@@ -11,30 +11,32 @@ class Variables_Subscription_watchAllStreets {
     List<Input_StreetsBoolExp>? where,
     List<Input_StreetsOrderBy>? orderBy,
     int? limit,
-  }) =>
-      Variables_Subscription_watchAllStreets._({
-        if (where != null) r'where': where,
-        if (orderBy != null) r'orderBy': orderBy,
-        if (limit != null) r'limit': limit,
-      });
+  }) => Variables_Subscription_watchAllStreets._({
+    if (where != null) r'where': where,
+    if (orderBy != null) r'orderBy': orderBy,
+    if (limit != null) r'limit': limit,
+  });
 
   Variables_Subscription_watchAllStreets._(this._$data);
 
   factory Variables_Subscription_watchAllStreets.fromJson(
-      Map<String, dynamic> data) {
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = (l$where as List<dynamic>?)
           ?.map(
-              (e) => Input_StreetsBoolExp.fromJson((e as Map<String, dynamic>)))
+            (e) => Input_StreetsBoolExp.fromJson((e as Map<String, dynamic>)),
+          )
           .toList();
     }
     if (data.containsKey('orderBy')) {
       final l$orderBy = data['orderBy'];
       result$data['orderBy'] = (l$orderBy as List<dynamic>?)
           ?.map(
-              (e) => Input_StreetsOrderBy.fromJson((e as Map<String, dynamic>)))
+            (e) => Input_StreetsOrderBy.fromJson((e as Map<String, dynamic>)),
+          )
           .toList();
     }
     if (data.containsKey('limit')) {
@@ -72,11 +74,10 @@ class Variables_Subscription_watchAllStreets {
   }
 
   CopyWith_Variables_Subscription_watchAllStreets<
-          Variables_Subscription_watchAllStreets>
-      get copyWith => CopyWith_Variables_Subscription_watchAllStreets(
-            this,
-            (i) => i,
-          );
+    Variables_Subscription_watchAllStreets
+  >
+  get copyWith =>
+      CopyWith_Variables_Subscription_watchAllStreets(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -144,13 +145,13 @@ class Variables_Subscription_watchAllStreets {
     return Object.hashAll([
       _$data.containsKey('where')
           ? l$where == null
-              ? null
-              : Object.hashAll(l$where.map((v) => v))
+                ? null
+                : Object.hashAll(l$where.map((v) => v))
           : const {},
       _$data.containsKey('orderBy')
           ? l$orderBy == null
-              ? null
-              : Object.hashAll(l$orderBy.map((v) => v))
+                ? null
+                : Object.hashAll(l$orderBy.map((v) => v))
           : const {},
       _$data.containsKey('limit') ? l$limit : const {},
     ]);
@@ -190,15 +191,15 @@ class _CopyWithImpl_Variables_Subscription_watchAllStreets<TRes>
     Object? where = _undefined,
     Object? orderBy = _undefined,
     Object? limit = _undefined,
-  }) =>
-      _then(Variables_Subscription_watchAllStreets._({
-        ..._instance._$data,
-        if (where != _undefined)
-          'where': (where as List<Input_StreetsBoolExp>?),
-        if (orderBy != _undefined)
-          'orderBy': (orderBy as List<Input_StreetsOrderBy>?),
-        if (limit != _undefined) 'limit': (limit as int?),
-      }));
+  }) => _then(
+    Variables_Subscription_watchAllStreets._({
+      ..._instance._$data,
+      if (where != _undefined) 'where': (where as List<Input_StreetsBoolExp>?),
+      if (orderBy != _undefined)
+        'orderBy': (orderBy as List<Input_StreetsOrderBy>?),
+      if (limit != _undefined) 'limit': (limit as int?),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Variables_Subscription_watchAllStreets<TRes>
@@ -211,8 +212,7 @@ class _CopyWithStubImpl_Variables_Subscription_watchAllStreets<TRes>
     List<Input_StreetsBoolExp>? where,
     List<Input_StreetsOrderBy>? orderBy,
     int? limit,
-  }) =>
-      _res;
+  }) => _res;
 }
 
 class Subscription_watchAllStreets {
@@ -221,10 +221,14 @@ class Subscription_watchAllStreets {
   factory Subscription_watchAllStreets.fromJson(Map<String, dynamic> json) {
     final l$streets = json['streets'];
     return Subscription_watchAllStreets(
-        streets: (l$streets as List<dynamic>)
-            .map((e) => Subscription_watchAllStreets_streets.fromJson(
-                (e as Map<String, dynamic>)))
-            .toList());
+      streets: (l$streets as List<dynamic>)
+          .map(
+            (e) => Subscription_watchAllStreets_streets.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
+          .toList(),
+    );
   }
 
   final List<Subscription_watchAllStreets_streets> streets;
@@ -270,10 +274,7 @@ class Subscription_watchAllStreets {
 extension UtilityExtension_Subscription_watchAllStreets
     on Subscription_watchAllStreets {
   CopyWith_Subscription_watchAllStreets<Subscription_watchAllStreets>
-      get copyWith => CopyWith_Subscription_watchAllStreets(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Subscription_watchAllStreets(this, (i) => i);
 }
 
 abstract class CopyWith_Subscription_watchAllStreets<TRes> {
@@ -287,19 +288,20 @@ abstract class CopyWith_Subscription_watchAllStreets<TRes> {
 
   TRes call({List<Subscription_watchAllStreets_streets>? streets});
   TRes streets(
-      Iterable<Subscription_watchAllStreets_streets> Function(
-              Iterable<
-                  CopyWith_Subscription_watchAllStreets_streets<
-                      Subscription_watchAllStreets_streets>>)
-          _fn);
+    Iterable<Subscription_watchAllStreets_streets> Function(
+      Iterable<
+        CopyWith_Subscription_watchAllStreets_streets<
+          Subscription_watchAllStreets_streets
+        >
+      >,
+    )
+    _fn,
+  );
 }
 
 class _CopyWithImpl_Subscription_watchAllStreets<TRes>
     implements CopyWith_Subscription_watchAllStreets<TRes> {
-  _CopyWithImpl_Subscription_watchAllStreets(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Subscription_watchAllStreets(this._instance, this._then);
 
   final Subscription_watchAllStreets _instance;
 
@@ -307,24 +309,30 @@ class _CopyWithImpl_Subscription_watchAllStreets<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? streets = _undefined}) =>
-      _then(Subscription_watchAllStreets(
-          streets: streets == _undefined || streets == null
-              ? _instance.streets
-              : (streets as List<Subscription_watchAllStreets_streets>)));
+  TRes call({Object? streets = _undefined}) => _then(
+    Subscription_watchAllStreets(
+      streets: streets == _undefined || streets == null
+          ? _instance.streets
+          : (streets as List<Subscription_watchAllStreets_streets>),
+    ),
+  );
 
   TRes streets(
-          Iterable<Subscription_watchAllStreets_streets> Function(
-                  Iterable<
-                      CopyWith_Subscription_watchAllStreets_streets<
-                          Subscription_watchAllStreets_streets>>)
-              _fn) =>
-      call(
-          streets: _fn(_instance.streets
-              .map((e) => CopyWith_Subscription_watchAllStreets_streets(
-                    e,
-                    (i) => i,
-                  ))).toList());
+    Iterable<Subscription_watchAllStreets_streets> Function(
+      Iterable<
+        CopyWith_Subscription_watchAllStreets_streets<
+          Subscription_watchAllStreets_streets
+        >
+      >,
+    )
+    _fn,
+  ) => call(
+    streets: _fn(
+      _instance.streets.map(
+        (e) => CopyWith_Subscription_watchAllStreets_streets(e, (i) => i),
+      ),
+    ).toList(),
+  );
 }
 
 class _CopyWithStubImpl_Subscription_watchAllStreets<TRes>
@@ -338,102 +346,110 @@ class _CopyWithStubImpl_Subscription_watchAllStreets<TRes>
   streets(_fn) => _res;
 }
 
-const documentNodeSubscriptionwatchAllStreets = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.subscription,
-    name: NameNode(value: 'watchAllStreets'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'where')),
-        type: ListTypeNode(
-          type: NamedTypeNode(
-            name: NameNode(value: 'StreetsBoolExp'),
-            isNonNull: true,
+const documentNodeSubscriptionwatchAllStreets = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.subscription,
+      name: NameNode(value: 'watchAllStreets'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'where')),
+          type: ListTypeNode(
+            type: NamedTypeNode(
+              name: NameNode(value: 'StreetsBoolExp'),
+              isNonNull: true,
+            ),
+            isNonNull: false,
           ),
-          isNonNull: false,
+          defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'orderBy')),
-        type: ListTypeNode(
-          type: NamedTypeNode(
-            name: NameNode(value: 'StreetsOrderBy'),
-            isNonNull: true,
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'orderBy')),
+          type: ListTypeNode(
+            type: NamedTypeNode(
+              name: NameNode(value: 'StreetsOrderBy'),
+              isNonNull: true,
+            ),
+            isNonNull: false,
           ),
-          isNonNull: false,
+          defaultValue: DefaultValueNode(
+            value: ObjectValueNode(
+              fields: [
+                ObjectFieldNode(
+                  name: NameNode(value: 'name'),
+                  value: EnumValueNode(name: NameNode(value: 'ASC')),
+                ),
+              ],
+            ),
+          ),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(
-            value: ObjectValueNode(fields: [
-          ObjectFieldNode(
-            name: NameNode(value: 'name'),
-            value: EnumValueNode(name: NameNode(value: 'ASC')),
-          )
-        ])),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'limit')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'Int'),
-          isNonNull: false,
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'limit')),
+          type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: false),
+          defaultValue: DefaultValueNode(value: IntValueNode(value: '200')),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: IntValueNode(value: '200')),
-        directives: [],
-      ),
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'streets'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'where'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: '_and'),
-                value: VariableNode(name: NameNode(value: 'where')),
-              )
-            ]),
-          ),
-          ArgumentNode(
-            name: NameNode(value: 'orderBy'),
-            value: VariableNode(name: NameNode(value: 'orderBy')),
-          ),
-          ArgumentNode(
-            name: NameNode(value: 'limit'),
-            value: VariableNode(name: NameNode(value: 'limit')),
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
+          FieldNode(
+            name: NameNode(value: 'streets'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'where'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: '_and'),
+                      value: VariableNode(name: NameNode(value: 'where')),
+                    ),
+                  ],
+                ),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'orderBy'),
+                value: VariableNode(name: NameNode(value: 'orderBy')),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'limit'),
+                value: VariableNode(name: NameNode(value: 'limit')),
+              ),
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FragmentSpreadNode(
+                  name: NameNode(value: 'Street'),
+                  directives: [],
+                ),
+                FieldNode(
+                  name: NameNode(value: 'line'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
           ),
         ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FragmentSpreadNode(
-            name: NameNode(value: 'Street'),
-            directives: [],
-          ),
-          FieldNode(
-            name: NameNode(value: 'line'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-        ]),
-      )
-    ]),
-  ),
-  fragmentDefinitionStreet,
-  fragmentDefinitionStreetNoPhoto,
-]);
+      ),
+    ),
+    fragmentDefinitionStreet,
+    fragmentDefinitionStreetNoPhoto,
+  ],
+);
 
 class Subscription_watchAllStreets_streets
     implements Fragment_Street, Fragment_StreetNoPhoto {
@@ -448,7 +464,8 @@ class Subscription_watchAllStreets_streets
   });
 
   factory Subscription_watchAllStreets_streets.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$id = json['id'];
     final l$name = json['name'];
     final l$color = json['color'];
@@ -461,8 +478,9 @@ class Subscription_watchAllStreets_streets
       name: (l$name as String),
       color: (l$color as int?),
       $__typename: (l$$__typename as String),
-      photoUpdatedAt:
-          l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
+      photoUpdatedAt: l$photoUpdatedAt == null
+          ? null
+          : tstzFromString(l$photoUpdatedAt),
       blurhash: (l$blurhash as String?),
       line: (l$line as Map<String, dynamic>?),
     );
@@ -493,8 +511,9 @@ class Subscription_watchAllStreets_streets
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
-    _resultData['photoUpdatedAt'] =
-        l$photoUpdatedAt == null ? null : tstzToString(l$photoUpdatedAt);
+    _resultData['photoUpdatedAt'] = l$photoUpdatedAt == null
+        ? null
+        : tstzToString(l$photoUpdatedAt);
     final l$blurhash = blurhash;
     _resultData['blurhash'] = l$blurhash;
     final l$line = line;
@@ -573,11 +592,9 @@ class Subscription_watchAllStreets_streets
 extension UtilityExtension_Subscription_watchAllStreets_streets
     on Subscription_watchAllStreets_streets {
   CopyWith_Subscription_watchAllStreets_streets<
-          Subscription_watchAllStreets_streets>
-      get copyWith => CopyWith_Subscription_watchAllStreets_streets(
-            this,
-            (i) => i,
-          );
+    Subscription_watchAllStreets_streets
+  >
+  get copyWith => CopyWith_Subscription_watchAllStreets_streets(this, (i) => i);
 }
 
 abstract class CopyWith_Subscription_watchAllStreets_streets<TRes> {
@@ -621,25 +638,27 @@ class _CopyWithImpl_Subscription_watchAllStreets_streets<TRes>
     Object? photoUpdatedAt = _undefined,
     Object? blurhash = _undefined,
     Object? line = _undefined,
-  }) =>
-      _then(Subscription_watchAllStreets_streets(
-        id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
-        name: name == _undefined || name == null
-            ? _instance.name
-            : (name as String),
-        color: color == _undefined ? _instance.color : (color as int?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-        photoUpdatedAt: photoUpdatedAt == _undefined
-            ? _instance.photoUpdatedAt
-            : (photoUpdatedAt as DateTime?),
-        blurhash:
-            blurhash == _undefined ? _instance.blurhash : (blurhash as String?),
-        line: line == _undefined
-            ? _instance.line
-            : (line as Map<String, dynamic>?),
-      ));
+  }) => _then(
+    Subscription_watchAllStreets_streets(
+      id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      color: color == _undefined ? _instance.color : (color as int?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+      photoUpdatedAt: photoUpdatedAt == _undefined
+          ? _instance.photoUpdatedAt
+          : (photoUpdatedAt as DateTime?),
+      blurhash: blurhash == _undefined
+          ? _instance.blurhash
+          : (blurhash as String?),
+      line: line == _undefined
+          ? _instance.line
+          : (line as Map<String, dynamic>?),
+    ),
+  );
 }
 
 class _CopyWithStubImpl_Subscription_watchAllStreets_streets<TRes>
@@ -656,27 +675,28 @@ class _CopyWithStubImpl_Subscription_watchAllStreets_streets<TRes>
     DateTime? photoUpdatedAt,
     String? blurhash,
     Map<String, dynamic>? line,
-  }) =>
-      _res;
+  }) => _res;
 }
 
 class Variables_Subscription_watchStreetsCount {
-  factory Variables_Subscription_watchStreetsCount(
-          {List<Input_StreetsBoolExp>? where}) =>
-      Variables_Subscription_watchStreetsCount._({
-        if (where != null) r'where': where,
-      });
+  factory Variables_Subscription_watchStreetsCount({
+    List<Input_StreetsBoolExp>? where,
+  }) => Variables_Subscription_watchStreetsCount._({
+    if (where != null) r'where': where,
+  });
 
   Variables_Subscription_watchStreetsCount._(this._$data);
 
   factory Variables_Subscription_watchStreetsCount.fromJson(
-      Map<String, dynamic> data) {
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = (l$where as List<dynamic>?)
           ?.map(
-              (e) => Input_StreetsBoolExp.fromJson((e as Map<String, dynamic>)))
+            (e) => Input_StreetsBoolExp.fromJson((e as Map<String, dynamic>)),
+          )
           .toList();
     }
     return Variables_Subscription_watchStreetsCount._(result$data);
@@ -697,11 +717,10 @@ class Variables_Subscription_watchStreetsCount {
   }
 
   CopyWith_Variables_Subscription_watchStreetsCount<
-          Variables_Subscription_watchStreetsCount>
-      get copyWith => CopyWith_Variables_Subscription_watchStreetsCount(
-            this,
-            (i) => i,
-          );
+    Variables_Subscription_watchStreetsCount
+  >
+  get copyWith =>
+      CopyWith_Variables_Subscription_watchStreetsCount(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -740,9 +759,9 @@ class Variables_Subscription_watchStreetsCount {
     return Object.hashAll([
       _$data.containsKey('where')
           ? l$where == null
-              ? null
-              : Object.hashAll(l$where.map((v) => v))
-          : const {}
+                ? null
+                : Object.hashAll(l$where.map((v) => v))
+          : const {},
     ]);
   }
 }
@@ -772,12 +791,12 @@ class _CopyWithImpl_Variables_Subscription_watchStreetsCount<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? where = _undefined}) =>
-      _then(Variables_Subscription_watchStreetsCount._({
-        ..._instance._$data,
-        if (where != _undefined)
-          'where': (where as List<Input_StreetsBoolExp>?),
-      }));
+  TRes call({Object? where = _undefined}) => _then(
+    Variables_Subscription_watchStreetsCount._({
+      ..._instance._$data,
+      if (where != _undefined) 'where': (where as List<Input_StreetsBoolExp>?),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Variables_Subscription_watchStreetsCount<TRes>
@@ -795,9 +814,11 @@ class Subscription_watchStreetsCount {
   factory Subscription_watchStreetsCount.fromJson(Map<String, dynamic> json) {
     final l$streetsAggregate = json['streetsAggregate'];
     return Subscription_watchStreetsCount(
-        streetsAggregate:
-            Subscription_watchStreetsCount_streetsAggregate.fromJson(
-                (l$streetsAggregate as Map<String, dynamic>)));
+      streetsAggregate:
+          Subscription_watchStreetsCount_streetsAggregate.fromJson(
+            (l$streetsAggregate as Map<String, dynamic>),
+          ),
+    );
   }
 
   final Subscription_watchStreetsCount_streetsAggregate streetsAggregate;
@@ -836,10 +857,7 @@ class Subscription_watchStreetsCount {
 extension UtilityExtension_Subscription_watchStreetsCount
     on Subscription_watchStreetsCount {
   CopyWith_Subscription_watchStreetsCount<Subscription_watchStreetsCount>
-      get copyWith => CopyWith_Subscription_watchStreetsCount(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Subscription_watchStreetsCount(this, (i) => i);
 }
 
 abstract class CopyWith_Subscription_watchStreetsCount<TRes> {
@@ -851,18 +869,16 @@ abstract class CopyWith_Subscription_watchStreetsCount<TRes> {
   factory CopyWith_Subscription_watchStreetsCount.stub(TRes res) =
       _CopyWithStubImpl_Subscription_watchStreetsCount;
 
-  TRes call(
-      {Subscription_watchStreetsCount_streetsAggregate? streetsAggregate});
+  TRes call({
+    Subscription_watchStreetsCount_streetsAggregate? streetsAggregate,
+  });
   CopyWith_Subscription_watchStreetsCount_streetsAggregate<TRes>
-      get streetsAggregate;
+  get streetsAggregate;
 }
 
 class _CopyWithImpl_Subscription_watchStreetsCount<TRes>
     implements CopyWith_Subscription_watchStreetsCount<TRes> {
-  _CopyWithImpl_Subscription_watchStreetsCount(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Subscription_watchStreetsCount(this._instance, this._then);
 
   final Subscription_watchStreetsCount _instance;
 
@@ -870,19 +886,23 @@ class _CopyWithImpl_Subscription_watchStreetsCount<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? streetsAggregate = _undefined}) =>
-      _then(Subscription_watchStreetsCount(
-          streetsAggregate:
-              streetsAggregate == _undefined || streetsAggregate == null
-                  ? _instance.streetsAggregate
-                  : (streetsAggregate
-                      as Subscription_watchStreetsCount_streetsAggregate)));
+  TRes call({Object? streetsAggregate = _undefined}) => _then(
+    Subscription_watchStreetsCount(
+      streetsAggregate:
+          streetsAggregate == _undefined || streetsAggregate == null
+          ? _instance.streetsAggregate
+          : (streetsAggregate
+                as Subscription_watchStreetsCount_streetsAggregate),
+    ),
+  );
 
   CopyWith_Subscription_watchStreetsCount_streetsAggregate<TRes>
-      get streetsAggregate {
+  get streetsAggregate {
     final local$streetsAggregate = _instance.streetsAggregate;
     return CopyWith_Subscription_watchStreetsCount_streetsAggregate(
-        local$streetsAggregate, (e) => call(streetsAggregate: e));
+      local$streetsAggregate,
+      (e) => call(streetsAggregate: e),
+    );
   }
 }
 
@@ -896,80 +916,90 @@ class _CopyWithStubImpl_Subscription_watchStreetsCount<TRes>
       _res;
 
   CopyWith_Subscription_watchStreetsCount_streetsAggregate<TRes>
-      get streetsAggregate =>
-          CopyWith_Subscription_watchStreetsCount_streetsAggregate.stub(_res);
+  get streetsAggregate =>
+      CopyWith_Subscription_watchStreetsCount_streetsAggregate.stub(_res);
 }
 
-const documentNodeSubscriptionwatchStreetsCount = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.subscription,
-    name: NameNode(value: 'watchStreetsCount'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'where')),
-        type: ListTypeNode(
-          type: NamedTypeNode(
-            name: NameNode(value: 'StreetsBoolExp'),
-            isNonNull: true,
+const documentNodeSubscriptionwatchStreetsCount = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.subscription,
+      name: NameNode(value: 'watchStreetsCount'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'where')),
+          type: ListTypeNode(
+            type: NamedTypeNode(
+              name: NameNode(value: 'StreetsBoolExp'),
+              isNonNull: true,
+            ),
+            isNonNull: false,
           ),
-          isNonNull: false,
+          defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
-        directives: [],
-      )
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'streetsAggregate'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'where'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: '_and'),
-                value: VariableNode(name: NameNode(value: 'where')),
-              )
-            ]),
-          )
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
+          FieldNode(
+            name: NameNode(value: 'streetsAggregate'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'where'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: '_and'),
+                      value: VariableNode(name: NameNode(value: 'where')),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FieldNode(
+                  name: NameNode(value: 'aggregate'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: SelectionSetNode(
+                    selections: [
+                      FieldNode(
+                        name: NameNode(value: 'count'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                      FieldNode(
+                        name: NameNode(value: '__typename'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                    ],
+                  ),
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
+          ),
         ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-            name: NameNode(value: 'aggregate'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                name: NameNode(value: 'count'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-              FieldNode(
-                name: NameNode(value: '__typename'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-            ]),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-        ]),
-      )
-    ]),
-  ),
-]);
+      ),
+    ),
+  ],
+);
 
 class Subscription_watchStreetsCount_streetsAggregate {
   Subscription_watchStreetsCount_streetsAggregate({
@@ -978,14 +1008,16 @@ class Subscription_watchStreetsCount_streetsAggregate {
   });
 
   factory Subscription_watchStreetsCount_streetsAggregate.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$aggregate = json['aggregate'];
     final l$$__typename = json['__typename'];
     return Subscription_watchStreetsCount_streetsAggregate(
       aggregate: l$aggregate == null
           ? null
           : Subscription_watchStreetsCount_streetsAggregate_aggregate.fromJson(
-              (l$aggregate as Map<String, dynamic>)),
+              (l$aggregate as Map<String, dynamic>),
+            ),
       $__typename: (l$$__typename as String),
     );
   }
@@ -1007,10 +1039,7 @@ class Subscription_watchStreetsCount_streetsAggregate {
   int get hashCode {
     final l$aggregate = aggregate;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$aggregate,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$aggregate, l$$__typename]);
   }
 
   @override
@@ -1039,11 +1068,10 @@ class Subscription_watchStreetsCount_streetsAggregate {
 extension UtilityExtension_Subscription_watchStreetsCount_streetsAggregate
     on Subscription_watchStreetsCount_streetsAggregate {
   CopyWith_Subscription_watchStreetsCount_streetsAggregate<
-          Subscription_watchStreetsCount_streetsAggregate>
-      get copyWith => CopyWith_Subscription_watchStreetsCount_streetsAggregate(
-            this,
-            (i) => i,
-          );
+    Subscription_watchStreetsCount_streetsAggregate
+  >
+  get copyWith =>
+      CopyWith_Subscription_watchStreetsCount_streetsAggregate(this, (i) => i);
 }
 
 abstract class CopyWith_Subscription_watchStreetsCount_streetsAggregate<TRes> {
@@ -1053,15 +1081,15 @@ abstract class CopyWith_Subscription_watchStreetsCount_streetsAggregate<TRes> {
   ) = _CopyWithImpl_Subscription_watchStreetsCount_streetsAggregate;
 
   factory CopyWith_Subscription_watchStreetsCount_streetsAggregate.stub(
-          TRes res) =
-      _CopyWithStubImpl_Subscription_watchStreetsCount_streetsAggregate;
+    TRes res,
+  ) = _CopyWithStubImpl_Subscription_watchStreetsCount_streetsAggregate;
 
   TRes call({
     Subscription_watchStreetsCount_streetsAggregate_aggregate? aggregate,
     String? $__typename,
   });
   CopyWith_Subscription_watchStreetsCount_streetsAggregate_aggregate<TRes>
-      get aggregate;
+  get aggregate;
 }
 
 class _CopyWithImpl_Subscription_watchStreetsCount_streetsAggregate<TRes>
@@ -1080,25 +1108,29 @@ class _CopyWithImpl_Subscription_watchStreetsCount_streetsAggregate<TRes>
   TRes call({
     Object? aggregate = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Subscription_watchStreetsCount_streetsAggregate(
-        aggregate: aggregate == _undefined
-            ? _instance.aggregate
-            : (aggregate
+  }) => _then(
+    Subscription_watchStreetsCount_streetsAggregate(
+      aggregate: aggregate == _undefined
+          ? _instance.aggregate
+          : (aggregate
                 as Subscription_watchStreetsCount_streetsAggregate_aggregate?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   CopyWith_Subscription_watchStreetsCount_streetsAggregate_aggregate<TRes>
-      get aggregate {
+  get aggregate {
     final local$aggregate = _instance.aggregate;
     return local$aggregate == null
-        ? CopyWith_Subscription_watchStreetsCount_streetsAggregate_aggregate
-            .stub(_then(_instance))
+        ? CopyWith_Subscription_watchStreetsCount_streetsAggregate_aggregate.stub(
+            _then(_instance),
+          )
         : CopyWith_Subscription_watchStreetsCount_streetsAggregate_aggregate(
-            local$aggregate, (e) => call(aggregate: e));
+            local$aggregate,
+            (e) => call(aggregate: e),
+          );
   }
 }
 
@@ -1111,13 +1143,13 @@ class _CopyWithStubImpl_Subscription_watchStreetsCount_streetsAggregate<TRes>
   call({
     Subscription_watchStreetsCount_streetsAggregate_aggregate? aggregate,
     String? $__typename,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Subscription_watchStreetsCount_streetsAggregate_aggregate<TRes>
-      get aggregate =>
-          CopyWith_Subscription_watchStreetsCount_streetsAggregate_aggregate
-              .stub(_res);
+  get aggregate =>
+      CopyWith_Subscription_watchStreetsCount_streetsAggregate_aggregate.stub(
+        _res,
+      );
 }
 
 class Subscription_watchStreetsCount_streetsAggregate_aggregate {
@@ -1127,7 +1159,8 @@ class Subscription_watchStreetsCount_streetsAggregate_aggregate {
   });
 
   factory Subscription_watchStreetsCount_streetsAggregate_aggregate.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$count = json['count'];
     final l$$__typename = json['__typename'];
     return Subscription_watchStreetsCount_streetsAggregate_aggregate(
@@ -1153,10 +1186,7 @@ class Subscription_watchStreetsCount_streetsAggregate_aggregate {
   int get hashCode {
     final l$count = count;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$count,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$count, l$$__typename]);
   }
 
   @override
@@ -1185,37 +1215,38 @@ class Subscription_watchStreetsCount_streetsAggregate_aggregate {
 extension UtilityExtension_Subscription_watchStreetsCount_streetsAggregate_aggregate
     on Subscription_watchStreetsCount_streetsAggregate_aggregate {
   CopyWith_Subscription_watchStreetsCount_streetsAggregate_aggregate<
-          Subscription_watchStreetsCount_streetsAggregate_aggregate>
-      get copyWith =>
-          CopyWith_Subscription_watchStreetsCount_streetsAggregate_aggregate(
-            this,
-            (i) => i,
-          );
+    Subscription_watchStreetsCount_streetsAggregate_aggregate
+  >
+  get copyWith =>
+      CopyWith_Subscription_watchStreetsCount_streetsAggregate_aggregate(
+        this,
+        (i) => i,
+      );
 }
 
 abstract class CopyWith_Subscription_watchStreetsCount_streetsAggregate_aggregate<
-    TRes> {
+  TRes
+> {
   factory CopyWith_Subscription_watchStreetsCount_streetsAggregate_aggregate(
     Subscription_watchStreetsCount_streetsAggregate_aggregate instance,
     TRes Function(Subscription_watchStreetsCount_streetsAggregate_aggregate)
-        then,
+    then,
   ) = _CopyWithImpl_Subscription_watchStreetsCount_streetsAggregate_aggregate;
 
   factory CopyWith_Subscription_watchStreetsCount_streetsAggregate_aggregate.stub(
-          TRes res) =
-      _CopyWithStubImpl_Subscription_watchStreetsCount_streetsAggregate_aggregate;
+    TRes res,
+  ) = _CopyWithStubImpl_Subscription_watchStreetsCount_streetsAggregate_aggregate;
 
-  TRes call({
-    int? count,
-    String? $__typename,
-  });
+  TRes call({int? count, String? $__typename});
 }
 
 class _CopyWithImpl_Subscription_watchStreetsCount_streetsAggregate_aggregate<
-        TRes>
+  TRes
+>
     implements
         CopyWith_Subscription_watchStreetsCount_streetsAggregate_aggregate<
-            TRes> {
+          TRes
+        > {
   _CopyWithImpl_Subscription_watchStreetsCount_streetsAggregate_aggregate(
     this._instance,
     this._then,
@@ -1224,51 +1255,48 @@ class _CopyWithImpl_Subscription_watchStreetsCount_streetsAggregate_aggregate<
   final Subscription_watchStreetsCount_streetsAggregate_aggregate _instance;
 
   final TRes Function(Subscription_watchStreetsCount_streetsAggregate_aggregate)
-      _then;
+  _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? count = _undefined,
-    Object? $__typename = _undefined,
-  }) =>
-      _then(Subscription_watchStreetsCount_streetsAggregate_aggregate(
-        count: count == _undefined || count == null
-            ? _instance.count
-            : (count as int),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  TRes call({Object? count = _undefined, Object? $__typename = _undefined}) =>
+      _then(
+        Subscription_watchStreetsCount_streetsAggregate_aggregate(
+          count: count == _undefined || count == null
+              ? _instance.count
+              : (count as int),
+          $__typename: $__typename == _undefined || $__typename == null
+              ? _instance.$__typename
+              : ($__typename as String),
+        ),
+      );
 }
 
 class _CopyWithStubImpl_Subscription_watchStreetsCount_streetsAggregate_aggregate<
-        TRes>
+  TRes
+>
     implements
         CopyWith_Subscription_watchStreetsCount_streetsAggregate_aggregate<
-            TRes> {
+          TRes
+        > {
   _CopyWithStubImpl_Subscription_watchStreetsCount_streetsAggregate_aggregate(
-      this._res);
+    this._res,
+  );
 
   TRes _res;
 
-  call({
-    int? count,
-    String? $__typename,
-  }) =>
-      _res;
+  call({int? count, String? $__typename}) => _res;
 }
 
 class Variables_Subscription_watchStreet {
   factory Variables_Subscription_watchStreet({required UuidValue id}) =>
-      Variables_Subscription_watchStreet._({
-        r'id': id,
-      });
+      Variables_Subscription_watchStreet._({r'id': id});
 
   Variables_Subscription_watchStreet._(this._$data);
 
   factory Variables_Subscription_watchStreet.fromJson(
-      Map<String, dynamic> data) {
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
     final l$id = data['id'];
     result$data['id'] = stringToUuid(l$id);
@@ -1287,11 +1315,9 @@ class Variables_Subscription_watchStreet {
   }
 
   CopyWith_Variables_Subscription_watchStreet<
-          Variables_Subscription_watchStreet>
-      get copyWith => CopyWith_Variables_Subscription_watchStreet(
-            this,
-            (i) => i,
-          );
+    Variables_Subscription_watchStreet
+  >
+  get copyWith => CopyWith_Variables_Subscription_watchStreet(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -1331,10 +1357,7 @@ abstract class CopyWith_Variables_Subscription_watchStreet<TRes> {
 
 class _CopyWithImpl_Variables_Subscription_watchStreet<TRes>
     implements CopyWith_Variables_Subscription_watchStreet<TRes> {
-  _CopyWithImpl_Variables_Subscription_watchStreet(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Variables_Subscription_watchStreet(this._instance, this._then);
 
   final Variables_Subscription_watchStreet _instance;
 
@@ -1342,11 +1365,12 @@ class _CopyWithImpl_Variables_Subscription_watchStreet<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? id = _undefined}) =>
-      _then(Variables_Subscription_watchStreet._({
-        ..._instance._$data,
-        if (id != _undefined && id != null) 'id': (id as UuidValue),
-      }));
+  TRes call({Object? id = _undefined}) => _then(
+    Variables_Subscription_watchStreet._({
+      ..._instance._$data,
+      if (id != _undefined && id != null) 'id': (id as UuidValue),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Variables_Subscription_watchStreet<TRes>
@@ -1364,10 +1388,12 @@ class Subscription_watchStreet {
   factory Subscription_watchStreet.fromJson(Map<String, dynamic> json) {
     final l$streetsByPk = json['streetsByPk'];
     return Subscription_watchStreet(
-        streetsByPk: l$streetsByPk == null
-            ? null
-            : Subscription_watchStreet_streetsByPk.fromJson(
-                (l$streetsByPk as Map<String, dynamic>)));
+      streetsByPk: l$streetsByPk == null
+          ? null
+          : Subscription_watchStreet_streetsByPk.fromJson(
+              (l$streetsByPk as Map<String, dynamic>),
+            ),
+    );
   }
 
   final Subscription_watchStreet_streetsByPk? streetsByPk;
@@ -1406,10 +1432,7 @@ class Subscription_watchStreet {
 extension UtilityExtension_Subscription_watchStreet
     on Subscription_watchStreet {
   CopyWith_Subscription_watchStreet<Subscription_watchStreet> get copyWith =>
-      CopyWith_Subscription_watchStreet(
-        this,
-        (i) => i,
-      );
+      CopyWith_Subscription_watchStreet(this, (i) => i);
 }
 
 abstract class CopyWith_Subscription_watchStreet<TRes> {
@@ -1427,10 +1450,7 @@ abstract class CopyWith_Subscription_watchStreet<TRes> {
 
 class _CopyWithImpl_Subscription_watchStreet<TRes>
     implements CopyWith_Subscription_watchStreet<TRes> {
-  _CopyWithImpl_Subscription_watchStreet(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Subscription_watchStreet(this._instance, this._then);
 
   final Subscription_watchStreet _instance;
 
@@ -1438,18 +1458,22 @@ class _CopyWithImpl_Subscription_watchStreet<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? streetsByPk = _undefined}) =>
-      _then(Subscription_watchStreet(
-          streetsByPk: streetsByPk == _undefined
-              ? _instance.streetsByPk
-              : (streetsByPk as Subscription_watchStreet_streetsByPk?)));
+  TRes call({Object? streetsByPk = _undefined}) => _then(
+    Subscription_watchStreet(
+      streetsByPk: streetsByPk == _undefined
+          ? _instance.streetsByPk
+          : (streetsByPk as Subscription_watchStreet_streetsByPk?),
+    ),
+  );
 
   CopyWith_Subscription_watchStreet_streetsByPk<TRes> get streetsByPk {
     final local$streetsByPk = _instance.streetsByPk;
     return local$streetsByPk == null
         ? CopyWith_Subscription_watchStreet_streetsByPk.stub(_then(_instance))
         : CopyWith_Subscription_watchStreet_streetsByPk(
-            local$streetsByPk, (e) => call(streetsByPk: e));
+            local$streetsByPk,
+            (e) => call(streetsByPk: e),
+          );
   }
 }
 
@@ -1465,132 +1489,147 @@ class _CopyWithStubImpl_Subscription_watchStreet<TRes>
       CopyWith_Subscription_watchStreet_streetsByPk.stub(_res);
 }
 
-const documentNodeSubscriptionwatchStreet = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.subscription,
-    name: NameNode(value: 'watchStreet'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'id')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'uuid'),
-          isNonNull: true,
+const documentNodeSubscriptionwatchStreet = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.subscription,
+      name: NameNode(value: 'watchStreet'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'id')),
+          type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      )
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'streetsByPk'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'id'),
-            value: VariableNode(name: NameNode(value: 'id')),
-          )
-        ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FragmentSpreadNode(
-            name: NameNode(value: 'Street'),
-            directives: [],
-          ),
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
           FieldNode(
-            name: NameNode(value: 'areas'),
+            name: NameNode(value: 'streetsByPk'),
             alias: null,
             arguments: [
               ArgumentNode(
-                name: NameNode(value: 'orderBy'),
-                value: ObjectValueNode(fields: [
-                  ObjectFieldNode(
-                    name: NameNode(value: 'area'),
-                    value: ObjectValueNode(fields: [
-                      ObjectFieldNode(
-                        name: NameNode(value: 'name'),
-                        value: EnumValueNode(name: NameNode(value: 'ASC')),
-                      )
-                    ]),
-                  )
-                ]),
-              )
+                name: NameNode(value: 'id'),
+                value: VariableNode(name: NameNode(value: 'id')),
+              ),
             ],
             directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                name: NameNode(value: 'area'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: SelectionSetNode(selections: [
-                  FragmentSpreadNode(
-                    name: NameNode(value: 'Area'),
-                    directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FragmentSpreadNode(
+                  name: NameNode(value: 'Street'),
+                  directives: [],
+                ),
+                FieldNode(
+                  name: NameNode(value: 'areas'),
+                  alias: null,
+                  arguments: [
+                    ArgumentNode(
+                      name: NameNode(value: 'orderBy'),
+                      value: ObjectValueNode(
+                        fields: [
+                          ObjectFieldNode(
+                            name: NameNode(value: 'area'),
+                            value: ObjectValueNode(
+                              fields: [
+                                ObjectFieldNode(
+                                  name: NameNode(value: 'name'),
+                                  value: EnumValueNode(
+                                    name: NameNode(value: 'ASC'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                  directives: [],
+                  selectionSet: SelectionSetNode(
+                    selections: [
+                      FieldNode(
+                        name: NameNode(value: 'area'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: SelectionSetNode(
+                          selections: [
+                            FragmentSpreadNode(
+                              name: NameNode(value: 'Area'),
+                              directives: [],
+                            ),
+                            FieldNode(
+                              name: NameNode(value: '__typename'),
+                              alias: null,
+                              arguments: [],
+                              directives: [],
+                              selectionSet: null,
+                            ),
+                          ],
+                        ),
+                      ),
+                      FieldNode(
+                        name: NameNode(value: '__typename'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                    ],
                   ),
-                  FieldNode(
-                    name: NameNode(value: '__typename'),
-                    alias: null,
-                    arguments: [],
-                    directives: [],
-                    selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: 'line'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: 'lastEdit'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: SelectionSetNode(
+                    selections: [
+                      FragmentSpreadNode(
+                        name: NameNode(value: 'LatestEditHistory'),
+                        directives: [],
+                      ),
+                      FieldNode(
+                        name: NameNode(value: '__typename'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                    ],
                   ),
-                ]),
-              ),
-              FieldNode(
-                name: NameNode(value: '__typename'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-            ]),
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
           ),
-          FieldNode(
-            name: NameNode(value: 'line'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'lastEdit'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FragmentSpreadNode(
-                name: NameNode(value: 'LatestEditHistory'),
-                directives: [],
-              ),
-              FieldNode(
-                name: NameNode(value: '__typename'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-            ]),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-        ]),
-      )
-    ]),
-  ),
-  fragmentDefinitionStreet,
-  fragmentDefinitionStreetNoPhoto,
-  fragmentDefinitionArea,
-  fragmentDefinitionAreaNoPhoto,
-  fragmentDefinitionLatestEditHistory,
-  fragmentDefinitionUser,
-  fragmentDefinitionUserNoPhoto,
-]);
+        ],
+      ),
+    ),
+    fragmentDefinitionStreet,
+    fragmentDefinitionStreetNoPhoto,
+    fragmentDefinitionArea,
+    fragmentDefinitionAreaNoPhoto,
+    fragmentDefinitionLatestEditHistory,
+    fragmentDefinitionUser,
+    fragmentDefinitionUserNoPhoto,
+  ],
+);
 
 class Subscription_watchStreet_streetsByPk
     implements Fragment_Street, Fragment_StreetNoPhoto {
@@ -1607,7 +1646,8 @@ class Subscription_watchStreet_streetsByPk
   });
 
   factory Subscription_watchStreet_streetsByPk.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$id = json['id'];
     final l$name = json['name'];
     final l$color = json['color'];
@@ -1622,18 +1662,23 @@ class Subscription_watchStreet_streetsByPk
       name: (l$name as String),
       color: (l$color as int?),
       $__typename: (l$$__typename as String),
-      photoUpdatedAt:
-          l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
+      photoUpdatedAt: l$photoUpdatedAt == null
+          ? null
+          : tstzFromString(l$photoUpdatedAt),
       blurhash: (l$blurhash as String?),
       areas: (l$areas as List<dynamic>)
-          .map((e) => Subscription_watchStreet_streetsByPk_areas.fromJson(
-              (e as Map<String, dynamic>)))
+          .map(
+            (e) => Subscription_watchStreet_streetsByPk_areas.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
           .toList(),
       line: (l$line as Map<String, dynamic>?),
       lastEdit: l$lastEdit == null
           ? null
           : Fragment_LatestEditHistory.fromJson(
-              (l$lastEdit as Map<String, dynamic>)),
+              (l$lastEdit as Map<String, dynamic>),
+            ),
     );
   }
 
@@ -1666,8 +1711,9 @@ class Subscription_watchStreet_streetsByPk
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
-    _resultData['photoUpdatedAt'] =
-        l$photoUpdatedAt == null ? null : tstzToString(l$photoUpdatedAt);
+    _resultData['photoUpdatedAt'] = l$photoUpdatedAt == null
+        ? null
+        : tstzToString(l$photoUpdatedAt);
     final l$blurhash = blurhash;
     _resultData['blurhash'] = l$blurhash;
     final l$areas = areas;
@@ -1771,11 +1817,9 @@ class Subscription_watchStreet_streetsByPk
 extension UtilityExtension_Subscription_watchStreet_streetsByPk
     on Subscription_watchStreet_streetsByPk {
   CopyWith_Subscription_watchStreet_streetsByPk<
-          Subscription_watchStreet_streetsByPk>
-      get copyWith => CopyWith_Subscription_watchStreet_streetsByPk(
-            this,
-            (i) => i,
-          );
+    Subscription_watchStreet_streetsByPk
+  >
+  get copyWith => CopyWith_Subscription_watchStreet_streetsByPk(this, (i) => i);
 }
 
 abstract class CopyWith_Subscription_watchStreet_streetsByPk<TRes> {
@@ -1799,11 +1843,15 @@ abstract class CopyWith_Subscription_watchStreet_streetsByPk<TRes> {
     Fragment_LatestEditHistory? lastEdit,
   });
   TRes areas(
-      Iterable<Subscription_watchStreet_streetsByPk_areas> Function(
-              Iterable<
-                  CopyWith_Subscription_watchStreet_streetsByPk_areas<
-                      Subscription_watchStreet_streetsByPk_areas>>)
-          _fn);
+    Iterable<Subscription_watchStreet_streetsByPk_areas> Function(
+      Iterable<
+        CopyWith_Subscription_watchStreet_streetsByPk_areas<
+          Subscription_watchStreet_streetsByPk_areas
+        >
+      >,
+    )
+    _fn,
+  );
   CopyWith_Fragment_LatestEditHistory<TRes> get lastEdit;
 }
 
@@ -1830,51 +1878,59 @@ class _CopyWithImpl_Subscription_watchStreet_streetsByPk<TRes>
     Object? areas = _undefined,
     Object? line = _undefined,
     Object? lastEdit = _undefined,
-  }) =>
-      _then(Subscription_watchStreet_streetsByPk(
-        id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
-        name: name == _undefined || name == null
-            ? _instance.name
-            : (name as String),
-        color: color == _undefined ? _instance.color : (color as int?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-        photoUpdatedAt: photoUpdatedAt == _undefined
-            ? _instance.photoUpdatedAt
-            : (photoUpdatedAt as DateTime?),
-        blurhash:
-            blurhash == _undefined ? _instance.blurhash : (blurhash as String?),
-        areas: areas == _undefined || areas == null
-            ? _instance.areas
-            : (areas as List<Subscription_watchStreet_streetsByPk_areas>),
-        line: line == _undefined
-            ? _instance.line
-            : (line as Map<String, dynamic>?),
-        lastEdit: lastEdit == _undefined
-            ? _instance.lastEdit
-            : (lastEdit as Fragment_LatestEditHistory?),
-      ));
+  }) => _then(
+    Subscription_watchStreet_streetsByPk(
+      id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      color: color == _undefined ? _instance.color : (color as int?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+      photoUpdatedAt: photoUpdatedAt == _undefined
+          ? _instance.photoUpdatedAt
+          : (photoUpdatedAt as DateTime?),
+      blurhash: blurhash == _undefined
+          ? _instance.blurhash
+          : (blurhash as String?),
+      areas: areas == _undefined || areas == null
+          ? _instance.areas
+          : (areas as List<Subscription_watchStreet_streetsByPk_areas>),
+      line: line == _undefined
+          ? _instance.line
+          : (line as Map<String, dynamic>?),
+      lastEdit: lastEdit == _undefined
+          ? _instance.lastEdit
+          : (lastEdit as Fragment_LatestEditHistory?),
+    ),
+  );
 
   TRes areas(
-          Iterable<Subscription_watchStreet_streetsByPk_areas> Function(
-                  Iterable<
-                      CopyWith_Subscription_watchStreet_streetsByPk_areas<
-                          Subscription_watchStreet_streetsByPk_areas>>)
-              _fn) =>
-      call(
-          areas: _fn(_instance.areas
-              .map((e) => CopyWith_Subscription_watchStreet_streetsByPk_areas(
-                    e,
-                    (i) => i,
-                  ))).toList());
+    Iterable<Subscription_watchStreet_streetsByPk_areas> Function(
+      Iterable<
+        CopyWith_Subscription_watchStreet_streetsByPk_areas<
+          Subscription_watchStreet_streetsByPk_areas
+        >
+      >,
+    )
+    _fn,
+  ) => call(
+    areas: _fn(
+      _instance.areas.map(
+        (e) => CopyWith_Subscription_watchStreet_streetsByPk_areas(e, (i) => i),
+      ),
+    ).toList(),
+  );
 
   CopyWith_Fragment_LatestEditHistory<TRes> get lastEdit {
     final local$lastEdit = _instance.lastEdit;
     return local$lastEdit == null
         ? CopyWith_Fragment_LatestEditHistory.stub(_then(_instance))
         : CopyWith_Fragment_LatestEditHistory(
-            local$lastEdit, (e) => call(lastEdit: e));
+            local$lastEdit,
+            (e) => call(lastEdit: e),
+          );
   }
 }
 
@@ -1894,8 +1950,7 @@ class _CopyWithStubImpl_Subscription_watchStreet_streetsByPk<TRes>
     List<Subscription_watchStreet_streetsByPk_areas>? areas,
     Map<String, dynamic>? line,
     Fragment_LatestEditHistory? lastEdit,
-  }) =>
-      _res;
+  }) => _res;
 
   areas(_fn) => _res;
 
@@ -1910,7 +1965,8 @@ class Subscription_watchStreet_streetsByPk_areas {
   });
 
   factory Subscription_watchStreet_streetsByPk_areas.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$area = json['area'];
     final l$$__typename = json['__typename'];
     return Subscription_watchStreet_streetsByPk_areas(
@@ -1936,10 +1992,7 @@ class Subscription_watchStreet_streetsByPk_areas {
   int get hashCode {
     final l$area = area;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$area,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$area, l$$__typename]);
   }
 
   @override
@@ -1968,11 +2021,10 @@ class Subscription_watchStreet_streetsByPk_areas {
 extension UtilityExtension_Subscription_watchStreet_streetsByPk_areas
     on Subscription_watchStreet_streetsByPk_areas {
   CopyWith_Subscription_watchStreet_streetsByPk_areas<
-          Subscription_watchStreet_streetsByPk_areas>
-      get copyWith => CopyWith_Subscription_watchStreet_streetsByPk_areas(
-            this,
-            (i) => i,
-          );
+    Subscription_watchStreet_streetsByPk_areas
+  >
+  get copyWith =>
+      CopyWith_Subscription_watchStreet_streetsByPk_areas(this, (i) => i);
 }
 
 abstract class CopyWith_Subscription_watchStreet_streetsByPk_areas<TRes> {
@@ -1984,10 +2036,7 @@ abstract class CopyWith_Subscription_watchStreet_streetsByPk_areas<TRes> {
   factory CopyWith_Subscription_watchStreet_streetsByPk_areas.stub(TRes res) =
       _CopyWithStubImpl_Subscription_watchStreet_streetsByPk_areas;
 
-  TRes call({
-    Fragment_Area? area,
-    String? $__typename,
-  });
+  TRes call({Fragment_Area? area, String? $__typename});
   CopyWith_Fragment_Area<TRes> get area;
 }
 
@@ -2004,18 +2053,17 @@ class _CopyWithImpl_Subscription_watchStreet_streetsByPk_areas<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? area = _undefined,
-    Object? $__typename = _undefined,
-  }) =>
-      _then(Subscription_watchStreet_streetsByPk_areas(
-        area: area == _undefined || area == null
-            ? _instance.area
-            : (area as Fragment_Area),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  TRes call({Object? area = _undefined, Object? $__typename = _undefined}) =>
+      _then(
+        Subscription_watchStreet_streetsByPk_areas(
+          area: area == _undefined || area == null
+              ? _instance.area
+              : (area as Fragment_Area),
+          $__typename: $__typename == _undefined || $__typename == null
+              ? _instance.$__typename
+              : ($__typename as String),
+        ),
+      );
 
   CopyWith_Fragment_Area<TRes> get area {
     final local$area = _instance.area;
@@ -2029,11 +2077,7 @@ class _CopyWithStubImpl_Subscription_watchStreet_streetsByPk_areas<TRes>
 
   TRes _res;
 
-  call({
-    Fragment_Area? area,
-    String? $__typename,
-  }) =>
-      _res;
+  call({Fragment_Area? area, String? $__typename}) => _res;
 
   CopyWith_Fragment_Area<TRes> get area => CopyWith_Fragment_Area.stub(_res);
 }

@@ -8,9 +8,7 @@ import 'package:gql/ast.dart';
 
 class Variables_Mutation_deleteFamily {
   factory Variables_Mutation_deleteFamily({required UuidValue familyId}) =>
-      Variables_Mutation_deleteFamily._({
-        r'familyId': familyId,
-      });
+      Variables_Mutation_deleteFamily._({r'familyId': familyId});
 
   Variables_Mutation_deleteFamily._(this._$data);
 
@@ -33,10 +31,7 @@ class Variables_Mutation_deleteFamily {
   }
 
   CopyWith_Variables_Mutation_deleteFamily<Variables_Mutation_deleteFamily>
-      get copyWith => CopyWith_Variables_Mutation_deleteFamily(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Variables_Mutation_deleteFamily(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -76,10 +71,7 @@ abstract class CopyWith_Variables_Mutation_deleteFamily<TRes> {
 
 class _CopyWithImpl_Variables_Mutation_deleteFamily<TRes>
     implements CopyWith_Variables_Mutation_deleteFamily<TRes> {
-  _CopyWithImpl_Variables_Mutation_deleteFamily(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Variables_Mutation_deleteFamily(this._instance, this._then);
 
   final Variables_Mutation_deleteFamily _instance;
 
@@ -87,12 +79,13 @@ class _CopyWithImpl_Variables_Mutation_deleteFamily<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? familyId = _undefined}) =>
-      _then(Variables_Mutation_deleteFamily._({
-        ..._instance._$data,
-        if (familyId != _undefined && familyId != null)
-          'familyId': (familyId as UuidValue),
-      }));
+  TRes call({Object? familyId = _undefined}) => _then(
+    Variables_Mutation_deleteFamily._({
+      ..._instance._$data,
+      if (familyId != _undefined && familyId != null)
+        'familyId': (familyId as UuidValue),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Variables_Mutation_deleteFamily<TRes>
@@ -117,7 +110,8 @@ class Mutation_deleteFamily {
       deleteFamiliesByPk: l$deleteFamiliesByPk == null
           ? null
           : Fragment_Family.fromJson(
-              (l$deleteFamiliesByPk as Map<String, dynamic>)),
+              (l$deleteFamiliesByPk as Map<String, dynamic>),
+            ),
       $__typename: (l$$__typename as String),
     );
   }
@@ -139,10 +133,7 @@ class Mutation_deleteFamily {
   int get hashCode {
     final l$deleteFamiliesByPk = deleteFamiliesByPk;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$deleteFamiliesByPk,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$deleteFamiliesByPk, l$$__typename]);
   }
 
   @override
@@ -169,10 +160,7 @@ class Mutation_deleteFamily {
 
 extension UtilityExtension_Mutation_deleteFamily on Mutation_deleteFamily {
   CopyWith_Mutation_deleteFamily<Mutation_deleteFamily> get copyWith =>
-      CopyWith_Mutation_deleteFamily(
-        this,
-        (i) => i,
-      );
+      CopyWith_Mutation_deleteFamily(this, (i) => i);
 }
 
 abstract class CopyWith_Mutation_deleteFamily<TRes> {
@@ -184,19 +172,13 @@ abstract class CopyWith_Mutation_deleteFamily<TRes> {
   factory CopyWith_Mutation_deleteFamily.stub(TRes res) =
       _CopyWithStubImpl_Mutation_deleteFamily;
 
-  TRes call({
-    Fragment_Family? deleteFamiliesByPk,
-    String? $__typename,
-  });
+  TRes call({Fragment_Family? deleteFamiliesByPk, String? $__typename});
   CopyWith_Fragment_Family<TRes> get deleteFamiliesByPk;
 }
 
 class _CopyWithImpl_Mutation_deleteFamily<TRes>
     implements CopyWith_Mutation_deleteFamily<TRes> {
-  _CopyWithImpl_Mutation_deleteFamily(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Mutation_deleteFamily(this._instance, this._then);
 
   final Mutation_deleteFamily _instance;
 
@@ -207,22 +189,25 @@ class _CopyWithImpl_Mutation_deleteFamily<TRes>
   TRes call({
     Object? deleteFamiliesByPk = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Mutation_deleteFamily(
-        deleteFamiliesByPk: deleteFamiliesByPk == _undefined
-            ? _instance.deleteFamiliesByPk
-            : (deleteFamiliesByPk as Fragment_Family?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Mutation_deleteFamily(
+      deleteFamiliesByPk: deleteFamiliesByPk == _undefined
+          ? _instance.deleteFamiliesByPk
+          : (deleteFamiliesByPk as Fragment_Family?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   CopyWith_Fragment_Family<TRes> get deleteFamiliesByPk {
     final local$deleteFamiliesByPk = _instance.deleteFamiliesByPk;
     return local$deleteFamiliesByPk == null
         ? CopyWith_Fragment_Family.stub(_then(_instance))
         : CopyWith_Fragment_Family(
-            local$deleteFamiliesByPk, (e) => call(deleteFamiliesByPk: e));
+            local$deleteFamiliesByPk,
+            (e) => call(deleteFamiliesByPk: e),
+          );
   }
 }
 
@@ -232,47 +217,53 @@ class _CopyWithStubImpl_Mutation_deleteFamily<TRes>
 
   TRes _res;
 
-  call({
-    Fragment_Family? deleteFamiliesByPk,
-    String? $__typename,
-  }) =>
-      _res;
+  call({Fragment_Family? deleteFamiliesByPk, String? $__typename}) => _res;
 
   CopyWith_Fragment_Family<TRes> get deleteFamiliesByPk =>
       CopyWith_Fragment_Family.stub(_res);
 }
 
-const documentNodeMutationdeleteFamily = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.mutation,
-    name: NameNode(value: 'deleteFamily'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'familyId')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'uuid'),
-          isNonNull: true,
+const documentNodeMutationdeleteFamily = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.mutation,
+      name: NameNode(value: 'deleteFamily'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'familyId')),
+          type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      )
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'deleteFamiliesByPk'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'id'),
-            value: VariableNode(name: NameNode(value: 'familyId')),
-          )
-        ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FragmentSpreadNode(
-            name: NameNode(value: 'Family'),
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
+          FieldNode(
+            name: NameNode(value: 'deleteFamiliesByPk'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'id'),
+                value: VariableNode(name: NameNode(value: 'familyId')),
+              ),
+            ],
             directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FragmentSpreadNode(
+                  name: NameNode(value: 'Family'),
+                  directives: [],
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
           ),
           FieldNode(
             name: NameNode(value: '__typename'),
@@ -281,27 +272,18 @@ const documentNodeMutationdeleteFamily = DocumentNode(definitions: [
             directives: [],
             selectionSet: null,
           ),
-        ]),
+        ],
       ),
-      FieldNode(
-        name: NameNode(value: '__typename'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-    ]),
-  ),
-  fragmentDefinitionFamily,
-  fragmentDefinitionFamilyNoPhoto,
-]);
+    ),
+    fragmentDefinitionFamily,
+    fragmentDefinitionFamilyNoPhoto,
+  ],
+);
 
 class Variables_Mutation_insertFamily {
-  factory Variables_Mutation_insertFamily(
-          {required Input_FamiliesInsertInput newFamily}) =>
-      Variables_Mutation_insertFamily._({
-        r'newFamily': newFamily,
-      });
+  factory Variables_Mutation_insertFamily({
+    required Input_FamiliesInsertInput newFamily,
+  }) => Variables_Mutation_insertFamily._({r'newFamily': newFamily});
 
   Variables_Mutation_insertFamily._(this._$data);
 
@@ -309,7 +291,8 @@ class Variables_Mutation_insertFamily {
     final result$data = <String, dynamic>{};
     final l$newFamily = data['newFamily'];
     result$data['newFamily'] = Input_FamiliesInsertInput.fromJson(
-        (l$newFamily as Map<String, dynamic>));
+      (l$newFamily as Map<String, dynamic>),
+    );
     return Variables_Mutation_insertFamily._(result$data);
   }
 
@@ -326,10 +309,7 @@ class Variables_Mutation_insertFamily {
   }
 
   CopyWith_Variables_Mutation_insertFamily<Variables_Mutation_insertFamily>
-      get copyWith => CopyWith_Variables_Mutation_insertFamily(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Variables_Mutation_insertFamily(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -369,10 +349,7 @@ abstract class CopyWith_Variables_Mutation_insertFamily<TRes> {
 
 class _CopyWithImpl_Variables_Mutation_insertFamily<TRes>
     implements CopyWith_Variables_Mutation_insertFamily<TRes> {
-  _CopyWithImpl_Variables_Mutation_insertFamily(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Variables_Mutation_insertFamily(this._instance, this._then);
 
   final Variables_Mutation_insertFamily _instance;
 
@@ -380,12 +357,13 @@ class _CopyWithImpl_Variables_Mutation_insertFamily<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? newFamily = _undefined}) =>
-      _then(Variables_Mutation_insertFamily._({
-        ..._instance._$data,
-        if (newFamily != _undefined && newFamily != null)
-          'newFamily': (newFamily as Input_FamiliesInsertInput),
-      }));
+  TRes call({Object? newFamily = _undefined}) => _then(
+    Variables_Mutation_insertFamily._({
+      ..._instance._$data,
+      if (newFamily != _undefined && newFamily != null)
+        'newFamily': (newFamily as Input_FamiliesInsertInput),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Variables_Mutation_insertFamily<TRes>
@@ -410,7 +388,8 @@ class Mutation_insertFamily {
       insertFamiliesOne: l$insertFamiliesOne == null
           ? null
           : Fragment_Family.fromJson(
-              (l$insertFamiliesOne as Map<String, dynamic>)),
+              (l$insertFamiliesOne as Map<String, dynamic>),
+            ),
       $__typename: (l$$__typename as String),
     );
   }
@@ -432,10 +411,7 @@ class Mutation_insertFamily {
   int get hashCode {
     final l$insertFamiliesOne = insertFamiliesOne;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$insertFamiliesOne,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$insertFamiliesOne, l$$__typename]);
   }
 
   @override
@@ -462,10 +438,7 @@ class Mutation_insertFamily {
 
 extension UtilityExtension_Mutation_insertFamily on Mutation_insertFamily {
   CopyWith_Mutation_insertFamily<Mutation_insertFamily> get copyWith =>
-      CopyWith_Mutation_insertFamily(
-        this,
-        (i) => i,
-      );
+      CopyWith_Mutation_insertFamily(this, (i) => i);
 }
 
 abstract class CopyWith_Mutation_insertFamily<TRes> {
@@ -477,19 +450,13 @@ abstract class CopyWith_Mutation_insertFamily<TRes> {
   factory CopyWith_Mutation_insertFamily.stub(TRes res) =
       _CopyWithStubImpl_Mutation_insertFamily;
 
-  TRes call({
-    Fragment_Family? insertFamiliesOne,
-    String? $__typename,
-  });
+  TRes call({Fragment_Family? insertFamiliesOne, String? $__typename});
   CopyWith_Fragment_Family<TRes> get insertFamiliesOne;
 }
 
 class _CopyWithImpl_Mutation_insertFamily<TRes>
     implements CopyWith_Mutation_insertFamily<TRes> {
-  _CopyWithImpl_Mutation_insertFamily(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Mutation_insertFamily(this._instance, this._then);
 
   final Mutation_insertFamily _instance;
 
@@ -500,22 +467,25 @@ class _CopyWithImpl_Mutation_insertFamily<TRes>
   TRes call({
     Object? insertFamiliesOne = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Mutation_insertFamily(
-        insertFamiliesOne: insertFamiliesOne == _undefined
-            ? _instance.insertFamiliesOne
-            : (insertFamiliesOne as Fragment_Family?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Mutation_insertFamily(
+      insertFamiliesOne: insertFamiliesOne == _undefined
+          ? _instance.insertFamiliesOne
+          : (insertFamiliesOne as Fragment_Family?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   CopyWith_Fragment_Family<TRes> get insertFamiliesOne {
     final local$insertFamiliesOne = _instance.insertFamiliesOne;
     return local$insertFamiliesOne == null
         ? CopyWith_Fragment_Family.stub(_then(_instance))
         : CopyWith_Fragment_Family(
-            local$insertFamiliesOne, (e) => call(insertFamiliesOne: e));
+            local$insertFamiliesOne,
+            (e) => call(insertFamiliesOne: e),
+          );
   }
 }
 
@@ -525,47 +495,56 @@ class _CopyWithStubImpl_Mutation_insertFamily<TRes>
 
   TRes _res;
 
-  call({
-    Fragment_Family? insertFamiliesOne,
-    String? $__typename,
-  }) =>
-      _res;
+  call({Fragment_Family? insertFamiliesOne, String? $__typename}) => _res;
 
   CopyWith_Fragment_Family<TRes> get insertFamiliesOne =>
       CopyWith_Fragment_Family.stub(_res);
 }
 
-const documentNodeMutationinsertFamily = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.mutation,
-    name: NameNode(value: 'insertFamily'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'newFamily')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'FamiliesInsertInput'),
-          isNonNull: true,
+const documentNodeMutationinsertFamily = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.mutation,
+      name: NameNode(value: 'insertFamily'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'newFamily')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'FamiliesInsertInput'),
+            isNonNull: true,
+          ),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      )
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'insertFamiliesOne'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'object'),
-            value: VariableNode(name: NameNode(value: 'newFamily')),
-          )
-        ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FragmentSpreadNode(
-            name: NameNode(value: 'Family'),
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
+          FieldNode(
+            name: NameNode(value: 'insertFamiliesOne'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'object'),
+                value: VariableNode(name: NameNode(value: 'newFamily')),
+              ),
+            ],
             directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FragmentSpreadNode(
+                  name: NameNode(value: 'Family'),
+                  directives: [],
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
           ),
           FieldNode(
             name: NameNode(value: '__typename'),
@@ -574,20 +553,13 @@ const documentNodeMutationinsertFamily = DocumentNode(definitions: [
             directives: [],
             selectionSet: null,
           ),
-        ]),
+        ],
       ),
-      FieldNode(
-        name: NameNode(value: '__typename'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-    ]),
-  ),
-  fragmentDefinitionFamily,
-  fragmentDefinitionFamilyNoPhoto,
-]);
+    ),
+    fragmentDefinitionFamily,
+    fragmentDefinitionFamilyNoPhoto,
+  ],
+);
 
 class Variables_Mutation_updateFamily {
   factory Variables_Mutation_updateFamily({
@@ -606,24 +578,23 @@ class Variables_Mutation_updateFamily {
     DateTime? lastFatherVisit,
     required bool insertVisitHistory,
     required bool insertFatherVisitHistory,
-  }) =>
-      Variables_Mutation_updateFamily._({
-        r'familyId': familyId,
-        r'newFamily': newFamily,
-        r'addressId': addressId,
-        if (newAddress != null) r'newAddress': newAddress,
-        r'deleteParents': deleteParents,
-        r'deleteChildren': deleteChildren,
-        r'addRelatedFamilies': addRelatedFamilies,
-        r'updateFamily': updateFamily,
-        r'updateAddress': updateAddress,
-        r'deleteRelatedFamilies': deleteRelatedFamilies,
-        r'insertRelatedFamilies': insertRelatedFamilies,
-        if (lastVisit != null) r'lastVisit': lastVisit,
-        if (lastFatherVisit != null) r'lastFatherVisit': lastFatherVisit,
-        r'insertVisitHistory': insertVisitHistory,
-        r'insertFatherVisitHistory': insertFatherVisitHistory,
-      });
+  }) => Variables_Mutation_updateFamily._({
+    r'familyId': familyId,
+    r'newFamily': newFamily,
+    r'addressId': addressId,
+    if (newAddress != null) r'newAddress': newAddress,
+    r'deleteParents': deleteParents,
+    r'deleteChildren': deleteChildren,
+    r'addRelatedFamilies': addRelatedFamilies,
+    r'updateFamily': updateFamily,
+    r'updateAddress': updateAddress,
+    r'deleteRelatedFamilies': deleteRelatedFamilies,
+    r'insertRelatedFamilies': insertRelatedFamilies,
+    if (lastVisit != null) r'lastVisit': lastVisit,
+    if (lastFatherVisit != null) r'lastFatherVisit': lastFatherVisit,
+    r'insertVisitHistory': insertVisitHistory,
+    r'insertFatherVisitHistory': insertFatherVisitHistory,
+  });
 
   Variables_Mutation_updateFamily._(this._$data);
 
@@ -632,8 +603,9 @@ class Variables_Mutation_updateFamily {
     final l$familyId = data['familyId'];
     result$data['familyId'] = stringToUuid(l$familyId);
     final l$newFamily = data['newFamily'];
-    result$data['newFamily'] =
-        Input_FamiliesSetInput.fromJson((l$newFamily as Map<String, dynamic>));
+    result$data['newFamily'] = Input_FamiliesSetInput.fromJson(
+      (l$newFamily as Map<String, dynamic>),
+    );
     final l$addressId = data['addressId'];
     result$data['addressId'] = stringToUuid(l$addressId);
     if (data.containsKey('newAddress')) {
@@ -641,19 +613,24 @@ class Variables_Mutation_updateFamily {
       result$data['newAddress'] = l$newAddress == null
           ? null
           : Input_AddressesSetInput.fromJson(
-              (l$newAddress as Map<String, dynamic>));
+              (l$newAddress as Map<String, dynamic>),
+            );
     }
     final l$deleteParents = data['deleteParents'];
-    result$data['deleteParents'] =
-        (l$deleteParents as List<dynamic>).map((e) => stringToUuid(e)).toList();
+    result$data['deleteParents'] = (l$deleteParents as List<dynamic>)
+        .map((e) => stringToUuid(e))
+        .toList();
     final l$deleteChildren = data['deleteChildren'];
     result$data['deleteChildren'] = (l$deleteChildren as List<dynamic>)
         .map((e) => stringToUuid(e))
         .toList();
     final l$addRelatedFamilies = data['addRelatedFamilies'];
     result$data['addRelatedFamilies'] = (l$addRelatedFamilies as List<dynamic>)
-        .map((e) => Input_FamiliesFamiliesInsertInput.fromJson(
-            (e as Map<String, dynamic>)))
+        .map(
+          (e) => Input_FamiliesFamiliesInsertInput.fromJson(
+            (e as Map<String, dynamic>),
+          ),
+        )
         .toList();
     final l$updateFamily = data['updateFamily'];
     result$data['updateFamily'] = (l$updateFamily as bool);
@@ -665,13 +642,15 @@ class Variables_Mutation_updateFamily {
     result$data['insertRelatedFamilies'] = (l$insertRelatedFamilies as bool);
     if (data.containsKey('lastVisit')) {
       final l$lastVisit = data['lastVisit'];
-      result$data['lastVisit'] =
-          l$lastVisit == null ? null : tstzFromString(l$lastVisit);
+      result$data['lastVisit'] = l$lastVisit == null
+          ? null
+          : tstzFromString(l$lastVisit);
     }
     if (data.containsKey('lastFatherVisit')) {
       final l$lastFatherVisit = data['lastFatherVisit'];
-      result$data['lastFatherVisit'] =
-          l$lastFatherVisit == null ? null : tstzFromString(l$lastFatherVisit);
+      result$data['lastFatherVisit'] = l$lastFatherVisit == null
+          ? null
+          : tstzFromString(l$lastFatherVisit);
     }
     final l$insertVisitHistory = data['insertVisitHistory'];
     result$data['insertVisitHistory'] = (l$insertVisitHistory as bool);
@@ -732,14 +711,17 @@ class Variables_Mutation_updateFamily {
       result$data['newAddress'] = l$newAddress?.toJson();
     }
     final l$deleteParents = deleteParents;
-    result$data['deleteParents'] =
-        l$deleteParents.map((e) => uuidToString(e)).toList();
+    result$data['deleteParents'] = l$deleteParents
+        .map((e) => uuidToString(e))
+        .toList();
     final l$deleteChildren = deleteChildren;
-    result$data['deleteChildren'] =
-        l$deleteChildren.map((e) => uuidToString(e)).toList();
+    result$data['deleteChildren'] = l$deleteChildren
+        .map((e) => uuidToString(e))
+        .toList();
     final l$addRelatedFamilies = addRelatedFamilies;
-    result$data['addRelatedFamilies'] =
-        l$addRelatedFamilies.map((e) => e.toJson()).toList();
+    result$data['addRelatedFamilies'] = l$addRelatedFamilies
+        .map((e) => e.toJson())
+        .toList();
     final l$updateFamily = updateFamily;
     result$data['updateFamily'] = l$updateFamily;
     final l$updateAddress = updateAddress;
@@ -750,13 +732,15 @@ class Variables_Mutation_updateFamily {
     result$data['insertRelatedFamilies'] = l$insertRelatedFamilies;
     if (_$data.containsKey('lastVisit')) {
       final l$lastVisit = lastVisit;
-      result$data['lastVisit'] =
-          l$lastVisit == null ? null : tstzToString(l$lastVisit);
+      result$data['lastVisit'] = l$lastVisit == null
+          ? null
+          : tstzToString(l$lastVisit);
     }
     if (_$data.containsKey('lastFatherVisit')) {
       final l$lastFatherVisit = lastFatherVisit;
-      result$data['lastFatherVisit'] =
-          l$lastFatherVisit == null ? null : tstzToString(l$lastFatherVisit);
+      result$data['lastFatherVisit'] = l$lastFatherVisit == null
+          ? null
+          : tstzToString(l$lastFatherVisit);
     }
     final l$insertVisitHistory = insertVisitHistory;
     result$data['insertVisitHistory'] = l$insertVisitHistory;
@@ -766,10 +750,7 @@ class Variables_Mutation_updateFamily {
   }
 
   CopyWith_Variables_Mutation_updateFamily<Variables_Mutation_updateFamily>
-      get copyWith => CopyWith_Variables_Mutation_updateFamily(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Variables_Mutation_updateFamily(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -958,10 +939,7 @@ abstract class CopyWith_Variables_Mutation_updateFamily<TRes> {
 
 class _CopyWithImpl_Variables_Mutation_updateFamily<TRes>
     implements CopyWith_Variables_Mutation_updateFamily<TRes> {
-  _CopyWithImpl_Variables_Mutation_updateFamily(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Variables_Mutation_updateFamily(this._instance, this._then);
 
   final Variables_Mutation_updateFamily _instance;
 
@@ -985,43 +963,42 @@ class _CopyWithImpl_Variables_Mutation_updateFamily<TRes>
     Object? lastFatherVisit = _undefined,
     Object? insertVisitHistory = _undefined,
     Object? insertFatherVisitHistory = _undefined,
-  }) =>
-      _then(Variables_Mutation_updateFamily._({
-        ..._instance._$data,
-        if (familyId != _undefined && familyId != null)
-          'familyId': (familyId as UuidValue),
-        if (newFamily != _undefined && newFamily != null)
-          'newFamily': (newFamily as Input_FamiliesSetInput),
-        if (addressId != _undefined && addressId != null)
-          'addressId': (addressId as UuidValue),
-        if (newAddress != _undefined)
-          'newAddress': (newAddress as Input_AddressesSetInput?),
-        if (deleteParents != _undefined && deleteParents != null)
-          'deleteParents': (deleteParents as List<UuidValue>),
-        if (deleteChildren != _undefined && deleteChildren != null)
-          'deleteChildren': (deleteChildren as List<UuidValue>),
-        if (addRelatedFamilies != _undefined && addRelatedFamilies != null)
-          'addRelatedFamilies':
-              (addRelatedFamilies as List<Input_FamiliesFamiliesInsertInput>),
-        if (updateFamily != _undefined && updateFamily != null)
-          'updateFamily': (updateFamily as bool),
-        if (updateAddress != _undefined && updateAddress != null)
-          'updateAddress': (updateAddress as bool),
-        if (deleteRelatedFamilies != _undefined &&
-            deleteRelatedFamilies != null)
-          'deleteRelatedFamilies': (deleteRelatedFamilies as bool),
-        if (insertRelatedFamilies != _undefined &&
-            insertRelatedFamilies != null)
-          'insertRelatedFamilies': (insertRelatedFamilies as bool),
-        if (lastVisit != _undefined) 'lastVisit': (lastVisit as DateTime?),
-        if (lastFatherVisit != _undefined)
-          'lastFatherVisit': (lastFatherVisit as DateTime?),
-        if (insertVisitHistory != _undefined && insertVisitHistory != null)
-          'insertVisitHistory': (insertVisitHistory as bool),
-        if (insertFatherVisitHistory != _undefined &&
-            insertFatherVisitHistory != null)
-          'insertFatherVisitHistory': (insertFatherVisitHistory as bool),
-      }));
+  }) => _then(
+    Variables_Mutation_updateFamily._({
+      ..._instance._$data,
+      if (familyId != _undefined && familyId != null)
+        'familyId': (familyId as UuidValue),
+      if (newFamily != _undefined && newFamily != null)
+        'newFamily': (newFamily as Input_FamiliesSetInput),
+      if (addressId != _undefined && addressId != null)
+        'addressId': (addressId as UuidValue),
+      if (newAddress != _undefined)
+        'newAddress': (newAddress as Input_AddressesSetInput?),
+      if (deleteParents != _undefined && deleteParents != null)
+        'deleteParents': (deleteParents as List<UuidValue>),
+      if (deleteChildren != _undefined && deleteChildren != null)
+        'deleteChildren': (deleteChildren as List<UuidValue>),
+      if (addRelatedFamilies != _undefined && addRelatedFamilies != null)
+        'addRelatedFamilies':
+            (addRelatedFamilies as List<Input_FamiliesFamiliesInsertInput>),
+      if (updateFamily != _undefined && updateFamily != null)
+        'updateFamily': (updateFamily as bool),
+      if (updateAddress != _undefined && updateAddress != null)
+        'updateAddress': (updateAddress as bool),
+      if (deleteRelatedFamilies != _undefined && deleteRelatedFamilies != null)
+        'deleteRelatedFamilies': (deleteRelatedFamilies as bool),
+      if (insertRelatedFamilies != _undefined && insertRelatedFamilies != null)
+        'insertRelatedFamilies': (insertRelatedFamilies as bool),
+      if (lastVisit != _undefined) 'lastVisit': (lastVisit as DateTime?),
+      if (lastFatherVisit != _undefined)
+        'lastFatherVisit': (lastFatherVisit as DateTime?),
+      if (insertVisitHistory != _undefined && insertVisitHistory != null)
+        'insertVisitHistory': (insertVisitHistory as bool),
+      if (insertFatherVisitHistory != _undefined &&
+          insertFatherVisitHistory != null)
+        'insertFatherVisitHistory': (insertFatherVisitHistory as bool),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Variables_Mutation_updateFamily<TRes>
@@ -1046,8 +1023,7 @@ class _CopyWithStubImpl_Variables_Mutation_updateFamily<TRes>
     DateTime? lastFatherVisit,
     bool? insertVisitHistory,
     bool? insertFatherVisitHistory,
-  }) =>
-      _res;
+  }) => _res;
 }
 
 class Mutation_updateFamily {
@@ -1073,27 +1049,33 @@ class Mutation_updateFamily {
       updateFamiliesByPk: l$updateFamiliesByPk == null
           ? null
           : Fragment_Family.fromJson(
-              (l$updateFamiliesByPk as Map<String, dynamic>)),
+              (l$updateFamiliesByPk as Map<String, dynamic>),
+            ),
       updateAddressesByPk: l$updateAddressesByPk == null
           ? null
           : Fragment_Address.fromJson(
-              (l$updateAddressesByPk as Map<String, dynamic>)),
+              (l$updateAddressesByPk as Map<String, dynamic>),
+            ),
       deleteFamiliesFamilies: l$deleteFamiliesFamilies == null
           ? null
           : Mutation_updateFamily_deleteFamiliesFamilies.fromJson(
-              (l$deleteFamiliesFamilies as Map<String, dynamic>)),
+              (l$deleteFamiliesFamilies as Map<String, dynamic>),
+            ),
       insertFamiliesFamilies: l$insertFamiliesFamilies == null
           ? null
           : Mutation_updateFamily_insertFamiliesFamilies.fromJson(
-              (l$insertFamiliesFamilies as Map<String, dynamic>)),
+              (l$insertFamiliesFamilies as Map<String, dynamic>),
+            ),
       insertHistoryVisitHistoryOne: l$insertHistoryVisitHistoryOne == null
           ? null
           : Mutation_updateFamily_insertHistoryVisitHistoryOne.fromJson(
-              (l$insertHistoryVisitHistoryOne as Map<String, dynamic>)),
+              (l$insertHistoryVisitHistoryOne as Map<String, dynamic>),
+            ),
       $_fatherVisitHistory: l$$_fatherVisitHistory == null
           ? null
           : Mutation_updateFamily__fatherVisitHistory.fromJson(
-              (l$$_fatherVisitHistory as Map<String, dynamic>)),
+              (l$$_fatherVisitHistory as Map<String, dynamic>),
+            ),
       $__typename: (l$$__typename as String),
     );
   }
@@ -1107,7 +1089,7 @@ class Mutation_updateFamily {
   final Mutation_updateFamily_insertFamiliesFamilies? insertFamiliesFamilies;
 
   final Mutation_updateFamily_insertHistoryVisitHistoryOne?
-      insertHistoryVisitHistoryOne;
+  insertHistoryVisitHistoryOne;
 
   final Mutation_updateFamily__fatherVisitHistory? $_fatherVisitHistory;
 
@@ -1124,8 +1106,8 @@ class Mutation_updateFamily {
     final l$insertFamiliesFamilies = insertFamiliesFamilies;
     _resultData['insertFamiliesFamilies'] = l$insertFamiliesFamilies?.toJson();
     final l$insertHistoryVisitHistoryOne = insertHistoryVisitHistoryOne;
-    _resultData['insertHistoryVisitHistoryOne'] =
-        l$insertHistoryVisitHistoryOne?.toJson();
+    _resultData['insertHistoryVisitHistoryOne'] = l$insertHistoryVisitHistoryOne
+        ?.toJson();
     final l$$_fatherVisitHistory = $_fatherVisitHistory;
     _resultData['_fatherVisitHistory'] = l$$_fatherVisitHistory?.toJson();
     final l$$__typename = $__typename;
@@ -1203,10 +1185,7 @@ class Mutation_updateFamily {
 
 extension UtilityExtension_Mutation_updateFamily on Mutation_updateFamily {
   CopyWith_Mutation_updateFamily<Mutation_updateFamily> get copyWith =>
-      CopyWith_Mutation_updateFamily(
-        this,
-        (i) => i,
-      );
+      CopyWith_Mutation_updateFamily(this, (i) => i);
 }
 
 abstract class CopyWith_Mutation_updateFamily<TRes> {
@@ -1224,28 +1203,25 @@ abstract class CopyWith_Mutation_updateFamily<TRes> {
     Mutation_updateFamily_deleteFamiliesFamilies? deleteFamiliesFamilies,
     Mutation_updateFamily_insertFamiliesFamilies? insertFamiliesFamilies,
     Mutation_updateFamily_insertHistoryVisitHistoryOne?
-        insertHistoryVisitHistoryOne,
+    insertHistoryVisitHistoryOne,
     Mutation_updateFamily__fatherVisitHistory? $_fatherVisitHistory,
     String? $__typename,
   });
   CopyWith_Fragment_Family<TRes> get updateFamiliesByPk;
   CopyWith_Fragment_Address<TRes> get updateAddressesByPk;
   CopyWith_Mutation_updateFamily_deleteFamiliesFamilies<TRes>
-      get deleteFamiliesFamilies;
+  get deleteFamiliesFamilies;
   CopyWith_Mutation_updateFamily_insertFamiliesFamilies<TRes>
-      get insertFamiliesFamilies;
+  get insertFamiliesFamilies;
   CopyWith_Mutation_updateFamily_insertHistoryVisitHistoryOne<TRes>
-      get insertHistoryVisitHistoryOne;
+  get insertHistoryVisitHistoryOne;
   CopyWith_Mutation_updateFamily__fatherVisitHistory<TRes>
-      get $_fatherVisitHistory;
+  get $_fatherVisitHistory;
 }
 
 class _CopyWithImpl_Mutation_updateFamily<TRes>
     implements CopyWith_Mutation_updateFamily<TRes> {
-  _CopyWithImpl_Mutation_updateFamily(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Mutation_updateFamily(this._instance, this._then);
 
   final Mutation_updateFamily _instance;
 
@@ -1261,41 +1237,44 @@ class _CopyWithImpl_Mutation_updateFamily<TRes>
     Object? insertHistoryVisitHistoryOne = _undefined,
     Object? $_fatherVisitHistory = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Mutation_updateFamily(
-        updateFamiliesByPk: updateFamiliesByPk == _undefined
-            ? _instance.updateFamiliesByPk
-            : (updateFamiliesByPk as Fragment_Family?),
-        updateAddressesByPk: updateAddressesByPk == _undefined
-            ? _instance.updateAddressesByPk
-            : (updateAddressesByPk as Fragment_Address?),
-        deleteFamiliesFamilies: deleteFamiliesFamilies == _undefined
-            ? _instance.deleteFamiliesFamilies
-            : (deleteFamiliesFamilies
+  }) => _then(
+    Mutation_updateFamily(
+      updateFamiliesByPk: updateFamiliesByPk == _undefined
+          ? _instance.updateFamiliesByPk
+          : (updateFamiliesByPk as Fragment_Family?),
+      updateAddressesByPk: updateAddressesByPk == _undefined
+          ? _instance.updateAddressesByPk
+          : (updateAddressesByPk as Fragment_Address?),
+      deleteFamiliesFamilies: deleteFamiliesFamilies == _undefined
+          ? _instance.deleteFamiliesFamilies
+          : (deleteFamiliesFamilies
                 as Mutation_updateFamily_deleteFamiliesFamilies?),
-        insertFamiliesFamilies: insertFamiliesFamilies == _undefined
-            ? _instance.insertFamiliesFamilies
-            : (insertFamiliesFamilies
+      insertFamiliesFamilies: insertFamiliesFamilies == _undefined
+          ? _instance.insertFamiliesFamilies
+          : (insertFamiliesFamilies
                 as Mutation_updateFamily_insertFamiliesFamilies?),
-        insertHistoryVisitHistoryOne: insertHistoryVisitHistoryOne == _undefined
-            ? _instance.insertHistoryVisitHistoryOne
-            : (insertHistoryVisitHistoryOne
+      insertHistoryVisitHistoryOne: insertHistoryVisitHistoryOne == _undefined
+          ? _instance.insertHistoryVisitHistoryOne
+          : (insertHistoryVisitHistoryOne
                 as Mutation_updateFamily_insertHistoryVisitHistoryOne?),
-        $_fatherVisitHistory: $_fatherVisitHistory == _undefined
-            ? _instance.$_fatherVisitHistory
-            : ($_fatherVisitHistory
+      $_fatherVisitHistory: $_fatherVisitHistory == _undefined
+          ? _instance.$_fatherVisitHistory
+          : ($_fatherVisitHistory
                 as Mutation_updateFamily__fatherVisitHistory?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   CopyWith_Fragment_Family<TRes> get updateFamiliesByPk {
     final local$updateFamiliesByPk = _instance.updateFamiliesByPk;
     return local$updateFamiliesByPk == null
         ? CopyWith_Fragment_Family.stub(_then(_instance))
         : CopyWith_Fragment_Family(
-            local$updateFamiliesByPk, (e) => call(updateFamiliesByPk: e));
+            local$updateFamiliesByPk,
+            (e) => call(updateFamiliesByPk: e),
+          );
   }
 
   CopyWith_Fragment_Address<TRes> get updateAddressesByPk {
@@ -1303,51 +1282,62 @@ class _CopyWithImpl_Mutation_updateFamily<TRes>
     return local$updateAddressesByPk == null
         ? CopyWith_Fragment_Address.stub(_then(_instance))
         : CopyWith_Fragment_Address(
-            local$updateAddressesByPk, (e) => call(updateAddressesByPk: e));
+            local$updateAddressesByPk,
+            (e) => call(updateAddressesByPk: e),
+          );
   }
 
   CopyWith_Mutation_updateFamily_deleteFamiliesFamilies<TRes>
-      get deleteFamiliesFamilies {
+  get deleteFamiliesFamilies {
     final local$deleteFamiliesFamilies = _instance.deleteFamiliesFamilies;
     return local$deleteFamiliesFamilies == null
         ? CopyWith_Mutation_updateFamily_deleteFamiliesFamilies.stub(
-            _then(_instance))
+            _then(_instance),
+          )
         : CopyWith_Mutation_updateFamily_deleteFamiliesFamilies(
             local$deleteFamiliesFamilies,
-            (e) => call(deleteFamiliesFamilies: e));
+            (e) => call(deleteFamiliesFamilies: e),
+          );
   }
 
   CopyWith_Mutation_updateFamily_insertFamiliesFamilies<TRes>
-      get insertFamiliesFamilies {
+  get insertFamiliesFamilies {
     final local$insertFamiliesFamilies = _instance.insertFamiliesFamilies;
     return local$insertFamiliesFamilies == null
         ? CopyWith_Mutation_updateFamily_insertFamiliesFamilies.stub(
-            _then(_instance))
+            _then(_instance),
+          )
         : CopyWith_Mutation_updateFamily_insertFamiliesFamilies(
             local$insertFamiliesFamilies,
-            (e) => call(insertFamiliesFamilies: e));
+            (e) => call(insertFamiliesFamilies: e),
+          );
   }
 
   CopyWith_Mutation_updateFamily_insertHistoryVisitHistoryOne<TRes>
-      get insertHistoryVisitHistoryOne {
+  get insertHistoryVisitHistoryOne {
     final local$insertHistoryVisitHistoryOne =
         _instance.insertHistoryVisitHistoryOne;
     return local$insertHistoryVisitHistoryOne == null
         ? CopyWith_Mutation_updateFamily_insertHistoryVisitHistoryOne.stub(
-            _then(_instance))
+            _then(_instance),
+          )
         : CopyWith_Mutation_updateFamily_insertHistoryVisitHistoryOne(
             local$insertHistoryVisitHistoryOne,
-            (e) => call(insertHistoryVisitHistoryOne: e));
+            (e) => call(insertHistoryVisitHistoryOne: e),
+          );
   }
 
   CopyWith_Mutation_updateFamily__fatherVisitHistory<TRes>
-      get $_fatherVisitHistory {
+  get $_fatherVisitHistory {
     final local$$_fatherVisitHistory = _instance.$_fatherVisitHistory;
     return local$$_fatherVisitHistory == null
         ? CopyWith_Mutation_updateFamily__fatherVisitHistory.stub(
-            _then(_instance))
+            _then(_instance),
+          )
         : CopyWith_Mutation_updateFamily__fatherVisitHistory(
-            local$$_fatherVisitHistory, (e) => call($_fatherVisitHistory: e));
+            local$$_fatherVisitHistory,
+            (e) => call($_fatherVisitHistory: e),
+          );
   }
 }
 
@@ -1363,11 +1353,10 @@ class _CopyWithStubImpl_Mutation_updateFamily<TRes>
     Mutation_updateFamily_deleteFamiliesFamilies? deleteFamiliesFamilies,
     Mutation_updateFamily_insertFamiliesFamilies? insertFamiliesFamilies,
     Mutation_updateFamily_insertHistoryVisitHistoryOne?
-        insertHistoryVisitHistoryOne,
+    insertHistoryVisitHistoryOne,
     Mutation_updateFamily__fatherVisitHistory? $_fatherVisitHistory,
     String? $__typename,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Fragment_Family<TRes> get updateFamiliesByPk =>
       CopyWith_Fragment_Family.stub(_res);
@@ -1376,494 +1365,539 @@ class _CopyWithStubImpl_Mutation_updateFamily<TRes>
       CopyWith_Fragment_Address.stub(_res);
 
   CopyWith_Mutation_updateFamily_deleteFamiliesFamilies<TRes>
-      get deleteFamiliesFamilies =>
-          CopyWith_Mutation_updateFamily_deleteFamiliesFamilies.stub(_res);
+  get deleteFamiliesFamilies =>
+      CopyWith_Mutation_updateFamily_deleteFamiliesFamilies.stub(_res);
 
   CopyWith_Mutation_updateFamily_insertFamiliesFamilies<TRes>
-      get insertFamiliesFamilies =>
-          CopyWith_Mutation_updateFamily_insertFamiliesFamilies.stub(_res);
+  get insertFamiliesFamilies =>
+      CopyWith_Mutation_updateFamily_insertFamiliesFamilies.stub(_res);
 
   CopyWith_Mutation_updateFamily_insertHistoryVisitHistoryOne<TRes>
-      get insertHistoryVisitHistoryOne =>
-          CopyWith_Mutation_updateFamily_insertHistoryVisitHistoryOne.stub(
-              _res);
+  get insertHistoryVisitHistoryOne =>
+      CopyWith_Mutation_updateFamily_insertHistoryVisitHistoryOne.stub(_res);
 
   CopyWith_Mutation_updateFamily__fatherVisitHistory<TRes>
-      get $_fatherVisitHistory =>
-          CopyWith_Mutation_updateFamily__fatherVisitHistory.stub(_res);
+  get $_fatherVisitHistory =>
+      CopyWith_Mutation_updateFamily__fatherVisitHistory.stub(_res);
 }
 
-const documentNodeMutationupdateFamily = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.mutation,
-    name: NameNode(value: 'updateFamily'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'familyId')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'uuid'),
-          isNonNull: true,
+const documentNodeMutationupdateFamily = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.mutation,
+      name: NameNode(value: 'updateFamily'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'familyId')),
+          type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'newFamily')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'FamiliesSetInput'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'addressId')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'uuid'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'newAddress')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'AddressesSetInput'),
-          isNonNull: false,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'deleteParents')),
-        type: ListTypeNode(
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'newFamily')),
           type: NamedTypeNode(
-            name: NameNode(value: 'uuid'),
+            name: NameNode(value: 'FamiliesSetInput'),
             isNonNull: true,
           ),
-          isNonNull: true,
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'deleteChildren')),
-        type: ListTypeNode(
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'addressId')),
+          type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'newAddress')),
           type: NamedTypeNode(
-            name: NameNode(value: 'uuid'),
+            name: NameNode(value: 'AddressesSetInput'),
+            isNonNull: false,
+          ),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'deleteParents')),
+          type: ListTypeNode(
+            type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
             isNonNull: true,
           ),
-          isNonNull: true,
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'addRelatedFamilies')),
-        type: ListTypeNode(
-          type: NamedTypeNode(
-            name: NameNode(value: 'FamiliesFamiliesInsertInput'),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'deleteChildren')),
+          type: ListTypeNode(
+            type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
             isNonNull: true,
           ),
-          isNonNull: true,
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'updateFamily')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'Boolean'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'updateAddress')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'Boolean'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'deleteRelatedFamilies')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'Boolean'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'insertRelatedFamilies')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'Boolean'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'lastVisit')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'timestamptz'),
-          isNonNull: false,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'lastFatherVisit')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'timestamptz'),
-          isNonNull: false,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'insertVisitHistory')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'Boolean'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable:
-            VariableNode(name: NameNode(value: 'insertFatherVisitHistory')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'Boolean'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'updateFamiliesByPk'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'pkColumns'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'id'),
-                value: VariableNode(name: NameNode(value: 'familyId')),
-              )
-            ]),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'addRelatedFamilies')),
+          type: ListTypeNode(
+            type: NamedTypeNode(
+              name: NameNode(value: 'FamiliesFamiliesInsertInput'),
+              isNonNull: true,
+            ),
+            isNonNull: true,
           ),
-          ArgumentNode(
-            name: NameNode(value: '_set'),
-            value: VariableNode(name: NameNode(value: 'newFamily')),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'updateFamily')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'Boolean'),
+            isNonNull: true,
           ),
-        ],
-        directives: [
-          DirectiveNode(
-            name: NameNode(value: 'include'),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'updateAddress')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'Boolean'),
+            isNonNull: true,
+          ),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(
+            name: NameNode(value: 'deleteRelatedFamilies'),
+          ),
+          type: NamedTypeNode(
+            name: NameNode(value: 'Boolean'),
+            isNonNull: true,
+          ),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(
+            name: NameNode(value: 'insertRelatedFamilies'),
+          ),
+          type: NamedTypeNode(
+            name: NameNode(value: 'Boolean'),
+            isNonNull: true,
+          ),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'lastVisit')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'timestamptz'),
+            isNonNull: false,
+          ),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'lastFatherVisit')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'timestamptz'),
+            isNonNull: false,
+          ),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'insertVisitHistory')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'Boolean'),
+            isNonNull: true,
+          ),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(
+            name: NameNode(value: 'insertFatherVisitHistory'),
+          ),
+          type: NamedTypeNode(
+            name: NameNode(value: 'Boolean'),
+            isNonNull: true,
+          ),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
+          FieldNode(
+            name: NameNode(value: 'updateFamiliesByPk'),
+            alias: null,
             arguments: [
               ArgumentNode(
-                name: NameNode(value: 'if'),
-                value: VariableNode(name: NameNode(value: 'updateFamily')),
-              )
-            ],
-          )
-        ],
-        selectionSet: SelectionSetNode(selections: [
-          FragmentSpreadNode(
-            name: NameNode(value: 'Family'),
-            directives: [],
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-        ]),
-      ),
-      FieldNode(
-        name: NameNode(value: 'updateAddressesByPk'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'pkColumns'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'id'),
-                value: VariableNode(name: NameNode(value: 'addressId')),
-              )
-            ]),
-          ),
-          ArgumentNode(
-            name: NameNode(value: '_set'),
-            value: VariableNode(name: NameNode(value: 'newAddress')),
-          ),
-        ],
-        directives: [
-          DirectiveNode(
-            name: NameNode(value: 'include'),
-            arguments: [
-              ArgumentNode(
-                name: NameNode(value: 'if'),
-                value: VariableNode(name: NameNode(value: 'updateAddress')),
-              )
-            ],
-          )
-        ],
-        selectionSet: SelectionSetNode(selections: [
-          FragmentSpreadNode(
-            name: NameNode(value: 'Address'),
-            directives: [],
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-        ]),
-      ),
-      FieldNode(
-        name: NameNode(value: 'deleteFamiliesFamilies'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'where'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: '_or'),
-                value: ListValueNode(values: [
-                  ObjectValueNode(fields: [
+                name: NameNode(value: 'pkColumns'),
+                value: ObjectValueNode(
+                  fields: [
                     ObjectFieldNode(
-                      name: NameNode(value: 'childFamilyId'),
-                      value: ObjectValueNode(fields: [
-                        ObjectFieldNode(
-                          name: NameNode(value: '_eq'),
-                          value:
-                              VariableNode(name: NameNode(value: 'familyId')),
-                        )
-                      ]),
+                      name: NameNode(value: 'id'),
+                      value: VariableNode(name: NameNode(value: 'familyId')),
                     ),
-                    ObjectFieldNode(
-                      name: NameNode(value: 'parentFamilyId'),
-                      value: ObjectValueNode(fields: [
-                        ObjectFieldNode(
-                          name: NameNode(value: '_in'),
-                          value: VariableNode(
-                              name: NameNode(value: 'deleteParents')),
-                        )
-                      ]),
-                    ),
-                  ]),
-                  ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                      name: NameNode(value: 'parentFamilyId'),
-                      value: ObjectValueNode(fields: [
-                        ObjectFieldNode(
-                          name: NameNode(value: '_eq'),
-                          value:
-                              VariableNode(name: NameNode(value: 'familyId')),
-                        )
-                      ]),
-                    ),
-                    ObjectFieldNode(
-                      name: NameNode(value: 'childFamilyId'),
-                      value: ObjectValueNode(fields: [
-                        ObjectFieldNode(
-                          name: NameNode(value: '_in'),
-                          value: VariableNode(
-                              name: NameNode(value: 'deleteChildren')),
-                        )
-                      ]),
-                    ),
-                  ]),
-                ]),
-              )
-            ]),
-          )
-        ],
-        directives: [
-          DirectiveNode(
-            name: NameNode(value: 'include'),
-            arguments: [
-              ArgumentNode(
-                name: NameNode(value: 'if'),
-                value: VariableNode(
-                    name: NameNode(value: 'deleteRelatedFamilies')),
-              )
-            ],
-          )
-        ],
-        selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-            name: NameNode(value: 'affectedRows'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-        ]),
-      ),
-      FieldNode(
-        name: NameNode(value: 'insertFamiliesFamilies'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'objects'),
-            value: VariableNode(name: NameNode(value: 'addRelatedFamilies')),
-          )
-        ],
-        directives: [
-          DirectiveNode(
-            name: NameNode(value: 'include'),
-            arguments: [
-              ArgumentNode(
-                name: NameNode(value: 'if'),
-                value: VariableNode(
-                    name: NameNode(value: 'insertRelatedFamilies')),
-              )
-            ],
-          )
-        ],
-        selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-            name: NameNode(value: 'affectedRows'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-        ]),
-      ),
-      FieldNode(
-        name: NameNode(value: 'insertHistoryVisitHistoryOne'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'object'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'table'),
-                value: StringValueNode(
-                  value: 'families',
-                  isBlock: false,
+                  ],
                 ),
               ),
-              ObjectFieldNode(
-                name: NameNode(value: 'recordId'),
-                value: VariableNode(name: NameNode(value: 'familyId')),
+              ArgumentNode(
+                name: NameNode(value: '_set'),
+                value: VariableNode(name: NameNode(value: 'newFamily')),
               ),
-              ObjectFieldNode(
-                name: NameNode(value: 'time'),
-                value: VariableNode(name: NameNode(value: 'lastVisit')),
+            ],
+            directives: [
+              DirectiveNode(
+                name: NameNode(value: 'include'),
+                arguments: [
+                  ArgumentNode(
+                    name: NameNode(value: 'if'),
+                    value: VariableNode(name: NameNode(value: 'updateFamily')),
+                  ),
+                ],
               ),
-              ObjectFieldNode(
-                name: NameNode(value: 'isFatherVisit'),
-                value: BooleanValueNode(value: false),
-              ),
-            ]),
-          )
-        ],
-        directives: [
-          DirectiveNode(
-            name: NameNode(value: 'include'),
+            ],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FragmentSpreadNode(
+                  name: NameNode(value: 'Family'),
+                  directives: [],
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
+          ),
+          FieldNode(
+            name: NameNode(value: 'updateAddressesByPk'),
+            alias: null,
             arguments: [
               ArgumentNode(
-                name: NameNode(value: 'if'),
-                value:
-                    VariableNode(name: NameNode(value: 'insertVisitHistory')),
-              )
-            ],
-          )
-        ],
-        selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-            name: NameNode(value: 'visitId'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-        ]),
-      ),
-      FieldNode(
-        name: NameNode(value: 'insertHistoryVisitHistoryOne'),
-        alias: NameNode(value: '_fatherVisitHistory'),
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'object'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'table'),
-                value: StringValueNode(
-                  value: 'families',
-                  isBlock: false,
+                name: NameNode(value: 'pkColumns'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'id'),
+                      value: VariableNode(name: NameNode(value: 'addressId')),
+                    ),
+                  ],
                 ),
               ),
-              ObjectFieldNode(
-                name: NameNode(value: 'recordId'),
-                value: VariableNode(name: NameNode(value: 'familyId')),
+              ArgumentNode(
+                name: NameNode(value: '_set'),
+                value: VariableNode(name: NameNode(value: 'newAddress')),
               ),
-              ObjectFieldNode(
-                name: NameNode(value: 'time'),
-                value: VariableNode(name: NameNode(value: 'lastFatherVisit')),
+            ],
+            directives: [
+              DirectiveNode(
+                name: NameNode(value: 'include'),
+                arguments: [
+                  ArgumentNode(
+                    name: NameNode(value: 'if'),
+                    value: VariableNode(name: NameNode(value: 'updateAddress')),
+                  ),
+                ],
               ),
-              ObjectFieldNode(
-                name: NameNode(value: 'isFatherVisit'),
-                value: BooleanValueNode(value: true),
-              ),
-            ]),
-          )
-        ],
-        directives: [
-          DirectiveNode(
-            name: NameNode(value: 'include'),
+            ],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FragmentSpreadNode(
+                  name: NameNode(value: 'Address'),
+                  directives: [],
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
+          ),
+          FieldNode(
+            name: NameNode(value: 'deleteFamiliesFamilies'),
+            alias: null,
             arguments: [
               ArgumentNode(
-                name: NameNode(value: 'if'),
-                value: VariableNode(
-                    name: NameNode(value: 'insertFatherVisitHistory')),
-              )
+                name: NameNode(value: 'where'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: '_or'),
+                      value: ListValueNode(
+                        values: [
+                          ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                name: NameNode(value: 'childFamilyId'),
+                                value: ObjectValueNode(
+                                  fields: [
+                                    ObjectFieldNode(
+                                      name: NameNode(value: '_eq'),
+                                      value: VariableNode(
+                                        name: NameNode(value: 'familyId'),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              ObjectFieldNode(
+                                name: NameNode(value: 'parentFamilyId'),
+                                value: ObjectValueNode(
+                                  fields: [
+                                    ObjectFieldNode(
+                                      name: NameNode(value: '_in'),
+                                      value: VariableNode(
+                                        name: NameNode(value: 'deleteParents'),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                          ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                name: NameNode(value: 'parentFamilyId'),
+                                value: ObjectValueNode(
+                                  fields: [
+                                    ObjectFieldNode(
+                                      name: NameNode(value: '_eq'),
+                                      value: VariableNode(
+                                        name: NameNode(value: 'familyId'),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              ObjectFieldNode(
+                                name: NameNode(value: 'childFamilyId'),
+                                value: ObjectValueNode(
+                                  fields: [
+                                    ObjectFieldNode(
+                                      name: NameNode(value: '_in'),
+                                      value: VariableNode(
+                                        name: NameNode(value: 'deleteChildren'),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ],
-          )
-        ],
-        selectionSet: SelectionSetNode(selections: [
+            directives: [
+              DirectiveNode(
+                name: NameNode(value: 'include'),
+                arguments: [
+                  ArgumentNode(
+                    name: NameNode(value: 'if'),
+                    value: VariableNode(
+                      name: NameNode(value: 'deleteRelatedFamilies'),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FieldNode(
+                  name: NameNode(value: 'affectedRows'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
+          ),
           FieldNode(
-            name: NameNode(value: 'visitId'),
+            name: NameNode(value: 'insertFamiliesFamilies'),
             alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'objects'),
+                value: VariableNode(
+                  name: NameNode(value: 'addRelatedFamilies'),
+                ),
+              ),
+            ],
+            directives: [
+              DirectiveNode(
+                name: NameNode(value: 'include'),
+                arguments: [
+                  ArgumentNode(
+                    name: NameNode(value: 'if'),
+                    value: VariableNode(
+                      name: NameNode(value: 'insertRelatedFamilies'),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FieldNode(
+                  name: NameNode(value: 'affectedRows'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
+          ),
+          FieldNode(
+            name: NameNode(value: 'insertHistoryVisitHistoryOne'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'object'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'table'),
+                      value: StringValueNode(value: 'families', isBlock: false),
+                    ),
+                    ObjectFieldNode(
+                      name: NameNode(value: 'recordId'),
+                      value: VariableNode(name: NameNode(value: 'familyId')),
+                    ),
+                    ObjectFieldNode(
+                      name: NameNode(value: 'time'),
+                      value: VariableNode(name: NameNode(value: 'lastVisit')),
+                    ),
+                    ObjectFieldNode(
+                      name: NameNode(value: 'isFatherVisit'),
+                      value: BooleanValueNode(value: false),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+            directives: [
+              DirectiveNode(
+                name: NameNode(value: 'include'),
+                arguments: [
+                  ArgumentNode(
+                    name: NameNode(value: 'if'),
+                    value: VariableNode(
+                      name: NameNode(value: 'insertVisitHistory'),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FieldNode(
+                  name: NameNode(value: 'visitId'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
+          ),
+          FieldNode(
+            name: NameNode(value: 'insertHistoryVisitHistoryOne'),
+            alias: NameNode(value: '_fatherVisitHistory'),
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'object'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'table'),
+                      value: StringValueNode(value: 'families', isBlock: false),
+                    ),
+                    ObjectFieldNode(
+                      name: NameNode(value: 'recordId'),
+                      value: VariableNode(name: NameNode(value: 'familyId')),
+                    ),
+                    ObjectFieldNode(
+                      name: NameNode(value: 'time'),
+                      value: VariableNode(
+                        name: NameNode(value: 'lastFatherVisit'),
+                      ),
+                    ),
+                    ObjectFieldNode(
+                      name: NameNode(value: 'isFatherVisit'),
+                      value: BooleanValueNode(value: true),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+            directives: [
+              DirectiveNode(
+                name: NameNode(value: 'include'),
+                arguments: [
+                  ArgumentNode(
+                    name: NameNode(value: 'if'),
+                    value: VariableNode(
+                      name: NameNode(value: 'insertFatherVisitHistory'),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FieldNode(
+                  name: NameNode(value: 'visitId'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
           ),
           FieldNode(
             name: NameNode(value: '__typename'),
@@ -1872,25 +1906,18 @@ const documentNodeMutationupdateFamily = DocumentNode(definitions: [
             directives: [],
             selectionSet: null,
           ),
-        ]),
+        ],
       ),
-      FieldNode(
-        name: NameNode(value: '__typename'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-    ]),
-  ),
-  fragmentDefinitionFamily,
-  fragmentDefinitionFamilyNoPhoto,
-  fragmentDefinitionAddress,
-  fragmentDefinitionArea,
-  fragmentDefinitionAreaNoPhoto,
-  fragmentDefinitionStreet,
-  fragmentDefinitionStreetNoPhoto,
-]);
+    ),
+    fragmentDefinitionFamily,
+    fragmentDefinitionFamilyNoPhoto,
+    fragmentDefinitionAddress,
+    fragmentDefinitionArea,
+    fragmentDefinitionAreaNoPhoto,
+    fragmentDefinitionStreet,
+    fragmentDefinitionStreetNoPhoto,
+  ],
+);
 
 class Mutation_updateFamily_deleteFamiliesFamilies {
   Mutation_updateFamily_deleteFamiliesFamilies({
@@ -1899,7 +1926,8 @@ class Mutation_updateFamily_deleteFamiliesFamilies {
   });
 
   factory Mutation_updateFamily_deleteFamiliesFamilies.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$affectedRows = json['affectedRows'];
     final l$$__typename = json['__typename'];
     return Mutation_updateFamily_deleteFamiliesFamilies(
@@ -1925,10 +1953,7 @@ class Mutation_updateFamily_deleteFamiliesFamilies {
   int get hashCode {
     final l$affectedRows = affectedRows;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$affectedRows,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$affectedRows, l$$__typename]);
   }
 
   @override
@@ -1957,11 +1982,10 @@ class Mutation_updateFamily_deleteFamiliesFamilies {
 extension UtilityExtension_Mutation_updateFamily_deleteFamiliesFamilies
     on Mutation_updateFamily_deleteFamiliesFamilies {
   CopyWith_Mutation_updateFamily_deleteFamiliesFamilies<
-          Mutation_updateFamily_deleteFamiliesFamilies>
-      get copyWith => CopyWith_Mutation_updateFamily_deleteFamiliesFamilies(
-            this,
-            (i) => i,
-          );
+    Mutation_updateFamily_deleteFamiliesFamilies
+  >
+  get copyWith =>
+      CopyWith_Mutation_updateFamily_deleteFamiliesFamilies(this, (i) => i);
 }
 
 abstract class CopyWith_Mutation_updateFamily_deleteFamiliesFamilies<TRes> {
@@ -1973,10 +1997,7 @@ abstract class CopyWith_Mutation_updateFamily_deleteFamiliesFamilies<TRes> {
   factory CopyWith_Mutation_updateFamily_deleteFamiliesFamilies.stub(TRes res) =
       _CopyWithStubImpl_Mutation_updateFamily_deleteFamiliesFamilies;
 
-  TRes call({
-    int? affectedRows,
-    String? $__typename,
-  });
+  TRes call({int? affectedRows, String? $__typename});
 }
 
 class _CopyWithImpl_Mutation_updateFamily_deleteFamiliesFamilies<TRes>
@@ -1995,15 +2016,16 @@ class _CopyWithImpl_Mutation_updateFamily_deleteFamiliesFamilies<TRes>
   TRes call({
     Object? affectedRows = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Mutation_updateFamily_deleteFamiliesFamilies(
-        affectedRows: affectedRows == _undefined || affectedRows == null
-            ? _instance.affectedRows
-            : (affectedRows as int),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Mutation_updateFamily_deleteFamiliesFamilies(
+      affectedRows: affectedRows == _undefined || affectedRows == null
+          ? _instance.affectedRows
+          : (affectedRows as int),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 }
 
 class _CopyWithStubImpl_Mutation_updateFamily_deleteFamiliesFamilies<TRes>
@@ -2012,11 +2034,7 @@ class _CopyWithStubImpl_Mutation_updateFamily_deleteFamiliesFamilies<TRes>
 
   TRes _res;
 
-  call({
-    int? affectedRows,
-    String? $__typename,
-  }) =>
-      _res;
+  call({int? affectedRows, String? $__typename}) => _res;
 }
 
 class Mutation_updateFamily_insertFamiliesFamilies {
@@ -2026,7 +2044,8 @@ class Mutation_updateFamily_insertFamiliesFamilies {
   });
 
   factory Mutation_updateFamily_insertFamiliesFamilies.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$affectedRows = json['affectedRows'];
     final l$$__typename = json['__typename'];
     return Mutation_updateFamily_insertFamiliesFamilies(
@@ -2052,10 +2071,7 @@ class Mutation_updateFamily_insertFamiliesFamilies {
   int get hashCode {
     final l$affectedRows = affectedRows;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$affectedRows,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$affectedRows, l$$__typename]);
   }
 
   @override
@@ -2084,11 +2100,10 @@ class Mutation_updateFamily_insertFamiliesFamilies {
 extension UtilityExtension_Mutation_updateFamily_insertFamiliesFamilies
     on Mutation_updateFamily_insertFamiliesFamilies {
   CopyWith_Mutation_updateFamily_insertFamiliesFamilies<
-          Mutation_updateFamily_insertFamiliesFamilies>
-      get copyWith => CopyWith_Mutation_updateFamily_insertFamiliesFamilies(
-            this,
-            (i) => i,
-          );
+    Mutation_updateFamily_insertFamiliesFamilies
+  >
+  get copyWith =>
+      CopyWith_Mutation_updateFamily_insertFamiliesFamilies(this, (i) => i);
 }
 
 abstract class CopyWith_Mutation_updateFamily_insertFamiliesFamilies<TRes> {
@@ -2100,10 +2115,7 @@ abstract class CopyWith_Mutation_updateFamily_insertFamiliesFamilies<TRes> {
   factory CopyWith_Mutation_updateFamily_insertFamiliesFamilies.stub(TRes res) =
       _CopyWithStubImpl_Mutation_updateFamily_insertFamiliesFamilies;
 
-  TRes call({
-    int? affectedRows,
-    String? $__typename,
-  });
+  TRes call({int? affectedRows, String? $__typename});
 }
 
 class _CopyWithImpl_Mutation_updateFamily_insertFamiliesFamilies<TRes>
@@ -2122,15 +2134,16 @@ class _CopyWithImpl_Mutation_updateFamily_insertFamiliesFamilies<TRes>
   TRes call({
     Object? affectedRows = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Mutation_updateFamily_insertFamiliesFamilies(
-        affectedRows: affectedRows == _undefined || affectedRows == null
-            ? _instance.affectedRows
-            : (affectedRows as int),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Mutation_updateFamily_insertFamiliesFamilies(
+      affectedRows: affectedRows == _undefined || affectedRows == null
+          ? _instance.affectedRows
+          : (affectedRows as int),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 }
 
 class _CopyWithStubImpl_Mutation_updateFamily_insertFamiliesFamilies<TRes>
@@ -2139,11 +2152,7 @@ class _CopyWithStubImpl_Mutation_updateFamily_insertFamiliesFamilies<TRes>
 
   TRes _res;
 
-  call({
-    int? affectedRows,
-    String? $__typename,
-  }) =>
-      _res;
+  call({int? affectedRows, String? $__typename}) => _res;
 }
 
 class Mutation_updateFamily_insertHistoryVisitHistoryOne {
@@ -2153,7 +2162,8 @@ class Mutation_updateFamily_insertHistoryVisitHistoryOne {
   });
 
   factory Mutation_updateFamily_insertHistoryVisitHistoryOne.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$visitId = json['visitId'];
     final l$$__typename = json['__typename'];
     return Mutation_updateFamily_insertHistoryVisitHistoryOne(
@@ -2179,10 +2189,7 @@ class Mutation_updateFamily_insertHistoryVisitHistoryOne {
   int get hashCode {
     final l$visitId = visitId;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$visitId,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$visitId, l$$__typename]);
   }
 
   @override
@@ -2211,29 +2218,27 @@ class Mutation_updateFamily_insertHistoryVisitHistoryOne {
 extension UtilityExtension_Mutation_updateFamily_insertHistoryVisitHistoryOne
     on Mutation_updateFamily_insertHistoryVisitHistoryOne {
   CopyWith_Mutation_updateFamily_insertHistoryVisitHistoryOne<
-          Mutation_updateFamily_insertHistoryVisitHistoryOne>
-      get copyWith =>
-          CopyWith_Mutation_updateFamily_insertHistoryVisitHistoryOne(
-            this,
-            (i) => i,
-          );
+    Mutation_updateFamily_insertHistoryVisitHistoryOne
+  >
+  get copyWith => CopyWith_Mutation_updateFamily_insertHistoryVisitHistoryOne(
+    this,
+    (i) => i,
+  );
 }
 
 abstract class CopyWith_Mutation_updateFamily_insertHistoryVisitHistoryOne<
-    TRes> {
+  TRes
+> {
   factory CopyWith_Mutation_updateFamily_insertHistoryVisitHistoryOne(
     Mutation_updateFamily_insertHistoryVisitHistoryOne instance,
     TRes Function(Mutation_updateFamily_insertHistoryVisitHistoryOne) then,
   ) = _CopyWithImpl_Mutation_updateFamily_insertHistoryVisitHistoryOne;
 
   factory CopyWith_Mutation_updateFamily_insertHistoryVisitHistoryOne.stub(
-          TRes res) =
-      _CopyWithStubImpl_Mutation_updateFamily_insertHistoryVisitHistoryOne;
+    TRes res,
+  ) = _CopyWithStubImpl_Mutation_updateFamily_insertHistoryVisitHistoryOne;
 
-  TRes call({
-    UuidValue? visitId,
-    String? $__typename,
-  });
+  TRes call({UuidValue? visitId, String? $__typename});
 }
 
 class _CopyWithImpl_Mutation_updateFamily_insertHistoryVisitHistoryOne<TRes>
@@ -2250,33 +2255,29 @@ class _CopyWithImpl_Mutation_updateFamily_insertHistoryVisitHistoryOne<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? visitId = _undefined,
-    Object? $__typename = _undefined,
-  }) =>
-      _then(Mutation_updateFamily_insertHistoryVisitHistoryOne(
-        visitId: visitId == _undefined || visitId == null
-            ? _instance.visitId
-            : (visitId as UuidValue),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  TRes call({Object? visitId = _undefined, Object? $__typename = _undefined}) =>
+      _then(
+        Mutation_updateFamily_insertHistoryVisitHistoryOne(
+          visitId: visitId == _undefined || visitId == null
+              ? _instance.visitId
+              : (visitId as UuidValue),
+          $__typename: $__typename == _undefined || $__typename == null
+              ? _instance.$__typename
+              : ($__typename as String),
+        ),
+      );
 }
 
 class _CopyWithStubImpl_Mutation_updateFamily_insertHistoryVisitHistoryOne<TRes>
     implements
         CopyWith_Mutation_updateFamily_insertHistoryVisitHistoryOne<TRes> {
   _CopyWithStubImpl_Mutation_updateFamily_insertHistoryVisitHistoryOne(
-      this._res);
+    this._res,
+  );
 
   TRes _res;
 
-  call({
-    UuidValue? visitId,
-    String? $__typename,
-  }) =>
-      _res;
+  call({UuidValue? visitId, String? $__typename}) => _res;
 }
 
 class Mutation_updateFamily__fatherVisitHistory {
@@ -2286,7 +2287,8 @@ class Mutation_updateFamily__fatherVisitHistory {
   });
 
   factory Mutation_updateFamily__fatherVisitHistory.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$visitId = json['visitId'];
     final l$$__typename = json['__typename'];
     return Mutation_updateFamily__fatherVisitHistory(
@@ -2312,10 +2314,7 @@ class Mutation_updateFamily__fatherVisitHistory {
   int get hashCode {
     final l$visitId = visitId;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$visitId,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$visitId, l$$__typename]);
   }
 
   @override
@@ -2344,11 +2343,10 @@ class Mutation_updateFamily__fatherVisitHistory {
 extension UtilityExtension_Mutation_updateFamily__fatherVisitHistory
     on Mutation_updateFamily__fatherVisitHistory {
   CopyWith_Mutation_updateFamily__fatherVisitHistory<
-          Mutation_updateFamily__fatherVisitHistory>
-      get copyWith => CopyWith_Mutation_updateFamily__fatherVisitHistory(
-            this,
-            (i) => i,
-          );
+    Mutation_updateFamily__fatherVisitHistory
+  >
+  get copyWith =>
+      CopyWith_Mutation_updateFamily__fatherVisitHistory(this, (i) => i);
 }
 
 abstract class CopyWith_Mutation_updateFamily__fatherVisitHistory<TRes> {
@@ -2360,10 +2358,7 @@ abstract class CopyWith_Mutation_updateFamily__fatherVisitHistory<TRes> {
   factory CopyWith_Mutation_updateFamily__fatherVisitHistory.stub(TRes res) =
       _CopyWithStubImpl_Mutation_updateFamily__fatherVisitHistory;
 
-  TRes call({
-    UuidValue? visitId,
-    String? $__typename,
-  });
+  TRes call({UuidValue? visitId, String? $__typename});
 }
 
 class _CopyWithImpl_Mutation_updateFamily__fatherVisitHistory<TRes>
@@ -2379,18 +2374,17 @@ class _CopyWithImpl_Mutation_updateFamily__fatherVisitHistory<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? visitId = _undefined,
-    Object? $__typename = _undefined,
-  }) =>
-      _then(Mutation_updateFamily__fatherVisitHistory(
-        visitId: visitId == _undefined || visitId == null
-            ? _instance.visitId
-            : (visitId as UuidValue),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  TRes call({Object? visitId = _undefined, Object? $__typename = _undefined}) =>
+      _then(
+        Mutation_updateFamily__fatherVisitHistory(
+          visitId: visitId == _undefined || visitId == null
+              ? _instance.visitId
+              : (visitId as UuidValue),
+          $__typename: $__typename == _undefined || $__typename == null
+              ? _instance.$__typename
+              : ($__typename as String),
+        ),
+      );
 }
 
 class _CopyWithStubImpl_Mutation_updateFamily__fatherVisitHistory<TRes>
@@ -2399,9 +2393,5 @@ class _CopyWithStubImpl_Mutation_updateFamily__fatherVisitHistory<TRes>
 
   TRes _res;
 
-  call({
-    UuidValue? visitId,
-    String? $__typename,
-  }) =>
-      _res;
+  call({UuidValue? visitId, String? $__typename}) => _res;
 }

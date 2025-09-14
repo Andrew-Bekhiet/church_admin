@@ -10,9 +10,7 @@ import 'package:gql/ast.dart';
 
 class Variables_Query_homeSearch {
   factory Variables_Query_homeSearch({required String query}) =>
-      Variables_Query_homeSearch._({
-        r'query': query,
-      });
+      Variables_Query_homeSearch._({r'query': query});
 
   Variables_Query_homeSearch._(this._$data);
 
@@ -35,10 +33,7 @@ class Variables_Query_homeSearch {
   }
 
   CopyWith_Variables_Query_homeSearch<Variables_Query_homeSearch>
-      get copyWith => CopyWith_Variables_Query_homeSearch(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Variables_Query_homeSearch(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -78,10 +73,7 @@ abstract class CopyWith_Variables_Query_homeSearch<TRes> {
 
 class _CopyWithImpl_Variables_Query_homeSearch<TRes>
     implements CopyWith_Variables_Query_homeSearch<TRes> {
-  _CopyWithImpl_Variables_Query_homeSearch(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Variables_Query_homeSearch(this._instance, this._then);
 
   final Variables_Query_homeSearch _instance;
 
@@ -89,11 +81,12 @@ class _CopyWithImpl_Variables_Query_homeSearch<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? query = _undefined}) =>
-      _then(Variables_Query_homeSearch._({
-        ..._instance._$data,
-        if (query != _undefined && query != null) 'query': (query as String),
-      }));
+  TRes call({Object? query = _undefined}) => _then(
+    Variables_Query_homeSearch._({
+      ..._instance._$data,
+      if (query != _undefined && query != null) 'query': (query as String),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Variables_Query_homeSearch<TRes>
@@ -337,10 +330,7 @@ class Query_homeSearch {
 
 extension UtilityExtension_Query_homeSearch on Query_homeSearch {
   CopyWith_Query_homeSearch<Query_homeSearch> get copyWith =>
-      CopyWith_Query_homeSearch(
-        this,
-        (i) => i,
-      );
+      CopyWith_Query_homeSearch(this, (i) => i);
 }
 
 abstract class CopyWith_Query_homeSearch<TRes> {
@@ -364,45 +354,58 @@ abstract class CopyWith_Query_homeSearch<TRes> {
     String? $__typename,
   });
   TRes persons(
-      Iterable<Fragment_Person> Function(
-              Iterable<CopyWith_Fragment_Person<Fragment_Person>>)
-          _fn);
+    Iterable<Fragment_Person> Function(
+      Iterable<CopyWith_Fragment_Person<Fragment_Person>>,
+    )
+    _fn,
+  );
   TRes classes(
-      Iterable<Fragment_Class> Function(
-              Iterable<CopyWith_Fragment_Class<Fragment_Class>>)
-          _fn);
+    Iterable<Fragment_Class> Function(
+      Iterable<CopyWith_Fragment_Class<Fragment_Class>>,
+    )
+    _fn,
+  );
   TRes groups(
-      Iterable<Fragment_Group> Function(
-              Iterable<CopyWith_Fragment_Group<Fragment_Group>>)
-          _fn);
+    Iterable<Fragment_Group> Function(
+      Iterable<CopyWith_Fragment_Group<Fragment_Group>>,
+    )
+    _fn,
+  );
   TRes families(
-      Iterable<Fragment_Family> Function(
-              Iterable<CopyWith_Fragment_Family<Fragment_Family>>)
-          _fn);
+    Iterable<Fragment_Family> Function(
+      Iterable<CopyWith_Fragment_Family<Fragment_Family>>,
+    )
+    _fn,
+  );
   TRes services(
-      Iterable<Fragment_Service> Function(
-              Iterable<CopyWith_Fragment_Service<Fragment_Service>>)
-          _fn);
+    Iterable<Fragment_Service> Function(
+      Iterable<CopyWith_Fragment_Service<Fragment_Service>>,
+    )
+    _fn,
+  );
   TRes streets(
-      Iterable<Fragment_Street> Function(
-              Iterable<CopyWith_Fragment_Street<Fragment_Street>>)
-          _fn);
+    Iterable<Fragment_Street> Function(
+      Iterable<CopyWith_Fragment_Street<Fragment_Street>>,
+    )
+    _fn,
+  );
   TRes stores(
-      Iterable<Fragment_Store> Function(
-              Iterable<CopyWith_Fragment_Store<Fragment_Store>>)
-          _fn);
+    Iterable<Fragment_Store> Function(
+      Iterable<CopyWith_Fragment_Store<Fragment_Store>>,
+    )
+    _fn,
+  );
   TRes areas(
-      Iterable<Fragment_Area> Function(
-              Iterable<CopyWith_Fragment_Area<Fragment_Area>>)
-          _fn);
+    Iterable<Fragment_Area> Function(
+      Iterable<CopyWith_Fragment_Area<Fragment_Area>>,
+    )
+    _fn,
+  );
 }
 
 class _CopyWithImpl_Query_homeSearch<TRes>
     implements CopyWith_Query_homeSearch<TRes> {
-  _CopyWithImpl_Query_homeSearch(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Query_homeSearch(this._instance, this._then);
 
   final Query_homeSearch _instance;
 
@@ -420,116 +423,125 @@ class _CopyWithImpl_Query_homeSearch<TRes>
     Object? stores = _undefined,
     Object? areas = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Query_homeSearch(
-        persons: persons == _undefined || persons == null
-            ? _instance.persons
-            : (persons as List<Fragment_Person>),
-        classes: classes == _undefined || classes == null
-            ? _instance.classes
-            : (classes as List<Fragment_Class>),
-        groups: groups == _undefined || groups == null
-            ? _instance.groups
-            : (groups as List<Fragment_Group>),
-        families: families == _undefined || families == null
-            ? _instance.families
-            : (families as List<Fragment_Family>),
-        services: services == _undefined || services == null
-            ? _instance.services
-            : (services as List<Fragment_Service>),
-        streets: streets == _undefined || streets == null
-            ? _instance.streets
-            : (streets as List<Fragment_Street>),
-        stores: stores == _undefined || stores == null
-            ? _instance.stores
-            : (stores as List<Fragment_Store>),
-        areas: areas == _undefined || areas == null
-            ? _instance.areas
-            : (areas as List<Fragment_Area>),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Query_homeSearch(
+      persons: persons == _undefined || persons == null
+          ? _instance.persons
+          : (persons as List<Fragment_Person>),
+      classes: classes == _undefined || classes == null
+          ? _instance.classes
+          : (classes as List<Fragment_Class>),
+      groups: groups == _undefined || groups == null
+          ? _instance.groups
+          : (groups as List<Fragment_Group>),
+      families: families == _undefined || families == null
+          ? _instance.families
+          : (families as List<Fragment_Family>),
+      services: services == _undefined || services == null
+          ? _instance.services
+          : (services as List<Fragment_Service>),
+      streets: streets == _undefined || streets == null
+          ? _instance.streets
+          : (streets as List<Fragment_Street>),
+      stores: stores == _undefined || stores == null
+          ? _instance.stores
+          : (stores as List<Fragment_Store>),
+      areas: areas == _undefined || areas == null
+          ? _instance.areas
+          : (areas as List<Fragment_Area>),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   TRes persons(
-          Iterable<Fragment_Person> Function(
-                  Iterable<CopyWith_Fragment_Person<Fragment_Person>>)
-              _fn) =>
-      call(
-          persons: _fn(_instance.persons.map((e) => CopyWith_Fragment_Person(
-                e,
-                (i) => i,
-              ))).toList());
+    Iterable<Fragment_Person> Function(
+      Iterable<CopyWith_Fragment_Person<Fragment_Person>>,
+    )
+    _fn,
+  ) => call(
+    persons: _fn(
+      _instance.persons.map((e) => CopyWith_Fragment_Person(e, (i) => i)),
+    ).toList(),
+  );
 
   TRes classes(
-          Iterable<Fragment_Class> Function(
-                  Iterable<CopyWith_Fragment_Class<Fragment_Class>>)
-              _fn) =>
-      call(
-          classes: _fn(_instance.classes.map((e) => CopyWith_Fragment_Class(
-                e,
-                (i) => i,
-              ))).toList());
+    Iterable<Fragment_Class> Function(
+      Iterable<CopyWith_Fragment_Class<Fragment_Class>>,
+    )
+    _fn,
+  ) => call(
+    classes: _fn(
+      _instance.classes.map((e) => CopyWith_Fragment_Class(e, (i) => i)),
+    ).toList(),
+  );
 
   TRes groups(
-          Iterable<Fragment_Group> Function(
-                  Iterable<CopyWith_Fragment_Group<Fragment_Group>>)
-              _fn) =>
-      call(
-          groups: _fn(_instance.groups.map((e) => CopyWith_Fragment_Group(
-                e,
-                (i) => i,
-              ))).toList());
+    Iterable<Fragment_Group> Function(
+      Iterable<CopyWith_Fragment_Group<Fragment_Group>>,
+    )
+    _fn,
+  ) => call(
+    groups: _fn(
+      _instance.groups.map((e) => CopyWith_Fragment_Group(e, (i) => i)),
+    ).toList(),
+  );
 
   TRes families(
-          Iterable<Fragment_Family> Function(
-                  Iterable<CopyWith_Fragment_Family<Fragment_Family>>)
-              _fn) =>
-      call(
-          families: _fn(_instance.families.map((e) => CopyWith_Fragment_Family(
-                e,
-                (i) => i,
-              ))).toList());
+    Iterable<Fragment_Family> Function(
+      Iterable<CopyWith_Fragment_Family<Fragment_Family>>,
+    )
+    _fn,
+  ) => call(
+    families: _fn(
+      _instance.families.map((e) => CopyWith_Fragment_Family(e, (i) => i)),
+    ).toList(),
+  );
 
   TRes services(
-          Iterable<Fragment_Service> Function(
-                  Iterable<CopyWith_Fragment_Service<Fragment_Service>>)
-              _fn) =>
-      call(
-          services: _fn(_instance.services.map((e) => CopyWith_Fragment_Service(
-                e,
-                (i) => i,
-              ))).toList());
+    Iterable<Fragment_Service> Function(
+      Iterable<CopyWith_Fragment_Service<Fragment_Service>>,
+    )
+    _fn,
+  ) => call(
+    services: _fn(
+      _instance.services.map((e) => CopyWith_Fragment_Service(e, (i) => i)),
+    ).toList(),
+  );
 
   TRes streets(
-          Iterable<Fragment_Street> Function(
-                  Iterable<CopyWith_Fragment_Street<Fragment_Street>>)
-              _fn) =>
-      call(
-          streets: _fn(_instance.streets.map((e) => CopyWith_Fragment_Street(
-                e,
-                (i) => i,
-              ))).toList());
+    Iterable<Fragment_Street> Function(
+      Iterable<CopyWith_Fragment_Street<Fragment_Street>>,
+    )
+    _fn,
+  ) => call(
+    streets: _fn(
+      _instance.streets.map((e) => CopyWith_Fragment_Street(e, (i) => i)),
+    ).toList(),
+  );
 
   TRes stores(
-          Iterable<Fragment_Store> Function(
-                  Iterable<CopyWith_Fragment_Store<Fragment_Store>>)
-              _fn) =>
-      call(
-          stores: _fn(_instance.stores.map((e) => CopyWith_Fragment_Store(
-                e,
-                (i) => i,
-              ))).toList());
+    Iterable<Fragment_Store> Function(
+      Iterable<CopyWith_Fragment_Store<Fragment_Store>>,
+    )
+    _fn,
+  ) => call(
+    stores: _fn(
+      _instance.stores.map((e) => CopyWith_Fragment_Store(e, (i) => i)),
+    ).toList(),
+  );
 
   TRes areas(
-          Iterable<Fragment_Area> Function(
-                  Iterable<CopyWith_Fragment_Area<Fragment_Area>>)
-              _fn) =>
-      call(
-          areas: _fn(_instance.areas.map((e) => CopyWith_Fragment_Area(
-                e,
-                (i) => i,
-              ))).toList());
+    Iterable<Fragment_Area> Function(
+      Iterable<CopyWith_Fragment_Area<Fragment_Area>>,
+    )
+    _fn,
+  ) => call(
+    areas: _fn(
+      _instance.areas.map((e) => CopyWith_Fragment_Area(e, (i) => i)),
+    ).toList(),
+  );
 }
 
 class _CopyWithStubImpl_Query_homeSearch<TRes>
@@ -548,8 +560,7 @@ class _CopyWithStubImpl_Query_homeSearch<TRes>
     List<Fragment_Store>? stores,
     List<Fragment_Area>? areas,
     String? $__typename,
-  }) =>
-      _res;
+  }) => _res;
 
   persons(_fn) => _res;
 
@@ -568,51 +579,373 @@ class _CopyWithStubImpl_Query_homeSearch<TRes>
   areas(_fn) => _res;
 }
 
-const documentNodeQueryhomeSearch = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.query,
-    name: NameNode(value: 'homeSearch'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'query')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'String'),
-          isNonNull: true,
+const documentNodeQueryhomeSearch = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.query,
+      name: NameNode(value: 'homeSearch'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'query')),
+          type: NamedTypeNode(name: NameNode(value: 'String'), isNonNull: true),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      )
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'persons'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'where'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'name'),
-                value: ObjectValueNode(fields: [
-                  ObjectFieldNode(
-                    name: NameNode(value: '_ilike'),
-                    value: VariableNode(name: NameNode(value: 'query')),
-                  )
-                ]),
-              )
-            ]),
-          ),
-          ArgumentNode(
-            name: NameNode(value: 'limit'),
-            value: IntValueNode(value: '5'),
-          ),
-        ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FragmentSpreadNode(
-            name: NameNode(value: 'Person'),
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
+          FieldNode(
+            name: NameNode(value: 'persons'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'where'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'name'),
+                      value: ObjectValueNode(
+                        fields: [
+                          ObjectFieldNode(
+                            name: NameNode(value: '_ilike'),
+                            value: VariableNode(name: NameNode(value: 'query')),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'limit'),
+                value: IntValueNode(value: '5'),
+              ),
+            ],
             directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FragmentSpreadNode(
+                  name: NameNode(value: 'Person'),
+                  directives: [],
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
+          ),
+          FieldNode(
+            name: NameNode(value: 'classes'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'where'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'name'),
+                      value: ObjectValueNode(
+                        fields: [
+                          ObjectFieldNode(
+                            name: NameNode(value: '_ilike'),
+                            value: VariableNode(name: NameNode(value: 'query')),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'limit'),
+                value: IntValueNode(value: '5'),
+              ),
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FragmentSpreadNode(
+                  name: NameNode(value: 'Class'),
+                  directives: [],
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
+          ),
+          FieldNode(
+            name: NameNode(value: 'groups'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'where'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'name'),
+                      value: ObjectValueNode(
+                        fields: [
+                          ObjectFieldNode(
+                            name: NameNode(value: '_ilike'),
+                            value: VariableNode(name: NameNode(value: 'query')),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'limit'),
+                value: IntValueNode(value: '5'),
+              ),
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FragmentSpreadNode(
+                  name: NameNode(value: 'Group'),
+                  directives: [],
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
+          ),
+          FieldNode(
+            name: NameNode(value: 'families'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'where'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'name'),
+                      value: ObjectValueNode(
+                        fields: [
+                          ObjectFieldNode(
+                            name: NameNode(value: '_ilike'),
+                            value: VariableNode(name: NameNode(value: 'query')),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'limit'),
+                value: IntValueNode(value: '5'),
+              ),
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FragmentSpreadNode(
+                  name: NameNode(value: 'Family'),
+                  directives: [],
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
+          ),
+          FieldNode(
+            name: NameNode(value: 'services'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'where'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'name'),
+                      value: ObjectValueNode(
+                        fields: [
+                          ObjectFieldNode(
+                            name: NameNode(value: '_ilike'),
+                            value: VariableNode(name: NameNode(value: 'query')),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'limit'),
+                value: IntValueNode(value: '5'),
+              ),
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FragmentSpreadNode(
+                  name: NameNode(value: 'Service'),
+                  directives: [],
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
+          ),
+          FieldNode(
+            name: NameNode(value: 'streets'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'where'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'name'),
+                      value: ObjectValueNode(
+                        fields: [
+                          ObjectFieldNode(
+                            name: NameNode(value: '_ilike'),
+                            value: VariableNode(name: NameNode(value: 'query')),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'limit'),
+                value: IntValueNode(value: '5'),
+              ),
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FragmentSpreadNode(
+                  name: NameNode(value: 'Street'),
+                  directives: [],
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
+          ),
+          FieldNode(
+            name: NameNode(value: 'stores'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'where'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'name'),
+                      value: ObjectValueNode(
+                        fields: [
+                          ObjectFieldNode(
+                            name: NameNode(value: '_ilike'),
+                            value: VariableNode(name: NameNode(value: 'query')),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'limit'),
+                value: IntValueNode(value: '5'),
+              ),
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FragmentSpreadNode(
+                  name: NameNode(value: 'Store'),
+                  directives: [],
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
+          ),
+          FieldNode(
+            name: NameNode(value: 'areas'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'where'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'name'),
+                      value: ObjectValueNode(
+                        fields: [
+                          ObjectFieldNode(
+                            name: NameNode(value: '_ilike'),
+                            value: VariableNode(name: NameNode(value: 'query')),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'limit'),
+                value: IntValueNode(value: '5'),
+              ),
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FragmentSpreadNode(
+                  name: NameNode(value: 'Area'),
+                  directives: [],
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
           ),
           FieldNode(
             name: NameNode(value: '__typename'),
@@ -621,297 +954,24 @@ const documentNodeQueryhomeSearch = DocumentNode(definitions: [
             directives: [],
             selectionSet: null,
           ),
-        ]),
-      ),
-      FieldNode(
-        name: NameNode(value: 'classes'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'where'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'name'),
-                value: ObjectValueNode(fields: [
-                  ObjectFieldNode(
-                    name: NameNode(value: '_ilike'),
-                    value: VariableNode(name: NameNode(value: 'query')),
-                  )
-                ]),
-              )
-            ]),
-          ),
-          ArgumentNode(
-            name: NameNode(value: 'limit'),
-            value: IntValueNode(value: '5'),
-          ),
         ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FragmentSpreadNode(
-            name: NameNode(value: 'Class'),
-            directives: [],
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-        ]),
       ),
-      FieldNode(
-        name: NameNode(value: 'groups'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'where'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'name'),
-                value: ObjectValueNode(fields: [
-                  ObjectFieldNode(
-                    name: NameNode(value: '_ilike'),
-                    value: VariableNode(name: NameNode(value: 'query')),
-                  )
-                ]),
-              )
-            ]),
-          ),
-          ArgumentNode(
-            name: NameNode(value: 'limit'),
-            value: IntValueNode(value: '5'),
-          ),
-        ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FragmentSpreadNode(
-            name: NameNode(value: 'Group'),
-            directives: [],
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-        ]),
-      ),
-      FieldNode(
-        name: NameNode(value: 'families'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'where'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'name'),
-                value: ObjectValueNode(fields: [
-                  ObjectFieldNode(
-                    name: NameNode(value: '_ilike'),
-                    value: VariableNode(name: NameNode(value: 'query')),
-                  )
-                ]),
-              )
-            ]),
-          ),
-          ArgumentNode(
-            name: NameNode(value: 'limit'),
-            value: IntValueNode(value: '5'),
-          ),
-        ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FragmentSpreadNode(
-            name: NameNode(value: 'Family'),
-            directives: [],
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-        ]),
-      ),
-      FieldNode(
-        name: NameNode(value: 'services'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'where'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'name'),
-                value: ObjectValueNode(fields: [
-                  ObjectFieldNode(
-                    name: NameNode(value: '_ilike'),
-                    value: VariableNode(name: NameNode(value: 'query')),
-                  )
-                ]),
-              )
-            ]),
-          ),
-          ArgumentNode(
-            name: NameNode(value: 'limit'),
-            value: IntValueNode(value: '5'),
-          ),
-        ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FragmentSpreadNode(
-            name: NameNode(value: 'Service'),
-            directives: [],
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-        ]),
-      ),
-      FieldNode(
-        name: NameNode(value: 'streets'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'where'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'name'),
-                value: ObjectValueNode(fields: [
-                  ObjectFieldNode(
-                    name: NameNode(value: '_ilike'),
-                    value: VariableNode(name: NameNode(value: 'query')),
-                  )
-                ]),
-              )
-            ]),
-          ),
-          ArgumentNode(
-            name: NameNode(value: 'limit'),
-            value: IntValueNode(value: '5'),
-          ),
-        ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FragmentSpreadNode(
-            name: NameNode(value: 'Street'),
-            directives: [],
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-        ]),
-      ),
-      FieldNode(
-        name: NameNode(value: 'stores'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'where'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'name'),
-                value: ObjectValueNode(fields: [
-                  ObjectFieldNode(
-                    name: NameNode(value: '_ilike'),
-                    value: VariableNode(name: NameNode(value: 'query')),
-                  )
-                ]),
-              )
-            ]),
-          ),
-          ArgumentNode(
-            name: NameNode(value: 'limit'),
-            value: IntValueNode(value: '5'),
-          ),
-        ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FragmentSpreadNode(
-            name: NameNode(value: 'Store'),
-            directives: [],
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-        ]),
-      ),
-      FieldNode(
-        name: NameNode(value: 'areas'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'where'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'name'),
-                value: ObjectValueNode(fields: [
-                  ObjectFieldNode(
-                    name: NameNode(value: '_ilike'),
-                    value: VariableNode(name: NameNode(value: 'query')),
-                  )
-                ]),
-              )
-            ]),
-          ),
-          ArgumentNode(
-            name: NameNode(value: 'limit'),
-            value: IntValueNode(value: '5'),
-          ),
-        ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FragmentSpreadNode(
-            name: NameNode(value: 'Area'),
-            directives: [],
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-        ]),
-      ),
-      FieldNode(
-        name: NameNode(value: '__typename'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-    ]),
-  ),
-  fragmentDefinitionPerson,
-  fragmentDefinitionPersonNoPhoto,
-  fragmentDefinitionClass,
-  fragmentDefinitionClassNoPhoto,
-  fragmentDefinitionGroup,
-  fragmentDefinitionGroupNoPhoto,
-  fragmentDefinitionFamily,
-  fragmentDefinitionFamilyNoPhoto,
-  fragmentDefinitionService,
-  fragmentDefinitionServiceNoPhoto,
-  fragmentDefinitionStreet,
-  fragmentDefinitionStreetNoPhoto,
-  fragmentDefinitionStore,
-  fragmentDefinitionStoreNoPhoto,
-  fragmentDefinitionArea,
-  fragmentDefinitionAreaNoPhoto,
-]);
+    ),
+    fragmentDefinitionPerson,
+    fragmentDefinitionPersonNoPhoto,
+    fragmentDefinitionClass,
+    fragmentDefinitionClassNoPhoto,
+    fragmentDefinitionGroup,
+    fragmentDefinitionGroupNoPhoto,
+    fragmentDefinitionFamily,
+    fragmentDefinitionFamilyNoPhoto,
+    fragmentDefinitionService,
+    fragmentDefinitionServiceNoPhoto,
+    fragmentDefinitionStreet,
+    fragmentDefinitionStreetNoPhoto,
+    fragmentDefinitionStore,
+    fragmentDefinitionStoreNoPhoto,
+    fragmentDefinitionArea,
+    fragmentDefinitionAreaNoPhoto,
+  ],
+);

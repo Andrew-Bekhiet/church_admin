@@ -26,18 +26,22 @@ abstract class CopyWith_Input_AuthUsersDataBoolExp<TRes> {
     Input_UuidComparisonExp? uid,
   });
   TRes $_and(
-      Iterable<Input_AuthUsersDataBoolExp>? Function(
-              Iterable<
-                  CopyWith_Input_AuthUsersDataBoolExp<
-                      Input_AuthUsersDataBoolExp>>?)
-          _fn);
+    Iterable<Input_AuthUsersDataBoolExp>? Function(
+      Iterable<
+        CopyWith_Input_AuthUsersDataBoolExp<Input_AuthUsersDataBoolExp>
+      >?,
+    )
+    _fn,
+  );
   CopyWith_Input_AuthUsersDataBoolExp<TRes> get $_not;
   TRes $_or(
-      Iterable<Input_AuthUsersDataBoolExp>? Function(
-              Iterable<
-                  CopyWith_Input_AuthUsersDataBoolExp<
-                      Input_AuthUsersDataBoolExp>>?)
-          _fn);
+    Iterable<Input_AuthUsersDataBoolExp>? Function(
+      Iterable<
+        CopyWith_Input_AuthUsersDataBoolExp<Input_AuthUsersDataBoolExp>
+      >?,
+    )
+    _fn,
+  );
   CopyWith_Input_AuthUsersAdminOnBoolExp<TRes> get adminOn;
   CopyWith_Input_StringComparisonExp<TRes> get blurhash;
   CopyWith_Input_StringComparisonExp<TRes> get email;
@@ -51,10 +55,7 @@ abstract class CopyWith_Input_AuthUsersDataBoolExp<TRes> {
 
 class _CopyWithImpl_Input_AuthUsersDataBoolExp<TRes>
     implements CopyWith_Input_AuthUsersDataBoolExp<TRes> {
-  _CopyWithImpl_Input_AuthUsersDataBoolExp(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Input_AuthUsersDataBoolExp(this._instance, this._then);
 
   final Input_AuthUsersDataBoolExp _instance;
 
@@ -75,70 +76,79 @@ class _CopyWithImpl_Input_AuthUsersDataBoolExp<TRes>
     Object? person = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? uid = _undefined,
-  }) =>
-      _then(Input_AuthUsersDataBoolExp._({
-        ..._instance._$data,
-        if ($_and != _undefined)
-          '_and': ($_and as List<Input_AuthUsersDataBoolExp>?),
-        if ($_not != _undefined) '_not': ($_not as Input_AuthUsersDataBoolExp?),
-        if ($_or != _undefined)
-          '_or': ($_or as List<Input_AuthUsersDataBoolExp>?),
-        if (adminOn != _undefined)
-          'adminOn': (adminOn as Input_AuthUsersAdminOnBoolExp?),
-        if (blurhash != _undefined)
-          'blurhash': (blurhash as Input_StringComparisonExp?),
-        if (email != _undefined) 'email': (email as Input_StringComparisonExp?),
-        if (lastEdit != _undefined)
-          'lastEdit': (lastEdit as Input_HistoryLatestEditsBoolExp?),
-        if (name != _undefined) 'name': (name as Input_StringComparisonExp?),
-        if (permissions != _undefined)
-          'permissions': (permissions as Input_AuthUsersPermissionsBoolExp?),
-        if (person != _undefined) 'person': (person as Input_PersonsBoolExp?),
-        if (photoUpdatedAt != _undefined)
-          'photoUpdatedAt': (photoUpdatedAt as Input_TimestamptzComparisonExp?),
-        if (uid != _undefined) 'uid': (uid as Input_UuidComparisonExp?),
-      }));
+  }) => _then(
+    Input_AuthUsersDataBoolExp._({
+      ..._instance._$data,
+      if ($_and != _undefined)
+        '_and': ($_and as List<Input_AuthUsersDataBoolExp>?),
+      if ($_not != _undefined) '_not': ($_not as Input_AuthUsersDataBoolExp?),
+      if ($_or != _undefined)
+        '_or': ($_or as List<Input_AuthUsersDataBoolExp>?),
+      if (adminOn != _undefined)
+        'adminOn': (adminOn as Input_AuthUsersAdminOnBoolExp?),
+      if (blurhash != _undefined)
+        'blurhash': (blurhash as Input_StringComparisonExp?),
+      if (email != _undefined) 'email': (email as Input_StringComparisonExp?),
+      if (lastEdit != _undefined)
+        'lastEdit': (lastEdit as Input_HistoryLatestEditsBoolExp?),
+      if (name != _undefined) 'name': (name as Input_StringComparisonExp?),
+      if (permissions != _undefined)
+        'permissions': (permissions as Input_AuthUsersPermissionsBoolExp?),
+      if (person != _undefined) 'person': (person as Input_PersonsBoolExp?),
+      if (photoUpdatedAt != _undefined)
+        'photoUpdatedAt': (photoUpdatedAt as Input_TimestamptzComparisonExp?),
+      if (uid != _undefined) 'uid': (uid as Input_UuidComparisonExp?),
+    }),
+  );
 
   TRes $_and(
-          Iterable<Input_AuthUsersDataBoolExp>? Function(
-                  Iterable<
-                      CopyWith_Input_AuthUsersDataBoolExp<
-                          Input_AuthUsersDataBoolExp>>?)
-              _fn) =>
-      call(
-          $_and: _fn(
-              _instance.$_and?.map((e) => CopyWith_Input_AuthUsersDataBoolExp(
-                    e,
-                    (i) => i,
-                  )))?.toList());
+    Iterable<Input_AuthUsersDataBoolExp>? Function(
+      Iterable<
+        CopyWith_Input_AuthUsersDataBoolExp<Input_AuthUsersDataBoolExp>
+      >?,
+    )
+    _fn,
+  ) => call(
+    $_and: _fn(
+      _instance.$_and?.map(
+        (e) => CopyWith_Input_AuthUsersDataBoolExp(e, (i) => i),
+      ),
+    )?.toList(),
+  );
 
   CopyWith_Input_AuthUsersDataBoolExp<TRes> get $_not {
     final local$$_not = _instance.$_not;
     return local$$_not == null
         ? CopyWith_Input_AuthUsersDataBoolExp.stub(_then(_instance))
         : CopyWith_Input_AuthUsersDataBoolExp(
-            local$$_not, (e) => call($_not: e));
+            local$$_not,
+            (e) => call($_not: e),
+          );
   }
 
   TRes $_or(
-          Iterable<Input_AuthUsersDataBoolExp>? Function(
-                  Iterable<
-                      CopyWith_Input_AuthUsersDataBoolExp<
-                          Input_AuthUsersDataBoolExp>>?)
-              _fn) =>
-      call(
-          $_or: _fn(
-              _instance.$_or?.map((e) => CopyWith_Input_AuthUsersDataBoolExp(
-                    e,
-                    (i) => i,
-                  )))?.toList());
+    Iterable<Input_AuthUsersDataBoolExp>? Function(
+      Iterable<
+        CopyWith_Input_AuthUsersDataBoolExp<Input_AuthUsersDataBoolExp>
+      >?,
+    )
+    _fn,
+  ) => call(
+    $_or: _fn(
+      _instance.$_or?.map(
+        (e) => CopyWith_Input_AuthUsersDataBoolExp(e, (i) => i),
+      ),
+    )?.toList(),
+  );
 
   CopyWith_Input_AuthUsersAdminOnBoolExp<TRes> get adminOn {
     final local$adminOn = _instance.adminOn;
     return local$adminOn == null
         ? CopyWith_Input_AuthUsersAdminOnBoolExp.stub(_then(_instance))
         : CopyWith_Input_AuthUsersAdminOnBoolExp(
-            local$adminOn, (e) => call(adminOn: e));
+            local$adminOn,
+            (e) => call(adminOn: e),
+          );
   }
 
   CopyWith_Input_StringComparisonExp<TRes> get blurhash {
@@ -146,7 +156,9 @@ class _CopyWithImpl_Input_AuthUsersDataBoolExp<TRes>
     return local$blurhash == null
         ? CopyWith_Input_StringComparisonExp.stub(_then(_instance))
         : CopyWith_Input_StringComparisonExp(
-            local$blurhash, (e) => call(blurhash: e));
+            local$blurhash,
+            (e) => call(blurhash: e),
+          );
   }
 
   CopyWith_Input_StringComparisonExp<TRes> get email {
@@ -154,7 +166,9 @@ class _CopyWithImpl_Input_AuthUsersDataBoolExp<TRes>
     return local$email == null
         ? CopyWith_Input_StringComparisonExp.stub(_then(_instance))
         : CopyWith_Input_StringComparisonExp(
-            local$email, (e) => call(email: e));
+            local$email,
+            (e) => call(email: e),
+          );
   }
 
   CopyWith_Input_HistoryLatestEditsBoolExp<TRes> get lastEdit {
@@ -162,7 +176,9 @@ class _CopyWithImpl_Input_AuthUsersDataBoolExp<TRes>
     return local$lastEdit == null
         ? CopyWith_Input_HistoryLatestEditsBoolExp.stub(_then(_instance))
         : CopyWith_Input_HistoryLatestEditsBoolExp(
-            local$lastEdit, (e) => call(lastEdit: e));
+            local$lastEdit,
+            (e) => call(lastEdit: e),
+          );
   }
 
   CopyWith_Input_StringComparisonExp<TRes> get name {
@@ -177,7 +193,9 @@ class _CopyWithImpl_Input_AuthUsersDataBoolExp<TRes>
     return local$permissions == null
         ? CopyWith_Input_AuthUsersPermissionsBoolExp.stub(_then(_instance))
         : CopyWith_Input_AuthUsersPermissionsBoolExp(
-            local$permissions, (e) => call(permissions: e));
+            local$permissions,
+            (e) => call(permissions: e),
+          );
   }
 
   CopyWith_Input_PersonsBoolExp<TRes> get person {
@@ -192,7 +210,9 @@ class _CopyWithImpl_Input_AuthUsersDataBoolExp<TRes>
     return local$photoUpdatedAt == null
         ? CopyWith_Input_TimestamptzComparisonExp.stub(_then(_instance))
         : CopyWith_Input_TimestamptzComparisonExp(
-            local$photoUpdatedAt, (e) => call(photoUpdatedAt: e));
+            local$photoUpdatedAt,
+            (e) => call(photoUpdatedAt: e),
+          );
   }
 
   CopyWith_Input_UuidComparisonExp<TRes> get uid {
@@ -222,8 +242,7 @@ class _CopyWithStubImpl_Input_AuthUsersDataBoolExp<TRes>
     Input_PersonsBoolExp? person,
     Input_TimestamptzComparisonExp? photoUpdatedAt,
     Input_UuidComparisonExp? uid,
-  }) =>
-      _res;
+  }) => _res;
 
   $_and(_fn) => _res;
 
@@ -271,19 +290,18 @@ class Input_AuthUsersDataOrderBy {
     Input_PersonsOrderBy? person,
     Enum_OrderBy? photoUpdatedAt,
     Enum_OrderBy? uid,
-  }) =>
-      Input_AuthUsersDataOrderBy._({
-        if (adminOnAggregate != null) r'adminOnAggregate': adminOnAggregate,
-        if (blurhash != null) r'blurhash': blurhash,
-        if (email != null) r'email': email,
-        if (lastEdit != null) r'lastEdit': lastEdit,
-        if (name != null) r'name': name,
-        if (permissionsAggregate != null)
-          r'permissionsAggregate': permissionsAggregate,
-        if (person != null) r'person': person,
-        if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
-        if (uid != null) r'uid': uid,
-      });
+  }) => Input_AuthUsersDataOrderBy._({
+    if (adminOnAggregate != null) r'adminOnAggregate': adminOnAggregate,
+    if (blurhash != null) r'blurhash': blurhash,
+    if (email != null) r'email': email,
+    if (lastEdit != null) r'lastEdit': lastEdit,
+    if (name != null) r'name': name,
+    if (permissionsAggregate != null)
+      r'permissionsAggregate': permissionsAggregate,
+    if (person != null) r'person': person,
+    if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
+    if (uid != null) r'uid': uid,
+  });
 
   Input_AuthUsersDataOrderBy._(this._$data);
 
@@ -294,7 +312,8 @@ class Input_AuthUsersDataOrderBy {
       result$data['adminOnAggregate'] = l$adminOnAggregate == null
           ? null
           : Input_AuthUsersAdminOnAggregateOrderBy.fromJson(
-              (l$adminOnAggregate as Map<String, dynamic>));
+              (l$adminOnAggregate as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('blurhash')) {
       final l$blurhash = data['blurhash'];
@@ -304,27 +323,31 @@ class Input_AuthUsersDataOrderBy {
     }
     if (data.containsKey('email')) {
       final l$email = data['email'];
-      result$data['email'] =
-          l$email == null ? null : fromJson_Enum_OrderBy((l$email as String));
+      result$data['email'] = l$email == null
+          ? null
+          : fromJson_Enum_OrderBy((l$email as String));
     }
     if (data.containsKey('lastEdit')) {
       final l$lastEdit = data['lastEdit'];
       result$data['lastEdit'] = l$lastEdit == null
           ? null
           : Input_HistoryLatestEditsOrderBy.fromJson(
-              (l$lastEdit as Map<String, dynamic>));
+              (l$lastEdit as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('name')) {
       final l$name = data['name'];
-      result$data['name'] =
-          l$name == null ? null : fromJson_Enum_OrderBy((l$name as String));
+      result$data['name'] = l$name == null
+          ? null
+          : fromJson_Enum_OrderBy((l$name as String));
     }
     if (data.containsKey('permissionsAggregate')) {
       final l$permissionsAggregate = data['permissionsAggregate'];
       result$data['permissionsAggregate'] = l$permissionsAggregate == null
           ? null
           : Input_AuthUsersPermissionsAggregateOrderBy.fromJson(
-              (l$permissionsAggregate as Map<String, dynamic>));
+              (l$permissionsAggregate as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('person')) {
       final l$person = data['person'];
@@ -340,8 +363,9 @@ class Input_AuthUsersDataOrderBy {
     }
     if (data.containsKey('uid')) {
       final l$uid = data['uid'];
-      result$data['uid'] =
-          l$uid == null ? null : fromJson_Enum_OrderBy((l$uid as String));
+      result$data['uid'] = l$uid == null
+          ? null
+          : fromJson_Enum_OrderBy((l$uid as String));
     }
     return Input_AuthUsersDataOrderBy._(result$data);
   }
@@ -380,13 +404,15 @@ class Input_AuthUsersDataOrderBy {
     }
     if (_$data.containsKey('blurhash')) {
       final l$blurhash = blurhash;
-      result$data['blurhash'] =
-          l$blurhash == null ? null : toJson_Enum_OrderBy(l$blurhash);
+      result$data['blurhash'] = l$blurhash == null
+          ? null
+          : toJson_Enum_OrderBy(l$blurhash);
     }
     if (_$data.containsKey('email')) {
       final l$email = email;
-      result$data['email'] =
-          l$email == null ? null : toJson_Enum_OrderBy(l$email);
+      result$data['email'] = l$email == null
+          ? null
+          : toJson_Enum_OrderBy(l$email);
     }
     if (_$data.containsKey('lastEdit')) {
       final l$lastEdit = lastEdit;
@@ -418,10 +444,7 @@ class Input_AuthUsersDataOrderBy {
   }
 
   CopyWith_Input_AuthUsersDataOrderBy<Input_AuthUsersDataOrderBy>
-      get copyWith => CopyWith_Input_AuthUsersDataOrderBy(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Input_AuthUsersDataOrderBy(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -562,16 +585,13 @@ abstract class CopyWith_Input_AuthUsersDataOrderBy<TRes> {
   CopyWith_Input_AuthUsersAdminOnAggregateOrderBy<TRes> get adminOnAggregate;
   CopyWith_Input_HistoryLatestEditsOrderBy<TRes> get lastEdit;
   CopyWith_Input_AuthUsersPermissionsAggregateOrderBy<TRes>
-      get permissionsAggregate;
+  get permissionsAggregate;
   CopyWith_Input_PersonsOrderBy<TRes> get person;
 }
 
 class _CopyWithImpl_Input_AuthUsersDataOrderBy<TRes>
     implements CopyWith_Input_AuthUsersDataOrderBy<TRes> {
-  _CopyWithImpl_Input_AuthUsersDataOrderBy(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Input_AuthUsersDataOrderBy(this._instance, this._then);
 
   final Input_AuthUsersDataOrderBy _instance;
 
@@ -589,32 +609,36 @@ class _CopyWithImpl_Input_AuthUsersDataOrderBy<TRes>
     Object? person = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? uid = _undefined,
-  }) =>
-      _then(Input_AuthUsersDataOrderBy._({
-        ..._instance._$data,
-        if (adminOnAggregate != _undefined)
-          'adminOnAggregate':
-              (adminOnAggregate as Input_AuthUsersAdminOnAggregateOrderBy?),
-        if (blurhash != _undefined) 'blurhash': (blurhash as Enum_OrderBy?),
-        if (email != _undefined) 'email': (email as Enum_OrderBy?),
-        if (lastEdit != _undefined)
-          'lastEdit': (lastEdit as Input_HistoryLatestEditsOrderBy?),
-        if (name != _undefined) 'name': (name as Enum_OrderBy?),
-        if (permissionsAggregate != _undefined)
-          'permissionsAggregate': (permissionsAggregate
-              as Input_AuthUsersPermissionsAggregateOrderBy?),
-        if (person != _undefined) 'person': (person as Input_PersonsOrderBy?),
-        if (photoUpdatedAt != _undefined)
-          'photoUpdatedAt': (photoUpdatedAt as Enum_OrderBy?),
-        if (uid != _undefined) 'uid': (uid as Enum_OrderBy?),
-      }));
+  }) => _then(
+    Input_AuthUsersDataOrderBy._({
+      ..._instance._$data,
+      if (adminOnAggregate != _undefined)
+        'adminOnAggregate':
+            (adminOnAggregate as Input_AuthUsersAdminOnAggregateOrderBy?),
+      if (blurhash != _undefined) 'blurhash': (blurhash as Enum_OrderBy?),
+      if (email != _undefined) 'email': (email as Enum_OrderBy?),
+      if (lastEdit != _undefined)
+        'lastEdit': (lastEdit as Input_HistoryLatestEditsOrderBy?),
+      if (name != _undefined) 'name': (name as Enum_OrderBy?),
+      if (permissionsAggregate != _undefined)
+        'permissionsAggregate':
+            (permissionsAggregate
+                as Input_AuthUsersPermissionsAggregateOrderBy?),
+      if (person != _undefined) 'person': (person as Input_PersonsOrderBy?),
+      if (photoUpdatedAt != _undefined)
+        'photoUpdatedAt': (photoUpdatedAt as Enum_OrderBy?),
+      if (uid != _undefined) 'uid': (uid as Enum_OrderBy?),
+    }),
+  );
 
   CopyWith_Input_AuthUsersAdminOnAggregateOrderBy<TRes> get adminOnAggregate {
     final local$adminOnAggregate = _instance.adminOnAggregate;
     return local$adminOnAggregate == null
         ? CopyWith_Input_AuthUsersAdminOnAggregateOrderBy.stub(_then(_instance))
         : CopyWith_Input_AuthUsersAdminOnAggregateOrderBy(
-            local$adminOnAggregate, (e) => call(adminOnAggregate: e));
+            local$adminOnAggregate,
+            (e) => call(adminOnAggregate: e),
+          );
   }
 
   CopyWith_Input_HistoryLatestEditsOrderBy<TRes> get lastEdit {
@@ -622,17 +646,22 @@ class _CopyWithImpl_Input_AuthUsersDataOrderBy<TRes>
     return local$lastEdit == null
         ? CopyWith_Input_HistoryLatestEditsOrderBy.stub(_then(_instance))
         : CopyWith_Input_HistoryLatestEditsOrderBy(
-            local$lastEdit, (e) => call(lastEdit: e));
+            local$lastEdit,
+            (e) => call(lastEdit: e),
+          );
   }
 
   CopyWith_Input_AuthUsersPermissionsAggregateOrderBy<TRes>
-      get permissionsAggregate {
+  get permissionsAggregate {
     final local$permissionsAggregate = _instance.permissionsAggregate;
     return local$permissionsAggregate == null
         ? CopyWith_Input_AuthUsersPermissionsAggregateOrderBy.stub(
-            _then(_instance))
+            _then(_instance),
+          )
         : CopyWith_Input_AuthUsersPermissionsAggregateOrderBy(
-            local$permissionsAggregate, (e) => call(permissionsAggregate: e));
+            local$permissionsAggregate,
+            (e) => call(permissionsAggregate: e),
+          );
   }
 
   CopyWith_Input_PersonsOrderBy<TRes> get person {
@@ -659,8 +688,7 @@ class _CopyWithStubImpl_Input_AuthUsersDataOrderBy<TRes>
     Input_PersonsOrderBy? person,
     Enum_OrderBy? photoUpdatedAt,
     Enum_OrderBy? uid,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Input_AuthUsersAdminOnAggregateOrderBy<TRes> get adminOnAggregate =>
       CopyWith_Input_AuthUsersAdminOnAggregateOrderBy.stub(_res);
@@ -669,8 +697,8 @@ class _CopyWithStubImpl_Input_AuthUsersDataOrderBy<TRes>
       CopyWith_Input_HistoryLatestEditsOrderBy.stub(_res);
 
   CopyWith_Input_AuthUsersPermissionsAggregateOrderBy<TRes>
-      get permissionsAggregate =>
-          CopyWith_Input_AuthUsersPermissionsAggregateOrderBy.stub(_res);
+  get permissionsAggregate =>
+      CopyWith_Input_AuthUsersPermissionsAggregateOrderBy.stub(_res);
 
   CopyWith_Input_PersonsOrderBy<TRes> get person =>
       CopyWith_Input_PersonsOrderBy.stub(_res);
@@ -680,21 +708,22 @@ class Input_AuthUsersDataStreamCursorInput {
   factory Input_AuthUsersDataStreamCursorInput({
     required Input_AuthUsersDataStreamCursorValueInput initialValue,
     Enum_CursorOrdering? ordering,
-  }) =>
-      Input_AuthUsersDataStreamCursorInput._({
-        r'initialValue': initialValue,
-        if (ordering != null) r'ordering': ordering,
-      });
+  }) => Input_AuthUsersDataStreamCursorInput._({
+    r'initialValue': initialValue,
+    if (ordering != null) r'ordering': ordering,
+  });
 
   Input_AuthUsersDataStreamCursorInput._(this._$data);
 
   factory Input_AuthUsersDataStreamCursorInput.fromJson(
-      Map<String, dynamic> data) {
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
     final l$initialValue = data['initialValue'];
     result$data['initialValue'] =
         Input_AuthUsersDataStreamCursorValueInput.fromJson(
-            (l$initialValue as Map<String, dynamic>));
+          (l$initialValue as Map<String, dynamic>),
+        );
     if (data.containsKey('ordering')) {
       final l$ordering = data['ordering'];
       result$data['ordering'] = l$ordering == null
@@ -718,18 +747,17 @@ class Input_AuthUsersDataStreamCursorInput {
     result$data['initialValue'] = l$initialValue.toJson();
     if (_$data.containsKey('ordering')) {
       final l$ordering = ordering;
-      result$data['ordering'] =
-          l$ordering == null ? null : toJson_Enum_CursorOrdering(l$ordering);
+      result$data['ordering'] = l$ordering == null
+          ? null
+          : toJson_Enum_CursorOrdering(l$ordering);
     }
     return result$data;
   }
 
   CopyWith_Input_AuthUsersDataStreamCursorInput<
-          Input_AuthUsersDataStreamCursorInput>
-      get copyWith => CopyWith_Input_AuthUsersDataStreamCursorInput(
-            this,
-            (i) => i,
-          );
+    Input_AuthUsersDataStreamCursorInput
+  >
+  get copyWith => CopyWith_Input_AuthUsersDataStreamCursorInput(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -800,20 +828,23 @@ class _CopyWithImpl_Input_AuthUsersDataStreamCursorInput<TRes>
   TRes call({
     Object? initialValue = _undefined,
     Object? ordering = _undefined,
-  }) =>
-      _then(Input_AuthUsersDataStreamCursorInput._({
-        ..._instance._$data,
-        if (initialValue != _undefined && initialValue != null)
-          'initialValue':
-              (initialValue as Input_AuthUsersDataStreamCursorValueInput),
-        if (ordering != _undefined)
-          'ordering': (ordering as Enum_CursorOrdering?),
-      }));
+  }) => _then(
+    Input_AuthUsersDataStreamCursorInput._({
+      ..._instance._$data,
+      if (initialValue != _undefined && initialValue != null)
+        'initialValue':
+            (initialValue as Input_AuthUsersDataStreamCursorValueInput),
+      if (ordering != _undefined)
+        'ordering': (ordering as Enum_CursorOrdering?),
+    }),
+  );
 
   CopyWith_Input_AuthUsersDataStreamCursorValueInput<TRes> get initialValue {
     final local$initialValue = _instance.initialValue;
     return CopyWith_Input_AuthUsersDataStreamCursorValueInput(
-        local$initialValue, (e) => call(initialValue: e));
+      local$initialValue,
+      (e) => call(initialValue: e),
+    );
   }
 }
 
@@ -826,8 +857,7 @@ class _CopyWithStubImpl_Input_AuthUsersDataStreamCursorInput<TRes>
   call({
     Input_AuthUsersDataStreamCursorValueInput? initialValue,
     Enum_CursorOrdering? ordering,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Input_AuthUsersDataStreamCursorValueInput<TRes> get initialValue =>
       CopyWith_Input_AuthUsersDataStreamCursorValueInput.stub(_res);
@@ -840,19 +870,19 @@ class Input_AuthUsersDataStreamCursorValueInput {
     String? name,
     DateTime? photoUpdatedAt,
     UuidValue? uid,
-  }) =>
-      Input_AuthUsersDataStreamCursorValueInput._({
-        if (blurhash != null) r'blurhash': blurhash,
-        if (email != null) r'email': email,
-        if (name != null) r'name': name,
-        if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
-        if (uid != null) r'uid': uid,
-      });
+  }) => Input_AuthUsersDataStreamCursorValueInput._({
+    if (blurhash != null) r'blurhash': blurhash,
+    if (email != null) r'email': email,
+    if (name != null) r'name': name,
+    if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
+    if (uid != null) r'uid': uid,
+  });
 
   Input_AuthUsersDataStreamCursorValueInput._(this._$data);
 
   factory Input_AuthUsersDataStreamCursorValueInput.fromJson(
-      Map<String, dynamic> data) {
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('blurhash')) {
       final l$blurhash = data['blurhash'];
@@ -868,8 +898,9 @@ class Input_AuthUsersDataStreamCursorValueInput {
     }
     if (data.containsKey('photoUpdatedAt')) {
       final l$photoUpdatedAt = data['photoUpdatedAt'];
-      result$data['photoUpdatedAt'] =
-          l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt);
+      result$data['photoUpdatedAt'] = l$photoUpdatedAt == null
+          ? null
+          : tstzFromString(l$photoUpdatedAt);
     }
     if (data.containsKey('uid')) {
       final l$uid = data['uid'];
@@ -906,8 +937,9 @@ class Input_AuthUsersDataStreamCursorValueInput {
     }
     if (_$data.containsKey('photoUpdatedAt')) {
       final l$photoUpdatedAt = photoUpdatedAt;
-      result$data['photoUpdatedAt'] =
-          l$photoUpdatedAt == null ? null : tstzToString(l$photoUpdatedAt);
+      result$data['photoUpdatedAt'] = l$photoUpdatedAt == null
+          ? null
+          : tstzToString(l$photoUpdatedAt);
     }
     if (_$data.containsKey('uid')) {
       final l$uid = uid;
@@ -917,11 +949,10 @@ class Input_AuthUsersDataStreamCursorValueInput {
   }
 
   CopyWith_Input_AuthUsersDataStreamCursorValueInput<
-          Input_AuthUsersDataStreamCursorValueInput>
-      get copyWith => CopyWith_Input_AuthUsersDataStreamCursorValueInput(
-            this,
-            (i) => i,
-          );
+    Input_AuthUsersDataStreamCursorValueInput
+  >
+  get copyWith =>
+      CopyWith_Input_AuthUsersDataStreamCursorValueInput(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -1031,16 +1062,17 @@ class _CopyWithImpl_Input_AuthUsersDataStreamCursorValueInput<TRes>
     Object? name = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? uid = _undefined,
-  }) =>
-      _then(Input_AuthUsersDataStreamCursorValueInput._({
-        ..._instance._$data,
-        if (blurhash != _undefined) 'blurhash': (blurhash as String?),
-        if (email != _undefined) 'email': (email as String?),
-        if (name != _undefined) 'name': (name as String?),
-        if (photoUpdatedAt != _undefined)
-          'photoUpdatedAt': (photoUpdatedAt as DateTime?),
-        if (uid != _undefined) 'uid': (uid as UuidValue?),
-      }));
+  }) => _then(
+    Input_AuthUsersDataStreamCursorValueInput._({
+      ..._instance._$data,
+      if (blurhash != _undefined) 'blurhash': (blurhash as String?),
+      if (email != _undefined) 'email': (email as String?),
+      if (name != _undefined) 'name': (name as String?),
+      if (photoUpdatedAt != _undefined)
+        'photoUpdatedAt': (photoUpdatedAt as DateTime?),
+      if (uid != _undefined) 'uid': (uid as UuidValue?),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Input_AuthUsersDataStreamCursorValueInput<TRes>
@@ -1055,8 +1087,7 @@ class _CopyWithStubImpl_Input_AuthUsersDataStreamCursorValueInput<TRes>
     String? name,
     DateTime? photoUpdatedAt,
     UuidValue? uid,
-  }) =>
-      _res;
+  }) => _res;
 }
 
 class Input_AuthUsersPermissionsAggregateOrderBy {
@@ -1064,36 +1095,39 @@ class Input_AuthUsersPermissionsAggregateOrderBy {
     Enum_OrderBy? count,
     Input_AuthUsersPermissionsMaxOrderBy? max,
     Input_AuthUsersPermissionsMinOrderBy? min,
-  }) =>
-      Input_AuthUsersPermissionsAggregateOrderBy._({
-        if (count != null) r'count': count,
-        if (max != null) r'max': max,
-        if (min != null) r'min': min,
-      });
+  }) => Input_AuthUsersPermissionsAggregateOrderBy._({
+    if (count != null) r'count': count,
+    if (max != null) r'max': max,
+    if (min != null) r'min': min,
+  });
 
   Input_AuthUsersPermissionsAggregateOrderBy._(this._$data);
 
   factory Input_AuthUsersPermissionsAggregateOrderBy.fromJson(
-      Map<String, dynamic> data) {
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('count')) {
       final l$count = data['count'];
-      result$data['count'] =
-          l$count == null ? null : fromJson_Enum_OrderBy((l$count as String));
+      result$data['count'] = l$count == null
+          ? null
+          : fromJson_Enum_OrderBy((l$count as String));
     }
     if (data.containsKey('max')) {
       final l$max = data['max'];
       result$data['max'] = l$max == null
           ? null
           : Input_AuthUsersPermissionsMaxOrderBy.fromJson(
-              (l$max as Map<String, dynamic>));
+              (l$max as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('min')) {
       final l$min = data['min'];
       result$data['min'] = l$min == null
           ? null
           : Input_AuthUsersPermissionsMinOrderBy.fromJson(
-              (l$min as Map<String, dynamic>));
+              (l$min as Map<String, dynamic>),
+            );
     }
     return Input_AuthUsersPermissionsAggregateOrderBy._(result$data);
   }
@@ -1112,8 +1146,9 @@ class Input_AuthUsersPermissionsAggregateOrderBy {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('count')) {
       final l$count = count;
-      result$data['count'] =
-          l$count == null ? null : toJson_Enum_OrderBy(l$count);
+      result$data['count'] = l$count == null
+          ? null
+          : toJson_Enum_OrderBy(l$count);
     }
     if (_$data.containsKey('max')) {
       final l$max = max;
@@ -1127,11 +1162,10 @@ class Input_AuthUsersPermissionsAggregateOrderBy {
   }
 
   CopyWith_Input_AuthUsersPermissionsAggregateOrderBy<
-          Input_AuthUsersPermissionsAggregateOrderBy>
-      get copyWith => CopyWith_Input_AuthUsersPermissionsAggregateOrderBy(
-            this,
-            (i) => i,
-          );
+    Input_AuthUsersPermissionsAggregateOrderBy
+  >
+  get copyWith =>
+      CopyWith_Input_AuthUsersPermissionsAggregateOrderBy(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -1217,22 +1251,25 @@ class _CopyWithImpl_Input_AuthUsersPermissionsAggregateOrderBy<TRes>
     Object? count = _undefined,
     Object? max = _undefined,
     Object? min = _undefined,
-  }) =>
-      _then(Input_AuthUsersPermissionsAggregateOrderBy._({
-        ..._instance._$data,
-        if (count != _undefined) 'count': (count as Enum_OrderBy?),
-        if (max != _undefined)
-          'max': (max as Input_AuthUsersPermissionsMaxOrderBy?),
-        if (min != _undefined)
-          'min': (min as Input_AuthUsersPermissionsMinOrderBy?),
-      }));
+  }) => _then(
+    Input_AuthUsersPermissionsAggregateOrderBy._({
+      ..._instance._$data,
+      if (count != _undefined) 'count': (count as Enum_OrderBy?),
+      if (max != _undefined)
+        'max': (max as Input_AuthUsersPermissionsMaxOrderBy?),
+      if (min != _undefined)
+        'min': (min as Input_AuthUsersPermissionsMinOrderBy?),
+    }),
+  );
 
   CopyWith_Input_AuthUsersPermissionsMaxOrderBy<TRes> get max {
     final local$max = _instance.max;
     return local$max == null
         ? CopyWith_Input_AuthUsersPermissionsMaxOrderBy.stub(_then(_instance))
         : CopyWith_Input_AuthUsersPermissionsMaxOrderBy(
-            local$max, (e) => call(max: e));
+            local$max,
+            (e) => call(max: e),
+          );
   }
 
   CopyWith_Input_AuthUsersPermissionsMinOrderBy<TRes> get min {
@@ -1240,7 +1277,9 @@ class _CopyWithImpl_Input_AuthUsersPermissionsAggregateOrderBy<TRes>
     return local$min == null
         ? CopyWith_Input_AuthUsersPermissionsMinOrderBy.stub(_then(_instance))
         : CopyWith_Input_AuthUsersPermissionsMinOrderBy(
-            local$min, (e) => call(min: e));
+            local$min,
+            (e) => call(min: e),
+          );
   }
 }
 
@@ -1254,8 +1293,7 @@ class _CopyWithStubImpl_Input_AuthUsersPermissionsAggregateOrderBy<TRes>
     Enum_OrderBy? count,
     Input_AuthUsersPermissionsMaxOrderBy? max,
     Input_AuthUsersPermissionsMinOrderBy? min,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Input_AuthUsersPermissionsMaxOrderBy<TRes> get max =>
       CopyWith_Input_AuthUsersPermissionsMaxOrderBy.stub(_res);
@@ -1272,26 +1310,29 @@ class Input_AuthUsersPermissionsBoolExp {
     Input_StringComparisonExp? permission,
     Input_UuidComparisonExp? uid,
     Input_AuthUsersDataBoolExp? user,
-  }) =>
-      Input_AuthUsersPermissionsBoolExp._({
-        if ($_and != null) r'_and': $_and,
-        if ($_not != null) r'_not': $_not,
-        if ($_or != null) r'_or': $_or,
-        if (permission != null) r'permission': permission,
-        if (uid != null) r'uid': uid,
-        if (user != null) r'user': user,
-      });
+  }) => Input_AuthUsersPermissionsBoolExp._({
+    if ($_and != null) r'_and': $_and,
+    if ($_not != null) r'_not': $_not,
+    if ($_or != null) r'_or': $_or,
+    if (permission != null) r'permission': permission,
+    if (uid != null) r'uid': uid,
+    if (user != null) r'user': user,
+  });
 
   Input_AuthUsersPermissionsBoolExp._(this._$data);
 
   factory Input_AuthUsersPermissionsBoolExp.fromJson(
-      Map<String, dynamic> data) {
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('_and')) {
       final l$$_and = data['_and'];
       result$data['_and'] = (l$$_and as List<dynamic>?)
-          ?.map((e) => Input_AuthUsersPermissionsBoolExp.fromJson(
-              (e as Map<String, dynamic>)))
+          ?.map(
+            (e) => Input_AuthUsersPermissionsBoolExp.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
           .toList();
     }
     if (data.containsKey('_not')) {
@@ -1299,13 +1340,17 @@ class Input_AuthUsersPermissionsBoolExp {
       result$data['_not'] = l$$_not == null
           ? null
           : Input_AuthUsersPermissionsBoolExp.fromJson(
-              (l$$_not as Map<String, dynamic>));
+              (l$$_not as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('_or')) {
       final l$$_or = data['_or'];
       result$data['_or'] = (l$$_or as List<dynamic>?)
-          ?.map((e) => Input_AuthUsersPermissionsBoolExp.fromJson(
-              (e as Map<String, dynamic>)))
+          ?.map(
+            (e) => Input_AuthUsersPermissionsBoolExp.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
           .toList();
     }
     if (data.containsKey('permission')) {
@@ -1313,7 +1358,8 @@ class Input_AuthUsersPermissionsBoolExp {
       result$data['permission'] = l$permission == null
           ? null
           : Input_StringComparisonExp.fromJson(
-              (l$permission as Map<String, dynamic>));
+              (l$permission as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('uid')) {
       final l$uid = data['uid'];
@@ -1326,7 +1372,8 @@ class Input_AuthUsersPermissionsBoolExp {
       result$data['user'] = l$user == null
           ? null
           : Input_AuthUsersDataBoolExp.fromJson(
-              (l$user as Map<String, dynamic>));
+              (l$user as Map<String, dynamic>),
+            );
     }
     return Input_AuthUsersPermissionsBoolExp._(result$data);
   }
@@ -1381,10 +1428,7 @@ class Input_AuthUsersPermissionsBoolExp {
   }
 
   CopyWith_Input_AuthUsersPermissionsBoolExp<Input_AuthUsersPermissionsBoolExp>
-      get copyWith => CopyWith_Input_AuthUsersPermissionsBoolExp(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Input_AuthUsersPermissionsBoolExp(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -1480,14 +1524,14 @@ class Input_AuthUsersPermissionsBoolExp {
     return Object.hashAll([
       _$data.containsKey('_and')
           ? l$$_and == null
-              ? null
-              : Object.hashAll(l$$_and.map((v) => v))
+                ? null
+                : Object.hashAll(l$$_and.map((v) => v))
           : const {},
       _$data.containsKey('_not') ? l$$_not : const {},
       _$data.containsKey('_or')
           ? l$$_or == null
-              ? null
-              : Object.hashAll(l$$_or.map((v) => v))
+                ? null
+                : Object.hashAll(l$$_or.map((v) => v))
           : const {},
       _$data.containsKey('permission') ? l$permission : const {},
       _$data.containsKey('uid') ? l$uid : const {},
@@ -1514,18 +1558,26 @@ abstract class CopyWith_Input_AuthUsersPermissionsBoolExp<TRes> {
     Input_AuthUsersDataBoolExp? user,
   });
   TRes $_and(
-      Iterable<Input_AuthUsersPermissionsBoolExp>? Function(
-              Iterable<
-                  CopyWith_Input_AuthUsersPermissionsBoolExp<
-                      Input_AuthUsersPermissionsBoolExp>>?)
-          _fn);
+    Iterable<Input_AuthUsersPermissionsBoolExp>? Function(
+      Iterable<
+        CopyWith_Input_AuthUsersPermissionsBoolExp<
+          Input_AuthUsersPermissionsBoolExp
+        >
+      >?,
+    )
+    _fn,
+  );
   CopyWith_Input_AuthUsersPermissionsBoolExp<TRes> get $_not;
   TRes $_or(
-      Iterable<Input_AuthUsersPermissionsBoolExp>? Function(
-              Iterable<
-                  CopyWith_Input_AuthUsersPermissionsBoolExp<
-                      Input_AuthUsersPermissionsBoolExp>>?)
-          _fn);
+    Iterable<Input_AuthUsersPermissionsBoolExp>? Function(
+      Iterable<
+        CopyWith_Input_AuthUsersPermissionsBoolExp<
+          Input_AuthUsersPermissionsBoolExp
+        >
+      >?,
+    )
+    _fn,
+  );
   CopyWith_Input_StringComparisonExp<TRes> get permission;
   CopyWith_Input_UuidComparisonExp<TRes> get uid;
   CopyWith_Input_AuthUsersDataBoolExp<TRes> get user;
@@ -1533,10 +1585,7 @@ abstract class CopyWith_Input_AuthUsersPermissionsBoolExp<TRes> {
 
 class _CopyWithImpl_Input_AuthUsersPermissionsBoolExp<TRes>
     implements CopyWith_Input_AuthUsersPermissionsBoolExp<TRes> {
-  _CopyWithImpl_Input_AuthUsersPermissionsBoolExp(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Input_AuthUsersPermissionsBoolExp(this._instance, this._then);
 
   final Input_AuthUsersPermissionsBoolExp _instance;
 
@@ -1551,61 +1600,74 @@ class _CopyWithImpl_Input_AuthUsersPermissionsBoolExp<TRes>
     Object? permission = _undefined,
     Object? uid = _undefined,
     Object? user = _undefined,
-  }) =>
-      _then(Input_AuthUsersPermissionsBoolExp._({
-        ..._instance._$data,
-        if ($_and != _undefined)
-          '_and': ($_and as List<Input_AuthUsersPermissionsBoolExp>?),
-        if ($_not != _undefined)
-          '_not': ($_not as Input_AuthUsersPermissionsBoolExp?),
-        if ($_or != _undefined)
-          '_or': ($_or as List<Input_AuthUsersPermissionsBoolExp>?),
-        if (permission != _undefined)
-          'permission': (permission as Input_StringComparisonExp?),
-        if (uid != _undefined) 'uid': (uid as Input_UuidComparisonExp?),
-        if (user != _undefined) 'user': (user as Input_AuthUsersDataBoolExp?),
-      }));
+  }) => _then(
+    Input_AuthUsersPermissionsBoolExp._({
+      ..._instance._$data,
+      if ($_and != _undefined)
+        '_and': ($_and as List<Input_AuthUsersPermissionsBoolExp>?),
+      if ($_not != _undefined)
+        '_not': ($_not as Input_AuthUsersPermissionsBoolExp?),
+      if ($_or != _undefined)
+        '_or': ($_or as List<Input_AuthUsersPermissionsBoolExp>?),
+      if (permission != _undefined)
+        'permission': (permission as Input_StringComparisonExp?),
+      if (uid != _undefined) 'uid': (uid as Input_UuidComparisonExp?),
+      if (user != _undefined) 'user': (user as Input_AuthUsersDataBoolExp?),
+    }),
+  );
 
   TRes $_and(
-          Iterable<Input_AuthUsersPermissionsBoolExp>? Function(
-                  Iterable<
-                      CopyWith_Input_AuthUsersPermissionsBoolExp<
-                          Input_AuthUsersPermissionsBoolExp>>?)
-              _fn) =>
-      call(
-          $_and: _fn(_instance.$_and
-              ?.map((e) => CopyWith_Input_AuthUsersPermissionsBoolExp(
-                    e,
-                    (i) => i,
-                  )))?.toList());
+    Iterable<Input_AuthUsersPermissionsBoolExp>? Function(
+      Iterable<
+        CopyWith_Input_AuthUsersPermissionsBoolExp<
+          Input_AuthUsersPermissionsBoolExp
+        >
+      >?,
+    )
+    _fn,
+  ) => call(
+    $_and: _fn(
+      _instance.$_and?.map(
+        (e) => CopyWith_Input_AuthUsersPermissionsBoolExp(e, (i) => i),
+      ),
+    )?.toList(),
+  );
 
   CopyWith_Input_AuthUsersPermissionsBoolExp<TRes> get $_not {
     final local$$_not = _instance.$_not;
     return local$$_not == null
         ? CopyWith_Input_AuthUsersPermissionsBoolExp.stub(_then(_instance))
         : CopyWith_Input_AuthUsersPermissionsBoolExp(
-            local$$_not, (e) => call($_not: e));
+            local$$_not,
+            (e) => call($_not: e),
+          );
   }
 
   TRes $_or(
-          Iterable<Input_AuthUsersPermissionsBoolExp>? Function(
-                  Iterable<
-                      CopyWith_Input_AuthUsersPermissionsBoolExp<
-                          Input_AuthUsersPermissionsBoolExp>>?)
-              _fn) =>
-      call(
-          $_or: _fn(_instance.$_or
-              ?.map((e) => CopyWith_Input_AuthUsersPermissionsBoolExp(
-                    e,
-                    (i) => i,
-                  )))?.toList());
+    Iterable<Input_AuthUsersPermissionsBoolExp>? Function(
+      Iterable<
+        CopyWith_Input_AuthUsersPermissionsBoolExp<
+          Input_AuthUsersPermissionsBoolExp
+        >
+      >?,
+    )
+    _fn,
+  ) => call(
+    $_or: _fn(
+      _instance.$_or?.map(
+        (e) => CopyWith_Input_AuthUsersPermissionsBoolExp(e, (i) => i),
+      ),
+    )?.toList(),
+  );
 
   CopyWith_Input_StringComparisonExp<TRes> get permission {
     final local$permission = _instance.permission;
     return local$permission == null
         ? CopyWith_Input_StringComparisonExp.stub(_then(_instance))
         : CopyWith_Input_StringComparisonExp(
-            local$permission, (e) => call(permission: e));
+            local$permission,
+            (e) => call(permission: e),
+          );
   }
 
   CopyWith_Input_UuidComparisonExp<TRes> get uid {
@@ -1636,8 +1698,7 @@ class _CopyWithStubImpl_Input_AuthUsersPermissionsBoolExp<TRes>
     Input_StringComparisonExp? permission,
     Input_UuidComparisonExp? uid,
     Input_AuthUsersDataBoolExp? user,
-  }) =>
-      _res;
+  }) => _res;
 
   $_and(_fn) => _res;
 
@@ -1660,16 +1721,16 @@ class Input_AuthUsersPermissionsInsertInput {
   factory Input_AuthUsersPermissionsInsertInput({
     String? permission,
     UuidValue? uid,
-  }) =>
-      Input_AuthUsersPermissionsInsertInput._({
-        if (permission != null) r'permission': permission,
-        if (uid != null) r'uid': uid,
-      });
+  }) => Input_AuthUsersPermissionsInsertInput._({
+    if (permission != null) r'permission': permission,
+    if (uid != null) r'uid': uid,
+  });
 
   Input_AuthUsersPermissionsInsertInput._(this._$data);
 
   factory Input_AuthUsersPermissionsInsertInput.fromJson(
-      Map<String, dynamic> data) {
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('permission')) {
       final l$permission = data['permission'];
@@ -1702,11 +1763,10 @@ class Input_AuthUsersPermissionsInsertInput {
   }
 
   CopyWith_Input_AuthUsersPermissionsInsertInput<
-          Input_AuthUsersPermissionsInsertInput>
-      get copyWith => CopyWith_Input_AuthUsersPermissionsInsertInput(
-            this,
-            (i) => i,
-          );
+    Input_AuthUsersPermissionsInsertInput
+  >
+  get copyWith =>
+      CopyWith_Input_AuthUsersPermissionsInsertInput(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -1757,10 +1817,7 @@ abstract class CopyWith_Input_AuthUsersPermissionsInsertInput<TRes> {
   factory CopyWith_Input_AuthUsersPermissionsInsertInput.stub(TRes res) =
       _CopyWithStubImpl_Input_AuthUsersPermissionsInsertInput;
 
-  TRes call({
-    String? permission,
-    UuidValue? uid,
-  });
+  TRes call({String? permission, UuidValue? uid});
 }
 
 class _CopyWithImpl_Input_AuthUsersPermissionsInsertInput<TRes>
@@ -1776,15 +1833,14 @@ class _CopyWithImpl_Input_AuthUsersPermissionsInsertInput<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? permission = _undefined,
-    Object? uid = _undefined,
-  }) =>
-      _then(Input_AuthUsersPermissionsInsertInput._({
-        ..._instance._$data,
-        if (permission != _undefined) 'permission': (permission as String?),
-        if (uid != _undefined) 'uid': (uid as UuidValue?),
-      }));
+  TRes call({Object? permission = _undefined, Object? uid = _undefined}) =>
+      _then(
+        Input_AuthUsersPermissionsInsertInput._({
+          ..._instance._$data,
+          if (permission != _undefined) 'permission': (permission as String?),
+          if (uid != _undefined) 'uid': (uid as UuidValue?),
+        }),
+      );
 }
 
 class _CopyWithStubImpl_Input_AuthUsersPermissionsInsertInput<TRes>
@@ -1793,27 +1849,23 @@ class _CopyWithStubImpl_Input_AuthUsersPermissionsInsertInput<TRes>
 
   TRes _res;
 
-  call({
-    String? permission,
-    UuidValue? uid,
-  }) =>
-      _res;
+  call({String? permission, UuidValue? uid}) => _res;
 }
 
 class Input_AuthUsersPermissionsMaxOrderBy {
   factory Input_AuthUsersPermissionsMaxOrderBy({
     Enum_OrderBy? permission,
     Enum_OrderBy? uid,
-  }) =>
-      Input_AuthUsersPermissionsMaxOrderBy._({
-        if (permission != null) r'permission': permission,
-        if (uid != null) r'uid': uid,
-      });
+  }) => Input_AuthUsersPermissionsMaxOrderBy._({
+    if (permission != null) r'permission': permission,
+    if (uid != null) r'uid': uid,
+  });
 
   Input_AuthUsersPermissionsMaxOrderBy._(this._$data);
 
   factory Input_AuthUsersPermissionsMaxOrderBy.fromJson(
-      Map<String, dynamic> data) {
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('permission')) {
       final l$permission = data['permission'];
@@ -1823,8 +1875,9 @@ class Input_AuthUsersPermissionsMaxOrderBy {
     }
     if (data.containsKey('uid')) {
       final l$uid = data['uid'];
-      result$data['uid'] =
-          l$uid == null ? null : fromJson_Enum_OrderBy((l$uid as String));
+      result$data['uid'] = l$uid == null
+          ? null
+          : fromJson_Enum_OrderBy((l$uid as String));
     }
     return Input_AuthUsersPermissionsMaxOrderBy._(result$data);
   }
@@ -1839,8 +1892,9 @@ class Input_AuthUsersPermissionsMaxOrderBy {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('permission')) {
       final l$permission = permission;
-      result$data['permission'] =
-          l$permission == null ? null : toJson_Enum_OrderBy(l$permission);
+      result$data['permission'] = l$permission == null
+          ? null
+          : toJson_Enum_OrderBy(l$permission);
     }
     if (_$data.containsKey('uid')) {
       final l$uid = uid;
@@ -1850,11 +1904,9 @@ class Input_AuthUsersPermissionsMaxOrderBy {
   }
 
   CopyWith_Input_AuthUsersPermissionsMaxOrderBy<
-          Input_AuthUsersPermissionsMaxOrderBy>
-      get copyWith => CopyWith_Input_AuthUsersPermissionsMaxOrderBy(
-            this,
-            (i) => i,
-          );
+    Input_AuthUsersPermissionsMaxOrderBy
+  >
+  get copyWith => CopyWith_Input_AuthUsersPermissionsMaxOrderBy(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -1905,10 +1957,7 @@ abstract class CopyWith_Input_AuthUsersPermissionsMaxOrderBy<TRes> {
   factory CopyWith_Input_AuthUsersPermissionsMaxOrderBy.stub(TRes res) =
       _CopyWithStubImpl_Input_AuthUsersPermissionsMaxOrderBy;
 
-  TRes call({
-    Enum_OrderBy? permission,
-    Enum_OrderBy? uid,
-  });
+  TRes call({Enum_OrderBy? permission, Enum_OrderBy? uid});
 }
 
 class _CopyWithImpl_Input_AuthUsersPermissionsMaxOrderBy<TRes>
@@ -1924,16 +1973,15 @@ class _CopyWithImpl_Input_AuthUsersPermissionsMaxOrderBy<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? permission = _undefined,
-    Object? uid = _undefined,
-  }) =>
-      _then(Input_AuthUsersPermissionsMaxOrderBy._({
-        ..._instance._$data,
-        if (permission != _undefined)
-          'permission': (permission as Enum_OrderBy?),
-        if (uid != _undefined) 'uid': (uid as Enum_OrderBy?),
-      }));
+  TRes call({Object? permission = _undefined, Object? uid = _undefined}) =>
+      _then(
+        Input_AuthUsersPermissionsMaxOrderBy._({
+          ..._instance._$data,
+          if (permission != _undefined)
+            'permission': (permission as Enum_OrderBy?),
+          if (uid != _undefined) 'uid': (uid as Enum_OrderBy?),
+        }),
+      );
 }
 
 class _CopyWithStubImpl_Input_AuthUsersPermissionsMaxOrderBy<TRes>
@@ -1942,27 +1990,23 @@ class _CopyWithStubImpl_Input_AuthUsersPermissionsMaxOrderBy<TRes>
 
   TRes _res;
 
-  call({
-    Enum_OrderBy? permission,
-    Enum_OrderBy? uid,
-  }) =>
-      _res;
+  call({Enum_OrderBy? permission, Enum_OrderBy? uid}) => _res;
 }
 
 class Input_AuthUsersPermissionsMinOrderBy {
   factory Input_AuthUsersPermissionsMinOrderBy({
     Enum_OrderBy? permission,
     Enum_OrderBy? uid,
-  }) =>
-      Input_AuthUsersPermissionsMinOrderBy._({
-        if (permission != null) r'permission': permission,
-        if (uid != null) r'uid': uid,
-      });
+  }) => Input_AuthUsersPermissionsMinOrderBy._({
+    if (permission != null) r'permission': permission,
+    if (uid != null) r'uid': uid,
+  });
 
   Input_AuthUsersPermissionsMinOrderBy._(this._$data);
 
   factory Input_AuthUsersPermissionsMinOrderBy.fromJson(
-      Map<String, dynamic> data) {
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('permission')) {
       final l$permission = data['permission'];
@@ -1972,8 +2016,9 @@ class Input_AuthUsersPermissionsMinOrderBy {
     }
     if (data.containsKey('uid')) {
       final l$uid = data['uid'];
-      result$data['uid'] =
-          l$uid == null ? null : fromJson_Enum_OrderBy((l$uid as String));
+      result$data['uid'] = l$uid == null
+          ? null
+          : fromJson_Enum_OrderBy((l$uid as String));
     }
     return Input_AuthUsersPermissionsMinOrderBy._(result$data);
   }
@@ -1988,8 +2033,9 @@ class Input_AuthUsersPermissionsMinOrderBy {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('permission')) {
       final l$permission = permission;
-      result$data['permission'] =
-          l$permission == null ? null : toJson_Enum_OrderBy(l$permission);
+      result$data['permission'] = l$permission == null
+          ? null
+          : toJson_Enum_OrderBy(l$permission);
     }
     if (_$data.containsKey('uid')) {
       final l$uid = uid;
@@ -1999,11 +2045,9 @@ class Input_AuthUsersPermissionsMinOrderBy {
   }
 
   CopyWith_Input_AuthUsersPermissionsMinOrderBy<
-          Input_AuthUsersPermissionsMinOrderBy>
-      get copyWith => CopyWith_Input_AuthUsersPermissionsMinOrderBy(
-            this,
-            (i) => i,
-          );
+    Input_AuthUsersPermissionsMinOrderBy
+  >
+  get copyWith => CopyWith_Input_AuthUsersPermissionsMinOrderBy(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -2054,10 +2098,7 @@ abstract class CopyWith_Input_AuthUsersPermissionsMinOrderBy<TRes> {
   factory CopyWith_Input_AuthUsersPermissionsMinOrderBy.stub(TRes res) =
       _CopyWithStubImpl_Input_AuthUsersPermissionsMinOrderBy;
 
-  TRes call({
-    Enum_OrderBy? permission,
-    Enum_OrderBy? uid,
-  });
+  TRes call({Enum_OrderBy? permission, Enum_OrderBy? uid});
 }
 
 class _CopyWithImpl_Input_AuthUsersPermissionsMinOrderBy<TRes>
@@ -2073,16 +2114,15 @@ class _CopyWithImpl_Input_AuthUsersPermissionsMinOrderBy<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? permission = _undefined,
-    Object? uid = _undefined,
-  }) =>
-      _then(Input_AuthUsersPermissionsMinOrderBy._({
-        ..._instance._$data,
-        if (permission != _undefined)
-          'permission': (permission as Enum_OrderBy?),
-        if (uid != _undefined) 'uid': (uid as Enum_OrderBy?),
-      }));
+  TRes call({Object? permission = _undefined, Object? uid = _undefined}) =>
+      _then(
+        Input_AuthUsersPermissionsMinOrderBy._({
+          ..._instance._$data,
+          if (permission != _undefined)
+            'permission': (permission as Enum_OrderBy?),
+          if (uid != _undefined) 'uid': (uid as Enum_OrderBy?),
+        }),
+      );
 }
 
 class _CopyWithStubImpl_Input_AuthUsersPermissionsMinOrderBy<TRes>
@@ -2091,11 +2131,7 @@ class _CopyWithStubImpl_Input_AuthUsersPermissionsMinOrderBy<TRes>
 
   TRes _res;
 
-  call({
-    Enum_OrderBy? permission,
-    Enum_OrderBy? uid,
-  }) =>
-      _res;
+  call({Enum_OrderBy? permission, Enum_OrderBy? uid}) => _res;
 }
 
 class Input_AuthUsersPermissionsOnConflict {
@@ -2103,26 +2139,29 @@ class Input_AuthUsersPermissionsOnConflict {
     required Enum_AuthUsersPermissionsConstraint constraint,
     List<Enum_AuthUsersPermissionsUpdateColumn>? updateColumns,
     Input_AuthUsersPermissionsBoolExp? where,
-  }) =>
-      Input_AuthUsersPermissionsOnConflict._({
-        r'constraint': constraint,
-        if (updateColumns != null) r'updateColumns': updateColumns,
-        if (where != null) r'where': where,
-      });
+  }) => Input_AuthUsersPermissionsOnConflict._({
+    r'constraint': constraint,
+    if (updateColumns != null) r'updateColumns': updateColumns,
+    if (where != null) r'where': where,
+  });
 
   Input_AuthUsersPermissionsOnConflict._(this._$data);
 
   factory Input_AuthUsersPermissionsOnConflict.fromJson(
-      Map<String, dynamic> data) {
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
     final l$constraint = data['constraint'];
-    result$data['constraint'] =
-        fromJson_Enum_AuthUsersPermissionsConstraint((l$constraint as String));
+    result$data['constraint'] = fromJson_Enum_AuthUsersPermissionsConstraint(
+      (l$constraint as String),
+    );
     if (data.containsKey('updateColumns')) {
       final l$updateColumns = data['updateColumns'];
       result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
-          .map((e) =>
-              fromJson_Enum_AuthUsersPermissionsUpdateColumn((e as String)))
+          .map(
+            (e) =>
+                fromJson_Enum_AuthUsersPermissionsUpdateColumn((e as String)),
+          )
           .toList();
     }
     if (data.containsKey('where')) {
@@ -2130,7 +2169,8 @@ class Input_AuthUsersPermissionsOnConflict {
       result$data['where'] = l$where == null
           ? null
           : Input_AuthUsersPermissionsBoolExp.fromJson(
-              (l$where as Map<String, dynamic>));
+              (l$where as Map<String, dynamic>),
+            );
     }
     return Input_AuthUsersPermissionsOnConflict._(result$data);
   }
@@ -2149,8 +2189,9 @@ class Input_AuthUsersPermissionsOnConflict {
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
-    result$data['constraint'] =
-        toJson_Enum_AuthUsersPermissionsConstraint(l$constraint);
+    result$data['constraint'] = toJson_Enum_AuthUsersPermissionsConstraint(
+      l$constraint,
+    );
     if (_$data.containsKey('updateColumns')) {
       final l$updateColumns = updateColumns;
       result$data['updateColumns'] =
@@ -2166,11 +2207,9 @@ class Input_AuthUsersPermissionsOnConflict {
   }
 
   CopyWith_Input_AuthUsersPermissionsOnConflict<
-          Input_AuthUsersPermissionsOnConflict>
-      get copyWith => CopyWith_Input_AuthUsersPermissionsOnConflict(
-            this,
-            (i) => i,
-          );
+    Input_AuthUsersPermissionsOnConflict
+  >
+  get copyWith => CopyWith_Input_AuthUsersPermissionsOnConflict(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -2226,8 +2265,8 @@ class Input_AuthUsersPermissionsOnConflict {
       l$constraint,
       _$data.containsKey('updateColumns')
           ? l$updateColumns == null
-              ? null
-              : Object.hashAll(l$updateColumns.map((v) => v))
+                ? null
+                : Object.hashAll(l$updateColumns.map((v) => v))
           : const {},
       _$data.containsKey('where') ? l$where : const {},
     ]);
@@ -2268,24 +2307,27 @@ class _CopyWithImpl_Input_AuthUsersPermissionsOnConflict<TRes>
     Object? constraint = _undefined,
     Object? updateColumns = _undefined,
     Object? where = _undefined,
-  }) =>
-      _then(Input_AuthUsersPermissionsOnConflict._({
-        ..._instance._$data,
-        if (constraint != _undefined && constraint != null)
-          'constraint': (constraint as Enum_AuthUsersPermissionsConstraint),
-        if (updateColumns != _undefined && updateColumns != null)
-          'updateColumns':
-              (updateColumns as List<Enum_AuthUsersPermissionsUpdateColumn>),
-        if (where != _undefined)
-          'where': (where as Input_AuthUsersPermissionsBoolExp?),
-      }));
+  }) => _then(
+    Input_AuthUsersPermissionsOnConflict._({
+      ..._instance._$data,
+      if (constraint != _undefined && constraint != null)
+        'constraint': (constraint as Enum_AuthUsersPermissionsConstraint),
+      if (updateColumns != _undefined && updateColumns != null)
+        'updateColumns':
+            (updateColumns as List<Enum_AuthUsersPermissionsUpdateColumn>),
+      if (where != _undefined)
+        'where': (where as Input_AuthUsersPermissionsBoolExp?),
+    }),
+  );
 
   CopyWith_Input_AuthUsersPermissionsBoolExp<TRes> get where {
     final local$where = _instance.where;
     return local$where == null
         ? CopyWith_Input_AuthUsersPermissionsBoolExp.stub(_then(_instance))
         : CopyWith_Input_AuthUsersPermissionsBoolExp(
-            local$where, (e) => call(where: e));
+            local$where,
+            (e) => call(where: e),
+          );
   }
 }
 
@@ -2299,8 +2341,7 @@ class _CopyWithStubImpl_Input_AuthUsersPermissionsOnConflict<TRes>
     Enum_AuthUsersPermissionsConstraint? constraint,
     List<Enum_AuthUsersPermissionsUpdateColumn>? updateColumns,
     Input_AuthUsersPermissionsBoolExp? where,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Input_AuthUsersPermissionsBoolExp<TRes> get where =>
       CopyWith_Input_AuthUsersPermissionsBoolExp.stub(_res);
@@ -2311,17 +2352,17 @@ class Input_AuthUsersPermissionsOrderBy {
     Enum_OrderBy? permission,
     Enum_OrderBy? uid,
     Input_AuthUsersDataOrderBy? user,
-  }) =>
-      Input_AuthUsersPermissionsOrderBy._({
-        if (permission != null) r'permission': permission,
-        if (uid != null) r'uid': uid,
-        if (user != null) r'user': user,
-      });
+  }) => Input_AuthUsersPermissionsOrderBy._({
+    if (permission != null) r'permission': permission,
+    if (uid != null) r'uid': uid,
+    if (user != null) r'user': user,
+  });
 
   Input_AuthUsersPermissionsOrderBy._(this._$data);
 
   factory Input_AuthUsersPermissionsOrderBy.fromJson(
-      Map<String, dynamic> data) {
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('permission')) {
       final l$permission = data['permission'];
@@ -2331,15 +2372,17 @@ class Input_AuthUsersPermissionsOrderBy {
     }
     if (data.containsKey('uid')) {
       final l$uid = data['uid'];
-      result$data['uid'] =
-          l$uid == null ? null : fromJson_Enum_OrderBy((l$uid as String));
+      result$data['uid'] = l$uid == null
+          ? null
+          : fromJson_Enum_OrderBy((l$uid as String));
     }
     if (data.containsKey('user')) {
       final l$user = data['user'];
       result$data['user'] = l$user == null
           ? null
           : Input_AuthUsersDataOrderBy.fromJson(
-              (l$user as Map<String, dynamic>));
+              (l$user as Map<String, dynamic>),
+            );
     }
     return Input_AuthUsersPermissionsOrderBy._(result$data);
   }
@@ -2357,8 +2400,9 @@ class Input_AuthUsersPermissionsOrderBy {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('permission')) {
       final l$permission = permission;
-      result$data['permission'] =
-          l$permission == null ? null : toJson_Enum_OrderBy(l$permission);
+      result$data['permission'] = l$permission == null
+          ? null
+          : toJson_Enum_OrderBy(l$permission);
     }
     if (_$data.containsKey('uid')) {
       final l$uid = uid;
@@ -2372,10 +2416,7 @@ class Input_AuthUsersPermissionsOrderBy {
   }
 
   CopyWith_Input_AuthUsersPermissionsOrderBy<Input_AuthUsersPermissionsOrderBy>
-      get copyWith => CopyWith_Input_AuthUsersPermissionsOrderBy(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Input_AuthUsersPermissionsOrderBy(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -2446,10 +2487,7 @@ abstract class CopyWith_Input_AuthUsersPermissionsOrderBy<TRes> {
 
 class _CopyWithImpl_Input_AuthUsersPermissionsOrderBy<TRes>
     implements CopyWith_Input_AuthUsersPermissionsOrderBy<TRes> {
-  _CopyWithImpl_Input_AuthUsersPermissionsOrderBy(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Input_AuthUsersPermissionsOrderBy(this._instance, this._then);
 
   final Input_AuthUsersPermissionsOrderBy _instance;
 
@@ -2461,14 +2499,14 @@ class _CopyWithImpl_Input_AuthUsersPermissionsOrderBy<TRes>
     Object? permission = _undefined,
     Object? uid = _undefined,
     Object? user = _undefined,
-  }) =>
-      _then(Input_AuthUsersPermissionsOrderBy._({
-        ..._instance._$data,
-        if (permission != _undefined)
-          'permission': (permission as Enum_OrderBy?),
-        if (uid != _undefined) 'uid': (uid as Enum_OrderBy?),
-        if (user != _undefined) 'user': (user as Input_AuthUsersDataOrderBy?),
-      }));
+  }) => _then(
+    Input_AuthUsersPermissionsOrderBy._({
+      ..._instance._$data,
+      if (permission != _undefined) 'permission': (permission as Enum_OrderBy?),
+      if (uid != _undefined) 'uid': (uid as Enum_OrderBy?),
+      if (user != _undefined) 'user': (user as Input_AuthUsersDataOrderBy?),
+    }),
+  );
 
   CopyWith_Input_AuthUsersDataOrderBy<TRes> get user {
     final local$user = _instance.user;
@@ -2488,8 +2526,7 @@ class _CopyWithStubImpl_Input_AuthUsersPermissionsOrderBy<TRes>
     Enum_OrderBy? permission,
     Enum_OrderBy? uid,
     Input_AuthUsersDataOrderBy? user,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Input_AuthUsersDataOrderBy<TRes> get user =>
       CopyWith_Input_AuthUsersDataOrderBy.stub(_res);
@@ -2499,21 +2536,22 @@ class Input_AuthUsersPermissionsStreamCursorInput {
   factory Input_AuthUsersPermissionsStreamCursorInput({
     required Input_AuthUsersPermissionsStreamCursorValueInput initialValue,
     Enum_CursorOrdering? ordering,
-  }) =>
-      Input_AuthUsersPermissionsStreamCursorInput._({
-        r'initialValue': initialValue,
-        if (ordering != null) r'ordering': ordering,
-      });
+  }) => Input_AuthUsersPermissionsStreamCursorInput._({
+    r'initialValue': initialValue,
+    if (ordering != null) r'ordering': ordering,
+  });
 
   Input_AuthUsersPermissionsStreamCursorInput._(this._$data);
 
   factory Input_AuthUsersPermissionsStreamCursorInput.fromJson(
-      Map<String, dynamic> data) {
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
     final l$initialValue = data['initialValue'];
     result$data['initialValue'] =
         Input_AuthUsersPermissionsStreamCursorValueInput.fromJson(
-            (l$initialValue as Map<String, dynamic>));
+          (l$initialValue as Map<String, dynamic>),
+        );
     if (data.containsKey('ordering')) {
       final l$ordering = data['ordering'];
       result$data['ordering'] = l$ordering == null
@@ -2538,18 +2576,18 @@ class Input_AuthUsersPermissionsStreamCursorInput {
     result$data['initialValue'] = l$initialValue.toJson();
     if (_$data.containsKey('ordering')) {
       final l$ordering = ordering;
-      result$data['ordering'] =
-          l$ordering == null ? null : toJson_Enum_CursorOrdering(l$ordering);
+      result$data['ordering'] = l$ordering == null
+          ? null
+          : toJson_Enum_CursorOrdering(l$ordering);
     }
     return result$data;
   }
 
   CopyWith_Input_AuthUsersPermissionsStreamCursorInput<
-          Input_AuthUsersPermissionsStreamCursorInput>
-      get copyWith => CopyWith_Input_AuthUsersPermissionsStreamCursorInput(
-            this,
-            (i) => i,
-          );
+    Input_AuthUsersPermissionsStreamCursorInput
+  >
+  get copyWith =>
+      CopyWith_Input_AuthUsersPermissionsStreamCursorInput(this, (i) => i);
 
   @override
   bool operator ==(Object other) {

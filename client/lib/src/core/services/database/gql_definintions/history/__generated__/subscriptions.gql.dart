@@ -8,22 +8,25 @@ class Variables_Subscription_editHistory {
   factory Variables_Subscription_editHistory({
     List<Input_HistoryEditHistoryBoolExp>? where,
     int? limit,
-  }) =>
-      Variables_Subscription_editHistory._({
-        if (where != null) r'where': where,
-        if (limit != null) r'limit': limit,
-      });
+  }) => Variables_Subscription_editHistory._({
+    if (where != null) r'where': where,
+    if (limit != null) r'limit': limit,
+  });
 
   Variables_Subscription_editHistory._(this._$data);
 
   factory Variables_Subscription_editHistory.fromJson(
-      Map<String, dynamic> data) {
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = (l$where as List<dynamic>?)
-          ?.map((e) => Input_HistoryEditHistoryBoolExp.fromJson(
-              (e as Map<String, dynamic>)))
+          ?.map(
+            (e) => Input_HistoryEditHistoryBoolExp.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
           .toList();
     }
     if (data.containsKey('limit')) {
@@ -54,11 +57,9 @@ class Variables_Subscription_editHistory {
   }
 
   CopyWith_Variables_Subscription_editHistory<
-          Variables_Subscription_editHistory>
-      get copyWith => CopyWith_Variables_Subscription_editHistory(
-            this,
-            (i) => i,
-          );
+    Variables_Subscription_editHistory
+  >
+  get copyWith => CopyWith_Variables_Subscription_editHistory(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -106,8 +107,8 @@ class Variables_Subscription_editHistory {
     return Object.hashAll([
       _$data.containsKey('where')
           ? l$where == null
-              ? null
-              : Object.hashAll(l$where.map((v) => v))
+                ? null
+                : Object.hashAll(l$where.map((v) => v))
           : const {},
       _$data.containsKey('limit') ? l$limit : const {},
     ]);
@@ -123,18 +124,12 @@ abstract class CopyWith_Variables_Subscription_editHistory<TRes> {
   factory CopyWith_Variables_Subscription_editHistory.stub(TRes res) =
       _CopyWithStubImpl_Variables_Subscription_editHistory;
 
-  TRes call({
-    List<Input_HistoryEditHistoryBoolExp>? where,
-    int? limit,
-  });
+  TRes call({List<Input_HistoryEditHistoryBoolExp>? where, int? limit});
 }
 
 class _CopyWithImpl_Variables_Subscription_editHistory<TRes>
     implements CopyWith_Variables_Subscription_editHistory<TRes> {
-  _CopyWithImpl_Variables_Subscription_editHistory(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Variables_Subscription_editHistory(this._instance, this._then);
 
   final Variables_Subscription_editHistory _instance;
 
@@ -142,16 +137,14 @@ class _CopyWithImpl_Variables_Subscription_editHistory<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? where = _undefined,
-    Object? limit = _undefined,
-  }) =>
-      _then(Variables_Subscription_editHistory._({
-        ..._instance._$data,
-        if (where != _undefined)
-          'where': (where as List<Input_HistoryEditHistoryBoolExp>?),
-        if (limit != _undefined) 'limit': (limit as int?),
-      }));
+  TRes call({Object? where = _undefined, Object? limit = _undefined}) => _then(
+    Variables_Subscription_editHistory._({
+      ..._instance._$data,
+      if (where != _undefined)
+        'where': (where as List<Input_HistoryEditHistoryBoolExp>?),
+      if (limit != _undefined) 'limit': (limit as int?),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Variables_Subscription_editHistory<TRes>
@@ -160,11 +153,7 @@ class _CopyWithStubImpl_Variables_Subscription_editHistory<TRes>
 
   TRes _res;
 
-  call({
-    List<Input_HistoryEditHistoryBoolExp>? where,
-    int? limit,
-  }) =>
-      _res;
+  call({List<Input_HistoryEditHistoryBoolExp>? where, int? limit}) => _res;
 }
 
 class Subscription_editHistory {
@@ -173,10 +162,12 @@ class Subscription_editHistory {
   factory Subscription_editHistory.fromJson(Map<String, dynamic> json) {
     final l$historyEditHistory = json['historyEditHistory'];
     return Subscription_editHistory(
-        historyEditHistory: (l$historyEditHistory as List<dynamic>)
-            .map((e) =>
-                Fragment_EditHistory.fromJson((e as Map<String, dynamic>)))
-            .toList());
+      historyEditHistory: (l$historyEditHistory as List<dynamic>)
+          .map(
+            (e) => Fragment_EditHistory.fromJson((e as Map<String, dynamic>)),
+          )
+          .toList(),
+    );
   }
 
   final List<Fragment_EditHistory> historyEditHistory;
@@ -184,8 +175,9 @@ class Subscription_editHistory {
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$historyEditHistory = historyEditHistory;
-    _resultData['historyEditHistory'] =
-        l$historyEditHistory.map((e) => e.toJson()).toList();
+    _resultData['historyEditHistory'] = l$historyEditHistory
+        .map((e) => e.toJson())
+        .toList();
     return _resultData;
   }
 
@@ -223,10 +215,7 @@ class Subscription_editHistory {
 extension UtilityExtension_Subscription_editHistory
     on Subscription_editHistory {
   CopyWith_Subscription_editHistory<Subscription_editHistory> get copyWith =>
-      CopyWith_Subscription_editHistory(
-        this,
-        (i) => i,
-      );
+      CopyWith_Subscription_editHistory(this, (i) => i);
 }
 
 abstract class CopyWith_Subscription_editHistory<TRes> {
@@ -240,17 +229,16 @@ abstract class CopyWith_Subscription_editHistory<TRes> {
 
   TRes call({List<Fragment_EditHistory>? historyEditHistory});
   TRes historyEditHistory(
-      Iterable<Fragment_EditHistory> Function(
-              Iterable<CopyWith_Fragment_EditHistory<Fragment_EditHistory>>)
-          _fn);
+    Iterable<Fragment_EditHistory> Function(
+      Iterable<CopyWith_Fragment_EditHistory<Fragment_EditHistory>>,
+    )
+    _fn,
+  );
 }
 
 class _CopyWithImpl_Subscription_editHistory<TRes>
     implements CopyWith_Subscription_editHistory<TRes> {
-  _CopyWithImpl_Subscription_editHistory(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Subscription_editHistory(this._instance, this._then);
 
   final Subscription_editHistory _instance;
 
@@ -258,23 +246,27 @@ class _CopyWithImpl_Subscription_editHistory<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? historyEditHistory = _undefined}) =>
-      _then(Subscription_editHistory(
-          historyEditHistory:
-              historyEditHistory == _undefined || historyEditHistory == null
-                  ? _instance.historyEditHistory
-                  : (historyEditHistory as List<Fragment_EditHistory>)));
+  TRes call({Object? historyEditHistory = _undefined}) => _then(
+    Subscription_editHistory(
+      historyEditHistory:
+          historyEditHistory == _undefined || historyEditHistory == null
+          ? _instance.historyEditHistory
+          : (historyEditHistory as List<Fragment_EditHistory>),
+    ),
+  );
 
   TRes historyEditHistory(
-          Iterable<Fragment_EditHistory> Function(
-                  Iterable<CopyWith_Fragment_EditHistory<Fragment_EditHistory>>)
-              _fn) =>
-      call(
-          historyEditHistory: _fn(_instance.historyEditHistory
-              .map((e) => CopyWith_Fragment_EditHistory(
-                    e,
-                    (i) => i,
-                  ))).toList());
+    Iterable<Fragment_EditHistory> Function(
+      Iterable<CopyWith_Fragment_EditHistory<Fragment_EditHistory>>,
+    )
+    _fn,
+  ) => call(
+    historyEditHistory: _fn(
+      _instance.historyEditHistory.map(
+        (e) => CopyWith_Fragment_EditHistory(e, (i) => i),
+      ),
+    ).toList(),
+  );
 }
 
 class _CopyWithStubImpl_Subscription_editHistory<TRes>
@@ -288,104 +280,114 @@ class _CopyWithStubImpl_Subscription_editHistory<TRes>
   historyEditHistory(_fn) => _res;
 }
 
-const documentNodeSubscriptioneditHistory = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.subscription,
-    name: NameNode(value: 'editHistory'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'where')),
-        type: ListTypeNode(
-          type: NamedTypeNode(
-            name: NameNode(value: 'HistoryEditHistoryBoolExp'),
-            isNonNull: true,
+const documentNodeSubscriptioneditHistory = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.subscription,
+      name: NameNode(value: 'editHistory'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'where')),
+          type: ListTypeNode(
+            type: NamedTypeNode(
+              name: NameNode(value: 'HistoryEditHistoryBoolExp'),
+              isNonNull: true,
+            ),
+            isNonNull: false,
           ),
-          isNonNull: false,
+          defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'limit')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'Int'),
-          isNonNull: false,
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'limit')),
+          type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: false),
+          defaultValue: DefaultValueNode(value: IntValueNode(value: '200')),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: IntValueNode(value: '200')),
-        directives: [],
-      ),
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'historyEditHistory'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'where'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: '_and'),
-                value: VariableNode(name: NameNode(value: 'where')),
-              )
-            ]),
-          ),
-          ArgumentNode(
-            name: NameNode(value: 'limit'),
-            value: VariableNode(name: NameNode(value: 'limit')),
-          ),
-          ArgumentNode(
-            name: NameNode(value: 'orderBy'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'time'),
-                value: EnumValueNode(name: NameNode(value: 'DESC')),
-              )
-            ]),
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
+          FieldNode(
+            name: NameNode(value: 'historyEditHistory'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'where'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: '_and'),
+                      value: VariableNode(name: NameNode(value: 'where')),
+                    ),
+                  ],
+                ),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'limit'),
+                value: VariableNode(name: NameNode(value: 'limit')),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'orderBy'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'time'),
+                      value: EnumValueNode(name: NameNode(value: 'DESC')),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FragmentSpreadNode(
+                  name: NameNode(value: 'EditHistory'),
+                  directives: [],
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
           ),
         ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FragmentSpreadNode(
-            name: NameNode(value: 'EditHistory'),
-            directives: [],
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-        ]),
-      )
-    ]),
-  ),
-  fragmentDefinitionEditHistory,
-  fragmentDefinitionUser,
-  fragmentDefinitionUserNoPhoto,
-]);
+      ),
+    ),
+    fragmentDefinitionEditHistory,
+    fragmentDefinitionUser,
+    fragmentDefinitionUserNoPhoto,
+  ],
+);
 
 class Variables_Subscription_visitHistory {
   factory Variables_Subscription_visitHistory({
     List<Input_HistoryVisitHistoryBoolExp>? where,
     int? limit,
-  }) =>
-      Variables_Subscription_visitHistory._({
-        if (where != null) r'where': where,
-        if (limit != null) r'limit': limit,
-      });
+  }) => Variables_Subscription_visitHistory._({
+    if (where != null) r'where': where,
+    if (limit != null) r'limit': limit,
+  });
 
   Variables_Subscription_visitHistory._(this._$data);
 
   factory Variables_Subscription_visitHistory.fromJson(
-      Map<String, dynamic> data) {
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = (l$where as List<dynamic>?)
-          ?.map((e) => Input_HistoryVisitHistoryBoolExp.fromJson(
-              (e as Map<String, dynamic>)))
+          ?.map(
+            (e) => Input_HistoryVisitHistoryBoolExp.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
           .toList();
     }
     if (data.containsKey('limit')) {
@@ -416,11 +418,9 @@ class Variables_Subscription_visitHistory {
   }
 
   CopyWith_Variables_Subscription_visitHistory<
-          Variables_Subscription_visitHistory>
-      get copyWith => CopyWith_Variables_Subscription_visitHistory(
-            this,
-            (i) => i,
-          );
+    Variables_Subscription_visitHistory
+  >
+  get copyWith => CopyWith_Variables_Subscription_visitHistory(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -468,8 +468,8 @@ class Variables_Subscription_visitHistory {
     return Object.hashAll([
       _$data.containsKey('where')
           ? l$where == null
-              ? null
-              : Object.hashAll(l$where.map((v) => v))
+                ? null
+                : Object.hashAll(l$where.map((v) => v))
           : const {},
       _$data.containsKey('limit') ? l$limit : const {},
     ]);
@@ -485,18 +485,12 @@ abstract class CopyWith_Variables_Subscription_visitHistory<TRes> {
   factory CopyWith_Variables_Subscription_visitHistory.stub(TRes res) =
       _CopyWithStubImpl_Variables_Subscription_visitHistory;
 
-  TRes call({
-    List<Input_HistoryVisitHistoryBoolExp>? where,
-    int? limit,
-  });
+  TRes call({List<Input_HistoryVisitHistoryBoolExp>? where, int? limit});
 }
 
 class _CopyWithImpl_Variables_Subscription_visitHistory<TRes>
     implements CopyWith_Variables_Subscription_visitHistory<TRes> {
-  _CopyWithImpl_Variables_Subscription_visitHistory(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Variables_Subscription_visitHistory(this._instance, this._then);
 
   final Variables_Subscription_visitHistory _instance;
 
@@ -504,16 +498,14 @@ class _CopyWithImpl_Variables_Subscription_visitHistory<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? where = _undefined,
-    Object? limit = _undefined,
-  }) =>
-      _then(Variables_Subscription_visitHistory._({
-        ..._instance._$data,
-        if (where != _undefined)
-          'where': (where as List<Input_HistoryVisitHistoryBoolExp>?),
-        if (limit != _undefined) 'limit': (limit as int?),
-      }));
+  TRes call({Object? where = _undefined, Object? limit = _undefined}) => _then(
+    Variables_Subscription_visitHistory._({
+      ..._instance._$data,
+      if (where != _undefined)
+        'where': (where as List<Input_HistoryVisitHistoryBoolExp>?),
+      if (limit != _undefined) 'limit': (limit as int?),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Variables_Subscription_visitHistory<TRes>
@@ -522,11 +514,7 @@ class _CopyWithStubImpl_Variables_Subscription_visitHistory<TRes>
 
   TRes _res;
 
-  call({
-    List<Input_HistoryVisitHistoryBoolExp>? where,
-    int? limit,
-  }) =>
-      _res;
+  call({List<Input_HistoryVisitHistoryBoolExp>? where, int? limit}) => _res;
 }
 
 class Subscription_visitHistory {
@@ -535,10 +523,12 @@ class Subscription_visitHistory {
   factory Subscription_visitHistory.fromJson(Map<String, dynamic> json) {
     final l$historyVisitHistory = json['historyVisitHistory'];
     return Subscription_visitHistory(
-        historyVisitHistory: (l$historyVisitHistory as List<dynamic>)
-            .map((e) =>
-                Fragment_VisitHistory.fromJson((e as Map<String, dynamic>)))
-            .toList());
+      historyVisitHistory: (l$historyVisitHistory as List<dynamic>)
+          .map(
+            (e) => Fragment_VisitHistory.fromJson((e as Map<String, dynamic>)),
+          )
+          .toList(),
+    );
   }
 
   final List<Fragment_VisitHistory> historyVisitHistory;
@@ -546,16 +536,18 @@ class Subscription_visitHistory {
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$historyVisitHistory = historyVisitHistory;
-    _resultData['historyVisitHistory'] =
-        l$historyVisitHistory.map((e) => e.toJson()).toList();
+    _resultData['historyVisitHistory'] = l$historyVisitHistory
+        .map((e) => e.toJson())
+        .toList();
     return _resultData;
   }
 
   @override
   int get hashCode {
     final l$historyVisitHistory = historyVisitHistory;
-    return Object.hashAll(
-        [Object.hashAll(l$historyVisitHistory.map((v) => v))]);
+    return Object.hashAll([
+      Object.hashAll(l$historyVisitHistory.map((v) => v)),
+    ]);
   }
 
   @override
@@ -586,10 +578,7 @@ class Subscription_visitHistory {
 extension UtilityExtension_Subscription_visitHistory
     on Subscription_visitHistory {
   CopyWith_Subscription_visitHistory<Subscription_visitHistory> get copyWith =>
-      CopyWith_Subscription_visitHistory(
-        this,
-        (i) => i,
-      );
+      CopyWith_Subscription_visitHistory(this, (i) => i);
 }
 
 abstract class CopyWith_Subscription_visitHistory<TRes> {
@@ -603,17 +592,16 @@ abstract class CopyWith_Subscription_visitHistory<TRes> {
 
   TRes call({List<Fragment_VisitHistory>? historyVisitHistory});
   TRes historyVisitHistory(
-      Iterable<Fragment_VisitHistory> Function(
-              Iterable<CopyWith_Fragment_VisitHistory<Fragment_VisitHistory>>)
-          _fn);
+    Iterable<Fragment_VisitHistory> Function(
+      Iterable<CopyWith_Fragment_VisitHistory<Fragment_VisitHistory>>,
+    )
+    _fn,
+  );
 }
 
 class _CopyWithImpl_Subscription_visitHistory<TRes>
     implements CopyWith_Subscription_visitHistory<TRes> {
-  _CopyWithImpl_Subscription_visitHistory(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Subscription_visitHistory(this._instance, this._then);
 
   final Subscription_visitHistory _instance;
 
@@ -621,24 +609,27 @@ class _CopyWithImpl_Subscription_visitHistory<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? historyVisitHistory = _undefined}) =>
-      _then(Subscription_visitHistory(
-          historyVisitHistory:
-              historyVisitHistory == _undefined || historyVisitHistory == null
-                  ? _instance.historyVisitHistory
-                  : (historyVisitHistory as List<Fragment_VisitHistory>)));
+  TRes call({Object? historyVisitHistory = _undefined}) => _then(
+    Subscription_visitHistory(
+      historyVisitHistory:
+          historyVisitHistory == _undefined || historyVisitHistory == null
+          ? _instance.historyVisitHistory
+          : (historyVisitHistory as List<Fragment_VisitHistory>),
+    ),
+  );
 
   TRes historyVisitHistory(
-          Iterable<Fragment_VisitHistory> Function(
-                  Iterable<
-                      CopyWith_Fragment_VisitHistory<Fragment_VisitHistory>>)
-              _fn) =>
-      call(
-          historyVisitHistory: _fn(_instance.historyVisitHistory
-              .map((e) => CopyWith_Fragment_VisitHistory(
-                    e,
-                    (i) => i,
-                  ))).toList());
+    Iterable<Fragment_VisitHistory> Function(
+      Iterable<CopyWith_Fragment_VisitHistory<Fragment_VisitHistory>>,
+    )
+    _fn,
+  ) => call(
+    historyVisitHistory: _fn(
+      _instance.historyVisitHistory.map(
+        (e) => CopyWith_Fragment_VisitHistory(e, (i) => i),
+      ),
+    ).toList(),
+  );
 }
 
 class _CopyWithStubImpl_Subscription_visitHistory<TRes>
@@ -652,108 +643,118 @@ class _CopyWithStubImpl_Subscription_visitHistory<TRes>
   historyVisitHistory(_fn) => _res;
 }
 
-const documentNodeSubscriptionvisitHistory = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.subscription,
-    name: NameNode(value: 'visitHistory'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'where')),
-        type: ListTypeNode(
-          type: NamedTypeNode(
-            name: NameNode(value: 'HistoryVisitHistoryBoolExp'),
-            isNonNull: true,
+const documentNodeSubscriptionvisitHistory = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.subscription,
+      name: NameNode(value: 'visitHistory'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'where')),
+          type: ListTypeNode(
+            type: NamedTypeNode(
+              name: NameNode(value: 'HistoryVisitHistoryBoolExp'),
+              isNonNull: true,
+            ),
+            isNonNull: false,
           ),
-          isNonNull: false,
+          defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'limit')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'Int'),
-          isNonNull: false,
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'limit')),
+          type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: false),
+          defaultValue: DefaultValueNode(value: IntValueNode(value: '200')),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: IntValueNode(value: '200')),
-        directives: [],
-      ),
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'historyVisitHistory'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'where'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: '_and'),
-                value: VariableNode(name: NameNode(value: 'where')),
-              )
-            ]),
-          ),
-          ArgumentNode(
-            name: NameNode(value: 'limit'),
-            value: VariableNode(name: NameNode(value: 'limit')),
-          ),
-          ArgumentNode(
-            name: NameNode(value: 'orderBy'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'time'),
-                value: EnumValueNode(name: NameNode(value: 'DESC')),
-              )
-            ]),
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
+          FieldNode(
+            name: NameNode(value: 'historyVisitHistory'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'where'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: '_and'),
+                      value: VariableNode(name: NameNode(value: 'where')),
+                    ),
+                  ],
+                ),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'limit'),
+                value: VariableNode(name: NameNode(value: 'limit')),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'orderBy'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'time'),
+                      value: EnumValueNode(name: NameNode(value: 'DESC')),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FragmentSpreadNode(
+                  name: NameNode(value: 'VisitHistory'),
+                  directives: [],
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
           ),
         ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FragmentSpreadNode(
-            name: NameNode(value: 'VisitHistory'),
-            directives: [],
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-        ]),
-      )
-    ]),
-  ),
-  fragmentDefinitionVisitHistory,
-  fragmentDefinitionUser,
-  fragmentDefinitionUserNoPhoto,
-]);
+      ),
+    ),
+    fragmentDefinitionVisitHistory,
+    fragmentDefinitionUser,
+    fragmentDefinitionUserNoPhoto,
+  ],
+);
 
 class Variables_Subscription_personCallHistory {
   factory Variables_Subscription_personCallHistory({
     required UuidValue personId,
     List<Input_HistoryCallHistoryBoolExp>? where,
     int? limit,
-  }) =>
-      Variables_Subscription_personCallHistory._({
-        r'personId': personId,
-        if (where != null) r'where': where,
-        if (limit != null) r'limit': limit,
-      });
+  }) => Variables_Subscription_personCallHistory._({
+    r'personId': personId,
+    if (where != null) r'where': where,
+    if (limit != null) r'limit': limit,
+  });
 
   Variables_Subscription_personCallHistory._(this._$data);
 
   factory Variables_Subscription_personCallHistory.fromJson(
-      Map<String, dynamic> data) {
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
     final l$personId = data['personId'];
     result$data['personId'] = stringToUuid(l$personId);
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = (l$where as List<dynamic>?)
-          ?.map((e) => Input_HistoryCallHistoryBoolExp.fromJson(
-              (e as Map<String, dynamic>)))
+          ?.map(
+            (e) => Input_HistoryCallHistoryBoolExp.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
           .toList();
     }
     if (data.containsKey('limit')) {
@@ -788,11 +789,10 @@ class Variables_Subscription_personCallHistory {
   }
 
   CopyWith_Variables_Subscription_personCallHistory<
-          Variables_Subscription_personCallHistory>
-      get copyWith => CopyWith_Variables_Subscription_personCallHistory(
-            this,
-            (i) => i,
-          );
+    Variables_Subscription_personCallHistory
+  >
+  get copyWith =>
+      CopyWith_Variables_Subscription_personCallHistory(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -847,8 +847,8 @@ class Variables_Subscription_personCallHistory {
       l$personId,
       _$data.containsKey('where')
           ? l$where == null
-              ? null
-              : Object.hashAll(l$where.map((v) => v))
+                ? null
+                : Object.hashAll(l$where.map((v) => v))
           : const {},
       _$data.containsKey('limit') ? l$limit : const {},
     ]);
@@ -888,15 +888,16 @@ class _CopyWithImpl_Variables_Subscription_personCallHistory<TRes>
     Object? personId = _undefined,
     Object? where = _undefined,
     Object? limit = _undefined,
-  }) =>
-      _then(Variables_Subscription_personCallHistory._({
-        ..._instance._$data,
-        if (personId != _undefined && personId != null)
-          'personId': (personId as UuidValue),
-        if (where != _undefined)
-          'where': (where as List<Input_HistoryCallHistoryBoolExp>?),
-        if (limit != _undefined) 'limit': (limit as int?),
-      }));
+  }) => _then(
+    Variables_Subscription_personCallHistory._({
+      ..._instance._$data,
+      if (personId != _undefined && personId != null)
+        'personId': (personId as UuidValue),
+      if (where != _undefined)
+        'where': (where as List<Input_HistoryCallHistoryBoolExp>?),
+      if (limit != _undefined) 'limit': (limit as int?),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Variables_Subscription_personCallHistory<TRes>
@@ -909,8 +910,7 @@ class _CopyWithStubImpl_Variables_Subscription_personCallHistory<TRes>
     UuidValue? personId,
     List<Input_HistoryCallHistoryBoolExp>? where,
     int? limit,
-  }) =>
-      _res;
+  }) => _res;
 }
 
 class Subscription_personCallHistory {
@@ -919,10 +919,12 @@ class Subscription_personCallHistory {
   factory Subscription_personCallHistory.fromJson(Map<String, dynamic> json) {
     final l$historyCallHistory = json['historyCallHistory'];
     return Subscription_personCallHistory(
-        historyCallHistory: (l$historyCallHistory as List<dynamic>)
-            .map((e) =>
-                Fragment_CallHistory.fromJson((e as Map<String, dynamic>)))
-            .toList());
+      historyCallHistory: (l$historyCallHistory as List<dynamic>)
+          .map(
+            (e) => Fragment_CallHistory.fromJson((e as Map<String, dynamic>)),
+          )
+          .toList(),
+    );
   }
 
   final List<Fragment_CallHistory> historyCallHistory;
@@ -930,8 +932,9 @@ class Subscription_personCallHistory {
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$historyCallHistory = historyCallHistory;
-    _resultData['historyCallHistory'] =
-        l$historyCallHistory.map((e) => e.toJson()).toList();
+    _resultData['historyCallHistory'] = l$historyCallHistory
+        .map((e) => e.toJson())
+        .toList();
     return _resultData;
   }
 
@@ -969,10 +972,7 @@ class Subscription_personCallHistory {
 extension UtilityExtension_Subscription_personCallHistory
     on Subscription_personCallHistory {
   CopyWith_Subscription_personCallHistory<Subscription_personCallHistory>
-      get copyWith => CopyWith_Subscription_personCallHistory(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Subscription_personCallHistory(this, (i) => i);
 }
 
 abstract class CopyWith_Subscription_personCallHistory<TRes> {
@@ -986,17 +986,16 @@ abstract class CopyWith_Subscription_personCallHistory<TRes> {
 
   TRes call({List<Fragment_CallHistory>? historyCallHistory});
   TRes historyCallHistory(
-      Iterable<Fragment_CallHistory> Function(
-              Iterable<CopyWith_Fragment_CallHistory<Fragment_CallHistory>>)
-          _fn);
+    Iterable<Fragment_CallHistory> Function(
+      Iterable<CopyWith_Fragment_CallHistory<Fragment_CallHistory>>,
+    )
+    _fn,
+  );
 }
 
 class _CopyWithImpl_Subscription_personCallHistory<TRes>
     implements CopyWith_Subscription_personCallHistory<TRes> {
-  _CopyWithImpl_Subscription_personCallHistory(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Subscription_personCallHistory(this._instance, this._then);
 
   final Subscription_personCallHistory _instance;
 
@@ -1004,23 +1003,27 @@ class _CopyWithImpl_Subscription_personCallHistory<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? historyCallHistory = _undefined}) =>
-      _then(Subscription_personCallHistory(
-          historyCallHistory:
-              historyCallHistory == _undefined || historyCallHistory == null
-                  ? _instance.historyCallHistory
-                  : (historyCallHistory as List<Fragment_CallHistory>)));
+  TRes call({Object? historyCallHistory = _undefined}) => _then(
+    Subscription_personCallHistory(
+      historyCallHistory:
+          historyCallHistory == _undefined || historyCallHistory == null
+          ? _instance.historyCallHistory
+          : (historyCallHistory as List<Fragment_CallHistory>),
+    ),
+  );
 
   TRes historyCallHistory(
-          Iterable<Fragment_CallHistory> Function(
-                  Iterable<CopyWith_Fragment_CallHistory<Fragment_CallHistory>>)
-              _fn) =>
-      call(
-          historyCallHistory: _fn(_instance.historyCallHistory
-              .map((e) => CopyWith_Fragment_CallHistory(
-                    e,
-                    (i) => i,
-                  ))).toList());
+    Iterable<Fragment_CallHistory> Function(
+      Iterable<CopyWith_Fragment_CallHistory<Fragment_CallHistory>>,
+    )
+    _fn,
+  ) => call(
+    historyCallHistory: _fn(
+      _instance.historyCallHistory.map(
+        (e) => CopyWith_Fragment_CallHistory(e, (i) => i),
+      ),
+    ).toList(),
+  );
 }
 
 class _CopyWithStubImpl_Subscription_personCallHistory<TRes>
@@ -1034,136 +1037,154 @@ class _CopyWithStubImpl_Subscription_personCallHistory<TRes>
   historyCallHistory(_fn) => _res;
 }
 
-const documentNodeSubscriptionpersonCallHistory = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.subscription,
-    name: NameNode(value: 'personCallHistory'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'personId')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'uuid'),
-          isNonNull: true,
+const documentNodeSubscriptionpersonCallHistory = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.subscription,
+      name: NameNode(value: 'personCallHistory'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'personId')),
+          type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'where')),
-        type: ListTypeNode(
-          type: NamedTypeNode(
-            name: NameNode(value: 'HistoryCallHistoryBoolExp'),
-            isNonNull: true,
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'where')),
+          type: ListTypeNode(
+            type: NamedTypeNode(
+              name: NameNode(value: 'HistoryCallHistoryBoolExp'),
+              isNonNull: true,
+            ),
+            isNonNull: false,
           ),
-          isNonNull: false,
+          defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'limit')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'Int'),
-          isNonNull: false,
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'limit')),
+          type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: false),
+          defaultValue: DefaultValueNode(value: IntValueNode(value: '200')),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: IntValueNode(value: '200')),
-        directives: [],
-      ),
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'historyCallHistory'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'where'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: '_and'),
-                value: ListValueNode(values: [
-                  ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                      name: NameNode(value: 'personId'),
-                      value: ObjectValueNode(fields: [
-                        ObjectFieldNode(
-                          name: NameNode(value: '_eq'),
-                          value:
-                              VariableNode(name: NameNode(value: 'personId')),
-                        )
-                      ]),
-                    )
-                  ]),
-                  ObjectValueNode(fields: [
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
+          FieldNode(
+            name: NameNode(value: 'historyCallHistory'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'where'),
+                value: ObjectValueNode(
+                  fields: [
                     ObjectFieldNode(
                       name: NameNode(value: '_and'),
-                      value: VariableNode(name: NameNode(value: 'where')),
-                    )
-                  ]),
-                ]),
-              )
-            ]),
-          ),
-          ArgumentNode(
-            name: NameNode(value: 'limit'),
-            value: VariableNode(name: NameNode(value: 'limit')),
-          ),
-          ArgumentNode(
-            name: NameNode(value: 'orderBy'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'time'),
-                value: EnumValueNode(name: NameNode(value: 'DESC')),
-              )
-            ]),
+                      value: ListValueNode(
+                        values: [
+                          ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                name: NameNode(value: 'personId'),
+                                value: ObjectValueNode(
+                                  fields: [
+                                    ObjectFieldNode(
+                                      name: NameNode(value: '_eq'),
+                                      value: VariableNode(
+                                        name: NameNode(value: 'personId'),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                          ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                name: NameNode(value: '_and'),
+                                value: VariableNode(
+                                  name: NameNode(value: 'where'),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'limit'),
+                value: VariableNode(name: NameNode(value: 'limit')),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'orderBy'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'time'),
+                      value: EnumValueNode(name: NameNode(value: 'DESC')),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FragmentSpreadNode(
+                  name: NameNode(value: 'CallHistory'),
+                  directives: [],
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
           ),
         ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FragmentSpreadNode(
-            name: NameNode(value: 'CallHistory'),
-            directives: [],
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-        ]),
-      )
-    ]),
-  ),
-  fragmentDefinitionCallHistory,
-  fragmentDefinitionUser,
-  fragmentDefinitionUserNoPhoto,
-]);
+      ),
+    ),
+    fragmentDefinitionCallHistory,
+    fragmentDefinitionUser,
+    fragmentDefinitionUserNoPhoto,
+  ],
+);
 
 class Variables_Subscription_personVisitHistory {
   factory Variables_Subscription_personVisitHistory({
     required UuidValue personId,
     List<Input_HistoryVisitHistoryBoolExp>? where,
     int? limit,
-  }) =>
-      Variables_Subscription_personVisitHistory._({
-        r'personId': personId,
-        if (where != null) r'where': where,
-        if (limit != null) r'limit': limit,
-      });
+  }) => Variables_Subscription_personVisitHistory._({
+    r'personId': personId,
+    if (where != null) r'where': where,
+    if (limit != null) r'limit': limit,
+  });
 
   Variables_Subscription_personVisitHistory._(this._$data);
 
   factory Variables_Subscription_personVisitHistory.fromJson(
-      Map<String, dynamic> data) {
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
     final l$personId = data['personId'];
     result$data['personId'] = stringToUuid(l$personId);
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = (l$where as List<dynamic>?)
-          ?.map((e) => Input_HistoryVisitHistoryBoolExp.fromJson(
-              (e as Map<String, dynamic>)))
+          ?.map(
+            (e) => Input_HistoryVisitHistoryBoolExp.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
           .toList();
     }
     if (data.containsKey('limit')) {
@@ -1198,11 +1219,10 @@ class Variables_Subscription_personVisitHistory {
   }
 
   CopyWith_Variables_Subscription_personVisitHistory<
-          Variables_Subscription_personVisitHistory>
-      get copyWith => CopyWith_Variables_Subscription_personVisitHistory(
-            this,
-            (i) => i,
-          );
+    Variables_Subscription_personVisitHistory
+  >
+  get copyWith =>
+      CopyWith_Variables_Subscription_personVisitHistory(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -1257,8 +1277,8 @@ class Variables_Subscription_personVisitHistory {
       l$personId,
       _$data.containsKey('where')
           ? l$where == null
-              ? null
-              : Object.hashAll(l$where.map((v) => v))
+                ? null
+                : Object.hashAll(l$where.map((v) => v))
           : const {},
       _$data.containsKey('limit') ? l$limit : const {},
     ]);
@@ -1298,15 +1318,16 @@ class _CopyWithImpl_Variables_Subscription_personVisitHistory<TRes>
     Object? personId = _undefined,
     Object? where = _undefined,
     Object? limit = _undefined,
-  }) =>
-      _then(Variables_Subscription_personVisitHistory._({
-        ..._instance._$data,
-        if (personId != _undefined && personId != null)
-          'personId': (personId as UuidValue),
-        if (where != _undefined)
-          'where': (where as List<Input_HistoryVisitHistoryBoolExp>?),
-        if (limit != _undefined) 'limit': (limit as int?),
-      }));
+  }) => _then(
+    Variables_Subscription_personVisitHistory._({
+      ..._instance._$data,
+      if (personId != _undefined && personId != null)
+        'personId': (personId as UuidValue),
+      if (where != _undefined)
+        'where': (where as List<Input_HistoryVisitHistoryBoolExp>?),
+      if (limit != _undefined) 'limit': (limit as int?),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Variables_Subscription_personVisitHistory<TRes>
@@ -1319,8 +1340,7 @@ class _CopyWithStubImpl_Variables_Subscription_personVisitHistory<TRes>
     UuidValue? personId,
     List<Input_HistoryVisitHistoryBoolExp>? where,
     int? limit,
-  }) =>
-      _res;
+  }) => _res;
 }
 
 class Subscription_personVisitHistory {
@@ -1329,10 +1349,12 @@ class Subscription_personVisitHistory {
   factory Subscription_personVisitHistory.fromJson(Map<String, dynamic> json) {
     final l$historyVisitHistory = json['historyVisitHistory'];
     return Subscription_personVisitHistory(
-        historyVisitHistory: (l$historyVisitHistory as List<dynamic>)
-            .map((e) =>
-                Fragment_VisitHistory.fromJson((e as Map<String, dynamic>)))
-            .toList());
+      historyVisitHistory: (l$historyVisitHistory as List<dynamic>)
+          .map(
+            (e) => Fragment_VisitHistory.fromJson((e as Map<String, dynamic>)),
+          )
+          .toList(),
+    );
   }
 
   final List<Fragment_VisitHistory> historyVisitHistory;
@@ -1340,16 +1362,18 @@ class Subscription_personVisitHistory {
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$historyVisitHistory = historyVisitHistory;
-    _resultData['historyVisitHistory'] =
-        l$historyVisitHistory.map((e) => e.toJson()).toList();
+    _resultData['historyVisitHistory'] = l$historyVisitHistory
+        .map((e) => e.toJson())
+        .toList();
     return _resultData;
   }
 
   @override
   int get hashCode {
     final l$historyVisitHistory = historyVisitHistory;
-    return Object.hashAll(
-        [Object.hashAll(l$historyVisitHistory.map((v) => v))]);
+    return Object.hashAll([
+      Object.hashAll(l$historyVisitHistory.map((v) => v)),
+    ]);
   }
 
   @override
@@ -1380,10 +1404,7 @@ class Subscription_personVisitHistory {
 extension UtilityExtension_Subscription_personVisitHistory
     on Subscription_personVisitHistory {
   CopyWith_Subscription_personVisitHistory<Subscription_personVisitHistory>
-      get copyWith => CopyWith_Subscription_personVisitHistory(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Subscription_personVisitHistory(this, (i) => i);
 }
 
 abstract class CopyWith_Subscription_personVisitHistory<TRes> {
@@ -1397,17 +1418,16 @@ abstract class CopyWith_Subscription_personVisitHistory<TRes> {
 
   TRes call({List<Fragment_VisitHistory>? historyVisitHistory});
   TRes historyVisitHistory(
-      Iterable<Fragment_VisitHistory> Function(
-              Iterable<CopyWith_Fragment_VisitHistory<Fragment_VisitHistory>>)
-          _fn);
+    Iterable<Fragment_VisitHistory> Function(
+      Iterable<CopyWith_Fragment_VisitHistory<Fragment_VisitHistory>>,
+    )
+    _fn,
+  );
 }
 
 class _CopyWithImpl_Subscription_personVisitHistory<TRes>
     implements CopyWith_Subscription_personVisitHistory<TRes> {
-  _CopyWithImpl_Subscription_personVisitHistory(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Subscription_personVisitHistory(this._instance, this._then);
 
   final Subscription_personVisitHistory _instance;
 
@@ -1415,24 +1435,27 @@ class _CopyWithImpl_Subscription_personVisitHistory<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? historyVisitHistory = _undefined}) =>
-      _then(Subscription_personVisitHistory(
-          historyVisitHistory:
-              historyVisitHistory == _undefined || historyVisitHistory == null
-                  ? _instance.historyVisitHistory
-                  : (historyVisitHistory as List<Fragment_VisitHistory>)));
+  TRes call({Object? historyVisitHistory = _undefined}) => _then(
+    Subscription_personVisitHistory(
+      historyVisitHistory:
+          historyVisitHistory == _undefined || historyVisitHistory == null
+          ? _instance.historyVisitHistory
+          : (historyVisitHistory as List<Fragment_VisitHistory>),
+    ),
+  );
 
   TRes historyVisitHistory(
-          Iterable<Fragment_VisitHistory> Function(
-                  Iterable<
-                      CopyWith_Fragment_VisitHistory<Fragment_VisitHistory>>)
-              _fn) =>
-      call(
-          historyVisitHistory: _fn(_instance.historyVisitHistory
-              .map((e) => CopyWith_Fragment_VisitHistory(
-                    e,
-                    (i) => i,
-                  ))).toList());
+    Iterable<Fragment_VisitHistory> Function(
+      Iterable<CopyWith_Fragment_VisitHistory<Fragment_VisitHistory>>,
+    )
+    _fn,
+  ) => call(
+    historyVisitHistory: _fn(
+      _instance.historyVisitHistory.map(
+        (e) => CopyWith_Fragment_VisitHistory(e, (i) => i),
+      ),
+    ).toList(),
+  );
 }
 
 class _CopyWithStubImpl_Subscription_personVisitHistory<TRes>
@@ -1446,150 +1469,172 @@ class _CopyWithStubImpl_Subscription_personVisitHistory<TRes>
   historyVisitHistory(_fn) => _res;
 }
 
-const documentNodeSubscriptionpersonVisitHistory = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.subscription,
-    name: NameNode(value: 'personVisitHistory'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'personId')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'uuid'),
-          isNonNull: true,
+const documentNodeSubscriptionpersonVisitHistory = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.subscription,
+      name: NameNode(value: 'personVisitHistory'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'personId')),
+          type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'where')),
-        type: ListTypeNode(
-          type: NamedTypeNode(
-            name: NameNode(value: 'HistoryVisitHistoryBoolExp'),
-            isNonNull: true,
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'where')),
+          type: ListTypeNode(
+            type: NamedTypeNode(
+              name: NameNode(value: 'HistoryVisitHistoryBoolExp'),
+              isNonNull: true,
+            ),
+            isNonNull: false,
           ),
-          isNonNull: false,
+          defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'limit')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'Int'),
-          isNonNull: false,
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'limit')),
+          type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: false),
+          defaultValue: DefaultValueNode(value: IntValueNode(value: '200')),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: IntValueNode(value: '200')),
-        directives: [],
-      ),
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'historyVisitHistory'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'where'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: '_and'),
-                value: ListValueNode(values: [
-                  ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                      name: NameNode(value: 'table'),
-                      value: ObjectValueNode(fields: [
-                        ObjectFieldNode(
-                          name: NameNode(value: '_eq'),
-                          value: StringValueNode(
-                            value: 'persons',
-                            isBlock: false,
-                          ),
-                        )
-                      ]),
-                    )
-                  ]),
-                  ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                      name: NameNode(value: 'recordId'),
-                      value: ObjectValueNode(fields: [
-                        ObjectFieldNode(
-                          name: NameNode(value: '_eq'),
-                          value:
-                              VariableNode(name: NameNode(value: 'personId')),
-                        )
-                      ]),
-                    )
-                  ]),
-                  ObjectValueNode(fields: [
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
+          FieldNode(
+            name: NameNode(value: 'historyVisitHistory'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'where'),
+                value: ObjectValueNode(
+                  fields: [
                     ObjectFieldNode(
                       name: NameNode(value: '_and'),
-                      value: VariableNode(name: NameNode(value: 'where')),
-                    )
-                  ]),
-                ]),
-              )
-            ]),
-          ),
-          ArgumentNode(
-            name: NameNode(value: 'limit'),
-            value: VariableNode(name: NameNode(value: 'limit')),
-          ),
-          ArgumentNode(
-            name: NameNode(value: 'orderBy'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'time'),
-                value: EnumValueNode(name: NameNode(value: 'DESC')),
-              )
-            ]),
+                      value: ListValueNode(
+                        values: [
+                          ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                name: NameNode(value: 'table'),
+                                value: ObjectValueNode(
+                                  fields: [
+                                    ObjectFieldNode(
+                                      name: NameNode(value: '_eq'),
+                                      value: StringValueNode(
+                                        value: 'persons',
+                                        isBlock: false,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                          ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                name: NameNode(value: 'recordId'),
+                                value: ObjectValueNode(
+                                  fields: [
+                                    ObjectFieldNode(
+                                      name: NameNode(value: '_eq'),
+                                      value: VariableNode(
+                                        name: NameNode(value: 'personId'),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                          ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                name: NameNode(value: '_and'),
+                                value: VariableNode(
+                                  name: NameNode(value: 'where'),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'limit'),
+                value: VariableNode(name: NameNode(value: 'limit')),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'orderBy'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'time'),
+                      value: EnumValueNode(name: NameNode(value: 'DESC')),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FragmentSpreadNode(
+                  name: NameNode(value: 'VisitHistory'),
+                  directives: [],
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
           ),
         ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FragmentSpreadNode(
-            name: NameNode(value: 'VisitHistory'),
-            directives: [],
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-        ]),
-      )
-    ]),
-  ),
-  fragmentDefinitionVisitHistory,
-  fragmentDefinitionUser,
-  fragmentDefinitionUserNoPhoto,
-]);
+      ),
+    ),
+    fragmentDefinitionVisitHistory,
+    fragmentDefinitionUser,
+    fragmentDefinitionUserNoPhoto,
+  ],
+);
 
 class Variables_Subscription_personConfessionHistory {
   factory Variables_Subscription_personConfessionHistory({
     required UuidValue personId,
     List<Input_HistoryConfessionHistoryBoolExp>? where,
     int? limit,
-  }) =>
-      Variables_Subscription_personConfessionHistory._({
-        r'personId': personId,
-        if (where != null) r'where': where,
-        if (limit != null) r'limit': limit,
-      });
+  }) => Variables_Subscription_personConfessionHistory._({
+    r'personId': personId,
+    if (where != null) r'where': where,
+    if (limit != null) r'limit': limit,
+  });
 
   Variables_Subscription_personConfessionHistory._(this._$data);
 
   factory Variables_Subscription_personConfessionHistory.fromJson(
-      Map<String, dynamic> data) {
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
     final l$personId = data['personId'];
     result$data['personId'] = stringToUuid(l$personId);
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = (l$where as List<dynamic>?)
-          ?.map((e) => Input_HistoryConfessionHistoryBoolExp.fromJson(
-              (e as Map<String, dynamic>)))
+          ?.map(
+            (e) => Input_HistoryConfessionHistoryBoolExp.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
           .toList();
     }
     if (data.containsKey('limit')) {
@@ -1624,11 +1669,10 @@ class Variables_Subscription_personConfessionHistory {
   }
 
   CopyWith_Variables_Subscription_personConfessionHistory<
-          Variables_Subscription_personConfessionHistory>
-      get copyWith => CopyWith_Variables_Subscription_personConfessionHistory(
-            this,
-            (i) => i,
-          );
+    Variables_Subscription_personConfessionHistory
+  >
+  get copyWith =>
+      CopyWith_Variables_Subscription_personConfessionHistory(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -1683,8 +1727,8 @@ class Variables_Subscription_personConfessionHistory {
       l$personId,
       _$data.containsKey('where')
           ? l$where == null
-              ? null
-              : Object.hashAll(l$where.map((v) => v))
+                ? null
+                : Object.hashAll(l$where.map((v) => v))
           : const {},
       _$data.containsKey('limit') ? l$limit : const {},
     ]);
@@ -1698,8 +1742,8 @@ abstract class CopyWith_Variables_Subscription_personConfessionHistory<TRes> {
   ) = _CopyWithImpl_Variables_Subscription_personConfessionHistory;
 
   factory CopyWith_Variables_Subscription_personConfessionHistory.stub(
-          TRes res) =
-      _CopyWithStubImpl_Variables_Subscription_personConfessionHistory;
+    TRes res,
+  ) = _CopyWithStubImpl_Variables_Subscription_personConfessionHistory;
 
   TRes call({
     UuidValue? personId,
@@ -1725,15 +1769,16 @@ class _CopyWithImpl_Variables_Subscription_personConfessionHistory<TRes>
     Object? personId = _undefined,
     Object? where = _undefined,
     Object? limit = _undefined,
-  }) =>
-      _then(Variables_Subscription_personConfessionHistory._({
-        ..._instance._$data,
-        if (personId != _undefined && personId != null)
-          'personId': (personId as UuidValue),
-        if (where != _undefined)
-          'where': (where as List<Input_HistoryConfessionHistoryBoolExp>?),
-        if (limit != _undefined) 'limit': (limit as int?),
-      }));
+  }) => _then(
+    Variables_Subscription_personConfessionHistory._({
+      ..._instance._$data,
+      if (personId != _undefined && personId != null)
+        'personId': (personId as UuidValue),
+      if (where != _undefined)
+        'where': (where as List<Input_HistoryConfessionHistoryBoolExp>?),
+      if (limit != _undefined) 'limit': (limit as int?),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Variables_Subscription_personConfessionHistory<TRes>
@@ -1746,22 +1791,27 @@ class _CopyWithStubImpl_Variables_Subscription_personConfessionHistory<TRes>
     UuidValue? personId,
     List<Input_HistoryConfessionHistoryBoolExp>? where,
     int? limit,
-  }) =>
-      _res;
+  }) => _res;
 }
 
 class Subscription_personConfessionHistory {
-  Subscription_personConfessionHistory(
-      {required this.historyConfessionHistory});
+  Subscription_personConfessionHistory({
+    required this.historyConfessionHistory,
+  });
 
   factory Subscription_personConfessionHistory.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$historyConfessionHistory = json['historyConfessionHistory'];
     return Subscription_personConfessionHistory(
-        historyConfessionHistory: (l$historyConfessionHistory as List<dynamic>)
-            .map((e) => Fragment_ConfessionHistory.fromJson(
-                (e as Map<String, dynamic>)))
-            .toList());
+      historyConfessionHistory: (l$historyConfessionHistory as List<dynamic>)
+          .map(
+            (e) => Fragment_ConfessionHistory.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
+          .toList(),
+    );
   }
 
   final List<Fragment_ConfessionHistory> historyConfessionHistory;
@@ -1769,16 +1819,18 @@ class Subscription_personConfessionHistory {
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$historyConfessionHistory = historyConfessionHistory;
-    _resultData['historyConfessionHistory'] =
-        l$historyConfessionHistory.map((e) => e.toJson()).toList();
+    _resultData['historyConfessionHistory'] = l$historyConfessionHistory
+        .map((e) => e.toJson())
+        .toList();
     return _resultData;
   }
 
   @override
   int get hashCode {
     final l$historyConfessionHistory = historyConfessionHistory;
-    return Object.hashAll(
-        [Object.hashAll(l$historyConfessionHistory.map((v) => v))]);
+    return Object.hashAll([
+      Object.hashAll(l$historyConfessionHistory.map((v) => v)),
+    ]);
   }
 
   @override
@@ -1812,11 +1864,9 @@ class Subscription_personConfessionHistory {
 extension UtilityExtension_Subscription_personConfessionHistory
     on Subscription_personConfessionHistory {
   CopyWith_Subscription_personConfessionHistory<
-          Subscription_personConfessionHistory>
-      get copyWith => CopyWith_Subscription_personConfessionHistory(
-            this,
-            (i) => i,
-          );
+    Subscription_personConfessionHistory
+  >
+  get copyWith => CopyWith_Subscription_personConfessionHistory(this, (i) => i);
 }
 
 abstract class CopyWith_Subscription_personConfessionHistory<TRes> {
@@ -1830,11 +1880,11 @@ abstract class CopyWith_Subscription_personConfessionHistory<TRes> {
 
   TRes call({List<Fragment_ConfessionHistory>? historyConfessionHistory});
   TRes historyConfessionHistory(
-      Iterable<Fragment_ConfessionHistory> Function(
-              Iterable<
-                  CopyWith_Fragment_ConfessionHistory<
-                      Fragment_ConfessionHistory>>)
-          _fn);
+    Iterable<Fragment_ConfessionHistory> Function(
+      Iterable<CopyWith_Fragment_ConfessionHistory<Fragment_ConfessionHistory>>,
+    )
+    _fn,
+  );
 }
 
 class _CopyWithImpl_Subscription_personConfessionHistory<TRes>
@@ -1850,26 +1900,28 @@ class _CopyWithImpl_Subscription_personConfessionHistory<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? historyConfessionHistory = _undefined}) =>
-      _then(Subscription_personConfessionHistory(
-          historyConfessionHistory: historyConfessionHistory == _undefined ||
-                  historyConfessionHistory == null
-              ? _instance.historyConfessionHistory
-              : (historyConfessionHistory
-                  as List<Fragment_ConfessionHistory>)));
+  TRes call({Object? historyConfessionHistory = _undefined}) => _then(
+    Subscription_personConfessionHistory(
+      historyConfessionHistory:
+          historyConfessionHistory == _undefined ||
+              historyConfessionHistory == null
+          ? _instance.historyConfessionHistory
+          : (historyConfessionHistory as List<Fragment_ConfessionHistory>),
+    ),
+  );
 
   TRes historyConfessionHistory(
-          Iterable<Fragment_ConfessionHistory> Function(
-                  Iterable<
-                      CopyWith_Fragment_ConfessionHistory<
-                          Fragment_ConfessionHistory>>)
-              _fn) =>
-      call(
-          historyConfessionHistory: _fn(_instance.historyConfessionHistory
-              .map((e) => CopyWith_Fragment_ConfessionHistory(
-                    e,
-                    (i) => i,
-                  ))).toList());
+    Iterable<Fragment_ConfessionHistory> Function(
+      Iterable<CopyWith_Fragment_ConfessionHistory<Fragment_ConfessionHistory>>,
+    )
+    _fn,
+  ) => call(
+    historyConfessionHistory: _fn(
+      _instance.historyConfessionHistory.map(
+        (e) => CopyWith_Fragment_ConfessionHistory(e, (i) => i),
+      ),
+    ).toList(),
+  );
 }
 
 class _CopyWithStubImpl_Subscription_personConfessionHistory<TRes>
@@ -1883,137 +1935,154 @@ class _CopyWithStubImpl_Subscription_personConfessionHistory<TRes>
   historyConfessionHistory(_fn) => _res;
 }
 
-const documentNodeSubscriptionpersonConfessionHistory =
-    DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.subscription,
-    name: NameNode(value: 'personConfessionHistory'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'personId')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'uuid'),
-          isNonNull: true,
+const documentNodeSubscriptionpersonConfessionHistory = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.subscription,
+      name: NameNode(value: 'personConfessionHistory'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'personId')),
+          type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'where')),
-        type: ListTypeNode(
-          type: NamedTypeNode(
-            name: NameNode(value: 'HistoryConfessionHistoryBoolExp'),
-            isNonNull: true,
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'where')),
+          type: ListTypeNode(
+            type: NamedTypeNode(
+              name: NameNode(value: 'HistoryConfessionHistoryBoolExp'),
+              isNonNull: true,
+            ),
+            isNonNull: false,
           ),
-          isNonNull: false,
+          defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'limit')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'Int'),
-          isNonNull: false,
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'limit')),
+          type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: false),
+          defaultValue: DefaultValueNode(value: IntValueNode(value: '200')),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: IntValueNode(value: '200')),
-        directives: [],
-      ),
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'historyConfessionHistory'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'where'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: '_and'),
-                value: ListValueNode(values: [
-                  ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                      name: NameNode(value: 'personId'),
-                      value: ObjectValueNode(fields: [
-                        ObjectFieldNode(
-                          name: NameNode(value: '_eq'),
-                          value:
-                              VariableNode(name: NameNode(value: 'personId')),
-                        )
-                      ]),
-                    )
-                  ]),
-                  ObjectValueNode(fields: [
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
+          FieldNode(
+            name: NameNode(value: 'historyConfessionHistory'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'where'),
+                value: ObjectValueNode(
+                  fields: [
                     ObjectFieldNode(
                       name: NameNode(value: '_and'),
-                      value: VariableNode(name: NameNode(value: 'where')),
-                    )
-                  ]),
-                ]),
-              )
-            ]),
-          ),
-          ArgumentNode(
-            name: NameNode(value: 'limit'),
-            value: VariableNode(name: NameNode(value: 'limit')),
-          ),
-          ArgumentNode(
-            name: NameNode(value: 'orderBy'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'time'),
-                value: EnumValueNode(name: NameNode(value: 'DESC')),
-              )
-            ]),
+                      value: ListValueNode(
+                        values: [
+                          ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                name: NameNode(value: 'personId'),
+                                value: ObjectValueNode(
+                                  fields: [
+                                    ObjectFieldNode(
+                                      name: NameNode(value: '_eq'),
+                                      value: VariableNode(
+                                        name: NameNode(value: 'personId'),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                          ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                name: NameNode(value: '_and'),
+                                value: VariableNode(
+                                  name: NameNode(value: 'where'),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'limit'),
+                value: VariableNode(name: NameNode(value: 'limit')),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'orderBy'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'time'),
+                      value: EnumValueNode(name: NameNode(value: 'DESC')),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FragmentSpreadNode(
+                  name: NameNode(value: 'ConfessionHistory'),
+                  directives: [],
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
           ),
         ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FragmentSpreadNode(
-            name: NameNode(value: 'ConfessionHistory'),
-            directives: [],
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-        ]),
-      )
-    ]),
-  ),
-  fragmentDefinitionConfessionHistory,
-  fragmentDefinitionUser,
-  fragmentDefinitionUserNoPhoto,
-]);
+      ),
+    ),
+    fragmentDefinitionConfessionHistory,
+    fragmentDefinitionUser,
+    fragmentDefinitionUserNoPhoto,
+  ],
+);
 
 class Variables_Subscription_personKodasHistory {
   factory Variables_Subscription_personKodasHistory({
     required UuidValue personId,
     List<Input_HistoryKodasHistoryBoolExp>? where,
     int? limit,
-  }) =>
-      Variables_Subscription_personKodasHistory._({
-        r'personId': personId,
-        if (where != null) r'where': where,
-        if (limit != null) r'limit': limit,
-      });
+  }) => Variables_Subscription_personKodasHistory._({
+    r'personId': personId,
+    if (where != null) r'where': where,
+    if (limit != null) r'limit': limit,
+  });
 
   Variables_Subscription_personKodasHistory._(this._$data);
 
   factory Variables_Subscription_personKodasHistory.fromJson(
-      Map<String, dynamic> data) {
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
     final l$personId = data['personId'];
     result$data['personId'] = stringToUuid(l$personId);
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = (l$where as List<dynamic>?)
-          ?.map((e) => Input_HistoryKodasHistoryBoolExp.fromJson(
-              (e as Map<String, dynamic>)))
+          ?.map(
+            (e) => Input_HistoryKodasHistoryBoolExp.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
           .toList();
     }
     if (data.containsKey('limit')) {
@@ -2048,11 +2117,10 @@ class Variables_Subscription_personKodasHistory {
   }
 
   CopyWith_Variables_Subscription_personKodasHistory<
-          Variables_Subscription_personKodasHistory>
-      get copyWith => CopyWith_Variables_Subscription_personKodasHistory(
-            this,
-            (i) => i,
-          );
+    Variables_Subscription_personKodasHistory
+  >
+  get copyWith =>
+      CopyWith_Variables_Subscription_personKodasHistory(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -2107,8 +2175,8 @@ class Variables_Subscription_personKodasHistory {
       l$personId,
       _$data.containsKey('where')
           ? l$where == null
-              ? null
-              : Object.hashAll(l$where.map((v) => v))
+                ? null
+                : Object.hashAll(l$where.map((v) => v))
           : const {},
       _$data.containsKey('limit') ? l$limit : const {},
     ]);
@@ -2148,15 +2216,16 @@ class _CopyWithImpl_Variables_Subscription_personKodasHistory<TRes>
     Object? personId = _undefined,
     Object? where = _undefined,
     Object? limit = _undefined,
-  }) =>
-      _then(Variables_Subscription_personKodasHistory._({
-        ..._instance._$data,
-        if (personId != _undefined && personId != null)
-          'personId': (personId as UuidValue),
-        if (where != _undefined)
-          'where': (where as List<Input_HistoryKodasHistoryBoolExp>?),
-        if (limit != _undefined) 'limit': (limit as int?),
-      }));
+  }) => _then(
+    Variables_Subscription_personKodasHistory._({
+      ..._instance._$data,
+      if (personId != _undefined && personId != null)
+        'personId': (personId as UuidValue),
+      if (where != _undefined)
+        'where': (where as List<Input_HistoryKodasHistoryBoolExp>?),
+      if (limit != _undefined) 'limit': (limit as int?),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Variables_Subscription_personKodasHistory<TRes>
@@ -2169,8 +2238,7 @@ class _CopyWithStubImpl_Variables_Subscription_personKodasHistory<TRes>
     UuidValue? personId,
     List<Input_HistoryKodasHistoryBoolExp>? where,
     int? limit,
-  }) =>
-      _res;
+  }) => _res;
 }
 
 class Subscription_personKodasHistory {
@@ -2179,10 +2247,12 @@ class Subscription_personKodasHistory {
   factory Subscription_personKodasHistory.fromJson(Map<String, dynamic> json) {
     final l$historyKodasHistory = json['historyKodasHistory'];
     return Subscription_personKodasHistory(
-        historyKodasHistory: (l$historyKodasHistory as List<dynamic>)
-            .map((e) =>
-                Fragment_KodasHistory.fromJson((e as Map<String, dynamic>)))
-            .toList());
+      historyKodasHistory: (l$historyKodasHistory as List<dynamic>)
+          .map(
+            (e) => Fragment_KodasHistory.fromJson((e as Map<String, dynamic>)),
+          )
+          .toList(),
+    );
   }
 
   final List<Fragment_KodasHistory> historyKodasHistory;
@@ -2190,16 +2260,18 @@ class Subscription_personKodasHistory {
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$historyKodasHistory = historyKodasHistory;
-    _resultData['historyKodasHistory'] =
-        l$historyKodasHistory.map((e) => e.toJson()).toList();
+    _resultData['historyKodasHistory'] = l$historyKodasHistory
+        .map((e) => e.toJson())
+        .toList();
     return _resultData;
   }
 
   @override
   int get hashCode {
     final l$historyKodasHistory = historyKodasHistory;
-    return Object.hashAll(
-        [Object.hashAll(l$historyKodasHistory.map((v) => v))]);
+    return Object.hashAll([
+      Object.hashAll(l$historyKodasHistory.map((v) => v)),
+    ]);
   }
 
   @override
@@ -2230,10 +2302,7 @@ class Subscription_personKodasHistory {
 extension UtilityExtension_Subscription_personKodasHistory
     on Subscription_personKodasHistory {
   CopyWith_Subscription_personKodasHistory<Subscription_personKodasHistory>
-      get copyWith => CopyWith_Subscription_personKodasHistory(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Subscription_personKodasHistory(this, (i) => i);
 }
 
 abstract class CopyWith_Subscription_personKodasHistory<TRes> {
@@ -2247,17 +2316,16 @@ abstract class CopyWith_Subscription_personKodasHistory<TRes> {
 
   TRes call({List<Fragment_KodasHistory>? historyKodasHistory});
   TRes historyKodasHistory(
-      Iterable<Fragment_KodasHistory> Function(
-              Iterable<CopyWith_Fragment_KodasHistory<Fragment_KodasHistory>>)
-          _fn);
+    Iterable<Fragment_KodasHistory> Function(
+      Iterable<CopyWith_Fragment_KodasHistory<Fragment_KodasHistory>>,
+    )
+    _fn,
+  );
 }
 
 class _CopyWithImpl_Subscription_personKodasHistory<TRes>
     implements CopyWith_Subscription_personKodasHistory<TRes> {
-  _CopyWithImpl_Subscription_personKodasHistory(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Subscription_personKodasHistory(this._instance, this._then);
 
   final Subscription_personKodasHistory _instance;
 
@@ -2265,24 +2333,27 @@ class _CopyWithImpl_Subscription_personKodasHistory<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? historyKodasHistory = _undefined}) =>
-      _then(Subscription_personKodasHistory(
-          historyKodasHistory:
-              historyKodasHistory == _undefined || historyKodasHistory == null
-                  ? _instance.historyKodasHistory
-                  : (historyKodasHistory as List<Fragment_KodasHistory>)));
+  TRes call({Object? historyKodasHistory = _undefined}) => _then(
+    Subscription_personKodasHistory(
+      historyKodasHistory:
+          historyKodasHistory == _undefined || historyKodasHistory == null
+          ? _instance.historyKodasHistory
+          : (historyKodasHistory as List<Fragment_KodasHistory>),
+    ),
+  );
 
   TRes historyKodasHistory(
-          Iterable<Fragment_KodasHistory> Function(
-                  Iterable<
-                      CopyWith_Fragment_KodasHistory<Fragment_KodasHistory>>)
-              _fn) =>
-      call(
-          historyKodasHistory: _fn(_instance.historyKodasHistory
-              .map((e) => CopyWith_Fragment_KodasHistory(
-                    e,
-                    (i) => i,
-                  ))).toList());
+    Iterable<Fragment_KodasHistory> Function(
+      Iterable<CopyWith_Fragment_KodasHistory<Fragment_KodasHistory>>,
+    )
+    _fn,
+  ) => call(
+    historyKodasHistory: _fn(
+      _instance.historyKodasHistory.map(
+        (e) => CopyWith_Fragment_KodasHistory(e, (i) => i),
+      ),
+    ).toList(),
+  );
 }
 
 class _CopyWithStubImpl_Subscription_personKodasHistory<TRes>
@@ -2296,108 +2367,123 @@ class _CopyWithStubImpl_Subscription_personKodasHistory<TRes>
   historyKodasHistory(_fn) => _res;
 }
 
-const documentNodeSubscriptionpersonKodasHistory = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.subscription,
-    name: NameNode(value: 'personKodasHistory'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'personId')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'uuid'),
-          isNonNull: true,
+const documentNodeSubscriptionpersonKodasHistory = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.subscription,
+      name: NameNode(value: 'personKodasHistory'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'personId')),
+          type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'where')),
-        type: ListTypeNode(
-          type: NamedTypeNode(
-            name: NameNode(value: 'HistoryKodasHistoryBoolExp'),
-            isNonNull: true,
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'where')),
+          type: ListTypeNode(
+            type: NamedTypeNode(
+              name: NameNode(value: 'HistoryKodasHistoryBoolExp'),
+              isNonNull: true,
+            ),
+            isNonNull: false,
           ),
-          isNonNull: false,
+          defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'limit')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'Int'),
-          isNonNull: false,
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'limit')),
+          type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: false),
+          defaultValue: DefaultValueNode(value: IntValueNode(value: '200')),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: IntValueNode(value: '200')),
-        directives: [],
-      ),
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'historyKodasHistory'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'where'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: '_and'),
-                value: ListValueNode(values: [
-                  ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                      name: NameNode(value: 'personId'),
-                      value: ObjectValueNode(fields: [
-                        ObjectFieldNode(
-                          name: NameNode(value: '_eq'),
-                          value:
-                              VariableNode(name: NameNode(value: 'personId')),
-                        )
-                      ]),
-                    )
-                  ]),
-                  ObjectValueNode(fields: [
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
+          FieldNode(
+            name: NameNode(value: 'historyKodasHistory'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'where'),
+                value: ObjectValueNode(
+                  fields: [
                     ObjectFieldNode(
                       name: NameNode(value: '_and'),
-                      value: VariableNode(name: NameNode(value: 'where')),
-                    )
-                  ]),
-                ]),
-              )
-            ]),
-          ),
-          ArgumentNode(
-            name: NameNode(value: 'limit'),
-            value: VariableNode(name: NameNode(value: 'limit')),
-          ),
-          ArgumentNode(
-            name: NameNode(value: 'orderBy'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'time'),
-                value: EnumValueNode(name: NameNode(value: 'DESC')),
-              )
-            ]),
+                      value: ListValueNode(
+                        values: [
+                          ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                name: NameNode(value: 'personId'),
+                                value: ObjectValueNode(
+                                  fields: [
+                                    ObjectFieldNode(
+                                      name: NameNode(value: '_eq'),
+                                      value: VariableNode(
+                                        name: NameNode(value: 'personId'),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                          ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                name: NameNode(value: '_and'),
+                                value: VariableNode(
+                                  name: NameNode(value: 'where'),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'limit'),
+                value: VariableNode(name: NameNode(value: 'limit')),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'orderBy'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'time'),
+                      value: EnumValueNode(name: NameNode(value: 'DESC')),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FragmentSpreadNode(
+                  name: NameNode(value: 'KodasHistory'),
+                  directives: [],
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
           ),
         ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FragmentSpreadNode(
-            name: NameNode(value: 'KodasHistory'),
-            directives: [],
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-        ]),
-      )
-    ]),
-  ),
-  fragmentDefinitionKodasHistory,
-  fragmentDefinitionUser,
-  fragmentDefinitionUserNoPhoto,
-]);
+      ),
+    ),
+    fragmentDefinitionKodasHistory,
+    fragmentDefinitionUser,
+    fragmentDefinitionUserNoPhoto,
+  ],
+);

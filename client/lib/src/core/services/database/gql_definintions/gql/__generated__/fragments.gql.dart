@@ -40,7 +40,8 @@ class Fragment_Address {
       district: l$district == null
           ? null
           : Fragment_Address_district.fromJson(
-              (l$district as Map<String, dynamic>)),
+              (l$district as Map<String, dynamic>),
+            ),
       street: Fragment_Street.fromJson((l$street as Map<String, dynamic>)),
       substreetName: (l$substreetName as String?),
       geolocation: (l$geolocation as Map<String, dynamic>?),
@@ -209,10 +210,7 @@ class Fragment_Address {
 
 extension UtilityExtension_Fragment_Address on Fragment_Address {
   CopyWith_Fragment_Address<Fragment_Address> get copyWith =>
-      CopyWith_Fragment_Address(
-        this,
-        (i) => i,
-      );
+      CopyWith_Fragment_Address(this, (i) => i);
 }
 
 abstract class CopyWith_Fragment_Address<TRes> {
@@ -245,10 +243,7 @@ abstract class CopyWith_Fragment_Address<TRes> {
 
 class _CopyWithImpl_Fragment_Address<TRes>
     implements CopyWith_Fragment_Address<TRes> {
-  _CopyWithImpl_Fragment_Address(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Fragment_Address(this._instance, this._then);
 
   final Fragment_Address _instance;
 
@@ -269,43 +264,44 @@ class _CopyWithImpl_Fragment_Address<TRes>
     Object? apartmentNumber = _undefined,
     Object? specialLandmark = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Fragment_Address(
-        id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
-        countryIsoCode: countryIsoCode == _undefined || countryIsoCode == null
-            ? _instance.countryIsoCode
-            : (countryIsoCode as String),
-        area: area == _undefined || area == null
-            ? _instance.area
-            : (area as Fragment_Area),
-        district: district == _undefined
-            ? _instance.district
-            : (district as Fragment_Address_district?),
-        street: street == _undefined || street == null
-            ? _instance.street
-            : (street as Fragment_Street),
-        substreetName: substreetName == _undefined
-            ? _instance.substreetName
-            : (substreetName as String?),
-        geolocation: geolocation == _undefined
-            ? _instance.geolocation
-            : (geolocation as Map<String, dynamic>?),
-        houseNumber: houseNumber == _undefined
-            ? _instance.houseNumber
-            : (houseNumber as int?),
-        storeyNumber: storeyNumber == _undefined
-            ? _instance.storeyNumber
-            : (storeyNumber as int?),
-        apartmentNumber: apartmentNumber == _undefined
-            ? _instance.apartmentNumber
-            : (apartmentNumber as int?),
-        specialLandmark: specialLandmark == _undefined
-            ? _instance.specialLandmark
-            : (specialLandmark as String?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Fragment_Address(
+      id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
+      countryIsoCode: countryIsoCode == _undefined || countryIsoCode == null
+          ? _instance.countryIsoCode
+          : (countryIsoCode as String),
+      area: area == _undefined || area == null
+          ? _instance.area
+          : (area as Fragment_Area),
+      district: district == _undefined
+          ? _instance.district
+          : (district as Fragment_Address_district?),
+      street: street == _undefined || street == null
+          ? _instance.street
+          : (street as Fragment_Street),
+      substreetName: substreetName == _undefined
+          ? _instance.substreetName
+          : (substreetName as String?),
+      geolocation: geolocation == _undefined
+          ? _instance.geolocation
+          : (geolocation as Map<String, dynamic>?),
+      houseNumber: houseNumber == _undefined
+          ? _instance.houseNumber
+          : (houseNumber as int?),
+      storeyNumber: storeyNumber == _undefined
+          ? _instance.storeyNumber
+          : (storeyNumber as int?),
+      apartmentNumber: apartmentNumber == _undefined
+          ? _instance.apartmentNumber
+          : (apartmentNumber as int?),
+      specialLandmark: specialLandmark == _undefined
+          ? _instance.specialLandmark
+          : (specialLandmark as String?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   CopyWith_Fragment_Area<TRes> get area {
     final local$area = _instance.area;
@@ -317,7 +313,9 @@ class _CopyWithImpl_Fragment_Address<TRes>
     return local$district == null
         ? CopyWith_Fragment_Address_district.stub(_then(_instance))
         : CopyWith_Fragment_Address_district(
-            local$district, (e) => call(district: e));
+            local$district,
+            (e) => call(district: e),
+          );
   }
 
   CopyWith_Fragment_Street<TRes> get street {
@@ -345,8 +343,7 @@ class _CopyWithStubImpl_Fragment_Address<TRes>
     int? apartmentNumber,
     String? specialLandmark,
     String? $__typename,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Fragment_Area<TRes> get area => CopyWith_Fragment_Area.stub(_res);
 
@@ -360,151 +357,159 @@ class _CopyWithStubImpl_Fragment_Address<TRes>
 const fragmentDefinitionAddress = FragmentDefinitionNode(
   name: NameNode(value: 'Address'),
   typeCondition: TypeConditionNode(
-      on: NamedTypeNode(
-    name: NameNode(value: 'Addresses'),
-    isNonNull: false,
-  )),
+    on: NamedTypeNode(name: NameNode(value: 'Addresses'), isNonNull: false),
+  ),
   directives: [],
-  selectionSet: SelectionSetNode(selections: [
-    FieldNode(
-      name: NameNode(value: 'id'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-    FieldNode(
-      name: NameNode(value: 'countryIsoCode'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-    FieldNode(
-      name: NameNode(value: 'area'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
-        FragmentSpreadNode(
-          name: NameNode(value: 'Area'),
-          directives: [],
+  selectionSet: SelectionSetNode(
+    selections: [
+      FieldNode(
+        name: NameNode(value: 'id'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'countryIsoCode'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'area'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(
+          selections: [
+            FragmentSpreadNode(
+              name: NameNode(value: 'Area'),
+              directives: [],
+            ),
+            FieldNode(
+              name: NameNode(value: '__typename'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+          ],
         ),
-        FieldNode(
-          name: NameNode(value: '__typename'),
-          alias: null,
-          arguments: [],
-          directives: [],
-          selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'district'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(
+          selections: [
+            FieldNode(
+              name: NameNode(value: 'id'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: 'name'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: '__typename'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+          ],
         ),
-      ]),
-    ),
-    FieldNode(
-      name: NameNode(value: 'district'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
-        FieldNode(
-          name: NameNode(value: 'id'),
-          alias: null,
-          arguments: [],
-          directives: [],
-          selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'street'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(
+          selections: [
+            FragmentSpreadNode(
+              name: NameNode(value: 'Street'),
+              directives: [],
+            ),
+            FieldNode(
+              name: NameNode(value: '__typename'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+          ],
         ),
-        FieldNode(
-          name: NameNode(value: 'name'),
-          alias: null,
-          arguments: [],
-          directives: [],
-          selectionSet: null,
-        ),
-        FieldNode(
-          name: NameNode(value: '__typename'),
-          alias: null,
-          arguments: [],
-          directives: [],
-          selectionSet: null,
-        ),
-      ]),
-    ),
-    FieldNode(
-      name: NameNode(value: 'street'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
-        FragmentSpreadNode(
-          name: NameNode(value: 'Street'),
-          directives: [],
-        ),
-        FieldNode(
-          name: NameNode(value: '__typename'),
-          alias: null,
-          arguments: [],
-          directives: [],
-          selectionSet: null,
-        ),
-      ]),
-    ),
-    FieldNode(
-      name: NameNode(value: 'substreetName'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-    FieldNode(
-      name: NameNode(value: 'geolocation'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-    FieldNode(
-      name: NameNode(value: 'houseNumber'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-    FieldNode(
-      name: NameNode(value: 'storeyNumber'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-    FieldNode(
-      name: NameNode(value: 'apartmentNumber'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-    FieldNode(
-      name: NameNode(value: 'specialLandmark'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-    FieldNode(
-      name: NameNode(value: '__typename'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-  ]),
+      ),
+      FieldNode(
+        name: NameNode(value: 'substreetName'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'geolocation'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'houseNumber'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'storeyNumber'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'apartmentNumber'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'specialLandmark'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ],
+  ),
 );
-const documentNodeFragmentAddress = DocumentNode(definitions: [
-  fragmentDefinitionAddress,
-  fragmentDefinitionArea,
-  fragmentDefinitionAreaNoPhoto,
-  fragmentDefinitionStreet,
-  fragmentDefinitionStreetNoPhoto,
-]);
+const documentNodeFragmentAddress = DocumentNode(
+  definitions: [
+    fragmentDefinitionAddress,
+    fragmentDefinitionArea,
+    fragmentDefinitionAreaNoPhoto,
+    fragmentDefinitionStreet,
+    fragmentDefinitionStreetNoPhoto,
+  ],
+);
 
 class Fragment_Address_district {
   Fragment_Address_district({
@@ -546,11 +551,7 @@ class Fragment_Address_district {
     final l$id = id;
     final l$name = name;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$id,
-      l$name,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$id, l$name, l$$__typename]);
   }
 
   @override
@@ -584,10 +585,7 @@ class Fragment_Address_district {
 extension UtilityExtension_Fragment_Address_district
     on Fragment_Address_district {
   CopyWith_Fragment_Address_district<Fragment_Address_district> get copyWith =>
-      CopyWith_Fragment_Address_district(
-        this,
-        (i) => i,
-      );
+      CopyWith_Fragment_Address_district(this, (i) => i);
 }
 
 abstract class CopyWith_Fragment_Address_district<TRes> {
@@ -599,19 +597,12 @@ abstract class CopyWith_Fragment_Address_district<TRes> {
   factory CopyWith_Fragment_Address_district.stub(TRes res) =
       _CopyWithStubImpl_Fragment_Address_district;
 
-  TRes call({
-    UuidValue? id,
-    String? name,
-    String? $__typename,
-  });
+  TRes call({UuidValue? id, String? name, String? $__typename});
 }
 
 class _CopyWithImpl_Fragment_Address_district<TRes>
     implements CopyWith_Fragment_Address_district<TRes> {
-  _CopyWithImpl_Fragment_Address_district(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Fragment_Address_district(this._instance, this._then);
 
   final Fragment_Address_district _instance;
 
@@ -623,16 +614,17 @@ class _CopyWithImpl_Fragment_Address_district<TRes>
     Object? id = _undefined,
     Object? name = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Fragment_Address_district(
-        id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
-        name: name == _undefined || name == null
-            ? _instance.name
-            : (name as String),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Fragment_Address_district(
+      id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 }
 
 class _CopyWithStubImpl_Fragment_Address_district<TRes>
@@ -641,12 +633,7 @@ class _CopyWithStubImpl_Fragment_Address_district<TRes>
 
   TRes _res;
 
-  call({
-    UuidValue? id,
-    String? name,
-    String? $__typename,
-  }) =>
-      _res;
+  call({UuidValue? id, String? name, String? $__typename}) => _res;
 }
 
 class Fragment_EditHistory {
@@ -691,11 +678,7 @@ class Fragment_EditHistory {
     final l$time = time;
     final l$user = user;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$time,
-      l$user,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$time, l$user, l$$__typename]);
   }
 
   @override
@@ -727,10 +710,7 @@ class Fragment_EditHistory {
 
 extension UtilityExtension_Fragment_EditHistory on Fragment_EditHistory {
   CopyWith_Fragment_EditHistory<Fragment_EditHistory> get copyWith =>
-      CopyWith_Fragment_EditHistory(
-        this,
-        (i) => i,
-      );
+      CopyWith_Fragment_EditHistory(this, (i) => i);
 }
 
 abstract class CopyWith_Fragment_EditHistory<TRes> {
@@ -742,20 +722,13 @@ abstract class CopyWith_Fragment_EditHistory<TRes> {
   factory CopyWith_Fragment_EditHistory.stub(TRes res) =
       _CopyWithStubImpl_Fragment_EditHistory;
 
-  TRes call({
-    DateTime? time,
-    Fragment_User? user,
-    String? $__typename,
-  });
+  TRes call({DateTime? time, Fragment_User? user, String? $__typename});
   CopyWith_Fragment_User<TRes> get user;
 }
 
 class _CopyWithImpl_Fragment_EditHistory<TRes>
     implements CopyWith_Fragment_EditHistory<TRes> {
-  _CopyWithImpl_Fragment_EditHistory(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Fragment_EditHistory(this._instance, this._then);
 
   final Fragment_EditHistory _instance;
 
@@ -767,16 +740,17 @@ class _CopyWithImpl_Fragment_EditHistory<TRes>
     Object? time = _undefined,
     Object? user = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Fragment_EditHistory(
-        time: time == _undefined || time == null
-            ? _instance.time
-            : (time as DateTime),
-        user: user == _undefined ? _instance.user : (user as Fragment_User?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Fragment_EditHistory(
+      time: time == _undefined || time == null
+          ? _instance.time
+          : (time as DateTime),
+      user: user == _undefined ? _instance.user : (user as Fragment_User?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   CopyWith_Fragment_User<TRes> get user {
     final local$user = _instance.user;
@@ -792,12 +766,7 @@ class _CopyWithStubImpl_Fragment_EditHistory<TRes>
 
   TRes _res;
 
-  call({
-    DateTime? time,
-    Fragment_User? user,
-    String? $__typename,
-  }) =>
-      _res;
+  call({DateTime? time, Fragment_User? user, String? $__typename}) => _res;
 
   CopyWith_Fragment_User<TRes> get user => CopyWith_Fragment_User.stub(_res);
 }
@@ -805,52 +774,59 @@ class _CopyWithStubImpl_Fragment_EditHistory<TRes>
 const fragmentDefinitionEditHistory = FragmentDefinitionNode(
   name: NameNode(value: 'EditHistory'),
   typeCondition: TypeConditionNode(
-      on: NamedTypeNode(
-    name: NameNode(value: 'HistoryEditHistory'),
-    isNonNull: false,
-  )),
+    on: NamedTypeNode(
+      name: NameNode(value: 'HistoryEditHistory'),
+      isNonNull: false,
+    ),
+  ),
   directives: [],
-  selectionSet: SelectionSetNode(selections: [
-    FieldNode(
-      name: NameNode(value: 'time'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-    FieldNode(
-      name: NameNode(value: 'user'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
-        FragmentSpreadNode(
-          name: NameNode(value: 'User'),
-          directives: [],
+  selectionSet: SelectionSetNode(
+    selections: [
+      FieldNode(
+        name: NameNode(value: 'time'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'user'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(
+          selections: [
+            FragmentSpreadNode(
+              name: NameNode(value: 'User'),
+              directives: [],
+            ),
+            FieldNode(
+              name: NameNode(value: '__typename'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+          ],
         ),
-        FieldNode(
-          name: NameNode(value: '__typename'),
-          alias: null,
-          arguments: [],
-          directives: [],
-          selectionSet: null,
-        ),
-      ]),
-    ),
-    FieldNode(
-      name: NameNode(value: '__typename'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-  ]),
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ],
+  ),
 );
-const documentNodeFragmentEditHistory = DocumentNode(definitions: [
-  fragmentDefinitionEditHistory,
-  fragmentDefinitionUser,
-  fragmentDefinitionUserNoPhoto,
-]);
+const documentNodeFragmentEditHistory = DocumentNode(
+  definitions: [
+    fragmentDefinitionEditHistory,
+    fragmentDefinitionUser,
+    fragmentDefinitionUserNoPhoto,
+  ],
+);
 
 class Fragment_AttendanceHistory {
   Fragment_AttendanceHistory({
@@ -865,8 +841,9 @@ class Fragment_AttendanceHistory {
     final l$$__typename = json['__typename'];
     return Fragment_AttendanceHistory(
       time: tstzFromString(l$time),
-      recordedByUser:
-          Fragment_User.fromJson((l$recordedByUser as Map<String, dynamic>)),
+      recordedByUser: Fragment_User.fromJson(
+        (l$recordedByUser as Map<String, dynamic>),
+      ),
       $__typename: (l$$__typename as String),
     );
   }
@@ -893,11 +870,7 @@ class Fragment_AttendanceHistory {
     final l$time = time;
     final l$recordedByUser = recordedByUser;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$time,
-      l$recordedByUser,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$time, l$recordedByUser, l$$__typename]);
   }
 
   @override
@@ -931,10 +904,7 @@ class Fragment_AttendanceHistory {
 extension UtilityExtension_Fragment_AttendanceHistory
     on Fragment_AttendanceHistory {
   CopyWith_Fragment_AttendanceHistory<Fragment_AttendanceHistory>
-      get copyWith => CopyWith_Fragment_AttendanceHistory(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Fragment_AttendanceHistory(this, (i) => i);
 }
 
 abstract class CopyWith_Fragment_AttendanceHistory<TRes> {
@@ -956,10 +926,7 @@ abstract class CopyWith_Fragment_AttendanceHistory<TRes> {
 
 class _CopyWithImpl_Fragment_AttendanceHistory<TRes>
     implements CopyWith_Fragment_AttendanceHistory<TRes> {
-  _CopyWithImpl_Fragment_AttendanceHistory(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Fragment_AttendanceHistory(this._instance, this._then);
 
   final Fragment_AttendanceHistory _instance;
 
@@ -971,23 +938,26 @@ class _CopyWithImpl_Fragment_AttendanceHistory<TRes>
     Object? time = _undefined,
     Object? recordedByUser = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Fragment_AttendanceHistory(
-        time: time == _undefined || time == null
-            ? _instance.time
-            : (time as DateTime),
-        recordedByUser: recordedByUser == _undefined || recordedByUser == null
-            ? _instance.recordedByUser
-            : (recordedByUser as Fragment_User),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Fragment_AttendanceHistory(
+      time: time == _undefined || time == null
+          ? _instance.time
+          : (time as DateTime),
+      recordedByUser: recordedByUser == _undefined || recordedByUser == null
+          ? _instance.recordedByUser
+          : (recordedByUser as Fragment_User),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   CopyWith_Fragment_User<TRes> get recordedByUser {
     final local$recordedByUser = _instance.recordedByUser;
     return CopyWith_Fragment_User(
-        local$recordedByUser, (e) => call(recordedByUser: e));
+      local$recordedByUser,
+      (e) => call(recordedByUser: e),
+    );
   }
 }
 
@@ -997,11 +967,7 @@ class _CopyWithStubImpl_Fragment_AttendanceHistory<TRes>
 
   TRes _res;
 
-  call({
-    DateTime? time,
-    Fragment_User? recordedByUser,
-    String? $__typename,
-  }) =>
+  call({DateTime? time, Fragment_User? recordedByUser, String? $__typename}) =>
       _res;
 
   CopyWith_Fragment_User<TRes> get recordedByUser =>
@@ -1011,52 +977,59 @@ class _CopyWithStubImpl_Fragment_AttendanceHistory<TRes>
 const fragmentDefinitionAttendanceHistory = FragmentDefinitionNode(
   name: NameNode(value: 'AttendanceHistory'),
   typeCondition: TypeConditionNode(
-      on: NamedTypeNode(
-    name: NameNode(value: 'HistoryAttendanceHistory'),
-    isNonNull: false,
-  )),
+    on: NamedTypeNode(
+      name: NameNode(value: 'HistoryAttendanceHistory'),
+      isNonNull: false,
+    ),
+  ),
   directives: [],
-  selectionSet: SelectionSetNode(selections: [
-    FieldNode(
-      name: NameNode(value: 'time'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-    FieldNode(
-      name: NameNode(value: 'recordedByUser'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
-        FragmentSpreadNode(
-          name: NameNode(value: 'User'),
-          directives: [],
+  selectionSet: SelectionSetNode(
+    selections: [
+      FieldNode(
+        name: NameNode(value: 'time'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'recordedByUser'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(
+          selections: [
+            FragmentSpreadNode(
+              name: NameNode(value: 'User'),
+              directives: [],
+            ),
+            FieldNode(
+              name: NameNode(value: '__typename'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+          ],
         ),
-        FieldNode(
-          name: NameNode(value: '__typename'),
-          alias: null,
-          arguments: [],
-          directives: [],
-          selectionSet: null,
-        ),
-      ]),
-    ),
-    FieldNode(
-      name: NameNode(value: '__typename'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-  ]),
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ],
+  ),
 );
-const documentNodeFragmentAttendanceHistory = DocumentNode(definitions: [
-  fragmentDefinitionAttendanceHistory,
-  fragmentDefinitionUser,
-  fragmentDefinitionUserNoPhoto,
-]);
+const documentNodeFragmentAttendanceHistory = DocumentNode(
+  definitions: [
+    fragmentDefinitionAttendanceHistory,
+    fragmentDefinitionUser,
+    fragmentDefinitionUserNoPhoto,
+  ],
+);
 
 class Fragment_CallHistory {
   Fragment_CallHistory({
@@ -1100,11 +1073,7 @@ class Fragment_CallHistory {
     final l$time = time;
     final l$user = user;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$time,
-      l$user,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$time, l$user, l$$__typename]);
   }
 
   @override
@@ -1136,10 +1105,7 @@ class Fragment_CallHistory {
 
 extension UtilityExtension_Fragment_CallHistory on Fragment_CallHistory {
   CopyWith_Fragment_CallHistory<Fragment_CallHistory> get copyWith =>
-      CopyWith_Fragment_CallHistory(
-        this,
-        (i) => i,
-      );
+      CopyWith_Fragment_CallHistory(this, (i) => i);
 }
 
 abstract class CopyWith_Fragment_CallHistory<TRes> {
@@ -1151,20 +1117,13 @@ abstract class CopyWith_Fragment_CallHistory<TRes> {
   factory CopyWith_Fragment_CallHistory.stub(TRes res) =
       _CopyWithStubImpl_Fragment_CallHistory;
 
-  TRes call({
-    DateTime? time,
-    Fragment_User? user,
-    String? $__typename,
-  });
+  TRes call({DateTime? time, Fragment_User? user, String? $__typename});
   CopyWith_Fragment_User<TRes> get user;
 }
 
 class _CopyWithImpl_Fragment_CallHistory<TRes>
     implements CopyWith_Fragment_CallHistory<TRes> {
-  _CopyWithImpl_Fragment_CallHistory(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Fragment_CallHistory(this._instance, this._then);
 
   final Fragment_CallHistory _instance;
 
@@ -1176,16 +1135,17 @@ class _CopyWithImpl_Fragment_CallHistory<TRes>
     Object? time = _undefined,
     Object? user = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Fragment_CallHistory(
-        time: time == _undefined || time == null
-            ? _instance.time
-            : (time as DateTime),
-        user: user == _undefined ? _instance.user : (user as Fragment_User?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Fragment_CallHistory(
+      time: time == _undefined || time == null
+          ? _instance.time
+          : (time as DateTime),
+      user: user == _undefined ? _instance.user : (user as Fragment_User?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   CopyWith_Fragment_User<TRes> get user {
     final local$user = _instance.user;
@@ -1201,12 +1161,7 @@ class _CopyWithStubImpl_Fragment_CallHistory<TRes>
 
   TRes _res;
 
-  call({
-    DateTime? time,
-    Fragment_User? user,
-    String? $__typename,
-  }) =>
-      _res;
+  call({DateTime? time, Fragment_User? user, String? $__typename}) => _res;
 
   CopyWith_Fragment_User<TRes> get user => CopyWith_Fragment_User.stub(_res);
 }
@@ -1214,52 +1169,59 @@ class _CopyWithStubImpl_Fragment_CallHistory<TRes>
 const fragmentDefinitionCallHistory = FragmentDefinitionNode(
   name: NameNode(value: 'CallHistory'),
   typeCondition: TypeConditionNode(
-      on: NamedTypeNode(
-    name: NameNode(value: 'HistoryCallHistory'),
-    isNonNull: false,
-  )),
+    on: NamedTypeNode(
+      name: NameNode(value: 'HistoryCallHistory'),
+      isNonNull: false,
+    ),
+  ),
   directives: [],
-  selectionSet: SelectionSetNode(selections: [
-    FieldNode(
-      name: NameNode(value: 'time'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-    FieldNode(
-      name: NameNode(value: 'user'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
-        FragmentSpreadNode(
-          name: NameNode(value: 'User'),
-          directives: [],
+  selectionSet: SelectionSetNode(
+    selections: [
+      FieldNode(
+        name: NameNode(value: 'time'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'user'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(
+          selections: [
+            FragmentSpreadNode(
+              name: NameNode(value: 'User'),
+              directives: [],
+            ),
+            FieldNode(
+              name: NameNode(value: '__typename'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+          ],
         ),
-        FieldNode(
-          name: NameNode(value: '__typename'),
-          alias: null,
-          arguments: [],
-          directives: [],
-          selectionSet: null,
-        ),
-      ]),
-    ),
-    FieldNode(
-      name: NameNode(value: '__typename'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-  ]),
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ],
+  ),
 );
-const documentNodeFragmentCallHistory = DocumentNode(definitions: [
-  fragmentDefinitionCallHistory,
-  fragmentDefinitionUser,
-  fragmentDefinitionUserNoPhoto,
-]);
+const documentNodeFragmentCallHistory = DocumentNode(
+  definitions: [
+    fragmentDefinitionCallHistory,
+    fragmentDefinitionUser,
+    fragmentDefinitionUserNoPhoto,
+  ],
+);
 
 class Fragment_VisitHistory {
   Fragment_VisitHistory({
@@ -1303,11 +1265,7 @@ class Fragment_VisitHistory {
     final l$time = time;
     final l$user = user;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$time,
-      l$user,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$time, l$user, l$$__typename]);
   }
 
   @override
@@ -1339,10 +1297,7 @@ class Fragment_VisitHistory {
 
 extension UtilityExtension_Fragment_VisitHistory on Fragment_VisitHistory {
   CopyWith_Fragment_VisitHistory<Fragment_VisitHistory> get copyWith =>
-      CopyWith_Fragment_VisitHistory(
-        this,
-        (i) => i,
-      );
+      CopyWith_Fragment_VisitHistory(this, (i) => i);
 }
 
 abstract class CopyWith_Fragment_VisitHistory<TRes> {
@@ -1354,20 +1309,13 @@ abstract class CopyWith_Fragment_VisitHistory<TRes> {
   factory CopyWith_Fragment_VisitHistory.stub(TRes res) =
       _CopyWithStubImpl_Fragment_VisitHistory;
 
-  TRes call({
-    DateTime? time,
-    Fragment_User? user,
-    String? $__typename,
-  });
+  TRes call({DateTime? time, Fragment_User? user, String? $__typename});
   CopyWith_Fragment_User<TRes> get user;
 }
 
 class _CopyWithImpl_Fragment_VisitHistory<TRes>
     implements CopyWith_Fragment_VisitHistory<TRes> {
-  _CopyWithImpl_Fragment_VisitHistory(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Fragment_VisitHistory(this._instance, this._then);
 
   final Fragment_VisitHistory _instance;
 
@@ -1379,16 +1327,17 @@ class _CopyWithImpl_Fragment_VisitHistory<TRes>
     Object? time = _undefined,
     Object? user = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Fragment_VisitHistory(
-        time: time == _undefined || time == null
-            ? _instance.time
-            : (time as DateTime),
-        user: user == _undefined ? _instance.user : (user as Fragment_User?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Fragment_VisitHistory(
+      time: time == _undefined || time == null
+          ? _instance.time
+          : (time as DateTime),
+      user: user == _undefined ? _instance.user : (user as Fragment_User?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   CopyWith_Fragment_User<TRes> get user {
     final local$user = _instance.user;
@@ -1404,12 +1353,7 @@ class _CopyWithStubImpl_Fragment_VisitHistory<TRes>
 
   TRes _res;
 
-  call({
-    DateTime? time,
-    Fragment_User? user,
-    String? $__typename,
-  }) =>
-      _res;
+  call({DateTime? time, Fragment_User? user, String? $__typename}) => _res;
 
   CopyWith_Fragment_User<TRes> get user => CopyWith_Fragment_User.stub(_res);
 }
@@ -1417,52 +1361,59 @@ class _CopyWithStubImpl_Fragment_VisitHistory<TRes>
 const fragmentDefinitionVisitHistory = FragmentDefinitionNode(
   name: NameNode(value: 'VisitHistory'),
   typeCondition: TypeConditionNode(
-      on: NamedTypeNode(
-    name: NameNode(value: 'HistoryVisitHistory'),
-    isNonNull: false,
-  )),
+    on: NamedTypeNode(
+      name: NameNode(value: 'HistoryVisitHistory'),
+      isNonNull: false,
+    ),
+  ),
   directives: [],
-  selectionSet: SelectionSetNode(selections: [
-    FieldNode(
-      name: NameNode(value: 'time'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-    FieldNode(
-      name: NameNode(value: 'user'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
-        FragmentSpreadNode(
-          name: NameNode(value: 'User'),
-          directives: [],
+  selectionSet: SelectionSetNode(
+    selections: [
+      FieldNode(
+        name: NameNode(value: 'time'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'user'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(
+          selections: [
+            FragmentSpreadNode(
+              name: NameNode(value: 'User'),
+              directives: [],
+            ),
+            FieldNode(
+              name: NameNode(value: '__typename'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+          ],
         ),
-        FieldNode(
-          name: NameNode(value: '__typename'),
-          alias: null,
-          arguments: [],
-          directives: [],
-          selectionSet: null,
-        ),
-      ]),
-    ),
-    FieldNode(
-      name: NameNode(value: '__typename'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-  ]),
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ],
+  ),
 );
-const documentNodeFragmentVisitHistory = DocumentNode(definitions: [
-  fragmentDefinitionVisitHistory,
-  fragmentDefinitionUser,
-  fragmentDefinitionUserNoPhoto,
-]);
+const documentNodeFragmentVisitHistory = DocumentNode(
+  definitions: [
+    fragmentDefinitionVisitHistory,
+    fragmentDefinitionUser,
+    fragmentDefinitionUserNoPhoto,
+  ],
+);
 
 class Fragment_KodasHistory {
   Fragment_KodasHistory({
@@ -1504,11 +1455,7 @@ class Fragment_KodasHistory {
     final l$time = time;
     final l$user = user;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$time,
-      l$user,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$time, l$user, l$$__typename]);
   }
 
   @override
@@ -1540,10 +1487,7 @@ class Fragment_KodasHistory {
 
 extension UtilityExtension_Fragment_KodasHistory on Fragment_KodasHistory {
   CopyWith_Fragment_KodasHistory<Fragment_KodasHistory> get copyWith =>
-      CopyWith_Fragment_KodasHistory(
-        this,
-        (i) => i,
-      );
+      CopyWith_Fragment_KodasHistory(this, (i) => i);
 }
 
 abstract class CopyWith_Fragment_KodasHistory<TRes> {
@@ -1555,20 +1499,13 @@ abstract class CopyWith_Fragment_KodasHistory<TRes> {
   factory CopyWith_Fragment_KodasHistory.stub(TRes res) =
       _CopyWithStubImpl_Fragment_KodasHistory;
 
-  TRes call({
-    DateTime? time,
-    Fragment_User? user,
-    String? $__typename,
-  });
+  TRes call({DateTime? time, Fragment_User? user, String? $__typename});
   CopyWith_Fragment_User<TRes> get user;
 }
 
 class _CopyWithImpl_Fragment_KodasHistory<TRes>
     implements CopyWith_Fragment_KodasHistory<TRes> {
-  _CopyWithImpl_Fragment_KodasHistory(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Fragment_KodasHistory(this._instance, this._then);
 
   final Fragment_KodasHistory _instance;
 
@@ -1580,16 +1517,17 @@ class _CopyWithImpl_Fragment_KodasHistory<TRes>
     Object? time = _undefined,
     Object? user = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Fragment_KodasHistory(
-        time: time == _undefined ? _instance.time : (time as DateTime?),
-        user: user == _undefined || user == null
-            ? _instance.user
-            : (user as Fragment_User),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Fragment_KodasHistory(
+      time: time == _undefined ? _instance.time : (time as DateTime?),
+      user: user == _undefined || user == null
+          ? _instance.user
+          : (user as Fragment_User),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   CopyWith_Fragment_User<TRes> get user {
     final local$user = _instance.user;
@@ -1603,12 +1541,7 @@ class _CopyWithStubImpl_Fragment_KodasHistory<TRes>
 
   TRes _res;
 
-  call({
-    DateTime? time,
-    Fragment_User? user,
-    String? $__typename,
-  }) =>
-      _res;
+  call({DateTime? time, Fragment_User? user, String? $__typename}) => _res;
 
   CopyWith_Fragment_User<TRes> get user => CopyWith_Fragment_User.stub(_res);
 }
@@ -1616,52 +1549,59 @@ class _CopyWithStubImpl_Fragment_KodasHistory<TRes>
 const fragmentDefinitionKodasHistory = FragmentDefinitionNode(
   name: NameNode(value: 'KodasHistory'),
   typeCondition: TypeConditionNode(
-      on: NamedTypeNode(
-    name: NameNode(value: 'HistoryKodasHistory'),
-    isNonNull: false,
-  )),
+    on: NamedTypeNode(
+      name: NameNode(value: 'HistoryKodasHistory'),
+      isNonNull: false,
+    ),
+  ),
   directives: [],
-  selectionSet: SelectionSetNode(selections: [
-    FieldNode(
-      name: NameNode(value: 'time'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-    FieldNode(
-      name: NameNode(value: 'user'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
-        FragmentSpreadNode(
-          name: NameNode(value: 'User'),
-          directives: [],
+  selectionSet: SelectionSetNode(
+    selections: [
+      FieldNode(
+        name: NameNode(value: 'time'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'user'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(
+          selections: [
+            FragmentSpreadNode(
+              name: NameNode(value: 'User'),
+              directives: [],
+            ),
+            FieldNode(
+              name: NameNode(value: '__typename'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+          ],
         ),
-        FieldNode(
-          name: NameNode(value: '__typename'),
-          alias: null,
-          arguments: [],
-          directives: [],
-          selectionSet: null,
-        ),
-      ]),
-    ),
-    FieldNode(
-      name: NameNode(value: '__typename'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-  ]),
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ],
+  ),
 );
-const documentNodeFragmentKodasHistory = DocumentNode(definitions: [
-  fragmentDefinitionKodasHistory,
-  fragmentDefinitionUser,
-  fragmentDefinitionUserNoPhoto,
-]);
+const documentNodeFragmentKodasHistory = DocumentNode(
+  definitions: [
+    fragmentDefinitionKodasHistory,
+    fragmentDefinitionUser,
+    fragmentDefinitionUserNoPhoto,
+  ],
+);
 
 class Fragment_ConfessionHistory {
   Fragment_ConfessionHistory({
@@ -1703,11 +1643,7 @@ class Fragment_ConfessionHistory {
     final l$time = time;
     final l$user = user;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$time,
-      l$user,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$time, l$user, l$$__typename]);
   }
 
   @override
@@ -1741,10 +1677,7 @@ class Fragment_ConfessionHistory {
 extension UtilityExtension_Fragment_ConfessionHistory
     on Fragment_ConfessionHistory {
   CopyWith_Fragment_ConfessionHistory<Fragment_ConfessionHistory>
-      get copyWith => CopyWith_Fragment_ConfessionHistory(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Fragment_ConfessionHistory(this, (i) => i);
 }
 
 abstract class CopyWith_Fragment_ConfessionHistory<TRes> {
@@ -1756,20 +1689,13 @@ abstract class CopyWith_Fragment_ConfessionHistory<TRes> {
   factory CopyWith_Fragment_ConfessionHistory.stub(TRes res) =
       _CopyWithStubImpl_Fragment_ConfessionHistory;
 
-  TRes call({
-    DateTime? time,
-    Fragment_User? user,
-    String? $__typename,
-  });
+  TRes call({DateTime? time, Fragment_User? user, String? $__typename});
   CopyWith_Fragment_User<TRes> get user;
 }
 
 class _CopyWithImpl_Fragment_ConfessionHistory<TRes>
     implements CopyWith_Fragment_ConfessionHistory<TRes> {
-  _CopyWithImpl_Fragment_ConfessionHistory(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Fragment_ConfessionHistory(this._instance, this._then);
 
   final Fragment_ConfessionHistory _instance;
 
@@ -1781,16 +1707,17 @@ class _CopyWithImpl_Fragment_ConfessionHistory<TRes>
     Object? time = _undefined,
     Object? user = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Fragment_ConfessionHistory(
-        time: time == _undefined ? _instance.time : (time as DateTime?),
-        user: user == _undefined || user == null
-            ? _instance.user
-            : (user as Fragment_User),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Fragment_ConfessionHistory(
+      time: time == _undefined ? _instance.time : (time as DateTime?),
+      user: user == _undefined || user == null
+          ? _instance.user
+          : (user as Fragment_User),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   CopyWith_Fragment_User<TRes> get user {
     final local$user = _instance.user;
@@ -1804,12 +1731,7 @@ class _CopyWithStubImpl_Fragment_ConfessionHistory<TRes>
 
   TRes _res;
 
-  call({
-    DateTime? time,
-    Fragment_User? user,
-    String? $__typename,
-  }) =>
-      _res;
+  call({DateTime? time, Fragment_User? user, String? $__typename}) => _res;
 
   CopyWith_Fragment_User<TRes> get user => CopyWith_Fragment_User.stub(_res);
 }
@@ -1817,52 +1739,59 @@ class _CopyWithStubImpl_Fragment_ConfessionHistory<TRes>
 const fragmentDefinitionConfessionHistory = FragmentDefinitionNode(
   name: NameNode(value: 'ConfessionHistory'),
   typeCondition: TypeConditionNode(
-      on: NamedTypeNode(
-    name: NameNode(value: 'HistoryConfessionHistory'),
-    isNonNull: false,
-  )),
+    on: NamedTypeNode(
+      name: NameNode(value: 'HistoryConfessionHistory'),
+      isNonNull: false,
+    ),
+  ),
   directives: [],
-  selectionSet: SelectionSetNode(selections: [
-    FieldNode(
-      name: NameNode(value: 'time'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-    FieldNode(
-      name: NameNode(value: 'user'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
-        FragmentSpreadNode(
-          name: NameNode(value: 'User'),
-          directives: [],
+  selectionSet: SelectionSetNode(
+    selections: [
+      FieldNode(
+        name: NameNode(value: 'time'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'user'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(
+          selections: [
+            FragmentSpreadNode(
+              name: NameNode(value: 'User'),
+              directives: [],
+            ),
+            FieldNode(
+              name: NameNode(value: '__typename'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+          ],
         ),
-        FieldNode(
-          name: NameNode(value: '__typename'),
-          alias: null,
-          arguments: [],
-          directives: [],
-          selectionSet: null,
-        ),
-      ]),
-    ),
-    FieldNode(
-      name: NameNode(value: '__typename'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-  ]),
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ],
+  ),
 );
-const documentNodeFragmentConfessionHistory = DocumentNode(definitions: [
-  fragmentDefinitionConfessionHistory,
-  fragmentDefinitionUser,
-  fragmentDefinitionUserNoPhoto,
-]);
+const documentNodeFragmentConfessionHistory = DocumentNode(
+  definitions: [
+    fragmentDefinitionConfessionHistory,
+    fragmentDefinitionUser,
+    fragmentDefinitionUserNoPhoto,
+  ],
+);
 
 class Fragment_LatestEditHistory {
   Fragment_LatestEditHistory({
@@ -1906,11 +1835,7 @@ class Fragment_LatestEditHistory {
     final l$time = time;
     final l$user = user;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$time,
-      l$user,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$time, l$user, l$$__typename]);
   }
 
   @override
@@ -1944,10 +1869,7 @@ class Fragment_LatestEditHistory {
 extension UtilityExtension_Fragment_LatestEditHistory
     on Fragment_LatestEditHistory {
   CopyWith_Fragment_LatestEditHistory<Fragment_LatestEditHistory>
-      get copyWith => CopyWith_Fragment_LatestEditHistory(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Fragment_LatestEditHistory(this, (i) => i);
 }
 
 abstract class CopyWith_Fragment_LatestEditHistory<TRes> {
@@ -1959,20 +1881,13 @@ abstract class CopyWith_Fragment_LatestEditHistory<TRes> {
   factory CopyWith_Fragment_LatestEditHistory.stub(TRes res) =
       _CopyWithStubImpl_Fragment_LatestEditHistory;
 
-  TRes call({
-    DateTime? time,
-    Fragment_User? user,
-    String? $__typename,
-  });
+  TRes call({DateTime? time, Fragment_User? user, String? $__typename});
   CopyWith_Fragment_User<TRes> get user;
 }
 
 class _CopyWithImpl_Fragment_LatestEditHistory<TRes>
     implements CopyWith_Fragment_LatestEditHistory<TRes> {
-  _CopyWithImpl_Fragment_LatestEditHistory(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Fragment_LatestEditHistory(this._instance, this._then);
 
   final Fragment_LatestEditHistory _instance;
 
@@ -1984,14 +1899,15 @@ class _CopyWithImpl_Fragment_LatestEditHistory<TRes>
     Object? time = _undefined,
     Object? user = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Fragment_LatestEditHistory(
-        time: time == _undefined ? _instance.time : (time as DateTime?),
-        user: user == _undefined ? _instance.user : (user as Fragment_User?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Fragment_LatestEditHistory(
+      time: time == _undefined ? _instance.time : (time as DateTime?),
+      user: user == _undefined ? _instance.user : (user as Fragment_User?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   CopyWith_Fragment_User<TRes> get user {
     final local$user = _instance.user;
@@ -2007,12 +1923,7 @@ class _CopyWithStubImpl_Fragment_LatestEditHistory<TRes>
 
   TRes _res;
 
-  call({
-    DateTime? time,
-    Fragment_User? user,
-    String? $__typename,
-  }) =>
-      _res;
+  call({DateTime? time, Fragment_User? user, String? $__typename}) => _res;
 
   CopyWith_Fragment_User<TRes> get user => CopyWith_Fragment_User.stub(_res);
 }
@@ -2020,52 +1931,59 @@ class _CopyWithStubImpl_Fragment_LatestEditHistory<TRes>
 const fragmentDefinitionLatestEditHistory = FragmentDefinitionNode(
   name: NameNode(value: 'LatestEditHistory'),
   typeCondition: TypeConditionNode(
-      on: NamedTypeNode(
-    name: NameNode(value: 'HistoryLatestEdits'),
-    isNonNull: false,
-  )),
+    on: NamedTypeNode(
+      name: NameNode(value: 'HistoryLatestEdits'),
+      isNonNull: false,
+    ),
+  ),
   directives: [],
-  selectionSet: SelectionSetNode(selections: [
-    FieldNode(
-      name: NameNode(value: 'time'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-    FieldNode(
-      name: NameNode(value: 'user'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
-        FragmentSpreadNode(
-          name: NameNode(value: 'User'),
-          directives: [],
+  selectionSet: SelectionSetNode(
+    selections: [
+      FieldNode(
+        name: NameNode(value: 'time'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'user'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(
+          selections: [
+            FragmentSpreadNode(
+              name: NameNode(value: 'User'),
+              directives: [],
+            ),
+            FieldNode(
+              name: NameNode(value: '__typename'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+          ],
         ),
-        FieldNode(
-          name: NameNode(value: '__typename'),
-          alias: null,
-          arguments: [],
-          directives: [],
-          selectionSet: null,
-        ),
-      ]),
-    ),
-    FieldNode(
-      name: NameNode(value: '__typename'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-  ]),
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ],
+  ),
 );
-const documentNodeFragmentLatestEditHistory = DocumentNode(definitions: [
-  fragmentDefinitionLatestEditHistory,
-  fragmentDefinitionUser,
-  fragmentDefinitionUserNoPhoto,
-]);
+const documentNodeFragmentLatestEditHistory = DocumentNode(
+  definitions: [
+    fragmentDefinitionLatestEditHistory,
+    fragmentDefinitionUser,
+    fragmentDefinitionUserNoPhoto,
+  ],
+);
 
 class Fragment_LatestCallHistory {
   Fragment_LatestCallHistory({
@@ -2109,11 +2027,7 @@ class Fragment_LatestCallHistory {
     final l$time = time;
     final l$user = user;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$time,
-      l$user,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$time, l$user, l$$__typename]);
   }
 
   @override
@@ -2147,10 +2061,7 @@ class Fragment_LatestCallHistory {
 extension UtilityExtension_Fragment_LatestCallHistory
     on Fragment_LatestCallHistory {
   CopyWith_Fragment_LatestCallHistory<Fragment_LatestCallHistory>
-      get copyWith => CopyWith_Fragment_LatestCallHistory(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Fragment_LatestCallHistory(this, (i) => i);
 }
 
 abstract class CopyWith_Fragment_LatestCallHistory<TRes> {
@@ -2162,20 +2073,13 @@ abstract class CopyWith_Fragment_LatestCallHistory<TRes> {
   factory CopyWith_Fragment_LatestCallHistory.stub(TRes res) =
       _CopyWithStubImpl_Fragment_LatestCallHistory;
 
-  TRes call({
-    DateTime? time,
-    Fragment_User? user,
-    String? $__typename,
-  });
+  TRes call({DateTime? time, Fragment_User? user, String? $__typename});
   CopyWith_Fragment_User<TRes> get user;
 }
 
 class _CopyWithImpl_Fragment_LatestCallHistory<TRes>
     implements CopyWith_Fragment_LatestCallHistory<TRes> {
-  _CopyWithImpl_Fragment_LatestCallHistory(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Fragment_LatestCallHistory(this._instance, this._then);
 
   final Fragment_LatestCallHistory _instance;
 
@@ -2187,14 +2091,15 @@ class _CopyWithImpl_Fragment_LatestCallHistory<TRes>
     Object? time = _undefined,
     Object? user = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Fragment_LatestCallHistory(
-        time: time == _undefined ? _instance.time : (time as DateTime?),
-        user: user == _undefined ? _instance.user : (user as Fragment_User?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Fragment_LatestCallHistory(
+      time: time == _undefined ? _instance.time : (time as DateTime?),
+      user: user == _undefined ? _instance.user : (user as Fragment_User?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   CopyWith_Fragment_User<TRes> get user {
     final local$user = _instance.user;
@@ -2210,12 +2115,7 @@ class _CopyWithStubImpl_Fragment_LatestCallHistory<TRes>
 
   TRes _res;
 
-  call({
-    DateTime? time,
-    Fragment_User? user,
-    String? $__typename,
-  }) =>
-      _res;
+  call({DateTime? time, Fragment_User? user, String? $__typename}) => _res;
 
   CopyWith_Fragment_User<TRes> get user => CopyWith_Fragment_User.stub(_res);
 }
@@ -2223,52 +2123,59 @@ class _CopyWithStubImpl_Fragment_LatestCallHistory<TRes>
 const fragmentDefinitionLatestCallHistory = FragmentDefinitionNode(
   name: NameNode(value: 'LatestCallHistory'),
   typeCondition: TypeConditionNode(
-      on: NamedTypeNode(
-    name: NameNode(value: 'HistoryLatestCalls'),
-    isNonNull: false,
-  )),
+    on: NamedTypeNode(
+      name: NameNode(value: 'HistoryLatestCalls'),
+      isNonNull: false,
+    ),
+  ),
   directives: [],
-  selectionSet: SelectionSetNode(selections: [
-    FieldNode(
-      name: NameNode(value: 'time'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-    FieldNode(
-      name: NameNode(value: 'user'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
-        FragmentSpreadNode(
-          name: NameNode(value: 'User'),
-          directives: [],
+  selectionSet: SelectionSetNode(
+    selections: [
+      FieldNode(
+        name: NameNode(value: 'time'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'user'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(
+          selections: [
+            FragmentSpreadNode(
+              name: NameNode(value: 'User'),
+              directives: [],
+            ),
+            FieldNode(
+              name: NameNode(value: '__typename'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+          ],
         ),
-        FieldNode(
-          name: NameNode(value: '__typename'),
-          alias: null,
-          arguments: [],
-          directives: [],
-          selectionSet: null,
-        ),
-      ]),
-    ),
-    FieldNode(
-      name: NameNode(value: '__typename'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-  ]),
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ],
+  ),
 );
-const documentNodeFragmentLatestCallHistory = DocumentNode(definitions: [
-  fragmentDefinitionLatestCallHistory,
-  fragmentDefinitionUser,
-  fragmentDefinitionUserNoPhoto,
-]);
+const documentNodeFragmentLatestCallHistory = DocumentNode(
+  definitions: [
+    fragmentDefinitionLatestCallHistory,
+    fragmentDefinitionUser,
+    fragmentDefinitionUserNoPhoto,
+  ],
+);
 
 class Fragment_LatestVisitHistory {
   Fragment_LatestVisitHistory({
@@ -2312,11 +2219,7 @@ class Fragment_LatestVisitHistory {
     final l$time = time;
     final l$user = user;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$time,
-      l$user,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$time, l$user, l$$__typename]);
   }
 
   @override
@@ -2350,10 +2253,7 @@ class Fragment_LatestVisitHistory {
 extension UtilityExtension_Fragment_LatestVisitHistory
     on Fragment_LatestVisitHistory {
   CopyWith_Fragment_LatestVisitHistory<Fragment_LatestVisitHistory>
-      get copyWith => CopyWith_Fragment_LatestVisitHistory(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Fragment_LatestVisitHistory(this, (i) => i);
 }
 
 abstract class CopyWith_Fragment_LatestVisitHistory<TRes> {
@@ -2365,20 +2265,13 @@ abstract class CopyWith_Fragment_LatestVisitHistory<TRes> {
   factory CopyWith_Fragment_LatestVisitHistory.stub(TRes res) =
       _CopyWithStubImpl_Fragment_LatestVisitHistory;
 
-  TRes call({
-    DateTime? time,
-    Fragment_User? user,
-    String? $__typename,
-  });
+  TRes call({DateTime? time, Fragment_User? user, String? $__typename});
   CopyWith_Fragment_User<TRes> get user;
 }
 
 class _CopyWithImpl_Fragment_LatestVisitHistory<TRes>
     implements CopyWith_Fragment_LatestVisitHistory<TRes> {
-  _CopyWithImpl_Fragment_LatestVisitHistory(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Fragment_LatestVisitHistory(this._instance, this._then);
 
   final Fragment_LatestVisitHistory _instance;
 
@@ -2390,14 +2283,15 @@ class _CopyWithImpl_Fragment_LatestVisitHistory<TRes>
     Object? time = _undefined,
     Object? user = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Fragment_LatestVisitHistory(
-        time: time == _undefined ? _instance.time : (time as DateTime?),
-        user: user == _undefined ? _instance.user : (user as Fragment_User?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Fragment_LatestVisitHistory(
+      time: time == _undefined ? _instance.time : (time as DateTime?),
+      user: user == _undefined ? _instance.user : (user as Fragment_User?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   CopyWith_Fragment_User<TRes> get user {
     final local$user = _instance.user;
@@ -2413,12 +2307,7 @@ class _CopyWithStubImpl_Fragment_LatestVisitHistory<TRes>
 
   TRes _res;
 
-  call({
-    DateTime? time,
-    Fragment_User? user,
-    String? $__typename,
-  }) =>
-      _res;
+  call({DateTime? time, Fragment_User? user, String? $__typename}) => _res;
 
   CopyWith_Fragment_User<TRes> get user => CopyWith_Fragment_User.stub(_res);
 }
@@ -2426,52 +2315,59 @@ class _CopyWithStubImpl_Fragment_LatestVisitHistory<TRes>
 const fragmentDefinitionLatestVisitHistory = FragmentDefinitionNode(
   name: NameNode(value: 'LatestVisitHistory'),
   typeCondition: TypeConditionNode(
-      on: NamedTypeNode(
-    name: NameNode(value: 'HistoryLatestVisits'),
-    isNonNull: false,
-  )),
+    on: NamedTypeNode(
+      name: NameNode(value: 'HistoryLatestVisits'),
+      isNonNull: false,
+    ),
+  ),
   directives: [],
-  selectionSet: SelectionSetNode(selections: [
-    FieldNode(
-      name: NameNode(value: 'time'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-    FieldNode(
-      name: NameNode(value: 'user'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
-        FragmentSpreadNode(
-          name: NameNode(value: 'User'),
-          directives: [],
+  selectionSet: SelectionSetNode(
+    selections: [
+      FieldNode(
+        name: NameNode(value: 'time'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'user'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(
+          selections: [
+            FragmentSpreadNode(
+              name: NameNode(value: 'User'),
+              directives: [],
+            ),
+            FieldNode(
+              name: NameNode(value: '__typename'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+          ],
         ),
-        FieldNode(
-          name: NameNode(value: '__typename'),
-          alias: null,
-          arguments: [],
-          directives: [],
-          selectionSet: null,
-        ),
-      ]),
-    ),
-    FieldNode(
-      name: NameNode(value: '__typename'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-  ]),
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ],
+  ),
 );
-const documentNodeFragmentLatestVisitHistory = DocumentNode(definitions: [
-  fragmentDefinitionLatestVisitHistory,
-  fragmentDefinitionUser,
-  fragmentDefinitionUserNoPhoto,
-]);
+const documentNodeFragmentLatestVisitHistory = DocumentNode(
+  definitions: [
+    fragmentDefinitionLatestVisitHistory,
+    fragmentDefinitionUser,
+    fragmentDefinitionUserNoPhoto,
+  ],
+);
 
 class Fragment_LatestFatherVisitHistory {
   Fragment_LatestFatherVisitHistory({
@@ -2481,7 +2377,8 @@ class Fragment_LatestFatherVisitHistory {
   });
 
   factory Fragment_LatestFatherVisitHistory.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$time = json['time'];
     final l$user = json['user'];
     final l$$__typename = json['__typename'];
@@ -2516,11 +2413,7 @@ class Fragment_LatestFatherVisitHistory {
     final l$time = time;
     final l$user = user;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$time,
-      l$user,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$time, l$user, l$$__typename]);
   }
 
   @override
@@ -2554,10 +2447,7 @@ class Fragment_LatestFatherVisitHistory {
 extension UtilityExtension_Fragment_LatestFatherVisitHistory
     on Fragment_LatestFatherVisitHistory {
   CopyWith_Fragment_LatestFatherVisitHistory<Fragment_LatestFatherVisitHistory>
-      get copyWith => CopyWith_Fragment_LatestFatherVisitHistory(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Fragment_LatestFatherVisitHistory(this, (i) => i);
 }
 
 abstract class CopyWith_Fragment_LatestFatherVisitHistory<TRes> {
@@ -2569,20 +2459,13 @@ abstract class CopyWith_Fragment_LatestFatherVisitHistory<TRes> {
   factory CopyWith_Fragment_LatestFatherVisitHistory.stub(TRes res) =
       _CopyWithStubImpl_Fragment_LatestFatherVisitHistory;
 
-  TRes call({
-    DateTime? time,
-    Fragment_User? user,
-    String? $__typename,
-  });
+  TRes call({DateTime? time, Fragment_User? user, String? $__typename});
   CopyWith_Fragment_User<TRes> get user;
 }
 
 class _CopyWithImpl_Fragment_LatestFatherVisitHistory<TRes>
     implements CopyWith_Fragment_LatestFatherVisitHistory<TRes> {
-  _CopyWithImpl_Fragment_LatestFatherVisitHistory(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Fragment_LatestFatherVisitHistory(this._instance, this._then);
 
   final Fragment_LatestFatherVisitHistory _instance;
 
@@ -2594,14 +2477,15 @@ class _CopyWithImpl_Fragment_LatestFatherVisitHistory<TRes>
     Object? time = _undefined,
     Object? user = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Fragment_LatestFatherVisitHistory(
-        time: time == _undefined ? _instance.time : (time as DateTime?),
-        user: user == _undefined ? _instance.user : (user as Fragment_User?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Fragment_LatestFatherVisitHistory(
+      time: time == _undefined ? _instance.time : (time as DateTime?),
+      user: user == _undefined ? _instance.user : (user as Fragment_User?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   CopyWith_Fragment_User<TRes> get user {
     final local$user = _instance.user;
@@ -2617,12 +2501,7 @@ class _CopyWithStubImpl_Fragment_LatestFatherVisitHistory<TRes>
 
   TRes _res;
 
-  call({
-    DateTime? time,
-    Fragment_User? user,
-    String? $__typename,
-  }) =>
-      _res;
+  call({DateTime? time, Fragment_User? user, String? $__typename}) => _res;
 
   CopyWith_Fragment_User<TRes> get user => CopyWith_Fragment_User.stub(_res);
 }
@@ -2630,52 +2509,59 @@ class _CopyWithStubImpl_Fragment_LatestFatherVisitHistory<TRes>
 const fragmentDefinitionLatestFatherVisitHistory = FragmentDefinitionNode(
   name: NameNode(value: 'LatestFatherVisitHistory'),
   typeCondition: TypeConditionNode(
-      on: NamedTypeNode(
-    name: NameNode(value: 'HistoryLatestFatherVisits'),
-    isNonNull: false,
-  )),
+    on: NamedTypeNode(
+      name: NameNode(value: 'HistoryLatestFatherVisits'),
+      isNonNull: false,
+    ),
+  ),
   directives: [],
-  selectionSet: SelectionSetNode(selections: [
-    FieldNode(
-      name: NameNode(value: 'time'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-    FieldNode(
-      name: NameNode(value: 'user'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
-        FragmentSpreadNode(
-          name: NameNode(value: 'User'),
-          directives: [],
+  selectionSet: SelectionSetNode(
+    selections: [
+      FieldNode(
+        name: NameNode(value: 'time'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'user'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(
+          selections: [
+            FragmentSpreadNode(
+              name: NameNode(value: 'User'),
+              directives: [],
+            ),
+            FieldNode(
+              name: NameNode(value: '__typename'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+          ],
         ),
-        FieldNode(
-          name: NameNode(value: '__typename'),
-          alias: null,
-          arguments: [],
-          directives: [],
-          selectionSet: null,
-        ),
-      ]),
-    ),
-    FieldNode(
-      name: NameNode(value: '__typename'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-  ]),
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ],
+  ),
 );
-const documentNodeFragmentLatestFatherVisitHistory = DocumentNode(definitions: [
-  fragmentDefinitionLatestFatherVisitHistory,
-  fragmentDefinitionUser,
-  fragmentDefinitionUserNoPhoto,
-]);
+const documentNodeFragmentLatestFatherVisitHistory = DocumentNode(
+  definitions: [
+    fragmentDefinitionLatestFatherVisitHistory,
+    fragmentDefinitionUser,
+    fragmentDefinitionUserNoPhoto,
+  ],
+);
 
 class Fragment_LatestKodasHistory {
   Fragment_LatestKodasHistory({
@@ -2719,11 +2605,7 @@ class Fragment_LatestKodasHistory {
     final l$time = time;
     final l$user = user;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$time,
-      l$user,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$time, l$user, l$$__typename]);
   }
 
   @override
@@ -2757,10 +2639,7 @@ class Fragment_LatestKodasHistory {
 extension UtilityExtension_Fragment_LatestKodasHistory
     on Fragment_LatestKodasHistory {
   CopyWith_Fragment_LatestKodasHistory<Fragment_LatestKodasHistory>
-      get copyWith => CopyWith_Fragment_LatestKodasHistory(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Fragment_LatestKodasHistory(this, (i) => i);
 }
 
 abstract class CopyWith_Fragment_LatestKodasHistory<TRes> {
@@ -2772,20 +2651,13 @@ abstract class CopyWith_Fragment_LatestKodasHistory<TRes> {
   factory CopyWith_Fragment_LatestKodasHistory.stub(TRes res) =
       _CopyWithStubImpl_Fragment_LatestKodasHistory;
 
-  TRes call({
-    DateTime? time,
-    Fragment_User? user,
-    String? $__typename,
-  });
+  TRes call({DateTime? time, Fragment_User? user, String? $__typename});
   CopyWith_Fragment_User<TRes> get user;
 }
 
 class _CopyWithImpl_Fragment_LatestKodasHistory<TRes>
     implements CopyWith_Fragment_LatestKodasHistory<TRes> {
-  _CopyWithImpl_Fragment_LatestKodasHistory(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Fragment_LatestKodasHistory(this._instance, this._then);
 
   final Fragment_LatestKodasHistory _instance;
 
@@ -2797,14 +2669,15 @@ class _CopyWithImpl_Fragment_LatestKodasHistory<TRes>
     Object? time = _undefined,
     Object? user = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Fragment_LatestKodasHistory(
-        time: time == _undefined ? _instance.time : (time as DateTime?),
-        user: user == _undefined ? _instance.user : (user as Fragment_User?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Fragment_LatestKodasHistory(
+      time: time == _undefined ? _instance.time : (time as DateTime?),
+      user: user == _undefined ? _instance.user : (user as Fragment_User?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   CopyWith_Fragment_User<TRes> get user {
     final local$user = _instance.user;
@@ -2820,12 +2693,7 @@ class _CopyWithStubImpl_Fragment_LatestKodasHistory<TRes>
 
   TRes _res;
 
-  call({
-    DateTime? time,
-    Fragment_User? user,
-    String? $__typename,
-  }) =>
-      _res;
+  call({DateTime? time, Fragment_User? user, String? $__typename}) => _res;
 
   CopyWith_Fragment_User<TRes> get user => CopyWith_Fragment_User.stub(_res);
 }
@@ -2833,52 +2701,59 @@ class _CopyWithStubImpl_Fragment_LatestKodasHistory<TRes>
 const fragmentDefinitionLatestKodasHistory = FragmentDefinitionNode(
   name: NameNode(value: 'LatestKodasHistory'),
   typeCondition: TypeConditionNode(
-      on: NamedTypeNode(
-    name: NameNode(value: 'HistoryLatestKodases'),
-    isNonNull: false,
-  )),
+    on: NamedTypeNode(
+      name: NameNode(value: 'HistoryLatestKodases'),
+      isNonNull: false,
+    ),
+  ),
   directives: [],
-  selectionSet: SelectionSetNode(selections: [
-    FieldNode(
-      name: NameNode(value: 'time'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-    FieldNode(
-      name: NameNode(value: 'user'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
-        FragmentSpreadNode(
-          name: NameNode(value: 'User'),
-          directives: [],
+  selectionSet: SelectionSetNode(
+    selections: [
+      FieldNode(
+        name: NameNode(value: 'time'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'user'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(
+          selections: [
+            FragmentSpreadNode(
+              name: NameNode(value: 'User'),
+              directives: [],
+            ),
+            FieldNode(
+              name: NameNode(value: '__typename'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+          ],
         ),
-        FieldNode(
-          name: NameNode(value: '__typename'),
-          alias: null,
-          arguments: [],
-          directives: [],
-          selectionSet: null,
-        ),
-      ]),
-    ),
-    FieldNode(
-      name: NameNode(value: '__typename'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-  ]),
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ],
+  ),
 );
-const documentNodeFragmentLatestKodasHistory = DocumentNode(definitions: [
-  fragmentDefinitionLatestKodasHistory,
-  fragmentDefinitionUser,
-  fragmentDefinitionUserNoPhoto,
-]);
+const documentNodeFragmentLatestKodasHistory = DocumentNode(
+  definitions: [
+    fragmentDefinitionLatestKodasHistory,
+    fragmentDefinitionUser,
+    fragmentDefinitionUserNoPhoto,
+  ],
+);
 
 class Fragment_LatestConfessionHistory {
   Fragment_LatestConfessionHistory({
@@ -2922,11 +2797,7 @@ class Fragment_LatestConfessionHistory {
     final l$time = time;
     final l$user = user;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$time,
-      l$user,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$time, l$user, l$$__typename]);
   }
 
   @override
@@ -2960,10 +2831,7 @@ class Fragment_LatestConfessionHistory {
 extension UtilityExtension_Fragment_LatestConfessionHistory
     on Fragment_LatestConfessionHistory {
   CopyWith_Fragment_LatestConfessionHistory<Fragment_LatestConfessionHistory>
-      get copyWith => CopyWith_Fragment_LatestConfessionHistory(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Fragment_LatestConfessionHistory(this, (i) => i);
 }
 
 abstract class CopyWith_Fragment_LatestConfessionHistory<TRes> {
@@ -2975,20 +2843,13 @@ abstract class CopyWith_Fragment_LatestConfessionHistory<TRes> {
   factory CopyWith_Fragment_LatestConfessionHistory.stub(TRes res) =
       _CopyWithStubImpl_Fragment_LatestConfessionHistory;
 
-  TRes call({
-    DateTime? time,
-    Fragment_User? user,
-    String? $__typename,
-  });
+  TRes call({DateTime? time, Fragment_User? user, String? $__typename});
   CopyWith_Fragment_User<TRes> get user;
 }
 
 class _CopyWithImpl_Fragment_LatestConfessionHistory<TRes>
     implements CopyWith_Fragment_LatestConfessionHistory<TRes> {
-  _CopyWithImpl_Fragment_LatestConfessionHistory(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Fragment_LatestConfessionHistory(this._instance, this._then);
 
   final Fragment_LatestConfessionHistory _instance;
 
@@ -3000,14 +2861,15 @@ class _CopyWithImpl_Fragment_LatestConfessionHistory<TRes>
     Object? time = _undefined,
     Object? user = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Fragment_LatestConfessionHistory(
-        time: time == _undefined ? _instance.time : (time as DateTime?),
-        user: user == _undefined ? _instance.user : (user as Fragment_User?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Fragment_LatestConfessionHistory(
+      time: time == _undefined ? _instance.time : (time as DateTime?),
+      user: user == _undefined ? _instance.user : (user as Fragment_User?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   CopyWith_Fragment_User<TRes> get user {
     final local$user = _instance.user;
@@ -3023,12 +2885,7 @@ class _CopyWithStubImpl_Fragment_LatestConfessionHistory<TRes>
 
   TRes _res;
 
-  call({
-    DateTime? time,
-    Fragment_User? user,
-    String? $__typename,
-  }) =>
-      _res;
+  call({DateTime? time, Fragment_User? user, String? $__typename}) => _res;
 
   CopyWith_Fragment_User<TRes> get user => CopyWith_Fragment_User.stub(_res);
 }
@@ -3036,49 +2893,56 @@ class _CopyWithStubImpl_Fragment_LatestConfessionHistory<TRes>
 const fragmentDefinitionLatestConfessionHistory = FragmentDefinitionNode(
   name: NameNode(value: 'LatestConfessionHistory'),
   typeCondition: TypeConditionNode(
-      on: NamedTypeNode(
-    name: NameNode(value: 'HistoryLatestConfessions'),
-    isNonNull: false,
-  )),
+    on: NamedTypeNode(
+      name: NameNode(value: 'HistoryLatestConfessions'),
+      isNonNull: false,
+    ),
+  ),
   directives: [],
-  selectionSet: SelectionSetNode(selections: [
-    FieldNode(
-      name: NameNode(value: 'time'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-    FieldNode(
-      name: NameNode(value: 'user'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
-        FragmentSpreadNode(
-          name: NameNode(value: 'User'),
-          directives: [],
+  selectionSet: SelectionSetNode(
+    selections: [
+      FieldNode(
+        name: NameNode(value: 'time'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'user'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(
+          selections: [
+            FragmentSpreadNode(
+              name: NameNode(value: 'User'),
+              directives: [],
+            ),
+            FieldNode(
+              name: NameNode(value: '__typename'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+          ],
         ),
-        FieldNode(
-          name: NameNode(value: '__typename'),
-          alias: null,
-          arguments: [],
-          directives: [],
-          selectionSet: null,
-        ),
-      ]),
-    ),
-    FieldNode(
-      name: NameNode(value: '__typename'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-  ]),
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ],
+  ),
 );
-const documentNodeFragmentLatestConfessionHistory = DocumentNode(definitions: [
-  fragmentDefinitionLatestConfessionHistory,
-  fragmentDefinitionUser,
-  fragmentDefinitionUserNoPhoto,
-]);
+const documentNodeFragmentLatestConfessionHistory = DocumentNode(
+  definitions: [
+    fragmentDefinitionLatestConfessionHistory,
+    fragmentDefinitionUser,
+    fragmentDefinitionUserNoPhoto,
+  ],
+);

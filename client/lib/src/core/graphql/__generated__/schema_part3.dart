@@ -29,10 +29,7 @@ abstract class CopyWith_Input_AddressesSetInput<TRes> {
 
 class _CopyWithImpl_Input_AddressesSetInput<TRes>
     implements CopyWith_Input_AddressesSetInput<TRes> {
-  _CopyWithImpl_Input_AddressesSetInput(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Input_AddressesSetInput(this._instance, this._then);
 
   final Input_AddressesSetInput _instance;
 
@@ -53,27 +50,28 @@ class _CopyWithImpl_Input_AddressesSetInput<TRes>
     Object? storeyNumber = _undefined,
     Object? streetId = _undefined,
     Object? substreetName = _undefined,
-  }) =>
-      _then(Input_AddressesSetInput._({
-        ..._instance._$data,
-        if (apartmentNumber != _undefined)
-          'apartmentNumber': (apartmentNumber as int?),
-        if (areaId != _undefined) 'areaId': (areaId as UuidValue?),
-        if (countryIsoCode != _undefined)
-          'countryIsoCode': (countryIsoCode as String?),
-        if (districtId != _undefined) 'districtId': (districtId as UuidValue?),
-        if (familyId != _undefined) 'familyId': (familyId as UuidValue?),
-        if (geolocation != _undefined)
-          'geolocation': (geolocation as Map<String, dynamic>?),
-        if (houseNumber != _undefined) 'houseNumber': (houseNumber as int?),
-        if (specialLandmark != _undefined)
-          'specialLandmark': (specialLandmark as String?),
-        if (storeId != _undefined) 'storeId': (storeId as UuidValue?),
-        if (storeyNumber != _undefined) 'storeyNumber': (storeyNumber as int?),
-        if (streetId != _undefined) 'streetId': (streetId as UuidValue?),
-        if (substreetName != _undefined)
-          'substreetName': (substreetName as String?),
-      }));
+  }) => _then(
+    Input_AddressesSetInput._({
+      ..._instance._$data,
+      if (apartmentNumber != _undefined)
+        'apartmentNumber': (apartmentNumber as int?),
+      if (areaId != _undefined) 'areaId': (areaId as UuidValue?),
+      if (countryIsoCode != _undefined)
+        'countryIsoCode': (countryIsoCode as String?),
+      if (districtId != _undefined) 'districtId': (districtId as UuidValue?),
+      if (familyId != _undefined) 'familyId': (familyId as UuidValue?),
+      if (geolocation != _undefined)
+        'geolocation': (geolocation as Map<String, dynamic>?),
+      if (houseNumber != _undefined) 'houseNumber': (houseNumber as int?),
+      if (specialLandmark != _undefined)
+        'specialLandmark': (specialLandmark as String?),
+      if (storeId != _undefined) 'storeId': (storeId as UuidValue?),
+      if (storeyNumber != _undefined) 'storeyNumber': (storeyNumber as int?),
+      if (streetId != _undefined) 'streetId': (streetId as UuidValue?),
+      if (substreetName != _undefined)
+        'substreetName': (substreetName as String?),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Input_AddressesSetInput<TRes>
@@ -95,8 +93,7 @@ class _CopyWithStubImpl_Input_AddressesSetInput<TRes>
     int? storeyNumber,
     UuidValue? streetId,
     String? substreetName,
-  }) =>
-      _res;
+  }) => _res;
 }
 
 class Input_AddressesStddevOrderBy {
@@ -104,12 +101,11 @@ class Input_AddressesStddevOrderBy {
     Enum_OrderBy? apartmentNumber,
     Enum_OrderBy? houseNumber,
     Enum_OrderBy? storeyNumber,
-  }) =>
-      Input_AddressesStddevOrderBy._({
-        if (apartmentNumber != null) r'apartmentNumber': apartmentNumber,
-        if (houseNumber != null) r'houseNumber': houseNumber,
-        if (storeyNumber != null) r'storeyNumber': storeyNumber,
-      });
+  }) => Input_AddressesStddevOrderBy._({
+    if (apartmentNumber != null) r'apartmentNumber': apartmentNumber,
+    if (houseNumber != null) r'houseNumber': houseNumber,
+    if (storeyNumber != null) r'storeyNumber': storeyNumber,
+  });
 
   Input_AddressesStddevOrderBy._(this._$data);
 
@@ -155,22 +151,21 @@ class Input_AddressesStddevOrderBy {
     }
     if (_$data.containsKey('houseNumber')) {
       final l$houseNumber = houseNumber;
-      result$data['houseNumber'] =
-          l$houseNumber == null ? null : toJson_Enum_OrderBy(l$houseNumber);
+      result$data['houseNumber'] = l$houseNumber == null
+          ? null
+          : toJson_Enum_OrderBy(l$houseNumber);
     }
     if (_$data.containsKey('storeyNumber')) {
       final l$storeyNumber = storeyNumber;
-      result$data['storeyNumber'] =
-          l$storeyNumber == null ? null : toJson_Enum_OrderBy(l$storeyNumber);
+      result$data['storeyNumber'] = l$storeyNumber == null
+          ? null
+          : toJson_Enum_OrderBy(l$storeyNumber);
     }
     return result$data;
   }
 
   CopyWith_Input_AddressesStddevOrderBy<Input_AddressesStddevOrderBy>
-      get copyWith => CopyWith_Input_AddressesStddevOrderBy(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Input_AddressesStddevOrderBy(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -242,10 +237,7 @@ abstract class CopyWith_Input_AddressesStddevOrderBy<TRes> {
 
 class _CopyWithImpl_Input_AddressesStddevOrderBy<TRes>
     implements CopyWith_Input_AddressesStddevOrderBy<TRes> {
-  _CopyWithImpl_Input_AddressesStddevOrderBy(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Input_AddressesStddevOrderBy(this._instance, this._then);
 
   final Input_AddressesStddevOrderBy _instance;
 
@@ -257,16 +249,17 @@ class _CopyWithImpl_Input_AddressesStddevOrderBy<TRes>
     Object? apartmentNumber = _undefined,
     Object? houseNumber = _undefined,
     Object? storeyNumber = _undefined,
-  }) =>
-      _then(Input_AddressesStddevOrderBy._({
-        ..._instance._$data,
-        if (apartmentNumber != _undefined)
-          'apartmentNumber': (apartmentNumber as Enum_OrderBy?),
-        if (houseNumber != _undefined)
-          'houseNumber': (houseNumber as Enum_OrderBy?),
-        if (storeyNumber != _undefined)
-          'storeyNumber': (storeyNumber as Enum_OrderBy?),
-      }));
+  }) => _then(
+    Input_AddressesStddevOrderBy._({
+      ..._instance._$data,
+      if (apartmentNumber != _undefined)
+        'apartmentNumber': (apartmentNumber as Enum_OrderBy?),
+      if (houseNumber != _undefined)
+        'houseNumber': (houseNumber as Enum_OrderBy?),
+      if (storeyNumber != _undefined)
+        'storeyNumber': (storeyNumber as Enum_OrderBy?),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Input_AddressesStddevOrderBy<TRes>
@@ -279,8 +272,7 @@ class _CopyWithStubImpl_Input_AddressesStddevOrderBy<TRes>
     Enum_OrderBy? apartmentNumber,
     Enum_OrderBy? houseNumber,
     Enum_OrderBy? storeyNumber,
-  }) =>
-      _res;
+  }) => _res;
 }
 
 class Input_AddressesStddevPopOrderBy {
@@ -288,12 +280,11 @@ class Input_AddressesStddevPopOrderBy {
     Enum_OrderBy? apartmentNumber,
     Enum_OrderBy? houseNumber,
     Enum_OrderBy? storeyNumber,
-  }) =>
-      Input_AddressesStddevPopOrderBy._({
-        if (apartmentNumber != null) r'apartmentNumber': apartmentNumber,
-        if (houseNumber != null) r'houseNumber': houseNumber,
-        if (storeyNumber != null) r'storeyNumber': storeyNumber,
-      });
+  }) => Input_AddressesStddevPopOrderBy._({
+    if (apartmentNumber != null) r'apartmentNumber': apartmentNumber,
+    if (houseNumber != null) r'houseNumber': houseNumber,
+    if (storeyNumber != null) r'storeyNumber': storeyNumber,
+  });
 
   Input_AddressesStddevPopOrderBy._(this._$data);
 
@@ -339,22 +330,21 @@ class Input_AddressesStddevPopOrderBy {
     }
     if (_$data.containsKey('houseNumber')) {
       final l$houseNumber = houseNumber;
-      result$data['houseNumber'] =
-          l$houseNumber == null ? null : toJson_Enum_OrderBy(l$houseNumber);
+      result$data['houseNumber'] = l$houseNumber == null
+          ? null
+          : toJson_Enum_OrderBy(l$houseNumber);
     }
     if (_$data.containsKey('storeyNumber')) {
       final l$storeyNumber = storeyNumber;
-      result$data['storeyNumber'] =
-          l$storeyNumber == null ? null : toJson_Enum_OrderBy(l$storeyNumber);
+      result$data['storeyNumber'] = l$storeyNumber == null
+          ? null
+          : toJson_Enum_OrderBy(l$storeyNumber);
     }
     return result$data;
   }
 
   CopyWith_Input_AddressesStddevPopOrderBy<Input_AddressesStddevPopOrderBy>
-      get copyWith => CopyWith_Input_AddressesStddevPopOrderBy(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Input_AddressesStddevPopOrderBy(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -426,10 +416,7 @@ abstract class CopyWith_Input_AddressesStddevPopOrderBy<TRes> {
 
 class _CopyWithImpl_Input_AddressesStddevPopOrderBy<TRes>
     implements CopyWith_Input_AddressesStddevPopOrderBy<TRes> {
-  _CopyWithImpl_Input_AddressesStddevPopOrderBy(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Input_AddressesStddevPopOrderBy(this._instance, this._then);
 
   final Input_AddressesStddevPopOrderBy _instance;
 
@@ -441,16 +428,17 @@ class _CopyWithImpl_Input_AddressesStddevPopOrderBy<TRes>
     Object? apartmentNumber = _undefined,
     Object? houseNumber = _undefined,
     Object? storeyNumber = _undefined,
-  }) =>
-      _then(Input_AddressesStddevPopOrderBy._({
-        ..._instance._$data,
-        if (apartmentNumber != _undefined)
-          'apartmentNumber': (apartmentNumber as Enum_OrderBy?),
-        if (houseNumber != _undefined)
-          'houseNumber': (houseNumber as Enum_OrderBy?),
-        if (storeyNumber != _undefined)
-          'storeyNumber': (storeyNumber as Enum_OrderBy?),
-      }));
+  }) => _then(
+    Input_AddressesStddevPopOrderBy._({
+      ..._instance._$data,
+      if (apartmentNumber != _undefined)
+        'apartmentNumber': (apartmentNumber as Enum_OrderBy?),
+      if (houseNumber != _undefined)
+        'houseNumber': (houseNumber as Enum_OrderBy?),
+      if (storeyNumber != _undefined)
+        'storeyNumber': (storeyNumber as Enum_OrderBy?),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Input_AddressesStddevPopOrderBy<TRes>
@@ -463,8 +451,7 @@ class _CopyWithStubImpl_Input_AddressesStddevPopOrderBy<TRes>
     Enum_OrderBy? apartmentNumber,
     Enum_OrderBy? houseNumber,
     Enum_OrderBy? storeyNumber,
-  }) =>
-      _res;
+  }) => _res;
 }
 
 class Input_AddressesStddevSampOrderBy {
@@ -472,12 +459,11 @@ class Input_AddressesStddevSampOrderBy {
     Enum_OrderBy? apartmentNumber,
     Enum_OrderBy? houseNumber,
     Enum_OrderBy? storeyNumber,
-  }) =>
-      Input_AddressesStddevSampOrderBy._({
-        if (apartmentNumber != null) r'apartmentNumber': apartmentNumber,
-        if (houseNumber != null) r'houseNumber': houseNumber,
-        if (storeyNumber != null) r'storeyNumber': storeyNumber,
-      });
+  }) => Input_AddressesStddevSampOrderBy._({
+    if (apartmentNumber != null) r'apartmentNumber': apartmentNumber,
+    if (houseNumber != null) r'houseNumber': houseNumber,
+    if (storeyNumber != null) r'storeyNumber': storeyNumber,
+  });
 
   Input_AddressesStddevSampOrderBy._(this._$data);
 
@@ -523,22 +509,21 @@ class Input_AddressesStddevSampOrderBy {
     }
     if (_$data.containsKey('houseNumber')) {
       final l$houseNumber = houseNumber;
-      result$data['houseNumber'] =
-          l$houseNumber == null ? null : toJson_Enum_OrderBy(l$houseNumber);
+      result$data['houseNumber'] = l$houseNumber == null
+          ? null
+          : toJson_Enum_OrderBy(l$houseNumber);
     }
     if (_$data.containsKey('storeyNumber')) {
       final l$storeyNumber = storeyNumber;
-      result$data['storeyNumber'] =
-          l$storeyNumber == null ? null : toJson_Enum_OrderBy(l$storeyNumber);
+      result$data['storeyNumber'] = l$storeyNumber == null
+          ? null
+          : toJson_Enum_OrderBy(l$storeyNumber);
     }
     return result$data;
   }
 
   CopyWith_Input_AddressesStddevSampOrderBy<Input_AddressesStddevSampOrderBy>
-      get copyWith => CopyWith_Input_AddressesStddevSampOrderBy(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Input_AddressesStddevSampOrderBy(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -610,10 +595,7 @@ abstract class CopyWith_Input_AddressesStddevSampOrderBy<TRes> {
 
 class _CopyWithImpl_Input_AddressesStddevSampOrderBy<TRes>
     implements CopyWith_Input_AddressesStddevSampOrderBy<TRes> {
-  _CopyWithImpl_Input_AddressesStddevSampOrderBy(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Input_AddressesStddevSampOrderBy(this._instance, this._then);
 
   final Input_AddressesStddevSampOrderBy _instance;
 
@@ -625,16 +607,17 @@ class _CopyWithImpl_Input_AddressesStddevSampOrderBy<TRes>
     Object? apartmentNumber = _undefined,
     Object? houseNumber = _undefined,
     Object? storeyNumber = _undefined,
-  }) =>
-      _then(Input_AddressesStddevSampOrderBy._({
-        ..._instance._$data,
-        if (apartmentNumber != _undefined)
-          'apartmentNumber': (apartmentNumber as Enum_OrderBy?),
-        if (houseNumber != _undefined)
-          'houseNumber': (houseNumber as Enum_OrderBy?),
-        if (storeyNumber != _undefined)
-          'storeyNumber': (storeyNumber as Enum_OrderBy?),
-      }));
+  }) => _then(
+    Input_AddressesStddevSampOrderBy._({
+      ..._instance._$data,
+      if (apartmentNumber != _undefined)
+        'apartmentNumber': (apartmentNumber as Enum_OrderBy?),
+      if (houseNumber != _undefined)
+        'houseNumber': (houseNumber as Enum_OrderBy?),
+      if (storeyNumber != _undefined)
+        'storeyNumber': (storeyNumber as Enum_OrderBy?),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Input_AddressesStddevSampOrderBy<TRes>
@@ -647,19 +630,17 @@ class _CopyWithStubImpl_Input_AddressesStddevSampOrderBy<TRes>
     Enum_OrderBy? apartmentNumber,
     Enum_OrderBy? houseNumber,
     Enum_OrderBy? storeyNumber,
-  }) =>
-      _res;
+  }) => _res;
 }
 
 class Input_AddressesStreamCursorInput {
   factory Input_AddressesStreamCursorInput({
     required Input_AddressesStreamCursorValueInput initialValue,
     Enum_CursorOrdering? ordering,
-  }) =>
-      Input_AddressesStreamCursorInput._({
-        r'initialValue': initialValue,
-        if (ordering != null) r'ordering': ordering,
-      });
+  }) => Input_AddressesStreamCursorInput._({
+    r'initialValue': initialValue,
+    if (ordering != null) r'ordering': ordering,
+  });
 
   Input_AddressesStreamCursorInput._(this._$data);
 
@@ -668,7 +649,8 @@ class Input_AddressesStreamCursorInput {
     final l$initialValue = data['initialValue'];
     result$data['initialValue'] =
         Input_AddressesStreamCursorValueInput.fromJson(
-            (l$initialValue as Map<String, dynamic>));
+          (l$initialValue as Map<String, dynamic>),
+        );
     if (data.containsKey('ordering')) {
       final l$ordering = data['ordering'];
       result$data['ordering'] = l$ordering == null
@@ -692,17 +674,15 @@ class Input_AddressesStreamCursorInput {
     result$data['initialValue'] = l$initialValue.toJson();
     if (_$data.containsKey('ordering')) {
       final l$ordering = ordering;
-      result$data['ordering'] =
-          l$ordering == null ? null : toJson_Enum_CursorOrdering(l$ordering);
+      result$data['ordering'] = l$ordering == null
+          ? null
+          : toJson_Enum_CursorOrdering(l$ordering);
     }
     return result$data;
   }
 
   CopyWith_Input_AddressesStreamCursorInput<Input_AddressesStreamCursorInput>
-      get copyWith => CopyWith_Input_AddressesStreamCursorInput(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Input_AddressesStreamCursorInput(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -759,10 +739,7 @@ abstract class CopyWith_Input_AddressesStreamCursorInput<TRes> {
 
 class _CopyWithImpl_Input_AddressesStreamCursorInput<TRes>
     implements CopyWith_Input_AddressesStreamCursorInput<TRes> {
-  _CopyWithImpl_Input_AddressesStreamCursorInput(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Input_AddressesStreamCursorInput(this._instance, this._then);
 
   final Input_AddressesStreamCursorInput _instance;
 
@@ -773,20 +750,22 @@ class _CopyWithImpl_Input_AddressesStreamCursorInput<TRes>
   TRes call({
     Object? initialValue = _undefined,
     Object? ordering = _undefined,
-  }) =>
-      _then(Input_AddressesStreamCursorInput._({
-        ..._instance._$data,
-        if (initialValue != _undefined && initialValue != null)
-          'initialValue':
-              (initialValue as Input_AddressesStreamCursorValueInput),
-        if (ordering != _undefined)
-          'ordering': (ordering as Enum_CursorOrdering?),
-      }));
+  }) => _then(
+    Input_AddressesStreamCursorInput._({
+      ..._instance._$data,
+      if (initialValue != _undefined && initialValue != null)
+        'initialValue': (initialValue as Input_AddressesStreamCursorValueInput),
+      if (ordering != _undefined)
+        'ordering': (ordering as Enum_CursorOrdering?),
+    }),
+  );
 
   CopyWith_Input_AddressesStreamCursorValueInput<TRes> get initialValue {
     final local$initialValue = _instance.initialValue;
     return CopyWith_Input_AddressesStreamCursorValueInput(
-        local$initialValue, (e) => call(initialValue: e));
+      local$initialValue,
+      (e) => call(initialValue: e),
+    );
   }
 }
 
@@ -799,8 +778,7 @@ class _CopyWithStubImpl_Input_AddressesStreamCursorInput<TRes>
   call({
     Input_AddressesStreamCursorValueInput? initialValue,
     Enum_CursorOrdering? ordering,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Input_AddressesStreamCursorValueInput<TRes> get initialValue =>
       CopyWith_Input_AddressesStreamCursorValueInput.stub(_res);
@@ -821,27 +799,27 @@ class Input_AddressesStreamCursorValueInput {
     int? storeyNumber,
     UuidValue? streetId,
     String? substreetName,
-  }) =>
-      Input_AddressesStreamCursorValueInput._({
-        if (apartmentNumber != null) r'apartmentNumber': apartmentNumber,
-        if (areaId != null) r'areaId': areaId,
-        if (countryIsoCode != null) r'countryIsoCode': countryIsoCode,
-        if (districtId != null) r'districtId': districtId,
-        if (familyId != null) r'familyId': familyId,
-        if (geolocation != null) r'geolocation': geolocation,
-        if (houseNumber != null) r'houseNumber': houseNumber,
-        if (id != null) r'id': id,
-        if (specialLandmark != null) r'specialLandmark': specialLandmark,
-        if (storeId != null) r'storeId': storeId,
-        if (storeyNumber != null) r'storeyNumber': storeyNumber,
-        if (streetId != null) r'streetId': streetId,
-        if (substreetName != null) r'substreetName': substreetName,
-      });
+  }) => Input_AddressesStreamCursorValueInput._({
+    if (apartmentNumber != null) r'apartmentNumber': apartmentNumber,
+    if (areaId != null) r'areaId': areaId,
+    if (countryIsoCode != null) r'countryIsoCode': countryIsoCode,
+    if (districtId != null) r'districtId': districtId,
+    if (familyId != null) r'familyId': familyId,
+    if (geolocation != null) r'geolocation': geolocation,
+    if (houseNumber != null) r'houseNumber': houseNumber,
+    if (id != null) r'id': id,
+    if (specialLandmark != null) r'specialLandmark': specialLandmark,
+    if (storeId != null) r'storeId': storeId,
+    if (storeyNumber != null) r'storeyNumber': storeyNumber,
+    if (streetId != null) r'streetId': streetId,
+    if (substreetName != null) r'substreetName': substreetName,
+  });
 
   Input_AddressesStreamCursorValueInput._(this._$data);
 
   factory Input_AddressesStreamCursorValueInput.fromJson(
-      Map<String, dynamic> data) {
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('apartmentNumber')) {
       final l$apartmentNumber = data['apartmentNumber'];
@@ -857,13 +835,15 @@ class Input_AddressesStreamCursorValueInput {
     }
     if (data.containsKey('districtId')) {
       final l$districtId = data['districtId'];
-      result$data['districtId'] =
-          l$districtId == null ? null : stringToUuid(l$districtId);
+      result$data['districtId'] = l$districtId == null
+          ? null
+          : stringToUuid(l$districtId);
     }
     if (data.containsKey('familyId')) {
       final l$familyId = data['familyId'];
-      result$data['familyId'] =
-          l$familyId == null ? null : stringToUuid(l$familyId);
+      result$data['familyId'] = l$familyId == null
+          ? null
+          : stringToUuid(l$familyId);
     }
     if (data.containsKey('geolocation')) {
       final l$geolocation = data['geolocation'];
@@ -883,8 +863,9 @@ class Input_AddressesStreamCursorValueInput {
     }
     if (data.containsKey('storeId')) {
       final l$storeId = data['storeId'];
-      result$data['storeId'] =
-          l$storeId == null ? null : stringToUuid(l$storeId);
+      result$data['storeId'] = l$storeId == null
+          ? null
+          : stringToUuid(l$storeId);
     }
     if (data.containsKey('storeyNumber')) {
       final l$storeyNumber = data['storeyNumber'];
@@ -892,8 +873,9 @@ class Input_AddressesStreamCursorValueInput {
     }
     if (data.containsKey('streetId')) {
       final l$streetId = data['streetId'];
-      result$data['streetId'] =
-          l$streetId == null ? null : stringToUuid(l$streetId);
+      result$data['streetId'] = l$streetId == null
+          ? null
+          : stringToUuid(l$streetId);
     }
     if (data.containsKey('substreetName')) {
       final l$substreetName = data['substreetName'];
@@ -947,13 +929,15 @@ class Input_AddressesStreamCursorValueInput {
     }
     if (_$data.containsKey('districtId')) {
       final l$districtId = districtId;
-      result$data['districtId'] =
-          l$districtId == null ? null : uuidToString(l$districtId);
+      result$data['districtId'] = l$districtId == null
+          ? null
+          : uuidToString(l$districtId);
     }
     if (_$data.containsKey('familyId')) {
       final l$familyId = familyId;
-      result$data['familyId'] =
-          l$familyId == null ? null : uuidToString(l$familyId);
+      result$data['familyId'] = l$familyId == null
+          ? null
+          : uuidToString(l$familyId);
     }
     if (_$data.containsKey('geolocation')) {
       final l$geolocation = geolocation;
@@ -973,8 +957,9 @@ class Input_AddressesStreamCursorValueInput {
     }
     if (_$data.containsKey('storeId')) {
       final l$storeId = storeId;
-      result$data['storeId'] =
-          l$storeId == null ? null : uuidToString(l$storeId);
+      result$data['storeId'] = l$storeId == null
+          ? null
+          : uuidToString(l$storeId);
     }
     if (_$data.containsKey('storeyNumber')) {
       final l$storeyNumber = storeyNumber;
@@ -982,8 +967,9 @@ class Input_AddressesStreamCursorValueInput {
     }
     if (_$data.containsKey('streetId')) {
       final l$streetId = streetId;
-      result$data['streetId'] =
-          l$streetId == null ? null : uuidToString(l$streetId);
+      result$data['streetId'] = l$streetId == null
+          ? null
+          : uuidToString(l$streetId);
     }
     if (_$data.containsKey('substreetName')) {
       final l$substreetName = substreetName;
@@ -993,11 +979,10 @@ class Input_AddressesStreamCursorValueInput {
   }
 
   CopyWith_Input_AddressesStreamCursorValueInput<
-          Input_AddressesStreamCursorValueInput>
-      get copyWith => CopyWith_Input_AddressesStreamCursorValueInput(
-            this,
-            (i) => i,
-          );
+    Input_AddressesStreamCursorValueInput
+  >
+  get copyWith =>
+      CopyWith_Input_AddressesStreamCursorValueInput(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -1211,28 +1196,29 @@ class _CopyWithImpl_Input_AddressesStreamCursorValueInput<TRes>
     Object? storeyNumber = _undefined,
     Object? streetId = _undefined,
     Object? substreetName = _undefined,
-  }) =>
-      _then(Input_AddressesStreamCursorValueInput._({
-        ..._instance._$data,
-        if (apartmentNumber != _undefined)
-          'apartmentNumber': (apartmentNumber as int?),
-        if (areaId != _undefined) 'areaId': (areaId as UuidValue?),
-        if (countryIsoCode != _undefined)
-          'countryIsoCode': (countryIsoCode as String?),
-        if (districtId != _undefined) 'districtId': (districtId as UuidValue?),
-        if (familyId != _undefined) 'familyId': (familyId as UuidValue?),
-        if (geolocation != _undefined)
-          'geolocation': (geolocation as Map<String, dynamic>?),
-        if (houseNumber != _undefined) 'houseNumber': (houseNumber as int?),
-        if (id != _undefined) 'id': (id as UuidValue?),
-        if (specialLandmark != _undefined)
-          'specialLandmark': (specialLandmark as String?),
-        if (storeId != _undefined) 'storeId': (storeId as UuidValue?),
-        if (storeyNumber != _undefined) 'storeyNumber': (storeyNumber as int?),
-        if (streetId != _undefined) 'streetId': (streetId as UuidValue?),
-        if (substreetName != _undefined)
-          'substreetName': (substreetName as String?),
-      }));
+  }) => _then(
+    Input_AddressesStreamCursorValueInput._({
+      ..._instance._$data,
+      if (apartmentNumber != _undefined)
+        'apartmentNumber': (apartmentNumber as int?),
+      if (areaId != _undefined) 'areaId': (areaId as UuidValue?),
+      if (countryIsoCode != _undefined)
+        'countryIsoCode': (countryIsoCode as String?),
+      if (districtId != _undefined) 'districtId': (districtId as UuidValue?),
+      if (familyId != _undefined) 'familyId': (familyId as UuidValue?),
+      if (geolocation != _undefined)
+        'geolocation': (geolocation as Map<String, dynamic>?),
+      if (houseNumber != _undefined) 'houseNumber': (houseNumber as int?),
+      if (id != _undefined) 'id': (id as UuidValue?),
+      if (specialLandmark != _undefined)
+        'specialLandmark': (specialLandmark as String?),
+      if (storeId != _undefined) 'storeId': (storeId as UuidValue?),
+      if (storeyNumber != _undefined) 'storeyNumber': (storeyNumber as int?),
+      if (streetId != _undefined) 'streetId': (streetId as UuidValue?),
+      if (substreetName != _undefined)
+        'substreetName': (substreetName as String?),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Input_AddressesStreamCursorValueInput<TRes>
@@ -1255,8 +1241,7 @@ class _CopyWithStubImpl_Input_AddressesStreamCursorValueInput<TRes>
     int? storeyNumber,
     UuidValue? streetId,
     String? substreetName,
-  }) =>
-      _res;
+  }) => _res;
 }
 
 class Input_AddressesSumOrderBy {
@@ -1264,12 +1249,11 @@ class Input_AddressesSumOrderBy {
     Enum_OrderBy? apartmentNumber,
     Enum_OrderBy? houseNumber,
     Enum_OrderBy? storeyNumber,
-  }) =>
-      Input_AddressesSumOrderBy._({
-        if (apartmentNumber != null) r'apartmentNumber': apartmentNumber,
-        if (houseNumber != null) r'houseNumber': houseNumber,
-        if (storeyNumber != null) r'storeyNumber': storeyNumber,
-      });
+  }) => Input_AddressesSumOrderBy._({
+    if (apartmentNumber != null) r'apartmentNumber': apartmentNumber,
+    if (houseNumber != null) r'houseNumber': houseNumber,
+    if (storeyNumber != null) r'storeyNumber': storeyNumber,
+  });
 
   Input_AddressesSumOrderBy._(this._$data);
 
@@ -1315,22 +1299,21 @@ class Input_AddressesSumOrderBy {
     }
     if (_$data.containsKey('houseNumber')) {
       final l$houseNumber = houseNumber;
-      result$data['houseNumber'] =
-          l$houseNumber == null ? null : toJson_Enum_OrderBy(l$houseNumber);
+      result$data['houseNumber'] = l$houseNumber == null
+          ? null
+          : toJson_Enum_OrderBy(l$houseNumber);
     }
     if (_$data.containsKey('storeyNumber')) {
       final l$storeyNumber = storeyNumber;
-      result$data['storeyNumber'] =
-          l$storeyNumber == null ? null : toJson_Enum_OrderBy(l$storeyNumber);
+      result$data['storeyNumber'] = l$storeyNumber == null
+          ? null
+          : toJson_Enum_OrderBy(l$storeyNumber);
     }
     return result$data;
   }
 
   CopyWith_Input_AddressesSumOrderBy<Input_AddressesSumOrderBy> get copyWith =>
-      CopyWith_Input_AddressesSumOrderBy(
-        this,
-        (i) => i,
-      );
+      CopyWith_Input_AddressesSumOrderBy(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -1402,10 +1385,7 @@ abstract class CopyWith_Input_AddressesSumOrderBy<TRes> {
 
 class _CopyWithImpl_Input_AddressesSumOrderBy<TRes>
     implements CopyWith_Input_AddressesSumOrderBy<TRes> {
-  _CopyWithImpl_Input_AddressesSumOrderBy(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Input_AddressesSumOrderBy(this._instance, this._then);
 
   final Input_AddressesSumOrderBy _instance;
 
@@ -1417,16 +1397,17 @@ class _CopyWithImpl_Input_AddressesSumOrderBy<TRes>
     Object? apartmentNumber = _undefined,
     Object? houseNumber = _undefined,
     Object? storeyNumber = _undefined,
-  }) =>
-      _then(Input_AddressesSumOrderBy._({
-        ..._instance._$data,
-        if (apartmentNumber != _undefined)
-          'apartmentNumber': (apartmentNumber as Enum_OrderBy?),
-        if (houseNumber != _undefined)
-          'houseNumber': (houseNumber as Enum_OrderBy?),
-        if (storeyNumber != _undefined)
-          'storeyNumber': (storeyNumber as Enum_OrderBy?),
-      }));
+  }) => _then(
+    Input_AddressesSumOrderBy._({
+      ..._instance._$data,
+      if (apartmentNumber != _undefined)
+        'apartmentNumber': (apartmentNumber as Enum_OrderBy?),
+      if (houseNumber != _undefined)
+        'houseNumber': (houseNumber as Enum_OrderBy?),
+      if (storeyNumber != _undefined)
+        'storeyNumber': (storeyNumber as Enum_OrderBy?),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Input_AddressesSumOrderBy<TRes>
@@ -1439,8 +1420,7 @@ class _CopyWithStubImpl_Input_AddressesSumOrderBy<TRes>
     Enum_OrderBy? apartmentNumber,
     Enum_OrderBy? houseNumber,
     Enum_OrderBy? storeyNumber,
-  }) =>
-      _res;
+  }) => _res;
 }
 
 class Input_AddressesUpdates {
@@ -1448,12 +1428,11 @@ class Input_AddressesUpdates {
     Input_AddressesIncInput? $_inc,
     Input_AddressesSetInput? $_set,
     required Input_AddressesBoolExp where,
-  }) =>
-      Input_AddressesUpdates._({
-        if ($_inc != null) r'_inc': $_inc,
-        if ($_set != null) r'_set': $_set,
-        r'where': where,
-      });
+  }) => Input_AddressesUpdates._({
+    if ($_inc != null) r'_inc': $_inc,
+    if ($_set != null) r'_set': $_set,
+    r'where': where,
+  });
 
   Input_AddressesUpdates._(this._$data);
 
@@ -1472,8 +1451,9 @@ class Input_AddressesUpdates {
           : Input_AddressesSetInput.fromJson((l$$_set as Map<String, dynamic>));
     }
     final l$where = data['where'];
-    result$data['where'] =
-        Input_AddressesBoolExp.fromJson((l$where as Map<String, dynamic>));
+    result$data['where'] = Input_AddressesBoolExp.fromJson(
+      (l$where as Map<String, dynamic>),
+    );
     return Input_AddressesUpdates._(result$data);
   }
 
@@ -1504,10 +1484,7 @@ class Input_AddressesUpdates {
   }
 
   CopyWith_Input_AddressesUpdates<Input_AddressesUpdates> get copyWith =>
-      CopyWith_Input_AddressesUpdates(
-        this,
-        (i) => i,
-      );
+      CopyWith_Input_AddressesUpdates(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -1575,10 +1552,7 @@ abstract class CopyWith_Input_AddressesUpdates<TRes> {
 
 class _CopyWithImpl_Input_AddressesUpdates<TRes>
     implements CopyWith_Input_AddressesUpdates<TRes> {
-  _CopyWithImpl_Input_AddressesUpdates(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Input_AddressesUpdates(this._instance, this._then);
 
   final Input_AddressesUpdates _instance;
 
@@ -1590,14 +1564,15 @@ class _CopyWithImpl_Input_AddressesUpdates<TRes>
     Object? $_inc = _undefined,
     Object? $_set = _undefined,
     Object? where = _undefined,
-  }) =>
-      _then(Input_AddressesUpdates._({
-        ..._instance._$data,
-        if ($_inc != _undefined) '_inc': ($_inc as Input_AddressesIncInput?),
-        if ($_set != _undefined) '_set': ($_set as Input_AddressesSetInput?),
-        if (where != _undefined && where != null)
-          'where': (where as Input_AddressesBoolExp),
-      }));
+  }) => _then(
+    Input_AddressesUpdates._({
+      ..._instance._$data,
+      if ($_inc != _undefined) '_inc': ($_inc as Input_AddressesIncInput?),
+      if ($_set != _undefined) '_set': ($_set as Input_AddressesSetInput?),
+      if (where != _undefined && where != null)
+        'where': (where as Input_AddressesBoolExp),
+    }),
+  );
 
   CopyWith_Input_AddressesIncInput<TRes> get $_inc {
     final local$$_inc = _instance.$_inc;
@@ -1629,8 +1604,7 @@ class _CopyWithStubImpl_Input_AddressesUpdates<TRes>
     Input_AddressesIncInput? $_inc,
     Input_AddressesSetInput? $_set,
     Input_AddressesBoolExp? where,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Input_AddressesIncInput<TRes> get $_inc =>
       CopyWith_Input_AddressesIncInput.stub(_res);
@@ -1647,12 +1621,11 @@ class Input_AddressesVarPopOrderBy {
     Enum_OrderBy? apartmentNumber,
     Enum_OrderBy? houseNumber,
     Enum_OrderBy? storeyNumber,
-  }) =>
-      Input_AddressesVarPopOrderBy._({
-        if (apartmentNumber != null) r'apartmentNumber': apartmentNumber,
-        if (houseNumber != null) r'houseNumber': houseNumber,
-        if (storeyNumber != null) r'storeyNumber': storeyNumber,
-      });
+  }) => Input_AddressesVarPopOrderBy._({
+    if (apartmentNumber != null) r'apartmentNumber': apartmentNumber,
+    if (houseNumber != null) r'houseNumber': houseNumber,
+    if (storeyNumber != null) r'storeyNumber': storeyNumber,
+  });
 
   Input_AddressesVarPopOrderBy._(this._$data);
 
@@ -1698,22 +1671,21 @@ class Input_AddressesVarPopOrderBy {
     }
     if (_$data.containsKey('houseNumber')) {
       final l$houseNumber = houseNumber;
-      result$data['houseNumber'] =
-          l$houseNumber == null ? null : toJson_Enum_OrderBy(l$houseNumber);
+      result$data['houseNumber'] = l$houseNumber == null
+          ? null
+          : toJson_Enum_OrderBy(l$houseNumber);
     }
     if (_$data.containsKey('storeyNumber')) {
       final l$storeyNumber = storeyNumber;
-      result$data['storeyNumber'] =
-          l$storeyNumber == null ? null : toJson_Enum_OrderBy(l$storeyNumber);
+      result$data['storeyNumber'] = l$storeyNumber == null
+          ? null
+          : toJson_Enum_OrderBy(l$storeyNumber);
     }
     return result$data;
   }
 
   CopyWith_Input_AddressesVarPopOrderBy<Input_AddressesVarPopOrderBy>
-      get copyWith => CopyWith_Input_AddressesVarPopOrderBy(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Input_AddressesVarPopOrderBy(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -1785,10 +1757,7 @@ abstract class CopyWith_Input_AddressesVarPopOrderBy<TRes> {
 
 class _CopyWithImpl_Input_AddressesVarPopOrderBy<TRes>
     implements CopyWith_Input_AddressesVarPopOrderBy<TRes> {
-  _CopyWithImpl_Input_AddressesVarPopOrderBy(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Input_AddressesVarPopOrderBy(this._instance, this._then);
 
   final Input_AddressesVarPopOrderBy _instance;
 
@@ -1800,16 +1769,17 @@ class _CopyWithImpl_Input_AddressesVarPopOrderBy<TRes>
     Object? apartmentNumber = _undefined,
     Object? houseNumber = _undefined,
     Object? storeyNumber = _undefined,
-  }) =>
-      _then(Input_AddressesVarPopOrderBy._({
-        ..._instance._$data,
-        if (apartmentNumber != _undefined)
-          'apartmentNumber': (apartmentNumber as Enum_OrderBy?),
-        if (houseNumber != _undefined)
-          'houseNumber': (houseNumber as Enum_OrderBy?),
-        if (storeyNumber != _undefined)
-          'storeyNumber': (storeyNumber as Enum_OrderBy?),
-      }));
+  }) => _then(
+    Input_AddressesVarPopOrderBy._({
+      ..._instance._$data,
+      if (apartmentNumber != _undefined)
+        'apartmentNumber': (apartmentNumber as Enum_OrderBy?),
+      if (houseNumber != _undefined)
+        'houseNumber': (houseNumber as Enum_OrderBy?),
+      if (storeyNumber != _undefined)
+        'storeyNumber': (storeyNumber as Enum_OrderBy?),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Input_AddressesVarPopOrderBy<TRes>
@@ -1822,8 +1792,7 @@ class _CopyWithStubImpl_Input_AddressesVarPopOrderBy<TRes>
     Enum_OrderBy? apartmentNumber,
     Enum_OrderBy? houseNumber,
     Enum_OrderBy? storeyNumber,
-  }) =>
-      _res;
+  }) => _res;
 }
 
 class Input_AddressesVarSampOrderBy {
@@ -1831,12 +1800,11 @@ class Input_AddressesVarSampOrderBy {
     Enum_OrderBy? apartmentNumber,
     Enum_OrderBy? houseNumber,
     Enum_OrderBy? storeyNumber,
-  }) =>
-      Input_AddressesVarSampOrderBy._({
-        if (apartmentNumber != null) r'apartmentNumber': apartmentNumber,
-        if (houseNumber != null) r'houseNumber': houseNumber,
-        if (storeyNumber != null) r'storeyNumber': storeyNumber,
-      });
+  }) => Input_AddressesVarSampOrderBy._({
+    if (apartmentNumber != null) r'apartmentNumber': apartmentNumber,
+    if (houseNumber != null) r'houseNumber': houseNumber,
+    if (storeyNumber != null) r'storeyNumber': storeyNumber,
+  });
 
   Input_AddressesVarSampOrderBy._(this._$data);
 
@@ -1882,22 +1850,21 @@ class Input_AddressesVarSampOrderBy {
     }
     if (_$data.containsKey('houseNumber')) {
       final l$houseNumber = houseNumber;
-      result$data['houseNumber'] =
-          l$houseNumber == null ? null : toJson_Enum_OrderBy(l$houseNumber);
+      result$data['houseNumber'] = l$houseNumber == null
+          ? null
+          : toJson_Enum_OrderBy(l$houseNumber);
     }
     if (_$data.containsKey('storeyNumber')) {
       final l$storeyNumber = storeyNumber;
-      result$data['storeyNumber'] =
-          l$storeyNumber == null ? null : toJson_Enum_OrderBy(l$storeyNumber);
+      result$data['storeyNumber'] = l$storeyNumber == null
+          ? null
+          : toJson_Enum_OrderBy(l$storeyNumber);
     }
     return result$data;
   }
 
   CopyWith_Input_AddressesVarSampOrderBy<Input_AddressesVarSampOrderBy>
-      get copyWith => CopyWith_Input_AddressesVarSampOrderBy(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Input_AddressesVarSampOrderBy(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -1969,10 +1936,7 @@ abstract class CopyWith_Input_AddressesVarSampOrderBy<TRes> {
 
 class _CopyWithImpl_Input_AddressesVarSampOrderBy<TRes>
     implements CopyWith_Input_AddressesVarSampOrderBy<TRes> {
-  _CopyWithImpl_Input_AddressesVarSampOrderBy(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Input_AddressesVarSampOrderBy(this._instance, this._then);
 
   final Input_AddressesVarSampOrderBy _instance;
 
@@ -1984,16 +1948,17 @@ class _CopyWithImpl_Input_AddressesVarSampOrderBy<TRes>
     Object? apartmentNumber = _undefined,
     Object? houseNumber = _undefined,
     Object? storeyNumber = _undefined,
-  }) =>
-      _then(Input_AddressesVarSampOrderBy._({
-        ..._instance._$data,
-        if (apartmentNumber != _undefined)
-          'apartmentNumber': (apartmentNumber as Enum_OrderBy?),
-        if (houseNumber != _undefined)
-          'houseNumber': (houseNumber as Enum_OrderBy?),
-        if (storeyNumber != _undefined)
-          'storeyNumber': (storeyNumber as Enum_OrderBy?),
-      }));
+  }) => _then(
+    Input_AddressesVarSampOrderBy._({
+      ..._instance._$data,
+      if (apartmentNumber != _undefined)
+        'apartmentNumber': (apartmentNumber as Enum_OrderBy?),
+      if (houseNumber != _undefined)
+        'houseNumber': (houseNumber as Enum_OrderBy?),
+      if (storeyNumber != _undefined)
+        'storeyNumber': (storeyNumber as Enum_OrderBy?),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Input_AddressesVarSampOrderBy<TRes>
@@ -2006,8 +1971,7 @@ class _CopyWithStubImpl_Input_AddressesVarSampOrderBy<TRes>
     Enum_OrderBy? apartmentNumber,
     Enum_OrderBy? houseNumber,
     Enum_OrderBy? storeyNumber,
-  }) =>
-      _res;
+  }) => _res;
 }
 
 class Input_AddressesVarianceOrderBy {
@@ -2015,12 +1979,11 @@ class Input_AddressesVarianceOrderBy {
     Enum_OrderBy? apartmentNumber,
     Enum_OrderBy? houseNumber,
     Enum_OrderBy? storeyNumber,
-  }) =>
-      Input_AddressesVarianceOrderBy._({
-        if (apartmentNumber != null) r'apartmentNumber': apartmentNumber,
-        if (houseNumber != null) r'houseNumber': houseNumber,
-        if (storeyNumber != null) r'storeyNumber': storeyNumber,
-      });
+  }) => Input_AddressesVarianceOrderBy._({
+    if (apartmentNumber != null) r'apartmentNumber': apartmentNumber,
+    if (houseNumber != null) r'houseNumber': houseNumber,
+    if (storeyNumber != null) r'storeyNumber': storeyNumber,
+  });
 
   Input_AddressesVarianceOrderBy._(this._$data);
 
@@ -2066,22 +2029,21 @@ class Input_AddressesVarianceOrderBy {
     }
     if (_$data.containsKey('houseNumber')) {
       final l$houseNumber = houseNumber;
-      result$data['houseNumber'] =
-          l$houseNumber == null ? null : toJson_Enum_OrderBy(l$houseNumber);
+      result$data['houseNumber'] = l$houseNumber == null
+          ? null
+          : toJson_Enum_OrderBy(l$houseNumber);
     }
     if (_$data.containsKey('storeyNumber')) {
       final l$storeyNumber = storeyNumber;
-      result$data['storeyNumber'] =
-          l$storeyNumber == null ? null : toJson_Enum_OrderBy(l$storeyNumber);
+      result$data['storeyNumber'] = l$storeyNumber == null
+          ? null
+          : toJson_Enum_OrderBy(l$storeyNumber);
     }
     return result$data;
   }
 
   CopyWith_Input_AddressesVarianceOrderBy<Input_AddressesVarianceOrderBy>
-      get copyWith => CopyWith_Input_AddressesVarianceOrderBy(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Input_AddressesVarianceOrderBy(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -2153,10 +2115,7 @@ abstract class CopyWith_Input_AddressesVarianceOrderBy<TRes> {
 
 class _CopyWithImpl_Input_AddressesVarianceOrderBy<TRes>
     implements CopyWith_Input_AddressesVarianceOrderBy<TRes> {
-  _CopyWithImpl_Input_AddressesVarianceOrderBy(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Input_AddressesVarianceOrderBy(this._instance, this._then);
 
   final Input_AddressesVarianceOrderBy _instance;
 
@@ -2168,16 +2127,17 @@ class _CopyWithImpl_Input_AddressesVarianceOrderBy<TRes>
     Object? apartmentNumber = _undefined,
     Object? houseNumber = _undefined,
     Object? storeyNumber = _undefined,
-  }) =>
-      _then(Input_AddressesVarianceOrderBy._({
-        ..._instance._$data,
-        if (apartmentNumber != _undefined)
-          'apartmentNumber': (apartmentNumber as Enum_OrderBy?),
-        if (houseNumber != _undefined)
-          'houseNumber': (houseNumber as Enum_OrderBy?),
-        if (storeyNumber != _undefined)
-          'storeyNumber': (storeyNumber as Enum_OrderBy?),
-      }));
+  }) => _then(
+    Input_AddressesVarianceOrderBy._({
+      ..._instance._$data,
+      if (apartmentNumber != _undefined)
+        'apartmentNumber': (apartmentNumber as Enum_OrderBy?),
+      if (houseNumber != _undefined)
+        'houseNumber': (houseNumber as Enum_OrderBy?),
+      if (storeyNumber != _undefined)
+        'storeyNumber': (storeyNumber as Enum_OrderBy?),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Input_AddressesVarianceOrderBy<TRes>
@@ -2190,8 +2150,7 @@ class _CopyWithStubImpl_Input_AddressesVarianceOrderBy<TRes>
     Enum_OrderBy? apartmentNumber,
     Enum_OrderBy? houseNumber,
     Enum_OrderBy? storeyNumber,
-  }) =>
-      _res;
+  }) => _res;
 }
 
 class Input_AreasBoolExp {
@@ -2211,25 +2170,24 @@ class Input_AreasBoolExp {
     Input_StringComparisonExp? name,
     Input_TimestamptzComparisonExp? photoUpdatedAt,
     Input_AreasStreetsBoolExp? streets,
-  }) =>
-      Input_AreasBoolExp._({
-        if ($_and != null) r'_and': $_and,
-        if ($_not != null) r'_not': $_not,
-        if ($_or != null) r'_or': $_or,
-        if (addresses != null) r'addresses': addresses,
-        if (adminUsers != null) r'adminUsers': adminUsers,
-        if (blurhash != null) r'blurhash': blurhash,
-        if (bounds != null) r'bounds': bounds,
-        if (color != null) r'color': color,
-        if (editHistory != null) r'editHistory': editHistory,
-        if (editHistoryAggregate != null)
-          r'editHistoryAggregate': editHistoryAggregate,
-        if (id != null) r'id': id,
-        if (lastEdit != null) r'lastEdit': lastEdit,
-        if (name != null) r'name': name,
-        if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
-        if (streets != null) r'streets': streets,
-      });
+  }) => Input_AreasBoolExp._({
+    if ($_and != null) r'_and': $_and,
+    if ($_not != null) r'_not': $_not,
+    if ($_or != null) r'_or': $_or,
+    if (addresses != null) r'addresses': addresses,
+    if (adminUsers != null) r'adminUsers': adminUsers,
+    if (blurhash != null) r'blurhash': blurhash,
+    if (bounds != null) r'bounds': bounds,
+    if (color != null) r'color': color,
+    if (editHistory != null) r'editHistory': editHistory,
+    if (editHistoryAggregate != null)
+      r'editHistoryAggregate': editHistoryAggregate,
+    if (id != null) r'id': id,
+    if (lastEdit != null) r'lastEdit': lastEdit,
+    if (name != null) r'name': name,
+    if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
+    if (streets != null) r'streets': streets,
+  });
 
   Input_AreasBoolExp._(this._$data);
 
@@ -2258,49 +2216,56 @@ class Input_AreasBoolExp {
       result$data['addresses'] = l$addresses == null
           ? null
           : Input_AddressesBoolExp.fromJson(
-              (l$addresses as Map<String, dynamic>));
+              (l$addresses as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('adminUsers')) {
       final l$adminUsers = data['adminUsers'];
       result$data['adminUsers'] = l$adminUsers == null
           ? null
           : Input_AuthUsersAdminOnBoolExp.fromJson(
-              (l$adminUsers as Map<String, dynamic>));
+              (l$adminUsers as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('blurhash')) {
       final l$blurhash = data['blurhash'];
       result$data['blurhash'] = l$blurhash == null
           ? null
           : Input_StringComparisonExp.fromJson(
-              (l$blurhash as Map<String, dynamic>));
+              (l$blurhash as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('bounds')) {
       final l$bounds = data['bounds'];
       result$data['bounds'] = l$bounds == null
           ? null
           : Input_GeographyComparisonExp.fromJson(
-              (l$bounds as Map<String, dynamic>));
+              (l$bounds as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('color')) {
       final l$color = data['color'];
       result$data['color'] = l$color == null
           ? null
           : Input_BigintComparisonExp.fromJson(
-              (l$color as Map<String, dynamic>));
+              (l$color as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('editHistory')) {
       final l$editHistory = data['editHistory'];
       result$data['editHistory'] = l$editHistory == null
           ? null
           : Input_HistoryEditHistoryBoolExp.fromJson(
-              (l$editHistory as Map<String, dynamic>));
+              (l$editHistory as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('editHistoryAggregate')) {
       final l$editHistoryAggregate = data['editHistoryAggregate'];
       result$data['editHistoryAggregate'] = l$editHistoryAggregate == null
           ? null
           : Input_HistoryEditHistoryAggregateBoolExp.fromJson(
-              (l$editHistoryAggregate as Map<String, dynamic>));
+              (l$editHistoryAggregate as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('id')) {
       final l$id = data['id'];
@@ -2313,28 +2278,32 @@ class Input_AreasBoolExp {
       result$data['lastEdit'] = l$lastEdit == null
           ? null
           : Input_HistoryLatestEditsBoolExp.fromJson(
-              (l$lastEdit as Map<String, dynamic>));
+              (l$lastEdit as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('name')) {
       final l$name = data['name'];
       result$data['name'] = l$name == null
           ? null
           : Input_StringComparisonExp.fromJson(
-              (l$name as Map<String, dynamic>));
+              (l$name as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('photoUpdatedAt')) {
       final l$photoUpdatedAt = data['photoUpdatedAt'];
       result$data['photoUpdatedAt'] = l$photoUpdatedAt == null
           ? null
           : Input_TimestamptzComparisonExp.fromJson(
-              (l$photoUpdatedAt as Map<String, dynamic>));
+              (l$photoUpdatedAt as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('streets')) {
       final l$streets = data['streets'];
       result$data['streets'] = l$streets == null
           ? null
           : Input_AreasStreetsBoolExp.fromJson(
-              (l$streets as Map<String, dynamic>));
+              (l$streets as Map<String, dynamic>),
+            );
     }
     return Input_AreasBoolExp._(result$data);
   }
@@ -2451,10 +2420,7 @@ class Input_AreasBoolExp {
   }
 
   CopyWith_Input_AreasBoolExp<Input_AreasBoolExp> get copyWith =>
-      CopyWith_Input_AreasBoolExp(
-        this,
-        (i) => i,
-      );
+      CopyWith_Input_AreasBoolExp(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -2636,14 +2602,14 @@ class Input_AreasBoolExp {
     return Object.hashAll([
       _$data.containsKey('_and')
           ? l$$_and == null
-              ? null
-              : Object.hashAll(l$$_and.map((v) => v))
+                ? null
+                : Object.hashAll(l$$_and.map((v) => v))
           : const {},
       _$data.containsKey('_not') ? l$$_not : const {},
       _$data.containsKey('_or')
           ? l$$_or == null
-              ? null
-              : Object.hashAll(l$$_or.map((v) => v))
+                ? null
+                : Object.hashAll(l$$_or.map((v) => v))
           : const {},
       _$data.containsKey('addresses') ? l$addresses : const {},
       _$data.containsKey('adminUsers') ? l$adminUsers : const {},

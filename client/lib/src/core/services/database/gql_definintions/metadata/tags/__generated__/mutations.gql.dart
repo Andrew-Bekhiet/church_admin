@@ -3,19 +3,18 @@ import 'package:church_admin/src/core/graphql/scalars.dart';
 import 'package:gql/ast.dart';
 
 class Variables_Mutation_createTag {
-  factory Variables_Mutation_createTag(
-          {required Input_TagsInsertInput object}) =>
-      Variables_Mutation_createTag._({
-        r'object': object,
-      });
+  factory Variables_Mutation_createTag({
+    required Input_TagsInsertInput object,
+  }) => Variables_Mutation_createTag._({r'object': object});
 
   Variables_Mutation_createTag._(this._$data);
 
   factory Variables_Mutation_createTag.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     final l$object = data['object'];
-    result$data['object'] =
-        Input_TagsInsertInput.fromJson((l$object as Map<String, dynamic>));
+    result$data['object'] = Input_TagsInsertInput.fromJson(
+      (l$object as Map<String, dynamic>),
+    );
     return Variables_Mutation_createTag._(result$data);
   }
 
@@ -32,10 +31,7 @@ class Variables_Mutation_createTag {
   }
 
   CopyWith_Variables_Mutation_createTag<Variables_Mutation_createTag>
-      get copyWith => CopyWith_Variables_Mutation_createTag(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Variables_Mutation_createTag(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -75,10 +71,7 @@ abstract class CopyWith_Variables_Mutation_createTag<TRes> {
 
 class _CopyWithImpl_Variables_Mutation_createTag<TRes>
     implements CopyWith_Variables_Mutation_createTag<TRes> {
-  _CopyWithImpl_Variables_Mutation_createTag(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Variables_Mutation_createTag(this._instance, this._then);
 
   final Variables_Mutation_createTag _instance;
 
@@ -86,12 +79,13 @@ class _CopyWithImpl_Variables_Mutation_createTag<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? object = _undefined}) =>
-      _then(Variables_Mutation_createTag._({
-        ..._instance._$data,
-        if (object != _undefined && object != null)
-          'object': (object as Input_TagsInsertInput),
-      }));
+  TRes call({Object? object = _undefined}) => _then(
+    Variables_Mutation_createTag._({
+      ..._instance._$data,
+      if (object != _undefined && object != null)
+        'object': (object as Input_TagsInsertInput),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Variables_Mutation_createTag<TRes>
@@ -104,10 +98,7 @@ class _CopyWithStubImpl_Variables_Mutation_createTag<TRes>
 }
 
 class Mutation_createTag {
-  Mutation_createTag({
-    this.insertTagsOne,
-    this.$__typename = 'mutation_root',
-  });
+  Mutation_createTag({this.insertTagsOne, this.$__typename = 'mutation_root'});
 
   factory Mutation_createTag.fromJson(Map<String, dynamic> json) {
     final l$insertTagsOne = json['insertTagsOne'];
@@ -116,7 +107,8 @@ class Mutation_createTag {
       insertTagsOne: l$insertTagsOne == null
           ? null
           : Mutation_createTag_insertTagsOne.fromJson(
-              (l$insertTagsOne as Map<String, dynamic>)),
+              (l$insertTagsOne as Map<String, dynamic>),
+            ),
       $__typename: (l$$__typename as String),
     );
   }
@@ -138,10 +130,7 @@ class Mutation_createTag {
   int get hashCode {
     final l$insertTagsOne = insertTagsOne;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$insertTagsOne,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$insertTagsOne, l$$__typename]);
   }
 
   @override
@@ -168,10 +157,7 @@ class Mutation_createTag {
 
 extension UtilityExtension_Mutation_createTag on Mutation_createTag {
   CopyWith_Mutation_createTag<Mutation_createTag> get copyWith =>
-      CopyWith_Mutation_createTag(
-        this,
-        (i) => i,
-      );
+      CopyWith_Mutation_createTag(this, (i) => i);
 }
 
 abstract class CopyWith_Mutation_createTag<TRes> {
@@ -192,10 +178,7 @@ abstract class CopyWith_Mutation_createTag<TRes> {
 
 class _CopyWithImpl_Mutation_createTag<TRes>
     implements CopyWith_Mutation_createTag<TRes> {
-  _CopyWithImpl_Mutation_createTag(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Mutation_createTag(this._instance, this._then);
 
   final Mutation_createTag _instance;
 
@@ -206,22 +189,25 @@ class _CopyWithImpl_Mutation_createTag<TRes>
   TRes call({
     Object? insertTagsOne = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Mutation_createTag(
-        insertTagsOne: insertTagsOne == _undefined
-            ? _instance.insertTagsOne
-            : (insertTagsOne as Mutation_createTag_insertTagsOne?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Mutation_createTag(
+      insertTagsOne: insertTagsOne == _undefined
+          ? _instance.insertTagsOne
+          : (insertTagsOne as Mutation_createTag_insertTagsOne?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   CopyWith_Mutation_createTag_insertTagsOne<TRes> get insertTagsOne {
     final local$insertTagsOne = _instance.insertTagsOne;
     return local$insertTagsOne == null
         ? CopyWith_Mutation_createTag_insertTagsOne.stub(_then(_instance))
         : CopyWith_Mutation_createTag_insertTagsOne(
-            local$insertTagsOne, (e) => call(insertTagsOne: e));
+            local$insertTagsOne,
+            (e) => call(insertTagsOne: e),
+          );
   }
 }
 
@@ -234,67 +220,83 @@ class _CopyWithStubImpl_Mutation_createTag<TRes>
   call({
     Mutation_createTag_insertTagsOne? insertTagsOne,
     String? $__typename,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Mutation_createTag_insertTagsOne<TRes> get insertTagsOne =>
       CopyWith_Mutation_createTag_insertTagsOne.stub(_res);
 }
 
-const documentNodeMutationcreateTag = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.mutation,
-    name: NameNode(value: 'createTag'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'object')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'TagsInsertInput'),
-          isNonNull: true,
+const documentNodeMutationcreateTag = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.mutation,
+      name: NameNode(value: 'createTag'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'object')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'TagsInsertInput'),
+            isNonNull: true,
+          ),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      )
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'insertTagsOne'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'object'),
-            value: VariableNode(name: NameNode(value: 'object')),
-          ),
-          ArgumentNode(
-            name: NameNode(value: 'onConflict'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'constraint'),
-                value: EnumValueNode(name: NameNode(value: 'tags_name_key')),
-              ),
-              ObjectFieldNode(
-                name: NameNode(value: 'updateColumns'),
-                value: EnumValueNode(name: NameNode(value: 'name')),
-              ),
-            ]),
-          ),
-        ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
           FieldNode(
-            name: NameNode(value: 'id'),
+            name: NameNode(value: 'insertTagsOne'),
             alias: null,
-            arguments: [],
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'object'),
+                value: VariableNode(name: NameNode(value: 'object')),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'onConflict'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'constraint'),
+                      value: EnumValueNode(
+                        name: NameNode(value: 'tags_name_key'),
+                      ),
+                    ),
+                    ObjectFieldNode(
+                      name: NameNode(value: 'updateColumns'),
+                      value: EnumValueNode(name: NameNode(value: 'name')),
+                    ),
+                  ],
+                ),
+              ),
+            ],
             directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'name'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
+            selectionSet: SelectionSetNode(
+              selections: [
+                FieldNode(
+                  name: NameNode(value: 'id'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: 'name'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
           ),
           FieldNode(
             name: NameNode(value: '__typename'),
@@ -303,18 +305,11 @@ const documentNodeMutationcreateTag = DocumentNode(definitions: [
             directives: [],
             selectionSet: null,
           ),
-        ]),
+        ],
       ),
-      FieldNode(
-        name: NameNode(value: '__typename'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-    ]),
-  ),
-]);
+    ),
+  ],
+);
 
 class Mutation_createTag_insertTagsOne {
   Mutation_createTag_insertTagsOne({
@@ -356,11 +351,7 @@ class Mutation_createTag_insertTagsOne {
     final l$id = id;
     final l$name = name;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$id,
-      l$name,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$id, l$name, l$$__typename]);
   }
 
   @override
@@ -394,10 +385,7 @@ class Mutation_createTag_insertTagsOne {
 extension UtilityExtension_Mutation_createTag_insertTagsOne
     on Mutation_createTag_insertTagsOne {
   CopyWith_Mutation_createTag_insertTagsOne<Mutation_createTag_insertTagsOne>
-      get copyWith => CopyWith_Mutation_createTag_insertTagsOne(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Mutation_createTag_insertTagsOne(this, (i) => i);
 }
 
 abstract class CopyWith_Mutation_createTag_insertTagsOne<TRes> {
@@ -409,19 +397,12 @@ abstract class CopyWith_Mutation_createTag_insertTagsOne<TRes> {
   factory CopyWith_Mutation_createTag_insertTagsOne.stub(TRes res) =
       _CopyWithStubImpl_Mutation_createTag_insertTagsOne;
 
-  TRes call({
-    UuidValue? id,
-    String? name,
-    String? $__typename,
-  });
+  TRes call({UuidValue? id, String? name, String? $__typename});
 }
 
 class _CopyWithImpl_Mutation_createTag_insertTagsOne<TRes>
     implements CopyWith_Mutation_createTag_insertTagsOne<TRes> {
-  _CopyWithImpl_Mutation_createTag_insertTagsOne(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Mutation_createTag_insertTagsOne(this._instance, this._then);
 
   final Mutation_createTag_insertTagsOne _instance;
 
@@ -433,16 +414,17 @@ class _CopyWithImpl_Mutation_createTag_insertTagsOne<TRes>
     Object? id = _undefined,
     Object? name = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Mutation_createTag_insertTagsOne(
-        id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
-        name: name == _undefined || name == null
-            ? _instance.name
-            : (name as String),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Mutation_createTag_insertTagsOne(
+      id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 }
 
 class _CopyWithStubImpl_Mutation_createTag_insertTagsOne<TRes>
@@ -451,10 +433,5 @@ class _CopyWithStubImpl_Mutation_createTag_insertTagsOne<TRes>
 
   TRes _res;
 
-  call({
-    UuidValue? id,
-    String? name,
-    String? $__typename,
-  }) =>
-      _res;
+  call({UuidValue? id, String? name, String? $__typename}) => _res;
 }

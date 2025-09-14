@@ -13,17 +13,17 @@ class Variables_Subscription_watchAllStores {
     int? limit,
     List<Input_StoresOrderBy>? orderBy,
     List<Input_StoresBoolExp>? where,
-  }) =>
-      Variables_Subscription_watchAllStores._({
-        if (limit != null) r'limit': limit,
-        if (orderBy != null) r'orderBy': orderBy,
-        if (where != null) r'where': where,
-      });
+  }) => Variables_Subscription_watchAllStores._({
+    if (limit != null) r'limit': limit,
+    if (orderBy != null) r'orderBy': orderBy,
+    if (where != null) r'where': where,
+  });
 
   Variables_Subscription_watchAllStores._(this._$data);
 
   factory Variables_Subscription_watchAllStores.fromJson(
-      Map<String, dynamic> data) {
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('limit')) {
       final l$limit = data['limit'];
@@ -33,14 +33,16 @@ class Variables_Subscription_watchAllStores {
       final l$orderBy = data['orderBy'];
       result$data['orderBy'] = (l$orderBy as List<dynamic>?)
           ?.map(
-              (e) => Input_StoresOrderBy.fromJson((e as Map<String, dynamic>)))
+            (e) => Input_StoresOrderBy.fromJson((e as Map<String, dynamic>)),
+          )
           .toList();
     }
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = (l$where as List<dynamic>?)
           ?.map(
-              (e) => Input_StoresBoolExp.fromJson((e as Map<String, dynamic>)))
+            (e) => Input_StoresBoolExp.fromJson((e as Map<String, dynamic>)),
+          )
           .toList();
     }
     return Variables_Subscription_watchAllStores._(result$data);
@@ -74,11 +76,10 @@ class Variables_Subscription_watchAllStores {
   }
 
   CopyWith_Variables_Subscription_watchAllStores<
-          Variables_Subscription_watchAllStores>
-      get copyWith => CopyWith_Variables_Subscription_watchAllStores(
-            this,
-            (i) => i,
-          );
+    Variables_Subscription_watchAllStores
+  >
+  get copyWith =>
+      CopyWith_Variables_Subscription_watchAllStores(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -147,13 +148,13 @@ class Variables_Subscription_watchAllStores {
       _$data.containsKey('limit') ? l$limit : const {},
       _$data.containsKey('orderBy')
           ? l$orderBy == null
-              ? null
-              : Object.hashAll(l$orderBy.map((v) => v))
+                ? null
+                : Object.hashAll(l$orderBy.map((v) => v))
           : const {},
       _$data.containsKey('where')
           ? l$where == null
-              ? null
-              : Object.hashAll(l$where.map((v) => v))
+                ? null
+                : Object.hashAll(l$where.map((v) => v))
           : const {},
     ]);
   }
@@ -192,14 +193,15 @@ class _CopyWithImpl_Variables_Subscription_watchAllStores<TRes>
     Object? limit = _undefined,
     Object? orderBy = _undefined,
     Object? where = _undefined,
-  }) =>
-      _then(Variables_Subscription_watchAllStores._({
-        ..._instance._$data,
-        if (limit != _undefined) 'limit': (limit as int?),
-        if (orderBy != _undefined)
-          'orderBy': (orderBy as List<Input_StoresOrderBy>?),
-        if (where != _undefined) 'where': (where as List<Input_StoresBoolExp>?),
-      }));
+  }) => _then(
+    Variables_Subscription_watchAllStores._({
+      ..._instance._$data,
+      if (limit != _undefined) 'limit': (limit as int?),
+      if (orderBy != _undefined)
+        'orderBy': (orderBy as List<Input_StoresOrderBy>?),
+      if (where != _undefined) 'where': (where as List<Input_StoresBoolExp>?),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Variables_Subscription_watchAllStores<TRes>
@@ -212,8 +214,7 @@ class _CopyWithStubImpl_Variables_Subscription_watchAllStores<TRes>
     int? limit,
     List<Input_StoresOrderBy>? orderBy,
     List<Input_StoresBoolExp>? where,
-  }) =>
-      _res;
+  }) => _res;
 }
 
 class Subscription_watchAllStores {
@@ -222,9 +223,10 @@ class Subscription_watchAllStores {
   factory Subscription_watchAllStores.fromJson(Map<String, dynamic> json) {
     final l$stores = json['stores'];
     return Subscription_watchAllStores(
-        stores: (l$stores as List<dynamic>)
-            .map((e) => Fragment_Store.fromJson((e as Map<String, dynamic>)))
-            .toList());
+      stores: (l$stores as List<dynamic>)
+          .map((e) => Fragment_Store.fromJson((e as Map<String, dynamic>)))
+          .toList(),
+    );
   }
 
   final List<Fragment_Store> stores;
@@ -270,10 +272,7 @@ class Subscription_watchAllStores {
 extension UtilityExtension_Subscription_watchAllStores
     on Subscription_watchAllStores {
   CopyWith_Subscription_watchAllStores<Subscription_watchAllStores>
-      get copyWith => CopyWith_Subscription_watchAllStores(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Subscription_watchAllStores(this, (i) => i);
 }
 
 abstract class CopyWith_Subscription_watchAllStores<TRes> {
@@ -287,17 +286,16 @@ abstract class CopyWith_Subscription_watchAllStores<TRes> {
 
   TRes call({List<Fragment_Store>? stores});
   TRes stores(
-      Iterable<Fragment_Store> Function(
-              Iterable<CopyWith_Fragment_Store<Fragment_Store>>)
-          _fn);
+    Iterable<Fragment_Store> Function(
+      Iterable<CopyWith_Fragment_Store<Fragment_Store>>,
+    )
+    _fn,
+  );
 }
 
 class _CopyWithImpl_Subscription_watchAllStores<TRes>
     implements CopyWith_Subscription_watchAllStores<TRes> {
-  _CopyWithImpl_Subscription_watchAllStores(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Subscription_watchAllStores(this._instance, this._then);
 
   final Subscription_watchAllStores _instance;
 
@@ -305,20 +303,24 @@ class _CopyWithImpl_Subscription_watchAllStores<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? stores = _undefined}) => _then(Subscription_watchAllStores(
+  TRes call({Object? stores = _undefined}) => _then(
+    Subscription_watchAllStores(
       stores: stores == _undefined || stores == null
           ? _instance.stores
-          : (stores as List<Fragment_Store>)));
+          : (stores as List<Fragment_Store>),
+    ),
+  );
 
   TRes stores(
-          Iterable<Fragment_Store> Function(
-                  Iterable<CopyWith_Fragment_Store<Fragment_Store>>)
-              _fn) =>
-      call(
-          stores: _fn(_instance.stores.map((e) => CopyWith_Fragment_Store(
-                e,
-                (i) => i,
-              ))).toList());
+    Iterable<Fragment_Store> Function(
+      Iterable<CopyWith_Fragment_Store<Fragment_Store>>,
+    )
+    _fn,
+  ) => call(
+    stores: _fn(
+      _instance.stores.map((e) => CopyWith_Fragment_Store(e, (i) => i)),
+    ).toList(),
+  );
 }
 
 class _CopyWithStubImpl_Subscription_watchAllStores<TRes>
@@ -332,113 +334,123 @@ class _CopyWithStubImpl_Subscription_watchAllStores<TRes>
   stores(_fn) => _res;
 }
 
-const documentNodeSubscriptionwatchAllStores = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.subscription,
-    name: NameNode(value: 'watchAllStores'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'limit')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'Int'),
-          isNonNull: false,
+const documentNodeSubscriptionwatchAllStores = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.subscription,
+      name: NameNode(value: 'watchAllStores'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'limit')),
+          type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: false),
+          defaultValue: DefaultValueNode(value: IntValueNode(value: '200')),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: IntValueNode(value: '200')),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'orderBy')),
-        type: ListTypeNode(
-          type: NamedTypeNode(
-            name: NameNode(value: 'StoresOrderBy'),
-            isNonNull: true,
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'orderBy')),
+          type: ListTypeNode(
+            type: NamedTypeNode(
+              name: NameNode(value: 'StoresOrderBy'),
+              isNonNull: true,
+            ),
+            isNonNull: false,
           ),
-          isNonNull: false,
+          defaultValue: DefaultValueNode(
+            value: ObjectValueNode(
+              fields: [
+                ObjectFieldNode(
+                  name: NameNode(value: 'name'),
+                  value: EnumValueNode(name: NameNode(value: 'ASC')),
+                ),
+              ],
+            ),
+          ),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(
-            value: ObjectValueNode(fields: [
-          ObjectFieldNode(
-            name: NameNode(value: 'name'),
-            value: EnumValueNode(name: NameNode(value: 'ASC')),
-          )
-        ])),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'where')),
-        type: ListTypeNode(
-          type: NamedTypeNode(
-            name: NameNode(value: 'StoresBoolExp'),
-            isNonNull: true,
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'where')),
+          type: ListTypeNode(
+            type: NamedTypeNode(
+              name: NameNode(value: 'StoresBoolExp'),
+              isNonNull: true,
+            ),
+            isNonNull: false,
           ),
-          isNonNull: false,
+          defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
-        directives: [],
-      ),
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'stores'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'limit'),
-            value: VariableNode(name: NameNode(value: 'limit')),
-          ),
-          ArgumentNode(
-            name: NameNode(value: 'orderBy'),
-            value: VariableNode(name: NameNode(value: 'orderBy')),
-          ),
-          ArgumentNode(
-            name: NameNode(value: 'where'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: '_and'),
-                value: VariableNode(name: NameNode(value: 'where')),
-              )
-            ]),
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
+          FieldNode(
+            name: NameNode(value: 'stores'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'limit'),
+                value: VariableNode(name: NameNode(value: 'limit')),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'orderBy'),
+                value: VariableNode(name: NameNode(value: 'orderBy')),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'where'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: '_and'),
+                      value: VariableNode(name: NameNode(value: 'where')),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FragmentSpreadNode(
+                  name: NameNode(value: 'Store'),
+                  directives: [],
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
           ),
         ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FragmentSpreadNode(
-            name: NameNode(value: 'Store'),
-            directives: [],
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-        ]),
-      )
-    ]),
-  ),
-  fragmentDefinitionStore,
-  fragmentDefinitionStoreNoPhoto,
-]);
+      ),
+    ),
+    fragmentDefinitionStore,
+    fragmentDefinitionStoreNoPhoto,
+  ],
+);
 
 class Variables_Subscription_watchStoresCount {
-  factory Variables_Subscription_watchStoresCount(
-          {List<Input_StoresBoolExp>? where}) =>
-      Variables_Subscription_watchStoresCount._({
-        if (where != null) r'where': where,
-      });
+  factory Variables_Subscription_watchStoresCount({
+    List<Input_StoresBoolExp>? where,
+  }) => Variables_Subscription_watchStoresCount._({
+    if (where != null) r'where': where,
+  });
 
   Variables_Subscription_watchStoresCount._(this._$data);
 
   factory Variables_Subscription_watchStoresCount.fromJson(
-      Map<String, dynamic> data) {
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = (l$where as List<dynamic>?)
           ?.map(
-              (e) => Input_StoresBoolExp.fromJson((e as Map<String, dynamic>)))
+            (e) => Input_StoresBoolExp.fromJson((e as Map<String, dynamic>)),
+          )
           .toList();
     }
     return Variables_Subscription_watchStoresCount._(result$data);
@@ -459,11 +471,10 @@ class Variables_Subscription_watchStoresCount {
   }
 
   CopyWith_Variables_Subscription_watchStoresCount<
-          Variables_Subscription_watchStoresCount>
-      get copyWith => CopyWith_Variables_Subscription_watchStoresCount(
-            this,
-            (i) => i,
-          );
+    Variables_Subscription_watchStoresCount
+  >
+  get copyWith =>
+      CopyWith_Variables_Subscription_watchStoresCount(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -502,9 +513,9 @@ class Variables_Subscription_watchStoresCount {
     return Object.hashAll([
       _$data.containsKey('where')
           ? l$where == null
-              ? null
-              : Object.hashAll(l$where.map((v) => v))
-          : const {}
+                ? null
+                : Object.hashAll(l$where.map((v) => v))
+          : const {},
     ]);
   }
 }
@@ -534,11 +545,12 @@ class _CopyWithImpl_Variables_Subscription_watchStoresCount<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? where = _undefined}) =>
-      _then(Variables_Subscription_watchStoresCount._({
-        ..._instance._$data,
-        if (where != _undefined) 'where': (where as List<Input_StoresBoolExp>?),
-      }));
+  TRes call({Object? where = _undefined}) => _then(
+    Variables_Subscription_watchStoresCount._({
+      ..._instance._$data,
+      if (where != _undefined) 'where': (where as List<Input_StoresBoolExp>?),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Variables_Subscription_watchStoresCount<TRes>
@@ -556,8 +568,10 @@ class Subscription_watchStoresCount {
   factory Subscription_watchStoresCount.fromJson(Map<String, dynamic> json) {
     final l$storesAggregate = json['storesAggregate'];
     return Subscription_watchStoresCount(
-        storesAggregate: Subscription_watchStoresCount_storesAggregate.fromJson(
-            (l$storesAggregate as Map<String, dynamic>)));
+      storesAggregate: Subscription_watchStoresCount_storesAggregate.fromJson(
+        (l$storesAggregate as Map<String, dynamic>),
+      ),
+    );
   }
 
   final Subscription_watchStoresCount_storesAggregate storesAggregate;
@@ -596,10 +610,7 @@ class Subscription_watchStoresCount {
 extension UtilityExtension_Subscription_watchStoresCount
     on Subscription_watchStoresCount {
   CopyWith_Subscription_watchStoresCount<Subscription_watchStoresCount>
-      get copyWith => CopyWith_Subscription_watchStoresCount(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Subscription_watchStoresCount(this, (i) => i);
 }
 
 abstract class CopyWith_Subscription_watchStoresCount<TRes> {
@@ -613,15 +624,12 @@ abstract class CopyWith_Subscription_watchStoresCount<TRes> {
 
   TRes call({Subscription_watchStoresCount_storesAggregate? storesAggregate});
   CopyWith_Subscription_watchStoresCount_storesAggregate<TRes>
-      get storesAggregate;
+  get storesAggregate;
 }
 
 class _CopyWithImpl_Subscription_watchStoresCount<TRes>
     implements CopyWith_Subscription_watchStoresCount<TRes> {
-  _CopyWithImpl_Subscription_watchStoresCount(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Subscription_watchStoresCount(this._instance, this._then);
 
   final Subscription_watchStoresCount _instance;
 
@@ -629,19 +637,21 @@ class _CopyWithImpl_Subscription_watchStoresCount<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? storesAggregate = _undefined}) =>
-      _then(Subscription_watchStoresCount(
-          storesAggregate:
-              storesAggregate == _undefined || storesAggregate == null
-                  ? _instance.storesAggregate
-                  : (storesAggregate
-                      as Subscription_watchStoresCount_storesAggregate)));
+  TRes call({Object? storesAggregate = _undefined}) => _then(
+    Subscription_watchStoresCount(
+      storesAggregate: storesAggregate == _undefined || storesAggregate == null
+          ? _instance.storesAggregate
+          : (storesAggregate as Subscription_watchStoresCount_storesAggregate),
+    ),
+  );
 
   CopyWith_Subscription_watchStoresCount_storesAggregate<TRes>
-      get storesAggregate {
+  get storesAggregate {
     final local$storesAggregate = _instance.storesAggregate;
     return CopyWith_Subscription_watchStoresCount_storesAggregate(
-        local$storesAggregate, (e) => call(storesAggregate: e));
+      local$storesAggregate,
+      (e) => call(storesAggregate: e),
+    );
   }
 }
 
@@ -655,80 +665,90 @@ class _CopyWithStubImpl_Subscription_watchStoresCount<TRes>
       _res;
 
   CopyWith_Subscription_watchStoresCount_storesAggregate<TRes>
-      get storesAggregate =>
-          CopyWith_Subscription_watchStoresCount_storesAggregate.stub(_res);
+  get storesAggregate =>
+      CopyWith_Subscription_watchStoresCount_storesAggregate.stub(_res);
 }
 
-const documentNodeSubscriptionwatchStoresCount = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.subscription,
-    name: NameNode(value: 'watchStoresCount'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'where')),
-        type: ListTypeNode(
-          type: NamedTypeNode(
-            name: NameNode(value: 'StoresBoolExp'),
-            isNonNull: true,
+const documentNodeSubscriptionwatchStoresCount = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.subscription,
+      name: NameNode(value: 'watchStoresCount'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'where')),
+          type: ListTypeNode(
+            type: NamedTypeNode(
+              name: NameNode(value: 'StoresBoolExp'),
+              isNonNull: true,
+            ),
+            isNonNull: false,
           ),
-          isNonNull: false,
+          defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
-        directives: [],
-      )
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'storesAggregate'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'where'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: '_and'),
-                value: VariableNode(name: NameNode(value: 'where')),
-              )
-            ]),
-          )
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
+          FieldNode(
+            name: NameNode(value: 'storesAggregate'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'where'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: '_and'),
+                      value: VariableNode(name: NameNode(value: 'where')),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FieldNode(
+                  name: NameNode(value: 'aggregate'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: SelectionSetNode(
+                    selections: [
+                      FieldNode(
+                        name: NameNode(value: 'count'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                      FieldNode(
+                        name: NameNode(value: '__typename'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                    ],
+                  ),
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
+          ),
         ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-            name: NameNode(value: 'aggregate'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                name: NameNode(value: 'count'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-              FieldNode(
-                name: NameNode(value: '__typename'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-            ]),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-        ]),
-      )
-    ]),
-  ),
-]);
+      ),
+    ),
+  ],
+);
 
 class Subscription_watchStoresCount_storesAggregate {
   Subscription_watchStoresCount_storesAggregate({
@@ -737,14 +757,16 @@ class Subscription_watchStoresCount_storesAggregate {
   });
 
   factory Subscription_watchStoresCount_storesAggregate.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$aggregate = json['aggregate'];
     final l$$__typename = json['__typename'];
     return Subscription_watchStoresCount_storesAggregate(
       aggregate: l$aggregate == null
           ? null
           : Subscription_watchStoresCount_storesAggregate_aggregate.fromJson(
-              (l$aggregate as Map<String, dynamic>)),
+              (l$aggregate as Map<String, dynamic>),
+            ),
       $__typename: (l$$__typename as String),
     );
   }
@@ -766,10 +788,7 @@ class Subscription_watchStoresCount_storesAggregate {
   int get hashCode {
     final l$aggregate = aggregate;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$aggregate,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$aggregate, l$$__typename]);
   }
 
   @override
@@ -798,11 +817,10 @@ class Subscription_watchStoresCount_storesAggregate {
 extension UtilityExtension_Subscription_watchStoresCount_storesAggregate
     on Subscription_watchStoresCount_storesAggregate {
   CopyWith_Subscription_watchStoresCount_storesAggregate<
-          Subscription_watchStoresCount_storesAggregate>
-      get copyWith => CopyWith_Subscription_watchStoresCount_storesAggregate(
-            this,
-            (i) => i,
-          );
+    Subscription_watchStoresCount_storesAggregate
+  >
+  get copyWith =>
+      CopyWith_Subscription_watchStoresCount_storesAggregate(this, (i) => i);
 }
 
 abstract class CopyWith_Subscription_watchStoresCount_storesAggregate<TRes> {
@@ -812,15 +830,15 @@ abstract class CopyWith_Subscription_watchStoresCount_storesAggregate<TRes> {
   ) = _CopyWithImpl_Subscription_watchStoresCount_storesAggregate;
 
   factory CopyWith_Subscription_watchStoresCount_storesAggregate.stub(
-          TRes res) =
-      _CopyWithStubImpl_Subscription_watchStoresCount_storesAggregate;
+    TRes res,
+  ) = _CopyWithStubImpl_Subscription_watchStoresCount_storesAggregate;
 
   TRes call({
     Subscription_watchStoresCount_storesAggregate_aggregate? aggregate,
     String? $__typename,
   });
   CopyWith_Subscription_watchStoresCount_storesAggregate_aggregate<TRes>
-      get aggregate;
+  get aggregate;
 }
 
 class _CopyWithImpl_Subscription_watchStoresCount_storesAggregate<TRes>
@@ -839,25 +857,29 @@ class _CopyWithImpl_Subscription_watchStoresCount_storesAggregate<TRes>
   TRes call({
     Object? aggregate = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Subscription_watchStoresCount_storesAggregate(
-        aggregate: aggregate == _undefined
-            ? _instance.aggregate
-            : (aggregate
+  }) => _then(
+    Subscription_watchStoresCount_storesAggregate(
+      aggregate: aggregate == _undefined
+          ? _instance.aggregate
+          : (aggregate
                 as Subscription_watchStoresCount_storesAggregate_aggregate?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   CopyWith_Subscription_watchStoresCount_storesAggregate_aggregate<TRes>
-      get aggregate {
+  get aggregate {
     final local$aggregate = _instance.aggregate;
     return local$aggregate == null
         ? CopyWith_Subscription_watchStoresCount_storesAggregate_aggregate.stub(
-            _then(_instance))
+            _then(_instance),
+          )
         : CopyWith_Subscription_watchStoresCount_storesAggregate_aggregate(
-            local$aggregate, (e) => call(aggregate: e));
+            local$aggregate,
+            (e) => call(aggregate: e),
+          );
   }
 }
 
@@ -870,13 +892,13 @@ class _CopyWithStubImpl_Subscription_watchStoresCount_storesAggregate<TRes>
   call({
     Subscription_watchStoresCount_storesAggregate_aggregate? aggregate,
     String? $__typename,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Subscription_watchStoresCount_storesAggregate_aggregate<TRes>
-      get aggregate =>
-          CopyWith_Subscription_watchStoresCount_storesAggregate_aggregate.stub(
-              _res);
+  get aggregate =>
+      CopyWith_Subscription_watchStoresCount_storesAggregate_aggregate.stub(
+        _res,
+      );
 }
 
 class Subscription_watchStoresCount_storesAggregate_aggregate {
@@ -886,7 +908,8 @@ class Subscription_watchStoresCount_storesAggregate_aggregate {
   });
 
   factory Subscription_watchStoresCount_storesAggregate_aggregate.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$count = json['count'];
     final l$$__typename = json['__typename'];
     return Subscription_watchStoresCount_storesAggregate_aggregate(
@@ -912,10 +935,7 @@ class Subscription_watchStoresCount_storesAggregate_aggregate {
   int get hashCode {
     final l$count = count;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$count,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$count, l$$__typename]);
   }
 
   @override
@@ -944,33 +964,33 @@ class Subscription_watchStoresCount_storesAggregate_aggregate {
 extension UtilityExtension_Subscription_watchStoresCount_storesAggregate_aggregate
     on Subscription_watchStoresCount_storesAggregate_aggregate {
   CopyWith_Subscription_watchStoresCount_storesAggregate_aggregate<
-          Subscription_watchStoresCount_storesAggregate_aggregate>
-      get copyWith =>
-          CopyWith_Subscription_watchStoresCount_storesAggregate_aggregate(
-            this,
-            (i) => i,
-          );
+    Subscription_watchStoresCount_storesAggregate_aggregate
+  >
+  get copyWith =>
+      CopyWith_Subscription_watchStoresCount_storesAggregate_aggregate(
+        this,
+        (i) => i,
+      );
 }
 
 abstract class CopyWith_Subscription_watchStoresCount_storesAggregate_aggregate<
-    TRes> {
+  TRes
+> {
   factory CopyWith_Subscription_watchStoresCount_storesAggregate_aggregate(
     Subscription_watchStoresCount_storesAggregate_aggregate instance,
     TRes Function(Subscription_watchStoresCount_storesAggregate_aggregate) then,
   ) = _CopyWithImpl_Subscription_watchStoresCount_storesAggregate_aggregate;
 
   factory CopyWith_Subscription_watchStoresCount_storesAggregate_aggregate.stub(
-          TRes res) =
-      _CopyWithStubImpl_Subscription_watchStoresCount_storesAggregate_aggregate;
+    TRes res,
+  ) = _CopyWithStubImpl_Subscription_watchStoresCount_storesAggregate_aggregate;
 
-  TRes call({
-    int? count,
-    String? $__typename,
-  });
+  TRes call({int? count, String? $__typename});
 }
 
 class _CopyWithImpl_Subscription_watchStoresCount_storesAggregate_aggregate<
-        TRes>
+  TRes
+>
     implements
         CopyWith_Subscription_watchStoresCount_storesAggregate_aggregate<TRes> {
   _CopyWithImpl_Subscription_watchStoresCount_storesAggregate_aggregate(
@@ -981,50 +1001,46 @@ class _CopyWithImpl_Subscription_watchStoresCount_storesAggregate_aggregate<
   final Subscription_watchStoresCount_storesAggregate_aggregate _instance;
 
   final TRes Function(Subscription_watchStoresCount_storesAggregate_aggregate)
-      _then;
+  _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? count = _undefined,
-    Object? $__typename = _undefined,
-  }) =>
-      _then(Subscription_watchStoresCount_storesAggregate_aggregate(
-        count: count == _undefined || count == null
-            ? _instance.count
-            : (count as int),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  TRes call({Object? count = _undefined, Object? $__typename = _undefined}) =>
+      _then(
+        Subscription_watchStoresCount_storesAggregate_aggregate(
+          count: count == _undefined || count == null
+              ? _instance.count
+              : (count as int),
+          $__typename: $__typename == _undefined || $__typename == null
+              ? _instance.$__typename
+              : ($__typename as String),
+        ),
+      );
 }
 
 class _CopyWithStubImpl_Subscription_watchStoresCount_storesAggregate_aggregate<
-        TRes>
+  TRes
+>
     implements
         CopyWith_Subscription_watchStoresCount_storesAggregate_aggregate<TRes> {
   _CopyWithStubImpl_Subscription_watchStoresCount_storesAggregate_aggregate(
-      this._res);
+    this._res,
+  );
 
   TRes _res;
 
-  call({
-    int? count,
-    String? $__typename,
-  }) =>
-      _res;
+  call({int? count, String? $__typename}) => _res;
 }
 
 class Variables_Subscription_watchStore {
   factory Variables_Subscription_watchStore({required UuidValue id}) =>
-      Variables_Subscription_watchStore._({
-        r'id': id,
-      });
+      Variables_Subscription_watchStore._({r'id': id});
 
   Variables_Subscription_watchStore._(this._$data);
 
   factory Variables_Subscription_watchStore.fromJson(
-      Map<String, dynamic> data) {
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
     final l$id = data['id'];
     result$data['id'] = stringToUuid(l$id);
@@ -1043,10 +1059,7 @@ class Variables_Subscription_watchStore {
   }
 
   CopyWith_Variables_Subscription_watchStore<Variables_Subscription_watchStore>
-      get copyWith => CopyWith_Variables_Subscription_watchStore(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Variables_Subscription_watchStore(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -1086,10 +1099,7 @@ abstract class CopyWith_Variables_Subscription_watchStore<TRes> {
 
 class _CopyWithImpl_Variables_Subscription_watchStore<TRes>
     implements CopyWith_Variables_Subscription_watchStore<TRes> {
-  _CopyWithImpl_Variables_Subscription_watchStore(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Variables_Subscription_watchStore(this._instance, this._then);
 
   final Variables_Subscription_watchStore _instance;
 
@@ -1097,11 +1107,12 @@ class _CopyWithImpl_Variables_Subscription_watchStore<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? id = _undefined}) =>
-      _then(Variables_Subscription_watchStore._({
-        ..._instance._$data,
-        if (id != _undefined && id != null) 'id': (id as UuidValue),
-      }));
+  TRes call({Object? id = _undefined}) => _then(
+    Variables_Subscription_watchStore._({
+      ..._instance._$data,
+      if (id != _undefined && id != null) 'id': (id as UuidValue),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Variables_Subscription_watchStore<TRes>
@@ -1119,10 +1130,12 @@ class Subscription_watchStore {
   factory Subscription_watchStore.fromJson(Map<String, dynamic> json) {
     final l$storesByPk = json['storesByPk'];
     return Subscription_watchStore(
-        storesByPk: l$storesByPk == null
-            ? null
-            : Subscription_watchStore_storesByPk.fromJson(
-                (l$storesByPk as Map<String, dynamic>)));
+      storesByPk: l$storesByPk == null
+          ? null
+          : Subscription_watchStore_storesByPk.fromJson(
+              (l$storesByPk as Map<String, dynamic>),
+            ),
+    );
   }
 
   final Subscription_watchStore_storesByPk? storesByPk;
@@ -1159,10 +1172,7 @@ class Subscription_watchStore {
 
 extension UtilityExtension_Subscription_watchStore on Subscription_watchStore {
   CopyWith_Subscription_watchStore<Subscription_watchStore> get copyWith =>
-      CopyWith_Subscription_watchStore(
-        this,
-        (i) => i,
-      );
+      CopyWith_Subscription_watchStore(this, (i) => i);
 }
 
 abstract class CopyWith_Subscription_watchStore<TRes> {
@@ -1180,10 +1190,7 @@ abstract class CopyWith_Subscription_watchStore<TRes> {
 
 class _CopyWithImpl_Subscription_watchStore<TRes>
     implements CopyWith_Subscription_watchStore<TRes> {
-  _CopyWithImpl_Subscription_watchStore(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Subscription_watchStore(this._instance, this._then);
 
   final Subscription_watchStore _instance;
 
@@ -1191,17 +1198,22 @@ class _CopyWithImpl_Subscription_watchStore<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? storesByPk = _undefined}) => _then(Subscription_watchStore(
+  TRes call({Object? storesByPk = _undefined}) => _then(
+    Subscription_watchStore(
       storesByPk: storesByPk == _undefined
           ? _instance.storesByPk
-          : (storesByPk as Subscription_watchStore_storesByPk?)));
+          : (storesByPk as Subscription_watchStore_storesByPk?),
+    ),
+  );
 
   CopyWith_Subscription_watchStore_storesByPk<TRes> get storesByPk {
     final local$storesByPk = _instance.storesByPk;
     return local$storesByPk == null
         ? CopyWith_Subscription_watchStore_storesByPk.stub(_then(_instance))
         : CopyWith_Subscription_watchStore_storesByPk(
-            local$storesByPk, (e) => call(storesByPk: e));
+            local$storesByPk,
+            (e) => call(storesByPk: e),
+          );
   }
 }
 
@@ -1217,119 +1229,128 @@ class _CopyWithStubImpl_Subscription_watchStore<TRes>
       CopyWith_Subscription_watchStore_storesByPk.stub(_res);
 }
 
-const documentNodeSubscriptionwatchStore = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.subscription,
-    name: NameNode(value: 'watchStore'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'id')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'uuid'),
-          isNonNull: true,
+const documentNodeSubscriptionwatchStore = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.subscription,
+      name: NameNode(value: 'watchStore'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'id')),
+          type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      )
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'storesByPk'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'id'),
-            value: VariableNode(name: NameNode(value: 'id')),
-          )
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
+          FieldNode(
+            name: NameNode(value: 'storesByPk'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'id'),
+                value: VariableNode(name: NameNode(value: 'id')),
+              ),
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FragmentSpreadNode(
+                  name: NameNode(value: 'Store'),
+                  directives: [],
+                ),
+                FieldNode(
+                  name: NameNode(value: 'address'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: SelectionSetNode(
+                    selections: [
+                      FragmentSpreadNode(
+                        name: NameNode(value: 'Address'),
+                        directives: [],
+                      ),
+                      FieldNode(
+                        name: NameNode(value: '__typename'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                    ],
+                  ),
+                ),
+                FieldNode(
+                  name: NameNode(value: 'lastEdit'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: SelectionSetNode(
+                    selections: [
+                      FragmentSpreadNode(
+                        name: NameNode(value: 'LatestEditHistory'),
+                        directives: [],
+                      ),
+                      FieldNode(
+                        name: NameNode(value: '__typename'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                    ],
+                  ),
+                ),
+                FieldNode(
+                  name: NameNode(value: 'family'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: SelectionSetNode(
+                    selections: [
+                      FragmentSpreadNode(
+                        name: NameNode(value: 'Family'),
+                        directives: [],
+                      ),
+                      FieldNode(
+                        name: NameNode(value: '__typename'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                    ],
+                  ),
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
+          ),
         ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FragmentSpreadNode(
-            name: NameNode(value: 'Store'),
-            directives: [],
-          ),
-          FieldNode(
-            name: NameNode(value: 'address'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FragmentSpreadNode(
-                name: NameNode(value: 'Address'),
-                directives: [],
-              ),
-              FieldNode(
-                name: NameNode(value: '__typename'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-            ]),
-          ),
-          FieldNode(
-            name: NameNode(value: 'lastEdit'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FragmentSpreadNode(
-                name: NameNode(value: 'LatestEditHistory'),
-                directives: [],
-              ),
-              FieldNode(
-                name: NameNode(value: '__typename'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-            ]),
-          ),
-          FieldNode(
-            name: NameNode(value: 'family'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FragmentSpreadNode(
-                name: NameNode(value: 'Family'),
-                directives: [],
-              ),
-              FieldNode(
-                name: NameNode(value: '__typename'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-            ]),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-        ]),
-      )
-    ]),
-  ),
-  fragmentDefinitionStore,
-  fragmentDefinitionStoreNoPhoto,
-  fragmentDefinitionAddress,
-  fragmentDefinitionArea,
-  fragmentDefinitionAreaNoPhoto,
-  fragmentDefinitionStreet,
-  fragmentDefinitionStreetNoPhoto,
-  fragmentDefinitionLatestEditHistory,
-  fragmentDefinitionUser,
-  fragmentDefinitionUserNoPhoto,
-  fragmentDefinitionFamily,
-  fragmentDefinitionFamilyNoPhoto,
-]);
+      ),
+    ),
+    fragmentDefinitionStore,
+    fragmentDefinitionStoreNoPhoto,
+    fragmentDefinitionAddress,
+    fragmentDefinitionArea,
+    fragmentDefinitionAreaNoPhoto,
+    fragmentDefinitionStreet,
+    fragmentDefinitionStreetNoPhoto,
+    fragmentDefinitionLatestEditHistory,
+    fragmentDefinitionUser,
+    fragmentDefinitionUserNoPhoto,
+    fragmentDefinitionFamily,
+    fragmentDefinitionFamilyNoPhoto,
+  ],
+);
 
 class Subscription_watchStore_storesByPk
     implements Fragment_Store, Fragment_StoreNoPhoto {
@@ -1346,7 +1367,8 @@ class Subscription_watchStore_storesByPk
   });
 
   factory Subscription_watchStore_storesByPk.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$id = json['id'];
     final l$name = json['name'];
     final l$color = json['color'];
@@ -1361,8 +1383,9 @@ class Subscription_watchStore_storesByPk
       name: (l$name as String),
       color: (l$color as int?),
       $__typename: (l$$__typename as String),
-      photoUpdatedAt:
-          l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
+      photoUpdatedAt: l$photoUpdatedAt == null
+          ? null
+          : tstzFromString(l$photoUpdatedAt),
       blurhash: (l$blurhash as String?),
       address: l$address == null
           ? null
@@ -1370,7 +1393,8 @@ class Subscription_watchStore_storesByPk
       lastEdit: l$lastEdit == null
           ? null
           : Fragment_LatestEditHistory.fromJson(
-              (l$lastEdit as Map<String, dynamic>)),
+              (l$lastEdit as Map<String, dynamic>),
+            ),
       family: l$family == null
           ? null
           : Fragment_Family.fromJson((l$family as Map<String, dynamic>)),
@@ -1406,8 +1430,9 @@ class Subscription_watchStore_storesByPk
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
-    _resultData['photoUpdatedAt'] =
-        l$photoUpdatedAt == null ? null : tstzToString(l$photoUpdatedAt);
+    _resultData['photoUpdatedAt'] = l$photoUpdatedAt == null
+        ? null
+        : tstzToString(l$photoUpdatedAt);
     final l$blurhash = blurhash;
     _resultData['blurhash'] = l$blurhash;
     final l$address = address;
@@ -1504,11 +1529,9 @@ class Subscription_watchStore_storesByPk
 extension UtilityExtension_Subscription_watchStore_storesByPk
     on Subscription_watchStore_storesByPk {
   CopyWith_Subscription_watchStore_storesByPk<
-          Subscription_watchStore_storesByPk>
-      get copyWith => CopyWith_Subscription_watchStore_storesByPk(
-            this,
-            (i) => i,
-          );
+    Subscription_watchStore_storesByPk
+  >
+  get copyWith => CopyWith_Subscription_watchStore_storesByPk(this, (i) => i);
 }
 
 abstract class CopyWith_Subscription_watchStore_storesByPk<TRes> {
@@ -1538,10 +1561,7 @@ abstract class CopyWith_Subscription_watchStore_storesByPk<TRes> {
 
 class _CopyWithImpl_Subscription_watchStore_storesByPk<TRes>
     implements CopyWith_Subscription_watchStore_storesByPk<TRes> {
-  _CopyWithImpl_Subscription_watchStore_storesByPk(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Subscription_watchStore_storesByPk(this._instance, this._then);
 
   final Subscription_watchStore_storesByPk _instance;
 
@@ -1559,31 +1579,33 @@ class _CopyWithImpl_Subscription_watchStore_storesByPk<TRes>
     Object? address = _undefined,
     Object? lastEdit = _undefined,
     Object? family = _undefined,
-  }) =>
-      _then(Subscription_watchStore_storesByPk(
-        id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
-        name: name == _undefined || name == null
-            ? _instance.name
-            : (name as String),
-        color: color == _undefined ? _instance.color : (color as int?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-        photoUpdatedAt: photoUpdatedAt == _undefined
-            ? _instance.photoUpdatedAt
-            : (photoUpdatedAt as DateTime?),
-        blurhash:
-            blurhash == _undefined ? _instance.blurhash : (blurhash as String?),
-        address: address == _undefined
-            ? _instance.address
-            : (address as Fragment_Address?),
-        lastEdit: lastEdit == _undefined
-            ? _instance.lastEdit
-            : (lastEdit as Fragment_LatestEditHistory?),
-        family: family == _undefined
-            ? _instance.family
-            : (family as Fragment_Family?),
-      ));
+  }) => _then(
+    Subscription_watchStore_storesByPk(
+      id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      color: color == _undefined ? _instance.color : (color as int?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+      photoUpdatedAt: photoUpdatedAt == _undefined
+          ? _instance.photoUpdatedAt
+          : (photoUpdatedAt as DateTime?),
+      blurhash: blurhash == _undefined
+          ? _instance.blurhash
+          : (blurhash as String?),
+      address: address == _undefined
+          ? _instance.address
+          : (address as Fragment_Address?),
+      lastEdit: lastEdit == _undefined
+          ? _instance.lastEdit
+          : (lastEdit as Fragment_LatestEditHistory?),
+      family: family == _undefined
+          ? _instance.family
+          : (family as Fragment_Family?),
+    ),
+  );
 
   CopyWith_Fragment_Address<TRes> get address {
     final local$address = _instance.address;
@@ -1597,7 +1619,9 @@ class _CopyWithImpl_Subscription_watchStore_storesByPk<TRes>
     return local$lastEdit == null
         ? CopyWith_Fragment_LatestEditHistory.stub(_then(_instance))
         : CopyWith_Fragment_LatestEditHistory(
-            local$lastEdit, (e) => call(lastEdit: e));
+            local$lastEdit,
+            (e) => call(lastEdit: e),
+          );
   }
 
   CopyWith_Fragment_Family<TRes> get family {
@@ -1624,8 +1648,7 @@ class _CopyWithStubImpl_Subscription_watchStore_storesByPk<TRes>
     Fragment_Address? address,
     Fragment_LatestEditHistory? lastEdit,
     Fragment_Family? family,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Fragment_Address<TRes> get address =>
       CopyWith_Fragment_Address.stub(_res);

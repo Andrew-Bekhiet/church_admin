@@ -7,30 +7,34 @@ class Variables_Subscription_watchAllPersonStates {
     List<Input_PersonStatesBoolExp>? where,
     List<Input_PersonStatesOrderBy>? orderBy,
     int? limit,
-  }) =>
-      Variables_Subscription_watchAllPersonStates._({
-        if (where != null) r'where': where,
-        if (orderBy != null) r'orderBy': orderBy,
-        if (limit != null) r'limit': limit,
-      });
+  }) => Variables_Subscription_watchAllPersonStates._({
+    if (where != null) r'where': where,
+    if (orderBy != null) r'orderBy': orderBy,
+    if (limit != null) r'limit': limit,
+  });
 
   Variables_Subscription_watchAllPersonStates._(this._$data);
 
   factory Variables_Subscription_watchAllPersonStates.fromJson(
-      Map<String, dynamic> data) {
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = (l$where as List<dynamic>?)
-          ?.map((e) =>
-              Input_PersonStatesBoolExp.fromJson((e as Map<String, dynamic>)))
+          ?.map(
+            (e) =>
+                Input_PersonStatesBoolExp.fromJson((e as Map<String, dynamic>)),
+          )
           .toList();
     }
     if (data.containsKey('orderBy')) {
       final l$orderBy = data['orderBy'];
       result$data['orderBy'] = (l$orderBy as List<dynamic>?)
-          ?.map((e) =>
-              Input_PersonStatesOrderBy.fromJson((e as Map<String, dynamic>)))
+          ?.map(
+            (e) =>
+                Input_PersonStatesOrderBy.fromJson((e as Map<String, dynamic>)),
+          )
           .toList();
     }
     if (data.containsKey('limit')) {
@@ -68,11 +72,10 @@ class Variables_Subscription_watchAllPersonStates {
   }
 
   CopyWith_Variables_Subscription_watchAllPersonStates<
-          Variables_Subscription_watchAllPersonStates>
-      get copyWith => CopyWith_Variables_Subscription_watchAllPersonStates(
-            this,
-            (i) => i,
-          );
+    Variables_Subscription_watchAllPersonStates
+  >
+  get copyWith =>
+      CopyWith_Variables_Subscription_watchAllPersonStates(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -140,13 +143,13 @@ class Variables_Subscription_watchAllPersonStates {
     return Object.hashAll([
       _$data.containsKey('where')
           ? l$where == null
-              ? null
-              : Object.hashAll(l$where.map((v) => v))
+                ? null
+                : Object.hashAll(l$where.map((v) => v))
           : const {},
       _$data.containsKey('orderBy')
           ? l$orderBy == null
-              ? null
-              : Object.hashAll(l$orderBy.map((v) => v))
+                ? null
+                : Object.hashAll(l$orderBy.map((v) => v))
           : const {},
       _$data.containsKey('limit') ? l$limit : const {},
     ]);
@@ -186,15 +189,16 @@ class _CopyWithImpl_Variables_Subscription_watchAllPersonStates<TRes>
     Object? where = _undefined,
     Object? orderBy = _undefined,
     Object? limit = _undefined,
-  }) =>
-      _then(Variables_Subscription_watchAllPersonStates._({
-        ..._instance._$data,
-        if (where != _undefined)
-          'where': (where as List<Input_PersonStatesBoolExp>?),
-        if (orderBy != _undefined)
-          'orderBy': (orderBy as List<Input_PersonStatesOrderBy>?),
-        if (limit != _undefined) 'limit': (limit as int?),
-      }));
+  }) => _then(
+    Variables_Subscription_watchAllPersonStates._({
+      ..._instance._$data,
+      if (where != _undefined)
+        'where': (where as List<Input_PersonStatesBoolExp>?),
+      if (orderBy != _undefined)
+        'orderBy': (orderBy as List<Input_PersonStatesOrderBy>?),
+      if (limit != _undefined) 'limit': (limit as int?),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Variables_Subscription_watchAllPersonStates<TRes>
@@ -207,21 +211,25 @@ class _CopyWithStubImpl_Variables_Subscription_watchAllPersonStates<TRes>
     List<Input_PersonStatesBoolExp>? where,
     List<Input_PersonStatesOrderBy>? orderBy,
     int? limit,
-  }) =>
-      _res;
+  }) => _res;
 }
 
 class Subscription_watchAllPersonStates {
   Subscription_watchAllPersonStates({required this.personStates});
 
   factory Subscription_watchAllPersonStates.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$personStates = json['personStates'];
     return Subscription_watchAllPersonStates(
-        personStates: (l$personStates as List<dynamic>)
-            .map((e) => Subscription_watchAllPersonStates_personStates.fromJson(
-                (e as Map<String, dynamic>)))
-            .toList());
+      personStates: (l$personStates as List<dynamic>)
+          .map(
+            (e) => Subscription_watchAllPersonStates_personStates.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
+          .toList(),
+    );
   }
 
   final List<Subscription_watchAllPersonStates_personStates> personStates;
@@ -229,8 +237,9 @@ class Subscription_watchAllPersonStates {
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$personStates = personStates;
-    _resultData['personStates'] =
-        l$personStates.map((e) => e.toJson()).toList();
+    _resultData['personStates'] = l$personStates
+        .map((e) => e.toJson())
+        .toList();
     return _resultData;
   }
 
@@ -268,10 +277,7 @@ class Subscription_watchAllPersonStates {
 extension UtilityExtension_Subscription_watchAllPersonStates
     on Subscription_watchAllPersonStates {
   CopyWith_Subscription_watchAllPersonStates<Subscription_watchAllPersonStates>
-      get copyWith => CopyWith_Subscription_watchAllPersonStates(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Subscription_watchAllPersonStates(this, (i) => i);
 }
 
 abstract class CopyWith_Subscription_watchAllPersonStates<TRes> {
@@ -283,22 +289,24 @@ abstract class CopyWith_Subscription_watchAllPersonStates<TRes> {
   factory CopyWith_Subscription_watchAllPersonStates.stub(TRes res) =
       _CopyWithStubImpl_Subscription_watchAllPersonStates;
 
-  TRes call(
-      {List<Subscription_watchAllPersonStates_personStates>? personStates});
+  TRes call({
+    List<Subscription_watchAllPersonStates_personStates>? personStates,
+  });
   TRes personStates(
-      Iterable<Subscription_watchAllPersonStates_personStates> Function(
-              Iterable<
-                  CopyWith_Subscription_watchAllPersonStates_personStates<
-                      Subscription_watchAllPersonStates_personStates>>)
-          _fn);
+    Iterable<Subscription_watchAllPersonStates_personStates> Function(
+      Iterable<
+        CopyWith_Subscription_watchAllPersonStates_personStates<
+          Subscription_watchAllPersonStates_personStates
+        >
+      >,
+    )
+    _fn,
+  );
 }
 
 class _CopyWithImpl_Subscription_watchAllPersonStates<TRes>
     implements CopyWith_Subscription_watchAllPersonStates<TRes> {
-  _CopyWithImpl_Subscription_watchAllPersonStates(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Subscription_watchAllPersonStates(this._instance, this._then);
 
   final Subscription_watchAllPersonStates _instance;
 
@@ -306,25 +314,34 @@ class _CopyWithImpl_Subscription_watchAllPersonStates<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? personStates = _undefined}) =>
-      _then(Subscription_watchAllPersonStates(
-          personStates: personStates == _undefined || personStates == null
-              ? _instance.personStates
-              : (personStates
-                  as List<Subscription_watchAllPersonStates_personStates>)));
+  TRes call({Object? personStates = _undefined}) => _then(
+    Subscription_watchAllPersonStates(
+      personStates: personStates == _undefined || personStates == null
+          ? _instance.personStates
+          : (personStates
+                as List<Subscription_watchAllPersonStates_personStates>),
+    ),
+  );
 
   TRes personStates(
-          Iterable<Subscription_watchAllPersonStates_personStates> Function(
-                  Iterable<
-                      CopyWith_Subscription_watchAllPersonStates_personStates<
-                          Subscription_watchAllPersonStates_personStates>>)
-              _fn) =>
-      call(
-          personStates: _fn(_instance.personStates.map(
-              (e) => CopyWith_Subscription_watchAllPersonStates_personStates(
-                    e,
-                    (i) => i,
-                  ))).toList());
+    Iterable<Subscription_watchAllPersonStates_personStates> Function(
+      Iterable<
+        CopyWith_Subscription_watchAllPersonStates_personStates<
+          Subscription_watchAllPersonStates_personStates
+        >
+      >,
+    )
+    _fn,
+  ) => call(
+    personStates: _fn(
+      _instance.personStates.map(
+        (e) => CopyWith_Subscription_watchAllPersonStates_personStates(
+          e,
+          (i) => i,
+        ),
+      ),
+    ).toList(),
+  );
 }
 
 class _CopyWithStubImpl_Subscription_watchAllPersonStates<TRes>
@@ -339,110 +356,118 @@ class _CopyWithStubImpl_Subscription_watchAllPersonStates<TRes>
   personStates(_fn) => _res;
 }
 
-const documentNodeSubscriptionwatchAllPersonStates = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.subscription,
-    name: NameNode(value: 'watchAllPersonStates'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'where')),
-        type: ListTypeNode(
-          type: NamedTypeNode(
-            name: NameNode(value: 'PersonStatesBoolExp'),
-            isNonNull: true,
+const documentNodeSubscriptionwatchAllPersonStates = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.subscription,
+      name: NameNode(value: 'watchAllPersonStates'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'where')),
+          type: ListTypeNode(
+            type: NamedTypeNode(
+              name: NameNode(value: 'PersonStatesBoolExp'),
+              isNonNull: true,
+            ),
+            isNonNull: false,
           ),
-          isNonNull: false,
+          defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'orderBy')),
-        type: ListTypeNode(
-          type: NamedTypeNode(
-            name: NameNode(value: 'PersonStatesOrderBy'),
-            isNonNull: true,
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'orderBy')),
+          type: ListTypeNode(
+            type: NamedTypeNode(
+              name: NameNode(value: 'PersonStatesOrderBy'),
+              isNonNull: true,
+            ),
+            isNonNull: false,
           ),
-          isNonNull: false,
+          defaultValue: DefaultValueNode(
+            value: ObjectValueNode(
+              fields: [
+                ObjectFieldNode(
+                  name: NameNode(value: 'name'),
+                  value: EnumValueNode(name: NameNode(value: 'ASC')),
+                ),
+              ],
+            ),
+          ),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(
-            value: ObjectValueNode(fields: [
-          ObjectFieldNode(
-            name: NameNode(value: 'name'),
-            value: EnumValueNode(name: NameNode(value: 'ASC')),
-          )
-        ])),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'limit')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'Int'),
-          isNonNull: false,
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'limit')),
+          type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: false),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'personStates'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'where'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: '_and'),
-                value: VariableNode(name: NameNode(value: 'where')),
-              )
-            ]),
-          ),
-          ArgumentNode(
-            name: NameNode(value: 'orderBy'),
-            value: VariableNode(name: NameNode(value: 'orderBy')),
-          ),
-          ArgumentNode(
-            name: NameNode(value: 'limit'),
-            value: VariableNode(name: NameNode(value: 'limit')),
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
+          FieldNode(
+            name: NameNode(value: 'personStates'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'where'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: '_and'),
+                      value: VariableNode(name: NameNode(value: 'where')),
+                    ),
+                  ],
+                ),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'orderBy'),
+                value: VariableNode(name: NameNode(value: 'orderBy')),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'limit'),
+                value: VariableNode(name: NameNode(value: 'limit')),
+              ),
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FieldNode(
+                  name: NameNode(value: 'id'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: 'name'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: 'color'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
           ),
         ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-            name: NameNode(value: 'id'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'name'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'color'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-        ]),
-      )
-    ]),
-  ),
-]);
+      ),
+    ),
+  ],
+);
 
 class Subscription_watchAllPersonStates_personStates {
   Subscription_watchAllPersonStates_personStates({
@@ -453,7 +478,8 @@ class Subscription_watchAllPersonStates_personStates {
   });
 
   factory Subscription_watchAllPersonStates_personStates.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$id = json['id'];
     final l$name = json['name'];
     final l$color = json['color'];
@@ -493,12 +519,7 @@ class Subscription_watchAllPersonStates_personStates {
     final l$name = name;
     final l$color = color;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$id,
-      l$name,
-      l$color,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$id, l$name, l$color, l$$__typename]);
   }
 
   @override
@@ -537,11 +558,10 @@ class Subscription_watchAllPersonStates_personStates {
 extension UtilityExtension_Subscription_watchAllPersonStates_personStates
     on Subscription_watchAllPersonStates_personStates {
   CopyWith_Subscription_watchAllPersonStates_personStates<
-          Subscription_watchAllPersonStates_personStates>
-      get copyWith => CopyWith_Subscription_watchAllPersonStates_personStates(
-            this,
-            (i) => i,
-          );
+    Subscription_watchAllPersonStates_personStates
+  >
+  get copyWith =>
+      CopyWith_Subscription_watchAllPersonStates_personStates(this, (i) => i);
 }
 
 abstract class CopyWith_Subscription_watchAllPersonStates_personStates<TRes> {
@@ -551,15 +571,10 @@ abstract class CopyWith_Subscription_watchAllPersonStates_personStates<TRes> {
   ) = _CopyWithImpl_Subscription_watchAllPersonStates_personStates;
 
   factory CopyWith_Subscription_watchAllPersonStates_personStates.stub(
-          TRes res) =
-      _CopyWithStubImpl_Subscription_watchAllPersonStates_personStates;
+    TRes res,
+  ) = _CopyWithStubImpl_Subscription_watchAllPersonStates_personStates;
 
-  TRes call({
-    UuidValue? id,
-    String? name,
-    int? color,
-    String? $__typename,
-  });
+  TRes call({UuidValue? id, String? name, int? color, String? $__typename});
 }
 
 class _CopyWithImpl_Subscription_watchAllPersonStates_personStates<TRes>
@@ -580,19 +595,20 @@ class _CopyWithImpl_Subscription_watchAllPersonStates_personStates<TRes>
     Object? name = _undefined,
     Object? color = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Subscription_watchAllPersonStates_personStates(
-        id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
-        name: name == _undefined || name == null
-            ? _instance.name
-            : (name as String),
-        color: color == _undefined || color == null
-            ? _instance.color
-            : (color as int),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Subscription_watchAllPersonStates_personStates(
+      id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      color: color == _undefined || color == null
+          ? _instance.color
+          : (color as int),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 }
 
 class _CopyWithStubImpl_Subscription_watchAllPersonStates_personStates<TRes>
@@ -601,11 +617,5 @@ class _CopyWithStubImpl_Subscription_watchAllPersonStates_personStates<TRes>
 
   TRes _res;
 
-  call({
-    UuidValue? id,
-    String? name,
-    int? color,
-    String? $__typename,
-  }) =>
-      _res;
+  call({UuidValue? id, String? name, int? color, String? $__typename}) => _res;
 }

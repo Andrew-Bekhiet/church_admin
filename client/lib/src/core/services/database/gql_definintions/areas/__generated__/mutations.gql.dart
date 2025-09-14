@@ -7,9 +7,7 @@ import 'package:gql/ast.dart';
 
 class Variables_Mutation_deleteArea {
   factory Variables_Mutation_deleteArea({required UuidValue areaId}) =>
-      Variables_Mutation_deleteArea._({
-        r'areaId': areaId,
-      });
+      Variables_Mutation_deleteArea._({r'areaId': areaId});
 
   Variables_Mutation_deleteArea._(this._$data);
 
@@ -32,10 +30,7 @@ class Variables_Mutation_deleteArea {
   }
 
   CopyWith_Variables_Mutation_deleteArea<Variables_Mutation_deleteArea>
-      get copyWith => CopyWith_Variables_Mutation_deleteArea(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Variables_Mutation_deleteArea(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -75,10 +70,7 @@ abstract class CopyWith_Variables_Mutation_deleteArea<TRes> {
 
 class _CopyWithImpl_Variables_Mutation_deleteArea<TRes>
     implements CopyWith_Variables_Mutation_deleteArea<TRes> {
-  _CopyWithImpl_Variables_Mutation_deleteArea(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Variables_Mutation_deleteArea(this._instance, this._then);
 
   final Variables_Mutation_deleteArea _instance;
 
@@ -86,12 +78,13 @@ class _CopyWithImpl_Variables_Mutation_deleteArea<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? areaId = _undefined}) =>
-      _then(Variables_Mutation_deleteArea._({
-        ..._instance._$data,
-        if (areaId != _undefined && areaId != null)
-          'areaId': (areaId as UuidValue),
-      }));
+  TRes call({Object? areaId = _undefined}) => _then(
+    Variables_Mutation_deleteArea._({
+      ..._instance._$data,
+      if (areaId != _undefined && areaId != null)
+        'areaId': (areaId as UuidValue),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Variables_Mutation_deleteArea<TRes>
@@ -137,10 +130,7 @@ class Mutation_deleteArea {
   int get hashCode {
     final l$deleteAreasByPk = deleteAreasByPk;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$deleteAreasByPk,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$deleteAreasByPk, l$$__typename]);
   }
 
   @override
@@ -167,10 +157,7 @@ class Mutation_deleteArea {
 
 extension UtilityExtension_Mutation_deleteArea on Mutation_deleteArea {
   CopyWith_Mutation_deleteArea<Mutation_deleteArea> get copyWith =>
-      CopyWith_Mutation_deleteArea(
-        this,
-        (i) => i,
-      );
+      CopyWith_Mutation_deleteArea(this, (i) => i);
 }
 
 abstract class CopyWith_Mutation_deleteArea<TRes> {
@@ -182,19 +169,13 @@ abstract class CopyWith_Mutation_deleteArea<TRes> {
   factory CopyWith_Mutation_deleteArea.stub(TRes res) =
       _CopyWithStubImpl_Mutation_deleteArea;
 
-  TRes call({
-    Fragment_Area? deleteAreasByPk,
-    String? $__typename,
-  });
+  TRes call({Fragment_Area? deleteAreasByPk, String? $__typename});
   CopyWith_Fragment_Area<TRes> get deleteAreasByPk;
 }
 
 class _CopyWithImpl_Mutation_deleteArea<TRes>
     implements CopyWith_Mutation_deleteArea<TRes> {
-  _CopyWithImpl_Mutation_deleteArea(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Mutation_deleteArea(this._instance, this._then);
 
   final Mutation_deleteArea _instance;
 
@@ -205,22 +186,25 @@ class _CopyWithImpl_Mutation_deleteArea<TRes>
   TRes call({
     Object? deleteAreasByPk = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Mutation_deleteArea(
-        deleteAreasByPk: deleteAreasByPk == _undefined
-            ? _instance.deleteAreasByPk
-            : (deleteAreasByPk as Fragment_Area?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Mutation_deleteArea(
+      deleteAreasByPk: deleteAreasByPk == _undefined
+          ? _instance.deleteAreasByPk
+          : (deleteAreasByPk as Fragment_Area?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   CopyWith_Fragment_Area<TRes> get deleteAreasByPk {
     final local$deleteAreasByPk = _instance.deleteAreasByPk;
     return local$deleteAreasByPk == null
         ? CopyWith_Fragment_Area.stub(_then(_instance))
         : CopyWith_Fragment_Area(
-            local$deleteAreasByPk, (e) => call(deleteAreasByPk: e));
+            local$deleteAreasByPk,
+            (e) => call(deleteAreasByPk: e),
+          );
   }
 }
 
@@ -230,47 +214,53 @@ class _CopyWithStubImpl_Mutation_deleteArea<TRes>
 
   TRes _res;
 
-  call({
-    Fragment_Area? deleteAreasByPk,
-    String? $__typename,
-  }) =>
-      _res;
+  call({Fragment_Area? deleteAreasByPk, String? $__typename}) => _res;
 
   CopyWith_Fragment_Area<TRes> get deleteAreasByPk =>
       CopyWith_Fragment_Area.stub(_res);
 }
 
-const documentNodeMutationdeleteArea = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.mutation,
-    name: NameNode(value: 'deleteArea'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'areaId')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'uuid'),
-          isNonNull: true,
+const documentNodeMutationdeleteArea = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.mutation,
+      name: NameNode(value: 'deleteArea'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'areaId')),
+          type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      )
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'deleteAreasByPk'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'id'),
-            value: VariableNode(name: NameNode(value: 'areaId')),
-          )
-        ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FragmentSpreadNode(
-            name: NameNode(value: 'Area'),
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
+          FieldNode(
+            name: NameNode(value: 'deleteAreasByPk'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'id'),
+                value: VariableNode(name: NameNode(value: 'areaId')),
+              ),
+            ],
             directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FragmentSpreadNode(
+                  name: NameNode(value: 'Area'),
+                  directives: [],
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
           ),
           FieldNode(
             name: NameNode(value: '__typename'),
@@ -279,35 +269,27 @@ const documentNodeMutationdeleteArea = DocumentNode(definitions: [
             directives: [],
             selectionSet: null,
           ),
-        ]),
+        ],
       ),
-      FieldNode(
-        name: NameNode(value: '__typename'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-    ]),
-  ),
-  fragmentDefinitionArea,
-  fragmentDefinitionAreaNoPhoto,
-]);
+    ),
+    fragmentDefinitionArea,
+    fragmentDefinitionAreaNoPhoto,
+  ],
+);
 
 class Variables_Mutation_insertArea {
-  factory Variables_Mutation_insertArea(
-          {required Input_AreasInsertInput newArea}) =>
-      Variables_Mutation_insertArea._({
-        r'newArea': newArea,
-      });
+  factory Variables_Mutation_insertArea({
+    required Input_AreasInsertInput newArea,
+  }) => Variables_Mutation_insertArea._({r'newArea': newArea});
 
   Variables_Mutation_insertArea._(this._$data);
 
   factory Variables_Mutation_insertArea.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     final l$newArea = data['newArea'];
-    result$data['newArea'] =
-        Input_AreasInsertInput.fromJson((l$newArea as Map<String, dynamic>));
+    result$data['newArea'] = Input_AreasInsertInput.fromJson(
+      (l$newArea as Map<String, dynamic>),
+    );
     return Variables_Mutation_insertArea._(result$data);
   }
 
@@ -324,10 +306,7 @@ class Variables_Mutation_insertArea {
   }
 
   CopyWith_Variables_Mutation_insertArea<Variables_Mutation_insertArea>
-      get copyWith => CopyWith_Variables_Mutation_insertArea(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Variables_Mutation_insertArea(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -367,10 +346,7 @@ abstract class CopyWith_Variables_Mutation_insertArea<TRes> {
 
 class _CopyWithImpl_Variables_Mutation_insertArea<TRes>
     implements CopyWith_Variables_Mutation_insertArea<TRes> {
-  _CopyWithImpl_Variables_Mutation_insertArea(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Variables_Mutation_insertArea(this._instance, this._then);
 
   final Variables_Mutation_insertArea _instance;
 
@@ -378,12 +354,13 @@ class _CopyWithImpl_Variables_Mutation_insertArea<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? newArea = _undefined}) =>
-      _then(Variables_Mutation_insertArea._({
-        ..._instance._$data,
-        if (newArea != _undefined && newArea != null)
-          'newArea': (newArea as Input_AreasInsertInput),
-      }));
+  TRes call({Object? newArea = _undefined}) => _then(
+    Variables_Mutation_insertArea._({
+      ..._instance._$data,
+      if (newArea != _undefined && newArea != null)
+        'newArea': (newArea as Input_AreasInsertInput),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Variables_Mutation_insertArea<TRes>
@@ -429,10 +406,7 @@ class Mutation_insertArea {
   int get hashCode {
     final l$insertAreasOne = insertAreasOne;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$insertAreasOne,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$insertAreasOne, l$$__typename]);
   }
 
   @override
@@ -459,10 +433,7 @@ class Mutation_insertArea {
 
 extension UtilityExtension_Mutation_insertArea on Mutation_insertArea {
   CopyWith_Mutation_insertArea<Mutation_insertArea> get copyWith =>
-      CopyWith_Mutation_insertArea(
-        this,
-        (i) => i,
-      );
+      CopyWith_Mutation_insertArea(this, (i) => i);
 }
 
 abstract class CopyWith_Mutation_insertArea<TRes> {
@@ -474,19 +445,13 @@ abstract class CopyWith_Mutation_insertArea<TRes> {
   factory CopyWith_Mutation_insertArea.stub(TRes res) =
       _CopyWithStubImpl_Mutation_insertArea;
 
-  TRes call({
-    Fragment_Area? insertAreasOne,
-    String? $__typename,
-  });
+  TRes call({Fragment_Area? insertAreasOne, String? $__typename});
   CopyWith_Fragment_Area<TRes> get insertAreasOne;
 }
 
 class _CopyWithImpl_Mutation_insertArea<TRes>
     implements CopyWith_Mutation_insertArea<TRes> {
-  _CopyWithImpl_Mutation_insertArea(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Mutation_insertArea(this._instance, this._then);
 
   final Mutation_insertArea _instance;
 
@@ -497,22 +462,25 @@ class _CopyWithImpl_Mutation_insertArea<TRes>
   TRes call({
     Object? insertAreasOne = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Mutation_insertArea(
-        insertAreasOne: insertAreasOne == _undefined
-            ? _instance.insertAreasOne
-            : (insertAreasOne as Fragment_Area?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Mutation_insertArea(
+      insertAreasOne: insertAreasOne == _undefined
+          ? _instance.insertAreasOne
+          : (insertAreasOne as Fragment_Area?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   CopyWith_Fragment_Area<TRes> get insertAreasOne {
     final local$insertAreasOne = _instance.insertAreasOne;
     return local$insertAreasOne == null
         ? CopyWith_Fragment_Area.stub(_then(_instance))
         : CopyWith_Fragment_Area(
-            local$insertAreasOne, (e) => call(insertAreasOne: e));
+            local$insertAreasOne,
+            (e) => call(insertAreasOne: e),
+          );
   }
 }
 
@@ -522,47 +490,56 @@ class _CopyWithStubImpl_Mutation_insertArea<TRes>
 
   TRes _res;
 
-  call({
-    Fragment_Area? insertAreasOne,
-    String? $__typename,
-  }) =>
-      _res;
+  call({Fragment_Area? insertAreasOne, String? $__typename}) => _res;
 
   CopyWith_Fragment_Area<TRes> get insertAreasOne =>
       CopyWith_Fragment_Area.stub(_res);
 }
 
-const documentNodeMutationinsertArea = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.mutation,
-    name: NameNode(value: 'insertArea'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'newArea')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'AreasInsertInput'),
-          isNonNull: true,
+const documentNodeMutationinsertArea = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.mutation,
+      name: NameNode(value: 'insertArea'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'newArea')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'AreasInsertInput'),
+            isNonNull: true,
+          ),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      )
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'insertAreasOne'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'object'),
-            value: VariableNode(name: NameNode(value: 'newArea')),
-          )
-        ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FragmentSpreadNode(
-            name: NameNode(value: 'Area'),
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
+          FieldNode(
+            name: NameNode(value: 'insertAreasOne'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'object'),
+                value: VariableNode(name: NameNode(value: 'newArea')),
+              ),
+            ],
             directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FragmentSpreadNode(
+                  name: NameNode(value: 'Area'),
+                  directives: [],
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
           ),
           FieldNode(
             name: NameNode(value: '__typename'),
@@ -571,20 +548,13 @@ const documentNodeMutationinsertArea = DocumentNode(definitions: [
             directives: [],
             selectionSet: null,
           ),
-        ]),
+        ],
       ),
-      FieldNode(
-        name: NameNode(value: '__typename'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-    ]),
-  ),
-  fragmentDefinitionArea,
-  fragmentDefinitionAreaNoPhoto,
-]);
+    ),
+    fragmentDefinitionArea,
+    fragmentDefinitionAreaNoPhoto,
+  ],
+);
 
 class Variables_Mutation_updateArea {
   factory Variables_Mutation_updateArea({
@@ -592,13 +562,12 @@ class Variables_Mutation_updateArea {
     required Input_AreasSetInput newArea,
     DateTime? lastVisit,
     required bool updateLastVisit,
-  }) =>
-      Variables_Mutation_updateArea._({
-        r'areaId': areaId,
-        r'newArea': newArea,
-        if (lastVisit != null) r'lastVisit': lastVisit,
-        r'updateLastVisit': updateLastVisit,
-      });
+  }) => Variables_Mutation_updateArea._({
+    r'areaId': areaId,
+    r'newArea': newArea,
+    if (lastVisit != null) r'lastVisit': lastVisit,
+    r'updateLastVisit': updateLastVisit,
+  });
 
   Variables_Mutation_updateArea._(this._$data);
 
@@ -607,12 +576,14 @@ class Variables_Mutation_updateArea {
     final l$areaId = data['areaId'];
     result$data['areaId'] = stringToUuid(l$areaId);
     final l$newArea = data['newArea'];
-    result$data['newArea'] =
-        Input_AreasSetInput.fromJson((l$newArea as Map<String, dynamic>));
+    result$data['newArea'] = Input_AreasSetInput.fromJson(
+      (l$newArea as Map<String, dynamic>),
+    );
     if (data.containsKey('lastVisit')) {
       final l$lastVisit = data['lastVisit'];
-      result$data['lastVisit'] =
-          l$lastVisit == null ? null : tstzFromString(l$lastVisit);
+      result$data['lastVisit'] = l$lastVisit == null
+          ? null
+          : tstzFromString(l$lastVisit);
     }
     final l$updateLastVisit = data['updateLastVisit'];
     result$data['updateLastVisit'] = (l$updateLastVisit as bool);
@@ -637,8 +608,9 @@ class Variables_Mutation_updateArea {
     result$data['newArea'] = l$newArea.toJson();
     if (_$data.containsKey('lastVisit')) {
       final l$lastVisit = lastVisit;
-      result$data['lastVisit'] =
-          l$lastVisit == null ? null : tstzToString(l$lastVisit);
+      result$data['lastVisit'] = l$lastVisit == null
+          ? null
+          : tstzToString(l$lastVisit);
     }
     final l$updateLastVisit = updateLastVisit;
     result$data['updateLastVisit'] = l$updateLastVisit;
@@ -646,10 +618,7 @@ class Variables_Mutation_updateArea {
   }
 
   CopyWith_Variables_Mutation_updateArea<Variables_Mutation_updateArea>
-      get copyWith => CopyWith_Variables_Mutation_updateArea(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Variables_Mutation_updateArea(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -721,10 +690,7 @@ abstract class CopyWith_Variables_Mutation_updateArea<TRes> {
 
 class _CopyWithImpl_Variables_Mutation_updateArea<TRes>
     implements CopyWith_Variables_Mutation_updateArea<TRes> {
-  _CopyWithImpl_Variables_Mutation_updateArea(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Variables_Mutation_updateArea(this._instance, this._then);
 
   final Variables_Mutation_updateArea _instance;
 
@@ -737,17 +703,18 @@ class _CopyWithImpl_Variables_Mutation_updateArea<TRes>
     Object? newArea = _undefined,
     Object? lastVisit = _undefined,
     Object? updateLastVisit = _undefined,
-  }) =>
-      _then(Variables_Mutation_updateArea._({
-        ..._instance._$data,
-        if (areaId != _undefined && areaId != null)
-          'areaId': (areaId as UuidValue),
-        if (newArea != _undefined && newArea != null)
-          'newArea': (newArea as Input_AreasSetInput),
-        if (lastVisit != _undefined) 'lastVisit': (lastVisit as DateTime?),
-        if (updateLastVisit != _undefined && updateLastVisit != null)
-          'updateLastVisit': (updateLastVisit as bool),
-      }));
+  }) => _then(
+    Variables_Mutation_updateArea._({
+      ..._instance._$data,
+      if (areaId != _undefined && areaId != null)
+        'areaId': (areaId as UuidValue),
+      if (newArea != _undefined && newArea != null)
+        'newArea': (newArea as Input_AreasSetInput),
+      if (lastVisit != _undefined) 'lastVisit': (lastVisit as DateTime?),
+      if (updateLastVisit != _undefined && updateLastVisit != null)
+        'updateLastVisit': (updateLastVisit as bool),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Variables_Mutation_updateArea<TRes>
@@ -761,8 +728,7 @@ class _CopyWithStubImpl_Variables_Mutation_updateArea<TRes>
     Input_AreasSetInput? newArea,
     DateTime? lastVisit,
     bool? updateLastVisit,
-  }) =>
-      _res;
+  }) => _res;
 }
 
 class Mutation_updateArea {
@@ -783,7 +749,8 @@ class Mutation_updateArea {
       insertHistoryVisitHistoryOne: l$insertHistoryVisitHistoryOne == null
           ? null
           : Fragment_VisitHistory.fromJson(
-              (l$insertHistoryVisitHistoryOne as Map<String, dynamic>)),
+              (l$insertHistoryVisitHistoryOne as Map<String, dynamic>),
+            ),
       $__typename: (l$$__typename as String),
     );
   }
@@ -799,8 +766,8 @@ class Mutation_updateArea {
     final l$updateAreasByPk = updateAreasByPk;
     _resultData['updateAreasByPk'] = l$updateAreasByPk?.toJson();
     final l$insertHistoryVisitHistoryOne = insertHistoryVisitHistoryOne;
-    _resultData['insertHistoryVisitHistoryOne'] =
-        l$insertHistoryVisitHistoryOne?.toJson();
+    _resultData['insertHistoryVisitHistoryOne'] = l$insertHistoryVisitHistoryOne
+        ?.toJson();
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -848,10 +815,7 @@ class Mutation_updateArea {
 
 extension UtilityExtension_Mutation_updateArea on Mutation_updateArea {
   CopyWith_Mutation_updateArea<Mutation_updateArea> get copyWith =>
-      CopyWith_Mutation_updateArea(
-        this,
-        (i) => i,
-      );
+      CopyWith_Mutation_updateArea(this, (i) => i);
 }
 
 abstract class CopyWith_Mutation_updateArea<TRes> {
@@ -874,10 +838,7 @@ abstract class CopyWith_Mutation_updateArea<TRes> {
 
 class _CopyWithImpl_Mutation_updateArea<TRes>
     implements CopyWith_Mutation_updateArea<TRes> {
-  _CopyWithImpl_Mutation_updateArea(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Mutation_updateArea(this._instance, this._then);
 
   final Mutation_updateArea _instance;
 
@@ -889,25 +850,28 @@ class _CopyWithImpl_Mutation_updateArea<TRes>
     Object? updateAreasByPk = _undefined,
     Object? insertHistoryVisitHistoryOne = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Mutation_updateArea(
-        updateAreasByPk: updateAreasByPk == _undefined
-            ? _instance.updateAreasByPk
-            : (updateAreasByPk as Fragment_Area?),
-        insertHistoryVisitHistoryOne: insertHistoryVisitHistoryOne == _undefined
-            ? _instance.insertHistoryVisitHistoryOne
-            : (insertHistoryVisitHistoryOne as Fragment_VisitHistory?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Mutation_updateArea(
+      updateAreasByPk: updateAreasByPk == _undefined
+          ? _instance.updateAreasByPk
+          : (updateAreasByPk as Fragment_Area?),
+      insertHistoryVisitHistoryOne: insertHistoryVisitHistoryOne == _undefined
+          ? _instance.insertHistoryVisitHistoryOne
+          : (insertHistoryVisitHistoryOne as Fragment_VisitHistory?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   CopyWith_Fragment_Area<TRes> get updateAreasByPk {
     final local$updateAreasByPk = _instance.updateAreasByPk;
     return local$updateAreasByPk == null
         ? CopyWith_Fragment_Area.stub(_then(_instance))
         : CopyWith_Fragment_Area(
-            local$updateAreasByPk, (e) => call(updateAreasByPk: e));
+            local$updateAreasByPk,
+            (e) => call(updateAreasByPk: e),
+          );
   }
 
   CopyWith_Fragment_VisitHistory<TRes> get insertHistoryVisitHistoryOne {
@@ -915,8 +879,10 @@ class _CopyWithImpl_Mutation_updateArea<TRes>
         _instance.insertHistoryVisitHistoryOne;
     return local$insertHistoryVisitHistoryOne == null
         ? CopyWith_Fragment_VisitHistory.stub(_then(_instance))
-        : CopyWith_Fragment_VisitHistory(local$insertHistoryVisitHistoryOne,
-            (e) => call(insertHistoryVisitHistoryOne: e));
+        : CopyWith_Fragment_VisitHistory(
+            local$insertHistoryVisitHistoryOne,
+            (e) => call(insertHistoryVisitHistoryOne: e),
+          );
   }
 }
 
@@ -930,8 +896,7 @@ class _CopyWithStubImpl_Mutation_updateArea<TRes>
     Fragment_Area? updateAreasByPk,
     Fragment_VisitHistory? insertHistoryVisitHistoryOne,
     String? $__typename,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Fragment_Area<TRes> get updateAreasByPk =>
       CopyWith_Fragment_Area.stub(_res);
@@ -940,123 +905,138 @@ class _CopyWithStubImpl_Mutation_updateArea<TRes>
       CopyWith_Fragment_VisitHistory.stub(_res);
 }
 
-const documentNodeMutationupdateArea = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.mutation,
-    name: NameNode(value: 'updateArea'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'areaId')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'uuid'),
-          isNonNull: true,
+const documentNodeMutationupdateArea = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.mutation,
+      name: NameNode(value: 'updateArea'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'areaId')),
+          type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'newArea')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'AreasSetInput'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'lastVisit')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'timestamptz'),
-          isNonNull: false,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'updateLastVisit')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'Boolean'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'updateAreasByPk'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'pkColumns'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'id'),
-                value: VariableNode(name: NameNode(value: 'areaId')),
-              )
-            ]),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'newArea')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'AreasSetInput'),
+            isNonNull: true,
           ),
-          ArgumentNode(
-            name: NameNode(value: '_set'),
-            value: VariableNode(name: NameNode(value: 'newArea')),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'lastVisit')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'timestamptz'),
+            isNonNull: false,
           ),
-        ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FragmentSpreadNode(
-            name: NameNode(value: 'Area'),
-            directives: [],
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'updateLastVisit')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'Boolean'),
+            isNonNull: true,
           ),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
           FieldNode(
-            name: NameNode(value: '__typename'),
+            name: NameNode(value: 'updateAreasByPk'),
             alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-        ]),
-      ),
-      FieldNode(
-        name: NameNode(value: 'insertHistoryVisitHistoryOne'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'object'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'table'),
-                value: StringValueNode(
-                  value: 'areas',
-                  isBlock: false,
-                ),
-              ),
-              ObjectFieldNode(
-                name: NameNode(value: 'recordId'),
-                value: VariableNode(name: NameNode(value: 'areaId')),
-              ),
-              ObjectFieldNode(
-                name: NameNode(value: 'time'),
-                value: VariableNode(name: NameNode(value: 'lastVisit')),
-              ),
-            ]),
-          )
-        ],
-        directives: [
-          DirectiveNode(
-            name: NameNode(value: 'include'),
             arguments: [
               ArgumentNode(
-                name: NameNode(value: 'if'),
-                value: VariableNode(name: NameNode(value: 'updateLastVisit')),
-              )
+                name: NameNode(value: 'pkColumns'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'id'),
+                      value: VariableNode(name: NameNode(value: 'areaId')),
+                    ),
+                  ],
+                ),
+              ),
+              ArgumentNode(
+                name: NameNode(value: '_set'),
+                value: VariableNode(name: NameNode(value: 'newArea')),
+              ),
             ],
-          )
-        ],
-        selectionSet: SelectionSetNode(selections: [
-          FragmentSpreadNode(
-            name: NameNode(value: 'VisitHistory'),
             directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FragmentSpreadNode(
+                  name: NameNode(value: 'Area'),
+                  directives: [],
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
+          ),
+          FieldNode(
+            name: NameNode(value: 'insertHistoryVisitHistoryOne'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'object'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'table'),
+                      value: StringValueNode(value: 'areas', isBlock: false),
+                    ),
+                    ObjectFieldNode(
+                      name: NameNode(value: 'recordId'),
+                      value: VariableNode(name: NameNode(value: 'areaId')),
+                    ),
+                    ObjectFieldNode(
+                      name: NameNode(value: 'time'),
+                      value: VariableNode(name: NameNode(value: 'lastVisit')),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+            directives: [
+              DirectiveNode(
+                name: NameNode(value: 'include'),
+                arguments: [
+                  ArgumentNode(
+                    name: NameNode(value: 'if'),
+                    value: VariableNode(
+                      name: NameNode(value: 'updateLastVisit'),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FragmentSpreadNode(
+                  name: NameNode(value: 'VisitHistory'),
+                  directives: [],
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
           ),
           FieldNode(
             name: NameNode(value: '__typename'),
@@ -1065,20 +1045,13 @@ const documentNodeMutationupdateArea = DocumentNode(definitions: [
             directives: [],
             selectionSet: null,
           ),
-        ]),
+        ],
       ),
-      FieldNode(
-        name: NameNode(value: '__typename'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-    ]),
-  ),
-  fragmentDefinitionArea,
-  fragmentDefinitionAreaNoPhoto,
-  fragmentDefinitionVisitHistory,
-  fragmentDefinitionUser,
-  fragmentDefinitionUserNoPhoto,
-]);
+    ),
+    fragmentDefinitionArea,
+    fragmentDefinitionAreaNoPhoto,
+    fragmentDefinitionVisitHistory,
+    fragmentDefinitionUser,
+    fragmentDefinitionUserNoPhoto,
+  ],
+);

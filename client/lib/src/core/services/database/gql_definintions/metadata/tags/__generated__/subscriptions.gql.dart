@@ -7,17 +7,17 @@ class Variables_Subscription_watchAllTags {
     List<Input_TagsBoolExp>? where,
     List<Input_TagsOrderBy>? orderBy,
     int? limit,
-  }) =>
-      Variables_Subscription_watchAllTags._({
-        if (where != null) r'where': where,
-        if (orderBy != null) r'orderBy': orderBy,
-        if (limit != null) r'limit': limit,
-      });
+  }) => Variables_Subscription_watchAllTags._({
+    if (where != null) r'where': where,
+    if (orderBy != null) r'orderBy': orderBy,
+    if (limit != null) r'limit': limit,
+  });
 
   Variables_Subscription_watchAllTags._(this._$data);
 
   factory Variables_Subscription_watchAllTags.fromJson(
-      Map<String, dynamic> data) {
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('where')) {
       final l$where = data['where'];
@@ -66,11 +66,9 @@ class Variables_Subscription_watchAllTags {
   }
 
   CopyWith_Variables_Subscription_watchAllTags<
-          Variables_Subscription_watchAllTags>
-      get copyWith => CopyWith_Variables_Subscription_watchAllTags(
-            this,
-            (i) => i,
-          );
+    Variables_Subscription_watchAllTags
+  >
+  get copyWith => CopyWith_Variables_Subscription_watchAllTags(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -138,13 +136,13 @@ class Variables_Subscription_watchAllTags {
     return Object.hashAll([
       _$data.containsKey('where')
           ? l$where == null
-              ? null
-              : Object.hashAll(l$where.map((v) => v))
+                ? null
+                : Object.hashAll(l$where.map((v) => v))
           : const {},
       _$data.containsKey('orderBy')
           ? l$orderBy == null
-              ? null
-              : Object.hashAll(l$orderBy.map((v) => v))
+                ? null
+                : Object.hashAll(l$orderBy.map((v) => v))
           : const {},
       _$data.containsKey('limit') ? l$limit : const {},
     ]);
@@ -169,10 +167,7 @@ abstract class CopyWith_Variables_Subscription_watchAllTags<TRes> {
 
 class _CopyWithImpl_Variables_Subscription_watchAllTags<TRes>
     implements CopyWith_Variables_Subscription_watchAllTags<TRes> {
-  _CopyWithImpl_Variables_Subscription_watchAllTags(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Variables_Subscription_watchAllTags(this._instance, this._then);
 
   final Variables_Subscription_watchAllTags _instance;
 
@@ -184,14 +179,15 @@ class _CopyWithImpl_Variables_Subscription_watchAllTags<TRes>
     Object? where = _undefined,
     Object? orderBy = _undefined,
     Object? limit = _undefined,
-  }) =>
-      _then(Variables_Subscription_watchAllTags._({
-        ..._instance._$data,
-        if (where != _undefined) 'where': (where as List<Input_TagsBoolExp>?),
-        if (orderBy != _undefined)
-          'orderBy': (orderBy as List<Input_TagsOrderBy>?),
-        if (limit != _undefined) 'limit': (limit as int?),
-      }));
+  }) => _then(
+    Variables_Subscription_watchAllTags._({
+      ..._instance._$data,
+      if (where != _undefined) 'where': (where as List<Input_TagsBoolExp>?),
+      if (orderBy != _undefined)
+        'orderBy': (orderBy as List<Input_TagsOrderBy>?),
+      if (limit != _undefined) 'limit': (limit as int?),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Variables_Subscription_watchAllTags<TRes>
@@ -204,8 +200,7 @@ class _CopyWithStubImpl_Variables_Subscription_watchAllTags<TRes>
     List<Input_TagsBoolExp>? where,
     List<Input_TagsOrderBy>? orderBy,
     int? limit,
-  }) =>
-      _res;
+  }) => _res;
 }
 
 class Subscription_watchAllTags {
@@ -214,10 +209,14 @@ class Subscription_watchAllTags {
   factory Subscription_watchAllTags.fromJson(Map<String, dynamic> json) {
     final l$tags = json['tags'];
     return Subscription_watchAllTags(
-        tags: (l$tags as List<dynamic>)
-            .map((e) => Subscription_watchAllTags_tags.fromJson(
-                (e as Map<String, dynamic>)))
-            .toList());
+      tags: (l$tags as List<dynamic>)
+          .map(
+            (e) => Subscription_watchAllTags_tags.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
+          .toList(),
+    );
   }
 
   final List<Subscription_watchAllTags_tags> tags;
@@ -263,10 +262,7 @@ class Subscription_watchAllTags {
 extension UtilityExtension_Subscription_watchAllTags
     on Subscription_watchAllTags {
   CopyWith_Subscription_watchAllTags<Subscription_watchAllTags> get copyWith =>
-      CopyWith_Subscription_watchAllTags(
-        this,
-        (i) => i,
-      );
+      CopyWith_Subscription_watchAllTags(this, (i) => i);
 }
 
 abstract class CopyWith_Subscription_watchAllTags<TRes> {
@@ -280,19 +276,18 @@ abstract class CopyWith_Subscription_watchAllTags<TRes> {
 
   TRes call({List<Subscription_watchAllTags_tags>? tags});
   TRes tags(
-      Iterable<Subscription_watchAllTags_tags> Function(
-              Iterable<
-                  CopyWith_Subscription_watchAllTags_tags<
-                      Subscription_watchAllTags_tags>>)
-          _fn);
+    Iterable<Subscription_watchAllTags_tags> Function(
+      Iterable<
+        CopyWith_Subscription_watchAllTags_tags<Subscription_watchAllTags_tags>
+      >,
+    )
+    _fn,
+  );
 }
 
 class _CopyWithImpl_Subscription_watchAllTags<TRes>
     implements CopyWith_Subscription_watchAllTags<TRes> {
-  _CopyWithImpl_Subscription_watchAllTags(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Subscription_watchAllTags(this._instance, this._then);
 
   final Subscription_watchAllTags _instance;
 
@@ -300,23 +295,28 @@ class _CopyWithImpl_Subscription_watchAllTags<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? tags = _undefined}) => _then(Subscription_watchAllTags(
+  TRes call({Object? tags = _undefined}) => _then(
+    Subscription_watchAllTags(
       tags: tags == _undefined || tags == null
           ? _instance.tags
-          : (tags as List<Subscription_watchAllTags_tags>)));
+          : (tags as List<Subscription_watchAllTags_tags>),
+    ),
+  );
 
   TRes tags(
-          Iterable<Subscription_watchAllTags_tags> Function(
-                  Iterable<
-                      CopyWith_Subscription_watchAllTags_tags<
-                          Subscription_watchAllTags_tags>>)
-              _fn) =>
-      call(
-          tags: _fn(
-              _instance.tags.map((e) => CopyWith_Subscription_watchAllTags_tags(
-                    e,
-                    (i) => i,
-                  ))).toList());
+    Iterable<Subscription_watchAllTags_tags> Function(
+      Iterable<
+        CopyWith_Subscription_watchAllTags_tags<Subscription_watchAllTags_tags>
+      >,
+    )
+    _fn,
+  ) => call(
+    tags: _fn(
+      _instance.tags.map(
+        (e) => CopyWith_Subscription_watchAllTags_tags(e, (i) => i),
+      ),
+    ).toList(),
+  );
 }
 
 class _CopyWithStubImpl_Subscription_watchAllTags<TRes>
@@ -330,104 +330,109 @@ class _CopyWithStubImpl_Subscription_watchAllTags<TRes>
   tags(_fn) => _res;
 }
 
-const documentNodeSubscriptionwatchAllTags = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.subscription,
-    name: NameNode(value: 'watchAllTags'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'where')),
-        type: ListTypeNode(
-          type: NamedTypeNode(
-            name: NameNode(value: 'TagsBoolExp'),
-            isNonNull: true,
+const documentNodeSubscriptionwatchAllTags = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.subscription,
+      name: NameNode(value: 'watchAllTags'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'where')),
+          type: ListTypeNode(
+            type: NamedTypeNode(
+              name: NameNode(value: 'TagsBoolExp'),
+              isNonNull: true,
+            ),
+            isNonNull: false,
           ),
-          isNonNull: false,
+          defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'orderBy')),
-        type: ListTypeNode(
-          type: NamedTypeNode(
-            name: NameNode(value: 'TagsOrderBy'),
-            isNonNull: true,
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'orderBy')),
+          type: ListTypeNode(
+            type: NamedTypeNode(
+              name: NameNode(value: 'TagsOrderBy'),
+              isNonNull: true,
+            ),
+            isNonNull: false,
           ),
-          isNonNull: false,
+          defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'limit')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'Int'),
-          isNonNull: false,
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'limit')),
+          type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: false),
+          defaultValue: DefaultValueNode(value: IntValueNode(value: '25')),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: IntValueNode(value: '25')),
-        directives: [],
-      ),
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'tags'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'where'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: '_and'),
-                value: VariableNode(name: NameNode(value: 'where')),
-              )
-            ]),
-          ),
-          ArgumentNode(
-            name: NameNode(value: 'orderBy'),
-            value: VariableNode(name: NameNode(value: 'orderBy')),
-          ),
-          ArgumentNode(
-            name: NameNode(value: 'limit'),
-            value: VariableNode(name: NameNode(value: 'limit')),
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
+          FieldNode(
+            name: NameNode(value: 'tags'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'where'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: '_and'),
+                      value: VariableNode(name: NameNode(value: 'where')),
+                    ),
+                  ],
+                ),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'orderBy'),
+                value: VariableNode(name: NameNode(value: 'orderBy')),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'limit'),
+                value: VariableNode(name: NameNode(value: 'limit')),
+              ),
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FieldNode(
+                  name: NameNode(value: 'id'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: 'name'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: 'color'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
           ),
         ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-            name: NameNode(value: 'id'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'name'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'color'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-        ]),
-      )
-    ]),
-  ),
-]);
+      ),
+    ),
+  ],
+);
 
 class Subscription_watchAllTags_tags {
   Subscription_watchAllTags_tags({
@@ -477,12 +482,7 @@ class Subscription_watchAllTags_tags {
     final l$name = name;
     final l$color = color;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$id,
-      l$name,
-      l$color,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$id, l$name, l$color, l$$__typename]);
   }
 
   @override
@@ -521,10 +521,7 @@ class Subscription_watchAllTags_tags {
 extension UtilityExtension_Subscription_watchAllTags_tags
     on Subscription_watchAllTags_tags {
   CopyWith_Subscription_watchAllTags_tags<Subscription_watchAllTags_tags>
-      get copyWith => CopyWith_Subscription_watchAllTags_tags(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Subscription_watchAllTags_tags(this, (i) => i);
 }
 
 abstract class CopyWith_Subscription_watchAllTags_tags<TRes> {
@@ -536,20 +533,12 @@ abstract class CopyWith_Subscription_watchAllTags_tags<TRes> {
   factory CopyWith_Subscription_watchAllTags_tags.stub(TRes res) =
       _CopyWithStubImpl_Subscription_watchAllTags_tags;
 
-  TRes call({
-    UuidValue? id,
-    String? name,
-    int? color,
-    String? $__typename,
-  });
+  TRes call({UuidValue? id, String? name, int? color, String? $__typename});
 }
 
 class _CopyWithImpl_Subscription_watchAllTags_tags<TRes>
     implements CopyWith_Subscription_watchAllTags_tags<TRes> {
-  _CopyWithImpl_Subscription_watchAllTags_tags(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Subscription_watchAllTags_tags(this._instance, this._then);
 
   final Subscription_watchAllTags_tags _instance;
 
@@ -562,17 +551,18 @@ class _CopyWithImpl_Subscription_watchAllTags_tags<TRes>
     Object? name = _undefined,
     Object? color = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Subscription_watchAllTags_tags(
-        id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
-        name: name == _undefined || name == null
-            ? _instance.name
-            : (name as String),
-        color: color == _undefined ? _instance.color : (color as int?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Subscription_watchAllTags_tags(
+      id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      color: color == _undefined ? _instance.color : (color as int?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 }
 
 class _CopyWithStubImpl_Subscription_watchAllTags_tags<TRes>
@@ -581,11 +571,5 @@ class _CopyWithStubImpl_Subscription_watchAllTags_tags<TRes>
 
   TRes _res;
 
-  call({
-    UuidValue? id,
-    String? name,
-    int? color,
-    String? $__typename,
-  }) =>
-      _res;
+  call({UuidValue? id, String? name, int? color, String? $__typename}) => _res;
 }

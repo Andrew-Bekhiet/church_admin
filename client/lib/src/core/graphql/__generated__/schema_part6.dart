@@ -16,11 +16,15 @@ abstract class CopyWith_Input_AuthUsersAdminOnArrRelInsertInput<TRes> {
     Input_AuthUsersAdminOnOnConflict? onConflict,
   });
   TRes data(
-      Iterable<Input_AuthUsersAdminOnInsertInput> Function(
-              Iterable<
-                  CopyWith_Input_AuthUsersAdminOnInsertInput<
-                      Input_AuthUsersAdminOnInsertInput>>)
-          _fn);
+    Iterable<Input_AuthUsersAdminOnInsertInput> Function(
+      Iterable<
+        CopyWith_Input_AuthUsersAdminOnInsertInput<
+          Input_AuthUsersAdminOnInsertInput
+        >
+      >,
+    )
+    _fn,
+  );
   CopyWith_Input_AuthUsersAdminOnOnConflict<TRes> get onConflict;
 }
 
@@ -37,37 +41,42 @@ class _CopyWithImpl_Input_AuthUsersAdminOnArrRelInsertInput<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? data = _undefined,
-    Object? onConflict = _undefined,
-  }) =>
-      _then(Input_AuthUsersAdminOnArrRelInsertInput._({
-        ..._instance._$data,
-        if (data != _undefined && data != null)
-          'data': (data as List<Input_AuthUsersAdminOnInsertInput>),
-        if (onConflict != _undefined)
-          'onConflict': (onConflict as Input_AuthUsersAdminOnOnConflict?),
-      }));
+  TRes call({Object? data = _undefined, Object? onConflict = _undefined}) =>
+      _then(
+        Input_AuthUsersAdminOnArrRelInsertInput._({
+          ..._instance._$data,
+          if (data != _undefined && data != null)
+            'data': (data as List<Input_AuthUsersAdminOnInsertInput>),
+          if (onConflict != _undefined)
+            'onConflict': (onConflict as Input_AuthUsersAdminOnOnConflict?),
+        }),
+      );
 
   TRes data(
-          Iterable<Input_AuthUsersAdminOnInsertInput> Function(
-                  Iterable<
-                      CopyWith_Input_AuthUsersAdminOnInsertInput<
-                          Input_AuthUsersAdminOnInsertInput>>)
-              _fn) =>
-      call(
-          data: _fn(_instance.data
-              .map((e) => CopyWith_Input_AuthUsersAdminOnInsertInput(
-                    e,
-                    (i) => i,
-                  ))).toList());
+    Iterable<Input_AuthUsersAdminOnInsertInput> Function(
+      Iterable<
+        CopyWith_Input_AuthUsersAdminOnInsertInput<
+          Input_AuthUsersAdminOnInsertInput
+        >
+      >,
+    )
+    _fn,
+  ) => call(
+    data: _fn(
+      _instance.data.map(
+        (e) => CopyWith_Input_AuthUsersAdminOnInsertInput(e, (i) => i),
+      ),
+    ).toList(),
+  );
 
   CopyWith_Input_AuthUsersAdminOnOnConflict<TRes> get onConflict {
     final local$onConflict = _instance.onConflict;
     return local$onConflict == null
         ? CopyWith_Input_AuthUsersAdminOnOnConflict.stub(_then(_instance))
         : CopyWith_Input_AuthUsersAdminOnOnConflict(
-            local$onConflict, (e) => call(onConflict: e));
+            local$onConflict,
+            (e) => call(onConflict: e),
+          );
   }
 }
 
@@ -80,8 +89,7 @@ class _CopyWithStubImpl_Input_AuthUsersAdminOnArrRelInsertInput<TRes>
   call({
     List<Input_AuthUsersAdminOnInsertInput>? data,
     Input_AuthUsersAdminOnOnConflict? onConflict,
-  }) =>
-      _res;
+  }) => _res;
 
   data(_fn) => _res;
 
@@ -125,10 +133,7 @@ class Input_AuthUsersAdminOnAvgOrderBy {
   }
 
   CopyWith_Input_AuthUsersAdminOnAvgOrderBy<Input_AuthUsersAdminOnAvgOrderBy>
-      get copyWith => CopyWith_Input_AuthUsersAdminOnAvgOrderBy(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Input_AuthUsersAdminOnAvgOrderBy(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -155,7 +160,7 @@ class Input_AuthUsersAdminOnAvgOrderBy {
   int get hashCode {
     final l$serviceStudyYear = serviceStudyYear;
     return Object.hashAll([
-      _$data.containsKey('serviceStudyYear') ? l$serviceStudyYear : const {}
+      _$data.containsKey('serviceStudyYear') ? l$serviceStudyYear : const {},
     ]);
   }
 }
@@ -174,10 +179,7 @@ abstract class CopyWith_Input_AuthUsersAdminOnAvgOrderBy<TRes> {
 
 class _CopyWithImpl_Input_AuthUsersAdminOnAvgOrderBy<TRes>
     implements CopyWith_Input_AuthUsersAdminOnAvgOrderBy<TRes> {
-  _CopyWithImpl_Input_AuthUsersAdminOnAvgOrderBy(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Input_AuthUsersAdminOnAvgOrderBy(this._instance, this._then);
 
   final Input_AuthUsersAdminOnAvgOrderBy _instance;
 
@@ -185,12 +187,13 @@ class _CopyWithImpl_Input_AuthUsersAdminOnAvgOrderBy<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? serviceStudyYear = _undefined}) =>
-      _then(Input_AuthUsersAdminOnAvgOrderBy._({
-        ..._instance._$data,
-        if (serviceStudyYear != _undefined)
-          'serviceStudyYear': (serviceStudyYear as Enum_OrderBy?),
-      }));
+  TRes call({Object? serviceStudyYear = _undefined}) => _then(
+    Input_AuthUsersAdminOnAvgOrderBy._({
+      ..._instance._$data,
+      if (serviceStudyYear != _undefined)
+        'serviceStudyYear': (serviceStudyYear as Enum_OrderBy?),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Input_AuthUsersAdminOnAvgOrderBy<TRes>
@@ -227,34 +230,33 @@ class Input_AuthUsersAdminOnBoolExp {
     Input_StudyYearsBoolExp? serviceStudyYearData,
     Input_UuidComparisonExp? uid,
     Input_AuthUsersDataBoolExp? user,
-  }) =>
-      Input_AuthUsersAdminOnBoolExp._({
-        if ($_and != null) r'_and': $_and,
-        if ($_not != null) r'_not': $_not,
-        if ($_or != null) r'_or': $_or,
-        if (adminOnArea != null) r'adminOnArea': adminOnArea,
-        if (adminOnGroup != null) r'adminOnGroup': adminOnGroup,
-        if (adminOnService != null) r'adminOnService': adminOnService,
-        if (area != null) r'area': area,
-        if (areaAdminOnUsers != null) r'areaAdminOnUsers': areaAdminOnUsers,
-        if (areaAllowEdit != null) r'areaAllowEdit': areaAllowEdit,
-        if (classes != null) r'classes': classes,
-        if (classesAggregate != null) r'classesAggregate': classesAggregate,
-        if (group != null) r'group': group,
-        if (groupAdminOnUsers != null) r'groupAdminOnUsers': groupAdminOnUsers,
-        if (groupAllowEdit != null) r'groupAllowEdit': groupAllowEdit,
-        if (permissionId != null) r'permissionId': permissionId,
-        if (service != null) r'service': service,
-        if (serviceAdminOnUsers != null)
-          r'serviceAdminOnUsers': serviceAdminOnUsers,
-        if (serviceAllowEdit != null) r'serviceAllowEdit': serviceAllowEdit,
-        if (serviceGender != null) r'serviceGender': serviceGender,
-        if (serviceStudyYear != null) r'serviceStudyYear': serviceStudyYear,
-        if (serviceStudyYearData != null)
-          r'serviceStudyYearData': serviceStudyYearData,
-        if (uid != null) r'uid': uid,
-        if (user != null) r'user': user,
-      });
+  }) => Input_AuthUsersAdminOnBoolExp._({
+    if ($_and != null) r'_and': $_and,
+    if ($_not != null) r'_not': $_not,
+    if ($_or != null) r'_or': $_or,
+    if (adminOnArea != null) r'adminOnArea': adminOnArea,
+    if (adminOnGroup != null) r'adminOnGroup': adminOnGroup,
+    if (adminOnService != null) r'adminOnService': adminOnService,
+    if (area != null) r'area': area,
+    if (areaAdminOnUsers != null) r'areaAdminOnUsers': areaAdminOnUsers,
+    if (areaAllowEdit != null) r'areaAllowEdit': areaAllowEdit,
+    if (classes != null) r'classes': classes,
+    if (classesAggregate != null) r'classesAggregate': classesAggregate,
+    if (group != null) r'group': group,
+    if (groupAdminOnUsers != null) r'groupAdminOnUsers': groupAdminOnUsers,
+    if (groupAllowEdit != null) r'groupAllowEdit': groupAllowEdit,
+    if (permissionId != null) r'permissionId': permissionId,
+    if (service != null) r'service': service,
+    if (serviceAdminOnUsers != null)
+      r'serviceAdminOnUsers': serviceAdminOnUsers,
+    if (serviceAllowEdit != null) r'serviceAllowEdit': serviceAllowEdit,
+    if (serviceGender != null) r'serviceGender': serviceGender,
+    if (serviceStudyYear != null) r'serviceStudyYear': serviceStudyYear,
+    if (serviceStudyYearData != null)
+      r'serviceStudyYearData': serviceStudyYearData,
+    if (uid != null) r'uid': uid,
+    if (user != null) r'user': user,
+  });
 
   Input_AuthUsersAdminOnBoolExp._(this._$data);
 
@@ -263,8 +265,11 @@ class Input_AuthUsersAdminOnBoolExp {
     if (data.containsKey('_and')) {
       final l$$_and = data['_and'];
       result$data['_and'] = (l$$_and as List<dynamic>?)
-          ?.map((e) => Input_AuthUsersAdminOnBoolExp.fromJson(
-              (e as Map<String, dynamic>)))
+          ?.map(
+            (e) => Input_AuthUsersAdminOnBoolExp.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
           .toList();
     }
     if (data.containsKey('_not')) {
@@ -272,13 +277,17 @@ class Input_AuthUsersAdminOnBoolExp {
       result$data['_not'] = l$$_not == null
           ? null
           : Input_AuthUsersAdminOnBoolExp.fromJson(
-              (l$$_not as Map<String, dynamic>));
+              (l$$_not as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('_or')) {
       final l$$_or = data['_or'];
       result$data['_or'] = (l$$_or as List<dynamic>?)
-          ?.map((e) => Input_AuthUsersAdminOnBoolExp.fromJson(
-              (e as Map<String, dynamic>)))
+          ?.map(
+            (e) => Input_AuthUsersAdminOnBoolExp.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
           .toList();
     }
     if (data.containsKey('adminOnArea')) {
@@ -286,21 +295,24 @@ class Input_AuthUsersAdminOnBoolExp {
       result$data['adminOnArea'] = l$adminOnArea == null
           ? null
           : Input_UuidComparisonExp.fromJson(
-              (l$adminOnArea as Map<String, dynamic>));
+              (l$adminOnArea as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('adminOnGroup')) {
       final l$adminOnGroup = data['adminOnGroup'];
       result$data['adminOnGroup'] = l$adminOnGroup == null
           ? null
           : Input_UuidComparisonExp.fromJson(
-              (l$adminOnGroup as Map<String, dynamic>));
+              (l$adminOnGroup as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('adminOnService')) {
       final l$adminOnService = data['adminOnService'];
       result$data['adminOnService'] = l$adminOnService == null
           ? null
           : Input_UuidComparisonExp.fromJson(
-              (l$adminOnService as Map<String, dynamic>));
+              (l$adminOnService as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('area')) {
       final l$area = data['area'];
@@ -313,14 +325,16 @@ class Input_AuthUsersAdminOnBoolExp {
       result$data['areaAdminOnUsers'] = l$areaAdminOnUsers == null
           ? null
           : Input_BooleanComparisonExp.fromJson(
-              (l$areaAdminOnUsers as Map<String, dynamic>));
+              (l$areaAdminOnUsers as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('areaAllowEdit')) {
       final l$areaAllowEdit = data['areaAllowEdit'];
       result$data['areaAllowEdit'] = l$areaAllowEdit == null
           ? null
           : Input_BooleanComparisonExp.fromJson(
-              (l$areaAllowEdit as Map<String, dynamic>));
+              (l$areaAllowEdit as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('classes')) {
       final l$classes = data['classes'];
@@ -333,7 +347,8 @@ class Input_AuthUsersAdminOnBoolExp {
       result$data['classesAggregate'] = l$classesAggregate == null
           ? null
           : Input_ClassesAggregateBoolExp.fromJson(
-              (l$classesAggregate as Map<String, dynamic>));
+              (l$classesAggregate as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('group')) {
       final l$group = data['group'];
@@ -346,21 +361,24 @@ class Input_AuthUsersAdminOnBoolExp {
       result$data['groupAdminOnUsers'] = l$groupAdminOnUsers == null
           ? null
           : Input_BooleanComparisonExp.fromJson(
-              (l$groupAdminOnUsers as Map<String, dynamic>));
+              (l$groupAdminOnUsers as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('groupAllowEdit')) {
       final l$groupAllowEdit = data['groupAllowEdit'];
       result$data['groupAllowEdit'] = l$groupAllowEdit == null
           ? null
           : Input_BooleanComparisonExp.fromJson(
-              (l$groupAllowEdit as Map<String, dynamic>));
+              (l$groupAllowEdit as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('permissionId')) {
       final l$permissionId = data['permissionId'];
       result$data['permissionId'] = l$permissionId == null
           ? null
           : Input_UuidComparisonExp.fromJson(
-              (l$permissionId as Map<String, dynamic>));
+              (l$permissionId as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('service')) {
       final l$service = data['service'];
@@ -373,35 +391,40 @@ class Input_AuthUsersAdminOnBoolExp {
       result$data['serviceAdminOnUsers'] = l$serviceAdminOnUsers == null
           ? null
           : Input_BooleanComparisonExp.fromJson(
-              (l$serviceAdminOnUsers as Map<String, dynamic>));
+              (l$serviceAdminOnUsers as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('serviceAllowEdit')) {
       final l$serviceAllowEdit = data['serviceAllowEdit'];
       result$data['serviceAllowEdit'] = l$serviceAllowEdit == null
           ? null
           : Input_BooleanComparisonExp.fromJson(
-              (l$serviceAllowEdit as Map<String, dynamic>));
+              (l$serviceAllowEdit as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('serviceGender')) {
       final l$serviceGender = data['serviceGender'];
       result$data['serviceGender'] = l$serviceGender == null
           ? null
           : Input_BooleanComparisonExp.fromJson(
-              (l$serviceGender as Map<String, dynamic>));
+              (l$serviceGender as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('serviceStudyYear')) {
       final l$serviceStudyYear = data['serviceStudyYear'];
       result$data['serviceStudyYear'] = l$serviceStudyYear == null
           ? null
           : Input_IntComparisonExp.fromJson(
-              (l$serviceStudyYear as Map<String, dynamic>));
+              (l$serviceStudyYear as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('serviceStudyYearData')) {
       final l$serviceStudyYearData = data['serviceStudyYearData'];
       result$data['serviceStudyYearData'] = l$serviceStudyYearData == null
           ? null
           : Input_StudyYearsBoolExp.fromJson(
-              (l$serviceStudyYearData as Map<String, dynamic>));
+              (l$serviceStudyYearData as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('uid')) {
       final l$uid = data['uid'];
@@ -414,7 +437,8 @@ class Input_AuthUsersAdminOnBoolExp {
       result$data['user'] = l$user == null
           ? null
           : Input_AuthUsersDataBoolExp.fromJson(
-              (l$user as Map<String, dynamic>));
+              (l$user as Map<String, dynamic>),
+            );
     }
     return Input_AuthUsersAdminOnBoolExp._(result$data);
   }
@@ -586,10 +610,7 @@ class Input_AuthUsersAdminOnBoolExp {
   }
 
   CopyWith_Input_AuthUsersAdminOnBoolExp<Input_AuthUsersAdminOnBoolExp>
-      get copyWith => CopyWith_Input_AuthUsersAdminOnBoolExp(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Input_AuthUsersAdminOnBoolExp(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -851,14 +872,14 @@ class Input_AuthUsersAdminOnBoolExp {
     return Object.hashAll([
       _$data.containsKey('_and')
           ? l$$_and == null
-              ? null
-              : Object.hashAll(l$$_and.map((v) => v))
+                ? null
+                : Object.hashAll(l$$_and.map((v) => v))
           : const {},
       _$data.containsKey('_not') ? l$$_not : const {},
       _$data.containsKey('_or')
           ? l$$_or == null
-              ? null
-              : Object.hashAll(l$$_or.map((v) => v))
+                ? null
+                : Object.hashAll(l$$_or.map((v) => v))
           : const {},
       _$data.containsKey('adminOnArea') ? l$adminOnArea : const {},
       _$data.containsKey('adminOnGroup') ? l$adminOnGroup : const {},
@@ -923,18 +944,22 @@ abstract class CopyWith_Input_AuthUsersAdminOnBoolExp<TRes> {
     Input_AuthUsersDataBoolExp? user,
   });
   TRes $_and(
-      Iterable<Input_AuthUsersAdminOnBoolExp>? Function(
-              Iterable<
-                  CopyWith_Input_AuthUsersAdminOnBoolExp<
-                      Input_AuthUsersAdminOnBoolExp>>?)
-          _fn);
+    Iterable<Input_AuthUsersAdminOnBoolExp>? Function(
+      Iterable<
+        CopyWith_Input_AuthUsersAdminOnBoolExp<Input_AuthUsersAdminOnBoolExp>
+      >?,
+    )
+    _fn,
+  );
   CopyWith_Input_AuthUsersAdminOnBoolExp<TRes> get $_not;
   TRes $_or(
-      Iterable<Input_AuthUsersAdminOnBoolExp>? Function(
-              Iterable<
-                  CopyWith_Input_AuthUsersAdminOnBoolExp<
-                      Input_AuthUsersAdminOnBoolExp>>?)
-          _fn);
+    Iterable<Input_AuthUsersAdminOnBoolExp>? Function(
+      Iterable<
+        CopyWith_Input_AuthUsersAdminOnBoolExp<Input_AuthUsersAdminOnBoolExp>
+      >?,
+    )
+    _fn,
+  );
   CopyWith_Input_UuidComparisonExp<TRes> get adminOnArea;
   CopyWith_Input_UuidComparisonExp<TRes> get adminOnGroup;
   CopyWith_Input_UuidComparisonExp<TRes> get adminOnService;
@@ -959,10 +984,7 @@ abstract class CopyWith_Input_AuthUsersAdminOnBoolExp<TRes> {
 
 class _CopyWithImpl_Input_AuthUsersAdminOnBoolExp<TRes>
     implements CopyWith_Input_AuthUsersAdminOnBoolExp<TRes> {
-  _CopyWithImpl_Input_AuthUsersAdminOnBoolExp(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Input_AuthUsersAdminOnBoolExp(this._instance, this._then);
 
   final Input_AuthUsersAdminOnBoolExp _instance;
 
@@ -994,97 +1016,103 @@ class _CopyWithImpl_Input_AuthUsersAdminOnBoolExp<TRes>
     Object? serviceStudyYearData = _undefined,
     Object? uid = _undefined,
     Object? user = _undefined,
-  }) =>
-      _then(Input_AuthUsersAdminOnBoolExp._({
-        ..._instance._$data,
-        if ($_and != _undefined)
-          '_and': ($_and as List<Input_AuthUsersAdminOnBoolExp>?),
-        if ($_not != _undefined)
-          '_not': ($_not as Input_AuthUsersAdminOnBoolExp?),
-        if ($_or != _undefined)
-          '_or': ($_or as List<Input_AuthUsersAdminOnBoolExp>?),
-        if (adminOnArea != _undefined)
-          'adminOnArea': (adminOnArea as Input_UuidComparisonExp?),
-        if (adminOnGroup != _undefined)
-          'adminOnGroup': (adminOnGroup as Input_UuidComparisonExp?),
-        if (adminOnService != _undefined)
-          'adminOnService': (adminOnService as Input_UuidComparisonExp?),
-        if (area != _undefined) 'area': (area as Input_AreasBoolExp?),
-        if (areaAdminOnUsers != _undefined)
-          'areaAdminOnUsers': (areaAdminOnUsers as Input_BooleanComparisonExp?),
-        if (areaAllowEdit != _undefined)
-          'areaAllowEdit': (areaAllowEdit as Input_BooleanComparisonExp?),
-        if (classes != _undefined)
-          'classes': (classes as Input_ClassesBoolExp?),
-        if (classesAggregate != _undefined)
-          'classesAggregate':
-              (classesAggregate as Input_ClassesAggregateBoolExp?),
-        if (group != _undefined) 'group': (group as Input_GroupsBoolExp?),
-        if (groupAdminOnUsers != _undefined)
-          'groupAdminOnUsers':
-              (groupAdminOnUsers as Input_BooleanComparisonExp?),
-        if (groupAllowEdit != _undefined)
-          'groupAllowEdit': (groupAllowEdit as Input_BooleanComparisonExp?),
-        if (permissionId != _undefined)
-          'permissionId': (permissionId as Input_UuidComparisonExp?),
-        if (service != _undefined)
-          'service': (service as Input_ServicesBoolExp?),
-        if (serviceAdminOnUsers != _undefined)
-          'serviceAdminOnUsers':
-              (serviceAdminOnUsers as Input_BooleanComparisonExp?),
-        if (serviceAllowEdit != _undefined)
-          'serviceAllowEdit': (serviceAllowEdit as Input_BooleanComparisonExp?),
-        if (serviceGender != _undefined)
-          'serviceGender': (serviceGender as Input_BooleanComparisonExp?),
-        if (serviceStudyYear != _undefined)
-          'serviceStudyYear': (serviceStudyYear as Input_IntComparisonExp?),
-        if (serviceStudyYearData != _undefined)
-          'serviceStudyYearData':
-              (serviceStudyYearData as Input_StudyYearsBoolExp?),
-        if (uid != _undefined) 'uid': (uid as Input_UuidComparisonExp?),
-        if (user != _undefined) 'user': (user as Input_AuthUsersDataBoolExp?),
-      }));
+  }) => _then(
+    Input_AuthUsersAdminOnBoolExp._({
+      ..._instance._$data,
+      if ($_and != _undefined)
+        '_and': ($_and as List<Input_AuthUsersAdminOnBoolExp>?),
+      if ($_not != _undefined)
+        '_not': ($_not as Input_AuthUsersAdminOnBoolExp?),
+      if ($_or != _undefined)
+        '_or': ($_or as List<Input_AuthUsersAdminOnBoolExp>?),
+      if (adminOnArea != _undefined)
+        'adminOnArea': (adminOnArea as Input_UuidComparisonExp?),
+      if (adminOnGroup != _undefined)
+        'adminOnGroup': (adminOnGroup as Input_UuidComparisonExp?),
+      if (adminOnService != _undefined)
+        'adminOnService': (adminOnService as Input_UuidComparisonExp?),
+      if (area != _undefined) 'area': (area as Input_AreasBoolExp?),
+      if (areaAdminOnUsers != _undefined)
+        'areaAdminOnUsers': (areaAdminOnUsers as Input_BooleanComparisonExp?),
+      if (areaAllowEdit != _undefined)
+        'areaAllowEdit': (areaAllowEdit as Input_BooleanComparisonExp?),
+      if (classes != _undefined) 'classes': (classes as Input_ClassesBoolExp?),
+      if (classesAggregate != _undefined)
+        'classesAggregate':
+            (classesAggregate as Input_ClassesAggregateBoolExp?),
+      if (group != _undefined) 'group': (group as Input_GroupsBoolExp?),
+      if (groupAdminOnUsers != _undefined)
+        'groupAdminOnUsers': (groupAdminOnUsers as Input_BooleanComparisonExp?),
+      if (groupAllowEdit != _undefined)
+        'groupAllowEdit': (groupAllowEdit as Input_BooleanComparisonExp?),
+      if (permissionId != _undefined)
+        'permissionId': (permissionId as Input_UuidComparisonExp?),
+      if (service != _undefined) 'service': (service as Input_ServicesBoolExp?),
+      if (serviceAdminOnUsers != _undefined)
+        'serviceAdminOnUsers':
+            (serviceAdminOnUsers as Input_BooleanComparisonExp?),
+      if (serviceAllowEdit != _undefined)
+        'serviceAllowEdit': (serviceAllowEdit as Input_BooleanComparisonExp?),
+      if (serviceGender != _undefined)
+        'serviceGender': (serviceGender as Input_BooleanComparisonExp?),
+      if (serviceStudyYear != _undefined)
+        'serviceStudyYear': (serviceStudyYear as Input_IntComparisonExp?),
+      if (serviceStudyYearData != _undefined)
+        'serviceStudyYearData':
+            (serviceStudyYearData as Input_StudyYearsBoolExp?),
+      if (uid != _undefined) 'uid': (uid as Input_UuidComparisonExp?),
+      if (user != _undefined) 'user': (user as Input_AuthUsersDataBoolExp?),
+    }),
+  );
 
   TRes $_and(
-          Iterable<Input_AuthUsersAdminOnBoolExp>? Function(
-                  Iterable<
-                      CopyWith_Input_AuthUsersAdminOnBoolExp<
-                          Input_AuthUsersAdminOnBoolExp>>?)
-              _fn) =>
-      call(
-          $_and: _fn(_instance.$_and
-              ?.map((e) => CopyWith_Input_AuthUsersAdminOnBoolExp(
-                    e,
-                    (i) => i,
-                  )))?.toList());
+    Iterable<Input_AuthUsersAdminOnBoolExp>? Function(
+      Iterable<
+        CopyWith_Input_AuthUsersAdminOnBoolExp<Input_AuthUsersAdminOnBoolExp>
+      >?,
+    )
+    _fn,
+  ) => call(
+    $_and: _fn(
+      _instance.$_and?.map(
+        (e) => CopyWith_Input_AuthUsersAdminOnBoolExp(e, (i) => i),
+      ),
+    )?.toList(),
+  );
 
   CopyWith_Input_AuthUsersAdminOnBoolExp<TRes> get $_not {
     final local$$_not = _instance.$_not;
     return local$$_not == null
         ? CopyWith_Input_AuthUsersAdminOnBoolExp.stub(_then(_instance))
         : CopyWith_Input_AuthUsersAdminOnBoolExp(
-            local$$_not, (e) => call($_not: e));
+            local$$_not,
+            (e) => call($_not: e),
+          );
   }
 
   TRes $_or(
-          Iterable<Input_AuthUsersAdminOnBoolExp>? Function(
-                  Iterable<
-                      CopyWith_Input_AuthUsersAdminOnBoolExp<
-                          Input_AuthUsersAdminOnBoolExp>>?)
-              _fn) =>
-      call(
-          $_or: _fn(
-              _instance.$_or?.map((e) => CopyWith_Input_AuthUsersAdminOnBoolExp(
-                    e,
-                    (i) => i,
-                  )))?.toList());
+    Iterable<Input_AuthUsersAdminOnBoolExp>? Function(
+      Iterable<
+        CopyWith_Input_AuthUsersAdminOnBoolExp<Input_AuthUsersAdminOnBoolExp>
+      >?,
+    )
+    _fn,
+  ) => call(
+    $_or: _fn(
+      _instance.$_or?.map(
+        (e) => CopyWith_Input_AuthUsersAdminOnBoolExp(e, (i) => i),
+      ),
+    )?.toList(),
+  );
 
   CopyWith_Input_UuidComparisonExp<TRes> get adminOnArea {
     final local$adminOnArea = _instance.adminOnArea;
     return local$adminOnArea == null
         ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
         : CopyWith_Input_UuidComparisonExp(
-            local$adminOnArea, (e) => call(adminOnArea: e));
+            local$adminOnArea,
+            (e) => call(adminOnArea: e),
+          );
   }
 
   CopyWith_Input_UuidComparisonExp<TRes> get adminOnGroup {
@@ -1092,7 +1120,9 @@ class _CopyWithImpl_Input_AuthUsersAdminOnBoolExp<TRes>
     return local$adminOnGroup == null
         ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
         : CopyWith_Input_UuidComparisonExp(
-            local$adminOnGroup, (e) => call(adminOnGroup: e));
+            local$adminOnGroup,
+            (e) => call(adminOnGroup: e),
+          );
   }
 
   CopyWith_Input_UuidComparisonExp<TRes> get adminOnService {
@@ -1100,7 +1130,9 @@ class _CopyWithImpl_Input_AuthUsersAdminOnBoolExp<TRes>
     return local$adminOnService == null
         ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
         : CopyWith_Input_UuidComparisonExp(
-            local$adminOnService, (e) => call(adminOnService: e));
+            local$adminOnService,
+            (e) => call(adminOnService: e),
+          );
   }
 
   CopyWith_Input_AreasBoolExp<TRes> get area {
@@ -1115,7 +1147,9 @@ class _CopyWithImpl_Input_AuthUsersAdminOnBoolExp<TRes>
     return local$areaAdminOnUsers == null
         ? CopyWith_Input_BooleanComparisonExp.stub(_then(_instance))
         : CopyWith_Input_BooleanComparisonExp(
-            local$areaAdminOnUsers, (e) => call(areaAdminOnUsers: e));
+            local$areaAdminOnUsers,
+            (e) => call(areaAdminOnUsers: e),
+          );
   }
 
   CopyWith_Input_BooleanComparisonExp<TRes> get areaAllowEdit {
@@ -1123,7 +1157,9 @@ class _CopyWithImpl_Input_AuthUsersAdminOnBoolExp<TRes>
     return local$areaAllowEdit == null
         ? CopyWith_Input_BooleanComparisonExp.stub(_then(_instance))
         : CopyWith_Input_BooleanComparisonExp(
-            local$areaAllowEdit, (e) => call(areaAllowEdit: e));
+            local$areaAllowEdit,
+            (e) => call(areaAllowEdit: e),
+          );
   }
 
   CopyWith_Input_ClassesBoolExp<TRes> get classes {
@@ -1138,7 +1174,9 @@ class _CopyWithImpl_Input_AuthUsersAdminOnBoolExp<TRes>
     return local$classesAggregate == null
         ? CopyWith_Input_ClassesAggregateBoolExp.stub(_then(_instance))
         : CopyWith_Input_ClassesAggregateBoolExp(
-            local$classesAggregate, (e) => call(classesAggregate: e));
+            local$classesAggregate,
+            (e) => call(classesAggregate: e),
+          );
   }
 
   CopyWith_Input_GroupsBoolExp<TRes> get group {
@@ -1153,7 +1191,9 @@ class _CopyWithImpl_Input_AuthUsersAdminOnBoolExp<TRes>
     return local$groupAdminOnUsers == null
         ? CopyWith_Input_BooleanComparisonExp.stub(_then(_instance))
         : CopyWith_Input_BooleanComparisonExp(
-            local$groupAdminOnUsers, (e) => call(groupAdminOnUsers: e));
+            local$groupAdminOnUsers,
+            (e) => call(groupAdminOnUsers: e),
+          );
   }
 
   CopyWith_Input_BooleanComparisonExp<TRes> get groupAllowEdit {
@@ -1161,7 +1201,9 @@ class _CopyWithImpl_Input_AuthUsersAdminOnBoolExp<TRes>
     return local$groupAllowEdit == null
         ? CopyWith_Input_BooleanComparisonExp.stub(_then(_instance))
         : CopyWith_Input_BooleanComparisonExp(
-            local$groupAllowEdit, (e) => call(groupAllowEdit: e));
+            local$groupAllowEdit,
+            (e) => call(groupAllowEdit: e),
+          );
   }
 
   CopyWith_Input_UuidComparisonExp<TRes> get permissionId {
@@ -1169,7 +1211,9 @@ class _CopyWithImpl_Input_AuthUsersAdminOnBoolExp<TRes>
     return local$permissionId == null
         ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
         : CopyWith_Input_UuidComparisonExp(
-            local$permissionId, (e) => call(permissionId: e));
+            local$permissionId,
+            (e) => call(permissionId: e),
+          );
   }
 
   CopyWith_Input_ServicesBoolExp<TRes> get service {
@@ -1177,7 +1221,9 @@ class _CopyWithImpl_Input_AuthUsersAdminOnBoolExp<TRes>
     return local$service == null
         ? CopyWith_Input_ServicesBoolExp.stub(_then(_instance))
         : CopyWith_Input_ServicesBoolExp(
-            local$service, (e) => call(service: e));
+            local$service,
+            (e) => call(service: e),
+          );
   }
 
   CopyWith_Input_BooleanComparisonExp<TRes> get serviceAdminOnUsers {
@@ -1185,7 +1231,9 @@ class _CopyWithImpl_Input_AuthUsersAdminOnBoolExp<TRes>
     return local$serviceAdminOnUsers == null
         ? CopyWith_Input_BooleanComparisonExp.stub(_then(_instance))
         : CopyWith_Input_BooleanComparisonExp(
-            local$serviceAdminOnUsers, (e) => call(serviceAdminOnUsers: e));
+            local$serviceAdminOnUsers,
+            (e) => call(serviceAdminOnUsers: e),
+          );
   }
 
   CopyWith_Input_BooleanComparisonExp<TRes> get serviceAllowEdit {
@@ -1193,7 +1241,9 @@ class _CopyWithImpl_Input_AuthUsersAdminOnBoolExp<TRes>
     return local$serviceAllowEdit == null
         ? CopyWith_Input_BooleanComparisonExp.stub(_then(_instance))
         : CopyWith_Input_BooleanComparisonExp(
-            local$serviceAllowEdit, (e) => call(serviceAllowEdit: e));
+            local$serviceAllowEdit,
+            (e) => call(serviceAllowEdit: e),
+          );
   }
 
   CopyWith_Input_BooleanComparisonExp<TRes> get serviceGender {
@@ -1201,7 +1251,9 @@ class _CopyWithImpl_Input_AuthUsersAdminOnBoolExp<TRes>
     return local$serviceGender == null
         ? CopyWith_Input_BooleanComparisonExp.stub(_then(_instance))
         : CopyWith_Input_BooleanComparisonExp(
-            local$serviceGender, (e) => call(serviceGender: e));
+            local$serviceGender,
+            (e) => call(serviceGender: e),
+          );
   }
 
   CopyWith_Input_IntComparisonExp<TRes> get serviceStudyYear {
@@ -1209,7 +1261,9 @@ class _CopyWithImpl_Input_AuthUsersAdminOnBoolExp<TRes>
     return local$serviceStudyYear == null
         ? CopyWith_Input_IntComparisonExp.stub(_then(_instance))
         : CopyWith_Input_IntComparisonExp(
-            local$serviceStudyYear, (e) => call(serviceStudyYear: e));
+            local$serviceStudyYear,
+            (e) => call(serviceStudyYear: e),
+          );
   }
 
   CopyWith_Input_StudyYearsBoolExp<TRes> get serviceStudyYearData {
@@ -1217,7 +1271,9 @@ class _CopyWithImpl_Input_AuthUsersAdminOnBoolExp<TRes>
     return local$serviceStudyYearData == null
         ? CopyWith_Input_StudyYearsBoolExp.stub(_then(_instance))
         : CopyWith_Input_StudyYearsBoolExp(
-            local$serviceStudyYearData, (e) => call(serviceStudyYearData: e));
+            local$serviceStudyYearData,
+            (e) => call(serviceStudyYearData: e),
+          );
   }
 
   CopyWith_Input_UuidComparisonExp<TRes> get uid {
@@ -1265,8 +1321,7 @@ class _CopyWithStubImpl_Input_AuthUsersAdminOnBoolExp<TRes>
     Input_StudyYearsBoolExp? serviceStudyYearData,
     Input_UuidComparisonExp? uid,
     Input_AuthUsersDataBoolExp? user,
-  }) =>
-      _res;
+  }) => _res;
 
   $_and(_fn) => _res;
 
@@ -1355,55 +1410,59 @@ class Input_AuthUsersAdminOnInsertInput {
     int? serviceStudyYear,
     Input_StudyYearsObjRelInsertInput? serviceStudyYearData,
     UuidValue? uid,
-  }) =>
-      Input_AuthUsersAdminOnInsertInput._({
-        if (adminOnArea != null) r'adminOnArea': adminOnArea,
-        if (adminOnGroup != null) r'adminOnGroup': adminOnGroup,
-        if (adminOnService != null) r'adminOnService': adminOnService,
-        if (area != null) r'area': area,
-        if (areaAdminOnUsers != null) r'areaAdminOnUsers': areaAdminOnUsers,
-        if (areaAllowEdit != null) r'areaAllowEdit': areaAllowEdit,
-        if (classes != null) r'classes': classes,
-        if (group != null) r'group': group,
-        if (groupAdminOnUsers != null) r'groupAdminOnUsers': groupAdminOnUsers,
-        if (groupAllowEdit != null) r'groupAllowEdit': groupAllowEdit,
-        if (service != null) r'service': service,
-        if (serviceAdminOnUsers != null)
-          r'serviceAdminOnUsers': serviceAdminOnUsers,
-        if (serviceAllowEdit != null) r'serviceAllowEdit': serviceAllowEdit,
-        if (serviceGender != null) r'serviceGender': serviceGender,
-        if (serviceStudyYear != null) r'serviceStudyYear': serviceStudyYear,
-        if (serviceStudyYearData != null)
-          r'serviceStudyYearData': serviceStudyYearData,
-        if (uid != null) r'uid': uid,
-      });
+  }) => Input_AuthUsersAdminOnInsertInput._({
+    if (adminOnArea != null) r'adminOnArea': adminOnArea,
+    if (adminOnGroup != null) r'adminOnGroup': adminOnGroup,
+    if (adminOnService != null) r'adminOnService': adminOnService,
+    if (area != null) r'area': area,
+    if (areaAdminOnUsers != null) r'areaAdminOnUsers': areaAdminOnUsers,
+    if (areaAllowEdit != null) r'areaAllowEdit': areaAllowEdit,
+    if (classes != null) r'classes': classes,
+    if (group != null) r'group': group,
+    if (groupAdminOnUsers != null) r'groupAdminOnUsers': groupAdminOnUsers,
+    if (groupAllowEdit != null) r'groupAllowEdit': groupAllowEdit,
+    if (service != null) r'service': service,
+    if (serviceAdminOnUsers != null)
+      r'serviceAdminOnUsers': serviceAdminOnUsers,
+    if (serviceAllowEdit != null) r'serviceAllowEdit': serviceAllowEdit,
+    if (serviceGender != null) r'serviceGender': serviceGender,
+    if (serviceStudyYear != null) r'serviceStudyYear': serviceStudyYear,
+    if (serviceStudyYearData != null)
+      r'serviceStudyYearData': serviceStudyYearData,
+    if (uid != null) r'uid': uid,
+  });
 
   Input_AuthUsersAdminOnInsertInput._(this._$data);
 
   factory Input_AuthUsersAdminOnInsertInput.fromJson(
-      Map<String, dynamic> data) {
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('adminOnArea')) {
       final l$adminOnArea = data['adminOnArea'];
-      result$data['adminOnArea'] =
-          l$adminOnArea == null ? null : stringToUuid(l$adminOnArea);
+      result$data['adminOnArea'] = l$adminOnArea == null
+          ? null
+          : stringToUuid(l$adminOnArea);
     }
     if (data.containsKey('adminOnGroup')) {
       final l$adminOnGroup = data['adminOnGroup'];
-      result$data['adminOnGroup'] =
-          l$adminOnGroup == null ? null : stringToUuid(l$adminOnGroup);
+      result$data['adminOnGroup'] = l$adminOnGroup == null
+          ? null
+          : stringToUuid(l$adminOnGroup);
     }
     if (data.containsKey('adminOnService')) {
       final l$adminOnService = data['adminOnService'];
-      result$data['adminOnService'] =
-          l$adminOnService == null ? null : stringToUuid(l$adminOnService);
+      result$data['adminOnService'] = l$adminOnService == null
+          ? null
+          : stringToUuid(l$adminOnService);
     }
     if (data.containsKey('area')) {
       final l$area = data['area'];
       result$data['area'] = l$area == null
           ? null
           : Input_AreasObjRelInsertInput.fromJson(
-              (l$area as Map<String, dynamic>));
+              (l$area as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('areaAdminOnUsers')) {
       final l$areaAdminOnUsers = data['areaAdminOnUsers'];
@@ -1418,14 +1477,16 @@ class Input_AuthUsersAdminOnInsertInput {
       result$data['classes'] = l$classes == null
           ? null
           : Input_ClassesArrRelInsertInput.fromJson(
-              (l$classes as Map<String, dynamic>));
+              (l$classes as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('group')) {
       final l$group = data['group'];
       result$data['group'] = l$group == null
           ? null
           : Input_GroupsObjRelInsertInput.fromJson(
-              (l$group as Map<String, dynamic>));
+              (l$group as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('groupAdminOnUsers')) {
       final l$groupAdminOnUsers = data['groupAdminOnUsers'];
@@ -1440,7 +1501,8 @@ class Input_AuthUsersAdminOnInsertInput {
       result$data['service'] = l$service == null
           ? null
           : Input_ServicesObjRelInsertInput.fromJson(
-              (l$service as Map<String, dynamic>));
+              (l$service as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('serviceAdminOnUsers')) {
       final l$serviceAdminOnUsers = data['serviceAdminOnUsers'];
@@ -1463,7 +1525,8 @@ class Input_AuthUsersAdminOnInsertInput {
       result$data['serviceStudyYearData'] = l$serviceStudyYearData == null
           ? null
           : Input_StudyYearsObjRelInsertInput.fromJson(
-              (l$serviceStudyYearData as Map<String, dynamic>));
+              (l$serviceStudyYearData as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('uid')) {
       final l$uid = data['uid'];
@@ -1517,18 +1580,21 @@ class Input_AuthUsersAdminOnInsertInput {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('adminOnArea')) {
       final l$adminOnArea = adminOnArea;
-      result$data['adminOnArea'] =
-          l$adminOnArea == null ? null : uuidToString(l$adminOnArea);
+      result$data['adminOnArea'] = l$adminOnArea == null
+          ? null
+          : uuidToString(l$adminOnArea);
     }
     if (_$data.containsKey('adminOnGroup')) {
       final l$adminOnGroup = adminOnGroup;
-      result$data['adminOnGroup'] =
-          l$adminOnGroup == null ? null : uuidToString(l$adminOnGroup);
+      result$data['adminOnGroup'] = l$adminOnGroup == null
+          ? null
+          : uuidToString(l$adminOnGroup);
     }
     if (_$data.containsKey('adminOnService')) {
       final l$adminOnService = adminOnService;
-      result$data['adminOnService'] =
-          l$adminOnService == null ? null : uuidToString(l$adminOnService);
+      result$data['adminOnService'] = l$adminOnService == null
+          ? null
+          : uuidToString(l$adminOnService);
     }
     if (_$data.containsKey('area')) {
       final l$area = area;
@@ -1590,10 +1656,7 @@ class Input_AuthUsersAdminOnInsertInput {
   }
 
   CopyWith_Input_AuthUsersAdminOnInsertInput<Input_AuthUsersAdminOnInsertInput>
-      get copyWith => CopyWith_Input_AuthUsersAdminOnInsertInput(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Input_AuthUsersAdminOnInsertInput(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -1837,10 +1900,7 @@ abstract class CopyWith_Input_AuthUsersAdminOnInsertInput<TRes> {
 
 class _CopyWithImpl_Input_AuthUsersAdminOnInsertInput<TRes>
     implements CopyWith_Input_AuthUsersAdminOnInsertInput<TRes> {
-  _CopyWithImpl_Input_AuthUsersAdminOnInsertInput(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Input_AuthUsersAdminOnInsertInput(this._instance, this._then);
 
   final Input_AuthUsersAdminOnInsertInput _instance;
 
@@ -1866,50 +1926,52 @@ class _CopyWithImpl_Input_AuthUsersAdminOnInsertInput<TRes>
     Object? serviceStudyYear = _undefined,
     Object? serviceStudyYearData = _undefined,
     Object? uid = _undefined,
-  }) =>
-      _then(Input_AuthUsersAdminOnInsertInput._({
-        ..._instance._$data,
-        if (adminOnArea != _undefined)
-          'adminOnArea': (adminOnArea as UuidValue?),
-        if (adminOnGroup != _undefined)
-          'adminOnGroup': (adminOnGroup as UuidValue?),
-        if (adminOnService != _undefined)
-          'adminOnService': (adminOnService as UuidValue?),
-        if (area != _undefined) 'area': (area as Input_AreasObjRelInsertInput?),
-        if (areaAdminOnUsers != _undefined)
-          'areaAdminOnUsers': (areaAdminOnUsers as bool?),
-        if (areaAllowEdit != _undefined)
-          'areaAllowEdit': (areaAllowEdit as bool?),
-        if (classes != _undefined)
-          'classes': (classes as Input_ClassesArrRelInsertInput?),
-        if (group != _undefined)
-          'group': (group as Input_GroupsObjRelInsertInput?),
-        if (groupAdminOnUsers != _undefined)
-          'groupAdminOnUsers': (groupAdminOnUsers as bool?),
-        if (groupAllowEdit != _undefined)
-          'groupAllowEdit': (groupAllowEdit as bool?),
-        if (service != _undefined)
-          'service': (service as Input_ServicesObjRelInsertInput?),
-        if (serviceAdminOnUsers != _undefined)
-          'serviceAdminOnUsers': (serviceAdminOnUsers as bool?),
-        if (serviceAllowEdit != _undefined)
-          'serviceAllowEdit': (serviceAllowEdit as bool?),
-        if (serviceGender != _undefined)
-          'serviceGender': (serviceGender as bool?),
-        if (serviceStudyYear != _undefined)
-          'serviceStudyYear': (serviceStudyYear as int?),
-        if (serviceStudyYearData != _undefined)
-          'serviceStudyYearData':
-              (serviceStudyYearData as Input_StudyYearsObjRelInsertInput?),
-        if (uid != _undefined) 'uid': (uid as UuidValue?),
-      }));
+  }) => _then(
+    Input_AuthUsersAdminOnInsertInput._({
+      ..._instance._$data,
+      if (adminOnArea != _undefined) 'adminOnArea': (adminOnArea as UuidValue?),
+      if (adminOnGroup != _undefined)
+        'adminOnGroup': (adminOnGroup as UuidValue?),
+      if (adminOnService != _undefined)
+        'adminOnService': (adminOnService as UuidValue?),
+      if (area != _undefined) 'area': (area as Input_AreasObjRelInsertInput?),
+      if (areaAdminOnUsers != _undefined)
+        'areaAdminOnUsers': (areaAdminOnUsers as bool?),
+      if (areaAllowEdit != _undefined)
+        'areaAllowEdit': (areaAllowEdit as bool?),
+      if (classes != _undefined)
+        'classes': (classes as Input_ClassesArrRelInsertInput?),
+      if (group != _undefined)
+        'group': (group as Input_GroupsObjRelInsertInput?),
+      if (groupAdminOnUsers != _undefined)
+        'groupAdminOnUsers': (groupAdminOnUsers as bool?),
+      if (groupAllowEdit != _undefined)
+        'groupAllowEdit': (groupAllowEdit as bool?),
+      if (service != _undefined)
+        'service': (service as Input_ServicesObjRelInsertInput?),
+      if (serviceAdminOnUsers != _undefined)
+        'serviceAdminOnUsers': (serviceAdminOnUsers as bool?),
+      if (serviceAllowEdit != _undefined)
+        'serviceAllowEdit': (serviceAllowEdit as bool?),
+      if (serviceGender != _undefined)
+        'serviceGender': (serviceGender as bool?),
+      if (serviceStudyYear != _undefined)
+        'serviceStudyYear': (serviceStudyYear as int?),
+      if (serviceStudyYearData != _undefined)
+        'serviceStudyYearData':
+            (serviceStudyYearData as Input_StudyYearsObjRelInsertInput?),
+      if (uid != _undefined) 'uid': (uid as UuidValue?),
+    }),
+  );
 
   CopyWith_Input_AreasObjRelInsertInput<TRes> get area {
     final local$area = _instance.area;
     return local$area == null
         ? CopyWith_Input_AreasObjRelInsertInput.stub(_then(_instance))
         : CopyWith_Input_AreasObjRelInsertInput(
-            local$area, (e) => call(area: e));
+            local$area,
+            (e) => call(area: e),
+          );
   }
 
   CopyWith_Input_ClassesArrRelInsertInput<TRes> get classes {
@@ -1917,7 +1979,9 @@ class _CopyWithImpl_Input_AuthUsersAdminOnInsertInput<TRes>
     return local$classes == null
         ? CopyWith_Input_ClassesArrRelInsertInput.stub(_then(_instance))
         : CopyWith_Input_ClassesArrRelInsertInput(
-            local$classes, (e) => call(classes: e));
+            local$classes,
+            (e) => call(classes: e),
+          );
   }
 
   CopyWith_Input_GroupsObjRelInsertInput<TRes> get group {
@@ -1925,7 +1989,9 @@ class _CopyWithImpl_Input_AuthUsersAdminOnInsertInput<TRes>
     return local$group == null
         ? CopyWith_Input_GroupsObjRelInsertInput.stub(_then(_instance))
         : CopyWith_Input_GroupsObjRelInsertInput(
-            local$group, (e) => call(group: e));
+            local$group,
+            (e) => call(group: e),
+          );
   }
 
   CopyWith_Input_ServicesObjRelInsertInput<TRes> get service {
@@ -1933,7 +1999,9 @@ class _CopyWithImpl_Input_AuthUsersAdminOnInsertInput<TRes>
     return local$service == null
         ? CopyWith_Input_ServicesObjRelInsertInput.stub(_then(_instance))
         : CopyWith_Input_ServicesObjRelInsertInput(
-            local$service, (e) => call(service: e));
+            local$service,
+            (e) => call(service: e),
+          );
   }
 
   CopyWith_Input_StudyYearsObjRelInsertInput<TRes> get serviceStudyYearData {
@@ -1941,7 +2009,9 @@ class _CopyWithImpl_Input_AuthUsersAdminOnInsertInput<TRes>
     return local$serviceStudyYearData == null
         ? CopyWith_Input_StudyYearsObjRelInsertInput.stub(_then(_instance))
         : CopyWith_Input_StudyYearsObjRelInsertInput(
-            local$serviceStudyYearData, (e) => call(serviceStudyYearData: e));
+            local$serviceStudyYearData,
+            (e) => call(serviceStudyYearData: e),
+          );
   }
 }
 
@@ -1969,8 +2039,7 @@ class _CopyWithStubImpl_Input_AuthUsersAdminOnInsertInput<TRes>
     int? serviceStudyYear,
     Input_StudyYearsObjRelInsertInput? serviceStudyYearData,
     UuidValue? uid,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Input_AreasObjRelInsertInput<TRes> get area =>
       CopyWith_Input_AreasObjRelInsertInput.stub(_res);
@@ -1996,15 +2065,14 @@ class Input_AuthUsersAdminOnMaxOrderBy {
     Enum_OrderBy? permissionId,
     Enum_OrderBy? serviceStudyYear,
     Enum_OrderBy? uid,
-  }) =>
-      Input_AuthUsersAdminOnMaxOrderBy._({
-        if (adminOnArea != null) r'adminOnArea': adminOnArea,
-        if (adminOnGroup != null) r'adminOnGroup': adminOnGroup,
-        if (adminOnService != null) r'adminOnService': adminOnService,
-        if (permissionId != null) r'permissionId': permissionId,
-        if (serviceStudyYear != null) r'serviceStudyYear': serviceStudyYear,
-        if (uid != null) r'uid': uid,
-      });
+  }) => Input_AuthUsersAdminOnMaxOrderBy._({
+    if (adminOnArea != null) r'adminOnArea': adminOnArea,
+    if (adminOnGroup != null) r'adminOnGroup': adminOnGroup,
+    if (adminOnService != null) r'adminOnService': adminOnService,
+    if (permissionId != null) r'permissionId': permissionId,
+    if (serviceStudyYear != null) r'serviceStudyYear': serviceStudyYear,
+    if (uid != null) r'uid': uid,
+  });
 
   Input_AuthUsersAdminOnMaxOrderBy._(this._$data);
 
@@ -2042,8 +2110,9 @@ class Input_AuthUsersAdminOnMaxOrderBy {
     }
     if (data.containsKey('uid')) {
       final l$uid = data['uid'];
-      result$data['uid'] =
-          l$uid == null ? null : fromJson_Enum_OrderBy((l$uid as String));
+      result$data['uid'] = l$uid == null
+          ? null
+          : fromJson_Enum_OrderBy((l$uid as String));
     }
     return Input_AuthUsersAdminOnMaxOrderBy._(result$data);
   }
@@ -2068,13 +2137,15 @@ class Input_AuthUsersAdminOnMaxOrderBy {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('adminOnArea')) {
       final l$adminOnArea = adminOnArea;
-      result$data['adminOnArea'] =
-          l$adminOnArea == null ? null : toJson_Enum_OrderBy(l$adminOnArea);
+      result$data['adminOnArea'] = l$adminOnArea == null
+          ? null
+          : toJson_Enum_OrderBy(l$adminOnArea);
     }
     if (_$data.containsKey('adminOnGroup')) {
       final l$adminOnGroup = adminOnGroup;
-      result$data['adminOnGroup'] =
-          l$adminOnGroup == null ? null : toJson_Enum_OrderBy(l$adminOnGroup);
+      result$data['adminOnGroup'] = l$adminOnGroup == null
+          ? null
+          : toJson_Enum_OrderBy(l$adminOnGroup);
     }
     if (_$data.containsKey('adminOnService')) {
       final l$adminOnService = adminOnService;
@@ -2084,8 +2155,9 @@ class Input_AuthUsersAdminOnMaxOrderBy {
     }
     if (_$data.containsKey('permissionId')) {
       final l$permissionId = permissionId;
-      result$data['permissionId'] =
-          l$permissionId == null ? null : toJson_Enum_OrderBy(l$permissionId);
+      result$data['permissionId'] = l$permissionId == null
+          ? null
+          : toJson_Enum_OrderBy(l$permissionId);
     }
     if (_$data.containsKey('serviceStudyYear')) {
       final l$serviceStudyYear = serviceStudyYear;
@@ -2101,10 +2173,7 @@ class Input_AuthUsersAdminOnMaxOrderBy {
   }
 
   CopyWith_Input_AuthUsersAdminOnMaxOrderBy<Input_AuthUsersAdminOnMaxOrderBy>
-      get copyWith => CopyWith_Input_AuthUsersAdminOnMaxOrderBy(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Input_AuthUsersAdminOnMaxOrderBy(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -2211,10 +2280,7 @@ abstract class CopyWith_Input_AuthUsersAdminOnMaxOrderBy<TRes> {
 
 class _CopyWithImpl_Input_AuthUsersAdminOnMaxOrderBy<TRes>
     implements CopyWith_Input_AuthUsersAdminOnMaxOrderBy<TRes> {
-  _CopyWithImpl_Input_AuthUsersAdminOnMaxOrderBy(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Input_AuthUsersAdminOnMaxOrderBy(this._instance, this._then);
 
   final Input_AuthUsersAdminOnMaxOrderBy _instance;
 
@@ -2229,21 +2295,22 @@ class _CopyWithImpl_Input_AuthUsersAdminOnMaxOrderBy<TRes>
     Object? permissionId = _undefined,
     Object? serviceStudyYear = _undefined,
     Object? uid = _undefined,
-  }) =>
-      _then(Input_AuthUsersAdminOnMaxOrderBy._({
-        ..._instance._$data,
-        if (adminOnArea != _undefined)
-          'adminOnArea': (adminOnArea as Enum_OrderBy?),
-        if (adminOnGroup != _undefined)
-          'adminOnGroup': (adminOnGroup as Enum_OrderBy?),
-        if (adminOnService != _undefined)
-          'adminOnService': (adminOnService as Enum_OrderBy?),
-        if (permissionId != _undefined)
-          'permissionId': (permissionId as Enum_OrderBy?),
-        if (serviceStudyYear != _undefined)
-          'serviceStudyYear': (serviceStudyYear as Enum_OrderBy?),
-        if (uid != _undefined) 'uid': (uid as Enum_OrderBy?),
-      }));
+  }) => _then(
+    Input_AuthUsersAdminOnMaxOrderBy._({
+      ..._instance._$data,
+      if (adminOnArea != _undefined)
+        'adminOnArea': (adminOnArea as Enum_OrderBy?),
+      if (adminOnGroup != _undefined)
+        'adminOnGroup': (adminOnGroup as Enum_OrderBy?),
+      if (adminOnService != _undefined)
+        'adminOnService': (adminOnService as Enum_OrderBy?),
+      if (permissionId != _undefined)
+        'permissionId': (permissionId as Enum_OrderBy?),
+      if (serviceStudyYear != _undefined)
+        'serviceStudyYear': (serviceStudyYear as Enum_OrderBy?),
+      if (uid != _undefined) 'uid': (uid as Enum_OrderBy?),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Input_AuthUsersAdminOnMaxOrderBy<TRes>
@@ -2259,8 +2326,7 @@ class _CopyWithStubImpl_Input_AuthUsersAdminOnMaxOrderBy<TRes>
     Enum_OrderBy? permissionId,
     Enum_OrderBy? serviceStudyYear,
     Enum_OrderBy? uid,
-  }) =>
-      _res;
+  }) => _res;
 }
 
 class Input_AuthUsersAdminOnMinOrderBy {
@@ -2271,15 +2337,14 @@ class Input_AuthUsersAdminOnMinOrderBy {
     Enum_OrderBy? permissionId,
     Enum_OrderBy? serviceStudyYear,
     Enum_OrderBy? uid,
-  }) =>
-      Input_AuthUsersAdminOnMinOrderBy._({
-        if (adminOnArea != null) r'adminOnArea': adminOnArea,
-        if (adminOnGroup != null) r'adminOnGroup': adminOnGroup,
-        if (adminOnService != null) r'adminOnService': adminOnService,
-        if (permissionId != null) r'permissionId': permissionId,
-        if (serviceStudyYear != null) r'serviceStudyYear': serviceStudyYear,
-        if (uid != null) r'uid': uid,
-      });
+  }) => Input_AuthUsersAdminOnMinOrderBy._({
+    if (adminOnArea != null) r'adminOnArea': adminOnArea,
+    if (adminOnGroup != null) r'adminOnGroup': adminOnGroup,
+    if (adminOnService != null) r'adminOnService': adminOnService,
+    if (permissionId != null) r'permissionId': permissionId,
+    if (serviceStudyYear != null) r'serviceStudyYear': serviceStudyYear,
+    if (uid != null) r'uid': uid,
+  });
 
   Input_AuthUsersAdminOnMinOrderBy._(this._$data);
 
@@ -2317,8 +2382,9 @@ class Input_AuthUsersAdminOnMinOrderBy {
     }
     if (data.containsKey('uid')) {
       final l$uid = data['uid'];
-      result$data['uid'] =
-          l$uid == null ? null : fromJson_Enum_OrderBy((l$uid as String));
+      result$data['uid'] = l$uid == null
+          ? null
+          : fromJson_Enum_OrderBy((l$uid as String));
     }
     return Input_AuthUsersAdminOnMinOrderBy._(result$data);
   }
@@ -2343,13 +2409,15 @@ class Input_AuthUsersAdminOnMinOrderBy {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('adminOnArea')) {
       final l$adminOnArea = adminOnArea;
-      result$data['adminOnArea'] =
-          l$adminOnArea == null ? null : toJson_Enum_OrderBy(l$adminOnArea);
+      result$data['adminOnArea'] = l$adminOnArea == null
+          ? null
+          : toJson_Enum_OrderBy(l$adminOnArea);
     }
     if (_$data.containsKey('adminOnGroup')) {
       final l$adminOnGroup = adminOnGroup;
-      result$data['adminOnGroup'] =
-          l$adminOnGroup == null ? null : toJson_Enum_OrderBy(l$adminOnGroup);
+      result$data['adminOnGroup'] = l$adminOnGroup == null
+          ? null
+          : toJson_Enum_OrderBy(l$adminOnGroup);
     }
     if (_$data.containsKey('adminOnService')) {
       final l$adminOnService = adminOnService;
@@ -2359,8 +2427,9 @@ class Input_AuthUsersAdminOnMinOrderBy {
     }
     if (_$data.containsKey('permissionId')) {
       final l$permissionId = permissionId;
-      result$data['permissionId'] =
-          l$permissionId == null ? null : toJson_Enum_OrderBy(l$permissionId);
+      result$data['permissionId'] = l$permissionId == null
+          ? null
+          : toJson_Enum_OrderBy(l$permissionId);
     }
     if (_$data.containsKey('serviceStudyYear')) {
       final l$serviceStudyYear = serviceStudyYear;
@@ -2376,10 +2445,7 @@ class Input_AuthUsersAdminOnMinOrderBy {
   }
 
   CopyWith_Input_AuthUsersAdminOnMinOrderBy<Input_AuthUsersAdminOnMinOrderBy>
-      get copyWith => CopyWith_Input_AuthUsersAdminOnMinOrderBy(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Input_AuthUsersAdminOnMinOrderBy(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -2461,212 +2527,6 @@ class Input_AuthUsersAdminOnMinOrderBy {
       _$data.containsKey('permissionId') ? l$permissionId : const {},
       _$data.containsKey('serviceStudyYear') ? l$serviceStudyYear : const {},
       _$data.containsKey('uid') ? l$uid : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_AuthUsersAdminOnMinOrderBy<TRes> {
-  factory CopyWith_Input_AuthUsersAdminOnMinOrderBy(
-    Input_AuthUsersAdminOnMinOrderBy instance,
-    TRes Function(Input_AuthUsersAdminOnMinOrderBy) then,
-  ) = _CopyWithImpl_Input_AuthUsersAdminOnMinOrderBy;
-
-  factory CopyWith_Input_AuthUsersAdminOnMinOrderBy.stub(TRes res) =
-      _CopyWithStubImpl_Input_AuthUsersAdminOnMinOrderBy;
-
-  TRes call({
-    Enum_OrderBy? adminOnArea,
-    Enum_OrderBy? adminOnGroup,
-    Enum_OrderBy? adminOnService,
-    Enum_OrderBy? permissionId,
-    Enum_OrderBy? serviceStudyYear,
-    Enum_OrderBy? uid,
-  });
-}
-
-class _CopyWithImpl_Input_AuthUsersAdminOnMinOrderBy<TRes>
-    implements CopyWith_Input_AuthUsersAdminOnMinOrderBy<TRes> {
-  _CopyWithImpl_Input_AuthUsersAdminOnMinOrderBy(
-    this._instance,
-    this._then,
-  );
-
-  final Input_AuthUsersAdminOnMinOrderBy _instance;
-
-  final TRes Function(Input_AuthUsersAdminOnMinOrderBy) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? adminOnArea = _undefined,
-    Object? adminOnGroup = _undefined,
-    Object? adminOnService = _undefined,
-    Object? permissionId = _undefined,
-    Object? serviceStudyYear = _undefined,
-    Object? uid = _undefined,
-  }) =>
-      _then(Input_AuthUsersAdminOnMinOrderBy._({
-        ..._instance._$data,
-        if (adminOnArea != _undefined)
-          'adminOnArea': (adminOnArea as Enum_OrderBy?),
-        if (adminOnGroup != _undefined)
-          'adminOnGroup': (adminOnGroup as Enum_OrderBy?),
-        if (adminOnService != _undefined)
-          'adminOnService': (adminOnService as Enum_OrderBy?),
-        if (permissionId != _undefined)
-          'permissionId': (permissionId as Enum_OrderBy?),
-        if (serviceStudyYear != _undefined)
-          'serviceStudyYear': (serviceStudyYear as Enum_OrderBy?),
-        if (uid != _undefined) 'uid': (uid as Enum_OrderBy?),
-      }));
-}
-
-class _CopyWithStubImpl_Input_AuthUsersAdminOnMinOrderBy<TRes>
-    implements CopyWith_Input_AuthUsersAdminOnMinOrderBy<TRes> {
-  _CopyWithStubImpl_Input_AuthUsersAdminOnMinOrderBy(this._res);
-
-  TRes _res;
-
-  call({
-    Enum_OrderBy? adminOnArea,
-    Enum_OrderBy? adminOnGroup,
-    Enum_OrderBy? adminOnService,
-    Enum_OrderBy? permissionId,
-    Enum_OrderBy? serviceStudyYear,
-    Enum_OrderBy? uid,
-  }) =>
-      _res;
-}
-
-class Input_AuthUsersAdminOnOnConflict {
-  factory Input_AuthUsersAdminOnOnConflict({
-    required Enum_AuthUsersAdminOnConstraint constraint,
-    List<Enum_AuthUsersAdminOnUpdateColumn>? updateColumns,
-    Input_AuthUsersAdminOnBoolExp? where,
-  }) =>
-      Input_AuthUsersAdminOnOnConflict._({
-        r'constraint': constraint,
-        if (updateColumns != null) r'updateColumns': updateColumns,
-        if (where != null) r'where': where,
-      });
-
-  Input_AuthUsersAdminOnOnConflict._(this._$data);
-
-  factory Input_AuthUsersAdminOnOnConflict.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    final l$constraint = data['constraint'];
-    result$data['constraint'] =
-        fromJson_Enum_AuthUsersAdminOnConstraint((l$constraint as String));
-    if (data.containsKey('updateColumns')) {
-      final l$updateColumns = data['updateColumns'];
-      result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
-          .map((e) => fromJson_Enum_AuthUsersAdminOnUpdateColumn((e as String)))
-          .toList();
-    }
-    if (data.containsKey('where')) {
-      final l$where = data['where'];
-      result$data['where'] = l$where == null
-          ? null
-          : Input_AuthUsersAdminOnBoolExp.fromJson(
-              (l$where as Map<String, dynamic>));
-    }
-    return Input_AuthUsersAdminOnOnConflict._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  Enum_AuthUsersAdminOnConstraint get constraint =>
-      (_$data['constraint'] as Enum_AuthUsersAdminOnConstraint);
-
-  List<Enum_AuthUsersAdminOnUpdateColumn>? get updateColumns =>
-      (_$data['updateColumns'] as List<Enum_AuthUsersAdminOnUpdateColumn>?);
-
-  Input_AuthUsersAdminOnBoolExp? get where =>
-      (_$data['where'] as Input_AuthUsersAdminOnBoolExp?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    final l$constraint = constraint;
-    result$data['constraint'] =
-        toJson_Enum_AuthUsersAdminOnConstraint(l$constraint);
-    if (_$data.containsKey('updateColumns')) {
-      final l$updateColumns = updateColumns;
-      result$data['updateColumns'] =
-          (l$updateColumns as List<Enum_AuthUsersAdminOnUpdateColumn>)
-              .map((e) => toJson_Enum_AuthUsersAdminOnUpdateColumn(e))
-              .toList();
-    }
-    if (_$data.containsKey('where')) {
-      final l$where = where;
-      result$data['where'] = l$where?.toJson();
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_AuthUsersAdminOnOnConflict<Input_AuthUsersAdminOnOnConflict>
-      get copyWith => CopyWith_Input_AuthUsersAdminOnOnConflict(
-            this,
-            (i) => i,
-          );
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_AuthUsersAdminOnOnConflict ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$constraint = constraint;
-    final lOther$constraint = other.constraint;
-    if (l$constraint != lOther$constraint) {
-      return false;
-    }
-    final l$updateColumns = updateColumns;
-    final lOther$updateColumns = other.updateColumns;
-    if (_$data.containsKey('updateColumns') !=
-        other._$data.containsKey('updateColumns')) {
-      return false;
-    }
-    if (l$updateColumns != null && lOther$updateColumns != null) {
-      if (l$updateColumns.length != lOther$updateColumns.length) {
-        return false;
-      }
-      for (int i = 0; i < l$updateColumns.length; i++) {
-        final l$updateColumns$entry = l$updateColumns[i];
-        final lOther$updateColumns$entry = lOther$updateColumns[i];
-        if (l$updateColumns$entry != lOther$updateColumns$entry) {
-          return false;
-        }
-      }
-    } else if (l$updateColumns != lOther$updateColumns) {
-      return false;
-    }
-    final l$where = where;
-    final lOther$where = other.where;
-    if (_$data.containsKey('where') != other._$data.containsKey('where')) {
-      return false;
-    }
-    if (l$where != lOther$where) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$constraint = constraint;
-    final l$updateColumns = updateColumns;
-    final l$where = where;
-    return Object.hashAll([
-      l$constraint,
-      _$data.containsKey('updateColumns')
-          ? l$updateColumns == null
-              ? null
-              : Object.hashAll(l$updateColumns.map((v) => v))
-          : const {},
-      _$data.containsKey('where') ? l$where : const {},
     ]);
   }
 }

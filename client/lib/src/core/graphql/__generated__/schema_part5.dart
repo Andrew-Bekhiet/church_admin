@@ -16,20 +16,19 @@ abstract class CopyWith_Input_AreasStreetsArrRelInsertInput<TRes> {
     Input_AreasStreetsOnConflict? onConflict,
   });
   TRes data(
-      Iterable<Input_AreasStreetsInsertInput> Function(
-              Iterable<
-                  CopyWith_Input_AreasStreetsInsertInput<
-                      Input_AreasStreetsInsertInput>>)
-          _fn);
+    Iterable<Input_AreasStreetsInsertInput> Function(
+      Iterable<
+        CopyWith_Input_AreasStreetsInsertInput<Input_AreasStreetsInsertInput>
+      >,
+    )
+    _fn,
+  );
   CopyWith_Input_AreasStreetsOnConflict<TRes> get onConflict;
 }
 
 class _CopyWithImpl_Input_AreasStreetsArrRelInsertInput<TRes>
     implements CopyWith_Input_AreasStreetsArrRelInsertInput<TRes> {
-  _CopyWithImpl_Input_AreasStreetsArrRelInsertInput(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Input_AreasStreetsArrRelInsertInput(this._instance, this._then);
 
   final Input_AreasStreetsArrRelInsertInput _instance;
 
@@ -37,37 +36,40 @@ class _CopyWithImpl_Input_AreasStreetsArrRelInsertInput<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? data = _undefined,
-    Object? onConflict = _undefined,
-  }) =>
-      _then(Input_AreasStreetsArrRelInsertInput._({
-        ..._instance._$data,
-        if (data != _undefined && data != null)
-          'data': (data as List<Input_AreasStreetsInsertInput>),
-        if (onConflict != _undefined)
-          'onConflict': (onConflict as Input_AreasStreetsOnConflict?),
-      }));
+  TRes call({Object? data = _undefined, Object? onConflict = _undefined}) =>
+      _then(
+        Input_AreasStreetsArrRelInsertInput._({
+          ..._instance._$data,
+          if (data != _undefined && data != null)
+            'data': (data as List<Input_AreasStreetsInsertInput>),
+          if (onConflict != _undefined)
+            'onConflict': (onConflict as Input_AreasStreetsOnConflict?),
+        }),
+      );
 
   TRes data(
-          Iterable<Input_AreasStreetsInsertInput> Function(
-                  Iterable<
-                      CopyWith_Input_AreasStreetsInsertInput<
-                          Input_AreasStreetsInsertInput>>)
-              _fn) =>
-      call(
-          data: _fn(
-              _instance.data.map((e) => CopyWith_Input_AreasStreetsInsertInput(
-                    e,
-                    (i) => i,
-                  ))).toList());
+    Iterable<Input_AreasStreetsInsertInput> Function(
+      Iterable<
+        CopyWith_Input_AreasStreetsInsertInput<Input_AreasStreetsInsertInput>
+      >,
+    )
+    _fn,
+  ) => call(
+    data: _fn(
+      _instance.data.map(
+        (e) => CopyWith_Input_AreasStreetsInsertInput(e, (i) => i),
+      ),
+    ).toList(),
+  );
 
   CopyWith_Input_AreasStreetsOnConflict<TRes> get onConflict {
     final local$onConflict = _instance.onConflict;
     return local$onConflict == null
         ? CopyWith_Input_AreasStreetsOnConflict.stub(_then(_instance))
         : CopyWith_Input_AreasStreetsOnConflict(
-            local$onConflict, (e) => call(onConflict: e));
+            local$onConflict,
+            (e) => call(onConflict: e),
+          );
   }
 }
 
@@ -80,8 +82,7 @@ class _CopyWithStubImpl_Input_AreasStreetsArrRelInsertInput<TRes>
   call({
     List<Input_AreasStreetsInsertInput>? data,
     Input_AreasStreetsOnConflict? onConflict,
-  }) =>
-      _res;
+  }) => _res;
 
   data(_fn) => _res;
 
@@ -98,16 +99,15 @@ class Input_AreasStreetsBoolExp {
     Input_UuidComparisonExp? areaId,
     Input_StreetsBoolExp? street,
     Input_UuidComparisonExp? streetId,
-  }) =>
-      Input_AreasStreetsBoolExp._({
-        if ($_and != null) r'_and': $_and,
-        if ($_not != null) r'_not': $_not,
-        if ($_or != null) r'_or': $_or,
-        if (area != null) r'area': area,
-        if (areaId != null) r'areaId': areaId,
-        if (street != null) r'street': street,
-        if (streetId != null) r'streetId': streetId,
-      });
+  }) => Input_AreasStreetsBoolExp._({
+    if ($_and != null) r'_and': $_and,
+    if ($_not != null) r'_not': $_not,
+    if ($_or != null) r'_or': $_or,
+    if (area != null) r'area': area,
+    if (areaId != null) r'areaId': areaId,
+    if (street != null) r'street': street,
+    if (streetId != null) r'streetId': streetId,
+  });
 
   Input_AreasStreetsBoolExp._(this._$data);
 
@@ -116,8 +116,10 @@ class Input_AreasStreetsBoolExp {
     if (data.containsKey('_and')) {
       final l$$_and = data['_and'];
       result$data['_and'] = (l$$_and as List<dynamic>?)
-          ?.map((e) =>
-              Input_AreasStreetsBoolExp.fromJson((e as Map<String, dynamic>)))
+          ?.map(
+            (e) =>
+                Input_AreasStreetsBoolExp.fromJson((e as Map<String, dynamic>)),
+          )
           .toList();
     }
     if (data.containsKey('_not')) {
@@ -125,13 +127,16 @@ class Input_AreasStreetsBoolExp {
       result$data['_not'] = l$$_not == null
           ? null
           : Input_AreasStreetsBoolExp.fromJson(
-              (l$$_not as Map<String, dynamic>));
+              (l$$_not as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('_or')) {
       final l$$_or = data['_or'];
       result$data['_or'] = (l$$_or as List<dynamic>?)
-          ?.map((e) =>
-              Input_AreasStreetsBoolExp.fromJson((e as Map<String, dynamic>)))
+          ?.map(
+            (e) =>
+                Input_AreasStreetsBoolExp.fromJson((e as Map<String, dynamic>)),
+          )
           .toList();
     }
     if (data.containsKey('area')) {
@@ -145,7 +150,8 @@ class Input_AreasStreetsBoolExp {
       result$data['areaId'] = l$areaId == null
           ? null
           : Input_UuidComparisonExp.fromJson(
-              (l$areaId as Map<String, dynamic>));
+              (l$areaId as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('street')) {
       final l$street = data['street'];
@@ -158,7 +164,8 @@ class Input_AreasStreetsBoolExp {
       result$data['streetId'] = l$streetId == null
           ? null
           : Input_UuidComparisonExp.fromJson(
-              (l$streetId as Map<String, dynamic>));
+              (l$streetId as Map<String, dynamic>),
+            );
     }
     return Input_AreasStreetsBoolExp._(result$data);
   }
@@ -219,10 +226,7 @@ class Input_AreasStreetsBoolExp {
   }
 
   CopyWith_Input_AreasStreetsBoolExp<Input_AreasStreetsBoolExp> get copyWith =>
-      CopyWith_Input_AreasStreetsBoolExp(
-        this,
-        (i) => i,
-      );
+      CopyWith_Input_AreasStreetsBoolExp(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -327,14 +331,14 @@ class Input_AreasStreetsBoolExp {
     return Object.hashAll([
       _$data.containsKey('_and')
           ? l$$_and == null
-              ? null
-              : Object.hashAll(l$$_and.map((v) => v))
+                ? null
+                : Object.hashAll(l$$_and.map((v) => v))
           : const {},
       _$data.containsKey('_not') ? l$$_not : const {},
       _$data.containsKey('_or')
           ? l$$_or == null
-              ? null
-              : Object.hashAll(l$$_or.map((v) => v))
+                ? null
+                : Object.hashAll(l$$_or.map((v) => v))
           : const {},
       _$data.containsKey('area') ? l$area : const {},
       _$data.containsKey('areaId') ? l$areaId : const {},
@@ -363,18 +367,18 @@ abstract class CopyWith_Input_AreasStreetsBoolExp<TRes> {
     Input_UuidComparisonExp? streetId,
   });
   TRes $_and(
-      Iterable<Input_AreasStreetsBoolExp>? Function(
-              Iterable<
-                  CopyWith_Input_AreasStreetsBoolExp<
-                      Input_AreasStreetsBoolExp>>?)
-          _fn);
+    Iterable<Input_AreasStreetsBoolExp>? Function(
+      Iterable<CopyWith_Input_AreasStreetsBoolExp<Input_AreasStreetsBoolExp>>?,
+    )
+    _fn,
+  );
   CopyWith_Input_AreasStreetsBoolExp<TRes> get $_not;
   TRes $_or(
-      Iterable<Input_AreasStreetsBoolExp>? Function(
-              Iterable<
-                  CopyWith_Input_AreasStreetsBoolExp<
-                      Input_AreasStreetsBoolExp>>?)
-          _fn);
+    Iterable<Input_AreasStreetsBoolExp>? Function(
+      Iterable<CopyWith_Input_AreasStreetsBoolExp<Input_AreasStreetsBoolExp>>?,
+    )
+    _fn,
+  );
   CopyWith_Input_AreasBoolExp<TRes> get area;
   CopyWith_Input_UuidComparisonExp<TRes> get areaId;
   CopyWith_Input_StreetsBoolExp<TRes> get street;
@@ -383,10 +387,7 @@ abstract class CopyWith_Input_AreasStreetsBoolExp<TRes> {
 
 class _CopyWithImpl_Input_AreasStreetsBoolExp<TRes>
     implements CopyWith_Input_AreasStreetsBoolExp<TRes> {
-  _CopyWithImpl_Input_AreasStreetsBoolExp(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Input_AreasStreetsBoolExp(this._instance, this._then);
 
   final Input_AreasStreetsBoolExp _instance;
 
@@ -402,55 +403,56 @@ class _CopyWithImpl_Input_AreasStreetsBoolExp<TRes>
     Object? areaId = _undefined,
     Object? street = _undefined,
     Object? streetId = _undefined,
-  }) =>
-      _then(Input_AreasStreetsBoolExp._({
-        ..._instance._$data,
-        if ($_and != _undefined)
-          '_and': ($_and as List<Input_AreasStreetsBoolExp>?),
-        if ($_not != _undefined) '_not': ($_not as Input_AreasStreetsBoolExp?),
-        if ($_or != _undefined)
-          '_or': ($_or as List<Input_AreasStreetsBoolExp>?),
-        if (area != _undefined) 'area': (area as Input_AreasBoolExp?),
-        if (areaId != _undefined)
-          'areaId': (areaId as Input_UuidComparisonExp?),
-        if (street != _undefined) 'street': (street as Input_StreetsBoolExp?),
-        if (streetId != _undefined)
-          'streetId': (streetId as Input_UuidComparisonExp?),
-      }));
+  }) => _then(
+    Input_AreasStreetsBoolExp._({
+      ..._instance._$data,
+      if ($_and != _undefined)
+        '_and': ($_and as List<Input_AreasStreetsBoolExp>?),
+      if ($_not != _undefined) '_not': ($_not as Input_AreasStreetsBoolExp?),
+      if ($_or != _undefined) '_or': ($_or as List<Input_AreasStreetsBoolExp>?),
+      if (area != _undefined) 'area': (area as Input_AreasBoolExp?),
+      if (areaId != _undefined) 'areaId': (areaId as Input_UuidComparisonExp?),
+      if (street != _undefined) 'street': (street as Input_StreetsBoolExp?),
+      if (streetId != _undefined)
+        'streetId': (streetId as Input_UuidComparisonExp?),
+    }),
+  );
 
   TRes $_and(
-          Iterable<Input_AreasStreetsBoolExp>? Function(
-                  Iterable<
-                      CopyWith_Input_AreasStreetsBoolExp<
-                          Input_AreasStreetsBoolExp>>?)
-              _fn) =>
-      call(
-          $_and: _fn(
-              _instance.$_and?.map((e) => CopyWith_Input_AreasStreetsBoolExp(
-                    e,
-                    (i) => i,
-                  )))?.toList());
+    Iterable<Input_AreasStreetsBoolExp>? Function(
+      Iterable<CopyWith_Input_AreasStreetsBoolExp<Input_AreasStreetsBoolExp>>?,
+    )
+    _fn,
+  ) => call(
+    $_and: _fn(
+      _instance.$_and?.map(
+        (e) => CopyWith_Input_AreasStreetsBoolExp(e, (i) => i),
+      ),
+    )?.toList(),
+  );
 
   CopyWith_Input_AreasStreetsBoolExp<TRes> get $_not {
     final local$$_not = _instance.$_not;
     return local$$_not == null
         ? CopyWith_Input_AreasStreetsBoolExp.stub(_then(_instance))
         : CopyWith_Input_AreasStreetsBoolExp(
-            local$$_not, (e) => call($_not: e));
+            local$$_not,
+            (e) => call($_not: e),
+          );
   }
 
   TRes $_or(
-          Iterable<Input_AreasStreetsBoolExp>? Function(
-                  Iterable<
-                      CopyWith_Input_AreasStreetsBoolExp<
-                          Input_AreasStreetsBoolExp>>?)
-              _fn) =>
-      call(
-          $_or:
-              _fn(_instance.$_or?.map((e) => CopyWith_Input_AreasStreetsBoolExp(
-                    e,
-                    (i) => i,
-                  )))?.toList());
+    Iterable<Input_AreasStreetsBoolExp>? Function(
+      Iterable<CopyWith_Input_AreasStreetsBoolExp<Input_AreasStreetsBoolExp>>?,
+    )
+    _fn,
+  ) => call(
+    $_or: _fn(
+      _instance.$_or?.map(
+        (e) => CopyWith_Input_AreasStreetsBoolExp(e, (i) => i),
+      ),
+    )?.toList(),
+  );
 
   CopyWith_Input_AreasBoolExp<TRes> get area {
     final local$area = _instance.area;
@@ -464,7 +466,9 @@ class _CopyWithImpl_Input_AreasStreetsBoolExp<TRes>
     return local$areaId == null
         ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
         : CopyWith_Input_UuidComparisonExp(
-            local$areaId, (e) => call(areaId: e));
+            local$areaId,
+            (e) => call(areaId: e),
+          );
   }
 
   CopyWith_Input_StreetsBoolExp<TRes> get street {
@@ -479,7 +483,9 @@ class _CopyWithImpl_Input_AreasStreetsBoolExp<TRes>
     return local$streetId == null
         ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
         : CopyWith_Input_UuidComparisonExp(
-            local$streetId, (e) => call(streetId: e));
+            local$streetId,
+            (e) => call(streetId: e),
+          );
   }
 }
 
@@ -497,8 +503,7 @@ class _CopyWithStubImpl_Input_AreasStreetsBoolExp<TRes>
     Input_UuidComparisonExp? areaId,
     Input_StreetsBoolExp? street,
     Input_UuidComparisonExp? streetId,
-  }) =>
-      _res;
+  }) => _res;
 
   $_and(_fn) => _res;
 
@@ -526,13 +531,12 @@ class Input_AreasStreetsInsertInput {
     UuidValue? areaId,
     Input_StreetsObjRelInsertInput? street,
     UuidValue? streetId,
-  }) =>
-      Input_AreasStreetsInsertInput._({
-        if (area != null) r'area': area,
-        if (areaId != null) r'areaId': areaId,
-        if (street != null) r'street': street,
-        if (streetId != null) r'streetId': streetId,
-      });
+  }) => Input_AreasStreetsInsertInput._({
+    if (area != null) r'area': area,
+    if (areaId != null) r'areaId': areaId,
+    if (street != null) r'street': street,
+    if (streetId != null) r'streetId': streetId,
+  });
 
   Input_AreasStreetsInsertInput._(this._$data);
 
@@ -543,7 +547,8 @@ class Input_AreasStreetsInsertInput {
       result$data['area'] = l$area == null
           ? null
           : Input_AreasObjRelInsertInput.fromJson(
-              (l$area as Map<String, dynamic>));
+              (l$area as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('areaId')) {
       final l$areaId = data['areaId'];
@@ -554,12 +559,14 @@ class Input_AreasStreetsInsertInput {
       result$data['street'] = l$street == null
           ? null
           : Input_StreetsObjRelInsertInput.fromJson(
-              (l$street as Map<String, dynamic>));
+              (l$street as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('streetId')) {
       final l$streetId = data['streetId'];
-      result$data['streetId'] =
-          l$streetId == null ? null : stringToUuid(l$streetId);
+      result$data['streetId'] = l$streetId == null
+          ? null
+          : stringToUuid(l$streetId);
     }
     return Input_AreasStreetsInsertInput._(result$data);
   }
@@ -592,17 +599,15 @@ class Input_AreasStreetsInsertInput {
     }
     if (_$data.containsKey('streetId')) {
       final l$streetId = streetId;
-      result$data['streetId'] =
-          l$streetId == null ? null : uuidToString(l$streetId);
+      result$data['streetId'] = l$streetId == null
+          ? null
+          : uuidToString(l$streetId);
     }
     return result$data;
   }
 
   CopyWith_Input_AreasStreetsInsertInput<Input_AreasStreetsInsertInput>
-      get copyWith => CopyWith_Input_AreasStreetsInsertInput(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Input_AreasStreetsInsertInput(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -685,10 +690,7 @@ abstract class CopyWith_Input_AreasStreetsInsertInput<TRes> {
 
 class _CopyWithImpl_Input_AreasStreetsInsertInput<TRes>
     implements CopyWith_Input_AreasStreetsInsertInput<TRes> {
-  _CopyWithImpl_Input_AreasStreetsInsertInput(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Input_AreasStreetsInsertInput(this._instance, this._then);
 
   final Input_AreasStreetsInsertInput _instance;
 
@@ -701,22 +703,25 @@ class _CopyWithImpl_Input_AreasStreetsInsertInput<TRes>
     Object? areaId = _undefined,
     Object? street = _undefined,
     Object? streetId = _undefined,
-  }) =>
-      _then(Input_AreasStreetsInsertInput._({
-        ..._instance._$data,
-        if (area != _undefined) 'area': (area as Input_AreasObjRelInsertInput?),
-        if (areaId != _undefined) 'areaId': (areaId as UuidValue?),
-        if (street != _undefined)
-          'street': (street as Input_StreetsObjRelInsertInput?),
-        if (streetId != _undefined) 'streetId': (streetId as UuidValue?),
-      }));
+  }) => _then(
+    Input_AreasStreetsInsertInput._({
+      ..._instance._$data,
+      if (area != _undefined) 'area': (area as Input_AreasObjRelInsertInput?),
+      if (areaId != _undefined) 'areaId': (areaId as UuidValue?),
+      if (street != _undefined)
+        'street': (street as Input_StreetsObjRelInsertInput?),
+      if (streetId != _undefined) 'streetId': (streetId as UuidValue?),
+    }),
+  );
 
   CopyWith_Input_AreasObjRelInsertInput<TRes> get area {
     final local$area = _instance.area;
     return local$area == null
         ? CopyWith_Input_AreasObjRelInsertInput.stub(_then(_instance))
         : CopyWith_Input_AreasObjRelInsertInput(
-            local$area, (e) => call(area: e));
+            local$area,
+            (e) => call(area: e),
+          );
   }
 
   CopyWith_Input_StreetsObjRelInsertInput<TRes> get street {
@@ -724,7 +729,9 @@ class _CopyWithImpl_Input_AreasStreetsInsertInput<TRes>
     return local$street == null
         ? CopyWith_Input_StreetsObjRelInsertInput.stub(_then(_instance))
         : CopyWith_Input_StreetsObjRelInsertInput(
-            local$street, (e) => call(street: e));
+            local$street,
+            (e) => call(street: e),
+          );
   }
 }
 
@@ -739,8 +746,7 @@ class _CopyWithStubImpl_Input_AreasStreetsInsertInput<TRes>
     UuidValue? areaId,
     Input_StreetsObjRelInsertInput? street,
     UuidValue? streetId,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Input_AreasObjRelInsertInput<TRes> get area =>
       CopyWith_Input_AreasObjRelInsertInput.stub(_res);
@@ -753,11 +759,10 @@ class Input_AreasStreetsMaxOrderBy {
   factory Input_AreasStreetsMaxOrderBy({
     Enum_OrderBy? areaId,
     Enum_OrderBy? streetId,
-  }) =>
-      Input_AreasStreetsMaxOrderBy._({
-        if (areaId != null) r'areaId': areaId,
-        if (streetId != null) r'streetId': streetId,
-      });
+  }) => Input_AreasStreetsMaxOrderBy._({
+    if (areaId != null) r'areaId': areaId,
+    if (streetId != null) r'streetId': streetId,
+  });
 
   Input_AreasStreetsMaxOrderBy._(this._$data);
 
@@ -765,8 +770,9 @@ class Input_AreasStreetsMaxOrderBy {
     final result$data = <String, dynamic>{};
     if (data.containsKey('areaId')) {
       final l$areaId = data['areaId'];
-      result$data['areaId'] =
-          l$areaId == null ? null : fromJson_Enum_OrderBy((l$areaId as String));
+      result$data['areaId'] = l$areaId == null
+          ? null
+          : fromJson_Enum_OrderBy((l$areaId as String));
     }
     if (data.containsKey('streetId')) {
       final l$streetId = data['streetId'];
@@ -787,22 +793,21 @@ class Input_AreasStreetsMaxOrderBy {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('areaId')) {
       final l$areaId = areaId;
-      result$data['areaId'] =
-          l$areaId == null ? null : toJson_Enum_OrderBy(l$areaId);
+      result$data['areaId'] = l$areaId == null
+          ? null
+          : toJson_Enum_OrderBy(l$areaId);
     }
     if (_$data.containsKey('streetId')) {
       final l$streetId = streetId;
-      result$data['streetId'] =
-          l$streetId == null ? null : toJson_Enum_OrderBy(l$streetId);
+      result$data['streetId'] = l$streetId == null
+          ? null
+          : toJson_Enum_OrderBy(l$streetId);
     }
     return result$data;
   }
 
   CopyWith_Input_AreasStreetsMaxOrderBy<Input_AreasStreetsMaxOrderBy>
-      get copyWith => CopyWith_Input_AreasStreetsMaxOrderBy(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Input_AreasStreetsMaxOrderBy(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -853,18 +858,12 @@ abstract class CopyWith_Input_AreasStreetsMaxOrderBy<TRes> {
   factory CopyWith_Input_AreasStreetsMaxOrderBy.stub(TRes res) =
       _CopyWithStubImpl_Input_AreasStreetsMaxOrderBy;
 
-  TRes call({
-    Enum_OrderBy? areaId,
-    Enum_OrderBy? streetId,
-  });
+  TRes call({Enum_OrderBy? areaId, Enum_OrderBy? streetId});
 }
 
 class _CopyWithImpl_Input_AreasStreetsMaxOrderBy<TRes>
     implements CopyWith_Input_AreasStreetsMaxOrderBy<TRes> {
-  _CopyWithImpl_Input_AreasStreetsMaxOrderBy(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Input_AreasStreetsMaxOrderBy(this._instance, this._then);
 
   final Input_AreasStreetsMaxOrderBy _instance;
 
@@ -872,15 +871,14 @@ class _CopyWithImpl_Input_AreasStreetsMaxOrderBy<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? areaId = _undefined,
-    Object? streetId = _undefined,
-  }) =>
-      _then(Input_AreasStreetsMaxOrderBy._({
-        ..._instance._$data,
-        if (areaId != _undefined) 'areaId': (areaId as Enum_OrderBy?),
-        if (streetId != _undefined) 'streetId': (streetId as Enum_OrderBy?),
-      }));
+  TRes call({Object? areaId = _undefined, Object? streetId = _undefined}) =>
+      _then(
+        Input_AreasStreetsMaxOrderBy._({
+          ..._instance._$data,
+          if (areaId != _undefined) 'areaId': (areaId as Enum_OrderBy?),
+          if (streetId != _undefined) 'streetId': (streetId as Enum_OrderBy?),
+        }),
+      );
 }
 
 class _CopyWithStubImpl_Input_AreasStreetsMaxOrderBy<TRes>
@@ -889,22 +887,17 @@ class _CopyWithStubImpl_Input_AreasStreetsMaxOrderBy<TRes>
 
   TRes _res;
 
-  call({
-    Enum_OrderBy? areaId,
-    Enum_OrderBy? streetId,
-  }) =>
-      _res;
+  call({Enum_OrderBy? areaId, Enum_OrderBy? streetId}) => _res;
 }
 
 class Input_AreasStreetsMinOrderBy {
   factory Input_AreasStreetsMinOrderBy({
     Enum_OrderBy? areaId,
     Enum_OrderBy? streetId,
-  }) =>
-      Input_AreasStreetsMinOrderBy._({
-        if (areaId != null) r'areaId': areaId,
-        if (streetId != null) r'streetId': streetId,
-      });
+  }) => Input_AreasStreetsMinOrderBy._({
+    if (areaId != null) r'areaId': areaId,
+    if (streetId != null) r'streetId': streetId,
+  });
 
   Input_AreasStreetsMinOrderBy._(this._$data);
 
@@ -912,8 +905,9 @@ class Input_AreasStreetsMinOrderBy {
     final result$data = <String, dynamic>{};
     if (data.containsKey('areaId')) {
       final l$areaId = data['areaId'];
-      result$data['areaId'] =
-          l$areaId == null ? null : fromJson_Enum_OrderBy((l$areaId as String));
+      result$data['areaId'] = l$areaId == null
+          ? null
+          : fromJson_Enum_OrderBy((l$areaId as String));
     }
     if (data.containsKey('streetId')) {
       final l$streetId = data['streetId'];
@@ -934,22 +928,21 @@ class Input_AreasStreetsMinOrderBy {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('areaId')) {
       final l$areaId = areaId;
-      result$data['areaId'] =
-          l$areaId == null ? null : toJson_Enum_OrderBy(l$areaId);
+      result$data['areaId'] = l$areaId == null
+          ? null
+          : toJson_Enum_OrderBy(l$areaId);
     }
     if (_$data.containsKey('streetId')) {
       final l$streetId = streetId;
-      result$data['streetId'] =
-          l$streetId == null ? null : toJson_Enum_OrderBy(l$streetId);
+      result$data['streetId'] = l$streetId == null
+          ? null
+          : toJson_Enum_OrderBy(l$streetId);
     }
     return result$data;
   }
 
   CopyWith_Input_AreasStreetsMinOrderBy<Input_AreasStreetsMinOrderBy>
-      get copyWith => CopyWith_Input_AreasStreetsMinOrderBy(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Input_AreasStreetsMinOrderBy(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -1000,18 +993,12 @@ abstract class CopyWith_Input_AreasStreetsMinOrderBy<TRes> {
   factory CopyWith_Input_AreasStreetsMinOrderBy.stub(TRes res) =
       _CopyWithStubImpl_Input_AreasStreetsMinOrderBy;
 
-  TRes call({
-    Enum_OrderBy? areaId,
-    Enum_OrderBy? streetId,
-  });
+  TRes call({Enum_OrderBy? areaId, Enum_OrderBy? streetId});
 }
 
 class _CopyWithImpl_Input_AreasStreetsMinOrderBy<TRes>
     implements CopyWith_Input_AreasStreetsMinOrderBy<TRes> {
-  _CopyWithImpl_Input_AreasStreetsMinOrderBy(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Input_AreasStreetsMinOrderBy(this._instance, this._then);
 
   final Input_AreasStreetsMinOrderBy _instance;
 
@@ -1019,15 +1006,14 @@ class _CopyWithImpl_Input_AreasStreetsMinOrderBy<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? areaId = _undefined,
-    Object? streetId = _undefined,
-  }) =>
-      _then(Input_AreasStreetsMinOrderBy._({
-        ..._instance._$data,
-        if (areaId != _undefined) 'areaId': (areaId as Enum_OrderBy?),
-        if (streetId != _undefined) 'streetId': (streetId as Enum_OrderBy?),
-      }));
+  TRes call({Object? areaId = _undefined, Object? streetId = _undefined}) =>
+      _then(
+        Input_AreasStreetsMinOrderBy._({
+          ..._instance._$data,
+          if (areaId != _undefined) 'areaId': (areaId as Enum_OrderBy?),
+          if (streetId != _undefined) 'streetId': (streetId as Enum_OrderBy?),
+        }),
+      );
 }
 
 class _CopyWithStubImpl_Input_AreasStreetsMinOrderBy<TRes>
@@ -1036,11 +1022,7 @@ class _CopyWithStubImpl_Input_AreasStreetsMinOrderBy<TRes>
 
   TRes _res;
 
-  call({
-    Enum_OrderBy? areaId,
-    Enum_OrderBy? streetId,
-  }) =>
-      _res;
+  call({Enum_OrderBy? areaId, Enum_OrderBy? streetId}) => _res;
 }
 
 class Input_AreasStreetsOnConflict {
@@ -1048,20 +1030,20 @@ class Input_AreasStreetsOnConflict {
     required Enum_AreasStreetsConstraint constraint,
     List<Enum_AreasStreetsUpdateColumn>? updateColumns,
     Input_AreasStreetsBoolExp? where,
-  }) =>
-      Input_AreasStreetsOnConflict._({
-        r'constraint': constraint,
-        if (updateColumns != null) r'updateColumns': updateColumns,
-        if (where != null) r'where': where,
-      });
+  }) => Input_AreasStreetsOnConflict._({
+    r'constraint': constraint,
+    if (updateColumns != null) r'updateColumns': updateColumns,
+    if (where != null) r'where': where,
+  });
 
   Input_AreasStreetsOnConflict._(this._$data);
 
   factory Input_AreasStreetsOnConflict.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     final l$constraint = data['constraint'];
-    result$data['constraint'] =
-        fromJson_Enum_AreasStreetsConstraint((l$constraint as String));
+    result$data['constraint'] = fromJson_Enum_AreasStreetsConstraint(
+      (l$constraint as String),
+    );
     if (data.containsKey('updateColumns')) {
       final l$updateColumns = data['updateColumns'];
       result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
@@ -1073,7 +1055,8 @@ class Input_AreasStreetsOnConflict {
       result$data['where'] = l$where == null
           ? null
           : Input_AreasStreetsBoolExp.fromJson(
-              (l$where as Map<String, dynamic>));
+              (l$where as Map<String, dynamic>),
+            );
     }
     return Input_AreasStreetsOnConflict._(result$data);
   }
@@ -1092,8 +1075,9 @@ class Input_AreasStreetsOnConflict {
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
-    result$data['constraint'] =
-        toJson_Enum_AreasStreetsConstraint(l$constraint);
+    result$data['constraint'] = toJson_Enum_AreasStreetsConstraint(
+      l$constraint,
+    );
     if (_$data.containsKey('updateColumns')) {
       final l$updateColumns = updateColumns;
       result$data['updateColumns'] =
@@ -1109,10 +1093,7 @@ class Input_AreasStreetsOnConflict {
   }
 
   CopyWith_Input_AreasStreetsOnConflict<Input_AreasStreetsOnConflict>
-      get copyWith => CopyWith_Input_AreasStreetsOnConflict(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Input_AreasStreetsOnConflict(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -1168,8 +1149,8 @@ class Input_AreasStreetsOnConflict {
       l$constraint,
       _$data.containsKey('updateColumns')
           ? l$updateColumns == null
-              ? null
-              : Object.hashAll(l$updateColumns.map((v) => v))
+                ? null
+                : Object.hashAll(l$updateColumns.map((v) => v))
           : const {},
       _$data.containsKey('where') ? l$where : const {},
     ]);
@@ -1195,10 +1176,7 @@ abstract class CopyWith_Input_AreasStreetsOnConflict<TRes> {
 
 class _CopyWithImpl_Input_AreasStreetsOnConflict<TRes>
     implements CopyWith_Input_AreasStreetsOnConflict<TRes> {
-  _CopyWithImpl_Input_AreasStreetsOnConflict(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Input_AreasStreetsOnConflict(this._instance, this._then);
 
   final Input_AreasStreetsOnConflict _instance;
 
@@ -1210,23 +1188,25 @@ class _CopyWithImpl_Input_AreasStreetsOnConflict<TRes>
     Object? constraint = _undefined,
     Object? updateColumns = _undefined,
     Object? where = _undefined,
-  }) =>
-      _then(Input_AreasStreetsOnConflict._({
-        ..._instance._$data,
-        if (constraint != _undefined && constraint != null)
-          'constraint': (constraint as Enum_AreasStreetsConstraint),
-        if (updateColumns != _undefined && updateColumns != null)
-          'updateColumns':
-              (updateColumns as List<Enum_AreasStreetsUpdateColumn>),
-        if (where != _undefined) 'where': (where as Input_AreasStreetsBoolExp?),
-      }));
+  }) => _then(
+    Input_AreasStreetsOnConflict._({
+      ..._instance._$data,
+      if (constraint != _undefined && constraint != null)
+        'constraint': (constraint as Enum_AreasStreetsConstraint),
+      if (updateColumns != _undefined && updateColumns != null)
+        'updateColumns': (updateColumns as List<Enum_AreasStreetsUpdateColumn>),
+      if (where != _undefined) 'where': (where as Input_AreasStreetsBoolExp?),
+    }),
+  );
 
   CopyWith_Input_AreasStreetsBoolExp<TRes> get where {
     final local$where = _instance.where;
     return local$where == null
         ? CopyWith_Input_AreasStreetsBoolExp.stub(_then(_instance))
         : CopyWith_Input_AreasStreetsBoolExp(
-            local$where, (e) => call(where: e));
+            local$where,
+            (e) => call(where: e),
+          );
   }
 }
 
@@ -1240,8 +1220,7 @@ class _CopyWithStubImpl_Input_AreasStreetsOnConflict<TRes>
     Enum_AreasStreetsConstraint? constraint,
     List<Enum_AreasStreetsUpdateColumn>? updateColumns,
     Input_AreasStreetsBoolExp? where,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Input_AreasStreetsBoolExp<TRes> get where =>
       CopyWith_Input_AreasStreetsBoolExp.stub(_res);
@@ -1253,13 +1232,12 @@ class Input_AreasStreetsOrderBy {
     Enum_OrderBy? areaId,
     Input_StreetsOrderBy? street,
     Enum_OrderBy? streetId,
-  }) =>
-      Input_AreasStreetsOrderBy._({
-        if (area != null) r'area': area,
-        if (areaId != null) r'areaId': areaId,
-        if (street != null) r'street': street,
-        if (streetId != null) r'streetId': streetId,
-      });
+  }) => Input_AreasStreetsOrderBy._({
+    if (area != null) r'area': area,
+    if (areaId != null) r'areaId': areaId,
+    if (street != null) r'street': street,
+    if (streetId != null) r'streetId': streetId,
+  });
 
   Input_AreasStreetsOrderBy._(this._$data);
 
@@ -1273,8 +1251,9 @@ class Input_AreasStreetsOrderBy {
     }
     if (data.containsKey('areaId')) {
       final l$areaId = data['areaId'];
-      result$data['areaId'] =
-          l$areaId == null ? null : fromJson_Enum_OrderBy((l$areaId as String));
+      result$data['areaId'] = l$areaId == null
+          ? null
+          : fromJson_Enum_OrderBy((l$areaId as String));
     }
     if (data.containsKey('street')) {
       final l$street = data['street'];
@@ -1310,8 +1289,9 @@ class Input_AreasStreetsOrderBy {
     }
     if (_$data.containsKey('areaId')) {
       final l$areaId = areaId;
-      result$data['areaId'] =
-          l$areaId == null ? null : toJson_Enum_OrderBy(l$areaId);
+      result$data['areaId'] = l$areaId == null
+          ? null
+          : toJson_Enum_OrderBy(l$areaId);
     }
     if (_$data.containsKey('street')) {
       final l$street = street;
@@ -1319,17 +1299,15 @@ class Input_AreasStreetsOrderBy {
     }
     if (_$data.containsKey('streetId')) {
       final l$streetId = streetId;
-      result$data['streetId'] =
-          l$streetId == null ? null : toJson_Enum_OrderBy(l$streetId);
+      result$data['streetId'] = l$streetId == null
+          ? null
+          : toJson_Enum_OrderBy(l$streetId);
     }
     return result$data;
   }
 
   CopyWith_Input_AreasStreetsOrderBy<Input_AreasStreetsOrderBy> get copyWith =>
-      CopyWith_Input_AreasStreetsOrderBy(
-        this,
-        (i) => i,
-      );
+      CopyWith_Input_AreasStreetsOrderBy(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -1412,10 +1390,7 @@ abstract class CopyWith_Input_AreasStreetsOrderBy<TRes> {
 
 class _CopyWithImpl_Input_AreasStreetsOrderBy<TRes>
     implements CopyWith_Input_AreasStreetsOrderBy<TRes> {
-  _CopyWithImpl_Input_AreasStreetsOrderBy(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Input_AreasStreetsOrderBy(this._instance, this._then);
 
   final Input_AreasStreetsOrderBy _instance;
 
@@ -1428,14 +1403,15 @@ class _CopyWithImpl_Input_AreasStreetsOrderBy<TRes>
     Object? areaId = _undefined,
     Object? street = _undefined,
     Object? streetId = _undefined,
-  }) =>
-      _then(Input_AreasStreetsOrderBy._({
-        ..._instance._$data,
-        if (area != _undefined) 'area': (area as Input_AreasOrderBy?),
-        if (areaId != _undefined) 'areaId': (areaId as Enum_OrderBy?),
-        if (street != _undefined) 'street': (street as Input_StreetsOrderBy?),
-        if (streetId != _undefined) 'streetId': (streetId as Enum_OrderBy?),
-      }));
+  }) => _then(
+    Input_AreasStreetsOrderBy._({
+      ..._instance._$data,
+      if (area != _undefined) 'area': (area as Input_AreasOrderBy?),
+      if (areaId != _undefined) 'areaId': (areaId as Enum_OrderBy?),
+      if (street != _undefined) 'street': (street as Input_StreetsOrderBy?),
+      if (streetId != _undefined) 'streetId': (streetId as Enum_OrderBy?),
+    }),
+  );
 
   CopyWith_Input_AreasOrderBy<TRes> get area {
     final local$area = _instance.area;
@@ -1463,8 +1439,7 @@ class _CopyWithStubImpl_Input_AreasStreetsOrderBy<TRes>
     Enum_OrderBy? areaId,
     Input_StreetsOrderBy? street,
     Enum_OrderBy? streetId,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Input_AreasOrderBy<TRes> get area =>
       CopyWith_Input_AreasOrderBy.stub(_res);
@@ -1477,21 +1452,22 @@ class Input_AreasStreetsStreamCursorInput {
   factory Input_AreasStreetsStreamCursorInput({
     required Input_AreasStreetsStreamCursorValueInput initialValue,
     Enum_CursorOrdering? ordering,
-  }) =>
-      Input_AreasStreetsStreamCursorInput._({
-        r'initialValue': initialValue,
-        if (ordering != null) r'ordering': ordering,
-      });
+  }) => Input_AreasStreetsStreamCursorInput._({
+    r'initialValue': initialValue,
+    if (ordering != null) r'ordering': ordering,
+  });
 
   Input_AreasStreetsStreamCursorInput._(this._$data);
 
   factory Input_AreasStreetsStreamCursorInput.fromJson(
-      Map<String, dynamic> data) {
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
     final l$initialValue = data['initialValue'];
     result$data['initialValue'] =
         Input_AreasStreetsStreamCursorValueInput.fromJson(
-            (l$initialValue as Map<String, dynamic>));
+          (l$initialValue as Map<String, dynamic>),
+        );
     if (data.containsKey('ordering')) {
       final l$ordering = data['ordering'];
       result$data['ordering'] = l$ordering == null
@@ -1515,18 +1491,17 @@ class Input_AreasStreetsStreamCursorInput {
     result$data['initialValue'] = l$initialValue.toJson();
     if (_$data.containsKey('ordering')) {
       final l$ordering = ordering;
-      result$data['ordering'] =
-          l$ordering == null ? null : toJson_Enum_CursorOrdering(l$ordering);
+      result$data['ordering'] = l$ordering == null
+          ? null
+          : toJson_Enum_CursorOrdering(l$ordering);
     }
     return result$data;
   }
 
   CopyWith_Input_AreasStreetsStreamCursorInput<
-          Input_AreasStreetsStreamCursorInput>
-      get copyWith => CopyWith_Input_AreasStreetsStreamCursorInput(
-            this,
-            (i) => i,
-          );
+    Input_AreasStreetsStreamCursorInput
+  >
+  get copyWith => CopyWith_Input_AreasStreetsStreamCursorInput(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -1583,10 +1558,7 @@ abstract class CopyWith_Input_AreasStreetsStreamCursorInput<TRes> {
 
 class _CopyWithImpl_Input_AreasStreetsStreamCursorInput<TRes>
     implements CopyWith_Input_AreasStreetsStreamCursorInput<TRes> {
-  _CopyWithImpl_Input_AreasStreetsStreamCursorInput(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Input_AreasStreetsStreamCursorInput(this._instance, this._then);
 
   final Input_AreasStreetsStreamCursorInput _instance;
 
@@ -1597,20 +1569,23 @@ class _CopyWithImpl_Input_AreasStreetsStreamCursorInput<TRes>
   TRes call({
     Object? initialValue = _undefined,
     Object? ordering = _undefined,
-  }) =>
-      _then(Input_AreasStreetsStreamCursorInput._({
-        ..._instance._$data,
-        if (initialValue != _undefined && initialValue != null)
-          'initialValue':
-              (initialValue as Input_AreasStreetsStreamCursorValueInput),
-        if (ordering != _undefined)
-          'ordering': (ordering as Enum_CursorOrdering?),
-      }));
+  }) => _then(
+    Input_AreasStreetsStreamCursorInput._({
+      ..._instance._$data,
+      if (initialValue != _undefined && initialValue != null)
+        'initialValue':
+            (initialValue as Input_AreasStreetsStreamCursorValueInput),
+      if (ordering != _undefined)
+        'ordering': (ordering as Enum_CursorOrdering?),
+    }),
+  );
 
   CopyWith_Input_AreasStreetsStreamCursorValueInput<TRes> get initialValue {
     final local$initialValue = _instance.initialValue;
     return CopyWith_Input_AreasStreetsStreamCursorValueInput(
-        local$initialValue, (e) => call(initialValue: e));
+      local$initialValue,
+      (e) => call(initialValue: e),
+    );
   }
 }
 
@@ -1623,8 +1598,7 @@ class _CopyWithStubImpl_Input_AreasStreetsStreamCursorInput<TRes>
   call({
     Input_AreasStreetsStreamCursorValueInput? initialValue,
     Enum_CursorOrdering? ordering,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Input_AreasStreetsStreamCursorValueInput<TRes> get initialValue =>
       CopyWith_Input_AreasStreetsStreamCursorValueInput.stub(_res);
@@ -1634,16 +1608,16 @@ class Input_AreasStreetsStreamCursorValueInput {
   factory Input_AreasStreetsStreamCursorValueInput({
     UuidValue? areaId,
     UuidValue? streetId,
-  }) =>
-      Input_AreasStreetsStreamCursorValueInput._({
-        if (areaId != null) r'areaId': areaId,
-        if (streetId != null) r'streetId': streetId,
-      });
+  }) => Input_AreasStreetsStreamCursorValueInput._({
+    if (areaId != null) r'areaId': areaId,
+    if (streetId != null) r'streetId': streetId,
+  });
 
   Input_AreasStreetsStreamCursorValueInput._(this._$data);
 
   factory Input_AreasStreetsStreamCursorValueInput.fromJson(
-      Map<String, dynamic> data) {
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('areaId')) {
       final l$areaId = data['areaId'];
@@ -1651,8 +1625,9 @@ class Input_AreasStreetsStreamCursorValueInput {
     }
     if (data.containsKey('streetId')) {
       final l$streetId = data['streetId'];
-      result$data['streetId'] =
-          l$streetId == null ? null : stringToUuid(l$streetId);
+      result$data['streetId'] = l$streetId == null
+          ? null
+          : stringToUuid(l$streetId);
     }
     return Input_AreasStreetsStreamCursorValueInput._(result$data);
   }
@@ -1671,18 +1646,18 @@ class Input_AreasStreetsStreamCursorValueInput {
     }
     if (_$data.containsKey('streetId')) {
       final l$streetId = streetId;
-      result$data['streetId'] =
-          l$streetId == null ? null : uuidToString(l$streetId);
+      result$data['streetId'] = l$streetId == null
+          ? null
+          : uuidToString(l$streetId);
     }
     return result$data;
   }
 
   CopyWith_Input_AreasStreetsStreamCursorValueInput<
-          Input_AreasStreetsStreamCursorValueInput>
-      get copyWith => CopyWith_Input_AreasStreetsStreamCursorValueInput(
-            this,
-            (i) => i,
-          );
+    Input_AreasStreetsStreamCursorValueInput
+  >
+  get copyWith =>
+      CopyWith_Input_AreasStreetsStreamCursorValueInput(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -1733,10 +1708,7 @@ abstract class CopyWith_Input_AreasStreetsStreamCursorValueInput<TRes> {
   factory CopyWith_Input_AreasStreetsStreamCursorValueInput.stub(TRes res) =
       _CopyWithStubImpl_Input_AreasStreetsStreamCursorValueInput;
 
-  TRes call({
-    UuidValue? areaId,
-    UuidValue? streetId,
-  });
+  TRes call({UuidValue? areaId, UuidValue? streetId});
 }
 
 class _CopyWithImpl_Input_AreasStreetsStreamCursorValueInput<TRes>
@@ -1752,15 +1724,14 @@ class _CopyWithImpl_Input_AreasStreetsStreamCursorValueInput<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? areaId = _undefined,
-    Object? streetId = _undefined,
-  }) =>
-      _then(Input_AreasStreetsStreamCursorValueInput._({
-        ..._instance._$data,
-        if (areaId != _undefined) 'areaId': (areaId as UuidValue?),
-        if (streetId != _undefined) 'streetId': (streetId as UuidValue?),
-      }));
+  TRes call({Object? areaId = _undefined, Object? streetId = _undefined}) =>
+      _then(
+        Input_AreasStreetsStreamCursorValueInput._({
+          ..._instance._$data,
+          if (areaId != _undefined) 'areaId': (areaId as UuidValue?),
+          if (streetId != _undefined) 'streetId': (streetId as UuidValue?),
+        }),
+      );
 }
 
 class _CopyWithStubImpl_Input_AreasStreetsStreamCursorValueInput<TRes>
@@ -1769,11 +1740,7 @@ class _CopyWithStubImpl_Input_AreasStreetsStreamCursorValueInput<TRes>
 
   TRes _res;
 
-  call({
-    UuidValue? areaId,
-    UuidValue? streetId,
-  }) =>
-      _res;
+  call({UuidValue? areaId, UuidValue? streetId}) => _res;
 }
 
 class Input_AreasUpdates {
@@ -1781,12 +1748,11 @@ class Input_AreasUpdates {
     Input_AreasIncInput? $_inc,
     Input_AreasSetInput? $_set,
     required Input_AreasBoolExp where,
-  }) =>
-      Input_AreasUpdates._({
-        if ($_inc != null) r'_inc': $_inc,
-        if ($_set != null) r'_set': $_set,
-        r'where': where,
-      });
+  }) => Input_AreasUpdates._({
+    if ($_inc != null) r'_inc': $_inc,
+    if ($_set != null) r'_set': $_set,
+    r'where': where,
+  });
 
   Input_AreasUpdates._(this._$data);
 
@@ -1805,8 +1771,9 @@ class Input_AreasUpdates {
           : Input_AreasSetInput.fromJson((l$$_set as Map<String, dynamic>));
     }
     final l$where = data['where'];
-    result$data['where'] =
-        Input_AreasBoolExp.fromJson((l$where as Map<String, dynamic>));
+    result$data['where'] = Input_AreasBoolExp.fromJson(
+      (l$where as Map<String, dynamic>),
+    );
     return Input_AreasUpdates._(result$data);
   }
 
@@ -1834,10 +1801,7 @@ class Input_AreasUpdates {
   }
 
   CopyWith_Input_AreasUpdates<Input_AreasUpdates> get copyWith =>
-      CopyWith_Input_AreasUpdates(
-        this,
-        (i) => i,
-      );
+      CopyWith_Input_AreasUpdates(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -1905,10 +1869,7 @@ abstract class CopyWith_Input_AreasUpdates<TRes> {
 
 class _CopyWithImpl_Input_AreasUpdates<TRes>
     implements CopyWith_Input_AreasUpdates<TRes> {
-  _CopyWithImpl_Input_AreasUpdates(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Input_AreasUpdates(this._instance, this._then);
 
   final Input_AreasUpdates _instance;
 
@@ -1920,14 +1881,15 @@ class _CopyWithImpl_Input_AreasUpdates<TRes>
     Object? $_inc = _undefined,
     Object? $_set = _undefined,
     Object? where = _undefined,
-  }) =>
-      _then(Input_AreasUpdates._({
-        ..._instance._$data,
-        if ($_inc != _undefined) '_inc': ($_inc as Input_AreasIncInput?),
-        if ($_set != _undefined) '_set': ($_set as Input_AreasSetInput?),
-        if (where != _undefined && where != null)
-          'where': (where as Input_AreasBoolExp),
-      }));
+  }) => _then(
+    Input_AreasUpdates._({
+      ..._instance._$data,
+      if ($_inc != _undefined) '_inc': ($_inc as Input_AreasIncInput?),
+      if ($_set != _undefined) '_set': ($_set as Input_AreasSetInput?),
+      if (where != _undefined && where != null)
+        'where': (where as Input_AreasBoolExp),
+    }),
+  );
 
   CopyWith_Input_AreasIncInput<TRes> get $_inc {
     final local$$_inc = _instance.$_inc;
@@ -1959,8 +1921,7 @@ class _CopyWithStubImpl_Input_AreasUpdates<TRes>
     Input_AreasIncInput? $_inc,
     Input_AreasSetInput? $_set,
     Input_AreasBoolExp? where,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Input_AreasIncInput<TRes> get $_inc =>
       CopyWith_Input_AreasIncInput.stub(_res);
@@ -1985,100 +1946,111 @@ class Input_AuthUsersAdminOnAggregateOrderBy {
     Input_AuthUsersAdminOnVarPopOrderBy? varPop,
     Input_AuthUsersAdminOnVarSampOrderBy? varSamp,
     Input_AuthUsersAdminOnVarianceOrderBy? variance,
-  }) =>
-      Input_AuthUsersAdminOnAggregateOrderBy._({
-        if (avg != null) r'avg': avg,
-        if (count != null) r'count': count,
-        if (max != null) r'max': max,
-        if (min != null) r'min': min,
-        if (stddev != null) r'stddev': stddev,
-        if (stddevPop != null) r'stddevPop': stddevPop,
-        if (stddevSamp != null) r'stddevSamp': stddevSamp,
-        if (sum != null) r'sum': sum,
-        if (varPop != null) r'varPop': varPop,
-        if (varSamp != null) r'varSamp': varSamp,
-        if (variance != null) r'variance': variance,
-      });
+  }) => Input_AuthUsersAdminOnAggregateOrderBy._({
+    if (avg != null) r'avg': avg,
+    if (count != null) r'count': count,
+    if (max != null) r'max': max,
+    if (min != null) r'min': min,
+    if (stddev != null) r'stddev': stddev,
+    if (stddevPop != null) r'stddevPop': stddevPop,
+    if (stddevSamp != null) r'stddevSamp': stddevSamp,
+    if (sum != null) r'sum': sum,
+    if (varPop != null) r'varPop': varPop,
+    if (varSamp != null) r'varSamp': varSamp,
+    if (variance != null) r'variance': variance,
+  });
 
   Input_AuthUsersAdminOnAggregateOrderBy._(this._$data);
 
   factory Input_AuthUsersAdminOnAggregateOrderBy.fromJson(
-      Map<String, dynamic> data) {
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('avg')) {
       final l$avg = data['avg'];
       result$data['avg'] = l$avg == null
           ? null
           : Input_AuthUsersAdminOnAvgOrderBy.fromJson(
-              (l$avg as Map<String, dynamic>));
+              (l$avg as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('count')) {
       final l$count = data['count'];
-      result$data['count'] =
-          l$count == null ? null : fromJson_Enum_OrderBy((l$count as String));
+      result$data['count'] = l$count == null
+          ? null
+          : fromJson_Enum_OrderBy((l$count as String));
     }
     if (data.containsKey('max')) {
       final l$max = data['max'];
       result$data['max'] = l$max == null
           ? null
           : Input_AuthUsersAdminOnMaxOrderBy.fromJson(
-              (l$max as Map<String, dynamic>));
+              (l$max as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('min')) {
       final l$min = data['min'];
       result$data['min'] = l$min == null
           ? null
           : Input_AuthUsersAdminOnMinOrderBy.fromJson(
-              (l$min as Map<String, dynamic>));
+              (l$min as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('stddev')) {
       final l$stddev = data['stddev'];
       result$data['stddev'] = l$stddev == null
           ? null
           : Input_AuthUsersAdminOnStddevOrderBy.fromJson(
-              (l$stddev as Map<String, dynamic>));
+              (l$stddev as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('stddevPop')) {
       final l$stddevPop = data['stddevPop'];
       result$data['stddevPop'] = l$stddevPop == null
           ? null
           : Input_AuthUsersAdminOnStddevPopOrderBy.fromJson(
-              (l$stddevPop as Map<String, dynamic>));
+              (l$stddevPop as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('stddevSamp')) {
       final l$stddevSamp = data['stddevSamp'];
       result$data['stddevSamp'] = l$stddevSamp == null
           ? null
           : Input_AuthUsersAdminOnStddevSampOrderBy.fromJson(
-              (l$stddevSamp as Map<String, dynamic>));
+              (l$stddevSamp as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('sum')) {
       final l$sum = data['sum'];
       result$data['sum'] = l$sum == null
           ? null
           : Input_AuthUsersAdminOnSumOrderBy.fromJson(
-              (l$sum as Map<String, dynamic>));
+              (l$sum as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('varPop')) {
       final l$varPop = data['varPop'];
       result$data['varPop'] = l$varPop == null
           ? null
           : Input_AuthUsersAdminOnVarPopOrderBy.fromJson(
-              (l$varPop as Map<String, dynamic>));
+              (l$varPop as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('varSamp')) {
       final l$varSamp = data['varSamp'];
       result$data['varSamp'] = l$varSamp == null
           ? null
           : Input_AuthUsersAdminOnVarSampOrderBy.fromJson(
-              (l$varSamp as Map<String, dynamic>));
+              (l$varSamp as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('variance')) {
       final l$variance = data['variance'];
       result$data['variance'] = l$variance == null
           ? null
           : Input_AuthUsersAdminOnVarianceOrderBy.fromJson(
-              (l$variance as Map<String, dynamic>));
+              (l$variance as Map<String, dynamic>),
+            );
     }
     return Input_AuthUsersAdminOnAggregateOrderBy._(result$data);
   }
@@ -2125,8 +2097,9 @@ class Input_AuthUsersAdminOnAggregateOrderBy {
     }
     if (_$data.containsKey('count')) {
       final l$count = count;
-      result$data['count'] =
-          l$count == null ? null : toJson_Enum_OrderBy(l$count);
+      result$data['count'] = l$count == null
+          ? null
+          : toJson_Enum_OrderBy(l$count);
     }
     if (_$data.containsKey('max')) {
       final l$max = max;
@@ -2168,11 +2141,10 @@ class Input_AuthUsersAdminOnAggregateOrderBy {
   }
 
   CopyWith_Input_AuthUsersAdminOnAggregateOrderBy<
-          Input_AuthUsersAdminOnAggregateOrderBy>
-      get copyWith => CopyWith_Input_AuthUsersAdminOnAggregateOrderBy(
-            this,
-            (i) => i,
-          );
+    Input_AuthUsersAdminOnAggregateOrderBy
+  >
+  get copyWith =>
+      CopyWith_Input_AuthUsersAdminOnAggregateOrderBy(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -2365,39 +2337,37 @@ class _CopyWithImpl_Input_AuthUsersAdminOnAggregateOrderBy<TRes>
     Object? varPop = _undefined,
     Object? varSamp = _undefined,
     Object? variance = _undefined,
-  }) =>
-      _then(Input_AuthUsersAdminOnAggregateOrderBy._({
-        ..._instance._$data,
-        if (avg != _undefined)
-          'avg': (avg as Input_AuthUsersAdminOnAvgOrderBy?),
-        if (count != _undefined) 'count': (count as Enum_OrderBy?),
-        if (max != _undefined)
-          'max': (max as Input_AuthUsersAdminOnMaxOrderBy?),
-        if (min != _undefined)
-          'min': (min as Input_AuthUsersAdminOnMinOrderBy?),
-        if (stddev != _undefined)
-          'stddev': (stddev as Input_AuthUsersAdminOnStddevOrderBy?),
-        if (stddevPop != _undefined)
-          'stddevPop': (stddevPop as Input_AuthUsersAdminOnStddevPopOrderBy?),
-        if (stddevSamp != _undefined)
-          'stddevSamp':
-              (stddevSamp as Input_AuthUsersAdminOnStddevSampOrderBy?),
-        if (sum != _undefined)
-          'sum': (sum as Input_AuthUsersAdminOnSumOrderBy?),
-        if (varPop != _undefined)
-          'varPop': (varPop as Input_AuthUsersAdminOnVarPopOrderBy?),
-        if (varSamp != _undefined)
-          'varSamp': (varSamp as Input_AuthUsersAdminOnVarSampOrderBy?),
-        if (variance != _undefined)
-          'variance': (variance as Input_AuthUsersAdminOnVarianceOrderBy?),
-      }));
+  }) => _then(
+    Input_AuthUsersAdminOnAggregateOrderBy._({
+      ..._instance._$data,
+      if (avg != _undefined) 'avg': (avg as Input_AuthUsersAdminOnAvgOrderBy?),
+      if (count != _undefined) 'count': (count as Enum_OrderBy?),
+      if (max != _undefined) 'max': (max as Input_AuthUsersAdminOnMaxOrderBy?),
+      if (min != _undefined) 'min': (min as Input_AuthUsersAdminOnMinOrderBy?),
+      if (stddev != _undefined)
+        'stddev': (stddev as Input_AuthUsersAdminOnStddevOrderBy?),
+      if (stddevPop != _undefined)
+        'stddevPop': (stddevPop as Input_AuthUsersAdminOnStddevPopOrderBy?),
+      if (stddevSamp != _undefined)
+        'stddevSamp': (stddevSamp as Input_AuthUsersAdminOnStddevSampOrderBy?),
+      if (sum != _undefined) 'sum': (sum as Input_AuthUsersAdminOnSumOrderBy?),
+      if (varPop != _undefined)
+        'varPop': (varPop as Input_AuthUsersAdminOnVarPopOrderBy?),
+      if (varSamp != _undefined)
+        'varSamp': (varSamp as Input_AuthUsersAdminOnVarSampOrderBy?),
+      if (variance != _undefined)
+        'variance': (variance as Input_AuthUsersAdminOnVarianceOrderBy?),
+    }),
+  );
 
   CopyWith_Input_AuthUsersAdminOnAvgOrderBy<TRes> get avg {
     final local$avg = _instance.avg;
     return local$avg == null
         ? CopyWith_Input_AuthUsersAdminOnAvgOrderBy.stub(_then(_instance))
         : CopyWith_Input_AuthUsersAdminOnAvgOrderBy(
-            local$avg, (e) => call(avg: e));
+            local$avg,
+            (e) => call(avg: e),
+          );
   }
 
   CopyWith_Input_AuthUsersAdminOnMaxOrderBy<TRes> get max {
@@ -2405,7 +2375,9 @@ class _CopyWithImpl_Input_AuthUsersAdminOnAggregateOrderBy<TRes>
     return local$max == null
         ? CopyWith_Input_AuthUsersAdminOnMaxOrderBy.stub(_then(_instance))
         : CopyWith_Input_AuthUsersAdminOnMaxOrderBy(
-            local$max, (e) => call(max: e));
+            local$max,
+            (e) => call(max: e),
+          );
   }
 
   CopyWith_Input_AuthUsersAdminOnMinOrderBy<TRes> get min {
@@ -2413,7 +2385,9 @@ class _CopyWithImpl_Input_AuthUsersAdminOnAggregateOrderBy<TRes>
     return local$min == null
         ? CopyWith_Input_AuthUsersAdminOnMinOrderBy.stub(_then(_instance))
         : CopyWith_Input_AuthUsersAdminOnMinOrderBy(
-            local$min, (e) => call(min: e));
+            local$min,
+            (e) => call(min: e),
+          );
   }
 
   CopyWith_Input_AuthUsersAdminOnStddevOrderBy<TRes> get stddev {
@@ -2421,7 +2395,9 @@ class _CopyWithImpl_Input_AuthUsersAdminOnAggregateOrderBy<TRes>
     return local$stddev == null
         ? CopyWith_Input_AuthUsersAdminOnStddevOrderBy.stub(_then(_instance))
         : CopyWith_Input_AuthUsersAdminOnStddevOrderBy(
-            local$stddev, (e) => call(stddev: e));
+            local$stddev,
+            (e) => call(stddev: e),
+          );
   }
 
   CopyWith_Input_AuthUsersAdminOnStddevPopOrderBy<TRes> get stddevPop {
@@ -2429,16 +2405,21 @@ class _CopyWithImpl_Input_AuthUsersAdminOnAggregateOrderBy<TRes>
     return local$stddevPop == null
         ? CopyWith_Input_AuthUsersAdminOnStddevPopOrderBy.stub(_then(_instance))
         : CopyWith_Input_AuthUsersAdminOnStddevPopOrderBy(
-            local$stddevPop, (e) => call(stddevPop: e));
+            local$stddevPop,
+            (e) => call(stddevPop: e),
+          );
   }
 
   CopyWith_Input_AuthUsersAdminOnStddevSampOrderBy<TRes> get stddevSamp {
     final local$stddevSamp = _instance.stddevSamp;
     return local$stddevSamp == null
         ? CopyWith_Input_AuthUsersAdminOnStddevSampOrderBy.stub(
-            _then(_instance))
+            _then(_instance),
+          )
         : CopyWith_Input_AuthUsersAdminOnStddevSampOrderBy(
-            local$stddevSamp, (e) => call(stddevSamp: e));
+            local$stddevSamp,
+            (e) => call(stddevSamp: e),
+          );
   }
 
   CopyWith_Input_AuthUsersAdminOnSumOrderBy<TRes> get sum {
@@ -2446,7 +2427,9 @@ class _CopyWithImpl_Input_AuthUsersAdminOnAggregateOrderBy<TRes>
     return local$sum == null
         ? CopyWith_Input_AuthUsersAdminOnSumOrderBy.stub(_then(_instance))
         : CopyWith_Input_AuthUsersAdminOnSumOrderBy(
-            local$sum, (e) => call(sum: e));
+            local$sum,
+            (e) => call(sum: e),
+          );
   }
 
   CopyWith_Input_AuthUsersAdminOnVarPopOrderBy<TRes> get varPop {
@@ -2454,7 +2437,9 @@ class _CopyWithImpl_Input_AuthUsersAdminOnAggregateOrderBy<TRes>
     return local$varPop == null
         ? CopyWith_Input_AuthUsersAdminOnVarPopOrderBy.stub(_then(_instance))
         : CopyWith_Input_AuthUsersAdminOnVarPopOrderBy(
-            local$varPop, (e) => call(varPop: e));
+            local$varPop,
+            (e) => call(varPop: e),
+          );
   }
 
   CopyWith_Input_AuthUsersAdminOnVarSampOrderBy<TRes> get varSamp {
@@ -2462,7 +2447,9 @@ class _CopyWithImpl_Input_AuthUsersAdminOnAggregateOrderBy<TRes>
     return local$varSamp == null
         ? CopyWith_Input_AuthUsersAdminOnVarSampOrderBy.stub(_then(_instance))
         : CopyWith_Input_AuthUsersAdminOnVarSampOrderBy(
-            local$varSamp, (e) => call(varSamp: e));
+            local$varSamp,
+            (e) => call(varSamp: e),
+          );
   }
 
   CopyWith_Input_AuthUsersAdminOnVarianceOrderBy<TRes> get variance {
@@ -2470,7 +2457,9 @@ class _CopyWithImpl_Input_AuthUsersAdminOnAggregateOrderBy<TRes>
     return local$variance == null
         ? CopyWith_Input_AuthUsersAdminOnVarianceOrderBy.stub(_then(_instance))
         : CopyWith_Input_AuthUsersAdminOnVarianceOrderBy(
-            local$variance, (e) => call(variance: e));
+            local$variance,
+            (e) => call(variance: e),
+          );
   }
 }
 
@@ -2492,8 +2481,7 @@ class _CopyWithStubImpl_Input_AuthUsersAdminOnAggregateOrderBy<TRes>
     Input_AuthUsersAdminOnVarPopOrderBy? varPop,
     Input_AuthUsersAdminOnVarSampOrderBy? varSamp,
     Input_AuthUsersAdminOnVarianceOrderBy? variance,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Input_AuthUsersAdminOnAvgOrderBy<TRes> get avg =>
       CopyWith_Input_AuthUsersAdminOnAvgOrderBy.stub(_res);
@@ -2530,28 +2518,32 @@ class Input_AuthUsersAdminOnArrRelInsertInput {
   factory Input_AuthUsersAdminOnArrRelInsertInput({
     required List<Input_AuthUsersAdminOnInsertInput> data,
     Input_AuthUsersAdminOnOnConflict? onConflict,
-  }) =>
-      Input_AuthUsersAdminOnArrRelInsertInput._({
-        r'data': data,
-        if (onConflict != null) r'onConflict': onConflict,
-      });
+  }) => Input_AuthUsersAdminOnArrRelInsertInput._({
+    r'data': data,
+    if (onConflict != null) r'onConflict': onConflict,
+  });
 
   Input_AuthUsersAdminOnArrRelInsertInput._(this._$data);
 
   factory Input_AuthUsersAdminOnArrRelInsertInput.fromJson(
-      Map<String, dynamic> data) {
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
     final l$data = data['data'];
     result$data['data'] = (l$data as List<dynamic>)
-        .map((e) => Input_AuthUsersAdminOnInsertInput.fromJson(
-            (e as Map<String, dynamic>)))
+        .map(
+          (e) => Input_AuthUsersAdminOnInsertInput.fromJson(
+            (e as Map<String, dynamic>),
+          ),
+        )
         .toList();
     if (data.containsKey('onConflict')) {
       final l$onConflict = data['onConflict'];
       result$data['onConflict'] = l$onConflict == null
           ? null
           : Input_AuthUsersAdminOnOnConflict.fromJson(
-              (l$onConflict as Map<String, dynamic>));
+              (l$onConflict as Map<String, dynamic>),
+            );
     }
     return Input_AuthUsersAdminOnArrRelInsertInput._(result$data);
   }
@@ -2576,11 +2568,10 @@ class Input_AuthUsersAdminOnArrRelInsertInput {
   }
 
   CopyWith_Input_AuthUsersAdminOnArrRelInsertInput<
-          Input_AuthUsersAdminOnArrRelInsertInput>
-      get copyWith => CopyWith_Input_AuthUsersAdminOnArrRelInsertInput(
-            this,
-            (i) => i,
-          );
+    Input_AuthUsersAdminOnArrRelInsertInput
+  >
+  get copyWith =>
+      CopyWith_Input_AuthUsersAdminOnArrRelInsertInput(this, (i) => i);
 
   @override
   bool operator ==(Object other) {

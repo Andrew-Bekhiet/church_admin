@@ -7,9 +7,7 @@ import 'package:gql/ast.dart';
 
 class Variables_Mutation_deleteStreet {
   factory Variables_Mutation_deleteStreet({required UuidValue streetId}) =>
-      Variables_Mutation_deleteStreet._({
-        r'streetId': streetId,
-      });
+      Variables_Mutation_deleteStreet._({r'streetId': streetId});
 
   Variables_Mutation_deleteStreet._(this._$data);
 
@@ -32,10 +30,7 @@ class Variables_Mutation_deleteStreet {
   }
 
   CopyWith_Variables_Mutation_deleteStreet<Variables_Mutation_deleteStreet>
-      get copyWith => CopyWith_Variables_Mutation_deleteStreet(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Variables_Mutation_deleteStreet(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -75,10 +70,7 @@ abstract class CopyWith_Variables_Mutation_deleteStreet<TRes> {
 
 class _CopyWithImpl_Variables_Mutation_deleteStreet<TRes>
     implements CopyWith_Variables_Mutation_deleteStreet<TRes> {
-  _CopyWithImpl_Variables_Mutation_deleteStreet(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Variables_Mutation_deleteStreet(this._instance, this._then);
 
   final Variables_Mutation_deleteStreet _instance;
 
@@ -86,12 +78,13 @@ class _CopyWithImpl_Variables_Mutation_deleteStreet<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? streetId = _undefined}) =>
-      _then(Variables_Mutation_deleteStreet._({
-        ..._instance._$data,
-        if (streetId != _undefined && streetId != null)
-          'streetId': (streetId as UuidValue),
-      }));
+  TRes call({Object? streetId = _undefined}) => _then(
+    Variables_Mutation_deleteStreet._({
+      ..._instance._$data,
+      if (streetId != _undefined && streetId != null)
+        'streetId': (streetId as UuidValue),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Variables_Mutation_deleteStreet<TRes>
@@ -116,7 +109,8 @@ class Mutation_deleteStreet {
       deleteStreetsByPk: l$deleteStreetsByPk == null
           ? null
           : Fragment_Street.fromJson(
-              (l$deleteStreetsByPk as Map<String, dynamic>)),
+              (l$deleteStreetsByPk as Map<String, dynamic>),
+            ),
       $__typename: (l$$__typename as String),
     );
   }
@@ -138,10 +132,7 @@ class Mutation_deleteStreet {
   int get hashCode {
     final l$deleteStreetsByPk = deleteStreetsByPk;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$deleteStreetsByPk,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$deleteStreetsByPk, l$$__typename]);
   }
 
   @override
@@ -168,10 +159,7 @@ class Mutation_deleteStreet {
 
 extension UtilityExtension_Mutation_deleteStreet on Mutation_deleteStreet {
   CopyWith_Mutation_deleteStreet<Mutation_deleteStreet> get copyWith =>
-      CopyWith_Mutation_deleteStreet(
-        this,
-        (i) => i,
-      );
+      CopyWith_Mutation_deleteStreet(this, (i) => i);
 }
 
 abstract class CopyWith_Mutation_deleteStreet<TRes> {
@@ -183,19 +171,13 @@ abstract class CopyWith_Mutation_deleteStreet<TRes> {
   factory CopyWith_Mutation_deleteStreet.stub(TRes res) =
       _CopyWithStubImpl_Mutation_deleteStreet;
 
-  TRes call({
-    Fragment_Street? deleteStreetsByPk,
-    String? $__typename,
-  });
+  TRes call({Fragment_Street? deleteStreetsByPk, String? $__typename});
   CopyWith_Fragment_Street<TRes> get deleteStreetsByPk;
 }
 
 class _CopyWithImpl_Mutation_deleteStreet<TRes>
     implements CopyWith_Mutation_deleteStreet<TRes> {
-  _CopyWithImpl_Mutation_deleteStreet(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Mutation_deleteStreet(this._instance, this._then);
 
   final Mutation_deleteStreet _instance;
 
@@ -206,22 +188,25 @@ class _CopyWithImpl_Mutation_deleteStreet<TRes>
   TRes call({
     Object? deleteStreetsByPk = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Mutation_deleteStreet(
-        deleteStreetsByPk: deleteStreetsByPk == _undefined
-            ? _instance.deleteStreetsByPk
-            : (deleteStreetsByPk as Fragment_Street?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Mutation_deleteStreet(
+      deleteStreetsByPk: deleteStreetsByPk == _undefined
+          ? _instance.deleteStreetsByPk
+          : (deleteStreetsByPk as Fragment_Street?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   CopyWith_Fragment_Street<TRes> get deleteStreetsByPk {
     final local$deleteStreetsByPk = _instance.deleteStreetsByPk;
     return local$deleteStreetsByPk == null
         ? CopyWith_Fragment_Street.stub(_then(_instance))
         : CopyWith_Fragment_Street(
-            local$deleteStreetsByPk, (e) => call(deleteStreetsByPk: e));
+            local$deleteStreetsByPk,
+            (e) => call(deleteStreetsByPk: e),
+          );
   }
 }
 
@@ -231,47 +216,53 @@ class _CopyWithStubImpl_Mutation_deleteStreet<TRes>
 
   TRes _res;
 
-  call({
-    Fragment_Street? deleteStreetsByPk,
-    String? $__typename,
-  }) =>
-      _res;
+  call({Fragment_Street? deleteStreetsByPk, String? $__typename}) => _res;
 
   CopyWith_Fragment_Street<TRes> get deleteStreetsByPk =>
       CopyWith_Fragment_Street.stub(_res);
 }
 
-const documentNodeMutationdeleteStreet = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.mutation,
-    name: NameNode(value: 'deleteStreet'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'streetId')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'uuid'),
-          isNonNull: true,
+const documentNodeMutationdeleteStreet = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.mutation,
+      name: NameNode(value: 'deleteStreet'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'streetId')),
+          type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      )
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'deleteStreetsByPk'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'id'),
-            value: VariableNode(name: NameNode(value: 'streetId')),
-          )
-        ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FragmentSpreadNode(
-            name: NameNode(value: 'Street'),
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
+          FieldNode(
+            name: NameNode(value: 'deleteStreetsByPk'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'id'),
+                value: VariableNode(name: NameNode(value: 'streetId')),
+              ),
+            ],
             directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FragmentSpreadNode(
+                  name: NameNode(value: 'Street'),
+                  directives: [],
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
           ),
           FieldNode(
             name: NameNode(value: '__typename'),
@@ -280,27 +271,18 @@ const documentNodeMutationdeleteStreet = DocumentNode(definitions: [
             directives: [],
             selectionSet: null,
           ),
-        ]),
+        ],
       ),
-      FieldNode(
-        name: NameNode(value: '__typename'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-    ]),
-  ),
-  fragmentDefinitionStreet,
-  fragmentDefinitionStreetNoPhoto,
-]);
+    ),
+    fragmentDefinitionStreet,
+    fragmentDefinitionStreetNoPhoto,
+  ],
+);
 
 class Variables_Mutation_insertStreet {
-  factory Variables_Mutation_insertStreet(
-          {required Input_StreetsInsertInput newStreet}) =>
-      Variables_Mutation_insertStreet._({
-        r'newStreet': newStreet,
-      });
+  factory Variables_Mutation_insertStreet({
+    required Input_StreetsInsertInput newStreet,
+  }) => Variables_Mutation_insertStreet._({r'newStreet': newStreet});
 
   Variables_Mutation_insertStreet._(this._$data);
 
@@ -308,7 +290,8 @@ class Variables_Mutation_insertStreet {
     final result$data = <String, dynamic>{};
     final l$newStreet = data['newStreet'];
     result$data['newStreet'] = Input_StreetsInsertInput.fromJson(
-        (l$newStreet as Map<String, dynamic>));
+      (l$newStreet as Map<String, dynamic>),
+    );
     return Variables_Mutation_insertStreet._(result$data);
   }
 
@@ -325,10 +308,7 @@ class Variables_Mutation_insertStreet {
   }
 
   CopyWith_Variables_Mutation_insertStreet<Variables_Mutation_insertStreet>
-      get copyWith => CopyWith_Variables_Mutation_insertStreet(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Variables_Mutation_insertStreet(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -368,10 +348,7 @@ abstract class CopyWith_Variables_Mutation_insertStreet<TRes> {
 
 class _CopyWithImpl_Variables_Mutation_insertStreet<TRes>
     implements CopyWith_Variables_Mutation_insertStreet<TRes> {
-  _CopyWithImpl_Variables_Mutation_insertStreet(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Variables_Mutation_insertStreet(this._instance, this._then);
 
   final Variables_Mutation_insertStreet _instance;
 
@@ -379,12 +356,13 @@ class _CopyWithImpl_Variables_Mutation_insertStreet<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? newStreet = _undefined}) =>
-      _then(Variables_Mutation_insertStreet._({
-        ..._instance._$data,
-        if (newStreet != _undefined && newStreet != null)
-          'newStreet': (newStreet as Input_StreetsInsertInput),
-      }));
+  TRes call({Object? newStreet = _undefined}) => _then(
+    Variables_Mutation_insertStreet._({
+      ..._instance._$data,
+      if (newStreet != _undefined && newStreet != null)
+        'newStreet': (newStreet as Input_StreetsInsertInput),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Variables_Mutation_insertStreet<TRes>
@@ -409,7 +387,8 @@ class Mutation_insertStreet {
       insertStreetsOne: l$insertStreetsOne == null
           ? null
           : Fragment_Street.fromJson(
-              (l$insertStreetsOne as Map<String, dynamic>)),
+              (l$insertStreetsOne as Map<String, dynamic>),
+            ),
       $__typename: (l$$__typename as String),
     );
   }
@@ -431,10 +410,7 @@ class Mutation_insertStreet {
   int get hashCode {
     final l$insertStreetsOne = insertStreetsOne;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$insertStreetsOne,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$insertStreetsOne, l$$__typename]);
   }
 
   @override
@@ -461,10 +437,7 @@ class Mutation_insertStreet {
 
 extension UtilityExtension_Mutation_insertStreet on Mutation_insertStreet {
   CopyWith_Mutation_insertStreet<Mutation_insertStreet> get copyWith =>
-      CopyWith_Mutation_insertStreet(
-        this,
-        (i) => i,
-      );
+      CopyWith_Mutation_insertStreet(this, (i) => i);
 }
 
 abstract class CopyWith_Mutation_insertStreet<TRes> {
@@ -476,19 +449,13 @@ abstract class CopyWith_Mutation_insertStreet<TRes> {
   factory CopyWith_Mutation_insertStreet.stub(TRes res) =
       _CopyWithStubImpl_Mutation_insertStreet;
 
-  TRes call({
-    Fragment_Street? insertStreetsOne,
-    String? $__typename,
-  });
+  TRes call({Fragment_Street? insertStreetsOne, String? $__typename});
   CopyWith_Fragment_Street<TRes> get insertStreetsOne;
 }
 
 class _CopyWithImpl_Mutation_insertStreet<TRes>
     implements CopyWith_Mutation_insertStreet<TRes> {
-  _CopyWithImpl_Mutation_insertStreet(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Mutation_insertStreet(this._instance, this._then);
 
   final Mutation_insertStreet _instance;
 
@@ -499,22 +466,25 @@ class _CopyWithImpl_Mutation_insertStreet<TRes>
   TRes call({
     Object? insertStreetsOne = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Mutation_insertStreet(
-        insertStreetsOne: insertStreetsOne == _undefined
-            ? _instance.insertStreetsOne
-            : (insertStreetsOne as Fragment_Street?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Mutation_insertStreet(
+      insertStreetsOne: insertStreetsOne == _undefined
+          ? _instance.insertStreetsOne
+          : (insertStreetsOne as Fragment_Street?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   CopyWith_Fragment_Street<TRes> get insertStreetsOne {
     final local$insertStreetsOne = _instance.insertStreetsOne;
     return local$insertStreetsOne == null
         ? CopyWith_Fragment_Street.stub(_then(_instance))
         : CopyWith_Fragment_Street(
-            local$insertStreetsOne, (e) => call(insertStreetsOne: e));
+            local$insertStreetsOne,
+            (e) => call(insertStreetsOne: e),
+          );
   }
 }
 
@@ -524,47 +494,56 @@ class _CopyWithStubImpl_Mutation_insertStreet<TRes>
 
   TRes _res;
 
-  call({
-    Fragment_Street? insertStreetsOne,
-    String? $__typename,
-  }) =>
-      _res;
+  call({Fragment_Street? insertStreetsOne, String? $__typename}) => _res;
 
   CopyWith_Fragment_Street<TRes> get insertStreetsOne =>
       CopyWith_Fragment_Street.stub(_res);
 }
 
-const documentNodeMutationinsertStreet = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.mutation,
-    name: NameNode(value: 'insertStreet'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'newStreet')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'StreetsInsertInput'),
-          isNonNull: true,
+const documentNodeMutationinsertStreet = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.mutation,
+      name: NameNode(value: 'insertStreet'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'newStreet')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'StreetsInsertInput'),
+            isNonNull: true,
+          ),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      )
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'insertStreetsOne'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'object'),
-            value: VariableNode(name: NameNode(value: 'newStreet')),
-          )
-        ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FragmentSpreadNode(
-            name: NameNode(value: 'Street'),
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
+          FieldNode(
+            name: NameNode(value: 'insertStreetsOne'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'object'),
+                value: VariableNode(name: NameNode(value: 'newStreet')),
+              ),
+            ],
             directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FragmentSpreadNode(
+                  name: NameNode(value: 'Street'),
+                  directives: [],
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
           ),
           FieldNode(
             name: NameNode(value: '__typename'),
@@ -573,20 +552,13 @@ const documentNodeMutationinsertStreet = DocumentNode(definitions: [
             directives: [],
             selectionSet: null,
           ),
-        ]),
+        ],
       ),
-      FieldNode(
-        name: NameNode(value: '__typename'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-    ]),
-  ),
-  fragmentDefinitionStreet,
-  fragmentDefinitionStreetNoPhoto,
-]);
+    ),
+    fragmentDefinitionStreet,
+    fragmentDefinitionStreetNoPhoto,
+  ],
+);
 
 class Variables_Mutation_updateStreet {
   factory Variables_Mutation_updateStreet({
@@ -598,17 +570,16 @@ class Variables_Mutation_updateStreet {
     required bool updateLastVisit,
     required bool insertAreasStreets,
     required bool deleteAreasStreets,
-  }) =>
-      Variables_Mutation_updateStreet._({
-        r'streetId': streetId,
-        r'newStreet': newStreet,
-        if (lastVisit != null) r'lastVisit': lastVisit,
-        r'addAreas': addAreas,
-        r'removeAreas': removeAreas,
-        r'updateLastVisit': updateLastVisit,
-        r'insertAreasStreets': insertAreasStreets,
-        r'deleteAreasStreets': deleteAreasStreets,
-      });
+  }) => Variables_Mutation_updateStreet._({
+    r'streetId': streetId,
+    r'newStreet': newStreet,
+    if (lastVisit != null) r'lastVisit': lastVisit,
+    r'addAreas': addAreas,
+    r'removeAreas': removeAreas,
+    r'updateLastVisit': updateLastVisit,
+    r'insertAreasStreets': insertAreasStreets,
+    r'deleteAreasStreets': deleteAreasStreets,
+  });
 
   Variables_Mutation_updateStreet._(this._$data);
 
@@ -617,21 +588,27 @@ class Variables_Mutation_updateStreet {
     final l$streetId = data['streetId'];
     result$data['streetId'] = stringToUuid(l$streetId);
     final l$newStreet = data['newStreet'];
-    result$data['newStreet'] =
-        Input_StreetsSetInput.fromJson((l$newStreet as Map<String, dynamic>));
+    result$data['newStreet'] = Input_StreetsSetInput.fromJson(
+      (l$newStreet as Map<String, dynamic>),
+    );
     if (data.containsKey('lastVisit')) {
       final l$lastVisit = data['lastVisit'];
-      result$data['lastVisit'] =
-          l$lastVisit == null ? null : tstzFromString(l$lastVisit);
+      result$data['lastVisit'] = l$lastVisit == null
+          ? null
+          : tstzFromString(l$lastVisit);
     }
     final l$addAreas = data['addAreas'];
     result$data['addAreas'] = (l$addAreas as List<dynamic>)
-        .map((e) =>
-            Input_AreasStreetsInsertInput.fromJson((e as Map<String, dynamic>)))
+        .map(
+          (e) => Input_AreasStreetsInsertInput.fromJson(
+            (e as Map<String, dynamic>),
+          ),
+        )
         .toList();
     final l$removeAreas = data['removeAreas'];
-    result$data['removeAreas'] =
-        (l$removeAreas as List<dynamic>).map((e) => stringToUuid(e)).toList();
+    result$data['removeAreas'] = (l$removeAreas as List<dynamic>)
+        .map((e) => stringToUuid(e))
+        .toList();
     final l$updateLastVisit = data['updateLastVisit'];
     result$data['updateLastVisit'] = (l$updateLastVisit as bool);
     final l$insertAreasStreets = data['insertAreasStreets'];
@@ -669,14 +646,16 @@ class Variables_Mutation_updateStreet {
     result$data['newStreet'] = l$newStreet.toJson();
     if (_$data.containsKey('lastVisit')) {
       final l$lastVisit = lastVisit;
-      result$data['lastVisit'] =
-          l$lastVisit == null ? null : tstzToString(l$lastVisit);
+      result$data['lastVisit'] = l$lastVisit == null
+          ? null
+          : tstzToString(l$lastVisit);
     }
     final l$addAreas = addAreas;
     result$data['addAreas'] = l$addAreas.map((e) => e.toJson()).toList();
     final l$removeAreas = removeAreas;
-    result$data['removeAreas'] =
-        l$removeAreas.map((e) => uuidToString(e)).toList();
+    result$data['removeAreas'] = l$removeAreas
+        .map((e) => uuidToString(e))
+        .toList();
     final l$updateLastVisit = updateLastVisit;
     result$data['updateLastVisit'] = l$updateLastVisit;
     final l$insertAreasStreets = insertAreasStreets;
@@ -687,10 +666,7 @@ class Variables_Mutation_updateStreet {
   }
 
   CopyWith_Variables_Mutation_updateStreet<Variables_Mutation_updateStreet>
-      get copyWith => CopyWith_Variables_Mutation_updateStreet(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Variables_Mutation_updateStreet(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -808,10 +784,7 @@ abstract class CopyWith_Variables_Mutation_updateStreet<TRes> {
 
 class _CopyWithImpl_Variables_Mutation_updateStreet<TRes>
     implements CopyWith_Variables_Mutation_updateStreet<TRes> {
-  _CopyWithImpl_Variables_Mutation_updateStreet(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Variables_Mutation_updateStreet(this._instance, this._then);
 
   final Variables_Mutation_updateStreet _instance;
 
@@ -828,25 +801,26 @@ class _CopyWithImpl_Variables_Mutation_updateStreet<TRes>
     Object? updateLastVisit = _undefined,
     Object? insertAreasStreets = _undefined,
     Object? deleteAreasStreets = _undefined,
-  }) =>
-      _then(Variables_Mutation_updateStreet._({
-        ..._instance._$data,
-        if (streetId != _undefined && streetId != null)
-          'streetId': (streetId as UuidValue),
-        if (newStreet != _undefined && newStreet != null)
-          'newStreet': (newStreet as Input_StreetsSetInput),
-        if (lastVisit != _undefined) 'lastVisit': (lastVisit as DateTime?),
-        if (addAreas != _undefined && addAreas != null)
-          'addAreas': (addAreas as List<Input_AreasStreetsInsertInput>),
-        if (removeAreas != _undefined && removeAreas != null)
-          'removeAreas': (removeAreas as List<UuidValue>),
-        if (updateLastVisit != _undefined && updateLastVisit != null)
-          'updateLastVisit': (updateLastVisit as bool),
-        if (insertAreasStreets != _undefined && insertAreasStreets != null)
-          'insertAreasStreets': (insertAreasStreets as bool),
-        if (deleteAreasStreets != _undefined && deleteAreasStreets != null)
-          'deleteAreasStreets': (deleteAreasStreets as bool),
-      }));
+  }) => _then(
+    Variables_Mutation_updateStreet._({
+      ..._instance._$data,
+      if (streetId != _undefined && streetId != null)
+        'streetId': (streetId as UuidValue),
+      if (newStreet != _undefined && newStreet != null)
+        'newStreet': (newStreet as Input_StreetsSetInput),
+      if (lastVisit != _undefined) 'lastVisit': (lastVisit as DateTime?),
+      if (addAreas != _undefined && addAreas != null)
+        'addAreas': (addAreas as List<Input_AreasStreetsInsertInput>),
+      if (removeAreas != _undefined && removeAreas != null)
+        'removeAreas': (removeAreas as List<UuidValue>),
+      if (updateLastVisit != _undefined && updateLastVisit != null)
+        'updateLastVisit': (updateLastVisit as bool),
+      if (insertAreasStreets != _undefined && insertAreasStreets != null)
+        'insertAreasStreets': (insertAreasStreets as bool),
+      if (deleteAreasStreets != _undefined && deleteAreasStreets != null)
+        'deleteAreasStreets': (deleteAreasStreets as bool),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Variables_Mutation_updateStreet<TRes>
@@ -864,8 +838,7 @@ class _CopyWithStubImpl_Variables_Mutation_updateStreet<TRes>
     bool? updateLastVisit,
     bool? insertAreasStreets,
     bool? deleteAreasStreets,
-  }) =>
-      _res;
+  }) => _res;
 }
 
 class Mutation_updateStreet {
@@ -887,19 +860,23 @@ class Mutation_updateStreet {
       updateStreetsByPk: l$updateStreetsByPk == null
           ? null
           : Fragment_Street.fromJson(
-              (l$updateStreetsByPk as Map<String, dynamic>)),
+              (l$updateStreetsByPk as Map<String, dynamic>),
+            ),
       insertHistoryVisitHistoryOne: l$insertHistoryVisitHistoryOne == null
           ? null
           : Fragment_VisitHistory.fromJson(
-              (l$insertHistoryVisitHistoryOne as Map<String, dynamic>)),
+              (l$insertHistoryVisitHistoryOne as Map<String, dynamic>),
+            ),
       insertAreasStreets: l$insertAreasStreets == null
           ? null
           : Mutation_updateStreet_insertAreasStreets.fromJson(
-              (l$insertAreasStreets as Map<String, dynamic>)),
+              (l$insertAreasStreets as Map<String, dynamic>),
+            ),
       deleteAreasStreets: l$deleteAreasStreets == null
           ? null
           : Mutation_updateStreet_deleteAreasStreets.fromJson(
-              (l$deleteAreasStreets as Map<String, dynamic>)),
+              (l$deleteAreasStreets as Map<String, dynamic>),
+            ),
       $__typename: (l$$__typename as String),
     );
   }
@@ -919,8 +896,8 @@ class Mutation_updateStreet {
     final l$updateStreetsByPk = updateStreetsByPk;
     _resultData['updateStreetsByPk'] = l$updateStreetsByPk?.toJson();
     final l$insertHistoryVisitHistoryOne = insertHistoryVisitHistoryOne;
-    _resultData['insertHistoryVisitHistoryOne'] =
-        l$insertHistoryVisitHistoryOne?.toJson();
+    _resultData['insertHistoryVisitHistoryOne'] = l$insertHistoryVisitHistoryOne
+        ?.toJson();
     final l$insertAreasStreets = insertAreasStreets;
     _resultData['insertAreasStreets'] = l$insertAreasStreets?.toJson();
     final l$deleteAreasStreets = deleteAreasStreets;
@@ -986,10 +963,7 @@ class Mutation_updateStreet {
 
 extension UtilityExtension_Mutation_updateStreet on Mutation_updateStreet {
   CopyWith_Mutation_updateStreet<Mutation_updateStreet> get copyWith =>
-      CopyWith_Mutation_updateStreet(
-        this,
-        (i) => i,
-      );
+      CopyWith_Mutation_updateStreet(this, (i) => i);
 }
 
 abstract class CopyWith_Mutation_updateStreet<TRes> {
@@ -1011,17 +985,14 @@ abstract class CopyWith_Mutation_updateStreet<TRes> {
   CopyWith_Fragment_Street<TRes> get updateStreetsByPk;
   CopyWith_Fragment_VisitHistory<TRes> get insertHistoryVisitHistoryOne;
   CopyWith_Mutation_updateStreet_insertAreasStreets<TRes>
-      get insertAreasStreets;
+  get insertAreasStreets;
   CopyWith_Mutation_updateStreet_deleteAreasStreets<TRes>
-      get deleteAreasStreets;
+  get deleteAreasStreets;
 }
 
 class _CopyWithImpl_Mutation_updateStreet<TRes>
     implements CopyWith_Mutation_updateStreet<TRes> {
-  _CopyWithImpl_Mutation_updateStreet(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Mutation_updateStreet(this._instance, this._then);
 
   final Mutation_updateStreet _instance;
 
@@ -1035,31 +1006,34 @@ class _CopyWithImpl_Mutation_updateStreet<TRes>
     Object? insertAreasStreets = _undefined,
     Object? deleteAreasStreets = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Mutation_updateStreet(
-        updateStreetsByPk: updateStreetsByPk == _undefined
-            ? _instance.updateStreetsByPk
-            : (updateStreetsByPk as Fragment_Street?),
-        insertHistoryVisitHistoryOne: insertHistoryVisitHistoryOne == _undefined
-            ? _instance.insertHistoryVisitHistoryOne
-            : (insertHistoryVisitHistoryOne as Fragment_VisitHistory?),
-        insertAreasStreets: insertAreasStreets == _undefined
-            ? _instance.insertAreasStreets
-            : (insertAreasStreets as Mutation_updateStreet_insertAreasStreets?),
-        deleteAreasStreets: deleteAreasStreets == _undefined
-            ? _instance.deleteAreasStreets
-            : (deleteAreasStreets as Mutation_updateStreet_deleteAreasStreets?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Mutation_updateStreet(
+      updateStreetsByPk: updateStreetsByPk == _undefined
+          ? _instance.updateStreetsByPk
+          : (updateStreetsByPk as Fragment_Street?),
+      insertHistoryVisitHistoryOne: insertHistoryVisitHistoryOne == _undefined
+          ? _instance.insertHistoryVisitHistoryOne
+          : (insertHistoryVisitHistoryOne as Fragment_VisitHistory?),
+      insertAreasStreets: insertAreasStreets == _undefined
+          ? _instance.insertAreasStreets
+          : (insertAreasStreets as Mutation_updateStreet_insertAreasStreets?),
+      deleteAreasStreets: deleteAreasStreets == _undefined
+          ? _instance.deleteAreasStreets
+          : (deleteAreasStreets as Mutation_updateStreet_deleteAreasStreets?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   CopyWith_Fragment_Street<TRes> get updateStreetsByPk {
     final local$updateStreetsByPk = _instance.updateStreetsByPk;
     return local$updateStreetsByPk == null
         ? CopyWith_Fragment_Street.stub(_then(_instance))
         : CopyWith_Fragment_Street(
-            local$updateStreetsByPk, (e) => call(updateStreetsByPk: e));
+            local$updateStreetsByPk,
+            (e) => call(updateStreetsByPk: e),
+          );
   }
 
   CopyWith_Fragment_VisitHistory<TRes> get insertHistoryVisitHistoryOne {
@@ -1067,28 +1041,36 @@ class _CopyWithImpl_Mutation_updateStreet<TRes>
         _instance.insertHistoryVisitHistoryOne;
     return local$insertHistoryVisitHistoryOne == null
         ? CopyWith_Fragment_VisitHistory.stub(_then(_instance))
-        : CopyWith_Fragment_VisitHistory(local$insertHistoryVisitHistoryOne,
-            (e) => call(insertHistoryVisitHistoryOne: e));
+        : CopyWith_Fragment_VisitHistory(
+            local$insertHistoryVisitHistoryOne,
+            (e) => call(insertHistoryVisitHistoryOne: e),
+          );
   }
 
   CopyWith_Mutation_updateStreet_insertAreasStreets<TRes>
-      get insertAreasStreets {
+  get insertAreasStreets {
     final local$insertAreasStreets = _instance.insertAreasStreets;
     return local$insertAreasStreets == null
         ? CopyWith_Mutation_updateStreet_insertAreasStreets.stub(
-            _then(_instance))
+            _then(_instance),
+          )
         : CopyWith_Mutation_updateStreet_insertAreasStreets(
-            local$insertAreasStreets, (e) => call(insertAreasStreets: e));
+            local$insertAreasStreets,
+            (e) => call(insertAreasStreets: e),
+          );
   }
 
   CopyWith_Mutation_updateStreet_deleteAreasStreets<TRes>
-      get deleteAreasStreets {
+  get deleteAreasStreets {
     final local$deleteAreasStreets = _instance.deleteAreasStreets;
     return local$deleteAreasStreets == null
         ? CopyWith_Mutation_updateStreet_deleteAreasStreets.stub(
-            _then(_instance))
+            _then(_instance),
+          )
         : CopyWith_Mutation_updateStreet_deleteAreasStreets(
-            local$deleteAreasStreets, (e) => call(deleteAreasStreets: e));
+            local$deleteAreasStreets,
+            (e) => call(deleteAreasStreets: e),
+          );
   }
 }
 
@@ -1104,8 +1086,7 @@ class _CopyWithStubImpl_Mutation_updateStreet<TRes>
     Mutation_updateStreet_insertAreasStreets? insertAreasStreets,
     Mutation_updateStreet_deleteAreasStreets? deleteAreasStreets,
     String? $__typename,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Fragment_Street<TRes> get updateStreetsByPk =>
       CopyWith_Fragment_Street.stub(_res);
@@ -1114,173 +1095,296 @@ class _CopyWithStubImpl_Mutation_updateStreet<TRes>
       CopyWith_Fragment_VisitHistory.stub(_res);
 
   CopyWith_Mutation_updateStreet_insertAreasStreets<TRes>
-      get insertAreasStreets =>
-          CopyWith_Mutation_updateStreet_insertAreasStreets.stub(_res);
+  get insertAreasStreets =>
+      CopyWith_Mutation_updateStreet_insertAreasStreets.stub(_res);
 
   CopyWith_Mutation_updateStreet_deleteAreasStreets<TRes>
-      get deleteAreasStreets =>
-          CopyWith_Mutation_updateStreet_deleteAreasStreets.stub(_res);
+  get deleteAreasStreets =>
+      CopyWith_Mutation_updateStreet_deleteAreasStreets.stub(_res);
 }
 
-const documentNodeMutationupdateStreet = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.mutation,
-    name: NameNode(value: 'updateStreet'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'streetId')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'uuid'),
-          isNonNull: true,
+const documentNodeMutationupdateStreet = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.mutation,
+      name: NameNode(value: 'updateStreet'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'streetId')),
+          type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'newStreet')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'StreetsSetInput'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'lastVisit')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'timestamptz'),
-          isNonNull: false,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'addAreas')),
-        type: ListTypeNode(
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'newStreet')),
           type: NamedTypeNode(
-            name: NameNode(value: 'AreasStreetsInsertInput'),
+            name: NameNode(value: 'StreetsSetInput'),
             isNonNull: true,
           ),
-          isNonNull: true,
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'removeAreas')),
-        type: ListTypeNode(
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'lastVisit')),
           type: NamedTypeNode(
-            name: NameNode(value: 'uuid'),
+            name: NameNode(value: 'timestamptz'),
+            isNonNull: false,
+          ),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'addAreas')),
+          type: ListTypeNode(
+            type: NamedTypeNode(
+              name: NameNode(value: 'AreasStreetsInsertInput'),
+              isNonNull: true,
+            ),
             isNonNull: true,
           ),
-          isNonNull: true,
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'updateLastVisit')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'Boolean'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'insertAreasStreets')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'Boolean'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'deleteAreasStreets')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'Boolean'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'updateStreetsByPk'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'pkColumns'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'id'),
-                value: VariableNode(name: NameNode(value: 'streetId')),
-              )
-            ]),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'removeAreas')),
+          type: ListTypeNode(
+            type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+            isNonNull: true,
           ),
-          ArgumentNode(
-            name: NameNode(value: '_set'),
-            value: VariableNode(name: NameNode(value: 'newStreet')),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'updateLastVisit')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'Boolean'),
+            isNonNull: true,
           ),
-        ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FragmentSpreadNode(
-            name: NameNode(value: 'Street'),
-            directives: [],
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'insertAreasStreets')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'Boolean'),
+            isNonNull: true,
           ),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'deleteAreasStreets')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'Boolean'),
+            isNonNull: true,
+          ),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
           FieldNode(
-            name: NameNode(value: '__typename'),
+            name: NameNode(value: 'updateStreetsByPk'),
             alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-        ]),
-      ),
-      FieldNode(
-        name: NameNode(value: 'insertHistoryVisitHistoryOne'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'object'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'table'),
-                value: StringValueNode(
-                  value: 'streets',
-                  isBlock: false,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'pkColumns'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'id'),
+                      value: VariableNode(name: NameNode(value: 'streetId')),
+                    ),
+                  ],
                 ),
               ),
-              ObjectFieldNode(
-                name: NameNode(value: 'recordId'),
-                value: VariableNode(name: NameNode(value: 'streetId')),
+              ArgumentNode(
+                name: NameNode(value: '_set'),
+                value: VariableNode(name: NameNode(value: 'newStreet')),
               ),
-              ObjectFieldNode(
-                name: NameNode(value: 'time'),
-                value: VariableNode(name: NameNode(value: 'lastVisit')),
-              ),
-            ]),
-          )
-        ],
-        directives: [
-          DirectiveNode(
-            name: NameNode(value: 'include'),
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FragmentSpreadNode(
+                  name: NameNode(value: 'Street'),
+                  directives: [],
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
+          ),
+          FieldNode(
+            name: NameNode(value: 'insertHistoryVisitHistoryOne'),
+            alias: null,
             arguments: [
               ArgumentNode(
-                name: NameNode(value: 'if'),
-                value: VariableNode(name: NameNode(value: 'updateLastVisit')),
-              )
+                name: NameNode(value: 'object'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'table'),
+                      value: StringValueNode(value: 'streets', isBlock: false),
+                    ),
+                    ObjectFieldNode(
+                      name: NameNode(value: 'recordId'),
+                      value: VariableNode(name: NameNode(value: 'streetId')),
+                    ),
+                    ObjectFieldNode(
+                      name: NameNode(value: 'time'),
+                      value: VariableNode(name: NameNode(value: 'lastVisit')),
+                    ),
+                  ],
+                ),
+              ),
             ],
-          )
-        ],
-        selectionSet: SelectionSetNode(selections: [
-          FragmentSpreadNode(
-            name: NameNode(value: 'VisitHistory'),
-            directives: [],
+            directives: [
+              DirectiveNode(
+                name: NameNode(value: 'include'),
+                arguments: [
+                  ArgumentNode(
+                    name: NameNode(value: 'if'),
+                    value: VariableNode(
+                      name: NameNode(value: 'updateLastVisit'),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FragmentSpreadNode(
+                  name: NameNode(value: 'VisitHistory'),
+                  directives: [],
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
+          ),
+          FieldNode(
+            name: NameNode(value: 'insertAreasStreets'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'objects'),
+                value: VariableNode(name: NameNode(value: 'addAreas')),
+              ),
+            ],
+            directives: [
+              DirectiveNode(
+                name: NameNode(value: 'include'),
+                arguments: [
+                  ArgumentNode(
+                    name: NameNode(value: 'if'),
+                    value: VariableNode(
+                      name: NameNode(value: 'insertAreasStreets'),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FieldNode(
+                  name: NameNode(value: 'affectedRows'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
+          ),
+          FieldNode(
+            name: NameNode(value: 'deleteAreasStreets'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'where'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'streetId'),
+                      value: ObjectValueNode(
+                        fields: [
+                          ObjectFieldNode(
+                            name: NameNode(value: '_eq'),
+                            value: VariableNode(
+                              name: NameNode(value: 'streetId'),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    ObjectFieldNode(
+                      name: NameNode(value: 'areaId'),
+                      value: ObjectValueNode(
+                        fields: [
+                          ObjectFieldNode(
+                            name: NameNode(value: '_in'),
+                            value: VariableNode(
+                              name: NameNode(value: 'removeAreas'),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+            directives: [
+              DirectiveNode(
+                name: NameNode(value: 'include'),
+                arguments: [
+                  ArgumentNode(
+                    name: NameNode(value: 'if'),
+                    value: VariableNode(
+                      name: NameNode(value: 'deleteAreasStreets'),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FieldNode(
+                  name: NameNode(value: 'affectedRows'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
           ),
           FieldNode(
             name: NameNode(value: '__typename'),
@@ -1289,118 +1393,16 @@ const documentNodeMutationupdateStreet = DocumentNode(definitions: [
             directives: [],
             selectionSet: null,
           ),
-        ]),
-      ),
-      FieldNode(
-        name: NameNode(value: 'insertAreasStreets'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'objects'),
-            value: VariableNode(name: NameNode(value: 'addAreas')),
-          )
         ],
-        directives: [
-          DirectiveNode(
-            name: NameNode(value: 'include'),
-            arguments: [
-              ArgumentNode(
-                name: NameNode(value: 'if'),
-                value:
-                    VariableNode(name: NameNode(value: 'insertAreasStreets')),
-              )
-            ],
-          )
-        ],
-        selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-            name: NameNode(value: 'affectedRows'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-        ]),
       ),
-      FieldNode(
-        name: NameNode(value: 'deleteAreasStreets'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'where'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'streetId'),
-                value: ObjectValueNode(fields: [
-                  ObjectFieldNode(
-                    name: NameNode(value: '_eq'),
-                    value: VariableNode(name: NameNode(value: 'streetId')),
-                  )
-                ]),
-              ),
-              ObjectFieldNode(
-                name: NameNode(value: 'areaId'),
-                value: ObjectValueNode(fields: [
-                  ObjectFieldNode(
-                    name: NameNode(value: '_in'),
-                    value: VariableNode(name: NameNode(value: 'removeAreas')),
-                  )
-                ]),
-              ),
-            ]),
-          )
-        ],
-        directives: [
-          DirectiveNode(
-            name: NameNode(value: 'include'),
-            arguments: [
-              ArgumentNode(
-                name: NameNode(value: 'if'),
-                value:
-                    VariableNode(name: NameNode(value: 'deleteAreasStreets')),
-              )
-            ],
-          )
-        ],
-        selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-            name: NameNode(value: 'affectedRows'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-        ]),
-      ),
-      FieldNode(
-        name: NameNode(value: '__typename'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-    ]),
-  ),
-  fragmentDefinitionStreet,
-  fragmentDefinitionStreetNoPhoto,
-  fragmentDefinitionVisitHistory,
-  fragmentDefinitionUser,
-  fragmentDefinitionUserNoPhoto,
-]);
+    ),
+    fragmentDefinitionStreet,
+    fragmentDefinitionStreetNoPhoto,
+    fragmentDefinitionVisitHistory,
+    fragmentDefinitionUser,
+    fragmentDefinitionUserNoPhoto,
+  ],
+);
 
 class Mutation_updateStreet_insertAreasStreets {
   Mutation_updateStreet_insertAreasStreets({
@@ -1409,7 +1411,8 @@ class Mutation_updateStreet_insertAreasStreets {
   });
 
   factory Mutation_updateStreet_insertAreasStreets.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$affectedRows = json['affectedRows'];
     final l$$__typename = json['__typename'];
     return Mutation_updateStreet_insertAreasStreets(
@@ -1435,10 +1438,7 @@ class Mutation_updateStreet_insertAreasStreets {
   int get hashCode {
     final l$affectedRows = affectedRows;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$affectedRows,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$affectedRows, l$$__typename]);
   }
 
   @override
@@ -1467,11 +1467,10 @@ class Mutation_updateStreet_insertAreasStreets {
 extension UtilityExtension_Mutation_updateStreet_insertAreasStreets
     on Mutation_updateStreet_insertAreasStreets {
   CopyWith_Mutation_updateStreet_insertAreasStreets<
-          Mutation_updateStreet_insertAreasStreets>
-      get copyWith => CopyWith_Mutation_updateStreet_insertAreasStreets(
-            this,
-            (i) => i,
-          );
+    Mutation_updateStreet_insertAreasStreets
+  >
+  get copyWith =>
+      CopyWith_Mutation_updateStreet_insertAreasStreets(this, (i) => i);
 }
 
 abstract class CopyWith_Mutation_updateStreet_insertAreasStreets<TRes> {
@@ -1483,10 +1482,7 @@ abstract class CopyWith_Mutation_updateStreet_insertAreasStreets<TRes> {
   factory CopyWith_Mutation_updateStreet_insertAreasStreets.stub(TRes res) =
       _CopyWithStubImpl_Mutation_updateStreet_insertAreasStreets;
 
-  TRes call({
-    int? affectedRows,
-    String? $__typename,
-  });
+  TRes call({int? affectedRows, String? $__typename});
 }
 
 class _CopyWithImpl_Mutation_updateStreet_insertAreasStreets<TRes>
@@ -1505,15 +1501,16 @@ class _CopyWithImpl_Mutation_updateStreet_insertAreasStreets<TRes>
   TRes call({
     Object? affectedRows = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Mutation_updateStreet_insertAreasStreets(
-        affectedRows: affectedRows == _undefined || affectedRows == null
-            ? _instance.affectedRows
-            : (affectedRows as int),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Mutation_updateStreet_insertAreasStreets(
+      affectedRows: affectedRows == _undefined || affectedRows == null
+          ? _instance.affectedRows
+          : (affectedRows as int),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 }
 
 class _CopyWithStubImpl_Mutation_updateStreet_insertAreasStreets<TRes>
@@ -1522,11 +1519,7 @@ class _CopyWithStubImpl_Mutation_updateStreet_insertAreasStreets<TRes>
 
   TRes _res;
 
-  call({
-    int? affectedRows,
-    String? $__typename,
-  }) =>
-      _res;
+  call({int? affectedRows, String? $__typename}) => _res;
 }
 
 class Mutation_updateStreet_deleteAreasStreets {
@@ -1536,7 +1529,8 @@ class Mutation_updateStreet_deleteAreasStreets {
   });
 
   factory Mutation_updateStreet_deleteAreasStreets.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$affectedRows = json['affectedRows'];
     final l$$__typename = json['__typename'];
     return Mutation_updateStreet_deleteAreasStreets(
@@ -1562,10 +1556,7 @@ class Mutation_updateStreet_deleteAreasStreets {
   int get hashCode {
     final l$affectedRows = affectedRows;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$affectedRows,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$affectedRows, l$$__typename]);
   }
 
   @override
@@ -1594,11 +1585,10 @@ class Mutation_updateStreet_deleteAreasStreets {
 extension UtilityExtension_Mutation_updateStreet_deleteAreasStreets
     on Mutation_updateStreet_deleteAreasStreets {
   CopyWith_Mutation_updateStreet_deleteAreasStreets<
-          Mutation_updateStreet_deleteAreasStreets>
-      get copyWith => CopyWith_Mutation_updateStreet_deleteAreasStreets(
-            this,
-            (i) => i,
-          );
+    Mutation_updateStreet_deleteAreasStreets
+  >
+  get copyWith =>
+      CopyWith_Mutation_updateStreet_deleteAreasStreets(this, (i) => i);
 }
 
 abstract class CopyWith_Mutation_updateStreet_deleteAreasStreets<TRes> {
@@ -1610,10 +1600,7 @@ abstract class CopyWith_Mutation_updateStreet_deleteAreasStreets<TRes> {
   factory CopyWith_Mutation_updateStreet_deleteAreasStreets.stub(TRes res) =
       _CopyWithStubImpl_Mutation_updateStreet_deleteAreasStreets;
 
-  TRes call({
-    int? affectedRows,
-    String? $__typename,
-  });
+  TRes call({int? affectedRows, String? $__typename});
 }
 
 class _CopyWithImpl_Mutation_updateStreet_deleteAreasStreets<TRes>
@@ -1632,15 +1619,16 @@ class _CopyWithImpl_Mutation_updateStreet_deleteAreasStreets<TRes>
   TRes call({
     Object? affectedRows = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Mutation_updateStreet_deleteAreasStreets(
-        affectedRows: affectedRows == _undefined || affectedRows == null
-            ? _instance.affectedRows
-            : (affectedRows as int),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Mutation_updateStreet_deleteAreasStreets(
+      affectedRows: affectedRows == _undefined || affectedRows == null
+          ? _instance.affectedRows
+          : (affectedRows as int),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 }
 
 class _CopyWithStubImpl_Mutation_updateStreet_deleteAreasStreets<TRes>
@@ -1649,9 +1637,5 @@ class _CopyWithStubImpl_Mutation_updateStreet_deleteAreasStreets<TRes>
 
   TRes _res;
 
-  call({
-    int? affectedRows,
-    String? $__typename,
-  }) =>
-      _res;
+  call({int? affectedRows, String? $__typename}) => _res;
 }

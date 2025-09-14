@@ -3,16 +3,15 @@ import 'package:church_admin/src/core/graphql/scalars.dart';
 import 'package:gql/ast.dart';
 
 class Variables_Query_getFamilyRelatedFamilies {
-  factory Variables_Query_getFamilyRelatedFamilies(
-          {required UuidValue familyId}) =>
-      Variables_Query_getFamilyRelatedFamilies._({
-        r'familyId': familyId,
-      });
+  factory Variables_Query_getFamilyRelatedFamilies({
+    required UuidValue familyId,
+  }) => Variables_Query_getFamilyRelatedFamilies._({r'familyId': familyId});
 
   Variables_Query_getFamilyRelatedFamilies._(this._$data);
 
   factory Variables_Query_getFamilyRelatedFamilies.fromJson(
-      Map<String, dynamic> data) {
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
     final l$familyId = data['familyId'];
     result$data['familyId'] = stringToUuid(l$familyId);
@@ -31,11 +30,10 @@ class Variables_Query_getFamilyRelatedFamilies {
   }
 
   CopyWith_Variables_Query_getFamilyRelatedFamilies<
-          Variables_Query_getFamilyRelatedFamilies>
-      get copyWith => CopyWith_Variables_Query_getFamilyRelatedFamilies(
-            this,
-            (i) => i,
-          );
+    Variables_Query_getFamilyRelatedFamilies
+  >
+  get copyWith =>
+      CopyWith_Variables_Query_getFamilyRelatedFamilies(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -86,12 +84,13 @@ class _CopyWithImpl_Variables_Query_getFamilyRelatedFamilies<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? familyId = _undefined}) =>
-      _then(Variables_Query_getFamilyRelatedFamilies._({
-        ..._instance._$data,
-        if (familyId != _undefined && familyId != null)
-          'familyId': (familyId as UuidValue),
-      }));
+  TRes call({Object? familyId = _undefined}) => _then(
+    Variables_Query_getFamilyRelatedFamilies._({
+      ..._instance._$data,
+      if (familyId != _undefined && familyId != null)
+        'familyId': (familyId as UuidValue),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Variables_Query_getFamilyRelatedFamilies<TRes>
@@ -116,7 +115,8 @@ class Query_getFamilyRelatedFamilies {
       familiesByPk: l$familiesByPk == null
           ? null
           : Query_getFamilyRelatedFamilies_familiesByPk.fromJson(
-              (l$familiesByPk as Map<String, dynamic>)),
+              (l$familiesByPk as Map<String, dynamic>),
+            ),
       $__typename: (l$$__typename as String),
     );
   }
@@ -138,10 +138,7 @@ class Query_getFamilyRelatedFamilies {
   int get hashCode {
     final l$familiesByPk = familiesByPk;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$familiesByPk,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$familiesByPk, l$$__typename]);
   }
 
   @override
@@ -170,10 +167,7 @@ class Query_getFamilyRelatedFamilies {
 extension UtilityExtension_Query_getFamilyRelatedFamilies
     on Query_getFamilyRelatedFamilies {
   CopyWith_Query_getFamilyRelatedFamilies<Query_getFamilyRelatedFamilies>
-      get copyWith => CopyWith_Query_getFamilyRelatedFamilies(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Query_getFamilyRelatedFamilies(this, (i) => i);
 }
 
 abstract class CopyWith_Query_getFamilyRelatedFamilies<TRes> {
@@ -194,10 +188,7 @@ abstract class CopyWith_Query_getFamilyRelatedFamilies<TRes> {
 
 class _CopyWithImpl_Query_getFamilyRelatedFamilies<TRes>
     implements CopyWith_Query_getFamilyRelatedFamilies<TRes> {
-  _CopyWithImpl_Query_getFamilyRelatedFamilies(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Query_getFamilyRelatedFamilies(this._instance, this._then);
 
   final Query_getFamilyRelatedFamilies _instance;
 
@@ -208,23 +199,27 @@ class _CopyWithImpl_Query_getFamilyRelatedFamilies<TRes>
   TRes call({
     Object? familiesByPk = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Query_getFamilyRelatedFamilies(
-        familiesByPk: familiesByPk == _undefined
-            ? _instance.familiesByPk
-            : (familiesByPk as Query_getFamilyRelatedFamilies_familiesByPk?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Query_getFamilyRelatedFamilies(
+      familiesByPk: familiesByPk == _undefined
+          ? _instance.familiesByPk
+          : (familiesByPk as Query_getFamilyRelatedFamilies_familiesByPk?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   CopyWith_Query_getFamilyRelatedFamilies_familiesByPk<TRes> get familiesByPk {
     final local$familiesByPk = _instance.familiesByPk;
     return local$familiesByPk == null
         ? CopyWith_Query_getFamilyRelatedFamilies_familiesByPk.stub(
-            _then(_instance))
+            _then(_instance),
+          )
         : CopyWith_Query_getFamilyRelatedFamilies_familiesByPk(
-            local$familiesByPk, (e) => call(familiesByPk: e));
+            local$familiesByPk,
+            (e) => call(familiesByPk: e),
+          );
   }
 }
 
@@ -237,142 +232,171 @@ class _CopyWithStubImpl_Query_getFamilyRelatedFamilies<TRes>
   call({
     Query_getFamilyRelatedFamilies_familiesByPk? familiesByPk,
     String? $__typename,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Query_getFamilyRelatedFamilies_familiesByPk<TRes> get familiesByPk =>
       CopyWith_Query_getFamilyRelatedFamilies_familiesByPk.stub(_res);
 }
 
-const documentNodeQuerygetFamilyRelatedFamilies = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.query,
-    name: NameNode(value: 'getFamilyRelatedFamilies'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'familyId')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'uuid'),
-          isNonNull: true,
+const documentNodeQuerygetFamilyRelatedFamilies = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.query,
+      name: NameNode(value: 'getFamilyRelatedFamilies'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'familyId')),
+          type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      )
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'familiesByPk'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'id'),
-            value: VariableNode(name: NameNode(value: 'familyId')),
-          )
-        ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FragmentSpreadNode(
-            name: NameNode(value: 'Family'),
-            directives: [],
-          ),
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
           FieldNode(
-            name: NameNode(value: 'children'),
+            name: NameNode(value: 'familiesByPk'),
             alias: null,
             arguments: [
               ArgumentNode(
-                name: NameNode(value: 'orderBy'),
-                value: ObjectValueNode(fields: [
-                  ObjectFieldNode(
-                    name: NameNode(value: 'child'),
-                    value: ObjectValueNode(fields: [
-                      ObjectFieldNode(
-                        name: NameNode(value: 'name'),
-                        value: EnumValueNode(name: NameNode(value: 'ASC')),
-                      )
-                    ]),
-                  )
-                ]),
-              )
+                name: NameNode(value: 'id'),
+                value: VariableNode(name: NameNode(value: 'familyId')),
+              ),
             ],
             directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                name: NameNode(value: 'child'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: SelectionSetNode(selections: [
-                  FragmentSpreadNode(
-                    name: NameNode(value: 'Family'),
-                    directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FragmentSpreadNode(
+                  name: NameNode(value: 'Family'),
+                  directives: [],
+                ),
+                FieldNode(
+                  name: NameNode(value: 'children'),
+                  alias: null,
+                  arguments: [
+                    ArgumentNode(
+                      name: NameNode(value: 'orderBy'),
+                      value: ObjectValueNode(
+                        fields: [
+                          ObjectFieldNode(
+                            name: NameNode(value: 'child'),
+                            value: ObjectValueNode(
+                              fields: [
+                                ObjectFieldNode(
+                                  name: NameNode(value: 'name'),
+                                  value: EnumValueNode(
+                                    name: NameNode(value: 'ASC'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                  directives: [],
+                  selectionSet: SelectionSetNode(
+                    selections: [
+                      FieldNode(
+                        name: NameNode(value: 'child'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: SelectionSetNode(
+                          selections: [
+                            FragmentSpreadNode(
+                              name: NameNode(value: 'Family'),
+                              directives: [],
+                            ),
+                            FieldNode(
+                              name: NameNode(value: '__typename'),
+                              alias: null,
+                              arguments: [],
+                              directives: [],
+                              selectionSet: null,
+                            ),
+                          ],
+                        ),
+                      ),
+                      FieldNode(
+                        name: NameNode(value: '__typename'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                    ],
                   ),
-                  FieldNode(
-                    name: NameNode(value: '__typename'),
-                    alias: null,
-                    arguments: [],
-                    directives: [],
-                    selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: 'parents'),
+                  alias: null,
+                  arguments: [
+                    ArgumentNode(
+                      name: NameNode(value: 'orderBy'),
+                      value: ObjectValueNode(
+                        fields: [
+                          ObjectFieldNode(
+                            name: NameNode(value: 'parent'),
+                            value: ObjectValueNode(
+                              fields: [
+                                ObjectFieldNode(
+                                  name: NameNode(value: 'name'),
+                                  value: EnumValueNode(
+                                    name: NameNode(value: 'ASC'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                  directives: [],
+                  selectionSet: SelectionSetNode(
+                    selections: [
+                      FieldNode(
+                        name: NameNode(value: 'parent'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: SelectionSetNode(
+                          selections: [
+                            FragmentSpreadNode(
+                              name: NameNode(value: 'Family'),
+                              directives: [],
+                            ),
+                            FieldNode(
+                              name: NameNode(value: '__typename'),
+                              alias: null,
+                              arguments: [],
+                              directives: [],
+                              selectionSet: null,
+                            ),
+                          ],
+                        ),
+                      ),
+                      FieldNode(
+                        name: NameNode(value: '__typename'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                    ],
                   ),
-                ]),
-              ),
-              FieldNode(
-                name: NameNode(value: '__typename'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-            ]),
-          ),
-          FieldNode(
-            name: NameNode(value: 'parents'),
-            alias: null,
-            arguments: [
-              ArgumentNode(
-                name: NameNode(value: 'orderBy'),
-                value: ObjectValueNode(fields: [
-                  ObjectFieldNode(
-                    name: NameNode(value: 'parent'),
-                    value: ObjectValueNode(fields: [
-                      ObjectFieldNode(
-                        name: NameNode(value: 'name'),
-                        value: EnumValueNode(name: NameNode(value: 'ASC')),
-                      )
-                    ]),
-                  )
-                ]),
-              )
-            ],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                name: NameNode(value: 'parent'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: SelectionSetNode(selections: [
-                  FragmentSpreadNode(
-                    name: NameNode(value: 'Family'),
-                    directives: [],
-                  ),
-                  FieldNode(
-                    name: NameNode(value: '__typename'),
-                    alias: null,
-                    arguments: [],
-                    directives: [],
-                    selectionSet: null,
-                  ),
-                ]),
-              ),
-              FieldNode(
-                name: NameNode(value: '__typename'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-            ]),
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
           ),
           FieldNode(
             name: NameNode(value: '__typename'),
@@ -381,20 +405,13 @@ const documentNodeQuerygetFamilyRelatedFamilies = DocumentNode(definitions: [
             directives: [],
             selectionSet: null,
           ),
-        ]),
+        ],
       ),
-      FieldNode(
-        name: NameNode(value: '__typename'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-    ]),
-  ),
-  fragmentDefinitionFamily,
-  fragmentDefinitionFamilyNoPhoto,
-]);
+    ),
+    fragmentDefinitionFamily,
+    fragmentDefinitionFamilyNoPhoto,
+  ],
+);
 
 class Query_getFamilyRelatedFamilies_familiesByPk
     implements Fragment_Family, Fragment_FamilyNoPhoto {
@@ -410,7 +427,8 @@ class Query_getFamilyRelatedFamilies_familiesByPk
   });
 
   factory Query_getFamilyRelatedFamilies_familiesByPk.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$id = json['id'];
     final l$name = json['name'];
     final l$color = json['color'];
@@ -424,18 +442,24 @@ class Query_getFamilyRelatedFamilies_familiesByPk
       name: (l$name as String),
       color: (l$color as int?),
       $__typename: (l$$__typename as String),
-      photoUpdatedAt:
-          l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
+      photoUpdatedAt: l$photoUpdatedAt == null
+          ? null
+          : tstzFromString(l$photoUpdatedAt),
       blurhash: (l$blurhash as String?),
       children: (l$children as List<dynamic>)
-          .map((e) =>
-              Query_getFamilyRelatedFamilies_familiesByPk_children.fromJson(
-                  (e as Map<String, dynamic>)))
+          .map(
+            (e) =>
+                Query_getFamilyRelatedFamilies_familiesByPk_children.fromJson(
+                  (e as Map<String, dynamic>),
+                ),
+          )
           .toList(),
       parents: (l$parents as List<dynamic>)
-          .map((e) =>
-              Query_getFamilyRelatedFamilies_familiesByPk_parents.fromJson(
-                  (e as Map<String, dynamic>)))
+          .map(
+            (e) => Query_getFamilyRelatedFamilies_familiesByPk_parents.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
           .toList(),
     );
   }
@@ -467,8 +491,9 @@ class Query_getFamilyRelatedFamilies_familiesByPk
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
-    _resultData['photoUpdatedAt'] =
-        l$photoUpdatedAt == null ? null : tstzToString(l$photoUpdatedAt);
+    _resultData['photoUpdatedAt'] = l$photoUpdatedAt == null
+        ? null
+        : tstzToString(l$photoUpdatedAt);
     final l$blurhash = blurhash;
     _resultData['blurhash'] = l$blurhash;
     final l$children = children;
@@ -570,11 +595,10 @@ class Query_getFamilyRelatedFamilies_familiesByPk
 extension UtilityExtension_Query_getFamilyRelatedFamilies_familiesByPk
     on Query_getFamilyRelatedFamilies_familiesByPk {
   CopyWith_Query_getFamilyRelatedFamilies_familiesByPk<
-          Query_getFamilyRelatedFamilies_familiesByPk>
-      get copyWith => CopyWith_Query_getFamilyRelatedFamilies_familiesByPk(
-            this,
-            (i) => i,
-          );
+    Query_getFamilyRelatedFamilies_familiesByPk
+  >
+  get copyWith =>
+      CopyWith_Query_getFamilyRelatedFamilies_familiesByPk(this, (i) => i);
 }
 
 abstract class CopyWith_Query_getFamilyRelatedFamilies_familiesByPk<TRes> {
@@ -597,17 +621,25 @@ abstract class CopyWith_Query_getFamilyRelatedFamilies_familiesByPk<TRes> {
     List<Query_getFamilyRelatedFamilies_familiesByPk_parents>? parents,
   });
   TRes children(
-      Iterable<Query_getFamilyRelatedFamilies_familiesByPk_children> Function(
-              Iterable<
-                  CopyWith_Query_getFamilyRelatedFamilies_familiesByPk_children<
-                      Query_getFamilyRelatedFamilies_familiesByPk_children>>)
-          _fn);
+    Iterable<Query_getFamilyRelatedFamilies_familiesByPk_children> Function(
+      Iterable<
+        CopyWith_Query_getFamilyRelatedFamilies_familiesByPk_children<
+          Query_getFamilyRelatedFamilies_familiesByPk_children
+        >
+      >,
+    )
+    _fn,
+  );
   TRes parents(
-      Iterable<Query_getFamilyRelatedFamilies_familiesByPk_parents> Function(
-              Iterable<
-                  CopyWith_Query_getFamilyRelatedFamilies_familiesByPk_parents<
-                      Query_getFamilyRelatedFamilies_familiesByPk_parents>>)
-          _fn);
+    Iterable<Query_getFamilyRelatedFamilies_familiesByPk_parents> Function(
+      Iterable<
+        CopyWith_Query_getFamilyRelatedFamilies_familiesByPk_parents<
+          Query_getFamilyRelatedFamilies_familiesByPk_parents
+        >
+      >,
+    )
+    _fn,
+  );
 }
 
 class _CopyWithImpl_Query_getFamilyRelatedFamilies_familiesByPk<TRes>
@@ -632,56 +664,72 @@ class _CopyWithImpl_Query_getFamilyRelatedFamilies_familiesByPk<TRes>
     Object? blurhash = _undefined,
     Object? children = _undefined,
     Object? parents = _undefined,
-  }) =>
-      _then(Query_getFamilyRelatedFamilies_familiesByPk(
-        id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
-        name: name == _undefined || name == null
-            ? _instance.name
-            : (name as String),
-        color: color == _undefined ? _instance.color : (color as int?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-        photoUpdatedAt: photoUpdatedAt == _undefined
-            ? _instance.photoUpdatedAt
-            : (photoUpdatedAt as DateTime?),
-        blurhash:
-            blurhash == _undefined ? _instance.blurhash : (blurhash as String?),
-        children: children == _undefined || children == null
-            ? _instance.children
-            : (children
+  }) => _then(
+    Query_getFamilyRelatedFamilies_familiesByPk(
+      id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      color: color == _undefined ? _instance.color : (color as int?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+      photoUpdatedAt: photoUpdatedAt == _undefined
+          ? _instance.photoUpdatedAt
+          : (photoUpdatedAt as DateTime?),
+      blurhash: blurhash == _undefined
+          ? _instance.blurhash
+          : (blurhash as String?),
+      children: children == _undefined || children == null
+          ? _instance.children
+          : (children
                 as List<Query_getFamilyRelatedFamilies_familiesByPk_children>),
-        parents: parents == _undefined || parents == null
-            ? _instance.parents
-            : (parents
+      parents: parents == _undefined || parents == null
+          ? _instance.parents
+          : (parents
                 as List<Query_getFamilyRelatedFamilies_familiesByPk_parents>),
-      ));
+    ),
+  );
 
   TRes children(
-          Iterable<Query_getFamilyRelatedFamilies_familiesByPk_children> Function(
-                  Iterable<
-                      CopyWith_Query_getFamilyRelatedFamilies_familiesByPk_children<
-                          Query_getFamilyRelatedFamilies_familiesByPk_children>>)
-              _fn) =>
-      call(
-          children: _fn(_instance.children.map((e) =>
-              CopyWith_Query_getFamilyRelatedFamilies_familiesByPk_children(
-                e,
-                (i) => i,
-              ))).toList());
+    Iterable<Query_getFamilyRelatedFamilies_familiesByPk_children> Function(
+      Iterable<
+        CopyWith_Query_getFamilyRelatedFamilies_familiesByPk_children<
+          Query_getFamilyRelatedFamilies_familiesByPk_children
+        >
+      >,
+    )
+    _fn,
+  ) => call(
+    children: _fn(
+      _instance.children.map(
+        (e) => CopyWith_Query_getFamilyRelatedFamilies_familiesByPk_children(
+          e,
+          (i) => i,
+        ),
+      ),
+    ).toList(),
+  );
 
   TRes parents(
-          Iterable<Query_getFamilyRelatedFamilies_familiesByPk_parents> Function(
-                  Iterable<
-                      CopyWith_Query_getFamilyRelatedFamilies_familiesByPk_parents<
-                          Query_getFamilyRelatedFamilies_familiesByPk_parents>>)
-              _fn) =>
-      call(
-          parents: _fn(_instance.parents.map((e) =>
-              CopyWith_Query_getFamilyRelatedFamilies_familiesByPk_parents(
-                e,
-                (i) => i,
-              ))).toList());
+    Iterable<Query_getFamilyRelatedFamilies_familiesByPk_parents> Function(
+      Iterable<
+        CopyWith_Query_getFamilyRelatedFamilies_familiesByPk_parents<
+          Query_getFamilyRelatedFamilies_familiesByPk_parents
+        >
+      >,
+    )
+    _fn,
+  ) => call(
+    parents: _fn(
+      _instance.parents.map(
+        (e) => CopyWith_Query_getFamilyRelatedFamilies_familiesByPk_parents(
+          e,
+          (i) => i,
+        ),
+      ),
+    ).toList(),
+  );
 }
 
 class _CopyWithStubImpl_Query_getFamilyRelatedFamilies_familiesByPk<TRes>
@@ -699,8 +747,7 @@ class _CopyWithStubImpl_Query_getFamilyRelatedFamilies_familiesByPk<TRes>
     String? blurhash,
     List<Query_getFamilyRelatedFamilies_familiesByPk_children>? children,
     List<Query_getFamilyRelatedFamilies_familiesByPk_parents>? parents,
-  }) =>
-      _res;
+  }) => _res;
 
   children(_fn) => _res;
 
@@ -714,7 +761,8 @@ class Query_getFamilyRelatedFamilies_familiesByPk_children {
   });
 
   factory Query_getFamilyRelatedFamilies_familiesByPk_children.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$child = json['child'];
     final l$$__typename = json['__typename'];
     return Query_getFamilyRelatedFamilies_familiesByPk_children(
@@ -740,10 +788,7 @@ class Query_getFamilyRelatedFamilies_familiesByPk_children {
   int get hashCode {
     final l$child = child;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$child,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$child, l$$__typename]);
   }
 
   @override
@@ -772,29 +817,27 @@ class Query_getFamilyRelatedFamilies_familiesByPk_children {
 extension UtilityExtension_Query_getFamilyRelatedFamilies_familiesByPk_children
     on Query_getFamilyRelatedFamilies_familiesByPk_children {
   CopyWith_Query_getFamilyRelatedFamilies_familiesByPk_children<
-          Query_getFamilyRelatedFamilies_familiesByPk_children>
-      get copyWith =>
-          CopyWith_Query_getFamilyRelatedFamilies_familiesByPk_children(
-            this,
-            (i) => i,
-          );
+    Query_getFamilyRelatedFamilies_familiesByPk_children
+  >
+  get copyWith => CopyWith_Query_getFamilyRelatedFamilies_familiesByPk_children(
+    this,
+    (i) => i,
+  );
 }
 
 abstract class CopyWith_Query_getFamilyRelatedFamilies_familiesByPk_children<
-    TRes> {
+  TRes
+> {
   factory CopyWith_Query_getFamilyRelatedFamilies_familiesByPk_children(
     Query_getFamilyRelatedFamilies_familiesByPk_children instance,
     TRes Function(Query_getFamilyRelatedFamilies_familiesByPk_children) then,
   ) = _CopyWithImpl_Query_getFamilyRelatedFamilies_familiesByPk_children;
 
   factory CopyWith_Query_getFamilyRelatedFamilies_familiesByPk_children.stub(
-          TRes res) =
-      _CopyWithStubImpl_Query_getFamilyRelatedFamilies_familiesByPk_children;
+    TRes res,
+  ) = _CopyWithStubImpl_Query_getFamilyRelatedFamilies_familiesByPk_children;
 
-  TRes call({
-    Fragment_Family? child,
-    String? $__typename,
-  });
+  TRes call({Fragment_Family? child, String? $__typename});
   CopyWith_Fragment_Family<TRes> get child;
 }
 
@@ -809,22 +852,21 @@ class _CopyWithImpl_Query_getFamilyRelatedFamilies_familiesByPk_children<TRes>
   final Query_getFamilyRelatedFamilies_familiesByPk_children _instance;
 
   final TRes Function(Query_getFamilyRelatedFamilies_familiesByPk_children)
-      _then;
+  _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? child = _undefined,
-    Object? $__typename = _undefined,
-  }) =>
-      _then(Query_getFamilyRelatedFamilies_familiesByPk_children(
-        child: child == _undefined || child == null
-            ? _instance.child
-            : (child as Fragment_Family),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  TRes call({Object? child = _undefined, Object? $__typename = _undefined}) =>
+      _then(
+        Query_getFamilyRelatedFamilies_familiesByPk_children(
+          child: child == _undefined || child == null
+              ? _instance.child
+              : (child as Fragment_Family),
+          $__typename: $__typename == _undefined || $__typename == null
+              ? _instance.$__typename
+              : ($__typename as String),
+        ),
+      );
 
   CopyWith_Fragment_Family<TRes> get child {
     final local$child = _instance.child;
@@ -833,19 +875,17 @@ class _CopyWithImpl_Query_getFamilyRelatedFamilies_familiesByPk_children<TRes>
 }
 
 class _CopyWithStubImpl_Query_getFamilyRelatedFamilies_familiesByPk_children<
-        TRes>
+  TRes
+>
     implements
         CopyWith_Query_getFamilyRelatedFamilies_familiesByPk_children<TRes> {
   _CopyWithStubImpl_Query_getFamilyRelatedFamilies_familiesByPk_children(
-      this._res);
+    this._res,
+  );
 
   TRes _res;
 
-  call({
-    Fragment_Family? child,
-    String? $__typename,
-  }) =>
-      _res;
+  call({Fragment_Family? child, String? $__typename}) => _res;
 
   CopyWith_Fragment_Family<TRes> get child =>
       CopyWith_Fragment_Family.stub(_res);
@@ -858,7 +898,8 @@ class Query_getFamilyRelatedFamilies_familiesByPk_parents {
   });
 
   factory Query_getFamilyRelatedFamilies_familiesByPk_parents.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$parent = json['parent'];
     final l$$__typename = json['__typename'];
     return Query_getFamilyRelatedFamilies_familiesByPk_parents(
@@ -884,10 +925,7 @@ class Query_getFamilyRelatedFamilies_familiesByPk_parents {
   int get hashCode {
     final l$parent = parent;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$parent,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$parent, l$$__typename]);
   }
 
   @override
@@ -916,29 +954,27 @@ class Query_getFamilyRelatedFamilies_familiesByPk_parents {
 extension UtilityExtension_Query_getFamilyRelatedFamilies_familiesByPk_parents
     on Query_getFamilyRelatedFamilies_familiesByPk_parents {
   CopyWith_Query_getFamilyRelatedFamilies_familiesByPk_parents<
-          Query_getFamilyRelatedFamilies_familiesByPk_parents>
-      get copyWith =>
-          CopyWith_Query_getFamilyRelatedFamilies_familiesByPk_parents(
-            this,
-            (i) => i,
-          );
+    Query_getFamilyRelatedFamilies_familiesByPk_parents
+  >
+  get copyWith => CopyWith_Query_getFamilyRelatedFamilies_familiesByPk_parents(
+    this,
+    (i) => i,
+  );
 }
 
 abstract class CopyWith_Query_getFamilyRelatedFamilies_familiesByPk_parents<
-    TRes> {
+  TRes
+> {
   factory CopyWith_Query_getFamilyRelatedFamilies_familiesByPk_parents(
     Query_getFamilyRelatedFamilies_familiesByPk_parents instance,
     TRes Function(Query_getFamilyRelatedFamilies_familiesByPk_parents) then,
   ) = _CopyWithImpl_Query_getFamilyRelatedFamilies_familiesByPk_parents;
 
   factory CopyWith_Query_getFamilyRelatedFamilies_familiesByPk_parents.stub(
-          TRes res) =
-      _CopyWithStubImpl_Query_getFamilyRelatedFamilies_familiesByPk_parents;
+    TRes res,
+  ) = _CopyWithStubImpl_Query_getFamilyRelatedFamilies_familiesByPk_parents;
 
-  TRes call({
-    Fragment_Family? parent,
-    String? $__typename,
-  });
+  TRes call({Fragment_Family? parent, String? $__typename});
   CopyWith_Fragment_Family<TRes> get parent;
 }
 
@@ -953,22 +989,21 @@ class _CopyWithImpl_Query_getFamilyRelatedFamilies_familiesByPk_parents<TRes>
   final Query_getFamilyRelatedFamilies_familiesByPk_parents _instance;
 
   final TRes Function(Query_getFamilyRelatedFamilies_familiesByPk_parents)
-      _then;
+  _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? parent = _undefined,
-    Object? $__typename = _undefined,
-  }) =>
-      _then(Query_getFamilyRelatedFamilies_familiesByPk_parents(
-        parent: parent == _undefined || parent == null
-            ? _instance.parent
-            : (parent as Fragment_Family),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  TRes call({Object? parent = _undefined, Object? $__typename = _undefined}) =>
+      _then(
+        Query_getFamilyRelatedFamilies_familiesByPk_parents(
+          parent: parent == _undefined || parent == null
+              ? _instance.parent
+              : (parent as Fragment_Family),
+          $__typename: $__typename == _undefined || $__typename == null
+              ? _instance.$__typename
+              : ($__typename as String),
+        ),
+      );
 
   CopyWith_Fragment_Family<TRes> get parent {
     final local$parent = _instance.parent;
@@ -977,19 +1012,17 @@ class _CopyWithImpl_Query_getFamilyRelatedFamilies_familiesByPk_parents<TRes>
 }
 
 class _CopyWithStubImpl_Query_getFamilyRelatedFamilies_familiesByPk_parents<
-        TRes>
+  TRes
+>
     implements
         CopyWith_Query_getFamilyRelatedFamilies_familiesByPk_parents<TRes> {
   _CopyWithStubImpl_Query_getFamilyRelatedFamilies_familiesByPk_parents(
-      this._res);
+    this._res,
+  );
 
   TRes _res;
 
-  call({
-    Fragment_Family? parent,
-    String? $__typename,
-  }) =>
-      _res;
+  call({Fragment_Family? parent, String? $__typename}) => _res;
 
   CopyWith_Fragment_Family<TRes> get parent =>
       CopyWith_Fragment_Family.stub(_res);

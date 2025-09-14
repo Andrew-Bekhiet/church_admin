@@ -7,30 +7,32 @@ class Variables_Subscription_watchAllFathers {
     List<Input_FathersBoolExp>? where,
     List<Input_FathersOrderBy>? orderBy,
     int? limit,
-  }) =>
-      Variables_Subscription_watchAllFathers._({
-        if (where != null) r'where': where,
-        if (orderBy != null) r'orderBy': orderBy,
-        if (limit != null) r'limit': limit,
-      });
+  }) => Variables_Subscription_watchAllFathers._({
+    if (where != null) r'where': where,
+    if (orderBy != null) r'orderBy': orderBy,
+    if (limit != null) r'limit': limit,
+  });
 
   Variables_Subscription_watchAllFathers._(this._$data);
 
   factory Variables_Subscription_watchAllFathers.fromJson(
-      Map<String, dynamic> data) {
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = (l$where as List<dynamic>?)
           ?.map(
-              (e) => Input_FathersBoolExp.fromJson((e as Map<String, dynamic>)))
+            (e) => Input_FathersBoolExp.fromJson((e as Map<String, dynamic>)),
+          )
           .toList();
     }
     if (data.containsKey('orderBy')) {
       final l$orderBy = data['orderBy'];
       result$data['orderBy'] = (l$orderBy as List<dynamic>?)
           ?.map(
-              (e) => Input_FathersOrderBy.fromJson((e as Map<String, dynamic>)))
+            (e) => Input_FathersOrderBy.fromJson((e as Map<String, dynamic>)),
+          )
           .toList();
     }
     if (data.containsKey('limit')) {
@@ -68,11 +70,10 @@ class Variables_Subscription_watchAllFathers {
   }
 
   CopyWith_Variables_Subscription_watchAllFathers<
-          Variables_Subscription_watchAllFathers>
-      get copyWith => CopyWith_Variables_Subscription_watchAllFathers(
-            this,
-            (i) => i,
-          );
+    Variables_Subscription_watchAllFathers
+  >
+  get copyWith =>
+      CopyWith_Variables_Subscription_watchAllFathers(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -140,13 +141,13 @@ class Variables_Subscription_watchAllFathers {
     return Object.hashAll([
       _$data.containsKey('where')
           ? l$where == null
-              ? null
-              : Object.hashAll(l$where.map((v) => v))
+                ? null
+                : Object.hashAll(l$where.map((v) => v))
           : const {},
       _$data.containsKey('orderBy')
           ? l$orderBy == null
-              ? null
-              : Object.hashAll(l$orderBy.map((v) => v))
+                ? null
+                : Object.hashAll(l$orderBy.map((v) => v))
           : const {},
       _$data.containsKey('limit') ? l$limit : const {},
     ]);
@@ -186,15 +187,15 @@ class _CopyWithImpl_Variables_Subscription_watchAllFathers<TRes>
     Object? where = _undefined,
     Object? orderBy = _undefined,
     Object? limit = _undefined,
-  }) =>
-      _then(Variables_Subscription_watchAllFathers._({
-        ..._instance._$data,
-        if (where != _undefined)
-          'where': (where as List<Input_FathersBoolExp>?),
-        if (orderBy != _undefined)
-          'orderBy': (orderBy as List<Input_FathersOrderBy>?),
-        if (limit != _undefined) 'limit': (limit as int?),
-      }));
+  }) => _then(
+    Variables_Subscription_watchAllFathers._({
+      ..._instance._$data,
+      if (where != _undefined) 'where': (where as List<Input_FathersBoolExp>?),
+      if (orderBy != _undefined)
+        'orderBy': (orderBy as List<Input_FathersOrderBy>?),
+      if (limit != _undefined) 'limit': (limit as int?),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Variables_Subscription_watchAllFathers<TRes>
@@ -207,8 +208,7 @@ class _CopyWithStubImpl_Variables_Subscription_watchAllFathers<TRes>
     List<Input_FathersBoolExp>? where,
     List<Input_FathersOrderBy>? orderBy,
     int? limit,
-  }) =>
-      _res;
+  }) => _res;
 }
 
 class Subscription_watchAllFathers {
@@ -217,10 +217,14 @@ class Subscription_watchAllFathers {
   factory Subscription_watchAllFathers.fromJson(Map<String, dynamic> json) {
     final l$fathers = json['fathers'];
     return Subscription_watchAllFathers(
-        fathers: (l$fathers as List<dynamic>)
-            .map((e) => Subscription_watchAllFathers_fathers.fromJson(
-                (e as Map<String, dynamic>)))
-            .toList());
+      fathers: (l$fathers as List<dynamic>)
+          .map(
+            (e) => Subscription_watchAllFathers_fathers.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
+          .toList(),
+    );
   }
 
   final List<Subscription_watchAllFathers_fathers> fathers;
@@ -266,10 +270,7 @@ class Subscription_watchAllFathers {
 extension UtilityExtension_Subscription_watchAllFathers
     on Subscription_watchAllFathers {
   CopyWith_Subscription_watchAllFathers<Subscription_watchAllFathers>
-      get copyWith => CopyWith_Subscription_watchAllFathers(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Subscription_watchAllFathers(this, (i) => i);
 }
 
 abstract class CopyWith_Subscription_watchAllFathers<TRes> {
@@ -283,19 +284,20 @@ abstract class CopyWith_Subscription_watchAllFathers<TRes> {
 
   TRes call({List<Subscription_watchAllFathers_fathers>? fathers});
   TRes fathers(
-      Iterable<Subscription_watchAllFathers_fathers> Function(
-              Iterable<
-                  CopyWith_Subscription_watchAllFathers_fathers<
-                      Subscription_watchAllFathers_fathers>>)
-          _fn);
+    Iterable<Subscription_watchAllFathers_fathers> Function(
+      Iterable<
+        CopyWith_Subscription_watchAllFathers_fathers<
+          Subscription_watchAllFathers_fathers
+        >
+      >,
+    )
+    _fn,
+  );
 }
 
 class _CopyWithImpl_Subscription_watchAllFathers<TRes>
     implements CopyWith_Subscription_watchAllFathers<TRes> {
-  _CopyWithImpl_Subscription_watchAllFathers(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Subscription_watchAllFathers(this._instance, this._then);
 
   final Subscription_watchAllFathers _instance;
 
@@ -303,24 +305,30 @@ class _CopyWithImpl_Subscription_watchAllFathers<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? fathers = _undefined}) =>
-      _then(Subscription_watchAllFathers(
-          fathers: fathers == _undefined || fathers == null
-              ? _instance.fathers
-              : (fathers as List<Subscription_watchAllFathers_fathers>)));
+  TRes call({Object? fathers = _undefined}) => _then(
+    Subscription_watchAllFathers(
+      fathers: fathers == _undefined || fathers == null
+          ? _instance.fathers
+          : (fathers as List<Subscription_watchAllFathers_fathers>),
+    ),
+  );
 
   TRes fathers(
-          Iterable<Subscription_watchAllFathers_fathers> Function(
-                  Iterable<
-                      CopyWith_Subscription_watchAllFathers_fathers<
-                          Subscription_watchAllFathers_fathers>>)
-              _fn) =>
-      call(
-          fathers: _fn(_instance.fathers
-              .map((e) => CopyWith_Subscription_watchAllFathers_fathers(
-                    e,
-                    (i) => i,
-                  ))).toList());
+    Iterable<Subscription_watchAllFathers_fathers> Function(
+      Iterable<
+        CopyWith_Subscription_watchAllFathers_fathers<
+          Subscription_watchAllFathers_fathers
+        >
+      >,
+    )
+    _fn,
+  ) => call(
+    fathers: _fn(
+      _instance.fathers.map(
+        (e) => CopyWith_Subscription_watchAllFathers_fathers(e, (i) => i),
+      ),
+    ).toList(),
+  );
 }
 
 class _CopyWithStubImpl_Subscription_watchAllFathers<TRes>
@@ -334,103 +342,111 @@ class _CopyWithStubImpl_Subscription_watchAllFathers<TRes>
   fathers(_fn) => _res;
 }
 
-const documentNodeSubscriptionwatchAllFathers = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.subscription,
-    name: NameNode(value: 'watchAllFathers'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'where')),
-        type: ListTypeNode(
-          type: NamedTypeNode(
-            name: NameNode(value: 'FathersBoolExp'),
-            isNonNull: true,
+const documentNodeSubscriptionwatchAllFathers = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.subscription,
+      name: NameNode(value: 'watchAllFathers'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'where')),
+          type: ListTypeNode(
+            type: NamedTypeNode(
+              name: NameNode(value: 'FathersBoolExp'),
+              isNonNull: true,
+            ),
+            isNonNull: false,
           ),
-          isNonNull: false,
+          defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'orderBy')),
-        type: ListTypeNode(
-          type: NamedTypeNode(
-            name: NameNode(value: 'FathersOrderBy'),
-            isNonNull: true,
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'orderBy')),
+          type: ListTypeNode(
+            type: NamedTypeNode(
+              name: NameNode(value: 'FathersOrderBy'),
+              isNonNull: true,
+            ),
+            isNonNull: false,
           ),
-          isNonNull: false,
+          defaultValue: DefaultValueNode(
+            value: ObjectValueNode(
+              fields: [
+                ObjectFieldNode(
+                  name: NameNode(value: 'name'),
+                  value: EnumValueNode(name: NameNode(value: 'ASC')),
+                ),
+              ],
+            ),
+          ),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(
-            value: ObjectValueNode(fields: [
-          ObjectFieldNode(
-            name: NameNode(value: 'name'),
-            value: EnumValueNode(name: NameNode(value: 'ASC')),
-          )
-        ])),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'limit')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'Int'),
-          isNonNull: false,
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'limit')),
+          type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: false),
+          defaultValue: DefaultValueNode(value: IntValueNode(value: '25')),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: IntValueNode(value: '25')),
-        directives: [],
-      ),
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'fathers'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'where'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: '_and'),
-                value: VariableNode(name: NameNode(value: 'where')),
-              )
-            ]),
-          ),
-          ArgumentNode(
-            name: NameNode(value: 'orderBy'),
-            value: VariableNode(name: NameNode(value: 'orderBy')),
-          ),
-          ArgumentNode(
-            name: NameNode(value: 'limit'),
-            value: VariableNode(name: NameNode(value: 'limit')),
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
+          FieldNode(
+            name: NameNode(value: 'fathers'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'where'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: '_and'),
+                      value: VariableNode(name: NameNode(value: 'where')),
+                    ),
+                  ],
+                ),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'orderBy'),
+                value: VariableNode(name: NameNode(value: 'orderBy')),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'limit'),
+                value: VariableNode(name: NameNode(value: 'limit')),
+              ),
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FieldNode(
+                  name: NameNode(value: 'id'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: 'name'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
           ),
         ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-            name: NameNode(value: 'id'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'name'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-        ]),
-      )
-    ]),
-  ),
-]);
+      ),
+    ),
+  ],
+);
 
 class Subscription_watchAllFathers_fathers {
   Subscription_watchAllFathers_fathers({
@@ -440,7 +456,8 @@ class Subscription_watchAllFathers_fathers {
   });
 
   factory Subscription_watchAllFathers_fathers.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$id = json['id'];
     final l$name = json['name'];
     final l$$__typename = json['__typename'];
@@ -473,11 +490,7 @@ class Subscription_watchAllFathers_fathers {
     final l$id = id;
     final l$name = name;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$id,
-      l$name,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$id, l$name, l$$__typename]);
   }
 
   @override
@@ -511,11 +524,9 @@ class Subscription_watchAllFathers_fathers {
 extension UtilityExtension_Subscription_watchAllFathers_fathers
     on Subscription_watchAllFathers_fathers {
   CopyWith_Subscription_watchAllFathers_fathers<
-          Subscription_watchAllFathers_fathers>
-      get copyWith => CopyWith_Subscription_watchAllFathers_fathers(
-            this,
-            (i) => i,
-          );
+    Subscription_watchAllFathers_fathers
+  >
+  get copyWith => CopyWith_Subscription_watchAllFathers_fathers(this, (i) => i);
 }
 
 abstract class CopyWith_Subscription_watchAllFathers_fathers<TRes> {
@@ -527,11 +538,7 @@ abstract class CopyWith_Subscription_watchAllFathers_fathers<TRes> {
   factory CopyWith_Subscription_watchAllFathers_fathers.stub(TRes res) =
       _CopyWithStubImpl_Subscription_watchAllFathers_fathers;
 
-  TRes call({
-    UuidValue? id,
-    String? name,
-    String? $__typename,
-  });
+  TRes call({UuidValue? id, String? name, String? $__typename});
 }
 
 class _CopyWithImpl_Subscription_watchAllFathers_fathers<TRes>
@@ -551,16 +558,17 @@ class _CopyWithImpl_Subscription_watchAllFathers_fathers<TRes>
     Object? id = _undefined,
     Object? name = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Subscription_watchAllFathers_fathers(
-        id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
-        name: name == _undefined || name == null
-            ? _instance.name
-            : (name as String),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Subscription_watchAllFathers_fathers(
+      id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 }
 
 class _CopyWithStubImpl_Subscription_watchAllFathers_fathers<TRes>
@@ -569,10 +577,5 @@ class _CopyWithStubImpl_Subscription_watchAllFathers_fathers<TRes>
 
   TRes _res;
 
-  call({
-    UuidValue? id,
-    String? name,
-    String? $__typename,
-  }) =>
-      _res;
+  call({UuidValue? id, String? name, String? $__typename}) => _res;
 }

@@ -2,104 +2,6 @@
 part of "schema.graphql.dart";
 
 
-String toJson_Enum_HobbiesUpdateColumn(Enum_HobbiesUpdateColumn e) {
-  switch (e) {
-    case Enum_HobbiesUpdateColumn.color:
-      return r'color';
-    case Enum_HobbiesUpdateColumn.name:
-      return r'name';
-    case Enum_HobbiesUpdateColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_HobbiesUpdateColumn fromJson_Enum_HobbiesUpdateColumn(String value) {
-  switch (value) {
-    case r'color':
-      return Enum_HobbiesUpdateColumn.color;
-    case r'name':
-      return Enum_HobbiesUpdateColumn.name;
-    default:
-      return Enum_HobbiesUpdateColumn.$unknown;
-  }
-}
-
-enum Enum_JobsConstraint {
-  jobs_name_key,
-  jobs_pkey,
-  $unknown;
-
-  factory Enum_JobsConstraint.fromJson(String value) =>
-      fromJson_Enum_JobsConstraint(value);
-
-  String toJson() => toJson_Enum_JobsConstraint(this);
-}
-
-String toJson_Enum_JobsConstraint(Enum_JobsConstraint e) {
-  switch (e) {
-    case Enum_JobsConstraint.jobs_name_key:
-      return r'jobs_name_key';
-    case Enum_JobsConstraint.jobs_pkey:
-      return r'jobs_pkey';
-    case Enum_JobsConstraint.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_JobsConstraint fromJson_Enum_JobsConstraint(String value) {
-  switch (value) {
-    case r'jobs_name_key':
-      return Enum_JobsConstraint.jobs_name_key;
-    case r'jobs_pkey':
-      return Enum_JobsConstraint.jobs_pkey;
-    default:
-      return Enum_JobsConstraint.$unknown;
-  }
-}
-
-enum Enum_JobsSelectColumn {
-  id,
-  name,
-  $unknown;
-
-  factory Enum_JobsSelectColumn.fromJson(String value) =>
-      fromJson_Enum_JobsSelectColumn(value);
-
-  String toJson() => toJson_Enum_JobsSelectColumn(this);
-}
-
-String toJson_Enum_JobsSelectColumn(Enum_JobsSelectColumn e) {
-  switch (e) {
-    case Enum_JobsSelectColumn.id:
-      return r'id';
-    case Enum_JobsSelectColumn.name:
-      return r'name';
-    case Enum_JobsSelectColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_JobsSelectColumn fromJson_Enum_JobsSelectColumn(String value) {
-  switch (value) {
-    case r'id':
-      return Enum_JobsSelectColumn.id;
-    case r'name':
-      return Enum_JobsSelectColumn.name;
-    default:
-      return Enum_JobsSelectColumn.$unknown;
-  }
-}
-
-enum Enum_JobsUpdateColumn {
-  name,
-  $unknown;
-
-  factory Enum_JobsUpdateColumn.fromJson(String value) =>
-      fromJson_Enum_JobsUpdateColumn(value);
-
-  String toJson() => toJson_Enum_JobsUpdateColumn(this);
-}
-
 String toJson_Enum_JobsUpdateColumn(Enum_JobsUpdateColumn e) {
   switch (e) {
     case Enum_JobsUpdateColumn.name:
@@ -234,7 +136,8 @@ String toJson_Enum_PersonStatesSelectColumn(Enum_PersonStatesSelectColumn e) {
 }
 
 Enum_PersonStatesSelectColumn fromJson_Enum_PersonStatesSelectColumn(
-    String value) {
+  String value,
+) {
   switch (value) {
     case r'color':
       return Enum_PersonStatesSelectColumn.color;
@@ -270,7 +173,8 @@ String toJson_Enum_PersonStatesUpdateColumn(Enum_PersonStatesUpdateColumn e) {
 }
 
 Enum_PersonStatesUpdateColumn fromJson_Enum_PersonStatesUpdateColumn(
-    String value) {
+  String value,
+) {
   switch (value) {
     case r'color':
       return Enum_PersonStatesUpdateColumn.color;
@@ -351,7 +255,8 @@ String toJson_Enum_PersonTypesSelectColumn(Enum_PersonTypesSelectColumn e) {
 }
 
 Enum_PersonTypesSelectColumn fromJson_Enum_PersonTypesSelectColumn(
-    String value) {
+  String value,
+) {
   switch (value) {
     case r'id':
       return Enum_PersonTypesSelectColumn.id;
@@ -388,7 +293,8 @@ String toJson_Enum_PersonTypesUpdateColumn(Enum_PersonTypesUpdateColumn e) {
 }
 
 Enum_PersonTypesUpdateColumn fromJson_Enum_PersonTypesUpdateColumn(
-    String value) {
+  String value,
+) {
   switch (value) {
     case r'name':
       return Enum_PersonTypesUpdateColumn.name;
@@ -458,7 +364,8 @@ String toJson_Enum_PersonsGroupsConstraint(Enum_PersonsGroupsConstraint e) {
 }
 
 Enum_PersonsGroupsConstraint fromJson_Enum_PersonsGroupsConstraint(
-    String value) {
+  String value,
+) {
   switch (value) {
     case r'persons_groups_person_id_group_id_key':
       return Enum_PersonsGroupsConstraint.persons_groups_person_id_group_id_key;
@@ -492,7 +399,8 @@ String toJson_Enum_PersonsGroupsSelectColumn(Enum_PersonsGroupsSelectColumn e) {
 }
 
 Enum_PersonsGroupsSelectColumn fromJson_Enum_PersonsGroupsSelectColumn(
-    String value) {
+  String value,
+) {
   switch (value) {
     case r'groupId':
       return Enum_PersonsGroupsSelectColumn.groupId;
@@ -523,7 +431,8 @@ String toJson_Enum_PersonsGroupsUpdateColumn(Enum_PersonsGroupsUpdateColumn e) {
 }
 
 Enum_PersonsGroupsUpdateColumn fromJson_Enum_PersonsGroupsUpdateColumn(
-    String value) {
+  String value,
+) {
   switch (value) {
     case r'_PLACEHOLDER':
       return Enum_PersonsGroupsUpdateColumn.$_PLACEHOLDER;
@@ -552,7 +461,8 @@ String toJson_Enum_PersonsHobbiesConstraint(Enum_PersonsHobbiesConstraint e) {
 }
 
 Enum_PersonsHobbiesConstraint fromJson_Enum_PersonsHobbiesConstraint(
-    String value) {
+  String value,
+) {
   switch (value) {
     case r'persons_hobbies_pkey':
       return Enum_PersonsHobbiesConstraint.persons_hobbies_pkey;
@@ -573,7 +483,8 @@ enum Enum_PersonsHobbiesSelectColumn {
 }
 
 String toJson_Enum_PersonsHobbiesSelectColumn(
-    Enum_PersonsHobbiesSelectColumn e) {
+  Enum_PersonsHobbiesSelectColumn e,
+) {
   switch (e) {
     case Enum_PersonsHobbiesSelectColumn.hobbyId:
       return r'hobbyId';
@@ -585,7 +496,8 @@ String toJson_Enum_PersonsHobbiesSelectColumn(
 }
 
 Enum_PersonsHobbiesSelectColumn fromJson_Enum_PersonsHobbiesSelectColumn(
-    String value) {
+  String value,
+) {
   switch (value) {
     case r'hobbyId':
       return Enum_PersonsHobbiesSelectColumn.hobbyId;
@@ -607,7 +519,8 @@ enum Enum_PersonsHobbiesUpdateColumn {
 }
 
 String toJson_Enum_PersonsHobbiesUpdateColumn(
-    Enum_PersonsHobbiesUpdateColumn e) {
+  Enum_PersonsHobbiesUpdateColumn e,
+) {
   switch (e) {
     case Enum_PersonsHobbiesUpdateColumn.$_PLACEHOLDER:
       return r'_PLACEHOLDER';
@@ -617,7 +530,8 @@ String toJson_Enum_PersonsHobbiesUpdateColumn(
 }
 
 Enum_PersonsHobbiesUpdateColumn fromJson_Enum_PersonsHobbiesUpdateColumn(
-    String value) {
+  String value,
+) {
   switch (value) {
     case r'_PLACEHOLDER':
       return Enum_PersonsHobbiesUpdateColumn.$_PLACEHOLDER;
@@ -827,41 +741,45 @@ enum Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns {
   $unknown;
 
   factory Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns.fromJson(
-          String value) =>
+    String value,
+  ) =>
       fromJson_Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns(
-          value);
+        value,
+      );
 
   String toJson() =>
       toJson_Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns(
-          this);
+        this,
+      );
 }
 
 String
-    toJson_Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns(
-        Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns
-            e) {
+toJson_Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns(
+  Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns e,
+) {
   switch (e) {
     case Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns
-          .gender:
+        .gender:
       return r'gender';
     case Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns
-          .isServant:
+        .isServant:
       return r'isServant';
     case Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns
-          .isShammas:
+        .isShammas:
       return r'isShammas';
     case Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns
-          .isStudent:
+        .isStudent:
       return r'isStudent';
     case Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns
-          .$unknown:
+        .$unknown:
       return r'$unknown';
   }
 }
 
 Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns
-    fromJson_Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns(
-        String value) {
+fromJson_Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns(
+  String value,
+) {
   switch (value) {
     case r'gender':
       return Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns
@@ -889,41 +807,45 @@ enum Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns {
   $unknown;
 
   factory Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns.fromJson(
-          String value) =>
+    String value,
+  ) =>
       fromJson_Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns(
-          value);
+        value,
+      );
 
   String toJson() =>
       toJson_Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns(
-          this);
+        this,
+      );
 }
 
 String
-    toJson_Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns(
-        Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns
-            e) {
+toJson_Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns(
+  Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns e,
+) {
   switch (e) {
     case Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns
-          .gender:
+        .gender:
       return r'gender';
     case Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns
-          .isServant:
+        .isServant:
       return r'isServant';
     case Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns
-          .isShammas:
+        .isShammas:
       return r'isShammas';
     case Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns
-          .isStudent:
+        .isStudent:
       return r'isStudent';
     case Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns
-          .$unknown:
+        .$unknown:
       return r'$unknown';
   }
 }
 
 Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns
-    fromJson_Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns(
-        String value) {
+fromJson_Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns(
+  String value,
+) {
   switch (value) {
     case r'gender':
       return Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns
@@ -957,7 +879,7 @@ enum Enum_PersonsServicesConstraint {
 String toJson_Enum_PersonsServicesConstraint(Enum_PersonsServicesConstraint e) {
   switch (e) {
     case Enum_PersonsServicesConstraint
-          .persons_services_person_id_service_id_key:
+        .persons_services_person_id_service_id_key:
       return r'persons_services_person_id_service_id_key';
     case Enum_PersonsServicesConstraint.persons_services_pkey:
       return r'persons_services_pkey';
@@ -967,7 +889,8 @@ String toJson_Enum_PersonsServicesConstraint(Enum_PersonsServicesConstraint e) {
 }
 
 Enum_PersonsServicesConstraint fromJson_Enum_PersonsServicesConstraint(
-    String value) {
+  String value,
+) {
   switch (value) {
     case r'persons_services_person_id_service_id_key':
       return Enum_PersonsServicesConstraint
@@ -991,7 +914,8 @@ enum Enum_PersonsServicesSelectColumn {
 }
 
 String toJson_Enum_PersonsServicesSelectColumn(
-    Enum_PersonsServicesSelectColumn e) {
+  Enum_PersonsServicesSelectColumn e,
+) {
   switch (e) {
     case Enum_PersonsServicesSelectColumn.personId:
       return r'personId';
@@ -1003,7 +927,8 @@ String toJson_Enum_PersonsServicesSelectColumn(
 }
 
 Enum_PersonsServicesSelectColumn fromJson_Enum_PersonsServicesSelectColumn(
-    String value) {
+  String value,
+) {
   switch (value) {
     case r'personId':
       return Enum_PersonsServicesSelectColumn.personId;
@@ -1026,7 +951,8 @@ enum Enum_PersonsServicesUpdateColumn {
 }
 
 String toJson_Enum_PersonsServicesUpdateColumn(
-    Enum_PersonsServicesUpdateColumn e) {
+  Enum_PersonsServicesUpdateColumn e,
+) {
   switch (e) {
     case Enum_PersonsServicesUpdateColumn.personId:
       return r'personId';
@@ -1038,7 +964,8 @@ String toJson_Enum_PersonsServicesUpdateColumn(
 }
 
 Enum_PersonsServicesUpdateColumn fromJson_Enum_PersonsServicesUpdateColumn(
-    String value) {
+  String value,
+) {
   switch (value) {
     case r'personId':
       return Enum_PersonsServicesUpdateColumn.personId;
@@ -1100,7 +1027,8 @@ String toJson_Enum_PersonsTagsSelectColumn(Enum_PersonsTagsSelectColumn e) {
 }
 
 Enum_PersonsTagsSelectColumn fromJson_Enum_PersonsTagsSelectColumn(
-    String value) {
+  String value,
+) {
   switch (value) {
     case r'personId':
       return Enum_PersonsTagsSelectColumn.personId;
@@ -1131,7 +1059,8 @@ String toJson_Enum_PersonsTagsUpdateColumn(Enum_PersonsTagsUpdateColumn e) {
 }
 
 Enum_PersonsTagsUpdateColumn fromJson_Enum_PersonsTagsUpdateColumn(
-    String value) {
+  String value,
+) {
   switch (value) {
     case r'_PLACEHOLDER':
       return Enum_PersonsTagsUpdateColumn.$_PLACEHOLDER;
@@ -1336,7 +1265,8 @@ String toJson_Enum_QualificationsConstraint(Enum_QualificationsConstraint e) {
 }
 
 Enum_QualificationsConstraint fromJson_Enum_QualificationsConstraint(
-    String value) {
+  String value,
+) {
   switch (value) {
     case r'qualifications_name_key':
       return Enum_QualificationsConstraint.qualifications_name_key;
@@ -1359,7 +1289,8 @@ enum Enum_QualificationsSelectColumn {
 }
 
 String toJson_Enum_QualificationsSelectColumn(
-    Enum_QualificationsSelectColumn e) {
+  Enum_QualificationsSelectColumn e,
+) {
   switch (e) {
     case Enum_QualificationsSelectColumn.id:
       return r'id';
@@ -1371,7 +1302,8 @@ String toJson_Enum_QualificationsSelectColumn(
 }
 
 Enum_QualificationsSelectColumn fromJson_Enum_QualificationsSelectColumn(
-    String value) {
+  String value,
+) {
   switch (value) {
     case r'id':
       return Enum_QualificationsSelectColumn.id;
@@ -1393,7 +1325,8 @@ enum Enum_QualificationsUpdateColumn {
 }
 
 String toJson_Enum_QualificationsUpdateColumn(
-    Enum_QualificationsUpdateColumn e) {
+  Enum_QualificationsUpdateColumn e,
+) {
   switch (e) {
     case Enum_QualificationsUpdateColumn.name:
       return r'name';
@@ -1403,7 +1336,8 @@ String toJson_Enum_QualificationsUpdateColumn(
 }
 
 Enum_QualificationsUpdateColumn fromJson_Enum_QualificationsUpdateColumn(
-    String value) {
+  String value,
+) {
   switch (value) {
     case r'name':
       return Enum_QualificationsUpdateColumn.name;
@@ -1676,7 +1610,8 @@ String toJson_Enum_ShammasLevelsSelectColumn(Enum_ShammasLevelsSelectColumn e) {
 }
 
 Enum_ShammasLevelsSelectColumn fromJson_Enum_ShammasLevelsSelectColumn(
-    String value) {
+  String value,
+) {
   switch (value) {
     case r'id':
       return Enum_ShammasLevelsSelectColumn.id;
@@ -2206,7 +2141,8 @@ String toJson_Enum_UniversitiesSelectColumn(Enum_UniversitiesSelectColumn e) {
 }
 
 Enum_UniversitiesSelectColumn fromJson_Enum_UniversitiesSelectColumn(
-    String value) {
+  String value,
+) {
   switch (value) {
     case r'id':
       return Enum_UniversitiesSelectColumn.id;
@@ -2237,7 +2173,8 @@ String toJson_Enum_UniversitiesUpdateColumn(Enum_UniversitiesUpdateColumn e) {
 }
 
 Enum_UniversitiesUpdateColumn fromJson_Enum_UniversitiesUpdateColumn(
-    String value) {
+  String value,
+) {
   switch (value) {
     case r'name':
       return Enum_UniversitiesUpdateColumn.name;

@@ -6,30 +6,34 @@ class Variables_Subscription_watchAllStudyYears {
     List<Input_StudyYearsBoolExp>? where,
     List<Input_StudyYearsOrderBy>? orderBy,
     int? limit,
-  }) =>
-      Variables_Subscription_watchAllStudyYears._({
-        if (where != null) r'where': where,
-        if (orderBy != null) r'orderBy': orderBy,
-        if (limit != null) r'limit': limit,
-      });
+  }) => Variables_Subscription_watchAllStudyYears._({
+    if (where != null) r'where': where,
+    if (orderBy != null) r'orderBy': orderBy,
+    if (limit != null) r'limit': limit,
+  });
 
   Variables_Subscription_watchAllStudyYears._(this._$data);
 
   factory Variables_Subscription_watchAllStudyYears.fromJson(
-      Map<String, dynamic> data) {
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = (l$where as List<dynamic>?)
-          ?.map((e) =>
-              Input_StudyYearsBoolExp.fromJson((e as Map<String, dynamic>)))
+          ?.map(
+            (e) =>
+                Input_StudyYearsBoolExp.fromJson((e as Map<String, dynamic>)),
+          )
           .toList();
     }
     if (data.containsKey('orderBy')) {
       final l$orderBy = data['orderBy'];
       result$data['orderBy'] = (l$orderBy as List<dynamic>?)
-          ?.map((e) =>
-              Input_StudyYearsOrderBy.fromJson((e as Map<String, dynamic>)))
+          ?.map(
+            (e) =>
+                Input_StudyYearsOrderBy.fromJson((e as Map<String, dynamic>)),
+          )
           .toList();
     }
     if (data.containsKey('limit')) {
@@ -67,11 +71,10 @@ class Variables_Subscription_watchAllStudyYears {
   }
 
   CopyWith_Variables_Subscription_watchAllStudyYears<
-          Variables_Subscription_watchAllStudyYears>
-      get copyWith => CopyWith_Variables_Subscription_watchAllStudyYears(
-            this,
-            (i) => i,
-          );
+    Variables_Subscription_watchAllStudyYears
+  >
+  get copyWith =>
+      CopyWith_Variables_Subscription_watchAllStudyYears(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -139,13 +142,13 @@ class Variables_Subscription_watchAllStudyYears {
     return Object.hashAll([
       _$data.containsKey('where')
           ? l$where == null
-              ? null
-              : Object.hashAll(l$where.map((v) => v))
+                ? null
+                : Object.hashAll(l$where.map((v) => v))
           : const {},
       _$data.containsKey('orderBy')
           ? l$orderBy == null
-              ? null
-              : Object.hashAll(l$orderBy.map((v) => v))
+                ? null
+                : Object.hashAll(l$orderBy.map((v) => v))
           : const {},
       _$data.containsKey('limit') ? l$limit : const {},
     ]);
@@ -185,15 +188,16 @@ class _CopyWithImpl_Variables_Subscription_watchAllStudyYears<TRes>
     Object? where = _undefined,
     Object? orderBy = _undefined,
     Object? limit = _undefined,
-  }) =>
-      _then(Variables_Subscription_watchAllStudyYears._({
-        ..._instance._$data,
-        if (where != _undefined)
-          'where': (where as List<Input_StudyYearsBoolExp>?),
-        if (orderBy != _undefined)
-          'orderBy': (orderBy as List<Input_StudyYearsOrderBy>?),
-        if (limit != _undefined) 'limit': (limit as int?),
-      }));
+  }) => _then(
+    Variables_Subscription_watchAllStudyYears._({
+      ..._instance._$data,
+      if (where != _undefined)
+        'where': (where as List<Input_StudyYearsBoolExp>?),
+      if (orderBy != _undefined)
+        'orderBy': (orderBy as List<Input_StudyYearsOrderBy>?),
+      if (limit != _undefined) 'limit': (limit as int?),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Variables_Subscription_watchAllStudyYears<TRes>
@@ -206,8 +210,7 @@ class _CopyWithStubImpl_Variables_Subscription_watchAllStudyYears<TRes>
     List<Input_StudyYearsBoolExp>? where,
     List<Input_StudyYearsOrderBy>? orderBy,
     int? limit,
-  }) =>
-      _res;
+  }) => _res;
 }
 
 class Subscription_watchAllStudyYears {
@@ -216,10 +219,14 @@ class Subscription_watchAllStudyYears {
   factory Subscription_watchAllStudyYears.fromJson(Map<String, dynamic> json) {
     final l$studyYears = json['studyYears'];
     return Subscription_watchAllStudyYears(
-        studyYears: (l$studyYears as List<dynamic>)
-            .map((e) => Subscription_watchAllStudyYears_studyYears.fromJson(
-                (e as Map<String, dynamic>)))
-            .toList());
+      studyYears: (l$studyYears as List<dynamic>)
+          .map(
+            (e) => Subscription_watchAllStudyYears_studyYears.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
+          .toList(),
+    );
   }
 
   final List<Subscription_watchAllStudyYears_studyYears> studyYears;
@@ -265,10 +272,7 @@ class Subscription_watchAllStudyYears {
 extension UtilityExtension_Subscription_watchAllStudyYears
     on Subscription_watchAllStudyYears {
   CopyWith_Subscription_watchAllStudyYears<Subscription_watchAllStudyYears>
-      get copyWith => CopyWith_Subscription_watchAllStudyYears(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Subscription_watchAllStudyYears(this, (i) => i);
 }
 
 abstract class CopyWith_Subscription_watchAllStudyYears<TRes> {
@@ -282,19 +286,20 @@ abstract class CopyWith_Subscription_watchAllStudyYears<TRes> {
 
   TRes call({List<Subscription_watchAllStudyYears_studyYears>? studyYears});
   TRes studyYears(
-      Iterable<Subscription_watchAllStudyYears_studyYears> Function(
-              Iterable<
-                  CopyWith_Subscription_watchAllStudyYears_studyYears<
-                      Subscription_watchAllStudyYears_studyYears>>)
-          _fn);
+    Iterable<Subscription_watchAllStudyYears_studyYears> Function(
+      Iterable<
+        CopyWith_Subscription_watchAllStudyYears_studyYears<
+          Subscription_watchAllStudyYears_studyYears
+        >
+      >,
+    )
+    _fn,
+  );
 }
 
 class _CopyWithImpl_Subscription_watchAllStudyYears<TRes>
     implements CopyWith_Subscription_watchAllStudyYears<TRes> {
-  _CopyWithImpl_Subscription_watchAllStudyYears(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Subscription_watchAllStudyYears(this._instance, this._then);
 
   final Subscription_watchAllStudyYears _instance;
 
@@ -302,25 +307,30 @@ class _CopyWithImpl_Subscription_watchAllStudyYears<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? studyYears = _undefined}) =>
-      _then(Subscription_watchAllStudyYears(
-          studyYears: studyYears == _undefined || studyYears == null
-              ? _instance.studyYears
-              : (studyYears
-                  as List<Subscription_watchAllStudyYears_studyYears>)));
+  TRes call({Object? studyYears = _undefined}) => _then(
+    Subscription_watchAllStudyYears(
+      studyYears: studyYears == _undefined || studyYears == null
+          ? _instance.studyYears
+          : (studyYears as List<Subscription_watchAllStudyYears_studyYears>),
+    ),
+  );
 
   TRes studyYears(
-          Iterable<Subscription_watchAllStudyYears_studyYears> Function(
-                  Iterable<
-                      CopyWith_Subscription_watchAllStudyYears_studyYears<
-                          Subscription_watchAllStudyYears_studyYears>>)
-              _fn) =>
-      call(
-          studyYears: _fn(_instance.studyYears
-              .map((e) => CopyWith_Subscription_watchAllStudyYears_studyYears(
-                    e,
-                    (i) => i,
-                  ))).toList());
+    Iterable<Subscription_watchAllStudyYears_studyYears> Function(
+      Iterable<
+        CopyWith_Subscription_watchAllStudyYears_studyYears<
+          Subscription_watchAllStudyYears_studyYears
+        >
+      >,
+    )
+    _fn,
+  ) => call(
+    studyYears: _fn(
+      _instance.studyYears.map(
+        (e) => CopyWith_Subscription_watchAllStudyYears_studyYears(e, (i) => i),
+      ),
+    ).toList(),
+  );
 }
 
 class _CopyWithStubImpl_Subscription_watchAllStudyYears<TRes>
@@ -334,103 +344,111 @@ class _CopyWithStubImpl_Subscription_watchAllStudyYears<TRes>
   studyYears(_fn) => _res;
 }
 
-const documentNodeSubscriptionwatchAllStudyYears = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.subscription,
-    name: NameNode(value: 'watchAllStudyYears'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'where')),
-        type: ListTypeNode(
-          type: NamedTypeNode(
-            name: NameNode(value: 'StudyYearsBoolExp'),
-            isNonNull: true,
+const documentNodeSubscriptionwatchAllStudyYears = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.subscription,
+      name: NameNode(value: 'watchAllStudyYears'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'where')),
+          type: ListTypeNode(
+            type: NamedTypeNode(
+              name: NameNode(value: 'StudyYearsBoolExp'),
+              isNonNull: true,
+            ),
+            isNonNull: false,
           ),
-          isNonNull: false,
+          defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'orderBy')),
-        type: ListTypeNode(
-          type: NamedTypeNode(
-            name: NameNode(value: 'StudyYearsOrderBy'),
-            isNonNull: true,
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'orderBy')),
+          type: ListTypeNode(
+            type: NamedTypeNode(
+              name: NameNode(value: 'StudyYearsOrderBy'),
+              isNonNull: true,
+            ),
+            isNonNull: false,
           ),
-          isNonNull: false,
+          defaultValue: DefaultValueNode(
+            value: ObjectValueNode(
+              fields: [
+                ObjectFieldNode(
+                  name: NameNode(value: 'order'),
+                  value: EnumValueNode(name: NameNode(value: 'ASC')),
+                ),
+              ],
+            ),
+          ),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(
-            value: ObjectValueNode(fields: [
-          ObjectFieldNode(
-            name: NameNode(value: 'order'),
-            value: EnumValueNode(name: NameNode(value: 'ASC')),
-          )
-        ])),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'limit')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'Int'),
-          isNonNull: false,
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'limit')),
+          type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: false),
+          defaultValue: DefaultValueNode(value: IntValueNode(value: '25')),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: IntValueNode(value: '25')),
-        directives: [],
-      ),
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'studyYears'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'where'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: '_and'),
-                value: VariableNode(name: NameNode(value: 'where')),
-              )
-            ]),
-          ),
-          ArgumentNode(
-            name: NameNode(value: 'orderBy'),
-            value: VariableNode(name: NameNode(value: 'orderBy')),
-          ),
-          ArgumentNode(
-            name: NameNode(value: 'limit'),
-            value: VariableNode(name: NameNode(value: 'limit')),
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
+          FieldNode(
+            name: NameNode(value: 'studyYears'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'where'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: '_and'),
+                      value: VariableNode(name: NameNode(value: 'where')),
+                    ),
+                  ],
+                ),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'orderBy'),
+                value: VariableNode(name: NameNode(value: 'orderBy')),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'limit'),
+                value: VariableNode(name: NameNode(value: 'limit')),
+              ),
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FieldNode(
+                  name: NameNode(value: 'order'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: 'name'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
           ),
         ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-            name: NameNode(value: 'order'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'name'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-        ]),
-      )
-    ]),
-  ),
-]);
+      ),
+    ),
+  ],
+);
 
 class Subscription_watchAllStudyYears_studyYears {
   Subscription_watchAllStudyYears_studyYears({
@@ -440,7 +458,8 @@ class Subscription_watchAllStudyYears_studyYears {
   });
 
   factory Subscription_watchAllStudyYears_studyYears.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$order = json['order'];
     final l$name = json['name'];
     final l$$__typename = json['__typename'];
@@ -473,11 +492,7 @@ class Subscription_watchAllStudyYears_studyYears {
     final l$order = order;
     final l$name = name;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$order,
-      l$name,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$order, l$name, l$$__typename]);
   }
 
   @override
@@ -511,11 +526,10 @@ class Subscription_watchAllStudyYears_studyYears {
 extension UtilityExtension_Subscription_watchAllStudyYears_studyYears
     on Subscription_watchAllStudyYears_studyYears {
   CopyWith_Subscription_watchAllStudyYears_studyYears<
-          Subscription_watchAllStudyYears_studyYears>
-      get copyWith => CopyWith_Subscription_watchAllStudyYears_studyYears(
-            this,
-            (i) => i,
-          );
+    Subscription_watchAllStudyYears_studyYears
+  >
+  get copyWith =>
+      CopyWith_Subscription_watchAllStudyYears_studyYears(this, (i) => i);
 }
 
 abstract class CopyWith_Subscription_watchAllStudyYears_studyYears<TRes> {
@@ -527,11 +541,7 @@ abstract class CopyWith_Subscription_watchAllStudyYears_studyYears<TRes> {
   factory CopyWith_Subscription_watchAllStudyYears_studyYears.stub(TRes res) =
       _CopyWithStubImpl_Subscription_watchAllStudyYears_studyYears;
 
-  TRes call({
-    int? order,
-    String? name,
-    String? $__typename,
-  });
+  TRes call({int? order, String? name, String? $__typename});
 }
 
 class _CopyWithImpl_Subscription_watchAllStudyYears_studyYears<TRes>
@@ -551,18 +561,19 @@ class _CopyWithImpl_Subscription_watchAllStudyYears_studyYears<TRes>
     Object? order = _undefined,
     Object? name = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Subscription_watchAllStudyYears_studyYears(
-        order: order == _undefined || order == null
-            ? _instance.order
-            : (order as int),
-        name: name == _undefined || name == null
-            ? _instance.name
-            : (name as String),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Subscription_watchAllStudyYears_studyYears(
+      order: order == _undefined || order == null
+          ? _instance.order
+          : (order as int),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 }
 
 class _CopyWithStubImpl_Subscription_watchAllStudyYears_studyYears<TRes>
@@ -571,10 +582,5 @@ class _CopyWithStubImpl_Subscription_watchAllStudyYears_studyYears<TRes>
 
   TRes _res;
 
-  call({
-    int? order,
-    String? name,
-    String? $__typename,
-  }) =>
-      _res;
+  call({int? order, String? name, String? $__typename}) => _res;
 }

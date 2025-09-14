@@ -7,17 +7,17 @@ class Variables_Subscription_watchAllJobs {
     List<Input_JobsBoolExp>? where,
     List<Input_JobsOrderBy>? orderBy,
     int? limit,
-  }) =>
-      Variables_Subscription_watchAllJobs._({
-        if (where != null) r'where': where,
-        if (orderBy != null) r'orderBy': orderBy,
-        if (limit != null) r'limit': limit,
-      });
+  }) => Variables_Subscription_watchAllJobs._({
+    if (where != null) r'where': where,
+    if (orderBy != null) r'orderBy': orderBy,
+    if (limit != null) r'limit': limit,
+  });
 
   Variables_Subscription_watchAllJobs._(this._$data);
 
   factory Variables_Subscription_watchAllJobs.fromJson(
-      Map<String, dynamic> data) {
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('where')) {
       final l$where = data['where'];
@@ -66,11 +66,9 @@ class Variables_Subscription_watchAllJobs {
   }
 
   CopyWith_Variables_Subscription_watchAllJobs<
-          Variables_Subscription_watchAllJobs>
-      get copyWith => CopyWith_Variables_Subscription_watchAllJobs(
-            this,
-            (i) => i,
-          );
+    Variables_Subscription_watchAllJobs
+  >
+  get copyWith => CopyWith_Variables_Subscription_watchAllJobs(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -138,13 +136,13 @@ class Variables_Subscription_watchAllJobs {
     return Object.hashAll([
       _$data.containsKey('where')
           ? l$where == null
-              ? null
-              : Object.hashAll(l$where.map((v) => v))
+                ? null
+                : Object.hashAll(l$where.map((v) => v))
           : const {},
       _$data.containsKey('orderBy')
           ? l$orderBy == null
-              ? null
-              : Object.hashAll(l$orderBy.map((v) => v))
+                ? null
+                : Object.hashAll(l$orderBy.map((v) => v))
           : const {},
       _$data.containsKey('limit') ? l$limit : const {},
     ]);
@@ -169,10 +167,7 @@ abstract class CopyWith_Variables_Subscription_watchAllJobs<TRes> {
 
 class _CopyWithImpl_Variables_Subscription_watchAllJobs<TRes>
     implements CopyWith_Variables_Subscription_watchAllJobs<TRes> {
-  _CopyWithImpl_Variables_Subscription_watchAllJobs(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Variables_Subscription_watchAllJobs(this._instance, this._then);
 
   final Variables_Subscription_watchAllJobs _instance;
 
@@ -184,14 +179,15 @@ class _CopyWithImpl_Variables_Subscription_watchAllJobs<TRes>
     Object? where = _undefined,
     Object? orderBy = _undefined,
     Object? limit = _undefined,
-  }) =>
-      _then(Variables_Subscription_watchAllJobs._({
-        ..._instance._$data,
-        if (where != _undefined) 'where': (where as List<Input_JobsBoolExp>?),
-        if (orderBy != _undefined)
-          'orderBy': (orderBy as List<Input_JobsOrderBy>?),
-        if (limit != _undefined) 'limit': (limit as int?),
-      }));
+  }) => _then(
+    Variables_Subscription_watchAllJobs._({
+      ..._instance._$data,
+      if (where != _undefined) 'where': (where as List<Input_JobsBoolExp>?),
+      if (orderBy != _undefined)
+        'orderBy': (orderBy as List<Input_JobsOrderBy>?),
+      if (limit != _undefined) 'limit': (limit as int?),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Variables_Subscription_watchAllJobs<TRes>
@@ -204,8 +200,7 @@ class _CopyWithStubImpl_Variables_Subscription_watchAllJobs<TRes>
     List<Input_JobsBoolExp>? where,
     List<Input_JobsOrderBy>? orderBy,
     int? limit,
-  }) =>
-      _res;
+  }) => _res;
 }
 
 class Subscription_watchAllJobs {
@@ -214,10 +209,14 @@ class Subscription_watchAllJobs {
   factory Subscription_watchAllJobs.fromJson(Map<String, dynamic> json) {
     final l$jobs = json['jobs'];
     return Subscription_watchAllJobs(
-        jobs: (l$jobs as List<dynamic>)
-            .map((e) => Subscription_watchAllJobs_jobs.fromJson(
-                (e as Map<String, dynamic>)))
-            .toList());
+      jobs: (l$jobs as List<dynamic>)
+          .map(
+            (e) => Subscription_watchAllJobs_jobs.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
+          .toList(),
+    );
   }
 
   final List<Subscription_watchAllJobs_jobs> jobs;
@@ -263,10 +262,7 @@ class Subscription_watchAllJobs {
 extension UtilityExtension_Subscription_watchAllJobs
     on Subscription_watchAllJobs {
   CopyWith_Subscription_watchAllJobs<Subscription_watchAllJobs> get copyWith =>
-      CopyWith_Subscription_watchAllJobs(
-        this,
-        (i) => i,
-      );
+      CopyWith_Subscription_watchAllJobs(this, (i) => i);
 }
 
 abstract class CopyWith_Subscription_watchAllJobs<TRes> {
@@ -280,19 +276,18 @@ abstract class CopyWith_Subscription_watchAllJobs<TRes> {
 
   TRes call({List<Subscription_watchAllJobs_jobs>? jobs});
   TRes jobs(
-      Iterable<Subscription_watchAllJobs_jobs> Function(
-              Iterable<
-                  CopyWith_Subscription_watchAllJobs_jobs<
-                      Subscription_watchAllJobs_jobs>>)
-          _fn);
+    Iterable<Subscription_watchAllJobs_jobs> Function(
+      Iterable<
+        CopyWith_Subscription_watchAllJobs_jobs<Subscription_watchAllJobs_jobs>
+      >,
+    )
+    _fn,
+  );
 }
 
 class _CopyWithImpl_Subscription_watchAllJobs<TRes>
     implements CopyWith_Subscription_watchAllJobs<TRes> {
-  _CopyWithImpl_Subscription_watchAllJobs(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Subscription_watchAllJobs(this._instance, this._then);
 
   final Subscription_watchAllJobs _instance;
 
@@ -300,23 +295,28 @@ class _CopyWithImpl_Subscription_watchAllJobs<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? jobs = _undefined}) => _then(Subscription_watchAllJobs(
+  TRes call({Object? jobs = _undefined}) => _then(
+    Subscription_watchAllJobs(
       jobs: jobs == _undefined || jobs == null
           ? _instance.jobs
-          : (jobs as List<Subscription_watchAllJobs_jobs>)));
+          : (jobs as List<Subscription_watchAllJobs_jobs>),
+    ),
+  );
 
   TRes jobs(
-          Iterable<Subscription_watchAllJobs_jobs> Function(
-                  Iterable<
-                      CopyWith_Subscription_watchAllJobs_jobs<
-                          Subscription_watchAllJobs_jobs>>)
-              _fn) =>
-      call(
-          jobs: _fn(
-              _instance.jobs.map((e) => CopyWith_Subscription_watchAllJobs_jobs(
-                    e,
-                    (i) => i,
-                  ))).toList());
+    Iterable<Subscription_watchAllJobs_jobs> Function(
+      Iterable<
+        CopyWith_Subscription_watchAllJobs_jobs<Subscription_watchAllJobs_jobs>
+      >,
+    )
+    _fn,
+  ) => call(
+    jobs: _fn(
+      _instance.jobs.map(
+        (e) => CopyWith_Subscription_watchAllJobs_jobs(e, (i) => i),
+      ),
+    ).toList(),
+  );
 }
 
 class _CopyWithStubImpl_Subscription_watchAllJobs<TRes>
@@ -330,103 +330,111 @@ class _CopyWithStubImpl_Subscription_watchAllJobs<TRes>
   jobs(_fn) => _res;
 }
 
-const documentNodeSubscriptionwatchAllJobs = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.subscription,
-    name: NameNode(value: 'watchAllJobs'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'where')),
-        type: ListTypeNode(
-          type: NamedTypeNode(
-            name: NameNode(value: 'JobsBoolExp'),
-            isNonNull: true,
+const documentNodeSubscriptionwatchAllJobs = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.subscription,
+      name: NameNode(value: 'watchAllJobs'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'where')),
+          type: ListTypeNode(
+            type: NamedTypeNode(
+              name: NameNode(value: 'JobsBoolExp'),
+              isNonNull: true,
+            ),
+            isNonNull: false,
           ),
-          isNonNull: false,
+          defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'orderBy')),
-        type: ListTypeNode(
-          type: NamedTypeNode(
-            name: NameNode(value: 'JobsOrderBy'),
-            isNonNull: true,
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'orderBy')),
+          type: ListTypeNode(
+            type: NamedTypeNode(
+              name: NameNode(value: 'JobsOrderBy'),
+              isNonNull: true,
+            ),
+            isNonNull: false,
           ),
-          isNonNull: false,
+          defaultValue: DefaultValueNode(
+            value: ObjectValueNode(
+              fields: [
+                ObjectFieldNode(
+                  name: NameNode(value: 'name'),
+                  value: EnumValueNode(name: NameNode(value: 'ASC')),
+                ),
+              ],
+            ),
+          ),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(
-            value: ObjectValueNode(fields: [
-          ObjectFieldNode(
-            name: NameNode(value: 'name'),
-            value: EnumValueNode(name: NameNode(value: 'ASC')),
-          )
-        ])),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'limit')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'Int'),
-          isNonNull: false,
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'limit')),
+          type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: false),
+          defaultValue: DefaultValueNode(value: IntValueNode(value: '25')),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: IntValueNode(value: '25')),
-        directives: [],
-      ),
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'jobs'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'where'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: '_and'),
-                value: VariableNode(name: NameNode(value: 'where')),
-              )
-            ]),
-          ),
-          ArgumentNode(
-            name: NameNode(value: 'orderBy'),
-            value: VariableNode(name: NameNode(value: 'orderBy')),
-          ),
-          ArgumentNode(
-            name: NameNode(value: 'limit'),
-            value: VariableNode(name: NameNode(value: 'limit')),
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
+          FieldNode(
+            name: NameNode(value: 'jobs'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'where'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: '_and'),
+                      value: VariableNode(name: NameNode(value: 'where')),
+                    ),
+                  ],
+                ),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'orderBy'),
+                value: VariableNode(name: NameNode(value: 'orderBy')),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'limit'),
+                value: VariableNode(name: NameNode(value: 'limit')),
+              ),
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FieldNode(
+                  name: NameNode(value: 'id'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: 'name'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
           ),
         ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-            name: NameNode(value: 'id'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'name'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-        ]),
-      )
-    ]),
-  ),
-]);
+      ),
+    ),
+  ],
+);
 
 class Subscription_watchAllJobs_jobs {
   Subscription_watchAllJobs_jobs({
@@ -468,11 +476,7 @@ class Subscription_watchAllJobs_jobs {
     final l$id = id;
     final l$name = name;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$id,
-      l$name,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$id, l$name, l$$__typename]);
   }
 
   @override
@@ -506,10 +510,7 @@ class Subscription_watchAllJobs_jobs {
 extension UtilityExtension_Subscription_watchAllJobs_jobs
     on Subscription_watchAllJobs_jobs {
   CopyWith_Subscription_watchAllJobs_jobs<Subscription_watchAllJobs_jobs>
-      get copyWith => CopyWith_Subscription_watchAllJobs_jobs(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Subscription_watchAllJobs_jobs(this, (i) => i);
 }
 
 abstract class CopyWith_Subscription_watchAllJobs_jobs<TRes> {
@@ -521,19 +522,12 @@ abstract class CopyWith_Subscription_watchAllJobs_jobs<TRes> {
   factory CopyWith_Subscription_watchAllJobs_jobs.stub(TRes res) =
       _CopyWithStubImpl_Subscription_watchAllJobs_jobs;
 
-  TRes call({
-    UuidValue? id,
-    String? name,
-    String? $__typename,
-  });
+  TRes call({UuidValue? id, String? name, String? $__typename});
 }
 
 class _CopyWithImpl_Subscription_watchAllJobs_jobs<TRes>
     implements CopyWith_Subscription_watchAllJobs_jobs<TRes> {
-  _CopyWithImpl_Subscription_watchAllJobs_jobs(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Subscription_watchAllJobs_jobs(this._instance, this._then);
 
   final Subscription_watchAllJobs_jobs _instance;
 
@@ -545,16 +539,17 @@ class _CopyWithImpl_Subscription_watchAllJobs_jobs<TRes>
     Object? id = _undefined,
     Object? name = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Subscription_watchAllJobs_jobs(
-        id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
-        name: name == _undefined || name == null
-            ? _instance.name
-            : (name as String),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Subscription_watchAllJobs_jobs(
+      id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 }
 
 class _CopyWithStubImpl_Subscription_watchAllJobs_jobs<TRes>
@@ -563,10 +558,5 @@ class _CopyWithStubImpl_Subscription_watchAllJobs_jobs<TRes>
 
   TRes _res;
 
-  call({
-    UuidValue? id,
-    String? name,
-    String? $__typename,
-  }) =>
-      _res;
+  call({UuidValue? id, String? name, String? $__typename}) => _res;
 }

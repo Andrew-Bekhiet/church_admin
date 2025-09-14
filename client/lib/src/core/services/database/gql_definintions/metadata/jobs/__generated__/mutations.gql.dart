@@ -3,19 +3,18 @@ import 'package:church_admin/src/core/graphql/scalars.dart';
 import 'package:gql/ast.dart';
 
 class Variables_Mutation_createJob {
-  factory Variables_Mutation_createJob(
-          {required Input_JobsInsertInput object}) =>
-      Variables_Mutation_createJob._({
-        r'object': object,
-      });
+  factory Variables_Mutation_createJob({
+    required Input_JobsInsertInput object,
+  }) => Variables_Mutation_createJob._({r'object': object});
 
   Variables_Mutation_createJob._(this._$data);
 
   factory Variables_Mutation_createJob.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     final l$object = data['object'];
-    result$data['object'] =
-        Input_JobsInsertInput.fromJson((l$object as Map<String, dynamic>));
+    result$data['object'] = Input_JobsInsertInput.fromJson(
+      (l$object as Map<String, dynamic>),
+    );
     return Variables_Mutation_createJob._(result$data);
   }
 
@@ -32,10 +31,7 @@ class Variables_Mutation_createJob {
   }
 
   CopyWith_Variables_Mutation_createJob<Variables_Mutation_createJob>
-      get copyWith => CopyWith_Variables_Mutation_createJob(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Variables_Mutation_createJob(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -75,10 +71,7 @@ abstract class CopyWith_Variables_Mutation_createJob<TRes> {
 
 class _CopyWithImpl_Variables_Mutation_createJob<TRes>
     implements CopyWith_Variables_Mutation_createJob<TRes> {
-  _CopyWithImpl_Variables_Mutation_createJob(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Variables_Mutation_createJob(this._instance, this._then);
 
   final Variables_Mutation_createJob _instance;
 
@@ -86,12 +79,13 @@ class _CopyWithImpl_Variables_Mutation_createJob<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? object = _undefined}) =>
-      _then(Variables_Mutation_createJob._({
-        ..._instance._$data,
-        if (object != _undefined && object != null)
-          'object': (object as Input_JobsInsertInput),
-      }));
+  TRes call({Object? object = _undefined}) => _then(
+    Variables_Mutation_createJob._({
+      ..._instance._$data,
+      if (object != _undefined && object != null)
+        'object': (object as Input_JobsInsertInput),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Variables_Mutation_createJob<TRes>
@@ -104,10 +98,7 @@ class _CopyWithStubImpl_Variables_Mutation_createJob<TRes>
 }
 
 class Mutation_createJob {
-  Mutation_createJob({
-    this.insertJobsOne,
-    this.$__typename = 'mutation_root',
-  });
+  Mutation_createJob({this.insertJobsOne, this.$__typename = 'mutation_root'});
 
   factory Mutation_createJob.fromJson(Map<String, dynamic> json) {
     final l$insertJobsOne = json['insertJobsOne'];
@@ -116,7 +107,8 @@ class Mutation_createJob {
       insertJobsOne: l$insertJobsOne == null
           ? null
           : Mutation_createJob_insertJobsOne.fromJson(
-              (l$insertJobsOne as Map<String, dynamic>)),
+              (l$insertJobsOne as Map<String, dynamic>),
+            ),
       $__typename: (l$$__typename as String),
     );
   }
@@ -138,10 +130,7 @@ class Mutation_createJob {
   int get hashCode {
     final l$insertJobsOne = insertJobsOne;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$insertJobsOne,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$insertJobsOne, l$$__typename]);
   }
 
   @override
@@ -168,10 +157,7 @@ class Mutation_createJob {
 
 extension UtilityExtension_Mutation_createJob on Mutation_createJob {
   CopyWith_Mutation_createJob<Mutation_createJob> get copyWith =>
-      CopyWith_Mutation_createJob(
-        this,
-        (i) => i,
-      );
+      CopyWith_Mutation_createJob(this, (i) => i);
 }
 
 abstract class CopyWith_Mutation_createJob<TRes> {
@@ -192,10 +178,7 @@ abstract class CopyWith_Mutation_createJob<TRes> {
 
 class _CopyWithImpl_Mutation_createJob<TRes>
     implements CopyWith_Mutation_createJob<TRes> {
-  _CopyWithImpl_Mutation_createJob(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Mutation_createJob(this._instance, this._then);
 
   final Mutation_createJob _instance;
 
@@ -206,22 +189,25 @@ class _CopyWithImpl_Mutation_createJob<TRes>
   TRes call({
     Object? insertJobsOne = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Mutation_createJob(
-        insertJobsOne: insertJobsOne == _undefined
-            ? _instance.insertJobsOne
-            : (insertJobsOne as Mutation_createJob_insertJobsOne?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Mutation_createJob(
+      insertJobsOne: insertJobsOne == _undefined
+          ? _instance.insertJobsOne
+          : (insertJobsOne as Mutation_createJob_insertJobsOne?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   CopyWith_Mutation_createJob_insertJobsOne<TRes> get insertJobsOne {
     final local$insertJobsOne = _instance.insertJobsOne;
     return local$insertJobsOne == null
         ? CopyWith_Mutation_createJob_insertJobsOne.stub(_then(_instance))
         : CopyWith_Mutation_createJob_insertJobsOne(
-            local$insertJobsOne, (e) => call(insertJobsOne: e));
+            local$insertJobsOne,
+            (e) => call(insertJobsOne: e),
+          );
   }
 }
 
@@ -234,67 +220,83 @@ class _CopyWithStubImpl_Mutation_createJob<TRes>
   call({
     Mutation_createJob_insertJobsOne? insertJobsOne,
     String? $__typename,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Mutation_createJob_insertJobsOne<TRes> get insertJobsOne =>
       CopyWith_Mutation_createJob_insertJobsOne.stub(_res);
 }
 
-const documentNodeMutationcreateJob = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.mutation,
-    name: NameNode(value: 'createJob'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'object')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'JobsInsertInput'),
-          isNonNull: true,
+const documentNodeMutationcreateJob = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.mutation,
+      name: NameNode(value: 'createJob'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'object')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'JobsInsertInput'),
+            isNonNull: true,
+          ),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      )
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'insertJobsOne'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'object'),
-            value: VariableNode(name: NameNode(value: 'object')),
-          ),
-          ArgumentNode(
-            name: NameNode(value: 'onConflict'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'constraint'),
-                value: EnumValueNode(name: NameNode(value: 'jobs_name_key')),
-              ),
-              ObjectFieldNode(
-                name: NameNode(value: 'updateColumns'),
-                value: EnumValueNode(name: NameNode(value: 'name')),
-              ),
-            ]),
-          ),
-        ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
           FieldNode(
-            name: NameNode(value: 'id'),
+            name: NameNode(value: 'insertJobsOne'),
             alias: null,
-            arguments: [],
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'object'),
+                value: VariableNode(name: NameNode(value: 'object')),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'onConflict'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'constraint'),
+                      value: EnumValueNode(
+                        name: NameNode(value: 'jobs_name_key'),
+                      ),
+                    ),
+                    ObjectFieldNode(
+                      name: NameNode(value: 'updateColumns'),
+                      value: EnumValueNode(name: NameNode(value: 'name')),
+                    ),
+                  ],
+                ),
+              ),
+            ],
             directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'name'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
+            selectionSet: SelectionSetNode(
+              selections: [
+                FieldNode(
+                  name: NameNode(value: 'id'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: 'name'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
           ),
           FieldNode(
             name: NameNode(value: '__typename'),
@@ -303,18 +305,11 @@ const documentNodeMutationcreateJob = DocumentNode(definitions: [
             directives: [],
             selectionSet: null,
           ),
-        ]),
+        ],
       ),
-      FieldNode(
-        name: NameNode(value: '__typename'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-    ]),
-  ),
-]);
+    ),
+  ],
+);
 
 class Mutation_createJob_insertJobsOne {
   Mutation_createJob_insertJobsOne({
@@ -356,11 +351,7 @@ class Mutation_createJob_insertJobsOne {
     final l$id = id;
     final l$name = name;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$id,
-      l$name,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$id, l$name, l$$__typename]);
   }
 
   @override
@@ -394,10 +385,7 @@ class Mutation_createJob_insertJobsOne {
 extension UtilityExtension_Mutation_createJob_insertJobsOne
     on Mutation_createJob_insertJobsOne {
   CopyWith_Mutation_createJob_insertJobsOne<Mutation_createJob_insertJobsOne>
-      get copyWith => CopyWith_Mutation_createJob_insertJobsOne(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Mutation_createJob_insertJobsOne(this, (i) => i);
 }
 
 abstract class CopyWith_Mutation_createJob_insertJobsOne<TRes> {
@@ -409,19 +397,12 @@ abstract class CopyWith_Mutation_createJob_insertJobsOne<TRes> {
   factory CopyWith_Mutation_createJob_insertJobsOne.stub(TRes res) =
       _CopyWithStubImpl_Mutation_createJob_insertJobsOne;
 
-  TRes call({
-    UuidValue? id,
-    String? name,
-    String? $__typename,
-  });
+  TRes call({UuidValue? id, String? name, String? $__typename});
 }
 
 class _CopyWithImpl_Mutation_createJob_insertJobsOne<TRes>
     implements CopyWith_Mutation_createJob_insertJobsOne<TRes> {
-  _CopyWithImpl_Mutation_createJob_insertJobsOne(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Mutation_createJob_insertJobsOne(this._instance, this._then);
 
   final Mutation_createJob_insertJobsOne _instance;
 
@@ -433,16 +414,17 @@ class _CopyWithImpl_Mutation_createJob_insertJobsOne<TRes>
     Object? id = _undefined,
     Object? name = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Mutation_createJob_insertJobsOne(
-        id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
-        name: name == _undefined || name == null
-            ? _instance.name
-            : (name as String),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Mutation_createJob_insertJobsOne(
+      id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 }
 
 class _CopyWithStubImpl_Mutation_createJob_insertJobsOne<TRes>
@@ -451,10 +433,5 @@ class _CopyWithStubImpl_Mutation_createJob_insertJobsOne<TRes>
 
   TRes _res;
 
-  call({
-    UuidValue? id,
-    String? name,
-    String? $__typename,
-  }) =>
-      _res;
+  call({UuidValue? id, String? name, String? $__typename}) => _res;
 }

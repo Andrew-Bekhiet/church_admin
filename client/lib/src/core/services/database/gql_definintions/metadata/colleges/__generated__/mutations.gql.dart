@@ -3,19 +3,18 @@ import 'package:church_admin/src/core/graphql/scalars.dart';
 import 'package:gql/ast.dart';
 
 class Variables_Mutation_createCollege {
-  factory Variables_Mutation_createCollege(
-          {required Input_CollegesInsertInput object}) =>
-      Variables_Mutation_createCollege._({
-        r'object': object,
-      });
+  factory Variables_Mutation_createCollege({
+    required Input_CollegesInsertInput object,
+  }) => Variables_Mutation_createCollege._({r'object': object});
 
   Variables_Mutation_createCollege._(this._$data);
 
   factory Variables_Mutation_createCollege.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     final l$object = data['object'];
-    result$data['object'] =
-        Input_CollegesInsertInput.fromJson((l$object as Map<String, dynamic>));
+    result$data['object'] = Input_CollegesInsertInput.fromJson(
+      (l$object as Map<String, dynamic>),
+    );
     return Variables_Mutation_createCollege._(result$data);
   }
 
@@ -32,10 +31,7 @@ class Variables_Mutation_createCollege {
   }
 
   CopyWith_Variables_Mutation_createCollege<Variables_Mutation_createCollege>
-      get copyWith => CopyWith_Variables_Mutation_createCollege(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Variables_Mutation_createCollege(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -75,10 +71,7 @@ abstract class CopyWith_Variables_Mutation_createCollege<TRes> {
 
 class _CopyWithImpl_Variables_Mutation_createCollege<TRes>
     implements CopyWith_Variables_Mutation_createCollege<TRes> {
-  _CopyWithImpl_Variables_Mutation_createCollege(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Variables_Mutation_createCollege(this._instance, this._then);
 
   final Variables_Mutation_createCollege _instance;
 
@@ -86,12 +79,13 @@ class _CopyWithImpl_Variables_Mutation_createCollege<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? object = _undefined}) =>
-      _then(Variables_Mutation_createCollege._({
-        ..._instance._$data,
-        if (object != _undefined && object != null)
-          'object': (object as Input_CollegesInsertInput),
-      }));
+  TRes call({Object? object = _undefined}) => _then(
+    Variables_Mutation_createCollege._({
+      ..._instance._$data,
+      if (object != _undefined && object != null)
+        'object': (object as Input_CollegesInsertInput),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Variables_Mutation_createCollege<TRes>
@@ -116,7 +110,8 @@ class Mutation_createCollege {
       insertCollegesOne: l$insertCollegesOne == null
           ? null
           : Mutation_createCollege_insertCollegesOne.fromJson(
-              (l$insertCollegesOne as Map<String, dynamic>)),
+              (l$insertCollegesOne as Map<String, dynamic>),
+            ),
       $__typename: (l$$__typename as String),
     );
   }
@@ -138,10 +133,7 @@ class Mutation_createCollege {
   int get hashCode {
     final l$insertCollegesOne = insertCollegesOne;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$insertCollegesOne,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$insertCollegesOne, l$$__typename]);
   }
 
   @override
@@ -168,10 +160,7 @@ class Mutation_createCollege {
 
 extension UtilityExtension_Mutation_createCollege on Mutation_createCollege {
   CopyWith_Mutation_createCollege<Mutation_createCollege> get copyWith =>
-      CopyWith_Mutation_createCollege(
-        this,
-        (i) => i,
-      );
+      CopyWith_Mutation_createCollege(this, (i) => i);
 }
 
 abstract class CopyWith_Mutation_createCollege<TRes> {
@@ -192,10 +181,7 @@ abstract class CopyWith_Mutation_createCollege<TRes> {
 
 class _CopyWithImpl_Mutation_createCollege<TRes>
     implements CopyWith_Mutation_createCollege<TRes> {
-  _CopyWithImpl_Mutation_createCollege(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Mutation_createCollege(this._instance, this._then);
 
   final Mutation_createCollege _instance;
 
@@ -206,24 +192,28 @@ class _CopyWithImpl_Mutation_createCollege<TRes>
   TRes call({
     Object? insertCollegesOne = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Mutation_createCollege(
-        insertCollegesOne: insertCollegesOne == _undefined
-            ? _instance.insertCollegesOne
-            : (insertCollegesOne as Mutation_createCollege_insertCollegesOne?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Mutation_createCollege(
+      insertCollegesOne: insertCollegesOne == _undefined
+          ? _instance.insertCollegesOne
+          : (insertCollegesOne as Mutation_createCollege_insertCollegesOne?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   CopyWith_Mutation_createCollege_insertCollegesOne<TRes>
-      get insertCollegesOne {
+  get insertCollegesOne {
     final local$insertCollegesOne = _instance.insertCollegesOne;
     return local$insertCollegesOne == null
         ? CopyWith_Mutation_createCollege_insertCollegesOne.stub(
-            _then(_instance))
+            _then(_instance),
+          )
         : CopyWith_Mutation_createCollege_insertCollegesOne(
-            local$insertCollegesOne, (e) => call(insertCollegesOne: e));
+            local$insertCollegesOne,
+            (e) => call(insertCollegesOne: e),
+          );
   }
 }
 
@@ -236,69 +226,84 @@ class _CopyWithStubImpl_Mutation_createCollege<TRes>
   call({
     Mutation_createCollege_insertCollegesOne? insertCollegesOne,
     String? $__typename,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Mutation_createCollege_insertCollegesOne<TRes>
-      get insertCollegesOne =>
-          CopyWith_Mutation_createCollege_insertCollegesOne.stub(_res);
+  get insertCollegesOne =>
+      CopyWith_Mutation_createCollege_insertCollegesOne.stub(_res);
 }
 
-const documentNodeMutationcreateCollege = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.mutation,
-    name: NameNode(value: 'createCollege'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'object')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'CollegesInsertInput'),
-          isNonNull: true,
+const documentNodeMutationcreateCollege = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.mutation,
+      name: NameNode(value: 'createCollege'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'object')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'CollegesInsertInput'),
+            isNonNull: true,
+          ),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      )
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'insertCollegesOne'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'object'),
-            value: VariableNode(name: NameNode(value: 'object')),
-          ),
-          ArgumentNode(
-            name: NameNode(value: 'onConflict'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'constraint'),
-                value:
-                    EnumValueNode(name: NameNode(value: 'colleges_name_key')),
-              ),
-              ObjectFieldNode(
-                name: NameNode(value: 'updateColumns'),
-                value: EnumValueNode(name: NameNode(value: 'name')),
-              ),
-            ]),
-          ),
-        ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
           FieldNode(
-            name: NameNode(value: 'id'),
+            name: NameNode(value: 'insertCollegesOne'),
             alias: null,
-            arguments: [],
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'object'),
+                value: VariableNode(name: NameNode(value: 'object')),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'onConflict'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'constraint'),
+                      value: EnumValueNode(
+                        name: NameNode(value: 'colleges_name_key'),
+                      ),
+                    ),
+                    ObjectFieldNode(
+                      name: NameNode(value: 'updateColumns'),
+                      value: EnumValueNode(name: NameNode(value: 'name')),
+                    ),
+                  ],
+                ),
+              ),
+            ],
             directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'name'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
+            selectionSet: SelectionSetNode(
+              selections: [
+                FieldNode(
+                  name: NameNode(value: 'id'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: 'name'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
           ),
           FieldNode(
             name: NameNode(value: '__typename'),
@@ -307,18 +312,11 @@ const documentNodeMutationcreateCollege = DocumentNode(definitions: [
             directives: [],
             selectionSet: null,
           ),
-        ]),
+        ],
       ),
-      FieldNode(
-        name: NameNode(value: '__typename'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-    ]),
-  ),
-]);
+    ),
+  ],
+);
 
 class Mutation_createCollege_insertCollegesOne {
   Mutation_createCollege_insertCollegesOne({
@@ -328,7 +326,8 @@ class Mutation_createCollege_insertCollegesOne {
   });
 
   factory Mutation_createCollege_insertCollegesOne.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$id = json['id'];
     final l$name = json['name'];
     final l$$__typename = json['__typename'];
@@ -361,11 +360,7 @@ class Mutation_createCollege_insertCollegesOne {
     final l$id = id;
     final l$name = name;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$id,
-      l$name,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$id, l$name, l$$__typename]);
   }
 
   @override
@@ -399,11 +394,10 @@ class Mutation_createCollege_insertCollegesOne {
 extension UtilityExtension_Mutation_createCollege_insertCollegesOne
     on Mutation_createCollege_insertCollegesOne {
   CopyWith_Mutation_createCollege_insertCollegesOne<
-          Mutation_createCollege_insertCollegesOne>
-      get copyWith => CopyWith_Mutation_createCollege_insertCollegesOne(
-            this,
-            (i) => i,
-          );
+    Mutation_createCollege_insertCollegesOne
+  >
+  get copyWith =>
+      CopyWith_Mutation_createCollege_insertCollegesOne(this, (i) => i);
 }
 
 abstract class CopyWith_Mutation_createCollege_insertCollegesOne<TRes> {
@@ -415,11 +409,7 @@ abstract class CopyWith_Mutation_createCollege_insertCollegesOne<TRes> {
   factory CopyWith_Mutation_createCollege_insertCollegesOne.stub(TRes res) =
       _CopyWithStubImpl_Mutation_createCollege_insertCollegesOne;
 
-  TRes call({
-    UuidValue? id,
-    String? name,
-    String? $__typename,
-  });
+  TRes call({UuidValue? id, String? name, String? $__typename});
 }
 
 class _CopyWithImpl_Mutation_createCollege_insertCollegesOne<TRes>
@@ -439,16 +429,17 @@ class _CopyWithImpl_Mutation_createCollege_insertCollegesOne<TRes>
     Object? id = _undefined,
     Object? name = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Mutation_createCollege_insertCollegesOne(
-        id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
-        name: name == _undefined || name == null
-            ? _instance.name
-            : (name as String),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Mutation_createCollege_insertCollegesOne(
+      id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 }
 
 class _CopyWithStubImpl_Mutation_createCollege_insertCollegesOne<TRes>
@@ -457,10 +448,5 @@ class _CopyWithStubImpl_Mutation_createCollege_insertCollegesOne<TRes>
 
   TRes _res;
 
-  call({
-    UuidValue? id,
-    String? name,
-    String? $__typename,
-  }) =>
-      _res;
+  call({UuidValue? id, String? name, String? $__typename}) => _res;
 }

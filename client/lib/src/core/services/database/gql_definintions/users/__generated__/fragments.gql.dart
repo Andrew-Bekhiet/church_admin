@@ -29,8 +29,9 @@ class Fragment_User implements Fragment_UserNoPhoto {
       name: (l$name as String),
       email: (l$email as String),
       $__typename: (l$$__typename as String),
-      photoUpdatedAt:
-          l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
+      photoUpdatedAt: l$photoUpdatedAt == null
+          ? null
+          : tstzFromString(l$photoUpdatedAt),
       blurhash: (l$blurhash as String?),
     );
   }
@@ -58,8 +59,9 @@ class Fragment_User implements Fragment_UserNoPhoto {
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
-    _resultData['photoUpdatedAt'] =
-        l$photoUpdatedAt == null ? null : tstzToString(l$photoUpdatedAt);
+    _resultData['photoUpdatedAt'] = l$photoUpdatedAt == null
+        ? null
+        : tstzToString(l$photoUpdatedAt);
     final l$blurhash = blurhash;
     _resultData['blurhash'] = l$blurhash;
     return _resultData;
@@ -126,10 +128,8 @@ class Fragment_User implements Fragment_UserNoPhoto {
 }
 
 extension UtilityExtension_Fragment_User on Fragment_User {
-  CopyWith_Fragment_User<Fragment_User> get copyWith => CopyWith_Fragment_User(
-        this,
-        (i) => i,
-      );
+  CopyWith_Fragment_User<Fragment_User> get copyWith =>
+      CopyWith_Fragment_User(this, (i) => i);
 }
 
 abstract class CopyWith_Fragment_User<TRes> {
@@ -153,10 +153,7 @@ abstract class CopyWith_Fragment_User<TRes> {
 
 class _CopyWithImpl_Fragment_User<TRes>
     implements CopyWith_Fragment_User<TRes> {
-  _CopyWithImpl_Fragment_User(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Fragment_User(this._instance, this._then);
 
   final Fragment_User _instance;
 
@@ -171,26 +168,28 @@ class _CopyWithImpl_Fragment_User<TRes>
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? blurhash = _undefined,
-  }) =>
-      _then(Fragment_User(
-        uid: uid == _undefined || uid == null
-            ? _instance.uid
-            : (uid as UuidValue),
-        name: name == _undefined || name == null
-            ? _instance.name
-            : (name as String),
-        email: email == _undefined || email == null
-            ? _instance.email
-            : (email as String),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-        photoUpdatedAt: photoUpdatedAt == _undefined
-            ? _instance.photoUpdatedAt
-            : (photoUpdatedAt as DateTime?),
-        blurhash:
-            blurhash == _undefined ? _instance.blurhash : (blurhash as String?),
-      ));
+  }) => _then(
+    Fragment_User(
+      uid: uid == _undefined || uid == null
+          ? _instance.uid
+          : (uid as UuidValue),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      email: email == _undefined || email == null
+          ? _instance.email
+          : (email as String),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+      photoUpdatedAt: photoUpdatedAt == _undefined
+          ? _instance.photoUpdatedAt
+          : (photoUpdatedAt as DateTime?),
+      blurhash: blurhash == _undefined
+          ? _instance.blurhash
+          : (blurhash as String?),
+    ),
+  );
 }
 
 class _CopyWithStubImpl_Fragment_User<TRes>
@@ -206,50 +205,48 @@ class _CopyWithStubImpl_Fragment_User<TRes>
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
-  }) =>
-      _res;
+  }) => _res;
 }
 
 const fragmentDefinitionUser = FragmentDefinitionNode(
   name: NameNode(value: 'User'),
   typeCondition: TypeConditionNode(
-      on: NamedTypeNode(
-    name: NameNode(value: 'AuthUsersData'),
-    isNonNull: false,
-  )),
+    on: NamedTypeNode(name: NameNode(value: 'AuthUsersData'), isNonNull: false),
+  ),
   directives: [],
-  selectionSet: SelectionSetNode(selections: [
-    FragmentSpreadNode(
-      name: NameNode(value: 'UserNoPhoto'),
-      directives: [],
-    ),
-    FieldNode(
-      name: NameNode(value: 'photoUpdatedAt'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-    FieldNode(
-      name: NameNode(value: 'blurhash'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-    FieldNode(
-      name: NameNode(value: '__typename'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-  ]),
+  selectionSet: SelectionSetNode(
+    selections: [
+      FragmentSpreadNode(
+        name: NameNode(value: 'UserNoPhoto'),
+        directives: [],
+      ),
+      FieldNode(
+        name: NameNode(value: 'photoUpdatedAt'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'blurhash'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ],
+  ),
 );
-const documentNodeFragmentUser = DocumentNode(definitions: [
-  fragmentDefinitionUser,
-  fragmentDefinitionUserNoPhoto,
-]);
+const documentNodeFragmentUser = DocumentNode(
+  definitions: [fragmentDefinitionUser, fragmentDefinitionUserNoPhoto],
+);
 
 class Fragment_UserNoPhoto {
   Fragment_UserNoPhoto({
@@ -299,12 +296,7 @@ class Fragment_UserNoPhoto {
     final l$name = name;
     final l$email = email;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$uid,
-      l$name,
-      l$email,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$uid, l$name, l$email, l$$__typename]);
   }
 
   @override
@@ -341,10 +333,7 @@ class Fragment_UserNoPhoto {
 
 extension UtilityExtension_Fragment_UserNoPhoto on Fragment_UserNoPhoto {
   CopyWith_Fragment_UserNoPhoto<Fragment_UserNoPhoto> get copyWith =>
-      CopyWith_Fragment_UserNoPhoto(
-        this,
-        (i) => i,
-      );
+      CopyWith_Fragment_UserNoPhoto(this, (i) => i);
 }
 
 abstract class CopyWith_Fragment_UserNoPhoto<TRes> {
@@ -356,20 +345,12 @@ abstract class CopyWith_Fragment_UserNoPhoto<TRes> {
   factory CopyWith_Fragment_UserNoPhoto.stub(TRes res) =
       _CopyWithStubImpl_Fragment_UserNoPhoto;
 
-  TRes call({
-    UuidValue? uid,
-    String? name,
-    String? email,
-    String? $__typename,
-  });
+  TRes call({UuidValue? uid, String? name, String? email, String? $__typename});
 }
 
 class _CopyWithImpl_Fragment_UserNoPhoto<TRes>
     implements CopyWith_Fragment_UserNoPhoto<TRes> {
-  _CopyWithImpl_Fragment_UserNoPhoto(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Fragment_UserNoPhoto(this._instance, this._then);
 
   final Fragment_UserNoPhoto _instance;
 
@@ -382,21 +363,22 @@ class _CopyWithImpl_Fragment_UserNoPhoto<TRes>
     Object? name = _undefined,
     Object? email = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Fragment_UserNoPhoto(
-        uid: uid == _undefined || uid == null
-            ? _instance.uid
-            : (uid as UuidValue),
-        name: name == _undefined || name == null
-            ? _instance.name
-            : (name as String),
-        email: email == _undefined || email == null
-            ? _instance.email
-            : (email as String),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Fragment_UserNoPhoto(
+      uid: uid == _undefined || uid == null
+          ? _instance.uid
+          : (uid as UuidValue),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      email: email == _undefined || email == null
+          ? _instance.email
+          : (email as String),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 }
 
 class _CopyWithStubImpl_Fragment_UserNoPhoto<TRes>
@@ -405,57 +387,52 @@ class _CopyWithStubImpl_Fragment_UserNoPhoto<TRes>
 
   TRes _res;
 
-  call({
-    UuidValue? uid,
-    String? name,
-    String? email,
-    String? $__typename,
-  }) =>
+  call({UuidValue? uid, String? name, String? email, String? $__typename}) =>
       _res;
 }
 
 const fragmentDefinitionUserNoPhoto = FragmentDefinitionNode(
   name: NameNode(value: 'UserNoPhoto'),
   typeCondition: TypeConditionNode(
-      on: NamedTypeNode(
-    name: NameNode(value: 'AuthUsersData'),
-    isNonNull: false,
-  )),
+    on: NamedTypeNode(name: NameNode(value: 'AuthUsersData'), isNonNull: false),
+  ),
   directives: [],
-  selectionSet: SelectionSetNode(selections: [
-    FieldNode(
-      name: NameNode(value: 'uid'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-    FieldNode(
-      name: NameNode(value: 'name'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-    FieldNode(
-      name: NameNode(value: 'email'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-    FieldNode(
-      name: NameNode(value: '__typename'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-  ]),
+  selectionSet: SelectionSetNode(
+    selections: [
+      FieldNode(
+        name: NameNode(value: 'uid'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'name'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'email'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ],
+  ),
 );
-const documentNodeFragmentUserNoPhoto = DocumentNode(definitions: [
-  fragmentDefinitionUserNoPhoto,
-]);
+const documentNodeFragmentUserNoPhoto = DocumentNode(
+  definitions: [fragmentDefinitionUserNoPhoto],
+);
 
 class Fragment_UserOverview
     implements Fragment_User, Fragment_UserNoPhoto, Fragment_UserPermissions {
@@ -484,17 +461,22 @@ class Fragment_UserOverview
       name: (l$name as String),
       email: (l$email as String),
       $__typename: (l$$__typename as String),
-      photoUpdatedAt:
-          l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
+      photoUpdatedAt: l$photoUpdatedAt == null
+          ? null
+          : tstzFromString(l$photoUpdatedAt),
       blurhash: (l$blurhash as String?),
       permissions: (l$permissions as List<dynamic>)
-          .map((e) => Fragment_UserOverview_permissions.fromJson(
-              (e as Map<String, dynamic>)))
+          .map(
+            (e) => Fragment_UserOverview_permissions.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
           .toList(),
       person: l$person == null
           ? null
           : Fragment_UserOverview_person.fromJson(
-              (l$person as Map<String, dynamic>)),
+              (l$person as Map<String, dynamic>),
+            ),
     );
   }
 
@@ -525,8 +507,9 @@ class Fragment_UserOverview
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
-    _resultData['photoUpdatedAt'] =
-        l$photoUpdatedAt == null ? null : tstzToString(l$photoUpdatedAt);
+    _resultData['photoUpdatedAt'] = l$photoUpdatedAt == null
+        ? null
+        : tstzToString(l$photoUpdatedAt);
     final l$blurhash = blurhash;
     _resultData['blurhash'] = l$blurhash;
     final l$permissions = permissions;
@@ -619,10 +602,7 @@ class Fragment_UserOverview
 
 extension UtilityExtension_Fragment_UserOverview on Fragment_UserOverview {
   CopyWith_Fragment_UserOverview<Fragment_UserOverview> get copyWith =>
-      CopyWith_Fragment_UserOverview(
-        this,
-        (i) => i,
-      );
+      CopyWith_Fragment_UserOverview(this, (i) => i);
 }
 
 abstract class CopyWith_Fragment_UserOverview<TRes> {
@@ -645,20 +625,21 @@ abstract class CopyWith_Fragment_UserOverview<TRes> {
     Fragment_UserOverview_person? person,
   });
   TRes permissions(
-      Iterable<Fragment_UserOverview_permissions> Function(
-              Iterable<
-                  CopyWith_Fragment_UserOverview_permissions<
-                      Fragment_UserOverview_permissions>>)
-          _fn);
+    Iterable<Fragment_UserOverview_permissions> Function(
+      Iterable<
+        CopyWith_Fragment_UserOverview_permissions<
+          Fragment_UserOverview_permissions
+        >
+      >,
+    )
+    _fn,
+  );
   CopyWith_Fragment_UserOverview_person<TRes> get person;
 }
 
 class _CopyWithImpl_Fragment_UserOverview<TRes>
     implements CopyWith_Fragment_UserOverview<TRes> {
-  _CopyWithImpl_Fragment_UserOverview(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Fragment_UserOverview(this._instance, this._then);
 
   final Fragment_UserOverview _instance;
 
@@ -675,52 +656,60 @@ class _CopyWithImpl_Fragment_UserOverview<TRes>
     Object? blurhash = _undefined,
     Object? permissions = _undefined,
     Object? person = _undefined,
-  }) =>
-      _then(Fragment_UserOverview(
-        uid: uid == _undefined || uid == null
-            ? _instance.uid
-            : (uid as UuidValue),
-        name: name == _undefined || name == null
-            ? _instance.name
-            : (name as String),
-        email: email == _undefined || email == null
-            ? _instance.email
-            : (email as String),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-        photoUpdatedAt: photoUpdatedAt == _undefined
-            ? _instance.photoUpdatedAt
-            : (photoUpdatedAt as DateTime?),
-        blurhash:
-            blurhash == _undefined ? _instance.blurhash : (blurhash as String?),
-        permissions: permissions == _undefined || permissions == null
-            ? _instance.permissions
-            : (permissions as List<Fragment_UserOverview_permissions>),
-        person: person == _undefined
-            ? _instance.person
-            : (person as Fragment_UserOverview_person?),
-      ));
+  }) => _then(
+    Fragment_UserOverview(
+      uid: uid == _undefined || uid == null
+          ? _instance.uid
+          : (uid as UuidValue),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      email: email == _undefined || email == null
+          ? _instance.email
+          : (email as String),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+      photoUpdatedAt: photoUpdatedAt == _undefined
+          ? _instance.photoUpdatedAt
+          : (photoUpdatedAt as DateTime?),
+      blurhash: blurhash == _undefined
+          ? _instance.blurhash
+          : (blurhash as String?),
+      permissions: permissions == _undefined || permissions == null
+          ? _instance.permissions
+          : (permissions as List<Fragment_UserOverview_permissions>),
+      person: person == _undefined
+          ? _instance.person
+          : (person as Fragment_UserOverview_person?),
+    ),
+  );
 
   TRes permissions(
-          Iterable<Fragment_UserOverview_permissions> Function(
-                  Iterable<
-                      CopyWith_Fragment_UserOverview_permissions<
-                          Fragment_UserOverview_permissions>>)
-              _fn) =>
-      call(
-          permissions: _fn(_instance.permissions
-              .map((e) => CopyWith_Fragment_UserOverview_permissions(
-                    e,
-                    (i) => i,
-                  ))).toList());
+    Iterable<Fragment_UserOverview_permissions> Function(
+      Iterable<
+        CopyWith_Fragment_UserOverview_permissions<
+          Fragment_UserOverview_permissions
+        >
+      >,
+    )
+    _fn,
+  ) => call(
+    permissions: _fn(
+      _instance.permissions.map(
+        (e) => CopyWith_Fragment_UserOverview_permissions(e, (i) => i),
+      ),
+    ).toList(),
+  );
 
   CopyWith_Fragment_UserOverview_person<TRes> get person {
     final local$person = _instance.person;
     return local$person == null
         ? CopyWith_Fragment_UserOverview_person.stub(_then(_instance))
         : CopyWith_Fragment_UserOverview_person(
-            local$person, (e) => call(person: e));
+            local$person,
+            (e) => call(person: e),
+          );
   }
 }
 
@@ -739,8 +728,7 @@ class _CopyWithStubImpl_Fragment_UserOverview<TRes>
     String? blurhash,
     List<Fragment_UserOverview_permissions>? permissions,
     Fragment_UserOverview_person? person,
-  }) =>
-      _res;
+  }) => _res;
 
   permissions(_fn) => _res;
 
@@ -751,46 +739,78 @@ class _CopyWithStubImpl_Fragment_UserOverview<TRes>
 const fragmentDefinitionUserOverview = FragmentDefinitionNode(
   name: NameNode(value: 'UserOverview'),
   typeCondition: TypeConditionNode(
-      on: NamedTypeNode(
-    name: NameNode(value: 'AuthUsersData'),
-    isNonNull: false,
-  )),
+    on: NamedTypeNode(name: NameNode(value: 'AuthUsersData'), isNonNull: false),
+  ),
   directives: [],
-  selectionSet: SelectionSetNode(selections: [
-    FragmentSpreadNode(
-      name: NameNode(value: 'User'),
-      directives: [],
-    ),
-    FieldNode(
-      name: NameNode(value: 'email'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-    FragmentSpreadNode(
-      name: NameNode(value: 'UserPermissions'),
-      directives: [],
-    ),
-    FieldNode(
-      name: NameNode(value: 'person'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
-        FragmentSpreadNode(
-          name: NameNode(value: 'Person'),
-          directives: [],
-        ),
-        FieldNode(
-          name: NameNode(value: 'lastKodas'),
-          alias: null,
-          arguments: [],
-          directives: [],
-          selectionSet: SelectionSetNode(selections: [
+  selectionSet: SelectionSetNode(
+    selections: [
+      FragmentSpreadNode(
+        name: NameNode(value: 'User'),
+        directives: [],
+      ),
+      FieldNode(
+        name: NameNode(value: 'email'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FragmentSpreadNode(
+        name: NameNode(value: 'UserPermissions'),
+        directives: [],
+      ),
+      FieldNode(
+        name: NameNode(value: 'person'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(
+          selections: [
             FragmentSpreadNode(
-              name: NameNode(value: 'LatestKodasHistory'),
+              name: NameNode(value: 'Person'),
               directives: [],
+            ),
+            FieldNode(
+              name: NameNode(value: 'lastKodas'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: SelectionSetNode(
+                selections: [
+                  FragmentSpreadNode(
+                    name: NameNode(value: 'LatestKodasHistory'),
+                    directives: [],
+                  ),
+                  FieldNode(
+                    name: NameNode(value: '__typename'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                ],
+              ),
+            ),
+            FieldNode(
+              name: NameNode(value: 'lastConfession'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: SelectionSetNode(
+                selections: [
+                  FragmentSpreadNode(
+                    name: NameNode(value: 'LatestConfessionHistory'),
+                    directives: [],
+                  ),
+                  FieldNode(
+                    name: NameNode(value: '__typename'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                ],
+              ),
             ),
             FieldNode(
               name: NameNode(value: '__typename'),
@@ -799,55 +819,31 @@ const fragmentDefinitionUserOverview = FragmentDefinitionNode(
               directives: [],
               selectionSet: null,
             ),
-          ]),
+          ],
         ),
-        FieldNode(
-          name: NameNode(value: 'lastConfession'),
-          alias: null,
-          arguments: [],
-          directives: [],
-          selectionSet: SelectionSetNode(selections: [
-            FragmentSpreadNode(
-              name: NameNode(value: 'LatestConfessionHistory'),
-              directives: [],
-            ),
-            FieldNode(
-              name: NameNode(value: '__typename'),
-              alias: null,
-              arguments: [],
-              directives: [],
-              selectionSet: null,
-            ),
-          ]),
-        ),
-        FieldNode(
-          name: NameNode(value: '__typename'),
-          alias: null,
-          arguments: [],
-          directives: [],
-          selectionSet: null,
-        ),
-      ]),
-    ),
-    FieldNode(
-      name: NameNode(value: '__typename'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-  ]),
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ],
+  ),
 );
-const documentNodeFragmentUserOverview = DocumentNode(definitions: [
-  fragmentDefinitionUserOverview,
-  fragmentDefinitionUser,
-  fragmentDefinitionUserNoPhoto,
-  fragmentDefinitionUserPermissions,
-  fragmentDefinitionPerson,
-  fragmentDefinitionPersonNoPhoto,
-  fragmentDefinitionLatestKodasHistory,
-  fragmentDefinitionLatestConfessionHistory,
-]);
+const documentNodeFragmentUserOverview = DocumentNode(
+  definitions: [
+    fragmentDefinitionUserOverview,
+    fragmentDefinitionUser,
+    fragmentDefinitionUserNoPhoto,
+    fragmentDefinitionUserPermissions,
+    fragmentDefinitionPerson,
+    fragmentDefinitionPersonNoPhoto,
+    fragmentDefinitionLatestKodasHistory,
+    fragmentDefinitionLatestConfessionHistory,
+  ],
+);
 
 class Fragment_UserOverview_permissions
     implements Fragment_UserPermissions_permissions {
@@ -857,7 +853,8 @@ class Fragment_UserOverview_permissions
   });
 
   factory Fragment_UserOverview_permissions.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$permission = json['permission'];
     final l$$__typename = json['__typename'];
     return Fragment_UserOverview_permissions(
@@ -883,10 +880,7 @@ class Fragment_UserOverview_permissions
   int get hashCode {
     final l$permission = permission;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$permission,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$permission, l$$__typename]);
   }
 
   @override
@@ -915,10 +909,7 @@ class Fragment_UserOverview_permissions
 extension UtilityExtension_Fragment_UserOverview_permissions
     on Fragment_UserOverview_permissions {
   CopyWith_Fragment_UserOverview_permissions<Fragment_UserOverview_permissions>
-      get copyWith => CopyWith_Fragment_UserOverview_permissions(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Fragment_UserOverview_permissions(this, (i) => i);
 }
 
 abstract class CopyWith_Fragment_UserOverview_permissions<TRes> {
@@ -930,18 +921,12 @@ abstract class CopyWith_Fragment_UserOverview_permissions<TRes> {
   factory CopyWith_Fragment_UserOverview_permissions.stub(TRes res) =
       _CopyWithStubImpl_Fragment_UserOverview_permissions;
 
-  TRes call({
-    String? permission,
-    String? $__typename,
-  });
+  TRes call({String? permission, String? $__typename});
 }
 
 class _CopyWithImpl_Fragment_UserOverview_permissions<TRes>
     implements CopyWith_Fragment_UserOverview_permissions<TRes> {
-  _CopyWithImpl_Fragment_UserOverview_permissions(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Fragment_UserOverview_permissions(this._instance, this._then);
 
   final Fragment_UserOverview_permissions _instance;
 
@@ -952,15 +937,16 @@ class _CopyWithImpl_Fragment_UserOverview_permissions<TRes>
   TRes call({
     Object? permission = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Fragment_UserOverview_permissions(
-        permission: permission == _undefined || permission == null
-            ? _instance.permission
-            : (permission as String),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Fragment_UserOverview_permissions(
+      permission: permission == _undefined || permission == null
+          ? _instance.permission
+          : (permission as String),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 }
 
 class _CopyWithStubImpl_Fragment_UserOverview_permissions<TRes>
@@ -969,11 +955,7 @@ class _CopyWithStubImpl_Fragment_UserOverview_permissions<TRes>
 
   TRes _res;
 
-  call({
-    String? permission,
-    String? $__typename,
-  }) =>
-      _res;
+  call({String? permission, String? $__typename}) => _res;
 }
 
 class Fragment_UserOverview_person
@@ -1003,17 +985,20 @@ class Fragment_UserOverview_person
       name: (l$name as String),
       color: (l$color as int?),
       $__typename: (l$$__typename as String),
-      photoUpdatedAt:
-          l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
+      photoUpdatedAt: l$photoUpdatedAt == null
+          ? null
+          : tstzFromString(l$photoUpdatedAt),
       blurhash: (l$blurhash as String?),
       lastKodas: l$lastKodas == null
           ? null
           : Fragment_LatestKodasHistory.fromJson(
-              (l$lastKodas as Map<String, dynamic>)),
+              (l$lastKodas as Map<String, dynamic>),
+            ),
       lastConfession: l$lastConfession == null
           ? null
           : Fragment_LatestConfessionHistory.fromJson(
-              (l$lastConfession as Map<String, dynamic>)),
+              (l$lastConfession as Map<String, dynamic>),
+            ),
     );
   }
 
@@ -1044,8 +1029,9 @@ class Fragment_UserOverview_person
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
-    _resultData['photoUpdatedAt'] =
-        l$photoUpdatedAt == null ? null : tstzToString(l$photoUpdatedAt);
+    _resultData['photoUpdatedAt'] = l$photoUpdatedAt == null
+        ? null
+        : tstzToString(l$photoUpdatedAt);
     final l$blurhash = blurhash;
     _resultData['blurhash'] = l$blurhash;
     final l$lastKodas = lastKodas;
@@ -1133,10 +1119,7 @@ class Fragment_UserOverview_person
 extension UtilityExtension_Fragment_UserOverview_person
     on Fragment_UserOverview_person {
   CopyWith_Fragment_UserOverview_person<Fragment_UserOverview_person>
-      get copyWith => CopyWith_Fragment_UserOverview_person(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Fragment_UserOverview_person(this, (i) => i);
 }
 
 abstract class CopyWith_Fragment_UserOverview_person<TRes> {
@@ -1164,10 +1147,7 @@ abstract class CopyWith_Fragment_UserOverview_person<TRes> {
 
 class _CopyWithImpl_Fragment_UserOverview_person<TRes>
     implements CopyWith_Fragment_UserOverview_person<TRes> {
-  _CopyWithImpl_Fragment_UserOverview_person(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Fragment_UserOverview_person(this._instance, this._then);
 
   final Fragment_UserOverview_person _instance;
 
@@ -1184,35 +1164,39 @@ class _CopyWithImpl_Fragment_UserOverview_person<TRes>
     Object? blurhash = _undefined,
     Object? lastKodas = _undefined,
     Object? lastConfession = _undefined,
-  }) =>
-      _then(Fragment_UserOverview_person(
-        id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
-        name: name == _undefined || name == null
-            ? _instance.name
-            : (name as String),
-        color: color == _undefined ? _instance.color : (color as int?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-        photoUpdatedAt: photoUpdatedAt == _undefined
-            ? _instance.photoUpdatedAt
-            : (photoUpdatedAt as DateTime?),
-        blurhash:
-            blurhash == _undefined ? _instance.blurhash : (blurhash as String?),
-        lastKodas: lastKodas == _undefined
-            ? _instance.lastKodas
-            : (lastKodas as Fragment_LatestKodasHistory?),
-        lastConfession: lastConfession == _undefined
-            ? _instance.lastConfession
-            : (lastConfession as Fragment_LatestConfessionHistory?),
-      ));
+  }) => _then(
+    Fragment_UserOverview_person(
+      id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      color: color == _undefined ? _instance.color : (color as int?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+      photoUpdatedAt: photoUpdatedAt == _undefined
+          ? _instance.photoUpdatedAt
+          : (photoUpdatedAt as DateTime?),
+      blurhash: blurhash == _undefined
+          ? _instance.blurhash
+          : (blurhash as String?),
+      lastKodas: lastKodas == _undefined
+          ? _instance.lastKodas
+          : (lastKodas as Fragment_LatestKodasHistory?),
+      lastConfession: lastConfession == _undefined
+          ? _instance.lastConfession
+          : (lastConfession as Fragment_LatestConfessionHistory?),
+    ),
+  );
 
   CopyWith_Fragment_LatestKodasHistory<TRes> get lastKodas {
     final local$lastKodas = _instance.lastKodas;
     return local$lastKodas == null
         ? CopyWith_Fragment_LatestKodasHistory.stub(_then(_instance))
         : CopyWith_Fragment_LatestKodasHistory(
-            local$lastKodas, (e) => call(lastKodas: e));
+            local$lastKodas,
+            (e) => call(lastKodas: e),
+          );
   }
 
   CopyWith_Fragment_LatestConfessionHistory<TRes> get lastConfession {
@@ -1220,7 +1204,9 @@ class _CopyWithImpl_Fragment_UserOverview_person<TRes>
     return local$lastConfession == null
         ? CopyWith_Fragment_LatestConfessionHistory.stub(_then(_instance))
         : CopyWith_Fragment_LatestConfessionHistory(
-            local$lastConfession, (e) => call(lastConfession: e));
+            local$lastConfession,
+            (e) => call(lastConfession: e),
+          );
   }
 }
 
@@ -1239,8 +1225,7 @@ class _CopyWithStubImpl_Fragment_UserOverview_person<TRes>
     String? blurhash,
     Fragment_LatestKodasHistory? lastKodas,
     Fragment_LatestConfessionHistory? lastConfession,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Fragment_LatestKodasHistory<TRes> get lastKodas =>
       CopyWith_Fragment_LatestKodasHistory.stub(_res);
@@ -1285,24 +1270,33 @@ class Fragment_UserDetails
       name: (l$name as String),
       email: (l$email as String),
       $__typename: (l$$__typename as String),
-      photoUpdatedAt:
-          l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
+      photoUpdatedAt: l$photoUpdatedAt == null
+          ? null
+          : tstzFromString(l$photoUpdatedAt),
       blurhash: (l$blurhash as String?),
       permissions: (l$permissions as List<dynamic>)
-          .map((e) => Fragment_UserDetails_permissions.fromJson(
-              (e as Map<String, dynamic>)))
+          .map(
+            (e) => Fragment_UserDetails_permissions.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
           .toList(),
       person: l$person == null
           ? null
           : Fragment_UserDetails_person.fromJson(
-              (l$person as Map<String, dynamic>)),
+              (l$person as Map<String, dynamic>),
+            ),
       lastEdit: l$lastEdit == null
           ? null
           : Fragment_LatestEditHistory.fromJson(
-              (l$lastEdit as Map<String, dynamic>)),
+              (l$lastEdit as Map<String, dynamic>),
+            ),
       adminOn: (l$adminOn as List<dynamic>)
-          .map((e) => Fragment_UserDetails_adminOn.fromJson(
-              (e as Map<String, dynamic>)))
+          .map(
+            (e) => Fragment_UserDetails_adminOn.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
           .toList(),
     );
   }
@@ -1338,8 +1332,9 @@ class Fragment_UserDetails
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
-    _resultData['photoUpdatedAt'] =
-        l$photoUpdatedAt == null ? null : tstzToString(l$photoUpdatedAt);
+    _resultData['photoUpdatedAt'] = l$photoUpdatedAt == null
+        ? null
+        : tstzToString(l$photoUpdatedAt);
     final l$blurhash = blurhash;
     _resultData['blurhash'] = l$blurhash;
     final l$permissions = permissions;
@@ -1457,10 +1452,7 @@ class Fragment_UserDetails
 
 extension UtilityExtension_Fragment_UserDetails on Fragment_UserDetails {
   CopyWith_Fragment_UserDetails<Fragment_UserDetails> get copyWith =>
-      CopyWith_Fragment_UserDetails(
-        this,
-        (i) => i,
-      );
+      CopyWith_Fragment_UserDetails(this, (i) => i);
 }
 
 abstract class CopyWith_Fragment_UserDetails<TRes> {
@@ -1485,27 +1477,30 @@ abstract class CopyWith_Fragment_UserDetails<TRes> {
     List<Fragment_UserDetails_adminOn>? adminOn,
   });
   TRes permissions(
-      Iterable<Fragment_UserDetails_permissions> Function(
-              Iterable<
-                  CopyWith_Fragment_UserDetails_permissions<
-                      Fragment_UserDetails_permissions>>)
-          _fn);
+    Iterable<Fragment_UserDetails_permissions> Function(
+      Iterable<
+        CopyWith_Fragment_UserDetails_permissions<
+          Fragment_UserDetails_permissions
+        >
+      >,
+    )
+    _fn,
+  );
   CopyWith_Fragment_UserDetails_person<TRes> get person;
   CopyWith_Fragment_LatestEditHistory<TRes> get lastEdit;
   TRes adminOn(
-      Iterable<Fragment_UserDetails_adminOn> Function(
-              Iterable<
-                  CopyWith_Fragment_UserDetails_adminOn<
-                      Fragment_UserDetails_adminOn>>)
-          _fn);
+    Iterable<Fragment_UserDetails_adminOn> Function(
+      Iterable<
+        CopyWith_Fragment_UserDetails_adminOn<Fragment_UserDetails_adminOn>
+      >,
+    )
+    _fn,
+  );
 }
 
 class _CopyWithImpl_Fragment_UserDetails<TRes>
     implements CopyWith_Fragment_UserDetails<TRes> {
-  _CopyWithImpl_Fragment_UserDetails(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Fragment_UserDetails(this._instance, this._then);
 
   final Fragment_UserDetails _instance;
 
@@ -1524,58 +1519,66 @@ class _CopyWithImpl_Fragment_UserDetails<TRes>
     Object? person = _undefined,
     Object? lastEdit = _undefined,
     Object? adminOn = _undefined,
-  }) =>
-      _then(Fragment_UserDetails(
-        uid: uid == _undefined || uid == null
-            ? _instance.uid
-            : (uid as UuidValue),
-        name: name == _undefined || name == null
-            ? _instance.name
-            : (name as String),
-        email: email == _undefined || email == null
-            ? _instance.email
-            : (email as String),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-        photoUpdatedAt: photoUpdatedAt == _undefined
-            ? _instance.photoUpdatedAt
-            : (photoUpdatedAt as DateTime?),
-        blurhash:
-            blurhash == _undefined ? _instance.blurhash : (blurhash as String?),
-        permissions: permissions == _undefined || permissions == null
-            ? _instance.permissions
-            : (permissions as List<Fragment_UserDetails_permissions>),
-        person: person == _undefined
-            ? _instance.person
-            : (person as Fragment_UserDetails_person?),
-        lastEdit: lastEdit == _undefined
-            ? _instance.lastEdit
-            : (lastEdit as Fragment_LatestEditHistory?),
-        adminOn: adminOn == _undefined || adminOn == null
-            ? _instance.adminOn
-            : (adminOn as List<Fragment_UserDetails_adminOn>),
-      ));
+  }) => _then(
+    Fragment_UserDetails(
+      uid: uid == _undefined || uid == null
+          ? _instance.uid
+          : (uid as UuidValue),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      email: email == _undefined || email == null
+          ? _instance.email
+          : (email as String),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+      photoUpdatedAt: photoUpdatedAt == _undefined
+          ? _instance.photoUpdatedAt
+          : (photoUpdatedAt as DateTime?),
+      blurhash: blurhash == _undefined
+          ? _instance.blurhash
+          : (blurhash as String?),
+      permissions: permissions == _undefined || permissions == null
+          ? _instance.permissions
+          : (permissions as List<Fragment_UserDetails_permissions>),
+      person: person == _undefined
+          ? _instance.person
+          : (person as Fragment_UserDetails_person?),
+      lastEdit: lastEdit == _undefined
+          ? _instance.lastEdit
+          : (lastEdit as Fragment_LatestEditHistory?),
+      adminOn: adminOn == _undefined || adminOn == null
+          ? _instance.adminOn
+          : (adminOn as List<Fragment_UserDetails_adminOn>),
+    ),
+  );
 
   TRes permissions(
-          Iterable<Fragment_UserDetails_permissions> Function(
-                  Iterable<
-                      CopyWith_Fragment_UserDetails_permissions<
-                          Fragment_UserDetails_permissions>>)
-              _fn) =>
-      call(
-          permissions: _fn(_instance.permissions
-              .map((e) => CopyWith_Fragment_UserDetails_permissions(
-                    e,
-                    (i) => i,
-                  ))).toList());
+    Iterable<Fragment_UserDetails_permissions> Function(
+      Iterable<
+        CopyWith_Fragment_UserDetails_permissions<
+          Fragment_UserDetails_permissions
+        >
+      >,
+    )
+    _fn,
+  ) => call(
+    permissions: _fn(
+      _instance.permissions.map(
+        (e) => CopyWith_Fragment_UserDetails_permissions(e, (i) => i),
+      ),
+    ).toList(),
+  );
 
   CopyWith_Fragment_UserDetails_person<TRes> get person {
     final local$person = _instance.person;
     return local$person == null
         ? CopyWith_Fragment_UserDetails_person.stub(_then(_instance))
         : CopyWith_Fragment_UserDetails_person(
-            local$person, (e) => call(person: e));
+            local$person,
+            (e) => call(person: e),
+          );
   }
 
   CopyWith_Fragment_LatestEditHistory<TRes> get lastEdit {
@@ -1583,21 +1586,25 @@ class _CopyWithImpl_Fragment_UserDetails<TRes>
     return local$lastEdit == null
         ? CopyWith_Fragment_LatestEditHistory.stub(_then(_instance))
         : CopyWith_Fragment_LatestEditHistory(
-            local$lastEdit, (e) => call(lastEdit: e));
+            local$lastEdit,
+            (e) => call(lastEdit: e),
+          );
   }
 
   TRes adminOn(
-          Iterable<Fragment_UserDetails_adminOn> Function(
-                  Iterable<
-                      CopyWith_Fragment_UserDetails_adminOn<
-                          Fragment_UserDetails_adminOn>>)
-              _fn) =>
-      call(
-          adminOn: _fn(_instance.adminOn
-              .map((e) => CopyWith_Fragment_UserDetails_adminOn(
-                    e,
-                    (i) => i,
-                  ))).toList());
+    Iterable<Fragment_UserDetails_adminOn> Function(
+      Iterable<
+        CopyWith_Fragment_UserDetails_adminOn<Fragment_UserDetails_adminOn>
+      >,
+    )
+    _fn,
+  ) => call(
+    adminOn: _fn(
+      _instance.adminOn.map(
+        (e) => CopyWith_Fragment_UserDetails_adminOn(e, (i) => i),
+      ),
+    ).toList(),
+  );
 }
 
 class _CopyWithStubImpl_Fragment_UserDetails<TRes>
@@ -1617,8 +1624,7 @@ class _CopyWithStubImpl_Fragment_UserDetails<TRes>
     Fragment_UserDetails_person? person,
     Fragment_LatestEditHistory? lastEdit,
     List<Fragment_UserDetails_adminOn>? adminOn,
-  }) =>
-      _res;
+  }) => _res;
 
   permissions(_fn) => _res;
 
@@ -1634,69 +1640,73 @@ class _CopyWithStubImpl_Fragment_UserDetails<TRes>
 const fragmentDefinitionUserDetails = FragmentDefinitionNode(
   name: NameNode(value: 'UserDetails'),
   typeCondition: TypeConditionNode(
-      on: NamedTypeNode(
-    name: NameNode(value: 'AuthUsersData'),
-    isNonNull: false,
-  )),
+    on: NamedTypeNode(name: NameNode(value: 'AuthUsersData'), isNonNull: false),
+  ),
   directives: [],
-  selectionSet: SelectionSetNode(selections: [
-    FragmentSpreadNode(
-      name: NameNode(value: 'UserOverview'),
-      directives: [],
-    ),
-    FieldNode(
-      name: NameNode(value: 'lastEdit'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
-        FragmentSpreadNode(
-          name: NameNode(value: 'LatestEditHistory'),
-          directives: [],
+  selectionSet: SelectionSetNode(
+    selections: [
+      FragmentSpreadNode(
+        name: NameNode(value: 'UserOverview'),
+        directives: [],
+      ),
+      FieldNode(
+        name: NameNode(value: 'lastEdit'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(
+          selections: [
+            FragmentSpreadNode(
+              name: NameNode(value: 'LatestEditHistory'),
+              directives: [],
+            ),
+            FieldNode(
+              name: NameNode(value: '__typename'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+          ],
         ),
-        FieldNode(
-          name: NameNode(value: '__typename'),
-          alias: null,
-          arguments: [],
-          directives: [],
-          selectionSet: null,
-        ),
-      ]),
-    ),
-    FragmentSpreadNode(
-      name: NameNode(value: 'UserAdminOn'),
-      directives: [],
-    ),
-    FieldNode(
-      name: NameNode(value: '__typename'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-  ]),
+      ),
+      FragmentSpreadNode(
+        name: NameNode(value: 'UserAdminOn'),
+        directives: [],
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ],
+  ),
 );
-const documentNodeFragmentUserDetails = DocumentNode(definitions: [
-  fragmentDefinitionUserDetails,
-  fragmentDefinitionUserOverview,
-  fragmentDefinitionUser,
-  fragmentDefinitionUserNoPhoto,
-  fragmentDefinitionUserPermissions,
-  fragmentDefinitionPerson,
-  fragmentDefinitionPersonNoPhoto,
-  fragmentDefinitionLatestKodasHistory,
-  fragmentDefinitionLatestConfessionHistory,
-  fragmentDefinitionLatestEditHistory,
-  fragmentDefinitionUserAdminOn,
-  fragmentDefinitionArea,
-  fragmentDefinitionAreaNoPhoto,
-  fragmentDefinitionService,
-  fragmentDefinitionServiceNoPhoto,
-  fragmentDefinitionClass,
-  fragmentDefinitionClassNoPhoto,
-  fragmentDefinitionGroup,
-  fragmentDefinitionGroupNoPhoto,
-]);
+const documentNodeFragmentUserDetails = DocumentNode(
+  definitions: [
+    fragmentDefinitionUserDetails,
+    fragmentDefinitionUserOverview,
+    fragmentDefinitionUser,
+    fragmentDefinitionUserNoPhoto,
+    fragmentDefinitionUserPermissions,
+    fragmentDefinitionPerson,
+    fragmentDefinitionPersonNoPhoto,
+    fragmentDefinitionLatestKodasHistory,
+    fragmentDefinitionLatestConfessionHistory,
+    fragmentDefinitionLatestEditHistory,
+    fragmentDefinitionUserAdminOn,
+    fragmentDefinitionArea,
+    fragmentDefinitionAreaNoPhoto,
+    fragmentDefinitionService,
+    fragmentDefinitionServiceNoPhoto,
+    fragmentDefinitionClass,
+    fragmentDefinitionClassNoPhoto,
+    fragmentDefinitionGroup,
+    fragmentDefinitionGroupNoPhoto,
+  ],
+);
 
 class Fragment_UserDetails_permissions
     implements
@@ -1733,10 +1743,7 @@ class Fragment_UserDetails_permissions
   int get hashCode {
     final l$permission = permission;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$permission,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$permission, l$$__typename]);
   }
 
   @override
@@ -1765,10 +1772,7 @@ class Fragment_UserDetails_permissions
 extension UtilityExtension_Fragment_UserDetails_permissions
     on Fragment_UserDetails_permissions {
   CopyWith_Fragment_UserDetails_permissions<Fragment_UserDetails_permissions>
-      get copyWith => CopyWith_Fragment_UserDetails_permissions(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Fragment_UserDetails_permissions(this, (i) => i);
 }
 
 abstract class CopyWith_Fragment_UserDetails_permissions<TRes> {
@@ -1780,18 +1784,12 @@ abstract class CopyWith_Fragment_UserDetails_permissions<TRes> {
   factory CopyWith_Fragment_UserDetails_permissions.stub(TRes res) =
       _CopyWithStubImpl_Fragment_UserDetails_permissions;
 
-  TRes call({
-    String? permission,
-    String? $__typename,
-  });
+  TRes call({String? permission, String? $__typename});
 }
 
 class _CopyWithImpl_Fragment_UserDetails_permissions<TRes>
     implements CopyWith_Fragment_UserDetails_permissions<TRes> {
-  _CopyWithImpl_Fragment_UserDetails_permissions(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Fragment_UserDetails_permissions(this._instance, this._then);
 
   final Fragment_UserDetails_permissions _instance;
 
@@ -1802,15 +1800,16 @@ class _CopyWithImpl_Fragment_UserDetails_permissions<TRes>
   TRes call({
     Object? permission = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Fragment_UserDetails_permissions(
-        permission: permission == _undefined || permission == null
-            ? _instance.permission
-            : (permission as String),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Fragment_UserDetails_permissions(
+      permission: permission == _undefined || permission == null
+          ? _instance.permission
+          : (permission as String),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 }
 
 class _CopyWithStubImpl_Fragment_UserDetails_permissions<TRes>
@@ -1819,11 +1818,7 @@ class _CopyWithStubImpl_Fragment_UserDetails_permissions<TRes>
 
   TRes _res;
 
-  call({
-    String? permission,
-    String? $__typename,
-  }) =>
-      _res;
+  call({String? permission, String? $__typename}) => _res;
 }
 
 class Fragment_UserDetails_person
@@ -1856,17 +1851,20 @@ class Fragment_UserDetails_person
       name: (l$name as String),
       color: (l$color as int?),
       $__typename: (l$$__typename as String),
-      photoUpdatedAt:
-          l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
+      photoUpdatedAt: l$photoUpdatedAt == null
+          ? null
+          : tstzFromString(l$photoUpdatedAt),
       blurhash: (l$blurhash as String?),
       lastKodas: l$lastKodas == null
           ? null
           : Fragment_LatestKodasHistory.fromJson(
-              (l$lastKodas as Map<String, dynamic>)),
+              (l$lastKodas as Map<String, dynamic>),
+            ),
       lastConfession: l$lastConfession == null
           ? null
           : Fragment_LatestConfessionHistory.fromJson(
-              (l$lastConfession as Map<String, dynamic>)),
+              (l$lastConfession as Map<String, dynamic>),
+            ),
     );
   }
 
@@ -1897,8 +1895,9 @@ class Fragment_UserDetails_person
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
-    _resultData['photoUpdatedAt'] =
-        l$photoUpdatedAt == null ? null : tstzToString(l$photoUpdatedAt);
+    _resultData['photoUpdatedAt'] = l$photoUpdatedAt == null
+        ? null
+        : tstzToString(l$photoUpdatedAt);
     final l$blurhash = blurhash;
     _resultData['blurhash'] = l$blurhash;
     final l$lastKodas = lastKodas;
@@ -1986,10 +1985,7 @@ class Fragment_UserDetails_person
 extension UtilityExtension_Fragment_UserDetails_person
     on Fragment_UserDetails_person {
   CopyWith_Fragment_UserDetails_person<Fragment_UserDetails_person>
-      get copyWith => CopyWith_Fragment_UserDetails_person(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Fragment_UserDetails_person(this, (i) => i);
 }
 
 abstract class CopyWith_Fragment_UserDetails_person<TRes> {
@@ -2017,10 +2013,7 @@ abstract class CopyWith_Fragment_UserDetails_person<TRes> {
 
 class _CopyWithImpl_Fragment_UserDetails_person<TRes>
     implements CopyWith_Fragment_UserDetails_person<TRes> {
-  _CopyWithImpl_Fragment_UserDetails_person(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Fragment_UserDetails_person(this._instance, this._then);
 
   final Fragment_UserDetails_person _instance;
 
@@ -2037,35 +2030,39 @@ class _CopyWithImpl_Fragment_UserDetails_person<TRes>
     Object? blurhash = _undefined,
     Object? lastKodas = _undefined,
     Object? lastConfession = _undefined,
-  }) =>
-      _then(Fragment_UserDetails_person(
-        id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
-        name: name == _undefined || name == null
-            ? _instance.name
-            : (name as String),
-        color: color == _undefined ? _instance.color : (color as int?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-        photoUpdatedAt: photoUpdatedAt == _undefined
-            ? _instance.photoUpdatedAt
-            : (photoUpdatedAt as DateTime?),
-        blurhash:
-            blurhash == _undefined ? _instance.blurhash : (blurhash as String?),
-        lastKodas: lastKodas == _undefined
-            ? _instance.lastKodas
-            : (lastKodas as Fragment_LatestKodasHistory?),
-        lastConfession: lastConfession == _undefined
-            ? _instance.lastConfession
-            : (lastConfession as Fragment_LatestConfessionHistory?),
-      ));
+  }) => _then(
+    Fragment_UserDetails_person(
+      id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      color: color == _undefined ? _instance.color : (color as int?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+      photoUpdatedAt: photoUpdatedAt == _undefined
+          ? _instance.photoUpdatedAt
+          : (photoUpdatedAt as DateTime?),
+      blurhash: blurhash == _undefined
+          ? _instance.blurhash
+          : (blurhash as String?),
+      lastKodas: lastKodas == _undefined
+          ? _instance.lastKodas
+          : (lastKodas as Fragment_LatestKodasHistory?),
+      lastConfession: lastConfession == _undefined
+          ? _instance.lastConfession
+          : (lastConfession as Fragment_LatestConfessionHistory?),
+    ),
+  );
 
   CopyWith_Fragment_LatestKodasHistory<TRes> get lastKodas {
     final local$lastKodas = _instance.lastKodas;
     return local$lastKodas == null
         ? CopyWith_Fragment_LatestKodasHistory.stub(_then(_instance))
         : CopyWith_Fragment_LatestKodasHistory(
-            local$lastKodas, (e) => call(lastKodas: e));
+            local$lastKodas,
+            (e) => call(lastKodas: e),
+          );
   }
 
   CopyWith_Fragment_LatestConfessionHistory<TRes> get lastConfession {
@@ -2073,7 +2070,9 @@ class _CopyWithImpl_Fragment_UserDetails_person<TRes>
     return local$lastConfession == null
         ? CopyWith_Fragment_LatestConfessionHistory.stub(_then(_instance))
         : CopyWith_Fragment_LatestConfessionHistory(
-            local$lastConfession, (e) => call(lastConfession: e));
+            local$lastConfession,
+            (e) => call(lastConfession: e),
+          );
   }
 }
 
@@ -2092,8 +2091,7 @@ class _CopyWithStubImpl_Fragment_UserDetails_person<TRes>
     String? blurhash,
     Fragment_LatestKodasHistory? lastKodas,
     Fragment_LatestConfessionHistory? lastConfession,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Fragment_LatestKodasHistory<TRes> get lastKodas =>
       CopyWith_Fragment_LatestKodasHistory.stub(_res);
@@ -2148,7 +2146,8 @@ class Fragment_UserDetails_adminOn implements Fragment_UserAdminOn_adminOn {
       serviceStudyYearData: l$serviceStudyYearData == null
           ? null
           : Fragment_UserDetails_adminOn_serviceStudyYearData.fromJson(
-              (l$serviceStudyYearData as Map<String, dynamic>)),
+              (l$serviceStudyYearData as Map<String, dynamic>),
+            ),
       serviceGender: (l$serviceGender as bool?),
       serviceAllowEdit: (l$serviceAllowEdit as bool?),
       serviceAdminOnUsers: (l$serviceAdminOnUsers as bool?),
@@ -2352,10 +2351,7 @@ class Fragment_UserDetails_adminOn implements Fragment_UserAdminOn_adminOn {
 extension UtilityExtension_Fragment_UserDetails_adminOn
     on Fragment_UserDetails_adminOn {
   CopyWith_Fragment_UserDetails_adminOn<Fragment_UserDetails_adminOn>
-      get copyWith => CopyWith_Fragment_UserDetails_adminOn(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Fragment_UserDetails_adminOn(this, (i) => i);
 }
 
 abstract class CopyWith_Fragment_UserDetails_adminOn<TRes> {
@@ -2386,20 +2382,19 @@ abstract class CopyWith_Fragment_UserDetails_adminOn<TRes> {
   CopyWith_Fragment_Area<TRes> get area;
   CopyWith_Fragment_Service<TRes> get service;
   CopyWith_Fragment_UserDetails_adminOn_serviceStudyYearData<TRes>
-      get serviceStudyYearData;
+  get serviceStudyYearData;
   TRes classes(
-      Iterable<Fragment_Class> Function(
-              Iterable<CopyWith_Fragment_Class<Fragment_Class>>)
-          _fn);
+    Iterable<Fragment_Class> Function(
+      Iterable<CopyWith_Fragment_Class<Fragment_Class>>,
+    )
+    _fn,
+  );
   CopyWith_Fragment_Group<TRes> get group;
 }
 
 class _CopyWithImpl_Fragment_UserDetails_adminOn<TRes>
     implements CopyWith_Fragment_UserDetails_adminOn<TRes> {
-  _CopyWithImpl_Fragment_UserDetails_adminOn(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Fragment_UserDetails_adminOn(this._instance, this._then);
 
   final Fragment_UserDetails_adminOn _instance;
 
@@ -2422,49 +2417,49 @@ class _CopyWithImpl_Fragment_UserDetails_adminOn<TRes>
     Object? groupAllowEdit = _undefined,
     Object? groupAdminOnUsers = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Fragment_UserDetails_adminOn(
-        permissionId: permissionId == _undefined || permissionId == null
-            ? _instance.permissionId
-            : (permissionId as UuidValue),
-        area: area == _undefined ? _instance.area : (area as Fragment_Area?),
-        areaAllowEdit: areaAllowEdit == _undefined
-            ? _instance.areaAllowEdit
-            : (areaAllowEdit as bool?),
-        areaAdminOnUsers: areaAdminOnUsers == _undefined
-            ? _instance.areaAdminOnUsers
-            : (areaAdminOnUsers as bool?),
-        service: service == _undefined
-            ? _instance.service
-            : (service as Fragment_Service?),
-        serviceStudyYearData: serviceStudyYearData == _undefined
-            ? _instance.serviceStudyYearData
-            : (serviceStudyYearData
+  }) => _then(
+    Fragment_UserDetails_adminOn(
+      permissionId: permissionId == _undefined || permissionId == null
+          ? _instance.permissionId
+          : (permissionId as UuidValue),
+      area: area == _undefined ? _instance.area : (area as Fragment_Area?),
+      areaAllowEdit: areaAllowEdit == _undefined
+          ? _instance.areaAllowEdit
+          : (areaAllowEdit as bool?),
+      areaAdminOnUsers: areaAdminOnUsers == _undefined
+          ? _instance.areaAdminOnUsers
+          : (areaAdminOnUsers as bool?),
+      service: service == _undefined
+          ? _instance.service
+          : (service as Fragment_Service?),
+      serviceStudyYearData: serviceStudyYearData == _undefined
+          ? _instance.serviceStudyYearData
+          : (serviceStudyYearData
                 as Fragment_UserDetails_adminOn_serviceStudyYearData?),
-        serviceGender: serviceGender == _undefined
-            ? _instance.serviceGender
-            : (serviceGender as bool?),
-        serviceAllowEdit: serviceAllowEdit == _undefined
-            ? _instance.serviceAllowEdit
-            : (serviceAllowEdit as bool?),
-        serviceAdminOnUsers: serviceAdminOnUsers == _undefined
-            ? _instance.serviceAdminOnUsers
-            : (serviceAdminOnUsers as bool?),
-        classes: classes == _undefined || classes == null
-            ? _instance.classes
-            : (classes as List<Fragment_Class>),
-        group:
-            group == _undefined ? _instance.group : (group as Fragment_Group?),
-        groupAllowEdit: groupAllowEdit == _undefined
-            ? _instance.groupAllowEdit
-            : (groupAllowEdit as bool?),
-        groupAdminOnUsers: groupAdminOnUsers == _undefined
-            ? _instance.groupAdminOnUsers
-            : (groupAdminOnUsers as bool?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+      serviceGender: serviceGender == _undefined
+          ? _instance.serviceGender
+          : (serviceGender as bool?),
+      serviceAllowEdit: serviceAllowEdit == _undefined
+          ? _instance.serviceAllowEdit
+          : (serviceAllowEdit as bool?),
+      serviceAdminOnUsers: serviceAdminOnUsers == _undefined
+          ? _instance.serviceAdminOnUsers
+          : (serviceAdminOnUsers as bool?),
+      classes: classes == _undefined || classes == null
+          ? _instance.classes
+          : (classes as List<Fragment_Class>),
+      group: group == _undefined ? _instance.group : (group as Fragment_Group?),
+      groupAllowEdit: groupAllowEdit == _undefined
+          ? _instance.groupAllowEdit
+          : (groupAllowEdit as bool?),
+      groupAdminOnUsers: groupAdminOnUsers == _undefined
+          ? _instance.groupAdminOnUsers
+          : (groupAdminOnUsers as bool?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   CopyWith_Fragment_Area<TRes> get area {
     final local$area = _instance.area;
@@ -2481,24 +2476,28 @@ class _CopyWithImpl_Fragment_UserDetails_adminOn<TRes>
   }
 
   CopyWith_Fragment_UserDetails_adminOn_serviceStudyYearData<TRes>
-      get serviceStudyYearData {
+  get serviceStudyYearData {
     final local$serviceStudyYearData = _instance.serviceStudyYearData;
     return local$serviceStudyYearData == null
         ? CopyWith_Fragment_UserDetails_adminOn_serviceStudyYearData.stub(
-            _then(_instance))
+            _then(_instance),
+          )
         : CopyWith_Fragment_UserDetails_adminOn_serviceStudyYearData(
-            local$serviceStudyYearData, (e) => call(serviceStudyYearData: e));
+            local$serviceStudyYearData,
+            (e) => call(serviceStudyYearData: e),
+          );
   }
 
   TRes classes(
-          Iterable<Fragment_Class> Function(
-                  Iterable<CopyWith_Fragment_Class<Fragment_Class>>)
-              _fn) =>
-      call(
-          classes: _fn(_instance.classes.map((e) => CopyWith_Fragment_Class(
-                e,
-                (i) => i,
-              ))).toList());
+    Iterable<Fragment_Class> Function(
+      Iterable<CopyWith_Fragment_Class<Fragment_Class>>,
+    )
+    _fn,
+  ) => call(
+    classes: _fn(
+      _instance.classes.map((e) => CopyWith_Fragment_Class(e, (i) => i)),
+    ).toList(),
+  );
 
   CopyWith_Fragment_Group<TRes> get group {
     final local$group = _instance.group;
@@ -2529,8 +2528,7 @@ class _CopyWithStubImpl_Fragment_UserDetails_adminOn<TRes>
     bool? groupAllowEdit,
     bool? groupAdminOnUsers,
     String? $__typename,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Fragment_Area<TRes> get area => CopyWith_Fragment_Area.stub(_res);
 
@@ -2538,8 +2536,8 @@ class _CopyWithStubImpl_Fragment_UserDetails_adminOn<TRes>
       CopyWith_Fragment_Service.stub(_res);
 
   CopyWith_Fragment_UserDetails_adminOn_serviceStudyYearData<TRes>
-      get serviceStudyYearData =>
-          CopyWith_Fragment_UserDetails_adminOn_serviceStudyYearData.stub(_res);
+  get serviceStudyYearData =>
+      CopyWith_Fragment_UserDetails_adminOn_serviceStudyYearData.stub(_res);
 
   classes(_fn) => _res;
 
@@ -2555,7 +2553,8 @@ class Fragment_UserDetails_adminOn_serviceStudyYearData
   });
 
   factory Fragment_UserDetails_adminOn_serviceStudyYearData.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$name = json['name'];
     final l$order = json['order'];
     final l$$__typename = json['__typename'];
@@ -2588,11 +2587,7 @@ class Fragment_UserDetails_adminOn_serviceStudyYearData
     final l$name = name;
     final l$order = order;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$name,
-      l$order,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$name, l$order, l$$__typename]);
   }
 
   @override
@@ -2626,30 +2621,27 @@ class Fragment_UserDetails_adminOn_serviceStudyYearData
 extension UtilityExtension_Fragment_UserDetails_adminOn_serviceStudyYearData
     on Fragment_UserDetails_adminOn_serviceStudyYearData {
   CopyWith_Fragment_UserDetails_adminOn_serviceStudyYearData<
-          Fragment_UserDetails_adminOn_serviceStudyYearData>
-      get copyWith =>
-          CopyWith_Fragment_UserDetails_adminOn_serviceStudyYearData(
-            this,
-            (i) => i,
-          );
+    Fragment_UserDetails_adminOn_serviceStudyYearData
+  >
+  get copyWith => CopyWith_Fragment_UserDetails_adminOn_serviceStudyYearData(
+    this,
+    (i) => i,
+  );
 }
 
 abstract class CopyWith_Fragment_UserDetails_adminOn_serviceStudyYearData<
-    TRes> {
+  TRes
+> {
   factory CopyWith_Fragment_UserDetails_adminOn_serviceStudyYearData(
     Fragment_UserDetails_adminOn_serviceStudyYearData instance,
     TRes Function(Fragment_UserDetails_adminOn_serviceStudyYearData) then,
   ) = _CopyWithImpl_Fragment_UserDetails_adminOn_serviceStudyYearData;
 
   factory CopyWith_Fragment_UserDetails_adminOn_serviceStudyYearData.stub(
-          TRes res) =
-      _CopyWithStubImpl_Fragment_UserDetails_adminOn_serviceStudyYearData;
+    TRes res,
+  ) = _CopyWithStubImpl_Fragment_UserDetails_adminOn_serviceStudyYearData;
 
-  TRes call({
-    String? name,
-    int? order,
-    String? $__typename,
-  });
+  TRes call({String? name, int? order, String? $__typename});
 }
 
 class _CopyWithImpl_Fragment_UserDetails_adminOn_serviceStudyYearData<TRes>
@@ -2670,34 +2662,31 @@ class _CopyWithImpl_Fragment_UserDetails_adminOn_serviceStudyYearData<TRes>
     Object? name = _undefined,
     Object? order = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Fragment_UserDetails_adminOn_serviceStudyYearData(
-        name: name == _undefined || name == null
-            ? _instance.name
-            : (name as String),
-        order: order == _undefined || order == null
-            ? _instance.order
-            : (order as int),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Fragment_UserDetails_adminOn_serviceStudyYearData(
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      order: order == _undefined || order == null
+          ? _instance.order
+          : (order as int),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 }
 
 class _CopyWithStubImpl_Fragment_UserDetails_adminOn_serviceStudyYearData<TRes>
     implements
         CopyWith_Fragment_UserDetails_adminOn_serviceStudyYearData<TRes> {
   _CopyWithStubImpl_Fragment_UserDetails_adminOn_serviceStudyYearData(
-      this._res);
+    this._res,
+  );
 
   TRes _res;
 
-  call({
-    String? name,
-    int? order,
-    String? $__typename,
-  }) =>
-      _res;
+  call({String? name, int? order, String? $__typename}) => _res;
 }
 
 class Fragment_UserPermissions {
@@ -2711,8 +2700,11 @@ class Fragment_UserPermissions {
     final l$$__typename = json['__typename'];
     return Fragment_UserPermissions(
       permissions: (l$permissions as List<dynamic>)
-          .map((e) => Fragment_UserPermissions_permissions.fromJson(
-              (e as Map<String, dynamic>)))
+          .map(
+            (e) => Fragment_UserPermissions_permissions.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
           .toList(),
       $__typename: (l$$__typename as String),
     );
@@ -2774,10 +2766,7 @@ class Fragment_UserPermissions {
 extension UtilityExtension_Fragment_UserPermissions
     on Fragment_UserPermissions {
   CopyWith_Fragment_UserPermissions<Fragment_UserPermissions> get copyWith =>
-      CopyWith_Fragment_UserPermissions(
-        this,
-        (i) => i,
-      );
+      CopyWith_Fragment_UserPermissions(this, (i) => i);
 }
 
 abstract class CopyWith_Fragment_UserPermissions<TRes> {
@@ -2794,19 +2783,20 @@ abstract class CopyWith_Fragment_UserPermissions<TRes> {
     String? $__typename,
   });
   TRes permissions(
-      Iterable<Fragment_UserPermissions_permissions> Function(
-              Iterable<
-                  CopyWith_Fragment_UserPermissions_permissions<
-                      Fragment_UserPermissions_permissions>>)
-          _fn);
+    Iterable<Fragment_UserPermissions_permissions> Function(
+      Iterable<
+        CopyWith_Fragment_UserPermissions_permissions<
+          Fragment_UserPermissions_permissions
+        >
+      >,
+    )
+    _fn,
+  );
 }
 
 class _CopyWithImpl_Fragment_UserPermissions<TRes>
     implements CopyWith_Fragment_UserPermissions<TRes> {
-  _CopyWithImpl_Fragment_UserPermissions(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Fragment_UserPermissions(this._instance, this._then);
 
   final Fragment_UserPermissions _instance;
 
@@ -2817,28 +2807,33 @@ class _CopyWithImpl_Fragment_UserPermissions<TRes>
   TRes call({
     Object? permissions = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Fragment_UserPermissions(
-        permissions: permissions == _undefined || permissions == null
-            ? _instance.permissions
-            : (permissions as List<Fragment_UserPermissions_permissions>),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Fragment_UserPermissions(
+      permissions: permissions == _undefined || permissions == null
+          ? _instance.permissions
+          : (permissions as List<Fragment_UserPermissions_permissions>),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   TRes permissions(
-          Iterable<Fragment_UserPermissions_permissions> Function(
-                  Iterable<
-                      CopyWith_Fragment_UserPermissions_permissions<
-                          Fragment_UserPermissions_permissions>>)
-              _fn) =>
-      call(
-          permissions: _fn(_instance.permissions
-              .map((e) => CopyWith_Fragment_UserPermissions_permissions(
-                    e,
-                    (i) => i,
-                  ))).toList());
+    Iterable<Fragment_UserPermissions_permissions> Function(
+      Iterable<
+        CopyWith_Fragment_UserPermissions_permissions<
+          Fragment_UserPermissions_permissions
+        >
+      >,
+    )
+    _fn,
+  ) => call(
+    permissions: _fn(
+      _instance.permissions.map(
+        (e) => CopyWith_Fragment_UserPermissions_permissions(e, (i) => i),
+      ),
+    ).toList(),
+  );
 }
 
 class _CopyWithStubImpl_Fragment_UserPermissions<TRes>
@@ -2850,8 +2845,7 @@ class _CopyWithStubImpl_Fragment_UserPermissions<TRes>
   call({
     List<Fragment_UserPermissions_permissions>? permissions,
     String? $__typename,
-  }) =>
-      _res;
+  }) => _res;
 
   permissions(_fn) => _res;
 }
@@ -2859,46 +2853,48 @@ class _CopyWithStubImpl_Fragment_UserPermissions<TRes>
 const fragmentDefinitionUserPermissions = FragmentDefinitionNode(
   name: NameNode(value: 'UserPermissions'),
   typeCondition: TypeConditionNode(
-      on: NamedTypeNode(
-    name: NameNode(value: 'AuthUsersData'),
-    isNonNull: false,
-  )),
+    on: NamedTypeNode(name: NameNode(value: 'AuthUsersData'), isNonNull: false),
+  ),
   directives: [],
-  selectionSet: SelectionSetNode(selections: [
-    FieldNode(
-      name: NameNode(value: 'permissions'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
-        FieldNode(
-          name: NameNode(value: 'permission'),
-          alias: null,
-          arguments: [],
-          directives: [],
-          selectionSet: null,
+  selectionSet: SelectionSetNode(
+    selections: [
+      FieldNode(
+        name: NameNode(value: 'permissions'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(
+          selections: [
+            FieldNode(
+              name: NameNode(value: 'permission'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: '__typename'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+          ],
         ),
-        FieldNode(
-          name: NameNode(value: '__typename'),
-          alias: null,
-          arguments: [],
-          directives: [],
-          selectionSet: null,
-        ),
-      ]),
-    ),
-    FieldNode(
-      name: NameNode(value: '__typename'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-  ]),
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ],
+  ),
 );
-const documentNodeFragmentUserPermissions = DocumentNode(definitions: [
-  fragmentDefinitionUserPermissions,
-]);
+const documentNodeFragmentUserPermissions = DocumentNode(
+  definitions: [fragmentDefinitionUserPermissions],
+);
 
 class Fragment_UserPermissions_permissions {
   Fragment_UserPermissions_permissions({
@@ -2907,7 +2903,8 @@ class Fragment_UserPermissions_permissions {
   });
 
   factory Fragment_UserPermissions_permissions.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$permission = json['permission'];
     final l$$__typename = json['__typename'];
     return Fragment_UserPermissions_permissions(
@@ -2933,10 +2930,7 @@ class Fragment_UserPermissions_permissions {
   int get hashCode {
     final l$permission = permission;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$permission,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$permission, l$$__typename]);
   }
 
   @override
@@ -2965,11 +2959,9 @@ class Fragment_UserPermissions_permissions {
 extension UtilityExtension_Fragment_UserPermissions_permissions
     on Fragment_UserPermissions_permissions {
   CopyWith_Fragment_UserPermissions_permissions<
-          Fragment_UserPermissions_permissions>
-      get copyWith => CopyWith_Fragment_UserPermissions_permissions(
-            this,
-            (i) => i,
-          );
+    Fragment_UserPermissions_permissions
+  >
+  get copyWith => CopyWith_Fragment_UserPermissions_permissions(this, (i) => i);
 }
 
 abstract class CopyWith_Fragment_UserPermissions_permissions<TRes> {
@@ -2981,10 +2973,7 @@ abstract class CopyWith_Fragment_UserPermissions_permissions<TRes> {
   factory CopyWith_Fragment_UserPermissions_permissions.stub(TRes res) =
       _CopyWithStubImpl_Fragment_UserPermissions_permissions;
 
-  TRes call({
-    String? permission,
-    String? $__typename,
-  });
+  TRes call({String? permission, String? $__typename});
 }
 
 class _CopyWithImpl_Fragment_UserPermissions_permissions<TRes>
@@ -3003,15 +2992,16 @@ class _CopyWithImpl_Fragment_UserPermissions_permissions<TRes>
   TRes call({
     Object? permission = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Fragment_UserPermissions_permissions(
-        permission: permission == _undefined || permission == null
-            ? _instance.permission
-            : (permission as String),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Fragment_UserPermissions_permissions(
+      permission: permission == _undefined || permission == null
+          ? _instance.permission
+          : (permission as String),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 }
 
 class _CopyWithStubImpl_Fragment_UserPermissions_permissions<TRes>
@@ -3020,11 +3010,7 @@ class _CopyWithStubImpl_Fragment_UserPermissions_permissions<TRes>
 
   TRes _res;
 
-  call({
-    String? permission,
-    String? $__typename,
-  }) =>
-      _res;
+  call({String? permission, String? $__typename}) => _res;
 }
 
 class Fragment_UserAdminOn {
@@ -3038,8 +3024,11 @@ class Fragment_UserAdminOn {
     final l$$__typename = json['__typename'];
     return Fragment_UserAdminOn(
       adminOn: (l$adminOn as List<dynamic>)
-          .map((e) => Fragment_UserAdminOn_adminOn.fromJson(
-              (e as Map<String, dynamic>)))
+          .map(
+            (e) => Fragment_UserAdminOn_adminOn.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
           .toList(),
       $__typename: (l$$__typename as String),
     );
@@ -3099,10 +3088,7 @@ class Fragment_UserAdminOn {
 
 extension UtilityExtension_Fragment_UserAdminOn on Fragment_UserAdminOn {
   CopyWith_Fragment_UserAdminOn<Fragment_UserAdminOn> get copyWith =>
-      CopyWith_Fragment_UserAdminOn(
-        this,
-        (i) => i,
-      );
+      CopyWith_Fragment_UserAdminOn(this, (i) => i);
 }
 
 abstract class CopyWith_Fragment_UserAdminOn<TRes> {
@@ -3114,24 +3100,20 @@ abstract class CopyWith_Fragment_UserAdminOn<TRes> {
   factory CopyWith_Fragment_UserAdminOn.stub(TRes res) =
       _CopyWithStubImpl_Fragment_UserAdminOn;
 
-  TRes call({
-    List<Fragment_UserAdminOn_adminOn>? adminOn,
-    String? $__typename,
-  });
+  TRes call({List<Fragment_UserAdminOn_adminOn>? adminOn, String? $__typename});
   TRes adminOn(
-      Iterable<Fragment_UserAdminOn_adminOn> Function(
-              Iterable<
-                  CopyWith_Fragment_UserAdminOn_adminOn<
-                      Fragment_UserAdminOn_adminOn>>)
-          _fn);
+    Iterable<Fragment_UserAdminOn_adminOn> Function(
+      Iterable<
+        CopyWith_Fragment_UserAdminOn_adminOn<Fragment_UserAdminOn_adminOn>
+      >,
+    )
+    _fn,
+  );
 }
 
 class _CopyWithImpl_Fragment_UserAdminOn<TRes>
     implements CopyWith_Fragment_UserAdminOn<TRes> {
-  _CopyWithImpl_Fragment_UserAdminOn(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Fragment_UserAdminOn(this._instance, this._then);
 
   final Fragment_UserAdminOn _instance;
 
@@ -3139,31 +3121,32 @@ class _CopyWithImpl_Fragment_UserAdminOn<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? adminOn = _undefined,
-    Object? $__typename = _undefined,
-  }) =>
-      _then(Fragment_UserAdminOn(
-        adminOn: adminOn == _undefined || adminOn == null
-            ? _instance.adminOn
-            : (adminOn as List<Fragment_UserAdminOn_adminOn>),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  TRes call({Object? adminOn = _undefined, Object? $__typename = _undefined}) =>
+      _then(
+        Fragment_UserAdminOn(
+          adminOn: adminOn == _undefined || adminOn == null
+              ? _instance.adminOn
+              : (adminOn as List<Fragment_UserAdminOn_adminOn>),
+          $__typename: $__typename == _undefined || $__typename == null
+              ? _instance.$__typename
+              : ($__typename as String),
+        ),
+      );
 
   TRes adminOn(
-          Iterable<Fragment_UserAdminOn_adminOn> Function(
-                  Iterable<
-                      CopyWith_Fragment_UserAdminOn_adminOn<
-                          Fragment_UserAdminOn_adminOn>>)
-              _fn) =>
-      call(
-          adminOn: _fn(_instance.adminOn
-              .map((e) => CopyWith_Fragment_UserAdminOn_adminOn(
-                    e,
-                    (i) => i,
-                  ))).toList());
+    Iterable<Fragment_UserAdminOn_adminOn> Function(
+      Iterable<
+        CopyWith_Fragment_UserAdminOn_adminOn<Fragment_UserAdminOn_adminOn>
+      >,
+    )
+    _fn,
+  ) => call(
+    adminOn: _fn(
+      _instance.adminOn.map(
+        (e) => CopyWith_Fragment_UserAdminOn_adminOn(e, (i) => i),
+      ),
+    ).toList(),
+  );
 }
 
 class _CopyWithStubImpl_Fragment_UserAdminOn<TRes>
@@ -3172,10 +3155,7 @@ class _CopyWithStubImpl_Fragment_UserAdminOn<TRes>
 
   TRes _res;
 
-  call({
-    List<Fragment_UserAdminOn_adminOn>? adminOn,
-    String? $__typename,
-  }) =>
+  call({List<Fragment_UserAdminOn_adminOn>? adminOn, String? $__typename}) =>
       _res;
 
   adminOn(_fn) => _res;
@@ -3184,103 +3164,296 @@ class _CopyWithStubImpl_Fragment_UserAdminOn<TRes>
 const fragmentDefinitionUserAdminOn = FragmentDefinitionNode(
   name: NameNode(value: 'UserAdminOn'),
   typeCondition: TypeConditionNode(
-      on: NamedTypeNode(
-    name: NameNode(value: 'AuthUsersData'),
-    isNonNull: false,
-  )),
+    on: NamedTypeNode(name: NameNode(value: 'AuthUsersData'), isNonNull: false),
+  ),
   directives: [],
-  selectionSet: SelectionSetNode(selections: [
-    FieldNode(
-      name: NameNode(value: 'adminOn'),
-      alias: null,
-      arguments: [
-        ArgumentNode(
-          name: NameNode(value: 'orderBy'),
-          value: ListValueNode(values: [
-            ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'area'),
-                value: ObjectValueNode(fields: [
-                  ObjectFieldNode(
-                    name: NameNode(value: 'name'),
-                    value:
-                        EnumValueNode(name: NameNode(value: 'ASC_NULLS_LAST')),
-                  )
-                ]),
-              )
-            ]),
-            ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'service'),
-                value: ObjectValueNode(fields: [
-                  ObjectFieldNode(
-                    name: NameNode(value: 'studyYearFromId'),
-                    value: EnumValueNode(name: NameNode(value: 'ASC')),
+  selectionSet: SelectionSetNode(
+    selections: [
+      FieldNode(
+        name: NameNode(value: 'adminOn'),
+        alias: null,
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'orderBy'),
+            value: ListValueNode(
+              values: [
+                ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'area'),
+                      value: ObjectValueNode(
+                        fields: [
+                          ObjectFieldNode(
+                            name: NameNode(value: 'name'),
+                            value: EnumValueNode(
+                              name: NameNode(value: 'ASC_NULLS_LAST'),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'service'),
+                      value: ObjectValueNode(
+                        fields: [
+                          ObjectFieldNode(
+                            name: NameNode(value: 'studyYearFromId'),
+                            value: EnumValueNode(name: NameNode(value: 'ASC')),
+                          ),
+                          ObjectFieldNode(
+                            name: NameNode(value: 'studyYearToId'),
+                            value: EnumValueNode(name: NameNode(value: 'ASC')),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'serviceStudyYear'),
+                      value: EnumValueNode(name: NameNode(value: 'ASC')),
+                    ),
+                  ],
+                ),
+                ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'serviceGender'),
+                      value: EnumValueNode(
+                        name: NameNode(value: 'DESC_NULLS_FIRST'),
+                      ),
+                    ),
+                  ],
+                ),
+                ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'service'),
+                      value: ObjectValueNode(
+                        fields: [
+                          ObjectFieldNode(
+                            name: NameNode(value: 'name'),
+                            value: EnumValueNode(
+                              name: NameNode(value: 'ASC_NULLS_LAST'),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'group'),
+                      value: ObjectValueNode(
+                        fields: [
+                          ObjectFieldNode(
+                            name: NameNode(value: 'name'),
+                            value: EnumValueNode(
+                              name: NameNode(value: 'ASC_NULLS_LAST'),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(
+          selections: [
+            FieldNode(
+              name: NameNode(value: 'permissionId'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: 'area'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: SelectionSetNode(
+                selections: [
+                  FragmentSpreadNode(
+                    name: NameNode(value: 'Area'),
+                    directives: [],
                   ),
-                  ObjectFieldNode(
-                    name: NameNode(value: 'studyYearToId'),
-                    value: EnumValueNode(name: NameNode(value: 'ASC')),
+                  FieldNode(
+                    name: NameNode(value: '__typename'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
                   ),
-                ]),
-              )
-            ]),
-            ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'serviceStudyYear'),
-                value: EnumValueNode(name: NameNode(value: 'ASC')),
-              )
-            ]),
-            ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'serviceGender'),
-                value: EnumValueNode(name: NameNode(value: 'DESC_NULLS_FIRST')),
-              )
-            ]),
-            ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'service'),
-                value: ObjectValueNode(fields: [
-                  ObjectFieldNode(
+                ],
+              ),
+            ),
+            FieldNode(
+              name: NameNode(value: 'areaAllowEdit'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: 'areaAdminOnUsers'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: 'service'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: SelectionSetNode(
+                selections: [
+                  FragmentSpreadNode(
+                    name: NameNode(value: 'Service'),
+                    directives: [],
+                  ),
+                  FieldNode(
+                    name: NameNode(value: '__typename'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                ],
+              ),
+            ),
+            FieldNode(
+              name: NameNode(value: 'serviceStudyYearData'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: SelectionSetNode(
+                selections: [
+                  FieldNode(
                     name: NameNode(value: 'name'),
-                    value:
-                        EnumValueNode(name: NameNode(value: 'ASC_NULLS_LAST')),
-                  )
-                ]),
-              )
-            ]),
-            ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'group'),
-                value: ObjectValueNode(fields: [
-                  ObjectFieldNode(
-                    name: NameNode(value: 'name'),
-                    value:
-                        EnumValueNode(name: NameNode(value: 'ASC_NULLS_LAST')),
-                  )
-                ]),
-              )
-            ]),
-          ]),
-        )
-      ],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
-        FieldNode(
-          name: NameNode(value: 'permissionId'),
-          alias: null,
-          arguments: [],
-          directives: [],
-          selectionSet: null,
-        ),
-        FieldNode(
-          name: NameNode(value: 'area'),
-          alias: null,
-          arguments: [],
-          directives: [],
-          selectionSet: SelectionSetNode(selections: [
-            FragmentSpreadNode(
-              name: NameNode(value: 'Area'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                  FieldNode(
+                    name: NameNode(value: 'order'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                  FieldNode(
+                    name: NameNode(value: '__typename'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                ],
+              ),
+            ),
+            FieldNode(
+              name: NameNode(value: 'serviceGender'),
+              alias: null,
+              arguments: [],
               directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: 'serviceAllowEdit'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: 'serviceAdminOnUsers'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: 'classes'),
+              alias: null,
+              arguments: [
+                ArgumentNode(
+                  name: NameNode(value: 'orderBy'),
+                  value: ObjectValueNode(
+                    fields: [
+                      ObjectFieldNode(
+                        name: NameNode(value: 'name'),
+                        value: EnumValueNode(name: NameNode(value: 'ASC')),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+              directives: [],
+              selectionSet: SelectionSetNode(
+                selections: [
+                  FragmentSpreadNode(
+                    name: NameNode(value: 'Class'),
+                    directives: [],
+                  ),
+                  FieldNode(
+                    name: NameNode(value: '__typename'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                ],
+              ),
+            ),
+            FieldNode(
+              name: NameNode(value: 'group'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: SelectionSetNode(
+                selections: [
+                  FragmentSpreadNode(
+                    name: NameNode(value: 'Group'),
+                    directives: [],
+                  ),
+                  FieldNode(
+                    name: NameNode(value: '__typename'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                ],
+              ),
+            ),
+            FieldNode(
+              name: NameNode(value: 'groupAllowEdit'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: 'groupAdminOnUsers'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
             ),
             FieldNode(
               name: NameNode(value: '__typename'),
@@ -3289,182 +3462,32 @@ const fragmentDefinitionUserAdminOn = FragmentDefinitionNode(
               directives: [],
               selectionSet: null,
             ),
-          ]),
-        ),
-        FieldNode(
-          name: NameNode(value: 'areaAllowEdit'),
-          alias: null,
-          arguments: [],
-          directives: [],
-          selectionSet: null,
-        ),
-        FieldNode(
-          name: NameNode(value: 'areaAdminOnUsers'),
-          alias: null,
-          arguments: [],
-          directives: [],
-          selectionSet: null,
-        ),
-        FieldNode(
-          name: NameNode(value: 'service'),
-          alias: null,
-          arguments: [],
-          directives: [],
-          selectionSet: SelectionSetNode(selections: [
-            FragmentSpreadNode(
-              name: NameNode(value: 'Service'),
-              directives: [],
-            ),
-            FieldNode(
-              name: NameNode(value: '__typename'),
-              alias: null,
-              arguments: [],
-              directives: [],
-              selectionSet: null,
-            ),
-          ]),
-        ),
-        FieldNode(
-          name: NameNode(value: 'serviceStudyYearData'),
-          alias: null,
-          arguments: [],
-          directives: [],
-          selectionSet: SelectionSetNode(selections: [
-            FieldNode(
-              name: NameNode(value: 'name'),
-              alias: null,
-              arguments: [],
-              directives: [],
-              selectionSet: null,
-            ),
-            FieldNode(
-              name: NameNode(value: 'order'),
-              alias: null,
-              arguments: [],
-              directives: [],
-              selectionSet: null,
-            ),
-            FieldNode(
-              name: NameNode(value: '__typename'),
-              alias: null,
-              arguments: [],
-              directives: [],
-              selectionSet: null,
-            ),
-          ]),
-        ),
-        FieldNode(
-          name: NameNode(value: 'serviceGender'),
-          alias: null,
-          arguments: [],
-          directives: [],
-          selectionSet: null,
-        ),
-        FieldNode(
-          name: NameNode(value: 'serviceAllowEdit'),
-          alias: null,
-          arguments: [],
-          directives: [],
-          selectionSet: null,
-        ),
-        FieldNode(
-          name: NameNode(value: 'serviceAdminOnUsers'),
-          alias: null,
-          arguments: [],
-          directives: [],
-          selectionSet: null,
-        ),
-        FieldNode(
-          name: NameNode(value: 'classes'),
-          alias: null,
-          arguments: [
-            ArgumentNode(
-              name: NameNode(value: 'orderBy'),
-              value: ObjectValueNode(fields: [
-                ObjectFieldNode(
-                  name: NameNode(value: 'name'),
-                  value: EnumValueNode(name: NameNode(value: 'ASC')),
-                )
-              ]),
-            )
           ],
-          directives: [],
-          selectionSet: SelectionSetNode(selections: [
-            FragmentSpreadNode(
-              name: NameNode(value: 'Class'),
-              directives: [],
-            ),
-            FieldNode(
-              name: NameNode(value: '__typename'),
-              alias: null,
-              arguments: [],
-              directives: [],
-              selectionSet: null,
-            ),
-          ]),
         ),
-        FieldNode(
-          name: NameNode(value: 'group'),
-          alias: null,
-          arguments: [],
-          directives: [],
-          selectionSet: SelectionSetNode(selections: [
-            FragmentSpreadNode(
-              name: NameNode(value: 'Group'),
-              directives: [],
-            ),
-            FieldNode(
-              name: NameNode(value: '__typename'),
-              alias: null,
-              arguments: [],
-              directives: [],
-              selectionSet: null,
-            ),
-          ]),
-        ),
-        FieldNode(
-          name: NameNode(value: 'groupAllowEdit'),
-          alias: null,
-          arguments: [],
-          directives: [],
-          selectionSet: null,
-        ),
-        FieldNode(
-          name: NameNode(value: 'groupAdminOnUsers'),
-          alias: null,
-          arguments: [],
-          directives: [],
-          selectionSet: null,
-        ),
-        FieldNode(
-          name: NameNode(value: '__typename'),
-          alias: null,
-          arguments: [],
-          directives: [],
-          selectionSet: null,
-        ),
-      ]),
-    ),
-    FieldNode(
-      name: NameNode(value: '__typename'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-  ]),
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ],
+  ),
 );
-const documentNodeFragmentUserAdminOn = DocumentNode(definitions: [
-  fragmentDefinitionUserAdminOn,
-  fragmentDefinitionArea,
-  fragmentDefinitionAreaNoPhoto,
-  fragmentDefinitionService,
-  fragmentDefinitionServiceNoPhoto,
-  fragmentDefinitionClass,
-  fragmentDefinitionClassNoPhoto,
-  fragmentDefinitionGroup,
-  fragmentDefinitionGroupNoPhoto,
-]);
+const documentNodeFragmentUserAdminOn = DocumentNode(
+  definitions: [
+    fragmentDefinitionUserAdminOn,
+    fragmentDefinitionArea,
+    fragmentDefinitionAreaNoPhoto,
+    fragmentDefinitionService,
+    fragmentDefinitionServiceNoPhoto,
+    fragmentDefinitionClass,
+    fragmentDefinitionClassNoPhoto,
+    fragmentDefinitionGroup,
+    fragmentDefinitionGroupNoPhoto,
+  ],
+);
 
 class Fragment_UserAdminOn_adminOn {
   Fragment_UserAdminOn_adminOn({
@@ -3512,7 +3535,8 @@ class Fragment_UserAdminOn_adminOn {
       serviceStudyYearData: l$serviceStudyYearData == null
           ? null
           : Fragment_UserAdminOn_adminOn_serviceStudyYearData.fromJson(
-              (l$serviceStudyYearData as Map<String, dynamic>)),
+              (l$serviceStudyYearData as Map<String, dynamic>),
+            ),
       serviceGender: (l$serviceGender as bool?),
       serviceAllowEdit: (l$serviceAllowEdit as bool?),
       serviceAdminOnUsers: (l$serviceAdminOnUsers as bool?),
@@ -3716,10 +3740,7 @@ class Fragment_UserAdminOn_adminOn {
 extension UtilityExtension_Fragment_UserAdminOn_adminOn
     on Fragment_UserAdminOn_adminOn {
   CopyWith_Fragment_UserAdminOn_adminOn<Fragment_UserAdminOn_adminOn>
-      get copyWith => CopyWith_Fragment_UserAdminOn_adminOn(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Fragment_UserAdminOn_adminOn(this, (i) => i);
 }
 
 abstract class CopyWith_Fragment_UserAdminOn_adminOn<TRes> {
@@ -3750,20 +3771,19 @@ abstract class CopyWith_Fragment_UserAdminOn_adminOn<TRes> {
   CopyWith_Fragment_Area<TRes> get area;
   CopyWith_Fragment_Service<TRes> get service;
   CopyWith_Fragment_UserAdminOn_adminOn_serviceStudyYearData<TRes>
-      get serviceStudyYearData;
+  get serviceStudyYearData;
   TRes classes(
-      Iterable<Fragment_Class> Function(
-              Iterable<CopyWith_Fragment_Class<Fragment_Class>>)
-          _fn);
+    Iterable<Fragment_Class> Function(
+      Iterable<CopyWith_Fragment_Class<Fragment_Class>>,
+    )
+    _fn,
+  );
   CopyWith_Fragment_Group<TRes> get group;
 }
 
 class _CopyWithImpl_Fragment_UserAdminOn_adminOn<TRes>
     implements CopyWith_Fragment_UserAdminOn_adminOn<TRes> {
-  _CopyWithImpl_Fragment_UserAdminOn_adminOn(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Fragment_UserAdminOn_adminOn(this._instance, this._then);
 
   final Fragment_UserAdminOn_adminOn _instance;
 
@@ -3786,49 +3806,49 @@ class _CopyWithImpl_Fragment_UserAdminOn_adminOn<TRes>
     Object? groupAllowEdit = _undefined,
     Object? groupAdminOnUsers = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Fragment_UserAdminOn_adminOn(
-        permissionId: permissionId == _undefined || permissionId == null
-            ? _instance.permissionId
-            : (permissionId as UuidValue),
-        area: area == _undefined ? _instance.area : (area as Fragment_Area?),
-        areaAllowEdit: areaAllowEdit == _undefined
-            ? _instance.areaAllowEdit
-            : (areaAllowEdit as bool?),
-        areaAdminOnUsers: areaAdminOnUsers == _undefined
-            ? _instance.areaAdminOnUsers
-            : (areaAdminOnUsers as bool?),
-        service: service == _undefined
-            ? _instance.service
-            : (service as Fragment_Service?),
-        serviceStudyYearData: serviceStudyYearData == _undefined
-            ? _instance.serviceStudyYearData
-            : (serviceStudyYearData
+  }) => _then(
+    Fragment_UserAdminOn_adminOn(
+      permissionId: permissionId == _undefined || permissionId == null
+          ? _instance.permissionId
+          : (permissionId as UuidValue),
+      area: area == _undefined ? _instance.area : (area as Fragment_Area?),
+      areaAllowEdit: areaAllowEdit == _undefined
+          ? _instance.areaAllowEdit
+          : (areaAllowEdit as bool?),
+      areaAdminOnUsers: areaAdminOnUsers == _undefined
+          ? _instance.areaAdminOnUsers
+          : (areaAdminOnUsers as bool?),
+      service: service == _undefined
+          ? _instance.service
+          : (service as Fragment_Service?),
+      serviceStudyYearData: serviceStudyYearData == _undefined
+          ? _instance.serviceStudyYearData
+          : (serviceStudyYearData
                 as Fragment_UserAdminOn_adminOn_serviceStudyYearData?),
-        serviceGender: serviceGender == _undefined
-            ? _instance.serviceGender
-            : (serviceGender as bool?),
-        serviceAllowEdit: serviceAllowEdit == _undefined
-            ? _instance.serviceAllowEdit
-            : (serviceAllowEdit as bool?),
-        serviceAdminOnUsers: serviceAdminOnUsers == _undefined
-            ? _instance.serviceAdminOnUsers
-            : (serviceAdminOnUsers as bool?),
-        classes: classes == _undefined || classes == null
-            ? _instance.classes
-            : (classes as List<Fragment_Class>),
-        group:
-            group == _undefined ? _instance.group : (group as Fragment_Group?),
-        groupAllowEdit: groupAllowEdit == _undefined
-            ? _instance.groupAllowEdit
-            : (groupAllowEdit as bool?),
-        groupAdminOnUsers: groupAdminOnUsers == _undefined
-            ? _instance.groupAdminOnUsers
-            : (groupAdminOnUsers as bool?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+      serviceGender: serviceGender == _undefined
+          ? _instance.serviceGender
+          : (serviceGender as bool?),
+      serviceAllowEdit: serviceAllowEdit == _undefined
+          ? _instance.serviceAllowEdit
+          : (serviceAllowEdit as bool?),
+      serviceAdminOnUsers: serviceAdminOnUsers == _undefined
+          ? _instance.serviceAdminOnUsers
+          : (serviceAdminOnUsers as bool?),
+      classes: classes == _undefined || classes == null
+          ? _instance.classes
+          : (classes as List<Fragment_Class>),
+      group: group == _undefined ? _instance.group : (group as Fragment_Group?),
+      groupAllowEdit: groupAllowEdit == _undefined
+          ? _instance.groupAllowEdit
+          : (groupAllowEdit as bool?),
+      groupAdminOnUsers: groupAdminOnUsers == _undefined
+          ? _instance.groupAdminOnUsers
+          : (groupAdminOnUsers as bool?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   CopyWith_Fragment_Area<TRes> get area {
     final local$area = _instance.area;
@@ -3845,24 +3865,28 @@ class _CopyWithImpl_Fragment_UserAdminOn_adminOn<TRes>
   }
 
   CopyWith_Fragment_UserAdminOn_adminOn_serviceStudyYearData<TRes>
-      get serviceStudyYearData {
+  get serviceStudyYearData {
     final local$serviceStudyYearData = _instance.serviceStudyYearData;
     return local$serviceStudyYearData == null
         ? CopyWith_Fragment_UserAdminOn_adminOn_serviceStudyYearData.stub(
-            _then(_instance))
+            _then(_instance),
+          )
         : CopyWith_Fragment_UserAdminOn_adminOn_serviceStudyYearData(
-            local$serviceStudyYearData, (e) => call(serviceStudyYearData: e));
+            local$serviceStudyYearData,
+            (e) => call(serviceStudyYearData: e),
+          );
   }
 
   TRes classes(
-          Iterable<Fragment_Class> Function(
-                  Iterable<CopyWith_Fragment_Class<Fragment_Class>>)
-              _fn) =>
-      call(
-          classes: _fn(_instance.classes.map((e) => CopyWith_Fragment_Class(
-                e,
-                (i) => i,
-              ))).toList());
+    Iterable<Fragment_Class> Function(
+      Iterable<CopyWith_Fragment_Class<Fragment_Class>>,
+    )
+    _fn,
+  ) => call(
+    classes: _fn(
+      _instance.classes.map((e) => CopyWith_Fragment_Class(e, (i) => i)),
+    ).toList(),
+  );
 
   CopyWith_Fragment_Group<TRes> get group {
     final local$group = _instance.group;
@@ -3893,8 +3917,7 @@ class _CopyWithStubImpl_Fragment_UserAdminOn_adminOn<TRes>
     bool? groupAllowEdit,
     bool? groupAdminOnUsers,
     String? $__typename,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Fragment_Area<TRes> get area => CopyWith_Fragment_Area.stub(_res);
 
@@ -3902,8 +3925,8 @@ class _CopyWithStubImpl_Fragment_UserAdminOn_adminOn<TRes>
       CopyWith_Fragment_Service.stub(_res);
 
   CopyWith_Fragment_UserAdminOn_adminOn_serviceStudyYearData<TRes>
-      get serviceStudyYearData =>
-          CopyWith_Fragment_UserAdminOn_adminOn_serviceStudyYearData.stub(_res);
+  get serviceStudyYearData =>
+      CopyWith_Fragment_UserAdminOn_adminOn_serviceStudyYearData.stub(_res);
 
   classes(_fn) => _res;
 
@@ -3918,7 +3941,8 @@ class Fragment_UserAdminOn_adminOn_serviceStudyYearData {
   });
 
   factory Fragment_UserAdminOn_adminOn_serviceStudyYearData.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$name = json['name'];
     final l$order = json['order'];
     final l$$__typename = json['__typename'];
@@ -3951,11 +3975,7 @@ class Fragment_UserAdminOn_adminOn_serviceStudyYearData {
     final l$name = name;
     final l$order = order;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$name,
-      l$order,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$name, l$order, l$$__typename]);
   }
 
   @override
@@ -3989,30 +4009,27 @@ class Fragment_UserAdminOn_adminOn_serviceStudyYearData {
 extension UtilityExtension_Fragment_UserAdminOn_adminOn_serviceStudyYearData
     on Fragment_UserAdminOn_adminOn_serviceStudyYearData {
   CopyWith_Fragment_UserAdminOn_adminOn_serviceStudyYearData<
-          Fragment_UserAdminOn_adminOn_serviceStudyYearData>
-      get copyWith =>
-          CopyWith_Fragment_UserAdminOn_adminOn_serviceStudyYearData(
-            this,
-            (i) => i,
-          );
+    Fragment_UserAdminOn_adminOn_serviceStudyYearData
+  >
+  get copyWith => CopyWith_Fragment_UserAdminOn_adminOn_serviceStudyYearData(
+    this,
+    (i) => i,
+  );
 }
 
 abstract class CopyWith_Fragment_UserAdminOn_adminOn_serviceStudyYearData<
-    TRes> {
+  TRes
+> {
   factory CopyWith_Fragment_UserAdminOn_adminOn_serviceStudyYearData(
     Fragment_UserAdminOn_adminOn_serviceStudyYearData instance,
     TRes Function(Fragment_UserAdminOn_adminOn_serviceStudyYearData) then,
   ) = _CopyWithImpl_Fragment_UserAdminOn_adminOn_serviceStudyYearData;
 
   factory CopyWith_Fragment_UserAdminOn_adminOn_serviceStudyYearData.stub(
-          TRes res) =
-      _CopyWithStubImpl_Fragment_UserAdminOn_adminOn_serviceStudyYearData;
+    TRes res,
+  ) = _CopyWithStubImpl_Fragment_UserAdminOn_adminOn_serviceStudyYearData;
 
-  TRes call({
-    String? name,
-    int? order,
-    String? $__typename,
-  });
+  TRes call({String? name, int? order, String? $__typename});
 }
 
 class _CopyWithImpl_Fragment_UserAdminOn_adminOn_serviceStudyYearData<TRes>
@@ -4033,34 +4050,31 @@ class _CopyWithImpl_Fragment_UserAdminOn_adminOn_serviceStudyYearData<TRes>
     Object? name = _undefined,
     Object? order = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Fragment_UserAdminOn_adminOn_serviceStudyYearData(
-        name: name == _undefined || name == null
-            ? _instance.name
-            : (name as String),
-        order: order == _undefined || order == null
-            ? _instance.order
-            : (order as int),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Fragment_UserAdminOn_adminOn_serviceStudyYearData(
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      order: order == _undefined || order == null
+          ? _instance.order
+          : (order as int),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 }
 
 class _CopyWithStubImpl_Fragment_UserAdminOn_adminOn_serviceStudyYearData<TRes>
     implements
         CopyWith_Fragment_UserAdminOn_adminOn_serviceStudyYearData<TRes> {
   _CopyWithStubImpl_Fragment_UserAdminOn_adminOn_serviceStudyYearData(
-      this._res);
+    this._res,
+  );
 
   TRes _res;
 
-  call({
-    String? name,
-    int? order,
-    String? $__typename,
-  }) =>
-      _res;
+  call({String? name, int? order, String? $__typename}) => _res;
 }
 
 class Variables_Fragment_AttendanceFields {
@@ -4071,35 +4085,38 @@ class Variables_Fragment_AttendanceFields {
     List<UuidValue>? servicesIds,
     List<UuidValue>? classesIds,
     List<UuidValue>? groupsIds,
-  }) =>
-      Variables_Fragment_AttendanceFields._({
-        if (dateFrom != null) r'dateFrom': dateFrom,
-        if (dateTo != null) r'dateTo': dateTo,
-        if (personId != null) r'personId': personId,
-        if (servicesIds != null) r'servicesIds': servicesIds,
-        if (classesIds != null) r'classesIds': classesIds,
-        if (groupsIds != null) r'groupsIds': groupsIds,
-      });
+  }) => Variables_Fragment_AttendanceFields._({
+    if (dateFrom != null) r'dateFrom': dateFrom,
+    if (dateTo != null) r'dateTo': dateTo,
+    if (personId != null) r'personId': personId,
+    if (servicesIds != null) r'servicesIds': servicesIds,
+    if (classesIds != null) r'classesIds': classesIds,
+    if (groupsIds != null) r'groupsIds': groupsIds,
+  });
 
   Variables_Fragment_AttendanceFields._(this._$data);
 
   factory Variables_Fragment_AttendanceFields.fromJson(
-      Map<String, dynamic> data) {
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('dateFrom')) {
       final l$dateFrom = data['dateFrom'];
-      result$data['dateFrom'] =
-          l$dateFrom == null ? null : dateFromString(l$dateFrom);
+      result$data['dateFrom'] = l$dateFrom == null
+          ? null
+          : dateFromString(l$dateFrom);
     }
     if (data.containsKey('dateTo')) {
       final l$dateTo = data['dateTo'];
-      result$data['dateTo'] =
-          l$dateTo == null ? null : dateFromString(l$dateTo);
+      result$data['dateTo'] = l$dateTo == null
+          ? null
+          : dateFromString(l$dateTo);
     }
     if (data.containsKey('personId')) {
       final l$personId = data['personId'];
-      result$data['personId'] =
-          l$personId == null ? null : stringToUuid(l$personId);
+      result$data['personId'] = l$personId == null
+          ? null
+          : stringToUuid(l$personId);
     }
     if (data.containsKey('servicesIds')) {
       final l$servicesIds = data['servicesIds'];
@@ -4115,8 +4132,9 @@ class Variables_Fragment_AttendanceFields {
     }
     if (data.containsKey('groupsIds')) {
       final l$groupsIds = data['groupsIds'];
-      result$data['groupsIds'] =
-          (l$groupsIds as List<dynamic>?)?.map((e) => stringToUuid(e)).toList();
+      result$data['groupsIds'] = (l$groupsIds as List<dynamic>?)
+          ?.map((e) => stringToUuid(e))
+          .toList();
     }
     return Variables_Fragment_AttendanceFields._(result$data);
   }
@@ -4140,8 +4158,9 @@ class Variables_Fragment_AttendanceFields {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('dateFrom')) {
       final l$dateFrom = dateFrom;
-      result$data['dateFrom'] =
-          l$dateFrom == null ? null : dateToString(l$dateFrom);
+      result$data['dateFrom'] = l$dateFrom == null
+          ? null
+          : dateToString(l$dateFrom);
     }
     if (_$data.containsKey('dateTo')) {
       final l$dateTo = dateTo;
@@ -4149,33 +4168,35 @@ class Variables_Fragment_AttendanceFields {
     }
     if (_$data.containsKey('personId')) {
       final l$personId = personId;
-      result$data['personId'] =
-          l$personId == null ? null : uuidToString(l$personId);
+      result$data['personId'] = l$personId == null
+          ? null
+          : uuidToString(l$personId);
     }
     if (_$data.containsKey('servicesIds')) {
       final l$servicesIds = servicesIds;
-      result$data['servicesIds'] =
-          l$servicesIds?.map((e) => uuidToString(e)).toList();
+      result$data['servicesIds'] = l$servicesIds
+          ?.map((e) => uuidToString(e))
+          .toList();
     }
     if (_$data.containsKey('classesIds')) {
       final l$classesIds = classesIds;
-      result$data['classesIds'] =
-          l$classesIds?.map((e) => uuidToString(e)).toList();
+      result$data['classesIds'] = l$classesIds
+          ?.map((e) => uuidToString(e))
+          .toList();
     }
     if (_$data.containsKey('groupsIds')) {
       final l$groupsIds = groupsIds;
-      result$data['groupsIds'] =
-          l$groupsIds?.map((e) => uuidToString(e)).toList();
+      result$data['groupsIds'] = l$groupsIds
+          ?.map((e) => uuidToString(e))
+          .toList();
     }
     return result$data;
   }
 
   CopyWith_Variables_Fragment_AttendanceFields<
-          Variables_Fragment_AttendanceFields>
-      get copyWith => CopyWith_Variables_Fragment_AttendanceFields(
-            this,
-            (i) => i,
-          );
+    Variables_Fragment_AttendanceFields
+  >
+  get copyWith => CopyWith_Variables_Fragment_AttendanceFields(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -4289,18 +4310,18 @@ class Variables_Fragment_AttendanceFields {
       _$data.containsKey('personId') ? l$personId : const {},
       _$data.containsKey('servicesIds')
           ? l$servicesIds == null
-              ? null
-              : Object.hashAll(l$servicesIds.map((v) => v))
+                ? null
+                : Object.hashAll(l$servicesIds.map((v) => v))
           : const {},
       _$data.containsKey('classesIds')
           ? l$classesIds == null
-              ? null
-              : Object.hashAll(l$classesIds.map((v) => v))
+                ? null
+                : Object.hashAll(l$classesIds.map((v) => v))
           : const {},
       _$data.containsKey('groupsIds')
           ? l$groupsIds == null
-              ? null
-              : Object.hashAll(l$groupsIds.map((v) => v))
+                ? null
+                : Object.hashAll(l$groupsIds.map((v) => v))
           : const {},
     ]);
   }
@@ -4327,10 +4348,7 @@ abstract class CopyWith_Variables_Fragment_AttendanceFields<TRes> {
 
 class _CopyWithImpl_Variables_Fragment_AttendanceFields<TRes>
     implements CopyWith_Variables_Fragment_AttendanceFields<TRes> {
-  _CopyWithImpl_Variables_Fragment_AttendanceFields(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Variables_Fragment_AttendanceFields(this._instance, this._then);
 
   final Variables_Fragment_AttendanceFields _instance;
 
@@ -4345,19 +4363,19 @@ class _CopyWithImpl_Variables_Fragment_AttendanceFields<TRes>
     Object? servicesIds = _undefined,
     Object? classesIds = _undefined,
     Object? groupsIds = _undefined,
-  }) =>
-      _then(Variables_Fragment_AttendanceFields._({
-        ..._instance._$data,
-        if (dateFrom != _undefined) 'dateFrom': (dateFrom as DateTime?),
-        if (dateTo != _undefined) 'dateTo': (dateTo as DateTime?),
-        if (personId != _undefined) 'personId': (personId as UuidValue?),
-        if (servicesIds != _undefined)
-          'servicesIds': (servicesIds as List<UuidValue>?),
-        if (classesIds != _undefined)
-          'classesIds': (classesIds as List<UuidValue>?),
-        if (groupsIds != _undefined)
-          'groupsIds': (groupsIds as List<UuidValue>?),
-      }));
+  }) => _then(
+    Variables_Fragment_AttendanceFields._({
+      ..._instance._$data,
+      if (dateFrom != _undefined) 'dateFrom': (dateFrom as DateTime?),
+      if (dateTo != _undefined) 'dateTo': (dateTo as DateTime?),
+      if (personId != _undefined) 'personId': (personId as UuidValue?),
+      if (servicesIds != _undefined)
+        'servicesIds': (servicesIds as List<UuidValue>?),
+      if (classesIds != _undefined)
+        'classesIds': (classesIds as List<UuidValue>?),
+      if (groupsIds != _undefined) 'groupsIds': (groupsIds as List<UuidValue>?),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Variables_Fragment_AttendanceFields<TRes>
@@ -4373,8 +4391,7 @@ class _CopyWithStubImpl_Variables_Fragment_AttendanceFields<TRes>
     List<UuidValue>? servicesIds,
     List<UuidValue>? classesIds,
     List<UuidValue>? groupsIds,
-  }) =>
-      _res;
+  }) => _res;
 }
 
 class Fragment_AttendanceFields {
@@ -4392,16 +4409,25 @@ class Fragment_AttendanceFields {
     final l$$__typename = json['__typename'];
     return Fragment_AttendanceFields(
       servicesHistory: (l$servicesHistory as List<dynamic>)
-          .map((e) => Fragment_AttendanceFields_servicesHistory.fromJson(
-              (e as Map<String, dynamic>)))
+          .map(
+            (e) => Fragment_AttendanceFields_servicesHistory.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
           .toList(),
       classesHistory: (l$classesHistory as List<dynamic>)
-          .map((e) => Fragment_AttendanceFields_classesHistory.fromJson(
-              (e as Map<String, dynamic>)))
+          .map(
+            (e) => Fragment_AttendanceFields_classesHistory.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
           .toList(),
       groupsHistory: (l$groupsHistory as List<dynamic>)
-          .map((e) => Fragment_AttendanceFields_groupsHistory.fromJson(
-              (e as Map<String, dynamic>)))
+          .map(
+            (e) => Fragment_AttendanceFields_groupsHistory.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
           .toList(),
       $__typename: (l$$__typename as String),
     );
@@ -4418,14 +4444,17 @@ class Fragment_AttendanceFields {
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$servicesHistory = servicesHistory;
-    _resultData['servicesHistory'] =
-        l$servicesHistory.map((e) => e.toJson()).toList();
+    _resultData['servicesHistory'] = l$servicesHistory
+        .map((e) => e.toJson())
+        .toList();
     final l$classesHistory = classesHistory;
-    _resultData['classesHistory'] =
-        l$classesHistory.map((e) => e.toJson()).toList();
+    _resultData['classesHistory'] = l$classesHistory
+        .map((e) => e.toJson())
+        .toList();
     final l$groupsHistory = groupsHistory;
-    _resultData['groupsHistory'] =
-        l$groupsHistory.map((e) => e.toJson()).toList();
+    _resultData['groupsHistory'] = l$groupsHistory
+        .map((e) => e.toJson())
+        .toList();
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -4502,10 +4531,7 @@ class Fragment_AttendanceFields {
 extension UtilityExtension_Fragment_AttendanceFields
     on Fragment_AttendanceFields {
   CopyWith_Fragment_AttendanceFields<Fragment_AttendanceFields> get copyWith =>
-      CopyWith_Fragment_AttendanceFields(
-        this,
-        (i) => i,
-      );
+      CopyWith_Fragment_AttendanceFields(this, (i) => i);
 }
 
 abstract class CopyWith_Fragment_AttendanceFields<TRes> {
@@ -4524,31 +4550,40 @@ abstract class CopyWith_Fragment_AttendanceFields<TRes> {
     String? $__typename,
   });
   TRes servicesHistory(
-      Iterable<Fragment_AttendanceFields_servicesHistory> Function(
-              Iterable<
-                  CopyWith_Fragment_AttendanceFields_servicesHistory<
-                      Fragment_AttendanceFields_servicesHistory>>)
-          _fn);
+    Iterable<Fragment_AttendanceFields_servicesHistory> Function(
+      Iterable<
+        CopyWith_Fragment_AttendanceFields_servicesHistory<
+          Fragment_AttendanceFields_servicesHistory
+        >
+      >,
+    )
+    _fn,
+  );
   TRes classesHistory(
-      Iterable<Fragment_AttendanceFields_classesHistory> Function(
-              Iterable<
-                  CopyWith_Fragment_AttendanceFields_classesHistory<
-                      Fragment_AttendanceFields_classesHistory>>)
-          _fn);
+    Iterable<Fragment_AttendanceFields_classesHistory> Function(
+      Iterable<
+        CopyWith_Fragment_AttendanceFields_classesHistory<
+          Fragment_AttendanceFields_classesHistory
+        >
+      >,
+    )
+    _fn,
+  );
   TRes groupsHistory(
-      Iterable<Fragment_AttendanceFields_groupsHistory> Function(
-              Iterable<
-                  CopyWith_Fragment_AttendanceFields_groupsHistory<
-                      Fragment_AttendanceFields_groupsHistory>>)
-          _fn);
+    Iterable<Fragment_AttendanceFields_groupsHistory> Function(
+      Iterable<
+        CopyWith_Fragment_AttendanceFields_groupsHistory<
+          Fragment_AttendanceFields_groupsHistory
+        >
+      >,
+    )
+    _fn,
+  );
 }
 
 class _CopyWithImpl_Fragment_AttendanceFields<TRes>
     implements CopyWith_Fragment_AttendanceFields<TRes> {
-  _CopyWithImpl_Fragment_AttendanceFields(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Fragment_AttendanceFields(this._instance, this._then);
 
   final Fragment_AttendanceFields _instance;
 
@@ -4561,63 +4596,74 @@ class _CopyWithImpl_Fragment_AttendanceFields<TRes>
     Object? classesHistory = _undefined,
     Object? groupsHistory = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Fragment_AttendanceFields(
-        servicesHistory:
-            servicesHistory == _undefined || servicesHistory == null
-                ? _instance.servicesHistory
-                : (servicesHistory
-                    as List<Fragment_AttendanceFields_servicesHistory>),
-        classesHistory: classesHistory == _undefined || classesHistory == null
-            ? _instance.classesHistory
-            : (classesHistory
-                as List<Fragment_AttendanceFields_classesHistory>),
-        groupsHistory: groupsHistory == _undefined || groupsHistory == null
-            ? _instance.groupsHistory
-            : (groupsHistory as List<Fragment_AttendanceFields_groupsHistory>),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Fragment_AttendanceFields(
+      servicesHistory: servicesHistory == _undefined || servicesHistory == null
+          ? _instance.servicesHistory
+          : (servicesHistory
+                as List<Fragment_AttendanceFields_servicesHistory>),
+      classesHistory: classesHistory == _undefined || classesHistory == null
+          ? _instance.classesHistory
+          : (classesHistory as List<Fragment_AttendanceFields_classesHistory>),
+      groupsHistory: groupsHistory == _undefined || groupsHistory == null
+          ? _instance.groupsHistory
+          : (groupsHistory as List<Fragment_AttendanceFields_groupsHistory>),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   TRes servicesHistory(
-          Iterable<Fragment_AttendanceFields_servicesHistory> Function(
-                  Iterable<
-                      CopyWith_Fragment_AttendanceFields_servicesHistory<
-                          Fragment_AttendanceFields_servicesHistory>>)
-              _fn) =>
-      call(
-          servicesHistory: _fn(_instance.servicesHistory
-              .map((e) => CopyWith_Fragment_AttendanceFields_servicesHistory(
-                    e,
-                    (i) => i,
-                  ))).toList());
+    Iterable<Fragment_AttendanceFields_servicesHistory> Function(
+      Iterable<
+        CopyWith_Fragment_AttendanceFields_servicesHistory<
+          Fragment_AttendanceFields_servicesHistory
+        >
+      >,
+    )
+    _fn,
+  ) => call(
+    servicesHistory: _fn(
+      _instance.servicesHistory.map(
+        (e) => CopyWith_Fragment_AttendanceFields_servicesHistory(e, (i) => i),
+      ),
+    ).toList(),
+  );
 
   TRes classesHistory(
-          Iterable<Fragment_AttendanceFields_classesHistory> Function(
-                  Iterable<
-                      CopyWith_Fragment_AttendanceFields_classesHistory<
-                          Fragment_AttendanceFields_classesHistory>>)
-              _fn) =>
-      call(
-          classesHistory: _fn(_instance.classesHistory
-              .map((e) => CopyWith_Fragment_AttendanceFields_classesHistory(
-                    e,
-                    (i) => i,
-                  ))).toList());
+    Iterable<Fragment_AttendanceFields_classesHistory> Function(
+      Iterable<
+        CopyWith_Fragment_AttendanceFields_classesHistory<
+          Fragment_AttendanceFields_classesHistory
+        >
+      >,
+    )
+    _fn,
+  ) => call(
+    classesHistory: _fn(
+      _instance.classesHistory.map(
+        (e) => CopyWith_Fragment_AttendanceFields_classesHistory(e, (i) => i),
+      ),
+    ).toList(),
+  );
 
   TRes groupsHistory(
-          Iterable<Fragment_AttendanceFields_groupsHistory> Function(
-                  Iterable<
-                      CopyWith_Fragment_AttendanceFields_groupsHistory<
-                          Fragment_AttendanceFields_groupsHistory>>)
-              _fn) =>
-      call(
-          groupsHistory: _fn(_instance.groupsHistory
-              .map((e) => CopyWith_Fragment_AttendanceFields_groupsHistory(
-                    e,
-                    (i) => i,
-                  ))).toList());
+    Iterable<Fragment_AttendanceFields_groupsHistory> Function(
+      Iterable<
+        CopyWith_Fragment_AttendanceFields_groupsHistory<
+          Fragment_AttendanceFields_groupsHistory
+        >
+      >,
+    )
+    _fn,
+  ) => call(
+    groupsHistory: _fn(
+      _instance.groupsHistory.map(
+        (e) => CopyWith_Fragment_AttendanceFields_groupsHistory(e, (i) => i),
+      ),
+    ).toList(),
+  );
 }
 
 class _CopyWithStubImpl_Fragment_AttendanceFields<TRes>
@@ -4631,8 +4677,7 @@ class _CopyWithStubImpl_Fragment_AttendanceFields<TRes>
     List<Fragment_AttendanceFields_classesHistory>? classesHistory,
     List<Fragment_AttendanceFields_groupsHistory>? groupsHistory,
     String? $__typename,
-  }) =>
-      _res;
+  }) => _res;
 
   servicesHistory(_fn) => _res;
 
@@ -4644,129 +4689,197 @@ class _CopyWithStubImpl_Fragment_AttendanceFields<TRes>
 const fragmentDefinitionAttendanceFields = FragmentDefinitionNode(
   name: NameNode(value: 'AttendanceFields'),
   typeCondition: TypeConditionNode(
-      on: NamedTypeNode(
-    name: NameNode(value: 'AuthUsersData'),
-    isNonNull: false,
-  )),
+    on: NamedTypeNode(name: NameNode(value: 'AuthUsersData'), isNonNull: false),
+  ),
   directives: [],
-  selectionSet: SelectionSetNode(selections: [
-    FieldNode(
-      name: NameNode(value: 'adminOn'),
-      alias: NameNode(value: 'servicesHistory'),
-      arguments: [
-        ArgumentNode(
-          name: NameNode(value: 'where'),
-          value: ObjectValueNode(fields: [
-            ObjectFieldNode(
-              name: NameNode(value: 'service'),
-              value: ObjectValueNode(fields: [
+  selectionSet: SelectionSetNode(
+    selections: [
+      FieldNode(
+        name: NameNode(value: 'adminOn'),
+        alias: NameNode(value: 'servicesHistory'),
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'where'),
+            value: ObjectValueNode(
+              fields: [
                 ObjectFieldNode(
-                  name: NameNode(value: 'id'),
-                  value: ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                      name: NameNode(value: '_in'),
-                      value: VariableNode(name: NameNode(value: 'servicesIds')),
-                    )
-                  ]),
-                )
-              ]),
-            )
-          ]),
-        ),
-        ArgumentNode(
-          name: NameNode(value: 'distinctOn'),
-          value: EnumValueNode(name: NameNode(value: 'adminOnService')),
-        ),
-      ],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
-        FieldNode(
-          name: NameNode(value: 'permissionId'),
-          alias: null,
-          arguments: [],
-          directives: [],
-          selectionSet: null,
-        ),
-        FieldNode(
-          name: NameNode(value: 'service'),
-          alias: null,
-          arguments: [],
-          directives: [],
-          selectionSet: SelectionSetNode(selections: [
-            FragmentSpreadNode(
-              name: NameNode(value: 'Service'),
+                  name: NameNode(value: 'service'),
+                  value: ObjectValueNode(
+                    fields: [
+                      ObjectFieldNode(
+                        name: NameNode(value: 'id'),
+                        value: ObjectValueNode(
+                          fields: [
+                            ObjectFieldNode(
+                              name: NameNode(value: '_in'),
+                              value: VariableNode(
+                                name: NameNode(value: 'servicesIds'),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          ArgumentNode(
+            name: NameNode(value: 'distinctOn'),
+            value: EnumValueNode(name: NameNode(value: 'adminOnService')),
+          ),
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(
+          selections: [
+            FieldNode(
+              name: NameNode(value: 'permissionId'),
+              alias: null,
+              arguments: [],
               directives: [],
+              selectionSet: null,
             ),
             FieldNode(
-              name: NameNode(value: 'attendanceHistoryAggregate'),
+              name: NameNode(value: 'service'),
               alias: null,
-              arguments: [
-                ArgumentNode(
-                  name: NameNode(value: 'where'),
-                  value: ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                      name: NameNode(value: 'dayId'),
-                      value: ObjectValueNode(fields: [
-                        ObjectFieldNode(
-                          name: NameNode(value: '_gte'),
-                          value:
-                              VariableNode(name: NameNode(value: 'dateFrom')),
-                        ),
-                        ObjectFieldNode(
-                          name: NameNode(value: '_lte'),
-                          value: VariableNode(name: NameNode(value: 'dateTo')),
-                        ),
-                      ]),
-                    ),
-                    ObjectFieldNode(
-                      name: NameNode(value: 'personId'),
-                      value: ObjectValueNode(fields: [
-                        ObjectFieldNode(
-                          name: NameNode(value: '_eq'),
-                          value:
-                              VariableNode(name: NameNode(value: 'personId')),
-                        )
-                      ]),
-                    ),
-                    ObjectFieldNode(
-                      name: NameNode(value: 'asAdmin'),
-                      value: ObjectValueNode(fields: [
-                        ObjectFieldNode(
-                          name: NameNode(value: '_eq'),
-                          value: BooleanValueNode(value: true),
-                        )
-                      ]),
-                    ),
-                  ]),
-                )
-              ],
+              arguments: [],
               directives: [],
-              selectionSet: SelectionSetNode(selections: [
-                FieldNode(
-                  name: NameNode(value: 'aggregate'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                      name: NameNode(value: 'count'),
-                      alias: null,
-                      arguments: [],
-                      directives: [],
-                      selectionSet: null,
-                    ),
-                    FieldNode(
-                      name: NameNode(value: 'max'),
-                      alias: null,
-                      arguments: [],
-                      directives: [],
-                      selectionSet: SelectionSetNode(selections: [
+              selectionSet: SelectionSetNode(
+                selections: [
+                  FragmentSpreadNode(
+                    name: NameNode(value: 'Service'),
+                    directives: [],
+                  ),
+                  FieldNode(
+                    name: NameNode(value: 'attendanceHistoryAggregate'),
+                    alias: null,
+                    arguments: [
+                      ArgumentNode(
+                        name: NameNode(value: 'where'),
+                        value: ObjectValueNode(
+                          fields: [
+                            ObjectFieldNode(
+                              name: NameNode(value: 'dayId'),
+                              value: ObjectValueNode(
+                                fields: [
+                                  ObjectFieldNode(
+                                    name: NameNode(value: '_gte'),
+                                    value: VariableNode(
+                                      name: NameNode(value: 'dateFrom'),
+                                    ),
+                                  ),
+                                  ObjectFieldNode(
+                                    name: NameNode(value: '_lte'),
+                                    value: VariableNode(
+                                      name: NameNode(value: 'dateTo'),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            ObjectFieldNode(
+                              name: NameNode(value: 'personId'),
+                              value: ObjectValueNode(
+                                fields: [
+                                  ObjectFieldNode(
+                                    name: NameNode(value: '_eq'),
+                                    value: VariableNode(
+                                      name: NameNode(value: 'personId'),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            ObjectFieldNode(
+                              name: NameNode(value: 'asAdmin'),
+                              value: ObjectValueNode(
+                                fields: [
+                                  ObjectFieldNode(
+                                    name: NameNode(value: '_eq'),
+                                    value: BooleanValueNode(value: true),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                    directives: [],
+                    selectionSet: SelectionSetNode(
+                      selections: [
                         FieldNode(
-                          name: NameNode(value: 'dayId'),
+                          name: NameNode(value: 'aggregate'),
                           alias: null,
                           arguments: [],
                           directives: [],
-                          selectionSet: null,
+                          selectionSet: SelectionSetNode(
+                            selections: [
+                              FieldNode(
+                                name: NameNode(value: 'count'),
+                                alias: null,
+                                arguments: [],
+                                directives: [],
+                                selectionSet: null,
+                              ),
+                              FieldNode(
+                                name: NameNode(value: 'max'),
+                                alias: null,
+                                arguments: [],
+                                directives: [],
+                                selectionSet: SelectionSetNode(
+                                  selections: [
+                                    FieldNode(
+                                      name: NameNode(value: 'dayId'),
+                                      alias: null,
+                                      arguments: [],
+                                      directives: [],
+                                      selectionSet: null,
+                                    ),
+                                    FieldNode(
+                                      name: NameNode(value: '__typename'),
+                                      alias: null,
+                                      arguments: [],
+                                      directives: [],
+                                      selectionSet: null,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              FieldNode(
+                                name: NameNode(value: '__typename'),
+                                alias: null,
+                                arguments: [],
+                                directives: [],
+                                selectionSet: null,
+                              ),
+                            ],
+                          ),
+                        ),
+                        FieldNode(
+                          name: NameNode(value: 'nodes'),
+                          alias: null,
+                          arguments: [],
+                          directives: [],
+                          selectionSet: SelectionSetNode(
+                            selections: [
+                              FieldNode(
+                                name: NameNode(value: 'dayId'),
+                                alias: null,
+                                arguments: [],
+                                directives: [],
+                                selectionSet: null,
+                              ),
+                              FieldNode(
+                                name: NameNode(value: '__typename'),
+                                alias: null,
+                                arguments: [],
+                                directives: [],
+                                selectionSet: null,
+                              ),
+                            ],
+                          ),
                         ),
                         FieldNode(
                           name: NameNode(value: '__typename'),
@@ -4775,126 +4888,110 @@ const fragmentDefinitionAttendanceFields = FragmentDefinitionNode(
                           directives: [],
                           selectionSet: null,
                         ),
-                      ]),
+                      ],
                     ),
-                    FieldNode(
-                      name: NameNode(value: '__typename'),
-                      alias: null,
-                      arguments: [],
-                      directives: [],
-                      selectionSet: null,
-                    ),
-                  ]),
-                ),
-                FieldNode(
-                  name: NameNode(value: 'nodes'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                      name: NameNode(value: 'dayId'),
-                      alias: null,
-                      arguments: [],
-                      directives: [],
-                      selectionSet: null,
-                    ),
-                    FieldNode(
-                      name: NameNode(value: '__typename'),
-                      alias: null,
-                      arguments: [],
-                      directives: [],
-                      selectionSet: null,
-                    ),
-                  ]),
-                ),
-                FieldNode(
-                  name: NameNode(value: '__typename'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null,
-                ),
-              ]),
-            ),
-            FieldNode(
-              name: NameNode(value: 'attendanceDaysConstraintsAggregate'),
-              alias: null,
-              arguments: [
-                ArgumentNode(
-                  name: NameNode(value: 'where'),
-                  value: ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                      name: NameNode(value: 'dayId'),
-                      value: ObjectValueNode(fields: [
-                        ObjectFieldNode(
-                          name: NameNode(value: '_gte'),
-                          value:
-                              VariableNode(name: NameNode(value: 'dateFrom')),
+                  ),
+                  FieldNode(
+                    name: NameNode(value: 'attendanceDaysConstraintsAggregate'),
+                    alias: null,
+                    arguments: [
+                      ArgumentNode(
+                        name: NameNode(value: 'where'),
+                        value: ObjectValueNode(
+                          fields: [
+                            ObjectFieldNode(
+                              name: NameNode(value: 'dayId'),
+                              value: ObjectValueNode(
+                                fields: [
+                                  ObjectFieldNode(
+                                    name: NameNode(value: '_gte'),
+                                    value: VariableNode(
+                                      name: NameNode(value: 'dateFrom'),
+                                    ),
+                                  ),
+                                  ObjectFieldNode(
+                                    name: NameNode(value: '_lte'),
+                                    value: VariableNode(
+                                      name: NameNode(value: 'dateTo'),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
-                        ObjectFieldNode(
-                          name: NameNode(value: '_lte'),
-                          value: VariableNode(name: NameNode(value: 'dateTo')),
+                      ),
+                    ],
+                    directives: [],
+                    selectionSet: SelectionSetNode(
+                      selections: [
+                        FieldNode(
+                          name: NameNode(value: 'aggregate'),
+                          alias: null,
+                          arguments: [],
+                          directives: [],
+                          selectionSet: SelectionSetNode(
+                            selections: [
+                              FieldNode(
+                                name: NameNode(value: 'count'),
+                                alias: null,
+                                arguments: [],
+                                directives: [],
+                                selectionSet: null,
+                              ),
+                              FieldNode(
+                                name: NameNode(value: '__typename'),
+                                alias: null,
+                                arguments: [],
+                                directives: [],
+                                selectionSet: null,
+                              ),
+                            ],
+                          ),
                         ),
-                      ]),
-                    )
-                  ]),
-                )
-              ],
-              directives: [],
-              selectionSet: SelectionSetNode(selections: [
-                FieldNode(
-                  name: NameNode(value: 'aggregate'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                      name: NameNode(value: 'count'),
-                      alias: null,
-                      arguments: [],
-                      directives: [],
-                      selectionSet: null,
+                        FieldNode(
+                          name: NameNode(value: 'nodes'),
+                          alias: null,
+                          arguments: [],
+                          directives: [],
+                          selectionSet: SelectionSetNode(
+                            selections: [
+                              FieldNode(
+                                name: NameNode(value: 'dayId'),
+                                alias: null,
+                                arguments: [],
+                                directives: [],
+                                selectionSet: null,
+                              ),
+                              FieldNode(
+                                name: NameNode(value: '__typename'),
+                                alias: null,
+                                arguments: [],
+                                directives: [],
+                                selectionSet: null,
+                              ),
+                            ],
+                          ),
+                        ),
+                        FieldNode(
+                          name: NameNode(value: '__typename'),
+                          alias: null,
+                          arguments: [],
+                          directives: [],
+                          selectionSet: null,
+                        ),
+                      ],
                     ),
-                    FieldNode(
-                      name: NameNode(value: '__typename'),
-                      alias: null,
-                      arguments: [],
-                      directives: [],
-                      selectionSet: null,
-                    ),
-                  ]),
-                ),
-                FieldNode(
-                  name: NameNode(value: 'nodes'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                      name: NameNode(value: 'dayId'),
-                      alias: null,
-                      arguments: [],
-                      directives: [],
-                      selectionSet: null,
-                    ),
-                    FieldNode(
-                      name: NameNode(value: '__typename'),
-                      alias: null,
-                      arguments: [],
-                      directives: [],
-                      selectionSet: null,
-                    ),
-                  ]),
-                ),
-                FieldNode(
-                  name: NameNode(value: '__typename'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null,
-                ),
-              ]),
+                  ),
+                  FieldNode(
+                    name: NameNode(value: '__typename'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                ],
+              ),
             ),
             FieldNode(
               name: NameNode(value: '__typename'),
@@ -4902,418 +4999,221 @@ const fragmentDefinitionAttendanceFields = FragmentDefinitionNode(
               arguments: [],
               directives: [],
               selectionSet: null,
-            ),
-          ]),
-        ),
-        FieldNode(
-          name: NameNode(value: '__typename'),
-          alias: null,
-          arguments: [],
-          directives: [],
-          selectionSet: null,
-        ),
-      ]),
-    ),
-    FieldNode(
-      name: NameNode(value: 'adminOn'),
-      alias: NameNode(value: 'classesHistory'),
-      arguments: [
-        ArgumentNode(
-          name: NameNode(value: 'where'),
-          value: ObjectValueNode(fields: [
-            ObjectFieldNode(
-              name: NameNode(value: 'classes'),
-              value: ObjectValueNode(fields: [
-                ObjectFieldNode(
-                  name: NameNode(value: 'id'),
-                  value: ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                      name: NameNode(value: '_in'),
-                      value: VariableNode(name: NameNode(value: 'classesIds')),
-                    )
-                  ]),
-                )
-              ]),
-            )
-          ]),
-        ),
-        ArgumentNode(
-          name: NameNode(value: 'distinctOn'),
-          value: EnumValueNode(name: NameNode(value: 'adminOnService')),
-        ),
-      ],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
-        FieldNode(
-          name: NameNode(value: 'permissionId'),
-          alias: null,
-          arguments: [],
-          directives: [],
-          selectionSet: null,
-        ),
-        FieldNode(
-          name: NameNode(value: 'classes'),
-          alias: null,
-          arguments: [
-            ArgumentNode(
-              name: NameNode(value: 'where'),
-              value: ObjectValueNode(fields: [
-                ObjectFieldNode(
-                  name: NameNode(value: 'id'),
-                  value: ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                      name: NameNode(value: '_in'),
-                      value: VariableNode(name: NameNode(value: 'classesIds')),
-                    )
-                  ]),
-                )
-              ]),
-            ),
-            ArgumentNode(
-              name: NameNode(value: 'distinctOn'),
-              value: EnumValueNode(name: NameNode(value: 'id')),
             ),
           ],
-          directives: [],
-          selectionSet: SelectionSetNode(selections: [
-            FragmentSpreadNode(
-              name: NameNode(value: 'Class'),
-              directives: [],
-            ),
-            FieldNode(
-              name: NameNode(value: 'attendanceHistoryAggregate'),
-              alias: null,
-              arguments: [
-                ArgumentNode(
-                  name: NameNode(value: 'where'),
-                  value: ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                      name: NameNode(value: 'dayId'),
-                      value: ObjectValueNode(fields: [
-                        ObjectFieldNode(
-                          name: NameNode(value: '_gte'),
-                          value:
-                              VariableNode(name: NameNode(value: 'dateFrom')),
-                        ),
-                        ObjectFieldNode(
-                          name: NameNode(value: '_lte'),
-                          value: VariableNode(name: NameNode(value: 'dateTo')),
-                        ),
-                      ]),
-                    ),
-                    ObjectFieldNode(
-                      name: NameNode(value: 'personId'),
-                      value: ObjectValueNode(fields: [
-                        ObjectFieldNode(
-                          name: NameNode(value: '_eq'),
-                          value:
-                              VariableNode(name: NameNode(value: 'personId')),
-                        )
-                      ]),
-                    ),
-                    ObjectFieldNode(
-                      name: NameNode(value: 'asAdmin'),
-                      value: ObjectValueNode(fields: [
-                        ObjectFieldNode(
-                          name: NameNode(value: '_eq'),
-                          value: BooleanValueNode(value: true),
-                        )
-                      ]),
-                    ),
-                  ]),
-                )
-              ],
-              directives: [],
-              selectionSet: SelectionSetNode(selections: [
-                FieldNode(
-                  name: NameNode(value: 'aggregate'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                      name: NameNode(value: 'count'),
-                      alias: null,
-                      arguments: [],
-                      directives: [],
-                      selectionSet: null,
-                    ),
-                    FieldNode(
-                      name: NameNode(value: 'max'),
-                      alias: null,
-                      arguments: [],
-                      directives: [],
-                      selectionSet: SelectionSetNode(selections: [
-                        FieldNode(
-                          name: NameNode(value: 'dayId'),
-                          alias: null,
-                          arguments: [],
-                          directives: [],
-                          selectionSet: null,
-                        ),
-                        FieldNode(
-                          name: NameNode(value: '__typename'),
-                          alias: null,
-                          arguments: [],
-                          directives: [],
-                          selectionSet: null,
-                        ),
-                      ]),
-                    ),
-                    FieldNode(
-                      name: NameNode(value: '__typename'),
-                      alias: null,
-                      arguments: [],
-                      directives: [],
-                      selectionSet: null,
-                    ),
-                  ]),
-                ),
-                FieldNode(
-                  name: NameNode(value: 'nodes'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                      name: NameNode(value: 'dayId'),
-                      alias: null,
-                      arguments: [],
-                      directives: [],
-                      selectionSet: null,
-                    ),
-                    FieldNode(
-                      name: NameNode(value: '__typename'),
-                      alias: null,
-                      arguments: [],
-                      directives: [],
-                      selectionSet: null,
-                    ),
-                  ]),
-                ),
-                FieldNode(
-                  name: NameNode(value: '__typename'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null,
-                ),
-              ]),
-            ),
-            FieldNode(
-              name: NameNode(value: 'attendanceDaysConstraintsAggregate'),
-              alias: null,
-              arguments: [
-                ArgumentNode(
-                  name: NameNode(value: 'where'),
-                  value: ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                      name: NameNode(value: 'dayId'),
-                      value: ObjectValueNode(fields: [
-                        ObjectFieldNode(
-                          name: NameNode(value: '_gte'),
-                          value:
-                              VariableNode(name: NameNode(value: 'dateFrom')),
-                        ),
-                        ObjectFieldNode(
-                          name: NameNode(value: '_lte'),
-                          value: VariableNode(name: NameNode(value: 'dateTo')),
-                        ),
-                      ]),
-                    )
-                  ]),
-                )
-              ],
-              directives: [],
-              selectionSet: SelectionSetNode(selections: [
-                FieldNode(
-                  name: NameNode(value: 'aggregate'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                      name: NameNode(value: 'count'),
-                      alias: null,
-                      arguments: [],
-                      directives: [],
-                      selectionSet: null,
-                    ),
-                    FieldNode(
-                      name: NameNode(value: '__typename'),
-                      alias: null,
-                      arguments: [],
-                      directives: [],
-                      selectionSet: null,
-                    ),
-                  ]),
-                ),
-                FieldNode(
-                  name: NameNode(value: 'nodes'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                      name: NameNode(value: 'dayId'),
-                      alias: null,
-                      arguments: [],
-                      directives: [],
-                      selectionSet: null,
-                    ),
-                    FieldNode(
-                      name: NameNode(value: '__typename'),
-                      alias: null,
-                      arguments: [],
-                      directives: [],
-                      selectionSet: null,
-                    ),
-                  ]),
-                ),
-                FieldNode(
-                  name: NameNode(value: '__typename'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null,
-                ),
-              ]),
-            ),
-            FieldNode(
-              name: NameNode(value: '__typename'),
-              alias: null,
-              arguments: [],
-              directives: [],
-              selectionSet: null,
-            ),
-          ]),
         ),
-        FieldNode(
-          name: NameNode(value: '__typename'),
-          alias: null,
-          arguments: [],
-          directives: [],
-          selectionSet: null,
-        ),
-      ]),
-    ),
-    FieldNode(
-      name: NameNode(value: 'adminOn'),
-      alias: NameNode(value: 'groupsHistory'),
-      arguments: [
-        ArgumentNode(
-          name: NameNode(value: 'where'),
-          value: ObjectValueNode(fields: [
-            ObjectFieldNode(
-              name: NameNode(value: 'group'),
-              value: ObjectValueNode(fields: [
+      ),
+      FieldNode(
+        name: NameNode(value: 'adminOn'),
+        alias: NameNode(value: 'classesHistory'),
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'where'),
+            value: ObjectValueNode(
+              fields: [
                 ObjectFieldNode(
-                  name: NameNode(value: 'id'),
-                  value: ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                      name: NameNode(value: '_in'),
-                      value: VariableNode(name: NameNode(value: 'groupsIds')),
-                    )
-                  ]),
-                )
-              ]),
-            )
-          ]),
-        ),
-        ArgumentNode(
-          name: NameNode(value: 'distinctOn'),
-          value: EnumValueNode(name: NameNode(value: 'adminOnGroup')),
-        ),
-      ],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
-        FieldNode(
-          name: NameNode(value: 'permissionId'),
-          alias: null,
-          arguments: [],
-          directives: [],
-          selectionSet: null,
-        ),
-        FieldNode(
-          name: NameNode(value: 'group'),
-          alias: null,
-          arguments: [],
-          directives: [],
-          selectionSet: SelectionSetNode(selections: [
-            FragmentSpreadNode(
-              name: NameNode(value: 'Group'),
+                  name: NameNode(value: 'classes'),
+                  value: ObjectValueNode(
+                    fields: [
+                      ObjectFieldNode(
+                        name: NameNode(value: 'id'),
+                        value: ObjectValueNode(
+                          fields: [
+                            ObjectFieldNode(
+                              name: NameNode(value: '_in'),
+                              value: VariableNode(
+                                name: NameNode(value: 'classesIds'),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          ArgumentNode(
+            name: NameNode(value: 'distinctOn'),
+            value: EnumValueNode(name: NameNode(value: 'adminOnService')),
+          ),
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(
+          selections: [
+            FieldNode(
+              name: NameNode(value: 'permissionId'),
+              alias: null,
+              arguments: [],
               directives: [],
+              selectionSet: null,
             ),
             FieldNode(
-              name: NameNode(value: 'attendanceHistoryAggregate'),
+              name: NameNode(value: 'classes'),
               alias: null,
               arguments: [
                 ArgumentNode(
                   name: NameNode(value: 'where'),
-                  value: ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                      name: NameNode(value: 'dayId'),
-                      value: ObjectValueNode(fields: [
-                        ObjectFieldNode(
-                          name: NameNode(value: '_gte'),
-                          value:
-                              VariableNode(name: NameNode(value: 'dateFrom')),
+                  value: ObjectValueNode(
+                    fields: [
+                      ObjectFieldNode(
+                        name: NameNode(value: 'id'),
+                        value: ObjectValueNode(
+                          fields: [
+                            ObjectFieldNode(
+                              name: NameNode(value: '_in'),
+                              value: VariableNode(
+                                name: NameNode(value: 'classesIds'),
+                              ),
+                            ),
+                          ],
                         ),
-                        ObjectFieldNode(
-                          name: NameNode(value: '_lte'),
-                          value: VariableNode(name: NameNode(value: 'dateTo')),
-                        ),
-                      ]),
-                    ),
-                    ObjectFieldNode(
-                      name: NameNode(value: 'personId'),
-                      value: ObjectValueNode(fields: [
-                        ObjectFieldNode(
-                          name: NameNode(value: '_eq'),
-                          value:
-                              VariableNode(name: NameNode(value: 'personId')),
-                        )
-                      ]),
-                    ),
-                    ObjectFieldNode(
-                      name: NameNode(value: 'asAdmin'),
-                      value: ObjectValueNode(fields: [
-                        ObjectFieldNode(
-                          name: NameNode(value: '_eq'),
-                          value: BooleanValueNode(value: true),
-                        )
-                      ]),
-                    ),
-                  ]),
-                )
+                      ),
+                    ],
+                  ),
+                ),
+                ArgumentNode(
+                  name: NameNode(value: 'distinctOn'),
+                  value: EnumValueNode(name: NameNode(value: 'id')),
+                ),
               ],
               directives: [],
-              selectionSet: SelectionSetNode(selections: [
-                FieldNode(
-                  name: NameNode(value: 'aggregate'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                      name: NameNode(value: 'count'),
-                      alias: null,
-                      arguments: [],
-                      directives: [],
-                      selectionSet: null,
-                    ),
-                    FieldNode(
-                      name: NameNode(value: 'max'),
-                      alias: null,
-                      arguments: [],
-                      directives: [],
-                      selectionSet: SelectionSetNode(selections: [
+              selectionSet: SelectionSetNode(
+                selections: [
+                  FragmentSpreadNode(
+                    name: NameNode(value: 'Class'),
+                    directives: [],
+                  ),
+                  FieldNode(
+                    name: NameNode(value: 'attendanceHistoryAggregate'),
+                    alias: null,
+                    arguments: [
+                      ArgumentNode(
+                        name: NameNode(value: 'where'),
+                        value: ObjectValueNode(
+                          fields: [
+                            ObjectFieldNode(
+                              name: NameNode(value: 'dayId'),
+                              value: ObjectValueNode(
+                                fields: [
+                                  ObjectFieldNode(
+                                    name: NameNode(value: '_gte'),
+                                    value: VariableNode(
+                                      name: NameNode(value: 'dateFrom'),
+                                    ),
+                                  ),
+                                  ObjectFieldNode(
+                                    name: NameNode(value: '_lte'),
+                                    value: VariableNode(
+                                      name: NameNode(value: 'dateTo'),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            ObjectFieldNode(
+                              name: NameNode(value: 'personId'),
+                              value: ObjectValueNode(
+                                fields: [
+                                  ObjectFieldNode(
+                                    name: NameNode(value: '_eq'),
+                                    value: VariableNode(
+                                      name: NameNode(value: 'personId'),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            ObjectFieldNode(
+                              name: NameNode(value: 'asAdmin'),
+                              value: ObjectValueNode(
+                                fields: [
+                                  ObjectFieldNode(
+                                    name: NameNode(value: '_eq'),
+                                    value: BooleanValueNode(value: true),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                    directives: [],
+                    selectionSet: SelectionSetNode(
+                      selections: [
                         FieldNode(
-                          name: NameNode(value: 'dayId'),
+                          name: NameNode(value: 'aggregate'),
                           alias: null,
                           arguments: [],
                           directives: [],
-                          selectionSet: null,
+                          selectionSet: SelectionSetNode(
+                            selections: [
+                              FieldNode(
+                                name: NameNode(value: 'count'),
+                                alias: null,
+                                arguments: [],
+                                directives: [],
+                                selectionSet: null,
+                              ),
+                              FieldNode(
+                                name: NameNode(value: 'max'),
+                                alias: null,
+                                arguments: [],
+                                directives: [],
+                                selectionSet: SelectionSetNode(
+                                  selections: [
+                                    FieldNode(
+                                      name: NameNode(value: 'dayId'),
+                                      alias: null,
+                                      arguments: [],
+                                      directives: [],
+                                      selectionSet: null,
+                                    ),
+                                    FieldNode(
+                                      name: NameNode(value: '__typename'),
+                                      alias: null,
+                                      arguments: [],
+                                      directives: [],
+                                      selectionSet: null,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              FieldNode(
+                                name: NameNode(value: '__typename'),
+                                alias: null,
+                                arguments: [],
+                                directives: [],
+                                selectionSet: null,
+                              ),
+                            ],
+                          ),
+                        ),
+                        FieldNode(
+                          name: NameNode(value: 'nodes'),
+                          alias: null,
+                          arguments: [],
+                          directives: [],
+                          selectionSet: SelectionSetNode(
+                            selections: [
+                              FieldNode(
+                                name: NameNode(value: 'dayId'),
+                                alias: null,
+                                arguments: [],
+                                directives: [],
+                                selectionSet: null,
+                              ),
+                              FieldNode(
+                                name: NameNode(value: '__typename'),
+                                alias: null,
+                                arguments: [],
+                                directives: [],
+                                selectionSet: null,
+                              ),
+                            ],
+                          ),
                         ),
                         FieldNode(
                           name: NameNode(value: '__typename'),
@@ -5322,126 +5222,110 @@ const fragmentDefinitionAttendanceFields = FragmentDefinitionNode(
                           directives: [],
                           selectionSet: null,
                         ),
-                      ]),
+                      ],
                     ),
-                    FieldNode(
-                      name: NameNode(value: '__typename'),
-                      alias: null,
-                      arguments: [],
-                      directives: [],
-                      selectionSet: null,
-                    ),
-                  ]),
-                ),
-                FieldNode(
-                  name: NameNode(value: 'nodes'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                      name: NameNode(value: 'dayId'),
-                      alias: null,
-                      arguments: [],
-                      directives: [],
-                      selectionSet: null,
-                    ),
-                    FieldNode(
-                      name: NameNode(value: '__typename'),
-                      alias: null,
-                      arguments: [],
-                      directives: [],
-                      selectionSet: null,
-                    ),
-                  ]),
-                ),
-                FieldNode(
-                  name: NameNode(value: '__typename'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null,
-                ),
-              ]),
-            ),
-            FieldNode(
-              name: NameNode(value: 'attendanceDaysConstraintsAggregate'),
-              alias: null,
-              arguments: [
-                ArgumentNode(
-                  name: NameNode(value: 'where'),
-                  value: ObjectValueNode(fields: [
-                    ObjectFieldNode(
-                      name: NameNode(value: 'dayId'),
-                      value: ObjectValueNode(fields: [
-                        ObjectFieldNode(
-                          name: NameNode(value: '_gte'),
-                          value:
-                              VariableNode(name: NameNode(value: 'dateFrom')),
+                  ),
+                  FieldNode(
+                    name: NameNode(value: 'attendanceDaysConstraintsAggregate'),
+                    alias: null,
+                    arguments: [
+                      ArgumentNode(
+                        name: NameNode(value: 'where'),
+                        value: ObjectValueNode(
+                          fields: [
+                            ObjectFieldNode(
+                              name: NameNode(value: 'dayId'),
+                              value: ObjectValueNode(
+                                fields: [
+                                  ObjectFieldNode(
+                                    name: NameNode(value: '_gte'),
+                                    value: VariableNode(
+                                      name: NameNode(value: 'dateFrom'),
+                                    ),
+                                  ),
+                                  ObjectFieldNode(
+                                    name: NameNode(value: '_lte'),
+                                    value: VariableNode(
+                                      name: NameNode(value: 'dateTo'),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
                         ),
-                        ObjectFieldNode(
-                          name: NameNode(value: '_lte'),
-                          value: VariableNode(name: NameNode(value: 'dateTo')),
+                      ),
+                    ],
+                    directives: [],
+                    selectionSet: SelectionSetNode(
+                      selections: [
+                        FieldNode(
+                          name: NameNode(value: 'aggregate'),
+                          alias: null,
+                          arguments: [],
+                          directives: [],
+                          selectionSet: SelectionSetNode(
+                            selections: [
+                              FieldNode(
+                                name: NameNode(value: 'count'),
+                                alias: null,
+                                arguments: [],
+                                directives: [],
+                                selectionSet: null,
+                              ),
+                              FieldNode(
+                                name: NameNode(value: '__typename'),
+                                alias: null,
+                                arguments: [],
+                                directives: [],
+                                selectionSet: null,
+                              ),
+                            ],
+                          ),
                         ),
-                      ]),
-                    )
-                  ]),
-                )
-              ],
-              directives: [],
-              selectionSet: SelectionSetNode(selections: [
-                FieldNode(
-                  name: NameNode(value: 'aggregate'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                      name: NameNode(value: 'count'),
-                      alias: null,
-                      arguments: [],
-                      directives: [],
-                      selectionSet: null,
+                        FieldNode(
+                          name: NameNode(value: 'nodes'),
+                          alias: null,
+                          arguments: [],
+                          directives: [],
+                          selectionSet: SelectionSetNode(
+                            selections: [
+                              FieldNode(
+                                name: NameNode(value: 'dayId'),
+                                alias: null,
+                                arguments: [],
+                                directives: [],
+                                selectionSet: null,
+                              ),
+                              FieldNode(
+                                name: NameNode(value: '__typename'),
+                                alias: null,
+                                arguments: [],
+                                directives: [],
+                                selectionSet: null,
+                              ),
+                            ],
+                          ),
+                        ),
+                        FieldNode(
+                          name: NameNode(value: '__typename'),
+                          alias: null,
+                          arguments: [],
+                          directives: [],
+                          selectionSet: null,
+                        ),
+                      ],
                     ),
-                    FieldNode(
-                      name: NameNode(value: '__typename'),
-                      alias: null,
-                      arguments: [],
-                      directives: [],
-                      selectionSet: null,
-                    ),
-                  ]),
-                ),
-                FieldNode(
-                  name: NameNode(value: 'nodes'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: SelectionSetNode(selections: [
-                    FieldNode(
-                      name: NameNode(value: 'dayId'),
-                      alias: null,
-                      arguments: [],
-                      directives: [],
-                      selectionSet: null,
-                    ),
-                    FieldNode(
-                      name: NameNode(value: '__typename'),
-                      alias: null,
-                      arguments: [],
-                      directives: [],
-                      selectionSet: null,
-                    ),
-                  ]),
-                ),
-                FieldNode(
-                  name: NameNode(value: '__typename'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null,
-                ),
-              ]),
+                  ),
+                  FieldNode(
+                    name: NameNode(value: '__typename'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                ],
+              ),
             ),
             FieldNode(
               name: NameNode(value: '__typename'),
@@ -5450,35 +5334,339 @@ const fragmentDefinitionAttendanceFields = FragmentDefinitionNode(
               directives: [],
               selectionSet: null,
             ),
-          ]),
+          ],
         ),
-        FieldNode(
-          name: NameNode(value: '__typename'),
-          alias: null,
-          arguments: [],
-          directives: [],
-          selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'adminOn'),
+        alias: NameNode(value: 'groupsHistory'),
+        arguments: [
+          ArgumentNode(
+            name: NameNode(value: 'where'),
+            value: ObjectValueNode(
+              fields: [
+                ObjectFieldNode(
+                  name: NameNode(value: 'group'),
+                  value: ObjectValueNode(
+                    fields: [
+                      ObjectFieldNode(
+                        name: NameNode(value: 'id'),
+                        value: ObjectValueNode(
+                          fields: [
+                            ObjectFieldNode(
+                              name: NameNode(value: '_in'),
+                              value: VariableNode(
+                                name: NameNode(value: 'groupsIds'),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+          ArgumentNode(
+            name: NameNode(value: 'distinctOn'),
+            value: EnumValueNode(name: NameNode(value: 'adminOnGroup')),
+          ),
+        ],
+        directives: [],
+        selectionSet: SelectionSetNode(
+          selections: [
+            FieldNode(
+              name: NameNode(value: 'permissionId'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: 'group'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: SelectionSetNode(
+                selections: [
+                  FragmentSpreadNode(
+                    name: NameNode(value: 'Group'),
+                    directives: [],
+                  ),
+                  FieldNode(
+                    name: NameNode(value: 'attendanceHistoryAggregate'),
+                    alias: null,
+                    arguments: [
+                      ArgumentNode(
+                        name: NameNode(value: 'where'),
+                        value: ObjectValueNode(
+                          fields: [
+                            ObjectFieldNode(
+                              name: NameNode(value: 'dayId'),
+                              value: ObjectValueNode(
+                                fields: [
+                                  ObjectFieldNode(
+                                    name: NameNode(value: '_gte'),
+                                    value: VariableNode(
+                                      name: NameNode(value: 'dateFrom'),
+                                    ),
+                                  ),
+                                  ObjectFieldNode(
+                                    name: NameNode(value: '_lte'),
+                                    value: VariableNode(
+                                      name: NameNode(value: 'dateTo'),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            ObjectFieldNode(
+                              name: NameNode(value: 'personId'),
+                              value: ObjectValueNode(
+                                fields: [
+                                  ObjectFieldNode(
+                                    name: NameNode(value: '_eq'),
+                                    value: VariableNode(
+                                      name: NameNode(value: 'personId'),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            ObjectFieldNode(
+                              name: NameNode(value: 'asAdmin'),
+                              value: ObjectValueNode(
+                                fields: [
+                                  ObjectFieldNode(
+                                    name: NameNode(value: '_eq'),
+                                    value: BooleanValueNode(value: true),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                    directives: [],
+                    selectionSet: SelectionSetNode(
+                      selections: [
+                        FieldNode(
+                          name: NameNode(value: 'aggregate'),
+                          alias: null,
+                          arguments: [],
+                          directives: [],
+                          selectionSet: SelectionSetNode(
+                            selections: [
+                              FieldNode(
+                                name: NameNode(value: 'count'),
+                                alias: null,
+                                arguments: [],
+                                directives: [],
+                                selectionSet: null,
+                              ),
+                              FieldNode(
+                                name: NameNode(value: 'max'),
+                                alias: null,
+                                arguments: [],
+                                directives: [],
+                                selectionSet: SelectionSetNode(
+                                  selections: [
+                                    FieldNode(
+                                      name: NameNode(value: 'dayId'),
+                                      alias: null,
+                                      arguments: [],
+                                      directives: [],
+                                      selectionSet: null,
+                                    ),
+                                    FieldNode(
+                                      name: NameNode(value: '__typename'),
+                                      alias: null,
+                                      arguments: [],
+                                      directives: [],
+                                      selectionSet: null,
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              FieldNode(
+                                name: NameNode(value: '__typename'),
+                                alias: null,
+                                arguments: [],
+                                directives: [],
+                                selectionSet: null,
+                              ),
+                            ],
+                          ),
+                        ),
+                        FieldNode(
+                          name: NameNode(value: 'nodes'),
+                          alias: null,
+                          arguments: [],
+                          directives: [],
+                          selectionSet: SelectionSetNode(
+                            selections: [
+                              FieldNode(
+                                name: NameNode(value: 'dayId'),
+                                alias: null,
+                                arguments: [],
+                                directives: [],
+                                selectionSet: null,
+                              ),
+                              FieldNode(
+                                name: NameNode(value: '__typename'),
+                                alias: null,
+                                arguments: [],
+                                directives: [],
+                                selectionSet: null,
+                              ),
+                            ],
+                          ),
+                        ),
+                        FieldNode(
+                          name: NameNode(value: '__typename'),
+                          alias: null,
+                          arguments: [],
+                          directives: [],
+                          selectionSet: null,
+                        ),
+                      ],
+                    ),
+                  ),
+                  FieldNode(
+                    name: NameNode(value: 'attendanceDaysConstraintsAggregate'),
+                    alias: null,
+                    arguments: [
+                      ArgumentNode(
+                        name: NameNode(value: 'where'),
+                        value: ObjectValueNode(
+                          fields: [
+                            ObjectFieldNode(
+                              name: NameNode(value: 'dayId'),
+                              value: ObjectValueNode(
+                                fields: [
+                                  ObjectFieldNode(
+                                    name: NameNode(value: '_gte'),
+                                    value: VariableNode(
+                                      name: NameNode(value: 'dateFrom'),
+                                    ),
+                                  ),
+                                  ObjectFieldNode(
+                                    name: NameNode(value: '_lte'),
+                                    value: VariableNode(
+                                      name: NameNode(value: 'dateTo'),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                    directives: [],
+                    selectionSet: SelectionSetNode(
+                      selections: [
+                        FieldNode(
+                          name: NameNode(value: 'aggregate'),
+                          alias: null,
+                          arguments: [],
+                          directives: [],
+                          selectionSet: SelectionSetNode(
+                            selections: [
+                              FieldNode(
+                                name: NameNode(value: 'count'),
+                                alias: null,
+                                arguments: [],
+                                directives: [],
+                                selectionSet: null,
+                              ),
+                              FieldNode(
+                                name: NameNode(value: '__typename'),
+                                alias: null,
+                                arguments: [],
+                                directives: [],
+                                selectionSet: null,
+                              ),
+                            ],
+                          ),
+                        ),
+                        FieldNode(
+                          name: NameNode(value: 'nodes'),
+                          alias: null,
+                          arguments: [],
+                          directives: [],
+                          selectionSet: SelectionSetNode(
+                            selections: [
+                              FieldNode(
+                                name: NameNode(value: 'dayId'),
+                                alias: null,
+                                arguments: [],
+                                directives: [],
+                                selectionSet: null,
+                              ),
+                              FieldNode(
+                                name: NameNode(value: '__typename'),
+                                alias: null,
+                                arguments: [],
+                                directives: [],
+                                selectionSet: null,
+                              ),
+                            ],
+                          ),
+                        ),
+                        FieldNode(
+                          name: NameNode(value: '__typename'),
+                          alias: null,
+                          arguments: [],
+                          directives: [],
+                          selectionSet: null,
+                        ),
+                      ],
+                    ),
+                  ),
+                  FieldNode(
+                    name: NameNode(value: '__typename'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                ],
+              ),
+            ),
+            FieldNode(
+              name: NameNode(value: '__typename'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+          ],
         ),
-      ]),
-    ),
-    FieldNode(
-      name: NameNode(value: '__typename'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-  ]),
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ],
+  ),
 );
-const documentNodeFragmentAttendanceFields = DocumentNode(definitions: [
-  fragmentDefinitionAttendanceFields,
-  fragmentDefinitionService,
-  fragmentDefinitionServiceNoPhoto,
-  fragmentDefinitionClass,
-  fragmentDefinitionClassNoPhoto,
-  fragmentDefinitionGroup,
-  fragmentDefinitionGroupNoPhoto,
-]);
+const documentNodeFragmentAttendanceFields = DocumentNode(
+  definitions: [
+    fragmentDefinitionAttendanceFields,
+    fragmentDefinitionService,
+    fragmentDefinitionServiceNoPhoto,
+    fragmentDefinitionClass,
+    fragmentDefinitionClassNoPhoto,
+    fragmentDefinitionGroup,
+    fragmentDefinitionGroupNoPhoto,
+  ],
+);
 
 class Fragment_AttendanceFields_servicesHistory {
   Fragment_AttendanceFields_servicesHistory({
@@ -5488,7 +5676,8 @@ class Fragment_AttendanceFields_servicesHistory {
   });
 
   factory Fragment_AttendanceFields_servicesHistory.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$permissionId = json['permissionId'];
     final l$service = json['service'];
     final l$$__typename = json['__typename'];
@@ -5497,7 +5686,8 @@ class Fragment_AttendanceFields_servicesHistory {
       service: l$service == null
           ? null
           : Fragment_AttendanceFields_servicesHistory_service.fromJson(
-              (l$service as Map<String, dynamic>)),
+              (l$service as Map<String, dynamic>),
+            ),
       $__typename: (l$$__typename as String),
     );
   }
@@ -5524,11 +5714,7 @@ class Fragment_AttendanceFields_servicesHistory {
     final l$permissionId = permissionId;
     final l$service = service;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$permissionId,
-      l$service,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$permissionId, l$service, l$$__typename]);
   }
 
   @override
@@ -5562,11 +5748,10 @@ class Fragment_AttendanceFields_servicesHistory {
 extension UtilityExtension_Fragment_AttendanceFields_servicesHistory
     on Fragment_AttendanceFields_servicesHistory {
   CopyWith_Fragment_AttendanceFields_servicesHistory<
-          Fragment_AttendanceFields_servicesHistory>
-      get copyWith => CopyWith_Fragment_AttendanceFields_servicesHistory(
-            this,
-            (i) => i,
-          );
+    Fragment_AttendanceFields_servicesHistory
+  >
+  get copyWith =>
+      CopyWith_Fragment_AttendanceFields_servicesHistory(this, (i) => i);
 }
 
 abstract class CopyWith_Fragment_AttendanceFields_servicesHistory<TRes> {
@@ -5603,26 +5788,30 @@ class _CopyWithImpl_Fragment_AttendanceFields_servicesHistory<TRes>
     Object? permissionId = _undefined,
     Object? service = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Fragment_AttendanceFields_servicesHistory(
-        permissionId: permissionId == _undefined || permissionId == null
-            ? _instance.permissionId
-            : (permissionId as UuidValue),
-        service: service == _undefined
-            ? _instance.service
-            : (service as Fragment_AttendanceFields_servicesHistory_service?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Fragment_AttendanceFields_servicesHistory(
+      permissionId: permissionId == _undefined || permissionId == null
+          ? _instance.permissionId
+          : (permissionId as UuidValue),
+      service: service == _undefined
+          ? _instance.service
+          : (service as Fragment_AttendanceFields_servicesHistory_service?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   CopyWith_Fragment_AttendanceFields_servicesHistory_service<TRes> get service {
     final local$service = _instance.service;
     return local$service == null
         ? CopyWith_Fragment_AttendanceFields_servicesHistory_service.stub(
-            _then(_instance))
+            _then(_instance),
+          )
         : CopyWith_Fragment_AttendanceFields_servicesHistory_service(
-            local$service, (e) => call(service: e));
+            local$service,
+            (e) => call(service: e),
+          );
   }
 }
 
@@ -5636,12 +5825,11 @@ class _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory<TRes>
     UuidValue? permissionId,
     Fragment_AttendanceFields_servicesHistory_service? service,
     String? $__typename,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Fragment_AttendanceFields_servicesHistory_service<TRes>
-      get service =>
-          CopyWith_Fragment_AttendanceFields_servicesHistory_service.stub(_res);
+  get service =>
+      CopyWith_Fragment_AttendanceFields_servicesHistory_service.stub(_res);
 }
 
 class Fragment_AttendanceFields_servicesHistory_service
@@ -5658,7 +5846,8 @@ class Fragment_AttendanceFields_servicesHistory_service
   });
 
   factory Fragment_AttendanceFields_servicesHistory_service.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$id = json['id'];
     final l$name = json['name'];
     final l$color = json['color'];
@@ -5673,16 +5862,18 @@ class Fragment_AttendanceFields_servicesHistory_service
       name: (l$name as String),
       color: (l$color as int?),
       $__typename: (l$$__typename as String),
-      photoUpdatedAt:
-          l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
+      photoUpdatedAt: l$photoUpdatedAt == null
+          ? null
+          : tstzFromString(l$photoUpdatedAt),
       blurhash: (l$blurhash as String?),
       attendanceHistoryAggregate:
-          Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate
-              .fromJson((l$attendanceHistoryAggregate as Map<String, dynamic>)),
+          Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate.fromJson(
+            (l$attendanceHistoryAggregate as Map<String, dynamic>),
+          ),
       attendanceDaysConstraintsAggregate:
-          Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate
-              .fromJson((l$attendanceDaysConstraintsAggregate
-                  as Map<String, dynamic>)),
+          Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate.fromJson(
+            (l$attendanceDaysConstraintsAggregate as Map<String, dynamic>),
+          ),
     );
   }
 
@@ -5699,10 +5890,10 @@ class Fragment_AttendanceFields_servicesHistory_service
   final String? blurhash;
 
   final Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate
-      attendanceHistoryAggregate;
+  attendanceHistoryAggregate;
 
   final Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate
-      attendanceDaysConstraintsAggregate;
+  attendanceDaysConstraintsAggregate;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -5715,13 +5906,14 @@ class Fragment_AttendanceFields_servicesHistory_service
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
-    _resultData['photoUpdatedAt'] =
-        l$photoUpdatedAt == null ? null : tstzToString(l$photoUpdatedAt);
+    _resultData['photoUpdatedAt'] = l$photoUpdatedAt == null
+        ? null
+        : tstzToString(l$photoUpdatedAt);
     final l$blurhash = blurhash;
     _resultData['blurhash'] = l$blurhash;
     final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
-    _resultData['attendanceHistoryAggregate'] =
-        l$attendanceHistoryAggregate.toJson();
+    _resultData['attendanceHistoryAggregate'] = l$attendanceHistoryAggregate
+        .toJson();
     final l$attendanceDaysConstraintsAggregate =
         attendanceDaysConstraintsAggregate;
     _resultData['attendanceDaysConstraintsAggregate'] =
@@ -5811,24 +6003,25 @@ class Fragment_AttendanceFields_servicesHistory_service
 extension UtilityExtension_Fragment_AttendanceFields_servicesHistory_service
     on Fragment_AttendanceFields_servicesHistory_service {
   CopyWith_Fragment_AttendanceFields_servicesHistory_service<
-          Fragment_AttendanceFields_servicesHistory_service>
-      get copyWith =>
-          CopyWith_Fragment_AttendanceFields_servicesHistory_service(
-            this,
-            (i) => i,
-          );
+    Fragment_AttendanceFields_servicesHistory_service
+  >
+  get copyWith => CopyWith_Fragment_AttendanceFields_servicesHistory_service(
+    this,
+    (i) => i,
+  );
 }
 
 abstract class CopyWith_Fragment_AttendanceFields_servicesHistory_service<
-    TRes> {
+  TRes
+> {
   factory CopyWith_Fragment_AttendanceFields_servicesHistory_service(
     Fragment_AttendanceFields_servicesHistory_service instance,
     TRes Function(Fragment_AttendanceFields_servicesHistory_service) then,
   ) = _CopyWithImpl_Fragment_AttendanceFields_servicesHistory_service;
 
   factory CopyWith_Fragment_AttendanceFields_servicesHistory_service.stub(
-          TRes res) =
-      _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service;
+    TRes res,
+  ) = _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service;
 
   TRes call({
     UuidValue? id,
@@ -5838,14 +6031,18 @@ abstract class CopyWith_Fragment_AttendanceFields_servicesHistory_service<
     DateTime? photoUpdatedAt,
     String? blurhash,
     Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate?
-        attendanceHistoryAggregate,
+    attendanceHistoryAggregate,
     Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate?
-        attendanceDaysConstraintsAggregate,
+    attendanceDaysConstraintsAggregate,
   });
   CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate<
-      TRes> get attendanceHistoryAggregate;
+    TRes
+  >
+  get attendanceHistoryAggregate;
   CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate<
-      TRes> get attendanceDaysConstraintsAggregate;
+    TRes
+  >
+  get attendanceDaysConstraintsAggregate;
 }
 
 class _CopyWithImpl_Fragment_AttendanceFields_servicesHistory_service<TRes>
@@ -5871,50 +6068,59 @@ class _CopyWithImpl_Fragment_AttendanceFields_servicesHistory_service<TRes>
     Object? blurhash = _undefined,
     Object? attendanceHistoryAggregate = _undefined,
     Object? attendanceDaysConstraintsAggregate = _undefined,
-  }) =>
-      _then(Fragment_AttendanceFields_servicesHistory_service(
-        id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
-        name: name == _undefined || name == null
-            ? _instance.name
-            : (name as String),
-        color: color == _undefined ? _instance.color : (color as int?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-        photoUpdatedAt: photoUpdatedAt == _undefined
-            ? _instance.photoUpdatedAt
-            : (photoUpdatedAt as DateTime?),
-        blurhash:
-            blurhash == _undefined ? _instance.blurhash : (blurhash as String?),
-        attendanceHistoryAggregate: attendanceHistoryAggregate == _undefined ||
-                attendanceHistoryAggregate == null
-            ? _instance.attendanceHistoryAggregate
-            : (attendanceHistoryAggregate
+  }) => _then(
+    Fragment_AttendanceFields_servicesHistory_service(
+      id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      color: color == _undefined ? _instance.color : (color as int?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+      photoUpdatedAt: photoUpdatedAt == _undefined
+          ? _instance.photoUpdatedAt
+          : (photoUpdatedAt as DateTime?),
+      blurhash: blurhash == _undefined
+          ? _instance.blurhash
+          : (blurhash as String?),
+      attendanceHistoryAggregate:
+          attendanceHistoryAggregate == _undefined ||
+              attendanceHistoryAggregate == null
+          ? _instance.attendanceHistoryAggregate
+          : (attendanceHistoryAggregate
                 as Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate),
-        attendanceDaysConstraintsAggregate: attendanceDaysConstraintsAggregate ==
-                    _undefined ||
-                attendanceDaysConstraintsAggregate == null
-            ? _instance.attendanceDaysConstraintsAggregate
-            : (attendanceDaysConstraintsAggregate
+      attendanceDaysConstraintsAggregate:
+          attendanceDaysConstraintsAggregate == _undefined ||
+              attendanceDaysConstraintsAggregate == null
+          ? _instance.attendanceDaysConstraintsAggregate
+          : (attendanceDaysConstraintsAggregate
                 as Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate),
-      ));
+    ),
+  );
 
   CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate<
-      TRes> get attendanceHistoryAggregate {
+    TRes
+  >
+  get attendanceHistoryAggregate {
     final local$attendanceHistoryAggregate =
         _instance.attendanceHistoryAggregate;
     return CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate(
-        local$attendanceHistoryAggregate,
-        (e) => call(attendanceHistoryAggregate: e));
+      local$attendanceHistoryAggregate,
+      (e) => call(attendanceHistoryAggregate: e),
+    );
   }
 
   CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate<
-      TRes> get attendanceDaysConstraintsAggregate {
+    TRes
+  >
+  get attendanceDaysConstraintsAggregate {
     final local$attendanceDaysConstraintsAggregate =
         _instance.attendanceDaysConstraintsAggregate;
     return CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate(
-        local$attendanceDaysConstraintsAggregate,
-        (e) => call(attendanceDaysConstraintsAggregate: e));
+      local$attendanceDaysConstraintsAggregate,
+      (e) => call(attendanceDaysConstraintsAggregate: e),
+    );
   }
 }
 
@@ -5922,7 +6128,8 @@ class _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service<TRes>
     implements
         CopyWith_Fragment_AttendanceFields_servicesHistory_service<TRes> {
   _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service(
-      this._res);
+    this._res,
+  );
 
   TRes _res;
 
@@ -5934,23 +6141,26 @@ class _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service<TRes>
     DateTime? photoUpdatedAt,
     String? blurhash,
     Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate?
-        attendanceHistoryAggregate,
+    attendanceHistoryAggregate,
     Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate?
-        attendanceDaysConstraintsAggregate,
-  }) =>
-      _res;
+    attendanceDaysConstraintsAggregate,
+  }) => _res;
 
   CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate<
-          TRes>
-      get attendanceHistoryAggregate =>
-          CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate
-              .stub(_res);
+    TRes
+  >
+  get attendanceHistoryAggregate =>
+      CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate.stub(
+        _res,
+      );
 
   CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate<
-          TRes>
-      get attendanceDaysConstraintsAggregate =>
-          CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate
-              .stub(_res);
+    TRes
+  >
+  get attendanceDaysConstraintsAggregate =>
+      CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate.stub(
+        _res,
+      );
 }
 
 class Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate {
@@ -5961,30 +6171,36 @@ class Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggrega
   });
 
   factory Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$aggregate = json['aggregate'];
     final l$nodes = json['nodes'];
     final l$$__typename = json['__typename'];
     return Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate(
       aggregate: l$aggregate == null
           ? null
-          : Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate
-              .fromJson((l$aggregate as Map<String, dynamic>)),
+          : Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate.fromJson(
+              (l$aggregate as Map<String, dynamic>),
+            ),
       nodes: (l$nodes as List<dynamic>)
-          .map((e) =>
-              Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes
-                  .fromJson((e as Map<String, dynamic>)))
+          .map(
+            (e) =>
+                Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes.fromJson(
+                  (e as Map<String, dynamic>),
+                ),
+          )
           .toList(),
       $__typename: (l$$__typename as String),
     );
   }
 
   final Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate?
-      aggregate;
+  aggregate;
 
   final List<
-          Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes>
-      nodes;
+    Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes
+  >
+  nodes;
 
   final String $__typename;
 
@@ -6050,61 +6266,78 @@ class Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggrega
 extension UtilityExtension_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate
     on Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate {
   CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate<
-          Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate>
-      get copyWith =>
-          CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate(
-            this,
-            (i) => i,
-          );
+    Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate
+  >
+  get copyWith =>
+      CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate(
+        this,
+        (i) => i,
+      );
 }
 
 abstract class CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate<
-    TRes> {
+  TRes
+> {
   factory CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate(
     Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate
-        instance,
+    instance,
     TRes Function(
-            Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate)
-        then,
+      Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate,
+    )
+    then,
   ) = _CopyWithImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate;
 
   factory CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate.stub(
-          TRes res) =
-      _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate;
+    TRes res,
+  ) = _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate;
 
   TRes call({
     Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate?
-        aggregate,
-    List<Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes>?
-        nodes,
+    aggregate,
+    List<
+      Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes
+    >?
+    nodes,
     String? $__typename,
   });
   CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate<
-      TRes> get aggregate;
+    TRes
+  >
+  get aggregate;
   TRes nodes(
-      Iterable<Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes> Function(
-              Iterable<
-                  CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes<
-                      Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes>>)
-          _fn);
+    Iterable<
+      Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes
+    >
+    Function(
+      Iterable<
+        CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes<
+          Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes
+        >
+      >,
+    )
+    _fn,
+  );
 }
 
 class _CopyWithImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate<
-        TRes>
+  TRes
+>
     implements
         CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate<
-            TRes> {
+          TRes
+        > {
   _CopyWithImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate(
     this._instance,
     this._then,
   );
 
   final Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate
-      _instance;
+  _instance;
 
   final TRes Function(
-          Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate)
-      _then;
+    Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate,
+  )
+  _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -6112,70 +6345,94 @@ class _CopyWithImpl_Fragment_AttendanceFields_servicesHistory_service_attendance
     Object? aggregate = _undefined,
     Object? nodes = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(
-          Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate(
-        aggregate: aggregate == _undefined
-            ? _instance.aggregate
-            : (aggregate
+  }) => _then(
+    Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate(
+      aggregate: aggregate == _undefined
+          ? _instance.aggregate
+          : (aggregate
                 as Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate?),
-        nodes: nodes == _undefined || nodes == null
-            ? _instance.nodes
-            : (nodes as List<
-                Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes>),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+      nodes: nodes == _undefined || nodes == null
+          ? _instance.nodes
+          : (nodes
+                as List<
+                  Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes
+                >),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate<
-      TRes> get aggregate {
+    TRes
+  >
+  get aggregate {
     final local$aggregate = _instance.aggregate;
     return local$aggregate == null
-        ? CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate
-            .stub(_then(_instance))
+        ? CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate.stub(
+            _then(_instance),
+          )
         : CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate(
-            local$aggregate, (e) => call(aggregate: e));
+            local$aggregate,
+            (e) => call(aggregate: e),
+          );
   }
 
   TRes nodes(
-          Iterable<Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes> Function(
-                  Iterable<
-                      CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes<
-                          Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes>>)
-              _fn) =>
-      call(
-          nodes: _fn(_instance.nodes.map((e) =>
-              CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes(
-                e,
-                (i) => i,
-              ))).toList());
+    Iterable<
+      Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes
+    >
+    Function(
+      Iterable<
+        CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes<
+          Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes
+        >
+      >,
+    )
+    _fn,
+  ) => call(
+    nodes: _fn(
+      _instance.nodes.map(
+        (e) =>
+            CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes(
+              e,
+              (i) => i,
+            ),
+      ),
+    ).toList(),
+  );
 }
 
 class _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate<
-        TRes>
+  TRes
+>
     implements
         CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate<
-            TRes> {
+          TRes
+        > {
   _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate(
-      this._res);
+    this._res,
+  );
 
   TRes _res;
 
   call({
     Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate?
-        aggregate,
-    List<Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes>?
-        nodes,
+    aggregate,
+    List<
+      Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes
+    >?
+    nodes,
     String? $__typename,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate<
-          TRes>
-      get aggregate =>
-          CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate
-              .stub(_res);
+    TRes
+  >
+  get aggregate =>
+      CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate.stub(
+        _res,
+      );
 
   nodes(_fn) => _res;
 }
@@ -6188,7 +6445,8 @@ class Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggrega
   });
 
   factory Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$count = json['count'];
     final l$max = json['max'];
     final l$$__typename = json['__typename'];
@@ -6196,8 +6454,9 @@ class Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggrega
       count: (l$count as int),
       max: l$max == null
           ? null
-          : Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max
-              .fromJson((l$max as Map<String, dynamic>)),
+          : Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max.fromJson(
+              (l$max as Map<String, dynamic>),
+            ),
       $__typename: (l$$__typename as String),
     );
   }
@@ -6205,7 +6464,7 @@ class Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggrega
   final int count;
 
   final Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max?
-      max;
+  max;
 
   final String $__typename;
 
@@ -6225,11 +6484,7 @@ class Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggrega
     final l$count = count;
     final l$max = max;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$count,
-      l$max,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$count, l$max, l$$__typename]);
   }
 
   @override
@@ -6262,56 +6517,65 @@ class Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggrega
 }
 
 extension UtilityExtension_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate
-    on Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate {
+    on
+        Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate {
   CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate<
-          Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate>
-      get copyWith =>
-          CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate(
-            this,
-            (i) => i,
-          );
+    Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate
+  >
+  get copyWith =>
+      CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate(
+        this,
+        (i) => i,
+      );
 }
 
 abstract class CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate<
-    TRes> {
+  TRes
+> {
   factory CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate(
     Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate
-        instance,
+    instance,
     TRes Function(
-            Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate)
-        then,
+      Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate,
+    )
+    then,
   ) = _CopyWithImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate;
 
   factory CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate.stub(
-          TRes res) =
-      _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate;
+    TRes res,
+  ) = _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate;
 
   TRes call({
     int? count,
     Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max?
-        max,
+    max,
     String? $__typename,
   });
   CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max<
-      TRes> get max;
+    TRes
+  >
+  get max;
 }
 
 class _CopyWithImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate<
-        TRes>
+  TRes
+>
     implements
         CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate<
-            TRes> {
+          TRes
+        > {
   _CopyWithImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate(
     this._instance,
     this._then,
   );
 
   final Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate
-      _instance;
+  _instance;
 
   final TRes Function(
-          Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate)
-      _then;
+    Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate,
+  )
+  _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -6319,55 +6583,64 @@ class _CopyWithImpl_Fragment_AttendanceFields_servicesHistory_service_attendance
     Object? count = _undefined,
     Object? max = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(
-          Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate(
-        count: count == _undefined || count == null
-            ? _instance.count
-            : (count as int),
-        max: max == _undefined
-            ? _instance.max
-            : (max
+  }) => _then(
+    Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate(
+      count: count == _undefined || count == null
+          ? _instance.count
+          : (count as int),
+      max: max == _undefined
+          ? _instance.max
+          : (max
                 as Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max<
-      TRes> get max {
+    TRes
+  >
+  get max {
     final local$max = _instance.max;
     return local$max == null
-        ? CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max
-            .stub(_then(_instance))
+        ? CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max.stub(
+            _then(_instance),
+          )
         : CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max(
-            local$max, (e) => call(max: e));
+            local$max,
+            (e) => call(max: e),
+          );
   }
 }
 
 class _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate<
-        TRes>
+  TRes
+>
     implements
         CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate<
-            TRes> {
+          TRes
+        > {
   _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate(
-      this._res);
+    this._res,
+  );
 
   TRes _res;
 
   call({
     int? count,
     Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max?
-        max,
+    max,
     String? $__typename,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max<
-          TRes>
-      get max =>
-          CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max
-              .stub(_res);
+    TRes
+  >
+  get max =>
+      CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max.stub(
+        _res,
+      );
 }
 
 class Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max {
@@ -6377,7 +6650,8 @@ class Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggrega
   });
 
   factory Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$dayId = json['dayId'];
     final l$$__typename = json['__typename'];
     return Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max(
@@ -6403,10 +6677,7 @@ class Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggrega
   int get hashCode {
     final l$dayId = dayId;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$dayId,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$dayId, l$$__typename]);
   }
 
   @override
@@ -6434,83 +6705,86 @@ class Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggrega
 }
 
 extension UtilityExtension_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max
-    on Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max {
+    on
+        Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max {
   CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max<
-          Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max>
-      get copyWith =>
-          CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max(
-            this,
-            (i) => i,
-          );
+    Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max
+  >
+  get copyWith =>
+      CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max(
+        this,
+        (i) => i,
+      );
 }
 
 abstract class CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max<
-    TRes> {
+  TRes
+> {
   factory CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max(
     Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max
-        instance,
+    instance,
     TRes Function(
-            Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max)
-        then,
+      Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max,
+    )
+    then,
   ) = _CopyWithImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max;
 
   factory CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max.stub(
-          TRes res) =
-      _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max;
+    TRes res,
+  ) = _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max;
 
-  TRes call({
-    DateTime? dayId,
-    String? $__typename,
-  });
+  TRes call({DateTime? dayId, String? $__typename});
 }
 
 class _CopyWithImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max<
-        TRes>
+  TRes
+>
     implements
         CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max<
-            TRes> {
+          TRes
+        > {
   _CopyWithImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max(
     this._instance,
     this._then,
   );
 
   final Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max
-      _instance;
+  _instance;
 
   final TRes Function(
-          Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max)
-      _then;
+    Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max,
+  )
+  _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? dayId = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(
-          Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max(
-        dayId: dayId == _undefined ? _instance.dayId : (dayId as DateTime?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max(
+      dayId: dayId == _undefined ? _instance.dayId : (dayId as DateTime?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 }
 
 class _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max<
-        TRes>
+  TRes
+>
     implements
         CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max<
-            TRes> {
+          TRes
+        > {
   _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_aggregate_max(
-      this._res);
+    this._res,
+  );
 
   TRes _res;
 
-  call({
-    DateTime? dayId,
-    String? $__typename,
-  }) =>
-      _res;
+  call({DateTime? dayId, String? $__typename}) => _res;
 }
 
 class Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes {
@@ -6520,7 +6794,8 @@ class Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggrega
   });
 
   factory Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$dayId = json['dayId'];
     final l$$__typename = json['__typename'];
     return Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes(
@@ -6546,10 +6821,7 @@ class Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggrega
   int get hashCode {
     final l$dayId = dayId;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$dayId,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$dayId, l$$__typename]);
   }
 
   @override
@@ -6577,85 +6849,88 @@ class Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggrega
 }
 
 extension UtilityExtension_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes
-    on Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes {
+    on
+        Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes {
   CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes<
-          Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes>
-      get copyWith =>
-          CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes(
-            this,
-            (i) => i,
-          );
+    Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes
+  >
+  get copyWith =>
+      CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes(
+        this,
+        (i) => i,
+      );
 }
 
 abstract class CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes<
-    TRes> {
+  TRes
+> {
   factory CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes(
     Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes
-        instance,
+    instance,
     TRes Function(
-            Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes)
-        then,
+      Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes,
+    )
+    then,
   ) = _CopyWithImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes;
 
   factory CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes.stub(
-          TRes res) =
-      _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes;
+    TRes res,
+  ) = _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes;
 
-  TRes call({
-    DateTime? dayId,
-    String? $__typename,
-  });
+  TRes call({DateTime? dayId, String? $__typename});
 }
 
 class _CopyWithImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes<
-        TRes>
+  TRes
+>
     implements
         CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes<
-            TRes> {
+          TRes
+        > {
   _CopyWithImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes(
     this._instance,
     this._then,
   );
 
   final Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes
-      _instance;
+  _instance;
 
   final TRes Function(
-          Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes)
-      _then;
+    Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes,
+  )
+  _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? dayId = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(
-          Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes(
-        dayId: dayId == _undefined || dayId == null
-            ? _instance.dayId
-            : (dayId as DateTime),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes(
+      dayId: dayId == _undefined || dayId == null
+          ? _instance.dayId
+          : (dayId as DateTime),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 }
 
 class _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes<
-        TRes>
+  TRes
+>
     implements
         CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes<
-            TRes> {
+          TRes
+        > {
   _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceHistoryAggregate_nodes(
-      this._res);
+    this._res,
+  );
 
   TRes _res;
 
-  call({
-    DateTime? dayId,
-    String? $__typename,
-  }) =>
-      _res;
+  call({DateTime? dayId, String? $__typename}) => _res;
 }
 
 class Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate {
@@ -6666,30 +6941,36 @@ class Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraint
   });
 
   factory Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$aggregate = json['aggregate'];
     final l$nodes = json['nodes'];
     final l$$__typename = json['__typename'];
     return Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate(
       aggregate: l$aggregate == null
           ? null
-          : Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate
-              .fromJson((l$aggregate as Map<String, dynamic>)),
+          : Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate.fromJson(
+              (l$aggregate as Map<String, dynamic>),
+            ),
       nodes: (l$nodes as List<dynamic>)
-          .map((e) =>
-              Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes
-                  .fromJson((e as Map<String, dynamic>)))
+          .map(
+            (e) =>
+                Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes.fromJson(
+                  (e as Map<String, dynamic>),
+                ),
+          )
           .toList(),
       $__typename: (l$$__typename as String),
     );
   }
 
   final Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate?
-      aggregate;
+  aggregate;
 
   final List<
-          Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes>
-      nodes;
+    Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes
+  >
+  nodes;
 
   final String $__typename;
 
@@ -6753,63 +7034,81 @@ class Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraint
 }
 
 extension UtilityExtension_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate
-    on Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate {
+    on
+        Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate {
   CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate<
-          Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate>
-      get copyWith =>
-          CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate(
-            this,
-            (i) => i,
-          );
+    Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate
+  >
+  get copyWith =>
+      CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate(
+        this,
+        (i) => i,
+      );
 }
 
 abstract class CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate<
-    TRes> {
+  TRes
+> {
   factory CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate(
     Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate
-        instance,
+    instance,
     TRes Function(
-            Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate)
-        then,
+      Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate,
+    )
+    then,
   ) = _CopyWithImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate;
 
   factory CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate.stub(
-          TRes res) =
-      _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate;
+    TRes res,
+  ) = _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate;
 
   TRes call({
     Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate?
-        aggregate,
-    List<Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes>?
-        nodes,
+    aggregate,
+    List<
+      Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes
+    >?
+    nodes,
     String? $__typename,
   });
   CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate<
-      TRes> get aggregate;
+    TRes
+  >
+  get aggregate;
   TRes nodes(
-      Iterable<Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes> Function(
-              Iterable<
-                  CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes<
-                      Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes>>)
-          _fn);
+    Iterable<
+      Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes
+    >
+    Function(
+      Iterable<
+        CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes<
+          Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes
+        >
+      >,
+    )
+    _fn,
+  );
 }
 
 class _CopyWithImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate<
-        TRes>
+  TRes
+>
     implements
         CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate<
-            TRes> {
+          TRes
+        > {
   _CopyWithImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate(
     this._instance,
     this._then,
   );
 
   final Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate
-      _instance;
+  _instance;
 
   final TRes Function(
-          Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate)
-      _then;
+    Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate,
+  )
+  _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -6817,70 +7116,94 @@ class _CopyWithImpl_Fragment_AttendanceFields_servicesHistory_service_attendance
     Object? aggregate = _undefined,
     Object? nodes = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(
-          Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate(
-        aggregate: aggregate == _undefined
-            ? _instance.aggregate
-            : (aggregate
+  }) => _then(
+    Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate(
+      aggregate: aggregate == _undefined
+          ? _instance.aggregate
+          : (aggregate
                 as Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate?),
-        nodes: nodes == _undefined || nodes == null
-            ? _instance.nodes
-            : (nodes as List<
-                Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes>),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+      nodes: nodes == _undefined || nodes == null
+          ? _instance.nodes
+          : (nodes
+                as List<
+                  Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes
+                >),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate<
-      TRes> get aggregate {
+    TRes
+  >
+  get aggregate {
     final local$aggregate = _instance.aggregate;
     return local$aggregate == null
-        ? CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate
-            .stub(_then(_instance))
+        ? CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate.stub(
+            _then(_instance),
+          )
         : CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate(
-            local$aggregate, (e) => call(aggregate: e));
+            local$aggregate,
+            (e) => call(aggregate: e),
+          );
   }
 
   TRes nodes(
-          Iterable<Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes> Function(
-                  Iterable<
-                      CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes<
-                          Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes>>)
-              _fn) =>
-      call(
-          nodes: _fn(_instance.nodes.map((e) =>
-              CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes(
-                e,
-                (i) => i,
-              ))).toList());
+    Iterable<
+      Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes
+    >
+    Function(
+      Iterable<
+        CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes<
+          Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes
+        >
+      >,
+    )
+    _fn,
+  ) => call(
+    nodes: _fn(
+      _instance.nodes.map(
+        (e) =>
+            CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes(
+              e,
+              (i) => i,
+            ),
+      ),
+    ).toList(),
+  );
 }
 
 class _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate<
-        TRes>
+  TRes
+>
     implements
         CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate<
-            TRes> {
+          TRes
+        > {
   _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate(
-      this._res);
+    this._res,
+  );
 
   TRes _res;
 
   call({
     Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate?
-        aggregate,
-    List<Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes>?
-        nodes,
+    aggregate,
+    List<
+      Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes
+    >?
+    nodes,
     String? $__typename,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate<
-          TRes>
-      get aggregate =>
-          CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate
-              .stub(_res);
+    TRes
+  >
+  get aggregate =>
+      CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate.stub(
+        _res,
+      );
 
   nodes(_fn) => _res;
 }
@@ -6892,7 +7215,8 @@ class Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraint
   });
 
   factory Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$count = json['count'];
     final l$$__typename = json['__typename'];
     return Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate(
@@ -6918,10 +7242,7 @@ class Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraint
   int get hashCode {
     final l$count = count;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$count,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$count, l$$__typename]);
   }
 
   @override
@@ -6949,85 +7270,88 @@ class Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraint
 }
 
 extension UtilityExtension_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate
-    on Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate {
+    on
+        Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate {
   CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate<
-          Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate>
-      get copyWith =>
-          CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate(
-            this,
-            (i) => i,
-          );
+    Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate
+  >
+  get copyWith =>
+      CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate(
+        this,
+        (i) => i,
+      );
 }
 
 abstract class CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate<
-    TRes> {
+  TRes
+> {
   factory CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate(
     Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate
-        instance,
+    instance,
     TRes Function(
-            Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate)
-        then,
+      Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate,
+    )
+    then,
   ) = _CopyWithImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate;
 
   factory CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate.stub(
-          TRes res) =
-      _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate;
+    TRes res,
+  ) = _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate;
 
-  TRes call({
-    int? count,
-    String? $__typename,
-  });
+  TRes call({int? count, String? $__typename});
 }
 
 class _CopyWithImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate<
-        TRes>
+  TRes
+>
     implements
         CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate<
-            TRes> {
+          TRes
+        > {
   _CopyWithImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate(
     this._instance,
     this._then,
   );
 
   final Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate
-      _instance;
+  _instance;
 
   final TRes Function(
-          Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate)
-      _then;
+    Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate,
+  )
+  _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? count = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(
-          Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate(
-        count: count == _undefined || count == null
-            ? _instance.count
-            : (count as int),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate(
+      count: count == _undefined || count == null
+          ? _instance.count
+          : (count as int),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 }
 
 class _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate<
-        TRes>
+  TRes
+>
     implements
         CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate<
-            TRes> {
+          TRes
+        > {
   _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_aggregate(
-      this._res);
+    this._res,
+  );
 
   TRes _res;
 
-  call({
-    int? count,
-    String? $__typename,
-  }) =>
-      _res;
+  call({int? count, String? $__typename}) => _res;
 }
 
 class Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes {
@@ -7037,7 +7361,8 @@ class Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraint
   });
 
   factory Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$dayId = json['dayId'];
     final l$$__typename = json['__typename'];
     return Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes(
@@ -7063,10 +7388,7 @@ class Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraint
   int get hashCode {
     final l$dayId = dayId;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$dayId,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$dayId, l$$__typename]);
   }
 
   @override
@@ -7094,85 +7416,88 @@ class Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraint
 }
 
 extension UtilityExtension_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes
-    on Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes {
+    on
+        Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes {
   CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes<
-          Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes>
-      get copyWith =>
-          CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes(
-            this,
-            (i) => i,
-          );
+    Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes
+  >
+  get copyWith =>
+      CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes(
+        this,
+        (i) => i,
+      );
 }
 
 abstract class CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes<
-    TRes> {
+  TRes
+> {
   factory CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes(
     Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes
-        instance,
+    instance,
     TRes Function(
-            Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes)
-        then,
+      Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes,
+    )
+    then,
   ) = _CopyWithImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes;
 
   factory CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes.stub(
-          TRes res) =
-      _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes;
+    TRes res,
+  ) = _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes;
 
-  TRes call({
-    DateTime? dayId,
-    String? $__typename,
-  });
+  TRes call({DateTime? dayId, String? $__typename});
 }
 
 class _CopyWithImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes<
-        TRes>
+  TRes
+>
     implements
         CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes<
-            TRes> {
+          TRes
+        > {
   _CopyWithImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes(
     this._instance,
     this._then,
   );
 
   final Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes
-      _instance;
+  _instance;
 
   final TRes Function(
-          Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes)
-      _then;
+    Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes,
+  )
+  _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? dayId = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(
-          Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes(
-        dayId: dayId == _undefined || dayId == null
-            ? _instance.dayId
-            : (dayId as DateTime),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes(
+      dayId: dayId == _undefined || dayId == null
+          ? _instance.dayId
+          : (dayId as DateTime),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 }
 
 class _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes<
-        TRes>
+  TRes
+>
     implements
         CopyWith_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes<
-            TRes> {
+          TRes
+        > {
   _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service_attendanceDaysConstraintsAggregate_nodes(
-      this._res);
+    this._res,
+  );
 
   TRes _res;
 
-  call({
-    DateTime? dayId,
-    String? $__typename,
-  }) =>
-      _res;
+  call({DateTime? dayId, String? $__typename}) => _res;
 }
 
 class Fragment_AttendanceFields_classesHistory {
@@ -7183,15 +7508,19 @@ class Fragment_AttendanceFields_classesHistory {
   });
 
   factory Fragment_AttendanceFields_classesHistory.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$permissionId = json['permissionId'];
     final l$classes = json['classes'];
     final l$$__typename = json['__typename'];
     return Fragment_AttendanceFields_classesHistory(
       permissionId: stringToUuid(l$permissionId),
       classes: (l$classes as List<dynamic>)
-          .map((e) => Fragment_AttendanceFields_classesHistory_classes.fromJson(
-              (e as Map<String, dynamic>)))
+          .map(
+            (e) => Fragment_AttendanceFields_classesHistory_classes.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
           .toList(),
       $__typename: (l$$__typename as String),
     );
@@ -7264,11 +7593,10 @@ class Fragment_AttendanceFields_classesHistory {
 extension UtilityExtension_Fragment_AttendanceFields_classesHistory
     on Fragment_AttendanceFields_classesHistory {
   CopyWith_Fragment_AttendanceFields_classesHistory<
-          Fragment_AttendanceFields_classesHistory>
-      get copyWith => CopyWith_Fragment_AttendanceFields_classesHistory(
-            this,
-            (i) => i,
-          );
+    Fragment_AttendanceFields_classesHistory
+  >
+  get copyWith =>
+      CopyWith_Fragment_AttendanceFields_classesHistory(this, (i) => i);
 }
 
 abstract class CopyWith_Fragment_AttendanceFields_classesHistory<TRes> {
@@ -7286,11 +7614,15 @@ abstract class CopyWith_Fragment_AttendanceFields_classesHistory<TRes> {
     String? $__typename,
   });
   TRes classes(
-      Iterable<Fragment_AttendanceFields_classesHistory_classes> Function(
-              Iterable<
-                  CopyWith_Fragment_AttendanceFields_classesHistory_classes<
-                      Fragment_AttendanceFields_classesHistory_classes>>)
-          _fn);
+    Iterable<Fragment_AttendanceFields_classesHistory_classes> Function(
+      Iterable<
+        CopyWith_Fragment_AttendanceFields_classesHistory_classes<
+          Fragment_AttendanceFields_classesHistory_classes
+        >
+      >,
+    )
+    _fn,
+  );
 }
 
 class _CopyWithImpl_Fragment_AttendanceFields_classesHistory<TRes>
@@ -7310,32 +7642,39 @@ class _CopyWithImpl_Fragment_AttendanceFields_classesHistory<TRes>
     Object? permissionId = _undefined,
     Object? classes = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Fragment_AttendanceFields_classesHistory(
-        permissionId: permissionId == _undefined || permissionId == null
-            ? _instance.permissionId
-            : (permissionId as UuidValue),
-        classes: classes == _undefined || classes == null
-            ? _instance.classes
-            : (classes
-                as List<Fragment_AttendanceFields_classesHistory_classes>),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Fragment_AttendanceFields_classesHistory(
+      permissionId: permissionId == _undefined || permissionId == null
+          ? _instance.permissionId
+          : (permissionId as UuidValue),
+      classes: classes == _undefined || classes == null
+          ? _instance.classes
+          : (classes as List<Fragment_AttendanceFields_classesHistory_classes>),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   TRes classes(
-          Iterable<Fragment_AttendanceFields_classesHistory_classes> Function(
-                  Iterable<
-                      CopyWith_Fragment_AttendanceFields_classesHistory_classes<
-                          Fragment_AttendanceFields_classesHistory_classes>>)
-              _fn) =>
-      call(
-          classes: _fn(_instance.classes.map(
-              (e) => CopyWith_Fragment_AttendanceFields_classesHistory_classes(
-                    e,
-                    (i) => i,
-                  ))).toList());
+    Iterable<Fragment_AttendanceFields_classesHistory_classes> Function(
+      Iterable<
+        CopyWith_Fragment_AttendanceFields_classesHistory_classes<
+          Fragment_AttendanceFields_classesHistory_classes
+        >
+      >,
+    )
+    _fn,
+  ) => call(
+    classes: _fn(
+      _instance.classes.map(
+        (e) => CopyWith_Fragment_AttendanceFields_classesHistory_classes(
+          e,
+          (i) => i,
+        ),
+      ),
+    ).toList(),
+  );
 }
 
 class _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory<TRes>
@@ -7348,8 +7687,7 @@ class _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory<TRes>
     UuidValue? permissionId,
     List<Fragment_AttendanceFields_classesHistory_classes>? classes,
     String? $__typename,
-  }) =>
-      _res;
+  }) => _res;
 
   classes(_fn) => _res;
 }
@@ -7368,7 +7706,8 @@ class Fragment_AttendanceFields_classesHistory_classes
   });
 
   factory Fragment_AttendanceFields_classesHistory_classes.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$id = json['id'];
     final l$name = json['name'];
     final l$color = json['color'];
@@ -7383,16 +7722,18 @@ class Fragment_AttendanceFields_classesHistory_classes
       name: (l$name as String),
       color: (l$color as int?),
       $__typename: (l$$__typename as String),
-      photoUpdatedAt:
-          l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
+      photoUpdatedAt: l$photoUpdatedAt == null
+          ? null
+          : tstzFromString(l$photoUpdatedAt),
       blurhash: (l$blurhash as String?),
       attendanceHistoryAggregate:
-          Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate
-              .fromJson((l$attendanceHistoryAggregate as Map<String, dynamic>)),
+          Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate.fromJson(
+            (l$attendanceHistoryAggregate as Map<String, dynamic>),
+          ),
       attendanceDaysConstraintsAggregate:
-          Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate
-              .fromJson((l$attendanceDaysConstraintsAggregate
-                  as Map<String, dynamic>)),
+          Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate.fromJson(
+            (l$attendanceDaysConstraintsAggregate as Map<String, dynamic>),
+          ),
     );
   }
 
@@ -7409,10 +7750,10 @@ class Fragment_AttendanceFields_classesHistory_classes
   final String? blurhash;
 
   final Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate
-      attendanceHistoryAggregate;
+  attendanceHistoryAggregate;
 
   final Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate
-      attendanceDaysConstraintsAggregate;
+  attendanceDaysConstraintsAggregate;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -7425,13 +7766,14 @@ class Fragment_AttendanceFields_classesHistory_classes
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
-    _resultData['photoUpdatedAt'] =
-        l$photoUpdatedAt == null ? null : tstzToString(l$photoUpdatedAt);
+    _resultData['photoUpdatedAt'] = l$photoUpdatedAt == null
+        ? null
+        : tstzToString(l$photoUpdatedAt);
     final l$blurhash = blurhash;
     _resultData['blurhash'] = l$blurhash;
     final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
-    _resultData['attendanceHistoryAggregate'] =
-        l$attendanceHistoryAggregate.toJson();
+    _resultData['attendanceHistoryAggregate'] = l$attendanceHistoryAggregate
+        .toJson();
     final l$attendanceDaysConstraintsAggregate =
         attendanceDaysConstraintsAggregate;
     _resultData['attendanceDaysConstraintsAggregate'] =
@@ -7521,11 +7863,10 @@ class Fragment_AttendanceFields_classesHistory_classes
 extension UtilityExtension_Fragment_AttendanceFields_classesHistory_classes
     on Fragment_AttendanceFields_classesHistory_classes {
   CopyWith_Fragment_AttendanceFields_classesHistory_classes<
-          Fragment_AttendanceFields_classesHistory_classes>
-      get copyWith => CopyWith_Fragment_AttendanceFields_classesHistory_classes(
-            this,
-            (i) => i,
-          );
+    Fragment_AttendanceFields_classesHistory_classes
+  >
+  get copyWith =>
+      CopyWith_Fragment_AttendanceFields_classesHistory_classes(this, (i) => i);
 }
 
 abstract class CopyWith_Fragment_AttendanceFields_classesHistory_classes<TRes> {
@@ -7535,8 +7876,8 @@ abstract class CopyWith_Fragment_AttendanceFields_classesHistory_classes<TRes> {
   ) = _CopyWithImpl_Fragment_AttendanceFields_classesHistory_classes;
 
   factory CopyWith_Fragment_AttendanceFields_classesHistory_classes.stub(
-          TRes res) =
-      _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory_classes;
+    TRes res,
+  ) = _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory_classes;
 
   TRes call({
     UuidValue? id,
@@ -7546,14 +7887,18 @@ abstract class CopyWith_Fragment_AttendanceFields_classesHistory_classes<TRes> {
     DateTime? photoUpdatedAt,
     String? blurhash,
     Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate?
-        attendanceHistoryAggregate,
+    attendanceHistoryAggregate,
     Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate?
-        attendanceDaysConstraintsAggregate,
+    attendanceDaysConstraintsAggregate,
   });
   CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate<
-      TRes> get attendanceHistoryAggregate;
+    TRes
+  >
+  get attendanceHistoryAggregate;
   CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate<
-      TRes> get attendanceDaysConstraintsAggregate;
+    TRes
+  >
+  get attendanceDaysConstraintsAggregate;
 }
 
 class _CopyWithImpl_Fragment_AttendanceFields_classesHistory_classes<TRes>
@@ -7578,50 +7923,59 @@ class _CopyWithImpl_Fragment_AttendanceFields_classesHistory_classes<TRes>
     Object? blurhash = _undefined,
     Object? attendanceHistoryAggregate = _undefined,
     Object? attendanceDaysConstraintsAggregate = _undefined,
-  }) =>
-      _then(Fragment_AttendanceFields_classesHistory_classes(
-        id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
-        name: name == _undefined || name == null
-            ? _instance.name
-            : (name as String),
-        color: color == _undefined ? _instance.color : (color as int?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-        photoUpdatedAt: photoUpdatedAt == _undefined
-            ? _instance.photoUpdatedAt
-            : (photoUpdatedAt as DateTime?),
-        blurhash:
-            blurhash == _undefined ? _instance.blurhash : (blurhash as String?),
-        attendanceHistoryAggregate: attendanceHistoryAggregate == _undefined ||
-                attendanceHistoryAggregate == null
-            ? _instance.attendanceHistoryAggregate
-            : (attendanceHistoryAggregate
+  }) => _then(
+    Fragment_AttendanceFields_classesHistory_classes(
+      id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      color: color == _undefined ? _instance.color : (color as int?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+      photoUpdatedAt: photoUpdatedAt == _undefined
+          ? _instance.photoUpdatedAt
+          : (photoUpdatedAt as DateTime?),
+      blurhash: blurhash == _undefined
+          ? _instance.blurhash
+          : (blurhash as String?),
+      attendanceHistoryAggregate:
+          attendanceHistoryAggregate == _undefined ||
+              attendanceHistoryAggregate == null
+          ? _instance.attendanceHistoryAggregate
+          : (attendanceHistoryAggregate
                 as Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate),
-        attendanceDaysConstraintsAggregate: attendanceDaysConstraintsAggregate ==
-                    _undefined ||
-                attendanceDaysConstraintsAggregate == null
-            ? _instance.attendanceDaysConstraintsAggregate
-            : (attendanceDaysConstraintsAggregate
+      attendanceDaysConstraintsAggregate:
+          attendanceDaysConstraintsAggregate == _undefined ||
+              attendanceDaysConstraintsAggregate == null
+          ? _instance.attendanceDaysConstraintsAggregate
+          : (attendanceDaysConstraintsAggregate
                 as Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate),
-      ));
+    ),
+  );
 
   CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate<
-      TRes> get attendanceHistoryAggregate {
+    TRes
+  >
+  get attendanceHistoryAggregate {
     final local$attendanceHistoryAggregate =
         _instance.attendanceHistoryAggregate;
     return CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate(
-        local$attendanceHistoryAggregate,
-        (e) => call(attendanceHistoryAggregate: e));
+      local$attendanceHistoryAggregate,
+      (e) => call(attendanceHistoryAggregate: e),
+    );
   }
 
   CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate<
-      TRes> get attendanceDaysConstraintsAggregate {
+    TRes
+  >
+  get attendanceDaysConstraintsAggregate {
     final local$attendanceDaysConstraintsAggregate =
         _instance.attendanceDaysConstraintsAggregate;
     return CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate(
-        local$attendanceDaysConstraintsAggregate,
-        (e) => call(attendanceDaysConstraintsAggregate: e));
+      local$attendanceDaysConstraintsAggregate,
+      (e) => call(attendanceDaysConstraintsAggregate: e),
+    );
   }
 }
 
@@ -7639,23 +7993,26 @@ class _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory_classes<TRes>
     DateTime? photoUpdatedAt,
     String? blurhash,
     Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate?
-        attendanceHistoryAggregate,
+    attendanceHistoryAggregate,
     Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate?
-        attendanceDaysConstraintsAggregate,
-  }) =>
-      _res;
+    attendanceDaysConstraintsAggregate,
+  }) => _res;
 
   CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate<
-          TRes>
-      get attendanceHistoryAggregate =>
-          CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate
-              .stub(_res);
+    TRes
+  >
+  get attendanceHistoryAggregate =>
+      CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate.stub(
+        _res,
+      );
 
   CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate<
-          TRes>
-      get attendanceDaysConstraintsAggregate =>
-          CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate
-              .stub(_res);
+    TRes
+  >
+  get attendanceDaysConstraintsAggregate =>
+      CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate.stub(
+        _res,
+      );
 }
 
 class Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate {
@@ -7666,30 +8023,36 @@ class Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregat
   });
 
   factory Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$aggregate = json['aggregate'];
     final l$nodes = json['nodes'];
     final l$$__typename = json['__typename'];
     return Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate(
       aggregate: l$aggregate == null
           ? null
-          : Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate
-              .fromJson((l$aggregate as Map<String, dynamic>)),
+          : Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate.fromJson(
+              (l$aggregate as Map<String, dynamic>),
+            ),
       nodes: (l$nodes as List<dynamic>)
-          .map((e) =>
-              Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes
-                  .fromJson((e as Map<String, dynamic>)))
+          .map(
+            (e) =>
+                Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes.fromJson(
+                  (e as Map<String, dynamic>),
+                ),
+          )
           .toList(),
       $__typename: (l$$__typename as String),
     );
   }
 
   final Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate?
-      aggregate;
+  aggregate;
 
   final List<
-          Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes>
-      nodes;
+    Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes
+  >
+  nodes;
 
   final String $__typename;
 
@@ -7755,61 +8118,78 @@ class Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregat
 extension UtilityExtension_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate
     on Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate {
   CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate<
-          Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate>
-      get copyWith =>
-          CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate(
-            this,
-            (i) => i,
-          );
+    Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate
+  >
+  get copyWith =>
+      CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate(
+        this,
+        (i) => i,
+      );
 }
 
 abstract class CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate<
-    TRes> {
+  TRes
+> {
   factory CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate(
     Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate
-        instance,
+    instance,
     TRes Function(
-            Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate)
-        then,
+      Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate,
+    )
+    then,
   ) = _CopyWithImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate;
 
   factory CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate.stub(
-          TRes res) =
-      _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate;
+    TRes res,
+  ) = _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate;
 
   TRes call({
     Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate?
-        aggregate,
-    List<Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes>?
-        nodes,
+    aggregate,
+    List<
+      Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes
+    >?
+    nodes,
     String? $__typename,
   });
   CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate<
-      TRes> get aggregate;
+    TRes
+  >
+  get aggregate;
   TRes nodes(
-      Iterable<Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes> Function(
-              Iterable<
-                  CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes<
-                      Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes>>)
-          _fn);
+    Iterable<
+      Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes
+    >
+    Function(
+      Iterable<
+        CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes<
+          Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes
+        >
+      >,
+    )
+    _fn,
+  );
 }
 
 class _CopyWithImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate<
-        TRes>
+  TRes
+>
     implements
         CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate<
-            TRes> {
+          TRes
+        > {
   _CopyWithImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate(
     this._instance,
     this._then,
   );
 
   final Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate
-      _instance;
+  _instance;
 
   final TRes Function(
-          Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate)
-      _then;
+    Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate,
+  )
+  _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -7817,70 +8197,94 @@ class _CopyWithImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceH
     Object? aggregate = _undefined,
     Object? nodes = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(
-          Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate(
-        aggregate: aggregate == _undefined
-            ? _instance.aggregate
-            : (aggregate
+  }) => _then(
+    Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate(
+      aggregate: aggregate == _undefined
+          ? _instance.aggregate
+          : (aggregate
                 as Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate?),
-        nodes: nodes == _undefined || nodes == null
-            ? _instance.nodes
-            : (nodes as List<
-                Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes>),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+      nodes: nodes == _undefined || nodes == null
+          ? _instance.nodes
+          : (nodes
+                as List<
+                  Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes
+                >),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate<
-      TRes> get aggregate {
+    TRes
+  >
+  get aggregate {
     final local$aggregate = _instance.aggregate;
     return local$aggregate == null
-        ? CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate
-            .stub(_then(_instance))
+        ? CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate.stub(
+            _then(_instance),
+          )
         : CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate(
-            local$aggregate, (e) => call(aggregate: e));
+            local$aggregate,
+            (e) => call(aggregate: e),
+          );
   }
 
   TRes nodes(
-          Iterable<Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes> Function(
-                  Iterable<
-                      CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes<
-                          Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes>>)
-              _fn) =>
-      call(
-          nodes: _fn(_instance.nodes.map((e) =>
-              CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes(
-                e,
-                (i) => i,
-              ))).toList());
+    Iterable<
+      Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes
+    >
+    Function(
+      Iterable<
+        CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes<
+          Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes
+        >
+      >,
+    )
+    _fn,
+  ) => call(
+    nodes: _fn(
+      _instance.nodes.map(
+        (e) =>
+            CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes(
+              e,
+              (i) => i,
+            ),
+      ),
+    ).toList(),
+  );
 }
 
 class _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate<
-        TRes>
+  TRes
+>
     implements
         CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate<
-            TRes> {
+          TRes
+        > {
   _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate(
-      this._res);
+    this._res,
+  );
 
   TRes _res;
 
   call({
     Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate?
-        aggregate,
-    List<Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes>?
-        nodes,
+    aggregate,
+    List<
+      Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes
+    >?
+    nodes,
     String? $__typename,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate<
-          TRes>
-      get aggregate =>
-          CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate
-              .stub(_res);
+    TRes
+  >
+  get aggregate =>
+      CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate.stub(
+        _res,
+      );
 
   nodes(_fn) => _res;
 }
@@ -7893,7 +8297,8 @@ class Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregat
   });
 
   factory Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$count = json['count'];
     final l$max = json['max'];
     final l$$__typename = json['__typename'];
@@ -7901,8 +8306,9 @@ class Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregat
       count: (l$count as int),
       max: l$max == null
           ? null
-          : Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max
-              .fromJson((l$max as Map<String, dynamic>)),
+          : Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max.fromJson(
+              (l$max as Map<String, dynamic>),
+            ),
       $__typename: (l$$__typename as String),
     );
   }
@@ -7910,7 +8316,7 @@ class Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregat
   final int count;
 
   final Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max?
-      max;
+  max;
 
   final String $__typename;
 
@@ -7930,11 +8336,7 @@ class Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregat
     final l$count = count;
     final l$max = max;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$count,
-      l$max,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$count, l$max, l$$__typename]);
   }
 
   @override
@@ -7967,56 +8369,65 @@ class Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregat
 }
 
 extension UtilityExtension_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate
-    on Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate {
+    on
+        Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate {
   CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate<
-          Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate>
-      get copyWith =>
-          CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate(
-            this,
-            (i) => i,
-          );
+    Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate
+  >
+  get copyWith =>
+      CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate(
+        this,
+        (i) => i,
+      );
 }
 
 abstract class CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate<
-    TRes> {
+  TRes
+> {
   factory CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate(
     Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate
-        instance,
+    instance,
     TRes Function(
-            Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate)
-        then,
+      Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate,
+    )
+    then,
   ) = _CopyWithImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate;
 
   factory CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate.stub(
-          TRes res) =
-      _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate;
+    TRes res,
+  ) = _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate;
 
   TRes call({
     int? count,
     Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max?
-        max,
+    max,
     String? $__typename,
   });
   CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max<
-      TRes> get max;
+    TRes
+  >
+  get max;
 }
 
 class _CopyWithImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate<
-        TRes>
+  TRes
+>
     implements
         CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate<
-            TRes> {
+          TRes
+        > {
   _CopyWithImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate(
     this._instance,
     this._then,
   );
 
   final Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate
-      _instance;
+  _instance;
 
   final TRes Function(
-          Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate)
-      _then;
+    Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate,
+  )
+  _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -8024,55 +8435,64 @@ class _CopyWithImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceH
     Object? count = _undefined,
     Object? max = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(
-          Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate(
-        count: count == _undefined || count == null
-            ? _instance.count
-            : (count as int),
-        max: max == _undefined
-            ? _instance.max
-            : (max
+  }) => _then(
+    Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate(
+      count: count == _undefined || count == null
+          ? _instance.count
+          : (count as int),
+      max: max == _undefined
+          ? _instance.max
+          : (max
                 as Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max<
-      TRes> get max {
+    TRes
+  >
+  get max {
     final local$max = _instance.max;
     return local$max == null
-        ? CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max
-            .stub(_then(_instance))
+        ? CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max.stub(
+            _then(_instance),
+          )
         : CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max(
-            local$max, (e) => call(max: e));
+            local$max,
+            (e) => call(max: e),
+          );
   }
 }
 
 class _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate<
-        TRes>
+  TRes
+>
     implements
         CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate<
-            TRes> {
+          TRes
+        > {
   _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate(
-      this._res);
+    this._res,
+  );
 
   TRes _res;
 
   call({
     int? count,
     Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max?
-        max,
+    max,
     String? $__typename,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max<
-          TRes>
-      get max =>
-          CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max
-              .stub(_res);
+    TRes
+  >
+  get max =>
+      CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max.stub(
+        _res,
+      );
 }
 
 class Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max {
@@ -8082,7 +8502,8 @@ class Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregat
   });
 
   factory Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$dayId = json['dayId'];
     final l$$__typename = json['__typename'];
     return Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max(
@@ -8108,10 +8529,7 @@ class Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregat
   int get hashCode {
     final l$dayId = dayId;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$dayId,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$dayId, l$$__typename]);
   }
 
   @override
@@ -8139,83 +8557,86 @@ class Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregat
 }
 
 extension UtilityExtension_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max
-    on Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max {
+    on
+        Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max {
   CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max<
-          Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max>
-      get copyWith =>
-          CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max(
-            this,
-            (i) => i,
-          );
+    Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max
+  >
+  get copyWith =>
+      CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max(
+        this,
+        (i) => i,
+      );
 }
 
 abstract class CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max<
-    TRes> {
+  TRes
+> {
   factory CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max(
     Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max
-        instance,
+    instance,
     TRes Function(
-            Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max)
-        then,
+      Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max,
+    )
+    then,
   ) = _CopyWithImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max;
 
   factory CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max.stub(
-          TRes res) =
-      _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max;
+    TRes res,
+  ) = _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max;
 
-  TRes call({
-    DateTime? dayId,
-    String? $__typename,
-  });
+  TRes call({DateTime? dayId, String? $__typename});
 }
 
 class _CopyWithImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max<
-        TRes>
+  TRes
+>
     implements
         CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max<
-            TRes> {
+          TRes
+        > {
   _CopyWithImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max(
     this._instance,
     this._then,
   );
 
   final Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max
-      _instance;
+  _instance;
 
   final TRes Function(
-          Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max)
-      _then;
+    Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max,
+  )
+  _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? dayId = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(
-          Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max(
-        dayId: dayId == _undefined ? _instance.dayId : (dayId as DateTime?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max(
+      dayId: dayId == _undefined ? _instance.dayId : (dayId as DateTime?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 }
 
 class _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max<
-        TRes>
+  TRes
+>
     implements
         CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max<
-            TRes> {
+          TRes
+        > {
   _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_aggregate_max(
-      this._res);
+    this._res,
+  );
 
   TRes _res;
 
-  call({
-    DateTime? dayId,
-    String? $__typename,
-  }) =>
-      _res;
+  call({DateTime? dayId, String? $__typename}) => _res;
 }
 
 class Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes {
@@ -8225,7 +8646,8 @@ class Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregat
   });
 
   factory Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$dayId = json['dayId'];
     final l$$__typename = json['__typename'];
     return Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes(
@@ -8251,10 +8673,7 @@ class Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregat
   int get hashCode {
     final l$dayId = dayId;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$dayId,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$dayId, l$$__typename]);
   }
 
   @override
@@ -8282,85 +8701,88 @@ class Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregat
 }
 
 extension UtilityExtension_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes
-    on Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes {
+    on
+        Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes {
   CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes<
-          Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes>
-      get copyWith =>
-          CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes(
-            this,
-            (i) => i,
-          );
+    Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes
+  >
+  get copyWith =>
+      CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes(
+        this,
+        (i) => i,
+      );
 }
 
 abstract class CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes<
-    TRes> {
+  TRes
+> {
   factory CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes(
     Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes
-        instance,
+    instance,
     TRes Function(
-            Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes)
-        then,
+      Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes,
+    )
+    then,
   ) = _CopyWithImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes;
 
   factory CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes.stub(
-          TRes res) =
-      _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes;
+    TRes res,
+  ) = _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes;
 
-  TRes call({
-    DateTime? dayId,
-    String? $__typename,
-  });
+  TRes call({DateTime? dayId, String? $__typename});
 }
 
 class _CopyWithImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes<
-        TRes>
+  TRes
+>
     implements
         CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes<
-            TRes> {
+          TRes
+        > {
   _CopyWithImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes(
     this._instance,
     this._then,
   );
 
   final Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes
-      _instance;
+  _instance;
 
   final TRes Function(
-          Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes)
-      _then;
+    Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes,
+  )
+  _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? dayId = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(
-          Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes(
-        dayId: dayId == _undefined || dayId == null
-            ? _instance.dayId
-            : (dayId as DateTime),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes(
+      dayId: dayId == _undefined || dayId == null
+          ? _instance.dayId
+          : (dayId as DateTime),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 }
 
 class _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes<
-        TRes>
+  TRes
+>
     implements
         CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes<
-            TRes> {
+          TRes
+        > {
   _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceHistoryAggregate_nodes(
-      this._res);
+    this._res,
+  );
 
   TRes _res;
 
-  call({
-    DateTime? dayId,
-    String? $__typename,
-  }) =>
-      _res;
+  call({DateTime? dayId, String? $__typename}) => _res;
 }
 
 class Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate {
@@ -8371,30 +8793,36 @@ class Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraints
   });
 
   factory Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$aggregate = json['aggregate'];
     final l$nodes = json['nodes'];
     final l$$__typename = json['__typename'];
     return Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate(
       aggregate: l$aggregate == null
           ? null
-          : Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate
-              .fromJson((l$aggregate as Map<String, dynamic>)),
+          : Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate.fromJson(
+              (l$aggregate as Map<String, dynamic>),
+            ),
       nodes: (l$nodes as List<dynamic>)
-          .map((e) =>
-              Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes
-                  .fromJson((e as Map<String, dynamic>)))
+          .map(
+            (e) =>
+                Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes.fromJson(
+                  (e as Map<String, dynamic>),
+                ),
+          )
           .toList(),
       $__typename: (l$$__typename as String),
     );
   }
 
   final Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate?
-      aggregate;
+  aggregate;
 
   final List<
-          Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes>
-      nodes;
+    Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes
+  >
+  nodes;
 
   final String $__typename;
 
@@ -8458,63 +8886,81 @@ class Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraints
 }
 
 extension UtilityExtension_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate
-    on Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate {
+    on
+        Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate {
   CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate<
-          Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate>
-      get copyWith =>
-          CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate(
-            this,
-            (i) => i,
-          );
+    Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate
+  >
+  get copyWith =>
+      CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate(
+        this,
+        (i) => i,
+      );
 }
 
 abstract class CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate<
-    TRes> {
+  TRes
+> {
   factory CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate(
     Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate
-        instance,
+    instance,
     TRes Function(
-            Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate)
-        then,
+      Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate,
+    )
+    then,
   ) = _CopyWithImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate;
 
   factory CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate.stub(
-          TRes res) =
-      _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate;
+    TRes res,
+  ) = _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate;
 
   TRes call({
     Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate?
-        aggregate,
-    List<Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes>?
-        nodes,
+    aggregate,
+    List<
+      Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes
+    >?
+    nodes,
     String? $__typename,
   });
   CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate<
-      TRes> get aggregate;
+    TRes
+  >
+  get aggregate;
   TRes nodes(
-      Iterable<Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes> Function(
-              Iterable<
-                  CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes<
-                      Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes>>)
-          _fn);
+    Iterable<
+      Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes
+    >
+    Function(
+      Iterable<
+        CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes<
+          Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes
+        >
+      >,
+    )
+    _fn,
+  );
 }
 
 class _CopyWithImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate<
-        TRes>
+  TRes
+>
     implements
         CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate<
-            TRes> {
+          TRes
+        > {
   _CopyWithImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate(
     this._instance,
     this._then,
   );
 
   final Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate
-      _instance;
+  _instance;
 
   final TRes Function(
-          Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate)
-      _then;
+    Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate,
+  )
+  _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -8522,70 +8968,94 @@ class _CopyWithImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceD
     Object? aggregate = _undefined,
     Object? nodes = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(
-          Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate(
-        aggregate: aggregate == _undefined
-            ? _instance.aggregate
-            : (aggregate
+  }) => _then(
+    Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate(
+      aggregate: aggregate == _undefined
+          ? _instance.aggregate
+          : (aggregate
                 as Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate?),
-        nodes: nodes == _undefined || nodes == null
-            ? _instance.nodes
-            : (nodes as List<
-                Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes>),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+      nodes: nodes == _undefined || nodes == null
+          ? _instance.nodes
+          : (nodes
+                as List<
+                  Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes
+                >),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate<
-      TRes> get aggregate {
+    TRes
+  >
+  get aggregate {
     final local$aggregate = _instance.aggregate;
     return local$aggregate == null
-        ? CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate
-            .stub(_then(_instance))
+        ? CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate.stub(
+            _then(_instance),
+          )
         : CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate(
-            local$aggregate, (e) => call(aggregate: e));
+            local$aggregate,
+            (e) => call(aggregate: e),
+          );
   }
 
   TRes nodes(
-          Iterable<Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes> Function(
-                  Iterable<
-                      CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes<
-                          Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes>>)
-              _fn) =>
-      call(
-          nodes: _fn(_instance.nodes.map((e) =>
-              CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes(
-                e,
-                (i) => i,
-              ))).toList());
+    Iterable<
+      Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes
+    >
+    Function(
+      Iterable<
+        CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes<
+          Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes
+        >
+      >,
+    )
+    _fn,
+  ) => call(
+    nodes: _fn(
+      _instance.nodes.map(
+        (e) =>
+            CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes(
+              e,
+              (i) => i,
+            ),
+      ),
+    ).toList(),
+  );
 }
 
 class _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate<
-        TRes>
+  TRes
+>
     implements
         CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate<
-            TRes> {
+          TRes
+        > {
   _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate(
-      this._res);
+    this._res,
+  );
 
   TRes _res;
 
   call({
     Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate?
-        aggregate,
-    List<Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes>?
-        nodes,
+    aggregate,
+    List<
+      Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes
+    >?
+    nodes,
     String? $__typename,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate<
-          TRes>
-      get aggregate =>
-          CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate
-              .stub(_res);
+    TRes
+  >
+  get aggregate =>
+      CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate.stub(
+        _res,
+      );
 
   nodes(_fn) => _res;
 }
@@ -8597,7 +9067,8 @@ class Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraints
   });
 
   factory Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$count = json['count'];
     final l$$__typename = json['__typename'];
     return Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate(
@@ -8623,10 +9094,7 @@ class Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraints
   int get hashCode {
     final l$count = count;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$count,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$count, l$$__typename]);
   }
 
   @override
@@ -8654,85 +9122,88 @@ class Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraints
 }
 
 extension UtilityExtension_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate
-    on Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate {
+    on
+        Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate {
   CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate<
-          Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate>
-      get copyWith =>
-          CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate(
-            this,
-            (i) => i,
-          );
+    Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate
+  >
+  get copyWith =>
+      CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate(
+        this,
+        (i) => i,
+      );
 }
 
 abstract class CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate<
-    TRes> {
+  TRes
+> {
   factory CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate(
     Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate
-        instance,
+    instance,
     TRes Function(
-            Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate)
-        then,
+      Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate,
+    )
+    then,
   ) = _CopyWithImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate;
 
   factory CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate.stub(
-          TRes res) =
-      _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate;
+    TRes res,
+  ) = _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate;
 
-  TRes call({
-    int? count,
-    String? $__typename,
-  });
+  TRes call({int? count, String? $__typename});
 }
 
 class _CopyWithImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate<
-        TRes>
+  TRes
+>
     implements
         CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate<
-            TRes> {
+          TRes
+        > {
   _CopyWithImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate(
     this._instance,
     this._then,
   );
 
   final Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate
-      _instance;
+  _instance;
 
   final TRes Function(
-          Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate)
-      _then;
+    Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate,
+  )
+  _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? count = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(
-          Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate(
-        count: count == _undefined || count == null
-            ? _instance.count
-            : (count as int),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate(
+      count: count == _undefined || count == null
+          ? _instance.count
+          : (count as int),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 }
 
 class _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate<
-        TRes>
+  TRes
+>
     implements
         CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate<
-            TRes> {
+          TRes
+        > {
   _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_aggregate(
-      this._res);
+    this._res,
+  );
 
   TRes _res;
 
-  call({
-    int? count,
-    String? $__typename,
-  }) =>
-      _res;
+  call({int? count, String? $__typename}) => _res;
 }
 
 class Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes {
@@ -8742,7 +9213,8 @@ class Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraints
   });
 
   factory Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$dayId = json['dayId'];
     final l$$__typename = json['__typename'];
     return Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes(
@@ -8768,10 +9240,7 @@ class Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraints
   int get hashCode {
     final l$dayId = dayId;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$dayId,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$dayId, l$$__typename]);
   }
 
   @override
@@ -8799,85 +9268,88 @@ class Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraints
 }
 
 extension UtilityExtension_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes
-    on Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes {
+    on
+        Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes {
   CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes<
-          Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes>
-      get copyWith =>
-          CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes(
-            this,
-            (i) => i,
-          );
+    Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes
+  >
+  get copyWith =>
+      CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes(
+        this,
+        (i) => i,
+      );
 }
 
 abstract class CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes<
-    TRes> {
+  TRes
+> {
   factory CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes(
     Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes
-        instance,
+    instance,
     TRes Function(
-            Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes)
-        then,
+      Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes,
+    )
+    then,
   ) = _CopyWithImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes;
 
   factory CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes.stub(
-          TRes res) =
-      _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes;
+    TRes res,
+  ) = _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes;
 
-  TRes call({
-    DateTime? dayId,
-    String? $__typename,
-  });
+  TRes call({DateTime? dayId, String? $__typename});
 }
 
 class _CopyWithImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes<
-        TRes>
+  TRes
+>
     implements
         CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes<
-            TRes> {
+          TRes
+        > {
   _CopyWithImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes(
     this._instance,
     this._then,
   );
 
   final Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes
-      _instance;
+  _instance;
 
   final TRes Function(
-          Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes)
-      _then;
+    Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes,
+  )
+  _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? dayId = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(
-          Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes(
-        dayId: dayId == _undefined || dayId == null
-            ? _instance.dayId
-            : (dayId as DateTime),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes(
+      dayId: dayId == _undefined || dayId == null
+          ? _instance.dayId
+          : (dayId as DateTime),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 }
 
 class _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes<
-        TRes>
+  TRes
+>
     implements
         CopyWith_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes<
-            TRes> {
+          TRes
+        > {
   _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory_classes_attendanceDaysConstraintsAggregate_nodes(
-      this._res);
+    this._res,
+  );
 
   TRes _res;
 
-  call({
-    DateTime? dayId,
-    String? $__typename,
-  }) =>
-      _res;
+  call({DateTime? dayId, String? $__typename}) => _res;
 }
 
 class Fragment_AttendanceFields_groupsHistory {
@@ -8888,7 +9360,8 @@ class Fragment_AttendanceFields_groupsHistory {
   });
 
   factory Fragment_AttendanceFields_groupsHistory.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$permissionId = json['permissionId'];
     final l$group = json['group'];
     final l$$__typename = json['__typename'];
@@ -8897,7 +9370,8 @@ class Fragment_AttendanceFields_groupsHistory {
       group: l$group == null
           ? null
           : Fragment_AttendanceFields_groupsHistory_group.fromJson(
-              (l$group as Map<String, dynamic>)),
+              (l$group as Map<String, dynamic>),
+            ),
       $__typename: (l$$__typename as String),
     );
   }
@@ -8924,11 +9398,7 @@ class Fragment_AttendanceFields_groupsHistory {
     final l$permissionId = permissionId;
     final l$group = group;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$permissionId,
-      l$group,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$permissionId, l$group, l$$__typename]);
   }
 
   @override
@@ -8962,11 +9432,10 @@ class Fragment_AttendanceFields_groupsHistory {
 extension UtilityExtension_Fragment_AttendanceFields_groupsHistory
     on Fragment_AttendanceFields_groupsHistory {
   CopyWith_Fragment_AttendanceFields_groupsHistory<
-          Fragment_AttendanceFields_groupsHistory>
-      get copyWith => CopyWith_Fragment_AttendanceFields_groupsHistory(
-            this,
-            (i) => i,
-          );
+    Fragment_AttendanceFields_groupsHistory
+  >
+  get copyWith =>
+      CopyWith_Fragment_AttendanceFields_groupsHistory(this, (i) => i);
 }
 
 abstract class CopyWith_Fragment_AttendanceFields_groupsHistory<TRes> {
@@ -9003,26 +9472,30 @@ class _CopyWithImpl_Fragment_AttendanceFields_groupsHistory<TRes>
     Object? permissionId = _undefined,
     Object? group = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Fragment_AttendanceFields_groupsHistory(
-        permissionId: permissionId == _undefined || permissionId == null
-            ? _instance.permissionId
-            : (permissionId as UuidValue),
-        group: group == _undefined
-            ? _instance.group
-            : (group as Fragment_AttendanceFields_groupsHistory_group?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Fragment_AttendanceFields_groupsHistory(
+      permissionId: permissionId == _undefined || permissionId == null
+          ? _instance.permissionId
+          : (permissionId as UuidValue),
+      group: group == _undefined
+          ? _instance.group
+          : (group as Fragment_AttendanceFields_groupsHistory_group?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   CopyWith_Fragment_AttendanceFields_groupsHistory_group<TRes> get group {
     final local$group = _instance.group;
     return local$group == null
         ? CopyWith_Fragment_AttendanceFields_groupsHistory_group.stub(
-            _then(_instance))
+            _then(_instance),
+          )
         : CopyWith_Fragment_AttendanceFields_groupsHistory_group(
-            local$group, (e) => call(group: e));
+            local$group,
+            (e) => call(group: e),
+          );
   }
 }
 
@@ -9036,8 +9509,7 @@ class _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory<TRes>
     UuidValue? permissionId,
     Fragment_AttendanceFields_groupsHistory_group? group,
     String? $__typename,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Fragment_AttendanceFields_groupsHistory_group<TRes> get group =>
       CopyWith_Fragment_AttendanceFields_groupsHistory_group.stub(_res);
@@ -9057,7 +9529,8 @@ class Fragment_AttendanceFields_groupsHistory_group
   });
 
   factory Fragment_AttendanceFields_groupsHistory_group.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$id = json['id'];
     final l$name = json['name'];
     final l$color = json['color'];
@@ -9072,16 +9545,18 @@ class Fragment_AttendanceFields_groupsHistory_group
       name: (l$name as String),
       color: (l$color as int?),
       $__typename: (l$$__typename as String),
-      photoUpdatedAt:
-          l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
+      photoUpdatedAt: l$photoUpdatedAt == null
+          ? null
+          : tstzFromString(l$photoUpdatedAt),
       blurhash: (l$blurhash as String?),
       attendanceHistoryAggregate:
-          Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate
-              .fromJson((l$attendanceHistoryAggregate as Map<String, dynamic>)),
+          Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate.fromJson(
+            (l$attendanceHistoryAggregate as Map<String, dynamic>),
+          ),
       attendanceDaysConstraintsAggregate:
-          Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate
-              .fromJson((l$attendanceDaysConstraintsAggregate
-                  as Map<String, dynamic>)),
+          Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate.fromJson(
+            (l$attendanceDaysConstraintsAggregate as Map<String, dynamic>),
+          ),
     );
   }
 
@@ -9098,10 +9573,10 @@ class Fragment_AttendanceFields_groupsHistory_group
   final String? blurhash;
 
   final Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate
-      attendanceHistoryAggregate;
+  attendanceHistoryAggregate;
 
   final Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate
-      attendanceDaysConstraintsAggregate;
+  attendanceDaysConstraintsAggregate;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -9114,13 +9589,14 @@ class Fragment_AttendanceFields_groupsHistory_group
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
-    _resultData['photoUpdatedAt'] =
-        l$photoUpdatedAt == null ? null : tstzToString(l$photoUpdatedAt);
+    _resultData['photoUpdatedAt'] = l$photoUpdatedAt == null
+        ? null
+        : tstzToString(l$photoUpdatedAt);
     final l$blurhash = blurhash;
     _resultData['blurhash'] = l$blurhash;
     final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
-    _resultData['attendanceHistoryAggregate'] =
-        l$attendanceHistoryAggregate.toJson();
+    _resultData['attendanceHistoryAggregate'] = l$attendanceHistoryAggregate
+        .toJson();
     final l$attendanceDaysConstraintsAggregate =
         attendanceDaysConstraintsAggregate;
     _resultData['attendanceDaysConstraintsAggregate'] =
@@ -9210,11 +9686,10 @@ class Fragment_AttendanceFields_groupsHistory_group
 extension UtilityExtension_Fragment_AttendanceFields_groupsHistory_group
     on Fragment_AttendanceFields_groupsHistory_group {
   CopyWith_Fragment_AttendanceFields_groupsHistory_group<
-          Fragment_AttendanceFields_groupsHistory_group>
-      get copyWith => CopyWith_Fragment_AttendanceFields_groupsHistory_group(
-            this,
-            (i) => i,
-          );
+    Fragment_AttendanceFields_groupsHistory_group
+  >
+  get copyWith =>
+      CopyWith_Fragment_AttendanceFields_groupsHistory_group(this, (i) => i);
 }
 
 abstract class CopyWith_Fragment_AttendanceFields_groupsHistory_group<TRes> {
@@ -9224,8 +9699,8 @@ abstract class CopyWith_Fragment_AttendanceFields_groupsHistory_group<TRes> {
   ) = _CopyWithImpl_Fragment_AttendanceFields_groupsHistory_group;
 
   factory CopyWith_Fragment_AttendanceFields_groupsHistory_group.stub(
-          TRes res) =
-      _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory_group;
+    TRes res,
+  ) = _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory_group;
 
   TRes call({
     UuidValue? id,
@@ -9235,14 +9710,18 @@ abstract class CopyWith_Fragment_AttendanceFields_groupsHistory_group<TRes> {
     DateTime? photoUpdatedAt,
     String? blurhash,
     Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate?
-        attendanceHistoryAggregate,
+    attendanceHistoryAggregate,
     Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate?
-        attendanceDaysConstraintsAggregate,
+    attendanceDaysConstraintsAggregate,
   });
   CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate<
-      TRes> get attendanceHistoryAggregate;
+    TRes
+  >
+  get attendanceHistoryAggregate;
   CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate<
-      TRes> get attendanceDaysConstraintsAggregate;
+    TRes
+  >
+  get attendanceDaysConstraintsAggregate;
 }
 
 class _CopyWithImpl_Fragment_AttendanceFields_groupsHistory_group<TRes>
@@ -9267,50 +9746,59 @@ class _CopyWithImpl_Fragment_AttendanceFields_groupsHistory_group<TRes>
     Object? blurhash = _undefined,
     Object? attendanceHistoryAggregate = _undefined,
     Object? attendanceDaysConstraintsAggregate = _undefined,
-  }) =>
-      _then(Fragment_AttendanceFields_groupsHistory_group(
-        id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
-        name: name == _undefined || name == null
-            ? _instance.name
-            : (name as String),
-        color: color == _undefined ? _instance.color : (color as int?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-        photoUpdatedAt: photoUpdatedAt == _undefined
-            ? _instance.photoUpdatedAt
-            : (photoUpdatedAt as DateTime?),
-        blurhash:
-            blurhash == _undefined ? _instance.blurhash : (blurhash as String?),
-        attendanceHistoryAggregate: attendanceHistoryAggregate == _undefined ||
-                attendanceHistoryAggregate == null
-            ? _instance.attendanceHistoryAggregate
-            : (attendanceHistoryAggregate
+  }) => _then(
+    Fragment_AttendanceFields_groupsHistory_group(
+      id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      color: color == _undefined ? _instance.color : (color as int?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+      photoUpdatedAt: photoUpdatedAt == _undefined
+          ? _instance.photoUpdatedAt
+          : (photoUpdatedAt as DateTime?),
+      blurhash: blurhash == _undefined
+          ? _instance.blurhash
+          : (blurhash as String?),
+      attendanceHistoryAggregate:
+          attendanceHistoryAggregate == _undefined ||
+              attendanceHistoryAggregate == null
+          ? _instance.attendanceHistoryAggregate
+          : (attendanceHistoryAggregate
                 as Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate),
-        attendanceDaysConstraintsAggregate: attendanceDaysConstraintsAggregate ==
-                    _undefined ||
-                attendanceDaysConstraintsAggregate == null
-            ? _instance.attendanceDaysConstraintsAggregate
-            : (attendanceDaysConstraintsAggregate
+      attendanceDaysConstraintsAggregate:
+          attendanceDaysConstraintsAggregate == _undefined ||
+              attendanceDaysConstraintsAggregate == null
+          ? _instance.attendanceDaysConstraintsAggregate
+          : (attendanceDaysConstraintsAggregate
                 as Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate),
-      ));
+    ),
+  );
 
   CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate<
-      TRes> get attendanceHistoryAggregate {
+    TRes
+  >
+  get attendanceHistoryAggregate {
     final local$attendanceHistoryAggregate =
         _instance.attendanceHistoryAggregate;
     return CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate(
-        local$attendanceHistoryAggregate,
-        (e) => call(attendanceHistoryAggregate: e));
+      local$attendanceHistoryAggregate,
+      (e) => call(attendanceHistoryAggregate: e),
+    );
   }
 
   CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate<
-      TRes> get attendanceDaysConstraintsAggregate {
+    TRes
+  >
+  get attendanceDaysConstraintsAggregate {
     final local$attendanceDaysConstraintsAggregate =
         _instance.attendanceDaysConstraintsAggregate;
     return CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate(
-        local$attendanceDaysConstraintsAggregate,
-        (e) => call(attendanceDaysConstraintsAggregate: e));
+      local$attendanceDaysConstraintsAggregate,
+      (e) => call(attendanceDaysConstraintsAggregate: e),
+    );
   }
 }
 
@@ -9328,23 +9816,26 @@ class _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory_group<TRes>
     DateTime? photoUpdatedAt,
     String? blurhash,
     Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate?
-        attendanceHistoryAggregate,
+    attendanceHistoryAggregate,
     Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate?
-        attendanceDaysConstraintsAggregate,
-  }) =>
-      _res;
+    attendanceDaysConstraintsAggregate,
+  }) => _res;
 
   CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate<
-          TRes>
-      get attendanceHistoryAggregate =>
-          CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate
-              .stub(_res);
+    TRes
+  >
+  get attendanceHistoryAggregate =>
+      CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate.stub(
+        _res,
+      );
 
   CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate<
-          TRes>
-      get attendanceDaysConstraintsAggregate =>
-          CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate
-              .stub(_res);
+    TRes
+  >
+  get attendanceDaysConstraintsAggregate =>
+      CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate.stub(
+        _res,
+      );
 }
 
 class Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate {
@@ -9355,30 +9846,36 @@ class Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate {
   });
 
   factory Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$aggregate = json['aggregate'];
     final l$nodes = json['nodes'];
     final l$$__typename = json['__typename'];
     return Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate(
       aggregate: l$aggregate == null
           ? null
-          : Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate
-              .fromJson((l$aggregate as Map<String, dynamic>)),
+          : Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate.fromJson(
+              (l$aggregate as Map<String, dynamic>),
+            ),
       nodes: (l$nodes as List<dynamic>)
-          .map((e) =>
-              Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes
-                  .fromJson((e as Map<String, dynamic>)))
+          .map(
+            (e) =>
+                Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes.fromJson(
+                  (e as Map<String, dynamic>),
+                ),
+          )
           .toList(),
       $__typename: (l$$__typename as String),
     );
   }
 
   final Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate?
-      aggregate;
+  aggregate;
 
   final List<
-          Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes>
-      nodes;
+    Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes
+  >
+  nodes;
 
   final String $__typename;
 
@@ -9444,61 +9941,78 @@ class Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate {
 extension UtilityExtension_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate
     on Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate {
   CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate<
-          Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate>
-      get copyWith =>
-          CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate(
-            this,
-            (i) => i,
-          );
+    Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate
+  >
+  get copyWith =>
+      CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate(
+        this,
+        (i) => i,
+      );
 }
 
 abstract class CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate<
-    TRes> {
+  TRes
+> {
   factory CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate(
     Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate
-        instance,
+    instance,
     TRes Function(
-            Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate)
-        then,
+      Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate,
+    )
+    then,
   ) = _CopyWithImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate;
 
   factory CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate.stub(
-          TRes res) =
-      _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate;
+    TRes res,
+  ) = _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate;
 
   TRes call({
     Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate?
-        aggregate,
-    List<Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes>?
-        nodes,
+    aggregate,
+    List<
+      Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes
+    >?
+    nodes,
     String? $__typename,
   });
   CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate<
-      TRes> get aggregate;
+    TRes
+  >
+  get aggregate;
   TRes nodes(
-      Iterable<Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes> Function(
-              Iterable<
-                  CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes<
-                      Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes>>)
-          _fn);
+    Iterable<
+      Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes
+    >
+    Function(
+      Iterable<
+        CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes<
+          Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes
+        >
+      >,
+    )
+    _fn,
+  );
 }
 
 class _CopyWithImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate<
-        TRes>
+  TRes
+>
     implements
         CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate<
-            TRes> {
+          TRes
+        > {
   _CopyWithImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate(
     this._instance,
     this._then,
   );
 
   final Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate
-      _instance;
+  _instance;
 
   final TRes Function(
-          Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate)
-      _then;
+    Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate,
+  )
+  _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -9506,70 +10020,94 @@ class _CopyWithImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceHist
     Object? aggregate = _undefined,
     Object? nodes = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(
-          Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate(
-        aggregate: aggregate == _undefined
-            ? _instance.aggregate
-            : (aggregate
+  }) => _then(
+    Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate(
+      aggregate: aggregate == _undefined
+          ? _instance.aggregate
+          : (aggregate
                 as Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate?),
-        nodes: nodes == _undefined || nodes == null
-            ? _instance.nodes
-            : (nodes as List<
-                Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes>),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+      nodes: nodes == _undefined || nodes == null
+          ? _instance.nodes
+          : (nodes
+                as List<
+                  Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes
+                >),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate<
-      TRes> get aggregate {
+    TRes
+  >
+  get aggregate {
     final local$aggregate = _instance.aggregate;
     return local$aggregate == null
-        ? CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate
-            .stub(_then(_instance))
+        ? CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate.stub(
+            _then(_instance),
+          )
         : CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate(
-            local$aggregate, (e) => call(aggregate: e));
+            local$aggregate,
+            (e) => call(aggregate: e),
+          );
   }
 
   TRes nodes(
-          Iterable<Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes> Function(
-                  Iterable<
-                      CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes<
-                          Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes>>)
-              _fn) =>
-      call(
-          nodes: _fn(_instance.nodes.map((e) =>
-              CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes(
-                e,
-                (i) => i,
-              ))).toList());
+    Iterable<
+      Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes
+    >
+    Function(
+      Iterable<
+        CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes<
+          Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes
+        >
+      >,
+    )
+    _fn,
+  ) => call(
+    nodes: _fn(
+      _instance.nodes.map(
+        (e) =>
+            CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes(
+              e,
+              (i) => i,
+            ),
+      ),
+    ).toList(),
+  );
 }
 
 class _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate<
-        TRes>
+  TRes
+>
     implements
         CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate<
-            TRes> {
+          TRes
+        > {
   _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate(
-      this._res);
+    this._res,
+  );
 
   TRes _res;
 
   call({
     Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate?
-        aggregate,
-    List<Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes>?
-        nodes,
+    aggregate,
+    List<
+      Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes
+    >?
+    nodes,
     String? $__typename,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate<
-          TRes>
-      get aggregate =>
-          CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate
-              .stub(_res);
+    TRes
+  >
+  get aggregate =>
+      CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate.stub(
+        _res,
+      );
 
   nodes(_fn) => _res;
 }
@@ -9582,7 +10120,8 @@ class Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_a
   });
 
   factory Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$count = json['count'];
     final l$max = json['max'];
     final l$$__typename = json['__typename'];
@@ -9590,8 +10129,9 @@ class Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_a
       count: (l$count as int),
       max: l$max == null
           ? null
-          : Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max
-              .fromJson((l$max as Map<String, dynamic>)),
+          : Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max.fromJson(
+              (l$max as Map<String, dynamic>),
+            ),
       $__typename: (l$$__typename as String),
     );
   }
@@ -9599,7 +10139,7 @@ class Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_a
   final int count;
 
   final Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max?
-      max;
+  max;
 
   final String $__typename;
 
@@ -9619,11 +10159,7 @@ class Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_a
     final l$count = count;
     final l$max = max;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$count,
-      l$max,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$count, l$max, l$$__typename]);
   }
 
   @override
@@ -9656,56 +10192,65 @@ class Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_a
 }
 
 extension UtilityExtension_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate
-    on Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate {
+    on
+        Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate {
   CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate<
-          Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate>
-      get copyWith =>
-          CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate(
-            this,
-            (i) => i,
-          );
+    Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate
+  >
+  get copyWith =>
+      CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate(
+        this,
+        (i) => i,
+      );
 }
 
 abstract class CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate<
-    TRes> {
+  TRes
+> {
   factory CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate(
     Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate
-        instance,
+    instance,
     TRes Function(
-            Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate)
-        then,
+      Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate,
+    )
+    then,
   ) = _CopyWithImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate;
 
   factory CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate.stub(
-          TRes res) =
-      _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate;
+    TRes res,
+  ) = _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate;
 
   TRes call({
     int? count,
     Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max?
-        max,
+    max,
     String? $__typename,
   });
   CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max<
-      TRes> get max;
+    TRes
+  >
+  get max;
 }
 
 class _CopyWithImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate<
-        TRes>
+  TRes
+>
     implements
         CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate<
-            TRes> {
+          TRes
+        > {
   _CopyWithImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate(
     this._instance,
     this._then,
   );
 
   final Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate
-      _instance;
+  _instance;
 
   final TRes Function(
-          Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate)
-      _then;
+    Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate,
+  )
+  _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -9713,55 +10258,64 @@ class _CopyWithImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceHist
     Object? count = _undefined,
     Object? max = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(
-          Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate(
-        count: count == _undefined || count == null
-            ? _instance.count
-            : (count as int),
-        max: max == _undefined
-            ? _instance.max
-            : (max
+  }) => _then(
+    Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate(
+      count: count == _undefined || count == null
+          ? _instance.count
+          : (count as int),
+      max: max == _undefined
+          ? _instance.max
+          : (max
                 as Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max<
-      TRes> get max {
+    TRes
+  >
+  get max {
     final local$max = _instance.max;
     return local$max == null
-        ? CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max
-            .stub(_then(_instance))
+        ? CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max.stub(
+            _then(_instance),
+          )
         : CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max(
-            local$max, (e) => call(max: e));
+            local$max,
+            (e) => call(max: e),
+          );
   }
 }
 
 class _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate<
-        TRes>
+  TRes
+>
     implements
         CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate<
-            TRes> {
+          TRes
+        > {
   _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate(
-      this._res);
+    this._res,
+  );
 
   TRes _res;
 
   call({
     int? count,
     Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max?
-        max,
+    max,
     String? $__typename,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max<
-          TRes>
-      get max =>
-          CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max
-              .stub(_res);
+    TRes
+  >
+  get max =>
+      CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max.stub(
+        _res,
+      );
 }
 
 class Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max {
@@ -9771,7 +10325,8 @@ class Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_a
   });
 
   factory Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$dayId = json['dayId'];
     final l$$__typename = json['__typename'];
     return Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max(
@@ -9797,10 +10352,7 @@ class Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_a
   int get hashCode {
     final l$dayId = dayId;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$dayId,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$dayId, l$$__typename]);
   }
 
   @override
@@ -9828,83 +10380,86 @@ class Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_a
 }
 
 extension UtilityExtension_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max
-    on Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max {
+    on
+        Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max {
   CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max<
-          Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max>
-      get copyWith =>
-          CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max(
-            this,
-            (i) => i,
-          );
+    Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max
+  >
+  get copyWith =>
+      CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max(
+        this,
+        (i) => i,
+      );
 }
 
 abstract class CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max<
-    TRes> {
+  TRes
+> {
   factory CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max(
     Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max
-        instance,
+    instance,
     TRes Function(
-            Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max)
-        then,
+      Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max,
+    )
+    then,
   ) = _CopyWithImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max;
 
   factory CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max.stub(
-          TRes res) =
-      _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max;
+    TRes res,
+  ) = _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max;
 
-  TRes call({
-    DateTime? dayId,
-    String? $__typename,
-  });
+  TRes call({DateTime? dayId, String? $__typename});
 }
 
 class _CopyWithImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max<
-        TRes>
+  TRes
+>
     implements
         CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max<
-            TRes> {
+          TRes
+        > {
   _CopyWithImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max(
     this._instance,
     this._then,
   );
 
   final Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max
-      _instance;
+  _instance;
 
   final TRes Function(
-          Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max)
-      _then;
+    Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max,
+  )
+  _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? dayId = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(
-          Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max(
-        dayId: dayId == _undefined ? _instance.dayId : (dayId as DateTime?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max(
+      dayId: dayId == _undefined ? _instance.dayId : (dayId as DateTime?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 }
 
 class _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max<
-        TRes>
+  TRes
+>
     implements
         CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max<
-            TRes> {
+          TRes
+        > {
   _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_aggregate_max(
-      this._res);
+    this._res,
+  );
 
   TRes _res;
 
-  call({
-    DateTime? dayId,
-    String? $__typename,
-  }) =>
-      _res;
+  call({DateTime? dayId, String? $__typename}) => _res;
 }
 
 class Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes {
@@ -9914,7 +10469,8 @@ class Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_n
   });
 
   factory Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$dayId = json['dayId'];
     final l$$__typename = json['__typename'];
     return Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes(
@@ -9940,10 +10496,7 @@ class Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_n
   int get hashCode {
     final l$dayId = dayId;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$dayId,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$dayId, l$$__typename]);
   }
 
   @override
@@ -9973,83 +10526,85 @@ class Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_n
 extension UtilityExtension_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes
     on Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes {
   CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes<
-          Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes>
-      get copyWith =>
-          CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes(
-            this,
-            (i) => i,
-          );
+    Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes
+  >
+  get copyWith =>
+      CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes(
+        this,
+        (i) => i,
+      );
 }
 
 abstract class CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes<
-    TRes> {
+  TRes
+> {
   factory CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes(
     Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes
-        instance,
+    instance,
     TRes Function(
-            Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes)
-        then,
+      Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes,
+    )
+    then,
   ) = _CopyWithImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes;
 
   factory CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes.stub(
-          TRes res) =
-      _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes;
+    TRes res,
+  ) = _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes;
 
-  TRes call({
-    DateTime? dayId,
-    String? $__typename,
-  });
+  TRes call({DateTime? dayId, String? $__typename});
 }
 
 class _CopyWithImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes<
-        TRes>
+  TRes
+>
     implements
         CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes<
-            TRes> {
+          TRes
+        > {
   _CopyWithImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes(
     this._instance,
     this._then,
   );
 
   final Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes
-      _instance;
+  _instance;
 
   final TRes Function(
-          Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes)
-      _then;
+    Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes,
+  )
+  _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? dayId = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(
-          Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes(
-        dayId: dayId == _undefined || dayId == null
-            ? _instance.dayId
-            : (dayId as DateTime),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes(
+      dayId: dayId == _undefined || dayId == null
+          ? _instance.dayId
+          : (dayId as DateTime),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 }
 
 class _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes<
-        TRes>
+  TRes
+>
     implements
         CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes<
-            TRes> {
+          TRes
+        > {
   _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceHistoryAggregate_nodes(
-      this._res);
+    this._res,
+  );
 
   TRes _res;
 
-  call({
-    DateTime? dayId,
-    String? $__typename,
-  }) =>
-      _res;
+  call({DateTime? dayId, String? $__typename}) => _res;
 }
 
 class Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate {
@@ -10060,30 +10615,36 @@ class Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAgg
   });
 
   factory Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$aggregate = json['aggregate'];
     final l$nodes = json['nodes'];
     final l$$__typename = json['__typename'];
     return Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate(
       aggregate: l$aggregate == null
           ? null
-          : Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate
-              .fromJson((l$aggregate as Map<String, dynamic>)),
+          : Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate.fromJson(
+              (l$aggregate as Map<String, dynamic>),
+            ),
       nodes: (l$nodes as List<dynamic>)
-          .map((e) =>
-              Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes
-                  .fromJson((e as Map<String, dynamic>)))
+          .map(
+            (e) =>
+                Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes.fromJson(
+                  (e as Map<String, dynamic>),
+                ),
+          )
           .toList(),
       $__typename: (l$$__typename as String),
     );
   }
 
   final Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate?
-      aggregate;
+  aggregate;
 
   final List<
-          Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes>
-      nodes;
+    Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes
+  >
+  nodes;
 
   final String $__typename;
 
@@ -10147,63 +10708,81 @@ class Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAgg
 }
 
 extension UtilityExtension_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate
-    on Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate {
+    on
+        Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate {
   CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate<
-          Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate>
-      get copyWith =>
-          CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate(
-            this,
-            (i) => i,
-          );
+    Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate
+  >
+  get copyWith =>
+      CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate(
+        this,
+        (i) => i,
+      );
 }
 
 abstract class CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate<
-    TRes> {
+  TRes
+> {
   factory CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate(
     Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate
-        instance,
+    instance,
     TRes Function(
-            Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate)
-        then,
+      Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate,
+    )
+    then,
   ) = _CopyWithImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate;
 
   factory CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate.stub(
-          TRes res) =
-      _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate;
+    TRes res,
+  ) = _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate;
 
   TRes call({
     Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate?
-        aggregate,
-    List<Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes>?
-        nodes,
+    aggregate,
+    List<
+      Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes
+    >?
+    nodes,
     String? $__typename,
   });
   CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate<
-      TRes> get aggregate;
+    TRes
+  >
+  get aggregate;
   TRes nodes(
-      Iterable<Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes> Function(
-              Iterable<
-                  CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes<
-                      Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes>>)
-          _fn);
+    Iterable<
+      Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes
+    >
+    Function(
+      Iterable<
+        CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes<
+          Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes
+        >
+      >,
+    )
+    _fn,
+  );
 }
 
 class _CopyWithImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate<
-        TRes>
+  TRes
+>
     implements
         CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate<
-            TRes> {
+          TRes
+        > {
   _CopyWithImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate(
     this._instance,
     this._then,
   );
 
   final Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate
-      _instance;
+  _instance;
 
   final TRes Function(
-          Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate)
-      _then;
+    Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate,
+  )
+  _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -10211,70 +10790,94 @@ class _CopyWithImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceDays
     Object? aggregate = _undefined,
     Object? nodes = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(
-          Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate(
-        aggregate: aggregate == _undefined
-            ? _instance.aggregate
-            : (aggregate
+  }) => _then(
+    Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate(
+      aggregate: aggregate == _undefined
+          ? _instance.aggregate
+          : (aggregate
                 as Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate?),
-        nodes: nodes == _undefined || nodes == null
-            ? _instance.nodes
-            : (nodes as List<
-                Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes>),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+      nodes: nodes == _undefined || nodes == null
+          ? _instance.nodes
+          : (nodes
+                as List<
+                  Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes
+                >),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate<
-      TRes> get aggregate {
+    TRes
+  >
+  get aggregate {
     final local$aggregate = _instance.aggregate;
     return local$aggregate == null
-        ? CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate
-            .stub(_then(_instance))
+        ? CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate.stub(
+            _then(_instance),
+          )
         : CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate(
-            local$aggregate, (e) => call(aggregate: e));
+            local$aggregate,
+            (e) => call(aggregate: e),
+          );
   }
 
   TRes nodes(
-          Iterable<Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes> Function(
-                  Iterable<
-                      CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes<
-                          Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes>>)
-              _fn) =>
-      call(
-          nodes: _fn(_instance.nodes.map((e) =>
-              CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes(
-                e,
-                (i) => i,
-              ))).toList());
+    Iterable<
+      Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes
+    >
+    Function(
+      Iterable<
+        CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes<
+          Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes
+        >
+      >,
+    )
+    _fn,
+  ) => call(
+    nodes: _fn(
+      _instance.nodes.map(
+        (e) =>
+            CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes(
+              e,
+              (i) => i,
+            ),
+      ),
+    ).toList(),
+  );
 }
 
 class _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate<
-        TRes>
+  TRes
+>
     implements
         CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate<
-            TRes> {
+          TRes
+        > {
   _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate(
-      this._res);
+    this._res,
+  );
 
   TRes _res;
 
   call({
     Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate?
-        aggregate,
-    List<Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes>?
-        nodes,
+    aggregate,
+    List<
+      Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes
+    >?
+    nodes,
     String? $__typename,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate<
-          TRes>
-      get aggregate =>
-          CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate
-              .stub(_res);
+    TRes
+  >
+  get aggregate =>
+      CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate.stub(
+        _res,
+      );
 
   nodes(_fn) => _res;
 }
@@ -10286,7 +10889,8 @@ class Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAgg
   });
 
   factory Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$count = json['count'];
     final l$$__typename = json['__typename'];
     return Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate(
@@ -10312,10 +10916,7 @@ class Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAgg
   int get hashCode {
     final l$count = count;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$count,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$count, l$$__typename]);
   }
 
   @override
@@ -10343,85 +10944,88 @@ class Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAgg
 }
 
 extension UtilityExtension_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate
-    on Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate {
+    on
+        Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate {
   CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate<
-          Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate>
-      get copyWith =>
-          CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate(
-            this,
-            (i) => i,
-          );
+    Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate
+  >
+  get copyWith =>
+      CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate(
+        this,
+        (i) => i,
+      );
 }
 
 abstract class CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate<
-    TRes> {
+  TRes
+> {
   factory CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate(
     Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate
-        instance,
+    instance,
     TRes Function(
-            Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate)
-        then,
+      Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate,
+    )
+    then,
   ) = _CopyWithImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate;
 
   factory CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate.stub(
-          TRes res) =
-      _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate;
+    TRes res,
+  ) = _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate;
 
-  TRes call({
-    int? count,
-    String? $__typename,
-  });
+  TRes call({int? count, String? $__typename});
 }
 
 class _CopyWithImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate<
-        TRes>
+  TRes
+>
     implements
         CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate<
-            TRes> {
+          TRes
+        > {
   _CopyWithImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate(
     this._instance,
     this._then,
   );
 
   final Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate
-      _instance;
+  _instance;
 
   final TRes Function(
-          Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate)
-      _then;
+    Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate,
+  )
+  _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? count = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(
-          Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate(
-        count: count == _undefined || count == null
-            ? _instance.count
-            : (count as int),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate(
+      count: count == _undefined || count == null
+          ? _instance.count
+          : (count as int),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 }
 
 class _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate<
-        TRes>
+  TRes
+>
     implements
         CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate<
-            TRes> {
+          TRes
+        > {
   _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_aggregate(
-      this._res);
+    this._res,
+  );
 
   TRes _res;
 
-  call({
-    int? count,
-    String? $__typename,
-  }) =>
-      _res;
+  call({int? count, String? $__typename}) => _res;
 }
 
 class Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes {
@@ -10431,7 +11035,8 @@ class Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAgg
   });
 
   factory Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$dayId = json['dayId'];
     final l$$__typename = json['__typename'];
     return Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes(
@@ -10457,10 +11062,7 @@ class Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAgg
   int get hashCode {
     final l$dayId = dayId;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$dayId,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$dayId, l$$__typename]);
   }
 
   @override
@@ -10488,83 +11090,86 @@ class Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAgg
 }
 
 extension UtilityExtension_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes
-    on Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes {
+    on
+        Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes {
   CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes<
-          Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes>
-      get copyWith =>
-          CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes(
-            this,
-            (i) => i,
-          );
+    Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes
+  >
+  get copyWith =>
+      CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes(
+        this,
+        (i) => i,
+      );
 }
 
 abstract class CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes<
-    TRes> {
+  TRes
+> {
   factory CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes(
     Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes
-        instance,
+    instance,
     TRes Function(
-            Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes)
-        then,
+      Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes,
+    )
+    then,
   ) = _CopyWithImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes;
 
   factory CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes.stub(
-          TRes res) =
-      _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes;
+    TRes res,
+  ) = _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes;
 
-  TRes call({
-    DateTime? dayId,
-    String? $__typename,
-  });
+  TRes call({DateTime? dayId, String? $__typename});
 }
 
 class _CopyWithImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes<
-        TRes>
+  TRes
+>
     implements
         CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes<
-            TRes> {
+          TRes
+        > {
   _CopyWithImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes(
     this._instance,
     this._then,
   );
 
   final Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes
-      _instance;
+  _instance;
 
   final TRes Function(
-          Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes)
-      _then;
+    Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes,
+  )
+  _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? dayId = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(
-          Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes(
-        dayId: dayId == _undefined || dayId == null
-            ? _instance.dayId
-            : (dayId as DateTime),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes(
+      dayId: dayId == _undefined || dayId == null
+          ? _instance.dayId
+          : (dayId as DateTime),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 }
 
 class _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes<
-        TRes>
+  TRes
+>
     implements
         CopyWith_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes<
-            TRes> {
+          TRes
+        > {
   _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory_group_attendanceDaysConstraintsAggregate_nodes(
-      this._res);
+    this._res,
+  );
 
   TRes _res;
 
-  call({
-    DateTime? dayId,
-    String? $__typename,
-  }) =>
-      _res;
+  call({DateTime? dayId, String? $__typename}) => _res;
 }

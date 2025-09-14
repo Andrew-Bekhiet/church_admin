@@ -8,9 +8,7 @@ import 'package:gql/ast.dart';
 
 class Variables_Mutation_deletePerson {
   factory Variables_Mutation_deletePerson({required UuidValue personId}) =>
-      Variables_Mutation_deletePerson._({
-        r'personId': personId,
-      });
+      Variables_Mutation_deletePerson._({r'personId': personId});
 
   Variables_Mutation_deletePerson._(this._$data);
 
@@ -33,10 +31,7 @@ class Variables_Mutation_deletePerson {
   }
 
   CopyWith_Variables_Mutation_deletePerson<Variables_Mutation_deletePerson>
-      get copyWith => CopyWith_Variables_Mutation_deletePerson(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Variables_Mutation_deletePerson(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -76,10 +71,7 @@ abstract class CopyWith_Variables_Mutation_deletePerson<TRes> {
 
 class _CopyWithImpl_Variables_Mutation_deletePerson<TRes>
     implements CopyWith_Variables_Mutation_deletePerson<TRes> {
-  _CopyWithImpl_Variables_Mutation_deletePerson(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Variables_Mutation_deletePerson(this._instance, this._then);
 
   final Variables_Mutation_deletePerson _instance;
 
@@ -87,12 +79,13 @@ class _CopyWithImpl_Variables_Mutation_deletePerson<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? personId = _undefined}) =>
-      _then(Variables_Mutation_deletePerson._({
-        ..._instance._$data,
-        if (personId != _undefined && personId != null)
-          'personId': (personId as UuidValue),
-      }));
+  TRes call({Object? personId = _undefined}) => _then(
+    Variables_Mutation_deletePerson._({
+      ..._instance._$data,
+      if (personId != _undefined && personId != null)
+        'personId': (personId as UuidValue),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Variables_Mutation_deletePerson<TRes>
@@ -117,7 +110,8 @@ class Mutation_deletePerson {
       deletePersonsByPk: l$deletePersonsByPk == null
           ? null
           : Fragment_Person.fromJson(
-              (l$deletePersonsByPk as Map<String, dynamic>)),
+              (l$deletePersonsByPk as Map<String, dynamic>),
+            ),
       $__typename: (l$$__typename as String),
     );
   }
@@ -139,10 +133,7 @@ class Mutation_deletePerson {
   int get hashCode {
     final l$deletePersonsByPk = deletePersonsByPk;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$deletePersonsByPk,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$deletePersonsByPk, l$$__typename]);
   }
 
   @override
@@ -169,10 +160,7 @@ class Mutation_deletePerson {
 
 extension UtilityExtension_Mutation_deletePerson on Mutation_deletePerson {
   CopyWith_Mutation_deletePerson<Mutation_deletePerson> get copyWith =>
-      CopyWith_Mutation_deletePerson(
-        this,
-        (i) => i,
-      );
+      CopyWith_Mutation_deletePerson(this, (i) => i);
 }
 
 abstract class CopyWith_Mutation_deletePerson<TRes> {
@@ -184,19 +172,13 @@ abstract class CopyWith_Mutation_deletePerson<TRes> {
   factory CopyWith_Mutation_deletePerson.stub(TRes res) =
       _CopyWithStubImpl_Mutation_deletePerson;
 
-  TRes call({
-    Fragment_Person? deletePersonsByPk,
-    String? $__typename,
-  });
+  TRes call({Fragment_Person? deletePersonsByPk, String? $__typename});
   CopyWith_Fragment_Person<TRes> get deletePersonsByPk;
 }
 
 class _CopyWithImpl_Mutation_deletePerson<TRes>
     implements CopyWith_Mutation_deletePerson<TRes> {
-  _CopyWithImpl_Mutation_deletePerson(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Mutation_deletePerson(this._instance, this._then);
 
   final Mutation_deletePerson _instance;
 
@@ -207,22 +189,25 @@ class _CopyWithImpl_Mutation_deletePerson<TRes>
   TRes call({
     Object? deletePersonsByPk = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Mutation_deletePerson(
-        deletePersonsByPk: deletePersonsByPk == _undefined
-            ? _instance.deletePersonsByPk
-            : (deletePersonsByPk as Fragment_Person?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Mutation_deletePerson(
+      deletePersonsByPk: deletePersonsByPk == _undefined
+          ? _instance.deletePersonsByPk
+          : (deletePersonsByPk as Fragment_Person?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   CopyWith_Fragment_Person<TRes> get deletePersonsByPk {
     final local$deletePersonsByPk = _instance.deletePersonsByPk;
     return local$deletePersonsByPk == null
         ? CopyWith_Fragment_Person.stub(_then(_instance))
         : CopyWith_Fragment_Person(
-            local$deletePersonsByPk, (e) => call(deletePersonsByPk: e));
+            local$deletePersonsByPk,
+            (e) => call(deletePersonsByPk: e),
+          );
   }
 }
 
@@ -232,47 +217,53 @@ class _CopyWithStubImpl_Mutation_deletePerson<TRes>
 
   TRes _res;
 
-  call({
-    Fragment_Person? deletePersonsByPk,
-    String? $__typename,
-  }) =>
-      _res;
+  call({Fragment_Person? deletePersonsByPk, String? $__typename}) => _res;
 
   CopyWith_Fragment_Person<TRes> get deletePersonsByPk =>
       CopyWith_Fragment_Person.stub(_res);
 }
 
-const documentNodeMutationdeletePerson = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.mutation,
-    name: NameNode(value: 'deletePerson'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'personId')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'uuid'),
-          isNonNull: true,
+const documentNodeMutationdeletePerson = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.mutation,
+      name: NameNode(value: 'deletePerson'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'personId')),
+          type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      )
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'deletePersonsByPk'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'id'),
-            value: VariableNode(name: NameNode(value: 'personId')),
-          )
-        ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FragmentSpreadNode(
-            name: NameNode(value: 'Person'),
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
+          FieldNode(
+            name: NameNode(value: 'deletePersonsByPk'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'id'),
+                value: VariableNode(name: NameNode(value: 'personId')),
+              ),
+            ],
             directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FragmentSpreadNode(
+                  name: NameNode(value: 'Person'),
+                  directives: [],
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
           ),
           FieldNode(
             name: NameNode(value: '__typename'),
@@ -281,20 +272,13 @@ const documentNodeMutationdeletePerson = DocumentNode(definitions: [
             directives: [],
             selectionSet: null,
           ),
-        ]),
+        ],
       ),
-      FieldNode(
-        name: NameNode(value: '__typename'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-    ]),
-  ),
-  fragmentDefinitionPerson,
-  fragmentDefinitionPersonNoPhoto,
-]);
+    ),
+    fragmentDefinitionPerson,
+    fragmentDefinitionPersonNoPhoto,
+  ],
+);
 
 class Variables_Mutation_updatePerson {
   factory Variables_Mutation_updatePerson({
@@ -328,50 +312,48 @@ class Variables_Mutation_updatePerson {
     bool? insertHistoryKodasHistoryOne,
     bool? insertHistoryCallHistoryOne,
     bool? insertHistoryVisitHistoryOne,
-  }) =>
-      Variables_Mutation_updatePerson._({
-        r'personId': personId,
-        r'newPerson': newPerson,
-        r'addressId': addressId,
-        if (newAddress != null) r'newAddress': newAddress,
-        if (updateAddressByPk != null) r'updateAddressByPk': updateAddressByPk,
-        if (newGroups != null) r'newGroups': newGroups,
-        if (deleteGroups != null) r'deleteGroups': deleteGroups,
-        if (newServices != null) r'newServices': newServices,
-        if (deleteServices != null) r'deleteServices': deleteServices,
-        if (newHobbies != null) r'newHobbies': newHobbies,
-        if (deleteHobbies != null) r'deleteHobbies': deleteHobbies,
-        if (newTags != null) r'newTags': newTags,
-        if (deleteTags != null) r'deleteTags': deleteTags,
-        if (lastConfession != null) r'lastConfession': lastConfession,
-        if (lastKodas != null) r'lastKodas': lastKodas,
-        if (lastCall != null) r'lastCall': lastCall,
-        if (lastVisit != null) r'lastVisit': lastVisit,
-        if (updatePersonsByPk != null) r'updatePersonsByPk': updatePersonsByPk,
-        if (insertPersonsServices != null)
-          r'insertPersonsServices': insertPersonsServices,
-        if (insertPersonsGroups != null)
-          r'insertPersonsGroups': insertPersonsGroups,
-        if (insertPersonsHobbies != null)
-          r'insertPersonsHobbies': insertPersonsHobbies,
-        if (insertPersonsTags != null) r'insertPersonsTags': insertPersonsTags,
-        if (deletePersonsTags != null) r'deletePersonsTags': deletePersonsTags,
-        if (deletePersonsHobbies != null)
-          r'deletePersonsHobbies': deletePersonsHobbies,
-        if (deletePersonsGroups != null)
-          r'deletePersonsGroups': deletePersonsGroups,
-        if (deletePersonsServices != null)
-          r'deletePersonsServices': deletePersonsServices,
-        if (insertHistoryConfessionHistoryOne != null)
-          r'insertHistoryConfessionHistoryOne':
-              insertHistoryConfessionHistoryOne,
-        if (insertHistoryKodasHistoryOne != null)
-          r'insertHistoryKodasHistoryOne': insertHistoryKodasHistoryOne,
-        if (insertHistoryCallHistoryOne != null)
-          r'insertHistoryCallHistoryOne': insertHistoryCallHistoryOne,
-        if (insertHistoryVisitHistoryOne != null)
-          r'insertHistoryVisitHistoryOne': insertHistoryVisitHistoryOne,
-      });
+  }) => Variables_Mutation_updatePerson._({
+    r'personId': personId,
+    r'newPerson': newPerson,
+    r'addressId': addressId,
+    if (newAddress != null) r'newAddress': newAddress,
+    if (updateAddressByPk != null) r'updateAddressByPk': updateAddressByPk,
+    if (newGroups != null) r'newGroups': newGroups,
+    if (deleteGroups != null) r'deleteGroups': deleteGroups,
+    if (newServices != null) r'newServices': newServices,
+    if (deleteServices != null) r'deleteServices': deleteServices,
+    if (newHobbies != null) r'newHobbies': newHobbies,
+    if (deleteHobbies != null) r'deleteHobbies': deleteHobbies,
+    if (newTags != null) r'newTags': newTags,
+    if (deleteTags != null) r'deleteTags': deleteTags,
+    if (lastConfession != null) r'lastConfession': lastConfession,
+    if (lastKodas != null) r'lastKodas': lastKodas,
+    if (lastCall != null) r'lastCall': lastCall,
+    if (lastVisit != null) r'lastVisit': lastVisit,
+    if (updatePersonsByPk != null) r'updatePersonsByPk': updatePersonsByPk,
+    if (insertPersonsServices != null)
+      r'insertPersonsServices': insertPersonsServices,
+    if (insertPersonsGroups != null)
+      r'insertPersonsGroups': insertPersonsGroups,
+    if (insertPersonsHobbies != null)
+      r'insertPersonsHobbies': insertPersonsHobbies,
+    if (insertPersonsTags != null) r'insertPersonsTags': insertPersonsTags,
+    if (deletePersonsTags != null) r'deletePersonsTags': deletePersonsTags,
+    if (deletePersonsHobbies != null)
+      r'deletePersonsHobbies': deletePersonsHobbies,
+    if (deletePersonsGroups != null)
+      r'deletePersonsGroups': deletePersonsGroups,
+    if (deletePersonsServices != null)
+      r'deletePersonsServices': deletePersonsServices,
+    if (insertHistoryConfessionHistoryOne != null)
+      r'insertHistoryConfessionHistoryOne': insertHistoryConfessionHistoryOne,
+    if (insertHistoryKodasHistoryOne != null)
+      r'insertHistoryKodasHistoryOne': insertHistoryKodasHistoryOne,
+    if (insertHistoryCallHistoryOne != null)
+      r'insertHistoryCallHistoryOne': insertHistoryCallHistoryOne,
+    if (insertHistoryVisitHistoryOne != null)
+      r'insertHistoryVisitHistoryOne': insertHistoryVisitHistoryOne,
+  });
 
   Variables_Mutation_updatePerson._(this._$data);
 
@@ -380,8 +362,9 @@ class Variables_Mutation_updatePerson {
     final l$personId = data['personId'];
     result$data['personId'] = stringToUuid(l$personId);
     final l$newPerson = data['newPerson'];
-    result$data['newPerson'] =
-        Input_PersonsSetInput.fromJson((l$newPerson as Map<String, dynamic>));
+    result$data['newPerson'] = Input_PersonsSetInput.fromJson(
+      (l$newPerson as Map<String, dynamic>),
+    );
     final l$addressId = data['addressId'];
     result$data['addressId'] = stringToUuid(l$addressId);
     if (data.containsKey('newAddress')) {
@@ -389,7 +372,8 @@ class Variables_Mutation_updatePerson {
       result$data['newAddress'] = l$newAddress == null
           ? null
           : Input_AddressesSetInput.fromJson(
-              (l$newAddress as Map<String, dynamic>));
+              (l$newAddress as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('updateAddressByPk')) {
       final l$updateAddressByPk = data['updateAddressByPk'];
@@ -398,8 +382,11 @@ class Variables_Mutation_updatePerson {
     if (data.containsKey('newGroups')) {
       final l$newGroups = data['newGroups'];
       result$data['newGroups'] = (l$newGroups as List<dynamic>)
-          .map((e) => Input_PersonsGroupsInsertInput.fromJson(
-              (e as Map<String, dynamic>)))
+          .map(
+            (e) => Input_PersonsGroupsInsertInput.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
           .toList();
     }
     if (data.containsKey('deleteGroups')) {
@@ -411,8 +398,11 @@ class Variables_Mutation_updatePerson {
     if (data.containsKey('newServices')) {
       final l$newServices = data['newServices'];
       result$data['newServices'] = (l$newServices as List<dynamic>)
-          .map((e) => Input_PersonsServicesInsertInput.fromJson(
-              (e as Map<String, dynamic>)))
+          .map(
+            (e) => Input_PersonsServicesInsertInput.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
           .toList();
     }
     if (data.containsKey('deleteServices')) {
@@ -424,8 +414,11 @@ class Variables_Mutation_updatePerson {
     if (data.containsKey('newHobbies')) {
       final l$newHobbies = data['newHobbies'];
       result$data['newHobbies'] = (l$newHobbies as List<dynamic>)
-          .map((e) => Input_PersonsHobbiesInsertInput.fromJson(
-              (e as Map<String, dynamic>)))
+          .map(
+            (e) => Input_PersonsHobbiesInsertInput.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
           .toList();
     }
     if (data.containsKey('deleteHobbies')) {
@@ -437,8 +430,11 @@ class Variables_Mutation_updatePerson {
     if (data.containsKey('newTags')) {
       final l$newTags = data['newTags'];
       result$data['newTags'] = (l$newTags as List<dynamic>)
-          .map((e) => Input_PersonsTagsInsertInput.fromJson(
-              (e as Map<String, dynamic>)))
+          .map(
+            (e) => Input_PersonsTagsInsertInput.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
           .toList();
     }
     if (data.containsKey('deleteTags')) {
@@ -449,23 +445,27 @@ class Variables_Mutation_updatePerson {
     }
     if (data.containsKey('lastConfession')) {
       final l$lastConfession = data['lastConfession'];
-      result$data['lastConfession'] =
-          l$lastConfession == null ? null : dateFromString(l$lastConfession);
+      result$data['lastConfession'] = l$lastConfession == null
+          ? null
+          : dateFromString(l$lastConfession);
     }
     if (data.containsKey('lastKodas')) {
       final l$lastKodas = data['lastKodas'];
-      result$data['lastKodas'] =
-          l$lastKodas == null ? null : dateFromString(l$lastKodas);
+      result$data['lastKodas'] = l$lastKodas == null
+          ? null
+          : dateFromString(l$lastKodas);
     }
     if (data.containsKey('lastCall')) {
       final l$lastCall = data['lastCall'];
-      result$data['lastCall'] =
-          l$lastCall == null ? null : tstzFromString(l$lastCall);
+      result$data['lastCall'] = l$lastCall == null
+          ? null
+          : tstzFromString(l$lastCall);
     }
     if (data.containsKey('lastVisit')) {
       final l$lastVisit = data['lastVisit'];
-      result$data['lastVisit'] =
-          l$lastVisit == null ? null : tstzFromString(l$lastVisit);
+      result$data['lastVisit'] = l$lastVisit == null
+          ? null
+          : tstzFromString(l$lastVisit);
     }
     if (data.containsKey('updatePersonsByPk')) {
       final l$updatePersonsByPk = data['updatePersonsByPk'];
@@ -629,8 +629,9 @@ class Variables_Mutation_updatePerson {
     }
     if (_$data.containsKey('deleteGroups')) {
       final l$deleteGroups = deleteGroups;
-      result$data['deleteGroups'] =
-          l$deleteGroups?.map((e) => uuidToString(e)).toList();
+      result$data['deleteGroups'] = l$deleteGroups
+          ?.map((e) => uuidToString(e))
+          .toList();
     }
     if (_$data.containsKey('newServices')) {
       final l$newServices = newServices;
@@ -641,8 +642,9 @@ class Variables_Mutation_updatePerson {
     }
     if (_$data.containsKey('deleteServices')) {
       final l$deleteServices = deleteServices;
-      result$data['deleteServices'] =
-          l$deleteServices?.map((e) => uuidToString(e)).toList();
+      result$data['deleteServices'] = l$deleteServices
+          ?.map((e) => uuidToString(e))
+          .toList();
     }
     if (_$data.containsKey('newHobbies')) {
       final l$newHobbies = newHobbies;
@@ -653,8 +655,9 @@ class Variables_Mutation_updatePerson {
     }
     if (_$data.containsKey('deleteHobbies')) {
       final l$deleteHobbies = deleteHobbies;
-      result$data['deleteHobbies'] =
-          l$deleteHobbies?.map((e) => uuidToString(e)).toList();
+      result$data['deleteHobbies'] = l$deleteHobbies
+          ?.map((e) => uuidToString(e))
+          .toList();
     }
     if (_$data.containsKey('newTags')) {
       final l$newTags = newTags;
@@ -664,28 +667,33 @@ class Variables_Mutation_updatePerson {
     }
     if (_$data.containsKey('deleteTags')) {
       final l$deleteTags = deleteTags;
-      result$data['deleteTags'] =
-          l$deleteTags?.map((e) => uuidToString(e)).toList();
+      result$data['deleteTags'] = l$deleteTags
+          ?.map((e) => uuidToString(e))
+          .toList();
     }
     if (_$data.containsKey('lastConfession')) {
       final l$lastConfession = lastConfession;
-      result$data['lastConfession'] =
-          l$lastConfession == null ? null : dateToString(l$lastConfession);
+      result$data['lastConfession'] = l$lastConfession == null
+          ? null
+          : dateToString(l$lastConfession);
     }
     if (_$data.containsKey('lastKodas')) {
       final l$lastKodas = lastKodas;
-      result$data['lastKodas'] =
-          l$lastKodas == null ? null : dateToString(l$lastKodas);
+      result$data['lastKodas'] = l$lastKodas == null
+          ? null
+          : dateToString(l$lastKodas);
     }
     if (_$data.containsKey('lastCall')) {
       final l$lastCall = lastCall;
-      result$data['lastCall'] =
-          l$lastCall == null ? null : tstzToString(l$lastCall);
+      result$data['lastCall'] = l$lastCall == null
+          ? null
+          : tstzToString(l$lastCall);
     }
     if (_$data.containsKey('lastVisit')) {
       final l$lastVisit = lastVisit;
-      result$data['lastVisit'] =
-          l$lastVisit == null ? null : tstzToString(l$lastVisit);
+      result$data['lastVisit'] = l$lastVisit == null
+          ? null
+          : tstzToString(l$lastVisit);
     }
     if (_$data.containsKey('updatePersonsByPk')) {
       final l$updatePersonsByPk = updatePersonsByPk;
@@ -748,10 +756,7 @@ class Variables_Mutation_updatePerson {
   }
 
   CopyWith_Variables_Mutation_updatePerson<Variables_Mutation_updatePerson>
-      get copyWith => CopyWith_Variables_Mutation_updatePerson(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Variables_Mutation_updatePerson(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -1157,43 +1162,43 @@ class Variables_Mutation_updatePerson {
       _$data.containsKey('updateAddressByPk') ? l$updateAddressByPk : const {},
       _$data.containsKey('newGroups')
           ? l$newGroups == null
-              ? null
-              : Object.hashAll(l$newGroups.map((v) => v))
+                ? null
+                : Object.hashAll(l$newGroups.map((v) => v))
           : const {},
       _$data.containsKey('deleteGroups')
           ? l$deleteGroups == null
-              ? null
-              : Object.hashAll(l$deleteGroups.map((v) => v))
+                ? null
+                : Object.hashAll(l$deleteGroups.map((v) => v))
           : const {},
       _$data.containsKey('newServices')
           ? l$newServices == null
-              ? null
-              : Object.hashAll(l$newServices.map((v) => v))
+                ? null
+                : Object.hashAll(l$newServices.map((v) => v))
           : const {},
       _$data.containsKey('deleteServices')
           ? l$deleteServices == null
-              ? null
-              : Object.hashAll(l$deleteServices.map((v) => v))
+                ? null
+                : Object.hashAll(l$deleteServices.map((v) => v))
           : const {},
       _$data.containsKey('newHobbies')
           ? l$newHobbies == null
-              ? null
-              : Object.hashAll(l$newHobbies.map((v) => v))
+                ? null
+                : Object.hashAll(l$newHobbies.map((v) => v))
           : const {},
       _$data.containsKey('deleteHobbies')
           ? l$deleteHobbies == null
-              ? null
-              : Object.hashAll(l$deleteHobbies.map((v) => v))
+                ? null
+                : Object.hashAll(l$deleteHobbies.map((v) => v))
           : const {},
       _$data.containsKey('newTags')
           ? l$newTags == null
-              ? null
-              : Object.hashAll(l$newTags.map((v) => v))
+                ? null
+                : Object.hashAll(l$newTags.map((v) => v))
           : const {},
       _$data.containsKey('deleteTags')
           ? l$deleteTags == null
-              ? null
-              : Object.hashAll(l$deleteTags.map((v) => v))
+                ? null
+                : Object.hashAll(l$deleteTags.map((v) => v))
           : const {},
       _$data.containsKey('lastConfession') ? l$lastConfession : const {},
       _$data.containsKey('lastKodas') ? l$lastKodas : const {},
@@ -1281,10 +1286,7 @@ abstract class CopyWith_Variables_Mutation_updatePerson<TRes> {
 
 class _CopyWithImpl_Variables_Mutation_updatePerson<TRes>
     implements CopyWith_Variables_Mutation_updatePerson<TRes> {
-  _CopyWithImpl_Variables_Mutation_updatePerson(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Variables_Mutation_updatePerson(this._instance, this._then);
 
   final Variables_Mutation_updatePerson _instance;
 
@@ -1323,77 +1325,73 @@ class _CopyWithImpl_Variables_Mutation_updatePerson<TRes>
     Object? insertHistoryKodasHistoryOne = _undefined,
     Object? insertHistoryCallHistoryOne = _undefined,
     Object? insertHistoryVisitHistoryOne = _undefined,
-  }) =>
-      _then(Variables_Mutation_updatePerson._({
-        ..._instance._$data,
-        if (personId != _undefined && personId != null)
-          'personId': (personId as UuidValue),
-        if (newPerson != _undefined && newPerson != null)
-          'newPerson': (newPerson as Input_PersonsSetInput),
-        if (addressId != _undefined && addressId != null)
-          'addressId': (addressId as UuidValue),
-        if (newAddress != _undefined)
-          'newAddress': (newAddress as Input_AddressesSetInput?),
-        if (updateAddressByPk != _undefined && updateAddressByPk != null)
-          'updateAddressByPk': (updateAddressByPk as bool),
-        if (newGroups != _undefined && newGroups != null)
-          'newGroups': (newGroups as List<Input_PersonsGroupsInsertInput>),
-        if (deleteGroups != _undefined)
-          'deleteGroups': (deleteGroups as List<UuidValue>?),
-        if (newServices != _undefined && newServices != null)
-          'newServices':
-              (newServices as List<Input_PersonsServicesInsertInput>),
-        if (deleteServices != _undefined)
-          'deleteServices': (deleteServices as List<UuidValue>?),
-        if (newHobbies != _undefined && newHobbies != null)
-          'newHobbies': (newHobbies as List<Input_PersonsHobbiesInsertInput>),
-        if (deleteHobbies != _undefined)
-          'deleteHobbies': (deleteHobbies as List<UuidValue>?),
-        if (newTags != _undefined && newTags != null)
-          'newTags': (newTags as List<Input_PersonsTagsInsertInput>),
-        if (deleteTags != _undefined)
-          'deleteTags': (deleteTags as List<UuidValue>?),
-        if (lastConfession != _undefined)
-          'lastConfession': (lastConfession as DateTime?),
-        if (lastKodas != _undefined) 'lastKodas': (lastKodas as DateTime?),
-        if (lastCall != _undefined) 'lastCall': (lastCall as DateTime?),
-        if (lastVisit != _undefined) 'lastVisit': (lastVisit as DateTime?),
-        if (updatePersonsByPk != _undefined && updatePersonsByPk != null)
-          'updatePersonsByPk': (updatePersonsByPk as bool),
-        if (insertPersonsServices != _undefined &&
-            insertPersonsServices != null)
-          'insertPersonsServices': (insertPersonsServices as bool),
-        if (insertPersonsGroups != _undefined && insertPersonsGroups != null)
-          'insertPersonsGroups': (insertPersonsGroups as bool),
-        if (insertPersonsHobbies != _undefined && insertPersonsHobbies != null)
-          'insertPersonsHobbies': (insertPersonsHobbies as bool),
-        if (insertPersonsTags != _undefined && insertPersonsTags != null)
-          'insertPersonsTags': (insertPersonsTags as bool),
-        if (deletePersonsTags != _undefined && deletePersonsTags != null)
-          'deletePersonsTags': (deletePersonsTags as bool),
-        if (deletePersonsHobbies != _undefined && deletePersonsHobbies != null)
-          'deletePersonsHobbies': (deletePersonsHobbies as bool),
-        if (deletePersonsGroups != _undefined && deletePersonsGroups != null)
-          'deletePersonsGroups': (deletePersonsGroups as bool),
-        if (deletePersonsServices != _undefined &&
-            deletePersonsServices != null)
-          'deletePersonsServices': (deletePersonsServices as bool),
-        if (insertHistoryConfessionHistoryOne != _undefined &&
-            insertHistoryConfessionHistoryOne != null)
-          'insertHistoryConfessionHistoryOne':
-              (insertHistoryConfessionHistoryOne as bool),
-        if (insertHistoryKodasHistoryOne != _undefined &&
-            insertHistoryKodasHistoryOne != null)
-          'insertHistoryKodasHistoryOne':
-              (insertHistoryKodasHistoryOne as bool),
-        if (insertHistoryCallHistoryOne != _undefined &&
-            insertHistoryCallHistoryOne != null)
-          'insertHistoryCallHistoryOne': (insertHistoryCallHistoryOne as bool),
-        if (insertHistoryVisitHistoryOne != _undefined &&
-            insertHistoryVisitHistoryOne != null)
-          'insertHistoryVisitHistoryOne':
-              (insertHistoryVisitHistoryOne as bool),
-      }));
+  }) => _then(
+    Variables_Mutation_updatePerson._({
+      ..._instance._$data,
+      if (personId != _undefined && personId != null)
+        'personId': (personId as UuidValue),
+      if (newPerson != _undefined && newPerson != null)
+        'newPerson': (newPerson as Input_PersonsSetInput),
+      if (addressId != _undefined && addressId != null)
+        'addressId': (addressId as UuidValue),
+      if (newAddress != _undefined)
+        'newAddress': (newAddress as Input_AddressesSetInput?),
+      if (updateAddressByPk != _undefined && updateAddressByPk != null)
+        'updateAddressByPk': (updateAddressByPk as bool),
+      if (newGroups != _undefined && newGroups != null)
+        'newGroups': (newGroups as List<Input_PersonsGroupsInsertInput>),
+      if (deleteGroups != _undefined)
+        'deleteGroups': (deleteGroups as List<UuidValue>?),
+      if (newServices != _undefined && newServices != null)
+        'newServices': (newServices as List<Input_PersonsServicesInsertInput>),
+      if (deleteServices != _undefined)
+        'deleteServices': (deleteServices as List<UuidValue>?),
+      if (newHobbies != _undefined && newHobbies != null)
+        'newHobbies': (newHobbies as List<Input_PersonsHobbiesInsertInput>),
+      if (deleteHobbies != _undefined)
+        'deleteHobbies': (deleteHobbies as List<UuidValue>?),
+      if (newTags != _undefined && newTags != null)
+        'newTags': (newTags as List<Input_PersonsTagsInsertInput>),
+      if (deleteTags != _undefined)
+        'deleteTags': (deleteTags as List<UuidValue>?),
+      if (lastConfession != _undefined)
+        'lastConfession': (lastConfession as DateTime?),
+      if (lastKodas != _undefined) 'lastKodas': (lastKodas as DateTime?),
+      if (lastCall != _undefined) 'lastCall': (lastCall as DateTime?),
+      if (lastVisit != _undefined) 'lastVisit': (lastVisit as DateTime?),
+      if (updatePersonsByPk != _undefined && updatePersonsByPk != null)
+        'updatePersonsByPk': (updatePersonsByPk as bool),
+      if (insertPersonsServices != _undefined && insertPersonsServices != null)
+        'insertPersonsServices': (insertPersonsServices as bool),
+      if (insertPersonsGroups != _undefined && insertPersonsGroups != null)
+        'insertPersonsGroups': (insertPersonsGroups as bool),
+      if (insertPersonsHobbies != _undefined && insertPersonsHobbies != null)
+        'insertPersonsHobbies': (insertPersonsHobbies as bool),
+      if (insertPersonsTags != _undefined && insertPersonsTags != null)
+        'insertPersonsTags': (insertPersonsTags as bool),
+      if (deletePersonsTags != _undefined && deletePersonsTags != null)
+        'deletePersonsTags': (deletePersonsTags as bool),
+      if (deletePersonsHobbies != _undefined && deletePersonsHobbies != null)
+        'deletePersonsHobbies': (deletePersonsHobbies as bool),
+      if (deletePersonsGroups != _undefined && deletePersonsGroups != null)
+        'deletePersonsGroups': (deletePersonsGroups as bool),
+      if (deletePersonsServices != _undefined && deletePersonsServices != null)
+        'deletePersonsServices': (deletePersonsServices as bool),
+      if (insertHistoryConfessionHistoryOne != _undefined &&
+          insertHistoryConfessionHistoryOne != null)
+        'insertHistoryConfessionHistoryOne':
+            (insertHistoryConfessionHistoryOne as bool),
+      if (insertHistoryKodasHistoryOne != _undefined &&
+          insertHistoryKodasHistoryOne != null)
+        'insertHistoryKodasHistoryOne': (insertHistoryKodasHistoryOne as bool),
+      if (insertHistoryCallHistoryOne != _undefined &&
+          insertHistoryCallHistoryOne != null)
+        'insertHistoryCallHistoryOne': (insertHistoryCallHistoryOne as bool),
+      if (insertHistoryVisitHistoryOne != _undefined &&
+          insertHistoryVisitHistoryOne != null)
+        'insertHistoryVisitHistoryOne': (insertHistoryVisitHistoryOne as bool),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Variables_Mutation_updatePerson<TRes>
@@ -1433,8 +1431,7 @@ class _CopyWithStubImpl_Variables_Mutation_updatePerson<TRes>
     bool? insertHistoryKodasHistoryOne,
     bool? insertHistoryCallHistoryOne,
     bool? insertHistoryVisitHistoryOne,
-  }) =>
-      _res;
+  }) => _res;
 }
 
 class Mutation_updatePerson {
@@ -1477,60 +1474,74 @@ class Mutation_updatePerson {
       updatePersonsByPk: l$updatePersonsByPk == null
           ? null
           : Fragment_Person.fromJson(
-              (l$updatePersonsByPk as Map<String, dynamic>)),
+              (l$updatePersonsByPk as Map<String, dynamic>),
+            ),
       updateAddressesByPk: l$updateAddressesByPk == null
           ? null
           : Fragment_Address.fromJson(
-              (l$updateAddressesByPk as Map<String, dynamic>)),
+              (l$updateAddressesByPk as Map<String, dynamic>),
+            ),
       insertPersonsServices: l$insertPersonsServices == null
           ? null
           : Mutation_updatePerson_insertPersonsServices.fromJson(
-              (l$insertPersonsServices as Map<String, dynamic>)),
+              (l$insertPersonsServices as Map<String, dynamic>),
+            ),
       insertPersonsGroups: l$insertPersonsGroups == null
           ? null
           : Mutation_updatePerson_insertPersonsGroups.fromJson(
-              (l$insertPersonsGroups as Map<String, dynamic>)),
+              (l$insertPersonsGroups as Map<String, dynamic>),
+            ),
       insertPersonsHobbies: l$insertPersonsHobbies == null
           ? null
           : Mutation_updatePerson_insertPersonsHobbies.fromJson(
-              (l$insertPersonsHobbies as Map<String, dynamic>)),
+              (l$insertPersonsHobbies as Map<String, dynamic>),
+            ),
       insertPersonsTags: l$insertPersonsTags == null
           ? null
           : Mutation_updatePerson_insertPersonsTags.fromJson(
-              (l$insertPersonsTags as Map<String, dynamic>)),
+              (l$insertPersonsTags as Map<String, dynamic>),
+            ),
       deletePersonsTags: l$deletePersonsTags == null
           ? null
           : Mutation_updatePerson_deletePersonsTags.fromJson(
-              (l$deletePersonsTags as Map<String, dynamic>)),
+              (l$deletePersonsTags as Map<String, dynamic>),
+            ),
       deletePersonsHobbies: l$deletePersonsHobbies == null
           ? null
           : Mutation_updatePerson_deletePersonsHobbies.fromJson(
-              (l$deletePersonsHobbies as Map<String, dynamic>)),
+              (l$deletePersonsHobbies as Map<String, dynamic>),
+            ),
       deletePersonsGroups: l$deletePersonsGroups == null
           ? null
           : Mutation_updatePerson_deletePersonsGroups.fromJson(
-              (l$deletePersonsGroups as Map<String, dynamic>)),
+              (l$deletePersonsGroups as Map<String, dynamic>),
+            ),
       deletePersonsServices: l$deletePersonsServices == null
           ? null
           : Mutation_updatePerson_deletePersonsServices.fromJson(
-              (l$deletePersonsServices as Map<String, dynamic>)),
-      insertHistoryConfessionHistoryOne: l$insertHistoryConfessionHistoryOne ==
-              null
+              (l$deletePersonsServices as Map<String, dynamic>),
+            ),
+      insertHistoryConfessionHistoryOne:
+          l$insertHistoryConfessionHistoryOne == null
           ? null
           : Mutation_updatePerson_insertHistoryConfessionHistoryOne.fromJson(
-              (l$insertHistoryConfessionHistoryOne as Map<String, dynamic>)),
+              (l$insertHistoryConfessionHistoryOne as Map<String, dynamic>),
+            ),
       insertHistoryKodasHistoryOne: l$insertHistoryKodasHistoryOne == null
           ? null
           : Mutation_updatePerson_insertHistoryKodasHistoryOne.fromJson(
-              (l$insertHistoryKodasHistoryOne as Map<String, dynamic>)),
+              (l$insertHistoryKodasHistoryOne as Map<String, dynamic>),
+            ),
       insertHistoryCallHistoryOne: l$insertHistoryCallHistoryOne == null
           ? null
           : Mutation_updatePerson_insertHistoryCallHistoryOne.fromJson(
-              (l$insertHistoryCallHistoryOne as Map<String, dynamic>)),
+              (l$insertHistoryCallHistoryOne as Map<String, dynamic>),
+            ),
       insertHistoryVisitHistoryOne: l$insertHistoryVisitHistoryOne == null
           ? null
           : Mutation_updatePerson_insertHistoryVisitHistoryOne.fromJson(
-              (l$insertHistoryVisitHistoryOne as Map<String, dynamic>)),
+              (l$insertHistoryVisitHistoryOne as Map<String, dynamic>),
+            ),
       $__typename: (l$$__typename as String),
     );
   }
@@ -1556,16 +1567,16 @@ class Mutation_updatePerson {
   final Mutation_updatePerson_deletePersonsServices? deletePersonsServices;
 
   final Mutation_updatePerson_insertHistoryConfessionHistoryOne?
-      insertHistoryConfessionHistoryOne;
+  insertHistoryConfessionHistoryOne;
 
   final Mutation_updatePerson_insertHistoryKodasHistoryOne?
-      insertHistoryKodasHistoryOne;
+  insertHistoryKodasHistoryOne;
 
   final Mutation_updatePerson_insertHistoryCallHistoryOne?
-      insertHistoryCallHistoryOne;
+  insertHistoryCallHistoryOne;
 
   final Mutation_updatePerson_insertHistoryVisitHistoryOne?
-      insertHistoryVisitHistoryOne;
+  insertHistoryVisitHistoryOne;
 
   final String $__typename;
 
@@ -1596,14 +1607,14 @@ class Mutation_updatePerson {
     _resultData['insertHistoryConfessionHistoryOne'] =
         l$insertHistoryConfessionHistoryOne?.toJson();
     final l$insertHistoryKodasHistoryOne = insertHistoryKodasHistoryOne;
-    _resultData['insertHistoryKodasHistoryOne'] =
-        l$insertHistoryKodasHistoryOne?.toJson();
+    _resultData['insertHistoryKodasHistoryOne'] = l$insertHistoryKodasHistoryOne
+        ?.toJson();
     final l$insertHistoryCallHistoryOne = insertHistoryCallHistoryOne;
-    _resultData['insertHistoryCallHistoryOne'] =
-        l$insertHistoryCallHistoryOne?.toJson();
+    _resultData['insertHistoryCallHistoryOne'] = l$insertHistoryCallHistoryOne
+        ?.toJson();
     final l$insertHistoryVisitHistoryOne = insertHistoryVisitHistoryOne;
-    _resultData['insertHistoryVisitHistoryOne'] =
-        l$insertHistoryVisitHistoryOne?.toJson();
+    _resultData['insertHistoryVisitHistoryOne'] = l$insertHistoryVisitHistoryOne
+        ?.toJson();
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -1741,10 +1752,7 @@ class Mutation_updatePerson {
 
 extension UtilityExtension_Mutation_updatePerson on Mutation_updatePerson {
   CopyWith_Mutation_updatePerson<Mutation_updatePerson> get copyWith =>
-      CopyWith_Mutation_updatePerson(
-        this,
-        (i) => i,
-      );
+      CopyWith_Mutation_updatePerson(this, (i) => i);
 }
 
 abstract class CopyWith_Mutation_updatePerson<TRes> {
@@ -1768,47 +1776,44 @@ abstract class CopyWith_Mutation_updatePerson<TRes> {
     Mutation_updatePerson_deletePersonsGroups? deletePersonsGroups,
     Mutation_updatePerson_deletePersonsServices? deletePersonsServices,
     Mutation_updatePerson_insertHistoryConfessionHistoryOne?
-        insertHistoryConfessionHistoryOne,
+    insertHistoryConfessionHistoryOne,
     Mutation_updatePerson_insertHistoryKodasHistoryOne?
-        insertHistoryKodasHistoryOne,
+    insertHistoryKodasHistoryOne,
     Mutation_updatePerson_insertHistoryCallHistoryOne?
-        insertHistoryCallHistoryOne,
+    insertHistoryCallHistoryOne,
     Mutation_updatePerson_insertHistoryVisitHistoryOne?
-        insertHistoryVisitHistoryOne,
+    insertHistoryVisitHistoryOne,
     String? $__typename,
   });
   CopyWith_Fragment_Person<TRes> get updatePersonsByPk;
   CopyWith_Fragment_Address<TRes> get updateAddressesByPk;
   CopyWith_Mutation_updatePerson_insertPersonsServices<TRes>
-      get insertPersonsServices;
+  get insertPersonsServices;
   CopyWith_Mutation_updatePerson_insertPersonsGroups<TRes>
-      get insertPersonsGroups;
+  get insertPersonsGroups;
   CopyWith_Mutation_updatePerson_insertPersonsHobbies<TRes>
-      get insertPersonsHobbies;
+  get insertPersonsHobbies;
   CopyWith_Mutation_updatePerson_insertPersonsTags<TRes> get insertPersonsTags;
   CopyWith_Mutation_updatePerson_deletePersonsTags<TRes> get deletePersonsTags;
   CopyWith_Mutation_updatePerson_deletePersonsHobbies<TRes>
-      get deletePersonsHobbies;
+  get deletePersonsHobbies;
   CopyWith_Mutation_updatePerson_deletePersonsGroups<TRes>
-      get deletePersonsGroups;
+  get deletePersonsGroups;
   CopyWith_Mutation_updatePerson_deletePersonsServices<TRes>
-      get deletePersonsServices;
+  get deletePersonsServices;
   CopyWith_Mutation_updatePerson_insertHistoryConfessionHistoryOne<TRes>
-      get insertHistoryConfessionHistoryOne;
+  get insertHistoryConfessionHistoryOne;
   CopyWith_Mutation_updatePerson_insertHistoryKodasHistoryOne<TRes>
-      get insertHistoryKodasHistoryOne;
+  get insertHistoryKodasHistoryOne;
   CopyWith_Mutation_updatePerson_insertHistoryCallHistoryOne<TRes>
-      get insertHistoryCallHistoryOne;
+  get insertHistoryCallHistoryOne;
   CopyWith_Mutation_updatePerson_insertHistoryVisitHistoryOne<TRes>
-      get insertHistoryVisitHistoryOne;
+  get insertHistoryVisitHistoryOne;
 }
 
 class _CopyWithImpl_Mutation_updatePerson<TRes>
     implements CopyWith_Mutation_updatePerson<TRes> {
-  _CopyWithImpl_Mutation_updatePerson(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Mutation_updatePerson(this._instance, this._then);
 
   final Mutation_updatePerson _instance;
 
@@ -1832,72 +1837,73 @@ class _CopyWithImpl_Mutation_updatePerson<TRes>
     Object? insertHistoryCallHistoryOne = _undefined,
     Object? insertHistoryVisitHistoryOne = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Mutation_updatePerson(
-        updatePersonsByPk: updatePersonsByPk == _undefined
-            ? _instance.updatePersonsByPk
-            : (updatePersonsByPk as Fragment_Person?),
-        updateAddressesByPk: updateAddressesByPk == _undefined
-            ? _instance.updateAddressesByPk
-            : (updateAddressesByPk as Fragment_Address?),
-        insertPersonsServices: insertPersonsServices == _undefined
-            ? _instance.insertPersonsServices
-            : (insertPersonsServices
+  }) => _then(
+    Mutation_updatePerson(
+      updatePersonsByPk: updatePersonsByPk == _undefined
+          ? _instance.updatePersonsByPk
+          : (updatePersonsByPk as Fragment_Person?),
+      updateAddressesByPk: updateAddressesByPk == _undefined
+          ? _instance.updateAddressesByPk
+          : (updateAddressesByPk as Fragment_Address?),
+      insertPersonsServices: insertPersonsServices == _undefined
+          ? _instance.insertPersonsServices
+          : (insertPersonsServices
                 as Mutation_updatePerson_insertPersonsServices?),
-        insertPersonsGroups: insertPersonsGroups == _undefined
-            ? _instance.insertPersonsGroups
-            : (insertPersonsGroups
-                as Mutation_updatePerson_insertPersonsGroups?),
-        insertPersonsHobbies: insertPersonsHobbies == _undefined
-            ? _instance.insertPersonsHobbies
-            : (insertPersonsHobbies
+      insertPersonsGroups: insertPersonsGroups == _undefined
+          ? _instance.insertPersonsGroups
+          : (insertPersonsGroups as Mutation_updatePerson_insertPersonsGroups?),
+      insertPersonsHobbies: insertPersonsHobbies == _undefined
+          ? _instance.insertPersonsHobbies
+          : (insertPersonsHobbies
                 as Mutation_updatePerson_insertPersonsHobbies?),
-        insertPersonsTags: insertPersonsTags == _undefined
-            ? _instance.insertPersonsTags
-            : (insertPersonsTags as Mutation_updatePerson_insertPersonsTags?),
-        deletePersonsTags: deletePersonsTags == _undefined
-            ? _instance.deletePersonsTags
-            : (deletePersonsTags as Mutation_updatePerson_deletePersonsTags?),
-        deletePersonsHobbies: deletePersonsHobbies == _undefined
-            ? _instance.deletePersonsHobbies
-            : (deletePersonsHobbies
+      insertPersonsTags: insertPersonsTags == _undefined
+          ? _instance.insertPersonsTags
+          : (insertPersonsTags as Mutation_updatePerson_insertPersonsTags?),
+      deletePersonsTags: deletePersonsTags == _undefined
+          ? _instance.deletePersonsTags
+          : (deletePersonsTags as Mutation_updatePerson_deletePersonsTags?),
+      deletePersonsHobbies: deletePersonsHobbies == _undefined
+          ? _instance.deletePersonsHobbies
+          : (deletePersonsHobbies
                 as Mutation_updatePerson_deletePersonsHobbies?),
-        deletePersonsGroups: deletePersonsGroups == _undefined
-            ? _instance.deletePersonsGroups
-            : (deletePersonsGroups
-                as Mutation_updatePerson_deletePersonsGroups?),
-        deletePersonsServices: deletePersonsServices == _undefined
-            ? _instance.deletePersonsServices
-            : (deletePersonsServices
+      deletePersonsGroups: deletePersonsGroups == _undefined
+          ? _instance.deletePersonsGroups
+          : (deletePersonsGroups as Mutation_updatePerson_deletePersonsGroups?),
+      deletePersonsServices: deletePersonsServices == _undefined
+          ? _instance.deletePersonsServices
+          : (deletePersonsServices
                 as Mutation_updatePerson_deletePersonsServices?),
-        insertHistoryConfessionHistoryOne: insertHistoryConfessionHistoryOne ==
-                _undefined
-            ? _instance.insertHistoryConfessionHistoryOne
-            : (insertHistoryConfessionHistoryOne
+      insertHistoryConfessionHistoryOne:
+          insertHistoryConfessionHistoryOne == _undefined
+          ? _instance.insertHistoryConfessionHistoryOne
+          : (insertHistoryConfessionHistoryOne
                 as Mutation_updatePerson_insertHistoryConfessionHistoryOne?),
-        insertHistoryKodasHistoryOne: insertHistoryKodasHistoryOne == _undefined
-            ? _instance.insertHistoryKodasHistoryOne
-            : (insertHistoryKodasHistoryOne
+      insertHistoryKodasHistoryOne: insertHistoryKodasHistoryOne == _undefined
+          ? _instance.insertHistoryKodasHistoryOne
+          : (insertHistoryKodasHistoryOne
                 as Mutation_updatePerson_insertHistoryKodasHistoryOne?),
-        insertHistoryCallHistoryOne: insertHistoryCallHistoryOne == _undefined
-            ? _instance.insertHistoryCallHistoryOne
-            : (insertHistoryCallHistoryOne
+      insertHistoryCallHistoryOne: insertHistoryCallHistoryOne == _undefined
+          ? _instance.insertHistoryCallHistoryOne
+          : (insertHistoryCallHistoryOne
                 as Mutation_updatePerson_insertHistoryCallHistoryOne?),
-        insertHistoryVisitHistoryOne: insertHistoryVisitHistoryOne == _undefined
-            ? _instance.insertHistoryVisitHistoryOne
-            : (insertHistoryVisitHistoryOne
+      insertHistoryVisitHistoryOne: insertHistoryVisitHistoryOne == _undefined
+          ? _instance.insertHistoryVisitHistoryOne
+          : (insertHistoryVisitHistoryOne
                 as Mutation_updatePerson_insertHistoryVisitHistoryOne?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   CopyWith_Fragment_Person<TRes> get updatePersonsByPk {
     final local$updatePersonsByPk = _instance.updatePersonsByPk;
     return local$updatePersonsByPk == null
         ? CopyWith_Fragment_Person.stub(_then(_instance))
         : CopyWith_Fragment_Person(
-            local$updatePersonsByPk, (e) => call(updatePersonsByPk: e));
+            local$updatePersonsByPk,
+            (e) => call(updatePersonsByPk: e),
+          );
   }
 
   CopyWith_Fragment_Address<TRes> get updateAddressesByPk {
@@ -1905,133 +1911,167 @@ class _CopyWithImpl_Mutation_updatePerson<TRes>
     return local$updateAddressesByPk == null
         ? CopyWith_Fragment_Address.stub(_then(_instance))
         : CopyWith_Fragment_Address(
-            local$updateAddressesByPk, (e) => call(updateAddressesByPk: e));
+            local$updateAddressesByPk,
+            (e) => call(updateAddressesByPk: e),
+          );
   }
 
   CopyWith_Mutation_updatePerson_insertPersonsServices<TRes>
-      get insertPersonsServices {
+  get insertPersonsServices {
     final local$insertPersonsServices = _instance.insertPersonsServices;
     return local$insertPersonsServices == null
         ? CopyWith_Mutation_updatePerson_insertPersonsServices.stub(
-            _then(_instance))
+            _then(_instance),
+          )
         : CopyWith_Mutation_updatePerson_insertPersonsServices(
-            local$insertPersonsServices, (e) => call(insertPersonsServices: e));
+            local$insertPersonsServices,
+            (e) => call(insertPersonsServices: e),
+          );
   }
 
   CopyWith_Mutation_updatePerson_insertPersonsGroups<TRes>
-      get insertPersonsGroups {
+  get insertPersonsGroups {
     final local$insertPersonsGroups = _instance.insertPersonsGroups;
     return local$insertPersonsGroups == null
         ? CopyWith_Mutation_updatePerson_insertPersonsGroups.stub(
-            _then(_instance))
+            _then(_instance),
+          )
         : CopyWith_Mutation_updatePerson_insertPersonsGroups(
-            local$insertPersonsGroups, (e) => call(insertPersonsGroups: e));
+            local$insertPersonsGroups,
+            (e) => call(insertPersonsGroups: e),
+          );
   }
 
   CopyWith_Mutation_updatePerson_insertPersonsHobbies<TRes>
-      get insertPersonsHobbies {
+  get insertPersonsHobbies {
     final local$insertPersonsHobbies = _instance.insertPersonsHobbies;
     return local$insertPersonsHobbies == null
         ? CopyWith_Mutation_updatePerson_insertPersonsHobbies.stub(
-            _then(_instance))
+            _then(_instance),
+          )
         : CopyWith_Mutation_updatePerson_insertPersonsHobbies(
-            local$insertPersonsHobbies, (e) => call(insertPersonsHobbies: e));
+            local$insertPersonsHobbies,
+            (e) => call(insertPersonsHobbies: e),
+          );
   }
 
   CopyWith_Mutation_updatePerson_insertPersonsTags<TRes> get insertPersonsTags {
     final local$insertPersonsTags = _instance.insertPersonsTags;
     return local$insertPersonsTags == null
         ? CopyWith_Mutation_updatePerson_insertPersonsTags.stub(
-            _then(_instance))
+            _then(_instance),
+          )
         : CopyWith_Mutation_updatePerson_insertPersonsTags(
-            local$insertPersonsTags, (e) => call(insertPersonsTags: e));
+            local$insertPersonsTags,
+            (e) => call(insertPersonsTags: e),
+          );
   }
 
   CopyWith_Mutation_updatePerson_deletePersonsTags<TRes> get deletePersonsTags {
     final local$deletePersonsTags = _instance.deletePersonsTags;
     return local$deletePersonsTags == null
         ? CopyWith_Mutation_updatePerson_deletePersonsTags.stub(
-            _then(_instance))
+            _then(_instance),
+          )
         : CopyWith_Mutation_updatePerson_deletePersonsTags(
-            local$deletePersonsTags, (e) => call(deletePersonsTags: e));
+            local$deletePersonsTags,
+            (e) => call(deletePersonsTags: e),
+          );
   }
 
   CopyWith_Mutation_updatePerson_deletePersonsHobbies<TRes>
-      get deletePersonsHobbies {
+  get deletePersonsHobbies {
     final local$deletePersonsHobbies = _instance.deletePersonsHobbies;
     return local$deletePersonsHobbies == null
         ? CopyWith_Mutation_updatePerson_deletePersonsHobbies.stub(
-            _then(_instance))
+            _then(_instance),
+          )
         : CopyWith_Mutation_updatePerson_deletePersonsHobbies(
-            local$deletePersonsHobbies, (e) => call(deletePersonsHobbies: e));
+            local$deletePersonsHobbies,
+            (e) => call(deletePersonsHobbies: e),
+          );
   }
 
   CopyWith_Mutation_updatePerson_deletePersonsGroups<TRes>
-      get deletePersonsGroups {
+  get deletePersonsGroups {
     final local$deletePersonsGroups = _instance.deletePersonsGroups;
     return local$deletePersonsGroups == null
         ? CopyWith_Mutation_updatePerson_deletePersonsGroups.stub(
-            _then(_instance))
+            _then(_instance),
+          )
         : CopyWith_Mutation_updatePerson_deletePersonsGroups(
-            local$deletePersonsGroups, (e) => call(deletePersonsGroups: e));
+            local$deletePersonsGroups,
+            (e) => call(deletePersonsGroups: e),
+          );
   }
 
   CopyWith_Mutation_updatePerson_deletePersonsServices<TRes>
-      get deletePersonsServices {
+  get deletePersonsServices {
     final local$deletePersonsServices = _instance.deletePersonsServices;
     return local$deletePersonsServices == null
         ? CopyWith_Mutation_updatePerson_deletePersonsServices.stub(
-            _then(_instance))
+            _then(_instance),
+          )
         : CopyWith_Mutation_updatePerson_deletePersonsServices(
-            local$deletePersonsServices, (e) => call(deletePersonsServices: e));
+            local$deletePersonsServices,
+            (e) => call(deletePersonsServices: e),
+          );
   }
 
   CopyWith_Mutation_updatePerson_insertHistoryConfessionHistoryOne<TRes>
-      get insertHistoryConfessionHistoryOne {
+  get insertHistoryConfessionHistoryOne {
     final local$insertHistoryConfessionHistoryOne =
         _instance.insertHistoryConfessionHistoryOne;
     return local$insertHistoryConfessionHistoryOne == null
         ? CopyWith_Mutation_updatePerson_insertHistoryConfessionHistoryOne.stub(
-            _then(_instance))
+            _then(_instance),
+          )
         : CopyWith_Mutation_updatePerson_insertHistoryConfessionHistoryOne(
             local$insertHistoryConfessionHistoryOne,
-            (e) => call(insertHistoryConfessionHistoryOne: e));
+            (e) => call(insertHistoryConfessionHistoryOne: e),
+          );
   }
 
   CopyWith_Mutation_updatePerson_insertHistoryKodasHistoryOne<TRes>
-      get insertHistoryKodasHistoryOne {
+  get insertHistoryKodasHistoryOne {
     final local$insertHistoryKodasHistoryOne =
         _instance.insertHistoryKodasHistoryOne;
     return local$insertHistoryKodasHistoryOne == null
         ? CopyWith_Mutation_updatePerson_insertHistoryKodasHistoryOne.stub(
-            _then(_instance))
+            _then(_instance),
+          )
         : CopyWith_Mutation_updatePerson_insertHistoryKodasHistoryOne(
             local$insertHistoryKodasHistoryOne,
-            (e) => call(insertHistoryKodasHistoryOne: e));
+            (e) => call(insertHistoryKodasHistoryOne: e),
+          );
   }
 
   CopyWith_Mutation_updatePerson_insertHistoryCallHistoryOne<TRes>
-      get insertHistoryCallHistoryOne {
+  get insertHistoryCallHistoryOne {
     final local$insertHistoryCallHistoryOne =
         _instance.insertHistoryCallHistoryOne;
     return local$insertHistoryCallHistoryOne == null
         ? CopyWith_Mutation_updatePerson_insertHistoryCallHistoryOne.stub(
-            _then(_instance))
+            _then(_instance),
+          )
         : CopyWith_Mutation_updatePerson_insertHistoryCallHistoryOne(
             local$insertHistoryCallHistoryOne,
-            (e) => call(insertHistoryCallHistoryOne: e));
+            (e) => call(insertHistoryCallHistoryOne: e),
+          );
   }
 
   CopyWith_Mutation_updatePerson_insertHistoryVisitHistoryOne<TRes>
-      get insertHistoryVisitHistoryOne {
+  get insertHistoryVisitHistoryOne {
     final local$insertHistoryVisitHistoryOne =
         _instance.insertHistoryVisitHistoryOne;
     return local$insertHistoryVisitHistoryOne == null
         ? CopyWith_Mutation_updatePerson_insertHistoryVisitHistoryOne.stub(
-            _then(_instance))
+            _then(_instance),
+          )
         : CopyWith_Mutation_updatePerson_insertHistoryVisitHistoryOne(
             local$insertHistoryVisitHistoryOne,
-            (e) => call(insertHistoryVisitHistoryOne: e));
+            (e) => call(insertHistoryVisitHistoryOne: e),
+          );
   }
 }
 
@@ -2053,16 +2093,15 @@ class _CopyWithStubImpl_Mutation_updatePerson<TRes>
     Mutation_updatePerson_deletePersonsGroups? deletePersonsGroups,
     Mutation_updatePerson_deletePersonsServices? deletePersonsServices,
     Mutation_updatePerson_insertHistoryConfessionHistoryOne?
-        insertHistoryConfessionHistoryOne,
+    insertHistoryConfessionHistoryOne,
     Mutation_updatePerson_insertHistoryKodasHistoryOne?
-        insertHistoryKodasHistoryOne,
+    insertHistoryKodasHistoryOne,
     Mutation_updatePerson_insertHistoryCallHistoryOne?
-        insertHistoryCallHistoryOne,
+    insertHistoryCallHistoryOne,
     Mutation_updatePerson_insertHistoryVisitHistoryOne?
-        insertHistoryVisitHistoryOne,
+    insertHistoryVisitHistoryOne,
     String? $__typename,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Fragment_Person<TRes> get updatePersonsByPk =>
       CopyWith_Fragment_Person.stub(_res);
@@ -2071,1150 +2110,1279 @@ class _CopyWithStubImpl_Mutation_updatePerson<TRes>
       CopyWith_Fragment_Address.stub(_res);
 
   CopyWith_Mutation_updatePerson_insertPersonsServices<TRes>
-      get insertPersonsServices =>
-          CopyWith_Mutation_updatePerson_insertPersonsServices.stub(_res);
+  get insertPersonsServices =>
+      CopyWith_Mutation_updatePerson_insertPersonsServices.stub(_res);
 
   CopyWith_Mutation_updatePerson_insertPersonsGroups<TRes>
-      get insertPersonsGroups =>
-          CopyWith_Mutation_updatePerson_insertPersonsGroups.stub(_res);
+  get insertPersonsGroups =>
+      CopyWith_Mutation_updatePerson_insertPersonsGroups.stub(_res);
 
   CopyWith_Mutation_updatePerson_insertPersonsHobbies<TRes>
-      get insertPersonsHobbies =>
-          CopyWith_Mutation_updatePerson_insertPersonsHobbies.stub(_res);
+  get insertPersonsHobbies =>
+      CopyWith_Mutation_updatePerson_insertPersonsHobbies.stub(_res);
 
   CopyWith_Mutation_updatePerson_insertPersonsTags<TRes>
-      get insertPersonsTags =>
-          CopyWith_Mutation_updatePerson_insertPersonsTags.stub(_res);
+  get insertPersonsTags =>
+      CopyWith_Mutation_updatePerson_insertPersonsTags.stub(_res);
 
   CopyWith_Mutation_updatePerson_deletePersonsTags<TRes>
-      get deletePersonsTags =>
-          CopyWith_Mutation_updatePerson_deletePersonsTags.stub(_res);
+  get deletePersonsTags =>
+      CopyWith_Mutation_updatePerson_deletePersonsTags.stub(_res);
 
   CopyWith_Mutation_updatePerson_deletePersonsHobbies<TRes>
-      get deletePersonsHobbies =>
-          CopyWith_Mutation_updatePerson_deletePersonsHobbies.stub(_res);
+  get deletePersonsHobbies =>
+      CopyWith_Mutation_updatePerson_deletePersonsHobbies.stub(_res);
 
   CopyWith_Mutation_updatePerson_deletePersonsGroups<TRes>
-      get deletePersonsGroups =>
-          CopyWith_Mutation_updatePerson_deletePersonsGroups.stub(_res);
+  get deletePersonsGroups =>
+      CopyWith_Mutation_updatePerson_deletePersonsGroups.stub(_res);
 
   CopyWith_Mutation_updatePerson_deletePersonsServices<TRes>
-      get deletePersonsServices =>
-          CopyWith_Mutation_updatePerson_deletePersonsServices.stub(_res);
+  get deletePersonsServices =>
+      CopyWith_Mutation_updatePerson_deletePersonsServices.stub(_res);
 
   CopyWith_Mutation_updatePerson_insertHistoryConfessionHistoryOne<TRes>
-      get insertHistoryConfessionHistoryOne =>
-          CopyWith_Mutation_updatePerson_insertHistoryConfessionHistoryOne.stub(
-              _res);
+  get insertHistoryConfessionHistoryOne =>
+      CopyWith_Mutation_updatePerson_insertHistoryConfessionHistoryOne.stub(
+        _res,
+      );
 
   CopyWith_Mutation_updatePerson_insertHistoryKodasHistoryOne<TRes>
-      get insertHistoryKodasHistoryOne =>
-          CopyWith_Mutation_updatePerson_insertHistoryKodasHistoryOne.stub(
-              _res);
+  get insertHistoryKodasHistoryOne =>
+      CopyWith_Mutation_updatePerson_insertHistoryKodasHistoryOne.stub(_res);
 
   CopyWith_Mutation_updatePerson_insertHistoryCallHistoryOne<TRes>
-      get insertHistoryCallHistoryOne =>
-          CopyWith_Mutation_updatePerson_insertHistoryCallHistoryOne.stub(_res);
+  get insertHistoryCallHistoryOne =>
+      CopyWith_Mutation_updatePerson_insertHistoryCallHistoryOne.stub(_res);
 
   CopyWith_Mutation_updatePerson_insertHistoryVisitHistoryOne<TRes>
-      get insertHistoryVisitHistoryOne =>
-          CopyWith_Mutation_updatePerson_insertHistoryVisitHistoryOne.stub(
-              _res);
+  get insertHistoryVisitHistoryOne =>
+      CopyWith_Mutation_updatePerson_insertHistoryVisitHistoryOne.stub(_res);
 }
 
-const documentNodeMutationupdatePerson = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.mutation,
-    name: NameNode(value: 'updatePerson'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'personId')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'uuid'),
-          isNonNull: true,
+const documentNodeMutationupdatePerson = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.mutation,
+      name: NameNode(value: 'updatePerson'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'personId')),
+          type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'newPerson')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'PersonsSetInput'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'addressId')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'uuid'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'newAddress')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'AddressesSetInput'),
-          isNonNull: false,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'updateAddressByPk')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'Boolean'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: BooleanValueNode(value: false)),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'newGroups')),
-        type: ListTypeNode(
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'newPerson')),
           type: NamedTypeNode(
-            name: NameNode(value: 'PersonsGroupsInsertInput'),
+            name: NameNode(value: 'PersonsSetInput'),
             isNonNull: true,
           ),
-          isNonNull: true,
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: ListValueNode(values: [])),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'deleteGroups')),
-        type: ListTypeNode(
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'addressId')),
+          type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'newAddress')),
           type: NamedTypeNode(
-            name: NameNode(value: 'uuid'),
+            name: NameNode(value: 'AddressesSetInput'),
+            isNonNull: false,
+          ),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'updateAddressByPk')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'Boolean'),
             isNonNull: true,
           ),
-          isNonNull: false,
+          defaultValue: DefaultValueNode(value: BooleanValueNode(value: false)),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'newServices')),
-        type: ListTypeNode(
-          type: NamedTypeNode(
-            name: NameNode(value: 'PersonsServicesInsertInput'),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'newGroups')),
+          type: ListTypeNode(
+            type: NamedTypeNode(
+              name: NameNode(value: 'PersonsGroupsInsertInput'),
+              isNonNull: true,
+            ),
             isNonNull: true,
           ),
-          isNonNull: true,
+          defaultValue: DefaultValueNode(value: ListValueNode(values: [])),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: ListValueNode(values: [])),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'deleteServices')),
-        type: ListTypeNode(
-          type: NamedTypeNode(
-            name: NameNode(value: 'uuid'),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'deleteGroups')),
+          type: ListTypeNode(
+            type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+            isNonNull: false,
+          ),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'newServices')),
+          type: ListTypeNode(
+            type: NamedTypeNode(
+              name: NameNode(value: 'PersonsServicesInsertInput'),
+              isNonNull: true,
+            ),
             isNonNull: true,
           ),
-          isNonNull: false,
+          defaultValue: DefaultValueNode(value: ListValueNode(values: [])),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'newHobbies')),
-        type: ListTypeNode(
-          type: NamedTypeNode(
-            name: NameNode(value: 'PersonsHobbiesInsertInput'),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'deleteServices')),
+          type: ListTypeNode(
+            type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+            isNonNull: false,
+          ),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'newHobbies')),
+          type: ListTypeNode(
+            type: NamedTypeNode(
+              name: NameNode(value: 'PersonsHobbiesInsertInput'),
+              isNonNull: true,
+            ),
             isNonNull: true,
           ),
-          isNonNull: true,
+          defaultValue: DefaultValueNode(value: ListValueNode(values: [])),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: ListValueNode(values: [])),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'deleteHobbies')),
-        type: ListTypeNode(
-          type: NamedTypeNode(
-            name: NameNode(value: 'uuid'),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'deleteHobbies')),
+          type: ListTypeNode(
+            type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+            isNonNull: false,
+          ),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'newTags')),
+          type: ListTypeNode(
+            type: NamedTypeNode(
+              name: NameNode(value: 'PersonsTagsInsertInput'),
+              isNonNull: true,
+            ),
             isNonNull: true,
           ),
-          isNonNull: false,
+          defaultValue: DefaultValueNode(value: ListValueNode(values: [])),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'newTags')),
-        type: ListTypeNode(
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'deleteTags')),
+          type: ListTypeNode(
+            type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+            isNonNull: false,
+          ),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'lastConfession')),
+          type: NamedTypeNode(name: NameNode(value: 'date'), isNonNull: false),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'lastKodas')),
+          type: NamedTypeNode(name: NameNode(value: 'date'), isNonNull: false),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'lastCall')),
           type: NamedTypeNode(
-            name: NameNode(value: 'PersonsTagsInsertInput'),
+            name: NameNode(value: 'timestamptz'),
+            isNonNull: false,
+          ),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'lastVisit')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'timestamptz'),
+            isNonNull: false,
+          ),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'updatePersonsByPk')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'Boolean'),
             isNonNull: true,
           ),
-          isNonNull: true,
+          defaultValue: DefaultValueNode(value: BooleanValueNode(value: true)),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: ListValueNode(values: [])),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'deleteTags')),
-        type: ListTypeNode(
+        VariableDefinitionNode(
+          variable: VariableNode(
+            name: NameNode(value: 'insertPersonsServices'),
+          ),
           type: NamedTypeNode(
-            name: NameNode(value: 'uuid'),
+            name: NameNode(value: 'Boolean'),
             isNonNull: true,
           ),
-          isNonNull: false,
+          defaultValue: DefaultValueNode(value: BooleanValueNode(value: true)),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'lastConfession')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'date'),
-          isNonNull: false,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'lastKodas')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'date'),
-          isNonNull: false,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'lastCall')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'timestamptz'),
-          isNonNull: false,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'lastVisit')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'timestamptz'),
-          isNonNull: false,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'updatePersonsByPk')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'Boolean'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: BooleanValueNode(value: true)),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'insertPersonsServices')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'Boolean'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: BooleanValueNode(value: true)),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'insertPersonsGroups')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'Boolean'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: BooleanValueNode(value: true)),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'insertPersonsHobbies')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'Boolean'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: BooleanValueNode(value: true)),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'insertPersonsTags')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'Boolean'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: BooleanValueNode(value: true)),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'deletePersonsTags')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'Boolean'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: BooleanValueNode(value: true)),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'deletePersonsHobbies')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'Boolean'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: BooleanValueNode(value: true)),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'deletePersonsGroups')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'Boolean'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: BooleanValueNode(value: true)),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'deletePersonsServices')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'Boolean'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: BooleanValueNode(value: true)),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(
-            name: NameNode(value: 'insertHistoryConfessionHistoryOne')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'Boolean'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: BooleanValueNode(value: true)),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable:
-            VariableNode(name: NameNode(value: 'insertHistoryKodasHistoryOne')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'Boolean'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: BooleanValueNode(value: true)),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable:
-            VariableNode(name: NameNode(value: 'insertHistoryCallHistoryOne')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'Boolean'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: BooleanValueNode(value: true)),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable:
-            VariableNode(name: NameNode(value: 'insertHistoryVisitHistoryOne')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'Boolean'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: BooleanValueNode(value: true)),
-        directives: [],
-      ),
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'updatePersonsByPk'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'pkColumns'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'id'),
-                value: VariableNode(name: NameNode(value: 'personId')),
-              )
-            ]),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'insertPersonsGroups')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'Boolean'),
+            isNonNull: true,
           ),
-          ArgumentNode(
-            name: NameNode(value: '_set'),
-            value: VariableNode(name: NameNode(value: 'newPerson')),
+          defaultValue: DefaultValueNode(value: BooleanValueNode(value: true)),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'insertPersonsHobbies')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'Boolean'),
+            isNonNull: true,
           ),
-        ],
-        directives: [
-          DirectiveNode(
-            name: NameNode(value: 'include'),
+          defaultValue: DefaultValueNode(value: BooleanValueNode(value: true)),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'insertPersonsTags')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'Boolean'),
+            isNonNull: true,
+          ),
+          defaultValue: DefaultValueNode(value: BooleanValueNode(value: true)),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'deletePersonsTags')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'Boolean'),
+            isNonNull: true,
+          ),
+          defaultValue: DefaultValueNode(value: BooleanValueNode(value: true)),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'deletePersonsHobbies')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'Boolean'),
+            isNonNull: true,
+          ),
+          defaultValue: DefaultValueNode(value: BooleanValueNode(value: true)),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'deletePersonsGroups')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'Boolean'),
+            isNonNull: true,
+          ),
+          defaultValue: DefaultValueNode(value: BooleanValueNode(value: true)),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(
+            name: NameNode(value: 'deletePersonsServices'),
+          ),
+          type: NamedTypeNode(
+            name: NameNode(value: 'Boolean'),
+            isNonNull: true,
+          ),
+          defaultValue: DefaultValueNode(value: BooleanValueNode(value: true)),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(
+            name: NameNode(value: 'insertHistoryConfessionHistoryOne'),
+          ),
+          type: NamedTypeNode(
+            name: NameNode(value: 'Boolean'),
+            isNonNull: true,
+          ),
+          defaultValue: DefaultValueNode(value: BooleanValueNode(value: true)),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(
+            name: NameNode(value: 'insertHistoryKodasHistoryOne'),
+          ),
+          type: NamedTypeNode(
+            name: NameNode(value: 'Boolean'),
+            isNonNull: true,
+          ),
+          defaultValue: DefaultValueNode(value: BooleanValueNode(value: true)),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(
+            name: NameNode(value: 'insertHistoryCallHistoryOne'),
+          ),
+          type: NamedTypeNode(
+            name: NameNode(value: 'Boolean'),
+            isNonNull: true,
+          ),
+          defaultValue: DefaultValueNode(value: BooleanValueNode(value: true)),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(
+            name: NameNode(value: 'insertHistoryVisitHistoryOne'),
+          ),
+          type: NamedTypeNode(
+            name: NameNode(value: 'Boolean'),
+            isNonNull: true,
+          ),
+          defaultValue: DefaultValueNode(value: BooleanValueNode(value: true)),
+          directives: [],
+        ),
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
+          FieldNode(
+            name: NameNode(value: 'updatePersonsByPk'),
+            alias: null,
             arguments: [
               ArgumentNode(
-                name: NameNode(value: 'if'),
-                value: VariableNode(name: NameNode(value: 'updatePersonsByPk')),
-              )
-            ],
-          )
-        ],
-        selectionSet: SelectionSetNode(selections: [
-          FragmentSpreadNode(
-            name: NameNode(value: 'Person'),
-            directives: [],
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-        ]),
-      ),
-      FieldNode(
-        name: NameNode(value: 'updateAddressesByPk'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'pkColumns'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'id'),
-                value: VariableNode(name: NameNode(value: 'addressId')),
-              )
-            ]),
-          ),
-          ArgumentNode(
-            name: NameNode(value: '_set'),
-            value: VariableNode(name: NameNode(value: 'newAddress')),
-          ),
-        ],
-        directives: [
-          DirectiveNode(
-            name: NameNode(value: 'include'),
-            arguments: [
-              ArgumentNode(
-                name: NameNode(value: 'if'),
-                value: VariableNode(name: NameNode(value: 'updateAddressByPk')),
-              )
-            ],
-          )
-        ],
-        selectionSet: SelectionSetNode(selections: [
-          FragmentSpreadNode(
-            name: NameNode(value: 'Address'),
-            directives: [],
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-        ]),
-      ),
-      FieldNode(
-        name: NameNode(value: 'insertPersonsServices'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'objects'),
-            value: VariableNode(name: NameNode(value: 'newServices')),
-          )
-        ],
-        directives: [
-          DirectiveNode(
-            name: NameNode(value: 'include'),
-            arguments: [
-              ArgumentNode(
-                name: NameNode(value: 'if'),
-                value: VariableNode(
-                    name: NameNode(value: 'insertPersonsServices')),
-              )
-            ],
-          )
-        ],
-        selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-            name: NameNode(value: 'affectedRows'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-        ]),
-      ),
-      FieldNode(
-        name: NameNode(value: 'insertPersonsGroups'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'objects'),
-            value: VariableNode(name: NameNode(value: 'newGroups')),
-          )
-        ],
-        directives: [
-          DirectiveNode(
-            name: NameNode(value: 'include'),
-            arguments: [
-              ArgumentNode(
-                name: NameNode(value: 'if'),
-                value:
-                    VariableNode(name: NameNode(value: 'insertPersonsGroups')),
-              )
-            ],
-          )
-        ],
-        selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-            name: NameNode(value: 'affectedRows'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-        ]),
-      ),
-      FieldNode(
-        name: NameNode(value: 'insertPersonsHobbies'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'objects'),
-            value: VariableNode(name: NameNode(value: 'newHobbies')),
-          )
-        ],
-        directives: [
-          DirectiveNode(
-            name: NameNode(value: 'include'),
-            arguments: [
-              ArgumentNode(
-                name: NameNode(value: 'if'),
-                value:
-                    VariableNode(name: NameNode(value: 'insertPersonsHobbies')),
-              )
-            ],
-          )
-        ],
-        selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-            name: NameNode(value: 'affectedRows'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-        ]),
-      ),
-      FieldNode(
-        name: NameNode(value: 'insertPersonsTags'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'objects'),
-            value: VariableNode(name: NameNode(value: 'newTags')),
-          )
-        ],
-        directives: [
-          DirectiveNode(
-            name: NameNode(value: 'include'),
-            arguments: [
-              ArgumentNode(
-                name: NameNode(value: 'if'),
-                value: VariableNode(name: NameNode(value: 'insertPersonsTags')),
-              )
-            ],
-          )
-        ],
-        selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-            name: NameNode(value: 'affectedRows'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-        ]),
-      ),
-      FieldNode(
-        name: NameNode(value: 'deletePersonsTags'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'where'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'personId'),
-                value: ObjectValueNode(fields: [
-                  ObjectFieldNode(
-                    name: NameNode(value: '_eq'),
-                    value: VariableNode(name: NameNode(value: 'personId')),
-                  )
-                ]),
-              ),
-              ObjectFieldNode(
-                name: NameNode(value: 'tagId'),
-                value: ObjectValueNode(fields: [
-                  ObjectFieldNode(
-                    name: NameNode(value: '_in'),
-                    value: VariableNode(name: NameNode(value: 'deleteTags')),
-                  )
-                ]),
-              ),
-            ]),
-          )
-        ],
-        directives: [
-          DirectiveNode(
-            name: NameNode(value: 'include'),
-            arguments: [
-              ArgumentNode(
-                name: NameNode(value: 'if'),
-                value: VariableNode(name: NameNode(value: 'deletePersonsTags')),
-              )
-            ],
-          )
-        ],
-        selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-            name: NameNode(value: 'affectedRows'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-        ]),
-      ),
-      FieldNode(
-        name: NameNode(value: 'deletePersonsHobbies'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'where'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'personId'),
-                value: ObjectValueNode(fields: [
-                  ObjectFieldNode(
-                    name: NameNode(value: '_eq'),
-                    value: VariableNode(name: NameNode(value: 'personId')),
-                  )
-                ]),
-              ),
-              ObjectFieldNode(
-                name: NameNode(value: 'hobbyId'),
-                value: ObjectValueNode(fields: [
-                  ObjectFieldNode(
-                    name: NameNode(value: '_in'),
-                    value: VariableNode(name: NameNode(value: 'deleteHobbies')),
-                  )
-                ]),
-              ),
-            ]),
-          )
-        ],
-        directives: [
-          DirectiveNode(
-            name: NameNode(value: 'include'),
-            arguments: [
-              ArgumentNode(
-                name: NameNode(value: 'if'),
-                value:
-                    VariableNode(name: NameNode(value: 'deletePersonsHobbies')),
-              )
-            ],
-          )
-        ],
-        selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-            name: NameNode(value: 'affectedRows'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-        ]),
-      ),
-      FieldNode(
-        name: NameNode(value: 'deletePersonsGroups'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'where'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'personId'),
-                value: ObjectValueNode(fields: [
-                  ObjectFieldNode(
-                    name: NameNode(value: '_eq'),
-                    value: VariableNode(name: NameNode(value: 'personId')),
-                  )
-                ]),
-              ),
-              ObjectFieldNode(
-                name: NameNode(value: 'groupId'),
-                value: ObjectValueNode(fields: [
-                  ObjectFieldNode(
-                    name: NameNode(value: '_in'),
-                    value: VariableNode(name: NameNode(value: 'deleteGroups')),
-                  )
-                ]),
-              ),
-            ]),
-          )
-        ],
-        directives: [
-          DirectiveNode(
-            name: NameNode(value: 'include'),
-            arguments: [
-              ArgumentNode(
-                name: NameNode(value: 'if'),
-                value:
-                    VariableNode(name: NameNode(value: 'deletePersonsGroups')),
-              )
-            ],
-          )
-        ],
-        selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-            name: NameNode(value: 'affectedRows'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-        ]),
-      ),
-      FieldNode(
-        name: NameNode(value: 'deletePersonsServices'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'where'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'personId'),
-                value: ObjectValueNode(fields: [
-                  ObjectFieldNode(
-                    name: NameNode(value: '_eq'),
-                    value: VariableNode(name: NameNode(value: 'personId')),
-                  )
-                ]),
-              ),
-              ObjectFieldNode(
-                name: NameNode(value: 'serviceId'),
-                value: ObjectValueNode(fields: [
-                  ObjectFieldNode(
-                    name: NameNode(value: '_in'),
-                    value:
-                        VariableNode(name: NameNode(value: 'deleteServices')),
-                  )
-                ]),
-              ),
-            ]),
-          )
-        ],
-        directives: [
-          DirectiveNode(
-            name: NameNode(value: 'include'),
-            arguments: [
-              ArgumentNode(
-                name: NameNode(value: 'if'),
-                value: VariableNode(
-                    name: NameNode(value: 'deletePersonsServices')),
-              )
-            ],
-          )
-        ],
-        selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-            name: NameNode(value: 'affectedRows'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-        ]),
-      ),
-      FieldNode(
-        name: NameNode(value: 'insertHistoryConfessionHistoryOne'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'object'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'personId'),
-                value: VariableNode(name: NameNode(value: 'personId')),
-              ),
-              ObjectFieldNode(
-                name: NameNode(value: 'day'),
-                value: ObjectValueNode(fields: [
-                  ObjectFieldNode(
-                    name: NameNode(value: 'data'),
-                    value: ObjectValueNode(fields: [
-                      ObjectFieldNode(
-                        name: NameNode(value: 'day'),
-                        value: VariableNode(
-                            name: NameNode(value: 'lastConfession')),
-                      )
-                    ]),
-                  ),
-                  ObjectFieldNode(
-                    name: NameNode(value: 'onConflict'),
-                    value: ObjectValueNode(fields: [
-                      ObjectFieldNode(
-                        name: NameNode(value: 'constraint'),
-                        value: EnumValueNode(
-                            name: NameNode(value: 'attendance_days_pkey')),
-                      ),
-                      ObjectFieldNode(
-                        name: NameNode(value: 'updateColumns'),
-                        value: EnumValueNode(name: NameNode(value: 'day')),
-                      ),
-                    ]),
-                  ),
-                ]),
-              ),
-            ]),
-          ),
-          ArgumentNode(
-            name: NameNode(value: 'onConflict'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'constraint'),
-                value: EnumValueNode(
-                    name: NameNode(
-                        value: 'confession_history_day_id_person_id_key')),
-              )
-            ]),
-          ),
-        ],
-        directives: [
-          DirectiveNode(
-            name: NameNode(value: 'include'),
-            arguments: [
-              ArgumentNode(
-                name: NameNode(value: 'if'),
-                value: VariableNode(
-                    name: NameNode(value: 'insertHistoryConfessionHistoryOne')),
-              )
-            ],
-          )
-        ],
-        selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-            name: NameNode(value: 'person'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                name: NameNode(value: 'id'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-              FieldNode(
-                name: NameNode(value: 'name'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-              FieldNode(
-                name: NameNode(value: '__typename'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-            ]),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-        ]),
-      ),
-      FieldNode(
-        name: NameNode(value: 'insertHistoryKodasHistoryOne'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'object'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'personId'),
-                value: VariableNode(name: NameNode(value: 'personId')),
-              ),
-              ObjectFieldNode(
-                name: NameNode(value: 'day'),
-                value: ObjectValueNode(fields: [
-                  ObjectFieldNode(
-                    name: NameNode(value: 'data'),
-                    value: ObjectValueNode(fields: [
-                      ObjectFieldNode(
-                        name: NameNode(value: 'day'),
-                        value: VariableNode(name: NameNode(value: 'lastKodas')),
-                      )
-                    ]),
-                  ),
-                  ObjectFieldNode(
-                    name: NameNode(value: 'onConflict'),
-                    value: ObjectValueNode(fields: [
-                      ObjectFieldNode(
-                        name: NameNode(value: 'constraint'),
-                        value: EnumValueNode(
-                            name: NameNode(value: 'attendance_days_pkey')),
-                      ),
-                      ObjectFieldNode(
-                        name: NameNode(value: 'updateColumns'),
-                        value: EnumValueNode(name: NameNode(value: 'day')),
-                      ),
-                    ]),
-                  ),
-                ]),
-              ),
-            ]),
-          ),
-          ArgumentNode(
-            name: NameNode(value: 'onConflict'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'constraint'),
-                value: EnumValueNode(
-                    name:
-                        NameNode(value: 'kodas_history_day_id_person_id_key')),
-              )
-            ]),
-          ),
-        ],
-        directives: [
-          DirectiveNode(
-            name: NameNode(value: 'include'),
-            arguments: [
-              ArgumentNode(
-                name: NameNode(value: 'if'),
-                value: VariableNode(
-                    name: NameNode(value: 'insertHistoryKodasHistoryOne')),
-              )
-            ],
-          )
-        ],
-        selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-            name: NameNode(value: 'person'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                name: NameNode(value: 'id'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-              FieldNode(
-                name: NameNode(value: 'name'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-              FieldNode(
-                name: NameNode(value: '__typename'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-            ]),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-        ]),
-      ),
-      FieldNode(
-        name: NameNode(value: 'insertHistoryCallHistoryOne'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'object'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'personId'),
-                value: VariableNode(name: NameNode(value: 'personId')),
-              ),
-              ObjectFieldNode(
-                name: NameNode(value: 'time'),
-                value: VariableNode(name: NameNode(value: 'lastCall')),
-              ),
-            ]),
-          )
-        ],
-        directives: [
-          DirectiveNode(
-            name: NameNode(value: 'include'),
-            arguments: [
-              ArgumentNode(
-                name: NameNode(value: 'if'),
-                value: VariableNode(
-                    name: NameNode(value: 'insertHistoryCallHistoryOne')),
-              )
-            ],
-          )
-        ],
-        selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-            name: NameNode(value: 'person'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                name: NameNode(value: 'id'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-              FieldNode(
-                name: NameNode(value: 'name'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-              FieldNode(
-                name: NameNode(value: '__typename'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-            ]),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-        ]),
-      ),
-      FieldNode(
-        name: NameNode(value: 'insertHistoryVisitHistoryOne'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'object'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'table'),
-                value: StringValueNode(
-                  value: 'persons',
-                  isBlock: false,
+                name: NameNode(value: 'pkColumns'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'id'),
+                      value: VariableNode(name: NameNode(value: 'personId')),
+                    ),
+                  ],
                 ),
               ),
-              ObjectFieldNode(
-                name: NameNode(value: 'recordId'),
-                value: VariableNode(name: NameNode(value: 'personId')),
+              ArgumentNode(
+                name: NameNode(value: '_set'),
+                value: VariableNode(name: NameNode(value: 'newPerson')),
               ),
-              ObjectFieldNode(
-                name: NameNode(value: 'time'),
-                value: VariableNode(name: NameNode(value: 'lastVisit')),
+            ],
+            directives: [
+              DirectiveNode(
+                name: NameNode(value: 'include'),
+                arguments: [
+                  ArgumentNode(
+                    name: NameNode(value: 'if'),
+                    value: VariableNode(
+                      name: NameNode(value: 'updatePersonsByPk'),
+                    ),
+                  ),
+                ],
               ),
-            ]),
-          )
-        ],
-        directives: [
-          DirectiveNode(
-            name: NameNode(value: 'include'),
+            ],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FragmentSpreadNode(
+                  name: NameNode(value: 'Person'),
+                  directives: [],
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
+          ),
+          FieldNode(
+            name: NameNode(value: 'updateAddressesByPk'),
+            alias: null,
             arguments: [
               ArgumentNode(
-                name: NameNode(value: 'if'),
-                value: VariableNode(
-                    name: NameNode(value: 'insertHistoryVisitHistoryOne')),
-              )
+                name: NameNode(value: 'pkColumns'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'id'),
+                      value: VariableNode(name: NameNode(value: 'addressId')),
+                    ),
+                  ],
+                ),
+              ),
+              ArgumentNode(
+                name: NameNode(value: '_set'),
+                value: VariableNode(name: NameNode(value: 'newAddress')),
+              ),
             ],
-          )
-        ],
-        selectionSet: SelectionSetNode(selections: [
+            directives: [
+              DirectiveNode(
+                name: NameNode(value: 'include'),
+                arguments: [
+                  ArgumentNode(
+                    name: NameNode(value: 'if'),
+                    value: VariableNode(
+                      name: NameNode(value: 'updateAddressByPk'),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FragmentSpreadNode(
+                  name: NameNode(value: 'Address'),
+                  directives: [],
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
+          ),
           FieldNode(
-            name: NameNode(value: 'visitId'),
+            name: NameNode(value: 'insertPersonsServices'),
             alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'objects'),
+                value: VariableNode(name: NameNode(value: 'newServices')),
+              ),
+            ],
+            directives: [
+              DirectiveNode(
+                name: NameNode(value: 'include'),
+                arguments: [
+                  ArgumentNode(
+                    name: NameNode(value: 'if'),
+                    value: VariableNode(
+                      name: NameNode(value: 'insertPersonsServices'),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FieldNode(
+                  name: NameNode(value: 'affectedRows'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
+          ),
+          FieldNode(
+            name: NameNode(value: 'insertPersonsGroups'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'objects'),
+                value: VariableNode(name: NameNode(value: 'newGroups')),
+              ),
+            ],
+            directives: [
+              DirectiveNode(
+                name: NameNode(value: 'include'),
+                arguments: [
+                  ArgumentNode(
+                    name: NameNode(value: 'if'),
+                    value: VariableNode(
+                      name: NameNode(value: 'insertPersonsGroups'),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FieldNode(
+                  name: NameNode(value: 'affectedRows'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
+          ),
+          FieldNode(
+            name: NameNode(value: 'insertPersonsHobbies'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'objects'),
+                value: VariableNode(name: NameNode(value: 'newHobbies')),
+              ),
+            ],
+            directives: [
+              DirectiveNode(
+                name: NameNode(value: 'include'),
+                arguments: [
+                  ArgumentNode(
+                    name: NameNode(value: 'if'),
+                    value: VariableNode(
+                      name: NameNode(value: 'insertPersonsHobbies'),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FieldNode(
+                  name: NameNode(value: 'affectedRows'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
+          ),
+          FieldNode(
+            name: NameNode(value: 'insertPersonsTags'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'objects'),
+                value: VariableNode(name: NameNode(value: 'newTags')),
+              ),
+            ],
+            directives: [
+              DirectiveNode(
+                name: NameNode(value: 'include'),
+                arguments: [
+                  ArgumentNode(
+                    name: NameNode(value: 'if'),
+                    value: VariableNode(
+                      name: NameNode(value: 'insertPersonsTags'),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FieldNode(
+                  name: NameNode(value: 'affectedRows'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
+          ),
+          FieldNode(
+            name: NameNode(value: 'deletePersonsTags'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'where'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'personId'),
+                      value: ObjectValueNode(
+                        fields: [
+                          ObjectFieldNode(
+                            name: NameNode(value: '_eq'),
+                            value: VariableNode(
+                              name: NameNode(value: 'personId'),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    ObjectFieldNode(
+                      name: NameNode(value: 'tagId'),
+                      value: ObjectValueNode(
+                        fields: [
+                          ObjectFieldNode(
+                            name: NameNode(value: '_in'),
+                            value: VariableNode(
+                              name: NameNode(value: 'deleteTags'),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+            directives: [
+              DirectiveNode(
+                name: NameNode(value: 'include'),
+                arguments: [
+                  ArgumentNode(
+                    name: NameNode(value: 'if'),
+                    value: VariableNode(
+                      name: NameNode(value: 'deletePersonsTags'),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FieldNode(
+                  name: NameNode(value: 'affectedRows'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
+          ),
+          FieldNode(
+            name: NameNode(value: 'deletePersonsHobbies'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'where'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'personId'),
+                      value: ObjectValueNode(
+                        fields: [
+                          ObjectFieldNode(
+                            name: NameNode(value: '_eq'),
+                            value: VariableNode(
+                              name: NameNode(value: 'personId'),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    ObjectFieldNode(
+                      name: NameNode(value: 'hobbyId'),
+                      value: ObjectValueNode(
+                        fields: [
+                          ObjectFieldNode(
+                            name: NameNode(value: '_in'),
+                            value: VariableNode(
+                              name: NameNode(value: 'deleteHobbies'),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+            directives: [
+              DirectiveNode(
+                name: NameNode(value: 'include'),
+                arguments: [
+                  ArgumentNode(
+                    name: NameNode(value: 'if'),
+                    value: VariableNode(
+                      name: NameNode(value: 'deletePersonsHobbies'),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FieldNode(
+                  name: NameNode(value: 'affectedRows'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
+          ),
+          FieldNode(
+            name: NameNode(value: 'deletePersonsGroups'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'where'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'personId'),
+                      value: ObjectValueNode(
+                        fields: [
+                          ObjectFieldNode(
+                            name: NameNode(value: '_eq'),
+                            value: VariableNode(
+                              name: NameNode(value: 'personId'),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    ObjectFieldNode(
+                      name: NameNode(value: 'groupId'),
+                      value: ObjectValueNode(
+                        fields: [
+                          ObjectFieldNode(
+                            name: NameNode(value: '_in'),
+                            value: VariableNode(
+                              name: NameNode(value: 'deleteGroups'),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+            directives: [
+              DirectiveNode(
+                name: NameNode(value: 'include'),
+                arguments: [
+                  ArgumentNode(
+                    name: NameNode(value: 'if'),
+                    value: VariableNode(
+                      name: NameNode(value: 'deletePersonsGroups'),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FieldNode(
+                  name: NameNode(value: 'affectedRows'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
+          ),
+          FieldNode(
+            name: NameNode(value: 'deletePersonsServices'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'where'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'personId'),
+                      value: ObjectValueNode(
+                        fields: [
+                          ObjectFieldNode(
+                            name: NameNode(value: '_eq'),
+                            value: VariableNode(
+                              name: NameNode(value: 'personId'),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    ObjectFieldNode(
+                      name: NameNode(value: 'serviceId'),
+                      value: ObjectValueNode(
+                        fields: [
+                          ObjectFieldNode(
+                            name: NameNode(value: '_in'),
+                            value: VariableNode(
+                              name: NameNode(value: 'deleteServices'),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+            directives: [
+              DirectiveNode(
+                name: NameNode(value: 'include'),
+                arguments: [
+                  ArgumentNode(
+                    name: NameNode(value: 'if'),
+                    value: VariableNode(
+                      name: NameNode(value: 'deletePersonsServices'),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FieldNode(
+                  name: NameNode(value: 'affectedRows'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
+          ),
+          FieldNode(
+            name: NameNode(value: 'insertHistoryConfessionHistoryOne'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'object'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'personId'),
+                      value: VariableNode(name: NameNode(value: 'personId')),
+                    ),
+                    ObjectFieldNode(
+                      name: NameNode(value: 'day'),
+                      value: ObjectValueNode(
+                        fields: [
+                          ObjectFieldNode(
+                            name: NameNode(value: 'data'),
+                            value: ObjectValueNode(
+                              fields: [
+                                ObjectFieldNode(
+                                  name: NameNode(value: 'day'),
+                                  value: VariableNode(
+                                    name: NameNode(value: 'lastConfession'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          ObjectFieldNode(
+                            name: NameNode(value: 'onConflict'),
+                            value: ObjectValueNode(
+                              fields: [
+                                ObjectFieldNode(
+                                  name: NameNode(value: 'constraint'),
+                                  value: EnumValueNode(
+                                    name: NameNode(
+                                      value: 'attendance_days_pkey',
+                                    ),
+                                  ),
+                                ),
+                                ObjectFieldNode(
+                                  name: NameNode(value: 'updateColumns'),
+                                  value: EnumValueNode(
+                                    name: NameNode(value: 'day'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'onConflict'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'constraint'),
+                      value: EnumValueNode(
+                        name: NameNode(
+                          value: 'confession_history_day_id_person_id_key',
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+            directives: [
+              DirectiveNode(
+                name: NameNode(value: 'include'),
+                arguments: [
+                  ArgumentNode(
+                    name: NameNode(value: 'if'),
+                    value: VariableNode(
+                      name: NameNode(
+                        value: 'insertHistoryConfessionHistoryOne',
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FieldNode(
+                  name: NameNode(value: 'person'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: SelectionSetNode(
+                    selections: [
+                      FieldNode(
+                        name: NameNode(value: 'id'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                      FieldNode(
+                        name: NameNode(value: 'name'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                      FieldNode(
+                        name: NameNode(value: '__typename'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                    ],
+                  ),
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
+          ),
+          FieldNode(
+            name: NameNode(value: 'insertHistoryKodasHistoryOne'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'object'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'personId'),
+                      value: VariableNode(name: NameNode(value: 'personId')),
+                    ),
+                    ObjectFieldNode(
+                      name: NameNode(value: 'day'),
+                      value: ObjectValueNode(
+                        fields: [
+                          ObjectFieldNode(
+                            name: NameNode(value: 'data'),
+                            value: ObjectValueNode(
+                              fields: [
+                                ObjectFieldNode(
+                                  name: NameNode(value: 'day'),
+                                  value: VariableNode(
+                                    name: NameNode(value: 'lastKodas'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          ObjectFieldNode(
+                            name: NameNode(value: 'onConflict'),
+                            value: ObjectValueNode(
+                              fields: [
+                                ObjectFieldNode(
+                                  name: NameNode(value: 'constraint'),
+                                  value: EnumValueNode(
+                                    name: NameNode(
+                                      value: 'attendance_days_pkey',
+                                    ),
+                                  ),
+                                ),
+                                ObjectFieldNode(
+                                  name: NameNode(value: 'updateColumns'),
+                                  value: EnumValueNode(
+                                    name: NameNode(value: 'day'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'onConflict'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'constraint'),
+                      value: EnumValueNode(
+                        name: NameNode(
+                          value: 'kodas_history_day_id_person_id_key',
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+            directives: [
+              DirectiveNode(
+                name: NameNode(value: 'include'),
+                arguments: [
+                  ArgumentNode(
+                    name: NameNode(value: 'if'),
+                    value: VariableNode(
+                      name: NameNode(value: 'insertHistoryKodasHistoryOne'),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FieldNode(
+                  name: NameNode(value: 'person'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: SelectionSetNode(
+                    selections: [
+                      FieldNode(
+                        name: NameNode(value: 'id'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                      FieldNode(
+                        name: NameNode(value: 'name'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                      FieldNode(
+                        name: NameNode(value: '__typename'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                    ],
+                  ),
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
+          ),
+          FieldNode(
+            name: NameNode(value: 'insertHistoryCallHistoryOne'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'object'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'personId'),
+                      value: VariableNode(name: NameNode(value: 'personId')),
+                    ),
+                    ObjectFieldNode(
+                      name: NameNode(value: 'time'),
+                      value: VariableNode(name: NameNode(value: 'lastCall')),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+            directives: [
+              DirectiveNode(
+                name: NameNode(value: 'include'),
+                arguments: [
+                  ArgumentNode(
+                    name: NameNode(value: 'if'),
+                    value: VariableNode(
+                      name: NameNode(value: 'insertHistoryCallHistoryOne'),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FieldNode(
+                  name: NameNode(value: 'person'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: SelectionSetNode(
+                    selections: [
+                      FieldNode(
+                        name: NameNode(value: 'id'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                      FieldNode(
+                        name: NameNode(value: 'name'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                      FieldNode(
+                        name: NameNode(value: '__typename'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                    ],
+                  ),
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
+          ),
+          FieldNode(
+            name: NameNode(value: 'insertHistoryVisitHistoryOne'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'object'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'table'),
+                      value: StringValueNode(value: 'persons', isBlock: false),
+                    ),
+                    ObjectFieldNode(
+                      name: NameNode(value: 'recordId'),
+                      value: VariableNode(name: NameNode(value: 'personId')),
+                    ),
+                    ObjectFieldNode(
+                      name: NameNode(value: 'time'),
+                      value: VariableNode(name: NameNode(value: 'lastVisit')),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+            directives: [
+              DirectiveNode(
+                name: NameNode(value: 'include'),
+                arguments: [
+                  ArgumentNode(
+                    name: NameNode(value: 'if'),
+                    value: VariableNode(
+                      name: NameNode(value: 'insertHistoryVisitHistoryOne'),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FieldNode(
+                  name: NameNode(value: 'visitId'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
           ),
           FieldNode(
             name: NameNode(value: '__typename'),
@@ -3223,25 +3391,18 @@ const documentNodeMutationupdatePerson = DocumentNode(definitions: [
             directives: [],
             selectionSet: null,
           ),
-        ]),
+        ],
       ),
-      FieldNode(
-        name: NameNode(value: '__typename'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-    ]),
-  ),
-  fragmentDefinitionPerson,
-  fragmentDefinitionPersonNoPhoto,
-  fragmentDefinitionAddress,
-  fragmentDefinitionArea,
-  fragmentDefinitionAreaNoPhoto,
-  fragmentDefinitionStreet,
-  fragmentDefinitionStreetNoPhoto,
-]);
+    ),
+    fragmentDefinitionPerson,
+    fragmentDefinitionPersonNoPhoto,
+    fragmentDefinitionAddress,
+    fragmentDefinitionArea,
+    fragmentDefinitionAreaNoPhoto,
+    fragmentDefinitionStreet,
+    fragmentDefinitionStreetNoPhoto,
+  ],
+);
 
 class Mutation_updatePerson_insertPersonsServices {
   Mutation_updatePerson_insertPersonsServices({
@@ -3250,7 +3411,8 @@ class Mutation_updatePerson_insertPersonsServices {
   });
 
   factory Mutation_updatePerson_insertPersonsServices.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$affectedRows = json['affectedRows'];
     final l$$__typename = json['__typename'];
     return Mutation_updatePerson_insertPersonsServices(
@@ -3276,10 +3438,7 @@ class Mutation_updatePerson_insertPersonsServices {
   int get hashCode {
     final l$affectedRows = affectedRows;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$affectedRows,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$affectedRows, l$$__typename]);
   }
 
   @override
@@ -3308,11 +3467,10 @@ class Mutation_updatePerson_insertPersonsServices {
 extension UtilityExtension_Mutation_updatePerson_insertPersonsServices
     on Mutation_updatePerson_insertPersonsServices {
   CopyWith_Mutation_updatePerson_insertPersonsServices<
-          Mutation_updatePerson_insertPersonsServices>
-      get copyWith => CopyWith_Mutation_updatePerson_insertPersonsServices(
-            this,
-            (i) => i,
-          );
+    Mutation_updatePerson_insertPersonsServices
+  >
+  get copyWith =>
+      CopyWith_Mutation_updatePerson_insertPersonsServices(this, (i) => i);
 }
 
 abstract class CopyWith_Mutation_updatePerson_insertPersonsServices<TRes> {
@@ -3324,10 +3482,7 @@ abstract class CopyWith_Mutation_updatePerson_insertPersonsServices<TRes> {
   factory CopyWith_Mutation_updatePerson_insertPersonsServices.stub(TRes res) =
       _CopyWithStubImpl_Mutation_updatePerson_insertPersonsServices;
 
-  TRes call({
-    int? affectedRows,
-    String? $__typename,
-  });
+  TRes call({int? affectedRows, String? $__typename});
 }
 
 class _CopyWithImpl_Mutation_updatePerson_insertPersonsServices<TRes>
@@ -3346,15 +3501,16 @@ class _CopyWithImpl_Mutation_updatePerson_insertPersonsServices<TRes>
   TRes call({
     Object? affectedRows = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Mutation_updatePerson_insertPersonsServices(
-        affectedRows: affectedRows == _undefined || affectedRows == null
-            ? _instance.affectedRows
-            : (affectedRows as int),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Mutation_updatePerson_insertPersonsServices(
+      affectedRows: affectedRows == _undefined || affectedRows == null
+          ? _instance.affectedRows
+          : (affectedRows as int),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 }
 
 class _CopyWithStubImpl_Mutation_updatePerson_insertPersonsServices<TRes>
@@ -3363,11 +3519,7 @@ class _CopyWithStubImpl_Mutation_updatePerson_insertPersonsServices<TRes>
 
   TRes _res;
 
-  call({
-    int? affectedRows,
-    String? $__typename,
-  }) =>
-      _res;
+  call({int? affectedRows, String? $__typename}) => _res;
 }
 
 class Mutation_updatePerson_insertPersonsGroups {
@@ -3377,7 +3529,8 @@ class Mutation_updatePerson_insertPersonsGroups {
   });
 
   factory Mutation_updatePerson_insertPersonsGroups.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$affectedRows = json['affectedRows'];
     final l$$__typename = json['__typename'];
     return Mutation_updatePerson_insertPersonsGroups(
@@ -3403,10 +3556,7 @@ class Mutation_updatePerson_insertPersonsGroups {
   int get hashCode {
     final l$affectedRows = affectedRows;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$affectedRows,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$affectedRows, l$$__typename]);
   }
 
   @override
@@ -3435,11 +3585,10 @@ class Mutation_updatePerson_insertPersonsGroups {
 extension UtilityExtension_Mutation_updatePerson_insertPersonsGroups
     on Mutation_updatePerson_insertPersonsGroups {
   CopyWith_Mutation_updatePerson_insertPersonsGroups<
-          Mutation_updatePerson_insertPersonsGroups>
-      get copyWith => CopyWith_Mutation_updatePerson_insertPersonsGroups(
-            this,
-            (i) => i,
-          );
+    Mutation_updatePerson_insertPersonsGroups
+  >
+  get copyWith =>
+      CopyWith_Mutation_updatePerson_insertPersonsGroups(this, (i) => i);
 }
 
 abstract class CopyWith_Mutation_updatePerson_insertPersonsGroups<TRes> {
@@ -3451,10 +3600,7 @@ abstract class CopyWith_Mutation_updatePerson_insertPersonsGroups<TRes> {
   factory CopyWith_Mutation_updatePerson_insertPersonsGroups.stub(TRes res) =
       _CopyWithStubImpl_Mutation_updatePerson_insertPersonsGroups;
 
-  TRes call({
-    int? affectedRows,
-    String? $__typename,
-  });
+  TRes call({int? affectedRows, String? $__typename});
 }
 
 class _CopyWithImpl_Mutation_updatePerson_insertPersonsGroups<TRes>
@@ -3473,15 +3619,16 @@ class _CopyWithImpl_Mutation_updatePerson_insertPersonsGroups<TRes>
   TRes call({
     Object? affectedRows = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Mutation_updatePerson_insertPersonsGroups(
-        affectedRows: affectedRows == _undefined || affectedRows == null
-            ? _instance.affectedRows
-            : (affectedRows as int),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Mutation_updatePerson_insertPersonsGroups(
+      affectedRows: affectedRows == _undefined || affectedRows == null
+          ? _instance.affectedRows
+          : (affectedRows as int),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 }
 
 class _CopyWithStubImpl_Mutation_updatePerson_insertPersonsGroups<TRes>
@@ -3490,11 +3637,7 @@ class _CopyWithStubImpl_Mutation_updatePerson_insertPersonsGroups<TRes>
 
   TRes _res;
 
-  call({
-    int? affectedRows,
-    String? $__typename,
-  }) =>
-      _res;
+  call({int? affectedRows, String? $__typename}) => _res;
 }
 
 class Mutation_updatePerson_insertPersonsHobbies {
@@ -3504,7 +3647,8 @@ class Mutation_updatePerson_insertPersonsHobbies {
   });
 
   factory Mutation_updatePerson_insertPersonsHobbies.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$affectedRows = json['affectedRows'];
     final l$$__typename = json['__typename'];
     return Mutation_updatePerson_insertPersonsHobbies(
@@ -3530,10 +3674,7 @@ class Mutation_updatePerson_insertPersonsHobbies {
   int get hashCode {
     final l$affectedRows = affectedRows;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$affectedRows,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$affectedRows, l$$__typename]);
   }
 
   @override
@@ -3562,11 +3703,10 @@ class Mutation_updatePerson_insertPersonsHobbies {
 extension UtilityExtension_Mutation_updatePerson_insertPersonsHobbies
     on Mutation_updatePerson_insertPersonsHobbies {
   CopyWith_Mutation_updatePerson_insertPersonsHobbies<
-          Mutation_updatePerson_insertPersonsHobbies>
-      get copyWith => CopyWith_Mutation_updatePerson_insertPersonsHobbies(
-            this,
-            (i) => i,
-          );
+    Mutation_updatePerson_insertPersonsHobbies
+  >
+  get copyWith =>
+      CopyWith_Mutation_updatePerson_insertPersonsHobbies(this, (i) => i);
 }
 
 abstract class CopyWith_Mutation_updatePerson_insertPersonsHobbies<TRes> {
@@ -3578,10 +3718,7 @@ abstract class CopyWith_Mutation_updatePerson_insertPersonsHobbies<TRes> {
   factory CopyWith_Mutation_updatePerson_insertPersonsHobbies.stub(TRes res) =
       _CopyWithStubImpl_Mutation_updatePerson_insertPersonsHobbies;
 
-  TRes call({
-    int? affectedRows,
-    String? $__typename,
-  });
+  TRes call({int? affectedRows, String? $__typename});
 }
 
 class _CopyWithImpl_Mutation_updatePerson_insertPersonsHobbies<TRes>
@@ -3600,15 +3737,16 @@ class _CopyWithImpl_Mutation_updatePerson_insertPersonsHobbies<TRes>
   TRes call({
     Object? affectedRows = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Mutation_updatePerson_insertPersonsHobbies(
-        affectedRows: affectedRows == _undefined || affectedRows == null
-            ? _instance.affectedRows
-            : (affectedRows as int),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Mutation_updatePerson_insertPersonsHobbies(
+      affectedRows: affectedRows == _undefined || affectedRows == null
+          ? _instance.affectedRows
+          : (affectedRows as int),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 }
 
 class _CopyWithStubImpl_Mutation_updatePerson_insertPersonsHobbies<TRes>
@@ -3617,11 +3755,7 @@ class _CopyWithStubImpl_Mutation_updatePerson_insertPersonsHobbies<TRes>
 
   TRes _res;
 
-  call({
-    int? affectedRows,
-    String? $__typename,
-  }) =>
-      _res;
+  call({int? affectedRows, String? $__typename}) => _res;
 }
 
 class Mutation_updatePerson_insertPersonsTags {
@@ -3631,7 +3765,8 @@ class Mutation_updatePerson_insertPersonsTags {
   });
 
   factory Mutation_updatePerson_insertPersonsTags.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$affectedRows = json['affectedRows'];
     final l$$__typename = json['__typename'];
     return Mutation_updatePerson_insertPersonsTags(
@@ -3657,10 +3792,7 @@ class Mutation_updatePerson_insertPersonsTags {
   int get hashCode {
     final l$affectedRows = affectedRows;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$affectedRows,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$affectedRows, l$$__typename]);
   }
 
   @override
@@ -3689,11 +3821,10 @@ class Mutation_updatePerson_insertPersonsTags {
 extension UtilityExtension_Mutation_updatePerson_insertPersonsTags
     on Mutation_updatePerson_insertPersonsTags {
   CopyWith_Mutation_updatePerson_insertPersonsTags<
-          Mutation_updatePerson_insertPersonsTags>
-      get copyWith => CopyWith_Mutation_updatePerson_insertPersonsTags(
-            this,
-            (i) => i,
-          );
+    Mutation_updatePerson_insertPersonsTags
+  >
+  get copyWith =>
+      CopyWith_Mutation_updatePerson_insertPersonsTags(this, (i) => i);
 }
 
 abstract class CopyWith_Mutation_updatePerson_insertPersonsTags<TRes> {
@@ -3705,10 +3836,7 @@ abstract class CopyWith_Mutation_updatePerson_insertPersonsTags<TRes> {
   factory CopyWith_Mutation_updatePerson_insertPersonsTags.stub(TRes res) =
       _CopyWithStubImpl_Mutation_updatePerson_insertPersonsTags;
 
-  TRes call({
-    int? affectedRows,
-    String? $__typename,
-  });
+  TRes call({int? affectedRows, String? $__typename});
 }
 
 class _CopyWithImpl_Mutation_updatePerson_insertPersonsTags<TRes>
@@ -3727,15 +3855,16 @@ class _CopyWithImpl_Mutation_updatePerson_insertPersonsTags<TRes>
   TRes call({
     Object? affectedRows = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Mutation_updatePerson_insertPersonsTags(
-        affectedRows: affectedRows == _undefined || affectedRows == null
-            ? _instance.affectedRows
-            : (affectedRows as int),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Mutation_updatePerson_insertPersonsTags(
+      affectedRows: affectedRows == _undefined || affectedRows == null
+          ? _instance.affectedRows
+          : (affectedRows as int),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 }
 
 class _CopyWithStubImpl_Mutation_updatePerson_insertPersonsTags<TRes>
@@ -3744,11 +3873,7 @@ class _CopyWithStubImpl_Mutation_updatePerson_insertPersonsTags<TRes>
 
   TRes _res;
 
-  call({
-    int? affectedRows,
-    String? $__typename,
-  }) =>
-      _res;
+  call({int? affectedRows, String? $__typename}) => _res;
 }
 
 class Mutation_updatePerson_deletePersonsTags {
@@ -3758,7 +3883,8 @@ class Mutation_updatePerson_deletePersonsTags {
   });
 
   factory Mutation_updatePerson_deletePersonsTags.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$affectedRows = json['affectedRows'];
     final l$$__typename = json['__typename'];
     return Mutation_updatePerson_deletePersonsTags(
@@ -3784,10 +3910,7 @@ class Mutation_updatePerson_deletePersonsTags {
   int get hashCode {
     final l$affectedRows = affectedRows;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$affectedRows,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$affectedRows, l$$__typename]);
   }
 
   @override
@@ -3816,11 +3939,10 @@ class Mutation_updatePerson_deletePersonsTags {
 extension UtilityExtension_Mutation_updatePerson_deletePersonsTags
     on Mutation_updatePerson_deletePersonsTags {
   CopyWith_Mutation_updatePerson_deletePersonsTags<
-          Mutation_updatePerson_deletePersonsTags>
-      get copyWith => CopyWith_Mutation_updatePerson_deletePersonsTags(
-            this,
-            (i) => i,
-          );
+    Mutation_updatePerson_deletePersonsTags
+  >
+  get copyWith =>
+      CopyWith_Mutation_updatePerson_deletePersonsTags(this, (i) => i);
 }
 
 abstract class CopyWith_Mutation_updatePerson_deletePersonsTags<TRes> {
@@ -3832,10 +3954,7 @@ abstract class CopyWith_Mutation_updatePerson_deletePersonsTags<TRes> {
   factory CopyWith_Mutation_updatePerson_deletePersonsTags.stub(TRes res) =
       _CopyWithStubImpl_Mutation_updatePerson_deletePersonsTags;
 
-  TRes call({
-    int? affectedRows,
-    String? $__typename,
-  });
+  TRes call({int? affectedRows, String? $__typename});
 }
 
 class _CopyWithImpl_Mutation_updatePerson_deletePersonsTags<TRes>
@@ -3854,15 +3973,16 @@ class _CopyWithImpl_Mutation_updatePerson_deletePersonsTags<TRes>
   TRes call({
     Object? affectedRows = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Mutation_updatePerson_deletePersonsTags(
-        affectedRows: affectedRows == _undefined || affectedRows == null
-            ? _instance.affectedRows
-            : (affectedRows as int),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Mutation_updatePerson_deletePersonsTags(
+      affectedRows: affectedRows == _undefined || affectedRows == null
+          ? _instance.affectedRows
+          : (affectedRows as int),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 }
 
 class _CopyWithStubImpl_Mutation_updatePerson_deletePersonsTags<TRes>
@@ -3871,11 +3991,7 @@ class _CopyWithStubImpl_Mutation_updatePerson_deletePersonsTags<TRes>
 
   TRes _res;
 
-  call({
-    int? affectedRows,
-    String? $__typename,
-  }) =>
-      _res;
+  call({int? affectedRows, String? $__typename}) => _res;
 }
 
 class Mutation_updatePerson_deletePersonsHobbies {
@@ -3885,7 +4001,8 @@ class Mutation_updatePerson_deletePersonsHobbies {
   });
 
   factory Mutation_updatePerson_deletePersonsHobbies.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$affectedRows = json['affectedRows'];
     final l$$__typename = json['__typename'];
     return Mutation_updatePerson_deletePersonsHobbies(
@@ -3911,10 +4028,7 @@ class Mutation_updatePerson_deletePersonsHobbies {
   int get hashCode {
     final l$affectedRows = affectedRows;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$affectedRows,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$affectedRows, l$$__typename]);
   }
 
   @override
@@ -3943,11 +4057,10 @@ class Mutation_updatePerson_deletePersonsHobbies {
 extension UtilityExtension_Mutation_updatePerson_deletePersonsHobbies
     on Mutation_updatePerson_deletePersonsHobbies {
   CopyWith_Mutation_updatePerson_deletePersonsHobbies<
-          Mutation_updatePerson_deletePersonsHobbies>
-      get copyWith => CopyWith_Mutation_updatePerson_deletePersonsHobbies(
-            this,
-            (i) => i,
-          );
+    Mutation_updatePerson_deletePersonsHobbies
+  >
+  get copyWith =>
+      CopyWith_Mutation_updatePerson_deletePersonsHobbies(this, (i) => i);
 }
 
 abstract class CopyWith_Mutation_updatePerson_deletePersonsHobbies<TRes> {
@@ -3959,10 +4072,7 @@ abstract class CopyWith_Mutation_updatePerson_deletePersonsHobbies<TRes> {
   factory CopyWith_Mutation_updatePerson_deletePersonsHobbies.stub(TRes res) =
       _CopyWithStubImpl_Mutation_updatePerson_deletePersonsHobbies;
 
-  TRes call({
-    int? affectedRows,
-    String? $__typename,
-  });
+  TRes call({int? affectedRows, String? $__typename});
 }
 
 class _CopyWithImpl_Mutation_updatePerson_deletePersonsHobbies<TRes>
@@ -3981,15 +4091,16 @@ class _CopyWithImpl_Mutation_updatePerson_deletePersonsHobbies<TRes>
   TRes call({
     Object? affectedRows = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Mutation_updatePerson_deletePersonsHobbies(
-        affectedRows: affectedRows == _undefined || affectedRows == null
-            ? _instance.affectedRows
-            : (affectedRows as int),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Mutation_updatePerson_deletePersonsHobbies(
+      affectedRows: affectedRows == _undefined || affectedRows == null
+          ? _instance.affectedRows
+          : (affectedRows as int),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 }
 
 class _CopyWithStubImpl_Mutation_updatePerson_deletePersonsHobbies<TRes>
@@ -3998,11 +4109,7 @@ class _CopyWithStubImpl_Mutation_updatePerson_deletePersonsHobbies<TRes>
 
   TRes _res;
 
-  call({
-    int? affectedRows,
-    String? $__typename,
-  }) =>
-      _res;
+  call({int? affectedRows, String? $__typename}) => _res;
 }
 
 class Mutation_updatePerson_deletePersonsGroups {
@@ -4012,7 +4119,8 @@ class Mutation_updatePerson_deletePersonsGroups {
   });
 
   factory Mutation_updatePerson_deletePersonsGroups.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$affectedRows = json['affectedRows'];
     final l$$__typename = json['__typename'];
     return Mutation_updatePerson_deletePersonsGroups(
@@ -4038,10 +4146,7 @@ class Mutation_updatePerson_deletePersonsGroups {
   int get hashCode {
     final l$affectedRows = affectedRows;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$affectedRows,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$affectedRows, l$$__typename]);
   }
 
   @override
@@ -4070,11 +4175,10 @@ class Mutation_updatePerson_deletePersonsGroups {
 extension UtilityExtension_Mutation_updatePerson_deletePersonsGroups
     on Mutation_updatePerson_deletePersonsGroups {
   CopyWith_Mutation_updatePerson_deletePersonsGroups<
-          Mutation_updatePerson_deletePersonsGroups>
-      get copyWith => CopyWith_Mutation_updatePerson_deletePersonsGroups(
-            this,
-            (i) => i,
-          );
+    Mutation_updatePerson_deletePersonsGroups
+  >
+  get copyWith =>
+      CopyWith_Mutation_updatePerson_deletePersonsGroups(this, (i) => i);
 }
 
 abstract class CopyWith_Mutation_updatePerson_deletePersonsGroups<TRes> {
@@ -4086,10 +4190,7 @@ abstract class CopyWith_Mutation_updatePerson_deletePersonsGroups<TRes> {
   factory CopyWith_Mutation_updatePerson_deletePersonsGroups.stub(TRes res) =
       _CopyWithStubImpl_Mutation_updatePerson_deletePersonsGroups;
 
-  TRes call({
-    int? affectedRows,
-    String? $__typename,
-  });
+  TRes call({int? affectedRows, String? $__typename});
 }
 
 class _CopyWithImpl_Mutation_updatePerson_deletePersonsGroups<TRes>
@@ -4108,15 +4209,16 @@ class _CopyWithImpl_Mutation_updatePerson_deletePersonsGroups<TRes>
   TRes call({
     Object? affectedRows = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Mutation_updatePerson_deletePersonsGroups(
-        affectedRows: affectedRows == _undefined || affectedRows == null
-            ? _instance.affectedRows
-            : (affectedRows as int),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Mutation_updatePerson_deletePersonsGroups(
+      affectedRows: affectedRows == _undefined || affectedRows == null
+          ? _instance.affectedRows
+          : (affectedRows as int),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 }
 
 class _CopyWithStubImpl_Mutation_updatePerson_deletePersonsGroups<TRes>
@@ -4125,11 +4227,7 @@ class _CopyWithStubImpl_Mutation_updatePerson_deletePersonsGroups<TRes>
 
   TRes _res;
 
-  call({
-    int? affectedRows,
-    String? $__typename,
-  }) =>
-      _res;
+  call({int? affectedRows, String? $__typename}) => _res;
 }
 
 class Mutation_updatePerson_deletePersonsServices {
@@ -4139,7 +4237,8 @@ class Mutation_updatePerson_deletePersonsServices {
   });
 
   factory Mutation_updatePerson_deletePersonsServices.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$affectedRows = json['affectedRows'];
     final l$$__typename = json['__typename'];
     return Mutation_updatePerson_deletePersonsServices(
@@ -4165,10 +4264,7 @@ class Mutation_updatePerson_deletePersonsServices {
   int get hashCode {
     final l$affectedRows = affectedRows;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$affectedRows,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$affectedRows, l$$__typename]);
   }
 
   @override
@@ -4197,11 +4293,10 @@ class Mutation_updatePerson_deletePersonsServices {
 extension UtilityExtension_Mutation_updatePerson_deletePersonsServices
     on Mutation_updatePerson_deletePersonsServices {
   CopyWith_Mutation_updatePerson_deletePersonsServices<
-          Mutation_updatePerson_deletePersonsServices>
-      get copyWith => CopyWith_Mutation_updatePerson_deletePersonsServices(
-            this,
-            (i) => i,
-          );
+    Mutation_updatePerson_deletePersonsServices
+  >
+  get copyWith =>
+      CopyWith_Mutation_updatePerson_deletePersonsServices(this, (i) => i);
 }
 
 abstract class CopyWith_Mutation_updatePerson_deletePersonsServices<TRes> {
@@ -4213,10 +4308,7 @@ abstract class CopyWith_Mutation_updatePerson_deletePersonsServices<TRes> {
   factory CopyWith_Mutation_updatePerson_deletePersonsServices.stub(TRes res) =
       _CopyWithStubImpl_Mutation_updatePerson_deletePersonsServices;
 
-  TRes call({
-    int? affectedRows,
-    String? $__typename,
-  });
+  TRes call({int? affectedRows, String? $__typename});
 }
 
 class _CopyWithImpl_Mutation_updatePerson_deletePersonsServices<TRes>
@@ -4235,15 +4327,16 @@ class _CopyWithImpl_Mutation_updatePerson_deletePersonsServices<TRes>
   TRes call({
     Object? affectedRows = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Mutation_updatePerson_deletePersonsServices(
-        affectedRows: affectedRows == _undefined || affectedRows == null
-            ? _instance.affectedRows
-            : (affectedRows as int),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Mutation_updatePerson_deletePersonsServices(
+      affectedRows: affectedRows == _undefined || affectedRows == null
+          ? _instance.affectedRows
+          : (affectedRows as int),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 }
 
 class _CopyWithStubImpl_Mutation_updatePerson_deletePersonsServices<TRes>
@@ -4252,11 +4345,7 @@ class _CopyWithStubImpl_Mutation_updatePerson_deletePersonsServices<TRes>
 
   TRes _res;
 
-  call({
-    int? affectedRows,
-    String? $__typename,
-  }) =>
-      _res;
+  call({int? affectedRows, String? $__typename}) => _res;
 }
 
 class Mutation_updatePerson_insertHistoryConfessionHistoryOne {
@@ -4266,12 +4355,15 @@ class Mutation_updatePerson_insertHistoryConfessionHistoryOne {
   });
 
   factory Mutation_updatePerson_insertHistoryConfessionHistoryOne.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$person = json['person'];
     final l$$__typename = json['__typename'];
     return Mutation_updatePerson_insertHistoryConfessionHistoryOne(
-      person: Mutation_updatePerson_insertHistoryConfessionHistoryOne_person
-          .fromJson((l$person as Map<String, dynamic>)),
+      person:
+          Mutation_updatePerson_insertHistoryConfessionHistoryOne_person.fromJson(
+            (l$person as Map<String, dynamic>),
+          ),
       $__typename: (l$$__typename as String),
     );
   }
@@ -4293,10 +4385,7 @@ class Mutation_updatePerson_insertHistoryConfessionHistoryOne {
   int get hashCode {
     final l$person = person;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$person,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$person, l$$__typename]);
   }
 
   @override
@@ -4325,35 +4414,38 @@ class Mutation_updatePerson_insertHistoryConfessionHistoryOne {
 extension UtilityExtension_Mutation_updatePerson_insertHistoryConfessionHistoryOne
     on Mutation_updatePerson_insertHistoryConfessionHistoryOne {
   CopyWith_Mutation_updatePerson_insertHistoryConfessionHistoryOne<
-          Mutation_updatePerson_insertHistoryConfessionHistoryOne>
-      get copyWith =>
-          CopyWith_Mutation_updatePerson_insertHistoryConfessionHistoryOne(
-            this,
-            (i) => i,
-          );
+    Mutation_updatePerson_insertHistoryConfessionHistoryOne
+  >
+  get copyWith =>
+      CopyWith_Mutation_updatePerson_insertHistoryConfessionHistoryOne(
+        this,
+        (i) => i,
+      );
 }
 
 abstract class CopyWith_Mutation_updatePerson_insertHistoryConfessionHistoryOne<
-    TRes> {
+  TRes
+> {
   factory CopyWith_Mutation_updatePerson_insertHistoryConfessionHistoryOne(
     Mutation_updatePerson_insertHistoryConfessionHistoryOne instance,
     TRes Function(Mutation_updatePerson_insertHistoryConfessionHistoryOne) then,
   ) = _CopyWithImpl_Mutation_updatePerson_insertHistoryConfessionHistoryOne;
 
   factory CopyWith_Mutation_updatePerson_insertHistoryConfessionHistoryOne.stub(
-          TRes res) =
-      _CopyWithStubImpl_Mutation_updatePerson_insertHistoryConfessionHistoryOne;
+    TRes res,
+  ) = _CopyWithStubImpl_Mutation_updatePerson_insertHistoryConfessionHistoryOne;
 
   TRes call({
     Mutation_updatePerson_insertHistoryConfessionHistoryOne_person? person,
     String? $__typename,
   });
   CopyWith_Mutation_updatePerson_insertHistoryConfessionHistoryOne_person<TRes>
-      get person;
+  get person;
 }
 
 class _CopyWithImpl_Mutation_updatePerson_insertHistoryConfessionHistoryOne<
-        TRes>
+  TRes
+>
     implements
         CopyWith_Mutation_updatePerson_insertHistoryConfessionHistoryOne<TRes> {
   _CopyWithImpl_Mutation_updatePerson_insertHistoryConfessionHistoryOne(
@@ -4364,51 +4456,56 @@ class _CopyWithImpl_Mutation_updatePerson_insertHistoryConfessionHistoryOne<
   final Mutation_updatePerson_insertHistoryConfessionHistoryOne _instance;
 
   final TRes Function(Mutation_updatePerson_insertHistoryConfessionHistoryOne)
-      _then;
+  _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
     Object? person = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Mutation_updatePerson_insertHistoryConfessionHistoryOne(
-        person: person == _undefined || person == null
-            ? _instance.person
-            : (person
+  }) => _then(
+    Mutation_updatePerson_insertHistoryConfessionHistoryOne(
+      person: person == _undefined || person == null
+          ? _instance.person
+          : (person
                 as Mutation_updatePerson_insertHistoryConfessionHistoryOne_person),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   CopyWith_Mutation_updatePerson_insertHistoryConfessionHistoryOne_person<TRes>
-      get person {
+  get person {
     final local$person = _instance.person;
     return CopyWith_Mutation_updatePerson_insertHistoryConfessionHistoryOne_person(
-        local$person, (e) => call(person: e));
+      local$person,
+      (e) => call(person: e),
+    );
   }
 }
 
 class _CopyWithStubImpl_Mutation_updatePerson_insertHistoryConfessionHistoryOne<
-        TRes>
+  TRes
+>
     implements
         CopyWith_Mutation_updatePerson_insertHistoryConfessionHistoryOne<TRes> {
   _CopyWithStubImpl_Mutation_updatePerson_insertHistoryConfessionHistoryOne(
-      this._res);
+    this._res,
+  );
 
   TRes _res;
 
   call({
     Mutation_updatePerson_insertHistoryConfessionHistoryOne_person? person,
     String? $__typename,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Mutation_updatePerson_insertHistoryConfessionHistoryOne_person<TRes>
-      get person =>
-          CopyWith_Mutation_updatePerson_insertHistoryConfessionHistoryOne_person
-              .stub(_res);
+  get person =>
+      CopyWith_Mutation_updatePerson_insertHistoryConfessionHistoryOne_person.stub(
+        _res,
+      );
 }
 
 class Mutation_updatePerson_insertHistoryConfessionHistoryOne_person {
@@ -4419,7 +4516,8 @@ class Mutation_updatePerson_insertHistoryConfessionHistoryOne_person {
   });
 
   factory Mutation_updatePerson_insertHistoryConfessionHistoryOne_person.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$id = json['id'];
     final l$name = json['name'];
     final l$$__typename = json['__typename'];
@@ -4452,11 +4550,7 @@ class Mutation_updatePerson_insertHistoryConfessionHistoryOne_person {
     final l$id = id;
     final l$name = name;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$id,
-      l$name,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$id, l$name, l$$__typename]);
   }
 
   @override
@@ -4491,49 +4585,52 @@ class Mutation_updatePerson_insertHistoryConfessionHistoryOne_person {
 extension UtilityExtension_Mutation_updatePerson_insertHistoryConfessionHistoryOne_person
     on Mutation_updatePerson_insertHistoryConfessionHistoryOne_person {
   CopyWith_Mutation_updatePerson_insertHistoryConfessionHistoryOne_person<
-          Mutation_updatePerson_insertHistoryConfessionHistoryOne_person>
-      get copyWith =>
-          CopyWith_Mutation_updatePerson_insertHistoryConfessionHistoryOne_person(
-            this,
-            (i) => i,
-          );
+    Mutation_updatePerson_insertHistoryConfessionHistoryOne_person
+  >
+  get copyWith =>
+      CopyWith_Mutation_updatePerson_insertHistoryConfessionHistoryOne_person(
+        this,
+        (i) => i,
+      );
 }
 
 abstract class CopyWith_Mutation_updatePerson_insertHistoryConfessionHistoryOne_person<
-    TRes> {
+  TRes
+> {
   factory CopyWith_Mutation_updatePerson_insertHistoryConfessionHistoryOne_person(
     Mutation_updatePerson_insertHistoryConfessionHistoryOne_person instance,
     TRes Function(
-            Mutation_updatePerson_insertHistoryConfessionHistoryOne_person)
-        then,
+      Mutation_updatePerson_insertHistoryConfessionHistoryOne_person,
+    )
+    then,
   ) = _CopyWithImpl_Mutation_updatePerson_insertHistoryConfessionHistoryOne_person;
 
   factory CopyWith_Mutation_updatePerson_insertHistoryConfessionHistoryOne_person.stub(
-          TRes res) =
-      _CopyWithStubImpl_Mutation_updatePerson_insertHistoryConfessionHistoryOne_person;
+    TRes res,
+  ) = _CopyWithStubImpl_Mutation_updatePerson_insertHistoryConfessionHistoryOne_person;
 
-  TRes call({
-    UuidValue? id,
-    String? name,
-    String? $__typename,
-  });
+  TRes call({UuidValue? id, String? name, String? $__typename});
 }
 
 class _CopyWithImpl_Mutation_updatePerson_insertHistoryConfessionHistoryOne_person<
-        TRes>
+  TRes
+>
     implements
         CopyWith_Mutation_updatePerson_insertHistoryConfessionHistoryOne_person<
-            TRes> {
+          TRes
+        > {
   _CopyWithImpl_Mutation_updatePerson_insertHistoryConfessionHistoryOne_person(
     this._instance,
     this._then,
   );
 
   final Mutation_updatePerson_insertHistoryConfessionHistoryOne_person
-      _instance;
+  _instance;
 
   final TRes Function(
-      Mutation_updatePerson_insertHistoryConfessionHistoryOne_person) _then;
+    Mutation_updatePerson_insertHistoryConfessionHistoryOne_person,
+  )
+  _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -4541,34 +4638,33 @@ class _CopyWithImpl_Mutation_updatePerson_insertHistoryConfessionHistoryOne_pers
     Object? id = _undefined,
     Object? name = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Mutation_updatePerson_insertHistoryConfessionHistoryOne_person(
-        id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
-        name: name == _undefined || name == null
-            ? _instance.name
-            : (name as String),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Mutation_updatePerson_insertHistoryConfessionHistoryOne_person(
+      id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 }
 
 class _CopyWithStubImpl_Mutation_updatePerson_insertHistoryConfessionHistoryOne_person<
-        TRes>
+  TRes
+>
     implements
         CopyWith_Mutation_updatePerson_insertHistoryConfessionHistoryOne_person<
-            TRes> {
+          TRes
+        > {
   _CopyWithStubImpl_Mutation_updatePerson_insertHistoryConfessionHistoryOne_person(
-      this._res);
+    this._res,
+  );
 
   TRes _res;
 
-  call({
-    UuidValue? id,
-    String? name,
-    String? $__typename,
-  }) =>
-      _res;
+  call({UuidValue? id, String? name, String? $__typename}) => _res;
 }
 
 class Mutation_updatePerson_insertHistoryKodasHistoryOne {
@@ -4578,13 +4674,15 @@ class Mutation_updatePerson_insertHistoryKodasHistoryOne {
   });
 
   factory Mutation_updatePerson_insertHistoryKodasHistoryOne.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$person = json['person'];
     final l$$__typename = json['__typename'];
     return Mutation_updatePerson_insertHistoryKodasHistoryOne(
       person:
           Mutation_updatePerson_insertHistoryKodasHistoryOne_person.fromJson(
-              (l$person as Map<String, dynamic>)),
+            (l$person as Map<String, dynamic>),
+          ),
       $__typename: (l$$__typename as String),
     );
   }
@@ -4606,10 +4704,7 @@ class Mutation_updatePerson_insertHistoryKodasHistoryOne {
   int get hashCode {
     final l$person = person;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$person,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$person, l$$__typename]);
   }
 
   @override
@@ -4638,31 +4733,32 @@ class Mutation_updatePerson_insertHistoryKodasHistoryOne {
 extension UtilityExtension_Mutation_updatePerson_insertHistoryKodasHistoryOne
     on Mutation_updatePerson_insertHistoryKodasHistoryOne {
   CopyWith_Mutation_updatePerson_insertHistoryKodasHistoryOne<
-          Mutation_updatePerson_insertHistoryKodasHistoryOne>
-      get copyWith =>
-          CopyWith_Mutation_updatePerson_insertHistoryKodasHistoryOne(
-            this,
-            (i) => i,
-          );
+    Mutation_updatePerson_insertHistoryKodasHistoryOne
+  >
+  get copyWith => CopyWith_Mutation_updatePerson_insertHistoryKodasHistoryOne(
+    this,
+    (i) => i,
+  );
 }
 
 abstract class CopyWith_Mutation_updatePerson_insertHistoryKodasHistoryOne<
-    TRes> {
+  TRes
+> {
   factory CopyWith_Mutation_updatePerson_insertHistoryKodasHistoryOne(
     Mutation_updatePerson_insertHistoryKodasHistoryOne instance,
     TRes Function(Mutation_updatePerson_insertHistoryKodasHistoryOne) then,
   ) = _CopyWithImpl_Mutation_updatePerson_insertHistoryKodasHistoryOne;
 
   factory CopyWith_Mutation_updatePerson_insertHistoryKodasHistoryOne.stub(
-          TRes res) =
-      _CopyWithStubImpl_Mutation_updatePerson_insertHistoryKodasHistoryOne;
+    TRes res,
+  ) = _CopyWithStubImpl_Mutation_updatePerson_insertHistoryKodasHistoryOne;
 
   TRes call({
     Mutation_updatePerson_insertHistoryKodasHistoryOne_person? person,
     String? $__typename,
   });
   CopyWith_Mutation_updatePerson_insertHistoryKodasHistoryOne_person<TRes>
-      get person;
+  get person;
 }
 
 class _CopyWithImpl_Mutation_updatePerson_insertHistoryKodasHistoryOne<TRes>
@@ -4682,22 +4778,25 @@ class _CopyWithImpl_Mutation_updatePerson_insertHistoryKodasHistoryOne<TRes>
   TRes call({
     Object? person = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Mutation_updatePerson_insertHistoryKodasHistoryOne(
-        person: person == _undefined || person == null
-            ? _instance.person
-            : (person
+  }) => _then(
+    Mutation_updatePerson_insertHistoryKodasHistoryOne(
+      person: person == _undefined || person == null
+          ? _instance.person
+          : (person
                 as Mutation_updatePerson_insertHistoryKodasHistoryOne_person),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   CopyWith_Mutation_updatePerson_insertHistoryKodasHistoryOne_person<TRes>
-      get person {
+  get person {
     final local$person = _instance.person;
     return CopyWith_Mutation_updatePerson_insertHistoryKodasHistoryOne_person(
-        local$person, (e) => call(person: e));
+      local$person,
+      (e) => call(person: e),
+    );
   }
 }
 
@@ -4705,20 +4804,21 @@ class _CopyWithStubImpl_Mutation_updatePerson_insertHistoryKodasHistoryOne<TRes>
     implements
         CopyWith_Mutation_updatePerson_insertHistoryKodasHistoryOne<TRes> {
   _CopyWithStubImpl_Mutation_updatePerson_insertHistoryKodasHistoryOne(
-      this._res);
+    this._res,
+  );
 
   TRes _res;
 
   call({
     Mutation_updatePerson_insertHistoryKodasHistoryOne_person? person,
     String? $__typename,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Mutation_updatePerson_insertHistoryKodasHistoryOne_person<TRes>
-      get person =>
-          CopyWith_Mutation_updatePerson_insertHistoryKodasHistoryOne_person
-              .stub(_res);
+  get person =>
+      CopyWith_Mutation_updatePerson_insertHistoryKodasHistoryOne_person.stub(
+        _res,
+      );
 }
 
 class Mutation_updatePerson_insertHistoryKodasHistoryOne_person {
@@ -4729,7 +4829,8 @@ class Mutation_updatePerson_insertHistoryKodasHistoryOne_person {
   });
 
   factory Mutation_updatePerson_insertHistoryKodasHistoryOne_person.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$id = json['id'];
     final l$name = json['name'];
     final l$$__typename = json['__typename'];
@@ -4762,11 +4863,7 @@ class Mutation_updatePerson_insertHistoryKodasHistoryOne_person {
     final l$id = id;
     final l$name = name;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$id,
-      l$name,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$id, l$name, l$$__typename]);
   }
 
   @override
@@ -4800,38 +4897,38 @@ class Mutation_updatePerson_insertHistoryKodasHistoryOne_person {
 extension UtilityExtension_Mutation_updatePerson_insertHistoryKodasHistoryOne_person
     on Mutation_updatePerson_insertHistoryKodasHistoryOne_person {
   CopyWith_Mutation_updatePerson_insertHistoryKodasHistoryOne_person<
-          Mutation_updatePerson_insertHistoryKodasHistoryOne_person>
-      get copyWith =>
-          CopyWith_Mutation_updatePerson_insertHistoryKodasHistoryOne_person(
-            this,
-            (i) => i,
-          );
+    Mutation_updatePerson_insertHistoryKodasHistoryOne_person
+  >
+  get copyWith =>
+      CopyWith_Mutation_updatePerson_insertHistoryKodasHistoryOne_person(
+        this,
+        (i) => i,
+      );
 }
 
 abstract class CopyWith_Mutation_updatePerson_insertHistoryKodasHistoryOne_person<
-    TRes> {
+  TRes
+> {
   factory CopyWith_Mutation_updatePerson_insertHistoryKodasHistoryOne_person(
     Mutation_updatePerson_insertHistoryKodasHistoryOne_person instance,
     TRes Function(Mutation_updatePerson_insertHistoryKodasHistoryOne_person)
-        then,
+    then,
   ) = _CopyWithImpl_Mutation_updatePerson_insertHistoryKodasHistoryOne_person;
 
   factory CopyWith_Mutation_updatePerson_insertHistoryKodasHistoryOne_person.stub(
-          TRes res) =
-      _CopyWithStubImpl_Mutation_updatePerson_insertHistoryKodasHistoryOne_person;
+    TRes res,
+  ) = _CopyWithStubImpl_Mutation_updatePerson_insertHistoryKodasHistoryOne_person;
 
-  TRes call({
-    UuidValue? id,
-    String? name,
-    String? $__typename,
-  });
+  TRes call({UuidValue? id, String? name, String? $__typename});
 }
 
 class _CopyWithImpl_Mutation_updatePerson_insertHistoryKodasHistoryOne_person<
-        TRes>
+  TRes
+>
     implements
         CopyWith_Mutation_updatePerson_insertHistoryKodasHistoryOne_person<
-            TRes> {
+          TRes
+        > {
   _CopyWithImpl_Mutation_updatePerson_insertHistoryKodasHistoryOne_person(
     this._instance,
     this._then,
@@ -4840,7 +4937,7 @@ class _CopyWithImpl_Mutation_updatePerson_insertHistoryKodasHistoryOne_person<
   final Mutation_updatePerson_insertHistoryKodasHistoryOne_person _instance;
 
   final TRes Function(Mutation_updatePerson_insertHistoryKodasHistoryOne_person)
-      _then;
+  _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -4848,34 +4945,33 @@ class _CopyWithImpl_Mutation_updatePerson_insertHistoryKodasHistoryOne_person<
     Object? id = _undefined,
     Object? name = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Mutation_updatePerson_insertHistoryKodasHistoryOne_person(
-        id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
-        name: name == _undefined || name == null
-            ? _instance.name
-            : (name as String),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Mutation_updatePerson_insertHistoryKodasHistoryOne_person(
+      id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 }
 
 class _CopyWithStubImpl_Mutation_updatePerson_insertHistoryKodasHistoryOne_person<
-        TRes>
+  TRes
+>
     implements
         CopyWith_Mutation_updatePerson_insertHistoryKodasHistoryOne_person<
-            TRes> {
+          TRes
+        > {
   _CopyWithStubImpl_Mutation_updatePerson_insertHistoryKodasHistoryOne_person(
-      this._res);
+    this._res,
+  );
 
   TRes _res;
 
-  call({
-    UuidValue? id,
-    String? name,
-    String? $__typename,
-  }) =>
-      _res;
+  call({UuidValue? id, String? name, String? $__typename}) => _res;
 }
 
 class Mutation_updatePerson_insertHistoryCallHistoryOne {
@@ -4885,12 +4981,14 @@ class Mutation_updatePerson_insertHistoryCallHistoryOne {
   });
 
   factory Mutation_updatePerson_insertHistoryCallHistoryOne.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$person = json['person'];
     final l$$__typename = json['__typename'];
     return Mutation_updatePerson_insertHistoryCallHistoryOne(
       person: Mutation_updatePerson_insertHistoryCallHistoryOne_person.fromJson(
-          (l$person as Map<String, dynamic>)),
+        (l$person as Map<String, dynamic>),
+      ),
       $__typename: (l$$__typename as String),
     );
   }
@@ -4912,10 +5010,7 @@ class Mutation_updatePerson_insertHistoryCallHistoryOne {
   int get hashCode {
     final l$person = person;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$person,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$person, l$$__typename]);
   }
 
   @override
@@ -4944,31 +5039,32 @@ class Mutation_updatePerson_insertHistoryCallHistoryOne {
 extension UtilityExtension_Mutation_updatePerson_insertHistoryCallHistoryOne
     on Mutation_updatePerson_insertHistoryCallHistoryOne {
   CopyWith_Mutation_updatePerson_insertHistoryCallHistoryOne<
-          Mutation_updatePerson_insertHistoryCallHistoryOne>
-      get copyWith =>
-          CopyWith_Mutation_updatePerson_insertHistoryCallHistoryOne(
-            this,
-            (i) => i,
-          );
+    Mutation_updatePerson_insertHistoryCallHistoryOne
+  >
+  get copyWith => CopyWith_Mutation_updatePerson_insertHistoryCallHistoryOne(
+    this,
+    (i) => i,
+  );
 }
 
 abstract class CopyWith_Mutation_updatePerson_insertHistoryCallHistoryOne<
-    TRes> {
+  TRes
+> {
   factory CopyWith_Mutation_updatePerson_insertHistoryCallHistoryOne(
     Mutation_updatePerson_insertHistoryCallHistoryOne instance,
     TRes Function(Mutation_updatePerson_insertHistoryCallHistoryOne) then,
   ) = _CopyWithImpl_Mutation_updatePerson_insertHistoryCallHistoryOne;
 
   factory CopyWith_Mutation_updatePerson_insertHistoryCallHistoryOne.stub(
-          TRes res) =
-      _CopyWithStubImpl_Mutation_updatePerson_insertHistoryCallHistoryOne;
+    TRes res,
+  ) = _CopyWithStubImpl_Mutation_updatePerson_insertHistoryCallHistoryOne;
 
   TRes call({
     Mutation_updatePerson_insertHistoryCallHistoryOne_person? person,
     String? $__typename,
   });
   CopyWith_Mutation_updatePerson_insertHistoryCallHistoryOne_person<TRes>
-      get person;
+  get person;
 }
 
 class _CopyWithImpl_Mutation_updatePerson_insertHistoryCallHistoryOne<TRes>
@@ -4988,22 +5084,25 @@ class _CopyWithImpl_Mutation_updatePerson_insertHistoryCallHistoryOne<TRes>
   TRes call({
     Object? person = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Mutation_updatePerson_insertHistoryCallHistoryOne(
-        person: person == _undefined || person == null
-            ? _instance.person
-            : (person
+  }) => _then(
+    Mutation_updatePerson_insertHistoryCallHistoryOne(
+      person: person == _undefined || person == null
+          ? _instance.person
+          : (person
                 as Mutation_updatePerson_insertHistoryCallHistoryOne_person),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   CopyWith_Mutation_updatePerson_insertHistoryCallHistoryOne_person<TRes>
-      get person {
+  get person {
     final local$person = _instance.person;
     return CopyWith_Mutation_updatePerson_insertHistoryCallHistoryOne_person(
-        local$person, (e) => call(person: e));
+      local$person,
+      (e) => call(person: e),
+    );
   }
 }
 
@@ -5011,20 +5110,21 @@ class _CopyWithStubImpl_Mutation_updatePerson_insertHistoryCallHistoryOne<TRes>
     implements
         CopyWith_Mutation_updatePerson_insertHistoryCallHistoryOne<TRes> {
   _CopyWithStubImpl_Mutation_updatePerson_insertHistoryCallHistoryOne(
-      this._res);
+    this._res,
+  );
 
   TRes _res;
 
   call({
     Mutation_updatePerson_insertHistoryCallHistoryOne_person? person,
     String? $__typename,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Mutation_updatePerson_insertHistoryCallHistoryOne_person<TRes>
-      get person =>
-          CopyWith_Mutation_updatePerson_insertHistoryCallHistoryOne_person
-              .stub(_res);
+  get person =>
+      CopyWith_Mutation_updatePerson_insertHistoryCallHistoryOne_person.stub(
+        _res,
+      );
 }
 
 class Mutation_updatePerson_insertHistoryCallHistoryOne_person {
@@ -5035,7 +5135,8 @@ class Mutation_updatePerson_insertHistoryCallHistoryOne_person {
   });
 
   factory Mutation_updatePerson_insertHistoryCallHistoryOne_person.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$id = json['id'];
     final l$name = json['name'];
     final l$$__typename = json['__typename'];
@@ -5068,11 +5169,7 @@ class Mutation_updatePerson_insertHistoryCallHistoryOne_person {
     final l$id = id;
     final l$name = name;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$id,
-      l$name,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$id, l$name, l$$__typename]);
   }
 
   @override
@@ -5106,38 +5203,38 @@ class Mutation_updatePerson_insertHistoryCallHistoryOne_person {
 extension UtilityExtension_Mutation_updatePerson_insertHistoryCallHistoryOne_person
     on Mutation_updatePerson_insertHistoryCallHistoryOne_person {
   CopyWith_Mutation_updatePerson_insertHistoryCallHistoryOne_person<
-          Mutation_updatePerson_insertHistoryCallHistoryOne_person>
-      get copyWith =>
-          CopyWith_Mutation_updatePerson_insertHistoryCallHistoryOne_person(
-            this,
-            (i) => i,
-          );
+    Mutation_updatePerson_insertHistoryCallHistoryOne_person
+  >
+  get copyWith =>
+      CopyWith_Mutation_updatePerson_insertHistoryCallHistoryOne_person(
+        this,
+        (i) => i,
+      );
 }
 
 abstract class CopyWith_Mutation_updatePerson_insertHistoryCallHistoryOne_person<
-    TRes> {
+  TRes
+> {
   factory CopyWith_Mutation_updatePerson_insertHistoryCallHistoryOne_person(
     Mutation_updatePerson_insertHistoryCallHistoryOne_person instance,
     TRes Function(Mutation_updatePerson_insertHistoryCallHistoryOne_person)
-        then,
+    then,
   ) = _CopyWithImpl_Mutation_updatePerson_insertHistoryCallHistoryOne_person;
 
   factory CopyWith_Mutation_updatePerson_insertHistoryCallHistoryOne_person.stub(
-          TRes res) =
-      _CopyWithStubImpl_Mutation_updatePerson_insertHistoryCallHistoryOne_person;
+    TRes res,
+  ) = _CopyWithStubImpl_Mutation_updatePerson_insertHistoryCallHistoryOne_person;
 
-  TRes call({
-    UuidValue? id,
-    String? name,
-    String? $__typename,
-  });
+  TRes call({UuidValue? id, String? name, String? $__typename});
 }
 
 class _CopyWithImpl_Mutation_updatePerson_insertHistoryCallHistoryOne_person<
-        TRes>
+  TRes
+>
     implements
         CopyWith_Mutation_updatePerson_insertHistoryCallHistoryOne_person<
-            TRes> {
+          TRes
+        > {
   _CopyWithImpl_Mutation_updatePerson_insertHistoryCallHistoryOne_person(
     this._instance,
     this._then,
@@ -5146,7 +5243,7 @@ class _CopyWithImpl_Mutation_updatePerson_insertHistoryCallHistoryOne_person<
   final Mutation_updatePerson_insertHistoryCallHistoryOne_person _instance;
 
   final TRes Function(Mutation_updatePerson_insertHistoryCallHistoryOne_person)
-      _then;
+  _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -5154,34 +5251,33 @@ class _CopyWithImpl_Mutation_updatePerson_insertHistoryCallHistoryOne_person<
     Object? id = _undefined,
     Object? name = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Mutation_updatePerson_insertHistoryCallHistoryOne_person(
-        id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
-        name: name == _undefined || name == null
-            ? _instance.name
-            : (name as String),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Mutation_updatePerson_insertHistoryCallHistoryOne_person(
+      id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 }
 
 class _CopyWithStubImpl_Mutation_updatePerson_insertHistoryCallHistoryOne_person<
-        TRes>
+  TRes
+>
     implements
         CopyWith_Mutation_updatePerson_insertHistoryCallHistoryOne_person<
-            TRes> {
+          TRes
+        > {
   _CopyWithStubImpl_Mutation_updatePerson_insertHistoryCallHistoryOne_person(
-      this._res);
+    this._res,
+  );
 
   TRes _res;
 
-  call({
-    UuidValue? id,
-    String? name,
-    String? $__typename,
-  }) =>
-      _res;
+  call({UuidValue? id, String? name, String? $__typename}) => _res;
 }
 
 class Mutation_updatePerson_insertHistoryVisitHistoryOne {
@@ -5191,7 +5287,8 @@ class Mutation_updatePerson_insertHistoryVisitHistoryOne {
   });
 
   factory Mutation_updatePerson_insertHistoryVisitHistoryOne.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$visitId = json['visitId'];
     final l$$__typename = json['__typename'];
     return Mutation_updatePerson_insertHistoryVisitHistoryOne(
@@ -5217,10 +5314,7 @@ class Mutation_updatePerson_insertHistoryVisitHistoryOne {
   int get hashCode {
     final l$visitId = visitId;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$visitId,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$visitId, l$$__typename]);
   }
 
   @override
@@ -5249,29 +5343,27 @@ class Mutation_updatePerson_insertHistoryVisitHistoryOne {
 extension UtilityExtension_Mutation_updatePerson_insertHistoryVisitHistoryOne
     on Mutation_updatePerson_insertHistoryVisitHistoryOne {
   CopyWith_Mutation_updatePerson_insertHistoryVisitHistoryOne<
-          Mutation_updatePerson_insertHistoryVisitHistoryOne>
-      get copyWith =>
-          CopyWith_Mutation_updatePerson_insertHistoryVisitHistoryOne(
-            this,
-            (i) => i,
-          );
+    Mutation_updatePerson_insertHistoryVisitHistoryOne
+  >
+  get copyWith => CopyWith_Mutation_updatePerson_insertHistoryVisitHistoryOne(
+    this,
+    (i) => i,
+  );
 }
 
 abstract class CopyWith_Mutation_updatePerson_insertHistoryVisitHistoryOne<
-    TRes> {
+  TRes
+> {
   factory CopyWith_Mutation_updatePerson_insertHistoryVisitHistoryOne(
     Mutation_updatePerson_insertHistoryVisitHistoryOne instance,
     TRes Function(Mutation_updatePerson_insertHistoryVisitHistoryOne) then,
   ) = _CopyWithImpl_Mutation_updatePerson_insertHistoryVisitHistoryOne;
 
   factory CopyWith_Mutation_updatePerson_insertHistoryVisitHistoryOne.stub(
-          TRes res) =
-      _CopyWithStubImpl_Mutation_updatePerson_insertHistoryVisitHistoryOne;
+    TRes res,
+  ) = _CopyWithStubImpl_Mutation_updatePerson_insertHistoryVisitHistoryOne;
 
-  TRes call({
-    UuidValue? visitId,
-    String? $__typename,
-  });
+  TRes call({UuidValue? visitId, String? $__typename});
 }
 
 class _CopyWithImpl_Mutation_updatePerson_insertHistoryVisitHistoryOne<TRes>
@@ -5288,41 +5380,35 @@ class _CopyWithImpl_Mutation_updatePerson_insertHistoryVisitHistoryOne<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? visitId = _undefined,
-    Object? $__typename = _undefined,
-  }) =>
-      _then(Mutation_updatePerson_insertHistoryVisitHistoryOne(
-        visitId: visitId == _undefined || visitId == null
-            ? _instance.visitId
-            : (visitId as UuidValue),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  TRes call({Object? visitId = _undefined, Object? $__typename = _undefined}) =>
+      _then(
+        Mutation_updatePerson_insertHistoryVisitHistoryOne(
+          visitId: visitId == _undefined || visitId == null
+              ? _instance.visitId
+              : (visitId as UuidValue),
+          $__typename: $__typename == _undefined || $__typename == null
+              ? _instance.$__typename
+              : ($__typename as String),
+        ),
+      );
 }
 
 class _CopyWithStubImpl_Mutation_updatePerson_insertHistoryVisitHistoryOne<TRes>
     implements
         CopyWith_Mutation_updatePerson_insertHistoryVisitHistoryOne<TRes> {
   _CopyWithStubImpl_Mutation_updatePerson_insertHistoryVisitHistoryOne(
-      this._res);
+    this._res,
+  );
 
   TRes _res;
 
-  call({
-    UuidValue? visitId,
-    String? $__typename,
-  }) =>
-      _res;
+  call({UuidValue? visitId, String? $__typename}) => _res;
 }
 
 class Variables_Mutation_insertPerson {
-  factory Variables_Mutation_insertPerson(
-          {required Input_PersonsInsertInput newPerson}) =>
-      Variables_Mutation_insertPerson._({
-        r'newPerson': newPerson,
-      });
+  factory Variables_Mutation_insertPerson({
+    required Input_PersonsInsertInput newPerson,
+  }) => Variables_Mutation_insertPerson._({r'newPerson': newPerson});
 
   Variables_Mutation_insertPerson._(this._$data);
 
@@ -5330,7 +5416,8 @@ class Variables_Mutation_insertPerson {
     final result$data = <String, dynamic>{};
     final l$newPerson = data['newPerson'];
     result$data['newPerson'] = Input_PersonsInsertInput.fromJson(
-        (l$newPerson as Map<String, dynamic>));
+      (l$newPerson as Map<String, dynamic>),
+    );
     return Variables_Mutation_insertPerson._(result$data);
   }
 
@@ -5347,10 +5434,7 @@ class Variables_Mutation_insertPerson {
   }
 
   CopyWith_Variables_Mutation_insertPerson<Variables_Mutation_insertPerson>
-      get copyWith => CopyWith_Variables_Mutation_insertPerson(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Variables_Mutation_insertPerson(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -5390,10 +5474,7 @@ abstract class CopyWith_Variables_Mutation_insertPerson<TRes> {
 
 class _CopyWithImpl_Variables_Mutation_insertPerson<TRes>
     implements CopyWith_Variables_Mutation_insertPerson<TRes> {
-  _CopyWithImpl_Variables_Mutation_insertPerson(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Variables_Mutation_insertPerson(this._instance, this._then);
 
   final Variables_Mutation_insertPerson _instance;
 
@@ -5401,12 +5482,13 @@ class _CopyWithImpl_Variables_Mutation_insertPerson<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? newPerson = _undefined}) =>
-      _then(Variables_Mutation_insertPerson._({
-        ..._instance._$data,
-        if (newPerson != _undefined && newPerson != null)
-          'newPerson': (newPerson as Input_PersonsInsertInput),
-      }));
+  TRes call({Object? newPerson = _undefined}) => _then(
+    Variables_Mutation_insertPerson._({
+      ..._instance._$data,
+      if (newPerson != _undefined && newPerson != null)
+        'newPerson': (newPerson as Input_PersonsInsertInput),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Variables_Mutation_insertPerson<TRes>
@@ -5431,7 +5513,8 @@ class Mutation_insertPerson {
       insertPersonsOne: l$insertPersonsOne == null
           ? null
           : Fragment_Person.fromJson(
-              (l$insertPersonsOne as Map<String, dynamic>)),
+              (l$insertPersonsOne as Map<String, dynamic>),
+            ),
       $__typename: (l$$__typename as String),
     );
   }
@@ -5453,10 +5536,7 @@ class Mutation_insertPerson {
   int get hashCode {
     final l$insertPersonsOne = insertPersonsOne;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$insertPersonsOne,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$insertPersonsOne, l$$__typename]);
   }
 
   @override
@@ -5483,10 +5563,7 @@ class Mutation_insertPerson {
 
 extension UtilityExtension_Mutation_insertPerson on Mutation_insertPerson {
   CopyWith_Mutation_insertPerson<Mutation_insertPerson> get copyWith =>
-      CopyWith_Mutation_insertPerson(
-        this,
-        (i) => i,
-      );
+      CopyWith_Mutation_insertPerson(this, (i) => i);
 }
 
 abstract class CopyWith_Mutation_insertPerson<TRes> {
@@ -5498,19 +5575,13 @@ abstract class CopyWith_Mutation_insertPerson<TRes> {
   factory CopyWith_Mutation_insertPerson.stub(TRes res) =
       _CopyWithStubImpl_Mutation_insertPerson;
 
-  TRes call({
-    Fragment_Person? insertPersonsOne,
-    String? $__typename,
-  });
+  TRes call({Fragment_Person? insertPersonsOne, String? $__typename});
   CopyWith_Fragment_Person<TRes> get insertPersonsOne;
 }
 
 class _CopyWithImpl_Mutation_insertPerson<TRes>
     implements CopyWith_Mutation_insertPerson<TRes> {
-  _CopyWithImpl_Mutation_insertPerson(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Mutation_insertPerson(this._instance, this._then);
 
   final Mutation_insertPerson _instance;
 
@@ -5521,22 +5592,25 @@ class _CopyWithImpl_Mutation_insertPerson<TRes>
   TRes call({
     Object? insertPersonsOne = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Mutation_insertPerson(
-        insertPersonsOne: insertPersonsOne == _undefined
-            ? _instance.insertPersonsOne
-            : (insertPersonsOne as Fragment_Person?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Mutation_insertPerson(
+      insertPersonsOne: insertPersonsOne == _undefined
+          ? _instance.insertPersonsOne
+          : (insertPersonsOne as Fragment_Person?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   CopyWith_Fragment_Person<TRes> get insertPersonsOne {
     final local$insertPersonsOne = _instance.insertPersonsOne;
     return local$insertPersonsOne == null
         ? CopyWith_Fragment_Person.stub(_then(_instance))
         : CopyWith_Fragment_Person(
-            local$insertPersonsOne, (e) => call(insertPersonsOne: e));
+            local$insertPersonsOne,
+            (e) => call(insertPersonsOne: e),
+          );
   }
 }
 
@@ -5546,47 +5620,56 @@ class _CopyWithStubImpl_Mutation_insertPerson<TRes>
 
   TRes _res;
 
-  call({
-    Fragment_Person? insertPersonsOne,
-    String? $__typename,
-  }) =>
-      _res;
+  call({Fragment_Person? insertPersonsOne, String? $__typename}) => _res;
 
   CopyWith_Fragment_Person<TRes> get insertPersonsOne =>
       CopyWith_Fragment_Person.stub(_res);
 }
 
-const documentNodeMutationinsertPerson = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.mutation,
-    name: NameNode(value: 'insertPerson'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'newPerson')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'PersonsInsertInput'),
-          isNonNull: true,
+const documentNodeMutationinsertPerson = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.mutation,
+      name: NameNode(value: 'insertPerson'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'newPerson')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'PersonsInsertInput'),
+            isNonNull: true,
+          ),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      )
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'insertPersonsOne'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'object'),
-            value: VariableNode(name: NameNode(value: 'newPerson')),
-          )
-        ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FragmentSpreadNode(
-            name: NameNode(value: 'Person'),
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
+          FieldNode(
+            name: NameNode(value: 'insertPersonsOne'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'object'),
+                value: VariableNode(name: NameNode(value: 'newPerson')),
+              ),
+            ],
             directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FragmentSpreadNode(
+                  name: NameNode(value: 'Person'),
+                  directives: [],
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
           ),
           FieldNode(
             name: NameNode(value: '__typename'),
@@ -5595,37 +5678,30 @@ const documentNodeMutationinsertPerson = DocumentNode(definitions: [
             directives: [],
             selectionSet: null,
           ),
-        ]),
+        ],
       ),
-      FieldNode(
-        name: NameNode(value: '__typename'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-    ]),
-  ),
-  fragmentDefinitionPerson,
-  fragmentDefinitionPersonNoPhoto,
-]);
+    ),
+    fragmentDefinitionPerson,
+    fragmentDefinitionPersonNoPhoto,
+  ],
+);
 
 class Variables_Mutation_updatePersonSpiritData {
   factory Variables_Mutation_updatePersonSpiritData({
     required UuidValue personId,
     required DateTime lastConfession,
     required DateTime lastKodas,
-  }) =>
-      Variables_Mutation_updatePersonSpiritData._({
-        r'personId': personId,
-        r'lastConfession': lastConfession,
-        r'lastKodas': lastKodas,
-      });
+  }) => Variables_Mutation_updatePersonSpiritData._({
+    r'personId': personId,
+    r'lastConfession': lastConfession,
+    r'lastKodas': lastKodas,
+  });
 
   Variables_Mutation_updatePersonSpiritData._(this._$data);
 
   factory Variables_Mutation_updatePersonSpiritData.fromJson(
-      Map<String, dynamic> data) {
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
     final l$personId = data['personId'];
     result$data['personId'] = stringToUuid(l$personId);
@@ -5656,11 +5732,10 @@ class Variables_Mutation_updatePersonSpiritData {
   }
 
   CopyWith_Variables_Mutation_updatePersonSpiritData<
-          Variables_Mutation_updatePersonSpiritData>
-      get copyWith => CopyWith_Variables_Mutation_updatePersonSpiritData(
-            this,
-            (i) => i,
-          );
+    Variables_Mutation_updatePersonSpiritData
+  >
+  get copyWith =>
+      CopyWith_Variables_Mutation_updatePersonSpiritData(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -5694,11 +5769,7 @@ class Variables_Mutation_updatePersonSpiritData {
     final l$personId = personId;
     final l$lastConfession = lastConfession;
     final l$lastKodas = lastKodas;
-    return Object.hashAll([
-      l$personId,
-      l$lastConfession,
-      l$lastKodas,
-    ]);
+    return Object.hashAll([l$personId, l$lastConfession, l$lastKodas]);
   }
 }
 
@@ -5735,16 +5806,17 @@ class _CopyWithImpl_Variables_Mutation_updatePersonSpiritData<TRes>
     Object? personId = _undefined,
     Object? lastConfession = _undefined,
     Object? lastKodas = _undefined,
-  }) =>
-      _then(Variables_Mutation_updatePersonSpiritData._({
-        ..._instance._$data,
-        if (personId != _undefined && personId != null)
-          'personId': (personId as UuidValue),
-        if (lastConfession != _undefined && lastConfession != null)
-          'lastConfession': (lastConfession as DateTime),
-        if (lastKodas != _undefined && lastKodas != null)
-          'lastKodas': (lastKodas as DateTime),
-      }));
+  }) => _then(
+    Variables_Mutation_updatePersonSpiritData._({
+      ..._instance._$data,
+      if (personId != _undefined && personId != null)
+        'personId': (personId as UuidValue),
+      if (lastConfession != _undefined && lastConfession != null)
+        'lastConfession': (lastConfession as DateTime),
+      if (lastKodas != _undefined && lastKodas != null)
+        'lastKodas': (lastKodas as DateTime),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Variables_Mutation_updatePersonSpiritData<TRes>
@@ -5753,11 +5825,7 @@ class _CopyWithStubImpl_Variables_Mutation_updatePersonSpiritData<TRes>
 
   TRes _res;
 
-  call({
-    UuidValue? personId,
-    DateTime? lastConfession,
-    DateTime? lastKodas,
-  }) =>
+  call({UuidValue? personId, DateTime? lastConfession, DateTime? lastKodas}) =>
       _res;
 }
 
@@ -5781,22 +5849,24 @@ class Mutation_updatePersonSpiritData {
       $_c: l$$_c == null
           ? null
           : Mutation_updatePersonSpiritData__c.fromJson(
-              (l$$_c as Map<String, dynamic>)),
+              (l$$_c as Map<String, dynamic>),
+            ),
       $_k: l$$_k == null
           ? null
           : Mutation_updatePersonSpiritData__k.fromJson(
-              (l$$_k as Map<String, dynamic>)),
-      insertHistoryConfessionHistoryOne: l$insertHistoryConfessionHistoryOne ==
-              null
+              (l$$_k as Map<String, dynamic>),
+            ),
+      insertHistoryConfessionHistoryOne:
+          l$insertHistoryConfessionHistoryOne == null
           ? null
-          : Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne
-              .fromJson((l$insertHistoryConfessionHistoryOne
-                  as Map<String, dynamic>)),
+          : Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne.fromJson(
+              (l$insertHistoryConfessionHistoryOne as Map<String, dynamic>),
+            ),
       insertHistoryKodasHistoryOne: l$insertHistoryKodasHistoryOne == null
           ? null
-          : Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne
-              .fromJson(
-                  (l$insertHistoryKodasHistoryOne as Map<String, dynamic>)),
+          : Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne.fromJson(
+              (l$insertHistoryKodasHistoryOne as Map<String, dynamic>),
+            ),
       $__typename: (l$$__typename as String),
     );
   }
@@ -5806,10 +5876,10 @@ class Mutation_updatePersonSpiritData {
   final Mutation_updatePersonSpiritData__k? $_k;
 
   final Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne?
-      insertHistoryConfessionHistoryOne;
+  insertHistoryConfessionHistoryOne;
 
   final Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne?
-      insertHistoryKodasHistoryOne;
+  insertHistoryKodasHistoryOne;
 
   final String $__typename;
 
@@ -5824,8 +5894,8 @@ class Mutation_updatePersonSpiritData {
     _resultData['insertHistoryConfessionHistoryOne'] =
         l$insertHistoryConfessionHistoryOne?.toJson();
     final l$insertHistoryKodasHistoryOne = insertHistoryKodasHistoryOne;
-    _resultData['insertHistoryKodasHistoryOne'] =
-        l$insertHistoryKodasHistoryOne?.toJson();
+    _resultData['insertHistoryKodasHistoryOne'] = l$insertHistoryKodasHistoryOne
+        ?.toJson();
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -5893,10 +5963,7 @@ class Mutation_updatePersonSpiritData {
 extension UtilityExtension_Mutation_updatePersonSpiritData
     on Mutation_updatePersonSpiritData {
   CopyWith_Mutation_updatePersonSpiritData<Mutation_updatePersonSpiritData>
-      get copyWith => CopyWith_Mutation_updatePersonSpiritData(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Mutation_updatePersonSpiritData(this, (i) => i);
 }
 
 abstract class CopyWith_Mutation_updatePersonSpiritData<TRes> {
@@ -5912,25 +5979,24 @@ abstract class CopyWith_Mutation_updatePersonSpiritData<TRes> {
     Mutation_updatePersonSpiritData__c? $_c,
     Mutation_updatePersonSpiritData__k? $_k,
     Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne?
-        insertHistoryConfessionHistoryOne,
+    insertHistoryConfessionHistoryOne,
     Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne?
-        insertHistoryKodasHistoryOne,
+    insertHistoryKodasHistoryOne,
     String? $__typename,
   });
   CopyWith_Mutation_updatePersonSpiritData__c<TRes> get $_c;
   CopyWith_Mutation_updatePersonSpiritData__k<TRes> get $_k;
   CopyWith_Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne<
-      TRes> get insertHistoryConfessionHistoryOne;
+    TRes
+  >
+  get insertHistoryConfessionHistoryOne;
   CopyWith_Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne<TRes>
-      get insertHistoryKodasHistoryOne;
+  get insertHistoryKodasHistoryOne;
 }
 
 class _CopyWithImpl_Mutation_updatePersonSpiritData<TRes>
     implements CopyWith_Mutation_updatePersonSpiritData<TRes> {
-  _CopyWithImpl_Mutation_updatePersonSpiritData(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Mutation_updatePersonSpiritData(this._instance, this._then);
 
   final Mutation_updatePersonSpiritData _instance;
 
@@ -5944,34 +6010,37 @@ class _CopyWithImpl_Mutation_updatePersonSpiritData<TRes>
     Object? insertHistoryConfessionHistoryOne = _undefined,
     Object? insertHistoryKodasHistoryOne = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Mutation_updatePersonSpiritData(
-        $_c: $_c == _undefined
-            ? _instance.$_c
-            : ($_c as Mutation_updatePersonSpiritData__c?),
-        $_k: $_k == _undefined
-            ? _instance.$_k
-            : ($_k as Mutation_updatePersonSpiritData__k?),
-        insertHistoryConfessionHistoryOne: insertHistoryConfessionHistoryOne ==
-                _undefined
-            ? _instance.insertHistoryConfessionHistoryOne
-            : (insertHistoryConfessionHistoryOne
+  }) => _then(
+    Mutation_updatePersonSpiritData(
+      $_c: $_c == _undefined
+          ? _instance.$_c
+          : ($_c as Mutation_updatePersonSpiritData__c?),
+      $_k: $_k == _undefined
+          ? _instance.$_k
+          : ($_k as Mutation_updatePersonSpiritData__k?),
+      insertHistoryConfessionHistoryOne:
+          insertHistoryConfessionHistoryOne == _undefined
+          ? _instance.insertHistoryConfessionHistoryOne
+          : (insertHistoryConfessionHistoryOne
                 as Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne?),
-        insertHistoryKodasHistoryOne: insertHistoryKodasHistoryOne == _undefined
-            ? _instance.insertHistoryKodasHistoryOne
-            : (insertHistoryKodasHistoryOne
+      insertHistoryKodasHistoryOne: insertHistoryKodasHistoryOne == _undefined
+          ? _instance.insertHistoryKodasHistoryOne
+          : (insertHistoryKodasHistoryOne
                 as Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   CopyWith_Mutation_updatePersonSpiritData__c<TRes> get $_c {
     final local$$_c = _instance.$_c;
     return local$$_c == null
         ? CopyWith_Mutation_updatePersonSpiritData__c.stub(_then(_instance))
         : CopyWith_Mutation_updatePersonSpiritData__c(
-            local$$_c, (e) => call($_c: e));
+            local$$_c,
+            (e) => call($_c: e),
+          );
   }
 
   CopyWith_Mutation_updatePersonSpiritData__k<TRes> get $_k {
@@ -5979,31 +6048,39 @@ class _CopyWithImpl_Mutation_updatePersonSpiritData<TRes>
     return local$$_k == null
         ? CopyWith_Mutation_updatePersonSpiritData__k.stub(_then(_instance))
         : CopyWith_Mutation_updatePersonSpiritData__k(
-            local$$_k, (e) => call($_k: e));
+            local$$_k,
+            (e) => call($_k: e),
+          );
   }
 
   CopyWith_Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne<
-      TRes> get insertHistoryConfessionHistoryOne {
+    TRes
+  >
+  get insertHistoryConfessionHistoryOne {
     final local$insertHistoryConfessionHistoryOne =
         _instance.insertHistoryConfessionHistoryOne;
     return local$insertHistoryConfessionHistoryOne == null
-        ? CopyWith_Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne
-            .stub(_then(_instance))
+        ? CopyWith_Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne.stub(
+            _then(_instance),
+          )
         : CopyWith_Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne(
             local$insertHistoryConfessionHistoryOne,
-            (e) => call(insertHistoryConfessionHistoryOne: e));
+            (e) => call(insertHistoryConfessionHistoryOne: e),
+          );
   }
 
   CopyWith_Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne<TRes>
-      get insertHistoryKodasHistoryOne {
+  get insertHistoryKodasHistoryOne {
     final local$insertHistoryKodasHistoryOne =
         _instance.insertHistoryKodasHistoryOne;
     return local$insertHistoryKodasHistoryOne == null
-        ? CopyWith_Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne
-            .stub(_then(_instance))
+        ? CopyWith_Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne.stub(
+            _then(_instance),
+          )
         : CopyWith_Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne(
             local$insertHistoryKodasHistoryOne,
-            (e) => call(insertHistoryKodasHistoryOne: e));
+            (e) => call(insertHistoryKodasHistoryOne: e),
+          );
   }
 }
 
@@ -6017,12 +6094,11 @@ class _CopyWithStubImpl_Mutation_updatePersonSpiritData<TRes>
     Mutation_updatePersonSpiritData__c? $_c,
     Mutation_updatePersonSpiritData__k? $_k,
     Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne?
-        insertHistoryConfessionHistoryOne,
+    insertHistoryConfessionHistoryOne,
     Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne?
-        insertHistoryKodasHistoryOne,
+    insertHistoryKodasHistoryOne,
     String? $__typename,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Mutation_updatePersonSpiritData__c<TRes> get $_c =>
       CopyWith_Mutation_updatePersonSpiritData__c.stub(_res);
@@ -6031,88 +6107,295 @@ class _CopyWithStubImpl_Mutation_updatePersonSpiritData<TRes>
       CopyWith_Mutation_updatePersonSpiritData__k.stub(_res);
 
   CopyWith_Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne<
-          TRes>
-      get insertHistoryConfessionHistoryOne =>
-          CopyWith_Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne
-              .stub(_res);
+    TRes
+  >
+  get insertHistoryConfessionHistoryOne =>
+      CopyWith_Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne.stub(
+        _res,
+      );
 
   CopyWith_Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne<TRes>
-      get insertHistoryKodasHistoryOne =>
-          CopyWith_Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne
-              .stub(_res);
+  get insertHistoryKodasHistoryOne =>
+      CopyWith_Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne.stub(
+        _res,
+      );
 }
 
-const documentNodeMutationupdatePersonSpiritData = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.mutation,
-    name: NameNode(value: 'updatePersonSpiritData'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'personId')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'uuid'),
-          isNonNull: true,
+const documentNodeMutationupdatePersonSpiritData = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.mutation,
+      name: NameNode(value: 'updatePersonSpiritData'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'personId')),
+          type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'lastConfession')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'date'),
-          isNonNull: true,
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'lastConfession')),
+          type: NamedTypeNode(name: NameNode(value: 'date'), isNonNull: true),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'lastKodas')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'date'),
-          isNonNull: true,
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'lastKodas')),
+          type: NamedTypeNode(name: NameNode(value: 'date'), isNonNull: true),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'insertHistoryAttendanceDaysOne'),
-        alias: NameNode(value: '_c'),
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'object'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'day'),
-                value: VariableNode(name: NameNode(value: 'lastConfession')),
-              )
-            ]),
-          ),
-          ArgumentNode(
-            name: NameNode(value: 'onConflict'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'constraint'),
-                value: EnumValueNode(
-                    name: NameNode(value: 'attendance_days_pkey')),
-              ),
-              ObjectFieldNode(
-                name: NameNode(value: 'updateColumns'),
-                value: EnumValueNode(name: NameNode(value: 'day')),
-              ),
-            ]),
-          ),
-        ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
           FieldNode(
-            name: NameNode(value: 'day'),
-            alias: null,
-            arguments: [],
+            name: NameNode(value: 'insertHistoryAttendanceDaysOne'),
+            alias: NameNode(value: '_c'),
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'object'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'day'),
+                      value: VariableNode(
+                        name: NameNode(value: 'lastConfession'),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'onConflict'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'constraint'),
+                      value: EnumValueNode(
+                        name: NameNode(value: 'attendance_days_pkey'),
+                      ),
+                    ),
+                    ObjectFieldNode(
+                      name: NameNode(value: 'updateColumns'),
+                      value: EnumValueNode(name: NameNode(value: 'day')),
+                    ),
+                  ],
+                ),
+              ),
+            ],
             directives: [],
-            selectionSet: null,
+            selectionSet: SelectionSetNode(
+              selections: [
+                FieldNode(
+                  name: NameNode(value: 'day'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
+          ),
+          FieldNode(
+            name: NameNode(value: 'insertHistoryAttendanceDaysOne'),
+            alias: NameNode(value: '_k'),
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'object'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'day'),
+                      value: VariableNode(name: NameNode(value: 'lastKodas')),
+                    ),
+                  ],
+                ),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'onConflict'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'constraint'),
+                      value: EnumValueNode(
+                        name: NameNode(value: 'attendance_days_pkey'),
+                      ),
+                    ),
+                    ObjectFieldNode(
+                      name: NameNode(value: 'updateColumns'),
+                      value: EnumValueNode(name: NameNode(value: 'day')),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FieldNode(
+                  name: NameNode(value: 'day'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
+          ),
+          FieldNode(
+            name: NameNode(value: 'insertHistoryConfessionHistoryOne'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'object'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'personId'),
+                      value: VariableNode(name: NameNode(value: 'personId')),
+                    ),
+                    ObjectFieldNode(
+                      name: NameNode(value: 'dayId'),
+                      value: VariableNode(
+                        name: NameNode(value: 'lastConfession'),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'onConflict'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'constraint'),
+                      value: EnumValueNode(
+                        name: NameNode(
+                          value: 'confession_history_day_id_person_id_key',
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FieldNode(
+                  name: NameNode(value: 'person'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: SelectionSetNode(
+                    selections: [
+                      FragmentSpreadNode(
+                        name: NameNode(value: 'Person'),
+                        directives: [],
+                      ),
+                      FieldNode(
+                        name: NameNode(value: '__typename'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                    ],
+                  ),
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
+          ),
+          FieldNode(
+            name: NameNode(value: 'insertHistoryKodasHistoryOne'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'object'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'personId'),
+                      value: VariableNode(name: NameNode(value: 'personId')),
+                    ),
+                    ObjectFieldNode(
+                      name: NameNode(value: 'dayId'),
+                      value: VariableNode(name: NameNode(value: 'lastKodas')),
+                    ),
+                  ],
+                ),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'onConflict'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'constraint'),
+                      value: EnumValueNode(
+                        name: NameNode(
+                          value: 'kodas_history_day_id_person_id_key',
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FieldNode(
+                  name: NameNode(value: 'person'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: SelectionSetNode(
+                    selections: [
+                      FragmentSpreadNode(
+                        name: NameNode(value: 'Person'),
+                        directives: [],
+                      ),
+                      FieldNode(
+                        name: NameNode(value: '__typename'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                    ],
+                  ),
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
           ),
           FieldNode(
             name: NameNode(value: '__typename'),
@@ -6121,184 +6404,13 @@ const documentNodeMutationupdatePersonSpiritData = DocumentNode(definitions: [
             directives: [],
             selectionSet: null,
           ),
-        ]),
-      ),
-      FieldNode(
-        name: NameNode(value: 'insertHistoryAttendanceDaysOne'),
-        alias: NameNode(value: '_k'),
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'object'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'day'),
-                value: VariableNode(name: NameNode(value: 'lastKodas')),
-              )
-            ]),
-          ),
-          ArgumentNode(
-            name: NameNode(value: 'onConflict'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'constraint'),
-                value: EnumValueNode(
-                    name: NameNode(value: 'attendance_days_pkey')),
-              ),
-              ObjectFieldNode(
-                name: NameNode(value: 'updateColumns'),
-                value: EnumValueNode(name: NameNode(value: 'day')),
-              ),
-            ]),
-          ),
         ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-            name: NameNode(value: 'day'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-        ]),
       ),
-      FieldNode(
-        name: NameNode(value: 'insertHistoryConfessionHistoryOne'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'object'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'personId'),
-                value: VariableNode(name: NameNode(value: 'personId')),
-              ),
-              ObjectFieldNode(
-                name: NameNode(value: 'dayId'),
-                value: VariableNode(name: NameNode(value: 'lastConfession')),
-              ),
-            ]),
-          ),
-          ArgumentNode(
-            name: NameNode(value: 'onConflict'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'constraint'),
-                value: EnumValueNode(
-                    name: NameNode(
-                        value: 'confession_history_day_id_person_id_key')),
-              )
-            ]),
-          ),
-        ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-            name: NameNode(value: 'person'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FragmentSpreadNode(
-                name: NameNode(value: 'Person'),
-                directives: [],
-              ),
-              FieldNode(
-                name: NameNode(value: '__typename'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-            ]),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-        ]),
-      ),
-      FieldNode(
-        name: NameNode(value: 'insertHistoryKodasHistoryOne'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'object'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'personId'),
-                value: VariableNode(name: NameNode(value: 'personId')),
-              ),
-              ObjectFieldNode(
-                name: NameNode(value: 'dayId'),
-                value: VariableNode(name: NameNode(value: 'lastKodas')),
-              ),
-            ]),
-          ),
-          ArgumentNode(
-            name: NameNode(value: 'onConflict'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'constraint'),
-                value: EnumValueNode(
-                    name:
-                        NameNode(value: 'kodas_history_day_id_person_id_key')),
-              )
-            ]),
-          ),
-        ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-            name: NameNode(value: 'person'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FragmentSpreadNode(
-                name: NameNode(value: 'Person'),
-                directives: [],
-              ),
-              FieldNode(
-                name: NameNode(value: '__typename'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-            ]),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-        ]),
-      ),
-      FieldNode(
-        name: NameNode(value: '__typename'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-    ]),
-  ),
-  fragmentDefinitionPerson,
-  fragmentDefinitionPersonNoPhoto,
-]);
+    ),
+    fragmentDefinitionPerson,
+    fragmentDefinitionPersonNoPhoto,
+  ],
+);
 
 class Mutation_updatePersonSpiritData__c {
   Mutation_updatePersonSpiritData__c({
@@ -6307,7 +6419,8 @@ class Mutation_updatePersonSpiritData__c {
   });
 
   factory Mutation_updatePersonSpiritData__c.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$day = json['day'];
     final l$$__typename = json['__typename'];
     return Mutation_updatePersonSpiritData__c(
@@ -6333,10 +6446,7 @@ class Mutation_updatePersonSpiritData__c {
   int get hashCode {
     final l$day = day;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$day,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$day, l$$__typename]);
   }
 
   @override
@@ -6365,11 +6475,9 @@ class Mutation_updatePersonSpiritData__c {
 extension UtilityExtension_Mutation_updatePersonSpiritData__c
     on Mutation_updatePersonSpiritData__c {
   CopyWith_Mutation_updatePersonSpiritData__c<
-          Mutation_updatePersonSpiritData__c>
-      get copyWith => CopyWith_Mutation_updatePersonSpiritData__c(
-            this,
-            (i) => i,
-          );
+    Mutation_updatePersonSpiritData__c
+  >
+  get copyWith => CopyWith_Mutation_updatePersonSpiritData__c(this, (i) => i);
 }
 
 abstract class CopyWith_Mutation_updatePersonSpiritData__c<TRes> {
@@ -6381,18 +6489,12 @@ abstract class CopyWith_Mutation_updatePersonSpiritData__c<TRes> {
   factory CopyWith_Mutation_updatePersonSpiritData__c.stub(TRes res) =
       _CopyWithStubImpl_Mutation_updatePersonSpiritData__c;
 
-  TRes call({
-    DateTime? day,
-    String? $__typename,
-  });
+  TRes call({DateTime? day, String? $__typename});
 }
 
 class _CopyWithImpl_Mutation_updatePersonSpiritData__c<TRes>
     implements CopyWith_Mutation_updatePersonSpiritData__c<TRes> {
-  _CopyWithImpl_Mutation_updatePersonSpiritData__c(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Mutation_updatePersonSpiritData__c(this._instance, this._then);
 
   final Mutation_updatePersonSpiritData__c _instance;
 
@@ -6400,18 +6502,17 @@ class _CopyWithImpl_Mutation_updatePersonSpiritData__c<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? day = _undefined,
-    Object? $__typename = _undefined,
-  }) =>
-      _then(Mutation_updatePersonSpiritData__c(
-        day: day == _undefined || day == null
-            ? _instance.day
-            : (day as DateTime),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  TRes call({Object? day = _undefined, Object? $__typename = _undefined}) =>
+      _then(
+        Mutation_updatePersonSpiritData__c(
+          day: day == _undefined || day == null
+              ? _instance.day
+              : (day as DateTime),
+          $__typename: $__typename == _undefined || $__typename == null
+              ? _instance.$__typename
+              : ($__typename as String),
+        ),
+      );
 }
 
 class _CopyWithStubImpl_Mutation_updatePersonSpiritData__c<TRes>
@@ -6420,11 +6521,7 @@ class _CopyWithStubImpl_Mutation_updatePersonSpiritData__c<TRes>
 
   TRes _res;
 
-  call({
-    DateTime? day,
-    String? $__typename,
-  }) =>
-      _res;
+  call({DateTime? day, String? $__typename}) => _res;
 }
 
 class Mutation_updatePersonSpiritData__k {
@@ -6434,7 +6531,8 @@ class Mutation_updatePersonSpiritData__k {
   });
 
   factory Mutation_updatePersonSpiritData__k.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$day = json['day'];
     final l$$__typename = json['__typename'];
     return Mutation_updatePersonSpiritData__k(
@@ -6460,10 +6558,7 @@ class Mutation_updatePersonSpiritData__k {
   int get hashCode {
     final l$day = day;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$day,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$day, l$$__typename]);
   }
 
   @override
@@ -6492,11 +6587,9 @@ class Mutation_updatePersonSpiritData__k {
 extension UtilityExtension_Mutation_updatePersonSpiritData__k
     on Mutation_updatePersonSpiritData__k {
   CopyWith_Mutation_updatePersonSpiritData__k<
-          Mutation_updatePersonSpiritData__k>
-      get copyWith => CopyWith_Mutation_updatePersonSpiritData__k(
-            this,
-            (i) => i,
-          );
+    Mutation_updatePersonSpiritData__k
+  >
+  get copyWith => CopyWith_Mutation_updatePersonSpiritData__k(this, (i) => i);
 }
 
 abstract class CopyWith_Mutation_updatePersonSpiritData__k<TRes> {
@@ -6508,18 +6601,12 @@ abstract class CopyWith_Mutation_updatePersonSpiritData__k<TRes> {
   factory CopyWith_Mutation_updatePersonSpiritData__k.stub(TRes res) =
       _CopyWithStubImpl_Mutation_updatePersonSpiritData__k;
 
-  TRes call({
-    DateTime? day,
-    String? $__typename,
-  });
+  TRes call({DateTime? day, String? $__typename});
 }
 
 class _CopyWithImpl_Mutation_updatePersonSpiritData__k<TRes>
     implements CopyWith_Mutation_updatePersonSpiritData__k<TRes> {
-  _CopyWithImpl_Mutation_updatePersonSpiritData__k(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Mutation_updatePersonSpiritData__k(this._instance, this._then);
 
   final Mutation_updatePersonSpiritData__k _instance;
 
@@ -6527,18 +6614,17 @@ class _CopyWithImpl_Mutation_updatePersonSpiritData__k<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? day = _undefined,
-    Object? $__typename = _undefined,
-  }) =>
-      _then(Mutation_updatePersonSpiritData__k(
-        day: day == _undefined || day == null
-            ? _instance.day
-            : (day as DateTime),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  TRes call({Object? day = _undefined, Object? $__typename = _undefined}) =>
+      _then(
+        Mutation_updatePersonSpiritData__k(
+          day: day == _undefined || day == null
+              ? _instance.day
+              : (day as DateTime),
+          $__typename: $__typename == _undefined || $__typename == null
+              ? _instance.$__typename
+              : ($__typename as String),
+        ),
+      );
 }
 
 class _CopyWithStubImpl_Mutation_updatePersonSpiritData__k<TRes>
@@ -6547,11 +6633,7 @@ class _CopyWithStubImpl_Mutation_updatePersonSpiritData__k<TRes>
 
   TRes _res;
 
-  call({
-    DateTime? day,
-    String? $__typename,
-  }) =>
-      _res;
+  call({DateTime? day, String? $__typename}) => _res;
 }
 
 class Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne {
@@ -6561,7 +6643,8 @@ class Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne {
   });
 
   factory Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$person = json['person'];
     final l$$__typename = json['__typename'];
     return Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne(
@@ -6587,10 +6670,7 @@ class Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne {
   int get hashCode {
     final l$person = person;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$person,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$person, l$$__typename]);
   }
 
   @override
@@ -6620,64 +6700,67 @@ class Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne {
 extension UtilityExtension_Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne
     on Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne {
   CopyWith_Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne<
-          Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne>
-      get copyWith =>
-          CopyWith_Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne(
-            this,
-            (i) => i,
-          );
+    Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne
+  >
+  get copyWith =>
+      CopyWith_Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne(
+        this,
+        (i) => i,
+      );
 }
 
 abstract class CopyWith_Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne<
-    TRes> {
+  TRes
+> {
   factory CopyWith_Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne(
     Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne instance,
     TRes Function(
-            Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne)
-        then,
+      Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne,
+    )
+    then,
   ) = _CopyWithImpl_Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne;
 
   factory CopyWith_Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne.stub(
-          TRes res) =
-      _CopyWithStubImpl_Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne;
+    TRes res,
+  ) = _CopyWithStubImpl_Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne;
 
-  TRes call({
-    Fragment_Person? person,
-    String? $__typename,
-  });
+  TRes call({Fragment_Person? person, String? $__typename});
   CopyWith_Fragment_Person<TRes> get person;
 }
 
 class _CopyWithImpl_Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne<
-        TRes>
+  TRes
+>
     implements
         CopyWith_Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne<
-            TRes> {
+          TRes
+        > {
   _CopyWithImpl_Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne(
     this._instance,
     this._then,
   );
 
   final Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne
-      _instance;
+  _instance;
 
   final TRes Function(
-      Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne) _then;
+    Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne,
+  )
+  _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? person = _undefined,
-    Object? $__typename = _undefined,
-  }) =>
-      _then(Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne(
-        person: person == _undefined || person == null
-            ? _instance.person
-            : (person as Fragment_Person),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  TRes call({Object? person = _undefined, Object? $__typename = _undefined}) =>
+      _then(
+        Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne(
+          person: person == _undefined || person == null
+              ? _instance.person
+              : (person as Fragment_Person),
+          $__typename: $__typename == _undefined || $__typename == null
+              ? _instance.$__typename
+              : ($__typename as String),
+        ),
+      );
 
   CopyWith_Fragment_Person<TRes> get person {
     final local$person = _instance.person;
@@ -6686,20 +6769,19 @@ class _CopyWithImpl_Mutation_updatePersonSpiritData_insertHistoryConfessionHisto
 }
 
 class _CopyWithStubImpl_Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne<
-        TRes>
+  TRes
+>
     implements
         CopyWith_Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne<
-            TRes> {
+          TRes
+        > {
   _CopyWithStubImpl_Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne(
-      this._res);
+    this._res,
+  );
 
   TRes _res;
 
-  call({
-    Fragment_Person? person,
-    String? $__typename,
-  }) =>
-      _res;
+  call({Fragment_Person? person, String? $__typename}) => _res;
 
   CopyWith_Fragment_Person<TRes> get person =>
       CopyWith_Fragment_Person.stub(_res);
@@ -6712,7 +6794,8 @@ class Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne {
   });
 
   factory Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$person = json['person'];
     final l$$__typename = json['__typename'];
     return Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne(
@@ -6738,10 +6821,7 @@ class Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne {
   int get hashCode {
     final l$person = person;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$person,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$person, l$$__typename]);
   }
 
   @override
@@ -6771,38 +6851,39 @@ class Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne {
 extension UtilityExtension_Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne
     on Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne {
   CopyWith_Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne<
-          Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne>
-      get copyWith =>
-          CopyWith_Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne(
-            this,
-            (i) => i,
-          );
+    Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne
+  >
+  get copyWith =>
+      CopyWith_Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne(
+        this,
+        (i) => i,
+      );
 }
 
 abstract class CopyWith_Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne<
-    TRes> {
+  TRes
+> {
   factory CopyWith_Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne(
     Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne instance,
     TRes Function(Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne)
-        then,
+    then,
   ) = _CopyWithImpl_Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne;
 
   factory CopyWith_Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne.stub(
-          TRes res) =
-      _CopyWithStubImpl_Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne;
+    TRes res,
+  ) = _CopyWithStubImpl_Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne;
 
-  TRes call({
-    Fragment_Person? person,
-    String? $__typename,
-  });
+  TRes call({Fragment_Person? person, String? $__typename});
   CopyWith_Fragment_Person<TRes> get person;
 }
 
 class _CopyWithImpl_Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne<
-        TRes>
+  TRes
+>
     implements
         CopyWith_Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne<
-            TRes> {
+          TRes
+        > {
   _CopyWithImpl_Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne(
     this._instance,
     this._then,
@@ -6811,22 +6892,23 @@ class _CopyWithImpl_Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne
   final Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne _instance;
 
   final TRes Function(
-      Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne) _then;
+    Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne,
+  )
+  _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? person = _undefined,
-    Object? $__typename = _undefined,
-  }) =>
-      _then(Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne(
-        person: person == _undefined || person == null
-            ? _instance.person
-            : (person as Fragment_Person),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  TRes call({Object? person = _undefined, Object? $__typename = _undefined}) =>
+      _then(
+        Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne(
+          person: person == _undefined || person == null
+              ? _instance.person
+              : (person as Fragment_Person),
+          $__typename: $__typename == _undefined || $__typename == null
+              ? _instance.$__typename
+              : ($__typename as String),
+        ),
+      );
 
   CopyWith_Fragment_Person<TRes> get person {
     final local$person = _instance.person;
@@ -6835,20 +6917,19 @@ class _CopyWithImpl_Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne
 }
 
 class _CopyWithStubImpl_Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne<
-        TRes>
+  TRes
+>
     implements
         CopyWith_Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne<
-            TRes> {
+          TRes
+        > {
   _CopyWithStubImpl_Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne(
-      this._res);
+    this._res,
+  );
 
   TRes _res;
 
-  call({
-    Fragment_Person? person,
-    String? $__typename,
-  }) =>
-      _res;
+  call({Fragment_Person? person, String? $__typename}) => _res;
 
   CopyWith_Fragment_Person<TRes> get person =>
       CopyWith_Fragment_Person.stub(_res);

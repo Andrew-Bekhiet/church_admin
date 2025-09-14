@@ -23,8 +23,9 @@ class Fragment_Family implements Fragment_FamilyNoPhoto {
       name: (l$name as String),
       color: (l$color as int?),
       $__typename: (l$$__typename as String),
-      photoUpdatedAt:
-          l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
+      photoUpdatedAt: l$photoUpdatedAt == null
+          ? null
+          : tstzFromString(l$photoUpdatedAt),
       blurhash: (l$blurhash as String?),
     );
   }
@@ -52,8 +53,9 @@ class Fragment_Family implements Fragment_FamilyNoPhoto {
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
-    _resultData['photoUpdatedAt'] =
-        l$photoUpdatedAt == null ? null : tstzToString(l$photoUpdatedAt);
+    _resultData['photoUpdatedAt'] = l$photoUpdatedAt == null
+        ? null
+        : tstzToString(l$photoUpdatedAt);
     final l$blurhash = blurhash;
     _resultData['blurhash'] = l$blurhash;
     return _resultData;
@@ -121,10 +123,7 @@ class Fragment_Family implements Fragment_FamilyNoPhoto {
 
 extension UtilityExtension_Fragment_Family on Fragment_Family {
   CopyWith_Fragment_Family<Fragment_Family> get copyWith =>
-      CopyWith_Fragment_Family(
-        this,
-        (i) => i,
-      );
+      CopyWith_Fragment_Family(this, (i) => i);
 }
 
 abstract class CopyWith_Fragment_Family<TRes> {
@@ -148,10 +147,7 @@ abstract class CopyWith_Fragment_Family<TRes> {
 
 class _CopyWithImpl_Fragment_Family<TRes>
     implements CopyWith_Fragment_Family<TRes> {
-  _CopyWithImpl_Fragment_Family(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Fragment_Family(this._instance, this._then);
 
   final Fragment_Family _instance;
 
@@ -166,22 +162,24 @@ class _CopyWithImpl_Fragment_Family<TRes>
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? blurhash = _undefined,
-  }) =>
-      _then(Fragment_Family(
-        id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
-        name: name == _undefined || name == null
-            ? _instance.name
-            : (name as String),
-        color: color == _undefined ? _instance.color : (color as int?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-        photoUpdatedAt: photoUpdatedAt == _undefined
-            ? _instance.photoUpdatedAt
-            : (photoUpdatedAt as DateTime?),
-        blurhash:
-            blurhash == _undefined ? _instance.blurhash : (blurhash as String?),
-      ));
+  }) => _then(
+    Fragment_Family(
+      id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      color: color == _undefined ? _instance.color : (color as int?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+      photoUpdatedAt: photoUpdatedAt == _undefined
+          ? _instance.photoUpdatedAt
+          : (photoUpdatedAt as DateTime?),
+      blurhash: blurhash == _undefined
+          ? _instance.blurhash
+          : (blurhash as String?),
+    ),
+  );
 }
 
 class _CopyWithStubImpl_Fragment_Family<TRes>
@@ -197,50 +195,48 @@ class _CopyWithStubImpl_Fragment_Family<TRes>
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
-  }) =>
-      _res;
+  }) => _res;
 }
 
 const fragmentDefinitionFamily = FragmentDefinitionNode(
   name: NameNode(value: 'Family'),
   typeCondition: TypeConditionNode(
-      on: NamedTypeNode(
-    name: NameNode(value: 'Families'),
-    isNonNull: false,
-  )),
+    on: NamedTypeNode(name: NameNode(value: 'Families'), isNonNull: false),
+  ),
   directives: [],
-  selectionSet: SelectionSetNode(selections: [
-    FragmentSpreadNode(
-      name: NameNode(value: 'FamilyNoPhoto'),
-      directives: [],
-    ),
-    FieldNode(
-      name: NameNode(value: 'photoUpdatedAt'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-    FieldNode(
-      name: NameNode(value: 'blurhash'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-    FieldNode(
-      name: NameNode(value: '__typename'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-  ]),
+  selectionSet: SelectionSetNode(
+    selections: [
+      FragmentSpreadNode(
+        name: NameNode(value: 'FamilyNoPhoto'),
+        directives: [],
+      ),
+      FieldNode(
+        name: NameNode(value: 'photoUpdatedAt'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'blurhash'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ],
+  ),
 );
-const documentNodeFragmentFamily = DocumentNode(definitions: [
-  fragmentDefinitionFamily,
-  fragmentDefinitionFamilyNoPhoto,
-]);
+const documentNodeFragmentFamily = DocumentNode(
+  definitions: [fragmentDefinitionFamily, fragmentDefinitionFamilyNoPhoto],
+);
 
 class Fragment_FamilyNoPhoto {
   Fragment_FamilyNoPhoto({
@@ -290,12 +286,7 @@ class Fragment_FamilyNoPhoto {
     final l$name = name;
     final l$color = color;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$id,
-      l$name,
-      l$color,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$id, l$name, l$color, l$$__typename]);
   }
 
   @override
@@ -332,10 +323,7 @@ class Fragment_FamilyNoPhoto {
 
 extension UtilityExtension_Fragment_FamilyNoPhoto on Fragment_FamilyNoPhoto {
   CopyWith_Fragment_FamilyNoPhoto<Fragment_FamilyNoPhoto> get copyWith =>
-      CopyWith_Fragment_FamilyNoPhoto(
-        this,
-        (i) => i,
-      );
+      CopyWith_Fragment_FamilyNoPhoto(this, (i) => i);
 }
 
 abstract class CopyWith_Fragment_FamilyNoPhoto<TRes> {
@@ -347,20 +335,12 @@ abstract class CopyWith_Fragment_FamilyNoPhoto<TRes> {
   factory CopyWith_Fragment_FamilyNoPhoto.stub(TRes res) =
       _CopyWithStubImpl_Fragment_FamilyNoPhoto;
 
-  TRes call({
-    UuidValue? id,
-    String? name,
-    int? color,
-    String? $__typename,
-  });
+  TRes call({UuidValue? id, String? name, int? color, String? $__typename});
 }
 
 class _CopyWithImpl_Fragment_FamilyNoPhoto<TRes>
     implements CopyWith_Fragment_FamilyNoPhoto<TRes> {
-  _CopyWithImpl_Fragment_FamilyNoPhoto(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Fragment_FamilyNoPhoto(this._instance, this._then);
 
   final Fragment_FamilyNoPhoto _instance;
 
@@ -373,17 +353,18 @@ class _CopyWithImpl_Fragment_FamilyNoPhoto<TRes>
     Object? name = _undefined,
     Object? color = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Fragment_FamilyNoPhoto(
-        id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
-        name: name == _undefined || name == null
-            ? _instance.name
-            : (name as String),
-        color: color == _undefined ? _instance.color : (color as int?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Fragment_FamilyNoPhoto(
+      id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      color: color == _undefined ? _instance.color : (color as int?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 }
 
 class _CopyWithStubImpl_Fragment_FamilyNoPhoto<TRes>
@@ -392,54 +373,48 @@ class _CopyWithStubImpl_Fragment_FamilyNoPhoto<TRes>
 
   TRes _res;
 
-  call({
-    UuidValue? id,
-    String? name,
-    int? color,
-    String? $__typename,
-  }) =>
-      _res;
+  call({UuidValue? id, String? name, int? color, String? $__typename}) => _res;
 }
 
 const fragmentDefinitionFamilyNoPhoto = FragmentDefinitionNode(
   name: NameNode(value: 'FamilyNoPhoto'),
   typeCondition: TypeConditionNode(
-      on: NamedTypeNode(
-    name: NameNode(value: 'Families'),
-    isNonNull: false,
-  )),
+    on: NamedTypeNode(name: NameNode(value: 'Families'), isNonNull: false),
+  ),
   directives: [],
-  selectionSet: SelectionSetNode(selections: [
-    FieldNode(
-      name: NameNode(value: 'id'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-    FieldNode(
-      name: NameNode(value: 'name'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-    FieldNode(
-      name: NameNode(value: 'color'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-    FieldNode(
-      name: NameNode(value: '__typename'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-  ]),
+  selectionSet: SelectionSetNode(
+    selections: [
+      FieldNode(
+        name: NameNode(value: 'id'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'name'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'color'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ],
+  ),
 );
-const documentNodeFragmentFamilyNoPhoto = DocumentNode(definitions: [
-  fragmentDefinitionFamilyNoPhoto,
-]);
+const documentNodeFragmentFamilyNoPhoto = DocumentNode(
+  definitions: [fragmentDefinitionFamilyNoPhoto],
+);

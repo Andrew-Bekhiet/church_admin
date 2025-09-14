@@ -21,10 +21,7 @@ abstract class CopyWith_Input_PersonsHobbiesOnConflict<TRes> {
 
 class _CopyWithImpl_Input_PersonsHobbiesOnConflict<TRes>
     implements CopyWith_Input_PersonsHobbiesOnConflict<TRes> {
-  _CopyWithImpl_Input_PersonsHobbiesOnConflict(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Input_PersonsHobbiesOnConflict(this._instance, this._then);
 
   final Input_PersonsHobbiesOnConflict _instance;
 
@@ -36,24 +33,26 @@ class _CopyWithImpl_Input_PersonsHobbiesOnConflict<TRes>
     Object? constraint = _undefined,
     Object? updateColumns = _undefined,
     Object? where = _undefined,
-  }) =>
-      _then(Input_PersonsHobbiesOnConflict._({
-        ..._instance._$data,
-        if (constraint != _undefined && constraint != null)
-          'constraint': (constraint as Enum_PersonsHobbiesConstraint),
-        if (updateColumns != _undefined && updateColumns != null)
-          'updateColumns':
-              (updateColumns as List<Enum_PersonsHobbiesUpdateColumn>),
-        if (where != _undefined)
-          'where': (where as Input_PersonsHobbiesBoolExp?),
-      }));
+  }) => _then(
+    Input_PersonsHobbiesOnConflict._({
+      ..._instance._$data,
+      if (constraint != _undefined && constraint != null)
+        'constraint': (constraint as Enum_PersonsHobbiesConstraint),
+      if (updateColumns != _undefined && updateColumns != null)
+        'updateColumns':
+            (updateColumns as List<Enum_PersonsHobbiesUpdateColumn>),
+      if (where != _undefined) 'where': (where as Input_PersonsHobbiesBoolExp?),
+    }),
+  );
 
   CopyWith_Input_PersonsHobbiesBoolExp<TRes> get where {
     final local$where = _instance.where;
     return local$where == null
         ? CopyWith_Input_PersonsHobbiesBoolExp.stub(_then(_instance))
         : CopyWith_Input_PersonsHobbiesBoolExp(
-            local$where, (e) => call(where: e));
+            local$where,
+            (e) => call(where: e),
+          );
   }
 }
 
@@ -67,8 +66,7 @@ class _CopyWithStubImpl_Input_PersonsHobbiesOnConflict<TRes>
     Enum_PersonsHobbiesConstraint? constraint,
     List<Enum_PersonsHobbiesUpdateColumn>? updateColumns,
     Input_PersonsHobbiesBoolExp? where,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Input_PersonsHobbiesBoolExp<TRes> get where =>
       CopyWith_Input_PersonsHobbiesBoolExp.stub(_res);
@@ -80,13 +78,12 @@ class Input_PersonsHobbiesOrderBy {
     Enum_OrderBy? hobbyId,
     Input_PersonsOrderBy? person,
     Enum_OrderBy? personId,
-  }) =>
-      Input_PersonsHobbiesOrderBy._({
-        if (hobby != null) r'hobby': hobby,
-        if (hobbyId != null) r'hobbyId': hobbyId,
-        if (person != null) r'person': person,
-        if (personId != null) r'personId': personId,
-      });
+  }) => Input_PersonsHobbiesOrderBy._({
+    if (hobby != null) r'hobby': hobby,
+    if (hobbyId != null) r'hobbyId': hobbyId,
+    if (person != null) r'person': person,
+    if (personId != null) r'personId': personId,
+  });
 
   Input_PersonsHobbiesOrderBy._(this._$data);
 
@@ -138,8 +135,9 @@ class Input_PersonsHobbiesOrderBy {
     }
     if (_$data.containsKey('hobbyId')) {
       final l$hobbyId = hobbyId;
-      result$data['hobbyId'] =
-          l$hobbyId == null ? null : toJson_Enum_OrderBy(l$hobbyId);
+      result$data['hobbyId'] = l$hobbyId == null
+          ? null
+          : toJson_Enum_OrderBy(l$hobbyId);
     }
     if (_$data.containsKey('person')) {
       final l$person = person;
@@ -147,17 +145,15 @@ class Input_PersonsHobbiesOrderBy {
     }
     if (_$data.containsKey('personId')) {
       final l$personId = personId;
-      result$data['personId'] =
-          l$personId == null ? null : toJson_Enum_OrderBy(l$personId);
+      result$data['personId'] = l$personId == null
+          ? null
+          : toJson_Enum_OrderBy(l$personId);
     }
     return result$data;
   }
 
   CopyWith_Input_PersonsHobbiesOrderBy<Input_PersonsHobbiesOrderBy>
-      get copyWith => CopyWith_Input_PersonsHobbiesOrderBy(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Input_PersonsHobbiesOrderBy(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -240,10 +236,7 @@ abstract class CopyWith_Input_PersonsHobbiesOrderBy<TRes> {
 
 class _CopyWithImpl_Input_PersonsHobbiesOrderBy<TRes>
     implements CopyWith_Input_PersonsHobbiesOrderBy<TRes> {
-  _CopyWithImpl_Input_PersonsHobbiesOrderBy(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Input_PersonsHobbiesOrderBy(this._instance, this._then);
 
   final Input_PersonsHobbiesOrderBy _instance;
 
@@ -256,14 +249,15 @@ class _CopyWithImpl_Input_PersonsHobbiesOrderBy<TRes>
     Object? hobbyId = _undefined,
     Object? person = _undefined,
     Object? personId = _undefined,
-  }) =>
-      _then(Input_PersonsHobbiesOrderBy._({
-        ..._instance._$data,
-        if (hobby != _undefined) 'hobby': (hobby as Input_HobbiesOrderBy?),
-        if (hobbyId != _undefined) 'hobbyId': (hobbyId as Enum_OrderBy?),
-        if (person != _undefined) 'person': (person as Input_PersonsOrderBy?),
-        if (personId != _undefined) 'personId': (personId as Enum_OrderBy?),
-      }));
+  }) => _then(
+    Input_PersonsHobbiesOrderBy._({
+      ..._instance._$data,
+      if (hobby != _undefined) 'hobby': (hobby as Input_HobbiesOrderBy?),
+      if (hobbyId != _undefined) 'hobbyId': (hobbyId as Enum_OrderBy?),
+      if (person != _undefined) 'person': (person as Input_PersonsOrderBy?),
+      if (personId != _undefined) 'personId': (personId as Enum_OrderBy?),
+    }),
+  );
 
   CopyWith_Input_HobbiesOrderBy<TRes> get hobby {
     final local$hobby = _instance.hobby;
@@ -291,8 +285,7 @@ class _CopyWithStubImpl_Input_PersonsHobbiesOrderBy<TRes>
     Enum_OrderBy? hobbyId,
     Input_PersonsOrderBy? person,
     Enum_OrderBy? personId,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Input_HobbiesOrderBy<TRes> get hobby =>
       CopyWith_Input_HobbiesOrderBy.stub(_res);
@@ -305,21 +298,22 @@ class Input_PersonsHobbiesStreamCursorInput {
   factory Input_PersonsHobbiesStreamCursorInput({
     required Input_PersonsHobbiesStreamCursorValueInput initialValue,
     Enum_CursorOrdering? ordering,
-  }) =>
-      Input_PersonsHobbiesStreamCursorInput._({
-        r'initialValue': initialValue,
-        if (ordering != null) r'ordering': ordering,
-      });
+  }) => Input_PersonsHobbiesStreamCursorInput._({
+    r'initialValue': initialValue,
+    if (ordering != null) r'ordering': ordering,
+  });
 
   Input_PersonsHobbiesStreamCursorInput._(this._$data);
 
   factory Input_PersonsHobbiesStreamCursorInput.fromJson(
-      Map<String, dynamic> data) {
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
     final l$initialValue = data['initialValue'];
     result$data['initialValue'] =
         Input_PersonsHobbiesStreamCursorValueInput.fromJson(
-            (l$initialValue as Map<String, dynamic>));
+          (l$initialValue as Map<String, dynamic>),
+        );
     if (data.containsKey('ordering')) {
       final l$ordering = data['ordering'];
       result$data['ordering'] = l$ordering == null
@@ -343,18 +337,18 @@ class Input_PersonsHobbiesStreamCursorInput {
     result$data['initialValue'] = l$initialValue.toJson();
     if (_$data.containsKey('ordering')) {
       final l$ordering = ordering;
-      result$data['ordering'] =
-          l$ordering == null ? null : toJson_Enum_CursorOrdering(l$ordering);
+      result$data['ordering'] = l$ordering == null
+          ? null
+          : toJson_Enum_CursorOrdering(l$ordering);
     }
     return result$data;
   }
 
   CopyWith_Input_PersonsHobbiesStreamCursorInput<
-          Input_PersonsHobbiesStreamCursorInput>
-      get copyWith => CopyWith_Input_PersonsHobbiesStreamCursorInput(
-            this,
-            (i) => i,
-          );
+    Input_PersonsHobbiesStreamCursorInput
+  >
+  get copyWith =>
+      CopyWith_Input_PersonsHobbiesStreamCursorInput(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -425,20 +419,23 @@ class _CopyWithImpl_Input_PersonsHobbiesStreamCursorInput<TRes>
   TRes call({
     Object? initialValue = _undefined,
     Object? ordering = _undefined,
-  }) =>
-      _then(Input_PersonsHobbiesStreamCursorInput._({
-        ..._instance._$data,
-        if (initialValue != _undefined && initialValue != null)
-          'initialValue':
-              (initialValue as Input_PersonsHobbiesStreamCursorValueInput),
-        if (ordering != _undefined)
-          'ordering': (ordering as Enum_CursorOrdering?),
-      }));
+  }) => _then(
+    Input_PersonsHobbiesStreamCursorInput._({
+      ..._instance._$data,
+      if (initialValue != _undefined && initialValue != null)
+        'initialValue':
+            (initialValue as Input_PersonsHobbiesStreamCursorValueInput),
+      if (ordering != _undefined)
+        'ordering': (ordering as Enum_CursorOrdering?),
+    }),
+  );
 
   CopyWith_Input_PersonsHobbiesStreamCursorValueInput<TRes> get initialValue {
     final local$initialValue = _instance.initialValue;
     return CopyWith_Input_PersonsHobbiesStreamCursorValueInput(
-        local$initialValue, (e) => call(initialValue: e));
+      local$initialValue,
+      (e) => call(initialValue: e),
+    );
   }
 }
 
@@ -451,8 +448,7 @@ class _CopyWithStubImpl_Input_PersonsHobbiesStreamCursorInput<TRes>
   call({
     Input_PersonsHobbiesStreamCursorValueInput? initialValue,
     Enum_CursorOrdering? ordering,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Input_PersonsHobbiesStreamCursorValueInput<TRes> get initialValue =>
       CopyWith_Input_PersonsHobbiesStreamCursorValueInput.stub(_res);
@@ -462,26 +458,28 @@ class Input_PersonsHobbiesStreamCursorValueInput {
   factory Input_PersonsHobbiesStreamCursorValueInput({
     UuidValue? hobbyId,
     UuidValue? personId,
-  }) =>
-      Input_PersonsHobbiesStreamCursorValueInput._({
-        if (hobbyId != null) r'hobbyId': hobbyId,
-        if (personId != null) r'personId': personId,
-      });
+  }) => Input_PersonsHobbiesStreamCursorValueInput._({
+    if (hobbyId != null) r'hobbyId': hobbyId,
+    if (personId != null) r'personId': personId,
+  });
 
   Input_PersonsHobbiesStreamCursorValueInput._(this._$data);
 
   factory Input_PersonsHobbiesStreamCursorValueInput.fromJson(
-      Map<String, dynamic> data) {
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('hobbyId')) {
       final l$hobbyId = data['hobbyId'];
-      result$data['hobbyId'] =
-          l$hobbyId == null ? null : stringToUuid(l$hobbyId);
+      result$data['hobbyId'] = l$hobbyId == null
+          ? null
+          : stringToUuid(l$hobbyId);
     }
     if (data.containsKey('personId')) {
       final l$personId = data['personId'];
-      result$data['personId'] =
-          l$personId == null ? null : stringToUuid(l$personId);
+      result$data['personId'] = l$personId == null
+          ? null
+          : stringToUuid(l$personId);
     }
     return Input_PersonsHobbiesStreamCursorValueInput._(result$data);
   }
@@ -496,23 +494,24 @@ class Input_PersonsHobbiesStreamCursorValueInput {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('hobbyId')) {
       final l$hobbyId = hobbyId;
-      result$data['hobbyId'] =
-          l$hobbyId == null ? null : uuidToString(l$hobbyId);
+      result$data['hobbyId'] = l$hobbyId == null
+          ? null
+          : uuidToString(l$hobbyId);
     }
     if (_$data.containsKey('personId')) {
       final l$personId = personId;
-      result$data['personId'] =
-          l$personId == null ? null : uuidToString(l$personId);
+      result$data['personId'] = l$personId == null
+          ? null
+          : uuidToString(l$personId);
     }
     return result$data;
   }
 
   CopyWith_Input_PersonsHobbiesStreamCursorValueInput<
-          Input_PersonsHobbiesStreamCursorValueInput>
-      get copyWith => CopyWith_Input_PersonsHobbiesStreamCursorValueInput(
-            this,
-            (i) => i,
-          );
+    Input_PersonsHobbiesStreamCursorValueInput
+  >
+  get copyWith =>
+      CopyWith_Input_PersonsHobbiesStreamCursorValueInput(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -563,10 +562,7 @@ abstract class CopyWith_Input_PersonsHobbiesStreamCursorValueInput<TRes> {
   factory CopyWith_Input_PersonsHobbiesStreamCursorValueInput.stub(TRes res) =
       _CopyWithStubImpl_Input_PersonsHobbiesStreamCursorValueInput;
 
-  TRes call({
-    UuidValue? hobbyId,
-    UuidValue? personId,
-  });
+  TRes call({UuidValue? hobbyId, UuidValue? personId});
 }
 
 class _CopyWithImpl_Input_PersonsHobbiesStreamCursorValueInput<TRes>
@@ -582,15 +578,14 @@ class _CopyWithImpl_Input_PersonsHobbiesStreamCursorValueInput<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? hobbyId = _undefined,
-    Object? personId = _undefined,
-  }) =>
-      _then(Input_PersonsHobbiesStreamCursorValueInput._({
-        ..._instance._$data,
-        if (hobbyId != _undefined) 'hobbyId': (hobbyId as UuidValue?),
-        if (personId != _undefined) 'personId': (personId as UuidValue?),
-      }));
+  TRes call({Object? hobbyId = _undefined, Object? personId = _undefined}) =>
+      _then(
+        Input_PersonsHobbiesStreamCursorValueInput._({
+          ..._instance._$data,
+          if (hobbyId != _undefined) 'hobbyId': (hobbyId as UuidValue?),
+          if (personId != _undefined) 'personId': (personId as UuidValue?),
+        }),
+      );
 }
 
 class _CopyWithStubImpl_Input_PersonsHobbiesStreamCursorValueInput<TRes>
@@ -599,27 +594,22 @@ class _CopyWithStubImpl_Input_PersonsHobbiesStreamCursorValueInput<TRes>
 
   TRes _res;
 
-  call({
-    UuidValue? hobbyId,
-    UuidValue? personId,
-  }) =>
-      _res;
+  call({UuidValue? hobbyId, UuidValue? personId}) => _res;
 }
 
 class Input_PersonsHobbiesUpdates {
-  factory Input_PersonsHobbiesUpdates(
-          {required Input_PersonsHobbiesBoolExp where}) =>
-      Input_PersonsHobbiesUpdates._({
-        r'where': where,
-      });
+  factory Input_PersonsHobbiesUpdates({
+    required Input_PersonsHobbiesBoolExp where,
+  }) => Input_PersonsHobbiesUpdates._({r'where': where});
 
   Input_PersonsHobbiesUpdates._(this._$data);
 
   factory Input_PersonsHobbiesUpdates.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     final l$where = data['where'];
-    result$data['where'] =
-        Input_PersonsHobbiesBoolExp.fromJson((l$where as Map<String, dynamic>));
+    result$data['where'] = Input_PersonsHobbiesBoolExp.fromJson(
+      (l$where as Map<String, dynamic>),
+    );
     return Input_PersonsHobbiesUpdates._(result$data);
   }
 
@@ -636,10 +626,7 @@ class Input_PersonsHobbiesUpdates {
   }
 
   CopyWith_Input_PersonsHobbiesUpdates<Input_PersonsHobbiesUpdates>
-      get copyWith => CopyWith_Input_PersonsHobbiesUpdates(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Input_PersonsHobbiesUpdates(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -680,10 +667,7 @@ abstract class CopyWith_Input_PersonsHobbiesUpdates<TRes> {
 
 class _CopyWithImpl_Input_PersonsHobbiesUpdates<TRes>
     implements CopyWith_Input_PersonsHobbiesUpdates<TRes> {
-  _CopyWithImpl_Input_PersonsHobbiesUpdates(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Input_PersonsHobbiesUpdates(this._instance, this._then);
 
   final Input_PersonsHobbiesUpdates _instance;
 
@@ -691,17 +675,20 @@ class _CopyWithImpl_Input_PersonsHobbiesUpdates<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? where = _undefined}) =>
-      _then(Input_PersonsHobbiesUpdates._({
-        ..._instance._$data,
-        if (where != _undefined && where != null)
-          'where': (where as Input_PersonsHobbiesBoolExp),
-      }));
+  TRes call({Object? where = _undefined}) => _then(
+    Input_PersonsHobbiesUpdates._({
+      ..._instance._$data,
+      if (where != _undefined && where != null)
+        'where': (where as Input_PersonsHobbiesBoolExp),
+    }),
+  );
 
   CopyWith_Input_PersonsHobbiesBoolExp<TRes> get where {
     final local$where = _instance.where;
     return CopyWith_Input_PersonsHobbiesBoolExp(
-        local$where, (e) => call(where: e));
+      local$where,
+      (e) => call(where: e),
+    );
   }
 }
 
@@ -722,12 +709,11 @@ class Input_PersonsIncInput {
     int? color,
     int? nationalId,
     int? studyYearId,
-  }) =>
-      Input_PersonsIncInput._({
-        if (color != null) r'color': color,
-        if (nationalId != null) r'nationalId': nationalId,
-        if (studyYearId != null) r'studyYearId': studyYearId,
-      });
+  }) => Input_PersonsIncInput._({
+    if (color != null) r'color': color,
+    if (nationalId != null) r'nationalId': nationalId,
+    if (studyYearId != null) r'studyYearId': studyYearId,
+  });
 
   Input_PersonsIncInput._(this._$data);
 
@@ -774,10 +760,7 @@ class Input_PersonsIncInput {
   }
 
   CopyWith_Input_PersonsIncInput<Input_PersonsIncInput> get copyWith =>
-      CopyWith_Input_PersonsIncInput(
-        this,
-        (i) => i,
-      );
+      CopyWith_Input_PersonsIncInput(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -838,19 +821,12 @@ abstract class CopyWith_Input_PersonsIncInput<TRes> {
   factory CopyWith_Input_PersonsIncInput.stub(TRes res) =
       _CopyWithStubImpl_Input_PersonsIncInput;
 
-  TRes call({
-    int? color,
-    int? nationalId,
-    int? studyYearId,
-  });
+  TRes call({int? color, int? nationalId, int? studyYearId});
 }
 
 class _CopyWithImpl_Input_PersonsIncInput<TRes>
     implements CopyWith_Input_PersonsIncInput<TRes> {
-  _CopyWithImpl_Input_PersonsIncInput(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Input_PersonsIncInput(this._instance, this._then);
 
   final Input_PersonsIncInput _instance;
 
@@ -862,13 +838,14 @@ class _CopyWithImpl_Input_PersonsIncInput<TRes>
     Object? color = _undefined,
     Object? nationalId = _undefined,
     Object? studyYearId = _undefined,
-  }) =>
-      _then(Input_PersonsIncInput._({
-        ..._instance._$data,
-        if (color != _undefined) 'color': (color as int?),
-        if (nationalId != _undefined) 'nationalId': (nationalId as int?),
-        if (studyYearId != _undefined) 'studyYearId': (studyYearId as int?),
-      }));
+  }) => _then(
+    Input_PersonsIncInput._({
+      ..._instance._$data,
+      if (color != _undefined) 'color': (color as int?),
+      if (nationalId != _undefined) 'nationalId': (nationalId as int?),
+      if (studyYearId != _undefined) 'studyYearId': (studyYearId as int?),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Input_PersonsIncInput<TRes>
@@ -877,12 +854,7 @@ class _CopyWithStubImpl_Input_PersonsIncInput<TRes>
 
   TRes _res;
 
-  call({
-    int? color,
-    int? nationalId,
-    int? studyYearId,
-  }) =>
-      _res;
+  call({int? color, int? nationalId, int? studyYearId}) => _res;
 }
 
 class Input_PersonsInsertInput {
@@ -938,60 +910,59 @@ class Input_PersonsInsertInput {
     Input_PersonsTagsArrRelInsertInput? tags,
     Input_HistoryVisitHistoryArrRelInsertInput? visitHistory,
     String? workStatus,
-  }) =>
-      Input_PersonsInsertInput._({
-        if (address != null) r'address': address,
-        if (addressText != null) r'addressText': addressText,
-        if (attendanceHistory != null) r'attendanceHistory': attendanceHistory,
-        if (birthdate != null) r'birthdate': birthdate,
-        if (callHistory != null) r'callHistory': callHistory,
-        if (church != null) r'church': church,
-        if (churchId != null) r'churchId': churchId,
-        if (college != null) r'college': college,
-        if (collegeId != null) r'collegeId': collegeId,
-        if (color != null) r'color': color,
-        if (confessionHistory != null) r'confessionHistory': confessionHistory,
-        if (family != null) r'family': family,
-        if (familyId != null) r'familyId': familyId,
-        if (father != null) r'father': father,
-        if (fatherId != null) r'fatherId': fatherId,
-        if (gender != null) r'gender': gender,
-        if (geolocation != null) r'geolocation': geolocation,
-        if (groups != null) r'groups': groups,
-        if (hobbies != null) r'hobbies': hobbies,
-        if (isServant != null) r'isServant': isServant,
-        if (isShammas != null) r'isShammas': isShammas,
-        if (isStudent != null) r'isStudent': isStudent,
-        if (job != null) r'job': job,
-        if (jobDescription != null) r'jobDescription': jobDescription,
-        if (jobId != null) r'jobId': jobId,
-        if (kodasHistory != null) r'kodasHistory': kodasHistory,
-        if (mainPhone != null) r'mainPhone': mainPhone,
-        if (martialStatus != null) r'martialStatus': martialStatus,
-        if (name != null) r'name': name,
-        if (nationalId != null) r'nationalId': nationalId,
-        if (notes != null) r'notes': notes,
-        if (otherPhones != null) r'otherPhones': otherPhones,
-        if (personType != null) r'personType': personType,
-        if (personTypeId != null) r'personTypeId': personTypeId,
-        if (qualification != null) r'qualification': qualification,
-        if (qualificationId != null) r'qualificationId': qualificationId,
-        if (school != null) r'school': school,
-        if (schoolId != null) r'schoolId': schoolId,
-        if (serviceType != null) r'serviceType': serviceType,
-        if (services != null) r'services': services,
-        if (servingChurch != null) r'servingChurch': servingChurch,
-        if (servingChurchId != null) r'servingChurchId': servingChurchId,
-        if (shammasLevelId != null) r'shammasLevelId': shammasLevelId,
-        if (state != null) r'state': state,
-        if (stateId != null) r'stateId': stateId,
-        if (storeId != null) r'storeId': storeId,
-        if (studyYear != null) r'studyYear': studyYear,
-        if (studyYearId != null) r'studyYearId': studyYearId,
-        if (tags != null) r'tags': tags,
-        if (visitHistory != null) r'visitHistory': visitHistory,
-        if (workStatus != null) r'workStatus': workStatus,
-      });
+  }) => Input_PersonsInsertInput._({
+    if (address != null) r'address': address,
+    if (addressText != null) r'addressText': addressText,
+    if (attendanceHistory != null) r'attendanceHistory': attendanceHistory,
+    if (birthdate != null) r'birthdate': birthdate,
+    if (callHistory != null) r'callHistory': callHistory,
+    if (church != null) r'church': church,
+    if (churchId != null) r'churchId': churchId,
+    if (college != null) r'college': college,
+    if (collegeId != null) r'collegeId': collegeId,
+    if (color != null) r'color': color,
+    if (confessionHistory != null) r'confessionHistory': confessionHistory,
+    if (family != null) r'family': family,
+    if (familyId != null) r'familyId': familyId,
+    if (father != null) r'father': father,
+    if (fatherId != null) r'fatherId': fatherId,
+    if (gender != null) r'gender': gender,
+    if (geolocation != null) r'geolocation': geolocation,
+    if (groups != null) r'groups': groups,
+    if (hobbies != null) r'hobbies': hobbies,
+    if (isServant != null) r'isServant': isServant,
+    if (isShammas != null) r'isShammas': isShammas,
+    if (isStudent != null) r'isStudent': isStudent,
+    if (job != null) r'job': job,
+    if (jobDescription != null) r'jobDescription': jobDescription,
+    if (jobId != null) r'jobId': jobId,
+    if (kodasHistory != null) r'kodasHistory': kodasHistory,
+    if (mainPhone != null) r'mainPhone': mainPhone,
+    if (martialStatus != null) r'martialStatus': martialStatus,
+    if (name != null) r'name': name,
+    if (nationalId != null) r'nationalId': nationalId,
+    if (notes != null) r'notes': notes,
+    if (otherPhones != null) r'otherPhones': otherPhones,
+    if (personType != null) r'personType': personType,
+    if (personTypeId != null) r'personTypeId': personTypeId,
+    if (qualification != null) r'qualification': qualification,
+    if (qualificationId != null) r'qualificationId': qualificationId,
+    if (school != null) r'school': school,
+    if (schoolId != null) r'schoolId': schoolId,
+    if (serviceType != null) r'serviceType': serviceType,
+    if (services != null) r'services': services,
+    if (servingChurch != null) r'servingChurch': servingChurch,
+    if (servingChurchId != null) r'servingChurchId': servingChurchId,
+    if (shammasLevelId != null) r'shammasLevelId': shammasLevelId,
+    if (state != null) r'state': state,
+    if (stateId != null) r'stateId': stateId,
+    if (storeId != null) r'storeId': storeId,
+    if (studyYear != null) r'studyYear': studyYear,
+    if (studyYearId != null) r'studyYearId': studyYearId,
+    if (tags != null) r'tags': tags,
+    if (visitHistory != null) r'visitHistory': visitHistory,
+    if (workStatus != null) r'workStatus': workStatus,
+  });
 
   Input_PersonsInsertInput._(this._$data);
 
@@ -1002,7 +973,8 @@ class Input_PersonsInsertInput {
       result$data['address'] = l$address == null
           ? null
           : Input_AddressesObjRelInsertInput.fromJson(
-              (l$address as Map<String, dynamic>));
+              (l$address as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('addressText')) {
       final l$addressText = data['addressText'];
@@ -1013,43 +985,50 @@ class Input_PersonsInsertInput {
       result$data['attendanceHistory'] = l$attendanceHistory == null
           ? null
           : Input_HistoryAttendanceHistoryArrRelInsertInput.fromJson(
-              (l$attendanceHistory as Map<String, dynamic>));
+              (l$attendanceHistory as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('birthdate')) {
       final l$birthdate = data['birthdate'];
-      result$data['birthdate'] =
-          l$birthdate == null ? null : dateFromString(l$birthdate);
+      result$data['birthdate'] = l$birthdate == null
+          ? null
+          : dateFromString(l$birthdate);
     }
     if (data.containsKey('callHistory')) {
       final l$callHistory = data['callHistory'];
       result$data['callHistory'] = l$callHistory == null
           ? null
           : Input_HistoryCallHistoryArrRelInsertInput.fromJson(
-              (l$callHistory as Map<String, dynamic>));
+              (l$callHistory as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('church')) {
       final l$church = data['church'];
       result$data['church'] = l$church == null
           ? null
           : Input_ChurchesObjRelInsertInput.fromJson(
-              (l$church as Map<String, dynamic>));
+              (l$church as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('churchId')) {
       final l$churchId = data['churchId'];
-      result$data['churchId'] =
-          l$churchId == null ? null : stringToUuid(l$churchId);
+      result$data['churchId'] = l$churchId == null
+          ? null
+          : stringToUuid(l$churchId);
     }
     if (data.containsKey('college')) {
       final l$college = data['college'];
       result$data['college'] = l$college == null
           ? null
           : Input_CollegesObjRelInsertInput.fromJson(
-              (l$college as Map<String, dynamic>));
+              (l$college as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('collegeId')) {
       final l$collegeId = data['collegeId'];
-      result$data['collegeId'] =
-          l$collegeId == null ? null : stringToUuid(l$collegeId);
+      result$data['collegeId'] = l$collegeId == null
+          ? null
+          : stringToUuid(l$collegeId);
     }
     if (data.containsKey('color')) {
       final l$color = data['color'];
@@ -1060,31 +1039,36 @@ class Input_PersonsInsertInput {
       result$data['confessionHistory'] = l$confessionHistory == null
           ? null
           : Input_HistoryConfessionHistoryArrRelInsertInput.fromJson(
-              (l$confessionHistory as Map<String, dynamic>));
+              (l$confessionHistory as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('family')) {
       final l$family = data['family'];
       result$data['family'] = l$family == null
           ? null
           : Input_FamiliesObjRelInsertInput.fromJson(
-              (l$family as Map<String, dynamic>));
+              (l$family as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('familyId')) {
       final l$familyId = data['familyId'];
-      result$data['familyId'] =
-          l$familyId == null ? null : stringToUuid(l$familyId);
+      result$data['familyId'] = l$familyId == null
+          ? null
+          : stringToUuid(l$familyId);
     }
     if (data.containsKey('father')) {
       final l$father = data['father'];
       result$data['father'] = l$father == null
           ? null
           : Input_FathersObjRelInsertInput.fromJson(
-              (l$father as Map<String, dynamic>));
+              (l$father as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('fatherId')) {
       final l$fatherId = data['fatherId'];
-      result$data['fatherId'] =
-          l$fatherId == null ? null : stringToUuid(l$fatherId);
+      result$data['fatherId'] = l$fatherId == null
+          ? null
+          : stringToUuid(l$fatherId);
     }
     if (data.containsKey('gender')) {
       final l$gender = data['gender'];
@@ -1099,14 +1083,16 @@ class Input_PersonsInsertInput {
       result$data['groups'] = l$groups == null
           ? null
           : Input_PersonsGroupsArrRelInsertInput.fromJson(
-              (l$groups as Map<String, dynamic>));
+              (l$groups as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('hobbies')) {
       final l$hobbies = data['hobbies'];
       result$data['hobbies'] = l$hobbies == null
           ? null
           : Input_PersonsHobbiesArrRelInsertInput.fromJson(
-              (l$hobbies as Map<String, dynamic>));
+              (l$hobbies as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('isServant')) {
       final l$isServant = data['isServant'];
@@ -1125,7 +1111,8 @@ class Input_PersonsInsertInput {
       result$data['job'] = l$job == null
           ? null
           : Input_JobsObjRelInsertInput.fromJson(
-              (l$job as Map<String, dynamic>));
+              (l$job as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('jobDescription')) {
       final l$jobDescription = data['jobDescription'];
@@ -1140,7 +1127,8 @@ class Input_PersonsInsertInput {
       result$data['kodasHistory'] = l$kodasHistory == null
           ? null
           : Input_HistoryKodasHistoryArrRelInsertInput.fromJson(
-              (l$kodasHistory as Map<String, dynamic>));
+              (l$kodasHistory as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('mainPhone')) {
       final l$mainPhone = data['mainPhone'];
@@ -1171,36 +1159,42 @@ class Input_PersonsInsertInput {
       result$data['personType'] = l$personType == null
           ? null
           : Input_PersonTypesObjRelInsertInput.fromJson(
-              (l$personType as Map<String, dynamic>));
+              (l$personType as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('personTypeId')) {
       final l$personTypeId = data['personTypeId'];
-      result$data['personTypeId'] =
-          l$personTypeId == null ? null : stringToUuid(l$personTypeId);
+      result$data['personTypeId'] = l$personTypeId == null
+          ? null
+          : stringToUuid(l$personTypeId);
     }
     if (data.containsKey('qualification')) {
       final l$qualification = data['qualification'];
       result$data['qualification'] = l$qualification == null
           ? null
           : Input_QualificationsObjRelInsertInput.fromJson(
-              (l$qualification as Map<String, dynamic>));
+              (l$qualification as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('qualificationId')) {
       final l$qualificationId = data['qualificationId'];
-      result$data['qualificationId'] =
-          l$qualificationId == null ? null : stringToUuid(l$qualificationId);
+      result$data['qualificationId'] = l$qualificationId == null
+          ? null
+          : stringToUuid(l$qualificationId);
     }
     if (data.containsKey('school')) {
       final l$school = data['school'];
       result$data['school'] = l$school == null
           ? null
           : Input_SchoolsObjRelInsertInput.fromJson(
-              (l$school as Map<String, dynamic>));
+              (l$school as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('schoolId')) {
       final l$schoolId = data['schoolId'];
-      result$data['schoolId'] =
-          l$schoolId == null ? null : stringToUuid(l$schoolId);
+      result$data['schoolId'] = l$schoolId == null
+          ? null
+          : stringToUuid(l$schoolId);
     }
     if (data.containsKey('serviceType')) {
       final l$serviceType = data['serviceType'];
@@ -1211,48 +1205,56 @@ class Input_PersonsInsertInput {
       result$data['services'] = l$services == null
           ? null
           : Input_PersonsServicesArrRelInsertInput.fromJson(
-              (l$services as Map<String, dynamic>));
+              (l$services as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('servingChurch')) {
       final l$servingChurch = data['servingChurch'];
       result$data['servingChurch'] = l$servingChurch == null
           ? null
           : Input_ChurchesObjRelInsertInput.fromJson(
-              (l$servingChurch as Map<String, dynamic>));
+              (l$servingChurch as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('servingChurchId')) {
       final l$servingChurchId = data['servingChurchId'];
-      result$data['servingChurchId'] =
-          l$servingChurchId == null ? null : stringToUuid(l$servingChurchId);
+      result$data['servingChurchId'] = l$servingChurchId == null
+          ? null
+          : stringToUuid(l$servingChurchId);
     }
     if (data.containsKey('shammasLevelId')) {
       final l$shammasLevelId = data['shammasLevelId'];
-      result$data['shammasLevelId'] =
-          l$shammasLevelId == null ? null : stringToUuid(l$shammasLevelId);
+      result$data['shammasLevelId'] = l$shammasLevelId == null
+          ? null
+          : stringToUuid(l$shammasLevelId);
     }
     if (data.containsKey('state')) {
       final l$state = data['state'];
       result$data['state'] = l$state == null
           ? null
           : Input_PersonStatesObjRelInsertInput.fromJson(
-              (l$state as Map<String, dynamic>));
+              (l$state as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('stateId')) {
       final l$stateId = data['stateId'];
-      result$data['stateId'] =
-          l$stateId == null ? null : stringToUuid(l$stateId);
+      result$data['stateId'] = l$stateId == null
+          ? null
+          : stringToUuid(l$stateId);
     }
     if (data.containsKey('storeId')) {
       final l$storeId = data['storeId'];
-      result$data['storeId'] =
-          l$storeId == null ? null : stringToUuid(l$storeId);
+      result$data['storeId'] = l$storeId == null
+          ? null
+          : stringToUuid(l$storeId);
     }
     if (data.containsKey('studyYear')) {
       final l$studyYear = data['studyYear'];
       result$data['studyYear'] = l$studyYear == null
           ? null
           : Input_StudyYearsObjRelInsertInput.fromJson(
-              (l$studyYear as Map<String, dynamic>));
+              (l$studyYear as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('studyYearId')) {
       final l$studyYearId = data['studyYearId'];
@@ -1263,14 +1265,16 @@ class Input_PersonsInsertInput {
       result$data['tags'] = l$tags == null
           ? null
           : Input_PersonsTagsArrRelInsertInput.fromJson(
-              (l$tags as Map<String, dynamic>));
+              (l$tags as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('visitHistory')) {
       final l$visitHistory = data['visitHistory'];
       result$data['visitHistory'] = l$visitHistory == null
           ? null
           : Input_HistoryVisitHistoryArrRelInsertInput.fromJson(
-              (l$visitHistory as Map<String, dynamic>));
+              (l$visitHistory as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('workStatus')) {
       final l$workStatus = data['workStatus'];
@@ -1423,8 +1427,9 @@ class Input_PersonsInsertInput {
     }
     if (_$data.containsKey('birthdate')) {
       final l$birthdate = birthdate;
-      result$data['birthdate'] =
-          l$birthdate == null ? null : dateToString(l$birthdate);
+      result$data['birthdate'] = l$birthdate == null
+          ? null
+          : dateToString(l$birthdate);
     }
     if (_$data.containsKey('callHistory')) {
       final l$callHistory = callHistory;
@@ -1436,8 +1441,9 @@ class Input_PersonsInsertInput {
     }
     if (_$data.containsKey('churchId')) {
       final l$churchId = churchId;
-      result$data['churchId'] =
-          l$churchId == null ? null : uuidToString(l$churchId);
+      result$data['churchId'] = l$churchId == null
+          ? null
+          : uuidToString(l$churchId);
     }
     if (_$data.containsKey('college')) {
       final l$college = college;
@@ -1445,8 +1451,9 @@ class Input_PersonsInsertInput {
     }
     if (_$data.containsKey('collegeId')) {
       final l$collegeId = collegeId;
-      result$data['collegeId'] =
-          l$collegeId == null ? null : uuidToString(l$collegeId);
+      result$data['collegeId'] = l$collegeId == null
+          ? null
+          : uuidToString(l$collegeId);
     }
     if (_$data.containsKey('color')) {
       final l$color = color;
@@ -1462,8 +1469,9 @@ class Input_PersonsInsertInput {
     }
     if (_$data.containsKey('familyId')) {
       final l$familyId = familyId;
-      result$data['familyId'] =
-          l$familyId == null ? null : uuidToString(l$familyId);
+      result$data['familyId'] = l$familyId == null
+          ? null
+          : uuidToString(l$familyId);
     }
     if (_$data.containsKey('father')) {
       final l$father = father;
@@ -1471,8 +1479,9 @@ class Input_PersonsInsertInput {
     }
     if (_$data.containsKey('fatherId')) {
       final l$fatherId = fatherId;
-      result$data['fatherId'] =
-          l$fatherId == null ? null : uuidToString(l$fatherId);
+      result$data['fatherId'] = l$fatherId == null
+          ? null
+          : uuidToString(l$fatherId);
     }
     if (_$data.containsKey('gender')) {
       final l$gender = gender;
@@ -1548,8 +1557,9 @@ class Input_PersonsInsertInput {
     }
     if (_$data.containsKey('personTypeId')) {
       final l$personTypeId = personTypeId;
-      result$data['personTypeId'] =
-          l$personTypeId == null ? null : uuidToString(l$personTypeId);
+      result$data['personTypeId'] = l$personTypeId == null
+          ? null
+          : uuidToString(l$personTypeId);
     }
     if (_$data.containsKey('qualification')) {
       final l$qualification = qualification;
@@ -1557,8 +1567,9 @@ class Input_PersonsInsertInput {
     }
     if (_$data.containsKey('qualificationId')) {
       final l$qualificationId = qualificationId;
-      result$data['qualificationId'] =
-          l$qualificationId == null ? null : uuidToString(l$qualificationId);
+      result$data['qualificationId'] = l$qualificationId == null
+          ? null
+          : uuidToString(l$qualificationId);
     }
     if (_$data.containsKey('school')) {
       final l$school = school;
@@ -1566,8 +1577,9 @@ class Input_PersonsInsertInput {
     }
     if (_$data.containsKey('schoolId')) {
       final l$schoolId = schoolId;
-      result$data['schoolId'] =
-          l$schoolId == null ? null : uuidToString(l$schoolId);
+      result$data['schoolId'] = l$schoolId == null
+          ? null
+          : uuidToString(l$schoolId);
     }
     if (_$data.containsKey('serviceType')) {
       final l$serviceType = serviceType;
@@ -1583,13 +1595,15 @@ class Input_PersonsInsertInput {
     }
     if (_$data.containsKey('servingChurchId')) {
       final l$servingChurchId = servingChurchId;
-      result$data['servingChurchId'] =
-          l$servingChurchId == null ? null : uuidToString(l$servingChurchId);
+      result$data['servingChurchId'] = l$servingChurchId == null
+          ? null
+          : uuidToString(l$servingChurchId);
     }
     if (_$data.containsKey('shammasLevelId')) {
       final l$shammasLevelId = shammasLevelId;
-      result$data['shammasLevelId'] =
-          l$shammasLevelId == null ? null : uuidToString(l$shammasLevelId);
+      result$data['shammasLevelId'] = l$shammasLevelId == null
+          ? null
+          : uuidToString(l$shammasLevelId);
     }
     if (_$data.containsKey('state')) {
       final l$state = state;
@@ -1597,13 +1611,15 @@ class Input_PersonsInsertInput {
     }
     if (_$data.containsKey('stateId')) {
       final l$stateId = stateId;
-      result$data['stateId'] =
-          l$stateId == null ? null : uuidToString(l$stateId);
+      result$data['stateId'] = l$stateId == null
+          ? null
+          : uuidToString(l$stateId);
     }
     if (_$data.containsKey('storeId')) {
       final l$storeId = storeId;
-      result$data['storeId'] =
-          l$storeId == null ? null : uuidToString(l$storeId);
+      result$data['storeId'] = l$storeId == null
+          ? null
+          : uuidToString(l$storeId);
     }
     if (_$data.containsKey('studyYear')) {
       final l$studyYear = studyYear;
@@ -1629,10 +1645,7 @@ class Input_PersonsInsertInput {
   }
 
   CopyWith_Input_PersonsInsertInput<Input_PersonsInsertInput> get copyWith =>
-      CopyWith_Input_PersonsInsertInput(
-        this,
-        (i) => i,
-      );
+      CopyWith_Input_PersonsInsertInput(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -2260,12 +2273,12 @@ abstract class CopyWith_Input_PersonsInsertInput<TRes> {
   });
   CopyWith_Input_AddressesObjRelInsertInput<TRes> get address;
   CopyWith_Input_HistoryAttendanceHistoryArrRelInsertInput<TRes>
-      get attendanceHistory;
+  get attendanceHistory;
   CopyWith_Input_HistoryCallHistoryArrRelInsertInput<TRes> get callHistory;
   CopyWith_Input_ChurchesObjRelInsertInput<TRes> get church;
   CopyWith_Input_CollegesObjRelInsertInput<TRes> get college;
   CopyWith_Input_HistoryConfessionHistoryArrRelInsertInput<TRes>
-      get confessionHistory;
+  get confessionHistory;
   CopyWith_Input_FamiliesObjRelInsertInput<TRes> get family;
   CopyWith_Input_FathersObjRelInsertInput<TRes> get father;
   CopyWith_Input_PersonsGroupsArrRelInsertInput<TRes> get groups;
@@ -2285,10 +2298,7 @@ abstract class CopyWith_Input_PersonsInsertInput<TRes> {
 
 class _CopyWithImpl_Input_PersonsInsertInput<TRes>
     implements CopyWith_Input_PersonsInsertInput<TRes> {
-  _CopyWithImpl_Input_PersonsInsertInput(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Input_PersonsInsertInput(this._instance, this._then);
 
   final Input_PersonsInsertInput _instance;
 
@@ -2348,120 +2358,131 @@ class _CopyWithImpl_Input_PersonsInsertInput<TRes>
     Object? tags = _undefined,
     Object? visitHistory = _undefined,
     Object? workStatus = _undefined,
-  }) =>
-      _then(Input_PersonsInsertInput._({
-        ..._instance._$data,
-        if (address != _undefined)
-          'address': (address as Input_AddressesObjRelInsertInput?),
-        if (addressText != _undefined) 'addressText': (addressText as String?),
-        if (attendanceHistory != _undefined)
-          'attendanceHistory': (attendanceHistory
-              as Input_HistoryAttendanceHistoryArrRelInsertInput?),
-        if (birthdate != _undefined) 'birthdate': (birthdate as DateTime?),
-        if (callHistory != _undefined)
-          'callHistory':
-              (callHistory as Input_HistoryCallHistoryArrRelInsertInput?),
-        if (church != _undefined)
-          'church': (church as Input_ChurchesObjRelInsertInput?),
-        if (churchId != _undefined) 'churchId': (churchId as UuidValue?),
-        if (college != _undefined)
-          'college': (college as Input_CollegesObjRelInsertInput?),
-        if (collegeId != _undefined) 'collegeId': (collegeId as UuidValue?),
-        if (color != _undefined) 'color': (color as int?),
-        if (confessionHistory != _undefined)
-          'confessionHistory': (confessionHistory
-              as Input_HistoryConfessionHistoryArrRelInsertInput?),
-        if (family != _undefined)
-          'family': (family as Input_FamiliesObjRelInsertInput?),
-        if (familyId != _undefined) 'familyId': (familyId as UuidValue?),
-        if (father != _undefined)
-          'father': (father as Input_FathersObjRelInsertInput?),
-        if (fatherId != _undefined) 'fatherId': (fatherId as UuidValue?),
-        if (gender != _undefined) 'gender': (gender as bool?),
-        if (geolocation != _undefined)
-          'geolocation': (geolocation as Map<String, dynamic>?),
-        if (groups != _undefined)
-          'groups': (groups as Input_PersonsGroupsArrRelInsertInput?),
-        if (hobbies != _undefined)
-          'hobbies': (hobbies as Input_PersonsHobbiesArrRelInsertInput?),
-        if (isServant != _undefined) 'isServant': (isServant as bool?),
-        if (isShammas != _undefined) 'isShammas': (isShammas as bool?),
-        if (isStudent != _undefined) 'isStudent': (isStudent as bool?),
-        if (job != _undefined) 'job': (job as Input_JobsObjRelInsertInput?),
-        if (jobDescription != _undefined)
-          'jobDescription': (jobDescription as String?),
-        if (jobId != _undefined) 'jobId': (jobId as UuidValue?),
-        if (kodasHistory != _undefined)
-          'kodasHistory':
-              (kodasHistory as Input_HistoryKodasHistoryArrRelInsertInput?),
-        if (mainPhone != _undefined) 'mainPhone': (mainPhone as String?),
-        if (martialStatus != _undefined)
-          'martialStatus': (martialStatus as String?),
-        if (name != _undefined) 'name': (name as String?),
-        if (nationalId != _undefined) 'nationalId': (nationalId as int?),
-        if (notes != _undefined) 'notes': (notes as String?),
-        if (otherPhones != _undefined) 'otherPhones': (otherPhones as Json?),
-        if (personType != _undefined)
-          'personType': (personType as Input_PersonTypesObjRelInsertInput?),
-        if (personTypeId != _undefined)
-          'personTypeId': (personTypeId as UuidValue?),
-        if (qualification != _undefined)
-          'qualification':
-              (qualification as Input_QualificationsObjRelInsertInput?),
-        if (qualificationId != _undefined)
-          'qualificationId': (qualificationId as UuidValue?),
-        if (school != _undefined)
-          'school': (school as Input_SchoolsObjRelInsertInput?),
-        if (schoolId != _undefined) 'schoolId': (schoolId as UuidValue?),
-        if (serviceType != _undefined) 'serviceType': (serviceType as String?),
-        if (services != _undefined)
-          'services': (services as Input_PersonsServicesArrRelInsertInput?),
-        if (servingChurch != _undefined)
-          'servingChurch': (servingChurch as Input_ChurchesObjRelInsertInput?),
-        if (servingChurchId != _undefined)
-          'servingChurchId': (servingChurchId as UuidValue?),
-        if (shammasLevelId != _undefined)
-          'shammasLevelId': (shammasLevelId as UuidValue?),
-        if (state != _undefined)
-          'state': (state as Input_PersonStatesObjRelInsertInput?),
-        if (stateId != _undefined) 'stateId': (stateId as UuidValue?),
-        if (storeId != _undefined) 'storeId': (storeId as UuidValue?),
-        if (studyYear != _undefined)
-          'studyYear': (studyYear as Input_StudyYearsObjRelInsertInput?),
-        if (studyYearId != _undefined) 'studyYearId': (studyYearId as int?),
-        if (tags != _undefined)
-          'tags': (tags as Input_PersonsTagsArrRelInsertInput?),
-        if (visitHistory != _undefined)
-          'visitHistory':
-              (visitHistory as Input_HistoryVisitHistoryArrRelInsertInput?),
-        if (workStatus != _undefined) 'workStatus': (workStatus as String?),
-      }));
+  }) => _then(
+    Input_PersonsInsertInput._({
+      ..._instance._$data,
+      if (address != _undefined)
+        'address': (address as Input_AddressesObjRelInsertInput?),
+      if (addressText != _undefined) 'addressText': (addressText as String?),
+      if (attendanceHistory != _undefined)
+        'attendanceHistory':
+            (attendanceHistory
+                as Input_HistoryAttendanceHistoryArrRelInsertInput?),
+      if (birthdate != _undefined) 'birthdate': (birthdate as DateTime?),
+      if (callHistory != _undefined)
+        'callHistory':
+            (callHistory as Input_HistoryCallHistoryArrRelInsertInput?),
+      if (church != _undefined)
+        'church': (church as Input_ChurchesObjRelInsertInput?),
+      if (churchId != _undefined) 'churchId': (churchId as UuidValue?),
+      if (college != _undefined)
+        'college': (college as Input_CollegesObjRelInsertInput?),
+      if (collegeId != _undefined) 'collegeId': (collegeId as UuidValue?),
+      if (color != _undefined) 'color': (color as int?),
+      if (confessionHistory != _undefined)
+        'confessionHistory':
+            (confessionHistory
+                as Input_HistoryConfessionHistoryArrRelInsertInput?),
+      if (family != _undefined)
+        'family': (family as Input_FamiliesObjRelInsertInput?),
+      if (familyId != _undefined) 'familyId': (familyId as UuidValue?),
+      if (father != _undefined)
+        'father': (father as Input_FathersObjRelInsertInput?),
+      if (fatherId != _undefined) 'fatherId': (fatherId as UuidValue?),
+      if (gender != _undefined) 'gender': (gender as bool?),
+      if (geolocation != _undefined)
+        'geolocation': (geolocation as Map<String, dynamic>?),
+      if (groups != _undefined)
+        'groups': (groups as Input_PersonsGroupsArrRelInsertInput?),
+      if (hobbies != _undefined)
+        'hobbies': (hobbies as Input_PersonsHobbiesArrRelInsertInput?),
+      if (isServant != _undefined) 'isServant': (isServant as bool?),
+      if (isShammas != _undefined) 'isShammas': (isShammas as bool?),
+      if (isStudent != _undefined) 'isStudent': (isStudent as bool?),
+      if (job != _undefined) 'job': (job as Input_JobsObjRelInsertInput?),
+      if (jobDescription != _undefined)
+        'jobDescription': (jobDescription as String?),
+      if (jobId != _undefined) 'jobId': (jobId as UuidValue?),
+      if (kodasHistory != _undefined)
+        'kodasHistory':
+            (kodasHistory as Input_HistoryKodasHistoryArrRelInsertInput?),
+      if (mainPhone != _undefined) 'mainPhone': (mainPhone as String?),
+      if (martialStatus != _undefined)
+        'martialStatus': (martialStatus as String?),
+      if (name != _undefined) 'name': (name as String?),
+      if (nationalId != _undefined) 'nationalId': (nationalId as int?),
+      if (notes != _undefined) 'notes': (notes as String?),
+      if (otherPhones != _undefined) 'otherPhones': (otherPhones as Json?),
+      if (personType != _undefined)
+        'personType': (personType as Input_PersonTypesObjRelInsertInput?),
+      if (personTypeId != _undefined)
+        'personTypeId': (personTypeId as UuidValue?),
+      if (qualification != _undefined)
+        'qualification':
+            (qualification as Input_QualificationsObjRelInsertInput?),
+      if (qualificationId != _undefined)
+        'qualificationId': (qualificationId as UuidValue?),
+      if (school != _undefined)
+        'school': (school as Input_SchoolsObjRelInsertInput?),
+      if (schoolId != _undefined) 'schoolId': (schoolId as UuidValue?),
+      if (serviceType != _undefined) 'serviceType': (serviceType as String?),
+      if (services != _undefined)
+        'services': (services as Input_PersonsServicesArrRelInsertInput?),
+      if (servingChurch != _undefined)
+        'servingChurch': (servingChurch as Input_ChurchesObjRelInsertInput?),
+      if (servingChurchId != _undefined)
+        'servingChurchId': (servingChurchId as UuidValue?),
+      if (shammasLevelId != _undefined)
+        'shammasLevelId': (shammasLevelId as UuidValue?),
+      if (state != _undefined)
+        'state': (state as Input_PersonStatesObjRelInsertInput?),
+      if (stateId != _undefined) 'stateId': (stateId as UuidValue?),
+      if (storeId != _undefined) 'storeId': (storeId as UuidValue?),
+      if (studyYear != _undefined)
+        'studyYear': (studyYear as Input_StudyYearsObjRelInsertInput?),
+      if (studyYearId != _undefined) 'studyYearId': (studyYearId as int?),
+      if (tags != _undefined)
+        'tags': (tags as Input_PersonsTagsArrRelInsertInput?),
+      if (visitHistory != _undefined)
+        'visitHistory':
+            (visitHistory as Input_HistoryVisitHistoryArrRelInsertInput?),
+      if (workStatus != _undefined) 'workStatus': (workStatus as String?),
+    }),
+  );
 
   CopyWith_Input_AddressesObjRelInsertInput<TRes> get address {
     final local$address = _instance.address;
     return local$address == null
         ? CopyWith_Input_AddressesObjRelInsertInput.stub(_then(_instance))
         : CopyWith_Input_AddressesObjRelInsertInput(
-            local$address, (e) => call(address: e));
+            local$address,
+            (e) => call(address: e),
+          );
   }
 
   CopyWith_Input_HistoryAttendanceHistoryArrRelInsertInput<TRes>
-      get attendanceHistory {
+  get attendanceHistory {
     final local$attendanceHistory = _instance.attendanceHistory;
     return local$attendanceHistory == null
         ? CopyWith_Input_HistoryAttendanceHistoryArrRelInsertInput.stub(
-            _then(_instance))
+            _then(_instance),
+          )
         : CopyWith_Input_HistoryAttendanceHistoryArrRelInsertInput(
-            local$attendanceHistory, (e) => call(attendanceHistory: e));
+            local$attendanceHistory,
+            (e) => call(attendanceHistory: e),
+          );
   }
 
   CopyWith_Input_HistoryCallHistoryArrRelInsertInput<TRes> get callHistory {
     final local$callHistory = _instance.callHistory;
     return local$callHistory == null
         ? CopyWith_Input_HistoryCallHistoryArrRelInsertInput.stub(
-            _then(_instance))
+            _then(_instance),
+          )
         : CopyWith_Input_HistoryCallHistoryArrRelInsertInput(
-            local$callHistory, (e) => call(callHistory: e));
+            local$callHistory,
+            (e) => call(callHistory: e),
+          );
   }
 
   CopyWith_Input_ChurchesObjRelInsertInput<TRes> get church {
@@ -2469,7 +2490,9 @@ class _CopyWithImpl_Input_PersonsInsertInput<TRes>
     return local$church == null
         ? CopyWith_Input_ChurchesObjRelInsertInput.stub(_then(_instance))
         : CopyWith_Input_ChurchesObjRelInsertInput(
-            local$church, (e) => call(church: e));
+            local$church,
+            (e) => call(church: e),
+          );
   }
 
   CopyWith_Input_CollegesObjRelInsertInput<TRes> get college {
@@ -2477,17 +2500,22 @@ class _CopyWithImpl_Input_PersonsInsertInput<TRes>
     return local$college == null
         ? CopyWith_Input_CollegesObjRelInsertInput.stub(_then(_instance))
         : CopyWith_Input_CollegesObjRelInsertInput(
-            local$college, (e) => call(college: e));
+            local$college,
+            (e) => call(college: e),
+          );
   }
 
   CopyWith_Input_HistoryConfessionHistoryArrRelInsertInput<TRes>
-      get confessionHistory {
+  get confessionHistory {
     final local$confessionHistory = _instance.confessionHistory;
     return local$confessionHistory == null
         ? CopyWith_Input_HistoryConfessionHistoryArrRelInsertInput.stub(
-            _then(_instance))
+            _then(_instance),
+          )
         : CopyWith_Input_HistoryConfessionHistoryArrRelInsertInput(
-            local$confessionHistory, (e) => call(confessionHistory: e));
+            local$confessionHistory,
+            (e) => call(confessionHistory: e),
+          );
   }
 
   CopyWith_Input_FamiliesObjRelInsertInput<TRes> get family {
@@ -2495,7 +2523,9 @@ class _CopyWithImpl_Input_PersonsInsertInput<TRes>
     return local$family == null
         ? CopyWith_Input_FamiliesObjRelInsertInput.stub(_then(_instance))
         : CopyWith_Input_FamiliesObjRelInsertInput(
-            local$family, (e) => call(family: e));
+            local$family,
+            (e) => call(family: e),
+          );
   }
 
   CopyWith_Input_FathersObjRelInsertInput<TRes> get father {
@@ -2503,7 +2533,9 @@ class _CopyWithImpl_Input_PersonsInsertInput<TRes>
     return local$father == null
         ? CopyWith_Input_FathersObjRelInsertInput.stub(_then(_instance))
         : CopyWith_Input_FathersObjRelInsertInput(
-            local$father, (e) => call(father: e));
+            local$father,
+            (e) => call(father: e),
+          );
   }
 
   CopyWith_Input_PersonsGroupsArrRelInsertInput<TRes> get groups {
@@ -2511,7 +2543,9 @@ class _CopyWithImpl_Input_PersonsInsertInput<TRes>
     return local$groups == null
         ? CopyWith_Input_PersonsGroupsArrRelInsertInput.stub(_then(_instance))
         : CopyWith_Input_PersonsGroupsArrRelInsertInput(
-            local$groups, (e) => call(groups: e));
+            local$groups,
+            (e) => call(groups: e),
+          );
   }
 
   CopyWith_Input_PersonsHobbiesArrRelInsertInput<TRes> get hobbies {
@@ -2519,7 +2553,9 @@ class _CopyWithImpl_Input_PersonsInsertInput<TRes>
     return local$hobbies == null
         ? CopyWith_Input_PersonsHobbiesArrRelInsertInput.stub(_then(_instance))
         : CopyWith_Input_PersonsHobbiesArrRelInsertInput(
-            local$hobbies, (e) => call(hobbies: e));
+            local$hobbies,
+            (e) => call(hobbies: e),
+          );
   }
 
   CopyWith_Input_JobsObjRelInsertInput<TRes> get job {
@@ -2533,9 +2569,12 @@ class _CopyWithImpl_Input_PersonsInsertInput<TRes>
     final local$kodasHistory = _instance.kodasHistory;
     return local$kodasHistory == null
         ? CopyWith_Input_HistoryKodasHistoryArrRelInsertInput.stub(
-            _then(_instance))
+            _then(_instance),
+          )
         : CopyWith_Input_HistoryKodasHistoryArrRelInsertInput(
-            local$kodasHistory, (e) => call(kodasHistory: e));
+            local$kodasHistory,
+            (e) => call(kodasHistory: e),
+          );
   }
 
   CopyWith_Input_PersonTypesObjRelInsertInput<TRes> get personType {
@@ -2543,7 +2582,9 @@ class _CopyWithImpl_Input_PersonsInsertInput<TRes>
     return local$personType == null
         ? CopyWith_Input_PersonTypesObjRelInsertInput.stub(_then(_instance))
         : CopyWith_Input_PersonTypesObjRelInsertInput(
-            local$personType, (e) => call(personType: e));
+            local$personType,
+            (e) => call(personType: e),
+          );
   }
 
   CopyWith_Input_QualificationsObjRelInsertInput<TRes> get qualification {
@@ -2551,7 +2592,9 @@ class _CopyWithImpl_Input_PersonsInsertInput<TRes>
     return local$qualification == null
         ? CopyWith_Input_QualificationsObjRelInsertInput.stub(_then(_instance))
         : CopyWith_Input_QualificationsObjRelInsertInput(
-            local$qualification, (e) => call(qualification: e));
+            local$qualification,
+            (e) => call(qualification: e),
+          );
   }
 
   CopyWith_Input_SchoolsObjRelInsertInput<TRes> get school {
@@ -2559,7 +2602,9 @@ class _CopyWithImpl_Input_PersonsInsertInput<TRes>
     return local$school == null
         ? CopyWith_Input_SchoolsObjRelInsertInput.stub(_then(_instance))
         : CopyWith_Input_SchoolsObjRelInsertInput(
-            local$school, (e) => call(school: e));
+            local$school,
+            (e) => call(school: e),
+          );
   }
 
   CopyWith_Input_PersonsServicesArrRelInsertInput<TRes> get services {
@@ -2567,7 +2612,9 @@ class _CopyWithImpl_Input_PersonsInsertInput<TRes>
     return local$services == null
         ? CopyWith_Input_PersonsServicesArrRelInsertInput.stub(_then(_instance))
         : CopyWith_Input_PersonsServicesArrRelInsertInput(
-            local$services, (e) => call(services: e));
+            local$services,
+            (e) => call(services: e),
+          );
   }
 
   CopyWith_Input_ChurchesObjRelInsertInput<TRes> get servingChurch {
@@ -2575,7 +2622,9 @@ class _CopyWithImpl_Input_PersonsInsertInput<TRes>
     return local$servingChurch == null
         ? CopyWith_Input_ChurchesObjRelInsertInput.stub(_then(_instance))
         : CopyWith_Input_ChurchesObjRelInsertInput(
-            local$servingChurch, (e) => call(servingChurch: e));
+            local$servingChurch,
+            (e) => call(servingChurch: e),
+          );
   }
 
   CopyWith_Input_PersonStatesObjRelInsertInput<TRes> get state {
@@ -2583,7 +2632,9 @@ class _CopyWithImpl_Input_PersonsInsertInput<TRes>
     return local$state == null
         ? CopyWith_Input_PersonStatesObjRelInsertInput.stub(_then(_instance))
         : CopyWith_Input_PersonStatesObjRelInsertInput(
-            local$state, (e) => call(state: e));
+            local$state,
+            (e) => call(state: e),
+          );
   }
 
   CopyWith_Input_StudyYearsObjRelInsertInput<TRes> get studyYear {
@@ -2591,7 +2642,9 @@ class _CopyWithImpl_Input_PersonsInsertInput<TRes>
     return local$studyYear == null
         ? CopyWith_Input_StudyYearsObjRelInsertInput.stub(_then(_instance))
         : CopyWith_Input_StudyYearsObjRelInsertInput(
-            local$studyYear, (e) => call(studyYear: e));
+            local$studyYear,
+            (e) => call(studyYear: e),
+          );
   }
 
   CopyWith_Input_PersonsTagsArrRelInsertInput<TRes> get tags {
@@ -2599,16 +2652,21 @@ class _CopyWithImpl_Input_PersonsInsertInput<TRes>
     return local$tags == null
         ? CopyWith_Input_PersonsTagsArrRelInsertInput.stub(_then(_instance))
         : CopyWith_Input_PersonsTagsArrRelInsertInput(
-            local$tags, (e) => call(tags: e));
+            local$tags,
+            (e) => call(tags: e),
+          );
   }
 
   CopyWith_Input_HistoryVisitHistoryArrRelInsertInput<TRes> get visitHistory {
     final local$visitHistory = _instance.visitHistory;
     return local$visitHistory == null
         ? CopyWith_Input_HistoryVisitHistoryArrRelInsertInput.stub(
-            _then(_instance))
+            _then(_instance),
+          )
         : CopyWith_Input_HistoryVisitHistoryArrRelInsertInput(
-            local$visitHistory, (e) => call(visitHistory: e));
+            local$visitHistory,
+            (e) => call(visitHistory: e),
+          );
   }
 }
 
@@ -2670,15 +2728,14 @@ class _CopyWithStubImpl_Input_PersonsInsertInput<TRes>
     Input_PersonsTagsArrRelInsertInput? tags,
     Input_HistoryVisitHistoryArrRelInsertInput? visitHistory,
     String? workStatus,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Input_AddressesObjRelInsertInput<TRes> get address =>
       CopyWith_Input_AddressesObjRelInsertInput.stub(_res);
 
   CopyWith_Input_HistoryAttendanceHistoryArrRelInsertInput<TRes>
-      get attendanceHistory =>
-          CopyWith_Input_HistoryAttendanceHistoryArrRelInsertInput.stub(_res);
+  get attendanceHistory =>
+      CopyWith_Input_HistoryAttendanceHistoryArrRelInsertInput.stub(_res);
 
   CopyWith_Input_HistoryCallHistoryArrRelInsertInput<TRes> get callHistory =>
       CopyWith_Input_HistoryCallHistoryArrRelInsertInput.stub(_res);
@@ -2690,8 +2747,8 @@ class _CopyWithStubImpl_Input_PersonsInsertInput<TRes>
       CopyWith_Input_CollegesObjRelInsertInput.stub(_res);
 
   CopyWith_Input_HistoryConfessionHistoryArrRelInsertInput<TRes>
-      get confessionHistory =>
-          CopyWith_Input_HistoryConfessionHistoryArrRelInsertInput.stub(_res);
+  get confessionHistory =>
+      CopyWith_Input_HistoryConfessionHistoryArrRelInsertInput.stub(_res);
 
   CopyWith_Input_FamiliesObjRelInsertInput<TRes> get family =>
       CopyWith_Input_FamiliesObjRelInsertInput.stub(_res);
@@ -2769,37 +2826,36 @@ class Input_PersonsMaxOrderBy {
     Enum_OrderBy? studyYearId,
     Enum_OrderBy? uid,
     Enum_OrderBy? workStatus,
-  }) =>
-      Input_PersonsMaxOrderBy._({
-        if (addressText != null) r'addressText': addressText,
-        if (birthdate != null) r'birthdate': birthdate,
-        if (blurhash != null) r'blurhash': blurhash,
-        if (churchId != null) r'churchId': churchId,
-        if (collegeId != null) r'collegeId': collegeId,
-        if (color != null) r'color': color,
-        if (familyId != null) r'familyId': familyId,
-        if (fatherId != null) r'fatherId': fatherId,
-        if (id != null) r'id': id,
-        if (jobDescription != null) r'jobDescription': jobDescription,
-        if (jobId != null) r'jobId': jobId,
-        if (mainPhone != null) r'mainPhone': mainPhone,
-        if (martialStatus != null) r'martialStatus': martialStatus,
-        if (name != null) r'name': name,
-        if (nationalId != null) r'nationalId': nationalId,
-        if (notes != null) r'notes': notes,
-        if (personTypeId != null) r'personTypeId': personTypeId,
-        if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
-        if (qualificationId != null) r'qualificationId': qualificationId,
-        if (schoolId != null) r'schoolId': schoolId,
-        if (serviceType != null) r'serviceType': serviceType,
-        if (servingChurchId != null) r'servingChurchId': servingChurchId,
-        if (shammasLevelId != null) r'shammasLevelId': shammasLevelId,
-        if (stateId != null) r'stateId': stateId,
-        if (storeId != null) r'storeId': storeId,
-        if (studyYearId != null) r'studyYearId': studyYearId,
-        if (uid != null) r'uid': uid,
-        if (workStatus != null) r'workStatus': workStatus,
-      });
+  }) => Input_PersonsMaxOrderBy._({
+    if (addressText != null) r'addressText': addressText,
+    if (birthdate != null) r'birthdate': birthdate,
+    if (blurhash != null) r'blurhash': blurhash,
+    if (churchId != null) r'churchId': churchId,
+    if (collegeId != null) r'collegeId': collegeId,
+    if (color != null) r'color': color,
+    if (familyId != null) r'familyId': familyId,
+    if (fatherId != null) r'fatherId': fatherId,
+    if (id != null) r'id': id,
+    if (jobDescription != null) r'jobDescription': jobDescription,
+    if (jobId != null) r'jobId': jobId,
+    if (mainPhone != null) r'mainPhone': mainPhone,
+    if (martialStatus != null) r'martialStatus': martialStatus,
+    if (name != null) r'name': name,
+    if (nationalId != null) r'nationalId': nationalId,
+    if (notes != null) r'notes': notes,
+    if (personTypeId != null) r'personTypeId': personTypeId,
+    if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
+    if (qualificationId != null) r'qualificationId': qualificationId,
+    if (schoolId != null) r'schoolId': schoolId,
+    if (serviceType != null) r'serviceType': serviceType,
+    if (servingChurchId != null) r'servingChurchId': servingChurchId,
+    if (shammasLevelId != null) r'shammasLevelId': shammasLevelId,
+    if (stateId != null) r'stateId': stateId,
+    if (storeId != null) r'storeId': storeId,
+    if (studyYearId != null) r'studyYearId': studyYearId,
+    if (uid != null) r'uid': uid,
+    if (workStatus != null) r'workStatus': workStatus,
+  });
 
   Input_PersonsMaxOrderBy._(this._$data);
 
@@ -2837,8 +2893,9 @@ class Input_PersonsMaxOrderBy {
     }
     if (data.containsKey('color')) {
       final l$color = data['color'];
-      result$data['color'] =
-          l$color == null ? null : fromJson_Enum_OrderBy((l$color as String));
+      result$data['color'] = l$color == null
+          ? null
+          : fromJson_Enum_OrderBy((l$color as String));
     }
     if (data.containsKey('familyId')) {
       final l$familyId = data['familyId'];
@@ -2854,8 +2911,9 @@ class Input_PersonsMaxOrderBy {
     }
     if (data.containsKey('id')) {
       final l$id = data['id'];
-      result$data['id'] =
-          l$id == null ? null : fromJson_Enum_OrderBy((l$id as String));
+      result$data['id'] = l$id == null
+          ? null
+          : fromJson_Enum_OrderBy((l$id as String));
     }
     if (data.containsKey('jobDescription')) {
       final l$jobDescription = data['jobDescription'];
@@ -2865,8 +2923,9 @@ class Input_PersonsMaxOrderBy {
     }
     if (data.containsKey('jobId')) {
       final l$jobId = data['jobId'];
-      result$data['jobId'] =
-          l$jobId == null ? null : fromJson_Enum_OrderBy((l$jobId as String));
+      result$data['jobId'] = l$jobId == null
+          ? null
+          : fromJson_Enum_OrderBy((l$jobId as String));
     }
     if (data.containsKey('mainPhone')) {
       final l$mainPhone = data['mainPhone'];
@@ -2882,8 +2941,9 @@ class Input_PersonsMaxOrderBy {
     }
     if (data.containsKey('name')) {
       final l$name = data['name'];
-      result$data['name'] =
-          l$name == null ? null : fromJson_Enum_OrderBy((l$name as String));
+      result$data['name'] = l$name == null
+          ? null
+          : fromJson_Enum_OrderBy((l$name as String));
     }
     if (data.containsKey('nationalId')) {
       final l$nationalId = data['nationalId'];
@@ -2893,8 +2953,9 @@ class Input_PersonsMaxOrderBy {
     }
     if (data.containsKey('notes')) {
       final l$notes = data['notes'];
-      result$data['notes'] =
-          l$notes == null ? null : fromJson_Enum_OrderBy((l$notes as String));
+      result$data['notes'] = l$notes == null
+          ? null
+          : fromJson_Enum_OrderBy((l$notes as String));
     }
     if (data.containsKey('personTypeId')) {
       final l$personTypeId = data['personTypeId'];
@@ -2958,8 +3019,9 @@ class Input_PersonsMaxOrderBy {
     }
     if (data.containsKey('uid')) {
       final l$uid = data['uid'];
-      result$data['uid'] =
-          l$uid == null ? null : fromJson_Enum_OrderBy((l$uid as String));
+      result$data['uid'] = l$uid == null
+          ? null
+          : fromJson_Enum_OrderBy((l$uid as String));
     }
     if (data.containsKey('workStatus')) {
       final l$workStatus = data['workStatus'];
@@ -3037,43 +3099,51 @@ class Input_PersonsMaxOrderBy {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('addressText')) {
       final l$addressText = addressText;
-      result$data['addressText'] =
-          l$addressText == null ? null : toJson_Enum_OrderBy(l$addressText);
+      result$data['addressText'] = l$addressText == null
+          ? null
+          : toJson_Enum_OrderBy(l$addressText);
     }
     if (_$data.containsKey('birthdate')) {
       final l$birthdate = birthdate;
-      result$data['birthdate'] =
-          l$birthdate == null ? null : toJson_Enum_OrderBy(l$birthdate);
+      result$data['birthdate'] = l$birthdate == null
+          ? null
+          : toJson_Enum_OrderBy(l$birthdate);
     }
     if (_$data.containsKey('blurhash')) {
       final l$blurhash = blurhash;
-      result$data['blurhash'] =
-          l$blurhash == null ? null : toJson_Enum_OrderBy(l$blurhash);
+      result$data['blurhash'] = l$blurhash == null
+          ? null
+          : toJson_Enum_OrderBy(l$blurhash);
     }
     if (_$data.containsKey('churchId')) {
       final l$churchId = churchId;
-      result$data['churchId'] =
-          l$churchId == null ? null : toJson_Enum_OrderBy(l$churchId);
+      result$data['churchId'] = l$churchId == null
+          ? null
+          : toJson_Enum_OrderBy(l$churchId);
     }
     if (_$data.containsKey('collegeId')) {
       final l$collegeId = collegeId;
-      result$data['collegeId'] =
-          l$collegeId == null ? null : toJson_Enum_OrderBy(l$collegeId);
+      result$data['collegeId'] = l$collegeId == null
+          ? null
+          : toJson_Enum_OrderBy(l$collegeId);
     }
     if (_$data.containsKey('color')) {
       final l$color = color;
-      result$data['color'] =
-          l$color == null ? null : toJson_Enum_OrderBy(l$color);
+      result$data['color'] = l$color == null
+          ? null
+          : toJson_Enum_OrderBy(l$color);
     }
     if (_$data.containsKey('familyId')) {
       final l$familyId = familyId;
-      result$data['familyId'] =
-          l$familyId == null ? null : toJson_Enum_OrderBy(l$familyId);
+      result$data['familyId'] = l$familyId == null
+          ? null
+          : toJson_Enum_OrderBy(l$familyId);
     }
     if (_$data.containsKey('fatherId')) {
       final l$fatherId = fatherId;
-      result$data['fatherId'] =
-          l$fatherId == null ? null : toJson_Enum_OrderBy(l$fatherId);
+      result$data['fatherId'] = l$fatherId == null
+          ? null
+          : toJson_Enum_OrderBy(l$fatherId);
     }
     if (_$data.containsKey('id')) {
       final l$id = id;
@@ -3087,18 +3157,21 @@ class Input_PersonsMaxOrderBy {
     }
     if (_$data.containsKey('jobId')) {
       final l$jobId = jobId;
-      result$data['jobId'] =
-          l$jobId == null ? null : toJson_Enum_OrderBy(l$jobId);
+      result$data['jobId'] = l$jobId == null
+          ? null
+          : toJson_Enum_OrderBy(l$jobId);
     }
     if (_$data.containsKey('mainPhone')) {
       final l$mainPhone = mainPhone;
-      result$data['mainPhone'] =
-          l$mainPhone == null ? null : toJson_Enum_OrderBy(l$mainPhone);
+      result$data['mainPhone'] = l$mainPhone == null
+          ? null
+          : toJson_Enum_OrderBy(l$mainPhone);
     }
     if (_$data.containsKey('martialStatus')) {
       final l$martialStatus = martialStatus;
-      result$data['martialStatus'] =
-          l$martialStatus == null ? null : toJson_Enum_OrderBy(l$martialStatus);
+      result$data['martialStatus'] = l$martialStatus == null
+          ? null
+          : toJson_Enum_OrderBy(l$martialStatus);
     }
     if (_$data.containsKey('name')) {
       final l$name = name;
@@ -3106,18 +3179,21 @@ class Input_PersonsMaxOrderBy {
     }
     if (_$data.containsKey('nationalId')) {
       final l$nationalId = nationalId;
-      result$data['nationalId'] =
-          l$nationalId == null ? null : toJson_Enum_OrderBy(l$nationalId);
+      result$data['nationalId'] = l$nationalId == null
+          ? null
+          : toJson_Enum_OrderBy(l$nationalId);
     }
     if (_$data.containsKey('notes')) {
       final l$notes = notes;
-      result$data['notes'] =
-          l$notes == null ? null : toJson_Enum_OrderBy(l$notes);
+      result$data['notes'] = l$notes == null
+          ? null
+          : toJson_Enum_OrderBy(l$notes);
     }
     if (_$data.containsKey('personTypeId')) {
       final l$personTypeId = personTypeId;
-      result$data['personTypeId'] =
-          l$personTypeId == null ? null : toJson_Enum_OrderBy(l$personTypeId);
+      result$data['personTypeId'] = l$personTypeId == null
+          ? null
+          : toJson_Enum_OrderBy(l$personTypeId);
     }
     if (_$data.containsKey('photoUpdatedAt')) {
       final l$photoUpdatedAt = photoUpdatedAt;
@@ -3133,13 +3209,15 @@ class Input_PersonsMaxOrderBy {
     }
     if (_$data.containsKey('schoolId')) {
       final l$schoolId = schoolId;
-      result$data['schoolId'] =
-          l$schoolId == null ? null : toJson_Enum_OrderBy(l$schoolId);
+      result$data['schoolId'] = l$schoolId == null
+          ? null
+          : toJson_Enum_OrderBy(l$schoolId);
     }
     if (_$data.containsKey('serviceType')) {
       final l$serviceType = serviceType;
-      result$data['serviceType'] =
-          l$serviceType == null ? null : toJson_Enum_OrderBy(l$serviceType);
+      result$data['serviceType'] = l$serviceType == null
+          ? null
+          : toJson_Enum_OrderBy(l$serviceType);
     }
     if (_$data.containsKey('servingChurchId')) {
       final l$servingChurchId = servingChurchId;
@@ -3155,18 +3233,21 @@ class Input_PersonsMaxOrderBy {
     }
     if (_$data.containsKey('stateId')) {
       final l$stateId = stateId;
-      result$data['stateId'] =
-          l$stateId == null ? null : toJson_Enum_OrderBy(l$stateId);
+      result$data['stateId'] = l$stateId == null
+          ? null
+          : toJson_Enum_OrderBy(l$stateId);
     }
     if (_$data.containsKey('storeId')) {
       final l$storeId = storeId;
-      result$data['storeId'] =
-          l$storeId == null ? null : toJson_Enum_OrderBy(l$storeId);
+      result$data['storeId'] = l$storeId == null
+          ? null
+          : toJson_Enum_OrderBy(l$storeId);
     }
     if (_$data.containsKey('studyYearId')) {
       final l$studyYearId = studyYearId;
-      result$data['studyYearId'] =
-          l$studyYearId == null ? null : toJson_Enum_OrderBy(l$studyYearId);
+      result$data['studyYearId'] = l$studyYearId == null
+          ? null
+          : toJson_Enum_OrderBy(l$studyYearId);
     }
     if (_$data.containsKey('uid')) {
       final l$uid = uid;
@@ -3174,17 +3255,15 @@ class Input_PersonsMaxOrderBy {
     }
     if (_$data.containsKey('workStatus')) {
       final l$workStatus = workStatus;
-      result$data['workStatus'] =
-          l$workStatus == null ? null : toJson_Enum_OrderBy(l$workStatus);
+      result$data['workStatus'] = l$workStatus == null
+          ? null
+          : toJson_Enum_OrderBy(l$workStatus);
     }
     return result$data;
   }
 
   CopyWith_Input_PersonsMaxOrderBy<Input_PersonsMaxOrderBy> get copyWith =>
-      CopyWith_Input_PersonsMaxOrderBy(
-        this,
-        (i) => i,
-      );
+      CopyWith_Input_PersonsMaxOrderBy(this, (i) => i);
 
   @override
   bool operator ==(Object other) {

@@ -23,8 +23,9 @@ class Fragment_Service implements Fragment_ServiceNoPhoto {
       name: (l$name as String),
       color: (l$color as int?),
       $__typename: (l$$__typename as String),
-      photoUpdatedAt:
-          l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
+      photoUpdatedAt: l$photoUpdatedAt == null
+          ? null
+          : tstzFromString(l$photoUpdatedAt),
       blurhash: (l$blurhash as String?),
     );
   }
@@ -52,8 +53,9 @@ class Fragment_Service implements Fragment_ServiceNoPhoto {
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
-    _resultData['photoUpdatedAt'] =
-        l$photoUpdatedAt == null ? null : tstzToString(l$photoUpdatedAt);
+    _resultData['photoUpdatedAt'] = l$photoUpdatedAt == null
+        ? null
+        : tstzToString(l$photoUpdatedAt);
     final l$blurhash = blurhash;
     _resultData['blurhash'] = l$blurhash;
     return _resultData;
@@ -121,10 +123,7 @@ class Fragment_Service implements Fragment_ServiceNoPhoto {
 
 extension UtilityExtension_Fragment_Service on Fragment_Service {
   CopyWith_Fragment_Service<Fragment_Service> get copyWith =>
-      CopyWith_Fragment_Service(
-        this,
-        (i) => i,
-      );
+      CopyWith_Fragment_Service(this, (i) => i);
 }
 
 abstract class CopyWith_Fragment_Service<TRes> {
@@ -148,10 +147,7 @@ abstract class CopyWith_Fragment_Service<TRes> {
 
 class _CopyWithImpl_Fragment_Service<TRes>
     implements CopyWith_Fragment_Service<TRes> {
-  _CopyWithImpl_Fragment_Service(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Fragment_Service(this._instance, this._then);
 
   final Fragment_Service _instance;
 
@@ -166,22 +162,24 @@ class _CopyWithImpl_Fragment_Service<TRes>
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? blurhash = _undefined,
-  }) =>
-      _then(Fragment_Service(
-        id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
-        name: name == _undefined || name == null
-            ? _instance.name
-            : (name as String),
-        color: color == _undefined ? _instance.color : (color as int?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-        photoUpdatedAt: photoUpdatedAt == _undefined
-            ? _instance.photoUpdatedAt
-            : (photoUpdatedAt as DateTime?),
-        blurhash:
-            blurhash == _undefined ? _instance.blurhash : (blurhash as String?),
-      ));
+  }) => _then(
+    Fragment_Service(
+      id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      color: color == _undefined ? _instance.color : (color as int?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+      photoUpdatedAt: photoUpdatedAt == _undefined
+          ? _instance.photoUpdatedAt
+          : (photoUpdatedAt as DateTime?),
+      blurhash: blurhash == _undefined
+          ? _instance.blurhash
+          : (blurhash as String?),
+    ),
+  );
 }
 
 class _CopyWithStubImpl_Fragment_Service<TRes>
@@ -197,50 +195,48 @@ class _CopyWithStubImpl_Fragment_Service<TRes>
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
-  }) =>
-      _res;
+  }) => _res;
 }
 
 const fragmentDefinitionService = FragmentDefinitionNode(
   name: NameNode(value: 'Service'),
   typeCondition: TypeConditionNode(
-      on: NamedTypeNode(
-    name: NameNode(value: 'Services'),
-    isNonNull: false,
-  )),
+    on: NamedTypeNode(name: NameNode(value: 'Services'), isNonNull: false),
+  ),
   directives: [],
-  selectionSet: SelectionSetNode(selections: [
-    FragmentSpreadNode(
-      name: NameNode(value: 'ServiceNoPhoto'),
-      directives: [],
-    ),
-    FieldNode(
-      name: NameNode(value: 'photoUpdatedAt'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-    FieldNode(
-      name: NameNode(value: 'blurhash'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-    FieldNode(
-      name: NameNode(value: '__typename'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-  ]),
+  selectionSet: SelectionSetNode(
+    selections: [
+      FragmentSpreadNode(
+        name: NameNode(value: 'ServiceNoPhoto'),
+        directives: [],
+      ),
+      FieldNode(
+        name: NameNode(value: 'photoUpdatedAt'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'blurhash'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ],
+  ),
 );
-const documentNodeFragmentService = DocumentNode(definitions: [
-  fragmentDefinitionService,
-  fragmentDefinitionServiceNoPhoto,
-]);
+const documentNodeFragmentService = DocumentNode(
+  definitions: [fragmentDefinitionService, fragmentDefinitionServiceNoPhoto],
+);
 
 class Fragment_ServiceWithStudyYears implements Fragment_ServiceNoPhoto {
   Fragment_ServiceWithStudyYears({
@@ -271,13 +267,16 @@ class Fragment_ServiceWithStudyYears implements Fragment_ServiceNoPhoto {
       studyYearFrom: l$studyYearFrom == null
           ? null
           : Fragment_ServiceWithStudyYears_studyYearFrom.fromJson(
-              (l$studyYearFrom as Map<String, dynamic>)),
+              (l$studyYearFrom as Map<String, dynamic>),
+            ),
       studyYearTo: l$studyYearTo == null
           ? null
           : Fragment_ServiceWithStudyYears_studyYearTo.fromJson(
-              (l$studyYearTo as Map<String, dynamic>)),
-      photoUpdatedAt:
-          l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
+              (l$studyYearTo as Map<String, dynamic>),
+            ),
+      photoUpdatedAt: l$photoUpdatedAt == null
+          ? null
+          : tstzFromString(l$photoUpdatedAt),
       blurhash: (l$blurhash as String?),
     );
   }
@@ -313,8 +312,9 @@ class Fragment_ServiceWithStudyYears implements Fragment_ServiceNoPhoto {
     final l$studyYearTo = studyYearTo;
     _resultData['studyYearTo'] = l$studyYearTo?.toJson();
     final l$photoUpdatedAt = photoUpdatedAt;
-    _resultData['photoUpdatedAt'] =
-        l$photoUpdatedAt == null ? null : tstzToString(l$photoUpdatedAt);
+    _resultData['photoUpdatedAt'] = l$photoUpdatedAt == null
+        ? null
+        : tstzToString(l$photoUpdatedAt);
     final l$blurhash = blurhash;
     _resultData['blurhash'] = l$blurhash;
     return _resultData;
@@ -398,10 +398,7 @@ class Fragment_ServiceWithStudyYears implements Fragment_ServiceNoPhoto {
 extension UtilityExtension_Fragment_ServiceWithStudyYears
     on Fragment_ServiceWithStudyYears {
   CopyWith_Fragment_ServiceWithStudyYears<Fragment_ServiceWithStudyYears>
-      get copyWith => CopyWith_Fragment_ServiceWithStudyYears(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Fragment_ServiceWithStudyYears(this, (i) => i);
 }
 
 abstract class CopyWith_Fragment_ServiceWithStudyYears<TRes> {
@@ -429,10 +426,7 @@ abstract class CopyWith_Fragment_ServiceWithStudyYears<TRes> {
 
 class _CopyWithImpl_Fragment_ServiceWithStudyYears<TRes>
     implements CopyWith_Fragment_ServiceWithStudyYears<TRes> {
-  _CopyWithImpl_Fragment_ServiceWithStudyYears(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Fragment_ServiceWithStudyYears(this._instance, this._then);
 
   final Fragment_ServiceWithStudyYears _instance;
 
@@ -449,46 +443,54 @@ class _CopyWithImpl_Fragment_ServiceWithStudyYears<TRes>
     Object? studyYearTo = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? blurhash = _undefined,
-  }) =>
-      _then(Fragment_ServiceWithStudyYears(
-        id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
-        name: name == _undefined || name == null
-            ? _instance.name
-            : (name as String),
-        color: color == _undefined ? _instance.color : (color as int?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-        studyYearFrom: studyYearFrom == _undefined
-            ? _instance.studyYearFrom
-            : (studyYearFrom as Fragment_ServiceWithStudyYears_studyYearFrom?),
-        studyYearTo: studyYearTo == _undefined
-            ? _instance.studyYearTo
-            : (studyYearTo as Fragment_ServiceWithStudyYears_studyYearTo?),
-        photoUpdatedAt: photoUpdatedAt == _undefined
-            ? _instance.photoUpdatedAt
-            : (photoUpdatedAt as DateTime?),
-        blurhash:
-            blurhash == _undefined ? _instance.blurhash : (blurhash as String?),
-      ));
+  }) => _then(
+    Fragment_ServiceWithStudyYears(
+      id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      color: color == _undefined ? _instance.color : (color as int?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+      studyYearFrom: studyYearFrom == _undefined
+          ? _instance.studyYearFrom
+          : (studyYearFrom as Fragment_ServiceWithStudyYears_studyYearFrom?),
+      studyYearTo: studyYearTo == _undefined
+          ? _instance.studyYearTo
+          : (studyYearTo as Fragment_ServiceWithStudyYears_studyYearTo?),
+      photoUpdatedAt: photoUpdatedAt == _undefined
+          ? _instance.photoUpdatedAt
+          : (photoUpdatedAt as DateTime?),
+      blurhash: blurhash == _undefined
+          ? _instance.blurhash
+          : (blurhash as String?),
+    ),
+  );
 
   CopyWith_Fragment_ServiceWithStudyYears_studyYearFrom<TRes>
-      get studyYearFrom {
+  get studyYearFrom {
     final local$studyYearFrom = _instance.studyYearFrom;
     return local$studyYearFrom == null
         ? CopyWith_Fragment_ServiceWithStudyYears_studyYearFrom.stub(
-            _then(_instance))
+            _then(_instance),
+          )
         : CopyWith_Fragment_ServiceWithStudyYears_studyYearFrom(
-            local$studyYearFrom, (e) => call(studyYearFrom: e));
+            local$studyYearFrom,
+            (e) => call(studyYearFrom: e),
+          );
   }
 
   CopyWith_Fragment_ServiceWithStudyYears_studyYearTo<TRes> get studyYearTo {
     final local$studyYearTo = _instance.studyYearTo;
     return local$studyYearTo == null
         ? CopyWith_Fragment_ServiceWithStudyYears_studyYearTo.stub(
-            _then(_instance))
+            _then(_instance),
+          )
         : CopyWith_Fragment_ServiceWithStudyYears_studyYearTo(
-            local$studyYearTo, (e) => call(studyYearTo: e));
+            local$studyYearTo,
+            (e) => call(studyYearTo: e),
+          );
   }
 }
 
@@ -507,12 +509,11 @@ class _CopyWithStubImpl_Fragment_ServiceWithStudyYears<TRes>
     Fragment_ServiceWithStudyYears_studyYearTo? studyYearTo,
     DateTime? photoUpdatedAt,
     String? blurhash,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Fragment_ServiceWithStudyYears_studyYearFrom<TRes>
-      get studyYearFrom =>
-          CopyWith_Fragment_ServiceWithStudyYears_studyYearFrom.stub(_res);
+  get studyYearFrom =>
+      CopyWith_Fragment_ServiceWithStudyYears_studyYearFrom.stub(_res);
 
   CopyWith_Fragment_ServiceWithStudyYears_studyYearTo<TRes> get studyYearTo =>
       CopyWith_Fragment_ServiceWithStudyYears_studyYearTo.stub(_res);
@@ -521,101 +522,107 @@ class _CopyWithStubImpl_Fragment_ServiceWithStudyYears<TRes>
 const fragmentDefinitionServiceWithStudyYears = FragmentDefinitionNode(
   name: NameNode(value: 'ServiceWithStudyYears'),
   typeCondition: TypeConditionNode(
-      on: NamedTypeNode(
-    name: NameNode(value: 'Services'),
-    isNonNull: false,
-  )),
+    on: NamedTypeNode(name: NameNode(value: 'Services'), isNonNull: false),
+  ),
   directives: [],
-  selectionSet: SelectionSetNode(selections: [
-    FragmentSpreadNode(
-      name: NameNode(value: 'ServiceNoPhoto'),
-      directives: [],
-    ),
-    FieldNode(
-      name: NameNode(value: 'studyYearFrom'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
-        FieldNode(
-          name: NameNode(value: 'order'),
-          alias: null,
-          arguments: [],
-          directives: [],
-          selectionSet: null,
+  selectionSet: SelectionSetNode(
+    selections: [
+      FragmentSpreadNode(
+        name: NameNode(value: 'ServiceNoPhoto'),
+        directives: [],
+      ),
+      FieldNode(
+        name: NameNode(value: 'studyYearFrom'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(
+          selections: [
+            FieldNode(
+              name: NameNode(value: 'order'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: 'name'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: '__typename'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+          ],
         ),
-        FieldNode(
-          name: NameNode(value: 'name'),
-          alias: null,
-          arguments: [],
-          directives: [],
-          selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'studyYearTo'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(
+          selections: [
+            FieldNode(
+              name: NameNode(value: 'order'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: 'name'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: '__typename'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+          ],
         ),
-        FieldNode(
-          name: NameNode(value: '__typename'),
-          alias: null,
-          arguments: [],
-          directives: [],
-          selectionSet: null,
-        ),
-      ]),
-    ),
-    FieldNode(
-      name: NameNode(value: 'studyYearTo'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: SelectionSetNode(selections: [
-        FieldNode(
-          name: NameNode(value: 'order'),
-          alias: null,
-          arguments: [],
-          directives: [],
-          selectionSet: null,
-        ),
-        FieldNode(
-          name: NameNode(value: 'name'),
-          alias: null,
-          arguments: [],
-          directives: [],
-          selectionSet: null,
-        ),
-        FieldNode(
-          name: NameNode(value: '__typename'),
-          alias: null,
-          arguments: [],
-          directives: [],
-          selectionSet: null,
-        ),
-      ]),
-    ),
-    FieldNode(
-      name: NameNode(value: 'photoUpdatedAt'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-    FieldNode(
-      name: NameNode(value: 'blurhash'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-    FieldNode(
-      name: NameNode(value: '__typename'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-  ]),
+      ),
+      FieldNode(
+        name: NameNode(value: 'photoUpdatedAt'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'blurhash'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ],
+  ),
 );
-const documentNodeFragmentServiceWithStudyYears = DocumentNode(definitions: [
-  fragmentDefinitionServiceWithStudyYears,
-  fragmentDefinitionServiceNoPhoto,
-]);
+const documentNodeFragmentServiceWithStudyYears = DocumentNode(
+  definitions: [
+    fragmentDefinitionServiceWithStudyYears,
+    fragmentDefinitionServiceNoPhoto,
+  ],
+);
 
 class Fragment_ServiceWithStudyYears_studyYearFrom {
   Fragment_ServiceWithStudyYears_studyYearFrom({
@@ -625,7 +632,8 @@ class Fragment_ServiceWithStudyYears_studyYearFrom {
   });
 
   factory Fragment_ServiceWithStudyYears_studyYearFrom.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$order = json['order'];
     final l$name = json['name'];
     final l$$__typename = json['__typename'];
@@ -658,11 +666,7 @@ class Fragment_ServiceWithStudyYears_studyYearFrom {
     final l$order = order;
     final l$name = name;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$order,
-      l$name,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$order, l$name, l$$__typename]);
   }
 
   @override
@@ -696,11 +700,10 @@ class Fragment_ServiceWithStudyYears_studyYearFrom {
 extension UtilityExtension_Fragment_ServiceWithStudyYears_studyYearFrom
     on Fragment_ServiceWithStudyYears_studyYearFrom {
   CopyWith_Fragment_ServiceWithStudyYears_studyYearFrom<
-          Fragment_ServiceWithStudyYears_studyYearFrom>
-      get copyWith => CopyWith_Fragment_ServiceWithStudyYears_studyYearFrom(
-            this,
-            (i) => i,
-          );
+    Fragment_ServiceWithStudyYears_studyYearFrom
+  >
+  get copyWith =>
+      CopyWith_Fragment_ServiceWithStudyYears_studyYearFrom(this, (i) => i);
 }
 
 abstract class CopyWith_Fragment_ServiceWithStudyYears_studyYearFrom<TRes> {
@@ -712,11 +715,7 @@ abstract class CopyWith_Fragment_ServiceWithStudyYears_studyYearFrom<TRes> {
   factory CopyWith_Fragment_ServiceWithStudyYears_studyYearFrom.stub(TRes res) =
       _CopyWithStubImpl_Fragment_ServiceWithStudyYears_studyYearFrom;
 
-  TRes call({
-    int? order,
-    String? name,
-    String? $__typename,
-  });
+  TRes call({int? order, String? name, String? $__typename});
 }
 
 class _CopyWithImpl_Fragment_ServiceWithStudyYears_studyYearFrom<TRes>
@@ -736,18 +735,19 @@ class _CopyWithImpl_Fragment_ServiceWithStudyYears_studyYearFrom<TRes>
     Object? order = _undefined,
     Object? name = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Fragment_ServiceWithStudyYears_studyYearFrom(
-        order: order == _undefined || order == null
-            ? _instance.order
-            : (order as int),
-        name: name == _undefined || name == null
-            ? _instance.name
-            : (name as String),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Fragment_ServiceWithStudyYears_studyYearFrom(
+      order: order == _undefined || order == null
+          ? _instance.order
+          : (order as int),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 }
 
 class _CopyWithStubImpl_Fragment_ServiceWithStudyYears_studyYearFrom<TRes>
@@ -756,12 +756,7 @@ class _CopyWithStubImpl_Fragment_ServiceWithStudyYears_studyYearFrom<TRes>
 
   TRes _res;
 
-  call({
-    int? order,
-    String? name,
-    String? $__typename,
-  }) =>
-      _res;
+  call({int? order, String? name, String? $__typename}) => _res;
 }
 
 class Fragment_ServiceWithStudyYears_studyYearTo {
@@ -772,7 +767,8 @@ class Fragment_ServiceWithStudyYears_studyYearTo {
   });
 
   factory Fragment_ServiceWithStudyYears_studyYearTo.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$order = json['order'];
     final l$name = json['name'];
     final l$$__typename = json['__typename'];
@@ -805,11 +801,7 @@ class Fragment_ServiceWithStudyYears_studyYearTo {
     final l$order = order;
     final l$name = name;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$order,
-      l$name,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$order, l$name, l$$__typename]);
   }
 
   @override
@@ -843,11 +835,10 @@ class Fragment_ServiceWithStudyYears_studyYearTo {
 extension UtilityExtension_Fragment_ServiceWithStudyYears_studyYearTo
     on Fragment_ServiceWithStudyYears_studyYearTo {
   CopyWith_Fragment_ServiceWithStudyYears_studyYearTo<
-          Fragment_ServiceWithStudyYears_studyYearTo>
-      get copyWith => CopyWith_Fragment_ServiceWithStudyYears_studyYearTo(
-            this,
-            (i) => i,
-          );
+    Fragment_ServiceWithStudyYears_studyYearTo
+  >
+  get copyWith =>
+      CopyWith_Fragment_ServiceWithStudyYears_studyYearTo(this, (i) => i);
 }
 
 abstract class CopyWith_Fragment_ServiceWithStudyYears_studyYearTo<TRes> {
@@ -859,11 +850,7 @@ abstract class CopyWith_Fragment_ServiceWithStudyYears_studyYearTo<TRes> {
   factory CopyWith_Fragment_ServiceWithStudyYears_studyYearTo.stub(TRes res) =
       _CopyWithStubImpl_Fragment_ServiceWithStudyYears_studyYearTo;
 
-  TRes call({
-    int? order,
-    String? name,
-    String? $__typename,
-  });
+  TRes call({int? order, String? name, String? $__typename});
 }
 
 class _CopyWithImpl_Fragment_ServiceWithStudyYears_studyYearTo<TRes>
@@ -883,18 +870,19 @@ class _CopyWithImpl_Fragment_ServiceWithStudyYears_studyYearTo<TRes>
     Object? order = _undefined,
     Object? name = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Fragment_ServiceWithStudyYears_studyYearTo(
-        order: order == _undefined || order == null
-            ? _instance.order
-            : (order as int),
-        name: name == _undefined || name == null
-            ? _instance.name
-            : (name as String),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Fragment_ServiceWithStudyYears_studyYearTo(
+      order: order == _undefined || order == null
+          ? _instance.order
+          : (order as int),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 }
 
 class _CopyWithStubImpl_Fragment_ServiceWithStudyYears_studyYearTo<TRes>
@@ -903,12 +891,7 @@ class _CopyWithStubImpl_Fragment_ServiceWithStudyYears_studyYearTo<TRes>
 
   TRes _res;
 
-  call({
-    int? order,
-    String? name,
-    String? $__typename,
-  }) =>
-      _res;
+  call({int? order, String? name, String? $__typename}) => _res;
 }
 
 class Fragment_ServiceNoPhoto {
@@ -959,12 +942,7 @@ class Fragment_ServiceNoPhoto {
     final l$name = name;
     final l$color = color;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$id,
-      l$name,
-      l$color,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$id, l$name, l$color, l$$__typename]);
   }
 
   @override
@@ -1001,10 +979,7 @@ class Fragment_ServiceNoPhoto {
 
 extension UtilityExtension_Fragment_ServiceNoPhoto on Fragment_ServiceNoPhoto {
   CopyWith_Fragment_ServiceNoPhoto<Fragment_ServiceNoPhoto> get copyWith =>
-      CopyWith_Fragment_ServiceNoPhoto(
-        this,
-        (i) => i,
-      );
+      CopyWith_Fragment_ServiceNoPhoto(this, (i) => i);
 }
 
 abstract class CopyWith_Fragment_ServiceNoPhoto<TRes> {
@@ -1016,20 +991,12 @@ abstract class CopyWith_Fragment_ServiceNoPhoto<TRes> {
   factory CopyWith_Fragment_ServiceNoPhoto.stub(TRes res) =
       _CopyWithStubImpl_Fragment_ServiceNoPhoto;
 
-  TRes call({
-    UuidValue? id,
-    String? name,
-    int? color,
-    String? $__typename,
-  });
+  TRes call({UuidValue? id, String? name, int? color, String? $__typename});
 }
 
 class _CopyWithImpl_Fragment_ServiceNoPhoto<TRes>
     implements CopyWith_Fragment_ServiceNoPhoto<TRes> {
-  _CopyWithImpl_Fragment_ServiceNoPhoto(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Fragment_ServiceNoPhoto(this._instance, this._then);
 
   final Fragment_ServiceNoPhoto _instance;
 
@@ -1042,17 +1009,18 @@ class _CopyWithImpl_Fragment_ServiceNoPhoto<TRes>
     Object? name = _undefined,
     Object? color = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Fragment_ServiceNoPhoto(
-        id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
-        name: name == _undefined || name == null
-            ? _instance.name
-            : (name as String),
-        color: color == _undefined ? _instance.color : (color as int?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Fragment_ServiceNoPhoto(
+      id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      color: color == _undefined ? _instance.color : (color as int?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 }
 
 class _CopyWithStubImpl_Fragment_ServiceNoPhoto<TRes>
@@ -1061,54 +1029,48 @@ class _CopyWithStubImpl_Fragment_ServiceNoPhoto<TRes>
 
   TRes _res;
 
-  call({
-    UuidValue? id,
-    String? name,
-    int? color,
-    String? $__typename,
-  }) =>
-      _res;
+  call({UuidValue? id, String? name, int? color, String? $__typename}) => _res;
 }
 
 const fragmentDefinitionServiceNoPhoto = FragmentDefinitionNode(
   name: NameNode(value: 'ServiceNoPhoto'),
   typeCondition: TypeConditionNode(
-      on: NamedTypeNode(
-    name: NameNode(value: 'Services'),
-    isNonNull: false,
-  )),
+    on: NamedTypeNode(name: NameNode(value: 'Services'), isNonNull: false),
+  ),
   directives: [],
-  selectionSet: SelectionSetNode(selections: [
-    FieldNode(
-      name: NameNode(value: 'id'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-    FieldNode(
-      name: NameNode(value: 'name'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-    FieldNode(
-      name: NameNode(value: 'color'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-    FieldNode(
-      name: NameNode(value: '__typename'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-  ]),
+  selectionSet: SelectionSetNode(
+    selections: [
+      FieldNode(
+        name: NameNode(value: 'id'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'name'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'color'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ],
+  ),
 );
-const documentNodeFragmentServiceNoPhoto = DocumentNode(definitions: [
-  fragmentDefinitionServiceNoPhoto,
-]);
+const documentNodeFragmentServiceNoPhoto = DocumentNode(
+  definitions: [fragmentDefinitionServiceNoPhoto],
+);

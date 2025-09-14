@@ -489,32 +489,6 @@ class MockFirebaseMessaging extends _i1.Mock implements _i13.FirebaseMessaging {
       ) as _i11.Future<_i3.NotificationSettings>);
 
   @override
-  _i11.Future<void> sendMessage({
-    String? to,
-    Map<String, String>? data,
-    String? collapseKey,
-    String? messageId,
-    String? messageType,
-    int? ttl,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #sendMessage,
-          [],
-          {
-            #to: to,
-            #data: data,
-            #collapseKey: collapseKey,
-            #messageId: messageId,
-            #messageType: messageType,
-            #ttl: ttl,
-          },
-        ),
-        returnValue: _i11.Future<void>.value(),
-        returnValueForMissingStub: _i11.Future<void>.value(),
-      ) as _i11.Future<void>);
-
-  @override
   _i11.Future<void> setAutoInitEnabled(bool? enabled) => (super.noSuchMethod(
         Invocation.method(
           #setAutoInitEnabled,

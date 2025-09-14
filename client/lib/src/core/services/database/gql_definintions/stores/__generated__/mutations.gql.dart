@@ -8,9 +8,7 @@ import 'package:gql/ast.dart';
 
 class Variables_Mutation_deleteStore {
   factory Variables_Mutation_deleteStore({required UuidValue storeId}) =>
-      Variables_Mutation_deleteStore._({
-        r'storeId': storeId,
-      });
+      Variables_Mutation_deleteStore._({r'storeId': storeId});
 
   Variables_Mutation_deleteStore._(this._$data);
 
@@ -33,10 +31,7 @@ class Variables_Mutation_deleteStore {
   }
 
   CopyWith_Variables_Mutation_deleteStore<Variables_Mutation_deleteStore>
-      get copyWith => CopyWith_Variables_Mutation_deleteStore(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Variables_Mutation_deleteStore(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -76,10 +71,7 @@ abstract class CopyWith_Variables_Mutation_deleteStore<TRes> {
 
 class _CopyWithImpl_Variables_Mutation_deleteStore<TRes>
     implements CopyWith_Variables_Mutation_deleteStore<TRes> {
-  _CopyWithImpl_Variables_Mutation_deleteStore(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Variables_Mutation_deleteStore(this._instance, this._then);
 
   final Variables_Mutation_deleteStore _instance;
 
@@ -87,12 +79,13 @@ class _CopyWithImpl_Variables_Mutation_deleteStore<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? storeId = _undefined}) =>
-      _then(Variables_Mutation_deleteStore._({
-        ..._instance._$data,
-        if (storeId != _undefined && storeId != null)
-          'storeId': (storeId as UuidValue),
-      }));
+  TRes call({Object? storeId = _undefined}) => _then(
+    Variables_Mutation_deleteStore._({
+      ..._instance._$data,
+      if (storeId != _undefined && storeId != null)
+        'storeId': (storeId as UuidValue),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Variables_Mutation_deleteStore<TRes>
@@ -117,7 +110,8 @@ class Mutation_deleteStore {
       deleteStoresByPk: l$deleteStoresByPk == null
           ? null
           : Fragment_Store.fromJson(
-              (l$deleteStoresByPk as Map<String, dynamic>)),
+              (l$deleteStoresByPk as Map<String, dynamic>),
+            ),
       $__typename: (l$$__typename as String),
     );
   }
@@ -139,10 +133,7 @@ class Mutation_deleteStore {
   int get hashCode {
     final l$deleteStoresByPk = deleteStoresByPk;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$deleteStoresByPk,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$deleteStoresByPk, l$$__typename]);
   }
 
   @override
@@ -169,10 +160,7 @@ class Mutation_deleteStore {
 
 extension UtilityExtension_Mutation_deleteStore on Mutation_deleteStore {
   CopyWith_Mutation_deleteStore<Mutation_deleteStore> get copyWith =>
-      CopyWith_Mutation_deleteStore(
-        this,
-        (i) => i,
-      );
+      CopyWith_Mutation_deleteStore(this, (i) => i);
 }
 
 abstract class CopyWith_Mutation_deleteStore<TRes> {
@@ -184,19 +172,13 @@ abstract class CopyWith_Mutation_deleteStore<TRes> {
   factory CopyWith_Mutation_deleteStore.stub(TRes res) =
       _CopyWithStubImpl_Mutation_deleteStore;
 
-  TRes call({
-    Fragment_Store? deleteStoresByPk,
-    String? $__typename,
-  });
+  TRes call({Fragment_Store? deleteStoresByPk, String? $__typename});
   CopyWith_Fragment_Store<TRes> get deleteStoresByPk;
 }
 
 class _CopyWithImpl_Mutation_deleteStore<TRes>
     implements CopyWith_Mutation_deleteStore<TRes> {
-  _CopyWithImpl_Mutation_deleteStore(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Mutation_deleteStore(this._instance, this._then);
 
   final Mutation_deleteStore _instance;
 
@@ -207,22 +189,25 @@ class _CopyWithImpl_Mutation_deleteStore<TRes>
   TRes call({
     Object? deleteStoresByPk = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Mutation_deleteStore(
-        deleteStoresByPk: deleteStoresByPk == _undefined
-            ? _instance.deleteStoresByPk
-            : (deleteStoresByPk as Fragment_Store?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Mutation_deleteStore(
+      deleteStoresByPk: deleteStoresByPk == _undefined
+          ? _instance.deleteStoresByPk
+          : (deleteStoresByPk as Fragment_Store?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   CopyWith_Fragment_Store<TRes> get deleteStoresByPk {
     final local$deleteStoresByPk = _instance.deleteStoresByPk;
     return local$deleteStoresByPk == null
         ? CopyWith_Fragment_Store.stub(_then(_instance))
         : CopyWith_Fragment_Store(
-            local$deleteStoresByPk, (e) => call(deleteStoresByPk: e));
+            local$deleteStoresByPk,
+            (e) => call(deleteStoresByPk: e),
+          );
   }
 }
 
@@ -232,47 +217,53 @@ class _CopyWithStubImpl_Mutation_deleteStore<TRes>
 
   TRes _res;
 
-  call({
-    Fragment_Store? deleteStoresByPk,
-    String? $__typename,
-  }) =>
-      _res;
+  call({Fragment_Store? deleteStoresByPk, String? $__typename}) => _res;
 
   CopyWith_Fragment_Store<TRes> get deleteStoresByPk =>
       CopyWith_Fragment_Store.stub(_res);
 }
 
-const documentNodeMutationdeleteStore = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.mutation,
-    name: NameNode(value: 'deleteStore'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'storeId')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'uuid'),
-          isNonNull: true,
+const documentNodeMutationdeleteStore = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.mutation,
+      name: NameNode(value: 'deleteStore'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'storeId')),
+          type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      )
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'deleteStoresByPk'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'id'),
-            value: VariableNode(name: NameNode(value: 'storeId')),
-          )
-        ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FragmentSpreadNode(
-            name: NameNode(value: 'Store'),
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
+          FieldNode(
+            name: NameNode(value: 'deleteStoresByPk'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'id'),
+                value: VariableNode(name: NameNode(value: 'storeId')),
+              ),
+            ],
             directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FragmentSpreadNode(
+                  name: NameNode(value: 'Store'),
+                  directives: [],
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
           ),
           FieldNode(
             name: NameNode(value: '__typename'),
@@ -281,35 +272,27 @@ const documentNodeMutationdeleteStore = DocumentNode(definitions: [
             directives: [],
             selectionSet: null,
           ),
-        ]),
+        ],
       ),
-      FieldNode(
-        name: NameNode(value: '__typename'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-    ]),
-  ),
-  fragmentDefinitionStore,
-  fragmentDefinitionStoreNoPhoto,
-]);
+    ),
+    fragmentDefinitionStore,
+    fragmentDefinitionStoreNoPhoto,
+  ],
+);
 
 class Variables_Mutation_insertStore {
-  factory Variables_Mutation_insertStore(
-          {required Input_StoresInsertInput newStore}) =>
-      Variables_Mutation_insertStore._({
-        r'newStore': newStore,
-      });
+  factory Variables_Mutation_insertStore({
+    required Input_StoresInsertInput newStore,
+  }) => Variables_Mutation_insertStore._({r'newStore': newStore});
 
   Variables_Mutation_insertStore._(this._$data);
 
   factory Variables_Mutation_insertStore.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     final l$newStore = data['newStore'];
-    result$data['newStore'] =
-        Input_StoresInsertInput.fromJson((l$newStore as Map<String, dynamic>));
+    result$data['newStore'] = Input_StoresInsertInput.fromJson(
+      (l$newStore as Map<String, dynamic>),
+    );
     return Variables_Mutation_insertStore._(result$data);
   }
 
@@ -326,10 +309,7 @@ class Variables_Mutation_insertStore {
   }
 
   CopyWith_Variables_Mutation_insertStore<Variables_Mutation_insertStore>
-      get copyWith => CopyWith_Variables_Mutation_insertStore(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Variables_Mutation_insertStore(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -369,10 +349,7 @@ abstract class CopyWith_Variables_Mutation_insertStore<TRes> {
 
 class _CopyWithImpl_Variables_Mutation_insertStore<TRes>
     implements CopyWith_Variables_Mutation_insertStore<TRes> {
-  _CopyWithImpl_Variables_Mutation_insertStore(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Variables_Mutation_insertStore(this._instance, this._then);
 
   final Variables_Mutation_insertStore _instance;
 
@@ -380,12 +357,13 @@ class _CopyWithImpl_Variables_Mutation_insertStore<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? newStore = _undefined}) =>
-      _then(Variables_Mutation_insertStore._({
-        ..._instance._$data,
-        if (newStore != _undefined && newStore != null)
-          'newStore': (newStore as Input_StoresInsertInput),
-      }));
+  TRes call({Object? newStore = _undefined}) => _then(
+    Variables_Mutation_insertStore._({
+      ..._instance._$data,
+      if (newStore != _undefined && newStore != null)
+        'newStore': (newStore as Input_StoresInsertInput),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Variables_Mutation_insertStore<TRes>
@@ -410,7 +388,8 @@ class Mutation_insertStore {
       insertStoresOne: l$insertStoresOne == null
           ? null
           : Fragment_Store.fromJson(
-              (l$insertStoresOne as Map<String, dynamic>)),
+              (l$insertStoresOne as Map<String, dynamic>),
+            ),
       $__typename: (l$$__typename as String),
     );
   }
@@ -432,10 +411,7 @@ class Mutation_insertStore {
   int get hashCode {
     final l$insertStoresOne = insertStoresOne;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$insertStoresOne,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$insertStoresOne, l$$__typename]);
   }
 
   @override
@@ -462,10 +438,7 @@ class Mutation_insertStore {
 
 extension UtilityExtension_Mutation_insertStore on Mutation_insertStore {
   CopyWith_Mutation_insertStore<Mutation_insertStore> get copyWith =>
-      CopyWith_Mutation_insertStore(
-        this,
-        (i) => i,
-      );
+      CopyWith_Mutation_insertStore(this, (i) => i);
 }
 
 abstract class CopyWith_Mutation_insertStore<TRes> {
@@ -477,19 +450,13 @@ abstract class CopyWith_Mutation_insertStore<TRes> {
   factory CopyWith_Mutation_insertStore.stub(TRes res) =
       _CopyWithStubImpl_Mutation_insertStore;
 
-  TRes call({
-    Fragment_Store? insertStoresOne,
-    String? $__typename,
-  });
+  TRes call({Fragment_Store? insertStoresOne, String? $__typename});
   CopyWith_Fragment_Store<TRes> get insertStoresOne;
 }
 
 class _CopyWithImpl_Mutation_insertStore<TRes>
     implements CopyWith_Mutation_insertStore<TRes> {
-  _CopyWithImpl_Mutation_insertStore(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Mutation_insertStore(this._instance, this._then);
 
   final Mutation_insertStore _instance;
 
@@ -500,22 +467,25 @@ class _CopyWithImpl_Mutation_insertStore<TRes>
   TRes call({
     Object? insertStoresOne = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Mutation_insertStore(
-        insertStoresOne: insertStoresOne == _undefined
-            ? _instance.insertStoresOne
-            : (insertStoresOne as Fragment_Store?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Mutation_insertStore(
+      insertStoresOne: insertStoresOne == _undefined
+          ? _instance.insertStoresOne
+          : (insertStoresOne as Fragment_Store?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   CopyWith_Fragment_Store<TRes> get insertStoresOne {
     final local$insertStoresOne = _instance.insertStoresOne;
     return local$insertStoresOne == null
         ? CopyWith_Fragment_Store.stub(_then(_instance))
         : CopyWith_Fragment_Store(
-            local$insertStoresOne, (e) => call(insertStoresOne: e));
+            local$insertStoresOne,
+            (e) => call(insertStoresOne: e),
+          );
   }
 }
 
@@ -525,47 +495,56 @@ class _CopyWithStubImpl_Mutation_insertStore<TRes>
 
   TRes _res;
 
-  call({
-    Fragment_Store? insertStoresOne,
-    String? $__typename,
-  }) =>
-      _res;
+  call({Fragment_Store? insertStoresOne, String? $__typename}) => _res;
 
   CopyWith_Fragment_Store<TRes> get insertStoresOne =>
       CopyWith_Fragment_Store.stub(_res);
 }
 
-const documentNodeMutationinsertStore = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.mutation,
-    name: NameNode(value: 'insertStore'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'newStore')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'StoresInsertInput'),
-          isNonNull: true,
+const documentNodeMutationinsertStore = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.mutation,
+      name: NameNode(value: 'insertStore'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'newStore')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'StoresInsertInput'),
+            isNonNull: true,
+          ),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      )
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'insertStoresOne'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'object'),
-            value: VariableNode(name: NameNode(value: 'newStore')),
-          )
-        ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FragmentSpreadNode(
-            name: NameNode(value: 'Store'),
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
+          FieldNode(
+            name: NameNode(value: 'insertStoresOne'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'object'),
+                value: VariableNode(name: NameNode(value: 'newStore')),
+              ),
+            ],
             directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FragmentSpreadNode(
+                  name: NameNode(value: 'Store'),
+                  directives: [],
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
           ),
           FieldNode(
             name: NameNode(value: '__typename'),
@@ -574,20 +553,13 @@ const documentNodeMutationinsertStore = DocumentNode(definitions: [
             directives: [],
             selectionSet: null,
           ),
-        ]),
+        ],
       ),
-      FieldNode(
-        name: NameNode(value: '__typename'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-    ]),
-  ),
-  fragmentDefinitionStore,
-  fragmentDefinitionStoreNoPhoto,
-]);
+    ),
+    fragmentDefinitionStore,
+    fragmentDefinitionStoreNoPhoto,
+  ],
+);
 
 class Variables_Mutation_updateStore {
   factory Variables_Mutation_updateStore({
@@ -597,15 +569,14 @@ class Variables_Mutation_updateStore {
     Input_AddressesSetInput? newAddress,
     required bool updateAddress,
     required bool updateStore,
-  }) =>
-      Variables_Mutation_updateStore._({
-        r'storeId': storeId,
-        r'newStore': newStore,
-        r'addressId': addressId,
-        if (newAddress != null) r'newAddress': newAddress,
-        r'updateAddress': updateAddress,
-        r'updateStore': updateStore,
-      });
+  }) => Variables_Mutation_updateStore._({
+    r'storeId': storeId,
+    r'newStore': newStore,
+    r'addressId': addressId,
+    if (newAddress != null) r'newAddress': newAddress,
+    r'updateAddress': updateAddress,
+    r'updateStore': updateStore,
+  });
 
   Variables_Mutation_updateStore._(this._$data);
 
@@ -614,8 +585,9 @@ class Variables_Mutation_updateStore {
     final l$storeId = data['storeId'];
     result$data['storeId'] = stringToUuid(l$storeId);
     final l$newStore = data['newStore'];
-    result$data['newStore'] =
-        Input_StoresSetInput.fromJson((l$newStore as Map<String, dynamic>));
+    result$data['newStore'] = Input_StoresSetInput.fromJson(
+      (l$newStore as Map<String, dynamic>),
+    );
     final l$addressId = data['addressId'];
     result$data['addressId'] = stringToUuid(l$addressId);
     if (data.containsKey('newAddress')) {
@@ -623,7 +595,8 @@ class Variables_Mutation_updateStore {
       result$data['newAddress'] = l$newAddress == null
           ? null
           : Input_AddressesSetInput.fromJson(
-              (l$newAddress as Map<String, dynamic>));
+              (l$newAddress as Map<String, dynamic>),
+            );
     }
     final l$updateAddress = data['updateAddress'];
     result$data['updateAddress'] = (l$updateAddress as bool);
@@ -668,10 +641,7 @@ class Variables_Mutation_updateStore {
   }
 
   CopyWith_Variables_Mutation_updateStore<Variables_Mutation_updateStore>
-      get copyWith => CopyWith_Variables_Mutation_updateStore(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Variables_Mutation_updateStore(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -759,10 +729,7 @@ abstract class CopyWith_Variables_Mutation_updateStore<TRes> {
 
 class _CopyWithImpl_Variables_Mutation_updateStore<TRes>
     implements CopyWith_Variables_Mutation_updateStore<TRes> {
-  _CopyWithImpl_Variables_Mutation_updateStore(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Variables_Mutation_updateStore(this._instance, this._then);
 
   final Variables_Mutation_updateStore _instance;
 
@@ -777,22 +744,23 @@ class _CopyWithImpl_Variables_Mutation_updateStore<TRes>
     Object? newAddress = _undefined,
     Object? updateAddress = _undefined,
     Object? updateStore = _undefined,
-  }) =>
-      _then(Variables_Mutation_updateStore._({
-        ..._instance._$data,
-        if (storeId != _undefined && storeId != null)
-          'storeId': (storeId as UuidValue),
-        if (newStore != _undefined && newStore != null)
-          'newStore': (newStore as Input_StoresSetInput),
-        if (addressId != _undefined && addressId != null)
-          'addressId': (addressId as UuidValue),
-        if (newAddress != _undefined)
-          'newAddress': (newAddress as Input_AddressesSetInput?),
-        if (updateAddress != _undefined && updateAddress != null)
-          'updateAddress': (updateAddress as bool),
-        if (updateStore != _undefined && updateStore != null)
-          'updateStore': (updateStore as bool),
-      }));
+  }) => _then(
+    Variables_Mutation_updateStore._({
+      ..._instance._$data,
+      if (storeId != _undefined && storeId != null)
+        'storeId': (storeId as UuidValue),
+      if (newStore != _undefined && newStore != null)
+        'newStore': (newStore as Input_StoresSetInput),
+      if (addressId != _undefined && addressId != null)
+        'addressId': (addressId as UuidValue),
+      if (newAddress != _undefined)
+        'newAddress': (newAddress as Input_AddressesSetInput?),
+      if (updateAddress != _undefined && updateAddress != null)
+        'updateAddress': (updateAddress as bool),
+      if (updateStore != _undefined && updateStore != null)
+        'updateStore': (updateStore as bool),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Variables_Mutation_updateStore<TRes>
@@ -808,8 +776,7 @@ class _CopyWithStubImpl_Variables_Mutation_updateStore<TRes>
     Input_AddressesSetInput? newAddress,
     bool? updateAddress,
     bool? updateStore,
-  }) =>
-      _res;
+  }) => _res;
 }
 
 class Mutation_updateStore {
@@ -827,11 +794,13 @@ class Mutation_updateStore {
       updateStoresByPk: l$updateStoresByPk == null
           ? null
           : Fragment_Store.fromJson(
-              (l$updateStoresByPk as Map<String, dynamic>)),
+              (l$updateStoresByPk as Map<String, dynamic>),
+            ),
       updateAddressesByPk: l$updateAddressesByPk == null
           ? null
           : Fragment_Address.fromJson(
-              (l$updateAddressesByPk as Map<String, dynamic>)),
+              (l$updateAddressesByPk as Map<String, dynamic>),
+            ),
       $__typename: (l$$__typename as String),
     );
   }
@@ -894,10 +863,7 @@ class Mutation_updateStore {
 
 extension UtilityExtension_Mutation_updateStore on Mutation_updateStore {
   CopyWith_Mutation_updateStore<Mutation_updateStore> get copyWith =>
-      CopyWith_Mutation_updateStore(
-        this,
-        (i) => i,
-      );
+      CopyWith_Mutation_updateStore(this, (i) => i);
 }
 
 abstract class CopyWith_Mutation_updateStore<TRes> {
@@ -920,10 +886,7 @@ abstract class CopyWith_Mutation_updateStore<TRes> {
 
 class _CopyWithImpl_Mutation_updateStore<TRes>
     implements CopyWith_Mutation_updateStore<TRes> {
-  _CopyWithImpl_Mutation_updateStore(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Mutation_updateStore(this._instance, this._then);
 
   final Mutation_updateStore _instance;
 
@@ -935,25 +898,28 @@ class _CopyWithImpl_Mutation_updateStore<TRes>
     Object? updateStoresByPk = _undefined,
     Object? updateAddressesByPk = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Mutation_updateStore(
-        updateStoresByPk: updateStoresByPk == _undefined
-            ? _instance.updateStoresByPk
-            : (updateStoresByPk as Fragment_Store?),
-        updateAddressesByPk: updateAddressesByPk == _undefined
-            ? _instance.updateAddressesByPk
-            : (updateAddressesByPk as Fragment_Address?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Mutation_updateStore(
+      updateStoresByPk: updateStoresByPk == _undefined
+          ? _instance.updateStoresByPk
+          : (updateStoresByPk as Fragment_Store?),
+      updateAddressesByPk: updateAddressesByPk == _undefined
+          ? _instance.updateAddressesByPk
+          : (updateAddressesByPk as Fragment_Address?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   CopyWith_Fragment_Store<TRes> get updateStoresByPk {
     final local$updateStoresByPk = _instance.updateStoresByPk;
     return local$updateStoresByPk == null
         ? CopyWith_Fragment_Store.stub(_then(_instance))
         : CopyWith_Fragment_Store(
-            local$updateStoresByPk, (e) => call(updateStoresByPk: e));
+            local$updateStoresByPk,
+            (e) => call(updateStoresByPk: e),
+          );
   }
 
   CopyWith_Fragment_Address<TRes> get updateAddressesByPk {
@@ -961,7 +927,9 @@ class _CopyWithImpl_Mutation_updateStore<TRes>
     return local$updateAddressesByPk == null
         ? CopyWith_Fragment_Address.stub(_then(_instance))
         : CopyWith_Fragment_Address(
-            local$updateAddressesByPk, (e) => call(updateAddressesByPk: e));
+            local$updateAddressesByPk,
+            (e) => call(updateAddressesByPk: e),
+          );
   }
 }
 
@@ -975,8 +943,7 @@ class _CopyWithStubImpl_Mutation_updateStore<TRes>
     Fragment_Store? updateStoresByPk,
     Fragment_Address? updateAddressesByPk,
     String? $__typename,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Fragment_Store<TRes> get updateStoresByPk =>
       CopyWith_Fragment_Store.stub(_res);
@@ -985,101 +952,157 @@ class _CopyWithStubImpl_Mutation_updateStore<TRes>
       CopyWith_Fragment_Address.stub(_res);
 }
 
-const documentNodeMutationupdateStore = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.mutation,
-    name: NameNode(value: 'updateStore'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'storeId')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'uuid'),
-          isNonNull: true,
+const documentNodeMutationupdateStore = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.mutation,
+      name: NameNode(value: 'updateStore'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'storeId')),
+          type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'newStore')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'StoresSetInput'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'addressId')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'uuid'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'newAddress')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'AddressesSetInput'),
-          isNonNull: false,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'updateAddress')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'Boolean'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'updateStore')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'Boolean'),
-          isNonNull: true,
-        ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'updateStoresByPk'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'pkColumns'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'id'),
-                value: VariableNode(name: NameNode(value: 'storeId')),
-              )
-            ]),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'newStore')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'StoresSetInput'),
+            isNonNull: true,
           ),
-          ArgumentNode(
-            name: NameNode(value: '_set'),
-            value: VariableNode(name: NameNode(value: 'newStore')),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'addressId')),
+          type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'newAddress')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'AddressesSetInput'),
+            isNonNull: false,
           ),
-        ],
-        directives: [
-          DirectiveNode(
-            name: NameNode(value: 'include'),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'updateAddress')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'Boolean'),
+            isNonNull: true,
+          ),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'updateStore')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'Boolean'),
+            isNonNull: true,
+          ),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
+          FieldNode(
+            name: NameNode(value: 'updateStoresByPk'),
+            alias: null,
             arguments: [
               ArgumentNode(
-                name: NameNode(value: 'if'),
-                value: VariableNode(name: NameNode(value: 'updateStore')),
-              )
+                name: NameNode(value: 'pkColumns'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'id'),
+                      value: VariableNode(name: NameNode(value: 'storeId')),
+                    ),
+                  ],
+                ),
+              ),
+              ArgumentNode(
+                name: NameNode(value: '_set'),
+                value: VariableNode(name: NameNode(value: 'newStore')),
+              ),
             ],
-          )
-        ],
-        selectionSet: SelectionSetNode(selections: [
-          FragmentSpreadNode(
-            name: NameNode(value: 'Store'),
-            directives: [],
+            directives: [
+              DirectiveNode(
+                name: NameNode(value: 'include'),
+                arguments: [
+                  ArgumentNode(
+                    name: NameNode(value: 'if'),
+                    value: VariableNode(name: NameNode(value: 'updateStore')),
+                  ),
+                ],
+              ),
+            ],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FragmentSpreadNode(
+                  name: NameNode(value: 'Store'),
+                  directives: [],
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
+          ),
+          FieldNode(
+            name: NameNode(value: 'updateAddressesByPk'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'pkColumns'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'id'),
+                      value: VariableNode(name: NameNode(value: 'addressId')),
+                    ),
+                  ],
+                ),
+              ),
+              ArgumentNode(
+                name: NameNode(value: '_set'),
+                value: VariableNode(name: NameNode(value: 'newAddress')),
+              ),
+            ],
+            directives: [
+              DirectiveNode(
+                name: NameNode(value: 'include'),
+                arguments: [
+                  ArgumentNode(
+                    name: NameNode(value: 'if'),
+                    value: VariableNode(name: NameNode(value: 'updateAddress')),
+                  ),
+                ],
+              ),
+            ],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FragmentSpreadNode(
+                  name: NameNode(value: 'Address'),
+                  directives: [],
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
           ),
           FieldNode(
             name: NameNode(value: '__typename'),
@@ -1088,65 +1111,15 @@ const documentNodeMutationupdateStore = DocumentNode(definitions: [
             directives: [],
             selectionSet: null,
           ),
-        ]),
-      ),
-      FieldNode(
-        name: NameNode(value: 'updateAddressesByPk'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'pkColumns'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'id'),
-                value: VariableNode(name: NameNode(value: 'addressId')),
-              )
-            ]),
-          ),
-          ArgumentNode(
-            name: NameNode(value: '_set'),
-            value: VariableNode(name: NameNode(value: 'newAddress')),
-          ),
         ],
-        directives: [
-          DirectiveNode(
-            name: NameNode(value: 'include'),
-            arguments: [
-              ArgumentNode(
-                name: NameNode(value: 'if'),
-                value: VariableNode(name: NameNode(value: 'updateAddress')),
-              )
-            ],
-          )
-        ],
-        selectionSet: SelectionSetNode(selections: [
-          FragmentSpreadNode(
-            name: NameNode(value: 'Address'),
-            directives: [],
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-        ]),
       ),
-      FieldNode(
-        name: NameNode(value: '__typename'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-    ]),
-  ),
-  fragmentDefinitionStore,
-  fragmentDefinitionStoreNoPhoto,
-  fragmentDefinitionAddress,
-  fragmentDefinitionArea,
-  fragmentDefinitionAreaNoPhoto,
-  fragmentDefinitionStreet,
-  fragmentDefinitionStreetNoPhoto,
-]);
+    ),
+    fragmentDefinitionStore,
+    fragmentDefinitionStoreNoPhoto,
+    fragmentDefinitionAddress,
+    fragmentDefinitionArea,
+    fragmentDefinitionAreaNoPhoto,
+    fragmentDefinitionStreet,
+    fragmentDefinitionStreetNoPhoto,
+  ],
+);

@@ -11,17 +11,17 @@ class Variables_Subscription_watchAllGroups {
     int? limit,
     List<Input_GroupsOrderBy>? orderBy,
     List<Input_GroupsBoolExp>? where,
-  }) =>
-      Variables_Subscription_watchAllGroups._({
-        if (limit != null) r'limit': limit,
-        if (orderBy != null) r'orderBy': orderBy,
-        if (where != null) r'where': where,
-      });
+  }) => Variables_Subscription_watchAllGroups._({
+    if (limit != null) r'limit': limit,
+    if (orderBy != null) r'orderBy': orderBy,
+    if (where != null) r'where': where,
+  });
 
   Variables_Subscription_watchAllGroups._(this._$data);
 
   factory Variables_Subscription_watchAllGroups.fromJson(
-      Map<String, dynamic> data) {
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('limit')) {
       final l$limit = data['limit'];
@@ -31,14 +31,16 @@ class Variables_Subscription_watchAllGroups {
       final l$orderBy = data['orderBy'];
       result$data['orderBy'] = (l$orderBy as List<dynamic>?)
           ?.map(
-              (e) => Input_GroupsOrderBy.fromJson((e as Map<String, dynamic>)))
+            (e) => Input_GroupsOrderBy.fromJson((e as Map<String, dynamic>)),
+          )
           .toList();
     }
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = (l$where as List<dynamic>?)
           ?.map(
-              (e) => Input_GroupsBoolExp.fromJson((e as Map<String, dynamic>)))
+            (e) => Input_GroupsBoolExp.fromJson((e as Map<String, dynamic>)),
+          )
           .toList();
     }
     return Variables_Subscription_watchAllGroups._(result$data);
@@ -72,11 +74,10 @@ class Variables_Subscription_watchAllGroups {
   }
 
   CopyWith_Variables_Subscription_watchAllGroups<
-          Variables_Subscription_watchAllGroups>
-      get copyWith => CopyWith_Variables_Subscription_watchAllGroups(
-            this,
-            (i) => i,
-          );
+    Variables_Subscription_watchAllGroups
+  >
+  get copyWith =>
+      CopyWith_Variables_Subscription_watchAllGroups(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -145,13 +146,13 @@ class Variables_Subscription_watchAllGroups {
       _$data.containsKey('limit') ? l$limit : const {},
       _$data.containsKey('orderBy')
           ? l$orderBy == null
-              ? null
-              : Object.hashAll(l$orderBy.map((v) => v))
+                ? null
+                : Object.hashAll(l$orderBy.map((v) => v))
           : const {},
       _$data.containsKey('where')
           ? l$where == null
-              ? null
-              : Object.hashAll(l$where.map((v) => v))
+                ? null
+                : Object.hashAll(l$where.map((v) => v))
           : const {},
     ]);
   }
@@ -190,14 +191,15 @@ class _CopyWithImpl_Variables_Subscription_watchAllGroups<TRes>
     Object? limit = _undefined,
     Object? orderBy = _undefined,
     Object? where = _undefined,
-  }) =>
-      _then(Variables_Subscription_watchAllGroups._({
-        ..._instance._$data,
-        if (limit != _undefined) 'limit': (limit as int?),
-        if (orderBy != _undefined)
-          'orderBy': (orderBy as List<Input_GroupsOrderBy>?),
-        if (where != _undefined) 'where': (where as List<Input_GroupsBoolExp>?),
-      }));
+  }) => _then(
+    Variables_Subscription_watchAllGroups._({
+      ..._instance._$data,
+      if (limit != _undefined) 'limit': (limit as int?),
+      if (orderBy != _undefined)
+        'orderBy': (orderBy as List<Input_GroupsOrderBy>?),
+      if (where != _undefined) 'where': (where as List<Input_GroupsBoolExp>?),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Variables_Subscription_watchAllGroups<TRes>
@@ -210,8 +212,7 @@ class _CopyWithStubImpl_Variables_Subscription_watchAllGroups<TRes>
     int? limit,
     List<Input_GroupsOrderBy>? orderBy,
     List<Input_GroupsBoolExp>? where,
-  }) =>
-      _res;
+  }) => _res;
 }
 
 class Subscription_watchAllGroups {
@@ -220,9 +221,10 @@ class Subscription_watchAllGroups {
   factory Subscription_watchAllGroups.fromJson(Map<String, dynamic> json) {
     final l$groups = json['groups'];
     return Subscription_watchAllGroups(
-        groups: (l$groups as List<dynamic>)
-            .map((e) => Fragment_Group.fromJson((e as Map<String, dynamic>)))
-            .toList());
+      groups: (l$groups as List<dynamic>)
+          .map((e) => Fragment_Group.fromJson((e as Map<String, dynamic>)))
+          .toList(),
+    );
   }
 
   final List<Fragment_Group> groups;
@@ -268,10 +270,7 @@ class Subscription_watchAllGroups {
 extension UtilityExtension_Subscription_watchAllGroups
     on Subscription_watchAllGroups {
   CopyWith_Subscription_watchAllGroups<Subscription_watchAllGroups>
-      get copyWith => CopyWith_Subscription_watchAllGroups(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Subscription_watchAllGroups(this, (i) => i);
 }
 
 abstract class CopyWith_Subscription_watchAllGroups<TRes> {
@@ -285,17 +284,16 @@ abstract class CopyWith_Subscription_watchAllGroups<TRes> {
 
   TRes call({List<Fragment_Group>? groups});
   TRes groups(
-      Iterable<Fragment_Group> Function(
-              Iterable<CopyWith_Fragment_Group<Fragment_Group>>)
-          _fn);
+    Iterable<Fragment_Group> Function(
+      Iterable<CopyWith_Fragment_Group<Fragment_Group>>,
+    )
+    _fn,
+  );
 }
 
 class _CopyWithImpl_Subscription_watchAllGroups<TRes>
     implements CopyWith_Subscription_watchAllGroups<TRes> {
-  _CopyWithImpl_Subscription_watchAllGroups(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Subscription_watchAllGroups(this._instance, this._then);
 
   final Subscription_watchAllGroups _instance;
 
@@ -303,20 +301,24 @@ class _CopyWithImpl_Subscription_watchAllGroups<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? groups = _undefined}) => _then(Subscription_watchAllGroups(
+  TRes call({Object? groups = _undefined}) => _then(
+    Subscription_watchAllGroups(
       groups: groups == _undefined || groups == null
           ? _instance.groups
-          : (groups as List<Fragment_Group>)));
+          : (groups as List<Fragment_Group>),
+    ),
+  );
 
   TRes groups(
-          Iterable<Fragment_Group> Function(
-                  Iterable<CopyWith_Fragment_Group<Fragment_Group>>)
-              _fn) =>
-      call(
-          groups: _fn(_instance.groups.map((e) => CopyWith_Fragment_Group(
-                e,
-                (i) => i,
-              ))).toList());
+    Iterable<Fragment_Group> Function(
+      Iterable<CopyWith_Fragment_Group<Fragment_Group>>,
+    )
+    _fn,
+  ) => call(
+    groups: _fn(
+      _instance.groups.map((e) => CopyWith_Fragment_Group(e, (i) => i)),
+    ).toList(),
+  );
 }
 
 class _CopyWithStubImpl_Subscription_watchAllGroups<TRes>
@@ -330,113 +332,123 @@ class _CopyWithStubImpl_Subscription_watchAllGroups<TRes>
   groups(_fn) => _res;
 }
 
-const documentNodeSubscriptionwatchAllGroups = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.subscription,
-    name: NameNode(value: 'watchAllGroups'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'limit')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'Int'),
-          isNonNull: false,
+const documentNodeSubscriptionwatchAllGroups = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.subscription,
+      name: NameNode(value: 'watchAllGroups'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'limit')),
+          type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: false),
+          defaultValue: DefaultValueNode(value: IntValueNode(value: '200')),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: IntValueNode(value: '200')),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'orderBy')),
-        type: ListTypeNode(
-          type: NamedTypeNode(
-            name: NameNode(value: 'GroupsOrderBy'),
-            isNonNull: true,
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'orderBy')),
+          type: ListTypeNode(
+            type: NamedTypeNode(
+              name: NameNode(value: 'GroupsOrderBy'),
+              isNonNull: true,
+            ),
+            isNonNull: false,
           ),
-          isNonNull: false,
+          defaultValue: DefaultValueNode(
+            value: ObjectValueNode(
+              fields: [
+                ObjectFieldNode(
+                  name: NameNode(value: 'name'),
+                  value: EnumValueNode(name: NameNode(value: 'ASC')),
+                ),
+              ],
+            ),
+          ),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(
-            value: ObjectValueNode(fields: [
-          ObjectFieldNode(
-            name: NameNode(value: 'name'),
-            value: EnumValueNode(name: NameNode(value: 'ASC')),
-          )
-        ])),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'where')),
-        type: ListTypeNode(
-          type: NamedTypeNode(
-            name: NameNode(value: 'GroupsBoolExp'),
-            isNonNull: true,
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'where')),
+          type: ListTypeNode(
+            type: NamedTypeNode(
+              name: NameNode(value: 'GroupsBoolExp'),
+              isNonNull: true,
+            ),
+            isNonNull: false,
           ),
-          isNonNull: false,
+          defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
-        directives: [],
-      ),
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'groups'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'limit'),
-            value: VariableNode(name: NameNode(value: 'limit')),
-          ),
-          ArgumentNode(
-            name: NameNode(value: 'orderBy'),
-            value: VariableNode(name: NameNode(value: 'orderBy')),
-          ),
-          ArgumentNode(
-            name: NameNode(value: 'where'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: '_and'),
-                value: VariableNode(name: NameNode(value: 'where')),
-              )
-            ]),
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
+          FieldNode(
+            name: NameNode(value: 'groups'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'limit'),
+                value: VariableNode(name: NameNode(value: 'limit')),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'orderBy'),
+                value: VariableNode(name: NameNode(value: 'orderBy')),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'where'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: '_and'),
+                      value: VariableNode(name: NameNode(value: 'where')),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FragmentSpreadNode(
+                  name: NameNode(value: 'Group'),
+                  directives: [],
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
           ),
         ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FragmentSpreadNode(
-            name: NameNode(value: 'Group'),
-            directives: [],
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-        ]),
-      )
-    ]),
-  ),
-  fragmentDefinitionGroup,
-  fragmentDefinitionGroupNoPhoto,
-]);
+      ),
+    ),
+    fragmentDefinitionGroup,
+    fragmentDefinitionGroupNoPhoto,
+  ],
+);
 
 class Variables_Subscription_watchGroupsCount {
-  factory Variables_Subscription_watchGroupsCount(
-          {List<Input_GroupsBoolExp>? where}) =>
-      Variables_Subscription_watchGroupsCount._({
-        if (where != null) r'where': where,
-      });
+  factory Variables_Subscription_watchGroupsCount({
+    List<Input_GroupsBoolExp>? where,
+  }) => Variables_Subscription_watchGroupsCount._({
+    if (where != null) r'where': where,
+  });
 
   Variables_Subscription_watchGroupsCount._(this._$data);
 
   factory Variables_Subscription_watchGroupsCount.fromJson(
-      Map<String, dynamic> data) {
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = (l$where as List<dynamic>?)
           ?.map(
-              (e) => Input_GroupsBoolExp.fromJson((e as Map<String, dynamic>)))
+            (e) => Input_GroupsBoolExp.fromJson((e as Map<String, dynamic>)),
+          )
           .toList();
     }
     return Variables_Subscription_watchGroupsCount._(result$data);
@@ -457,11 +469,10 @@ class Variables_Subscription_watchGroupsCount {
   }
 
   CopyWith_Variables_Subscription_watchGroupsCount<
-          Variables_Subscription_watchGroupsCount>
-      get copyWith => CopyWith_Variables_Subscription_watchGroupsCount(
-            this,
-            (i) => i,
-          );
+    Variables_Subscription_watchGroupsCount
+  >
+  get copyWith =>
+      CopyWith_Variables_Subscription_watchGroupsCount(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -500,9 +511,9 @@ class Variables_Subscription_watchGroupsCount {
     return Object.hashAll([
       _$data.containsKey('where')
           ? l$where == null
-              ? null
-              : Object.hashAll(l$where.map((v) => v))
-          : const {}
+                ? null
+                : Object.hashAll(l$where.map((v) => v))
+          : const {},
     ]);
   }
 }
@@ -532,11 +543,12 @@ class _CopyWithImpl_Variables_Subscription_watchGroupsCount<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? where = _undefined}) =>
-      _then(Variables_Subscription_watchGroupsCount._({
-        ..._instance._$data,
-        if (where != _undefined) 'where': (where as List<Input_GroupsBoolExp>?),
-      }));
+  TRes call({Object? where = _undefined}) => _then(
+    Variables_Subscription_watchGroupsCount._({
+      ..._instance._$data,
+      if (where != _undefined) 'where': (where as List<Input_GroupsBoolExp>?),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Variables_Subscription_watchGroupsCount<TRes>
@@ -554,8 +566,10 @@ class Subscription_watchGroupsCount {
   factory Subscription_watchGroupsCount.fromJson(Map<String, dynamic> json) {
     final l$groupsAggregate = json['groupsAggregate'];
     return Subscription_watchGroupsCount(
-        groupsAggregate: Subscription_watchGroupsCount_groupsAggregate.fromJson(
-            (l$groupsAggregate as Map<String, dynamic>)));
+      groupsAggregate: Subscription_watchGroupsCount_groupsAggregate.fromJson(
+        (l$groupsAggregate as Map<String, dynamic>),
+      ),
+    );
   }
 
   final Subscription_watchGroupsCount_groupsAggregate groupsAggregate;
@@ -594,10 +608,7 @@ class Subscription_watchGroupsCount {
 extension UtilityExtension_Subscription_watchGroupsCount
     on Subscription_watchGroupsCount {
   CopyWith_Subscription_watchGroupsCount<Subscription_watchGroupsCount>
-      get copyWith => CopyWith_Subscription_watchGroupsCount(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Subscription_watchGroupsCount(this, (i) => i);
 }
 
 abstract class CopyWith_Subscription_watchGroupsCount<TRes> {
@@ -611,15 +622,12 @@ abstract class CopyWith_Subscription_watchGroupsCount<TRes> {
 
   TRes call({Subscription_watchGroupsCount_groupsAggregate? groupsAggregate});
   CopyWith_Subscription_watchGroupsCount_groupsAggregate<TRes>
-      get groupsAggregate;
+  get groupsAggregate;
 }
 
 class _CopyWithImpl_Subscription_watchGroupsCount<TRes>
     implements CopyWith_Subscription_watchGroupsCount<TRes> {
-  _CopyWithImpl_Subscription_watchGroupsCount(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Subscription_watchGroupsCount(this._instance, this._then);
 
   final Subscription_watchGroupsCount _instance;
 
@@ -627,19 +635,21 @@ class _CopyWithImpl_Subscription_watchGroupsCount<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? groupsAggregate = _undefined}) =>
-      _then(Subscription_watchGroupsCount(
-          groupsAggregate:
-              groupsAggregate == _undefined || groupsAggregate == null
-                  ? _instance.groupsAggregate
-                  : (groupsAggregate
-                      as Subscription_watchGroupsCount_groupsAggregate)));
+  TRes call({Object? groupsAggregate = _undefined}) => _then(
+    Subscription_watchGroupsCount(
+      groupsAggregate: groupsAggregate == _undefined || groupsAggregate == null
+          ? _instance.groupsAggregate
+          : (groupsAggregate as Subscription_watchGroupsCount_groupsAggregate),
+    ),
+  );
 
   CopyWith_Subscription_watchGroupsCount_groupsAggregate<TRes>
-      get groupsAggregate {
+  get groupsAggregate {
     final local$groupsAggregate = _instance.groupsAggregate;
     return CopyWith_Subscription_watchGroupsCount_groupsAggregate(
-        local$groupsAggregate, (e) => call(groupsAggregate: e));
+      local$groupsAggregate,
+      (e) => call(groupsAggregate: e),
+    );
   }
 }
 
@@ -653,80 +663,90 @@ class _CopyWithStubImpl_Subscription_watchGroupsCount<TRes>
       _res;
 
   CopyWith_Subscription_watchGroupsCount_groupsAggregate<TRes>
-      get groupsAggregate =>
-          CopyWith_Subscription_watchGroupsCount_groupsAggregate.stub(_res);
+  get groupsAggregate =>
+      CopyWith_Subscription_watchGroupsCount_groupsAggregate.stub(_res);
 }
 
-const documentNodeSubscriptionwatchGroupsCount = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.subscription,
-    name: NameNode(value: 'watchGroupsCount'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'where')),
-        type: ListTypeNode(
-          type: NamedTypeNode(
-            name: NameNode(value: 'GroupsBoolExp'),
-            isNonNull: true,
+const documentNodeSubscriptionwatchGroupsCount = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.subscription,
+      name: NameNode(value: 'watchGroupsCount'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'where')),
+          type: ListTypeNode(
+            type: NamedTypeNode(
+              name: NameNode(value: 'GroupsBoolExp'),
+              isNonNull: true,
+            ),
+            isNonNull: false,
           ),
-          isNonNull: false,
+          defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
-        directives: [],
-      )
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'groupsAggregate'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'where'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: '_and'),
-                value: VariableNode(name: NameNode(value: 'where')),
-              )
-            ]),
-          )
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
+          FieldNode(
+            name: NameNode(value: 'groupsAggregate'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'where'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: '_and'),
+                      value: VariableNode(name: NameNode(value: 'where')),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FieldNode(
+                  name: NameNode(value: 'aggregate'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: SelectionSetNode(
+                    selections: [
+                      FieldNode(
+                        name: NameNode(value: 'count'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                      FieldNode(
+                        name: NameNode(value: '__typename'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                    ],
+                  ),
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
+          ),
         ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-            name: NameNode(value: 'aggregate'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                name: NameNode(value: 'count'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-              FieldNode(
-                name: NameNode(value: '__typename'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-            ]),
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-        ]),
-      )
-    ]),
-  ),
-]);
+      ),
+    ),
+  ],
+);
 
 class Subscription_watchGroupsCount_groupsAggregate {
   Subscription_watchGroupsCount_groupsAggregate({
@@ -735,14 +755,16 @@ class Subscription_watchGroupsCount_groupsAggregate {
   });
 
   factory Subscription_watchGroupsCount_groupsAggregate.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$aggregate = json['aggregate'];
     final l$$__typename = json['__typename'];
     return Subscription_watchGroupsCount_groupsAggregate(
       aggregate: l$aggregate == null
           ? null
           : Subscription_watchGroupsCount_groupsAggregate_aggregate.fromJson(
-              (l$aggregate as Map<String, dynamic>)),
+              (l$aggregate as Map<String, dynamic>),
+            ),
       $__typename: (l$$__typename as String),
     );
   }
@@ -764,10 +786,7 @@ class Subscription_watchGroupsCount_groupsAggregate {
   int get hashCode {
     final l$aggregate = aggregate;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$aggregate,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$aggregate, l$$__typename]);
   }
 
   @override
@@ -796,11 +815,10 @@ class Subscription_watchGroupsCount_groupsAggregate {
 extension UtilityExtension_Subscription_watchGroupsCount_groupsAggregate
     on Subscription_watchGroupsCount_groupsAggregate {
   CopyWith_Subscription_watchGroupsCount_groupsAggregate<
-          Subscription_watchGroupsCount_groupsAggregate>
-      get copyWith => CopyWith_Subscription_watchGroupsCount_groupsAggregate(
-            this,
-            (i) => i,
-          );
+    Subscription_watchGroupsCount_groupsAggregate
+  >
+  get copyWith =>
+      CopyWith_Subscription_watchGroupsCount_groupsAggregate(this, (i) => i);
 }
 
 abstract class CopyWith_Subscription_watchGroupsCount_groupsAggregate<TRes> {
@@ -810,15 +828,15 @@ abstract class CopyWith_Subscription_watchGroupsCount_groupsAggregate<TRes> {
   ) = _CopyWithImpl_Subscription_watchGroupsCount_groupsAggregate;
 
   factory CopyWith_Subscription_watchGroupsCount_groupsAggregate.stub(
-          TRes res) =
-      _CopyWithStubImpl_Subscription_watchGroupsCount_groupsAggregate;
+    TRes res,
+  ) = _CopyWithStubImpl_Subscription_watchGroupsCount_groupsAggregate;
 
   TRes call({
     Subscription_watchGroupsCount_groupsAggregate_aggregate? aggregate,
     String? $__typename,
   });
   CopyWith_Subscription_watchGroupsCount_groupsAggregate_aggregate<TRes>
-      get aggregate;
+  get aggregate;
 }
 
 class _CopyWithImpl_Subscription_watchGroupsCount_groupsAggregate<TRes>
@@ -837,25 +855,29 @@ class _CopyWithImpl_Subscription_watchGroupsCount_groupsAggregate<TRes>
   TRes call({
     Object? aggregate = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Subscription_watchGroupsCount_groupsAggregate(
-        aggregate: aggregate == _undefined
-            ? _instance.aggregate
-            : (aggregate
+  }) => _then(
+    Subscription_watchGroupsCount_groupsAggregate(
+      aggregate: aggregate == _undefined
+          ? _instance.aggregate
+          : (aggregate
                 as Subscription_watchGroupsCount_groupsAggregate_aggregate?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   CopyWith_Subscription_watchGroupsCount_groupsAggregate_aggregate<TRes>
-      get aggregate {
+  get aggregate {
     final local$aggregate = _instance.aggregate;
     return local$aggregate == null
         ? CopyWith_Subscription_watchGroupsCount_groupsAggregate_aggregate.stub(
-            _then(_instance))
+            _then(_instance),
+          )
         : CopyWith_Subscription_watchGroupsCount_groupsAggregate_aggregate(
-            local$aggregate, (e) => call(aggregate: e));
+            local$aggregate,
+            (e) => call(aggregate: e),
+          );
   }
 }
 
@@ -868,13 +890,13 @@ class _CopyWithStubImpl_Subscription_watchGroupsCount_groupsAggregate<TRes>
   call({
     Subscription_watchGroupsCount_groupsAggregate_aggregate? aggregate,
     String? $__typename,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Subscription_watchGroupsCount_groupsAggregate_aggregate<TRes>
-      get aggregate =>
-          CopyWith_Subscription_watchGroupsCount_groupsAggregate_aggregate.stub(
-              _res);
+  get aggregate =>
+      CopyWith_Subscription_watchGroupsCount_groupsAggregate_aggregate.stub(
+        _res,
+      );
 }
 
 class Subscription_watchGroupsCount_groupsAggregate_aggregate {
@@ -884,7 +906,8 @@ class Subscription_watchGroupsCount_groupsAggregate_aggregate {
   });
 
   factory Subscription_watchGroupsCount_groupsAggregate_aggregate.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$count = json['count'];
     final l$$__typename = json['__typename'];
     return Subscription_watchGroupsCount_groupsAggregate_aggregate(
@@ -910,10 +933,7 @@ class Subscription_watchGroupsCount_groupsAggregate_aggregate {
   int get hashCode {
     final l$count = count;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$count,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$count, l$$__typename]);
   }
 
   @override
@@ -942,33 +962,33 @@ class Subscription_watchGroupsCount_groupsAggregate_aggregate {
 extension UtilityExtension_Subscription_watchGroupsCount_groupsAggregate_aggregate
     on Subscription_watchGroupsCount_groupsAggregate_aggregate {
   CopyWith_Subscription_watchGroupsCount_groupsAggregate_aggregate<
-          Subscription_watchGroupsCount_groupsAggregate_aggregate>
-      get copyWith =>
-          CopyWith_Subscription_watchGroupsCount_groupsAggregate_aggregate(
-            this,
-            (i) => i,
-          );
+    Subscription_watchGroupsCount_groupsAggregate_aggregate
+  >
+  get copyWith =>
+      CopyWith_Subscription_watchGroupsCount_groupsAggregate_aggregate(
+        this,
+        (i) => i,
+      );
 }
 
 abstract class CopyWith_Subscription_watchGroupsCount_groupsAggregate_aggregate<
-    TRes> {
+  TRes
+> {
   factory CopyWith_Subscription_watchGroupsCount_groupsAggregate_aggregate(
     Subscription_watchGroupsCount_groupsAggregate_aggregate instance,
     TRes Function(Subscription_watchGroupsCount_groupsAggregate_aggregate) then,
   ) = _CopyWithImpl_Subscription_watchGroupsCount_groupsAggregate_aggregate;
 
   factory CopyWith_Subscription_watchGroupsCount_groupsAggregate_aggregate.stub(
-          TRes res) =
-      _CopyWithStubImpl_Subscription_watchGroupsCount_groupsAggregate_aggregate;
+    TRes res,
+  ) = _CopyWithStubImpl_Subscription_watchGroupsCount_groupsAggregate_aggregate;
 
-  TRes call({
-    int? count,
-    String? $__typename,
-  });
+  TRes call({int? count, String? $__typename});
 }
 
 class _CopyWithImpl_Subscription_watchGroupsCount_groupsAggregate_aggregate<
-        TRes>
+  TRes
+>
     implements
         CopyWith_Subscription_watchGroupsCount_groupsAggregate_aggregate<TRes> {
   _CopyWithImpl_Subscription_watchGroupsCount_groupsAggregate_aggregate(
@@ -979,50 +999,46 @@ class _CopyWithImpl_Subscription_watchGroupsCount_groupsAggregate_aggregate<
   final Subscription_watchGroupsCount_groupsAggregate_aggregate _instance;
 
   final TRes Function(Subscription_watchGroupsCount_groupsAggregate_aggregate)
-      _then;
+  _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? count = _undefined,
-    Object? $__typename = _undefined,
-  }) =>
-      _then(Subscription_watchGroupsCount_groupsAggregate_aggregate(
-        count: count == _undefined || count == null
-            ? _instance.count
-            : (count as int),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  TRes call({Object? count = _undefined, Object? $__typename = _undefined}) =>
+      _then(
+        Subscription_watchGroupsCount_groupsAggregate_aggregate(
+          count: count == _undefined || count == null
+              ? _instance.count
+              : (count as int),
+          $__typename: $__typename == _undefined || $__typename == null
+              ? _instance.$__typename
+              : ($__typename as String),
+        ),
+      );
 }
 
 class _CopyWithStubImpl_Subscription_watchGroupsCount_groupsAggregate_aggregate<
-        TRes>
+  TRes
+>
     implements
         CopyWith_Subscription_watchGroupsCount_groupsAggregate_aggregate<TRes> {
   _CopyWithStubImpl_Subscription_watchGroupsCount_groupsAggregate_aggregate(
-      this._res);
+    this._res,
+  );
 
   TRes _res;
 
-  call({
-    int? count,
-    String? $__typename,
-  }) =>
-      _res;
+  call({int? count, String? $__typename}) => _res;
 }
 
 class Variables_Subscription_watchGroup {
   factory Variables_Subscription_watchGroup({required UuidValue id}) =>
-      Variables_Subscription_watchGroup._({
-        r'id': id,
-      });
+      Variables_Subscription_watchGroup._({r'id': id});
 
   Variables_Subscription_watchGroup._(this._$data);
 
   factory Variables_Subscription_watchGroup.fromJson(
-      Map<String, dynamic> data) {
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
     final l$id = data['id'];
     result$data['id'] = stringToUuid(l$id);
@@ -1041,10 +1057,7 @@ class Variables_Subscription_watchGroup {
   }
 
   CopyWith_Variables_Subscription_watchGroup<Variables_Subscription_watchGroup>
-      get copyWith => CopyWith_Variables_Subscription_watchGroup(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Variables_Subscription_watchGroup(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -1084,10 +1097,7 @@ abstract class CopyWith_Variables_Subscription_watchGroup<TRes> {
 
 class _CopyWithImpl_Variables_Subscription_watchGroup<TRes>
     implements CopyWith_Variables_Subscription_watchGroup<TRes> {
-  _CopyWithImpl_Variables_Subscription_watchGroup(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Variables_Subscription_watchGroup(this._instance, this._then);
 
   final Variables_Subscription_watchGroup _instance;
 
@@ -1095,11 +1105,12 @@ class _CopyWithImpl_Variables_Subscription_watchGroup<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? id = _undefined}) =>
-      _then(Variables_Subscription_watchGroup._({
-        ..._instance._$data,
-        if (id != _undefined && id != null) 'id': (id as UuidValue),
-      }));
+  TRes call({Object? id = _undefined}) => _then(
+    Variables_Subscription_watchGroup._({
+      ..._instance._$data,
+      if (id != _undefined && id != null) 'id': (id as UuidValue),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Variables_Subscription_watchGroup<TRes>
@@ -1117,10 +1128,12 @@ class Subscription_watchGroup {
   factory Subscription_watchGroup.fromJson(Map<String, dynamic> json) {
     final l$groupsByPk = json['groupsByPk'];
     return Subscription_watchGroup(
-        groupsByPk: l$groupsByPk == null
-            ? null
-            : Subscription_watchGroup_groupsByPk.fromJson(
-                (l$groupsByPk as Map<String, dynamic>)));
+      groupsByPk: l$groupsByPk == null
+          ? null
+          : Subscription_watchGroup_groupsByPk.fromJson(
+              (l$groupsByPk as Map<String, dynamic>),
+            ),
+    );
   }
 
   final Subscription_watchGroup_groupsByPk? groupsByPk;
@@ -1157,10 +1170,7 @@ class Subscription_watchGroup {
 
 extension UtilityExtension_Subscription_watchGroup on Subscription_watchGroup {
   CopyWith_Subscription_watchGroup<Subscription_watchGroup> get copyWith =>
-      CopyWith_Subscription_watchGroup(
-        this,
-        (i) => i,
-      );
+      CopyWith_Subscription_watchGroup(this, (i) => i);
 }
 
 abstract class CopyWith_Subscription_watchGroup<TRes> {
@@ -1178,10 +1188,7 @@ abstract class CopyWith_Subscription_watchGroup<TRes> {
 
 class _CopyWithImpl_Subscription_watchGroup<TRes>
     implements CopyWith_Subscription_watchGroup<TRes> {
-  _CopyWithImpl_Subscription_watchGroup(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Subscription_watchGroup(this._instance, this._then);
 
   final Subscription_watchGroup _instance;
 
@@ -1189,17 +1196,22 @@ class _CopyWithImpl_Subscription_watchGroup<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? groupsByPk = _undefined}) => _then(Subscription_watchGroup(
+  TRes call({Object? groupsByPk = _undefined}) => _then(
+    Subscription_watchGroup(
       groupsByPk: groupsByPk == _undefined
           ? _instance.groupsByPk
-          : (groupsByPk as Subscription_watchGroup_groupsByPk?)));
+          : (groupsByPk as Subscription_watchGroup_groupsByPk?),
+    ),
+  );
 
   CopyWith_Subscription_watchGroup_groupsByPk<TRes> get groupsByPk {
     final local$groupsByPk = _instance.groupsByPk;
     return local$groupsByPk == null
         ? CopyWith_Subscription_watchGroup_groupsByPk.stub(_then(_instance))
         : CopyWith_Subscription_watchGroup_groupsByPk(
-            local$groupsByPk, (e) => call(groupsByPk: e));
+            local$groupsByPk,
+            (e) => call(groupsByPk: e),
+          );
   }
 }
 
@@ -1215,141 +1227,152 @@ class _CopyWithStubImpl_Subscription_watchGroup<TRes>
       CopyWith_Subscription_watchGroup_groupsByPk.stub(_res);
 }
 
-const documentNodeSubscriptionwatchGroup = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.subscription,
-    name: NameNode(value: 'watchGroup'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'id')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'uuid'),
-          isNonNull: true,
+const documentNodeSubscriptionwatchGroup = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.subscription,
+      name: NameNode(value: 'watchGroup'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'id')),
+          type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      )
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'groupsByPk'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'id'),
-            value: VariableNode(name: NameNode(value: 'id')),
-          )
-        ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FragmentSpreadNode(
-            name: NameNode(value: 'Group'),
-            directives: [],
-          ),
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
           FieldNode(
-            name: NameNode(value: 'service'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FragmentSpreadNode(
-                name: NameNode(value: 'ServiceWithStudyYears'),
-                directives: [],
-              ),
-              FieldNode(
-                name: NameNode(value: '__typename'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-            ]),
-          ),
-          FieldNode(
-            name: NameNode(value: 'lastEdit'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FragmentSpreadNode(
-                name: NameNode(value: 'LatestEditHistory'),
-                directives: [],
-              ),
-              FieldNode(
-                name: NameNode(value: '__typename'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-            ]),
-          ),
-          FieldNode(
-            name: NameNode(value: 'validity'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'adminUsers'),
+            name: NameNode(value: 'groupsByPk'),
             alias: null,
             arguments: [
               ArgumentNode(
-                name: NameNode(value: 'distinctOn'),
-                value: EnumValueNode(name: NameNode(value: 'uid')),
-              )
+                name: NameNode(value: 'id'),
+                value: VariableNode(name: NameNode(value: 'id')),
+              ),
             ],
             directives: [],
-            selectionSet: SelectionSetNode(selections: [
-              FieldNode(
-                name: NameNode(value: 'user'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: SelectionSetNode(selections: [
-                  FragmentSpreadNode(
-                    name: NameNode(value: 'User'),
-                    directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FragmentSpreadNode(
+                  name: NameNode(value: 'Group'),
+                  directives: [],
+                ),
+                FieldNode(
+                  name: NameNode(value: 'service'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: SelectionSetNode(
+                    selections: [
+                      FragmentSpreadNode(
+                        name: NameNode(value: 'ServiceWithStudyYears'),
+                        directives: [],
+                      ),
+                      FieldNode(
+                        name: NameNode(value: '__typename'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                    ],
                   ),
-                  FieldNode(
-                    name: NameNode(value: '__typename'),
-                    alias: null,
-                    arguments: [],
-                    directives: [],
-                    selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: 'lastEdit'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: SelectionSetNode(
+                    selections: [
+                      FragmentSpreadNode(
+                        name: NameNode(value: 'LatestEditHistory'),
+                        directives: [],
+                      ),
+                      FieldNode(
+                        name: NameNode(value: '__typename'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                    ],
                   ),
-                ]),
-              ),
-              FieldNode(
-                name: NameNode(value: '__typename'),
-                alias: null,
-                arguments: [],
-                directives: [],
-                selectionSet: null,
-              ),
-            ]),
+                ),
+                FieldNode(
+                  name: NameNode(value: 'validity'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: 'adminUsers'),
+                  alias: null,
+                  arguments: [
+                    ArgumentNode(
+                      name: NameNode(value: 'distinctOn'),
+                      value: EnumValueNode(name: NameNode(value: 'uid')),
+                    ),
+                  ],
+                  directives: [],
+                  selectionSet: SelectionSetNode(
+                    selections: [
+                      FieldNode(
+                        name: NameNode(value: 'user'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: SelectionSetNode(
+                          selections: [
+                            FragmentSpreadNode(
+                              name: NameNode(value: 'User'),
+                              directives: [],
+                            ),
+                            FieldNode(
+                              name: NameNode(value: '__typename'),
+                              alias: null,
+                              arguments: [],
+                              directives: [],
+                              selectionSet: null,
+                            ),
+                          ],
+                        ),
+                      ),
+                      FieldNode(
+                        name: NameNode(value: '__typename'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                    ],
+                  ),
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
           ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-        ]),
-      )
-    ]),
-  ),
-  fragmentDefinitionGroup,
-  fragmentDefinitionGroupNoPhoto,
-  fragmentDefinitionServiceWithStudyYears,
-  fragmentDefinitionServiceNoPhoto,
-  fragmentDefinitionLatestEditHistory,
-  fragmentDefinitionUser,
-  fragmentDefinitionUserNoPhoto,
-]);
+        ],
+      ),
+    ),
+    fragmentDefinitionGroup,
+    fragmentDefinitionGroupNoPhoto,
+    fragmentDefinitionServiceWithStudyYears,
+    fragmentDefinitionServiceNoPhoto,
+    fragmentDefinitionLatestEditHistory,
+    fragmentDefinitionUser,
+    fragmentDefinitionUserNoPhoto,
+  ],
+);
 
 class Subscription_watchGroup_groupsByPk
     implements Fragment_Group, Fragment_GroupNoPhoto {
@@ -1367,7 +1390,8 @@ class Subscription_watchGroup_groupsByPk
   });
 
   factory Subscription_watchGroup_groupsByPk.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$id = json['id'];
     final l$name = json['name'];
     final l$color = json['color'];
@@ -1383,19 +1407,25 @@ class Subscription_watchGroup_groupsByPk
       name: (l$name as String),
       color: (l$color as int?),
       $__typename: (l$$__typename as String),
-      photoUpdatedAt:
-          l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
+      photoUpdatedAt: l$photoUpdatedAt == null
+          ? null
+          : tstzFromString(l$photoUpdatedAt),
       blurhash: (l$blurhash as String?),
       service: Fragment_ServiceWithStudyYears.fromJson(
-          (l$service as Map<String, dynamic>)),
+        (l$service as Map<String, dynamic>),
+      ),
       lastEdit: l$lastEdit == null
           ? null
           : Fragment_LatestEditHistory.fromJson(
-              (l$lastEdit as Map<String, dynamic>)),
+              (l$lastEdit as Map<String, dynamic>),
+            ),
       validity: l$validity == null ? null : dateRangeFromString(l$validity),
       adminUsers: (l$adminUsers as List<dynamic>)
-          .map((e) => Subscription_watchGroup_groupsByPk_adminUsers.fromJson(
-              (e as Map<String, dynamic>)))
+          .map(
+            (e) => Subscription_watchGroup_groupsByPk_adminUsers.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
           .toList(),
     );
   }
@@ -1431,8 +1461,9 @@ class Subscription_watchGroup_groupsByPk
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
-    _resultData['photoUpdatedAt'] =
-        l$photoUpdatedAt == null ? null : tstzToString(l$photoUpdatedAt);
+    _resultData['photoUpdatedAt'] = l$photoUpdatedAt == null
+        ? null
+        : tstzToString(l$photoUpdatedAt);
     final l$blurhash = blurhash;
     _resultData['blurhash'] = l$blurhash;
     final l$service = service;
@@ -1440,8 +1471,9 @@ class Subscription_watchGroup_groupsByPk
     final l$lastEdit = lastEdit;
     _resultData['lastEdit'] = l$lastEdit?.toJson();
     final l$validity = validity;
-    _resultData['validity'] =
-        l$validity == null ? null : dateRangeToString(l$validity);
+    _resultData['validity'] = l$validity == null
+        ? null
+        : dateRangeToString(l$validity);
     final l$adminUsers = adminUsers;
     _resultData['adminUsers'] = l$adminUsers.map((e) => e.toJson()).toList();
     return _resultData;
@@ -1546,11 +1578,9 @@ class Subscription_watchGroup_groupsByPk
 extension UtilityExtension_Subscription_watchGroup_groupsByPk
     on Subscription_watchGroup_groupsByPk {
   CopyWith_Subscription_watchGroup_groupsByPk<
-          Subscription_watchGroup_groupsByPk>
-      get copyWith => CopyWith_Subscription_watchGroup_groupsByPk(
-            this,
-            (i) => i,
-          );
+    Subscription_watchGroup_groupsByPk
+  >
+  get copyWith => CopyWith_Subscription_watchGroup_groupsByPk(this, (i) => i);
 }
 
 abstract class CopyWith_Subscription_watchGroup_groupsByPk<TRes> {
@@ -1577,19 +1607,20 @@ abstract class CopyWith_Subscription_watchGroup_groupsByPk<TRes> {
   CopyWith_Fragment_ServiceWithStudyYears<TRes> get service;
   CopyWith_Fragment_LatestEditHistory<TRes> get lastEdit;
   TRes adminUsers(
-      Iterable<Subscription_watchGroup_groupsByPk_adminUsers> Function(
-              Iterable<
-                  CopyWith_Subscription_watchGroup_groupsByPk_adminUsers<
-                      Subscription_watchGroup_groupsByPk_adminUsers>>)
-          _fn);
+    Iterable<Subscription_watchGroup_groupsByPk_adminUsers> Function(
+      Iterable<
+        CopyWith_Subscription_watchGroup_groupsByPk_adminUsers<
+          Subscription_watchGroup_groupsByPk_adminUsers
+        >
+      >,
+    )
+    _fn,
+  );
 }
 
 class _CopyWithImpl_Subscription_watchGroup_groupsByPk<TRes>
     implements CopyWith_Subscription_watchGroup_groupsByPk<TRes> {
-  _CopyWithImpl_Subscription_watchGroup_groupsByPk(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Subscription_watchGroup_groupsByPk(this._instance, this._then);
 
   final Subscription_watchGroup_groupsByPk _instance;
 
@@ -1608,40 +1639,43 @@ class _CopyWithImpl_Subscription_watchGroup_groupsByPk<TRes>
     Object? lastEdit = _undefined,
     Object? validity = _undefined,
     Object? adminUsers = _undefined,
-  }) =>
-      _then(Subscription_watchGroup_groupsByPk(
-        id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
-        name: name == _undefined || name == null
-            ? _instance.name
-            : (name as String),
-        color: color == _undefined ? _instance.color : (color as int?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-        photoUpdatedAt: photoUpdatedAt == _undefined
-            ? _instance.photoUpdatedAt
-            : (photoUpdatedAt as DateTime?),
-        blurhash:
-            blurhash == _undefined ? _instance.blurhash : (blurhash as String?),
-        service: service == _undefined || service == null
-            ? _instance.service
-            : (service as Fragment_ServiceWithStudyYears),
-        lastEdit: lastEdit == _undefined
-            ? _instance.lastEdit
-            : (lastEdit as Fragment_LatestEditHistory?),
-        validity: validity == _undefined
-            ? _instance.validity
-            : (validity as DateTimeRange?),
-        adminUsers: adminUsers == _undefined || adminUsers == null
-            ? _instance.adminUsers
-            : (adminUsers
-                as List<Subscription_watchGroup_groupsByPk_adminUsers>),
-      ));
+  }) => _then(
+    Subscription_watchGroup_groupsByPk(
+      id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      color: color == _undefined ? _instance.color : (color as int?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+      photoUpdatedAt: photoUpdatedAt == _undefined
+          ? _instance.photoUpdatedAt
+          : (photoUpdatedAt as DateTime?),
+      blurhash: blurhash == _undefined
+          ? _instance.blurhash
+          : (blurhash as String?),
+      service: service == _undefined || service == null
+          ? _instance.service
+          : (service as Fragment_ServiceWithStudyYears),
+      lastEdit: lastEdit == _undefined
+          ? _instance.lastEdit
+          : (lastEdit as Fragment_LatestEditHistory?),
+      validity: validity == _undefined
+          ? _instance.validity
+          : (validity as DateTimeRange?),
+      adminUsers: adminUsers == _undefined || adminUsers == null
+          ? _instance.adminUsers
+          : (adminUsers as List<Subscription_watchGroup_groupsByPk_adminUsers>),
+    ),
+  );
 
   CopyWith_Fragment_ServiceWithStudyYears<TRes> get service {
     final local$service = _instance.service;
     return CopyWith_Fragment_ServiceWithStudyYears(
-        local$service, (e) => call(service: e));
+      local$service,
+      (e) => call(service: e),
+    );
   }
 
   CopyWith_Fragment_LatestEditHistory<TRes> get lastEdit {
@@ -1649,21 +1683,28 @@ class _CopyWithImpl_Subscription_watchGroup_groupsByPk<TRes>
     return local$lastEdit == null
         ? CopyWith_Fragment_LatestEditHistory.stub(_then(_instance))
         : CopyWith_Fragment_LatestEditHistory(
-            local$lastEdit, (e) => call(lastEdit: e));
+            local$lastEdit,
+            (e) => call(lastEdit: e),
+          );
   }
 
   TRes adminUsers(
-          Iterable<Subscription_watchGroup_groupsByPk_adminUsers> Function(
-                  Iterable<
-                      CopyWith_Subscription_watchGroup_groupsByPk_adminUsers<
-                          Subscription_watchGroup_groupsByPk_adminUsers>>)
-              _fn) =>
-      call(
-          adminUsers: _fn(_instance.adminUsers.map(
-              (e) => CopyWith_Subscription_watchGroup_groupsByPk_adminUsers(
-                    e,
-                    (i) => i,
-                  ))).toList());
+    Iterable<Subscription_watchGroup_groupsByPk_adminUsers> Function(
+      Iterable<
+        CopyWith_Subscription_watchGroup_groupsByPk_adminUsers<
+          Subscription_watchGroup_groupsByPk_adminUsers
+        >
+      >,
+    )
+    _fn,
+  ) => call(
+    adminUsers: _fn(
+      _instance.adminUsers.map(
+        (e) =>
+            CopyWith_Subscription_watchGroup_groupsByPk_adminUsers(e, (i) => i),
+      ),
+    ).toList(),
+  );
 }
 
 class _CopyWithStubImpl_Subscription_watchGroup_groupsByPk<TRes>
@@ -1683,8 +1724,7 @@ class _CopyWithStubImpl_Subscription_watchGroup_groupsByPk<TRes>
     Fragment_LatestEditHistory? lastEdit,
     DateTimeRange? validity,
     List<Subscription_watchGroup_groupsByPk_adminUsers>? adminUsers,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Fragment_ServiceWithStudyYears<TRes> get service =>
       CopyWith_Fragment_ServiceWithStudyYears.stub(_res);
@@ -1702,7 +1742,8 @@ class Subscription_watchGroup_groupsByPk_adminUsers {
   });
 
   factory Subscription_watchGroup_groupsByPk_adminUsers.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$user = json['user'];
     final l$$__typename = json['__typename'];
     return Subscription_watchGroup_groupsByPk_adminUsers(
@@ -1728,10 +1769,7 @@ class Subscription_watchGroup_groupsByPk_adminUsers {
   int get hashCode {
     final l$user = user;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$user,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$user, l$$__typename]);
   }
 
   @override
@@ -1760,11 +1798,10 @@ class Subscription_watchGroup_groupsByPk_adminUsers {
 extension UtilityExtension_Subscription_watchGroup_groupsByPk_adminUsers
     on Subscription_watchGroup_groupsByPk_adminUsers {
   CopyWith_Subscription_watchGroup_groupsByPk_adminUsers<
-          Subscription_watchGroup_groupsByPk_adminUsers>
-      get copyWith => CopyWith_Subscription_watchGroup_groupsByPk_adminUsers(
-            this,
-            (i) => i,
-          );
+    Subscription_watchGroup_groupsByPk_adminUsers
+  >
+  get copyWith =>
+      CopyWith_Subscription_watchGroup_groupsByPk_adminUsers(this, (i) => i);
 }
 
 abstract class CopyWith_Subscription_watchGroup_groupsByPk_adminUsers<TRes> {
@@ -1774,13 +1811,10 @@ abstract class CopyWith_Subscription_watchGroup_groupsByPk_adminUsers<TRes> {
   ) = _CopyWithImpl_Subscription_watchGroup_groupsByPk_adminUsers;
 
   factory CopyWith_Subscription_watchGroup_groupsByPk_adminUsers.stub(
-          TRes res) =
-      _CopyWithStubImpl_Subscription_watchGroup_groupsByPk_adminUsers;
+    TRes res,
+  ) = _CopyWithStubImpl_Subscription_watchGroup_groupsByPk_adminUsers;
 
-  TRes call({
-    Fragment_User? user,
-    String? $__typename,
-  });
+  TRes call({Fragment_User? user, String? $__typename});
   CopyWith_Fragment_User<TRes> get user;
 }
 
@@ -1797,18 +1831,17 @@ class _CopyWithImpl_Subscription_watchGroup_groupsByPk_adminUsers<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? user = _undefined,
-    Object? $__typename = _undefined,
-  }) =>
-      _then(Subscription_watchGroup_groupsByPk_adminUsers(
-        user: user == _undefined || user == null
-            ? _instance.user
-            : (user as Fragment_User),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  TRes call({Object? user = _undefined, Object? $__typename = _undefined}) =>
+      _then(
+        Subscription_watchGroup_groupsByPk_adminUsers(
+          user: user == _undefined || user == null
+              ? _instance.user
+              : (user as Fragment_User),
+          $__typename: $__typename == _undefined || $__typename == null
+              ? _instance.$__typename
+              : ($__typename as String),
+        ),
+      );
 
   CopyWith_Fragment_User<TRes> get user {
     final local$user = _instance.user;
@@ -1822,11 +1855,7 @@ class _CopyWithStubImpl_Subscription_watchGroup_groupsByPk_adminUsers<TRes>
 
   TRes _res;
 
-  call({
-    Fragment_User? user,
-    String? $__typename,
-  }) =>
-      _res;
+  call({Fragment_User? user, String? $__typename}) => _res;
 
   CopyWith_Fragment_User<TRes> get user => CopyWith_Fragment_User.stub(_res);
 }

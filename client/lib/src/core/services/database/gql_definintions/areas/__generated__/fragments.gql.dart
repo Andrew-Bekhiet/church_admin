@@ -23,8 +23,9 @@ class Fragment_Area implements Fragment_AreaNoPhoto {
       name: (l$name as String),
       color: (l$color as int?),
       $__typename: (l$$__typename as String),
-      photoUpdatedAt:
-          l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
+      photoUpdatedAt: l$photoUpdatedAt == null
+          ? null
+          : tstzFromString(l$photoUpdatedAt),
       blurhash: (l$blurhash as String?),
     );
   }
@@ -52,8 +53,9 @@ class Fragment_Area implements Fragment_AreaNoPhoto {
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
-    _resultData['photoUpdatedAt'] =
-        l$photoUpdatedAt == null ? null : tstzToString(l$photoUpdatedAt);
+    _resultData['photoUpdatedAt'] = l$photoUpdatedAt == null
+        ? null
+        : tstzToString(l$photoUpdatedAt);
     final l$blurhash = blurhash;
     _resultData['blurhash'] = l$blurhash;
     return _resultData;
@@ -120,10 +122,8 @@ class Fragment_Area implements Fragment_AreaNoPhoto {
 }
 
 extension UtilityExtension_Fragment_Area on Fragment_Area {
-  CopyWith_Fragment_Area<Fragment_Area> get copyWith => CopyWith_Fragment_Area(
-        this,
-        (i) => i,
-      );
+  CopyWith_Fragment_Area<Fragment_Area> get copyWith =>
+      CopyWith_Fragment_Area(this, (i) => i);
 }
 
 abstract class CopyWith_Fragment_Area<TRes> {
@@ -147,10 +147,7 @@ abstract class CopyWith_Fragment_Area<TRes> {
 
 class _CopyWithImpl_Fragment_Area<TRes>
     implements CopyWith_Fragment_Area<TRes> {
-  _CopyWithImpl_Fragment_Area(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Fragment_Area(this._instance, this._then);
 
   final Fragment_Area _instance;
 
@@ -165,22 +162,24 @@ class _CopyWithImpl_Fragment_Area<TRes>
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? blurhash = _undefined,
-  }) =>
-      _then(Fragment_Area(
-        id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
-        name: name == _undefined || name == null
-            ? _instance.name
-            : (name as String),
-        color: color == _undefined ? _instance.color : (color as int?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-        photoUpdatedAt: photoUpdatedAt == _undefined
-            ? _instance.photoUpdatedAt
-            : (photoUpdatedAt as DateTime?),
-        blurhash:
-            blurhash == _undefined ? _instance.blurhash : (blurhash as String?),
-      ));
+  }) => _then(
+    Fragment_Area(
+      id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      color: color == _undefined ? _instance.color : (color as int?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+      photoUpdatedAt: photoUpdatedAt == _undefined
+          ? _instance.photoUpdatedAt
+          : (photoUpdatedAt as DateTime?),
+      blurhash: blurhash == _undefined
+          ? _instance.blurhash
+          : (blurhash as String?),
+    ),
+  );
 }
 
 class _CopyWithStubImpl_Fragment_Area<TRes>
@@ -196,50 +195,48 @@ class _CopyWithStubImpl_Fragment_Area<TRes>
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
-  }) =>
-      _res;
+  }) => _res;
 }
 
 const fragmentDefinitionArea = FragmentDefinitionNode(
   name: NameNode(value: 'Area'),
   typeCondition: TypeConditionNode(
-      on: NamedTypeNode(
-    name: NameNode(value: 'Areas'),
-    isNonNull: false,
-  )),
+    on: NamedTypeNode(name: NameNode(value: 'Areas'), isNonNull: false),
+  ),
   directives: [],
-  selectionSet: SelectionSetNode(selections: [
-    FragmentSpreadNode(
-      name: NameNode(value: 'AreaNoPhoto'),
-      directives: [],
-    ),
-    FieldNode(
-      name: NameNode(value: 'photoUpdatedAt'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-    FieldNode(
-      name: NameNode(value: 'blurhash'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-    FieldNode(
-      name: NameNode(value: '__typename'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-  ]),
+  selectionSet: SelectionSetNode(
+    selections: [
+      FragmentSpreadNode(
+        name: NameNode(value: 'AreaNoPhoto'),
+        directives: [],
+      ),
+      FieldNode(
+        name: NameNode(value: 'photoUpdatedAt'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'blurhash'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ],
+  ),
 );
-const documentNodeFragmentArea = DocumentNode(definitions: [
-  fragmentDefinitionArea,
-  fragmentDefinitionAreaNoPhoto,
-]);
+const documentNodeFragmentArea = DocumentNode(
+  definitions: [fragmentDefinitionArea, fragmentDefinitionAreaNoPhoto],
+);
 
 class Fragment_AreaNoPhoto {
   Fragment_AreaNoPhoto({
@@ -289,12 +286,7 @@ class Fragment_AreaNoPhoto {
     final l$name = name;
     final l$color = color;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$id,
-      l$name,
-      l$color,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$id, l$name, l$color, l$$__typename]);
   }
 
   @override
@@ -331,10 +323,7 @@ class Fragment_AreaNoPhoto {
 
 extension UtilityExtension_Fragment_AreaNoPhoto on Fragment_AreaNoPhoto {
   CopyWith_Fragment_AreaNoPhoto<Fragment_AreaNoPhoto> get copyWith =>
-      CopyWith_Fragment_AreaNoPhoto(
-        this,
-        (i) => i,
-      );
+      CopyWith_Fragment_AreaNoPhoto(this, (i) => i);
 }
 
 abstract class CopyWith_Fragment_AreaNoPhoto<TRes> {
@@ -346,20 +335,12 @@ abstract class CopyWith_Fragment_AreaNoPhoto<TRes> {
   factory CopyWith_Fragment_AreaNoPhoto.stub(TRes res) =
       _CopyWithStubImpl_Fragment_AreaNoPhoto;
 
-  TRes call({
-    UuidValue? id,
-    String? name,
-    int? color,
-    String? $__typename,
-  });
+  TRes call({UuidValue? id, String? name, int? color, String? $__typename});
 }
 
 class _CopyWithImpl_Fragment_AreaNoPhoto<TRes>
     implements CopyWith_Fragment_AreaNoPhoto<TRes> {
-  _CopyWithImpl_Fragment_AreaNoPhoto(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Fragment_AreaNoPhoto(this._instance, this._then);
 
   final Fragment_AreaNoPhoto _instance;
 
@@ -372,17 +353,18 @@ class _CopyWithImpl_Fragment_AreaNoPhoto<TRes>
     Object? name = _undefined,
     Object? color = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Fragment_AreaNoPhoto(
-        id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
-        name: name == _undefined || name == null
-            ? _instance.name
-            : (name as String),
-        color: color == _undefined ? _instance.color : (color as int?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Fragment_AreaNoPhoto(
+      id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      color: color == _undefined ? _instance.color : (color as int?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 }
 
 class _CopyWithStubImpl_Fragment_AreaNoPhoto<TRes>
@@ -391,54 +373,48 @@ class _CopyWithStubImpl_Fragment_AreaNoPhoto<TRes>
 
   TRes _res;
 
-  call({
-    UuidValue? id,
-    String? name,
-    int? color,
-    String? $__typename,
-  }) =>
-      _res;
+  call({UuidValue? id, String? name, int? color, String? $__typename}) => _res;
 }
 
 const fragmentDefinitionAreaNoPhoto = FragmentDefinitionNode(
   name: NameNode(value: 'AreaNoPhoto'),
   typeCondition: TypeConditionNode(
-      on: NamedTypeNode(
-    name: NameNode(value: 'Areas'),
-    isNonNull: false,
-  )),
+    on: NamedTypeNode(name: NameNode(value: 'Areas'), isNonNull: false),
+  ),
   directives: [],
-  selectionSet: SelectionSetNode(selections: [
-    FieldNode(
-      name: NameNode(value: 'id'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-    FieldNode(
-      name: NameNode(value: 'name'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-    FieldNode(
-      name: NameNode(value: 'color'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-    FieldNode(
-      name: NameNode(value: '__typename'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-  ]),
+  selectionSet: SelectionSetNode(
+    selections: [
+      FieldNode(
+        name: NameNode(value: 'id'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'name'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'color'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ],
+  ),
 );
-const documentNodeFragmentAreaNoPhoto = DocumentNode(definitions: [
-  fragmentDefinitionAreaNoPhoto,
-]);
+const documentNodeFragmentAreaNoPhoto = DocumentNode(
+  definitions: [fragmentDefinitionAreaNoPhoto],
+);

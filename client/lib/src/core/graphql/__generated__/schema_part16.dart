@@ -37,22 +37,23 @@ class _CopyWithImpl_Input_FamiliesFamiliesAggregateOrderBy<TRes>
     Object? count = _undefined,
     Object? max = _undefined,
     Object? min = _undefined,
-  }) =>
-      _then(Input_FamiliesFamiliesAggregateOrderBy._({
-        ..._instance._$data,
-        if (count != _undefined) 'count': (count as Enum_OrderBy?),
-        if (max != _undefined)
-          'max': (max as Input_FamiliesFamiliesMaxOrderBy?),
-        if (min != _undefined)
-          'min': (min as Input_FamiliesFamiliesMinOrderBy?),
-      }));
+  }) => _then(
+    Input_FamiliesFamiliesAggregateOrderBy._({
+      ..._instance._$data,
+      if (count != _undefined) 'count': (count as Enum_OrderBy?),
+      if (max != _undefined) 'max': (max as Input_FamiliesFamiliesMaxOrderBy?),
+      if (min != _undefined) 'min': (min as Input_FamiliesFamiliesMinOrderBy?),
+    }),
+  );
 
   CopyWith_Input_FamiliesFamiliesMaxOrderBy<TRes> get max {
     final local$max = _instance.max;
     return local$max == null
         ? CopyWith_Input_FamiliesFamiliesMaxOrderBy.stub(_then(_instance))
         : CopyWith_Input_FamiliesFamiliesMaxOrderBy(
-            local$max, (e) => call(max: e));
+            local$max,
+            (e) => call(max: e),
+          );
   }
 
   CopyWith_Input_FamiliesFamiliesMinOrderBy<TRes> get min {
@@ -60,7 +61,9 @@ class _CopyWithImpl_Input_FamiliesFamiliesAggregateOrderBy<TRes>
     return local$min == null
         ? CopyWith_Input_FamiliesFamiliesMinOrderBy.stub(_then(_instance))
         : CopyWith_Input_FamiliesFamiliesMinOrderBy(
-            local$min, (e) => call(min: e));
+            local$min,
+            (e) => call(min: e),
+          );
   }
 }
 
@@ -74,8 +77,7 @@ class _CopyWithStubImpl_Input_FamiliesFamiliesAggregateOrderBy<TRes>
     Enum_OrderBy? count,
     Input_FamiliesFamiliesMaxOrderBy? max,
     Input_FamiliesFamiliesMinOrderBy? min,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Input_FamiliesFamiliesMaxOrderBy<TRes> get max =>
       CopyWith_Input_FamiliesFamiliesMaxOrderBy.stub(_res);
@@ -88,28 +90,32 @@ class Input_FamiliesFamiliesArrRelInsertInput {
   factory Input_FamiliesFamiliesArrRelInsertInput({
     required List<Input_FamiliesFamiliesInsertInput> data,
     Input_FamiliesFamiliesOnConflict? onConflict,
-  }) =>
-      Input_FamiliesFamiliesArrRelInsertInput._({
-        r'data': data,
-        if (onConflict != null) r'onConflict': onConflict,
-      });
+  }) => Input_FamiliesFamiliesArrRelInsertInput._({
+    r'data': data,
+    if (onConflict != null) r'onConflict': onConflict,
+  });
 
   Input_FamiliesFamiliesArrRelInsertInput._(this._$data);
 
   factory Input_FamiliesFamiliesArrRelInsertInput.fromJson(
-      Map<String, dynamic> data) {
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
     final l$data = data['data'];
     result$data['data'] = (l$data as List<dynamic>)
-        .map((e) => Input_FamiliesFamiliesInsertInput.fromJson(
-            (e as Map<String, dynamic>)))
+        .map(
+          (e) => Input_FamiliesFamiliesInsertInput.fromJson(
+            (e as Map<String, dynamic>),
+          ),
+        )
         .toList();
     if (data.containsKey('onConflict')) {
       final l$onConflict = data['onConflict'];
       result$data['onConflict'] = l$onConflict == null
           ? null
           : Input_FamiliesFamiliesOnConflict.fromJson(
-              (l$onConflict as Map<String, dynamic>));
+              (l$onConflict as Map<String, dynamic>),
+            );
     }
     return Input_FamiliesFamiliesArrRelInsertInput._(result$data);
   }
@@ -134,11 +140,10 @@ class Input_FamiliesFamiliesArrRelInsertInput {
   }
 
   CopyWith_Input_FamiliesFamiliesArrRelInsertInput<
-          Input_FamiliesFamiliesArrRelInsertInput>
-      get copyWith => CopyWith_Input_FamiliesFamiliesArrRelInsertInput(
-            this,
-            (i) => i,
-          );
+    Input_FamiliesFamiliesArrRelInsertInput
+  >
+  get copyWith =>
+      CopyWith_Input_FamiliesFamiliesArrRelInsertInput(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -198,11 +203,15 @@ abstract class CopyWith_Input_FamiliesFamiliesArrRelInsertInput<TRes> {
     Input_FamiliesFamiliesOnConflict? onConflict,
   });
   TRes data(
-      Iterable<Input_FamiliesFamiliesInsertInput> Function(
-              Iterable<
-                  CopyWith_Input_FamiliesFamiliesInsertInput<
-                      Input_FamiliesFamiliesInsertInput>>)
-          _fn);
+    Iterable<Input_FamiliesFamiliesInsertInput> Function(
+      Iterable<
+        CopyWith_Input_FamiliesFamiliesInsertInput<
+          Input_FamiliesFamiliesInsertInput
+        >
+      >,
+    )
+    _fn,
+  );
   CopyWith_Input_FamiliesFamiliesOnConflict<TRes> get onConflict;
 }
 
@@ -219,37 +228,42 @@ class _CopyWithImpl_Input_FamiliesFamiliesArrRelInsertInput<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? data = _undefined,
-    Object? onConflict = _undefined,
-  }) =>
-      _then(Input_FamiliesFamiliesArrRelInsertInput._({
-        ..._instance._$data,
-        if (data != _undefined && data != null)
-          'data': (data as List<Input_FamiliesFamiliesInsertInput>),
-        if (onConflict != _undefined)
-          'onConflict': (onConflict as Input_FamiliesFamiliesOnConflict?),
-      }));
+  TRes call({Object? data = _undefined, Object? onConflict = _undefined}) =>
+      _then(
+        Input_FamiliesFamiliesArrRelInsertInput._({
+          ..._instance._$data,
+          if (data != _undefined && data != null)
+            'data': (data as List<Input_FamiliesFamiliesInsertInput>),
+          if (onConflict != _undefined)
+            'onConflict': (onConflict as Input_FamiliesFamiliesOnConflict?),
+        }),
+      );
 
   TRes data(
-          Iterable<Input_FamiliesFamiliesInsertInput> Function(
-                  Iterable<
-                      CopyWith_Input_FamiliesFamiliesInsertInput<
-                          Input_FamiliesFamiliesInsertInput>>)
-              _fn) =>
-      call(
-          data: _fn(_instance.data
-              .map((e) => CopyWith_Input_FamiliesFamiliesInsertInput(
-                    e,
-                    (i) => i,
-                  ))).toList());
+    Iterable<Input_FamiliesFamiliesInsertInput> Function(
+      Iterable<
+        CopyWith_Input_FamiliesFamiliesInsertInput<
+          Input_FamiliesFamiliesInsertInput
+        >
+      >,
+    )
+    _fn,
+  ) => call(
+    data: _fn(
+      _instance.data.map(
+        (e) => CopyWith_Input_FamiliesFamiliesInsertInput(e, (i) => i),
+      ),
+    ).toList(),
+  );
 
   CopyWith_Input_FamiliesFamiliesOnConflict<TRes> get onConflict {
     final local$onConflict = _instance.onConflict;
     return local$onConflict == null
         ? CopyWith_Input_FamiliesFamiliesOnConflict.stub(_then(_instance))
         : CopyWith_Input_FamiliesFamiliesOnConflict(
-            local$onConflict, (e) => call(onConflict: e));
+            local$onConflict,
+            (e) => call(onConflict: e),
+          );
   }
 }
 
@@ -262,8 +276,7 @@ class _CopyWithStubImpl_Input_FamiliesFamiliesArrRelInsertInput<TRes>
   call({
     List<Input_FamiliesFamiliesInsertInput>? data,
     Input_FamiliesFamiliesOnConflict? onConflict,
-  }) =>
-      _res;
+  }) => _res;
 
   data(_fn) => _res;
 
@@ -280,16 +293,15 @@ class Input_FamiliesFamiliesBoolExp {
     Input_UuidComparisonExp? childFamilyId,
     Input_FamiliesBoolExp? parent,
     Input_UuidComparisonExp? parentFamilyId,
-  }) =>
-      Input_FamiliesFamiliesBoolExp._({
-        if ($_and != null) r'_and': $_and,
-        if ($_not != null) r'_not': $_not,
-        if ($_or != null) r'_or': $_or,
-        if (child != null) r'child': child,
-        if (childFamilyId != null) r'childFamilyId': childFamilyId,
-        if (parent != null) r'parent': parent,
-        if (parentFamilyId != null) r'parentFamilyId': parentFamilyId,
-      });
+  }) => Input_FamiliesFamiliesBoolExp._({
+    if ($_and != null) r'_and': $_and,
+    if ($_not != null) r'_not': $_not,
+    if ($_or != null) r'_or': $_or,
+    if (child != null) r'child': child,
+    if (childFamilyId != null) r'childFamilyId': childFamilyId,
+    if (parent != null) r'parent': parent,
+    if (parentFamilyId != null) r'parentFamilyId': parentFamilyId,
+  });
 
   Input_FamiliesFamiliesBoolExp._(this._$data);
 
@@ -298,8 +310,11 @@ class Input_FamiliesFamiliesBoolExp {
     if (data.containsKey('_and')) {
       final l$$_and = data['_and'];
       result$data['_and'] = (l$$_and as List<dynamic>?)
-          ?.map((e) => Input_FamiliesFamiliesBoolExp.fromJson(
-              (e as Map<String, dynamic>)))
+          ?.map(
+            (e) => Input_FamiliesFamiliesBoolExp.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
           .toList();
     }
     if (data.containsKey('_not')) {
@@ -307,13 +322,17 @@ class Input_FamiliesFamiliesBoolExp {
       result$data['_not'] = l$$_not == null
           ? null
           : Input_FamiliesFamiliesBoolExp.fromJson(
-              (l$$_not as Map<String, dynamic>));
+              (l$$_not as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('_or')) {
       final l$$_or = data['_or'];
       result$data['_or'] = (l$$_or as List<dynamic>?)
-          ?.map((e) => Input_FamiliesFamiliesBoolExp.fromJson(
-              (e as Map<String, dynamic>)))
+          ?.map(
+            (e) => Input_FamiliesFamiliesBoolExp.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
           .toList();
     }
     if (data.containsKey('child')) {
@@ -327,7 +346,8 @@ class Input_FamiliesFamiliesBoolExp {
       result$data['childFamilyId'] = l$childFamilyId == null
           ? null
           : Input_UuidComparisonExp.fromJson(
-              (l$childFamilyId as Map<String, dynamic>));
+              (l$childFamilyId as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('parent')) {
       final l$parent = data['parent'];
@@ -340,7 +360,8 @@ class Input_FamiliesFamiliesBoolExp {
       result$data['parentFamilyId'] = l$parentFamilyId == null
           ? null
           : Input_UuidComparisonExp.fromJson(
-              (l$parentFamilyId as Map<String, dynamic>));
+              (l$parentFamilyId as Map<String, dynamic>),
+            );
     }
     return Input_FamiliesFamiliesBoolExp._(result$data);
   }
@@ -402,10 +423,7 @@ class Input_FamiliesFamiliesBoolExp {
   }
 
   CopyWith_Input_FamiliesFamiliesBoolExp<Input_FamiliesFamiliesBoolExp>
-      get copyWith => CopyWith_Input_FamiliesFamiliesBoolExp(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Input_FamiliesFamiliesBoolExp(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -511,14 +529,14 @@ class Input_FamiliesFamiliesBoolExp {
     return Object.hashAll([
       _$data.containsKey('_and')
           ? l$$_and == null
-              ? null
-              : Object.hashAll(l$$_and.map((v) => v))
+                ? null
+                : Object.hashAll(l$$_and.map((v) => v))
           : const {},
       _$data.containsKey('_not') ? l$$_not : const {},
       _$data.containsKey('_or')
           ? l$$_or == null
-              ? null
-              : Object.hashAll(l$$_or.map((v) => v))
+                ? null
+                : Object.hashAll(l$$_or.map((v) => v))
           : const {},
       _$data.containsKey('child') ? l$child : const {},
       _$data.containsKey('childFamilyId') ? l$childFamilyId : const {},
@@ -547,18 +565,22 @@ abstract class CopyWith_Input_FamiliesFamiliesBoolExp<TRes> {
     Input_UuidComparisonExp? parentFamilyId,
   });
   TRes $_and(
-      Iterable<Input_FamiliesFamiliesBoolExp>? Function(
-              Iterable<
-                  CopyWith_Input_FamiliesFamiliesBoolExp<
-                      Input_FamiliesFamiliesBoolExp>>?)
-          _fn);
+    Iterable<Input_FamiliesFamiliesBoolExp>? Function(
+      Iterable<
+        CopyWith_Input_FamiliesFamiliesBoolExp<Input_FamiliesFamiliesBoolExp>
+      >?,
+    )
+    _fn,
+  );
   CopyWith_Input_FamiliesFamiliesBoolExp<TRes> get $_not;
   TRes $_or(
-      Iterable<Input_FamiliesFamiliesBoolExp>? Function(
-              Iterable<
-                  CopyWith_Input_FamiliesFamiliesBoolExp<
-                      Input_FamiliesFamiliesBoolExp>>?)
-          _fn);
+    Iterable<Input_FamiliesFamiliesBoolExp>? Function(
+      Iterable<
+        CopyWith_Input_FamiliesFamiliesBoolExp<Input_FamiliesFamiliesBoolExp>
+      >?,
+    )
+    _fn,
+  );
   CopyWith_Input_FamiliesBoolExp<TRes> get child;
   CopyWith_Input_UuidComparisonExp<TRes> get childFamilyId;
   CopyWith_Input_FamiliesBoolExp<TRes> get parent;
@@ -567,10 +589,7 @@ abstract class CopyWith_Input_FamiliesFamiliesBoolExp<TRes> {
 
 class _CopyWithImpl_Input_FamiliesFamiliesBoolExp<TRes>
     implements CopyWith_Input_FamiliesFamiliesBoolExp<TRes> {
-  _CopyWithImpl_Input_FamiliesFamiliesBoolExp(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Input_FamiliesFamiliesBoolExp(this._instance, this._then);
 
   final Input_FamiliesFamiliesBoolExp _instance;
 
@@ -586,56 +605,63 @@ class _CopyWithImpl_Input_FamiliesFamiliesBoolExp<TRes>
     Object? childFamilyId = _undefined,
     Object? parent = _undefined,
     Object? parentFamilyId = _undefined,
-  }) =>
-      _then(Input_FamiliesFamiliesBoolExp._({
-        ..._instance._$data,
-        if ($_and != _undefined)
-          '_and': ($_and as List<Input_FamiliesFamiliesBoolExp>?),
-        if ($_not != _undefined)
-          '_not': ($_not as Input_FamiliesFamiliesBoolExp?),
-        if ($_or != _undefined)
-          '_or': ($_or as List<Input_FamiliesFamiliesBoolExp>?),
-        if (child != _undefined) 'child': (child as Input_FamiliesBoolExp?),
-        if (childFamilyId != _undefined)
-          'childFamilyId': (childFamilyId as Input_UuidComparisonExp?),
-        if (parent != _undefined) 'parent': (parent as Input_FamiliesBoolExp?),
-        if (parentFamilyId != _undefined)
-          'parentFamilyId': (parentFamilyId as Input_UuidComparisonExp?),
-      }));
+  }) => _then(
+    Input_FamiliesFamiliesBoolExp._({
+      ..._instance._$data,
+      if ($_and != _undefined)
+        '_and': ($_and as List<Input_FamiliesFamiliesBoolExp>?),
+      if ($_not != _undefined)
+        '_not': ($_not as Input_FamiliesFamiliesBoolExp?),
+      if ($_or != _undefined)
+        '_or': ($_or as List<Input_FamiliesFamiliesBoolExp>?),
+      if (child != _undefined) 'child': (child as Input_FamiliesBoolExp?),
+      if (childFamilyId != _undefined)
+        'childFamilyId': (childFamilyId as Input_UuidComparisonExp?),
+      if (parent != _undefined) 'parent': (parent as Input_FamiliesBoolExp?),
+      if (parentFamilyId != _undefined)
+        'parentFamilyId': (parentFamilyId as Input_UuidComparisonExp?),
+    }),
+  );
 
   TRes $_and(
-          Iterable<Input_FamiliesFamiliesBoolExp>? Function(
-                  Iterable<
-                      CopyWith_Input_FamiliesFamiliesBoolExp<
-                          Input_FamiliesFamiliesBoolExp>>?)
-              _fn) =>
-      call(
-          $_and: _fn(_instance.$_and
-              ?.map((e) => CopyWith_Input_FamiliesFamiliesBoolExp(
-                    e,
-                    (i) => i,
-                  )))?.toList());
+    Iterable<Input_FamiliesFamiliesBoolExp>? Function(
+      Iterable<
+        CopyWith_Input_FamiliesFamiliesBoolExp<Input_FamiliesFamiliesBoolExp>
+      >?,
+    )
+    _fn,
+  ) => call(
+    $_and: _fn(
+      _instance.$_and?.map(
+        (e) => CopyWith_Input_FamiliesFamiliesBoolExp(e, (i) => i),
+      ),
+    )?.toList(),
+  );
 
   CopyWith_Input_FamiliesFamiliesBoolExp<TRes> get $_not {
     final local$$_not = _instance.$_not;
     return local$$_not == null
         ? CopyWith_Input_FamiliesFamiliesBoolExp.stub(_then(_instance))
         : CopyWith_Input_FamiliesFamiliesBoolExp(
-            local$$_not, (e) => call($_not: e));
+            local$$_not,
+            (e) => call($_not: e),
+          );
   }
 
   TRes $_or(
-          Iterable<Input_FamiliesFamiliesBoolExp>? Function(
-                  Iterable<
-                      CopyWith_Input_FamiliesFamiliesBoolExp<
-                          Input_FamiliesFamiliesBoolExp>>?)
-              _fn) =>
-      call(
-          $_or: _fn(
-              _instance.$_or?.map((e) => CopyWith_Input_FamiliesFamiliesBoolExp(
-                    e,
-                    (i) => i,
-                  )))?.toList());
+    Iterable<Input_FamiliesFamiliesBoolExp>? Function(
+      Iterable<
+        CopyWith_Input_FamiliesFamiliesBoolExp<Input_FamiliesFamiliesBoolExp>
+      >?,
+    )
+    _fn,
+  ) => call(
+    $_or: _fn(
+      _instance.$_or?.map(
+        (e) => CopyWith_Input_FamiliesFamiliesBoolExp(e, (i) => i),
+      ),
+    )?.toList(),
+  );
 
   CopyWith_Input_FamiliesBoolExp<TRes> get child {
     final local$child = _instance.child;
@@ -649,7 +675,9 @@ class _CopyWithImpl_Input_FamiliesFamiliesBoolExp<TRes>
     return local$childFamilyId == null
         ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
         : CopyWith_Input_UuidComparisonExp(
-            local$childFamilyId, (e) => call(childFamilyId: e));
+            local$childFamilyId,
+            (e) => call(childFamilyId: e),
+          );
   }
 
   CopyWith_Input_FamiliesBoolExp<TRes> get parent {
@@ -664,7 +692,9 @@ class _CopyWithImpl_Input_FamiliesFamiliesBoolExp<TRes>
     return local$parentFamilyId == null
         ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
         : CopyWith_Input_UuidComparisonExp(
-            local$parentFamilyId, (e) => call(parentFamilyId: e));
+            local$parentFamilyId,
+            (e) => call(parentFamilyId: e),
+          );
   }
 }
 
@@ -682,8 +712,7 @@ class _CopyWithStubImpl_Input_FamiliesFamiliesBoolExp<TRes>
     Input_UuidComparisonExp? childFamilyId,
     Input_FamiliesBoolExp? parent,
     Input_UuidComparisonExp? parentFamilyId,
-  }) =>
-      _res;
+  }) => _res;
 
   $_and(_fn) => _res;
 
@@ -711,42 +740,46 @@ class Input_FamiliesFamiliesInsertInput {
     UuidValue? childFamilyId,
     Input_FamiliesObjRelInsertInput? parent,
     UuidValue? parentFamilyId,
-  }) =>
-      Input_FamiliesFamiliesInsertInput._({
-        if (child != null) r'child': child,
-        if (childFamilyId != null) r'childFamilyId': childFamilyId,
-        if (parent != null) r'parent': parent,
-        if (parentFamilyId != null) r'parentFamilyId': parentFamilyId,
-      });
+  }) => Input_FamiliesFamiliesInsertInput._({
+    if (child != null) r'child': child,
+    if (childFamilyId != null) r'childFamilyId': childFamilyId,
+    if (parent != null) r'parent': parent,
+    if (parentFamilyId != null) r'parentFamilyId': parentFamilyId,
+  });
 
   Input_FamiliesFamiliesInsertInput._(this._$data);
 
   factory Input_FamiliesFamiliesInsertInput.fromJson(
-      Map<String, dynamic> data) {
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('child')) {
       final l$child = data['child'];
       result$data['child'] = l$child == null
           ? null
           : Input_FamiliesObjRelInsertInput.fromJson(
-              (l$child as Map<String, dynamic>));
+              (l$child as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('childFamilyId')) {
       final l$childFamilyId = data['childFamilyId'];
-      result$data['childFamilyId'] =
-          l$childFamilyId == null ? null : stringToUuid(l$childFamilyId);
+      result$data['childFamilyId'] = l$childFamilyId == null
+          ? null
+          : stringToUuid(l$childFamilyId);
     }
     if (data.containsKey('parent')) {
       final l$parent = data['parent'];
       result$data['parent'] = l$parent == null
           ? null
           : Input_FamiliesObjRelInsertInput.fromJson(
-              (l$parent as Map<String, dynamic>));
+              (l$parent as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('parentFamilyId')) {
       final l$parentFamilyId = data['parentFamilyId'];
-      result$data['parentFamilyId'] =
-          l$parentFamilyId == null ? null : stringToUuid(l$parentFamilyId);
+      result$data['parentFamilyId'] = l$parentFamilyId == null
+          ? null
+          : stringToUuid(l$parentFamilyId);
     }
     return Input_FamiliesFamiliesInsertInput._(result$data);
   }
@@ -771,8 +804,9 @@ class Input_FamiliesFamiliesInsertInput {
     }
     if (_$data.containsKey('childFamilyId')) {
       final l$childFamilyId = childFamilyId;
-      result$data['childFamilyId'] =
-          l$childFamilyId == null ? null : uuidToString(l$childFamilyId);
+      result$data['childFamilyId'] = l$childFamilyId == null
+          ? null
+          : uuidToString(l$childFamilyId);
     }
     if (_$data.containsKey('parent')) {
       final l$parent = parent;
@@ -780,17 +814,15 @@ class Input_FamiliesFamiliesInsertInput {
     }
     if (_$data.containsKey('parentFamilyId')) {
       final l$parentFamilyId = parentFamilyId;
-      result$data['parentFamilyId'] =
-          l$parentFamilyId == null ? null : uuidToString(l$parentFamilyId);
+      result$data['parentFamilyId'] = l$parentFamilyId == null
+          ? null
+          : uuidToString(l$parentFamilyId);
     }
     return result$data;
   }
 
   CopyWith_Input_FamiliesFamiliesInsertInput<Input_FamiliesFamiliesInsertInput>
-      get copyWith => CopyWith_Input_FamiliesFamiliesInsertInput(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Input_FamiliesFamiliesInsertInput(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -874,10 +906,7 @@ abstract class CopyWith_Input_FamiliesFamiliesInsertInput<TRes> {
 
 class _CopyWithImpl_Input_FamiliesFamiliesInsertInput<TRes>
     implements CopyWith_Input_FamiliesFamiliesInsertInput<TRes> {
-  _CopyWithImpl_Input_FamiliesFamiliesInsertInput(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Input_FamiliesFamiliesInsertInput(this._instance, this._then);
 
   final Input_FamiliesFamiliesInsertInput _instance;
 
@@ -890,25 +919,28 @@ class _CopyWithImpl_Input_FamiliesFamiliesInsertInput<TRes>
     Object? childFamilyId = _undefined,
     Object? parent = _undefined,
     Object? parentFamilyId = _undefined,
-  }) =>
-      _then(Input_FamiliesFamiliesInsertInput._({
-        ..._instance._$data,
-        if (child != _undefined)
-          'child': (child as Input_FamiliesObjRelInsertInput?),
-        if (childFamilyId != _undefined)
-          'childFamilyId': (childFamilyId as UuidValue?),
-        if (parent != _undefined)
-          'parent': (parent as Input_FamiliesObjRelInsertInput?),
-        if (parentFamilyId != _undefined)
-          'parentFamilyId': (parentFamilyId as UuidValue?),
-      }));
+  }) => _then(
+    Input_FamiliesFamiliesInsertInput._({
+      ..._instance._$data,
+      if (child != _undefined)
+        'child': (child as Input_FamiliesObjRelInsertInput?),
+      if (childFamilyId != _undefined)
+        'childFamilyId': (childFamilyId as UuidValue?),
+      if (parent != _undefined)
+        'parent': (parent as Input_FamiliesObjRelInsertInput?),
+      if (parentFamilyId != _undefined)
+        'parentFamilyId': (parentFamilyId as UuidValue?),
+    }),
+  );
 
   CopyWith_Input_FamiliesObjRelInsertInput<TRes> get child {
     final local$child = _instance.child;
     return local$child == null
         ? CopyWith_Input_FamiliesObjRelInsertInput.stub(_then(_instance))
         : CopyWith_Input_FamiliesObjRelInsertInput(
-            local$child, (e) => call(child: e));
+            local$child,
+            (e) => call(child: e),
+          );
   }
 
   CopyWith_Input_FamiliesObjRelInsertInput<TRes> get parent {
@@ -916,7 +948,9 @@ class _CopyWithImpl_Input_FamiliesFamiliesInsertInput<TRes>
     return local$parent == null
         ? CopyWith_Input_FamiliesObjRelInsertInput.stub(_then(_instance))
         : CopyWith_Input_FamiliesObjRelInsertInput(
-            local$parent, (e) => call(parent: e));
+            local$parent,
+            (e) => call(parent: e),
+          );
   }
 }
 
@@ -931,8 +965,7 @@ class _CopyWithStubImpl_Input_FamiliesFamiliesInsertInput<TRes>
     UuidValue? childFamilyId,
     Input_FamiliesObjRelInsertInput? parent,
     UuidValue? parentFamilyId,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Input_FamiliesObjRelInsertInput<TRes> get child =>
       CopyWith_Input_FamiliesObjRelInsertInput.stub(_res);
@@ -945,11 +978,10 @@ class Input_FamiliesFamiliesMaxOrderBy {
   factory Input_FamiliesFamiliesMaxOrderBy({
     Enum_OrderBy? childFamilyId,
     Enum_OrderBy? parentFamilyId,
-  }) =>
-      Input_FamiliesFamiliesMaxOrderBy._({
-        if (childFamilyId != null) r'childFamilyId': childFamilyId,
-        if (parentFamilyId != null) r'parentFamilyId': parentFamilyId,
-      });
+  }) => Input_FamiliesFamiliesMaxOrderBy._({
+    if (childFamilyId != null) r'childFamilyId': childFamilyId,
+    if (parentFamilyId != null) r'parentFamilyId': parentFamilyId,
+  });
 
   Input_FamiliesFamiliesMaxOrderBy._(this._$data);
 
@@ -981,8 +1013,9 @@ class Input_FamiliesFamiliesMaxOrderBy {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('childFamilyId')) {
       final l$childFamilyId = childFamilyId;
-      result$data['childFamilyId'] =
-          l$childFamilyId == null ? null : toJson_Enum_OrderBy(l$childFamilyId);
+      result$data['childFamilyId'] = l$childFamilyId == null
+          ? null
+          : toJson_Enum_OrderBy(l$childFamilyId);
     }
     if (_$data.containsKey('parentFamilyId')) {
       final l$parentFamilyId = parentFamilyId;
@@ -994,10 +1027,7 @@ class Input_FamiliesFamiliesMaxOrderBy {
   }
 
   CopyWith_Input_FamiliesFamiliesMaxOrderBy<Input_FamiliesFamiliesMaxOrderBy>
-      get copyWith => CopyWith_Input_FamiliesFamiliesMaxOrderBy(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Input_FamiliesFamiliesMaxOrderBy(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -1049,18 +1079,12 @@ abstract class CopyWith_Input_FamiliesFamiliesMaxOrderBy<TRes> {
   factory CopyWith_Input_FamiliesFamiliesMaxOrderBy.stub(TRes res) =
       _CopyWithStubImpl_Input_FamiliesFamiliesMaxOrderBy;
 
-  TRes call({
-    Enum_OrderBy? childFamilyId,
-    Enum_OrderBy? parentFamilyId,
-  });
+  TRes call({Enum_OrderBy? childFamilyId, Enum_OrderBy? parentFamilyId});
 }
 
 class _CopyWithImpl_Input_FamiliesFamiliesMaxOrderBy<TRes>
     implements CopyWith_Input_FamiliesFamiliesMaxOrderBy<TRes> {
-  _CopyWithImpl_Input_FamiliesFamiliesMaxOrderBy(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Input_FamiliesFamiliesMaxOrderBy(this._instance, this._then);
 
   final Input_FamiliesFamiliesMaxOrderBy _instance;
 
@@ -1071,14 +1095,15 @@ class _CopyWithImpl_Input_FamiliesFamiliesMaxOrderBy<TRes>
   TRes call({
     Object? childFamilyId = _undefined,
     Object? parentFamilyId = _undefined,
-  }) =>
-      _then(Input_FamiliesFamiliesMaxOrderBy._({
-        ..._instance._$data,
-        if (childFamilyId != _undefined)
-          'childFamilyId': (childFamilyId as Enum_OrderBy?),
-        if (parentFamilyId != _undefined)
-          'parentFamilyId': (parentFamilyId as Enum_OrderBy?),
-      }));
+  }) => _then(
+    Input_FamiliesFamiliesMaxOrderBy._({
+      ..._instance._$data,
+      if (childFamilyId != _undefined)
+        'childFamilyId': (childFamilyId as Enum_OrderBy?),
+      if (parentFamilyId != _undefined)
+        'parentFamilyId': (parentFamilyId as Enum_OrderBy?),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Input_FamiliesFamiliesMaxOrderBy<TRes>
@@ -1087,22 +1112,17 @@ class _CopyWithStubImpl_Input_FamiliesFamiliesMaxOrderBy<TRes>
 
   TRes _res;
 
-  call({
-    Enum_OrderBy? childFamilyId,
-    Enum_OrderBy? parentFamilyId,
-  }) =>
-      _res;
+  call({Enum_OrderBy? childFamilyId, Enum_OrderBy? parentFamilyId}) => _res;
 }
 
 class Input_FamiliesFamiliesMinOrderBy {
   factory Input_FamiliesFamiliesMinOrderBy({
     Enum_OrderBy? childFamilyId,
     Enum_OrderBy? parentFamilyId,
-  }) =>
-      Input_FamiliesFamiliesMinOrderBy._({
-        if (childFamilyId != null) r'childFamilyId': childFamilyId,
-        if (parentFamilyId != null) r'parentFamilyId': parentFamilyId,
-      });
+  }) => Input_FamiliesFamiliesMinOrderBy._({
+    if (childFamilyId != null) r'childFamilyId': childFamilyId,
+    if (parentFamilyId != null) r'parentFamilyId': parentFamilyId,
+  });
 
   Input_FamiliesFamiliesMinOrderBy._(this._$data);
 
@@ -1134,8 +1154,9 @@ class Input_FamiliesFamiliesMinOrderBy {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('childFamilyId')) {
       final l$childFamilyId = childFamilyId;
-      result$data['childFamilyId'] =
-          l$childFamilyId == null ? null : toJson_Enum_OrderBy(l$childFamilyId);
+      result$data['childFamilyId'] = l$childFamilyId == null
+          ? null
+          : toJson_Enum_OrderBy(l$childFamilyId);
     }
     if (_$data.containsKey('parentFamilyId')) {
       final l$parentFamilyId = parentFamilyId;
@@ -1147,10 +1168,7 @@ class Input_FamiliesFamiliesMinOrderBy {
   }
 
   CopyWith_Input_FamiliesFamiliesMinOrderBy<Input_FamiliesFamiliesMinOrderBy>
-      get copyWith => CopyWith_Input_FamiliesFamiliesMinOrderBy(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Input_FamiliesFamiliesMinOrderBy(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -1202,18 +1220,12 @@ abstract class CopyWith_Input_FamiliesFamiliesMinOrderBy<TRes> {
   factory CopyWith_Input_FamiliesFamiliesMinOrderBy.stub(TRes res) =
       _CopyWithStubImpl_Input_FamiliesFamiliesMinOrderBy;
 
-  TRes call({
-    Enum_OrderBy? childFamilyId,
-    Enum_OrderBy? parentFamilyId,
-  });
+  TRes call({Enum_OrderBy? childFamilyId, Enum_OrderBy? parentFamilyId});
 }
 
 class _CopyWithImpl_Input_FamiliesFamiliesMinOrderBy<TRes>
     implements CopyWith_Input_FamiliesFamiliesMinOrderBy<TRes> {
-  _CopyWithImpl_Input_FamiliesFamiliesMinOrderBy(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Input_FamiliesFamiliesMinOrderBy(this._instance, this._then);
 
   final Input_FamiliesFamiliesMinOrderBy _instance;
 
@@ -1224,14 +1236,15 @@ class _CopyWithImpl_Input_FamiliesFamiliesMinOrderBy<TRes>
   TRes call({
     Object? childFamilyId = _undefined,
     Object? parentFamilyId = _undefined,
-  }) =>
-      _then(Input_FamiliesFamiliesMinOrderBy._({
-        ..._instance._$data,
-        if (childFamilyId != _undefined)
-          'childFamilyId': (childFamilyId as Enum_OrderBy?),
-        if (parentFamilyId != _undefined)
-          'parentFamilyId': (parentFamilyId as Enum_OrderBy?),
-      }));
+  }) => _then(
+    Input_FamiliesFamiliesMinOrderBy._({
+      ..._instance._$data,
+      if (childFamilyId != _undefined)
+        'childFamilyId': (childFamilyId as Enum_OrderBy?),
+      if (parentFamilyId != _undefined)
+        'parentFamilyId': (parentFamilyId as Enum_OrderBy?),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Input_FamiliesFamiliesMinOrderBy<TRes>
@@ -1240,11 +1253,7 @@ class _CopyWithStubImpl_Input_FamiliesFamiliesMinOrderBy<TRes>
 
   TRes _res;
 
-  call({
-    Enum_OrderBy? childFamilyId,
-    Enum_OrderBy? parentFamilyId,
-  }) =>
-      _res;
+  call({Enum_OrderBy? childFamilyId, Enum_OrderBy? parentFamilyId}) => _res;
 }
 
 class Input_FamiliesFamiliesOnConflict {
@@ -1252,20 +1261,20 @@ class Input_FamiliesFamiliesOnConflict {
     required Enum_FamiliesFamiliesConstraint constraint,
     List<Enum_FamiliesFamiliesUpdateColumn>? updateColumns,
     Input_FamiliesFamiliesBoolExp? where,
-  }) =>
-      Input_FamiliesFamiliesOnConflict._({
-        r'constraint': constraint,
-        if (updateColumns != null) r'updateColumns': updateColumns,
-        if (where != null) r'where': where,
-      });
+  }) => Input_FamiliesFamiliesOnConflict._({
+    r'constraint': constraint,
+    if (updateColumns != null) r'updateColumns': updateColumns,
+    if (where != null) r'where': where,
+  });
 
   Input_FamiliesFamiliesOnConflict._(this._$data);
 
   factory Input_FamiliesFamiliesOnConflict.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     final l$constraint = data['constraint'];
-    result$data['constraint'] =
-        fromJson_Enum_FamiliesFamiliesConstraint((l$constraint as String));
+    result$data['constraint'] = fromJson_Enum_FamiliesFamiliesConstraint(
+      (l$constraint as String),
+    );
     if (data.containsKey('updateColumns')) {
       final l$updateColumns = data['updateColumns'];
       result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
@@ -1277,7 +1286,8 @@ class Input_FamiliesFamiliesOnConflict {
       result$data['where'] = l$where == null
           ? null
           : Input_FamiliesFamiliesBoolExp.fromJson(
-              (l$where as Map<String, dynamic>));
+              (l$where as Map<String, dynamic>),
+            );
     }
     return Input_FamiliesFamiliesOnConflict._(result$data);
   }
@@ -1296,8 +1306,9 @@ class Input_FamiliesFamiliesOnConflict {
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$constraint = constraint;
-    result$data['constraint'] =
-        toJson_Enum_FamiliesFamiliesConstraint(l$constraint);
+    result$data['constraint'] = toJson_Enum_FamiliesFamiliesConstraint(
+      l$constraint,
+    );
     if (_$data.containsKey('updateColumns')) {
       final l$updateColumns = updateColumns;
       result$data['updateColumns'] =
@@ -1313,10 +1324,7 @@ class Input_FamiliesFamiliesOnConflict {
   }
 
   CopyWith_Input_FamiliesFamiliesOnConflict<Input_FamiliesFamiliesOnConflict>
-      get copyWith => CopyWith_Input_FamiliesFamiliesOnConflict(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Input_FamiliesFamiliesOnConflict(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -1372,8 +1380,8 @@ class Input_FamiliesFamiliesOnConflict {
       l$constraint,
       _$data.containsKey('updateColumns')
           ? l$updateColumns == null
-              ? null
-              : Object.hashAll(l$updateColumns.map((v) => v))
+                ? null
+                : Object.hashAll(l$updateColumns.map((v) => v))
           : const {},
       _$data.containsKey('where') ? l$where : const {},
     ]);
@@ -1399,10 +1407,7 @@ abstract class CopyWith_Input_FamiliesFamiliesOnConflict<TRes> {
 
 class _CopyWithImpl_Input_FamiliesFamiliesOnConflict<TRes>
     implements CopyWith_Input_FamiliesFamiliesOnConflict<TRes> {
-  _CopyWithImpl_Input_FamiliesFamiliesOnConflict(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Input_FamiliesFamiliesOnConflict(this._instance, this._then);
 
   final Input_FamiliesFamiliesOnConflict _instance;
 
@@ -1414,24 +1419,27 @@ class _CopyWithImpl_Input_FamiliesFamiliesOnConflict<TRes>
     Object? constraint = _undefined,
     Object? updateColumns = _undefined,
     Object? where = _undefined,
-  }) =>
-      _then(Input_FamiliesFamiliesOnConflict._({
-        ..._instance._$data,
-        if (constraint != _undefined && constraint != null)
-          'constraint': (constraint as Enum_FamiliesFamiliesConstraint),
-        if (updateColumns != _undefined && updateColumns != null)
-          'updateColumns':
-              (updateColumns as List<Enum_FamiliesFamiliesUpdateColumn>),
-        if (where != _undefined)
-          'where': (where as Input_FamiliesFamiliesBoolExp?),
-      }));
+  }) => _then(
+    Input_FamiliesFamiliesOnConflict._({
+      ..._instance._$data,
+      if (constraint != _undefined && constraint != null)
+        'constraint': (constraint as Enum_FamiliesFamiliesConstraint),
+      if (updateColumns != _undefined && updateColumns != null)
+        'updateColumns':
+            (updateColumns as List<Enum_FamiliesFamiliesUpdateColumn>),
+      if (where != _undefined)
+        'where': (where as Input_FamiliesFamiliesBoolExp?),
+    }),
+  );
 
   CopyWith_Input_FamiliesFamiliesBoolExp<TRes> get where {
     final local$where = _instance.where;
     return local$where == null
         ? CopyWith_Input_FamiliesFamiliesBoolExp.stub(_then(_instance))
         : CopyWith_Input_FamiliesFamiliesBoolExp(
-            local$where, (e) => call(where: e));
+            local$where,
+            (e) => call(where: e),
+          );
   }
 }
 
@@ -1445,8 +1453,7 @@ class _CopyWithStubImpl_Input_FamiliesFamiliesOnConflict<TRes>
     Enum_FamiliesFamiliesConstraint? constraint,
     List<Enum_FamiliesFamiliesUpdateColumn>? updateColumns,
     Input_FamiliesFamiliesBoolExp? where,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Input_FamiliesFamiliesBoolExp<TRes> get where =>
       CopyWith_Input_FamiliesFamiliesBoolExp.stub(_res);
@@ -1458,13 +1465,12 @@ class Input_FamiliesFamiliesOrderBy {
     Enum_OrderBy? childFamilyId,
     Input_FamiliesOrderBy? parent,
     Enum_OrderBy? parentFamilyId,
-  }) =>
-      Input_FamiliesFamiliesOrderBy._({
-        if (child != null) r'child': child,
-        if (childFamilyId != null) r'childFamilyId': childFamilyId,
-        if (parent != null) r'parent': parent,
-        if (parentFamilyId != null) r'parentFamilyId': parentFamilyId,
-      });
+  }) => Input_FamiliesFamiliesOrderBy._({
+    if (child != null) r'child': child,
+    if (childFamilyId != null) r'childFamilyId': childFamilyId,
+    if (parent != null) r'parent': parent,
+    if (parentFamilyId != null) r'parentFamilyId': parentFamilyId,
+  });
 
   Input_FamiliesFamiliesOrderBy._(this._$data);
 
@@ -1518,8 +1524,9 @@ class Input_FamiliesFamiliesOrderBy {
     }
     if (_$data.containsKey('childFamilyId')) {
       final l$childFamilyId = childFamilyId;
-      result$data['childFamilyId'] =
-          l$childFamilyId == null ? null : toJson_Enum_OrderBy(l$childFamilyId);
+      result$data['childFamilyId'] = l$childFamilyId == null
+          ? null
+          : toJson_Enum_OrderBy(l$childFamilyId);
     }
     if (_$data.containsKey('parent')) {
       final l$parent = parent;
@@ -1535,10 +1542,7 @@ class Input_FamiliesFamiliesOrderBy {
   }
 
   CopyWith_Input_FamiliesFamiliesOrderBy<Input_FamiliesFamiliesOrderBy>
-      get copyWith => CopyWith_Input_FamiliesFamiliesOrderBy(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Input_FamiliesFamiliesOrderBy(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -1622,10 +1626,7 @@ abstract class CopyWith_Input_FamiliesFamiliesOrderBy<TRes> {
 
 class _CopyWithImpl_Input_FamiliesFamiliesOrderBy<TRes>
     implements CopyWith_Input_FamiliesFamiliesOrderBy<TRes> {
-  _CopyWithImpl_Input_FamiliesFamiliesOrderBy(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Input_FamiliesFamiliesOrderBy(this._instance, this._then);
 
   final Input_FamiliesFamiliesOrderBy _instance;
 
@@ -1638,16 +1639,17 @@ class _CopyWithImpl_Input_FamiliesFamiliesOrderBy<TRes>
     Object? childFamilyId = _undefined,
     Object? parent = _undefined,
     Object? parentFamilyId = _undefined,
-  }) =>
-      _then(Input_FamiliesFamiliesOrderBy._({
-        ..._instance._$data,
-        if (child != _undefined) 'child': (child as Input_FamiliesOrderBy?),
-        if (childFamilyId != _undefined)
-          'childFamilyId': (childFamilyId as Enum_OrderBy?),
-        if (parent != _undefined) 'parent': (parent as Input_FamiliesOrderBy?),
-        if (parentFamilyId != _undefined)
-          'parentFamilyId': (parentFamilyId as Enum_OrderBy?),
-      }));
+  }) => _then(
+    Input_FamiliesFamiliesOrderBy._({
+      ..._instance._$data,
+      if (child != _undefined) 'child': (child as Input_FamiliesOrderBy?),
+      if (childFamilyId != _undefined)
+        'childFamilyId': (childFamilyId as Enum_OrderBy?),
+      if (parent != _undefined) 'parent': (parent as Input_FamiliesOrderBy?),
+      if (parentFamilyId != _undefined)
+        'parentFamilyId': (parentFamilyId as Enum_OrderBy?),
+    }),
+  );
 
   CopyWith_Input_FamiliesOrderBy<TRes> get child {
     final local$child = _instance.child;
@@ -1675,8 +1677,7 @@ class _CopyWithStubImpl_Input_FamiliesFamiliesOrderBy<TRes>
     Enum_OrderBy? childFamilyId,
     Input_FamiliesOrderBy? parent,
     Enum_OrderBy? parentFamilyId,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Input_FamiliesOrderBy<TRes> get child =>
       CopyWith_Input_FamiliesOrderBy.stub(_res);
@@ -1689,21 +1690,22 @@ class Input_FamiliesFamiliesStreamCursorInput {
   factory Input_FamiliesFamiliesStreamCursorInput({
     required Input_FamiliesFamiliesStreamCursorValueInput initialValue,
     Enum_CursorOrdering? ordering,
-  }) =>
-      Input_FamiliesFamiliesStreamCursorInput._({
-        r'initialValue': initialValue,
-        if (ordering != null) r'ordering': ordering,
-      });
+  }) => Input_FamiliesFamiliesStreamCursorInput._({
+    r'initialValue': initialValue,
+    if (ordering != null) r'ordering': ordering,
+  });
 
   Input_FamiliesFamiliesStreamCursorInput._(this._$data);
 
   factory Input_FamiliesFamiliesStreamCursorInput.fromJson(
-      Map<String, dynamic> data) {
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
     final l$initialValue = data['initialValue'];
     result$data['initialValue'] =
         Input_FamiliesFamiliesStreamCursorValueInput.fromJson(
-            (l$initialValue as Map<String, dynamic>));
+          (l$initialValue as Map<String, dynamic>),
+        );
     if (data.containsKey('ordering')) {
       final l$ordering = data['ordering'];
       result$data['ordering'] = l$ordering == null
@@ -1727,18 +1729,18 @@ class Input_FamiliesFamiliesStreamCursorInput {
     result$data['initialValue'] = l$initialValue.toJson();
     if (_$data.containsKey('ordering')) {
       final l$ordering = ordering;
-      result$data['ordering'] =
-          l$ordering == null ? null : toJson_Enum_CursorOrdering(l$ordering);
+      result$data['ordering'] = l$ordering == null
+          ? null
+          : toJson_Enum_CursorOrdering(l$ordering);
     }
     return result$data;
   }
 
   CopyWith_Input_FamiliesFamiliesStreamCursorInput<
-          Input_FamiliesFamiliesStreamCursorInput>
-      get copyWith => CopyWith_Input_FamiliesFamiliesStreamCursorInput(
-            this,
-            (i) => i,
-          );
+    Input_FamiliesFamiliesStreamCursorInput
+  >
+  get copyWith =>
+      CopyWith_Input_FamiliesFamiliesStreamCursorInput(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -1809,20 +1811,23 @@ class _CopyWithImpl_Input_FamiliesFamiliesStreamCursorInput<TRes>
   TRes call({
     Object? initialValue = _undefined,
     Object? ordering = _undefined,
-  }) =>
-      _then(Input_FamiliesFamiliesStreamCursorInput._({
-        ..._instance._$data,
-        if (initialValue != _undefined && initialValue != null)
-          'initialValue':
-              (initialValue as Input_FamiliesFamiliesStreamCursorValueInput),
-        if (ordering != _undefined)
-          'ordering': (ordering as Enum_CursorOrdering?),
-      }));
+  }) => _then(
+    Input_FamiliesFamiliesStreamCursorInput._({
+      ..._instance._$data,
+      if (initialValue != _undefined && initialValue != null)
+        'initialValue':
+            (initialValue as Input_FamiliesFamiliesStreamCursorValueInput),
+      if (ordering != _undefined)
+        'ordering': (ordering as Enum_CursorOrdering?),
+    }),
+  );
 
   CopyWith_Input_FamiliesFamiliesStreamCursorValueInput<TRes> get initialValue {
     final local$initialValue = _instance.initialValue;
     return CopyWith_Input_FamiliesFamiliesStreamCursorValueInput(
-        local$initialValue, (e) => call(initialValue: e));
+      local$initialValue,
+      (e) => call(initialValue: e),
+    );
   }
 }
 
@@ -1835,38 +1840,39 @@ class _CopyWithStubImpl_Input_FamiliesFamiliesStreamCursorInput<TRes>
   call({
     Input_FamiliesFamiliesStreamCursorValueInput? initialValue,
     Enum_CursorOrdering? ordering,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Input_FamiliesFamiliesStreamCursorValueInput<TRes>
-      get initialValue =>
-          CopyWith_Input_FamiliesFamiliesStreamCursorValueInput.stub(_res);
+  get initialValue =>
+      CopyWith_Input_FamiliesFamiliesStreamCursorValueInput.stub(_res);
 }
 
 class Input_FamiliesFamiliesStreamCursorValueInput {
   factory Input_FamiliesFamiliesStreamCursorValueInput({
     UuidValue? childFamilyId,
     UuidValue? parentFamilyId,
-  }) =>
-      Input_FamiliesFamiliesStreamCursorValueInput._({
-        if (childFamilyId != null) r'childFamilyId': childFamilyId,
-        if (parentFamilyId != null) r'parentFamilyId': parentFamilyId,
-      });
+  }) => Input_FamiliesFamiliesStreamCursorValueInput._({
+    if (childFamilyId != null) r'childFamilyId': childFamilyId,
+    if (parentFamilyId != null) r'parentFamilyId': parentFamilyId,
+  });
 
   Input_FamiliesFamiliesStreamCursorValueInput._(this._$data);
 
   factory Input_FamiliesFamiliesStreamCursorValueInput.fromJson(
-      Map<String, dynamic> data) {
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('childFamilyId')) {
       final l$childFamilyId = data['childFamilyId'];
-      result$data['childFamilyId'] =
-          l$childFamilyId == null ? null : stringToUuid(l$childFamilyId);
+      result$data['childFamilyId'] = l$childFamilyId == null
+          ? null
+          : stringToUuid(l$childFamilyId);
     }
     if (data.containsKey('parentFamilyId')) {
       final l$parentFamilyId = data['parentFamilyId'];
-      result$data['parentFamilyId'] =
-          l$parentFamilyId == null ? null : stringToUuid(l$parentFamilyId);
+      result$data['parentFamilyId'] = l$parentFamilyId == null
+          ? null
+          : stringToUuid(l$parentFamilyId);
     }
     return Input_FamiliesFamiliesStreamCursorValueInput._(result$data);
   }
@@ -1881,23 +1887,24 @@ class Input_FamiliesFamiliesStreamCursorValueInput {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('childFamilyId')) {
       final l$childFamilyId = childFamilyId;
-      result$data['childFamilyId'] =
-          l$childFamilyId == null ? null : uuidToString(l$childFamilyId);
+      result$data['childFamilyId'] = l$childFamilyId == null
+          ? null
+          : uuidToString(l$childFamilyId);
     }
     if (_$data.containsKey('parentFamilyId')) {
       final l$parentFamilyId = parentFamilyId;
-      result$data['parentFamilyId'] =
-          l$parentFamilyId == null ? null : uuidToString(l$parentFamilyId);
+      result$data['parentFamilyId'] = l$parentFamilyId == null
+          ? null
+          : uuidToString(l$parentFamilyId);
     }
     return result$data;
   }
 
   CopyWith_Input_FamiliesFamiliesStreamCursorValueInput<
-          Input_FamiliesFamiliesStreamCursorValueInput>
-      get copyWith => CopyWith_Input_FamiliesFamiliesStreamCursorValueInput(
-            this,
-            (i) => i,
-          );
+    Input_FamiliesFamiliesStreamCursorValueInput
+  >
+  get copyWith =>
+      CopyWith_Input_FamiliesFamiliesStreamCursorValueInput(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -1949,10 +1956,7 @@ abstract class CopyWith_Input_FamiliesFamiliesStreamCursorValueInput<TRes> {
   factory CopyWith_Input_FamiliesFamiliesStreamCursorValueInput.stub(TRes res) =
       _CopyWithStubImpl_Input_FamiliesFamiliesStreamCursorValueInput;
 
-  TRes call({
-    UuidValue? childFamilyId,
-    UuidValue? parentFamilyId,
-  });
+  TRes call({UuidValue? childFamilyId, UuidValue? parentFamilyId});
 }
 
 class _CopyWithImpl_Input_FamiliesFamiliesStreamCursorValueInput<TRes>
@@ -1971,14 +1975,15 @@ class _CopyWithImpl_Input_FamiliesFamiliesStreamCursorValueInput<TRes>
   TRes call({
     Object? childFamilyId = _undefined,
     Object? parentFamilyId = _undefined,
-  }) =>
-      _then(Input_FamiliesFamiliesStreamCursorValueInput._({
-        ..._instance._$data,
-        if (childFamilyId != _undefined)
-          'childFamilyId': (childFamilyId as UuidValue?),
-        if (parentFamilyId != _undefined)
-          'parentFamilyId': (parentFamilyId as UuidValue?),
-      }));
+  }) => _then(
+    Input_FamiliesFamiliesStreamCursorValueInput._({
+      ..._instance._$data,
+      if (childFamilyId != _undefined)
+        'childFamilyId': (childFamilyId as UuidValue?),
+      if (parentFamilyId != _undefined)
+        'parentFamilyId': (parentFamilyId as UuidValue?),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Input_FamiliesFamiliesStreamCursorValueInput<TRes>
@@ -1987,17 +1992,12 @@ class _CopyWithStubImpl_Input_FamiliesFamiliesStreamCursorValueInput<TRes>
 
   TRes _res;
 
-  call({
-    UuidValue? childFamilyId,
-    UuidValue? parentFamilyId,
-  }) =>
-      _res;
+  call({UuidValue? childFamilyId, UuidValue? parentFamilyId}) => _res;
 }
 
 class Input_FamiliesIncInput {
-  factory Input_FamiliesIncInput({int? color}) => Input_FamiliesIncInput._({
-        if (color != null) r'color': color,
-      });
+  factory Input_FamiliesIncInput({int? color}) =>
+      Input_FamiliesIncInput._({if (color != null) r'color': color});
 
   Input_FamiliesIncInput._(this._$data);
 
@@ -2024,10 +2024,7 @@ class Input_FamiliesIncInput {
   }
 
   CopyWith_Input_FamiliesIncInput<Input_FamiliesIncInput> get copyWith =>
-      CopyWith_Input_FamiliesIncInput(
-        this,
-        (i) => i,
-      );
+      CopyWith_Input_FamiliesIncInput(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -2069,10 +2066,7 @@ abstract class CopyWith_Input_FamiliesIncInput<TRes> {
 
 class _CopyWithImpl_Input_FamiliesIncInput<TRes>
     implements CopyWith_Input_FamiliesIncInput<TRes> {
-  _CopyWithImpl_Input_FamiliesIncInput(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Input_FamiliesIncInput(this._instance, this._then);
 
   final Input_FamiliesIncInput _instance;
 
@@ -2080,10 +2074,12 @@ class _CopyWithImpl_Input_FamiliesIncInput<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? color = _undefined}) => _then(Input_FamiliesIncInput._({
-        ..._instance._$data,
-        if (color != _undefined) 'color': (color as int?),
-      }));
+  TRes call({Object? color = _undefined}) => _then(
+    Input_FamiliesIncInput._({
+      ..._instance._$data,
+      if (color != _undefined) 'color': (color as int?),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Input_FamiliesIncInput<TRes>
@@ -2113,26 +2109,24 @@ class Input_FamiliesInsertInput {
     String? status,
     Input_StoresArrRelInsertInput? stores,
     Input_HistoryVisitHistoryArrRelInsertInput? visitHistory,
-  }) =>
-      Input_FamiliesInsertInput._({
-        if (address != null) r'address': address,
-        if (addressText != null) r'addressText': addressText,
-        if (children != null) r'children': children,
-        if (church != null) r'church': church,
-        if (churchId != null) r'churchId': churchId,
-        if (color != null) r'color': color,
-        if (deceasedSpouseName != null)
-          r'deceasedSpouseName': deceasedSpouseName,
-        if (geolocation != null) r'geolocation': geolocation,
-        if (marriageDate != null) r'marriageDate': marriageDate,
-        if (name != null) r'name': name,
-        if (notes != null) r'notes': notes,
-        if (parents != null) r'parents': parents,
-        if (persons != null) r'persons': persons,
-        if (status != null) r'status': status,
-        if (stores != null) r'stores': stores,
-        if (visitHistory != null) r'visitHistory': visitHistory,
-      });
+  }) => Input_FamiliesInsertInput._({
+    if (address != null) r'address': address,
+    if (addressText != null) r'addressText': addressText,
+    if (children != null) r'children': children,
+    if (church != null) r'church': church,
+    if (churchId != null) r'churchId': churchId,
+    if (color != null) r'color': color,
+    if (deceasedSpouseName != null) r'deceasedSpouseName': deceasedSpouseName,
+    if (geolocation != null) r'geolocation': geolocation,
+    if (marriageDate != null) r'marriageDate': marriageDate,
+    if (name != null) r'name': name,
+    if (notes != null) r'notes': notes,
+    if (parents != null) r'parents': parents,
+    if (persons != null) r'persons': persons,
+    if (status != null) r'status': status,
+    if (stores != null) r'stores': stores,
+    if (visitHistory != null) r'visitHistory': visitHistory,
+  });
 
   Input_FamiliesInsertInput._(this._$data);
 
@@ -2143,7 +2137,8 @@ class Input_FamiliesInsertInput {
       result$data['address'] = l$address == null
           ? null
           : Input_AddressesObjRelInsertInput.fromJson(
-              (l$address as Map<String, dynamic>));
+              (l$address as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('addressText')) {
       final l$addressText = data['addressText'];
@@ -2154,19 +2149,22 @@ class Input_FamiliesInsertInput {
       result$data['children'] = l$children == null
           ? null
           : Input_FamiliesFamiliesArrRelInsertInput.fromJson(
-              (l$children as Map<String, dynamic>));
+              (l$children as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('church')) {
       final l$church = data['church'];
       result$data['church'] = l$church == null
           ? null
           : Input_ChurchesObjRelInsertInput.fromJson(
-              (l$church as Map<String, dynamic>));
+              (l$church as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('churchId')) {
       final l$churchId = data['churchId'];
-      result$data['churchId'] =
-          l$churchId == null ? null : stringToUuid(l$churchId);
+      result$data['churchId'] = l$churchId == null
+          ? null
+          : stringToUuid(l$churchId);
     }
     if (data.containsKey('color')) {
       final l$color = data['color'];
@@ -2182,8 +2180,9 @@ class Input_FamiliesInsertInput {
     }
     if (data.containsKey('marriageDate')) {
       final l$marriageDate = data['marriageDate'];
-      result$data['marriageDate'] =
-          l$marriageDate == null ? null : dateFromString(l$marriageDate);
+      result$data['marriageDate'] = l$marriageDate == null
+          ? null
+          : dateFromString(l$marriageDate);
     }
     if (data.containsKey('name')) {
       final l$name = data['name'];
@@ -2198,14 +2197,16 @@ class Input_FamiliesInsertInput {
       result$data['parents'] = l$parents == null
           ? null
           : Input_FamiliesFamiliesArrRelInsertInput.fromJson(
-              (l$parents as Map<String, dynamic>));
+              (l$parents as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('persons')) {
       final l$persons = data['persons'];
       result$data['persons'] = l$persons == null
           ? null
           : Input_PersonsArrRelInsertInput.fromJson(
-              (l$persons as Map<String, dynamic>));
+              (l$persons as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('status')) {
       final l$status = data['status'];
@@ -2216,14 +2217,16 @@ class Input_FamiliesInsertInput {
       result$data['stores'] = l$stores == null
           ? null
           : Input_StoresArrRelInsertInput.fromJson(
-              (l$stores as Map<String, dynamic>));
+              (l$stores as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('visitHistory')) {
       final l$visitHistory = data['visitHistory'];
       result$data['visitHistory'] = l$visitHistory == null
           ? null
           : Input_HistoryVisitHistoryArrRelInsertInput.fromJson(
-              (l$visitHistory as Map<String, dynamic>));
+              (l$visitHistory as Map<String, dynamic>),
+            );
     }
     return Input_FamiliesInsertInput._(result$data);
   }
@@ -2290,8 +2293,9 @@ class Input_FamiliesInsertInput {
     }
     if (_$data.containsKey('churchId')) {
       final l$churchId = churchId;
-      result$data['churchId'] =
-          l$churchId == null ? null : uuidToString(l$churchId);
+      result$data['churchId'] = l$churchId == null
+          ? null
+          : uuidToString(l$churchId);
     }
     if (_$data.containsKey('color')) {
       final l$color = color;
@@ -2307,8 +2311,9 @@ class Input_FamiliesInsertInput {
     }
     if (_$data.containsKey('marriageDate')) {
       final l$marriageDate = marriageDate;
-      result$data['marriageDate'] =
-          l$marriageDate == null ? null : dateToString(l$marriageDate);
+      result$data['marriageDate'] = l$marriageDate == null
+          ? null
+          : dateToString(l$marriageDate);
     }
     if (_$data.containsKey('name')) {
       final l$name = name;
@@ -2342,10 +2347,7 @@ class Input_FamiliesInsertInput {
   }
 
   CopyWith_Input_FamiliesInsertInput<Input_FamiliesInsertInput> get copyWith =>
-      CopyWith_Input_FamiliesInsertInput(
-        this,
-        (i) => i,
-      );
+      CopyWith_Input_FamiliesInsertInput(this, (i) => i);
 
   @override
   bool operator ==(Object other) {

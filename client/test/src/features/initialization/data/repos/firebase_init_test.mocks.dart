@@ -1425,32 +1425,6 @@ class FirebaseMessagingPlatform_ extends _i1.Mock
       ) as _i8.Future<void>);
 
   @override
-  _i8.Future<void> sendMessage({
-    required String? to,
-    Map<String, String>? data,
-    String? collapseKey,
-    String? messageId,
-    String? messageType,
-    int? ttl,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #sendMessage,
-          [],
-          {
-            #to: to,
-            #data: data,
-            #collapseKey: collapseKey,
-            #messageId: messageId,
-            #messageType: messageType,
-            #ttl: ttl,
-          },
-        ),
-        returnValue: _i8.Future<void>.value(),
-        returnValueForMissingStub: _i8.Future<void>.value(),
-      ) as _i8.Future<void>);
-
-  @override
   _i8.Future<void> subscribeToTopic(String? topic) => (super.noSuchMethod(
         Invocation.method(
           #subscribeToTopic,

@@ -23,8 +23,9 @@ class Fragment_Street implements Fragment_StreetNoPhoto {
       name: (l$name as String),
       color: (l$color as int?),
       $__typename: (l$$__typename as String),
-      photoUpdatedAt:
-          l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
+      photoUpdatedAt: l$photoUpdatedAt == null
+          ? null
+          : tstzFromString(l$photoUpdatedAt),
       blurhash: (l$blurhash as String?),
     );
   }
@@ -52,8 +53,9 @@ class Fragment_Street implements Fragment_StreetNoPhoto {
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
-    _resultData['photoUpdatedAt'] =
-        l$photoUpdatedAt == null ? null : tstzToString(l$photoUpdatedAt);
+    _resultData['photoUpdatedAt'] = l$photoUpdatedAt == null
+        ? null
+        : tstzToString(l$photoUpdatedAt);
     final l$blurhash = blurhash;
     _resultData['blurhash'] = l$blurhash;
     return _resultData;
@@ -121,10 +123,7 @@ class Fragment_Street implements Fragment_StreetNoPhoto {
 
 extension UtilityExtension_Fragment_Street on Fragment_Street {
   CopyWith_Fragment_Street<Fragment_Street> get copyWith =>
-      CopyWith_Fragment_Street(
-        this,
-        (i) => i,
-      );
+      CopyWith_Fragment_Street(this, (i) => i);
 }
 
 abstract class CopyWith_Fragment_Street<TRes> {
@@ -148,10 +147,7 @@ abstract class CopyWith_Fragment_Street<TRes> {
 
 class _CopyWithImpl_Fragment_Street<TRes>
     implements CopyWith_Fragment_Street<TRes> {
-  _CopyWithImpl_Fragment_Street(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Fragment_Street(this._instance, this._then);
 
   final Fragment_Street _instance;
 
@@ -166,22 +162,24 @@ class _CopyWithImpl_Fragment_Street<TRes>
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? blurhash = _undefined,
-  }) =>
-      _then(Fragment_Street(
-        id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
-        name: name == _undefined || name == null
-            ? _instance.name
-            : (name as String),
-        color: color == _undefined ? _instance.color : (color as int?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-        photoUpdatedAt: photoUpdatedAt == _undefined
-            ? _instance.photoUpdatedAt
-            : (photoUpdatedAt as DateTime?),
-        blurhash:
-            blurhash == _undefined ? _instance.blurhash : (blurhash as String?),
-      ));
+  }) => _then(
+    Fragment_Street(
+      id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      color: color == _undefined ? _instance.color : (color as int?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+      photoUpdatedAt: photoUpdatedAt == _undefined
+          ? _instance.photoUpdatedAt
+          : (photoUpdatedAt as DateTime?),
+      blurhash: blurhash == _undefined
+          ? _instance.blurhash
+          : (blurhash as String?),
+    ),
+  );
 }
 
 class _CopyWithStubImpl_Fragment_Street<TRes>
@@ -197,50 +195,48 @@ class _CopyWithStubImpl_Fragment_Street<TRes>
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
-  }) =>
-      _res;
+  }) => _res;
 }
 
 const fragmentDefinitionStreet = FragmentDefinitionNode(
   name: NameNode(value: 'Street'),
   typeCondition: TypeConditionNode(
-      on: NamedTypeNode(
-    name: NameNode(value: 'Streets'),
-    isNonNull: false,
-  )),
+    on: NamedTypeNode(name: NameNode(value: 'Streets'), isNonNull: false),
+  ),
   directives: [],
-  selectionSet: SelectionSetNode(selections: [
-    FragmentSpreadNode(
-      name: NameNode(value: 'StreetNoPhoto'),
-      directives: [],
-    ),
-    FieldNode(
-      name: NameNode(value: 'photoUpdatedAt'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-    FieldNode(
-      name: NameNode(value: 'blurhash'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-    FieldNode(
-      name: NameNode(value: '__typename'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-  ]),
+  selectionSet: SelectionSetNode(
+    selections: [
+      FragmentSpreadNode(
+        name: NameNode(value: 'StreetNoPhoto'),
+        directives: [],
+      ),
+      FieldNode(
+        name: NameNode(value: 'photoUpdatedAt'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'blurhash'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ],
+  ),
 );
-const documentNodeFragmentStreet = DocumentNode(definitions: [
-  fragmentDefinitionStreet,
-  fragmentDefinitionStreetNoPhoto,
-]);
+const documentNodeFragmentStreet = DocumentNode(
+  definitions: [fragmentDefinitionStreet, fragmentDefinitionStreetNoPhoto],
+);
 
 class Fragment_StreetNoPhoto {
   Fragment_StreetNoPhoto({
@@ -290,12 +286,7 @@ class Fragment_StreetNoPhoto {
     final l$name = name;
     final l$color = color;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$id,
-      l$name,
-      l$color,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$id, l$name, l$color, l$$__typename]);
   }
 
   @override
@@ -332,10 +323,7 @@ class Fragment_StreetNoPhoto {
 
 extension UtilityExtension_Fragment_StreetNoPhoto on Fragment_StreetNoPhoto {
   CopyWith_Fragment_StreetNoPhoto<Fragment_StreetNoPhoto> get copyWith =>
-      CopyWith_Fragment_StreetNoPhoto(
-        this,
-        (i) => i,
-      );
+      CopyWith_Fragment_StreetNoPhoto(this, (i) => i);
 }
 
 abstract class CopyWith_Fragment_StreetNoPhoto<TRes> {
@@ -347,20 +335,12 @@ abstract class CopyWith_Fragment_StreetNoPhoto<TRes> {
   factory CopyWith_Fragment_StreetNoPhoto.stub(TRes res) =
       _CopyWithStubImpl_Fragment_StreetNoPhoto;
 
-  TRes call({
-    UuidValue? id,
-    String? name,
-    int? color,
-    String? $__typename,
-  });
+  TRes call({UuidValue? id, String? name, int? color, String? $__typename});
 }
 
 class _CopyWithImpl_Fragment_StreetNoPhoto<TRes>
     implements CopyWith_Fragment_StreetNoPhoto<TRes> {
-  _CopyWithImpl_Fragment_StreetNoPhoto(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Fragment_StreetNoPhoto(this._instance, this._then);
 
   final Fragment_StreetNoPhoto _instance;
 
@@ -373,17 +353,18 @@ class _CopyWithImpl_Fragment_StreetNoPhoto<TRes>
     Object? name = _undefined,
     Object? color = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Fragment_StreetNoPhoto(
-        id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
-        name: name == _undefined || name == null
-            ? _instance.name
-            : (name as String),
-        color: color == _undefined ? _instance.color : (color as int?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Fragment_StreetNoPhoto(
+      id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      color: color == _undefined ? _instance.color : (color as int?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 }
 
 class _CopyWithStubImpl_Fragment_StreetNoPhoto<TRes>
@@ -392,54 +373,48 @@ class _CopyWithStubImpl_Fragment_StreetNoPhoto<TRes>
 
   TRes _res;
 
-  call({
-    UuidValue? id,
-    String? name,
-    int? color,
-    String? $__typename,
-  }) =>
-      _res;
+  call({UuidValue? id, String? name, int? color, String? $__typename}) => _res;
 }
 
 const fragmentDefinitionStreetNoPhoto = FragmentDefinitionNode(
   name: NameNode(value: 'StreetNoPhoto'),
   typeCondition: TypeConditionNode(
-      on: NamedTypeNode(
-    name: NameNode(value: 'Streets'),
-    isNonNull: false,
-  )),
+    on: NamedTypeNode(name: NameNode(value: 'Streets'), isNonNull: false),
+  ),
   directives: [],
-  selectionSet: SelectionSetNode(selections: [
-    FieldNode(
-      name: NameNode(value: 'id'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-    FieldNode(
-      name: NameNode(value: 'name'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-    FieldNode(
-      name: NameNode(value: 'color'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-    FieldNode(
-      name: NameNode(value: '__typename'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-  ]),
+  selectionSet: SelectionSetNode(
+    selections: [
+      FieldNode(
+        name: NameNode(value: 'id'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'name'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'color'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ],
+  ),
 );
-const documentNodeFragmentStreetNoPhoto = DocumentNode(definitions: [
-  fragmentDefinitionStreetNoPhoto,
-]);
+const documentNodeFragmentStreetNoPhoto = DocumentNode(
+  definitions: [fragmentDefinitionStreetNoPhoto],
+);

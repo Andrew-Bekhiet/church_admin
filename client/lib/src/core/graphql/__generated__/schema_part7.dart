@@ -2,6 +2,208 @@
 part of "schema.graphql.dart";
 
 
+abstract class CopyWith_Input_AuthUsersAdminOnMinOrderBy<TRes> {
+  factory CopyWith_Input_AuthUsersAdminOnMinOrderBy(
+    Input_AuthUsersAdminOnMinOrderBy instance,
+    TRes Function(Input_AuthUsersAdminOnMinOrderBy) then,
+  ) = _CopyWithImpl_Input_AuthUsersAdminOnMinOrderBy;
+
+  factory CopyWith_Input_AuthUsersAdminOnMinOrderBy.stub(TRes res) =
+      _CopyWithStubImpl_Input_AuthUsersAdminOnMinOrderBy;
+
+  TRes call({
+    Enum_OrderBy? adminOnArea,
+    Enum_OrderBy? adminOnGroup,
+    Enum_OrderBy? adminOnService,
+    Enum_OrderBy? permissionId,
+    Enum_OrderBy? serviceStudyYear,
+    Enum_OrderBy? uid,
+  });
+}
+
+class _CopyWithImpl_Input_AuthUsersAdminOnMinOrderBy<TRes>
+    implements CopyWith_Input_AuthUsersAdminOnMinOrderBy<TRes> {
+  _CopyWithImpl_Input_AuthUsersAdminOnMinOrderBy(this._instance, this._then);
+
+  final Input_AuthUsersAdminOnMinOrderBy _instance;
+
+  final TRes Function(Input_AuthUsersAdminOnMinOrderBy) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? adminOnArea = _undefined,
+    Object? adminOnGroup = _undefined,
+    Object? adminOnService = _undefined,
+    Object? permissionId = _undefined,
+    Object? serviceStudyYear = _undefined,
+    Object? uid = _undefined,
+  }) => _then(
+    Input_AuthUsersAdminOnMinOrderBy._({
+      ..._instance._$data,
+      if (adminOnArea != _undefined)
+        'adminOnArea': (adminOnArea as Enum_OrderBy?),
+      if (adminOnGroup != _undefined)
+        'adminOnGroup': (adminOnGroup as Enum_OrderBy?),
+      if (adminOnService != _undefined)
+        'adminOnService': (adminOnService as Enum_OrderBy?),
+      if (permissionId != _undefined)
+        'permissionId': (permissionId as Enum_OrderBy?),
+      if (serviceStudyYear != _undefined)
+        'serviceStudyYear': (serviceStudyYear as Enum_OrderBy?),
+      if (uid != _undefined) 'uid': (uid as Enum_OrderBy?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_AuthUsersAdminOnMinOrderBy<TRes>
+    implements CopyWith_Input_AuthUsersAdminOnMinOrderBy<TRes> {
+  _CopyWithStubImpl_Input_AuthUsersAdminOnMinOrderBy(this._res);
+
+  TRes _res;
+
+  call({
+    Enum_OrderBy? adminOnArea,
+    Enum_OrderBy? adminOnGroup,
+    Enum_OrderBy? adminOnService,
+    Enum_OrderBy? permissionId,
+    Enum_OrderBy? serviceStudyYear,
+    Enum_OrderBy? uid,
+  }) => _res;
+}
+
+class Input_AuthUsersAdminOnOnConflict {
+  factory Input_AuthUsersAdminOnOnConflict({
+    required Enum_AuthUsersAdminOnConstraint constraint,
+    List<Enum_AuthUsersAdminOnUpdateColumn>? updateColumns,
+    Input_AuthUsersAdminOnBoolExp? where,
+  }) => Input_AuthUsersAdminOnOnConflict._({
+    r'constraint': constraint,
+    if (updateColumns != null) r'updateColumns': updateColumns,
+    if (where != null) r'where': where,
+  });
+
+  Input_AuthUsersAdminOnOnConflict._(this._$data);
+
+  factory Input_AuthUsersAdminOnOnConflict.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$constraint = data['constraint'];
+    result$data['constraint'] = fromJson_Enum_AuthUsersAdminOnConstraint(
+      (l$constraint as String),
+    );
+    if (data.containsKey('updateColumns')) {
+      final l$updateColumns = data['updateColumns'];
+      result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
+          .map((e) => fromJson_Enum_AuthUsersAdminOnUpdateColumn((e as String)))
+          .toList();
+    }
+    if (data.containsKey('where')) {
+      final l$where = data['where'];
+      result$data['where'] = l$where == null
+          ? null
+          : Input_AuthUsersAdminOnBoolExp.fromJson(
+              (l$where as Map<String, dynamic>),
+            );
+    }
+    return Input_AuthUsersAdminOnOnConflict._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Enum_AuthUsersAdminOnConstraint get constraint =>
+      (_$data['constraint'] as Enum_AuthUsersAdminOnConstraint);
+
+  List<Enum_AuthUsersAdminOnUpdateColumn>? get updateColumns =>
+      (_$data['updateColumns'] as List<Enum_AuthUsersAdminOnUpdateColumn>?);
+
+  Input_AuthUsersAdminOnBoolExp? get where =>
+      (_$data['where'] as Input_AuthUsersAdminOnBoolExp?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$constraint = constraint;
+    result$data['constraint'] = toJson_Enum_AuthUsersAdminOnConstraint(
+      l$constraint,
+    );
+    if (_$data.containsKey('updateColumns')) {
+      final l$updateColumns = updateColumns;
+      result$data['updateColumns'] =
+          (l$updateColumns as List<Enum_AuthUsersAdminOnUpdateColumn>)
+              .map((e) => toJson_Enum_AuthUsersAdminOnUpdateColumn(e))
+              .toList();
+    }
+    if (_$data.containsKey('where')) {
+      final l$where = where;
+      result$data['where'] = l$where?.toJson();
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_AuthUsersAdminOnOnConflict<Input_AuthUsersAdminOnOnConflict>
+  get copyWith => CopyWith_Input_AuthUsersAdminOnOnConflict(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_AuthUsersAdminOnOnConflict ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$constraint = constraint;
+    final lOther$constraint = other.constraint;
+    if (l$constraint != lOther$constraint) {
+      return false;
+    }
+    final l$updateColumns = updateColumns;
+    final lOther$updateColumns = other.updateColumns;
+    if (_$data.containsKey('updateColumns') !=
+        other._$data.containsKey('updateColumns')) {
+      return false;
+    }
+    if (l$updateColumns != null && lOther$updateColumns != null) {
+      if (l$updateColumns.length != lOther$updateColumns.length) {
+        return false;
+      }
+      for (int i = 0; i < l$updateColumns.length; i++) {
+        final l$updateColumns$entry = l$updateColumns[i];
+        final lOther$updateColumns$entry = lOther$updateColumns[i];
+        if (l$updateColumns$entry != lOther$updateColumns$entry) {
+          return false;
+        }
+      }
+    } else if (l$updateColumns != lOther$updateColumns) {
+      return false;
+    }
+    final l$where = where;
+    final lOther$where = other.where;
+    if (_$data.containsKey('where') != other._$data.containsKey('where')) {
+      return false;
+    }
+    if (l$where != lOther$where) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$constraint = constraint;
+    final l$updateColumns = updateColumns;
+    final l$where = where;
+    return Object.hashAll([
+      l$constraint,
+      _$data.containsKey('updateColumns')
+          ? l$updateColumns == null
+                ? null
+                : Object.hashAll(l$updateColumns.map((v) => v))
+          : const {},
+      _$data.containsKey('where') ? l$where : const {},
+    ]);
+  }
+}
+
 abstract class CopyWith_Input_AuthUsersAdminOnOnConflict<TRes> {
   factory CopyWith_Input_AuthUsersAdminOnOnConflict(
     Input_AuthUsersAdminOnOnConflict instance,
@@ -21,10 +223,7 @@ abstract class CopyWith_Input_AuthUsersAdminOnOnConflict<TRes> {
 
 class _CopyWithImpl_Input_AuthUsersAdminOnOnConflict<TRes>
     implements CopyWith_Input_AuthUsersAdminOnOnConflict<TRes> {
-  _CopyWithImpl_Input_AuthUsersAdminOnOnConflict(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Input_AuthUsersAdminOnOnConflict(this._instance, this._then);
 
   final Input_AuthUsersAdminOnOnConflict _instance;
 
@@ -36,24 +235,27 @@ class _CopyWithImpl_Input_AuthUsersAdminOnOnConflict<TRes>
     Object? constraint = _undefined,
     Object? updateColumns = _undefined,
     Object? where = _undefined,
-  }) =>
-      _then(Input_AuthUsersAdminOnOnConflict._({
-        ..._instance._$data,
-        if (constraint != _undefined && constraint != null)
-          'constraint': (constraint as Enum_AuthUsersAdminOnConstraint),
-        if (updateColumns != _undefined && updateColumns != null)
-          'updateColumns':
-              (updateColumns as List<Enum_AuthUsersAdminOnUpdateColumn>),
-        if (where != _undefined)
-          'where': (where as Input_AuthUsersAdminOnBoolExp?),
-      }));
+  }) => _then(
+    Input_AuthUsersAdminOnOnConflict._({
+      ..._instance._$data,
+      if (constraint != _undefined && constraint != null)
+        'constraint': (constraint as Enum_AuthUsersAdminOnConstraint),
+      if (updateColumns != _undefined && updateColumns != null)
+        'updateColumns':
+            (updateColumns as List<Enum_AuthUsersAdminOnUpdateColumn>),
+      if (where != _undefined)
+        'where': (where as Input_AuthUsersAdminOnBoolExp?),
+    }),
+  );
 
   CopyWith_Input_AuthUsersAdminOnBoolExp<TRes> get where {
     final local$where = _instance.where;
     return local$where == null
         ? CopyWith_Input_AuthUsersAdminOnBoolExp.stub(_then(_instance))
         : CopyWith_Input_AuthUsersAdminOnBoolExp(
-            local$where, (e) => call(where: e));
+            local$where,
+            (e) => call(where: e),
+          );
   }
 }
 
@@ -67,8 +269,7 @@ class _CopyWithStubImpl_Input_AuthUsersAdminOnOnConflict<TRes>
     Enum_AuthUsersAdminOnConstraint? constraint,
     List<Enum_AuthUsersAdminOnUpdateColumn>? updateColumns,
     Input_AuthUsersAdminOnBoolExp? where,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Input_AuthUsersAdminOnBoolExp<TRes> get where =>
       CopyWith_Input_AuthUsersAdminOnBoolExp.stub(_res);
@@ -95,30 +296,29 @@ class Input_AuthUsersAdminOnOrderBy {
     Input_StudyYearsOrderBy? serviceStudyYearData,
     Enum_OrderBy? uid,
     Input_AuthUsersDataOrderBy? user,
-  }) =>
-      Input_AuthUsersAdminOnOrderBy._({
-        if (adminOnArea != null) r'adminOnArea': adminOnArea,
-        if (adminOnGroup != null) r'adminOnGroup': adminOnGroup,
-        if (adminOnService != null) r'adminOnService': adminOnService,
-        if (area != null) r'area': area,
-        if (areaAdminOnUsers != null) r'areaAdminOnUsers': areaAdminOnUsers,
-        if (areaAllowEdit != null) r'areaAllowEdit': areaAllowEdit,
-        if (classesAggregate != null) r'classesAggregate': classesAggregate,
-        if (group != null) r'group': group,
-        if (groupAdminOnUsers != null) r'groupAdminOnUsers': groupAdminOnUsers,
-        if (groupAllowEdit != null) r'groupAllowEdit': groupAllowEdit,
-        if (permissionId != null) r'permissionId': permissionId,
-        if (service != null) r'service': service,
-        if (serviceAdminOnUsers != null)
-          r'serviceAdminOnUsers': serviceAdminOnUsers,
-        if (serviceAllowEdit != null) r'serviceAllowEdit': serviceAllowEdit,
-        if (serviceGender != null) r'serviceGender': serviceGender,
-        if (serviceStudyYear != null) r'serviceStudyYear': serviceStudyYear,
-        if (serviceStudyYearData != null)
-          r'serviceStudyYearData': serviceStudyYearData,
-        if (uid != null) r'uid': uid,
-        if (user != null) r'user': user,
-      });
+  }) => Input_AuthUsersAdminOnOrderBy._({
+    if (adminOnArea != null) r'adminOnArea': adminOnArea,
+    if (adminOnGroup != null) r'adminOnGroup': adminOnGroup,
+    if (adminOnService != null) r'adminOnService': adminOnService,
+    if (area != null) r'area': area,
+    if (areaAdminOnUsers != null) r'areaAdminOnUsers': areaAdminOnUsers,
+    if (areaAllowEdit != null) r'areaAllowEdit': areaAllowEdit,
+    if (classesAggregate != null) r'classesAggregate': classesAggregate,
+    if (group != null) r'group': group,
+    if (groupAdminOnUsers != null) r'groupAdminOnUsers': groupAdminOnUsers,
+    if (groupAllowEdit != null) r'groupAllowEdit': groupAllowEdit,
+    if (permissionId != null) r'permissionId': permissionId,
+    if (service != null) r'service': service,
+    if (serviceAdminOnUsers != null)
+      r'serviceAdminOnUsers': serviceAdminOnUsers,
+    if (serviceAllowEdit != null) r'serviceAllowEdit': serviceAllowEdit,
+    if (serviceGender != null) r'serviceGender': serviceGender,
+    if (serviceStudyYear != null) r'serviceStudyYear': serviceStudyYear,
+    if (serviceStudyYearData != null)
+      r'serviceStudyYearData': serviceStudyYearData,
+    if (uid != null) r'uid': uid,
+    if (user != null) r'user': user,
+  });
 
   Input_AuthUsersAdminOnOrderBy._(this._$data);
 
@@ -165,7 +365,8 @@ class Input_AuthUsersAdminOnOrderBy {
       result$data['classesAggregate'] = l$classesAggregate == null
           ? null
           : Input_ClassesAggregateOrderBy.fromJson(
-              (l$classesAggregate as Map<String, dynamic>));
+              (l$classesAggregate as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('group')) {
       final l$group = data['group'];
@@ -226,19 +427,22 @@ class Input_AuthUsersAdminOnOrderBy {
       result$data['serviceStudyYearData'] = l$serviceStudyYearData == null
           ? null
           : Input_StudyYearsOrderBy.fromJson(
-              (l$serviceStudyYearData as Map<String, dynamic>));
+              (l$serviceStudyYearData as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('uid')) {
       final l$uid = data['uid'];
-      result$data['uid'] =
-          l$uid == null ? null : fromJson_Enum_OrderBy((l$uid as String));
+      result$data['uid'] = l$uid == null
+          ? null
+          : fromJson_Enum_OrderBy((l$uid as String));
     }
     if (data.containsKey('user')) {
       final l$user = data['user'];
       result$data['user'] = l$user == null
           ? null
           : Input_AuthUsersDataOrderBy.fromJson(
-              (l$user as Map<String, dynamic>));
+              (l$user as Map<String, dynamic>),
+            );
     }
     return Input_AuthUsersAdminOnOrderBy._(result$data);
   }
@@ -298,13 +502,15 @@ class Input_AuthUsersAdminOnOrderBy {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('adminOnArea')) {
       final l$adminOnArea = adminOnArea;
-      result$data['adminOnArea'] =
-          l$adminOnArea == null ? null : toJson_Enum_OrderBy(l$adminOnArea);
+      result$data['adminOnArea'] = l$adminOnArea == null
+          ? null
+          : toJson_Enum_OrderBy(l$adminOnArea);
     }
     if (_$data.containsKey('adminOnGroup')) {
       final l$adminOnGroup = adminOnGroup;
-      result$data['adminOnGroup'] =
-          l$adminOnGroup == null ? null : toJson_Enum_OrderBy(l$adminOnGroup);
+      result$data['adminOnGroup'] = l$adminOnGroup == null
+          ? null
+          : toJson_Enum_OrderBy(l$adminOnGroup);
     }
     if (_$data.containsKey('adminOnService')) {
       final l$adminOnService = adminOnService;
@@ -324,8 +530,9 @@ class Input_AuthUsersAdminOnOrderBy {
     }
     if (_$data.containsKey('areaAllowEdit')) {
       final l$areaAllowEdit = areaAllowEdit;
-      result$data['areaAllowEdit'] =
-          l$areaAllowEdit == null ? null : toJson_Enum_OrderBy(l$areaAllowEdit);
+      result$data['areaAllowEdit'] = l$areaAllowEdit == null
+          ? null
+          : toJson_Enum_OrderBy(l$areaAllowEdit);
     }
     if (_$data.containsKey('classesAggregate')) {
       final l$classesAggregate = classesAggregate;
@@ -349,8 +556,9 @@ class Input_AuthUsersAdminOnOrderBy {
     }
     if (_$data.containsKey('permissionId')) {
       final l$permissionId = permissionId;
-      result$data['permissionId'] =
-          l$permissionId == null ? null : toJson_Enum_OrderBy(l$permissionId);
+      result$data['permissionId'] = l$permissionId == null
+          ? null
+          : toJson_Enum_OrderBy(l$permissionId);
     }
     if (_$data.containsKey('service')) {
       final l$service = service;
@@ -370,8 +578,9 @@ class Input_AuthUsersAdminOnOrderBy {
     }
     if (_$data.containsKey('serviceGender')) {
       final l$serviceGender = serviceGender;
-      result$data['serviceGender'] =
-          l$serviceGender == null ? null : toJson_Enum_OrderBy(l$serviceGender);
+      result$data['serviceGender'] = l$serviceGender == null
+          ? null
+          : toJson_Enum_OrderBy(l$serviceGender);
     }
     if (_$data.containsKey('serviceStudyYear')) {
       final l$serviceStudyYear = serviceStudyYear;
@@ -395,10 +604,7 @@ class Input_AuthUsersAdminOnOrderBy {
   }
 
   CopyWith_Input_AuthUsersAdminOnOrderBy<Input_AuthUsersAdminOnOrderBy>
-      get copyWith => CopyWith_Input_AuthUsersAdminOnOrderBy(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Input_AuthUsersAdminOnOrderBy(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -667,10 +873,7 @@ abstract class CopyWith_Input_AuthUsersAdminOnOrderBy<TRes> {
 
 class _CopyWithImpl_Input_AuthUsersAdminOnOrderBy<TRes>
     implements CopyWith_Input_AuthUsersAdminOnOrderBy<TRes> {
-  _CopyWithImpl_Input_AuthUsersAdminOnOrderBy(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Input_AuthUsersAdminOnOrderBy(this._instance, this._then);
 
   final Input_AuthUsersAdminOnOrderBy _instance;
 
@@ -698,46 +901,46 @@ class _CopyWithImpl_Input_AuthUsersAdminOnOrderBy<TRes>
     Object? serviceStudyYearData = _undefined,
     Object? uid = _undefined,
     Object? user = _undefined,
-  }) =>
-      _then(Input_AuthUsersAdminOnOrderBy._({
-        ..._instance._$data,
-        if (adminOnArea != _undefined)
-          'adminOnArea': (adminOnArea as Enum_OrderBy?),
-        if (adminOnGroup != _undefined)
-          'adminOnGroup': (adminOnGroup as Enum_OrderBy?),
-        if (adminOnService != _undefined)
-          'adminOnService': (adminOnService as Enum_OrderBy?),
-        if (area != _undefined) 'area': (area as Input_AreasOrderBy?),
-        if (areaAdminOnUsers != _undefined)
-          'areaAdminOnUsers': (areaAdminOnUsers as Enum_OrderBy?),
-        if (areaAllowEdit != _undefined)
-          'areaAllowEdit': (areaAllowEdit as Enum_OrderBy?),
-        if (classesAggregate != _undefined)
-          'classesAggregate':
-              (classesAggregate as Input_ClassesAggregateOrderBy?),
-        if (group != _undefined) 'group': (group as Input_GroupsOrderBy?),
-        if (groupAdminOnUsers != _undefined)
-          'groupAdminOnUsers': (groupAdminOnUsers as Enum_OrderBy?),
-        if (groupAllowEdit != _undefined)
-          'groupAllowEdit': (groupAllowEdit as Enum_OrderBy?),
-        if (permissionId != _undefined)
-          'permissionId': (permissionId as Enum_OrderBy?),
-        if (service != _undefined)
-          'service': (service as Input_ServicesOrderBy?),
-        if (serviceAdminOnUsers != _undefined)
-          'serviceAdminOnUsers': (serviceAdminOnUsers as Enum_OrderBy?),
-        if (serviceAllowEdit != _undefined)
-          'serviceAllowEdit': (serviceAllowEdit as Enum_OrderBy?),
-        if (serviceGender != _undefined)
-          'serviceGender': (serviceGender as Enum_OrderBy?),
-        if (serviceStudyYear != _undefined)
-          'serviceStudyYear': (serviceStudyYear as Enum_OrderBy?),
-        if (serviceStudyYearData != _undefined)
-          'serviceStudyYearData':
-              (serviceStudyYearData as Input_StudyYearsOrderBy?),
-        if (uid != _undefined) 'uid': (uid as Enum_OrderBy?),
-        if (user != _undefined) 'user': (user as Input_AuthUsersDataOrderBy?),
-      }));
+  }) => _then(
+    Input_AuthUsersAdminOnOrderBy._({
+      ..._instance._$data,
+      if (adminOnArea != _undefined)
+        'adminOnArea': (adminOnArea as Enum_OrderBy?),
+      if (adminOnGroup != _undefined)
+        'adminOnGroup': (adminOnGroup as Enum_OrderBy?),
+      if (adminOnService != _undefined)
+        'adminOnService': (adminOnService as Enum_OrderBy?),
+      if (area != _undefined) 'area': (area as Input_AreasOrderBy?),
+      if (areaAdminOnUsers != _undefined)
+        'areaAdminOnUsers': (areaAdminOnUsers as Enum_OrderBy?),
+      if (areaAllowEdit != _undefined)
+        'areaAllowEdit': (areaAllowEdit as Enum_OrderBy?),
+      if (classesAggregate != _undefined)
+        'classesAggregate':
+            (classesAggregate as Input_ClassesAggregateOrderBy?),
+      if (group != _undefined) 'group': (group as Input_GroupsOrderBy?),
+      if (groupAdminOnUsers != _undefined)
+        'groupAdminOnUsers': (groupAdminOnUsers as Enum_OrderBy?),
+      if (groupAllowEdit != _undefined)
+        'groupAllowEdit': (groupAllowEdit as Enum_OrderBy?),
+      if (permissionId != _undefined)
+        'permissionId': (permissionId as Enum_OrderBy?),
+      if (service != _undefined) 'service': (service as Input_ServicesOrderBy?),
+      if (serviceAdminOnUsers != _undefined)
+        'serviceAdminOnUsers': (serviceAdminOnUsers as Enum_OrderBy?),
+      if (serviceAllowEdit != _undefined)
+        'serviceAllowEdit': (serviceAllowEdit as Enum_OrderBy?),
+      if (serviceGender != _undefined)
+        'serviceGender': (serviceGender as Enum_OrderBy?),
+      if (serviceStudyYear != _undefined)
+        'serviceStudyYear': (serviceStudyYear as Enum_OrderBy?),
+      if (serviceStudyYearData != _undefined)
+        'serviceStudyYearData':
+            (serviceStudyYearData as Input_StudyYearsOrderBy?),
+      if (uid != _undefined) 'uid': (uid as Enum_OrderBy?),
+      if (user != _undefined) 'user': (user as Input_AuthUsersDataOrderBy?),
+    }),
+  );
 
   CopyWith_Input_AreasOrderBy<TRes> get area {
     final local$area = _instance.area;
@@ -751,7 +954,9 @@ class _CopyWithImpl_Input_AuthUsersAdminOnOrderBy<TRes>
     return local$classesAggregate == null
         ? CopyWith_Input_ClassesAggregateOrderBy.stub(_then(_instance))
         : CopyWith_Input_ClassesAggregateOrderBy(
-            local$classesAggregate, (e) => call(classesAggregate: e));
+            local$classesAggregate,
+            (e) => call(classesAggregate: e),
+          );
   }
 
   CopyWith_Input_GroupsOrderBy<TRes> get group {
@@ -766,7 +971,9 @@ class _CopyWithImpl_Input_AuthUsersAdminOnOrderBy<TRes>
     return local$service == null
         ? CopyWith_Input_ServicesOrderBy.stub(_then(_instance))
         : CopyWith_Input_ServicesOrderBy(
-            local$service, (e) => call(service: e));
+            local$service,
+            (e) => call(service: e),
+          );
   }
 
   CopyWith_Input_StudyYearsOrderBy<TRes> get serviceStudyYearData {
@@ -774,7 +981,9 @@ class _CopyWithImpl_Input_AuthUsersAdminOnOrderBy<TRes>
     return local$serviceStudyYearData == null
         ? CopyWith_Input_StudyYearsOrderBy.stub(_then(_instance))
         : CopyWith_Input_StudyYearsOrderBy(
-            local$serviceStudyYearData, (e) => call(serviceStudyYearData: e));
+            local$serviceStudyYearData,
+            (e) => call(serviceStudyYearData: e),
+          );
   }
 
   CopyWith_Input_AuthUsersDataOrderBy<TRes> get user {
@@ -811,8 +1020,7 @@ class _CopyWithStubImpl_Input_AuthUsersAdminOnOrderBy<TRes>
     Input_StudyYearsOrderBy? serviceStudyYearData,
     Enum_OrderBy? uid,
     Input_AuthUsersDataOrderBy? user,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Input_AreasOrderBy<TRes> get area =>
       CopyWith_Input_AreasOrderBy.stub(_res);
@@ -834,16 +1042,17 @@ class _CopyWithStubImpl_Input_AuthUsersAdminOnOrderBy<TRes>
 }
 
 class Input_AuthUsersAdminOnStddevOrderBy {
-  factory Input_AuthUsersAdminOnStddevOrderBy(
-          {Enum_OrderBy? serviceStudyYear}) =>
-      Input_AuthUsersAdminOnStddevOrderBy._({
-        if (serviceStudyYear != null) r'serviceStudyYear': serviceStudyYear,
-      });
+  factory Input_AuthUsersAdminOnStddevOrderBy({
+    Enum_OrderBy? serviceStudyYear,
+  }) => Input_AuthUsersAdminOnStddevOrderBy._({
+    if (serviceStudyYear != null) r'serviceStudyYear': serviceStudyYear,
+  });
 
   Input_AuthUsersAdminOnStddevOrderBy._(this._$data);
 
   factory Input_AuthUsersAdminOnStddevOrderBy.fromJson(
-      Map<String, dynamic> data) {
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('serviceStudyYear')) {
       final l$serviceStudyYear = data['serviceStudyYear'];
@@ -871,11 +1080,9 @@ class Input_AuthUsersAdminOnStddevOrderBy {
   }
 
   CopyWith_Input_AuthUsersAdminOnStddevOrderBy<
-          Input_AuthUsersAdminOnStddevOrderBy>
-      get copyWith => CopyWith_Input_AuthUsersAdminOnStddevOrderBy(
-            this,
-            (i) => i,
-          );
+    Input_AuthUsersAdminOnStddevOrderBy
+  >
+  get copyWith => CopyWith_Input_AuthUsersAdminOnStddevOrderBy(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -902,7 +1109,7 @@ class Input_AuthUsersAdminOnStddevOrderBy {
   int get hashCode {
     final l$serviceStudyYear = serviceStudyYear;
     return Object.hashAll([
-      _$data.containsKey('serviceStudyYear') ? l$serviceStudyYear : const {}
+      _$data.containsKey('serviceStudyYear') ? l$serviceStudyYear : const {},
     ]);
   }
 }
@@ -921,10 +1128,7 @@ abstract class CopyWith_Input_AuthUsersAdminOnStddevOrderBy<TRes> {
 
 class _CopyWithImpl_Input_AuthUsersAdminOnStddevOrderBy<TRes>
     implements CopyWith_Input_AuthUsersAdminOnStddevOrderBy<TRes> {
-  _CopyWithImpl_Input_AuthUsersAdminOnStddevOrderBy(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Input_AuthUsersAdminOnStddevOrderBy(this._instance, this._then);
 
   final Input_AuthUsersAdminOnStddevOrderBy _instance;
 
@@ -932,12 +1136,13 @@ class _CopyWithImpl_Input_AuthUsersAdminOnStddevOrderBy<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? serviceStudyYear = _undefined}) =>
-      _then(Input_AuthUsersAdminOnStddevOrderBy._({
-        ..._instance._$data,
-        if (serviceStudyYear != _undefined)
-          'serviceStudyYear': (serviceStudyYear as Enum_OrderBy?),
-      }));
+  TRes call({Object? serviceStudyYear = _undefined}) => _then(
+    Input_AuthUsersAdminOnStddevOrderBy._({
+      ..._instance._$data,
+      if (serviceStudyYear != _undefined)
+        'serviceStudyYear': (serviceStudyYear as Enum_OrderBy?),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Input_AuthUsersAdminOnStddevOrderBy<TRes>
@@ -950,16 +1155,17 @@ class _CopyWithStubImpl_Input_AuthUsersAdminOnStddevOrderBy<TRes>
 }
 
 class Input_AuthUsersAdminOnStddevPopOrderBy {
-  factory Input_AuthUsersAdminOnStddevPopOrderBy(
-          {Enum_OrderBy? serviceStudyYear}) =>
-      Input_AuthUsersAdminOnStddevPopOrderBy._({
-        if (serviceStudyYear != null) r'serviceStudyYear': serviceStudyYear,
-      });
+  factory Input_AuthUsersAdminOnStddevPopOrderBy({
+    Enum_OrderBy? serviceStudyYear,
+  }) => Input_AuthUsersAdminOnStddevPopOrderBy._({
+    if (serviceStudyYear != null) r'serviceStudyYear': serviceStudyYear,
+  });
 
   Input_AuthUsersAdminOnStddevPopOrderBy._(this._$data);
 
   factory Input_AuthUsersAdminOnStddevPopOrderBy.fromJson(
-      Map<String, dynamic> data) {
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('serviceStudyYear')) {
       final l$serviceStudyYear = data['serviceStudyYear'];
@@ -987,11 +1193,10 @@ class Input_AuthUsersAdminOnStddevPopOrderBy {
   }
 
   CopyWith_Input_AuthUsersAdminOnStddevPopOrderBy<
-          Input_AuthUsersAdminOnStddevPopOrderBy>
-      get copyWith => CopyWith_Input_AuthUsersAdminOnStddevPopOrderBy(
-            this,
-            (i) => i,
-          );
+    Input_AuthUsersAdminOnStddevPopOrderBy
+  >
+  get copyWith =>
+      CopyWith_Input_AuthUsersAdminOnStddevPopOrderBy(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -1018,7 +1223,7 @@ class Input_AuthUsersAdminOnStddevPopOrderBy {
   int get hashCode {
     final l$serviceStudyYear = serviceStudyYear;
     return Object.hashAll([
-      _$data.containsKey('serviceStudyYear') ? l$serviceStudyYear : const {}
+      _$data.containsKey('serviceStudyYear') ? l$serviceStudyYear : const {},
     ]);
   }
 }
@@ -1048,12 +1253,13 @@ class _CopyWithImpl_Input_AuthUsersAdminOnStddevPopOrderBy<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? serviceStudyYear = _undefined}) =>
-      _then(Input_AuthUsersAdminOnStddevPopOrderBy._({
-        ..._instance._$data,
-        if (serviceStudyYear != _undefined)
-          'serviceStudyYear': (serviceStudyYear as Enum_OrderBy?),
-      }));
+  TRes call({Object? serviceStudyYear = _undefined}) => _then(
+    Input_AuthUsersAdminOnStddevPopOrderBy._({
+      ..._instance._$data,
+      if (serviceStudyYear != _undefined)
+        'serviceStudyYear': (serviceStudyYear as Enum_OrderBy?),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Input_AuthUsersAdminOnStddevPopOrderBy<TRes>
@@ -1066,16 +1272,17 @@ class _CopyWithStubImpl_Input_AuthUsersAdminOnStddevPopOrderBy<TRes>
 }
 
 class Input_AuthUsersAdminOnStddevSampOrderBy {
-  factory Input_AuthUsersAdminOnStddevSampOrderBy(
-          {Enum_OrderBy? serviceStudyYear}) =>
-      Input_AuthUsersAdminOnStddevSampOrderBy._({
-        if (serviceStudyYear != null) r'serviceStudyYear': serviceStudyYear,
-      });
+  factory Input_AuthUsersAdminOnStddevSampOrderBy({
+    Enum_OrderBy? serviceStudyYear,
+  }) => Input_AuthUsersAdminOnStddevSampOrderBy._({
+    if (serviceStudyYear != null) r'serviceStudyYear': serviceStudyYear,
+  });
 
   Input_AuthUsersAdminOnStddevSampOrderBy._(this._$data);
 
   factory Input_AuthUsersAdminOnStddevSampOrderBy.fromJson(
-      Map<String, dynamic> data) {
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('serviceStudyYear')) {
       final l$serviceStudyYear = data['serviceStudyYear'];
@@ -1103,11 +1310,10 @@ class Input_AuthUsersAdminOnStddevSampOrderBy {
   }
 
   CopyWith_Input_AuthUsersAdminOnStddevSampOrderBy<
-          Input_AuthUsersAdminOnStddevSampOrderBy>
-      get copyWith => CopyWith_Input_AuthUsersAdminOnStddevSampOrderBy(
-            this,
-            (i) => i,
-          );
+    Input_AuthUsersAdminOnStddevSampOrderBy
+  >
+  get copyWith =>
+      CopyWith_Input_AuthUsersAdminOnStddevSampOrderBy(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -1134,7 +1340,7 @@ class Input_AuthUsersAdminOnStddevSampOrderBy {
   int get hashCode {
     final l$serviceStudyYear = serviceStudyYear;
     return Object.hashAll([
-      _$data.containsKey('serviceStudyYear') ? l$serviceStudyYear : const {}
+      _$data.containsKey('serviceStudyYear') ? l$serviceStudyYear : const {},
     ]);
   }
 }
@@ -1164,12 +1370,13 @@ class _CopyWithImpl_Input_AuthUsersAdminOnStddevSampOrderBy<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? serviceStudyYear = _undefined}) =>
-      _then(Input_AuthUsersAdminOnStddevSampOrderBy._({
-        ..._instance._$data,
-        if (serviceStudyYear != _undefined)
-          'serviceStudyYear': (serviceStudyYear as Enum_OrderBy?),
-      }));
+  TRes call({Object? serviceStudyYear = _undefined}) => _then(
+    Input_AuthUsersAdminOnStddevSampOrderBy._({
+      ..._instance._$data,
+      if (serviceStudyYear != _undefined)
+        'serviceStudyYear': (serviceStudyYear as Enum_OrderBy?),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Input_AuthUsersAdminOnStddevSampOrderBy<TRes>
@@ -1185,21 +1392,22 @@ class Input_AuthUsersAdminOnStreamCursorInput {
   factory Input_AuthUsersAdminOnStreamCursorInput({
     required Input_AuthUsersAdminOnStreamCursorValueInput initialValue,
     Enum_CursorOrdering? ordering,
-  }) =>
-      Input_AuthUsersAdminOnStreamCursorInput._({
-        r'initialValue': initialValue,
-        if (ordering != null) r'ordering': ordering,
-      });
+  }) => Input_AuthUsersAdminOnStreamCursorInput._({
+    r'initialValue': initialValue,
+    if (ordering != null) r'ordering': ordering,
+  });
 
   Input_AuthUsersAdminOnStreamCursorInput._(this._$data);
 
   factory Input_AuthUsersAdminOnStreamCursorInput.fromJson(
-      Map<String, dynamic> data) {
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
     final l$initialValue = data['initialValue'];
     result$data['initialValue'] =
         Input_AuthUsersAdminOnStreamCursorValueInput.fromJson(
-            (l$initialValue as Map<String, dynamic>));
+          (l$initialValue as Map<String, dynamic>),
+        );
     if (data.containsKey('ordering')) {
       final l$ordering = data['ordering'];
       result$data['ordering'] = l$ordering == null
@@ -1223,18 +1431,18 @@ class Input_AuthUsersAdminOnStreamCursorInput {
     result$data['initialValue'] = l$initialValue.toJson();
     if (_$data.containsKey('ordering')) {
       final l$ordering = ordering;
-      result$data['ordering'] =
-          l$ordering == null ? null : toJson_Enum_CursorOrdering(l$ordering);
+      result$data['ordering'] = l$ordering == null
+          ? null
+          : toJson_Enum_CursorOrdering(l$ordering);
     }
     return result$data;
   }
 
   CopyWith_Input_AuthUsersAdminOnStreamCursorInput<
-          Input_AuthUsersAdminOnStreamCursorInput>
-      get copyWith => CopyWith_Input_AuthUsersAdminOnStreamCursorInput(
-            this,
-            (i) => i,
-          );
+    Input_AuthUsersAdminOnStreamCursorInput
+  >
+  get copyWith =>
+      CopyWith_Input_AuthUsersAdminOnStreamCursorInput(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -1305,20 +1513,23 @@ class _CopyWithImpl_Input_AuthUsersAdminOnStreamCursorInput<TRes>
   TRes call({
     Object? initialValue = _undefined,
     Object? ordering = _undefined,
-  }) =>
-      _then(Input_AuthUsersAdminOnStreamCursorInput._({
-        ..._instance._$data,
-        if (initialValue != _undefined && initialValue != null)
-          'initialValue':
-              (initialValue as Input_AuthUsersAdminOnStreamCursorValueInput),
-        if (ordering != _undefined)
-          'ordering': (ordering as Enum_CursorOrdering?),
-      }));
+  }) => _then(
+    Input_AuthUsersAdminOnStreamCursorInput._({
+      ..._instance._$data,
+      if (initialValue != _undefined && initialValue != null)
+        'initialValue':
+            (initialValue as Input_AuthUsersAdminOnStreamCursorValueInput),
+      if (ordering != _undefined)
+        'ordering': (ordering as Enum_CursorOrdering?),
+    }),
+  );
 
   CopyWith_Input_AuthUsersAdminOnStreamCursorValueInput<TRes> get initialValue {
     final local$initialValue = _instance.initialValue;
     return CopyWith_Input_AuthUsersAdminOnStreamCursorValueInput(
-        local$initialValue, (e) => call(initialValue: e));
+      local$initialValue,
+      (e) => call(initialValue: e),
+    );
   }
 }
 
@@ -1331,12 +1542,11 @@ class _CopyWithStubImpl_Input_AuthUsersAdminOnStreamCursorInput<TRes>
   call({
     Input_AuthUsersAdminOnStreamCursorValueInput? initialValue,
     Enum_CursorOrdering? ordering,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Input_AuthUsersAdminOnStreamCursorValueInput<TRes>
-      get initialValue =>
-          CopyWith_Input_AuthUsersAdminOnStreamCursorValueInput.stub(_res);
+  get initialValue =>
+      CopyWith_Input_AuthUsersAdminOnStreamCursorValueInput.stub(_res);
 }
 
 class Input_AuthUsersAdminOnStreamCursorValueInput {
@@ -1354,43 +1564,46 @@ class Input_AuthUsersAdminOnStreamCursorValueInput {
     bool? serviceGender,
     int? serviceStudyYear,
     UuidValue? uid,
-  }) =>
-      Input_AuthUsersAdminOnStreamCursorValueInput._({
-        if (adminOnArea != null) r'adminOnArea': adminOnArea,
-        if (adminOnGroup != null) r'adminOnGroup': adminOnGroup,
-        if (adminOnService != null) r'adminOnService': adminOnService,
-        if (areaAdminOnUsers != null) r'areaAdminOnUsers': areaAdminOnUsers,
-        if (areaAllowEdit != null) r'areaAllowEdit': areaAllowEdit,
-        if (groupAdminOnUsers != null) r'groupAdminOnUsers': groupAdminOnUsers,
-        if (groupAllowEdit != null) r'groupAllowEdit': groupAllowEdit,
-        if (permissionId != null) r'permissionId': permissionId,
-        if (serviceAdminOnUsers != null)
-          r'serviceAdminOnUsers': serviceAdminOnUsers,
-        if (serviceAllowEdit != null) r'serviceAllowEdit': serviceAllowEdit,
-        if (serviceGender != null) r'serviceGender': serviceGender,
-        if (serviceStudyYear != null) r'serviceStudyYear': serviceStudyYear,
-        if (uid != null) r'uid': uid,
-      });
+  }) => Input_AuthUsersAdminOnStreamCursorValueInput._({
+    if (adminOnArea != null) r'adminOnArea': adminOnArea,
+    if (adminOnGroup != null) r'adminOnGroup': adminOnGroup,
+    if (adminOnService != null) r'adminOnService': adminOnService,
+    if (areaAdminOnUsers != null) r'areaAdminOnUsers': areaAdminOnUsers,
+    if (areaAllowEdit != null) r'areaAllowEdit': areaAllowEdit,
+    if (groupAdminOnUsers != null) r'groupAdminOnUsers': groupAdminOnUsers,
+    if (groupAllowEdit != null) r'groupAllowEdit': groupAllowEdit,
+    if (permissionId != null) r'permissionId': permissionId,
+    if (serviceAdminOnUsers != null)
+      r'serviceAdminOnUsers': serviceAdminOnUsers,
+    if (serviceAllowEdit != null) r'serviceAllowEdit': serviceAllowEdit,
+    if (serviceGender != null) r'serviceGender': serviceGender,
+    if (serviceStudyYear != null) r'serviceStudyYear': serviceStudyYear,
+    if (uid != null) r'uid': uid,
+  });
 
   Input_AuthUsersAdminOnStreamCursorValueInput._(this._$data);
 
   factory Input_AuthUsersAdminOnStreamCursorValueInput.fromJson(
-      Map<String, dynamic> data) {
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('adminOnArea')) {
       final l$adminOnArea = data['adminOnArea'];
-      result$data['adminOnArea'] =
-          l$adminOnArea == null ? null : stringToUuid(l$adminOnArea);
+      result$data['adminOnArea'] = l$adminOnArea == null
+          ? null
+          : stringToUuid(l$adminOnArea);
     }
     if (data.containsKey('adminOnGroup')) {
       final l$adminOnGroup = data['adminOnGroup'];
-      result$data['adminOnGroup'] =
-          l$adminOnGroup == null ? null : stringToUuid(l$adminOnGroup);
+      result$data['adminOnGroup'] = l$adminOnGroup == null
+          ? null
+          : stringToUuid(l$adminOnGroup);
     }
     if (data.containsKey('adminOnService')) {
       final l$adminOnService = data['adminOnService'];
-      result$data['adminOnService'] =
-          l$adminOnService == null ? null : stringToUuid(l$adminOnService);
+      result$data['adminOnService'] = l$adminOnService == null
+          ? null
+          : stringToUuid(l$adminOnService);
     }
     if (data.containsKey('areaAdminOnUsers')) {
       final l$areaAdminOnUsers = data['areaAdminOnUsers'];
@@ -1410,8 +1623,9 @@ class Input_AuthUsersAdminOnStreamCursorValueInput {
     }
     if (data.containsKey('permissionId')) {
       final l$permissionId = data['permissionId'];
-      result$data['permissionId'] =
-          l$permissionId == null ? null : stringToUuid(l$permissionId);
+      result$data['permissionId'] = l$permissionId == null
+          ? null
+          : stringToUuid(l$permissionId);
     }
     if (data.containsKey('serviceAdminOnUsers')) {
       final l$serviceAdminOnUsers = data['serviceAdminOnUsers'];
@@ -1468,18 +1682,21 @@ class Input_AuthUsersAdminOnStreamCursorValueInput {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('adminOnArea')) {
       final l$adminOnArea = adminOnArea;
-      result$data['adminOnArea'] =
-          l$adminOnArea == null ? null : uuidToString(l$adminOnArea);
+      result$data['adminOnArea'] = l$adminOnArea == null
+          ? null
+          : uuidToString(l$adminOnArea);
     }
     if (_$data.containsKey('adminOnGroup')) {
       final l$adminOnGroup = adminOnGroup;
-      result$data['adminOnGroup'] =
-          l$adminOnGroup == null ? null : uuidToString(l$adminOnGroup);
+      result$data['adminOnGroup'] = l$adminOnGroup == null
+          ? null
+          : uuidToString(l$adminOnGroup);
     }
     if (_$data.containsKey('adminOnService')) {
       final l$adminOnService = adminOnService;
-      result$data['adminOnService'] =
-          l$adminOnService == null ? null : uuidToString(l$adminOnService);
+      result$data['adminOnService'] = l$adminOnService == null
+          ? null
+          : uuidToString(l$adminOnService);
     }
     if (_$data.containsKey('areaAdminOnUsers')) {
       final l$areaAdminOnUsers = areaAdminOnUsers;
@@ -1499,8 +1716,9 @@ class Input_AuthUsersAdminOnStreamCursorValueInput {
     }
     if (_$data.containsKey('permissionId')) {
       final l$permissionId = permissionId;
-      result$data['permissionId'] =
-          l$permissionId == null ? null : uuidToString(l$permissionId);
+      result$data['permissionId'] = l$permissionId == null
+          ? null
+          : uuidToString(l$permissionId);
     }
     if (_$data.containsKey('serviceAdminOnUsers')) {
       final l$serviceAdminOnUsers = serviceAdminOnUsers;
@@ -1526,11 +1744,10 @@ class Input_AuthUsersAdminOnStreamCursorValueInput {
   }
 
   CopyWith_Input_AuthUsersAdminOnStreamCursorValueInput<
-          Input_AuthUsersAdminOnStreamCursorValueInput>
-      get copyWith => CopyWith_Input_AuthUsersAdminOnStreamCursorValueInput(
-            this,
-            (i) => i,
-          );
+    Input_AuthUsersAdminOnStreamCursorValueInput
+  >
+  get copyWith =>
+      CopyWith_Input_AuthUsersAdminOnStreamCursorValueInput(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -1748,35 +1965,35 @@ class _CopyWithImpl_Input_AuthUsersAdminOnStreamCursorValueInput<TRes>
     Object? serviceGender = _undefined,
     Object? serviceStudyYear = _undefined,
     Object? uid = _undefined,
-  }) =>
-      _then(Input_AuthUsersAdminOnStreamCursorValueInput._({
-        ..._instance._$data,
-        if (adminOnArea != _undefined)
-          'adminOnArea': (adminOnArea as UuidValue?),
-        if (adminOnGroup != _undefined)
-          'adminOnGroup': (adminOnGroup as UuidValue?),
-        if (adminOnService != _undefined)
-          'adminOnService': (adminOnService as UuidValue?),
-        if (areaAdminOnUsers != _undefined)
-          'areaAdminOnUsers': (areaAdminOnUsers as bool?),
-        if (areaAllowEdit != _undefined)
-          'areaAllowEdit': (areaAllowEdit as bool?),
-        if (groupAdminOnUsers != _undefined)
-          'groupAdminOnUsers': (groupAdminOnUsers as bool?),
-        if (groupAllowEdit != _undefined)
-          'groupAllowEdit': (groupAllowEdit as bool?),
-        if (permissionId != _undefined)
-          'permissionId': (permissionId as UuidValue?),
-        if (serviceAdminOnUsers != _undefined)
-          'serviceAdminOnUsers': (serviceAdminOnUsers as bool?),
-        if (serviceAllowEdit != _undefined)
-          'serviceAllowEdit': (serviceAllowEdit as bool?),
-        if (serviceGender != _undefined)
-          'serviceGender': (serviceGender as bool?),
-        if (serviceStudyYear != _undefined)
-          'serviceStudyYear': (serviceStudyYear as int?),
-        if (uid != _undefined) 'uid': (uid as UuidValue?),
-      }));
+  }) => _then(
+    Input_AuthUsersAdminOnStreamCursorValueInput._({
+      ..._instance._$data,
+      if (adminOnArea != _undefined) 'adminOnArea': (adminOnArea as UuidValue?),
+      if (adminOnGroup != _undefined)
+        'adminOnGroup': (adminOnGroup as UuidValue?),
+      if (adminOnService != _undefined)
+        'adminOnService': (adminOnService as UuidValue?),
+      if (areaAdminOnUsers != _undefined)
+        'areaAdminOnUsers': (areaAdminOnUsers as bool?),
+      if (areaAllowEdit != _undefined)
+        'areaAllowEdit': (areaAllowEdit as bool?),
+      if (groupAdminOnUsers != _undefined)
+        'groupAdminOnUsers': (groupAdminOnUsers as bool?),
+      if (groupAllowEdit != _undefined)
+        'groupAllowEdit': (groupAllowEdit as bool?),
+      if (permissionId != _undefined)
+        'permissionId': (permissionId as UuidValue?),
+      if (serviceAdminOnUsers != _undefined)
+        'serviceAdminOnUsers': (serviceAdminOnUsers as bool?),
+      if (serviceAllowEdit != _undefined)
+        'serviceAllowEdit': (serviceAllowEdit as bool?),
+      if (serviceGender != _undefined)
+        'serviceGender': (serviceGender as bool?),
+      if (serviceStudyYear != _undefined)
+        'serviceStudyYear': (serviceStudyYear as int?),
+      if (uid != _undefined) 'uid': (uid as UuidValue?),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Input_AuthUsersAdminOnStreamCursorValueInput<TRes>
@@ -1799,8 +2016,7 @@ class _CopyWithStubImpl_Input_AuthUsersAdminOnStreamCursorValueInput<TRes>
     bool? serviceGender,
     int? serviceStudyYear,
     UuidValue? uid,
-  }) =>
-      _res;
+  }) => _res;
 }
 
 class Input_AuthUsersAdminOnSumOrderBy {
@@ -1839,10 +2055,7 @@ class Input_AuthUsersAdminOnSumOrderBy {
   }
 
   CopyWith_Input_AuthUsersAdminOnSumOrderBy<Input_AuthUsersAdminOnSumOrderBy>
-      get copyWith => CopyWith_Input_AuthUsersAdminOnSumOrderBy(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Input_AuthUsersAdminOnSumOrderBy(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -1869,7 +2082,7 @@ class Input_AuthUsersAdminOnSumOrderBy {
   int get hashCode {
     final l$serviceStudyYear = serviceStudyYear;
     return Object.hashAll([
-      _$data.containsKey('serviceStudyYear') ? l$serviceStudyYear : const {}
+      _$data.containsKey('serviceStudyYear') ? l$serviceStudyYear : const {},
     ]);
   }
 }
@@ -1888,10 +2101,7 @@ abstract class CopyWith_Input_AuthUsersAdminOnSumOrderBy<TRes> {
 
 class _CopyWithImpl_Input_AuthUsersAdminOnSumOrderBy<TRes>
     implements CopyWith_Input_AuthUsersAdminOnSumOrderBy<TRes> {
-  _CopyWithImpl_Input_AuthUsersAdminOnSumOrderBy(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Input_AuthUsersAdminOnSumOrderBy(this._instance, this._then);
 
   final Input_AuthUsersAdminOnSumOrderBy _instance;
 
@@ -1899,12 +2109,13 @@ class _CopyWithImpl_Input_AuthUsersAdminOnSumOrderBy<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? serviceStudyYear = _undefined}) =>
-      _then(Input_AuthUsersAdminOnSumOrderBy._({
-        ..._instance._$data,
-        if (serviceStudyYear != _undefined)
-          'serviceStudyYear': (serviceStudyYear as Enum_OrderBy?),
-      }));
+  TRes call({Object? serviceStudyYear = _undefined}) => _then(
+    Input_AuthUsersAdminOnSumOrderBy._({
+      ..._instance._$data,
+      if (serviceStudyYear != _undefined)
+        'serviceStudyYear': (serviceStudyYear as Enum_OrderBy?),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Input_AuthUsersAdminOnSumOrderBy<TRes>
@@ -1917,16 +2128,17 @@ class _CopyWithStubImpl_Input_AuthUsersAdminOnSumOrderBy<TRes>
 }
 
 class Input_AuthUsersAdminOnVarPopOrderBy {
-  factory Input_AuthUsersAdminOnVarPopOrderBy(
-          {Enum_OrderBy? serviceStudyYear}) =>
-      Input_AuthUsersAdminOnVarPopOrderBy._({
-        if (serviceStudyYear != null) r'serviceStudyYear': serviceStudyYear,
-      });
+  factory Input_AuthUsersAdminOnVarPopOrderBy({
+    Enum_OrderBy? serviceStudyYear,
+  }) => Input_AuthUsersAdminOnVarPopOrderBy._({
+    if (serviceStudyYear != null) r'serviceStudyYear': serviceStudyYear,
+  });
 
   Input_AuthUsersAdminOnVarPopOrderBy._(this._$data);
 
   factory Input_AuthUsersAdminOnVarPopOrderBy.fromJson(
-      Map<String, dynamic> data) {
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('serviceStudyYear')) {
       final l$serviceStudyYear = data['serviceStudyYear'];
@@ -1954,11 +2166,9 @@ class Input_AuthUsersAdminOnVarPopOrderBy {
   }
 
   CopyWith_Input_AuthUsersAdminOnVarPopOrderBy<
-          Input_AuthUsersAdminOnVarPopOrderBy>
-      get copyWith => CopyWith_Input_AuthUsersAdminOnVarPopOrderBy(
-            this,
-            (i) => i,
-          );
+    Input_AuthUsersAdminOnVarPopOrderBy
+  >
+  get copyWith => CopyWith_Input_AuthUsersAdminOnVarPopOrderBy(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -1985,7 +2195,7 @@ class Input_AuthUsersAdminOnVarPopOrderBy {
   int get hashCode {
     final l$serviceStudyYear = serviceStudyYear;
     return Object.hashAll([
-      _$data.containsKey('serviceStudyYear') ? l$serviceStudyYear : const {}
+      _$data.containsKey('serviceStudyYear') ? l$serviceStudyYear : const {},
     ]);
   }
 }
@@ -2004,10 +2214,7 @@ abstract class CopyWith_Input_AuthUsersAdminOnVarPopOrderBy<TRes> {
 
 class _CopyWithImpl_Input_AuthUsersAdminOnVarPopOrderBy<TRes>
     implements CopyWith_Input_AuthUsersAdminOnVarPopOrderBy<TRes> {
-  _CopyWithImpl_Input_AuthUsersAdminOnVarPopOrderBy(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Input_AuthUsersAdminOnVarPopOrderBy(this._instance, this._then);
 
   final Input_AuthUsersAdminOnVarPopOrderBy _instance;
 
@@ -2015,12 +2222,13 @@ class _CopyWithImpl_Input_AuthUsersAdminOnVarPopOrderBy<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? serviceStudyYear = _undefined}) =>
-      _then(Input_AuthUsersAdminOnVarPopOrderBy._({
-        ..._instance._$data,
-        if (serviceStudyYear != _undefined)
-          'serviceStudyYear': (serviceStudyYear as Enum_OrderBy?),
-      }));
+  TRes call({Object? serviceStudyYear = _undefined}) => _then(
+    Input_AuthUsersAdminOnVarPopOrderBy._({
+      ..._instance._$data,
+      if (serviceStudyYear != _undefined)
+        'serviceStudyYear': (serviceStudyYear as Enum_OrderBy?),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Input_AuthUsersAdminOnVarPopOrderBy<TRes>
@@ -2033,16 +2241,17 @@ class _CopyWithStubImpl_Input_AuthUsersAdminOnVarPopOrderBy<TRes>
 }
 
 class Input_AuthUsersAdminOnVarSampOrderBy {
-  factory Input_AuthUsersAdminOnVarSampOrderBy(
-          {Enum_OrderBy? serviceStudyYear}) =>
-      Input_AuthUsersAdminOnVarSampOrderBy._({
-        if (serviceStudyYear != null) r'serviceStudyYear': serviceStudyYear,
-      });
+  factory Input_AuthUsersAdminOnVarSampOrderBy({
+    Enum_OrderBy? serviceStudyYear,
+  }) => Input_AuthUsersAdminOnVarSampOrderBy._({
+    if (serviceStudyYear != null) r'serviceStudyYear': serviceStudyYear,
+  });
 
   Input_AuthUsersAdminOnVarSampOrderBy._(this._$data);
 
   factory Input_AuthUsersAdminOnVarSampOrderBy.fromJson(
-      Map<String, dynamic> data) {
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('serviceStudyYear')) {
       final l$serviceStudyYear = data['serviceStudyYear'];
@@ -2070,11 +2279,9 @@ class Input_AuthUsersAdminOnVarSampOrderBy {
   }
 
   CopyWith_Input_AuthUsersAdminOnVarSampOrderBy<
-          Input_AuthUsersAdminOnVarSampOrderBy>
-      get copyWith => CopyWith_Input_AuthUsersAdminOnVarSampOrderBy(
-            this,
-            (i) => i,
-          );
+    Input_AuthUsersAdminOnVarSampOrderBy
+  >
+  get copyWith => CopyWith_Input_AuthUsersAdminOnVarSampOrderBy(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -2101,7 +2308,7 @@ class Input_AuthUsersAdminOnVarSampOrderBy {
   int get hashCode {
     final l$serviceStudyYear = serviceStudyYear;
     return Object.hashAll([
-      _$data.containsKey('serviceStudyYear') ? l$serviceStudyYear : const {}
+      _$data.containsKey('serviceStudyYear') ? l$serviceStudyYear : const {},
     ]);
   }
 }
@@ -2131,12 +2338,13 @@ class _CopyWithImpl_Input_AuthUsersAdminOnVarSampOrderBy<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? serviceStudyYear = _undefined}) =>
-      _then(Input_AuthUsersAdminOnVarSampOrderBy._({
-        ..._instance._$data,
-        if (serviceStudyYear != _undefined)
-          'serviceStudyYear': (serviceStudyYear as Enum_OrderBy?),
-      }));
+  TRes call({Object? serviceStudyYear = _undefined}) => _then(
+    Input_AuthUsersAdminOnVarSampOrderBy._({
+      ..._instance._$data,
+      if (serviceStudyYear != _undefined)
+        'serviceStudyYear': (serviceStudyYear as Enum_OrderBy?),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Input_AuthUsersAdminOnVarSampOrderBy<TRes>
@@ -2149,16 +2357,17 @@ class _CopyWithStubImpl_Input_AuthUsersAdminOnVarSampOrderBy<TRes>
 }
 
 class Input_AuthUsersAdminOnVarianceOrderBy {
-  factory Input_AuthUsersAdminOnVarianceOrderBy(
-          {Enum_OrderBy? serviceStudyYear}) =>
-      Input_AuthUsersAdminOnVarianceOrderBy._({
-        if (serviceStudyYear != null) r'serviceStudyYear': serviceStudyYear,
-      });
+  factory Input_AuthUsersAdminOnVarianceOrderBy({
+    Enum_OrderBy? serviceStudyYear,
+  }) => Input_AuthUsersAdminOnVarianceOrderBy._({
+    if (serviceStudyYear != null) r'serviceStudyYear': serviceStudyYear,
+  });
 
   Input_AuthUsersAdminOnVarianceOrderBy._(this._$data);
 
   factory Input_AuthUsersAdminOnVarianceOrderBy.fromJson(
-      Map<String, dynamic> data) {
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('serviceStudyYear')) {
       final l$serviceStudyYear = data['serviceStudyYear'];
@@ -2186,11 +2395,10 @@ class Input_AuthUsersAdminOnVarianceOrderBy {
   }
 
   CopyWith_Input_AuthUsersAdminOnVarianceOrderBy<
-          Input_AuthUsersAdminOnVarianceOrderBy>
-      get copyWith => CopyWith_Input_AuthUsersAdminOnVarianceOrderBy(
-            this,
-            (i) => i,
-          );
+    Input_AuthUsersAdminOnVarianceOrderBy
+  >
+  get copyWith =>
+      CopyWith_Input_AuthUsersAdminOnVarianceOrderBy(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -2217,7 +2425,7 @@ class Input_AuthUsersAdminOnVarianceOrderBy {
   int get hashCode {
     final l$serviceStudyYear = serviceStudyYear;
     return Object.hashAll([
-      _$data.containsKey('serviceStudyYear') ? l$serviceStudyYear : const {}
+      _$data.containsKey('serviceStudyYear') ? l$serviceStudyYear : const {},
     ]);
   }
 }
@@ -2247,12 +2455,13 @@ class _CopyWithImpl_Input_AuthUsersAdminOnVarianceOrderBy<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? serviceStudyYear = _undefined}) =>
-      _then(Input_AuthUsersAdminOnVarianceOrderBy._({
-        ..._instance._$data,
-        if (serviceStudyYear != _undefined)
-          'serviceStudyYear': (serviceStudyYear as Enum_OrderBy?),
-      }));
+  TRes call({Object? serviceStudyYear = _undefined}) => _then(
+    Input_AuthUsersAdminOnVarianceOrderBy._({
+      ..._instance._$data,
+      if (serviceStudyYear != _undefined)
+        'serviceStudyYear': (serviceStudyYear as Enum_OrderBy?),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Input_AuthUsersAdminOnVarianceOrderBy<TRes>
@@ -2278,21 +2487,20 @@ class Input_AuthUsersDataBoolExp {
     Input_PersonsBoolExp? person,
     Input_TimestamptzComparisonExp? photoUpdatedAt,
     Input_UuidComparisonExp? uid,
-  }) =>
-      Input_AuthUsersDataBoolExp._({
-        if ($_and != null) r'_and': $_and,
-        if ($_not != null) r'_not': $_not,
-        if ($_or != null) r'_or': $_or,
-        if (adminOn != null) r'adminOn': adminOn,
-        if (blurhash != null) r'blurhash': blurhash,
-        if (email != null) r'email': email,
-        if (lastEdit != null) r'lastEdit': lastEdit,
-        if (name != null) r'name': name,
-        if (permissions != null) r'permissions': permissions,
-        if (person != null) r'person': person,
-        if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
-        if (uid != null) r'uid': uid,
-      });
+  }) => Input_AuthUsersDataBoolExp._({
+    if ($_and != null) r'_and': $_and,
+    if ($_not != null) r'_not': $_not,
+    if ($_or != null) r'_or': $_or,
+    if (adminOn != null) r'adminOn': adminOn,
+    if (blurhash != null) r'blurhash': blurhash,
+    if (email != null) r'email': email,
+    if (lastEdit != null) r'lastEdit': lastEdit,
+    if (name != null) r'name': name,
+    if (permissions != null) r'permissions': permissions,
+    if (person != null) r'person': person,
+    if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
+    if (uid != null) r'uid': uid,
+  });
 
   Input_AuthUsersDataBoolExp._(this._$data);
 
@@ -2301,8 +2509,11 @@ class Input_AuthUsersDataBoolExp {
     if (data.containsKey('_and')) {
       final l$$_and = data['_and'];
       result$data['_and'] = (l$$_and as List<dynamic>?)
-          ?.map((e) =>
-              Input_AuthUsersDataBoolExp.fromJson((e as Map<String, dynamic>)))
+          ?.map(
+            (e) => Input_AuthUsersDataBoolExp.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
           .toList();
     }
     if (data.containsKey('_not')) {
@@ -2310,13 +2521,17 @@ class Input_AuthUsersDataBoolExp {
       result$data['_not'] = l$$_not == null
           ? null
           : Input_AuthUsersDataBoolExp.fromJson(
-              (l$$_not as Map<String, dynamic>));
+              (l$$_not as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('_or')) {
       final l$$_or = data['_or'];
       result$data['_or'] = (l$$_or as List<dynamic>?)
-          ?.map((e) =>
-              Input_AuthUsersDataBoolExp.fromJson((e as Map<String, dynamic>)))
+          ?.map(
+            (e) => Input_AuthUsersDataBoolExp.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
           .toList();
     }
     if (data.containsKey('adminOn')) {
@@ -2324,42 +2539,48 @@ class Input_AuthUsersDataBoolExp {
       result$data['adminOn'] = l$adminOn == null
           ? null
           : Input_AuthUsersAdminOnBoolExp.fromJson(
-              (l$adminOn as Map<String, dynamic>));
+              (l$adminOn as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('blurhash')) {
       final l$blurhash = data['blurhash'];
       result$data['blurhash'] = l$blurhash == null
           ? null
           : Input_StringComparisonExp.fromJson(
-              (l$blurhash as Map<String, dynamic>));
+              (l$blurhash as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('email')) {
       final l$email = data['email'];
       result$data['email'] = l$email == null
           ? null
           : Input_StringComparisonExp.fromJson(
-              (l$email as Map<String, dynamic>));
+              (l$email as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('lastEdit')) {
       final l$lastEdit = data['lastEdit'];
       result$data['lastEdit'] = l$lastEdit == null
           ? null
           : Input_HistoryLatestEditsBoolExp.fromJson(
-              (l$lastEdit as Map<String, dynamic>));
+              (l$lastEdit as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('name')) {
       final l$name = data['name'];
       result$data['name'] = l$name == null
           ? null
           : Input_StringComparisonExp.fromJson(
-              (l$name as Map<String, dynamic>));
+              (l$name as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('permissions')) {
       final l$permissions = data['permissions'];
       result$data['permissions'] = l$permissions == null
           ? null
           : Input_AuthUsersPermissionsBoolExp.fromJson(
-              (l$permissions as Map<String, dynamic>));
+              (l$permissions as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('person')) {
       final l$person = data['person'];
@@ -2372,7 +2593,8 @@ class Input_AuthUsersDataBoolExp {
       result$data['photoUpdatedAt'] = l$photoUpdatedAt == null
           ? null
           : Input_TimestamptzComparisonExp.fromJson(
-              (l$photoUpdatedAt as Map<String, dynamic>));
+              (l$photoUpdatedAt as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('uid')) {
       final l$uid = data['uid'];
@@ -2475,10 +2697,7 @@ class Input_AuthUsersDataBoolExp {
   }
 
   CopyWith_Input_AuthUsersDataBoolExp<Input_AuthUsersDataBoolExp>
-      get copyWith => CopyWith_Input_AuthUsersDataBoolExp(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Input_AuthUsersDataBoolExp(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -2631,14 +2850,14 @@ class Input_AuthUsersDataBoolExp {
     return Object.hashAll([
       _$data.containsKey('_and')
           ? l$$_and == null
-              ? null
-              : Object.hashAll(l$$_and.map((v) => v))
+                ? null
+                : Object.hashAll(l$$_and.map((v) => v))
           : const {},
       _$data.containsKey('_not') ? l$$_not : const {},
       _$data.containsKey('_or')
           ? l$$_or == null
-              ? null
-              : Object.hashAll(l$$_or.map((v) => v))
+                ? null
+                : Object.hashAll(l$$_or.map((v) => v))
           : const {},
       _$data.containsKey('adminOn') ? l$adminOn : const {},
       _$data.containsKey('blurhash') ? l$blurhash : const {},

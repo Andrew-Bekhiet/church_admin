@@ -3,20 +3,20 @@ import 'package:church_admin/src/core/graphql/scalars.dart';
 import 'package:gql/ast.dart';
 
 class Variables_Mutation_createPersonType {
-  factory Variables_Mutation_createPersonType(
-          {required Input_PersonTypesInsertInput object}) =>
-      Variables_Mutation_createPersonType._({
-        r'object': object,
-      });
+  factory Variables_Mutation_createPersonType({
+    required Input_PersonTypesInsertInput object,
+  }) => Variables_Mutation_createPersonType._({r'object': object});
 
   Variables_Mutation_createPersonType._(this._$data);
 
   factory Variables_Mutation_createPersonType.fromJson(
-      Map<String, dynamic> data) {
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
     final l$object = data['object'];
     result$data['object'] = Input_PersonTypesInsertInput.fromJson(
-        (l$object as Map<String, dynamic>));
+      (l$object as Map<String, dynamic>),
+    );
     return Variables_Mutation_createPersonType._(result$data);
   }
 
@@ -33,11 +33,9 @@ class Variables_Mutation_createPersonType {
   }
 
   CopyWith_Variables_Mutation_createPersonType<
-          Variables_Mutation_createPersonType>
-      get copyWith => CopyWith_Variables_Mutation_createPersonType(
-            this,
-            (i) => i,
-          );
+    Variables_Mutation_createPersonType
+  >
+  get copyWith => CopyWith_Variables_Mutation_createPersonType(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -77,10 +75,7 @@ abstract class CopyWith_Variables_Mutation_createPersonType<TRes> {
 
 class _CopyWithImpl_Variables_Mutation_createPersonType<TRes>
     implements CopyWith_Variables_Mutation_createPersonType<TRes> {
-  _CopyWithImpl_Variables_Mutation_createPersonType(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Variables_Mutation_createPersonType(this._instance, this._then);
 
   final Variables_Mutation_createPersonType _instance;
 
@@ -88,12 +83,13 @@ class _CopyWithImpl_Variables_Mutation_createPersonType<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? object = _undefined}) =>
-      _then(Variables_Mutation_createPersonType._({
-        ..._instance._$data,
-        if (object != _undefined && object != null)
-          'object': (object as Input_PersonTypesInsertInput),
-      }));
+  TRes call({Object? object = _undefined}) => _then(
+    Variables_Mutation_createPersonType._({
+      ..._instance._$data,
+      if (object != _undefined && object != null)
+        'object': (object as Input_PersonTypesInsertInput),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Variables_Mutation_createPersonType<TRes>
@@ -118,7 +114,8 @@ class Mutation_createPersonType {
       insertPersonTypesOne: l$insertPersonTypesOne == null
           ? null
           : Mutation_createPersonType_insertPersonTypesOne.fromJson(
-              (l$insertPersonTypesOne as Map<String, dynamic>)),
+              (l$insertPersonTypesOne as Map<String, dynamic>),
+            ),
       $__typename: (l$$__typename as String),
     );
   }
@@ -140,10 +137,7 @@ class Mutation_createPersonType {
   int get hashCode {
     final l$insertPersonTypesOne = insertPersonTypesOne;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$insertPersonTypesOne,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$insertPersonTypesOne, l$$__typename]);
   }
 
   @override
@@ -172,10 +166,7 @@ class Mutation_createPersonType {
 extension UtilityExtension_Mutation_createPersonType
     on Mutation_createPersonType {
   CopyWith_Mutation_createPersonType<Mutation_createPersonType> get copyWith =>
-      CopyWith_Mutation_createPersonType(
-        this,
-        (i) => i,
-      );
+      CopyWith_Mutation_createPersonType(this, (i) => i);
 }
 
 abstract class CopyWith_Mutation_createPersonType<TRes> {
@@ -192,15 +183,12 @@ abstract class CopyWith_Mutation_createPersonType<TRes> {
     String? $__typename,
   });
   CopyWith_Mutation_createPersonType_insertPersonTypesOne<TRes>
-      get insertPersonTypesOne;
+  get insertPersonTypesOne;
 }
 
 class _CopyWithImpl_Mutation_createPersonType<TRes>
     implements CopyWith_Mutation_createPersonType<TRes> {
-  _CopyWithImpl_Mutation_createPersonType(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Mutation_createPersonType(this._instance, this._then);
 
   final Mutation_createPersonType _instance;
 
@@ -211,25 +199,29 @@ class _CopyWithImpl_Mutation_createPersonType<TRes>
   TRes call({
     Object? insertPersonTypesOne = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Mutation_createPersonType(
-        insertPersonTypesOne: insertPersonTypesOne == _undefined
-            ? _instance.insertPersonTypesOne
-            : (insertPersonTypesOne
+  }) => _then(
+    Mutation_createPersonType(
+      insertPersonTypesOne: insertPersonTypesOne == _undefined
+          ? _instance.insertPersonTypesOne
+          : (insertPersonTypesOne
                 as Mutation_createPersonType_insertPersonTypesOne?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   CopyWith_Mutation_createPersonType_insertPersonTypesOne<TRes>
-      get insertPersonTypesOne {
+  get insertPersonTypesOne {
     final local$insertPersonTypesOne = _instance.insertPersonTypesOne;
     return local$insertPersonTypesOne == null
         ? CopyWith_Mutation_createPersonType_insertPersonTypesOne.stub(
-            _then(_instance))
+            _then(_instance),
+          )
         : CopyWith_Mutation_createPersonType_insertPersonTypesOne(
-            local$insertPersonTypesOne, (e) => call(insertPersonTypesOne: e));
+            local$insertPersonTypesOne,
+            (e) => call(insertPersonTypesOne: e),
+          );
   }
 }
 
@@ -242,90 +234,105 @@ class _CopyWithStubImpl_Mutation_createPersonType<TRes>
   call({
     Mutation_createPersonType_insertPersonTypesOne? insertPersonTypesOne,
     String? $__typename,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Mutation_createPersonType_insertPersonTypesOne<TRes>
-      get insertPersonTypesOne =>
-          CopyWith_Mutation_createPersonType_insertPersonTypesOne.stub(_res);
+  get insertPersonTypesOne =>
+      CopyWith_Mutation_createPersonType_insertPersonTypesOne.stub(_res);
 }
 
-const documentNodeMutationcreatePersonType = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.mutation,
-    name: NameNode(value: 'createPersonType'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'object')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'PersonTypesInsertInput'),
-          isNonNull: true,
+const documentNodeMutationcreatePersonType = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.mutation,
+      name: NameNode(value: 'createPersonType'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'object')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'PersonTypesInsertInput'),
+            isNonNull: true,
+          ),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      )
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'insertPersonTypesOne'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'object'),
-            value: VariableNode(name: NameNode(value: 'object')),
-          ),
-          ArgumentNode(
-            name: NameNode(value: 'onConflict'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'constraint'),
-                value: EnumValueNode(
-                    name: NameNode(value: 'person_types_name_key')),
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
+          FieldNode(
+            name: NameNode(value: 'insertPersonTypesOne'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'object'),
+                value: VariableNode(name: NameNode(value: 'object')),
               ),
-              ObjectFieldNode(
-                name: NameNode(value: 'updateColumns'),
-                value: EnumValueNode(name: NameNode(value: 'name')),
+              ArgumentNode(
+                name: NameNode(value: 'onConflict'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'constraint'),
+                      value: EnumValueNode(
+                        name: NameNode(value: 'person_types_name_key'),
+                      ),
+                    ),
+                    ObjectFieldNode(
+                      name: NameNode(value: 'updateColumns'),
+                      value: EnumValueNode(name: NameNode(value: 'name')),
+                    ),
+                  ],
+                ),
               ),
-            ]),
-          ),
-        ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-            name: NameNode(value: 'id'),
-            alias: null,
-            arguments: [],
+            ],
             directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'name'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'order'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'isHidden'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'isFamilyAdmin'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
+            selectionSet: SelectionSetNode(
+              selections: [
+                FieldNode(
+                  name: NameNode(value: 'id'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: 'name'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: 'order'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: 'isHidden'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: 'isFamilyAdmin'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
           ),
           FieldNode(
             name: NameNode(value: '__typename'),
@@ -334,18 +341,11 @@ const documentNodeMutationcreatePersonType = DocumentNode(definitions: [
             directives: [],
             selectionSet: null,
           ),
-        ]),
+        ],
       ),
-      FieldNode(
-        name: NameNode(value: '__typename'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-    ]),
-  ),
-]);
+    ),
+  ],
+);
 
 class Mutation_createPersonType_insertPersonTypesOne {
   Mutation_createPersonType_insertPersonTypesOne({
@@ -358,7 +358,8 @@ class Mutation_createPersonType_insertPersonTypesOne {
   });
 
   factory Mutation_createPersonType_insertPersonTypesOne.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$id = json['id'];
     final l$name = json['name'];
     final l$order = json['order'];
@@ -468,11 +469,10 @@ class Mutation_createPersonType_insertPersonTypesOne {
 extension UtilityExtension_Mutation_createPersonType_insertPersonTypesOne
     on Mutation_createPersonType_insertPersonTypesOne {
   CopyWith_Mutation_createPersonType_insertPersonTypesOne<
-          Mutation_createPersonType_insertPersonTypesOne>
-      get copyWith => CopyWith_Mutation_createPersonType_insertPersonTypesOne(
-            this,
-            (i) => i,
-          );
+    Mutation_createPersonType_insertPersonTypesOne
+  >
+  get copyWith =>
+      CopyWith_Mutation_createPersonType_insertPersonTypesOne(this, (i) => i);
 }
 
 abstract class CopyWith_Mutation_createPersonType_insertPersonTypesOne<TRes> {
@@ -482,8 +482,8 @@ abstract class CopyWith_Mutation_createPersonType_insertPersonTypesOne<TRes> {
   ) = _CopyWithImpl_Mutation_createPersonType_insertPersonTypesOne;
 
   factory CopyWith_Mutation_createPersonType_insertPersonTypesOne.stub(
-          TRes res) =
-      _CopyWithStubImpl_Mutation_createPersonType_insertPersonTypesOne;
+    TRes res,
+  ) = _CopyWithStubImpl_Mutation_createPersonType_insertPersonTypesOne;
 
   TRes call({
     UuidValue? id,
@@ -515,25 +515,26 @@ class _CopyWithImpl_Mutation_createPersonType_insertPersonTypesOne<TRes>
     Object? isHidden = _undefined,
     Object? isFamilyAdmin = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Mutation_createPersonType_insertPersonTypesOne(
-        id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
-        name: name == _undefined || name == null
-            ? _instance.name
-            : (name as String),
-        order: order == _undefined || order == null
-            ? _instance.order
-            : (order as int),
-        isHidden: isHidden == _undefined || isHidden == null
-            ? _instance.isHidden
-            : (isHidden as bool),
-        isFamilyAdmin: isFamilyAdmin == _undefined || isFamilyAdmin == null
-            ? _instance.isFamilyAdmin
-            : (isFamilyAdmin as bool),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Mutation_createPersonType_insertPersonTypesOne(
+      id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      order: order == _undefined || order == null
+          ? _instance.order
+          : (order as int),
+      isHidden: isHidden == _undefined || isHidden == null
+          ? _instance.isHidden
+          : (isHidden as bool),
+      isFamilyAdmin: isFamilyAdmin == _undefined || isFamilyAdmin == null
+          ? _instance.isFamilyAdmin
+          : (isFamilyAdmin as bool),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 }
 
 class _CopyWithStubImpl_Mutation_createPersonType_insertPersonTypesOne<TRes>
@@ -549,6 +550,5 @@ class _CopyWithStubImpl_Mutation_createPersonType_insertPersonTypesOne<TRes>
     bool? isHidden,
     bool? isFamilyAdmin,
     String? $__typename,
-  }) =>
-      _res;
+  }) => _res;
 }

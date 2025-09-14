@@ -16,19 +16,17 @@ abstract class CopyWith_Input_GroupsArrRelInsertInput<TRes> {
     Input_GroupsOnConflict? onConflict,
   });
   TRes data(
-      Iterable<Input_GroupsInsertInput> Function(
-              Iterable<
-                  CopyWith_Input_GroupsInsertInput<Input_GroupsInsertInput>>)
-          _fn);
+    Iterable<Input_GroupsInsertInput> Function(
+      Iterable<CopyWith_Input_GroupsInsertInput<Input_GroupsInsertInput>>,
+    )
+    _fn,
+  );
   CopyWith_Input_GroupsOnConflict<TRes> get onConflict;
 }
 
 class _CopyWithImpl_Input_GroupsArrRelInsertInput<TRes>
     implements CopyWith_Input_GroupsArrRelInsertInput<TRes> {
-  _CopyWithImpl_Input_GroupsArrRelInsertInput(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Input_GroupsArrRelInsertInput(this._instance, this._then);
 
   final Input_GroupsArrRelInsertInput _instance;
 
@@ -36,36 +34,36 @@ class _CopyWithImpl_Input_GroupsArrRelInsertInput<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? data = _undefined,
-    Object? onConflict = _undefined,
-  }) =>
-      _then(Input_GroupsArrRelInsertInput._({
-        ..._instance._$data,
-        if (data != _undefined && data != null)
-          'data': (data as List<Input_GroupsInsertInput>),
-        if (onConflict != _undefined)
-          'onConflict': (onConflict as Input_GroupsOnConflict?),
-      }));
+  TRes call({Object? data = _undefined, Object? onConflict = _undefined}) =>
+      _then(
+        Input_GroupsArrRelInsertInput._({
+          ..._instance._$data,
+          if (data != _undefined && data != null)
+            'data': (data as List<Input_GroupsInsertInput>),
+          if (onConflict != _undefined)
+            'onConflict': (onConflict as Input_GroupsOnConflict?),
+        }),
+      );
 
   TRes data(
-          Iterable<Input_GroupsInsertInput> Function(
-                  Iterable<
-                      CopyWith_Input_GroupsInsertInput<
-                          Input_GroupsInsertInput>>)
-              _fn) =>
-      call(
-          data: _fn(_instance.data.map((e) => CopyWith_Input_GroupsInsertInput(
-                e,
-                (i) => i,
-              ))).toList());
+    Iterable<Input_GroupsInsertInput> Function(
+      Iterable<CopyWith_Input_GroupsInsertInput<Input_GroupsInsertInput>>,
+    )
+    _fn,
+  ) => call(
+    data: _fn(
+      _instance.data.map((e) => CopyWith_Input_GroupsInsertInput(e, (i) => i)),
+    ).toList(),
+  );
 
   CopyWith_Input_GroupsOnConflict<TRes> get onConflict {
     final local$onConflict = _instance.onConflict;
     return local$onConflict == null
         ? CopyWith_Input_GroupsOnConflict.stub(_then(_instance))
         : CopyWith_Input_GroupsOnConflict(
-            local$onConflict, (e) => call(onConflict: e));
+            local$onConflict,
+            (e) => call(onConflict: e),
+          );
   }
 }
 
@@ -78,8 +76,7 @@ class _CopyWithStubImpl_Input_GroupsArrRelInsertInput<TRes>
   call({
     List<Input_GroupsInsertInput>? data,
     Input_GroupsOnConflict? onConflict,
-  }) =>
-      _res;
+  }) => _res;
 
   data(_fn) => _res;
 
@@ -89,9 +86,7 @@ class _CopyWithStubImpl_Input_GroupsArrRelInsertInput<TRes>
 
 class Input_GroupsAvgOrderBy {
   factory Input_GroupsAvgOrderBy({Enum_OrderBy? color}) =>
-      Input_GroupsAvgOrderBy._({
-        if (color != null) r'color': color,
-      });
+      Input_GroupsAvgOrderBy._({if (color != null) r'color': color});
 
   Input_GroupsAvgOrderBy._(this._$data);
 
@@ -99,8 +94,9 @@ class Input_GroupsAvgOrderBy {
     final result$data = <String, dynamic>{};
     if (data.containsKey('color')) {
       final l$color = data['color'];
-      result$data['color'] =
-          l$color == null ? null : fromJson_Enum_OrderBy((l$color as String));
+      result$data['color'] = l$color == null
+          ? null
+          : fromJson_Enum_OrderBy((l$color as String));
     }
     return Input_GroupsAvgOrderBy._(result$data);
   }
@@ -113,17 +109,15 @@ class Input_GroupsAvgOrderBy {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('color')) {
       final l$color = color;
-      result$data['color'] =
-          l$color == null ? null : toJson_Enum_OrderBy(l$color);
+      result$data['color'] = l$color == null
+          ? null
+          : toJson_Enum_OrderBy(l$color);
     }
     return result$data;
   }
 
   CopyWith_Input_GroupsAvgOrderBy<Input_GroupsAvgOrderBy> get copyWith =>
-      CopyWith_Input_GroupsAvgOrderBy(
-        this,
-        (i) => i,
-      );
+      CopyWith_Input_GroupsAvgOrderBy(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -165,10 +159,7 @@ abstract class CopyWith_Input_GroupsAvgOrderBy<TRes> {
 
 class _CopyWithImpl_Input_GroupsAvgOrderBy<TRes>
     implements CopyWith_Input_GroupsAvgOrderBy<TRes> {
-  _CopyWithImpl_Input_GroupsAvgOrderBy(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Input_GroupsAvgOrderBy(this._instance, this._then);
 
   final Input_GroupsAvgOrderBy _instance;
 
@@ -176,10 +167,12 @@ class _CopyWithImpl_Input_GroupsAvgOrderBy<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? color = _undefined}) => _then(Input_GroupsAvgOrderBy._({
-        ..._instance._$data,
-        if (color != _undefined) 'color': (color as Enum_OrderBy?),
-      }));
+  TRes call({Object? color = _undefined}) => _then(
+    Input_GroupsAvgOrderBy._({
+      ..._instance._$data,
+      if (color != _undefined) 'color': (color as Enum_OrderBy?),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Input_GroupsAvgOrderBy<TRes>
@@ -199,7 +192,7 @@ class Input_GroupsBoolExp {
     Input_AuthUsersAdminOnBoolExp? adminUsers,
     Input_HistoryAttendanceDaysConstraintsBoolExp? attendanceDaysConstraints,
     Input_HistoryAttendanceDaysConstraintsAggregateBoolExp?
-        attendanceDaysConstraintsAggregate,
+    attendanceDaysConstraintsAggregate,
     Input_HistoryAttendanceHistoryBoolExp? attendanceHistory,
     Input_HistoryAttendanceHistoryAggregateBoolExp? attendanceHistoryAggregate,
     Input_StringComparisonExp? blurhash,
@@ -214,34 +207,32 @@ class Input_GroupsBoolExp {
     Input_ServicesBoolExp? service,
     Input_UuidComparisonExp? serviceId,
     Input_DaterangeComparisonExp? validity,
-  }) =>
-      Input_GroupsBoolExp._({
-        if ($_and != null) r'_and': $_and,
-        if ($_not != null) r'_not': $_not,
-        if ($_or != null) r'_or': $_or,
-        if (adminUsers != null) r'adminUsers': adminUsers,
-        if (attendanceDaysConstraints != null)
-          r'attendanceDaysConstraints': attendanceDaysConstraints,
-        if (attendanceDaysConstraintsAggregate != null)
-          r'attendanceDaysConstraintsAggregate':
-              attendanceDaysConstraintsAggregate,
-        if (attendanceHistory != null) r'attendanceHistory': attendanceHistory,
-        if (attendanceHistoryAggregate != null)
-          r'attendanceHistoryAggregate': attendanceHistoryAggregate,
-        if (blurhash != null) r'blurhash': blurhash,
-        if (color != null) r'color': color,
-        if (editHistroy != null) r'editHistroy': editHistroy,
-        if (editHistroyAggregate != null)
-          r'editHistroyAggregate': editHistroyAggregate,
-        if (id != null) r'id': id,
-        if (lastEdit != null) r'lastEdit': lastEdit,
-        if (name != null) r'name': name,
-        if (persons != null) r'persons': persons,
-        if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
-        if (service != null) r'service': service,
-        if (serviceId != null) r'serviceId': serviceId,
-        if (validity != null) r'validity': validity,
-      });
+  }) => Input_GroupsBoolExp._({
+    if ($_and != null) r'_and': $_and,
+    if ($_not != null) r'_not': $_not,
+    if ($_or != null) r'_or': $_or,
+    if (adminUsers != null) r'adminUsers': adminUsers,
+    if (attendanceDaysConstraints != null)
+      r'attendanceDaysConstraints': attendanceDaysConstraints,
+    if (attendanceDaysConstraintsAggregate != null)
+      r'attendanceDaysConstraintsAggregate': attendanceDaysConstraintsAggregate,
+    if (attendanceHistory != null) r'attendanceHistory': attendanceHistory,
+    if (attendanceHistoryAggregate != null)
+      r'attendanceHistoryAggregate': attendanceHistoryAggregate,
+    if (blurhash != null) r'blurhash': blurhash,
+    if (color != null) r'color': color,
+    if (editHistroy != null) r'editHistroy': editHistroy,
+    if (editHistroyAggregate != null)
+      r'editHistroyAggregate': editHistroyAggregate,
+    if (id != null) r'id': id,
+    if (lastEdit != null) r'lastEdit': lastEdit,
+    if (name != null) r'name': name,
+    if (persons != null) r'persons': persons,
+    if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
+    if (service != null) r'service': service,
+    if (serviceId != null) r'serviceId': serviceId,
+    if (validity != null) r'validity': validity,
+  });
 
   Input_GroupsBoolExp._(this._$data);
 
@@ -251,7 +242,8 @@ class Input_GroupsBoolExp {
       final l$$_and = data['_and'];
       result$data['_and'] = (l$$_and as List<dynamic>?)
           ?.map(
-              (e) => Input_GroupsBoolExp.fromJson((e as Map<String, dynamic>)))
+            (e) => Input_GroupsBoolExp.fromJson((e as Map<String, dynamic>)),
+          )
           .toList();
     }
     if (data.containsKey('_not')) {
@@ -264,7 +256,8 @@ class Input_GroupsBoolExp {
       final l$$_or = data['_or'];
       result$data['_or'] = (l$$_or as List<dynamic>?)
           ?.map(
-              (e) => Input_GroupsBoolExp.fromJson((e as Map<String, dynamic>)))
+            (e) => Input_GroupsBoolExp.fromJson((e as Map<String, dynamic>)),
+          )
           .toList();
     }
     if (data.containsKey('adminUsers')) {
@@ -272,68 +265,76 @@ class Input_GroupsBoolExp {
       result$data['adminUsers'] = l$adminUsers == null
           ? null
           : Input_AuthUsersAdminOnBoolExp.fromJson(
-              (l$adminUsers as Map<String, dynamic>));
+              (l$adminUsers as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('attendanceDaysConstraints')) {
       final l$attendanceDaysConstraints = data['attendanceDaysConstraints'];
       result$data['attendanceDaysConstraints'] =
           l$attendanceDaysConstraints == null
-              ? null
-              : Input_HistoryAttendanceDaysConstraintsBoolExp.fromJson(
-                  (l$attendanceDaysConstraints as Map<String, dynamic>));
+          ? null
+          : Input_HistoryAttendanceDaysConstraintsBoolExp.fromJson(
+              (l$attendanceDaysConstraints as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('attendanceDaysConstraintsAggregate')) {
       final l$attendanceDaysConstraintsAggregate =
           data['attendanceDaysConstraintsAggregate'];
       result$data['attendanceDaysConstraintsAggregate'] =
           l$attendanceDaysConstraintsAggregate == null
-              ? null
-              : Input_HistoryAttendanceDaysConstraintsAggregateBoolExp.fromJson(
-                  (l$attendanceDaysConstraintsAggregate
-                      as Map<String, dynamic>));
+          ? null
+          : Input_HistoryAttendanceDaysConstraintsAggregateBoolExp.fromJson(
+              (l$attendanceDaysConstraintsAggregate as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('attendanceHistory')) {
       final l$attendanceHistory = data['attendanceHistory'];
       result$data['attendanceHistory'] = l$attendanceHistory == null
           ? null
           : Input_HistoryAttendanceHistoryBoolExp.fromJson(
-              (l$attendanceHistory as Map<String, dynamic>));
+              (l$attendanceHistory as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('attendanceHistoryAggregate')) {
       final l$attendanceHistoryAggregate = data['attendanceHistoryAggregate'];
       result$data['attendanceHistoryAggregate'] =
           l$attendanceHistoryAggregate == null
-              ? null
-              : Input_HistoryAttendanceHistoryAggregateBoolExp.fromJson(
-                  (l$attendanceHistoryAggregate as Map<String, dynamic>));
+          ? null
+          : Input_HistoryAttendanceHistoryAggregateBoolExp.fromJson(
+              (l$attendanceHistoryAggregate as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('blurhash')) {
       final l$blurhash = data['blurhash'];
       result$data['blurhash'] = l$blurhash == null
           ? null
           : Input_StringComparisonExp.fromJson(
-              (l$blurhash as Map<String, dynamic>));
+              (l$blurhash as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('color')) {
       final l$color = data['color'];
       result$data['color'] = l$color == null
           ? null
           : Input_BigintComparisonExp.fromJson(
-              (l$color as Map<String, dynamic>));
+              (l$color as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('editHistroy')) {
       final l$editHistroy = data['editHistroy'];
       result$data['editHistroy'] = l$editHistroy == null
           ? null
           : Input_HistoryEditHistoryBoolExp.fromJson(
-              (l$editHistroy as Map<String, dynamic>));
+              (l$editHistroy as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('editHistroyAggregate')) {
       final l$editHistroyAggregate = data['editHistroyAggregate'];
       result$data['editHistroyAggregate'] = l$editHistroyAggregate == null
           ? null
           : Input_HistoryEditHistoryAggregateBoolExp.fromJson(
-              (l$editHistroyAggregate as Map<String, dynamic>));
+              (l$editHistroyAggregate as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('id')) {
       final l$id = data['id'];
@@ -346,28 +347,32 @@ class Input_GroupsBoolExp {
       result$data['lastEdit'] = l$lastEdit == null
           ? null
           : Input_HistoryLatestEditsBoolExp.fromJson(
-              (l$lastEdit as Map<String, dynamic>));
+              (l$lastEdit as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('name')) {
       final l$name = data['name'];
       result$data['name'] = l$name == null
           ? null
           : Input_StringComparisonExp.fromJson(
-              (l$name as Map<String, dynamic>));
+              (l$name as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('persons')) {
       final l$persons = data['persons'];
       result$data['persons'] = l$persons == null
           ? null
           : Input_PersonsGroupsBoolExp.fromJson(
-              (l$persons as Map<String, dynamic>));
+              (l$persons as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('photoUpdatedAt')) {
       final l$photoUpdatedAt = data['photoUpdatedAt'];
       result$data['photoUpdatedAt'] = l$photoUpdatedAt == null
           ? null
           : Input_TimestamptzComparisonExp.fromJson(
-              (l$photoUpdatedAt as Map<String, dynamic>));
+              (l$photoUpdatedAt as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('service')) {
       final l$service = data['service'];
@@ -380,14 +385,16 @@ class Input_GroupsBoolExp {
       result$data['serviceId'] = l$serviceId == null
           ? null
           : Input_UuidComparisonExp.fromJson(
-              (l$serviceId as Map<String, dynamic>));
+              (l$serviceId as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('validity')) {
       final l$validity = data['validity'];
       result$data['validity'] = l$validity == null
           ? null
           : Input_DaterangeComparisonExp.fromJson(
-              (l$validity as Map<String, dynamic>));
+              (l$validity as Map<String, dynamic>),
+            );
     }
     return Input_GroupsBoolExp._(result$data);
   }
@@ -406,19 +413,21 @@ class Input_GroupsBoolExp {
       (_$data['adminUsers'] as Input_AuthUsersAdminOnBoolExp?);
 
   Input_HistoryAttendanceDaysConstraintsBoolExp?
-      get attendanceDaysConstraints => (_$data['attendanceDaysConstraints']
+  get attendanceDaysConstraints =>
+      (_$data['attendanceDaysConstraints']
           as Input_HistoryAttendanceDaysConstraintsBoolExp?);
 
   Input_HistoryAttendanceDaysConstraintsAggregateBoolExp?
-      get attendanceDaysConstraintsAggregate =>
-          (_$data['attendanceDaysConstraintsAggregate']
-              as Input_HistoryAttendanceDaysConstraintsAggregateBoolExp?);
+  get attendanceDaysConstraintsAggregate =>
+      (_$data['attendanceDaysConstraintsAggregate']
+          as Input_HistoryAttendanceDaysConstraintsAggregateBoolExp?);
 
   Input_HistoryAttendanceHistoryBoolExp? get attendanceHistory =>
       (_$data['attendanceHistory'] as Input_HistoryAttendanceHistoryBoolExp?);
 
   Input_HistoryAttendanceHistoryAggregateBoolExp?
-      get attendanceHistoryAggregate => (_$data['attendanceHistoryAggregate']
+  get attendanceHistoryAggregate =>
+      (_$data['attendanceHistoryAggregate']
           as Input_HistoryAttendanceHistoryAggregateBoolExp?);
 
   Input_StringComparisonExp? get blurhash =>
@@ -477,8 +486,8 @@ class Input_GroupsBoolExp {
     }
     if (_$data.containsKey('attendanceDaysConstraints')) {
       final l$attendanceDaysConstraints = attendanceDaysConstraints;
-      result$data['attendanceDaysConstraints'] =
-          l$attendanceDaysConstraints?.toJson();
+      result$data['attendanceDaysConstraints'] = l$attendanceDaysConstraints
+          ?.toJson();
     }
     if (_$data.containsKey('attendanceDaysConstraintsAggregate')) {
       final l$attendanceDaysConstraintsAggregate =
@@ -492,8 +501,8 @@ class Input_GroupsBoolExp {
     }
     if (_$data.containsKey('attendanceHistoryAggregate')) {
       final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
-      result$data['attendanceHistoryAggregate'] =
-          l$attendanceHistoryAggregate?.toJson();
+      result$data['attendanceHistoryAggregate'] = l$attendanceHistoryAggregate
+          ?.toJson();
     }
     if (_$data.containsKey('blurhash')) {
       final l$blurhash = blurhash;
@@ -547,10 +556,7 @@ class Input_GroupsBoolExp {
   }
 
   CopyWith_Input_GroupsBoolExp<Input_GroupsBoolExp> get copyWith =>
-      CopyWith_Input_GroupsBoolExp(
-        this,
-        (i) => i,
-      );
+      CopyWith_Input_GroupsBoolExp(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -786,14 +792,14 @@ class Input_GroupsBoolExp {
     return Object.hashAll([
       _$data.containsKey('_and')
           ? l$$_and == null
-              ? null
-              : Object.hashAll(l$$_and.map((v) => v))
+                ? null
+                : Object.hashAll(l$$_and.map((v) => v))
           : const {},
       _$data.containsKey('_not') ? l$$_not : const {},
       _$data.containsKey('_or')
           ? l$$_or == null
-              ? null
-              : Object.hashAll(l$$_or.map((v) => v))
+                ? null
+                : Object.hashAll(l$$_or.map((v) => v))
           : const {},
       _$data.containsKey('adminUsers') ? l$adminUsers : const {},
       _$data.containsKey('attendanceDaysConstraints')
@@ -840,7 +846,7 @@ abstract class CopyWith_Input_GroupsBoolExp<TRes> {
     Input_AuthUsersAdminOnBoolExp? adminUsers,
     Input_HistoryAttendanceDaysConstraintsBoolExp? attendanceDaysConstraints,
     Input_HistoryAttendanceDaysConstraintsAggregateBoolExp?
-        attendanceDaysConstraintsAggregate,
+    attendanceDaysConstraintsAggregate,
     Input_HistoryAttendanceHistoryBoolExp? attendanceHistory,
     Input_HistoryAttendanceHistoryAggregateBoolExp? attendanceHistoryAggregate,
     Input_StringComparisonExp? blurhash,
@@ -857,27 +863,31 @@ abstract class CopyWith_Input_GroupsBoolExp<TRes> {
     Input_DaterangeComparisonExp? validity,
   });
   TRes $_and(
-      Iterable<Input_GroupsBoolExp>? Function(
-              Iterable<CopyWith_Input_GroupsBoolExp<Input_GroupsBoolExp>>?)
-          _fn);
+    Iterable<Input_GroupsBoolExp>? Function(
+      Iterable<CopyWith_Input_GroupsBoolExp<Input_GroupsBoolExp>>?,
+    )
+    _fn,
+  );
   CopyWith_Input_GroupsBoolExp<TRes> get $_not;
   TRes $_or(
-      Iterable<Input_GroupsBoolExp>? Function(
-              Iterable<CopyWith_Input_GroupsBoolExp<Input_GroupsBoolExp>>?)
-          _fn);
+    Iterable<Input_GroupsBoolExp>? Function(
+      Iterable<CopyWith_Input_GroupsBoolExp<Input_GroupsBoolExp>>?,
+    )
+    _fn,
+  );
   CopyWith_Input_AuthUsersAdminOnBoolExp<TRes> get adminUsers;
   CopyWith_Input_HistoryAttendanceDaysConstraintsBoolExp<TRes>
-      get attendanceDaysConstraints;
+  get attendanceDaysConstraints;
   CopyWith_Input_HistoryAttendanceDaysConstraintsAggregateBoolExp<TRes>
-      get attendanceDaysConstraintsAggregate;
+  get attendanceDaysConstraintsAggregate;
   CopyWith_Input_HistoryAttendanceHistoryBoolExp<TRes> get attendanceHistory;
   CopyWith_Input_HistoryAttendanceHistoryAggregateBoolExp<TRes>
-      get attendanceHistoryAggregate;
+  get attendanceHistoryAggregate;
   CopyWith_Input_StringComparisonExp<TRes> get blurhash;
   CopyWith_Input_BigintComparisonExp<TRes> get color;
   CopyWith_Input_HistoryEditHistoryBoolExp<TRes> get editHistroy;
   CopyWith_Input_HistoryEditHistoryAggregateBoolExp<TRes>
-      get editHistroyAggregate;
+  get editHistroyAggregate;
   CopyWith_Input_UuidComparisonExp<TRes> get id;
   CopyWith_Input_HistoryLatestEditsBoolExp<TRes> get lastEdit;
   CopyWith_Input_StringComparisonExp<TRes> get name;
@@ -890,10 +900,7 @@ abstract class CopyWith_Input_GroupsBoolExp<TRes> {
 
 class _CopyWithImpl_Input_GroupsBoolExp<TRes>
     implements CopyWith_Input_GroupsBoolExp<TRes> {
-  _CopyWithImpl_Input_GroupsBoolExp(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Input_GroupsBoolExp(this._instance, this._then);
 
   final Input_GroupsBoolExp _instance;
 
@@ -922,60 +929,63 @@ class _CopyWithImpl_Input_GroupsBoolExp<TRes>
     Object? service = _undefined,
     Object? serviceId = _undefined,
     Object? validity = _undefined,
-  }) =>
-      _then(Input_GroupsBoolExp._({
-        ..._instance._$data,
-        if ($_and != _undefined) '_and': ($_and as List<Input_GroupsBoolExp>?),
-        if ($_not != _undefined) '_not': ($_not as Input_GroupsBoolExp?),
-        if ($_or != _undefined) '_or': ($_or as List<Input_GroupsBoolExp>?),
-        if (adminUsers != _undefined)
-          'adminUsers': (adminUsers as Input_AuthUsersAdminOnBoolExp?),
-        if (attendanceDaysConstraints != _undefined)
-          'attendanceDaysConstraints': (attendanceDaysConstraints
-              as Input_HistoryAttendanceDaysConstraintsBoolExp?),
-        if (attendanceDaysConstraintsAggregate != _undefined)
-          'attendanceDaysConstraintsAggregate':
-              (attendanceDaysConstraintsAggregate
-                  as Input_HistoryAttendanceDaysConstraintsAggregateBoolExp?),
-        if (attendanceHistory != _undefined)
-          'attendanceHistory':
-              (attendanceHistory as Input_HistoryAttendanceHistoryBoolExp?),
-        if (attendanceHistoryAggregate != _undefined)
-          'attendanceHistoryAggregate': (attendanceHistoryAggregate
-              as Input_HistoryAttendanceHistoryAggregateBoolExp?),
-        if (blurhash != _undefined)
-          'blurhash': (blurhash as Input_StringComparisonExp?),
-        if (color != _undefined) 'color': (color as Input_BigintComparisonExp?),
-        if (editHistroy != _undefined)
-          'editHistroy': (editHistroy as Input_HistoryEditHistoryBoolExp?),
-        if (editHistroyAggregate != _undefined)
-          'editHistroyAggregate': (editHistroyAggregate
-              as Input_HistoryEditHistoryAggregateBoolExp?),
-        if (id != _undefined) 'id': (id as Input_UuidComparisonExp?),
-        if (lastEdit != _undefined)
-          'lastEdit': (lastEdit as Input_HistoryLatestEditsBoolExp?),
-        if (name != _undefined) 'name': (name as Input_StringComparisonExp?),
-        if (persons != _undefined)
-          'persons': (persons as Input_PersonsGroupsBoolExp?),
-        if (photoUpdatedAt != _undefined)
-          'photoUpdatedAt': (photoUpdatedAt as Input_TimestamptzComparisonExp?),
-        if (service != _undefined)
-          'service': (service as Input_ServicesBoolExp?),
-        if (serviceId != _undefined)
-          'serviceId': (serviceId as Input_UuidComparisonExp?),
-        if (validity != _undefined)
-          'validity': (validity as Input_DaterangeComparisonExp?),
-      }));
+  }) => _then(
+    Input_GroupsBoolExp._({
+      ..._instance._$data,
+      if ($_and != _undefined) '_and': ($_and as List<Input_GroupsBoolExp>?),
+      if ($_not != _undefined) '_not': ($_not as Input_GroupsBoolExp?),
+      if ($_or != _undefined) '_or': ($_or as List<Input_GroupsBoolExp>?),
+      if (adminUsers != _undefined)
+        'adminUsers': (adminUsers as Input_AuthUsersAdminOnBoolExp?),
+      if (attendanceDaysConstraints != _undefined)
+        'attendanceDaysConstraints':
+            (attendanceDaysConstraints
+                as Input_HistoryAttendanceDaysConstraintsBoolExp?),
+      if (attendanceDaysConstraintsAggregate != _undefined)
+        'attendanceDaysConstraintsAggregate':
+            (attendanceDaysConstraintsAggregate
+                as Input_HistoryAttendanceDaysConstraintsAggregateBoolExp?),
+      if (attendanceHistory != _undefined)
+        'attendanceHistory':
+            (attendanceHistory as Input_HistoryAttendanceHistoryBoolExp?),
+      if (attendanceHistoryAggregate != _undefined)
+        'attendanceHistoryAggregate':
+            (attendanceHistoryAggregate
+                as Input_HistoryAttendanceHistoryAggregateBoolExp?),
+      if (blurhash != _undefined)
+        'blurhash': (blurhash as Input_StringComparisonExp?),
+      if (color != _undefined) 'color': (color as Input_BigintComparisonExp?),
+      if (editHistroy != _undefined)
+        'editHistroy': (editHistroy as Input_HistoryEditHistoryBoolExp?),
+      if (editHistroyAggregate != _undefined)
+        'editHistroyAggregate':
+            (editHistroyAggregate as Input_HistoryEditHistoryAggregateBoolExp?),
+      if (id != _undefined) 'id': (id as Input_UuidComparisonExp?),
+      if (lastEdit != _undefined)
+        'lastEdit': (lastEdit as Input_HistoryLatestEditsBoolExp?),
+      if (name != _undefined) 'name': (name as Input_StringComparisonExp?),
+      if (persons != _undefined)
+        'persons': (persons as Input_PersonsGroupsBoolExp?),
+      if (photoUpdatedAt != _undefined)
+        'photoUpdatedAt': (photoUpdatedAt as Input_TimestamptzComparisonExp?),
+      if (service != _undefined) 'service': (service as Input_ServicesBoolExp?),
+      if (serviceId != _undefined)
+        'serviceId': (serviceId as Input_UuidComparisonExp?),
+      if (validity != _undefined)
+        'validity': (validity as Input_DaterangeComparisonExp?),
+    }),
+  );
 
   TRes $_and(
-          Iterable<Input_GroupsBoolExp>? Function(
-                  Iterable<CopyWith_Input_GroupsBoolExp<Input_GroupsBoolExp>>?)
-              _fn) =>
-      call(
-          $_and: _fn(_instance.$_and?.map((e) => CopyWith_Input_GroupsBoolExp(
-                e,
-                (i) => i,
-              )))?.toList());
+    Iterable<Input_GroupsBoolExp>? Function(
+      Iterable<CopyWith_Input_GroupsBoolExp<Input_GroupsBoolExp>>?,
+    )
+    _fn,
+  ) => call(
+    $_and: _fn(
+      _instance.$_and?.map((e) => CopyWith_Input_GroupsBoolExp(e, (i) => i)),
+    )?.toList(),
+  );
 
   CopyWith_Input_GroupsBoolExp<TRes> get $_not {
     final local$$_not = _instance.$_not;
@@ -985,44 +995,51 @@ class _CopyWithImpl_Input_GroupsBoolExp<TRes>
   }
 
   TRes $_or(
-          Iterable<Input_GroupsBoolExp>? Function(
-                  Iterable<CopyWith_Input_GroupsBoolExp<Input_GroupsBoolExp>>?)
-              _fn) =>
-      call(
-          $_or: _fn(_instance.$_or?.map((e) => CopyWith_Input_GroupsBoolExp(
-                e,
-                (i) => i,
-              )))?.toList());
+    Iterable<Input_GroupsBoolExp>? Function(
+      Iterable<CopyWith_Input_GroupsBoolExp<Input_GroupsBoolExp>>?,
+    )
+    _fn,
+  ) => call(
+    $_or: _fn(
+      _instance.$_or?.map((e) => CopyWith_Input_GroupsBoolExp(e, (i) => i)),
+    )?.toList(),
+  );
 
   CopyWith_Input_AuthUsersAdminOnBoolExp<TRes> get adminUsers {
     final local$adminUsers = _instance.adminUsers;
     return local$adminUsers == null
         ? CopyWith_Input_AuthUsersAdminOnBoolExp.stub(_then(_instance))
         : CopyWith_Input_AuthUsersAdminOnBoolExp(
-            local$adminUsers, (e) => call(adminUsers: e));
+            local$adminUsers,
+            (e) => call(adminUsers: e),
+          );
   }
 
   CopyWith_Input_HistoryAttendanceDaysConstraintsBoolExp<TRes>
-      get attendanceDaysConstraints {
+  get attendanceDaysConstraints {
     final local$attendanceDaysConstraints = _instance.attendanceDaysConstraints;
     return local$attendanceDaysConstraints == null
         ? CopyWith_Input_HistoryAttendanceDaysConstraintsBoolExp.stub(
-            _then(_instance))
+            _then(_instance),
+          )
         : CopyWith_Input_HistoryAttendanceDaysConstraintsBoolExp(
             local$attendanceDaysConstraints,
-            (e) => call(attendanceDaysConstraints: e));
+            (e) => call(attendanceDaysConstraints: e),
+          );
   }
 
   CopyWith_Input_HistoryAttendanceDaysConstraintsAggregateBoolExp<TRes>
-      get attendanceDaysConstraintsAggregate {
+  get attendanceDaysConstraintsAggregate {
     final local$attendanceDaysConstraintsAggregate =
         _instance.attendanceDaysConstraintsAggregate;
     return local$attendanceDaysConstraintsAggregate == null
         ? CopyWith_Input_HistoryAttendanceDaysConstraintsAggregateBoolExp.stub(
-            _then(_instance))
+            _then(_instance),
+          )
         : CopyWith_Input_HistoryAttendanceDaysConstraintsAggregateBoolExp(
             local$attendanceDaysConstraintsAggregate,
-            (e) => call(attendanceDaysConstraintsAggregate: e));
+            (e) => call(attendanceDaysConstraintsAggregate: e),
+          );
   }
 
   CopyWith_Input_HistoryAttendanceHistoryBoolExp<TRes> get attendanceHistory {
@@ -1030,19 +1047,23 @@ class _CopyWithImpl_Input_GroupsBoolExp<TRes>
     return local$attendanceHistory == null
         ? CopyWith_Input_HistoryAttendanceHistoryBoolExp.stub(_then(_instance))
         : CopyWith_Input_HistoryAttendanceHistoryBoolExp(
-            local$attendanceHistory, (e) => call(attendanceHistory: e));
+            local$attendanceHistory,
+            (e) => call(attendanceHistory: e),
+          );
   }
 
   CopyWith_Input_HistoryAttendanceHistoryAggregateBoolExp<TRes>
-      get attendanceHistoryAggregate {
+  get attendanceHistoryAggregate {
     final local$attendanceHistoryAggregate =
         _instance.attendanceHistoryAggregate;
     return local$attendanceHistoryAggregate == null
         ? CopyWith_Input_HistoryAttendanceHistoryAggregateBoolExp.stub(
-            _then(_instance))
+            _then(_instance),
+          )
         : CopyWith_Input_HistoryAttendanceHistoryAggregateBoolExp(
             local$attendanceHistoryAggregate,
-            (e) => call(attendanceHistoryAggregate: e));
+            (e) => call(attendanceHistoryAggregate: e),
+          );
   }
 
   CopyWith_Input_StringComparisonExp<TRes> get blurhash {
@@ -1050,7 +1071,9 @@ class _CopyWithImpl_Input_GroupsBoolExp<TRes>
     return local$blurhash == null
         ? CopyWith_Input_StringComparisonExp.stub(_then(_instance))
         : CopyWith_Input_StringComparisonExp(
-            local$blurhash, (e) => call(blurhash: e));
+            local$blurhash,
+            (e) => call(blurhash: e),
+          );
   }
 
   CopyWith_Input_BigintComparisonExp<TRes> get color {
@@ -1058,7 +1081,9 @@ class _CopyWithImpl_Input_GroupsBoolExp<TRes>
     return local$color == null
         ? CopyWith_Input_BigintComparisonExp.stub(_then(_instance))
         : CopyWith_Input_BigintComparisonExp(
-            local$color, (e) => call(color: e));
+            local$color,
+            (e) => call(color: e),
+          );
   }
 
   CopyWith_Input_HistoryEditHistoryBoolExp<TRes> get editHistroy {
@@ -1066,17 +1091,22 @@ class _CopyWithImpl_Input_GroupsBoolExp<TRes>
     return local$editHistroy == null
         ? CopyWith_Input_HistoryEditHistoryBoolExp.stub(_then(_instance))
         : CopyWith_Input_HistoryEditHistoryBoolExp(
-            local$editHistroy, (e) => call(editHistroy: e));
+            local$editHistroy,
+            (e) => call(editHistroy: e),
+          );
   }
 
   CopyWith_Input_HistoryEditHistoryAggregateBoolExp<TRes>
-      get editHistroyAggregate {
+  get editHistroyAggregate {
     final local$editHistroyAggregate = _instance.editHistroyAggregate;
     return local$editHistroyAggregate == null
         ? CopyWith_Input_HistoryEditHistoryAggregateBoolExp.stub(
-            _then(_instance))
+            _then(_instance),
+          )
         : CopyWith_Input_HistoryEditHistoryAggregateBoolExp(
-            local$editHistroyAggregate, (e) => call(editHistroyAggregate: e));
+            local$editHistroyAggregate,
+            (e) => call(editHistroyAggregate: e),
+          );
   }
 
   CopyWith_Input_UuidComparisonExp<TRes> get id {
@@ -1091,7 +1121,9 @@ class _CopyWithImpl_Input_GroupsBoolExp<TRes>
     return local$lastEdit == null
         ? CopyWith_Input_HistoryLatestEditsBoolExp.stub(_then(_instance))
         : CopyWith_Input_HistoryLatestEditsBoolExp(
-            local$lastEdit, (e) => call(lastEdit: e));
+            local$lastEdit,
+            (e) => call(lastEdit: e),
+          );
   }
 
   CopyWith_Input_StringComparisonExp<TRes> get name {
@@ -1106,7 +1138,9 @@ class _CopyWithImpl_Input_GroupsBoolExp<TRes>
     return local$persons == null
         ? CopyWith_Input_PersonsGroupsBoolExp.stub(_then(_instance))
         : CopyWith_Input_PersonsGroupsBoolExp(
-            local$persons, (e) => call(persons: e));
+            local$persons,
+            (e) => call(persons: e),
+          );
   }
 
   CopyWith_Input_TimestamptzComparisonExp<TRes> get photoUpdatedAt {
@@ -1114,7 +1148,9 @@ class _CopyWithImpl_Input_GroupsBoolExp<TRes>
     return local$photoUpdatedAt == null
         ? CopyWith_Input_TimestamptzComparisonExp.stub(_then(_instance))
         : CopyWith_Input_TimestamptzComparisonExp(
-            local$photoUpdatedAt, (e) => call(photoUpdatedAt: e));
+            local$photoUpdatedAt,
+            (e) => call(photoUpdatedAt: e),
+          );
   }
 
   CopyWith_Input_ServicesBoolExp<TRes> get service {
@@ -1122,7 +1158,9 @@ class _CopyWithImpl_Input_GroupsBoolExp<TRes>
     return local$service == null
         ? CopyWith_Input_ServicesBoolExp.stub(_then(_instance))
         : CopyWith_Input_ServicesBoolExp(
-            local$service, (e) => call(service: e));
+            local$service,
+            (e) => call(service: e),
+          );
   }
 
   CopyWith_Input_UuidComparisonExp<TRes> get serviceId {
@@ -1130,7 +1168,9 @@ class _CopyWithImpl_Input_GroupsBoolExp<TRes>
     return local$serviceId == null
         ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
         : CopyWith_Input_UuidComparisonExp(
-            local$serviceId, (e) => call(serviceId: e));
+            local$serviceId,
+            (e) => call(serviceId: e),
+          );
   }
 
   CopyWith_Input_DaterangeComparisonExp<TRes> get validity {
@@ -1138,7 +1178,9 @@ class _CopyWithImpl_Input_GroupsBoolExp<TRes>
     return local$validity == null
         ? CopyWith_Input_DaterangeComparisonExp.stub(_then(_instance))
         : CopyWith_Input_DaterangeComparisonExp(
-            local$validity, (e) => call(validity: e));
+            local$validity,
+            (e) => call(validity: e),
+          );
   }
 }
 
@@ -1155,7 +1197,7 @@ class _CopyWithStubImpl_Input_GroupsBoolExp<TRes>
     Input_AuthUsersAdminOnBoolExp? adminUsers,
     Input_HistoryAttendanceDaysConstraintsBoolExp? attendanceDaysConstraints,
     Input_HistoryAttendanceDaysConstraintsAggregateBoolExp?
-        attendanceDaysConstraintsAggregate,
+    attendanceDaysConstraintsAggregate,
     Input_HistoryAttendanceHistoryBoolExp? attendanceHistory,
     Input_HistoryAttendanceHistoryAggregateBoolExp? attendanceHistoryAggregate,
     Input_StringComparisonExp? blurhash,
@@ -1170,8 +1212,7 @@ class _CopyWithStubImpl_Input_GroupsBoolExp<TRes>
     Input_ServicesBoolExp? service,
     Input_UuidComparisonExp? serviceId,
     Input_DaterangeComparisonExp? validity,
-  }) =>
-      _res;
+  }) => _res;
 
   $_and(_fn) => _res;
 
@@ -1184,20 +1225,21 @@ class _CopyWithStubImpl_Input_GroupsBoolExp<TRes>
       CopyWith_Input_AuthUsersAdminOnBoolExp.stub(_res);
 
   CopyWith_Input_HistoryAttendanceDaysConstraintsBoolExp<TRes>
-      get attendanceDaysConstraints =>
-          CopyWith_Input_HistoryAttendanceDaysConstraintsBoolExp.stub(_res);
+  get attendanceDaysConstraints =>
+      CopyWith_Input_HistoryAttendanceDaysConstraintsBoolExp.stub(_res);
 
   CopyWith_Input_HistoryAttendanceDaysConstraintsAggregateBoolExp<TRes>
-      get attendanceDaysConstraintsAggregate =>
-          CopyWith_Input_HistoryAttendanceDaysConstraintsAggregateBoolExp.stub(
-              _res);
+  get attendanceDaysConstraintsAggregate =>
+      CopyWith_Input_HistoryAttendanceDaysConstraintsAggregateBoolExp.stub(
+        _res,
+      );
 
   CopyWith_Input_HistoryAttendanceHistoryBoolExp<TRes> get attendanceHistory =>
       CopyWith_Input_HistoryAttendanceHistoryBoolExp.stub(_res);
 
   CopyWith_Input_HistoryAttendanceHistoryAggregateBoolExp<TRes>
-      get attendanceHistoryAggregate =>
-          CopyWith_Input_HistoryAttendanceHistoryAggregateBoolExp.stub(_res);
+  get attendanceHistoryAggregate =>
+      CopyWith_Input_HistoryAttendanceHistoryAggregateBoolExp.stub(_res);
 
   CopyWith_Input_StringComparisonExp<TRes> get blurhash =>
       CopyWith_Input_StringComparisonExp.stub(_res);
@@ -1209,8 +1251,8 @@ class _CopyWithStubImpl_Input_GroupsBoolExp<TRes>
       CopyWith_Input_HistoryEditHistoryBoolExp.stub(_res);
 
   CopyWith_Input_HistoryEditHistoryAggregateBoolExp<TRes>
-      get editHistroyAggregate =>
-          CopyWith_Input_HistoryEditHistoryAggregateBoolExp.stub(_res);
+  get editHistroyAggregate =>
+      CopyWith_Input_HistoryEditHistoryAggregateBoolExp.stub(_res);
 
   CopyWith_Input_UuidComparisonExp<TRes> get id =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
@@ -1238,9 +1280,8 @@ class _CopyWithStubImpl_Input_GroupsBoolExp<TRes>
 }
 
 class Input_GroupsIncInput {
-  factory Input_GroupsIncInput({int? color}) => Input_GroupsIncInput._({
-        if (color != null) r'color': color,
-      });
+  factory Input_GroupsIncInput({int? color}) =>
+      Input_GroupsIncInput._({if (color != null) r'color': color});
 
   Input_GroupsIncInput._(this._$data);
 
@@ -1267,10 +1308,7 @@ class Input_GroupsIncInput {
   }
 
   CopyWith_Input_GroupsIncInput<Input_GroupsIncInput> get copyWith =>
-      CopyWith_Input_GroupsIncInput(
-        this,
-        (i) => i,
-      );
+      CopyWith_Input_GroupsIncInput(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -1312,10 +1350,7 @@ abstract class CopyWith_Input_GroupsIncInput<TRes> {
 
 class _CopyWithImpl_Input_GroupsIncInput<TRes>
     implements CopyWith_Input_GroupsIncInput<TRes> {
-  _CopyWithImpl_Input_GroupsIncInput(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Input_GroupsIncInput(this._instance, this._then);
 
   final Input_GroupsIncInput _instance;
 
@@ -1323,10 +1358,12 @@ class _CopyWithImpl_Input_GroupsIncInput<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? color = _undefined}) => _then(Input_GroupsIncInput._({
-        ..._instance._$data,
-        if (color != _undefined) 'color': (color as int?),
-      }));
+  TRes call({Object? color = _undefined}) => _then(
+    Input_GroupsIncInput._({
+      ..._instance._$data,
+      if (color != _undefined) 'color': (color as int?),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Input_GroupsIncInput<TRes>
@@ -1342,7 +1379,7 @@ class Input_GroupsInsertInput {
   factory Input_GroupsInsertInput({
     Input_AuthUsersAdminOnArrRelInsertInput? adminUsers,
     Input_HistoryAttendanceDaysConstraintsArrRelInsertInput?
-        attendanceDaysConstraints,
+    attendanceDaysConstraints,
     Input_HistoryAttendanceHistoryArrRelInsertInput? attendanceHistory,
     int? color,
     String? name,
@@ -1350,19 +1387,18 @@ class Input_GroupsInsertInput {
     Input_ServicesObjRelInsertInput? service,
     UuidValue? serviceId,
     DateTimeRange? validity,
-  }) =>
-      Input_GroupsInsertInput._({
-        if (adminUsers != null) r'adminUsers': adminUsers,
-        if (attendanceDaysConstraints != null)
-          r'attendanceDaysConstraints': attendanceDaysConstraints,
-        if (attendanceHistory != null) r'attendanceHistory': attendanceHistory,
-        if (color != null) r'color': color,
-        if (name != null) r'name': name,
-        if (persons != null) r'persons': persons,
-        if (service != null) r'service': service,
-        if (serviceId != null) r'serviceId': serviceId,
-        if (validity != null) r'validity': validity,
-      });
+  }) => Input_GroupsInsertInput._({
+    if (adminUsers != null) r'adminUsers': adminUsers,
+    if (attendanceDaysConstraints != null)
+      r'attendanceDaysConstraints': attendanceDaysConstraints,
+    if (attendanceHistory != null) r'attendanceHistory': attendanceHistory,
+    if (color != null) r'color': color,
+    if (name != null) r'name': name,
+    if (persons != null) r'persons': persons,
+    if (service != null) r'service': service,
+    if (serviceId != null) r'serviceId': serviceId,
+    if (validity != null) r'validity': validity,
+  });
 
   Input_GroupsInsertInput._(this._$data);
 
@@ -1373,22 +1409,25 @@ class Input_GroupsInsertInput {
       result$data['adminUsers'] = l$adminUsers == null
           ? null
           : Input_AuthUsersAdminOnArrRelInsertInput.fromJson(
-              (l$adminUsers as Map<String, dynamic>));
+              (l$adminUsers as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('attendanceDaysConstraints')) {
       final l$attendanceDaysConstraints = data['attendanceDaysConstraints'];
-      result$data['attendanceDaysConstraints'] = l$attendanceDaysConstraints ==
-              null
+      result$data['attendanceDaysConstraints'] =
+          l$attendanceDaysConstraints == null
           ? null
           : Input_HistoryAttendanceDaysConstraintsArrRelInsertInput.fromJson(
-              (l$attendanceDaysConstraints as Map<String, dynamic>));
+              (l$attendanceDaysConstraints as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('attendanceHistory')) {
       final l$attendanceHistory = data['attendanceHistory'];
       result$data['attendanceHistory'] = l$attendanceHistory == null
           ? null
           : Input_HistoryAttendanceHistoryArrRelInsertInput.fromJson(
-              (l$attendanceHistory as Map<String, dynamic>));
+              (l$attendanceHistory as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('color')) {
       final l$color = data['color'];
@@ -1403,24 +1442,28 @@ class Input_GroupsInsertInput {
       result$data['persons'] = l$persons == null
           ? null
           : Input_PersonsGroupsArrRelInsertInput.fromJson(
-              (l$persons as Map<String, dynamic>));
+              (l$persons as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('service')) {
       final l$service = data['service'];
       result$data['service'] = l$service == null
           ? null
           : Input_ServicesObjRelInsertInput.fromJson(
-              (l$service as Map<String, dynamic>));
+              (l$service as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('serviceId')) {
       final l$serviceId = data['serviceId'];
-      result$data['serviceId'] =
-          l$serviceId == null ? null : stringToUuid(l$serviceId);
+      result$data['serviceId'] = l$serviceId == null
+          ? null
+          : stringToUuid(l$serviceId);
     }
     if (data.containsKey('validity')) {
       final l$validity = data['validity'];
-      result$data['validity'] =
-          l$validity == null ? null : dateRangeFromString(l$validity);
+      result$data['validity'] = l$validity == null
+          ? null
+          : dateRangeFromString(l$validity);
     }
     return Input_GroupsInsertInput._(result$data);
   }
@@ -1431,7 +1474,8 @@ class Input_GroupsInsertInput {
       (_$data['adminUsers'] as Input_AuthUsersAdminOnArrRelInsertInput?);
 
   Input_HistoryAttendanceDaysConstraintsArrRelInsertInput?
-      get attendanceDaysConstraints => (_$data['attendanceDaysConstraints']
+  get attendanceDaysConstraints =>
+      (_$data['attendanceDaysConstraints']
           as Input_HistoryAttendanceDaysConstraintsArrRelInsertInput?);
 
   Input_HistoryAttendanceHistoryArrRelInsertInput? get attendanceHistory =>
@@ -1460,8 +1504,8 @@ class Input_GroupsInsertInput {
     }
     if (_$data.containsKey('attendanceDaysConstraints')) {
       final l$attendanceDaysConstraints = attendanceDaysConstraints;
-      result$data['attendanceDaysConstraints'] =
-          l$attendanceDaysConstraints?.toJson();
+      result$data['attendanceDaysConstraints'] = l$attendanceDaysConstraints
+          ?.toJson();
     }
     if (_$data.containsKey('attendanceHistory')) {
       final l$attendanceHistory = attendanceHistory;
@@ -1485,22 +1529,21 @@ class Input_GroupsInsertInput {
     }
     if (_$data.containsKey('serviceId')) {
       final l$serviceId = serviceId;
-      result$data['serviceId'] =
-          l$serviceId == null ? null : uuidToString(l$serviceId);
+      result$data['serviceId'] = l$serviceId == null
+          ? null
+          : uuidToString(l$serviceId);
     }
     if (_$data.containsKey('validity')) {
       final l$validity = validity;
-      result$data['validity'] =
-          l$validity == null ? null : dateRangeToString(l$validity);
+      result$data['validity'] = l$validity == null
+          ? null
+          : dateRangeToString(l$validity);
     }
     return result$data;
   }
 
   CopyWith_Input_GroupsInsertInput<Input_GroupsInsertInput> get copyWith =>
-      CopyWith_Input_GroupsInsertInput(
-        this,
-        (i) => i,
-      );
+      CopyWith_Input_GroupsInsertInput(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -1629,7 +1672,7 @@ abstract class CopyWith_Input_GroupsInsertInput<TRes> {
   TRes call({
     Input_AuthUsersAdminOnArrRelInsertInput? adminUsers,
     Input_HistoryAttendanceDaysConstraintsArrRelInsertInput?
-        attendanceDaysConstraints,
+    attendanceDaysConstraints,
     Input_HistoryAttendanceHistoryArrRelInsertInput? attendanceHistory,
     int? color,
     String? name,
@@ -1640,19 +1683,16 @@ abstract class CopyWith_Input_GroupsInsertInput<TRes> {
   });
   CopyWith_Input_AuthUsersAdminOnArrRelInsertInput<TRes> get adminUsers;
   CopyWith_Input_HistoryAttendanceDaysConstraintsArrRelInsertInput<TRes>
-      get attendanceDaysConstraints;
+  get attendanceDaysConstraints;
   CopyWith_Input_HistoryAttendanceHistoryArrRelInsertInput<TRes>
-      get attendanceHistory;
+  get attendanceHistory;
   CopyWith_Input_PersonsGroupsArrRelInsertInput<TRes> get persons;
   CopyWith_Input_ServicesObjRelInsertInput<TRes> get service;
 }
 
 class _CopyWithImpl_Input_GroupsInsertInput<TRes>
     implements CopyWith_Input_GroupsInsertInput<TRes> {
-  _CopyWithImpl_Input_GroupsInsertInput(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Input_GroupsInsertInput(this._instance, this._then);
 
   final Input_GroupsInsertInput _instance;
 
@@ -1670,56 +1710,66 @@ class _CopyWithImpl_Input_GroupsInsertInput<TRes>
     Object? service = _undefined,
     Object? serviceId = _undefined,
     Object? validity = _undefined,
-  }) =>
-      _then(Input_GroupsInsertInput._({
-        ..._instance._$data,
-        if (adminUsers != _undefined)
-          'adminUsers':
-              (adminUsers as Input_AuthUsersAdminOnArrRelInsertInput?),
-        if (attendanceDaysConstraints != _undefined)
-          'attendanceDaysConstraints': (attendanceDaysConstraints
-              as Input_HistoryAttendanceDaysConstraintsArrRelInsertInput?),
-        if (attendanceHistory != _undefined)
-          'attendanceHistory': (attendanceHistory
-              as Input_HistoryAttendanceHistoryArrRelInsertInput?),
-        if (color != _undefined) 'color': (color as int?),
-        if (name != _undefined) 'name': (name as String?),
-        if (persons != _undefined)
-          'persons': (persons as Input_PersonsGroupsArrRelInsertInput?),
-        if (service != _undefined)
-          'service': (service as Input_ServicesObjRelInsertInput?),
-        if (serviceId != _undefined) 'serviceId': (serviceId as UuidValue?),
-        if (validity != _undefined) 'validity': (validity as DateTimeRange?),
-      }));
+  }) => _then(
+    Input_GroupsInsertInput._({
+      ..._instance._$data,
+      if (adminUsers != _undefined)
+        'adminUsers': (adminUsers as Input_AuthUsersAdminOnArrRelInsertInput?),
+      if (attendanceDaysConstraints != _undefined)
+        'attendanceDaysConstraints':
+            (attendanceDaysConstraints
+                as Input_HistoryAttendanceDaysConstraintsArrRelInsertInput?),
+      if (attendanceHistory != _undefined)
+        'attendanceHistory':
+            (attendanceHistory
+                as Input_HistoryAttendanceHistoryArrRelInsertInput?),
+      if (color != _undefined) 'color': (color as int?),
+      if (name != _undefined) 'name': (name as String?),
+      if (persons != _undefined)
+        'persons': (persons as Input_PersonsGroupsArrRelInsertInput?),
+      if (service != _undefined)
+        'service': (service as Input_ServicesObjRelInsertInput?),
+      if (serviceId != _undefined) 'serviceId': (serviceId as UuidValue?),
+      if (validity != _undefined) 'validity': (validity as DateTimeRange?),
+    }),
+  );
 
   CopyWith_Input_AuthUsersAdminOnArrRelInsertInput<TRes> get adminUsers {
     final local$adminUsers = _instance.adminUsers;
     return local$adminUsers == null
         ? CopyWith_Input_AuthUsersAdminOnArrRelInsertInput.stub(
-            _then(_instance))
+            _then(_instance),
+          )
         : CopyWith_Input_AuthUsersAdminOnArrRelInsertInput(
-            local$adminUsers, (e) => call(adminUsers: e));
+            local$adminUsers,
+            (e) => call(adminUsers: e),
+          );
   }
 
   CopyWith_Input_HistoryAttendanceDaysConstraintsArrRelInsertInput<TRes>
-      get attendanceDaysConstraints {
+  get attendanceDaysConstraints {
     final local$attendanceDaysConstraints = _instance.attendanceDaysConstraints;
     return local$attendanceDaysConstraints == null
         ? CopyWith_Input_HistoryAttendanceDaysConstraintsArrRelInsertInput.stub(
-            _then(_instance))
+            _then(_instance),
+          )
         : CopyWith_Input_HistoryAttendanceDaysConstraintsArrRelInsertInput(
             local$attendanceDaysConstraints,
-            (e) => call(attendanceDaysConstraints: e));
+            (e) => call(attendanceDaysConstraints: e),
+          );
   }
 
   CopyWith_Input_HistoryAttendanceHistoryArrRelInsertInput<TRes>
-      get attendanceHistory {
+  get attendanceHistory {
     final local$attendanceHistory = _instance.attendanceHistory;
     return local$attendanceHistory == null
         ? CopyWith_Input_HistoryAttendanceHistoryArrRelInsertInput.stub(
-            _then(_instance))
+            _then(_instance),
+          )
         : CopyWith_Input_HistoryAttendanceHistoryArrRelInsertInput(
-            local$attendanceHistory, (e) => call(attendanceHistory: e));
+            local$attendanceHistory,
+            (e) => call(attendanceHistory: e),
+          );
   }
 
   CopyWith_Input_PersonsGroupsArrRelInsertInput<TRes> get persons {
@@ -1727,7 +1777,9 @@ class _CopyWithImpl_Input_GroupsInsertInput<TRes>
     return local$persons == null
         ? CopyWith_Input_PersonsGroupsArrRelInsertInput.stub(_then(_instance))
         : CopyWith_Input_PersonsGroupsArrRelInsertInput(
-            local$persons, (e) => call(persons: e));
+            local$persons,
+            (e) => call(persons: e),
+          );
   }
 
   CopyWith_Input_ServicesObjRelInsertInput<TRes> get service {
@@ -1735,7 +1787,9 @@ class _CopyWithImpl_Input_GroupsInsertInput<TRes>
     return local$service == null
         ? CopyWith_Input_ServicesObjRelInsertInput.stub(_then(_instance))
         : CopyWith_Input_ServicesObjRelInsertInput(
-            local$service, (e) => call(service: e));
+            local$service,
+            (e) => call(service: e),
+          );
   }
 }
 
@@ -1748,7 +1802,7 @@ class _CopyWithStubImpl_Input_GroupsInsertInput<TRes>
   call({
     Input_AuthUsersAdminOnArrRelInsertInput? adminUsers,
     Input_HistoryAttendanceDaysConstraintsArrRelInsertInput?
-        attendanceDaysConstraints,
+    attendanceDaysConstraints,
     Input_HistoryAttendanceHistoryArrRelInsertInput? attendanceHistory,
     int? color,
     String? name,
@@ -1756,20 +1810,20 @@ class _CopyWithStubImpl_Input_GroupsInsertInput<TRes>
     Input_ServicesObjRelInsertInput? service,
     UuidValue? serviceId,
     DateTimeRange? validity,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Input_AuthUsersAdminOnArrRelInsertInput<TRes> get adminUsers =>
       CopyWith_Input_AuthUsersAdminOnArrRelInsertInput.stub(_res);
 
   CopyWith_Input_HistoryAttendanceDaysConstraintsArrRelInsertInput<TRes>
-      get attendanceDaysConstraints =>
-          CopyWith_Input_HistoryAttendanceDaysConstraintsArrRelInsertInput.stub(
-              _res);
+  get attendanceDaysConstraints =>
+      CopyWith_Input_HistoryAttendanceDaysConstraintsArrRelInsertInput.stub(
+        _res,
+      );
 
   CopyWith_Input_HistoryAttendanceHistoryArrRelInsertInput<TRes>
-      get attendanceHistory =>
-          CopyWith_Input_HistoryAttendanceHistoryArrRelInsertInput.stub(_res);
+  get attendanceHistory =>
+      CopyWith_Input_HistoryAttendanceHistoryArrRelInsertInput.stub(_res);
 
   CopyWith_Input_PersonsGroupsArrRelInsertInput<TRes> get persons =>
       CopyWith_Input_PersonsGroupsArrRelInsertInput.stub(_res);
@@ -1786,15 +1840,14 @@ class Input_GroupsMaxOrderBy {
     Enum_OrderBy? name,
     Enum_OrderBy? photoUpdatedAt,
     Enum_OrderBy? serviceId,
-  }) =>
-      Input_GroupsMaxOrderBy._({
-        if (blurhash != null) r'blurhash': blurhash,
-        if (color != null) r'color': color,
-        if (id != null) r'id': id,
-        if (name != null) r'name': name,
-        if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
-        if (serviceId != null) r'serviceId': serviceId,
-      });
+  }) => Input_GroupsMaxOrderBy._({
+    if (blurhash != null) r'blurhash': blurhash,
+    if (color != null) r'color': color,
+    if (id != null) r'id': id,
+    if (name != null) r'name': name,
+    if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
+    if (serviceId != null) r'serviceId': serviceId,
+  });
 
   Input_GroupsMaxOrderBy._(this._$data);
 
@@ -1808,18 +1861,21 @@ class Input_GroupsMaxOrderBy {
     }
     if (data.containsKey('color')) {
       final l$color = data['color'];
-      result$data['color'] =
-          l$color == null ? null : fromJson_Enum_OrderBy((l$color as String));
+      result$data['color'] = l$color == null
+          ? null
+          : fromJson_Enum_OrderBy((l$color as String));
     }
     if (data.containsKey('id')) {
       final l$id = data['id'];
-      result$data['id'] =
-          l$id == null ? null : fromJson_Enum_OrderBy((l$id as String));
+      result$data['id'] = l$id == null
+          ? null
+          : fromJson_Enum_OrderBy((l$id as String));
     }
     if (data.containsKey('name')) {
       final l$name = data['name'];
-      result$data['name'] =
-          l$name == null ? null : fromJson_Enum_OrderBy((l$name as String));
+      result$data['name'] = l$name == null
+          ? null
+          : fromJson_Enum_OrderBy((l$name as String));
     }
     if (data.containsKey('photoUpdatedAt')) {
       final l$photoUpdatedAt = data['photoUpdatedAt'];
@@ -1855,13 +1911,15 @@ class Input_GroupsMaxOrderBy {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('blurhash')) {
       final l$blurhash = blurhash;
-      result$data['blurhash'] =
-          l$blurhash == null ? null : toJson_Enum_OrderBy(l$blurhash);
+      result$data['blurhash'] = l$blurhash == null
+          ? null
+          : toJson_Enum_OrderBy(l$blurhash);
     }
     if (_$data.containsKey('color')) {
       final l$color = color;
-      result$data['color'] =
-          l$color == null ? null : toJson_Enum_OrderBy(l$color);
+      result$data['color'] = l$color == null
+          ? null
+          : toJson_Enum_OrderBy(l$color);
     }
     if (_$data.containsKey('id')) {
       final l$id = id;
@@ -1879,17 +1937,15 @@ class Input_GroupsMaxOrderBy {
     }
     if (_$data.containsKey('serviceId')) {
       final l$serviceId = serviceId;
-      result$data['serviceId'] =
-          l$serviceId == null ? null : toJson_Enum_OrderBy(l$serviceId);
+      result$data['serviceId'] = l$serviceId == null
+          ? null
+          : toJson_Enum_OrderBy(l$serviceId);
     }
     return result$data;
   }
 
   CopyWith_Input_GroupsMaxOrderBy<Input_GroupsMaxOrderBy> get copyWith =>
-      CopyWith_Input_GroupsMaxOrderBy(
-        this,
-        (i) => i,
-      );
+      CopyWith_Input_GroupsMaxOrderBy(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -1993,10 +2049,7 @@ abstract class CopyWith_Input_GroupsMaxOrderBy<TRes> {
 
 class _CopyWithImpl_Input_GroupsMaxOrderBy<TRes>
     implements CopyWith_Input_GroupsMaxOrderBy<TRes> {
-  _CopyWithImpl_Input_GroupsMaxOrderBy(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Input_GroupsMaxOrderBy(this._instance, this._then);
 
   final Input_GroupsMaxOrderBy _instance;
 
@@ -2011,17 +2064,18 @@ class _CopyWithImpl_Input_GroupsMaxOrderBy<TRes>
     Object? name = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? serviceId = _undefined,
-  }) =>
-      _then(Input_GroupsMaxOrderBy._({
-        ..._instance._$data,
-        if (blurhash != _undefined) 'blurhash': (blurhash as Enum_OrderBy?),
-        if (color != _undefined) 'color': (color as Enum_OrderBy?),
-        if (id != _undefined) 'id': (id as Enum_OrderBy?),
-        if (name != _undefined) 'name': (name as Enum_OrderBy?),
-        if (photoUpdatedAt != _undefined)
-          'photoUpdatedAt': (photoUpdatedAt as Enum_OrderBy?),
-        if (serviceId != _undefined) 'serviceId': (serviceId as Enum_OrderBy?),
-      }));
+  }) => _then(
+    Input_GroupsMaxOrderBy._({
+      ..._instance._$data,
+      if (blurhash != _undefined) 'blurhash': (blurhash as Enum_OrderBy?),
+      if (color != _undefined) 'color': (color as Enum_OrderBy?),
+      if (id != _undefined) 'id': (id as Enum_OrderBy?),
+      if (name != _undefined) 'name': (name as Enum_OrderBy?),
+      if (photoUpdatedAt != _undefined)
+        'photoUpdatedAt': (photoUpdatedAt as Enum_OrderBy?),
+      if (serviceId != _undefined) 'serviceId': (serviceId as Enum_OrderBy?),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Input_GroupsMaxOrderBy<TRes>
@@ -2037,8 +2091,7 @@ class _CopyWithStubImpl_Input_GroupsMaxOrderBy<TRes>
     Enum_OrderBy? name,
     Enum_OrderBy? photoUpdatedAt,
     Enum_OrderBy? serviceId,
-  }) =>
-      _res;
+  }) => _res;
 }
 
 class Input_GroupsMinOrderBy {
@@ -2049,15 +2102,14 @@ class Input_GroupsMinOrderBy {
     Enum_OrderBy? name,
     Enum_OrderBy? photoUpdatedAt,
     Enum_OrderBy? serviceId,
-  }) =>
-      Input_GroupsMinOrderBy._({
-        if (blurhash != null) r'blurhash': blurhash,
-        if (color != null) r'color': color,
-        if (id != null) r'id': id,
-        if (name != null) r'name': name,
-        if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
-        if (serviceId != null) r'serviceId': serviceId,
-      });
+  }) => Input_GroupsMinOrderBy._({
+    if (blurhash != null) r'blurhash': blurhash,
+    if (color != null) r'color': color,
+    if (id != null) r'id': id,
+    if (name != null) r'name': name,
+    if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
+    if (serviceId != null) r'serviceId': serviceId,
+  });
 
   Input_GroupsMinOrderBy._(this._$data);
 
@@ -2071,18 +2123,21 @@ class Input_GroupsMinOrderBy {
     }
     if (data.containsKey('color')) {
       final l$color = data['color'];
-      result$data['color'] =
-          l$color == null ? null : fromJson_Enum_OrderBy((l$color as String));
+      result$data['color'] = l$color == null
+          ? null
+          : fromJson_Enum_OrderBy((l$color as String));
     }
     if (data.containsKey('id')) {
       final l$id = data['id'];
-      result$data['id'] =
-          l$id == null ? null : fromJson_Enum_OrderBy((l$id as String));
+      result$data['id'] = l$id == null
+          ? null
+          : fromJson_Enum_OrderBy((l$id as String));
     }
     if (data.containsKey('name')) {
       final l$name = data['name'];
-      result$data['name'] =
-          l$name == null ? null : fromJson_Enum_OrderBy((l$name as String));
+      result$data['name'] = l$name == null
+          ? null
+          : fromJson_Enum_OrderBy((l$name as String));
     }
     if (data.containsKey('photoUpdatedAt')) {
       final l$photoUpdatedAt = data['photoUpdatedAt'];
@@ -2118,13 +2173,15 @@ class Input_GroupsMinOrderBy {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('blurhash')) {
       final l$blurhash = blurhash;
-      result$data['blurhash'] =
-          l$blurhash == null ? null : toJson_Enum_OrderBy(l$blurhash);
+      result$data['blurhash'] = l$blurhash == null
+          ? null
+          : toJson_Enum_OrderBy(l$blurhash);
     }
     if (_$data.containsKey('color')) {
       final l$color = color;
-      result$data['color'] =
-          l$color == null ? null : toJson_Enum_OrderBy(l$color);
+      result$data['color'] = l$color == null
+          ? null
+          : toJson_Enum_OrderBy(l$color);
     }
     if (_$data.containsKey('id')) {
       final l$id = id;
@@ -2142,17 +2199,15 @@ class Input_GroupsMinOrderBy {
     }
     if (_$data.containsKey('serviceId')) {
       final l$serviceId = serviceId;
-      result$data['serviceId'] =
-          l$serviceId == null ? null : toJson_Enum_OrderBy(l$serviceId);
+      result$data['serviceId'] = l$serviceId == null
+          ? null
+          : toJson_Enum_OrderBy(l$serviceId);
     }
     return result$data;
   }
 
   CopyWith_Input_GroupsMinOrderBy<Input_GroupsMinOrderBy> get copyWith =>
-      CopyWith_Input_GroupsMinOrderBy(
-        this,
-        (i) => i,
-      );
+      CopyWith_Input_GroupsMinOrderBy(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -2256,10 +2311,7 @@ abstract class CopyWith_Input_GroupsMinOrderBy<TRes> {
 
 class _CopyWithImpl_Input_GroupsMinOrderBy<TRes>
     implements CopyWith_Input_GroupsMinOrderBy<TRes> {
-  _CopyWithImpl_Input_GroupsMinOrderBy(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Input_GroupsMinOrderBy(this._instance, this._then);
 
   final Input_GroupsMinOrderBy _instance;
 
@@ -2274,17 +2326,18 @@ class _CopyWithImpl_Input_GroupsMinOrderBy<TRes>
     Object? name = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? serviceId = _undefined,
-  }) =>
-      _then(Input_GroupsMinOrderBy._({
-        ..._instance._$data,
-        if (blurhash != _undefined) 'blurhash': (blurhash as Enum_OrderBy?),
-        if (color != _undefined) 'color': (color as Enum_OrderBy?),
-        if (id != _undefined) 'id': (id as Enum_OrderBy?),
-        if (name != _undefined) 'name': (name as Enum_OrderBy?),
-        if (photoUpdatedAt != _undefined)
-          'photoUpdatedAt': (photoUpdatedAt as Enum_OrderBy?),
-        if (serviceId != _undefined) 'serviceId': (serviceId as Enum_OrderBy?),
-      }));
+  }) => _then(
+    Input_GroupsMinOrderBy._({
+      ..._instance._$data,
+      if (blurhash != _undefined) 'blurhash': (blurhash as Enum_OrderBy?),
+      if (color != _undefined) 'color': (color as Enum_OrderBy?),
+      if (id != _undefined) 'id': (id as Enum_OrderBy?),
+      if (name != _undefined) 'name': (name as Enum_OrderBy?),
+      if (photoUpdatedAt != _undefined)
+        'photoUpdatedAt': (photoUpdatedAt as Enum_OrderBy?),
+      if (serviceId != _undefined) 'serviceId': (serviceId as Enum_OrderBy?),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Input_GroupsMinOrderBy<TRes>
@@ -2300,33 +2353,33 @@ class _CopyWithStubImpl_Input_GroupsMinOrderBy<TRes>
     Enum_OrderBy? name,
     Enum_OrderBy? photoUpdatedAt,
     Enum_OrderBy? serviceId,
-  }) =>
-      _res;
+  }) => _res;
 }
 
 class Input_GroupsObjRelInsertInput {
   factory Input_GroupsObjRelInsertInput({
     required Input_GroupsInsertInput data,
     Input_GroupsOnConflict? onConflict,
-  }) =>
-      Input_GroupsObjRelInsertInput._({
-        r'data': data,
-        if (onConflict != null) r'onConflict': onConflict,
-      });
+  }) => Input_GroupsObjRelInsertInput._({
+    r'data': data,
+    if (onConflict != null) r'onConflict': onConflict,
+  });
 
   Input_GroupsObjRelInsertInput._(this._$data);
 
   factory Input_GroupsObjRelInsertInput.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     final l$data = data['data'];
-    result$data['data'] =
-        Input_GroupsInsertInput.fromJson((l$data as Map<String, dynamic>));
+    result$data['data'] = Input_GroupsInsertInput.fromJson(
+      (l$data as Map<String, dynamic>),
+    );
     if (data.containsKey('onConflict')) {
       final l$onConflict = data['onConflict'];
       result$data['onConflict'] = l$onConflict == null
           ? null
           : Input_GroupsOnConflict.fromJson(
-              (l$onConflict as Map<String, dynamic>));
+              (l$onConflict as Map<String, dynamic>),
+            );
     }
     return Input_GroupsObjRelInsertInput._(result$data);
   }
@@ -2351,10 +2404,7 @@ class Input_GroupsObjRelInsertInput {
   }
 
   CopyWith_Input_GroupsObjRelInsertInput<Input_GroupsObjRelInsertInput>
-      get copyWith => CopyWith_Input_GroupsObjRelInsertInput(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Input_GroupsObjRelInsertInput(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -2412,10 +2462,7 @@ abstract class CopyWith_Input_GroupsObjRelInsertInput<TRes> {
 
 class _CopyWithImpl_Input_GroupsObjRelInsertInput<TRes>
     implements CopyWith_Input_GroupsObjRelInsertInput<TRes> {
-  _CopyWithImpl_Input_GroupsObjRelInsertInput(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Input_GroupsObjRelInsertInput(this._instance, this._then);
 
   final Input_GroupsObjRelInsertInput _instance;
 
@@ -2423,17 +2470,16 @@ class _CopyWithImpl_Input_GroupsObjRelInsertInput<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? data = _undefined,
-    Object? onConflict = _undefined,
-  }) =>
-      _then(Input_GroupsObjRelInsertInput._({
-        ..._instance._$data,
-        if (data != _undefined && data != null)
-          'data': (data as Input_GroupsInsertInput),
-        if (onConflict != _undefined)
-          'onConflict': (onConflict as Input_GroupsOnConflict?),
-      }));
+  TRes call({Object? data = _undefined, Object? onConflict = _undefined}) =>
+      _then(
+        Input_GroupsObjRelInsertInput._({
+          ..._instance._$data,
+          if (data != _undefined && data != null)
+            'data': (data as Input_GroupsInsertInput),
+          if (onConflict != _undefined)
+            'onConflict': (onConflict as Input_GroupsOnConflict?),
+        }),
+      );
 
   CopyWith_Input_GroupsInsertInput<TRes> get data {
     final local$data = _instance.data;
@@ -2445,7 +2491,9 @@ class _CopyWithImpl_Input_GroupsObjRelInsertInput<TRes>
     return local$onConflict == null
         ? CopyWith_Input_GroupsOnConflict.stub(_then(_instance))
         : CopyWith_Input_GroupsOnConflict(
-            local$onConflict, (e) => call(onConflict: e));
+            local$onConflict,
+            (e) => call(onConflict: e),
+          );
   }
 }
 
@@ -2455,10 +2503,7 @@ class _CopyWithStubImpl_Input_GroupsObjRelInsertInput<TRes>
 
   TRes _res;
 
-  call({
-    Input_GroupsInsertInput? data,
-    Input_GroupsOnConflict? onConflict,
-  }) =>
+  call({Input_GroupsInsertInput? data, Input_GroupsOnConflict? onConflict}) =>
       _res;
 
   CopyWith_Input_GroupsInsertInput<TRes> get data =>
@@ -2473,20 +2518,20 @@ class Input_GroupsOnConflict {
     required Enum_GroupsConstraint constraint,
     List<Enum_GroupsUpdateColumn>? updateColumns,
     Input_GroupsBoolExp? where,
-  }) =>
-      Input_GroupsOnConflict._({
-        r'constraint': constraint,
-        if (updateColumns != null) r'updateColumns': updateColumns,
-        if (where != null) r'where': where,
-      });
+  }) => Input_GroupsOnConflict._({
+    r'constraint': constraint,
+    if (updateColumns != null) r'updateColumns': updateColumns,
+    if (where != null) r'where': where,
+  });
 
   Input_GroupsOnConflict._(this._$data);
 
   factory Input_GroupsOnConflict.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     final l$constraint = data['constraint'];
-    result$data['constraint'] =
-        fromJson_Enum_GroupsConstraint((l$constraint as String));
+    result$data['constraint'] = fromJson_Enum_GroupsConstraint(
+      (l$constraint as String),
+    );
     if (data.containsKey('updateColumns')) {
       final l$updateColumns = data['updateColumns'];
       result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
@@ -2531,10 +2576,7 @@ class Input_GroupsOnConflict {
   }
 
   CopyWith_Input_GroupsOnConflict<Input_GroupsOnConflict> get copyWith =>
-      CopyWith_Input_GroupsOnConflict(
-        this,
-        (i) => i,
-      );
+      CopyWith_Input_GroupsOnConflict(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -2589,8 +2631,8 @@ class Input_GroupsOnConflict {
       l$constraint,
       _$data.containsKey('updateColumns')
           ? l$updateColumns == null
-              ? null
-              : Object.hashAll(l$updateColumns.map((v) => v))
+                ? null
+                : Object.hashAll(l$updateColumns.map((v) => v))
           : const {},
       _$data.containsKey('where') ? l$where : const {},
     ]);

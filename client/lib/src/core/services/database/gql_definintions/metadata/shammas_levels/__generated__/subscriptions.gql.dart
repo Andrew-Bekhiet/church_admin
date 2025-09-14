@@ -7,30 +7,36 @@ class Variables_Subscription_watchAllShammasLevels {
     List<Input_ShammasLevelsBoolExp>? where,
     List<Input_ShammasLevelsOrderBy>? orderBy,
     int? limit,
-  }) =>
-      Variables_Subscription_watchAllShammasLevels._({
-        if (where != null) r'where': where,
-        if (orderBy != null) r'orderBy': orderBy,
-        if (limit != null) r'limit': limit,
-      });
+  }) => Variables_Subscription_watchAllShammasLevels._({
+    if (where != null) r'where': where,
+    if (orderBy != null) r'orderBy': orderBy,
+    if (limit != null) r'limit': limit,
+  });
 
   Variables_Subscription_watchAllShammasLevels._(this._$data);
 
   factory Variables_Subscription_watchAllShammasLevels.fromJson(
-      Map<String, dynamic> data) {
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = (l$where as List<dynamic>?)
-          ?.map((e) =>
-              Input_ShammasLevelsBoolExp.fromJson((e as Map<String, dynamic>)))
+          ?.map(
+            (e) => Input_ShammasLevelsBoolExp.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
           .toList();
     }
     if (data.containsKey('orderBy')) {
       final l$orderBy = data['orderBy'];
       result$data['orderBy'] = (l$orderBy as List<dynamic>?)
-          ?.map((e) =>
-              Input_ShammasLevelsOrderBy.fromJson((e as Map<String, dynamic>)))
+          ?.map(
+            (e) => Input_ShammasLevelsOrderBy.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
           .toList();
     }
     if (data.containsKey('limit')) {
@@ -68,11 +74,10 @@ class Variables_Subscription_watchAllShammasLevels {
   }
 
   CopyWith_Variables_Subscription_watchAllShammasLevels<
-          Variables_Subscription_watchAllShammasLevels>
-      get copyWith => CopyWith_Variables_Subscription_watchAllShammasLevels(
-            this,
-            (i) => i,
-          );
+    Variables_Subscription_watchAllShammasLevels
+  >
+  get copyWith =>
+      CopyWith_Variables_Subscription_watchAllShammasLevels(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -140,13 +145,13 @@ class Variables_Subscription_watchAllShammasLevels {
     return Object.hashAll([
       _$data.containsKey('where')
           ? l$where == null
-              ? null
-              : Object.hashAll(l$where.map((v) => v))
+                ? null
+                : Object.hashAll(l$where.map((v) => v))
           : const {},
       _$data.containsKey('orderBy')
           ? l$orderBy == null
-              ? null
-              : Object.hashAll(l$orderBy.map((v) => v))
+                ? null
+                : Object.hashAll(l$orderBy.map((v) => v))
           : const {},
       _$data.containsKey('limit') ? l$limit : const {},
     ]);
@@ -186,15 +191,16 @@ class _CopyWithImpl_Variables_Subscription_watchAllShammasLevels<TRes>
     Object? where = _undefined,
     Object? orderBy = _undefined,
     Object? limit = _undefined,
-  }) =>
-      _then(Variables_Subscription_watchAllShammasLevels._({
-        ..._instance._$data,
-        if (where != _undefined)
-          'where': (where as List<Input_ShammasLevelsBoolExp>?),
-        if (orderBy != _undefined)
-          'orderBy': (orderBy as List<Input_ShammasLevelsOrderBy>?),
-        if (limit != _undefined) 'limit': (limit as int?),
-      }));
+  }) => _then(
+    Variables_Subscription_watchAllShammasLevels._({
+      ..._instance._$data,
+      if (where != _undefined)
+        'where': (where as List<Input_ShammasLevelsBoolExp>?),
+      if (orderBy != _undefined)
+        'orderBy': (orderBy as List<Input_ShammasLevelsOrderBy>?),
+      if (limit != _undefined) 'limit': (limit as int?),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Variables_Subscription_watchAllShammasLevels<TRes>
@@ -207,22 +213,25 @@ class _CopyWithStubImpl_Variables_Subscription_watchAllShammasLevels<TRes>
     List<Input_ShammasLevelsBoolExp>? where,
     List<Input_ShammasLevelsOrderBy>? orderBy,
     int? limit,
-  }) =>
-      _res;
+  }) => _res;
 }
 
 class Subscription_watchAllShammasLevels {
   Subscription_watchAllShammasLevels({required this.shammasLevels});
 
   factory Subscription_watchAllShammasLevels.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$shammasLevels = json['shammasLevels'];
     return Subscription_watchAllShammasLevels(
-        shammasLevels: (l$shammasLevels as List<dynamic>)
-            .map((e) =>
-                Subscription_watchAllShammasLevels_shammasLevels.fromJson(
-                    (e as Map<String, dynamic>)))
-            .toList());
+      shammasLevels: (l$shammasLevels as List<dynamic>)
+          .map(
+            (e) => Subscription_watchAllShammasLevels_shammasLevels.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
+          .toList(),
+    );
   }
 
   final List<Subscription_watchAllShammasLevels_shammasLevels> shammasLevels;
@@ -230,8 +239,9 @@ class Subscription_watchAllShammasLevels {
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
     final l$shammasLevels = shammasLevels;
-    _resultData['shammasLevels'] =
-        l$shammasLevels.map((e) => e.toJson()).toList();
+    _resultData['shammasLevels'] = l$shammasLevels
+        .map((e) => e.toJson())
+        .toList();
     return _resultData;
   }
 
@@ -269,11 +279,9 @@ class Subscription_watchAllShammasLevels {
 extension UtilityExtension_Subscription_watchAllShammasLevels
     on Subscription_watchAllShammasLevels {
   CopyWith_Subscription_watchAllShammasLevels<
-          Subscription_watchAllShammasLevels>
-      get copyWith => CopyWith_Subscription_watchAllShammasLevels(
-            this,
-            (i) => i,
-          );
+    Subscription_watchAllShammasLevels
+  >
+  get copyWith => CopyWith_Subscription_watchAllShammasLevels(this, (i) => i);
 }
 
 abstract class CopyWith_Subscription_watchAllShammasLevels<TRes> {
@@ -285,22 +293,24 @@ abstract class CopyWith_Subscription_watchAllShammasLevels<TRes> {
   factory CopyWith_Subscription_watchAllShammasLevels.stub(TRes res) =
       _CopyWithStubImpl_Subscription_watchAllShammasLevels;
 
-  TRes call(
-      {List<Subscription_watchAllShammasLevels_shammasLevels>? shammasLevels});
+  TRes call({
+    List<Subscription_watchAllShammasLevels_shammasLevels>? shammasLevels,
+  });
   TRes shammasLevels(
-      Iterable<Subscription_watchAllShammasLevels_shammasLevels> Function(
-              Iterable<
-                  CopyWith_Subscription_watchAllShammasLevels_shammasLevels<
-                      Subscription_watchAllShammasLevels_shammasLevels>>)
-          _fn);
+    Iterable<Subscription_watchAllShammasLevels_shammasLevels> Function(
+      Iterable<
+        CopyWith_Subscription_watchAllShammasLevels_shammasLevels<
+          Subscription_watchAllShammasLevels_shammasLevels
+        >
+      >,
+    )
+    _fn,
+  );
 }
 
 class _CopyWithImpl_Subscription_watchAllShammasLevels<TRes>
     implements CopyWith_Subscription_watchAllShammasLevels<TRes> {
-  _CopyWithImpl_Subscription_watchAllShammasLevels(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Subscription_watchAllShammasLevels(this._instance, this._then);
 
   final Subscription_watchAllShammasLevels _instance;
 
@@ -308,25 +318,34 @@ class _CopyWithImpl_Subscription_watchAllShammasLevels<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? shammasLevels = _undefined}) =>
-      _then(Subscription_watchAllShammasLevels(
-          shammasLevels: shammasLevels == _undefined || shammasLevels == null
-              ? _instance.shammasLevels
-              : (shammasLevels
-                  as List<Subscription_watchAllShammasLevels_shammasLevels>)));
+  TRes call({Object? shammasLevels = _undefined}) => _then(
+    Subscription_watchAllShammasLevels(
+      shammasLevels: shammasLevels == _undefined || shammasLevels == null
+          ? _instance.shammasLevels
+          : (shammasLevels
+                as List<Subscription_watchAllShammasLevels_shammasLevels>),
+    ),
+  );
 
   TRes shammasLevels(
-          Iterable<Subscription_watchAllShammasLevels_shammasLevels> Function(
-                  Iterable<
-                      CopyWith_Subscription_watchAllShammasLevels_shammasLevels<
-                          Subscription_watchAllShammasLevels_shammasLevels>>)
-              _fn) =>
-      call(
-          shammasLevels: _fn(_instance.shammasLevels.map(
-              (e) => CopyWith_Subscription_watchAllShammasLevels_shammasLevels(
-                    e,
-                    (i) => i,
-                  ))).toList());
+    Iterable<Subscription_watchAllShammasLevels_shammasLevels> Function(
+      Iterable<
+        CopyWith_Subscription_watchAllShammasLevels_shammasLevels<
+          Subscription_watchAllShammasLevels_shammasLevels
+        >
+      >,
+    )
+    _fn,
+  ) => call(
+    shammasLevels: _fn(
+      _instance.shammasLevels.map(
+        (e) => CopyWith_Subscription_watchAllShammasLevels_shammasLevels(
+          e,
+          (i) => i,
+        ),
+      ),
+    ).toList(),
+  );
 }
 
 class _CopyWithStubImpl_Subscription_watchAllShammasLevels<TRes>
@@ -335,119 +354,125 @@ class _CopyWithStubImpl_Subscription_watchAllShammasLevels<TRes>
 
   TRes _res;
 
-  call(
-          {List<Subscription_watchAllShammasLevels_shammasLevels>?
-              shammasLevels}) =>
-      _res;
+  call({
+    List<Subscription_watchAllShammasLevels_shammasLevels>? shammasLevels,
+  }) => _res;
 
   shammasLevels(_fn) => _res;
 }
 
-const documentNodeSubscriptionwatchAllShammasLevels =
-    DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.subscription,
-    name: NameNode(value: 'watchAllShammasLevels'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'where')),
-        type: ListTypeNode(
-          type: NamedTypeNode(
-            name: NameNode(value: 'ShammasLevelsBoolExp'),
-            isNonNull: true,
+const documentNodeSubscriptionwatchAllShammasLevels = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.subscription,
+      name: NameNode(value: 'watchAllShammasLevels'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'where')),
+          type: ListTypeNode(
+            type: NamedTypeNode(
+              name: NameNode(value: 'ShammasLevelsBoolExp'),
+              isNonNull: true,
+            ),
+            isNonNull: false,
           ),
-          isNonNull: false,
+          defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'orderBy')),
-        type: ListTypeNode(
-          type: NamedTypeNode(
-            name: NameNode(value: 'ShammasLevelsOrderBy'),
-            isNonNull: true,
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'orderBy')),
+          type: ListTypeNode(
+            type: NamedTypeNode(
+              name: NameNode(value: 'ShammasLevelsOrderBy'),
+              isNonNull: true,
+            ),
+            isNonNull: false,
           ),
-          isNonNull: false,
+          defaultValue: DefaultValueNode(
+            value: ObjectValueNode(
+              fields: [
+                ObjectFieldNode(
+                  name: NameNode(value: 'order'),
+                  value: EnumValueNode(name: NameNode(value: 'ASC')),
+                ),
+              ],
+            ),
+          ),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(
-            value: ObjectValueNode(fields: [
-          ObjectFieldNode(
-            name: NameNode(value: 'order'),
-            value: EnumValueNode(name: NameNode(value: 'ASC')),
-          )
-        ])),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'limit')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'Int'),
-          isNonNull: false,
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'limit')),
+          type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: false),
+          defaultValue: DefaultValueNode(value: IntValueNode(value: '25')),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: IntValueNode(value: '25')),
-        directives: [],
-      ),
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'shammasLevels'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'where'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: '_and'),
-                value: VariableNode(name: NameNode(value: 'where')),
-              )
-            ]),
-          ),
-          ArgumentNode(
-            name: NameNode(value: 'orderBy'),
-            value: VariableNode(name: NameNode(value: 'orderBy')),
-          ),
-          ArgumentNode(
-            name: NameNode(value: 'limit'),
-            value: VariableNode(name: NameNode(value: 'limit')),
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
+          FieldNode(
+            name: NameNode(value: 'shammasLevels'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'where'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: '_and'),
+                      value: VariableNode(name: NameNode(value: 'where')),
+                    ),
+                  ],
+                ),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'orderBy'),
+                value: VariableNode(name: NameNode(value: 'orderBy')),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'limit'),
+                value: VariableNode(name: NameNode(value: 'limit')),
+              ),
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FieldNode(
+                  name: NameNode(value: 'id'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: 'order'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: 'name'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
           ),
         ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FieldNode(
-            name: NameNode(value: 'id'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'order'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: 'name'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-          FieldNode(
-            name: NameNode(value: '__typename'),
-            alias: null,
-            arguments: [],
-            directives: [],
-            selectionSet: null,
-          ),
-        ]),
-      )
-    ]),
-  ),
-]);
+      ),
+    ),
+  ],
+);
 
 class Subscription_watchAllShammasLevels_shammasLevels {
   Subscription_watchAllShammasLevels_shammasLevels({
@@ -458,7 +483,8 @@ class Subscription_watchAllShammasLevels_shammasLevels {
   });
 
   factory Subscription_watchAllShammasLevels_shammasLevels.fromJson(
-      Map<String, dynamic> json) {
+    Map<String, dynamic> json,
+  ) {
     final l$id = json['id'];
     final l$order = json['order'];
     final l$name = json['name'];
@@ -498,12 +524,7 @@ class Subscription_watchAllShammasLevels_shammasLevels {
     final l$order = order;
     final l$name = name;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$id,
-      l$order,
-      l$name,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$id, l$order, l$name, l$$__typename]);
   }
 
   @override
@@ -542,11 +563,10 @@ class Subscription_watchAllShammasLevels_shammasLevels {
 extension UtilityExtension_Subscription_watchAllShammasLevels_shammasLevels
     on Subscription_watchAllShammasLevels_shammasLevels {
   CopyWith_Subscription_watchAllShammasLevels_shammasLevels<
-          Subscription_watchAllShammasLevels_shammasLevels>
-      get copyWith => CopyWith_Subscription_watchAllShammasLevels_shammasLevels(
-            this,
-            (i) => i,
-          );
+    Subscription_watchAllShammasLevels_shammasLevels
+  >
+  get copyWith =>
+      CopyWith_Subscription_watchAllShammasLevels_shammasLevels(this, (i) => i);
 }
 
 abstract class CopyWith_Subscription_watchAllShammasLevels_shammasLevels<TRes> {
@@ -556,15 +576,10 @@ abstract class CopyWith_Subscription_watchAllShammasLevels_shammasLevels<TRes> {
   ) = _CopyWithImpl_Subscription_watchAllShammasLevels_shammasLevels;
 
   factory CopyWith_Subscription_watchAllShammasLevels_shammasLevels.stub(
-          TRes res) =
-      _CopyWithStubImpl_Subscription_watchAllShammasLevels_shammasLevels;
+    TRes res,
+  ) = _CopyWithStubImpl_Subscription_watchAllShammasLevels_shammasLevels;
 
-  TRes call({
-    UuidValue? id,
-    int? order,
-    String? name,
-    String? $__typename,
-  });
+  TRes call({UuidValue? id, int? order, String? name, String? $__typename});
 }
 
 class _CopyWithImpl_Subscription_watchAllShammasLevels_shammasLevels<TRes>
@@ -585,19 +600,20 @@ class _CopyWithImpl_Subscription_watchAllShammasLevels_shammasLevels<TRes>
     Object? order = _undefined,
     Object? name = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Subscription_watchAllShammasLevels_shammasLevels(
-        id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
-        order: order == _undefined || order == null
-            ? _instance.order
-            : (order as int),
-        name: name == _undefined || name == null
-            ? _instance.name
-            : (name as String),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Subscription_watchAllShammasLevels_shammasLevels(
+      id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
+      order: order == _undefined || order == null
+          ? _instance.order
+          : (order as int),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 }
 
 class _CopyWithStubImpl_Subscription_watchAllShammasLevels_shammasLevels<TRes>
@@ -606,11 +622,5 @@ class _CopyWithStubImpl_Subscription_watchAllShammasLevels_shammasLevels<TRes>
 
   TRes _res;
 
-  call({
-    UuidValue? id,
-    int? order,
-    String? name,
-    String? $__typename,
-  }) =>
-      _res;
+  call({UuidValue? id, int? order, String? name, String? $__typename}) => _res;
 }

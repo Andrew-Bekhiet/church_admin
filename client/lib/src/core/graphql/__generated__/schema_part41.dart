@@ -45,10 +45,7 @@ abstract class CopyWith_Input_PersonsMaxOrderBy<TRes> {
 
 class _CopyWithImpl_Input_PersonsMaxOrderBy<TRes>
     implements CopyWith_Input_PersonsMaxOrderBy<TRes> {
-  _CopyWithImpl_Input_PersonsMaxOrderBy(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Input_PersonsMaxOrderBy(this._instance, this._then);
 
   final Input_PersonsMaxOrderBy _instance;
 
@@ -85,50 +82,49 @@ class _CopyWithImpl_Input_PersonsMaxOrderBy<TRes>
     Object? studyYearId = _undefined,
     Object? uid = _undefined,
     Object? workStatus = _undefined,
-  }) =>
-      _then(Input_PersonsMaxOrderBy._({
-        ..._instance._$data,
-        if (addressText != _undefined)
-          'addressText': (addressText as Enum_OrderBy?),
-        if (birthdate != _undefined) 'birthdate': (birthdate as Enum_OrderBy?),
-        if (blurhash != _undefined) 'blurhash': (blurhash as Enum_OrderBy?),
-        if (churchId != _undefined) 'churchId': (churchId as Enum_OrderBy?),
-        if (collegeId != _undefined) 'collegeId': (collegeId as Enum_OrderBy?),
-        if (color != _undefined) 'color': (color as Enum_OrderBy?),
-        if (familyId != _undefined) 'familyId': (familyId as Enum_OrderBy?),
-        if (fatherId != _undefined) 'fatherId': (fatherId as Enum_OrderBy?),
-        if (id != _undefined) 'id': (id as Enum_OrderBy?),
-        if (jobDescription != _undefined)
-          'jobDescription': (jobDescription as Enum_OrderBy?),
-        if (jobId != _undefined) 'jobId': (jobId as Enum_OrderBy?),
-        if (mainPhone != _undefined) 'mainPhone': (mainPhone as Enum_OrderBy?),
-        if (martialStatus != _undefined)
-          'martialStatus': (martialStatus as Enum_OrderBy?),
-        if (name != _undefined) 'name': (name as Enum_OrderBy?),
-        if (nationalId != _undefined)
-          'nationalId': (nationalId as Enum_OrderBy?),
-        if (notes != _undefined) 'notes': (notes as Enum_OrderBy?),
-        if (personTypeId != _undefined)
-          'personTypeId': (personTypeId as Enum_OrderBy?),
-        if (photoUpdatedAt != _undefined)
-          'photoUpdatedAt': (photoUpdatedAt as Enum_OrderBy?),
-        if (qualificationId != _undefined)
-          'qualificationId': (qualificationId as Enum_OrderBy?),
-        if (schoolId != _undefined) 'schoolId': (schoolId as Enum_OrderBy?),
-        if (serviceType != _undefined)
-          'serviceType': (serviceType as Enum_OrderBy?),
-        if (servingChurchId != _undefined)
-          'servingChurchId': (servingChurchId as Enum_OrderBy?),
-        if (shammasLevelId != _undefined)
-          'shammasLevelId': (shammasLevelId as Enum_OrderBy?),
-        if (stateId != _undefined) 'stateId': (stateId as Enum_OrderBy?),
-        if (storeId != _undefined) 'storeId': (storeId as Enum_OrderBy?),
-        if (studyYearId != _undefined)
-          'studyYearId': (studyYearId as Enum_OrderBy?),
-        if (uid != _undefined) 'uid': (uid as Enum_OrderBy?),
-        if (workStatus != _undefined)
-          'workStatus': (workStatus as Enum_OrderBy?),
-      }));
+  }) => _then(
+    Input_PersonsMaxOrderBy._({
+      ..._instance._$data,
+      if (addressText != _undefined)
+        'addressText': (addressText as Enum_OrderBy?),
+      if (birthdate != _undefined) 'birthdate': (birthdate as Enum_OrderBy?),
+      if (blurhash != _undefined) 'blurhash': (blurhash as Enum_OrderBy?),
+      if (churchId != _undefined) 'churchId': (churchId as Enum_OrderBy?),
+      if (collegeId != _undefined) 'collegeId': (collegeId as Enum_OrderBy?),
+      if (color != _undefined) 'color': (color as Enum_OrderBy?),
+      if (familyId != _undefined) 'familyId': (familyId as Enum_OrderBy?),
+      if (fatherId != _undefined) 'fatherId': (fatherId as Enum_OrderBy?),
+      if (id != _undefined) 'id': (id as Enum_OrderBy?),
+      if (jobDescription != _undefined)
+        'jobDescription': (jobDescription as Enum_OrderBy?),
+      if (jobId != _undefined) 'jobId': (jobId as Enum_OrderBy?),
+      if (mainPhone != _undefined) 'mainPhone': (mainPhone as Enum_OrderBy?),
+      if (martialStatus != _undefined)
+        'martialStatus': (martialStatus as Enum_OrderBy?),
+      if (name != _undefined) 'name': (name as Enum_OrderBy?),
+      if (nationalId != _undefined) 'nationalId': (nationalId as Enum_OrderBy?),
+      if (notes != _undefined) 'notes': (notes as Enum_OrderBy?),
+      if (personTypeId != _undefined)
+        'personTypeId': (personTypeId as Enum_OrderBy?),
+      if (photoUpdatedAt != _undefined)
+        'photoUpdatedAt': (photoUpdatedAt as Enum_OrderBy?),
+      if (qualificationId != _undefined)
+        'qualificationId': (qualificationId as Enum_OrderBy?),
+      if (schoolId != _undefined) 'schoolId': (schoolId as Enum_OrderBy?),
+      if (serviceType != _undefined)
+        'serviceType': (serviceType as Enum_OrderBy?),
+      if (servingChurchId != _undefined)
+        'servingChurchId': (servingChurchId as Enum_OrderBy?),
+      if (shammasLevelId != _undefined)
+        'shammasLevelId': (shammasLevelId as Enum_OrderBy?),
+      if (stateId != _undefined) 'stateId': (stateId as Enum_OrderBy?),
+      if (storeId != _undefined) 'storeId': (storeId as Enum_OrderBy?),
+      if (studyYearId != _undefined)
+        'studyYearId': (studyYearId as Enum_OrderBy?),
+      if (uid != _undefined) 'uid': (uid as Enum_OrderBy?),
+      if (workStatus != _undefined) 'workStatus': (workStatus as Enum_OrderBy?),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Input_PersonsMaxOrderBy<TRes>
@@ -166,8 +162,7 @@ class _CopyWithStubImpl_Input_PersonsMaxOrderBy<TRes>
     Enum_OrderBy? studyYearId,
     Enum_OrderBy? uid,
     Enum_OrderBy? workStatus,
-  }) =>
-      _res;
+  }) => _res;
 }
 
 class Input_PersonsMinOrderBy {
@@ -200,37 +195,36 @@ class Input_PersonsMinOrderBy {
     Enum_OrderBy? studyYearId,
     Enum_OrderBy? uid,
     Enum_OrderBy? workStatus,
-  }) =>
-      Input_PersonsMinOrderBy._({
-        if (addressText != null) r'addressText': addressText,
-        if (birthdate != null) r'birthdate': birthdate,
-        if (blurhash != null) r'blurhash': blurhash,
-        if (churchId != null) r'churchId': churchId,
-        if (collegeId != null) r'collegeId': collegeId,
-        if (color != null) r'color': color,
-        if (familyId != null) r'familyId': familyId,
-        if (fatherId != null) r'fatherId': fatherId,
-        if (id != null) r'id': id,
-        if (jobDescription != null) r'jobDescription': jobDescription,
-        if (jobId != null) r'jobId': jobId,
-        if (mainPhone != null) r'mainPhone': mainPhone,
-        if (martialStatus != null) r'martialStatus': martialStatus,
-        if (name != null) r'name': name,
-        if (nationalId != null) r'nationalId': nationalId,
-        if (notes != null) r'notes': notes,
-        if (personTypeId != null) r'personTypeId': personTypeId,
-        if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
-        if (qualificationId != null) r'qualificationId': qualificationId,
-        if (schoolId != null) r'schoolId': schoolId,
-        if (serviceType != null) r'serviceType': serviceType,
-        if (servingChurchId != null) r'servingChurchId': servingChurchId,
-        if (shammasLevelId != null) r'shammasLevelId': shammasLevelId,
-        if (stateId != null) r'stateId': stateId,
-        if (storeId != null) r'storeId': storeId,
-        if (studyYearId != null) r'studyYearId': studyYearId,
-        if (uid != null) r'uid': uid,
-        if (workStatus != null) r'workStatus': workStatus,
-      });
+  }) => Input_PersonsMinOrderBy._({
+    if (addressText != null) r'addressText': addressText,
+    if (birthdate != null) r'birthdate': birthdate,
+    if (blurhash != null) r'blurhash': blurhash,
+    if (churchId != null) r'churchId': churchId,
+    if (collegeId != null) r'collegeId': collegeId,
+    if (color != null) r'color': color,
+    if (familyId != null) r'familyId': familyId,
+    if (fatherId != null) r'fatherId': fatherId,
+    if (id != null) r'id': id,
+    if (jobDescription != null) r'jobDescription': jobDescription,
+    if (jobId != null) r'jobId': jobId,
+    if (mainPhone != null) r'mainPhone': mainPhone,
+    if (martialStatus != null) r'martialStatus': martialStatus,
+    if (name != null) r'name': name,
+    if (nationalId != null) r'nationalId': nationalId,
+    if (notes != null) r'notes': notes,
+    if (personTypeId != null) r'personTypeId': personTypeId,
+    if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
+    if (qualificationId != null) r'qualificationId': qualificationId,
+    if (schoolId != null) r'schoolId': schoolId,
+    if (serviceType != null) r'serviceType': serviceType,
+    if (servingChurchId != null) r'servingChurchId': servingChurchId,
+    if (shammasLevelId != null) r'shammasLevelId': shammasLevelId,
+    if (stateId != null) r'stateId': stateId,
+    if (storeId != null) r'storeId': storeId,
+    if (studyYearId != null) r'studyYearId': studyYearId,
+    if (uid != null) r'uid': uid,
+    if (workStatus != null) r'workStatus': workStatus,
+  });
 
   Input_PersonsMinOrderBy._(this._$data);
 
@@ -268,8 +262,9 @@ class Input_PersonsMinOrderBy {
     }
     if (data.containsKey('color')) {
       final l$color = data['color'];
-      result$data['color'] =
-          l$color == null ? null : fromJson_Enum_OrderBy((l$color as String));
+      result$data['color'] = l$color == null
+          ? null
+          : fromJson_Enum_OrderBy((l$color as String));
     }
     if (data.containsKey('familyId')) {
       final l$familyId = data['familyId'];
@@ -285,8 +280,9 @@ class Input_PersonsMinOrderBy {
     }
     if (data.containsKey('id')) {
       final l$id = data['id'];
-      result$data['id'] =
-          l$id == null ? null : fromJson_Enum_OrderBy((l$id as String));
+      result$data['id'] = l$id == null
+          ? null
+          : fromJson_Enum_OrderBy((l$id as String));
     }
     if (data.containsKey('jobDescription')) {
       final l$jobDescription = data['jobDescription'];
@@ -296,8 +292,9 @@ class Input_PersonsMinOrderBy {
     }
     if (data.containsKey('jobId')) {
       final l$jobId = data['jobId'];
-      result$data['jobId'] =
-          l$jobId == null ? null : fromJson_Enum_OrderBy((l$jobId as String));
+      result$data['jobId'] = l$jobId == null
+          ? null
+          : fromJson_Enum_OrderBy((l$jobId as String));
     }
     if (data.containsKey('mainPhone')) {
       final l$mainPhone = data['mainPhone'];
@@ -313,8 +310,9 @@ class Input_PersonsMinOrderBy {
     }
     if (data.containsKey('name')) {
       final l$name = data['name'];
-      result$data['name'] =
-          l$name == null ? null : fromJson_Enum_OrderBy((l$name as String));
+      result$data['name'] = l$name == null
+          ? null
+          : fromJson_Enum_OrderBy((l$name as String));
     }
     if (data.containsKey('nationalId')) {
       final l$nationalId = data['nationalId'];
@@ -324,8 +322,9 @@ class Input_PersonsMinOrderBy {
     }
     if (data.containsKey('notes')) {
       final l$notes = data['notes'];
-      result$data['notes'] =
-          l$notes == null ? null : fromJson_Enum_OrderBy((l$notes as String));
+      result$data['notes'] = l$notes == null
+          ? null
+          : fromJson_Enum_OrderBy((l$notes as String));
     }
     if (data.containsKey('personTypeId')) {
       final l$personTypeId = data['personTypeId'];
@@ -389,8 +388,9 @@ class Input_PersonsMinOrderBy {
     }
     if (data.containsKey('uid')) {
       final l$uid = data['uid'];
-      result$data['uid'] =
-          l$uid == null ? null : fromJson_Enum_OrderBy((l$uid as String));
+      result$data['uid'] = l$uid == null
+          ? null
+          : fromJson_Enum_OrderBy((l$uid as String));
     }
     if (data.containsKey('workStatus')) {
       final l$workStatus = data['workStatus'];
@@ -468,43 +468,51 @@ class Input_PersonsMinOrderBy {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('addressText')) {
       final l$addressText = addressText;
-      result$data['addressText'] =
-          l$addressText == null ? null : toJson_Enum_OrderBy(l$addressText);
+      result$data['addressText'] = l$addressText == null
+          ? null
+          : toJson_Enum_OrderBy(l$addressText);
     }
     if (_$data.containsKey('birthdate')) {
       final l$birthdate = birthdate;
-      result$data['birthdate'] =
-          l$birthdate == null ? null : toJson_Enum_OrderBy(l$birthdate);
+      result$data['birthdate'] = l$birthdate == null
+          ? null
+          : toJson_Enum_OrderBy(l$birthdate);
     }
     if (_$data.containsKey('blurhash')) {
       final l$blurhash = blurhash;
-      result$data['blurhash'] =
-          l$blurhash == null ? null : toJson_Enum_OrderBy(l$blurhash);
+      result$data['blurhash'] = l$blurhash == null
+          ? null
+          : toJson_Enum_OrderBy(l$blurhash);
     }
     if (_$data.containsKey('churchId')) {
       final l$churchId = churchId;
-      result$data['churchId'] =
-          l$churchId == null ? null : toJson_Enum_OrderBy(l$churchId);
+      result$data['churchId'] = l$churchId == null
+          ? null
+          : toJson_Enum_OrderBy(l$churchId);
     }
     if (_$data.containsKey('collegeId')) {
       final l$collegeId = collegeId;
-      result$data['collegeId'] =
-          l$collegeId == null ? null : toJson_Enum_OrderBy(l$collegeId);
+      result$data['collegeId'] = l$collegeId == null
+          ? null
+          : toJson_Enum_OrderBy(l$collegeId);
     }
     if (_$data.containsKey('color')) {
       final l$color = color;
-      result$data['color'] =
-          l$color == null ? null : toJson_Enum_OrderBy(l$color);
+      result$data['color'] = l$color == null
+          ? null
+          : toJson_Enum_OrderBy(l$color);
     }
     if (_$data.containsKey('familyId')) {
       final l$familyId = familyId;
-      result$data['familyId'] =
-          l$familyId == null ? null : toJson_Enum_OrderBy(l$familyId);
+      result$data['familyId'] = l$familyId == null
+          ? null
+          : toJson_Enum_OrderBy(l$familyId);
     }
     if (_$data.containsKey('fatherId')) {
       final l$fatherId = fatherId;
-      result$data['fatherId'] =
-          l$fatherId == null ? null : toJson_Enum_OrderBy(l$fatherId);
+      result$data['fatherId'] = l$fatherId == null
+          ? null
+          : toJson_Enum_OrderBy(l$fatherId);
     }
     if (_$data.containsKey('id')) {
       final l$id = id;
@@ -518,18 +526,21 @@ class Input_PersonsMinOrderBy {
     }
     if (_$data.containsKey('jobId')) {
       final l$jobId = jobId;
-      result$data['jobId'] =
-          l$jobId == null ? null : toJson_Enum_OrderBy(l$jobId);
+      result$data['jobId'] = l$jobId == null
+          ? null
+          : toJson_Enum_OrderBy(l$jobId);
     }
     if (_$data.containsKey('mainPhone')) {
       final l$mainPhone = mainPhone;
-      result$data['mainPhone'] =
-          l$mainPhone == null ? null : toJson_Enum_OrderBy(l$mainPhone);
+      result$data['mainPhone'] = l$mainPhone == null
+          ? null
+          : toJson_Enum_OrderBy(l$mainPhone);
     }
     if (_$data.containsKey('martialStatus')) {
       final l$martialStatus = martialStatus;
-      result$data['martialStatus'] =
-          l$martialStatus == null ? null : toJson_Enum_OrderBy(l$martialStatus);
+      result$data['martialStatus'] = l$martialStatus == null
+          ? null
+          : toJson_Enum_OrderBy(l$martialStatus);
     }
     if (_$data.containsKey('name')) {
       final l$name = name;
@@ -537,18 +548,21 @@ class Input_PersonsMinOrderBy {
     }
     if (_$data.containsKey('nationalId')) {
       final l$nationalId = nationalId;
-      result$data['nationalId'] =
-          l$nationalId == null ? null : toJson_Enum_OrderBy(l$nationalId);
+      result$data['nationalId'] = l$nationalId == null
+          ? null
+          : toJson_Enum_OrderBy(l$nationalId);
     }
     if (_$data.containsKey('notes')) {
       final l$notes = notes;
-      result$data['notes'] =
-          l$notes == null ? null : toJson_Enum_OrderBy(l$notes);
+      result$data['notes'] = l$notes == null
+          ? null
+          : toJson_Enum_OrderBy(l$notes);
     }
     if (_$data.containsKey('personTypeId')) {
       final l$personTypeId = personTypeId;
-      result$data['personTypeId'] =
-          l$personTypeId == null ? null : toJson_Enum_OrderBy(l$personTypeId);
+      result$data['personTypeId'] = l$personTypeId == null
+          ? null
+          : toJson_Enum_OrderBy(l$personTypeId);
     }
     if (_$data.containsKey('photoUpdatedAt')) {
       final l$photoUpdatedAt = photoUpdatedAt;
@@ -564,13 +578,15 @@ class Input_PersonsMinOrderBy {
     }
     if (_$data.containsKey('schoolId')) {
       final l$schoolId = schoolId;
-      result$data['schoolId'] =
-          l$schoolId == null ? null : toJson_Enum_OrderBy(l$schoolId);
+      result$data['schoolId'] = l$schoolId == null
+          ? null
+          : toJson_Enum_OrderBy(l$schoolId);
     }
     if (_$data.containsKey('serviceType')) {
       final l$serviceType = serviceType;
-      result$data['serviceType'] =
-          l$serviceType == null ? null : toJson_Enum_OrderBy(l$serviceType);
+      result$data['serviceType'] = l$serviceType == null
+          ? null
+          : toJson_Enum_OrderBy(l$serviceType);
     }
     if (_$data.containsKey('servingChurchId')) {
       final l$servingChurchId = servingChurchId;
@@ -586,18 +602,21 @@ class Input_PersonsMinOrderBy {
     }
     if (_$data.containsKey('stateId')) {
       final l$stateId = stateId;
-      result$data['stateId'] =
-          l$stateId == null ? null : toJson_Enum_OrderBy(l$stateId);
+      result$data['stateId'] = l$stateId == null
+          ? null
+          : toJson_Enum_OrderBy(l$stateId);
     }
     if (_$data.containsKey('storeId')) {
       final l$storeId = storeId;
-      result$data['storeId'] =
-          l$storeId == null ? null : toJson_Enum_OrderBy(l$storeId);
+      result$data['storeId'] = l$storeId == null
+          ? null
+          : toJson_Enum_OrderBy(l$storeId);
     }
     if (_$data.containsKey('studyYearId')) {
       final l$studyYearId = studyYearId;
-      result$data['studyYearId'] =
-          l$studyYearId == null ? null : toJson_Enum_OrderBy(l$studyYearId);
+      result$data['studyYearId'] = l$studyYearId == null
+          ? null
+          : toJson_Enum_OrderBy(l$studyYearId);
     }
     if (_$data.containsKey('uid')) {
       final l$uid = uid;
@@ -605,17 +624,15 @@ class Input_PersonsMinOrderBy {
     }
     if (_$data.containsKey('workStatus')) {
       final l$workStatus = workStatus;
-      result$data['workStatus'] =
-          l$workStatus == null ? null : toJson_Enum_OrderBy(l$workStatus);
+      result$data['workStatus'] = l$workStatus == null
+          ? null
+          : toJson_Enum_OrderBy(l$workStatus);
     }
     return result$data;
   }
 
   CopyWith_Input_PersonsMinOrderBy<Input_PersonsMinOrderBy> get copyWith =>
-      CopyWith_Input_PersonsMinOrderBy(
-        this,
-        (i) => i,
-      );
+      CopyWith_Input_PersonsMinOrderBy(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -978,10 +995,7 @@ abstract class CopyWith_Input_PersonsMinOrderBy<TRes> {
 
 class _CopyWithImpl_Input_PersonsMinOrderBy<TRes>
     implements CopyWith_Input_PersonsMinOrderBy<TRes> {
-  _CopyWithImpl_Input_PersonsMinOrderBy(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Input_PersonsMinOrderBy(this._instance, this._then);
 
   final Input_PersonsMinOrderBy _instance;
 
@@ -1018,50 +1032,49 @@ class _CopyWithImpl_Input_PersonsMinOrderBy<TRes>
     Object? studyYearId = _undefined,
     Object? uid = _undefined,
     Object? workStatus = _undefined,
-  }) =>
-      _then(Input_PersonsMinOrderBy._({
-        ..._instance._$data,
-        if (addressText != _undefined)
-          'addressText': (addressText as Enum_OrderBy?),
-        if (birthdate != _undefined) 'birthdate': (birthdate as Enum_OrderBy?),
-        if (blurhash != _undefined) 'blurhash': (blurhash as Enum_OrderBy?),
-        if (churchId != _undefined) 'churchId': (churchId as Enum_OrderBy?),
-        if (collegeId != _undefined) 'collegeId': (collegeId as Enum_OrderBy?),
-        if (color != _undefined) 'color': (color as Enum_OrderBy?),
-        if (familyId != _undefined) 'familyId': (familyId as Enum_OrderBy?),
-        if (fatherId != _undefined) 'fatherId': (fatherId as Enum_OrderBy?),
-        if (id != _undefined) 'id': (id as Enum_OrderBy?),
-        if (jobDescription != _undefined)
-          'jobDescription': (jobDescription as Enum_OrderBy?),
-        if (jobId != _undefined) 'jobId': (jobId as Enum_OrderBy?),
-        if (mainPhone != _undefined) 'mainPhone': (mainPhone as Enum_OrderBy?),
-        if (martialStatus != _undefined)
-          'martialStatus': (martialStatus as Enum_OrderBy?),
-        if (name != _undefined) 'name': (name as Enum_OrderBy?),
-        if (nationalId != _undefined)
-          'nationalId': (nationalId as Enum_OrderBy?),
-        if (notes != _undefined) 'notes': (notes as Enum_OrderBy?),
-        if (personTypeId != _undefined)
-          'personTypeId': (personTypeId as Enum_OrderBy?),
-        if (photoUpdatedAt != _undefined)
-          'photoUpdatedAt': (photoUpdatedAt as Enum_OrderBy?),
-        if (qualificationId != _undefined)
-          'qualificationId': (qualificationId as Enum_OrderBy?),
-        if (schoolId != _undefined) 'schoolId': (schoolId as Enum_OrderBy?),
-        if (serviceType != _undefined)
-          'serviceType': (serviceType as Enum_OrderBy?),
-        if (servingChurchId != _undefined)
-          'servingChurchId': (servingChurchId as Enum_OrderBy?),
-        if (shammasLevelId != _undefined)
-          'shammasLevelId': (shammasLevelId as Enum_OrderBy?),
-        if (stateId != _undefined) 'stateId': (stateId as Enum_OrderBy?),
-        if (storeId != _undefined) 'storeId': (storeId as Enum_OrderBy?),
-        if (studyYearId != _undefined)
-          'studyYearId': (studyYearId as Enum_OrderBy?),
-        if (uid != _undefined) 'uid': (uid as Enum_OrderBy?),
-        if (workStatus != _undefined)
-          'workStatus': (workStatus as Enum_OrderBy?),
-      }));
+  }) => _then(
+    Input_PersonsMinOrderBy._({
+      ..._instance._$data,
+      if (addressText != _undefined)
+        'addressText': (addressText as Enum_OrderBy?),
+      if (birthdate != _undefined) 'birthdate': (birthdate as Enum_OrderBy?),
+      if (blurhash != _undefined) 'blurhash': (blurhash as Enum_OrderBy?),
+      if (churchId != _undefined) 'churchId': (churchId as Enum_OrderBy?),
+      if (collegeId != _undefined) 'collegeId': (collegeId as Enum_OrderBy?),
+      if (color != _undefined) 'color': (color as Enum_OrderBy?),
+      if (familyId != _undefined) 'familyId': (familyId as Enum_OrderBy?),
+      if (fatherId != _undefined) 'fatherId': (fatherId as Enum_OrderBy?),
+      if (id != _undefined) 'id': (id as Enum_OrderBy?),
+      if (jobDescription != _undefined)
+        'jobDescription': (jobDescription as Enum_OrderBy?),
+      if (jobId != _undefined) 'jobId': (jobId as Enum_OrderBy?),
+      if (mainPhone != _undefined) 'mainPhone': (mainPhone as Enum_OrderBy?),
+      if (martialStatus != _undefined)
+        'martialStatus': (martialStatus as Enum_OrderBy?),
+      if (name != _undefined) 'name': (name as Enum_OrderBy?),
+      if (nationalId != _undefined) 'nationalId': (nationalId as Enum_OrderBy?),
+      if (notes != _undefined) 'notes': (notes as Enum_OrderBy?),
+      if (personTypeId != _undefined)
+        'personTypeId': (personTypeId as Enum_OrderBy?),
+      if (photoUpdatedAt != _undefined)
+        'photoUpdatedAt': (photoUpdatedAt as Enum_OrderBy?),
+      if (qualificationId != _undefined)
+        'qualificationId': (qualificationId as Enum_OrderBy?),
+      if (schoolId != _undefined) 'schoolId': (schoolId as Enum_OrderBy?),
+      if (serviceType != _undefined)
+        'serviceType': (serviceType as Enum_OrderBy?),
+      if (servingChurchId != _undefined)
+        'servingChurchId': (servingChurchId as Enum_OrderBy?),
+      if (shammasLevelId != _undefined)
+        'shammasLevelId': (shammasLevelId as Enum_OrderBy?),
+      if (stateId != _undefined) 'stateId': (stateId as Enum_OrderBy?),
+      if (storeId != _undefined) 'storeId': (storeId as Enum_OrderBy?),
+      if (studyYearId != _undefined)
+        'studyYearId': (studyYearId as Enum_OrderBy?),
+      if (uid != _undefined) 'uid': (uid as Enum_OrderBy?),
+      if (workStatus != _undefined) 'workStatus': (workStatus as Enum_OrderBy?),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Input_PersonsMinOrderBy<TRes>
@@ -1099,33 +1112,33 @@ class _CopyWithStubImpl_Input_PersonsMinOrderBy<TRes>
     Enum_OrderBy? studyYearId,
     Enum_OrderBy? uid,
     Enum_OrderBy? workStatus,
-  }) =>
-      _res;
+  }) => _res;
 }
 
 class Input_PersonsObjRelInsertInput {
   factory Input_PersonsObjRelInsertInput({
     required Input_PersonsInsertInput data,
     Input_PersonsOnConflict? onConflict,
-  }) =>
-      Input_PersonsObjRelInsertInput._({
-        r'data': data,
-        if (onConflict != null) r'onConflict': onConflict,
-      });
+  }) => Input_PersonsObjRelInsertInput._({
+    r'data': data,
+    if (onConflict != null) r'onConflict': onConflict,
+  });
 
   Input_PersonsObjRelInsertInput._(this._$data);
 
   factory Input_PersonsObjRelInsertInput.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     final l$data = data['data'];
-    result$data['data'] =
-        Input_PersonsInsertInput.fromJson((l$data as Map<String, dynamic>));
+    result$data['data'] = Input_PersonsInsertInput.fromJson(
+      (l$data as Map<String, dynamic>),
+    );
     if (data.containsKey('onConflict')) {
       final l$onConflict = data['onConflict'];
       result$data['onConflict'] = l$onConflict == null
           ? null
           : Input_PersonsOnConflict.fromJson(
-              (l$onConflict as Map<String, dynamic>));
+              (l$onConflict as Map<String, dynamic>),
+            );
     }
     return Input_PersonsObjRelInsertInput._(result$data);
   }
@@ -1150,10 +1163,7 @@ class Input_PersonsObjRelInsertInput {
   }
 
   CopyWith_Input_PersonsObjRelInsertInput<Input_PersonsObjRelInsertInput>
-      get copyWith => CopyWith_Input_PersonsObjRelInsertInput(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Input_PersonsObjRelInsertInput(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -1211,10 +1221,7 @@ abstract class CopyWith_Input_PersonsObjRelInsertInput<TRes> {
 
 class _CopyWithImpl_Input_PersonsObjRelInsertInput<TRes>
     implements CopyWith_Input_PersonsObjRelInsertInput<TRes> {
-  _CopyWithImpl_Input_PersonsObjRelInsertInput(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Input_PersonsObjRelInsertInput(this._instance, this._then);
 
   final Input_PersonsObjRelInsertInput _instance;
 
@@ -1222,17 +1229,16 @@ class _CopyWithImpl_Input_PersonsObjRelInsertInput<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? data = _undefined,
-    Object? onConflict = _undefined,
-  }) =>
-      _then(Input_PersonsObjRelInsertInput._({
-        ..._instance._$data,
-        if (data != _undefined && data != null)
-          'data': (data as Input_PersonsInsertInput),
-        if (onConflict != _undefined)
-          'onConflict': (onConflict as Input_PersonsOnConflict?),
-      }));
+  TRes call({Object? data = _undefined, Object? onConflict = _undefined}) =>
+      _then(
+        Input_PersonsObjRelInsertInput._({
+          ..._instance._$data,
+          if (data != _undefined && data != null)
+            'data': (data as Input_PersonsInsertInput),
+          if (onConflict != _undefined)
+            'onConflict': (onConflict as Input_PersonsOnConflict?),
+        }),
+      );
 
   CopyWith_Input_PersonsInsertInput<TRes> get data {
     final local$data = _instance.data;
@@ -1244,7 +1250,9 @@ class _CopyWithImpl_Input_PersonsObjRelInsertInput<TRes>
     return local$onConflict == null
         ? CopyWith_Input_PersonsOnConflict.stub(_then(_instance))
         : CopyWith_Input_PersonsOnConflict(
-            local$onConflict, (e) => call(onConflict: e));
+            local$onConflict,
+            (e) => call(onConflict: e),
+          );
   }
 }
 
@@ -1254,10 +1262,7 @@ class _CopyWithStubImpl_Input_PersonsObjRelInsertInput<TRes>
 
   TRes _res;
 
-  call({
-    Input_PersonsInsertInput? data,
-    Input_PersonsOnConflict? onConflict,
-  }) =>
+  call({Input_PersonsInsertInput? data, Input_PersonsOnConflict? onConflict}) =>
       _res;
 
   CopyWith_Input_PersonsInsertInput<TRes> get data =>
@@ -1272,20 +1277,20 @@ class Input_PersonsOnConflict {
     required Enum_PersonsConstraint constraint,
     List<Enum_PersonsUpdateColumn>? updateColumns,
     Input_PersonsBoolExp? where,
-  }) =>
-      Input_PersonsOnConflict._({
-        r'constraint': constraint,
-        if (updateColumns != null) r'updateColumns': updateColumns,
-        if (where != null) r'where': where,
-      });
+  }) => Input_PersonsOnConflict._({
+    r'constraint': constraint,
+    if (updateColumns != null) r'updateColumns': updateColumns,
+    if (where != null) r'where': where,
+  });
 
   Input_PersonsOnConflict._(this._$data);
 
   factory Input_PersonsOnConflict.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     final l$constraint = data['constraint'];
-    result$data['constraint'] =
-        fromJson_Enum_PersonsConstraint((l$constraint as String));
+    result$data['constraint'] = fromJson_Enum_PersonsConstraint(
+      (l$constraint as String),
+    );
     if (data.containsKey('updateColumns')) {
       final l$updateColumns = data['updateColumns'];
       result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
@@ -1330,10 +1335,7 @@ class Input_PersonsOnConflict {
   }
 
   CopyWith_Input_PersonsOnConflict<Input_PersonsOnConflict> get copyWith =>
-      CopyWith_Input_PersonsOnConflict(
-        this,
-        (i) => i,
-      );
+      CopyWith_Input_PersonsOnConflict(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -1388,8 +1390,8 @@ class Input_PersonsOnConflict {
       l$constraint,
       _$data.containsKey('updateColumns')
           ? l$updateColumns == null
-              ? null
-              : Object.hashAll(l$updateColumns.map((v) => v))
+                ? null
+                : Object.hashAll(l$updateColumns.map((v) => v))
           : const {},
       _$data.containsKey('where') ? l$where : const {},
     ]);
@@ -1415,10 +1417,7 @@ abstract class CopyWith_Input_PersonsOnConflict<TRes> {
 
 class _CopyWithImpl_Input_PersonsOnConflict<TRes>
     implements CopyWith_Input_PersonsOnConflict<TRes> {
-  _CopyWithImpl_Input_PersonsOnConflict(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Input_PersonsOnConflict(this._instance, this._then);
 
   final Input_PersonsOnConflict _instance;
 
@@ -1430,15 +1429,16 @@ class _CopyWithImpl_Input_PersonsOnConflict<TRes>
     Object? constraint = _undefined,
     Object? updateColumns = _undefined,
     Object? where = _undefined,
-  }) =>
-      _then(Input_PersonsOnConflict._({
-        ..._instance._$data,
-        if (constraint != _undefined && constraint != null)
-          'constraint': (constraint as Enum_PersonsConstraint),
-        if (updateColumns != _undefined && updateColumns != null)
-          'updateColumns': (updateColumns as List<Enum_PersonsUpdateColumn>),
-        if (where != _undefined) 'where': (where as Input_PersonsBoolExp?),
-      }));
+  }) => _then(
+    Input_PersonsOnConflict._({
+      ..._instance._$data,
+      if (constraint != _undefined && constraint != null)
+        'constraint': (constraint as Enum_PersonsConstraint),
+      if (updateColumns != _undefined && updateColumns != null)
+        'updateColumns': (updateColumns as List<Enum_PersonsUpdateColumn>),
+      if (where != _undefined) 'where': (where as Input_PersonsBoolExp?),
+    }),
+  );
 
   CopyWith_Input_PersonsBoolExp<TRes> get where {
     final local$where = _instance.where;
@@ -1458,8 +1458,7 @@ class _CopyWithStubImpl_Input_PersonsOnConflict<TRes>
     Enum_PersonsConstraint? constraint,
     List<Enum_PersonsUpdateColumn>? updateColumns,
     Input_PersonsBoolExp? where,
-  }) =>
-      _res;
+  }) => _res;
 
   CopyWith_Input_PersonsBoolExp<TRes> get where =>
       CopyWith_Input_PersonsBoolExp.stub(_res);
@@ -1532,80 +1531,79 @@ class Input_PersonsOrderBy {
     Input_AuthUsersDataOrderBy? user,
     Input_HistoryVisitHistoryAggregateOrderBy? visitHistoryAggregate,
     Enum_OrderBy? workStatus,
-  }) =>
-      Input_PersonsOrderBy._({
-        if (address != null) r'address': address,
-        if (addressText != null) r'addressText': addressText,
-        if (attendanceHistoryAggregate != null)
-          r'attendanceHistoryAggregate': attendanceHistoryAggregate,
-        if (birthdate != null) r'birthdate': birthdate,
-        if (birthday != null) r'birthday': birthday,
-        if (blurhash != null) r'blurhash': blurhash,
-        if (callHistoryAggregate != null)
-          r'callHistoryAggregate': callHistoryAggregate,
-        if (church != null) r'church': church,
-        if (churchId != null) r'churchId': churchId,
-        if (classesAggregate != null) r'classesAggregate': classesAggregate,
-        if (college != null) r'college': college,
-        if (collegeId != null) r'collegeId': collegeId,
-        if (color != null) r'color': color,
-        if (confessionHistoryAggregate != null)
-          r'confessionHistoryAggregate': confessionHistoryAggregate,
-        if (editHistoryAggregate != null)
-          r'editHistoryAggregate': editHistoryAggregate,
-        if (family != null) r'family': family,
-        if (familyId != null) r'familyId': familyId,
-        if (father != null) r'father': father,
-        if (fatherId != null) r'fatherId': fatherId,
-        if (gender != null) r'gender': gender,
-        if (geolocation != null) r'geolocation': geolocation,
-        if (groupsAggregate != null) r'groupsAggregate': groupsAggregate,
-        if (hobbiesAggregate != null) r'hobbiesAggregate': hobbiesAggregate,
-        if (id != null) r'id': id,
-        if (isServant != null) r'isServant': isServant,
-        if (isShammas != null) r'isShammas': isShammas,
-        if (isStudent != null) r'isStudent': isStudent,
-        if (job != null) r'job': job,
-        if (jobDescription != null) r'jobDescription': jobDescription,
-        if (jobId != null) r'jobId': jobId,
-        if (kodasHistoryAggregate != null)
-          r'kodasHistoryAggregate': kodasHistoryAggregate,
-        if (lastCall != null) r'lastCall': lastCall,
-        if (lastConfession != null) r'lastConfession': lastConfession,
-        if (lastEdit != null) r'lastEdit': lastEdit,
-        if (lastKodas != null) r'lastKodas': lastKodas,
-        if (lastVisit != null) r'lastVisit': lastVisit,
-        if (mainPhone != null) r'mainPhone': mainPhone,
-        if (martialStatus != null) r'martialStatus': martialStatus,
-        if (name != null) r'name': name,
-        if (nationalId != null) r'nationalId': nationalId,
-        if (notes != null) r'notes': notes,
-        if (otherPhones != null) r'otherPhones': otherPhones,
-        if (personType != null) r'personType': personType,
-        if (personTypeId != null) r'personTypeId': personTypeId,
-        if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
-        if (qualification != null) r'qualification': qualification,
-        if (qualificationId != null) r'qualificationId': qualificationId,
-        if (school != null) r'school': school,
-        if (schoolId != null) r'schoolId': schoolId,
-        if (serviceType != null) r'serviceType': serviceType,
-        if (servicesAggregate != null) r'servicesAggregate': servicesAggregate,
-        if (servingChurch != null) r'servingChurch': servingChurch,
-        if (servingChurchId != null) r'servingChurchId': servingChurchId,
-        if (shammasLevel != null) r'shammasLevel': shammasLevel,
-        if (shammasLevelId != null) r'shammasLevelId': shammasLevelId,
-        if (state != null) r'state': state,
-        if (stateId != null) r'stateId': stateId,
-        if (storeId != null) r'storeId': storeId,
-        if (studyYear != null) r'studyYear': studyYear,
-        if (studyYearId != null) r'studyYearId': studyYearId,
-        if (tagsAggregate != null) r'tagsAggregate': tagsAggregate,
-        if (uid != null) r'uid': uid,
-        if (user != null) r'user': user,
-        if (visitHistoryAggregate != null)
-          r'visitHistoryAggregate': visitHistoryAggregate,
-        if (workStatus != null) r'workStatus': workStatus,
-      });
+  }) => Input_PersonsOrderBy._({
+    if (address != null) r'address': address,
+    if (addressText != null) r'addressText': addressText,
+    if (attendanceHistoryAggregate != null)
+      r'attendanceHistoryAggregate': attendanceHistoryAggregate,
+    if (birthdate != null) r'birthdate': birthdate,
+    if (birthday != null) r'birthday': birthday,
+    if (blurhash != null) r'blurhash': blurhash,
+    if (callHistoryAggregate != null)
+      r'callHistoryAggregate': callHistoryAggregate,
+    if (church != null) r'church': church,
+    if (churchId != null) r'churchId': churchId,
+    if (classesAggregate != null) r'classesAggregate': classesAggregate,
+    if (college != null) r'college': college,
+    if (collegeId != null) r'collegeId': collegeId,
+    if (color != null) r'color': color,
+    if (confessionHistoryAggregate != null)
+      r'confessionHistoryAggregate': confessionHistoryAggregate,
+    if (editHistoryAggregate != null)
+      r'editHistoryAggregate': editHistoryAggregate,
+    if (family != null) r'family': family,
+    if (familyId != null) r'familyId': familyId,
+    if (father != null) r'father': father,
+    if (fatherId != null) r'fatherId': fatherId,
+    if (gender != null) r'gender': gender,
+    if (geolocation != null) r'geolocation': geolocation,
+    if (groupsAggregate != null) r'groupsAggregate': groupsAggregate,
+    if (hobbiesAggregate != null) r'hobbiesAggregate': hobbiesAggregate,
+    if (id != null) r'id': id,
+    if (isServant != null) r'isServant': isServant,
+    if (isShammas != null) r'isShammas': isShammas,
+    if (isStudent != null) r'isStudent': isStudent,
+    if (job != null) r'job': job,
+    if (jobDescription != null) r'jobDescription': jobDescription,
+    if (jobId != null) r'jobId': jobId,
+    if (kodasHistoryAggregate != null)
+      r'kodasHistoryAggregate': kodasHistoryAggregate,
+    if (lastCall != null) r'lastCall': lastCall,
+    if (lastConfession != null) r'lastConfession': lastConfession,
+    if (lastEdit != null) r'lastEdit': lastEdit,
+    if (lastKodas != null) r'lastKodas': lastKodas,
+    if (lastVisit != null) r'lastVisit': lastVisit,
+    if (mainPhone != null) r'mainPhone': mainPhone,
+    if (martialStatus != null) r'martialStatus': martialStatus,
+    if (name != null) r'name': name,
+    if (nationalId != null) r'nationalId': nationalId,
+    if (notes != null) r'notes': notes,
+    if (otherPhones != null) r'otherPhones': otherPhones,
+    if (personType != null) r'personType': personType,
+    if (personTypeId != null) r'personTypeId': personTypeId,
+    if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
+    if (qualification != null) r'qualification': qualification,
+    if (qualificationId != null) r'qualificationId': qualificationId,
+    if (school != null) r'school': school,
+    if (schoolId != null) r'schoolId': schoolId,
+    if (serviceType != null) r'serviceType': serviceType,
+    if (servicesAggregate != null) r'servicesAggregate': servicesAggregate,
+    if (servingChurch != null) r'servingChurch': servingChurch,
+    if (servingChurchId != null) r'servingChurchId': servingChurchId,
+    if (shammasLevel != null) r'shammasLevel': shammasLevel,
+    if (shammasLevelId != null) r'shammasLevelId': shammasLevelId,
+    if (state != null) r'state': state,
+    if (stateId != null) r'stateId': stateId,
+    if (storeId != null) r'storeId': storeId,
+    if (studyYear != null) r'studyYear': studyYear,
+    if (studyYearId != null) r'studyYearId': studyYearId,
+    if (tagsAggregate != null) r'tagsAggregate': tagsAggregate,
+    if (uid != null) r'uid': uid,
+    if (user != null) r'user': user,
+    if (visitHistoryAggregate != null)
+      r'visitHistoryAggregate': visitHistoryAggregate,
+    if (workStatus != null) r'workStatus': workStatus,
+  });
 
   Input_PersonsOrderBy._(this._$data);
 
@@ -1616,7 +1614,8 @@ class Input_PersonsOrderBy {
       result$data['address'] = l$address == null
           ? null
           : Input_AddressesOrderBy.fromJson(
-              (l$address as Map<String, dynamic>));
+              (l$address as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('addressText')) {
       final l$addressText = data['addressText'];
@@ -1628,9 +1627,10 @@ class Input_PersonsOrderBy {
       final l$attendanceHistoryAggregate = data['attendanceHistoryAggregate'];
       result$data['attendanceHistoryAggregate'] =
           l$attendanceHistoryAggregate == null
-              ? null
-              : Input_HistoryAttendanceHistoryAggregateOrderBy.fromJson(
-                  (l$attendanceHistoryAggregate as Map<String, dynamic>));
+          ? null
+          : Input_HistoryAttendanceHistoryAggregateOrderBy.fromJson(
+              (l$attendanceHistoryAggregate as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('birthdate')) {
       final l$birthdate = data['birthdate'];
@@ -1655,7 +1655,8 @@ class Input_PersonsOrderBy {
       result$data['callHistoryAggregate'] = l$callHistoryAggregate == null
           ? null
           : Input_HistoryCallHistoryAggregateOrderBy.fromJson(
-              (l$callHistoryAggregate as Map<String, dynamic>));
+              (l$callHistoryAggregate as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('church')) {
       final l$church = data['church'];
@@ -1674,7 +1675,8 @@ class Input_PersonsOrderBy {
       result$data['classesAggregate'] = l$classesAggregate == null
           ? null
           : Input_ClassesPersonsAggregateOrderBy.fromJson(
-              (l$classesAggregate as Map<String, dynamic>));
+              (l$classesAggregate as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('college')) {
       final l$college = data['college'];
@@ -1690,23 +1692,26 @@ class Input_PersonsOrderBy {
     }
     if (data.containsKey('color')) {
       final l$color = data['color'];
-      result$data['color'] =
-          l$color == null ? null : fromJson_Enum_OrderBy((l$color as String));
+      result$data['color'] = l$color == null
+          ? null
+          : fromJson_Enum_OrderBy((l$color as String));
     }
     if (data.containsKey('confessionHistoryAggregate')) {
       final l$confessionHistoryAggregate = data['confessionHistoryAggregate'];
       result$data['confessionHistoryAggregate'] =
           l$confessionHistoryAggregate == null
-              ? null
-              : Input_HistoryConfessionHistoryAggregateOrderBy.fromJson(
-                  (l$confessionHistoryAggregate as Map<String, dynamic>));
+          ? null
+          : Input_HistoryConfessionHistoryAggregateOrderBy.fromJson(
+              (l$confessionHistoryAggregate as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('editHistoryAggregate')) {
       final l$editHistoryAggregate = data['editHistoryAggregate'];
       result$data['editHistoryAggregate'] = l$editHistoryAggregate == null
           ? null
           : Input_HistoryEditHistoryAggregateOrderBy.fromJson(
-              (l$editHistoryAggregate as Map<String, dynamic>));
+              (l$editHistoryAggregate as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('family')) {
       final l$family = data['family'];
@@ -1734,8 +1739,9 @@ class Input_PersonsOrderBy {
     }
     if (data.containsKey('gender')) {
       final l$gender = data['gender'];
-      result$data['gender'] =
-          l$gender == null ? null : fromJson_Enum_OrderBy((l$gender as String));
+      result$data['gender'] = l$gender == null
+          ? null
+          : fromJson_Enum_OrderBy((l$gender as String));
     }
     if (data.containsKey('geolocation')) {
       final l$geolocation = data['geolocation'];
@@ -1748,19 +1754,22 @@ class Input_PersonsOrderBy {
       result$data['groupsAggregate'] = l$groupsAggregate == null
           ? null
           : Input_PersonsGroupsAggregateOrderBy.fromJson(
-              (l$groupsAggregate as Map<String, dynamic>));
+              (l$groupsAggregate as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('hobbiesAggregate')) {
       final l$hobbiesAggregate = data['hobbiesAggregate'];
       result$data['hobbiesAggregate'] = l$hobbiesAggregate == null
           ? null
           : Input_PersonsHobbiesAggregateOrderBy.fromJson(
-              (l$hobbiesAggregate as Map<String, dynamic>));
+              (l$hobbiesAggregate as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('id')) {
       final l$id = data['id'];
-      result$data['id'] =
-          l$id == null ? null : fromJson_Enum_OrderBy((l$id as String));
+      result$data['id'] = l$id == null
+          ? null
+          : fromJson_Enum_OrderBy((l$id as String));
     }
     if (data.containsKey('isServant')) {
       final l$isServant = data['isServant'];
@@ -1794,50 +1803,57 @@ class Input_PersonsOrderBy {
     }
     if (data.containsKey('jobId')) {
       final l$jobId = data['jobId'];
-      result$data['jobId'] =
-          l$jobId == null ? null : fromJson_Enum_OrderBy((l$jobId as String));
+      result$data['jobId'] = l$jobId == null
+          ? null
+          : fromJson_Enum_OrderBy((l$jobId as String));
     }
     if (data.containsKey('kodasHistoryAggregate')) {
       final l$kodasHistoryAggregate = data['kodasHistoryAggregate'];
       result$data['kodasHistoryAggregate'] = l$kodasHistoryAggregate == null
           ? null
           : Input_HistoryKodasHistoryAggregateOrderBy.fromJson(
-              (l$kodasHistoryAggregate as Map<String, dynamic>));
+              (l$kodasHistoryAggregate as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('lastCall')) {
       final l$lastCall = data['lastCall'];
       result$data['lastCall'] = l$lastCall == null
           ? null
           : Input_HistoryLatestCallsOrderBy.fromJson(
-              (l$lastCall as Map<String, dynamic>));
+              (l$lastCall as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('lastConfession')) {
       final l$lastConfession = data['lastConfession'];
       result$data['lastConfession'] = l$lastConfession == null
           ? null
           : Input_HistoryLatestConfessionsOrderBy.fromJson(
-              (l$lastConfession as Map<String, dynamic>));
+              (l$lastConfession as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('lastEdit')) {
       final l$lastEdit = data['lastEdit'];
       result$data['lastEdit'] = l$lastEdit == null
           ? null
           : Input_HistoryLatestEditsOrderBy.fromJson(
-              (l$lastEdit as Map<String, dynamic>));
+              (l$lastEdit as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('lastKodas')) {
       final l$lastKodas = data['lastKodas'];
       result$data['lastKodas'] = l$lastKodas == null
           ? null
           : Input_HistoryLatestKodasesOrderBy.fromJson(
-              (l$lastKodas as Map<String, dynamic>));
+              (l$lastKodas as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('lastVisit')) {
       final l$lastVisit = data['lastVisit'];
       result$data['lastVisit'] = l$lastVisit == null
           ? null
           : Input_HistoryLatestVisitsOrderBy.fromJson(
-              (l$lastVisit as Map<String, dynamic>));
+              (l$lastVisit as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('mainPhone')) {
       final l$mainPhone = data['mainPhone'];
@@ -1853,8 +1869,9 @@ class Input_PersonsOrderBy {
     }
     if (data.containsKey('name')) {
       final l$name = data['name'];
-      result$data['name'] =
-          l$name == null ? null : fromJson_Enum_OrderBy((l$name as String));
+      result$data['name'] = l$name == null
+          ? null
+          : fromJson_Enum_OrderBy((l$name as String));
     }
     if (data.containsKey('nationalId')) {
       final l$nationalId = data['nationalId'];
@@ -1864,8 +1881,9 @@ class Input_PersonsOrderBy {
     }
     if (data.containsKey('notes')) {
       final l$notes = data['notes'];
-      result$data['notes'] =
-          l$notes == null ? null : fromJson_Enum_OrderBy((l$notes as String));
+      result$data['notes'] = l$notes == null
+          ? null
+          : fromJson_Enum_OrderBy((l$notes as String));
     }
     if (data.containsKey('otherPhones')) {
       final l$otherPhones = data['otherPhones'];
@@ -1878,7 +1896,8 @@ class Input_PersonsOrderBy {
       result$data['personType'] = l$personType == null
           ? null
           : Input_PersonTypesOrderBy.fromJson(
-              (l$personType as Map<String, dynamic>));
+              (l$personType as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('personTypeId')) {
       final l$personTypeId = data['personTypeId'];
@@ -1897,7 +1916,8 @@ class Input_PersonsOrderBy {
       result$data['qualification'] = l$qualification == null
           ? null
           : Input_QualificationsOrderBy.fromJson(
-              (l$qualification as Map<String, dynamic>));
+              (l$qualification as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('qualificationId')) {
       final l$qualificationId = data['qualificationId'];
@@ -1928,14 +1948,16 @@ class Input_PersonsOrderBy {
       result$data['servicesAggregate'] = l$servicesAggregate == null
           ? null
           : Input_PersonsServicesAggregateOrderBy.fromJson(
-              (l$servicesAggregate as Map<String, dynamic>));
+              (l$servicesAggregate as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('servingChurch')) {
       final l$servingChurch = data['servingChurch'];
       result$data['servingChurch'] = l$servingChurch == null
           ? null
           : Input_ChurchesOrderBy.fromJson(
-              (l$servingChurch as Map<String, dynamic>));
+              (l$servingChurch as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('servingChurchId')) {
       final l$servingChurchId = data['servingChurchId'];
@@ -1948,7 +1970,8 @@ class Input_PersonsOrderBy {
       result$data['shammasLevel'] = l$shammasLevel == null
           ? null
           : Input_ShammasLevelsOrderBy.fromJson(
-              (l$shammasLevel as Map<String, dynamic>));
+              (l$shammasLevel as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('shammasLevelId')) {
       final l$shammasLevelId = data['shammasLevelId'];
@@ -1961,7 +1984,8 @@ class Input_PersonsOrderBy {
       result$data['state'] = l$state == null
           ? null
           : Input_PersonStatesOrderBy.fromJson(
-              (l$state as Map<String, dynamic>));
+              (l$state as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('stateId')) {
       final l$stateId = data['stateId'];
@@ -1980,7 +2004,8 @@ class Input_PersonsOrderBy {
       result$data['studyYear'] = l$studyYear == null
           ? null
           : Input_StudyYearsOrderBy.fromJson(
-              (l$studyYear as Map<String, dynamic>));
+              (l$studyYear as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('studyYearId')) {
       final l$studyYearId = data['studyYearId'];
@@ -1993,26 +2018,30 @@ class Input_PersonsOrderBy {
       result$data['tagsAggregate'] = l$tagsAggregate == null
           ? null
           : Input_PersonsTagsAggregateOrderBy.fromJson(
-              (l$tagsAggregate as Map<String, dynamic>));
+              (l$tagsAggregate as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('uid')) {
       final l$uid = data['uid'];
-      result$data['uid'] =
-          l$uid == null ? null : fromJson_Enum_OrderBy((l$uid as String));
+      result$data['uid'] = l$uid == null
+          ? null
+          : fromJson_Enum_OrderBy((l$uid as String));
     }
     if (data.containsKey('user')) {
       final l$user = data['user'];
       result$data['user'] = l$user == null
           ? null
           : Input_AuthUsersDataOrderBy.fromJson(
-              (l$user as Map<String, dynamic>));
+              (l$user as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('visitHistoryAggregate')) {
       final l$visitHistoryAggregate = data['visitHistoryAggregate'];
       result$data['visitHistoryAggregate'] = l$visitHistoryAggregate == null
           ? null
           : Input_HistoryVisitHistoryAggregateOrderBy.fromJson(
-              (l$visitHistoryAggregate as Map<String, dynamic>));
+              (l$visitHistoryAggregate as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('workStatus')) {
       final l$workStatus = data['workStatus'];
@@ -2031,7 +2060,8 @@ class Input_PersonsOrderBy {
   Enum_OrderBy? get addressText => (_$data['addressText'] as Enum_OrderBy?);
 
   Input_HistoryAttendanceHistoryAggregateOrderBy?
-      get attendanceHistoryAggregate => (_$data['attendanceHistoryAggregate']
+  get attendanceHistoryAggregate =>
+      (_$data['attendanceHistoryAggregate']
           as Input_HistoryAttendanceHistoryAggregateOrderBy?);
 
   Enum_OrderBy? get birthdate => (_$data['birthdate'] as Enum_OrderBy?);
@@ -2060,7 +2090,8 @@ class Input_PersonsOrderBy {
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
 
   Input_HistoryConfessionHistoryAggregateOrderBy?
-      get confessionHistoryAggregate => (_$data['confessionHistoryAggregate']
+  get confessionHistoryAggregate =>
+      (_$data['confessionHistoryAggregate']
           as Input_HistoryConfessionHistoryAggregateOrderBy?);
 
   Input_HistoryEditHistoryAggregateOrderBy? get editHistoryAggregate =>
@@ -2203,28 +2234,32 @@ class Input_PersonsOrderBy {
     }
     if (_$data.containsKey('addressText')) {
       final l$addressText = addressText;
-      result$data['addressText'] =
-          l$addressText == null ? null : toJson_Enum_OrderBy(l$addressText);
+      result$data['addressText'] = l$addressText == null
+          ? null
+          : toJson_Enum_OrderBy(l$addressText);
     }
     if (_$data.containsKey('attendanceHistoryAggregate')) {
       final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
-      result$data['attendanceHistoryAggregate'] =
-          l$attendanceHistoryAggregate?.toJson();
+      result$data['attendanceHistoryAggregate'] = l$attendanceHistoryAggregate
+          ?.toJson();
     }
     if (_$data.containsKey('birthdate')) {
       final l$birthdate = birthdate;
-      result$data['birthdate'] =
-          l$birthdate == null ? null : toJson_Enum_OrderBy(l$birthdate);
+      result$data['birthdate'] = l$birthdate == null
+          ? null
+          : toJson_Enum_OrderBy(l$birthdate);
     }
     if (_$data.containsKey('birthday')) {
       final l$birthday = birthday;
-      result$data['birthday'] =
-          l$birthday == null ? null : toJson_Enum_OrderBy(l$birthday);
+      result$data['birthday'] = l$birthday == null
+          ? null
+          : toJson_Enum_OrderBy(l$birthday);
     }
     if (_$data.containsKey('blurhash')) {
       final l$blurhash = blurhash;
-      result$data['blurhash'] =
-          l$blurhash == null ? null : toJson_Enum_OrderBy(l$blurhash);
+      result$data['blurhash'] = l$blurhash == null
+          ? null
+          : toJson_Enum_OrderBy(l$blurhash);
     }
     if (_$data.containsKey('callHistoryAggregate')) {
       final l$callHistoryAggregate = callHistoryAggregate;
@@ -2236,8 +2271,9 @@ class Input_PersonsOrderBy {
     }
     if (_$data.containsKey('churchId')) {
       final l$churchId = churchId;
-      result$data['churchId'] =
-          l$churchId == null ? null : toJson_Enum_OrderBy(l$churchId);
+      result$data['churchId'] = l$churchId == null
+          ? null
+          : toJson_Enum_OrderBy(l$churchId);
     }
     if (_$data.containsKey('classesAggregate')) {
       final l$classesAggregate = classesAggregate;
@@ -2249,18 +2285,20 @@ class Input_PersonsOrderBy {
     }
     if (_$data.containsKey('collegeId')) {
       final l$collegeId = collegeId;
-      result$data['collegeId'] =
-          l$collegeId == null ? null : toJson_Enum_OrderBy(l$collegeId);
+      result$data['collegeId'] = l$collegeId == null
+          ? null
+          : toJson_Enum_OrderBy(l$collegeId);
     }
     if (_$data.containsKey('color')) {
       final l$color = color;
-      result$data['color'] =
-          l$color == null ? null : toJson_Enum_OrderBy(l$color);
+      result$data['color'] = l$color == null
+          ? null
+          : toJson_Enum_OrderBy(l$color);
     }
     if (_$data.containsKey('confessionHistoryAggregate')) {
       final l$confessionHistoryAggregate = confessionHistoryAggregate;
-      result$data['confessionHistoryAggregate'] =
-          l$confessionHistoryAggregate?.toJson();
+      result$data['confessionHistoryAggregate'] = l$confessionHistoryAggregate
+          ?.toJson();
     }
     if (_$data.containsKey('editHistoryAggregate')) {
       final l$editHistoryAggregate = editHistoryAggregate;
@@ -2272,8 +2310,9 @@ class Input_PersonsOrderBy {
     }
     if (_$data.containsKey('familyId')) {
       final l$familyId = familyId;
-      result$data['familyId'] =
-          l$familyId == null ? null : toJson_Enum_OrderBy(l$familyId);
+      result$data['familyId'] = l$familyId == null
+          ? null
+          : toJson_Enum_OrderBy(l$familyId);
     }
     if (_$data.containsKey('father')) {
       final l$father = father;
@@ -2281,18 +2320,21 @@ class Input_PersonsOrderBy {
     }
     if (_$data.containsKey('fatherId')) {
       final l$fatherId = fatherId;
-      result$data['fatherId'] =
-          l$fatherId == null ? null : toJson_Enum_OrderBy(l$fatherId);
+      result$data['fatherId'] = l$fatherId == null
+          ? null
+          : toJson_Enum_OrderBy(l$fatherId);
     }
     if (_$data.containsKey('gender')) {
       final l$gender = gender;
-      result$data['gender'] =
-          l$gender == null ? null : toJson_Enum_OrderBy(l$gender);
+      result$data['gender'] = l$gender == null
+          ? null
+          : toJson_Enum_OrderBy(l$gender);
     }
     if (_$data.containsKey('geolocation')) {
       final l$geolocation = geolocation;
-      result$data['geolocation'] =
-          l$geolocation == null ? null : toJson_Enum_OrderBy(l$geolocation);
+      result$data['geolocation'] = l$geolocation == null
+          ? null
+          : toJson_Enum_OrderBy(l$geolocation);
     }
     if (_$data.containsKey('groupsAggregate')) {
       final l$groupsAggregate = groupsAggregate;
@@ -2308,18 +2350,21 @@ class Input_PersonsOrderBy {
     }
     if (_$data.containsKey('isServant')) {
       final l$isServant = isServant;
-      result$data['isServant'] =
-          l$isServant == null ? null : toJson_Enum_OrderBy(l$isServant);
+      result$data['isServant'] = l$isServant == null
+          ? null
+          : toJson_Enum_OrderBy(l$isServant);
     }
     if (_$data.containsKey('isShammas')) {
       final l$isShammas = isShammas;
-      result$data['isShammas'] =
-          l$isShammas == null ? null : toJson_Enum_OrderBy(l$isShammas);
+      result$data['isShammas'] = l$isShammas == null
+          ? null
+          : toJson_Enum_OrderBy(l$isShammas);
     }
     if (_$data.containsKey('isStudent')) {
       final l$isStudent = isStudent;
-      result$data['isStudent'] =
-          l$isStudent == null ? null : toJson_Enum_OrderBy(l$isStudent);
+      result$data['isStudent'] = l$isStudent == null
+          ? null
+          : toJson_Enum_OrderBy(l$isStudent);
     }
     if (_$data.containsKey('job')) {
       final l$job = job;
@@ -2333,8 +2378,9 @@ class Input_PersonsOrderBy {
     }
     if (_$data.containsKey('jobId')) {
       final l$jobId = jobId;
-      result$data['jobId'] =
-          l$jobId == null ? null : toJson_Enum_OrderBy(l$jobId);
+      result$data['jobId'] = l$jobId == null
+          ? null
+          : toJson_Enum_OrderBy(l$jobId);
     }
     if (_$data.containsKey('kodasHistoryAggregate')) {
       final l$kodasHistoryAggregate = kodasHistoryAggregate;
@@ -2362,13 +2408,15 @@ class Input_PersonsOrderBy {
     }
     if (_$data.containsKey('mainPhone')) {
       final l$mainPhone = mainPhone;
-      result$data['mainPhone'] =
-          l$mainPhone == null ? null : toJson_Enum_OrderBy(l$mainPhone);
+      result$data['mainPhone'] = l$mainPhone == null
+          ? null
+          : toJson_Enum_OrderBy(l$mainPhone);
     }
     if (_$data.containsKey('martialStatus')) {
       final l$martialStatus = martialStatus;
-      result$data['martialStatus'] =
-          l$martialStatus == null ? null : toJson_Enum_OrderBy(l$martialStatus);
+      result$data['martialStatus'] = l$martialStatus == null
+          ? null
+          : toJson_Enum_OrderBy(l$martialStatus);
     }
     if (_$data.containsKey('name')) {
       final l$name = name;
@@ -2376,18 +2424,21 @@ class Input_PersonsOrderBy {
     }
     if (_$data.containsKey('nationalId')) {
       final l$nationalId = nationalId;
-      result$data['nationalId'] =
-          l$nationalId == null ? null : toJson_Enum_OrderBy(l$nationalId);
+      result$data['nationalId'] = l$nationalId == null
+          ? null
+          : toJson_Enum_OrderBy(l$nationalId);
     }
     if (_$data.containsKey('notes')) {
       final l$notes = notes;
-      result$data['notes'] =
-          l$notes == null ? null : toJson_Enum_OrderBy(l$notes);
+      result$data['notes'] = l$notes == null
+          ? null
+          : toJson_Enum_OrderBy(l$notes);
     }
     if (_$data.containsKey('otherPhones')) {
       final l$otherPhones = otherPhones;
-      result$data['otherPhones'] =
-          l$otherPhones == null ? null : toJson_Enum_OrderBy(l$otherPhones);
+      result$data['otherPhones'] = l$otherPhones == null
+          ? null
+          : toJson_Enum_OrderBy(l$otherPhones);
     }
     if (_$data.containsKey('personType')) {
       final l$personType = personType;
@@ -2395,8 +2446,9 @@ class Input_PersonsOrderBy {
     }
     if (_$data.containsKey('personTypeId')) {
       final l$personTypeId = personTypeId;
-      result$data['personTypeId'] =
-          l$personTypeId == null ? null : toJson_Enum_OrderBy(l$personTypeId);
+      result$data['personTypeId'] = l$personTypeId == null
+          ? null
+          : toJson_Enum_OrderBy(l$personTypeId);
     }
     if (_$data.containsKey('photoUpdatedAt')) {
       final l$photoUpdatedAt = photoUpdatedAt;
@@ -2420,13 +2472,15 @@ class Input_PersonsOrderBy {
     }
     if (_$data.containsKey('schoolId')) {
       final l$schoolId = schoolId;
-      result$data['schoolId'] =
-          l$schoolId == null ? null : toJson_Enum_OrderBy(l$schoolId);
+      result$data['schoolId'] = l$schoolId == null
+          ? null
+          : toJson_Enum_OrderBy(l$schoolId);
     }
     if (_$data.containsKey('serviceType')) {
       final l$serviceType = serviceType;
-      result$data['serviceType'] =
-          l$serviceType == null ? null : toJson_Enum_OrderBy(l$serviceType);
+      result$data['serviceType'] = l$serviceType == null
+          ? null
+          : toJson_Enum_OrderBy(l$serviceType);
     }
     if (_$data.containsKey('servicesAggregate')) {
       final l$servicesAggregate = servicesAggregate;
@@ -2458,13 +2512,15 @@ class Input_PersonsOrderBy {
     }
     if (_$data.containsKey('stateId')) {
       final l$stateId = stateId;
-      result$data['stateId'] =
-          l$stateId == null ? null : toJson_Enum_OrderBy(l$stateId);
+      result$data['stateId'] = l$stateId == null
+          ? null
+          : toJson_Enum_OrderBy(l$stateId);
     }
     if (_$data.containsKey('storeId')) {
       final l$storeId = storeId;
-      result$data['storeId'] =
-          l$storeId == null ? null : toJson_Enum_OrderBy(l$storeId);
+      result$data['storeId'] = l$storeId == null
+          ? null
+          : toJson_Enum_OrderBy(l$storeId);
     }
     if (_$data.containsKey('studyYear')) {
       final l$studyYear = studyYear;
@@ -2472,8 +2528,9 @@ class Input_PersonsOrderBy {
     }
     if (_$data.containsKey('studyYearId')) {
       final l$studyYearId = studyYearId;
-      result$data['studyYearId'] =
-          l$studyYearId == null ? null : toJson_Enum_OrderBy(l$studyYearId);
+      result$data['studyYearId'] = l$studyYearId == null
+          ? null
+          : toJson_Enum_OrderBy(l$studyYearId);
     }
     if (_$data.containsKey('tagsAggregate')) {
       final l$tagsAggregate = tagsAggregate;
@@ -2493,17 +2550,15 @@ class Input_PersonsOrderBy {
     }
     if (_$data.containsKey('workStatus')) {
       final l$workStatus = workStatus;
-      result$data['workStatus'] =
-          l$workStatus == null ? null : toJson_Enum_OrderBy(l$workStatus);
+      result$data['workStatus'] = l$workStatus == null
+          ? null
+          : toJson_Enum_OrderBy(l$workStatus);
     }
     return result$data;
   }
 
   CopyWith_Input_PersonsOrderBy<Input_PersonsOrderBy> get copyWith =>
-      CopyWith_Input_PersonsOrderBy(
-        this,
-        (i) => i,
-      );
+      CopyWith_Input_PersonsOrderBy(this, (i) => i);
 
   @override
   bool operator ==(Object other) {

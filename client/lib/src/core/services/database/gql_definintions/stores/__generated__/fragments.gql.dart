@@ -23,8 +23,9 @@ class Fragment_Store implements Fragment_StoreNoPhoto {
       name: (l$name as String),
       color: (l$color as int?),
       $__typename: (l$$__typename as String),
-      photoUpdatedAt:
-          l$photoUpdatedAt == null ? null : tstzFromString(l$photoUpdatedAt),
+      photoUpdatedAt: l$photoUpdatedAt == null
+          ? null
+          : tstzFromString(l$photoUpdatedAt),
       blurhash: (l$blurhash as String?),
     );
   }
@@ -52,8 +53,9 @@ class Fragment_Store implements Fragment_StoreNoPhoto {
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
-    _resultData['photoUpdatedAt'] =
-        l$photoUpdatedAt == null ? null : tstzToString(l$photoUpdatedAt);
+    _resultData['photoUpdatedAt'] = l$photoUpdatedAt == null
+        ? null
+        : tstzToString(l$photoUpdatedAt);
     final l$blurhash = blurhash;
     _resultData['blurhash'] = l$blurhash;
     return _resultData;
@@ -121,10 +123,7 @@ class Fragment_Store implements Fragment_StoreNoPhoto {
 
 extension UtilityExtension_Fragment_Store on Fragment_Store {
   CopyWith_Fragment_Store<Fragment_Store> get copyWith =>
-      CopyWith_Fragment_Store(
-        this,
-        (i) => i,
-      );
+      CopyWith_Fragment_Store(this, (i) => i);
 }
 
 abstract class CopyWith_Fragment_Store<TRes> {
@@ -148,10 +147,7 @@ abstract class CopyWith_Fragment_Store<TRes> {
 
 class _CopyWithImpl_Fragment_Store<TRes>
     implements CopyWith_Fragment_Store<TRes> {
-  _CopyWithImpl_Fragment_Store(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Fragment_Store(this._instance, this._then);
 
   final Fragment_Store _instance;
 
@@ -166,22 +162,24 @@ class _CopyWithImpl_Fragment_Store<TRes>
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? blurhash = _undefined,
-  }) =>
-      _then(Fragment_Store(
-        id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
-        name: name == _undefined || name == null
-            ? _instance.name
-            : (name as String),
-        color: color == _undefined ? _instance.color : (color as int?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-        photoUpdatedAt: photoUpdatedAt == _undefined
-            ? _instance.photoUpdatedAt
-            : (photoUpdatedAt as DateTime?),
-        blurhash:
-            blurhash == _undefined ? _instance.blurhash : (blurhash as String?),
-      ));
+  }) => _then(
+    Fragment_Store(
+      id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      color: color == _undefined ? _instance.color : (color as int?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+      photoUpdatedAt: photoUpdatedAt == _undefined
+          ? _instance.photoUpdatedAt
+          : (photoUpdatedAt as DateTime?),
+      blurhash: blurhash == _undefined
+          ? _instance.blurhash
+          : (blurhash as String?),
+    ),
+  );
 }
 
 class _CopyWithStubImpl_Fragment_Store<TRes>
@@ -197,50 +195,48 @@ class _CopyWithStubImpl_Fragment_Store<TRes>
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
-  }) =>
-      _res;
+  }) => _res;
 }
 
 const fragmentDefinitionStore = FragmentDefinitionNode(
   name: NameNode(value: 'Store'),
   typeCondition: TypeConditionNode(
-      on: NamedTypeNode(
-    name: NameNode(value: 'Stores'),
-    isNonNull: false,
-  )),
+    on: NamedTypeNode(name: NameNode(value: 'Stores'), isNonNull: false),
+  ),
   directives: [],
-  selectionSet: SelectionSetNode(selections: [
-    FragmentSpreadNode(
-      name: NameNode(value: 'StoreNoPhoto'),
-      directives: [],
-    ),
-    FieldNode(
-      name: NameNode(value: 'photoUpdatedAt'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-    FieldNode(
-      name: NameNode(value: 'blurhash'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-    FieldNode(
-      name: NameNode(value: '__typename'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-  ]),
+  selectionSet: SelectionSetNode(
+    selections: [
+      FragmentSpreadNode(
+        name: NameNode(value: 'StoreNoPhoto'),
+        directives: [],
+      ),
+      FieldNode(
+        name: NameNode(value: 'photoUpdatedAt'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'blurhash'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ],
+  ),
 );
-const documentNodeFragmentStore = DocumentNode(definitions: [
-  fragmentDefinitionStore,
-  fragmentDefinitionStoreNoPhoto,
-]);
+const documentNodeFragmentStore = DocumentNode(
+  definitions: [fragmentDefinitionStore, fragmentDefinitionStoreNoPhoto],
+);
 
 class Fragment_StoreNoPhoto {
   Fragment_StoreNoPhoto({
@@ -290,12 +286,7 @@ class Fragment_StoreNoPhoto {
     final l$name = name;
     final l$color = color;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$id,
-      l$name,
-      l$color,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$id, l$name, l$color, l$$__typename]);
   }
 
   @override
@@ -332,10 +323,7 @@ class Fragment_StoreNoPhoto {
 
 extension UtilityExtension_Fragment_StoreNoPhoto on Fragment_StoreNoPhoto {
   CopyWith_Fragment_StoreNoPhoto<Fragment_StoreNoPhoto> get copyWith =>
-      CopyWith_Fragment_StoreNoPhoto(
-        this,
-        (i) => i,
-      );
+      CopyWith_Fragment_StoreNoPhoto(this, (i) => i);
 }
 
 abstract class CopyWith_Fragment_StoreNoPhoto<TRes> {
@@ -347,20 +335,12 @@ abstract class CopyWith_Fragment_StoreNoPhoto<TRes> {
   factory CopyWith_Fragment_StoreNoPhoto.stub(TRes res) =
       _CopyWithStubImpl_Fragment_StoreNoPhoto;
 
-  TRes call({
-    UuidValue? id,
-    String? name,
-    int? color,
-    String? $__typename,
-  });
+  TRes call({UuidValue? id, String? name, int? color, String? $__typename});
 }
 
 class _CopyWithImpl_Fragment_StoreNoPhoto<TRes>
     implements CopyWith_Fragment_StoreNoPhoto<TRes> {
-  _CopyWithImpl_Fragment_StoreNoPhoto(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Fragment_StoreNoPhoto(this._instance, this._then);
 
   final Fragment_StoreNoPhoto _instance;
 
@@ -373,17 +353,18 @@ class _CopyWithImpl_Fragment_StoreNoPhoto<TRes>
     Object? name = _undefined,
     Object? color = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Fragment_StoreNoPhoto(
-        id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
-        name: name == _undefined || name == null
-            ? _instance.name
-            : (name as String),
-        color: color == _undefined ? _instance.color : (color as int?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Fragment_StoreNoPhoto(
+      id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      color: color == _undefined ? _instance.color : (color as int?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 }
 
 class _CopyWithStubImpl_Fragment_StoreNoPhoto<TRes>
@@ -392,54 +373,48 @@ class _CopyWithStubImpl_Fragment_StoreNoPhoto<TRes>
 
   TRes _res;
 
-  call({
-    UuidValue? id,
-    String? name,
-    int? color,
-    String? $__typename,
-  }) =>
-      _res;
+  call({UuidValue? id, String? name, int? color, String? $__typename}) => _res;
 }
 
 const fragmentDefinitionStoreNoPhoto = FragmentDefinitionNode(
   name: NameNode(value: 'StoreNoPhoto'),
   typeCondition: TypeConditionNode(
-      on: NamedTypeNode(
-    name: NameNode(value: 'Stores'),
-    isNonNull: false,
-  )),
+    on: NamedTypeNode(name: NameNode(value: 'Stores'), isNonNull: false),
+  ),
   directives: [],
-  selectionSet: SelectionSetNode(selections: [
-    FieldNode(
-      name: NameNode(value: 'id'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-    FieldNode(
-      name: NameNode(value: 'name'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-    FieldNode(
-      name: NameNode(value: 'color'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-    FieldNode(
-      name: NameNode(value: '__typename'),
-      alias: null,
-      arguments: [],
-      directives: [],
-      selectionSet: null,
-    ),
-  ]),
+  selectionSet: SelectionSetNode(
+    selections: [
+      FieldNode(
+        name: NameNode(value: 'id'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'name'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'color'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ],
+  ),
 );
-const documentNodeFragmentStoreNoPhoto = DocumentNode(definitions: [
-  fragmentDefinitionStoreNoPhoto,
-]);
+const documentNodeFragmentStoreNoPhoto = DocumentNode(
+  definitions: [fragmentDefinitionStoreNoPhoto],
+);

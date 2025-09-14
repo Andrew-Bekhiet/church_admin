@@ -5,9 +5,7 @@ import 'package:gql/ast.dart';
 
 class Variables_Mutation_deleteGroup {
   factory Variables_Mutation_deleteGroup({required UuidValue groupId}) =>
-      Variables_Mutation_deleteGroup._({
-        r'groupId': groupId,
-      });
+      Variables_Mutation_deleteGroup._({r'groupId': groupId});
 
   Variables_Mutation_deleteGroup._(this._$data);
 
@@ -30,10 +28,7 @@ class Variables_Mutation_deleteGroup {
   }
 
   CopyWith_Variables_Mutation_deleteGroup<Variables_Mutation_deleteGroup>
-      get copyWith => CopyWith_Variables_Mutation_deleteGroup(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Variables_Mutation_deleteGroup(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -73,10 +68,7 @@ abstract class CopyWith_Variables_Mutation_deleteGroup<TRes> {
 
 class _CopyWithImpl_Variables_Mutation_deleteGroup<TRes>
     implements CopyWith_Variables_Mutation_deleteGroup<TRes> {
-  _CopyWithImpl_Variables_Mutation_deleteGroup(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Variables_Mutation_deleteGroup(this._instance, this._then);
 
   final Variables_Mutation_deleteGroup _instance;
 
@@ -84,12 +76,13 @@ class _CopyWithImpl_Variables_Mutation_deleteGroup<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? groupId = _undefined}) =>
-      _then(Variables_Mutation_deleteGroup._({
-        ..._instance._$data,
-        if (groupId != _undefined && groupId != null)
-          'groupId': (groupId as UuidValue),
-      }));
+  TRes call({Object? groupId = _undefined}) => _then(
+    Variables_Mutation_deleteGroup._({
+      ..._instance._$data,
+      if (groupId != _undefined && groupId != null)
+        'groupId': (groupId as UuidValue),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Variables_Mutation_deleteGroup<TRes>
@@ -114,7 +107,8 @@ class Mutation_deleteGroup {
       deleteGroupsByPk: l$deleteGroupsByPk == null
           ? null
           : Fragment_Group.fromJson(
-              (l$deleteGroupsByPk as Map<String, dynamic>)),
+              (l$deleteGroupsByPk as Map<String, dynamic>),
+            ),
       $__typename: (l$$__typename as String),
     );
   }
@@ -136,10 +130,7 @@ class Mutation_deleteGroup {
   int get hashCode {
     final l$deleteGroupsByPk = deleteGroupsByPk;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$deleteGroupsByPk,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$deleteGroupsByPk, l$$__typename]);
   }
 
   @override
@@ -166,10 +157,7 @@ class Mutation_deleteGroup {
 
 extension UtilityExtension_Mutation_deleteGroup on Mutation_deleteGroup {
   CopyWith_Mutation_deleteGroup<Mutation_deleteGroup> get copyWith =>
-      CopyWith_Mutation_deleteGroup(
-        this,
-        (i) => i,
-      );
+      CopyWith_Mutation_deleteGroup(this, (i) => i);
 }
 
 abstract class CopyWith_Mutation_deleteGroup<TRes> {
@@ -181,19 +169,13 @@ abstract class CopyWith_Mutation_deleteGroup<TRes> {
   factory CopyWith_Mutation_deleteGroup.stub(TRes res) =
       _CopyWithStubImpl_Mutation_deleteGroup;
 
-  TRes call({
-    Fragment_Group? deleteGroupsByPk,
-    String? $__typename,
-  });
+  TRes call({Fragment_Group? deleteGroupsByPk, String? $__typename});
   CopyWith_Fragment_Group<TRes> get deleteGroupsByPk;
 }
 
 class _CopyWithImpl_Mutation_deleteGroup<TRes>
     implements CopyWith_Mutation_deleteGroup<TRes> {
-  _CopyWithImpl_Mutation_deleteGroup(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Mutation_deleteGroup(this._instance, this._then);
 
   final Mutation_deleteGroup _instance;
 
@@ -204,22 +186,25 @@ class _CopyWithImpl_Mutation_deleteGroup<TRes>
   TRes call({
     Object? deleteGroupsByPk = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Mutation_deleteGroup(
-        deleteGroupsByPk: deleteGroupsByPk == _undefined
-            ? _instance.deleteGroupsByPk
-            : (deleteGroupsByPk as Fragment_Group?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Mutation_deleteGroup(
+      deleteGroupsByPk: deleteGroupsByPk == _undefined
+          ? _instance.deleteGroupsByPk
+          : (deleteGroupsByPk as Fragment_Group?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   CopyWith_Fragment_Group<TRes> get deleteGroupsByPk {
     final local$deleteGroupsByPk = _instance.deleteGroupsByPk;
     return local$deleteGroupsByPk == null
         ? CopyWith_Fragment_Group.stub(_then(_instance))
         : CopyWith_Fragment_Group(
-            local$deleteGroupsByPk, (e) => call(deleteGroupsByPk: e));
+            local$deleteGroupsByPk,
+            (e) => call(deleteGroupsByPk: e),
+          );
   }
 }
 
@@ -229,47 +214,53 @@ class _CopyWithStubImpl_Mutation_deleteGroup<TRes>
 
   TRes _res;
 
-  call({
-    Fragment_Group? deleteGroupsByPk,
-    String? $__typename,
-  }) =>
-      _res;
+  call({Fragment_Group? deleteGroupsByPk, String? $__typename}) => _res;
 
   CopyWith_Fragment_Group<TRes> get deleteGroupsByPk =>
       CopyWith_Fragment_Group.stub(_res);
 }
 
-const documentNodeMutationdeleteGroup = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.mutation,
-    name: NameNode(value: 'deleteGroup'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'groupId')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'uuid'),
-          isNonNull: true,
+const documentNodeMutationdeleteGroup = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.mutation,
+      name: NameNode(value: 'deleteGroup'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'groupId')),
+          type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      )
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'deleteGroupsByPk'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'id'),
-            value: VariableNode(name: NameNode(value: 'groupId')),
-          )
-        ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FragmentSpreadNode(
-            name: NameNode(value: 'Group'),
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
+          FieldNode(
+            name: NameNode(value: 'deleteGroupsByPk'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'id'),
+                value: VariableNode(name: NameNode(value: 'groupId')),
+              ),
+            ],
             directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FragmentSpreadNode(
+                  name: NameNode(value: 'Group'),
+                  directives: [],
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
           ),
           FieldNode(
             name: NameNode(value: '__typename'),
@@ -278,35 +269,27 @@ const documentNodeMutationdeleteGroup = DocumentNode(definitions: [
             directives: [],
             selectionSet: null,
           ),
-        ]),
+        ],
       ),
-      FieldNode(
-        name: NameNode(value: '__typename'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-    ]),
-  ),
-  fragmentDefinitionGroup,
-  fragmentDefinitionGroupNoPhoto,
-]);
+    ),
+    fragmentDefinitionGroup,
+    fragmentDefinitionGroupNoPhoto,
+  ],
+);
 
 class Variables_Mutation_insertGroup {
-  factory Variables_Mutation_insertGroup(
-          {required Input_GroupsInsertInput newGroup}) =>
-      Variables_Mutation_insertGroup._({
-        r'newGroup': newGroup,
-      });
+  factory Variables_Mutation_insertGroup({
+    required Input_GroupsInsertInput newGroup,
+  }) => Variables_Mutation_insertGroup._({r'newGroup': newGroup});
 
   Variables_Mutation_insertGroup._(this._$data);
 
   factory Variables_Mutation_insertGroup.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     final l$newGroup = data['newGroup'];
-    result$data['newGroup'] =
-        Input_GroupsInsertInput.fromJson((l$newGroup as Map<String, dynamic>));
+    result$data['newGroup'] = Input_GroupsInsertInput.fromJson(
+      (l$newGroup as Map<String, dynamic>),
+    );
     return Variables_Mutation_insertGroup._(result$data);
   }
 
@@ -323,10 +306,7 @@ class Variables_Mutation_insertGroup {
   }
 
   CopyWith_Variables_Mutation_insertGroup<Variables_Mutation_insertGroup>
-      get copyWith => CopyWith_Variables_Mutation_insertGroup(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Variables_Mutation_insertGroup(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -366,10 +346,7 @@ abstract class CopyWith_Variables_Mutation_insertGroup<TRes> {
 
 class _CopyWithImpl_Variables_Mutation_insertGroup<TRes>
     implements CopyWith_Variables_Mutation_insertGroup<TRes> {
-  _CopyWithImpl_Variables_Mutation_insertGroup(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Variables_Mutation_insertGroup(this._instance, this._then);
 
   final Variables_Mutation_insertGroup _instance;
 
@@ -377,12 +354,13 @@ class _CopyWithImpl_Variables_Mutation_insertGroup<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? newGroup = _undefined}) =>
-      _then(Variables_Mutation_insertGroup._({
-        ..._instance._$data,
-        if (newGroup != _undefined && newGroup != null)
-          'newGroup': (newGroup as Input_GroupsInsertInput),
-      }));
+  TRes call({Object? newGroup = _undefined}) => _then(
+    Variables_Mutation_insertGroup._({
+      ..._instance._$data,
+      if (newGroup != _undefined && newGroup != null)
+        'newGroup': (newGroup as Input_GroupsInsertInput),
+    }),
+  );
 }
 
 class _CopyWithStubImpl_Variables_Mutation_insertGroup<TRes>
@@ -407,7 +385,8 @@ class Mutation_insertGroup {
       insertGroupsOne: l$insertGroupsOne == null
           ? null
           : Fragment_Group.fromJson(
-              (l$insertGroupsOne as Map<String, dynamic>)),
+              (l$insertGroupsOne as Map<String, dynamic>),
+            ),
       $__typename: (l$$__typename as String),
     );
   }
@@ -429,10 +408,7 @@ class Mutation_insertGroup {
   int get hashCode {
     final l$insertGroupsOne = insertGroupsOne;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$insertGroupsOne,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$insertGroupsOne, l$$__typename]);
   }
 
   @override
@@ -459,10 +435,7 @@ class Mutation_insertGroup {
 
 extension UtilityExtension_Mutation_insertGroup on Mutation_insertGroup {
   CopyWith_Mutation_insertGroup<Mutation_insertGroup> get copyWith =>
-      CopyWith_Mutation_insertGroup(
-        this,
-        (i) => i,
-      );
+      CopyWith_Mutation_insertGroup(this, (i) => i);
 }
 
 abstract class CopyWith_Mutation_insertGroup<TRes> {
@@ -474,19 +447,13 @@ abstract class CopyWith_Mutation_insertGroup<TRes> {
   factory CopyWith_Mutation_insertGroup.stub(TRes res) =
       _CopyWithStubImpl_Mutation_insertGroup;
 
-  TRes call({
-    Fragment_Group? insertGroupsOne,
-    String? $__typename,
-  });
+  TRes call({Fragment_Group? insertGroupsOne, String? $__typename});
   CopyWith_Fragment_Group<TRes> get insertGroupsOne;
 }
 
 class _CopyWithImpl_Mutation_insertGroup<TRes>
     implements CopyWith_Mutation_insertGroup<TRes> {
-  _CopyWithImpl_Mutation_insertGroup(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Mutation_insertGroup(this._instance, this._then);
 
   final Mutation_insertGroup _instance;
 
@@ -497,22 +464,25 @@ class _CopyWithImpl_Mutation_insertGroup<TRes>
   TRes call({
     Object? insertGroupsOne = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Mutation_insertGroup(
-        insertGroupsOne: insertGroupsOne == _undefined
-            ? _instance.insertGroupsOne
-            : (insertGroupsOne as Fragment_Group?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Mutation_insertGroup(
+      insertGroupsOne: insertGroupsOne == _undefined
+          ? _instance.insertGroupsOne
+          : (insertGroupsOne as Fragment_Group?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   CopyWith_Fragment_Group<TRes> get insertGroupsOne {
     final local$insertGroupsOne = _instance.insertGroupsOne;
     return local$insertGroupsOne == null
         ? CopyWith_Fragment_Group.stub(_then(_instance))
         : CopyWith_Fragment_Group(
-            local$insertGroupsOne, (e) => call(insertGroupsOne: e));
+            local$insertGroupsOne,
+            (e) => call(insertGroupsOne: e),
+          );
   }
 }
 
@@ -522,47 +492,56 @@ class _CopyWithStubImpl_Mutation_insertGroup<TRes>
 
   TRes _res;
 
-  call({
-    Fragment_Group? insertGroupsOne,
-    String? $__typename,
-  }) =>
-      _res;
+  call({Fragment_Group? insertGroupsOne, String? $__typename}) => _res;
 
   CopyWith_Fragment_Group<TRes> get insertGroupsOne =>
       CopyWith_Fragment_Group.stub(_res);
 }
 
-const documentNodeMutationinsertGroup = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.mutation,
-    name: NameNode(value: 'insertGroup'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'newGroup')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'GroupsInsertInput'),
-          isNonNull: true,
+const documentNodeMutationinsertGroup = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.mutation,
+      name: NameNode(value: 'insertGroup'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'newGroup')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'GroupsInsertInput'),
+            isNonNull: true,
+          ),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      )
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'insertGroupsOne'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'object'),
-            value: VariableNode(name: NameNode(value: 'newGroup')),
-          )
-        ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FragmentSpreadNode(
-            name: NameNode(value: 'Group'),
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
+          FieldNode(
+            name: NameNode(value: 'insertGroupsOne'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'object'),
+                value: VariableNode(name: NameNode(value: 'newGroup')),
+              ),
+            ],
             directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FragmentSpreadNode(
+                  name: NameNode(value: 'Group'),
+                  directives: [],
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
           ),
           FieldNode(
             name: NameNode(value: '__typename'),
@@ -571,30 +550,22 @@ const documentNodeMutationinsertGroup = DocumentNode(definitions: [
             directives: [],
             selectionSet: null,
           ),
-        ]),
+        ],
       ),
-      FieldNode(
-        name: NameNode(value: '__typename'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-    ]),
-  ),
-  fragmentDefinitionGroup,
-  fragmentDefinitionGroupNoPhoto,
-]);
+    ),
+    fragmentDefinitionGroup,
+    fragmentDefinitionGroupNoPhoto,
+  ],
+);
 
 class Variables_Mutation_updateGroup {
   factory Variables_Mutation_updateGroup({
     required UuidValue groupId,
     required Input_GroupsSetInput newGroup,
-  }) =>
-      Variables_Mutation_updateGroup._({
-        r'groupId': groupId,
-        r'newGroup': newGroup,
-      });
+  }) => Variables_Mutation_updateGroup._({
+    r'groupId': groupId,
+    r'newGroup': newGroup,
+  });
 
   Variables_Mutation_updateGroup._(this._$data);
 
@@ -603,8 +574,9 @@ class Variables_Mutation_updateGroup {
     final l$groupId = data['groupId'];
     result$data['groupId'] = stringToUuid(l$groupId);
     final l$newGroup = data['newGroup'];
-    result$data['newGroup'] =
-        Input_GroupsSetInput.fromJson((l$newGroup as Map<String, dynamic>));
+    result$data['newGroup'] = Input_GroupsSetInput.fromJson(
+      (l$newGroup as Map<String, dynamic>),
+    );
     return Variables_Mutation_updateGroup._(result$data);
   }
 
@@ -625,10 +597,7 @@ class Variables_Mutation_updateGroup {
   }
 
   CopyWith_Variables_Mutation_updateGroup<Variables_Mutation_updateGroup>
-      get copyWith => CopyWith_Variables_Mutation_updateGroup(
-            this,
-            (i) => i,
-          );
+  get copyWith => CopyWith_Variables_Mutation_updateGroup(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
@@ -656,10 +625,7 @@ class Variables_Mutation_updateGroup {
   int get hashCode {
     final l$groupId = groupId;
     final l$newGroup = newGroup;
-    return Object.hashAll([
-      l$groupId,
-      l$newGroup,
-    ]);
+    return Object.hashAll([l$groupId, l$newGroup]);
   }
 }
 
@@ -672,18 +638,12 @@ abstract class CopyWith_Variables_Mutation_updateGroup<TRes> {
   factory CopyWith_Variables_Mutation_updateGroup.stub(TRes res) =
       _CopyWithStubImpl_Variables_Mutation_updateGroup;
 
-  TRes call({
-    UuidValue? groupId,
-    Input_GroupsSetInput? newGroup,
-  });
+  TRes call({UuidValue? groupId, Input_GroupsSetInput? newGroup});
 }
 
 class _CopyWithImpl_Variables_Mutation_updateGroup<TRes>
     implements CopyWith_Variables_Mutation_updateGroup<TRes> {
-  _CopyWithImpl_Variables_Mutation_updateGroup(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Variables_Mutation_updateGroup(this._instance, this._then);
 
   final Variables_Mutation_updateGroup _instance;
 
@@ -691,17 +651,16 @@ class _CopyWithImpl_Variables_Mutation_updateGroup<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? groupId = _undefined,
-    Object? newGroup = _undefined,
-  }) =>
-      _then(Variables_Mutation_updateGroup._({
-        ..._instance._$data,
-        if (groupId != _undefined && groupId != null)
-          'groupId': (groupId as UuidValue),
-        if (newGroup != _undefined && newGroup != null)
-          'newGroup': (newGroup as Input_GroupsSetInput),
-      }));
+  TRes call({Object? groupId = _undefined, Object? newGroup = _undefined}) =>
+      _then(
+        Variables_Mutation_updateGroup._({
+          ..._instance._$data,
+          if (groupId != _undefined && groupId != null)
+            'groupId': (groupId as UuidValue),
+          if (newGroup != _undefined && newGroup != null)
+            'newGroup': (newGroup as Input_GroupsSetInput),
+        }),
+      );
 }
 
 class _CopyWithStubImpl_Variables_Mutation_updateGroup<TRes>
@@ -710,11 +669,7 @@ class _CopyWithStubImpl_Variables_Mutation_updateGroup<TRes>
 
   TRes _res;
 
-  call({
-    UuidValue? groupId,
-    Input_GroupsSetInput? newGroup,
-  }) =>
-      _res;
+  call({UuidValue? groupId, Input_GroupsSetInput? newGroup}) => _res;
 }
 
 class Mutation_updateGroup {
@@ -730,7 +685,8 @@ class Mutation_updateGroup {
       updateGroupsByPk: l$updateGroupsByPk == null
           ? null
           : Fragment_Group.fromJson(
-              (l$updateGroupsByPk as Map<String, dynamic>)),
+              (l$updateGroupsByPk as Map<String, dynamic>),
+            ),
       $__typename: (l$$__typename as String),
     );
   }
@@ -752,10 +708,7 @@ class Mutation_updateGroup {
   int get hashCode {
     final l$updateGroupsByPk = updateGroupsByPk;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$updateGroupsByPk,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$updateGroupsByPk, l$$__typename]);
   }
 
   @override
@@ -782,10 +735,7 @@ class Mutation_updateGroup {
 
 extension UtilityExtension_Mutation_updateGroup on Mutation_updateGroup {
   CopyWith_Mutation_updateGroup<Mutation_updateGroup> get copyWith =>
-      CopyWith_Mutation_updateGroup(
-        this,
-        (i) => i,
-      );
+      CopyWith_Mutation_updateGroup(this, (i) => i);
 }
 
 abstract class CopyWith_Mutation_updateGroup<TRes> {
@@ -797,19 +747,13 @@ abstract class CopyWith_Mutation_updateGroup<TRes> {
   factory CopyWith_Mutation_updateGroup.stub(TRes res) =
       _CopyWithStubImpl_Mutation_updateGroup;
 
-  TRes call({
-    Fragment_Group? updateGroupsByPk,
-    String? $__typename,
-  });
+  TRes call({Fragment_Group? updateGroupsByPk, String? $__typename});
   CopyWith_Fragment_Group<TRes> get updateGroupsByPk;
 }
 
 class _CopyWithImpl_Mutation_updateGroup<TRes>
     implements CopyWith_Mutation_updateGroup<TRes> {
-  _CopyWithImpl_Mutation_updateGroup(
-    this._instance,
-    this._then,
-  );
+  _CopyWithImpl_Mutation_updateGroup(this._instance, this._then);
 
   final Mutation_updateGroup _instance;
 
@@ -820,22 +764,25 @@ class _CopyWithImpl_Mutation_updateGroup<TRes>
   TRes call({
     Object? updateGroupsByPk = _undefined,
     Object? $__typename = _undefined,
-  }) =>
-      _then(Mutation_updateGroup(
-        updateGroupsByPk: updateGroupsByPk == _undefined
-            ? _instance.updateGroupsByPk
-            : (updateGroupsByPk as Fragment_Group?),
-        $__typename: $__typename == _undefined || $__typename == null
-            ? _instance.$__typename
-            : ($__typename as String),
-      ));
+  }) => _then(
+    Mutation_updateGroup(
+      updateGroupsByPk: updateGroupsByPk == _undefined
+          ? _instance.updateGroupsByPk
+          : (updateGroupsByPk as Fragment_Group?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   CopyWith_Fragment_Group<TRes> get updateGroupsByPk {
     final local$updateGroupsByPk = _instance.updateGroupsByPk;
     return local$updateGroupsByPk == null
         ? CopyWith_Fragment_Group.stub(_then(_instance))
         : CopyWith_Fragment_Group(
-            local$updateGroupsByPk, (e) => call(updateGroupsByPk: e));
+            local$updateGroupsByPk,
+            (e) => call(updateGroupsByPk: e),
+          );
   }
 }
 
@@ -845,65 +792,73 @@ class _CopyWithStubImpl_Mutation_updateGroup<TRes>
 
   TRes _res;
 
-  call({
-    Fragment_Group? updateGroupsByPk,
-    String? $__typename,
-  }) =>
-      _res;
+  call({Fragment_Group? updateGroupsByPk, String? $__typename}) => _res;
 
   CopyWith_Fragment_Group<TRes> get updateGroupsByPk =>
       CopyWith_Fragment_Group.stub(_res);
 }
 
-const documentNodeMutationupdateGroup = DocumentNode(definitions: [
-  OperationDefinitionNode(
-    type: OperationType.mutation,
-    name: NameNode(value: 'updateGroup'),
-    variableDefinitions: [
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'groupId')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'uuid'),
-          isNonNull: true,
+const documentNodeMutationupdateGroup = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.mutation,
+      name: NameNode(value: 'updateGroup'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'groupId')),
+          type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-      VariableDefinitionNode(
-        variable: VariableNode(name: NameNode(value: 'newGroup')),
-        type: NamedTypeNode(
-          name: NameNode(value: 'GroupsSetInput'),
-          isNonNull: true,
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'newGroup')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'GroupsSetInput'),
+            isNonNull: true,
+          ),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
         ),
-        defaultValue: DefaultValueNode(value: null),
-        directives: [],
-      ),
-    ],
-    directives: [],
-    selectionSet: SelectionSetNode(selections: [
-      FieldNode(
-        name: NameNode(value: 'updateGroupsByPk'),
-        alias: null,
-        arguments: [
-          ArgumentNode(
-            name: NameNode(value: 'pkColumns'),
-            value: ObjectValueNode(fields: [
-              ObjectFieldNode(
-                name: NameNode(value: 'id'),
-                value: VariableNode(name: NameNode(value: 'groupId')),
-              )
-            ]),
-          ),
-          ArgumentNode(
-            name: NameNode(value: '_set'),
-            value: VariableNode(name: NameNode(value: 'newGroup')),
-          ),
-        ],
-        directives: [],
-        selectionSet: SelectionSetNode(selections: [
-          FragmentSpreadNode(
-            name: NameNode(value: 'Group'),
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
+          FieldNode(
+            name: NameNode(value: 'updateGroupsByPk'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'pkColumns'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'id'),
+                      value: VariableNode(name: NameNode(value: 'groupId')),
+                    ),
+                  ],
+                ),
+              ),
+              ArgumentNode(
+                name: NameNode(value: '_set'),
+                value: VariableNode(name: NameNode(value: 'newGroup')),
+              ),
+            ],
             directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FragmentSpreadNode(
+                  name: NameNode(value: 'Group'),
+                  directives: [],
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
           ),
           FieldNode(
             name: NameNode(value: '__typename'),
@@ -912,17 +867,10 @@ const documentNodeMutationupdateGroup = DocumentNode(definitions: [
             directives: [],
             selectionSet: null,
           ),
-        ]),
+        ],
       ),
-      FieldNode(
-        name: NameNode(value: '__typename'),
-        alias: null,
-        arguments: [],
-        directives: [],
-        selectionSet: null,
-      ),
-    ]),
-  ),
-  fragmentDefinitionGroup,
-  fragmentDefinitionGroupNoPhoto,
-]);
+    ),
+    fragmentDefinitionGroup,
+    fragmentDefinitionGroupNoPhoto,
+  ],
+);
