@@ -87,7 +87,6 @@ android {
     }
     buildTypes {
         debug{
-            defaultConfig.minSdkVersion 30
             signingConfig signingConfigs.debug
             ndk {
                 abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86_64'
