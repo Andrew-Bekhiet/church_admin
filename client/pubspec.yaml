@@ -13,27 +13,27 @@ dependency_overrides:
 
 dependencies:
   align_positioned: ^5.0.1
-  android_alarm_manager_plus: ^4.0.6
+  android_alarm_manager_plus: ^5.0.0
   async: ^2.9.0
   cached_network_image: ^3.2.3
   clock: ^1.1.1
-  cloud_functions: ^5.0.1
+  cloud_functions: ^6.0.1
   collection: ^1.17.0
   connectivity_plus: ^6.0.3
   cryptography_flutter_plus: ^2.3.4
   cryptography_plus: ^2.7.1
   curved_navigation_bar: ^1.0.6
   derived_colors: ^0.4.0
-  device_info_plus: ^11.3.0
+  device_info_plus: ^12.1.0
   dio: ^5.1.1
   equatable: ^2.0.5
   fancy_password_field: ^2.0.0
-  firebase_app_check: ^0.3.0+1
-  firebase_auth: ^5.5.1
-  firebase_core: ^3.1.0
-  firebase_database: ^11.0.1
-  firebase_messaging: ^15.0.1
-  firebase_remote_config: ^5.4.3
+  firebase_app_check: ^0.4.0+1
+  firebase_auth: ^6.0.1
+  firebase_core: ^4.0.0
+  firebase_database: ^12.0.1
+  firebase_messaging: ^16.0.1
+  firebase_remote_config: ^6.0.1
   fl_chart: ^1.0.0
   flex_color_picker: ^3.0.0
   flex_color_scheme: ^8.1.1
@@ -68,7 +68,7 @@ dependencies:
   json_annotation: ^4.9.0
   latlong2: ^0.9.0
   local_auth: ^2.1.2
-  map_launcher: ^3.1.0
+  map_launcher: ^3.5.0
   material_symbols_icons: ^4.2762.0
   meta: ^1.8.0
   mime: ^2.0.0
@@ -90,7 +90,7 @@ dependencies:
   sembast_sqflite: ^2.2.1
   sembast_web: ^2.4.1
   sentry_flutter: ^9.3.0
-  share_plus: ^11.0.0
+  share_plus: ^12.0.0
   shorebird_code_push: ^2.0.4
   snapping_sheet_2: ^3.1.5
   sqflite: ^2.4.2
@@ -112,8 +112,8 @@ dev_dependencies:
   cross_file: ^0.3.3+4
   device_info_plus_platform_interface: ^7.0.0
   file: ^7.0.0
-  firebase_app_check_platform_interface: ^0.1.0
-  firebase_auth_platform_interface: ^7.0.6
+  firebase_app_check_platform_interface: ^0.2.0+1
+  firebase_auth_platform_interface: ^8.0.0
   firebase_core_platform_interface: ^6.0.0
   firebase_messaging_platform_interface: ^4.5.7
   flutter_launcher_icons: ^0.14.3
@@ -122,7 +122,7 @@ dev_dependencies:
   freezed: ^3.0.6
   go_router_builder: ^3.0.0
   golden_toolkit: ^0.15.0
-  graphql_codegen: ^1.1.0
+  graphql_codegen: ^2.0.0
   http: ^1.0.0
   image_cropper_platform_interface: ^7.0.0
   image_picker_platform_interface: ^2.8.0

@@ -31,6 +31,8 @@
 				<string>Editor</string>
 				<key>CFBundleURLSchemes</key>
 				<array>
+					<string>app-1-496540691813-ios-cc06a3c94fe8be8399858c</string>
+					<string>app-1-496540691813-ios-af9fbd1533c7aa0f99858c</string>
 					<string>com.googleusercontent.apps.496540691813-vr6uul4h967oibqp0divmf8r8lh08661</string>
 				</array>
 			</dict>
