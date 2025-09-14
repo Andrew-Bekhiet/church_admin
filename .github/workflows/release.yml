@@ -84,6 +84,7 @@ jobs:
           pub-cache-key: "flutter-pub:os:-:channel:-:version:-:arch:"
           cache-key: "flutter:os:-:channel:-:version:-:arch:"
           channel: "stable"
+          flutter-version: 3.35.2
 
       - name: Populate Flutter cache
         run: flutter precache
