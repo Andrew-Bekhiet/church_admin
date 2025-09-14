@@ -147,5 +147,5 @@ class ViewableObjectService {
     return Symbols.image_not_supported;
   }
 
-  bool _isSubtype<Type, Subtype>() => <Type>[] is List<Subtype>;
+  bool _isSubtype<T, S>() => <T>[] is List<S>;
 }

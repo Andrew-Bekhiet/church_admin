@@ -56,7 +56,7 @@ class _AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
                     child: DropdownButtonFormField<QueryableType>(
                       borderRadius: const BorderRadius.all(Radius.circular(20)),
                       isExpanded: true,
-                      value: selectedQueryableType,
+                      initialValue: selectedQueryableType,
                       items: AdvancedQueriesMetadata()
                           .allQueryables
                           .where((t) => t.dao != null)
@@ -280,7 +280,7 @@ class _OrderByWidget extends StatelessWidget {
                     Radius.circular(20),
                   ),
                   isExpanded: true,
-                  value: parentField,
+                  initialValue: parentField,
                   items: filterableFields
                       .map(
                         (p) => DropdownMenuItem(
@@ -326,7 +326,7 @@ class _OrderByWidget extends StatelessWidget {
                       Radius.circular(20),
                     ),
                     isExpanded: true,
-                    value: orderBy.value,
+                    initialValue: orderBy.value,
                     alignment: Alignment.center,
                     items: const [
                       DropdownMenuItem(

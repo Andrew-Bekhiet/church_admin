@@ -157,7 +157,7 @@ class FilterBuilder extends StatelessWidget {
                   decoration: const InputDecoration(labelText: 'بشرط'),
                   borderRadius: const BorderRadius.all(Radius.circular(20)),
                   isExpanded: true,
-                  value: parentField,
+                  initialValue: parentField,
                   items: filterableFields
                       .map(
                         (f) => DropdownMenuItem(
@@ -177,7 +177,7 @@ class FilterBuilder extends StatelessWidget {
                   child: DropdownButtonFormField<Operator>(
                     borderRadius: const BorderRadius.all(Radius.circular(20)),
                     isExpanded: true,
-                    value: operator,
+                    initialValue: operator,
                     items: parentField.operators
                         .map(
                           (o) => DropdownMenuItem(
@@ -517,7 +517,7 @@ class BirthdayFilter extends StatelessWidget {
         Expanded(
           child: DropdownButtonFormField<int>(
             borderRadius: const BorderRadius.all(Radius.circular(20)),
-            value: parsedMonth,
+            initialValue: parsedMonth,
             onChanged: (v) => _onDateChanged(v, parsedDay),
             items: List.generate(12, (i) => i + 1)
                 .map(
@@ -535,7 +535,7 @@ class BirthdayFilter extends StatelessWidget {
         Expanded(
           child: DropdownButtonFormField<int?>(
             borderRadius: const BorderRadius.all(Radius.circular(20)),
-            value: parsedDay,
+            initialValue: parsedDay,
             onChanged: (v) => _onDateChanged(parsedMonth, v),
             items: [null, ...List.generate(31, (i) => i + 1)]
                 .map(

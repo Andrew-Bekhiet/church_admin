@@ -97,7 +97,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       (qtype) => Container(
                         padding: const EdgeInsets.symmetric(vertical: 4),
                         child: DropdownButtonFormField<String?>(
-                          value: userSettingsService.getSecondLineFor(
+                          initialValue: userSettingsService.getSecondLineFor(
                             qtype.type,
                           ),
                           items: [

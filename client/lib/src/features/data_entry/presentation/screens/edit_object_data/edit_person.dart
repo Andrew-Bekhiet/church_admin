@@ -431,7 +431,7 @@ class _EditPersonState extends State<EditPerson> {
             ),
             DropdownButtonFormField<WorkStatus>(
               borderRadius: const BorderRadius.all(Radius.circular(20)),
-              value: newPerson.workStatus,
+              initialValue: newPerson.workStatus,
               decoration: const InputDecoration(
                 labelText: 'حالة العمل',
               ),

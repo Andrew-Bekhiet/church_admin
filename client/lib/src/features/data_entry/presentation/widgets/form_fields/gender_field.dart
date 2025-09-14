@@ -45,70 +45,69 @@ class GenderField extends StatelessWidget {
             labelText: label,
             errorText: state.errorText,
           ),
-          child: Row(
-            children: [
-              if (nullable)
+          child: RadioGroup<bool?>(
+            groupValue: state.value,
+            onChanged: (v) => _onChanged(state, v),
+            child: Row(
+              children: [
+                if (nullable)
+                  Expanded(
+                    flex: 5,
+                    child: Row(
+                      children: [
+                        const Radio<bool?>(
+                          materialTapTargetSize:
+                              MaterialTapTargetSize.shrinkWrap,
+                          value: null,
+                        ),
+                        GestureDetector(
+                          onTap: () => _onChanged(state, null),
+                          child: Text(
+                            nullLabel,
+                            style: theme.textTheme.titleMedium,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 Expanded(
-                  flex: 5,
+                  flex: 4,
                   child: Row(
                     children: [
-                      Radio<bool?>(
+                      const Radio<bool?>(
                         materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                        value: null,
-                        groupValue: state.value,
-                        onChanged: (v) => _onChanged(state, v),
+                        value: true,
                       ),
                       GestureDetector(
-                        onTap: () => _onChanged(state, null),
+                        onTap: () => _onChanged(state, true),
                         child: Text(
-                          nullLabel,
+                          maleLabel,
                           style: theme.textTheme.titleMedium,
                         ),
                       ),
                     ],
                   ),
                 ),
-              Expanded(
-                flex: 4,
-                child: Row(
-                  children: [
-                    Radio<bool?>(
-                      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      value: true,
-                      groupValue: state.value,
-                      onChanged: (v) => _onChanged(state, v),
-                    ),
-                    GestureDetector(
-                      onTap: () => _onChanged(state, true),
-                      child: Text(
-                        maleLabel,
-                        style: theme.textTheme.titleMedium,
+                Expanded(
+                  flex: 4,
+                  child: Row(
+                    children: [
+                      const Radio<bool?>(
+                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        value: false,
                       ),
-                    ),
-                  ],
-                ),
-              ),
-              Expanded(
-                flex: 4,
-                child: Row(
-                  children: [
-                    Radio<bool?>(
-                      materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      value: false,
-                      groupValue: state.value,
-                      onChanged: (v) => _onChanged(state, v),
-                    ),
-                    GestureDetector(
-                      onTap: () => _onChanged(state, false),
-                      child: Text(
-                        femaleLabel,
-                        style: theme.textTheme.titleMedium,
+                      GestureDetector(
+                        onTap: () => _onChanged(state, false),
+                        child: Text(
+                          femaleLabel,
+                          style: theme.textTheme.titleMedium,
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },
