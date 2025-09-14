@@ -85,7 +85,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
                   state is! AuthLoading &&
                   (state is! AuthAuthenticated || state.userData != null),
             )
-            .timeout(const Duration(seconds: 8)),
+            .timeout(const Duration(seconds: 8))
+            .whenComplete(() {}),
         _ => Future.value(),
       };
 

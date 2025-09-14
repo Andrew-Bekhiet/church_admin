@@ -76,7 +76,7 @@ class ConnectivityService {
   Future<bool> _canPingUrl() async {
     try {
       final response =
-          await _dio.get(urlToPing).timeout(const Duration(seconds: 5));
+          await _dio.get(urlToPing).timeout(const Duration(seconds: 8));
 
       return response.statusCode == 200;
     } on Exception {
