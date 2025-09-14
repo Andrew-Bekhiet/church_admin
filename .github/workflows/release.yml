@@ -163,11 +163,7 @@ jobs:
         if: ${{ matrix.os == 'macos-latest' }}
         uses: maxim-lobanov/setup-xcode@v1
         with:
-          xcode-version: latest-stable
-
-      - name: Setup iOS 26
-        if: ${{ matrix.os == 'macos-latest' }}
-        run: xcodebuild -downloadPlatform iOS -buildVersion 26.0
+          xcode-version: ^16.4
 
       - name: Populate the Flutter tool's cache of binary artifacts
         run: flutter precache
