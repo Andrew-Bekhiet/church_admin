@@ -165,6 +165,10 @@ jobs:
         with:
           xcode-version: latest-stable
 
+      - name: Setup iOS 26
+        if: ${{ matrix.os == 'macos-latest' }}
+        run: xcodebuild -downloadPlatform iOS -buildVersion 26.0
+
       - name: Populate the Flutter tool's cache of binary artifacts
         run: flutter precache
 
