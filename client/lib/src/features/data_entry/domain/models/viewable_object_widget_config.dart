@@ -36,7 +36,7 @@ class ViewableObjectWidgetConfig<T extends Viewable> {
   ViewableObjectWidgetConfig<NewT> copyWith<NewT extends T>({
     bool? selected,
     bool? wrapInCard,
-    bool? dense,
+    bool? isDense,
     bool? enabled,
     bool? forceShowSecondLine,
     bool? isThreeLine,
@@ -49,7 +49,7 @@ class ViewableObjectWidgetConfig<T extends Viewable> {
       ViewableObjectWidgetConfig(
         selected: selected ?? this.selected,
         wrapInCard: wrapInCard ?? this.wrapInCard,
-        isDense: dense ?? this.isDense,
+        isDense: isDense ?? this.isDense,
         enabled: enabled ?? this.enabled,
         forceShowSecondLine: forceShowSecondLine ?? this.forceShowSecondLine,
         isThreeLine: isThreeLine ?? this.isThreeLine,
