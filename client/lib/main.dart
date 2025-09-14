@@ -8,23 +8,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 Future<void> main() async {
-  debugPrint('App starting...');
-  
   FlutterNativeSplash.preserve(
     widgetsBinding: WidgetsFlutterBinding.ensureInitialized(),
   );
 
-  debugPrint('Initializing services...');
   try {
     await InitializationService.I.initialize();
-    debugPrint('Services initialized successfully');
   } catch (e, stackTrace) {
-    // Log initialization error but continue
-    debugPrint('Initialization error: $e');
-    Sentry.captureException(e, stackTrace: stackTrace);
+    unawaited(Sentry.captureException(e, stackTrace: stackTrace));
   }
 
-  debugPrint('Showing splash screen...');
   runApp(
     UncontrolledProviderScope(
       container: globalProviderContainer,
@@ -33,24 +26,8 @@ Future<void> main() async {
   );
   FlutterNativeSplash.remove();
 
-  debugPrint('Waiting for auth to load...');
-  try {
-    // Add timeout to prevent infinite waiting
-    await AuthBloc.I.loaded.timeout(
-      const Duration(seconds: 10),
-      onTimeout: () {
-        debugPrint('Auth loading timed out, proceeding anyway');
-        return;
-      },
-    );
-    debugPrint('Auth loaded successfully');
-  } catch (e, stackTrace) {
-    // Log auth loading error but continue
-    debugPrint('Auth loading error: $e');
-    Sentry.captureException(e, stackTrace: stackTrace);
-  }
+  await AuthBloc.I.loaded;
 
-  debugPrint('Starting main app...');
   runApp(
     UncontrolledProviderScope(
       container: globalProviderContainer,

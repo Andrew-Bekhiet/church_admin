@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
-import 'package:flutter/foundation.dart';
 import 'package:riverpod/riverpod.dart';
 
 final initializationServiceProvider = Provider<InitializationService>(
@@ -37,16 +36,36 @@ class InitializationService {
 
     _isInitialized = true;
 
+    final List<(Object, StackTrace)> exceptions = [];
+
     for (final step in steps) {
       try {
         await step.initialize();
-      } catch (e) {
-        // Log error but continue with other initialization steps
-        debugPrint('Initialization step ${step.runtimeType} failed: $e');
-        // Don't rethrow to allow app to continue
+      } catch (e, stackTrace) {
+        exceptions.add((e, stackTrace));
       }
     }
 
+    await _reportInitExceptions(exceptions);
+
     return _initializationCompleter.complete();
+  }
+
+  Future<void> _reportInitExceptions(
+      List<(Object, StackTrace)> exceptions) async {
+    await exceptions.map(
+      (exception) async {
+        final (e, stackTrace) = exception;
+
+        await LoggingService.I.warning(
+          LogRecord(
+            message: 'Initialization step failed',
+            moduleName: '$InitializationService',
+            error: e,
+            stackTrace: stackTrace,
+          ),
+        );
+      },
+    ).wait;
   }
 }
