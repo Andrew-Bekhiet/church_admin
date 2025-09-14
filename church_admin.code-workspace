@@ -13,24 +13,21 @@
         "name": "church_admin",
         "request": "launch",
         "type": "dart",
-        "cwd": "${workspaceFolder:church_admin}/client",
-        "args": ["--device-user", "0"]
+        "cwd": "${workspaceFolder:church_admin}/client"
       },
       {
         "name": "church_admin (profile mode)",
         "request": "launch",
         "type": "dart",
         "flutterMode": "profile",
-        "cwd": "${workspaceFolder:church_admin}/client/",
-        "args": ["--device-user", "0"]
+        "cwd": "${workspaceFolder:church_admin}/client/"
       },
       {
         "name": "church_admin (release mode)",
         "request": "launch",
         "type": "dart",
         "flutterMode": "release",
-        "cwd": "${workspaceFolder:church_admin}/client/",
-        "args": ["--device-user", "0"]
+        "cwd": "${workspaceFolder:church_admin}/client/"
       },
       {
         "name": "church_admin (web debug mode)",
