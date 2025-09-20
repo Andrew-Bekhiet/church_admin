@@ -40,8 +40,6 @@ class LoggingService extends BlocObserver {
   }
 
   Widget _errorWidgetBuilder(FlutterErrorDetails error) {
-    _onFlutterError(error);
-
     return Material(
       type: MaterialType.card,
       child: Center(
