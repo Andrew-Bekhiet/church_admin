@@ -14,34 +14,14 @@ class FirebaseInit implements Initializer {
 
   @override
   Future<void> initialize() async {
-    try {
-      await _initFirebaseApp();
-    } catch (e) {
-      debugPrint('Firebase app initialization failed: $e');
-      rethrow;
-    }
+    await _initFirebaseApp();
 
-    try {
-      await _initFirebaseAppCheck();
-    } catch (e) {
-      debugPrint('Firebase App Check initialization failed: $e');
-      // Don't rethrow as this is not critical for app functionality
-    }
+    await _initFirebaseAppCheck();
 
-    try {
-      _initFirebaseFirebaseCloudMessaging();
-    } catch (e) {
-      debugPrint('Firebase Cloud Messaging initialization failed: $e');
-      // Don't rethrow as this is not critical for app functionality
-    }
+    _initFirebaseFirebaseCloudMessaging();
 
     if (kDebugMode && kEmulatorsHost != null) {
-      try {
-        await _initializeFirebaseEmulators(kEmulatorsHost!);
-      } catch (e) {
-        debugPrint('Firebase emulators initialization failed: $e');
-        // Don't rethrow as this is only for debug mode
-      }
+      await _initializeFirebaseEmulators(kEmulatorsHost!);
     }
   }
 

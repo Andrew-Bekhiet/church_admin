@@ -100,14 +100,6 @@ jobs:
           echo $GOOGLE_SERVICES_JSON | sed 's/[^A-Za-z0-9+/=]//g' | base64 -d > ./android/app/google-services.json
           echo $ANDROID_KEYSTORE_PROPERTIES | sed 's/[^A-Za-z0-9+/=]//g' | base64 -d > ./android/releaseKey.properties
 
-      - name: Decode and save ios secrets
-        working-directory: client
-        if: ${{ matrix.os == 'macos-latest' }}
-        env:
-          GOOGLE_SERVICES_PLIST: ${{ secrets.GOOGLE_SERVICES_PLIST }}
-        run: |
-          echo $GOOGLE_SERVICES_PLIST | sed 's/[^A-Za-z0-9+/=]//g' | base64 -d > ./ios/Runner/GoogleService-Info.plist
-
       - name: Install dependencies
         working-directory: client
         run: flutter pub get
