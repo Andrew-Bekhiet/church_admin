@@ -55,6 +55,34 @@ jobs:
           cache-key: "flutter:os:-:channel:-:version:-:arch:"
           channel: "stable"
 
+      - name: Install Codemagic CLI tools
+        if: ${{ matrix.os == 'macos-latest' }}
+        run: pip install codemagic-cli-tools
+
+      - name: Set up keychain
+        if: ${{ matrix.os == 'macos-latest' }}
+        run: keychain initialize
+
+      - name: Fetch signing files
+        if: ${{ matrix.os == 'macos-latest' }}
+        working-directory: client/ios
+        env:
+          APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+          APP_STORE_CONNECT_KEY_IDENTIFIER: ${{ secrets.APP_STORE_CONNECT_KEY_IDENTIFIER }}
+          APP_STORE_CONNECT_PRIVATE_KEY: ${{ secrets.APP_STORE_CONNECT_PRIVATE_KEY }}
+          CERTIFICATE_PRIVATE_KEY: ${{ secrets.CERTIFICATE_PRIVATE_KEY }}
+          APP_STORE_APPLE_ID: ${{ secrets.APP_STORE_APPLE_ID }}
+        run: |
+          app-store-connect fetch-signing-files $(xcode-project detect-bundle-id) \
+          --type IOS_APP_STORE \
+          --create
+      - name: Set up signing certificate
+        if: ${{ matrix.os == 'macos-latest' }}
+        run: keychain add-certificates
+      - name: Set up code signing settings on Xcode project
+        if: ${{ matrix.os == 'macos-latest' }}
+        run: xcode-project use-profiles
+
       - name: 🐦 Setup Shorebird
         uses: shorebirdtech/setup-shorebird@v1
         with:
@@ -136,7 +164,7 @@ jobs:
         with:
           platform: ios
           working-directory: client
-          args: "--release-version ${{ inputs.base_version }}"
+          args: "--release-version ${{ inputs.base_version }} --  --export-options-plist=$HOME/export_options.plist"
 
   patch-web:
     if: ${{ github.event_name == 'push' || github.event.inputs.web == 'true' }}
