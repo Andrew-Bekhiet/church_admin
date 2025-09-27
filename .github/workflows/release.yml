@@ -265,31 +265,7 @@ jobs:
         with:
           working-directory: client
           platform: ios
-          args: --no-codesign --build-name ${{ steps.version.outputs.version }}
-
-      - name: Compress ios src
-        if: ${{ matrix.os == 'macos-latest' }}
-        working-directory: client
-        run: tar -czf ios_dir-v${{ steps.version.outputs.version }}.tar.gz ios
-
-      - name: Create an ipa
-        if: ${{ matrix.os == 'macos-latest' }}
-        working-directory: client
-        run: |
-          if [ -d "build/ios/archive/Runner.xcarchive" ]; then
-            echo "Found xcarchive, extracting app bundle..."
-            cd build/ios
-            mkdir -p Payload
-            # Extract the app from the xcarchive
-            cp -r archive/Runner.xcarchive/Products/Applications/Runner.app Payload/
-            zip -r app-release-v${{steps.version.outputs.version}}.ipa Payload/
-            rm -rf Payload/
-            echo "✅ IPA created from xcarchive"
-          else
-            echo "❌ No xcarchive found. Available files:"
-            ls -la build/ios/
-            exit 1
-          fi
+          args: --build-name ${{ steps.version.outputs.version }} --export-options-plist=$HOME/export_options.plist"
 
       - name: Add version to APK filename
         if: ${{ matrix.os == 'ubuntu-latest' }}
@@ -309,18 +285,11 @@ jobs:
           path: "client/build/app/outputs/flutter-apk/app-release-v${{ steps.version.outputs.version }}.apk"
           destination: "${{ secrets.APP_RELEASE_GCS_BUCKET }}"
 
-      - name: Upload iOS src to Google Cloud Storage
+      - name: Upload ipa to Google Cloud Storage
         uses: "google-github-actions/upload-cloud-storage@v2"
         if: ${{ matrix.os == 'macos-latest' }}
         with:
-          path: "client/ios_dir-v${{ steps.version.outputs.version }}.tar.gz"
-          destination: "${{ secrets.APP_RELEASE_GCS_BUCKET }}"
-
-      - name: Upload unsigned ipa to Google Cloud Storage
-        uses: "google-github-actions/upload-cloud-storage@v2"
-        if: ${{ matrix.os == 'macos-latest' }}
-        with:
-          path: "client/build/ios/app-release-v${{ steps.version.outputs.version }}.ipa"
+          path: "client/build/ios/ipa/*.ipa"
           destination: "${{ secrets.APP_RELEASE_GCS_BUCKET }}"
 
       - name: Create release

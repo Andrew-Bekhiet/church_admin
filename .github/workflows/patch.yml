@@ -164,7 +164,7 @@ jobs:
         with:
           platform: ios
           working-directory: client
-          args: "--release-version ${{ inputs.base_version }} --  --export-options-plist=$HOME/export_options.plist"
+          args: "--release-version ${{ inputs.base_version }} --export-options-plist=$HOME/export_options.plist"
 
   patch-web:
     if: ${{ github.event_name == 'push' || github.event.inputs.web == 'true' }}
