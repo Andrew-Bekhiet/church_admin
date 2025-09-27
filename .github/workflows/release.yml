@@ -267,6 +267,16 @@ jobs:
           platform: ios
           args: --build-name ${{ steps.version.outputs.version }} --export-options-plist="$HOME/export_options.plist"
 
+      - name: Publish to Google Play
+        if: ${{ matrix.os == 'ubuntu-latest' }}
+        working-directory: client
+        env:
+          GOOGLE_PLAY_SERVICE_ACCOUNT_CREDENTIALS: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_CREDENTIALS }}
+        run: |
+          google-play bundles publish \
+          --bundle "build/app/outputs/bundle/release/app-release.aab" \
+          --track production
+
       - name: Publish the app to App Store Connect
         if: ${{ matrix.os == 'macos-latest' }}
         working-directory: client
