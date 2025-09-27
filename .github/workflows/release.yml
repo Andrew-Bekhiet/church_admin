@@ -265,7 +265,7 @@ jobs:
         with:
           working-directory: client
           platform: ios
-          args: --build-name ${{ steps.version.outputs.version }} --export-options-plist=$HOME/export_options.plist"
+          args: --build-name ${{ steps.version.outputs.version }} --export-options-plist="$HOME/export_options.plist"
 
       - name: Add version to APK filename
         if: ${{ matrix.os == 'ubuntu-latest' }}
