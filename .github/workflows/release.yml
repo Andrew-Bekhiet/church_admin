@@ -267,6 +267,18 @@ jobs:
           platform: ios
           args: --build-name ${{ steps.version.outputs.version }} --export-options-plist="$HOME/export_options.plist"
 
+      - name: Publish the app to App Store Connect
+        if: ${{ matrix.os == 'macos-latest' }}
+        working-directory: client
+        env:
+          APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
+          APP_STORE_CONNECT_KEY_IDENTIFIER: ${{ secrets.APP_STORE_CONNECT_KEY_IDENTIFIER }}
+          APP_STORE_CONNECT_PRIVATE_KEY: ${{ secrets.APP_STORE_CONNECT_PRIVATE_KEY }}
+          CERTIFICATE_PRIVATE_KEY: ${{ secrets.CERTIFICATE_PRIVATE_KEY }}
+          APP_STORE_APPLE_ID: ${{ secrets.APP_STORE_APPLE_ID }}
+        run: |
+          app-store-connect publish --path "$(find $(pwd) -name "*.ipa")"
+
       - name: Add version to APK filename
         if: ${{ matrix.os == 'ubuntu-latest' }}
         working-directory: client
@@ -289,7 +301,8 @@ jobs:
         uses: "google-github-actions/upload-cloud-storage@v2"
         if: ${{ matrix.os == 'macos-latest' }}
         with:
-          path: "client/build/ios/ipa/*.ipa"
+          path: "client/build/ios/ipa"
+          glob: "**/*.ipa"
           destination: "${{ secrets.APP_RELEASE_GCS_BUCKET }}"
 
       - name: Create release
