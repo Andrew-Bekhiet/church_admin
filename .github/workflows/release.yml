@@ -147,7 +147,6 @@ jobs:
           channel: "stable"
 
       - name: Install Codemagic CLI tools
-        if: ${{ matrix.os == 'macos-latest' }}
         run: pip install codemagic-cli-tools
 
       - name: Set up keychain
@@ -295,6 +294,12 @@ jobs:
         run: |
           mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/app-release-v${{ steps.version.outputs.version }}.apk
 
+      - name: Add version to ipa filename
+        if: ${{ matrix.os == 'macos-latest' }}
+        working-directory: client
+        run: |
+          mv build/ios/ipa/churchAdmin.ipa build/ios/ipa/app-release-v${{ steps.version.outputs.version }}.ipa
+
       - name: Authenticate with Google Cloud
         uses: "google-github-actions/auth@v2"
         with:
@@ -311,8 +316,7 @@ jobs:
         uses: "google-github-actions/upload-cloud-storage@v2"
         if: ${{ matrix.os == 'macos-latest' }}
         with:
-          path: "client/build/ios/ipa"
-          glob: "**/*.ipa"
+          path: "client/build/ios/ipa/app-release-v${{ steps.version.outputs.version }}.ipa"
           destination: "${{ secrets.APP_RELEASE_GCS_BUCKET }}"
 
       - name: Create release
