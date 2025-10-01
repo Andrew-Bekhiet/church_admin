@@ -1,12 +1,490 @@
+import 'package:church_admin/church_admin.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:material_symbols_icons/material_symbols_icons.dart';
+import 'package:rxdart/rxdart.dart';
 
-class EditUser extends StatelessWidget {
-  const EditUser({super.key});
+class EditUser extends StatefulWidget {
+  final User? user;
+  final String userId;
+
+  const EditUser({
+    required this.userId,
+    this.user,
+    super.key,
+  });
+
+  @override
+  State<EditUser> createState() => _EditUserState();
+}
+
+class _EditUserState extends State<EditUser> {
+  final scrollController = ScrollController();
+
+  // State variables for permissions
+  Set<UserPermission> _selectedPermissions = {};
+  bool _isLoading = true;
+
+  late final stream = DatabaseService.I.users.streamSingleById(
+    id: widget.userId,
+    fullData: true,
+  );
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(child: Text('Edit User Screen')),
+    return ViewObjectDetails<User>(
+      objectId: widget.userId,
+      object: widget.user,
+      objectStream: stream,
+      detailsBuilder: (context, user) {
+        // Initialize permissions if not already done
+        if (_isLoading) {
+          _selectedPermissions = user.permissions.permissions.toSet();
+          _isLoading = false;
+        }
+
+        return SliverList(
+          delegate: SliverChildListDelegate(
+            [
+              CopiablePropertyWidget(
+                'البريد الاكتروني',
+                user.email,
+              ),
+              const Divider(thickness: 1),
+
+              // Editable Permissions Section
+              Card(
+                margin: const EdgeInsets.all(8.0),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Icon(Icons.security,
+                              color: Theme.of(context).primaryColor),
+                          const SizedBox(width: 8),
+                          Text(
+                            'الصلاحيات',
+                            style: Theme.of(context).textTheme.titleMedium,
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 16),
+                      _buildEditablePermissions(context),
+                    ],
+                  ),
+                ),
+              ),
+
+              const Divider(thickness: 1),
+              const SizedBox(height: 10),
+              AdminOnDataWidget(adminOn: user.adminOn ?? []),
+              const Divider(thickness: 1),
+              ListTile(
+                title: FilledButton.tonalIcon(
+                  style: Theme.of(context).filledTonalButtonStyleWorkaround,
+                  icon: const Icon(Symbols.query_stats),
+                  label: const Text('احصائيات الحضور'),
+                  onPressed: () => _attendanceAnalysis(context, user),
+                ),
+              ),
+              const Divider(thickness: 1),
+              HistoryProperty(
+                name: 'أخر تحديث لبيانات الخادم',
+                value: user.lastEdit?.time,
+                getHistoryStream: () => DatabaseService.I.history
+                    .paginateEditHistory<User>(id: user.id),
+              ),
+              const SizedBox(height: 50),
+            ],
+          ),
+        );
+      },
+      editButtonBuilder: (context, user) => IconButton(
+        tooltip: 'تعديل',
+        onPressed: () =>
+            // EditUserRoute(uid: widget.userId, $extra: user).push(context),
+            EditUserRoute(uid: widget.userId, $extra: user).push(context),
+        icon: const Icon(Symbols.edit),
+      ),
+      notFoundBuilder: (context) => Center(
+        child: Text(
+          'لم يتم العثور على الخادم',
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
+      ),
     );
+  }
+
+  void _attendanceAnalysis(BuildContext context, User user) {
+    PersonAnalysisRoute(
+      $extra: PersonAnalysisExtra(
+        editOptionsBuilder: (
+          context,
+          options,
+          void Function(PersonAnalysisOptions) onComplete,
+        ) =>
+            _SelectAttendanceOptions(
+          user: user,
+          onComplete: onComplete,
+          options: options,
+        ),
+        person: user.person,
+        user: user,
+      ),
+    ).push(context);
+  }
+
+  @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
+  }
+
+  // Build editable permissions UI inside EditUser screen
+  Widget _buildEditablePermissions(BuildContext context) {
+    return Column(
+      children: [
+        // Main permissions
+        _buildPermissionCheckbox(
+          UserPermission.approved,
+          'تفعيل الحساب',
+          'يجب تفعيل الحساب للسماح للمستخدم بالدخول',
+        ),
+        const Divider(),
+
+        _buildPermissionCheckbox(
+          UserPermission.manageAllUsers,
+          'إدارة جميع المستخدمين',
+          'السماح بإضافة وتعديل وحذف المستخدمين',
+        ),
+
+        _buildPermissionCheckbox(
+          UserPermission.readAllData,
+          'قراءة جميع البيانات',
+          'السماح بقراءة جميع بيانات التطبيق',
+        ),
+
+        _buildPermissionCheckbox(
+          UserPermission.writeAllData,
+          'كتابة جميع البيانات',
+          'السماح بتعديل جميع بيانات التطبيق',
+        ),
+
+        // إذا أردت تفعيل حذف البيانات لاحقًا، أزل التعليق التالي
+        // _buildPermissionCheckbox(
+        //   UserPermission.deleteData,
+        //   'حذف البيانات',
+        //   'السماح بحذف البيانات من التطبيق',
+        // ),
+
+        const Divider(),
+
+        // History permissions
+        _buildPermissionCheckbox(
+          UserPermission.recordHistory,
+          'تسجيل التاريخ',
+          'السماح بتسجيل تاريخ التعديلات',
+        ),
+
+        _buildPermissionCheckbox(
+          UserPermission.changeOldHistory,
+          'تعديل التاريخ القديم',
+          'السماح بتعديل السجلات التاريخية',
+        ),
+
+        _buildPermissionCheckbox(
+          UserPermission.recoverDeleted,
+          'استرداد المحذوف',
+          'السماح باسترداد البيانات المحذوفة',
+        ),
+
+        _buildPermissionCheckbox(
+          UserPermission.exportData,
+          'تصدير البيانات',
+          'السماح بتصدير بيانات التطبيق',
+        ),
+
+        const SizedBox(height: 16),
+
+        // Action buttons
+        Row(
+          children: [
+            Expanded(
+              child: ElevatedButton.icon(
+                onPressed: _savePermissions,
+                icon: const Icon(Icons.save),
+                label: const Text('حفظ الصلاحيات'),
+              ),
+            ),
+            const SizedBox(width: 8),
+            ElevatedButton.icon(
+              onPressed: _resetPermissions,
+              icon: const Icon(Icons.refresh),
+              label: const Text('إعادة تعيين'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.orange,
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildPermissionCheckbox(
+    UserPermission permission,
+    String title,
+    String subtitle,
+  ) {
+    final isChecked = _selectedPermissions.contains(permission);
+
+    return CheckboxListTile(
+      value: isChecked,
+      onChanged: (bool? value) {
+        setState(() {
+          if (value == true) {
+            _selectedPermissions.add(permission);
+          } else {
+            _selectedPermissions.remove(permission);
+          }
+        });
+      },
+      title: Row(
+        children: [
+          Icon(permission.icon, size: 20),
+          const SizedBox(width: 8),
+          Expanded(child: Text(title)),
+        ],
+      ),
+      subtitle: Text(
+        subtitle,
+        style: Theme.of(context).textTheme.bodySmall,
+      ),
+      dense: true,
+    );
+  }
+
+  void _savePermissions() {
+    // TODO: ربط الحفظ بقاعدة البيانات / خدمة المستخدمين
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          'تم حفظ الصلاحيات: ${_selectedPermissions.map((p) => p.humanReadableName).join('، ')}',
+        ),
+        backgroundColor: Colors.green,
+      ),
+    );
+  }
+
+  void _resetPermissions() {
+    setState(() {
+      // Reset to original permissions from the user object
+      if (widget.user != null) {
+        _selectedPermissions = widget.user!.permissions.permissions.toSet();
+      } else {
+        _selectedPermissions.clear();
+      }
+    });
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('تم إعادة تعيين الصلاحيات'),
+        backgroundColor: Colors.orange,
+      ),
+    );
+  }
+}
+
+class _SelectAttendanceOptions extends StatefulWidget {
+  const _SelectAttendanceOptions({
+    required this.user,
+    required this.onComplete,
+    this.options,
+  });
+
+  final User user;
+  final PersonAnalysisOptions? options;
+  final void Function(PersonAnalysisOptions) onComplete;
+
+  @override
+  State<_SelectAttendanceOptions> createState() =>
+      _SelectAttendanceOptionsState();
+}
+
+class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
+  late final selected = BehaviorSubject<Set<ViewableWithID>>.seeded(
+    widget.options == null
+        ? {}
+        : {
+            ...widget.options!.services,
+            ...widget.options!.classes,
+            ...widget.options!.groups,
+          },
+  );
+
+  late DateTimeRange dateRange = widget.options?.dateRange ??
+      DateTimeRange(
+        start: DateTime.now().subtract(const Duration(days: 30)),
+        end: DateTime.now(),
+      );
+
+  final _formKey = GlobalKey<FormState>();
+
+  @override
+  Widget build(BuildContext context) {
+    final themeData = Theme.of(context);
+
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('تحليل الحضور كخادم في'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(8),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      DateTimeRangeField(
+                        label: 'الفترة',
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        initialValue: dateRange,
+                        onSaved: (v) => dateRange = v!,
+                      ),
+                      ListTile(
+                        title: Text(
+                          'الخدمات المسؤول عنها',
+                          style: themeData.textTheme.titleMedium
+                              ?.copyWith(fontWeight: FontWeight.bold),
+                        ),
+                        subtitle: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            for (final MapEntry(
+                                  key: service,
+                                  value: permissions
+                                ) in (widget.user.adminOn
+                                            ?.where((a) => a.service != null) ??
+                                        [])
+                                    .groupListsBy((a) => a.service!)
+                                    .entries)
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 4),
+                                child: Card(
+                                  child: AdminOnServiceWidget(
+                                    serviceData: (service, permissions),
+                                    onTap: (s) =>
+                                        _toggle(s, !selected.value.contains(s)),
+                                    trailingBuilder: (context, s) =>
+                                        StreamBuilder<bool>(
+                                      initialData: false,
+                                      stream:
+                                          selected.map((o) => o.contains(s)),
+                                      builder: (context, entryChecked) =>
+                                          Checkbox(
+                                        onChanged: (checked) =>
+                                            _toggle(s, checked ?? false),
+                                        value: entryChecked.requireData,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                          ],
+                        ),
+                      ),
+                      ListTile(
+                        title: Text(
+                          'المجموعات المسؤول عنها',
+                          style: themeData.textTheme.titleMedium
+                              ?.copyWith(fontWeight: FontWeight.bold),
+                        ),
+                        subtitle: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            for (final adminData in widget.user.adminOn
+                                    ?.where((a) => a.group != null) ??
+                                <AdminOnData>[])
+                              Card(
+                                child: ViewableObjectWidget(
+                                  adminData.group!,
+                                  wrapInCard: false,
+                                  forceShowSecondLine: false,
+                                  onTap: (g) =>
+                                      _toggle(g, !selected.value.contains(g)),
+                                  trailing: StreamBuilder<bool>(
+                                    initialData: false,
+                                    stream: selected.map(
+                                      (o) => o.contains(adminData.group),
+                                    ),
+                                    builder: (context, entryChecked) =>
+                                        Checkbox(
+                                      onChanged: (checked) => _toggle(
+                                        adminData.group!,
+                                        checked ?? false,
+                                      ),
+                                      value: entryChecked.requireData,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            FilledButton(
+              onPressed: () async {
+                if (_formKey.currentState!.validate()) {
+                  _formKey.currentState!.save();
+
+                  widget.onComplete(
+                    PersonAnalysisOptions(
+                      dateRange: dateRange,
+                      classes: selected.value.whereType<Class>().toList(),
+                      groups: selected.value.whereType<Group>().toList(),
+                      services: selected.value.whereType<Service>().toList(),
+                    ),
+                  );
+
+                  await selected.close();
+                }
+              },
+              child: const Text('تحليل الحضور'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _toggle(ViewableWithID object, bool isSelected) {
+    if (isSelected) {
+      selected.add({...selected.value, object});
+    } else {
+      selected.add(
+        selected.value.difference(
+          <ViewableWithID>{object},
+        ),
+      );
+    }
+  }
+
+  @override
+  Future<void> dispose() async {
+    super.dispose();
+    await selected.close();
   }
 }
