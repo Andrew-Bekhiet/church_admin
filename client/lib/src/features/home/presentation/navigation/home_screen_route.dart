@@ -1,4 +1,5 @@
 import 'package:church_admin/church_admin.dart';
+import 'package:church_admin/src/features/user_management/presentation/navigation/edit_user_route.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -14,6 +15,7 @@ part 'home_screen_route.g.dart';
     TypedGoRoute<ViewServiceRoute>(path: 'view_service'),
     TypedGoRoute<EditServiceRoute>(path: 'edit_service'),
     TypedGoRoute<ViewUserRoute>(path: 'view_user'),
+    TypedGoRoute<EditUserRoute>(path: 'edit_user'),
     TypedGoRoute<ViewGroupRoute>(path: 'view_group'),
     TypedGoRoute<EditGroupRoute>(path: 'edit_group'),
     TypedGoRoute<ViewClassRoute>(path: 'view_class'),

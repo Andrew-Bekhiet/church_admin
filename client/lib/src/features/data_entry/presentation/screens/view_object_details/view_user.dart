@@ -90,7 +90,8 @@ class _ViewUserState extends State<ViewUser> {
       editButtonBuilder: (context, user) => IconButton(
         tooltip: 'تعديل',
         onPressed: () =>
-            ViewUserRoute(uid: widget.userId, $extra: user).push(context),
+            // ViewUserRoute(uid: widget.userId, $extra: user).push(context),
+            EditUserRoute().push(context),
         icon: const Icon(Symbols.edit),
       ),
       notFoundBuilder: (context) => Center(
