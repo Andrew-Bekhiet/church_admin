@@ -40,7 +40,11 @@ RouteBase get $homeScreenRoute => GoRouteData.$route(
         ),
         GoRouteData.$route(
           path: 'view_user',
-          factory: _$ViewUserRoute._fromState,
+          factory: $ViewUserRouteExtension._fromState,
+        ),
+        GoRouteData.$route(
+          path: 'edit_user',
+          factory: $EditUserRouteExtension._fromState,
         ),
         GoRouteData.$route(
           path: 'view_group',
@@ -342,6 +346,54 @@ mixin _$ViewUserRoute on GoRouteData {
   @override
   void replace(BuildContext context) =>
       context.replace(location, extra: _self.$extra);
+}
+
+extension $EditUserRouteExtension on EditUserRoute {
+  static EditUserRoute _fromState(GoRouterState state) => EditUserRoute(
+    uid: state.uri.queryParameters['uid']!,
+        $extra: state.extra as User?,
+  );
+
+  String get location => GoRouteData.$location(
+        '/edit_user',
+        queryParams: {
+          'uid': uid,
+        },
+      );
+
+  void go(BuildContext context) => context.go(location, extra: $extra);
+
+  Future<T?> push<T>(BuildContext context) =>
+      context.push<T>(location, extra: $extra);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location, extra: $extra);
+
+  void replace(BuildContext context) =>
+      context.replace(location, extra: $extra);
+}
+
+extension $EditUserRouteExtension on EditUserRoute {
+  static EditUserRoute _fromState(GoRouterState state) => EditUserRoute(
+    uid: state.uri.queryParameters['uid']!,
+        $extra: state.extra as User?,
+  );
+
+  String get location => GoRouteData.$location(
+        '/edit_user',
+        queryParams: {
+          'uid': uid,
+        },
+      );
+
+  void go(BuildContext context) => context.go(location, extra: $extra);
+
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location, extra: $extra);
+
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location, extra: $extra);
+
+  void replace(BuildContext context) => context.replace(location, extra: $extra);
 }
 
 mixin _$ViewGroupRoute on GoRouteData {

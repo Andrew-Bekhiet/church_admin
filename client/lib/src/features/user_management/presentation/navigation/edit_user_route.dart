@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class EditUserRoute extends GoRouteData {
-  const EditUserRoute();
+  const EditUserRoute({required this.uid, this.$extra});
 
-  // final String uid;
-  // final User? $extra;
+  final String uid;
+  final User? $extra;
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const EditUser();
+    return EditUser(userId: uid, user: $extra);
   }
 }
