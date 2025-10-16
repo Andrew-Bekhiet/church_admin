@@ -1,7 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:rxdart/rxdart.dart';
 
 class EditUser extends StatefulWidget {
@@ -60,8 +59,10 @@ class _EditUserState extends State<EditUser> {
                     children: [
                       Row(
                         children: [
-                          Icon(Icons.security,
-                              color: Theme.of(context).primaryColor,),
+                          Icon(
+                            Icons.security,
+                            color: Theme.of(context).primaryColor,
+                          ),
                           const SizedBox(width: 8),
                           Text(
                             'الصلاحيات',
@@ -75,20 +76,12 @@ class _EditUserState extends State<EditUser> {
                   ),
                 ),
               ),
-              const Divider(thickness: 1),
-              const SizedBox(height: 10),
-              AdminOnDataWidget(adminOn: user.adminOn ?? []),
-              const SizedBox(height: 50),
+              const SizedBox(height: 60),
             ],
           ),
         );
       },
-      editButtonBuilder: (context, user) => IconButton(
-        tooltip: 'تعديل',
-        onPressed: () =>
-            EditUserRoute(uid: widget.userId, $extra: user).push(context),
-        icon: const Icon(Symbols.edit),
-      ),
+      editButtonBuilder: (context, user) => const SizedBox.shrink(),
       notFoundBuilder: (context) => Center(
         child: Text(
           'لم يتم العثور على الخادم',
@@ -285,7 +278,6 @@ class _EditUserState extends State<EditUser> {
       ),
     );
   }
-
 }
 
 class _SelectAttendanceOptions extends StatefulWidget {
