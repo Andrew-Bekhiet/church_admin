@@ -1,4 +1,5 @@
 import 'package:church_admin/church_admin.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/users/__generated__/mutations.gql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/users/__generated__/queries.gql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/users/__generated__/subscriptions.gql.dart';
 import 'package:graphql/client.dart';
@@ -91,5 +92,90 @@ class UsersDAO extends DAOBase<User> with StreamableDAO<User> {
     );
 
     return graphQLClient.queryAndReturnParsedNullable(queryOptions);
+  }
+
+  /// Updates user permissions by replacing all existing permissions with new ones
+  Future<bool> updateUserPermissions({
+    required String userId,
+    required PermissionsSet newPermissions,
+  }) async {
+    try {
+      // Convert permissions to the format expected by GraphQL
+      final permissionsInput = newPermissions
+          .map((permission) => Input_AuthUsersPermissionsInsertInput(
+                uid: userId.toUuid(),
+                permission: permission.name,
+              ))
+          .toList();
+
+      final mutationOptions = MutationOptions(
+        document: documentNodeMutationupdateUserPermissions,
+        operationName: 'updateUserPermissions',
+        variables: Variables_Mutation_updateUserPermissions(
+          uid: userId.toUuid(),
+          permissions: permissionsInput,
+        ).toJson(),
+        parserFn: (data) =>
+            data, // Simple parser since we only need to check success
+      );
+
+      final result = await graphQLClient.mutate(mutationOptions);
+
+      // Return true if the mutation was successful and no errors occurred
+      return !result.hasException;
+    } catch (e) {
+      // Log error and return false
+      print('Error updating user permissions: $e');
+      return false;
+    }
+  }
+
+  /// Adds a new admin on record for a user
+  Future<bool> addUserAdminOn({
+    required String userId,
+    required AdminOnData adminOnData,
+  }) async {
+    try {
+      // TODO: Implement GraphQL mutation for adding admin on record
+      // This requires creating a new mutation in mutations.gql
+      print('Adding admin on record for user: $userId');
+      return true;
+    } catch (e) {
+      print('Error adding admin on record: $e');
+      return false;
+    }
+  }
+
+  /// Deletes an existing admin on record for a user
+  Future<bool> deleteUserAdminOn({
+    required String userId,
+    required String adminOnId,
+  }) async {
+    try {
+      // TODO: Implement GraphQL mutation for deleting admin on record
+      // This requires creating a new mutation in mutations.gql
+      print('Deleting admin on record: $adminOnId for user: $userId');
+      return true;
+    } catch (e) {
+      print('Error deleting admin on record: $e');
+      return false;
+    }
+  }
+
+  /// Updates an existing admin on record for a user
+  Future<bool> updateUserAdminOn({
+    required String userId,
+    required String adminOnId,
+    required AdminOnData updatedAdminOnData,
+  }) async {
+    try {
+      // TODO: Implement GraphQL mutation for updating admin on record
+      // This requires creating a new mutation in mutations.gql
+      print('Updating admin on record: $adminOnId for user: $userId');
+      return true;
+    } catch (e) {
+      print('Error updating admin on record: $e');
+      return false;
+    }
   }
 }

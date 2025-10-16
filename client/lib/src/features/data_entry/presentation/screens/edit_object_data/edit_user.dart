@@ -21,9 +21,9 @@ class EditUser extends StatefulWidget {
 class _EditUserState extends State<EditUser> {
   final scrollController = ScrollController();
 
-  // State variables for permissions
   Set<UserPermission> _selectedPermissions = {};
   bool _isLoading = true;
+  bool _isSaving = false;
 
   late final stream = DatabaseService.I.users.streamSingleById(
     id: widget.userId,
@@ -37,7 +37,6 @@ class _EditUserState extends State<EditUser> {
       object: widget.user,
       objectStream: stream,
       detailsBuilder: (context, user) {
-        // Initialize permissions if not already done
         if (_isLoading) {
           _selectedPermissions = user.permissions.permissions.toSet();
           _isLoading = false;
@@ -51,8 +50,6 @@ class _EditUserState extends State<EditUser> {
                 user.email,
               ),
               const Divider(thickness: 1),
-
-              // Editable Permissions Section
               Card(
                 margin: const EdgeInsets.all(8.0),
                 child: Padding(
@@ -77,10 +74,9 @@ class _EditUserState extends State<EditUser> {
                   ),
                 ),
               ),
-
               const Divider(thickness: 1),
               const SizedBox(height: 10),
-              AdminOnDataWidget(adminOn: user.adminOn ?? []),
+              _buildEditableAdminOn(context, user),
               const Divider(thickness: 1),
               ListTile(
                 title: FilledButton.tonalIcon(
@@ -147,81 +143,67 @@ class _EditUserState extends State<EditUser> {
   Widget _buildEditablePermissions(BuildContext context) {
     return Column(
       children: [
-        // Main permissions
         _buildPermissionCheckbox(
           UserPermission.approved,
           'تفعيل الحساب',
           'يجب تفعيل الحساب للسماح للمستخدم بالدخول',
         ),
         const Divider(),
-
         _buildPermissionCheckbox(
           UserPermission.manageAllUsers,
           'إدارة جميع المستخدمين',
           'السماح بإضافة وتعديل وحذف المستخدمين',
         ),
-
         _buildPermissionCheckbox(
           UserPermission.readAllData,
           'قراءة جميع البيانات',
           'السماح بقراءة جميع بيانات التطبيق',
         ),
-
         _buildPermissionCheckbox(
           UserPermission.writeAllData,
           'كتابة جميع البيانات',
           'السماح بتعديل جميع بيانات التطبيق',
         ),
-
-        // إذا أردت تفعيل حذف البيانات لاحقًا، أزل التعليق التالي
-        // _buildPermissionCheckbox(
-        //   UserPermission.deleteData,
-        //   'حذف البيانات',
-        //   'السماح بحذف البيانات من التطبيق',
-        // ),
-
         const Divider(),
-
-        // History permissions
         _buildPermissionCheckbox(
           UserPermission.recordHistory,
           'تسجيل التاريخ',
           'السماح بتسجيل تاريخ التعديلات',
         ),
-
         _buildPermissionCheckbox(
           UserPermission.changeOldHistory,
           'تعديل التاريخ القديم',
           'السماح بتعديل السجلات التاريخية',
         ),
-
         _buildPermissionCheckbox(
           UserPermission.recoverDeleted,
           'استرداد المحذوف',
           'السماح باسترداد البيانات المحذوفة',
         ),
-
         _buildPermissionCheckbox(
           UserPermission.exportData,
           'تصدير البيانات',
           'السماح بتصدير بيانات التطبيق',
         ),
-
         const SizedBox(height: 16),
-
-        // Action buttons
         Row(
           children: [
             Expanded(
               child: ElevatedButton.icon(
-                onPressed: _savePermissions,
-                icon: const Icon(Icons.save),
-                label: const Text('حفظ الصلاحيات'),
+                onPressed: _isSaving ? null : _savePermissions,
+                icon: _isSaving
+                    ? const SizedBox(
+                        width: 16,
+                        height: 16,
+                        child: CircularProgressIndicator(strokeWidth: 2),
+                      )
+                    : const Icon(Icons.save),
+                label: Text(_isSaving ? 'جاري الحفظ...' : 'حفظ الصلاحيات'),
               ),
             ),
             const SizedBox(width: 8),
             ElevatedButton.icon(
-              onPressed: _resetPermissions,
+              onPressed: _isSaving ? null : _resetPermissions,
               icon: const Icon(Icons.refresh),
               label: const Text('إعادة تعيين'),
               style: ElevatedButton.styleFrom(
@@ -267,21 +249,69 @@ class _EditUserState extends State<EditUser> {
     );
   }
 
-  void _savePermissions() {
-    // TODO: ربط الحفظ بقاعدة البيانات / خدمة المستخدمين
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          'تم حفظ الصلاحيات: ${_selectedPermissions.map((p) => p.humanReadableName).join('، ')}',
-        ),
-        backgroundColor: Colors.green,
-      ),
-    );
+  Future<void> _savePermissions() async {
+    if (_isSaving) return;
+
+    setState(() {
+      _isSaving = true;
+    });
+
+    try {
+      // Convert selected permissions to PermissionsSet
+      final newPermissions = PermissionsSet.fromSet(_selectedPermissions);
+
+      // Call the DAO method to update permissions
+      final success = await DatabaseService.I.users.updateUserPermissions(
+        userId: widget.userId,
+        newPermissions: newPermissions,
+      );
+
+      if (success) {
+        // Show success message
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(
+                'تم حفظ الصلاحيات بنجاح: ${newPermissions.toHumanReadableString()}',
+              ),
+              backgroundColor: Colors.green,
+              duration: const Duration(seconds: 3),
+            ),
+          );
+        }
+      } else {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content:
+                  Text('حدث خطأ أثناء حفظ الصلاحيات. يرجى المحاولة مرة أخرى.'),
+              backgroundColor: Colors.red,
+              duration: Duration(seconds: 5),
+            ),
+          );
+        }
+      }
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('حدث خطأ غير متوقع: $e'),
+            backgroundColor: Colors.red,
+            duration: const Duration(seconds: 5),
+          ),
+        );
+      }
+    } finally {
+      if (mounted) {
+        setState(() {
+          _isSaving = false;
+        });
+      }
+    }
   }
 
   void _resetPermissions() {
     setState(() {
-      // Reset to original permissions from the user object
       if (widget.user != null) {
         _selectedPermissions = widget.user!.permissions.permissions.toSet();
       } else {
@@ -293,6 +323,140 @@ class _EditUserState extends State<EditUser> {
       const SnackBar(
         content: Text('تم إعادة تعيين الصلاحيات'),
         backgroundColor: Colors.orange,
+        duration: Duration(seconds: 2),
+      ),
+    );
+  }
+
+  // Build editable AdminOn UI
+  Widget _buildEditableAdminOn(BuildContext context, User user) {
+    return Card(
+      margin: const EdgeInsets.all(8.0),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Icon(Icons.admin_panel_settings,
+                    color: Theme.of(context).primaryColor,),
+                const SizedBox(width: 8),
+                Text(
+                  'صلاحيات الإدارة',
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
+                const Spacer(),
+                IconButton(
+                  icon: const Icon(Icons.add),
+                  onPressed: () => _showAddAdminOnDialog(context, user),
+                  tooltip: 'إضافة صلاحية إدارة',
+                ),
+              ],
+            ),
+            const SizedBox(height: 16),
+            if (user.adminOn?.isEmpty ?? true)
+              const Text('لا توجد صلاحيات إدارة محددة')
+            else
+              ...user.adminOn!
+                  .map((adminOn) => _buildAdminOnItem(context, adminOn)),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildAdminOnItem(BuildContext context, AdminOnData adminOn) {
+    return Card(
+      margin: const EdgeInsets.symmetric(vertical: 4),
+      child: ListTile(
+        title: Text(_getAdminOnTitle(adminOn)),
+        subtitle: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (adminOn.areaAllowEdit != null ||
+                adminOn.serviceAllowEdit != null ||
+                adminOn.groupAllowEdit != null)
+              Text('تعديل: ${_getAllowEditText(adminOn)}'),
+            if (adminOn.areaAdminOnUsers != null ||
+                adminOn.serviceAdminOnUsers != null ||
+                adminOn.groupAdminOnUsers != null)
+              Text('إدارة المستخدمين: ${_getAdminOnUsersText(adminOn)}'),
+          ],
+        ),
+        trailing: IconButton(
+          icon: const Icon(Icons.delete, color: Colors.red),
+          onPressed: () => _deleteAdminOn(context, adminOn),
+          tooltip: 'حذف صلاحية الإدارة',
+        ),
+      ),
+    );
+  }
+
+  String _getAdminOnTitle(AdminOnData adminOn) {
+    if (adminOn.area != null) return 'منطقة: ${adminOn.area!.name}';
+    if (adminOn.service != null) return 'خدمة: ${adminOn.service!.name}';
+    if (adminOn.group != null) return 'مجموعة: ${adminOn.group!.name}';
+    return 'صلاحية إدارة';
+  }
+
+  String _getAllowEditText(AdminOnData adminOn) {
+    if (adminOn.areaAllowEdit == true) return 'نعم';
+    if (adminOn.serviceAllowEdit == true) return 'نعم';
+    if (adminOn.groupAllowEdit == true) return 'نعم';
+    return 'لا';
+  }
+
+  String _getAdminOnUsersText(AdminOnData adminOn) {
+    if (adminOn.areaAdminOnUsers == true) return 'نعم';
+    if (adminOn.serviceAdminOnUsers == true) return 'نعم';
+    if (adminOn.groupAdminOnUsers == true) return 'نعم';
+    return 'لا';
+  }
+
+  void _showAddAdminOnDialog(BuildContext context, User user) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('إضافة صلاحية إدارة'),
+        content: const Text(
+            'هذه الميزة تحتاج إلى تطوير إضافي لاختيار المنطقة/الخدمة/المجموعة'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('إغلاق'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _deleteAdminOn(BuildContext context, AdminOnData adminOn) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('حذف صلاحية الإدارة'),
+        content: Text(
+            'هل أنت متأكد من حذف صلاحية الإدارة: ${_getAdminOnTitle(adminOn)}؟'),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('إلغاء'),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              // TODO: Call database service to delete adminOn
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('تم حذف صلاحية الإدارة'),
+                  backgroundColor: Colors.green,
+                ),
+              );
+            },
+            child: const Text('حذف'),
+          ),
+        ],
       ),
     );
   }
