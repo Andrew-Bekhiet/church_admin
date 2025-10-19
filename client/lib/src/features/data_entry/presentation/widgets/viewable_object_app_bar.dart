@@ -79,9 +79,10 @@ class ViewableObjectAppBarState extends State<ViewableObjectAppBar> {
       child: SafeArea(
         child: LayoutBuilder(
           builder: (context, constraints) {
-            final animationValue = 1 -
-                ((constraints.biggest.height - kToolbarHeight) /
-                    (widget.appBarMaxHeight - kToolbarHeight));
+            final animationValue = (1 -
+                    ((constraints.biggest.height - kToolbarHeight) /
+                        (widget.appBarMaxHeight - kToolbarHeight)))
+                .clamp(0.0, 1.0);
 
             final BorderRadius? borderRadiusValue = _borderRadiusTween
                 .transform(widget.circleCrop ? animationValue : 0);
