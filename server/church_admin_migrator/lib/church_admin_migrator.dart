@@ -339,8 +339,10 @@ Future<void> _migrateMeetingHelperPersons(
                 }
 
                 return member.mainPhone!
-                    .replaceAll(r'\D', '')
-                    .levenshteinSimilarity(person.phone!.replaceAll(r'\D', ''));
+                    .replaceAll(RegExp(r'\D'), '')
+                    .levenshteinSimilarity(
+                      person.phone!.replaceAll(RegExp(r'\D'), ''),
+                    );
               })
               .fold(0.0, (max, score) => score > max ? score : max);
 
