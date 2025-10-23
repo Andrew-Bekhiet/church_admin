@@ -244,7 +244,7 @@ class _OrderByWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
 
-    final filterableFields = selectedQueryableType.fieldsMetadata
+    final orderableFields = selectedQueryableType.fieldsMetadata
         .where((p) => p.isOrderable && !p.isCodeOnly)
         .toList();
 
@@ -254,7 +254,7 @@ class _OrderByWidget extends StatelessWidget {
 
     if (field is RedirectingFieldMetadata &&
         field.isExpandable &&
-        filterableFields.contains(field.parentField)) {
+        orderableFields.contains(field.parentField)) {
       parentField = field.parentField;
       childField = field.targetField;
     } else {
@@ -281,7 +281,7 @@ class _OrderByWidget extends StatelessWidget {
                   ),
                   isExpanded: true,
                   initialValue: parentField,
-                  items: filterableFields
+                  items: orderableFields
                       .map(
                         (p) => DropdownMenuItem(
                           alignment: Alignment.center,
@@ -310,7 +310,7 @@ class _OrderByWidget extends StatelessWidget {
                     }
 
                     onChanged(
-                      orderBy.copyWith(
+                      OrderBy(
                         field: newField,
                         value: orderBy.value,
                       ),
@@ -367,8 +367,8 @@ class _OrderByWidget extends StatelessWidget {
                 selectedQueryableType: parentField.fieldQueryableType!,
                 orderBy: OrderBy(field: childField, value: orderBy.value),
                 onChanged: (newOrderBy) => onChanged(
-                  orderBy.copyWith(
-                    field: field.redirectTo(newOrderBy.field),
+                  OrderBy(
+                    field: parentField.redirectTo(newOrderBy.field),
                     value: newOrderBy.value,
                   ),
                 ),

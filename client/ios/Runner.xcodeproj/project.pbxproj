@@ -483,7 +483,7 @@
 		};
 		249021D4217E4FDB00AE95B9 /* Profile */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B4B6C3F51A2B3D7800A1BEEF /* Profile.xcconfig */;
+			baseConfigurationReference = BA1FBEA9E62AB4A079D32B69 /* Pods-Runner.profile.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
