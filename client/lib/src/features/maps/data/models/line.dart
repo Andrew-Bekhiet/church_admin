@@ -18,6 +18,9 @@ class Line with EquatableMixin implements Spatial {
     };
   }
 
+  String asWKT() =>
+      'LINESTRING(${coordinates.map((p) => '${p.longitude} ${p.latitude}').join(', ')})';
+
   @override
   List<Object?> get props => coordinates;
 }

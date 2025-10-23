@@ -15,6 +15,8 @@ class Point with EquatableMixin implements Spatial {
     };
   }
 
+  String asWKT() => 'POINT($longitude $latitude)';
+
   @override
   List<Object?> get props => [longitude, latitude];
 }

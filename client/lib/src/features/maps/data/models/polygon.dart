@@ -23,6 +23,12 @@ class Polygon with EquatableMixin implements Spatial {
     };
   }
 
+  String asWKT() => 'POLYGON((${[
+        ...coordinates.map((p) => '${p.longitude} ${p.latitude}'),
+        if (coordinates.isNotEmpty)
+          '${coordinates.first.longitude} ${coordinates.first.latitude}'
+      ].join(', ')}))';
+
   @override
   List<Object?> get props => coordinates;
 }
