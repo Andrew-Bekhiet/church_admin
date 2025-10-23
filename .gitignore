@@ -22,3 +22,6 @@ alt-store-server/
 .env.*
 .vscode
 client/resources/
+**/*/churchdata.json
+**/*/meetinghelper.json
+**/*/node_modules
