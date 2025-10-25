@@ -44,16 +44,20 @@ class OrderByBottomSheet extends StatelessWidget {
                   (i, orderBy) => OrderByWidget(
                     selectedQueryableType: queryableType,
                     orderBy: orderBy,
-                    onChanged: (newValue) => onChanged(orderByValue
-                        .mapIndexed(
-                          (j, o) => j == i ? newValue : o,
-                        )
-                        .toList()),
+                    onChanged: (newValue) => onChanged(
+                      orderByValue
+                          .mapIndexed(
+                            (j, o) => j == i ? newValue : o,
+                          )
+                          .toList(),
+                    ),
                     onRemoved: i == 0
                         ? null
-                        : () => onChanged(orderByValue
-                            .whereIndexed((j, _) => j != i)
-                            .toList()),
+                        : () => onChanged(
+                              orderByValue
+                                  .whereIndexed((j, _) => j != i)
+                                  .toList(),
+                            ),
                   ),
                 ),
                 Padding(
