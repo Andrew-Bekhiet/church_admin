@@ -30,9 +30,7 @@ class _ViewGroupState extends State<ViewGroup> {
           ),
         ],
       ),
-      orderBy: Stream.value([
-        OrderBy(field: PersonFields().name),
-      ]),
+      orderBy: _personsOrderBy.stream,
     ),
   );
 
