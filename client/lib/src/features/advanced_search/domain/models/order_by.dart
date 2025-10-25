@@ -33,13 +33,7 @@ class OrderBy with _$OrderBy {
   Map<String, dynamic> toJson() => _$OrderByToJson(this);
 
   Json toSearchJson() {
-    return field.serializeOrderBy(switch (field) {
-      FieldMetadata<ShammasLevel>() || FieldMetadata<StudyYear>() => {
-          'order': value.serializedName
-        },
-      FieldMetadata<ID>() => {'name': value.serializedName},
-      _ => value.serializedName,
-    });
+    return field.serializeOrderBy(value.serializedName);
   }
 }
 
@@ -57,5 +51,8 @@ enum OrderByValue {
   asc,
   desc;
 
-  String get serializedName => name.toUpperCase();
+  String get serializedName => switch (this) {
+        OrderByValue.asc => 'ASC_NULLS_LAST',
+        OrderByValue.desc => 'DESC_NULLS_LAST',
+      };
 }

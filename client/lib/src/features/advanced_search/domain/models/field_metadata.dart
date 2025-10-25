@@ -60,7 +60,15 @@ class FieldMetadata<T extends Object> with EquatableMixin {
   }
 
   Json serializeOrderBy(Object serializedValue) {
-    return {name: serializedValue};
+    final subFields = AdvancedQueriesMetadata()
+        .allQueryablesByType[type]
+        ?.fieldsMetadataByName;
+
+    return {
+      name: subFields?['order']?.serializeOrderBy(serializedValue) ??
+          subFields?['name']?.serializeOrderBy(serializedValue) ??
+          serializedValue,
+    };
   }
 
   /// Creates a redirecting field that exposes deeply nested fields directly on parent types.
