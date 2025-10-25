@@ -26,25 +26,35 @@ class _ViewStreetState extends State<ViewStreet> {
             ),
           ],
         ),
+        orderBy: _familiesOrderBy.stream,
       ),
     ),
   );
 
+  final BehaviorSubject<List<OrderBy>> _familiesOrderBy =
+      BehaviorSubject.seeded([
+    OrderBy(field: FamilyFields().name),
+  ]);
+
   late final _storesController = _ensureWillDispose(
     ViewableObjectListController(
       objectsPaginatableStream: DatabaseService.I.stores.streamAll(
-        where: Stream.value(
-          [
-            Filter(
-              StoreFields().street.redirectTo(StreetFields().id),
-              PrimitiveOperator.eq,
-              widget.streetId,
-            ),
-          ],
-        ),
-      ),
+          where: Stream.value(
+            [
+              Filter(
+                StoreFields().street.redirectTo(StreetFields().id),
+                PrimitiveOperator.eq,
+                widget.streetId,
+              ),
+            ],
+          ),
+          orderBy: _storesOrderBy.stream),
     ),
   );
+
+  final BehaviorSubject<List<OrderBy>> _storesOrderBy = BehaviorSubject.seeded([
+    OrderBy(field: StoreFields().name),
+  ]);
 
   late final _personsController = _ensureWillDispose(
     ViewableObjectListController(
@@ -58,9 +68,15 @@ class _ViewStreetState extends State<ViewStreet> {
             ),
           ],
         ),
+        orderBy: _personsOrderBy.stream,
       ),
     ),
   );
+
+  final BehaviorSubject<List<OrderBy>> _personsOrderBy =
+      BehaviorSubject.seeded([
+    OrderBy(field: PersonFields().name),
+  ]);
 
   final Set<ViewableObjectListController> _controllersToDispose = {};
 
@@ -92,6 +108,15 @@ class _ViewStreetState extends State<ViewStreet> {
             ),
       },
       sliverPersistentHeaderDelegate: ChipTabBarPersistentHeaderDelegate(
+        filtersWidget: Builder(
+          builder: (context) => IconButton(
+            visualDensity: VisualDensity.compact,
+            padding: EdgeInsets.zero,
+            icon: const Icon(Symbols.sort),
+            onPressed: () =>
+                _showOrderBySheet(DefaultTabController.of(context).index),
+          ),
+        ),
         tabs: [
           (
             icon: viewableObjectService.getDefaultIconFor<Family>(),
@@ -234,6 +259,27 @@ class _ViewStreetState extends State<ViewStreet> {
         },
       ),
     );
+  }
+
+  Future<void> _showOrderBySheet(int currentTabIndex) async {
+    final advancedQueriesMetadata = AdvancedQueriesMetadata();
+
+    final (queryableType, orderBySubject) = switch (currentTabIndex) {
+      0 => (advancedQueriesMetadata.family, _familiesOrderBy),
+      1 => (advancedQueriesMetadata.person, _personsOrderBy),
+      2 => (advancedQueriesMetadata.store, _storesOrderBy),
+      _ => throw UnimplementedError(),
+    };
+
+    final newOrderBy = await showOrderByBottomSheet(
+      context,
+      queryableType: queryableType,
+      orderBySubject: orderBySubject,
+    );
+
+    if (newOrderBy == null) return;
+
+    orderBySubject.add(newOrderBy);
   }
 
   ViewableObjectListController<T>

@@ -1,6 +1,7 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
+import 'package:rxdart/rxdart.dart';
 
 class ViewClass extends StatefulWidget {
   final Class? $class;
@@ -22,8 +23,17 @@ class _ViewClassState extends State<ViewClass> {
           widget.classId,
         ),
       ]),
+      orderBy: Stream.value([
+        OrderBy(field: PersonFields().name),
+      ]),
     ),
   );
+
+  final BehaviorSubject<List<OrderBy>> _personsOrderBy =
+      BehaviorSubject.seeded([
+    OrderBy(field: PersonFields().studyYear),
+    OrderBy(field: PersonFields().name),
+  ]);
 
   late final stream = DatabaseService.I.classes.streamSingleById(
     id: widget.classId,
@@ -79,6 +89,12 @@ class _ViewClassState extends State<ViewClass> {
         ]),
       ),
       sliverPersistentHeaderDelegate: ChipTabBarPersistentHeaderDelegate(
+        filtersWidget: IconButton(
+          visualDensity: VisualDensity.compact,
+          padding: EdgeInsets.zero,
+          icon: const Icon(Symbols.sort),
+          onPressed: _showOrderBySheet,
+        ),
         tabs: [
           (
             icon: ViewableObjectService.I.getDefaultIconFor<Person>(),
@@ -110,6 +126,18 @@ class _ViewClassState extends State<ViewClass> {
         child: const Icon(Symbols.person_add),
       ),
     );
+  }
+
+  Future<void> _showOrderBySheet() async {
+    final newOrderBy = await showOrderByBottomSheet(
+      context,
+      queryableType: AdvancedQueriesMetadata().person,
+      orderBySubject: _personsOrderBy,
+    );
+
+    if (newOrderBy == null) return;
+
+    _personsOrderBy.add(newOrderBy);
   }
 
   @override
