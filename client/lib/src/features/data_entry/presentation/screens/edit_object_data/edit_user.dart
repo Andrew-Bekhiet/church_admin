@@ -21,6 +21,7 @@ class _EditUserState extends State<EditUser> {
   final scrollController = ScrollController();
 
   Set<UserPermission> _selectedPermissions = {};
+  Set<UserPermission> _initialPermissions = {};
   bool _isLoading = true;
   bool _isSaving = false;
 
@@ -37,6 +38,7 @@ class _EditUserState extends State<EditUser> {
       objectStream: stream,
       detailsBuilder: (context, user) {
         if (_isLoading) {
+          _initialPermissions = user.permissions.permissions.toSet();
           _selectedPermissions = user.permissions.permissions.toSet();
           _isLoading = false;
         }
@@ -263,11 +265,7 @@ class _EditUserState extends State<EditUser> {
 
   void _resetPermissions() {
     setState(() {
-      if (widget.user != null) {
-        _selectedPermissions = widget.user!.permissions.permissions.toSet();
-      } else {
-        _selectedPermissions.clear();
-      }
+      _selectedPermissions = {..._initialPermissions};
     });
 
     ScaffoldMessenger.of(context).showSnackBar(
