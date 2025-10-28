@@ -93,12 +93,6 @@ class _EditUserState extends State<EditUser> {
     );
   }
 
-  @override
-  void dispose() {
-    scrollController.dispose();
-    super.dispose();
-  }
-
   Widget _buildEditablePermissions(BuildContext context) {
     return Column(
       children: [
@@ -275,6 +269,12 @@ class _EditUserState extends State<EditUser> {
         duration: Duration(seconds: 2),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
   }
 }
 
