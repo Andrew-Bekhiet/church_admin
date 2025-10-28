@@ -202,6 +202,8 @@ class _EditUserState extends State<EditUser> {
   Future<void> _savePermissions() async {
     if (_isSaving) return;
 
+    final scaffoldMessenger = ScaffoldMessenger.of(context);
+
     setState(() {
       _isSaving = true;
     });
@@ -214,8 +216,8 @@ class _EditUserState extends State<EditUser> {
         newPermissions: newPermissions,
       );
 
-      if (success && mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
+      if (success) {
+        scaffoldMessenger.showSnackBar(
           SnackBar(
             content: Text(
               'تم حفظ الصلاحيات بنجاح: ${newPermissions.toHumanReadableString()}',
@@ -224,8 +226,8 @@ class _EditUserState extends State<EditUser> {
             duration: const Duration(seconds: 3),
           ),
         );
-      } else if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
+      } else {
+        scaffoldMessenger.showSnackBar(
           const SnackBar(
             content:
                 Text('حدث خطأ أثناء حفظ الصلاحيات. يرجى المحاولة مرة أخرى.'),
@@ -235,15 +237,13 @@ class _EditUserState extends State<EditUser> {
         );
       }
     } catch (e) {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('حدث خطأ غير متوقع: $e'),
-            backgroundColor: Colors.red,
-            duration: const Duration(seconds: 5),
-          ),
-        );
-      }
+      scaffoldMessenger.showSnackBar(
+        SnackBar(
+          content: Text('حدث خطأ غير متوقع: $e'),
+          backgroundColor: Colors.red,
+          duration: const Duration(seconds: 5),
+        ),
+      );
     } finally {
       if (mounted) {
         setState(() {
