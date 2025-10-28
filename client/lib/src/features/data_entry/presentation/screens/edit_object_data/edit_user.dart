@@ -16,8 +16,6 @@ class EditUser extends StatefulWidget {
 }
 
 class _EditUserState extends State<EditUser> {
-  final scrollController = ScrollController();
-
   Set<UserPermission> _selectedPermissions = {};
   Set<UserPermission> _initialPermissions = {};
   bool _isLoading = true;
@@ -263,11 +261,5 @@ class _EditUserState extends State<EditUser> {
         duration: Duration(seconds: 2),
       ),
     );
-  }
-
-  @override
-  void dispose() {
-    scrollController.dispose();
-    super.dispose();
   }
 }
