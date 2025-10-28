@@ -1333,6 +1333,98 @@ class MockUsersDAO extends _i1.Mock implements _i2.UsersDAO {
       ) as _i4.Future<_i2.User?>);
 
   @override
+  _i4.Future<bool> updateUserPermissions({
+    required String? userId,
+    required _i2.PermissionsSet? newPermissions,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateUserPermissions,
+          [],
+          {
+            #userId: userId,
+            #newPermissions: newPermissions,
+          },
+        ),
+        returnValue: _i4.Future<bool>.value(false),
+        returnValueForMissingStub: _i4.Future<bool>.value(false),
+      ) as _i4.Future<bool>);
+
+  @override
+  _i4.Future<bool> addUserPermissionsOnly({
+    required String? userId,
+    required _i2.PermissionsSet? newPermissions,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #addUserPermissionsOnly,
+          [],
+          {
+            #userId: userId,
+            #newPermissions: newPermissions,
+          },
+        ),
+        returnValue: _i4.Future<bool>.value(false),
+        returnValueForMissingStub: _i4.Future<bool>.value(false),
+      ) as _i4.Future<bool>);
+
+  @override
+  _i4.Future<bool> addUserAdminOn({
+    required String? userId,
+    required _i2.AdminOnData? adminOnData,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #addUserAdminOn,
+          [],
+          {
+            #userId: userId,
+            #adminOnData: adminOnData,
+          },
+        ),
+        returnValue: _i4.Future<bool>.value(false),
+        returnValueForMissingStub: _i4.Future<bool>.value(false),
+      ) as _i4.Future<bool>);
+
+  @override
+  _i4.Future<bool> deleteUserAdminOn({
+    required String? userId,
+    required String? adminOnId,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #deleteUserAdminOn,
+          [],
+          {
+            #userId: userId,
+            #adminOnId: adminOnId,
+          },
+        ),
+        returnValue: _i4.Future<bool>.value(false),
+        returnValueForMissingStub: _i4.Future<bool>.value(false),
+      ) as _i4.Future<bool>);
+
+  @override
+  _i4.Future<bool> updateUserAdminOn({
+    required String? userId,
+    required String? adminOnId,
+    required _i2.AdminOnData? updatedAdminOnData,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateUserAdminOn,
+          [],
+          {
+            #userId: userId,
+            #adminOnId: adminOnId,
+            #updatedAdminOnData: updatedAdminOnData,
+          },
+        ),
+        returnValue: _i4.Future<bool>.value(false),
+        returnValueForMissingStub: _i4.Future<bool>.value(false),
+      ) as _i4.Future<bool>);
+
+  @override
   _i2.PaginatableStreamBase<_i2.User> streamAll({
     _i4.Stream<String?>? searchQuery,
     _i4.Stream<List<_i2.Filter<Object>>>? where,

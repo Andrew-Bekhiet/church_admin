@@ -48,34 +48,8 @@ mutation addUserAdminOn(
   }
 }
 
-mutation deleteUserAdminOn(
-  $permissionId: uuid!
-) {
+mutation deleteUserAdminOn($permissionId: uuid!) {
   deleteAuthUsersAdminOn(where: { permissionId: { _eq: $permissionId } }) {
-    affectedRows
-  }
-}
-
-mutation updateUserAdminOn(
-  $permissionId: uuid!
-  $areaAllowEdit: Boolean
-  $areaAdminOnUsers: Boolean
-  $serviceAllowEdit: Boolean
-  $serviceAdminOnUsers: Boolean
-  $groupAllowEdit: Boolean
-  $groupAdminOnUsers: Boolean
-) {
-  updateAuthUsersAdminOn(
-    where: { permissionId: { _eq: $permissionId } }
-    _set: {
-      areaAllowEdit: $areaAllowEdit
-      areaAdminOnUsers: $areaAdminOnUsers
-      serviceAllowEdit: $serviceAllowEdit
-      serviceAdminOnUsers: $serviceAdminOnUsers
-      groupAllowEdit: $groupAllowEdit
-      groupAdminOnUsers: $groupAdminOnUsers
-    }
-  ) {
     affectedRows
   }
 }

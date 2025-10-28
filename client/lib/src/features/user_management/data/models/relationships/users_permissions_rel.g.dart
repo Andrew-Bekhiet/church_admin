@@ -71,6 +71,7 @@ const _$UserPermissionEnumMap = {
   UserPermission.writeAllData: 'writeAllData',
   UserPermission.recordHistory: 'recordHistory',
   UserPermission.changeOldHistory: 'changeOldHistory',
+  UserPermission.deleteData: 'deleteData',
   UserPermission.recoverDeleted: 'recoverDeleted',
   UserPermission.exportData: 'exportData',
 };
