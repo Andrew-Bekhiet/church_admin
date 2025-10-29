@@ -23,9 +23,7 @@ class _ViewClassState extends State<ViewClass> {
           widget.classId,
         ),
       ]),
-      orderBy: Stream.value([
-        OrderBy(field: PersonFields().name),
-      ]),
+      orderBy: _personsOrderBy.stream,
     ),
   );
 
