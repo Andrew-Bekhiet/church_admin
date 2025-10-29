@@ -1,55 +1,23 @@
 mutation updateUserPermissions(
   $uid: uuid!
-  $permissions: [AuthUsersPermissionsInsertInput!]!
+  $permissionsToDelete: [String!]!
+  $permissionsToInsert: [AuthUsersPermissionsInsertInput!]!
   $deletePermissions: Boolean! = true
   $insertPermissions: Boolean! = true
 ) {
-  deleteAuthUsersPermissions(where: { uid: { _eq: $uid } })
-    @include(if: $deletePermissions) {
+  deleteAuthUsersPermissions(
+    where: {
+      _and: [
+        { uid: { _eq: $uid } }
+        { permission: { _in: $permissionsToDelete } }
+      ]
+    }
+  ) @include(if: $deletePermissions) {
     affectedRows
   }
 
-  insertAuthUsersPermissions(objects: $permissions)
+  insertAuthUsersPermissions(objects: $permissionsToInsert)
     @include(if: $insertPermissions) {
-    affectedRows
-  }
-}
-
-mutation addUserAdminOn(
-  $uid: uuid!
-  $areaId: uuid
-  $serviceId: uuid
-  $groupId: uuid
-  $areaAllowEdit: Boolean
-  $areaAdminOnUsers: Boolean
-  $serviceAllowEdit: Boolean
-  $serviceAdminOnUsers: Boolean
-  $groupAllowEdit: Boolean
-  $groupAdminOnUsers: Boolean
-) {
-  insertAuthUsersAdminOn(
-    objects: {
-      uid: $uid
-      areaId: $areaId
-      serviceId: $serviceId
-      groupId: $groupId
-      areaAllowEdit: $areaAllowEdit
-      areaAdminOnUsers: $areaAdminOnUsers
-      serviceAllowEdit: $serviceAllowEdit
-      serviceAdminOnUsers: $serviceAdminOnUsers
-      groupAllowEdit: $groupAllowEdit
-      groupAdminOnUsers: $groupAdminOnUsers
-    }
-  ) {
-    affectedRows
-    returning {
-      permissionId
-    }
-  }
-}
-
-mutation deleteUserAdminOn($permissionId: uuid!) {
-  deleteAuthUsersAdminOn(where: { permissionId: { _eq: $permissionId } }) {
     affectedRows
   }
 }

@@ -18,7 +18,7 @@ RouteBase get $editUserRoute => GoRouteData.$route(
 mixin _$EditUserRoute on GoRouteData {
   static EditUserRoute _fromState(GoRouterState state) => EditUserRoute(
         uid: state.uri.queryParameters['uid']!,
-        $extra: state.extra as User?,
+        $extra: state.extra as User,
       );
 
   EditUserRoute get _self => this as EditUserRoute;

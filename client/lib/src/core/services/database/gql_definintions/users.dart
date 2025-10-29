@@ -93,152 +93,34 @@ class UsersDAO extends DAOBase<User> with StreamableDAO<User> {
     return graphQLClient.queryAndReturnParsedNullable(queryOptions);
   }
 
-  Future<bool> updateUserPermissions({
+  Future<void> updateUserPermissions({
     required String userId,
     required PermissionsSet newPermissions,
+    required PermissionsSet oldPermissions,
   }) async {
-    try {
-      final permissionsInput = newPermissions
-          .map((permission) => Input_AuthUsersPermissionsInsertInput(
-                uid: userId.toUuid(),
-                permission: permission.name,
-              ))
-          .toList();
+    final difference = diff(oldPermissions, newPermissions);
 
-      print('Attempting to update permissions for user: $userId');
-      print('New permissions: ${newPermissions.map((p) => p.name).toList()}');
-
-      final mutationOptions = MutationOptions(
+    return graphQLClient.mutateAndReturnParsedNullable(
+      MutationOptions(
         document: documentNodeMutationupdateUserPermissions,
         operationName: 'updateUserPermissions',
         variables: Variables_Mutation_updateUserPermissions(
           uid: userId.toUuid(),
-          permissions: permissionsInput,
+          insertPermissions: difference.added.isNotEmpty,
+          deletePermissions: difference.removed.isNotEmpty,
+          permissionsToDelete:
+              difference.removed.map((permission) => permission.name).toList(),
+          permissionsToInsert: difference.added
+              .map(
+                (permission) => Input_AuthUsersPermissionsInsertInput(
+                  uid: userId.toUuid(),
+                  permission: permission.name,
+                ),
+              )
+              .toList(),
         ).toJson(),
-        parserFn: (data) =>
-            data, 
-      );
-
-      final result = await graphQLClient.mutate(mutationOptions);
-
-      if (result.hasException) {
-        print('GraphQL Exception: ${result.exception}');
-        if (result.exception?.graphqlErrors != null) {
-          for (final error in result.exception!.graphqlErrors!) {
-            print('GraphQL Error: ${error.message}');
-            print('Path: ${error.path}');
-            print('Extensions: ${error.extensions}');
-          }
-        }
-        return false;
-      }
-
-      final data = result.data;
-      if (data != null) {
-        final deleteRows =
-            data['deleteAuthUsersPermissions']?['affectedRows'] ?? 0;
-        final insertRows =
-            data['insertAuthUsersPermissions']?['affectedRows'] ?? 0;
-        print('Delete affected rows: $deleteRows');
-        print('Insert affected rows: $insertRows');
-
-        return insertRows > 0;
-      }
-
-      return false;
-    } catch (e) {
-      print('Error updating user permissions: $e');
-      return false;
-    }
-  }
-
-  Future<bool> addUserPermissionsOnly({
-    required String userId,
-    required PermissionsSet newPermissions,
-  }) async {
-    try {
-      final permissionsInput = newPermissions
-          .map((permission) => Input_AuthUsersPermissionsInsertInput(
-                uid: userId.toUuid(),
-                permission: permission.name,
-              ))
-          .toList();
-
-      print('Attempting to add permissions only for user: $userId');
-      print(
-          'Permissions to add: ${newPermissions.map((p) => p.name).toList()}');
-
-      final mutationOptions = MutationOptions(
-        document: documentNodeMutationupdateUserPermissions,
-        operationName: 'updateUserPermissions',
-        variables: Variables_Mutation_updateUserPermissions(
-          uid: userId.toUuid(),
-          permissions: permissionsInput,
-          deletePermissions: false,
-          insertPermissions: true,
-        ).toJson(),
-        parserFn: (data) => data,
-      );
-
-      final result = await graphQLClient.mutate(mutationOptions);
-
-      if (result.hasException) {
-        print('Insert-only failed: ${result.exception}');
-        return false;
-      }
-
-      final data = result.data;
-      if (data != null) {
-        final insertRows =
-            data['insertAuthUsersPermissions']?['affectedRows'] ?? 0;
-        print('Insert-only affected rows: $insertRows');
-        return insertRows > 0;
-      }
-
-      return false;
-    } catch (e) {
-      print('Error in insert-only permissions: $e');
-      return false;
-    }
-  }
-
-  Future<bool> addUserAdminOn({
-    required String userId,
-    required AdminOnData adminOnData,
-  }) async {
-    try {
-      print('Adding admin on record for user: $userId');
-      return true;
-    } catch (e) {
-      print('Error adding admin on record: $e');
-      return false;
-    }
-  }
-
-  Future<bool> deleteUserAdminOn({
-    required String userId,
-    required String adminOnId,
-  }) async {
-    try {
-      print('Deleting admin on record: $adminOnId for user: $userId');
-      return true;
-    } catch (e) {
-      print('Error deleting admin on record: $e');
-      return false;
-    }
-  }
-
-  Future<bool> updateUserAdminOn({
-    required String userId,
-    required String adminOnId,
-    required AdminOnData updatedAdminOnData,
-  }) async {
-    try {
-      print('Updating admin on record: $adminOnId for user: $userId');
-      return true;
-    } catch (e) {
-      print('Error updating admin on record: $e');
-      return false;
-    }
+        parserFn: (_) => null,
+      ),
+    );
   }
 }
