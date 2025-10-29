@@ -1,4 +1,5 @@
 import 'package:church_admin/church_admin.dart';
+import 'package:church_admin/src/features/data_entry/presentation/screens/edit_object_data/permission_check_widget.dart';
 import 'package:flutter/material.dart';
 
 class EditUser extends StatefulWidget {
@@ -27,7 +28,7 @@ class _EditUserState extends State<EditUser> {
         await DatabaseService.I.users.updateUserPermissions(
           userId: newUser.uid,
           oldPermissions: oldUser.permissions,
-          newPermissions: newUser.permissions,
+          newPermissions: newUser.permissions.validated(),
         );
 
         return newUser;
@@ -82,91 +83,60 @@ class _EditUserState extends State<EditUser> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          CheckboxListTile(
-                            value: permissions.approved,
-                            onChanged: (_) =>
-                                _togglePermission(UserPermission.approved),
-                            secondary: Icon(UserPermission.approved.icon),
-                            title: Text(UserPermission.approved.label),
-                            subtitle: const Text(
-                              'يجب تفعيل الحساب للسماح للمستخدم بالدخول',
-                            ),
+                          PermissionCheckWidget(
+                            permission: UserPermission.approved,
+                            permissions: permissions,
+                            onToggle: _togglePermission,
+                            subtitleText:
+                                'يجب تفعيل الحساب للسماح للمستخدم بالدخول',
                           ),
                           const Divider(),
-                          CheckboxListTile(
-                            value: permissions.manageAllUsers,
-                            onChanged: (_) => _togglePermission(
-                              UserPermission.manageAllUsers,
-                            ),
-                            secondary: Icon(UserPermission.manageAllUsers.icon),
-                            title: Text(UserPermission.manageAllUsers.label),
-                            subtitle: const Text(
-                              'السماح بإضافة وتعديل وحذف المستخدمين',
-                            ),
+                          PermissionCheckWidget(
+                            permission: UserPermission.manageAllUsers,
+                            permissions: permissions,
+                            onToggle: _togglePermission,
+                            subtitleText:
+                                'السماح بإضافة وتعديل وحذف المستخدمين',
                           ),
-                          CheckboxListTile(
-                            value: permissions.readAllData,
-                            onChanged: (_) =>
-                                _togglePermission(UserPermission.readAllData),
-                            secondary: Icon(UserPermission.readAllData.icon),
-                            title: Text(UserPermission.readAllData.label),
-                            subtitle: const Text(
-                              'السماح برؤية جميع بيانات التطبيق',
-                            ),
+                          PermissionCheckWidget(
+                            permission: UserPermission.writeAllData,
+                            permissions: permissions,
+                            onToggle: _togglePermission,
+                            subtitleText: 'السماح بتعديل جميع بيانات التطبيق',
                           ),
-                          CheckboxListTile(
-                            value: permissions.writeAllData,
-                            onChanged: (_) =>
-                                _togglePermission(UserPermission.writeAllData),
-                            secondary: Icon(UserPermission.writeAllData.icon),
-                            title: Text(UserPermission.writeAllData.label),
-                            subtitle: const Text(
-                              'السماح بتعديل جميع بيانات التطبيق',
-                            ),
+                          PermissionCheckWidget(
+                            permission: UserPermission.readAllData,
+                            permissions: permissions,
+                            onToggle: _togglePermission,
+                            subtitleText: 'السماح برؤية جميع بيانات التطبيق',
                           ),
                           const Divider(),
-                          CheckboxListTile(
-                            value: permissions.recordHistory,
-                            onChanged: (_) =>
-                                _togglePermission(UserPermission.recordHistory),
-                            secondary: Icon(UserPermission.recordHistory.icon),
-                            title: Text(UserPermission.recordHistory.label),
-                            subtitle: const Text(
-                              'السماح بتسجيل الحضور للخدام والمخدومين',
-                            ),
+                          PermissionCheckWidget(
+                            permission: UserPermission.recordHistory,
+                            permissions: permissions,
+                            onToggle: _togglePermission,
+                            subtitleText:
+                                'السماح بتسجيل الحضور للخدام والمخدومين',
                           ),
-                          CheckboxListTile(
-                            value: permissions.changeOldHistory,
-                            onChanged: (_) => _togglePermission(
-                              UserPermission.changeOldHistory,
-                            ),
-                            secondary:
-                                Icon(UserPermission.changeOldHistory.icon),
-                            title: Text(UserPermission.changeOldHistory.label),
-                            subtitle: const Text(
-                              'السماح بتعديل سجلات الحضور لأي يوم سابق',
-                            ),
+                          PermissionCheckWidget(
+                            permission: UserPermission.changeOldHistory,
+                            permissions: permissions,
+                            onToggle: _togglePermission,
+                            subtitleText:
+                                'السماح بتعديل سجلات الحضور لأي يوم سابق',
                           ),
-                          CheckboxListTile(
-                            value: permissions.deleteData,
-                            onChanged: (_) =>
-                                _togglePermission(UserPermission.deleteData),
-                            secondary: Icon(UserPermission.deleteData.icon),
-                            title: Text(UserPermission.deleteData.label),
-                            subtitle: const Text(
-                              'السماح بحذف البيانات اللتي يمكن تعديلها',
-                            ),
+                          PermissionCheckWidget(
+                            permission: UserPermission.deleteData,
+                            permissions: permissions,
+                            onToggle: _togglePermission,
+                            subtitleText:
+                                'السماح بحذف البيانات اللتي يمكن تعديلها',
                           ),
-                          CheckboxListTile(
-                            value: permissions.recoverDeleted,
-                            onChanged: (_) => _togglePermission(
-                              UserPermission.recoverDeleted,
-                            ),
-                            secondary: Icon(UserPermission.recoverDeleted.icon),
-                            title: Text(UserPermission.recoverDeleted.label),
-                            subtitle: const Text(
-                              'السماح باسترجاع البيانات المحذوفة',
-                            ),
+                          PermissionCheckWidget(
+                            permission: UserPermission.recoverDeleted,
+                            permissions: permissions,
+                            onToggle: _togglePermission,
+                            subtitleText: 'السماح باسترجاع البيانات المحذوفة',
                           ),
                         ],
                       ),

@@ -56,6 +56,13 @@ class PermissionsSet extends DelegatingSet<UserPermission> with EquatableMixin {
         .map((e) => e.icon)
         .toSet();
   }
+
+  PermissionsSet validated() {
+    return PermissionsSet.fromSet({
+      for (final permission in this)
+        if (containsAll(permission.requires)) permission,
+    });
+  }
 }
 
 extension RemoveQuotes on String {
