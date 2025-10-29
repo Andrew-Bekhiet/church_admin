@@ -130,7 +130,7 @@ class _EditUserState extends State<EditUser> {
                             secondary: Icon(UserPermission.recordHistory.icon),
                             title: Text(UserPermission.recordHistory.label),
                             subtitle: const Text(
-                              'السماح بتسجيل الحضور اليومي للخدام',
+                              'السماح بتسجيل الحضور للخدام والمخدومين',
                             ),
                           ),
                           CheckboxListTile(
@@ -152,7 +152,7 @@ class _EditUserState extends State<EditUser> {
                             secondary: Icon(UserPermission.deleteData.icon),
                             title: Text(UserPermission.deleteData.label),
                             subtitle: const Text(
-                              'السماح بحذف بيانات التطبيق',
+                              'السماح بحذف البيانات اللتي يمكن تعديلها',
                             ),
                           ),
                           CheckboxListTile(
