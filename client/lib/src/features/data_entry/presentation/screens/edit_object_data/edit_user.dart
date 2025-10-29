@@ -43,6 +43,8 @@ class _EditUserState extends State<EditUser> {
     return EditObjectData<User>(
       getController: () => _controller,
       objectData: widget.user,
+      // TODO: implement deleting user permanently
+      canDelete: (_) => false,
       builder: (context, controller) {
         final user = controller.newObject;
         final permissions = user.permissions;
