@@ -129,6 +129,8 @@ class _ViewAreaState extends State<ViewArea> {
       sliverPersistentHeaderDelegate: ChipTabBarPersistentHeaderDelegate(
         filtersWidget: Builder(
           builder: (context) => IconButton(
+            visualDensity: VisualDensity.compact,
+            padding: EdgeInsets.zero,
             icon: const Icon(Symbols.sort),
             onPressed: () =>
                 _showOrderBySheet(DefaultTabController.of(context).index),
