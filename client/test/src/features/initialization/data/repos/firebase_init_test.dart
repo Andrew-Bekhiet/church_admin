@@ -38,6 +38,8 @@ void main() {
         ),
         FirebaseAppCheckPlatform.instance.activate(
           webProvider: anyNamed('webProvider'),
+          providerAndroid: anyNamed('providerAndroid'),
+          providerApple: anyNamed('providerApple'),
           androidProvider: anyNamed('androidProvider'),
           appleProvider: anyNamed('appleProvider'),
         ),
@@ -74,6 +76,8 @@ void _setUpMockFirebaseAppCheck() {
   when(
     mock.activate(
       webProvider: anyNamed('webProvider'),
+      providerAndroid: anyNamed('providerAndroid'),
+      providerApple: anyNamed('providerApple'),
       androidProvider: anyNamed('androidProvider'),
       appleProvider: anyNamed('appleProvider'),
     ),
