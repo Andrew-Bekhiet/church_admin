@@ -582,6 +582,26 @@ class MockLoggingService extends _i1.Mock implements _i6.LoggingService {
       );
 
   @override
+  void onDone(
+    _i9.Bloc<dynamic, dynamic>? bloc,
+    Object? event, [
+    Object? error,
+    StackTrace? stackTrace,
+  ]) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #onDone,
+          [
+            bloc,
+            event,
+            error,
+            stackTrace,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
   void onClose(_i9.BlocBase<dynamic>? bloc) => super.noSuchMethod(
         Invocation.method(
           #onClose,

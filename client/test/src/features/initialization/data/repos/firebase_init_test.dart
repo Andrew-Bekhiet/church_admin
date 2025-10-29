@@ -38,7 +38,11 @@ void main() {
         ),
         FirebaseAppCheckPlatform.instance.activate(
           webProvider: anyNamed('webProvider'),
+          providerAndroid: anyNamed('providerAndroid'),
+          providerApple: anyNamed('providerApple'),
+          // ignore: deprecated_member_use needed to detect real calls
           androidProvider: anyNamed('androidProvider'),
+          // ignore: deprecated_member_use needed to detect real calls
           appleProvider: anyNamed('appleProvider'),
         ),
         FirebaseMessagingPlatform.onBackgroundMessage =
@@ -74,6 +78,8 @@ void _setUpMockFirebaseAppCheck() {
   when(
     mock.activate(
       webProvider: anyNamed('webProvider'),
+      providerAndroid: anyNamed('providerAndroid'),
+      providerApple: anyNamed('providerApple'),
       androidProvider: anyNamed('androidProvider'),
       appleProvider: anyNamed('appleProvider'),
     ),

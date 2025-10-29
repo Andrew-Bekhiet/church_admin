@@ -276,6 +276,26 @@ class MockUserSettingsService extends _i1.Mock
       );
 
   @override
+  void onDone(
+    _i9.Bloc<dynamic, dynamic>? bloc,
+    Object? event, [
+    Object? error,
+    StackTrace? stackTrace,
+  ]) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #onDone,
+          [
+            bloc,
+            event,
+            error,
+            stackTrace,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
   void onClose(_i9.BlocBase<dynamic>? bloc) => super.noSuchMethod(
         Invocation.method(
           #onClose,
@@ -621,6 +641,24 @@ class MockAuthBloc extends _i1.Mock implements _i2.AuthBloc {
         Invocation.method(
           #onTransition,
           [transition],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onDone(
+    _i2.AuthEvent? event, [
+    Object? error,
+    StackTrace? stackTrace,
+  ]) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #onDone,
+          [
+            event,
+            error,
+            stackTrace,
+          ],
         ),
         returnValueForMissingStub: null,
       );

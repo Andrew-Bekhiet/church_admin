@@ -33,12 +33,13 @@ class FirebaseInit implements Initializer {
 
   Future<void> _initFirebaseAppCheck() async {
     await FirebaseAppCheck.instance.activate(
-      androidProvider:
-          kDebugMode ? AndroidProvider.debug : AndroidProvider.playIntegrity,
-      appleProvider: kDebugMode
-          ? AppleProvider.debug
-          : AppleProvider.appAttestWithDeviceCheckFallback,
-      webProvider: ReCaptchaV3Provider(SecretsService.I.webRecaptchaSiteKey),
+      providerAndroid: kDebugMode
+          ? const AndroidDebugProvider()
+          : const AndroidPlayIntegrityProvider(),
+      providerApple: kDebugMode
+          ? const AppleDebugProvider()
+          : const AppleAppAttestWithDeviceCheckFallbackProvider(),
+      providerWeb: ReCaptchaV3Provider(SecretsService.I.webRecaptchaSiteKey),
     );
 
     if (kDebugMode) {

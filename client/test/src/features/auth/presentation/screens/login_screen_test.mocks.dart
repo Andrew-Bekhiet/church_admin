@@ -452,6 +452,24 @@ class MockAuthBloc extends _i1.Mock implements _i3.AuthBloc {
       );
 
   @override
+  void onDone(
+    _i3.AuthEvent? event, [
+    Object? error,
+    StackTrace? stackTrace,
+  ]) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #onDone,
+          [
+            event,
+            error,
+            stackTrace,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
   void onChange(_i10.Change<_i3.AuthState>? change) => super.noSuchMethod(
         Invocation.method(
           #onChange,
@@ -1028,6 +1046,26 @@ class MockUserSettingsService extends _i1.Mock
       );
 
   @override
+  void onDone(
+    _i10.Bloc<dynamic, dynamic>? bloc,
+    Object? event, [
+    Object? error,
+    StackTrace? stackTrace,
+  ]) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #onDone,
+          [
+            bloc,
+            event,
+            error,
+            stackTrace,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
   void onClose(_i10.BlocBase<dynamic>? bloc) => super.noSuchMethod(
         Invocation.method(
           #onClose,
@@ -1273,6 +1311,26 @@ class MockNotificationsService extends _i1.Mock
           #onError,
           [
             bloc,
+            error,
+            stackTrace,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onDone(
+    _i10.Bloc<dynamic, dynamic>? bloc,
+    Object? event, [
+    Object? error,
+    StackTrace? stackTrace,
+  ]) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #onDone,
+          [
+            bloc,
+            event,
             error,
             stackTrace,
           ],
@@ -1776,6 +1834,26 @@ class MockLoggingService extends _i1.Mock implements _i3.LoggingService {
           [
             bloc,
             change,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onDone(
+    _i10.Bloc<dynamic, dynamic>? bloc,
+    Object? event, [
+    Object? error,
+    StackTrace? stackTrace,
+  ]) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #onDone,
+          [
+            bloc,
+            event,
+            error,
+            stackTrace,
           ],
         ),
         returnValueForMissingStub: null,

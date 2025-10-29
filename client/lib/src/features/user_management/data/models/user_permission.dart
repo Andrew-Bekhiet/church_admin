@@ -46,4 +46,27 @@ enum UserPermission implements LabeledEnum {
   final IconData icon;
 
   const UserPermission({required this.label, required this.icon});
+
+  Set<UserPermission> get requires {
+    if (this == UserPermission.approved) return {};
+
+    return {
+      UserPermission.approved,
+      ...switch (this) {
+        UserPermission.manageAllUsers => {
+            UserPermission.writeAllData,
+            ...UserPermission.writeAllData.requires,
+          },
+        UserPermission.writeAllData => {
+            UserPermission.readAllData,
+            ...UserPermission.readAllData.requires
+          },
+        UserPermission.recoverDeleted => {
+            UserPermission.readAllData,
+            ...UserPermission.readAllData.requires
+          },
+        _ => {},
+      }
+    };
+  }
 }

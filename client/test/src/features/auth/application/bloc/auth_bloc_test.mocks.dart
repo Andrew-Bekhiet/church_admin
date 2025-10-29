@@ -1333,6 +1333,26 @@ class MockUsersDAO extends _i1.Mock implements _i2.UsersDAO {
       ) as _i4.Future<_i2.User?>);
 
   @override
+  _i4.Future<void> updateUserPermissions({
+    required String? userId,
+    required _i2.PermissionsSet? newPermissions,
+    required _i2.PermissionsSet? oldPermissions,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #updateUserPermissions,
+          [],
+          {
+            #userId: userId,
+            #newPermissions: newPermissions,
+            #oldPermissions: oldPermissions,
+          },
+        ),
+        returnValue: _i4.Future<void>.value(),
+        returnValueForMissingStub: _i4.Future<void>.value(),
+      ) as _i4.Future<void>);
+
+  @override
   _i2.PaginatableStreamBase<_i2.User> streamAll({
     _i4.Stream<String?>? searchQuery,
     _i4.Stream<List<_i2.Filter<Object>>>? where,

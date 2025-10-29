@@ -1,0 +1,23 @@
+mutation updateUserPermissions(
+  $uid: uuid!
+  $permissionsToDelete: [String!]!
+  $permissionsToInsert: [AuthUsersPermissionsInsertInput!]!
+  $deletePermissions: Boolean! = true
+  $insertPermissions: Boolean! = true
+) {
+  deleteAuthUsersPermissions(
+    where: {
+      _and: [
+        { uid: { _eq: $uid } }
+        { permission: { _in: $permissionsToDelete } }
+      ]
+    }
+  ) @include(if: $deletePermissions) {
+    affectedRows
+  }
+
+  insertAuthUsersPermissions(objects: $permissionsToInsert)
+    @include(if: $insertPermissions) {
+    affectedRows
+  }
+}

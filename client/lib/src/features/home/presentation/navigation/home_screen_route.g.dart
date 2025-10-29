@@ -43,6 +43,10 @@ RouteBase get $homeScreenRoute => GoRouteData.$route(
           factory: _$ViewUserRoute._fromState,
         ),
         GoRouteData.$route(
+          path: 'edit_user',
+          factory: _$EditUserRoute._fromState,
+        ),
+        GoRouteData.$route(
           path: 'view_group',
           factory: _$ViewGroupRoute._fromState,
         ),
@@ -323,6 +327,38 @@ mixin _$ViewUserRoute on GoRouteData {
   @override
   String get location => GoRouteData.$location(
         '/view_user',
+        queryParams: {
+          'uid': _self.uid,
+        },
+      );
+
+  @override
+  void go(BuildContext context) => context.go(location, extra: _self.$extra);
+
+  @override
+  Future<T?> push<T>(BuildContext context) =>
+      context.push<T>(location, extra: _self.$extra);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location, extra: _self.$extra);
+
+  @override
+  void replace(BuildContext context) =>
+      context.replace(location, extra: _self.$extra);
+}
+
+mixin _$EditUserRoute on GoRouteData {
+  static EditUserRoute _fromState(GoRouterState state) => EditUserRoute(
+        uid: state.uri.queryParameters['uid']!,
+        $extra: state.extra as User,
+      );
+
+  EditUserRoute get _self => this as EditUserRoute;
+
+  @override
+  String get location => GoRouteData.$location(
+        '/edit_user',
         queryParams: {
           'uid': _self.uid,
         },

@@ -272,6 +272,24 @@ class MockAuthBloc extends _i1.Mock implements _i8.AuthBloc {
       );
 
   @override
+  void onDone(
+    _i8.AuthEvent? event, [
+    Object? error,
+    StackTrace? stackTrace,
+  ]) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #onDone,
+          [
+            event,
+            error,
+            stackTrace,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
   void onChange(_i11.Change<_i8.AuthState>? change) => super.noSuchMethod(
         Invocation.method(
           #onChange,

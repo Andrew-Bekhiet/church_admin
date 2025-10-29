@@ -18,8 +18,8 @@ class EditObjectController<T extends ViewableWithID> {
 
   T newObject;
 
-  final void Function(T object) afterCreate;
-  final Future<T> Function(T object) onCreate;
+  final void Function(T object)? afterCreate;
+  final Future<T> Function(T object)? onCreate;
   final UpdateFunc<T>? onUpdate;
   final Future<void> Function(T object)? onDelete;
 
@@ -28,8 +28,8 @@ class EditObjectController<T extends ViewableWithID> {
   EditObjectController({
     required this.toJson,
     required this.newObject,
-    required this.onCreate,
-    required this.afterCreate,
+    required void Function(T object) this.afterCreate,
+    required Future<T> Function(T object) this.onCreate,
     this.onUpdate,
     this.onDelete,
     this.initialObject,
@@ -37,6 +37,25 @@ class EditObjectController<T extends ViewableWithID> {
           initialObject == null || (onUpdate != null && onDelete != null),
           'You must provide update and delete functions when editing an existing object',
         );
+
+  EditObjectController.update({
+    required this.toJson,
+    required T this.initialObject,
+    required this.newObject,
+    required UpdateFunc<T> this.onUpdate,
+    this.onDelete,
+  })  : onCreate = null,
+        afterCreate = null;
+
+  EditObjectController._({
+    required this.toJson,
+    required this.newObject,
+    this.afterCreate,
+    this.onCreate,
+    this.onUpdate,
+    this.onDelete,
+    this.initialObject,
+  });
 
   bool get hasChanged => initialObject != newObject;
   bool get isCreate => initialObject == null;
@@ -69,7 +88,7 @@ class EditObjectController<T extends ViewableWithID> {
 
         final T returnedObject;
         if (isCreate) {
-          returnedObject = await onCreate(newObject);
+          returnedObject = await onCreate!(newObject);
         } else {
           returnedObject =
               await onUpdate!(initialObject!, newObject) ?? newObject;
@@ -90,7 +109,7 @@ class EditObjectController<T extends ViewableWithID> {
             ),
           );
 
-        if (isCreate) {
+        if (afterCreate case final afterCreate? when isCreate) {
           afterCreate(returnedObject);
         } else {
           navigator.pop();
@@ -245,7 +264,7 @@ class EditObjectController<T extends ViewableWithID> {
     Json Function(T object)? toJson,
     void Function(T object)? afterCreate,
   }) {
-    return EditObjectController<T>(
+    return EditObjectController<T>._(
       initialObject: initialObject ?? this.initialObject,
       newObject: newObject ?? this.newObject,
       onCreate: onCreate ?? this.onCreate,
