@@ -299,6 +299,24 @@ class MockAuthBloc extends _i1.Mock implements _i5.AuthBloc {
       );
 
   @override
+  void onDone(
+    _i5.AuthEvent? event, [
+    Object? error,
+    StackTrace? stackTrace,
+  ]) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #onDone,
+          [
+            event,
+            error,
+            stackTrace,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
   void onChange(_i8.Change<_i5.AuthState>? change) => super.noSuchMethod(
         Invocation.method(
           #onChange,

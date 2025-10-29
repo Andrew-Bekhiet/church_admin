@@ -1050,6 +1050,8 @@ class FirebaseAppCheckPlatform_ extends _i1.Mock
     _i5.WebProvider? webProvider,
     _i5.AndroidProvider? androidProvider,
     _i5.AppleProvider? appleProvider,
+    _i5.AndroidAppCheckProvider? providerAndroid,
+    _i5.AppleAppCheckProvider? providerApple,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -1059,6 +1061,8 @@ class FirebaseAppCheckPlatform_ extends _i1.Mock
             #webProvider: webProvider,
             #androidProvider: androidProvider,
             #appleProvider: appleProvider,
+            #providerAndroid: providerAndroid,
+            #providerApple: providerApple,
           },
         ),
         returnValue: _i8.Future<void>.value(),

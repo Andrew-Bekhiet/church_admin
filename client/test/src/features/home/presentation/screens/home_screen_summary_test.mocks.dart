@@ -118,6 +118,24 @@ class MockHomeBloc extends _i1.Mock implements _i2.HomeBloc {
       );
 
   @override
+  void onDone(
+    _i2.HomeEvent? event, [
+    Object? error,
+    StackTrace? stackTrace,
+  ]) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #onDone,
+          [
+            event,
+            error,
+            stackTrace,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
   void onChange(_i5.Change<_i2.HomeState>? change) => super.noSuchMethod(
         Invocation.method(
           #onChange,

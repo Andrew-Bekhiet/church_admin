@@ -203,6 +203,26 @@ class MockUserSettingsService extends _i1.Mock
       );
 
   @override
+  void onDone(
+    _i4.Bloc<dynamic, dynamic>? bloc,
+    Object? event, [
+    Object? error,
+    StackTrace? stackTrace,
+  ]) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #onDone,
+          [
+            bloc,
+            event,
+            error,
+            stackTrace,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
   void onClose(_i4.BlocBase<dynamic>? bloc) => super.noSuchMethod(
         Invocation.method(
           #onClose,

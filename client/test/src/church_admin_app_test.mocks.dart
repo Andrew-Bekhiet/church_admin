@@ -646,6 +646,26 @@ class MockLoggingService extends _i1.Mock implements _i5.LoggingService {
       );
 
   @override
+  void onDone(
+    _i8.Bloc<dynamic, dynamic>? bloc,
+    Object? event, [
+    Object? error,
+    StackTrace? stackTrace,
+  ]) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #onDone,
+          [
+            bloc,
+            event,
+            error,
+            stackTrace,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
   void onClose(_i8.BlocBase<dynamic>? bloc) => super.noSuchMethod(
         Invocation.method(
           #onClose,
@@ -785,6 +805,24 @@ class MockAuthBloc extends _i1.Mock implements _i5.AuthBloc {
         Invocation.method(
           #onTransition,
           [transition],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onDone(
+    _i5.AuthEvent? event, [
+    Object? error,
+    StackTrace? stackTrace,
+  ]) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #onDone,
+          [
+            event,
+            error,
+            stackTrace,
+          ],
         ),
         returnValueForMissingStub: null,
       );
@@ -1196,9 +1234,10 @@ class MockUsersDAO extends _i1.Mock implements _i5.UsersDAO {
       ) as _i9.Future<_i5.User?>);
 
   @override
-  _i9.Future<bool> updateUserPermissions({
+  _i9.Future<void> updateUserPermissions({
     required String? userId,
     required _i5.PermissionsSet? newPermissions,
+    required _i5.PermissionsSet? oldPermissions,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -1207,85 +1246,12 @@ class MockUsersDAO extends _i1.Mock implements _i5.UsersDAO {
           {
             #userId: userId,
             #newPermissions: newPermissions,
+            #oldPermissions: oldPermissions,
           },
         ),
-        returnValue: _i9.Future<bool>.value(false),
-        returnValueForMissingStub: _i9.Future<bool>.value(false),
-      ) as _i9.Future<bool>);
-
-  @override
-  _i9.Future<bool> addUserPermissionsOnly({
-    required String? userId,
-    required _i5.PermissionsSet? newPermissions,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #addUserPermissionsOnly,
-          [],
-          {
-            #userId: userId,
-            #newPermissions: newPermissions,
-          },
-        ),
-        returnValue: _i9.Future<bool>.value(false),
-        returnValueForMissingStub: _i9.Future<bool>.value(false),
-      ) as _i9.Future<bool>);
-
-  @override
-  _i9.Future<bool> addUserAdminOn({
-    required String? userId,
-    required _i5.AdminOnData? adminOnData,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #addUserAdminOn,
-          [],
-          {
-            #userId: userId,
-            #adminOnData: adminOnData,
-          },
-        ),
-        returnValue: _i9.Future<bool>.value(false),
-        returnValueForMissingStub: _i9.Future<bool>.value(false),
-      ) as _i9.Future<bool>);
-
-  @override
-  _i9.Future<bool> deleteUserAdminOn({
-    required String? userId,
-    required String? adminOnId,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #deleteUserAdminOn,
-          [],
-          {
-            #userId: userId,
-            #adminOnId: adminOnId,
-          },
-        ),
-        returnValue: _i9.Future<bool>.value(false),
-        returnValueForMissingStub: _i9.Future<bool>.value(false),
-      ) as _i9.Future<bool>);
-
-  @override
-  _i9.Future<bool> updateUserAdminOn({
-    required String? userId,
-    required String? adminOnId,
-    required _i5.AdminOnData? updatedAdminOnData,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #updateUserAdminOn,
-          [],
-          {
-            #userId: userId,
-            #adminOnId: adminOnId,
-            #updatedAdminOnData: updatedAdminOnData,
-          },
-        ),
-        returnValue: _i9.Future<bool>.value(false),
-        returnValueForMissingStub: _i9.Future<bool>.value(false),
-      ) as _i9.Future<bool>);
+        returnValue: _i9.Future<void>.value(),
+        returnValueForMissingStub: _i9.Future<void>.value(),
+      ) as _i9.Future<void>);
 
   @override
   _i5.PaginatableStreamBase<_i5.User> streamAll({
@@ -3043,6 +3009,26 @@ class MockNotificationsService extends _i1.Mock
       );
 
   @override
+  void onDone(
+    _i8.Bloc<dynamic, dynamic>? bloc,
+    Object? event, [
+    Object? error,
+    StackTrace? stackTrace,
+  ]) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #onDone,
+          [
+            bloc,
+            event,
+            error,
+            stackTrace,
+          ],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
   void onClose(_i8.BlocBase<dynamic>? bloc) => super.noSuchMethod(
         Invocation.method(
           #onClose,
@@ -3140,6 +3126,24 @@ class MockHomeBloc extends _i1.Mock implements _i5.HomeBloc {
         Invocation.method(
           #onTransition,
           [transition],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onDone(
+    _i5.HomeEvent? event, [
+    Object? error,
+    StackTrace? stackTrace,
+  ]) =>
+      super.noSuchMethod(
+        Invocation.method(
+          #onDone,
+          [
+            event,
+            error,
+            stackTrace,
+          ],
         ),
         returnValueForMissingStub: null,
       );
