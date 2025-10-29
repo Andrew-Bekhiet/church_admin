@@ -40,7 +40,9 @@ void main() {
           webProvider: anyNamed('webProvider'),
           providerAndroid: anyNamed('providerAndroid'),
           providerApple: anyNamed('providerApple'),
+          // ignore: deprecated_member_use needed to detect real calls
           androidProvider: anyNamed('androidProvider'),
+          // ignore: deprecated_member_use needed to detect real calls
           appleProvider: anyNamed('appleProvider'),
         ),
         FirebaseMessagingPlatform.onBackgroundMessage =
