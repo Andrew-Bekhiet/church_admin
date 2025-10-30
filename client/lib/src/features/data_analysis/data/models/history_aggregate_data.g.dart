@@ -13,6 +13,7 @@ class HistoryAggregateDataFields {
   HistoryAggregateDataFields._();
 
   final FieldMetadata<AggregateData> aggregate = FieldMetadata<AggregateData>(
+    getValue: (obj) => obj is HistoryAggregateData ? obj.aggregate : null,
     parentType: HistoryAggregateData,
     name: 'aggregate',
     label: 'aggregate',

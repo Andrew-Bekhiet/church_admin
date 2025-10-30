@@ -12,6 +12,7 @@ class ShammasLevelFields {
   ShammasLevelFields._();
 
   final FieldMetadata<int> order = FieldMetadata<int>(
+    getValue: (obj) => obj is ShammasLevel ? obj.order : null,
     parentType: ShammasLevel,
     name: 'order',
     label: 'الترتيب',
@@ -20,6 +21,7 @@ class ShammasLevelFields {
   );
 
   final FieldMetadata<ShammasLevel> id = FieldMetadata<ShammasLevel>(
+    getValue: (obj) => obj is ShammasLevel ? obj.id : null,
     parentType: ShammasLevel,
     name: 'id',
     label: '=',
@@ -28,6 +30,7 @@ class ShammasLevelFields {
   );
 
   final FieldMetadata<String> name = FieldMetadata<String>(
+    getValue: (obj) => obj is ShammasLevel ? obj.name : null,
     parentType: ShammasLevel,
     name: 'name',
     label: 'الاسم',

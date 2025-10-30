@@ -12,6 +12,7 @@ class StreetFields {
   StreetFields._();
 
   final FieldMetadata<Street> id = FieldMetadata<Street>(
+    getValue: (obj) => obj is Street ? obj.id : null,
     parentType: Street,
     name: 'id',
     label: '=',
@@ -20,6 +21,7 @@ class StreetFields {
   );
 
   final FieldMetadata<String> name = FieldMetadata<String>(
+    getValue: (obj) => obj is Street ? obj.name : null,
     parentType: Street,
     name: 'name',
     label: 'الاسم',
@@ -28,6 +30,7 @@ class StreetFields {
   );
 
   final FieldMetadata<Line> line = FieldMetadata<Line>(
+    getValue: (obj) => obj is Street ? obj.line : null,
     parentType: Street,
     name: 'line',
     label: 'الموقع',
@@ -40,6 +43,7 @@ class StreetFields {
   );
 
   final FieldMetadata<Color> color = FieldMetadata<Color>(
+    getValue: (obj) => obj is Street ? obj.color : null,
     parentType: Street,
     name: 'color',
     label: 'اللون',
@@ -52,6 +56,7 @@ class StreetFields {
   );
 
   final FieldMetadata<DateTime> photoUpdatedAt = FieldMetadata<DateTime>(
+    getValue: (obj) => obj is Street ? obj.photoUpdatedAt : null,
     parentType: Street,
     name: 'photoUpdatedAt',
     label: 'أخر تحديث للصورة',
@@ -65,6 +70,7 @@ class StreetFields {
   );
 
   final FieldMetadata<AreasStreets> areasRel = FieldMetadata<AreasStreets>(
+    getValue: (obj) => obj is Street ? obj.areas : null,
     parentType: Street,
     name: 'areas',
     label: 'areas',
@@ -75,10 +81,12 @@ class StreetFields {
   late final FieldMetadata<Area> areas = areasRel.redirectTo(
     AreasStreetsFields().area,
     isExpandable: false,
+    isOrderable: false,
   );
 
   final FieldMetadata<LastRecordedByInfo> lastVisit =
       FieldMetadata<LastRecordedByInfo>(
+    getValue: (obj) => obj is Street ? obj.lastVisit : null,
     parentType: Street,
     name: 'lastVisit',
     label: 'أخر افتقاد',
@@ -92,6 +100,7 @@ class StreetFields {
 
   final FieldMetadata<LastRecordedByInfo> lastEdit =
       FieldMetadata<LastRecordedByInfo>(
+    getValue: (obj) => obj is Street ? obj.lastEdit : null,
     parentType: Street,
     name: 'lastEdit',
     label: 'أخر تحديث البيانات',

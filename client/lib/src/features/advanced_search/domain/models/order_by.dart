@@ -35,6 +35,16 @@ class OrderBy with _$OrderBy {
   Json toSearchJson() {
     return field.serializeOrderBy(value.serializedName);
   }
+
+  FieldMetadata getSecondLineField() {
+    final subFields = AdvancedQueriesMetadata()
+        .allQueryablesByType[field.type]
+        ?.fieldsMetadataByName;
+
+    final nameSubField = field.name != 'id' ? (subFields?['name']) : null;
+
+    return nameSubField != null ? field.redirectTo(nameSubField) : field;
+  }
 }
 
 OrderByValue orderByValueFromJson(Object? data) =>

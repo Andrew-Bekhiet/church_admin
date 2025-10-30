@@ -109,21 +109,53 @@ class _ViewAreaState extends State<ViewArea> {
       objectStream: stream,
       childrenTypes: const [Street, Family, Person, Store],
       tabsContentBuilders: {
-        Street: (context) => ViewableObjectList(
-              scrollController: PrimaryScrollController.maybeOf(context),
-              objectsController: _streetsController,
+        Street: (context) => StreamBuilder(
+              stream: _streetsOrderBy.stream,
+              initialData: _streetsOrderBy.value,
+              builder: (context, orderBySnapshot) => ViewableObjectList(
+                scrollController: PrimaryScrollController.maybeOf(context),
+                viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
+                  secondLineField:
+                      orderBySnapshot.data?.first.getSecondLineField(),
+                ),
+                objectsController: _streetsController,
+              ),
             ),
-        Family: (context) => ViewableObjectList(
-              scrollController: PrimaryScrollController.maybeOf(context),
-              objectsController: _familiesController,
+        Family: (context) => StreamBuilder(
+              stream: _familiesOrderBy.stream,
+              initialData: _familiesOrderBy.value,
+              builder: (context, orderBySnapshot) => ViewableObjectList(
+                scrollController: PrimaryScrollController.maybeOf(context),
+                viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
+                  secondLineField:
+                      orderBySnapshot.data?.first.getSecondLineField(),
+                ),
+                objectsController: _familiesController,
+              ),
             ),
-        Person: (context) => ViewableObjectList(
-              scrollController: PrimaryScrollController.maybeOf(context),
-              objectsController: _personsController,
+        Person: (context) => StreamBuilder(
+              stream: _personsOrderBy.stream,
+              initialData: _personsOrderBy.value,
+              builder: (context, orderBySnapshot) => ViewableObjectList(
+                scrollController: PrimaryScrollController.maybeOf(context),
+                viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
+                  secondLineField:
+                      orderBySnapshot.data?.first.getSecondLineField(),
+                ),
+                objectsController: _personsController,
+              ),
             ),
-        Store: (context) => ViewableObjectList(
-              scrollController: PrimaryScrollController.maybeOf(context),
-              objectsController: _storesController,
+        Store: (context) => StreamBuilder(
+              stream: _storesOrderBy.stream,
+              initialData: _storesOrderBy.value,
+              builder: (context, orderBySnapshot) => ViewableObjectList(
+                scrollController: PrimaryScrollController.maybeOf(context),
+                viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
+                  secondLineField:
+                      orderBySnapshot.data?.first.getSecondLineField(),
+                ),
+                objectsController: _storesController,
+              ),
             ),
       },
       sliverPersistentHeaderDelegate: ChipTabBarPersistentHeaderDelegate(

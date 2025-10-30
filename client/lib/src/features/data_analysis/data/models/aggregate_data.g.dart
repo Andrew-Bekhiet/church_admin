@@ -12,6 +12,7 @@ class AggregateDataFields {
   AggregateDataFields._();
 
   final FieldMetadata<int> count = FieldMetadata<int>(
+    getValue: (obj) => obj is AggregateData ? obj.count : null,
     parentType: AggregateData,
     name: 'count',
     label: 'العدد',
@@ -25,6 +26,7 @@ class AggregateDataFields {
 
   final FieldMetadata<LastRecordedByInfo> max =
       FieldMetadata<LastRecordedByInfo>(
+    getValue: (obj) => obj is AggregateData ? obj.max : null,
     parentType: AggregateData,
     name: 'max',
     label: 'أقصى',
@@ -38,6 +40,7 @@ class AggregateDataFields {
 
   final FieldMetadata<LastRecordedByInfo> min =
       FieldMetadata<LastRecordedByInfo>(
+    getValue: (obj) => obj is AggregateData ? obj.min : null,
     parentType: AggregateData,
     name: 'min',
     label: 'أدنى',

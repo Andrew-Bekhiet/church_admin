@@ -56,7 +56,10 @@ class ViewableObjectWidget<T extends Viewable> extends StatelessWidget {
             ? CardTheme.of(context).color?.findInvert()
             : ListTileTheme.of(context).textColor);
 
-    final secondLine = viewableObjectService.getSecondLine(object);
+    final secondLine = viewableObjectService.getFormattedValue(
+      object,
+      config.secondLineField,
+    );
 
     final tile = ListTile(
       iconColor: foregroundColor,

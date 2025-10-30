@@ -66,9 +66,17 @@ class _ViewGroupState extends State<ViewGroup> {
         ],
       ),
       tabsContentBuilders: {
-        Group: (context) => ViewableObjectList(
-              scrollController: PrimaryScrollController.maybeOf(context),
-              objectsController: _personsController,
+        Group: (context) => StreamBuilder(
+              stream: _personsOrderBy.stream,
+              initialData: _personsOrderBy.value,
+              builder: (context, orderBySnapshot) => ViewableObjectList(
+                scrollController: PrimaryScrollController.maybeOf(context),
+                viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
+                  secondLineField:
+                      orderBySnapshot.data?.first.getSecondLineField(),
+                ),
+                objectsController: _personsController,
+              ),
             ),
       },
       detailsBuilder: (context, group) => SliverList(

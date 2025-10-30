@@ -10,6 +10,7 @@ class _StoreFields {
   _StoreFields();
 
   final FieldMetadata<Store> id = FieldMetadata<Store>(
+    getValue: (obj) => obj is Store ? obj.id : null,
     parentType: Store,
     name: 'id',
     label: '=',
@@ -18,6 +19,7 @@ class _StoreFields {
   );
 
   final FieldMetadata<String> name = FieldMetadata<String>(
+    getValue: (obj) => obj is Store ? obj.name : null,
     parentType: Store,
     name: 'name',
     label: 'الاسم',
@@ -26,6 +28,7 @@ class _StoreFields {
   );
 
   final FieldMetadata<Address> address = FieldMetadata<Address>(
+    getValue: (obj) => obj is Store ? obj.address : null,
     parentType: Store,
     name: 'address',
     label: 'العنوان',
@@ -33,6 +36,7 @@ class _StoreFields {
   );
 
   final FieldMetadata<Family> family = FieldMetadata<Family>(
+    getValue: (obj) => obj is Store ? obj.family : null,
     parentType: Store,
     name: 'family',
     label: 'العائلة',
@@ -45,6 +49,7 @@ class _StoreFields {
   );
 
   final FieldMetadata<Color> color = FieldMetadata<Color>(
+    getValue: (obj) => obj is Store ? obj.color : null,
     parentType: Store,
     name: 'color',
     label: 'اللون',
@@ -58,6 +63,7 @@ class _StoreFields {
 
   final FieldMetadata<LastRecordedByInfo> lastEdit =
       FieldMetadata<LastRecordedByInfo>(
+    getValue: (obj) => obj is Store ? obj.lastEdit : null,
     parentType: Store,
     name: 'lastEdit',
     label: 'أخر تحديث البيانات',
@@ -70,6 +76,7 @@ class _StoreFields {
   );
 
   final FieldMetadata<DateTime> photoUpdatedAt = FieldMetadata<DateTime>(
+    getValue: (obj) => obj is Store ? obj.photoUpdatedAt : null,
     parentType: Store,
     name: 'photoUpdatedAt',
     label: 'أخر تحديث للصورة',
@@ -83,6 +90,7 @@ class _StoreFields {
   );
 
   final FieldMetadata<Point> geolocation = FieldMetadata<Point>(
+    getValue: (obj) => obj is Store ? obj.geolocation : null,
     parentType: Store,
     name: 'geolocation',
     label: 'الموقع',

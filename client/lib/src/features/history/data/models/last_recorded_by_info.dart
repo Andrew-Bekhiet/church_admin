@@ -31,11 +31,11 @@ class LastRecordedByInfo extends ViewableWithID
   final bool isFatherVisit;
 
   LastRecordedByInfo({
-    required this.time,
+    DateTime? time,
     this.recordedBy,
     this.user,
     this.isFatherVisit = false,
-  });
+  }) : time = time ?? DateTime.now();
 
   factory LastRecordedByInfo.fromJson(Map<String, Object?> json) =>
       _$LastRecordedByInfoFromJson(json);

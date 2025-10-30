@@ -217,7 +217,7 @@ class QueryableFieldsGenerator extends GeneratorForAnnotation<Queryable> {
                 .toLowerCase()
                 .maybeAddDollar(),
       )
-      ..write(', isExpandable: false,')
+      ..write(', isExpandable: false, isOrderable: false,')
       ..write(');');
 
     return buffer.toString();
@@ -244,6 +244,9 @@ class QueryableFieldsGenerator extends GeneratorForAnnotation<Queryable> {
       ..write(' = ')
       ..write(fieldMetadataType)
       ..write('(')
+      ..write(
+        'getValue: (obj) => obj is $parentType ? obj.${name.maybeAddDollar()} : null,',
+      )
       ..write('parentType: $parentType,')
       ..write("name: '$name',")
       ..write("label: '$label',")

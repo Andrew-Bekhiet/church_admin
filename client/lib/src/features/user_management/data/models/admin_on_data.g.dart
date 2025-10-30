@@ -12,6 +12,7 @@ class AdminOnDataFields {
   AdminOnDataFields._();
 
   final FieldMetadata<Area> area = FieldMetadata<Area>(
+    getValue: (obj) => obj is AdminOnData ? obj.area : null,
     parentType: AdminOnData,
     name: 'area',
     label: 'المنطقة',
@@ -24,6 +25,7 @@ class AdminOnDataFields {
   );
 
   final FieldMetadata<bool> areaAllowEdit = FieldMetadata<bool>(
+    getValue: (obj) => obj is AdminOnData ? obj.areaAllowEdit : null,
     parentType: AdminOnData,
     name: 'areaAllowEdit',
     label: 'يمكنه تعديل المنطقة',
@@ -36,6 +38,7 @@ class AdminOnDataFields {
   );
 
   final FieldMetadata<bool> areaAdminOnUsers = FieldMetadata<bool>(
+    getValue: (obj) => obj is AdminOnData ? obj.areaAdminOnUsers : null,
     parentType: AdminOnData,
     name: 'areaAdminOnUsers',
     label: 'مسؤول عن خدام المنطقة',
@@ -48,6 +51,7 @@ class AdminOnDataFields {
   );
 
   final FieldMetadata<Service> service = FieldMetadata<Service>(
+    getValue: (obj) => obj is AdminOnData ? obj.service : null,
     parentType: AdminOnData,
     name: 'service',
     label: 'الخدمة',
@@ -61,6 +65,7 @@ class AdminOnDataFields {
 
   final FieldMetadata<StudyYear> serviceStudyYearData =
       FieldMetadata<StudyYear>(
+    getValue: (obj) => obj is AdminOnData ? obj.serviceStudyYearData : null,
     parentType: AdminOnData,
     name: 'serviceStudyYearData',
     label: 'السنة الدراسية',
@@ -73,6 +78,7 @@ class AdminOnDataFields {
   );
 
   final FieldMetadata<bool> serviceGender = FieldMetadata<bool>(
+    getValue: (obj) => obj is AdminOnData ? obj.serviceGender : null,
     parentType: AdminOnData,
     name: 'serviceGender',
     label: 'نوع المخدومين المسؤول عنهم',
@@ -85,6 +91,7 @@ class AdminOnDataFields {
   );
 
   final FieldMetadata<bool> serviceAllowEdit = FieldMetadata<bool>(
+    getValue: (obj) => obj is AdminOnData ? obj.serviceAllowEdit : null,
     parentType: AdminOnData,
     name: 'serviceAllowEdit',
     label: 'يمكنه تعديل الخدمة',
@@ -97,6 +104,7 @@ class AdminOnDataFields {
   );
 
   final FieldMetadata<bool> serviceAdminOnUsers = FieldMetadata<bool>(
+    getValue: (obj) => obj is AdminOnData ? obj.serviceAdminOnUsers : null,
     parentType: AdminOnData,
     name: 'serviceAdminOnUsers',
     label: 'مسؤول عن خدام الخدمة',
@@ -109,6 +117,7 @@ class AdminOnDataFields {
   );
 
   final FieldMetadata<Class> classes = FieldMetadata<Class>(
+    getValue: (obj) => obj is AdminOnData ? obj.classes : null,
     parentType: AdminOnData,
     name: 'classes',
     label: 'الفصول',
@@ -118,6 +127,7 @@ class AdminOnDataFields {
   );
 
   final FieldMetadata<Group> group = FieldMetadata<Group>(
+    getValue: (obj) => obj is AdminOnData ? obj.group : null,
     parentType: AdminOnData,
     name: 'group',
     label: 'المجموعة',
@@ -130,6 +140,7 @@ class AdminOnDataFields {
   );
 
   final FieldMetadata<bool> groupAllowEdit = FieldMetadata<bool>(
+    getValue: (obj) => obj is AdminOnData ? obj.groupAllowEdit : null,
     parentType: AdminOnData,
     name: 'groupAllowEdit',
     label: 'يمكنه تعديل المجموعة',
@@ -142,6 +153,7 @@ class AdminOnDataFields {
   );
 
   final FieldMetadata<bool> groupAdminOnUsers = FieldMetadata<bool>(
+    getValue: (obj) => obj is AdminOnData ? obj.groupAdminOnUsers : null,
     parentType: AdminOnData,
     name: 'groupAdminOnUsers',
     label: 'مسؤول عن خدام المجموعة',
@@ -154,6 +166,7 @@ class AdminOnDataFields {
   );
 
   final FieldMetadata<User> user = FieldMetadata<User>(
+    getValue: (obj) => obj is AdminOnData ? obj.user : null,
     parentType: AdminOnData,
     name: 'user',
     label: 'بيانات الخادم',

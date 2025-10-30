@@ -9,11 +9,13 @@ class FieldMetadata<T extends Object> with EquatableMixin {
   final bool isOrderable;
   final bool isCodeOnly;
   final Set<Operator> operators;
+  final Object? Function(Object) getValue;
 
   const FieldMetadata({
     required this.parentType,
     required this.name,
     required this.label,
+    required this.getValue,
     this.isCodeOnly = false,
     this.isOrderable = true,
     Type? type,
@@ -73,6 +75,8 @@ class FieldMetadata<T extends Object> with EquatableMixin {
     };
   }
 
+  List<String> get fieldPath => [name];
+
   /// Creates a redirecting field that exposes deeply nested fields directly on parent types.
   ///
   /// **Purpose:** Flatten complex object hierarchies to improve UX by allowing direct access
@@ -94,6 +98,7 @@ class FieldMetadata<T extends Object> with EquatableMixin {
     String? alias,
     String? label,
     bool isExpandable = true,
+    bool? isOrderable,
   }) =>
       RedirectingFieldMetadata<T, U>(
         parentField: this,
@@ -101,5 +106,6 @@ class FieldMetadata<T extends Object> with EquatableMixin {
         alias: alias,
         label: label,
         isExpandable: isExpandable,
+        isOrderable: isOrderable,
       );
 }

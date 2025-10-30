@@ -12,6 +12,7 @@ class SchoolFields {
   SchoolFields._();
 
   final FieldMetadata<School> id = FieldMetadata<School>(
+    getValue: (obj) => obj is School ? obj.id : null,
     parentType: School,
     name: 'id',
     label: '=',
@@ -20,6 +21,7 @@ class SchoolFields {
   );
 
   final FieldMetadata<String> name = FieldMetadata<String>(
+    getValue: (obj) => obj is School ? obj.name : null,
     parentType: School,
     name: 'name',
     label: 'الاسم',

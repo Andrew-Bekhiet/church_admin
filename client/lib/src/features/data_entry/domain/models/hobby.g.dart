@@ -12,6 +12,7 @@ class HobbyFields {
   HobbyFields._();
 
   final FieldMetadata<Hobby> id = FieldMetadata<Hobby>(
+    getValue: (obj) => obj is Hobby ? obj.id : null,
     parentType: Hobby,
     name: 'id',
     label: '=',
@@ -20,6 +21,7 @@ class HobbyFields {
   );
 
   final FieldMetadata<String> name = FieldMetadata<String>(
+    getValue: (obj) => obj is Hobby ? obj.name : null,
     parentType: Hobby,
     name: 'name',
     label: 'الاسم',
@@ -28,6 +30,7 @@ class HobbyFields {
   );
 
   final FieldMetadata<Color> color = FieldMetadata<Color>(
+    getValue: (obj) => obj is Hobby ? obj.color : null,
     parentType: Hobby,
     name: 'color',
     label: 'اللون',

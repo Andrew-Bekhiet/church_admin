@@ -12,6 +12,7 @@ class TagFields {
   TagFields._();
 
   final FieldMetadata<Tag> id = FieldMetadata<Tag>(
+    getValue: (obj) => obj is Tag ? obj.id : null,
     parentType: Tag,
     name: 'id',
     label: '=',
@@ -20,6 +21,7 @@ class TagFields {
   );
 
   final FieldMetadata<String> name = FieldMetadata<String>(
+    getValue: (obj) => obj is Tag ? obj.name : null,
     parentType: Tag,
     name: 'name',
     label: 'الاسم',
@@ -28,6 +30,7 @@ class TagFields {
   );
 
   final FieldMetadata<Color> color = FieldMetadata<Color>(
+    getValue: (obj) => obj is Tag ? obj.color : null,
     parentType: Tag,
     name: 'color',
     label: 'اللون',

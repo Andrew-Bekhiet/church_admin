@@ -10,6 +10,7 @@ class _ClassFields {
   _ClassFields();
 
   final FieldMetadata<Class> id = FieldMetadata<Class>(
+    getValue: (obj) => obj is Class ? obj.id : null,
     parentType: Class,
     name: 'id',
     label: '=',
@@ -18,6 +19,7 @@ class _ClassFields {
   );
 
   final FieldMetadata<String> name = FieldMetadata<String>(
+    getValue: (obj) => obj is Class ? obj.name : null,
     parentType: Class,
     name: 'name',
     label: 'الاسم',
@@ -26,6 +28,7 @@ class _ClassFields {
   );
 
   final FieldMetadata<Color> color = FieldMetadata<Color>(
+    getValue: (obj) => obj is Class ? obj.color : null,
     parentType: Class,
     name: 'color',
     label: 'اللون',
@@ -38,6 +41,7 @@ class _ClassFields {
   );
 
   final FieldMetadata<DateTime> photoUpdatedAt = FieldMetadata<DateTime>(
+    getValue: (obj) => obj is Class ? obj.photoUpdatedAt : null,
     parentType: Class,
     name: 'photoUpdatedAt',
     label: 'أخر تحديث للصورة',
@@ -51,6 +55,7 @@ class _ClassFields {
   );
 
   final FieldMetadata<Service> service = FieldMetadata<Service>(
+    getValue: (obj) => obj is Class ? obj.service : null,
     parentType: Class,
     name: 'service',
     label: 'الخدمة',
@@ -63,6 +68,7 @@ class _ClassFields {
   );
 
   final FieldMetadata<StudyYear> studyYear = FieldMetadata<StudyYear>(
+    getValue: (obj) => obj is Class ? obj.studyYear : null,
     parentType: Class,
     name: 'studyYear',
     label: 'السنة الدراسية',
@@ -75,6 +81,7 @@ class _ClassFields {
   );
 
   final FieldMetadata<bool> serviceGender = FieldMetadata<bool>(
+    getValue: (obj) => obj is Class ? obj.serviceGender : null,
     parentType: Class,
     name: 'serviceGender',
     label: 'نوع المخدومين المسؤول عنهم',
@@ -88,6 +95,7 @@ class _ClassFields {
 
   final FieldMetadata<LastRecordedByInfo> lastEdit =
       FieldMetadata<LastRecordedByInfo>(
+    getValue: (obj) => obj is Class ? obj.lastEdit : null,
     parentType: Class,
     name: 'lastEdit',
     label: 'أخر تحديث البيانات',
@@ -100,6 +108,7 @@ class _ClassFields {
   );
 
   final FieldMetadata<AdminOnData> adminUsersRel = FieldMetadata<AdminOnData>(
+    getValue: (obj) => obj is Class ? obj.adminUsers : null,
     parentType: Class,
     name: 'adminUsers',
     label: 'adminUsers',
@@ -110,10 +119,12 @@ class _ClassFields {
   late final FieldMetadata<User> adminUsers = adminUsersRel.redirectTo(
     AdminOnDataFields().user,
     isExpandable: false,
+    isOrderable: false,
   );
 
   final FieldMetadata<AggregateData> attendanceHistoryAggregate =
       FieldMetadata<AggregateData>(
+    getValue: (obj) => obj is Class ? obj.attendanceHistoryAggregate : null,
     parentType: Class,
     name: 'attendanceHistoryAggregate',
     label: 'attendanceHistoryAggregate',
@@ -122,6 +133,8 @@ class _ClassFields {
 
   final FieldMetadata<AggregateData> attendanceDaysConstraintsAggregate =
       FieldMetadata<AggregateData>(
+    getValue: (obj) =>
+        obj is Class ? obj.attendanceDaysConstraintsAggregate : null,
     parentType: Class,
     name: 'attendanceDaysConstraintsAggregate',
     label: 'attendanceDaysConstraintsAggregate',

@@ -12,6 +12,7 @@ class ClassesPersonsFields {
   ClassesPersonsFields._();
 
   final FieldMetadata<Person> person = FieldMetadata<Person>(
+    getValue: (obj) => obj is ClassesPersons ? obj.person : null,
     parentType: ClassesPersons,
     name: 'person',
     label: 'بيانات المخدوم',
@@ -20,6 +21,7 @@ class ClassesPersonsFields {
   );
 
   final FieldMetadata<Class> class$ = FieldMetadata<Class>(
+    getValue: (obj) => obj is ClassesPersons ? obj.class$ : null,
     parentType: ClassesPersons,
     name: 'class',
     label: 'الفصل',
@@ -28,6 +30,7 @@ class ClassesPersonsFields {
   );
 
   final FieldMetadata<String> personId = FieldMetadata<String>(
+    getValue: (obj) => obj is ClassesPersons ? obj.personId : null,
     parentType: ClassesPersons,
     name: 'personId',
     label: 'personId',
@@ -36,6 +39,7 @@ class ClassesPersonsFields {
   );
 
   final FieldMetadata<String> classId = FieldMetadata<String>(
+    getValue: (obj) => obj is ClassesPersons ? obj.classId : null,
     parentType: ClassesPersons,
     name: 'classId',
     label: 'classId',

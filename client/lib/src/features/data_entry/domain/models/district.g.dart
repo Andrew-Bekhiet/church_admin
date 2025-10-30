@@ -12,6 +12,7 @@ class DistrictFields {
   DistrictFields._();
 
   final FieldMetadata<District> id = FieldMetadata<District>(
+    getValue: (obj) => obj is District ? obj.id : null,
     parentType: District,
     name: 'id',
     label: '=',
@@ -20,6 +21,7 @@ class DistrictFields {
   );
 
   final FieldMetadata<String> name = FieldMetadata<String>(
+    getValue: (obj) => obj is District ? obj.name : null,
     parentType: District,
     name: 'name',
     label: 'الاسم',

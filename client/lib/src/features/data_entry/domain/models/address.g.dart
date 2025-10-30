@@ -12,6 +12,7 @@ class AddressFields {
   AddressFields._();
 
   final FieldMetadata<District> district = FieldMetadata<District>(
+    getValue: (obj) => obj is Address ? obj.district : null,
     parentType: Address,
     name: 'district',
     label: 'الحي',
@@ -24,6 +25,7 @@ class AddressFields {
   );
 
   final FieldMetadata<Area> area = FieldMetadata<Area>(
+    getValue: (obj) => obj is Address ? obj.area : null,
     parentType: Address,
     name: 'area',
     label: 'المنطقة',
@@ -36,6 +38,7 @@ class AddressFields {
   );
 
   final FieldMetadata<Street> street = FieldMetadata<Street>(
+    getValue: (obj) => obj is Address ? obj.street : null,
     parentType: Address,
     name: 'street',
     label: 'الشارع',
@@ -48,6 +51,7 @@ class AddressFields {
   );
 
   final FieldMetadata<String> substreetName = FieldMetadata<String>(
+    getValue: (obj) => obj is Address ? obj.substreetName : null,
     parentType: Address,
     name: 'substreetName',
     label: 'الشارع الفرعي',
@@ -60,6 +64,7 @@ class AddressFields {
   );
 
   final FieldMetadata<Point> geolocation = FieldMetadata<Point>(
+    getValue: (obj) => obj is Address ? obj.geolocation : null,
     parentType: Address,
     name: 'geolocation',
     label: 'الموقع',
@@ -72,6 +77,7 @@ class AddressFields {
   );
 
   final FieldMetadata<int> storeyNumber = FieldMetadata<int>(
+    getValue: (obj) => obj is Address ? obj.storeyNumber : null,
     parentType: Address,
     name: 'storeyNumber',
     label: 'رقم الدور',
@@ -84,6 +90,7 @@ class AddressFields {
   );
 
   final FieldMetadata<int> houseNumber = FieldMetadata<int>(
+    getValue: (obj) => obj is Address ? obj.houseNumber : null,
     parentType: Address,
     name: 'houseNumber',
     label: 'رقم العمارة',
@@ -96,6 +103,7 @@ class AddressFields {
   );
 
   final FieldMetadata<int> apartmentNumber = FieldMetadata<int>(
+    getValue: (obj) => obj is Address ? obj.apartmentNumber : null,
     parentType: Address,
     name: 'apartmentNumber',
     label: 'رقم الشقة',
@@ -108,6 +116,7 @@ class AddressFields {
   );
 
   final FieldMetadata<String> specialLandmark = FieldMetadata<String>(
+    getValue: (obj) => obj is Address ? obj.specialLandmark : null,
     parentType: Address,
     name: 'specialLandmark',
     label: 'علامة مميزة',
@@ -120,6 +129,7 @@ class AddressFields {
   );
 
   final FieldMetadata<Family> family = FieldMetadata<Family>(
+    getValue: (obj) => obj is Address ? obj.family : null,
     parentType: Address,
     name: 'family',
     label: 'العائلة',
@@ -132,6 +142,7 @@ class AddressFields {
   );
 
   final FieldMetadata<Store> store = FieldMetadata<Store>(
+    getValue: (obj) => obj is Address ? obj.store : null,
     parentType: Address,
     name: 'store',
     label: 'المتجر',

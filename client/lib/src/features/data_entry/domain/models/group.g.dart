@@ -10,6 +10,7 @@ class _GroupFields {
   _GroupFields();
 
   final FieldMetadata<Group> id = FieldMetadata<Group>(
+    getValue: (obj) => obj is Group ? obj.id : null,
     parentType: Group,
     name: 'id',
     label: '=',
@@ -18,6 +19,7 @@ class _GroupFields {
   );
 
   final FieldMetadata<String> name = FieldMetadata<String>(
+    getValue: (obj) => obj is Group ? obj.name : null,
     parentType: Group,
     name: 'name',
     label: 'الاسم',
@@ -26,6 +28,7 @@ class _GroupFields {
   );
 
   final FieldMetadata<Color> color = FieldMetadata<Color>(
+    getValue: (obj) => obj is Group ? obj.color : null,
     parentType: Group,
     name: 'color',
     label: 'اللون',
@@ -38,6 +41,7 @@ class _GroupFields {
   );
 
   final FieldMetadata<DateTime> photoUpdatedAt = FieldMetadata<DateTime>(
+    getValue: (obj) => obj is Group ? obj.photoUpdatedAt : null,
     parentType: Group,
     name: 'photoUpdatedAt',
     label: 'أخر تحديث للصورة',
@@ -51,6 +55,7 @@ class _GroupFields {
   );
 
   final FieldMetadata<Service> service = FieldMetadata<Service>(
+    getValue: (obj) => obj is Group ? obj.service : null,
     parentType: Group,
     name: 'service',
     label: 'الخدمة',
@@ -64,6 +69,7 @@ class _GroupFields {
 
   final FieldMetadata<LastRecordedByInfo> lastEdit =
       FieldMetadata<LastRecordedByInfo>(
+    getValue: (obj) => obj is Group ? obj.lastEdit : null,
     parentType: Group,
     name: 'lastEdit',
     label: 'أخر تحديث البيانات',
@@ -76,6 +82,7 @@ class _GroupFields {
   );
 
   final FieldMetadata<AdminOnData> adminUsersRel = FieldMetadata<AdminOnData>(
+    getValue: (obj) => obj is Group ? obj.adminUsers : null,
     parentType: Group,
     name: 'adminUsers',
     label: 'adminUsers',
@@ -86,10 +93,12 @@ class _GroupFields {
   late final FieldMetadata<User> adminUsers = adminUsersRel.redirectTo(
     AdminOnDataFields().user,
     isExpandable: false,
+    isOrderable: false,
   );
 
   final FieldMetadata<AggregateData> attendanceHistoryAggregate =
       FieldMetadata<AggregateData>(
+    getValue: (obj) => obj is Group ? obj.attendanceHistoryAggregate : null,
     parentType: Group,
     name: 'attendanceHistoryAggregate',
     label: 'attendanceHistoryAggregate',
@@ -98,6 +107,8 @@ class _GroupFields {
 
   final FieldMetadata<AggregateData> attendanceDaysConstraintsAggregate =
       FieldMetadata<AggregateData>(
+    getValue: (obj) =>
+        obj is Group ? obj.attendanceDaysConstraintsAggregate : null,
     parentType: Group,
     name: 'attendanceDaysConstraintsAggregate',
     label: 'attendanceDaysConstraintsAggregate',

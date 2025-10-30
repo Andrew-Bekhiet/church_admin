@@ -111,7 +111,10 @@ class GroupFields extends _GroupFields {
   GroupFields();
 
   @override
-  FieldMetadata<User> get adminUsers =>
-      adminUsersRel.redirectTo(AdminOnDataFields().user,
-          label: adminUsersRel.label, isExpandable: false);
+  FieldMetadata<User> get adminUsers => adminUsersRel.redirectTo(
+        AdminOnDataFields().user,
+        label: adminUsersRel.label,
+        isExpandable: false,
+        isOrderable: false,
+      );
 }

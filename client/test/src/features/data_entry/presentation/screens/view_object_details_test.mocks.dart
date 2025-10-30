@@ -479,10 +479,17 @@ class MockViewableObjectService extends _i1.Mock
       );
 
   @override
-  String? getSecondLine(_i2.Viewable? object) => (super.noSuchMethod(
+  String? getFormattedValue(
+    _i2.Viewable? object,
+    _i2.FieldMetadata<Object>? field,
+  ) =>
+      (super.noSuchMethod(
         Invocation.method(
-          #getSecondLine,
-          [object],
+          #getFormattedValue,
+          [
+            object,
+            field,
+          ],
         ),
         returnValueForMissingStub: null,
       ) as String?);

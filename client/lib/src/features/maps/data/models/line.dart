@@ -23,6 +23,9 @@ class Line with EquatableMixin implements Spatial {
 
   @override
   List<Object?> get props => coordinates;
+
+  @override
+  String toString() => coordinates.map((p) => p.toString()).join(', ');
 }
 
 Json? lineToJson(Line? data) => data?.asPostGISLineString();

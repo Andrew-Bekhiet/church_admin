@@ -10,6 +10,7 @@ class _UserFields {
   _UserFields();
 
   final FieldMetadata<String> uid = FieldMetadata<String>(
+    getValue: (obj) => obj is User ? obj.uid : null,
     parentType: User,
     name: 'uid',
     label: 'uid',
@@ -18,6 +19,7 @@ class _UserFields {
   );
 
   final FieldMetadata<String> name = FieldMetadata<String>(
+    getValue: (obj) => obj is User ? obj.name : null,
     parentType: User,
     name: 'name',
     label: 'الاسم',
@@ -26,6 +28,7 @@ class _UserFields {
   );
 
   final FieldMetadata<String> email = FieldMetadata<String>(
+    getValue: (obj) => obj is User ? obj.email : null,
     parentType: User,
     name: 'email',
     label: 'email',
@@ -38,6 +41,7 @@ class _UserFields {
   );
 
   final FieldMetadata<DateTime> photoUpdatedAt = FieldMetadata<DateTime>(
+    getValue: (obj) => obj is User ? obj.photoUpdatedAt : null,
     parentType: User,
     name: 'photoUpdatedAt',
     label: 'أخر تحديث للصورة',
@@ -51,6 +55,7 @@ class _UserFields {
   );
 
   final FieldMetadata<AdminOnData> adminOn = FieldMetadata<AdminOnData>(
+    getValue: (obj) => obj is User ? obj.adminOn : null,
     parentType: User,
     name: 'adminOn',
     label: 'مسؤول عن',
@@ -60,6 +65,7 @@ class _UserFields {
 
   final FieldMetadata<UsersPermissionsRel> permissionsRel =
       FieldMetadata<UsersPermissionsRel>(
+    getValue: (obj) => obj is User ? obj.permissions : null,
     parentType: User,
     name: 'permissions',
     label: 'permissions',
@@ -71,10 +77,12 @@ class _UserFields {
       permissionsRel.redirectTo(
     UsersPermissionsRelFields().permission,
     isExpandable: false,
+    isOrderable: false,
   );
 
   final FieldMetadata<LastRecordedByInfo> lastEdit =
       FieldMetadata<LastRecordedByInfo>(
+    getValue: (obj) => obj is User ? obj.lastEdit : null,
     parentType: User,
     name: 'lastEdit',
     label: 'أخر تحديث البيانات',
@@ -87,6 +95,7 @@ class _UserFields {
   );
 
   final FieldMetadata<Person> person = FieldMetadata<Person>(
+    getValue: (obj) => obj is User ? obj.person : null,
     parentType: User,
     name: 'person',
     label: 'بيانات المخدوم',

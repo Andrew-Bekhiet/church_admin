@@ -150,20 +150,50 @@ class _ViewServiceState extends State<ViewService> {
         ],
       ),
       tabsContentBuilders: {
-        Class: (context) => ViewableObjectList(
-              itemBuilder: (context, class_, config) =>
-                  ViewableObjectCard<Class>(class_, config: config),
-              type: ViewableObjectListType.grid3,
-              scrollController: PrimaryScrollController.maybeOf(context),
-              objectsController: _classesController,
+        Class: (context) => StreamBuilder(
+              stream: _classesOrderBy.stream,
+              initialData: _classesOrderBy.value,
+              builder: (context, orderBySnapshot) => ViewableObjectList(
+                itemBuilder: (context, class_, config) =>
+                    ViewableObjectCard<Class>(
+                  class_,
+                  config: config?.copyWith(
+                        secondLineField:
+                            orderBySnapshot.data?.first.getSecondLineField(),
+                      ) ??
+                      ViewableObjectWidgetConfig(
+                        secondLineField:
+                            orderBySnapshot.data?.first.getSecondLineField(),
+                      ),
+                ),
+                type: ViewableObjectListType.grid3,
+                scrollController: PrimaryScrollController.maybeOf(context),
+                objectsController: _classesController,
+              ),
             ),
-        Group: (context) => ViewableObjectList(
-              scrollController: PrimaryScrollController.maybeOf(context),
-              objectsController: _groupsController,
+        Group: (context) => StreamBuilder(
+              stream: _groupsOrderBy.stream,
+              initialData: _groupsOrderBy.value,
+              builder: (context, orderBySnapshot) => ViewableObjectList(
+                scrollController: PrimaryScrollController.maybeOf(context),
+                viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
+                  secondLineField:
+                      orderBySnapshot.data?.first.getSecondLineField(),
+                ),
+                objectsController: _groupsController,
+              ),
             ),
-        Person: (context) => ViewableObjectList(
-              scrollController: PrimaryScrollController.maybeOf(context),
-              objectsController: _personsController,
+        Person: (context) => StreamBuilder(
+              stream: _personsOrderBy.stream,
+              initialData: _personsOrderBy.value,
+              builder: (context, orderBySnapshot) => ViewableObjectList(
+                scrollController: PrimaryScrollController.maybeOf(context),
+                viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
+                  secondLineField:
+                      orderBySnapshot.data?.first.getSecondLineField(),
+                ),
+                objectsController: _personsController,
+              ),
             ),
       },
       notFoundBuilder: (context) => Center(

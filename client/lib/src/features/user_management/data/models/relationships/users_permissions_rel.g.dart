@@ -13,6 +13,7 @@ class UsersPermissionsRelFields {
   UsersPermissionsRelFields._();
 
   final FieldMetadata<String> uid = FieldMetadata<String>(
+    getValue: (obj) => obj is UsersPermissionsRel ? obj.uid : null,
     parentType: UsersPermissionsRel,
     name: 'uid',
     label: 'uid',
@@ -21,6 +22,7 @@ class UsersPermissionsRelFields {
   );
 
   final FieldMetadata<User> user = FieldMetadata<User>(
+    getValue: (obj) => obj is UsersPermissionsRel ? obj.user : null,
     parentType: UsersPermissionsRel,
     name: 'user',
     label: 'بيانات الخادم',
@@ -30,6 +32,7 @@ class UsersPermissionsRelFields {
 
   final FieldMetadata<UserPermission> permission =
       FieldMetadata<UserPermission>(
+    getValue: (obj) => obj is UsersPermissionsRel ? obj.permission : null,
     parentType: UsersPermissionsRel,
     name: 'permission',
     label: 'الصلاحية',

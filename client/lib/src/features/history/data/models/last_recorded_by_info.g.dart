@@ -13,6 +13,7 @@ class LastRecordedByInfoFields {
   LastRecordedByInfoFields._();
 
   final FieldMetadata<DateTime> time = FieldMetadata<DateTime>(
+    getValue: (obj) => obj is LastRecordedByInfo ? obj.time : null,
     parentType: LastRecordedByInfo,
     name: 'time',
     label: 'الوقت',
@@ -21,6 +22,7 @@ class LastRecordedByInfoFields {
   );
 
   final FieldMetadata<User> user = FieldMetadata<User>(
+    getValue: (obj) => obj is LastRecordedByInfo ? obj.user : null,
     parentType: LastRecordedByInfo,
     name: 'user',
     label: 'بيانات الخادم',
@@ -33,6 +35,7 @@ class LastRecordedByInfoFields {
   );
 
   final FieldMetadata<bool> isFatherVisit = FieldMetadata<bool>(
+    getValue: (obj) => obj is LastRecordedByInfo ? obj.isFatherVisit : null,
     parentType: LastRecordedByInfo,
     name: 'isFatherVisit',
     label: 'زيارة أب كاهن',
@@ -57,7 +60,8 @@ class LastRecordedByInfoFields {
 // **************************************************************************
 
 LastRecordedByInfo _$LastRecordedByInfoFromJson(Map json) => LastRecordedByInfo(
-      time: DateTime.parse(json['time'] as String),
+      time:
+          json['time'] == null ? null : DateTime.parse(json['time'] as String),
       recordedBy: readRecordedBy(json, 'recordedBy') as String?,
       user: json['user'] == null
           ? null

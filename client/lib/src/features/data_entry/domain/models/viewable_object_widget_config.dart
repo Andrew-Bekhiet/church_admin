@@ -19,6 +19,8 @@ class ViewableObjectWidgetConfig<T extends Viewable> {
   final void Function(T)? onTap;
   final void Function(T)? onLongPress;
 
+  final FieldMetadata? secondLineField;
+
   const ViewableObjectWidgetConfig({
     this.selected = false,
     this.wrapInCard = false,
@@ -31,6 +33,7 @@ class ViewableObjectWidgetConfig<T extends Viewable> {
     this.trailing,
     this.onTap,
     this.onLongPress,
+    this.secondLineField,
   });
 
   ViewableObjectWidgetConfig<NewT> copyWith<NewT extends T>({
@@ -45,6 +48,7 @@ class ViewableObjectWidgetConfig<T extends Viewable> {
     Widget? trailing,
     void Function(T)? onTap,
     void Function(T)? onLongPress,
+    FieldMetadata? secondLineField,
   }) =>
       ViewableObjectWidgetConfig(
         selected: selected ?? this.selected,
@@ -58,5 +62,6 @@ class ViewableObjectWidgetConfig<T extends Viewable> {
         trailing: trailing ?? this.trailing,
         onTap: onTap ?? this.onTap,
         onLongPress: onLongPress ?? this.onLongPress,
+        secondLineField: secondLineField ?? this.secondLineField,
       );
 }

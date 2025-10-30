@@ -12,6 +12,7 @@ class PersonTypeFields {
   PersonTypeFields._();
 
   final FieldMetadata<PersonType> id = FieldMetadata<PersonType>(
+    getValue: (obj) => obj is PersonType ? obj.id : null,
     parentType: PersonType,
     name: 'id',
     label: '=',
@@ -20,6 +21,7 @@ class PersonTypeFields {
   );
 
   final FieldMetadata<String> name = FieldMetadata<String>(
+    getValue: (obj) => obj is PersonType ? obj.name : null,
     parentType: PersonType,
     name: 'name',
     label: 'الاسم',
@@ -28,6 +30,7 @@ class PersonTypeFields {
   );
 
   final FieldMetadata<int> order = FieldMetadata<int>(
+    getValue: (obj) => obj is PersonType ? obj.order : null,
     parentType: PersonType,
     name: 'order',
     label: 'الترتيب',
@@ -36,6 +39,7 @@ class PersonTypeFields {
   );
 
   final FieldMetadata<bool> isFamilyAdmin = FieldMetadata<bool>(
+    getValue: (obj) => obj is PersonType ? obj.isFamilyAdmin : null,
     parentType: PersonType,
     name: 'isFamilyAdmin',
     label: 'isFamilyAdmin',
@@ -44,6 +48,7 @@ class PersonTypeFields {
   );
 
   final FieldMetadata<bool> isHidden = FieldMetadata<bool>(
+    getValue: (obj) => obj is PersonType ? obj.isHidden : null,
     parentType: PersonType,
     name: 'isHidden',
     label: 'مخفي',

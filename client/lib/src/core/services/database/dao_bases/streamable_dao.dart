@@ -115,7 +115,8 @@ class StreamableDAOProxy<T extends ViewableWithID> extends DAOBase<T> {
       graphQLClient.subscribeAndReturnParsed(
         streamAllConfig.operationOptions ??
             SubscriptionOptions(
-              document: _getDocumentWithSecondLine(streamAllConfig),
+              document: _getDocumentWithSecondLine(
+                  streamAllConfig, request.param?.orderBy),
               operationName: streamAllConfig.effectiveOperationName,
               variables: _getEffectiveStreamAllVars(streamAllConfig, request),
               parserFn: streamAllConfig.parserFn ??
@@ -143,14 +144,9 @@ class StreamableDAOProxy<T extends ViewableWithID> extends DAOBase<T> {
         db.varsTransformer.transformrequestForPagination<T>(request);
   }
 
-  dynamic _getDocumentWithSecondLine(
-    StreamAllConfig<T> streamAllConfig,
-  ) {
+  dynamic _getDocumentWithSecondLine(StreamAllConfig<T> streamAllConfig,
+      [List<OrderBy>? orderBy]) {
     final configDocument = streamAllConfig.document;
-
-    if (secondLineFieldName == null) {
-      return configDocument;
-    }
 
     final firstSelectionNodeName = configDocument.definitions
         .whereType<OperationDefinitionNode>()
@@ -158,6 +154,19 @@ class StreamableDAOProxy<T extends ViewableWithID> extends DAOBase<T> {
         .firstSelectionNode
         .name
         .value;
+
+    if (orderBy?.firstOrNull case final orderBy?) {
+      return configDocument.withSelectionFields(
+        {
+          firstSelectionNodeName:
+              orderBy.getSecondLineField().fieldPath.asGQLSelectionNode()
+        },
+      );
+    }
+
+    if (secondLineFieldName == null) {
+      return configDocument;
+    }
 
     return configDocument.withSelectionFields(
       {

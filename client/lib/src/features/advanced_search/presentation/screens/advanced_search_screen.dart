@@ -200,6 +200,11 @@ class _AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
             ),
             body: ViewableObjectList(
               objectsController: viewableObjectListController,
+              viewableObjectWidgetConfig: controller.orderBy.isNotEmpty
+                  ? ViewableObjectWidgetConfig(
+                      secondLineField: controller.orderBy.first.field,
+                    )
+                  : null,
             ),
             bottomNavigationBar: StreamBuilder<int?>(
               stream: viewableObjectListController.totalCountStream,
