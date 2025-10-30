@@ -10,6 +10,7 @@ class _AreaFields {
   _AreaFields();
 
   final FieldMetadata<Area> id = FieldMetadata<Area>(
+    getValue: (obj) => obj is Area ? obj.id : null,
     parentType: Area,
     name: 'id',
     label: '=',
@@ -18,6 +19,7 @@ class _AreaFields {
   );
 
   final FieldMetadata<String> name = FieldMetadata<String>(
+    getValue: (obj) => obj is Area ? obj.name : null,
     parentType: Area,
     name: 'name',
     label: 'الاسم',
@@ -26,6 +28,7 @@ class _AreaFields {
   );
 
   final FieldMetadata<Polygon> bounds = FieldMetadata<Polygon>(
+    getValue: (obj) => obj is Area ? obj.bounds : null,
     parentType: Area,
     name: 'bounds',
     label: 'الموقع',
@@ -38,6 +41,7 @@ class _AreaFields {
   );
 
   final FieldMetadata<Color> color = FieldMetadata<Color>(
+    getValue: (obj) => obj is Area ? obj.color : null,
     parentType: Area,
     name: 'color',
     label: 'اللون',
@@ -50,6 +54,7 @@ class _AreaFields {
   );
 
   final FieldMetadata<DateTime> photoUpdatedAt = FieldMetadata<DateTime>(
+    getValue: (obj) => obj is Area ? obj.photoUpdatedAt : null,
     parentType: Area,
     name: 'photoUpdatedAt',
     label: 'أخر تحديث للصورة',
@@ -64,6 +69,7 @@ class _AreaFields {
 
   final FieldMetadata<LastRecordedByInfo> lastVisit =
       FieldMetadata<LastRecordedByInfo>(
+    getValue: (obj) => obj is Area ? obj.lastVisit : null,
     parentType: Area,
     name: 'lastVisit',
     label: 'أخر افتقاد',
@@ -77,6 +83,7 @@ class _AreaFields {
 
   final FieldMetadata<LastRecordedByInfo> lastEdit =
       FieldMetadata<LastRecordedByInfo>(
+    getValue: (obj) => obj is Area ? obj.lastEdit : null,
     parentType: Area,
     name: 'lastEdit',
     label: 'أخر تحديث البيانات',
@@ -89,6 +96,7 @@ class _AreaFields {
   );
 
   final FieldMetadata<AdminOnData> adminUsersRel = FieldMetadata<AdminOnData>(
+    getValue: (obj) => obj is Area ? obj.adminUsers : null,
     parentType: Area,
     name: 'adminUsers',
     label: 'adminUsers',
@@ -99,6 +107,7 @@ class _AreaFields {
   late final FieldMetadata<User> adminUsers = adminUsersRel.redirectTo(
     AdminOnDataFields().user,
     isExpandable: false,
+    isOrderable: false,
   );
 
   late final List<FieldMetadata<Object>> allFields = [

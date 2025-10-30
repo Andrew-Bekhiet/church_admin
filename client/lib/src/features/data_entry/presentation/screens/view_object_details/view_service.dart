@@ -30,9 +30,15 @@ class _ViewServiceState extends State<ViewService> {
             ),
           ],
         ),
+        orderBy: _classesOrderBy.stream,
       ),
     ),
   );
+
+  final BehaviorSubject<List<OrderBy>> _classesOrderBy =
+      BehaviorSubject.seeded([
+    OrderBy(field: ClassFields().name),
+  ]);
 
   late final _groupsController = _ensureWillDispose(
     ViewableObjectListController(
@@ -46,9 +52,14 @@ class _ViewServiceState extends State<ViewService> {
             ),
           ],
         ),
+        orderBy: _groupsOrderBy.stream,
       ),
     ),
   );
+
+  final BehaviorSubject<List<OrderBy>> _groupsOrderBy = BehaviorSubject.seeded([
+    OrderBy(field: GroupFields().name),
+  ]);
 
   late final _personsController = _ensureWillDispose(
     ViewableObjectListController(
@@ -64,9 +75,16 @@ class _ViewServiceState extends State<ViewService> {
             ),
           ],
         ),
+        orderBy: _personsOrderBy.stream,
       ),
     ),
   );
+
+  final BehaviorSubject<List<OrderBy>> _personsOrderBy =
+      BehaviorSubject.seeded([
+    OrderBy(field: PersonFields().studyYear),
+    OrderBy(field: PersonFields().name),
+  ]);
 
   final Set<ViewableObjectListController> _controllersToDispose = {};
 
@@ -107,6 +125,15 @@ class _ViewServiceState extends State<ViewService> {
         ),
       ),
       sliverPersistentHeaderDelegate: ChipTabBarPersistentHeaderDelegate(
+        filtersWidget: Builder(
+          builder: (context) => IconButton(
+            visualDensity: VisualDensity.compact,
+            padding: EdgeInsets.zero,
+            icon: const Icon(Symbols.sort),
+            onPressed: () =>
+                _showOrderBySheet(DefaultTabController.of(context).index),
+          ),
+        ),
         tabs: [
           (
             label: 'الفصول',
@@ -123,20 +150,50 @@ class _ViewServiceState extends State<ViewService> {
         ],
       ),
       tabsContentBuilders: {
-        Class: (context) => ViewableObjectList(
-              itemBuilder: (context, class_, config) =>
-                  ViewableObjectCard<Class>(class_, config: config),
-              type: ViewableObjectListType.grid3,
-              scrollController: PrimaryScrollController.maybeOf(context),
-              objectsController: _classesController,
+        Class: (context) => StreamBuilder(
+              stream: _classesOrderBy.stream,
+              initialData: _classesOrderBy.value,
+              builder: (context, orderBySnapshot) => ViewableObjectList(
+                itemBuilder: (context, class_, config) =>
+                    ViewableObjectCard<Class>(
+                  class_,
+                  config: config?.copyWith(
+                        secondLineField:
+                            orderBySnapshot.data?.first.getSecondLineField(),
+                      ) ??
+                      ViewableObjectWidgetConfig(
+                        secondLineField:
+                            orderBySnapshot.data?.first.getSecondLineField(),
+                      ),
+                ),
+                type: ViewableObjectListType.grid3,
+                scrollController: PrimaryScrollController.maybeOf(context),
+                objectsController: _classesController,
+              ),
             ),
-        Group: (context) => ViewableObjectList(
-              scrollController: PrimaryScrollController.maybeOf(context),
-              objectsController: _groupsController,
+        Group: (context) => StreamBuilder(
+              stream: _groupsOrderBy.stream,
+              initialData: _groupsOrderBy.value,
+              builder: (context, orderBySnapshot) => ViewableObjectList(
+                scrollController: PrimaryScrollController.maybeOf(context),
+                viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
+                  secondLineField:
+                      orderBySnapshot.data?.first.getSecondLineField(),
+                ),
+                objectsController: _groupsController,
+              ),
             ),
-        Person: (context) => ViewableObjectList(
-              scrollController: PrimaryScrollController.maybeOf(context),
-              objectsController: _personsController,
+        Person: (context) => StreamBuilder(
+              stream: _personsOrderBy.stream,
+              initialData: _personsOrderBy.value,
+              builder: (context, orderBySnapshot) => ViewableObjectList(
+                scrollController: PrimaryScrollController.maybeOf(context),
+                viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
+                  secondLineField:
+                      orderBySnapshot.data?.first.getSecondLineField(),
+                ),
+                objectsController: _personsController,
+              ),
             ),
       },
       notFoundBuilder: (context) => Center(
@@ -210,6 +267,27 @@ class _ViewServiceState extends State<ViewService> {
     return offset.isNegative
         ? (currentIndex + offset).floor()
         : (currentIndex + offset).ceil();
+  }
+
+  Future<void> _showOrderBySheet(int currentTabIndex) async {
+    final advancedQueriesMetadata = AdvancedQueriesMetadata();
+
+    final (queryableType, orderBySubject) = switch (currentTabIndex) {
+      0 => (advancedQueriesMetadata.$class, _classesOrderBy),
+      1 => (advancedQueriesMetadata.group, _groupsOrderBy),
+      2 => (advancedQueriesMetadata.person, _personsOrderBy),
+      _ => throw UnimplementedError(),
+    };
+
+    final newOrderBy = await showOrderByBottomSheet(
+      context,
+      queryableType: queryableType,
+      orderBySubject: orderBySubject,
+    );
+
+    if (newOrderBy == null) return;
+
+    orderBySubject.add(newOrderBy);
   }
 
   ViewableObjectListController<T>

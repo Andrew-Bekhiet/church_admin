@@ -12,6 +12,7 @@ class QualificationFields {
   QualificationFields._();
 
   final FieldMetadata<Qualification> id = FieldMetadata<Qualification>(
+    getValue: (obj) => obj is Qualification ? obj.id : null,
     parentType: Qualification,
     name: 'id',
     label: '=',
@@ -20,6 +21,7 @@ class QualificationFields {
   );
 
   final FieldMetadata<String> name = FieldMetadata<String>(
+    getValue: (obj) => obj is Qualification ? obj.name : null,
     parentType: Qualification,
     name: 'name',
     label: 'الاسم',

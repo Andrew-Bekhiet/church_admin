@@ -12,6 +12,7 @@ class AreasStreetsFields {
   AreasStreetsFields._();
 
   final FieldMetadata<Area> area = FieldMetadata<Area>(
+    getValue: (obj) => obj is AreasStreets ? obj.area : null,
     parentType: AreasStreets,
     name: 'area',
     label: 'المنطقة',
@@ -20,6 +21,7 @@ class AreasStreetsFields {
   );
 
   final FieldMetadata<Street> street = FieldMetadata<Street>(
+    getValue: (obj) => obj is AreasStreets ? obj.street : null,
     parentType: AreasStreets,
     name: 'street',
     label: 'الشارع',
@@ -28,6 +30,7 @@ class AreasStreetsFields {
   );
 
   final FieldMetadata<String> areaId = FieldMetadata<String>(
+    getValue: (obj) => obj is AreasStreets ? obj.areaId : null,
     parentType: AreasStreets,
     name: 'areaId',
     label: 'areaId',
@@ -36,6 +39,7 @@ class AreasStreetsFields {
   );
 
   final FieldMetadata<String> streetId = FieldMetadata<String>(
+    getValue: (obj) => obj is AreasStreets ? obj.streetId : null,
     parentType: AreasStreets,
     name: 'streetId',
     label: 'streetId',

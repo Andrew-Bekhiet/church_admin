@@ -12,6 +12,7 @@ class AttendanceRecordFields {
   AttendanceRecordFields._();
 
   final FieldMetadata<AttendanceRecord> id = FieldMetadata<AttendanceRecord>(
+    getValue: (obj) => obj is AttendanceRecord ? obj.id : null,
     parentType: AttendanceRecord,
     name: 'id',
     label: '=',
@@ -20,6 +21,7 @@ class AttendanceRecordFields {
   );
 
   final FieldMetadata<DateTime> time = FieldMetadata<DateTime>(
+    getValue: (obj) => obj is AttendanceRecord ? obj.time : null,
     parentType: AttendanceRecord,
     name: 'time',
     label: 'الوقت',
@@ -28,6 +30,7 @@ class AttendanceRecordFields {
   );
 
   final FieldMetadata<Service> service = FieldMetadata<Service>(
+    getValue: (obj) => obj is AttendanceRecord ? obj.service : null,
     parentType: AttendanceRecord,
     name: 'service',
     label: 'الخدمة',
@@ -36,6 +39,7 @@ class AttendanceRecordFields {
   );
 
   final FieldMetadata<Person> person = FieldMetadata<Person>(
+    getValue: (obj) => obj is AttendanceRecord ? obj.person : null,
     parentType: AttendanceRecord,
     name: 'person',
     label: 'بيانات المخدوم',
@@ -44,6 +48,7 @@ class AttendanceRecordFields {
   );
 
   final FieldMetadata<User> recordedByUser = FieldMetadata<User>(
+    getValue: (obj) => obj is AttendanceRecord ? obj.recordedByUser : null,
     parentType: AttendanceRecord,
     name: 'recordedByUser',
     label: 'الخادم الذي سجل',
@@ -52,6 +57,7 @@ class AttendanceRecordFields {
   );
 
   final FieldMetadata<bool> asAdmin = FieldMetadata<bool>(
+    getValue: (obj) => obj is AttendanceRecord ? obj.asAdmin : null,
     parentType: AttendanceRecord,
     name: 'asAdmin',
     label: 'asAdmin',
@@ -60,6 +66,7 @@ class AttendanceRecordFields {
   );
 
   final FieldMetadata<StudyYear> studyYear = FieldMetadata<StudyYear>(
+    getValue: (obj) => obj is AttendanceRecord ? obj.studyYear : null,
     parentType: AttendanceRecord,
     name: 'studyYear',
     label: 'السنة الدراسية',
@@ -72,6 +79,7 @@ class AttendanceRecordFields {
   );
 
   final FieldMetadata<bool> serviceGender = FieldMetadata<bool>(
+    getValue: (obj) => obj is AttendanceRecord ? obj.serviceGender : null,
     parentType: AttendanceRecord,
     name: 'serviceGender',
     label: 'نوع المخدومين المسؤول عنهم',
@@ -84,6 +92,7 @@ class AttendanceRecordFields {
   );
 
   final FieldMetadata<Group> group = FieldMetadata<Group>(
+    getValue: (obj) => obj is AttendanceRecord ? obj.group : null,
     parentType: AttendanceRecord,
     name: 'group',
     label: 'المجموعة',
@@ -96,6 +105,7 @@ class AttendanceRecordFields {
   );
 
   final FieldMetadata<Class> class$ = FieldMetadata<Class>(
+    getValue: (obj) => obj is AttendanceRecord ? obj.class$ : null,
     parentType: AttendanceRecord,
     name: 'class',
     label: 'الفصل',

@@ -12,6 +12,7 @@ class JobFields {
   JobFields._();
 
   final FieldMetadata<Job> id = FieldMetadata<Job>(
+    getValue: (obj) => obj is Job ? obj.id : null,
     parentType: Job,
     name: 'id',
     label: '=',
@@ -20,6 +21,7 @@ class JobFields {
   );
 
   final FieldMetadata<String> name = FieldMetadata<String>(
+    getValue: (obj) => obj is Job ? obj.name : null,
     parentType: Job,
     name: 'name',
     label: 'الاسم',

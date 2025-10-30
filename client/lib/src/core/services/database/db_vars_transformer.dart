@@ -92,10 +92,8 @@ extension _FollowKeysPath<T> on Map<T, dynamic> {
       throw StateError('Path must have exactly one key');
     }
 
-    if (path.isEmpty) return this;
-
     final value = this[path.keys.single];
-    return value is Map<T, dynamic>
+    return value is Map<T, dynamic> && path.values.single is Map
         ? value.followKeysPath(path.values.single)
         : value;
   }

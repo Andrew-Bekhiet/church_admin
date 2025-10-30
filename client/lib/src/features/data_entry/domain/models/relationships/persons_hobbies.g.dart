@@ -12,6 +12,7 @@ class PersonsHobbiesFields {
   PersonsHobbiesFields._();
 
   final FieldMetadata<Person> person = FieldMetadata<Person>(
+    getValue: (obj) => obj is PersonsHobbies ? obj.person : null,
     parentType: PersonsHobbies,
     name: 'person',
     label: 'بيانات المخدوم',
@@ -20,6 +21,7 @@ class PersonsHobbiesFields {
   );
 
   final FieldMetadata<Hobby> hobby = FieldMetadata<Hobby>(
+    getValue: (obj) => obj is PersonsHobbies ? obj.hobby : null,
     parentType: PersonsHobbies,
     name: 'hobby',
     label: 'الهواية',
@@ -28,6 +30,7 @@ class PersonsHobbiesFields {
   );
 
   final FieldMetadata<String> personId = FieldMetadata<String>(
+    getValue: (obj) => obj is PersonsHobbies ? obj.personId : null,
     parentType: PersonsHobbies,
     name: 'personId',
     label: 'personId',
@@ -36,6 +39,7 @@ class PersonsHobbiesFields {
   );
 
   final FieldMetadata<String> hobbyId = FieldMetadata<String>(
+    getValue: (obj) => obj is PersonsHobbies ? obj.hobbyId : null,
     parentType: PersonsHobbies,
     name: 'hobbyId',
     label: 'hobbyId',

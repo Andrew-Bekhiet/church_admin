@@ -12,6 +12,7 @@ class ChurchFields {
   ChurchFields._();
 
   final FieldMetadata<Church> id = FieldMetadata<Church>(
+    getValue: (obj) => obj is Church ? obj.id : null,
     parentType: Church,
     name: 'id',
     label: '=',
@@ -20,6 +21,7 @@ class ChurchFields {
   );
 
   final FieldMetadata<String> name = FieldMetadata<String>(
+    getValue: (obj) => obj is Church ? obj.name : null,
     parentType: Church,
     name: 'name',
     label: 'الاسم',

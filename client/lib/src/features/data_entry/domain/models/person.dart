@@ -13,7 +13,12 @@ part 'person.g.dart';
   classLabel: 'الأشخاص',
   ignoreFields: ['blurhash', 'isStudent', 'otherPhones'],
   allowExtension: true,
-  labelsOverrides: {'martialStatus': 'الحالة الاجتماعية'},
+  labelsOverrides: {
+    'martialStatus': 'الحالة الاجتماعية',
+    'workStatus': 'حالة العمل',
+    'servingChurch': 'الكنيسة التي يخدم بها',
+    'serviceType': 'نوع الخدمة',
+  },
 )
 class Person extends ViewableWithIDAndImage
     with _$Person

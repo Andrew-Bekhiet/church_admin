@@ -16,10 +16,10 @@ class ChipTabBarPersistentHeaderDelegate
   bool get _hasFilters => filtersWidget != null;
 
   @override
-  double get minExtent => (kToolbarHeight - 6) * (_hasFilters ? 2 : 1);
+  double get minExtent => kToolbarHeight - 6;
 
   @override
-  double get maxExtent => kToolbarHeight * 1.2 * (_hasFilters ? 2 : 1);
+  double get maxExtent => kToolbarHeight * 1.2;
 
   @override
   Widget build(
@@ -36,13 +36,31 @@ class ChipTabBarPersistentHeaderDelegate
       color: theme.scaffoldBackgroundColor,
       child: Align(
         alignment: AlignmentDirectional.centerStart,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            ChipTabBar(tabs: tabs),
-            if (_hasFilters) filtersWidget!,
-          ],
-        ),
+        child: _hasFilters
+            ? Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Expanded(
+                    child: DecoratedBox(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: AlignmentDirectional.centerEnd,
+                          end: AlignmentDirectional.centerStart,
+                          colors: [
+                            theme.scaffoldBackgroundColor,
+                            theme.scaffoldBackgroundColor.withValues(alpha: 0),
+                          ],
+                          stops: const [0, 0.12],
+                        ),
+                      ),
+                      position: DecorationPosition.foreground,
+                      child: ChipTabBar(tabs: tabs),
+                    ),
+                  ),
+                  filtersWidget!,
+                ],
+              )
+            : ChipTabBar(tabs: tabs),
       ),
     );
   }

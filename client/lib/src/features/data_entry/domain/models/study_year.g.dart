@@ -10,6 +10,7 @@ class _StudyYearFields {
   _StudyYearFields();
 
   final FieldMetadata<int> order = FieldMetadata<int>(
+    getValue: (obj) => obj is StudyYear ? obj.order : null,
     parentType: StudyYear,
     name: 'order',
     label: 'الترتيب',
@@ -18,6 +19,7 @@ class _StudyYearFields {
   );
 
   final FieldMetadata<String> name = FieldMetadata<String>(
+    getValue: (obj) => obj is StudyYear ? obj.name : null,
     parentType: StudyYear,
     name: 'name',
     label: 'الاسم',
@@ -26,6 +28,7 @@ class _StudyYearFields {
   );
 
   final FieldMetadata<StudyYear> id = FieldMetadata<StudyYear>(
+    getValue: (obj) => obj is StudyYear ? obj.id : null,
     parentType: StudyYear,
     name: 'id',
     label: '=',

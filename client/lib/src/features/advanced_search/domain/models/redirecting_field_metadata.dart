@@ -15,6 +15,7 @@ class RedirectingFieldMetadata<P extends Object, T extends Object>
     required this.parentField,
     required this.targetField,
     this.isExpandable = true,
+    bool? isOrderable,
     String? alias,
     String? label,
   }) : super(
@@ -22,9 +23,16 @@ class RedirectingFieldMetadata<P extends Object, T extends Object>
           name: alias ?? targetField.name,
           label: label ?? targetField.label,
           isCodeOnly: targetField.isCodeOnly,
-          isOrderable: targetField.isOrderable,
+          isOrderable: isOrderable ?? targetField.isOrderable,
           type: targetField.type,
           operators: targetField.operators,
+          getValue: (obj) {
+            final parentValue = parentField.getValue(obj);
+
+            if (parentValue == null) return null;
+
+            return targetField.getValue(parentValue);
+          },
         );
 
   static RedirectingFieldMetadata<P, T>
@@ -64,4 +72,7 @@ class RedirectingFieldMetadata<P extends Object, T extends Object>
     return parentField
         .serializeOrderBy(targetField.serializeOrderBy(serializedValue));
   }
+
+  @override
+  List<String> get fieldPath => [...parentField.fieldPath, name];
 }

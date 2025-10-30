@@ -12,6 +12,7 @@ class PersonStateFields {
   PersonStateFields._();
 
   final FieldMetadata<PersonState> id = FieldMetadata<PersonState>(
+    getValue: (obj) => obj is PersonState ? obj.id : null,
     parentType: PersonState,
     name: 'id',
     label: '=',
@@ -20,6 +21,7 @@ class PersonStateFields {
   );
 
   final FieldMetadata<String> name = FieldMetadata<String>(
+    getValue: (obj) => obj is PersonState ? obj.name : null,
     parentType: PersonState,
     name: 'name',
     label: 'الاسم',
@@ -28,6 +30,7 @@ class PersonStateFields {
   );
 
   final FieldMetadata<Color> color = FieldMetadata<Color>(
+    getValue: (obj) => obj is PersonState ? obj.color : null,
     parentType: PersonState,
     name: 'color',
     label: 'اللون',

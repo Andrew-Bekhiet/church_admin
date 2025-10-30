@@ -35,14 +35,13 @@ class StudyYear extends ViewableWithID
 }
 
 class StudyYearFields extends _StudyYearFields {
+  static T _identity<T>(T value) => value;
+
   StudyYearFields();
 
   @override
   FieldMetadata<StudyYear> get id => const FieldMetadata<StudyYear>(
-        parentType: StudyYear,
-        name: 'id',
-        label: '=',
-      );
+      parentType: StudyYear, name: 'id', label: '=', getValue: _identity);
 
   @override
   List<FieldMetadata<Object>> get allFields => [id, ...super.allFields];

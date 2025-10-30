@@ -222,30 +222,33 @@ class UserFields extends _UserFields {
   UserFields();
 
   @override
-  FieldMetadata<String> get uid => const FieldMetadata<String>(
+  FieldMetadata<String> get uid => FieldMetadata<String>(
         parentType: User,
         name: 'uid',
         label: 'معرف المستخدم',
         operators: {...StringOperator.values},
         isCodeOnly: true,
+        getValue: (obj) => obj is User ? obj.uid : null,
       );
 
   @override
-  FieldMetadata<String> get email => const FieldMetadata<String>(
+  FieldMetadata<String> get email => FieldMetadata<String>(
         parentType: User,
         name: 'email',
         label: 'البريد الإلكتروني',
         operators: {...StringOperator.values},
         isCodeOnly: true,
+        getValue: (obj) => obj is User ? obj.email : null,
       );
 
-  FieldMetadata<AggregateData> get permissionsAggregate => const FieldMetadata(
+  FieldMetadata<AggregateData> get permissionsAggregate => FieldMetadata(
         parentType: User,
         name: 'permissionsAggregate',
         label: 'permissionsAggregate',
         isCodeOnly: true,
         isOrderable: false,
         operators: {...MultiSelectOperator.values},
+        getValue: (obj) => obj is User ? obj.permissions : null,
       );
 
   @override

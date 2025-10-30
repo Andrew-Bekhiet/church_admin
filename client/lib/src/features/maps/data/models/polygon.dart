@@ -31,6 +31,9 @@ class Polygon with EquatableMixin implements Spatial {
 
   @override
   List<Object?> get props => coordinates;
+
+  @override
+  String toString() => coordinates.map((p) => p.toString()).join(', ');
 }
 
 Json? polygonToJson(Polygon? data) => data?.asPostGISPolygon();

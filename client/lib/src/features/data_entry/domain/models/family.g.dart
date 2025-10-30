@@ -10,6 +10,7 @@ class _FamilyFields {
   _FamilyFields();
 
   final FieldMetadata<Family> id = FieldMetadata<Family>(
+    getValue: (obj) => obj is Family ? obj.id : null,
     parentType: Family,
     name: 'id',
     label: '=',
@@ -18,6 +19,7 @@ class _FamilyFields {
   );
 
   final FieldMetadata<String> name = FieldMetadata<String>(
+    getValue: (obj) => obj is Family ? obj.name : null,
     parentType: Family,
     name: 'name',
     label: 'الاسم',
@@ -26,6 +28,7 @@ class _FamilyFields {
   );
 
   final FieldMetadata<Address> address = FieldMetadata<Address>(
+    getValue: (obj) => obj is Family ? obj.address : null,
     parentType: Family,
     name: 'address',
     label: 'العنوان',
@@ -33,6 +36,7 @@ class _FamilyFields {
   );
 
   final FieldMetadata<MartialStatus> status = FieldMetadata<MartialStatus>(
+    getValue: (obj) => obj is Family ? obj.status : null,
     parentType: Family,
     name: 'status',
     label: 'الحالة الاجتماعية',
@@ -41,6 +45,7 @@ class _FamilyFields {
   );
 
   final FieldMetadata<DateTime> marriageDate = FieldMetadata<DateTime>(
+    getValue: (obj) => obj is Family ? obj.marriageDate : null,
     parentType: Family,
     name: 'marriageDate',
     label: 'تاريخ الزواج',
@@ -54,6 +59,7 @@ class _FamilyFields {
   );
 
   final FieldMetadata<String> deceasedSpouseName = FieldMetadata<String>(
+    getValue: (obj) => obj is Family ? obj.deceasedSpouseName : null,
     parentType: Family,
     name: 'deceasedSpouseName',
     label: 'اسم الزوج المتوفي',
@@ -66,6 +72,7 @@ class _FamilyFields {
   );
 
   final FieldMetadata<Church> church = FieldMetadata<Church>(
+    getValue: (obj) => obj is Family ? obj.church : null,
     parentType: Family,
     name: 'church',
     label: 'الكنيسة',
@@ -78,6 +85,7 @@ class _FamilyFields {
   );
 
   final FieldMetadata<String> notes = FieldMetadata<String>(
+    getValue: (obj) => obj is Family ? obj.notes : null,
     parentType: Family,
     name: 'notes',
     label: 'ملاحظات',
@@ -90,6 +98,7 @@ class _FamilyFields {
   );
 
   final FieldMetadata<Color> color = FieldMetadata<Color>(
+    getValue: (obj) => obj is Family ? obj.color : null,
     parentType: Family,
     name: 'color',
     label: 'اللون',
@@ -102,6 +111,7 @@ class _FamilyFields {
   );
 
   final FieldMetadata<DateTime> photoUpdatedAt = FieldMetadata<DateTime>(
+    getValue: (obj) => obj is Family ? obj.photoUpdatedAt : null,
     parentType: Family,
     name: 'photoUpdatedAt',
     label: 'أخر تحديث للصورة',
@@ -116,6 +126,7 @@ class _FamilyFields {
 
   final FieldMetadata<FamiliesFamilies> childrenRel =
       FieldMetadata<FamiliesFamilies>(
+    getValue: (obj) => obj is Family ? obj.children : null,
     parentType: Family,
     name: 'children',
     label: 'children',
@@ -126,10 +137,12 @@ class _FamilyFields {
   late final FieldMetadata<Family> children = childrenRel.redirectTo(
     FamiliesFamiliesFields().child,
     isExpandable: false,
+    isOrderable: false,
   );
 
   final FieldMetadata<FamiliesFamilies> parentsRel =
       FieldMetadata<FamiliesFamilies>(
+    getValue: (obj) => obj is Family ? obj.parents : null,
     parentType: Family,
     name: 'parents',
     label: 'parents',
@@ -140,10 +153,12 @@ class _FamilyFields {
   late final FieldMetadata<Family> parents = parentsRel.redirectTo(
     FamiliesFamiliesFields().parent,
     isExpandable: false,
+    isOrderable: false,
   );
 
   final FieldMetadata<LastRecordedByInfo> lastEdit =
       FieldMetadata<LastRecordedByInfo>(
+    getValue: (obj) => obj is Family ? obj.lastEdit : null,
     parentType: Family,
     name: 'lastEdit',
     label: 'أخر تحديث البيانات',
@@ -157,6 +172,7 @@ class _FamilyFields {
 
   final FieldMetadata<LastRecordedByInfo> lastVisit =
       FieldMetadata<LastRecordedByInfo>(
+    getValue: (obj) => obj is Family ? obj.lastVisit : null,
     parentType: Family,
     name: 'lastVisit',
     label: 'أخر افتقاد',
@@ -170,6 +186,7 @@ class _FamilyFields {
 
   final FieldMetadata<LastRecordedByInfo> lastFatherVisit =
       FieldMetadata<LastRecordedByInfo>(
+    getValue: (obj) => obj is Family ? obj.lastFatherVisit : null,
     parentType: Family,
     name: 'lastFatherVisit',
     label: 'آخر افتقاد للأب الكاهن',
@@ -182,6 +199,7 @@ class _FamilyFields {
   );
 
   final FieldMetadata<Point> geolocation = FieldMetadata<Point>(
+    getValue: (obj) => obj is Family ? obj.geolocation : null,
     parentType: Family,
     name: 'geolocation',
     label: 'الموقع',

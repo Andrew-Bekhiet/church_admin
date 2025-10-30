@@ -12,6 +12,7 @@ class FatherFields {
   FatherFields._();
 
   final FieldMetadata<Father> id = FieldMetadata<Father>(
+    getValue: (obj) => obj is Father ? obj.id : null,
     parentType: Father,
     name: 'id',
     label: '=',
@@ -20,6 +21,7 @@ class FatherFields {
   );
 
   final FieldMetadata<String> name = FieldMetadata<String>(
+    getValue: (obj) => obj is Father ? obj.name : null,
     parentType: Father,
     name: 'name',
     label: 'الاسم',
@@ -28,6 +30,7 @@ class FatherFields {
   );
 
   final FieldMetadata<bool> isHidden = FieldMetadata<bool>(
+    getValue: (obj) => obj is Father ? obj.isHidden : null,
     parentType: Father,
     name: 'isHidden',
     label: 'isHidden',

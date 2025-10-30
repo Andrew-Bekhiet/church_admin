@@ -69,22 +69,28 @@ class AreaFields extends _AreaFields {
 
   AreaFields._();
 
-  FieldMetadata<AreasStreets> get streetsRel =>
-      const FieldMetadata<AreasStreets>(
+  FieldMetadata<AreasStreets> get streetsRel => FieldMetadata<AreasStreets>(
         parentType: Area,
         name: 'streets',
         label: 'الشوارع',
         isCodeOnly: true,
         isOrderable: false,
+        getValue: (obj) => obj is Area ? [] : null,
       );
 
-  FieldMetadata<Street> get streets =>
-      streetsRel.redirectTo(AreasStreetsFields().street, isExpandable: false);
+  FieldMetadata<Street> get streets => streetsRel.redirectTo(
+        AreasStreetsFields().street,
+        isExpandable: false,
+        isOrderable: false,
+      );
 
   @override
-  FieldMetadata<User> get adminUsers =>
-      adminUsersRel.redirectTo(AdminOnDataFields().user,
-          label: adminUsersRel.label, isExpandable: false);
+  FieldMetadata<User> get adminUsers => adminUsersRel.redirectTo(
+        AdminOnDataFields().user,
+        label: adminUsersRel.label,
+        isExpandable: false,
+        isOrderable: false,
+      );
 
   @override
   List<FieldMetadata<Object>> get allFields => [...super.allFields, streets];

@@ -27,24 +27,23 @@ class _ViewFamilyState extends State<ViewFamily> {
             ),
           ],
         ),
-        orderBy: Stream.value(
-          [
-            OrderBy(
-              field: PersonFields()
-                  .personType
-                  .redirectTo(PersonTypeFields().isFamilyAdmin),
-              value: OrderByValue.desc,
-            ),
-            OrderBy(
-              field: PersonFields()
-                  .personType
-                  .redirectTo(PersonTypeFields().order),
-            ),
-          ],
-        ),
+        orderBy: _personsOrderBy.stream,
       ),
     ),
   );
+
+  final BehaviorSubject<List<OrderBy>> _personsOrderBy =
+      BehaviorSubject.seeded([
+    OrderBy(
+      field: PersonFields()
+          .personType
+          .redirectTo(PersonTypeFields().isFamilyAdmin),
+      value: OrderByValue.desc,
+    ),
+    OrderBy(
+      field: PersonFields().personType.redirectTo(PersonTypeFields().order),
+    ),
+  ]);
 
   late final _childrenFamiliesController = _ensureWillDispose(
     ViewableObjectListController(
@@ -60,9 +59,15 @@ class _ViewFamilyState extends State<ViewFamily> {
             ),
           ],
         ),
+        orderBy: _childrenFamiliesOrderBy.stream,
       ),
     ),
   );
+
+  final BehaviorSubject<List<OrderBy>> _childrenFamiliesOrderBy =
+      BehaviorSubject.seeded([
+    OrderBy(field: FamilyFields().name),
+  ]);
 
   late final _parentFamiliesController = _ensureWillDispose(
     ViewableObjectListController(
@@ -78,9 +83,15 @@ class _ViewFamilyState extends State<ViewFamily> {
             ),
           ],
         ),
+        orderBy: _parentFamiliesOrderBy.stream,
       ),
     ),
   );
+
+  final BehaviorSubject<List<OrderBy>> _parentFamiliesOrderBy =
+      BehaviorSubject.seeded([
+    OrderBy(field: FamilyFields().name),
+  ]);
 
   late final _storesController = _ensureWillDispose(
     ViewableObjectListController(
@@ -94,9 +105,14 @@ class _ViewFamilyState extends State<ViewFamily> {
             ),
           ],
         ),
+        orderBy: _storesOrderBy.stream,
       ),
     ),
   );
+
+  final BehaviorSubject<List<OrderBy>> _storesOrderBy = BehaviorSubject.seeded([
+    OrderBy(field: StoreFields().name),
+  ]);
 
   final Set<ViewableObjectListController> _controllersToDispose = {};
 
@@ -114,24 +130,65 @@ class _ViewFamilyState extends State<ViewFamily> {
       objectStream: stream,
       childrenTypes: const [Person, _ChildrenFamily, _ParentFamily, Store],
       tabsContentBuilders: {
-        Person: (context) => ViewableObjectList<Person>(
-              scrollController: PrimaryScrollController.maybeOf(context),
-              objectsController: _personsController,
+        Person: (context) => StreamBuilder(
+              stream: _personsOrderBy.stream,
+              initialData: _personsOrderBy.value,
+              builder: (context, orderBySnapshot) => ViewableObjectList(
+                scrollController: PrimaryScrollController.maybeOf(context),
+                viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
+                  secondLineField:
+                      orderBySnapshot.data?.first.getSecondLineField(),
+                ),
+                objectsController: _personsController,
+              ),
             ),
-        _ChildrenFamily: (context) => ViewableObjectList<Family>(
-              scrollController: PrimaryScrollController.maybeOf(context),
-              objectsController: _childrenFamiliesController,
+        _ChildrenFamily: (context) => StreamBuilder(
+              stream: _childrenFamiliesOrderBy.stream,
+              initialData: _childrenFamiliesOrderBy.value,
+              builder: (context, orderBySnapshot) => ViewableObjectList(
+                scrollController: PrimaryScrollController.maybeOf(context),
+                viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
+                  secondLineField:
+                      orderBySnapshot.data?.first.getSecondLineField(),
+                ),
+                objectsController: _childrenFamiliesController,
+              ),
             ),
-        _ParentFamily: (context) => ViewableObjectList<Family>(
-              scrollController: PrimaryScrollController.maybeOf(context),
-              objectsController: _parentFamiliesController,
+        _ParentFamily: (context) => StreamBuilder(
+              stream: _parentFamiliesOrderBy.stream,
+              initialData: _parentFamiliesOrderBy.value,
+              builder: (context, orderBySnapshot) => ViewableObjectList(
+                scrollController: PrimaryScrollController.maybeOf(context),
+                viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
+                  secondLineField:
+                      orderBySnapshot.data?.first.getSecondLineField(),
+                ),
+                objectsController: _parentFamiliesController,
+              ),
             ),
-        Store: (context) => ViewableObjectList<Store>(
-              scrollController: PrimaryScrollController.maybeOf(context),
-              objectsController: _storesController,
+        Store: (context) => StreamBuilder(
+              stream: _storesOrderBy.stream,
+              initialData: _storesOrderBy.value,
+              builder: (context, orderBySnapshot) => ViewableObjectList(
+                scrollController: PrimaryScrollController.maybeOf(context),
+                viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
+                  secondLineField:
+                      orderBySnapshot.data?.first.getSecondLineField(),
+                ),
+                objectsController: _storesController,
+              ),
             ),
       },
       sliverPersistentHeaderDelegate: ChipTabBarPersistentHeaderDelegate(
+        filtersWidget: Builder(
+          builder: (context) => IconButton(
+            visualDensity: VisualDensity.compact,
+            padding: EdgeInsets.zero,
+            icon: const Icon(Symbols.sort),
+            onPressed: () =>
+                _showOrderBySheet(DefaultTabController.of(context).index),
+          ),
+        ),
         tabs: [
           (
             label: 'المخدومين',
@@ -342,6 +399,28 @@ class _ViewFamilyState extends State<ViewFamily> {
         },
       ),
     );
+  }
+
+  Future<void> _showOrderBySheet(int currentTabIndex) async {
+    final advancedQueriesMetadata = AdvancedQueriesMetadata();
+
+    final (queryableType, orderBySubject) = switch (currentTabIndex) {
+      0 => (advancedQueriesMetadata.person, _personsOrderBy),
+      1 => (advancedQueriesMetadata.family, _childrenFamiliesOrderBy),
+      2 => (advancedQueriesMetadata.family, _parentFamiliesOrderBy),
+      3 => (advancedQueriesMetadata.store, _storesOrderBy),
+      _ => throw UnimplementedError(),
+    };
+
+    final newOrderBy = await showOrderByBottomSheet(
+      context,
+      queryableType: queryableType,
+      orderBySubject: orderBySubject,
+    );
+
+    if (newOrderBy == null) return;
+
+    orderBySubject.add(newOrderBy);
   }
 
   ViewableObjectListController<T>

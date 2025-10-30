@@ -221,15 +221,6 @@ class FamilyFields extends _FamilyFields {
       address.redirectTo(AddressFields().district, isExpandable: false);
 
   @override
-  FieldMetadata<Family> get children =>
-      childrenRel.redirectTo(FamiliesFamiliesFields().child,
-          label: childrenRel.label, isExpandable: false);
-  @override
-  FieldMetadata<Family> get parents =>
-      parentsRel.redirectTo(FamiliesFamiliesFields().parent,
-          label: parentsRel.label, isExpandable: false);
-
-  @override
   List<FieldMetadata<Object>> get allFields => [
         ...super.allFields,
         area,

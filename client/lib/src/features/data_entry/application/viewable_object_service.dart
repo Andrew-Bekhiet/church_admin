@@ -69,58 +69,55 @@ class ViewableObjectService {
     }
   }
 
-  String? getFormattedValue(String? key, Object? value) {
-    if (key == null || value == null) return null;
+  String? getFormattedValue(Viewable object, FieldMetadata? field) {
+    final fieldName = field?.name;
 
-    switch (value) {
-      case PermissionsSet _:
-        return value.toHumanReadableString();
-      case Json _:
-        return value['name'];
-      case List _:
-        return value.map((o) => getFormattedValue(key, o)).join(',');
+    if (field == null) return null;
+
+    final value = field.getValue(object);
+
+    if (value == null || field.name == 'name' && value == object.name) {
+      return null;
     }
 
-    if (key == 'birthday') {
-      return DateFormat('M/d').format(DateTime.parse(value as String));
-    } else if (DateTime.tryParse(value.toString()) != null) {
-      final parsed = DateTime.parse(value.toString());
+    switch (value) {
+      case PermissionsSet(:final toHumanReadableString):
+        return toHumanReadableString();
 
-      return '${parsed.toDurationString(appendSince: false)}\t\t\t\t\u202D${DateFormat('yyyy/M/d').format(parsed)}';
-    } else if (key == 'gender') {
-      if (value as bool? ?? false) {
-        return 'ذكر';
-      } else if ((value as bool?) == false) {
-        return 'أنثى';
-      } else {
-        return 'غير محدد';
-      }
-    } else if (key.startsWith('is')) {
-      if (value as bool? ?? false) {
-        return 'نعم';
-      } else if ((value as bool?) == false) {
-        return 'لا';
-      } else {
-        return 'غير محدد';
-      }
-    } else if (key == 'color') {
-      return '#${(value as int).toRadixString(16)}';
+      case LabeledEnum(:final label):
+        return label;
+
+      case Viewable(:final name):
+        return name;
+
+      case Color(:final argbValue):
+        return '#${argbValue.toRadixString(16)}';
+
+      case final DateTime dateTime:
+        return '${dateTime.toDurationString(appendSince: false)}'
+            '\t\t\t\t\u202D${DateFormat('yyyy/M/d').format(dateTime)}';
+
+      case final bool? gender
+          when fieldName?.toLowerCase().endsWith('gender') ?? false:
+        return gender == null
+            ? 'غير محدد'
+            : gender
+                ? 'ذكر'
+                : 'أنثى';
+
+      case final bool? value:
+        return value == null
+            ? 'غير محدد'
+            : value
+                ? 'نعم'
+                : 'لا';
+
+      case final String value when fieldName == 'birthday':
+        return DateFormat('d MMMM', 'ar_EG')
+            .format(DateFormat('M-d').parse(value));
     }
 
     return value.toString();
-  }
-
-  String? getSecondLine(Viewable object) {
-    final key = _userSettingsService.getSecondLineFor(object.runtimeType);
-
-    switch (object) {
-      case User _ when key == 'permissions':
-        return getFormattedValue(key, object.permissions);
-      case ToJson _:
-        return getFormattedValue(key, (object as ToJson).toJson()[key]);
-      default:
-        return null;
-    }
   }
 
   IconData getDefaultIconFor<T extends IImage>([T? imageObject]) {

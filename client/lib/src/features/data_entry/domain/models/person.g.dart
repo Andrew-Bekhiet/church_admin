@@ -10,6 +10,7 @@ class _PersonFields {
   _PersonFields();
 
   final FieldMetadata<Person> id = FieldMetadata<Person>(
+    getValue: (obj) => obj is Person ? obj.id : null,
     parentType: Person,
     name: 'id',
     label: '=',
@@ -18,6 +19,7 @@ class _PersonFields {
   );
 
   final FieldMetadata<String> name = FieldMetadata<String>(
+    getValue: (obj) => obj is Person ? obj.name : null,
     parentType: Person,
     name: 'name',
     label: 'الاسم',
@@ -26,6 +28,7 @@ class _PersonFields {
   );
 
   final FieldMetadata<Address> address = FieldMetadata<Address>(
+    getValue: (obj) => obj is Person ? obj.address : null,
     parentType: Person,
     name: 'address',
     label: 'العنوان',
@@ -33,6 +36,7 @@ class _PersonFields {
   );
 
   final FieldMetadata<String> mainPhone = FieldMetadata<String>(
+    getValue: (obj) => obj is Person ? obj.mainPhone : null,
     parentType: Person,
     name: 'mainPhone',
     label: 'رقم الهاتف',
@@ -45,6 +49,7 @@ class _PersonFields {
   );
 
   final FieldMetadata<DateTime> birthdate = FieldMetadata<DateTime>(
+    getValue: (obj) => obj is Person ? obj.birthdate : null,
     parentType: Person,
     name: 'birthdate',
     label: 'تاريخ الميلاد',
@@ -58,6 +63,7 @@ class _PersonFields {
   );
 
   final FieldMetadata<String> birthday = FieldMetadata<String>(
+    getValue: (obj) => obj is Person ? obj.birthday : null,
     parentType: Person,
     name: 'birthday',
     label: 'يوم وشهر الميلاد',
@@ -70,6 +76,7 @@ class _PersonFields {
   );
 
   final FieldMetadata<bool> gender = FieldMetadata<bool>(
+    getValue: (obj) => obj is Person ? obj.gender : null,
     parentType: Person,
     name: 'gender',
     label: 'النوع',
@@ -78,6 +85,7 @@ class _PersonFields {
   );
 
   final FieldMetadata<bool> isShammas = FieldMetadata<bool>(
+    getValue: (obj) => obj is Person ? obj.isShammas : null,
     parentType: Person,
     name: 'isShammas',
     label: 'شماس؟',
@@ -86,6 +94,7 @@ class _PersonFields {
   );
 
   final FieldMetadata<ShammasLevel> shammasLevel = FieldMetadata<ShammasLevel>(
+    getValue: (obj) => obj is Person ? obj.shammasLevel : null,
     parentType: Person,
     name: 'shammasLevel',
     label: 'رتبة الشموسية',
@@ -98,6 +107,7 @@ class _PersonFields {
   );
 
   final FieldMetadata<School> school = FieldMetadata<School>(
+    getValue: (obj) => obj is Person ? obj.school : null,
     parentType: Person,
     name: 'school',
     label: 'المدرسة',
@@ -110,6 +120,7 @@ class _PersonFields {
   );
 
   final FieldMetadata<College> college = FieldMetadata<College>(
+    getValue: (obj) => obj is Person ? obj.college : null,
     parentType: Person,
     name: 'college',
     label: 'الكلية',
@@ -122,6 +133,7 @@ class _PersonFields {
   );
 
   final FieldMetadata<Church> church = FieldMetadata<Church>(
+    getValue: (obj) => obj is Person ? obj.church : null,
     parentType: Person,
     name: 'church',
     label: 'الكنيسة',
@@ -134,6 +146,7 @@ class _PersonFields {
   );
 
   final FieldMetadata<Father> father = FieldMetadata<Father>(
+    getValue: (obj) => obj is Person ? obj.father : null,
     parentType: Person,
     name: 'father',
     label: 'اب الاعتراف',
@@ -146,9 +159,10 @@ class _PersonFields {
   );
 
   final FieldMetadata<WorkStatus> workStatus = FieldMetadata<WorkStatus>(
+    getValue: (obj) => obj is Person ? obj.workStatus : null,
     parentType: Person,
     name: 'workStatus',
-    label: 'workStatus',
+    label: 'حالة العمل',
     isCodeOnly: false,
     operators: {
       ...MultiSelectOperator.values,
@@ -158,6 +172,7 @@ class _PersonFields {
   );
 
   final FieldMetadata<Job> job = FieldMetadata<Job>(
+    getValue: (obj) => obj is Person ? obj.job : null,
     parentType: Person,
     name: 'job',
     label: 'الوظيفة',
@@ -170,6 +185,7 @@ class _PersonFields {
   );
 
   final FieldMetadata<String> jobDescription = FieldMetadata<String>(
+    getValue: (obj) => obj is Person ? obj.jobDescription : null,
     parentType: Person,
     name: 'jobDescription',
     label: 'تفاصيل الوظيفة',
@@ -183,6 +199,7 @@ class _PersonFields {
 
   final FieldMetadata<Qualification> qualification =
       FieldMetadata<Qualification>(
+    getValue: (obj) => obj is Person ? obj.qualification : null,
     parentType: Person,
     name: 'qualification',
     label: 'المؤهل',
@@ -196,6 +213,7 @@ class _PersonFields {
 
   final FieldMetadata<MartialStatus> martialStatus =
       FieldMetadata<MartialStatus>(
+    getValue: (obj) => obj is Person ? obj.martialStatus : null,
     parentType: Person,
     name: 'martialStatus',
     label: 'الحالة الاجتماعية',
@@ -208,6 +226,7 @@ class _PersonFields {
   );
 
   final FieldMetadata<PersonType> personType = FieldMetadata<PersonType>(
+    getValue: (obj) => obj is Person ? obj.personType : null,
     parentType: Person,
     name: 'personType',
     label: 'نوع الفرد في العائلة',
@@ -220,6 +239,7 @@ class _PersonFields {
   );
 
   final FieldMetadata<PersonState> state = FieldMetadata<PersonState>(
+    getValue: (obj) => obj is Person ? obj.state : null,
     parentType: Person,
     name: 'state',
     label: 'الحالة الروحية',
@@ -232,6 +252,7 @@ class _PersonFields {
   );
 
   final FieldMetadata<bool> isServant = FieldMetadata<bool>(
+    getValue: (obj) => obj is Person ? obj.isServant : null,
     parentType: Person,
     name: 'isServant',
     label: 'خادم؟',
@@ -240,9 +261,10 @@ class _PersonFields {
   );
 
   final FieldMetadata<Church> servingChurch = FieldMetadata<Church>(
+    getValue: (obj) => obj is Person ? obj.servingChurch : null,
     parentType: Person,
     name: 'servingChurch',
-    label: 'servingChurch',
+    label: 'الكنيسة التي يخدم بها',
     isCodeOnly: false,
     operators: {
       ...MultiSelectOperator.values,
@@ -252,9 +274,10 @@ class _PersonFields {
   );
 
   final FieldMetadata<String> serviceType = FieldMetadata<String>(
+    getValue: (obj) => obj is Person ? obj.serviceType : null,
     parentType: Person,
     name: 'serviceType',
-    label: 'serviceType',
+    label: 'نوع الخدمة',
     isCodeOnly: false,
     operators: {
       ...StringOperator.values,
@@ -264,6 +287,7 @@ class _PersonFields {
   );
 
   final FieldMetadata<String> notes = FieldMetadata<String>(
+    getValue: (obj) => obj is Person ? obj.notes : null,
     parentType: Person,
     name: 'notes',
     label: 'ملاحظات',
@@ -276,6 +300,7 @@ class _PersonFields {
   );
 
   final FieldMetadata<Family> family = FieldMetadata<Family>(
+    getValue: (obj) => obj is Person ? obj.family : null,
     parentType: Person,
     name: 'family',
     label: 'العائلة',
@@ -288,6 +313,7 @@ class _PersonFields {
   );
 
   final FieldMetadata<Store> store = FieldMetadata<Store>(
+    getValue: (obj) => obj is Person ? obj.store : null,
     parentType: Person,
     name: 'store',
     label: 'المتجر',
@@ -300,6 +326,7 @@ class _PersonFields {
   );
 
   final FieldMetadata<StudyYear> studyYear = FieldMetadata<StudyYear>(
+    getValue: (obj) => obj is Person ? obj.studyYear : null,
     parentType: Person,
     name: 'studyYear',
     label: 'السنة الدراسية',
@@ -312,6 +339,7 @@ class _PersonFields {
   );
 
   final FieldMetadata<Color> color = FieldMetadata<Color>(
+    getValue: (obj) => obj is Person ? obj.color : null,
     parentType: Person,
     name: 'color',
     label: 'اللون',
@@ -324,6 +352,7 @@ class _PersonFields {
   );
 
   final FieldMetadata<DateTime> photoUpdatedAt = FieldMetadata<DateTime>(
+    getValue: (obj) => obj is Person ? obj.photoUpdatedAt : null,
     parentType: Person,
     name: 'photoUpdatedAt',
     label: 'أخر تحديث للصورة',
@@ -338,6 +367,7 @@ class _PersonFields {
 
   final FieldMetadata<LastRecordedByInfo> lastConfession =
       FieldMetadata<LastRecordedByInfo>(
+    getValue: (obj) => obj is Person ? obj.lastConfession : null,
     parentType: Person,
     name: 'lastConfession',
     label: 'أخر اعتراف',
@@ -351,6 +381,7 @@ class _PersonFields {
 
   final FieldMetadata<LastRecordedByInfo> lastKodas =
       FieldMetadata<LastRecordedByInfo>(
+    getValue: (obj) => obj is Person ? obj.lastKodas : null,
     parentType: Person,
     name: 'lastKodas',
     label: 'أخر تناول',
@@ -364,6 +395,7 @@ class _PersonFields {
 
   final FieldMetadata<LastRecordedByInfo> lastAttendance =
       FieldMetadata<LastRecordedByInfo>(
+    getValue: (obj) => obj is Person ? obj.lastAttendance : null,
     parentType: Person,
     name: 'lastAttendance',
     label: 'أخر حضور',
@@ -377,6 +409,7 @@ class _PersonFields {
 
   final FieldMetadata<LastRecordedByInfo> lastCall =
       FieldMetadata<LastRecordedByInfo>(
+    getValue: (obj) => obj is Person ? obj.lastCall : null,
     parentType: Person,
     name: 'lastCall',
     label: 'أخر مكالمات',
@@ -390,6 +423,7 @@ class _PersonFields {
 
   final FieldMetadata<LastRecordedByInfo> lastVisit =
       FieldMetadata<LastRecordedByInfo>(
+    getValue: (obj) => obj is Person ? obj.lastVisit : null,
     parentType: Person,
     name: 'lastVisit',
     label: 'أخر افتقاد',
@@ -403,6 +437,7 @@ class _PersonFields {
 
   final FieldMetadata<LastRecordedByInfo> lastEdit =
       FieldMetadata<LastRecordedByInfo>(
+    getValue: (obj) => obj is Person ? obj.lastEdit : null,
     parentType: Person,
     name: 'lastEdit',
     label: 'أخر تحديث البيانات',
@@ -416,6 +451,7 @@ class _PersonFields {
 
   final FieldMetadata<ClassesPersons> classesRel =
       FieldMetadata<ClassesPersons>(
+    getValue: (obj) => obj is Person ? obj.classes : null,
     parentType: Person,
     name: 'classes',
     label: 'classes',
@@ -426,9 +462,11 @@ class _PersonFields {
   late final FieldMetadata<Class> classes = classesRel.redirectTo(
     ClassesPersonsFields().class$,
     isExpandable: false,
+    isOrderable: false,
   );
 
   final FieldMetadata<PersonsGroups> groupsRel = FieldMetadata<PersonsGroups>(
+    getValue: (obj) => obj is Person ? obj.groups : null,
     parentType: Person,
     name: 'groups',
     label: 'groups',
@@ -439,10 +477,12 @@ class _PersonFields {
   late final FieldMetadata<Group> groups = groupsRel.redirectTo(
     PersonsGroupsFields().group,
     isExpandable: false,
+    isOrderable: false,
   );
 
   final FieldMetadata<PersonsServices> servicesRel =
       FieldMetadata<PersonsServices>(
+    getValue: (obj) => obj is Person ? obj.services : null,
     parentType: Person,
     name: 'services',
     label: 'services',
@@ -453,9 +493,11 @@ class _PersonFields {
   late final FieldMetadata<Service> services = servicesRel.redirectTo(
     PersonsServicesFields().service,
     isExpandable: false,
+    isOrderable: false,
   );
 
   final FieldMetadata<PersonsTags> tagsRel = FieldMetadata<PersonsTags>(
+    getValue: (obj) => obj is Person ? obj.tags : null,
     parentType: Person,
     name: 'tags',
     label: 'tags',
@@ -466,10 +508,12 @@ class _PersonFields {
   late final FieldMetadata<Tag> tags = tagsRel.redirectTo(
     PersonsTagsFields().tag,
     isExpandable: false,
+    isOrderable: false,
   );
 
   final FieldMetadata<PersonsHobbies> hobbiesRel =
       FieldMetadata<PersonsHobbies>(
+    getValue: (obj) => obj is Person ? obj.hobbies : null,
     parentType: Person,
     name: 'hobbies',
     label: 'hobbies',
@@ -480,9 +524,11 @@ class _PersonFields {
   late final FieldMetadata<Hobby> hobbies = hobbiesRel.redirectTo(
     PersonsHobbiesFields().hobby,
     isExpandable: false,
+    isOrderable: false,
   );
 
   final FieldMetadata<User> user = FieldMetadata<User>(
+    getValue: (obj) => obj is Person ? obj.user : null,
     parentType: Person,
     name: 'user',
     label: 'بيانات الخادم',
@@ -496,6 +542,7 @@ class _PersonFields {
 
   final FieldMetadata<LastRecordedByInfo> kodasHistory =
       FieldMetadata<LastRecordedByInfo>(
+    getValue: (obj) => obj is Person ? obj.kodasHistory : null,
     parentType: Person,
     name: 'kodasHistory',
     label: 'سجل التناول',
@@ -506,6 +553,7 @@ class _PersonFields {
 
   final FieldMetadata<LastRecordedByInfo> attendanceHistory =
       FieldMetadata<LastRecordedByInfo>(
+    getValue: (obj) => obj is Person ? obj.attendanceHistory : null,
     parentType: Person,
     name: 'attendanceHistory',
     label: 'سجل الحضور',
@@ -516,6 +564,7 @@ class _PersonFields {
 
   final FieldMetadata<LastRecordedByInfo> confessionHistory =
       FieldMetadata<LastRecordedByInfo>(
+    getValue: (obj) => obj is Person ? obj.confessionHistory : null,
     parentType: Person,
     name: 'confessionHistory',
     label: 'سجل الاعتراف',
@@ -526,6 +575,7 @@ class _PersonFields {
 
   final FieldMetadata<LastRecordedByInfo> callHistory =
       FieldMetadata<LastRecordedByInfo>(
+    getValue: (obj) => obj is Person ? obj.callHistory : null,
     parentType: Person,
     name: 'callHistory',
     label: 'سجل المكالمات',
@@ -536,6 +586,7 @@ class _PersonFields {
 
   final FieldMetadata<LastRecordedByInfo> visitHistory =
       FieldMetadata<LastRecordedByInfo>(
+    getValue: (obj) => obj is Person ? obj.visitHistory : null,
     parentType: Person,
     name: 'visitHistory',
     label: 'سجل الافتقاد',
@@ -546,6 +597,7 @@ class _PersonFields {
 
   final FieldMetadata<LastRecordedByInfo> editHistory =
       FieldMetadata<LastRecordedByInfo>(
+    getValue: (obj) => obj is Person ? obj.editHistory : null,
     parentType: Person,
     name: 'editHistory',
     label: 'سجل تحديث البيانات',
@@ -556,6 +608,7 @@ class _PersonFields {
 
   final FieldMetadata<AggregateData> kodasHistoryAggregate =
       FieldMetadata<AggregateData>(
+    getValue: (obj) => obj is Person ? obj.kodasHistoryAggregate : null,
     parentType: Person,
     name: 'kodasHistoryAggregate',
     label: 'kodasHistoryAggregate',
@@ -564,6 +617,7 @@ class _PersonFields {
 
   final FieldMetadata<AggregateData> attendanceHistoryAggregate =
       FieldMetadata<AggregateData>(
+    getValue: (obj) => obj is Person ? obj.attendanceHistoryAggregate : null,
     parentType: Person,
     name: 'attendanceHistoryAggregate',
     label: 'attendanceHistoryAggregate',
@@ -572,6 +626,7 @@ class _PersonFields {
 
   final FieldMetadata<AggregateData> confessionHistoryAggregate =
       FieldMetadata<AggregateData>(
+    getValue: (obj) => obj is Person ? obj.confessionHistoryAggregate : null,
     parentType: Person,
     name: 'confessionHistoryAggregate',
     label: 'confessionHistoryAggregate',
@@ -580,6 +635,7 @@ class _PersonFields {
 
   final FieldMetadata<AggregateData> callHistoryAggregate =
       FieldMetadata<AggregateData>(
+    getValue: (obj) => obj is Person ? obj.callHistoryAggregate : null,
     parentType: Person,
     name: 'callHistoryAggregate',
     label: 'callHistoryAggregate',
@@ -588,6 +644,7 @@ class _PersonFields {
 
   final FieldMetadata<AggregateData> visitHistoryAggregate =
       FieldMetadata<AggregateData>(
+    getValue: (obj) => obj is Person ? obj.visitHistoryAggregate : null,
     parentType: Person,
     name: 'visitHistoryAggregate',
     label: 'visitHistoryAggregate',
@@ -596,6 +653,7 @@ class _PersonFields {
 
   final FieldMetadata<AggregateData> editHistoryAggregate =
       FieldMetadata<AggregateData>(
+    getValue: (obj) => obj is Person ? obj.editHistoryAggregate : null,
     parentType: Person,
     name: 'editHistoryAggregate',
     label: 'editHistoryAggregate',
@@ -603,6 +661,7 @@ class _PersonFields {
   );
 
   final FieldMetadata<Point> geolocation = FieldMetadata<Point>(
+    getValue: (obj) => obj is Person ? obj.geolocation : null,
     parentType: Person,
     name: 'geolocation',
     label: 'الموقع',

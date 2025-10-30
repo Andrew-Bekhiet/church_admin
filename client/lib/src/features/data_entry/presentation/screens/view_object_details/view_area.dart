@@ -24,9 +24,15 @@ class _ViewAreaState extends State<ViewArea> {
             widget.areaId,
           ),
         ]),
+        orderBy: _streetsOrderBy.stream,
       ),
     ),
   );
+
+  final BehaviorSubject<List<OrderBy>> _streetsOrderBy =
+      BehaviorSubject.seeded([
+    OrderBy(field: StreetFields().name),
+  ]);
 
   late final _familiesController = _ensureWillDispose(
     ViewableObjectListController(
@@ -38,9 +44,15 @@ class _ViewAreaState extends State<ViewArea> {
             widget.areaId,
           ),
         ]),
+        orderBy: _familiesOrderBy.stream,
       ),
     ),
   );
+
+  final BehaviorSubject<List<OrderBy>> _familiesOrderBy =
+      BehaviorSubject.seeded([
+    OrderBy(field: FamilyFields().name),
+  ]);
 
   late final _storesController = _ensureWillDispose(
     ViewableObjectListController(
@@ -52,9 +64,14 @@ class _ViewAreaState extends State<ViewArea> {
             widget.areaId,
           ),
         ]),
+        orderBy: _storesOrderBy.stream,
       ),
     ),
   );
+
+  final BehaviorSubject<List<OrderBy>> _storesOrderBy = BehaviorSubject.seeded([
+    OrderBy(field: StoreFields().name),
+  ]);
 
   late final _personsController = _ensureWillDispose(
     ViewableObjectListController(
@@ -66,9 +83,15 @@ class _ViewAreaState extends State<ViewArea> {
             widget.areaId,
           ),
         ]),
+        orderBy: _personsOrderBy.stream,
       ),
     ),
   );
+
+  final BehaviorSubject<List<OrderBy>> _personsOrderBy =
+      BehaviorSubject.seeded([
+    OrderBy(field: PersonFields().name),
+  ]);
 
   final Set<ViewableObjectListController> _controllersToDispose = {};
 
@@ -86,24 +109,65 @@ class _ViewAreaState extends State<ViewArea> {
       objectStream: stream,
       childrenTypes: const [Street, Family, Person, Store],
       tabsContentBuilders: {
-        Street: (context) => ViewableObjectList(
-              scrollController: PrimaryScrollController.maybeOf(context),
-              objectsController: _streetsController,
+        Street: (context) => StreamBuilder(
+              stream: _streetsOrderBy.stream,
+              initialData: _streetsOrderBy.value,
+              builder: (context, orderBySnapshot) => ViewableObjectList(
+                scrollController: PrimaryScrollController.maybeOf(context),
+                viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
+                  secondLineField:
+                      orderBySnapshot.data?.first.getSecondLineField(),
+                ),
+                objectsController: _streetsController,
+              ),
             ),
-        Family: (context) => ViewableObjectList(
-              scrollController: PrimaryScrollController.maybeOf(context),
-              objectsController: _familiesController,
+        Family: (context) => StreamBuilder(
+              stream: _familiesOrderBy.stream,
+              initialData: _familiesOrderBy.value,
+              builder: (context, orderBySnapshot) => ViewableObjectList(
+                scrollController: PrimaryScrollController.maybeOf(context),
+                viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
+                  secondLineField:
+                      orderBySnapshot.data?.first.getSecondLineField(),
+                ),
+                objectsController: _familiesController,
+              ),
             ),
-        Person: (context) => ViewableObjectList(
-              scrollController: PrimaryScrollController.maybeOf(context),
-              objectsController: _personsController,
+        Person: (context) => StreamBuilder(
+              stream: _personsOrderBy.stream,
+              initialData: _personsOrderBy.value,
+              builder: (context, orderBySnapshot) => ViewableObjectList(
+                scrollController: PrimaryScrollController.maybeOf(context),
+                viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
+                  secondLineField:
+                      orderBySnapshot.data?.first.getSecondLineField(),
+                ),
+                objectsController: _personsController,
+              ),
             ),
-        Store: (context) => ViewableObjectList(
-              scrollController: PrimaryScrollController.maybeOf(context),
-              objectsController: _storesController,
+        Store: (context) => StreamBuilder(
+              stream: _storesOrderBy.stream,
+              initialData: _storesOrderBy.value,
+              builder: (context, orderBySnapshot) => ViewableObjectList(
+                scrollController: PrimaryScrollController.maybeOf(context),
+                viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
+                  secondLineField:
+                      orderBySnapshot.data?.first.getSecondLineField(),
+                ),
+                objectsController: _storesController,
+              ),
             ),
       },
       sliverPersistentHeaderDelegate: ChipTabBarPersistentHeaderDelegate(
+        filtersWidget: Builder(
+          builder: (context) => IconButton(
+            visualDensity: VisualDensity.compact,
+            padding: EdgeInsets.zero,
+            icon: const Icon(Symbols.sort),
+            onPressed: () =>
+                _showOrderBySheet(DefaultTabController.of(context).index),
+          ),
+        ),
         tabs: [
           (
             icon: viewableObjectService.getDefaultIconFor<Street>(),
@@ -248,6 +312,28 @@ class _ViewAreaState extends State<ViewArea> {
     );
   }
 
+  Future<void> _showOrderBySheet(int currentTabIndex) async {
+    final advancedQueriesMetadata = AdvancedQueriesMetadata();
+
+    final (queryableType, orderBySubject) = switch (currentTabIndex) {
+      0 => (advancedQueriesMetadata.street, _streetsOrderBy),
+      1 => (advancedQueriesMetadata.family, _familiesOrderBy),
+      2 => (advancedQueriesMetadata.person, _personsOrderBy),
+      3 => (advancedQueriesMetadata.store, _storesOrderBy),
+      _ => throw UnimplementedError(),
+    };
+
+    final newOrderBy = await showOrderByBottomSheet(
+      context,
+      queryableType: queryableType,
+      orderBySubject: orderBySubject,
+    );
+
+    if (newOrderBy == null) return;
+
+    orderBySubject.add(newOrderBy);
+  }
+
   ViewableObjectListController<T>
       _ensureWillDispose<T extends ViewableWithIDAndImage>(
     ViewableObjectListController<T> controller,
@@ -259,6 +345,10 @@ class _ViewAreaState extends State<ViewArea> {
   @override
   void dispose() {
     Future.wait(_controllersToDispose.map((e) => e.dispose()));
+    _streetsOrderBy.close();
+    _familiesOrderBy.close();
+    _personsOrderBy.close();
+    _storesOrderBy.close();
 
     super.dispose();
   }

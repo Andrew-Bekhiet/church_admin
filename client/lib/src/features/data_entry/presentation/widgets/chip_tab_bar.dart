@@ -29,7 +29,7 @@ class ChipTabBar extends StatelessWidget {
 
         final row = Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
-          spacing: 10,
+          spacing: 3,
           children: [
             if (isScrollable) const SizedBox(width: 4),
             ...tabs.mapIndexed(

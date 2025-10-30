@@ -1,6 +1,5 @@
-import 'package:church_admin/src/core/services/database/iterable_difference_result.dart';
+import 'package:church_admin/church_admin.dart';
 import 'package:gql/ast.dart';
-import 'package:uuid/uuid.dart';
 
 IterableDifferenceResult<T> diff<T>(Set<T> old, Set<T> $new) {
   return IterableDifferenceResult(
@@ -11,7 +10,7 @@ IterableDifferenceResult<T> diff<T>(Set<T> old, Set<T> $new) {
 
 extension AddSelectionFields on DocumentNode {
   DocumentNode withSelectionFields(
-    Map<String, List<FieldNode>> fieldsToAdd,
+    Map<String, List<SelectionNode>> fieldsToAdd,
   ) {
     return DocumentNode(
       definitions: definitions
@@ -53,6 +52,39 @@ extension AddSelectionFields on DocumentNode {
           .toList(),
       span: span,
     );
+  }
+}
+
+extension GQLSelectionNode on Json {
+  List<SelectionNode> asGQLSelectionNode() {
+    return entries.map((e) {
+      return FieldNode(
+        name: NameNode(value: e.key),
+        selectionSet: e.value is Map<String, Object?>
+            ? SelectionSetNode(
+                selections:
+                    (e.value as Map<String, Object?>).asGQLSelectionNode(),
+              )
+            : null,
+      );
+    }).toList();
+  }
+}
+
+extension StringGQLSelectionNode on List<String> {
+  List<SelectionNode> asGQLSelectionNode() {
+    if (firstOrNull?.isEmpty ?? true) return [];
+
+    return [
+      FieldNode(
+        name: NameNode(value: first),
+        selectionSet: length > 1
+            ? SelectionSetNode(
+                selections: sublist(1).asGQLSelectionNode(),
+              )
+            : null,
+      )
+    ];
   }
 }
 

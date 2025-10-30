@@ -10,6 +10,7 @@ class _ServiceFields {
   _ServiceFields();
 
   final FieldMetadata<Service> id = FieldMetadata<Service>(
+    getValue: (obj) => obj is Service ? obj.id : null,
     parentType: Service,
     name: 'id',
     label: '=',
@@ -18,6 +19,7 @@ class _ServiceFields {
   );
 
   final FieldMetadata<String> name = FieldMetadata<String>(
+    getValue: (obj) => obj is Service ? obj.name : null,
     parentType: Service,
     name: 'name',
     label: 'الاسم',
@@ -26,6 +28,7 @@ class _ServiceFields {
   );
 
   final FieldMetadata<StudyYear> studyYearFrom = FieldMetadata<StudyYear>(
+    getValue: (obj) => obj is Service ? obj.studyYearFrom : null,
     parentType: Service,
     name: 'studyYearFrom',
     label: 'السنة الدراسية: من',
@@ -38,6 +41,7 @@ class _ServiceFields {
   );
 
   final FieldMetadata<StudyYear> studyYearTo = FieldMetadata<StudyYear>(
+    getValue: (obj) => obj is Service ? obj.studyYearTo : null,
     parentType: Service,
     name: 'studyYearTo',
     label: 'السنة الدراسية: إلى',
@@ -50,6 +54,7 @@ class _ServiceFields {
   );
 
   final FieldMetadata<Service> nextService = FieldMetadata<Service>(
+    getValue: (obj) => obj is Service ? obj.nextService : null,
     parentType: Service,
     name: 'nextService',
     label: 'الخدمة التالية',
@@ -62,6 +67,7 @@ class _ServiceFields {
   );
 
   final FieldMetadata<Color> color = FieldMetadata<Color>(
+    getValue: (obj) => obj is Service ? obj.color : null,
     parentType: Service,
     name: 'color',
     label: 'اللون',
@@ -74,6 +80,7 @@ class _ServiceFields {
   );
 
   final FieldMetadata<DateTime> photoUpdatedAt = FieldMetadata<DateTime>(
+    getValue: (obj) => obj is Service ? obj.photoUpdatedAt : null,
     parentType: Service,
     name: 'photoUpdatedAt',
     label: 'أخر تحديث للصورة',
@@ -87,6 +94,7 @@ class _ServiceFields {
   );
 
   final FieldMetadata<Class> classes = FieldMetadata<Class>(
+    getValue: (obj) => obj is Service ? obj.classes : null,
     parentType: Service,
     name: 'classes',
     label: 'الفصول',
@@ -96,6 +104,7 @@ class _ServiceFields {
   );
 
   final FieldMetadata<Group> groups = FieldMetadata<Group>(
+    getValue: (obj) => obj is Service ? obj.groups : null,
     parentType: Service,
     name: 'groups',
     label: 'المجموعات',
@@ -106,6 +115,7 @@ class _ServiceFields {
 
   final FieldMetadata<LastRecordedByInfo> lastEdit =
       FieldMetadata<LastRecordedByInfo>(
+    getValue: (obj) => obj is Service ? obj.lastEdit : null,
     parentType: Service,
     name: 'lastEdit',
     label: 'أخر تحديث البيانات',
@@ -118,6 +128,7 @@ class _ServiceFields {
   );
 
   final FieldMetadata<AdminOnData> adminUsersRel = FieldMetadata<AdminOnData>(
+    getValue: (obj) => obj is Service ? obj.adminUsers : null,
     parentType: Service,
     name: 'adminUsers',
     label: 'adminUsers',
@@ -128,10 +139,12 @@ class _ServiceFields {
   late final FieldMetadata<User> adminUsers = adminUsersRel.redirectTo(
     AdminOnDataFields().user,
     isExpandable: false,
+    isOrderable: false,
   );
 
   final FieldMetadata<AggregateData> attendanceHistoryAggregate =
       FieldMetadata<AggregateData>(
+    getValue: (obj) => obj is Service ? obj.attendanceHistoryAggregate : null,
     parentType: Service,
     name: 'attendanceHistoryAggregate',
     label: 'attendanceHistoryAggregate',
@@ -140,6 +153,8 @@ class _ServiceFields {
 
   final FieldMetadata<AggregateData> attendanceDaysConstraintsAggregate =
       FieldMetadata<AggregateData>(
+    getValue: (obj) =>
+        obj is Service ? obj.attendanceDaysConstraintsAggregate : null,
     parentType: Service,
     name: 'attendanceDaysConstraintsAggregate',
     label: 'attendanceDaysConstraintsAggregate',

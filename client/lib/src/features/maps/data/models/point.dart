@@ -19,6 +19,9 @@ class Point with EquatableMixin implements Spatial {
 
   @override
   List<Object?> get props => [longitude, latitude];
+
+  @override
+  String toString() => '$latitude, $longitude';
 }
 
 Json? pointToJson(Point? data) => data?.toPostGISJson();

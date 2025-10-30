@@ -12,6 +12,7 @@ class FamiliesFamiliesFields {
   FamiliesFamiliesFields._();
 
   final FieldMetadata<Family> parent = FieldMetadata<Family>(
+    getValue: (obj) => obj is FamiliesFamilies ? obj.parent : null,
     parentType: FamiliesFamilies,
     name: 'parent',
     label: 'parent',
@@ -20,6 +21,7 @@ class FamiliesFamiliesFields {
   );
 
   final FieldMetadata<Family> child = FieldMetadata<Family>(
+    getValue: (obj) => obj is FamiliesFamilies ? obj.child : null,
     parentType: FamiliesFamilies,
     name: 'child',
     label: 'child',
@@ -28,6 +30,7 @@ class FamiliesFamiliesFields {
   );
 
   final FieldMetadata<String> parentFamilyId = FieldMetadata<String>(
+    getValue: (obj) => obj is FamiliesFamilies ? obj.parentFamilyId : null,
     parentType: FamiliesFamilies,
     name: 'parentFamilyId',
     label: 'parentFamilyId',
@@ -36,6 +39,7 @@ class FamiliesFamiliesFields {
   );
 
   final FieldMetadata<String> childFamilyId = FieldMetadata<String>(
+    getValue: (obj) => obj is FamiliesFamilies ? obj.childFamilyId : null,
     parentType: FamiliesFamilies,
     name: 'childFamilyId',
     label: 'childFamilyId',
