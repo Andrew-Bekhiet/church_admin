@@ -86,7 +86,7 @@ class DBVarsTransformer {
       orderByClause.getLeaf() == 'ASC' ? '_gte' : '_lte';
 }
 
-extension FollowKeysPath<T> on Map<T, dynamic> {
+extension _FollowKeysPath<T> on Map<T, dynamic> {
   dynamic followKeysPath(Json path) {
     if (path.length != 1) {
       throw StateError('Path must have exactly one key');
