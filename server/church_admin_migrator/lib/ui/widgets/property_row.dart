@@ -27,53 +27,51 @@ class PropertyRow extends StatelessWidget {
           child: ValueListenableBuilder<bool?>(
             valueListenable: controller,
             builder: (context, isNew, _) {
-              return Row(
-                children: [
-                  Expanded(
-                    child: RadioListTile<bool?>(
-                      dense: true,
-                      title: Text(
-                        existingValue ?? '',
-                        style: TextStyle(
-                          color: existingValue == null ? Colors.grey : null,
-                        ),
-                      ),
-                      value: false,
-                      groupValue: isNew,
-                      onChanged: (value) => controller.value = value!,
-                    ),
-                  ),
-                  Expanded(
-                    child: RadioListTile<bool?>(
-                      dense: true,
-                      title: Text(
-                        newValue ?? '',
-                        style: TextStyle(
-                          color: newValue == null ? Colors.grey : null,
-                        ),
-                      ),
-                      value: true,
-                      groupValue: isNew,
-                      onChanged: (value) => controller.value = value!,
-                    ),
-                  ),
-                  if (controller is! ValueNotifier<bool>)
+              return RadioGroup(
+                groupValue: isNew,
+                onChanged: (value) => controller.value = value,
+                child: Row(
+                  children: [
                     Expanded(
                       child: RadioListTile<bool?>(
                         dense: true,
                         title: Text(
-                          '${newValue?.trim() ?? ''}\n${existingValue?.trim() ?? ''}'
-                              .trim(),
+                          existingValue ?? '',
+                          style: TextStyle(
+                            color: existingValue == null ? Colors.grey : null,
+                          ),
+                        ),
+                        value: false,
+                      ),
+                    ),
+                    Expanded(
+                      child: RadioListTile<bool?>(
+                        dense: true,
+                        title: Text(
+                          newValue ?? '',
                           style: TextStyle(
                             color: newValue == null ? Colors.grey : null,
                           ),
                         ),
-                        value: null,
-                        groupValue: isNew,
-                        onChanged: (value) => controller.value = value,
+                        value: true,
                       ),
                     ),
-                ],
+                    if (controller is! ValueNotifier<bool>)
+                      Expanded(
+                        child: RadioListTile<bool?>(
+                          dense: true,
+                          title: Text(
+                            '${newValue?.trim() ?? ''}\n${existingValue?.trim() ?? ''}'
+                                .trim(),
+                            style: TextStyle(
+                              color: newValue == null ? Colors.grey : null,
+                            ),
+                          ),
+                          value: null,
+                        ),
+                      ),
+                  ],
+                ),
               );
             },
           ),
