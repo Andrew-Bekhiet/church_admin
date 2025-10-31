@@ -29,9 +29,7 @@ class Class {
   Class.fromJson(Map<String, dynamic> data, this.ref)
     : name = data['Name'] ?? '',
       gender = data['Gender'],
-      studyYear = (data['StudyYear'] as DocumentReference?)?.toIdReference(
-        ref.context,
-      ),
+      studyYear = (data['StudyYear'] as DocumentReference?)?.toIdReference(),
       hasPhoto = data['HasPhoto'] ?? false,
       color = data['Color'] == null || data['Color'] == 0
           ? null

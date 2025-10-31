@@ -45,7 +45,6 @@ Future<void> migrateAndCreateNewServices(
     final service = _newServices[i];
     churchAdminContext.services[IdReference.fromPath(
       'Services/${service.id}',
-      context: churchAdminContext,
     )] = service.copyWith(
       nextService: _newServices.elementAtOrNull(i + 1),
     );

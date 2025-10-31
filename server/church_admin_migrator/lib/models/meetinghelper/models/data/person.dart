@@ -74,9 +74,7 @@ class Person {
     : this.fromJson(snapshot.data(), ref);
 
   Person.fromJson(Map<String, dynamic> json, this.ref)
-    : classId = (json['ClassId'] as DocumentReference?)?.toIdReference(
-        ref.context,
-      ),
+    : classId = (json['ClassId'] as DocumentReference?)?.toIdReference(),
       name = json['Name'] ?? '',
       color = json['Color'] == null || json['Color'] == 0
           ? null
@@ -87,18 +85,10 @@ class Person {
       birthDate = json['BirthDateString'] != null
           ? DateTime.parse(json['BirthDateString'])
           : (json['BirthDate'] as Timestamp?)?.toDate(),
-      school = (json['School'] as DocumentReference?)?.toIdReference(
-        ref.context,
-      ),
-      college = (json['College'] as DocumentReference?)?.toIdReference(
-        ref.context,
-      ),
-      church = (json['Church'] as DocumentReference?)?.toIdReference(
-        ref.context,
-      ),
-      cFather = (json['CFather'] as DocumentReference?)?.toIdReference(
-        ref.context,
-      ),
+      school = (json['School'] as DocumentReference?)?.toIdReference(),
+      college = (json['College'] as DocumentReference?)?.toIdReference(),
+      church = (json['Church'] as DocumentReference?)?.toIdReference(),
+      cFather = (json['CFather'] as DocumentReference?)?.toIdReference(),
       lastKodas = (json['LastKodas'] as Timestamp?)?.toDate(),
       lastTanawol = (json['LastTanawol'] as Timestamp?)?.toDate(),
       lastConfession = (json['LastConfession'] as Timestamp?)?.toDate(),
@@ -108,16 +98,14 @@ class Person {
       isShammas = json['IsShammas'] ?? false,
       gender = json['Gender'] ?? true,
       shammasLevel = json['ShammasLevel'],
-      studyYear = (json['StudyYear'] as DocumentReference?)?.toIdReference(
-        ref.context,
-      ),
+      studyYear = (json['StudyYear'] as DocumentReference?)?.toIdReference(),
       phone = _deserializePhone(json['Phone']),
       fatherPhone = _deserializePhone(json['FatherPhone']),
       motherPhone = _deserializePhone(json['MotherPhone']),
       phones = (json['Phones'] as Map?)?.cast() ?? {},
       services =
           (json['Services'] as List?)
-              ?.map((e) => (e as DocumentReference).toIdReference(ref.context))
+              ?.map((e) => (e as DocumentReference).toIdReference())
               .toList() ??
           [];
 

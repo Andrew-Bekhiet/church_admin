@@ -228,10 +228,10 @@ packages:
   church_admin:
     dependency: "direct main"
     description:
-      path: "/Users/andrewbekhiet/projects/church_admin/client"
-      relative: false
+      path: "../../client"
+      relative: true
     source: path
-    version: "2.8.2+37"
+    version: "2.9.0+38"
   circle_flags:
     dependency: transitive
     description:
@@ -1549,7 +1549,7 @@ packages:
     source: hosted
     version: "4.0.1"
   meta:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: meta
       sha256: e3641ec5d63ebf0d9b41bd43201a66e3fc79a65db5f61fc181f04cd27aab950c

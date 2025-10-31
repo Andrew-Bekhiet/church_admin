@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:church_admin_migrator/models/app_context.dart';
 import 'package:church_admin_migrator/models/id_reference.dart';
 import 'package:dart_firebase_admin/dart_firebase_admin.dart';
 import 'package:dart_firebase_admin/firestore.dart';
@@ -13,7 +12,7 @@ import 'church_data/models/mini_models.dart';
 import 'church_data/models/person.dart';
 import 'church_data/models/street.dart';
 
-class ChurchDataContext with EquatableMixin implements AppContext {
+class ChurchDataContext with EquatableMixin {
   static FirebaseAdminApp? _deserializationApp;
 
   final FirebaseAdminApp app;
@@ -60,7 +59,7 @@ class ChurchDataContext with EquatableMixin implements AppContext {
           .cast<String, dynamic>()
           .map(_deserializeFirestoreValues)
           .map((key, value) {
-            final idReference = IdReference.fromPath(key, context: context);
+            final idReference = IdReference.fromPath(key);
             return MapEntry(
               idReference,
               Church.createFromData(value as Map<String, dynamic>, idReference),
@@ -73,7 +72,7 @@ class ChurchDataContext with EquatableMixin implements AppContext {
           .cast<String, dynamic>()
           .map(_deserializeFirestoreValues)
           .map((key, value) {
-            final idReference = IdReference.fromPath(key, context: context);
+            final idReference = IdReference.fromPath(key);
             return MapEntry(
               idReference,
               Father.createFromData(value as Map<String, dynamic>, idReference),
@@ -86,7 +85,7 @@ class ChurchDataContext with EquatableMixin implements AppContext {
           .cast<String, dynamic>()
           .map(_deserializeFirestoreValues)
           .map((key, value) {
-            final idReference = IdReference.fromPath(key, context: context);
+            final idReference = IdReference.fromPath(key);
             return MapEntry(
               idReference,
               College.createFromData(
@@ -102,7 +101,7 @@ class ChurchDataContext with EquatableMixin implements AppContext {
           .cast<String, dynamic>()
           .map(_deserializeFirestoreValues)
           .map((key, value) {
-            final idReference = IdReference.fromPath(key, context: context);
+            final idReference = IdReference.fromPath(key);
             return MapEntry(
               idReference,
               Job.createFromData(value as Map<String, dynamic>, idReference),
@@ -115,7 +114,7 @@ class ChurchDataContext with EquatableMixin implements AppContext {
           .cast<String, dynamic>()
           .map(_deserializeFirestoreValues)
           .map((key, value) {
-            final idReference = IdReference.fromPath(key, context: context);
+            final idReference = IdReference.fromPath(key);
             return MapEntry(
               idReference,
               StudyYear.createFromData(
@@ -131,7 +130,7 @@ class ChurchDataContext with EquatableMixin implements AppContext {
           .cast<String, dynamic>()
           .map(_deserializeFirestoreValues)
           .map((key, value) {
-            final idReference = IdReference.fromPath(key, context: context);
+            final idReference = IdReference.fromPath(key);
             return MapEntry(
               idReference,
               ServingType.createFromData(
@@ -147,7 +146,7 @@ class ChurchDataContext with EquatableMixin implements AppContext {
           .cast<String, dynamic>()
           .map(_deserializeFirestoreValues)
           .map((key, value) {
-            final idReference = IdReference.fromPath(key, context: context);
+            final idReference = IdReference.fromPath(key);
             return MapEntry(
               idReference,
               PersonState.createFromData(
@@ -163,7 +162,7 @@ class ChurchDataContext with EquatableMixin implements AppContext {
           .cast<String, dynamic>()
           .map(_deserializeFirestoreValues)
           .map((key, value) {
-            final idReference = IdReference.fromPath(key, context: context);
+            final idReference = IdReference.fromPath(key);
             return MapEntry(
               idReference,
               PersonType.createFromData(
@@ -179,10 +178,8 @@ class ChurchDataContext with EquatableMixin implements AppContext {
           .cast<String, dynamic>()
           .map(_deserializeFirestoreValues)
           .map(
-            (key, value) => MapEntry(
-              IdReference.fromPath(key, context: context),
-              value as String,
-            ),
+            (key, value) =>
+                MapEntry(IdReference.fromPath(key), value as String),
           ),
     );
 
@@ -191,7 +188,7 @@ class ChurchDataContext with EquatableMixin implements AppContext {
           .cast<String, dynamic>()
           .map(_deserializeFirestoreValues)
           .map((key, value) {
-            final idReference = IdReference.fromPath(key, context: context);
+            final idReference = IdReference.fromPath(key);
             return MapEntry(
               idReference,
               Area.createFromData(value as Map<String, dynamic>, idReference),
@@ -204,7 +201,7 @@ class ChurchDataContext with EquatableMixin implements AppContext {
           .cast<String, dynamic>()
           .map(_deserializeFirestoreValues)
           .map((key, value) {
-            final idReference = IdReference.fromPath(key, context: context);
+            final idReference = IdReference.fromPath(key);
             return MapEntry(
               idReference,
               Street.createFromData(value as Map<String, dynamic>, idReference),
@@ -217,7 +214,7 @@ class ChurchDataContext with EquatableMixin implements AppContext {
           .cast<String, dynamic>()
           .map(_deserializeFirestoreValues)
           .map((key, value) {
-            final idReference = IdReference.fromPath(key, context: context);
+            final idReference = IdReference.fromPath(key);
             return MapEntry(
               idReference,
               Family.createFromData(value as Map<String, dynamic>, idReference),
@@ -230,7 +227,7 @@ class ChurchDataContext with EquatableMixin implements AppContext {
           .cast<String, dynamic>()
           .map(_deserializeFirestoreValues)
           .map((key, value) {
-            final idReference = IdReference.fromPath(key, context: context);
+            final idReference = IdReference.fromPath(key);
             return MapEntry(
               idReference,
               Person.createFromData(value as Map<String, dynamic>, idReference),
@@ -480,7 +477,7 @@ class ChurchDataContext with EquatableMixin implements AppContext {
     for (final doc in snapshot.docs) {
       if (!doc.exists || doc.id == 'null' || doc.data().isEmpty) continue;
 
-      final idReference = IdReference.fromPath(doc.ref.path, context: context);
+      final idReference = IdReference.fromPath(doc.ref.path);
       final parsed = parse(doc, idReference);
       afterParse(idReference, parsed);
     }

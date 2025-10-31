@@ -277,7 +277,6 @@ class _PersonMergeDialogState extends State<_PersonMergeDialog> {
         newValue: churchAdminContext
             .shammasLevels[IdReference.fromPath(
               'ShammasLevels/${newPerson.shammasLevel}',
-              context: churchAdminContext,
             )]
             ?.name,
         controller: controllers.shammasLevel,
@@ -365,7 +364,6 @@ class _PersonMergeDialogState extends State<_PersonMergeDialog> {
     var shammasLevel = controllers.shammasLevel.value
         ? churchAdminContext.shammasLevels[IdReference.fromPath(
             'ShammasLevels/${newPerson.shammasLevel}',
-            context: churchAdminContext,
           )]
         : existingPerson.shammasLevel;
     var gender = controllers.gender.value

@@ -31,9 +31,7 @@ class Street extends DataObject with PhotoObject {
     : this.createFromData(doc.data() as Map<String, dynamic>, ref);
 
   Street.createFromData(Map<String, dynamic> data, IdReference ref)
-    : areaId = (data['AreaId'] as DocumentReference?)?.toIdReference(
-        ref.context,
-      ),
+    : areaId = (data['AreaId'] as DocumentReference?)?.toIdReference(),
       locationConfirmed = data['LocationConfirmed'] ?? false,
       locationPoints = data['Location']?.cast<GeoPoint>() ?? [],
       super.createFromData(data, ref) {

@@ -108,38 +108,30 @@ class Person extends DataObject with PhotoObject {
       isServant = data['IsServant'] ?? false,
       phones = data['Phones']?.cast<String, dynamic>() ?? {},
       super.createFromData(data, ref) {
-    _familyId = (data['FamilyId'] as DocumentReference?)?.toIdReference(
-      ref.context,
-    );
-    _streetId = (data['StreetId'] as DocumentReference?)?.toIdReference(
-      ref.context,
-    );
-    areaId = (data['AreaId'] as DocumentReference?)?.toIdReference(ref.context);
+    _familyId = (data['FamilyId'] as DocumentReference?)?.toIdReference();
+    _streetId = (data['StreetId'] as DocumentReference?)?.toIdReference();
+    areaId = (data['AreaId'] as DocumentReference?)?.toIdReference();
 
     phone = data['Phone'];
 
     hasPhoto = data['HasPhoto'] ?? false;
 
-    studyYear = (data['StudyYear'] as DocumentReference?)?.toIdReference(
-      ref.context,
-    );
-    college = (data['College'] as DocumentReference?)?.toIdReference(
-      ref.context,
-    );
+    studyYear = (data['StudyYear'] as DocumentReference?)?.toIdReference();
+    college = (data['College'] as DocumentReference?)?.toIdReference();
 
     birthDate = data['BirthDate'];
     lastConfession = data['LastConfession'];
     lastTanawol = data['LastTanawol'];
     lastCall = data['LastCall'];
 
-    job = (data['Job'] as DocumentReference?)?.toIdReference(ref.context);
+    job = (data['Job'] as DocumentReference?)?.toIdReference();
     jobDescription = data['JobDescription'];
     qualification = data['Qualification'];
 
     type = data['Type'] is String && data['Type'].isNotEmpty
-        ? IdReference.fromPath('Types/${data['Type']}', context: ref.context)
+        ? IdReference.fromPath('Types/${data['Type']}')
         : data['Type'] is DocumentReference
-        ? (data['Type'] as DocumentReference).toIdReference(ref.context)
+        ? (data['Type'] as DocumentReference).toIdReference()
         : null;
 
     if (type == null && (data['Type'] ?? '') != '') {
@@ -148,18 +140,14 @@ class Person extends DataObject with PhotoObject {
 
     notes = data['Notes'];
     servingAreaId = (data['ServingAreaId'] as DocumentReference?)
-        ?.toIdReference(ref.context);
+        ?.toIdReference();
 
-    church = (data['Church'] as DocumentReference?)?.toIdReference(ref.context);
+    church = (data['Church'] as DocumentReference?)?.toIdReference();
     meeting = data['Meeting'];
-    cFather = (data['CFather'] as DocumentReference?)?.toIdReference(
-      ref.context,
-    );
+    cFather = (data['CFather'] as DocumentReference?)?.toIdReference();
 
-    state = (data['State'] as DocumentReference?)?.toIdReference(ref.context);
-    servingType = (data['ServingType'] as DocumentReference?)?.toIdReference(
-      ref.context,
-    );
+    state = (data['State'] as DocumentReference?)?.toIdReference();
+    servingType = (data['ServingType'] as DocumentReference?)?.toIdReference();
 
     lastEdit = data['LastEdit'];
   }

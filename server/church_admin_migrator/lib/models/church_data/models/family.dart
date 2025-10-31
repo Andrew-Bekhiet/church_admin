@@ -63,15 +63,12 @@ class Family extends DataObject with PhotoObject {
     : locationConfirmed = data['LocationConfirmed'] ?? false,
       isStore = data['IsStore'] ?? false,
       super.createFromData(data, ref) {
-    areaId = (data['AreaId'] as DocumentReference?)?.toIdReference(ref.context);
-    _streetId = (data['StreetId'] as DocumentReference?)?.toIdReference(
-      ref.context,
-    );
-    insideFamily = (data['InsideFamily'] as DocumentReference?)?.toIdReference(
-      ref.context,
-    );
+    areaId = (data['AreaId'] as DocumentReference?)?.toIdReference();
+    _streetId = (data['StreetId'] as DocumentReference?)?.toIdReference();
+    insideFamily = (data['InsideFamily'] as DocumentReference?)
+        ?.toIdReference();
     insideFamily2 = (data['InsideFamily2'] as DocumentReference?)
-        ?.toIdReference(ref.context);
+        ?.toIdReference();
 
     address = data['Address'];
     notes = data['Notes'];

@@ -41,9 +41,9 @@ class Service {
                 json['StudyYearRange']['To'] is DocumentReference
             ? StudyYearRange(
                 from: (json['StudyYearRange']['From'] as DocumentReference)
-                    .toIdReference(ref.context),
+                    .toIdReference(),
                 to: (json['StudyYearRange']['To'] as DocumentReference)
-                    .toIdReference(ref.context),
+                    .toIdReference(),
               )
             : null,
         validity:

@@ -141,7 +141,6 @@ class MergeControllers {
       shammasLevel: ValueNotifier(
         churchAdminContext.shammasLevels[IdReference.fromPath(
                   'ShammasLevels/${newPerson.shammasLevel}',
-                  context: churchAdminContext,
                 )] !=
                 null &&
             existingPerson.shammasLevel == null,

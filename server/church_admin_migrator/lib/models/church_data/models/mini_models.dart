@@ -59,7 +59,7 @@ class PersonState extends MiniModel {
     : super('States', ref, name, color);
   PersonState.createFromData(Map<String, dynamic> data, IdReference ref)
     : super.createFromData('States', data, ref) {
-    color = Color(int.parse('0xFF' + data['Color']));
+    color = Color(int.parse('0xFF${data['Color']}'));
   }
 
   PersonState.createNew(IdReference ref) : super.createNew('States', ref);
@@ -80,10 +80,7 @@ class PersonState extends MiniModel {
   static PersonState? fromDoc(DocumentSnapshot data) => data.exists
       ? PersonState.createFromData(
           data.data()! as Map<String, dynamic>,
-          IdReference.fromPath(
-            data.ref.path,
-            context: data.ref.firestore as dynamic,
-          ),
+          IdReference.fromPath(data.ref.path),
         )
       : null;
 
@@ -130,9 +127,7 @@ class Father extends MiniModel {
     : super('Fathers', ref, name);
   Father.createFromData(Map<String, dynamic> data, IdReference ref)
     : super.createFromData('Fathers', data, ref) {
-    churchId = (data['ChurchId'] as DocumentReference?)?.toIdReference(
-      ref.context,
-    );
+    churchId = (data['ChurchId'] as DocumentReference?)?.toIdReference();
   }
 
   Father.createNew(IdReference ref) : super.createNew('Fathers', ref);

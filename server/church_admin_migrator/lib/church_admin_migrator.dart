@@ -192,10 +192,7 @@ void _migrateChurchDataPersons(
       in churchDataContext.persons.entries.take(
         isDryRun ? 10 : churchDataContext.persons.length,
       )) {
-    final newRef = IdReference.fromPath(
-      'Persons/${person.id}',
-      context: churchAdminContext,
-    );
+    final newRef = IdReference.fromPath('Persons/${person.id}');
 
     final birthdate = person.birthDate != null
         ? DateTime.fromMillisecondsSinceEpoch(person.birthDate!.seconds * 1000)
@@ -230,7 +227,6 @@ void _migrateChurchDataPersons(
       qualification:
           churchAdminContext.qualifications[IdReference.fromPath(
             'Qualifications/${person.qualification}',
-            context: churchAdminContext,
           )],
       personType: PersonType(
         id: personTypeData?.name ?? "غير محدد",
@@ -303,7 +299,7 @@ Future<void> _migrateMeetingHelperPersons(
       final existingFamilyAddress =
           addressesByFamilyId[duplicate.person.family?.id] ?? newAddress;
       merged = await _maybeMergePersons(
-        silent: true || duplicate.score > 0.84,
+        silent: true,
         existingFamilyAddress: existingFamilyAddress,
         person: person,
         duplicate: duplicate,
@@ -387,7 +383,6 @@ Future<void> _migrateMeetingHelperPersons(
     if (family == null) {
       final familyId = IdReference.fromPath(
         'Families/person_${person.ref.id}_family',
-        context: churchAdminContext,
       );
 
       family = Family(
@@ -401,7 +396,6 @@ Future<void> _migrateMeetingHelperPersons(
 
       final addressId = IdReference.fromPath(
         'Addresses/family_${family.id}_address',
-        context: churchAdminContext,
       );
       final address = Address(
         id: addressId.id,
@@ -418,17 +412,13 @@ Future<void> _migrateMeetingHelperPersons(
 
     if (merged) continue;
 
-    final newRef = IdReference.fromPath(
-      'Persons/${person.ref.id}',
-      context: churchAdminContext,
-    );
+    final newRef = IdReference.fromPath('Persons/${person.ref.id}');
 
     final birthdate = person.birthDate;
 
     var shammasLevel =
         churchAdminContext.shammasLevels[IdReference.fromPath(
           'ShammasLevels/${person.shammasLevel}',
-          context: churchAdminContext,
         )];
     final newPerson = Person(
       id: newRef.id,
@@ -500,14 +490,8 @@ Future<bool> _maybeMergePersons({
     return false;
   }
 
-  final newRef = IdReference.fromPath(
-    'Persons/${duplicate.person.id}',
-    context: churchAdminContext,
-  );
-  final oldRef = IdReference.fromPath(
-    'Persons/${person.ref.id}',
-    context: churchAdminContext,
-  );
+  final newRef = IdReference.fromPath('Persons/${duplicate.person.id}');
+  final oldRef = IdReference.fromPath('Persons/${person.ref.id}');
 
   if (address != null) {
     Address newAddress = address;
@@ -521,7 +505,6 @@ Future<bool> _maybeMergePersons({
 
       churchAdminContext.families[IdReference.fromPath(
             'Families/${newFamily.id}',
-            context: churchAdminContext,
           )] =
           newFamily;
 
@@ -533,10 +516,7 @@ Future<bool> _maybeMergePersons({
     //   debugger();
     // }
 
-    final addressId = IdReference.fromPath(
-      'Addresses/${newAddress.id}',
-      context: churchAdminContext,
-    );
+    final addressId = IdReference.fromPath('Addresses/${newAddress.id}');
     churchAdminContext.addresses[addressId] = newAddress;
   }
 
@@ -555,10 +535,7 @@ void _migrateStores(
       in churchDataContext.familiesAndStores.entries) {
     if (!store.isStore) continue;
 
-    final newRef = IdReference.fromPath(
-      'Stores/${store.id}',
-      context: churchAdminContext,
-    );
+    final newRef = IdReference.fromPath('Stores/${store.id}');
 
     final family1Ref = store.insideFamily;
     final family2Ref = store.insideFamily2;
@@ -574,7 +551,6 @@ void _migrateStores(
 
     final addressId = IdReference.fromPath(
       'Addresses/store_${newStore.id}_address',
-      context: churchAdminContext,
     );
 
     churchAdminContext.addresses[addressId] = Address(
@@ -604,10 +580,7 @@ void _migrateFamilies(
       )) {
     if (family.isStore) continue;
 
-    final newRef = IdReference.fromPath(
-      'Families/${family.id}',
-      context: churchAdminContext,
-    );
+    final newRef = IdReference.fromPath('Families/${family.id}');
 
     final family1Ref = family.insideFamily;
 
@@ -616,20 +589,14 @@ void _migrateFamilies(
     if (family1Ref != null &&
         churchDataContext.familiesAndStores[family1Ref] != null) {
       churchAdminContext.familiesFamilies.add((
-        parentFamilyId: IdReference.fromPath(
-          family1Ref.path,
-          context: churchAdminContext,
-        ),
+        parentFamilyId: IdReference.fromPath(family1Ref.path),
         childFamilyId: newRef,
       ));
     }
     if (family2Ref != null &&
         churchDataContext.familiesAndStores[family2Ref] != null) {
       churchAdminContext.familiesFamilies.add((
-        parentFamilyId: IdReference.fromPath(
-          family2Ref.path,
-          context: churchAdminContext,
-        ),
+        parentFamilyId: IdReference.fromPath(family2Ref.path),
         childFamilyId: newRef,
       ));
     }
@@ -643,7 +610,6 @@ void _migrateFamilies(
 
     final addressId = IdReference.fromPath(
       'Addresses/family_${newFamily.id}_address',
-      context: churchAdminContext,
     );
 
     churchAdminContext.addresses[addressId] = Address(
@@ -706,10 +672,7 @@ void _migrateStreets(
       color: street.color?.toUiColor(),
     );
 
-    final newRef = IdReference.fromPath(
-      'Streets/${newStreet.id}',
-      context: churchAdminContext,
-    );
+    final newRef = IdReference.fromPath('Streets/${newStreet.id}');
 
     churchAdminContext.streets[newRef] = newStreet;
     churchAdminContext.streets[oldRef] = newStreet;
@@ -743,10 +706,7 @@ void _migrateAreas(
       color: area.color?.toUiColor(),
     );
 
-    final newRef = IdReference.fromPath(
-      'Areas/${newArea.id}',
-      context: churchAdminContext,
-    );
+    final newRef = IdReference.fromPath('Areas/${newArea.id}');
 
     churchAdminContext.areas[newRef] = newArea;
     churchAdminContext.areas[oldRef] = newArea;
@@ -787,10 +747,7 @@ void _migrateChurches(
       continue;
     }
 
-    final newRef = IdReference.fromPath(
-      'Churches/${church.id}',
-      context: churchAdminContext,
-    );
+    final newRef = IdReference.fromPath('Churches/${church.id}');
 
     final newChurch = Church(id: church.id, name: church.name.trim());
     churchAdminContext.churches[newRef] = newChurch;
@@ -843,10 +800,7 @@ void _migrateFathers(
       continue;
     }
 
-    final newRef = IdReference.fromPath(
-      'Fathers/${father.id}',
-      context: churchAdminContext,
-    );
+    final newRef = IdReference.fromPath('Fathers/${father.id}');
 
     final newFather = Father(id: father.id, name: father.name.trim());
     churchAdminContext.fathers[newRef] = newFather;
@@ -896,10 +850,7 @@ void _migrateColleges(
       continue;
     }
 
-    final newRef = IdReference.fromPath(
-      'Colleges/${college.id}',
-      context: churchAdminContext,
-    );
+    final newRef = IdReference.fromPath('Colleges/${college.id}');
 
     final newCollege = College(id: college.id, name: college.name.trim());
     churchAdminContext.colleges[newRef] = newCollege;
@@ -942,10 +893,7 @@ void _migrateJobs(
       continue;
     }
 
-    final newRef = IdReference.fromPath(
-      'Jobs/${job.id}',
-      context: churchAdminContext,
-    );
+    final newRef = IdReference.fromPath('Jobs/${job.id}');
 
     final newJob = Job(id: job.id, name: job.name.trim());
     churchAdminContext.jobs[newRef] = newJob;
@@ -988,10 +936,7 @@ void _migrateSchools(
       continue;
     }
 
-    final newRef = IdReference.fromPath(
-      'Schools/${school.ref.id}',
-      context: churchAdminContext,
-    );
+    final newRef = IdReference.fromPath('Schools/${school.ref.id}');
 
     final newSchool = School(id: school.ref.id, name: school.name.trim());
     churchAdminContext.schools[newRef] = newSchool;
@@ -1019,10 +964,7 @@ void _migrateQualifications(
           .map((p) => p.qualification ?? '')
           .where((q) => q.trim().isNotEmpty)
           .toSet()) {
-    final oldRef = IdReference.fromPath(
-      'Qualifications/$qualification',
-      context: churchAdminContext,
-    );
+    final oldRef = IdReference.fromPath('Qualifications/$qualification');
 
     final duplicate = migratedQualifications
         .map(
@@ -1048,7 +990,6 @@ void _migrateQualifications(
 
     final newRef = IdReference.fromPath(
       'Qualifications/${qualification.trim()}',
-      context: churchAdminContext,
     );
 
     final newQualification = Qualification(
@@ -1083,15 +1024,9 @@ void _migrateShammasLevels(
 
   for (int i = 0; i < shammasLevels.length; i++) {
     final shammasLevel = shammasLevels[i];
-    final oldRef = IdReference.fromPath(
-      'ShammasLevels/$shammasLevel',
-      context: churchAdminContext,
-    );
+    final oldRef = IdReference.fromPath('ShammasLevels/$shammasLevel');
 
-    final newRef = IdReference.fromPath(
-      'ShammasLevels/${shammasLevel.trim()}',
-      context: churchAdminContext,
-    );
+    final newRef = IdReference.fromPath('ShammasLevels/${shammasLevel.trim()}');
 
     final newShammasLevel = ShammasLevel(
       id: shammasLevel.trim(),
@@ -1123,7 +1058,6 @@ void _migratePersonsStates(ChurchAdminContext churchAdminContext) {
 
     churchAdminContext.personStates[IdReference.fromPath(
           'PersonStates/${personState.id}',
-          context: churchAdminContext,
         )] =
         personState;
     migratedIds.add(personState.id);
@@ -1143,7 +1077,6 @@ void _migratePersonsTypes(ChurchAdminContext churchAdminContext) {
 
     churchAdminContext.personTypes[IdReference.fromPath(
           'PersonTypes/${personType.id}',
-          context: churchAdminContext,
         )] =
         personType;
     migratedIds.add(personType.id);

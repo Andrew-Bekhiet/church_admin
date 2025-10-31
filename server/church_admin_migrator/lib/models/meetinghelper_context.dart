@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:church_admin_migrator/models/app_context.dart';
 import 'package:church_admin_migrator/models/church_data/models/mini_models.dart';
 import 'package:church_admin_migrator/models/id_reference.dart';
 import 'package:church_admin_migrator/models/meetinghelper/models/data.dart';
@@ -11,7 +10,7 @@ import 'package:dart_firebase_admin/dart_firebase_admin.dart';
 import 'package:dart_firebase_admin/firestore.dart';
 import 'package:equatable/equatable.dart';
 
-class MeetingHelperContext with EquatableMixin implements AppContext {
+class MeetingHelperContext with EquatableMixin {
   static FirebaseAdminApp? _deserializationApp;
 
   final FirebaseAdminApp app;
@@ -47,7 +46,7 @@ class MeetingHelperContext with EquatableMixin implements AppContext {
           .cast<String, dynamic>()
           .map(_deserializeFirestoreValues)
           .map((key, value) {
-            final idReference = IdReference.fromPath(key, context: context);
+            final idReference = IdReference.fromPath(key);
             return MapEntry(
               idReference,
               Church.createFromData(value as Map<String, dynamic>, idReference),
@@ -60,7 +59,7 @@ class MeetingHelperContext with EquatableMixin implements AppContext {
           .cast<String, dynamic>()
           .map(_deserializeFirestoreValues)
           .map((key, value) {
-            final idReference = IdReference.fromPath(key, context: context);
+            final idReference = IdReference.fromPath(key);
             return MapEntry(
               idReference,
               Father.createFromData(value as Map<String, dynamic>, idReference),
@@ -73,7 +72,7 @@ class MeetingHelperContext with EquatableMixin implements AppContext {
           .cast<String, dynamic>()
           .map(_deserializeFirestoreValues)
           .map((key, value) {
-            final idReference = IdReference.fromPath(key, context: context);
+            final idReference = IdReference.fromPath(key);
             return MapEntry(
               idReference,
               College.createFromData(
@@ -89,7 +88,7 @@ class MeetingHelperContext with EquatableMixin implements AppContext {
           .cast<String, dynamic>()
           .map(_deserializeFirestoreValues)
           .map((key, value) {
-            final idReference = IdReference.fromPath(key, context: context);
+            final idReference = IdReference.fromPath(key);
             return MapEntry(
               idReference,
               School.createFromData(value as Map<String, dynamic>, idReference),
@@ -102,7 +101,7 @@ class MeetingHelperContext with EquatableMixin implements AppContext {
           .cast<String, dynamic>()
           .map(_deserializeFirestoreValues)
           .map((key, value) {
-            final idReference = IdReference.fromPath(key, context: context);
+            final idReference = IdReference.fromPath(key);
             return MapEntry(
               idReference,
               StudyYear.createFromData(
@@ -118,7 +117,7 @@ class MeetingHelperContext with EquatableMixin implements AppContext {
           .cast<String, dynamic>()
           .map(_deserializeFirestoreValues)
           .map((key, value) {
-            final idReference = IdReference.fromPath(key, context: context);
+            final idReference = IdReference.fromPath(key);
             return MapEntry(
               idReference,
               Class.fromJson(value as Map<String, dynamic>, idReference),
@@ -131,7 +130,7 @@ class MeetingHelperContext with EquatableMixin implements AppContext {
           .cast<String, dynamic>()
           .map(_deserializeFirestoreValues)
           .map((key, value) {
-            final idReference = IdReference.fromPath(key, context: context);
+            final idReference = IdReference.fromPath(key);
             return MapEntry(
               idReference,
               Service.fromJson(value as Map<String, dynamic>, idReference),
@@ -144,7 +143,7 @@ class MeetingHelperContext with EquatableMixin implements AppContext {
           .cast<String, dynamic>()
           .map(_deserializeFirestoreValues)
           .map((key, value) {
-            final idReference = IdReference.fromPath(key, context: context);
+            final idReference = IdReference.fromPath(key);
             return MapEntry(
               idReference,
               Person.fromJson(value as Map<String, dynamic>, idReference),
@@ -349,7 +348,7 @@ class MeetingHelperContext with EquatableMixin implements AppContext {
     final snapshot = await collection.get();
 
     for (final doc in snapshot.docs) {
-      final idReference = IdReference.fromPath(doc.ref.path, context: context);
+      final idReference = IdReference.fromPath(doc.ref.path);
       final parsed = parse(doc, idReference);
       afterParse(idReference, parsed);
     }
