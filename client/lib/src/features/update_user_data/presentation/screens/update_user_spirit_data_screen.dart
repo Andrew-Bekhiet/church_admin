@@ -67,7 +67,7 @@ class _UpdateUserSpiritDataState extends State<UpdateUserSpiritData> {
                 },
                 onSaved: (v) => _userData = _userData.copyWith(
                   lastKodas: LastRecordedByInfo(
-                    time: v!,
+                    time: v,
                     recordedBy: AuthBloc.I.currentUser!.uid,
                   ),
                 ),
@@ -108,7 +108,7 @@ class _UpdateUserSpiritDataState extends State<UpdateUserSpiritData> {
                 },
                 onSaved: (v) => _userData = _userData.copyWith(
                   lastConfession: LastRecordedByInfo(
-                    time: v!,
+                    time: v,
                     recordedBy: AuthBloc.I.currentUser!.uid,
                   ),
                 ),

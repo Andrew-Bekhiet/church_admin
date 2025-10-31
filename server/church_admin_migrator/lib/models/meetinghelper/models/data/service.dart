@@ -78,7 +78,7 @@ class Service {
             'To': Timestamp.fromDate(validity!.end),
           },
     'ShowInHistory': showInHistory,
-    'Color': color?.value,
+    'Color': color?.toARGB32(),
     'HasPhoto': hasPhoto,
   };
 }

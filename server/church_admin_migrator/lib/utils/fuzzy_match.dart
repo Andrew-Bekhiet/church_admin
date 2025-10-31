@@ -101,7 +101,10 @@ extension FuzzyMatchString on String {
     int k = 0;
     for (int i = 0; i < len1; i++) {
       if (!s1Matches[i]) continue;
-      while (!s2Matches[k]) k++;
+      while (!s2Matches[k]) {
+        k++;
+      }
+
       if (s1[i] != s2[k]) transpositions++;
       k++;
     }
