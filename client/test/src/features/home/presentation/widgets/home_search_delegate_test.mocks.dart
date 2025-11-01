@@ -440,24 +440,6 @@ class MockUserSettingsService extends _i1.Mock
       ) as _i7.Future<void>);
 
   @override
-  _i7.Future<void> setSecondLineFor<T>({
-    required String? value,
-    Type? type,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #setSecondLineFor,
-          [],
-          {
-            #value: value,
-            #type: type,
-          },
-        ),
-        returnValue: _i7.Future<void>.value(),
-        returnValueForMissingStub: _i7.Future<void>.value(),
-      ) as _i7.Future<void>);
-
-  @override
   _i7.Future<void> setupDefaults() => (super.noSuchMethod(
         Invocation.method(
           #setupDefaults,

@@ -8,13 +8,9 @@ class ViewableObjectService {
   static ViewableObjectService get I =>
       globalProviderContainer.read(viewableObjectServiceProvider);
 
-  ViewableObjectService({
-    required this.router,
-    required UserSettingsService userSettingsService,
-  }) : _userSettingsService = userSettingsService;
+  ViewableObjectService({required this.router});
 
   final GoRouter router;
-  final UserSettingsService _userSettingsService;
 
   NavigatorState get navigator =>
       router.routeInformationParser.configuration.navigatorKey.currentState!;

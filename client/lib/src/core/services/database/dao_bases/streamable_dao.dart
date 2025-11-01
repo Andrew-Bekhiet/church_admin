@@ -45,14 +45,7 @@ class StreamableDAOProxy<T extends ViewableWithID> extends DAOBase<T> {
   StreamableDAOProxy({
     required super.db,
     required super.fromJson,
-    String? secondLineFieldNameOverride,
-  }) : _secondLineFieldNameOverride = secondLineFieldNameOverride;
-
-  final String? _secondLineFieldNameOverride;
-
-  String? get secondLineFieldName =>
-      _secondLineFieldNameOverride ??
-      UserSettingsService.I.getSecondLineFor<T>();
+  });
 
   PaginatableStreamBase<T> streamAll({
     required StreamAllConfig<T> streamAllConfig,
@@ -97,17 +90,13 @@ class StreamableDAOProxy<T extends ViewableWithID> extends DAOBase<T> {
   ) {
     if (streamCountConfig == null) return Stream.value(null).shareValue();
 
-    return parametersStream
-        .map((p) => p.where)
-        .distinct()
-        .switchMap(
+    return parametersStream.map((p) => p.where).distinct().switchMap(
           (where) => graphQLClient.subscribeAndReturnParsed(
             streamCountConfig.operationOptions ??
                 SubscriptionOptions(
                   document: streamCountConfig.document,
                   operationName: streamCountConfig.effectiveOperationName,
-                  variables:
-                      streamCountConfig.variables ??
+                  variables: streamCountConfig.variables ??
                       {
                         'where':
                             where?.map((o) => o.queryToJson()).toList() ?? [],
@@ -134,8 +123,7 @@ class StreamableDAOProxy<T extends ViewableWithID> extends DAOBase<T> {
               ),
               operationName: streamAllConfig.effectiveOperationName,
               variables: _getEffectiveStreamAllVars(streamAllConfig, request),
-              parserFn:
-                  streamAllConfig.parserFn ??
+              parserFn: streamAllConfig.parserFn ??
                   db.parser.singleListParser(
                     fromJson,
                     pageSize: request.pageSize,
@@ -173,11 +161,11 @@ class StreamableDAOProxy<T extends ViewableWithID> extends DAOBase<T> {
         .name
         .value;
 
-    if (orderBy?.firstOrNull case final seondLine?) {
+    if (orderBy?.firstOrNull case final secondLine?) {
       return configDocument.withSelectionFields(
         {
           firstSelectionNodeName: {
-            ...seondLine.getSecondLineField().fieldPath.asGQLSelectionNode(),
+            ...secondLine.getSecondLineField().fieldPath.asGQLSelectionNode(),
             ...?orderBy?.expand(
               (o) => o.field.orderByFieldPath.asGQLSelectionNode(),
             ),
@@ -186,17 +174,7 @@ class StreamableDAOProxy<T extends ViewableWithID> extends DAOBase<T> {
       );
     }
 
-    if (secondLineFieldName == null) {
-      return configDocument;
-    }
-
-    return configDocument.withSelectionFields(
-      {
-        firstSelectionNodeName: [
-          FieldNode(name: NameNode(value: secondLineFieldName!)),
-        ],
-      },
-    );
+    return configDocument;
   }
 
   Stream<T?> streamSingleById({
@@ -209,14 +187,12 @@ class StreamableDAOProxy<T extends ViewableWithID> extends DAOBase<T> {
               SubscriptionOptions(
                 document: streamSingleByIdConfig.document,
                 operationName: streamSingleByIdConfig.effectiveOperationName,
-                variables:
-                    streamSingleByIdConfig.variables ??
+                variables: streamSingleByIdConfig.variables ??
                     streamSingleByIdConfig.varsConstructor?.call(
                       id: id.toUuid(),
                     ) ??
                     {},
-                parserFn:
-                    streamSingleByIdConfig.parserFn ??
+                parserFn: streamSingleByIdConfig.parserFn ??
                     db.parser.singleOrNullParser(fromJson),
               ),
         )

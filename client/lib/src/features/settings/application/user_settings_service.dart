@@ -21,24 +21,8 @@ class UserSettingsService extends BlocObserver {
   Future<void> setGreatFeastTheme(bool value) =>
       box.put('greatFeastTheme', value);
 
-  String? getSecondLineFor<T>([Type? type]) =>
-      box.get('${_getTypeName(type ?? T)}SecondLine');
-  Future<void> setSecondLineFor<T>({required String? value, Type? type}) =>
-      box.put('${_getTypeName(type ?? T)}SecondLine', value);
-
-  String _getTypeName(Type t) =>
-      AdvancedQueriesMetadata().allQueryablesByType[t]?.name ??
-      (t.toString().replaceAll(RegExp(r'_|\$|(Impl)'), ''));
-
   Future<void> setupDefaults() async {
-    await Future.wait([
-      setGreatFeastTheme(true),
-      setSecondLineFor(type: Area, value: null),
-      setSecondLineFor(type: Street, value: null),
-      setSecondLineFor(type: Family, value: null),
-      setSecondLineFor(type: Person, value: 'birthdate'),
-      setSecondLineFor(type: User, value: 'permissions'),
-    ]);
+    await setGreatFeastTheme(true);
   }
 
   @override

@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
 
 import '../../../../utils.dart';
 import 'settings_screen_test.mocks.dart';
@@ -52,14 +51,6 @@ void main() {
                 expect(
                   find.descendant(
                     of: find.byKey(key),
-                    matching:
-                        find.widgetWithText(ExpansionTile, 'مظهر البيانات'),
-                  ),
-                  findsOneWidget,
-                );
-                expect(
-                  find.descendant(
-                    of: find.byKey(key),
                     matching: find.widgetWithText(ExpansionTile, 'الاشعارات'),
                   ),
                   findsOneWidget,
@@ -74,19 +65,6 @@ void main() {
                   find.descendant(
                     of: find.byKey(key),
                     matching: find.widgetWithText(ExpansionTile, 'المظهر'),
-                  ),
-                );
-              },
-            )
-            ..addScenario(
-              name: 'SettingsScreen: Second line settings expanded',
-              widget: const SettingsScreen(),
-              onCreate: (key) async {
-                await tester.tap(
-                  find.descendant(
-                    of: find.byKey(key),
-                    matching:
-                        find.widgetWithText(ExpansionTile, 'مظهر البيانات'),
                   ),
                 );
               },
@@ -134,8 +112,6 @@ void main() {
               await tester.pumpAndSettle();
 
               await tester.tap(find.widgetWithText(ExpansionTile, 'المظهر'));
-              await tester
-                  .tap(find.widgetWithText(ExpansionTile, 'مظهر البيانات'));
               await tester.tap(find.widgetWithText(ExpansionTile, 'الاشعارات'));
               await tester.pumpAndSettle();
 
@@ -180,55 +156,6 @@ void main() {
               expect(find.text('تم حفظ التغييرات'), findsNothing);
             },
           );
-
-          testWidgets(
-            'Changing second line',
-            (tester) async {
-              await tester.pumpWidgetBuilder(
-                const SizedBox(),
-                wrapper: materialAppWithThemeAndLocale(),
-              );
-              unawaited(
-                tester.firstState<NavigatorState>(find.byType(Navigator)).push(
-                      MaterialPageRoute(
-                        builder: (_) => const SettingsScreen(),
-                      ),
-                    ),
-              );
-
-              await tester.pumpAndSettle();
-
-              await tester
-                  .tap(find.widgetWithText(ExpansionTile, 'مظهر البيانات'));
-              await tester.pumpAndSettle();
-
-              await tester.tap(
-                find.bySubtype<DropdownButtonFormField>().first,
-              );
-              await tester.pumpAndSettle();
-
-              await tester.tap(
-                find
-                    .text(
-                      AdvancedQueriesMetadata()
-                          .area
-                          .fieldsMetadata
-                          .elementAt(2)
-                          .label,
-                    )
-                    .first,
-              );
-              await tester.pumpAndSettle();
-
-              await tester.tap(find.byType(BackButton));
-
-              await tester.pumpAndSettle();
-
-              expect(find.byType(AlertDialog), findsOneWidget);
-              expect(find.byType(SettingsScreen), findsOneWidget);
-              expect(find.text('تم حفظ التغييرات'), findsNothing);
-            },
-          );
         },
       );
 
@@ -249,18 +176,10 @@ void main() {
 
           await tester.pumpAndSettle();
 
-          await tester.tap(find.widgetWithText(ExpansionTile, 'مظهر البيانات'));
+          await tester.tap(find.widgetWithText(ExpansionTile, 'المظهر'));
           await tester.pumpAndSettle();
 
-          await tester.tap(
-            find.bySubtype<DropdownButtonFormField>().first,
-          );
-          await tester.pumpAndSettle();
-
-          final FieldMetadata<Object> property =
-              AdvancedQueriesMetadata().area.fieldsMetadata.elementAt(2);
-
-          await tester.tap(find.text(property.label).first);
+          await tester.tap(find.text('المظهر الداكن'));
           await tester.pumpAndSettle();
 
           await tester.tap(find.byType(FloatingActionButton));
@@ -269,11 +188,6 @@ void main() {
           expect(find.byType(AlertDialog), findsNothing);
           expect(find.byType(SettingsScreen), findsOneWidget);
           expect(find.text('تم حفظ التغييرات'), findsOneWidget);
-
-          verify(
-            UserSettingsService.I
-                .setSecondLineFor(type: Area, value: property.name),
-          );
         },
       );
     },

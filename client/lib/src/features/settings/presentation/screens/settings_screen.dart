@@ -12,17 +12,6 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  static final List<QueryableType> _secondLineTypes = [
-    AdvancedQueriesMetadata().area,
-    AdvancedQueriesMetadata().street,
-    AdvancedQueriesMetadata().family,
-    AdvancedQueriesMetadata().store,
-    AdvancedQueriesMetadata().service,
-    AdvancedQueriesMetadata().$class,
-    AdvancedQueriesMetadata().group,
-    AdvancedQueriesMetadata().person,
-  ];
-
   final _formKey = GlobalKey<FormState>();
 
   final userSettingsService = UserSettingsService.I;
@@ -87,50 +76,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       onPressed: _applyThemeChange,
                       icon: const Icon(Symbols.done),
                       label: const Text('تغيير'),
-                    ),
-                  ],
-                ),
-                ExpansionTile(
-                  title: const Text('مظهر البيانات'),
-                  children: [
-                    ..._secondLineTypes.map(
-                      (qtype) => Container(
-                        padding: const EdgeInsets.symmetric(vertical: 4),
-                        child: DropdownButtonFormField<String?>(
-                          initialValue: userSettingsService.getSecondLineFor(
-                            qtype.type,
-                          ),
-                          items: [
-                            const DropdownMenuItem(child: Text('')),
-                            ...qtype.fieldsMetadata
-                                .where(
-                                  (element) =>
-                                      !element.isCodeOnly &&
-                                      element.name != 'id' &&
-                                      element.name != 'name' &&
-                                      element.name != 'color',
-                                )
-                                .map(
-                                  (e) => DropdownMenuItem(
-                                    value: e.name,
-                                    child: Text(e.label),
-                                  ),
-                                ),
-                          ],
-                          onChanged: (_) {},
-                          onSaved: (value) {
-                            userSettingsService.setSecondLineFor(
-                              type: qtype.type,
-                              value: value,
-                            );
-                            _needsSaving = false;
-                          },
-                          decoration: InputDecoration(
-                            labelText:
-                                'السطر الثاني لل${qtype.label.replaceFirst(RegExp('^ال'), 'ل')}',
-                          ),
-                        ),
-                      ),
                     ),
                   ],
                 ),

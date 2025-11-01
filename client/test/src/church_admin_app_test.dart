@@ -390,9 +390,4 @@ enum FirstScreenVariantEnum {
   home,
 }
 
-class FakeUserSettings extends Fake implements UserSettingsService {
-  @override
-  String? getSecondLineFor<T>([Type? t]) {
-    return null;
-  }
-}
+class FakeUserSettings extends Fake implements UserSettingsService {}

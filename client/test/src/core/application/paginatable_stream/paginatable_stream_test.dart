@@ -13,7 +13,8 @@ void main() {
   late BehaviorSubject<String?> searchController;
 
   setUp(() {
-    testData = List.generate(100, (index) => 'Item $index');
+    testData = List.generate(
+        100, (index) => 'Item ${index.toString().padLeft(2, '0')}');
     searchController = BehaviorSubject<String?>.seeded(null);
   });
 
@@ -230,7 +231,8 @@ PaginatableStreamResponse<String> _paginateData(
   int countTaken = 0;
   final slicedData = testData.where((item) {
     if (countTaken > 0 && countTaken <= request.pageSize ||
-        countTaken == 0 && (request.cursor == null || item == request.cursor)) {
+        countTaken == 0 &&
+            (request.cursor == null || item.compareTo(request.cursor!) > 0)) {
       countTaken++;
       return true;
     }

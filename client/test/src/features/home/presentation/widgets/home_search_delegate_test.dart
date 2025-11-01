@@ -23,10 +23,7 @@ void main() {
       goRouterRefreshStreamProvider
           .overrideWithValue(GoRouterRefreshStream(const Stream.empty())),
       viewableObjectServiceProvider.overrideWith(
-        (ref) => ViewableObjectService(
-          router: GoRouter(routes: []),
-          userSettingsService: ref.watch(userSettingsServiceProvider),
-        ),
+        (ref) => ViewableObjectService(router: GoRouter(routes: [])),
       ),
       userSettingsServiceProvider.overrideWithValue(MockUserSettingsService()),
       imageUrlCacheServiceProvider

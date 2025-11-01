@@ -51,21 +51,4 @@ void main() {
       expect(unit.greatFeastTheme, isTrue);
     },
   );
-  test(
-    'UserSettingsService => getSecondLineFor',
-    () async {
-      final unit = UserSettingsService(box: FakeSyncKVStore());
-
-      expect(unit.getSecondLineFor(PhoneNumberService), isNull);
-
-      await unit.setSecondLineFor(
-        type: PhoneNumberService,
-        value: 'secondLine',
-      );
-      expect(unit.getSecondLineFor(PhoneNumberService), 'secondLine');
-
-      await unit.setSecondLineFor(type: PhoneNumberService, value: null);
-      expect(unit.getSecondLineFor(PhoneNumberService), isNull);
-    },
-  );
 }

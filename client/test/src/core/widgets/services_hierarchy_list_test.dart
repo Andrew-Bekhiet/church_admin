@@ -368,19 +368,13 @@ Future<void> _setUp() async {
 }
 
 Override _setUpUserSettingsService() {
-  final mockUserSettingsService = MockUserSettingsService();
-
-  when(mockUserSettingsService.getSecondLineFor(any)).thenReturn('');
-
-  return userSettingsServiceProvider.overrideWithValue(mockUserSettingsService);
+  return userSettingsServiceProvider
+      .overrideWithValue(MockUserSettingsService());
 }
 
 Override _setUpCAViewableObjectService() {
   return viewableObjectServiceProvider.overrideWith(
-    (ref) => ViewableObjectService(
-      router: MockGoRouter(),
-      userSettingsService: ref.read(userSettingsServiceProvider),
-    ),
+    (ref) => ViewableObjectService(router: MockGoRouter()),
   );
 }
 

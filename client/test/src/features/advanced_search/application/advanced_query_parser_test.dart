@@ -1,6 +1,7 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gql/ast.dart';
+import 'package:graphql/client.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:riverpod/riverpod.dart';
@@ -9,6 +10,7 @@ import 'advanced_query_parser_test.mocks.dart';
 
 @GenerateNiceMocks([
   MockSpec<DatabaseService>(),
+  MockSpec<DBGraphQLClient>(),
   MockSpec<PersonsDAO>(),
   MockSpec<StreamableDAOProxy>(),
   MockSpec<PaginatableStreamBase>(),
@@ -64,11 +66,12 @@ void main() {
             ],
             'orderBy': [
               {
-                'lastEdit': {'time': 'DESC'},
+                'lastEdit': {'time': OrderByValue.desc.serializedName},
               },
-              {'name': 'ASC'},
+              {'name': OrderByValue.asc.serializedName},
+              {'id': OrderByValue.asc.serializedName},
             ],
-            'limit': 10,
+            'limit': PaginatableStream.defaultPageSize + 1,
           };
 
           await _runTestCase(query, expectedVarsJson);
@@ -102,9 +105,9 @@ void main() {
               }
             ],
             'orderBy': [
-              {'name': 'ASC'},
+              {'id': OrderByValue.asc.serializedName},
             ],
-            'limit': 10,
+            'limit': PaginatableStream.defaultPageSize + 1,
           };
 
           await _runTestCase(query, expectedVarsJson);
@@ -190,11 +193,12 @@ void main() {
             ],
             'orderBy': [
               {
-                'lastEdit': {'time': 'DESC'},
+                'lastEdit': {'time': OrderByValue.desc.serializedName},
               },
-              {'name': 'ASC'},
+              {'name': OrderByValue.asc.serializedName},
+              {'id': OrderByValue.asc.serializedName},
             ],
-            'limit': 12,
+            'limit': 13,
           };
 
           await _runTestCase(query, expectedVarsJson);
@@ -206,39 +210,44 @@ void main() {
 
 Future<void> _runTestCase(AdvancedQuery query, Json expectedVarsJson) async {
   const unit = AdvancedQueryParser();
-  await unit.createPaginatableStream(query).dispose();
+  final stream = unit.createPaginatableStream(query);
+  await Future.delayed(Duration.zero);
+  await stream.dispose();
 
-  final mockedStreamingProxy = (globalProviderContainer
-          .read(databaseServiceProvider)
-          .daosByType[Person]! as MockPersonsDAO)
-      .streamingProxy as MockStreamableDAOProxy<Person>;
+  final gqlClient = globalProviderContainer
+      .read(databaseServiceProvider)
+      .graphQLClient as MockDBGraphQLClient;
 
-  final verificationResult = verify(
-    mockedStreamingProxy.streamAll(
-      orderBy: anyNamed('orderBy'),
-      where: anyNamed('where'),
-      searchQuery: anyNamed('searchQuery'),
-      streamAllConfig: captureAnyNamed('streamAllConfig'),
-      streamCountConfig: anyNamed('streamCountConfig'),
-    ),
-  )..called(1);
+  final verificationResult = verify(gqlClient
+      .subscribeAndReturnParsed(captureThat(predicate<SubscriptionOptions>(
+    (o) => !(o.document.definitions
+            .whereType<OperationDefinitionNode>()
+            .firstOrNull
+            ?.name
+            ?.value
+            .toLowerCase()
+            .contains('count') ??
+        false),
+  ))))
+    ..called(1);
 
-  final capturedConfig =
-      verificationResult.captured[0] as StreamAllConfig<Person>;
+  final subscriptionOptions =
+      verificationResult.captured[0] as SubscriptionOptions;
 
-  final firstSelectionNode = capturedConfig.document.definitions
+  final firstSelectionNode = subscriptionOptions.document.definitions
       .whereType<OperationDefinitionNode>()
       .first
       .firstSelectionNode;
 
-  final capturedVars = capturedConfig.variables ??
-      capturedConfig.transformRequest!(MockPaginatableStreamRequest());
+  final capturedVars = subscriptionOptions.variables;
 
   expect(capturedVars, expectedVarsJson);
 
   final expectedOrderByFields = (expectedVarsJson['orderBy'] as List<Json>)
       .map((e) => e.toGQLFieldWithSelection())
-      .toList();
+      .toList()
+      // Exclude the 'id' orderBy added by default
+      .take(expectedVarsJson['orderBy'].length - 1);
 
   expect(
     firstSelectionNode.selectionSet!.selections,
@@ -255,61 +264,9 @@ Future<void> _setUp() async {
 }
 
 Override _mockDBService() {
-  final mock = MockDatabaseService();
-
-  final MockPersonsDAO mockPersonsDAO = _createMockPersonsDAO(mock);
-
-  final daosByType = {Person: mockPersonsDAO};
-  when(mock.daosByType).thenReturn(daosByType);
-  final mockDBVarsTransformer = _createMockDBVarsTransformer();
-  when(mock.varsTransformer).thenReturn(mockDBVarsTransformer);
-
-  return databaseServiceProvider.overrideWithValue(mock);
-}
-
-DBVarsTransformer _createMockDBVarsTransformer() {
-  final mock = MockDBVarsTransformer();
-
-  when(
-    mock.transformrequestForPagination(
-      any,
-      overrideWhere: captureAnyNamed('overrideWhere'),
-      overrideOrderBy: captureAnyNamed('overrideOrderBy'),
-    ),
-  ).thenAnswer(
-    (i) => {
-      'where': i.namedArguments[#overrideWhere] as List<Json>,
-      'orderBy': i.namedArguments[#overrideOrderBy] as List<Json>,
-      'limit': 10,
-    },
+  return databaseServiceProvider.overrideWithValue(
+    DatabaseService(MockDBGraphQLClient()),
   );
-
-  return mock;
-}
-
-MockPersonsDAO _createMockPersonsDAO(MockDatabaseService mock) {
-  final realPersonsDAO = PersonsDAO(db: mock);
-
-  final mockPersonsDAO = MockPersonsDAO();
-  when(mockPersonsDAO.baseStreamCountConfig)
-      .thenReturn(realPersonsDAO.baseStreamCountConfig);
-  when(mockPersonsDAO.baseStreamAllConfig)
-      .thenReturn(realPersonsDAO.baseStreamAllConfig);
-
-  final mockStreamableDAOProxy = MockStreamableDAOProxy<Person>();
-  when(
-    mockStreamableDAOProxy.streamAll(
-      orderBy: anyNamed('orderBy'),
-      where: anyNamed('where'),
-      searchQuery: anyNamed('searchQuery'),
-      streamAllConfig: anyNamed('streamAllConfig'),
-      streamCountConfig: anyNamed('streamCountConfig'),
-    ),
-  ).thenAnswer((_) => MockPaginatableStreamBase());
-
-  when(mockPersonsDAO.streamingProxy).thenReturn(mockStreamableDAOProxy);
-
-  return mockPersonsDAO;
 }
 
 extension ToGQLFieldWithSelection on Json {

@@ -14,7 +14,9 @@ class AdvancedQueryParser {
       streamAllConfig: streamableDAO.baseStreamAllConfig,
       streamCountConfig: streamableDAO.baseStreamCountConfig,
       searchQuery: searchStream,
-      where: Stream.value(query.filters),
+      where: Stream.value([
+        Filter(const DotField(), query.logicalOperator, query.filters),
+      ]),
       orderBy: Stream.value(query.orderBy),
     );
   }

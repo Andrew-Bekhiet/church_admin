@@ -44,7 +44,7 @@ class DBVarsTransformer {
   }
 
   List<OrderBy> _maybeAddIdOrder(List<OrderBy> orderBy) {
-    final hasIdOrder = orderBy.last.field.name == 'id';
+    final hasIdOrder = orderBy.lastOrNull?.field.name == 'id';
 
     if (hasIdOrder) {
       return orderBy;

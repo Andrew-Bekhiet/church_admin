@@ -301,10 +301,7 @@ final goRouterRefreshStreamProvider = Provider<GoRouterRefreshStream>((ref) {
 final viewableObjectServiceProvider = Provider<ViewableObjectService>(
   (ref) => kIsWeb
       ? throw Exception('Web version does not support viewing data')
-      : ViewableObjectService(
-          router: $appRouter,
-          userSettingsService: ref.watch(userSettingsServiceProvider),
-        ),
+      : ViewableObjectService(router: $appRouter),
 );
 
 final baseCacheManagerProvider = Provider<BaseCacheManager>((ref) {
