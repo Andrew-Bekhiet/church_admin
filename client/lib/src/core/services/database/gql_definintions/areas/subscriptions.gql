@@ -9,8 +9,8 @@ subscription watchAllAreas(
   }
 }
 
-subscription watchAreasCount($where: [AreasBoolExp!] = {}) {
-  areasAggregate(where: { _and: $where }) {
+subscription watchAreasCount($where: [AreasBoolExp!] = {}, $limit: Int) {
+  areasAggregate(where: { _and: $where }, limit: $limit) {
     aggregate {
       count
     }

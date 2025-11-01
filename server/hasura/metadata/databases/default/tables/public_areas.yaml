@@ -73,7 +73,6 @@ select_permissions:
       filter:
         deleted_at:
           _is_null: true
-      limit: 200
       allow_aggregations: true
 update_permissions:
   - role: user

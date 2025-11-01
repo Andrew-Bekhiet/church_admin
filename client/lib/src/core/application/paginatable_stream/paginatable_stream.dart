@@ -59,6 +59,8 @@ abstract class PaginatableStreamBase<T> extends Stream<List<T>> {
 /// await paginatedStream.listenToNextPage();
 /// ```
 class PaginatableStream<T, P> extends PaginatableStreamBase<T> {
+  static const int defaultPageSize = 100;
+
   @override
   final int pageSize;
 
@@ -72,7 +74,7 @@ class PaginatableStream<T, P> extends PaginatableStreamBase<T> {
   PaginatableStream({
     required Stream<P> parametersStream,
     required PaginatableStreamFactory<T, P> factory,
-    this.pageSize = 100,
+    this.pageSize = defaultPageSize,
   }) {
     _subjectSubscription = parametersStream
         .scan<({P value, bool changed})?>(
@@ -103,7 +105,7 @@ class PaginatableStream<T, P> extends PaginatableStreamBase<T> {
 
   PaginatableStream.simple({
     required PaginatableStreamFactory<T, P?> factory,
-    this.pageSize = 100,
+    this.pageSize = defaultPageSize,
   }) {
     _subjectSubscription = _pageIndex
         .doOnData((_) => _onLoadingChanged.add(true))
@@ -122,7 +124,7 @@ class PaginatableStream<T, P> extends PaginatableStreamBase<T> {
   static PaginatableStream<T, String?> withSearch<T>({
     required PaginatableStreamFactory<T, String?> factory,
     required Stream<String?> searchStream,
-    int pageSize = 100,
+    int pageSize = defaultPageSize,
   }) =>
       PaginatableStream(
         factory: factory,
@@ -142,9 +144,9 @@ class PaginatableStream<T, P> extends PaginatableStreamBase<T> {
   ) {
     return factory(
       PaginatableStreamRequest(
-        cursor: parameter?.changed ?? false
+        cursor: currentPageIndex == 0 || (parameter?.changed ?? false)
             ? null
-            : currentItems.elementAtOrNull(currentPageIndex * pageSize) ??
+            : currentItems.elementAtOrNull(currentPageIndex * pageSize - 1) ??
                 currentCursor,
         param: parameter?.value,
         pageIndex: currentPageIndex,

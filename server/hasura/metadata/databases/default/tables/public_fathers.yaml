@@ -31,7 +31,6 @@ select_permissions:
         - is_hidden
         - name
       filter: {}
-      limit: 200
 update_permissions:
   - role: user
     permission:

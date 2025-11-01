@@ -22,6 +22,7 @@ class StudyYearsDAO extends DAOBase<StudyYear> with StreamableDAO<StudyYear> {
     Stream<String?>? searchQuery,
     Stream<List<Filter>>? where,
     Stream<List<OrderBy>>? orderBy,
+    int? overrideTotalLimit,
   }) {
     return streamingProxy.streamAll(
       streamAllConfig: baseStreamAllConfig,

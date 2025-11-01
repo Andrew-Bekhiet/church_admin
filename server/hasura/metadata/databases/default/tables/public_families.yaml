@@ -153,7 +153,6 @@ select_permissions:
                                   _eq: any
                               - entity_id:
                                   _is_null: true
-      limit: 200
       allow_aggregations: true
 update_permissions:
   - role: user

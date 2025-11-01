@@ -9,8 +9,8 @@ subscription watchAllStreets(
   }
 }
 
-subscription watchStreetsCount($where: [StreetsBoolExp!] = {}) {
-  streetsAggregate(where: { _and: $where }) {
+subscription watchStreetsCount($where: [StreetsBoolExp!] = {}, $limit: Int) {
+  streetsAggregate(where: { _and: $where }, limit: $limit) {
     aggregate {
       count
     }

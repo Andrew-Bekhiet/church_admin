@@ -27,8 +27,8 @@ subscription watchAllServices(
     }
   }
 }
-subscription watchServicesCount($where: [ServicesBoolExp!] = {}) {
-  servicesAggregate(where: { _and: $where }) {
+subscription watchServicesCount($where: [ServicesBoolExp!] = {}, $limit: Int) {
+  servicesAggregate(where: { _and: $where }, limit: $limit) {
     aggregate {
       count
     }

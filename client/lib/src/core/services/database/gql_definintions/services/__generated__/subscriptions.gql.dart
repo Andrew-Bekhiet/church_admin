@@ -1966,8 +1966,10 @@ class _CopyWithStubImpl_Subscription_watchAllServices_services_classes_studyYear
 class Variables_Subscription_watchServicesCount {
   factory Variables_Subscription_watchServicesCount({
     List<Input_ServicesBoolExp>? where,
+    int? limit,
   }) => Variables_Subscription_watchServicesCount._({
     if (where != null) r'where': where,
+    if (limit != null) r'limit': limit,
   });
 
   Variables_Subscription_watchServicesCount._(this._$data);
@@ -1984,6 +1986,10 @@ class Variables_Subscription_watchServicesCount {
           )
           .toList();
     }
+    if (data.containsKey('limit')) {
+      final l$limit = data['limit'];
+      result$data['limit'] = (l$limit as int?);
+    }
     return Variables_Subscription_watchServicesCount._(result$data);
   }
 
@@ -1992,11 +1998,17 @@ class Variables_Subscription_watchServicesCount {
   List<Input_ServicesBoolExp>? get where =>
       (_$data['where'] as List<Input_ServicesBoolExp>?);
 
+  int? get limit => (_$data['limit'] as int?);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('where')) {
       final l$where = where;
       result$data['where'] = l$where?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('limit')) {
+      final l$limit = limit;
+      result$data['limit'] = l$limit;
     }
     return result$data;
   }
@@ -2035,18 +2047,28 @@ class Variables_Subscription_watchServicesCount {
     } else if (l$where != lOther$where) {
       return false;
     }
+    final l$limit = limit;
+    final lOther$limit = other.limit;
+    if (_$data.containsKey('limit') != other._$data.containsKey('limit')) {
+      return false;
+    }
+    if (l$limit != lOther$limit) {
+      return false;
+    }
     return true;
   }
 
   @override
   int get hashCode {
     final l$where = where;
+    final l$limit = limit;
     return Object.hashAll([
       _$data.containsKey('where')
           ? l$where == null
                 ? null
                 : Object.hashAll(l$where.map((v) => v))
           : const {},
+      _$data.containsKey('limit') ? l$limit : const {},
     ]);
   }
 }
@@ -2060,7 +2082,7 @@ abstract class CopyWith_Variables_Subscription_watchServicesCount<TRes> {
   factory CopyWith_Variables_Subscription_watchServicesCount.stub(TRes res) =
       _CopyWithStubImpl_Variables_Subscription_watchServicesCount;
 
-  TRes call({List<Input_ServicesBoolExp>? where});
+  TRes call({List<Input_ServicesBoolExp>? where, int? limit});
 }
 
 class _CopyWithImpl_Variables_Subscription_watchServicesCount<TRes>
@@ -2076,10 +2098,11 @@ class _CopyWithImpl_Variables_Subscription_watchServicesCount<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? where = _undefined}) => _then(
+  TRes call({Object? where = _undefined, Object? limit = _undefined}) => _then(
     Variables_Subscription_watchServicesCount._({
       ..._instance._$data,
       if (where != _undefined) 'where': (where as List<Input_ServicesBoolExp>?),
+      if (limit != _undefined) 'limit': (limit as int?),
     }),
   );
 }
@@ -2090,7 +2113,7 @@ class _CopyWithStubImpl_Variables_Subscription_watchServicesCount<TRes>
 
   TRes _res;
 
-  call({List<Input_ServicesBoolExp>? where}) => _res;
+  call({List<Input_ServicesBoolExp>? where, int? limit}) => _res;
 }
 
 class Subscription_watchServicesCount {
@@ -2224,6 +2247,12 @@ const documentNodeSubscriptionwatchServicesCount = DocumentNode(
           defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
           directives: [],
         ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'limit')),
+          type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: false),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
       ],
       directives: [],
       selectionSet: SelectionSetNode(
@@ -2242,6 +2271,10 @@ const documentNodeSubscriptionwatchServicesCount = DocumentNode(
                     ),
                   ],
                 ),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'limit'),
+                value: VariableNode(name: NameNode(value: 'limit')),
               ),
             ],
             directives: [],

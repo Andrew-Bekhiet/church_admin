@@ -1189,6 +1189,7 @@ class MockStreamableDAOProxy<T extends _i2.ViewableWithID> extends _i1.Mock
     _i4.Stream<String?>? searchQuery,
     _i4.Stream<List<_i2.Filter<Object>>>? where,
     _i4.Stream<List<_i2.OrderBy>>? orderBy,
+    int? overrideTotalLimit,
   }) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -1200,6 +1201,7 @@ class MockStreamableDAOProxy<T extends _i2.ViewableWithID> extends _i1.Mock
             #searchQuery: searchQuery,
             #where: where,
             #orderBy: orderBy,
+            #overrideTotalLimit: overrideTotalLimit,
           },
         ),
         returnValue: _FakePaginatableStreamBase_29<T>(
@@ -1213,6 +1215,7 @@ class MockStreamableDAOProxy<T extends _i2.ViewableWithID> extends _i1.Mock
               #searchQuery: searchQuery,
               #where: where,
               #orderBy: orderBy,
+              #overrideTotalLimit: overrideTotalLimit,
             },
           ),
         ),
@@ -1227,6 +1230,7 @@ class MockStreamableDAOProxy<T extends _i2.ViewableWithID> extends _i1.Mock
               #searchQuery: searchQuery,
               #where: where,
               #orderBy: orderBy,
+              #overrideTotalLimit: overrideTotalLimit,
             },
           ),
         ),

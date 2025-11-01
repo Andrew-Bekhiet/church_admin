@@ -5,8 +5,10 @@ import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
 
 mixin StreamableDAO<T extends ViewableWithID> on DAOBase<T> {
-  late final StreamableDAOProxy<T> streamingProxy =
-      StreamableDAOProxy<T>(db: db, fromJson: fromJson);
+  late final StreamableDAOProxy<T> streamingProxy = StreamableDAOProxy<T>(
+    db: db,
+    fromJson: fromJson,
+  );
 
   StreamAllConfig<T> get baseStreamAllConfig;
 
@@ -58,6 +60,7 @@ class StreamableDAOProxy<T extends ViewableWithID> extends DAOBase<T> {
     Stream<String?>? searchQuery,
     Stream<List<Filter>>? where,
     Stream<List<OrderBy>>? orderBy,
+    int? overrideTotalLimit,
   }) {
     final shareableParametersStream = Rx.combineLatest3(
       searchQuery ?? Stream.value(null),
@@ -70,10 +73,14 @@ class StreamableDAOProxy<T extends ViewableWithID> extends DAOBase<T> {
       ),
     ).shareValue();
 
-    final Stream<int?> countStream =
-        _getCountStream(streamCountConfig, shareableParametersStream);
+    final Stream<int?> countStream = _getCountStream(
+      streamCountConfig,
+      shareableParametersStream,
+      overrideTotalLimit,
+    );
 
     return PaginatableStream(
+      pageSize: overrideTotalLimit ?? PaginatableStream.defaultPageSize,
       parametersStream: shareableParametersStream,
       factory: (request) => _streamAllFactory(
         streamAllConfig,
@@ -86,19 +93,25 @@ class StreamableDAOProxy<T extends ViewableWithID> extends DAOBase<T> {
   Stream<int?> _getCountStream(
     StreamCountConfig? streamCountConfig,
     Stream<StreamableDAOParameters> parametersStream,
+    int? overrideTotalLimit,
   ) {
     if (streamCountConfig == null) return Stream.value(null).shareValue();
 
-    return parametersStream.map((p) => p.where).distinct().switchMap(
+    return parametersStream
+        .map((p) => p.where)
+        .distinct()
+        .switchMap(
           (where) => graphQLClient.subscribeAndReturnParsed(
             streamCountConfig.operationOptions ??
                 SubscriptionOptions(
                   document: streamCountConfig.document,
                   operationName: streamCountConfig.effectiveOperationName,
-                  variables: streamCountConfig.variables ??
+                  variables:
+                      streamCountConfig.variables ??
                       {
                         'where':
                             where?.map((o) => o.queryToJson()).toList() ?? [],
+                        'limit': overrideTotalLimit,
                       },
                   parserFn: streamCountConfig.parserFn ?? db.parser.countParser,
                 ),
@@ -116,10 +129,13 @@ class StreamableDAOProxy<T extends ViewableWithID> extends DAOBase<T> {
         streamAllConfig.operationOptions ??
             SubscriptionOptions(
               document: _getDocumentWithSecondLine(
-                  streamAllConfig, request.param?.orderBy),
+                streamAllConfig,
+                request.param?.orderBy,
+              ),
               operationName: streamAllConfig.effectiveOperationName,
               variables: _getEffectiveStreamAllVars(streamAllConfig, request),
-              parserFn: streamAllConfig.parserFn ??
+              parserFn:
+                  streamAllConfig.parserFn ??
                   db.parser.singleListParser(
                     fromJson,
                     pageSize: request.pageSize,
@@ -144,8 +160,10 @@ class StreamableDAOProxy<T extends ViewableWithID> extends DAOBase<T> {
         db.varsTransformer.transformrequestForPagination<T>(request);
   }
 
-  dynamic _getDocumentWithSecondLine(StreamAllConfig<T> streamAllConfig,
-      [List<OrderBy>? orderBy]) {
+  dynamic _getDocumentWithSecondLine(
+    StreamAllConfig<T> streamAllConfig, [
+    List<OrderBy>? orderBy,
+  ]) {
     final configDocument = streamAllConfig.document;
 
     final firstSelectionNodeName = configDocument.definitions
@@ -155,11 +173,15 @@ class StreamableDAOProxy<T extends ViewableWithID> extends DAOBase<T> {
         .name
         .value;
 
-    if (orderBy?.firstOrNull case final orderBy?) {
+    if (orderBy?.firstOrNull case final seondLine?) {
       return configDocument.withSelectionFields(
         {
-          firstSelectionNodeName:
-              orderBy.getSecondLineField().fieldPath.asGQLSelectionNode()
+          firstSelectionNodeName: {
+            ...seondLine.getSecondLineField().fieldPath.asGQLSelectionNode(),
+            ...?orderBy?.expand(
+              (o) => o.field.orderByFieldPath.asGQLSelectionNode(),
+            ),
+          }.toList(),
         },
       );
     }
@@ -187,11 +209,14 @@ class StreamableDAOProxy<T extends ViewableWithID> extends DAOBase<T> {
               SubscriptionOptions(
                 document: streamSingleByIdConfig.document,
                 operationName: streamSingleByIdConfig.effectiveOperationName,
-                variables: streamSingleByIdConfig.variables ??
-                    streamSingleByIdConfig.varsConstructor
-                        ?.call(id: id.toUuid()) ??
+                variables:
+                    streamSingleByIdConfig.variables ??
+                    streamSingleByIdConfig.varsConstructor?.call(
+                      id: id.toUuid(),
+                    ) ??
                     {},
-                parserFn: streamSingleByIdConfig.parserFn ??
+                parserFn:
+                    streamSingleByIdConfig.parserFn ??
                     db.parser.singleOrNullParser(fromJson),
               ),
         )

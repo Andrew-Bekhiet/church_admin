@@ -5,8 +5,11 @@ subscription watchUser($uid: uuid!, $fullData: Boolean = false) {
   }
 }
 
-subscription watchAuthUsersDataCount($where: [AuthUsersDataBoolExp!] = {}) {
-  authUsersDataAggregate(where: { _and: $where }) {
+subscription watchAuthUsersDataCount(
+  $where: [AuthUsersDataBoolExp!] = {}
+  $limit: Int
+) {
+  authUsersDataAggregate(where: { _and: $where }, limit: $limit) {
     aggregate {
       count
     }

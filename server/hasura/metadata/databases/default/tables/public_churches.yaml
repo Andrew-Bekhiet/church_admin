@@ -29,7 +29,6 @@ select_permissions:
         - id
         - name
       filter: {}
-      limit: 200
 update_permissions:
   - role: user
     permission:

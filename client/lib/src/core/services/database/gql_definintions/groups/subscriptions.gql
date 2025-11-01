@@ -8,8 +8,8 @@ subscription watchAllGroups(
   }
 }
 
-subscription watchGroupsCount($where: [GroupsBoolExp!] = {}) {
-  groupsAggregate(where: { _and: $where }) {
+subscription watchGroupsCount($where: [GroupsBoolExp!] = {}, $limit: Int) {
+  groupsAggregate(where: { _and: $where }, limit: $limit) {
     aggregate {
       count
     }

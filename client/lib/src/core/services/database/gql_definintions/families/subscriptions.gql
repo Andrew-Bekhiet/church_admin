@@ -8,8 +8,8 @@ subscription watchAllFamilies(
   }
 }
 
-subscription watchFamiliesCount($where: [FamiliesBoolExp!] = {}) {
-  familiesAggregate(where: { _and: $where }) {
+subscription watchFamiliesCount($where: [FamiliesBoolExp!] = {}, $limit: Int) {
+  familiesAggregate(where: { _and: $where }, limit: $limit) {
     aggregate {
       count
     }

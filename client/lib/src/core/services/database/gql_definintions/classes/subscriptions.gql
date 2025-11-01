@@ -8,8 +8,8 @@ subscription watchAllClasses(
   }
 }
 
-subscription watchClassesCount($where: [ClassesBoolExp!] = {}) {
-  classesAggregate(where: { _and: $where }) {
+subscription watchClassesCount($where: [ClassesBoolExp!] = {}, $limit: Int) {
+  classesAggregate(where: { _and: $where }, limit: $limit) {
     aggregate {
       count
     }

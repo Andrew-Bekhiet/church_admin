@@ -47,6 +47,26 @@ class FieldMetadata<T extends Object> with EquatableMixin {
   QueryableType<T>? get fieldQueryableType =>
       AdvancedQueriesMetadata().allQueryablesByType[type] as QueryableType<T>?;
 
+  List<String> get fieldPath => [name];
+
+  List<String> get orderByFieldPath {
+    final subFields = AdvancedQueriesMetadata()
+        .allQueryablesByType[type]
+        ?.fieldsMetadataByName;
+
+    return switch (subFields) {
+      {'order': FieldMetadata(:final orderByFieldPath)} => [
+          ...fieldPath,
+          ...orderByFieldPath
+        ],
+      {'name': FieldMetadata(:final orderByFieldPath)} => [
+          ...fieldPath,
+          ...orderByFieldPath
+        ],
+      _ => fieldPath,
+    };
+  }
+
   @override
   List<Object?> get props => [name, label, operators];
 
@@ -74,8 +94,6 @@ class FieldMetadata<T extends Object> with EquatableMixin {
               serializedValue,
     };
   }
-
-  List<String> get fieldPath => [name];
 
   /// Creates a redirecting field that exposes deeply nested fields directly on parent types.
   ///

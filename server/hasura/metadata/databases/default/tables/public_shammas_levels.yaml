@@ -9,7 +9,6 @@ select_permissions:
         - name
         - order
       filter: {}
-      limit: 200
 update_permissions:
   - role: user
     permission:

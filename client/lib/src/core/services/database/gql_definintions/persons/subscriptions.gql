@@ -8,8 +8,8 @@ subscription watchAllPersons(
   }
 }
 
-subscription watchPersonsCount($where: [PersonsBoolExp!] = {}) {
-  personsAggregate(where: { _and: $where }) {
+subscription watchPersonsCount($where: [PersonsBoolExp!] = {}, $limit: Int) {
+  personsAggregate(where: { _and: $where }, limit: $limit) {
     aggregate {
       count
     }

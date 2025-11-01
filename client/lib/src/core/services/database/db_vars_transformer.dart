@@ -15,11 +15,13 @@ class DBVarsTransformer {
     final where = param?.where?.map((o) => o.queryToJson()).toList() ??
         overrideWhere ??
         [];
-    final orderBy = param?.orderBy?.map((o) => o.toSearchJson()).toList() ??
-        overrideOrderBy ??
-        [
-          {'name': 'ASC'},
-        ];
+    final orderBy = _maybeAddIdOrder(
+      param?.orderBy?.map((o) => o.toSearchJson()).toList() ??
+          overrideOrderBy ??
+          [
+            {'name': 'ASC'},
+          ],
+    );
 
     return {
       'where': [
@@ -30,6 +32,19 @@ class DBVarsTransformer {
       'orderBy': orderBy,
       'limit': pageSize + 1,
     };
+  }
+
+  List<Json> _maybeAddIdOrder(List<Json> orderBy) {
+    final hasIdOrder = orderBy.last.keys.any((key) => key == 'id');
+
+    if (hasIdOrder) {
+      return orderBy;
+    }
+
+    return [
+      ...orderBy,
+      {'id': 'ASC_NULLS_LAST'},
+    ];
   }
 
   Json _nameSearch(String search) => {
@@ -82,8 +97,9 @@ class DBVarsTransformer {
           ? object.id
           : (object as ToJson).toJson().followKeysPath(orderByClause);
 
-  String _getOperatorByDirection(Json orderByClause) =>
-      orderByClause.getLeaf() == 'ASC' ? '_gte' : '_lte';
+  String _getOperatorByDirection(Json orderByClause) {
+    return orderByClause.getLeaf().toString().startsWith('ASC') ? '_gt' : '_lt';
+  }
 }
 
 extension _FollowKeysPath<T> on Map<T, dynamic> {

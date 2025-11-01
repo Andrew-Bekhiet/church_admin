@@ -311,3 +311,18 @@ MockPersonsDAO _createMockPersonsDAO(MockDatabaseService mock) {
 
   return mockPersonsDAO;
 }
+
+extension ToGQLFieldWithSelection on Json {
+  FieldNode toGQLFieldWithSelection() {
+    return FieldNode(
+      name: NameNode(value: keys.single),
+      selectionSet: entries.single.value is Json
+          ? SelectionSetNode(
+              selections: [
+                (entries.single.value as Json).toGQLFieldWithSelection(),
+              ],
+            )
+          : null,
+    );
+  }
+}

@@ -28,7 +28,6 @@ select_permissions:
         - name
         - university_id
       filter: {}
-      limit: 200
 update_permissions:
   - role: user
     permission:
