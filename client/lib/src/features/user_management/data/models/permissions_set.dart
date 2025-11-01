@@ -10,7 +10,15 @@ class PermissionsSet extends DelegatingSet<UserPermission> with EquatableMixin {
   const PermissionsSet.empty() : super(const {});
 
   PermissionsSet.parse(Set<String> permissions)
-      : super(permissions.map(UserPermission.values.byName).toSet());
+      : super(
+          permissions
+              .map(
+                (p) =>
+                    UserPermission.values.firstWhereOrNull((e) => e.name == p),
+              )
+              .nonNulls
+              .toSet(),
+        );
 
   const PermissionsSet.fromSet(super.permissions);
 
