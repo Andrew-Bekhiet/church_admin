@@ -67,6 +67,15 @@ class _GroupFields {
     },
   );
 
+  final FieldMetadata<DateTimeRange<DateTime>> validity =
+      FieldMetadata<DateTimeRange<DateTime>>(
+    getValue: (obj) => obj is Group ? obj.validity : null,
+    parentType: Group,
+    name: 'validity',
+    label: 'validity',
+    isCodeOnly: false,
+  );
+
   final FieldMetadata<LastRecordedByInfo> lastEdit =
       FieldMetadata<LastRecordedByInfo>(
     getValue: (obj) => obj is Group ? obj.lastEdit : null,
@@ -121,6 +130,7 @@ class _GroupFields {
     color,
     photoUpdatedAt,
     service,
+    validity,
     lastEdit,
     adminUsers,
     attendanceHistoryAggregate,
@@ -132,6 +142,7 @@ class _GroupFields {
     'color': color,
     'photoUpdatedAt': photoUpdatedAt,
     'service': service,
+    'validity': validity,
     'lastEdit': lastEdit,
     'adminUsers': adminUsers,
     'attendanceHistoryAggregate': attendanceHistoryAggregate,

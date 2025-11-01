@@ -348,10 +348,10 @@ packages:
     dependency: "direct dev"
     description:
       name: cross_file
-      sha256: "7caf6a750a0c04effbb52a676dce9a4a592e10ad35c34d6d2d0e4811160d5670"
+      sha256: "942a4791cd385a68ccb3b32c71c427aba508a1bb949b86dff2adbe4049f16239"
       url: "https://pub.dev"
     source: hosted
-    version: "0.3.4+2"
+    version: "0.3.5"
   crypto:
     dependency: transitive
     description:
@@ -1904,10 +1904,10 @@ packages:
     dependency: "direct main"
     description:
       name: phone_numbers_parser
-      sha256: f95f15494536712cf6c5c4303bd7c4dae788863184d2dff03fda5e084a623c01
+      sha256: cfd5217cd1c132f3cd07d7b91f29a44219333bb1723c0480044a9cbac0e47eed
       url: "https://pub.dev"
     source: hosted
-    version: "9.0.15"
+    version: "9.0.16"
   photo_view:
     dependency: "direct main"
     description:

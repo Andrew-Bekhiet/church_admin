@@ -13,32 +13,32 @@ class ClassesDAO extends FullCRUDDAO<Class> {
   @override
   late final StreamCountConfig<Class> baseStreamCountConfig =
       const StreamCountConfig(
-    document: documentNodeSubscriptionwatchClassesCount,
-  );
+        document: documentNodeSubscriptionwatchClassesCount,
+      );
   @override
   late final StreamSingleByIdConfig<Class> baseStreamSingleByIdConfig =
       StreamSingleByIdConfig(
-    document: documentNodeSubscriptionwatchClass,
-    varsConstructor: _streamSingleByIdVarsConstructor,
-  );
+        document: documentNodeSubscriptionwatchClass,
+        varsConstructor: _streamSingleByIdVarsConstructor,
+      );
   @override
   late final DeleteSingleByIdConfig<Class> baseDeleteSingleByIdConfig =
       DeleteSingleByIdConfig(
-    document: documentNodeMutationdeleteClass,
-    varsConstructor: _deleteSingleByIdVarsConstructor,
-  );
+        document: documentNodeMutationdeleteClass,
+        varsConstructor: _deleteSingleByIdVarsConstructor,
+      );
   @override
   late final UpdateObjectConfig<Class> baseUpdateObjectConfig =
       UpdateObjectConfig(
-    document: documentNodeMutationupdateClass,
-    varsConstructor: _updateClassVarsConstructor,
-  );
+        document: documentNodeMutationupdateClass,
+        varsConstructor: _updateClassVarsConstructor,
+      );
   @override
   late final CreateObjectConfig<Class> baseCreateObjectConfig =
       CreateObjectConfig(
-    document: documentNodeMutationinsertClass,
-    varsConstructor: _createClassVarsConstructor,
-  );
+        document: documentNodeMutationinsertClass,
+        varsConstructor: _createClassVarsConstructor,
+      );
 
   Json _streamAllVarsConstructor(
     PaginatableStreamRequest<Class, StreamableDAOParameters<Class>?> request,
@@ -49,12 +49,17 @@ class ClassesDAO extends FullCRUDDAO<Class> {
       request,
       overrideOrderBy: (orderBy?.isEmpty ?? true)
           ? [
-              Input_ClassesOrderBy(serviceStudyYear: Enum_OrderBy.ASC),
-              Input_ClassesOrderBy(
-                serviceGender: Enum_OrderBy.DESC_NULLS_FIRST,
+              OrderBy(
+                field: ClassFields().studyYear.redirectTo(
+                  StudyYearFields().order,
+                ),
               ),
-              Input_ClassesOrderBy(name: Enum_OrderBy.ASC),
-            ].map((o) => o.toJson()).toList()
+              OrderBy(
+                field: ClassFields().serviceGender,
+                value: OrderByValue.desc,
+              ),
+              OrderBy(field: ClassFields().name),
+            ]
           : null,
     );
   }
@@ -63,17 +68,17 @@ class ClassesDAO extends FullCRUDDAO<Class> {
       Variables_Subscription_watchClass(id: id).toJson();
 
   Json _createClassVarsConstructor({required Class newObject}) =>
-      Variables_Mutation_insertClass(newClass: newObject.toInsertInput())
-          .toJson();
+      Variables_Mutation_insertClass(
+        newClass: newObject.toInsertInput(),
+      ).toJson();
 
   Json _updateClassVarsConstructor({
     required Class newObject,
     required Class oldObject,
-  }) =>
-      Variables_Mutation_updateClass(
-        classId: newObject.id.toUuid(),
-        newClass: newObject.toUpdateInput(oldObject: oldObject),
-      ).toJson();
+  }) => Variables_Mutation_updateClass(
+    classId: newObject.id.toUuid(),
+    newClass: newObject.toUpdateInput(oldObject: oldObject),
+  ).toJson();
 
   Json _deleteSingleByIdVarsConstructor({required UuidValue id}) =>
       Variables_Mutation_deleteClass(classId: id).toJson();

@@ -6,21 +6,30 @@ class DBVarsTransformer {
 
   Json transformrequestForPagination<T extends ViewableWithID>(
     PaginatableStreamRequest<T, StreamableDAOParameters<T>?> request, {
-    List<Json>? overrideWhere,
-    List<Json>? overrideOrderBy,
+    List<Filter>? overrideWhere,
+    List<OrderBy>? overrideOrderBy,
   }) {
     final PaginatableStreamRequest(:param, :cursor, :pageSize) = request;
 
     final search = param?.search;
-    final where = param?.where?.map((o) => o.queryToJson()).toList() ??
-        overrideWhere ??
+    final where =
+        (param?.where ?? overrideWhere)?.map((o) => o.queryToJson()).toList() ??
         [];
     final orderBy = _maybeAddIdOrder(
-      param?.orderBy?.map((o) => o.toSearchJson()).toList() ??
-          overrideOrderBy ??
-          [
-            {'name': 'ASC'},
-          ],
+      (param?.orderBy ??
+              overrideOrderBy ??
+              [
+                OrderBy(
+                  field: FieldMetadata<String>(
+                    getValue: (o) => o is Viewable ? o.name : null,
+                    label: '',
+                    name: 'name',
+                    parentType: ViewableWithID,
+                    operators: {},
+                  ),
+                ),
+              ])
+          .toList(),
     );
 
     return {
@@ -29,13 +38,13 @@ class DBVarsTransformer {
         if (search != null && search.isNotEmpty) _nameSearch(search),
         if (cursor != null) _whereConditionsForPagination(orderBy, cursor),
       ],
-      'orderBy': orderBy,
+      'orderBy': orderBy.map((o) => o.toSearchJson()).toList(),
       'limit': pageSize + 1,
     };
   }
 
-  List<Json> _maybeAddIdOrder(List<Json> orderBy) {
-    final hasIdOrder = orderBy.last.keys.any((key) => key == 'id');
+  List<OrderBy> _maybeAddIdOrder(List<OrderBy> orderBy) {
+    final hasIdOrder = orderBy.last.field.name == 'id';
 
     if (hasIdOrder) {
       return orderBy;
@@ -43,19 +52,26 @@ class DBVarsTransformer {
 
     return [
       ...orderBy,
-      {'id': 'ASC_NULLS_LAST'},
+      OrderBy(
+        field: FieldMetadata<String>(
+          getValue: (o) => o is ID ? o.id : null,
+          label: '',
+          name: 'id',
+          parentType: ID,
+        ),
+      ),
     ];
   }
 
   Json _nameSearch(String search) => {
-        'name': {'_ilike': '%$search%'},
-      };
+    'name': {'_ilike': '%$search%'},
+  };
 
   Json _whereConditionsForPagination(
-    List<Json> orderBy,
+    List<OrderBy> orderBy,
     ViewableWithID cursor,
   ) {
-    final List<Json> accumulatedClauses = [];
+    final List<OrderBy> accumulatedClauses = [];
 
     return {
       '_or': orderBy.mapIndexed(
@@ -84,21 +100,24 @@ class DBVarsTransformer {
   }
 
   Json _replaceWithCondition(
-    Json orderByClause,
+    OrderBy orderByClause,
     String operator,
     ViewableWithID object,
-  ) =>
-      orderByClause.replaceLeafWith(
-        {operator: _getValueByPath(orderByClause, object)},
-      );
+  ) {
+    final orderByJson = orderByClause.toSearchJson();
+
+    return orderByJson.replaceLeafWith(
+      {operator: _getValueByPath(orderByJson, object)},
+    );
+  }
 
   dynamic _getValueByPath(Json orderByClause, ViewableWithID object) =>
       orderByClause.keys.single == 'id'
-          ? object.id
-          : (object as ToJson).toJson().followKeysPath(orderByClause);
+      ? object.id
+      : (object as ToJson).toJson().followKeysPath(orderByClause);
 
-  String _getOperatorByDirection(Json orderByClause) {
-    return orderByClause.getLeaf().toString().startsWith('ASC') ? '_gt' : '_lt';
+  String _getOperatorByDirection(OrderBy orderByClause) {
+    return orderByClause.value == OrderByValue.asc ? '_gt' : '_lt';
   }
 }
 

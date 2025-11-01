@@ -35,10 +35,12 @@ class _ViewServiceState extends State<ViewService> {
     ),
   );
 
-  final BehaviorSubject<List<OrderBy>> _classesOrderBy =
-      BehaviorSubject.seeded([
-    OrderBy(field: ClassFields().name),
-  ]);
+  final BehaviorSubject<List<OrderBy>> _classesOrderBy = BehaviorSubject.seeded(
+    [
+      OrderBy(field: ClassFields().studyYear),
+      OrderBy(field: ClassFields().name),
+    ],
+  );
 
   late final _groupsController = _ensureWillDispose(
     ViewableObjectListController(
@@ -67,9 +69,9 @@ class _ViewServiceState extends State<ViewService> {
         where: Stream.value(
           [
             Filter(
-              PersonFields()
-                  .servicesRel
-                  .redirectTo(PersonsServicesFields().serviceId),
+              PersonFields().servicesRel.redirectTo(
+                PersonsServicesFields().serviceId,
+              ),
               PrimitiveOperator.eq,
               widget.serviceId,
             ),
@@ -80,11 +82,12 @@ class _ViewServiceState extends State<ViewService> {
     ),
   );
 
-  final BehaviorSubject<List<OrderBy>> _personsOrderBy =
-      BehaviorSubject.seeded([
-    OrderBy(field: PersonFields().studyYear),
-    OrderBy(field: PersonFields().name),
-  ]);
+  final BehaviorSubject<List<OrderBy>> _personsOrderBy = BehaviorSubject.seeded(
+    [
+      OrderBy(field: PersonFields().studyYear),
+      OrderBy(field: PersonFields().name),
+    ],
+  );
 
   final Set<ViewableObjectListController> _controllersToDispose = {};
 
@@ -151,50 +154,48 @@ class _ViewServiceState extends State<ViewService> {
       ),
       tabsContentBuilders: {
         Class: (context) => StreamBuilder(
-              stream: _classesOrderBy.stream,
-              initialData: _classesOrderBy.value,
-              builder: (context, orderBySnapshot) => ViewableObjectList(
-                itemBuilder: (context, class_, config) =>
-                    ViewableObjectCard<Class>(
-                  class_,
-                  config: config?.copyWith(
-                        secondLineField:
-                            orderBySnapshot.data?.first.getSecondLineField(),
-                      ) ??
-                      ViewableObjectWidgetConfig(
-                        secondLineField:
-                            orderBySnapshot.data?.first.getSecondLineField(),
-                      ),
-                ),
-                type: ViewableObjectListType.grid3,
-                scrollController: PrimaryScrollController.maybeOf(context),
-                objectsController: _classesController,
-              ),
+          stream: _classesOrderBy.stream,
+          initialData: _classesOrderBy.value,
+          builder: (context, orderBySnapshot) => ViewableObjectList(
+            itemBuilder: (context, class_, config) => ViewableObjectCard<Class>(
+              class_,
+              config:
+                  config?.copyWith(
+                    secondLineField: orderBySnapshot.data?.first
+                        .getSecondLineField(),
+                  ) ??
+                  ViewableObjectWidgetConfig(
+                    secondLineField: orderBySnapshot.data?.first
+                        .getSecondLineField(),
+                  ),
             ),
+            type: ViewableObjectListType.grid3,
+            scrollController: PrimaryScrollController.maybeOf(context),
+            objectsController: _classesController,
+          ),
+        ),
         Group: (context) => StreamBuilder(
-              stream: _groupsOrderBy.stream,
-              initialData: _groupsOrderBy.value,
-              builder: (context, orderBySnapshot) => ViewableObjectList(
-                scrollController: PrimaryScrollController.maybeOf(context),
-                viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
-                  secondLineField:
-                      orderBySnapshot.data?.first.getSecondLineField(),
-                ),
-                objectsController: _groupsController,
-              ),
+          stream: _groupsOrderBy.stream,
+          initialData: _groupsOrderBy.value,
+          builder: (context, orderBySnapshot) => ViewableObjectList(
+            scrollController: PrimaryScrollController.maybeOf(context),
+            viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
+              secondLineField: orderBySnapshot.data?.first.getSecondLineField(),
             ),
+            objectsController: _groupsController,
+          ),
+        ),
         Person: (context) => StreamBuilder(
-              stream: _personsOrderBy.stream,
-              initialData: _personsOrderBy.value,
-              builder: (context, orderBySnapshot) => ViewableObjectList(
-                scrollController: PrimaryScrollController.maybeOf(context),
-                viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
-                  secondLineField:
-                      orderBySnapshot.data?.first.getSecondLineField(),
-                ),
-                objectsController: _personsController,
-              ),
+          stream: _personsOrderBy.stream,
+          initialData: _personsOrderBy.value,
+          builder: (context, orderBySnapshot) => ViewableObjectList(
+            scrollController: PrimaryScrollController.maybeOf(context),
+            viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
+              secondLineField: orderBySnapshot.data?.first.getSecondLineField(),
             ),
+            objectsController: _personsController,
+          ),
+        ),
       },
       notFoundBuilder: (context) => Center(
         child: Text(
@@ -219,16 +220,14 @@ class _ViewServiceState extends State<ViewService> {
               1 => _groupsController,
               2 => _personsController,
               _ => throw UnimplementedError(),
-            }
-                .totalCountStream
-                .map(
-                  (c) => switch (currentIndex) {
-                    0 => '$c فصل',
-                    1 => '$c مجموعة',
-                    2 => '$c مخدوم',
-                    _ => throw UnimplementedError(),
-                  },
-                );
+            }.totalCountStream.map(
+              (c) => switch (currentIndex) {
+                0 => '$c فصل',
+                1 => '$c مجموعة',
+                2 => '$c مخدوم',
+                _ => throw UnimplementedError(),
+              },
+            );
           },
         ),
         builder: (context, snapshot) {
@@ -241,25 +240,28 @@ class _ViewServiceState extends State<ViewService> {
       ),
       floatingActionButtonBuilder: (context, tabController, service) =>
           SwitchingFloatingActionButton.fromTabController(
-        tabController: tabController,
-        icons: const [
-          Icon(Symbols.group_add),
-          Icon(Symbols.group_add),
-          Icon(Symbols.person_add),
-        ],
-        onTap: (newIndex) {
-          if (newIndex == 0) {
-            EditClassRoute($extra: EditClassExtra(service: service))
-                .push(context);
-          } else if (newIndex == 1) {
-            EditGroupRoute($extra: EditGroupExtra(service: service))
-                .push(context);
-          } else if (newIndex == 2) {
-            EditPersonRoute($extra: EditPersonExtra(service: service))
-                .push(context);
-          }
-        },
-      ),
+            tabController: tabController,
+            icons: const [
+              Icon(Symbols.group_add),
+              Icon(Symbols.group_add),
+              Icon(Symbols.person_add),
+            ],
+            onTap: (newIndex) {
+              if (newIndex == 0) {
+                EditClassRoute(
+                  $extra: EditClassExtra(service: service),
+                ).push(context);
+              } else if (newIndex == 1) {
+                EditGroupRoute(
+                  $extra: EditGroupExtra(service: service),
+                ).push(context);
+              } else if (newIndex == 2) {
+                EditPersonRoute(
+                  $extra: EditPersonExtra(service: service),
+                ).push(context);
+              }
+            },
+          ),
     );
   }
 
@@ -291,7 +293,7 @@ class _ViewServiceState extends State<ViewService> {
   }
 
   ViewableObjectListController<T>
-      _ensureWillDispose<T extends ViewableWithIDAndImage>(
+  _ensureWillDispose<T extends ViewableWithIDAndImage>(
     ViewableObjectListController<T> controller,
   ) {
     _controllersToDispose.add(controller);

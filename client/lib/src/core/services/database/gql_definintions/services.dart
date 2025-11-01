@@ -15,36 +15,36 @@ class ServicesDAO extends FullCRUDDAO<Service> {
   @override
   late final StreamCountConfig<Service> baseStreamCountConfig =
       const StreamCountConfig(
-    document: documentNodeSubscriptionwatchServicesCount,
-  );
+        document: documentNodeSubscriptionwatchServicesCount,
+      );
   @override
   late final StreamSingleByIdConfig<Service> baseStreamSingleByIdConfig =
       StreamSingleByIdConfig(
-    document: documentNodeSubscriptionwatchService,
-    varsConstructor: _streamSingleByIdVarsConstructor,
-  );
+        document: documentNodeSubscriptionwatchService,
+        varsConstructor: _streamSingleByIdVarsConstructor,
+      );
   @override
   late final DeleteSingleByIdConfig<Service> baseDeleteSingleByIdConfig =
       DeleteSingleByIdConfig(
-    document: documentNodeMutationdeleteService,
-    varsConstructor: _deleteSingleByIdVarsConstructor,
-  );
+        document: documentNodeMutationdeleteService,
+        varsConstructor: _deleteSingleByIdVarsConstructor,
+      );
   @override
   late final UpdateObjectConfig<Service> baseUpdateObjectConfig =
       UpdateObjectConfig(
-    document: documentNodeMutationupdateService,
-    varsConstructor: _updateServiceVarsConstructor,
-  );
+        document: documentNodeMutationupdateService,
+        varsConstructor: _updateServiceVarsConstructor,
+      );
   @override
   late final CreateObjectConfig<Service> baseCreateObjectConfig =
       CreateObjectConfig(
-    document: documentNodeMutationinsertService,
-    varsConstructor: _createServiceVarsConstructor,
-  );
+        document: documentNodeMutationinsertService,
+        varsConstructor: _createServiceVarsConstructor,
+      );
 
   Json _streamAllVarsConstructor(
     PaginatableStreamRequest<Service, StreamableDAOParameters<Service>?>
-        request,
+    request,
   ) {
     final search = request.param?.search;
     final orderBy = request.param?.orderBy;
@@ -70,30 +70,39 @@ class ServicesDAO extends FullCRUDDAO<Service> {
         request,
         overrideWhere: nameSearch
             ? [
-                ...where?.map((o) => o.toJson()) ?? [],
-                Input_ServicesBoolExp(
-                  $_or: [
-                    Input_ServicesBoolExp(
-                      name: nameSearchExp,
-                    ),
-                    Input_ServicesBoolExp(
-                      classes: Input_ClassesBoolExp(
-                        name: nameSearchExp,
-                      ),
-                    ),
-                    Input_ServicesBoolExp(
-                      groups: Input_GroupsBoolExp(
-                        name: nameSearchExp,
-                      ),
-                    ),
-                  ],
-                ).toJson(),
+                ...?where,
+                Filter(const DotField(), LogicalOperator.or, [
+                  Filter(
+                    ServiceFields().name,
+                    StringOperator.contains,
+                    search,
+                  ),
+                  Filter(
+                    ServiceFields().classes.redirectTo(ClassFields().name),
+                    StringOperator.contains,
+                    search,
+                  ),
+                  Filter(
+                    ServiceFields().groups.redirectTo(GroupFields().name),
+                    StringOperator.contains,
+                    search,
+                  ),
+                ]),
               ]
-            : [],
-        overrideOrderBy: orderBy?.map((o) => o.toJson()).toList() ??
+            : where,
+        overrideOrderBy:
+            orderBy?.toList() ??
             [
-              {'studyYearFromId': 'ASC'},
-              {'studyYearToId': 'ASC'},
+              OrderBy(
+                field: ServiceFields().studyYearFrom.redirectTo(
+                  StudyYearFields().order,
+                ),
+              ),
+              OrderBy(
+                field: ServiceFields().studyYearTo.redirectTo(
+                  StudyYearFields().order,
+                ),
+              ),
             ],
       ),
     };
@@ -121,22 +130,21 @@ class ServicesDAO extends FullCRUDDAO<Service> {
   Json _updateServiceVarsConstructor({
     required Service newObject,
     required Service oldObject,
-  }) =>
-      Variables_Mutation_updateService(
-        serviceId: newObject.id.toUuid(),
-        newService: Input_ServicesSetInput.fromJson(
-          computeObjectDelta(
-            newObject.toJson(),
-            oldObject.toJson(),
-            ignoreFields: {
-              'id',
-              'studyYearFrom',
-              'studyYearTo',
-              'nextService',
-            },
-          ),
-        ),
-      ).toJson();
+  }) => Variables_Mutation_updateService(
+    serviceId: newObject.id.toUuid(),
+    newService: Input_ServicesSetInput.fromJson(
+      computeObjectDelta(
+        newObject.toJson(),
+        oldObject.toJson(),
+        ignoreFields: {
+          'id',
+          'studyYearFrom',
+          'studyYearTo',
+          'nextService',
+        },
+      ),
+    ),
+  ).toJson();
 
   Json _deleteSingleByIdVarsConstructor({required UuidValue id}) =>
       Variables_Mutation_deleteService(serviceId: id).toJson();

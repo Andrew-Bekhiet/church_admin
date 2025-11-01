@@ -27,11 +27,12 @@ class _ViewClassState extends State<ViewClass> {
     ),
   );
 
-  final BehaviorSubject<List<OrderBy>> _personsOrderBy =
-      BehaviorSubject.seeded([
-    OrderBy(field: PersonFields().studyYear),
-    OrderBy(field: PersonFields().name),
-  ]);
+  final BehaviorSubject<List<OrderBy>> _personsOrderBy = BehaviorSubject.seeded(
+    [
+      OrderBy(field: PersonFields().studyYear),
+      OrderBy(field: PersonFields().name),
+    ],
+  );
 
   late final stream = DatabaseService.I.classes.streamSingleById(
     id: widget.classId,
@@ -45,10 +46,17 @@ class _ViewClassState extends State<ViewClass> {
       objectStream: stream,
       childrenTypes: const [Person],
       tabsContentBuilders: {
-        Person: (context) => ViewableObjectList(
-              scrollController: PrimaryScrollController.maybeOf(context),
-              objectsController: _personsController,
+        Person: (context) => StreamBuilder(
+          stream: _personsOrderBy.stream,
+          initialData: _personsOrderBy.value,
+          builder: (context, orderBySnapshot) => ViewableObjectList(
+            scrollController: PrimaryScrollController.maybeOf(context),
+            viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
+              secondLineField: orderBySnapshot.data?.first.getSecondLineField(),
             ),
+            objectsController: _personsController,
+          ),
+        ),
       },
       notFoundBuilder: (context) => Center(
         child: Text(
@@ -69,10 +77,10 @@ class _ViewClassState extends State<ViewClass> {
             name: 'أخر تحديث للبيانات',
             value: $class.lastEdit?.time,
             getHistoryListController: () => ViewableObjectListController(
-              objectsPaginatableStream:
-                  DatabaseService.I.history.paginateEditHistory<Class>(
-                id: $class.id,
-              ),
+              objectsPaginatableStream: DatabaseService.I.history
+                  .paginateEditHistory<Class>(
+                    id: $class.id,
+                  ),
             ),
           ),
           ListTile(
@@ -112,17 +120,17 @@ class _ViewClassState extends State<ViewClass> {
       ),
       floatingActionButtonBuilder: (context, tabController, class$) =>
           FloatingActionButton(
-        onPressed: () {
-          EditPersonRoute(
-            $extra: EditPersonExtra(
-              service: class$.service,
-              studyYear: class$.studyYear,
-              gender: class$.serviceGender,
-            ),
-          ).push(context);
-        },
-        child: const Icon(Symbols.person_add),
-      ),
+            onPressed: () {
+              EditPersonRoute(
+                $extra: EditPersonExtra(
+                  service: class$.service,
+                  studyYear: class$.studyYear,
+                  gender: class$.serviceGender,
+                ),
+              ).push(context);
+            },
+            child: const Icon(Symbols.person_add),
+          ),
     );
   }
 

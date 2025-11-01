@@ -15,8 +15,8 @@ class UsersDAO extends DAOBase<User> with StreamableDAO<User> {
   @override
   late final StreamCountConfig<User> baseStreamCountConfig =
       const StreamCountConfig(
-    document: documentNodeSubscriptionwatchAuthUsersDataCount,
-  );
+        document: documentNodeSubscriptionwatchAuthUsersDataCount,
+      );
   @override
   late final StreamSingleByIdConfig<User> baseStreamSingleByIdConfig =
       const StreamSingleByIdConfig(document: documentNodeSubscriptionwatchUser);
@@ -31,22 +31,21 @@ class UsersDAO extends DAOBase<User> with StreamableDAO<User> {
       overrideOrderBy: [
         ...?orderBy,
         OrderBy(
-          field: UserFields()
-              .permissionsAggregate
-              .redirectTo(AggregateDataFields().count),
+          field: UserFields().permissionsAggregate.redirectTo(
+            AggregateDataFields().count,
+          ),
           value: OrderByValue.desc,
         ),
         OrderBy(field: UserFields().name),
         OrderBy(field: UserFields().email),
-      ].map((o) => o.toSearchJson()).toList(),
+      ],
     );
   }
 
   Json _streamSingleByIdVarsConstructor({
     required UuidValue id,
     bool fullData = false,
-  }) =>
-      Variables_Subscription_watchUser(uid: id, fullData: fullData).toJson();
+  }) => Variables_Subscription_watchUser(uid: id, fullData: fullData).toJson();
 
   @override
   Stream<User?> streamSingleById({
@@ -108,8 +107,9 @@ class UsersDAO extends DAOBase<User> with StreamableDAO<User> {
           uid: userId.toUuid(),
           insertPermissions: difference.added.isNotEmpty,
           deletePermissions: difference.removed.isNotEmpty,
-          permissionsToDelete:
-              difference.removed.map((permission) => permission.name).toList(),
+          permissionsToDelete: difference.removed
+              .map((permission) => permission.name)
+              .toList(),
           permissionsToInsert: difference.added
               .map(
                 (permission) => Input_AuthUsersPermissionsInsertInput(

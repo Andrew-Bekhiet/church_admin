@@ -13,32 +13,32 @@ class GroupsDAO extends FullCRUDDAO<Group> {
   @override
   late final StreamCountConfig<Group> baseStreamCountConfig =
       const StreamCountConfig(
-    document: documentNodeSubscriptionwatchGroupsCount,
-  );
+        document: documentNodeSubscriptionwatchGroupsCount,
+      );
   @override
   late final StreamSingleByIdConfig<Group> baseStreamSingleByIdConfig =
       StreamSingleByIdConfig(
-    document: documentNodeSubscriptionwatchGroup,
-    varsConstructor: _streamSingleByIdVarsConstructor,
-  );
+        document: documentNodeSubscriptionwatchGroup,
+        varsConstructor: _streamSingleByIdVarsConstructor,
+      );
   @override
   late final DeleteSingleByIdConfig<Group> baseDeleteSingleByIdConfig =
       DeleteSingleByIdConfig(
-    document: documentNodeMutationdeleteGroup,
-    varsConstructor: _deleteSingleByIdVarsConstructor,
-  );
+        document: documentNodeMutationdeleteGroup,
+        varsConstructor: _deleteSingleByIdVarsConstructor,
+      );
   @override
   late final UpdateObjectConfig<Group> baseUpdateObjectConfig =
       UpdateObjectConfig(
-    document: documentNodeMutationupdateGroup,
-    varsConstructor: _updateGroupVarsConstructor,
-  );
+        document: documentNodeMutationupdateGroup,
+        varsConstructor: _updateGroupVarsConstructor,
+      );
   @override
   late final CreateObjectConfig<Group> baseCreateObjectConfig =
       CreateObjectConfig(
-    document: documentNodeMutationinsertGroup,
-    varsConstructor: _createGroupVarsConstructor,
-  );
+        document: documentNodeMutationinsertGroup,
+        varsConstructor: _createGroupVarsConstructor,
+      );
 
   Json _streamAllVarsConstructor(
     PaginatableStreamRequest<Group, StreamableDAOParameters<Group>?> request,
@@ -49,13 +49,9 @@ class GroupsDAO extends FullCRUDDAO<Group> {
       request,
       overrideOrderBy: (orderBy?.isEmpty ?? true)
           ? [
-              Input_GroupsOrderBy(
-                validity: Enum_OrderBy.ASC,
-              ),
-              Input_GroupsOrderBy(
-                name: Enum_OrderBy.ASC,
-              ),
-            ].map((o) => o.toJson()).toList()
+              OrderBy(field: GroupFields().validity),
+              OrderBy(field: GroupFields().name),
+            ]
           : null,
     );
   }
@@ -71,11 +67,10 @@ class GroupsDAO extends FullCRUDDAO<Group> {
   Json _updateGroupVarsConstructor({
     required Group newObject,
     required Group oldObject,
-  }) =>
-      Variables_Mutation_updateGroup(
-        groupId: newObject.id.toUuid(),
-        newGroup: newObject.toUpdateInput(oldObject: oldObject),
-      ).toJson();
+  }) => Variables_Mutation_updateGroup(
+    groupId: newObject.id.toUuid(),
+    newGroup: newObject.toUpdateInput(oldObject: oldObject),
+  ).toJson();
 
   Json _deleteSingleByIdVarsConstructor({required UuidValue id}) =>
       Variables_Mutation_deleteGroup(groupId: id).toJson();

@@ -1913,8 +1913,8 @@ class MockDBVarsTransformer extends _i1.Mock implements _i2.DBVarsTransformer {
   Map<String, dynamic>
       transformrequestForPagination<T extends _i2.ViewableWithID>(
     _i2.PaginatableStreamRequest<T, _i2.StreamableDAOParameters<T>?>? request, {
-    List<Map<String, dynamic>>? overrideWhere,
-    List<Map<String, dynamic>>? overrideOrderBy,
+    List<_i2.Filter<Object>>? overrideWhere,
+    List<_i2.OrderBy>? overrideOrderBy,
   }) =>
           (super.noSuchMethod(
             Invocation.method(
