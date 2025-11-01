@@ -14,7 +14,7 @@ class DBVarsTransformer {
     final search = param?.search;
     final where =
         (param?.where ?? overrideWhere)?.map((o) => o.queryToJson()).toList() ??
-        [];
+            [];
     final orderBy = _maybeAddIdOrder(
       (param?.orderBy ??
               overrideOrderBy ??
@@ -64,8 +64,8 @@ class DBVarsTransformer {
   }
 
   Json _nameSearch(String search) => {
-    'name': {'_ilike': '%$search%'},
-  };
+        'name': {'_ilike': '%$search%'},
+      };
 
   Json _whereConditionsForPagination(
     List<OrderBy> orderBy,
@@ -113,8 +113,8 @@ class DBVarsTransformer {
 
   dynamic _getValueByPath(Json orderByClause, ViewableWithID object) =>
       orderByClause.keys.single == 'id'
-      ? object.id
-      : (object as ToJson).toJson().followKeysPath(orderByClause);
+          ? object.id
+          : (object as ToJson).toJson().followKeysPath(orderByClause);
 
   String _getOperatorByDirection(OrderBy orderByClause) {
     return orderByClause.value == OrderByValue.asc ? '_gt' : '_lt';
@@ -143,15 +143,5 @@ extension _ReplaceLeafWith on Json {
             keys.single: (values.single as Json).replaceLeafWith(value),
           }
         : {keys.single: value};
-  }
-}
-
-extension _GetLeaf on Json {
-  dynamic getLeaf() {
-    if (length != 1) throw StateError('The map must have exactly one key');
-
-    return values.single is Json
-        ? (values.single as Json).getLeaf()
-        : values.single;
   }
 }
