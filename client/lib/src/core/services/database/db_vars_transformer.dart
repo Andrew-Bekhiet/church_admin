@@ -15,7 +15,7 @@ class DBVarsTransformer {
     final where =
         (param?.where ?? overrideWhere)?.map((o) => o.queryToJson()).toList() ??
             [];
-    final orderBy = _maybeAddIdOrder(
+    final orderBy = _maybeAddIdOrder<T>(
       (param?.orderBy ??
               overrideOrderBy ??
               [
@@ -43,7 +43,7 @@ class DBVarsTransformer {
     };
   }
 
-  List<OrderBy> _maybeAddIdOrder(List<OrderBy> orderBy) {
+  List<OrderBy> _maybeAddIdOrder<T>(List<OrderBy> orderBy) {
     final hasIdOrder = orderBy.lastOrNull?.field.name == 'id';
 
     if (hasIdOrder) {
@@ -52,15 +52,14 @@ class DBVarsTransformer {
 
     return [
       ...orderBy,
-      OrderBy(
-        field: FieldMetadata<String>(
-          getValue: (o) => o is ID ? o.id : null,
-          label: '',
-          name: 'id',
-          parentType: ID,
-        ),
-      ),
-    ];
+      switch (AdvancedQueriesMetadata()
+          .allQueryablesByType[T]
+          ?.fieldsMetadataByName) {
+        {'id': final idField} => OrderBy(field: idField),
+        {'uid': final uidField} => OrderBy(field: uidField),
+        _ => null,
+      },
+    ].nonNulls.toList();
   }
 
   Json _nameSearch(String search) => {

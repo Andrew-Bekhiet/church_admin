@@ -87,7 +87,10 @@ class FieldMetadata<T extends Object> with EquatableMixin {
         ?.fieldsMetadataByName;
 
     return {
-      name: serializedValue is Map || serializedValue is List
+      name: name == 'id' ||
+              name == 'uid' ||
+              serializedValue is Map ||
+              serializedValue is List
           ? serializedValue
           : subFields?['order']?.serializeOrderBy(serializedValue) ??
               subFields?['name']?.serializeOrderBy(serializedValue) ??
