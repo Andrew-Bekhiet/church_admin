@@ -10,7 +10,7 @@ part 'person.g.dart';
 @freezed
 @JsonSerializable()
 @Queryable(
-  classLabel: 'الأشخاص',
+  classLabel: 'المخدومين',
   ignoreFields: ['blurhash', 'isStudent', 'otherPhones'],
   allowExtension: true,
   labelsOverrides: {
