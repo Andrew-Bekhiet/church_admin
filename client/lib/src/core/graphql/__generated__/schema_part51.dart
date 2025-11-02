@@ -2559,6 +2559,7 @@ class Input_StudyYearsBoolExp {
     attendanceDaysConstraintsAggregate,
     Input_ClassesBoolExp? classes,
     Input_ClassesAggregateBoolExp? classesAggregate,
+    Input_StringComparisonExp? id,
     Input_StringComparisonExp? name,
     Input_SmallintComparisonExp? order,
     Input_PersonsBoolExp? persons,
@@ -2573,6 +2574,7 @@ class Input_StudyYearsBoolExp {
       r'attendanceDaysConstraintsAggregate': attendanceDaysConstraintsAggregate,
     if (classes != null) r'classes': classes,
     if (classesAggregate != null) r'classesAggregate': classesAggregate,
+    if (id != null) r'id': id,
     if (name != null) r'name': name,
     if (order != null) r'order': order,
     if (persons != null) r'persons': persons,
@@ -2640,6 +2642,12 @@ class Input_StudyYearsBoolExp {
               (l$classesAggregate as Map<String, dynamic>),
             );
     }
+    if (data.containsKey('id')) {
+      final l$id = data['id'];
+      result$data['id'] = l$id == null
+          ? null
+          : Input_StringComparisonExp.fromJson((l$id as Map<String, dynamic>));
+    }
     if (data.containsKey('name')) {
       final l$name = data['name'];
       result$data['name'] = l$name == null
@@ -2700,6 +2708,9 @@ class Input_StudyYearsBoolExp {
   Input_ClassesAggregateBoolExp? get classesAggregate =>
       (_$data['classesAggregate'] as Input_ClassesAggregateBoolExp?);
 
+  Input_StringComparisonExp? get id =>
+      (_$data['id'] as Input_StringComparisonExp?);
+
   Input_StringComparisonExp? get name =>
       (_$data['name'] as Input_StringComparisonExp?);
 
@@ -2744,6 +2755,10 @@ class Input_StudyYearsBoolExp {
     if (_$data.containsKey('classesAggregate')) {
       final l$classesAggregate = classesAggregate;
       result$data['classesAggregate'] = l$classesAggregate?.toJson();
+    }
+    if (_$data.containsKey('id')) {
+      final l$id = id;
+      result$data['id'] = l$id?.toJson();
     }
     if (_$data.containsKey('name')) {
       final l$name = name;
@@ -2859,6 +2874,14 @@ class Input_StudyYearsBoolExp {
     if (l$classesAggregate != lOther$classesAggregate) {
       return false;
     }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
+      return false;
+    }
+    if (l$id != lOther$id) {
+      return false;
+    }
     final l$name = name;
     final lOther$name = other.name;
     if (_$data.containsKey('name') != other._$data.containsKey('name')) {
@@ -2905,6 +2928,7 @@ class Input_StudyYearsBoolExp {
         attendanceDaysConstraintsAggregate;
     final l$classes = classes;
     final l$classesAggregate = classesAggregate;
+    final l$id = id;
     final l$name = name;
     final l$order = order;
     final l$persons = persons;
@@ -2929,6 +2953,7 @@ class Input_StudyYearsBoolExp {
           : const {},
       _$data.containsKey('classes') ? l$classes : const {},
       _$data.containsKey('classesAggregate') ? l$classesAggregate : const {},
+      _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('name') ? l$name : const {},
       _$data.containsKey('order') ? l$order : const {},
       _$data.containsKey('persons') ? l$persons : const {},

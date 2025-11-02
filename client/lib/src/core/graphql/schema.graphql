@@ -10,8 +10,8 @@ directive @cached(
 
 type Addresses {
   apartmentNumber: smallint
-  area: Areas!
-  areaId: uuid!
+  area: Areas
+  areaId: uuid
   countryIsoCode: String!
   district: Districts
   districtId: uuid
@@ -24,8 +24,8 @@ type Addresses {
   store: Stores
   storeId: uuid
   storeyNumber: smallint
-  street: Streets!
-  streetId: uuid!
+  street: Streets
+  streetId: uuid
   substreetName: String
 }
 
@@ -1015,6 +1015,7 @@ type Churches {
     where: FathersBoolExp
   ): [Fathers!]!
   id: uuid!
+  isHidden: Boolean!
   name: String!
   persons(
     distinctOn: [PersonsSelectColumn!]
@@ -1038,6 +1039,7 @@ input ChurchesBoolExp {
   _or: [ChurchesBoolExp!]
   fathers: FathersBoolExp
   id: UuidComparisonExp
+  isHidden: BooleanComparisonExp
   name: StringComparisonExp
   persons: PersonsBoolExp
   personsAggregate: PersonsAggregateBoolExp
@@ -1072,6 +1074,7 @@ input ChurchesOnConflict {
 input ChurchesOrderBy {
   fathersAggregate: FathersAggregateOrderBy
   id: OrderBy
+  isHidden: OrderBy
   name: OrderBy
   personsAggregate: PersonsAggregateOrderBy
 }
@@ -1081,6 +1084,7 @@ input ChurchesPkColumnsInput {
 
 enum ChurchesSelectColumn {
   id
+  isHidden
   name
 }
 
@@ -1094,6 +1098,7 @@ input ChurchesStreamCursorInput {
 }
 input ChurchesStreamCursorValueInput {
   id: uuid
+  isHidden: Boolean
   name: String
 }
 
@@ -4934,7 +4939,6 @@ input PersonsBoolExp {
 }
 
 enum PersonsConstraint {
-  idx_persons_clean_name_main_phone_birthdate
   persons_pkey
   persons_uid_key
 }
@@ -6923,6 +6927,7 @@ type StudyYears {
     orderBy: [ClassesOrderBy!]
     where: ClassesBoolExp
   ): ClassesAggregate!
+  id: String
   name: String!
   order: smallint!
   persons(
@@ -6949,6 +6954,7 @@ input StudyYearsBoolExp {
   attendanceDaysConstraintsAggregate: HistoryAttendanceDaysConstraintsAggregateBoolExp
   classes: ClassesBoolExp
   classesAggregate: ClassesAggregateBoolExp
+  id: StringComparisonExp
   name: StringComparisonExp
   order: SmallintComparisonExp
   persons: PersonsBoolExp
@@ -6987,6 +6993,7 @@ input StudyYearsOnConflict {
 input StudyYearsOrderBy {
   attendanceDaysConstraintsAggregate: HistoryAttendanceDaysConstraintsAggregateOrderBy
   classesAggregate: ClassesAggregateOrderBy
+  id: OrderBy
   name: OrderBy
   order: OrderBy
   personsAggregate: PersonsAggregateOrderBy
@@ -6996,6 +7003,7 @@ input StudyYearsPkColumnsInput {
 }
 
 enum StudyYearsSelectColumn {
+  id
   name
   order
 }
@@ -7009,6 +7017,7 @@ input StudyYearsStreamCursorInput {
   ordering: CursorOrdering
 }
 input StudyYearsStreamCursorValueInput {
+  id: String
   name: String
   order: smallint
 }

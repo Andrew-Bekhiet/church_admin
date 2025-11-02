@@ -16,6 +16,7 @@ T _$identity<T>(T value) => value;
 mixin _$Church {
   String get id;
   String get name;
+  bool get isHidden;
 
   /// Create a copy of Church
   /// with the given fields replaced by the non-null parameter values.
@@ -30,16 +31,18 @@ mixin _$Church {
         (other.runtimeType == runtimeType &&
             other is Church &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name));
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.isHidden, isHidden) ||
+                other.isHidden == isHidden));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name);
+  int get hashCode => Object.hash(runtimeType, id, name, isHidden);
 
   @override
   String toString() {
-    return 'Church(id: $id, name: $name)';
+    return 'Church(id: $id, name: $name, isHidden: $isHidden)';
   }
 }
 
@@ -48,7 +51,7 @@ abstract mixin class $ChurchCopyWith<$Res> {
   factory $ChurchCopyWith(Church value, $Res Function(Church) _then) =
       _$ChurchCopyWithImpl;
   @useResult
-  $Res call({String id, String name});
+  $Res call({String id, String name, bool isHidden});
 }
 
 /// @nodoc
@@ -65,6 +68,7 @@ class _$ChurchCopyWithImpl<$Res> implements $ChurchCopyWith<$Res> {
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? isHidden = null,
   }) {
     return _then(Church(
       id: null == id
@@ -75,6 +79,10 @@ class _$ChurchCopyWithImpl<$Res> implements $ChurchCopyWith<$Res> {
           ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
+      isHidden: null == isHidden
+          ? _self.isHidden
+          : isHidden // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }

@@ -8,9 +8,9 @@ class Fragment_Address {
   Fragment_Address({
     required this.id,
     required this.countryIsoCode,
-    required this.area,
+    this.area,
     this.district,
-    required this.street,
+    this.street,
     this.substreetName,
     this.geolocation,
     this.houseNumber,
@@ -36,13 +36,17 @@ class Fragment_Address {
     return Fragment_Address(
       id: stringToUuid(l$id),
       countryIsoCode: (l$countryIsoCode as String),
-      area: Fragment_Area.fromJson((l$area as Map<String, dynamic>)),
+      area: l$area == null
+          ? null
+          : Fragment_Area.fromJson((l$area as Map<String, dynamic>)),
       district: l$district == null
           ? null
           : Fragment_Address_district.fromJson(
               (l$district as Map<String, dynamic>),
             ),
-      street: Fragment_Street.fromJson((l$street as Map<String, dynamic>)),
+      street: l$street == null
+          ? null
+          : Fragment_Street.fromJson((l$street as Map<String, dynamic>)),
       substreetName: (l$substreetName as String?),
       geolocation: (l$geolocation as Map<String, dynamic>?),
       houseNumber: (l$houseNumber as int?),
@@ -57,11 +61,11 @@ class Fragment_Address {
 
   final String countryIsoCode;
 
-  final Fragment_Area area;
+  final Fragment_Area? area;
 
   final Fragment_Address_district? district;
 
-  final Fragment_Street street;
+  final Fragment_Street? street;
 
   final String? substreetName;
 
@@ -84,11 +88,11 @@ class Fragment_Address {
     final l$countryIsoCode = countryIsoCode;
     _resultData['countryIsoCode'] = l$countryIsoCode;
     final l$area = area;
-    _resultData['area'] = l$area.toJson();
+    _resultData['area'] = l$area?.toJson();
     final l$district = district;
     _resultData['district'] = l$district?.toJson();
     final l$street = street;
-    _resultData['street'] = l$street.toJson();
+    _resultData['street'] = l$street?.toJson();
     final l$substreetName = substreetName;
     _resultData['substreetName'] = l$substreetName;
     final l$geolocation = geolocation;
@@ -270,15 +274,13 @@ class _CopyWithImpl_Fragment_Address<TRes>
       countryIsoCode: countryIsoCode == _undefined || countryIsoCode == null
           ? _instance.countryIsoCode
           : (countryIsoCode as String),
-      area: area == _undefined || area == null
-          ? _instance.area
-          : (area as Fragment_Area),
+      area: area == _undefined ? _instance.area : (area as Fragment_Area?),
       district: district == _undefined
           ? _instance.district
           : (district as Fragment_Address_district?),
-      street: street == _undefined || street == null
+      street: street == _undefined
           ? _instance.street
-          : (street as Fragment_Street),
+          : (street as Fragment_Street?),
       substreetName: substreetName == _undefined
           ? _instance.substreetName
           : (substreetName as String?),
@@ -305,7 +307,9 @@ class _CopyWithImpl_Fragment_Address<TRes>
 
   CopyWith_Fragment_Area<TRes> get area {
     final local$area = _instance.area;
-    return CopyWith_Fragment_Area(local$area, (e) => call(area: e));
+    return local$area == null
+        ? CopyWith_Fragment_Area.stub(_then(_instance))
+        : CopyWith_Fragment_Area(local$area, (e) => call(area: e));
   }
 
   CopyWith_Fragment_Address_district<TRes> get district {
@@ -320,7 +324,9 @@ class _CopyWithImpl_Fragment_Address<TRes>
 
   CopyWith_Fragment_Street<TRes> get street {
     final local$street = _instance.street;
-    return CopyWith_Fragment_Street(local$street, (e) => call(street: e));
+    return local$street == null
+        ? CopyWith_Fragment_Street.stub(_then(_instance))
+        : CopyWith_Fragment_Street(local$street, (e) => call(street: e));
   }
 }
 

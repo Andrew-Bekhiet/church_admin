@@ -304,7 +304,6 @@ Enum_PersonTypesUpdateColumn fromJson_Enum_PersonTypesUpdateColumn(
 }
 
 enum Enum_PersonsConstraint {
-  idx_persons_clean_name_main_phone_birthdate,
   persons_pkey,
   persons_uid_key,
   $unknown;
@@ -317,8 +316,6 @@ enum Enum_PersonsConstraint {
 
 String toJson_Enum_PersonsConstraint(Enum_PersonsConstraint e) {
   switch (e) {
-    case Enum_PersonsConstraint.idx_persons_clean_name_main_phone_birthdate:
-      return r'idx_persons_clean_name_main_phone_birthdate';
     case Enum_PersonsConstraint.persons_pkey:
       return r'persons_pkey';
     case Enum_PersonsConstraint.persons_uid_key:
@@ -330,8 +327,6 @@ String toJson_Enum_PersonsConstraint(Enum_PersonsConstraint e) {
 
 Enum_PersonsConstraint fromJson_Enum_PersonsConstraint(String value) {
   switch (value) {
-    case r'idx_persons_clean_name_main_phone_birthdate':
-      return Enum_PersonsConstraint.idx_persons_clean_name_main_phone_birthdate;
     case r'persons_pkey':
       return Enum_PersonsConstraint.persons_pkey;
     case r'persons_uid_key':
@@ -1921,6 +1916,7 @@ Enum_StudyYearsConstraint fromJson_Enum_StudyYearsConstraint(String value) {
 }
 
 enum Enum_StudyYearsSelectColumn {
+  id,
   name,
   order,
   $unknown;
@@ -1933,6 +1929,8 @@ enum Enum_StudyYearsSelectColumn {
 
 String toJson_Enum_StudyYearsSelectColumn(Enum_StudyYearsSelectColumn e) {
   switch (e) {
+    case Enum_StudyYearsSelectColumn.id:
+      return r'id';
     case Enum_StudyYearsSelectColumn.name:
       return r'name';
     case Enum_StudyYearsSelectColumn.order:
@@ -1944,6 +1942,8 @@ String toJson_Enum_StudyYearsSelectColumn(Enum_StudyYearsSelectColumn e) {
 
 Enum_StudyYearsSelectColumn fromJson_Enum_StudyYearsSelectColumn(String value) {
   switch (value) {
+    case r'id':
+      return Enum_StudyYearsSelectColumn.id;
     case r'name':
       return Enum_StudyYearsSelectColumn.name;
     case r'order':

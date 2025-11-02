@@ -29,10 +29,20 @@ class ChurchFields {
     operators: {...StringOperator.values},
   );
 
-  late final List<FieldMetadata<Object>> allFields = [id, name];
+  final FieldMetadata<bool> isHidden = FieldMetadata<bool>(
+    getValue: (obj) => obj is Church ? obj.isHidden : null,
+    parentType: Church,
+    name: 'isHidden',
+    label: 'isHidden',
+    isCodeOnly: false,
+    operators: {...BooleanOperator.values},
+  );
+
+  late final List<FieldMetadata<Object>> allFields = [id, name, isHidden];
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'id': id,
-    'name': name
+    'name': name,
+    'isHidden': isHidden
   };
 }
 
@@ -43,9 +53,11 @@ class ChurchFields {
 Church _$ChurchFromJson(Map json) => Church(
       id: json['id'] as String? ?? '',
       name: json['name'] as String? ?? '',
+      isHidden: json['isHidden'] as bool? ?? true,
     );
 
 Map<String, dynamic> _$ChurchToJson(Church instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
+      'isHidden': instance.isHidden,
     };

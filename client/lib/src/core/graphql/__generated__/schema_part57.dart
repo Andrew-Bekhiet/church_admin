@@ -26,6 +26,7 @@ Enum_ChurchesConstraint fromJson_Enum_ChurchesConstraint(String value) {
 
 enum Enum_ChurchesSelectColumn {
   id,
+  isHidden,
   name,
   $unknown;
 
@@ -39,6 +40,8 @@ String toJson_Enum_ChurchesSelectColumn(Enum_ChurchesSelectColumn e) {
   switch (e) {
     case Enum_ChurchesSelectColumn.id:
       return r'id';
+    case Enum_ChurchesSelectColumn.isHidden:
+      return r'isHidden';
     case Enum_ChurchesSelectColumn.name:
       return r'name';
     case Enum_ChurchesSelectColumn.$unknown:
@@ -50,6 +53,8 @@ Enum_ChurchesSelectColumn fromJson_Enum_ChurchesSelectColumn(String value) {
   switch (value) {
     case r'id':
       return Enum_ChurchesSelectColumn.id;
+    case r'isHidden':
+      return Enum_ChurchesSelectColumn.isHidden;
     case r'name':
       return Enum_ChurchesSelectColumn.name;
     default:

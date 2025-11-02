@@ -26,4 +26,29 @@ class ChurchesDAO extends DAOBase<Church>
   Json _createChurchVarsConstructor({required Church newObject}) => {
         'object': {'name': newObject.name},
       };
+
+  @override
+  PaginatableStreamBase<Church> streamAll({
+    Stream<String?>? searchQuery,
+    Stream<List<Filter>>? where,
+    Stream<List<OrderBy>>? orderBy,
+  }) {
+    return streamingProxy.streamAll(
+      streamAllConfig: baseStreamAllConfig,
+      streamCountConfig: baseStreamCountConfig,
+      searchQuery: searchQuery,
+      where: where ??
+          Stream.value(
+            [
+              Filter(ChurchFields().isHidden, BooleanOperator.is$, false),
+            ],
+          ),
+      orderBy: orderBy ??
+          Stream.value(
+            [
+              OrderBy(field: ChurchFields().name),
+            ],
+          ),
+    );
+  }
 }

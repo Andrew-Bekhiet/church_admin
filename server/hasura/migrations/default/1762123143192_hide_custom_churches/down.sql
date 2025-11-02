@@ -1,0 +1,1 @@
+ALTER TABLE "public"."churches" DROP COLUMN "is_hidden";

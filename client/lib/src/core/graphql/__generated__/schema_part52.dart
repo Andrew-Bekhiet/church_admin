@@ -20,6 +20,7 @@ abstract class CopyWith_Input_StudyYearsBoolExp<TRes> {
     attendanceDaysConstraintsAggregate,
     Input_ClassesBoolExp? classes,
     Input_ClassesAggregateBoolExp? classesAggregate,
+    Input_StringComparisonExp? id,
     Input_StringComparisonExp? name,
     Input_SmallintComparisonExp? order,
     Input_PersonsBoolExp? persons,
@@ -44,6 +45,7 @@ abstract class CopyWith_Input_StudyYearsBoolExp<TRes> {
   get attendanceDaysConstraintsAggregate;
   CopyWith_Input_ClassesBoolExp<TRes> get classes;
   CopyWith_Input_ClassesAggregateBoolExp<TRes> get classesAggregate;
+  CopyWith_Input_StringComparisonExp<TRes> get id;
   CopyWith_Input_StringComparisonExp<TRes> get name;
   CopyWith_Input_SmallintComparisonExp<TRes> get order;
   CopyWith_Input_PersonsBoolExp<TRes> get persons;
@@ -68,6 +70,7 @@ class _CopyWithImpl_Input_StudyYearsBoolExp<TRes>
     Object? attendanceDaysConstraintsAggregate = _undefined,
     Object? classes = _undefined,
     Object? classesAggregate = _undefined,
+    Object? id = _undefined,
     Object? name = _undefined,
     Object? order = _undefined,
     Object? persons = _undefined,
@@ -91,6 +94,7 @@ class _CopyWithImpl_Input_StudyYearsBoolExp<TRes>
       if (classesAggregate != _undefined)
         'classesAggregate':
             (classesAggregate as Input_ClassesAggregateBoolExp?),
+      if (id != _undefined) 'id': (id as Input_StringComparisonExp?),
       if (name != _undefined) 'name': (name as Input_StringComparisonExp?),
       if (order != _undefined) 'order': (order as Input_SmallintComparisonExp?),
       if (persons != _undefined) 'persons': (persons as Input_PersonsBoolExp?),
@@ -175,6 +179,13 @@ class _CopyWithImpl_Input_StudyYearsBoolExp<TRes>
           );
   }
 
+  CopyWith_Input_StringComparisonExp<TRes> get id {
+    final local$id = _instance.id;
+    return local$id == null
+        ? CopyWith_Input_StringComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_StringComparisonExp(local$id, (e) => call(id: e));
+  }
+
   CopyWith_Input_StringComparisonExp<TRes> get name {
     final local$name = _instance.name;
     return local$name == null
@@ -225,6 +236,7 @@ class _CopyWithStubImpl_Input_StudyYearsBoolExp<TRes>
     attendanceDaysConstraintsAggregate,
     Input_ClassesBoolExp? classes,
     Input_ClassesAggregateBoolExp? classesAggregate,
+    Input_StringComparisonExp? id,
     Input_StringComparisonExp? name,
     Input_SmallintComparisonExp? order,
     Input_PersonsBoolExp? persons,
@@ -253,6 +265,9 @@ class _CopyWithStubImpl_Input_StudyYearsBoolExp<TRes>
 
   CopyWith_Input_ClassesAggregateBoolExp<TRes> get classesAggregate =>
       CopyWith_Input_ClassesAggregateBoolExp.stub(_res);
+
+  CopyWith_Input_StringComparisonExp<TRes> get id =>
+      CopyWith_Input_StringComparisonExp.stub(_res);
 
   CopyWith_Input_StringComparisonExp<TRes> get name =>
       CopyWith_Input_StringComparisonExp.stub(_res);
@@ -922,6 +937,7 @@ class Input_StudyYearsOrderBy {
     Input_HistoryAttendanceDaysConstraintsAggregateOrderBy?
     attendanceDaysConstraintsAggregate,
     Input_ClassesAggregateOrderBy? classesAggregate,
+    Enum_OrderBy? id,
     Enum_OrderBy? name,
     Enum_OrderBy? order,
     Input_PersonsAggregateOrderBy? personsAggregate,
@@ -929,6 +945,7 @@ class Input_StudyYearsOrderBy {
     if (attendanceDaysConstraintsAggregate != null)
       r'attendanceDaysConstraintsAggregate': attendanceDaysConstraintsAggregate,
     if (classesAggregate != null) r'classesAggregate': classesAggregate,
+    if (id != null) r'id': id,
     if (name != null) r'name': name,
     if (order != null) r'order': order,
     if (personsAggregate != null) r'personsAggregate': personsAggregate,
@@ -955,6 +972,12 @@ class Input_StudyYearsOrderBy {
           : Input_ClassesAggregateOrderBy.fromJson(
               (l$classesAggregate as Map<String, dynamic>),
             );
+    }
+    if (data.containsKey('id')) {
+      final l$id = data['id'];
+      result$data['id'] = l$id == null
+          ? null
+          : fromJson_Enum_OrderBy((l$id as String));
     }
     if (data.containsKey('name')) {
       final l$name = data['name'];
@@ -989,6 +1012,8 @@ class Input_StudyYearsOrderBy {
   Input_ClassesAggregateOrderBy? get classesAggregate =>
       (_$data['classesAggregate'] as Input_ClassesAggregateOrderBy?);
 
+  Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
+
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
 
   Enum_OrderBy? get order => (_$data['order'] as Enum_OrderBy?);
@@ -1007,6 +1032,10 @@ class Input_StudyYearsOrderBy {
     if (_$data.containsKey('classesAggregate')) {
       final l$classesAggregate = classesAggregate;
       result$data['classesAggregate'] = l$classesAggregate?.toJson();
+    }
+    if (_$data.containsKey('id')) {
+      final l$id = id;
+      result$data['id'] = l$id == null ? null : toJson_Enum_OrderBy(l$id);
     }
     if (_$data.containsKey('name')) {
       final l$name = name;
@@ -1057,6 +1086,14 @@ class Input_StudyYearsOrderBy {
     if (l$classesAggregate != lOther$classesAggregate) {
       return false;
     }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
+      return false;
+    }
+    if (l$id != lOther$id) {
+      return false;
+    }
     final l$name = name;
     final lOther$name = other.name;
     if (_$data.containsKey('name') != other._$data.containsKey('name')) {
@@ -1090,6 +1127,7 @@ class Input_StudyYearsOrderBy {
     final l$attendanceDaysConstraintsAggregate =
         attendanceDaysConstraintsAggregate;
     final l$classesAggregate = classesAggregate;
+    final l$id = id;
     final l$name = name;
     final l$order = order;
     final l$personsAggregate = personsAggregate;
@@ -1098,6 +1136,7 @@ class Input_StudyYearsOrderBy {
           ? l$attendanceDaysConstraintsAggregate
           : const {},
       _$data.containsKey('classesAggregate') ? l$classesAggregate : const {},
+      _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('name') ? l$name : const {},
       _$data.containsKey('order') ? l$order : const {},
       _$data.containsKey('personsAggregate') ? l$personsAggregate : const {},
@@ -1118,6 +1157,7 @@ abstract class CopyWith_Input_StudyYearsOrderBy<TRes> {
     Input_HistoryAttendanceDaysConstraintsAggregateOrderBy?
     attendanceDaysConstraintsAggregate,
     Input_ClassesAggregateOrderBy? classesAggregate,
+    Enum_OrderBy? id,
     Enum_OrderBy? name,
     Enum_OrderBy? order,
     Input_PersonsAggregateOrderBy? personsAggregate,
@@ -1141,6 +1181,7 @@ class _CopyWithImpl_Input_StudyYearsOrderBy<TRes>
   TRes call({
     Object? attendanceDaysConstraintsAggregate = _undefined,
     Object? classesAggregate = _undefined,
+    Object? id = _undefined,
     Object? name = _undefined,
     Object? order = _undefined,
     Object? personsAggregate = _undefined,
@@ -1154,6 +1195,7 @@ class _CopyWithImpl_Input_StudyYearsOrderBy<TRes>
       if (classesAggregate != _undefined)
         'classesAggregate':
             (classesAggregate as Input_ClassesAggregateOrderBy?),
+      if (id != _undefined) 'id': (id as Enum_OrderBy?),
       if (name != _undefined) 'name': (name as Enum_OrderBy?),
       if (order != _undefined) 'order': (order as Enum_OrderBy?),
       if (personsAggregate != _undefined)
@@ -1207,6 +1249,7 @@ class _CopyWithStubImpl_Input_StudyYearsOrderBy<TRes>
     Input_HistoryAttendanceDaysConstraintsAggregateOrderBy?
     attendanceDaysConstraintsAggregate,
     Input_ClassesAggregateOrderBy? classesAggregate,
+    Enum_OrderBy? id,
     Enum_OrderBy? name,
     Enum_OrderBy? order,
     Input_PersonsAggregateOrderBy? personsAggregate,
@@ -1567,11 +1610,15 @@ class _CopyWithStubImpl_Input_StudyYearsStreamCursorInput<TRes>
 }
 
 class Input_StudyYearsStreamCursorValueInput {
-  factory Input_StudyYearsStreamCursorValueInput({String? name, int? order}) =>
-      Input_StudyYearsStreamCursorValueInput._({
-        if (name != null) r'name': name,
-        if (order != null) r'order': order,
-      });
+  factory Input_StudyYearsStreamCursorValueInput({
+    String? id,
+    String? name,
+    int? order,
+  }) => Input_StudyYearsStreamCursorValueInput._({
+    if (id != null) r'id': id,
+    if (name != null) r'name': name,
+    if (order != null) r'order': order,
+  });
 
   Input_StudyYearsStreamCursorValueInput._(this._$data);
 
@@ -1579,6 +1626,10 @@ class Input_StudyYearsStreamCursorValueInput {
     Map<String, dynamic> data,
   ) {
     final result$data = <String, dynamic>{};
+    if (data.containsKey('id')) {
+      final l$id = data['id'];
+      result$data['id'] = (l$id as String?);
+    }
     if (data.containsKey('name')) {
       final l$name = data['name'];
       result$data['name'] = (l$name as String?);
@@ -1592,12 +1643,18 @@ class Input_StudyYearsStreamCursorValueInput {
 
   Map<String, dynamic> _$data;
 
+  String? get id => (_$data['id'] as String?);
+
   String? get name => (_$data['name'] as String?);
 
   int? get order => (_$data['order'] as int?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
+    if (_$data.containsKey('id')) {
+      final l$id = id;
+      result$data['id'] = l$id;
+    }
     if (_$data.containsKey('name')) {
       final l$name = name;
       result$data['name'] = l$name;
@@ -1624,6 +1681,14 @@ class Input_StudyYearsStreamCursorValueInput {
         runtimeType != other.runtimeType) {
       return false;
     }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
+      return false;
+    }
+    if (l$id != lOther$id) {
+      return false;
+    }
     final l$name = name;
     final lOther$name = other.name;
     if (_$data.containsKey('name') != other._$data.containsKey('name')) {
@@ -1645,9 +1710,11 @@ class Input_StudyYearsStreamCursorValueInput {
 
   @override
   int get hashCode {
+    final l$id = id;
     final l$name = name;
     final l$order = order;
     return Object.hashAll([
+      _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('name') ? l$name : const {},
       _$data.containsKey('order') ? l$order : const {},
     ]);
@@ -1663,7 +1730,7 @@ abstract class CopyWith_Input_StudyYearsStreamCursorValueInput<TRes> {
   factory CopyWith_Input_StudyYearsStreamCursorValueInput.stub(TRes res) =
       _CopyWithStubImpl_Input_StudyYearsStreamCursorValueInput;
 
-  TRes call({String? name, int? order});
+  TRes call({String? id, String? name, int? order});
 }
 
 class _CopyWithImpl_Input_StudyYearsStreamCursorValueInput<TRes>
@@ -1679,9 +1746,14 @@ class _CopyWithImpl_Input_StudyYearsStreamCursorValueInput<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? name = _undefined, Object? order = _undefined}) => _then(
+  TRes call({
+    Object? id = _undefined,
+    Object? name = _undefined,
+    Object? order = _undefined,
+  }) => _then(
     Input_StudyYearsStreamCursorValueInput._({
       ..._instance._$data,
+      if (id != _undefined) 'id': (id as String?),
       if (name != _undefined) 'name': (name as String?),
       if (order != _undefined) 'order': (order as int?),
     }),
@@ -1694,7 +1766,7 @@ class _CopyWithStubImpl_Input_StudyYearsStreamCursorValueInput<TRes>
 
   TRes _res;
 
-  call({String? name, int? order}) => _res;
+  call({String? id, String? name, int? order}) => _res;
 }
 
 class Input_StudyYearsUpdates {
@@ -2465,160 +2537,6 @@ class Input_TagsInsertInput {
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('name') ? l$name : const {},
       _$data.containsKey('persons') ? l$persons : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_TagsInsertInput<TRes> {
-  factory CopyWith_Input_TagsInsertInput(
-    Input_TagsInsertInput instance,
-    TRes Function(Input_TagsInsertInput) then,
-  ) = _CopyWithImpl_Input_TagsInsertInput;
-
-  factory CopyWith_Input_TagsInsertInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_TagsInsertInput;
-
-  TRes call({
-    int? color,
-    String? name,
-    Input_PersonsTagsArrRelInsertInput? persons,
-  });
-  CopyWith_Input_PersonsTagsArrRelInsertInput<TRes> get persons;
-}
-
-class _CopyWithImpl_Input_TagsInsertInput<TRes>
-    implements CopyWith_Input_TagsInsertInput<TRes> {
-  _CopyWithImpl_Input_TagsInsertInput(this._instance, this._then);
-
-  final Input_TagsInsertInput _instance;
-
-  final TRes Function(Input_TagsInsertInput) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? color = _undefined,
-    Object? name = _undefined,
-    Object? persons = _undefined,
-  }) => _then(
-    Input_TagsInsertInput._({
-      ..._instance._$data,
-      if (color != _undefined) 'color': (color as int?),
-      if (name != _undefined) 'name': (name as String?),
-      if (persons != _undefined)
-        'persons': (persons as Input_PersonsTagsArrRelInsertInput?),
-    }),
-  );
-
-  CopyWith_Input_PersonsTagsArrRelInsertInput<TRes> get persons {
-    final local$persons = _instance.persons;
-    return local$persons == null
-        ? CopyWith_Input_PersonsTagsArrRelInsertInput.stub(_then(_instance))
-        : CopyWith_Input_PersonsTagsArrRelInsertInput(
-            local$persons,
-            (e) => call(persons: e),
-          );
-  }
-}
-
-class _CopyWithStubImpl_Input_TagsInsertInput<TRes>
-    implements CopyWith_Input_TagsInsertInput<TRes> {
-  _CopyWithStubImpl_Input_TagsInsertInput(this._res);
-
-  TRes _res;
-
-  call({
-    int? color,
-    String? name,
-    Input_PersonsTagsArrRelInsertInput? persons,
-  }) => _res;
-
-  CopyWith_Input_PersonsTagsArrRelInsertInput<TRes> get persons =>
-      CopyWith_Input_PersonsTagsArrRelInsertInput.stub(_res);
-}
-
-class Input_TagsObjRelInsertInput {
-  factory Input_TagsObjRelInsertInput({
-    required Input_TagsInsertInput data,
-    Input_TagsOnConflict? onConflict,
-  }) => Input_TagsObjRelInsertInput._({
-    r'data': data,
-    if (onConflict != null) r'onConflict': onConflict,
-  });
-
-  Input_TagsObjRelInsertInput._(this._$data);
-
-  factory Input_TagsObjRelInsertInput.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    final l$data = data['data'];
-    result$data['data'] = Input_TagsInsertInput.fromJson(
-      (l$data as Map<String, dynamic>),
-    );
-    if (data.containsKey('onConflict')) {
-      final l$onConflict = data['onConflict'];
-      result$data['onConflict'] = l$onConflict == null
-          ? null
-          : Input_TagsOnConflict.fromJson(
-              (l$onConflict as Map<String, dynamic>),
-            );
-    }
-    return Input_TagsObjRelInsertInput._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  Input_TagsInsertInput get data => (_$data['data'] as Input_TagsInsertInput);
-
-  Input_TagsOnConflict? get onConflict =>
-      (_$data['onConflict'] as Input_TagsOnConflict?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    final l$data = data;
-    result$data['data'] = l$data.toJson();
-    if (_$data.containsKey('onConflict')) {
-      final l$onConflict = onConflict;
-      result$data['onConflict'] = l$onConflict?.toJson();
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_TagsObjRelInsertInput<Input_TagsObjRelInsertInput>
-  get copyWith => CopyWith_Input_TagsObjRelInsertInput(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_TagsObjRelInsertInput ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$data = data;
-    final lOther$data = other.data;
-    if (l$data != lOther$data) {
-      return false;
-    }
-    final l$onConflict = onConflict;
-    final lOther$onConflict = other.onConflict;
-    if (_$data.containsKey('onConflict') !=
-        other._$data.containsKey('onConflict')) {
-      return false;
-    }
-    if (l$onConflict != lOther$onConflict) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$data = data;
-    final l$onConflict = onConflict;
-    return Object.hashAll([
-      l$data,
-      _$data.containsKey('onConflict') ? l$onConflict : const {},
     ]);
   }
 }

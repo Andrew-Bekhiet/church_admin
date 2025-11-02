@@ -20,6 +20,8 @@ insert_permissions:
   - role: user
     permission:
       check: {}
+      set:
+        is_hidden: "true"
       columns:
         - name
 select_permissions:
@@ -27,6 +29,7 @@ select_permissions:
     permission:
       columns:
         - id
+        - is_hidden
         - name
       filter: {}
 update_permissions:

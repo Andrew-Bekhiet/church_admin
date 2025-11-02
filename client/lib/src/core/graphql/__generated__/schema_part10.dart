@@ -2,6 +2,181 @@
 part of "schema.graphql.dart";
 
 
+abstract class CopyWith_Input_ChurchesStreamCursorInput<TRes> {
+  factory CopyWith_Input_ChurchesStreamCursorInput(
+    Input_ChurchesStreamCursorInput instance,
+    TRes Function(Input_ChurchesStreamCursorInput) then,
+  ) = _CopyWithImpl_Input_ChurchesStreamCursorInput;
+
+  factory CopyWith_Input_ChurchesStreamCursorInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_ChurchesStreamCursorInput;
+
+  TRes call({
+    Input_ChurchesStreamCursorValueInput? initialValue,
+    Enum_CursorOrdering? ordering,
+  });
+  CopyWith_Input_ChurchesStreamCursorValueInput<TRes> get initialValue;
+}
+
+class _CopyWithImpl_Input_ChurchesStreamCursorInput<TRes>
+    implements CopyWith_Input_ChurchesStreamCursorInput<TRes> {
+  _CopyWithImpl_Input_ChurchesStreamCursorInput(this._instance, this._then);
+
+  final Input_ChurchesStreamCursorInput _instance;
+
+  final TRes Function(Input_ChurchesStreamCursorInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? initialValue = _undefined,
+    Object? ordering = _undefined,
+  }) => _then(
+    Input_ChurchesStreamCursorInput._({
+      ..._instance._$data,
+      if (initialValue != _undefined && initialValue != null)
+        'initialValue': (initialValue as Input_ChurchesStreamCursorValueInput),
+      if (ordering != _undefined)
+        'ordering': (ordering as Enum_CursorOrdering?),
+    }),
+  );
+
+  CopyWith_Input_ChurchesStreamCursorValueInput<TRes> get initialValue {
+    final local$initialValue = _instance.initialValue;
+    return CopyWith_Input_ChurchesStreamCursorValueInput(
+      local$initialValue,
+      (e) => call(initialValue: e),
+    );
+  }
+}
+
+class _CopyWithStubImpl_Input_ChurchesStreamCursorInput<TRes>
+    implements CopyWith_Input_ChurchesStreamCursorInput<TRes> {
+  _CopyWithStubImpl_Input_ChurchesStreamCursorInput(this._res);
+
+  TRes _res;
+
+  call({
+    Input_ChurchesStreamCursorValueInput? initialValue,
+    Enum_CursorOrdering? ordering,
+  }) => _res;
+
+  CopyWith_Input_ChurchesStreamCursorValueInput<TRes> get initialValue =>
+      CopyWith_Input_ChurchesStreamCursorValueInput.stub(_res);
+}
+
+class Input_ChurchesStreamCursorValueInput {
+  factory Input_ChurchesStreamCursorValueInput({
+    UuidValue? id,
+    bool? isHidden,
+    String? name,
+  }) => Input_ChurchesStreamCursorValueInput._({
+    if (id != null) r'id': id,
+    if (isHidden != null) r'isHidden': isHidden,
+    if (name != null) r'name': name,
+  });
+
+  Input_ChurchesStreamCursorValueInput._(this._$data);
+
+  factory Input_ChurchesStreamCursorValueInput.fromJson(
+    Map<String, dynamic> data,
+  ) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('id')) {
+      final l$id = data['id'];
+      result$data['id'] = l$id == null ? null : stringToUuid(l$id);
+    }
+    if (data.containsKey('isHidden')) {
+      final l$isHidden = data['isHidden'];
+      result$data['isHidden'] = (l$isHidden as bool?);
+    }
+    if (data.containsKey('name')) {
+      final l$name = data['name'];
+      result$data['name'] = (l$name as String?);
+    }
+    return Input_ChurchesStreamCursorValueInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  UuidValue? get id => (_$data['id'] as UuidValue?);
+
+  bool? get isHidden => (_$data['isHidden'] as bool?);
+
+  String? get name => (_$data['name'] as String?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('id')) {
+      final l$id = id;
+      result$data['id'] = l$id == null ? null : uuidToString(l$id);
+    }
+    if (_$data.containsKey('isHidden')) {
+      final l$isHidden = isHidden;
+      result$data['isHidden'] = l$isHidden;
+    }
+    if (_$data.containsKey('name')) {
+      final l$name = name;
+      result$data['name'] = l$name;
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_ChurchesStreamCursorValueInput<
+    Input_ChurchesStreamCursorValueInput
+  >
+  get copyWith => CopyWith_Input_ChurchesStreamCursorValueInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_ChurchesStreamCursorValueInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
+      return false;
+    }
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$isHidden = isHidden;
+    final lOther$isHidden = other.isHidden;
+    if (_$data.containsKey('isHidden') !=
+        other._$data.containsKey('isHidden')) {
+      return false;
+    }
+    if (l$isHidden != lOther$isHidden) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (_$data.containsKey('name') != other._$data.containsKey('name')) {
+      return false;
+    }
+    if (l$name != lOther$name) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$isHidden = isHidden;
+    final l$name = name;
+    return Object.hashAll([
+      _$data.containsKey('id') ? l$id : const {},
+      _$data.containsKey('isHidden') ? l$isHidden : const {},
+      _$data.containsKey('name') ? l$name : const {},
+    ]);
+  }
+}
+
 abstract class CopyWith_Input_ChurchesStreamCursorValueInput<TRes> {
   factory CopyWith_Input_ChurchesStreamCursorValueInput(
     Input_ChurchesStreamCursorValueInput instance,
@@ -11,7 +186,7 @@ abstract class CopyWith_Input_ChurchesStreamCursorValueInput<TRes> {
   factory CopyWith_Input_ChurchesStreamCursorValueInput.stub(TRes res) =
       _CopyWithStubImpl_Input_ChurchesStreamCursorValueInput;
 
-  TRes call({UuidValue? id, String? name});
+  TRes call({UuidValue? id, bool? isHidden, String? name});
 }
 
 class _CopyWithImpl_Input_ChurchesStreamCursorValueInput<TRes>
@@ -27,10 +202,15 @@ class _CopyWithImpl_Input_ChurchesStreamCursorValueInput<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? id = _undefined, Object? name = _undefined}) => _then(
+  TRes call({
+    Object? id = _undefined,
+    Object? isHidden = _undefined,
+    Object? name = _undefined,
+  }) => _then(
     Input_ChurchesStreamCursorValueInput._({
       ..._instance._$data,
       if (id != _undefined) 'id': (id as UuidValue?),
+      if (isHidden != _undefined) 'isHidden': (isHidden as bool?),
       if (name != _undefined) 'name': (name as String?),
     }),
   );
@@ -42,7 +222,7 @@ class _CopyWithStubImpl_Input_ChurchesStreamCursorValueInput<TRes>
 
   TRes _res;
 
-  call({UuidValue? id, String? name}) => _res;
+  call({UuidValue? id, bool? isHidden, String? name}) => _res;
 }
 
 class Input_ChurchesUpdates {

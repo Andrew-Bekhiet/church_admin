@@ -12,13 +12,18 @@ class Church extends ViewableWithID with _$Church implements SerializableExtra {
   @override
   @JsonKey(defaultValue: '')
   final String id;
+
   @override
   @JsonKey(defaultValue: '')
   final String name;
 
+  @override
+  final bool isHidden;
+
   const Church({
     required this.id,
     required this.name,
+    this.isHidden = true,
   });
 
   factory Church.fromJson(Map<String, Object?> json) => _$ChurchFromJson(json);

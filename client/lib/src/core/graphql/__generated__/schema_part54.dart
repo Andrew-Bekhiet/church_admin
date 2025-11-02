@@ -2,6 +2,153 @@
 part of "schema.graphql.dart";
 
 
+abstract class CopyWith_Input_UniversitiesInsertInput<TRes> {
+  factory CopyWith_Input_UniversitiesInsertInput(
+    Input_UniversitiesInsertInput instance,
+    TRes Function(Input_UniversitiesInsertInput) then,
+  ) = _CopyWithImpl_Input_UniversitiesInsertInput;
+
+  factory CopyWith_Input_UniversitiesInsertInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_UniversitiesInsertInput;
+
+  TRes call({Input_CollegesArrRelInsertInput? colleges, String? name});
+  CopyWith_Input_CollegesArrRelInsertInput<TRes> get colleges;
+}
+
+class _CopyWithImpl_Input_UniversitiesInsertInput<TRes>
+    implements CopyWith_Input_UniversitiesInsertInput<TRes> {
+  _CopyWithImpl_Input_UniversitiesInsertInput(this._instance, this._then);
+
+  final Input_UniversitiesInsertInput _instance;
+
+  final TRes Function(Input_UniversitiesInsertInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? colleges = _undefined, Object? name = _undefined}) =>
+      _then(
+        Input_UniversitiesInsertInput._({
+          ..._instance._$data,
+          if (colleges != _undefined)
+            'colleges': (colleges as Input_CollegesArrRelInsertInput?),
+          if (name != _undefined) 'name': (name as String?),
+        }),
+      );
+
+  CopyWith_Input_CollegesArrRelInsertInput<TRes> get colleges {
+    final local$colleges = _instance.colleges;
+    return local$colleges == null
+        ? CopyWith_Input_CollegesArrRelInsertInput.stub(_then(_instance))
+        : CopyWith_Input_CollegesArrRelInsertInput(
+            local$colleges,
+            (e) => call(colleges: e),
+          );
+  }
+}
+
+class _CopyWithStubImpl_Input_UniversitiesInsertInput<TRes>
+    implements CopyWith_Input_UniversitiesInsertInput<TRes> {
+  _CopyWithStubImpl_Input_UniversitiesInsertInput(this._res);
+
+  TRes _res;
+
+  call({Input_CollegesArrRelInsertInput? colleges, String? name}) => _res;
+
+  CopyWith_Input_CollegesArrRelInsertInput<TRes> get colleges =>
+      CopyWith_Input_CollegesArrRelInsertInput.stub(_res);
+}
+
+class Input_UniversitiesObjRelInsertInput {
+  factory Input_UniversitiesObjRelInsertInput({
+    required Input_UniversitiesInsertInput data,
+    Input_UniversitiesOnConflict? onConflict,
+  }) => Input_UniversitiesObjRelInsertInput._({
+    r'data': data,
+    if (onConflict != null) r'onConflict': onConflict,
+  });
+
+  Input_UniversitiesObjRelInsertInput._(this._$data);
+
+  factory Input_UniversitiesObjRelInsertInput.fromJson(
+    Map<String, dynamic> data,
+  ) {
+    final result$data = <String, dynamic>{};
+    final l$data = data['data'];
+    result$data['data'] = Input_UniversitiesInsertInput.fromJson(
+      (l$data as Map<String, dynamic>),
+    );
+    if (data.containsKey('onConflict')) {
+      final l$onConflict = data['onConflict'];
+      result$data['onConflict'] = l$onConflict == null
+          ? null
+          : Input_UniversitiesOnConflict.fromJson(
+              (l$onConflict as Map<String, dynamic>),
+            );
+    }
+    return Input_UniversitiesObjRelInsertInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Input_UniversitiesInsertInput get data =>
+      (_$data['data'] as Input_UniversitiesInsertInput);
+
+  Input_UniversitiesOnConflict? get onConflict =>
+      (_$data['onConflict'] as Input_UniversitiesOnConflict?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$data = data;
+    result$data['data'] = l$data.toJson();
+    if (_$data.containsKey('onConflict')) {
+      final l$onConflict = onConflict;
+      result$data['onConflict'] = l$onConflict?.toJson();
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_UniversitiesObjRelInsertInput<
+    Input_UniversitiesObjRelInsertInput
+  >
+  get copyWith => CopyWith_Input_UniversitiesObjRelInsertInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_UniversitiesObjRelInsertInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$data = data;
+    final lOther$data = other.data;
+    if (l$data != lOther$data) {
+      return false;
+    }
+    final l$onConflict = onConflict;
+    final lOther$onConflict = other.onConflict;
+    if (_$data.containsKey('onConflict') !=
+        other._$data.containsKey('onConflict')) {
+      return false;
+    }
+    if (l$onConflict != lOther$onConflict) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$data = data;
+    final l$onConflict = onConflict;
+    return Object.hashAll([
+      l$data,
+      _$data.containsKey('onConflict') ? l$onConflict : const {},
+    ]);
+  }
+}
+
 abstract class CopyWith_Input_UniversitiesObjRelInsertInput<TRes> {
   factory CopyWith_Input_UniversitiesObjRelInsertInput(
     Input_UniversitiesObjRelInsertInput instance,

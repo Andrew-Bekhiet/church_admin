@@ -915,6 +915,7 @@ class Input_ChurchesBoolExp {
     List<Input_ChurchesBoolExp>? $_or,
     Input_FathersBoolExp? fathers,
     Input_UuidComparisonExp? id,
+    Input_BooleanComparisonExp? isHidden,
     Input_StringComparisonExp? name,
     Input_PersonsBoolExp? persons,
     Input_PersonsAggregateBoolExp? personsAggregate,
@@ -924,6 +925,7 @@ class Input_ChurchesBoolExp {
     if ($_or != null) r'_or': $_or,
     if (fathers != null) r'fathers': fathers,
     if (id != null) r'id': id,
+    if (isHidden != null) r'isHidden': isHidden,
     if (name != null) r'name': name,
     if (persons != null) r'persons': persons,
     if (personsAggregate != null) r'personsAggregate': personsAggregate,
@@ -967,6 +969,14 @@ class Input_ChurchesBoolExp {
           ? null
           : Input_UuidComparisonExp.fromJson((l$id as Map<String, dynamic>));
     }
+    if (data.containsKey('isHidden')) {
+      final l$isHidden = data['isHidden'];
+      result$data['isHidden'] = l$isHidden == null
+          ? null
+          : Input_BooleanComparisonExp.fromJson(
+              (l$isHidden as Map<String, dynamic>),
+            );
+    }
     if (data.containsKey('name')) {
       final l$name = data['name'];
       result$data['name'] = l$name == null
@@ -1008,6 +1018,9 @@ class Input_ChurchesBoolExp {
 
   Input_UuidComparisonExp? get id => (_$data['id'] as Input_UuidComparisonExp?);
 
+  Input_BooleanComparisonExp? get isHidden =>
+      (_$data['isHidden'] as Input_BooleanComparisonExp?);
+
   Input_StringComparisonExp? get name =>
       (_$data['name'] as Input_StringComparisonExp?);
 
@@ -1038,6 +1051,10 @@ class Input_ChurchesBoolExp {
     if (_$data.containsKey('id')) {
       final l$id = id;
       result$data['id'] = l$id?.toJson();
+    }
+    if (_$data.containsKey('isHidden')) {
+      final l$isHidden = isHidden;
+      result$data['isHidden'] = l$isHidden?.toJson();
     }
     if (_$data.containsKey('name')) {
       final l$name = name;
@@ -1127,6 +1144,15 @@ class Input_ChurchesBoolExp {
     if (l$id != lOther$id) {
       return false;
     }
+    final l$isHidden = isHidden;
+    final lOther$isHidden = other.isHidden;
+    if (_$data.containsKey('isHidden') !=
+        other._$data.containsKey('isHidden')) {
+      return false;
+    }
+    if (l$isHidden != lOther$isHidden) {
+      return false;
+    }
     final l$name = name;
     final lOther$name = other.name;
     if (_$data.containsKey('name') != other._$data.containsKey('name')) {
@@ -1162,6 +1188,7 @@ class Input_ChurchesBoolExp {
     final l$$_or = $_or;
     final l$fathers = fathers;
     final l$id = id;
+    final l$isHidden = isHidden;
     final l$name = name;
     final l$persons = persons;
     final l$personsAggregate = personsAggregate;
@@ -1179,6 +1206,7 @@ class Input_ChurchesBoolExp {
           : const {},
       _$data.containsKey('fathers') ? l$fathers : const {},
       _$data.containsKey('id') ? l$id : const {},
+      _$data.containsKey('isHidden') ? l$isHidden : const {},
       _$data.containsKey('name') ? l$name : const {},
       _$data.containsKey('persons') ? l$persons : const {},
       _$data.containsKey('personsAggregate') ? l$personsAggregate : const {},
@@ -1201,6 +1229,7 @@ abstract class CopyWith_Input_ChurchesBoolExp<TRes> {
     List<Input_ChurchesBoolExp>? $_or,
     Input_FathersBoolExp? fathers,
     Input_UuidComparisonExp? id,
+    Input_BooleanComparisonExp? isHidden,
     Input_StringComparisonExp? name,
     Input_PersonsBoolExp? persons,
     Input_PersonsAggregateBoolExp? personsAggregate,
@@ -1220,6 +1249,7 @@ abstract class CopyWith_Input_ChurchesBoolExp<TRes> {
   );
   CopyWith_Input_FathersBoolExp<TRes> get fathers;
   CopyWith_Input_UuidComparisonExp<TRes> get id;
+  CopyWith_Input_BooleanComparisonExp<TRes> get isHidden;
   CopyWith_Input_StringComparisonExp<TRes> get name;
   CopyWith_Input_PersonsBoolExp<TRes> get persons;
   CopyWith_Input_PersonsAggregateBoolExp<TRes> get personsAggregate;
@@ -1241,6 +1271,7 @@ class _CopyWithImpl_Input_ChurchesBoolExp<TRes>
     Object? $_or = _undefined,
     Object? fathers = _undefined,
     Object? id = _undefined,
+    Object? isHidden = _undefined,
     Object? name = _undefined,
     Object? persons = _undefined,
     Object? personsAggregate = _undefined,
@@ -1252,6 +1283,8 @@ class _CopyWithImpl_Input_ChurchesBoolExp<TRes>
       if ($_or != _undefined) '_or': ($_or as List<Input_ChurchesBoolExp>?),
       if (fathers != _undefined) 'fathers': (fathers as Input_FathersBoolExp?),
       if (id != _undefined) 'id': (id as Input_UuidComparisonExp?),
+      if (isHidden != _undefined)
+        'isHidden': (isHidden as Input_BooleanComparisonExp?),
       if (name != _undefined) 'name': (name as Input_StringComparisonExp?),
       if (persons != _undefined) 'persons': (persons as Input_PersonsBoolExp?),
       if (personsAggregate != _undefined)
@@ -1303,6 +1336,16 @@ class _CopyWithImpl_Input_ChurchesBoolExp<TRes>
         : CopyWith_Input_UuidComparisonExp(local$id, (e) => call(id: e));
   }
 
+  CopyWith_Input_BooleanComparisonExp<TRes> get isHidden {
+    final local$isHidden = _instance.isHidden;
+    return local$isHidden == null
+        ? CopyWith_Input_BooleanComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_BooleanComparisonExp(
+            local$isHidden,
+            (e) => call(isHidden: e),
+          );
+  }
+
   CopyWith_Input_StringComparisonExp<TRes> get name {
     final local$name = _instance.name;
     return local$name == null
@@ -1340,6 +1383,7 @@ class _CopyWithStubImpl_Input_ChurchesBoolExp<TRes>
     List<Input_ChurchesBoolExp>? $_or,
     Input_FathersBoolExp? fathers,
     Input_UuidComparisonExp? id,
+    Input_BooleanComparisonExp? isHidden,
     Input_StringComparisonExp? name,
     Input_PersonsBoolExp? persons,
     Input_PersonsAggregateBoolExp? personsAggregate,
@@ -1357,6 +1401,9 @@ class _CopyWithStubImpl_Input_ChurchesBoolExp<TRes>
 
   CopyWith_Input_UuidComparisonExp<TRes> get id =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
+  CopyWith_Input_BooleanComparisonExp<TRes> get isHidden =>
+      CopyWith_Input_BooleanComparisonExp.stub(_res);
 
   CopyWith_Input_StringComparisonExp<TRes> get name =>
       CopyWith_Input_StringComparisonExp.stub(_res);
@@ -1925,11 +1972,13 @@ class Input_ChurchesOrderBy {
   factory Input_ChurchesOrderBy({
     Input_FathersAggregateOrderBy? fathersAggregate,
     Enum_OrderBy? id,
+    Enum_OrderBy? isHidden,
     Enum_OrderBy? name,
     Input_PersonsAggregateOrderBy? personsAggregate,
   }) => Input_ChurchesOrderBy._({
     if (fathersAggregate != null) r'fathersAggregate': fathersAggregate,
     if (id != null) r'id': id,
+    if (isHidden != null) r'isHidden': isHidden,
     if (name != null) r'name': name,
     if (personsAggregate != null) r'personsAggregate': personsAggregate,
   });
@@ -1951,6 +2000,12 @@ class Input_ChurchesOrderBy {
       result$data['id'] = l$id == null
           ? null
           : fromJson_Enum_OrderBy((l$id as String));
+    }
+    if (data.containsKey('isHidden')) {
+      final l$isHidden = data['isHidden'];
+      result$data['isHidden'] = l$isHidden == null
+          ? null
+          : fromJson_Enum_OrderBy((l$isHidden as String));
     }
     if (data.containsKey('name')) {
       final l$name = data['name'];
@@ -1976,6 +2031,8 @@ class Input_ChurchesOrderBy {
 
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
 
+  Enum_OrderBy? get isHidden => (_$data['isHidden'] as Enum_OrderBy?);
+
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
 
   Input_PersonsAggregateOrderBy? get personsAggregate =>
@@ -1990,6 +2047,12 @@ class Input_ChurchesOrderBy {
     if (_$data.containsKey('id')) {
       final l$id = id;
       result$data['id'] = l$id == null ? null : toJson_Enum_OrderBy(l$id);
+    }
+    if (_$data.containsKey('isHidden')) {
+      final l$isHidden = isHidden;
+      result$data['isHidden'] = l$isHidden == null
+          ? null
+          : toJson_Enum_OrderBy(l$isHidden);
     }
     if (_$data.containsKey('name')) {
       final l$name = name;
@@ -2030,6 +2093,15 @@ class Input_ChurchesOrderBy {
     if (l$id != lOther$id) {
       return false;
     }
+    final l$isHidden = isHidden;
+    final lOther$isHidden = other.isHidden;
+    if (_$data.containsKey('isHidden') !=
+        other._$data.containsKey('isHidden')) {
+      return false;
+    }
+    if (l$isHidden != lOther$isHidden) {
+      return false;
+    }
     final l$name = name;
     final lOther$name = other.name;
     if (_$data.containsKey('name') != other._$data.containsKey('name')) {
@@ -2054,11 +2126,13 @@ class Input_ChurchesOrderBy {
   int get hashCode {
     final l$fathersAggregate = fathersAggregate;
     final l$id = id;
+    final l$isHidden = isHidden;
     final l$name = name;
     final l$personsAggregate = personsAggregate;
     return Object.hashAll([
       _$data.containsKey('fathersAggregate') ? l$fathersAggregate : const {},
       _$data.containsKey('id') ? l$id : const {},
+      _$data.containsKey('isHidden') ? l$isHidden : const {},
       _$data.containsKey('name') ? l$name : const {},
       _$data.containsKey('personsAggregate') ? l$personsAggregate : const {},
     ]);
@@ -2077,6 +2151,7 @@ abstract class CopyWith_Input_ChurchesOrderBy<TRes> {
   TRes call({
     Input_FathersAggregateOrderBy? fathersAggregate,
     Enum_OrderBy? id,
+    Enum_OrderBy? isHidden,
     Enum_OrderBy? name,
     Input_PersonsAggregateOrderBy? personsAggregate,
   });
@@ -2097,6 +2172,7 @@ class _CopyWithImpl_Input_ChurchesOrderBy<TRes>
   TRes call({
     Object? fathersAggregate = _undefined,
     Object? id = _undefined,
+    Object? isHidden = _undefined,
     Object? name = _undefined,
     Object? personsAggregate = _undefined,
   }) => _then(
@@ -2106,6 +2182,7 @@ class _CopyWithImpl_Input_ChurchesOrderBy<TRes>
         'fathersAggregate':
             (fathersAggregate as Input_FathersAggregateOrderBy?),
       if (id != _undefined) 'id': (id as Enum_OrderBy?),
+      if (isHidden != _undefined) 'isHidden': (isHidden as Enum_OrderBy?),
       if (name != _undefined) 'name': (name as Enum_OrderBy?),
       if (personsAggregate != _undefined)
         'personsAggregate':
@@ -2143,6 +2220,7 @@ class _CopyWithStubImpl_Input_ChurchesOrderBy<TRes>
   call({
     Input_FathersAggregateOrderBy? fathersAggregate,
     Enum_OrderBy? id,
+    Enum_OrderBy? isHidden,
     Enum_OrderBy? name,
     Input_PersonsAggregateOrderBy? personsAggregate,
   }) => _res;
@@ -2423,156 +2501,6 @@ class Input_ChurchesStreamCursorInput {
     return Object.hashAll([
       l$initialValue,
       _$data.containsKey('ordering') ? l$ordering : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_ChurchesStreamCursorInput<TRes> {
-  factory CopyWith_Input_ChurchesStreamCursorInput(
-    Input_ChurchesStreamCursorInput instance,
-    TRes Function(Input_ChurchesStreamCursorInput) then,
-  ) = _CopyWithImpl_Input_ChurchesStreamCursorInput;
-
-  factory CopyWith_Input_ChurchesStreamCursorInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_ChurchesStreamCursorInput;
-
-  TRes call({
-    Input_ChurchesStreamCursorValueInput? initialValue,
-    Enum_CursorOrdering? ordering,
-  });
-  CopyWith_Input_ChurchesStreamCursorValueInput<TRes> get initialValue;
-}
-
-class _CopyWithImpl_Input_ChurchesStreamCursorInput<TRes>
-    implements CopyWith_Input_ChurchesStreamCursorInput<TRes> {
-  _CopyWithImpl_Input_ChurchesStreamCursorInput(this._instance, this._then);
-
-  final Input_ChurchesStreamCursorInput _instance;
-
-  final TRes Function(Input_ChurchesStreamCursorInput) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? initialValue = _undefined,
-    Object? ordering = _undefined,
-  }) => _then(
-    Input_ChurchesStreamCursorInput._({
-      ..._instance._$data,
-      if (initialValue != _undefined && initialValue != null)
-        'initialValue': (initialValue as Input_ChurchesStreamCursorValueInput),
-      if (ordering != _undefined)
-        'ordering': (ordering as Enum_CursorOrdering?),
-    }),
-  );
-
-  CopyWith_Input_ChurchesStreamCursorValueInput<TRes> get initialValue {
-    final local$initialValue = _instance.initialValue;
-    return CopyWith_Input_ChurchesStreamCursorValueInput(
-      local$initialValue,
-      (e) => call(initialValue: e),
-    );
-  }
-}
-
-class _CopyWithStubImpl_Input_ChurchesStreamCursorInput<TRes>
-    implements CopyWith_Input_ChurchesStreamCursorInput<TRes> {
-  _CopyWithStubImpl_Input_ChurchesStreamCursorInput(this._res);
-
-  TRes _res;
-
-  call({
-    Input_ChurchesStreamCursorValueInput? initialValue,
-    Enum_CursorOrdering? ordering,
-  }) => _res;
-
-  CopyWith_Input_ChurchesStreamCursorValueInput<TRes> get initialValue =>
-      CopyWith_Input_ChurchesStreamCursorValueInput.stub(_res);
-}
-
-class Input_ChurchesStreamCursorValueInput {
-  factory Input_ChurchesStreamCursorValueInput({UuidValue? id, String? name}) =>
-      Input_ChurchesStreamCursorValueInput._({
-        if (id != null) r'id': id,
-        if (name != null) r'name': name,
-      });
-
-  Input_ChurchesStreamCursorValueInput._(this._$data);
-
-  factory Input_ChurchesStreamCursorValueInput.fromJson(
-    Map<String, dynamic> data,
-  ) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('id')) {
-      final l$id = data['id'];
-      result$data['id'] = l$id == null ? null : stringToUuid(l$id);
-    }
-    if (data.containsKey('name')) {
-      final l$name = data['name'];
-      result$data['name'] = (l$name as String?);
-    }
-    return Input_ChurchesStreamCursorValueInput._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  UuidValue? get id => (_$data['id'] as UuidValue?);
-
-  String? get name => (_$data['name'] as String?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('id')) {
-      final l$id = id;
-      result$data['id'] = l$id == null ? null : uuidToString(l$id);
-    }
-    if (_$data.containsKey('name')) {
-      final l$name = name;
-      result$data['name'] = l$name;
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_ChurchesStreamCursorValueInput<
-    Input_ChurchesStreamCursorValueInput
-  >
-  get copyWith => CopyWith_Input_ChurchesStreamCursorValueInput(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_ChurchesStreamCursorValueInput ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$id = id;
-    final lOther$id = other.id;
-    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
-      return false;
-    }
-    if (l$id != lOther$id) {
-      return false;
-    }
-    final l$name = name;
-    final lOther$name = other.name;
-    if (_$data.containsKey('name') != other._$data.containsKey('name')) {
-      return false;
-    }
-    if (l$name != lOther$name) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$id = id;
-    final l$name = name;
-    return Object.hashAll([
-      _$data.containsKey('id') ? l$id : const {},
-      _$data.containsKey('name') ? l$name : const {},
     ]);
   }
 }
