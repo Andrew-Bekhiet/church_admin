@@ -299,7 +299,6 @@ class _EditFamilyState extends State<EditFamily> {
             },
             validator: (v) => null,
           ),
-          const SizedBox(height: 80),
         ],
       ),
     );

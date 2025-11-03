@@ -116,7 +116,6 @@ class _EditStreetState extends State<EditStreet> {
               () => newStreet = newStreet.copyWith(color: value),
             ),
           ),
-          const SizedBox(height: 80),
         ],
       ),
     );

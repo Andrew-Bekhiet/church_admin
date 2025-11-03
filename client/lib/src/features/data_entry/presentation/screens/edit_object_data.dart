@@ -88,8 +88,7 @@ class _EditObjectDataState<T extends ViewableWithID>
                           : null,
                     ),
                   ),
-                SliverFillRemaining(
-                  hasScrollBody: false,
+                SliverToBoxAdapter(
                   child: FocusScope(
                     debugLabel: 'EditObjectDataFocusScope',
                     child: Padding(
@@ -105,7 +104,7 @@ class _EditObjectDataState<T extends ViewableWithID>
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
                       horizontal: 8,
-                      vertical: 16,
+                      vertical: 4,
                     ),
                     child: SaveAndCancelButtonRow(
                       onSave: () => _controller.save(context),

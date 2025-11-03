@@ -86,7 +86,6 @@ class _EditAreaState extends State<EditArea> {
               () => newArea = newArea.copyWith(color: value),
             ),
           ),
-          const SizedBox(height: 80),
         ],
       ),
     );

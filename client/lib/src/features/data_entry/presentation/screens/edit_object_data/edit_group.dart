@@ -105,7 +105,6 @@ class _EditGroupState extends State<EditGroup> {
               () => newGroup = newGroup.copyWith(color: value),
             ),
           ),
-          const SizedBox(height: 80),
         ],
       ),
     );

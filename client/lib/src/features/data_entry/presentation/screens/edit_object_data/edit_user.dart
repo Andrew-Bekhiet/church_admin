@@ -50,103 +50,99 @@ class _EditUserState extends State<EditUser> {
         final user = controller.newObject;
         final permissions = user.permissions;
 
-        return SingleChildScrollView(
-          child: Column(
-            children: [
-              CopiablePropertyWidget(
-                'البريد الاكتروني',
-                user.email,
-              ),
-              const Divider(thickness: 1),
-              Card(
-                margin: const EdgeInsets.all(8),
-                color: Theme.of(context).colorScheme.secondaryContainer,
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        children: [
-                          Icon(
-                            Icons.security,
-                            color: Theme.of(context).primaryColor,
-                          ),
-                          const SizedBox(width: 8),
-                          Text(
-                            'الصلاحيات',
-                            style: Theme.of(context).textTheme.titleMedium,
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 16),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          PermissionCheckWidget(
-                            permission: UserPermission.approved,
-                            permissions: permissions,
-                            onToggle: _togglePermission,
-                            subtitleText:
-                                'يجب تفعيل الحساب للسماح للمستخدم بالدخول',
-                          ),
-                          const Divider(),
-                          PermissionCheckWidget(
-                            permission: UserPermission.manageAllUsers,
-                            permissions: permissions,
-                            onToggle: _togglePermission,
-                            subtitleText:
-                                'السماح بإضافة وتعديل وحذف المستخدمين',
-                          ),
-                          PermissionCheckWidget(
-                            permission: UserPermission.writeAllData,
-                            permissions: permissions,
-                            onToggle: _togglePermission,
-                            subtitleText: 'السماح بتعديل جميع بيانات التطبيق',
-                          ),
-                          PermissionCheckWidget(
-                            permission: UserPermission.readAllData,
-                            permissions: permissions,
-                            onToggle: _togglePermission,
-                            subtitleText: 'السماح برؤية جميع بيانات التطبيق',
-                          ),
-                          const Divider(),
-                          PermissionCheckWidget(
-                            permission: UserPermission.recordHistory,
-                            permissions: permissions,
-                            onToggle: _togglePermission,
-                            subtitleText:
-                                'السماح بتسجيل الحضور للخدام والمخدومين',
-                          ),
-                          PermissionCheckWidget(
-                            permission: UserPermission.changeOldHistory,
-                            permissions: permissions,
-                            onToggle: _togglePermission,
-                            subtitleText:
-                                'السماح بتعديل سجلات الحضور لأي يوم سابق',
-                          ),
-                          PermissionCheckWidget(
-                            permission: UserPermission.deleteData,
-                            permissions: permissions,
-                            onToggle: _togglePermission,
-                            subtitleText:
-                                'السماح بحذف البيانات اللتي يمكن تعديلها',
-                          ),
-                          PermissionCheckWidget(
-                            permission: UserPermission.recoverDeleted,
-                            permissions: permissions,
-                            onToggle: _togglePermission,
-                            subtitleText: 'السماح باسترجاع البيانات المحذوفة',
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+        return Column(
+          children: [
+            CopiablePropertyWidget(
+              'البريد الاكتروني',
+              user.email,
+            ),
+            const Divider(thickness: 1),
+            Card(
+              margin: const EdgeInsets.all(8),
+              color: Theme.of(context).colorScheme.secondaryContainer,
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.security,
+                          color: Theme.of(context).primaryColor,
+                        ),
+                        const SizedBox(width: 8),
+                        Text(
+                          'الصلاحيات',
+                          style: Theme.of(context).textTheme.titleMedium,
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        PermissionCheckWidget(
+                          permission: UserPermission.approved,
+                          permissions: permissions,
+                          onToggle: _togglePermission,
+                          subtitleText:
+                              'يجب تفعيل الحساب للسماح للمستخدم بالدخول',
+                        ),
+                        const Divider(),
+                        PermissionCheckWidget(
+                          permission: UserPermission.manageAllUsers,
+                          permissions: permissions,
+                          onToggle: _togglePermission,
+                          subtitleText: 'السماح بإضافة وتعديل وحذف المستخدمين',
+                        ),
+                        PermissionCheckWidget(
+                          permission: UserPermission.writeAllData,
+                          permissions: permissions,
+                          onToggle: _togglePermission,
+                          subtitleText: 'السماح بتعديل جميع بيانات التطبيق',
+                        ),
+                        PermissionCheckWidget(
+                          permission: UserPermission.readAllData,
+                          permissions: permissions,
+                          onToggle: _togglePermission,
+                          subtitleText: 'السماح برؤية جميع بيانات التطبيق',
+                        ),
+                        const Divider(),
+                        PermissionCheckWidget(
+                          permission: UserPermission.recordHistory,
+                          permissions: permissions,
+                          onToggle: _togglePermission,
+                          subtitleText:
+                              'السماح بتسجيل الحضور للخدام والمخدومين',
+                        ),
+                        PermissionCheckWidget(
+                          permission: UserPermission.changeOldHistory,
+                          permissions: permissions,
+                          onToggle: _togglePermission,
+                          subtitleText:
+                              'السماح بتعديل سجلات الحضور لأي يوم سابق',
+                        ),
+                        PermissionCheckWidget(
+                          permission: UserPermission.deleteData,
+                          permissions: permissions,
+                          onToggle: _togglePermission,
+                          subtitleText:
+                              'السماح بحذف البيانات اللتي يمكن تعديلها',
+                        ),
+                        PermissionCheckWidget(
+                          permission: UserPermission.recoverDeleted,
+                          permissions: permissions,
+                          onToggle: _togglePermission,
+                          subtitleText: 'السماح باسترجاع البيانات المحذوفة',
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
-              const SizedBox(height: 60),
-            ],
-          ),
+            ),
+          ],
         );
       },
     );
