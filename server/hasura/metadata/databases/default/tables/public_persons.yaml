@@ -20,6 +20,9 @@ object_relationships:
   - name: family
     using:
       foreign_key_constraint_on: family_id
+  - name: store
+    using:
+      foreign_key_constraint_on: store_id
   - name: father
     using:
       foreign_key_constraint_on: father_id

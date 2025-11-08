@@ -1,6 +1,7 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
+import 'package:rxdart/rxdart.dart';
 
 class ViewStore extends StatefulWidget {
   final Store? store;
@@ -13,6 +14,28 @@ class ViewStore extends StatefulWidget {
 }
 
 class _ViewStoreState extends State<ViewStore> {
+  late final _personsController = ViewableObjectListController(
+    objectsPaginatableStream: DatabaseService.I.persons.streamAll(
+      where: Stream.value(
+        [
+          Filter(
+            PersonFields().store.redirectTo(StoreFields().id),
+            PrimitiveOperator.eq,
+            widget.storeId,
+          ),
+        ],
+      ),
+      orderBy: _personsOrderBy.stream,
+    ),
+  );
+
+  final BehaviorSubject<List<OrderBy>> _personsOrderBy =
+      BehaviorSubject.seeded([
+    OrderBy(field: PersonFields().name),
+  ]);
+
+  late final viewableObjectService = ViewableObjectService.I;
+
   late final stream = DatabaseService.I.stores.streamSingleById(
     id: widget.storeId,
   );
@@ -23,6 +46,37 @@ class _ViewStoreState extends State<ViewStore> {
       objectId: widget.storeId,
       object: widget.store,
       objectStream: stream,
+      childrenTypes: const [Person],
+      tabsContentBuilders: {
+        Person: (context) => StreamBuilder(
+              stream: _personsOrderBy.stream,
+              initialData: _personsOrderBy.value,
+              builder: (context, orderBySnapshot) => ViewableObjectList(
+                scrollController: PrimaryScrollController.maybeOf(context),
+                viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
+                  secondLineField:
+                      orderBySnapshot.data?.first.getSecondLineField(),
+                ),
+                objectsController: _personsController,
+              ),
+            ),
+      },
+      sliverPersistentHeaderDelegate: ChipTabBarPersistentHeaderDelegate(
+        filtersWidget: Builder(
+          builder: (context) => IconButton(
+            visualDensity: VisualDensity.compact,
+            padding: EdgeInsets.zero,
+            icon: const Icon(Symbols.sort),
+            onPressed: _showOrderBySheet,
+          ),
+        ),
+        tabs: [
+          (
+            label: 'المخدومين',
+            icon: viewableObjectService.getDefaultIconFor<Person>(),
+          ),
+        ],
+      ),
       notFoundBuilder: (context) => Center(
         child: Text(
           'لم يتم العثور على المتجر',
@@ -101,5 +155,17 @@ class _ViewStoreState extends State<ViewStore> {
         ]),
       ),
     );
+  }
+
+  Future<void> _showOrderBySheet() async {
+    final newOrderBy = await showOrderByBottomSheet(
+      context,
+      queryableType: AdvancedQueriesMetadata().person,
+      orderBySubject: _personsOrderBy,
+    );
+
+    if (newOrderBy == null) return;
+
+    _personsOrderBy.add(newOrderBy);
   }
 }
