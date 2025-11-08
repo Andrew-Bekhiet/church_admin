@@ -37,150 +37,105 @@ Future<void> migrate({
   required FirebaseAdminApp churchDataApp,
   required FirebaseAdminApp meetingHelperApp,
 }) async {
-  await _benchmarkStep('Migration', () async {
-    final churchDataContext = await _benchmarkStep(
-      'Loading Church Data context',
-      () => ChurchDataContext.load(churchDataApp),
-    );
+  String? currentStep;
+  int? lastStepElapsedMs;
 
-    final meetingHelperContext = await _benchmarkStep(
-      'Loading Meeting Helper context',
-      () => MeetingHelperContext.load(meetingHelperApp),
-    );
-
-    final churchAdminContext = ChurchAdminContext();
-
-    await _benchmarkStep(
-      'Creating new StudyYears',
-      () => createNewStudyYears(
-        churchDataContext,
-        meetingHelperContext,
-        churchAdminContext,
-      ),
-    );
-
-    await _benchmarkStep(
-      'Migrating and creating new Services',
-      () =>
-          migrateAndCreateNewServices(meetingHelperContext, churchAdminContext),
-    );
-
-    await _benchmarkStep(
-      'Migrating ShammasLevels',
-      () => _migrateShammasLevels(meetingHelperContext, churchAdminContext),
-    );
-
-    await _benchmarkStep(
-      'Migrating Churches',
-      () => _migrateChurches(
-        churchDataContext,
-        meetingHelperContext,
-        churchAdminContext,
-      ),
-    );
-
-    await _benchmarkStep(
-      'Migrating Fathers',
-      () => _migrateFathers(
-        churchDataContext,
-        meetingHelperContext,
-        churchAdminContext,
-      ),
-    );
-
-    await _benchmarkStep(
-      'Migrating Schools',
-      () => _migrateSchools(meetingHelperContext, churchAdminContext),
-    );
-
-    await _benchmarkStep(
-      'Migrating Colleges',
-      () => _migrateColleges(
-        churchDataContext,
-        meetingHelperContext,
-        churchAdminContext,
-      ),
-    );
-
-    await _benchmarkStep(
-      'Migrating Jobs',
-      () => _migrateJobs(churchDataContext, churchAdminContext),
-    );
-
-    await _benchmarkStep(
-      'Migrating Qualifications',
-      () => _migrateQualifications(churchDataContext, churchAdminContext),
-    );
-
-    await _benchmarkStep(
-      'Migrating Persons Types',
-      () => _migrateQualifications(churchDataContext, churchAdminContext),
-    );
-
-    await _benchmarkStep(
-      'Migrating Areas',
-      () => _migrateAreas(churchDataContext, churchAdminContext),
-    );
-
-    await _benchmarkStep(
-      'Migrating Streets',
-      () => _migrateStreets(churchDataContext, churchAdminContext),
-    );
-    await _benchmarkStep(
-      'Migrating Families',
-      () => _migrateFamilies(churchDataContext, churchAdminContext),
-    );
-
-    await _benchmarkStep(
-      'Migrating Stores',
-      () => _migrateStores(churchDataContext, churchAdminContext),
-    );
-    await _benchmarkStep(
-      'Migrating ChurchData Persons',
-      () => _migrateChurchDataPersons(churchDataContext, churchAdminContext),
-    );
-
-    await _benchmarkStep(
-      'Migrating Meeting Helper Persons',
-      () => _migrateMeetingHelperPersons(
-        meetingHelperContext,
-        churchAdminContext,
-      ),
-    );
-
-    await _benchmarkStep(
-      'Migrating Persons States from persons',
-      () => _migratePersonsStates(churchAdminContext),
-    );
-
-    await _benchmarkStep(
-      'Migrating Persons Types from persons',
-      () => _migratePersonsTypes(churchAdminContext),
-    );
-
-    await _benchmarkStep(
-      'Exporting to CSV',
-      () => _exportToCsv(churchAdminContext),
-    );
-  });
-}
-
-FutureOr<T> _benchmarkStep<T>(
-  String stepName,
-  FutureOr<T> Function() stepFunction,
-) async {
   final stopwatch = Stopwatch()..start();
-  logger.i('$stepName...');
+  logger.i('Migration...');
 
-  FutureOr<T> result = stepFunction();
-  if (result is Future<T>) {
-    result = await result;
-  }
+  await _migrateWithTiming(
+    churchDataApp: churchDataApp,
+    meetingHelperApp: meetingHelperApp,
+    beforeStepStart: (stepName) {
+      if (currentStep != null && lastStepElapsedMs != null) {
+        logger.i(
+          '$currentStep completed in ${stopwatch.elapsedMilliseconds - (lastStepElapsedMs ?? 0)}ms',
+        );
+      }
+      currentStep = stepName;
+      lastStepElapsedMs = stopwatch.elapsedMilliseconds;
+
+      logger.i('$stepName...');
+    },
+  );
 
   stopwatch.stop();
-  logger.i('$stepName completed in ${stopwatch.elapsedMilliseconds}ms');
+  logger.i('Migration completed in ${stopwatch.elapsedMilliseconds}ms');
+}
 
-  return result;
+Future<void> _migrateWithTiming({
+  required FirebaseAdminApp churchDataApp,
+  required FirebaseAdminApp meetingHelperApp,
+  required void Function(String stepName) beforeStepStart,
+}) async {
+  final churchAdminContext = ChurchAdminContext();
+
+  beforeStepStart('Loading Church Data context');
+  final churchDataContext = await ChurchDataContext.load(churchDataApp);
+
+  beforeStepStart('Loading Meeting Helper context');
+  final meetingHelperContext = await MeetingHelperContext.load(
+    meetingHelperApp,
+  );
+
+  beforeStepStart('Creating new StudyYears');
+  await createNewStudyYears(
+    churchDataContext,
+    meetingHelperContext,
+    churchAdminContext,
+  );
+
+  beforeStepStart('Migrating and creating new Services');
+  await migrateAndCreateNewServices(meetingHelperContext, churchAdminContext);
+
+  beforeStepStart('Migrating ShammasLevels');
+  _migrateShammasLevels(meetingHelperContext, churchAdminContext);
+
+  beforeStepStart('Migrating Churches');
+  _migrateChurches(churchDataContext, meetingHelperContext, churchAdminContext);
+
+  beforeStepStart('Migrating Fathers');
+  _migrateFathers(churchDataContext, meetingHelperContext, churchAdminContext);
+
+  beforeStepStart('Migrating Schools');
+  _migrateSchools(meetingHelperContext, churchAdminContext);
+
+  beforeStepStart('Migrating Colleges');
+  _migrateColleges(churchDataContext, meetingHelperContext, churchAdminContext);
+
+  beforeStepStart('Migrating Jobs');
+  _migrateJobs(churchDataContext, churchAdminContext);
+
+  beforeStepStart('Migrating Qualifications');
+  _migrateQualifications(churchDataContext, churchAdminContext);
+
+  beforeStepStart('Migrating Persons Types');
+  _migrateQualifications(churchDataContext, churchAdminContext);
+
+  beforeStepStart('Migrating Areas');
+  _migrateAreas(churchDataContext, churchAdminContext);
+
+  beforeStepStart('Migrating Streets');
+  _migrateStreets(churchDataContext, churchAdminContext);
+  beforeStepStart('Migrating Families');
+  _migrateFamilies(churchDataContext, churchAdminContext);
+
+  beforeStepStart('Migrating Stores');
+  _migrateStores(churchDataContext, churchAdminContext);
+  beforeStepStart('Migrating ChurchData Persons');
+  _migrateChurchDataPersons(churchDataContext, churchAdminContext);
+
+  beforeStepStart('Migrating Meeting Helper Persons');
+  _migrateMeetingHelperPersons(meetingHelperContext, churchAdminContext);
+
+  beforeStepStart('Migrating Persons States from persons');
+  _migratePersonsStates(churchAdminContext);
+
+  beforeStepStart('Migrating Persons Types from persons');
+  _migratePersonsTypes(churchAdminContext);
+
+  beforeStepStart('Exporting to CSV');
+  await _exportToCsv(churchAdminContext);
 }
 
 void _migrateChurchDataPersons(
@@ -510,11 +465,6 @@ Future<bool> _maybeMergePersons({
 
       newAddress = newAddress.copyWith(family: newFamily);
     }
-
-    // if (existingPerson.address?.specialLandmark != newAddress.specialLandmark ||
-    //     existingPerson.address?.geolocation != newAddress.geolocation) {
-    //   debugger();
-    // }
 
     final addressId = IdReference.fromPath('Addresses/${newAddress.id}');
     churchAdminContext.addresses[addressId] = newAddress;
