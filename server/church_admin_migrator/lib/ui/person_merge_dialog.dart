@@ -387,9 +387,7 @@ class _PersonMergeDialogState extends State<_PersonMergeDialog> {
       college: controllers.college.value
           ? churchAdminContext.colleges[newPerson.college]
           : existingPerson.college,
-      color: controllers.color.value
-          ? newPerson.color?.toUiColor()
-          : existingPerson.color,
+      color: controllers.color.value ? newPerson.color : existingPerson.color,
       family: existingPerson.family,
       martialStatus: controllers.martialStatus.value
           ? MartialStatus.single
