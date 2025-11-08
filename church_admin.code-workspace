@@ -67,7 +67,15 @@
           "-a",
           "--meeting-helper-credentials",
           "-a",
-          "lib/meetinghelper.json"
+          "lib/meetinghelper.json",
+          "-a",
+          "--church-admin-credentials",
+          "-a",
+          "lib/church-data-admin.json",
+          "-a",
+          "--no-migrate-data",
+          "-a",
+          "--migrate-storage"
         ]
       }
     ],
