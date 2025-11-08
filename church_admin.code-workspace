@@ -55,16 +55,20 @@
         "cwd": "${workspaceFolder:church_admin}/client/"
       },
       {
-        "name": "Debug /server/functions/src/firestore_migration.ts",
-        "type": "node",
+        "name": "Debug Migration Script",
+        "type": "dart",
         "request": "launch",
-        "program": "${workspaceFolder:server}/functions/src/firestore_migration.ts",
-        "cwd": "${workspaceFolder:server}/functions/src",
-        "runtimeExecutable": "node",
-        // "runtimeArgs": ["--nolazy", "-r", "source-map-support/register"],
-        // "console": "integratedTerminal",
-        // "internalConsoleOptions": "neverOpen",
-        "skipFiles": ["<node_internals>/**"]
+        "program": "${workspaceFolder:server}/church_admin_migrator/lib/main.dart",
+        "args": [
+          "-a",
+          "--church-data-credentials",
+          "-a",
+          "lib/churchdata.json",
+          "-a",
+          "--meeting-helper-credentials",
+          "-a",
+          "lib/meetinghelper.json"
+        ]
       }
     ],
     "compounds": []
