@@ -172,7 +172,7 @@ void _migrateChurchDataPersons(
       otherPhones: person.phones.cast<String, String>(),
       church: churchAdminContext.churches[person.church],
       college: churchAdminContext.colleges[person.college],
-      color: person.color?.toUiColor(),
+      color: person.color,
       family: churchAdminContext.families[person.familyId],
       store: churchAdminContext.stores[person.familyId],
       martialStatus: personTypeData?.martialStatus ?? MartialStatus.married,
@@ -201,7 +201,7 @@ void _migrateChurchDataPersons(
       state: PersonState(
         id: personStateData?.id ?? 'غير محدد',
         name: personStateData?.name ?? 'غير محدد',
-        color: personStateData?.color?.toUiColor(),
+        color: personStateData?.color,
       ),
       notes: person.notes,
     );
@@ -384,7 +384,7 @@ Future<void> _migrateMeetingHelperPersons(
       otherPhones: person.phones.cast<String, String>(),
       church: churchAdminContext.churches[person.church],
       college: churchAdminContext.colleges[person.college],
-      color: person.color?.toUiColor(),
+      color: person.color,
       family: family,
       martialStatus: MartialStatus.single,
       studyYear: churchAdminContext
@@ -496,7 +496,7 @@ void _migrateStores(
       family:
           churchAdminContext.families[family1Ref] ??
           churchAdminContext.families[family2Ref],
-      color: store.color?.toUiColor(),
+      color: store.color,
     );
 
     final addressId = IdReference.fromPath(
@@ -555,7 +555,7 @@ void _migrateFamilies(
       id: newRef.id,
       name: family.name,
       notes: family.notes,
-      color: family.color?.toUiColor(),
+      color: family.color,
     );
 
     final addressId = IdReference.fromPath(
@@ -619,7 +619,7 @@ void _migrateStreets(
                   .toList(),
             )
           : null,
-      color: street.color?.toUiColor(),
+      color: street.color,
     );
 
     final newRef = IdReference.fromPath('Streets/${newStreet.id}');
@@ -653,7 +653,7 @@ void _migrateAreas(
                   .toList(),
             )
           : null,
-      color: area.color?.toUiColor(),
+      color: area.color,
     );
 
     final newRef = IdReference.fromPath('Areas/${newArea.id}');
