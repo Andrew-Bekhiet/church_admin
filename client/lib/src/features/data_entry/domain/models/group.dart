@@ -126,7 +126,7 @@ class GroupFields extends _GroupFields {
         parentType: super.validity.parentType,
         type: super.validity.type,
         name: super.validity.name,
-        label: adminUsersRel.label,
+        label: super.validity.label,
         isOrderable: super.validity.isOrderable,
         operators: super.validity.operators,
         getValue: super.validity.getValue,
