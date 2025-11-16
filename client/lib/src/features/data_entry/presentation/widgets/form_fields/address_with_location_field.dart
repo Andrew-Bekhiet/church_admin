@@ -259,6 +259,7 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
                       label: AutoSizeText(
                         'رقم العمارة',
                         minFontSize: 9,
+                        maxLines: 1,
                       ),
                     ),
                     enabled: widget.enabled,
