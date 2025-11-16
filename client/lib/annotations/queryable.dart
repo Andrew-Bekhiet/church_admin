@@ -11,7 +11,7 @@ final class Queryable {
   const Queryable({
     required this.classLabel,
     this.labelsOverrides = const {},
-    this.ignoreFields = const ['blurhash'],
+    this.ignoreFields = const ['blurhash', 'userCanEdit'],
     this.regexIgnoreFields = const [r'^.+Id$'],
     this.allowExtension = false,
   });

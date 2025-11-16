@@ -33,6 +33,14 @@ array_relationships:
         table:
           name: users_permissions
           schema: auth
+computed_fields:
+  - name: currentUserCanManageThisUser
+    definition:
+      function:
+        name: user_can_edit_user
+        schema: auth
+      session_argument: hasura_session
+    comment: ""
 select_permissions:
   - role: user
     permission:
@@ -42,6 +50,8 @@ select_permissions:
         - photo_updated_at
         - blurhash
         - uid
+      computed_fields:
+        - currentUserCanManageThisUser
       filter:
         _exists:
           _table:

@@ -12,6 +12,7 @@ fragment UserNoPhoto on AuthUsersData {
 
 fragment UserOverview on AuthUsersData {
   ...User
+  currentUserCanManageThisUser
   email
   ...UserPermissions
   person {
@@ -66,6 +67,7 @@ fragment UserAdminOn on AuthUsersData {
     serviceGender
     serviceAllowEdit
     serviceAdminOnUsers
+    serviceWriteRelatedFamilies
     classes(orderBy: { name: ASC }) {
       ...Class
     }
@@ -74,6 +76,7 @@ fragment UserAdminOn on AuthUsersData {
     }
     groupAllowEdit
     groupAdminOnUsers
+    groupWriteRelatedFamilies
   }
 }
 

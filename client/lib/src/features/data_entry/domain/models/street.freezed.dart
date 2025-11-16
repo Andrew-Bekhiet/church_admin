@@ -23,6 +23,7 @@ mixin _$Street {
   List<Area>? get areas;
   LastRecordedByInfo? get lastVisit;
   LastRecordedByInfo? get lastEdit;
+  bool get userCanEdit;
 
   /// Create a copy of Street
   /// with the given fields replaced by the non-null parameter values.
@@ -48,7 +49,9 @@ mixin _$Street {
             (identical(other.lastVisit, lastVisit) ||
                 other.lastVisit == lastVisit) &&
             (identical(other.lastEdit, lastEdit) ||
-                other.lastEdit == lastEdit));
+                other.lastEdit == lastEdit) &&
+            (identical(other.userCanEdit, userCanEdit) ||
+                other.userCanEdit == userCanEdit));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -63,11 +66,12 @@ mixin _$Street {
       blurhash,
       const DeepCollectionEquality().hash(areas),
       lastVisit,
-      lastEdit);
+      lastEdit,
+      userCanEdit);
 
   @override
   String toString() {
-    return 'Street(id: $id, name: $name, line: $line, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, areas: $areas, lastVisit: $lastVisit, lastEdit: $lastEdit)';
+    return 'Street(id: $id, name: $name, line: $line, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, areas: $areas, lastVisit: $lastVisit, lastEdit: $lastEdit, userCanEdit: $userCanEdit)';
   }
 }
 
@@ -85,7 +89,8 @@ abstract mixin class $StreetCopyWith<$Res> {
       String? blurhash,
       List<Area>? areas,
       LastRecordedByInfo? lastVisit,
-      LastRecordedByInfo? lastEdit});
+      LastRecordedByInfo? lastEdit,
+      bool userCanEdit});
 }
 
 /// @nodoc
@@ -109,6 +114,7 @@ class _$StreetCopyWithImpl<$Res> implements $StreetCopyWith<$Res> {
     Object? areas = freezed,
     Object? lastVisit = freezed,
     Object? lastEdit = freezed,
+    Object? userCanEdit = null,
   }) {
     return _then(Street(
       id: null == id
@@ -147,6 +153,10 @@ class _$StreetCopyWithImpl<$Res> implements $StreetCopyWith<$Res> {
           ? _self.lastEdit
           : lastEdit // ignore: cast_nullable_to_non_nullable
               as LastRecordedByInfo?,
+      userCanEdit: null == userCanEdit
+          ? _self.userCanEdit
+          : userCanEdit // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }

@@ -862,6 +862,7 @@ class Subscription_watchAllServices_services
     required this.id,
     required this.name,
     this.color,
+    this.userCanEdit,
     this.$__typename = 'Services',
     this.studyYearFrom,
     this.studyYearTo,
@@ -877,6 +878,7 @@ class Subscription_watchAllServices_services
     final l$id = json['id'];
     final l$name = json['name'];
     final l$color = json['color'];
+    final l$userCanEdit = json['userCanEdit'];
     final l$$__typename = json['__typename'];
     final l$studyYearFrom = json['studyYearFrom'];
     final l$studyYearTo = json['studyYearTo'];
@@ -888,6 +890,7 @@ class Subscription_watchAllServices_services
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
+      userCanEdit: (l$userCanEdit as bool?),
       $__typename: (l$$__typename as String),
       studyYearFrom: l$studyYearFrom == null
           ? null
@@ -922,6 +925,8 @@ class Subscription_watchAllServices_services
 
   final int? color;
 
+  final bool? userCanEdit;
+
   final String $__typename;
 
   final Subscription_watchAllServices_services_studyYearFrom? studyYearFrom;
@@ -944,6 +949,8 @@ class Subscription_watchAllServices_services
     _resultData['name'] = l$name;
     final l$color = color;
     _resultData['color'] = l$color;
+    final l$userCanEdit = userCanEdit;
+    _resultData['userCanEdit'] = l$userCanEdit;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     final l$studyYearFrom = studyYearFrom;
@@ -968,6 +975,7 @@ class Subscription_watchAllServices_services
     final l$id = id;
     final l$name = name;
     final l$color = color;
+    final l$userCanEdit = userCanEdit;
     final l$$__typename = $__typename;
     final l$studyYearFrom = studyYearFrom;
     final l$studyYearTo = studyYearTo;
@@ -979,6 +987,7 @@ class Subscription_watchAllServices_services
       l$id,
       l$name,
       l$color,
+      l$userCanEdit,
       l$$__typename,
       l$studyYearFrom,
       l$studyYearTo,
@@ -1011,6 +1020,11 @@ class Subscription_watchAllServices_services
     final l$color = color;
     final lOther$color = other.color;
     if (l$color != lOther$color) {
+      return false;
+    }
+    final l$userCanEdit = userCanEdit;
+    final lOther$userCanEdit = other.userCanEdit;
+    if (l$userCanEdit != lOther$userCanEdit) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -1088,6 +1102,7 @@ abstract class CopyWith_Subscription_watchAllServices_services<TRes> {
     UuidValue? id,
     String? name,
     int? color,
+    bool? userCanEdit,
     String? $__typename,
     Subscription_watchAllServices_services_studyYearFrom? studyYearFrom,
     Subscription_watchAllServices_services_studyYearTo? studyYearTo,
@@ -1135,6 +1150,7 @@ class _CopyWithImpl_Subscription_watchAllServices_services<TRes>
     Object? id = _undefined,
     Object? name = _undefined,
     Object? color = _undefined,
+    Object? userCanEdit = _undefined,
     Object? $__typename = _undefined,
     Object? studyYearFrom = _undefined,
     Object? studyYearTo = _undefined,
@@ -1149,6 +1165,9 @@ class _CopyWithImpl_Subscription_watchAllServices_services<TRes>
           ? _instance.name
           : (name as String),
       color: color == _undefined ? _instance.color : (color as int?),
+      userCanEdit: userCanEdit == _undefined
+          ? _instance.userCanEdit
+          : (userCanEdit as bool?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -1243,6 +1262,7 @@ class _CopyWithStubImpl_Subscription_watchAllServices_services<TRes>
     UuidValue? id,
     String? name,
     int? color,
+    bool? userCanEdit,
     String? $__typename,
     Subscription_watchAllServices_services_studyYearFrom? studyYearFrom,
     Subscription_watchAllServices_services_studyYearTo? studyYearTo,
@@ -1564,6 +1584,7 @@ class Subscription_watchAllServices_services_classes
     required this.id,
     required this.name,
     this.color,
+    this.userCanEdit,
     this.$__typename = 'Classes',
     this.photoUpdatedAt,
     this.blurhash,
@@ -1576,6 +1597,7 @@ class Subscription_watchAllServices_services_classes
     final l$id = json['id'];
     final l$name = json['name'];
     final l$color = json['color'];
+    final l$userCanEdit = json['userCanEdit'];
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
     final l$blurhash = json['blurhash'];
@@ -1584,6 +1606,7 @@ class Subscription_watchAllServices_services_classes
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
+      userCanEdit: (l$userCanEdit as bool?),
       $__typename: (l$$__typename as String),
       photoUpdatedAt: l$photoUpdatedAt == null
           ? null
@@ -1602,6 +1625,8 @@ class Subscription_watchAllServices_services_classes
 
   final int? color;
 
+  final bool? userCanEdit;
+
   final String $__typename;
 
   final DateTime? photoUpdatedAt;
@@ -1618,6 +1643,8 @@ class Subscription_watchAllServices_services_classes
     _resultData['name'] = l$name;
     final l$color = color;
     _resultData['color'] = l$color;
+    final l$userCanEdit = userCanEdit;
+    _resultData['userCanEdit'] = l$userCanEdit;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
@@ -1636,6 +1663,7 @@ class Subscription_watchAllServices_services_classes
     final l$id = id;
     final l$name = name;
     final l$color = color;
+    final l$userCanEdit = userCanEdit;
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$blurhash = blurhash;
@@ -1644,6 +1672,7 @@ class Subscription_watchAllServices_services_classes
       l$id,
       l$name,
       l$color,
+      l$userCanEdit,
       l$$__typename,
       l$photoUpdatedAt,
       l$blurhash,
@@ -1673,6 +1702,11 @@ class Subscription_watchAllServices_services_classes
     final l$color = color;
     final lOther$color = other.color;
     if (l$color != lOther$color) {
+      return false;
+    }
+    final l$userCanEdit = userCanEdit;
+    final lOther$userCanEdit = other.userCanEdit;
+    if (l$userCanEdit != lOther$userCanEdit) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -1722,6 +1756,7 @@ abstract class CopyWith_Subscription_watchAllServices_services_classes<TRes> {
     UuidValue? id,
     String? name,
     int? color,
+    bool? userCanEdit,
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
@@ -1748,6 +1783,7 @@ class _CopyWithImpl_Subscription_watchAllServices_services_classes<TRes>
     Object? id = _undefined,
     Object? name = _undefined,
     Object? color = _undefined,
+    Object? userCanEdit = _undefined,
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? blurhash = _undefined,
@@ -1759,6 +1795,9 @@ class _CopyWithImpl_Subscription_watchAllServices_services_classes<TRes>
           ? _instance.name
           : (name as String),
       color: color == _undefined ? _instance.color : (color as int?),
+      userCanEdit: userCanEdit == _undefined
+          ? _instance.userCanEdit
+          : (userCanEdit as bool?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -1795,6 +1834,7 @@ class _CopyWithStubImpl_Subscription_watchAllServices_services_classes<TRes>
     UuidValue? id,
     String? name,
     int? color,
+    bool? userCanEdit,
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
@@ -2963,6 +3003,7 @@ class Subscription_watchService_servicesByPk
     required this.id,
     required this.name,
     this.color,
+    this.userCanEdit,
     this.$__typename = 'Services',
     this.studyYearFrom,
     this.studyYearTo,
@@ -2979,6 +3020,7 @@ class Subscription_watchService_servicesByPk
     final l$id = json['id'];
     final l$name = json['name'];
     final l$color = json['color'];
+    final l$userCanEdit = json['userCanEdit'];
     final l$$__typename = json['__typename'];
     final l$studyYearFrom = json['studyYearFrom'];
     final l$studyYearTo = json['studyYearTo'];
@@ -2991,6 +3033,7 @@ class Subscription_watchService_servicesByPk
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
+      userCanEdit: (l$userCanEdit as bool?),
       $__typename: (l$$__typename as String),
       studyYearFrom: l$studyYearFrom == null
           ? null
@@ -3030,6 +3073,8 @@ class Subscription_watchService_servicesByPk
 
   final int? color;
 
+  final bool? userCanEdit;
+
   final String $__typename;
 
   final Subscription_watchService_servicesByPk_studyYearFrom? studyYearFrom;
@@ -3054,6 +3099,8 @@ class Subscription_watchService_servicesByPk
     _resultData['name'] = l$name;
     final l$color = color;
     _resultData['color'] = l$color;
+    final l$userCanEdit = userCanEdit;
+    _resultData['userCanEdit'] = l$userCanEdit;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     final l$studyYearFrom = studyYearFrom;
@@ -3080,6 +3127,7 @@ class Subscription_watchService_servicesByPk
     final l$id = id;
     final l$name = name;
     final l$color = color;
+    final l$userCanEdit = userCanEdit;
     final l$$__typename = $__typename;
     final l$studyYearFrom = studyYearFrom;
     final l$studyYearTo = studyYearTo;
@@ -3092,6 +3140,7 @@ class Subscription_watchService_servicesByPk
       l$id,
       l$name,
       l$color,
+      l$userCanEdit,
       l$$__typename,
       l$studyYearFrom,
       l$studyYearTo,
@@ -3125,6 +3174,11 @@ class Subscription_watchService_servicesByPk
     final l$color = color;
     final lOther$color = other.color;
     if (l$color != lOther$color) {
+      return false;
+    }
+    final l$userCanEdit = userCanEdit;
+    final lOther$userCanEdit = other.userCanEdit;
+    if (l$userCanEdit != lOther$userCanEdit) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -3200,6 +3254,7 @@ abstract class CopyWith_Subscription_watchService_servicesByPk<TRes> {
     UuidValue? id,
     String? name,
     int? color,
+    bool? userCanEdit,
     String? $__typename,
     Subscription_watchService_servicesByPk_studyYearFrom? studyYearFrom,
     Subscription_watchService_servicesByPk_studyYearTo? studyYearTo,
@@ -3244,6 +3299,7 @@ class _CopyWithImpl_Subscription_watchService_servicesByPk<TRes>
     Object? id = _undefined,
     Object? name = _undefined,
     Object? color = _undefined,
+    Object? userCanEdit = _undefined,
     Object? $__typename = _undefined,
     Object? studyYearFrom = _undefined,
     Object? studyYearTo = _undefined,
@@ -3259,6 +3315,9 @@ class _CopyWithImpl_Subscription_watchService_servicesByPk<TRes>
           ? _instance.name
           : (name as String),
       color: color == _undefined ? _instance.color : (color as int?),
+      userCanEdit: userCanEdit == _undefined
+          ? _instance.userCanEdit
+          : (userCanEdit as bool?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -3366,6 +3425,7 @@ class _CopyWithStubImpl_Subscription_watchService_servicesByPk<TRes>
     UuidValue? id,
     String? name,
     int? color,
+    bool? userCanEdit,
     String? $__typename,
     Subscription_watchService_servicesByPk_studyYearFrom? studyYearFrom,
     Subscription_watchService_servicesByPk_studyYearTo? studyYearTo,

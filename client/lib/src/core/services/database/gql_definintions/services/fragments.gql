@@ -22,4 +22,5 @@ fragment ServiceNoPhoto on Services {
   id
   name
   color
+  userCanEdit
 }

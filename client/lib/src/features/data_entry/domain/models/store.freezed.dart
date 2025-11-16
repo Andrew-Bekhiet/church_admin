@@ -23,6 +23,7 @@ mixin _$Store {
   LastRecordedByInfo? get lastEdit;
   DateTime? get photoUpdatedAt;
   String? get blurhash;
+  bool get userCanEdit;
 
   /// Create a copy of Store
   /// with the given fields replaced by the non-null parameter values.
@@ -48,17 +49,19 @@ mixin _$Store {
             (identical(other.photoUpdatedAt, photoUpdatedAt) ||
                 other.photoUpdatedAt == photoUpdatedAt) &&
             (identical(other.blurhash, blurhash) ||
-                other.blurhash == blurhash));
+                other.blurhash == blurhash) &&
+            (identical(other.userCanEdit, userCanEdit) ||
+                other.userCanEdit == userCanEdit));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, name, address, family,
-      familyId, color, lastEdit, photoUpdatedAt, blurhash);
+      familyId, color, lastEdit, photoUpdatedAt, blurhash, userCanEdit);
 
   @override
   String toString() {
-    return 'Store(id: $id, name: $name, address: $address, family: $family, familyId: $familyId, color: $color, lastEdit: $lastEdit, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash)';
+    return 'Store(id: $id, name: $name, address: $address, family: $family, familyId: $familyId, color: $color, lastEdit: $lastEdit, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, userCanEdit: $userCanEdit)';
   }
 }
 
@@ -76,7 +79,8 @@ abstract mixin class $StoreCopyWith<$Res> {
       Color? color,
       LastRecordedByInfo? lastEdit,
       DateTime? photoUpdatedAt,
-      String? blurhash});
+      String? blurhash,
+      bool userCanEdit});
 }
 
 /// @nodoc
@@ -100,6 +104,7 @@ class _$StoreCopyWithImpl<$Res> implements $StoreCopyWith<$Res> {
     Object? lastEdit = freezed,
     Object? photoUpdatedAt = freezed,
     Object? blurhash = freezed,
+    Object? userCanEdit = null,
   }) {
     return _then(Store(
       id: null == id
@@ -138,6 +143,10 @@ class _$StoreCopyWithImpl<$Res> implements $StoreCopyWith<$Res> {
           ? _self.blurhash
           : blurhash // ignore: cast_nullable_to_non_nullable
               as String?,
+      userCanEdit: null == userCanEdit
+          ? _self.userCanEdit
+          : userCanEdit // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }

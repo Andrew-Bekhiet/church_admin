@@ -8,4 +8,5 @@ fragment StreetNoPhoto on Streets {
   id
   name
   color
+  userCanEdit
 }

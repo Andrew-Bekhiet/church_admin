@@ -154,6 +154,7 @@ Area _$AreaFromJson(Map json) => Area(
           : LastRecordedByInfo.fromJson(
               Map<String, Object?>.from(json['lastEdit'] as Map)),
       adminUsers: adminUsersFromJson(json['adminUsers'] as List?),
+      userCanEdit: json['userCanEdit'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$AreaToJson(Area instance) => <String, dynamic>{

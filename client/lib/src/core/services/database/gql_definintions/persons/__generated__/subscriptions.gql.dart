@@ -2721,6 +2721,7 @@ class Subscription_watchPerson_personsByPk
     required this.id,
     required this.name,
     this.color,
+    this.userCanEdit,
     this.$__typename = 'Persons',
     this.photoUpdatedAt,
     this.blurhash,
@@ -2769,6 +2770,7 @@ class Subscription_watchPerson_personsByPk
     final l$id = json['id'];
     final l$name = json['name'];
     final l$color = json['color'];
+    final l$userCanEdit = json['userCanEdit'];
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
     final l$blurhash = json['blurhash'];
@@ -2813,6 +2815,7 @@ class Subscription_watchPerson_personsByPk
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
+      userCanEdit: (l$userCanEdit as bool?),
       $__typename: (l$$__typename as String),
       photoUpdatedAt: l$photoUpdatedAt == null
           ? null
@@ -2966,6 +2969,8 @@ class Subscription_watchPerson_personsByPk
 
   final int? color;
 
+  final bool? userCanEdit;
+
   final String $__typename;
 
   final DateTime? photoUpdatedAt;
@@ -3054,6 +3059,8 @@ class Subscription_watchPerson_personsByPk
     _resultData['name'] = l$name;
     final l$color = color;
     _resultData['color'] = l$color;
+    final l$userCanEdit = userCanEdit;
+    _resultData['userCanEdit'] = l$userCanEdit;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
@@ -3146,6 +3153,7 @@ class Subscription_watchPerson_personsByPk
     final l$id = id;
     final l$name = name;
     final l$color = color;
+    final l$userCanEdit = userCanEdit;
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$blurhash = blurhash;
@@ -3190,6 +3198,7 @@ class Subscription_watchPerson_personsByPk
       l$id,
       l$name,
       l$color,
+      l$userCanEdit,
       l$$__typename,
       l$photoUpdatedAt,
       l$blurhash,
@@ -3255,6 +3264,11 @@ class Subscription_watchPerson_personsByPk
     final l$color = color;
     final lOther$color = other.color;
     if (l$color != lOther$color) {
+      return false;
+    }
+    final l$userCanEdit = userCanEdit;
+    final lOther$userCanEdit = other.userCanEdit;
+    if (l$userCanEdit != lOther$userCanEdit) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -3517,6 +3531,7 @@ abstract class CopyWith_Subscription_watchPerson_personsByPk<TRes> {
     UuidValue? id,
     String? name,
     int? color,
+    bool? userCanEdit,
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
@@ -3649,6 +3664,7 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk<TRes>
     Object? id = _undefined,
     Object? name = _undefined,
     Object? color = _undefined,
+    Object? userCanEdit = _undefined,
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? blurhash = _undefined,
@@ -3696,6 +3712,9 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk<TRes>
           ? _instance.name
           : (name as String),
       color: color == _undefined ? _instance.color : (color as int?),
+      userCanEdit: userCanEdit == _undefined
+          ? _instance.userCanEdit
+          : (userCanEdit as bool?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -4130,6 +4149,7 @@ class _CopyWithStubImpl_Subscription_watchPerson_personsByPk<TRes>
     UuidValue? id,
     String? name,
     int? color,
+    bool? userCanEdit,
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
@@ -4393,6 +4413,7 @@ class Subscription_watchPerson_personsByPk_classes_class
     required this.id,
     required this.name,
     this.color,
+    this.userCanEdit,
     this.$__typename = 'Classes',
     this.photoUpdatedAt,
     this.blurhash,
@@ -4405,6 +4426,7 @@ class Subscription_watchPerson_personsByPk_classes_class
     final l$id = json['id'];
     final l$name = json['name'];
     final l$color = json['color'];
+    final l$userCanEdit = json['userCanEdit'];
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
     final l$blurhash = json['blurhash'];
@@ -4413,6 +4435,7 @@ class Subscription_watchPerson_personsByPk_classes_class
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
+      userCanEdit: (l$userCanEdit as bool?),
       $__typename: (l$$__typename as String),
       photoUpdatedAt: l$photoUpdatedAt == null
           ? null
@@ -4431,6 +4454,8 @@ class Subscription_watchPerson_personsByPk_classes_class
 
   final int? color;
 
+  final bool? userCanEdit;
+
   final String $__typename;
 
   final DateTime? photoUpdatedAt;
@@ -4448,6 +4473,8 @@ class Subscription_watchPerson_personsByPk_classes_class
     _resultData['name'] = l$name;
     final l$color = color;
     _resultData['color'] = l$color;
+    final l$userCanEdit = userCanEdit;
+    _resultData['userCanEdit'] = l$userCanEdit;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
@@ -4467,6 +4494,7 @@ class Subscription_watchPerson_personsByPk_classes_class
     final l$id = id;
     final l$name = name;
     final l$color = color;
+    final l$userCanEdit = userCanEdit;
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$blurhash = blurhash;
@@ -4475,6 +4503,7 @@ class Subscription_watchPerson_personsByPk_classes_class
       l$id,
       l$name,
       l$color,
+      l$userCanEdit,
       l$$__typename,
       l$photoUpdatedAt,
       l$blurhash,
@@ -4504,6 +4533,11 @@ class Subscription_watchPerson_personsByPk_classes_class
     final l$color = color;
     final lOther$color = other.color;
     if (l$color != lOther$color) {
+      return false;
+    }
+    final l$userCanEdit = userCanEdit;
+    final lOther$userCanEdit = other.userCanEdit;
+    if (l$userCanEdit != lOther$userCanEdit) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -4557,6 +4591,7 @@ abstract class CopyWith_Subscription_watchPerson_personsByPk_classes_class<
     UuidValue? id,
     String? name,
     int? color,
+    bool? userCanEdit,
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
@@ -4587,6 +4622,7 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk_classes_class<TRes>
     Object? id = _undefined,
     Object? name = _undefined,
     Object? color = _undefined,
+    Object? userCanEdit = _undefined,
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? blurhash = _undefined,
@@ -4598,6 +4634,9 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk_classes_class<TRes>
           ? _instance.name
           : (name as String),
       color: color == _undefined ? _instance.color : (color as int?),
+      userCanEdit: userCanEdit == _undefined
+          ? _instance.userCanEdit
+          : (userCanEdit as bool?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -4642,6 +4681,7 @@ class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_classes_class<TRes>
     UuidValue? id,
     String? name,
     int? color,
+    bool? userCanEdit,
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
@@ -5906,6 +5946,7 @@ class Subscription_watchPerson_personsByPk_groups_group
     required this.id,
     required this.name,
     this.color,
+    this.userCanEdit,
     this.$__typename = 'Groups',
     this.photoUpdatedAt,
     this.blurhash,
@@ -5918,6 +5959,7 @@ class Subscription_watchPerson_personsByPk_groups_group
     final l$id = json['id'];
     final l$name = json['name'];
     final l$color = json['color'];
+    final l$userCanEdit = json['userCanEdit'];
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
     final l$blurhash = json['blurhash'];
@@ -5926,6 +5968,7 @@ class Subscription_watchPerson_personsByPk_groups_group
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
+      userCanEdit: (l$userCanEdit as bool?),
       $__typename: (l$$__typename as String),
       photoUpdatedAt: l$photoUpdatedAt == null
           ? null
@@ -5944,6 +5987,8 @@ class Subscription_watchPerson_personsByPk_groups_group
 
   final int? color;
 
+  final bool? userCanEdit;
+
   final String $__typename;
 
   final DateTime? photoUpdatedAt;
@@ -5961,6 +6006,8 @@ class Subscription_watchPerson_personsByPk_groups_group
     _resultData['name'] = l$name;
     final l$color = color;
     _resultData['color'] = l$color;
+    final l$userCanEdit = userCanEdit;
+    _resultData['userCanEdit'] = l$userCanEdit;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
@@ -5980,6 +6027,7 @@ class Subscription_watchPerson_personsByPk_groups_group
     final l$id = id;
     final l$name = name;
     final l$color = color;
+    final l$userCanEdit = userCanEdit;
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$blurhash = blurhash;
@@ -5988,6 +6036,7 @@ class Subscription_watchPerson_personsByPk_groups_group
       l$id,
       l$name,
       l$color,
+      l$userCanEdit,
       l$$__typename,
       l$photoUpdatedAt,
       l$blurhash,
@@ -6017,6 +6066,11 @@ class Subscription_watchPerson_personsByPk_groups_group
     final l$color = color;
     final lOther$color = other.color;
     if (l$color != lOther$color) {
+      return false;
+    }
+    final l$userCanEdit = userCanEdit;
+    final lOther$userCanEdit = other.userCanEdit;
+    if (l$userCanEdit != lOther$userCanEdit) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -6070,6 +6124,7 @@ abstract class CopyWith_Subscription_watchPerson_personsByPk_groups_group<
     UuidValue? id,
     String? name,
     int? color,
+    bool? userCanEdit,
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
@@ -6100,6 +6155,7 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk_groups_group<TRes>
     Object? id = _undefined,
     Object? name = _undefined,
     Object? color = _undefined,
+    Object? userCanEdit = _undefined,
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? blurhash = _undefined,
@@ -6111,6 +6167,9 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk_groups_group<TRes>
           ? _instance.name
           : (name as String),
       color: color == _undefined ? _instance.color : (color as int?),
+      userCanEdit: userCanEdit == _undefined
+          ? _instance.userCanEdit
+          : (userCanEdit as bool?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -6155,6 +6214,7 @@ class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_groups_group<TRes>
     UuidValue? id,
     String? name,
     int? color,
+    bool? userCanEdit,
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
@@ -7519,6 +7579,7 @@ class Subscription_watchPerson_personsByPk_services_service
     required this.id,
     required this.name,
     this.color,
+    this.userCanEdit,
     this.$__typename = 'Services',
     this.studyYearFrom,
     this.studyYearTo,
@@ -7533,6 +7594,7 @@ class Subscription_watchPerson_personsByPk_services_service
     final l$id = json['id'];
     final l$name = json['name'];
     final l$color = json['color'];
+    final l$userCanEdit = json['userCanEdit'];
     final l$$__typename = json['__typename'];
     final l$studyYearFrom = json['studyYearFrom'];
     final l$studyYearTo = json['studyYearTo'];
@@ -7543,6 +7605,7 @@ class Subscription_watchPerson_personsByPk_services_service
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
+      userCanEdit: (l$userCanEdit as bool?),
       $__typename: (l$$__typename as String),
       studyYearFrom: l$studyYearFrom == null
           ? null
@@ -7571,6 +7634,8 @@ class Subscription_watchPerson_personsByPk_services_service
 
   final int? color;
 
+  final bool? userCanEdit;
+
   final String $__typename;
 
   final Subscription_watchPerson_personsByPk_services_service_studyYearFrom?
@@ -7594,6 +7659,8 @@ class Subscription_watchPerson_personsByPk_services_service
     _resultData['name'] = l$name;
     final l$color = color;
     _resultData['color'] = l$color;
+    final l$userCanEdit = userCanEdit;
+    _resultData['userCanEdit'] = l$userCanEdit;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     final l$studyYearFrom = studyYearFrom;
@@ -7617,6 +7684,7 @@ class Subscription_watchPerson_personsByPk_services_service
     final l$id = id;
     final l$name = name;
     final l$color = color;
+    final l$userCanEdit = userCanEdit;
     final l$$__typename = $__typename;
     final l$studyYearFrom = studyYearFrom;
     final l$studyYearTo = studyYearTo;
@@ -7627,6 +7695,7 @@ class Subscription_watchPerson_personsByPk_services_service
       l$id,
       l$name,
       l$color,
+      l$userCanEdit,
       l$$__typename,
       l$studyYearFrom,
       l$studyYearTo,
@@ -7658,6 +7727,11 @@ class Subscription_watchPerson_personsByPk_services_service
     final l$color = color;
     final lOther$color = other.color;
     if (l$color != lOther$color) {
+      return false;
+    }
+    final l$userCanEdit = userCanEdit;
+    final lOther$userCanEdit = other.userCanEdit;
+    if (l$userCanEdit != lOther$userCanEdit) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -7722,6 +7796,7 @@ abstract class CopyWith_Subscription_watchPerson_personsByPk_services_service<
     UuidValue? id,
     String? name,
     int? color,
+    bool? userCanEdit,
     String? $__typename,
     Subscription_watchPerson_personsByPk_services_service_studyYearFrom?
     studyYearFrom,
@@ -7765,6 +7840,7 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk_services_service<TRes>
     Object? id = _undefined,
     Object? name = _undefined,
     Object? color = _undefined,
+    Object? userCanEdit = _undefined,
     Object? $__typename = _undefined,
     Object? studyYearFrom = _undefined,
     Object? studyYearTo = _undefined,
@@ -7778,6 +7854,9 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk_services_service<TRes>
           ? _instance.name
           : (name as String),
       color: color == _undefined ? _instance.color : (color as int?),
+      userCanEdit: userCanEdit == _undefined
+          ? _instance.userCanEdit
+          : (userCanEdit as bool?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -7862,6 +7941,7 @@ class _CopyWithStubImpl_Subscription_watchPerson_personsByPk_services_service<
     UuidValue? id,
     String? name,
     int? color,
+    bool? userCanEdit,
     String? $__typename,
     Subscription_watchPerson_personsByPk_services_service_studyYearFrom?
     studyYearFrom,

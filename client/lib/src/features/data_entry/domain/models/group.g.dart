@@ -181,6 +181,7 @@ Group _$GroupFromJson(Map json) => Group(
               ? null
               : HistoryAggregateData.fromJson(Map<String, dynamic>.from(
                   json['attendanceDaysConstraintsAggregate'] as Map)),
+      userCanEdit: json['userCanEdit'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$GroupToJson(Group instance) => <String, dynamic>{

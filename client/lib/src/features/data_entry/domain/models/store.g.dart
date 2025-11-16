@@ -147,6 +147,7 @@ Store _$StoreFromJson(Map json) => Store(
           ? null
           : DateTime.parse(json['photoUpdatedAt'] as String),
       blurhash: json['blurhash'] as String?,
+      userCanEdit: json['userCanEdit'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$StoreToJson(Store instance) => <String, dynamic>{

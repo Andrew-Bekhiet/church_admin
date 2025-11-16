@@ -15,26 +15,38 @@ class Store extends ViewableWithIDAndImage
   @override
   @JsonKey(defaultValue: '')
   final String id;
+
   @override
   @JsonKey(defaultValue: '')
   final String name;
+
   @override
   final Address? address;
+
   @override
   final Family? family;
+
   @override
   @JsonKey(name: 'adminFamily')
   @QueryableField(renameTo: 'adminFamily')
   final String? familyId;
+
   @override
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
   final Color? color;
+
   @override
   final LastRecordedByInfo? lastEdit;
+
   @override
   final DateTime? photoUpdatedAt;
+
   @override
   final String? blurhash;
+
+  @override
+  @JsonKey(includeToJson: false)
+  final bool userCanEdit;
 
   const Store({
     required this.id,
@@ -46,6 +58,7 @@ class Store extends ViewableWithIDAndImage
     this.lastEdit,
     this.photoUpdatedAt,
     this.blurhash,
+    this.userCanEdit = false,
   });
 
   factory Store.fromJson(Map<String, Object?> json) => _$StoreFromJson(json);

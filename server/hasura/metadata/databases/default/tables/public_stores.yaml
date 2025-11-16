@@ -31,6 +31,14 @@ array_relationships:
         remote_table:
           name: edit_history
           schema: history
+computed_fields:
+  - name: userCanEdit
+    definition:
+      function:
+        name: user_can_edit_store
+        schema: auth
+      session_argument: hasura_session
+    comment: ""
 insert_permissions:
   - role: user
     permission:
@@ -53,6 +61,8 @@ select_permissions:
         - id
         - name
         - photo_updated_at
+      computed_fields:
+        - userCanEdit
       filter:
         _and:
           - deleted_at:

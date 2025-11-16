@@ -27,6 +27,7 @@ abstract class CopyWith_Input_AreasBoolExp<TRes> {
     Input_StringComparisonExp? name,
     Input_TimestamptzComparisonExp? photoUpdatedAt,
     Input_AreasStreetsBoolExp? streets,
+    Input_BooleanComparisonExp? userCanEdit,
   });
   TRes $_and(
     Iterable<Input_AreasBoolExp>? Function(
@@ -54,6 +55,7 @@ abstract class CopyWith_Input_AreasBoolExp<TRes> {
   CopyWith_Input_StringComparisonExp<TRes> get name;
   CopyWith_Input_TimestamptzComparisonExp<TRes> get photoUpdatedAt;
   CopyWith_Input_AreasStreetsBoolExp<TRes> get streets;
+  CopyWith_Input_BooleanComparisonExp<TRes> get userCanEdit;
 }
 
 class _CopyWithImpl_Input_AreasBoolExp<TRes>
@@ -82,6 +84,7 @@ class _CopyWithImpl_Input_AreasBoolExp<TRes>
     Object? name = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? streets = _undefined,
+    Object? userCanEdit = _undefined,
   }) => _then(
     Input_AreasBoolExp._({
       ..._instance._$data,
@@ -110,6 +113,8 @@ class _CopyWithImpl_Input_AreasBoolExp<TRes>
         'photoUpdatedAt': (photoUpdatedAt as Input_TimestamptzComparisonExp?),
       if (streets != _undefined)
         'streets': (streets as Input_AreasStreetsBoolExp?),
+      if (userCanEdit != _undefined)
+        'userCanEdit': (userCanEdit as Input_BooleanComparisonExp?),
     }),
   );
 
@@ -258,6 +263,16 @@ class _CopyWithImpl_Input_AreasBoolExp<TRes>
             (e) => call(streets: e),
           );
   }
+
+  CopyWith_Input_BooleanComparisonExp<TRes> get userCanEdit {
+    final local$userCanEdit = _instance.userCanEdit;
+    return local$userCanEdit == null
+        ? CopyWith_Input_BooleanComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_BooleanComparisonExp(
+            local$userCanEdit,
+            (e) => call(userCanEdit: e),
+          );
+  }
 }
 
 class _CopyWithStubImpl_Input_AreasBoolExp<TRes>
@@ -282,6 +297,7 @@ class _CopyWithStubImpl_Input_AreasBoolExp<TRes>
     Input_StringComparisonExp? name,
     Input_TimestamptzComparisonExp? photoUpdatedAt,
     Input_AreasStreetsBoolExp? streets,
+    Input_BooleanComparisonExp? userCanEdit,
   }) => _res;
 
   $_and(_fn) => _res;
@@ -327,6 +343,9 @@ class _CopyWithStubImpl_Input_AreasBoolExp<TRes>
 
   CopyWith_Input_AreasStreetsBoolExp<TRes> get streets =>
       CopyWith_Input_AreasStreetsBoolExp.stub(_res);
+
+  CopyWith_Input_BooleanComparisonExp<TRes> get userCanEdit =>
+      CopyWith_Input_BooleanComparisonExp.stub(_res);
 }
 
 class Input_AreasIncInput {
@@ -1085,6 +1104,7 @@ class Input_AreasOrderBy {
     Enum_OrderBy? name,
     Enum_OrderBy? photoUpdatedAt,
     Input_AreasStreetsAggregateOrderBy? streetsAggregate,
+    Enum_OrderBy? userCanEdit,
   }) => Input_AreasOrderBy._({
     if (addressesAggregate != null) r'addressesAggregate': addressesAggregate,
     if (adminUsersAggregate != null)
@@ -1099,6 +1119,7 @@ class Input_AreasOrderBy {
     if (name != null) r'name': name,
     if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
     if (streetsAggregate != null) r'streetsAggregate': streetsAggregate,
+    if (userCanEdit != null) r'userCanEdit': userCanEdit,
   });
 
   Input_AreasOrderBy._(this._$data);
@@ -1181,6 +1202,12 @@ class Input_AreasOrderBy {
               (l$streetsAggregate as Map<String, dynamic>),
             );
     }
+    if (data.containsKey('userCanEdit')) {
+      final l$userCanEdit = data['userCanEdit'];
+      result$data['userCanEdit'] = l$userCanEdit == null
+          ? null
+          : fromJson_Enum_OrderBy((l$userCanEdit as String));
+    }
     return Input_AreasOrderBy._(result$data);
   }
 
@@ -1215,6 +1242,8 @@ class Input_AreasOrderBy {
 
   Input_AreasStreetsAggregateOrderBy? get streetsAggregate =>
       (_$data['streetsAggregate'] as Input_AreasStreetsAggregateOrderBy?);
+
+  Enum_OrderBy? get userCanEdit => (_$data['userCanEdit'] as Enum_OrderBy?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -1269,6 +1298,12 @@ class Input_AreasOrderBy {
     if (_$data.containsKey('streetsAggregate')) {
       final l$streetsAggregate = streetsAggregate;
       result$data['streetsAggregate'] = l$streetsAggregate?.toJson();
+    }
+    if (_$data.containsKey('userCanEdit')) {
+      final l$userCanEdit = userCanEdit;
+      result$data['userCanEdit'] = l$userCanEdit == null
+          ? null
+          : toJson_Enum_OrderBy(l$userCanEdit);
     }
     return result$data;
   }
@@ -1379,6 +1414,15 @@ class Input_AreasOrderBy {
     if (l$streetsAggregate != lOther$streetsAggregate) {
       return false;
     }
+    final l$userCanEdit = userCanEdit;
+    final lOther$userCanEdit = other.userCanEdit;
+    if (_$data.containsKey('userCanEdit') !=
+        other._$data.containsKey('userCanEdit')) {
+      return false;
+    }
+    if (l$userCanEdit != lOther$userCanEdit) {
+      return false;
+    }
     return true;
   }
 
@@ -1395,6 +1439,7 @@ class Input_AreasOrderBy {
     final l$name = name;
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$streetsAggregate = streetsAggregate;
+    final l$userCanEdit = userCanEdit;
     return Object.hashAll([
       _$data.containsKey('addressesAggregate')
           ? l$addressesAggregate
@@ -1413,6 +1458,7 @@ class Input_AreasOrderBy {
       _$data.containsKey('name') ? l$name : const {},
       _$data.containsKey('photoUpdatedAt') ? l$photoUpdatedAt : const {},
       _$data.containsKey('streetsAggregate') ? l$streetsAggregate : const {},
+      _$data.containsKey('userCanEdit') ? l$userCanEdit : const {},
     ]);
   }
 }
@@ -1438,6 +1484,7 @@ abstract class CopyWith_Input_AreasOrderBy<TRes> {
     Enum_OrderBy? name,
     Enum_OrderBy? photoUpdatedAt,
     Input_AreasStreetsAggregateOrderBy? streetsAggregate,
+    Enum_OrderBy? userCanEdit,
   });
   CopyWith_Input_AddressesAggregateOrderBy<TRes> get addressesAggregate;
   CopyWith_Input_AuthUsersAdminOnAggregateOrderBy<TRes> get adminUsersAggregate;
@@ -1469,6 +1516,7 @@ class _CopyWithImpl_Input_AreasOrderBy<TRes>
     Object? name = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? streetsAggregate = _undefined,
+    Object? userCanEdit = _undefined,
   }) => _then(
     Input_AreasOrderBy._({
       ..._instance._$data,
@@ -1493,6 +1541,8 @@ class _CopyWithImpl_Input_AreasOrderBy<TRes>
       if (streetsAggregate != _undefined)
         'streetsAggregate':
             (streetsAggregate as Input_AreasStreetsAggregateOrderBy?),
+      if (userCanEdit != _undefined)
+        'userCanEdit': (userCanEdit as Enum_OrderBy?),
     }),
   );
 
@@ -1569,6 +1619,7 @@ class _CopyWithStubImpl_Input_AreasOrderBy<TRes>
     Enum_OrderBy? name,
     Enum_OrderBy? photoUpdatedAt,
     Input_AreasStreetsAggregateOrderBy? streetsAggregate,
+    Enum_OrderBy? userCanEdit,
   }) => _res;
 
   CopyWith_Input_AddressesAggregateOrderBy<TRes> get addressesAggregate =>

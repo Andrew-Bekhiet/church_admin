@@ -6,35 +6,60 @@ part 'admin_on_data.freezed.dart';
 part 'admin_on_data.g.dart';
 
 @freezed
-@Queryable(classLabel: 'صلاحيات الإدارة على البيانات')
+@Queryable(
+  classLabel: 'صلاحيات الإدارة على البيانات',
+  labelsOverrides: {
+    'serviceWriteRelatedFamilies': 'يمكنه تعديل عائلات المخدومين بالخدمة',
+    'groupWriteRelatedFamilies': 'يمكنه تعديل عائلات المخدومين بالمجموعة',
+  }
+)
 @JsonSerializable()
 class AdminOnData with _$AdminOnData implements ToJson {
   @override
   final String permissionId;
+
   @override
   final Area? area;
+
   @override
   final bool? areaAllowEdit;
+
   @override
   final bool? areaAdminOnUsers;
+
   @override
   final Service? service;
+
   @override
   final StudyYear? serviceStudyYearData;
+
   @override
   final bool? serviceGender;
+
   @override
   final bool? serviceAllowEdit;
+
   @override
   final bool? serviceAdminOnUsers;
+
+  @override
+  final bool? serviceWriteRelatedFamilies;
+
   @override
   final List<Class> classes;
+
   @override
   final Group? group;
+
   @override
   final bool? groupAllowEdit;
+
   @override
   final bool? groupAdminOnUsers;
+
+  @override
+  final bool? groupWriteRelatedFamilies;
+
   @override
   final User? user;
 
@@ -48,10 +73,12 @@ class AdminOnData with _$AdminOnData implements ToJson {
     this.serviceGender,
     this.serviceAllowEdit,
     this.serviceAdminOnUsers,
+    this.serviceWriteRelatedFamilies,
     this.classes = const [],
     this.group,
     this.groupAllowEdit,
     this.groupAdminOnUsers,
+    this.groupWriteRelatedFamilies,
     this.user,
   });
 

@@ -19,12 +19,16 @@ class AdminOnDataIndicator extends StatelessWidget {
             adminOnData.areaAdminOnUsers ??
             false)
           Icon(UserPermission.manageAllUsers.icon),
+        if (adminOnData.serviceWriteRelatedFamilies ??
+            adminOnData.groupWriteRelatedFamilies ??
+            false)
+          Icon(ViewableObjectService.I.getDefaultIconFor<Family>()),
         if (adminOnData.serviceAllowEdit ??
             adminOnData.groupAllowEdit ??
             adminOnData.areaAllowEdit ??
             false)
-          Icon(UserPermission.readAllData.icon),
-        Icon(UserPermission.writeAllData.icon),
+          Icon(UserPermission.writeAllData.icon),
+        Icon(UserPermission.readAllData.icon),
       ],
     );
   }

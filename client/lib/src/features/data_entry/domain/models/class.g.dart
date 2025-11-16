@@ -205,6 +205,7 @@ Class _$ClassFromJson(Map json) => Class(
               ? null
               : HistoryAggregateData.fromJson(Map<String, dynamic>.from(
                   json['attendanceDaysConstraintsAggregate'] as Map)),
+      userCanEdit: json['userCanEdit'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$ClassToJson(Class instance) => <String, dynamic>{

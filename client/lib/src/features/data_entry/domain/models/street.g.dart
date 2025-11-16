@@ -156,6 +156,7 @@ Street _$StreetFromJson(Map json) => Street(
           ? null
           : LastRecordedByInfo.fromJson(
               Map<String, Object?>.from(json['lastEdit'] as Map)),
+      userCanEdit: json['userCanEdit'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$StreetToJson(Street instance) => <String, dynamic>{

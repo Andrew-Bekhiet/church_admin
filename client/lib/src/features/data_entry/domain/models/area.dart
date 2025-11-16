@@ -15,27 +15,39 @@ class Area extends ViewableWithIDAndImage
   @override
   @JsonKey(defaultValue: '')
   final String id;
+
   @override
   @JsonKey(defaultValue: '')
   final String name;
+
   @override
   @JsonKey(fromJson: polygonFromJson, toJson: polygonToJson)
   final Polygon? bounds;
+
   @override
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
   final Color? color;
+
   @override
   final DateTime? photoUpdatedAt;
+
   @override
   final String? blurhash;
+
   @override
   final LastRecordedByInfo? lastVisit;
+
   @override
   final LastRecordedByInfo? lastEdit;
+
   @override
   @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
   @QueryableField(manyToManyRelType: AdminOnData)
   final List<User>? adminUsers;
+
+  @override
+  @JsonKey(includeToJson: false)
+  final bool userCanEdit;
 
   const Area({
     required this.id,
@@ -47,6 +59,7 @@ class Area extends ViewableWithIDAndImage
     this.lastVisit,
     this.lastEdit,
     this.adminUsers,
+    this.userCanEdit = false,
   });
 
   factory Area.fromJson(Map<String, Object?> json) => _$AreaFromJson(json);

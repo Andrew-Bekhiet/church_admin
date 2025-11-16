@@ -10,7 +10,7 @@ part 'class.g.dart';
 @JsonSerializable()
 @Queryable(
   classLabel: 'الفصول',
-  ignoreFields: ['blurhash', 'serviceStudyYear'],
+  ignoreFields: ['blurhash', 'serviceStudyYear', 'userCanEdit'],
   allowExtension: true,
 )
 class Class extends ViewableWithIDAndImage
@@ -19,36 +19,53 @@ class Class extends ViewableWithIDAndImage
   @override
   @JsonKey(defaultValue: '')
   final String id;
+
   @override
   @JsonKey(defaultValue: '')
   final String name;
+
   @override
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
   final Color? color;
+
   @override
   final DateTime? photoUpdatedAt;
+
   @override
   final String? blurhash;
+
   @override
   final Service? service;
+
   @override
   final String? serviceId;
+
   @override
   final StudyYear? studyYear;
+
   @override
   final int? serviceStudyYear;
+
   @override
   final bool? serviceGender;
+
   @override
   final LastRecordedByInfo? lastEdit;
+
   @override
   @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
   @QueryableField(manyToManyRelType: AdminOnData)
   final List<User>? adminUsers;
+
   @override
   final HistoryAggregateData? attendanceHistoryAggregate;
+
   @override
   final HistoryAggregateData? attendanceDaysConstraintsAggregate;
+
+  @override
+  @JsonKey(includeToJson: false)
+  final bool userCanEdit;
 
   const Class({
     required this.id,
@@ -65,6 +82,7 @@ class Class extends ViewableWithIDAndImage
     this.adminUsers,
     this.attendanceHistoryAggregate,
     this.attendanceDaysConstraintsAggregate,
+    this.userCanEdit = false,
   });
 
   factory Class.fromJson(Map<String, Object?> json) => _$ClassFromJson(json);

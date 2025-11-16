@@ -2170,6 +2170,7 @@ class Input_AreasBoolExp {
     Input_StringComparisonExp? name,
     Input_TimestamptzComparisonExp? photoUpdatedAt,
     Input_AreasStreetsBoolExp? streets,
+    Input_BooleanComparisonExp? userCanEdit,
   }) => Input_AreasBoolExp._({
     if ($_and != null) r'_and': $_and,
     if ($_not != null) r'_not': $_not,
@@ -2187,6 +2188,7 @@ class Input_AreasBoolExp {
     if (name != null) r'name': name,
     if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
     if (streets != null) r'streets': streets,
+    if (userCanEdit != null) r'userCanEdit': userCanEdit,
   });
 
   Input_AreasBoolExp._(this._$data);
@@ -2305,6 +2307,14 @@ class Input_AreasBoolExp {
               (l$streets as Map<String, dynamic>),
             );
     }
+    if (data.containsKey('userCanEdit')) {
+      final l$userCanEdit = data['userCanEdit'];
+      result$data['userCanEdit'] = l$userCanEdit == null
+          ? null
+          : Input_BooleanComparisonExp.fromJson(
+              (l$userCanEdit as Map<String, dynamic>),
+            );
+    }
     return Input_AreasBoolExp._(result$data);
   }
 
@@ -2353,6 +2363,9 @@ class Input_AreasBoolExp {
 
   Input_AreasStreetsBoolExp? get streets =>
       (_$data['streets'] as Input_AreasStreetsBoolExp?);
+
+  Input_BooleanComparisonExp? get userCanEdit =>
+      (_$data['userCanEdit'] as Input_BooleanComparisonExp?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -2415,6 +2428,10 @@ class Input_AreasBoolExp {
     if (_$data.containsKey('streets')) {
       final l$streets = streets;
       result$data['streets'] = l$streets?.toJson();
+    }
+    if (_$data.containsKey('userCanEdit')) {
+      final l$userCanEdit = userCanEdit;
+      result$data['userCanEdit'] = l$userCanEdit?.toJson();
     }
     return result$data;
   }
@@ -2579,6 +2596,15 @@ class Input_AreasBoolExp {
     if (l$streets != lOther$streets) {
       return false;
     }
+    final l$userCanEdit = userCanEdit;
+    final lOther$userCanEdit = other.userCanEdit;
+    if (_$data.containsKey('userCanEdit') !=
+        other._$data.containsKey('userCanEdit')) {
+      return false;
+    }
+    if (l$userCanEdit != lOther$userCanEdit) {
+      return false;
+    }
     return true;
   }
 
@@ -2599,6 +2625,7 @@ class Input_AreasBoolExp {
     final l$name = name;
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$streets = streets;
+    final l$userCanEdit = userCanEdit;
     return Object.hashAll([
       _$data.containsKey('_and')
           ? l$$_and == null
@@ -2625,6 +2652,7 @@ class Input_AreasBoolExp {
       _$data.containsKey('name') ? l$name : const {},
       _$data.containsKey('photoUpdatedAt') ? l$photoUpdatedAt : const {},
       _$data.containsKey('streets') ? l$streets : const {},
+      _$data.containsKey('userCanEdit') ? l$userCanEdit : const {},
     ]);
   }
 }

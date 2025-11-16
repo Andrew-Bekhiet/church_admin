@@ -27,6 +27,7 @@ mixin _$User {
   List<AdminOnData>? get servicesHistory;
   List<AdminOnData>? get classesHistory;
   List<AdminOnData>? get groupsHistory;
+  bool get currentUserCanManageThisUser;
 
   /// Create a copy of User
   /// with the given fields replaced by the non-null parameter values.
@@ -59,7 +60,11 @@ mixin _$User {
             const DeepCollectionEquality()
                 .equals(other.classesHistory, classesHistory) &&
             const DeepCollectionEquality()
-                .equals(other.groupsHistory, groupsHistory));
+                .equals(other.groupsHistory, groupsHistory) &&
+            (identical(other.currentUserCanManageThisUser,
+                    currentUserCanManageThisUser) ||
+                other.currentUserCanManageThisUser ==
+                    currentUserCanManageThisUser));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -78,11 +83,12 @@ mixin _$User {
       person,
       const DeepCollectionEquality().hash(servicesHistory),
       const DeepCollectionEquality().hash(classesHistory),
-      const DeepCollectionEquality().hash(groupsHistory));
+      const DeepCollectionEquality().hash(groupsHistory),
+      currentUserCanManageThisUser);
 
   @override
   String toString() {
-    return 'User(uid: $uid, name: $name, email: $email, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, adminOn: $adminOn, permissions: $permissions, authId: $authId, lastEdit: $lastEdit, person: $person, servicesHistory: $servicesHistory, classesHistory: $classesHistory, groupsHistory: $groupsHistory)';
+    return 'User(uid: $uid, name: $name, email: $email, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, adminOn: $adminOn, permissions: $permissions, authId: $authId, lastEdit: $lastEdit, person: $person, servicesHistory: $servicesHistory, classesHistory: $classesHistory, groupsHistory: $groupsHistory, currentUserCanManageThisUser: $currentUserCanManageThisUser)';
   }
 }
 
@@ -104,7 +110,8 @@ abstract mixin class $UserCopyWith<$Res> {
       Person? person,
       List<AdminOnData>? servicesHistory,
       List<AdminOnData>? classesHistory,
-      List<AdminOnData>? groupsHistory});
+      List<AdminOnData>? groupsHistory,
+      bool currentUserCanManageThisUser});
 }
 
 /// @nodoc
@@ -132,6 +139,7 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
     Object? servicesHistory = freezed,
     Object? classesHistory = freezed,
     Object? groupsHistory = freezed,
+    Object? currentUserCanManageThisUser = null,
   }) {
     return _then(User(
       uid: null == uid
@@ -186,6 +194,10 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
           ? _self.groupsHistory
           : groupsHistory // ignore: cast_nullable_to_non_nullable
               as List<AdminOnData>?,
+      currentUserCanManageThisUser: null == currentUserCanManageThisUser
+          ? _self.currentUserCanManageThisUser
+          : currentUserCanManageThisUser // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }

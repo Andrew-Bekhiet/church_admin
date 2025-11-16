@@ -52,6 +52,14 @@ array_relationships:
         table:
           name: persons_groups
           schema: public
+computed_fields:
+  - name: userCanEdit
+    definition:
+      function:
+        name: user_can_edit_group
+        schema: auth
+      session_argument: hasura_session
+    comment: ""
 insert_permissions:
   - role: user
     permission:
@@ -95,6 +103,8 @@ select_permissions:
         - blurhash
         - service_id
         - validity
+      computed_fields:
+        - userCanEdit
       filter:
         _and:
           - deleted_at:

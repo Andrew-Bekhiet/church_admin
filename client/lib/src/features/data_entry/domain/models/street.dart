@@ -15,27 +15,39 @@ class Street extends ViewableWithIDAndImage
   @override
   @JsonKey(defaultValue: '')
   final String id;
+
   @override
   @JsonKey(defaultValue: '')
   final String name;
+
   @override
   @JsonKey(fromJson: lineFromJson, toJson: lineToJson)
   final Line? line;
+
   @override
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
   final Color? color;
+
   @override
   final DateTime? photoUpdatedAt;
+
   @override
   final String? blurhash;
+
   @override
   @JsonKey(fromJson: streetsAreasFromJson, toJson: streetsAreasToJson)
   @QueryableField(manyToManyRelType: AreasStreets)
   final List<Area>? areas;
+
   @override
   final LastRecordedByInfo? lastVisit;
+
   @override
   final LastRecordedByInfo? lastEdit;
+
+  @override
+  @JsonKey(includeToJson: false)
+  final bool userCanEdit;
 
   const Street({
     required this.id,
@@ -47,6 +59,7 @@ class Street extends ViewableWithIDAndImage
     this.areas,
     this.lastVisit,
     this.lastEdit,
+    this.userCanEdit = false,
   });
 
   factory Street.fromJson(Map<String, Object?> json) => _$StreetFromJson(json);

@@ -23,10 +23,12 @@ mixin _$AdminOnData {
   bool? get serviceGender;
   bool? get serviceAllowEdit;
   bool? get serviceAdminOnUsers;
+  bool? get serviceWriteRelatedFamilies;
   List<Class> get classes;
   Group? get group;
   bool? get groupAllowEdit;
   bool? get groupAdminOnUsers;
+  bool? get groupWriteRelatedFamilies;
   User? get user;
 
   /// Create a copy of AdminOnData
@@ -57,12 +59,19 @@ mixin _$AdminOnData {
                 other.serviceAllowEdit == serviceAllowEdit) &&
             (identical(other.serviceAdminOnUsers, serviceAdminOnUsers) ||
                 other.serviceAdminOnUsers == serviceAdminOnUsers) &&
+            (identical(other.serviceWriteRelatedFamilies,
+                    serviceWriteRelatedFamilies) ||
+                other.serviceWriteRelatedFamilies ==
+                    serviceWriteRelatedFamilies) &&
             const DeepCollectionEquality().equals(other.classes, classes) &&
             (identical(other.group, group) || other.group == group) &&
             (identical(other.groupAllowEdit, groupAllowEdit) ||
                 other.groupAllowEdit == groupAllowEdit) &&
             (identical(other.groupAdminOnUsers, groupAdminOnUsers) ||
                 other.groupAdminOnUsers == groupAdminOnUsers) &&
+            (identical(other.groupWriteRelatedFamilies,
+                    groupWriteRelatedFamilies) ||
+                other.groupWriteRelatedFamilies == groupWriteRelatedFamilies) &&
             (identical(other.user, user) || other.user == user));
   }
 
@@ -79,15 +88,17 @@ mixin _$AdminOnData {
       serviceGender,
       serviceAllowEdit,
       serviceAdminOnUsers,
+      serviceWriteRelatedFamilies,
       const DeepCollectionEquality().hash(classes),
       group,
       groupAllowEdit,
       groupAdminOnUsers,
+      groupWriteRelatedFamilies,
       user);
 
   @override
   String toString() {
-    return 'AdminOnData(permissionId: $permissionId, area: $area, areaAllowEdit: $areaAllowEdit, areaAdminOnUsers: $areaAdminOnUsers, service: $service, serviceStudyYearData: $serviceStudyYearData, serviceGender: $serviceGender, serviceAllowEdit: $serviceAllowEdit, serviceAdminOnUsers: $serviceAdminOnUsers, classes: $classes, group: $group, groupAllowEdit: $groupAllowEdit, groupAdminOnUsers: $groupAdminOnUsers, user: $user)';
+    return 'AdminOnData(permissionId: $permissionId, area: $area, areaAllowEdit: $areaAllowEdit, areaAdminOnUsers: $areaAdminOnUsers, service: $service, serviceStudyYearData: $serviceStudyYearData, serviceGender: $serviceGender, serviceAllowEdit: $serviceAllowEdit, serviceAdminOnUsers: $serviceAdminOnUsers, serviceWriteRelatedFamilies: $serviceWriteRelatedFamilies, classes: $classes, group: $group, groupAllowEdit: $groupAllowEdit, groupAdminOnUsers: $groupAdminOnUsers, groupWriteRelatedFamilies: $groupWriteRelatedFamilies, user: $user)';
   }
 }
 
@@ -107,10 +118,12 @@ abstract mixin class $AdminOnDataCopyWith<$Res> {
       bool? serviceGender,
       bool? serviceAllowEdit,
       bool? serviceAdminOnUsers,
+      bool? serviceWriteRelatedFamilies,
       List<Class> classes,
       Group? group,
       bool? groupAllowEdit,
       bool? groupAdminOnUsers,
+      bool? groupWriteRelatedFamilies,
       User? user});
 }
 
@@ -135,10 +148,12 @@ class _$AdminOnDataCopyWithImpl<$Res> implements $AdminOnDataCopyWith<$Res> {
     Object? serviceGender = freezed,
     Object? serviceAllowEdit = freezed,
     Object? serviceAdminOnUsers = freezed,
+    Object? serviceWriteRelatedFamilies = freezed,
     Object? classes = null,
     Object? group = freezed,
     Object? groupAllowEdit = freezed,
     Object? groupAdminOnUsers = freezed,
+    Object? groupWriteRelatedFamilies = freezed,
     Object? user = freezed,
   }) {
     return _then(AdminOnData(
@@ -178,6 +193,10 @@ class _$AdminOnDataCopyWithImpl<$Res> implements $AdminOnDataCopyWith<$Res> {
           ? _self.serviceAdminOnUsers
           : serviceAdminOnUsers // ignore: cast_nullable_to_non_nullable
               as bool?,
+      serviceWriteRelatedFamilies: freezed == serviceWriteRelatedFamilies
+          ? _self.serviceWriteRelatedFamilies
+          : serviceWriteRelatedFamilies // ignore: cast_nullable_to_non_nullable
+              as bool?,
       classes: null == classes
           ? _self.classes
           : classes // ignore: cast_nullable_to_non_nullable
@@ -193,6 +212,10 @@ class _$AdminOnDataCopyWithImpl<$Res> implements $AdminOnDataCopyWith<$Res> {
       groupAdminOnUsers: freezed == groupAdminOnUsers
           ? _self.groupAdminOnUsers
           : groupAdminOnUsers // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      groupWriteRelatedFamilies: freezed == groupWriteRelatedFamilies
+          ? _self.groupWriteRelatedFamilies
+          : groupWriteRelatedFamilies // ignore: cast_nullable_to_non_nullable
               as bool?,
       user: freezed == user
           ? _self.user

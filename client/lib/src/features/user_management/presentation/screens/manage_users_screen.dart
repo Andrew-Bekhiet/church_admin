@@ -13,8 +13,16 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
   final _search = BehaviorSubject<String?>.seeded(null);
 
   late final _usersController = ViewableObjectListController(
-    objectsPaginatableStream:
-        DatabaseService.I.users.streamAll(searchQuery: _search.stream),
+    objectsPaginatableStream: DatabaseService.I.users.streamAll(
+      searchQuery: _search.stream,
+      where: Stream.value([
+        Filter(
+          UserFields().currentUserCanManageThisUser,
+          PrimitiveOperator.eq,
+          true,
+        ),
+      ]),
+    ),
     filterStream: _search.stream,
   );
 

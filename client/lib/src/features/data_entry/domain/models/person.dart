@@ -11,7 +11,7 @@ part 'person.g.dart';
 @JsonSerializable()
 @Queryable(
   classLabel: 'المخدومين',
-  ignoreFields: ['blurhash', 'isStudent', 'otherPhones'],
+  ignoreFields: ['blurhash', 'isStudent', 'otherPhones', 'userCanEdit'],
   allowExtension: true,
   labelsOverrides: {
     'martialStatus': 'الحالة الاجتماعية',
@@ -242,6 +242,10 @@ class Person extends ViewableWithIDAndImage
   @override
   final HistoryAggregateData? editHistoryAggregate;
 
+  @override
+  @JsonKey(includeToJson: false)
+  final bool userCanEdit;
+
   Person({
     required this.id,
     required this.name,
@@ -311,6 +315,7 @@ class Person extends ViewableWithIDAndImage
     this.callHistoryAggregate,
     this.visitHistoryAggregate,
     this.editHistoryAggregate,
+    this.userCanEdit = false,
   })  : lastConfession = lastConfession ??
             confessionHistoryAggregate?.aggregate.max ??
             confessionHistory?.singleOrNull,

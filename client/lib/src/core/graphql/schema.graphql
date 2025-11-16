@@ -336,6 +336,7 @@ type Areas {
     orderBy: [AreasStreetsOrderBy!]
     where: AreasStreetsBoolExp
   ): [AreasStreets!]!
+  userCanEdit: Boolean
 }
 
 type AreasAggregate {
@@ -376,6 +377,7 @@ input AreasBoolExp {
   name: StringComparisonExp
   photoUpdatedAt: TimestamptzComparisonExp
   streets: AreasStreetsBoolExp
+  userCanEdit: BooleanComparisonExp
 }
 
 enum AreasConstraint {
@@ -436,6 +438,7 @@ input AreasOrderBy {
   name: OrderBy
   photoUpdatedAt: OrderBy
   streetsAggregate: AreasStreetsAggregateOrderBy
+  userCanEdit: OrderBy
 }
 input AreasPkColumnsInput {
   id: uuid!
@@ -609,6 +612,7 @@ type AuthUsersAdminOn {
   group: Groups
   groupAdminOnUsers: Boolean
   groupAllowEdit: Boolean
+  groupWriteRelatedFamilies: Boolean!
   permissionId: uuid!
   service: Services
   serviceAdminOnUsers: Boolean
@@ -616,6 +620,7 @@ type AuthUsersAdminOn {
   serviceGender: Boolean
   serviceStudyYear: Int
   serviceStudyYearData: StudyYears
+  serviceWriteRelatedFamilies: Boolean!
   uid: uuid!
   user: AuthUsersData!
 }
@@ -658,6 +663,7 @@ input AuthUsersAdminOnBoolExp {
   group: GroupsBoolExp
   groupAdminOnUsers: BooleanComparisonExp
   groupAllowEdit: BooleanComparisonExp
+  groupWriteRelatedFamilies: BooleanComparisonExp
   permissionId: UuidComparisonExp
   service: ServicesBoolExp
   serviceAdminOnUsers: BooleanComparisonExp
@@ -665,6 +671,7 @@ input AuthUsersAdminOnBoolExp {
   serviceGender: BooleanComparisonExp
   serviceStudyYear: IntComparisonExp
   serviceStudyYearData: StudyYearsBoolExp
+  serviceWriteRelatedFamilies: BooleanComparisonExp
   uid: UuidComparisonExp
   user: AuthUsersDataBoolExp
 }
@@ -735,6 +742,7 @@ input AuthUsersAdminOnOrderBy {
   group: GroupsOrderBy
   groupAdminOnUsers: OrderBy
   groupAllowEdit: OrderBy
+  groupWriteRelatedFamilies: OrderBy
   permissionId: OrderBy
   service: ServicesOrderBy
   serviceAdminOnUsers: OrderBy
@@ -742,6 +750,7 @@ input AuthUsersAdminOnOrderBy {
   serviceGender: OrderBy
   serviceStudyYear: OrderBy
   serviceStudyYearData: StudyYearsOrderBy
+  serviceWriteRelatedFamilies: OrderBy
   uid: OrderBy
   user: AuthUsersDataOrderBy
 }
@@ -754,11 +763,13 @@ enum AuthUsersAdminOnSelectColumn {
   areaAllowEdit
   groupAdminOnUsers
   groupAllowEdit
+  groupWriteRelatedFamilies
   permissionId
   serviceAdminOnUsers
   serviceAllowEdit
   serviceGender
   serviceStudyYear
+  serviceWriteRelatedFamilies
   uid
 }
 
@@ -786,11 +797,13 @@ input AuthUsersAdminOnStreamCursorValueInput {
   areaAllowEdit: Boolean
   groupAdminOnUsers: Boolean
   groupAllowEdit: Boolean
+  groupWriteRelatedFamilies: Boolean
   permissionId: uuid
   serviceAdminOnUsers: Boolean
   serviceAllowEdit: Boolean
   serviceGender: Boolean
   serviceStudyYear: Int
+  serviceWriteRelatedFamilies: Boolean
   uid: uuid
 }
 
@@ -822,6 +835,7 @@ type AuthUsersData {
     where: AuthUsersAdminOnBoolExp
   ): [AuthUsersAdminOn!]!
   blurhash: String
+  currentUserCanManageThisUser: Boolean
   email: String!
   lastEdit: HistoryLatestEdits
   name: String!
@@ -854,6 +868,7 @@ input AuthUsersDataBoolExp {
   _or: [AuthUsersDataBoolExp!]
   adminOn: AuthUsersAdminOnBoolExp
   blurhash: StringComparisonExp
+  currentUserCanManageThisUser: BooleanComparisonExp
   email: StringComparisonExp
   lastEdit: HistoryLatestEditsBoolExp
   name: StringComparisonExp
@@ -879,6 +894,7 @@ type AuthUsersDataMinFields {
 input AuthUsersDataOrderBy {
   adminOnAggregate: AuthUsersAdminOnAggregateOrderBy
   blurhash: OrderBy
+  currentUserCanManageThisUser: OrderBy
   email: OrderBy
   lastEdit: HistoryLatestEditsOrderBy
   name: OrderBy
@@ -1179,6 +1195,7 @@ type Classes {
   serviceId: uuid!
   serviceStudyYear: Int!
   studyYear: StudyYears!
+  userCanEdit: Boolean
 }
 
 type ClassesAggregate {
@@ -1257,6 +1274,7 @@ input ClassesBoolExp {
   serviceId: UuidComparisonExp
   serviceStudyYear: IntComparisonExp
   studyYear: StudyYearsBoolExp
+  userCanEdit: BooleanComparisonExp
 }
 
 enum ClassesConstraint {
@@ -1351,6 +1369,7 @@ input ClassesOrderBy {
   serviceId: OrderBy
   serviceStudyYear: OrderBy
   studyYear: StudyYearsOrderBy
+  userCanEdit: OrderBy
 }
 
 type ClassesPersons {
@@ -1830,6 +1849,7 @@ type Families {
     orderBy: [StoresOrderBy!]
     where: StoresBoolExp
   ): StoresAggregate!
+  userCanEdit: Boolean
   visitHistory(
     distinctOn: [HistoryVisitHistorySelectColumn!]
     limit: Int
@@ -1931,6 +1951,7 @@ input FamiliesBoolExp {
   status: StringComparisonExp
   stores: StoresBoolExp
   storesAggregate: StoresAggregateBoolExp
+  userCanEdit: BooleanComparisonExp
   visitHistory: HistoryVisitHistoryBoolExp
   visitHistoryAggregate: HistoryVisitHistoryAggregateBoolExp
 }
@@ -2112,6 +2133,7 @@ input FamiliesOrderBy {
   photoUpdatedAt: OrderBy
   status: OrderBy
   storesAggregate: StoresAggregateOrderBy
+  userCanEdit: OrderBy
   visitHistoryAggregate: HistoryVisitHistoryAggregateOrderBy
 }
 input FamiliesPkColumnsInput {
@@ -2441,6 +2463,7 @@ type Groups {
   photoUpdatedAt: timestamptz
   service: Services!
   serviceId: uuid!
+  userCanEdit: Boolean
   validity: daterange
 }
 
@@ -2513,6 +2536,7 @@ input GroupsBoolExp {
   photoUpdatedAt: TimestamptzComparisonExp
   service: ServicesBoolExp
   serviceId: UuidComparisonExp
+  userCanEdit: BooleanComparisonExp
   validity: DaterangeComparisonExp
 }
 
@@ -2599,6 +2623,7 @@ input GroupsOrderBy {
   photoUpdatedAt: OrderBy
   service: ServicesOrderBy
   serviceId: OrderBy
+  userCanEdit: OrderBy
   validity: OrderBy
 }
 input GroupsPkColumnsInput {
@@ -4774,6 +4799,7 @@ type Persons {
   shammasLevelId: uuid
   state: PersonStates
   stateId: uuid
+  store: Stores
   storeId: uuid
   studyYear: StudyYears
   studyYearId: smallint
@@ -4786,6 +4812,7 @@ type Persons {
   ): [PersonsTags!]!
   uid: uuid
   user: AuthUsersData
+  userCanEdit: Boolean
   visitHistory(
     distinctOn: [HistoryVisitHistorySelectColumn!]
     limit: Int
@@ -4927,12 +4954,14 @@ input PersonsBoolExp {
   shammasLevelId: UuidComparisonExp
   state: PersonStatesBoolExp
   stateId: UuidComparisonExp
+  store: StoresBoolExp
   storeId: UuidComparisonExp
   studyYear: StudyYearsBoolExp
   studyYearId: SmallintComparisonExp
   tags: PersonsTagsBoolExp
   uid: UuidComparisonExp
   user: AuthUsersDataBoolExp
+  userCanEdit: BooleanComparisonExp
   visitHistory: HistoryVisitHistoryBoolExp
   visitHistoryAggregate: HistoryVisitHistoryAggregateBoolExp
   workStatus: StringComparisonExp
@@ -5180,6 +5209,7 @@ input PersonsInsertInput {
   shammasLevelId: uuid
   state: PersonStatesObjRelInsertInput
   stateId: uuid
+  store: StoresObjRelInsertInput
   storeId: uuid
   studyYear: StudyYearsObjRelInsertInput
   studyYearId: smallint
@@ -5385,12 +5415,14 @@ input PersonsOrderBy {
   shammasLevelId: OrderBy
   state: PersonStatesOrderBy
   stateId: OrderBy
+  store: StoresOrderBy
   storeId: OrderBy
   studyYear: StudyYearsOrderBy
   studyYearId: OrderBy
   tagsAggregate: PersonsTagsAggregateOrderBy
   uid: OrderBy
   user: AuthUsersDataOrderBy
+  userCanEdit: OrderBy
   visitHistoryAggregate: HistoryVisitHistoryAggregateOrderBy
   workStatus: OrderBy
 }
@@ -6108,6 +6140,7 @@ type Services {
   studyYearFromId: smallint
   studyYearTo: StudyYears
   studyYearToId: smallint
+  userCanEdit: Boolean
 }
 
 type ServicesAggregate {
@@ -6162,6 +6195,7 @@ input ServicesBoolExp {
   studyYearFromId: SmallintComparisonExp
   studyYearTo: StudyYearsBoolExp
   studyYearToId: SmallintComparisonExp
+  userCanEdit: BooleanComparisonExp
 }
 
 enum ServicesConstraint {
@@ -6247,6 +6281,7 @@ input ServicesOrderBy {
   studyYearFromId: OrderBy
   studyYearTo: StudyYearsOrderBy
   studyYearToId: OrderBy
+  userCanEdit: OrderBy
 }
 input ServicesPkColumnsInput {
   id: uuid!
@@ -6421,6 +6456,7 @@ type Stores {
   lastEdit: HistoryLatestEdits
   name: String!
   photoUpdatedAt: timestamptz
+  userCanEdit: Boolean
 }
 
 type StoresAggregate {
@@ -6489,6 +6525,7 @@ input StoresBoolExp {
   lastEdit: HistoryLatestEditsBoolExp
   name: StringComparisonExp
   photoUpdatedAt: TimestamptzComparisonExp
+  userCanEdit: BooleanComparisonExp
 }
 
 enum StoresConstraint {
@@ -6575,6 +6612,7 @@ input StoresOrderBy {
   lastEdit: HistoryLatestEditsOrderBy
   name: OrderBy
   photoUpdatedAt: OrderBy
+  userCanEdit: OrderBy
 }
 input StoresPkColumnsInput {
   id: uuid!
@@ -6713,6 +6751,7 @@ type Streets {
   line: geography
   name: String!
   photoUpdatedAt: timestamptz
+  userCanEdit: Boolean
 }
 
 type StreetsAggregate {
@@ -6752,6 +6791,7 @@ input StreetsBoolExp {
   line: GeographyComparisonExp
   name: StringComparisonExp
   photoUpdatedAt: TimestamptzComparisonExp
+  userCanEdit: BooleanComparisonExp
 }
 
 enum StreetsConstraint {
@@ -6810,6 +6850,7 @@ input StreetsOrderBy {
   line: OrderBy
   name: OrderBy
   photoUpdatedAt: OrderBy
+  userCanEdit: OrderBy
 }
 input StreetsPkColumnsInput {
   id: uuid!
