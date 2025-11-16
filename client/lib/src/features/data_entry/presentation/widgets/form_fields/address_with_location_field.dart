@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -254,7 +255,12 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
                   child: TextFormField(
                     key: ValueKey(_address.houseNumber),
                     initialValue: _address.houseNumber?.toString(),
-                    decoration: const InputDecoration(labelText: 'رقم العمارة'),
+                    decoration: const InputDecoration(
+                      label: AutoSizeText(
+                        'رقم العمارة',
+                        minFontSize: 9,
+                      ),
+                    ),
                     enabled: widget.enabled,
                     keyboardType: TextInputType.number,
                     inputFormatters: [
@@ -294,7 +300,13 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
                   child: TextFormField(
                     key: ValueKey(_address.storeyNumber),
                     initialValue: _address.storeyNumber?.toString(),
-                    decoration: const InputDecoration(labelText: 'رقم الدور'),
+                    decoration: const InputDecoration(
+                      label: AutoSizeText(
+                        'رقم الدور',
+                        maxLines: 1,
+                        minFontSize: 9,
+                      ),
+                    ),
                     enabled: widget.enabled,
                     keyboardType: TextInputType.number,
                     inputFormatters: [
@@ -325,7 +337,13 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
                   child: TextFormField(
                     key: ValueKey(_address.apartmentNumber),
                     initialValue: _address.apartmentNumber?.toString(),
-                    decoration: const InputDecoration(labelText: 'رقم الشقة'),
+                    decoration: const InputDecoration(
+                      label: AutoSizeText(
+                        'رقم الشقة',
+                        maxLines: 1,
+                        minFontSize: 9,
+                      ),
+                    ),
                     enabled: widget.enabled,
                     keyboardType: TextInputType.number,
                     inputFormatters: [
