@@ -961,6 +961,7 @@ Person _$PersonFromJson(Map json) => Person(
           ? null
           : HistoryAggregateData.fromJson(
               Map<String, dynamic>.from(json['editHistoryAggregate'] as Map)),
+      userCanEdit: json['userCanEdit'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$PersonToJson(Person instance) => <String, dynamic>{

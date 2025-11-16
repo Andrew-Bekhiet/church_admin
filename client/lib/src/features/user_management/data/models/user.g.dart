@@ -107,6 +107,15 @@ class _UserFields {
     },
   );
 
+  final FieldMetadata<bool> currentUserCanManageThisUser = FieldMetadata<bool>(
+    getValue: (obj) => obj is User ? obj.currentUserCanManageThisUser : null,
+    parentType: User,
+    name: 'currentUserCanManageThisUser',
+    label: 'currentUserCanManageThisUser',
+    isCodeOnly: false,
+    operators: {...BooleanOperator.values},
+  );
+
   late final List<FieldMetadata<Object>> allFields = [
     uid,
     name,
@@ -115,7 +124,8 @@ class _UserFields {
     adminOn,
     permissions,
     lastEdit,
-    person
+    person,
+    currentUserCanManageThisUser
   ];
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'uid': uid,
@@ -125,7 +135,8 @@ class _UserFields {
     'adminOn': adminOn,
     'permissions': permissions,
     'lastEdit': lastEdit,
-    'person': person
+    'person': person,
+    'currentUserCanManageThisUser': currentUserCanManageThisUser
   };
 }
 
@@ -168,6 +179,8 @@ User _$UserFromJson(Map json) => User(
           ?.map(
               (e) => AdminOnData.fromJson(Map<String, Object?>.from(e as Map)))
           .toList(),
+      currentUserCanManageThisUser:
+          json['currentUserCanManageThisUser'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{

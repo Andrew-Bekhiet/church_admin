@@ -221,6 +221,7 @@ class Input_AuthUsersAdminOnBoolExp {
     Input_GroupsBoolExp? group,
     Input_BooleanComparisonExp? groupAdminOnUsers,
     Input_BooleanComparisonExp? groupAllowEdit,
+    Input_BooleanComparisonExp? groupWriteRelatedFamilies,
     Input_UuidComparisonExp? permissionId,
     Input_ServicesBoolExp? service,
     Input_BooleanComparisonExp? serviceAdminOnUsers,
@@ -228,6 +229,7 @@ class Input_AuthUsersAdminOnBoolExp {
     Input_BooleanComparisonExp? serviceGender,
     Input_IntComparisonExp? serviceStudyYear,
     Input_StudyYearsBoolExp? serviceStudyYearData,
+    Input_BooleanComparisonExp? serviceWriteRelatedFamilies,
     Input_UuidComparisonExp? uid,
     Input_AuthUsersDataBoolExp? user,
   }) => Input_AuthUsersAdminOnBoolExp._({
@@ -245,6 +247,8 @@ class Input_AuthUsersAdminOnBoolExp {
     if (group != null) r'group': group,
     if (groupAdminOnUsers != null) r'groupAdminOnUsers': groupAdminOnUsers,
     if (groupAllowEdit != null) r'groupAllowEdit': groupAllowEdit,
+    if (groupWriteRelatedFamilies != null)
+      r'groupWriteRelatedFamilies': groupWriteRelatedFamilies,
     if (permissionId != null) r'permissionId': permissionId,
     if (service != null) r'service': service,
     if (serviceAdminOnUsers != null)
@@ -254,6 +258,8 @@ class Input_AuthUsersAdminOnBoolExp {
     if (serviceStudyYear != null) r'serviceStudyYear': serviceStudyYear,
     if (serviceStudyYearData != null)
       r'serviceStudyYearData': serviceStudyYearData,
+    if (serviceWriteRelatedFamilies != null)
+      r'serviceWriteRelatedFamilies': serviceWriteRelatedFamilies,
     if (uid != null) r'uid': uid,
     if (user != null) r'user': user,
   });
@@ -372,6 +378,15 @@ class Input_AuthUsersAdminOnBoolExp {
               (l$groupAllowEdit as Map<String, dynamic>),
             );
     }
+    if (data.containsKey('groupWriteRelatedFamilies')) {
+      final l$groupWriteRelatedFamilies = data['groupWriteRelatedFamilies'];
+      result$data['groupWriteRelatedFamilies'] =
+          l$groupWriteRelatedFamilies == null
+          ? null
+          : Input_BooleanComparisonExp.fromJson(
+              (l$groupWriteRelatedFamilies as Map<String, dynamic>),
+            );
+    }
     if (data.containsKey('permissionId')) {
       final l$permissionId = data['permissionId'];
       result$data['permissionId'] = l$permissionId == null
@@ -424,6 +439,15 @@ class Input_AuthUsersAdminOnBoolExp {
           ? null
           : Input_StudyYearsBoolExp.fromJson(
               (l$serviceStudyYearData as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('serviceWriteRelatedFamilies')) {
+      final l$serviceWriteRelatedFamilies = data['serviceWriteRelatedFamilies'];
+      result$data['serviceWriteRelatedFamilies'] =
+          l$serviceWriteRelatedFamilies == null
+          ? null
+          : Input_BooleanComparisonExp.fromJson(
+              (l$serviceWriteRelatedFamilies as Map<String, dynamic>),
             );
     }
     if (data.containsKey('uid')) {
@@ -485,6 +509,9 @@ class Input_AuthUsersAdminOnBoolExp {
   Input_BooleanComparisonExp? get groupAllowEdit =>
       (_$data['groupAllowEdit'] as Input_BooleanComparisonExp?);
 
+  Input_BooleanComparisonExp? get groupWriteRelatedFamilies =>
+      (_$data['groupWriteRelatedFamilies'] as Input_BooleanComparisonExp?);
+
   Input_UuidComparisonExp? get permissionId =>
       (_$data['permissionId'] as Input_UuidComparisonExp?);
 
@@ -505,6 +532,9 @@ class Input_AuthUsersAdminOnBoolExp {
 
   Input_StudyYearsBoolExp? get serviceStudyYearData =>
       (_$data['serviceStudyYearData'] as Input_StudyYearsBoolExp?);
+
+  Input_BooleanComparisonExp? get serviceWriteRelatedFamilies =>
+      (_$data['serviceWriteRelatedFamilies'] as Input_BooleanComparisonExp?);
 
   Input_UuidComparisonExp? get uid =>
       (_$data['uid'] as Input_UuidComparisonExp?);
@@ -570,6 +600,11 @@ class Input_AuthUsersAdminOnBoolExp {
       final l$groupAllowEdit = groupAllowEdit;
       result$data['groupAllowEdit'] = l$groupAllowEdit?.toJson();
     }
+    if (_$data.containsKey('groupWriteRelatedFamilies')) {
+      final l$groupWriteRelatedFamilies = groupWriteRelatedFamilies;
+      result$data['groupWriteRelatedFamilies'] = l$groupWriteRelatedFamilies
+          ?.toJson();
+    }
     if (_$data.containsKey('permissionId')) {
       final l$permissionId = permissionId;
       result$data['permissionId'] = l$permissionId?.toJson();
@@ -597,6 +632,11 @@ class Input_AuthUsersAdminOnBoolExp {
     if (_$data.containsKey('serviceStudyYearData')) {
       final l$serviceStudyYearData = serviceStudyYearData;
       result$data['serviceStudyYearData'] = l$serviceStudyYearData?.toJson();
+    }
+    if (_$data.containsKey('serviceWriteRelatedFamilies')) {
+      final l$serviceWriteRelatedFamilies = serviceWriteRelatedFamilies;
+      result$data['serviceWriteRelatedFamilies'] = l$serviceWriteRelatedFamilies
+          ?.toJson();
     }
     if (_$data.containsKey('uid')) {
       final l$uid = uid;
@@ -763,6 +803,15 @@ class Input_AuthUsersAdminOnBoolExp {
     if (l$groupAllowEdit != lOther$groupAllowEdit) {
       return false;
     }
+    final l$groupWriteRelatedFamilies = groupWriteRelatedFamilies;
+    final lOther$groupWriteRelatedFamilies = other.groupWriteRelatedFamilies;
+    if (_$data.containsKey('groupWriteRelatedFamilies') !=
+        other._$data.containsKey('groupWriteRelatedFamilies')) {
+      return false;
+    }
+    if (l$groupWriteRelatedFamilies != lOther$groupWriteRelatedFamilies) {
+      return false;
+    }
     final l$permissionId = permissionId;
     final lOther$permissionId = other.permissionId;
     if (_$data.containsKey('permissionId') !=
@@ -825,6 +874,16 @@ class Input_AuthUsersAdminOnBoolExp {
     if (l$serviceStudyYearData != lOther$serviceStudyYearData) {
       return false;
     }
+    final l$serviceWriteRelatedFamilies = serviceWriteRelatedFamilies;
+    final lOther$serviceWriteRelatedFamilies =
+        other.serviceWriteRelatedFamilies;
+    if (_$data.containsKey('serviceWriteRelatedFamilies') !=
+        other._$data.containsKey('serviceWriteRelatedFamilies')) {
+      return false;
+    }
+    if (l$serviceWriteRelatedFamilies != lOther$serviceWriteRelatedFamilies) {
+      return false;
+    }
     final l$uid = uid;
     final lOther$uid = other.uid;
     if (_$data.containsKey('uid') != other._$data.containsKey('uid')) {
@@ -860,6 +919,7 @@ class Input_AuthUsersAdminOnBoolExp {
     final l$group = group;
     final l$groupAdminOnUsers = groupAdminOnUsers;
     final l$groupAllowEdit = groupAllowEdit;
+    final l$groupWriteRelatedFamilies = groupWriteRelatedFamilies;
     final l$permissionId = permissionId;
     final l$service = service;
     final l$serviceAdminOnUsers = serviceAdminOnUsers;
@@ -867,6 +927,7 @@ class Input_AuthUsersAdminOnBoolExp {
     final l$serviceGender = serviceGender;
     final l$serviceStudyYear = serviceStudyYear;
     final l$serviceStudyYearData = serviceStudyYearData;
+    final l$serviceWriteRelatedFamilies = serviceWriteRelatedFamilies;
     final l$uid = uid;
     final l$user = user;
     return Object.hashAll([
@@ -892,6 +953,9 @@ class Input_AuthUsersAdminOnBoolExp {
       _$data.containsKey('group') ? l$group : const {},
       _$data.containsKey('groupAdminOnUsers') ? l$groupAdminOnUsers : const {},
       _$data.containsKey('groupAllowEdit') ? l$groupAllowEdit : const {},
+      _$data.containsKey('groupWriteRelatedFamilies')
+          ? l$groupWriteRelatedFamilies
+          : const {},
       _$data.containsKey('permissionId') ? l$permissionId : const {},
       _$data.containsKey('service') ? l$service : const {},
       _$data.containsKey('serviceAdminOnUsers')
@@ -902,6 +966,9 @@ class Input_AuthUsersAdminOnBoolExp {
       _$data.containsKey('serviceStudyYear') ? l$serviceStudyYear : const {},
       _$data.containsKey('serviceStudyYearData')
           ? l$serviceStudyYearData
+          : const {},
+      _$data.containsKey('serviceWriteRelatedFamilies')
+          ? l$serviceWriteRelatedFamilies
           : const {},
       _$data.containsKey('uid') ? l$uid : const {},
       _$data.containsKey('user') ? l$user : const {},
@@ -933,6 +1000,7 @@ abstract class CopyWith_Input_AuthUsersAdminOnBoolExp<TRes> {
     Input_GroupsBoolExp? group,
     Input_BooleanComparisonExp? groupAdminOnUsers,
     Input_BooleanComparisonExp? groupAllowEdit,
+    Input_BooleanComparisonExp? groupWriteRelatedFamilies,
     Input_UuidComparisonExp? permissionId,
     Input_ServicesBoolExp? service,
     Input_BooleanComparisonExp? serviceAdminOnUsers,
@@ -940,6 +1008,7 @@ abstract class CopyWith_Input_AuthUsersAdminOnBoolExp<TRes> {
     Input_BooleanComparisonExp? serviceGender,
     Input_IntComparisonExp? serviceStudyYear,
     Input_StudyYearsBoolExp? serviceStudyYearData,
+    Input_BooleanComparisonExp? serviceWriteRelatedFamilies,
     Input_UuidComparisonExp? uid,
     Input_AuthUsersDataBoolExp? user,
   });
@@ -971,6 +1040,7 @@ abstract class CopyWith_Input_AuthUsersAdminOnBoolExp<TRes> {
   CopyWith_Input_GroupsBoolExp<TRes> get group;
   CopyWith_Input_BooleanComparisonExp<TRes> get groupAdminOnUsers;
   CopyWith_Input_BooleanComparisonExp<TRes> get groupAllowEdit;
+  CopyWith_Input_BooleanComparisonExp<TRes> get groupWriteRelatedFamilies;
   CopyWith_Input_UuidComparisonExp<TRes> get permissionId;
   CopyWith_Input_ServicesBoolExp<TRes> get service;
   CopyWith_Input_BooleanComparisonExp<TRes> get serviceAdminOnUsers;
@@ -978,6 +1048,7 @@ abstract class CopyWith_Input_AuthUsersAdminOnBoolExp<TRes> {
   CopyWith_Input_BooleanComparisonExp<TRes> get serviceGender;
   CopyWith_Input_IntComparisonExp<TRes> get serviceStudyYear;
   CopyWith_Input_StudyYearsBoolExp<TRes> get serviceStudyYearData;
+  CopyWith_Input_BooleanComparisonExp<TRes> get serviceWriteRelatedFamilies;
   CopyWith_Input_UuidComparisonExp<TRes> get uid;
   CopyWith_Input_AuthUsersDataBoolExp<TRes> get user;
 }
@@ -1007,6 +1078,7 @@ class _CopyWithImpl_Input_AuthUsersAdminOnBoolExp<TRes>
     Object? group = _undefined,
     Object? groupAdminOnUsers = _undefined,
     Object? groupAllowEdit = _undefined,
+    Object? groupWriteRelatedFamilies = _undefined,
     Object? permissionId = _undefined,
     Object? service = _undefined,
     Object? serviceAdminOnUsers = _undefined,
@@ -1014,6 +1086,7 @@ class _CopyWithImpl_Input_AuthUsersAdminOnBoolExp<TRes>
     Object? serviceGender = _undefined,
     Object? serviceStudyYear = _undefined,
     Object? serviceStudyYearData = _undefined,
+    Object? serviceWriteRelatedFamilies = _undefined,
     Object? uid = _undefined,
     Object? user = _undefined,
   }) => _then(
@@ -1045,6 +1118,9 @@ class _CopyWithImpl_Input_AuthUsersAdminOnBoolExp<TRes>
         'groupAdminOnUsers': (groupAdminOnUsers as Input_BooleanComparisonExp?),
       if (groupAllowEdit != _undefined)
         'groupAllowEdit': (groupAllowEdit as Input_BooleanComparisonExp?),
+      if (groupWriteRelatedFamilies != _undefined)
+        'groupWriteRelatedFamilies':
+            (groupWriteRelatedFamilies as Input_BooleanComparisonExp?),
       if (permissionId != _undefined)
         'permissionId': (permissionId as Input_UuidComparisonExp?),
       if (service != _undefined) 'service': (service as Input_ServicesBoolExp?),
@@ -1060,6 +1136,9 @@ class _CopyWithImpl_Input_AuthUsersAdminOnBoolExp<TRes>
       if (serviceStudyYearData != _undefined)
         'serviceStudyYearData':
             (serviceStudyYearData as Input_StudyYearsBoolExp?),
+      if (serviceWriteRelatedFamilies != _undefined)
+        'serviceWriteRelatedFamilies':
+            (serviceWriteRelatedFamilies as Input_BooleanComparisonExp?),
       if (uid != _undefined) 'uid': (uid as Input_UuidComparisonExp?),
       if (user != _undefined) 'user': (user as Input_AuthUsersDataBoolExp?),
     }),
@@ -1206,6 +1285,16 @@ class _CopyWithImpl_Input_AuthUsersAdminOnBoolExp<TRes>
           );
   }
 
+  CopyWith_Input_BooleanComparisonExp<TRes> get groupWriteRelatedFamilies {
+    final local$groupWriteRelatedFamilies = _instance.groupWriteRelatedFamilies;
+    return local$groupWriteRelatedFamilies == null
+        ? CopyWith_Input_BooleanComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_BooleanComparisonExp(
+            local$groupWriteRelatedFamilies,
+            (e) => call(groupWriteRelatedFamilies: e),
+          );
+  }
+
   CopyWith_Input_UuidComparisonExp<TRes> get permissionId {
     final local$permissionId = _instance.permissionId;
     return local$permissionId == null
@@ -1276,6 +1365,17 @@ class _CopyWithImpl_Input_AuthUsersAdminOnBoolExp<TRes>
           );
   }
 
+  CopyWith_Input_BooleanComparisonExp<TRes> get serviceWriteRelatedFamilies {
+    final local$serviceWriteRelatedFamilies =
+        _instance.serviceWriteRelatedFamilies;
+    return local$serviceWriteRelatedFamilies == null
+        ? CopyWith_Input_BooleanComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_BooleanComparisonExp(
+            local$serviceWriteRelatedFamilies,
+            (e) => call(serviceWriteRelatedFamilies: e),
+          );
+  }
+
   CopyWith_Input_UuidComparisonExp<TRes> get uid {
     final local$uid = _instance.uid;
     return local$uid == null
@@ -1312,6 +1412,7 @@ class _CopyWithStubImpl_Input_AuthUsersAdminOnBoolExp<TRes>
     Input_GroupsBoolExp? group,
     Input_BooleanComparisonExp? groupAdminOnUsers,
     Input_BooleanComparisonExp? groupAllowEdit,
+    Input_BooleanComparisonExp? groupWriteRelatedFamilies,
     Input_UuidComparisonExp? permissionId,
     Input_ServicesBoolExp? service,
     Input_BooleanComparisonExp? serviceAdminOnUsers,
@@ -1319,6 +1420,7 @@ class _CopyWithStubImpl_Input_AuthUsersAdminOnBoolExp<TRes>
     Input_BooleanComparisonExp? serviceGender,
     Input_IntComparisonExp? serviceStudyYear,
     Input_StudyYearsBoolExp? serviceStudyYearData,
+    Input_BooleanComparisonExp? serviceWriteRelatedFamilies,
     Input_UuidComparisonExp? uid,
     Input_AuthUsersDataBoolExp? user,
   }) => _res;
@@ -1363,6 +1465,9 @@ class _CopyWithStubImpl_Input_AuthUsersAdminOnBoolExp<TRes>
   CopyWith_Input_BooleanComparisonExp<TRes> get groupAllowEdit =>
       CopyWith_Input_BooleanComparisonExp.stub(_res);
 
+  CopyWith_Input_BooleanComparisonExp<TRes> get groupWriteRelatedFamilies =>
+      CopyWith_Input_BooleanComparisonExp.stub(_res);
+
   CopyWith_Input_UuidComparisonExp<TRes> get permissionId =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
 
@@ -1383,6 +1488,9 @@ class _CopyWithStubImpl_Input_AuthUsersAdminOnBoolExp<TRes>
 
   CopyWith_Input_StudyYearsBoolExp<TRes> get serviceStudyYearData =>
       CopyWith_Input_StudyYearsBoolExp.stub(_res);
+
+  CopyWith_Input_BooleanComparisonExp<TRes> get serviceWriteRelatedFamilies =>
+      CopyWith_Input_BooleanComparisonExp.stub(_res);
 
   CopyWith_Input_UuidComparisonExp<TRes> get uid =>
       CopyWith_Input_UuidComparisonExp.stub(_res);

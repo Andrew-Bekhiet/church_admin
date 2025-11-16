@@ -19,7 +19,7 @@ part 'family.g.dart';
     'children': 'عائلات الأبناء',
     'parents': 'عائلات الآباء',
   },
-  ignoreFields: ['blurhash', 'familyAdminsPhones'],
+  ignoreFields: ['blurhash', 'familyAdminsPhones', 'userCanEdit'],
 )
 class Family extends ViewableWithIDAndImage
     with _$Family
@@ -86,6 +86,10 @@ class Family extends ViewableWithIDAndImage
   @override
   final LastRecordedByInfo? lastFatherVisit;
 
+  @override
+  @JsonKey(includeToJson: false)
+  final bool userCanEdit;
+
   const Family({
     required this.id,
     required this.name,
@@ -104,6 +108,7 @@ class Family extends ViewableWithIDAndImage
     this.lastVisit,
     this.lastFatherVisit,
     this.familyAdminsPhones,
+    this.userCanEdit = false,
   });
 
   factory Family.fromJson(Map<String, Object?> json) => _$FamilyFromJson(json);

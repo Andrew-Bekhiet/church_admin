@@ -57,6 +57,10 @@ class Group extends ViewableWithIDAndImage
   @override
   final HistoryAggregateData? attendanceDaysConstraintsAggregate;
 
+  @override
+  @JsonKey(includeToJson: false)
+  final bool userCanEdit;
+
   const Group({
     required this.id,
     required this.name,
@@ -70,6 +74,7 @@ class Group extends ViewableWithIDAndImage
     this.adminUsers,
     this.attendanceHistoryAggregate,
     this.attendanceDaysConstraintsAggregate,
+    this.userCanEdit = false,
   });
 
   factory Group.fromJson(Map<String, Object?> json) => _$GroupFromJson(json);

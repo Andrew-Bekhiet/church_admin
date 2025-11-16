@@ -2473,6 +2473,7 @@ class Query_personsGeolocations_areas implements Fragment_AreaNoPhoto {
     required this.id,
     required this.name,
     this.color,
+    this.userCanEdit,
     this.$__typename = 'Areas',
     this.bounds,
   });
@@ -2481,12 +2482,14 @@ class Query_personsGeolocations_areas implements Fragment_AreaNoPhoto {
     final l$id = json['id'];
     final l$name = json['name'];
     final l$color = json['color'];
+    final l$userCanEdit = json['userCanEdit'];
     final l$$__typename = json['__typename'];
     final l$bounds = json['bounds'];
     return Query_personsGeolocations_areas(
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
+      userCanEdit: (l$userCanEdit as bool?),
       $__typename: (l$$__typename as String),
       bounds: (l$bounds as Map<String, dynamic>?),
     );
@@ -2497,6 +2500,8 @@ class Query_personsGeolocations_areas implements Fragment_AreaNoPhoto {
   final String name;
 
   final int? color;
+
+  final bool? userCanEdit;
 
   final String $__typename;
 
@@ -2510,6 +2515,8 @@ class Query_personsGeolocations_areas implements Fragment_AreaNoPhoto {
     _resultData['name'] = l$name;
     final l$color = color;
     _resultData['color'] = l$color;
+    final l$userCanEdit = userCanEdit;
+    _resultData['userCanEdit'] = l$userCanEdit;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     final l$bounds = bounds;
@@ -2522,9 +2529,17 @@ class Query_personsGeolocations_areas implements Fragment_AreaNoPhoto {
     final l$id = id;
     final l$name = name;
     final l$color = color;
+    final l$userCanEdit = userCanEdit;
     final l$$__typename = $__typename;
     final l$bounds = bounds;
-    return Object.hashAll([l$id, l$name, l$color, l$$__typename, l$bounds]);
+    return Object.hashAll([
+      l$id,
+      l$name,
+      l$color,
+      l$userCanEdit,
+      l$$__typename,
+      l$bounds,
+    ]);
   }
 
   @override
@@ -2549,6 +2564,11 @@ class Query_personsGeolocations_areas implements Fragment_AreaNoPhoto {
     final l$color = color;
     final lOther$color = other.color;
     if (l$color != lOther$color) {
+      return false;
+    }
+    final l$userCanEdit = userCanEdit;
+    final lOther$userCanEdit = other.userCanEdit;
+    if (l$userCanEdit != lOther$userCanEdit) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -2584,6 +2604,7 @@ abstract class CopyWith_Query_personsGeolocations_areas<TRes> {
     UuidValue? id,
     String? name,
     int? color,
+    bool? userCanEdit,
     String? $__typename,
     Map<String, dynamic>? bounds,
   });
@@ -2603,6 +2624,7 @@ class _CopyWithImpl_Query_personsGeolocations_areas<TRes>
     Object? id = _undefined,
     Object? name = _undefined,
     Object? color = _undefined,
+    Object? userCanEdit = _undefined,
     Object? $__typename = _undefined,
     Object? bounds = _undefined,
   }) => _then(
@@ -2612,6 +2634,9 @@ class _CopyWithImpl_Query_personsGeolocations_areas<TRes>
           ? _instance.name
           : (name as String),
       color: color == _undefined ? _instance.color : (color as int?),
+      userCanEdit: userCanEdit == _undefined
+          ? _instance.userCanEdit
+          : (userCanEdit as bool?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -2632,6 +2657,7 @@ class _CopyWithStubImpl_Query_personsGeolocations_areas<TRes>
     UuidValue? id,
     String? name,
     int? color,
+    bool? userCanEdit,
     String? $__typename,
     Map<String, dynamic>? bounds,
   }) => _res;
@@ -2642,6 +2668,7 @@ class Query_personsGeolocations_streets implements Fragment_StreetNoPhoto {
     required this.id,
     required this.name,
     this.color,
+    this.userCanEdit,
     this.$__typename = 'Streets',
     this.line,
   });
@@ -2652,12 +2679,14 @@ class Query_personsGeolocations_streets implements Fragment_StreetNoPhoto {
     final l$id = json['id'];
     final l$name = json['name'];
     final l$color = json['color'];
+    final l$userCanEdit = json['userCanEdit'];
     final l$$__typename = json['__typename'];
     final l$line = json['line'];
     return Query_personsGeolocations_streets(
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
+      userCanEdit: (l$userCanEdit as bool?),
       $__typename: (l$$__typename as String),
       line: (l$line as Map<String, dynamic>?),
     );
@@ -2668,6 +2697,8 @@ class Query_personsGeolocations_streets implements Fragment_StreetNoPhoto {
   final String name;
 
   final int? color;
+
+  final bool? userCanEdit;
 
   final String $__typename;
 
@@ -2681,6 +2712,8 @@ class Query_personsGeolocations_streets implements Fragment_StreetNoPhoto {
     _resultData['name'] = l$name;
     final l$color = color;
     _resultData['color'] = l$color;
+    final l$userCanEdit = userCanEdit;
+    _resultData['userCanEdit'] = l$userCanEdit;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     final l$line = line;
@@ -2693,9 +2726,17 @@ class Query_personsGeolocations_streets implements Fragment_StreetNoPhoto {
     final l$id = id;
     final l$name = name;
     final l$color = color;
+    final l$userCanEdit = userCanEdit;
     final l$$__typename = $__typename;
     final l$line = line;
-    return Object.hashAll([l$id, l$name, l$color, l$$__typename, l$line]);
+    return Object.hashAll([
+      l$id,
+      l$name,
+      l$color,
+      l$userCanEdit,
+      l$$__typename,
+      l$line,
+    ]);
   }
 
   @override
@@ -2720,6 +2761,11 @@ class Query_personsGeolocations_streets implements Fragment_StreetNoPhoto {
     final l$color = color;
     final lOther$color = other.color;
     if (l$color != lOther$color) {
+      return false;
+    }
+    final l$userCanEdit = userCanEdit;
+    final lOther$userCanEdit = other.userCanEdit;
+    if (l$userCanEdit != lOther$userCanEdit) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -2755,6 +2801,7 @@ abstract class CopyWith_Query_personsGeolocations_streets<TRes> {
     UuidValue? id,
     String? name,
     int? color,
+    bool? userCanEdit,
     String? $__typename,
     Map<String, dynamic>? line,
   });
@@ -2774,6 +2821,7 @@ class _CopyWithImpl_Query_personsGeolocations_streets<TRes>
     Object? id = _undefined,
     Object? name = _undefined,
     Object? color = _undefined,
+    Object? userCanEdit = _undefined,
     Object? $__typename = _undefined,
     Object? line = _undefined,
   }) => _then(
@@ -2783,6 +2831,9 @@ class _CopyWithImpl_Query_personsGeolocations_streets<TRes>
           ? _instance.name
           : (name as String),
       color: color == _undefined ? _instance.color : (color as int?),
+      userCanEdit: userCanEdit == _undefined
+          ? _instance.userCanEdit
+          : (userCanEdit as bool?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -2803,6 +2854,7 @@ class _CopyWithStubImpl_Query_personsGeolocations_streets<TRes>
     UuidValue? id,
     String? name,
     int? color,
+    bool? userCanEdit,
     String? $__typename,
     Map<String, dynamic>? line,
   }) => _res;
@@ -2813,6 +2865,7 @@ class Query_personsGeolocations_families implements Fragment_FamilyNoPhoto {
     required this.id,
     required this.name,
     this.color,
+    this.userCanEdit,
     this.$__typename = 'Families',
     this.address,
   });
@@ -2823,12 +2876,14 @@ class Query_personsGeolocations_families implements Fragment_FamilyNoPhoto {
     final l$id = json['id'];
     final l$name = json['name'];
     final l$color = json['color'];
+    final l$userCanEdit = json['userCanEdit'];
     final l$$__typename = json['__typename'];
     final l$address = json['address'];
     return Query_personsGeolocations_families(
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
+      userCanEdit: (l$userCanEdit as bool?),
       $__typename: (l$$__typename as String),
       address: l$address == null
           ? null
@@ -2844,6 +2899,8 @@ class Query_personsGeolocations_families implements Fragment_FamilyNoPhoto {
 
   final int? color;
 
+  final bool? userCanEdit;
+
   final String $__typename;
 
   final Query_personsGeolocations_families_address? address;
@@ -2856,6 +2913,8 @@ class Query_personsGeolocations_families implements Fragment_FamilyNoPhoto {
     _resultData['name'] = l$name;
     final l$color = color;
     _resultData['color'] = l$color;
+    final l$userCanEdit = userCanEdit;
+    _resultData['userCanEdit'] = l$userCanEdit;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     final l$address = address;
@@ -2868,9 +2927,17 @@ class Query_personsGeolocations_families implements Fragment_FamilyNoPhoto {
     final l$id = id;
     final l$name = name;
     final l$color = color;
+    final l$userCanEdit = userCanEdit;
     final l$$__typename = $__typename;
     final l$address = address;
-    return Object.hashAll([l$id, l$name, l$color, l$$__typename, l$address]);
+    return Object.hashAll([
+      l$id,
+      l$name,
+      l$color,
+      l$userCanEdit,
+      l$$__typename,
+      l$address,
+    ]);
   }
 
   @override
@@ -2895,6 +2962,11 @@ class Query_personsGeolocations_families implements Fragment_FamilyNoPhoto {
     final l$color = color;
     final lOther$color = other.color;
     if (l$color != lOther$color) {
+      return false;
+    }
+    final l$userCanEdit = userCanEdit;
+    final lOther$userCanEdit = other.userCanEdit;
+    if (l$userCanEdit != lOther$userCanEdit) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -2932,6 +3004,7 @@ abstract class CopyWith_Query_personsGeolocations_families<TRes> {
     UuidValue? id,
     String? name,
     int? color,
+    bool? userCanEdit,
     String? $__typename,
     Query_personsGeolocations_families_address? address,
   });
@@ -2952,6 +3025,7 @@ class _CopyWithImpl_Query_personsGeolocations_families<TRes>
     Object? id = _undefined,
     Object? name = _undefined,
     Object? color = _undefined,
+    Object? userCanEdit = _undefined,
     Object? $__typename = _undefined,
     Object? address = _undefined,
   }) => _then(
@@ -2961,6 +3035,9 @@ class _CopyWithImpl_Query_personsGeolocations_families<TRes>
           ? _instance.name
           : (name as String),
       color: color == _undefined ? _instance.color : (color as int?),
+      userCanEdit: userCanEdit == _undefined
+          ? _instance.userCanEdit
+          : (userCanEdit as bool?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -2993,6 +3070,7 @@ class _CopyWithStubImpl_Query_personsGeolocations_families<TRes>
     UuidValue? id,
     String? name,
     int? color,
+    bool? userCanEdit,
     String? $__typename,
     Query_personsGeolocations_families_address? address,
   }) => _res;
@@ -3124,6 +3202,7 @@ class Query_personsGeolocations_stores implements Fragment_StoreNoPhoto {
     required this.id,
     required this.name,
     this.color,
+    this.userCanEdit,
     this.$__typename = 'Stores',
     this.address,
   });
@@ -3132,12 +3211,14 @@ class Query_personsGeolocations_stores implements Fragment_StoreNoPhoto {
     final l$id = json['id'];
     final l$name = json['name'];
     final l$color = json['color'];
+    final l$userCanEdit = json['userCanEdit'];
     final l$$__typename = json['__typename'];
     final l$address = json['address'];
     return Query_personsGeolocations_stores(
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
+      userCanEdit: (l$userCanEdit as bool?),
       $__typename: (l$$__typename as String),
       address: l$address == null
           ? null
@@ -3153,6 +3234,8 @@ class Query_personsGeolocations_stores implements Fragment_StoreNoPhoto {
 
   final int? color;
 
+  final bool? userCanEdit;
+
   final String $__typename;
 
   final Query_personsGeolocations_stores_address? address;
@@ -3165,6 +3248,8 @@ class Query_personsGeolocations_stores implements Fragment_StoreNoPhoto {
     _resultData['name'] = l$name;
     final l$color = color;
     _resultData['color'] = l$color;
+    final l$userCanEdit = userCanEdit;
+    _resultData['userCanEdit'] = l$userCanEdit;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     final l$address = address;
@@ -3177,9 +3262,17 @@ class Query_personsGeolocations_stores implements Fragment_StoreNoPhoto {
     final l$id = id;
     final l$name = name;
     final l$color = color;
+    final l$userCanEdit = userCanEdit;
     final l$$__typename = $__typename;
     final l$address = address;
-    return Object.hashAll([l$id, l$name, l$color, l$$__typename, l$address]);
+    return Object.hashAll([
+      l$id,
+      l$name,
+      l$color,
+      l$userCanEdit,
+      l$$__typename,
+      l$address,
+    ]);
   }
 
   @override
@@ -3204,6 +3297,11 @@ class Query_personsGeolocations_stores implements Fragment_StoreNoPhoto {
     final l$color = color;
     final lOther$color = other.color;
     if (l$color != lOther$color) {
+      return false;
+    }
+    final l$userCanEdit = userCanEdit;
+    final lOther$userCanEdit = other.userCanEdit;
+    if (l$userCanEdit != lOther$userCanEdit) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -3239,6 +3337,7 @@ abstract class CopyWith_Query_personsGeolocations_stores<TRes> {
     UuidValue? id,
     String? name,
     int? color,
+    bool? userCanEdit,
     String? $__typename,
     Query_personsGeolocations_stores_address? address,
   });
@@ -3259,6 +3358,7 @@ class _CopyWithImpl_Query_personsGeolocations_stores<TRes>
     Object? id = _undefined,
     Object? name = _undefined,
     Object? color = _undefined,
+    Object? userCanEdit = _undefined,
     Object? $__typename = _undefined,
     Object? address = _undefined,
   }) => _then(
@@ -3268,6 +3368,9 @@ class _CopyWithImpl_Query_personsGeolocations_stores<TRes>
           ? _instance.name
           : (name as String),
       color: color == _undefined ? _instance.color : (color as int?),
+      userCanEdit: userCanEdit == _undefined
+          ? _instance.userCanEdit
+          : (userCanEdit as bool?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -3300,6 +3403,7 @@ class _CopyWithStubImpl_Query_personsGeolocations_stores<TRes>
     UuidValue? id,
     String? name,
     int? color,
+    bool? userCanEdit,
     String? $__typename,
     Query_personsGeolocations_stores_address? address,
   }) => _res;
@@ -3431,6 +3535,7 @@ class Query_personsGeolocations_persons implements Fragment_PersonNoPhoto {
     required this.id,
     required this.name,
     this.color,
+    this.userCanEdit,
     this.$__typename = 'Persons',
     this.address,
   });
@@ -3441,12 +3546,14 @@ class Query_personsGeolocations_persons implements Fragment_PersonNoPhoto {
     final l$id = json['id'];
     final l$name = json['name'];
     final l$color = json['color'];
+    final l$userCanEdit = json['userCanEdit'];
     final l$$__typename = json['__typename'];
     final l$address = json['address'];
     return Query_personsGeolocations_persons(
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
+      userCanEdit: (l$userCanEdit as bool?),
       $__typename: (l$$__typename as String),
       address: l$address == null
           ? null
@@ -3462,6 +3569,8 @@ class Query_personsGeolocations_persons implements Fragment_PersonNoPhoto {
 
   final int? color;
 
+  final bool? userCanEdit;
+
   final String $__typename;
 
   final Query_personsGeolocations_persons_address? address;
@@ -3474,6 +3583,8 @@ class Query_personsGeolocations_persons implements Fragment_PersonNoPhoto {
     _resultData['name'] = l$name;
     final l$color = color;
     _resultData['color'] = l$color;
+    final l$userCanEdit = userCanEdit;
+    _resultData['userCanEdit'] = l$userCanEdit;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     final l$address = address;
@@ -3486,9 +3597,17 @@ class Query_personsGeolocations_persons implements Fragment_PersonNoPhoto {
     final l$id = id;
     final l$name = name;
     final l$color = color;
+    final l$userCanEdit = userCanEdit;
     final l$$__typename = $__typename;
     final l$address = address;
-    return Object.hashAll([l$id, l$name, l$color, l$$__typename, l$address]);
+    return Object.hashAll([
+      l$id,
+      l$name,
+      l$color,
+      l$userCanEdit,
+      l$$__typename,
+      l$address,
+    ]);
   }
 
   @override
@@ -3513,6 +3632,11 @@ class Query_personsGeolocations_persons implements Fragment_PersonNoPhoto {
     final l$color = color;
     final lOther$color = other.color;
     if (l$color != lOther$color) {
+      return false;
+    }
+    final l$userCanEdit = userCanEdit;
+    final lOther$userCanEdit = other.userCanEdit;
+    if (l$userCanEdit != lOther$userCanEdit) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -3548,6 +3672,7 @@ abstract class CopyWith_Query_personsGeolocations_persons<TRes> {
     UuidValue? id,
     String? name,
     int? color,
+    bool? userCanEdit,
     String? $__typename,
     Query_personsGeolocations_persons_address? address,
   });
@@ -3568,6 +3693,7 @@ class _CopyWithImpl_Query_personsGeolocations_persons<TRes>
     Object? id = _undefined,
     Object? name = _undefined,
     Object? color = _undefined,
+    Object? userCanEdit = _undefined,
     Object? $__typename = _undefined,
     Object? address = _undefined,
   }) => _then(
@@ -3577,6 +3703,9 @@ class _CopyWithImpl_Query_personsGeolocations_persons<TRes>
           ? _instance.name
           : (name as String),
       color: color == _undefined ? _instance.color : (color as int?),
+      userCanEdit: userCanEdit == _undefined
+          ? _instance.userCanEdit
+          : (userCanEdit as bool?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -3609,6 +3738,7 @@ class _CopyWithStubImpl_Query_personsGeolocations_persons<TRes>
     UuidValue? id,
     String? name,
     int? color,
+    bool? userCanEdit,
     String? $__typename,
     Query_personsGeolocations_persons_address? address,
   }) => _res;
@@ -10590,6 +10720,7 @@ class Query_personHistoryAnalysis_personsByPk_services_service
     required this.id,
     required this.name,
     this.color,
+    this.userCanEdit,
     this.$__typename = 'Services',
     required this.attendanceHistoryAggregate,
     required this.attendanceDaysConstraintsAggregate,
@@ -10601,6 +10732,7 @@ class Query_personHistoryAnalysis_personsByPk_services_service
     final l$id = json['id'];
     final l$name = json['name'];
     final l$color = json['color'];
+    final l$userCanEdit = json['userCanEdit'];
     final l$$__typename = json['__typename'];
     final l$attendanceHistoryAggregate = json['attendanceHistoryAggregate'];
     final l$attendanceDaysConstraintsAggregate =
@@ -10609,6 +10741,7 @@ class Query_personHistoryAnalysis_personsByPk_services_service
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
+      userCanEdit: (l$userCanEdit as bool?),
       $__typename: (l$$__typename as String),
       attendanceHistoryAggregate:
           Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate.fromJson(
@@ -10627,6 +10760,8 @@ class Query_personHistoryAnalysis_personsByPk_services_service
 
   final int? color;
 
+  final bool? userCanEdit;
+
   final String $__typename;
 
   final Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate
@@ -10643,6 +10778,8 @@ class Query_personHistoryAnalysis_personsByPk_services_service
     _resultData['name'] = l$name;
     final l$color = color;
     _resultData['color'] = l$color;
+    final l$userCanEdit = userCanEdit;
+    _resultData['userCanEdit'] = l$userCanEdit;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
@@ -10660,6 +10797,7 @@ class Query_personHistoryAnalysis_personsByPk_services_service
     final l$id = id;
     final l$name = name;
     final l$color = color;
+    final l$userCanEdit = userCanEdit;
     final l$$__typename = $__typename;
     final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
     final l$attendanceDaysConstraintsAggregate =
@@ -10668,6 +10806,7 @@ class Query_personHistoryAnalysis_personsByPk_services_service
       l$id,
       l$name,
       l$color,
+      l$userCanEdit,
       l$$__typename,
       l$attendanceHistoryAggregate,
       l$attendanceDaysConstraintsAggregate,
@@ -10696,6 +10835,11 @@ class Query_personHistoryAnalysis_personsByPk_services_service
     final l$color = color;
     final lOther$color = other.color;
     if (l$color != lOther$color) {
+      return false;
+    }
+    final l$userCanEdit = userCanEdit;
+    final lOther$userCanEdit = other.userCanEdit;
+    if (l$userCanEdit != lOther$userCanEdit) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -10749,6 +10893,7 @@ abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_services_service
     UuidValue? id,
     String? name,
     int? color,
+    bool? userCanEdit,
     String? $__typename,
     Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate?
     attendanceHistoryAggregate,
@@ -10788,6 +10933,7 @@ class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_services_service<
     Object? id = _undefined,
     Object? name = _undefined,
     Object? color = _undefined,
+    Object? userCanEdit = _undefined,
     Object? $__typename = _undefined,
     Object? attendanceHistoryAggregate = _undefined,
     Object? attendanceDaysConstraintsAggregate = _undefined,
@@ -10798,6 +10944,9 @@ class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_services_service<
           ? _instance.name
           : (name as String),
       color: color == _undefined ? _instance.color : (color as int?),
+      userCanEdit: userCanEdit == _undefined
+          ? _instance.userCanEdit
+          : (userCanEdit as bool?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -10858,6 +11007,7 @@ class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_services_service
     UuidValue? id,
     String? name,
     int? color,
+    bool? userCanEdit,
     String? $__typename,
     Query_personHistoryAnalysis_personsByPk_services_service_attendanceHistoryAggregate?
     attendanceHistoryAggregate,
@@ -12373,6 +12523,7 @@ class Query_personHistoryAnalysis_personsByPk_classes_class
     required this.id,
     required this.name,
     this.color,
+    this.userCanEdit,
     this.$__typename = 'Classes',
     required this.attendanceHistoryAggregate,
     required this.attendanceDaysConstraintsAggregate,
@@ -12384,6 +12535,7 @@ class Query_personHistoryAnalysis_personsByPk_classes_class
     final l$id = json['id'];
     final l$name = json['name'];
     final l$color = json['color'];
+    final l$userCanEdit = json['userCanEdit'];
     final l$$__typename = json['__typename'];
     final l$attendanceHistoryAggregate = json['attendanceHistoryAggregate'];
     final l$attendanceDaysConstraintsAggregate =
@@ -12392,6 +12544,7 @@ class Query_personHistoryAnalysis_personsByPk_classes_class
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
+      userCanEdit: (l$userCanEdit as bool?),
       $__typename: (l$$__typename as String),
       attendanceHistoryAggregate:
           Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate.fromJson(
@@ -12410,6 +12563,8 @@ class Query_personHistoryAnalysis_personsByPk_classes_class
 
   final int? color;
 
+  final bool? userCanEdit;
+
   final String $__typename;
 
   final Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate
@@ -12426,6 +12581,8 @@ class Query_personHistoryAnalysis_personsByPk_classes_class
     _resultData['name'] = l$name;
     final l$color = color;
     _resultData['color'] = l$color;
+    final l$userCanEdit = userCanEdit;
+    _resultData['userCanEdit'] = l$userCanEdit;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
@@ -12443,6 +12600,7 @@ class Query_personHistoryAnalysis_personsByPk_classes_class
     final l$id = id;
     final l$name = name;
     final l$color = color;
+    final l$userCanEdit = userCanEdit;
     final l$$__typename = $__typename;
     final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
     final l$attendanceDaysConstraintsAggregate =
@@ -12451,6 +12609,7 @@ class Query_personHistoryAnalysis_personsByPk_classes_class
       l$id,
       l$name,
       l$color,
+      l$userCanEdit,
       l$$__typename,
       l$attendanceHistoryAggregate,
       l$attendanceDaysConstraintsAggregate,
@@ -12479,6 +12638,11 @@ class Query_personHistoryAnalysis_personsByPk_classes_class
     final l$color = color;
     final lOther$color = other.color;
     if (l$color != lOther$color) {
+      return false;
+    }
+    final l$userCanEdit = userCanEdit;
+    final lOther$userCanEdit = other.userCanEdit;
+    if (l$userCanEdit != lOther$userCanEdit) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -12531,6 +12695,7 @@ abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_classes_class<
     UuidValue? id,
     String? name,
     int? color,
+    bool? userCanEdit,
     String? $__typename,
     Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate?
     attendanceHistoryAggregate,
@@ -12566,6 +12731,7 @@ class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_class<TRes>
     Object? id = _undefined,
     Object? name = _undefined,
     Object? color = _undefined,
+    Object? userCanEdit = _undefined,
     Object? $__typename = _undefined,
     Object? attendanceHistoryAggregate = _undefined,
     Object? attendanceDaysConstraintsAggregate = _undefined,
@@ -12576,6 +12742,9 @@ class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes_class<TRes>
           ? _instance.name
           : (name as String),
       color: color == _undefined ? _instance.color : (color as int?),
+      userCanEdit: userCanEdit == _undefined
+          ? _instance.userCanEdit
+          : (userCanEdit as bool?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -12634,6 +12803,7 @@ class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes_class<
     UuidValue? id,
     String? name,
     int? color,
+    bool? userCanEdit,
     String? $__typename,
     Query_personHistoryAnalysis_personsByPk_classes_class_attendanceHistoryAggregate?
     attendanceHistoryAggregate,
@@ -14141,6 +14311,7 @@ class Query_personHistoryAnalysis_personsByPk_groups_group
     required this.id,
     required this.name,
     this.color,
+    this.userCanEdit,
     this.$__typename = 'Groups',
     required this.attendanceHistoryAggregate,
     required this.attendanceDaysConstraintsAggregate,
@@ -14152,6 +14323,7 @@ class Query_personHistoryAnalysis_personsByPk_groups_group
     final l$id = json['id'];
     final l$name = json['name'];
     final l$color = json['color'];
+    final l$userCanEdit = json['userCanEdit'];
     final l$$__typename = json['__typename'];
     final l$attendanceHistoryAggregate = json['attendanceHistoryAggregate'];
     final l$attendanceDaysConstraintsAggregate =
@@ -14160,6 +14332,7 @@ class Query_personHistoryAnalysis_personsByPk_groups_group
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
+      userCanEdit: (l$userCanEdit as bool?),
       $__typename: (l$$__typename as String),
       attendanceHistoryAggregate:
           Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate.fromJson(
@@ -14178,6 +14351,8 @@ class Query_personHistoryAnalysis_personsByPk_groups_group
 
   final int? color;
 
+  final bool? userCanEdit;
+
   final String $__typename;
 
   final Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate
@@ -14194,6 +14369,8 @@ class Query_personHistoryAnalysis_personsByPk_groups_group
     _resultData['name'] = l$name;
     final l$color = color;
     _resultData['color'] = l$color;
+    final l$userCanEdit = userCanEdit;
+    _resultData['userCanEdit'] = l$userCanEdit;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
@@ -14211,6 +14388,7 @@ class Query_personHistoryAnalysis_personsByPk_groups_group
     final l$id = id;
     final l$name = name;
     final l$color = color;
+    final l$userCanEdit = userCanEdit;
     final l$$__typename = $__typename;
     final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
     final l$attendanceDaysConstraintsAggregate =
@@ -14219,6 +14397,7 @@ class Query_personHistoryAnalysis_personsByPk_groups_group
       l$id,
       l$name,
       l$color,
+      l$userCanEdit,
       l$$__typename,
       l$attendanceHistoryAggregate,
       l$attendanceDaysConstraintsAggregate,
@@ -14247,6 +14426,11 @@ class Query_personHistoryAnalysis_personsByPk_groups_group
     final l$color = color;
     final lOther$color = other.color;
     if (l$color != lOther$color) {
+      return false;
+    }
+    final l$userCanEdit = userCanEdit;
+    final lOther$userCanEdit = other.userCanEdit;
+    if (l$userCanEdit != lOther$userCanEdit) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -14298,6 +14482,7 @@ abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_groups_group<
     UuidValue? id,
     String? name,
     int? color,
+    bool? userCanEdit,
     String? $__typename,
     Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate?
     attendanceHistoryAggregate,
@@ -14333,6 +14518,7 @@ class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_groups_group<TRes>
     Object? id = _undefined,
     Object? name = _undefined,
     Object? color = _undefined,
+    Object? userCanEdit = _undefined,
     Object? $__typename = _undefined,
     Object? attendanceHistoryAggregate = _undefined,
     Object? attendanceDaysConstraintsAggregate = _undefined,
@@ -14343,6 +14529,9 @@ class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_groups_group<TRes>
           ? _instance.name
           : (name as String),
       color: color == _undefined ? _instance.color : (color as int?),
+      userCanEdit: userCanEdit == _undefined
+          ? _instance.userCanEdit
+          : (userCanEdit as bool?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -14401,6 +14590,7 @@ class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_groups_group<
     UuidValue? id,
     String? name,
     int? color,
+    bool? userCanEdit,
     String? $__typename,
     Query_personHistoryAnalysis_personsByPk_groups_group_attendanceHistoryAggregate?
     attendanceHistoryAggregate,
@@ -16956,6 +17146,7 @@ class Query_personServicesClassesGroups_personsByPk_classes_class
     required this.id,
     required this.name,
     this.color,
+    this.userCanEdit,
     this.$__typename = 'Classes',
     this.photoUpdatedAt,
     this.blurhash,
@@ -16968,6 +17159,7 @@ class Query_personServicesClassesGroups_personsByPk_classes_class
     final l$id = json['id'];
     final l$name = json['name'];
     final l$color = json['color'];
+    final l$userCanEdit = json['userCanEdit'];
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
     final l$blurhash = json['blurhash'];
@@ -16976,6 +17168,7 @@ class Query_personServicesClassesGroups_personsByPk_classes_class
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
+      userCanEdit: (l$userCanEdit as bool?),
       $__typename: (l$$__typename as String),
       photoUpdatedAt: l$photoUpdatedAt == null
           ? null
@@ -16993,6 +17186,8 @@ class Query_personServicesClassesGroups_personsByPk_classes_class
 
   final int? color;
 
+  final bool? userCanEdit;
+
   final String $__typename;
 
   final DateTime? photoUpdatedAt;
@@ -17009,6 +17204,8 @@ class Query_personServicesClassesGroups_personsByPk_classes_class
     _resultData['name'] = l$name;
     final l$color = color;
     _resultData['color'] = l$color;
+    final l$userCanEdit = userCanEdit;
+    _resultData['userCanEdit'] = l$userCanEdit;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
@@ -17027,6 +17224,7 @@ class Query_personServicesClassesGroups_personsByPk_classes_class
     final l$id = id;
     final l$name = name;
     final l$color = color;
+    final l$userCanEdit = userCanEdit;
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$blurhash = blurhash;
@@ -17035,6 +17233,7 @@ class Query_personServicesClassesGroups_personsByPk_classes_class
       l$id,
       l$name,
       l$color,
+      l$userCanEdit,
       l$$__typename,
       l$photoUpdatedAt,
       l$blurhash,
@@ -17064,6 +17263,11 @@ class Query_personServicesClassesGroups_personsByPk_classes_class
     final l$color = color;
     final lOther$color = other.color;
     if (l$color != lOther$color) {
+      return false;
+    }
+    final l$userCanEdit = userCanEdit;
+    final lOther$userCanEdit = other.userCanEdit;
+    if (l$userCanEdit != lOther$userCanEdit) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -17119,6 +17323,7 @@ abstract class CopyWith_Query_personServicesClassesGroups_personsByPk_classes_cl
     UuidValue? id,
     String? name,
     int? color,
+    bool? userCanEdit,
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
@@ -17152,6 +17357,7 @@ class _CopyWithImpl_Query_personServicesClassesGroups_personsByPk_classes_class<
     Object? id = _undefined,
     Object? name = _undefined,
     Object? color = _undefined,
+    Object? userCanEdit = _undefined,
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? blurhash = _undefined,
@@ -17163,6 +17369,9 @@ class _CopyWithImpl_Query_personServicesClassesGroups_personsByPk_classes_class<
           ? _instance.name
           : (name as String),
       color: color == _undefined ? _instance.color : (color as int?),
+      userCanEdit: userCanEdit == _undefined
+          ? _instance.userCanEdit
+          : (userCanEdit as bool?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -17204,6 +17413,7 @@ class _CopyWithStubImpl_Query_personServicesClassesGroups_personsByPk_classes_cl
     UuidValue? id,
     String? name,
     int? color,
+    bool? userCanEdit,
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
@@ -17377,6 +17587,7 @@ class Query_personServicesClassesGroups_personsByPk_groups_group
     required this.id,
     required this.name,
     this.color,
+    this.userCanEdit,
     this.$__typename = 'Groups',
     this.photoUpdatedAt,
     this.blurhash,
@@ -17389,6 +17600,7 @@ class Query_personServicesClassesGroups_personsByPk_groups_group
     final l$id = json['id'];
     final l$name = json['name'];
     final l$color = json['color'];
+    final l$userCanEdit = json['userCanEdit'];
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
     final l$blurhash = json['blurhash'];
@@ -17397,6 +17609,7 @@ class Query_personServicesClassesGroups_personsByPk_groups_group
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
+      userCanEdit: (l$userCanEdit as bool?),
       $__typename: (l$$__typename as String),
       photoUpdatedAt: l$photoUpdatedAt == null
           ? null
@@ -17414,6 +17627,8 @@ class Query_personServicesClassesGroups_personsByPk_groups_group
 
   final int? color;
 
+  final bool? userCanEdit;
+
   final String $__typename;
 
   final DateTime? photoUpdatedAt;
@@ -17430,6 +17645,8 @@ class Query_personServicesClassesGroups_personsByPk_groups_group
     _resultData['name'] = l$name;
     final l$color = color;
     _resultData['color'] = l$color;
+    final l$userCanEdit = userCanEdit;
+    _resultData['userCanEdit'] = l$userCanEdit;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
@@ -17448,6 +17665,7 @@ class Query_personServicesClassesGroups_personsByPk_groups_group
     final l$id = id;
     final l$name = name;
     final l$color = color;
+    final l$userCanEdit = userCanEdit;
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$blurhash = blurhash;
@@ -17456,6 +17674,7 @@ class Query_personServicesClassesGroups_personsByPk_groups_group
       l$id,
       l$name,
       l$color,
+      l$userCanEdit,
       l$$__typename,
       l$photoUpdatedAt,
       l$blurhash,
@@ -17485,6 +17704,11 @@ class Query_personServicesClassesGroups_personsByPk_groups_group
     final l$color = color;
     final lOther$color = other.color;
     if (l$color != lOther$color) {
+      return false;
+    }
+    final l$userCanEdit = userCanEdit;
+    final lOther$userCanEdit = other.userCanEdit;
+    if (l$userCanEdit != lOther$userCanEdit) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -17540,6 +17764,7 @@ abstract class CopyWith_Query_personServicesClassesGroups_personsByPk_groups_gro
     UuidValue? id,
     String? name,
     int? color,
+    bool? userCanEdit,
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
@@ -17573,6 +17798,7 @@ class _CopyWithImpl_Query_personServicesClassesGroups_personsByPk_groups_group<
     Object? id = _undefined,
     Object? name = _undefined,
     Object? color = _undefined,
+    Object? userCanEdit = _undefined,
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? blurhash = _undefined,
@@ -17584,6 +17810,9 @@ class _CopyWithImpl_Query_personServicesClassesGroups_personsByPk_groups_group<
           ? _instance.name
           : (name as String),
       color: color == _undefined ? _instance.color : (color as int?),
+      userCanEdit: userCanEdit == _undefined
+          ? _instance.userCanEdit
+          : (userCanEdit as bool?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -17625,6 +17854,7 @@ class _CopyWithStubImpl_Query_personServicesClassesGroups_personsByPk_groups_gro
     UuidValue? id,
     String? name,
     int? color,
+    bool? userCanEdit,
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,

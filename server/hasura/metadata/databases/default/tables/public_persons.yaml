@@ -20,9 +20,6 @@ object_relationships:
   - name: family
     using:
       foreign_key_constraint_on: family_id
-  - name: store
-    using:
-      foreign_key_constraint_on: store_id
   - name: father
     using:
       foreign_key_constraint_on: father_id
@@ -92,6 +89,9 @@ object_relationships:
   - name: state
     using:
       foreign_key_constraint_on: state_id
+  - name: store
+    using:
+      foreign_key_constraint_on: store_id
   - name: studyYear
     using:
       foreign_key_constraint_on: study_year_id
@@ -194,6 +194,13 @@ computed_fields:
       function:
         name: get_person_birthday
         schema: public
+  - name: userCanEdit
+    definition:
+      function:
+        name: user_can_edit_person
+        schema: auth
+      session_argument: hasura_session
+    comment: ""
 insert_permissions:
   - role: user
     permission:
@@ -269,6 +276,7 @@ select_permissions:
         - work_status
       computed_fields:
         - birthday
+        - userCanEdit
       filter:
         _and:
           - deleted_at:

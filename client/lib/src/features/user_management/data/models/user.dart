@@ -1,6 +1,5 @@
 import 'package:church_admin/annotations.dart';
 import 'package:church_admin/church_admin.dart';
-import 'package:collection/collection.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'user.freezed.dart';
@@ -25,17 +24,23 @@ class User extends ViewableWithIDAndImage
   @override
   @JsonKey(defaultValue: '')
   final String uid;
+
   @override
   @JsonKey(defaultValue: '')
   final String name;
+
   @override
   final String? email;
+
   @override
   final DateTime? photoUpdatedAt;
+
   @override
   final String? blurhash;
+
   @override
   final List<AdminOnData>? adminOn;
+
   @override
   @JsonKey(
     fromJson: permissionsSetFromJson,
@@ -46,18 +51,28 @@ class User extends ViewableWithIDAndImage
     manyToManyRelType: UsersPermissionsRel,
   )
   final PermissionsSet permissions;
+
   @override
   final String? authId;
+
   @override
   final LastRecordedByInfo? lastEdit;
+
   @override
   final Person? person;
+
   @override
   final List<AdminOnData>? servicesHistory;
+
   @override
   final List<AdminOnData>? classesHistory;
+
   @override
   final List<AdminOnData>? groupsHistory;
+
+  @override
+  @JsonKey(includeToJson: false)
+  final bool currentUserCanManageThisUser;
 
   const User({
     required this.uid,
@@ -73,6 +88,7 @@ class User extends ViewableWithIDAndImage
     this.servicesHistory,
     this.classesHistory,
     this.groupsHistory,
+    this.currentUserCanManageThisUser = false,
   });
 
   factory User.fromJson(Map<String, Object?> json) => _$UserFromJson(json);
@@ -90,122 +106,26 @@ class User extends ViewableWithIDAndImage
   @override
   String get id => uid;
 
-  bool canReadObject(ViewableWithID object) {
-    if (permissions.readAllData) return true;
-
-    return _isAdminOn(object, canEdit: false);
-  }
-
   bool canEditObject(ViewableWithID object) {
     if (permissions.writeAllData) return true;
 
-    return _isAdminOn(object, canEdit: true);
+    return switch (object) {
+      Area(:final userCanEdit) ||
+      Street(:final userCanEdit) ||
+      Store(:final userCanEdit) ||
+      Family(:final userCanEdit) ||
+      Service(:final userCanEdit) ||
+      Group(:final userCanEdit) ||
+      Class(:final userCanEdit) ||
+      Person(:final userCanEdit) =>
+        userCanEdit,
+      User(:final currentUserCanManageThisUser, :final uid) =>
+        currentUserCanManageThisUser && this.uid != uid,
+      _ => false
+    };
   }
 
   bool canDeleteObject(ViewableWithID object) => permissions.deleteData;
-
-  bool _isAdminOn(ViewableWithID object, {required bool canEdit}) {
-    switch (object) {
-      case Person(
-            services: final List<Service> services,
-            :final bool? gender,
-            :final StudyYear? studyYear
-          )
-          when adminOn?.any(
-                (a) => services.any(
-                  (service) =>
-                      a.service?.id == service.id &&
-                      (a.serviceGender == null || a.serviceGender == gender) &&
-                      (a.serviceStudyYearData == null ||
-                          a.serviceStudyYearData?.order == studyYear?.order) &&
-                      (!canEdit || (a.serviceAllowEdit ?? false)),
-                ),
-              ) ??
-              false:
-        return true;
-
-      case Person(groups: final List<Group> groups)
-          when adminOn?.any(
-                (a) => groups.any(
-                  (group) =>
-                      a.group?.id == group.id &&
-                      (!canEdit || (a.groupAllowEdit ?? false)),
-                ),
-              ) ??
-              false:
-        return true;
-
-      case Person(address: Address(area: Area(:final id))) ||
-            Area(id: final id) ||
-            Store(address: Address(area: Area(:final id))) ||
-            Family(address: Address(area: Area(:final id))):
-        return adminOn?.any(
-              (a) =>
-                  a.area?.id == id && (!canEdit || (a.areaAllowEdit ?? false)),
-            ) ??
-            false;
-
-      case Street(:final List<Area> areas):
-        return adminOn?.any(
-              (a) =>
-                  areas.firstWhereOrNull(
-                    (area) =>
-                        area.id == a.area?.id &&
-                        (!canEdit || (a.areaAllowEdit ?? false)),
-                  ) !=
-                  null,
-            ) ??
-            false;
-
-      case Service(id: final id):
-        return adminOn?.any(
-              (a) =>
-                  a.service?.id == id &&
-                  (!canEdit || (a.serviceAllowEdit ?? false)),
-            ) ??
-            false;
-
-      case Group(id: final id):
-        return adminOn?.any(
-              (a) =>
-                  a.group?.id == id &&
-                  (!canEdit || (a.groupAllowEdit ?? false)),
-            ) ??
-            false;
-
-      default:
-        return false;
-    }
-  }
-
-  bool canEditObjectUsers(ViewableWithID object) {
-    if (permissions.manageAllUsers) return true;
-
-    if (object is! Area && object is! Service && object is! Group) return false;
-
-    switch (object) {
-      case Area(id: final id):
-        return adminOn?.any(
-              (a) => a.area?.id == id && (a.areaAdminOnUsers ?? false),
-            ) ??
-            false;
-
-      case Service(id: final id):
-        return adminOn?.any(
-              (a) => a.service?.id == id && (a.serviceAdminOnUsers ?? false),
-            ) ??
-            false;
-
-      case Group(id: final id):
-        return adminOn?.any(
-              (a) => a.group?.id == id && (a.groupAdminOnUsers ?? false),
-            ) ??
-            false;
-
-      default:
-        return false;
-    }
-  }
 
   bool get canManageSomeUsers =>
       permissions.manageAllUsers ||
@@ -239,6 +159,17 @@ class UserFields extends _UserFields {
         operators: {...StringOperator.values},
         isCodeOnly: true,
         getValue: (obj) => obj is User ? obj.email : null,
+      );
+
+  @override
+  FieldMetadata<bool> get currentUserCanManageThisUser => FieldMetadata(
+        parentType: super.currentUserCanManageThisUser.parentType,
+        name: 'currentUserCanManageThisUser',
+        label: super.currentUserCanManageThisUser.label,
+        isOrderable: super.currentUserCanManageThisUser.isOrderable,
+        operators: super.currentUserCanManageThisUser.operators,
+        getValue: super.currentUserCanManageThisUser.getValue,
+        isCodeOnly: true,
       );
 
   FieldMetadata<AggregateData> get permissionsAggregate => FieldMetadata(

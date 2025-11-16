@@ -356,6 +356,7 @@ class Subscription_watchUser_authUsersDataByPk
     this.$__typename = 'AuthUsersData',
     this.photoUpdatedAt,
     this.blurhash,
+    this.currentUserCanManageThisUser,
     required this.permissions,
     this.person,
     this.lastEdit,
@@ -371,6 +372,7 @@ class Subscription_watchUser_authUsersDataByPk
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
     final l$blurhash = json['blurhash'];
+    final l$currentUserCanManageThisUser = json['currentUserCanManageThisUser'];
     final l$permissions = json['permissions'];
     final l$person = json['person'];
     final l$lastEdit = json['lastEdit'];
@@ -384,6 +386,7 @@ class Subscription_watchUser_authUsersDataByPk
           ? null
           : tstzFromString(l$photoUpdatedAt),
       blurhash: (l$blurhash as String?),
+      currentUserCanManageThisUser: (l$currentUserCanManageThisUser as bool?),
       permissions: (l$permissions as List<dynamic>)
           .map(
             (e) =>
@@ -424,6 +427,8 @@ class Subscription_watchUser_authUsersDataByPk
 
   final String? blurhash;
 
+  final bool? currentUserCanManageThisUser;
+
   final List<Subscription_watchUser_authUsersDataByPk_permissions> permissions;
 
   final Subscription_watchUser_authUsersDataByPk_person? person;
@@ -448,6 +453,9 @@ class Subscription_watchUser_authUsersDataByPk
         : tstzToString(l$photoUpdatedAt);
     final l$blurhash = blurhash;
     _resultData['blurhash'] = l$blurhash;
+    final l$currentUserCanManageThisUser = currentUserCanManageThisUser;
+    _resultData['currentUserCanManageThisUser'] =
+        l$currentUserCanManageThisUser;
     final l$permissions = permissions;
     _resultData['permissions'] = l$permissions.map((e) => e.toJson()).toList();
     final l$person = person;
@@ -467,6 +475,7 @@ class Subscription_watchUser_authUsersDataByPk
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$blurhash = blurhash;
+    final l$currentUserCanManageThisUser = currentUserCanManageThisUser;
     final l$permissions = permissions;
     final l$person = person;
     final l$lastEdit = lastEdit;
@@ -478,6 +487,7 @@ class Subscription_watchUser_authUsersDataByPk
       l$$__typename,
       l$photoUpdatedAt,
       l$blurhash,
+      l$currentUserCanManageThisUser,
       Object.hashAll(l$permissions.map((v) => v)),
       l$person,
       l$lastEdit,
@@ -522,6 +532,12 @@ class Subscription_watchUser_authUsersDataByPk
     final l$blurhash = blurhash;
     final lOther$blurhash = other.blurhash;
     if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
+    final l$currentUserCanManageThisUser = currentUserCanManageThisUser;
+    final lOther$currentUserCanManageThisUser =
+        other.currentUserCanManageThisUser;
+    if (l$currentUserCanManageThisUser != lOther$currentUserCanManageThisUser) {
       return false;
     }
     final l$permissions = permissions;
@@ -587,6 +603,7 @@ abstract class CopyWith_Subscription_watchUser_authUsersDataByPk<TRes> {
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
+    bool? currentUserCanManageThisUser,
     List<Subscription_watchUser_authUsersDataByPk_permissions>? permissions,
     Subscription_watchUser_authUsersDataByPk_person? person,
     Fragment_LatestEditHistory? lastEdit,
@@ -636,6 +653,7 @@ class _CopyWithImpl_Subscription_watchUser_authUsersDataByPk<TRes>
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? blurhash = _undefined,
+    Object? currentUserCanManageThisUser = _undefined,
     Object? permissions = _undefined,
     Object? person = _undefined,
     Object? lastEdit = _undefined,
@@ -660,6 +678,9 @@ class _CopyWithImpl_Subscription_watchUser_authUsersDataByPk<TRes>
       blurhash: blurhash == _undefined
           ? _instance.blurhash
           : (blurhash as String?),
+      currentUserCanManageThisUser: currentUserCanManageThisUser == _undefined
+          ? _instance.currentUserCanManageThisUser
+          : (currentUserCanManageThisUser as bool?),
       permissions: permissions == _undefined || permissions == null
           ? _instance.permissions
           : (permissions
@@ -752,6 +773,7 @@ class _CopyWithStubImpl_Subscription_watchUser_authUsersDataByPk<TRes>
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
+    bool? currentUserCanManageThisUser,
     List<Subscription_watchUser_authUsersDataByPk_permissions>? permissions,
     Subscription_watchUser_authUsersDataByPk_person? person,
     Fragment_LatestEditHistory? lastEdit,
@@ -913,6 +935,7 @@ class Subscription_watchUser_authUsersDataByPk_person
     required this.id,
     required this.name,
     this.color,
+    this.userCanEdit,
     this.$__typename = 'Persons',
     this.photoUpdatedAt,
     this.blurhash,
@@ -926,6 +949,7 @@ class Subscription_watchUser_authUsersDataByPk_person
     final l$id = json['id'];
     final l$name = json['name'];
     final l$color = json['color'];
+    final l$userCanEdit = json['userCanEdit'];
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
     final l$blurhash = json['blurhash'];
@@ -935,6 +959,7 @@ class Subscription_watchUser_authUsersDataByPk_person
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
+      userCanEdit: (l$userCanEdit as bool?),
       $__typename: (l$$__typename as String),
       photoUpdatedAt: l$photoUpdatedAt == null
           ? null
@@ -959,6 +984,8 @@ class Subscription_watchUser_authUsersDataByPk_person
 
   final int? color;
 
+  final bool? userCanEdit;
+
   final String $__typename;
 
   final DateTime? photoUpdatedAt;
@@ -977,6 +1004,8 @@ class Subscription_watchUser_authUsersDataByPk_person
     _resultData['name'] = l$name;
     final l$color = color;
     _resultData['color'] = l$color;
+    final l$userCanEdit = userCanEdit;
+    _resultData['userCanEdit'] = l$userCanEdit;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
@@ -997,6 +1026,7 @@ class Subscription_watchUser_authUsersDataByPk_person
     final l$id = id;
     final l$name = name;
     final l$color = color;
+    final l$userCanEdit = userCanEdit;
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$blurhash = blurhash;
@@ -1006,6 +1036,7 @@ class Subscription_watchUser_authUsersDataByPk_person
       l$id,
       l$name,
       l$color,
+      l$userCanEdit,
       l$$__typename,
       l$photoUpdatedAt,
       l$blurhash,
@@ -1036,6 +1067,11 @@ class Subscription_watchUser_authUsersDataByPk_person
     final l$color = color;
     final lOther$color = other.color;
     if (l$color != lOther$color) {
+      return false;
+    }
+    final l$userCanEdit = userCanEdit;
+    final lOther$userCanEdit = other.userCanEdit;
+    if (l$userCanEdit != lOther$userCanEdit) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -1090,6 +1126,7 @@ abstract class CopyWith_Subscription_watchUser_authUsersDataByPk_person<TRes> {
     UuidValue? id,
     String? name,
     int? color,
+    bool? userCanEdit,
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
@@ -1117,6 +1154,7 @@ class _CopyWithImpl_Subscription_watchUser_authUsersDataByPk_person<TRes>
     Object? id = _undefined,
     Object? name = _undefined,
     Object? color = _undefined,
+    Object? userCanEdit = _undefined,
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? blurhash = _undefined,
@@ -1129,6 +1167,9 @@ class _CopyWithImpl_Subscription_watchUser_authUsersDataByPk_person<TRes>
           ? _instance.name
           : (name as String),
       color: color == _undefined ? _instance.color : (color as int?),
+      userCanEdit: userCanEdit == _undefined
+          ? _instance.userCanEdit
+          : (userCanEdit as bool?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -1178,6 +1219,7 @@ class _CopyWithStubImpl_Subscription_watchUser_authUsersDataByPk_person<TRes>
     UuidValue? id,
     String? name,
     int? color,
+    bool? userCanEdit,
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
@@ -1204,10 +1246,12 @@ class Subscription_watchUser_authUsersDataByPk_adminOn
     this.serviceGender,
     this.serviceAllowEdit,
     this.serviceAdminOnUsers,
+    required this.serviceWriteRelatedFamilies,
     required this.classes,
     this.group,
     this.groupAllowEdit,
     this.groupAdminOnUsers,
+    required this.groupWriteRelatedFamilies,
     this.$__typename = 'AuthUsersAdminOn',
   });
 
@@ -1223,10 +1267,12 @@ class Subscription_watchUser_authUsersDataByPk_adminOn
     final l$serviceGender = json['serviceGender'];
     final l$serviceAllowEdit = json['serviceAllowEdit'];
     final l$serviceAdminOnUsers = json['serviceAdminOnUsers'];
+    final l$serviceWriteRelatedFamilies = json['serviceWriteRelatedFamilies'];
     final l$classes = json['classes'];
     final l$group = json['group'];
     final l$groupAllowEdit = json['groupAllowEdit'];
     final l$groupAdminOnUsers = json['groupAdminOnUsers'];
+    final l$groupWriteRelatedFamilies = json['groupWriteRelatedFamilies'];
     final l$$__typename = json['__typename'];
     return Subscription_watchUser_authUsersDataByPk_adminOn(
       permissionId: stringToUuid(l$permissionId),
@@ -1246,6 +1292,7 @@ class Subscription_watchUser_authUsersDataByPk_adminOn
       serviceGender: (l$serviceGender as bool?),
       serviceAllowEdit: (l$serviceAllowEdit as bool?),
       serviceAdminOnUsers: (l$serviceAdminOnUsers as bool?),
+      serviceWriteRelatedFamilies: (l$serviceWriteRelatedFamilies as bool),
       classes: (l$classes as List<dynamic>)
           .map((e) => Fragment_Class.fromJson((e as Map<String, dynamic>)))
           .toList(),
@@ -1254,6 +1301,7 @@ class Subscription_watchUser_authUsersDataByPk_adminOn
           : Fragment_Group.fromJson((l$group as Map<String, dynamic>)),
       groupAllowEdit: (l$groupAllowEdit as bool?),
       groupAdminOnUsers: (l$groupAdminOnUsers as bool?),
+      groupWriteRelatedFamilies: (l$groupWriteRelatedFamilies as bool),
       $__typename: (l$$__typename as String),
     );
   }
@@ -1277,6 +1325,8 @@ class Subscription_watchUser_authUsersDataByPk_adminOn
 
   final bool? serviceAdminOnUsers;
 
+  final bool serviceWriteRelatedFamilies;
+
   final List<Fragment_Class> classes;
 
   final Fragment_Group? group;
@@ -1284,6 +1334,8 @@ class Subscription_watchUser_authUsersDataByPk_adminOn
   final bool? groupAllowEdit;
 
   final bool? groupAdminOnUsers;
+
+  final bool groupWriteRelatedFamilies;
 
   final String $__typename;
 
@@ -1307,6 +1359,8 @@ class Subscription_watchUser_authUsersDataByPk_adminOn
     _resultData['serviceAllowEdit'] = l$serviceAllowEdit;
     final l$serviceAdminOnUsers = serviceAdminOnUsers;
     _resultData['serviceAdminOnUsers'] = l$serviceAdminOnUsers;
+    final l$serviceWriteRelatedFamilies = serviceWriteRelatedFamilies;
+    _resultData['serviceWriteRelatedFamilies'] = l$serviceWriteRelatedFamilies;
     final l$classes = classes;
     _resultData['classes'] = l$classes.map((e) => e.toJson()).toList();
     final l$group = group;
@@ -1315,6 +1369,8 @@ class Subscription_watchUser_authUsersDataByPk_adminOn
     _resultData['groupAllowEdit'] = l$groupAllowEdit;
     final l$groupAdminOnUsers = groupAdminOnUsers;
     _resultData['groupAdminOnUsers'] = l$groupAdminOnUsers;
+    final l$groupWriteRelatedFamilies = groupWriteRelatedFamilies;
+    _resultData['groupWriteRelatedFamilies'] = l$groupWriteRelatedFamilies;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -1331,10 +1387,12 @@ class Subscription_watchUser_authUsersDataByPk_adminOn
     final l$serviceGender = serviceGender;
     final l$serviceAllowEdit = serviceAllowEdit;
     final l$serviceAdminOnUsers = serviceAdminOnUsers;
+    final l$serviceWriteRelatedFamilies = serviceWriteRelatedFamilies;
     final l$classes = classes;
     final l$group = group;
     final l$groupAllowEdit = groupAllowEdit;
     final l$groupAdminOnUsers = groupAdminOnUsers;
+    final l$groupWriteRelatedFamilies = groupWriteRelatedFamilies;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$permissionId,
@@ -1346,10 +1404,12 @@ class Subscription_watchUser_authUsersDataByPk_adminOn
       l$serviceGender,
       l$serviceAllowEdit,
       l$serviceAdminOnUsers,
+      l$serviceWriteRelatedFamilies,
       Object.hashAll(l$classes.map((v) => v)),
       l$group,
       l$groupAllowEdit,
       l$groupAdminOnUsers,
+      l$groupWriteRelatedFamilies,
       l$$__typename,
     ]);
   }
@@ -1408,6 +1468,12 @@ class Subscription_watchUser_authUsersDataByPk_adminOn
     if (l$serviceAdminOnUsers != lOther$serviceAdminOnUsers) {
       return false;
     }
+    final l$serviceWriteRelatedFamilies = serviceWriteRelatedFamilies;
+    final lOther$serviceWriteRelatedFamilies =
+        other.serviceWriteRelatedFamilies;
+    if (l$serviceWriteRelatedFamilies != lOther$serviceWriteRelatedFamilies) {
+      return false;
+    }
     final l$classes = classes;
     final lOther$classes = other.classes;
     if (l$classes.length != lOther$classes.length) {
@@ -1433,6 +1499,11 @@ class Subscription_watchUser_authUsersDataByPk_adminOn
     final l$groupAdminOnUsers = groupAdminOnUsers;
     final lOther$groupAdminOnUsers = other.groupAdminOnUsers;
     if (l$groupAdminOnUsers != lOther$groupAdminOnUsers) {
+      return false;
+    }
+    final l$groupWriteRelatedFamilies = groupWriteRelatedFamilies;
+    final lOther$groupWriteRelatedFamilies = other.groupWriteRelatedFamilies;
+    if (l$groupWriteRelatedFamilies != lOther$groupWriteRelatedFamilies) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -1474,10 +1545,12 @@ abstract class CopyWith_Subscription_watchUser_authUsersDataByPk_adminOn<TRes> {
     bool? serviceGender,
     bool? serviceAllowEdit,
     bool? serviceAdminOnUsers,
+    bool? serviceWriteRelatedFamilies,
     List<Fragment_Class>? classes,
     Fragment_Group? group,
     bool? groupAllowEdit,
     bool? groupAdminOnUsers,
+    bool? groupWriteRelatedFamilies,
     String? $__typename,
   });
   CopyWith_Fragment_Area<TRes> get area;
@@ -1518,10 +1591,12 @@ class _CopyWithImpl_Subscription_watchUser_authUsersDataByPk_adminOn<TRes>
     Object? serviceGender = _undefined,
     Object? serviceAllowEdit = _undefined,
     Object? serviceAdminOnUsers = _undefined,
+    Object? serviceWriteRelatedFamilies = _undefined,
     Object? classes = _undefined,
     Object? group = _undefined,
     Object? groupAllowEdit = _undefined,
     Object? groupAdminOnUsers = _undefined,
+    Object? groupWriteRelatedFamilies = _undefined,
     Object? $__typename = _undefined,
   }) => _then(
     Subscription_watchUser_authUsersDataByPk_adminOn(
@@ -1551,6 +1626,11 @@ class _CopyWithImpl_Subscription_watchUser_authUsersDataByPk_adminOn<TRes>
       serviceAdminOnUsers: serviceAdminOnUsers == _undefined
           ? _instance.serviceAdminOnUsers
           : (serviceAdminOnUsers as bool?),
+      serviceWriteRelatedFamilies:
+          serviceWriteRelatedFamilies == _undefined ||
+              serviceWriteRelatedFamilies == null
+          ? _instance.serviceWriteRelatedFamilies
+          : (serviceWriteRelatedFamilies as bool),
       classes: classes == _undefined || classes == null
           ? _instance.classes
           : (classes as List<Fragment_Class>),
@@ -1561,6 +1641,11 @@ class _CopyWithImpl_Subscription_watchUser_authUsersDataByPk_adminOn<TRes>
       groupAdminOnUsers: groupAdminOnUsers == _undefined
           ? _instance.groupAdminOnUsers
           : (groupAdminOnUsers as bool?),
+      groupWriteRelatedFamilies:
+          groupWriteRelatedFamilies == _undefined ||
+              groupWriteRelatedFamilies == null
+          ? _instance.groupWriteRelatedFamilies
+          : (groupWriteRelatedFamilies as bool),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -1632,10 +1717,12 @@ class _CopyWithStubImpl_Subscription_watchUser_authUsersDataByPk_adminOn<TRes>
     bool? serviceGender,
     bool? serviceAllowEdit,
     bool? serviceAdminOnUsers,
+    bool? serviceWriteRelatedFamilies,
     List<Fragment_Class>? classes,
     Fragment_Group? group,
     bool? groupAllowEdit,
     bool? groupAdminOnUsers,
+    bool? groupWriteRelatedFamilies,
     String? $__typename,
   }) => _res;
 

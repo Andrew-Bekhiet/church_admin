@@ -443,6 +443,7 @@ class Fragment_UserOverview
     this.$__typename = 'AuthUsersData',
     this.photoUpdatedAt,
     this.blurhash,
+    this.currentUserCanManageThisUser,
     required this.permissions,
     this.person,
   });
@@ -454,6 +455,7 @@ class Fragment_UserOverview
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
     final l$blurhash = json['blurhash'];
+    final l$currentUserCanManageThisUser = json['currentUserCanManageThisUser'];
     final l$permissions = json['permissions'];
     final l$person = json['person'];
     return Fragment_UserOverview(
@@ -465,6 +467,7 @@ class Fragment_UserOverview
           ? null
           : tstzFromString(l$photoUpdatedAt),
       blurhash: (l$blurhash as String?),
+      currentUserCanManageThisUser: (l$currentUserCanManageThisUser as bool?),
       permissions: (l$permissions as List<dynamic>)
           .map(
             (e) => Fragment_UserOverview_permissions.fromJson(
@@ -492,6 +495,8 @@ class Fragment_UserOverview
 
   final String? blurhash;
 
+  final bool? currentUserCanManageThisUser;
+
   final List<Fragment_UserOverview_permissions> permissions;
 
   final Fragment_UserOverview_person? person;
@@ -512,6 +517,9 @@ class Fragment_UserOverview
         : tstzToString(l$photoUpdatedAt);
     final l$blurhash = blurhash;
     _resultData['blurhash'] = l$blurhash;
+    final l$currentUserCanManageThisUser = currentUserCanManageThisUser;
+    _resultData['currentUserCanManageThisUser'] =
+        l$currentUserCanManageThisUser;
     final l$permissions = permissions;
     _resultData['permissions'] = l$permissions.map((e) => e.toJson()).toList();
     final l$person = person;
@@ -527,6 +535,7 @@ class Fragment_UserOverview
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$blurhash = blurhash;
+    final l$currentUserCanManageThisUser = currentUserCanManageThisUser;
     final l$permissions = permissions;
     final l$person = person;
     return Object.hashAll([
@@ -536,6 +545,7 @@ class Fragment_UserOverview
       l$$__typename,
       l$photoUpdatedAt,
       l$blurhash,
+      l$currentUserCanManageThisUser,
       Object.hashAll(l$permissions.map((v) => v)),
       l$person,
     ]);
@@ -577,6 +587,12 @@ class Fragment_UserOverview
     final l$blurhash = blurhash;
     final lOther$blurhash = other.blurhash;
     if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
+    final l$currentUserCanManageThisUser = currentUserCanManageThisUser;
+    final lOther$currentUserCanManageThisUser =
+        other.currentUserCanManageThisUser;
+    if (l$currentUserCanManageThisUser != lOther$currentUserCanManageThisUser) {
       return false;
     }
     final l$permissions = permissions;
@@ -621,6 +637,7 @@ abstract class CopyWith_Fragment_UserOverview<TRes> {
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
+    bool? currentUserCanManageThisUser,
     List<Fragment_UserOverview_permissions>? permissions,
     Fragment_UserOverview_person? person,
   });
@@ -654,6 +671,7 @@ class _CopyWithImpl_Fragment_UserOverview<TRes>
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? blurhash = _undefined,
+    Object? currentUserCanManageThisUser = _undefined,
     Object? permissions = _undefined,
     Object? person = _undefined,
   }) => _then(
@@ -676,6 +694,9 @@ class _CopyWithImpl_Fragment_UserOverview<TRes>
       blurhash: blurhash == _undefined
           ? _instance.blurhash
           : (blurhash as String?),
+      currentUserCanManageThisUser: currentUserCanManageThisUser == _undefined
+          ? _instance.currentUserCanManageThisUser
+          : (currentUserCanManageThisUser as bool?),
       permissions: permissions == _undefined || permissions == null
           ? _instance.permissions
           : (permissions as List<Fragment_UserOverview_permissions>),
@@ -726,6 +747,7 @@ class _CopyWithStubImpl_Fragment_UserOverview<TRes>
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
+    bool? currentUserCanManageThisUser,
     List<Fragment_UserOverview_permissions>? permissions,
     Fragment_UserOverview_person? person,
   }) => _res;
@@ -747,6 +769,13 @@ const fragmentDefinitionUserOverview = FragmentDefinitionNode(
       FragmentSpreadNode(
         name: NameNode(value: 'User'),
         directives: [],
+      ),
+      FieldNode(
+        name: NameNode(value: 'currentUserCanManageThisUser'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
       ),
       FieldNode(
         name: NameNode(value: 'email'),
@@ -964,6 +993,7 @@ class Fragment_UserOverview_person
     required this.id,
     required this.name,
     this.color,
+    this.userCanEdit,
     this.$__typename = 'Persons',
     this.photoUpdatedAt,
     this.blurhash,
@@ -975,6 +1005,7 @@ class Fragment_UserOverview_person
     final l$id = json['id'];
     final l$name = json['name'];
     final l$color = json['color'];
+    final l$userCanEdit = json['userCanEdit'];
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
     final l$blurhash = json['blurhash'];
@@ -984,6 +1015,7 @@ class Fragment_UserOverview_person
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
+      userCanEdit: (l$userCanEdit as bool?),
       $__typename: (l$$__typename as String),
       photoUpdatedAt: l$photoUpdatedAt == null
           ? null
@@ -1008,6 +1040,8 @@ class Fragment_UserOverview_person
 
   final int? color;
 
+  final bool? userCanEdit;
+
   final String $__typename;
 
   final DateTime? photoUpdatedAt;
@@ -1026,6 +1060,8 @@ class Fragment_UserOverview_person
     _resultData['name'] = l$name;
     final l$color = color;
     _resultData['color'] = l$color;
+    final l$userCanEdit = userCanEdit;
+    _resultData['userCanEdit'] = l$userCanEdit;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
@@ -1046,6 +1082,7 @@ class Fragment_UserOverview_person
     final l$id = id;
     final l$name = name;
     final l$color = color;
+    final l$userCanEdit = userCanEdit;
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$blurhash = blurhash;
@@ -1055,6 +1092,7 @@ class Fragment_UserOverview_person
       l$id,
       l$name,
       l$color,
+      l$userCanEdit,
       l$$__typename,
       l$photoUpdatedAt,
       l$blurhash,
@@ -1085,6 +1123,11 @@ class Fragment_UserOverview_person
     final l$color = color;
     final lOther$color = other.color;
     if (l$color != lOther$color) {
+      return false;
+    }
+    final l$userCanEdit = userCanEdit;
+    final lOther$userCanEdit = other.userCanEdit;
+    if (l$userCanEdit != lOther$userCanEdit) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -1135,6 +1178,7 @@ abstract class CopyWith_Fragment_UserOverview_person<TRes> {
     UuidValue? id,
     String? name,
     int? color,
+    bool? userCanEdit,
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
@@ -1159,6 +1203,7 @@ class _CopyWithImpl_Fragment_UserOverview_person<TRes>
     Object? id = _undefined,
     Object? name = _undefined,
     Object? color = _undefined,
+    Object? userCanEdit = _undefined,
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? blurhash = _undefined,
@@ -1171,6 +1216,9 @@ class _CopyWithImpl_Fragment_UserOverview_person<TRes>
           ? _instance.name
           : (name as String),
       color: color == _undefined ? _instance.color : (color as int?),
+      userCanEdit: userCanEdit == _undefined
+          ? _instance.userCanEdit
+          : (userCanEdit as bool?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -1220,6 +1268,7 @@ class _CopyWithStubImpl_Fragment_UserOverview_person<TRes>
     UuidValue? id,
     String? name,
     int? color,
+    bool? userCanEdit,
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
@@ -1248,6 +1297,7 @@ class Fragment_UserDetails
     this.$__typename = 'AuthUsersData',
     this.photoUpdatedAt,
     this.blurhash,
+    this.currentUserCanManageThisUser,
     required this.permissions,
     this.person,
     this.lastEdit,
@@ -1261,6 +1311,7 @@ class Fragment_UserDetails
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
     final l$blurhash = json['blurhash'];
+    final l$currentUserCanManageThisUser = json['currentUserCanManageThisUser'];
     final l$permissions = json['permissions'];
     final l$person = json['person'];
     final l$lastEdit = json['lastEdit'];
@@ -1274,6 +1325,7 @@ class Fragment_UserDetails
           ? null
           : tstzFromString(l$photoUpdatedAt),
       blurhash: (l$blurhash as String?),
+      currentUserCanManageThisUser: (l$currentUserCanManageThisUser as bool?),
       permissions: (l$permissions as List<dynamic>)
           .map(
             (e) => Fragment_UserDetails_permissions.fromJson(
@@ -1313,6 +1365,8 @@ class Fragment_UserDetails
 
   final String? blurhash;
 
+  final bool? currentUserCanManageThisUser;
+
   final List<Fragment_UserDetails_permissions> permissions;
 
   final Fragment_UserDetails_person? person;
@@ -1337,6 +1391,9 @@ class Fragment_UserDetails
         : tstzToString(l$photoUpdatedAt);
     final l$blurhash = blurhash;
     _resultData['blurhash'] = l$blurhash;
+    final l$currentUserCanManageThisUser = currentUserCanManageThisUser;
+    _resultData['currentUserCanManageThisUser'] =
+        l$currentUserCanManageThisUser;
     final l$permissions = permissions;
     _resultData['permissions'] = l$permissions.map((e) => e.toJson()).toList();
     final l$person = person;
@@ -1356,6 +1413,7 @@ class Fragment_UserDetails
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$blurhash = blurhash;
+    final l$currentUserCanManageThisUser = currentUserCanManageThisUser;
     final l$permissions = permissions;
     final l$person = person;
     final l$lastEdit = lastEdit;
@@ -1367,6 +1425,7 @@ class Fragment_UserDetails
       l$$__typename,
       l$photoUpdatedAt,
       l$blurhash,
+      l$currentUserCanManageThisUser,
       Object.hashAll(l$permissions.map((v) => v)),
       l$person,
       l$lastEdit,
@@ -1410,6 +1469,12 @@ class Fragment_UserDetails
     final l$blurhash = blurhash;
     final lOther$blurhash = other.blurhash;
     if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
+    final l$currentUserCanManageThisUser = currentUserCanManageThisUser;
+    final lOther$currentUserCanManageThisUser =
+        other.currentUserCanManageThisUser;
+    if (l$currentUserCanManageThisUser != lOther$currentUserCanManageThisUser) {
       return false;
     }
     final l$permissions = permissions;
@@ -1471,6 +1536,7 @@ abstract class CopyWith_Fragment_UserDetails<TRes> {
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
+    bool? currentUserCanManageThisUser,
     List<Fragment_UserDetails_permissions>? permissions,
     Fragment_UserDetails_person? person,
     Fragment_LatestEditHistory? lastEdit,
@@ -1515,6 +1581,7 @@ class _CopyWithImpl_Fragment_UserDetails<TRes>
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? blurhash = _undefined,
+    Object? currentUserCanManageThisUser = _undefined,
     Object? permissions = _undefined,
     Object? person = _undefined,
     Object? lastEdit = _undefined,
@@ -1539,6 +1606,9 @@ class _CopyWithImpl_Fragment_UserDetails<TRes>
       blurhash: blurhash == _undefined
           ? _instance.blurhash
           : (blurhash as String?),
+      currentUserCanManageThisUser: currentUserCanManageThisUser == _undefined
+          ? _instance.currentUserCanManageThisUser
+          : (currentUserCanManageThisUser as bool?),
       permissions: permissions == _undefined || permissions == null
           ? _instance.permissions
           : (permissions as List<Fragment_UserDetails_permissions>),
@@ -1620,6 +1690,7 @@ class _CopyWithStubImpl_Fragment_UserDetails<TRes>
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
+    bool? currentUserCanManageThisUser,
     List<Fragment_UserDetails_permissions>? permissions,
     Fragment_UserDetails_person? person,
     Fragment_LatestEditHistory? lastEdit,
@@ -1830,6 +1901,7 @@ class Fragment_UserDetails_person
     required this.id,
     required this.name,
     this.color,
+    this.userCanEdit,
     this.$__typename = 'Persons',
     this.photoUpdatedAt,
     this.blurhash,
@@ -1841,6 +1913,7 @@ class Fragment_UserDetails_person
     final l$id = json['id'];
     final l$name = json['name'];
     final l$color = json['color'];
+    final l$userCanEdit = json['userCanEdit'];
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
     final l$blurhash = json['blurhash'];
@@ -1850,6 +1923,7 @@ class Fragment_UserDetails_person
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
+      userCanEdit: (l$userCanEdit as bool?),
       $__typename: (l$$__typename as String),
       photoUpdatedAt: l$photoUpdatedAt == null
           ? null
@@ -1874,6 +1948,8 @@ class Fragment_UserDetails_person
 
   final int? color;
 
+  final bool? userCanEdit;
+
   final String $__typename;
 
   final DateTime? photoUpdatedAt;
@@ -1892,6 +1968,8 @@ class Fragment_UserDetails_person
     _resultData['name'] = l$name;
     final l$color = color;
     _resultData['color'] = l$color;
+    final l$userCanEdit = userCanEdit;
+    _resultData['userCanEdit'] = l$userCanEdit;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
@@ -1912,6 +1990,7 @@ class Fragment_UserDetails_person
     final l$id = id;
     final l$name = name;
     final l$color = color;
+    final l$userCanEdit = userCanEdit;
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$blurhash = blurhash;
@@ -1921,6 +2000,7 @@ class Fragment_UserDetails_person
       l$id,
       l$name,
       l$color,
+      l$userCanEdit,
       l$$__typename,
       l$photoUpdatedAt,
       l$blurhash,
@@ -1951,6 +2031,11 @@ class Fragment_UserDetails_person
     final l$color = color;
     final lOther$color = other.color;
     if (l$color != lOther$color) {
+      return false;
+    }
+    final l$userCanEdit = userCanEdit;
+    final lOther$userCanEdit = other.userCanEdit;
+    if (l$userCanEdit != lOther$userCanEdit) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -2001,6 +2086,7 @@ abstract class CopyWith_Fragment_UserDetails_person<TRes> {
     UuidValue? id,
     String? name,
     int? color,
+    bool? userCanEdit,
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
@@ -2025,6 +2111,7 @@ class _CopyWithImpl_Fragment_UserDetails_person<TRes>
     Object? id = _undefined,
     Object? name = _undefined,
     Object? color = _undefined,
+    Object? userCanEdit = _undefined,
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? blurhash = _undefined,
@@ -2037,6 +2124,9 @@ class _CopyWithImpl_Fragment_UserDetails_person<TRes>
           ? _instance.name
           : (name as String),
       color: color == _undefined ? _instance.color : (color as int?),
+      userCanEdit: userCanEdit == _undefined
+          ? _instance.userCanEdit
+          : (userCanEdit as bool?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -2086,6 +2176,7 @@ class _CopyWithStubImpl_Fragment_UserDetails_person<TRes>
     UuidValue? id,
     String? name,
     int? color,
+    bool? userCanEdit,
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
@@ -2111,10 +2202,12 @@ class Fragment_UserDetails_adminOn implements Fragment_UserAdminOn_adminOn {
     this.serviceGender,
     this.serviceAllowEdit,
     this.serviceAdminOnUsers,
+    required this.serviceWriteRelatedFamilies,
     required this.classes,
     this.group,
     this.groupAllowEdit,
     this.groupAdminOnUsers,
+    required this.groupWriteRelatedFamilies,
     this.$__typename = 'AuthUsersAdminOn',
   });
 
@@ -2128,10 +2221,12 @@ class Fragment_UserDetails_adminOn implements Fragment_UserAdminOn_adminOn {
     final l$serviceGender = json['serviceGender'];
     final l$serviceAllowEdit = json['serviceAllowEdit'];
     final l$serviceAdminOnUsers = json['serviceAdminOnUsers'];
+    final l$serviceWriteRelatedFamilies = json['serviceWriteRelatedFamilies'];
     final l$classes = json['classes'];
     final l$group = json['group'];
     final l$groupAllowEdit = json['groupAllowEdit'];
     final l$groupAdminOnUsers = json['groupAdminOnUsers'];
+    final l$groupWriteRelatedFamilies = json['groupWriteRelatedFamilies'];
     final l$$__typename = json['__typename'];
     return Fragment_UserDetails_adminOn(
       permissionId: stringToUuid(l$permissionId),
@@ -2151,6 +2246,7 @@ class Fragment_UserDetails_adminOn implements Fragment_UserAdminOn_adminOn {
       serviceGender: (l$serviceGender as bool?),
       serviceAllowEdit: (l$serviceAllowEdit as bool?),
       serviceAdminOnUsers: (l$serviceAdminOnUsers as bool?),
+      serviceWriteRelatedFamilies: (l$serviceWriteRelatedFamilies as bool),
       classes: (l$classes as List<dynamic>)
           .map((e) => Fragment_Class.fromJson((e as Map<String, dynamic>)))
           .toList(),
@@ -2159,6 +2255,7 @@ class Fragment_UserDetails_adminOn implements Fragment_UserAdminOn_adminOn {
           : Fragment_Group.fromJson((l$group as Map<String, dynamic>)),
       groupAllowEdit: (l$groupAllowEdit as bool?),
       groupAdminOnUsers: (l$groupAdminOnUsers as bool?),
+      groupWriteRelatedFamilies: (l$groupWriteRelatedFamilies as bool),
       $__typename: (l$$__typename as String),
     );
   }
@@ -2181,6 +2278,8 @@ class Fragment_UserDetails_adminOn implements Fragment_UserAdminOn_adminOn {
 
   final bool? serviceAdminOnUsers;
 
+  final bool serviceWriteRelatedFamilies;
+
   final List<Fragment_Class> classes;
 
   final Fragment_Group? group;
@@ -2188,6 +2287,8 @@ class Fragment_UserDetails_adminOn implements Fragment_UserAdminOn_adminOn {
   final bool? groupAllowEdit;
 
   final bool? groupAdminOnUsers;
+
+  final bool groupWriteRelatedFamilies;
 
   final String $__typename;
 
@@ -2211,6 +2312,8 @@ class Fragment_UserDetails_adminOn implements Fragment_UserAdminOn_adminOn {
     _resultData['serviceAllowEdit'] = l$serviceAllowEdit;
     final l$serviceAdminOnUsers = serviceAdminOnUsers;
     _resultData['serviceAdminOnUsers'] = l$serviceAdminOnUsers;
+    final l$serviceWriteRelatedFamilies = serviceWriteRelatedFamilies;
+    _resultData['serviceWriteRelatedFamilies'] = l$serviceWriteRelatedFamilies;
     final l$classes = classes;
     _resultData['classes'] = l$classes.map((e) => e.toJson()).toList();
     final l$group = group;
@@ -2219,6 +2322,8 @@ class Fragment_UserDetails_adminOn implements Fragment_UserAdminOn_adminOn {
     _resultData['groupAllowEdit'] = l$groupAllowEdit;
     final l$groupAdminOnUsers = groupAdminOnUsers;
     _resultData['groupAdminOnUsers'] = l$groupAdminOnUsers;
+    final l$groupWriteRelatedFamilies = groupWriteRelatedFamilies;
+    _resultData['groupWriteRelatedFamilies'] = l$groupWriteRelatedFamilies;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -2235,10 +2340,12 @@ class Fragment_UserDetails_adminOn implements Fragment_UserAdminOn_adminOn {
     final l$serviceGender = serviceGender;
     final l$serviceAllowEdit = serviceAllowEdit;
     final l$serviceAdminOnUsers = serviceAdminOnUsers;
+    final l$serviceWriteRelatedFamilies = serviceWriteRelatedFamilies;
     final l$classes = classes;
     final l$group = group;
     final l$groupAllowEdit = groupAllowEdit;
     final l$groupAdminOnUsers = groupAdminOnUsers;
+    final l$groupWriteRelatedFamilies = groupWriteRelatedFamilies;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$permissionId,
@@ -2250,10 +2357,12 @@ class Fragment_UserDetails_adminOn implements Fragment_UserAdminOn_adminOn {
       l$serviceGender,
       l$serviceAllowEdit,
       l$serviceAdminOnUsers,
+      l$serviceWriteRelatedFamilies,
       Object.hashAll(l$classes.map((v) => v)),
       l$group,
       l$groupAllowEdit,
       l$groupAdminOnUsers,
+      l$groupWriteRelatedFamilies,
       l$$__typename,
     ]);
   }
@@ -2312,6 +2421,12 @@ class Fragment_UserDetails_adminOn implements Fragment_UserAdminOn_adminOn {
     if (l$serviceAdminOnUsers != lOther$serviceAdminOnUsers) {
       return false;
     }
+    final l$serviceWriteRelatedFamilies = serviceWriteRelatedFamilies;
+    final lOther$serviceWriteRelatedFamilies =
+        other.serviceWriteRelatedFamilies;
+    if (l$serviceWriteRelatedFamilies != lOther$serviceWriteRelatedFamilies) {
+      return false;
+    }
     final l$classes = classes;
     final lOther$classes = other.classes;
     if (l$classes.length != lOther$classes.length) {
@@ -2337,6 +2452,11 @@ class Fragment_UserDetails_adminOn implements Fragment_UserAdminOn_adminOn {
     final l$groupAdminOnUsers = groupAdminOnUsers;
     final lOther$groupAdminOnUsers = other.groupAdminOnUsers;
     if (l$groupAdminOnUsers != lOther$groupAdminOnUsers) {
+      return false;
+    }
+    final l$groupWriteRelatedFamilies = groupWriteRelatedFamilies;
+    final lOther$groupWriteRelatedFamilies = other.groupWriteRelatedFamilies;
+    if (l$groupWriteRelatedFamilies != lOther$groupWriteRelatedFamilies) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -2373,10 +2493,12 @@ abstract class CopyWith_Fragment_UserDetails_adminOn<TRes> {
     bool? serviceGender,
     bool? serviceAllowEdit,
     bool? serviceAdminOnUsers,
+    bool? serviceWriteRelatedFamilies,
     List<Fragment_Class>? classes,
     Fragment_Group? group,
     bool? groupAllowEdit,
     bool? groupAdminOnUsers,
+    bool? groupWriteRelatedFamilies,
     String? $__typename,
   });
   CopyWith_Fragment_Area<TRes> get area;
@@ -2412,10 +2534,12 @@ class _CopyWithImpl_Fragment_UserDetails_adminOn<TRes>
     Object? serviceGender = _undefined,
     Object? serviceAllowEdit = _undefined,
     Object? serviceAdminOnUsers = _undefined,
+    Object? serviceWriteRelatedFamilies = _undefined,
     Object? classes = _undefined,
     Object? group = _undefined,
     Object? groupAllowEdit = _undefined,
     Object? groupAdminOnUsers = _undefined,
+    Object? groupWriteRelatedFamilies = _undefined,
     Object? $__typename = _undefined,
   }) => _then(
     Fragment_UserDetails_adminOn(
@@ -2445,6 +2569,11 @@ class _CopyWithImpl_Fragment_UserDetails_adminOn<TRes>
       serviceAdminOnUsers: serviceAdminOnUsers == _undefined
           ? _instance.serviceAdminOnUsers
           : (serviceAdminOnUsers as bool?),
+      serviceWriteRelatedFamilies:
+          serviceWriteRelatedFamilies == _undefined ||
+              serviceWriteRelatedFamilies == null
+          ? _instance.serviceWriteRelatedFamilies
+          : (serviceWriteRelatedFamilies as bool),
       classes: classes == _undefined || classes == null
           ? _instance.classes
           : (classes as List<Fragment_Class>),
@@ -2455,6 +2584,11 @@ class _CopyWithImpl_Fragment_UserDetails_adminOn<TRes>
       groupAdminOnUsers: groupAdminOnUsers == _undefined
           ? _instance.groupAdminOnUsers
           : (groupAdminOnUsers as bool?),
+      groupWriteRelatedFamilies:
+          groupWriteRelatedFamilies == _undefined ||
+              groupWriteRelatedFamilies == null
+          ? _instance.groupWriteRelatedFamilies
+          : (groupWriteRelatedFamilies as bool),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -2523,10 +2657,12 @@ class _CopyWithStubImpl_Fragment_UserDetails_adminOn<TRes>
     bool? serviceGender,
     bool? serviceAllowEdit,
     bool? serviceAdminOnUsers,
+    bool? serviceWriteRelatedFamilies,
     List<Fragment_Class>? classes,
     Fragment_Group? group,
     bool? groupAllowEdit,
     bool? groupAdminOnUsers,
+    bool? groupWriteRelatedFamilies,
     String? $__typename,
   }) => _res;
 
@@ -3388,6 +3524,13 @@ const fragmentDefinitionUserAdminOn = FragmentDefinitionNode(
               selectionSet: null,
             ),
             FieldNode(
+              name: NameNode(value: 'serviceWriteRelatedFamilies'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
               name: NameNode(value: 'classes'),
               alias: null,
               arguments: [
@@ -3456,6 +3599,13 @@ const fragmentDefinitionUserAdminOn = FragmentDefinitionNode(
               selectionSet: null,
             ),
             FieldNode(
+              name: NameNode(value: 'groupWriteRelatedFamilies'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
               name: NameNode(value: '__typename'),
               alias: null,
               arguments: [],
@@ -3500,10 +3650,12 @@ class Fragment_UserAdminOn_adminOn {
     this.serviceGender,
     this.serviceAllowEdit,
     this.serviceAdminOnUsers,
+    required this.serviceWriteRelatedFamilies,
     required this.classes,
     this.group,
     this.groupAllowEdit,
     this.groupAdminOnUsers,
+    required this.groupWriteRelatedFamilies,
     this.$__typename = 'AuthUsersAdminOn',
   });
 
@@ -3517,10 +3669,12 @@ class Fragment_UserAdminOn_adminOn {
     final l$serviceGender = json['serviceGender'];
     final l$serviceAllowEdit = json['serviceAllowEdit'];
     final l$serviceAdminOnUsers = json['serviceAdminOnUsers'];
+    final l$serviceWriteRelatedFamilies = json['serviceWriteRelatedFamilies'];
     final l$classes = json['classes'];
     final l$group = json['group'];
     final l$groupAllowEdit = json['groupAllowEdit'];
     final l$groupAdminOnUsers = json['groupAdminOnUsers'];
+    final l$groupWriteRelatedFamilies = json['groupWriteRelatedFamilies'];
     final l$$__typename = json['__typename'];
     return Fragment_UserAdminOn_adminOn(
       permissionId: stringToUuid(l$permissionId),
@@ -3540,6 +3694,7 @@ class Fragment_UserAdminOn_adminOn {
       serviceGender: (l$serviceGender as bool?),
       serviceAllowEdit: (l$serviceAllowEdit as bool?),
       serviceAdminOnUsers: (l$serviceAdminOnUsers as bool?),
+      serviceWriteRelatedFamilies: (l$serviceWriteRelatedFamilies as bool),
       classes: (l$classes as List<dynamic>)
           .map((e) => Fragment_Class.fromJson((e as Map<String, dynamic>)))
           .toList(),
@@ -3548,6 +3703,7 @@ class Fragment_UserAdminOn_adminOn {
           : Fragment_Group.fromJson((l$group as Map<String, dynamic>)),
       groupAllowEdit: (l$groupAllowEdit as bool?),
       groupAdminOnUsers: (l$groupAdminOnUsers as bool?),
+      groupWriteRelatedFamilies: (l$groupWriteRelatedFamilies as bool),
       $__typename: (l$$__typename as String),
     );
   }
@@ -3570,6 +3726,8 @@ class Fragment_UserAdminOn_adminOn {
 
   final bool? serviceAdminOnUsers;
 
+  final bool serviceWriteRelatedFamilies;
+
   final List<Fragment_Class> classes;
 
   final Fragment_Group? group;
@@ -3577,6 +3735,8 @@ class Fragment_UserAdminOn_adminOn {
   final bool? groupAllowEdit;
 
   final bool? groupAdminOnUsers;
+
+  final bool groupWriteRelatedFamilies;
 
   final String $__typename;
 
@@ -3600,6 +3760,8 @@ class Fragment_UserAdminOn_adminOn {
     _resultData['serviceAllowEdit'] = l$serviceAllowEdit;
     final l$serviceAdminOnUsers = serviceAdminOnUsers;
     _resultData['serviceAdminOnUsers'] = l$serviceAdminOnUsers;
+    final l$serviceWriteRelatedFamilies = serviceWriteRelatedFamilies;
+    _resultData['serviceWriteRelatedFamilies'] = l$serviceWriteRelatedFamilies;
     final l$classes = classes;
     _resultData['classes'] = l$classes.map((e) => e.toJson()).toList();
     final l$group = group;
@@ -3608,6 +3770,8 @@ class Fragment_UserAdminOn_adminOn {
     _resultData['groupAllowEdit'] = l$groupAllowEdit;
     final l$groupAdminOnUsers = groupAdminOnUsers;
     _resultData['groupAdminOnUsers'] = l$groupAdminOnUsers;
+    final l$groupWriteRelatedFamilies = groupWriteRelatedFamilies;
+    _resultData['groupWriteRelatedFamilies'] = l$groupWriteRelatedFamilies;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -3624,10 +3788,12 @@ class Fragment_UserAdminOn_adminOn {
     final l$serviceGender = serviceGender;
     final l$serviceAllowEdit = serviceAllowEdit;
     final l$serviceAdminOnUsers = serviceAdminOnUsers;
+    final l$serviceWriteRelatedFamilies = serviceWriteRelatedFamilies;
     final l$classes = classes;
     final l$group = group;
     final l$groupAllowEdit = groupAllowEdit;
     final l$groupAdminOnUsers = groupAdminOnUsers;
+    final l$groupWriteRelatedFamilies = groupWriteRelatedFamilies;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$permissionId,
@@ -3639,10 +3805,12 @@ class Fragment_UserAdminOn_adminOn {
       l$serviceGender,
       l$serviceAllowEdit,
       l$serviceAdminOnUsers,
+      l$serviceWriteRelatedFamilies,
       Object.hashAll(l$classes.map((v) => v)),
       l$group,
       l$groupAllowEdit,
       l$groupAdminOnUsers,
+      l$groupWriteRelatedFamilies,
       l$$__typename,
     ]);
   }
@@ -3701,6 +3869,12 @@ class Fragment_UserAdminOn_adminOn {
     if (l$serviceAdminOnUsers != lOther$serviceAdminOnUsers) {
       return false;
     }
+    final l$serviceWriteRelatedFamilies = serviceWriteRelatedFamilies;
+    final lOther$serviceWriteRelatedFamilies =
+        other.serviceWriteRelatedFamilies;
+    if (l$serviceWriteRelatedFamilies != lOther$serviceWriteRelatedFamilies) {
+      return false;
+    }
     final l$classes = classes;
     final lOther$classes = other.classes;
     if (l$classes.length != lOther$classes.length) {
@@ -3726,6 +3900,11 @@ class Fragment_UserAdminOn_adminOn {
     final l$groupAdminOnUsers = groupAdminOnUsers;
     final lOther$groupAdminOnUsers = other.groupAdminOnUsers;
     if (l$groupAdminOnUsers != lOther$groupAdminOnUsers) {
+      return false;
+    }
+    final l$groupWriteRelatedFamilies = groupWriteRelatedFamilies;
+    final lOther$groupWriteRelatedFamilies = other.groupWriteRelatedFamilies;
+    if (l$groupWriteRelatedFamilies != lOther$groupWriteRelatedFamilies) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -3762,10 +3941,12 @@ abstract class CopyWith_Fragment_UserAdminOn_adminOn<TRes> {
     bool? serviceGender,
     bool? serviceAllowEdit,
     bool? serviceAdminOnUsers,
+    bool? serviceWriteRelatedFamilies,
     List<Fragment_Class>? classes,
     Fragment_Group? group,
     bool? groupAllowEdit,
     bool? groupAdminOnUsers,
+    bool? groupWriteRelatedFamilies,
     String? $__typename,
   });
   CopyWith_Fragment_Area<TRes> get area;
@@ -3801,10 +3982,12 @@ class _CopyWithImpl_Fragment_UserAdminOn_adminOn<TRes>
     Object? serviceGender = _undefined,
     Object? serviceAllowEdit = _undefined,
     Object? serviceAdminOnUsers = _undefined,
+    Object? serviceWriteRelatedFamilies = _undefined,
     Object? classes = _undefined,
     Object? group = _undefined,
     Object? groupAllowEdit = _undefined,
     Object? groupAdminOnUsers = _undefined,
+    Object? groupWriteRelatedFamilies = _undefined,
     Object? $__typename = _undefined,
   }) => _then(
     Fragment_UserAdminOn_adminOn(
@@ -3834,6 +4017,11 @@ class _CopyWithImpl_Fragment_UserAdminOn_adminOn<TRes>
       serviceAdminOnUsers: serviceAdminOnUsers == _undefined
           ? _instance.serviceAdminOnUsers
           : (serviceAdminOnUsers as bool?),
+      serviceWriteRelatedFamilies:
+          serviceWriteRelatedFamilies == _undefined ||
+              serviceWriteRelatedFamilies == null
+          ? _instance.serviceWriteRelatedFamilies
+          : (serviceWriteRelatedFamilies as bool),
       classes: classes == _undefined || classes == null
           ? _instance.classes
           : (classes as List<Fragment_Class>),
@@ -3844,6 +4032,11 @@ class _CopyWithImpl_Fragment_UserAdminOn_adminOn<TRes>
       groupAdminOnUsers: groupAdminOnUsers == _undefined
           ? _instance.groupAdminOnUsers
           : (groupAdminOnUsers as bool?),
+      groupWriteRelatedFamilies:
+          groupWriteRelatedFamilies == _undefined ||
+              groupWriteRelatedFamilies == null
+          ? _instance.groupWriteRelatedFamilies
+          : (groupWriteRelatedFamilies as bool),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -3912,10 +4105,12 @@ class _CopyWithStubImpl_Fragment_UserAdminOn_adminOn<TRes>
     bool? serviceGender,
     bool? serviceAllowEdit,
     bool? serviceAdminOnUsers,
+    bool? serviceWriteRelatedFamilies,
     List<Fragment_Class>? classes,
     Fragment_Group? group,
     bool? groupAllowEdit,
     bool? groupAdminOnUsers,
+    bool? groupWriteRelatedFamilies,
     String? $__typename,
   }) => _res;
 
@@ -5838,6 +6033,7 @@ class Fragment_AttendanceFields_servicesHistory_service
     required this.id,
     required this.name,
     this.color,
+    this.userCanEdit,
     this.$__typename = 'Services',
     this.photoUpdatedAt,
     this.blurhash,
@@ -5851,6 +6047,7 @@ class Fragment_AttendanceFields_servicesHistory_service
     final l$id = json['id'];
     final l$name = json['name'];
     final l$color = json['color'];
+    final l$userCanEdit = json['userCanEdit'];
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
     final l$blurhash = json['blurhash'];
@@ -5861,6 +6058,7 @@ class Fragment_AttendanceFields_servicesHistory_service
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
+      userCanEdit: (l$userCanEdit as bool?),
       $__typename: (l$$__typename as String),
       photoUpdatedAt: l$photoUpdatedAt == null
           ? null
@@ -5883,6 +6081,8 @@ class Fragment_AttendanceFields_servicesHistory_service
 
   final int? color;
 
+  final bool? userCanEdit;
+
   final String $__typename;
 
   final DateTime? photoUpdatedAt;
@@ -5903,6 +6103,8 @@ class Fragment_AttendanceFields_servicesHistory_service
     _resultData['name'] = l$name;
     final l$color = color;
     _resultData['color'] = l$color;
+    final l$userCanEdit = userCanEdit;
+    _resultData['userCanEdit'] = l$userCanEdit;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
@@ -5926,6 +6128,7 @@ class Fragment_AttendanceFields_servicesHistory_service
     final l$id = id;
     final l$name = name;
     final l$color = color;
+    final l$userCanEdit = userCanEdit;
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$blurhash = blurhash;
@@ -5936,6 +6139,7 @@ class Fragment_AttendanceFields_servicesHistory_service
       l$id,
       l$name,
       l$color,
+      l$userCanEdit,
       l$$__typename,
       l$photoUpdatedAt,
       l$blurhash,
@@ -5966,6 +6170,11 @@ class Fragment_AttendanceFields_servicesHistory_service
     final l$color = color;
     final lOther$color = other.color;
     if (l$color != lOther$color) {
+      return false;
+    }
+    final l$userCanEdit = userCanEdit;
+    final lOther$userCanEdit = other.userCanEdit;
+    if (l$userCanEdit != lOther$userCanEdit) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -6027,6 +6236,7 @@ abstract class CopyWith_Fragment_AttendanceFields_servicesHistory_service<
     UuidValue? id,
     String? name,
     int? color,
+    bool? userCanEdit,
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
@@ -6063,6 +6273,7 @@ class _CopyWithImpl_Fragment_AttendanceFields_servicesHistory_service<TRes>
     Object? id = _undefined,
     Object? name = _undefined,
     Object? color = _undefined,
+    Object? userCanEdit = _undefined,
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? blurhash = _undefined,
@@ -6075,6 +6286,9 @@ class _CopyWithImpl_Fragment_AttendanceFields_servicesHistory_service<TRes>
           ? _instance.name
           : (name as String),
       color: color == _undefined ? _instance.color : (color as int?),
+      userCanEdit: userCanEdit == _undefined
+          ? _instance.userCanEdit
+          : (userCanEdit as bool?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -6137,6 +6351,7 @@ class _CopyWithStubImpl_Fragment_AttendanceFields_servicesHistory_service<TRes>
     UuidValue? id,
     String? name,
     int? color,
+    bool? userCanEdit,
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
@@ -7698,6 +7913,7 @@ class Fragment_AttendanceFields_classesHistory_classes
     required this.id,
     required this.name,
     this.color,
+    this.userCanEdit,
     this.$__typename = 'Classes',
     this.photoUpdatedAt,
     this.blurhash,
@@ -7711,6 +7927,7 @@ class Fragment_AttendanceFields_classesHistory_classes
     final l$id = json['id'];
     final l$name = json['name'];
     final l$color = json['color'];
+    final l$userCanEdit = json['userCanEdit'];
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
     final l$blurhash = json['blurhash'];
@@ -7721,6 +7938,7 @@ class Fragment_AttendanceFields_classesHistory_classes
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
+      userCanEdit: (l$userCanEdit as bool?),
       $__typename: (l$$__typename as String),
       photoUpdatedAt: l$photoUpdatedAt == null
           ? null
@@ -7743,6 +7961,8 @@ class Fragment_AttendanceFields_classesHistory_classes
 
   final int? color;
 
+  final bool? userCanEdit;
+
   final String $__typename;
 
   final DateTime? photoUpdatedAt;
@@ -7763,6 +7983,8 @@ class Fragment_AttendanceFields_classesHistory_classes
     _resultData['name'] = l$name;
     final l$color = color;
     _resultData['color'] = l$color;
+    final l$userCanEdit = userCanEdit;
+    _resultData['userCanEdit'] = l$userCanEdit;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
@@ -7786,6 +8008,7 @@ class Fragment_AttendanceFields_classesHistory_classes
     final l$id = id;
     final l$name = name;
     final l$color = color;
+    final l$userCanEdit = userCanEdit;
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$blurhash = blurhash;
@@ -7796,6 +8019,7 @@ class Fragment_AttendanceFields_classesHistory_classes
       l$id,
       l$name,
       l$color,
+      l$userCanEdit,
       l$$__typename,
       l$photoUpdatedAt,
       l$blurhash,
@@ -7826,6 +8050,11 @@ class Fragment_AttendanceFields_classesHistory_classes
     final l$color = color;
     final lOther$color = other.color;
     if (l$color != lOther$color) {
+      return false;
+    }
+    final l$userCanEdit = userCanEdit;
+    final lOther$userCanEdit = other.userCanEdit;
+    if (l$userCanEdit != lOther$userCanEdit) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -7883,6 +8112,7 @@ abstract class CopyWith_Fragment_AttendanceFields_classesHistory_classes<TRes> {
     UuidValue? id,
     String? name,
     int? color,
+    bool? userCanEdit,
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
@@ -7918,6 +8148,7 @@ class _CopyWithImpl_Fragment_AttendanceFields_classesHistory_classes<TRes>
     Object? id = _undefined,
     Object? name = _undefined,
     Object? color = _undefined,
+    Object? userCanEdit = _undefined,
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? blurhash = _undefined,
@@ -7930,6 +8161,9 @@ class _CopyWithImpl_Fragment_AttendanceFields_classesHistory_classes<TRes>
           ? _instance.name
           : (name as String),
       color: color == _undefined ? _instance.color : (color as int?),
+      userCanEdit: userCanEdit == _undefined
+          ? _instance.userCanEdit
+          : (userCanEdit as bool?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -7989,6 +8223,7 @@ class _CopyWithStubImpl_Fragment_AttendanceFields_classesHistory_classes<TRes>
     UuidValue? id,
     String? name,
     int? color,
+    bool? userCanEdit,
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
@@ -9521,6 +9756,7 @@ class Fragment_AttendanceFields_groupsHistory_group
     required this.id,
     required this.name,
     this.color,
+    this.userCanEdit,
     this.$__typename = 'Groups',
     this.photoUpdatedAt,
     this.blurhash,
@@ -9534,6 +9770,7 @@ class Fragment_AttendanceFields_groupsHistory_group
     final l$id = json['id'];
     final l$name = json['name'];
     final l$color = json['color'];
+    final l$userCanEdit = json['userCanEdit'];
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
     final l$blurhash = json['blurhash'];
@@ -9544,6 +9781,7 @@ class Fragment_AttendanceFields_groupsHistory_group
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
+      userCanEdit: (l$userCanEdit as bool?),
       $__typename: (l$$__typename as String),
       photoUpdatedAt: l$photoUpdatedAt == null
           ? null
@@ -9566,6 +9804,8 @@ class Fragment_AttendanceFields_groupsHistory_group
 
   final int? color;
 
+  final bool? userCanEdit;
+
   final String $__typename;
 
   final DateTime? photoUpdatedAt;
@@ -9586,6 +9826,8 @@ class Fragment_AttendanceFields_groupsHistory_group
     _resultData['name'] = l$name;
     final l$color = color;
     _resultData['color'] = l$color;
+    final l$userCanEdit = userCanEdit;
+    _resultData['userCanEdit'] = l$userCanEdit;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
@@ -9609,6 +9851,7 @@ class Fragment_AttendanceFields_groupsHistory_group
     final l$id = id;
     final l$name = name;
     final l$color = color;
+    final l$userCanEdit = userCanEdit;
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$blurhash = blurhash;
@@ -9619,6 +9862,7 @@ class Fragment_AttendanceFields_groupsHistory_group
       l$id,
       l$name,
       l$color,
+      l$userCanEdit,
       l$$__typename,
       l$photoUpdatedAt,
       l$blurhash,
@@ -9649,6 +9893,11 @@ class Fragment_AttendanceFields_groupsHistory_group
     final l$color = color;
     final lOther$color = other.color;
     if (l$color != lOther$color) {
+      return false;
+    }
+    final l$userCanEdit = userCanEdit;
+    final lOther$userCanEdit = other.userCanEdit;
+    if (l$userCanEdit != lOther$userCanEdit) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -9706,6 +9955,7 @@ abstract class CopyWith_Fragment_AttendanceFields_groupsHistory_group<TRes> {
     UuidValue? id,
     String? name,
     int? color,
+    bool? userCanEdit,
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
@@ -9741,6 +9991,7 @@ class _CopyWithImpl_Fragment_AttendanceFields_groupsHistory_group<TRes>
     Object? id = _undefined,
     Object? name = _undefined,
     Object? color = _undefined,
+    Object? userCanEdit = _undefined,
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? blurhash = _undefined,
@@ -9753,6 +10004,9 @@ class _CopyWithImpl_Fragment_AttendanceFields_groupsHistory_group<TRes>
           ? _instance.name
           : (name as String),
       color: color == _undefined ? _instance.color : (color as int?),
+      userCanEdit: userCanEdit == _undefined
+          ? _instance.userCanEdit
+          : (userCanEdit as bool?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -9812,6 +10066,7 @@ class _CopyWithStubImpl_Fragment_AttendanceFields_groupsHistory_group<TRes>
     UuidValue? id,
     String? name,
     int? color,
+    bool? userCanEdit,
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,

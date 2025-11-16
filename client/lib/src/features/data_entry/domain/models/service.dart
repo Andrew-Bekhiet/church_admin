@@ -15,42 +15,62 @@ class Service extends ViewableWithIDAndImage
   @override
   @JsonKey(defaultValue: '')
   final String id;
+
   @override
   @JsonKey(defaultValue: '')
   final String name;
+
   @override
   final StudyYear? studyYearFrom;
+
   @override
   final StudyYear? studyYearTo;
+
   @override
   final int? studyYearFromId;
+
   @override
   final int? studyYearToId;
+
   @override
   final Service? nextService;
+
   @override
   final String? nextServiceId;
+
   @override
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
   final Color? color;
+
   @override
   final DateTime? photoUpdatedAt;
+
   @override
   final String? blurhash;
+
   @override
   final List<Class>? classes;
+
   @override
   final List<Group>? groups;
+
   @override
   final LastRecordedByInfo? lastEdit;
+
   @override
   @JsonKey(fromJson: adminUsersFromJson, toJson: adminUsersToJson)
   @QueryableField(manyToManyRelType: AdminOnData)
   final List<User>? adminUsers;
+
   @override
   final HistoryAggregateData? attendanceHistoryAggregate;
+
   @override
   final HistoryAggregateData? attendanceDaysConstraintsAggregate;
+
+  @override
+  @JsonKey(includeToJson: false)
+  final bool userCanEdit;
 
   const Service({
     required this.id,
@@ -70,6 +90,7 @@ class Service extends ViewableWithIDAndImage
     this.adminUsers,
     this.attendanceHistoryAggregate,
     this.attendanceDaysConstraintsAggregate,
+    this.userCanEdit = false,
   });
 
   factory Service.fromJson(Map<String, Object?> json) =>

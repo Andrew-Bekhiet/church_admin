@@ -23,6 +23,7 @@ mixin _$Area {
   LastRecordedByInfo? get lastVisit;
   LastRecordedByInfo? get lastEdit;
   List<User>? get adminUsers;
+  bool get userCanEdit;
 
   /// Create a copy of Area
   /// with the given fields replaced by the non-null parameter values.
@@ -49,7 +50,9 @@ mixin _$Area {
             (identical(other.lastEdit, lastEdit) ||
                 other.lastEdit == lastEdit) &&
             const DeepCollectionEquality()
-                .equals(other.adminUsers, adminUsers));
+                .equals(other.adminUsers, adminUsers) &&
+            (identical(other.userCanEdit, userCanEdit) ||
+                other.userCanEdit == userCanEdit));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -64,11 +67,12 @@ mixin _$Area {
       blurhash,
       lastVisit,
       lastEdit,
-      const DeepCollectionEquality().hash(adminUsers));
+      const DeepCollectionEquality().hash(adminUsers),
+      userCanEdit);
 
   @override
   String toString() {
-    return 'Area(id: $id, name: $name, bounds: $bounds, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, lastVisit: $lastVisit, lastEdit: $lastEdit, adminUsers: $adminUsers)';
+    return 'Area(id: $id, name: $name, bounds: $bounds, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, lastVisit: $lastVisit, lastEdit: $lastEdit, adminUsers: $adminUsers, userCanEdit: $userCanEdit)';
   }
 }
 
@@ -86,7 +90,8 @@ abstract mixin class $AreaCopyWith<$Res> {
       String? blurhash,
       LastRecordedByInfo? lastVisit,
       LastRecordedByInfo? lastEdit,
-      List<User>? adminUsers});
+      List<User>? adminUsers,
+      bool userCanEdit});
 }
 
 /// @nodoc
@@ -110,6 +115,7 @@ class _$AreaCopyWithImpl<$Res> implements $AreaCopyWith<$Res> {
     Object? lastVisit = freezed,
     Object? lastEdit = freezed,
     Object? adminUsers = freezed,
+    Object? userCanEdit = null,
   }) {
     return _then(Area(
       id: null == id
@@ -148,6 +154,10 @@ class _$AreaCopyWithImpl<$Res> implements $AreaCopyWith<$Res> {
           ? _self.adminUsers
           : adminUsers // ignore: cast_nullable_to_non_nullable
               as List<User>?,
+      userCanEdit: null == userCanEdit
+          ? _self.userCanEdit
+          : userCanEdit // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }

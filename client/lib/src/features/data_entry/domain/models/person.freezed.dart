@@ -82,6 +82,7 @@ mixin _$Person {
   HistoryAggregateData? get callHistoryAggregate;
   HistoryAggregateData? get visitHistoryAggregate;
   HistoryAggregateData? get editHistoryAggregate;
+  bool get userCanEdit;
 
   /// Create a copy of Person
   /// with the given fields replaced by the non-null parameter values.
@@ -204,7 +205,8 @@ mixin _$Person {
             (identical(other.confessionHistoryAggregate, confessionHistoryAggregate) || other.confessionHistoryAggregate == confessionHistoryAggregate) &&
             (identical(other.callHistoryAggregate, callHistoryAggregate) || other.callHistoryAggregate == callHistoryAggregate) &&
             (identical(other.visitHistoryAggregate, visitHistoryAggregate) || other.visitHistoryAggregate == visitHistoryAggregate) &&
-            (identical(other.editHistoryAggregate, editHistoryAggregate) || other.editHistoryAggregate == editHistoryAggregate));
+            (identical(other.editHistoryAggregate, editHistoryAggregate) || other.editHistoryAggregate == editHistoryAggregate) &&
+            (identical(other.userCanEdit, userCanEdit) || other.userCanEdit == userCanEdit));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -278,12 +280,13 @@ mixin _$Person {
         confessionHistoryAggregate,
         callHistoryAggregate,
         visitHistoryAggregate,
-        editHistoryAggregate
+        editHistoryAggregate,
+        userCanEdit
       ]);
 
   @override
   String toString() {
-    return 'Person(id: $id, nationalId: $nationalId, name: $name, address: $address, mainPhone: $mainPhone, otherPhones: $otherPhones, birthdate: $birthdate, birthday: $birthday, gender: $gender, isShammas: $isShammas, shammasLevelId: $shammasLevelId, shammasLevel: $shammasLevel, school: $school, schoolId: $schoolId, college: $college, collegeId: $collegeId, church: $church, churchId: $churchId, father: $father, fatherId: $fatherId, workStatus: $workStatus, job: $job, jobId: $jobId, jobDescription: $jobDescription, qualification: $qualification, qualificationId: $qualificationId, martialStatus: $martialStatus, personType: $personType, personTypeId: $personTypeId, state: $state, stateId: $stateId, isServant: $isServant, servingChurch: $servingChurch, serviceType: $serviceType, notes: $notes, family: $family, familyId: $familyId, store: $store, storeId: $storeId, studyYear: $studyYear, studyYearId: $studyYearId, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, lastConfession: $lastConfession, lastKodas: $lastKodas, lastAttendance: $lastAttendance, lastCall: $lastCall, lastVisit: $lastVisit, lastEdit: $lastEdit, classes: $classes, groups: $groups, services: $services, tags: $tags, hobbies: $hobbies, user: $user, kodasHistory: $kodasHistory, attendanceHistory: $attendanceHistory, confessionHistory: $confessionHistory, callHistory: $callHistory, visitHistory: $visitHistory, editHistory: $editHistory, kodasHistoryAggregate: $kodasHistoryAggregate, attendanceHistoryAggregate: $attendanceHistoryAggregate, confessionHistoryAggregate: $confessionHistoryAggregate, callHistoryAggregate: $callHistoryAggregate, visitHistoryAggregate: $visitHistoryAggregate, editHistoryAggregate: $editHistoryAggregate)';
+    return 'Person(id: $id, nationalId: $nationalId, name: $name, address: $address, mainPhone: $mainPhone, otherPhones: $otherPhones, birthdate: $birthdate, birthday: $birthday, gender: $gender, isShammas: $isShammas, shammasLevelId: $shammasLevelId, shammasLevel: $shammasLevel, school: $school, schoolId: $schoolId, college: $college, collegeId: $collegeId, church: $church, churchId: $churchId, father: $father, fatherId: $fatherId, workStatus: $workStatus, job: $job, jobId: $jobId, jobDescription: $jobDescription, qualification: $qualification, qualificationId: $qualificationId, martialStatus: $martialStatus, personType: $personType, personTypeId: $personTypeId, state: $state, stateId: $stateId, isServant: $isServant, servingChurch: $servingChurch, serviceType: $serviceType, notes: $notes, family: $family, familyId: $familyId, store: $store, storeId: $storeId, studyYear: $studyYear, studyYearId: $studyYearId, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, lastConfession: $lastConfession, lastKodas: $lastKodas, lastAttendance: $lastAttendance, lastCall: $lastCall, lastVisit: $lastVisit, lastEdit: $lastEdit, classes: $classes, groups: $groups, services: $services, tags: $tags, hobbies: $hobbies, user: $user, kodasHistory: $kodasHistory, attendanceHistory: $attendanceHistory, confessionHistory: $confessionHistory, callHistory: $callHistory, visitHistory: $visitHistory, editHistory: $editHistory, kodasHistoryAggregate: $kodasHistoryAggregate, attendanceHistoryAggregate: $attendanceHistoryAggregate, confessionHistoryAggregate: $confessionHistoryAggregate, callHistoryAggregate: $callHistoryAggregate, visitHistoryAggregate: $visitHistoryAggregate, editHistoryAggregate: $editHistoryAggregate, userCanEdit: $userCanEdit)';
   }
 }
 
@@ -360,7 +363,8 @@ abstract mixin class $PersonCopyWith<$Res> {
       HistoryAggregateData? confessionHistoryAggregate,
       HistoryAggregateData? callHistoryAggregate,
       HistoryAggregateData? visitHistoryAggregate,
-      HistoryAggregateData? editHistoryAggregate});
+      HistoryAggregateData? editHistoryAggregate,
+      bool userCanEdit});
 }
 
 /// @nodoc
@@ -443,6 +447,7 @@ class _$PersonCopyWithImpl<$Res> implements $PersonCopyWith<$Res> {
     Object? callHistoryAggregate = freezed,
     Object? visitHistoryAggregate = freezed,
     Object? editHistoryAggregate = freezed,
+    Object? userCanEdit = null,
   }) {
     return _then(Person(
       id: null == id
@@ -717,6 +722,10 @@ class _$PersonCopyWithImpl<$Res> implements $PersonCopyWith<$Res> {
           ? _self.editHistoryAggregate
           : editHistoryAggregate // ignore: cast_nullable_to_non_nullable
               as HistoryAggregateData?,
+      userCanEdit: null == userCanEdit
+          ? _self.userCanEdit
+          : userCanEdit // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }

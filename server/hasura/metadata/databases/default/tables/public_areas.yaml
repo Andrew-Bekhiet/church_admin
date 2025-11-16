@@ -42,6 +42,14 @@ array_relationships:
         table:
           name: areas_streets
           schema: public
+computed_fields:
+  - name: userCanEdit
+    definition:
+      function:
+        name: user_can_edit_area
+        schema: auth
+      session_argument: hasura_session
+    comment: ""
 insert_permissions:
   - role: user
     permission:
@@ -70,6 +78,8 @@ select_permissions:
         - id
         - name
         - photo_updated_at
+      computed_fields:
+        - userCanEdit
       filter:
         deleted_at:
           _is_null: true

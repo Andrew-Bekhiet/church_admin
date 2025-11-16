@@ -6,6 +6,7 @@ class Fragment_Class implements Fragment_ClassNoPhoto {
     required this.id,
     required this.name,
     this.color,
+    this.userCanEdit,
     this.$__typename = 'Classes',
     this.photoUpdatedAt,
     this.blurhash,
@@ -15,6 +16,7 @@ class Fragment_Class implements Fragment_ClassNoPhoto {
     final l$id = json['id'];
     final l$name = json['name'];
     final l$color = json['color'];
+    final l$userCanEdit = json['userCanEdit'];
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
     final l$blurhash = json['blurhash'];
@@ -22,6 +24,7 @@ class Fragment_Class implements Fragment_ClassNoPhoto {
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
+      userCanEdit: (l$userCanEdit as bool?),
       $__typename: (l$$__typename as String),
       photoUpdatedAt: l$photoUpdatedAt == null
           ? null
@@ -35,6 +38,8 @@ class Fragment_Class implements Fragment_ClassNoPhoto {
   final String name;
 
   final int? color;
+
+  final bool? userCanEdit;
 
   final String $__typename;
 
@@ -50,6 +55,8 @@ class Fragment_Class implements Fragment_ClassNoPhoto {
     _resultData['name'] = l$name;
     final l$color = color;
     _resultData['color'] = l$color;
+    final l$userCanEdit = userCanEdit;
+    _resultData['userCanEdit'] = l$userCanEdit;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
@@ -66,6 +73,7 @@ class Fragment_Class implements Fragment_ClassNoPhoto {
     final l$id = id;
     final l$name = name;
     final l$color = color;
+    final l$userCanEdit = userCanEdit;
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$blurhash = blurhash;
@@ -73,6 +81,7 @@ class Fragment_Class implements Fragment_ClassNoPhoto {
       l$id,
       l$name,
       l$color,
+      l$userCanEdit,
       l$$__typename,
       l$photoUpdatedAt,
       l$blurhash,
@@ -100,6 +109,11 @@ class Fragment_Class implements Fragment_ClassNoPhoto {
     final l$color = color;
     final lOther$color = other.color;
     if (l$color != lOther$color) {
+      return false;
+    }
+    final l$userCanEdit = userCanEdit;
+    final lOther$userCanEdit = other.userCanEdit;
+    if (l$userCanEdit != lOther$userCanEdit) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -139,6 +153,7 @@ abstract class CopyWith_Fragment_Class<TRes> {
     UuidValue? id,
     String? name,
     int? color,
+    bool? userCanEdit,
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
@@ -159,6 +174,7 @@ class _CopyWithImpl_Fragment_Class<TRes>
     Object? id = _undefined,
     Object? name = _undefined,
     Object? color = _undefined,
+    Object? userCanEdit = _undefined,
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? blurhash = _undefined,
@@ -169,6 +185,9 @@ class _CopyWithImpl_Fragment_Class<TRes>
           ? _instance.name
           : (name as String),
       color: color == _undefined ? _instance.color : (color as int?),
+      userCanEdit: userCanEdit == _undefined
+          ? _instance.userCanEdit
+          : (userCanEdit as bool?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -192,6 +211,7 @@ class _CopyWithStubImpl_Fragment_Class<TRes>
     UuidValue? id,
     String? name,
     int? color,
+    bool? userCanEdit,
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
@@ -243,6 +263,7 @@ class Fragment_ClassNoPhoto {
     required this.id,
     required this.name,
     this.color,
+    this.userCanEdit,
     this.$__typename = 'Classes',
   });
 
@@ -250,11 +271,13 @@ class Fragment_ClassNoPhoto {
     final l$id = json['id'];
     final l$name = json['name'];
     final l$color = json['color'];
+    final l$userCanEdit = json['userCanEdit'];
     final l$$__typename = json['__typename'];
     return Fragment_ClassNoPhoto(
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
+      userCanEdit: (l$userCanEdit as bool?),
       $__typename: (l$$__typename as String),
     );
   }
@@ -264,6 +287,8 @@ class Fragment_ClassNoPhoto {
   final String name;
 
   final int? color;
+
+  final bool? userCanEdit;
 
   final String $__typename;
 
@@ -275,6 +300,8 @@ class Fragment_ClassNoPhoto {
     _resultData['name'] = l$name;
     final l$color = color;
     _resultData['color'] = l$color;
+    final l$userCanEdit = userCanEdit;
+    _resultData['userCanEdit'] = l$userCanEdit;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -285,8 +312,15 @@ class Fragment_ClassNoPhoto {
     final l$id = id;
     final l$name = name;
     final l$color = color;
+    final l$userCanEdit = userCanEdit;
     final l$$__typename = $__typename;
-    return Object.hashAll([l$id, l$name, l$color, l$$__typename]);
+    return Object.hashAll([
+      l$id,
+      l$name,
+      l$color,
+      l$userCanEdit,
+      l$$__typename,
+    ]);
   }
 
   @override
@@ -312,6 +346,11 @@ class Fragment_ClassNoPhoto {
     if (l$color != lOther$color) {
       return false;
     }
+    final l$userCanEdit = userCanEdit;
+    final lOther$userCanEdit = other.userCanEdit;
+    if (l$userCanEdit != lOther$userCanEdit) {
+      return false;
+    }
     final l$$__typename = $__typename;
     final lOther$$__typename = other.$__typename;
     if (l$$__typename != lOther$$__typename) {
@@ -335,7 +374,13 @@ abstract class CopyWith_Fragment_ClassNoPhoto<TRes> {
   factory CopyWith_Fragment_ClassNoPhoto.stub(TRes res) =
       _CopyWithStubImpl_Fragment_ClassNoPhoto;
 
-  TRes call({UuidValue? id, String? name, int? color, String? $__typename});
+  TRes call({
+    UuidValue? id,
+    String? name,
+    int? color,
+    bool? userCanEdit,
+    String? $__typename,
+  });
 }
 
 class _CopyWithImpl_Fragment_ClassNoPhoto<TRes>
@@ -352,6 +397,7 @@ class _CopyWithImpl_Fragment_ClassNoPhoto<TRes>
     Object? id = _undefined,
     Object? name = _undefined,
     Object? color = _undefined,
+    Object? userCanEdit = _undefined,
     Object? $__typename = _undefined,
   }) => _then(
     Fragment_ClassNoPhoto(
@@ -360,6 +406,9 @@ class _CopyWithImpl_Fragment_ClassNoPhoto<TRes>
           ? _instance.name
           : (name as String),
       color: color == _undefined ? _instance.color : (color as int?),
+      userCanEdit: userCanEdit == _undefined
+          ? _instance.userCanEdit
+          : (userCanEdit as bool?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -373,7 +422,13 @@ class _CopyWithStubImpl_Fragment_ClassNoPhoto<TRes>
 
   TRes _res;
 
-  call({UuidValue? id, String? name, int? color, String? $__typename}) => _res;
+  call({
+    UuidValue? id,
+    String? name,
+    int? color,
+    bool? userCanEdit,
+    String? $__typename,
+  }) => _res;
 }
 
 const fragmentDefinitionClassNoPhoto = FragmentDefinitionNode(
@@ -400,6 +455,13 @@ const fragmentDefinitionClassNoPhoto = FragmentDefinitionNode(
       ),
       FieldNode(
         name: NameNode(value: 'color'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'userCanEdit'),
         alias: null,
         arguments: [],
         directives: [],

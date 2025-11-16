@@ -8,4 +8,5 @@ fragment GroupNoPhoto on Groups {
   id
   name
   color
+  userCanEdit
 }

@@ -240,6 +240,7 @@ Service _$ServiceFromJson(Map json) => Service(
               ? null
               : HistoryAggregateData.fromJson(Map<String, dynamic>.from(
                   json['attendanceDaysConstraintsAggregate'] as Map)),
+      userCanEdit: json['userCanEdit'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$ServiceToJson(Service instance) => <String, dynamic>{

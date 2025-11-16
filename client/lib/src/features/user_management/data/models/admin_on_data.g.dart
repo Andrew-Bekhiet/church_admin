@@ -116,6 +116,20 @@ class AdminOnDataFields {
     },
   );
 
+  final FieldMetadata<bool> serviceWriteRelatedFamilies = FieldMetadata<bool>(
+    getValue: (obj) =>
+        obj is AdminOnData ? obj.serviceWriteRelatedFamilies : null,
+    parentType: AdminOnData,
+    name: 'serviceWriteRelatedFamilies',
+    label: 'يمكنه تعديل عائلات المخدومين بالخدمة',
+    isCodeOnly: false,
+    operators: {
+      ...BooleanOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
   final FieldMetadata<Class> classes = FieldMetadata<Class>(
     getValue: (obj) => obj is AdminOnData ? obj.classes : null,
     parentType: AdminOnData,
@@ -165,6 +179,20 @@ class AdminOnDataFields {
     },
   );
 
+  final FieldMetadata<bool> groupWriteRelatedFamilies = FieldMetadata<bool>(
+    getValue: (obj) =>
+        obj is AdminOnData ? obj.groupWriteRelatedFamilies : null,
+    parentType: AdminOnData,
+    name: 'groupWriteRelatedFamilies',
+    label: 'يمكنه تعديل عائلات المخدومين بالمجموعة',
+    isCodeOnly: false,
+    operators: {
+      ...BooleanOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull
+    },
+  );
+
   final FieldMetadata<User> user = FieldMetadata<User>(
     getValue: (obj) => obj is AdminOnData ? obj.user : null,
     parentType: AdminOnData,
@@ -187,10 +215,12 @@ class AdminOnDataFields {
     serviceGender,
     serviceAllowEdit,
     serviceAdminOnUsers,
+    serviceWriteRelatedFamilies,
     classes,
     group,
     groupAllowEdit,
     groupAdminOnUsers,
+    groupWriteRelatedFamilies,
     user
   ];
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
@@ -202,10 +232,12 @@ class AdminOnDataFields {
     'serviceGender': serviceGender,
     'serviceAllowEdit': serviceAllowEdit,
     'serviceAdminOnUsers': serviceAdminOnUsers,
+    'serviceWriteRelatedFamilies': serviceWriteRelatedFamilies,
     'classes': classes,
     'group': group,
     'groupAllowEdit': groupAllowEdit,
     'groupAdminOnUsers': groupAdminOnUsers,
+    'groupWriteRelatedFamilies': groupWriteRelatedFamilies,
     'user': user
   };
 }
@@ -231,6 +263,7 @@ AdminOnData _$AdminOnDataFromJson(Map json) => AdminOnData(
       serviceGender: json['serviceGender'] as bool?,
       serviceAllowEdit: json['serviceAllowEdit'] as bool?,
       serviceAdminOnUsers: json['serviceAdminOnUsers'] as bool?,
+      serviceWriteRelatedFamilies: json['serviceWriteRelatedFamilies'] as bool?,
       classes: (json['classes'] as List<dynamic>?)
               ?.map((e) => Class.fromJson(Map<String, Object?>.from(e as Map)))
               .toList() ??
@@ -240,6 +273,7 @@ AdminOnData _$AdminOnDataFromJson(Map json) => AdminOnData(
           : Group.fromJson(Map<String, Object?>.from(json['group'] as Map)),
       groupAllowEdit: json['groupAllowEdit'] as bool?,
       groupAdminOnUsers: json['groupAdminOnUsers'] as bool?,
+      groupWriteRelatedFamilies: json['groupWriteRelatedFamilies'] as bool?,
       user: json['user'] == null
           ? null
           : User.fromJson(Map<String, Object?>.from(json['user'] as Map)),
@@ -256,9 +290,11 @@ Map<String, dynamic> _$AdminOnDataToJson(AdminOnData instance) =>
       'serviceGender': instance.serviceGender,
       'serviceAllowEdit': instance.serviceAllowEdit,
       'serviceAdminOnUsers': instance.serviceAdminOnUsers,
+      'serviceWriteRelatedFamilies': instance.serviceWriteRelatedFamilies,
       'classes': instance.classes.map((e) => e.toJson()).toList(),
       'group': instance.group?.toJson(),
       'groupAllowEdit': instance.groupAllowEdit,
       'groupAdminOnUsers': instance.groupAdminOnUsers,
+      'groupWriteRelatedFamilies': instance.groupWriteRelatedFamilies,
       'user': instance.user?.toJson(),
     };

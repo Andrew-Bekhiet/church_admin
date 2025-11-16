@@ -292,6 +292,7 @@ Family _$FamilyFromJson(Map json) => Family(
           (_readFamilyAdminsPhones(json, 'familyAdminsPhones') as Map?)?.map(
         (k, e) => MapEntry(k as String, e),
       ),
+      userCanEdit: json['userCanEdit'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$FamilyToJson(Family instance) => <String, dynamic>{

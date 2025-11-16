@@ -8,4 +8,5 @@ fragment StoreNoPhoto on Stores {
   id
   name
   color
+  userCanEdit
 }

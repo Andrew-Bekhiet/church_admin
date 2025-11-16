@@ -35,6 +35,14 @@ array_relationships:
         remote_table:
           name: edit_history
           schema: history
+computed_fields:
+  - name: userCanEdit
+    definition:
+      function:
+        name: user_can_edit_street
+        schema: auth
+      session_argument: hasura_session
+    comment: ""
 insert_permissions:
   - role: user
     permission:
@@ -63,6 +71,8 @@ select_permissions:
         - line
         - name
         - photo_updated_at
+      computed_fields:
+        - userCanEdit
       filter:
         deleted_at:
           _is_null: true

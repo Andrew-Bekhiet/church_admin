@@ -8,4 +8,5 @@ fragment ClassNoPhoto on Classes {
   id
   name
   color
+  userCanEdit
 }

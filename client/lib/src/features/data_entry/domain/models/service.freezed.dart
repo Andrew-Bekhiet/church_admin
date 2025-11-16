@@ -31,6 +31,7 @@ mixin _$Service {
   List<User>? get adminUsers;
   HistoryAggregateData? get attendanceHistoryAggregate;
   HistoryAggregateData? get attendanceDaysConstraintsAggregate;
+  bool get userCanEdit;
 
   /// Create a copy of Service
   /// with the given fields replaced by the non-null parameter values.
@@ -76,7 +77,9 @@ mixin _$Service {
             (identical(other.attendanceDaysConstraintsAggregate,
                     attendanceDaysConstraintsAggregate) ||
                 other.attendanceDaysConstraintsAggregate ==
-                    attendanceDaysConstraintsAggregate));
+                    attendanceDaysConstraintsAggregate) &&
+            (identical(other.userCanEdit, userCanEdit) ||
+                other.userCanEdit == userCanEdit));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -99,11 +102,12 @@ mixin _$Service {
       lastEdit,
       const DeepCollectionEquality().hash(adminUsers),
       attendanceHistoryAggregate,
-      attendanceDaysConstraintsAggregate);
+      attendanceDaysConstraintsAggregate,
+      userCanEdit);
 
   @override
   String toString() {
-    return 'Service(id: $id, name: $name, studyYearFrom: $studyYearFrom, studyYearTo: $studyYearTo, studyYearFromId: $studyYearFromId, studyYearToId: $studyYearToId, nextService: $nextService, nextServiceId: $nextServiceId, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, classes: $classes, groups: $groups, lastEdit: $lastEdit, adminUsers: $adminUsers, attendanceHistoryAggregate: $attendanceHistoryAggregate, attendanceDaysConstraintsAggregate: $attendanceDaysConstraintsAggregate)';
+    return 'Service(id: $id, name: $name, studyYearFrom: $studyYearFrom, studyYearTo: $studyYearTo, studyYearFromId: $studyYearFromId, studyYearToId: $studyYearToId, nextService: $nextService, nextServiceId: $nextServiceId, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, classes: $classes, groups: $groups, lastEdit: $lastEdit, adminUsers: $adminUsers, attendanceHistoryAggregate: $attendanceHistoryAggregate, attendanceDaysConstraintsAggregate: $attendanceDaysConstraintsAggregate, userCanEdit: $userCanEdit)';
   }
 }
 
@@ -129,7 +133,8 @@ abstract mixin class $ServiceCopyWith<$Res> {
       LastRecordedByInfo? lastEdit,
       List<User>? adminUsers,
       HistoryAggregateData? attendanceHistoryAggregate,
-      HistoryAggregateData? attendanceDaysConstraintsAggregate});
+      HistoryAggregateData? attendanceDaysConstraintsAggregate,
+      bool userCanEdit});
 }
 
 /// @nodoc
@@ -161,6 +166,7 @@ class _$ServiceCopyWithImpl<$Res> implements $ServiceCopyWith<$Res> {
     Object? adminUsers = freezed,
     Object? attendanceHistoryAggregate = freezed,
     Object? attendanceDaysConstraintsAggregate = freezed,
+    Object? userCanEdit = null,
   }) {
     return _then(Service(
       id: null == id
@@ -232,6 +238,10 @@ class _$ServiceCopyWithImpl<$Res> implements $ServiceCopyWith<$Res> {
           ? _self.attendanceDaysConstraintsAggregate
           : attendanceDaysConstraintsAggregate // ignore: cast_nullable_to_non_nullable
               as HistoryAggregateData?,
+      userCanEdit: null == userCanEdit
+          ? _self.userCanEdit
+          : userCanEdit // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
