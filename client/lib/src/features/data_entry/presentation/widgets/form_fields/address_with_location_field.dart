@@ -258,8 +258,8 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
                     decoration: const InputDecoration(
                       label: AutoSizeText(
                         'رقم العمارة',
-                        minFontSize: 9,
                         maxLines: 1,
+                        minFontSize: 9,
                       ),
                     ),
                     enabled: widget.enabled,

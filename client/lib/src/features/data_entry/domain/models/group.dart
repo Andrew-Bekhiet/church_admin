@@ -10,7 +10,6 @@ part 'group.g.dart';
 @JsonSerializable()
 @Queryable(
   classLabel: 'المجموعات',
-  ignoreFields: ['blurhash'],
   allowExtension: true,
 )
 class Group extends ViewableWithIDAndImage
@@ -124,21 +123,21 @@ class GroupFields extends _GroupFields {
 
   @override
   FieldMetadata<DateTimeRange> get validity => FieldMetadata<DateTimeRange>(
-    parentType: super.validity.parentType,
-    type: super.validity.type,
-    name: super.validity.name,
-    label: adminUsersRel.label,
-    isOrderable: super.validity.isOrderable,
-    operators: super.validity.operators,
-    getValue: super.validity.getValue,
-    isCodeOnly: true,
-  );
+        parentType: super.validity.parentType,
+        type: super.validity.type,
+        name: super.validity.name,
+        label: adminUsersRel.label,
+        isOrderable: super.validity.isOrderable,
+        operators: super.validity.operators,
+        getValue: super.validity.getValue,
+        isCodeOnly: true,
+      );
 
   @override
   FieldMetadata<User> get adminUsers => adminUsersRel.redirectTo(
-    AdminOnDataFields().user,
-    label: adminUsersRel.label,
-    isExpandable: false,
-    isOrderable: false,
-  );
+        AdminOnDataFields().user,
+        label: adminUsersRel.label,
+        isExpandable: false,
+        isOrderable: false,
+      );
 }
