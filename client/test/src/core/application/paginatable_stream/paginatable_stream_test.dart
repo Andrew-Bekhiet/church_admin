@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:church_admin/src/core/application/paginatable_stream/paginatable_stream.dart';
 import 'package:church_admin/src/core/application/paginatable_stream/paginatable_stream_request.dart';
 import 'package:church_admin/src/core/application/paginatable_stream/paginatable_stream_response.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -221,6 +222,111 @@ void main() {
       expect(paginatableStream.currentPageIndex, equals(0));
     });
   });
+
+  group(
+    'Stays in sync with data source',
+    () {
+      test('Shows newly added items', () async {
+        final rnd = Random();
+        const pageSize = 20;
+
+        final dataSubject = BehaviorSubject<List<String>>();
+        addTearDown(dataSubject.close);
+
+        paginatableStream = PaginatableStream<String, String?>.simple(
+          pageSize: pageSize,
+          factory: (request) =>
+              dataSubject.stream.map((data) => _paginateData(request, data)),
+        );
+
+        final pageWithAddedItems = testData
+            .sublist(0, pageSize)
+            .expandIndexed(
+              (i, element) =>
+                  rnd.nextBool() ? [element, 'New Item $i'] : [element],
+            )
+            .toList();
+
+        expect(
+          paginatableStream,
+          emitsInOrder([
+            equals(testData.sublist(0, pageSize)),
+            equals(pageWithAddedItems.sublist(0, pageSize)),
+          ]),
+        );
+
+        dataSubject.add(testData);
+        await paginatableStream.onLoadingChanged.firstWhere((e) => !e);
+        dataSubject.add(pageWithAddedItems);
+      });
+
+      test('Updates items', () async {
+        final rnd = Random();
+        const pageSize = 20;
+
+        final dataSubject = BehaviorSubject<List<String>>();
+        addTearDown(dataSubject.close);
+
+        paginatableStream = PaginatableStream<String, String?>.simple(
+          pageSize: pageSize,
+          factory: (request) =>
+              dataSubject.stream.map((data) => _paginateData(request, data)),
+        );
+
+        final updatedData = testData
+            .sublist(0, pageSize)
+            .map((e) => rnd.nextBool() ? e.replaceAll('Item', 'Changed!') : e)
+            .toList();
+
+        expect(
+          paginatableStream,
+          emitsInOrder([
+            equals(testData.sublist(0, pageSize)),
+            equals(updatedData.sublist(0, pageSize)),
+          ]),
+        );
+
+        dataSubject.add(testData);
+        await paginatableStream.onLoadingChanged.firstWhere((e) => !e);
+        dataSubject.add(updatedData);
+      });
+
+      test(
+        'Removes items',
+        () async {
+          const int pageSize = 20;
+          final testData = List.generate(
+            pageSize ~/ 2,
+            (index) => 'Item ${index.toString().padLeft(2, '0')}',
+          );
+
+          final dataSubject = BehaviorSubject<List<String>>();
+          addTearDown(dataSubject.close);
+
+          paginatableStream = PaginatableStream<String, String?>.simple(
+            pageSize: pageSize,
+            factory: (request) =>
+                dataSubject.stream.map((data) => _paginateData(request, data)),
+          );
+
+          final removedItems = testData.sample(pageSize ~/ 2);
+          final updatedData = testData.whereNot(removedItems.contains).toList();
+
+          expect(
+            paginatableStream,
+            emitsInOrder([
+              equals(testData),
+              equals(updatedData),
+            ]),
+          );
+
+          dataSubject.add(testData);
+          await paginatableStream.onLoadingChanged.firstWhere((e) => !e);
+          dataSubject.add(updatedData);
+        },
+      );
+    },
+  );
 }
 
 PaginatableStreamResponse<String> _paginateData(

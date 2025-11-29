@@ -180,13 +180,16 @@ class PaginatableStream<T, P> extends PaginatableStreamBase<T> {
     }
 
     final int start = currentPageIndex * pageSize;
-    final int end = start + math.min(pageSize, newItems.length);
+    final int end = start + math.min(pageSize, currentItems.length);
 
     final combined = start < currentItems.length
-        ? currentItems.mapIndexed(
-            (i, e) => start <= i && i < end ? newItems[i - start] : e,
-          )
-        : currentItems.followedBy(newItems);
+        ? (currentItems.sublist(0)
+          ..replaceRange(
+            start,
+            math.min(end, currentItems.length),
+            newItems,
+          ))
+        : [...currentItems, ...newItems];
 
     return PaginatableStreamData<T>(
       items: combined.toList(),
