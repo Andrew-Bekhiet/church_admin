@@ -28,8 +28,8 @@ import 'login_screen_test.mocks.dart';
   MockSpec<LoggingService>(),
   MockSpec<PackageInfo>(),
 ])
-void main() {
-  loadAppFonts();
+Future<void> main() async {
+  await loadAppFonts();
 
   setUp(() => provideDummy<AuthState>(const AuthUnauthenticated()));
 

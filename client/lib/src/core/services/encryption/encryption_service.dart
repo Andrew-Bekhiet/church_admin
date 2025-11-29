@@ -1,5 +1,4 @@
 // coverage:ignore-file
-// ignore_for_file: prefer_adjacent_string_concatenation
 
 import 'dart:convert';
 
@@ -153,8 +152,9 @@ class EncryptionService {
     } else if (UniversalPlatform.isWindows) {
       final windowsDeviceInfo = await deviceInfoPlugin.windowsInfo;
 
-      computedInfo
-          .addAll(utf8.encode(windowsDeviceInfo.numberOfCores.toString()));
+      computedInfo.addAll(
+        utf8.encode(windowsDeviceInfo.numberOfCores.toString()),
+      );
     }
 
     return Uint8List.fromList(computedInfo);
@@ -170,8 +170,9 @@ class EncryptionService {
     if (await secureStorage.containsKey(key: keyName)) {
       key = (await secureStorage.read(key: keyName))!;
     } else {
-      final deviceInfo =
-          await additionalDeviceInfo(usePotentialyVolatitleInfo: true);
+      final deviceInfo = await additionalDeviceInfo(
+        usePotentialyVolatitleInfo: true,
+      );
 
       key = base64Url.encode(
         (FortunaRandom()..seed(KeyParameter(deviceInfo.sublist(0, 32))))

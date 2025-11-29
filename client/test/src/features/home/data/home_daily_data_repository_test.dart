@@ -35,8 +35,9 @@ void main() {
 
   setUp(() {
     mockAdvancedQueryParser = MockAdvancedQueryParser();
-    when(mockAdvancedQueryParser.createPaginatableStream(any))
-        .thenAnswer((_) => PaginatableStream.simple(factory: (_) async* {}));
+    when(
+      mockAdvancedQueryParser.createPaginatableStream(any),
+    ).thenAnswer((_) => PaginatableStream.simple(factory: (_) async* {}));
   });
 
   tearDown(defaultTearDown);
@@ -86,8 +87,8 @@ void main() {
   });
 
   group('getTodaysSneksar', () {
-    test('returns correct sneksar for date', () {
-      initializeDateFormatting('ar-EG');
+    test('returns correct sneksar for date', () async {
+      await initializeDateFormatting('ar-EG');
 
       HomeDailyDataRepository createUnit(DateTime now) =>
           HomeDailyDataRepository(
@@ -99,9 +100,11 @@ void main() {
             clock: Clock.fixed(now),
           );
 
-      for (var (date, i) = (DateTime(2022, 9, 11), 0);
-          i < 366;
-          date = date.add(const Duration(days: 1)), i++) {
+      for (
+        var (date, i) = (DateTime(2022, 9, 11), 0);
+        i < 366;
+        date = date.add(const Duration(days: 1)), i++
+      ) {
         final sneksar = createUnit(date).getTodaysSneksar();
 
         expect(sneksar, contains(kRawSneksarData[i].trim()));

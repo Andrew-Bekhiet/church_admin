@@ -107,13 +107,11 @@ class _ChurchAdminAppState extends State<ChurchAdminApp> {
 
   void _onNotificationTapped(Notification notification) {
     WidgetsBinding.instance.addPostFrameCallback(
-      (_) {
-        showDialog(
-          context: $appRouter.routerDelegate.navigatorKey.currentContext!,
-          builder: (context) =>
-              NotificationDetailsDialog(notification: notification),
-        );
-      },
+      (_) => showDialog(
+        context: $appRouter.routerDelegate.navigatorKey.currentContext!,
+        builder: (context) =>
+            NotificationDetailsDialog(notification: notification),
+      ),
     );
   }
 

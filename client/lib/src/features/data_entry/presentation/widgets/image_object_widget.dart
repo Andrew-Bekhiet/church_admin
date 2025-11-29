@@ -20,9 +20,8 @@ class ImageObjectWidget extends StatelessWidget {
     this.size = defaultSize,
     this.blurhashSize,
     super.key,
-  })  : photoUrlCacheService = imageUrlCacheService ?? ImageUrlCacheService.I,
-        viewableObjectService =
-            viewableObjectService ?? ViewableObjectService.I;
+  }) : photoUrlCacheService = imageUrlCacheService ?? ImageUrlCacheService.I,
+       viewableObjectService = viewableObjectService ?? ViewableObjectService.I;
 
   final ImageUrlCacheService photoUrlCacheService;
   final ViewableObjectService viewableObjectService;
@@ -37,14 +36,15 @@ class ImageObjectWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final IconData defaultIcon =
-        viewableObjectService.getDefaultIconFor(imageObject);
+    final IconData defaultIcon = viewableObjectService.getDefaultIconFor(
+      imageObject,
+    );
     final constraints = BoxConstraints.expand(width: size, height: size);
     final String cacheKey = imageObject.imageInfo.cacheKey;
     final BorderRadius? borderRadius = circleCrop
         ? null
         : this.borderRadius ??
-            (isDense ? denseClipBorderRadius : clipBorderRadius);
+              (isDense ? denseClipBorderRadius : clipBorderRadius);
 
     return Hero(
       transitionOnUserGestures: true,
@@ -58,8 +58,9 @@ class ImageObjectWidget extends StatelessWidget {
             );
           }
 
-          final cachedImageUrl =
-              photoUrlCacheService.getCachedImageUrl(imageObject.imageInfo);
+          final cachedImageUrl = photoUrlCacheService.getCachedImageUrl(
+            imageObject.imageInfo,
+          );
 
           return ConstrainedBox(
             constraints: constraints,
@@ -126,35 +127,36 @@ class ImageObjectWidget extends StatelessWidget {
     required Widget imagePlaceholder,
   }) {
     return () => Navigator.of(context).push(
-          PageRouteBuilder(
-            opaque: false,
-            barrierDismissible: true,
-            barrierColor: Colors.black45,
-            pageBuilder: (context, _, __) => Dialog(
-              backgroundColor: Colors.transparent,
-              surfaceTintColor: Colors.transparent,
-              child: Hero(
-                transitionOnUserGestures: true,
-                tag: heroTag ?? imageObject,
-                child: PhotoView.customChild(
-                  backgroundDecoration:
-                      const BoxDecoration(color: Colors.transparent),
-                  tightMode: true,
-                  childSize: constraints.smallest,
-                  child: _ImageFromUrlWidget(
-                    cacheKey: cacheKey,
-                    defaultIcon: defaultIcon,
-                    imageUrl: downloadUrlOrCache,
-                    maxHeight: constraints.maxHeight,
-                    fullQuality: true,
-                    hasBlurhash: hasBlurhash,
-                    imagePlaceholder: imagePlaceholder,
-                  ),
-                ),
+      PageRouteBuilder(
+        opaque: false,
+        barrierDismissible: true,
+        barrierColor: Colors.black45,
+        pageBuilder: (context, _, _) => Dialog(
+          backgroundColor: Colors.transparent,
+          surfaceTintColor: Colors.transparent,
+          child: Hero(
+            transitionOnUserGestures: true,
+            tag: heroTag ?? imageObject,
+            child: PhotoView.customChild(
+              backgroundDecoration: const BoxDecoration(
+                color: Colors.transparent,
+              ),
+              tightMode: true,
+              childSize: constraints.smallest,
+              child: _ImageFromUrlWidget(
+                cacheKey: cacheKey,
+                defaultIcon: defaultIcon,
+                imageUrl: downloadUrlOrCache,
+                maxHeight: constraints.maxHeight,
+                fullQuality: true,
+                hasBlurhash: hasBlurhash,
+                imagePlaceholder: imagePlaceholder,
               ),
             ),
           ),
-        );
+        ),
+      ),
+    );
   }
 }
 

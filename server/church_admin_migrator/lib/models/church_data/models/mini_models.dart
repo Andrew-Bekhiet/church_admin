@@ -74,7 +74,7 @@ class PersonState extends MiniModel {
   Map<String, dynamic> getMap() {
     return {
       'Name': name,
-      'Color': color?.value.toRadixString(16).padLeft(8, '0').substring(2),
+      'Color': color?.toARGB32().toRadixString(16).padLeft(8, '0').substring(2),
     };
   }
 

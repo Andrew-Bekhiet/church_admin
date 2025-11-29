@@ -276,7 +276,7 @@ void main() {
 
       blocTest<AuthBloc, AuthState>(
         'refresh token on connectivity change when token expired',
-        setUp: () {
+        setUp: () async {
           connectivityController = BehaviorSubject.seeded(false);
           when(
             ConnectivityService.I.connectivityStream,
@@ -293,7 +293,7 @@ void main() {
             },
           );
 
-          AuthStorage.I.writeAuthDataToCache(initialAuthUser);
+          await AuthStorage.I.writeAuthDataToCache(initialAuthUser);
         },
         build: _createAuthBloc,
         act: (bloc) async {
@@ -330,8 +330,8 @@ void main() {
                   as MockFirebaseAuthRepository;
           verify(mockRepo.refreshToken());
         },
-        tearDown: () {
-          connectivityController.close();
+        tearDown: () async {
+          await connectivityController.close();
         },
       );
 

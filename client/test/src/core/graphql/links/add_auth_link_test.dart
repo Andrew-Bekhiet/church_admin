@@ -65,7 +65,7 @@ void main() {
         url: 'url',
         createHttpLink: (url) => mockHttpLink,
         createWSLink: (url, config) {
-          expectLater(
+          expect(
             config.initialPayload(),
             completion(
               containsPair(
@@ -190,7 +190,7 @@ void main() {
         createHttpLink: (url) => mockHttpLink,
         createWSLink: (url, config) {
           expect(url, 'wss://example.com');
-          expectLater(
+          expect(
             config.initialPayload(),
             completion(
               containsPair(

@@ -19,8 +19,8 @@ import 'unapproved_user_screen_test.mocks.dart';
   MockSpec<BuildContext>(),
   MockSpec<GoRouterState>(),
 ])
-void main() {
-  loadAppFonts();
+Future<void> main() async {
+  await loadAppFonts();
 
   setUp(_setUp);
   tearDown(defaultTearDown);

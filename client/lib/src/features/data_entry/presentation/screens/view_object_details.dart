@@ -17,10 +17,11 @@ export 'view_object_details/view_user.dart';
 
 typedef WidgetBuilderWithObject<T> = WBuilderWithObject<T, Widget>;
 
-typedef WBuilderWithObject<T, W extends Widget> = W Function(
-  BuildContext context,
-  T object,
-);
+typedef WBuilderWithObject<T, W extends Widget> =
+    W Function(
+      BuildContext context,
+      T object,
+    );
 
 class ViewObjectDetails<T extends ViewableWithIDAndImage>
     extends StatefulWidget {
@@ -34,7 +35,7 @@ class ViewObjectDetails<T extends ViewableWithIDAndImage>
   final List<Type> childrenTypes;
   final Map<Type, Widget Function(BuildContext)> tabsContentBuilders;
   final Widget Function(BuildContext, TabController, T)?
-      floatingActionButtonBuilder;
+  floatingActionButtonBuilder;
 
   final WidgetBuilder notFoundBuilder;
   final Widget Function(BuildContext, TabController)? bottomNavBarBuilder;
@@ -55,10 +56,10 @@ class ViewObjectDetails<T extends ViewableWithIDAndImage>
     this.floatingActionButtonBuilder,
     this.object,
     super.key,
-  })  : assert(
-          childrenTypes.length == 0 || sliverPersistentHeaderDelegate != null,
-        ),
-        assert(childrenTypes.length == tabsContentBuilders.length);
+  }) : assert(
+         childrenTypes.length == 0 || sliverPersistentHeaderDelegate != null,
+       ),
+       assert(childrenTypes.length == tabsContentBuilders.length);
 
   @override
   State<ViewObjectDetails<T>> createState() => _ViewObjectDetailsState<T>();
@@ -108,8 +109,9 @@ class _ViewObjectDetailsState<T extends ViewableWithIDAndImage>
 
         final objectData = snapshot.requireData!;
 
-        final canEditObject =
-            AuthBloc.I.currentUserData!.canEditObject(objectData);
+        final canEditObject = AuthBloc.I.currentUserData!.canEditObject(
+          objectData,
+        );
 
         final slivers = [
           SliverAppBar(
@@ -162,16 +164,17 @@ class _ViewObjectDetailsState<T extends ViewableWithIDAndImage>
                 ),
               );
 
-        ThemeData newTheme =
-            ThemingService.getDefault(seedOverride: objectData.color);
+        ThemeData newTheme = ThemingService.getDefault(
+          seedOverride: objectData.color,
+        );
 
         if (widget.floatingActionButtonBuilder != null &&
             widget.bottomNavBarBuilder != null) {
           newTheme = newTheme.copyWith(
-            floatingActionButtonTheme:
-                newTheme.floatingActionButtonTheme.copyWith(
-              elevation: 0,
-            ),
+            floatingActionButtonTheme: newTheme.floatingActionButtonTheme
+                .copyWith(
+                  elevation: 0,
+                ),
           );
         }
 
@@ -199,16 +202,16 @@ class _ViewObjectDetailsState<T extends ViewableWithIDAndImage>
                   : null,
               floatingActionButton:
                   widget.floatingActionButtonBuilder != null && canEditObject
-                      ? Builder(
-                          builder: (context) {
-                            return widget.floatingActionButtonBuilder!(
-                              context,
-                              DefaultTabController.of(context),
-                              objectData,
-                            );
-                          },
-                        )
-                      : null,
+                  ? Builder(
+                      builder: (context) {
+                        return widget.floatingActionButtonBuilder!(
+                          context,
+                          DefaultTabController.of(context),
+                          objectData,
+                        );
+                      },
+                    )
+                  : null,
             ),
           ),
         );
@@ -235,20 +238,23 @@ class _ViewObjectDetailsState<T extends ViewableWithIDAndImage>
         final nearestSnap = ViewObjectDetails.snapPositions.reduce(
           (nearest, element) =>
               (element - scrollPercent).abs() < (nearest - scrollPercent).abs()
-                  ? element
-                  : nearest,
+              ? element
+              : nearest,
         );
 
         if (scrollPercent < 1 && scrollPercent != nearestSnap) {
-          Future.microtask(() {
-            if (_scrollController.hasClients && scrollPercent != nearestSnap) {
-              _scrollController.animateTo(
-                nearestSnap * maxScroll,
-                duration: ViewObjectDetails.snapDuration,
-                curve: Curves.easeOutExpo,
-              );
-            }
-          });
+          unawaited(
+            Future.microtask(() async {
+              if (_scrollController.hasClients &&
+                  scrollPercent != nearestSnap) {
+                await _scrollController.animateTo(
+                  nearestSnap * maxScroll,
+                  duration: ViewObjectDetails.snapDuration,
+                  curve: Curves.easeOutExpo,
+                );
+              }
+            }),
+          );
         }
       },
     );

@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:church_admin/church_admin.dart';
@@ -42,12 +43,12 @@ class HomeDailyDataRepository {
     required List<String> versesData,
     required AdvancedQueryParser advancedQueryParser,
     Clock? clock,
-  })  : _sneksarData = sneksarData,
-        _versesData = versesData,
-        _sayingData = sayingData,
-        _currentIndexes = currentIndexes,
-        _clock = clock ?? const Clock(),
-        _advancedQueryParser = advancedQueryParser;
+  }) : _sneksarData = sneksarData,
+       _versesData = versesData,
+       _sayingData = sayingData,
+       _currentIndexes = currentIndexes,
+       _clock = clock ?? const Clock(),
+       _advancedQueryParser = advancedQueryParser;
 
   Future<List<String>> getTodaysBirthdaysData() async {
     final birthdaysQuery = getTodaysBirthdaysQuery();
@@ -84,14 +85,18 @@ class HomeDailyDataRepository {
   }
 
   String getVerse({bool forceRefresh = false}) {
-    return _versesData[
-            _getOrGenerateRandomFor(HomeDailyDataType.verse, forceRefresh)]
+    return _versesData[_getOrGenerateRandomFor(
+          HomeDailyDataType.verse,
+          forceRefresh,
+        )]
         .trim();
   }
 
   String getSaying({bool forceRefresh = false}) {
-    return _sayingData[
-            _getOrGenerateRandomFor(HomeDailyDataType.saying, forceRefresh)]
+    return _sayingData[_getOrGenerateRandomFor(
+          HomeDailyDataType.saying,
+          forceRefresh,
+        )]
         .trim();
   }
 
@@ -150,7 +155,7 @@ class HomeDailyDataRepository {
         HomeDailyDataType.saying.name: sayingIndex,
     };
 
-    _currentIndexes.put(isoDate, data);
+    unawaited(_currentIndexes.put(isoDate, data));
 
     return data;
   }

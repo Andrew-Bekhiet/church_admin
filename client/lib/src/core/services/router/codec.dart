@@ -12,7 +12,7 @@ final Map<String, Object Function(Json)> fromJsonByTypeName = {
   'AdvancedQuery': AdvancedQuery.fromJson,
   for (final MapEntry(value: QueryableType(:name, :fromJson))
       in AdvancedQueriesMetadata().allQueryablesByType.entries)
-    if (fromJson != null) name: fromJson
+    name: ?fromJson,
 };
 
 class ChurchAdminRouterExtraCodec extends Codec<SerializableExtra?, List?> {

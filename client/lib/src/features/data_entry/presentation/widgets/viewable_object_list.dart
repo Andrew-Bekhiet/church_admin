@@ -108,7 +108,8 @@ class _ViewableObjectListState<T extends Viewable>
           if (i >= items.length) {
             return StreamBuilder(
               stream: objectsController.onLoadingChanged,
-              builder: (context, state) => state.hasData &&
+              builder: (context, state) =>
+                  state.hasData &&
                       state.requireData &&
                       (widget.type != ViewableObjectListType.list ||
                           i == items.length)
@@ -125,7 +126,8 @@ class _ViewableObjectListState<T extends Viewable>
               selectionController: objectsController.selectionController,
               itemBuilder: widget.itemBuilder,
               viewableObjectWidgetConfig: widget.viewableObjectWidgetConfig,
-              addSeparator: widget.addSeparator &&
+              addSeparator:
+                  widget.addSeparator &&
                   i < items.length - 1 &&
                   widget.type == ViewableObjectListType.list,
             ),
@@ -181,10 +183,10 @@ class _ViewableObjectListState<T extends Viewable>
   }
 
   void Function(VisibilityInfo) _onVisibilityChanged(int i) => (info) {
-        if (info.visibleFraction >= 0.8) {
-          objectsController.itemVisibleAt(i);
-        }
-      };
+    if (info.visibleFraction >= 0.8) {
+      unawaited(objectsController.itemVisibleAt(i));
+    }
+  };
 
   @override
   Future<void> dispose() async {
@@ -196,13 +198,15 @@ class _ViewableObjectListState<T extends Viewable>
   }
 }
 
-typedef ItemBuilder<T extends Viewable> = Widget Function(
-  BuildContext context,
-  T item,
-  ViewableObjectWidgetConfig<T>? config,
-);
+typedef ItemBuilder<T extends Viewable> =
+    Widget Function(
+      BuildContext context,
+      T item,
+      ViewableObjectWidgetConfig<T>? config,
+    );
 
-typedef OffsetFromIndexFunction = int Function(
-  int limit,
-  int itemIndex,
-);
+typedef OffsetFromIndexFunction =
+    int Function(
+      int limit,
+      int itemIndex,
+    );

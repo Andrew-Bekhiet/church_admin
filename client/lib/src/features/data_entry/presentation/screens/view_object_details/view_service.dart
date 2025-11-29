@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
@@ -248,17 +250,23 @@ class _ViewServiceState extends State<ViewService> {
             ],
             onTap: (newIndex) {
               if (newIndex == 0) {
-                EditClassRoute(
-                  $extra: EditClassExtra(service: service),
-                ).push(context);
+                unawaited(
+                  EditClassRoute(
+                    $extra: EditClassExtra(service: service),
+                  ).push(context),
+                );
               } else if (newIndex == 1) {
-                EditGroupRoute(
-                  $extra: EditGroupExtra(service: service),
-                ).push(context);
+                unawaited(
+                  EditGroupRoute(
+                    $extra: EditGroupExtra(service: service),
+                  ).push(context),
+                );
               } else if (newIndex == 2) {
-                EditPersonRoute(
-                  $extra: EditPersonExtra(service: service),
-                ).push(context);
+                unawaited(
+                  EditPersonRoute(
+                    $extra: EditPersonExtra(service: service),
+                  ).push(context),
+                );
               }
             },
           ),
@@ -302,7 +310,7 @@ class _ViewServiceState extends State<ViewService> {
 
   @override
   void dispose() {
-    Future.wait(_controllersToDispose.map((e) => e.dispose()));
+    unawaited(Future.wait(_controllersToDispose.map((e) => e.dispose())));
 
     super.dispose();
   }

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
@@ -33,22 +35,23 @@ class _ViewStreetState extends State<ViewStreet> {
 
   final BehaviorSubject<List<OrderBy>> _familiesOrderBy =
       BehaviorSubject.seeded([
-    OrderBy(field: FamilyFields().name),
-  ]);
+        OrderBy(field: FamilyFields().name),
+      ]);
 
   late final _storesController = _ensureWillDispose(
     ViewableObjectListController(
       objectsPaginatableStream: DatabaseService.I.stores.streamAll(
-          where: Stream.value(
-            [
-              Filter(
-                StoreFields().street.redirectTo(StreetFields().id),
-                PrimitiveOperator.eq,
-                widget.streetId,
-              ),
-            ],
-          ),
-          orderBy: _storesOrderBy.stream),
+        where: Stream.value(
+          [
+            Filter(
+              StoreFields().street.redirectTo(StreetFields().id),
+              PrimitiveOperator.eq,
+              widget.streetId,
+            ),
+          ],
+        ),
+        orderBy: _storesOrderBy.stream,
+      ),
     ),
   );
 
@@ -73,10 +76,11 @@ class _ViewStreetState extends State<ViewStreet> {
     ),
   );
 
-  final BehaviorSubject<List<OrderBy>> _personsOrderBy =
-      BehaviorSubject.seeded([
-    OrderBy(field: PersonFields().name),
-  ]);
+  final BehaviorSubject<List<OrderBy>> _personsOrderBy = BehaviorSubject.seeded(
+    [
+      OrderBy(field: PersonFields().name),
+    ],
+  );
 
   final Set<ViewableObjectListController> _controllersToDispose = {};
 
@@ -95,41 +99,38 @@ class _ViewStreetState extends State<ViewStreet> {
       childrenTypes: const [Family, Person, Store],
       tabsContentBuilders: {
         Family: (context) => StreamBuilder(
-              stream: _familiesOrderBy.stream,
-              initialData: _familiesOrderBy.value,
-              builder: (context, orderBySnapshot) => ViewableObjectList(
-                scrollController: PrimaryScrollController.maybeOf(context),
-                viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
-                  secondLineField:
-                      orderBySnapshot.data?.first.getSecondLineField(),
-                ),
-                objectsController: _familiesController,
-              ),
+          stream: _familiesOrderBy.stream,
+          initialData: _familiesOrderBy.value,
+          builder: (context, orderBySnapshot) => ViewableObjectList(
+            scrollController: PrimaryScrollController.maybeOf(context),
+            viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
+              secondLineField: orderBySnapshot.data?.first.getSecondLineField(),
             ),
+            objectsController: _familiesController,
+          ),
+        ),
         Person: (context) => StreamBuilder(
-              stream: _personsOrderBy.stream,
-              initialData: _personsOrderBy.value,
-              builder: (context, orderBySnapshot) => ViewableObjectList(
-                scrollController: PrimaryScrollController.maybeOf(context),
-                viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
-                  secondLineField:
-                      orderBySnapshot.data?.first.getSecondLineField(),
-                ),
-                objectsController: _personsController,
-              ),
+          stream: _personsOrderBy.stream,
+          initialData: _personsOrderBy.value,
+          builder: (context, orderBySnapshot) => ViewableObjectList(
+            scrollController: PrimaryScrollController.maybeOf(context),
+            viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
+              secondLineField: orderBySnapshot.data?.first.getSecondLineField(),
             ),
+            objectsController: _personsController,
+          ),
+        ),
         Store: (context) => StreamBuilder(
-              stream: _storesOrderBy.stream,
-              initialData: _storesOrderBy.value,
-              builder: (context, orderBySnapshot) => ViewableObjectList(
-                scrollController: PrimaryScrollController.maybeOf(context),
-                viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
-                  secondLineField:
-                      orderBySnapshot.data?.first.getSecondLineField(),
-                ),
-                objectsController: _storesController,
-              ),
+          stream: _storesOrderBy.stream,
+          initialData: _storesOrderBy.value,
+          builder: (context, orderBySnapshot) => ViewableObjectList(
+            scrollController: PrimaryScrollController.maybeOf(context),
+            viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
+              secondLineField: orderBySnapshot.data?.first.getSecondLineField(),
             ),
+            objectsController: _storesController,
+          ),
+        ),
       },
       sliverPersistentHeaderDelegate: ChipTabBarPersistentHeaderDelegate(
         filtersWidget: Builder(
@@ -207,19 +208,19 @@ class _ViewStreetState extends State<ViewStreet> {
             name: 'أخر تحديث للبيانات',
             value: street.lastEdit?.time,
             getHistoryListController: () => ViewableObjectListController(
-              objectsPaginatableStream:
-                  DatabaseService.I.history.paginateEditHistory<Street>(
-                id: street.id,
-              ),
+              objectsPaginatableStream: DatabaseService.I.history
+                  .paginateEditHistory<Street>(
+                    id: street.id,
+                  ),
             ),
           ),
         ]),
       ),
       editButtonBuilder: (context, street) => IconButton(
         tooltip: 'تعديل',
-        onPressed: () =>
-            EditStreetRoute($extra: EditStreetExtra(street: street))
-                .push(context),
+        onPressed: () => EditStreetRoute(
+          $extra: EditStreetExtra(street: street),
+        ).push(context),
         icon: const Icon(Symbols.edit),
       ),
       notFoundBuilder: (context) => Center(
@@ -238,16 +239,14 @@ class _ViewStreetState extends State<ViewStreet> {
               1 => _personsController,
               2 => _storesController,
               _ => throw UnimplementedError(),
-            }
-                .totalCountStream
-                .map(
-                  (c) => switch (currentIndex) {
-                    0 => '$c عائلة',
-                    1 => '$c مخدوم',
-                    2 => '$c متجر',
-                    _ => throw UnimplementedError(),
-                  },
-                );
+            }.totalCountStream.map(
+              (c) => switch (currentIndex) {
+                0 => '$c عائلة',
+                1 => '$c مخدوم',
+                2 => '$c متجر',
+                _ => throw UnimplementedError(),
+              },
+            );
           },
         ),
         builder: (context, snapshot) {
@@ -260,28 +259,34 @@ class _ViewStreetState extends State<ViewStreet> {
       ),
       floatingActionButtonBuilder: (context, tabController, street) =>
           SwitchingFloatingActionButton.fromTabController(
-        tabController: tabController,
-        icons: const [
-          Icon(Symbols.group_add),
-          Icon(Symbols.person_add),
-          Icon(Symbols.add_business),
-        ],
-        onTap: (newIndex) {
-          if (newIndex == 0) {
-            EditFamilyRoute(
-              $extra: EditFamilyExtra(street: street),
-            ).push(context);
-          } else if (newIndex == 1) {
-            EditPersonRoute(
-              $extra: EditPersonExtra(street: street),
-            ).push(context);
-          } else if (newIndex == 2) {
-            EditStoreRoute(
-              $extra: EditStoreExtra(street: street),
-            ).push(context);
-          }
-        },
-      ),
+            tabController: tabController,
+            icons: const [
+              Icon(Symbols.group_add),
+              Icon(Symbols.person_add),
+              Icon(Symbols.add_business),
+            ],
+            onTap: (newIndex) {
+              if (newIndex == 0) {
+                unawaited(
+                  EditFamilyRoute(
+                    $extra: EditFamilyExtra(street: street),
+                  ).push(context),
+                );
+              } else if (newIndex == 1) {
+                unawaited(
+                  EditPersonRoute(
+                    $extra: EditPersonExtra(street: street),
+                  ).push(context),
+                );
+              } else if (newIndex == 2) {
+                unawaited(
+                  EditStoreRoute(
+                    $extra: EditStoreExtra(street: street),
+                  ).push(context),
+                );
+              }
+            },
+          ),
     );
   }
 
@@ -307,7 +312,7 @@ class _ViewStreetState extends State<ViewStreet> {
   }
 
   ViewableObjectListController<T>
-      _ensureWillDispose<T extends ViewableWithIDAndImage>(
+  _ensureWillDispose<T extends ViewableWithIDAndImage>(
     ViewableObjectListController<T> controller,
   ) {
     _controllersToDispose.add(controller);
@@ -316,7 +321,7 @@ class _ViewStreetState extends State<ViewStreet> {
 
   @override
   void dispose() {
-    Future.wait(_controllersToDispose.map((e) => e.dispose()));
+    unawaited(Future.wait(_controllersToDispose.map((e) => e.dispose())));
 
     super.dispose();
   }

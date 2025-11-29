@@ -10,8 +10,8 @@ import '../../../../utils.dart';
 import 'forgot_password_screen_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<AuthBloc>()])
-void main() {
-  loadAppFonts();
+Future<void> main() async {
+  await loadAppFonts();
 
   setUp(_setUp);
   tearDown(defaultTearDown);

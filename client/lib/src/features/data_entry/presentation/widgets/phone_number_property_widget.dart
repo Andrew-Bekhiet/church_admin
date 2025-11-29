@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -60,11 +62,13 @@ class PhoneNumberProperty extends StatelessWidget {
             ],
             onSelected: (v) {
               if (v == 'SMS') {
-                LauncherService.I.launchSMSChat(
-                  PhoneNumberService.I.formatInternational(value),
+                unawaited(
+                  LauncherService.I.launchSMSChat(
+                    PhoneNumberService.I.formatInternational(value),
+                  ),
                 );
               } else if (v == 'Copy') {
-                Clipboard.setData(ClipboardData(text: value));
+                unawaited(Clipboard.setData(ClipboardData(text: value)));
               }
             },
           ),

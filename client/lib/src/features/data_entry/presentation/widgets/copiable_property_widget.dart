@@ -40,7 +40,7 @@ class CopiablePropertyWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           ...additionalOptions!,
-          if (copyOrError != null) copyOrError,
+          ?copyOrError,
         ],
       );
     } else {

@@ -44,8 +44,8 @@ MultiFactorChallenge mockChallengeWithResendToken = MultiFactorChallenge(
   MockSpec<BuildContext>(),
   MockSpec<GoRouterState>(),
 ])
-void main() {
-  loadAppFonts();
+Future<void> main() async {
+  await loadAppFonts();
 
   setUp(_setUp);
   tearDown(defaultTearDown);

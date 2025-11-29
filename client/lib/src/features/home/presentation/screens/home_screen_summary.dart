@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -56,59 +58,59 @@ class HomeScreenSummary extends StatelessWidget {
               ),
               child: switch (dailyData) {
                 null => const Center(
-                    child: CircularProgressIndicator(),
-                  ),
+                  child: CircularProgressIndicator(),
+                ),
                 final HomeDailyData dailyData => Column(
-                    spacing: 6,
-                    children: [
-                      if (dailyData.birthdaysText.isNotEmpty)
-                        AnimatedSize(
-                          duration: const Duration(milliseconds: 400),
-                          alignment: Alignment.topCenter,
-                          curve: Easing.standard,
-                          child: HomeModeSection(
-                            key: HomeScreenSummaryKeys.birthdaysButtonKey,
-                            onTap: () => AdvancedSearchRoute(
-                              $extra: dailyData.birthdaysQuery,
-                            ).push(context),
-                            title: 'أعياد الميلاد اليوم',
-                            text: dailyData.birthdaysText,
-                            textMaxLines: 2,
-                          ),
+                  spacing: 6,
+                  children: [
+                    if (dailyData.birthdaysText.isNotEmpty)
+                      AnimatedSize(
+                        duration: const Duration(milliseconds: 400),
+                        alignment: Alignment.topCenter,
+                        curve: Easing.standard,
+                        child: HomeModeSection(
+                          key: HomeScreenSummaryKeys.birthdaysButtonKey,
+                          onTap: () => AdvancedSearchRoute(
+                            $extra: dailyData.birthdaysQuery,
+                          ).push(context),
+                          title: 'أعياد الميلاد اليوم',
+                          text: dailyData.birthdaysText,
+                          textMaxLines: 2,
                         ),
-                      HomeModeSection(
-                        key: HomeScreenSummaryKeys.verseButtonKey,
-                        onTap: () => showMessageDialog(
-                          context,
-                          initialData: dailyData,
-                          type: HomeDailyDataType.verse,
-                        ),
-                        title: 'الآيه',
-                        text: dailyData.verse,
                       ),
-                      HomeModeSection(
-                        key: HomeScreenSummaryKeys.sneksarButtonKey,
-                        onTap: () => showMessageDialog(
-                          context,
-                          initialData: dailyData,
-                          type: HomeDailyDataType.sneksar,
-                          canGetNew: false,
-                        ),
-                        title: 'السنكسار',
-                        text: dailyData.sneksar,
+                    HomeModeSection(
+                      key: HomeScreenSummaryKeys.verseButtonKey,
+                      onTap: () => showMessageDialog(
+                        context,
+                        initialData: dailyData,
+                        type: HomeDailyDataType.verse,
                       ),
-                      HomeModeSection(
-                        key: HomeScreenSummaryKeys.sayingButtonKey,
-                        onTap: () => showMessageDialog(
-                          context,
-                          initialData: dailyData,
-                          type: HomeDailyDataType.saying,
-                        ),
-                        title: 'أقوال أباء',
-                        text: dailyData.saying,
+                      title: 'الآيه',
+                      text: dailyData.verse,
+                    ),
+                    HomeModeSection(
+                      key: HomeScreenSummaryKeys.sneksarButtonKey,
+                      onTap: () => showMessageDialog(
+                        context,
+                        initialData: dailyData,
+                        type: HomeDailyDataType.sneksar,
+                        canGetNew: false,
                       ),
-                    ],
-                  ),
+                      title: 'السنكسار',
+                      text: dailyData.sneksar,
+                    ),
+                    HomeModeSection(
+                      key: HomeScreenSummaryKeys.sayingButtonKey,
+                      onTap: () => showMessageDialog(
+                        context,
+                        initialData: dailyData,
+                        type: HomeDailyDataType.saying,
+                      ),
+                      title: 'أقوال أباء',
+                      text: dailyData.saying,
+                    ),
+                  ],
+                ),
               },
             ),
             Padding(
@@ -120,15 +122,17 @@ class HomeScreenSummary extends StatelessWidget {
                   children: [
                     HomeModeCard(
                       key: HomeScreenSummaryKeys.churchDataButtonKey,
-                      onTap: () => homeBloc
-                          .add(const HomeChangeMode(HomeMode.churchData)),
+                      onTap: () => homeBloc.add(
+                        const HomeChangeMode(HomeMode.churchData),
+                      ),
                       assetName: 'assets/images/church_data.png',
                       title: 'أسرة أبونا بيشوى كامل',
                     ),
                     HomeModeCard(
                       key: HomeScreenSummaryKeys.sundaySchoolButtonKey,
-                      onTap: () => homeBloc
-                          .add(const HomeChangeMode(HomeMode.sundaySchool)),
+                      onTap: () => homeBloc.add(
+                        const HomeChangeMode(HomeMode.sundaySchool),
+                      ),
                       assetName:
                           'assets/images/sunday_school_services_image.png',
                       title: 'خدمات مدارس الأحد',
@@ -167,41 +171,45 @@ class HomeScreenSummary extends StatelessWidget {
     final title = type.title;
     final label = type.label;
 
-    showDialog(
-      context: context,
-      builder: (context) => BlocBuilder<HomeBloc, HomeState>(
-        bloc: homeBloc,
-        builder: (context, state) {
-          final message = switch (state) {
-            HomeState(dailyData: null) => initialMessage,
-            HomeState(:final HomeDailyData dailyData) => dailyData.select(type),
-          };
+    unawaited(
+      showDialog(
+        context: context,
+        builder: (context) => BlocBuilder<HomeBloc, HomeState>(
+          bloc: homeBloc,
+          builder: (context, state) {
+            final message = switch (state) {
+              HomeState(dailyData: null) => initialMessage,
+              HomeState(:final HomeDailyData dailyData) => dailyData.select(
+                type,
+              ),
+            };
 
-          return AlertDialog(
-            scrollable: true,
-            title: Text(title),
-            content: Text(message, textAlign: TextAlign.center),
-            contentTextStyle: Theme.of(context).textTheme.titleLarge,
-            actionsAlignment: MainAxisAlignment.center,
-            actions: [
-              FilledButton(
-                key: HomeScreenSummaryKeys.shareButtonKey,
-                onPressed: () => ShareService.I.shareText(message),
-                child: Text('مشاركة $title'),
-              ),
-              if (canGetNew)
+            return AlertDialog(
+              scrollable: true,
+              title: Text(title),
+              content: Text(message, textAlign: TextAlign.center),
+              contentTextStyle: Theme.of(context).textTheme.titleLarge,
+              actionsAlignment: MainAxisAlignment.center,
+              actions: [
                 FilledButton(
-                  key: HomeScreenSummaryKeys.newItemButtonKey,
-                  onPressed: () => homeBloc.add(HomeDailyDataGetNew(type)),
-                  child: Text('$label أخرى'),
+                  key: HomeScreenSummaryKeys.shareButtonKey,
+                  onPressed: () => ShareService.I.shareText(message),
+                  child: Text('مشاركة $title'),
                 ),
-              FilledButton(
-                onPressed: Navigator.of(context).pop,
-                child: const Text('إلغاء'),
-              ),
-            ],
-          );
-        },
+                if (canGetNew)
+                  FilledButton(
+                    key: HomeScreenSummaryKeys.newItemButtonKey,
+                    onPressed: () => homeBloc.add(HomeDailyDataGetNew(type)),
+                    child: Text('$label أخرى'),
+                  ),
+                FilledButton(
+                  onPressed: Navigator.of(context).pop,
+                  child: const Text('إلغاء'),
+                ),
+              ],
+            );
+          },
+        ),
       ),
     );
   }

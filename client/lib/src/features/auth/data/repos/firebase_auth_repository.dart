@@ -14,24 +14,22 @@ class FirebaseAuthRepository implements AuthRepository {
       id: e.resolver.session.id,
       email: email,
       password: password,
-      enrolledFactors:
-          e.resolver.hints
-              .map(
-                (hint) => MultiFactorInfo(
-                  id: hint.uid,
-                  // TODO: support totp
-                  type: MultiFactorType.phone,
-                  displayName: hint.displayName,
-                  phoneNumber:
-                      hint is firebase_auth.PhoneMultiFactorInfo
-                          ? hint.phoneNumber
-                          : null,
-                  enrolledAt: DateTime.fromMillisecondsSinceEpoch(
-                    hint.enrollmentTimestamp.round(),
-                  ),
-                ),
-              )
-              .toList(),
+      enrolledFactors: e.resolver.hints
+          .map(
+            (hint) => MultiFactorInfo(
+              id: hint.uid,
+              // TODO: support totp
+              type: MultiFactorType.phone,
+              displayName: hint.displayName,
+              phoneNumber: hint is firebase_auth.PhoneMultiFactorInfo
+                  ? hint.phoneNumber
+                  : null,
+              enrolledAt: DateTime.fromMillisecondsSinceEpoch(
+                hint.enrollmentTimestamp.round(),
+              ),
+            ),
+          )
+          .toList(),
     );
   }
 
@@ -125,14 +123,13 @@ class FirebaseAuthRepository implements AuthRepository {
     try {
       final firebase_auth.MultiFactorAssertion assertion =
           switch (selectedFactor?.type ?? MultiFactorType.phone) {
-            MultiFactorType.phone => firebase_auth
-                .PhoneMultiFactorGenerator.getAssertion(
-              firebase_auth.PhoneAuthProvider.credential(
-                verificationId: challenge.verificationId,
-                smsCode: verificationCode,
+            MultiFactorType.phone =>
+              firebase_auth.PhoneMultiFactorGenerator.getAssertion(
+                firebase_auth.PhoneAuthProvider.credential(
+                  verificationId: challenge.verificationId,
+                  smsCode: verificationCode,
+                ),
               ),
-            ),
-            // TODO: support totp
           };
 
       if (_pendingMultiFactorResolver != null) {
@@ -169,8 +166,8 @@ class FirebaseAuthRepository implements AuthRepository {
       throw IncorrectCredentialsException(e, stackTrace);
     }
 
-    final multiFactorSession =
-        await _auth.currentUser!.multiFactor.getSession();
+    final multiFactorSession = await _auth.currentUser!.multiFactor
+        .getSession();
 
     _pendingSessions[multiFactorSession.id] = multiFactorSession;
 
@@ -196,61 +193,58 @@ class FirebaseAuthRepository implements AuthRepository {
 
     final completer = Completer<MultiFactorChallenge>();
 
-    final multiFactorInfo =
-        selectedFactor == null
-            ? null
-            : _pendingMultiFactorResolver!.hints.firstWhere(
-                  (f) => f.uid == selectedFactor.id,
-                )
-                as firebase_auth.PhoneMultiFactorInfo;
+    final multiFactorInfo = selectedFactor == null
+        ? null
+        : _pendingMultiFactorResolver!.hints.firstWhere(
+                (f) => f.uid == selectedFactor.id,
+              )
+              as firebase_auth.PhoneMultiFactorInfo;
 
     MultiFactorChallenge? challenge;
 
-    _auth.verifyPhoneNumber(
-      forceResendingToken: resendToken,
-      phoneNumber: phoneNumber,
-      multiFactorSession: _pendingSessions[session.id],
-      multiFactorInfo: multiFactorInfo,
-      verificationCompleted: (credential) {
-        completeMultiFactorChallenge(
-          challenge:
-              challenge ??= MultiFactorChallenge(
-                verificationId: credential.verificationId!,
-                createdAt: DateTime.now(),
-              ),
+    unawaited(
+      _auth.verifyPhoneNumber(
+        forceResendingToken: resendToken,
+        phoneNumber: phoneNumber,
+        multiFactorSession: _pendingSessions[session.id],
+        multiFactorInfo: multiFactorInfo,
+        verificationCompleted: (credential) => completeMultiFactorChallenge(
+          challenge: challenge ??= MultiFactorChallenge(
+            verificationId: credential.verificationId!,
+            createdAt: DateTime.now(),
+          ),
           verificationCode: credential.smsCode!,
           selectedFactor: selectedFactor,
-        );
-      },
-      verificationFailed:
-          (e) => completer.completeError(
-            MultiFactorVerificationFailedException(e, StackTrace.current),
-          ),
-      codeSent: (verificationId, resendToken) {
-        if (completer.isCompleted) {
-          return;
-        }
+        ),
+        verificationFailed: (e) => completer.completeError(
+          MultiFactorVerificationFailedException(e, StackTrace.current),
+        ),
+        codeSent: (verificationId, resendToken) {
+          if (completer.isCompleted) {
+            return;
+          }
 
-        completer.complete(
-          challenge ??= MultiFactorChallenge(
-            createdAt: DateTime.now(),
-            verificationId: verificationId,
-            resendToken: resendToken,
-          ),
-        );
-      },
-      codeAutoRetrievalTimeout: (verificationId) {
-        if (completer.isCompleted) {
-          return;
-        }
+          completer.complete(
+            challenge ??= MultiFactorChallenge(
+              createdAt: DateTime.now(),
+              verificationId: verificationId,
+              resendToken: resendToken,
+            ),
+          );
+        },
+        codeAutoRetrievalTimeout: (verificationId) {
+          if (completer.isCompleted) {
+            return;
+          }
 
-        completer.complete(
-          challenge ??= MultiFactorChallenge(
-            createdAt: DateTime.now(),
-            verificationId: verificationId,
-          ),
-        );
-      },
+          completer.complete(
+            challenge ??= MultiFactorChallenge(
+              createdAt: DateTime.now(),
+              verificationId: verificationId,
+            ),
+          );
+        },
+      ),
     );
 
     _pendingSessions.remove(session.id);

@@ -25,7 +25,7 @@ void main() {
             () {
               final unit = createEditObjectController(
                 initialObject: Person(id: 'id', name: 'name'),
-                onUpdate: (_, __) async => null,
+                onUpdate: (_, _) async => null,
                 onDelete: (_) async {},
               );
               expect(unit.hasChanged, isFalse);
@@ -49,7 +49,7 @@ void main() {
 
               final unit2 = createEditObjectController(
                 initialObject: Person(id: 'id', name: 'name'),
-                onUpdate: (_, __) async => null,
+                onUpdate: (_, _) async => null,
                 onDelete: (_) async {},
               );
               expect(unit2.isCreate, isFalse);
@@ -64,7 +64,7 @@ void main() {
 
               final unit2 = createEditObjectController(
                 initialObject: Person(id: 'id', name: 'name'),
-                onUpdate: (_, __) async => null,
+                onUpdate: (_, _) async => null,
                 onDelete: (_) async {},
               );
               expect(unit2.isUpdate, isTrue);
@@ -88,7 +88,9 @@ void main() {
               );
 
               unawaited(
-                tester.firstState<NavigatorState>(find.byType(Navigator)).push(
+                tester
+                    .firstState<NavigatorState>(find.byType(Navigator))
+                    .push(
                       MaterialPageRoute(
                         builder: (context) => Form(
                           canPop: false,
@@ -132,7 +134,9 @@ void main() {
               );
 
               unawaited(
-                tester.firstState<NavigatorState>(find.byType(Navigator)).push(
+                tester
+                    .firstState<NavigatorState>(find.byType(Navigator))
+                    .push(
                       MaterialPageRoute(
                         builder: (context) => Form(
                           canPop: false,
@@ -197,8 +201,9 @@ void main() {
               );
 
               expect(
-                () => unit
-                    .delete(tester.firstState(find.byType(Scaffold)).context),
+                () => unit.delete(
+                  tester.firstState(find.byType(Scaffold)).context,
+                ),
                 throwsA(isA<Exception>()),
               );
             },
@@ -212,7 +217,7 @@ void main() {
               final unit = createEditObjectController(
                 initialObject: Person(id: 'id', name: 'name'),
                 onDelete: (_) async => deleted = true,
-                onUpdate: (_, __) async => null,
+                onUpdate: (_, _) async => null,
               );
 
               await tester.pumpWidgetBuilder(
@@ -222,7 +227,9 @@ void main() {
                 wrapper: materialAppWrapper(),
               );
               unawaited(
-                tester.firstState<NavigatorState>(find.byType(Navigator)).push(
+                tester
+                    .firstState<NavigatorState>(find.byType(Navigator))
+                    .push(
                       MaterialPageRoute(
                         builder: (context) => Scaffold(
                           body: ElevatedButton(
@@ -279,7 +286,7 @@ void main() {
 
                   final unit = createEditObjectController(
                     initialObject: Person(id: 'id', name: 'name'),
-                    onUpdate: (_, __) async {
+                    onUpdate: (_, _) async {
                       saveCallTimes++;
 
                       return completer.future;
@@ -322,8 +329,9 @@ void main() {
                 'error',
                 (tester) async {
                   initGlobalProviderContainer([
-                    loggingServiceProvider
-                        .overrideWithValue(MockLoggingService()),
+                    loggingServiceProvider.overrideWithValue(
+                      MockLoggingService(),
+                    ),
                   ]);
 
                   final completer = Completer<Person?>();
@@ -332,7 +340,7 @@ void main() {
 
                   final unit = createEditObjectController(
                     initialObject: Person(id: 'id', name: 'name'),
-                    onUpdate: (_, __) async {
+                    onUpdate: (_, _) async {
                       saveCallTimes++;
 
                       return completer.future;
@@ -389,7 +397,7 @@ void main() {
 
               final unit = createEditObjectController(
                 initialObject: Person(id: 'id', name: 'name'),
-                onUpdate: (_, __) async => null,
+                onUpdate: (_, _) async => null,
                 onDelete: (_) async {},
               );
 
@@ -636,8 +644,9 @@ const url = 'https://example.com/id.jpg';
 void _setUpPhotoFieldTests() {
   final mockFunctionsService = MockFunctionsService();
 
-  when(mockFunctionsService.deletePhoto('persons', 'id'))
-      .thenAnswer((_) async {});
+  when(
+    mockFunctionsService.deletePhoto('persons', 'id'),
+  ).thenAnswer((_) async {});
   when(
     mockFunctionsService.getUploadUrl(
       'persons',

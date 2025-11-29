@@ -23,8 +23,8 @@ import 'email_verification_screen_test.mocks.dart';
   MockSpec<GoRouterState>(),
   MockSpec<LoggingService>(),
 ])
-void main() {
-  loadAppFonts();
+Future<void> main() async {
+  await loadAppFonts();
 
   setUp(() => provideDummy<AuthState>(const AuthUnauthenticated()));
 

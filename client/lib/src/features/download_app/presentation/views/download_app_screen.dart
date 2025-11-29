@@ -53,46 +53,52 @@ class DownloadAppScreen extends StatelessWidget {
   Future<T> _showLoadingLinkDialog<T>(BuildContext context, Future<T> future) {
     final completer = Completer<T>();
 
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: FutureBuilder(
-          future: future,
-          builder: (context, snapshot) {
-            if (snapshot.hasError) {
-              LoggingService.I.error(
-                LogRecord(
-                  moduleName: '$DownloadAppScreen',
-                  eventName: 'getAppDownloadLink',
-                  error: snapshot.error,
-                  stackTrace: snapshot.stackTrace,
-                ),
+    unawaited(
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: FutureBuilder(
+            future: future,
+            builder: (context, snapshot) {
+              if (snapshot.hasError) {
+                unawaited(
+                  LoggingService.I.error(
+                    LogRecord(
+                      moduleName: '$DownloadAppScreen',
+                      eventName: 'getAppDownloadLink',
+                      error: snapshot.error,
+                      stackTrace: snapshot.stackTrace,
+                    ),
+                  ),
+                );
+
+                completer.completeError(snapshot.error!);
+
+                return const Text(
+                  'لا يمكن تحميل الرابط في الوقت الحالي\n'
+                  'يرجى المحاولة لاحقا',
+                );
+              }
+
+              if (snapshot.connectionState == ConnectionState.done) {
+                WidgetsBinding.instance.addPostFrameCallback(
+                  (_) => Navigator.of(context).pop(),
+                );
+
+                completer.complete(snapshot.data);
+
+                return const Text('جار التنزيل');
+              }
+
+              return const Row(
+                children: [
+                  CircularProgressIndicator(),
+                  SizedBox(width: 10),
+                  Expanded(child: Text('جاري تحميل الرابط')),
+                ],
               );
-
-              completer.completeError(snapshot.error!);
-
-              return const Text(
-                'لا يمكن تحميل الرابط في الوقت الحالي\n' 'يرجى المحاولة لاحقا',
-              );
-            }
-
-            if (snapshot.connectionState == ConnectionState.done) {
-              WidgetsBinding.instance
-                  .addPostFrameCallback((_) => Navigator.of(context).pop());
-
-              completer.complete(snapshot.data);
-
-              return const Text('جار التنزيل');
-            }
-
-            return const Row(
-              children: [
-                CircularProgressIndicator(),
-                SizedBox(width: 10),
-                Expanded(child: Text('جاري تحميل الرابط')),
-              ],
-            );
-          },
+            },
+          ),
         ),
       ),
     );

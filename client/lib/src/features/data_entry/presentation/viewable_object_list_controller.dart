@@ -24,13 +24,14 @@ class ViewableObjectListController<T extends Viewable> {
     required PaginatableStreamBase<T> objectsPaginatableStream,
     this.filterStream,
     SelectionController<T>? selectionController,
-  })  : _objectsPaginatableStream = objectsPaginatableStream,
-        selectionController = selectionController ??
-            SelectionController<T>(
-              equality: EqualityBy(
-                (o) => (o is ID) ? (o as ID).id : o,
-              ),
-            ) {
+  }) : _objectsPaginatableStream = objectsPaginatableStream,
+       selectionController =
+           selectionController ??
+           SelectionController<T>(
+             equality: EqualityBy(
+               (o) => (o is ID) ? (o as ID).id : o,
+             ),
+           ) {
     if (filterStream == null) {
       _itemsSubjectSubscription = _objectsPaginatableStream.listen(
         _itemsSubject.add,
@@ -47,8 +48,9 @@ class ViewableObjectListController<T extends Viewable> {
                 .map(
                   (search) => objects
                       .where(
-                        (object) => normalizeString(object.name)
-                            .contains(normalizeString(search ?? '')),
+                        (object) => normalizeString(
+                          object.name,
+                        ).contains(normalizeString(search ?? '')),
                       )
                       .toList(),
                 ),
@@ -99,12 +101,13 @@ class ViewableObjectListController<T extends Viewable> {
   }
 
   Future<void> itemVisibleAt(int index) async {
-    _loadPageThrottler
-        .add(defaultOffsetFromIndex(_objectsPaginatableStream.pageSize, index));
+    _loadPageThrottler.add(
+      defaultOffsetFromIndex(_objectsPaginatableStream.pageSize, index),
+    );
   }
 
   Future<void> dispose() async {
-    _loadPageThrottlerTimer.cancel();
+    await _loadPageThrottlerTimer.cancel();
 
     await Future.wait([
       _loadPageThrottler.close(),
@@ -126,8 +129,9 @@ int defaultOffsetFromIndex(int limit, int index) => (index / limit).floor();
 class _DisposablePeriodicStream extends Stream<void> {
   final Duration duration;
 
-  final StreamController<void> _controller =
-      StreamController<void>.broadcast(sync: true);
+  final StreamController<void> _controller = StreamController<void>.broadcast(
+    sync: true,
+  );
 
   late final Timer _timer;
 
@@ -135,9 +139,9 @@ class _DisposablePeriodicStream extends Stream<void> {
     _timer = Timer.periodic(duration, (_) => _controller.add(null));
   }
 
-  void cancel() {
+  Future<void> cancel() async {
     _timer.cancel();
-    _controller.close();
+    await _controller.close();
   }
 
   @override

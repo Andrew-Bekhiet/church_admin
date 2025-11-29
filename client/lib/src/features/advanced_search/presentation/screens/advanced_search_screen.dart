@@ -57,8 +57,7 @@ class _AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
                       borderRadius: const BorderRadius.all(Radius.circular(20)),
                       isExpanded: true,
                       initialValue: selectedQueryableType,
-                      items: AdvancedQueriesMetadata()
-                          .allQueryables
+                      items: AdvancedQueriesMetadata().allQueryables
                           .where((t) => t.dao != null)
                           .map(
                             (t) => DropdownMenuItem(
@@ -100,7 +99,7 @@ class _AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
                 ),
                 initialData: (
                   controller.selectedQueryableType,
-                  controller.orderBy
+                  controller.orderBy,
                 ),
                 builder: (context, orderByData) {
                   final (selectedQueryableType, orderByStatements) =
@@ -151,11 +150,12 @@ class _AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
   }
 
   void _onAddOrderByStatement() => controller.addOrderBy(
-        OrderBy(
-          field: selectedQueryableType.fieldsMetadata
-              .firstWhere((p) => !p.name.endsWith('id') && p.isOrderable),
-        ),
-      );
+    OrderBy(
+      field: selectedQueryableType.fieldsMetadata.firstWhere(
+        (p) => !p.name.endsWith('id') && p.isOrderable,
+      ),
+    ),
+  );
 
   void _onChangeLimit(int? newLimit) => controller.changeLimit(newLimit);
 
@@ -184,17 +184,15 @@ class _AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
               actions: [
                 IconButton(
                   icon: const Icon(Symbols.share),
-                  onPressed: () {
-                    globalProviderContainer
-                        .read(shareServiceProvider)
-                        .shareText(
-                          base64Encode(
-                            utf8.encode(
-                              jsonEncode(controller.query.toJson()),
-                            ),
+                  onPressed: () => globalProviderContainer
+                      .read(shareServiceProvider)
+                      .shareText(
+                        base64Encode(
+                          utf8.encode(
+                            jsonEncode(controller.query.toJson()),
                           ),
-                        );
-                  },
+                        ),
+                      ),
                 ),
               ],
             ),

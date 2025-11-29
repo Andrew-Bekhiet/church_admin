@@ -29,5 +29,7 @@ void main() {
 }
 
 class FakeSecretsServiceImpl extends SecretsService {
+  // Ignored for readability
+  // ignore: matching_super_parameters
   FakeSecretsServiceImpl(super.secrets);
 }

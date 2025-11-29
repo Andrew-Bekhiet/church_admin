@@ -26,7 +26,7 @@ class LoggingService extends BlocObserver {
     FlutterError.onError = _onFlutterError;
     ErrorWidget.builder = _errorWidgetBuilder;
 
-    _initSentry(sentryDSN);
+    unawaited(_initSentry(sentryDSN));
   }
 
   Future<void> _onFlutterError(FlutterErrorDetails flutterError) async {
@@ -50,8 +50,8 @@ class LoggingService extends BlocObserver {
     );
   }
 
-  void _initSentry(String sentryDSN) {
-    SentryFlutter.init(
+  Future<void> _initSentry(String sentryDSN) async {
+    await SentryFlutter.init(
       (options) => options
         ..dsn = sentryDSN
         ..environment = kReleaseMode ? 'release' : 'debug'
@@ -77,11 +77,13 @@ class LoggingService extends BlocObserver {
   void onError(BlocBase bloc, Object error, StackTrace stackTrace) {
     super.onError(bloc, error, stackTrace);
 
-    exception(
-      LogRecord(
-        moduleName: bloc.runtimeType.toString(),
-        error: error,
-        stackTrace: stackTrace,
+    unawaited(
+      exception(
+        LogRecord(
+          moduleName: bloc.runtimeType.toString(),
+          error: error,
+          stackTrace: stackTrace,
+        ),
       ),
     );
   }
@@ -90,11 +92,13 @@ class LoggingService extends BlocObserver {
   void onEvent(Bloc bloc, Object? event) {
     super.onEvent(bloc, event);
 
-    config(
-      LogRecord(
-        moduleName: bloc.runtimeType.toString(),
-        eventName: event.runtimeType.toString(),
-        data: {'event': event.toString()},
+    unawaited(
+      config(
+        LogRecord(
+          moduleName: bloc.runtimeType.toString(),
+          eventName: event.runtimeType.toString(),
+          data: {'event': event.toString()},
+        ),
       ),
     );
   }
@@ -103,26 +107,28 @@ class LoggingService extends BlocObserver {
   void onTransition(Bloc bloc, Transition transition) {
     super.onTransition(bloc, transition);
 
-    _maybeIdentifyUser(transition);
+    unawaited(_maybeIdentifyUser(transition));
 
     final event = transition.event;
     final currentState = transition.currentState;
     final nextState = transition.nextState;
 
-    info(
-      LogRecord(
-        moduleName: bloc.runtimeType.toString(),
-        eventName: event.runtimeType.toString(),
-        data: {
-          'event': event.toString(),
-          'previousState': currentState.toString(),
-          'currentState': nextState.toString(),
-        },
+    unawaited(
+      info(
+        LogRecord(
+          moduleName: bloc.runtimeType.toString(),
+          eventName: event.runtimeType.toString(),
+          data: {
+            'event': event.toString(),
+            'previousState': currentState.toString(),
+            'currentState': nextState.toString(),
+          },
+        ),
       ),
     );
   }
 
-  void _maybeIdentifyUser(Transition transition) {
+  Future<void> _maybeIdentifyUser(Transition transition) async {
     if (transition is! Transition<AuthEvent, AuthState>) {
       return;
     }
@@ -150,7 +156,7 @@ class LoggingService extends BlocObserver {
     };
 
     if (sentryUser is SentryUser?) {
-      Sentry.configureScope((scope) => scope.setUser(sentryUser));
+      await Sentry.configureScope((scope) => scope.setUser(sentryUser));
     }
   }
 

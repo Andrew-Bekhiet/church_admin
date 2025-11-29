@@ -26,6 +26,7 @@ linter:
     specify_nonobvious_property_types: false
     lines_longer_than_80_chars: false
     prefer_asserts_with_message: false
+    prefer_foreach: false
     # Enabled
     avoid_futureor_void: true
     avoid_init_to_null: true

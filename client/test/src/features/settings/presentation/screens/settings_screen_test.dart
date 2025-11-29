@@ -10,8 +10,8 @@ import '../../../../utils.dart';
 import 'settings_screen_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<UserSettingsService>()])
-void main() {
-  loadAppFonts();
+Future<void> main() async {
+  await loadAppFonts();
 
   group(
     'SettingsScreen',
@@ -20,8 +20,9 @@ void main() {
         () {
           initGlobalProviderContainer(
             [
-              userSettingsServiceProvider
-                  .overrideWithValue(MockUserSettingsService()),
+              userSettingsServiceProvider.overrideWithValue(
+                MockUserSettingsService(),
+              ),
             ],
           );
         },
@@ -34,56 +35,63 @@ void main() {
       testGoldens(
         'Structure',
         (tester) async {
-          final deviceBuilder = DeviceBuilder(
-            wrap: materialAppWithThemeAndLocale(),
-          )
-            ..addScenario(
-              name: 'SettingsScreen Collapsed',
-              widget: const SettingsScreen(),
-              onCreate: (key) async {
-                expect(
-                  find.descendant(
-                    of: find.byKey(key),
-                    matching: find.widgetWithText(ExpansionTile, 'المظهر'),
-                  ),
-                  findsOneWidget,
+          final deviceBuilder =
+              DeviceBuilder(
+                  wrap: materialAppWithThemeAndLocale(),
+                )
+                ..addScenario(
+                  name: 'SettingsScreen Collapsed',
+                  widget: const SettingsScreen(),
+                  onCreate: (key) async {
+                    expect(
+                      find.descendant(
+                        of: find.byKey(key),
+                        matching: find.widgetWithText(ExpansionTile, 'المظهر'),
+                      ),
+                      findsOneWidget,
+                    );
+                    expect(
+                      find.descendant(
+                        of: find.byKey(key),
+                        matching: find.widgetWithText(
+                          ExpansionTile,
+                          'الاشعارات',
+                        ),
+                      ),
+                      findsOneWidget,
+                    );
+                  },
+                )
+                ..addScenario(
+                  name: 'SettingsScreen: Theme settings expanded',
+                  widget: const SettingsScreen(),
+                  onCreate: (key) async {
+                    await tester.tap(
+                      find.descendant(
+                        of: find.byKey(key),
+                        matching: find.widgetWithText(ExpansionTile, 'المظهر'),
+                      ),
+                    );
+                  },
+                )
+                ..addScenario(
+                  name: 'SettingsScreen: Notifications settings expanded',
+                  widget: const SettingsScreen(),
+                  onCreate: (key) async {
+                    await tester.tap(
+                      find.descendant(
+                        of: find.byKey(key),
+                        matching: find.widgetWithText(
+                          ExpansionTile,
+                          'الاشعارات',
+                        ),
+                      ),
+                    );
+                  },
+                )
+                ..overrideDevicesForAllScenarios(
+                  devices: [Device.iphone11, Device.tabletPortrait],
                 );
-                expect(
-                  find.descendant(
-                    of: find.byKey(key),
-                    matching: find.widgetWithText(ExpansionTile, 'الاشعارات'),
-                  ),
-                  findsOneWidget,
-                );
-              },
-            )
-            ..addScenario(
-              name: 'SettingsScreen: Theme settings expanded',
-              widget: const SettingsScreen(),
-              onCreate: (key) async {
-                await tester.tap(
-                  find.descendant(
-                    of: find.byKey(key),
-                    matching: find.widgetWithText(ExpansionTile, 'المظهر'),
-                  ),
-                );
-              },
-            )
-            ..addScenario(
-              name: 'SettingsScreen: Notifications settings expanded',
-              widget: const SettingsScreen(),
-              onCreate: (key) async {
-                await tester.tap(
-                  find.descendant(
-                    of: find.byKey(key),
-                    matching: find.widgetWithText(ExpansionTile, 'الاشعارات'),
-                  ),
-                );
-              },
-            )
-            ..overrideDevicesForAllScenarios(
-              devices: [Device.iphone11, Device.tabletPortrait],
-            );
 
           await tester.pumpDeviceBuilder(deviceBuilder);
 
@@ -102,7 +110,9 @@ void main() {
                 wrapper: materialAppWithThemeAndLocale(),
               );
               unawaited(
-                tester.firstState<NavigatorState>(find.byType(Navigator)).push(
+                tester
+                    .firstState<NavigatorState>(find.byType(Navigator))
+                    .push(
                       MaterialPageRoute(
                         builder: (_) => const SettingsScreen(),
                       ),
@@ -132,7 +142,9 @@ void main() {
                 wrapper: materialAppWithThemeAndLocale(),
               );
               unawaited(
-                tester.firstState<NavigatorState>(find.byType(Navigator)).push(
+                tester
+                    .firstState<NavigatorState>(find.byType(Navigator))
+                    .push(
                       MaterialPageRoute(
                         builder: (_) => const SettingsScreen(),
                       ),
@@ -167,7 +179,9 @@ void main() {
             wrapper: materialAppWithThemeAndLocale(),
           );
           unawaited(
-            tester.firstState<NavigatorState>(find.byType(Navigator)).push(
+            tester
+                .firstState<NavigatorState>(find.byType(Navigator))
+                .push(
                   MaterialPageRoute(
                     builder: (_) => const SettingsScreen(),
                   ),

@@ -26,19 +26,20 @@ class _ViewPersonState extends State<ViewPerson> {
   final _classesLimit = BehaviorSubject<int?>.seeded(4);
   final _groupsLimit = BehaviorSubject<int?>.seeded(4);
 
-  late final stream = Rx.combineLatest3(
-    _servicesLimit.distinct(),
-    _classesLimit.distinct(),
-    _groupsLimit.distinct(),
-    (a, b, c) => (a, b, c),
-  ).switchMap(
-    (limits) => DatabaseService.I.persons.streamSingleById(
-      id: widget.personId,
-      servicesLimit: limits.$1,
-      classesLimit: limits.$2,
-      groupsLimit: limits.$3,
-    ),
-  );
+  late final stream =
+      Rx.combineLatest3(
+        _servicesLimit.distinct(),
+        _classesLimit.distinct(),
+        _groupsLimit.distinct(),
+        (a, b, c) => (a, b, c),
+      ).switchMap(
+        (limits) => DatabaseService.I.persons.streamSingleById(
+          id: widget.personId,
+          servicesLimit: limits.$1,
+          classesLimit: limits.$2,
+          groupsLimit: limits.$3,
+        ),
+      );
 
   @override
   Widget build(BuildContext context) {
@@ -297,16 +298,16 @@ class _ViewPersonState extends State<ViewPerson> {
               value: person.lastKodas?.time,
               showTime: false,
               getHistoryListController: () => ViewableObjectListController(
-                objectsPaginatableStream:
-                    DatabaseService.I.history.paginatePersonKodasHistory(
-                  personId: person.id,
-                ),
+                objectsPaginatableStream: DatabaseService.I.history
+                    .paginatePersonKodasHistory(
+                      personId: person.id,
+                    ),
               ),
               onRecordNow: () =>
                   DatabaseService.I.history.updatePersonLastKodas(
-                personId: widget.personId,
-                lastKodas: DateTime.now(),
-              ),
+                    personId: widget.personId,
+                    lastKodas: DateTime.now(),
+                  ),
             ),
             HistoryProperty(
               name: 'أخر اعتراف',
@@ -318,34 +319,34 @@ class _ViewPersonState extends State<ViewPerson> {
               ),
               onRecordNow: () =>
                   DatabaseService.I.history.updatePersonLastConfession(
-                personId: widget.personId,
-                lastConfession: DateTime.now(),
-              ),
+                    personId: widget.personId,
+                    lastConfession: DateTime.now(),
+                  ),
             ),
             const Divider(thickness: 1),
             HistoryProperty(
               name: 'أخر افتقاد',
               value: person.lastVisit?.time,
               getHistoryListController: () => ViewableObjectListController(
-                objectsPaginatableStream:
-                    DatabaseService.I.history.paginatePersonVisitHistory(
-                  personId: person.id,
-                ),
+                objectsPaginatableStream: DatabaseService.I.history
+                    .paginatePersonVisitHistory(
+                      personId: person.id,
+                    ),
               ),
               onRecordNow: () =>
                   DatabaseService.I.history.updatePersonLastVisit(
-                personId: widget.personId,
-                lastVisit: DateTime.now(),
-              ),
+                    personId: widget.personId,
+                    lastVisit: DateTime.now(),
+                  ),
             ),
             HistoryProperty(
               name: 'أخر مكالمة',
               value: person.lastCall?.time,
               getHistoryListController: () => ViewableObjectListController(
-                objectsPaginatableStream:
-                    DatabaseService.I.history.paginatePersonCallHistory(
-                  personId: person.id,
-                ),
+                objectsPaginatableStream: DatabaseService.I.history
+                    .paginatePersonCallHistory(
+                      personId: person.id,
+                    ),
               ),
               onRecordNow: () => DatabaseService.I.history.updatePersonLastCall(
                 personId: widget.personId,
@@ -356,10 +357,10 @@ class _ViewPersonState extends State<ViewPerson> {
               name: 'أخر تحديث للبيانات',
               value: person.lastEdit?.time,
               getHistoryListController: () => ViewableObjectListController(
-                objectsPaginatableStream:
-                    DatabaseService.I.history.paginateEditHistory<Person>(
-                  id: person.id,
-                ),
+                objectsPaginatableStream: DatabaseService.I.history
+                    .paginateEditHistory<Person>(
+                      id: person.id,
+                    ),
               ),
             ),
             ListTile(
@@ -419,19 +420,19 @@ class _ViewPersonState extends State<ViewPerson> {
     );
   }
 
-  void _analysis(BuildContext context, Person person) {
-    PersonAnalysisRoute(
+  Future<void> _analysis(BuildContext context, Person person) async {
+    await PersonAnalysisRoute(
       $extra: PersonAnalysisExtra(
-        editOptionsBuilder: (
-          context,
-          options,
-          void Function(PersonAnalysisOptions) onComplete,
-        ) =>
-            _SelectAttendanceOptions(
-          person: person,
-          onComplete: onComplete,
-          options: options,
-        ),
+        editOptionsBuilder:
+            (
+              context,
+              options,
+              void Function(PersonAnalysisOptions) onComplete,
+            ) => _SelectAttendanceOptions(
+              person: person,
+              onComplete: onComplete,
+              options: options,
+            ),
         person: person,
       ),
     ).push(context);
@@ -548,9 +549,9 @@ class _ViewPersonState extends State<ViewPerson> {
   void dispose() {
     scrollController.dispose();
 
-    _servicesLimit.close();
-    _classesLimit.close();
-    _groupsLimit.close();
+    unawaited(_servicesLimit.close());
+    unawaited(_classesLimit.close());
+    unawaited(_groupsLimit.close());
 
     super.dispose();
   }
@@ -573,9 +574,9 @@ class _ShowMore<T extends Viewable> extends StatelessWidget {
   final int visibleItemsLimit;
 
   DateFormat get dateFormat => DateFormat(
-        'التاريخ: yyyy/M/d${showTime ? '\nالساعة: h:m a' : ''}',
-        'ar-EG',
-      );
+    'التاريخ: yyyy/M/d${showTime ? '\nالساعة: h:m a' : ''}',
+    'ar-EG',
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -639,7 +640,8 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
       widget.options?.visitHistoryAnalysis ?? false;
   late bool editHistoryAnalysis = widget.options?.editHistoryAnalysis ?? false;
 
-  late DateTimeRange dateRange = widget.options?.dateRange ??
+  late DateTimeRange dateRange =
+      widget.options?.dateRange ??
       DateTimeRange(
         start: DateTime.now().subtract(const Duration(days: 30)),
         end: DateTime.now(),
@@ -652,29 +654,31 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
     return Scaffold(
       appBar: AppBar(title: const Text('تحليل الحضور في')),
       body: FutureBuilder<Map<Service, List<ViewableWithIDAndImage>>>(
-        initialData: <ViewableWithIDAndImage>[
-          ...widget.person.classes ?? [],
-          ...widget.person.groups ?? [],
-        ].groupListsBy(
-          (o) =>
-              (o is Class ? o.service : (o as Group).service) ??
-              const Service(id: 'id', name: 'جار التحميل'),
-        ),
+        initialData:
+            <ViewableWithIDAndImage>[
+              ...widget.person.classes ?? [],
+              ...widget.person.groups ?? [],
+            ].groupListsBy(
+              (o) =>
+                  (o is Class ? o.service : (o as Group).service) ??
+                  const Service(id: 'id', name: 'جار التحميل'),
+            ),
         future: DatabaseService.I.persons
             .personServicesClassesGroups(personId: widget.person.id)
             .then((p) {
-          final groupedObjects = <ViewableWithIDAndImage>[
-            ...p?.classes ?? [],
-            ...p?.groups ?? [],
-          ].groupListsBy(
-            (o) => o is Class ? o.service! : (o as Group).service!,
-          );
+              final groupedObjects =
+                  <ViewableWithIDAndImage>[
+                    ...p?.classes ?? [],
+                    ...p?.groups ?? [],
+                  ].groupListsBy(
+                    (o) => o is Class ? o.service! : (o as Group).service!,
+                  );
 
-          return <Service, List<ViewableWithIDAndImage>>{
-            for (final s in p?.services ?? []) s: [],
-            ...groupedObjects,
-          };
-        }),
+              return <Service, List<ViewableWithIDAndImage>>{
+                for (final s in p?.services ?? []) s: [],
+                ...groupedObjects,
+              };
+            }),
         builder: (context, snapshot) {
           return Padding(
             padding: const EdgeInsets.all(8),
@@ -739,12 +743,12 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
                                         ),
                                         builder: (context, entryChecked) =>
                                             Checkbox(
-                                          onChanged: (checked) => _toggle(
-                                            descendent,
-                                            checked ?? false,
-                                          ),
-                                          value: entryChecked.requireData,
-                                        ),
+                                              onChanged: (checked) => _toggle(
+                                                descendent,
+                                                checked ?? false,
+                                              ),
+                                              value: entryChecked.requireData,
+                                            ),
                                       ),
                                     ),
                                 ],
@@ -803,8 +807,9 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
                           dateRange: dateRange,
                           classes: selected.value.whereType<Class>().toList(),
                           groups: selected.value.whereType<Group>().toList(),
-                          services:
-                              selected.value.whereType<Service>().toList(),
+                          services: selected.value
+                              .whereType<Service>()
+                              .toList(),
                         ),
                       );
 

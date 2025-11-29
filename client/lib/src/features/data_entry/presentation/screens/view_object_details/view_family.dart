@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -32,18 +34,19 @@ class _ViewFamilyState extends State<ViewFamily> {
     ),
   );
 
-  final BehaviorSubject<List<OrderBy>> _personsOrderBy =
-      BehaviorSubject.seeded([
-    OrderBy(
-      field: PersonFields()
-          .personType
-          .redirectTo(PersonTypeFields().isFamilyAdmin),
-      value: OrderByValue.desc,
-    ),
-    OrderBy(
-      field: PersonFields().personType.redirectTo(PersonTypeFields().order),
-    ),
-  ]);
+  final BehaviorSubject<List<OrderBy>> _personsOrderBy = BehaviorSubject.seeded(
+    [
+      OrderBy(
+        field: PersonFields().personType.redirectTo(
+          PersonTypeFields().isFamilyAdmin,
+        ),
+        value: OrderByValue.desc,
+      ),
+      OrderBy(
+        field: PersonFields().personType.redirectTo(PersonTypeFields().order),
+      ),
+    ],
+  );
 
   late final _childrenFamiliesController = _ensureWillDispose(
     ViewableObjectListController(
@@ -51,9 +54,9 @@ class _ViewFamilyState extends State<ViewFamily> {
         where: Stream.value(
           [
             Filter(
-              FamilyFields()
-                  .parentsRel
-                  .redirectTo(FamiliesFamiliesFields().parentFamilyId),
+              FamilyFields().parentsRel.redirectTo(
+                FamiliesFamiliesFields().parentFamilyId,
+              ),
               PrimitiveOperator.eq,
               widget.familyId,
             ),
@@ -66,8 +69,8 @@ class _ViewFamilyState extends State<ViewFamily> {
 
   final BehaviorSubject<List<OrderBy>> _childrenFamiliesOrderBy =
       BehaviorSubject.seeded([
-    OrderBy(field: FamilyFields().name),
-  ]);
+        OrderBy(field: FamilyFields().name),
+      ]);
 
   late final _parentFamiliesController = _ensureWillDispose(
     ViewableObjectListController(
@@ -75,9 +78,9 @@ class _ViewFamilyState extends State<ViewFamily> {
         where: Stream.value(
           [
             Filter(
-              FamilyFields()
-                  .childrenRel
-                  .redirectTo(FamiliesFamiliesFields().childFamilyId),
+              FamilyFields().childrenRel.redirectTo(
+                FamiliesFamiliesFields().childFamilyId,
+              ),
               PrimitiveOperator.eq,
               widget.familyId,
             ),
@@ -90,8 +93,8 @@ class _ViewFamilyState extends State<ViewFamily> {
 
   final BehaviorSubject<List<OrderBy>> _parentFamiliesOrderBy =
       BehaviorSubject.seeded([
-    OrderBy(field: FamilyFields().name),
-  ]);
+        OrderBy(field: FamilyFields().name),
+      ]);
 
   late final _storesController = _ensureWillDispose(
     ViewableObjectListController(
@@ -131,53 +134,49 @@ class _ViewFamilyState extends State<ViewFamily> {
       childrenTypes: const [Person, _ChildrenFamily, _ParentFamily, Store],
       tabsContentBuilders: {
         Person: (context) => StreamBuilder(
-              stream: _personsOrderBy.stream,
-              initialData: _personsOrderBy.value,
-              builder: (context, orderBySnapshot) => ViewableObjectList(
-                scrollController: PrimaryScrollController.maybeOf(context),
-                viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
-                  secondLineField:
-                      orderBySnapshot.data?.first.getSecondLineField(),
-                ),
-                objectsController: _personsController,
-              ),
+          stream: _personsOrderBy.stream,
+          initialData: _personsOrderBy.value,
+          builder: (context, orderBySnapshot) => ViewableObjectList(
+            scrollController: PrimaryScrollController.maybeOf(context),
+            viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
+              secondLineField: orderBySnapshot.data?.first.getSecondLineField(),
             ),
+            objectsController: _personsController,
+          ),
+        ),
         _ChildrenFamily: (context) => StreamBuilder(
-              stream: _childrenFamiliesOrderBy.stream,
-              initialData: _childrenFamiliesOrderBy.value,
-              builder: (context, orderBySnapshot) => ViewableObjectList(
-                scrollController: PrimaryScrollController.maybeOf(context),
-                viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
-                  secondLineField:
-                      orderBySnapshot.data?.first.getSecondLineField(),
-                ),
-                objectsController: _childrenFamiliesController,
-              ),
+          stream: _childrenFamiliesOrderBy.stream,
+          initialData: _childrenFamiliesOrderBy.value,
+          builder: (context, orderBySnapshot) => ViewableObjectList(
+            scrollController: PrimaryScrollController.maybeOf(context),
+            viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
+              secondLineField: orderBySnapshot.data?.first.getSecondLineField(),
             ),
+            objectsController: _childrenFamiliesController,
+          ),
+        ),
         _ParentFamily: (context) => StreamBuilder(
-              stream: _parentFamiliesOrderBy.stream,
-              initialData: _parentFamiliesOrderBy.value,
-              builder: (context, orderBySnapshot) => ViewableObjectList(
-                scrollController: PrimaryScrollController.maybeOf(context),
-                viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
-                  secondLineField:
-                      orderBySnapshot.data?.first.getSecondLineField(),
-                ),
-                objectsController: _parentFamiliesController,
-              ),
+          stream: _parentFamiliesOrderBy.stream,
+          initialData: _parentFamiliesOrderBy.value,
+          builder: (context, orderBySnapshot) => ViewableObjectList(
+            scrollController: PrimaryScrollController.maybeOf(context),
+            viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
+              secondLineField: orderBySnapshot.data?.first.getSecondLineField(),
             ),
+            objectsController: _parentFamiliesController,
+          ),
+        ),
         Store: (context) => StreamBuilder(
-              stream: _storesOrderBy.stream,
-              initialData: _storesOrderBy.value,
-              builder: (context, orderBySnapshot) => ViewableObjectList(
-                scrollController: PrimaryScrollController.maybeOf(context),
-                viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
-                  secondLineField:
-                      orderBySnapshot.data?.first.getSecondLineField(),
-                ),
-                objectsController: _storesController,
-              ),
+          stream: _storesOrderBy.stream,
+          initialData: _storesOrderBy.value,
+          builder: (context, orderBySnapshot) => ViewableObjectList(
+            scrollController: PrimaryScrollController.maybeOf(context),
+            viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
+              secondLineField: orderBySnapshot.data?.first.getSecondLineField(),
             ),
+            objectsController: _storesController,
+          ),
+        ),
       },
       sliverPersistentHeaderDelegate: ChipTabBarPersistentHeaderDelegate(
         filtersWidget: Builder(
@@ -286,10 +285,10 @@ class _ViewFamilyState extends State<ViewFamily> {
             name: 'أخر افتقاد',
             value: family.lastVisit?.time,
             getHistoryListController: () => ViewableObjectListController(
-              objectsPaginatableStream:
-                  DatabaseService.I.history.paginateFamilyVisitHistory(
-                familyId: family.id,
-              ),
+              objectsPaginatableStream: DatabaseService.I.history
+                  .paginateFamilyVisitHistory(
+                    familyId: family.id,
+                  ),
             ),
             onRecordNow: () => DatabaseService.I.history.updateFamilyLastVisit(
               familyId: widget.familyId,
@@ -300,11 +299,11 @@ class _ViewFamilyState extends State<ViewFamily> {
             name: 'أخر افتقاد للأب الكاهن',
             value: family.lastFatherVisit?.time,
             getHistoryListController: () => ViewableObjectListController(
-              objectsPaginatableStream:
-                  DatabaseService.I.history.paginateFamilyVisitHistory(
-                familyId: family.id,
-                fatherVisit: true,
-              ),
+              objectsPaginatableStream: DatabaseService.I.history
+                  .paginateFamilyVisitHistory(
+                    familyId: family.id,
+                    fatherVisit: true,
+                  ),
             ),
             onRecordNow: () => DatabaseService.I.history.updateFamilyLastVisit(
               familyId: widget.familyId,
@@ -316,10 +315,10 @@ class _ViewFamilyState extends State<ViewFamily> {
             name: 'أخر تحديث للبيانات',
             value: family.lastEdit?.time,
             getHistoryListController: () => ViewableObjectListController(
-              objectsPaginatableStream:
-                  DatabaseService.I.history.paginateEditHistory<Family>(
-                id: family.id,
-              ),
+              objectsPaginatableStream: DatabaseService.I.history
+                  .paginateEditHistory<Family>(
+                    id: family.id,
+                  ),
             ),
           ),
         ]),
@@ -348,17 +347,15 @@ class _ViewFamilyState extends State<ViewFamily> {
               2 => _parentFamiliesController,
               3 => _storesController,
               _ => throw UnimplementedError(),
-            }
-                .totalCountStream
-                .map(
-                  (c) => switch (currentIndex) {
-                    0 => '$c مخدوم',
-                    1 => '$c أبناء',
-                    2 => '$c أباء',
-                    3 => '$c متجر',
-                    _ => throw UnimplementedError(),
-                  },
-                );
+            }.totalCountStream.map(
+              (c) => switch (currentIndex) {
+                0 => '$c مخدوم',
+                1 => '$c أبناء',
+                2 => '$c أباء',
+                3 => '$c متجر',
+                _ => throw UnimplementedError(),
+              },
+            );
           },
         ),
         builder: (context, snapshot) {
@@ -371,33 +368,41 @@ class _ViewFamilyState extends State<ViewFamily> {
       ),
       floatingActionButtonBuilder: (context, tabController, family) =>
           SwitchingFloatingActionButton.fromTabController(
-        tabController: tabController,
-        icons: const [
-          Icon(Symbols.person_add),
-          Icon(Symbols.group_add),
-          Icon(Symbols.group_add),
-          Icon(Symbols.add_business),
-        ],
-        onTap: (newIndex) {
-          if (newIndex == 0) {
-            EditPersonRoute(
-              $extra: EditPersonExtra(family: family),
-            ).push(context);
-          } else if (newIndex == 1) {
-            EditFamilyRoute(
-              $extra: EditFamilyExtra(parents: {family}),
-            ).push(context);
-          } else if (newIndex == 2) {
-            EditFamilyRoute(
-              $extra: EditFamilyExtra(children: {family}),
-            ).push(context);
-          } else if (newIndex == 3) {
-            EditStoreRoute(
-              $extra: EditStoreExtra(family: family),
-            ).push(context);
-          }
-        },
-      ),
+            tabController: tabController,
+            icons: const [
+              Icon(Symbols.person_add),
+              Icon(Symbols.group_add),
+              Icon(Symbols.group_add),
+              Icon(Symbols.add_business),
+            ],
+            onTap: (newIndex) {
+              if (newIndex == 0) {
+                unawaited(
+                  EditPersonRoute(
+                    $extra: EditPersonExtra(family: family),
+                  ).push(context),
+                );
+              } else if (newIndex == 1) {
+                unawaited(
+                  EditFamilyRoute(
+                    $extra: EditFamilyExtra(parents: {family}),
+                  ).push(context),
+                );
+              } else if (newIndex == 2) {
+                unawaited(
+                  EditFamilyRoute(
+                    $extra: EditFamilyExtra(children: {family}),
+                  ).push(context),
+                );
+              } else if (newIndex == 3) {
+                unawaited(
+                  EditStoreRoute(
+                    $extra: EditStoreExtra(family: family),
+                  ).push(context),
+                );
+              }
+            },
+          ),
     );
   }
 
@@ -424,7 +429,7 @@ class _ViewFamilyState extends State<ViewFamily> {
   }
 
   ViewableObjectListController<T>
-      _ensureWillDispose<T extends ViewableWithIDAndImage>(
+  _ensureWillDispose<T extends ViewableWithIDAndImage>(
     ViewableObjectListController<T> controller,
   ) {
     _controllersToDispose.add(controller);
@@ -433,7 +438,7 @@ class _ViewFamilyState extends State<ViewFamily> {
 
   @override
   void dispose() {
-    Future.wait(_controllersToDispose.map((e) => e.dispose()));
+    unawaited(Future.wait(_controllersToDispose.map((e) => e.dispose())));
 
     super.dispose();
   }

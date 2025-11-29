@@ -80,7 +80,7 @@ class PaginatableStream<T, P> extends PaginatableStreamBase<T> {
         .scan<({P value, bool changed})?>(
           (previousValue, value, i) {
             if (i != 0 && previousValue?.value != value) {
-              listenToPage(0);
+              unawaited(listenToPage(0));
               return (value: value, changed: true);
             }
 
@@ -125,19 +125,16 @@ class PaginatableStream<T, P> extends PaginatableStreamBase<T> {
     required PaginatableStreamFactory<T, String?> factory,
     required Stream<String?> searchStream,
     int pageSize = defaultPageSize,
-  }) =>
-      PaginatableStream(
-        factory: factory,
-        parametersStream: searchStream,
-        pageSize: pageSize,
-      );
+  }) => PaginatableStream(
+    factory: factory,
+    parametersStream: searchStream,
+    pageSize: pageSize,
+  );
 
   Stream<
-      ({
-        int pageIndex,
-        bool paramChanged,
-        PaginatableStreamResponse<T> response
-      })> _loadPage(
+    ({int pageIndex, bool paramChanged, PaginatableStreamResponse<T> response})
+  >
+  _loadPage(
     PaginatableStreamFactory<T, P> factory,
     int currentPageIndex,
     ({P? value, bool changed})? parameter,
@@ -147,7 +144,7 @@ class PaginatableStream<T, P> extends PaginatableStreamBase<T> {
         cursor: currentPageIndex == 0 || (parameter?.changed ?? false)
             ? null
             : currentItems.elementAtOrNull(currentPageIndex * pageSize - 1) ??
-                currentCursor,
+                  currentCursor,
         param: parameter?.value,
         pageIndex: currentPageIndex,
         pageSize: pageSize,
@@ -156,17 +153,14 @@ class PaginatableStream<T, P> extends PaginatableStreamBase<T> {
       (response) => (
         pageIndex: currentPageIndex,
         response: response,
-        paramChanged: parameter?.changed ?? false
+        paramChanged: parameter?.changed ?? false,
       ),
     );
   }
 
   PaginatableStreamData<T> _mapPageResult(
-    ({
-      int pageIndex,
-      PaginatableStreamResponse<T> response,
-      bool paramChanged
-    }) newPageResult,
+    ({int pageIndex, PaginatableStreamResponse<T> response, bool paramChanged})
+    newPageResult,
   ) {
     final currentPageIndex = newPageResult.pageIndex;
     final newItems = newPageResult.response.data;
@@ -183,8 +177,7 @@ class PaginatableStream<T, P> extends PaginatableStreamBase<T> {
     final int end = start + math.min(pageSize, currentItems.length);
 
     final combined = start < currentItems.length
-        ? (currentItems.sublist(0)
-          ..replaceRange(
+        ? (currentItems.sublist(0)..replaceRange(
             start,
             math.min(end, currentItems.length),
             newItems,
@@ -241,10 +234,9 @@ class PaginatableStream<T, P> extends PaginatableStreamBase<T> {
   Stream<List<T>> asBroadcastStream({
     void Function(StreamSubscription<List<T>>)? onListen,
     void Function(StreamSubscription<List<T>>)? onCancel,
-  }) =>
-      _subject
-          .map((e) => e.items)
-          .asBroadcastStream(onListen: onListen, onCancel: onCancel);
+  }) => _subject
+      .map((e) => e.items)
+      .asBroadcastStream(onListen: onListen, onCancel: onCancel);
 
   @override
   StreamSubscription<List<T>> listen(
@@ -252,13 +244,14 @@ class PaginatableStream<T, P> extends PaginatableStreamBase<T> {
     Function? onError,
     void Function()? onDone,
     bool? cancelOnError,
-  }) =>
-      _subject.map((e) => e.items).listen(
-            onData,
-            onError: onError,
-            onDone: onDone,
-            cancelOnError: cancelOnError,
-          );
+  }) => _subject
+      .map((e) => e.items)
+      .listen(
+        onData,
+        onError: onError,
+        onDone: onDone,
+        cancelOnError: cancelOnError,
+      );
 
   @override
   Future<void> dispose() async {
@@ -269,7 +262,7 @@ class PaginatableStream<T, P> extends PaginatableStreamBase<T> {
   }
 }
 
-typedef PaginatableStreamFactory<T, P> = Stream<PaginatableStreamResponse<T>>
-    Function(
-  PaginatableStreamRequest<T, P>,
-);
+typedef PaginatableStreamFactory<T, P> =
+    Stream<PaginatableStreamResponse<T>> Function(
+      PaginatableStreamRequest<T, P>,
+    );

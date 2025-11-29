@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
@@ -120,15 +122,13 @@ class _ViewClassState extends State<ViewClass> {
       ),
       floatingActionButtonBuilder: (context, tabController, class$) =>
           FloatingActionButton(
-            onPressed: () {
-              EditPersonRoute(
-                $extra: EditPersonExtra(
-                  service: class$.service,
-                  studyYear: class$.studyYear,
-                  gender: class$.serviceGender,
-                ),
-              ).push(context);
-            },
+            onPressed: () => EditPersonRoute(
+              $extra: EditPersonExtra(
+                service: class$.service,
+                studyYear: class$.studyYear,
+                gender: class$.serviceGender,
+              ),
+            ).push(context),
             child: const Icon(Symbols.person_add),
           ),
     );
@@ -148,7 +148,7 @@ class _ViewClassState extends State<ViewClass> {
 
   @override
   void dispose() {
-    _personsController.dispose();
+    unawaited(_personsController.dispose());
 
     super.dispose();
   }

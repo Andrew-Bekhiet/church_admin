@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -34,15 +36,17 @@ class _ViewGroupState extends State<ViewGroup> {
     ),
   );
 
-  final BehaviorSubject<List<OrderBy>> _personsOrderBy =
-      BehaviorSubject.seeded([
-    OrderBy(field: PersonFields().studyYear),
-    OrderBy(field: PersonFields().name),
-  ]);
+  final BehaviorSubject<List<OrderBy>> _personsOrderBy = BehaviorSubject.seeded(
+    [
+      OrderBy(field: PersonFields().studyYear),
+      OrderBy(field: PersonFields().name),
+    ],
+  );
   late final viewableObjectService = ViewableObjectService.I;
 
-  late final stream =
-      DatabaseService.I.groups.streamSingleById(id: widget.groupId);
+  late final stream = DatabaseService.I.groups.streamSingleById(
+    id: widget.groupId,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -61,23 +65,22 @@ class _ViewGroupState extends State<ViewGroup> {
         tabs: [
           (
             icon: viewableObjectService.getDefaultIconFor<Person>(),
-            label: 'المخدومين'
+            label: 'المخدومين',
           ),
         ],
       ),
       tabsContentBuilders: {
         Group: (context) => StreamBuilder(
-              stream: _personsOrderBy.stream,
-              initialData: _personsOrderBy.value,
-              builder: (context, orderBySnapshot) => ViewableObjectList(
-                scrollController: PrimaryScrollController.maybeOf(context),
-                viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
-                  secondLineField:
-                      orderBySnapshot.data?.first.getSecondLineField(),
-                ),
-                objectsController: _personsController,
-              ),
+          stream: _personsOrderBy.stream,
+          initialData: _personsOrderBy.value,
+          builder: (context, orderBySnapshot) => ViewableObjectList(
+            scrollController: PrimaryScrollController.maybeOf(context),
+            viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
+              secondLineField: orderBySnapshot.data?.first.getSecondLineField(),
             ),
+            objectsController: _personsController,
+          ),
+        ),
       },
       detailsBuilder: (context, group) => SliverList(
         delegate: SliverChildListDelegate(
@@ -149,16 +152,14 @@ class _ViewGroupState extends State<ViewGroup> {
       ),
       floatingActionButtonBuilder: (context, tabController, group) =>
           FloatingActionButton(
-        onPressed: () {
-          EditPersonRoute(
-            $extra: EditPersonExtra(
-              service: group.service?.copyWith(groups: [group]),
-              group: group,
-            ),
-          ).push(context);
-        },
-        child: const Icon(Symbols.person_add),
-      ),
+            onPressed: () => EditPersonRoute(
+              $extra: EditPersonExtra(
+                service: group.service?.copyWith(groups: [group]),
+                group: group,
+              ),
+            ).push(context),
+            child: const Icon(Symbols.person_add),
+          ),
     );
   }
 
@@ -176,7 +177,7 @@ class _ViewGroupState extends State<ViewGroup> {
 
   @override
   void dispose() {
-    _personsController.dispose();
+    unawaited(_personsController.dispose());
 
     super.dispose();
   }
