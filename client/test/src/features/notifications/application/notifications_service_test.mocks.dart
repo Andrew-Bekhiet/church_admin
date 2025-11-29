@@ -52,181 +52,97 @@ import 'package:timezone/timezone.dart' as _i18;
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
+// ignore_for_file: invalid_use_of_internal_member
 
 class _FakeFirebaseApp_0 extends _i1.SmartFake implements _i2.FirebaseApp {
-  _FakeFirebaseApp_0(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeFirebaseApp_0(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeNotificationSettings_1 extends _i1.SmartFake
     implements _i3.NotificationSettings {
-  _FakeNotificationSettings_1(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeNotificationSettings_1(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeSyncKVStore_2<T> extends _i1.SmartFake
     implements _i4.SyncKVStore<T> {
-  _FakeSyncKVStore_2(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeSyncKVStore_2(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeHttpsCallable_3 extends _i1.SmartFake implements _i5.HttpsCallable {
-  _FakeHttpsCallable_3(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeHttpsCallable_3(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeHttpsCallableResult_4<T> extends _i1.SmartFake
     implements _i5.HttpsCallableResult<T> {
-  _FakeHttpsCallableResult_4(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeHttpsCallableResult_4(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeResponse_5<T> extends _i1.SmartFake implements _i6.Response<T> {
-  _FakeResponse_5(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeResponse_5(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeNotificationSetting_6 extends _i1.SmartFake
     implements _i4.NotificationSetting {
-  _FakeNotificationSetting_6(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeNotificationSetting_6(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeFile_7 extends _i1.SmartFake implements _i7.File {
-  _FakeFile_7(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeFile_7(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeFileInfo_8 extends _i1.SmartFake implements _i8.FileInfo {
-  _FakeFileInfo_8(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeFileInfo_8(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeFileSystem_9 extends _i1.SmartFake implements _i7.FileSystem {
-  _FakeFileSystem_9(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeFileSystem_9(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeDirectory_10 extends _i1.SmartFake implements _i7.Directory {
-  _FakeDirectory_10(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeDirectory_10(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeUri_11 extends _i1.SmartFake implements Uri {
-  _FakeUri_11(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeUri_11(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeFileSystemEntity_12 extends _i1.SmartFake
     implements _i7.FileSystemEntity {
-  _FakeFileSystemEntity_12(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeFileSystemEntity_12(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeFileStat_13 extends _i1.SmartFake implements _i9.FileStat {
-  _FakeFileStat_13(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeFileStat_13(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeDateTime_14 extends _i1.SmartFake implements DateTime {
-  _FakeDateTime_14(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeDateTime_14(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeRandomAccessFile_15 extends _i1.SmartFake
     implements _i9.RandomAccessFile {
-  _FakeRandomAccessFile_15(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeRandomAccessFile_15(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeIOSink_16 extends _i1.SmartFake implements _i9.IOSink {
-  _FakeIOSink_16(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeIOSink_16(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 /// A class which mocks [PermissionHandlerPlatform].
@@ -236,69 +152,72 @@ class PermissionHandlerPlatform_ extends _i1.Mock
     implements _i10.PermissionHandlerPlatform {
   @override
   _i11.Future<_i12.PermissionStatus> checkPermissionStatus(
-          _i12.Permission? permission) =>
+    _i12.Permission? permission,
+  ) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #checkPermissionStatus,
-          [permission],
-        ),
-        returnValue: _i11.Future<_i12.PermissionStatus>.value(
-            _i12.PermissionStatus.denied),
-        returnValueForMissingStub: _i11.Future<_i12.PermissionStatus>.value(
-            _i12.PermissionStatus.denied),
-      ) as _i11.Future<_i12.PermissionStatus>);
+            Invocation.method(#checkPermissionStatus, [permission]),
+            returnValue: _i11.Future<_i12.PermissionStatus>.value(
+              _i12.PermissionStatus.denied,
+            ),
+            returnValueForMissingStub: _i11.Future<_i12.PermissionStatus>.value(
+              _i12.PermissionStatus.denied,
+            ),
+          )
+          as _i11.Future<_i12.PermissionStatus>);
 
   @override
   _i11.Future<_i12.ServiceStatus> checkServiceStatus(
-          _i12.Permission? permission) =>
+    _i12.Permission? permission,
+  ) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #checkServiceStatus,
-          [permission],
-        ),
-        returnValue:
-            _i11.Future<_i12.ServiceStatus>.value(_i12.ServiceStatus.disabled),
-        returnValueForMissingStub:
-            _i11.Future<_i12.ServiceStatus>.value(_i12.ServiceStatus.disabled),
-      ) as _i11.Future<_i12.ServiceStatus>);
+            Invocation.method(#checkServiceStatus, [permission]),
+            returnValue: _i11.Future<_i12.ServiceStatus>.value(
+              _i12.ServiceStatus.disabled,
+            ),
+            returnValueForMissingStub: _i11.Future<_i12.ServiceStatus>.value(
+              _i12.ServiceStatus.disabled,
+            ),
+          )
+          as _i11.Future<_i12.ServiceStatus>);
 
   @override
-  _i11.Future<bool> openAppSettings() => (super.noSuchMethod(
-        Invocation.method(
-          #openAppSettings,
-          [],
-        ),
-        returnValue: _i11.Future<bool>.value(false),
-        returnValueForMissingStub: _i11.Future<bool>.value(false),
-      ) as _i11.Future<bool>);
+  _i11.Future<bool> openAppSettings() =>
+      (super.noSuchMethod(
+            Invocation.method(#openAppSettings, []),
+            returnValue: _i11.Future<bool>.value(false),
+            returnValueForMissingStub: _i11.Future<bool>.value(false),
+          )
+          as _i11.Future<bool>);
 
   @override
   _i11.Future<Map<_i12.Permission, _i12.PermissionStatus>> requestPermissions(
-          List<_i12.Permission>? permissions) =>
+    List<_i12.Permission>? permissions,
+  ) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #requestPermissions,
-          [permissions],
-        ),
-        returnValue:
-            _i11.Future<Map<_i12.Permission, _i12.PermissionStatus>>.value(
-                <_i12.Permission, _i12.PermissionStatus>{}),
-        returnValueForMissingStub:
-            _i11.Future<Map<_i12.Permission, _i12.PermissionStatus>>.value(
-                <_i12.Permission, _i12.PermissionStatus>{}),
-      ) as _i11.Future<Map<_i12.Permission, _i12.PermissionStatus>>);
+            Invocation.method(#requestPermissions, [permissions]),
+            returnValue:
+                _i11.Future<Map<_i12.Permission, _i12.PermissionStatus>>.value(
+                  <_i12.Permission, _i12.PermissionStatus>{},
+                ),
+            returnValueForMissingStub:
+                _i11.Future<Map<_i12.Permission, _i12.PermissionStatus>>.value(
+                  <_i12.Permission, _i12.PermissionStatus>{},
+                ),
+          )
+          as _i11.Future<Map<_i12.Permission, _i12.PermissionStatus>>);
 
   @override
   _i11.Future<bool> shouldShowRequestPermissionRationale(
-          _i12.Permission? permission) =>
+    _i12.Permission? permission,
+  ) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #shouldShowRequestPermissionRationale,
-          [permission],
-        ),
-        returnValue: _i11.Future<bool>.value(false),
-        returnValueForMissingStub: _i11.Future<bool>.value(false),
-      ) as _i11.Future<bool>);
+            Invocation.method(#shouldShowRequestPermissionRationale, [
+              permission,
+            ]),
+            returnValue: _i11.Future<bool>.value(false),
+            returnValueForMissingStub: _i11.Future<bool>.value(false),
+          )
+          as _i11.Future<bool>);
 }
 
 /// A class which mocks [FirebaseMessaging].
@@ -306,123 +225,114 @@ class PermissionHandlerPlatform_ extends _i1.Mock
 /// See the documentation for Mockito's code generation for more information.
 class MockFirebaseMessaging extends _i1.Mock implements _i13.FirebaseMessaging {
   @override
-  _i2.FirebaseApp get app => (super.noSuchMethod(
-        Invocation.getter(#app),
-        returnValue: _FakeFirebaseApp_0(
-          this,
-          Invocation.getter(#app),
-        ),
-        returnValueForMissingStub: _FakeFirebaseApp_0(
-          this,
-          Invocation.getter(#app),
-        ),
-      ) as _i2.FirebaseApp);
+  _i2.FirebaseApp get app =>
+      (super.noSuchMethod(
+            Invocation.getter(#app),
+            returnValue: _FakeFirebaseApp_0(this, Invocation.getter(#app)),
+            returnValueForMissingStub: _FakeFirebaseApp_0(
+              this,
+              Invocation.getter(#app),
+            ),
+          )
+          as _i2.FirebaseApp);
 
   @override
-  bool get isAutoInitEnabled => (super.noSuchMethod(
-        Invocation.getter(#isAutoInitEnabled),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
+  bool get isAutoInitEnabled =>
+      (super.noSuchMethod(
+            Invocation.getter(#isAutoInitEnabled),
+            returnValue: false,
+            returnValueForMissingStub: false,
+          )
+          as bool);
 
   @override
-  _i11.Stream<String> get onTokenRefresh => (super.noSuchMethod(
-        Invocation.getter(#onTokenRefresh),
-        returnValue: _i11.Stream<String>.empty(),
-        returnValueForMissingStub: _i11.Stream<String>.empty(),
-      ) as _i11.Stream<String>);
+  _i11.Stream<String> get onTokenRefresh =>
+      (super.noSuchMethod(
+            Invocation.getter(#onTokenRefresh),
+            returnValue: _i11.Stream<String>.empty(),
+            returnValueForMissingStub: _i11.Stream<String>.empty(),
+          )
+          as _i11.Stream<String>);
 
   @override
-  set app(_i2.FirebaseApp? _app) => super.noSuchMethod(
-        Invocation.setter(
-          #app,
-          _app,
-        ),
-        returnValueForMissingStub: null,
-      );
+  set app(_i2.FirebaseApp? value) => super.noSuchMethod(
+    Invocation.setter(#app, value),
+    returnValueForMissingStub: null,
+  );
 
   @override
-  Map<dynamic, dynamic> get pluginConstants => (super.noSuchMethod(
-        Invocation.getter(#pluginConstants),
-        returnValue: <dynamic, dynamic>{},
-        returnValueForMissingStub: <dynamic, dynamic>{},
-      ) as Map<dynamic, dynamic>);
+  Map<dynamic, dynamic> get pluginConstants =>
+      (super.noSuchMethod(
+            Invocation.getter(#pluginConstants),
+            returnValue: <dynamic, dynamic>{},
+            returnValueForMissingStub: <dynamic, dynamic>{},
+          )
+          as Map<dynamic, dynamic>);
 
   @override
-  _i11.Future<_i3.RemoteMessage?> getInitialMessage() => (super.noSuchMethod(
-        Invocation.method(
-          #getInitialMessage,
-          [],
-        ),
-        returnValue: _i11.Future<_i3.RemoteMessage?>.value(),
-        returnValueForMissingStub: _i11.Future<_i3.RemoteMessage?>.value(),
-      ) as _i11.Future<_i3.RemoteMessage?>);
+  _i11.Future<_i3.RemoteMessage?> getInitialMessage() =>
+      (super.noSuchMethod(
+            Invocation.method(#getInitialMessage, []),
+            returnValue: _i11.Future<_i3.RemoteMessage?>.value(),
+            returnValueForMissingStub: _i11.Future<_i3.RemoteMessage?>.value(),
+          )
+          as _i11.Future<_i3.RemoteMessage?>);
 
   @override
-  _i11.Future<void> deleteToken() => (super.noSuchMethod(
-        Invocation.method(
-          #deleteToken,
-          [],
-        ),
-        returnValue: _i11.Future<void>.value(),
-        returnValueForMissingStub: _i11.Future<void>.value(),
-      ) as _i11.Future<void>);
+  _i11.Future<void> deleteToken() =>
+      (super.noSuchMethod(
+            Invocation.method(#deleteToken, []),
+            returnValue: _i11.Future<void>.value(),
+            returnValueForMissingStub: _i11.Future<void>.value(),
+          )
+          as _i11.Future<void>);
 
   @override
-  _i11.Future<String?> getAPNSToken() => (super.noSuchMethod(
-        Invocation.method(
-          #getAPNSToken,
-          [],
-        ),
-        returnValue: _i11.Future<String?>.value(),
-        returnValueForMissingStub: _i11.Future<String?>.value(),
-      ) as _i11.Future<String?>);
+  _i11.Future<String?> getAPNSToken() =>
+      (super.noSuchMethod(
+            Invocation.method(#getAPNSToken, []),
+            returnValue: _i11.Future<String?>.value(),
+            returnValueForMissingStub: _i11.Future<String?>.value(),
+          )
+          as _i11.Future<String?>);
 
   @override
-  _i11.Future<String?> getToken({String? vapidKey}) => (super.noSuchMethod(
-        Invocation.method(
-          #getToken,
-          [],
-          {#vapidKey: vapidKey},
-        ),
-        returnValue: _i11.Future<String?>.value(),
-        returnValueForMissingStub: _i11.Future<String?>.value(),
-      ) as _i11.Future<String?>);
+  _i11.Future<String?> getToken({String? vapidKey}) =>
+      (super.noSuchMethod(
+            Invocation.method(#getToken, [], {#vapidKey: vapidKey}),
+            returnValue: _i11.Future<String?>.value(),
+            returnValueForMissingStub: _i11.Future<String?>.value(),
+          )
+          as _i11.Future<String?>);
 
   @override
-  _i11.Future<bool> isSupported() => (super.noSuchMethod(
-        Invocation.method(
-          #isSupported,
-          [],
-        ),
-        returnValue: _i11.Future<bool>.value(false),
-        returnValueForMissingStub: _i11.Future<bool>.value(false),
-      ) as _i11.Future<bool>);
+  _i11.Future<bool> isSupported() =>
+      (super.noSuchMethod(
+            Invocation.method(#isSupported, []),
+            returnValue: _i11.Future<bool>.value(false),
+            returnValueForMissingStub: _i11.Future<bool>.value(false),
+          )
+          as _i11.Future<bool>);
 
   @override
   _i11.Future<_i3.NotificationSettings> getNotificationSettings() =>
       (super.noSuchMethod(
-        Invocation.method(
-          #getNotificationSettings,
-          [],
-        ),
-        returnValue: _i11.Future<_i3.NotificationSettings>.value(
-            _FakeNotificationSettings_1(
-          this,
-          Invocation.method(
-            #getNotificationSettings,
-            [],
-          ),
-        )),
-        returnValueForMissingStub: _i11.Future<_i3.NotificationSettings>.value(
-            _FakeNotificationSettings_1(
-          this,
-          Invocation.method(
-            #getNotificationSettings,
-            [],
-          ),
-        )),
-      ) as _i11.Future<_i3.NotificationSettings>);
+            Invocation.method(#getNotificationSettings, []),
+            returnValue: _i11.Future<_i3.NotificationSettings>.value(
+              _FakeNotificationSettings_1(
+                this,
+                Invocation.method(#getNotificationSettings, []),
+              ),
+            ),
+            returnValueForMissingStub:
+                _i11.Future<_i3.NotificationSettings>.value(
+                  _FakeNotificationSettings_1(
+                    this,
+                    Invocation.method(#getNotificationSettings, []),
+                  ),
+                ),
+          )
+          as _i11.Future<_i3.NotificationSettings>);
 
   @override
   _i11.Future<_i3.NotificationSettings> requestPermission({
@@ -436,27 +346,7 @@ class MockFirebaseMessaging extends _i1.Mock implements _i13.FirebaseMessaging {
     bool? providesAppNotificationSettings = false,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #requestPermission,
-          [],
-          {
-            #alert: alert,
-            #announcement: announcement,
-            #badge: badge,
-            #carPlay: carPlay,
-            #criticalAlert: criticalAlert,
-            #provisional: provisional,
-            #sound: sound,
-            #providesAppNotificationSettings: providesAppNotificationSettings,
-          },
-        ),
-        returnValue: _i11.Future<_i3.NotificationSettings>.value(
-            _FakeNotificationSettings_1(
-          this,
-          Invocation.method(
-            #requestPermission,
-            [],
-            {
+            Invocation.method(#requestPermission, [], {
               #alert: alert,
               #announcement: announcement,
               #badge: badge,
@@ -465,49 +355,60 @@ class MockFirebaseMessaging extends _i1.Mock implements _i13.FirebaseMessaging {
               #provisional: provisional,
               #sound: sound,
               #providesAppNotificationSettings: providesAppNotificationSettings,
-            },
-          ),
-        )),
-        returnValueForMissingStub: _i11.Future<_i3.NotificationSettings>.value(
-            _FakeNotificationSettings_1(
-          this,
-          Invocation.method(
-            #requestPermission,
-            [],
-            {
-              #alert: alert,
-              #announcement: announcement,
-              #badge: badge,
-              #carPlay: carPlay,
-              #criticalAlert: criticalAlert,
-              #provisional: provisional,
-              #sound: sound,
-              #providesAppNotificationSettings: providesAppNotificationSettings,
-            },
-          ),
-        )),
-      ) as _i11.Future<_i3.NotificationSettings>);
+            }),
+            returnValue: _i11.Future<_i3.NotificationSettings>.value(
+              _FakeNotificationSettings_1(
+                this,
+                Invocation.method(#requestPermission, [], {
+                  #alert: alert,
+                  #announcement: announcement,
+                  #badge: badge,
+                  #carPlay: carPlay,
+                  #criticalAlert: criticalAlert,
+                  #provisional: provisional,
+                  #sound: sound,
+                  #providesAppNotificationSettings:
+                      providesAppNotificationSettings,
+                }),
+              ),
+            ),
+            returnValueForMissingStub:
+                _i11.Future<_i3.NotificationSettings>.value(
+                  _FakeNotificationSettings_1(
+                    this,
+                    Invocation.method(#requestPermission, [], {
+                      #alert: alert,
+                      #announcement: announcement,
+                      #badge: badge,
+                      #carPlay: carPlay,
+                      #criticalAlert: criticalAlert,
+                      #provisional: provisional,
+                      #sound: sound,
+                      #providesAppNotificationSettings:
+                          providesAppNotificationSettings,
+                    }),
+                  ),
+                ),
+          )
+          as _i11.Future<_i3.NotificationSettings>);
 
   @override
-  _i11.Future<void> setAutoInitEnabled(bool? enabled) => (super.noSuchMethod(
-        Invocation.method(
-          #setAutoInitEnabled,
-          [enabled],
-        ),
-        returnValue: _i11.Future<void>.value(),
-        returnValueForMissingStub: _i11.Future<void>.value(),
-      ) as _i11.Future<void>);
+  _i11.Future<void> setAutoInitEnabled(bool? enabled) =>
+      (super.noSuchMethod(
+            Invocation.method(#setAutoInitEnabled, [enabled]),
+            returnValue: _i11.Future<void>.value(),
+            returnValueForMissingStub: _i11.Future<void>.value(),
+          )
+          as _i11.Future<void>);
 
   @override
   _i11.Future<void> setDeliveryMetricsExportToBigQuery(bool? enabled) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #setDeliveryMetricsExportToBigQuery,
-          [enabled],
-        ),
-        returnValue: _i11.Future<void>.value(),
-        returnValueForMissingStub: _i11.Future<void>.value(),
-      ) as _i11.Future<void>);
+            Invocation.method(#setDeliveryMetricsExportToBigQuery, [enabled]),
+            returnValue: _i11.Future<void>.value(),
+            returnValueForMissingStub: _i11.Future<void>.value(),
+          )
+          as _i11.Future<void>);
 
   @override
   _i11.Future<void> setForegroundNotificationPresentationOptions({
@@ -516,38 +417,33 @@ class MockFirebaseMessaging extends _i1.Mock implements _i13.FirebaseMessaging {
     bool? sound = false,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #setForegroundNotificationPresentationOptions,
-          [],
-          {
-            #alert: alert,
-            #badge: badge,
-            #sound: sound,
-          },
-        ),
-        returnValue: _i11.Future<void>.value(),
-        returnValueForMissingStub: _i11.Future<void>.value(),
-      ) as _i11.Future<void>);
+            Invocation.method(
+              #setForegroundNotificationPresentationOptions,
+              [],
+              {#alert: alert, #badge: badge, #sound: sound},
+            ),
+            returnValue: _i11.Future<void>.value(),
+            returnValueForMissingStub: _i11.Future<void>.value(),
+          )
+          as _i11.Future<void>);
 
   @override
-  _i11.Future<void> subscribeToTopic(String? topic) => (super.noSuchMethod(
-        Invocation.method(
-          #subscribeToTopic,
-          [topic],
-        ),
-        returnValue: _i11.Future<void>.value(),
-        returnValueForMissingStub: _i11.Future<void>.value(),
-      ) as _i11.Future<void>);
+  _i11.Future<void> subscribeToTopic(String? topic) =>
+      (super.noSuchMethod(
+            Invocation.method(#subscribeToTopic, [topic]),
+            returnValue: _i11.Future<void>.value(),
+            returnValueForMissingStub: _i11.Future<void>.value(),
+          )
+          as _i11.Future<void>);
 
   @override
-  _i11.Future<void> unsubscribeFromTopic(String? topic) => (super.noSuchMethod(
-        Invocation.method(
-          #unsubscribeFromTopic,
-          [topic],
-        ),
-        returnValue: _i11.Future<void>.value(),
-        returnValueForMissingStub: _i11.Future<void>.value(),
-      ) as _i11.Future<void>);
+  _i11.Future<void> unsubscribeFromTopic(String? topic) =>
+      (super.noSuchMethod(
+            Invocation.method(#unsubscribeFromTopic, [topic]),
+            returnValue: _i11.Future<void>.value(),
+            returnValueForMissingStub: _i11.Future<void>.value(),
+          )
+          as _i11.Future<void>);
 }
 
 /// A class which mocks [NotificationSettings].
@@ -556,89 +452,112 @@ class MockFirebaseMessaging extends _i1.Mock implements _i13.FirebaseMessaging {
 class MockNotificationSettings extends _i1.Mock
     implements _i3.NotificationSettings {
   @override
-  _i3.AppleNotificationSetting get alert => (super.noSuchMethod(
-        Invocation.getter(#alert),
-        returnValue: _i3.AppleNotificationSetting.disabled,
-        returnValueForMissingStub: _i3.AppleNotificationSetting.disabled,
-      ) as _i3.AppleNotificationSetting);
+  _i3.AppleNotificationSetting get alert =>
+      (super.noSuchMethod(
+            Invocation.getter(#alert),
+            returnValue: _i3.AppleNotificationSetting.disabled,
+            returnValueForMissingStub: _i3.AppleNotificationSetting.disabled,
+          )
+          as _i3.AppleNotificationSetting);
 
   @override
-  _i3.AppleNotificationSetting get announcement => (super.noSuchMethod(
-        Invocation.getter(#announcement),
-        returnValue: _i3.AppleNotificationSetting.disabled,
-        returnValueForMissingStub: _i3.AppleNotificationSetting.disabled,
-      ) as _i3.AppleNotificationSetting);
+  _i3.AppleNotificationSetting get announcement =>
+      (super.noSuchMethod(
+            Invocation.getter(#announcement),
+            returnValue: _i3.AppleNotificationSetting.disabled,
+            returnValueForMissingStub: _i3.AppleNotificationSetting.disabled,
+          )
+          as _i3.AppleNotificationSetting);
 
   @override
-  _i3.AuthorizationStatus get authorizationStatus => (super.noSuchMethod(
-        Invocation.getter(#authorizationStatus),
-        returnValue: _i3.AuthorizationStatus.authorized,
-        returnValueForMissingStub: _i3.AuthorizationStatus.authorized,
-      ) as _i3.AuthorizationStatus);
+  _i3.AuthorizationStatus get authorizationStatus =>
+      (super.noSuchMethod(
+            Invocation.getter(#authorizationStatus),
+            returnValue: _i3.AuthorizationStatus.authorized,
+            returnValueForMissingStub: _i3.AuthorizationStatus.authorized,
+          )
+          as _i3.AuthorizationStatus);
 
   @override
-  _i3.AppleNotificationSetting get timeSensitive => (super.noSuchMethod(
-        Invocation.getter(#timeSensitive),
-        returnValue: _i3.AppleNotificationSetting.disabled,
-        returnValueForMissingStub: _i3.AppleNotificationSetting.disabled,
-      ) as _i3.AppleNotificationSetting);
+  _i3.AppleNotificationSetting get timeSensitive =>
+      (super.noSuchMethod(
+            Invocation.getter(#timeSensitive),
+            returnValue: _i3.AppleNotificationSetting.disabled,
+            returnValueForMissingStub: _i3.AppleNotificationSetting.disabled,
+          )
+          as _i3.AppleNotificationSetting);
 
   @override
-  _i3.AppleNotificationSetting get criticalAlert => (super.noSuchMethod(
-        Invocation.getter(#criticalAlert),
-        returnValue: _i3.AppleNotificationSetting.disabled,
-        returnValueForMissingStub: _i3.AppleNotificationSetting.disabled,
-      ) as _i3.AppleNotificationSetting);
+  _i3.AppleNotificationSetting get criticalAlert =>
+      (super.noSuchMethod(
+            Invocation.getter(#criticalAlert),
+            returnValue: _i3.AppleNotificationSetting.disabled,
+            returnValueForMissingStub: _i3.AppleNotificationSetting.disabled,
+          )
+          as _i3.AppleNotificationSetting);
 
   @override
-  _i3.AppleNotificationSetting get badge => (super.noSuchMethod(
-        Invocation.getter(#badge),
-        returnValue: _i3.AppleNotificationSetting.disabled,
-        returnValueForMissingStub: _i3.AppleNotificationSetting.disabled,
-      ) as _i3.AppleNotificationSetting);
+  _i3.AppleNotificationSetting get badge =>
+      (super.noSuchMethod(
+            Invocation.getter(#badge),
+            returnValue: _i3.AppleNotificationSetting.disabled,
+            returnValueForMissingStub: _i3.AppleNotificationSetting.disabled,
+          )
+          as _i3.AppleNotificationSetting);
 
   @override
-  _i3.AppleNotificationSetting get carPlay => (super.noSuchMethod(
-        Invocation.getter(#carPlay),
-        returnValue: _i3.AppleNotificationSetting.disabled,
-        returnValueForMissingStub: _i3.AppleNotificationSetting.disabled,
-      ) as _i3.AppleNotificationSetting);
+  _i3.AppleNotificationSetting get carPlay =>
+      (super.noSuchMethod(
+            Invocation.getter(#carPlay),
+            returnValue: _i3.AppleNotificationSetting.disabled,
+            returnValueForMissingStub: _i3.AppleNotificationSetting.disabled,
+          )
+          as _i3.AppleNotificationSetting);
 
   @override
-  _i3.AppleNotificationSetting get lockScreen => (super.noSuchMethod(
-        Invocation.getter(#lockScreen),
-        returnValue: _i3.AppleNotificationSetting.disabled,
-        returnValueForMissingStub: _i3.AppleNotificationSetting.disabled,
-      ) as _i3.AppleNotificationSetting);
+  _i3.AppleNotificationSetting get lockScreen =>
+      (super.noSuchMethod(
+            Invocation.getter(#lockScreen),
+            returnValue: _i3.AppleNotificationSetting.disabled,
+            returnValueForMissingStub: _i3.AppleNotificationSetting.disabled,
+          )
+          as _i3.AppleNotificationSetting);
 
   @override
-  _i3.AppleNotificationSetting get notificationCenter => (super.noSuchMethod(
-        Invocation.getter(#notificationCenter),
-        returnValue: _i3.AppleNotificationSetting.disabled,
-        returnValueForMissingStub: _i3.AppleNotificationSetting.disabled,
-      ) as _i3.AppleNotificationSetting);
+  _i3.AppleNotificationSetting get notificationCenter =>
+      (super.noSuchMethod(
+            Invocation.getter(#notificationCenter),
+            returnValue: _i3.AppleNotificationSetting.disabled,
+            returnValueForMissingStub: _i3.AppleNotificationSetting.disabled,
+          )
+          as _i3.AppleNotificationSetting);
 
   @override
-  _i3.AppleShowPreviewSetting get showPreviews => (super.noSuchMethod(
-        Invocation.getter(#showPreviews),
-        returnValue: _i3.AppleShowPreviewSetting.always,
-        returnValueForMissingStub: _i3.AppleShowPreviewSetting.always,
-      ) as _i3.AppleShowPreviewSetting);
+  _i3.AppleShowPreviewSetting get showPreviews =>
+      (super.noSuchMethod(
+            Invocation.getter(#showPreviews),
+            returnValue: _i3.AppleShowPreviewSetting.always,
+            returnValueForMissingStub: _i3.AppleShowPreviewSetting.always,
+          )
+          as _i3.AppleShowPreviewSetting);
 
   @override
-  _i3.AppleNotificationSetting get sound => (super.noSuchMethod(
-        Invocation.getter(#sound),
-        returnValue: _i3.AppleNotificationSetting.disabled,
-        returnValueForMissingStub: _i3.AppleNotificationSetting.disabled,
-      ) as _i3.AppleNotificationSetting);
+  _i3.AppleNotificationSetting get sound =>
+      (super.noSuchMethod(
+            Invocation.getter(#sound),
+            returnValue: _i3.AppleNotificationSetting.disabled,
+            returnValueForMissingStub: _i3.AppleNotificationSetting.disabled,
+          )
+          as _i3.AppleNotificationSetting);
 
   @override
   _i3.AppleNotificationSetting get providesAppNotificationSettings =>
       (super.noSuchMethod(
-        Invocation.getter(#providesAppNotificationSettings),
-        returnValue: _i3.AppleNotificationSetting.disabled,
-        returnValueForMissingStub: _i3.AppleNotificationSetting.disabled,
-      ) as _i3.AppleNotificationSetting);
+            Invocation.getter(#providesAppNotificationSettings),
+            returnValue: _i3.AppleNotificationSetting.disabled,
+            returnValueForMissingStub: _i3.AppleNotificationSetting.disabled,
+          )
+          as _i3.AppleNotificationSetting);
 }
 
 /// A class which mocks [FlutterLocalNotificationsPlugin].
@@ -650,36 +569,37 @@ class MockFlutterLocalNotificationsPlugin extends _i1.Mock
   _i11.Future<bool?> initialize(
     _i15.InitializationSettings? initializationSettings, {
     _i16.DidReceiveNotificationResponseCallback?
-        onDidReceiveNotificationResponse,
+    onDidReceiveNotificationResponse,
     _i16.DidReceiveBackgroundNotificationResponseCallback?
-        onDidReceiveBackgroundNotificationResponse,
+    onDidReceiveBackgroundNotificationResponse,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #initialize,
-          [initializationSettings],
-          {
-            #onDidReceiveNotificationResponse: onDidReceiveNotificationResponse,
-            #onDidReceiveBackgroundNotificationResponse:
-                onDidReceiveBackgroundNotificationResponse,
-          },
-        ),
-        returnValue: _i11.Future<bool?>.value(),
-        returnValueForMissingStub: _i11.Future<bool?>.value(),
-      ) as _i11.Future<bool?>);
+            Invocation.method(
+              #initialize,
+              [initializationSettings],
+              {
+                #onDidReceiveNotificationResponse:
+                    onDidReceiveNotificationResponse,
+                #onDidReceiveBackgroundNotificationResponse:
+                    onDidReceiveBackgroundNotificationResponse,
+              },
+            ),
+            returnValue: _i11.Future<bool?>.value(),
+            returnValueForMissingStub: _i11.Future<bool?>.value(),
+          )
+          as _i11.Future<bool?>);
 
   @override
   _i11.Future<_i16.NotificationAppLaunchDetails?>
-      getNotificationAppLaunchDetails() => (super.noSuchMethod(
-            Invocation.method(
-              #getNotificationAppLaunchDetails,
-              [],
-            ),
+  getNotificationAppLaunchDetails() =>
+      (super.noSuchMethod(
+            Invocation.method(#getNotificationAppLaunchDetails, []),
             returnValue:
                 _i11.Future<_i16.NotificationAppLaunchDetails?>.value(),
             returnValueForMissingStub:
                 _i11.Future<_i16.NotificationAppLaunchDetails?>.value(),
-          ) as _i11.Future<_i16.NotificationAppLaunchDetails?>);
+          )
+          as _i11.Future<_i16.NotificationAppLaunchDetails?>);
 
   @override
   _i11.Future<void> show(
@@ -690,54 +610,42 @@ class MockFlutterLocalNotificationsPlugin extends _i1.Mock
     String? payload,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #show,
-          [
-            id,
-            title,
-            body,
-            notificationDetails,
-          ],
-          {#payload: payload},
-        ),
-        returnValue: _i11.Future<void>.value(),
-        returnValueForMissingStub: _i11.Future<void>.value(),
-      ) as _i11.Future<void>);
+            Invocation.method(
+              #show,
+              [id, title, body, notificationDetails],
+              {#payload: payload},
+            ),
+            returnValue: _i11.Future<void>.value(),
+            returnValueForMissingStub: _i11.Future<void>.value(),
+          )
+          as _i11.Future<void>);
 
   @override
-  _i11.Future<void> cancel(
-    int? id, {
-    String? tag,
-  }) =>
+  _i11.Future<void> cancel(int? id, {String? tag}) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #cancel,
-          [id],
-          {#tag: tag},
-        ),
-        returnValue: _i11.Future<void>.value(),
-        returnValueForMissingStub: _i11.Future<void>.value(),
-      ) as _i11.Future<void>);
+            Invocation.method(#cancel, [id], {#tag: tag}),
+            returnValue: _i11.Future<void>.value(),
+            returnValueForMissingStub: _i11.Future<void>.value(),
+          )
+          as _i11.Future<void>);
 
   @override
-  _i11.Future<void> cancelAll() => (super.noSuchMethod(
-        Invocation.method(
-          #cancelAll,
-          [],
-        ),
-        returnValue: _i11.Future<void>.value(),
-        returnValueForMissingStub: _i11.Future<void>.value(),
-      ) as _i11.Future<void>);
+  _i11.Future<void> cancelAll() =>
+      (super.noSuchMethod(
+            Invocation.method(#cancelAll, []),
+            returnValue: _i11.Future<void>.value(),
+            returnValueForMissingStub: _i11.Future<void>.value(),
+          )
+          as _i11.Future<void>);
 
   @override
-  _i11.Future<void> cancelAllPendingNotifications() => (super.noSuchMethod(
-        Invocation.method(
-          #cancelAllPendingNotifications,
-          [],
-        ),
-        returnValue: _i11.Future<void>.value(),
-        returnValueForMissingStub: _i11.Future<void>.value(),
-      ) as _i11.Future<void>);
+  _i11.Future<void> cancelAllPendingNotifications() =>
+      (super.noSuchMethod(
+            Invocation.method(#cancelAllPendingNotifications, []),
+            returnValue: _i11.Future<void>.value(),
+            returnValueForMissingStub: _i11.Future<void>.value(),
+          )
+          as _i11.Future<void>);
 
   @override
   _i11.Future<void> zonedSchedule(
@@ -751,24 +659,19 @@ class MockFlutterLocalNotificationsPlugin extends _i1.Mock
     _i20.DateTimeComponents? matchDateTimeComponents,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #zonedSchedule,
-          [
-            id,
-            title,
-            body,
-            scheduledDate,
-            notificationDetails,
-          ],
-          {
-            #androidScheduleMode: androidScheduleMode,
-            #payload: payload,
-            #matchDateTimeComponents: matchDateTimeComponents,
-          },
-        ),
-        returnValue: _i11.Future<void>.value(),
-        returnValueForMissingStub: _i11.Future<void>.value(),
-      ) as _i11.Future<void>);
+            Invocation.method(
+              #zonedSchedule,
+              [id, title, body, scheduledDate, notificationDetails],
+              {
+                #androidScheduleMode: androidScheduleMode,
+                #payload: payload,
+                #matchDateTimeComponents: matchDateTimeComponents,
+              },
+            ),
+            returnValue: _i11.Future<void>.value(),
+            returnValueForMissingStub: _i11.Future<void>.value(),
+          )
+          as _i11.Future<void>);
 
   @override
   _i11.Future<void> periodicallyShow(
@@ -781,23 +684,15 @@ class MockFlutterLocalNotificationsPlugin extends _i1.Mock
     String? payload,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #periodicallyShow,
-          [
-            id,
-            title,
-            body,
-            repeatInterval,
-            notificationDetails,
-          ],
-          {
-            #androidScheduleMode: androidScheduleMode,
-            #payload: payload,
-          },
-        ),
-        returnValue: _i11.Future<void>.value(),
-        returnValueForMissingStub: _i11.Future<void>.value(),
-      ) as _i11.Future<void>);
+            Invocation.method(
+              #periodicallyShow,
+              [id, title, body, repeatInterval, notificationDetails],
+              {#androidScheduleMode: androidScheduleMode, #payload: payload},
+            ),
+            returnValue: _i11.Future<void>.value(),
+            returnValueForMissingStub: _i11.Future<void>.value(),
+          )
+          as _i11.Future<void>);
 
   @override
   _i11.Future<void> periodicallyShowWithDuration(
@@ -811,52 +706,45 @@ class MockFlutterLocalNotificationsPlugin extends _i1.Mock
     String? payload,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #periodicallyShowWithDuration,
-          [
-            id,
-            title,
-            body,
-            repeatDurationInterval,
-            notificationDetails,
-          ],
-          {
-            #androidScheduleMode: androidScheduleMode,
-            #payload: payload,
-          },
-        ),
-        returnValue: _i11.Future<void>.value(),
-        returnValueForMissingStub: _i11.Future<void>.value(),
-      ) as _i11.Future<void>);
+            Invocation.method(
+              #periodicallyShowWithDuration,
+              [id, title, body, repeatDurationInterval, notificationDetails],
+              {#androidScheduleMode: androidScheduleMode, #payload: payload},
+            ),
+            returnValue: _i11.Future<void>.value(),
+            returnValueForMissingStub: _i11.Future<void>.value(),
+          )
+          as _i11.Future<void>);
 
   @override
   _i11.Future<List<_i16.PendingNotificationRequest>>
-      pendingNotificationRequests() => (super.noSuchMethod(
-            Invocation.method(
-              #pendingNotificationRequests,
-              [],
-            ),
+  pendingNotificationRequests() =>
+      (super.noSuchMethod(
+            Invocation.method(#pendingNotificationRequests, []),
             returnValue:
                 _i11.Future<List<_i16.PendingNotificationRequest>>.value(
-                    <_i16.PendingNotificationRequest>[]),
+                  <_i16.PendingNotificationRequest>[],
+                ),
             returnValueForMissingStub:
                 _i11.Future<List<_i16.PendingNotificationRequest>>.value(
-                    <_i16.PendingNotificationRequest>[]),
-          ) as _i11.Future<List<_i16.PendingNotificationRequest>>);
+                  <_i16.PendingNotificationRequest>[],
+                ),
+          )
+          as _i11.Future<List<_i16.PendingNotificationRequest>>);
 
   @override
   _i11.Future<List<_i16.ActiveNotification>> getActiveNotifications() =>
       (super.noSuchMethod(
-        Invocation.method(
-          #getActiveNotifications,
-          [],
-        ),
-        returnValue: _i11.Future<List<_i16.ActiveNotification>>.value(
-            <_i16.ActiveNotification>[]),
-        returnValueForMissingStub:
-            _i11.Future<List<_i16.ActiveNotification>>.value(
-                <_i16.ActiveNotification>[]),
-      ) as _i11.Future<List<_i16.ActiveNotification>>);
+            Invocation.method(#getActiveNotifications, []),
+            returnValue: _i11.Future<List<_i16.ActiveNotification>>.value(
+              <_i16.ActiveNotification>[],
+            ),
+            returnValueForMissingStub:
+                _i11.Future<List<_i16.ActiveNotification>>.value(
+                  <_i16.ActiveNotification>[],
+                ),
+          )
+          as _i11.Future<List<_i16.ActiveNotification>>);
 }
 
 /// A class which mocks [AuthBloc].
@@ -864,194 +752,160 @@ class MockFlutterLocalNotificationsPlugin extends _i1.Mock
 /// See the documentation for Mockito's code generation for more information.
 class MockAuthBloc extends _i1.Mock implements _i4.AuthBloc {
   @override
-  bool get isSignedIn => (super.noSuchMethod(
-        Invocation.getter(#isSignedIn),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
+  bool get isSignedIn =>
+      (super.noSuchMethod(
+            Invocation.getter(#isSignedIn),
+            returnValue: false,
+            returnValueForMissingStub: false,
+          )
+          as bool);
 
   @override
-  _i11.Stream<_i4.AuthUser?> get userStream => (super.noSuchMethod(
-        Invocation.getter(#userStream),
-        returnValue: _i11.Stream<_i4.AuthUser?>.empty(),
-        returnValueForMissingStub: _i11.Stream<_i4.AuthUser?>.empty(),
-      ) as _i11.Stream<_i4.AuthUser?>);
+  _i11.Stream<_i4.AuthUser?> get userStream =>
+      (super.noSuchMethod(
+            Invocation.getter(#userStream),
+            returnValue: _i11.Stream<_i4.AuthUser?>.empty(),
+            returnValueForMissingStub: _i11.Stream<_i4.AuthUser?>.empty(),
+          )
+          as _i11.Stream<_i4.AuthUser?>);
 
   @override
-  _i11.Stream<_i4.User?> get userDataStream => (super.noSuchMethod(
-        Invocation.getter(#userDataStream),
-        returnValue: _i11.Stream<_i4.User?>.empty(),
-        returnValueForMissingStub: _i11.Stream<_i4.User?>.empty(),
-      ) as _i11.Stream<_i4.User?>);
+  _i11.Stream<_i4.User?> get userDataStream =>
+      (super.noSuchMethod(
+            Invocation.getter(#userDataStream),
+            returnValue: _i11.Stream<_i4.User?>.empty(),
+            returnValueForMissingStub: _i11.Stream<_i4.User?>.empty(),
+          )
+          as _i11.Stream<_i4.User?>);
 
   @override
-  _i11.Stream<String?> get idTokenStream => (super.noSuchMethod(
-        Invocation.getter(#idTokenStream),
-        returnValue: _i11.Stream<String?>.empty(),
-        returnValueForMissingStub: _i11.Stream<String?>.empty(),
-      ) as _i11.Stream<String?>);
+  _i11.Stream<String?> get idTokenStream =>
+      (super.noSuchMethod(
+            Invocation.getter(#idTokenStream),
+            returnValue: _i11.Stream<String?>.empty(),
+            returnValueForMissingStub: _i11.Stream<String?>.empty(),
+          )
+          as _i11.Stream<String?>);
 
   @override
-  _i11.Stream<bool> get isSignedInStream => (super.noSuchMethod(
-        Invocation.getter(#isSignedInStream),
-        returnValue: _i11.Stream<bool>.empty(),
-        returnValueForMissingStub: _i11.Stream<bool>.empty(),
-      ) as _i11.Stream<bool>);
+  _i11.Stream<bool> get isSignedInStream =>
+      (super.noSuchMethod(
+            Invocation.getter(#isSignedInStream),
+            returnValue: _i11.Stream<bool>.empty(),
+            returnValueForMissingStub: _i11.Stream<bool>.empty(),
+          )
+          as _i11.Stream<bool>);
 
   @override
-  _i11.Future<void> get loaded => (super.noSuchMethod(
-        Invocation.getter(#loaded),
-        returnValue: _i11.Future<void>.value(),
-        returnValueForMissingStub: _i11.Future<void>.value(),
-      ) as _i11.Future<void>);
+  _i11.Future<void> get loaded =>
+      (super.noSuchMethod(
+            Invocation.getter(#loaded),
+            returnValue: _i11.Future<void>.value(),
+            returnValueForMissingStub: _i11.Future<void>.value(),
+          )
+          as _i11.Future<void>);
 
   @override
-  _i4.AuthState get state => (super.noSuchMethod(
-        Invocation.getter(#state),
-        returnValue: _i21.dummyValue<_i4.AuthState>(
-          this,
-          Invocation.getter(#state),
-        ),
-        returnValueForMissingStub: _i21.dummyValue<_i4.AuthState>(
-          this,
-          Invocation.getter(#state),
-        ),
-      ) as _i4.AuthState);
+  _i4.AuthState get state =>
+      (super.noSuchMethod(
+            Invocation.getter(#state),
+            returnValue: _i21.dummyValue<_i4.AuthState>(
+              this,
+              Invocation.getter(#state),
+            ),
+            returnValueForMissingStub: _i21.dummyValue<_i4.AuthState>(
+              this,
+              Invocation.getter(#state),
+            ),
+          )
+          as _i4.AuthState);
 
   @override
-  _i11.Stream<_i4.AuthState> get stream => (super.noSuchMethod(
-        Invocation.getter(#stream),
-        returnValue: _i11.Stream<_i4.AuthState>.empty(),
-        returnValueForMissingStub: _i11.Stream<_i4.AuthState>.empty(),
-      ) as _i11.Stream<_i4.AuthState>);
+  _i11.Stream<_i4.AuthState> get stream =>
+      (super.noSuchMethod(
+            Invocation.getter(#stream),
+            returnValue: _i11.Stream<_i4.AuthState>.empty(),
+            returnValueForMissingStub: _i11.Stream<_i4.AuthState>.empty(),
+          )
+          as _i11.Stream<_i4.AuthState>);
 
   @override
-  bool get isClosed => (super.noSuchMethod(
-        Invocation.getter(#isClosed),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
+  bool get isClosed =>
+      (super.noSuchMethod(
+            Invocation.getter(#isClosed),
+            returnValue: false,
+            returnValueForMissingStub: false,
+          )
+          as bool);
 
   @override
-  _i11.Future<void> close() => (super.noSuchMethod(
-        Invocation.method(
-          #close,
-          [],
-        ),
-        returnValue: _i11.Future<void>.value(),
-        returnValueForMissingStub: _i11.Future<void>.value(),
-      ) as _i11.Future<void>);
+  _i11.Future<void> close() =>
+      (super.noSuchMethod(
+            Invocation.method(#close, []),
+            returnValue: _i11.Future<void>.value(),
+            returnValueForMissingStub: _i11.Future<void>.value(),
+          )
+          as _i11.Future<void>);
 
   @override
   void add(_i4.AuthEvent? event) => super.noSuchMethod(
-        Invocation.method(
-          #add,
-          [event],
-        ),
-        returnValueForMissingStub: null,
-      );
+    Invocation.method(#add, [event]),
+    returnValueForMissingStub: null,
+  );
 
   @override
   void onEvent(_i4.AuthEvent? event) => super.noSuchMethod(
-        Invocation.method(
-          #onEvent,
-          [event],
-        ),
-        returnValueForMissingStub: null,
-      );
+    Invocation.method(#onEvent, [event]),
+    returnValueForMissingStub: null,
+  );
 
   @override
   void emit(_i4.AuthState? state) => super.noSuchMethod(
-        Invocation.method(
-          #emit,
-          [state],
-        ),
-        returnValueForMissingStub: null,
-      );
+    Invocation.method(#emit, [state]),
+    returnValueForMissingStub: null,
+  );
 
   @override
   void on<E extends _i4.AuthEvent>(
     _i22.EventHandler<E, _i4.AuthState>? handler, {
     _i22.EventTransformer<E>? transformer,
-  }) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #on,
-          [handler],
-          {#transformer: transformer},
-        ),
-        returnValueForMissingStub: null,
-      );
+  }) => super.noSuchMethod(
+    Invocation.method(#on, [handler], {#transformer: transformer}),
+    returnValueForMissingStub: null,
+  );
 
   @override
   void onTransition(
-          _i22.Transition<_i4.AuthEvent, _i4.AuthState>? transition) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #onTransition,
-          [transition],
-        ),
-        returnValueForMissingStub: null,
-      );
+    _i22.Transition<_i4.AuthEvent, _i4.AuthState>? transition,
+  ) => super.noSuchMethod(
+    Invocation.method(#onTransition, [transition]),
+    returnValueForMissingStub: null,
+  );
 
   @override
-  void onDone(
-    _i4.AuthEvent? event, [
-    Object? error,
-    StackTrace? stackTrace,
-  ]) =>
+  void onDone(_i4.AuthEvent? event, [Object? error, StackTrace? stackTrace]) =>
       super.noSuchMethod(
-        Invocation.method(
-          #onDone,
-          [
-            event,
-            error,
-            stackTrace,
-          ],
-        ),
+        Invocation.method(#onDone, [event, error, stackTrace]),
         returnValueForMissingStub: null,
       );
 
   @override
   void onChange(_i22.Change<_i4.AuthState>? change) => super.noSuchMethod(
-        Invocation.method(
-          #onChange,
-          [change],
-        ),
-        returnValueForMissingStub: null,
-      );
+    Invocation.method(#onChange, [change]),
+    returnValueForMissingStub: null,
+  );
 
   @override
-  void addError(
-    Object? error, [
-    StackTrace? stackTrace,
-  ]) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #addError,
-          [
-            error,
-            stackTrace,
-          ],
-        ),
-        returnValueForMissingStub: null,
-      );
+  void addError(Object? error, [StackTrace? stackTrace]) => super.noSuchMethod(
+    Invocation.method(#addError, [error, stackTrace]),
+    returnValueForMissingStub: null,
+  );
 
   @override
-  void onError(
-    Object? error,
-    StackTrace? stackTrace,
-  ) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #onError,
-          [
-            error,
-            stackTrace,
-          ],
-        ),
-        returnValueForMissingStub: null,
-      );
+  void onError(Object? error, StackTrace? stackTrace) => super.noSuchMethod(
+    Invocation.method(#onError, [error, stackTrace]),
+    returnValueForMissingStub: null,
+  );
 }
 
 /// A class which mocks [UserSettingsService].
@@ -1060,129 +914,100 @@ class MockAuthBloc extends _i1.Mock implements _i4.AuthBloc {
 class MockUserSettingsService extends _i1.Mock
     implements _i4.UserSettingsService {
   @override
-  _i4.SyncKVStore<dynamic> get box => (super.noSuchMethod(
-        Invocation.getter(#box),
-        returnValue: _FakeSyncKVStore_2<dynamic>(
-          this,
-          Invocation.getter(#box),
-        ),
-        returnValueForMissingStub: _FakeSyncKVStore_2<dynamic>(
-          this,
-          Invocation.getter(#box),
-        ),
-      ) as _i4.SyncKVStore<dynamic>);
+  _i4.SyncKVStore<dynamic> get box =>
+      (super.noSuchMethod(
+            Invocation.getter(#box),
+            returnValue: _FakeSyncKVStore_2<dynamic>(
+              this,
+              Invocation.getter(#box),
+            ),
+            returnValueForMissingStub: _FakeSyncKVStore_2<dynamic>(
+              this,
+              Invocation.getter(#box),
+            ),
+          )
+          as _i4.SyncKVStore<dynamic>);
 
   @override
-  bool get greatFeastTheme => (super.noSuchMethod(
-        Invocation.getter(#greatFeastTheme),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
+  bool get greatFeastTheme =>
+      (super.noSuchMethod(
+            Invocation.getter(#greatFeastTheme),
+            returnValue: false,
+            returnValueForMissingStub: false,
+          )
+          as bool);
 
   @override
-  _i11.Future<void> setDarkTheme(bool? value) => (super.noSuchMethod(
-        Invocation.method(
-          #setDarkTheme,
-          [value],
-        ),
-        returnValue: _i11.Future<void>.value(),
-        returnValueForMissingStub: _i11.Future<void>.value(),
-      ) as _i11.Future<void>);
+  _i11.Future<void> setDarkTheme(bool? value) =>
+      (super.noSuchMethod(
+            Invocation.method(#setDarkTheme, [value]),
+            returnValue: _i11.Future<void>.value(),
+            returnValueForMissingStub: _i11.Future<void>.value(),
+          )
+          as _i11.Future<void>);
 
   @override
-  _i11.Future<void> setRegisteredFCMToken(String? value) => (super.noSuchMethod(
-        Invocation.method(
-          #setRegisteredFCMToken,
-          [value],
-        ),
-        returnValue: _i11.Future<void>.value(),
-        returnValueForMissingStub: _i11.Future<void>.value(),
-      ) as _i11.Future<void>);
+  _i11.Future<void> setRegisteredFCMToken(String? value) =>
+      (super.noSuchMethod(
+            Invocation.method(#setRegisteredFCMToken, [value]),
+            returnValue: _i11.Future<void>.value(),
+            returnValueForMissingStub: _i11.Future<void>.value(),
+          )
+          as _i11.Future<void>);
 
   @override
-  _i11.Future<void> setGreatFeastTheme(bool? value) => (super.noSuchMethod(
-        Invocation.method(
-          #setGreatFeastTheme,
-          [value],
-        ),
-        returnValue: _i11.Future<void>.value(),
-        returnValueForMissingStub: _i11.Future<void>.value(),
-      ) as _i11.Future<void>);
+  _i11.Future<void> setGreatFeastTheme(bool? value) =>
+      (super.noSuchMethod(
+            Invocation.method(#setGreatFeastTheme, [value]),
+            returnValue: _i11.Future<void>.value(),
+            returnValueForMissingStub: _i11.Future<void>.value(),
+          )
+          as _i11.Future<void>);
 
   @override
-  _i11.Future<void> setupDefaults() => (super.noSuchMethod(
-        Invocation.method(
-          #setupDefaults,
-          [],
-        ),
-        returnValue: _i11.Future<void>.value(),
-        returnValueForMissingStub: _i11.Future<void>.value(),
-      ) as _i11.Future<void>);
+  _i11.Future<void> setupDefaults() =>
+      (super.noSuchMethod(
+            Invocation.method(#setupDefaults, []),
+            returnValue: _i11.Future<void>.value(),
+            returnValueForMissingStub: _i11.Future<void>.value(),
+          )
+          as _i11.Future<void>);
 
   @override
   void onTransition(
     _i22.Bloc<dynamic, dynamic>? bloc,
     _i22.Transition<dynamic, dynamic>? transition,
-  ) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #onTransition,
-          [
-            bloc,
-            transition,
-          ],
-        ),
-        returnValueForMissingStub: null,
-      );
+  ) => super.noSuchMethod(
+    Invocation.method(#onTransition, [bloc, transition]),
+    returnValueForMissingStub: null,
+  );
 
   @override
-  Map<String, dynamic> toJson() => (super.noSuchMethod(
-        Invocation.method(
-          #toJson,
-          [],
-        ),
-        returnValue: <String, dynamic>{},
-        returnValueForMissingStub: <String, dynamic>{},
-      ) as Map<String, dynamic>);
+  Map<String, dynamic> toJson() =>
+      (super.noSuchMethod(
+            Invocation.method(#toJson, []),
+            returnValue: <String, dynamic>{},
+            returnValueForMissingStub: <String, dynamic>{},
+          )
+          as Map<String, dynamic>);
 
   @override
   void onCreate(_i22.BlocBase<dynamic>? bloc) => super.noSuchMethod(
-        Invocation.method(
-          #onCreate,
-          [bloc],
-        ),
+    Invocation.method(#onCreate, [bloc]),
+    returnValueForMissingStub: null,
+  );
+
+  @override
+  void onEvent(_i22.Bloc<dynamic, dynamic>? bloc, Object? event) =>
+      super.noSuchMethod(
+        Invocation.method(#onEvent, [bloc, event]),
         returnValueForMissingStub: null,
       );
 
   @override
-  void onEvent(
-    _i22.Bloc<dynamic, dynamic>? bloc,
-    Object? event,
-  ) =>
+  void onChange(_i22.BlocBase<dynamic>? bloc, _i22.Change<dynamic>? change) =>
       super.noSuchMethod(
-        Invocation.method(
-          #onEvent,
-          [
-            bloc,
-            event,
-          ],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void onChange(
-    _i22.BlocBase<dynamic>? bloc,
-    _i22.Change<dynamic>? change,
-  ) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #onChange,
-          [
-            bloc,
-            change,
-          ],
-        ),
+        Invocation.method(#onChange, [bloc, change]),
         returnValueForMissingStub: null,
       );
 
@@ -1191,18 +1016,10 @@ class MockUserSettingsService extends _i1.Mock
     _i22.BlocBase<dynamic>? bloc,
     Object? error,
     StackTrace? stackTrace,
-  ) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #onError,
-          [
-            bloc,
-            error,
-            stackTrace,
-          ],
-        ),
-        returnValueForMissingStub: null,
-      );
+  ) => super.noSuchMethod(
+    Invocation.method(#onError, [bloc, error, stackTrace]),
+    returnValueForMissingStub: null,
+  );
 
   @override
   void onDone(
@@ -1210,28 +1027,16 @@ class MockUserSettingsService extends _i1.Mock
     Object? event, [
     Object? error,
     StackTrace? stackTrace,
-  ]) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #onDone,
-          [
-            bloc,
-            event,
-            error,
-            stackTrace,
-          ],
-        ),
-        returnValueForMissingStub: null,
-      );
+  ]) => super.noSuchMethod(
+    Invocation.method(#onDone, [bloc, event, error, stackTrace]),
+    returnValueForMissingStub: null,
+  );
 
   @override
   void onClose(_i22.BlocBase<dynamic>? bloc) => super.noSuchMethod(
-        Invocation.method(
-          #onClose,
-          [bloc],
-        ),
-        returnValueForMissingStub: null,
-      );
+    Invocation.method(#onClose, [bloc]),
+    returnValueForMissingStub: null,
+  );
 }
 
 /// A class which mocks [FunctionsService].
@@ -1244,55 +1049,51 @@ class MockFunctionsService extends _i1.Mock implements _i4.FunctionsService {
     _i5.HttpsCallableOptions? options,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #httpsCallable,
-          [functionName],
-          {#options: options},
-        ),
-        returnValue: _FakeHttpsCallable_3(
-          this,
-          Invocation.method(
-            #httpsCallable,
-            [functionName],
-            {#options: options},
-          ),
-        ),
-        returnValueForMissingStub: _FakeHttpsCallable_3(
-          this,
-          Invocation.method(
-            #httpsCallable,
-            [functionName],
-            {#options: options},
-          ),
-        ),
-      ) as _i5.HttpsCallable);
+            Invocation.method(
+              #httpsCallable,
+              [functionName],
+              {#options: options},
+            ),
+            returnValue: _FakeHttpsCallable_3(
+              this,
+              Invocation.method(
+                #httpsCallable,
+                [functionName],
+                {#options: options},
+              ),
+            ),
+            returnValueForMissingStub: _FakeHttpsCallable_3(
+              this,
+              Invocation.method(
+                #httpsCallable,
+                [functionName],
+                {#options: options},
+              ),
+            ),
+          )
+          as _i5.HttpsCallable);
 
   @override
   _i11.Future<_i5.HttpsCallableResult<dynamic>> registerFCMToken(
-          String? token) =>
+    String? token,
+  ) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #registerFCMToken,
-          [token],
-        ),
-        returnValue: _i11.Future<_i5.HttpsCallableResult<dynamic>>.value(
-            _FakeHttpsCallableResult_4<dynamic>(
-          this,
-          Invocation.method(
-            #registerFCMToken,
-            [token],
-          ),
-        )),
-        returnValueForMissingStub:
-            _i11.Future<_i5.HttpsCallableResult<dynamic>>.value(
-                _FakeHttpsCallableResult_4<dynamic>(
-          this,
-          Invocation.method(
-            #registerFCMToken,
-            [token],
-          ),
-        )),
-      ) as _i11.Future<_i5.HttpsCallableResult<dynamic>>);
+            Invocation.method(#registerFCMToken, [token]),
+            returnValue: _i11.Future<_i5.HttpsCallableResult<dynamic>>.value(
+              _FakeHttpsCallableResult_4<dynamic>(
+                this,
+                Invocation.method(#registerFCMToken, [token]),
+              ),
+            ),
+            returnValueForMissingStub:
+                _i11.Future<_i5.HttpsCallableResult<dynamic>>.value(
+                  _FakeHttpsCallableResult_4<dynamic>(
+                    this,
+                    Invocation.method(#registerFCMToken, [token]),
+                  ),
+                ),
+          )
+          as _i11.Future<_i5.HttpsCallableResult<dynamic>>);
 
   @override
   _i11.Future<String> getDownloadUrl(
@@ -1301,38 +1102,33 @@ class MockFunctionsService extends _i1.Mock implements _i4.FunctionsService {
     String? contentType,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #getDownloadUrl,
-          [
-            table,
-            id,
-          ],
-          {#contentType: contentType},
-        ),
-        returnValue: _i11.Future<String>.value(_i21.dummyValue<String>(
-          this,
-          Invocation.method(
-            #getDownloadUrl,
-            [
-              table,
-              id,
-            ],
-            {#contentType: contentType},
-          ),
-        )),
-        returnValueForMissingStub:
-            _i11.Future<String>.value(_i21.dummyValue<String>(
-          this,
-          Invocation.method(
-            #getDownloadUrl,
-            [
-              table,
-              id,
-            ],
-            {#contentType: contentType},
-          ),
-        )),
-      ) as _i11.Future<String>);
+            Invocation.method(
+              #getDownloadUrl,
+              [table, id],
+              {#contentType: contentType},
+            ),
+            returnValue: _i11.Future<String>.value(
+              _i21.dummyValue<String>(
+                this,
+                Invocation.method(
+                  #getDownloadUrl,
+                  [table, id],
+                  {#contentType: contentType},
+                ),
+              ),
+            ),
+            returnValueForMissingStub: _i11.Future<String>.value(
+              _i21.dummyValue<String>(
+                this,
+                Invocation.method(
+                  #getDownloadUrl,
+                  [table, id],
+                  {#contentType: contentType},
+                ),
+              ),
+            ),
+          )
+          as _i11.Future<String>);
 
   @override
   _i11.Future<String> getUploadUrl(
@@ -1341,66 +1137,51 @@ class MockFunctionsService extends _i1.Mock implements _i4.FunctionsService {
     String? contentType,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #getUploadUrl,
-          [
-            table,
-            id,
-          ],
-          {#contentType: contentType},
-        ),
-        returnValue: _i11.Future<String>.value(_i21.dummyValue<String>(
-          this,
-          Invocation.method(
-            #getUploadUrl,
-            [
-              table,
-              id,
-            ],
-            {#contentType: contentType},
-          ),
-        )),
-        returnValueForMissingStub:
-            _i11.Future<String>.value(_i21.dummyValue<String>(
-          this,
-          Invocation.method(
-            #getUploadUrl,
-            [
-              table,
-              id,
-            ],
-            {#contentType: contentType},
-          ),
-        )),
-      ) as _i11.Future<String>);
+            Invocation.method(
+              #getUploadUrl,
+              [table, id],
+              {#contentType: contentType},
+            ),
+            returnValue: _i11.Future<String>.value(
+              _i21.dummyValue<String>(
+                this,
+                Invocation.method(
+                  #getUploadUrl,
+                  [table, id],
+                  {#contentType: contentType},
+                ),
+              ),
+            ),
+            returnValueForMissingStub: _i11.Future<String>.value(
+              _i21.dummyValue<String>(
+                this,
+                Invocation.method(
+                  #getUploadUrl,
+                  [table, id],
+                  {#contentType: contentType},
+                ),
+              ),
+            ),
+          )
+          as _i11.Future<String>);
 
   @override
-  _i11.Future<void> deletePhoto(
-    String? table,
-    String? id,
-  ) =>
+  _i11.Future<void> deletePhoto(String? table, String? id) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #deletePhoto,
-          [
-            table,
-            id,
-          ],
-        ),
-        returnValue: _i11.Future<void>.value(),
-        returnValueForMissingStub: _i11.Future<void>.value(),
-      ) as _i11.Future<void>);
+            Invocation.method(#deletePhoto, [table, id]),
+            returnValue: _i11.Future<void>.value(),
+            returnValueForMissingStub: _i11.Future<void>.value(),
+          )
+          as _i11.Future<void>);
 
   @override
   _i11.Future<_i4.Address?> getAddressFromLocation(_i4.Point? location) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #getAddressFromLocation,
-          [location],
-        ),
-        returnValue: _i11.Future<_i4.Address?>.value(),
-        returnValueForMissingStub: _i11.Future<_i4.Address?>.value(),
-      ) as _i11.Future<_i4.Address?>);
+            Invocation.method(#getAddressFromLocation, [location]),
+            returnValue: _i11.Future<_i4.Address?>.value(),
+            returnValueForMissingStub: _i11.Future<_i4.Address?>.value(),
+          )
+          as _i11.Future<_i4.Address?>);
 
   @override
   _i11.Future<_i6.Response<dynamic>> uploadPhoto({
@@ -1408,109 +1189,88 @@ class MockFunctionsService extends _i1.Mock implements _i4.FunctionsService {
     required _i11.Stream<List<int>>? fileStream,
     String? contentType,
     int? fileLength,
-    void Function(
-      int,
-      int,
-    )? onSendProgress,
+    void Function(int, int)? onSendProgress,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #uploadPhoto,
-          [],
-          {
-            #url: url,
-            #fileStream: fileStream,
-            #contentType: contentType,
-            #fileLength: fileLength,
-            #onSendProgress: onSendProgress,
-          },
-        ),
-        returnValue:
-            _i11.Future<_i6.Response<dynamic>>.value(_FakeResponse_5<dynamic>(
-          this,
-          Invocation.method(
-            #uploadPhoto,
-            [],
-            {
+            Invocation.method(#uploadPhoto, [], {
               #url: url,
               #fileStream: fileStream,
               #contentType: contentType,
               #fileLength: fileLength,
               #onSendProgress: onSendProgress,
-            },
-          ),
-        )),
-        returnValueForMissingStub:
-            _i11.Future<_i6.Response<dynamic>>.value(_FakeResponse_5<dynamic>(
-          this,
-          Invocation.method(
-            #uploadPhoto,
-            [],
-            {
-              #url: url,
-              #fileStream: fileStream,
-              #contentType: contentType,
-              #fileLength: fileLength,
-              #onSendProgress: onSendProgress,
-            },
-          ),
-        )),
-      ) as _i11.Future<_i6.Response<dynamic>>);
+            }),
+            returnValue: _i11.Future<_i6.Response<dynamic>>.value(
+              _FakeResponse_5<dynamic>(
+                this,
+                Invocation.method(#uploadPhoto, [], {
+                  #url: url,
+                  #fileStream: fileStream,
+                  #contentType: contentType,
+                  #fileLength: fileLength,
+                  #onSendProgress: onSendProgress,
+                }),
+              ),
+            ),
+            returnValueForMissingStub: _i11.Future<_i6.Response<dynamic>>.value(
+              _FakeResponse_5<dynamic>(
+                this,
+                Invocation.method(#uploadPhoto, [], {
+                  #url: url,
+                  #fileStream: fileStream,
+                  #contentType: contentType,
+                  #fileLength: fileLength,
+                  #onSendProgress: onSendProgress,
+                }),
+              ),
+            ),
+          )
+          as _i11.Future<_i6.Response<dynamic>>);
 
   @override
-  _i11.Future<bool> checkHasuraHealth() => (super.noSuchMethod(
-        Invocation.method(
-          #checkHasuraHealth,
-          [],
-        ),
-        returnValue: _i11.Future<bool>.value(false),
-        returnValueForMissingStub: _i11.Future<bool>.value(false),
-      ) as _i11.Future<bool>);
+  _i11.Future<bool> checkHasuraHealth() =>
+      (super.noSuchMethod(
+            Invocation.method(#checkHasuraHealth, []),
+            returnValue: _i11.Future<bool>.value(false),
+            returnValueForMissingStub: _i11.Future<bool>.value(false),
+          )
+          as _i11.Future<bool>);
 
   @override
   _i11.Future<void> registerUserWithCode(String? registerCode) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #registerUserWithCode,
-          [registerCode],
-        ),
-        returnValue: _i11.Future<void>.value(),
-        returnValueForMissingStub: _i11.Future<void>.value(),
-      ) as _i11.Future<void>);
+            Invocation.method(#registerUserWithCode, [registerCode]),
+            returnValue: _i11.Future<void>.value(),
+            returnValueForMissingStub: _i11.Future<void>.value(),
+          )
+          as _i11.Future<void>);
 
   @override
   _i11.Future<String> getAppDownloadLink(String? platform) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #getAppDownloadLink,
-          [platform],
-        ),
-        returnValue: _i11.Future<String>.value(_i21.dummyValue<String>(
-          this,
-          Invocation.method(
-            #getAppDownloadLink,
-            [platform],
-          ),
-        )),
-        returnValueForMissingStub:
-            _i11.Future<String>.value(_i21.dummyValue<String>(
-          this,
-          Invocation.method(
-            #getAppDownloadLink,
-            [platform],
-          ),
-        )),
-      ) as _i11.Future<String>);
+            Invocation.method(#getAppDownloadLink, [platform]),
+            returnValue: _i11.Future<String>.value(
+              _i21.dummyValue<String>(
+                this,
+                Invocation.method(#getAppDownloadLink, [platform]),
+              ),
+            ),
+            returnValueForMissingStub: _i11.Future<String>.value(
+              _i21.dummyValue<String>(
+                this,
+                Invocation.method(#getAppDownloadLink, [platform]),
+              ),
+            ),
+          )
+          as _i11.Future<String>);
 
   @override
-  _i11.Future<void> deleteMyAccount() => (super.noSuchMethod(
-        Invocation.method(
-          #deleteMyAccount,
-          [],
-        ),
-        returnValue: _i11.Future<void>.value(),
-        returnValueForMissingStub: _i11.Future<void>.value(),
-      ) as _i11.Future<void>);
+  _i11.Future<void> deleteMyAccount() =>
+      (super.noSuchMethod(
+            Invocation.method(#deleteMyAccount, []),
+            returnValue: _i11.Future<void>.value(),
+            returnValueForMissingStub: _i11.Future<void>.value(),
+          )
+          as _i11.Future<void>);
 }
 
 /// A class which mocks [InitializationService].
@@ -1519,21 +1279,22 @@ class MockFunctionsService extends _i1.Mock implements _i4.FunctionsService {
 class MockInitializationService extends _i1.Mock
     implements _i4.InitializationService {
   @override
-  Set<_i4.Initializer> get steps => (super.noSuchMethod(
-        Invocation.getter(#steps),
-        returnValue: <_i4.Initializer>{},
-        returnValueForMissingStub: <_i4.Initializer>{},
-      ) as Set<_i4.Initializer>);
+  Set<_i4.Initializer> get steps =>
+      (super.noSuchMethod(
+            Invocation.getter(#steps),
+            returnValue: <_i4.Initializer>{},
+            returnValueForMissingStub: <_i4.Initializer>{},
+          )
+          as Set<_i4.Initializer>);
 
   @override
-  _i11.Future<void> initialize() => (super.noSuchMethod(
-        Invocation.method(
-          #initialize,
-          [],
-        ),
-        returnValue: _i11.Future<void>.value(),
-        returnValueForMissingStub: _i11.Future<void>.value(),
-      ) as _i11.Future<void>);
+  _i11.Future<void> initialize() =>
+      (super.noSuchMethod(
+            Invocation.method(#initialize, []),
+            returnValue: _i11.Future<void>.value(),
+            returnValueForMissingStub: _i11.Future<void>.value(),
+          )
+          as _i11.Future<void>);
 }
 
 /// A class which mocks [NotificationsStorage].
@@ -1544,24 +1305,20 @@ class MockNotificationsStorage extends _i1.Mock
   @override
   _i11.Future<void> writeNotification(_i4.Notification? notification) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #writeNotification,
-          [notification],
-        ),
-        returnValue: _i11.Future<void>.value(),
-        returnValueForMissingStub: _i11.Future<void>.value(),
-      ) as _i11.Future<void>);
+            Invocation.method(#writeNotification, [notification]),
+            returnValue: _i11.Future<void>.value(),
+            returnValueForMissingStub: _i11.Future<void>.value(),
+          )
+          as _i11.Future<void>);
 
   @override
   _i11.Future<_i4.Notification?> readNotification(String? notificationId) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #readNotification,
-          [notificationId],
-        ),
-        returnValue: _i11.Future<_i4.Notification?>.value(),
-        returnValueForMissingStub: _i11.Future<_i4.Notification?>.value(),
-      ) as _i11.Future<_i4.Notification?>);
+            Invocation.method(#readNotification, [notificationId]),
+            returnValue: _i11.Future<_i4.Notification?>.value(),
+            returnValueForMissingStub: _i11.Future<_i4.Notification?>.value(),
+          )
+          as _i11.Future<_i4.Notification?>);
 }
 
 /// A class which mocks [NotificationsSettingsStorage].
@@ -1570,100 +1327,100 @@ class MockNotificationsStorage extends _i1.Mock
 class MockNotificationsSettingsStorage extends _i1.Mock
     implements _i4.NotificationsSettingsStorage {
   @override
-  _i4.NotificationSetting get birthDayTimeSetting => (super.noSuchMethod(
-        Invocation.getter(#birthDayTimeSetting),
-        returnValue: _FakeNotificationSetting_6(
-          this,
-          Invocation.getter(#birthDayTimeSetting),
-        ),
-        returnValueForMissingStub: _FakeNotificationSetting_6(
-          this,
-          Invocation.getter(#birthDayTimeSetting),
-        ),
-      ) as _i4.NotificationSetting);
+  _i4.NotificationSetting get birthDayTimeSetting =>
+      (super.noSuchMethod(
+            Invocation.getter(#birthDayTimeSetting),
+            returnValue: _FakeNotificationSetting_6(
+              this,
+              Invocation.getter(#birthDayTimeSetting),
+            ),
+            returnValueForMissingStub: _FakeNotificationSetting_6(
+              this,
+              Invocation.getter(#birthDayTimeSetting),
+            ),
+          )
+          as _i4.NotificationSetting);
 
   @override
-  _i4.NotificationSetting get kodasTimeSetting => (super.noSuchMethod(
-        Invocation.getter(#kodasTimeSetting),
-        returnValue: _FakeNotificationSetting_6(
-          this,
-          Invocation.getter(#kodasTimeSetting),
-        ),
-        returnValueForMissingStub: _FakeNotificationSetting_6(
-          this,
-          Invocation.getter(#kodasTimeSetting),
-        ),
-      ) as _i4.NotificationSetting);
+  _i4.NotificationSetting get kodasTimeSetting =>
+      (super.noSuchMethod(
+            Invocation.getter(#kodasTimeSetting),
+            returnValue: _FakeNotificationSetting_6(
+              this,
+              Invocation.getter(#kodasTimeSetting),
+            ),
+            returnValueForMissingStub: _FakeNotificationSetting_6(
+              this,
+              Invocation.getter(#kodasTimeSetting),
+            ),
+          )
+          as _i4.NotificationSetting);
 
   @override
-  _i4.NotificationSetting get attendanceTimeSetting => (super.noSuchMethod(
-        Invocation.getter(#attendanceTimeSetting),
-        returnValue: _FakeNotificationSetting_6(
-          this,
-          Invocation.getter(#attendanceTimeSetting),
-        ),
-        returnValueForMissingStub: _FakeNotificationSetting_6(
-          this,
-          Invocation.getter(#attendanceTimeSetting),
-        ),
-      ) as _i4.NotificationSetting);
+  _i4.NotificationSetting get attendanceTimeSetting =>
+      (super.noSuchMethod(
+            Invocation.getter(#attendanceTimeSetting),
+            returnValue: _FakeNotificationSetting_6(
+              this,
+              Invocation.getter(#attendanceTimeSetting),
+            ),
+            returnValueForMissingStub: _FakeNotificationSetting_6(
+              this,
+              Invocation.getter(#attendanceTimeSetting),
+            ),
+          )
+          as _i4.NotificationSetting);
 
   @override
-  _i4.NotificationSetting get confessionTimeSetting => (super.noSuchMethod(
-        Invocation.getter(#confessionTimeSetting),
-        returnValue: _FakeNotificationSetting_6(
-          this,
-          Invocation.getter(#confessionTimeSetting),
-        ),
-        returnValueForMissingStub: _FakeNotificationSetting_6(
-          this,
-          Invocation.getter(#confessionTimeSetting),
-        ),
-      ) as _i4.NotificationSetting);
+  _i4.NotificationSetting get confessionTimeSetting =>
+      (super.noSuchMethod(
+            Invocation.getter(#confessionTimeSetting),
+            returnValue: _FakeNotificationSetting_6(
+              this,
+              Invocation.getter(#confessionTimeSetting),
+            ),
+            returnValueForMissingStub: _FakeNotificationSetting_6(
+              this,
+              Invocation.getter(#confessionTimeSetting),
+            ),
+          )
+          as _i4.NotificationSetting);
 
   @override
   _i11.Future<void> setBirthDayTime(_i4.NotificationSetting? setting) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #setBirthDayTime,
-          [setting],
-        ),
-        returnValue: _i11.Future<void>.value(),
-        returnValueForMissingStub: _i11.Future<void>.value(),
-      ) as _i11.Future<void>);
+            Invocation.method(#setBirthDayTime, [setting]),
+            returnValue: _i11.Future<void>.value(),
+            returnValueForMissingStub: _i11.Future<void>.value(),
+          )
+          as _i11.Future<void>);
 
   @override
   _i11.Future<void> setKodasTime(_i4.NotificationSetting? setting) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #setKodasTime,
-          [setting],
-        ),
-        returnValue: _i11.Future<void>.value(),
-        returnValueForMissingStub: _i11.Future<void>.value(),
-      ) as _i11.Future<void>);
+            Invocation.method(#setKodasTime, [setting]),
+            returnValue: _i11.Future<void>.value(),
+            returnValueForMissingStub: _i11.Future<void>.value(),
+          )
+          as _i11.Future<void>);
 
   @override
   _i11.Future<void> setAttendanceTime(_i4.NotificationSetting? setting) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #setAttendanceTime,
-          [setting],
-        ),
-        returnValue: _i11.Future<void>.value(),
-        returnValueForMissingStub: _i11.Future<void>.value(),
-      ) as _i11.Future<void>);
+            Invocation.method(#setAttendanceTime, [setting]),
+            returnValue: _i11.Future<void>.value(),
+            returnValueForMissingStub: _i11.Future<void>.value(),
+          )
+          as _i11.Future<void>);
 
   @override
   _i11.Future<void> setConfessionTime(_i4.NotificationSetting? setting) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #setConfessionTime,
-          [setting],
-        ),
-        returnValue: _i11.Future<void>.value(),
-        returnValueForMissingStub: _i11.Future<void>.value(),
-      ) as _i11.Future<void>);
+            Invocation.method(#setConfessionTime, [setting]),
+            returnValue: _i11.Future<void>.value(),
+            returnValueForMissingStub: _i11.Future<void>.value(),
+          )
+          as _i11.Future<void>);
 }
 
 /// A class which mocks [NotificationsService].
@@ -1672,116 +1429,111 @@ class MockNotificationsSettingsStorage extends _i1.Mock
 class MockNotificationsService extends _i1.Mock
     implements _i4.NotificationsService {
   @override
-  _i11.Stream<_i4.Notification> get onNotificationTapStream =>
+  bool get isPaused =>
       (super.noSuchMethod(
-        Invocation.getter(#onNotificationTapStream),
-        returnValue: _i11.Stream<_i4.Notification>.empty(),
-        returnValueForMissingStub: _i11.Stream<_i4.Notification>.empty(),
-      ) as _i11.Stream<_i4.Notification>);
+            Invocation.getter(#isPaused),
+            returnValue: false,
+            returnValueForMissingStub: false,
+          )
+          as bool);
 
   @override
-  bool get isPaused => (super.noSuchMethod(
-        Invocation.getter(#isPaused),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
+  _i11.Stream<_i4.Notification> get onNotificationTapStream =>
+      (super.noSuchMethod(
+            Invocation.getter(#onNotificationTapStream),
+            returnValue: _i11.Stream<_i4.Notification>.empty(),
+            returnValueForMissingStub: _i11.Stream<_i4.Notification>.empty(),
+          )
+          as _i11.Stream<_i4.Notification>);
 
   @override
   void addForegroundNotificationTap(_i4.Notification? notification) =>
       super.noSuchMethod(
-        Invocation.method(
-          #addForegroundNotificationTap,
-          [notification],
-        ),
+        Invocation.method(#addForegroundNotificationTap, [notification]),
         returnValueForMissingStub: null,
       );
 
   @override
   void pauseListeners() => super.noSuchMethod(
-        Invocation.method(
-          #pauseListeners,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
+    Invocation.method(#pauseListeners, []),
+    returnValueForMissingStub: null,
+  );
 
   @override
   void resumeListeners() => super.noSuchMethod(
-        Invocation.method(
-          #resumeListeners,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
+    Invocation.method(#resumeListeners, []),
+    returnValueForMissingStub: null,
+  );
 
   @override
   _i11.Future<_i4.Notification?> getInitialNotification() =>
       (super.noSuchMethod(
-        Invocation.method(
-          #getInitialNotification,
-          [],
-        ),
-        returnValue: _i11.Future<_i4.Notification?>.value(),
-        returnValueForMissingStub: _i11.Future<_i4.Notification?>.value(),
-      ) as _i11.Future<_i4.Notification?>);
+            Invocation.method(#getInitialNotification, []),
+            returnValue: _i11.Future<_i4.Notification?>.value(),
+            returnValueForMissingStub: _i11.Future<_i4.Notification?>.value(),
+          )
+          as _i11.Future<_i4.Notification?>);
 
   @override
-  _i11.Future<void> scheduleBirthDayNotification(
-          [_i4.NotificationSetting? notificationSetting]) =>
+  _i11.Future<void> scheduleBirthDayNotification([
+    _i4.NotificationSetting? notificationSetting,
+  ]) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #scheduleBirthDayNotification,
-          [notificationSetting],
-        ),
-        returnValue: _i11.Future<void>.value(),
-        returnValueForMissingStub: _i11.Future<void>.value(),
-      ) as _i11.Future<void>);
+            Invocation.method(#scheduleBirthDayNotification, [
+              notificationSetting,
+            ]),
+            returnValue: _i11.Future<void>.value(),
+            returnValueForMissingStub: _i11.Future<void>.value(),
+          )
+          as _i11.Future<void>);
 
   @override
-  _i11.Future<void> scheduleAttendanceNotification(
-          [_i4.NotificationSetting? notificationSetting]) =>
+  _i11.Future<void> scheduleAttendanceNotification([
+    _i4.NotificationSetting? notificationSetting,
+  ]) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #scheduleAttendanceNotification,
-          [notificationSetting],
-        ),
-        returnValue: _i11.Future<void>.value(),
-        returnValueForMissingStub: _i11.Future<void>.value(),
-      ) as _i11.Future<void>);
+            Invocation.method(#scheduleAttendanceNotification, [
+              notificationSetting,
+            ]),
+            returnValue: _i11.Future<void>.value(),
+            returnValueForMissingStub: _i11.Future<void>.value(),
+          )
+          as _i11.Future<void>);
 
   @override
-  _i11.Future<void> scheduleKodasNotification(
-          [_i4.NotificationSetting? notificationSetting]) =>
+  _i11.Future<void> scheduleKodasNotification([
+    _i4.NotificationSetting? notificationSetting,
+  ]) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #scheduleKodasNotification,
-          [notificationSetting],
-        ),
-        returnValue: _i11.Future<void>.value(),
-        returnValueForMissingStub: _i11.Future<void>.value(),
-      ) as _i11.Future<void>);
+            Invocation.method(#scheduleKodasNotification, [
+              notificationSetting,
+            ]),
+            returnValue: _i11.Future<void>.value(),
+            returnValueForMissingStub: _i11.Future<void>.value(),
+          )
+          as _i11.Future<void>);
 
   @override
-  _i11.Future<void> scheduleConfessionNotification(
-          [_i4.NotificationSetting? notificationSetting]) =>
+  _i11.Future<void> scheduleConfessionNotification([
+    _i4.NotificationSetting? notificationSetting,
+  ]) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #scheduleConfessionNotification,
-          [notificationSetting],
-        ),
-        returnValue: _i11.Future<void>.value(),
-        returnValueForMissingStub: _i11.Future<void>.value(),
-      ) as _i11.Future<void>);
+            Invocation.method(#scheduleConfessionNotification, [
+              notificationSetting,
+            ]),
+            returnValue: _i11.Future<void>.value(),
+            returnValueForMissingStub: _i11.Future<void>.value(),
+          )
+          as _i11.Future<void>);
 
   @override
-  _i11.Future<void> scheduleDefaultNotifications() => (super.noSuchMethod(
-        Invocation.method(
-          #scheduleDefaultNotifications,
-          [],
-        ),
-        returnValue: _i11.Future<void>.value(),
-        returnValueForMissingStub: _i11.Future<void>.value(),
-      ) as _i11.Future<void>);
+  _i11.Future<void> scheduleDefaultNotifications() =>
+      (super.noSuchMethod(
+            Invocation.method(#scheduleDefaultNotifications, []),
+            returnValue: _i11.Future<void>.value(),
+            returnValueForMissingStub: _i11.Future<void>.value(),
+          )
+          as _i11.Future<void>);
 
   @override
   _i11.Future<void> notify(
@@ -1790,40 +1542,37 @@ class MockNotificationsService extends _i1.Mock
     _i17.NotificationDetails? notificationDetails,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #notify,
-          [notification],
-          {
-            #id: id,
-            #notificationDetails: notificationDetails,
-          },
-        ),
-        returnValue: _i11.Future<void>.value(),
-        returnValueForMissingStub: _i11.Future<void>.value(),
-      ) as _i11.Future<void>);
+            Invocation.method(
+              #notify,
+              [notification],
+              {#id: id, #notificationDetails: notificationDetails},
+            ),
+            returnValue: _i11.Future<void>.value(),
+            returnValueForMissingStub: _i11.Future<void>.value(),
+          )
+          as _i11.Future<void>);
 
   @override
-  _i11.Future<bool> registerFCMTokenAndListenForChanges(
-          {String? cachedToken}) =>
+  _i11.Future<bool> registerFCMTokenAndListenForChanges({
+    String? cachedToken,
+  }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #registerFCMTokenAndListenForChanges,
-          [],
-          {#cachedToken: cachedToken},
-        ),
-        returnValue: _i11.Future<bool>.value(false),
-        returnValueForMissingStub: _i11.Future<bool>.value(false),
-      ) as _i11.Future<bool>);
+            Invocation.method(#registerFCMTokenAndListenForChanges, [], {
+              #cachedToken: cachedToken,
+            }),
+            returnValue: _i11.Future<bool>.value(false),
+            returnValueForMissingStub: _i11.Future<bool>.value(false),
+          )
+          as _i11.Future<bool>);
 
   @override
-  _i11.Future<bool> requestNotificationsPermission() => (super.noSuchMethod(
-        Invocation.method(
-          #requestNotificationsPermission,
-          [],
-        ),
-        returnValue: _i11.Future<bool>.value(false),
-        returnValueForMissingStub: _i11.Future<bool>.value(false),
-      ) as _i11.Future<bool>);
+  _i11.Future<bool> requestNotificationsPermission() =>
+      (super.noSuchMethod(
+            Invocation.method(#requestNotificationsPermission, []),
+            returnValue: _i11.Future<bool>.value(false),
+            returnValueForMissingStub: _i11.Future<bool>.value(false),
+          )
+          as _i11.Future<bool>);
 
   @override
   _i11.Future<void> onTransition(
@@ -1831,65 +1580,38 @@ class MockNotificationsService extends _i1.Mock
     _i22.Transition<dynamic, dynamic>? transition,
   ) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #onTransition,
-          [
-            bloc,
-            transition,
-          ],
-        ),
-        returnValue: _i11.Future<void>.value(),
-        returnValueForMissingStub: _i11.Future<void>.value(),
-      ) as _i11.Future<void>);
+            Invocation.method(#onTransition, [bloc, transition]),
+            returnValue: _i11.Future<void>.value(),
+            returnValueForMissingStub: _i11.Future<void>.value(),
+          )
+          as _i11.Future<void>);
 
   @override
-  _i11.Future<void> dispose() => (super.noSuchMethod(
-        Invocation.method(
-          #dispose,
-          [],
-        ),
-        returnValue: _i11.Future<void>.value(),
-        returnValueForMissingStub: _i11.Future<void>.value(),
-      ) as _i11.Future<void>);
+  _i11.Future<void> dispose() =>
+      (super.noSuchMethod(
+            Invocation.method(#dispose, []),
+            returnValue: _i11.Future<void>.value(),
+            returnValueForMissingStub: _i11.Future<void>.value(),
+          )
+          as _i11.Future<void>);
 
   @override
   void onCreate(_i22.BlocBase<dynamic>? bloc) => super.noSuchMethod(
-        Invocation.method(
-          #onCreate,
-          [bloc],
-        ),
+    Invocation.method(#onCreate, [bloc]),
+    returnValueForMissingStub: null,
+  );
+
+  @override
+  void onEvent(_i22.Bloc<dynamic, dynamic>? bloc, Object? event) =>
+      super.noSuchMethod(
+        Invocation.method(#onEvent, [bloc, event]),
         returnValueForMissingStub: null,
       );
 
   @override
-  void onEvent(
-    _i22.Bloc<dynamic, dynamic>? bloc,
-    Object? event,
-  ) =>
+  void onChange(_i22.BlocBase<dynamic>? bloc, _i22.Change<dynamic>? change) =>
       super.noSuchMethod(
-        Invocation.method(
-          #onEvent,
-          [
-            bloc,
-            event,
-          ],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void onChange(
-    _i22.BlocBase<dynamic>? bloc,
-    _i22.Change<dynamic>? change,
-  ) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #onChange,
-          [
-            bloc,
-            change,
-          ],
-        ),
+        Invocation.method(#onChange, [bloc, change]),
         returnValueForMissingStub: null,
       );
 
@@ -1898,18 +1620,10 @@ class MockNotificationsService extends _i1.Mock
     _i22.BlocBase<dynamic>? bloc,
     Object? error,
     StackTrace? stackTrace,
-  ) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #onError,
-          [
-            bloc,
-            error,
-            stackTrace,
-          ],
-        ),
-        returnValueForMissingStub: null,
-      );
+  ) => super.noSuchMethod(
+    Invocation.method(#onError, [bloc, error, stackTrace]),
+    returnValueForMissingStub: null,
+  );
 
   @override
   void onDone(
@@ -1917,28 +1631,16 @@ class MockNotificationsService extends _i1.Mock
     Object? event, [
     Object? error,
     StackTrace? stackTrace,
-  ]) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #onDone,
-          [
-            bloc,
-            event,
-            error,
-            stackTrace,
-          ],
-        ),
-        returnValueForMissingStub: null,
-      );
+  ]) => super.noSuchMethod(
+    Invocation.method(#onDone, [bloc, event, error, stackTrace]),
+    returnValueForMissingStub: null,
+  );
 
   @override
   void onClose(_i22.BlocBase<dynamic>? bloc) => super.noSuchMethod(
-        Invocation.method(
-          #onClose,
-          [bloc],
-        ),
-        returnValueForMissingStub: null,
-      );
+    Invocation.method(#onClose, [bloc]),
+    returnValueForMissingStub: null,
+  );
 }
 
 /// A class which mocks [BaseCacheManager].
@@ -1952,37 +1654,33 @@ class MockBaseCacheManager extends _i1.Mock implements _i23.BaseCacheManager {
     Map<String, String>? headers,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #getSingleFile,
-          [url],
-          {
-            #key: key,
-            #headers: headers,
-          },
-        ),
-        returnValue: _i11.Future<_i7.File>.value(_FakeFile_7(
-          this,
-          Invocation.method(
-            #getSingleFile,
-            [url],
-            {
-              #key: key,
-              #headers: headers,
-            },
-          ),
-        )),
-        returnValueForMissingStub: _i11.Future<_i7.File>.value(_FakeFile_7(
-          this,
-          Invocation.method(
-            #getSingleFile,
-            [url],
-            {
-              #key: key,
-              #headers: headers,
-            },
-          ),
-        )),
-      ) as _i11.Future<_i7.File>);
+            Invocation.method(
+              #getSingleFile,
+              [url],
+              {#key: key, #headers: headers},
+            ),
+            returnValue: _i11.Future<_i7.File>.value(
+              _FakeFile_7(
+                this,
+                Invocation.method(
+                  #getSingleFile,
+                  [url],
+                  {#key: key, #headers: headers},
+                ),
+              ),
+            ),
+            returnValueForMissingStub: _i11.Future<_i7.File>.value(
+              _FakeFile_7(
+                this,
+                Invocation.method(
+                  #getSingleFile,
+                  [url],
+                  {#key: key, #headers: headers},
+                ),
+              ),
+            ),
+          )
+          as _i11.Future<_i7.File>);
 
   @override
   _i11.Stream<_i8.FileInfo> getFile(
@@ -1991,17 +1689,11 @@ class MockBaseCacheManager extends _i1.Mock implements _i23.BaseCacheManager {
     Map<String, String>? headers,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #getFile,
-          [url],
-          {
-            #key: key,
-            #headers: headers,
-          },
-        ),
-        returnValue: _i11.Stream<_i8.FileInfo>.empty(),
-        returnValueForMissingStub: _i11.Stream<_i8.FileInfo>.empty(),
-      ) as _i11.Stream<_i8.FileInfo>);
+            Invocation.method(#getFile, [url], {#key: key, #headers: headers}),
+            returnValue: _i11.Stream<_i8.FileInfo>.empty(),
+            returnValueForMissingStub: _i11.Stream<_i8.FileInfo>.empty(),
+          )
+          as _i11.Stream<_i8.FileInfo>);
 
   @override
   _i11.Stream<_i24.FileResponse> getFileStream(
@@ -2011,18 +1703,15 @@ class MockBaseCacheManager extends _i1.Mock implements _i23.BaseCacheManager {
     bool? withProgress,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #getFileStream,
-          [url],
-          {
-            #key: key,
-            #headers: headers,
-            #withProgress: withProgress,
-          },
-        ),
-        returnValue: _i11.Stream<_i24.FileResponse>.empty(),
-        returnValueForMissingStub: _i11.Stream<_i24.FileResponse>.empty(),
-      ) as _i11.Stream<_i24.FileResponse>);
+            Invocation.method(
+              #getFileStream,
+              [url],
+              {#key: key, #headers: headers, #withProgress: withProgress},
+            ),
+            returnValue: _i11.Stream<_i24.FileResponse>.empty(),
+            returnValueForMissingStub: _i11.Stream<_i24.FileResponse>.empty(),
+          )
+          as _i11.Stream<_i24.FileResponse>);
 
   @override
   _i11.Future<_i8.FileInfo> downloadFile(
@@ -2032,41 +1721,33 @@ class MockBaseCacheManager extends _i1.Mock implements _i23.BaseCacheManager {
     bool? force = false,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #downloadFile,
-          [url],
-          {
-            #key: key,
-            #authHeaders: authHeaders,
-            #force: force,
-          },
-        ),
-        returnValue: _i11.Future<_i8.FileInfo>.value(_FakeFileInfo_8(
-          this,
-          Invocation.method(
-            #downloadFile,
-            [url],
-            {
-              #key: key,
-              #authHeaders: authHeaders,
-              #force: force,
-            },
-          ),
-        )),
-        returnValueForMissingStub:
-            _i11.Future<_i8.FileInfo>.value(_FakeFileInfo_8(
-          this,
-          Invocation.method(
-            #downloadFile,
-            [url],
-            {
-              #key: key,
-              #authHeaders: authHeaders,
-              #force: force,
-            },
-          ),
-        )),
-      ) as _i11.Future<_i8.FileInfo>);
+            Invocation.method(
+              #downloadFile,
+              [url],
+              {#key: key, #authHeaders: authHeaders, #force: force},
+            ),
+            returnValue: _i11.Future<_i8.FileInfo>.value(
+              _FakeFileInfo_8(
+                this,
+                Invocation.method(
+                  #downloadFile,
+                  [url],
+                  {#key: key, #authHeaders: authHeaders, #force: force},
+                ),
+              ),
+            ),
+            returnValueForMissingStub: _i11.Future<_i8.FileInfo>.value(
+              _FakeFileInfo_8(
+                this,
+                Invocation.method(
+                  #downloadFile,
+                  [url],
+                  {#key: key, #authHeaders: authHeaders, #force: force},
+                ),
+              ),
+            ),
+          )
+          as _i11.Future<_i8.FileInfo>);
 
   @override
   _i11.Future<_i8.FileInfo?> getFileFromCache(
@@ -2074,25 +1755,24 @@ class MockBaseCacheManager extends _i1.Mock implements _i23.BaseCacheManager {
     bool? ignoreMemCache = false,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #getFileFromCache,
-          [key],
-          {#ignoreMemCache: ignoreMemCache},
-        ),
-        returnValue: _i11.Future<_i8.FileInfo?>.value(),
-        returnValueForMissingStub: _i11.Future<_i8.FileInfo?>.value(),
-      ) as _i11.Future<_i8.FileInfo?>);
+            Invocation.method(
+              #getFileFromCache,
+              [key],
+              {#ignoreMemCache: ignoreMemCache},
+            ),
+            returnValue: _i11.Future<_i8.FileInfo?>.value(),
+            returnValueForMissingStub: _i11.Future<_i8.FileInfo?>.value(),
+          )
+          as _i11.Future<_i8.FileInfo?>);
 
   @override
   _i11.Future<_i8.FileInfo?> getFileFromMemory(String? key) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #getFileFromMemory,
-          [key],
-        ),
-        returnValue: _i11.Future<_i8.FileInfo?>.value(),
-        returnValueForMissingStub: _i11.Future<_i8.FileInfo?>.value(),
-      ) as _i11.Future<_i8.FileInfo?>);
+            Invocation.method(#getFileFromMemory, [key]),
+            returnValue: _i11.Future<_i8.FileInfo?>.value(),
+            returnValueForMissingStub: _i11.Future<_i8.FileInfo?>.value(),
+          )
+          as _i11.Future<_i8.FileInfo?>);
 
   @override
   _i11.Future<_i7.File> putFile(
@@ -2104,52 +1784,48 @@ class MockBaseCacheManager extends _i1.Mock implements _i23.BaseCacheManager {
     String? fileExtension = 'file',
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #putFile,
-          [
-            url,
-            fileBytes,
-          ],
-          {
-            #key: key,
-            #eTag: eTag,
-            #maxAge: maxAge,
-            #fileExtension: fileExtension,
-          },
-        ),
-        returnValue: _i11.Future<_i7.File>.value(_FakeFile_7(
-          this,
-          Invocation.method(
-            #putFile,
-            [
-              url,
-              fileBytes,
-            ],
-            {
-              #key: key,
-              #eTag: eTag,
-              #maxAge: maxAge,
-              #fileExtension: fileExtension,
-            },
-          ),
-        )),
-        returnValueForMissingStub: _i11.Future<_i7.File>.value(_FakeFile_7(
-          this,
-          Invocation.method(
-            #putFile,
-            [
-              url,
-              fileBytes,
-            ],
-            {
-              #key: key,
-              #eTag: eTag,
-              #maxAge: maxAge,
-              #fileExtension: fileExtension,
-            },
-          ),
-        )),
-      ) as _i11.Future<_i7.File>);
+            Invocation.method(
+              #putFile,
+              [url, fileBytes],
+              {
+                #key: key,
+                #eTag: eTag,
+                #maxAge: maxAge,
+                #fileExtension: fileExtension,
+              },
+            ),
+            returnValue: _i11.Future<_i7.File>.value(
+              _FakeFile_7(
+                this,
+                Invocation.method(
+                  #putFile,
+                  [url, fileBytes],
+                  {
+                    #key: key,
+                    #eTag: eTag,
+                    #maxAge: maxAge,
+                    #fileExtension: fileExtension,
+                  },
+                ),
+              ),
+            ),
+            returnValueForMissingStub: _i11.Future<_i7.File>.value(
+              _FakeFile_7(
+                this,
+                Invocation.method(
+                  #putFile,
+                  [url, fileBytes],
+                  {
+                    #key: key,
+                    #eTag: eTag,
+                    #maxAge: maxAge,
+                    #fileExtension: fileExtension,
+                  },
+                ),
+              ),
+            ),
+          )
+          as _i11.Future<_i7.File>);
 
   @override
   _i11.Future<_i7.File> putFileStream(
@@ -2161,82 +1837,75 @@ class MockBaseCacheManager extends _i1.Mock implements _i23.BaseCacheManager {
     String? fileExtension = 'file',
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #putFileStream,
-          [
-            url,
-            source,
-          ],
-          {
-            #key: key,
-            #eTag: eTag,
-            #maxAge: maxAge,
-            #fileExtension: fileExtension,
-          },
-        ),
-        returnValue: _i11.Future<_i7.File>.value(_FakeFile_7(
-          this,
-          Invocation.method(
-            #putFileStream,
-            [
-              url,
-              source,
-            ],
-            {
-              #key: key,
-              #eTag: eTag,
-              #maxAge: maxAge,
-              #fileExtension: fileExtension,
-            },
-          ),
-        )),
-        returnValueForMissingStub: _i11.Future<_i7.File>.value(_FakeFile_7(
-          this,
-          Invocation.method(
-            #putFileStream,
-            [
-              url,
-              source,
-            ],
-            {
-              #key: key,
-              #eTag: eTag,
-              #maxAge: maxAge,
-              #fileExtension: fileExtension,
-            },
-          ),
-        )),
-      ) as _i11.Future<_i7.File>);
+            Invocation.method(
+              #putFileStream,
+              [url, source],
+              {
+                #key: key,
+                #eTag: eTag,
+                #maxAge: maxAge,
+                #fileExtension: fileExtension,
+              },
+            ),
+            returnValue: _i11.Future<_i7.File>.value(
+              _FakeFile_7(
+                this,
+                Invocation.method(
+                  #putFileStream,
+                  [url, source],
+                  {
+                    #key: key,
+                    #eTag: eTag,
+                    #maxAge: maxAge,
+                    #fileExtension: fileExtension,
+                  },
+                ),
+              ),
+            ),
+            returnValueForMissingStub: _i11.Future<_i7.File>.value(
+              _FakeFile_7(
+                this,
+                Invocation.method(
+                  #putFileStream,
+                  [url, source],
+                  {
+                    #key: key,
+                    #eTag: eTag,
+                    #maxAge: maxAge,
+                    #fileExtension: fileExtension,
+                  },
+                ),
+              ),
+            ),
+          )
+          as _i11.Future<_i7.File>);
 
   @override
-  _i11.Future<void> removeFile(String? key) => (super.noSuchMethod(
-        Invocation.method(
-          #removeFile,
-          [key],
-        ),
-        returnValue: _i11.Future<void>.value(),
-        returnValueForMissingStub: _i11.Future<void>.value(),
-      ) as _i11.Future<void>);
+  _i11.Future<void> removeFile(String? key) =>
+      (super.noSuchMethod(
+            Invocation.method(#removeFile, [key]),
+            returnValue: _i11.Future<void>.value(),
+            returnValueForMissingStub: _i11.Future<void>.value(),
+          )
+          as _i11.Future<void>);
 
   @override
-  _i11.Future<void> emptyCache() => (super.noSuchMethod(
-        Invocation.method(
-          #emptyCache,
-          [],
-        ),
-        returnValue: _i11.Future<void>.value(),
-        returnValueForMissingStub: _i11.Future<void>.value(),
-      ) as _i11.Future<void>);
+  _i11.Future<void> emptyCache() =>
+      (super.noSuchMethod(
+            Invocation.method(#emptyCache, []),
+            returnValue: _i11.Future<void>.value(),
+            returnValueForMissingStub: _i11.Future<void>.value(),
+          )
+          as _i11.Future<void>);
 
   @override
-  _i11.Future<void> dispose() => (super.noSuchMethod(
-        Invocation.method(
-          #dispose,
-          [],
-        ),
-        returnValue: _i11.Future<void>.value(),
-        returnValueForMissingStub: _i11.Future<void>.value(),
-      ) as _i11.Future<void>);
+  _i11.Future<void> dispose() =>
+      (super.noSuchMethod(
+            Invocation.method(#dispose, []),
+            returnValue: _i11.Future<void>.value(),
+            returnValueForMissingStub: _i11.Future<void>.value(),
+          )
+          as _i11.Future<void>);
 }
 
 /// A class which mocks [File].
@@ -2244,102 +1913,109 @@ class MockBaseCacheManager extends _i1.Mock implements _i23.BaseCacheManager {
 /// See the documentation for Mockito's code generation for more information.
 class MockFile extends _i1.Mock implements _i7.File {
   @override
-  _i7.File get absolute => (super.noSuchMethod(
-        Invocation.getter(#absolute),
-        returnValue: _FakeFile_7(
-          this,
-          Invocation.getter(#absolute),
-        ),
-        returnValueForMissingStub: _FakeFile_7(
-          this,
-          Invocation.getter(#absolute),
-        ),
-      ) as _i7.File);
+  _i7.File get absolute =>
+      (super.noSuchMethod(
+            Invocation.getter(#absolute),
+            returnValue: _FakeFile_7(this, Invocation.getter(#absolute)),
+            returnValueForMissingStub: _FakeFile_7(
+              this,
+              Invocation.getter(#absolute),
+            ),
+          )
+          as _i7.File);
 
   @override
-  _i7.FileSystem get fileSystem => (super.noSuchMethod(
-        Invocation.getter(#fileSystem),
-        returnValue: _FakeFileSystem_9(
-          this,
-          Invocation.getter(#fileSystem),
-        ),
-        returnValueForMissingStub: _FakeFileSystem_9(
-          this,
-          Invocation.getter(#fileSystem),
-        ),
-      ) as _i7.FileSystem);
+  _i7.FileSystem get fileSystem =>
+      (super.noSuchMethod(
+            Invocation.getter(#fileSystem),
+            returnValue: _FakeFileSystem_9(
+              this,
+              Invocation.getter(#fileSystem),
+            ),
+            returnValueForMissingStub: _FakeFileSystem_9(
+              this,
+              Invocation.getter(#fileSystem),
+            ),
+          )
+          as _i7.FileSystem);
 
   @override
-  String get basename => (super.noSuchMethod(
-        Invocation.getter(#basename),
-        returnValue: _i21.dummyValue<String>(
-          this,
-          Invocation.getter(#basename),
-        ),
-        returnValueForMissingStub: _i21.dummyValue<String>(
-          this,
-          Invocation.getter(#basename),
-        ),
-      ) as String);
+  String get basename =>
+      (super.noSuchMethod(
+            Invocation.getter(#basename),
+            returnValue: _i21.dummyValue<String>(
+              this,
+              Invocation.getter(#basename),
+            ),
+            returnValueForMissingStub: _i21.dummyValue<String>(
+              this,
+              Invocation.getter(#basename),
+            ),
+          )
+          as String);
 
   @override
-  String get dirname => (super.noSuchMethod(
-        Invocation.getter(#dirname),
-        returnValue: _i21.dummyValue<String>(
-          this,
-          Invocation.getter(#dirname),
-        ),
-        returnValueForMissingStub: _i21.dummyValue<String>(
-          this,
-          Invocation.getter(#dirname),
-        ),
-      ) as String);
+  String get dirname =>
+      (super.noSuchMethod(
+            Invocation.getter(#dirname),
+            returnValue: _i21.dummyValue<String>(
+              this,
+              Invocation.getter(#dirname),
+            ),
+            returnValueForMissingStub: _i21.dummyValue<String>(
+              this,
+              Invocation.getter(#dirname),
+            ),
+          )
+          as String);
 
   @override
-  _i7.Directory get parent => (super.noSuchMethod(
-        Invocation.getter(#parent),
-        returnValue: _FakeDirectory_10(
-          this,
-          Invocation.getter(#parent),
-        ),
-        returnValueForMissingStub: _FakeDirectory_10(
-          this,
-          Invocation.getter(#parent),
-        ),
-      ) as _i7.Directory);
+  _i7.Directory get parent =>
+      (super.noSuchMethod(
+            Invocation.getter(#parent),
+            returnValue: _FakeDirectory_10(this, Invocation.getter(#parent)),
+            returnValueForMissingStub: _FakeDirectory_10(
+              this,
+              Invocation.getter(#parent),
+            ),
+          )
+          as _i7.Directory);
 
   @override
-  String get path => (super.noSuchMethod(
-        Invocation.getter(#path),
-        returnValue: _i21.dummyValue<String>(
-          this,
-          Invocation.getter(#path),
-        ),
-        returnValueForMissingStub: _i21.dummyValue<String>(
-          this,
-          Invocation.getter(#path),
-        ),
-      ) as String);
+  String get path =>
+      (super.noSuchMethod(
+            Invocation.getter(#path),
+            returnValue: _i21.dummyValue<String>(
+              this,
+              Invocation.getter(#path),
+            ),
+            returnValueForMissingStub: _i21.dummyValue<String>(
+              this,
+              Invocation.getter(#path),
+            ),
+          )
+          as String);
 
   @override
-  Uri get uri => (super.noSuchMethod(
-        Invocation.getter(#uri),
-        returnValue: _FakeUri_11(
-          this,
-          Invocation.getter(#uri),
-        ),
-        returnValueForMissingStub: _FakeUri_11(
-          this,
-          Invocation.getter(#uri),
-        ),
-      ) as Uri);
+  Uri get uri =>
+      (super.noSuchMethod(
+            Invocation.getter(#uri),
+            returnValue: _FakeUri_11(this, Invocation.getter(#uri)),
+            returnValueForMissingStub: _FakeUri_11(
+              this,
+              Invocation.getter(#uri),
+            ),
+          )
+          as Uri);
 
   @override
-  bool get isAbsolute => (super.noSuchMethod(
-        Invocation.getter(#isAbsolute),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
+  bool get isAbsolute =>
+      (super.noSuchMethod(
+            Invocation.getter(#isAbsolute),
+            returnValue: false,
+            returnValueForMissingStub: false,
+          )
+          as bool);
 
   @override
   _i11.Future<_i7.File> create({
@@ -2347,125 +2023,86 @@ class MockFile extends _i1.Mock implements _i7.File {
     bool? exclusive = false,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #create,
-          [],
-          {
-            #recursive: recursive,
-            #exclusive: exclusive,
-          },
-        ),
-        returnValue: _i11.Future<_i7.File>.value(_FakeFile_7(
-          this,
-          Invocation.method(
-            #create,
-            [],
-            {
+            Invocation.method(#create, [], {
               #recursive: recursive,
               #exclusive: exclusive,
-            },
-          ),
-        )),
-        returnValueForMissingStub: _i11.Future<_i7.File>.value(_FakeFile_7(
-          this,
-          Invocation.method(
-            #create,
-            [],
-            {
-              #recursive: recursive,
-              #exclusive: exclusive,
-            },
-          ),
-        )),
-      ) as _i11.Future<_i7.File>);
+            }),
+            returnValue: _i11.Future<_i7.File>.value(
+              _FakeFile_7(
+                this,
+                Invocation.method(#create, [], {
+                  #recursive: recursive,
+                  #exclusive: exclusive,
+                }),
+              ),
+            ),
+            returnValueForMissingStub: _i11.Future<_i7.File>.value(
+              _FakeFile_7(
+                this,
+                Invocation.method(#create, [], {
+                  #recursive: recursive,
+                  #exclusive: exclusive,
+                }),
+              ),
+            ),
+          )
+          as _i11.Future<_i7.File>);
 
   @override
-  _i11.Future<_i7.File> rename(String? newPath) => (super.noSuchMethod(
-        Invocation.method(
-          #rename,
-          [newPath],
-        ),
-        returnValue: _i11.Future<_i7.File>.value(_FakeFile_7(
-          this,
-          Invocation.method(
-            #rename,
-            [newPath],
-          ),
-        )),
-        returnValueForMissingStub: _i11.Future<_i7.File>.value(_FakeFile_7(
-          this,
-          Invocation.method(
-            #rename,
-            [newPath],
-          ),
-        )),
-      ) as _i11.Future<_i7.File>);
+  _i11.Future<_i7.File> rename(String? newPath) =>
+      (super.noSuchMethod(
+            Invocation.method(#rename, [newPath]),
+            returnValue: _i11.Future<_i7.File>.value(
+              _FakeFile_7(this, Invocation.method(#rename, [newPath])),
+            ),
+            returnValueForMissingStub: _i11.Future<_i7.File>.value(
+              _FakeFile_7(this, Invocation.method(#rename, [newPath])),
+            ),
+          )
+          as _i11.Future<_i7.File>);
 
   @override
-  _i7.File renameSync(String? newPath) => (super.noSuchMethod(
-        Invocation.method(
-          #renameSync,
-          [newPath],
-        ),
-        returnValue: _FakeFile_7(
-          this,
-          Invocation.method(
-            #renameSync,
-            [newPath],
-          ),
-        ),
-        returnValueForMissingStub: _FakeFile_7(
-          this,
-          Invocation.method(
-            #renameSync,
-            [newPath],
-          ),
-        ),
-      ) as _i7.File);
+  _i7.File renameSync(String? newPath) =>
+      (super.noSuchMethod(
+            Invocation.method(#renameSync, [newPath]),
+            returnValue: _FakeFile_7(
+              this,
+              Invocation.method(#renameSync, [newPath]),
+            ),
+            returnValueForMissingStub: _FakeFile_7(
+              this,
+              Invocation.method(#renameSync, [newPath]),
+            ),
+          )
+          as _i7.File);
 
   @override
-  _i11.Future<_i7.File> copy(String? newPath) => (super.noSuchMethod(
-        Invocation.method(
-          #copy,
-          [newPath],
-        ),
-        returnValue: _i11.Future<_i7.File>.value(_FakeFile_7(
-          this,
-          Invocation.method(
-            #copy,
-            [newPath],
-          ),
-        )),
-        returnValueForMissingStub: _i11.Future<_i7.File>.value(_FakeFile_7(
-          this,
-          Invocation.method(
-            #copy,
-            [newPath],
-          ),
-        )),
-      ) as _i11.Future<_i7.File>);
+  _i11.Future<_i7.File> copy(String? newPath) =>
+      (super.noSuchMethod(
+            Invocation.method(#copy, [newPath]),
+            returnValue: _i11.Future<_i7.File>.value(
+              _FakeFile_7(this, Invocation.method(#copy, [newPath])),
+            ),
+            returnValueForMissingStub: _i11.Future<_i7.File>.value(
+              _FakeFile_7(this, Invocation.method(#copy, [newPath])),
+            ),
+          )
+          as _i11.Future<_i7.File>);
 
   @override
-  _i7.File copySync(String? newPath) => (super.noSuchMethod(
-        Invocation.method(
-          #copySync,
-          [newPath],
-        ),
-        returnValue: _FakeFile_7(
-          this,
-          Invocation.method(
-            #copySync,
-            [newPath],
-          ),
-        ),
-        returnValueForMissingStub: _FakeFile_7(
-          this,
-          Invocation.method(
-            #copySync,
-            [newPath],
-          ),
-        ),
-      ) as _i7.File);
+  _i7.File copySync(String? newPath) =>
+      (super.noSuchMethod(
+            Invocation.method(#copySync, [newPath]),
+            returnValue: _FakeFile_7(
+              this,
+              Invocation.method(#copySync, [newPath]),
+            ),
+            returnValueForMissingStub: _FakeFile_7(
+              this,
+              Invocation.method(#copySync, [newPath]),
+            ),
+          )
+          as _i7.File);
 
   @override
   _i11.Future<_i7.File> writeAsBytes(
@@ -2474,37 +2111,33 @@ class MockFile extends _i1.Mock implements _i7.File {
     bool? flush = false,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #writeAsBytes,
-          [bytes],
-          {
-            #mode: mode,
-            #flush: flush,
-          },
-        ),
-        returnValue: _i11.Future<_i7.File>.value(_FakeFile_7(
-          this,
-          Invocation.method(
-            #writeAsBytes,
-            [bytes],
-            {
-              #mode: mode,
-              #flush: flush,
-            },
-          ),
-        )),
-        returnValueForMissingStub: _i11.Future<_i7.File>.value(_FakeFile_7(
-          this,
-          Invocation.method(
-            #writeAsBytes,
-            [bytes],
-            {
-              #mode: mode,
-              #flush: flush,
-            },
-          ),
-        )),
-      ) as _i11.Future<_i7.File>);
+            Invocation.method(
+              #writeAsBytes,
+              [bytes],
+              {#mode: mode, #flush: flush},
+            ),
+            returnValue: _i11.Future<_i7.File>.value(
+              _FakeFile_7(
+                this,
+                Invocation.method(
+                  #writeAsBytes,
+                  [bytes],
+                  {#mode: mode, #flush: flush},
+                ),
+              ),
+            ),
+            returnValueForMissingStub: _i11.Future<_i7.File>.value(
+              _FakeFile_7(
+                this,
+                Invocation.method(
+                  #writeAsBytes,
+                  [bytes],
+                  {#mode: mode, #flush: flush},
+                ),
+              ),
+            ),
+          )
+          as _i11.Future<_i7.File>);
 
   @override
   _i11.Future<_i7.File> writeAsString(
@@ -2514,188 +2147,138 @@ class MockFile extends _i1.Mock implements _i7.File {
     bool? flush = false,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #writeAsString,
-          [contents],
-          {
-            #mode: mode,
-            #encoding: encoding,
-            #flush: flush,
-          },
-        ),
-        returnValue: _i11.Future<_i7.File>.value(_FakeFile_7(
-          this,
-          Invocation.method(
-            #writeAsString,
-            [contents],
-            {
-              #mode: mode,
-              #encoding: encoding,
-              #flush: flush,
-            },
-          ),
-        )),
-        returnValueForMissingStub: _i11.Future<_i7.File>.value(_FakeFile_7(
-          this,
-          Invocation.method(
-            #writeAsString,
-            [contents],
-            {
-              #mode: mode,
-              #encoding: encoding,
-              #flush: flush,
-            },
-          ),
-        )),
-      ) as _i11.Future<_i7.File>);
+            Invocation.method(
+              #writeAsString,
+              [contents],
+              {#mode: mode, #encoding: encoding, #flush: flush},
+            ),
+            returnValue: _i11.Future<_i7.File>.value(
+              _FakeFile_7(
+                this,
+                Invocation.method(
+                  #writeAsString,
+                  [contents],
+                  {#mode: mode, #encoding: encoding, #flush: flush},
+                ),
+              ),
+            ),
+            returnValueForMissingStub: _i11.Future<_i7.File>.value(
+              _FakeFile_7(
+                this,
+                Invocation.method(
+                  #writeAsString,
+                  [contents],
+                  {#mode: mode, #encoding: encoding, #flush: flush},
+                ),
+              ),
+            ),
+          )
+          as _i11.Future<_i7.File>);
 
   @override
   _i11.Future<_i7.FileSystemEntity> delete({bool? recursive = false}) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #delete,
-          [],
-          {#recursive: recursive},
-        ),
-        returnValue:
-            _i11.Future<_i7.FileSystemEntity>.value(_FakeFileSystemEntity_12(
-          this,
-          Invocation.method(
-            #delete,
-            [],
-            {#recursive: recursive},
-          ),
-        )),
-        returnValueForMissingStub:
-            _i11.Future<_i7.FileSystemEntity>.value(_FakeFileSystemEntity_12(
-          this,
-          Invocation.method(
-            #delete,
-            [],
-            {#recursive: recursive},
-          ),
-        )),
-      ) as _i11.Future<_i7.FileSystemEntity>);
+            Invocation.method(#delete, [], {#recursive: recursive}),
+            returnValue: _i11.Future<_i7.FileSystemEntity>.value(
+              _FakeFileSystemEntity_12(
+                this,
+                Invocation.method(#delete, [], {#recursive: recursive}),
+              ),
+            ),
+            returnValueForMissingStub: _i11.Future<_i7.FileSystemEntity>.value(
+              _FakeFileSystemEntity_12(
+                this,
+                Invocation.method(#delete, [], {#recursive: recursive}),
+              ),
+            ),
+          )
+          as _i11.Future<_i7.FileSystemEntity>);
 
   @override
-  _i11.Future<bool> exists() => (super.noSuchMethod(
-        Invocation.method(
-          #exists,
-          [],
-        ),
-        returnValue: _i11.Future<bool>.value(false),
-        returnValueForMissingStub: _i11.Future<bool>.value(false),
-      ) as _i11.Future<bool>);
+  _i11.Future<bool> exists() =>
+      (super.noSuchMethod(
+            Invocation.method(#exists, []),
+            returnValue: _i11.Future<bool>.value(false),
+            returnValueForMissingStub: _i11.Future<bool>.value(false),
+          )
+          as _i11.Future<bool>);
 
   @override
-  bool existsSync() => (super.noSuchMethod(
-        Invocation.method(
-          #existsSync,
-          [],
-        ),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
+  bool existsSync() =>
+      (super.noSuchMethod(
+            Invocation.method(#existsSync, []),
+            returnValue: false,
+            returnValueForMissingStub: false,
+          )
+          as bool);
 
   @override
-  _i11.Future<String> resolveSymbolicLinks() => (super.noSuchMethod(
-        Invocation.method(
-          #resolveSymbolicLinks,
-          [],
-        ),
-        returnValue: _i11.Future<String>.value(_i21.dummyValue<String>(
-          this,
-          Invocation.method(
-            #resolveSymbolicLinks,
-            [],
-          ),
-        )),
-        returnValueForMissingStub:
-            _i11.Future<String>.value(_i21.dummyValue<String>(
-          this,
-          Invocation.method(
-            #resolveSymbolicLinks,
-            [],
-          ),
-        )),
-      ) as _i11.Future<String>);
+  _i11.Future<String> resolveSymbolicLinks() =>
+      (super.noSuchMethod(
+            Invocation.method(#resolveSymbolicLinks, []),
+            returnValue: _i11.Future<String>.value(
+              _i21.dummyValue<String>(
+                this,
+                Invocation.method(#resolveSymbolicLinks, []),
+              ),
+            ),
+            returnValueForMissingStub: _i11.Future<String>.value(
+              _i21.dummyValue<String>(
+                this,
+                Invocation.method(#resolveSymbolicLinks, []),
+              ),
+            ),
+          )
+          as _i11.Future<String>);
 
   @override
-  String resolveSymbolicLinksSync() => (super.noSuchMethod(
-        Invocation.method(
-          #resolveSymbolicLinksSync,
-          [],
-        ),
-        returnValue: _i21.dummyValue<String>(
-          this,
-          Invocation.method(
-            #resolveSymbolicLinksSync,
-            [],
-          ),
-        ),
-        returnValueForMissingStub: _i21.dummyValue<String>(
-          this,
-          Invocation.method(
-            #resolveSymbolicLinksSync,
-            [],
-          ),
-        ),
-      ) as String);
+  String resolveSymbolicLinksSync() =>
+      (super.noSuchMethod(
+            Invocation.method(#resolveSymbolicLinksSync, []),
+            returnValue: _i21.dummyValue<String>(
+              this,
+              Invocation.method(#resolveSymbolicLinksSync, []),
+            ),
+            returnValueForMissingStub: _i21.dummyValue<String>(
+              this,
+              Invocation.method(#resolveSymbolicLinksSync, []),
+            ),
+          )
+          as String);
 
   @override
-  _i11.Future<_i9.FileStat> stat() => (super.noSuchMethod(
-        Invocation.method(
-          #stat,
-          [],
-        ),
-        returnValue: _i11.Future<_i9.FileStat>.value(_FakeFileStat_13(
-          this,
-          Invocation.method(
-            #stat,
-            [],
-          ),
-        )),
-        returnValueForMissingStub:
-            _i11.Future<_i9.FileStat>.value(_FakeFileStat_13(
-          this,
-          Invocation.method(
-            #stat,
-            [],
-          ),
-        )),
-      ) as _i11.Future<_i9.FileStat>);
+  _i11.Future<_i9.FileStat> stat() =>
+      (super.noSuchMethod(
+            Invocation.method(#stat, []),
+            returnValue: _i11.Future<_i9.FileStat>.value(
+              _FakeFileStat_13(this, Invocation.method(#stat, [])),
+            ),
+            returnValueForMissingStub: _i11.Future<_i9.FileStat>.value(
+              _FakeFileStat_13(this, Invocation.method(#stat, [])),
+            ),
+          )
+          as _i11.Future<_i9.FileStat>);
 
   @override
-  _i9.FileStat statSync() => (super.noSuchMethod(
-        Invocation.method(
-          #statSync,
-          [],
-        ),
-        returnValue: _FakeFileStat_13(
-          this,
-          Invocation.method(
-            #statSync,
-            [],
-          ),
-        ),
-        returnValueForMissingStub: _FakeFileStat_13(
-          this,
-          Invocation.method(
-            #statSync,
-            [],
-          ),
-        ),
-      ) as _i9.FileStat);
+  _i9.FileStat statSync() =>
+      (super.noSuchMethod(
+            Invocation.method(#statSync, []),
+            returnValue: _FakeFileStat_13(
+              this,
+              Invocation.method(#statSync, []),
+            ),
+            returnValueForMissingStub: _FakeFileStat_13(
+              this,
+              Invocation.method(#statSync, []),
+            ),
+          )
+          as _i9.FileStat);
 
   @override
   void deleteSync({bool? recursive = false}) => super.noSuchMethod(
-        Invocation.method(
-          #deleteSync,
-          [],
-          {#recursive: recursive},
-        ),
-        returnValueForMissingStub: null,
-      );
+    Invocation.method(#deleteSync, [], {#recursive: recursive}),
+    returnValueForMissingStub: null,
+  );
 
   @override
   _i11.Stream<_i9.FileSystemEvent> watch({
@@ -2703,252 +2286,173 @@ class MockFile extends _i1.Mock implements _i7.File {
     bool? recursive = false,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #watch,
-          [],
-          {
-            #events: events,
-            #recursive: recursive,
-          },
-        ),
-        returnValue: _i11.Stream<_i9.FileSystemEvent>.empty(),
-        returnValueForMissingStub: _i11.Stream<_i9.FileSystemEvent>.empty(),
-      ) as _i11.Stream<_i9.FileSystemEvent>);
+            Invocation.method(#watch, [], {
+              #events: events,
+              #recursive: recursive,
+            }),
+            returnValue: _i11.Stream<_i9.FileSystemEvent>.empty(),
+            returnValueForMissingStub: _i11.Stream<_i9.FileSystemEvent>.empty(),
+          )
+          as _i11.Stream<_i9.FileSystemEvent>);
 
   @override
-  void createSync({
-    bool? recursive = false,
-    bool? exclusive = false,
-  }) =>
+  void createSync({bool? recursive = false, bool? exclusive = false}) =>
       super.noSuchMethod(
-        Invocation.method(
-          #createSync,
-          [],
-          {
-            #recursive: recursive,
-            #exclusive: exclusive,
-          },
-        ),
+        Invocation.method(#createSync, [], {
+          #recursive: recursive,
+          #exclusive: exclusive,
+        }),
         returnValueForMissingStub: null,
       );
 
   @override
-  _i11.Future<int> length() => (super.noSuchMethod(
-        Invocation.method(
-          #length,
-          [],
-        ),
-        returnValue: _i11.Future<int>.value(0),
-        returnValueForMissingStub: _i11.Future<int>.value(0),
-      ) as _i11.Future<int>);
+  _i11.Future<int> length() =>
+      (super.noSuchMethod(
+            Invocation.method(#length, []),
+            returnValue: _i11.Future<int>.value(0),
+            returnValueForMissingStub: _i11.Future<int>.value(0),
+          )
+          as _i11.Future<int>);
 
   @override
-  int lengthSync() => (super.noSuchMethod(
-        Invocation.method(
-          #lengthSync,
-          [],
-        ),
-        returnValue: 0,
-        returnValueForMissingStub: 0,
-      ) as int);
+  int lengthSync() =>
+      (super.noSuchMethod(
+            Invocation.method(#lengthSync, []),
+            returnValue: 0,
+            returnValueForMissingStub: 0,
+          )
+          as int);
 
   @override
-  _i11.Future<DateTime> lastAccessed() => (super.noSuchMethod(
-        Invocation.method(
-          #lastAccessed,
-          [],
-        ),
-        returnValue: _i11.Future<DateTime>.value(_FakeDateTime_14(
-          this,
-          Invocation.method(
-            #lastAccessed,
-            [],
-          ),
-        )),
-        returnValueForMissingStub: _i11.Future<DateTime>.value(_FakeDateTime_14(
-          this,
-          Invocation.method(
-            #lastAccessed,
-            [],
-          ),
-        )),
-      ) as _i11.Future<DateTime>);
+  _i11.Future<DateTime> lastAccessed() =>
+      (super.noSuchMethod(
+            Invocation.method(#lastAccessed, []),
+            returnValue: _i11.Future<DateTime>.value(
+              _FakeDateTime_14(this, Invocation.method(#lastAccessed, [])),
+            ),
+            returnValueForMissingStub: _i11.Future<DateTime>.value(
+              _FakeDateTime_14(this, Invocation.method(#lastAccessed, [])),
+            ),
+          )
+          as _i11.Future<DateTime>);
 
   @override
-  DateTime lastAccessedSync() => (super.noSuchMethod(
-        Invocation.method(
-          #lastAccessedSync,
-          [],
-        ),
-        returnValue: _FakeDateTime_14(
-          this,
-          Invocation.method(
-            #lastAccessedSync,
-            [],
-          ),
-        ),
-        returnValueForMissingStub: _FakeDateTime_14(
-          this,
-          Invocation.method(
-            #lastAccessedSync,
-            [],
-          ),
-        ),
-      ) as DateTime);
+  DateTime lastAccessedSync() =>
+      (super.noSuchMethod(
+            Invocation.method(#lastAccessedSync, []),
+            returnValue: _FakeDateTime_14(
+              this,
+              Invocation.method(#lastAccessedSync, []),
+            ),
+            returnValueForMissingStub: _FakeDateTime_14(
+              this,
+              Invocation.method(#lastAccessedSync, []),
+            ),
+          )
+          as DateTime);
 
   @override
-  _i11.Future<dynamic> setLastAccessed(DateTime? time) => (super.noSuchMethod(
-        Invocation.method(
-          #setLastAccessed,
-          [time],
-        ),
-        returnValue: _i11.Future<dynamic>.value(),
-        returnValueForMissingStub: _i11.Future<dynamic>.value(),
-      ) as _i11.Future<dynamic>);
+  _i11.Future<dynamic> setLastAccessed(DateTime? time) =>
+      (super.noSuchMethod(
+            Invocation.method(#setLastAccessed, [time]),
+            returnValue: _i11.Future<dynamic>.value(),
+            returnValueForMissingStub: _i11.Future<dynamic>.value(),
+          )
+          as _i11.Future<dynamic>);
 
   @override
   void setLastAccessedSync(DateTime? time) => super.noSuchMethod(
-        Invocation.method(
-          #setLastAccessedSync,
-          [time],
-        ),
-        returnValueForMissingStub: null,
-      );
+    Invocation.method(#setLastAccessedSync, [time]),
+    returnValueForMissingStub: null,
+  );
 
   @override
-  _i11.Future<DateTime> lastModified() => (super.noSuchMethod(
-        Invocation.method(
-          #lastModified,
-          [],
-        ),
-        returnValue: _i11.Future<DateTime>.value(_FakeDateTime_14(
-          this,
-          Invocation.method(
-            #lastModified,
-            [],
-          ),
-        )),
-        returnValueForMissingStub: _i11.Future<DateTime>.value(_FakeDateTime_14(
-          this,
-          Invocation.method(
-            #lastModified,
-            [],
-          ),
-        )),
-      ) as _i11.Future<DateTime>);
+  _i11.Future<DateTime> lastModified() =>
+      (super.noSuchMethod(
+            Invocation.method(#lastModified, []),
+            returnValue: _i11.Future<DateTime>.value(
+              _FakeDateTime_14(this, Invocation.method(#lastModified, [])),
+            ),
+            returnValueForMissingStub: _i11.Future<DateTime>.value(
+              _FakeDateTime_14(this, Invocation.method(#lastModified, [])),
+            ),
+          )
+          as _i11.Future<DateTime>);
 
   @override
-  DateTime lastModifiedSync() => (super.noSuchMethod(
-        Invocation.method(
-          #lastModifiedSync,
-          [],
-        ),
-        returnValue: _FakeDateTime_14(
-          this,
-          Invocation.method(
-            #lastModifiedSync,
-            [],
-          ),
-        ),
-        returnValueForMissingStub: _FakeDateTime_14(
-          this,
-          Invocation.method(
-            #lastModifiedSync,
-            [],
-          ),
-        ),
-      ) as DateTime);
+  DateTime lastModifiedSync() =>
+      (super.noSuchMethod(
+            Invocation.method(#lastModifiedSync, []),
+            returnValue: _FakeDateTime_14(
+              this,
+              Invocation.method(#lastModifiedSync, []),
+            ),
+            returnValueForMissingStub: _FakeDateTime_14(
+              this,
+              Invocation.method(#lastModifiedSync, []),
+            ),
+          )
+          as DateTime);
 
   @override
-  _i11.Future<dynamic> setLastModified(DateTime? time) => (super.noSuchMethod(
-        Invocation.method(
-          #setLastModified,
-          [time],
-        ),
-        returnValue: _i11.Future<dynamic>.value(),
-        returnValueForMissingStub: _i11.Future<dynamic>.value(),
-      ) as _i11.Future<dynamic>);
+  _i11.Future<dynamic> setLastModified(DateTime? time) =>
+      (super.noSuchMethod(
+            Invocation.method(#setLastModified, [time]),
+            returnValue: _i11.Future<dynamic>.value(),
+            returnValueForMissingStub: _i11.Future<dynamic>.value(),
+          )
+          as _i11.Future<dynamic>);
 
   @override
   void setLastModifiedSync(DateTime? time) => super.noSuchMethod(
-        Invocation.method(
-          #setLastModifiedSync,
-          [time],
-        ),
-        returnValueForMissingStub: null,
-      );
+    Invocation.method(#setLastModifiedSync, [time]),
+    returnValueForMissingStub: null,
+  );
 
   @override
-  _i11.Future<_i9.RandomAccessFile> open(
-          {_i9.FileMode? mode = _i9.FileMode.read}) =>
+  _i11.Future<_i9.RandomAccessFile> open({
+    _i9.FileMode? mode = _i9.FileMode.read,
+  }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #open,
-          [],
-          {#mode: mode},
-        ),
-        returnValue:
-            _i11.Future<_i9.RandomAccessFile>.value(_FakeRandomAccessFile_15(
-          this,
-          Invocation.method(
-            #open,
-            [],
-            {#mode: mode},
-          ),
-        )),
-        returnValueForMissingStub:
-            _i11.Future<_i9.RandomAccessFile>.value(_FakeRandomAccessFile_15(
-          this,
-          Invocation.method(
-            #open,
-            [],
-            {#mode: mode},
-          ),
-        )),
-      ) as _i11.Future<_i9.RandomAccessFile>);
+            Invocation.method(#open, [], {#mode: mode}),
+            returnValue: _i11.Future<_i9.RandomAccessFile>.value(
+              _FakeRandomAccessFile_15(
+                this,
+                Invocation.method(#open, [], {#mode: mode}),
+              ),
+            ),
+            returnValueForMissingStub: _i11.Future<_i9.RandomAccessFile>.value(
+              _FakeRandomAccessFile_15(
+                this,
+                Invocation.method(#open, [], {#mode: mode}),
+              ),
+            ),
+          )
+          as _i11.Future<_i9.RandomAccessFile>);
 
   @override
   _i9.RandomAccessFile openSync({_i9.FileMode? mode = _i9.FileMode.read}) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #openSync,
-          [],
-          {#mode: mode},
-        ),
-        returnValue: _FakeRandomAccessFile_15(
-          this,
-          Invocation.method(
-            #openSync,
-            [],
-            {#mode: mode},
-          ),
-        ),
-        returnValueForMissingStub: _FakeRandomAccessFile_15(
-          this,
-          Invocation.method(
-            #openSync,
-            [],
-            {#mode: mode},
-          ),
-        ),
-      ) as _i9.RandomAccessFile);
+            Invocation.method(#openSync, [], {#mode: mode}),
+            returnValue: _FakeRandomAccessFile_15(
+              this,
+              Invocation.method(#openSync, [], {#mode: mode}),
+            ),
+            returnValueForMissingStub: _FakeRandomAccessFile_15(
+              this,
+              Invocation.method(#openSync, [], {#mode: mode}),
+            ),
+          )
+          as _i9.RandomAccessFile);
 
   @override
-  _i11.Stream<List<int>> openRead([
-    int? start,
-    int? end,
-  ]) =>
+  _i11.Stream<List<int>> openRead([int? start, int? end]) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #openRead,
-          [
-            start,
-            end,
-          ],
-        ),
-        returnValue: _i11.Stream<List<int>>.empty(),
-        returnValueForMissingStub: _i11.Stream<List<int>>.empty(),
-      ) as _i11.Stream<List<int>>);
+            Invocation.method(#openRead, [start, end]),
+            returnValue: _i11.Stream<List<int>>.empty(),
+            returnValueForMissingStub: _i11.Stream<List<int>>.empty(),
+          )
+          as _i11.Stream<List<int>>);
 
   @override
   _i9.IOSink openWrite({
@@ -2956,156 +2460,116 @@ class MockFile extends _i1.Mock implements _i7.File {
     _i26.Encoding? encoding = const _i26.Utf8Codec(),
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #openWrite,
-          [],
-          {
-            #mode: mode,
-            #encoding: encoding,
-          },
-        ),
-        returnValue: _FakeIOSink_16(
-          this,
-          Invocation.method(
-            #openWrite,
-            [],
-            {
+            Invocation.method(#openWrite, [], {
               #mode: mode,
               #encoding: encoding,
-            },
-          ),
-        ),
-        returnValueForMissingStub: _FakeIOSink_16(
-          this,
-          Invocation.method(
-            #openWrite,
-            [],
-            {
-              #mode: mode,
-              #encoding: encoding,
-            },
-          ),
-        ),
-      ) as _i9.IOSink);
+            }),
+            returnValue: _FakeIOSink_16(
+              this,
+              Invocation.method(#openWrite, [], {
+                #mode: mode,
+                #encoding: encoding,
+              }),
+            ),
+            returnValueForMissingStub: _FakeIOSink_16(
+              this,
+              Invocation.method(#openWrite, [], {
+                #mode: mode,
+                #encoding: encoding,
+              }),
+            ),
+          )
+          as _i9.IOSink);
 
   @override
-  _i11.Future<_i25.Uint8List> readAsBytes() => (super.noSuchMethod(
-        Invocation.method(
-          #readAsBytes,
-          [],
-        ),
-        returnValue: _i11.Future<_i25.Uint8List>.value(_i25.Uint8List(0)),
-        returnValueForMissingStub:
-            _i11.Future<_i25.Uint8List>.value(_i25.Uint8List(0)),
-      ) as _i11.Future<_i25.Uint8List>);
-
-  @override
-  _i25.Uint8List readAsBytesSync() => (super.noSuchMethod(
-        Invocation.method(
-          #readAsBytesSync,
-          [],
-        ),
-        returnValue: _i25.Uint8List(0),
-        returnValueForMissingStub: _i25.Uint8List(0),
-      ) as _i25.Uint8List);
-
-  @override
-  _i11.Future<String> readAsString(
-          {_i26.Encoding? encoding = const _i26.Utf8Codec()}) =>
+  _i11.Future<_i25.Uint8List> readAsBytes() =>
       (super.noSuchMethod(
-        Invocation.method(
-          #readAsString,
-          [],
-          {#encoding: encoding},
-        ),
-        returnValue: _i11.Future<String>.value(_i21.dummyValue<String>(
-          this,
-          Invocation.method(
-            #readAsString,
-            [],
-            {#encoding: encoding},
-          ),
-        )),
-        returnValueForMissingStub:
-            _i11.Future<String>.value(_i21.dummyValue<String>(
-          this,
-          Invocation.method(
-            #readAsString,
-            [],
-            {#encoding: encoding},
-          ),
-        )),
-      ) as _i11.Future<String>);
+            Invocation.method(#readAsBytes, []),
+            returnValue: _i11.Future<_i25.Uint8List>.value(_i25.Uint8List(0)),
+            returnValueForMissingStub: _i11.Future<_i25.Uint8List>.value(
+              _i25.Uint8List(0),
+            ),
+          )
+          as _i11.Future<_i25.Uint8List>);
+
+  @override
+  _i25.Uint8List readAsBytesSync() =>
+      (super.noSuchMethod(
+            Invocation.method(#readAsBytesSync, []),
+            returnValue: _i25.Uint8List(0),
+            returnValueForMissingStub: _i25.Uint8List(0),
+          )
+          as _i25.Uint8List);
+
+  @override
+  _i11.Future<String> readAsString({
+    _i26.Encoding? encoding = const _i26.Utf8Codec(),
+  }) =>
+      (super.noSuchMethod(
+            Invocation.method(#readAsString, [], {#encoding: encoding}),
+            returnValue: _i11.Future<String>.value(
+              _i21.dummyValue<String>(
+                this,
+                Invocation.method(#readAsString, [], {#encoding: encoding}),
+              ),
+            ),
+            returnValueForMissingStub: _i11.Future<String>.value(
+              _i21.dummyValue<String>(
+                this,
+                Invocation.method(#readAsString, [], {#encoding: encoding}),
+              ),
+            ),
+          )
+          as _i11.Future<String>);
 
   @override
   String readAsStringSync({_i26.Encoding? encoding = const _i26.Utf8Codec()}) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #readAsStringSync,
-          [],
-          {#encoding: encoding},
-        ),
-        returnValue: _i21.dummyValue<String>(
-          this,
-          Invocation.method(
-            #readAsStringSync,
-            [],
-            {#encoding: encoding},
-          ),
-        ),
-        returnValueForMissingStub: _i21.dummyValue<String>(
-          this,
-          Invocation.method(
-            #readAsStringSync,
-            [],
-            {#encoding: encoding},
-          ),
-        ),
-      ) as String);
+            Invocation.method(#readAsStringSync, [], {#encoding: encoding}),
+            returnValue: _i21.dummyValue<String>(
+              this,
+              Invocation.method(#readAsStringSync, [], {#encoding: encoding}),
+            ),
+            returnValueForMissingStub: _i21.dummyValue<String>(
+              this,
+              Invocation.method(#readAsStringSync, [], {#encoding: encoding}),
+            ),
+          )
+          as String);
 
   @override
-  _i11.Future<List<String>> readAsLines(
-          {_i26.Encoding? encoding = const _i26.Utf8Codec()}) =>
+  _i11.Future<List<String>> readAsLines({
+    _i26.Encoding? encoding = const _i26.Utf8Codec(),
+  }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #readAsLines,
-          [],
-          {#encoding: encoding},
-        ),
-        returnValue: _i11.Future<List<String>>.value(<String>[]),
-        returnValueForMissingStub: _i11.Future<List<String>>.value(<String>[]),
-      ) as _i11.Future<List<String>>);
+            Invocation.method(#readAsLines, [], {#encoding: encoding}),
+            returnValue: _i11.Future<List<String>>.value(<String>[]),
+            returnValueForMissingStub: _i11.Future<List<String>>.value(
+              <String>[],
+            ),
+          )
+          as _i11.Future<List<String>>);
 
   @override
-  List<String> readAsLinesSync(
-          {_i26.Encoding? encoding = const _i26.Utf8Codec()}) =>
+  List<String> readAsLinesSync({
+    _i26.Encoding? encoding = const _i26.Utf8Codec(),
+  }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #readAsLinesSync,
-          [],
-          {#encoding: encoding},
-        ),
-        returnValue: <String>[],
-        returnValueForMissingStub: <String>[],
-      ) as List<String>);
+            Invocation.method(#readAsLinesSync, [], {#encoding: encoding}),
+            returnValue: <String>[],
+            returnValueForMissingStub: <String>[],
+          )
+          as List<String>);
 
   @override
   void writeAsBytesSync(
     List<int>? bytes, {
     _i9.FileMode? mode = _i9.FileMode.write,
     bool? flush = false,
-  }) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #writeAsBytesSync,
-          [bytes],
-          {
-            #mode: mode,
-            #flush: flush,
-          },
-        ),
-        returnValueForMissingStub: null,
-      );
+  }) => super.noSuchMethod(
+    Invocation.method(#writeAsBytesSync, [bytes], {#mode: mode, #flush: flush}),
+    returnValueForMissingStub: null,
+  );
 
   @override
   void writeAsStringSync(
@@ -3113,17 +2577,12 @@ class MockFile extends _i1.Mock implements _i7.File {
     _i9.FileMode? mode = _i9.FileMode.write,
     _i26.Encoding? encoding = const _i26.Utf8Codec(),
     bool? flush = false,
-  }) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #writeAsStringSync,
-          [contents],
-          {
-            #mode: mode,
-            #encoding: encoding,
-            #flush: flush,
-          },
-        ),
-        returnValueForMissingStub: null,
-      );
+  }) => super.noSuchMethod(
+    Invocation.method(
+      #writeAsStringSync,
+      [contents],
+      {#mode: mode, #encoding: encoding, #flush: flush},
+    ),
+    returnValueForMissingStub: null,
+  );
 }

@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 part 'view_class_route.g.dart';
 
 @TypedGoRoute<ViewClassRoute>(path: '/view_class')
-class ViewClassRoute extends GoRouteData with _$ViewClassRoute {
+class ViewClassRoute extends GoRouteData with $ViewClassRoute {
   const ViewClassRoute({required this.id, this.$extra});
 
   final String id;

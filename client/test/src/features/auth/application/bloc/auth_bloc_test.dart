@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:bloc_test/bloc_test.dart';
 import 'package:church_admin/church_admin.dart';
+import 'package:flutter_riverpod/misc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:riverpod/riverpod.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:rxdart/subjects.dart';
 
@@ -42,7 +42,7 @@ AuthUser initialAuthUser = AuthUser(
     'x-hasura-user-id': 'hasura-user-id',
     'exp':
         DateTime.now().add(const Duration(hours: 1)).millisecondsSinceEpoch ~/
-            1000,
+        1000,
   },
 );
 
@@ -124,8 +124,9 @@ void main() {
               .having((s) => s.userData, 'userData', initialUserData),
         ],
         verify: (bloc) {
-          final mockRepo = globalProviderContainer.read(authRepositoryProvider)
-              as MockFirebaseAuthRepository;
+          final mockRepo =
+              globalProviderContainer.read(authRepositoryProvider)
+                  as MockFirebaseAuthRepository;
 
           verifyInOrder([
             mockRepo.signInWithEmailPassword(
@@ -171,8 +172,9 @@ void main() {
               .having((s) => s.userData, 'userData', initialUserData),
         ],
         verify: (bloc) {
-          final mockRepo = globalProviderContainer.read(authRepositoryProvider)
-              as MockFirebaseAuthRepository;
+          final mockRepo =
+              globalProviderContainer.read(authRepositoryProvider)
+                  as MockFirebaseAuthRepository;
 
           verifyInOrder([
             mockRepo.signUpWithEmailPassword(
@@ -236,8 +238,9 @@ void main() {
           isA<AuthUnauthenticated>(),
         ],
         verify: (bloc) {
-          final mockRepo = globalProviderContainer.read(authRepositoryProvider)
-              as MockFirebaseAuthRepository;
+          final mockRepo =
+              globalProviderContainer.read(authRepositoryProvider)
+                  as MockFirebaseAuthRepository;
           verify(mockRepo.sendPasswordResetEmail(email: 'email@example.com'));
         },
       );
@@ -260,8 +263,9 @@ void main() {
               .having((s) => s.userData, 'userData', initialUserData),
         ],
         verify: (bloc) {
-          final mockRepo = globalProviderContainer.read(authRepositoryProvider)
-              as MockFirebaseAuthRepository;
+          final mockRepo =
+              globalProviderContainer.read(authRepositoryProvider)
+                  as MockFirebaseAuthRepository;
           verify(mockRepo.sendPasswordResetEmail(email: 'email@example.com'));
         },
       );
@@ -274,8 +278,9 @@ void main() {
         'refresh token on connectivity change when token expired',
         setUp: () {
           connectivityController = BehaviorSubject.seeded(false);
-          when(ConnectivityService.I.connectivityStream)
-              .thenAnswer((_) => connectivityController.stream);
+          when(
+            ConnectivityService.I.connectivityStream,
+          ).thenAnswer((_) => connectivityController.stream);
 
           final oldUser = initialAuthUser;
           addTearDown(() => initialAuthUser = oldUser);
@@ -298,7 +303,8 @@ void main() {
             idToken: 'refreshed',
             claims: {
               ...initialAuthUser.claims,
-              'exp': DateTime.now()
+              'exp':
+                  DateTime.now()
                       .add(const Duration(hours: 1))
                       .millisecondsSinceEpoch ~/
                   1000,
@@ -307,14 +313,21 @@ void main() {
           connectivityController.add(true);
         },
         expect: () => [
-          isA<AuthAuthenticated>()
-              .having((s) => s.authUser.idToken, 'idToken', 'stale-token'),
-          isA<AuthAuthenticated>()
-              .having((s) => s.authUser.idToken, 'idToken', 'refreshed'),
+          isA<AuthAuthenticated>().having(
+            (s) => s.authUser.idToken,
+            'idToken',
+            'stale-token',
+          ),
+          isA<AuthAuthenticated>().having(
+            (s) => s.authUser.idToken,
+            'idToken',
+            'refreshed',
+          ),
         ],
         verify: (bloc) {
-          final mockRepo = globalProviderContainer.read(authRepositoryProvider)
-              as MockFirebaseAuthRepository;
+          final mockRepo =
+              globalProviderContainer.read(authRepositoryProvider)
+                  as MockFirebaseAuthRepository;
           verify(mockRepo.refreshToken());
         },
         tearDown: () {
@@ -332,7 +345,8 @@ void main() {
             idToken: 'initial-token',
             claims: {
               ...initialAuthUser.claims,
-              'exp': DateTime.now()
+              'exp':
+                  DateTime.now()
                       .add(const Duration(seconds: 2))
                       .millisecondsSinceEpoch ~/
                   1000,
@@ -344,14 +358,21 @@ void main() {
         build: _createAuthBloc,
         wait: const Duration(seconds: 2),
         expect: () => [
-          isA<AuthAuthenticated>()
-              .having((s) => s.authUser.idToken, 'idToken', 'initial-token'),
-          isA<AuthAuthenticated>()
-              .having((s) => s.authUser.idToken, 'idToken', 'refreshed'),
+          isA<AuthAuthenticated>().having(
+            (s) => s.authUser.idToken,
+            'idToken',
+            'initial-token',
+          ),
+          isA<AuthAuthenticated>().having(
+            (s) => s.authUser.idToken,
+            'idToken',
+            'refreshed',
+          ),
         ],
         verify: (bloc) {
-          final mockRepo = globalProviderContainer.read(authRepositoryProvider)
-              as MockFirebaseAuthRepository;
+          final mockRepo =
+              globalProviderContainer.read(authRepositoryProvider)
+                  as MockFirebaseAuthRepository;
           verify(mockRepo.refreshToken()).called(1);
         },
       );
@@ -377,8 +398,9 @@ void main() {
               .having((s) => s.userData, 'userData', initialUserData),
         ],
         verify: (bloc) {
-          final mockRepo = globalProviderContainer.read(authRepositoryProvider)
-              as MockFirebaseAuthRepository;
+          final mockRepo =
+              globalProviderContainer.read(authRepositoryProvider)
+                  as MockFirebaseAuthRepository;
           verify(mockRepo.sendEmailVerification());
         },
       );
@@ -402,8 +424,9 @@ void main() {
               .having((s) => s.userData, 'userData', initialUserData),
         ],
         verify: (bloc) {
-          final mockRepo = globalProviderContainer.read(authRepositoryProvider)
-              as MockFirebaseAuthRepository;
+          final mockRepo =
+              globalProviderContainer.read(authRepositoryProvider)
+                  as MockFirebaseAuthRepository;
           verify(mockRepo.reload());
         },
       );
@@ -444,10 +467,12 @@ Future<Override> _setUpMockAuthStorage() async {
     passwordHash = null;
     return;
   });
-  when(mock.writeAuthDataToCache(captureAny))
-      .thenAnswer((i) async => authUser = i.positionalArguments[0]);
-  when(mock.writeUserToCache(captureAny))
-      .thenAnswer((i) async => user = i.positionalArguments[0]);
+  when(
+    mock.writeAuthDataToCache(captureAny),
+  ).thenAnswer((i) async => authUser = i.positionalArguments[0]);
+  when(
+    mock.writeUserToCache(captureAny),
+  ).thenAnswer((i) async => user = i.positionalArguments[0]);
   when(mock.saveUserPasswordHash(captureAny, captureAny)).thenAnswer(
     (i) async => passwordHash =
         '${i.positionalArguments[0]}-hash-${i.positionalArguments[1]}',
@@ -464,10 +489,12 @@ Future<Override> _setUpMockAuthRepository() async {
 
   final mock = MockFirebaseAuthRepository();
 
-  when(mock.signInWithEmailPassword(email: 'email', password: 'password'))
-      .thenAnswer((_) async => controller.add(initialAuthUser));
-  when(mock.signUpWithEmailPassword(email: 'email', password: 'password'))
-      .thenAnswer((_) async => controller.add(initialAuthUser));
+  when(
+    mock.signInWithEmailPassword(email: 'email', password: 'password'),
+  ).thenAnswer((_) async => controller.add(initialAuthUser));
+  when(
+    mock.signUpWithEmailPassword(email: 'email', password: 'password'),
+  ).thenAnswer((_) async => controller.add(initialAuthUser));
 
   when(mock.signOut()).thenAnswer((_) async => controller.add(null));
   when(mock.refreshToken()).thenAnswer(
@@ -476,7 +503,8 @@ Future<Override> _setUpMockAuthRepository() async {
         idToken: 'refreshed',
         claims: {
           ...initialAuthUser.claims,
-          'exp': DateTime.now()
+          'exp':
+              DateTime.now()
                   .add(const Duration(hours: 1))
                   .millisecondsSinceEpoch ~/
               1000,

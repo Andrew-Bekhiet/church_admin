@@ -6,23 +6,19 @@ part of 'unapproved_user_route.dart';
 // GoRouterGenerator
 // **************************************************************************
 
-List<RouteBase> get $appRoutes => [
-      $unapprovedUserRoute,
-    ];
+List<RouteBase> get $appRoutes => [$unapprovedUserRoute];
 
 RouteBase get $unapprovedUserRoute => GoRouteData.$route(
-      path: '/unapproved_user',
-      factory: _$UnapprovedUserRoute._fromState,
-    );
+  path: '/unapproved_user',
+  factory: $UnapprovedUserRoute._fromState,
+);
 
-mixin _$UnapprovedUserRoute on GoRouteData {
+mixin $UnapprovedUserRoute on GoRouteData {
   static UnapprovedUserRoute _fromState(GoRouterState state) =>
       const UnapprovedUserRoute();
 
   @override
-  String get location => GoRouteData.$location(
-        '/unapproved_user',
-      );
+  String get location => GoRouteData.$location('/unapproved_user');
 
   @override
   void go(BuildContext context) => context.go(location);

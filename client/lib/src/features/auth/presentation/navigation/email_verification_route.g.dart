@@ -6,23 +6,19 @@ part of 'email_verification_route.dart';
 // GoRouterGenerator
 // **************************************************************************
 
-List<RouteBase> get $appRoutes => [
-      $emailVerificationRoute,
-    ];
+List<RouteBase> get $appRoutes => [$emailVerificationRoute];
 
 RouteBase get $emailVerificationRoute => GoRouteData.$route(
-      path: '/email_verification',
-      factory: _$EmailVerificationRoute._fromState,
-    );
+  path: '/email_verification',
+  factory: $EmailVerificationRoute._fromState,
+);
 
-mixin _$EmailVerificationRoute on GoRouteData {
+mixin $EmailVerificationRoute on GoRouteData {
   static EmailVerificationRoute _fromState(GoRouterState state) =>
       const EmailVerificationRoute();
 
   @override
-  String get location => GoRouteData.$location(
-        '/email_verification',
-      );
+  String get location => GoRouteData.$location('/email_verification');
 
   @override
   void go(BuildContext context) => context.go(location);

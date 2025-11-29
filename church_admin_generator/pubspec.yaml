@@ -10,15 +10,15 @@ dependency_overrides:
   js: ^0.7.1
 
 dependencies:
-  analyzer: ^7.0.0
-  build: ^2.4.1
+  analyzer: ^8.0.0
+  build: ^4.0.0
   church_admin:
     path: ../client
   code_builder: ^4.10.1
   dart_style: ^3.1.0
   glob: ^2.1.2
   gql: ^1.0.1-alpha+1691943394579
-  source_gen: ^2.0.0
+  source_gen: ^4.0.0
 
 dev_dependencies:
   lints: ^6.0.0

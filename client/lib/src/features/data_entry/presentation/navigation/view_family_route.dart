@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 part 'view_family_route.g.dart';
 
 @TypedGoRoute<ViewFamilyRoute>(path: '/view_family')
-class ViewFamilyRoute extends GoRouteData with _$ViewFamilyRoute {
+class ViewFamilyRoute extends GoRouteData with $ViewFamilyRoute {
   const ViewFamilyRoute({required this.id, this.$extra});
 
   final String id;

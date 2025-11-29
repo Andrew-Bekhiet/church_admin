@@ -14,85 +14,67 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$Father {
-  String get id;
-  String get name;
-  String? get churchId;
-  bool get isHidden;
 
-  /// Create a copy of Father
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  $FatherCopyWith<Father> get copyWith =>
-      _$FatherCopyWithImpl<Father>(this as Father, _$identity);
+ String get id; String get name; String? get churchId; bool get isHidden;
+/// Create a copy of Father
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$FatherCopyWith<Father> get copyWith => _$FatherCopyWithImpl<Father>(this as Father, _$identity);
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is Father &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.churchId, churchId) ||
-                other.churchId == churchId) &&
-            (identical(other.isHidden, isHidden) ||
-                other.isHidden == isHidden));
-  }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(runtimeType, id, name, churchId, isHidden);
 
-  @override
-  String toString() {
-    return 'Father(id: $id, name: $name, churchId: $churchId, isHidden: $isHidden)';
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Father&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.churchId, churchId) || other.churchId == churchId)&&(identical(other.isHidden, isHidden) || other.isHidden == isHidden));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,id,name,churchId,isHidden);
+
+@override
+String toString() {
+  return 'Father(id: $id, name: $name, churchId: $churchId, isHidden: $isHidden)';
+}
+
+
 }
 
 /// @nodoc
-abstract mixin class $FatherCopyWith<$Res> {
-  factory $FatherCopyWith(Father value, $Res Function(Father) _then) =
-      _$FatherCopyWithImpl;
-  @useResult
-  $Res call({String id, String name, String? churchId, bool isHidden});
-}
+abstract mixin class $FatherCopyWith<$Res>  {
+  factory $FatherCopyWith(Father value, $Res Function(Father) _then) = _$FatherCopyWithImpl;
+@useResult
+$Res call({
+ String id, String name, String? churchId, bool isHidden
+});
 
+
+
+
+}
 /// @nodoc
-class _$FatherCopyWithImpl<$Res> implements $FatherCopyWith<$Res> {
+class _$FatherCopyWithImpl<$Res>
+    implements $FatherCopyWith<$Res> {
   _$FatherCopyWithImpl(this._self, this._then);
 
   final Father _self;
   final $Res Function(Father) _then;
 
-  /// Create a copy of Father
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? name = null,
-    Object? churchId = freezed,
-    Object? isHidden = null,
-  }) {
-    return _then(Father(
-      id: null == id
-          ? _self.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _self.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      churchId: freezed == churchId
-          ? _self.churchId
-          : churchId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      isHidden: null == isHidden
-          ? _self.isHidden
-          : isHidden // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
-  }
+/// Create a copy of Father
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? churchId = freezed,Object? isHidden = null,}) {
+  return _then(Father(
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String,churchId: freezed == churchId ? _self.churchId : churchId // ignore: cast_nullable_to_non_nullable
+as String?,isHidden: null == isHidden ? _self.isHidden : isHidden // ignore: cast_nullable_to_non_nullable
+as bool,
+  ));
 }
+
+}
+
+
 
 // dart format on

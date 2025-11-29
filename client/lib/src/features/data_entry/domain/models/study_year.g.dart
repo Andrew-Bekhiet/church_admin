@@ -40,7 +40,7 @@ class _StudyYearFields {
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'order': order,
     'name': name,
-    'id': id
+    'id': id,
   };
 }
 
@@ -49,11 +49,11 @@ class _StudyYearFields {
 // **************************************************************************
 
 StudyYear _$StudyYearFromJson(Map json) => StudyYear(
-      order: (json['order'] as num?)?.toInt() ?? 0,
-      name: json['name'] as String? ?? '',
-    );
+  order: (json['order'] as num?)?.toInt() ?? 0,
+  name: json['name'] as String? ?? '',
+);
 
 Map<String, dynamic> _$StudyYearToJson(StudyYear instance) => <String, dynamic>{
-      'order': instance.order,
-      'name': instance.name,
-    };
+  'order': instance.order,
+  'name': instance.name,
+};

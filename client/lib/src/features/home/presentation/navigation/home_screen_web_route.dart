@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 part 'home_screen_web_route.g.dart';
 
 @TypedGoRoute<HomeScreenWebRoute>(path: '/')
-class HomeScreenWebRoute extends GoRouteData with _$HomeScreenWebRoute {
+class HomeScreenWebRoute extends GoRouteData with $HomeScreenWebRoute {
   const HomeScreenWebRoute();
 
   @override

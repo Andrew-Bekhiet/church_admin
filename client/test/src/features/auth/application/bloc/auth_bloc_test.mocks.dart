@@ -26,287 +26,154 @@ import 'package:rxdart/rxdart.dart' as _i3;
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
+// ignore_for_file: invalid_use_of_internal_member
 
 class _FakeMultiFactorSession_0 extends _i1.SmartFake
     implements _i2.MultiFactorSession {
-  _FakeMultiFactorSession_0(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeMultiFactorSession_0(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeMultiFactorChallenge_1 extends _i1.SmartFake
     implements _i2.MultiFactorChallenge {
-  _FakeMultiFactorChallenge_1(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeMultiFactorChallenge_1(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeDBGraphQLClient_2 extends _i1.SmartFake
     implements _i2.DBGraphQLClient {
-  _FakeDBGraphQLClient_2(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeDBGraphQLClient_2(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeGQLParser_3 extends _i1.SmartFake implements _i2.GQLParser {
-  _FakeGQLParser_3(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeGQLParser_3(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeDBVarsTransformer_4 extends _i1.SmartFake
     implements _i2.DBVarsTransformer {
-  _FakeDBVarsTransformer_4(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeDBVarsTransformer_4(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeAdvancedQueryParser_5 extends _i1.SmartFake
     implements _i2.AdvancedQueryParser {
-  _FakeAdvancedQueryParser_5(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeAdvancedQueryParser_5(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeHomeDAO_6 extends _i1.SmartFake implements _i2.HomeDAO {
-  _FakeHomeDAO_6(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeHomeDAO_6(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeAreasDAO_7 extends _i1.SmartFake implements _i2.AreasDAO {
-  _FakeAreasDAO_7(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeAreasDAO_7(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeStreetsDAO_8 extends _i1.SmartFake implements _i2.StreetsDAO {
-  _FakeStreetsDAO_8(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeStreetsDAO_8(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeFamiliesDAO_9 extends _i1.SmartFake implements _i2.FamiliesDAO {
-  _FakeFamiliesDAO_9(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeFamiliesDAO_9(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeStoresDAO_10 extends _i1.SmartFake implements _i2.StoresDAO {
-  _FakeStoresDAO_10(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeStoresDAO_10(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakePersonsDAO_11 extends _i1.SmartFake implements _i2.PersonsDAO {
-  _FakePersonsDAO_11(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakePersonsDAO_11(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeServicesDAO_12 extends _i1.SmartFake implements _i2.ServicesDAO {
-  _FakeServicesDAO_12(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeServicesDAO_12(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeClassesDAO_13 extends _i1.SmartFake implements _i2.ClassesDAO {
-  _FakeClassesDAO_13(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeClassesDAO_13(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeGroupsDAO_14 extends _i1.SmartFake implements _i2.GroupsDAO {
-  _FakeGroupsDAO_14(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeGroupsDAO_14(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeUsersDAO_15 extends _i1.SmartFake implements _i2.UsersDAO {
-  _FakeUsersDAO_15(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeUsersDAO_15(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeMetadataDAO_16 extends _i1.SmartFake implements _i2.MetadataDAO {
-  _FakeMetadataDAO_16(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeMetadataDAO_16(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeHistoryDAO_17 extends _i1.SmartFake implements _i2.HistoryDAO {
-  _FakeHistoryDAO_17(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeHistoryDAO_17(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeDuration_18 extends _i1.SmartFake implements Duration {
-  _FakeDuration_18(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeDuration_18(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeValueStream_19<T> extends _i1.SmartFake
     implements _i3.ValueStream<T> {
-  _FakeValueStream_19(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeValueStream_19(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeStreamAllConfig_20<T> extends _i1.SmartFake
     implements _i2.StreamAllConfig<T> {
-  _FakeStreamAllConfig_20(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeStreamAllConfig_20(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeStreamCountConfig_21<T> extends _i1.SmartFake
     implements _i2.StreamCountConfig<T> {
-  _FakeStreamCountConfig_21(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeStreamCountConfig_21(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeStreamSingleByIdConfig_22<T> extends _i1.SmartFake
     implements _i2.StreamSingleByIdConfig<T> {
-  _FakeStreamSingleByIdConfig_22(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeStreamSingleByIdConfig_22(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeDatabaseService_23 extends _i1.SmartFake
     implements _i2.DatabaseService {
-  _FakeDatabaseService_23(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeDatabaseService_23(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeUser_24 extends _i1.SmartFake implements _i2.User {
-  _FakeUser_24(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeUser_24(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeStreamableDAOProxy_25<T extends _i2.ViewableWithID>
-    extends _i1.SmartFake implements _i2.StreamableDAOProxy<T> {
-  _FakeStreamableDAOProxy_25(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+    extends _i1.SmartFake
+    implements _i2.StreamableDAOProxy<T> {
+  _FakeStreamableDAOProxy_25(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakePaginatableStreamBase_26<T> extends _i1.SmartFake
     implements _i2.PaginatableStreamBase<T> {
-  _FakePaginatableStreamBase_26(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakePaginatableStreamBase_26(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 /// A class which mocks [AuthStorage].
@@ -314,92 +181,76 @@ class _FakePaginatableStreamBase_26<T> extends _i1.SmartFake
 /// See the documentation for Mockito's code generation for more information.
 class MockAuthStorage extends _i1.Mock implements _i2.AuthStorage {
   @override
-  _i4.Future<_i2.AuthUser?> getAuthDataFromCache() => (super.noSuchMethod(
-        Invocation.method(
-          #getAuthDataFromCache,
-          [],
-        ),
-        returnValue: _i4.Future<_i2.AuthUser?>.value(),
-        returnValueForMissingStub: _i4.Future<_i2.AuthUser?>.value(),
-      ) as _i4.Future<_i2.AuthUser?>);
+  _i4.Future<_i2.AuthUser?> getAuthDataFromCache() =>
+      (super.noSuchMethod(
+            Invocation.method(#getAuthDataFromCache, []),
+            returnValue: _i4.Future<_i2.AuthUser?>.value(),
+            returnValueForMissingStub: _i4.Future<_i2.AuthUser?>.value(),
+          )
+          as _i4.Future<_i2.AuthUser?>);
 
   @override
   _i4.Future<void> writeAuthDataToCache(_i2.AuthUser? authData) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #writeAuthDataToCache,
-          [authData],
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+            Invocation.method(#writeAuthDataToCache, [authData]),
+            returnValue: _i4.Future<void>.value(),
+            returnValueForMissingStub: _i4.Future<void>.value(),
+          )
+          as _i4.Future<void>);
 
   @override
-  _i4.Future<_i2.User?> getUserFromCache() => (super.noSuchMethod(
-        Invocation.method(
-          #getUserFromCache,
-          [],
-        ),
-        returnValue: _i4.Future<_i2.User?>.value(),
-        returnValueForMissingStub: _i4.Future<_i2.User?>.value(),
-      ) as _i4.Future<_i2.User?>);
-
-  @override
-  _i4.Future<void> writeUserToCache(_i2.User? user) => (super.noSuchMethod(
-        Invocation.method(
-          #writeUserToCache,
-          [user],
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
-
-  @override
-  _i4.Future<String?> getPasswordHash() => (super.noSuchMethod(
-        Invocation.method(
-          #getPasswordHash,
-          [],
-        ),
-        returnValue: _i4.Future<String?>.value(),
-        returnValueForMissingStub: _i4.Future<String?>.value(),
-      ) as _i4.Future<String?>);
-
-  @override
-  _i4.Future<void> saveUserPasswordHash(
-    String? email,
-    String? password,
-  ) =>
+  _i4.Future<_i2.User?> getUserFromCache() =>
       (super.noSuchMethod(
-        Invocation.method(
-          #saveUserPasswordHash,
-          [
-            email,
-            password,
-          ],
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+            Invocation.method(#getUserFromCache, []),
+            returnValue: _i4.Future<_i2.User?>.value(),
+            returnValueForMissingStub: _i4.Future<_i2.User?>.value(),
+          )
+          as _i4.Future<_i2.User?>);
 
   @override
-  _i4.Future<void> clearPasswordHash() => (super.noSuchMethod(
-        Invocation.method(
-          #clearPasswordHash,
-          [],
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+  _i4.Future<void> writeUserToCache(_i2.User? user) =>
+      (super.noSuchMethod(
+            Invocation.method(#writeUserToCache, [user]),
+            returnValue: _i4.Future<void>.value(),
+            returnValueForMissingStub: _i4.Future<void>.value(),
+          )
+          as _i4.Future<void>);
 
   @override
-  _i4.Future<void> clearAll() => (super.noSuchMethod(
-        Invocation.method(
-          #clearAll,
-          [],
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+  _i4.Future<String?> getPasswordHash() =>
+      (super.noSuchMethod(
+            Invocation.method(#getPasswordHash, []),
+            returnValue: _i4.Future<String?>.value(),
+            returnValueForMissingStub: _i4.Future<String?>.value(),
+          )
+          as _i4.Future<String?>);
+
+  @override
+  _i4.Future<void> saveUserPasswordHash(String? email, String? password) =>
+      (super.noSuchMethod(
+            Invocation.method(#saveUserPasswordHash, [email, password]),
+            returnValue: _i4.Future<void>.value(),
+            returnValueForMissingStub: _i4.Future<void>.value(),
+          )
+          as _i4.Future<void>);
+
+  @override
+  _i4.Future<void> clearPasswordHash() =>
+      (super.noSuchMethod(
+            Invocation.method(#clearPasswordHash, []),
+            returnValue: _i4.Future<void>.value(),
+            returnValueForMissingStub: _i4.Future<void>.value(),
+          )
+          as _i4.Future<void>);
+
+  @override
+  _i4.Future<void> clearAll() =>
+      (super.noSuchMethod(
+            Invocation.method(#clearAll, []),
+            returnValue: _i4.Future<void>.value(),
+            returnValueForMissingStub: _i4.Future<void>.value(),
+          )
+          as _i4.Future<void>);
 }
 
 /// A class which mocks [FirebaseAuthRepository].
@@ -408,11 +259,13 @@ class MockAuthStorage extends _i1.Mock implements _i2.AuthStorage {
 class MockFirebaseAuthRepository extends _i1.Mock
     implements _i2.FirebaseAuthRepository {
   @override
-  _i4.Stream<_i2.AuthUser?> get userChanges => (super.noSuchMethod(
-        Invocation.getter(#userChanges),
-        returnValue: _i4.Stream<_i2.AuthUser?>.empty(),
-        returnValueForMissingStub: _i4.Stream<_i2.AuthUser?>.empty(),
-      ) as _i4.Stream<_i2.AuthUser?>);
+  _i4.Stream<_i2.AuthUser?> get userChanges =>
+      (super.noSuchMethod(
+            Invocation.getter(#userChanges),
+            returnValue: _i4.Stream<_i2.AuthUser?>.empty(),
+            returnValueForMissingStub: _i4.Stream<_i2.AuthUser?>.empty(),
+          )
+          as _i4.Stream<_i2.AuthUser?>);
 
   @override
   _i4.Future<void> signUpWithEmailPassword({
@@ -420,17 +273,14 @@ class MockFirebaseAuthRepository extends _i1.Mock
     required String? password,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #signUpWithEmailPassword,
-          [],
-          {
-            #email: email,
-            #password: password,
-          },
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+            Invocation.method(#signUpWithEmailPassword, [], {
+              #email: email,
+              #password: password,
+            }),
+            returnValue: _i4.Future<void>.value(),
+            returnValueForMissingStub: _i4.Future<void>.value(),
+          )
+          as _i4.Future<void>);
 
   @override
   _i4.Future<void> signInWithEmailPassword({
@@ -438,39 +288,32 @@ class MockFirebaseAuthRepository extends _i1.Mock
     required String? password,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #signInWithEmailPassword,
-          [],
-          {
-            #email: email,
-            #password: password,
-          },
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+            Invocation.method(#signInWithEmailPassword, [], {
+              #email: email,
+              #password: password,
+            }),
+            returnValue: _i4.Future<void>.value(),
+            returnValueForMissingStub: _i4.Future<void>.value(),
+          )
+          as _i4.Future<void>);
 
   @override
-  _i4.Future<void> sendEmailVerification() => (super.noSuchMethod(
-        Invocation.method(
-          #sendEmailVerification,
-          [],
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+  _i4.Future<void> sendEmailVerification() =>
+      (super.noSuchMethod(
+            Invocation.method(#sendEmailVerification, []),
+            returnValue: _i4.Future<void>.value(),
+            returnValueForMissingStub: _i4.Future<void>.value(),
+          )
+          as _i4.Future<void>);
 
   @override
   _i4.Future<void> sendPasswordResetEmail({required String? email}) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #sendPasswordResetEmail,
-          [],
-          {#email: email},
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+            Invocation.method(#sendPasswordResetEmail, [], {#email: email}),
+            returnValue: _i4.Future<void>.value(),
+            returnValueForMissingStub: _i4.Future<void>.value(),
+          )
+          as _i4.Future<void>);
 
   @override
   _i4.Future<void> completeMultiFactorChallenge({
@@ -479,18 +322,15 @@ class MockFirebaseAuthRepository extends _i1.Mock
     _i2.MultiFactorInfo? selectedFactor,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #completeMultiFactorChallenge,
-          [],
-          {
-            #challenge: challenge,
-            #verificationCode: verificationCode,
-            #selectedFactor: selectedFactor,
-          },
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+            Invocation.method(#completeMultiFactorChallenge, [], {
+              #challenge: challenge,
+              #verificationCode: verificationCode,
+              #selectedFactor: selectedFactor,
+            }),
+            returnValue: _i4.Future<void>.value(),
+            returnValueForMissingStub: _i4.Future<void>.value(),
+          )
+          as _i4.Future<void>);
 
   @override
   _i4.Future<_i2.MultiFactorSession> startMultiFactorEnrollment({
@@ -498,39 +338,30 @@ class MockFirebaseAuthRepository extends _i1.Mock
     required String? phoneNumber,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #startMultiFactorEnrollment,
-          [],
-          {
-            #password: password,
-            #phoneNumber: phoneNumber,
-          },
-        ),
-        returnValue:
-            _i4.Future<_i2.MultiFactorSession>.value(_FakeMultiFactorSession_0(
-          this,
-          Invocation.method(
-            #startMultiFactorEnrollment,
-            [],
-            {
+            Invocation.method(#startMultiFactorEnrollment, [], {
               #password: password,
               #phoneNumber: phoneNumber,
-            },
-          ),
-        )),
-        returnValueForMissingStub:
-            _i4.Future<_i2.MultiFactorSession>.value(_FakeMultiFactorSession_0(
-          this,
-          Invocation.method(
-            #startMultiFactorEnrollment,
-            [],
-            {
-              #password: password,
-              #phoneNumber: phoneNumber,
-            },
-          ),
-        )),
-      ) as _i4.Future<_i2.MultiFactorSession>);
+            }),
+            returnValue: _i4.Future<_i2.MultiFactorSession>.value(
+              _FakeMultiFactorSession_0(
+                this,
+                Invocation.method(#startMultiFactorEnrollment, [], {
+                  #password: password,
+                  #phoneNumber: phoneNumber,
+                }),
+              ),
+            ),
+            returnValueForMissingStub: _i4.Future<_i2.MultiFactorSession>.value(
+              _FakeMultiFactorSession_0(
+                this,
+                Invocation.method(#startMultiFactorEnrollment, [], {
+                  #password: password,
+                  #phoneNumber: phoneNumber,
+                }),
+              ),
+            ),
+          )
+          as _i4.Future<_i2.MultiFactorSession>);
 
   @override
   _i4.Future<_i2.MultiFactorChallenge> startMultiFactorChallenge({
@@ -540,45 +371,37 @@ class MockFirebaseAuthRepository extends _i1.Mock
     int? resendToken,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #startMultiFactorChallenge,
-          [],
-          {
-            #session: session,
-            #selectedFactor: selectedFactor,
-            #phoneNumber: phoneNumber,
-            #resendToken: resendToken,
-          },
-        ),
-        returnValue: _i4.Future<_i2.MultiFactorChallenge>.value(
-            _FakeMultiFactorChallenge_1(
-          this,
-          Invocation.method(
-            #startMultiFactorChallenge,
-            [],
-            {
+            Invocation.method(#startMultiFactorChallenge, [], {
               #session: session,
               #selectedFactor: selectedFactor,
               #phoneNumber: phoneNumber,
               #resendToken: resendToken,
-            },
-          ),
-        )),
-        returnValueForMissingStub: _i4.Future<_i2.MultiFactorChallenge>.value(
-            _FakeMultiFactorChallenge_1(
-          this,
-          Invocation.method(
-            #startMultiFactorChallenge,
-            [],
-            {
-              #session: session,
-              #selectedFactor: selectedFactor,
-              #phoneNumber: phoneNumber,
-              #resendToken: resendToken,
-            },
-          ),
-        )),
-      ) as _i4.Future<_i2.MultiFactorChallenge>);
+            }),
+            returnValue: _i4.Future<_i2.MultiFactorChallenge>.value(
+              _FakeMultiFactorChallenge_1(
+                this,
+                Invocation.method(#startMultiFactorChallenge, [], {
+                  #session: session,
+                  #selectedFactor: selectedFactor,
+                  #phoneNumber: phoneNumber,
+                  #resendToken: resendToken,
+                }),
+              ),
+            ),
+            returnValueForMissingStub:
+                _i4.Future<_i2.MultiFactorChallenge>.value(
+                  _FakeMultiFactorChallenge_1(
+                    this,
+                    Invocation.method(#startMultiFactorChallenge, [], {
+                      #session: session,
+                      #selectedFactor: selectedFactor,
+                      #phoneNumber: phoneNumber,
+                      #resendToken: resendToken,
+                    }),
+                  ),
+                ),
+          )
+          as _i4.Future<_i2.MultiFactorChallenge>);
 
   @override
   _i4.Future<void> reauthWithEmailPassword({
@@ -586,57 +409,50 @@ class MockFirebaseAuthRepository extends _i1.Mock
     required String? password,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #reauthWithEmailPassword,
-          [],
-          {
-            #email: email,
-            #password: password,
-          },
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+            Invocation.method(#reauthWithEmailPassword, [], {
+              #email: email,
+              #password: password,
+            }),
+            returnValue: _i4.Future<void>.value(),
+            returnValueForMissingStub: _i4.Future<void>.value(),
+          )
+          as _i4.Future<void>);
 
   @override
-  _i4.Future<void> refreshToken() => (super.noSuchMethod(
-        Invocation.method(
-          #refreshToken,
-          [],
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+  _i4.Future<void> refreshToken() =>
+      (super.noSuchMethod(
+            Invocation.method(#refreshToken, []),
+            returnValue: _i4.Future<void>.value(),
+            returnValueForMissingStub: _i4.Future<void>.value(),
+          )
+          as _i4.Future<void>);
 
   @override
-  _i4.Future<void> reload() => (super.noSuchMethod(
-        Invocation.method(
-          #reload,
-          [],
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+  _i4.Future<void> reload() =>
+      (super.noSuchMethod(
+            Invocation.method(#reload, []),
+            returnValue: _i4.Future<void>.value(),
+            returnValueForMissingStub: _i4.Future<void>.value(),
+          )
+          as _i4.Future<void>);
 
   @override
-  _i4.Future<void> signOut() => (super.noSuchMethod(
-        Invocation.method(
-          #signOut,
-          [],
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+  _i4.Future<void> signOut() =>
+      (super.noSuchMethod(
+            Invocation.method(#signOut, []),
+            returnValue: _i4.Future<void>.value(),
+            returnValueForMissingStub: _i4.Future<void>.value(),
+          )
+          as _i4.Future<void>);
 
   @override
-  _i4.Future<void> dispose() => (super.noSuchMethod(
-        Invocation.method(
-          #dispose,
-          [],
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+  _i4.Future<void> dispose() =>
+      (super.noSuchMethod(
+            Invocation.method(#dispose, []),
+            returnValue: _i4.Future<void>.value(),
+            returnValueForMissingStub: _i4.Future<void>.value(),
+          )
+          as _i4.Future<void>);
 }
 
 /// A class which mocks [DatabaseService].
@@ -644,220 +460,221 @@ class MockFirebaseAuthRepository extends _i1.Mock
 /// See the documentation for Mockito's code generation for more information.
 class MockDatabaseService extends _i1.Mock implements _i2.DatabaseService {
   @override
-  _i2.DBGraphQLClient get graphQLClient => (super.noSuchMethod(
-        Invocation.getter(#graphQLClient),
-        returnValue: _FakeDBGraphQLClient_2(
-          this,
-          Invocation.getter(#graphQLClient),
-        ),
-        returnValueForMissingStub: _FakeDBGraphQLClient_2(
-          this,
-          Invocation.getter(#graphQLClient),
-        ),
-      ) as _i2.DBGraphQLClient);
+  _i2.DBGraphQLClient get graphQLClient =>
+      (super.noSuchMethod(
+            Invocation.getter(#graphQLClient),
+            returnValue: _FakeDBGraphQLClient_2(
+              this,
+              Invocation.getter(#graphQLClient),
+            ),
+            returnValueForMissingStub: _FakeDBGraphQLClient_2(
+              this,
+              Invocation.getter(#graphQLClient),
+            ),
+          )
+          as _i2.DBGraphQLClient);
 
   @override
-  _i2.GQLParser get parser => (super.noSuchMethod(
-        Invocation.getter(#parser),
-        returnValue: _FakeGQLParser_3(
-          this,
-          Invocation.getter(#parser),
-        ),
-        returnValueForMissingStub: _FakeGQLParser_3(
-          this,
-          Invocation.getter(#parser),
-        ),
-      ) as _i2.GQLParser);
+  _i2.GQLParser get parser =>
+      (super.noSuchMethod(
+            Invocation.getter(#parser),
+            returnValue: _FakeGQLParser_3(this, Invocation.getter(#parser)),
+            returnValueForMissingStub: _FakeGQLParser_3(
+              this,
+              Invocation.getter(#parser),
+            ),
+          )
+          as _i2.GQLParser);
 
   @override
-  _i2.DBVarsTransformer get varsTransformer => (super.noSuchMethod(
-        Invocation.getter(#varsTransformer),
-        returnValue: _FakeDBVarsTransformer_4(
-          this,
-          Invocation.getter(#varsTransformer),
-        ),
-        returnValueForMissingStub: _FakeDBVarsTransformer_4(
-          this,
-          Invocation.getter(#varsTransformer),
-        ),
-      ) as _i2.DBVarsTransformer);
+  _i2.DBVarsTransformer get varsTransformer =>
+      (super.noSuchMethod(
+            Invocation.getter(#varsTransformer),
+            returnValue: _FakeDBVarsTransformer_4(
+              this,
+              Invocation.getter(#varsTransformer),
+            ),
+            returnValueForMissingStub: _FakeDBVarsTransformer_4(
+              this,
+              Invocation.getter(#varsTransformer),
+            ),
+          )
+          as _i2.DBVarsTransformer);
 
   @override
-  _i2.AdvancedQueryParser get advancedQueryParser => (super.noSuchMethod(
-        Invocation.getter(#advancedQueryParser),
-        returnValue: _FakeAdvancedQueryParser_5(
-          this,
-          Invocation.getter(#advancedQueryParser),
-        ),
-        returnValueForMissingStub: _FakeAdvancedQueryParser_5(
-          this,
-          Invocation.getter(#advancedQueryParser),
-        ),
-      ) as _i2.AdvancedQueryParser);
+  _i2.AdvancedQueryParser get advancedQueryParser =>
+      (super.noSuchMethod(
+            Invocation.getter(#advancedQueryParser),
+            returnValue: _FakeAdvancedQueryParser_5(
+              this,
+              Invocation.getter(#advancedQueryParser),
+            ),
+            returnValueForMissingStub: _FakeAdvancedQueryParser_5(
+              this,
+              Invocation.getter(#advancedQueryParser),
+            ),
+          )
+          as _i2.AdvancedQueryParser);
 
   @override
-  _i2.HomeDAO get home => (super.noSuchMethod(
-        Invocation.getter(#home),
-        returnValue: _FakeHomeDAO_6(
-          this,
-          Invocation.getter(#home),
-        ),
-        returnValueForMissingStub: _FakeHomeDAO_6(
-          this,
-          Invocation.getter(#home),
-        ),
-      ) as _i2.HomeDAO);
+  _i2.HomeDAO get home =>
+      (super.noSuchMethod(
+            Invocation.getter(#home),
+            returnValue: _FakeHomeDAO_6(this, Invocation.getter(#home)),
+            returnValueForMissingStub: _FakeHomeDAO_6(
+              this,
+              Invocation.getter(#home),
+            ),
+          )
+          as _i2.HomeDAO);
 
   @override
-  _i2.AreasDAO get areas => (super.noSuchMethod(
-        Invocation.getter(#areas),
-        returnValue: _FakeAreasDAO_7(
-          this,
-          Invocation.getter(#areas),
-        ),
-        returnValueForMissingStub: _FakeAreasDAO_7(
-          this,
-          Invocation.getter(#areas),
-        ),
-      ) as _i2.AreasDAO);
+  _i2.AreasDAO get areas =>
+      (super.noSuchMethod(
+            Invocation.getter(#areas),
+            returnValue: _FakeAreasDAO_7(this, Invocation.getter(#areas)),
+            returnValueForMissingStub: _FakeAreasDAO_7(
+              this,
+              Invocation.getter(#areas),
+            ),
+          )
+          as _i2.AreasDAO);
 
   @override
-  _i2.StreetsDAO get streets => (super.noSuchMethod(
-        Invocation.getter(#streets),
-        returnValue: _FakeStreetsDAO_8(
-          this,
-          Invocation.getter(#streets),
-        ),
-        returnValueForMissingStub: _FakeStreetsDAO_8(
-          this,
-          Invocation.getter(#streets),
-        ),
-      ) as _i2.StreetsDAO);
+  _i2.StreetsDAO get streets =>
+      (super.noSuchMethod(
+            Invocation.getter(#streets),
+            returnValue: _FakeStreetsDAO_8(this, Invocation.getter(#streets)),
+            returnValueForMissingStub: _FakeStreetsDAO_8(
+              this,
+              Invocation.getter(#streets),
+            ),
+          )
+          as _i2.StreetsDAO);
 
   @override
-  _i2.FamiliesDAO get families => (super.noSuchMethod(
-        Invocation.getter(#families),
-        returnValue: _FakeFamiliesDAO_9(
-          this,
-          Invocation.getter(#families),
-        ),
-        returnValueForMissingStub: _FakeFamiliesDAO_9(
-          this,
-          Invocation.getter(#families),
-        ),
-      ) as _i2.FamiliesDAO);
+  _i2.FamiliesDAO get families =>
+      (super.noSuchMethod(
+            Invocation.getter(#families),
+            returnValue: _FakeFamiliesDAO_9(this, Invocation.getter(#families)),
+            returnValueForMissingStub: _FakeFamiliesDAO_9(
+              this,
+              Invocation.getter(#families),
+            ),
+          )
+          as _i2.FamiliesDAO);
 
   @override
-  _i2.StoresDAO get stores => (super.noSuchMethod(
-        Invocation.getter(#stores),
-        returnValue: _FakeStoresDAO_10(
-          this,
-          Invocation.getter(#stores),
-        ),
-        returnValueForMissingStub: _FakeStoresDAO_10(
-          this,
-          Invocation.getter(#stores),
-        ),
-      ) as _i2.StoresDAO);
+  _i2.StoresDAO get stores =>
+      (super.noSuchMethod(
+            Invocation.getter(#stores),
+            returnValue: _FakeStoresDAO_10(this, Invocation.getter(#stores)),
+            returnValueForMissingStub: _FakeStoresDAO_10(
+              this,
+              Invocation.getter(#stores),
+            ),
+          )
+          as _i2.StoresDAO);
 
   @override
-  _i2.PersonsDAO get persons => (super.noSuchMethod(
-        Invocation.getter(#persons),
-        returnValue: _FakePersonsDAO_11(
-          this,
-          Invocation.getter(#persons),
-        ),
-        returnValueForMissingStub: _FakePersonsDAO_11(
-          this,
-          Invocation.getter(#persons),
-        ),
-      ) as _i2.PersonsDAO);
+  _i2.PersonsDAO get persons =>
+      (super.noSuchMethod(
+            Invocation.getter(#persons),
+            returnValue: _FakePersonsDAO_11(this, Invocation.getter(#persons)),
+            returnValueForMissingStub: _FakePersonsDAO_11(
+              this,
+              Invocation.getter(#persons),
+            ),
+          )
+          as _i2.PersonsDAO);
 
   @override
-  _i2.ServicesDAO get services => (super.noSuchMethod(
-        Invocation.getter(#services),
-        returnValue: _FakeServicesDAO_12(
-          this,
-          Invocation.getter(#services),
-        ),
-        returnValueForMissingStub: _FakeServicesDAO_12(
-          this,
-          Invocation.getter(#services),
-        ),
-      ) as _i2.ServicesDAO);
+  _i2.ServicesDAO get services =>
+      (super.noSuchMethod(
+            Invocation.getter(#services),
+            returnValue: _FakeServicesDAO_12(
+              this,
+              Invocation.getter(#services),
+            ),
+            returnValueForMissingStub: _FakeServicesDAO_12(
+              this,
+              Invocation.getter(#services),
+            ),
+          )
+          as _i2.ServicesDAO);
 
   @override
-  _i2.ClassesDAO get classes => (super.noSuchMethod(
-        Invocation.getter(#classes),
-        returnValue: _FakeClassesDAO_13(
-          this,
-          Invocation.getter(#classes),
-        ),
-        returnValueForMissingStub: _FakeClassesDAO_13(
-          this,
-          Invocation.getter(#classes),
-        ),
-      ) as _i2.ClassesDAO);
+  _i2.ClassesDAO get classes =>
+      (super.noSuchMethod(
+            Invocation.getter(#classes),
+            returnValue: _FakeClassesDAO_13(this, Invocation.getter(#classes)),
+            returnValueForMissingStub: _FakeClassesDAO_13(
+              this,
+              Invocation.getter(#classes),
+            ),
+          )
+          as _i2.ClassesDAO);
 
   @override
-  _i2.GroupsDAO get groups => (super.noSuchMethod(
-        Invocation.getter(#groups),
-        returnValue: _FakeGroupsDAO_14(
-          this,
-          Invocation.getter(#groups),
-        ),
-        returnValueForMissingStub: _FakeGroupsDAO_14(
-          this,
-          Invocation.getter(#groups),
-        ),
-      ) as _i2.GroupsDAO);
+  _i2.GroupsDAO get groups =>
+      (super.noSuchMethod(
+            Invocation.getter(#groups),
+            returnValue: _FakeGroupsDAO_14(this, Invocation.getter(#groups)),
+            returnValueForMissingStub: _FakeGroupsDAO_14(
+              this,
+              Invocation.getter(#groups),
+            ),
+          )
+          as _i2.GroupsDAO);
 
   @override
-  _i2.UsersDAO get users => (super.noSuchMethod(
-        Invocation.getter(#users),
-        returnValue: _FakeUsersDAO_15(
-          this,
-          Invocation.getter(#users),
-        ),
-        returnValueForMissingStub: _FakeUsersDAO_15(
-          this,
-          Invocation.getter(#users),
-        ),
-      ) as _i2.UsersDAO);
+  _i2.UsersDAO get users =>
+      (super.noSuchMethod(
+            Invocation.getter(#users),
+            returnValue: _FakeUsersDAO_15(this, Invocation.getter(#users)),
+            returnValueForMissingStub: _FakeUsersDAO_15(
+              this,
+              Invocation.getter(#users),
+            ),
+          )
+          as _i2.UsersDAO);
 
   @override
-  _i2.MetadataDAO get metadata => (super.noSuchMethod(
-        Invocation.getter(#metadata),
-        returnValue: _FakeMetadataDAO_16(
-          this,
-          Invocation.getter(#metadata),
-        ),
-        returnValueForMissingStub: _FakeMetadataDAO_16(
-          this,
-          Invocation.getter(#metadata),
-        ),
-      ) as _i2.MetadataDAO);
+  _i2.MetadataDAO get metadata =>
+      (super.noSuchMethod(
+            Invocation.getter(#metadata),
+            returnValue: _FakeMetadataDAO_16(
+              this,
+              Invocation.getter(#metadata),
+            ),
+            returnValueForMissingStub: _FakeMetadataDAO_16(
+              this,
+              Invocation.getter(#metadata),
+            ),
+          )
+          as _i2.MetadataDAO);
 
   @override
-  _i2.HistoryDAO get history => (super.noSuchMethod(
-        Invocation.getter(#history),
-        returnValue: _FakeHistoryDAO_17(
-          this,
-          Invocation.getter(#history),
-        ),
-        returnValueForMissingStub: _FakeHistoryDAO_17(
-          this,
-          Invocation.getter(#history),
-        ),
-      ) as _i2.HistoryDAO);
+  _i2.HistoryDAO get history =>
+      (super.noSuchMethod(
+            Invocation.getter(#history),
+            returnValue: _FakeHistoryDAO_17(this, Invocation.getter(#history)),
+            returnValueForMissingStub: _FakeHistoryDAO_17(
+              this,
+              Invocation.getter(#history),
+            ),
+          )
+          as _i2.HistoryDAO);
 
   @override
   Map<Type, _i2.DAOBase<_i2.ViewableWithID>> get daosByType =>
       (super.noSuchMethod(
-        Invocation.getter(#daosByType),
-        returnValue: <Type, _i2.DAOBase<_i2.ViewableWithID>>{},
-        returnValueForMissingStub: <Type, _i2.DAOBase<_i2.ViewableWithID>>{},
-      ) as Map<Type, _i2.DAOBase<_i2.ViewableWithID>>);
+            Invocation.getter(#daosByType),
+            returnValue: <Type, _i2.DAOBase<_i2.ViewableWithID>>{},
+            returnValueForMissingStub:
+                <Type, _i2.DAOBase<_i2.ViewableWithID>>{},
+          )
+          as Map<Type, _i2.DAOBase<_i2.ViewableWithID>>);
 }
 
 /// A class which mocks [LocalAuthService].
@@ -865,100 +682,92 @@ class MockDatabaseService extends _i1.Mock implements _i2.DatabaseService {
 /// See the documentation for Mockito's code generation for more information.
 class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
   @override
-  Duration get timeToReauth => (super.noSuchMethod(
-        Invocation.getter(#timeToReauth),
-        returnValue: _FakeDuration_18(
-          this,
-          Invocation.getter(#timeToReauth),
-        ),
-        returnValueForMissingStub: _FakeDuration_18(
-          this,
-          Invocation.getter(#timeToReauth),
-        ),
-      ) as Duration);
+  Duration get timeToReauth =>
+      (super.noSuchMethod(
+            Invocation.getter(#timeToReauth),
+            returnValue: _FakeDuration_18(
+              this,
+              Invocation.getter(#timeToReauth),
+            ),
+            returnValueForMissingStub: _FakeDuration_18(
+              this,
+              Invocation.getter(#timeToReauth),
+            ),
+          )
+          as Duration);
 
   @override
-  bool get shouldAuthenticate => (super.noSuchMethod(
-        Invocation.getter(#shouldAuthenticate),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
+  bool get shouldAuthenticate =>
+      (super.noSuchMethod(
+            Invocation.getter(#shouldAuthenticate),
+            returnValue: false,
+            returnValueForMissingStub: false,
+          )
+          as bool);
 
   @override
-  _i4.Stream<void> get refreshUIStream => (super.noSuchMethod(
-        Invocation.getter(#refreshUIStream),
-        returnValue: _i4.Stream<void>.empty(),
-        returnValueForMissingStub: _i4.Stream<void>.empty(),
-      ) as _i4.Stream<void>);
+  _i4.Stream<void> get refreshUIStream =>
+      (super.noSuchMethod(
+            Invocation.getter(#refreshUIStream),
+            returnValue: _i4.Stream<void>.empty(),
+            returnValueForMissingStub: _i4.Stream<void>.empty(),
+          )
+          as _i4.Stream<void>);
 
   @override
-  bool requestOneTimeAuthForPath(String? path) => (super.noSuchMethod(
-        Invocation.method(
-          #requestOneTimeAuthForPath,
-          [path],
-        ),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
+  bool requestOneTimeAuthForPath(String? path) =>
+      (super.noSuchMethod(
+            Invocation.method(#requestOneTimeAuthForPath, [path]),
+            returnValue: false,
+            returnValueForMissingStub: false,
+          )
+          as bool);
 
   @override
-  bool shouldAuthenticateForPath(String? path) => (super.noSuchMethod(
-        Invocation.method(
-          #shouldAuthenticateForPath,
-          [path],
-        ),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
+  bool shouldAuthenticateForPath(String? path) =>
+      (super.noSuchMethod(
+            Invocation.method(#shouldAuthenticateForPath, [path]),
+            returnValue: false,
+            returnValueForMissingStub: false,
+          )
+          as bool);
 
   @override
   void didChangeAppLifecycleState(_i5.AppLifecycleState? state) =>
       super.noSuchMethod(
-        Invocation.method(
-          #didChangeAppLifecycleState,
-          [state],
-        ),
+        Invocation.method(#didChangeAppLifecycleState, [state]),
         returnValueForMissingStub: null,
       );
 
   @override
   void scheduleReauth() => super.noSuchMethod(
-        Invocation.method(
-          #scheduleReauth,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
+    Invocation.method(#scheduleReauth, []),
+    returnValueForMissingStub: null,
+  );
 
   @override
   void resetAuthState({String? path}) => super.noSuchMethod(
-        Invocation.method(
-          #resetAuthState,
-          [],
-          {#path: path},
-        ),
-        returnValueForMissingStub: null,
-      );
+    Invocation.method(#resetAuthState, [], {#path: path}),
+    returnValueForMissingStub: null,
+  );
 
   @override
-  _i4.Future<bool> canCheckBiometrics() => (super.noSuchMethod(
-        Invocation.method(
-          #canCheckBiometrics,
-          [],
-        ),
-        returnValue: _i4.Future<bool>.value(false),
-        returnValueForMissingStub: _i4.Future<bool>.value(false),
-      ) as _i4.Future<bool>);
+  _i4.Future<bool> canCheckBiometrics() =>
+      (super.noSuchMethod(
+            Invocation.method(#canCheckBiometrics, []),
+            returnValue: _i4.Future<bool>.value(false),
+            returnValueForMissingStub: _i4.Future<bool>.value(false),
+          )
+          as _i4.Future<bool>);
 
   @override
-  _i4.Future<bool> authenticate() => (super.noSuchMethod(
-        Invocation.method(
-          #authenticate,
-          [],
-        ),
-        returnValue: _i4.Future<bool>.value(false),
-        returnValueForMissingStub: _i4.Future<bool>.value(false),
-      ) as _i4.Future<bool>);
+  _i4.Future<bool> authenticate() =>
+      (super.noSuchMethod(
+            Invocation.method(#authenticate, []),
+            returnValue: _i4.Future<bool>.value(false),
+            returnValueForMissingStub: _i4.Future<bool>.value(false),
+          )
+          as _i4.Future<bool>);
 
   @override
   _i4.Future<bool> verifyPassword({
@@ -967,174 +776,136 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
     String? storedPasswordHash,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #verifyPassword,
-          [],
-          {
-            #email: email,
-            #password: password,
-            #storedPasswordHash: storedPasswordHash,
-          },
-        ),
-        returnValue: _i4.Future<bool>.value(false),
-        returnValueForMissingStub: _i4.Future<bool>.value(false),
-      ) as _i4.Future<bool>);
+            Invocation.method(#verifyPassword, [], {
+              #email: email,
+              #password: password,
+              #storedPasswordHash: storedPasswordHash,
+            }),
+            returnValue: _i4.Future<bool>.value(false),
+            returnValueForMissingStub: _i4.Future<bool>.value(false),
+          )
+          as _i4.Future<bool>);
 
   @override
-  _i4.Future<void> dispose() => (super.noSuchMethod(
-        Invocation.method(
-          #dispose,
-          [],
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+  _i4.Future<void> dispose() =>
+      (super.noSuchMethod(
+            Invocation.method(#dispose, []),
+            returnValue: _i4.Future<void>.value(),
+            returnValueForMissingStub: _i4.Future<void>.value(),
+          )
+          as _i4.Future<void>);
 
   @override
-  _i4.Future<bool> didPopRoute() => (super.noSuchMethod(
-        Invocation.method(
-          #didPopRoute,
-          [],
-        ),
-        returnValue: _i4.Future<bool>.value(false),
-        returnValueForMissingStub: _i4.Future<bool>.value(false),
-      ) as _i4.Future<bool>);
+  _i4.Future<bool> didPopRoute() =>
+      (super.noSuchMethod(
+            Invocation.method(#didPopRoute, []),
+            returnValue: _i4.Future<bool>.value(false),
+            returnValueForMissingStub: _i4.Future<bool>.value(false),
+          )
+          as _i4.Future<bool>);
 
   @override
   bool handleStartBackGesture(_i6.PredictiveBackEvent? backEvent) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #handleStartBackGesture,
-          [backEvent],
-        ),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
+            Invocation.method(#handleStartBackGesture, [backEvent]),
+            returnValue: false,
+            returnValueForMissingStub: false,
+          )
+          as bool);
 
   @override
   void handleUpdateBackGestureProgress(_i6.PredictiveBackEvent? backEvent) =>
       super.noSuchMethod(
-        Invocation.method(
-          #handleUpdateBackGestureProgress,
-          [backEvent],
-        ),
+        Invocation.method(#handleUpdateBackGestureProgress, [backEvent]),
         returnValueForMissingStub: null,
       );
 
   @override
   void handleCommitBackGesture() => super.noSuchMethod(
-        Invocation.method(
-          #handleCommitBackGesture,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
+    Invocation.method(#handleCommitBackGesture, []),
+    returnValueForMissingStub: null,
+  );
 
   @override
   void handleCancelBackGesture() => super.noSuchMethod(
-        Invocation.method(
-          #handleCancelBackGesture,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
+    Invocation.method(#handleCancelBackGesture, []),
+    returnValueForMissingStub: null,
+  );
 
   @override
-  _i4.Future<bool> didPushRoute(String? route) => (super.noSuchMethod(
-        Invocation.method(
-          #didPushRoute,
-          [route],
-        ),
-        returnValue: _i4.Future<bool>.value(false),
-        returnValueForMissingStub: _i4.Future<bool>.value(false),
-      ) as _i4.Future<bool>);
+  _i4.Future<bool> didPushRoute(String? route) =>
+      (super.noSuchMethod(
+            Invocation.method(#didPushRoute, [route]),
+            returnValue: _i4.Future<bool>.value(false),
+            returnValueForMissingStub: _i4.Future<bool>.value(false),
+          )
+          as _i4.Future<bool>);
 
   @override
   _i4.Future<bool> didPushRouteInformation(
-          _i7.RouteInformation? routeInformation) =>
+    _i7.RouteInformation? routeInformation,
+  ) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #didPushRouteInformation,
-          [routeInformation],
-        ),
-        returnValue: _i4.Future<bool>.value(false),
-        returnValueForMissingStub: _i4.Future<bool>.value(false),
-      ) as _i4.Future<bool>);
+            Invocation.method(#didPushRouteInformation, [routeInformation]),
+            returnValue: _i4.Future<bool>.value(false),
+            returnValueForMissingStub: _i4.Future<bool>.value(false),
+          )
+          as _i4.Future<bool>);
 
   @override
   void didChangeMetrics() => super.noSuchMethod(
-        Invocation.method(
-          #didChangeMetrics,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
+    Invocation.method(#didChangeMetrics, []),
+    returnValueForMissingStub: null,
+  );
 
   @override
   void didChangeTextScaleFactor() => super.noSuchMethod(
-        Invocation.method(
-          #didChangeTextScaleFactor,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
+    Invocation.method(#didChangeTextScaleFactor, []),
+    returnValueForMissingStub: null,
+  );
 
   @override
   void didChangePlatformBrightness() => super.noSuchMethod(
-        Invocation.method(
-          #didChangePlatformBrightness,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
+    Invocation.method(#didChangePlatformBrightness, []),
+    returnValueForMissingStub: null,
+  );
 
   @override
   void didChangeLocales(List<_i5.Locale>? locales) => super.noSuchMethod(
-        Invocation.method(
-          #didChangeLocales,
-          [locales],
-        ),
-        returnValueForMissingStub: null,
-      );
+    Invocation.method(#didChangeLocales, [locales]),
+    returnValueForMissingStub: null,
+  );
 
   @override
   void didChangeViewFocus(_i5.ViewFocusEvent? event) => super.noSuchMethod(
-        Invocation.method(
-          #didChangeViewFocus,
-          [event],
-        ),
-        returnValueForMissingStub: null,
-      );
+    Invocation.method(#didChangeViewFocus, [event]),
+    returnValueForMissingStub: null,
+  );
 
   @override
-  _i4.Future<_i5.AppExitResponse> didRequestAppExit() => (super.noSuchMethod(
-        Invocation.method(
-          #didRequestAppExit,
-          [],
-        ),
-        returnValue:
-            _i4.Future<_i5.AppExitResponse>.value(_i5.AppExitResponse.exit),
-        returnValueForMissingStub:
-            _i4.Future<_i5.AppExitResponse>.value(_i5.AppExitResponse.exit),
-      ) as _i4.Future<_i5.AppExitResponse>);
+  _i4.Future<_i5.AppExitResponse> didRequestAppExit() =>
+      (super.noSuchMethod(
+            Invocation.method(#didRequestAppExit, []),
+            returnValue: _i4.Future<_i5.AppExitResponse>.value(
+              _i5.AppExitResponse.exit,
+            ),
+            returnValueForMissingStub: _i4.Future<_i5.AppExitResponse>.value(
+              _i5.AppExitResponse.exit,
+            ),
+          )
+          as _i4.Future<_i5.AppExitResponse>);
 
   @override
   void didHaveMemoryPressure() => super.noSuchMethod(
-        Invocation.method(
-          #didHaveMemoryPressure,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
+    Invocation.method(#didHaveMemoryPressure, []),
+    returnValueForMissingStub: null,
+  );
 
   @override
   void didChangeAccessibilityFeatures() => super.noSuchMethod(
-        Invocation.method(
-          #didChangeAccessibilityFeatures,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
+    Invocation.method(#didChangeAccessibilityFeatures, []),
+    returnValueForMissingStub: null,
+  );
 }
 
 /// A class which mocks [ConnectivityService].
@@ -1143,50 +914,52 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
 class MockConnectivityService extends _i1.Mock
     implements _i2.ConnectivityService {
   @override
-  String get urlToPing => (super.noSuchMethod(
-        Invocation.getter(#urlToPing),
-        returnValue: _i8.dummyValue<String>(
-          this,
-          Invocation.getter(#urlToPing),
-        ),
-        returnValueForMissingStub: _i8.dummyValue<String>(
-          this,
-          Invocation.getter(#urlToPing),
-        ),
-      ) as String);
+  String get urlToPing =>
+      (super.noSuchMethod(
+            Invocation.getter(#urlToPing),
+            returnValue: _i8.dummyValue<String>(
+              this,
+              Invocation.getter(#urlToPing),
+            ),
+            returnValueForMissingStub: _i8.dummyValue<String>(
+              this,
+              Invocation.getter(#urlToPing),
+            ),
+          )
+          as String);
 
   @override
-  _i3.ValueStream<bool> get connectivityStream => (super.noSuchMethod(
-        Invocation.getter(#connectivityStream),
-        returnValue: _FakeValueStream_19<bool>(
-          this,
-          Invocation.getter(#connectivityStream),
-        ),
-        returnValueForMissingStub: _FakeValueStream_19<bool>(
-          this,
-          Invocation.getter(#connectivityStream),
-        ),
-      ) as _i3.ValueStream<bool>);
+  _i3.ValueStream<bool> get connectivityStream =>
+      (super.noSuchMethod(
+            Invocation.getter(#connectivityStream),
+            returnValue: _FakeValueStream_19<bool>(
+              this,
+              Invocation.getter(#connectivityStream),
+            ),
+            returnValueForMissingStub: _FakeValueStream_19<bool>(
+              this,
+              Invocation.getter(#connectivityStream),
+            ),
+          )
+          as _i3.ValueStream<bool>);
 
   @override
-  _i4.Future<bool> isConnected() => (super.noSuchMethod(
-        Invocation.method(
-          #isConnected,
-          [],
-        ),
-        returnValue: _i4.Future<bool>.value(false),
-        returnValueForMissingStub: _i4.Future<bool>.value(false),
-      ) as _i4.Future<bool>);
+  _i4.Future<bool> isConnected() =>
+      (super.noSuchMethod(
+            Invocation.method(#isConnected, []),
+            returnValue: _i4.Future<bool>.value(false),
+            returnValueForMissingStub: _i4.Future<bool>.value(false),
+          )
+          as _i4.Future<bool>);
 
   @override
-  _i4.Future<void> dispose() => (super.noSuchMethod(
-        Invocation.method(
-          #dispose,
-          [],
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+  _i4.Future<void> dispose() =>
+      (super.noSuchMethod(
+            Invocation.method(#dispose, []),
+            returnValue: _i4.Future<void>.value(),
+            returnValueForMissingStub: _i4.Future<void>.value(),
+          )
+          as _i4.Future<void>);
 }
 
 /// A class which mocks [UsersDAO].
@@ -1194,97 +967,102 @@ class MockConnectivityService extends _i1.Mock
 /// See the documentation for Mockito's code generation for more information.
 class MockUsersDAO extends _i1.Mock implements _i2.UsersDAO {
   @override
-  _i2.StreamAllConfig<_i2.User> get baseStreamAllConfig => (super.noSuchMethod(
-        Invocation.getter(#baseStreamAllConfig),
-        returnValue: _FakeStreamAllConfig_20<_i2.User>(
-          this,
-          Invocation.getter(#baseStreamAllConfig),
-        ),
-        returnValueForMissingStub: _FakeStreamAllConfig_20<_i2.User>(
-          this,
-          Invocation.getter(#baseStreamAllConfig),
-        ),
-      ) as _i2.StreamAllConfig<_i2.User>);
+  _i2.StreamAllConfig<_i2.User> get baseStreamAllConfig =>
+      (super.noSuchMethod(
+            Invocation.getter(#baseStreamAllConfig),
+            returnValue: _FakeStreamAllConfig_20<_i2.User>(
+              this,
+              Invocation.getter(#baseStreamAllConfig),
+            ),
+            returnValueForMissingStub: _FakeStreamAllConfig_20<_i2.User>(
+              this,
+              Invocation.getter(#baseStreamAllConfig),
+            ),
+          )
+          as _i2.StreamAllConfig<_i2.User>);
 
   @override
   _i2.StreamCountConfig<_i2.User> get baseStreamCountConfig =>
       (super.noSuchMethod(
-        Invocation.getter(#baseStreamCountConfig),
-        returnValue: _FakeStreamCountConfig_21<_i2.User>(
-          this,
-          Invocation.getter(#baseStreamCountConfig),
-        ),
-        returnValueForMissingStub: _FakeStreamCountConfig_21<_i2.User>(
-          this,
-          Invocation.getter(#baseStreamCountConfig),
-        ),
-      ) as _i2.StreamCountConfig<_i2.User>);
+            Invocation.getter(#baseStreamCountConfig),
+            returnValue: _FakeStreamCountConfig_21<_i2.User>(
+              this,
+              Invocation.getter(#baseStreamCountConfig),
+            ),
+            returnValueForMissingStub: _FakeStreamCountConfig_21<_i2.User>(
+              this,
+              Invocation.getter(#baseStreamCountConfig),
+            ),
+          )
+          as _i2.StreamCountConfig<_i2.User>);
 
   @override
   _i2.StreamSingleByIdConfig<_i2.User> get baseStreamSingleByIdConfig =>
       (super.noSuchMethod(
-        Invocation.getter(#baseStreamSingleByIdConfig),
-        returnValue: _FakeStreamSingleByIdConfig_22<_i2.User>(
-          this,
-          Invocation.getter(#baseStreamSingleByIdConfig),
-        ),
-        returnValueForMissingStub: _FakeStreamSingleByIdConfig_22<_i2.User>(
-          this,
-          Invocation.getter(#baseStreamSingleByIdConfig),
-        ),
-      ) as _i2.StreamSingleByIdConfig<_i2.User>);
+            Invocation.getter(#baseStreamSingleByIdConfig),
+            returnValue: _FakeStreamSingleByIdConfig_22<_i2.User>(
+              this,
+              Invocation.getter(#baseStreamSingleByIdConfig),
+            ),
+            returnValueForMissingStub: _FakeStreamSingleByIdConfig_22<_i2.User>(
+              this,
+              Invocation.getter(#baseStreamSingleByIdConfig),
+            ),
+          )
+          as _i2.StreamSingleByIdConfig<_i2.User>);
 
   @override
-  _i2.DatabaseService get db => (super.noSuchMethod(
-        Invocation.getter(#db),
-        returnValue: _FakeDatabaseService_23(
-          this,
-          Invocation.getter(#db),
-        ),
-        returnValueForMissingStub: _FakeDatabaseService_23(
-          this,
-          Invocation.getter(#db),
-        ),
-      ) as _i2.DatabaseService);
+  _i2.DatabaseService get db =>
+      (super.noSuchMethod(
+            Invocation.getter(#db),
+            returnValue: _FakeDatabaseService_23(this, Invocation.getter(#db)),
+            returnValueForMissingStub: _FakeDatabaseService_23(
+              this,
+              Invocation.getter(#db),
+            ),
+          )
+          as _i2.DatabaseService);
 
   @override
-  _i2.User Function(Map<String, dynamic>) get fromJson => (super.noSuchMethod(
-        Invocation.getter(#fromJson),
-        returnValue: (Map<String, dynamic> json) => _FakeUser_24(
-          this,
-          Invocation.getter(#fromJson),
-        ),
-        returnValueForMissingStub: (Map<String, dynamic> json) => _FakeUser_24(
-          this,
-          Invocation.getter(#fromJson),
-        ),
-      ) as _i2.User Function(Map<String, dynamic>));
+  _i2.User Function(Map<String, dynamic>) get fromJson =>
+      (super.noSuchMethod(
+            Invocation.getter(#fromJson),
+            returnValue: (Map<String, dynamic> json) =>
+                _FakeUser_24(this, Invocation.getter(#fromJson)),
+            returnValueForMissingStub: (Map<String, dynamic> json) =>
+                _FakeUser_24(this, Invocation.getter(#fromJson)),
+          )
+          as _i2.User Function(Map<String, dynamic>));
 
   @override
-  _i2.DBGraphQLClient get graphQLClient => (super.noSuchMethod(
-        Invocation.getter(#graphQLClient),
-        returnValue: _FakeDBGraphQLClient_2(
-          this,
-          Invocation.getter(#graphQLClient),
-        ),
-        returnValueForMissingStub: _FakeDBGraphQLClient_2(
-          this,
-          Invocation.getter(#graphQLClient),
-        ),
-      ) as _i2.DBGraphQLClient);
+  _i2.DBGraphQLClient get graphQLClient =>
+      (super.noSuchMethod(
+            Invocation.getter(#graphQLClient),
+            returnValue: _FakeDBGraphQLClient_2(
+              this,
+              Invocation.getter(#graphQLClient),
+            ),
+            returnValueForMissingStub: _FakeDBGraphQLClient_2(
+              this,
+              Invocation.getter(#graphQLClient),
+            ),
+          )
+          as _i2.DBGraphQLClient);
 
   @override
-  _i2.StreamableDAOProxy<_i2.User> get streamingProxy => (super.noSuchMethod(
-        Invocation.getter(#streamingProxy),
-        returnValue: _FakeStreamableDAOProxy_25<_i2.User>(
-          this,
-          Invocation.getter(#streamingProxy),
-        ),
-        returnValueForMissingStub: _FakeStreamableDAOProxy_25<_i2.User>(
-          this,
-          Invocation.getter(#streamingProxy),
-        ),
-      ) as _i2.StreamableDAOProxy<_i2.User>);
+  _i2.StreamableDAOProxy<_i2.User> get streamingProxy =>
+      (super.noSuchMethod(
+            Invocation.getter(#streamingProxy),
+            returnValue: _FakeStreamableDAOProxy_25<_i2.User>(
+              this,
+              Invocation.getter(#streamingProxy),
+            ),
+            returnValueForMissingStub: _FakeStreamableDAOProxy_25<_i2.User>(
+              this,
+              Invocation.getter(#streamingProxy),
+            ),
+          )
+          as _i2.StreamableDAOProxy<_i2.User>);
 
   @override
   _i4.Stream<_i2.User?> streamSingleById({
@@ -1292,17 +1070,14 @@ class MockUsersDAO extends _i1.Mock implements _i2.UsersDAO {
     bool? fullData = false,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #streamSingleById,
-          [],
-          {
-            #id: id,
-            #fullData: fullData,
-          },
-        ),
-        returnValue: _i4.Stream<_i2.User?>.empty(),
-        returnValueForMissingStub: _i4.Stream<_i2.User?>.empty(),
-      ) as _i4.Stream<_i2.User?>);
+            Invocation.method(#streamSingleById, [], {
+              #id: id,
+              #fullData: fullData,
+            }),
+            returnValue: _i4.Stream<_i2.User?>.empty(),
+            returnValueForMissingStub: _i4.Stream<_i2.User?>.empty(),
+          )
+          as _i4.Stream<_i2.User?>);
 
   @override
   _i4.Future<_i2.User?> analyzeUserAttendance({
@@ -1315,22 +1090,19 @@ class MockUsersDAO extends _i1.Mock implements _i2.UsersDAO {
     required Iterable<String>? servicesIds,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #analyzeUserAttendance,
-          [],
-          {
-            #personId: personId,
-            #userId: userId,
-            #dateFrom: dateFrom,
-            #dateTo: dateTo,
-            #groupsIds: groupsIds,
-            #classesIds: classesIds,
-            #servicesIds: servicesIds,
-          },
-        ),
-        returnValue: _i4.Future<_i2.User?>.value(),
-        returnValueForMissingStub: _i4.Future<_i2.User?>.value(),
-      ) as _i4.Future<_i2.User?>);
+            Invocation.method(#analyzeUserAttendance, [], {
+              #personId: personId,
+              #userId: userId,
+              #dateFrom: dateFrom,
+              #dateTo: dateTo,
+              #groupsIds: groupsIds,
+              #classesIds: classesIds,
+              #servicesIds: servicesIds,
+            }),
+            returnValue: _i4.Future<_i2.User?>.value(),
+            returnValueForMissingStub: _i4.Future<_i2.User?>.value(),
+          )
+          as _i4.Future<_i2.User?>);
 
   @override
   _i4.Future<void> updateUserPermissions({
@@ -1339,18 +1111,15 @@ class MockUsersDAO extends _i1.Mock implements _i2.UsersDAO {
     required _i2.PermissionsSet? oldPermissions,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #updateUserPermissions,
-          [],
-          {
-            #userId: userId,
-            #newPermissions: newPermissions,
-            #oldPermissions: oldPermissions,
-          },
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+            Invocation.method(#updateUserPermissions, [], {
+              #userId: userId,
+              #newPermissions: newPermissions,
+              #oldPermissions: oldPermissions,
+            }),
+            returnValue: _i4.Future<void>.value(),
+            returnValueForMissingStub: _i4.Future<void>.value(),
+          )
+          as _i4.Future<void>);
 
   @override
   _i2.PaginatableStreamBase<_i2.User> streamAll({
@@ -1359,38 +1128,27 @@ class MockUsersDAO extends _i1.Mock implements _i2.UsersDAO {
     _i4.Stream<List<_i2.OrderBy>>? orderBy,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #streamAll,
-          [],
-          {
-            #searchQuery: searchQuery,
-            #where: where,
-            #orderBy: orderBy,
-          },
-        ),
-        returnValue: _FakePaginatableStreamBase_26<_i2.User>(
-          this,
-          Invocation.method(
-            #streamAll,
-            [],
-            {
+            Invocation.method(#streamAll, [], {
               #searchQuery: searchQuery,
               #where: where,
               #orderBy: orderBy,
-            },
-          ),
-        ),
-        returnValueForMissingStub: _FakePaginatableStreamBase_26<_i2.User>(
-          this,
-          Invocation.method(
-            #streamAll,
-            [],
-            {
-              #searchQuery: searchQuery,
-              #where: where,
-              #orderBy: orderBy,
-            },
-          ),
-        ),
-      ) as _i2.PaginatableStreamBase<_i2.User>);
+            }),
+            returnValue: _FakePaginatableStreamBase_26<_i2.User>(
+              this,
+              Invocation.method(#streamAll, [], {
+                #searchQuery: searchQuery,
+                #where: where,
+                #orderBy: orderBy,
+              }),
+            ),
+            returnValueForMissingStub: _FakePaginatableStreamBase_26<_i2.User>(
+              this,
+              Invocation.method(#streamAll, [], {
+                #searchQuery: searchQuery,
+                #where: where,
+                #orderBy: orderBy,
+              }),
+            ),
+          )
+          as _i2.PaginatableStreamBase<_i2.User>);
 }

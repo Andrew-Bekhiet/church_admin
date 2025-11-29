@@ -5,7 +5,6 @@ import 'package:church_admin/church_admin.dart' hide Polygon;
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_location_marker/flutter_map_location_marker.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart' hide Family;
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -24,7 +23,8 @@ class DataGeomap extends StatefulWidget {
   final List<Widget> addLayers;
   final Stream<PersonsGeolocationsResponse?> Function(
     PersonsGeolocationsResponse?,
-  )? overrideResponseObjects;
+  )?
+  overrideResponseObjects;
 
   final bool showUserLocation;
   final void Function(Position?)? onUserLocationChanged;
@@ -61,8 +61,8 @@ class DataGeomapState extends State<DataGeomap> {
       .requireValue
       .packageName;
 
-  late final _userLocationStream =
-      const LocationMarkerDataStreamFactory().fromGeolocatorPositionStream();
+  late final _userLocationStream = const LocationMarkerDataStreamFactory()
+      .fromGeolocatorPositionStream();
   late final _userLocationHeadingStream =
       const LocationMarkerDataStreamFactory().fromRotationSensorHeadingStream();
 
@@ -103,7 +103,7 @@ class DataGeomapState extends State<DataGeomap> {
           :streets,
           :families,
           :stores,
-          :persons
+          :persons,
         ) = locationsData;
 
         return FlutterMap(
@@ -117,8 +117,9 @@ class DataGeomapState extends State<DataGeomap> {
           ),
           children: [
             TileLayer(
-              tileProvider:
-                  globalProviderContainer.read(flutterMapTileCacheProvider),
+              tileProvider: globalProviderContainer.read(
+                flutterMapTileCacheProvider,
+              ),
               urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
               userAgentPackageName:
                   '${packageName.isEmpty ? 'com.AndroidQuartz.church_admin' : packageName}'
@@ -163,7 +164,8 @@ class DataGeomapState extends State<DataGeomap> {
                 afterTap: (_, location) => _onTapLocation(location),
               ),
             DefaultTextStyle(
-              style: Theme.of(context).textTheme.bodySmall ??
+              style:
+                  Theme.of(context).textTheme.bodySmall ??
                   const TextStyle(fontSize: 12),
               child: SimpleAttributionWidget(
                 alignment: Alignment.topLeft,
@@ -222,9 +224,9 @@ class DataGeomapState extends State<DataGeomap> {
         .asStream()
         .startWith(null)
         .map((event) {
-      widget.onUserLocationChanged?.call(event);
-      return event;
-    });
+          widget.onUserLocationChanged?.call(event);
+          return event;
+        });
   }
 
   Future<Position?> _requestAndGetLocation() async {
@@ -242,8 +244,8 @@ class DataGeomapState extends State<DataGeomap> {
   Stream<PersonsGeolocationsResponse?> _getObjectsLocationsStream() {
     return widget.overrideResponseObjects != null
         ? widget.geomapOptionsStream
-            .asyncMap(_getPersonsLocations)
-            .switchMap(widget.overrideResponseObjects!)
+              .asyncMap(_getPersonsLocations)
+              .switchMap(widget.overrideResponseObjects!)
         : widget.geomapOptionsStream.asyncMap(_getPersonsLocations);
   }
 
@@ -251,7 +253,8 @@ class DataGeomapState extends State<DataGeomap> {
     GeomapOptions options,
   ) {
     return DatabaseService.I.persons.personsGeolocations(
-      personId: options.selectedAreas.isEmpty &&
+      personId:
+          options.selectedAreas.isEmpty &&
               options.selectedStreets.isEmpty &&
               options.selectedFamilies.isEmpty &&
               options.selectedClasses.isEmpty &&

@@ -6,30 +6,24 @@ part of 'view_store_route.dart';
 // GoRouterGenerator
 // **************************************************************************
 
-List<RouteBase> get $appRoutes => [
-      $viewStoreRoute,
-    ];
+List<RouteBase> get $appRoutes => [$viewStoreRoute];
 
 RouteBase get $viewStoreRoute => GoRouteData.$route(
-      path: '/view_store',
-      factory: _$ViewStoreRoute._fromState,
-    );
+  path: '/view_store',
+  factory: $ViewStoreRoute._fromState,
+);
 
-mixin _$ViewStoreRoute on GoRouteData {
+mixin $ViewStoreRoute on GoRouteData {
   static ViewStoreRoute _fromState(GoRouterState state) => ViewStoreRoute(
-        id: state.uri.queryParameters['id']!,
-        $extra: state.extra as Store?,
-      );
+    id: state.uri.queryParameters['id']!,
+    $extra: state.extra as Store?,
+  );
 
   ViewStoreRoute get _self => this as ViewStoreRoute;
 
   @override
-  String get location => GoRouteData.$location(
-        '/view_store',
-        queryParams: {
-          'id': _self.id,
-        },
-      );
+  String get location =>
+      GoRouteData.$location('/view_store', queryParams: {'id': _self.id});
 
   @override
   void go(BuildContext context) => context.go(location, extra: _self.$extra);

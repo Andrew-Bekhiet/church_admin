@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 part 'unapproved_user_route.g.dart';
 
 @TypedGoRoute<UnapprovedUserRoute>(path: '/unapproved_user')
-class UnapprovedUserRoute extends GoRouteData with _$UnapprovedUserRoute {
+class UnapprovedUserRoute extends GoRouteData with $UnapprovedUserRoute {
   const UnapprovedUserRoute();
 
   @override

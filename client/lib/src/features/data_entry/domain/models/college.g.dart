@@ -32,7 +32,7 @@ class CollegeFields {
   late final List<FieldMetadata<Object>> allFields = [id, name];
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'id': id,
-    'name': name
+    'name': name,
   };
 }
 
@@ -41,13 +41,13 @@ class CollegeFields {
 // **************************************************************************
 
 College _$CollegeFromJson(Map json) => College(
-      id: json['id'] as String? ?? '',
-      name: json['name'] as String? ?? '',
-      universityId: json['universityId'] as String?,
-    );
+  id: json['id'] as String? ?? '',
+  name: json['name'] as String? ?? '',
+  universityId: json['universityId'] as String?,
+);
 
 Map<String, dynamic> _$CollegeToJson(College instance) => <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
-      'universityId': instance.universityId,
-    };
+  'id': instance.id,
+  'name': instance.name,
+  'universityId': instance.universityId,
+};

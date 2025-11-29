@@ -42,7 +42,7 @@ class ChurchFields {
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'id': id,
     'name': name,
-    'isHidden': isHidden
+    'isHidden': isHidden,
   };
 }
 
@@ -51,13 +51,13 @@ class ChurchFields {
 // **************************************************************************
 
 Church _$ChurchFromJson(Map json) => Church(
-      id: json['id'] as String? ?? '',
-      name: json['name'] as String? ?? '',
-      isHidden: json['isHidden'] as bool? ?? true,
-    );
+  id: json['id'] as String? ?? '',
+  name: json['name'] as String? ?? '',
+  isHidden: json['isHidden'] as bool? ?? true,
+);
 
 Map<String, dynamic> _$ChurchToJson(Church instance) => <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
-      'isHidden': instance.isHidden,
-    };
+  'id': instance.id,
+  'name': instance.name,
+  'isHidden': instance.isHidden,
+};

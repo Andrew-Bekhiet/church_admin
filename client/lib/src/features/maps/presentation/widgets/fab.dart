@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:church_admin/church_admin.dart' hide Polygon;
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
@@ -22,43 +20,31 @@ class GeomapFAB extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 28),
       child: FloatingActionButton.small(
         onPressed: () async {
-          bool launched = false;
+          final installedMaps = await MapLauncher.installedMaps;
 
-          try {
-            if (await MapLauncher.isMapAvailable(MapType.google) ?? false) {
-              await _showMarker(location, MapType.google);
-              launched = true;
-            } else if (await MapLauncher.isMapAvailable(MapType.apple) ??
-                false) {
-              await _showMarker(location, MapType.apple);
-              launched = true;
-            }
-          } finally {
-            if (!launched) {
-              await LauncherService.I.launchUrl(
-                Uri(
-                  scheme: 'https',
-                  host: 'google.com',
-                  pathSegments: ['maps', 'search', ''],
-                  queryParameters: {
-                    'api': '1',
-                    'query': '${location.latitude},${location.longitude}',
-                  },
-                ),
-              );
-            }
+          if (installedMaps.isNotEmpty) {
+            await MapLauncher.showMarker(
+              mapType: installedMaps.first.mapType,
+              coords: Coords(location.latitude, location.longitude),
+              title: '',
+            );
+            return;
           }
+
+          await LauncherService.I.launchUrl(
+            Uri(
+              scheme: 'https',
+              host: 'google.com',
+              pathSegments: ['maps', 'search', ''],
+              queryParameters: {
+                'api': '1',
+                'query': '${location.latitude},${location.longitude}',
+              },
+            ),
+          );
         },
         child: const Icon(Symbols.map),
       ),
-    );
-  }
-
-  Future<void> _showMarker(Point location, MapType mapType) {
-    return MapLauncher.showMarker(
-      mapType: mapType,
-      coords: Coords(location.latitude, location.longitude),
-      title: '',
     );
   }
 }

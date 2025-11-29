@@ -1,10 +1,10 @@
 import 'package:church_admin/church_admin.dart';
+import 'package:flutter_riverpod/misc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gql/ast.dart';
 import 'package:graphql/client.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:riverpod/riverpod.dart';
 
 import 'advanced_query_parser_test.mocks.dart';
 
@@ -31,18 +31,18 @@ void main() {
             queryableType: AdvancedQueriesMetadata().person,
             filters: [
               Filter(
-                PersonFields()
-                    .lastEdit
-                    .redirectTo(LastRecordedByInfoFields().time),
+                PersonFields().lastEdit.redirectTo(
+                  LastRecordedByInfoFields().time,
+                ),
                 DateTimeOperator.isAfter,
                 DateTime.now().subtract(const Duration(days: 7)),
               ),
             ],
             orderBy: [
               OrderBy(
-                field: PersonFields()
-                    .lastEdit
-                    .redirectTo(LastRecordedByInfoFields().time),
+                field: PersonFields().lastEdit.redirectTo(
+                  LastRecordedByInfoFields().time,
+                ),
                 value: OrderByValue.desc,
               ),
               OrderBy(field: PersonFields().name),
@@ -62,7 +62,7 @@ void main() {
                     },
                   },
                 ],
-              }
+              },
             ],
             'orderBy': [
               {
@@ -102,7 +102,7 @@ void main() {
                     },
                   },
                 ],
-              }
+              },
             ],
             'orderBy': [
               {'id': OrderByValue.asc.serializedName},
@@ -127,9 +127,9 @@ void main() {
                 LogicalOperator.and,
                 [
                   Filter(
-                    PersonFields()
-                        .lastVisit
-                        .redirectTo(LastRecordedByInfoFields().time),
+                    PersonFields().lastVisit.redirectTo(
+                      LastRecordedByInfoFields().time,
+                    ),
                     DateTimeOperator.isAfter,
                     dateValue,
                   ),
@@ -142,16 +142,17 @@ void main() {
               ),
               Filter(
                 PersonFields().area.redirectTo(
-                    AreaFields().streets.redirectTo(StreetFields().name)),
+                  AreaFields().streets.redirectTo(StreetFields().name),
+                ),
                 StringOperator.contains,
                 'name',
               ),
             ],
             orderBy: [
               OrderBy(
-                field: PersonFields()
-                    .lastEdit
-                    .redirectTo(LastRecordedByInfoFields().time),
+                field: PersonFields().lastEdit.redirectTo(
+                  LastRecordedByInfoFields().time,
+                ),
                 value: OrderByValue.desc,
               ),
               OrderBy(field: PersonFields().name),
@@ -174,7 +175,7 @@ void main() {
                       },
                       {
                         'user': {'_eq': 'aqefwaef'},
-                      }
+                      },
                     ],
                   },
                   {
@@ -184,12 +185,12 @@ void main() {
                           'street': {
                             'name': {'_ilike': '%name%'},
                           },
-                        }
+                        },
                       },
                     },
-                  }
+                  },
                 ],
-              }
+              },
             ],
             'orderBy': [
               {
@@ -214,22 +215,27 @@ Future<void> _runTestCase(AdvancedQuery query, Json expectedVarsJson) async {
   await Future.delayed(Duration.zero);
   await stream.dispose();
 
-  final gqlClient = globalProviderContainer
-      .read(databaseServiceProvider)
-      .graphQLClient as MockDBGraphQLClient;
+  final gqlClient =
+      globalProviderContainer.read(databaseServiceProvider).graphQLClient
+          as MockDBGraphQLClient;
 
-  final verificationResult = verify(gqlClient
-      .subscribeAndReturnParsed(captureThat(predicate<SubscriptionOptions>(
-    (o) => !(o.document.definitions
-            .whereType<OperationDefinitionNode>()
-            .firstOrNull
-            ?.name
-            ?.value
-            .toLowerCase()
-            .contains('count') ??
-        false),
-  ))))
-    ..called(1);
+  final verificationResult = verify(
+    gqlClient.subscribeAndReturnParsed(
+      captureThat(
+        predicate<SubscriptionOptions>(
+          (o) =>
+              !(o.document.definitions
+                      .whereType<OperationDefinitionNode>()
+                      .firstOrNull
+                      ?.name
+                      ?.value
+                      .toLowerCase()
+                      .contains('count') ??
+                  false),
+        ),
+      ),
+    ),
+  )..called(1);
 
   final subscriptionOptions =
       verificationResult.captured[0] as SubscriptionOptions;

@@ -12,16 +12,16 @@ class QueryableRegisteryGenerator extends Generator {
   FutureOr<String> generate(LibraryReader library, BuildStep buildStep) async {
     final registry = library
         .annotatedWith(
-          const TypeChecker.fromRuntime(GenerateQueryablesRegistery),
+          const TypeChecker.typeNamed(GenerateQueryablesRegistery),
         )
         .singleOrNull;
 
     if (registry == null) return '';
 
     final queryables = _collectAllQueryablesFromExportedLibraries(
-      library.element.importedLibraries.firstWhere(
-        (l) => l.identifier == 'package:church_admin/church_admin.dart',
-      ),
+      library.element.fragments.expand((f) => f.importedLibraries).firstWhere(
+            (l) => l.identifier == 'package:church_admin/church_admin.dart',
+          ),
     );
 
     return _writeQueryablesRegistry(
@@ -48,7 +48,7 @@ class QueryableRegisteryGenerator extends Generator {
         )
         .followedBy(
           LibraryReader(library)
-              .annotatedWith(const TypeChecker.fromRuntime(Queryable)),
+              .annotatedWith(const TypeChecker.typeNamed(Queryable)),
         )
         .toList();
   }

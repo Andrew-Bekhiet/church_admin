@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 part 'view_store_route.g.dart';
 
 @TypedGoRoute<ViewStoreRoute>(path: '/view_store')
-class ViewStoreRoute extends GoRouteData with _$ViewStoreRoute {
+class ViewStoreRoute extends GoRouteData with $ViewStoreRoute {
   const ViewStoreRoute({required this.id, this.$extra});
 
   final String id;

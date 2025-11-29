@@ -28,6 +28,7 @@ import 'package:mockito/src/dummies.dart' as _i6;
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
+// ignore_for_file: invalid_use_of_internal_member
 
 /// A class which mocks [NotificationsService].
 ///
@@ -35,115 +36,111 @@ import 'package:mockito/src/dummies.dart' as _i6;
 class MockNotificationsService extends _i1.Mock
     implements _i2.NotificationsService {
   @override
-  _i3.Stream<_i2.Notification> get onNotificationTapStream =>
+  bool get isPaused =>
       (super.noSuchMethod(
-        Invocation.getter(#onNotificationTapStream),
-        returnValue: _i3.Stream<_i2.Notification>.empty(),
-        returnValueForMissingStub: _i3.Stream<_i2.Notification>.empty(),
-      ) as _i3.Stream<_i2.Notification>);
+            Invocation.getter(#isPaused),
+            returnValue: false,
+            returnValueForMissingStub: false,
+          )
+          as bool);
 
   @override
-  bool get isPaused => (super.noSuchMethod(
-        Invocation.getter(#isPaused),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
+  _i3.Stream<_i2.Notification> get onNotificationTapStream =>
+      (super.noSuchMethod(
+            Invocation.getter(#onNotificationTapStream),
+            returnValue: _i3.Stream<_i2.Notification>.empty(),
+            returnValueForMissingStub: _i3.Stream<_i2.Notification>.empty(),
+          )
+          as _i3.Stream<_i2.Notification>);
 
   @override
   void addForegroundNotificationTap(_i2.Notification? notification) =>
       super.noSuchMethod(
-        Invocation.method(
-          #addForegroundNotificationTap,
-          [notification],
-        ),
+        Invocation.method(#addForegroundNotificationTap, [notification]),
         returnValueForMissingStub: null,
       );
 
   @override
   void pauseListeners() => super.noSuchMethod(
-        Invocation.method(
-          #pauseListeners,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
+    Invocation.method(#pauseListeners, []),
+    returnValueForMissingStub: null,
+  );
 
   @override
   void resumeListeners() => super.noSuchMethod(
-        Invocation.method(
-          #resumeListeners,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
+    Invocation.method(#resumeListeners, []),
+    returnValueForMissingStub: null,
+  );
 
   @override
-  _i3.Future<_i2.Notification?> getInitialNotification() => (super.noSuchMethod(
-        Invocation.method(
-          #getInitialNotification,
-          [],
-        ),
-        returnValue: _i3.Future<_i2.Notification?>.value(),
-        returnValueForMissingStub: _i3.Future<_i2.Notification?>.value(),
-      ) as _i3.Future<_i2.Notification?>);
-
-  @override
-  _i3.Future<void> scheduleBirthDayNotification(
-          [_i2.NotificationSetting? notificationSetting]) =>
+  _i3.Future<_i2.Notification?> getInitialNotification() =>
       (super.noSuchMethod(
-        Invocation.method(
-          #scheduleBirthDayNotification,
-          [notificationSetting],
-        ),
-        returnValue: _i3.Future<void>.value(),
-        returnValueForMissingStub: _i3.Future<void>.value(),
-      ) as _i3.Future<void>);
+            Invocation.method(#getInitialNotification, []),
+            returnValue: _i3.Future<_i2.Notification?>.value(),
+            returnValueForMissingStub: _i3.Future<_i2.Notification?>.value(),
+          )
+          as _i3.Future<_i2.Notification?>);
 
   @override
-  _i3.Future<void> scheduleAttendanceNotification(
-          [_i2.NotificationSetting? notificationSetting]) =>
+  _i3.Future<void> scheduleBirthDayNotification([
+    _i2.NotificationSetting? notificationSetting,
+  ]) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #scheduleAttendanceNotification,
-          [notificationSetting],
-        ),
-        returnValue: _i3.Future<void>.value(),
-        returnValueForMissingStub: _i3.Future<void>.value(),
-      ) as _i3.Future<void>);
+            Invocation.method(#scheduleBirthDayNotification, [
+              notificationSetting,
+            ]),
+            returnValue: _i3.Future<void>.value(),
+            returnValueForMissingStub: _i3.Future<void>.value(),
+          )
+          as _i3.Future<void>);
 
   @override
-  _i3.Future<void> scheduleKodasNotification(
-          [_i2.NotificationSetting? notificationSetting]) =>
+  _i3.Future<void> scheduleAttendanceNotification([
+    _i2.NotificationSetting? notificationSetting,
+  ]) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #scheduleKodasNotification,
-          [notificationSetting],
-        ),
-        returnValue: _i3.Future<void>.value(),
-        returnValueForMissingStub: _i3.Future<void>.value(),
-      ) as _i3.Future<void>);
+            Invocation.method(#scheduleAttendanceNotification, [
+              notificationSetting,
+            ]),
+            returnValue: _i3.Future<void>.value(),
+            returnValueForMissingStub: _i3.Future<void>.value(),
+          )
+          as _i3.Future<void>);
 
   @override
-  _i3.Future<void> scheduleConfessionNotification(
-          [_i2.NotificationSetting? notificationSetting]) =>
+  _i3.Future<void> scheduleKodasNotification([
+    _i2.NotificationSetting? notificationSetting,
+  ]) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #scheduleConfessionNotification,
-          [notificationSetting],
-        ),
-        returnValue: _i3.Future<void>.value(),
-        returnValueForMissingStub: _i3.Future<void>.value(),
-      ) as _i3.Future<void>);
+            Invocation.method(#scheduleKodasNotification, [
+              notificationSetting,
+            ]),
+            returnValue: _i3.Future<void>.value(),
+            returnValueForMissingStub: _i3.Future<void>.value(),
+          )
+          as _i3.Future<void>);
 
   @override
-  _i3.Future<void> scheduleDefaultNotifications() => (super.noSuchMethod(
-        Invocation.method(
-          #scheduleDefaultNotifications,
-          [],
-        ),
-        returnValue: _i3.Future<void>.value(),
-        returnValueForMissingStub: _i3.Future<void>.value(),
-      ) as _i3.Future<void>);
+  _i3.Future<void> scheduleConfessionNotification([
+    _i2.NotificationSetting? notificationSetting,
+  ]) =>
+      (super.noSuchMethod(
+            Invocation.method(#scheduleConfessionNotification, [
+              notificationSetting,
+            ]),
+            returnValue: _i3.Future<void>.value(),
+            returnValueForMissingStub: _i3.Future<void>.value(),
+          )
+          as _i3.Future<void>);
+
+  @override
+  _i3.Future<void> scheduleDefaultNotifications() =>
+      (super.noSuchMethod(
+            Invocation.method(#scheduleDefaultNotifications, []),
+            returnValue: _i3.Future<void>.value(),
+            returnValueForMissingStub: _i3.Future<void>.value(),
+          )
+          as _i3.Future<void>);
 
   @override
   _i3.Future<void> notify(
@@ -152,39 +149,35 @@ class MockNotificationsService extends _i1.Mock
     _i4.NotificationDetails? notificationDetails,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #notify,
-          [notification],
-          {
-            #id: id,
-            #notificationDetails: notificationDetails,
-          },
-        ),
-        returnValue: _i3.Future<void>.value(),
-        returnValueForMissingStub: _i3.Future<void>.value(),
-      ) as _i3.Future<void>);
+            Invocation.method(
+              #notify,
+              [notification],
+              {#id: id, #notificationDetails: notificationDetails},
+            ),
+            returnValue: _i3.Future<void>.value(),
+            returnValueForMissingStub: _i3.Future<void>.value(),
+          )
+          as _i3.Future<void>);
 
   @override
   _i3.Future<bool> registerFCMTokenAndListenForChanges({String? cachedToken}) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #registerFCMTokenAndListenForChanges,
-          [],
-          {#cachedToken: cachedToken},
-        ),
-        returnValue: _i3.Future<bool>.value(false),
-        returnValueForMissingStub: _i3.Future<bool>.value(false),
-      ) as _i3.Future<bool>);
+            Invocation.method(#registerFCMTokenAndListenForChanges, [], {
+              #cachedToken: cachedToken,
+            }),
+            returnValue: _i3.Future<bool>.value(false),
+            returnValueForMissingStub: _i3.Future<bool>.value(false),
+          )
+          as _i3.Future<bool>);
 
   @override
-  _i3.Future<bool> requestNotificationsPermission() => (super.noSuchMethod(
-        Invocation.method(
-          #requestNotificationsPermission,
-          [],
-        ),
-        returnValue: _i3.Future<bool>.value(false),
-        returnValueForMissingStub: _i3.Future<bool>.value(false),
-      ) as _i3.Future<bool>);
+  _i3.Future<bool> requestNotificationsPermission() =>
+      (super.noSuchMethod(
+            Invocation.method(#requestNotificationsPermission, []),
+            returnValue: _i3.Future<bool>.value(false),
+            returnValueForMissingStub: _i3.Future<bool>.value(false),
+          )
+          as _i3.Future<bool>);
 
   @override
   _i3.Future<void> onTransition(
@@ -192,65 +185,38 @@ class MockNotificationsService extends _i1.Mock
     _i5.Transition<dynamic, dynamic>? transition,
   ) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #onTransition,
-          [
-            bloc,
-            transition,
-          ],
-        ),
-        returnValue: _i3.Future<void>.value(),
-        returnValueForMissingStub: _i3.Future<void>.value(),
-      ) as _i3.Future<void>);
+            Invocation.method(#onTransition, [bloc, transition]),
+            returnValue: _i3.Future<void>.value(),
+            returnValueForMissingStub: _i3.Future<void>.value(),
+          )
+          as _i3.Future<void>);
 
   @override
-  _i3.Future<void> dispose() => (super.noSuchMethod(
-        Invocation.method(
-          #dispose,
-          [],
-        ),
-        returnValue: _i3.Future<void>.value(),
-        returnValueForMissingStub: _i3.Future<void>.value(),
-      ) as _i3.Future<void>);
+  _i3.Future<void> dispose() =>
+      (super.noSuchMethod(
+            Invocation.method(#dispose, []),
+            returnValue: _i3.Future<void>.value(),
+            returnValueForMissingStub: _i3.Future<void>.value(),
+          )
+          as _i3.Future<void>);
 
   @override
   void onCreate(_i5.BlocBase<dynamic>? bloc) => super.noSuchMethod(
-        Invocation.method(
-          #onCreate,
-          [bloc],
-        ),
+    Invocation.method(#onCreate, [bloc]),
+    returnValueForMissingStub: null,
+  );
+
+  @override
+  void onEvent(_i5.Bloc<dynamic, dynamic>? bloc, Object? event) =>
+      super.noSuchMethod(
+        Invocation.method(#onEvent, [bloc, event]),
         returnValueForMissingStub: null,
       );
 
   @override
-  void onEvent(
-    _i5.Bloc<dynamic, dynamic>? bloc,
-    Object? event,
-  ) =>
+  void onChange(_i5.BlocBase<dynamic>? bloc, _i5.Change<dynamic>? change) =>
       super.noSuchMethod(
-        Invocation.method(
-          #onEvent,
-          [
-            bloc,
-            event,
-          ],
-        ),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void onChange(
-    _i5.BlocBase<dynamic>? bloc,
-    _i5.Change<dynamic>? change,
-  ) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #onChange,
-          [
-            bloc,
-            change,
-          ],
-        ),
+        Invocation.method(#onChange, [bloc, change]),
         returnValueForMissingStub: null,
       );
 
@@ -259,18 +225,10 @@ class MockNotificationsService extends _i1.Mock
     _i5.BlocBase<dynamic>? bloc,
     Object? error,
     StackTrace? stackTrace,
-  ) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #onError,
-          [
-            bloc,
-            error,
-            stackTrace,
-          ],
-        ),
-        returnValueForMissingStub: null,
-      );
+  ) => super.noSuchMethod(
+    Invocation.method(#onError, [bloc, error, stackTrace]),
+    returnValueForMissingStub: null,
+  );
 
   @override
   void onDone(
@@ -278,28 +236,16 @@ class MockNotificationsService extends _i1.Mock
     Object? event, [
     Object? error,
     StackTrace? stackTrace,
-  ]) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #onDone,
-          [
-            bloc,
-            event,
-            error,
-            stackTrace,
-          ],
-        ),
-        returnValueForMissingStub: null,
-      );
+  ]) => super.noSuchMethod(
+    Invocation.method(#onDone, [bloc, event, error, stackTrace]),
+    returnValueForMissingStub: null,
+  );
 
   @override
   void onClose(_i5.BlocBase<dynamic>? bloc) => super.noSuchMethod(
-        Invocation.method(
-          #onClose,
-          [bloc],
-        ),
-        returnValueForMissingStub: null,
-      );
+    Invocation.method(#onClose, [bloc]),
+    returnValueForMissingStub: null,
+  );
 }
 
 /// A class which mocks [AuthBloc].
@@ -307,193 +253,159 @@ class MockNotificationsService extends _i1.Mock
 /// See the documentation for Mockito's code generation for more information.
 class MockAuthBloc extends _i1.Mock implements _i2.AuthBloc {
   @override
-  bool get isSignedIn => (super.noSuchMethod(
-        Invocation.getter(#isSignedIn),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
+  bool get isSignedIn =>
+      (super.noSuchMethod(
+            Invocation.getter(#isSignedIn),
+            returnValue: false,
+            returnValueForMissingStub: false,
+          )
+          as bool);
 
   @override
-  _i3.Stream<_i2.AuthUser?> get userStream => (super.noSuchMethod(
-        Invocation.getter(#userStream),
-        returnValue: _i3.Stream<_i2.AuthUser?>.empty(),
-        returnValueForMissingStub: _i3.Stream<_i2.AuthUser?>.empty(),
-      ) as _i3.Stream<_i2.AuthUser?>);
+  _i3.Stream<_i2.AuthUser?> get userStream =>
+      (super.noSuchMethod(
+            Invocation.getter(#userStream),
+            returnValue: _i3.Stream<_i2.AuthUser?>.empty(),
+            returnValueForMissingStub: _i3.Stream<_i2.AuthUser?>.empty(),
+          )
+          as _i3.Stream<_i2.AuthUser?>);
 
   @override
-  _i3.Stream<_i2.User?> get userDataStream => (super.noSuchMethod(
-        Invocation.getter(#userDataStream),
-        returnValue: _i3.Stream<_i2.User?>.empty(),
-        returnValueForMissingStub: _i3.Stream<_i2.User?>.empty(),
-      ) as _i3.Stream<_i2.User?>);
+  _i3.Stream<_i2.User?> get userDataStream =>
+      (super.noSuchMethod(
+            Invocation.getter(#userDataStream),
+            returnValue: _i3.Stream<_i2.User?>.empty(),
+            returnValueForMissingStub: _i3.Stream<_i2.User?>.empty(),
+          )
+          as _i3.Stream<_i2.User?>);
 
   @override
-  _i3.Stream<String?> get idTokenStream => (super.noSuchMethod(
-        Invocation.getter(#idTokenStream),
-        returnValue: _i3.Stream<String?>.empty(),
-        returnValueForMissingStub: _i3.Stream<String?>.empty(),
-      ) as _i3.Stream<String?>);
+  _i3.Stream<String?> get idTokenStream =>
+      (super.noSuchMethod(
+            Invocation.getter(#idTokenStream),
+            returnValue: _i3.Stream<String?>.empty(),
+            returnValueForMissingStub: _i3.Stream<String?>.empty(),
+          )
+          as _i3.Stream<String?>);
 
   @override
-  _i3.Stream<bool> get isSignedInStream => (super.noSuchMethod(
-        Invocation.getter(#isSignedInStream),
-        returnValue: _i3.Stream<bool>.empty(),
-        returnValueForMissingStub: _i3.Stream<bool>.empty(),
-      ) as _i3.Stream<bool>);
+  _i3.Stream<bool> get isSignedInStream =>
+      (super.noSuchMethod(
+            Invocation.getter(#isSignedInStream),
+            returnValue: _i3.Stream<bool>.empty(),
+            returnValueForMissingStub: _i3.Stream<bool>.empty(),
+          )
+          as _i3.Stream<bool>);
 
   @override
-  _i3.Future<void> get loaded => (super.noSuchMethod(
-        Invocation.getter(#loaded),
-        returnValue: _i3.Future<void>.value(),
-        returnValueForMissingStub: _i3.Future<void>.value(),
-      ) as _i3.Future<void>);
+  _i3.Future<void> get loaded =>
+      (super.noSuchMethod(
+            Invocation.getter(#loaded),
+            returnValue: _i3.Future<void>.value(),
+            returnValueForMissingStub: _i3.Future<void>.value(),
+          )
+          as _i3.Future<void>);
 
   @override
-  _i2.AuthState get state => (super.noSuchMethod(
-        Invocation.getter(#state),
-        returnValue: _i6.dummyValue<_i2.AuthState>(
-          this,
-          Invocation.getter(#state),
-        ),
-        returnValueForMissingStub: _i6.dummyValue<_i2.AuthState>(
-          this,
-          Invocation.getter(#state),
-        ),
-      ) as _i2.AuthState);
+  _i2.AuthState get state =>
+      (super.noSuchMethod(
+            Invocation.getter(#state),
+            returnValue: _i6.dummyValue<_i2.AuthState>(
+              this,
+              Invocation.getter(#state),
+            ),
+            returnValueForMissingStub: _i6.dummyValue<_i2.AuthState>(
+              this,
+              Invocation.getter(#state),
+            ),
+          )
+          as _i2.AuthState);
 
   @override
-  _i3.Stream<_i2.AuthState> get stream => (super.noSuchMethod(
-        Invocation.getter(#stream),
-        returnValue: _i3.Stream<_i2.AuthState>.empty(),
-        returnValueForMissingStub: _i3.Stream<_i2.AuthState>.empty(),
-      ) as _i3.Stream<_i2.AuthState>);
+  _i3.Stream<_i2.AuthState> get stream =>
+      (super.noSuchMethod(
+            Invocation.getter(#stream),
+            returnValue: _i3.Stream<_i2.AuthState>.empty(),
+            returnValueForMissingStub: _i3.Stream<_i2.AuthState>.empty(),
+          )
+          as _i3.Stream<_i2.AuthState>);
 
   @override
-  bool get isClosed => (super.noSuchMethod(
-        Invocation.getter(#isClosed),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
+  bool get isClosed =>
+      (super.noSuchMethod(
+            Invocation.getter(#isClosed),
+            returnValue: false,
+            returnValueForMissingStub: false,
+          )
+          as bool);
 
   @override
-  _i3.Future<void> close() => (super.noSuchMethod(
-        Invocation.method(
-          #close,
-          [],
-        ),
-        returnValue: _i3.Future<void>.value(),
-        returnValueForMissingStub: _i3.Future<void>.value(),
-      ) as _i3.Future<void>);
+  _i3.Future<void> close() =>
+      (super.noSuchMethod(
+            Invocation.method(#close, []),
+            returnValue: _i3.Future<void>.value(),
+            returnValueForMissingStub: _i3.Future<void>.value(),
+          )
+          as _i3.Future<void>);
 
   @override
   void add(_i2.AuthEvent? event) => super.noSuchMethod(
-        Invocation.method(
-          #add,
-          [event],
-        ),
-        returnValueForMissingStub: null,
-      );
+    Invocation.method(#add, [event]),
+    returnValueForMissingStub: null,
+  );
 
   @override
   void onEvent(_i2.AuthEvent? event) => super.noSuchMethod(
-        Invocation.method(
-          #onEvent,
-          [event],
-        ),
-        returnValueForMissingStub: null,
-      );
+    Invocation.method(#onEvent, [event]),
+    returnValueForMissingStub: null,
+  );
 
   @override
   void emit(_i2.AuthState? state) => super.noSuchMethod(
-        Invocation.method(
-          #emit,
-          [state],
-        ),
-        returnValueForMissingStub: null,
-      );
+    Invocation.method(#emit, [state]),
+    returnValueForMissingStub: null,
+  );
 
   @override
   void on<E extends _i2.AuthEvent>(
     _i5.EventHandler<E, _i2.AuthState>? handler, {
     _i5.EventTransformer<E>? transformer,
-  }) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #on,
-          [handler],
-          {#transformer: transformer},
-        ),
-        returnValueForMissingStub: null,
-      );
+  }) => super.noSuchMethod(
+    Invocation.method(#on, [handler], {#transformer: transformer}),
+    returnValueForMissingStub: null,
+  );
 
   @override
   void onTransition(_i5.Transition<_i2.AuthEvent, _i2.AuthState>? transition) =>
       super.noSuchMethod(
-        Invocation.method(
-          #onTransition,
-          [transition],
-        ),
+        Invocation.method(#onTransition, [transition]),
         returnValueForMissingStub: null,
       );
 
   @override
-  void onDone(
-    _i2.AuthEvent? event, [
-    Object? error,
-    StackTrace? stackTrace,
-  ]) =>
+  void onDone(_i2.AuthEvent? event, [Object? error, StackTrace? stackTrace]) =>
       super.noSuchMethod(
-        Invocation.method(
-          #onDone,
-          [
-            event,
-            error,
-            stackTrace,
-          ],
-        ),
+        Invocation.method(#onDone, [event, error, stackTrace]),
         returnValueForMissingStub: null,
       );
 
   @override
   void onChange(_i5.Change<_i2.AuthState>? change) => super.noSuchMethod(
-        Invocation.method(
-          #onChange,
-          [change],
-        ),
-        returnValueForMissingStub: null,
-      );
+    Invocation.method(#onChange, [change]),
+    returnValueForMissingStub: null,
+  );
 
   @override
-  void addError(
-    Object? error, [
-    StackTrace? stackTrace,
-  ]) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #addError,
-          [
-            error,
-            stackTrace,
-          ],
-        ),
-        returnValueForMissingStub: null,
-      );
+  void addError(Object? error, [StackTrace? stackTrace]) => super.noSuchMethod(
+    Invocation.method(#addError, [error, stackTrace]),
+    returnValueForMissingStub: null,
+  );
 
   @override
-  void onError(
-    Object? error,
-    StackTrace? stackTrace,
-  ) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #onError,
-          [
-            error,
-            stackTrace,
-          ],
-        ),
-        returnValueForMissingStub: null,
-      );
+  void onError(Object? error, StackTrace? stackTrace) => super.noSuchMethod(
+    Invocation.method(#onError, [error, stackTrace]),
+    returnValueForMissingStub: null,
+  );
 }
 
 /// A class which mocks [LocalAuthPlatform].
@@ -507,59 +419,54 @@ class LocalAuthPlatformMock extends _i1.Mock implements _i7.LocalAuthPlatform {
     _i8.AuthenticationOptions? options = const _i8.AuthenticationOptions(),
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #authenticate,
-          [],
-          {
-            #localizedReason: localizedReason,
-            #authMessages: authMessages,
-            #options: options,
-          },
-        ),
-        returnValue: _i3.Future<bool>.value(false),
-        returnValueForMissingStub: _i3.Future<bool>.value(false),
-      ) as _i3.Future<bool>);
+            Invocation.method(#authenticate, [], {
+              #localizedReason: localizedReason,
+              #authMessages: authMessages,
+              #options: options,
+            }),
+            returnValue: _i3.Future<bool>.value(false),
+            returnValueForMissingStub: _i3.Future<bool>.value(false),
+          )
+          as _i3.Future<bool>);
 
   @override
-  _i3.Future<bool> deviceSupportsBiometrics() => (super.noSuchMethod(
-        Invocation.method(
-          #deviceSupportsBiometrics,
-          [],
-        ),
-        returnValue: _i3.Future<bool>.value(false),
-        returnValueForMissingStub: _i3.Future<bool>.value(false),
-      ) as _i3.Future<bool>);
+  _i3.Future<bool> deviceSupportsBiometrics() =>
+      (super.noSuchMethod(
+            Invocation.method(#deviceSupportsBiometrics, []),
+            returnValue: _i3.Future<bool>.value(false),
+            returnValueForMissingStub: _i3.Future<bool>.value(false),
+          )
+          as _i3.Future<bool>);
 
   @override
   _i3.Future<List<_i8.BiometricType>> getEnrolledBiometrics() =>
       (super.noSuchMethod(
-        Invocation.method(
-          #getEnrolledBiometrics,
-          [],
-        ),
-        returnValue:
-            _i3.Future<List<_i8.BiometricType>>.value(<_i8.BiometricType>[]),
-        returnValueForMissingStub:
-            _i3.Future<List<_i8.BiometricType>>.value(<_i8.BiometricType>[]),
-      ) as _i3.Future<List<_i8.BiometricType>>);
+            Invocation.method(#getEnrolledBiometrics, []),
+            returnValue: _i3.Future<List<_i8.BiometricType>>.value(
+              <_i8.BiometricType>[],
+            ),
+            returnValueForMissingStub:
+                _i3.Future<List<_i8.BiometricType>>.value(
+                  <_i8.BiometricType>[],
+                ),
+          )
+          as _i3.Future<List<_i8.BiometricType>>);
 
   @override
-  _i3.Future<bool> isDeviceSupported() => (super.noSuchMethod(
-        Invocation.method(
-          #isDeviceSupported,
-          [],
-        ),
-        returnValue: _i3.Future<bool>.value(false),
-        returnValueForMissingStub: _i3.Future<bool>.value(false),
-      ) as _i3.Future<bool>);
+  _i3.Future<bool> isDeviceSupported() =>
+      (super.noSuchMethod(
+            Invocation.method(#isDeviceSupported, []),
+            returnValue: _i3.Future<bool>.value(false),
+            returnValueForMissingStub: _i3.Future<bool>.value(false),
+          )
+          as _i3.Future<bool>);
 
   @override
-  _i3.Future<bool> stopAuthentication() => (super.noSuchMethod(
-        Invocation.method(
-          #stopAuthentication,
-          [],
-        ),
-        returnValue: _i3.Future<bool>.value(false),
-        returnValueForMissingStub: _i3.Future<bool>.value(false),
-      ) as _i3.Future<bool>);
+  _i3.Future<bool> stopAuthentication() =>
+      (super.noSuchMethod(
+            Invocation.method(#stopAuthentication, []),
+            returnValue: _i3.Future<bool>.value(false),
+            returnValueForMissingStub: _i3.Future<bool>.value(false),
+          )
+          as _i3.Future<bool>);
 }

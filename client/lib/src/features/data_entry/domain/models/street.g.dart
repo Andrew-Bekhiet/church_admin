@@ -38,7 +38,7 @@ class StreetFields {
     operators: {
       ...SpatialOperator.values,
       PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
+      PrimitiveOperator.isNotNull,
     },
   );
 
@@ -51,7 +51,7 @@ class StreetFields {
     operators: {
       ...ColorOperator.values,
       PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
+      PrimitiveOperator.isNotNull,
     },
   );
 
@@ -65,7 +65,7 @@ class StreetFields {
       ...DateTimeOperator.values,
       ...DateRangeOperator.values,
       PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
+      PrimitiveOperator.isNotNull,
     },
   );
 
@@ -86,31 +86,31 @@ class StreetFields {
 
   final FieldMetadata<LastRecordedByInfo> lastVisit =
       FieldMetadata<LastRecordedByInfo>(
-    getValue: (obj) => obj is Street ? obj.lastVisit : null,
-    parentType: Street,
-    name: 'lastVisit',
-    label: 'أخر افتقاد',
-    isCodeOnly: false,
-    operators: {
-      ...MultiSelectOperator.values,
-      PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
-    },
-  );
+        getValue: (obj) => obj is Street ? obj.lastVisit : null,
+        parentType: Street,
+        name: 'lastVisit',
+        label: 'أخر افتقاد',
+        isCodeOnly: false,
+        operators: {
+          ...MultiSelectOperator.values,
+          PrimitiveOperator.isNull,
+          PrimitiveOperator.isNotNull,
+        },
+      );
 
   final FieldMetadata<LastRecordedByInfo> lastEdit =
       FieldMetadata<LastRecordedByInfo>(
-    getValue: (obj) => obj is Street ? obj.lastEdit : null,
-    parentType: Street,
-    name: 'lastEdit',
-    label: 'أخر تحديث البيانات',
-    isCodeOnly: false,
-    operators: {
-      ...MultiSelectOperator.values,
-      PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
-    },
-  );
+        getValue: (obj) => obj is Street ? obj.lastEdit : null,
+        parentType: Street,
+        name: 'lastEdit',
+        label: 'أخر تحديث البيانات',
+        isCodeOnly: false,
+        operators: {
+          ...MultiSelectOperator.values,
+          PrimitiveOperator.isNull,
+          PrimitiveOperator.isNotNull,
+        },
+      );
 
   late final List<FieldMetadata<Object>> allFields = [
     id,
@@ -120,7 +120,7 @@ class StreetFields {
     photoUpdatedAt,
     areas,
     lastVisit,
-    lastEdit
+    lastEdit,
   ];
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'id': id,
@@ -130,7 +130,7 @@ class StreetFields {
     'photoUpdatedAt': photoUpdatedAt,
     'areas': areas,
     'lastVisit': lastVisit,
-    'lastEdit': lastEdit
+    'lastEdit': lastEdit,
   };
 }
 
@@ -139,34 +139,36 @@ class StreetFields {
 // **************************************************************************
 
 Street _$StreetFromJson(Map json) => Street(
-      id: json['id'] as String? ?? '',
-      name: json['name'] as String? ?? '',
-      line: lineFromJson(json['line']),
-      color: colorFromInt((json['color'] as num?)?.toInt()),
-      photoUpdatedAt: json['photoUpdatedAt'] == null
-          ? null
-          : DateTime.parse(json['photoUpdatedAt'] as String),
-      blurhash: json['blurhash'] as String?,
-      areas: streetsAreasFromJson(json['areas'] as List?),
-      lastVisit: json['lastVisit'] == null
-          ? null
-          : LastRecordedByInfo.fromJson(
-              Map<String, Object?>.from(json['lastVisit'] as Map)),
-      lastEdit: json['lastEdit'] == null
-          ? null
-          : LastRecordedByInfo.fromJson(
-              Map<String, Object?>.from(json['lastEdit'] as Map)),
-      userCanEdit: json['userCanEdit'] as bool? ?? false,
-    );
+  id: json['id'] as String? ?? '',
+  name: json['name'] as String? ?? '',
+  line: lineFromJson(json['line']),
+  color: colorFromInt((json['color'] as num?)?.toInt()),
+  photoUpdatedAt: json['photoUpdatedAt'] == null
+      ? null
+      : DateTime.parse(json['photoUpdatedAt'] as String),
+  blurhash: json['blurhash'] as String?,
+  areas: streetsAreasFromJson(json['areas'] as List?),
+  lastVisit: json['lastVisit'] == null
+      ? null
+      : LastRecordedByInfo.fromJson(
+          Map<String, Object?>.from(json['lastVisit'] as Map),
+        ),
+  lastEdit: json['lastEdit'] == null
+      ? null
+      : LastRecordedByInfo.fromJson(
+          Map<String, Object?>.from(json['lastEdit'] as Map),
+        ),
+  userCanEdit: json['userCanEdit'] as bool? ?? false,
+);
 
 Map<String, dynamic> _$StreetToJson(Street instance) => <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
-      'line': lineToJson(instance.line),
-      'color': colorToInt(instance.color),
-      'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
-      'blurhash': instance.blurhash,
-      'areas': streetsAreasToJson(instance.areas),
-      'lastVisit': instance.lastVisit?.toJson(),
-      'lastEdit': instance.lastEdit?.toJson(),
-    };
+  'id': instance.id,
+  'name': instance.name,
+  'line': lineToJson(instance.line),
+  'color': colorToInt(instance.color),
+  'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+  'blurhash': instance.blurhash,
+  'areas': streetsAreasToJson(instance.areas),
+  'lastVisit': instance.lastVisit?.toJson(),
+  'lastEdit': instance.lastEdit?.toJson(),
+};

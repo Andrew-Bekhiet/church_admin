@@ -38,7 +38,7 @@ class HobbyFields {
     operators: {
       ...ColorOperator.values,
       PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
+      PrimitiveOperator.isNotNull,
     },
   );
 
@@ -46,7 +46,7 @@ class HobbyFields {
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'id': id,
     'name': name,
-    'color': color
+    'color': color,
   };
 }
 
@@ -55,13 +55,13 @@ class HobbyFields {
 // **************************************************************************
 
 Hobby _$HobbyFromJson(Map json) => Hobby(
-      id: json['id'] as String? ?? '',
-      name: json['name'] as String? ?? '',
-      color: colorFromInt((json['color'] as num?)?.toInt()),
-    );
+  id: json['id'] as String? ?? '',
+  name: json['name'] as String? ?? '',
+  color: colorFromInt((json['color'] as num?)?.toInt()),
+);
 
 Map<String, dynamic> _$HobbyToJson(Hobby instance) => <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
-      'color': colorToInt(instance.color),
-    };
+  'id': instance.id,
+  'name': instance.name,
+  'color': colorToInt(instance.color),
+};

@@ -42,7 +42,7 @@ class ShammasLevelFields {
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'order': order,
     'id': id,
-    'name': name
+    'name': name,
   };
 }
 
@@ -51,10 +51,10 @@ class ShammasLevelFields {
 // **************************************************************************
 
 ShammasLevel _$ShammasLevelFromJson(Map json) => ShammasLevel(
-      order: (json['order'] as num?)?.toInt() ?? 0,
-      name: json['name'] as String? ?? '',
-      id: json['id'] as String? ?? '',
-    );
+  order: (json['order'] as num?)?.toInt() ?? 0,
+  name: json['name'] as String? ?? '',
+  id: json['id'] as String? ?? '',
+);
 
 Map<String, dynamic> _$ShammasLevelToJson(ShammasLevel instance) =>
     <String, dynamic>{

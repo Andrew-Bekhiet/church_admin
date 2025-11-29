@@ -38,7 +38,7 @@ class TagFields {
     operators: {
       ...ColorOperator.values,
       PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
+      PrimitiveOperator.isNotNull,
     },
   );
 
@@ -46,7 +46,7 @@ class TagFields {
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'id': id,
     'name': name,
-    'color': color
+    'color': color,
   };
 }
 
@@ -55,13 +55,13 @@ class TagFields {
 // **************************************************************************
 
 Tag _$TagFromJson(Map json) => Tag(
-      id: json['id'] as String? ?? '',
-      name: json['name'] as String? ?? '',
-      color: colorFromInt((json['color'] as num?)?.toInt()),
-    );
+  id: json['id'] as String? ?? '',
+  name: json['name'] as String? ?? '',
+  color: colorFromInt((json['color'] as num?)?.toInt()),
+);
 
 Map<String, dynamic> _$TagToJson(Tag instance) => <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
-      'color': colorToInt(instance.color),
-    };
+  'id': instance.id,
+  'name': instance.name,
+  'color': colorToInt(instance.color),
+};

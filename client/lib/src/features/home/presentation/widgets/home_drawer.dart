@@ -67,9 +67,8 @@ class HomeDrawer extends StatelessWidget {
               onTap: () => Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) {
-                    final gqlClient = graphQLClientProvider.read(
-                      globalProviderContainer,
-                    );
+                    final gqlClient =
+                        globalProviderContainer.read(graphQLClientProvider);
 
                     return GraphqlCacheInspector(
                       title: 'GraphQL Cache',

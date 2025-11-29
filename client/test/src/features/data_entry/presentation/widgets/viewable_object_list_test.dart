@@ -3,12 +3,12 @@ import 'dart:async';
 import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/misc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:riverpod/riverpod.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '../../../../utils.dart';
@@ -33,8 +33,10 @@ void main() {
 
       final controller = ViewableObjectListController(
         selectionController: SelectionController<Person>(),
-        objectsPaginatableStream:
-            _createMockPaginatableStream(isLoading, objectsStream),
+        objectsPaginatableStream: _createMockPaginatableStream(
+          isLoading,
+          objectsStream,
+        ),
       );
 
       await tester.pumpWidget(
@@ -119,8 +121,9 @@ void main() {
       ]);
       addTearDown(objectsStream.close);
 
-      final selectionController =
-          SelectionController<Person>(equality: EqualityBy((p) => p.id));
+      final selectionController = SelectionController<Person>(
+        equality: EqualityBy((p) => p.id),
+      );
       final controller = ViewableObjectListController(
         objectsPaginatableStream: _createMockPaginatableStream(
           BehaviorSubject.seeded(false),
@@ -357,13 +360,15 @@ void _setUp() {
 Override _setUpViewableObjectService() {
   final viewableObjectService = MockViewableObjectService();
 
-  when(viewableObjectService.getDefaultIconFor<Person>(any))
-      .thenReturn(Symbols.person);
+  when(
+    viewableObjectService.getDefaultIconFor<Person>(any),
+  ).thenReturn(Symbols.person);
 
   return viewableObjectServiceProvider.overrideWithValue(viewableObjectService);
 }
 
 Override _setUpImageUrlCacheService() {
-  return imageUrlCacheServiceProvider
-      .overrideWithValue(MockImageUrlCacheService());
+  return imageUrlCacheServiceProvider.overrideWithValue(
+    MockImageUrlCacheService(),
+  );
 }

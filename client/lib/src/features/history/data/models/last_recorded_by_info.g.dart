@@ -30,7 +30,7 @@ class LastRecordedByInfoFields {
     operators: {
       ...MultiSelectOperator.values,
       PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
+      PrimitiveOperator.isNotNull,
     },
   );
 
@@ -46,12 +46,12 @@ class LastRecordedByInfoFields {
   late final List<FieldMetadata<Object>> allFields = [
     time,
     user,
-    isFatherVisit
+    isFatherVisit,
   ];
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'time': time,
     'user': user,
-    'isFatherVisit': isFatherVisit
+    'isFatherVisit': isFatherVisit,
   };
 }
 
@@ -60,14 +60,13 @@ class LastRecordedByInfoFields {
 // **************************************************************************
 
 LastRecordedByInfo _$LastRecordedByInfoFromJson(Map json) => LastRecordedByInfo(
-      time:
-          json['time'] == null ? null : DateTime.parse(json['time'] as String),
-      recordedBy: readRecordedBy(json, 'recordedBy') as String?,
-      user: json['user'] == null
-          ? null
-          : User.fromJson(Map<String, Object?>.from(json['user'] as Map)),
-      isFatherVisit: json['isFatherVisit'] as bool? ?? false,
-    );
+  time: json['time'] == null ? null : DateTime.parse(json['time'] as String),
+  recordedBy: readRecordedBy(json, 'recordedBy') as String?,
+  user: json['user'] == null
+      ? null
+      : User.fromJson(Map<String, Object?>.from(json['user'] as Map)),
+  isFatherVisit: json['isFatherVisit'] as bool? ?? false,
+);
 
 Map<String, dynamic> _$LastRecordedByInfoToJson(LastRecordedByInfo instance) =>
     <String, dynamic>{

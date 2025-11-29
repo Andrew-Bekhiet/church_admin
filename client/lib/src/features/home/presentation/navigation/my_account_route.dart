@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 part 'my_account_route.g.dart';
 
 @TypedGoRoute<MyAccountRoute>(path: '/my_account')
-class MyAccountRoute extends GoRouteData with _$MyAccountRoute {
+class MyAccountRoute extends GoRouteData with $MyAccountRoute {
   const MyAccountRoute();
 
   @override

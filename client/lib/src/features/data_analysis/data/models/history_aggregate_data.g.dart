@@ -22,7 +22,7 @@ class HistoryAggregateDataFields {
 
   late final List<FieldMetadata<Object>> allFields = [aggregate];
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
-    'aggregate': aggregate
+    'aggregate': aggregate,
   };
 }
 
@@ -33,17 +33,22 @@ class HistoryAggregateDataFields {
 HistoryAggregateData _$HistoryAggregateDataFromJson(Map json) =>
     HistoryAggregateData(
       aggregate: AggregateData.fromJson(
-          Map<String, Object?>.from(json['aggregate'] as Map)),
-      nodes: (json['nodes'] as List<dynamic>?)
-              ?.map((e) => LastRecordedByInfo.fromJson(
-                  Map<String, Object?>.from(e as Map)))
+        Map<String, Object?>.from(json['aggregate'] as Map),
+      ),
+      nodes:
+          (json['nodes'] as List<dynamic>?)
+              ?.map(
+                (e) => LastRecordedByInfo.fromJson(
+                  Map<String, Object?>.from(e as Map),
+                ),
+              )
               .toList() ??
           const [],
     );
 
 Map<String, dynamic> _$HistoryAggregateDataToJson(
-        HistoryAggregateData instance) =>
-    <String, dynamic>{
-      'aggregate': instance.aggregate.toJson(),
-      'nodes': instance.nodes.map((e) => e.toJson()).toList(),
-    };
+  HistoryAggregateData instance,
+) => <String, dynamic>{
+  'aggregate': instance.aggregate.toJson(),
+  'nodes': instance.nodes.map((e) => e.toJson()).toList(),
+};

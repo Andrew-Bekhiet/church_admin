@@ -14,47 +14,45 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$HistoryAggregateData {
-  AggregateData get aggregate;
-  List<LastRecordedByInfo> get nodes;
 
-  /// Create a copy of HistoryAggregateData
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  $HistoryAggregateDataCopyWith<HistoryAggregateData> get copyWith =>
-      _$HistoryAggregateDataCopyWithImpl<HistoryAggregateData>(
-          this as HistoryAggregateData, _$identity);
+ AggregateData get aggregate; List<LastRecordedByInfo> get nodes;
+/// Create a copy of HistoryAggregateData
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$HistoryAggregateDataCopyWith<HistoryAggregateData> get copyWith => _$HistoryAggregateDataCopyWithImpl<HistoryAggregateData>(this as HistoryAggregateData, _$identity);
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is HistoryAggregateData &&
-            (identical(other.aggregate, aggregate) ||
-                other.aggregate == aggregate) &&
-            const DeepCollectionEquality().equals(other.nodes, nodes));
-  }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(
-      runtimeType, aggregate, const DeepCollectionEquality().hash(nodes));
 
-  @override
-  String toString() {
-    return 'HistoryAggregateData(aggregate: $aggregate, nodes: $nodes)';
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is HistoryAggregateData&&(identical(other.aggregate, aggregate) || other.aggregate == aggregate)&&const DeepCollectionEquality().equals(other.nodes, nodes));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,aggregate,const DeepCollectionEquality().hash(nodes));
+
+@override
+String toString() {
+  return 'HistoryAggregateData(aggregate: $aggregate, nodes: $nodes)';
+}
+
+
 }
 
 /// @nodoc
-abstract mixin class $HistoryAggregateDataCopyWith<$Res> {
-  factory $HistoryAggregateDataCopyWith(HistoryAggregateData value,
-          $Res Function(HistoryAggregateData) _then) =
-      _$HistoryAggregateDataCopyWithImpl;
-  @useResult
-  $Res call({AggregateData aggregate, List<LastRecordedByInfo> nodes});
-}
+abstract mixin class $HistoryAggregateDataCopyWith<$Res>  {
+  factory $HistoryAggregateDataCopyWith(HistoryAggregateData value, $Res Function(HistoryAggregateData) _then) = _$HistoryAggregateDataCopyWithImpl;
+@useResult
+$Res call({
+ AggregateData aggregate, List<LastRecordedByInfo> nodes
+});
 
+
+
+
+}
 /// @nodoc
 class _$HistoryAggregateDataCopyWithImpl<$Res>
     implements $HistoryAggregateDataCopyWith<$Res> {
@@ -63,25 +61,18 @@ class _$HistoryAggregateDataCopyWithImpl<$Res>
   final HistoryAggregateData _self;
   final $Res Function(HistoryAggregateData) _then;
 
-  /// Create a copy of HistoryAggregateData
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? aggregate = null,
-    Object? nodes = null,
-  }) {
-    return _then(HistoryAggregateData(
-      aggregate: null == aggregate
-          ? _self.aggregate
-          : aggregate // ignore: cast_nullable_to_non_nullable
-              as AggregateData,
-      nodes: null == nodes
-          ? _self.nodes
-          : nodes // ignore: cast_nullable_to_non_nullable
-              as List<LastRecordedByInfo>,
-    ));
-  }
+/// Create a copy of HistoryAggregateData
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? aggregate = null,Object? nodes = null,}) {
+  return _then(HistoryAggregateData(
+aggregate: null == aggregate ? _self.aggregate : aggregate // ignore: cast_nullable_to_non_nullable
+as AggregateData,nodes: null == nodes ? _self.nodes : nodes // ignore: cast_nullable_to_non_nullable
+as List<LastRecordedByInfo>,
+  ));
 }
+
+}
+
+
 
 // dart format on

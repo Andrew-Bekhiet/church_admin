@@ -36,7 +36,7 @@ class _ServiceFields {
     operators: {
       ...MultiSelectOperator.values,
       PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
+      PrimitiveOperator.isNotNull,
     },
   );
 
@@ -49,7 +49,7 @@ class _ServiceFields {
     operators: {
       ...MultiSelectOperator.values,
       PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
+      PrimitiveOperator.isNotNull,
     },
   );
 
@@ -62,7 +62,7 @@ class _ServiceFields {
     operators: {
       ...MultiSelectOperator.values,
       PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
+      PrimitiveOperator.isNotNull,
     },
   );
 
@@ -75,7 +75,7 @@ class _ServiceFields {
     operators: {
       ...ColorOperator.values,
       PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
+      PrimitiveOperator.isNotNull,
     },
   );
 
@@ -89,7 +89,7 @@ class _ServiceFields {
       ...DateTimeOperator.values,
       ...DateRangeOperator.values,
       PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
+      PrimitiveOperator.isNotNull,
     },
   );
 
@@ -115,17 +115,17 @@ class _ServiceFields {
 
   final FieldMetadata<LastRecordedByInfo> lastEdit =
       FieldMetadata<LastRecordedByInfo>(
-    getValue: (obj) => obj is Service ? obj.lastEdit : null,
-    parentType: Service,
-    name: 'lastEdit',
-    label: 'أخر تحديث البيانات',
-    isCodeOnly: false,
-    operators: {
-      ...MultiSelectOperator.values,
-      PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
-    },
-  );
+        getValue: (obj) => obj is Service ? obj.lastEdit : null,
+        parentType: Service,
+        name: 'lastEdit',
+        label: 'أخر تحديث البيانات',
+        isCodeOnly: false,
+        operators: {
+          ...MultiSelectOperator.values,
+          PrimitiveOperator.isNull,
+          PrimitiveOperator.isNotNull,
+        },
+      );
 
   final FieldMetadata<AdminOnData> adminUsersRel = FieldMetadata<AdminOnData>(
     getValue: (obj) => obj is Service ? obj.adminUsers : null,
@@ -144,22 +144,23 @@ class _ServiceFields {
 
   final FieldMetadata<AggregateData> attendanceHistoryAggregate =
       FieldMetadata<AggregateData>(
-    getValue: (obj) => obj is Service ? obj.attendanceHistoryAggregate : null,
-    parentType: Service,
-    name: 'attendanceHistoryAggregate',
-    label: 'attendanceHistoryAggregate',
-    isCodeOnly: true,
-  );
+        getValue: (obj) =>
+            obj is Service ? obj.attendanceHistoryAggregate : null,
+        parentType: Service,
+        name: 'attendanceHistoryAggregate',
+        label: 'attendanceHistoryAggregate',
+        isCodeOnly: true,
+      );
 
   final FieldMetadata<AggregateData> attendanceDaysConstraintsAggregate =
       FieldMetadata<AggregateData>(
-    getValue: (obj) =>
-        obj is Service ? obj.attendanceDaysConstraintsAggregate : null,
-    parentType: Service,
-    name: 'attendanceDaysConstraintsAggregate',
-    label: 'attendanceDaysConstraintsAggregate',
-    isCodeOnly: true,
-  );
+        getValue: (obj) =>
+            obj is Service ? obj.attendanceDaysConstraintsAggregate : null,
+        parentType: Service,
+        name: 'attendanceDaysConstraintsAggregate',
+        label: 'attendanceDaysConstraintsAggregate',
+        isCodeOnly: true,
+      );
 
   late final List<FieldMetadata<Object>> allFields = [
     id,
@@ -174,7 +175,7 @@ class _ServiceFields {
     lastEdit,
     adminUsers,
     attendanceHistoryAggregate,
-    attendanceDaysConstraintsAggregate
+    attendanceDaysConstraintsAggregate,
   ];
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'id': id,
@@ -189,7 +190,7 @@ class _ServiceFields {
     'lastEdit': lastEdit,
     'adminUsers': adminUsers,
     'attendanceHistoryAggregate': attendanceHistoryAggregate,
-    'attendanceDaysConstraintsAggregate': attendanceDaysConstraintsAggregate
+    'attendanceDaysConstraintsAggregate': attendanceDaysConstraintsAggregate,
   };
 }
 
@@ -198,69 +199,75 @@ class _ServiceFields {
 // **************************************************************************
 
 Service _$ServiceFromJson(Map json) => Service(
-      id: json['id'] as String? ?? '',
-      name: json['name'] as String? ?? '',
-      studyYearFrom: json['studyYearFrom'] == null
-          ? null
-          : StudyYear.fromJson(
-              Map<String, Object?>.from(json['studyYearFrom'] as Map)),
-      studyYearTo: json['studyYearTo'] == null
-          ? null
-          : StudyYear.fromJson(
-              Map<String, Object?>.from(json['studyYearTo'] as Map)),
-      studyYearFromId: (json['studyYearFromId'] as num?)?.toInt(),
-      studyYearToId: (json['studyYearToId'] as num?)?.toInt(),
-      nextService: json['nextService'] == null
-          ? null
-          : Service.fromJson(
-              Map<String, Object?>.from(json['nextService'] as Map)),
-      nextServiceId: json['nextServiceId'] as String?,
-      color: colorFromInt((json['color'] as num?)?.toInt()),
-      photoUpdatedAt: json['photoUpdatedAt'] == null
-          ? null
-          : DateTime.parse(json['photoUpdatedAt'] as String),
-      blurhash: json['blurhash'] as String?,
-      classes: (json['classes'] as List<dynamic>?)
-          ?.map((e) => Class.fromJson(Map<String, Object?>.from(e as Map)))
-          .toList(),
-      groups: (json['groups'] as List<dynamic>?)
-          ?.map((e) => Group.fromJson(Map<String, Object?>.from(e as Map)))
-          .toList(),
-      lastEdit: json['lastEdit'] == null
-          ? null
-          : LastRecordedByInfo.fromJson(
-              Map<String, Object?>.from(json['lastEdit'] as Map)),
-      adminUsers: adminUsersFromJson(json['adminUsers'] as List?),
-      attendanceHistoryAggregate: json['attendanceHistoryAggregate'] == null
-          ? null
-          : HistoryAggregateData.fromJson(Map<String, dynamic>.from(
-              json['attendanceHistoryAggregate'] as Map)),
-      attendanceDaysConstraintsAggregate:
-          json['attendanceDaysConstraintsAggregate'] == null
-              ? null
-              : HistoryAggregateData.fromJson(Map<String, dynamic>.from(
-                  json['attendanceDaysConstraintsAggregate'] as Map)),
-      userCanEdit: json['userCanEdit'] as bool? ?? false,
-    );
+  id: json['id'] as String? ?? '',
+  name: json['name'] as String? ?? '',
+  studyYearFrom: json['studyYearFrom'] == null
+      ? null
+      : StudyYear.fromJson(
+          Map<String, Object?>.from(json['studyYearFrom'] as Map),
+        ),
+  studyYearTo: json['studyYearTo'] == null
+      ? null
+      : StudyYear.fromJson(
+          Map<String, Object?>.from(json['studyYearTo'] as Map),
+        ),
+  studyYearFromId: (json['studyYearFromId'] as num?)?.toInt(),
+  studyYearToId: (json['studyYearToId'] as num?)?.toInt(),
+  nextService: json['nextService'] == null
+      ? null
+      : Service.fromJson(Map<String, Object?>.from(json['nextService'] as Map)),
+  nextServiceId: json['nextServiceId'] as String?,
+  color: colorFromInt((json['color'] as num?)?.toInt()),
+  photoUpdatedAt: json['photoUpdatedAt'] == null
+      ? null
+      : DateTime.parse(json['photoUpdatedAt'] as String),
+  blurhash: json['blurhash'] as String?,
+  classes: (json['classes'] as List<dynamic>?)
+      ?.map((e) => Class.fromJson(Map<String, Object?>.from(e as Map)))
+      .toList(),
+  groups: (json['groups'] as List<dynamic>?)
+      ?.map((e) => Group.fromJson(Map<String, Object?>.from(e as Map)))
+      .toList(),
+  lastEdit: json['lastEdit'] == null
+      ? null
+      : LastRecordedByInfo.fromJson(
+          Map<String, Object?>.from(json['lastEdit'] as Map),
+        ),
+  adminUsers: adminUsersFromJson(json['adminUsers'] as List?),
+  attendanceHistoryAggregate: json['attendanceHistoryAggregate'] == null
+      ? null
+      : HistoryAggregateData.fromJson(
+          Map<String, dynamic>.from(json['attendanceHistoryAggregate'] as Map),
+        ),
+  attendanceDaysConstraintsAggregate:
+      json['attendanceDaysConstraintsAggregate'] == null
+      ? null
+      : HistoryAggregateData.fromJson(
+          Map<String, dynamic>.from(
+            json['attendanceDaysConstraintsAggregate'] as Map,
+          ),
+        ),
+  userCanEdit: json['userCanEdit'] as bool? ?? false,
+);
 
 Map<String, dynamic> _$ServiceToJson(Service instance) => <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
-      'studyYearFrom': instance.studyYearFrom?.toJson(),
-      'studyYearTo': instance.studyYearTo?.toJson(),
-      'studyYearFromId': instance.studyYearFromId,
-      'studyYearToId': instance.studyYearToId,
-      'nextService': instance.nextService?.toJson(),
-      'nextServiceId': instance.nextServiceId,
-      'color': colorToInt(instance.color),
-      'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
-      'blurhash': instance.blurhash,
-      'classes': instance.classes?.map((e) => e.toJson()).toList(),
-      'groups': instance.groups?.map((e) => e.toJson()).toList(),
-      'lastEdit': instance.lastEdit?.toJson(),
-      'adminUsers': adminUsersToJson(instance.adminUsers),
-      'attendanceHistoryAggregate':
-          instance.attendanceHistoryAggregate?.toJson(),
-      'attendanceDaysConstraintsAggregate':
-          instance.attendanceDaysConstraintsAggregate?.toJson(),
-    };
+  'id': instance.id,
+  'name': instance.name,
+  'studyYearFrom': instance.studyYearFrom?.toJson(),
+  'studyYearTo': instance.studyYearTo?.toJson(),
+  'studyYearFromId': instance.studyYearFromId,
+  'studyYearToId': instance.studyYearToId,
+  'nextService': instance.nextService?.toJson(),
+  'nextServiceId': instance.nextServiceId,
+  'color': colorToInt(instance.color),
+  'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+  'blurhash': instance.blurhash,
+  'classes': instance.classes?.map((e) => e.toJson()).toList(),
+  'groups': instance.groups?.map((e) => e.toJson()).toList(),
+  'lastEdit': instance.lastEdit?.toJson(),
+  'adminUsers': adminUsersToJson(instance.adminUsers),
+  'attendanceHistoryAggregate': instance.attendanceHistoryAggregate?.toJson(),
+  'attendanceDaysConstraintsAggregate': instance
+      .attendanceDaysConstraintsAggregate
+      ?.toJson(),
+};

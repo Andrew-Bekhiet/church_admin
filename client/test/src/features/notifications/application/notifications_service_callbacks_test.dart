@@ -4,10 +4,10 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart' hide Notification;
 import 'package:flutter_local_notifications/flutter_local_notifications.dart'
     hide Person;
+import 'package:flutter_riverpod/misc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:riverpod/riverpod.dart';
 
 import 'notifications_service_callbacks_test.mocks.dart';
 
@@ -61,8 +61,9 @@ void main() {
 
           verifyInOrder([
             NotificationsStorage.I.readNotification(expectedNotification.id),
-            NotificationsService.I
-                .addForegroundNotificationTap(expectedNotification),
+            NotificationsService.I.addForegroundNotificationTap(
+              expectedNotification,
+            ),
           ]);
         },
       );
@@ -160,10 +161,10 @@ Future<void> _testNotificationMethod({
 }) async {
   final expectedNotification =
       NotificationsServiceCallbacks.makeNotificationWith(
-    title: title,
-    persons: expectedPersons,
-    additionalData: const {},
-  );
+        title: title,
+        persons: expectedPersons,
+        additionalData: const {},
+      );
 
   final expectedNotificationDetails = NotificationDetails(
     android: NotificationsServiceCallbacks.androidNotificationDetailsFor(
@@ -196,8 +197,9 @@ Future<void> _testNotificationMethod({
     ),
   ]).captured[2];
 
-  final advQueryJson =
-      json.encode((paginatableStreamCall.first as AdvancedQuery).toJson());
+  final advQueryJson = json.encode(
+    (paginatableStreamCall.first as AdvancedQuery).toJson(),
+  );
 
   expect(
     advQueryJson,
@@ -242,8 +244,9 @@ void _setUp() {
 Override _setUpMockInitializationService() {
   final mockInitializationService = MockInitializationService();
 
-  return initializationServiceProvider
-      .overrideWithValue(mockInitializationService);
+  return initializationServiceProvider.overrideWithValue(
+    mockInitializationService,
+  );
 }
 
 Override _setUpMockAuthBloc() {
@@ -267,8 +270,9 @@ Override _setUpMockAuthBloc() {
 Override _setUpMockNotificationsStorage() {
   final mockNotificationsStorage = MockNotificationsStorage();
 
-  return notificationsStorageProvider
-      .overrideWithValue(mockNotificationsStorage);
+  return notificationsStorageProvider.overrideWithValue(
+    mockNotificationsStorage,
+  );
 }
 
 Override _setUpMockNotificationsService() {
@@ -284,8 +288,9 @@ Override _setUpMockNotificationsService() {
     return;
   });
 
-  return notificationsServiceProvider
-      .overrideWithValue(mockNotificationsService);
+  return notificationsServiceProvider.overrideWithValue(
+    mockNotificationsService,
+  );
 }
 
 final expectedPersons = [

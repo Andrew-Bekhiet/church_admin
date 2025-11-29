@@ -31,114 +31,65 @@ import 'package:sembast/src/api/v2/database_client.dart' as _i7;
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
+// ignore_for_file: invalid_use_of_internal_member
 
 class _FakeFirebaseAppPlatform_0 extends _i1.SmartFake
     implements _i2.FirebaseAppPlatform {
-  _FakeFirebaseAppPlatform_0(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeFirebaseAppPlatform_0(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeFirebaseApp_1 extends _i1.SmartFake implements _i3.FirebaseApp {
-  _FakeFirebaseApp_1(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeFirebaseApp_1(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeFirebaseAuthPlatform_2 extends _i1.SmartFake
     implements _i4.FirebaseAuthPlatform {
-  _FakeFirebaseAuthPlatform_2(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeFirebaseAuthPlatform_2(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeActionCodeInfo_3 extends _i1.SmartFake
     implements _i4.ActionCodeInfo {
-  _FakeActionCodeInfo_3(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeActionCodeInfo_3(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeUserCredentialPlatform_4 extends _i1.SmartFake
     implements _i4.UserCredentialPlatform {
-  _FakeUserCredentialPlatform_4(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeUserCredentialPlatform_4(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeConfirmationResultPlatform_5 extends _i1.SmartFake
     implements _i4.ConfirmationResultPlatform {
-  _FakeConfirmationResultPlatform_5(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeConfirmationResultPlatform_5(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeFirebaseOptions_6 extends _i1.SmartFake
     implements _i3.FirebaseOptions {
-  _FakeFirebaseOptions_6(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeFirebaseOptions_6(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeFirebaseAppCheckPlatform_7 extends _i1.SmartFake
     implements _i5.FirebaseAppCheckPlatform {
-  _FakeFirebaseAppCheckPlatform_7(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeFirebaseAppCheckPlatform_7(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeFirebaseMessagingPlatform_8 extends _i1.SmartFake
     implements _i6.FirebaseMessagingPlatform {
-  _FakeFirebaseMessagingPlatform_8(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeFirebaseMessagingPlatform_8(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeNotificationSettings_9 extends _i1.SmartFake
     implements _i6.NotificationSettings {
-  _FakeNotificationSettings_9(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeNotificationSettings_9(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 /// A class which mocks [DatabaseClient].
@@ -151,11 +102,13 @@ class MockDatabaseClient extends _i1.Mock implements _i7.DatabaseClient {}
 /// See the documentation for Mockito's code generation for more information.
 class FirebasePlatform_ extends _i1.Mock implements _i2.FirebasePlatform {
   @override
-  List<_i2.FirebaseAppPlatform> get apps => (super.noSuchMethod(
-        Invocation.getter(#apps),
-        returnValue: <_i2.FirebaseAppPlatform>[],
-        returnValueForMissingStub: <_i2.FirebaseAppPlatform>[],
-      ) as List<_i2.FirebaseAppPlatform>);
+  List<_i2.FirebaseAppPlatform> get apps =>
+      (super.noSuchMethod(
+            Invocation.getter(#apps),
+            returnValue: <_i2.FirebaseAppPlatform>[],
+            returnValueForMissingStub: <_i2.FirebaseAppPlatform>[],
+          )
+          as List<_i2.FirebaseAppPlatform>);
 
   @override
   _i8.Future<_i2.FirebaseAppPlatform> initializeApp({
@@ -163,62 +116,46 @@ class FirebasePlatform_ extends _i1.Mock implements _i2.FirebasePlatform {
     _i3.FirebaseOptions? options,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #initializeApp,
-          [],
-          {
-            #name: name,
-            #options: options,
-          },
-        ),
-        returnValue: _i8.Future<_i2.FirebaseAppPlatform>.value(
-            _FakeFirebaseAppPlatform_0(
-          this,
-          Invocation.method(
-            #initializeApp,
-            [],
-            {
+            Invocation.method(#initializeApp, [], {
               #name: name,
               #options: options,
-            },
-          ),
-        )),
-        returnValueForMissingStub: _i8.Future<_i2.FirebaseAppPlatform>.value(
-            _FakeFirebaseAppPlatform_0(
-          this,
-          Invocation.method(
-            #initializeApp,
-            [],
-            {
-              #name: name,
-              #options: options,
-            },
-          ),
-        )),
-      ) as _i8.Future<_i2.FirebaseAppPlatform>);
+            }),
+            returnValue: _i8.Future<_i2.FirebaseAppPlatform>.value(
+              _FakeFirebaseAppPlatform_0(
+                this,
+                Invocation.method(#initializeApp, [], {
+                  #name: name,
+                  #options: options,
+                }),
+              ),
+            ),
+            returnValueForMissingStub:
+                _i8.Future<_i2.FirebaseAppPlatform>.value(
+                  _FakeFirebaseAppPlatform_0(
+                    this,
+                    Invocation.method(#initializeApp, [], {
+                      #name: name,
+                      #options: options,
+                    }),
+                  ),
+                ),
+          )
+          as _i8.Future<_i2.FirebaseAppPlatform>);
 
   @override
   _i2.FirebaseAppPlatform app([String? name = '[DEFAULT]']) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #app,
-          [name],
-        ),
-        returnValue: _FakeFirebaseAppPlatform_0(
-          this,
-          Invocation.method(
-            #app,
-            [name],
-          ),
-        ),
-        returnValueForMissingStub: _FakeFirebaseAppPlatform_0(
-          this,
-          Invocation.method(
-            #app,
-            [name],
-          ),
-        ),
-      ) as _i2.FirebaseAppPlatform);
+            Invocation.method(#app, [name]),
+            returnValue: _FakeFirebaseAppPlatform_0(
+              this,
+              Invocation.method(#app, [name]),
+            ),
+            returnValueForMissingStub: _FakeFirebaseAppPlatform_0(
+              this,
+              Invocation.method(#app, [name]),
+            ),
+          )
+          as _i2.FirebaseAppPlatform);
 }
 
 /// A class which mocks [FirebaseAuthPlatform].
@@ -227,70 +164,49 @@ class FirebasePlatform_ extends _i1.Mock implements _i2.FirebasePlatform {
 class FirebaseAuthPlatform_ extends _i1.Mock
     implements _i4.FirebaseAuthPlatform {
   @override
-  _i3.FirebaseApp get app => (super.noSuchMethod(
-        Invocation.getter(#app),
-        returnValue: _FakeFirebaseApp_1(
-          this,
-          Invocation.getter(#app),
-        ),
-        returnValueForMissingStub: _FakeFirebaseApp_1(
-          this,
-          Invocation.getter(#app),
-        ),
-      ) as _i3.FirebaseApp);
+  _i3.FirebaseApp get app =>
+      (super.noSuchMethod(
+            Invocation.getter(#app),
+            returnValue: _FakeFirebaseApp_1(this, Invocation.getter(#app)),
+            returnValueForMissingStub: _FakeFirebaseApp_1(
+              this,
+              Invocation.getter(#app),
+            ),
+          )
+          as _i3.FirebaseApp);
 
   @override
-  set tenantId(String? _tenantId) => super.noSuchMethod(
-        Invocation.setter(
-          #tenantId,
-          _tenantId,
-        ),
-        returnValueForMissingStub: null,
-      );
+  set tenantId(String? value) => super.noSuchMethod(
+    Invocation.setter(#tenantId, value),
+    returnValueForMissingStub: null,
+  );
 
   @override
-  set customAuthDomain(String? _customAuthDomain) => super.noSuchMethod(
-        Invocation.setter(
-          #customAuthDomain,
-          _customAuthDomain,
-        ),
-        returnValueForMissingStub: null,
-      );
+  set customAuthDomain(String? value) => super.noSuchMethod(
+    Invocation.setter(#customAuthDomain, value),
+    returnValueForMissingStub: null,
+  );
 
   @override
   set currentUser(_i4.UserPlatform? userPlatform) => super.noSuchMethod(
-        Invocation.setter(
-          #currentUser,
-          userPlatform,
-        ),
-        returnValueForMissingStub: null,
-      );
+    Invocation.setter(#currentUser, userPlatform),
+    returnValueForMissingStub: null,
+  );
 
   @override
   _i4.FirebaseAuthPlatform delegateFor({required _i3.FirebaseApp? app}) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #delegateFor,
-          [],
-          {#app: app},
-        ),
-        returnValue: _FakeFirebaseAuthPlatform_2(
-          this,
-          Invocation.method(
-            #delegateFor,
-            [],
-            {#app: app},
-          ),
-        ),
-        returnValueForMissingStub: _FakeFirebaseAuthPlatform_2(
-          this,
-          Invocation.method(
-            #delegateFor,
-            [],
-            {#app: app},
-          ),
-        ),
-      ) as _i4.FirebaseAuthPlatform);
+            Invocation.method(#delegateFor, [], {#app: app}),
+            returnValue: _FakeFirebaseAuthPlatform_2(
+              this,
+              Invocation.method(#delegateFor, [], {#app: app}),
+            ),
+            returnValueForMissingStub: _FakeFirebaseAuthPlatform_2(
+              this,
+              Invocation.method(#delegateFor, [], {#app: app}),
+            ),
+          )
+          as _i4.FirebaseAuthPlatform);
 
   @override
   _i4.FirebaseAuthPlatform setInitialValues({
@@ -298,121 +214,79 @@ class FirebaseAuthPlatform_ extends _i1.Mock
     String? languageCode,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #setInitialValues,
-          [],
-          {
-            #currentUser: currentUser,
-            #languageCode: languageCode,
-          },
-        ),
-        returnValue: _FakeFirebaseAuthPlatform_2(
-          this,
-          Invocation.method(
-            #setInitialValues,
-            [],
-            {
+            Invocation.method(#setInitialValues, [], {
               #currentUser: currentUser,
               #languageCode: languageCode,
-            },
-          ),
-        ),
-        returnValueForMissingStub: _FakeFirebaseAuthPlatform_2(
-          this,
-          Invocation.method(
-            #setInitialValues,
-            [],
-            {
-              #currentUser: currentUser,
-              #languageCode: languageCode,
-            },
-          ),
-        ),
-      ) as _i4.FirebaseAuthPlatform);
+            }),
+            returnValue: _FakeFirebaseAuthPlatform_2(
+              this,
+              Invocation.method(#setInitialValues, [], {
+                #currentUser: currentUser,
+                #languageCode: languageCode,
+              }),
+            ),
+            returnValueForMissingStub: _FakeFirebaseAuthPlatform_2(
+              this,
+              Invocation.method(#setInitialValues, [], {
+                #currentUser: currentUser,
+                #languageCode: languageCode,
+              }),
+            ),
+          )
+          as _i4.FirebaseAuthPlatform);
 
   @override
-  void sendAuthChangesEvent(
-    String? appName,
-    _i4.UserPlatform? userPlatform,
-  ) =>
+  void sendAuthChangesEvent(String? appName, _i4.UserPlatform? userPlatform) =>
       super.noSuchMethod(
-        Invocation.method(
-          #sendAuthChangesEvent,
-          [
-            appName,
-            userPlatform,
-          ],
-        ),
+        Invocation.method(#sendAuthChangesEvent, [appName, userPlatform]),
         returnValueForMissingStub: null,
       );
 
   @override
-  _i8.Future<void> useAuthEmulator(
-    String? host,
-    int? port,
-  ) =>
+  _i8.Future<void> useAuthEmulator(String? host, int? port) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #useAuthEmulator,
-          [
-            host,
-            port,
-          ],
-        ),
-        returnValue: _i8.Future<void>.value(),
-        returnValueForMissingStub: _i8.Future<void>.value(),
-      ) as _i8.Future<void>);
+            Invocation.method(#useAuthEmulator, [host, port]),
+            returnValue: _i8.Future<void>.value(),
+            returnValueForMissingStub: _i8.Future<void>.value(),
+          )
+          as _i8.Future<void>);
 
   @override
-  _i8.Future<void> applyActionCode(String? code) => (super.noSuchMethod(
-        Invocation.method(
-          #applyActionCode,
-          [code],
-        ),
-        returnValue: _i8.Future<void>.value(),
-        returnValueForMissingStub: _i8.Future<void>.value(),
-      ) as _i8.Future<void>);
+  _i8.Future<void> applyActionCode(String? code) =>
+      (super.noSuchMethod(
+            Invocation.method(#applyActionCode, [code]),
+            returnValue: _i8.Future<void>.value(),
+            returnValueForMissingStub: _i8.Future<void>.value(),
+          )
+          as _i8.Future<void>);
 
   @override
   _i8.Future<_i4.ActionCodeInfo> checkActionCode(String? code) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #checkActionCode,
-          [code],
-        ),
-        returnValue: _i8.Future<_i4.ActionCodeInfo>.value(_FakeActionCodeInfo_3(
-          this,
-          Invocation.method(
-            #checkActionCode,
-            [code],
-          ),
-        )),
-        returnValueForMissingStub:
-            _i8.Future<_i4.ActionCodeInfo>.value(_FakeActionCodeInfo_3(
-          this,
-          Invocation.method(
-            #checkActionCode,
-            [code],
-          ),
-        )),
-      ) as _i8.Future<_i4.ActionCodeInfo>);
+            Invocation.method(#checkActionCode, [code]),
+            returnValue: _i8.Future<_i4.ActionCodeInfo>.value(
+              _FakeActionCodeInfo_3(
+                this,
+                Invocation.method(#checkActionCode, [code]),
+              ),
+            ),
+            returnValueForMissingStub: _i8.Future<_i4.ActionCodeInfo>.value(
+              _FakeActionCodeInfo_3(
+                this,
+                Invocation.method(#checkActionCode, [code]),
+              ),
+            ),
+          )
+          as _i8.Future<_i4.ActionCodeInfo>);
 
   @override
-  _i8.Future<void> confirmPasswordReset(
-    String? code,
-    String? newPassword,
-  ) =>
+  _i8.Future<void> confirmPasswordReset(String? code, String? newPassword) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #confirmPasswordReset,
-          [
-            code,
-            newPassword,
-          ],
-        ),
-        returnValue: _i8.Future<void>.value(),
-        returnValueForMissingStub: _i8.Future<void>.value(),
-      ) as _i8.Future<void>);
+            Invocation.method(#confirmPasswordReset, [code, newPassword]),
+            returnValue: _i8.Future<void>.value(),
+            returnValueForMissingStub: _i8.Future<void>.value(),
+          )
+          as _i8.Future<void>);
 
   @override
   _i8.Future<_i4.UserCredentialPlatform> createUserWithEmailAndPassword(
@@ -420,112 +294,98 @@ class FirebaseAuthPlatform_ extends _i1.Mock
     String? password,
   ) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #createUserWithEmailAndPassword,
-          [
-            email,
-            password,
-          ],
-        ),
-        returnValue: _i8.Future<_i4.UserCredentialPlatform>.value(
-            _FakeUserCredentialPlatform_4(
-          this,
-          Invocation.method(
-            #createUserWithEmailAndPassword,
-            [
+            Invocation.method(#createUserWithEmailAndPassword, [
               email,
               password,
-            ],
-          ),
-        )),
-        returnValueForMissingStub: _i8.Future<_i4.UserCredentialPlatform>.value(
-            _FakeUserCredentialPlatform_4(
-          this,
-          Invocation.method(
-            #createUserWithEmailAndPassword,
-            [
-              email,
-              password,
-            ],
-          ),
-        )),
-      ) as _i8.Future<_i4.UserCredentialPlatform>);
+            ]),
+            returnValue: _i8.Future<_i4.UserCredentialPlatform>.value(
+              _FakeUserCredentialPlatform_4(
+                this,
+                Invocation.method(#createUserWithEmailAndPassword, [
+                  email,
+                  password,
+                ]),
+              ),
+            ),
+            returnValueForMissingStub:
+                _i8.Future<_i4.UserCredentialPlatform>.value(
+                  _FakeUserCredentialPlatform_4(
+                    this,
+                    Invocation.method(#createUserWithEmailAndPassword, [
+                      email,
+                      password,
+                    ]),
+                  ),
+                ),
+          )
+          as _i8.Future<_i4.UserCredentialPlatform>);
 
   @override
   _i8.Future<List<String>> fetchSignInMethodsForEmail(String? email) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #fetchSignInMethodsForEmail,
-          [email],
-        ),
-        returnValue: _i8.Future<List<String>>.value(<String>[]),
-        returnValueForMissingStub: _i8.Future<List<String>>.value(<String>[]),
-      ) as _i8.Future<List<String>>);
+            Invocation.method(#fetchSignInMethodsForEmail, [email]),
+            returnValue: _i8.Future<List<String>>.value(<String>[]),
+            returnValueForMissingStub: _i8.Future<List<String>>.value(
+              <String>[],
+            ),
+          )
+          as _i8.Future<List<String>>);
 
   @override
   _i8.Future<_i4.UserCredentialPlatform> getRedirectResult() =>
       (super.noSuchMethod(
-        Invocation.method(
-          #getRedirectResult,
-          [],
-        ),
-        returnValue: _i8.Future<_i4.UserCredentialPlatform>.value(
-            _FakeUserCredentialPlatform_4(
-          this,
-          Invocation.method(
-            #getRedirectResult,
-            [],
-          ),
-        )),
-        returnValueForMissingStub: _i8.Future<_i4.UserCredentialPlatform>.value(
-            _FakeUserCredentialPlatform_4(
-          this,
-          Invocation.method(
-            #getRedirectResult,
-            [],
-          ),
-        )),
-      ) as _i8.Future<_i4.UserCredentialPlatform>);
+            Invocation.method(#getRedirectResult, []),
+            returnValue: _i8.Future<_i4.UserCredentialPlatform>.value(
+              _FakeUserCredentialPlatform_4(
+                this,
+                Invocation.method(#getRedirectResult, []),
+              ),
+            ),
+            returnValueForMissingStub:
+                _i8.Future<_i4.UserCredentialPlatform>.value(
+                  _FakeUserCredentialPlatform_4(
+                    this,
+                    Invocation.method(#getRedirectResult, []),
+                  ),
+                ),
+          )
+          as _i8.Future<_i4.UserCredentialPlatform>);
 
   @override
-  bool isSignInWithEmailLink(String? emailLink) => (super.noSuchMethod(
-        Invocation.method(
-          #isSignInWithEmailLink,
-          [emailLink],
-        ),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
+  bool isSignInWithEmailLink(String? emailLink) =>
+      (super.noSuchMethod(
+            Invocation.method(#isSignInWithEmailLink, [emailLink]),
+            returnValue: false,
+            returnValueForMissingStub: false,
+          )
+          as bool);
 
   @override
-  _i8.Stream<_i4.UserPlatform?> authStateChanges() => (super.noSuchMethod(
-        Invocation.method(
-          #authStateChanges,
-          [],
-        ),
-        returnValue: _i8.Stream<_i4.UserPlatform?>.empty(),
-        returnValueForMissingStub: _i8.Stream<_i4.UserPlatform?>.empty(),
-      ) as _i8.Stream<_i4.UserPlatform?>);
+  _i8.Stream<_i4.UserPlatform?> authStateChanges() =>
+      (super.noSuchMethod(
+            Invocation.method(#authStateChanges, []),
+            returnValue: _i8.Stream<_i4.UserPlatform?>.empty(),
+            returnValueForMissingStub: _i8.Stream<_i4.UserPlatform?>.empty(),
+          )
+          as _i8.Stream<_i4.UserPlatform?>);
 
   @override
-  _i8.Stream<_i4.UserPlatform?> idTokenChanges() => (super.noSuchMethod(
-        Invocation.method(
-          #idTokenChanges,
-          [],
-        ),
-        returnValue: _i8.Stream<_i4.UserPlatform?>.empty(),
-        returnValueForMissingStub: _i8.Stream<_i4.UserPlatform?>.empty(),
-      ) as _i8.Stream<_i4.UserPlatform?>);
+  _i8.Stream<_i4.UserPlatform?> idTokenChanges() =>
+      (super.noSuchMethod(
+            Invocation.method(#idTokenChanges, []),
+            returnValue: _i8.Stream<_i4.UserPlatform?>.empty(),
+            returnValueForMissingStub: _i8.Stream<_i4.UserPlatform?>.empty(),
+          )
+          as _i8.Stream<_i4.UserPlatform?>);
 
   @override
-  _i8.Stream<_i4.UserPlatform?> userChanges() => (super.noSuchMethod(
-        Invocation.method(
-          #userChanges,
-          [],
-        ),
-        returnValue: _i8.Stream<_i4.UserPlatform?>.empty(),
-        returnValueForMissingStub: _i8.Stream<_i4.UserPlatform?>.empty(),
-      ) as _i8.Stream<_i4.UserPlatform?>);
+  _i8.Stream<_i4.UserPlatform?> userChanges() =>
+      (super.noSuchMethod(
+            Invocation.method(#userChanges, []),
+            returnValue: _i8.Stream<_i4.UserPlatform?>.empty(),
+            returnValueForMissingStub: _i8.Stream<_i4.UserPlatform?>.empty(),
+          )
+          as _i8.Stream<_i4.UserPlatform?>);
 
   @override
   _i8.Future<void> sendPasswordResetEmail(
@@ -533,16 +393,14 @@ class FirebaseAuthPlatform_ extends _i1.Mock
     _i4.ActionCodeSettings? actionCodeSettings,
   ]) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #sendPasswordResetEmail,
-          [
-            email,
-            actionCodeSettings,
-          ],
-        ),
-        returnValue: _i8.Future<void>.value(),
-        returnValueForMissingStub: _i8.Future<void>.value(),
-      ) as _i8.Future<void>);
+            Invocation.method(#sendPasswordResetEmail, [
+              email,
+              actionCodeSettings,
+            ]),
+            returnValue: _i8.Future<void>.value(),
+            returnValueForMissingStub: _i8.Future<void>.value(),
+          )
+          as _i8.Future<void>);
 
   @override
   _i8.Future<void> sendSignInLinkToEmail(
@@ -550,26 +408,23 @@ class FirebaseAuthPlatform_ extends _i1.Mock
     _i4.ActionCodeSettings? actionCodeSettings,
   ) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #sendSignInLinkToEmail,
-          [
-            email,
-            actionCodeSettings,
-          ],
-        ),
-        returnValue: _i8.Future<void>.value(),
-        returnValueForMissingStub: _i8.Future<void>.value(),
-      ) as _i8.Future<void>);
+            Invocation.method(#sendSignInLinkToEmail, [
+              email,
+              actionCodeSettings,
+            ]),
+            returnValue: _i8.Future<void>.value(),
+            returnValueForMissingStub: _i8.Future<void>.value(),
+          )
+          as _i8.Future<void>);
 
   @override
-  _i8.Future<void> setLanguageCode(String? languageCode) => (super.noSuchMethod(
-        Invocation.method(
-          #setLanguageCode,
-          [languageCode],
-        ),
-        returnValue: _i8.Future<void>.value(),
-        returnValueForMissingStub: _i8.Future<void>.value(),
-      ) as _i8.Future<void>);
+  _i8.Future<void> setLanguageCode(String? languageCode) =>
+      (super.noSuchMethod(
+            Invocation.method(#setLanguageCode, [languageCode]),
+            returnValue: _i8.Future<void>.value(),
+            returnValueForMissingStub: _i8.Future<void>.value(),
+          )
+          as _i8.Future<void>);
 
   @override
   _i8.Future<void> setSettings({
@@ -580,108 +435,89 @@ class FirebaseAuthPlatform_ extends _i1.Mock
     bool? forceRecaptchaFlow,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #setSettings,
-          [],
-          {
-            #appVerificationDisabledForTesting:
-                appVerificationDisabledForTesting,
-            #userAccessGroup: userAccessGroup,
-            #phoneNumber: phoneNumber,
-            #smsCode: smsCode,
-            #forceRecaptchaFlow: forceRecaptchaFlow,
-          },
-        ),
-        returnValue: _i8.Future<void>.value(),
-        returnValueForMissingStub: _i8.Future<void>.value(),
-      ) as _i8.Future<void>);
+            Invocation.method(#setSettings, [], {
+              #appVerificationDisabledForTesting:
+                  appVerificationDisabledForTesting,
+              #userAccessGroup: userAccessGroup,
+              #phoneNumber: phoneNumber,
+              #smsCode: smsCode,
+              #forceRecaptchaFlow: forceRecaptchaFlow,
+            }),
+            returnValue: _i8.Future<void>.value(),
+            returnValueForMissingStub: _i8.Future<void>.value(),
+          )
+          as _i8.Future<void>);
 
   @override
   _i8.Future<void> setPersistence(_i4.Persistence? persistence) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #setPersistence,
-          [persistence],
-        ),
-        returnValue: _i8.Future<void>.value(),
-        returnValueForMissingStub: _i8.Future<void>.value(),
-      ) as _i8.Future<void>);
+            Invocation.method(#setPersistence, [persistence]),
+            returnValue: _i8.Future<void>.value(),
+            returnValueForMissingStub: _i8.Future<void>.value(),
+          )
+          as _i8.Future<void>);
 
   @override
   _i8.Future<_i4.UserCredentialPlatform> signInAnonymously() =>
       (super.noSuchMethod(
-        Invocation.method(
-          #signInAnonymously,
-          [],
-        ),
-        returnValue: _i8.Future<_i4.UserCredentialPlatform>.value(
-            _FakeUserCredentialPlatform_4(
-          this,
-          Invocation.method(
-            #signInAnonymously,
-            [],
-          ),
-        )),
-        returnValueForMissingStub: _i8.Future<_i4.UserCredentialPlatform>.value(
-            _FakeUserCredentialPlatform_4(
-          this,
-          Invocation.method(
-            #signInAnonymously,
-            [],
-          ),
-        )),
-      ) as _i8.Future<_i4.UserCredentialPlatform>);
+            Invocation.method(#signInAnonymously, []),
+            returnValue: _i8.Future<_i4.UserCredentialPlatform>.value(
+              _FakeUserCredentialPlatform_4(
+                this,
+                Invocation.method(#signInAnonymously, []),
+              ),
+            ),
+            returnValueForMissingStub:
+                _i8.Future<_i4.UserCredentialPlatform>.value(
+                  _FakeUserCredentialPlatform_4(
+                    this,
+                    Invocation.method(#signInAnonymously, []),
+                  ),
+                ),
+          )
+          as _i8.Future<_i4.UserCredentialPlatform>);
 
   @override
   _i8.Future<_i4.UserCredentialPlatform> signInWithCredential(
-          _i4.AuthCredential? credential) =>
+    _i4.AuthCredential? credential,
+  ) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #signInWithCredential,
-          [credential],
-        ),
-        returnValue: _i8.Future<_i4.UserCredentialPlatform>.value(
-            _FakeUserCredentialPlatform_4(
-          this,
-          Invocation.method(
-            #signInWithCredential,
-            [credential],
-          ),
-        )),
-        returnValueForMissingStub: _i8.Future<_i4.UserCredentialPlatform>.value(
-            _FakeUserCredentialPlatform_4(
-          this,
-          Invocation.method(
-            #signInWithCredential,
-            [credential],
-          ),
-        )),
-      ) as _i8.Future<_i4.UserCredentialPlatform>);
+            Invocation.method(#signInWithCredential, [credential]),
+            returnValue: _i8.Future<_i4.UserCredentialPlatform>.value(
+              _FakeUserCredentialPlatform_4(
+                this,
+                Invocation.method(#signInWithCredential, [credential]),
+              ),
+            ),
+            returnValueForMissingStub:
+                _i8.Future<_i4.UserCredentialPlatform>.value(
+                  _FakeUserCredentialPlatform_4(
+                    this,
+                    Invocation.method(#signInWithCredential, [credential]),
+                  ),
+                ),
+          )
+          as _i8.Future<_i4.UserCredentialPlatform>);
 
   @override
   _i8.Future<_i4.UserCredentialPlatform> signInWithCustomToken(String? token) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #signInWithCustomToken,
-          [token],
-        ),
-        returnValue: _i8.Future<_i4.UserCredentialPlatform>.value(
-            _FakeUserCredentialPlatform_4(
-          this,
-          Invocation.method(
-            #signInWithCustomToken,
-            [token],
-          ),
-        )),
-        returnValueForMissingStub: _i8.Future<_i4.UserCredentialPlatform>.value(
-            _FakeUserCredentialPlatform_4(
-          this,
-          Invocation.method(
-            #signInWithCustomToken,
-            [token],
-          ),
-        )),
-      ) as _i8.Future<_i4.UserCredentialPlatform>);
+            Invocation.method(#signInWithCustomToken, [token]),
+            returnValue: _i8.Future<_i4.UserCredentialPlatform>.value(
+              _FakeUserCredentialPlatform_4(
+                this,
+                Invocation.method(#signInWithCustomToken, [token]),
+              ),
+            ),
+            returnValueForMissingStub:
+                _i8.Future<_i4.UserCredentialPlatform>.value(
+                  _FakeUserCredentialPlatform_4(
+                    this,
+                    Invocation.method(#signInWithCustomToken, [token]),
+                  ),
+                ),
+          )
+          as _i8.Future<_i4.UserCredentialPlatform>);
 
   @override
   _i8.Future<_i4.UserCredentialPlatform> signInWithEmailAndPassword(
@@ -689,36 +525,28 @@ class FirebaseAuthPlatform_ extends _i1.Mock
     String? password,
   ) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #signInWithEmailAndPassword,
-          [
-            email,
-            password,
-          ],
-        ),
-        returnValue: _i8.Future<_i4.UserCredentialPlatform>.value(
-            _FakeUserCredentialPlatform_4(
-          this,
-          Invocation.method(
-            #signInWithEmailAndPassword,
-            [
-              email,
-              password,
-            ],
-          ),
-        )),
-        returnValueForMissingStub: _i8.Future<_i4.UserCredentialPlatform>.value(
-            _FakeUserCredentialPlatform_4(
-          this,
-          Invocation.method(
-            #signInWithEmailAndPassword,
-            [
-              email,
-              password,
-            ],
-          ),
-        )),
-      ) as _i8.Future<_i4.UserCredentialPlatform>);
+            Invocation.method(#signInWithEmailAndPassword, [email, password]),
+            returnValue: _i8.Future<_i4.UserCredentialPlatform>.value(
+              _FakeUserCredentialPlatform_4(
+                this,
+                Invocation.method(#signInWithEmailAndPassword, [
+                  email,
+                  password,
+                ]),
+              ),
+            ),
+            returnValueForMissingStub:
+                _i8.Future<_i4.UserCredentialPlatform>.value(
+                  _FakeUserCredentialPlatform_4(
+                    this,
+                    Invocation.method(#signInWithEmailAndPassword, [
+                      email,
+                      password,
+                    ]),
+                  ),
+                ),
+          )
+          as _i8.Future<_i4.UserCredentialPlatform>);
 
   @override
   _i8.Future<_i4.UserCredentialPlatform> signInWithEmailLink(
@@ -726,62 +554,44 @@ class FirebaseAuthPlatform_ extends _i1.Mock
     String? emailLink,
   ) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #signInWithEmailLink,
-          [
-            email,
-            emailLink,
-          ],
-        ),
-        returnValue: _i8.Future<_i4.UserCredentialPlatform>.value(
-            _FakeUserCredentialPlatform_4(
-          this,
-          Invocation.method(
-            #signInWithEmailLink,
-            [
-              email,
-              emailLink,
-            ],
-          ),
-        )),
-        returnValueForMissingStub: _i8.Future<_i4.UserCredentialPlatform>.value(
-            _FakeUserCredentialPlatform_4(
-          this,
-          Invocation.method(
-            #signInWithEmailLink,
-            [
-              email,
-              emailLink,
-            ],
-          ),
-        )),
-      ) as _i8.Future<_i4.UserCredentialPlatform>);
+            Invocation.method(#signInWithEmailLink, [email, emailLink]),
+            returnValue: _i8.Future<_i4.UserCredentialPlatform>.value(
+              _FakeUserCredentialPlatform_4(
+                this,
+                Invocation.method(#signInWithEmailLink, [email, emailLink]),
+              ),
+            ),
+            returnValueForMissingStub:
+                _i8.Future<_i4.UserCredentialPlatform>.value(
+                  _FakeUserCredentialPlatform_4(
+                    this,
+                    Invocation.method(#signInWithEmailLink, [email, emailLink]),
+                  ),
+                ),
+          )
+          as _i8.Future<_i4.UserCredentialPlatform>);
 
   @override
   _i8.Future<_i4.UserCredentialPlatform> signInWithProvider(
-          _i4.AuthProvider? provider) =>
+    _i4.AuthProvider? provider,
+  ) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #signInWithProvider,
-          [provider],
-        ),
-        returnValue: _i8.Future<_i4.UserCredentialPlatform>.value(
-            _FakeUserCredentialPlatform_4(
-          this,
-          Invocation.method(
-            #signInWithProvider,
-            [provider],
-          ),
-        )),
-        returnValueForMissingStub: _i8.Future<_i4.UserCredentialPlatform>.value(
-            _FakeUserCredentialPlatform_4(
-          this,
-          Invocation.method(
-            #signInWithProvider,
-            [provider],
-          ),
-        )),
-      ) as _i8.Future<_i4.UserCredentialPlatform>);
+            Invocation.method(#signInWithProvider, [provider]),
+            returnValue: _i8.Future<_i4.UserCredentialPlatform>.value(
+              _FakeUserCredentialPlatform_4(
+                this,
+                Invocation.method(#signInWithProvider, [provider]),
+              ),
+            ),
+            returnValueForMissingStub:
+                _i8.Future<_i4.UserCredentialPlatform>.value(
+                  _FakeUserCredentialPlatform_4(
+                    this,
+                    Invocation.method(#signInWithProvider, [provider]),
+                  ),
+                ),
+          )
+          as _i8.Future<_i4.UserCredentialPlatform>);
 
   @override
   _i8.Future<_i4.ConfirmationResultPlatform> signInWithPhoneNumber(
@@ -789,108 +599,90 @@ class FirebaseAuthPlatform_ extends _i1.Mock
     _i4.RecaptchaVerifierFactoryPlatform? applicationVerifier,
   ) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #signInWithPhoneNumber,
-          [
-            phoneNumber,
-            applicationVerifier,
-          ],
-        ),
-        returnValue: _i8.Future<_i4.ConfirmationResultPlatform>.value(
-            _FakeConfirmationResultPlatform_5(
-          this,
-          Invocation.method(
-            #signInWithPhoneNumber,
-            [
+            Invocation.method(#signInWithPhoneNumber, [
               phoneNumber,
               applicationVerifier,
-            ],
-          ),
-        )),
-        returnValueForMissingStub:
-            _i8.Future<_i4.ConfirmationResultPlatform>.value(
-                _FakeConfirmationResultPlatform_5(
-          this,
-          Invocation.method(
-            #signInWithPhoneNumber,
-            [
-              phoneNumber,
-              applicationVerifier,
-            ],
-          ),
-        )),
-      ) as _i8.Future<_i4.ConfirmationResultPlatform>);
+            ]),
+            returnValue: _i8.Future<_i4.ConfirmationResultPlatform>.value(
+              _FakeConfirmationResultPlatform_5(
+                this,
+                Invocation.method(#signInWithPhoneNumber, [
+                  phoneNumber,
+                  applicationVerifier,
+                ]),
+              ),
+            ),
+            returnValueForMissingStub:
+                _i8.Future<_i4.ConfirmationResultPlatform>.value(
+                  _FakeConfirmationResultPlatform_5(
+                    this,
+                    Invocation.method(#signInWithPhoneNumber, [
+                      phoneNumber,
+                      applicationVerifier,
+                    ]),
+                  ),
+                ),
+          )
+          as _i8.Future<_i4.ConfirmationResultPlatform>);
 
   @override
   _i8.Future<_i4.UserCredentialPlatform> signInWithPopup(
-          _i4.AuthProvider? provider) =>
+    _i4.AuthProvider? provider,
+  ) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #signInWithPopup,
-          [provider],
-        ),
-        returnValue: _i8.Future<_i4.UserCredentialPlatform>.value(
-            _FakeUserCredentialPlatform_4(
-          this,
-          Invocation.method(
-            #signInWithPopup,
-            [provider],
-          ),
-        )),
-        returnValueForMissingStub: _i8.Future<_i4.UserCredentialPlatform>.value(
-            _FakeUserCredentialPlatform_4(
-          this,
-          Invocation.method(
-            #signInWithPopup,
-            [provider],
-          ),
-        )),
-      ) as _i8.Future<_i4.UserCredentialPlatform>);
+            Invocation.method(#signInWithPopup, [provider]),
+            returnValue: _i8.Future<_i4.UserCredentialPlatform>.value(
+              _FakeUserCredentialPlatform_4(
+                this,
+                Invocation.method(#signInWithPopup, [provider]),
+              ),
+            ),
+            returnValueForMissingStub:
+                _i8.Future<_i4.UserCredentialPlatform>.value(
+                  _FakeUserCredentialPlatform_4(
+                    this,
+                    Invocation.method(#signInWithPopup, [provider]),
+                  ),
+                ),
+          )
+          as _i8.Future<_i4.UserCredentialPlatform>);
 
   @override
   _i8.Future<void> signInWithRedirect(_i4.AuthProvider? provider) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #signInWithRedirect,
-          [provider],
-        ),
-        returnValue: _i8.Future<void>.value(),
-        returnValueForMissingStub: _i8.Future<void>.value(),
-      ) as _i8.Future<void>);
+            Invocation.method(#signInWithRedirect, [provider]),
+            returnValue: _i8.Future<void>.value(),
+            returnValueForMissingStub: _i8.Future<void>.value(),
+          )
+          as _i8.Future<void>);
 
   @override
-  _i8.Future<void> signOut() => (super.noSuchMethod(
-        Invocation.method(
-          #signOut,
-          [],
-        ),
-        returnValue: _i8.Future<void>.value(),
-        returnValueForMissingStub: _i8.Future<void>.value(),
-      ) as _i8.Future<void>);
+  _i8.Future<void> signOut() =>
+      (super.noSuchMethod(
+            Invocation.method(#signOut, []),
+            returnValue: _i8.Future<void>.value(),
+            returnValueForMissingStub: _i8.Future<void>.value(),
+          )
+          as _i8.Future<void>);
 
   @override
   _i8.Future<String> verifyPasswordResetCode(String? code) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #verifyPasswordResetCode,
-          [code],
-        ),
-        returnValue: _i8.Future<String>.value(_i9.dummyValue<String>(
-          this,
-          Invocation.method(
-            #verifyPasswordResetCode,
-            [code],
-          ),
-        )),
-        returnValueForMissingStub:
-            _i8.Future<String>.value(_i9.dummyValue<String>(
-          this,
-          Invocation.method(
-            #verifyPasswordResetCode,
-            [code],
-          ),
-        )),
-      ) as _i8.Future<String>);
+            Invocation.method(#verifyPasswordResetCode, [code]),
+            returnValue: _i8.Future<String>.value(
+              _i9.dummyValue<String>(
+                this,
+                Invocation.method(#verifyPasswordResetCode, [code]),
+              ),
+            ),
+            returnValueForMissingStub: _i8.Future<String>.value(
+              _i9.dummyValue<String>(
+                this,
+                Invocation.method(#verifyPasswordResetCode, [code]),
+              ),
+            ),
+          )
+          as _i8.Future<String>);
 
   @override
   _i8.Future<void> verifyPhoneNumber({
@@ -906,47 +698,44 @@ class FirebaseAuthPlatform_ extends _i1.Mock
     String? autoRetrievedSmsCodeForTesting,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #verifyPhoneNumber,
-          [],
-          {
-            #phoneNumber: phoneNumber,
-            #multiFactorInfo: multiFactorInfo,
-            #verificationCompleted: verificationCompleted,
-            #verificationFailed: verificationFailed,
-            #codeSent: codeSent,
-            #codeAutoRetrievalTimeout: codeAutoRetrievalTimeout,
-            #timeout: timeout,
-            #forceResendingToken: forceResendingToken,
-            #multiFactorSession: multiFactorSession,
-            #autoRetrievedSmsCodeForTesting: autoRetrievedSmsCodeForTesting,
-          },
-        ),
-        returnValue: _i8.Future<void>.value(),
-        returnValueForMissingStub: _i8.Future<void>.value(),
-      ) as _i8.Future<void>);
+            Invocation.method(#verifyPhoneNumber, [], {
+              #phoneNumber: phoneNumber,
+              #multiFactorInfo: multiFactorInfo,
+              #verificationCompleted: verificationCompleted,
+              #verificationFailed: verificationFailed,
+              #codeSent: codeSent,
+              #codeAutoRetrievalTimeout: codeAutoRetrievalTimeout,
+              #timeout: timeout,
+              #forceResendingToken: forceResendingToken,
+              #multiFactorSession: multiFactorSession,
+              #autoRetrievedSmsCodeForTesting: autoRetrievedSmsCodeForTesting,
+            }),
+            returnValue: _i8.Future<void>.value(),
+            returnValueForMissingStub: _i8.Future<void>.value(),
+          )
+          as _i8.Future<void>);
 
   @override
   _i8.Future<void> revokeTokenWithAuthorizationCode(
-          String? authorizationCode) =>
+    String? authorizationCode,
+  ) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #revokeTokenWithAuthorizationCode,
-          [authorizationCode],
-        ),
-        returnValue: _i8.Future<void>.value(),
-        returnValueForMissingStub: _i8.Future<void>.value(),
-      ) as _i8.Future<void>);
+            Invocation.method(#revokeTokenWithAuthorizationCode, [
+              authorizationCode,
+            ]),
+            returnValue: _i8.Future<void>.value(),
+            returnValueForMissingStub: _i8.Future<void>.value(),
+          )
+          as _i8.Future<void>);
 
   @override
-  _i8.Future<void> initializeRecaptchaConfig() => (super.noSuchMethod(
-        Invocation.method(
-          #initializeRecaptchaConfig,
-          [],
-        ),
-        returnValue: _i8.Future<void>.value(),
-        returnValueForMissingStub: _i8.Future<void>.value(),
-      ) as _i8.Future<void>);
+  _i8.Future<void> initializeRecaptchaConfig() =>
+      (super.noSuchMethod(
+            Invocation.method(#initializeRecaptchaConfig, []),
+            returnValue: _i8.Future<void>.value(),
+            returnValueForMissingStub: _i8.Future<void>.value(),
+          )
+          as _i8.Future<void>);
 }
 
 /// A class which mocks [FirebaseAppPlatform].
@@ -955,69 +744,69 @@ class FirebaseAuthPlatform_ extends _i1.Mock
 class MockFirebaseAppPlatform_ extends _i1.Mock
     implements _i2.FirebaseAppPlatform {
   @override
-  String get name => (super.noSuchMethod(
-        Invocation.getter(#name),
-        returnValue: _i9.dummyValue<String>(
-          this,
-          Invocation.getter(#name),
-        ),
-        returnValueForMissingStub: _i9.dummyValue<String>(
-          this,
-          Invocation.getter(#name),
-        ),
-      ) as String);
+  String get name =>
+      (super.noSuchMethod(
+            Invocation.getter(#name),
+            returnValue: _i9.dummyValue<String>(this, Invocation.getter(#name)),
+            returnValueForMissingStub: _i9.dummyValue<String>(
+              this,
+              Invocation.getter(#name),
+            ),
+          )
+          as String);
 
   @override
-  _i3.FirebaseOptions get options => (super.noSuchMethod(
-        Invocation.getter(#options),
-        returnValue: _FakeFirebaseOptions_6(
-          this,
-          Invocation.getter(#options),
-        ),
-        returnValueForMissingStub: _FakeFirebaseOptions_6(
-          this,
-          Invocation.getter(#options),
-        ),
-      ) as _i3.FirebaseOptions);
+  _i3.FirebaseOptions get options =>
+      (super.noSuchMethod(
+            Invocation.getter(#options),
+            returnValue: _FakeFirebaseOptions_6(
+              this,
+              Invocation.getter(#options),
+            ),
+            returnValueForMissingStub: _FakeFirebaseOptions_6(
+              this,
+              Invocation.getter(#options),
+            ),
+          )
+          as _i3.FirebaseOptions);
 
   @override
-  bool get isAutomaticDataCollectionEnabled => (super.noSuchMethod(
-        Invocation.getter(#isAutomaticDataCollectionEnabled),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
+  bool get isAutomaticDataCollectionEnabled =>
+      (super.noSuchMethod(
+            Invocation.getter(#isAutomaticDataCollectionEnabled),
+            returnValue: false,
+            returnValueForMissingStub: false,
+          )
+          as bool);
 
   @override
-  _i8.Future<void> delete() => (super.noSuchMethod(
-        Invocation.method(
-          #delete,
-          [],
-        ),
-        returnValue: _i8.Future<void>.value(),
-        returnValueForMissingStub: _i8.Future<void>.value(),
-      ) as _i8.Future<void>);
+  _i8.Future<void> delete() =>
+      (super.noSuchMethod(
+            Invocation.method(#delete, []),
+            returnValue: _i8.Future<void>.value(),
+            returnValueForMissingStub: _i8.Future<void>.value(),
+          )
+          as _i8.Future<void>);
 
   @override
   _i8.Future<void> setAutomaticDataCollectionEnabled(bool? enabled) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #setAutomaticDataCollectionEnabled,
-          [enabled],
-        ),
-        returnValue: _i8.Future<void>.value(),
-        returnValueForMissingStub: _i8.Future<void>.value(),
-      ) as _i8.Future<void>);
+            Invocation.method(#setAutomaticDataCollectionEnabled, [enabled]),
+            returnValue: _i8.Future<void>.value(),
+            returnValueForMissingStub: _i8.Future<void>.value(),
+          )
+          as _i8.Future<void>);
 
   @override
   _i8.Future<void> setAutomaticResourceManagementEnabled(bool? enabled) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #setAutomaticResourceManagementEnabled,
-          [enabled],
-        ),
-        returnValue: _i8.Future<void>.value(),
-        returnValueForMissingStub: _i8.Future<void>.value(),
-      ) as _i8.Future<void>);
+            Invocation.method(#setAutomaticResourceManagementEnabled, [
+              enabled,
+            ]),
+            returnValue: _i8.Future<void>.value(),
+            returnValueForMissingStub: _i8.Future<void>.value(),
+          )
+          as _i8.Future<void>);
 }
 
 /// A class which mocks [FirebaseAppCheckPlatform].
@@ -1026,24 +815,25 @@ class MockFirebaseAppPlatform_ extends _i1.Mock
 class FirebaseAppCheckPlatform_ extends _i1.Mock
     implements _i5.FirebaseAppCheckPlatform {
   @override
-  _i3.FirebaseApp get app => (super.noSuchMethod(
-        Invocation.getter(#app),
-        returnValue: _FakeFirebaseApp_1(
-          this,
-          Invocation.getter(#app),
-        ),
-        returnValueForMissingStub: _FakeFirebaseApp_1(
-          this,
-          Invocation.getter(#app),
-        ),
-      ) as _i3.FirebaseApp);
+  _i3.FirebaseApp get app =>
+      (super.noSuchMethod(
+            Invocation.getter(#app),
+            returnValue: _FakeFirebaseApp_1(this, Invocation.getter(#app)),
+            returnValueForMissingStub: _FakeFirebaseApp_1(
+              this,
+              Invocation.getter(#app),
+            ),
+          )
+          as _i3.FirebaseApp);
 
   @override
-  _i8.Stream<String?> get onTokenChange => (super.noSuchMethod(
-        Invocation.getter(#onTokenChange),
-        returnValue: _i8.Stream<String?>.empty(),
-        returnValueForMissingStub: _i8.Stream<String?>.empty(),
-      ) as _i8.Stream<String?>);
+  _i8.Stream<String?> get onTokenChange =>
+      (super.noSuchMethod(
+            Invocation.getter(#onTokenChange),
+            returnValue: _i8.Stream<String?>.empty(),
+            returnValueForMissingStub: _i8.Stream<String?>.empty(),
+          )
+          as _i8.Stream<String?>);
 
   @override
   _i8.Future<void> activate({
@@ -1054,113 +844,88 @@ class FirebaseAppCheckPlatform_ extends _i1.Mock
     _i5.AppleAppCheckProvider? providerApple,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #activate,
-          [],
-          {
-            #webProvider: webProvider,
-            #androidProvider: androidProvider,
-            #appleProvider: appleProvider,
-            #providerAndroid: providerAndroid,
-            #providerApple: providerApple,
-          },
-        ),
-        returnValue: _i8.Future<void>.value(),
-        returnValueForMissingStub: _i8.Future<void>.value(),
-      ) as _i8.Future<void>);
+            Invocation.method(#activate, [], {
+              #webProvider: webProvider,
+              #androidProvider: androidProvider,
+              #appleProvider: appleProvider,
+              #providerAndroid: providerAndroid,
+              #providerApple: providerApple,
+            }),
+            returnValue: _i8.Future<void>.value(),
+            returnValueForMissingStub: _i8.Future<void>.value(),
+          )
+          as _i8.Future<void>);
 
   @override
-  _i8.Future<String?> getToken(bool? forceRefresh) => (super.noSuchMethod(
-        Invocation.method(
-          #getToken,
-          [forceRefresh],
-        ),
-        returnValue: _i8.Future<String?>.value(),
-        returnValueForMissingStub: _i8.Future<String?>.value(),
-      ) as _i8.Future<String?>);
+  _i8.Future<String?> getToken(bool? forceRefresh) =>
+      (super.noSuchMethod(
+            Invocation.method(#getToken, [forceRefresh]),
+            returnValue: _i8.Future<String?>.value(),
+            returnValueForMissingStub: _i8.Future<String?>.value(),
+          )
+          as _i8.Future<String?>);
 
   @override
   _i8.Future<void> setTokenAutoRefreshEnabled(
-          bool? isTokenAutoRefreshEnabled) =>
+    bool? isTokenAutoRefreshEnabled,
+  ) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #setTokenAutoRefreshEnabled,
-          [isTokenAutoRefreshEnabled],
-        ),
-        returnValue: _i8.Future<void>.value(),
-        returnValueForMissingStub: _i8.Future<void>.value(),
-      ) as _i8.Future<void>);
+            Invocation.method(#setTokenAutoRefreshEnabled, [
+              isTokenAutoRefreshEnabled,
+            ]),
+            returnValue: _i8.Future<void>.value(),
+            returnValueForMissingStub: _i8.Future<void>.value(),
+          )
+          as _i8.Future<void>);
 
   @override
-  _i8.Future<String> getLimitedUseToken() => (super.noSuchMethod(
-        Invocation.method(
-          #getLimitedUseToken,
-          [],
-        ),
-        returnValue: _i8.Future<String>.value(_i9.dummyValue<String>(
-          this,
-          Invocation.method(
-            #getLimitedUseToken,
-            [],
-          ),
-        )),
-        returnValueForMissingStub:
-            _i8.Future<String>.value(_i9.dummyValue<String>(
-          this,
-          Invocation.method(
-            #getLimitedUseToken,
-            [],
-          ),
-        )),
-      ) as _i8.Future<String>);
+  _i8.Future<String> getLimitedUseToken() =>
+      (super.noSuchMethod(
+            Invocation.method(#getLimitedUseToken, []),
+            returnValue: _i8.Future<String>.value(
+              _i9.dummyValue<String>(
+                this,
+                Invocation.method(#getLimitedUseToken, []),
+              ),
+            ),
+            returnValueForMissingStub: _i8.Future<String>.value(
+              _i9.dummyValue<String>(
+                this,
+                Invocation.method(#getLimitedUseToken, []),
+              ),
+            ),
+          )
+          as _i8.Future<String>);
 
   @override
   _i5.FirebaseAppCheckPlatform delegateFor({required _i3.FirebaseApp? app}) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #delegateFor,
-          [],
-          {#app: app},
-        ),
-        returnValue: _FakeFirebaseAppCheckPlatform_7(
-          this,
-          Invocation.method(
-            #delegateFor,
-            [],
-            {#app: app},
-          ),
-        ),
-        returnValueForMissingStub: _FakeFirebaseAppCheckPlatform_7(
-          this,
-          Invocation.method(
-            #delegateFor,
-            [],
-            {#app: app},
-          ),
-        ),
-      ) as _i5.FirebaseAppCheckPlatform);
+            Invocation.method(#delegateFor, [], {#app: app}),
+            returnValue: _FakeFirebaseAppCheckPlatform_7(
+              this,
+              Invocation.method(#delegateFor, [], {#app: app}),
+            ),
+            returnValueForMissingStub: _FakeFirebaseAppCheckPlatform_7(
+              this,
+              Invocation.method(#delegateFor, [], {#app: app}),
+            ),
+          )
+          as _i5.FirebaseAppCheckPlatform);
 
   @override
-  _i5.FirebaseAppCheckPlatform setInitialValues() => (super.noSuchMethod(
-        Invocation.method(
-          #setInitialValues,
-          [],
-        ),
-        returnValue: _FakeFirebaseAppCheckPlatform_7(
-          this,
-          Invocation.method(
-            #setInitialValues,
-            [],
-          ),
-        ),
-        returnValueForMissingStub: _FakeFirebaseAppCheckPlatform_7(
-          this,
-          Invocation.method(
-            #setInitialValues,
-            [],
-          ),
-        ),
-      ) as _i5.FirebaseAppCheckPlatform);
+  _i5.FirebaseAppCheckPlatform setInitialValues() =>
+      (super.noSuchMethod(
+            Invocation.method(#setInitialValues, []),
+            returnValue: _FakeFirebaseAppCheckPlatform_7(
+              this,
+              Invocation.method(#setInitialValues, []),
+            ),
+            returnValueForMissingStub: _FakeFirebaseAppCheckPlatform_7(
+              this,
+              Invocation.method(#setInitialValues, []),
+            ),
+          )
+          as _i5.FirebaseAppCheckPlatform);
 }
 
 /// A class which mocks [FirebaseMessagingPlatform].
@@ -1169,170 +934,143 @@ class FirebaseAppCheckPlatform_ extends _i1.Mock
 class FirebaseMessagingPlatform_ extends _i1.Mock
     implements _i6.FirebaseMessagingPlatform {
   @override
-  _i3.FirebaseApp get app => (super.noSuchMethod(
-        Invocation.getter(#app),
-        returnValue: _FakeFirebaseApp_1(
-          this,
-          Invocation.getter(#app),
-        ),
-        returnValueForMissingStub: _FakeFirebaseApp_1(
-          this,
-          Invocation.getter(#app),
-        ),
-      ) as _i3.FirebaseApp);
+  _i3.FirebaseApp get app =>
+      (super.noSuchMethod(
+            Invocation.getter(#app),
+            returnValue: _FakeFirebaseApp_1(this, Invocation.getter(#app)),
+            returnValueForMissingStub: _FakeFirebaseApp_1(
+              this,
+              Invocation.getter(#app),
+            ),
+          )
+          as _i3.FirebaseApp);
 
   @override
-  bool get isAutoInitEnabled => (super.noSuchMethod(
-        Invocation.getter(#isAutoInitEnabled),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
+  bool get isAutoInitEnabled =>
+      (super.noSuchMethod(
+            Invocation.getter(#isAutoInitEnabled),
+            returnValue: false,
+            returnValueForMissingStub: false,
+          )
+          as bool);
 
   @override
-  _i8.Stream<String> get onTokenRefresh => (super.noSuchMethod(
-        Invocation.getter(#onTokenRefresh),
-        returnValue: _i8.Stream<String>.empty(),
-        returnValueForMissingStub: _i8.Stream<String>.empty(),
-      ) as _i8.Stream<String>);
+  _i8.Stream<String> get onTokenRefresh =>
+      (super.noSuchMethod(
+            Invocation.getter(#onTokenRefresh),
+            returnValue: _i8.Stream<String>.empty(),
+            returnValueForMissingStub: _i8.Stream<String>.empty(),
+          )
+          as _i8.Stream<String>);
 
   @override
   _i6.FirebaseMessagingPlatform delegateFor({required _i3.FirebaseApp? app}) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #delegateFor,
-          [],
-          {#app: app},
-        ),
-        returnValue: _FakeFirebaseMessagingPlatform_8(
-          this,
-          Invocation.method(
-            #delegateFor,
-            [],
-            {#app: app},
-          ),
-        ),
-        returnValueForMissingStub: _FakeFirebaseMessagingPlatform_8(
-          this,
-          Invocation.method(
-            #delegateFor,
-            [],
-            {#app: app},
-          ),
-        ),
-      ) as _i6.FirebaseMessagingPlatform);
+            Invocation.method(#delegateFor, [], {#app: app}),
+            returnValue: _FakeFirebaseMessagingPlatform_8(
+              this,
+              Invocation.method(#delegateFor, [], {#app: app}),
+            ),
+            returnValueForMissingStub: _FakeFirebaseMessagingPlatform_8(
+              this,
+              Invocation.method(#delegateFor, [], {#app: app}),
+            ),
+          )
+          as _i6.FirebaseMessagingPlatform);
 
   @override
   _i6.FirebaseMessagingPlatform setInitialValues({bool? isAutoInitEnabled}) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #setInitialValues,
-          [],
-          {#isAutoInitEnabled: isAutoInitEnabled},
-        ),
-        returnValue: _FakeFirebaseMessagingPlatform_8(
-          this,
-          Invocation.method(
-            #setInitialValues,
-            [],
-            {#isAutoInitEnabled: isAutoInitEnabled},
-          ),
-        ),
-        returnValueForMissingStub: _FakeFirebaseMessagingPlatform_8(
-          this,
-          Invocation.method(
-            #setInitialValues,
-            [],
-            {#isAutoInitEnabled: isAutoInitEnabled},
-          ),
-        ),
-      ) as _i6.FirebaseMessagingPlatform);
+            Invocation.method(#setInitialValues, [], {
+              #isAutoInitEnabled: isAutoInitEnabled,
+            }),
+            returnValue: _FakeFirebaseMessagingPlatform_8(
+              this,
+              Invocation.method(#setInitialValues, [], {
+                #isAutoInitEnabled: isAutoInitEnabled,
+              }),
+            ),
+            returnValueForMissingStub: _FakeFirebaseMessagingPlatform_8(
+              this,
+              Invocation.method(#setInitialValues, [], {
+                #isAutoInitEnabled: isAutoInitEnabled,
+              }),
+            ),
+          )
+          as _i6.FirebaseMessagingPlatform);
 
   @override
-  _i8.Future<_i6.RemoteMessage?> getInitialMessage() => (super.noSuchMethod(
-        Invocation.method(
-          #getInitialMessage,
-          [],
-        ),
-        returnValue: _i8.Future<_i6.RemoteMessage?>.value(),
-        returnValueForMissingStub: _i8.Future<_i6.RemoteMessage?>.value(),
-      ) as _i8.Future<_i6.RemoteMessage?>);
+  _i8.Future<_i6.RemoteMessage?> getInitialMessage() =>
+      (super.noSuchMethod(
+            Invocation.method(#getInitialMessage, []),
+            returnValue: _i8.Future<_i6.RemoteMessage?>.value(),
+            returnValueForMissingStub: _i8.Future<_i6.RemoteMessage?>.value(),
+          )
+          as _i8.Future<_i6.RemoteMessage?>);
 
   @override
   void registerBackgroundMessageHandler(
-          _i6.BackgroundMessageHandler? handler) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #registerBackgroundMessageHandler,
-          [handler],
-        ),
-        returnValueForMissingStub: null,
-      );
+    _i6.BackgroundMessageHandler? handler,
+  ) => super.noSuchMethod(
+    Invocation.method(#registerBackgroundMessageHandler, [handler]),
+    returnValueForMissingStub: null,
+  );
 
   @override
-  _i8.Future<void> deleteToken() => (super.noSuchMethod(
-        Invocation.method(
-          #deleteToken,
-          [],
-        ),
-        returnValue: _i8.Future<void>.value(),
-        returnValueForMissingStub: _i8.Future<void>.value(),
-      ) as _i8.Future<void>);
+  _i8.Future<void> deleteToken() =>
+      (super.noSuchMethod(
+            Invocation.method(#deleteToken, []),
+            returnValue: _i8.Future<void>.value(),
+            returnValueForMissingStub: _i8.Future<void>.value(),
+          )
+          as _i8.Future<void>);
 
   @override
-  _i8.Future<String?> getAPNSToken() => (super.noSuchMethod(
-        Invocation.method(
-          #getAPNSToken,
-          [],
-        ),
-        returnValue: _i8.Future<String?>.value(),
-        returnValueForMissingStub: _i8.Future<String?>.value(),
-      ) as _i8.Future<String?>);
+  _i8.Future<String?> getAPNSToken() =>
+      (super.noSuchMethod(
+            Invocation.method(#getAPNSToken, []),
+            returnValue: _i8.Future<String?>.value(),
+            returnValueForMissingStub: _i8.Future<String?>.value(),
+          )
+          as _i8.Future<String?>);
 
   @override
-  _i8.Future<String?> getToken({String? vapidKey}) => (super.noSuchMethod(
-        Invocation.method(
-          #getToken,
-          [],
-          {#vapidKey: vapidKey},
-        ),
-        returnValue: _i8.Future<String?>.value(),
-        returnValueForMissingStub: _i8.Future<String?>.value(),
-      ) as _i8.Future<String?>);
+  _i8.Future<String?> getToken({String? vapidKey}) =>
+      (super.noSuchMethod(
+            Invocation.method(#getToken, [], {#vapidKey: vapidKey}),
+            returnValue: _i8.Future<String?>.value(),
+            returnValueForMissingStub: _i8.Future<String?>.value(),
+          )
+          as _i8.Future<String?>);
 
   @override
   _i8.Future<_i6.NotificationSettings> getNotificationSettings() =>
       (super.noSuchMethod(
-        Invocation.method(
-          #getNotificationSettings,
-          [],
-        ),
-        returnValue: _i8.Future<_i6.NotificationSettings>.value(
-            _FakeNotificationSettings_9(
-          this,
-          Invocation.method(
-            #getNotificationSettings,
-            [],
-          ),
-        )),
-        returnValueForMissingStub: _i8.Future<_i6.NotificationSettings>.value(
-            _FakeNotificationSettings_9(
-          this,
-          Invocation.method(
-            #getNotificationSettings,
-            [],
-          ),
-        )),
-      ) as _i8.Future<_i6.NotificationSettings>);
+            Invocation.method(#getNotificationSettings, []),
+            returnValue: _i8.Future<_i6.NotificationSettings>.value(
+              _FakeNotificationSettings_9(
+                this,
+                Invocation.method(#getNotificationSettings, []),
+              ),
+            ),
+            returnValueForMissingStub:
+                _i8.Future<_i6.NotificationSettings>.value(
+                  _FakeNotificationSettings_9(
+                    this,
+                    Invocation.method(#getNotificationSettings, []),
+                  ),
+                ),
+          )
+          as _i8.Future<_i6.NotificationSettings>);
 
   @override
-  _i8.Future<bool> isSupported() => (super.noSuchMethod(
-        Invocation.method(
-          #isSupported,
-          [],
-        ),
-        returnValue: _i8.Future<bool>.value(false),
-        returnValueForMissingStub: _i8.Future<bool>.value(false),
-      ) as _i8.Future<bool>);
+  _i8.Future<bool> isSupported() =>
+      (super.noSuchMethod(
+            Invocation.method(#isSupported, []),
+            returnValue: _i8.Future<bool>.value(false),
+            returnValueForMissingStub: _i8.Future<bool>.value(false),
+          )
+          as _i8.Future<bool>);
 
   @override
   _i8.Future<_i6.NotificationSettings> requestPermission({
@@ -1346,27 +1084,7 @@ class FirebaseMessagingPlatform_ extends _i1.Mock
     bool? providesAppNotificationSettings = false,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #requestPermission,
-          [],
-          {
-            #alert: alert,
-            #announcement: announcement,
-            #badge: badge,
-            #carPlay: carPlay,
-            #criticalAlert: criticalAlert,
-            #provisional: provisional,
-            #sound: sound,
-            #providesAppNotificationSettings: providesAppNotificationSettings,
-          },
-        ),
-        returnValue: _i8.Future<_i6.NotificationSettings>.value(
-            _FakeNotificationSettings_9(
-          this,
-          Invocation.method(
-            #requestPermission,
-            [],
-            {
+            Invocation.method(#requestPermission, [], {
               #alert: alert,
               #announcement: announcement,
               #badge: badge,
@@ -1375,38 +1093,51 @@ class FirebaseMessagingPlatform_ extends _i1.Mock
               #provisional: provisional,
               #sound: sound,
               #providesAppNotificationSettings: providesAppNotificationSettings,
-            },
-          ),
-        )),
-        returnValueForMissingStub: _i8.Future<_i6.NotificationSettings>.value(
-            _FakeNotificationSettings_9(
-          this,
-          Invocation.method(
-            #requestPermission,
-            [],
-            {
-              #alert: alert,
-              #announcement: announcement,
-              #badge: badge,
-              #carPlay: carPlay,
-              #criticalAlert: criticalAlert,
-              #provisional: provisional,
-              #sound: sound,
-              #providesAppNotificationSettings: providesAppNotificationSettings,
-            },
-          ),
-        )),
-      ) as _i8.Future<_i6.NotificationSettings>);
+            }),
+            returnValue: _i8.Future<_i6.NotificationSettings>.value(
+              _FakeNotificationSettings_9(
+                this,
+                Invocation.method(#requestPermission, [], {
+                  #alert: alert,
+                  #announcement: announcement,
+                  #badge: badge,
+                  #carPlay: carPlay,
+                  #criticalAlert: criticalAlert,
+                  #provisional: provisional,
+                  #sound: sound,
+                  #providesAppNotificationSettings:
+                      providesAppNotificationSettings,
+                }),
+              ),
+            ),
+            returnValueForMissingStub:
+                _i8.Future<_i6.NotificationSettings>.value(
+                  _FakeNotificationSettings_9(
+                    this,
+                    Invocation.method(#requestPermission, [], {
+                      #alert: alert,
+                      #announcement: announcement,
+                      #badge: badge,
+                      #carPlay: carPlay,
+                      #criticalAlert: criticalAlert,
+                      #provisional: provisional,
+                      #sound: sound,
+                      #providesAppNotificationSettings:
+                          providesAppNotificationSettings,
+                    }),
+                  ),
+                ),
+          )
+          as _i8.Future<_i6.NotificationSettings>);
 
   @override
-  _i8.Future<void> setAutoInitEnabled(bool? enabled) => (super.noSuchMethod(
-        Invocation.method(
-          #setAutoInitEnabled,
-          [enabled],
-        ),
-        returnValue: _i8.Future<void>.value(),
-        returnValueForMissingStub: _i8.Future<void>.value(),
-      ) as _i8.Future<void>);
+  _i8.Future<void> setAutoInitEnabled(bool? enabled) =>
+      (super.noSuchMethod(
+            Invocation.method(#setAutoInitEnabled, [enabled]),
+            returnValue: _i8.Future<void>.value(),
+            returnValueForMissingStub: _i8.Future<void>.value(),
+          )
+          as _i8.Future<void>);
 
   @override
   _i8.Future<void> setForegroundNotificationPresentationOptions({
@@ -1415,47 +1146,40 @@ class FirebaseMessagingPlatform_ extends _i1.Mock
     required bool? sound,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #setForegroundNotificationPresentationOptions,
-          [],
-          {
-            #alert: alert,
-            #badge: badge,
-            #sound: sound,
-          },
-        ),
-        returnValue: _i8.Future<void>.value(),
-        returnValueForMissingStub: _i8.Future<void>.value(),
-      ) as _i8.Future<void>);
+            Invocation.method(
+              #setForegroundNotificationPresentationOptions,
+              [],
+              {#alert: alert, #badge: badge, #sound: sound},
+            ),
+            returnValue: _i8.Future<void>.value(),
+            returnValueForMissingStub: _i8.Future<void>.value(),
+          )
+          as _i8.Future<void>);
 
   @override
-  _i8.Future<void> subscribeToTopic(String? topic) => (super.noSuchMethod(
-        Invocation.method(
-          #subscribeToTopic,
-          [topic],
-        ),
-        returnValue: _i8.Future<void>.value(),
-        returnValueForMissingStub: _i8.Future<void>.value(),
-      ) as _i8.Future<void>);
+  _i8.Future<void> subscribeToTopic(String? topic) =>
+      (super.noSuchMethod(
+            Invocation.method(#subscribeToTopic, [topic]),
+            returnValue: _i8.Future<void>.value(),
+            returnValueForMissingStub: _i8.Future<void>.value(),
+          )
+          as _i8.Future<void>);
 
   @override
-  _i8.Future<void> unsubscribeFromTopic(String? topic) => (super.noSuchMethod(
-        Invocation.method(
-          #unsubscribeFromTopic,
-          [topic],
-        ),
-        returnValue: _i8.Future<void>.value(),
-        returnValueForMissingStub: _i8.Future<void>.value(),
-      ) as _i8.Future<void>);
+  _i8.Future<void> unsubscribeFromTopic(String? topic) =>
+      (super.noSuchMethod(
+            Invocation.method(#unsubscribeFromTopic, [topic]),
+            returnValue: _i8.Future<void>.value(),
+            returnValueForMissingStub: _i8.Future<void>.value(),
+          )
+          as _i8.Future<void>);
 
   @override
   _i8.Future<void> setDeliveryMetricsExportToBigQuery(bool? enabled) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #setDeliveryMetricsExportToBigQuery,
-          [enabled],
-        ),
-        returnValue: _i8.Future<void>.value(),
-        returnValueForMissingStub: _i8.Future<void>.value(),
-      ) as _i8.Future<void>);
+            Invocation.method(#setDeliveryMetricsExportToBigQuery, [enabled]),
+            returnValue: _i8.Future<void>.value(),
+            returnValueForMissingStub: _i8.Future<void>.value(),
+          )
+          as _i8.Future<void>);
 }

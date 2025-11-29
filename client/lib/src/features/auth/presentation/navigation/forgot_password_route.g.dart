@@ -6,23 +6,19 @@ part of 'forgot_password_route.dart';
 // GoRouterGenerator
 // **************************************************************************
 
-List<RouteBase> get $appRoutes => [
-      $forgotPasswordRoute,
-    ];
+List<RouteBase> get $appRoutes => [$forgotPasswordRoute];
 
 RouteBase get $forgotPasswordRoute => GoRouteData.$route(
-      path: '/forgot_password',
-      factory: _$ForgotPasswordRoute._fromState,
-    );
+  path: '/forgot_password',
+  factory: $ForgotPasswordRoute._fromState,
+);
 
-mixin _$ForgotPasswordRoute on GoRouteData {
+mixin $ForgotPasswordRoute on GoRouteData {
   static ForgotPasswordRoute _fromState(GoRouterState state) =>
       const ForgotPasswordRoute();
 
   @override
-  String get location => GoRouteData.$location(
-        '/forgot_password',
-      );
+  String get location => GoRouteData.$location('/forgot_password');
 
   @override
   void go(BuildContext context) => context.go(location);

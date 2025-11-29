@@ -6,23 +6,19 @@ part of 'multi_factor_login_route.dart';
 // GoRouterGenerator
 // **************************************************************************
 
-List<RouteBase> get $appRoutes => [
-      $multiFactorLoginRoute,
-    ];
+List<RouteBase> get $appRoutes => [$multiFactorLoginRoute];
 
 RouteBase get $multiFactorLoginRoute => GoRouteData.$route(
-      path: '/multifactor',
-      factory: _$MultiFactorLoginRoute._fromState,
-    );
+  path: '/multifactor',
+  factory: $MultiFactorLoginRoute._fromState,
+);
 
-mixin _$MultiFactorLoginRoute on GoRouteData {
+mixin $MultiFactorLoginRoute on GoRouteData {
   static MultiFactorLoginRoute _fromState(GoRouterState state) =>
       const MultiFactorLoginRoute();
 
   @override
-  String get location => GoRouteData.$location(
-        '/multifactor',
-      );
+  String get location => GoRouteData.$location('/multifactor');
 
   @override
   void go(BuildContext context) => context.go(location);

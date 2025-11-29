@@ -2,12 +2,12 @@ import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_riverpod/misc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:local_auth_platform_interface/local_auth_platform_interface.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
-import 'package:riverpod/riverpod.dart';
 
 import 'local_auth_service_test.mocks.dart';
 
@@ -30,8 +30,9 @@ void main() {
         'Initial State (noInitialAuth)',
         () async {
           final unit = LocalAuthService.noInitialAuth(
-            localAuthPlugin:
-                globalProviderContainer.read(localAuthPluginProvider),
+            localAuthPlugin: globalProviderContainer.read(
+              localAuthPluginProvider,
+            ),
           );
 
           addTearDown(unit.dispose);
@@ -61,18 +62,21 @@ void main() {
       testWidgets(
         'Observes App Lifecycle',
         (tester) async {
-          tester.binding
-              .handleAppLifecycleStateChanged(AppLifecycleState.resumed);
+          tester.binding.handleAppLifecycleStateChanged(
+            AppLifecycleState.resumed,
+          );
 
           final unit = LocalAuthService.noInitialAuth(
-            localAuthPlugin:
-                globalProviderContainer.read(localAuthPluginProvider),
+            localAuthPlugin: globalProviderContainer.read(
+              localAuthPluginProvider,
+            ),
           );
 
           addTearDown(unit.dispose);
 
-          tester.binding
-              .handleAppLifecycleStateChanged(AppLifecycleState.paused);
+          tester.binding.handleAppLifecycleStateChanged(
+            AppLifecycleState.paused,
+          );
 
           expect(unit.shouldAuthenticate, isFalse);
 
@@ -94,48 +98,57 @@ void main() {
         'canCheckBiometrics',
         () async {
           final unit = LocalAuthService.noInitialAuth(
-            localAuthPlugin:
-                globalProviderContainer.read(localAuthPluginProvider),
+            localAuthPlugin: globalProviderContainer.read(
+              localAuthPluginProvider,
+            ),
           );
 
           addTearDown(unit.dispose);
 
           LocalAuthPlatform.instance = MockLocalAuthPlatform();
 
-          when(LocalAuthPlatform.instance.deviceSupportsBiometrics())
-              .thenAnswer((_) async => true);
-          when(LocalAuthPlatform.instance.isDeviceSupported())
-              .thenAnswer((_) async => true);
+          when(
+            LocalAuthPlatform.instance.deviceSupportsBiometrics(),
+          ).thenAnswer((_) async => true);
+          when(
+            LocalAuthPlatform.instance.isDeviceSupported(),
+          ).thenAnswer((_) async => true);
 
           await expectLater(
             unit.canCheckBiometrics(),
             completion(isTrue),
           );
 
-          when(LocalAuthPlatform.instance.deviceSupportsBiometrics())
-              .thenAnswer((_) async => true);
-          when(LocalAuthPlatform.instance.isDeviceSupported())
-              .thenAnswer((_) async => false);
+          when(
+            LocalAuthPlatform.instance.deviceSupportsBiometrics(),
+          ).thenAnswer((_) async => true);
+          when(
+            LocalAuthPlatform.instance.isDeviceSupported(),
+          ).thenAnswer((_) async => false);
 
           await expectLater(
             unit.canCheckBiometrics(),
             completion(isFalse),
           );
 
-          when(LocalAuthPlatform.instance.deviceSupportsBiometrics())
-              .thenAnswer((_) async => false);
-          when(LocalAuthPlatform.instance.isDeviceSupported())
-              .thenAnswer((_) async => true);
+          when(
+            LocalAuthPlatform.instance.deviceSupportsBiometrics(),
+          ).thenAnswer((_) async => false);
+          when(
+            LocalAuthPlatform.instance.isDeviceSupported(),
+          ).thenAnswer((_) async => true);
 
           await expectLater(
             unit.canCheckBiometrics(),
             completion(isFalse),
           );
 
-          when(LocalAuthPlatform.instance.deviceSupportsBiometrics())
-              .thenAnswer((_) async => false);
-          when(LocalAuthPlatform.instance.isDeviceSupported())
-              .thenAnswer((_) async => false);
+          when(
+            LocalAuthPlatform.instance.deviceSupportsBiometrics(),
+          ).thenAnswer((_) async => false);
+          when(
+            LocalAuthPlatform.instance.isDeviceSupported(),
+          ).thenAnswer((_) async => false);
 
           await expectLater(
             unit.canCheckBiometrics(),
@@ -150,8 +163,9 @@ void main() {
           final authCompleter = Completer<bool>();
 
           final unit = LocalAuthService.noInitialAuth(
-            localAuthPlugin:
-                globalProviderContainer.read(localAuthPluginProvider),
+            localAuthPlugin: globalProviderContainer.read(
+              localAuthPluginProvider,
+            ),
           );
 
           addTearDown(unit.dispose);
@@ -185,8 +199,9 @@ void main() {
         'One time auth for path',
         () async {
           final unit = LocalAuthService.noInitialAuth(
-            localAuthPlugin:
-                globalProviderContainer.read(localAuthPluginProvider),
+            localAuthPlugin: globalProviderContainer.read(
+              localAuthPluginProvider,
+            ),
           );
           addTearDown(unit.dispose);
 
@@ -223,8 +238,9 @@ void main() {
           final authCompleter = Completer<bool>();
 
           final unit = LocalAuthService.noInitialAuth(
-            localAuthPlugin:
-                globalProviderContainer.read(localAuthPluginProvider),
+            localAuthPlugin: globalProviderContainer.read(
+              localAuthPluginProvider,
+            ),
           );
 
           LocalAuthPlatform.instance = MockLocalAuthPlatform();
@@ -258,35 +274,41 @@ void main() {
         'Authentication => cancels timer if '
         'lifecycle changed in timer duration',
         (tester) async {
-          tester.binding
-              .handleAppLifecycleStateChanged(AppLifecycleState.resumed);
+          tester.binding.handleAppLifecycleStateChanged(
+            AppLifecycleState.resumed,
+          );
 
           LocalAuthPlatform.instance = MockLocalAuthPlatform();
 
           final unit = LocalAuthService(
-            localAuthPlugin:
-                globalProviderContainer.read(localAuthPluginProvider),
+            localAuthPlugin: globalProviderContainer.read(
+              localAuthPluginProvider,
+            ),
             timeToReauth: const Duration(minutes: 1),
           )..resetAuthState();
 
-          tester.binding
-              .handleAppLifecycleStateChanged(AppLifecycleState.paused);
+          tester.binding.handleAppLifecycleStateChanged(
+            AppLifecycleState.paused,
+          );
 
           await tester.pump(const Duration(seconds: 30));
-          tester.binding
-              .handleAppLifecycleStateChanged(AppLifecycleState.resumed);
+          tester.binding.handleAppLifecycleStateChanged(
+            AppLifecycleState.resumed,
+          );
 
           expect(unit.shouldAuthenticate, isFalse);
 
           await tester.pump(const Duration(seconds: 32));
           expect(unit.shouldAuthenticate, isFalse);
 
-          tester.binding
-              .handleAppLifecycleStateChanged(AppLifecycleState.paused);
+          tester.binding.handleAppLifecycleStateChanged(
+            AppLifecycleState.paused,
+          );
 
           await tester.pump(const Duration(minutes: 1, seconds: 2));
-          tester.binding
-              .handleAppLifecycleStateChanged(AppLifecycleState.resumed);
+          tester.binding.handleAppLifecycleStateChanged(
+            AppLifecycleState.resumed,
+          );
 
           expect(unit.shouldAuthenticate, isTrue);
 
@@ -297,15 +319,17 @@ void main() {
       testWidgets(
         'reset',
         (tester) async {
-          tester.binding
-              .handleAppLifecycleStateChanged(AppLifecycleState.resumed);
+          tester.binding.handleAppLifecycleStateChanged(
+            AppLifecycleState.resumed,
+          );
 
           final unit = globalProviderContainer.read(localAuthServiceProvider);
 
           addTearDown(unit.dispose);
 
-          tester.binding
-              .handleAppLifecycleStateChanged(AppLifecycleState.paused);
+          tester.binding.handleAppLifecycleStateChanged(
+            AppLifecycleState.paused,
+          );
 
           expect(unit.shouldAuthenticate, isTrue);
 
@@ -357,8 +381,9 @@ Override _setUpCANotificationsService() {
     mockCANotificationsService.isPaused,
   ).thenAnswer((_) => isPaused);
 
-  return notificationsServiceProvider
-      .overrideWithValue(mockCANotificationsService);
+  return notificationsServiceProvider.overrideWithValue(
+    mockCANotificationsService,
+  );
 }
 
 Override _setUpAuthBloc() {

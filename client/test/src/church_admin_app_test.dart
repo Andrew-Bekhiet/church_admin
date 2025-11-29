@@ -1,11 +1,11 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/misc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:riverpod/riverpod.dart';
 import 'package:rxdart_ext/not_replay_value_stream.dart';
 
 import 'church_admin_app_test.mocks.dart';
@@ -119,9 +119,9 @@ Override _setUpAuthBloc() {
   return authBlocProvider.overrideWithValue(mock);
 }
 
-List<Override> _setUp() {
+List<Override> _setUp({bool withAuthBloc = true}) {
   final overrides = [
-    _setUpAuthBloc(),
+    if (withAuthBloc) _setUpAuthBloc(),
     _setUpLoggingService(),
     userSettingsServiceProvider.overrideWithValue(FakeUserSettings()),
     _setUpGoRouterRefreshStream(),
@@ -248,7 +248,7 @@ class FirstScreenVariant extends ValueVariant<FirstScreenVariantEnum> {
   Future<FirstScreenVariantEnum> setUp(FirstScreenVariantEnum value) async {
     await super.setUp(value);
 
-    final overrides = [..._setUp(), _setUpAuthBloc(value)];
+    final overrides = [..._setUp(withAuthBloc: false), _setUpAuthBloc(value)];
 
     if (value != FirstScreenVariantEnum.login) {
       overrides.add(_setUpLocalAuthService(value));
@@ -306,11 +306,11 @@ class FirstScreenVariant extends ValueVariant<FirstScreenVariantEnum> {
                     ),
               lastConfession:
                   value == FirstScreenVariantEnum.updateUserSpiritData
-                      ? null
-                      : LastRecordedByInfo(
-                          time: DateTime.now(),
-                          recordedBy: 'uid',
-                        ),
+                  ? null
+                  : LastRecordedByInfo(
+                      time: DateTime.now(),
+                      recordedBy: 'uid',
+                    ),
             ),
           )
         : null;
@@ -322,19 +322,19 @@ class FirstScreenVariant extends ValueVariant<FirstScreenVariantEnum> {
       (_) => user != null
           ? AuthAuthenticated(authUser: user, userData: userData)
           : value == FirstScreenVariantEnum.multiFactor
-              ? AuthMultiFactorChallengeInProgress(
-                  challenge: MultiFactorChallenge(
-                    verificationId: 'verificationId',
-                    createdAt: DateTime.now(),
-                  ),
-                  session: const MultiFactorSession(
-                    id: 'id',
-                    email: 'email',
-                    password: 'password',
-                    enrolledFactors: [],
-                  ),
-                )
-              : const AuthUnauthenticated(),
+          ? AuthMultiFactorChallengeInProgress(
+              challenge: MultiFactorChallenge(
+                verificationId: 'verificationId',
+                createdAt: DateTime.now(),
+              ),
+              session: const MultiFactorSession(
+                id: 'id',
+                email: 'email',
+                password: 'password',
+                enrolledFactors: [],
+              ),
+            )
+          : const AuthUnauthenticated(),
     );
 
     when(mock.userStream).thenAnswer((_) => BehaviorSubject.seeded(user));
@@ -376,6 +376,7 @@ class FirstScreenVariant extends ValueVariant<FirstScreenVariantEnum> {
     FirstScreenVariantEnum value,
     FirstScreenVariantEnum memento,
   ) async {
+    resetGlobalProviderContainer();
     await super.tearDown(value, memento);
   }
 }

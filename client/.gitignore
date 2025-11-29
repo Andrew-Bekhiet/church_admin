@@ -40,3 +40,6 @@ theme.zip
 coverage
 **/failures/*.png
 ios-builds/
+
+# FVM Version Cache
+.fvm/

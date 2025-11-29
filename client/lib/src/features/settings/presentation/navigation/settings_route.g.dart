@@ -6,22 +6,16 @@ part of 'settings_route.dart';
 // GoRouterGenerator
 // **************************************************************************
 
-List<RouteBase> get $appRoutes => [
-      $settingsRoute,
-    ];
+List<RouteBase> get $appRoutes => [$settingsRoute];
 
-RouteBase get $settingsRoute => GoRouteData.$route(
-      path: '/settings',
-      factory: _$SettingsRoute._fromState,
-    );
+RouteBase get $settingsRoute =>
+    GoRouteData.$route(path: '/settings', factory: $SettingsRoute._fromState);
 
-mixin _$SettingsRoute on GoRouteData {
+mixin $SettingsRoute on GoRouteData {
   static SettingsRoute _fromState(GoRouterState state) => const SettingsRoute();
 
   @override
-  String get location => GoRouteData.$location(
-        '/settings',
-      );
+  String get location => GoRouteData.$location('/settings');
 
   @override
   void go(BuildContext context) => context.go(location);

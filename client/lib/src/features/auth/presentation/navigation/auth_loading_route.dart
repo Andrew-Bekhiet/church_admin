@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 part 'auth_loading_route.g.dart';
 
 @TypedGoRoute<AuthLoadingRoute>(path: '/auth_loading')
-class AuthLoadingRoute extends GoRouteData with _$AuthLoadingRoute {
+class AuthLoadingRoute extends GoRouteData with $AuthLoadingRoute {
   const AuthLoadingRoute();
 
   @override

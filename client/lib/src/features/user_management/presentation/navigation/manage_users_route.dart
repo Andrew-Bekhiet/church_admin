@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 part 'manage_users_route.g.dart';
 
 @TypedGoRoute<ManageUsersRoute>(path: '/manage_users')
-class ManageUsersRoute extends GoRouteData with _$ManageUsersRoute {
+class ManageUsersRoute extends GoRouteData with $ManageUsersRoute {
   const ManageUsersRoute();
 
   @override

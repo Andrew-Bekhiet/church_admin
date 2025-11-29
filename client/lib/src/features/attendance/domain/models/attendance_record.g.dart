@@ -74,7 +74,7 @@ class AttendanceRecordFields {
     operators: {
       ...MultiSelectOperator.values,
       PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
+      PrimitiveOperator.isNotNull,
     },
   );
 
@@ -87,7 +87,7 @@ class AttendanceRecordFields {
     operators: {
       ...BooleanOperator.values,
       PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
+      PrimitiveOperator.isNotNull,
     },
   );
 
@@ -100,7 +100,7 @@ class AttendanceRecordFields {
     operators: {
       ...MultiSelectOperator.values,
       PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
+      PrimitiveOperator.isNotNull,
     },
   );
 
@@ -113,7 +113,7 @@ class AttendanceRecordFields {
     operators: {
       ...MultiSelectOperator.values,
       PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
+      PrimitiveOperator.isNotNull,
     },
   );
 
@@ -127,7 +127,7 @@ class AttendanceRecordFields {
     studyYear,
     serviceGender,
     group,
-    class$
+    class$,
   ];
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'id': id,
@@ -139,7 +139,7 @@ class AttendanceRecordFields {
     'studyYear': studyYear,
     'serviceGender': serviceGender,
     'group': group,
-    'class': class$
+    'class': class$,
   };
 }
 
@@ -148,27 +148,26 @@ class AttendanceRecordFields {
 // **************************************************************************
 
 AttendanceRecord _$AttendanceRecordFromJson(Map json) => AttendanceRecord(
-      id: json['id'] as String,
-      dayId: DateTime.parse(json['dayId'] as String),
-      time: DateTime.parse(json['time'] as String),
-      service:
-          Service.fromJson(Map<String, Object?>.from(json['service'] as Map)),
-      person: Person.fromJson(Map<String, Object?>.from(json['person'] as Map)),
-      recordedByUser: User.fromJson(
-          Map<String, Object?>.from(json['recordedByUser'] as Map)),
-      asAdmin: json['asAdmin'] as bool,
-      studyYear: json['studyYear'] == null
-          ? null
-          : StudyYear.fromJson(
-              Map<String, Object?>.from(json['studyYear'] as Map)),
-      serviceGender: json['serviceGender'] as bool?,
-      group: json['group'] == null
-          ? null
-          : Group.fromJson(Map<String, Object?>.from(json['group'] as Map)),
-      class$: json['class'] == null
-          ? null
-          : Class.fromJson(Map<String, Object?>.from(json['class'] as Map)),
-    );
+  id: json['id'] as String,
+  dayId: DateTime.parse(json['dayId'] as String),
+  time: DateTime.parse(json['time'] as String),
+  service: Service.fromJson(Map<String, Object?>.from(json['service'] as Map)),
+  person: Person.fromJson(Map<String, Object?>.from(json['person'] as Map)),
+  recordedByUser: User.fromJson(
+    Map<String, Object?>.from(json['recordedByUser'] as Map),
+  ),
+  asAdmin: json['asAdmin'] as bool,
+  studyYear: json['studyYear'] == null
+      ? null
+      : StudyYear.fromJson(Map<String, Object?>.from(json['studyYear'] as Map)),
+  serviceGender: json['serviceGender'] as bool?,
+  group: json['group'] == null
+      ? null
+      : Group.fromJson(Map<String, Object?>.from(json['group'] as Map)),
+  class$: json['class'] == null
+      ? null
+      : Class.fromJson(Map<String, Object?>.from(json['class'] as Map)),
+);
 
 Map<String, dynamic> _$AttendanceRecordToJson(AttendanceRecord instance) =>
     <String, dynamic>{

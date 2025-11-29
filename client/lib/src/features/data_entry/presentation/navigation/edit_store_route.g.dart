@@ -6,26 +6,21 @@ part of 'edit_store_route.dart';
 // GoRouterGenerator
 // **************************************************************************
 
-List<RouteBase> get $appRoutes => [
-      $editStoreRoute,
-    ];
+List<RouteBase> get $appRoutes => [$editStoreRoute];
 
 RouteBase get $editStoreRoute => GoRouteData.$route(
-      path: '/edit_store',
-      factory: _$EditStoreRoute._fromState,
-    );
+  path: '/edit_store',
+  factory: $EditStoreRoute._fromState,
+);
 
-mixin _$EditStoreRoute on GoRouteData {
-  static EditStoreRoute _fromState(GoRouterState state) => EditStoreRoute(
-        $extra: state.extra as EditStoreExtra?,
-      );
+mixin $EditStoreRoute on GoRouteData {
+  static EditStoreRoute _fromState(GoRouterState state) =>
+      EditStoreRoute($extra: state.extra as EditStoreExtra?);
 
   EditStoreRoute get _self => this as EditStoreRoute;
 
   @override
-  String get location => GoRouteData.$location(
-        '/edit_store',
-      );
+  String get location => GoRouteData.$location('/edit_store');
 
   @override
   void go(BuildContext context) => context.go(location, extra: _self.$extra);
@@ -48,19 +43,19 @@ mixin _$EditStoreRoute on GoRouteData {
 // **************************************************************************
 
 EditStoreExtra _$EditStoreExtraFromJson(Map json) => EditStoreExtra(
-      area: json['area'] == null
-          ? null
-          : Area.fromJson(Map<String, Object?>.from(json['area'] as Map)),
-      street: json['street'] == null
-          ? null
-          : Street.fromJson(Map<String, Object?>.from(json['street'] as Map)),
-      store: json['store'] == null
-          ? null
-          : Store.fromJson(Map<String, Object?>.from(json['store'] as Map)),
-      family: json['family'] == null
-          ? null
-          : Family.fromJson(Map<String, Object?>.from(json['family'] as Map)),
-    );
+  area: json['area'] == null
+      ? null
+      : Area.fromJson(Map<String, Object?>.from(json['area'] as Map)),
+  street: json['street'] == null
+      ? null
+      : Street.fromJson(Map<String, Object?>.from(json['street'] as Map)),
+  store: json['store'] == null
+      ? null
+      : Store.fromJson(Map<String, Object?>.from(json['store'] as Map)),
+  family: json['family'] == null
+      ? null
+      : Family.fromJson(Map<String, Object?>.from(json['family'] as Map)),
+);
 
 Map<String, dynamic> _$EditStoreExtraToJson(EditStoreExtra instance) =>
     <String, dynamic>{

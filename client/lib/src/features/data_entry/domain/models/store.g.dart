@@ -44,7 +44,7 @@ class _StoreFields {
     operators: {
       ...MultiSelectOperator.values,
       PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
+      PrimitiveOperator.isNotNull,
     },
   );
 
@@ -57,23 +57,23 @@ class _StoreFields {
     operators: {
       ...ColorOperator.values,
       PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
+      PrimitiveOperator.isNotNull,
     },
   );
 
   final FieldMetadata<LastRecordedByInfo> lastEdit =
       FieldMetadata<LastRecordedByInfo>(
-    getValue: (obj) => obj is Store ? obj.lastEdit : null,
-    parentType: Store,
-    name: 'lastEdit',
-    label: 'أخر تحديث البيانات',
-    isCodeOnly: false,
-    operators: {
-      ...MultiSelectOperator.values,
-      PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
-    },
-  );
+        getValue: (obj) => obj is Store ? obj.lastEdit : null,
+        parentType: Store,
+        name: 'lastEdit',
+        label: 'أخر تحديث البيانات',
+        isCodeOnly: false,
+        operators: {
+          ...MultiSelectOperator.values,
+          PrimitiveOperator.isNull,
+          PrimitiveOperator.isNotNull,
+        },
+      );
 
   final FieldMetadata<DateTime> photoUpdatedAt = FieldMetadata<DateTime>(
     getValue: (obj) => obj is Store ? obj.photoUpdatedAt : null,
@@ -85,7 +85,7 @@ class _StoreFields {
       ...DateTimeOperator.values,
       ...DateRangeOperator.values,
       PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
+      PrimitiveOperator.isNotNull,
     },
   );
 
@@ -98,7 +98,7 @@ class _StoreFields {
     operators: {
       ...SpatialOperator.values,
       PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
+      PrimitiveOperator.isNotNull,
     },
   );
 
@@ -110,7 +110,7 @@ class _StoreFields {
     color,
     lastEdit,
     photoUpdatedAt,
-    geolocation
+    geolocation,
   ];
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'id': id,
@@ -120,7 +120,7 @@ class _StoreFields {
     'color': color,
     'lastEdit': lastEdit,
     'photoUpdatedAt': photoUpdatedAt,
-    'geolocation': geolocation
+    'geolocation': geolocation,
   };
 }
 
@@ -129,35 +129,36 @@ class _StoreFields {
 // **************************************************************************
 
 Store _$StoreFromJson(Map json) => Store(
-      id: json['id'] as String? ?? '',
-      name: json['name'] as String? ?? '',
-      address: json['address'] == null
-          ? null
-          : Address.fromJson(Map<String, Object?>.from(json['address'] as Map)),
-      family: json['family'] == null
-          ? null
-          : Family.fromJson(Map<String, Object?>.from(json['family'] as Map)),
-      familyId: json['adminFamily'] as String?,
-      color: colorFromInt((json['color'] as num?)?.toInt()),
-      lastEdit: json['lastEdit'] == null
-          ? null
-          : LastRecordedByInfo.fromJson(
-              Map<String, Object?>.from(json['lastEdit'] as Map)),
-      photoUpdatedAt: json['photoUpdatedAt'] == null
-          ? null
-          : DateTime.parse(json['photoUpdatedAt'] as String),
-      blurhash: json['blurhash'] as String?,
-      userCanEdit: json['userCanEdit'] as bool? ?? false,
-    );
+  id: json['id'] as String? ?? '',
+  name: json['name'] as String? ?? '',
+  address: json['address'] == null
+      ? null
+      : Address.fromJson(Map<String, Object?>.from(json['address'] as Map)),
+  family: json['family'] == null
+      ? null
+      : Family.fromJson(Map<String, Object?>.from(json['family'] as Map)),
+  familyId: json['adminFamily'] as String?,
+  color: colorFromInt((json['color'] as num?)?.toInt()),
+  lastEdit: json['lastEdit'] == null
+      ? null
+      : LastRecordedByInfo.fromJson(
+          Map<String, Object?>.from(json['lastEdit'] as Map),
+        ),
+  photoUpdatedAt: json['photoUpdatedAt'] == null
+      ? null
+      : DateTime.parse(json['photoUpdatedAt'] as String),
+  blurhash: json['blurhash'] as String?,
+  userCanEdit: json['userCanEdit'] as bool? ?? false,
+);
 
 Map<String, dynamic> _$StoreToJson(Store instance) => <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
-      'address': instance.address?.toJson(),
-      'family': instance.family?.toJson(),
-      'adminFamily': instance.familyId,
-      'color': colorToInt(instance.color),
-      'lastEdit': instance.lastEdit?.toJson(),
-      'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
-      'blurhash': instance.blurhash,
-    };
+  'id': instance.id,
+  'name': instance.name,
+  'address': instance.address?.toJson(),
+  'family': instance.family?.toJson(),
+  'adminFamily': instance.familyId,
+  'color': colorToInt(instance.color),
+  'lastEdit': instance.lastEdit?.toJson(),
+  'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+  'blurhash': instance.blurhash,
+};

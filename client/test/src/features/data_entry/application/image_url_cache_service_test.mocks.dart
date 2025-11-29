@@ -30,56 +30,32 @@ import 'package:mockito/src/dummies.dart' as _i11;
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
+// ignore_for_file: invalid_use_of_internal_member
 
 class _FakeFile_0 extends _i1.SmartFake implements _i2.File {
-  _FakeFile_0(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeFile_0(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeFileInfo_1 extends _i1.SmartFake implements _i3.FileInfo {
-  _FakeFileInfo_1(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeFileInfo_1(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeHttpsCallable_2 extends _i1.SmartFake implements _i4.HttpsCallable {
-  _FakeHttpsCallable_2(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeHttpsCallable_2(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeHttpsCallableResult_3<T> extends _i1.SmartFake
     implements _i4.HttpsCallableResult<T> {
-  _FakeHttpsCallableResult_3(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeHttpsCallableResult_3(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeResponse_4<T> extends _i1.SmartFake implements _i5.Response<T> {
-  _FakeResponse_4(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeResponse_4(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 /// A class which mocks [BaseCacheManager].
@@ -93,37 +69,33 @@ class MockBaseCacheManager extends _i1.Mock implements _i6.BaseCacheManager {
     Map<String, String>? headers,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #getSingleFile,
-          [url],
-          {
-            #key: key,
-            #headers: headers,
-          },
-        ),
-        returnValue: _i7.Future<_i2.File>.value(_FakeFile_0(
-          this,
-          Invocation.method(
-            #getSingleFile,
-            [url],
-            {
-              #key: key,
-              #headers: headers,
-            },
-          ),
-        )),
-        returnValueForMissingStub: _i7.Future<_i2.File>.value(_FakeFile_0(
-          this,
-          Invocation.method(
-            #getSingleFile,
-            [url],
-            {
-              #key: key,
-              #headers: headers,
-            },
-          ),
-        )),
-      ) as _i7.Future<_i2.File>);
+            Invocation.method(
+              #getSingleFile,
+              [url],
+              {#key: key, #headers: headers},
+            ),
+            returnValue: _i7.Future<_i2.File>.value(
+              _FakeFile_0(
+                this,
+                Invocation.method(
+                  #getSingleFile,
+                  [url],
+                  {#key: key, #headers: headers},
+                ),
+              ),
+            ),
+            returnValueForMissingStub: _i7.Future<_i2.File>.value(
+              _FakeFile_0(
+                this,
+                Invocation.method(
+                  #getSingleFile,
+                  [url],
+                  {#key: key, #headers: headers},
+                ),
+              ),
+            ),
+          )
+          as _i7.Future<_i2.File>);
 
   @override
   _i7.Stream<_i3.FileInfo> getFile(
@@ -132,17 +104,11 @@ class MockBaseCacheManager extends _i1.Mock implements _i6.BaseCacheManager {
     Map<String, String>? headers,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #getFile,
-          [url],
-          {
-            #key: key,
-            #headers: headers,
-          },
-        ),
-        returnValue: _i7.Stream<_i3.FileInfo>.empty(),
-        returnValueForMissingStub: _i7.Stream<_i3.FileInfo>.empty(),
-      ) as _i7.Stream<_i3.FileInfo>);
+            Invocation.method(#getFile, [url], {#key: key, #headers: headers}),
+            returnValue: _i7.Stream<_i3.FileInfo>.empty(),
+            returnValueForMissingStub: _i7.Stream<_i3.FileInfo>.empty(),
+          )
+          as _i7.Stream<_i3.FileInfo>);
 
   @override
   _i7.Stream<_i8.FileResponse> getFileStream(
@@ -152,18 +118,15 @@ class MockBaseCacheManager extends _i1.Mock implements _i6.BaseCacheManager {
     bool? withProgress,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #getFileStream,
-          [url],
-          {
-            #key: key,
-            #headers: headers,
-            #withProgress: withProgress,
-          },
-        ),
-        returnValue: _i7.Stream<_i8.FileResponse>.empty(),
-        returnValueForMissingStub: _i7.Stream<_i8.FileResponse>.empty(),
-      ) as _i7.Stream<_i8.FileResponse>);
+            Invocation.method(
+              #getFileStream,
+              [url],
+              {#key: key, #headers: headers, #withProgress: withProgress},
+            ),
+            returnValue: _i7.Stream<_i8.FileResponse>.empty(),
+            returnValueForMissingStub: _i7.Stream<_i8.FileResponse>.empty(),
+          )
+          as _i7.Stream<_i8.FileResponse>);
 
   @override
   _i7.Future<_i3.FileInfo> downloadFile(
@@ -173,41 +136,33 @@ class MockBaseCacheManager extends _i1.Mock implements _i6.BaseCacheManager {
     bool? force = false,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #downloadFile,
-          [url],
-          {
-            #key: key,
-            #authHeaders: authHeaders,
-            #force: force,
-          },
-        ),
-        returnValue: _i7.Future<_i3.FileInfo>.value(_FakeFileInfo_1(
-          this,
-          Invocation.method(
-            #downloadFile,
-            [url],
-            {
-              #key: key,
-              #authHeaders: authHeaders,
-              #force: force,
-            },
-          ),
-        )),
-        returnValueForMissingStub:
-            _i7.Future<_i3.FileInfo>.value(_FakeFileInfo_1(
-          this,
-          Invocation.method(
-            #downloadFile,
-            [url],
-            {
-              #key: key,
-              #authHeaders: authHeaders,
-              #force: force,
-            },
-          ),
-        )),
-      ) as _i7.Future<_i3.FileInfo>);
+            Invocation.method(
+              #downloadFile,
+              [url],
+              {#key: key, #authHeaders: authHeaders, #force: force},
+            ),
+            returnValue: _i7.Future<_i3.FileInfo>.value(
+              _FakeFileInfo_1(
+                this,
+                Invocation.method(
+                  #downloadFile,
+                  [url],
+                  {#key: key, #authHeaders: authHeaders, #force: force},
+                ),
+              ),
+            ),
+            returnValueForMissingStub: _i7.Future<_i3.FileInfo>.value(
+              _FakeFileInfo_1(
+                this,
+                Invocation.method(
+                  #downloadFile,
+                  [url],
+                  {#key: key, #authHeaders: authHeaders, #force: force},
+                ),
+              ),
+            ),
+          )
+          as _i7.Future<_i3.FileInfo>);
 
   @override
   _i7.Future<_i3.FileInfo?> getFileFromCache(
@@ -215,25 +170,24 @@ class MockBaseCacheManager extends _i1.Mock implements _i6.BaseCacheManager {
     bool? ignoreMemCache = false,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #getFileFromCache,
-          [key],
-          {#ignoreMemCache: ignoreMemCache},
-        ),
-        returnValue: _i7.Future<_i3.FileInfo?>.value(),
-        returnValueForMissingStub: _i7.Future<_i3.FileInfo?>.value(),
-      ) as _i7.Future<_i3.FileInfo?>);
+            Invocation.method(
+              #getFileFromCache,
+              [key],
+              {#ignoreMemCache: ignoreMemCache},
+            ),
+            returnValue: _i7.Future<_i3.FileInfo?>.value(),
+            returnValueForMissingStub: _i7.Future<_i3.FileInfo?>.value(),
+          )
+          as _i7.Future<_i3.FileInfo?>);
 
   @override
   _i7.Future<_i3.FileInfo?> getFileFromMemory(String? key) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #getFileFromMemory,
-          [key],
-        ),
-        returnValue: _i7.Future<_i3.FileInfo?>.value(),
-        returnValueForMissingStub: _i7.Future<_i3.FileInfo?>.value(),
-      ) as _i7.Future<_i3.FileInfo?>);
+            Invocation.method(#getFileFromMemory, [key]),
+            returnValue: _i7.Future<_i3.FileInfo?>.value(),
+            returnValueForMissingStub: _i7.Future<_i3.FileInfo?>.value(),
+          )
+          as _i7.Future<_i3.FileInfo?>);
 
   @override
   _i7.Future<_i2.File> putFile(
@@ -245,52 +199,48 @@ class MockBaseCacheManager extends _i1.Mock implements _i6.BaseCacheManager {
     String? fileExtension = 'file',
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #putFile,
-          [
-            url,
-            fileBytes,
-          ],
-          {
-            #key: key,
-            #eTag: eTag,
-            #maxAge: maxAge,
-            #fileExtension: fileExtension,
-          },
-        ),
-        returnValue: _i7.Future<_i2.File>.value(_FakeFile_0(
-          this,
-          Invocation.method(
-            #putFile,
-            [
-              url,
-              fileBytes,
-            ],
-            {
-              #key: key,
-              #eTag: eTag,
-              #maxAge: maxAge,
-              #fileExtension: fileExtension,
-            },
-          ),
-        )),
-        returnValueForMissingStub: _i7.Future<_i2.File>.value(_FakeFile_0(
-          this,
-          Invocation.method(
-            #putFile,
-            [
-              url,
-              fileBytes,
-            ],
-            {
-              #key: key,
-              #eTag: eTag,
-              #maxAge: maxAge,
-              #fileExtension: fileExtension,
-            },
-          ),
-        )),
-      ) as _i7.Future<_i2.File>);
+            Invocation.method(
+              #putFile,
+              [url, fileBytes],
+              {
+                #key: key,
+                #eTag: eTag,
+                #maxAge: maxAge,
+                #fileExtension: fileExtension,
+              },
+            ),
+            returnValue: _i7.Future<_i2.File>.value(
+              _FakeFile_0(
+                this,
+                Invocation.method(
+                  #putFile,
+                  [url, fileBytes],
+                  {
+                    #key: key,
+                    #eTag: eTag,
+                    #maxAge: maxAge,
+                    #fileExtension: fileExtension,
+                  },
+                ),
+              ),
+            ),
+            returnValueForMissingStub: _i7.Future<_i2.File>.value(
+              _FakeFile_0(
+                this,
+                Invocation.method(
+                  #putFile,
+                  [url, fileBytes],
+                  {
+                    #key: key,
+                    #eTag: eTag,
+                    #maxAge: maxAge,
+                    #fileExtension: fileExtension,
+                  },
+                ),
+              ),
+            ),
+          )
+          as _i7.Future<_i2.File>);
 
   @override
   _i7.Future<_i2.File> putFileStream(
@@ -302,82 +252,75 @@ class MockBaseCacheManager extends _i1.Mock implements _i6.BaseCacheManager {
     String? fileExtension = 'file',
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #putFileStream,
-          [
-            url,
-            source,
-          ],
-          {
-            #key: key,
-            #eTag: eTag,
-            #maxAge: maxAge,
-            #fileExtension: fileExtension,
-          },
-        ),
-        returnValue: _i7.Future<_i2.File>.value(_FakeFile_0(
-          this,
-          Invocation.method(
-            #putFileStream,
-            [
-              url,
-              source,
-            ],
-            {
-              #key: key,
-              #eTag: eTag,
-              #maxAge: maxAge,
-              #fileExtension: fileExtension,
-            },
-          ),
-        )),
-        returnValueForMissingStub: _i7.Future<_i2.File>.value(_FakeFile_0(
-          this,
-          Invocation.method(
-            #putFileStream,
-            [
-              url,
-              source,
-            ],
-            {
-              #key: key,
-              #eTag: eTag,
-              #maxAge: maxAge,
-              #fileExtension: fileExtension,
-            },
-          ),
-        )),
-      ) as _i7.Future<_i2.File>);
+            Invocation.method(
+              #putFileStream,
+              [url, source],
+              {
+                #key: key,
+                #eTag: eTag,
+                #maxAge: maxAge,
+                #fileExtension: fileExtension,
+              },
+            ),
+            returnValue: _i7.Future<_i2.File>.value(
+              _FakeFile_0(
+                this,
+                Invocation.method(
+                  #putFileStream,
+                  [url, source],
+                  {
+                    #key: key,
+                    #eTag: eTag,
+                    #maxAge: maxAge,
+                    #fileExtension: fileExtension,
+                  },
+                ),
+              ),
+            ),
+            returnValueForMissingStub: _i7.Future<_i2.File>.value(
+              _FakeFile_0(
+                this,
+                Invocation.method(
+                  #putFileStream,
+                  [url, source],
+                  {
+                    #key: key,
+                    #eTag: eTag,
+                    #maxAge: maxAge,
+                    #fileExtension: fileExtension,
+                  },
+                ),
+              ),
+            ),
+          )
+          as _i7.Future<_i2.File>);
 
   @override
-  _i7.Future<void> removeFile(String? key) => (super.noSuchMethod(
-        Invocation.method(
-          #removeFile,
-          [key],
-        ),
-        returnValue: _i7.Future<void>.value(),
-        returnValueForMissingStub: _i7.Future<void>.value(),
-      ) as _i7.Future<void>);
+  _i7.Future<void> removeFile(String? key) =>
+      (super.noSuchMethod(
+            Invocation.method(#removeFile, [key]),
+            returnValue: _i7.Future<void>.value(),
+            returnValueForMissingStub: _i7.Future<void>.value(),
+          )
+          as _i7.Future<void>);
 
   @override
-  _i7.Future<void> emptyCache() => (super.noSuchMethod(
-        Invocation.method(
-          #emptyCache,
-          [],
-        ),
-        returnValue: _i7.Future<void>.value(),
-        returnValueForMissingStub: _i7.Future<void>.value(),
-      ) as _i7.Future<void>);
+  _i7.Future<void> emptyCache() =>
+      (super.noSuchMethod(
+            Invocation.method(#emptyCache, []),
+            returnValue: _i7.Future<void>.value(),
+            returnValueForMissingStub: _i7.Future<void>.value(),
+          )
+          as _i7.Future<void>);
 
   @override
-  _i7.Future<void> dispose() => (super.noSuchMethod(
-        Invocation.method(
-          #dispose,
-          [],
-        ),
-        returnValue: _i7.Future<void>.value(),
-        returnValueForMissingStub: _i7.Future<void>.value(),
-      ) as _i7.Future<void>);
+  _i7.Future<void> dispose() =>
+      (super.noSuchMethod(
+            Invocation.method(#dispose, []),
+            returnValue: _i7.Future<void>.value(),
+            returnValueForMissingStub: _i7.Future<void>.value(),
+          )
+          as _i7.Future<void>);
 }
 
 /// A class which mocks [FunctionsService].
@@ -390,55 +333,51 @@ class MockFunctionsService extends _i1.Mock implements _i10.FunctionsService {
     _i4.HttpsCallableOptions? options,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #httpsCallable,
-          [functionName],
-          {#options: options},
-        ),
-        returnValue: _FakeHttpsCallable_2(
-          this,
-          Invocation.method(
-            #httpsCallable,
-            [functionName],
-            {#options: options},
-          ),
-        ),
-        returnValueForMissingStub: _FakeHttpsCallable_2(
-          this,
-          Invocation.method(
-            #httpsCallable,
-            [functionName],
-            {#options: options},
-          ),
-        ),
-      ) as _i4.HttpsCallable);
+            Invocation.method(
+              #httpsCallable,
+              [functionName],
+              {#options: options},
+            ),
+            returnValue: _FakeHttpsCallable_2(
+              this,
+              Invocation.method(
+                #httpsCallable,
+                [functionName],
+                {#options: options},
+              ),
+            ),
+            returnValueForMissingStub: _FakeHttpsCallable_2(
+              this,
+              Invocation.method(
+                #httpsCallable,
+                [functionName],
+                {#options: options},
+              ),
+            ),
+          )
+          as _i4.HttpsCallable);
 
   @override
   _i7.Future<_i4.HttpsCallableResult<dynamic>> registerFCMToken(
-          String? token) =>
+    String? token,
+  ) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #registerFCMToken,
-          [token],
-        ),
-        returnValue: _i7.Future<_i4.HttpsCallableResult<dynamic>>.value(
-            _FakeHttpsCallableResult_3<dynamic>(
-          this,
-          Invocation.method(
-            #registerFCMToken,
-            [token],
-          ),
-        )),
-        returnValueForMissingStub:
-            _i7.Future<_i4.HttpsCallableResult<dynamic>>.value(
-                _FakeHttpsCallableResult_3<dynamic>(
-          this,
-          Invocation.method(
-            #registerFCMToken,
-            [token],
-          ),
-        )),
-      ) as _i7.Future<_i4.HttpsCallableResult<dynamic>>);
+            Invocation.method(#registerFCMToken, [token]),
+            returnValue: _i7.Future<_i4.HttpsCallableResult<dynamic>>.value(
+              _FakeHttpsCallableResult_3<dynamic>(
+                this,
+                Invocation.method(#registerFCMToken, [token]),
+              ),
+            ),
+            returnValueForMissingStub:
+                _i7.Future<_i4.HttpsCallableResult<dynamic>>.value(
+                  _FakeHttpsCallableResult_3<dynamic>(
+                    this,
+                    Invocation.method(#registerFCMToken, [token]),
+                  ),
+                ),
+          )
+          as _i7.Future<_i4.HttpsCallableResult<dynamic>>);
 
   @override
   _i7.Future<String> getDownloadUrl(
@@ -447,38 +386,33 @@ class MockFunctionsService extends _i1.Mock implements _i10.FunctionsService {
     String? contentType,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #getDownloadUrl,
-          [
-            table,
-            id,
-          ],
-          {#contentType: contentType},
-        ),
-        returnValue: _i7.Future<String>.value(_i11.dummyValue<String>(
-          this,
-          Invocation.method(
-            #getDownloadUrl,
-            [
-              table,
-              id,
-            ],
-            {#contentType: contentType},
-          ),
-        )),
-        returnValueForMissingStub:
-            _i7.Future<String>.value(_i11.dummyValue<String>(
-          this,
-          Invocation.method(
-            #getDownloadUrl,
-            [
-              table,
-              id,
-            ],
-            {#contentType: contentType},
-          ),
-        )),
-      ) as _i7.Future<String>);
+            Invocation.method(
+              #getDownloadUrl,
+              [table, id],
+              {#contentType: contentType},
+            ),
+            returnValue: _i7.Future<String>.value(
+              _i11.dummyValue<String>(
+                this,
+                Invocation.method(
+                  #getDownloadUrl,
+                  [table, id],
+                  {#contentType: contentType},
+                ),
+              ),
+            ),
+            returnValueForMissingStub: _i7.Future<String>.value(
+              _i11.dummyValue<String>(
+                this,
+                Invocation.method(
+                  #getDownloadUrl,
+                  [table, id],
+                  {#contentType: contentType},
+                ),
+              ),
+            ),
+          )
+          as _i7.Future<String>);
 
   @override
   _i7.Future<String> getUploadUrl(
@@ -487,66 +421,51 @@ class MockFunctionsService extends _i1.Mock implements _i10.FunctionsService {
     String? contentType,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #getUploadUrl,
-          [
-            table,
-            id,
-          ],
-          {#contentType: contentType},
-        ),
-        returnValue: _i7.Future<String>.value(_i11.dummyValue<String>(
-          this,
-          Invocation.method(
-            #getUploadUrl,
-            [
-              table,
-              id,
-            ],
-            {#contentType: contentType},
-          ),
-        )),
-        returnValueForMissingStub:
-            _i7.Future<String>.value(_i11.dummyValue<String>(
-          this,
-          Invocation.method(
-            #getUploadUrl,
-            [
-              table,
-              id,
-            ],
-            {#contentType: contentType},
-          ),
-        )),
-      ) as _i7.Future<String>);
+            Invocation.method(
+              #getUploadUrl,
+              [table, id],
+              {#contentType: contentType},
+            ),
+            returnValue: _i7.Future<String>.value(
+              _i11.dummyValue<String>(
+                this,
+                Invocation.method(
+                  #getUploadUrl,
+                  [table, id],
+                  {#contentType: contentType},
+                ),
+              ),
+            ),
+            returnValueForMissingStub: _i7.Future<String>.value(
+              _i11.dummyValue<String>(
+                this,
+                Invocation.method(
+                  #getUploadUrl,
+                  [table, id],
+                  {#contentType: contentType},
+                ),
+              ),
+            ),
+          )
+          as _i7.Future<String>);
 
   @override
-  _i7.Future<void> deletePhoto(
-    String? table,
-    String? id,
-  ) =>
+  _i7.Future<void> deletePhoto(String? table, String? id) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #deletePhoto,
-          [
-            table,
-            id,
-          ],
-        ),
-        returnValue: _i7.Future<void>.value(),
-        returnValueForMissingStub: _i7.Future<void>.value(),
-      ) as _i7.Future<void>);
+            Invocation.method(#deletePhoto, [table, id]),
+            returnValue: _i7.Future<void>.value(),
+            returnValueForMissingStub: _i7.Future<void>.value(),
+          )
+          as _i7.Future<void>);
 
   @override
   _i7.Future<_i10.Address?> getAddressFromLocation(_i10.Point? location) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #getAddressFromLocation,
-          [location],
-        ),
-        returnValue: _i7.Future<_i10.Address?>.value(),
-        returnValueForMissingStub: _i7.Future<_i10.Address?>.value(),
-      ) as _i7.Future<_i10.Address?>);
+            Invocation.method(#getAddressFromLocation, [location]),
+            returnValue: _i7.Future<_i10.Address?>.value(),
+            returnValueForMissingStub: _i7.Future<_i10.Address?>.value(),
+          )
+          as _i7.Future<_i10.Address?>);
 
   @override
   _i7.Future<_i5.Response<dynamic>> uploadPhoto({
@@ -554,107 +473,86 @@ class MockFunctionsService extends _i1.Mock implements _i10.FunctionsService {
     required _i7.Stream<List<int>>? fileStream,
     String? contentType,
     int? fileLength,
-    void Function(
-      int,
-      int,
-    )? onSendProgress,
+    void Function(int, int)? onSendProgress,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #uploadPhoto,
-          [],
-          {
-            #url: url,
-            #fileStream: fileStream,
-            #contentType: contentType,
-            #fileLength: fileLength,
-            #onSendProgress: onSendProgress,
-          },
-        ),
-        returnValue:
-            _i7.Future<_i5.Response<dynamic>>.value(_FakeResponse_4<dynamic>(
-          this,
-          Invocation.method(
-            #uploadPhoto,
-            [],
-            {
+            Invocation.method(#uploadPhoto, [], {
               #url: url,
               #fileStream: fileStream,
               #contentType: contentType,
               #fileLength: fileLength,
               #onSendProgress: onSendProgress,
-            },
-          ),
-        )),
-        returnValueForMissingStub:
-            _i7.Future<_i5.Response<dynamic>>.value(_FakeResponse_4<dynamic>(
-          this,
-          Invocation.method(
-            #uploadPhoto,
-            [],
-            {
-              #url: url,
-              #fileStream: fileStream,
-              #contentType: contentType,
-              #fileLength: fileLength,
-              #onSendProgress: onSendProgress,
-            },
-          ),
-        )),
-      ) as _i7.Future<_i5.Response<dynamic>>);
+            }),
+            returnValue: _i7.Future<_i5.Response<dynamic>>.value(
+              _FakeResponse_4<dynamic>(
+                this,
+                Invocation.method(#uploadPhoto, [], {
+                  #url: url,
+                  #fileStream: fileStream,
+                  #contentType: contentType,
+                  #fileLength: fileLength,
+                  #onSendProgress: onSendProgress,
+                }),
+              ),
+            ),
+            returnValueForMissingStub: _i7.Future<_i5.Response<dynamic>>.value(
+              _FakeResponse_4<dynamic>(
+                this,
+                Invocation.method(#uploadPhoto, [], {
+                  #url: url,
+                  #fileStream: fileStream,
+                  #contentType: contentType,
+                  #fileLength: fileLength,
+                  #onSendProgress: onSendProgress,
+                }),
+              ),
+            ),
+          )
+          as _i7.Future<_i5.Response<dynamic>>);
 
   @override
-  _i7.Future<bool> checkHasuraHealth() => (super.noSuchMethod(
-        Invocation.method(
-          #checkHasuraHealth,
-          [],
-        ),
-        returnValue: _i7.Future<bool>.value(false),
-        returnValueForMissingStub: _i7.Future<bool>.value(false),
-      ) as _i7.Future<bool>);
+  _i7.Future<bool> checkHasuraHealth() =>
+      (super.noSuchMethod(
+            Invocation.method(#checkHasuraHealth, []),
+            returnValue: _i7.Future<bool>.value(false),
+            returnValueForMissingStub: _i7.Future<bool>.value(false),
+          )
+          as _i7.Future<bool>);
 
   @override
   _i7.Future<void> registerUserWithCode(String? registerCode) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #registerUserWithCode,
-          [registerCode],
-        ),
-        returnValue: _i7.Future<void>.value(),
-        returnValueForMissingStub: _i7.Future<void>.value(),
-      ) as _i7.Future<void>);
+            Invocation.method(#registerUserWithCode, [registerCode]),
+            returnValue: _i7.Future<void>.value(),
+            returnValueForMissingStub: _i7.Future<void>.value(),
+          )
+          as _i7.Future<void>);
 
   @override
   _i7.Future<String> getAppDownloadLink(String? platform) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #getAppDownloadLink,
-          [platform],
-        ),
-        returnValue: _i7.Future<String>.value(_i11.dummyValue<String>(
-          this,
-          Invocation.method(
-            #getAppDownloadLink,
-            [platform],
-          ),
-        )),
-        returnValueForMissingStub:
-            _i7.Future<String>.value(_i11.dummyValue<String>(
-          this,
-          Invocation.method(
-            #getAppDownloadLink,
-            [platform],
-          ),
-        )),
-      ) as _i7.Future<String>);
+            Invocation.method(#getAppDownloadLink, [platform]),
+            returnValue: _i7.Future<String>.value(
+              _i11.dummyValue<String>(
+                this,
+                Invocation.method(#getAppDownloadLink, [platform]),
+              ),
+            ),
+            returnValueForMissingStub: _i7.Future<String>.value(
+              _i11.dummyValue<String>(
+                this,
+                Invocation.method(#getAppDownloadLink, [platform]),
+              ),
+            ),
+          )
+          as _i7.Future<String>);
 
   @override
-  _i7.Future<void> deleteMyAccount() => (super.noSuchMethod(
-        Invocation.method(
-          #deleteMyAccount,
-          [],
-        ),
-        returnValue: _i7.Future<void>.value(),
-        returnValueForMissingStub: _i7.Future<void>.value(),
-      ) as _i7.Future<void>);
+  _i7.Future<void> deleteMyAccount() =>
+      (super.noSuchMethod(
+            Invocation.method(#deleteMyAccount, []),
+            returnValue: _i7.Future<void>.value(),
+            returnValueForMissingStub: _i7.Future<void>.value(),
+          )
+          as _i7.Future<void>);
 }

@@ -14,77 +14,66 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$College {
-  String get id;
-  String get name;
-  String? get universityId;
 
-  /// Create a copy of College
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  $CollegeCopyWith<College> get copyWith =>
-      _$CollegeCopyWithImpl<College>(this as College, _$identity);
+ String get id; String get name; String? get universityId;
+/// Create a copy of College
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$CollegeCopyWith<College> get copyWith => _$CollegeCopyWithImpl<College>(this as College, _$identity);
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is College &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.universityId, universityId) ||
-                other.universityId == universityId));
-  }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(runtimeType, id, name, universityId);
 
-  @override
-  String toString() {
-    return 'College(id: $id, name: $name, universityId: $universityId)';
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is College&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.universityId, universityId) || other.universityId == universityId));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,id,name,universityId);
+
+@override
+String toString() {
+  return 'College(id: $id, name: $name, universityId: $universityId)';
+}
+
+
 }
 
 /// @nodoc
-abstract mixin class $CollegeCopyWith<$Res> {
-  factory $CollegeCopyWith(College value, $Res Function(College) _then) =
-      _$CollegeCopyWithImpl;
-  @useResult
-  $Res call({String id, String name, String? universityId});
-}
+abstract mixin class $CollegeCopyWith<$Res>  {
+  factory $CollegeCopyWith(College value, $Res Function(College) _then) = _$CollegeCopyWithImpl;
+@useResult
+$Res call({
+ String id, String name, String? universityId
+});
 
+
+
+
+}
 /// @nodoc
-class _$CollegeCopyWithImpl<$Res> implements $CollegeCopyWith<$Res> {
+class _$CollegeCopyWithImpl<$Res>
+    implements $CollegeCopyWith<$Res> {
   _$CollegeCopyWithImpl(this._self, this._then);
 
   final College _self;
   final $Res Function(College) _then;
 
-  /// Create a copy of College
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? name = null,
-    Object? universityId = freezed,
-  }) {
-    return _then(College(
-      id: null == id
-          ? _self.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _self.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      universityId: freezed == universityId
-          ? _self.universityId
-          : universityId // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
+/// Create a copy of College
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,Object? universityId = freezed,}) {
+  return _then(College(
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String,universityId: freezed == universityId ? _self.universityId : universityId // ignore: cast_nullable_to_non_nullable
+as String?,
+  ));
 }
+
+}
+
+
 
 // dart format on

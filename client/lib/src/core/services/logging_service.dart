@@ -231,7 +231,7 @@ class LoggingService extends BlocObserver {
         ...?record.data,
         'moduleName': record.moduleName,
         'eventName': record.eventName,
-      }.entries.map((e) => scope.setContexts(e.key, e.value)).toList(),
+      }.entries.map((e) async => scope.setContexts(e.key, e.value)).toList(),
     );
   }
 

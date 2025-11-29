@@ -36,7 +36,7 @@ class _GroupFields {
     operators: {
       ...ColorOperator.values,
       PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
+      PrimitiveOperator.isNotNull,
     },
   );
 
@@ -50,7 +50,7 @@ class _GroupFields {
       ...DateTimeOperator.values,
       ...DateRangeOperator.values,
       PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
+      PrimitiveOperator.isNotNull,
     },
   );
 
@@ -63,32 +63,32 @@ class _GroupFields {
     operators: {
       ...MultiSelectOperator.values,
       PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
+      PrimitiveOperator.isNotNull,
     },
   );
 
   final FieldMetadata<DateTimeRange<DateTime>> validity =
       FieldMetadata<DateTimeRange<DateTime>>(
-    getValue: (obj) => obj is Group ? obj.validity : null,
-    parentType: Group,
-    name: 'validity',
-    label: 'validity',
-    isCodeOnly: false,
-  );
+        getValue: (obj) => obj is Group ? obj.validity : null,
+        parentType: Group,
+        name: 'validity',
+        label: 'validity',
+        isCodeOnly: false,
+      );
 
   final FieldMetadata<LastRecordedByInfo> lastEdit =
       FieldMetadata<LastRecordedByInfo>(
-    getValue: (obj) => obj is Group ? obj.lastEdit : null,
-    parentType: Group,
-    name: 'lastEdit',
-    label: 'أخر تحديث البيانات',
-    isCodeOnly: false,
-    operators: {
-      ...MultiSelectOperator.values,
-      PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
-    },
-  );
+        getValue: (obj) => obj is Group ? obj.lastEdit : null,
+        parentType: Group,
+        name: 'lastEdit',
+        label: 'أخر تحديث البيانات',
+        isCodeOnly: false,
+        operators: {
+          ...MultiSelectOperator.values,
+          PrimitiveOperator.isNull,
+          PrimitiveOperator.isNotNull,
+        },
+      );
 
   final FieldMetadata<AdminOnData> adminUsersRel = FieldMetadata<AdminOnData>(
     getValue: (obj) => obj is Group ? obj.adminUsers : null,
@@ -107,22 +107,22 @@ class _GroupFields {
 
   final FieldMetadata<AggregateData> attendanceHistoryAggregate =
       FieldMetadata<AggregateData>(
-    getValue: (obj) => obj is Group ? obj.attendanceHistoryAggregate : null,
-    parentType: Group,
-    name: 'attendanceHistoryAggregate',
-    label: 'attendanceHistoryAggregate',
-    isCodeOnly: true,
-  );
+        getValue: (obj) => obj is Group ? obj.attendanceHistoryAggregate : null,
+        parentType: Group,
+        name: 'attendanceHistoryAggregate',
+        label: 'attendanceHistoryAggregate',
+        isCodeOnly: true,
+      );
 
   final FieldMetadata<AggregateData> attendanceDaysConstraintsAggregate =
       FieldMetadata<AggregateData>(
-    getValue: (obj) =>
-        obj is Group ? obj.attendanceDaysConstraintsAggregate : null,
-    parentType: Group,
-    name: 'attendanceDaysConstraintsAggregate',
-    label: 'attendanceDaysConstraintsAggregate',
-    isCodeOnly: true,
-  );
+        getValue: (obj) =>
+            obj is Group ? obj.attendanceDaysConstraintsAggregate : null,
+        parentType: Group,
+        name: 'attendanceDaysConstraintsAggregate',
+        label: 'attendanceDaysConstraintsAggregate',
+        isCodeOnly: true,
+      );
 
   late final List<FieldMetadata<Object>> allFields = [
     id,
@@ -134,7 +134,7 @@ class _GroupFields {
     lastEdit,
     adminUsers,
     attendanceHistoryAggregate,
-    attendanceDaysConstraintsAggregate
+    attendanceDaysConstraintsAggregate,
   ];
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'id': id,
@@ -146,7 +146,7 @@ class _GroupFields {
     'lastEdit': lastEdit,
     'adminUsers': adminUsers,
     'attendanceHistoryAggregate': attendanceHistoryAggregate,
-    'attendanceDaysConstraintsAggregate': attendanceDaysConstraintsAggregate
+    'attendanceDaysConstraintsAggregate': attendanceDaysConstraintsAggregate,
   };
 }
 
@@ -155,48 +155,53 @@ class _GroupFields {
 // **************************************************************************
 
 Group _$GroupFromJson(Map json) => Group(
-      id: json['id'] as String? ?? '',
-      name: json['name'] as String? ?? '',
-      color: colorFromInt((json['color'] as num?)?.toInt()),
-      photoUpdatedAt: json['photoUpdatedAt'] == null
-          ? null
-          : DateTime.parse(json['photoUpdatedAt'] as String),
-      blurhash: json['blurhash'] as String?,
-      serviceId: json['serviceId'] as String?,
-      service: json['service'] == null
-          ? null
-          : Service.fromJson(Map<String, Object?>.from(json['service'] as Map)),
-      validity: dateRangeFromString(json['validity']),
-      lastEdit: json['lastEdit'] == null
-          ? null
-          : LastRecordedByInfo.fromJson(
-              Map<String, Object?>.from(json['lastEdit'] as Map)),
-      adminUsers: adminUsersFromJson(json['adminUsers'] as List?),
-      attendanceHistoryAggregate: json['attendanceHistoryAggregate'] == null
-          ? null
-          : HistoryAggregateData.fromJson(Map<String, dynamic>.from(
-              json['attendanceHistoryAggregate'] as Map)),
-      attendanceDaysConstraintsAggregate:
-          json['attendanceDaysConstraintsAggregate'] == null
-              ? null
-              : HistoryAggregateData.fromJson(Map<String, dynamic>.from(
-                  json['attendanceDaysConstraintsAggregate'] as Map)),
-      userCanEdit: json['userCanEdit'] as bool? ?? false,
-    );
+  id: json['id'] as String? ?? '',
+  name: json['name'] as String? ?? '',
+  color: colorFromInt((json['color'] as num?)?.toInt()),
+  photoUpdatedAt: json['photoUpdatedAt'] == null
+      ? null
+      : DateTime.parse(json['photoUpdatedAt'] as String),
+  blurhash: json['blurhash'] as String?,
+  serviceId: json['serviceId'] as String?,
+  service: json['service'] == null
+      ? null
+      : Service.fromJson(Map<String, Object?>.from(json['service'] as Map)),
+  validity: dateRangeFromString(json['validity']),
+  lastEdit: json['lastEdit'] == null
+      ? null
+      : LastRecordedByInfo.fromJson(
+          Map<String, Object?>.from(json['lastEdit'] as Map),
+        ),
+  adminUsers: adminUsersFromJson(json['adminUsers'] as List?),
+  attendanceHistoryAggregate: json['attendanceHistoryAggregate'] == null
+      ? null
+      : HistoryAggregateData.fromJson(
+          Map<String, dynamic>.from(json['attendanceHistoryAggregate'] as Map),
+        ),
+  attendanceDaysConstraintsAggregate:
+      json['attendanceDaysConstraintsAggregate'] == null
+      ? null
+      : HistoryAggregateData.fromJson(
+          Map<String, dynamic>.from(
+            json['attendanceDaysConstraintsAggregate'] as Map,
+          ),
+        ),
+  userCanEdit: json['userCanEdit'] as bool? ?? false,
+);
 
 Map<String, dynamic> _$GroupToJson(Group instance) => <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
-      'color': colorToInt(instance.color),
-      'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
-      'blurhash': instance.blurhash,
-      'serviceId': instance.serviceId,
-      'service': instance.service?.toJson(),
-      'validity': dateRangeToString(instance.validity),
-      'lastEdit': instance.lastEdit?.toJson(),
-      'adminUsers': adminUsersToJson(instance.adminUsers),
-      'attendanceHistoryAggregate':
-          instance.attendanceHistoryAggregate?.toJson(),
-      'attendanceDaysConstraintsAggregate':
-          instance.attendanceDaysConstraintsAggregate?.toJson(),
-    };
+  'id': instance.id,
+  'name': instance.name,
+  'color': colorToInt(instance.color),
+  'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+  'blurhash': instance.blurhash,
+  'serviceId': instance.serviceId,
+  'service': instance.service?.toJson(),
+  'validity': dateRangeToString(instance.validity),
+  'lastEdit': instance.lastEdit?.toJson(),
+  'adminUsers': adminUsersToJson(instance.adminUsers),
+  'attendanceHistoryAggregate': instance.attendanceHistoryAggregate?.toJson(),
+  'attendanceDaysConstraintsAggregate': instance
+      .attendanceDaysConstraintsAggregate
+      ?.toJson(),
+};

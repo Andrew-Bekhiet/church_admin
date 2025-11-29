@@ -23,19 +23,19 @@ import 'package:mockito/src/dummies.dart' as _i4;
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
+// ignore_for_file: invalid_use_of_internal_member
 
 /// A class which mocks [Initializer].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockInitializer extends _i1.Mock implements _i2.Initializer {
   @override
-  _i3.Future<void>? initialize() => (super.noSuchMethod(
-        Invocation.method(
-          #initialize,
-          [],
-        ),
-        returnValueForMissingStub: _i3.Future<void>.value(),
-      ) as _i3.Future<void>?);
+  _i3.Future<void>? initialize() =>
+      (super.noSuchMethod(
+            Invocation.method(#initialize, []),
+            returnValueForMissingStub: _i3.Future<void>.value(),
+          )
+          as _i3.Future<void>?);
 }
 
 /// A class which mocks [AuthBloc].
@@ -43,191 +43,157 @@ class MockInitializer extends _i1.Mock implements _i2.Initializer {
 /// See the documentation for Mockito's code generation for more information.
 class MockAuthBloc extends _i1.Mock implements _i2.AuthBloc {
   @override
-  bool get isSignedIn => (super.noSuchMethod(
-        Invocation.getter(#isSignedIn),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
+  bool get isSignedIn =>
+      (super.noSuchMethod(
+            Invocation.getter(#isSignedIn),
+            returnValue: false,
+            returnValueForMissingStub: false,
+          )
+          as bool);
 
   @override
-  _i3.Stream<_i2.AuthUser?> get userStream => (super.noSuchMethod(
-        Invocation.getter(#userStream),
-        returnValue: _i3.Stream<_i2.AuthUser?>.empty(),
-        returnValueForMissingStub: _i3.Stream<_i2.AuthUser?>.empty(),
-      ) as _i3.Stream<_i2.AuthUser?>);
+  _i3.Stream<_i2.AuthUser?> get userStream =>
+      (super.noSuchMethod(
+            Invocation.getter(#userStream),
+            returnValue: _i3.Stream<_i2.AuthUser?>.empty(),
+            returnValueForMissingStub: _i3.Stream<_i2.AuthUser?>.empty(),
+          )
+          as _i3.Stream<_i2.AuthUser?>);
 
   @override
-  _i3.Stream<_i2.User?> get userDataStream => (super.noSuchMethod(
-        Invocation.getter(#userDataStream),
-        returnValue: _i3.Stream<_i2.User?>.empty(),
-        returnValueForMissingStub: _i3.Stream<_i2.User?>.empty(),
-      ) as _i3.Stream<_i2.User?>);
+  _i3.Stream<_i2.User?> get userDataStream =>
+      (super.noSuchMethod(
+            Invocation.getter(#userDataStream),
+            returnValue: _i3.Stream<_i2.User?>.empty(),
+            returnValueForMissingStub: _i3.Stream<_i2.User?>.empty(),
+          )
+          as _i3.Stream<_i2.User?>);
 
   @override
-  _i3.Stream<String?> get idTokenStream => (super.noSuchMethod(
-        Invocation.getter(#idTokenStream),
-        returnValue: _i3.Stream<String?>.empty(),
-        returnValueForMissingStub: _i3.Stream<String?>.empty(),
-      ) as _i3.Stream<String?>);
+  _i3.Stream<String?> get idTokenStream =>
+      (super.noSuchMethod(
+            Invocation.getter(#idTokenStream),
+            returnValue: _i3.Stream<String?>.empty(),
+            returnValueForMissingStub: _i3.Stream<String?>.empty(),
+          )
+          as _i3.Stream<String?>);
 
   @override
-  _i3.Stream<bool> get isSignedInStream => (super.noSuchMethod(
-        Invocation.getter(#isSignedInStream),
-        returnValue: _i3.Stream<bool>.empty(),
-        returnValueForMissingStub: _i3.Stream<bool>.empty(),
-      ) as _i3.Stream<bool>);
+  _i3.Stream<bool> get isSignedInStream =>
+      (super.noSuchMethod(
+            Invocation.getter(#isSignedInStream),
+            returnValue: _i3.Stream<bool>.empty(),
+            returnValueForMissingStub: _i3.Stream<bool>.empty(),
+          )
+          as _i3.Stream<bool>);
 
   @override
-  _i3.Future<void> get loaded => (super.noSuchMethod(
-        Invocation.getter(#loaded),
-        returnValue: _i3.Future<void>.value(),
-        returnValueForMissingStub: _i3.Future<void>.value(),
-      ) as _i3.Future<void>);
+  _i3.Future<void> get loaded =>
+      (super.noSuchMethod(
+            Invocation.getter(#loaded),
+            returnValue: _i3.Future<void>.value(),
+            returnValueForMissingStub: _i3.Future<void>.value(),
+          )
+          as _i3.Future<void>);
 
   @override
-  _i2.AuthState get state => (super.noSuchMethod(
-        Invocation.getter(#state),
-        returnValue: _i4.dummyValue<_i2.AuthState>(
-          this,
-          Invocation.getter(#state),
-        ),
-        returnValueForMissingStub: _i4.dummyValue<_i2.AuthState>(
-          this,
-          Invocation.getter(#state),
-        ),
-      ) as _i2.AuthState);
+  _i2.AuthState get state =>
+      (super.noSuchMethod(
+            Invocation.getter(#state),
+            returnValue: _i4.dummyValue<_i2.AuthState>(
+              this,
+              Invocation.getter(#state),
+            ),
+            returnValueForMissingStub: _i4.dummyValue<_i2.AuthState>(
+              this,
+              Invocation.getter(#state),
+            ),
+          )
+          as _i2.AuthState);
 
   @override
-  _i3.Stream<_i2.AuthState> get stream => (super.noSuchMethod(
-        Invocation.getter(#stream),
-        returnValue: _i3.Stream<_i2.AuthState>.empty(),
-        returnValueForMissingStub: _i3.Stream<_i2.AuthState>.empty(),
-      ) as _i3.Stream<_i2.AuthState>);
+  _i3.Stream<_i2.AuthState> get stream =>
+      (super.noSuchMethod(
+            Invocation.getter(#stream),
+            returnValue: _i3.Stream<_i2.AuthState>.empty(),
+            returnValueForMissingStub: _i3.Stream<_i2.AuthState>.empty(),
+          )
+          as _i3.Stream<_i2.AuthState>);
 
   @override
-  bool get isClosed => (super.noSuchMethod(
-        Invocation.getter(#isClosed),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
+  bool get isClosed =>
+      (super.noSuchMethod(
+            Invocation.getter(#isClosed),
+            returnValue: false,
+            returnValueForMissingStub: false,
+          )
+          as bool);
 
   @override
-  _i3.Future<void> close() => (super.noSuchMethod(
-        Invocation.method(
-          #close,
-          [],
-        ),
-        returnValue: _i3.Future<void>.value(),
-        returnValueForMissingStub: _i3.Future<void>.value(),
-      ) as _i3.Future<void>);
+  _i3.Future<void> close() =>
+      (super.noSuchMethod(
+            Invocation.method(#close, []),
+            returnValue: _i3.Future<void>.value(),
+            returnValueForMissingStub: _i3.Future<void>.value(),
+          )
+          as _i3.Future<void>);
 
   @override
   void add(_i2.AuthEvent? event) => super.noSuchMethod(
-        Invocation.method(
-          #add,
-          [event],
-        ),
-        returnValueForMissingStub: null,
-      );
+    Invocation.method(#add, [event]),
+    returnValueForMissingStub: null,
+  );
 
   @override
   void onEvent(_i2.AuthEvent? event) => super.noSuchMethod(
-        Invocation.method(
-          #onEvent,
-          [event],
-        ),
-        returnValueForMissingStub: null,
-      );
+    Invocation.method(#onEvent, [event]),
+    returnValueForMissingStub: null,
+  );
 
   @override
   void emit(_i2.AuthState? state) => super.noSuchMethod(
-        Invocation.method(
-          #emit,
-          [state],
-        ),
-        returnValueForMissingStub: null,
-      );
+    Invocation.method(#emit, [state]),
+    returnValueForMissingStub: null,
+  );
 
   @override
   void on<E extends _i2.AuthEvent>(
     _i5.EventHandler<E, _i2.AuthState>? handler, {
     _i5.EventTransformer<E>? transformer,
-  }) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #on,
-          [handler],
-          {#transformer: transformer},
-        ),
-        returnValueForMissingStub: null,
-      );
+  }) => super.noSuchMethod(
+    Invocation.method(#on, [handler], {#transformer: transformer}),
+    returnValueForMissingStub: null,
+  );
 
   @override
   void onTransition(_i5.Transition<_i2.AuthEvent, _i2.AuthState>? transition) =>
       super.noSuchMethod(
-        Invocation.method(
-          #onTransition,
-          [transition],
-        ),
+        Invocation.method(#onTransition, [transition]),
         returnValueForMissingStub: null,
       );
 
   @override
-  void onDone(
-    _i2.AuthEvent? event, [
-    Object? error,
-    StackTrace? stackTrace,
-  ]) =>
+  void onDone(_i2.AuthEvent? event, [Object? error, StackTrace? stackTrace]) =>
       super.noSuchMethod(
-        Invocation.method(
-          #onDone,
-          [
-            event,
-            error,
-            stackTrace,
-          ],
-        ),
+        Invocation.method(#onDone, [event, error, stackTrace]),
         returnValueForMissingStub: null,
       );
 
   @override
   void onChange(_i5.Change<_i2.AuthState>? change) => super.noSuchMethod(
-        Invocation.method(
-          #onChange,
-          [change],
-        ),
-        returnValueForMissingStub: null,
-      );
+    Invocation.method(#onChange, [change]),
+    returnValueForMissingStub: null,
+  );
 
   @override
-  void addError(
-    Object? error, [
-    StackTrace? stackTrace,
-  ]) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #addError,
-          [
-            error,
-            stackTrace,
-          ],
-        ),
-        returnValueForMissingStub: null,
-      );
+  void addError(Object? error, [StackTrace? stackTrace]) => super.noSuchMethod(
+    Invocation.method(#addError, [error, stackTrace]),
+    returnValueForMissingStub: null,
+  );
 
   @override
-  void onError(
-    Object? error,
-    StackTrace? stackTrace,
-  ) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #onError,
-          [
-            error,
-            stackTrace,
-          ],
-        ),
-        returnValueForMissingStub: null,
-      );
+  void onError(Object? error, StackTrace? stackTrace) => super.noSuchMethod(
+    Invocation.method(#onError, [error, stackTrace]),
+    returnValueForMissingStub: null,
+  );
 }

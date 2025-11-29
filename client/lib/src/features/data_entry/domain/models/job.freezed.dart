@@ -14,68 +14,65 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$Job {
-  String get id;
-  String get name;
 
-  /// Create a copy of Job
-  /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @pragma('vm:prefer-inline')
-  $JobCopyWith<Job> get copyWith =>
-      _$JobCopyWithImpl<Job>(this as Job, _$identity);
+ String get id; String get name;
+/// Create a copy of Job
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$JobCopyWith<Job> get copyWith => _$JobCopyWithImpl<Job>(this as Job, _$identity);
 
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is Job &&
-            (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name));
-  }
 
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  @override
-  int get hashCode => Object.hash(runtimeType, id, name);
 
-  @override
-  String toString() {
-    return 'Job(id: $id, name: $name)';
-  }
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Job&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name));
+}
+
+@JsonKey(includeFromJson: false, includeToJson: false)
+@override
+int get hashCode => Object.hash(runtimeType,id,name);
+
+@override
+String toString() {
+  return 'Job(id: $id, name: $name)';
+}
+
+
 }
 
 /// @nodoc
-abstract mixin class $JobCopyWith<$Res> {
+abstract mixin class $JobCopyWith<$Res>  {
   factory $JobCopyWith(Job value, $Res Function(Job) _then) = _$JobCopyWithImpl;
-  @useResult
-  $Res call({String id, String name});
-}
+@useResult
+$Res call({
+ String id, String name
+});
 
+
+
+
+}
 /// @nodoc
-class _$JobCopyWithImpl<$Res> implements $JobCopyWith<$Res> {
+class _$JobCopyWithImpl<$Res>
+    implements $JobCopyWith<$Res> {
   _$JobCopyWithImpl(this._self, this._then);
 
   final Job _self;
   final $Res Function(Job) _then;
 
-  /// Create a copy of Job
-  /// with the given fields replaced by the non-null parameter values.
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? id = null,
-    Object? name = null,
-  }) {
-    return _then(Job(
-      id: null == id
-          ? _self.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _self.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
-  }
+/// Create a copy of Job
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') @override $Res call({Object? id = null,Object? name = null,}) {
+  return _then(Job(
+id: null == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String,name: null == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String,
+  ));
 }
+
+}
+
+
 
 // dart format on

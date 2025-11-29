@@ -59,14 +59,14 @@ class _PersonTypeFields {
     name,
     order,
     isFamilyAdmin,
-    isHidden
+    isHidden,
   ];
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'id': id,
     'name': name,
     'order': order,
     'isFamilyAdmin': isFamilyAdmin,
-    'isHidden': isHidden
+    'isHidden': isHidden,
   };
 }
 
@@ -75,12 +75,12 @@ class _PersonTypeFields {
 // **************************************************************************
 
 PersonType _$PersonTypeFromJson(Map json) => PersonType(
-      id: json['id'] as String? ?? '',
-      name: json['name'] as String? ?? '',
-      order: (json['order'] as num?)?.toInt() ?? 0,
-      isFamilyAdmin: json['isFamilyAdmin'] as bool? ?? false,
-      isHidden: json['isHidden'] as bool? ?? true,
-    );
+  id: json['id'] as String? ?? '',
+  name: json['name'] as String? ?? '',
+  order: (json['order'] as num?)?.toInt() ?? 0,
+  isFamilyAdmin: json['isFamilyAdmin'] as bool? ?? false,
+  isHidden: json['isHidden'] as bool? ?? true,
+);
 
 Map<String, dynamic> _$PersonTypeToJson(PersonType instance) =>
     <String, dynamic>{

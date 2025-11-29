@@ -2,7 +2,6 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:pub_semver/pub_semver.dart';
-import 'package:riverpod/riverpod.dart';
 import 'package:rxdart/rxdart.dart';
 
 class UpdateAvailableWidget extends StatelessWidget {

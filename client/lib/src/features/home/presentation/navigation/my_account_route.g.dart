@@ -6,23 +6,19 @@ part of 'my_account_route.dart';
 // GoRouterGenerator
 // **************************************************************************
 
-List<RouteBase> get $appRoutes => [
-      $myAccountRoute,
-    ];
+List<RouteBase> get $appRoutes => [$myAccountRoute];
 
 RouteBase get $myAccountRoute => GoRouteData.$route(
-      path: '/my_account',
-      factory: _$MyAccountRoute._fromState,
-    );
+  path: '/my_account',
+  factory: $MyAccountRoute._fromState,
+);
 
-mixin _$MyAccountRoute on GoRouteData {
+mixin $MyAccountRoute on GoRouteData {
   static MyAccountRoute _fromState(GoRouterState state) =>
       const MyAccountRoute();
 
   @override
-  String get location => GoRouteData.$location(
-        '/my_account',
-      );
+  String get location => GoRouteData.$location('/my_account');
 
   @override
   void go(BuildContext context) => context.go(location);

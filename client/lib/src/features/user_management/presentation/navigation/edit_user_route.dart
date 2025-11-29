@@ -6,7 +6,7 @@ import 'package:go_router/go_router.dart';
 part 'edit_user_route.g.dart';
 
 @TypedGoRoute<EditUserRoute>(path: '/edit_user')
-class EditUserRoute extends GoRouteData with _$EditUserRoute {
+class EditUserRoute extends GoRouteData with $EditUserRoute {
   const EditUserRoute({required this.uid, required this.$extra});
 
   final String uid;

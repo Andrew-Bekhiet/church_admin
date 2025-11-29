@@ -6,23 +6,19 @@ part of 'outdated_feature_route.dart';
 // GoRouterGenerator
 // **************************************************************************
 
-List<RouteBase> get $appRoutes => [
-      $outdatedFeatureRoute,
-    ];
+List<RouteBase> get $appRoutes => [$outdatedFeatureRoute];
 
 RouteBase get $outdatedFeatureRoute => GoRouteData.$route(
-      path: '/outdated_feature',
-      factory: _$OutdatedFeatureRoute._fromState,
-    );
+  path: '/outdated_feature',
+  factory: $OutdatedFeatureRoute._fromState,
+);
 
-mixin _$OutdatedFeatureRoute on GoRouteData {
+mixin $OutdatedFeatureRoute on GoRouteData {
   static OutdatedFeatureRoute _fromState(GoRouterState state) =>
       const OutdatedFeatureRoute();
 
   @override
-  String get location => GoRouteData.$location(
-        '/outdated_feature',
-      );
+  String get location => GoRouteData.$location('/outdated_feature');
 
   @override
   void go(BuildContext context) => context.go(location);

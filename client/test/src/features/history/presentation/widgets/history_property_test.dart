@@ -1,13 +1,13 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:clock/clock.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/misc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:riverpod/riverpod.dart';
 import 'package:rxdart_ext/single.dart';
 import 'package:timeago/timeago.dart';
 
@@ -169,8 +169,9 @@ void main() {
 
             when(mock.hasMore).thenReturn(false);
             when(mock.pageSize).thenReturn(1);
-            when(mock.onLoadingChanged)
-                .thenAnswer((_) => BehaviorSubject.seeded(false));
+            when(
+              mock.onLoadingChanged,
+            ).thenAnswer((_) => BehaviorSubject.seeded(false));
 
             return ViewableObjectListController(objectsPaginatableStream: mock);
           },
@@ -240,8 +241,9 @@ void _setUp() {
 Override _setUpViewableObjectService() {
   final viewableObjectService = MockViewableObjectService();
 
-  when(viewableObjectService.getDefaultIconFor<Person>(any))
-      .thenReturn(Symbols.person);
+  when(
+    viewableObjectService.getDefaultIconFor<Person>(any),
+  ).thenReturn(Symbols.person);
 
   return viewableObjectServiceProvider.overrideWithValue(viewableObjectService);
 }

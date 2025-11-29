@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 part 'login_route.g.dart';
 
 @TypedGoRoute<LoginRoute>(path: '/login')
-class LoginRoute extends GoRouteData with _$LoginRoute {
+class LoginRoute extends GoRouteData with $LoginRoute {
   const LoginRoute();
 
   @override

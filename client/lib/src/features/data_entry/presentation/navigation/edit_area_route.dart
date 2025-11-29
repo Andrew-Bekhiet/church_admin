@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 part 'edit_area_route.g.dart';
 
 @TypedGoRoute<EditAreaRoute>(path: '/edit_area')
-class EditAreaRoute extends GoRouteData with _$EditAreaRoute {
+class EditAreaRoute extends GoRouteData with $EditAreaRoute {
   const EditAreaRoute({this.$extra});
 
   final Area? $extra;

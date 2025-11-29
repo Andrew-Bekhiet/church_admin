@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 part 'visits_map_route.g.dart';
 
 @TypedGoRoute<VisitsMapRoute>(path: '/visits_map')
-class VisitsMapRoute extends GoRouteData with _$VisitsMapRoute {
+class VisitsMapRoute extends GoRouteData with $VisitsMapRoute {
   const VisitsMapRoute();
 
   @override

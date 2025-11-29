@@ -26,47 +26,28 @@ import 'package:mockito/src/dummies.dart' as _i8;
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
+// ignore_for_file: invalid_use_of_internal_member
 
 class _FakeStreamSubscription_0<T1> extends _i1.SmartFake
     implements _i2.StreamSubscription<T1> {
-  _FakeStreamSubscription_0(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeStreamSubscription_0(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeFuture_1<T1> extends _i1.SmartFake implements _i2.Future<T1> {
-  _FakeFuture_1(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeFuture_1(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeGoRouter_2 extends _i1.SmartFake implements _i3.GoRouter {
-  _FakeGoRouter_2(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeGoRouter_2(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeNavigatorState_3 extends _i1.SmartFake
     implements _i4.NavigatorState {
-  _FakeNavigatorState_3(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeNavigatorState_3(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 
   @override
   String toString({_i4.DiagnosticLevel? minLevel = _i4.DiagnosticLevel.info}) =>
@@ -74,56 +55,32 @@ class _FakeNavigatorState_3 extends _i1.SmartFake
 }
 
 class _FakeGlobalKey_4<T extends _i4.State<_i4.StatefulWidget>>
-    extends _i1.SmartFake implements _i4.GlobalKey<T> {
-  _FakeGlobalKey_4(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+    extends _i1.SmartFake
+    implements _i4.GlobalKey<T> {
+  _FakeGlobalKey_4(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeIconData_5 extends _i1.SmartFake implements _i4.IconData {
-  _FakeIconData_5(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeIconData_5(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeSyncKVStore_6<T> extends _i1.SmartFake
     implements _i5.SyncKVStore<T> {
-  _FakeSyncKVStore_6(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeSyncKVStore_6(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeBaseCacheManager_7 extends _i1.SmartFake
     implements _i6.BaseCacheManager {
-  _FakeBaseCacheManager_7(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeBaseCacheManager_7(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeFile_8 extends _i1.SmartFake implements _i7.File {
-  _FakeFile_8(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeFile_8(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 /// A class which mocks [PaginatableStreamBase].
@@ -132,125 +89,148 @@ class _FakeFile_8 extends _i1.SmartFake implements _i7.File {
 class MockPaginatableStreamBase<T> extends _i1.Mock
     implements _i5.PaginatableStreamBase<T> {
   @override
-  int get pageSize => (super.noSuchMethod(
-        Invocation.getter(#pageSize),
-        returnValue: 0,
-        returnValueForMissingStub: 0,
-      ) as int);
+  int get pageSize =>
+      (super.noSuchMethod(
+            Invocation.getter(#pageSize),
+            returnValue: 0,
+            returnValueForMissingStub: 0,
+          )
+          as int);
 
   @override
-  bool get hasMore => (super.noSuchMethod(
-        Invocation.getter(#hasMore),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
+  bool get hasMore =>
+      (super.noSuchMethod(
+            Invocation.getter(#hasMore),
+            returnValue: false,
+            returnValueForMissingStub: false,
+          )
+          as bool);
 
   @override
-  int get currentPageIndex => (super.noSuchMethod(
-        Invocation.getter(#currentPageIndex),
-        returnValue: 0,
-        returnValueForMissingStub: 0,
-      ) as int);
+  int get currentPageIndex =>
+      (super.noSuchMethod(
+            Invocation.getter(#currentPageIndex),
+            returnValue: 0,
+            returnValueForMissingStub: 0,
+          )
+          as int);
 
   @override
-  List<T> get currentItems => (super.noSuchMethod(
-        Invocation.getter(#currentItems),
-        returnValue: <T>[],
-        returnValueForMissingStub: <T>[],
-      ) as List<T>);
+  List<T> get currentItems =>
+      (super.noSuchMethod(
+            Invocation.getter(#currentItems),
+            returnValue: <T>[],
+            returnValueForMissingStub: <T>[],
+          )
+          as List<T>);
 
   @override
-  bool get isLoading => (super.noSuchMethod(
-        Invocation.getter(#isLoading),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
+  bool get isLoading =>
+      (super.noSuchMethod(
+            Invocation.getter(#isLoading),
+            returnValue: false,
+            returnValueForMissingStub: false,
+          )
+          as bool);
 
   @override
-  _i2.Stream<bool> get onLoadingChanged => (super.noSuchMethod(
-        Invocation.getter(#onLoadingChanged),
-        returnValue: _i2.Stream<bool>.empty(),
-        returnValueForMissingStub: _i2.Stream<bool>.empty(),
-      ) as _i2.Stream<bool>);
+  _i2.Stream<bool> get onLoadingChanged =>
+      (super.noSuchMethod(
+            Invocation.getter(#onLoadingChanged),
+            returnValue: _i2.Stream<bool>.empty(),
+            returnValueForMissingStub: _i2.Stream<bool>.empty(),
+          )
+          as _i2.Stream<bool>);
 
   @override
-  _i2.Stream<int?> get totalCountStream => (super.noSuchMethod(
-        Invocation.getter(#totalCountStream),
-        returnValue: _i2.Stream<int?>.empty(),
-        returnValueForMissingStub: _i2.Stream<int?>.empty(),
-      ) as _i2.Stream<int?>);
+  _i2.Stream<int?> get totalCountStream =>
+      (super.noSuchMethod(
+            Invocation.getter(#totalCountStream),
+            returnValue: _i2.Stream<int?>.empty(),
+            returnValueForMissingStub: _i2.Stream<int?>.empty(),
+          )
+          as _i2.Stream<int?>);
 
   @override
-  bool get isBroadcast => (super.noSuchMethod(
-        Invocation.getter(#isBroadcast),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
+  bool get isBroadcast =>
+      (super.noSuchMethod(
+            Invocation.getter(#isBroadcast),
+            returnValue: false,
+            returnValueForMissingStub: false,
+          )
+          as bool);
 
   @override
-  _i2.Future<int> get length => (super.noSuchMethod(
-        Invocation.getter(#length),
-        returnValue: _i2.Future<int>.value(0),
-        returnValueForMissingStub: _i2.Future<int>.value(0),
-      ) as _i2.Future<int>);
+  _i2.Future<int> get length =>
+      (super.noSuchMethod(
+            Invocation.getter(#length),
+            returnValue: _i2.Future<int>.value(0),
+            returnValueForMissingStub: _i2.Future<int>.value(0),
+          )
+          as _i2.Future<int>);
 
   @override
-  _i2.Future<bool> get isEmpty => (super.noSuchMethod(
-        Invocation.getter(#isEmpty),
-        returnValue: _i2.Future<bool>.value(false),
-        returnValueForMissingStub: _i2.Future<bool>.value(false),
-      ) as _i2.Future<bool>);
+  _i2.Future<bool> get isEmpty =>
+      (super.noSuchMethod(
+            Invocation.getter(#isEmpty),
+            returnValue: _i2.Future<bool>.value(false),
+            returnValueForMissingStub: _i2.Future<bool>.value(false),
+          )
+          as _i2.Future<bool>);
 
   @override
-  _i2.Future<List<T>> get first => (super.noSuchMethod(
-        Invocation.getter(#first),
-        returnValue: _i2.Future<List<T>>.value(<T>[]),
-        returnValueForMissingStub: _i2.Future<List<T>>.value(<T>[]),
-      ) as _i2.Future<List<T>>);
+  _i2.Future<List<T>> get first =>
+      (super.noSuchMethod(
+            Invocation.getter(#first),
+            returnValue: _i2.Future<List<T>>.value(<T>[]),
+            returnValueForMissingStub: _i2.Future<List<T>>.value(<T>[]),
+          )
+          as _i2.Future<List<T>>);
 
   @override
-  _i2.Future<List<T>> get last => (super.noSuchMethod(
-        Invocation.getter(#last),
-        returnValue: _i2.Future<List<T>>.value(<T>[]),
-        returnValueForMissingStub: _i2.Future<List<T>>.value(<T>[]),
-      ) as _i2.Future<List<T>>);
+  _i2.Future<List<T>> get last =>
+      (super.noSuchMethod(
+            Invocation.getter(#last),
+            returnValue: _i2.Future<List<T>>.value(<T>[]),
+            returnValueForMissingStub: _i2.Future<List<T>>.value(<T>[]),
+          )
+          as _i2.Future<List<T>>);
 
   @override
-  _i2.Future<List<T>> get single => (super.noSuchMethod(
-        Invocation.getter(#single),
-        returnValue: _i2.Future<List<T>>.value(<T>[]),
-        returnValueForMissingStub: _i2.Future<List<T>>.value(<T>[]),
-      ) as _i2.Future<List<T>>);
+  _i2.Future<List<T>> get single =>
+      (super.noSuchMethod(
+            Invocation.getter(#single),
+            returnValue: _i2.Future<List<T>>.value(<T>[]),
+            returnValueForMissingStub: _i2.Future<List<T>>.value(<T>[]),
+          )
+          as _i2.Future<List<T>>);
 
   @override
-  _i2.Future<void> listenToPage(int? pageIndex) => (super.noSuchMethod(
-        Invocation.method(
-          #listenToPage,
-          [pageIndex],
-        ),
-        returnValue: _i2.Future<void>.value(),
-        returnValueForMissingStub: _i2.Future<void>.value(),
-      ) as _i2.Future<void>);
+  _i2.Future<void> listenToPage(int? pageIndex) =>
+      (super.noSuchMethod(
+            Invocation.method(#listenToPage, [pageIndex]),
+            returnValue: _i2.Future<void>.value(),
+            returnValueForMissingStub: _i2.Future<void>.value(),
+          )
+          as _i2.Future<void>);
 
   @override
-  _i2.Future<void> listenToNextPage() => (super.noSuchMethod(
-        Invocation.method(
-          #listenToNextPage,
-          [],
-        ),
-        returnValue: _i2.Future<void>.value(),
-        returnValueForMissingStub: _i2.Future<void>.value(),
-      ) as _i2.Future<void>);
+  _i2.Future<void> listenToNextPage() =>
+      (super.noSuchMethod(
+            Invocation.method(#listenToNextPage, []),
+            returnValue: _i2.Future<void>.value(),
+            returnValueForMissingStub: _i2.Future<void>.value(),
+          )
+          as _i2.Future<void>);
 
   @override
-  _i2.Future<void> dispose() => (super.noSuchMethod(
-        Invocation.method(
-          #dispose,
-          [],
-        ),
-        returnValue: _i2.Future<void>.value(),
-        returnValueForMissingStub: _i2.Future<void>.value(),
-      ) as _i2.Future<void>);
+  _i2.Future<void> dispose() =>
+      (super.noSuchMethod(
+            Invocation.method(#dispose, []),
+            returnValue: _i2.Future<void>.value(),
+            returnValueForMissingStub: _i2.Future<void>.value(),
+          )
+          as _i2.Future<void>);
 
   @override
   _i2.Stream<List<T>> asBroadcastStream({
@@ -258,17 +238,14 @@ class MockPaginatableStreamBase<T> extends _i1.Mock
     void Function(_i2.StreamSubscription<List<T>>)? onCancel,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #asBroadcastStream,
-          [],
-          {
-            #onListen: onListen,
-            #onCancel: onCancel,
-          },
-        ),
-        returnValue: _i2.Stream<List<T>>.empty(),
-        returnValueForMissingStub: _i2.Stream<List<T>>.empty(),
-      ) as _i2.Stream<List<T>>);
+            Invocation.method(#asBroadcastStream, [], {
+              #onListen: onListen,
+              #onCancel: onCancel,
+            }),
+            returnValue: _i2.Stream<List<T>>.empty(),
+            returnValueForMissingStub: _i2.Stream<List<T>>.empty(),
+          )
+          as _i2.Stream<List<T>>);
 
   @override
   _i2.StreamSubscription<List<T>> listen(
@@ -278,83 +255,77 @@ class MockPaginatableStreamBase<T> extends _i1.Mock
     bool? cancelOnError,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #listen,
-          [onData],
-          {
-            #onError: onError,
-            #onDone: onDone,
-            #cancelOnError: cancelOnError,
-          },
-        ),
-        returnValue: _FakeStreamSubscription_0<List<T>>(
-          this,
-          Invocation.method(
-            #listen,
-            [onData],
-            {
-              #onError: onError,
-              #onDone: onDone,
-              #cancelOnError: cancelOnError,
-            },
-          ),
-        ),
-        returnValueForMissingStub: _FakeStreamSubscription_0<List<T>>(
-          this,
-          Invocation.method(
-            #listen,
-            [onData],
-            {
-              #onError: onError,
-              #onDone: onDone,
-              #cancelOnError: cancelOnError,
-            },
-          ),
-        ),
-      ) as _i2.StreamSubscription<List<T>>);
+            Invocation.method(
+              #listen,
+              [onData],
+              {
+                #onError: onError,
+                #onDone: onDone,
+                #cancelOnError: cancelOnError,
+              },
+            ),
+            returnValue: _FakeStreamSubscription_0<List<T>>(
+              this,
+              Invocation.method(
+                #listen,
+                [onData],
+                {
+                  #onError: onError,
+                  #onDone: onDone,
+                  #cancelOnError: cancelOnError,
+                },
+              ),
+            ),
+            returnValueForMissingStub: _FakeStreamSubscription_0<List<T>>(
+              this,
+              Invocation.method(
+                #listen,
+                [onData],
+                {
+                  #onError: onError,
+                  #onDone: onDone,
+                  #cancelOnError: cancelOnError,
+                },
+              ),
+            ),
+          )
+          as _i2.StreamSubscription<List<T>>);
 
   @override
   _i2.Stream<List<T>> where(bool Function(List<T>)? test) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #where,
-          [test],
-        ),
-        returnValue: _i2.Stream<List<T>>.empty(),
-        returnValueForMissingStub: _i2.Stream<List<T>>.empty(),
-      ) as _i2.Stream<List<T>>);
+            Invocation.method(#where, [test]),
+            returnValue: _i2.Stream<List<T>>.empty(),
+            returnValueForMissingStub: _i2.Stream<List<T>>.empty(),
+          )
+          as _i2.Stream<List<T>>);
 
   @override
-  _i2.Stream<S> map<S>(S Function(List<T>)? convert) => (super.noSuchMethod(
-        Invocation.method(
-          #map,
-          [convert],
-        ),
-        returnValue: _i2.Stream<S>.empty(),
-        returnValueForMissingStub: _i2.Stream<S>.empty(),
-      ) as _i2.Stream<S>);
+  _i2.Stream<S> map<S>(S Function(List<T>)? convert) =>
+      (super.noSuchMethod(
+            Invocation.method(#map, [convert]),
+            returnValue: _i2.Stream<S>.empty(),
+            returnValueForMissingStub: _i2.Stream<S>.empty(),
+          )
+          as _i2.Stream<S>);
 
   @override
   _i2.Stream<E> asyncMap<E>(_i2.FutureOr<E> Function(List<T>)? convert) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #asyncMap,
-          [convert],
-        ),
-        returnValue: _i2.Stream<E>.empty(),
-        returnValueForMissingStub: _i2.Stream<E>.empty(),
-      ) as _i2.Stream<E>);
+            Invocation.method(#asyncMap, [convert]),
+            returnValue: _i2.Stream<E>.empty(),
+            returnValueForMissingStub: _i2.Stream<E>.empty(),
+          )
+          as _i2.Stream<E>);
 
   @override
   _i2.Stream<E> asyncExpand<E>(_i2.Stream<E>? Function(List<T>)? convert) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #asyncExpand,
-          [convert],
-        ),
-        returnValue: _i2.Stream<E>.empty(),
-        returnValueForMissingStub: _i2.Stream<E>.empty(),
-      ) as _i2.Stream<E>);
+            Invocation.method(#asyncExpand, [convert]),
+            returnValue: _i2.Stream<E>.empty(),
+            returnValueForMissingStub: _i2.Stream<E>.empty(),
+          )
+          as _i2.Stream<E>);
 
   @override
   _i2.Stream<List<T>> handleError(
@@ -362,320 +333,242 @@ class MockPaginatableStreamBase<T> extends _i1.Mock
     bool Function(dynamic)? test,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #handleError,
-          [onError],
-          {#test: test},
-        ),
-        returnValue: _i2.Stream<List<T>>.empty(),
-        returnValueForMissingStub: _i2.Stream<List<T>>.empty(),
-      ) as _i2.Stream<List<T>>);
+            Invocation.method(#handleError, [onError], {#test: test}),
+            returnValue: _i2.Stream<List<T>>.empty(),
+            returnValueForMissingStub: _i2.Stream<List<T>>.empty(),
+          )
+          as _i2.Stream<List<T>>);
 
   @override
   _i2.Stream<S> expand<S>(Iterable<S> Function(List<T>)? convert) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #expand,
-          [convert],
-        ),
-        returnValue: _i2.Stream<S>.empty(),
-        returnValueForMissingStub: _i2.Stream<S>.empty(),
-      ) as _i2.Stream<S>);
+            Invocation.method(#expand, [convert]),
+            returnValue: _i2.Stream<S>.empty(),
+            returnValueForMissingStub: _i2.Stream<S>.empty(),
+          )
+          as _i2.Stream<S>);
 
   @override
   _i2.Future<dynamic> pipe(_i2.StreamConsumer<List<T>>? streamConsumer) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #pipe,
-          [streamConsumer],
-        ),
-        returnValue: _i2.Future<dynamic>.value(),
-        returnValueForMissingStub: _i2.Future<dynamic>.value(),
-      ) as _i2.Future<dynamic>);
+            Invocation.method(#pipe, [streamConsumer]),
+            returnValue: _i2.Future<dynamic>.value(),
+            returnValueForMissingStub: _i2.Future<dynamic>.value(),
+          )
+          as _i2.Future<dynamic>);
 
   @override
   _i2.Stream<S> transform<S>(
-          _i2.StreamTransformer<List<T>, S>? streamTransformer) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #transform,
-          [streamTransformer],
-        ),
-        returnValue: _i2.Stream<S>.empty(),
-        returnValueForMissingStub: _i2.Stream<S>.empty(),
-      ) as _i2.Stream<S>);
-
-  @override
-  _i2.Future<List<T>> reduce(
-          List<T> Function(
-            List<T>,
-            List<T>,
-          )? combine) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #reduce,
-          [combine],
-        ),
-        returnValue: _i2.Future<List<T>>.value(<T>[]),
-        returnValueForMissingStub: _i2.Future<List<T>>.value(<T>[]),
-      ) as _i2.Future<List<T>>);
-
-  @override
-  _i2.Future<S> fold<S>(
-    S? initialValue,
-    S Function(
-      S,
-      List<T>,
-    )? combine,
+    _i2.StreamTransformer<List<T>, S>? streamTransformer,
   ) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #fold,
-          [
-            initialValue,
-            combine,
-          ],
-        ),
-        returnValue: _i8.ifNotNull(
-              _i8.dummyValueOrNull<S>(
-                this,
-                Invocation.method(
-                  #fold,
-                  [
-                    initialValue,
-                    combine,
-                  ],
-                ),
-              ),
-              (S v) => _i2.Future<S>.value(v),
-            ) ??
-            _FakeFuture_1<S>(
-              this,
-              Invocation.method(
-                #fold,
-                [
-                  initialValue,
-                  combine,
-                ],
-              ),
-            ),
-        returnValueForMissingStub: _i8.ifNotNull(
-              _i8.dummyValueOrNull<S>(
-                this,
-                Invocation.method(
-                  #fold,
-                  [
-                    initialValue,
-                    combine,
-                  ],
-                ),
-              ),
-              (S v) => _i2.Future<S>.value(v),
-            ) ??
-            _FakeFuture_1<S>(
-              this,
-              Invocation.method(
-                #fold,
-                [
-                  initialValue,
-                  combine,
-                ],
-              ),
-            ),
-      ) as _i2.Future<S>);
+            Invocation.method(#transform, [streamTransformer]),
+            returnValue: _i2.Stream<S>.empty(),
+            returnValueForMissingStub: _i2.Stream<S>.empty(),
+          )
+          as _i2.Stream<S>);
 
   @override
-  _i2.Future<String> join([String? separator = '']) => (super.noSuchMethod(
-        Invocation.method(
-          #join,
-          [separator],
-        ),
-        returnValue: _i2.Future<String>.value(_i8.dummyValue<String>(
-          this,
-          Invocation.method(
-            #join,
-            [separator],
-          ),
-        )),
-        returnValueForMissingStub:
-            _i2.Future<String>.value(_i8.dummyValue<String>(
-          this,
-          Invocation.method(
-            #join,
-            [separator],
-          ),
-        )),
-      ) as _i2.Future<String>);
+  _i2.Future<List<T>> reduce(List<T> Function(List<T>, List<T>)? combine) =>
+      (super.noSuchMethod(
+            Invocation.method(#reduce, [combine]),
+            returnValue: _i2.Future<List<T>>.value(<T>[]),
+            returnValueForMissingStub: _i2.Future<List<T>>.value(<T>[]),
+          )
+          as _i2.Future<List<T>>);
 
   @override
-  _i2.Future<bool> contains(Object? needle) => (super.noSuchMethod(
-        Invocation.method(
-          #contains,
-          [needle],
-        ),
-        returnValue: _i2.Future<bool>.value(false),
-        returnValueForMissingStub: _i2.Future<bool>.value(false),
-      ) as _i2.Future<bool>);
+  _i2.Future<S> fold<S>(S? initialValue, S Function(S, List<T>)? combine) =>
+      (super.noSuchMethod(
+            Invocation.method(#fold, [initialValue, combine]),
+            returnValue:
+                _i8.ifNotNull(
+                  _i8.dummyValueOrNull<S>(
+                    this,
+                    Invocation.method(#fold, [initialValue, combine]),
+                  ),
+                  (S v) => _i2.Future<S>.value(v),
+                ) ??
+                _FakeFuture_1<S>(
+                  this,
+                  Invocation.method(#fold, [initialValue, combine]),
+                ),
+            returnValueForMissingStub:
+                _i8.ifNotNull(
+                  _i8.dummyValueOrNull<S>(
+                    this,
+                    Invocation.method(#fold, [initialValue, combine]),
+                  ),
+                  (S v) => _i2.Future<S>.value(v),
+                ) ??
+                _FakeFuture_1<S>(
+                  this,
+                  Invocation.method(#fold, [initialValue, combine]),
+                ),
+          )
+          as _i2.Future<S>);
+
+  @override
+  _i2.Future<String> join([String? separator = '']) =>
+      (super.noSuchMethod(
+            Invocation.method(#join, [separator]),
+            returnValue: _i2.Future<String>.value(
+              _i8.dummyValue<String>(
+                this,
+                Invocation.method(#join, [separator]),
+              ),
+            ),
+            returnValueForMissingStub: _i2.Future<String>.value(
+              _i8.dummyValue<String>(
+                this,
+                Invocation.method(#join, [separator]),
+              ),
+            ),
+          )
+          as _i2.Future<String>);
+
+  @override
+  _i2.Future<bool> contains(Object? needle) =>
+      (super.noSuchMethod(
+            Invocation.method(#contains, [needle]),
+            returnValue: _i2.Future<bool>.value(false),
+            returnValueForMissingStub: _i2.Future<bool>.value(false),
+          )
+          as _i2.Future<bool>);
 
   @override
   _i2.Future<void> forEach(void Function(List<T>)? action) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #forEach,
-          [action],
-        ),
-        returnValue: _i2.Future<void>.value(),
-        returnValueForMissingStub: _i2.Future<void>.value(),
-      ) as _i2.Future<void>);
+            Invocation.method(#forEach, [action]),
+            returnValue: _i2.Future<void>.value(),
+            returnValueForMissingStub: _i2.Future<void>.value(),
+          )
+          as _i2.Future<void>);
 
   @override
-  _i2.Future<bool> every(bool Function(List<T>)? test) => (super.noSuchMethod(
-        Invocation.method(
-          #every,
-          [test],
-        ),
-        returnValue: _i2.Future<bool>.value(false),
-        returnValueForMissingStub: _i2.Future<bool>.value(false),
-      ) as _i2.Future<bool>);
+  _i2.Future<bool> every(bool Function(List<T>)? test) =>
+      (super.noSuchMethod(
+            Invocation.method(#every, [test]),
+            returnValue: _i2.Future<bool>.value(false),
+            returnValueForMissingStub: _i2.Future<bool>.value(false),
+          )
+          as _i2.Future<bool>);
 
   @override
-  _i2.Future<bool> any(bool Function(List<T>)? test) => (super.noSuchMethod(
-        Invocation.method(
-          #any,
-          [test],
-        ),
-        returnValue: _i2.Future<bool>.value(false),
-        returnValueForMissingStub: _i2.Future<bool>.value(false),
-      ) as _i2.Future<bool>);
+  _i2.Future<bool> any(bool Function(List<T>)? test) =>
+      (super.noSuchMethod(
+            Invocation.method(#any, [test]),
+            returnValue: _i2.Future<bool>.value(false),
+            returnValueForMissingStub: _i2.Future<bool>.value(false),
+          )
+          as _i2.Future<bool>);
 
   @override
-  _i2.Stream<R> cast<R>() => (super.noSuchMethod(
-        Invocation.method(
-          #cast,
-          [],
-        ),
-        returnValue: _i2.Stream<R>.empty(),
-        returnValueForMissingStub: _i2.Stream<R>.empty(),
-      ) as _i2.Stream<R>);
+  _i2.Stream<R> cast<R>() =>
+      (super.noSuchMethod(
+            Invocation.method(#cast, []),
+            returnValue: _i2.Stream<R>.empty(),
+            returnValueForMissingStub: _i2.Stream<R>.empty(),
+          )
+          as _i2.Stream<R>);
 
   @override
-  _i2.Future<List<List<T>>> toList() => (super.noSuchMethod(
-        Invocation.method(
-          #toList,
-          [],
-        ),
-        returnValue: _i2.Future<List<List<T>>>.value(<List<T>>[]),
-        returnValueForMissingStub: _i2.Future<List<List<T>>>.value(<List<T>>[]),
-      ) as _i2.Future<List<List<T>>>);
-
-  @override
-  _i2.Future<Set<List<T>>> toSet() => (super.noSuchMethod(
-        Invocation.method(
-          #toSet,
-          [],
-        ),
-        returnValue: _i2.Future<Set<List<T>>>.value(<List<T>>{}),
-        returnValueForMissingStub: _i2.Future<Set<List<T>>>.value(<List<T>>{}),
-      ) as _i2.Future<Set<List<T>>>);
-
-  @override
-  _i2.Future<E> drain<E>([E? futureValue]) => (super.noSuchMethod(
-        Invocation.method(
-          #drain,
-          [futureValue],
-        ),
-        returnValue: _i8.ifNotNull(
-              _i8.dummyValueOrNull<E>(
-                this,
-                Invocation.method(
-                  #drain,
-                  [futureValue],
-                ),
-              ),
-              (E v) => _i2.Future<E>.value(v),
-            ) ??
-            _FakeFuture_1<E>(
-              this,
-              Invocation.method(
-                #drain,
-                [futureValue],
-              ),
+  _i2.Future<List<List<T>>> toList() =>
+      (super.noSuchMethod(
+            Invocation.method(#toList, []),
+            returnValue: _i2.Future<List<List<T>>>.value(<List<T>>[]),
+            returnValueForMissingStub: _i2.Future<List<List<T>>>.value(
+              <List<T>>[],
             ),
-        returnValueForMissingStub: _i8.ifNotNull(
-              _i8.dummyValueOrNull<E>(
-                this,
-                Invocation.method(
-                  #drain,
-                  [futureValue],
-                ),
-              ),
-              (E v) => _i2.Future<E>.value(v),
-            ) ??
-            _FakeFuture_1<E>(
-              this,
-              Invocation.method(
-                #drain,
-                [futureValue],
-              ),
-            ),
-      ) as _i2.Future<E>);
+          )
+          as _i2.Future<List<List<T>>>);
 
   @override
-  _i2.Stream<List<T>> take(int? count) => (super.noSuchMethod(
-        Invocation.method(
-          #take,
-          [count],
-        ),
-        returnValue: _i2.Stream<List<T>>.empty(),
-        returnValueForMissingStub: _i2.Stream<List<T>>.empty(),
-      ) as _i2.Stream<List<T>>);
+  _i2.Future<Set<List<T>>> toSet() =>
+      (super.noSuchMethod(
+            Invocation.method(#toSet, []),
+            returnValue: _i2.Future<Set<List<T>>>.value(<List<T>>{}),
+            returnValueForMissingStub: _i2.Future<Set<List<T>>>.value(
+              <List<T>>{},
+            ),
+          )
+          as _i2.Future<Set<List<T>>>);
+
+  @override
+  _i2.Future<E> drain<E>([E? futureValue]) =>
+      (super.noSuchMethod(
+            Invocation.method(#drain, [futureValue]),
+            returnValue:
+                _i8.ifNotNull(
+                  _i8.dummyValueOrNull<E>(
+                    this,
+                    Invocation.method(#drain, [futureValue]),
+                  ),
+                  (E v) => _i2.Future<E>.value(v),
+                ) ??
+                _FakeFuture_1<E>(
+                  this,
+                  Invocation.method(#drain, [futureValue]),
+                ),
+            returnValueForMissingStub:
+                _i8.ifNotNull(
+                  _i8.dummyValueOrNull<E>(
+                    this,
+                    Invocation.method(#drain, [futureValue]),
+                  ),
+                  (E v) => _i2.Future<E>.value(v),
+                ) ??
+                _FakeFuture_1<E>(
+                  this,
+                  Invocation.method(#drain, [futureValue]),
+                ),
+          )
+          as _i2.Future<E>);
+
+  @override
+  _i2.Stream<List<T>> take(int? count) =>
+      (super.noSuchMethod(
+            Invocation.method(#take, [count]),
+            returnValue: _i2.Stream<List<T>>.empty(),
+            returnValueForMissingStub: _i2.Stream<List<T>>.empty(),
+          )
+          as _i2.Stream<List<T>>);
 
   @override
   _i2.Stream<List<T>> takeWhile(bool Function(List<T>)? test) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #takeWhile,
-          [test],
-        ),
-        returnValue: _i2.Stream<List<T>>.empty(),
-        returnValueForMissingStub: _i2.Stream<List<T>>.empty(),
-      ) as _i2.Stream<List<T>>);
+            Invocation.method(#takeWhile, [test]),
+            returnValue: _i2.Stream<List<T>>.empty(),
+            returnValueForMissingStub: _i2.Stream<List<T>>.empty(),
+          )
+          as _i2.Stream<List<T>>);
 
   @override
-  _i2.Stream<List<T>> skip(int? count) => (super.noSuchMethod(
-        Invocation.method(
-          #skip,
-          [count],
-        ),
-        returnValue: _i2.Stream<List<T>>.empty(),
-        returnValueForMissingStub: _i2.Stream<List<T>>.empty(),
-      ) as _i2.Stream<List<T>>);
+  _i2.Stream<List<T>> skip(int? count) =>
+      (super.noSuchMethod(
+            Invocation.method(#skip, [count]),
+            returnValue: _i2.Stream<List<T>>.empty(),
+            returnValueForMissingStub: _i2.Stream<List<T>>.empty(),
+          )
+          as _i2.Stream<List<T>>);
 
   @override
   _i2.Stream<List<T>> skipWhile(bool Function(List<T>)? test) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #skipWhile,
-          [test],
-        ),
-        returnValue: _i2.Stream<List<T>>.empty(),
-        returnValueForMissingStub: _i2.Stream<List<T>>.empty(),
-      ) as _i2.Stream<List<T>>);
+            Invocation.method(#skipWhile, [test]),
+            returnValue: _i2.Stream<List<T>>.empty(),
+            returnValueForMissingStub: _i2.Stream<List<T>>.empty(),
+          )
+          as _i2.Stream<List<T>>);
 
   @override
-  _i2.Stream<List<T>> distinct(
-          [bool Function(
-            List<T>,
-            List<T>,
-          )? equals]) =>
+  _i2.Stream<List<T>> distinct([bool Function(List<T>, List<T>)? equals]) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #distinct,
-          [equals],
-        ),
-        returnValue: _i2.Stream<List<T>>.empty(),
-        returnValueForMissingStub: _i2.Stream<List<T>>.empty(),
-      ) as _i2.Stream<List<T>>);
+            Invocation.method(#distinct, [equals]),
+            returnValue: _i2.Stream<List<T>>.empty(),
+            returnValueForMissingStub: _i2.Stream<List<T>>.empty(),
+          )
+          as _i2.Stream<List<T>>);
 
   @override
   _i2.Future<List<T>> firstWhere(
@@ -683,14 +576,11 @@ class MockPaginatableStreamBase<T> extends _i1.Mock
     List<T> Function()? orElse,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #firstWhere,
-          [test],
-          {#orElse: orElse},
-        ),
-        returnValue: _i2.Future<List<T>>.value(<T>[]),
-        returnValueForMissingStub: _i2.Future<List<T>>.value(<T>[]),
-      ) as _i2.Future<List<T>>);
+            Invocation.method(#firstWhere, [test], {#orElse: orElse}),
+            returnValue: _i2.Future<List<T>>.value(<T>[]),
+            returnValueForMissingStub: _i2.Future<List<T>>.value(<T>[]),
+          )
+          as _i2.Future<List<T>>);
 
   @override
   _i2.Future<List<T>> lastWhere(
@@ -698,14 +588,11 @@ class MockPaginatableStreamBase<T> extends _i1.Mock
     List<T> Function()? orElse,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #lastWhere,
-          [test],
-          {#orElse: orElse},
-        ),
-        returnValue: _i2.Future<List<T>>.value(<T>[]),
-        returnValueForMissingStub: _i2.Future<List<T>>.value(<T>[]),
-      ) as _i2.Future<List<T>>);
+            Invocation.method(#lastWhere, [test], {#orElse: orElse}),
+            returnValue: _i2.Future<List<T>>.value(<T>[]),
+            returnValueForMissingStub: _i2.Future<List<T>>.value(<T>[]),
+          )
+          as _i2.Future<List<T>>);
 
   @override
   _i2.Future<List<T>> singleWhere(
@@ -713,24 +600,20 @@ class MockPaginatableStreamBase<T> extends _i1.Mock
     List<T> Function()? orElse,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #singleWhere,
-          [test],
-          {#orElse: orElse},
-        ),
-        returnValue: _i2.Future<List<T>>.value(<T>[]),
-        returnValueForMissingStub: _i2.Future<List<T>>.value(<T>[]),
-      ) as _i2.Future<List<T>>);
+            Invocation.method(#singleWhere, [test], {#orElse: orElse}),
+            returnValue: _i2.Future<List<T>>.value(<T>[]),
+            returnValueForMissingStub: _i2.Future<List<T>>.value(<T>[]),
+          )
+          as _i2.Future<List<T>>);
 
   @override
-  _i2.Future<List<T>> elementAt(int? index) => (super.noSuchMethod(
-        Invocation.method(
-          #elementAt,
-          [index],
-        ),
-        returnValue: _i2.Future<List<T>>.value(<T>[]),
-        returnValueForMissingStub: _i2.Future<List<T>>.value(<T>[]),
-      ) as _i2.Future<List<T>>);
+  _i2.Future<List<T>> elementAt(int? index) =>
+      (super.noSuchMethod(
+            Invocation.method(#elementAt, [index]),
+            returnValue: _i2.Future<List<T>>.value(<T>[]),
+            returnValueForMissingStub: _i2.Future<List<T>>.value(<T>[]),
+          )
+          as _i2.Future<List<T>>);
 
   @override
   _i2.Stream<List<T>> timeout(
@@ -738,14 +621,11 @@ class MockPaginatableStreamBase<T> extends _i1.Mock
     void Function(_i2.EventSink<List<T>>)? onTimeout,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #timeout,
-          [timeLimit],
-          {#onTimeout: onTimeout},
-        ),
-        returnValue: _i2.Stream<List<T>>.empty(),
-        returnValueForMissingStub: _i2.Stream<List<T>>.empty(),
-      ) as _i2.Stream<List<T>>);
+            Invocation.method(#timeout, [timeLimit], {#onTimeout: onTimeout}),
+            returnValue: _i2.Stream<List<T>>.empty(),
+            returnValueForMissingStub: _i2.Stream<List<T>>.empty(),
+          )
+          as _i2.Stream<List<T>>);
 }
 
 /// A class which mocks [ViewableObjectService].
@@ -754,52 +634,52 @@ class MockPaginatableStreamBase<T> extends _i1.Mock
 class MockViewableObjectService extends _i1.Mock
     implements _i5.ViewableObjectService {
   @override
-  _i3.GoRouter get router => (super.noSuchMethod(
-        Invocation.getter(#router),
-        returnValue: _FakeGoRouter_2(
-          this,
-          Invocation.getter(#router),
-        ),
-        returnValueForMissingStub: _FakeGoRouter_2(
-          this,
-          Invocation.getter(#router),
-        ),
-      ) as _i3.GoRouter);
+  _i3.GoRouter get router =>
+      (super.noSuchMethod(
+            Invocation.getter(#router),
+            returnValue: _FakeGoRouter_2(this, Invocation.getter(#router)),
+            returnValueForMissingStub: _FakeGoRouter_2(
+              this,
+              Invocation.getter(#router),
+            ),
+          )
+          as _i3.GoRouter);
 
   @override
-  _i4.NavigatorState get navigator => (super.noSuchMethod(
-        Invocation.getter(#navigator),
-        returnValue: _FakeNavigatorState_3(
-          this,
-          Invocation.getter(#navigator),
-        ),
-        returnValueForMissingStub: _FakeNavigatorState_3(
-          this,
-          Invocation.getter(#navigator),
-        ),
-      ) as _i4.NavigatorState);
+  _i4.NavigatorState get navigator =>
+      (super.noSuchMethod(
+            Invocation.getter(#navigator),
+            returnValue: _FakeNavigatorState_3(
+              this,
+              Invocation.getter(#navigator),
+            ),
+            returnValueForMissingStub: _FakeNavigatorState_3(
+              this,
+              Invocation.getter(#navigator),
+            ),
+          )
+          as _i4.NavigatorState);
 
   @override
-  _i4.GlobalKey<_i4.NavigatorState> get navigatorKey => (super.noSuchMethod(
-        Invocation.getter(#navigatorKey),
-        returnValue: _FakeGlobalKey_4<_i4.NavigatorState>(
-          this,
-          Invocation.getter(#navigatorKey),
-        ),
-        returnValueForMissingStub: _FakeGlobalKey_4<_i4.NavigatorState>(
-          this,
-          Invocation.getter(#navigatorKey),
-        ),
-      ) as _i4.GlobalKey<_i4.NavigatorState>);
+  _i4.GlobalKey<_i4.NavigatorState> get navigatorKey =>
+      (super.noSuchMethod(
+            Invocation.getter(#navigatorKey),
+            returnValue: _FakeGlobalKey_4<_i4.NavigatorState>(
+              this,
+              Invocation.getter(#navigatorKey),
+            ),
+            returnValueForMissingStub: _FakeGlobalKey_4<_i4.NavigatorState>(
+              this,
+              Invocation.getter(#navigatorKey),
+            ),
+          )
+          as _i4.GlobalKey<_i4.NavigatorState>);
 
   @override
   void onTap(_i5.Viewable? object) => super.noSuchMethod(
-        Invocation.method(
-          #onTap,
-          [object],
-        ),
-        returnValueForMissingStub: null,
-      );
+    Invocation.method(#onTap, [object]),
+    returnValueForMissingStub: null,
+  );
 
   @override
   String? getFormattedValue(
@@ -807,38 +687,25 @@ class MockViewableObjectService extends _i1.Mock
     _i5.FieldMetadata<Object>? field,
   ) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #getFormattedValue,
-          [
-            object,
-            field,
-          ],
-        ),
-        returnValueForMissingStub: null,
-      ) as String?);
+            Invocation.method(#getFormattedValue, [object, field]),
+            returnValueForMissingStub: null,
+          )
+          as String?);
 
   @override
   _i4.IconData getDefaultIconFor<T extends _i5.IImage>([T? imageObject]) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #getDefaultIconFor,
-          [imageObject],
-        ),
-        returnValue: _FakeIconData_5(
-          this,
-          Invocation.method(
-            #getDefaultIconFor,
-            [imageObject],
-          ),
-        ),
-        returnValueForMissingStub: _FakeIconData_5(
-          this,
-          Invocation.method(
-            #getDefaultIconFor,
-            [imageObject],
-          ),
-        ),
-      ) as _i4.IconData);
+            Invocation.method(#getDefaultIconFor, [imageObject]),
+            returnValue: _FakeIconData_5(
+              this,
+              Invocation.method(#getDefaultIconFor, [imageObject]),
+            ),
+            returnValueForMissingStub: _FakeIconData_5(
+              this,
+              Invocation.method(#getDefaultIconFor, [imageObject]),
+            ),
+          )
+          as _i4.IconData);
 }
 
 /// A class which mocks [ImageUrlCacheService].
@@ -847,116 +714,98 @@ class MockViewableObjectService extends _i1.Mock
 class MockImageUrlCacheService extends _i1.Mock
     implements _i5.ImageUrlCacheService {
   @override
-  _i5.SyncKVStore<String> get box => (super.noSuchMethod(
-        Invocation.getter(#box),
-        returnValue: _FakeSyncKVStore_6<String>(
-          this,
-          Invocation.getter(#box),
-        ),
-        returnValueForMissingStub: _FakeSyncKVStore_6<String>(
-          this,
-          Invocation.getter(#box),
-        ),
-      ) as _i5.SyncKVStore<String>);
+  _i5.SyncKVStore<String> get box =>
+      (super.noSuchMethod(
+            Invocation.getter(#box),
+            returnValue: _FakeSyncKVStore_6<String>(
+              this,
+              Invocation.getter(#box),
+            ),
+            returnValueForMissingStub: _FakeSyncKVStore_6<String>(
+              this,
+              Invocation.getter(#box),
+            ),
+          )
+          as _i5.SyncKVStore<String>);
 
   @override
-  _i6.BaseCacheManager get cacheManager => (super.noSuchMethod(
-        Invocation.getter(#cacheManager),
-        returnValue: _FakeBaseCacheManager_7(
-          this,
-          Invocation.getter(#cacheManager),
-        ),
-        returnValueForMissingStub: _FakeBaseCacheManager_7(
-          this,
-          Invocation.getter(#cacheManager),
-        ),
-      ) as _i6.BaseCacheManager);
+  _i6.BaseCacheManager get cacheManager =>
+      (super.noSuchMethod(
+            Invocation.getter(#cacheManager),
+            returnValue: _FakeBaseCacheManager_7(
+              this,
+              Invocation.getter(#cacheManager),
+            ),
+            returnValueForMissingStub: _FakeBaseCacheManager_7(
+              this,
+              Invocation.getter(#cacheManager),
+            ),
+          )
+          as _i6.BaseCacheManager);
 
   @override
   _i2.Future<_i7.File> getImageFile(_i5.ObjectImageInfo? imageInfo) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #getImageFile,
-          [imageInfo],
-        ),
-        returnValue: _i2.Future<_i7.File>.value(_FakeFile_8(
-          this,
-          Invocation.method(
-            #getImageFile,
-            [imageInfo],
-          ),
-        )),
-        returnValueForMissingStub: _i2.Future<_i7.File>.value(_FakeFile_8(
-          this,
-          Invocation.method(
-            #getImageFile,
-            [imageInfo],
-          ),
-        )),
-      ) as _i2.Future<_i7.File>);
+            Invocation.method(#getImageFile, [imageInfo]),
+            returnValue: _i2.Future<_i7.File>.value(
+              _FakeFile_8(this, Invocation.method(#getImageFile, [imageInfo])),
+            ),
+            returnValueForMissingStub: _i2.Future<_i7.File>.value(
+              _FakeFile_8(this, Invocation.method(#getImageFile, [imageInfo])),
+            ),
+          )
+          as _i2.Future<_i7.File>);
 
   @override
   _i2.Future<String> getImageUrl(_i5.ObjectImageInfo? imageObject) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #getImageUrl,
-          [imageObject],
-        ),
-        returnValue: _i2.Future<String>.value(_i8.dummyValue<String>(
-          this,
-          Invocation.method(
-            #getImageUrl,
-            [imageObject],
-          ),
-        )),
-        returnValueForMissingStub:
-            _i2.Future<String>.value(_i8.dummyValue<String>(
-          this,
-          Invocation.method(
-            #getImageUrl,
-            [imageObject],
-          ),
-        )),
-      ) as _i2.Future<String>);
+            Invocation.method(#getImageUrl, [imageObject]),
+            returnValue: _i2.Future<String>.value(
+              _i8.dummyValue<String>(
+                this,
+                Invocation.method(#getImageUrl, [imageObject]),
+              ),
+            ),
+            returnValueForMissingStub: _i2.Future<String>.value(
+              _i8.dummyValue<String>(
+                this,
+                Invocation.method(#getImageUrl, [imageObject]),
+              ),
+            ),
+          )
+          as _i2.Future<String>);
 
   @override
   String? getNonExpiredCachedImageUrl(_i5.ObjectImageInfo? imageObject) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #getNonExpiredCachedImageUrl,
-          [imageObject],
-        ),
-        returnValueForMissingStub: null,
-      ) as String?);
+            Invocation.method(#getNonExpiredCachedImageUrl, [imageObject]),
+            returnValueForMissingStub: null,
+          )
+          as String?);
 
   @override
   String? getCachedImageUrl(_i5.ObjectImageInfo? imageInfo) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #getCachedImageUrl,
-          [imageInfo],
-        ),
-        returnValueForMissingStub: null,
-      ) as String?);
+            Invocation.method(#getCachedImageUrl, [imageInfo]),
+            returnValueForMissingStub: null,
+          )
+          as String?);
 
   @override
   _i2.Future<bool> isUrlFileCachedAndValid(String? cacheKey) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #isUrlFileCachedAndValid,
-          [cacheKey],
-        ),
-        returnValue: _i2.Future<bool>.value(false),
-        returnValueForMissingStub: _i2.Future<bool>.value(false),
-      ) as _i2.Future<bool>);
+            Invocation.method(#isUrlFileCachedAndValid, [cacheKey]),
+            returnValue: _i2.Future<bool>.value(false),
+            returnValueForMissingStub: _i2.Future<bool>.value(false),
+          )
+          as _i2.Future<bool>);
 
   @override
-  bool isUrlExpired(String? url) => (super.noSuchMethod(
-        Invocation.method(
-          #isUrlExpired,
-          [url],
-        ),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
+  bool isUrlExpired(String? url) =>
+      (super.noSuchMethod(
+            Invocation.method(#isUrlExpired, [url]),
+            returnValue: false,
+            returnValueForMissingStub: false,
+          )
+          as bool);
 }

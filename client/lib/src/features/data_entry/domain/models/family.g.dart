@@ -54,7 +54,7 @@ class _FamilyFields {
       ...DateTimeOperator.values,
       ...DateRangeOperator.values,
       PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
+      PrimitiveOperator.isNotNull,
     },
   );
 
@@ -67,7 +67,7 @@ class _FamilyFields {
     operators: {
       ...StringOperator.values,
       PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
+      PrimitiveOperator.isNotNull,
     },
   );
 
@@ -80,7 +80,7 @@ class _FamilyFields {
     operators: {
       ...MultiSelectOperator.values,
       PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
+      PrimitiveOperator.isNotNull,
     },
   );
 
@@ -93,7 +93,7 @@ class _FamilyFields {
     operators: {
       ...StringOperator.values,
       PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
+      PrimitiveOperator.isNotNull,
     },
   );
 
@@ -106,7 +106,7 @@ class _FamilyFields {
     operators: {
       ...ColorOperator.values,
       PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
+      PrimitiveOperator.isNotNull,
     },
   );
 
@@ -120,19 +120,19 @@ class _FamilyFields {
       ...DateTimeOperator.values,
       ...DateRangeOperator.values,
       PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
+      PrimitiveOperator.isNotNull,
     },
   );
 
   final FieldMetadata<FamiliesFamilies> childrenRel =
       FieldMetadata<FamiliesFamilies>(
-    getValue: (obj) => obj is Family ? obj.children : null,
-    parentType: Family,
-    name: 'children',
-    label: 'children',
-    isCodeOnly: true,
-    isOrderable: false,
-  );
+        getValue: (obj) => obj is Family ? obj.children : null,
+        parentType: Family,
+        name: 'children',
+        label: 'children',
+        isCodeOnly: true,
+        isOrderable: false,
+      );
 
   late final FieldMetadata<Family> children = childrenRel.redirectTo(
     FamiliesFamiliesFields().child,
@@ -142,13 +142,13 @@ class _FamilyFields {
 
   final FieldMetadata<FamiliesFamilies> parentsRel =
       FieldMetadata<FamiliesFamilies>(
-    getValue: (obj) => obj is Family ? obj.parents : null,
-    parentType: Family,
-    name: 'parents',
-    label: 'parents',
-    isCodeOnly: true,
-    isOrderable: false,
-  );
+        getValue: (obj) => obj is Family ? obj.parents : null,
+        parentType: Family,
+        name: 'parents',
+        label: 'parents',
+        isCodeOnly: true,
+        isOrderable: false,
+      );
 
   late final FieldMetadata<Family> parents = parentsRel.redirectTo(
     FamiliesFamiliesFields().parent,
@@ -158,45 +158,45 @@ class _FamilyFields {
 
   final FieldMetadata<LastRecordedByInfo> lastEdit =
       FieldMetadata<LastRecordedByInfo>(
-    getValue: (obj) => obj is Family ? obj.lastEdit : null,
-    parentType: Family,
-    name: 'lastEdit',
-    label: 'أخر تحديث البيانات',
-    isCodeOnly: false,
-    operators: {
-      ...MultiSelectOperator.values,
-      PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
-    },
-  );
+        getValue: (obj) => obj is Family ? obj.lastEdit : null,
+        parentType: Family,
+        name: 'lastEdit',
+        label: 'أخر تحديث البيانات',
+        isCodeOnly: false,
+        operators: {
+          ...MultiSelectOperator.values,
+          PrimitiveOperator.isNull,
+          PrimitiveOperator.isNotNull,
+        },
+      );
 
   final FieldMetadata<LastRecordedByInfo> lastVisit =
       FieldMetadata<LastRecordedByInfo>(
-    getValue: (obj) => obj is Family ? obj.lastVisit : null,
-    parentType: Family,
-    name: 'lastVisit',
-    label: 'أخر افتقاد',
-    isCodeOnly: false,
-    operators: {
-      ...MultiSelectOperator.values,
-      PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
-    },
-  );
+        getValue: (obj) => obj is Family ? obj.lastVisit : null,
+        parentType: Family,
+        name: 'lastVisit',
+        label: 'أخر افتقاد',
+        isCodeOnly: false,
+        operators: {
+          ...MultiSelectOperator.values,
+          PrimitiveOperator.isNull,
+          PrimitiveOperator.isNotNull,
+        },
+      );
 
   final FieldMetadata<LastRecordedByInfo> lastFatherVisit =
       FieldMetadata<LastRecordedByInfo>(
-    getValue: (obj) => obj is Family ? obj.lastFatherVisit : null,
-    parentType: Family,
-    name: 'lastFatherVisit',
-    label: 'آخر افتقاد للأب الكاهن',
-    isCodeOnly: false,
-    operators: {
-      ...MultiSelectOperator.values,
-      PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
-    },
-  );
+        getValue: (obj) => obj is Family ? obj.lastFatherVisit : null,
+        parentType: Family,
+        name: 'lastFatherVisit',
+        label: 'آخر افتقاد للأب الكاهن',
+        isCodeOnly: false,
+        operators: {
+          ...MultiSelectOperator.values,
+          PrimitiveOperator.isNull,
+          PrimitiveOperator.isNotNull,
+        },
+      );
 
   final FieldMetadata<Point> geolocation = FieldMetadata<Point>(
     getValue: (obj) => obj is Family ? obj.geolocation : null,
@@ -207,7 +207,7 @@ class _FamilyFields {
     operators: {
       ...SpatialOperator.values,
       PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
+      PrimitiveOperator.isNotNull,
     },
   );
 
@@ -227,7 +227,7 @@ class _FamilyFields {
     lastEdit,
     lastVisit,
     lastFatherVisit,
-    geolocation
+    geolocation,
   ];
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'id': id,
@@ -245,7 +245,7 @@ class _FamilyFields {
     'lastEdit': lastEdit,
     'lastVisit': lastVisit,
     'lastFatherVisit': lastFatherVisit,
-    'geolocation': geolocation
+    'geolocation': geolocation,
   };
 }
 
@@ -254,66 +254,70 @@ class _FamilyFields {
 // **************************************************************************
 
 Family _$FamilyFromJson(Map json) => Family(
-      id: json['id'] as String? ?? '',
-      name: json['name'] as String? ?? '',
-      address: json['address'] == null
-          ? null
-          : Address.fromJson(Map<String, Object?>.from(json['address'] as Map)),
-      status: $enumDecodeNullable(_$MartialStatusEnumMap, json['status']) ??
-          MartialStatus.married,
-      marriageDate: json['marriageDate'] == null
-          ? null
-          : DateTime.parse(json['marriageDate'] as String),
-      deceasedSpouseName: json['deceasedSpouseName'] as String?,
-      church: json['church'] == null
-          ? null
-          : Church.fromJson(Map<String, Object?>.from(json['church'] as Map)),
-      notes: json['notes'] as String?,
-      color: colorFromInt((json['color'] as num?)?.toInt()),
-      photoUpdatedAt: json['photoUpdatedAt'] == null
-          ? null
-          : DateTime.parse(json['photoUpdatedAt'] as String),
-      blurhash: json['blurhash'] as String?,
-      children: familyChildrenFromJson(json['children'] as List?),
-      parents: familyParentsFromJson(json['parents'] as List?),
-      lastEdit: json['lastEdit'] == null
-          ? null
-          : LastRecordedByInfo.fromJson(
-              Map<String, Object?>.from(json['lastEdit'] as Map)),
-      lastVisit: json['lastVisit'] == null
-          ? null
-          : LastRecordedByInfo.fromJson(
-              Map<String, Object?>.from(json['lastVisit'] as Map)),
-      lastFatherVisit: json['lastFatherVisit'] == null
-          ? null
-          : LastRecordedByInfo.fromJson(
-              Map<String, Object?>.from(json['lastFatherVisit'] as Map)),
-      familyAdminsPhones:
-          (_readFamilyAdminsPhones(json, 'familyAdminsPhones') as Map?)?.map(
+  id: json['id'] as String? ?? '',
+  name: json['name'] as String? ?? '',
+  address: json['address'] == null
+      ? null
+      : Address.fromJson(Map<String, Object?>.from(json['address'] as Map)),
+  status:
+      $enumDecodeNullable(_$MartialStatusEnumMap, json['status']) ??
+      MartialStatus.married,
+  marriageDate: json['marriageDate'] == null
+      ? null
+      : DateTime.parse(json['marriageDate'] as String),
+  deceasedSpouseName: json['deceasedSpouseName'] as String?,
+  church: json['church'] == null
+      ? null
+      : Church.fromJson(Map<String, Object?>.from(json['church'] as Map)),
+  notes: json['notes'] as String?,
+  color: colorFromInt((json['color'] as num?)?.toInt()),
+  photoUpdatedAt: json['photoUpdatedAt'] == null
+      ? null
+      : DateTime.parse(json['photoUpdatedAt'] as String),
+  blurhash: json['blurhash'] as String?,
+  children: familyChildrenFromJson(json['children'] as List?),
+  parents: familyParentsFromJson(json['parents'] as List?),
+  lastEdit: json['lastEdit'] == null
+      ? null
+      : LastRecordedByInfo.fromJson(
+          Map<String, Object?>.from(json['lastEdit'] as Map),
+        ),
+  lastVisit: json['lastVisit'] == null
+      ? null
+      : LastRecordedByInfo.fromJson(
+          Map<String, Object?>.from(json['lastVisit'] as Map),
+        ),
+  lastFatherVisit: json['lastFatherVisit'] == null
+      ? null
+      : LastRecordedByInfo.fromJson(
+          Map<String, Object?>.from(json['lastFatherVisit'] as Map),
+        ),
+  familyAdminsPhones:
+      (_readFamilyAdminsPhones(json, 'familyAdminsPhones') as Map?)?.map(
         (k, e) => MapEntry(k as String, e),
       ),
-      userCanEdit: json['userCanEdit'] as bool? ?? false,
-    );
+  userCanEdit: json['userCanEdit'] as bool? ?? false,
+);
 
 Map<String, dynamic> _$FamilyToJson(Family instance) => <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
-      'address': instance.address?.toJson(),
-      'status': _$MartialStatusEnumMap[instance.status]!,
-      'marriageDate': instance.marriageDate?.toIso8601String(),
-      'deceasedSpouseName': instance.deceasedSpouseName,
-      'church': instance.church?.toJson(),
-      'notes': instance.notes,
-      'color': colorToInt(instance.color),
-      'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
-      'blurhash': instance.blurhash,
-      'children': familyChildrenToJson(instance.children),
-      'parents': familyParentsToJson(instance.parents),
-      'familyAdminsPhones': instance.familyAdminsPhones,
-      'lastEdit': instance.lastEdit?.toJson(),
-      'lastVisit': instance.lastVisit?.toJson(),
-      'lastFatherVisit': instance.lastFatherVisit?.toJson(),
-    };
+  'id': instance.id,
+  'name': instance.name,
+  'address': instance.address?.toJson(),
+  'status': _$MartialStatusEnumMap[instance.status]!,
+  'marriageDate': instance.marriageDate?.toIso8601String(),
+  'deceasedSpouseName': instance.deceasedSpouseName,
+  'church': instance.church?.toJson(),
+  'notes': instance.notes,
+  'color': colorToInt(instance.color),
+  'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+  'blurhash': instance.blurhash,
+  'children': familyChildrenToJson(instance.children),
+  'parents': familyParentsToJson(instance.parents),
+  'familyAdminsPhones': instance.familyAdminsPhones,
+  'lastEdit': instance.lastEdit?.toJson(),
+  'lastVisit': instance.lastVisit?.toJson(),
+  'lastFatherVisit': instance.lastFatherVisit?.toJson(),
+};
 
 const _$MartialStatusEnumMap = {
   MartialStatus.married: 'married',

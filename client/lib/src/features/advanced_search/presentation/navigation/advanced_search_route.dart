@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 part 'advanced_search_route.g.dart';
 
 @TypedGoRoute<AdvancedSearchRoute>(path: '/advanced_search')
-class AdvancedSearchRoute extends GoRouteData with _$AdvancedSearchRoute {
+class AdvancedSearchRoute extends GoRouteData with $AdvancedSearchRoute {
   const AdvancedSearchRoute({this.$extra});
 
   final AdvancedQuery? $extra;

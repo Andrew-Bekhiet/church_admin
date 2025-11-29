@@ -32,108 +32,59 @@ import 'package:mockito/src/dummies.dart' as _i10;
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
+// ignore_for_file: invalid_use_of_internal_member
 
 class _FakeOperation_0 extends _i1.SmartFake implements _i2.Operation {
-  _FakeOperation_0(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeOperation_0(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeContext_1 extends _i1.SmartFake implements _i3.Context {
-  _FakeContext_1(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeContext_1(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeRequest_2 extends _i1.SmartFake implements _i4.Request {
-  _FakeRequest_2(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeRequest_2(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeResponse_3 extends _i1.SmartFake implements _i4.Response {
-  _FakeResponse_3(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeResponse_3(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeDocumentNode_4 extends _i1.SmartFake implements _i5.DocumentNode {
-  _FakeDocumentNode_4(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeDocumentNode_4(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeUri_5 extends _i1.SmartFake implements Uri {
-  _FakeUri_5(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeUri_5(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeRequestSerializer_6 extends _i1.SmartFake
     implements _i6.RequestSerializer {
-  _FakeRequestSerializer_6(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeRequestSerializer_6(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeResponseParser_7 extends _i1.SmartFake
     implements _i6.ResponseParser {
-  _FakeResponseParser_7(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeResponseParser_7(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeLink_8 extends _i1.SmartFake implements _i6.Link {
-  _FakeLink_8(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeLink_8(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeSocketClientConfig_9 extends _i1.SmartFake
     implements _i7.SocketClientConfig {
-  _FakeSocketClientConfig_9(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeSocketClientConfig_9(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 /// A class which mocks [AuthBloc].
@@ -141,194 +92,160 @@ class _FakeSocketClientConfig_9 extends _i1.SmartFake
 /// See the documentation for Mockito's code generation for more information.
 class MockAuthBloc extends _i1.Mock implements _i8.AuthBloc {
   @override
-  bool get isSignedIn => (super.noSuchMethod(
-        Invocation.getter(#isSignedIn),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
+  bool get isSignedIn =>
+      (super.noSuchMethod(
+            Invocation.getter(#isSignedIn),
+            returnValue: false,
+            returnValueForMissingStub: false,
+          )
+          as bool);
 
   @override
-  _i9.Stream<_i8.AuthUser?> get userStream => (super.noSuchMethod(
-        Invocation.getter(#userStream),
-        returnValue: _i9.Stream<_i8.AuthUser?>.empty(),
-        returnValueForMissingStub: _i9.Stream<_i8.AuthUser?>.empty(),
-      ) as _i9.Stream<_i8.AuthUser?>);
+  _i9.Stream<_i8.AuthUser?> get userStream =>
+      (super.noSuchMethod(
+            Invocation.getter(#userStream),
+            returnValue: _i9.Stream<_i8.AuthUser?>.empty(),
+            returnValueForMissingStub: _i9.Stream<_i8.AuthUser?>.empty(),
+          )
+          as _i9.Stream<_i8.AuthUser?>);
 
   @override
-  _i9.Stream<_i8.User?> get userDataStream => (super.noSuchMethod(
-        Invocation.getter(#userDataStream),
-        returnValue: _i9.Stream<_i8.User?>.empty(),
-        returnValueForMissingStub: _i9.Stream<_i8.User?>.empty(),
-      ) as _i9.Stream<_i8.User?>);
+  _i9.Stream<_i8.User?> get userDataStream =>
+      (super.noSuchMethod(
+            Invocation.getter(#userDataStream),
+            returnValue: _i9.Stream<_i8.User?>.empty(),
+            returnValueForMissingStub: _i9.Stream<_i8.User?>.empty(),
+          )
+          as _i9.Stream<_i8.User?>);
 
   @override
-  _i9.Stream<String?> get idTokenStream => (super.noSuchMethod(
-        Invocation.getter(#idTokenStream),
-        returnValue: _i9.Stream<String?>.empty(),
-        returnValueForMissingStub: _i9.Stream<String?>.empty(),
-      ) as _i9.Stream<String?>);
+  _i9.Stream<String?> get idTokenStream =>
+      (super.noSuchMethod(
+            Invocation.getter(#idTokenStream),
+            returnValue: _i9.Stream<String?>.empty(),
+            returnValueForMissingStub: _i9.Stream<String?>.empty(),
+          )
+          as _i9.Stream<String?>);
 
   @override
-  _i9.Stream<bool> get isSignedInStream => (super.noSuchMethod(
-        Invocation.getter(#isSignedInStream),
-        returnValue: _i9.Stream<bool>.empty(),
-        returnValueForMissingStub: _i9.Stream<bool>.empty(),
-      ) as _i9.Stream<bool>);
+  _i9.Stream<bool> get isSignedInStream =>
+      (super.noSuchMethod(
+            Invocation.getter(#isSignedInStream),
+            returnValue: _i9.Stream<bool>.empty(),
+            returnValueForMissingStub: _i9.Stream<bool>.empty(),
+          )
+          as _i9.Stream<bool>);
 
   @override
-  _i9.Future<void> get loaded => (super.noSuchMethod(
-        Invocation.getter(#loaded),
-        returnValue: _i9.Future<void>.value(),
-        returnValueForMissingStub: _i9.Future<void>.value(),
-      ) as _i9.Future<void>);
+  _i9.Future<void> get loaded =>
+      (super.noSuchMethod(
+            Invocation.getter(#loaded),
+            returnValue: _i9.Future<void>.value(),
+            returnValueForMissingStub: _i9.Future<void>.value(),
+          )
+          as _i9.Future<void>);
 
   @override
-  _i8.AuthState get state => (super.noSuchMethod(
-        Invocation.getter(#state),
-        returnValue: _i10.dummyValue<_i8.AuthState>(
-          this,
-          Invocation.getter(#state),
-        ),
-        returnValueForMissingStub: _i10.dummyValue<_i8.AuthState>(
-          this,
-          Invocation.getter(#state),
-        ),
-      ) as _i8.AuthState);
+  _i8.AuthState get state =>
+      (super.noSuchMethod(
+            Invocation.getter(#state),
+            returnValue: _i10.dummyValue<_i8.AuthState>(
+              this,
+              Invocation.getter(#state),
+            ),
+            returnValueForMissingStub: _i10.dummyValue<_i8.AuthState>(
+              this,
+              Invocation.getter(#state),
+            ),
+          )
+          as _i8.AuthState);
 
   @override
-  _i9.Stream<_i8.AuthState> get stream => (super.noSuchMethod(
-        Invocation.getter(#stream),
-        returnValue: _i9.Stream<_i8.AuthState>.empty(),
-        returnValueForMissingStub: _i9.Stream<_i8.AuthState>.empty(),
-      ) as _i9.Stream<_i8.AuthState>);
+  _i9.Stream<_i8.AuthState> get stream =>
+      (super.noSuchMethod(
+            Invocation.getter(#stream),
+            returnValue: _i9.Stream<_i8.AuthState>.empty(),
+            returnValueForMissingStub: _i9.Stream<_i8.AuthState>.empty(),
+          )
+          as _i9.Stream<_i8.AuthState>);
 
   @override
-  bool get isClosed => (super.noSuchMethod(
-        Invocation.getter(#isClosed),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
+  bool get isClosed =>
+      (super.noSuchMethod(
+            Invocation.getter(#isClosed),
+            returnValue: false,
+            returnValueForMissingStub: false,
+          )
+          as bool);
 
   @override
-  _i9.Future<void> close() => (super.noSuchMethod(
-        Invocation.method(
-          #close,
-          [],
-        ),
-        returnValue: _i9.Future<void>.value(),
-        returnValueForMissingStub: _i9.Future<void>.value(),
-      ) as _i9.Future<void>);
+  _i9.Future<void> close() =>
+      (super.noSuchMethod(
+            Invocation.method(#close, []),
+            returnValue: _i9.Future<void>.value(),
+            returnValueForMissingStub: _i9.Future<void>.value(),
+          )
+          as _i9.Future<void>);
 
   @override
   void add(_i8.AuthEvent? event) => super.noSuchMethod(
-        Invocation.method(
-          #add,
-          [event],
-        ),
-        returnValueForMissingStub: null,
-      );
+    Invocation.method(#add, [event]),
+    returnValueForMissingStub: null,
+  );
 
   @override
   void onEvent(_i8.AuthEvent? event) => super.noSuchMethod(
-        Invocation.method(
-          #onEvent,
-          [event],
-        ),
-        returnValueForMissingStub: null,
-      );
+    Invocation.method(#onEvent, [event]),
+    returnValueForMissingStub: null,
+  );
 
   @override
   void emit(_i8.AuthState? state) => super.noSuchMethod(
-        Invocation.method(
-          #emit,
-          [state],
-        ),
-        returnValueForMissingStub: null,
-      );
+    Invocation.method(#emit, [state]),
+    returnValueForMissingStub: null,
+  );
 
   @override
   void on<E extends _i8.AuthEvent>(
     _i11.EventHandler<E, _i8.AuthState>? handler, {
     _i11.EventTransformer<E>? transformer,
-  }) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #on,
-          [handler],
-          {#transformer: transformer},
-        ),
-        returnValueForMissingStub: null,
-      );
+  }) => super.noSuchMethod(
+    Invocation.method(#on, [handler], {#transformer: transformer}),
+    returnValueForMissingStub: null,
+  );
 
   @override
   void onTransition(
-          _i11.Transition<_i8.AuthEvent, _i8.AuthState>? transition) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #onTransition,
-          [transition],
-        ),
-        returnValueForMissingStub: null,
-      );
+    _i11.Transition<_i8.AuthEvent, _i8.AuthState>? transition,
+  ) => super.noSuchMethod(
+    Invocation.method(#onTransition, [transition]),
+    returnValueForMissingStub: null,
+  );
 
   @override
-  void onDone(
-    _i8.AuthEvent? event, [
-    Object? error,
-    StackTrace? stackTrace,
-  ]) =>
+  void onDone(_i8.AuthEvent? event, [Object? error, StackTrace? stackTrace]) =>
       super.noSuchMethod(
-        Invocation.method(
-          #onDone,
-          [
-            event,
-            error,
-            stackTrace,
-          ],
-        ),
+        Invocation.method(#onDone, [event, error, stackTrace]),
         returnValueForMissingStub: null,
       );
 
   @override
   void onChange(_i11.Change<_i8.AuthState>? change) => super.noSuchMethod(
-        Invocation.method(
-          #onChange,
-          [change],
-        ),
-        returnValueForMissingStub: null,
-      );
+    Invocation.method(#onChange, [change]),
+    returnValueForMissingStub: null,
+  );
 
   @override
-  void addError(
-    Object? error, [
-    StackTrace? stackTrace,
-  ]) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #addError,
-          [
-            error,
-            stackTrace,
-          ],
-        ),
-        returnValueForMissingStub: null,
-      );
+  void addError(Object? error, [StackTrace? stackTrace]) => super.noSuchMethod(
+    Invocation.method(#addError, [error, stackTrace]),
+    returnValueForMissingStub: null,
+  );
 
   @override
-  void onError(
-    Object? error,
-    StackTrace? stackTrace,
-  ) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #onError,
-          [
-            error,
-            stackTrace,
-          ],
-        ),
-        returnValueForMissingStub: null,
-      );
+  void onError(Object? error, StackTrace? stackTrace) => super.noSuchMethod(
+    Invocation.method(#onError, [error, stackTrace]),
+    returnValueForMissingStub: null,
+  );
 }
 
 /// A class which mocks [Request].
@@ -337,84 +254,69 @@ class MockAuthBloc extends _i1.Mock implements _i8.AuthBloc {
 // ignore: must_be_immutable
 class MockRequest extends _i1.Mock implements _i4.Request {
   @override
-  _i2.Operation get operation => (super.noSuchMethod(
-        Invocation.getter(#operation),
-        returnValue: _FakeOperation_0(
-          this,
-          Invocation.getter(#operation),
-        ),
-        returnValueForMissingStub: _FakeOperation_0(
-          this,
-          Invocation.getter(#operation),
-        ),
-      ) as _i2.Operation);
+  _i2.Operation get operation =>
+      (super.noSuchMethod(
+            Invocation.getter(#operation),
+            returnValue: _FakeOperation_0(this, Invocation.getter(#operation)),
+            returnValueForMissingStub: _FakeOperation_0(
+              this,
+              Invocation.getter(#operation),
+            ),
+          )
+          as _i2.Operation);
 
   @override
-  Map<String, dynamic> get variables => (super.noSuchMethod(
-        Invocation.getter(#variables),
-        returnValue: <String, dynamic>{},
-        returnValueForMissingStub: <String, dynamic>{},
-      ) as Map<String, dynamic>);
+  Map<String, dynamic> get variables =>
+      (super.noSuchMethod(
+            Invocation.getter(#variables),
+            returnValue: <String, dynamic>{},
+            returnValueForMissingStub: <String, dynamic>{},
+          )
+          as Map<String, dynamic>);
 
   @override
-  _i3.Context get context => (super.noSuchMethod(
-        Invocation.getter(#context),
-        returnValue: _FakeContext_1(
-          this,
-          Invocation.getter(#context),
-        ),
-        returnValueForMissingStub: _FakeContext_1(
-          this,
-          Invocation.getter(#context),
-        ),
-      ) as _i3.Context);
+  _i3.Context get context =>
+      (super.noSuchMethod(
+            Invocation.getter(#context),
+            returnValue: _FakeContext_1(this, Invocation.getter(#context)),
+            returnValueForMissingStub: _FakeContext_1(
+              this,
+              Invocation.getter(#context),
+            ),
+          )
+          as _i3.Context);
 
   @override
   _i4.Request withContextEntry<T extends _i3.ContextEntry>(T? entry) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #withContextEntry,
-          [entry],
-        ),
-        returnValue: _FakeRequest_2(
-          this,
-          Invocation.method(
-            #withContextEntry,
-            [entry],
-          ),
-        ),
-        returnValueForMissingStub: _FakeRequest_2(
-          this,
-          Invocation.method(
-            #withContextEntry,
-            [entry],
-          ),
-        ),
-      ) as _i4.Request);
+            Invocation.method(#withContextEntry, [entry]),
+            returnValue: _FakeRequest_2(
+              this,
+              Invocation.method(#withContextEntry, [entry]),
+            ),
+            returnValueForMissingStub: _FakeRequest_2(
+              this,
+              Invocation.method(#withContextEntry, [entry]),
+            ),
+          )
+          as _i4.Request);
 
   @override
   _i4.Request updateContextEntry<T extends _i3.ContextEntry>(
-          _i3.ContextUpdater<T?>? update) =>
+    _i3.ContextUpdater<T?>? update,
+  ) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #updateContextEntry,
-          [update],
-        ),
-        returnValue: _FakeRequest_2(
-          this,
-          Invocation.method(
-            #updateContextEntry,
-            [update],
-          ),
-        ),
-        returnValueForMissingStub: _FakeRequest_2(
-          this,
-          Invocation.method(
-            #updateContextEntry,
-            [update],
-          ),
-        ),
-      ) as _i4.Request);
+            Invocation.method(#updateContextEntry, [update]),
+            returnValue: _FakeRequest_2(
+              this,
+              Invocation.method(#updateContextEntry, [update]),
+            ),
+            returnValueForMissingStub: _FakeRequest_2(
+              this,
+              Invocation.method(#updateContextEntry, [update]),
+            ),
+          )
+          as _i4.Request);
 }
 
 /// A class which mocks [Response].
@@ -423,71 +325,57 @@ class MockRequest extends _i1.Mock implements _i4.Request {
 // ignore: must_be_immutable
 class MockResponse extends _i1.Mock implements _i4.Response {
   @override
-  Map<String, dynamic> get response => (super.noSuchMethod(
-        Invocation.getter(#response),
-        returnValue: <String, dynamic>{},
-        returnValueForMissingStub: <String, dynamic>{},
-      ) as Map<String, dynamic>);
+  Map<String, dynamic> get response =>
+      (super.noSuchMethod(
+            Invocation.getter(#response),
+            returnValue: <String, dynamic>{},
+            returnValueForMissingStub: <String, dynamic>{},
+          )
+          as Map<String, dynamic>);
 
   @override
-  _i3.Context get context => (super.noSuchMethod(
-        Invocation.getter(#context),
-        returnValue: _FakeContext_1(
-          this,
-          Invocation.getter(#context),
-        ),
-        returnValueForMissingStub: _FakeContext_1(
-          this,
-          Invocation.getter(#context),
-        ),
-      ) as _i3.Context);
+  _i3.Context get context =>
+      (super.noSuchMethod(
+            Invocation.getter(#context),
+            returnValue: _FakeContext_1(this, Invocation.getter(#context)),
+            returnValueForMissingStub: _FakeContext_1(
+              this,
+              Invocation.getter(#context),
+            ),
+          )
+          as _i3.Context);
 
   @override
   _i4.Response withContextEntry<T extends _i3.ContextEntry>(T? entry) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #withContextEntry,
-          [entry],
-        ),
-        returnValue: _FakeResponse_3(
-          this,
-          Invocation.method(
-            #withContextEntry,
-            [entry],
-          ),
-        ),
-        returnValueForMissingStub: _FakeResponse_3(
-          this,
-          Invocation.method(
-            #withContextEntry,
-            [entry],
-          ),
-        ),
-      ) as _i4.Response);
+            Invocation.method(#withContextEntry, [entry]),
+            returnValue: _FakeResponse_3(
+              this,
+              Invocation.method(#withContextEntry, [entry]),
+            ),
+            returnValueForMissingStub: _FakeResponse_3(
+              this,
+              Invocation.method(#withContextEntry, [entry]),
+            ),
+          )
+          as _i4.Response);
 
   @override
   _i4.Response updateContextEntry<T extends _i3.ContextEntry>(
-          _i3.ContextUpdater<T?>? update) =>
+    _i3.ContextUpdater<T?>? update,
+  ) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #updateContextEntry,
-          [update],
-        ),
-        returnValue: _FakeResponse_3(
-          this,
-          Invocation.method(
-            #updateContextEntry,
-            [update],
-          ),
-        ),
-        returnValueForMissingStub: _FakeResponse_3(
-          this,
-          Invocation.method(
-            #updateContextEntry,
-            [update],
-          ),
-        ),
-      ) as _i4.Response);
+            Invocation.method(#updateContextEntry, [update]),
+            returnValue: _FakeResponse_3(
+              this,
+              Invocation.method(#updateContextEntry, [update]),
+            ),
+            returnValueForMissingStub: _FakeResponse_3(
+              this,
+              Invocation.method(#updateContextEntry, [update]),
+            ),
+          )
+          as _i4.Response);
 }
 
 /// A class which mocks [Operation].
@@ -496,17 +384,19 @@ class MockResponse extends _i1.Mock implements _i4.Response {
 // ignore: must_be_immutable
 class MockOperation extends _i1.Mock implements _i2.Operation {
   @override
-  _i5.DocumentNode get document => (super.noSuchMethod(
-        Invocation.getter(#document),
-        returnValue: _FakeDocumentNode_4(
-          this,
-          Invocation.getter(#document),
-        ),
-        returnValueForMissingStub: _FakeDocumentNode_4(
-          this,
-          Invocation.getter(#document),
-        ),
-      ) as _i5.DocumentNode);
+  _i5.DocumentNode get document =>
+      (super.noSuchMethod(
+            Invocation.getter(#document),
+            returnValue: _FakeDocumentNode_4(
+              this,
+              Invocation.getter(#document),
+            ),
+            returnValueForMissingStub: _FakeDocumentNode_4(
+              this,
+              Invocation.getter(#document),
+            ),
+          )
+          as _i5.DocumentNode);
 }
 
 /// A class which mocks [HttpLink].
@@ -514,79 +404,87 @@ class MockOperation extends _i1.Mock implements _i2.Operation {
 /// See the documentation for Mockito's code generation for more information.
 class MockHttpLink extends _i1.Mock implements _i12.HttpLink {
   @override
-  Uri get uri => (super.noSuchMethod(
-        Invocation.getter(#uri),
-        returnValue: _FakeUri_5(
-          this,
-          Invocation.getter(#uri),
-        ),
-        returnValueForMissingStub: _FakeUri_5(
-          this,
-          Invocation.getter(#uri),
-        ),
-      ) as Uri);
+  Uri get uri =>
+      (super.noSuchMethod(
+            Invocation.getter(#uri),
+            returnValue: _FakeUri_5(this, Invocation.getter(#uri)),
+            returnValueForMissingStub: _FakeUri_5(
+              this,
+              Invocation.getter(#uri),
+            ),
+          )
+          as Uri);
 
   @override
-  Map<String, String> get defaultHeaders => (super.noSuchMethod(
-        Invocation.getter(#defaultHeaders),
-        returnValue: <String, String>{},
-        returnValueForMissingStub: <String, String>{},
-      ) as Map<String, String>);
+  Map<String, String> get defaultHeaders =>
+      (super.noSuchMethod(
+            Invocation.getter(#defaultHeaders),
+            returnValue: <String, String>{},
+            returnValueForMissingStub: <String, String>{},
+          )
+          as Map<String, String>);
 
   @override
-  bool get useGETForQueries => (super.noSuchMethod(
-        Invocation.getter(#useGETForQueries),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
+  bool get useGETForQueries =>
+      (super.noSuchMethod(
+            Invocation.getter(#useGETForQueries),
+            returnValue: false,
+            returnValueForMissingStub: false,
+          )
+          as bool);
 
   @override
-  _i6.RequestSerializer get serializer => (super.noSuchMethod(
-        Invocation.getter(#serializer),
-        returnValue: _FakeRequestSerializer_6(
-          this,
-          Invocation.getter(#serializer),
-        ),
-        returnValueForMissingStub: _FakeRequestSerializer_6(
-          this,
-          Invocation.getter(#serializer),
-        ),
-      ) as _i6.RequestSerializer);
+  _i6.RequestSerializer get serializer =>
+      (super.noSuchMethod(
+            Invocation.getter(#serializer),
+            returnValue: _FakeRequestSerializer_6(
+              this,
+              Invocation.getter(#serializer),
+            ),
+            returnValueForMissingStub: _FakeRequestSerializer_6(
+              this,
+              Invocation.getter(#serializer),
+            ),
+          )
+          as _i6.RequestSerializer);
 
   @override
-  _i6.ResponseParser get parser => (super.noSuchMethod(
-        Invocation.getter(#parser),
-        returnValue: _FakeResponseParser_7(
-          this,
-          Invocation.getter(#parser),
-        ),
-        returnValueForMissingStub: _FakeResponseParser_7(
-          this,
-          Invocation.getter(#parser),
-        ),
-      ) as _i6.ResponseParser);
+  _i6.ResponseParser get parser =>
+      (super.noSuchMethod(
+            Invocation.getter(#parser),
+            returnValue: _FakeResponseParser_7(
+              this,
+              Invocation.getter(#parser),
+            ),
+            returnValueForMissingStub: _FakeResponseParser_7(
+              this,
+              Invocation.getter(#parser),
+            ),
+          )
+          as _i6.ResponseParser);
 
   @override
-  _i12.HttpResponseDecoder get httpResponseDecoder => (super.noSuchMethod(
-        Invocation.getter(#httpResponseDecoder),
-        returnValue: (_i13.Response httpResponse) => null,
-        returnValueForMissingStub: (_i13.Response httpResponse) => null,
-      ) as _i12.HttpResponseDecoder);
+  _i12.HttpResponseDecoder get httpResponseDecoder =>
+      (super.noSuchMethod(
+            Invocation.getter(#httpResponseDecoder),
+            returnValue: (_i13.Response httpResponse) => null,
+            returnValueForMissingStub: (_i13.Response httpResponse) => null,
+          )
+          as _i12.HttpResponseDecoder);
 
   @override
-  bool get followRedirects => (super.noSuchMethod(
-        Invocation.getter(#followRedirects),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
+  bool get followRedirects =>
+      (super.noSuchMethod(
+            Invocation.getter(#followRedirects),
+            returnValue: false,
+            returnValueForMissingStub: false,
+          )
+          as bool);
 
   @override
-  set httpResponseDecoder(_i12.HttpResponseDecoder? _httpResponseDecoder) =>
+  set httpResponseDecoder(_i12.HttpResponseDecoder? value) =>
       super.noSuchMethod(
-        Invocation.setter(
-          #httpResponseDecoder,
-          _httpResponseDecoder,
-        ),
+        Invocation.setter(#httpResponseDecoder, value),
         returnValueForMissingStub: null,
       );
 
@@ -596,70 +494,44 @@ class MockHttpLink extends _i1.Mock implements _i12.HttpLink {
     _i6.NextLink? forward,
   ]) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #request,
-          [
-            request,
-            forward,
-          ],
-        ),
-        returnValue: _i9.Stream<_i4.Response>.empty(),
-        returnValueForMissingStub: _i9.Stream<_i4.Response>.empty(),
-      ) as _i9.Stream<_i4.Response>);
+            Invocation.method(#request, [request, forward]),
+            returnValue: _i9.Stream<_i4.Response>.empty(),
+            returnValueForMissingStub: _i9.Stream<_i4.Response>.empty(),
+          )
+          as _i9.Stream<_i4.Response>);
 
   @override
-  _i9.Future<void> dispose() => (super.noSuchMethod(
-        Invocation.method(
-          #dispose,
-          [],
-        ),
-        returnValue: _i9.Future<void>.value(),
-        returnValueForMissingStub: _i9.Future<void>.value(),
-      ) as _i9.Future<void>);
+  _i9.Future<void> dispose() =>
+      (super.noSuchMethod(
+            Invocation.method(#dispose, []),
+            returnValue: _i9.Future<void>.value(),
+            returnValueForMissingStub: _i9.Future<void>.value(),
+          )
+          as _i9.Future<void>);
 
   @override
-  _i6.Link concat(_i6.Link? next) => (super.noSuchMethod(
-        Invocation.method(
-          #concat,
-          [next],
-        ),
-        returnValue: _FakeLink_8(
-          this,
-          Invocation.method(
-            #concat,
-            [next],
-          ),
-        ),
-        returnValueForMissingStub: _FakeLink_8(
-          this,
-          Invocation.method(
-            #concat,
-            [next],
-          ),
-        ),
-      ) as _i6.Link);
+  _i6.Link concat(_i6.Link? next) =>
+      (super.noSuchMethod(
+            Invocation.method(#concat, [next]),
+            returnValue: _FakeLink_8(this, Invocation.method(#concat, [next])),
+            returnValueForMissingStub: _FakeLink_8(
+              this,
+              Invocation.method(#concat, [next]),
+            ),
+          )
+          as _i6.Link);
 
   @override
-  _i6.Link route(_i6.LinkRouter? route) => (super.noSuchMethod(
-        Invocation.method(
-          #route,
-          [route],
-        ),
-        returnValue: _FakeLink_8(
-          this,
-          Invocation.method(
-            #route,
-            [route],
-          ),
-        ),
-        returnValueForMissingStub: _FakeLink_8(
-          this,
-          Invocation.method(
-            #route,
-            [route],
-          ),
-        ),
-      ) as _i6.Link);
+  _i6.Link route(_i6.LinkRouter? route) =>
+      (super.noSuchMethod(
+            Invocation.method(#route, [route]),
+            returnValue: _FakeLink_8(this, Invocation.method(#route, [route])),
+            returnValueForMissingStub: _FakeLink_8(
+              this,
+              Invocation.method(#route, [route]),
+            ),
+          )
+          as _i6.Link);
 
   @override
   _i6.Link split(
@@ -668,37 +540,17 @@ class MockHttpLink extends _i1.Mock implements _i12.HttpLink {
     _i6.Link? right = const _i6.PassthroughLink(),
   ]) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #split,
-          [
-            test,
-            left,
-            right,
-          ],
-        ),
-        returnValue: _FakeLink_8(
-          this,
-          Invocation.method(
-            #split,
-            [
-              test,
-              left,
-              right,
-            ],
-          ),
-        ),
-        returnValueForMissingStub: _FakeLink_8(
-          this,
-          Invocation.method(
-            #split,
-            [
-              test,
-              left,
-              right,
-            ],
-          ),
-        ),
-      ) as _i6.Link);
+            Invocation.method(#split, [test, left, right]),
+            returnValue: _FakeLink_8(
+              this,
+              Invocation.method(#split, [test, left, right]),
+            ),
+            returnValueForMissingStub: _FakeLink_8(
+              this,
+              Invocation.method(#split, [test, left, right]),
+            ),
+          )
+          as _i6.Link);
 }
 
 /// A class which mocks [WebSocketLink].
@@ -706,43 +558,46 @@ class MockHttpLink extends _i1.Mock implements _i12.HttpLink {
 /// See the documentation for Mockito's code generation for more information.
 class MockWebSocketLink extends _i1.Mock implements _i14.WebSocketLink {
   @override
-  String get url => (super.noSuchMethod(
-        Invocation.getter(#url),
-        returnValue: _i10.dummyValue<String>(
-          this,
-          Invocation.getter(#url),
-        ),
-        returnValueForMissingStub: _i10.dummyValue<String>(
-          this,
-          Invocation.getter(#url),
-        ),
-      ) as String);
+  String get url =>
+      (super.noSuchMethod(
+            Invocation.getter(#url),
+            returnValue: _i10.dummyValue<String>(this, Invocation.getter(#url)),
+            returnValueForMissingStub: _i10.dummyValue<String>(
+              this,
+              Invocation.getter(#url),
+            ),
+          )
+          as String);
 
   @override
-  String get subProtocol => (super.noSuchMethod(
-        Invocation.getter(#subProtocol),
-        returnValue: _i10.dummyValue<String>(
-          this,
-          Invocation.getter(#subProtocol),
-        ),
-        returnValueForMissingStub: _i10.dummyValue<String>(
-          this,
-          Invocation.getter(#subProtocol),
-        ),
-      ) as String);
+  String get subProtocol =>
+      (super.noSuchMethod(
+            Invocation.getter(#subProtocol),
+            returnValue: _i10.dummyValue<String>(
+              this,
+              Invocation.getter(#subProtocol),
+            ),
+            returnValueForMissingStub: _i10.dummyValue<String>(
+              this,
+              Invocation.getter(#subProtocol),
+            ),
+          )
+          as String);
 
   @override
-  _i7.SocketClientConfig get config => (super.noSuchMethod(
-        Invocation.getter(#config),
-        returnValue: _FakeSocketClientConfig_9(
-          this,
-          Invocation.getter(#config),
-        ),
-        returnValueForMissingStub: _FakeSocketClientConfig_9(
-          this,
-          Invocation.getter(#config),
-        ),
-      ) as _i7.SocketClientConfig);
+  _i7.SocketClientConfig get config =>
+      (super.noSuchMethod(
+            Invocation.getter(#config),
+            returnValue: _FakeSocketClientConfig_9(
+              this,
+              Invocation.getter(#config),
+            ),
+            returnValueForMissingStub: _FakeSocketClientConfig_9(
+              this,
+              Invocation.getter(#config),
+            ),
+          )
+          as _i7.SocketClientConfig);
 
   @override
   _i9.Stream<_i4.Response> request(
@@ -750,79 +605,50 @@ class MockWebSocketLink extends _i1.Mock implements _i14.WebSocketLink {
     _i6.NextLink? forward,
   ]) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #request,
-          [
-            request,
-            forward,
-          ],
-        ),
-        returnValue: _i9.Stream<_i4.Response>.empty(),
-        returnValueForMissingStub: _i9.Stream<_i4.Response>.empty(),
-      ) as _i9.Stream<_i4.Response>);
+            Invocation.method(#request, [request, forward]),
+            returnValue: _i9.Stream<_i4.Response>.empty(),
+            returnValueForMissingStub: _i9.Stream<_i4.Response>.empty(),
+          )
+          as _i9.Stream<_i4.Response>);
 
   @override
   void connectOrReconnect() => super.noSuchMethod(
-        Invocation.method(
-          #connectOrReconnect,
-          [],
-        ),
-        returnValueForMissingStub: null,
-      );
+    Invocation.method(#connectOrReconnect, []),
+    returnValueForMissingStub: null,
+  );
 
   @override
-  _i9.Future<void> dispose() => (super.noSuchMethod(
-        Invocation.method(
-          #dispose,
-          [],
-        ),
-        returnValue: _i9.Future<void>.value(),
-        returnValueForMissingStub: _i9.Future<void>.value(),
-      ) as _i9.Future<void>);
+  _i9.Future<void> dispose() =>
+      (super.noSuchMethod(
+            Invocation.method(#dispose, []),
+            returnValue: _i9.Future<void>.value(),
+            returnValueForMissingStub: _i9.Future<void>.value(),
+          )
+          as _i9.Future<void>);
 
   @override
-  _i6.Link concat(_i6.Link? next) => (super.noSuchMethod(
-        Invocation.method(
-          #concat,
-          [next],
-        ),
-        returnValue: _FakeLink_8(
-          this,
-          Invocation.method(
-            #concat,
-            [next],
-          ),
-        ),
-        returnValueForMissingStub: _FakeLink_8(
-          this,
-          Invocation.method(
-            #concat,
-            [next],
-          ),
-        ),
-      ) as _i6.Link);
+  _i6.Link concat(_i6.Link? next) =>
+      (super.noSuchMethod(
+            Invocation.method(#concat, [next]),
+            returnValue: _FakeLink_8(this, Invocation.method(#concat, [next])),
+            returnValueForMissingStub: _FakeLink_8(
+              this,
+              Invocation.method(#concat, [next]),
+            ),
+          )
+          as _i6.Link);
 
   @override
-  _i6.Link route(_i6.LinkRouter? route) => (super.noSuchMethod(
-        Invocation.method(
-          #route,
-          [route],
-        ),
-        returnValue: _FakeLink_8(
-          this,
-          Invocation.method(
-            #route,
-            [route],
-          ),
-        ),
-        returnValueForMissingStub: _FakeLink_8(
-          this,
-          Invocation.method(
-            #route,
-            [route],
-          ),
-        ),
-      ) as _i6.Link);
+  _i6.Link route(_i6.LinkRouter? route) =>
+      (super.noSuchMethod(
+            Invocation.method(#route, [route]),
+            returnValue: _FakeLink_8(this, Invocation.method(#route, [route])),
+            returnValueForMissingStub: _FakeLink_8(
+              this,
+              Invocation.method(#route, [route]),
+            ),
+          )
+          as _i6.Link);
 
   @override
   _i6.Link split(
@@ -831,35 +657,15 @@ class MockWebSocketLink extends _i1.Mock implements _i14.WebSocketLink {
     _i6.Link? right = const _i6.PassthroughLink(),
   ]) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #split,
-          [
-            test,
-            left,
-            right,
-          ],
-        ),
-        returnValue: _FakeLink_8(
-          this,
-          Invocation.method(
-            #split,
-            [
-              test,
-              left,
-              right,
-            ],
-          ),
-        ),
-        returnValueForMissingStub: _FakeLink_8(
-          this,
-          Invocation.method(
-            #split,
-            [
-              test,
-              left,
-              right,
-            ],
-          ),
-        ),
-      ) as _i6.Link);
+            Invocation.method(#split, [test, left, right]),
+            returnValue: _FakeLink_8(
+              this,
+              Invocation.method(#split, [test, left, right]),
+            ),
+            returnValueForMissingStub: _FakeLink_8(
+              this,
+              Invocation.method(#split, [test, left, right]),
+            ),
+          )
+          as _i6.Link);
 }

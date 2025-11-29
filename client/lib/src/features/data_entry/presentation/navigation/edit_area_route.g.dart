@@ -6,26 +6,19 @@ part of 'edit_area_route.dart';
 // GoRouterGenerator
 // **************************************************************************
 
-List<RouteBase> get $appRoutes => [
-      $editAreaRoute,
-    ];
+List<RouteBase> get $appRoutes => [$editAreaRoute];
 
-RouteBase get $editAreaRoute => GoRouteData.$route(
-      path: '/edit_area',
-      factory: _$EditAreaRoute._fromState,
-    );
+RouteBase get $editAreaRoute =>
+    GoRouteData.$route(path: '/edit_area', factory: $EditAreaRoute._fromState);
 
-mixin _$EditAreaRoute on GoRouteData {
-  static EditAreaRoute _fromState(GoRouterState state) => EditAreaRoute(
-        $extra: state.extra as Area?,
-      );
+mixin $EditAreaRoute on GoRouteData {
+  static EditAreaRoute _fromState(GoRouterState state) =>
+      EditAreaRoute($extra: state.extra as Area?);
 
   EditAreaRoute get _self => this as EditAreaRoute;
 
   @override
-  String get location => GoRouteData.$location(
-        '/edit_area',
-      );
+  String get location => GoRouteData.$location('/edit_area');
 
   @override
   void go(BuildContext context) => context.go(location, extra: _self.$extra);

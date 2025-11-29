@@ -2,13 +2,13 @@ import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/misc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:riverpod/riverpod.dart';
 import 'package:rxdart_ext/single.dart';
 
 import '../../utils.dart';
@@ -38,87 +38,88 @@ void main() {
         objectsPaginatableStream: mock,
       );
 
-      final deviceBuilder = DeviceBuilder(
-        wrap: materialAppWrapper(
-          theme: ThemingService.getDefault(
-            isDarkOverride: false,
-            greatFeastThemeOverride: false,
-          ),
-        ),
-      )
-        ..addScenario(
-          widget: ServicesHierarchyList(
-            listController: viewableObjectListController,
-          ),
-          name: 'collapsed',
-        )
-        ..addScenario(
-          widget: ServicesHierarchyList(
-            listController: viewableObjectListController,
-          ),
-          name: 'service_1_expanded',
-          onCreate: (key) async => tester.tap(
-            find.descendant(
-              of: find.byKey(key),
-              matching: find.text('Service 1'),
-            ),
-          ),
-        )
-        ..addScenario(
-          widget: ServicesHierarchyList(
-            listController: viewableObjectListController,
-          ),
-          name: 'study_year_expanded',
-          onCreate: (key) async {
-            await tester.tap(
-              find.descendant(
-                of: find.byKey(key),
-                matching: find.text('Service 1'),
+      final deviceBuilder =
+          DeviceBuilder(
+              wrap: materialAppWrapper(
+                theme: ThemingService.getDefault(
+                  isDarkOverride: false,
+                  greatFeastThemeOverride: false,
+                ),
               ),
-            );
-
-            await tester.pumpAndSettle();
-
-            await tester.tap(
-              find.descendant(
-                of: find.byKey(key),
-                matching: find.text('First Primary'),
+            )
+            ..addScenario(
+              widget: ServicesHierarchyList(
+                listController: viewableObjectListController,
               ),
-            );
-          },
-        )
-        ..addScenario(
-          widget: ServicesHierarchyList(
-            listController: viewableObjectListController,
-          ),
-          name: 'service_2_expanded',
-          onCreate: (key) async {
-            await tester.tap(
-              find.descendant(
-                of: find.byKey(key),
-                matching: find.text('Service 1'),
+              name: 'collapsed',
+            )
+            ..addScenario(
+              widget: ServicesHierarchyList(
+                listController: viewableObjectListController,
               ),
-            );
-
-            await tester.pumpAndSettle();
-
-            await tester.tap(
-              find.descendant(
-                of: find.byKey(key),
-                matching: find.text('First Primary'),
+              name: 'service_1_expanded',
+              onCreate: (key) async => tester.tap(
+                find.descendant(
+                  of: find.byKey(key),
+                  matching: find.text('Service 1'),
+                ),
               ),
-            );
-
-            await tester.pumpAndSettle();
-
-            await tester.tap(
-              find.descendant(
-                of: find.byKey(key),
-                matching: find.text('Service 2'),
+            )
+            ..addScenario(
+              widget: ServicesHierarchyList(
+                listController: viewableObjectListController,
               ),
+              name: 'study_year_expanded',
+              onCreate: (key) async {
+                await tester.tap(
+                  find.descendant(
+                    of: find.byKey(key),
+                    matching: find.text('Service 1'),
+                  ),
+                );
+
+                await tester.pumpAndSettle();
+
+                await tester.tap(
+                  find.descendant(
+                    of: find.byKey(key),
+                    matching: find.text('First Primary'),
+                  ),
+                );
+              },
+            )
+            ..addScenario(
+              widget: ServicesHierarchyList(
+                listController: viewableObjectListController,
+              ),
+              name: 'service_2_expanded',
+              onCreate: (key) async {
+                await tester.tap(
+                  find.descendant(
+                    of: find.byKey(key),
+                    matching: find.text('Service 1'),
+                  ),
+                );
+
+                await tester.pumpAndSettle();
+
+                await tester.tap(
+                  find.descendant(
+                    of: find.byKey(key),
+                    matching: find.text('First Primary'),
+                  ),
+                );
+
+                await tester.pumpAndSettle();
+
+                await tester.tap(
+                  find.descendant(
+                    of: find.byKey(key),
+                    matching: find.text('Service 2'),
+                  ),
+                );
+              },
             );
-          },
-        );
 
       await tester.pumpDeviceBuilder(deviceBuilder);
 
@@ -198,57 +199,57 @@ void main() {
 
       await tester.pumpWidgetBuilder(
         ServicesHierarchyList(
-          classBuilder: (
-            context, {
-            required $class,
-            required service,
-            required studyYear,
-          }) =>
-              IgnorePointer(
-            child: Column(
-              key: ValueKey($class.name),
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                ViewableObjectWidget($class),
-                ViewableObjectWidget(service),
-                ViewableObjectWidget(studyYear),
-              ],
-            ),
-          ),
+          classBuilder:
+              (
+                context, {
+                required $class,
+                required service,
+                required studyYear,
+              }) => IgnorePointer(
+                child: Column(
+                  key: ValueKey($class.name),
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    ViewableObjectWidget($class),
+                    ViewableObjectWidget(service),
+                    ViewableObjectWidget(studyYear),
+                  ],
+                ),
+              ),
           groupBuilder: (p0, {required group, required service}) =>
               IgnorePointer(
-            child: Column(
-              key: ValueKey(group.name),
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                ViewableObjectWidget(group),
-                ViewableObjectWidget(service),
-              ],
-            ),
-          ),
-          serviceTrailingBuilder: (
-            context,
-            service, {
-            onLongPress,
-            onTap,
-            subtitle,
-            trailing,
-          }) =>
-              Icon(
-            Symbols.ac_unit,
-            key: ValueKey(service.name),
-          ),
+                child: Column(
+                  key: ValueKey(group.name),
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    ViewableObjectWidget(group),
+                    ViewableObjectWidget(service),
+                  ],
+                ),
+              ),
+          serviceTrailingBuilder:
+              (
+                context,
+                service, {
+                onLongPress,
+                onTap,
+                subtitle,
+                trailing,
+              }) => Icon(
+                Symbols.ac_unit,
+                key: ValueKey(service.name),
+              ),
           studyYearBuilder: (p0, {required service, required studyYear}) =>
               IgnorePointer(
-            child: Column(
-              key: ValueKey(studyYear.name),
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                ViewableObjectWidget(service),
-                ViewableObjectWidget(studyYear),
-              ],
-            ),
-          ),
+                child: Column(
+                  key: ValueKey(studyYear.name),
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    ViewableObjectWidget(service),
+                    ViewableObjectWidget(studyYear),
+                  ],
+                ),
+              ),
           listController: viewableObjectListController,
         ),
       );
@@ -307,53 +308,55 @@ MockPaginatableStreamBase _createPaginatableStreamMock() {
       cancelOnError: captureAnyNamed('cancelOnError'),
     ),
   ).thenAnswer(
-    (i) => BehaviorSubject.seeded(
-      [
-        Service(
-          id: 'id',
-          name: 'Service 1',
-          classes: [
-            Class(
+    (i) =>
+        BehaviorSubject.seeded(
+          [
+            Service(
               id: 'id',
-              name: 'Class 1',
-              studyYear: StudyYear(order: 1, name: 'First Primary'),
+              name: 'Service 1',
+              classes: [
+                Class(
+                  id: 'id',
+                  name: 'Class 1',
+                  studyYear: StudyYear(order: 1, name: 'First Primary'),
+                ),
+                Class(
+                  id: 'id',
+                  name: 'Class 2',
+                  studyYear: StudyYear(order: 1, name: 'First Primary'),
+                ),
+              ],
+              groups: const [
+                Group(id: 'id', name: 'Group 1'),
+                Group(id: 'id', name: 'Group 2'),
+              ],
             ),
-            Class(
+            Service(
               id: 'id',
-              name: 'Class 2',
-              studyYear: StudyYear(order: 1, name: 'First Primary'),
+              name: 'Service 2',
+              classes: [
+                Class(
+                  id: 'id',
+                  name: 'Class 1',
+                  studyYear: StudyYear(order: 1, name: 'First Primary'),
+                ),
+              ],
+              groups: const [
+                Group(id: 'id', name: 'Group 1'),
+                Group(id: 'id', name: 'Group 2'),
+              ],
             ),
           ],
-          groups: const [
-            Group(id: 'id', name: 'Group 1'),
-            Group(id: 'id', name: 'Group 2'),
-          ],
+        ).listen(
+          i.positionalArguments.first,
+          onDone: i.namedArguments[#onDone],
+          onError: i.namedArguments[#onError],
+          cancelOnError: i.namedArguments[#cancelOnError],
         ),
-        Service(
-          id: 'id',
-          name: 'Service 2',
-          classes: [
-            Class(
-              id: 'id',
-              name: 'Class 1',
-              studyYear: StudyYear(order: 1, name: 'First Primary'),
-            ),
-          ],
-          groups: const [
-            Group(id: 'id', name: 'Group 1'),
-            Group(id: 'id', name: 'Group 2'),
-          ],
-        ),
-      ],
-    ).listen(
-      i.positionalArguments.first,
-      onDone: i.namedArguments[#onDone],
-      onError: i.namedArguments[#onError],
-      cancelOnError: i.namedArguments[#cancelOnError],
-    ),
   );
-  when(mock.onLoadingChanged)
-      .thenAnswer((_) => Stream.value(false).shareValue());
+  when(
+    mock.onLoadingChanged,
+  ).thenAnswer((_) => Stream.value(false).shareValue());
   return mock;
 }
 
@@ -368,8 +371,9 @@ Future<void> _setUp() async {
 }
 
 Override _setUpUserSettingsService() {
-  return userSettingsServiceProvider
-      .overrideWithValue(MockUserSettingsService());
+  return userSettingsServiceProvider.overrideWithValue(
+    MockUserSettingsService(),
+  );
 }
 
 Override _setUpCAViewableObjectService() {

@@ -7,13 +7,13 @@ part of 'order_by.dart';
 // **************************************************************************
 
 OrderBy _$OrderByFromJson(Map json) => OrderBy(
-      field: fieldMetadataFromJson(json['field']),
-      value: json['value'] == null
-          ? OrderByValue.asc
-          : orderByValueFromJson(json['value']),
-    );
+  field: fieldMetadataFromJson(json['field']),
+  value: json['value'] == null
+      ? OrderByValue.asc
+      : orderByValueFromJson(json['value']),
+);
 
 Map<String, dynamic> _$OrderByToJson(OrderBy instance) => <String, dynamic>{
-      'field': fieldMetadataToJson(instance.field),
-      'value': orderByValueToJson(instance.value),
-    };
+  'field': fieldMetadataToJson(instance.field),
+  'value': orderByValueToJson(instance.value),
+};

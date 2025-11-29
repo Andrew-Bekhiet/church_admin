@@ -13,6 +13,7 @@ import 'package:flutter/widgets.dart' hide Notification;
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_map_tile_caching/flutter_map_tile_caching.dart';
+import 'package:flutter_riverpod/misc.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:image_cropper/image_cropper.dart';
@@ -51,8 +52,9 @@ final deviceInfoServiceProvider = FutureProvider<DeviceInfoService>(
       androidDeviceInfo: currentPlatformService.isAndroid
           ? await deviceInfoPlugin.androidInfo
           : null,
-      iosDeviceInfo:
-          currentPlatformService.isIOS ? await deviceInfoPlugin.iosInfo : null,
+      iosDeviceInfo: currentPlatformService.isIOS
+          ? await deviceInfoPlugin.iosInfo
+          : null,
       webBrowserInfo: currentPlatformService.isWeb
           ? await deviceInfoPlugin.webBrowserInfo
           : null,
@@ -75,8 +77,8 @@ final encryptionServiceProvider = Provider<EncryptionService>(
 
 final Provider<DatabaseService> databaseServiceProvider =
     Provider<DatabaseService>(
-  (ref) => DatabaseService(ref.watch(graphQLClientProvider)),
-);
+      (ref) => DatabaseService(ref.watch(graphQLClientProvider)),
+    );
 
 final graphQLClientProvider = Provider<DBGraphQLClient>(
   (ref) {
@@ -95,15 +97,17 @@ final graphQLClientProvider = Provider<DBGraphQLClient>(
               .watch(authStorageProvider)
               .getAuthDataFromCache()
               .asStream()
-              .concatWith([ref.watch(authRepositoryProvider).userChanges]).map(
-            (u) => u?.idToken,
-          ),
+              .concatWith([ref.watch(authRepositoryProvider).userChanges])
+              .map(
+                (u) => u?.idToken,
+              ),
           url: ref.watch(secretsServiceProvider).hasuraServer,
         ),
       ),
       cache: GraphQLCache(store: ref.watch(graphQLCacheStore)),
-      connectivityStream:
-          ref.watch(connectivityServiceProvider).connectivityStream,
+      connectivityStream: ref
+          .watch(connectivityServiceProvider)
+          .connectivityStream,
     );
   },
 );
@@ -141,8 +145,9 @@ final authBlocProvider = Provider<AuthBloc>((ref) {
     authRepository: ref.watch(authRepositoryProvider),
     authStorage: ref.watch(authStorageProvider),
     databaseService: ref.watch(databaseServiceProvider),
-    connectivityStream:
-        ref.watch(connectivityServiceProvider).connectivityStream,
+    connectivityStream: ref
+        .watch(connectivityServiceProvider)
+        .connectivityStream,
   );
 
   ref.onDispose(authBloc.close);
@@ -168,8 +173,9 @@ final firebaseFunctionsProvider = Provider(
   (_) => FirebaseFunctions.instanceFor(region: 'europe-west6'),
 );
 final firebaseMessagingProvider = Provider((_) => FirebaseMessaging.instance);
-final firebaseRemoteConfigProvider =
-    Provider((_) => FirebaseRemoteConfig.instance);
+final firebaseRemoteConfigProvider = Provider(
+  (_) => FirebaseRemoteConfig.instance,
+);
 
 final featureFlagsRepoProvider = Provider<FeatureFlagsRepository>(
   (ref) => FeatureFlagsRepository(
@@ -199,7 +205,8 @@ final secureStorageProvider = Provider<FlutterSecureStorage>(
     aOptions: ref.watch(currentPlatformServiceProvider).isAndroid
         ? AndroidOptions(
             sharedPreferencesName: 'secure_storage',
-            encryptedSharedPreferences: ref
+            encryptedSharedPreferences:
+                ref
                     .read(deviceInfoServiceProvider)
                     .requireValue
                     .androidDeviceInfo!
@@ -217,8 +224,8 @@ final secureStorageProvider = Provider<FlutterSecureStorage>(
 
 final localNotificationsPluginProvider =
     Provider<FlutterLocalNotificationsPlugin>(
-  (ref) => FlutterLocalNotificationsPlugin(),
-);
+      (ref) => FlutterLocalNotificationsPlugin(),
+    );
 
 final notificationsServiceProvider = Provider<NotificationsService>((ref) {
   final notificationsService = NotificationsService(
@@ -239,7 +246,10 @@ final notificationsServiceProvider = Provider<NotificationsService>((ref) {
 
 final notificationsStorageProvider = Provider<NotificationsStorage>(
   (ref) => NotificationsStorageImpl(
-    ref.read(sembastProvider(KvDatabase.shared)).requireValue.serializableKv(
+    ref
+        .read(sembastProvider(KvDatabase.shared))
+        .requireValue
+        .serializableKv(
           'Notifications',
           fromJson: Notification.fromJson,
           toJson: (n) => n.toJson(),
@@ -289,7 +299,7 @@ final goRouterRefreshStreamProvider = Provider<GoRouterRefreshStream>((ref) {
       ref.watch(localAuthServiceProvider).refreshUIStream.startWith(null),
       ref.watch(featureFlagsRepoProvider).onConfigChanged.startWith(null),
       //Just notify when any stream emits
-      (_, __, ___) => Object(),
+      (_, _, _) => Object(),
     ),
   );
 
@@ -389,8 +399,9 @@ final shareServiceProvider = Provider<ShareService>(
 
 final authRepositoryProvider = Provider<AuthRepository>(
   (ref) {
-    final firebaseAuthRepository =
-        FirebaseAuthRepository(auth: ref.watch(firebaseAuthProvider));
+    final firebaseAuthRepository = FirebaseAuthRepository(
+      auth: ref.watch(firebaseAuthProvider),
+    );
     ref.onDispose(firebaseAuthRepository.dispose);
 
     return firebaseAuthRepository;

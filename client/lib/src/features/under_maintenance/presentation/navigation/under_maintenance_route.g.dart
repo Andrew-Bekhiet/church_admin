@@ -6,23 +6,19 @@ part of 'under_maintenance_route.dart';
 // GoRouterGenerator
 // **************************************************************************
 
-List<RouteBase> get $appRoutes => [
-      $underMaintenanceRoute,
-    ];
+List<RouteBase> get $appRoutes => [$underMaintenanceRoute];
 
 RouteBase get $underMaintenanceRoute => GoRouteData.$route(
-      path: '/under_maintenance',
-      factory: _$UnderMaintenanceRoute._fromState,
-    );
+  path: '/under_maintenance',
+  factory: $UnderMaintenanceRoute._fromState,
+);
 
-mixin _$UnderMaintenanceRoute on GoRouteData {
+mixin $UnderMaintenanceRoute on GoRouteData {
   static UnderMaintenanceRoute _fromState(GoRouterState state) =>
       const UnderMaintenanceRoute();
 
   @override
-  String get location => GoRouteData.$location(
-        '/under_maintenance',
-      );
+  String get location => GoRouteData.$location('/under_maintenance');
 
   @override
   void go(BuildContext context) => context.go(location);
