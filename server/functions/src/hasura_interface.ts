@@ -87,14 +87,15 @@ export async function getPersonIdFromUser(
   return null;
 }
 
-export async function checkUserAccess(
+export async function checkUserAccessToPerson(
   table: PhotoTable,
   id: string,
-  hasura_uid: string,
-  permission: "read" | "write"
-): Promise<boolean> {
+  hasuraUid: string
+): Promise<{ canRead: boolean; canWrite: boolean; personUid: string | null }> {
   try {
-    if (permission == "write" && table == "users") return false;
+    if (table == "users") {
+      return { canRead: true, canWrite: false, personUid: null };
+    }
 
     const hasura_response = await makeGraphqlRequest({
       query: `
@@ -124,29 +125,33 @@ export async function checkUserAccess(
               ) {
                 allowEdit
               }
+              personsByPk(id: $id) {
+                uid
+              }
             }
           `,
       variables: {
         id,
-        uid: hasura_uid,
+        uid: hasuraUid,
         table,
-        anyEntityType: table == "users" ? "any-user" : "any",
+        anyEntityType: "any",
       },
       operationName: "checkPermissions",
     });
 
     const exists: Array<{ allowEdit: boolean }> =
       hasura_response.data?.["data"]?.["authUsersPermissionsByEntityId"] ?? [];
+    const personUid = hasura_response.data?.["data"]?.["personsByPk"]?.["uid"];
 
-    return (
-      (permission == "read" && exists.length > 0) ||
-      (permission == "write" && !!exists?.[0]?.allowEdit)
-    );
+    const canRead = exists.length > 0;
+    const canWrite = !!exists?.[0]?.allowEdit;
+
+    return { canRead, canWrite, personUid };
   } catch (e) {
     console.error(e);
   }
 
-  return false;
+  return { canRead: false, canWrite: false, personUid: null };
 }
 
 export async function upsertUser(user: {
@@ -341,12 +346,10 @@ export async function makeGraphqlRequest({
   query,
   variables,
   operationName,
-  headers,
 }: {
   query: string;
   variables: object;
   operationName?: string;
-  headers?: object;
 }): Promise<AxiosResponse> {
   return axios.post(
     process.env["HASURA_SERVER"]!,
@@ -357,7 +360,7 @@ export async function makeGraphqlRequest({
     }),
     {
       method: "POST",
-      headers: headers ?? {
+      headers: {
         "content-type": "application/json",
         "x-hasura-admin-secret": process.env["HASURA_ADMIN_SECRET"]!,
         "x-hasura-role": "admin",

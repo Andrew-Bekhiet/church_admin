@@ -4,7 +4,7 @@ import { AuthData } from "firebase-functions/v2/tasks";
 import { assertUserAuthenticatedAndApproved } from "./common";
 import {
   PhotoTable,
-  checkUserAccess,
+  checkUserAccessToPerson as checkUserAccessToPhoto,
   getHasuraUID,
   getPersonIdFromUser,
   photoTables,
@@ -131,18 +131,19 @@ async function _authenticateStorageRequest(
 
     console.log({ hasuraUID, table, id, action });
 
-    const isReadingPublicPhoto =
-      action == "read" && publicPhotoTables.find((t) => t == table);
+    const userCanAccessPhoto = await checkUserAccessToPhoto(
+      table as PhotoTable,
+      id,
+      hasuraUID
+    );
 
-    if (
-      !isReadingPublicPhoto &&
-      !(await checkUserAccess(
-        table as PhotoTable,
-        id,
-        hasuraUID,
-        action == "delete" ? "write" : action
-      ))
-    ) {
+    const isReadingPublicPhoto = publicPhotoTables.some((t) => t == table);
+    const canRead =
+      action == "read" && (userCanAccessPhoto.canRead || isReadingPublicPhoto);
+    const canWrite =
+      (action == "write" || action == "delete") && userCanAccessPhoto.canWrite;
+
+    if (!canRead && !canWrite) {
       throw new https.HttpsError(
         "not-found",
         `Object with id ${id} in table ${table} was not found`
@@ -151,8 +152,8 @@ async function _authenticateStorageRequest(
 
     if (
       table == "persons" &&
-      action == "write" &&
-      id != (await getPersonIdFromUser(hasuraUID))
+      (action == "write" || action == "delete") &&
+      (userCanAccessPhoto.personUid ?? hasuraUID) != hasuraUID
     ) {
       throw new https.HttpsError(
         "permission-denied",
