@@ -1,4 +1,6 @@
 defmodule ChurchAdmin.Geography.Store do
+  alias ChurchAdmin.Geography
+
   use Ash.Resource,
     domain: ChurchAdmin.Geography,
     data_layer: AshPostgres.DataLayer,
@@ -54,5 +56,6 @@ defmodule ChurchAdmin.Geography.Store do
 
   relationships do
     belongs_to :admin_family, ChurchAdmin.Person.Family, public?: true
+    has_one :address, destination: Geography.Address, public?: true
   end
 end
