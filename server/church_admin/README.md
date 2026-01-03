@@ -16,6 +16,7 @@ Last updated 11/8/2025
 * ~~Review and continue working on `Attendance` context~~
 * ~~Add missing relationships (`areas_streets`, `classes_persons`, ...)~~
 * Add missing constraint triggers and triggers
+* Add Audit logs and soft deletes
 * Add Authentication and Authorization
 * Add graphql relationships support (ie: creating an address with creating a person or family)
 * Maybe support initial response on list subscriptions (return all areas on initiating areas subscription)
