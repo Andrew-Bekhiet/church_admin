@@ -1,13 +1,17 @@
 defmodule ChurchAdmin.Geography.Street do
+  @moduledoc false
+  import AshGeo.Postgis
+  import Ash.Expr
+
+  require Ash.Query
+
+  alias Ash.Changeset
+  alias ChurchAdmin.Geography
+
   use Ash.Resource,
-    authorizers: [Ash.Policy.Authorizer],
     domain: ChurchAdmin.Geography,
     data_layer: AshPostgres.DataLayer,
     extensions: [AshGraphql.Resource]
-
-  @moduledoc """
-  Street resource maps to public.streets
-  """
 
   graphql do
     type :streets
@@ -36,7 +40,27 @@ defmodule ChurchAdmin.Geography.Street do
   end
 
   actions do
-    defaults [:read, :destroy, create: :*, update: :*]
+    defaults [:read, :destroy]
+
+    create :create do
+      accept :*
+      touches_resources [ChurchAdmin.Geography.Area]
+
+      argument :line, :geo_json
+      change set_attribute(:line, arg(:line))
+      change &sync_related_areas/2
+    end
+
+    update :update do
+      accept :*
+      primary? true
+      require_atomic? false
+      touches_resources [ChurchAdmin.Geography.Area]
+
+      argument :line, :geo_json
+      change set_attribute(:line, arg(:line))
+      change &sync_related_areas/2
+    end
   end
 
   attributes do
@@ -49,5 +73,57 @@ defmodule ChurchAdmin.Geography.Street do
 
     attribute :deleted_at, :datetime, public?: false
     attribute :deleted_by, :uuid_v7, public?: false
+  end
+
+  relationships do
+    many_to_many :areas, Geography.Area do
+      through Geography.AreasStreets
+      public? true
+      source_attribute_on_join_resource :street_id
+      destination_attribute_on_join_resource :area_id
+      read_action :read
+    end
+  end
+
+  defp sync_related_areas(%Changeset{action_type: type} = changeset, _street)
+       when type in [:create, :update] do
+    cond do
+      Changeset.changing_attribute?(changeset, :line) ->
+        line = Changeset.get_attribute(changeset, :line)
+
+        threshold = geo_search_threshold()
+
+        areas =
+          case line do
+            nil ->
+              []
+
+            _ ->
+              Geography.Area
+              |> Ash.Query.filter(
+                expr(
+                  not is_nil(bounds) and
+                    ^st_dwithin_in_meters(bounds, ^line, ^threshold)
+                )
+              )
+              |> Ash.read!()
+          end
+
+        changeset
+        |> Changeset.manage_relationship(:areas, areas, type: :append_and_remove)
+
+      true ->
+        changeset
+    end
+  end
+
+  defp geo_search_threshold() do
+    case Application.get_env(:church_admin, :geo_search_threshold, 0) do
+      v when is_integer(v) ->
+        v
+
+      _ ->
+        0
+    end
   end
 end

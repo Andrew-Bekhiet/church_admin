@@ -49,7 +49,7 @@ defmodule ChurchAdmin.Geography.Area do
 
       argument :bounds, :geo_json
       change set_attribute(:bounds, arg(:bounds))
-      change &sync_related_areas/2
+      change &sync_related_streets/2
     end
 
     update :update do
@@ -60,7 +60,7 @@ defmodule ChurchAdmin.Geography.Area do
 
       argument :bounds, :geo_json
       change set_attribute(:bounds, arg(:bounds))
-      change &sync_related_areas/2
+      change &sync_related_streets/2
     end
   end
 
@@ -95,7 +95,7 @@ defmodule ChurchAdmin.Geography.Area do
     end
   end
 
-  defp sync_related_areas(%Changeset{action_type: type} = changeset, _area)
+  defp sync_related_streets(%Changeset{action_type: type} = changeset, _area)
        when type in [:create, :update] do
     cond do
       Changeset.changing_attribute?(changeset, :bounds) ->
