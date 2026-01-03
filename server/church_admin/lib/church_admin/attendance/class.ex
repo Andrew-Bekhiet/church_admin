@@ -1,6 +1,5 @@
 defmodule ChurchAdmin.Attendance.Class do
   use Ash.Resource,
-    authorizers: [Ash.Policy.Authorizer],
     domain: ChurchAdmin.Attendance,
     data_layer: AshPostgres.DataLayer,
     extensions: [AshGraphql.Resource]
@@ -49,8 +48,8 @@ defmodule ChurchAdmin.Attendance.Class do
     attribute :gender, :boolean, public?: true
 
     attribute :color, :color, public?: true
-    attribute :photo_updated_at, :datetime, public?: true
-    attribute :blurhash, :string, public?: true
+    attribute :photo_updated_at, :datetime, public?: true, writable?: false
+    attribute :blurhash, :string, public?: true, writable?: false
 
     attribute :deleted_at, :datetime, public?: false
     attribute :deleted_by, :uuid_v7, public?: false

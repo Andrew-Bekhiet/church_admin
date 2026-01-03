@@ -29,7 +29,9 @@ defmodule ChurchAdminWeb.Router do
         interface: :simple
     end
 
-    forward "/", Absinthe.Plug, schema: Module.concat([ChurchAdminWeb.GraphqlSchema])
+    forward "/", Absinthe.Plug,
+      schema: Module.concat([ChurchAdminWeb.GraphqlSchema]),
+      json_codec: Jason
   end
 
   # scope "/", ChurchAdminWeb do

@@ -51,6 +51,7 @@ config :spark,
 config :geo_postgis, json_library: Jason
 
 config :ash, :custom_types,
+  geo_json: AshGeo.GeoJson,
   point: ChurchAdmin.Type.Point,
   line_string: ChurchAdmin.Type.LineString,
   polygon: ChurchAdmin.Type.Polygon,

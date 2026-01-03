@@ -18,7 +18,6 @@ defmodule ChurchAdmin.Geography.Metadata.BaseResource do
 
     quote do
       use Ash.Resource,
-        authorizers: [Ash.Policy.Authorizer],
         domain: ChurchAdmin.Geography,
         data_layer: AshPostgres.DataLayer,
         extensions: [AshGraphql.Resource]

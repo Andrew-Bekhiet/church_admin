@@ -31,7 +31,6 @@ defmodule ChurchAdmin.Geography.Address do
   alias ChurchAdmin.{Geography, Person}
 
   use Ash.Resource,
-    authorizers: [Ash.Policy.Authorizer],
     domain: ChurchAdmin.Geography,
     data_layer: AshPostgres.DataLayer,
     extensions: [AshGraphql.Resource]

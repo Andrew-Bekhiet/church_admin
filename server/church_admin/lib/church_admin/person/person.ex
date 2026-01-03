@@ -4,7 +4,6 @@ defmodule ChurchAdmin.Person.Person do
   alias ChurchAdmin.Attendance
 
   use Ash.Resource,
-    authorizers: [Ash.Policy.Authorizer],
     domain: ChurchAdmin.Person,
     data_layer: AshPostgres.DataLayer,
     extensions: [AshGraphql.Resource]
@@ -108,8 +107,8 @@ defmodule ChurchAdmin.Person.Person do
     attribute :uid, :uuid_v7, public?: true
 
     attribute :color, :color, public?: true
-    attribute :photo_updated_at, :datetime, public?: true
-    attribute :blurhash, :string, public?: true
+    attribute :photo_updated_at, :datetime, public?: true, writable?: false
+    attribute :blurhash, :string, public?: true, writable?: false
 
     attribute :national_id, :integer, sensitive?: true, public?: false
     attribute :work_status, :string, public?: true

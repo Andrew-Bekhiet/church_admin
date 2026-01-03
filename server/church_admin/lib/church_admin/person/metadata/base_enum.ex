@@ -5,7 +5,6 @@ defmodule ChurchAdmin.Person.Metadata.BaseEnum do
 
     quote do
       use Ash.Resource,
-        authorizers: [Ash.Policy.Authorizer],
         domain: ChurchAdmin.Person,
         data_layer: AshPostgres.DataLayer,
         extensions: [AshGraphql.Resource]

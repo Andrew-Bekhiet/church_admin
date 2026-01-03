@@ -1,6 +1,5 @@
 defmodule ChurchAdmin.Attendance.PersonService do
   use Ash.Resource,
-    authorizers: [Ash.Policy.Authorizer],
     domain: ChurchAdmin.Attendance,
     data_layer: AshPostgres.DataLayer,
     extensions: [AshGraphql.Resource]

@@ -1,6 +1,5 @@
 defmodule ChurchAdmin.Person.FamiliesFamilies do
   use Ash.Resource,
-    authorizers: [Ash.Policy.Authorizer],
     domain: ChurchAdmin.Person,
     data_layer: AshPostgres.DataLayer,
     extensions: [AshGraphql.Resource]

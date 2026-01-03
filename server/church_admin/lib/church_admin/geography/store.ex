@@ -1,6 +1,5 @@
 defmodule ChurchAdmin.Geography.Store do
   use Ash.Resource,
-    authorizers: [Ash.Policy.Authorizer],
     domain: ChurchAdmin.Geography,
     data_layer: AshPostgres.DataLayer,
     extensions: [AshGraphql.Resource]
@@ -46,8 +45,8 @@ defmodule ChurchAdmin.Geography.Store do
     uuid_v7_primary_key :id
     attribute :name, :string, allow_nil?: false, public?: true
     attribute :color, :color, public?: true
-    attribute :photo_updated_at, :datetime, public?: true
-    attribute :blurhash, :string, public?: true
+    attribute :photo_updated_at, :datetime, public?: true, writable?: false
+    attribute :blurhash, :string, public?: true, writable?: false
 
     attribute :deleted_at, :datetime, public?: false
     attribute :deleted_by, :uuid_v7, public?: false

@@ -10,7 +10,6 @@ defmodule ChurchAdmin.Geography.Area do
   alias ChurchAdmin.Geography
 
   use Ash.Resource,
-    authorizers: [Ash.Policy.Authorizer],
     domain: ChurchAdmin.Geography,
     data_layer: AshPostgres.DataLayer,
     extensions: [AshGraphql.Resource]
@@ -48,14 +47,20 @@ defmodule ChurchAdmin.Geography.Area do
       accept :*
       touches_resources [ChurchAdmin.Geography.Street]
 
-      change after_action(&sync_related_areas/2), always_atomic?: true
+      argument :bounds, :geo_json
+      change set_attribute(:bounds, arg(:bounds))
+      change &sync_related_areas/2
     end
 
     update :update do
       accept :*
+      primary? true
+      require_atomic? false
       touches_resources [ChurchAdmin.Geography.Street]
 
-      change after_action(&sync_related_areas/2), always_atomic?: true
+      argument :bounds, :geo_json
+      change set_attribute(:bounds, arg(:bounds))
+      change &sync_related_areas/2
     end
   end
 
@@ -65,8 +70,8 @@ defmodule ChurchAdmin.Geography.Area do
     attribute :name, :string, allow_nil?: false, public?: true
     attribute :bounds, :polygon, public?: true
     attribute :color, :color, public?: true
-    attribute :photo_updated_at, :datetime, public?: true
-    attribute :blurhash, :string, public?: true
+    attribute :photo_updated_at, :datetime, public?: true, writable?: false
+    attribute :blurhash, :string, public?: true, writable?: false
 
     attribute :deleted_at, :datetime, public?: false
     attribute :deleted_by, :uuid_v7, public?: false
@@ -90,7 +95,7 @@ defmodule ChurchAdmin.Geography.Area do
     end
   end
 
-  defp sync_related_areas(%Changeset{action_type: type} = changeset, area)
+  defp sync_related_areas(%Changeset{action_type: type} = changeset, _area)
        when type in [:create, :update] do
     cond do
       Changeset.changing_attribute?(changeset, :bounds) ->
@@ -114,13 +119,11 @@ defmodule ChurchAdmin.Geography.Area do
               |> Ash.read!()
           end
 
-        area
-        |> Changeset.new()
+        changeset
         |> Changeset.manage_relationship(:streets, streets, type: :append_and_remove)
-        |> Ash.update()
 
       true ->
-        {:ok, area}
+        changeset
     end
   end
 
