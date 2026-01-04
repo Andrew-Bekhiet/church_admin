@@ -1,13 +1,8 @@
 defmodule ChurchAdmin.Geography.Area do
   @moduledoc false
-  import AshGeo.Postgis
-  import Ash.Expr
-
-  require Ash.Query
-
-  alias Ash.Changeset
   alias ChurchAdmin.Person
   alias ChurchAdmin.Geography
+  alias Geography.Changes.SyncAreasStreetsWithGeoraphy
 
   use Ash.Resource,
     domain: ChurchAdmin.Geography,
@@ -49,7 +44,7 @@ defmodule ChurchAdmin.Geography.Area do
 
       argument :bounds, :geo_json
       change set_attribute(:bounds, arg(:bounds))
-      change &sync_related_streets/2
+      change {SyncAreasStreetsWithGeoraphy, mode: :area_to_streets}
     end
 
     update :update do
@@ -59,8 +54,8 @@ defmodule ChurchAdmin.Geography.Area do
       touches_resources [ChurchAdmin.Geography.Street]
 
       argument :bounds, :geo_json
-      change set_attribute(:bounds, arg(:bounds))
-      change &sync_related_streets/2
+      change set_attribute(:bounds, arg(:bounds)), where: changing(:bounds)
+      change {SyncAreasStreetsWithGeoraphy, mode: :area_to_streets}
     end
   end
 
@@ -92,48 +87,6 @@ defmodule ChurchAdmin.Geography.Area do
       destination_attribute_on_join_resource :family_id
       read_action :read
       public? true
-    end
-  end
-
-  defp sync_related_streets(%Changeset{action_type: type} = changeset, _area)
-       when type in [:create, :update] do
-    cond do
-      Changeset.changing_attribute?(changeset, :bounds) ->
-        bounds = Changeset.get_attribute(changeset, :bounds)
-
-        threshold = geo_search_threshold()
-
-        streets =
-          case bounds do
-            nil ->
-              []
-
-            _ ->
-              Geography.Street
-              |> Ash.Query.filter(
-                expr(
-                  not is_nil(line) and
-                    ^st_dwithin_in_meters(^bounds, line, ^threshold)
-                )
-              )
-              |> Ash.read!()
-          end
-
-        changeset
-        |> Changeset.manage_relationship(:streets, streets, type: :append_and_remove)
-
-      true ->
-        changeset
-    end
-  end
-
-  defp geo_search_threshold() do
-    case Application.get_env(:church_admin, :geo_search_threshold, 0) do
-      v when is_integer(v) ->
-        v
-
-      _ ->
-        0
     end
   end
 end
