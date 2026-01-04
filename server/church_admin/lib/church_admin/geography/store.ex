@@ -40,7 +40,16 @@ defmodule ChurchAdmin.Geography.Store do
   end
 
   actions do
-    defaults [:read, :destroy, create: :*, update: :*]
+    defaults [:read, :destroy, create: :*]
+
+    update :update do
+      accept :*
+    end
+  end
+
+  validations do
+    validate present(:admin_family) || present(:address),
+      message: "Store must belong to an admin family or have an address"
   end
 
   attributes do
