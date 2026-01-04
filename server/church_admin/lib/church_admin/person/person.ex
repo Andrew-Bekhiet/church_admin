@@ -33,14 +33,9 @@ defmodule ChurchAdmin.Person.Person do
     schema "public"
 
     custom_indexes do
-      index [
-              "replace(replace(replace(replace(replace(name, 'ى', 'ي'), 'أ', 'ا'), 'إ', 'ا'), 'آ', 'ا'), 'ة', 'ه')",
-              :main_phone,
-              :birthdate
-            ],
-            name: "idx_persons_clean_name_main_phone_birthdate",
-            unique: true
-
+      index [:family_id, :id, :study_year_id, :gender], where: "family_id IS NOT NULL"
+      index [:gender, :study_year_id, :id], include: ["family_id"]
+      index [:store_id], where: "store_id IS NOT NULL"
       index ["get_birthday(birthdate)"], name: "idx_persons_birthdays"
       index [:deleted_at]
     end
