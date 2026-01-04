@@ -89,7 +89,12 @@ defmodule ChurchAdmin.Geography.Changes.SyncAreasStreetsWithGeoraphy do
       )
       |> Ash.read!()
 
-    Changeset.manage_relationship(changeset, :streets, old_streets, type: :remove)
+    # Using on_no_match: :ignore as due to manual linking
+    # there could be inconsistencies with geographical matches
+    Changeset.manage_relationship(changeset, :streets, old_streets,
+      type: :remove,
+      on_no_match: :ignore
+    )
   end
 
   defp add_streets_from_bounds(changeset, nil, _threshold), do: changeset
@@ -121,7 +126,12 @@ defmodule ChurchAdmin.Geography.Changes.SyncAreasStreetsWithGeoraphy do
       )
       |> Ash.read!()
 
-    Changeset.manage_relationship(changeset, :areas, old_areas, type: :remove)
+    # Using on_no_match: :ignore as due to manual linking
+    # there could be inconsistencies with geographical matches
+    Changeset.manage_relationship(changeset, :areas, old_areas,
+      type: :remove,
+      on_no_match: :ignore
+    )
   end
 
   defp add_areas_from_line(changeset, nil, _threshold), do: changeset
