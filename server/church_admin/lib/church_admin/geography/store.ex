@@ -48,7 +48,7 @@ defmodule ChurchAdmin.Geography.Store do
   end
 
   validations do
-    validate present(:admin_family) || present(:address),
+    validate present([:admin_family, :address], at_least: 1),
       message: "Store must belong to an admin family or have an address"
   end
 
