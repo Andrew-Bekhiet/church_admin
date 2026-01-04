@@ -1,5 +1,6 @@
 defmodule ChurchAdmin.Geography.Area do
   @moduledoc false
+  alias Ash.Changeset
   alias ChurchAdmin.Person
   alias ChurchAdmin.Geography
   alias Geography.Changes.SyncAreasStreetsWithGeoraphy
@@ -42,7 +43,15 @@ defmodule ChurchAdmin.Geography.Area do
       accept :*
       touches_resources [ChurchAdmin.Geography.Street]
 
-      argument :bounds, :geo_json
+      change fn changeset, _context ->
+        if Map.has_key?(changeset.arguments, :bounds) do
+          bounds = Changeset.get_argument(changeset, :bounds)
+          changeset |> Changeset.change_attribute(:bounds, bounds)
+        else
+          changeset
+        end
+      end
+
       change set_attribute(:bounds, arg(:bounds))
       change {SyncAreasStreetsWithGeoraphy, mode: :area_to_streets}
     end
@@ -53,7 +62,15 @@ defmodule ChurchAdmin.Geography.Area do
       require_atomic? false
       touches_resources [ChurchAdmin.Geography.Street]
 
-      argument :bounds, :geo_json
+      change fn changeset, _context ->
+        if Map.has_key?(changeset.arguments, :bounds) do
+          bounds = Changeset.get_argument(changeset, :bounds)
+          changeset |> Changeset.change_attribute(:bounds, bounds)
+        else
+          changeset
+        end
+      end
+
       change set_attribute(:bounds, arg(:bounds)), where: changing(:bounds)
       change {SyncAreasStreetsWithGeoraphy, mode: :area_to_streets}
     end

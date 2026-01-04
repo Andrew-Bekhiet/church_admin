@@ -1,5 +1,6 @@
 defmodule ChurchAdmin.Geography.Street do
   @moduledoc false
+  alias Ash.Changeset
   alias ChurchAdmin.Geography
   alias Geography.Changes.SyncAreasStreetsWithGeoraphy
 
@@ -39,32 +40,70 @@ defmodule ChurchAdmin.Geography.Street do
 
     create :create do
       accept :*
-      touches_resources [ChurchAdmin.Geography.Area]
+      touches_resources [Geography.Area]
 
       argument :line, :geo_json
       argument :areas, {:array, :uuid_v7}, allow_nil?: false, default: []
 
-      change set_attribute(:line, arg(:line))
+      change fn changeset, _context ->
+        if Map.has_key?(changeset.arguments, :line) do
+          line = Changeset.get_argument(changeset, :line)
+          changeset |> Changeset.change_attribute(:line, line)
+        else
+          changeset
+        end
+      end
+
       change {SyncAreasStreetsWithGeoraphy, mode: :street_to_areas}
       change manage_relationship(:areas, type: :append, value_is_key: :id)
+      change fn changeset, _ctx -> validate_street_has_at_least_one_area(changeset) end
     end
 
     update :update do
       accept :*
       primary? true
       require_atomic? false
-      touches_resources [ChurchAdmin.Geography.Area]
+      touches_resources [Geography.Area]
 
       argument :line, :geo_json
-      argument :link_areas, {:array, :uuid_v7}, allow_nil?: false, default: []
       argument :unlink_areas, {:array, :uuid_v7}, allow_nil?: false, default: []
+      argument :link_areas, {:array, :uuid_v7}, allow_nil?: false, default: []
 
-      change set_attribute(:line, arg(:line)), where: changing(:line)
+      change fn changeset, _context ->
+        if Map.has_key?(changeset.arguments, :line) do
+          line = Changeset.get_argument(changeset, :line)
+          changeset |> Changeset.change_attribute(:line, line)
+        else
+          changeset
+        end
+      end
+
+      change set_attribute(:line, arg(:line))
+
       change {SyncAreasStreetsWithGeoraphy, mode: :street_to_areas}
 
       change manage_relationship(:unlink_areas, :areas, type: :remove, value_is_key: :id)
       change manage_relationship(:link_areas, :areas, type: :append, value_is_key: :id)
+      change fn changeset, _ctx -> validate_street_has_at_least_one_area(changeset) end
     end
+  end
+
+  @spec validate_street_has_at_least_one_area(Changeset.t()) :: Changeset.t()
+  defp validate_street_has_at_least_one_area(changeset) do
+    changeset
+    |> Changeset.after_action(fn _changeset, result ->
+      %{areas: areas} = Ash.load!(result, [:areas])
+
+      if Enum.empty?(areas) do
+        {:error,
+         Ash.Error.Changes.InvalidChanges.exception(
+           fields: [:areas],
+           message: "must have at least one area"
+         )}
+      else
+        {:ok, result}
+      end
+    end)
   end
 
   attributes do
