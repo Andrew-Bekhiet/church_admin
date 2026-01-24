@@ -36,6 +36,8 @@ class FunctionsService {
     _pendingDownloadUrls[hash] ??= httpsCallable('getDownloadUrl')
         .call({'table': table, 'id': id, 'contentType': contentType})
         .then((value) {
+          // Map.remove returns the removed value
+          // which the analyzer marks as unawaited
           unawaited(_pendingDownloadUrls.remove(hash));
           return value.data;
         });
@@ -43,6 +45,8 @@ class FunctionsService {
     try {
       return await _pendingDownloadUrls[hash]!;
     } catch (e) {
+      // Map.remove returns the removed value
+      // which the analyzer marks as unawaited
       unawaited(_pendingDownloadUrls.remove(hash));
       rethrow;
     }
