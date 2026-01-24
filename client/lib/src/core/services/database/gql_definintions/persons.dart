@@ -340,7 +340,7 @@ class PersonsDAO extends FullCRUDDAO<Person> {
     required DateTime lastConfession,
     required DateTime lastKodas,
   }) {
-    return graphQLClient.mutateAndReturnParsed(
+    return graphQLClient.mutateAndReturnParsedNullable(
       MutationOptions(
         document: documentNodeMutationupdatePersonSpiritData,
         operationName: 'updatePersonSpiritData',
