@@ -31,8 +31,9 @@ class ChipTabBarPersistentHeaderDelegate
 
     return Material(
       surfaceTintColor: theme.colorScheme.surfaceTint,
-      elevation:
-          overlapsContent ? theme.appBarTheme.scrolledUnderElevation ?? 4 : 0,
+      elevation: overlapsContent
+          ? theme.appBarTheme.scrolledUnderElevation ?? 4
+          : 0,
       color: theme.scaffoldBackgroundColor,
       child: Align(
         alignment: AlignmentDirectional.centerStart,

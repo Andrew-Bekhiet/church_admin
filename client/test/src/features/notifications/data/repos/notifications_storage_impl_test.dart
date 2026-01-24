@@ -22,8 +22,9 @@ void main() {
         'Read',
         () async {
           final mockLazyBox = MockKVStore<Notification>();
-          when(mockLazyBox.get('1'))
-              .thenAnswer((_) async => expectedNotification);
+          when(
+            mockLazyBox.get('1'),
+          ).thenAnswer((_) async => expectedNotification);
 
           final unit = NotificationsStorageImpl(mockLazyBox);
 
@@ -39,8 +40,9 @@ void main() {
 
       test('Write', () async {
         final mockLazyBox = MockKVStore<Notification>();
-        when(mockLazyBox.get('1'))
-            .thenAnswer((_) async => expectedNotification);
+        when(
+          mockLazyBox.get('1'),
+        ).thenAnswer((_) async => expectedNotification);
 
         final unit = NotificationsStorageImpl(mockLazyBox);
 

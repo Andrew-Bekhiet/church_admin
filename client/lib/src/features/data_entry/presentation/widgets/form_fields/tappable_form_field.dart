@@ -45,50 +45,45 @@ class _TappableFormFieldState<T> extends State<TappableFormField<T>> {
         autovalidateMode: widget.autovalidateMode,
         initialValue: widget.initialValue,
         enabled: enabled,
-        builder:
-            (state) => InkWell(
-              focusNode: _effectiveFocusNode,
-              onTap:
-                  enabled
-                      ? () async {
-                        _effectiveFocusNode.requestFocus();
+        builder: (state) => InkWell(
+          focusNode: _effectiveFocusNode,
+          onTap: enabled
+              ? () async {
+                  _effectiveFocusNode.requestFocus();
 
-                        final previousValue = state.value;
+                  final previousValue = state.value;
 
-                        await widget.onTap!(state);
+                  await widget.onTap!(state);
 
-                        if (state.value != previousValue &&
-                            (_effectiveFocusNode.context?.mounted ?? false)) {
-                          _effectiveFocusNode.nextFocus();
-                        }
-                      }
-                      : null,
-              child: AnimatedBuilder(
-                animation: _effectiveFocusNode,
-                child: widget.builder(context, state),
+                  if (state.value != previousValue &&
+                      (_effectiveFocusNode.context?.mounted ?? false)) {
+                    _effectiveFocusNode.nextFocus();
+                  }
+                }
+              : null,
+          child: AnimatedBuilder(
+            animation: _effectiveFocusNode,
+            child: widget.builder(context, state),
 
-                builder:
-                    (context, child) => InputDecorator(
-                      isFocused: _effectiveFocusNode.hasFocus,
-                      decoration:
-                          widget.decoration != null
-                              ? widget.decoration!(context, state)
-                              : InputDecoration(
-                                errorText: state.errorText,
-                                labelText: widget.labelText,
-                                enabled: enabled,
-                              ),
-                      isEmpty: state.value == null,
-                      child:
-                          child != null
-                              ? Opacity(
-                                opacity: enabled ? 1 : 0.38,
-                                child: child,
-                              )
-                              : null,
+            builder: (context, child) => InputDecorator(
+              isFocused: _effectiveFocusNode.hasFocus,
+              decoration: widget.decoration != null
+                  ? widget.decoration!(context, state)
+                  : InputDecoration(
+                      errorText: state.errorText,
+                      labelText: widget.labelText,
+                      enabled: enabled,
                     ),
-              ),
+              isEmpty: state.value == null,
+              child: child != null
+                  ? Opacity(
+                      opacity: enabled ? 1 : 0.38,
+                      child: child,
+                    )
+                  : null,
             ),
+          ),
+        ),
         onSaved: widget.onSaved,
         validator:
             widget.validator ??

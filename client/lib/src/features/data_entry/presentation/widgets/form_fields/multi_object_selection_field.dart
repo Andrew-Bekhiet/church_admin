@@ -5,7 +5,7 @@ import 'package:rxdart/rxdart.dart';
 
 class MultiObjectSelectionField<T extends Viewable> extends StatelessWidget {
   final ViewableObjectListController<T> Function(Stream<String?>)
-      listController;
+  listController;
   final Widget? Function(BuildContext, FormFieldState<Set<T>>) builder;
   final Set<T> initialValue;
   final String labelText;
@@ -58,8 +58,9 @@ class MultiObjectSelectionField<T extends Viewable> extends StatelessWidget {
               title: Text('اختيار $labelText'),
               actions: [
                 OutlinedButton(
-                  onPressed: () => Navigator.of(context)
-                      .pop(controller.selectionController.currentValue ?? {}),
+                  onPressed: () => Navigator.of(
+                    context,
+                  ).pop(controller.selectionController.currentValue ?? {}),
                   child: const Text('تم'),
                 ),
               ],
@@ -87,11 +88,12 @@ class MultiObjectSelectionField<T extends Viewable> extends StatelessWidget {
                               child: OutlinedButton.icon(
                                 icon: const Icon(Symbols.add),
                                 onPressed: () async {
-                                  final customObject =
-                                      await onCreateCustom?.call(search.value!);
+                                  final customObject = await onCreateCustom
+                                      ?.call(search.value!);
                                   if (customObject != null) {
-                                    controller.selectionController
-                                        .select(customObject);
+                                    controller.selectionController.select(
+                                      customObject,
+                                    );
                                   }
                                   search.add(null);
                                 },

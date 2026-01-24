@@ -74,8 +74,7 @@ void main() {
         'Nested conditions',
         () {
           final Filter<Object> unit = Filter(
-            PersonFields()
-                .address
+            PersonFields().address
                 .redirectTo<Object>(AddressFields().street)
                 .redirectTo<Object>(StreetFields().name),
             StringOperator.contains,

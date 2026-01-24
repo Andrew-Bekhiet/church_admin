@@ -10,8 +10,8 @@ class StudyYearsDAO extends DAOBase<StudyYear> with StreamableDAO<StudyYear> {
 
   @override
   StreamAllConfig<StudyYear> get baseStreamAllConfig => const StreamAllConfig(
-        document: documentNodeSubscriptionwatchAllStudyYears,
-      );
+    document: documentNodeSubscriptionwatchAllStudyYears,
+  );
 
   @override
   StreamSingleByIdConfig<StudyYear> get baseStreamSingleByIdConfig =>

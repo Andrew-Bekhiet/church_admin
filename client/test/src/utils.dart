@@ -12,17 +12,17 @@ void flushVisibilityDetectors() {
 }
 
 WidgetWrapper materialAppWithThemeAndLocale() => materialAppWrapper(
-      localeOverrides: [const Locale('ar', 'EG')],
-      localizations: [
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      theme: ThemingService.getDefault(
-        isDarkOverride: false,
-        greatFeastThemeOverride: false,
-      ),
-    );
+  localeOverrides: [const Locale('ar', 'EG')],
+  localizations: [
+    GlobalMaterialLocalizations.delegate,
+    GlobalWidgetsLocalizations.delegate,
+    GlobalCupertinoLocalizations.delegate,
+  ],
+  theme: ThemingService.getDefault(
+    isDarkOverride: false,
+    greatFeastThemeOverride: false,
+  ),
+);
 
 void defaultTearDown() {
   resetGlobalProviderContainer();

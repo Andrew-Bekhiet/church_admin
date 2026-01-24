@@ -13,10 +13,11 @@ extension GetCopticDate on DateTime {
 
     // Convert Gregorian date to days since Unix epoch
     final unixEpoch = DateTime(1970);
-    final daysSinceEpoch = ((gregorianDate.millisecondsSinceEpoch -
-                unixEpoch.millisecondsSinceEpoch) /
-            (1000 * 60 * 60 * 24))
-        .round();
+    final daysSinceEpoch =
+        ((gregorianDate.millisecondsSinceEpoch -
+                    unixEpoch.millisecondsSinceEpoch) /
+                (1000 * 60 * 60 * 24))
+            .round();
 
     // Convert to Coptic calendar
     // First get the year

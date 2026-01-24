@@ -9,20 +9,20 @@ class TagsDAO extends DAOBase<Tag> with StreamableDAO<Tag>, CreatableDAO<Tag> {
 
   @override
   StreamAllConfig<Tag> get baseStreamAllConfig => const StreamAllConfig(
-        document: documentNodeSubscriptionwatchAllTags,
-      );
+    document: documentNodeSubscriptionwatchAllTags,
+  );
   @override
   StreamSingleByIdConfig<Tag> get baseStreamSingleByIdConfig =>
       throw UnimplementedError();
 
   @override
   CreateObjectConfig<Tag> get baseCreateObjectConfig => CreateObjectConfig(
-        document: documentNodeMutationcreateTag,
-        varsConstructor: _createTagVarsConstructor,
-        parserFn: db.parser.singleParser(fromJson, 'insertTagsOne'),
-      );
+    document: documentNodeMutationcreateTag,
+    varsConstructor: _createTagVarsConstructor,
+    parserFn: db.parser.singleParser(fromJson, 'insertTagsOne'),
+  );
 
   Json _createTagVarsConstructor({required Tag newObject}) => {
-        'object': {'name': newObject.name},
-      };
+    'object': {'name': newObject.name},
+  };
 }

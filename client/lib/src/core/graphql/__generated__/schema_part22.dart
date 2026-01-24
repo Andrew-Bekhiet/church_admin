@@ -1,7 +1,6 @@
 // Part 22 of the schema
 part of "schema.graphql.dart";
 
-
 abstract class CopyWith_Input_GroupsUpdates<TRes> {
   factory CopyWith_Input_GroupsUpdates(
     Input_GroupsUpdates instance,

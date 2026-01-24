@@ -97,7 +97,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  void Function(bool _) _onDarkThemeChanged(bool? value) => (_) => setState(() {
+  void Function(bool _) _onDarkThemeChanged(bool? value) =>
+      (_) => setState(() {
         darkTheme = value;
       });
 

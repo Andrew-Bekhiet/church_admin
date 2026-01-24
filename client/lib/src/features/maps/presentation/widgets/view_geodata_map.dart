@@ -31,8 +31,9 @@ class _ViewGeodataMapState extends State<ViewGeodataMap>
   final _sheetScrollController = ScrollController();
 
   Point? _focusedLocation;
-  late Alignment _fabAlignment =
-      AlignmentDirectional.bottomEnd.resolve(Directionality.of(context));
+  late Alignment _fabAlignment = AlignmentDirectional.bottomEnd.resolve(
+    Directionality.of(context),
+  );
 
   late final BehaviorSubject<GeomapOptions> _mapOptions =
       BehaviorSubject.seeded(widget.initialGeomapOptions);
@@ -85,7 +86,7 @@ class _ViewGeodataMapState extends State<ViewGeodataMap>
                 child: RepaintBoundary(
                   child: GeomapFAB(focusedLocation: _focusedLocation!),
                 ),
-              )
+              ),
           ],
         ),
       ),

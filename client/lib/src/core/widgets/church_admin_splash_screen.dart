@@ -8,7 +8,8 @@ class ChurchAdminSplashScreen extends StatefulWidget {
   const ChurchAdminSplashScreen({super.key});
 
   @override
-  State<ChurchAdminSplashScreen> createState() => _ChurchAdminSplashScreenState();
+  State<ChurchAdminSplashScreen> createState() =>
+      _ChurchAdminSplashScreenState();
 }
 
 class _ChurchAdminSplashScreenState extends State<ChurchAdminSplashScreen> {

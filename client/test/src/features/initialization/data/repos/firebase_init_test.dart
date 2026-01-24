@@ -97,8 +97,9 @@ void _setUpMockFirebaseAuth() {
   final mock = MockFirebaseAuthPlatform();
   when(mock.delegateFor(app: anyNamed('app'))).thenReturn(mock);
   when(mock.setInitialValues()).thenReturn(mock);
-  when(mock.setSettings(forceRecaptchaFlow: anyNamed('forceRecaptchaFlow')))
-      .thenAnswer((_) async {
+  when(
+    mock.setSettings(forceRecaptchaFlow: anyNamed('forceRecaptchaFlow')),
+  ).thenAnswer((_) async {
     return;
   });
 

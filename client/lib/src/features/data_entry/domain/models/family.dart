@@ -64,13 +64,17 @@ class Family extends ViewableWithIDAndImage
   @override
   @JsonKey(fromJson: familyChildrenFromJson, toJson: familyChildrenToJson)
   @QueryableField(
-      manyToManyRelType: FamiliesFamilies, manyToManyRelSelectField: 'child')
+    manyToManyRelType: FamiliesFamilies,
+    manyToManyRelSelectField: 'child',
+  )
   final List<Family>? children;
 
   @override
   @JsonKey(fromJson: familyParentsFromJson, toJson: familyParentsToJson)
   @QueryableField(
-      manyToManyRelType: FamiliesFamilies, manyToManyRelSelectField: 'parent')
+    manyToManyRelType: FamiliesFamilies,
+    manyToManyRelSelectField: 'parent',
+  )
   final List<Family>? parents;
 
   @override
@@ -126,36 +130,37 @@ class Family extends ViewableWithIDAndImage
   String get typeName => AdvancedQueriesMetadata().family.name;
 
   Input_FamiliesInsertInput toInsertInput() => Input_FamiliesInsertInput(
-        name: name,
-        address: address != null
-            ? Input_AddressesObjRelInsertInput(
-                data: address!.copyWith(family: null).toInsertInput(),
-              )
-            : null,
-        status: status.name,
-        marriageDate: status == MartialStatus.widowed ? null : marriageDate,
-        deceasedSpouseName:
-            status == MartialStatus.widowed ? deceasedSpouseName : null,
-        churchId: church?.id.toUuid(),
-        notes: notes,
-        color: colorToInt(color),
-        visitHistory: Input_HistoryVisitHistoryArrRelInsertInput(
-          data: [
-            if (lastVisit != null)
-              Input_HistoryVisitHistoryInsertInput(
-                isFatherVisit: false,
-                table: 'families',
-                time: lastVisit!.time,
-              ),
-            if (lastFatherVisit != null)
-              Input_HistoryVisitHistoryInsertInput(
-                isFatherVisit: true,
-                table: 'families',
-                time: lastFatherVisit!.time,
-              ),
-          ],
-        ),
-      );
+    name: name,
+    address: address != null
+        ? Input_AddressesObjRelInsertInput(
+            data: address!.copyWith(family: null).toInsertInput(),
+          )
+        : null,
+    status: status.name,
+    marriageDate: status == MartialStatus.widowed ? null : marriageDate,
+    deceasedSpouseName: status == MartialStatus.widowed
+        ? deceasedSpouseName
+        : null,
+    churchId: church?.id.toUuid(),
+    notes: notes,
+    color: colorToInt(color),
+    visitHistory: Input_HistoryVisitHistoryArrRelInsertInput(
+      data: [
+        if (lastVisit != null)
+          Input_HistoryVisitHistoryInsertInput(
+            isFatherVisit: false,
+            table: 'families',
+            time: lastVisit!.time,
+          ),
+        if (lastFatherVisit != null)
+          Input_HistoryVisitHistoryInsertInput(
+            isFatherVisit: true,
+            table: 'families',
+            time: lastFatherVisit!.time,
+          ),
+      ],
+    ),
+  );
 
   Input_FamiliesSetInput toUpdateInput(Family oldFamily) {
     Input_FamiliesSetInput result = Input_FamiliesSetInput();
@@ -200,8 +205,9 @@ class Family extends ViewableWithIDAndImage
       result = result.copyWith(
         status: status.name,
         marriageDate: status == MartialStatus.widowed ? null : marriageDate,
-        deceasedSpouseName:
-            status == MartialStatus.widowed ? deceasedSpouseName : null,
+        deceasedSpouseName: status == MartialStatus.widowed
+            ? deceasedSpouseName
+            : null,
       );
     }
 
@@ -227,11 +233,11 @@ class FamilyFields extends _FamilyFields {
 
   @override
   List<FieldMetadata<Object>> get allFields => [
-        ...super.allFields,
-        area,
-        street,
-        district,
-      ];
+    ...super.allFields,
+    area,
+    street,
+    district,
+  ];
 
   @override
   Map<String, FieldMetadata<Object>> get allFieldsByName {

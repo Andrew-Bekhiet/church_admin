@@ -1,7 +1,6 @@
 // Part 19 of the schema
 part of "schema.graphql.dart";
 
-
 abstract class CopyWith_Input_FathersOnConflict<TRes> {
   factory CopyWith_Input_FathersOnConflict(
     Input_FathersOnConflict instance,

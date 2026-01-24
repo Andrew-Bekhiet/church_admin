@@ -9,8 +9,8 @@ class ChurchAdminSembastCodec extends AsyncContentCodecBase {
   final Cipher _cipher;
 
   ChurchAdminSembastCodec({required Uint8List key})
-      : _key = SecretKey(key),
-        _cipher = Chacha20.poly1305Aead();
+    : _key = SecretKey(key),
+      _cipher = Chacha20.poly1305Aead();
 
   @override
   Future<String> encodeAsync(Object? object) async {

@@ -76,19 +76,19 @@ class Store extends ViewableWithIDAndImage
   String get typeName => AdvancedQueriesMetadata().store.name;
 
   Input_StoresInsertInput toInsertInput() => Input_StoresInsertInput(
-        name: name,
-        address: address != null
-            ? Input_AddressesObjRelInsertInput(data: address!.toInsertInput())
-            : null,
-        adminFamily: familyId?.toUuid(),
-        color: colorToInt(color),
-      );
+    name: name,
+    address: address != null
+        ? Input_AddressesObjRelInsertInput(data: address!.toInsertInput())
+        : null,
+    adminFamily: familyId?.toUuid(),
+    color: colorToInt(color),
+  );
 
   Input_StoresSetInput toUpdateInput(Store oldStore) => Input_StoresSetInput(
-        name: name != oldStore.name ? name : null,
-        adminFamily: familyId != oldStore.familyId ? familyId?.toUuid() : null,
-        color: color != oldStore.color ? colorToInt(color) : null,
-      );
+    name: name != oldStore.name ? name : null,
+    adminFamily: familyId != oldStore.familyId ? familyId?.toUuid() : null,
+    color: color != oldStore.color ? colorToInt(color) : null,
+  );
 }
 
 class StoreFields extends _StoreFields {
@@ -109,11 +109,11 @@ class StoreFields extends _StoreFields {
 
   @override
   List<FieldMetadata<Object>> get allFields => [
-        ...super.allFields,
-        area,
-        street,
-        district,
-      ];
+    ...super.allFields,
+    area,
+    street,
+    district,
+  ];
 
   @override
   Map<String, FieldMetadata<Object>> get allFieldsByName {

@@ -35,10 +35,10 @@ class LocalAuthService with WidgetsBindingObserver {
     CurrentPlatformService? currentPlatformService,
     NotificationsService? notificationService,
     this.timeToReauth = const Duration(seconds: 30),
-  })  : _localAuthPlugin = localAuthPlugin,
-        _notificationsService = notificationService ?? NotificationsService.I,
-        _currentPlatformService =
-            currentPlatformService ?? CurrentPlatformService.I {
+  }) : _localAuthPlugin = localAuthPlugin,
+       _notificationsService = notificationService ?? NotificationsService.I,
+       _currentPlatformService =
+           currentPlatformService ?? CurrentPlatformService.I {
     scheduleReauth();
     didChangeAppLifecycleState(
       WidgetsBinding.instance.lifecycleState ?? AppLifecycleState.resumed,
@@ -51,10 +51,10 @@ class LocalAuthService with WidgetsBindingObserver {
     CurrentPlatformService? currentPlatformService,
     NotificationsService? notificationService,
     this.timeToReauth = const Duration(seconds: 30),
-  })  : _localAuthPlugin = localAuthPlugin,
-        _notificationsService = notificationService ?? NotificationsService.I,
-        _currentPlatformService =
-            currentPlatformService ?? CurrentPlatformService.I {
+  }) : _localAuthPlugin = localAuthPlugin,
+       _notificationsService = notificationService ?? NotificationsService.I,
+       _currentPlatformService =
+           currentPlatformService ?? CurrentPlatformService.I {
     didChangeAppLifecycleState(
       WidgetsBinding.instance.lifecycleState ?? AppLifecycleState.resumed,
     );
@@ -132,15 +132,15 @@ class LocalAuthService with WidgetsBindingObserver {
     _localAuthCompleter!.complete(
       localAuthentication
           .authenticate(
-        localizedReason: 'برجاء التحقق للمتابعة',
-        biometricOnly: !_currentPlatformService.isWindows,
-      )
+            localizedReason: 'برجاء التحقق للمتابعة',
+            biometricOnly: !_currentPlatformService.isWindows,
+          )
           .then(
-        (result) {
-          _localAuthCompleter = null;
-          return result;
-        },
-      ),
+            (result) {
+              _localAuthCompleter = null;
+              return result;
+            },
+          ),
     );
 
     return _localAuthCompleter!.future;

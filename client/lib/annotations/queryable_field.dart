@@ -6,6 +6,9 @@ final class QueryableField {
   final String? manyToManyRelSelectField;
   final String? renameTo;
 
-  const QueryableField(
-      {this.manyToManyRelType, this.manyToManyRelSelectField, this.renameTo});
+  const QueryableField({
+    this.manyToManyRelType,
+    this.manyToManyRelSelectField,
+    this.renameTo,
+  });
 }

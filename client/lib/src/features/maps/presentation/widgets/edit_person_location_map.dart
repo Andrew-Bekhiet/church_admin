@@ -18,11 +18,9 @@ class EditPersonLocationMap extends StatelessWidget {
       onSaved: onSaved,
       initialObject: initialPerson,
       getLocation: (p) => p.geolocation,
-      copyWithNewLocation:
-          (p, l) => p.copyWith(
-            address:
-                p.address?.copyWith(geolocation: l) ?? Address(geolocation: l),
-          ),
+      copyWithNewLocation: (p, l) => p.copyWith(
+        address: p.address?.copyWith(geolocation: l) ?? Address(geolocation: l),
+      ),
       geomapOptions: GeomapOptions(
         layers: const {
           GeoMapLayer.areas,

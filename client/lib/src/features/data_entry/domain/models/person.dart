@@ -316,24 +316,30 @@ class Person extends ViewableWithIDAndImage
     this.visitHistoryAggregate,
     this.editHistoryAggregate,
     this.userCanEdit = false,
-  })  : lastConfession = lastConfession ??
-            confessionHistoryAggregate?.aggregate.max ??
-            confessionHistory?.singleOrNull,
-        lastKodas = lastKodas ??
-            kodasHistoryAggregate?.aggregate.max ??
-            kodasHistory?.singleOrNull,
-        lastAttendance = lastAttendance ??
-            attendanceHistoryAggregate?.aggregate.max ??
-            attendanceHistory?.singleOrNull,
-        lastCall = lastCall ??
-            callHistoryAggregate?.aggregate.max ??
-            callHistory?.singleOrNull,
-        lastVisit = lastVisit ??
-            visitHistoryAggregate?.aggregate.max ??
-            visitHistory?.singleOrNull,
-        lastEdit = lastEdit ??
-            editHistoryAggregate?.aggregate.max ??
-            editHistory?.singleOrNull;
+  }) : lastConfession =
+           lastConfession ??
+           confessionHistoryAggregate?.aggregate.max ??
+           confessionHistory?.singleOrNull,
+       lastKodas =
+           lastKodas ??
+           kodasHistoryAggregate?.aggregate.max ??
+           kodasHistory?.singleOrNull,
+       lastAttendance =
+           lastAttendance ??
+           attendanceHistoryAggregate?.aggregate.max ??
+           attendanceHistory?.singleOrNull,
+       lastCall =
+           lastCall ??
+           callHistoryAggregate?.aggregate.max ??
+           callHistory?.singleOrNull,
+       lastVisit =
+           lastVisit ??
+           visitHistoryAggregate?.aggregate.max ??
+           visitHistory?.singleOrNull,
+       lastEdit =
+           lastEdit ??
+           editHistoryAggregate?.aggregate.max ??
+           editHistory?.singleOrNull;
 
   factory Person.fromJson(Map<String, Object?> json) => _$PersonFromJson(json);
 
@@ -359,149 +365,149 @@ class Person extends ViewableWithIDAndImage
   }
 
   Input_PersonsInsertInput toInsertInput() => Input_PersonsInsertInput(
-        nationalId: nationalId,
-        name: name,
-        mainPhone: mainPhone,
-        otherPhones: otherPhones,
-        birthdate: birthdate,
-        gender: gender,
-        isShammas: isShammas,
-        shammasLevelId: shammasLevel?.id.toUuid(),
-        schoolId: school?.id.toUuid(),
-        collegeId: college?.id.toUuid(),
-        churchId: church?.id.toUuid(),
-        fatherId: father?.id.toUuid(),
-        workStatus: workStatus?.name,
-        jobId: job?.id.toUuid(),
-        jobDescription: jobDescription,
-        qualificationId: qualification?.id.toUuid(),
-        martialStatus: martialStatus?.name,
-        personTypeId: personType?.id.toUuid(),
-        stateId: state?.id.toUuid(),
-        isServant: isServant,
-        servingChurchId: servingChurch?.id.toUuid(),
-        serviceType: serviceType,
-        notes: notes,
-        family: family == null && address != null
-            ? Input_FamiliesObjRelInsertInput(
-                data: Family(
-                  id: family?.id ?? Namespace.nil.value,
-                  name: name.split(' ').sublist(1).join(' '),
-                  address: address!.copyWith(family: null),
-                ).toInsertInput(),
-              )
-            : null,
-        familyId: family?.id.toUuid(),
-        storeId: store?.id.toUuid(),
-        studyYearId: studyYear?.order,
-        groups: groups != null
-            ? Input_PersonsGroupsArrRelInsertInput(
-                data: groups!
-                    .map(
-                      (g) => Input_PersonsGroupsInsertInput(
-                        groupId: g.id.toUuid(),
-                      ),
-                    )
-                    .toList(),
-              )
-            : null,
-        services: services != null
-            ? Input_PersonsServicesArrRelInsertInput(
-                data: services!
-                    .map(
-                      (s) => Input_PersonsServicesInsertInput(
-                        serviceId: s.id.toUuid(),
-                      ),
-                    )
-                    .toList(),
-              )
-            : null,
-        tags: tags != null
-            ? Input_PersonsTagsArrRelInsertInput(
-                data: tags!
-                    .map(
-                      (t) => Input_PersonsTagsInsertInput(tagId: t.id.toUuid()),
-                    )
-                    .toList(),
-              )
-            : null,
-        hobbies: hobbies != null
-            ? Input_PersonsHobbiesArrRelInsertInput(
-                data: hobbies!
-                    .map(
-                      (h) => Input_PersonsHobbiesInsertInput(
-                        hobbyId: h.id.toUuid(),
-                      ),
-                    )
-                    .toList(),
-              )
-            : null,
-        color: colorToInt(color),
-        kodasHistory: Input_HistoryKodasHistoryArrRelInsertInput(
-          data: [
-            if (lastKodas != null)
-              Input_HistoryKodasHistoryInsertInput(
-                day: Input_HistoryAttendanceDaysObjRelInsertInput(
-                  data: Input_HistoryAttendanceDaysInsertInput(
-                    day: lastKodas!.time,
+    nationalId: nationalId,
+    name: name,
+    mainPhone: mainPhone,
+    otherPhones: otherPhones,
+    birthdate: birthdate,
+    gender: gender,
+    isShammas: isShammas,
+    shammasLevelId: shammasLevel?.id.toUuid(),
+    schoolId: school?.id.toUuid(),
+    collegeId: college?.id.toUuid(),
+    churchId: church?.id.toUuid(),
+    fatherId: father?.id.toUuid(),
+    workStatus: workStatus?.name,
+    jobId: job?.id.toUuid(),
+    jobDescription: jobDescription,
+    qualificationId: qualification?.id.toUuid(),
+    martialStatus: martialStatus?.name,
+    personTypeId: personType?.id.toUuid(),
+    stateId: state?.id.toUuid(),
+    isServant: isServant,
+    servingChurchId: servingChurch?.id.toUuid(),
+    serviceType: serviceType,
+    notes: notes,
+    family: family == null && address != null
+        ? Input_FamiliesObjRelInsertInput(
+            data: Family(
+              id: family?.id ?? Namespace.nil.value,
+              name: name.split(' ').sublist(1).join(' '),
+              address: address!.copyWith(family: null),
+            ).toInsertInput(),
+          )
+        : null,
+    familyId: family?.id.toUuid(),
+    storeId: store?.id.toUuid(),
+    studyYearId: studyYear?.order,
+    groups: groups != null
+        ? Input_PersonsGroupsArrRelInsertInput(
+            data: groups!
+                .map(
+                  (g) => Input_PersonsGroupsInsertInput(
+                    groupId: g.id.toUuid(),
                   ),
-                  onConflict: Input_HistoryAttendanceDaysOnConflict(
-                    constraint: Enum_HistoryAttendanceDaysConstraint
-                        .attendance_days_pkey,
-                    updateColumns: [
-                      Enum_HistoryAttendanceDaysUpdateColumn.day,
-                    ],
+                )
+                .toList(),
+          )
+        : null,
+    services: services != null
+        ? Input_PersonsServicesArrRelInsertInput(
+            data: services!
+                .map(
+                  (s) => Input_PersonsServicesInsertInput(
+                    serviceId: s.id.toUuid(),
                   ),
-                ),
+                )
+                .toList(),
+          )
+        : null,
+    tags: tags != null
+        ? Input_PersonsTagsArrRelInsertInput(
+            data: tags!
+                .map(
+                  (t) => Input_PersonsTagsInsertInput(tagId: t.id.toUuid()),
+                )
+                .toList(),
+          )
+        : null,
+    hobbies: hobbies != null
+        ? Input_PersonsHobbiesArrRelInsertInput(
+            data: hobbies!
+                .map(
+                  (h) => Input_PersonsHobbiesInsertInput(
+                    hobbyId: h.id.toUuid(),
+                  ),
+                )
+                .toList(),
+          )
+        : null,
+    color: colorToInt(color),
+    kodasHistory: Input_HistoryKodasHistoryArrRelInsertInput(
+      data: [
+        if (lastKodas != null)
+          Input_HistoryKodasHistoryInsertInput(
+            day: Input_HistoryAttendanceDaysObjRelInsertInput(
+              data: Input_HistoryAttendanceDaysInsertInput(
+                day: lastKodas!.time,
               ),
-          ],
-          onConflict: Input_HistoryKodasHistoryOnConflict(
-            constraint: Enum_HistoryKodasHistoryConstraint
-                .kodas_history_day_id_person_id_key,
+              onConflict: Input_HistoryAttendanceDaysOnConflict(
+                constraint:
+                    Enum_HistoryAttendanceDaysConstraint.attendance_days_pkey,
+                updateColumns: [
+                  Enum_HistoryAttendanceDaysUpdateColumn.day,
+                ],
+              ),
+            ),
           ),
-        ),
-        confessionHistory: Input_HistoryConfessionHistoryArrRelInsertInput(
-          data: [
-            if (lastConfession != null)
-              Input_HistoryConfessionHistoryInsertInput(
-                day: Input_HistoryAttendanceDaysObjRelInsertInput(
-                  data: Input_HistoryAttendanceDaysInsertInput(
-                    day: lastConfession!.time,
-                  ),
-                  onConflict: Input_HistoryAttendanceDaysOnConflict(
-                    constraint: Enum_HistoryAttendanceDaysConstraint
-                        .attendance_days_pkey,
-                    updateColumns: [
-                      Enum_HistoryAttendanceDaysUpdateColumn.day,
-                    ],
-                  ),
-                ),
+      ],
+      onConflict: Input_HistoryKodasHistoryOnConflict(
+        constraint: Enum_HistoryKodasHistoryConstraint
+            .kodas_history_day_id_person_id_key,
+      ),
+    ),
+    confessionHistory: Input_HistoryConfessionHistoryArrRelInsertInput(
+      data: [
+        if (lastConfession != null)
+          Input_HistoryConfessionHistoryInsertInput(
+            day: Input_HistoryAttendanceDaysObjRelInsertInput(
+              data: Input_HistoryAttendanceDaysInsertInput(
+                day: lastConfession!.time,
               ),
-          ],
-          onConflict: Input_HistoryConfessionHistoryOnConflict(
-            constraint: Enum_HistoryConfessionHistoryConstraint
-                .confession_history_day_id_person_id_key,
+              onConflict: Input_HistoryAttendanceDaysOnConflict(
+                constraint:
+                    Enum_HistoryAttendanceDaysConstraint.attendance_days_pkey,
+                updateColumns: [
+                  Enum_HistoryAttendanceDaysUpdateColumn.day,
+                ],
+              ),
+            ),
           ),
-        ),
-        visitHistory: Input_HistoryVisitHistoryArrRelInsertInput(
-          data: [
-            if (lastVisit != null)
-              Input_HistoryVisitHistoryInsertInput(
-                time: lastVisit!.time,
-                isFatherVisit: lastVisit!.isFatherVisit,
-                table: 'persons',
-              ),
-          ],
-        ),
-        callHistory: Input_HistoryCallHistoryArrRelInsertInput(
-          data: [
-            if (lastCall != null)
-              Input_HistoryCallHistoryInsertInput(
-                time: lastCall!.time,
-              ),
-          ],
-        ),
-      );
+      ],
+      onConflict: Input_HistoryConfessionHistoryOnConflict(
+        constraint: Enum_HistoryConfessionHistoryConstraint
+            .confession_history_day_id_person_id_key,
+      ),
+    ),
+    visitHistory: Input_HistoryVisitHistoryArrRelInsertInput(
+      data: [
+        if (lastVisit != null)
+          Input_HistoryVisitHistoryInsertInput(
+            time: lastVisit!.time,
+            isFatherVisit: lastVisit!.isFatherVisit,
+            table: 'persons',
+          ),
+      ],
+    ),
+    callHistory: Input_HistoryCallHistoryArrRelInsertInput(
+      data: [
+        if (lastCall != null)
+          Input_HistoryCallHistoryInsertInput(
+            time: lastCall!.time,
+          ),
+      ],
+    ),
+  );
 
   Input_PersonsSetInput toUpdateInput(Person oldPerson) {
     Input_PersonsSetInput result = Input_PersonsSetInput();
@@ -613,26 +619,30 @@ class Person extends ViewableWithIDAndImage
     if (workStatus != oldPerson.workStatus) {
       result = result.copyWith(
         workStatus: workStatus?.name,
-        studyYearId:
-            workStatus == WorkStatus.student ? result.studyYearId : null,
+        studyYearId: workStatus == WorkStatus.student
+            ? result.studyYearId
+            : null,
         schoolId:
             workStatus == WorkStatus.student && (studyYear?.order ?? 0) <= 12
-                ? result.schoolId
-                : null,
+            ? result.schoolId
+            : null,
         collegeId:
             workStatus == WorkStatus.student && (studyYear?.order ?? 12) >= 12
-                ? result.collegeId
-                : null,
-        jobId: workStatus == WorkStatus.employed ||
+            ? result.collegeId
+            : null,
+        jobId:
+            workStatus == WorkStatus.employed ||
                 workStatus == WorkStatus.retired
             ? result.jobId
             : null,
-        jobDescription: workStatus == WorkStatus.employed ||
+        jobDescription:
+            workStatus == WorkStatus.employed ||
                 workStatus == WorkStatus.retired
             ? result.jobDescription
             : null,
-        qualificationId:
-            workStatus != WorkStatus.student ? result.qualificationId : null,
+        qualificationId: workStatus != WorkStatus.student
+            ? result.qualificationId
+            : null,
       );
     }
 
@@ -659,9 +669,9 @@ class PersonFields extends _PersonFields {
   PersonFields();
 
   FieldMetadata<Area> get area => address.redirectTo(
-        AddressFields().area,
-        isExpandable: false,
-      );
+    AddressFields().area,
+    isExpandable: false,
+  );
 
   FieldMetadata<Street> get street =>
       address.redirectTo(AddressFields().street, isExpandable: false);
@@ -675,55 +685,55 @@ class PersonFields extends _PersonFields {
 
   @override
   List<FieldMetadata<Object>> get allFields => {
-        id,
-        name,
-        address,
-        area,
-        street,
-        district,
-        geolocation,
-        mainPhone,
-        birthdate,
-        birthday,
-        gender,
-        isServant,
-        church,
-        father,
-        isShammas,
-        shammasLevel,
-        workStatus,
-        studyYear,
-        school,
-        college,
-        qualification,
-        job,
-        jobDescription,
-        martialStatus,
-        personType,
-        state,
-        hobbies,
-        notes,
-        tags,
-        family,
-        store,
-        classes,
-        groups,
-        services,
-        user,
-        confessionHistory,
-        lastConfession,
-        kodasHistory,
-        lastKodas,
-        attendanceHistory,
-        lastAttendance,
-        callHistory,
-        lastCall,
-        visitHistory,
-        lastVisit,
-        editHistory,
-        lastEdit,
-        ...super.allFields,
-      }.toList();
+    id,
+    name,
+    address,
+    area,
+    street,
+    district,
+    geolocation,
+    mainPhone,
+    birthdate,
+    birthday,
+    gender,
+    isServant,
+    church,
+    father,
+    isShammas,
+    shammasLevel,
+    workStatus,
+    studyYear,
+    school,
+    college,
+    qualification,
+    job,
+    jobDescription,
+    martialStatus,
+    personType,
+    state,
+    hobbies,
+    notes,
+    tags,
+    family,
+    store,
+    classes,
+    groups,
+    services,
+    user,
+    confessionHistory,
+    lastConfession,
+    kodasHistory,
+    lastKodas,
+    attendanceHistory,
+    lastAttendance,
+    callHistory,
+    lastCall,
+    visitHistory,
+    lastVisit,
+    editHistory,
+    lastEdit,
+    ...super.allFields,
+  }.toList();
 
   @override
   Map<String, FieldMetadata<Object>> get allFieldsByName {

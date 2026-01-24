@@ -34,9 +34,9 @@ class EditObjectController<T extends ViewableWithID> {
     this.onDelete,
     this.initialObject,
   }) : assert(
-          initialObject == null || (onUpdate != null && onDelete != null),
-          'You must provide update and delete functions when editing an existing object',
-        );
+         initialObject == null || (onUpdate != null && onDelete != null),
+         'You must provide update and delete functions when editing an existing object',
+       );
 
   EditObjectController.update({
     required this.toJson,
@@ -44,8 +44,8 @@ class EditObjectController<T extends ViewableWithID> {
     required this.newObject,
     required UpdateFunc<T> this.onUpdate,
     this.onDelete,
-  })  : onCreate = null,
-        afterCreate = null;
+  }) : onCreate = null,
+       afterCreate = null;
 
   EditObjectController._({
     required this.toJson,
@@ -130,8 +130,9 @@ class EditObjectController<T extends ViewableWithID> {
             stackTrace: stackTrace,
             data: {
               'objectType': T.toString(),
-              'initialObject':
-                  initialObject != null ? toJson(initialObject!) : null,
+              'initialObject': initialObject != null
+                  ? toJson(initialObject!)
+                  : null,
               'newObject': toJson(newObject),
             },
           ),
@@ -172,8 +173,8 @@ class EditObjectController<T extends ViewableWithID> {
       );
 
       final uploadUrl = await (returnedObject as IImage).imageInfo.getUploadUrl(
-            contentType: mimeType,
-          );
+        contentType: mimeType,
+      );
 
       await FunctionsService.I.uploadPhoto(
         url: uploadUrl,

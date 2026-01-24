@@ -90,13 +90,17 @@ class StreamableDAOProxy<T extends ViewableWithID> extends DAOBase<T> {
   ) {
     if (streamCountConfig == null) return Stream.value(null).shareValue();
 
-    return parametersStream.map((p) => p.where).distinct().switchMap(
+    return parametersStream
+        .map((p) => p.where)
+        .distinct()
+        .switchMap(
           (where) => graphQLClient.subscribeAndReturnParsed(
             streamCountConfig.operationOptions ??
                 SubscriptionOptions(
                   document: streamCountConfig.document,
                   operationName: streamCountConfig.effectiveOperationName,
-                  variables: streamCountConfig.variables ??
+                  variables:
+                      streamCountConfig.variables ??
                       {
                         'where':
                             where?.map((o) => o.queryToJson()).toList() ?? [],
@@ -123,7 +127,8 @@ class StreamableDAOProxy<T extends ViewableWithID> extends DAOBase<T> {
               ),
               operationName: streamAllConfig.effectiveOperationName,
               variables: _getEffectiveStreamAllVars(streamAllConfig, request),
-              parserFn: streamAllConfig.parserFn ??
+              parserFn:
+                  streamAllConfig.parserFn ??
                   db.parser.singleListParser(
                     fromJson,
                     pageSize: request.pageSize,
@@ -187,12 +192,14 @@ class StreamableDAOProxy<T extends ViewableWithID> extends DAOBase<T> {
               SubscriptionOptions(
                 document: streamSingleByIdConfig.document,
                 operationName: streamSingleByIdConfig.effectiveOperationName,
-                variables: streamSingleByIdConfig.variables ??
+                variables:
+                    streamSingleByIdConfig.variables ??
                     streamSingleByIdConfig.varsConstructor?.call(
                       id: id.toUuid(),
                     ) ??
                     {},
-                parserFn: streamSingleByIdConfig.parserFn ??
+                parserFn:
+                    streamSingleByIdConfig.parserFn ??
                     db.parser.singleOrNullParser(fromJson),
               ),
         )

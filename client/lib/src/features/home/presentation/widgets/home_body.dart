@@ -30,33 +30,33 @@ class HomeBody extends StatelessWidget {
             return switch (page) {
               _ when i == 0 => HomeScreenSummary(homeBloc: homeBloc),
               HomePageConfig<Service> _ => ServicesHierarchyList(
-                  key: PageStorageKey('Home => ${page.type} Page'),
-                  type: page.listType,
-                  listController: page.objectsController!(),
-                  serviceTrailingBuilder: (
-                    context,
-                    s, {
-                    onLongPress,
-                    onTap,
-                    subtitle,
-                    trailing,
-                  }) =>
-                      IconButton(
-                    onPressed: onTap != null ? () => onTap(s) : null,
-                    icon: const Icon(Symbols.info),
-                  ),
-                ),
+                key: PageStorageKey('Home => ${page.type} Page'),
+                type: page.listType,
+                listController: page.objectsController!(),
+                serviceTrailingBuilder:
+                    (
+                      context,
+                      s, {
+                      onLongPress,
+                      onTap,
+                      subtitle,
+                      trailing,
+                    }) => IconButton(
+                      onPressed: onTap != null ? () => onTap(s) : null,
+                      icon: const Icon(Symbols.info),
+                    ),
+              ),
               HomePageConfig<Area> _ => ViewableObjectList(
-                  key: PageStorageKey('Home => ${page.type} Page'),
-                  objectsController: page.objectsController!(),
-                  viewableObjectWidgetConfig: const ViewableObjectWidgetConfig(
-                    forceShowSecondLine: false,
-                  ),
+                key: PageStorageKey('Home => ${page.type} Page'),
+                objectsController: page.objectsController!(),
+                viewableObjectWidgetConfig: const ViewableObjectWidgetConfig(
+                  forceShowSecondLine: false,
                 ),
+              ),
               HomePageConfig<Viewable> _ => ViewableObjectList(
-                  key: PageStorageKey('Home => ${page.type} Page'),
-                  objectsController: page.objectsController!(),
-                ),
+                key: PageStorageKey('Home => ${page.type} Page'),
+                objectsController: page.objectsController!(),
+              ),
             };
           },
         );

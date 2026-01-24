@@ -72,13 +72,15 @@ class OrderByWidget extends StatelessWidget {
                             true)) {
                       newField = field.redirectTo(
                         field.fieldQueryableType!.fieldsMetadata.firstWhere(
-                            (f) =>
-                                !f.isCodeOnly &&
-                                f.isOrderable &&
-                                (f.operators.isNotEmpty ||
-                                    (f.fieldQueryableType
-                                            ?.isSelectableAsReference ??
-                                        false))),
+                          (f) =>
+                              !f.isCodeOnly &&
+                              f.isOrderable &&
+                              (f.operators.isNotEmpty ||
+                                  (f
+                                          .fieldQueryableType
+                                          ?.isSelectableAsReference ??
+                                      false)),
+                        ),
                       );
                     } else {
                       newField = field;
@@ -146,8 +148,12 @@ class OrderByWidget extends StatelessWidget {
               decoration: BoxDecoration(
                 border: Border(
                   right: BorderSide(
-                    color: themeData
-                            .inputDecorationTheme.border?.borderSide.color ??
+                    color:
+                        themeData
+                            .inputDecorationTheme
+                            .border
+                            ?.borderSide
+                            .color ??
                         themeData.colorScheme.primary,
                     width: 1.2,
                   ),

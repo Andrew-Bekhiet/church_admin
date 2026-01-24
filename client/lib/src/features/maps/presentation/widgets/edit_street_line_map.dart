@@ -20,12 +20,14 @@ class EditStreetLineMap extends StatelessWidget {
         return resultStreetStream.map(
           (resultStreetValue) =>
               (response ?? const PersonsGeolocationsResponse()).copyWith(
-            streets: {
-              ...response?.streets.where((s) => s.id != resultStreetValue.id) ??
-                  {},
-              resultStreetValue,
-            },
-          ),
+                streets: {
+                  ...response?.streets.where(
+                        (s) => s.id != resultStreetValue.id,
+                      ) ??
+                      {},
+                  resultStreetValue,
+                },
+              ),
         );
       },
       initialObject: initialStreet,

@@ -25,9 +25,9 @@ class QualificationsDAO extends DAOBase<Qualification>
         parserFn: db.parser.singleParser(fromJson),
       );
 
-  Json _createQualificationVarsConstructor(
-          {required Qualification newObject}) =>
-      {
-        'object': {'name': newObject.name},
-      };
+  Json _createQualificationVarsConstructor({
+    required Qualification newObject,
+  }) => {
+    'object': {'name': newObject.name},
+  };
 }

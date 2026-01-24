@@ -1,7 +1,6 @@
 // Part 28 of the schema
 part of "schema.graphql.dart";
 
-
 abstract class CopyWith_Input_HistoryCallHistoryMinOrderBy<TRes> {
   factory CopyWith_Input_HistoryCallHistoryMinOrderBy(
     Input_HistoryCallHistoryMinOrderBy instance,

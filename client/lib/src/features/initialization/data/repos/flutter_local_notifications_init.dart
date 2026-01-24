@@ -8,10 +8,12 @@ class FlutterLocalNotificationsPluginInit implements Initializer {
 
   @override
   Future<void> initialize() async {
-    final localNotificationsPlugin =
-        globalProviderContainer.read(localNotificationsPluginProvider);
+    final localNotificationsPlugin = globalProviderContainer.read(
+      localNotificationsPluginProvider,
+    );
 
-    final bool initialized = await localNotificationsPlugin.initialize(
+    final bool initialized =
+        await localNotificationsPlugin.initialize(
           const InitializationSettings(
             android: AndroidInitializationSettings('warning'),
             iOS: DarwinInitializationSettings(),

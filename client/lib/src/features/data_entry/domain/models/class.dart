@@ -141,8 +141,8 @@ class ClassFields extends _ClassFields {
 
   @override
   FieldMetadata<User> get adminUsers => adminUsersRel.redirectTo(
-        AdminOnDataFields().user,
-        label: adminUsersRel.label,
-        isExpandable: false,
-      );
+    AdminOnDataFields().user,
+    label: adminUsersRel.label,
+    isExpandable: false,
+  );
 }

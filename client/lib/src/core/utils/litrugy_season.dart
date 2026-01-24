@@ -19,8 +19,9 @@ enum LiturgySeason {
     final palmSundayEnd = resurrectionDay
         .subtract(const Duration(days: 7))
         .add(const Duration(hours: 15));
-    final holyWeekeEnd =
-        resurrectionDay.subtract(const Duration(days: 1, hours: 3));
+    final holyWeekeEnd = resurrectionDay.subtract(
+      const Duration(days: 1, hours: 3),
+    );
     final pentecostEnd = resurrectionDay.add(const Duration(days: 50));
 
     if (now.isBetween(palmSundayEnd, holyWeekeEnd)) {

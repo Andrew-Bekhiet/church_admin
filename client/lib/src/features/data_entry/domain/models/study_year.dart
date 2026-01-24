@@ -41,7 +41,11 @@ class StudyYearFields extends _StudyYearFields {
 
   @override
   FieldMetadata<StudyYear> get id => const FieldMetadata<StudyYear>(
-      parentType: StudyYear, name: 'id', label: '=', getValue: _identity);
+    parentType: StudyYear,
+    name: 'id',
+    label: '=',
+    getValue: _identity,
+  );
 
   @override
   List<FieldMetadata<Object>> get allFields => [id, ...super.allFields];

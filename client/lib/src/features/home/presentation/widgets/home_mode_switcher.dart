@@ -21,7 +21,7 @@ class HomeModeSwitcher extends StatelessWidget {
               switch (mode) {
                 HomeMode.sundaySchool =>
                   'assets/images/sunday_school_services_image.png',
-                HomeMode.churchData => 'assets/images/church_data.png'
+                HomeMode.churchData => 'assets/images/church_data.png',
               },
               width: kToolbarHeight - 12,
               height: kToolbarHeight - 12,

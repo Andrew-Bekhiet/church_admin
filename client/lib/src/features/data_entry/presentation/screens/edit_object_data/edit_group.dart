@@ -28,8 +28,10 @@ class _EditGroupState extends State<EditGroup> {
     );
 
     _controller = EditObjectController(
-      afterCreate: (object) => ViewGroupRoute(id: object.id, $extra: object)
-          .pushReplacement(context),
+      afterCreate: (object) => ViewGroupRoute(
+        id: object.id,
+        $extra: object,
+      ).pushReplacement(context),
       onCreate: (object) =>
           DatabaseService.I.groups.createObject(newObject: object),
       onUpdate: (oldGroup, newGroup) => DatabaseService.I.groups.updateObject(
@@ -38,7 +40,8 @@ class _EditGroupState extends State<EditGroup> {
       ),
       onDelete: (object) => DatabaseService.I.groups.deleteById(id: object.id),
       toJson: (object) => object.toJson(),
-      newObject: oldGroup ??
+      newObject:
+          oldGroup ??
           Group(
             id: const Uuid().v4(),
             name: '',
@@ -72,8 +75,9 @@ class _EditGroupState extends State<EditGroup> {
             decoration: const InputDecoration(errorMaxLines: 2),
             initialValue: newGroup.service,
             listController: (s) => ViewableObjectListController(
-              objectsPaginatableStream:
-                  DatabaseService.I.services.streamAll(searchQuery: s),
+              objectsPaginatableStream: DatabaseService.I.services.streamAll(
+                searchQuery: s,
+              ),
             ),
             dialogFieldLabel: 'الخدمة',
             onChanged: (value) => newGroup = newGroup.copyWith(

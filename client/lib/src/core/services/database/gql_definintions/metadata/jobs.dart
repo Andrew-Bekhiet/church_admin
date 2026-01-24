@@ -9,20 +9,20 @@ class JobsDAO extends DAOBase<Job> with StreamableDAO<Job>, CreatableDAO<Job> {
 
   @override
   StreamAllConfig<Job> get baseStreamAllConfig => const StreamAllConfig(
-        document: documentNodeSubscriptionwatchAllJobs,
-      );
+    document: documentNodeSubscriptionwatchAllJobs,
+  );
   @override
   StreamSingleByIdConfig<Job> get baseStreamSingleByIdConfig =>
       throw UnimplementedError();
 
   @override
   CreateObjectConfig<Job> get baseCreateObjectConfig => CreateObjectConfig(
-        document: documentNodeMutationcreateJob,
-        varsConstructor: _createJobVarsConstructor,
-        parserFn: db.parser.singleParser(fromJson),
-      );
+    document: documentNodeMutationcreateJob,
+    varsConstructor: _createJobVarsConstructor,
+    parserFn: db.parser.singleParser(fromJson),
+  );
 
   Json _createJobVarsConstructor({required Job newObject}) => {
-        'object': {'name': newObject.name},
-      };
+    'object': {'name': newObject.name},
+  };
 }

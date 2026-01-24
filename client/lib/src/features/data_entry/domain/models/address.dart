@@ -69,14 +69,16 @@ class Address with _$Address {
       addressData['house_number'] as String? ?? '',
     );
     final String? streetName = addressData['road'] as String?;
-    final String? districtName = addressData['neighbourhood'] as String? ??
+    final String? districtName =
+        addressData['neighbourhood'] as String? ??
         addressData['allotments'] as String? ??
         addressData['quarter'] as String? ??
         addressData['suburb'] as String? ??
         addressData['district'] as String? ??
         addressData['city_district'] as String?;
-    final String? countryCode =
-        addressData['country_code']?.toString().toUpperCase();
+    final String? countryCode = addressData['country_code']
+        ?.toString()
+        .toUpperCase();
 
     return Address(
       geolocation: lat != null && lon != null ? Point(lat, lon) : null,

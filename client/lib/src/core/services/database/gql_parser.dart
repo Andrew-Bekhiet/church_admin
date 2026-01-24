@@ -45,8 +45,9 @@ class GQLParser {
 
   ParserFn<T> singleParser<T>(ParserFn<T> fromJson, [String? key]) {
     return (data) {
-      final value =
-          key != null ? data[key] as Map : data.values.whereType<Map>().single;
+      final value = key != null
+          ? data[key] as Map
+          : data.values.whereType<Map>().single;
       return fromJson(value.cast<String, Object?>());
     };
   }

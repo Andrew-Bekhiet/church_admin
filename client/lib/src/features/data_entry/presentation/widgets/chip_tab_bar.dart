@@ -15,9 +15,10 @@ class ChipTabBar extends StatelessWidget {
     final theme = Theme.of(context);
 
     final chipSide = WidgetStateBorderSide.resolveWith(
-      (states) => states.contains(
-        WidgetState.selected,
-      )
+      (states) =>
+          states.contains(
+            WidgetState.selected,
+          )
           ? BorderSide(color: theme.colorScheme.primaryContainer)
           : BorderSide.none,
     );

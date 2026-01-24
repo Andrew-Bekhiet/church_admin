@@ -4,8 +4,10 @@ import 'package:meta/meta.dart';
 
 mixin UpdatableDAO<T extends ViewableWithID> on DAOBase<T> {
   @protected
-  late final UpdatableDAOProxy<T> updateObjectProxy =
-      UpdatableDAOProxy<T>(db: db, fromJson: fromJson);
+  late final UpdatableDAOProxy<T> updateObjectProxy = UpdatableDAOProxy<T>(
+    db: db,
+    fromJson: fromJson,
+  );
 
   @protected
   UpdateObjectConfig<T> get baseUpdateObjectConfig;
@@ -38,13 +40,15 @@ class UpdatableDAOProxy<T extends ViewableWithID> extends DAOBase<T> {
           MutationOptions(
             document: updateObjectConfig.document,
             operationName: updateObjectConfig.effectiveOperationName,
-            variables: updateObjectConfig.variables ??
+            variables:
+                updateObjectConfig.variables ??
                 updateObjectConfig.varsConstructor?.call(
                   newObject: newObject,
                   oldObject: oldObject,
                 ) ??
                 {},
-            parserFn: updateObjectConfig.parserFn ??
+            parserFn:
+                updateObjectConfig.parserFn ??
                 db.parser.singleOrNullParser(fromJson),
           ),
     );

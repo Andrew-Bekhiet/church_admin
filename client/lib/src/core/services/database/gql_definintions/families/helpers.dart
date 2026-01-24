@@ -33,9 +33,9 @@ class FamilyInsertHelper {
   Variables_Mutation_insertFamily get variables =>
       Variables_Mutation_insertFamily(
         newFamily: newFamily.toInsertInput().copyWith(
-              children: _childrenFamilies,
-              parents: _parentsFamilies,
-            ),
+          children: _childrenFamilies,
+          parents: _parentsFamilies,
+        ),
       );
 }
 
@@ -49,10 +49,10 @@ class FamilyUpdateHelper {
   late final IterableDifferenceResult<ID> _parentsDiff;
 
   FamilyUpdateHelper({required this.newFamily, required this.oldFamily})
-      : _familyDelta = computeObjectDelta(
-          newFamily.toJson(),
-          oldFamily.toJson(),
-        ) {
+    : _familyDelta = computeObjectDelta(
+        newFamily.toJson(),
+        oldFamily.toJson(),
+      ) {
     _childrenDiff = _getDifferenceUsing((p) => p.children);
     _parentsDiff = _getDifferenceUsing((p) => p.parents);
   }
@@ -79,19 +79,19 @@ class FamilyUpdateHelper {
       _parentsDiff.removed.map((s) => s.id.toUuid()).toList();
 
   List<Input_FamiliesFamiliesInsertInput> get _addRelatedFamilies => [
-        ..._childrenDiff.added.map(
-          (e) => Input_FamiliesFamiliesInsertInput(
-            parentFamilyId: newFamily.id.toUuid(),
-            childFamilyId: e.id.toUuid(),
-          ),
-        ),
-        ..._parentsDiff.added.map(
-          (e) => Input_FamiliesFamiliesInsertInput(
-            parentFamilyId: e.id.toUuid(),
-            childFamilyId: newFamily.id.toUuid(),
-          ),
-        ),
-      ];
+    ..._childrenDiff.added.map(
+      (e) => Input_FamiliesFamiliesInsertInput(
+        parentFamilyId: newFamily.id.toUuid(),
+        childFamilyId: e.id.toUuid(),
+      ),
+    ),
+    ..._parentsDiff.added.map(
+      (e) => Input_FamiliesFamiliesInsertInput(
+        parentFamilyId: e.id.toUuid(),
+        childFamilyId: newFamily.id.toUuid(),
+      ),
+    ),
+  ];
 
   Variables_Mutation_updateFamily get variables =>
       Variables_Mutation_updateFamily(

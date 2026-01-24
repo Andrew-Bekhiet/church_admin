@@ -86,11 +86,13 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
               errorText: state.errorText,
               suffixIcon: Icon(
                 Symbols.location_on,
-                color:
-                    _address.geolocation != null ? colorScheme.primary : null,
+                color: _address.geolocation != null
+                    ? colorScheme.primary
+                    : null,
               ),
-              prefixIcon:
-                  state.value != null ? const Icon(Symbols.check_circle) : null,
+              prefixIcon: state.value != null
+                  ? const Icon(Symbols.check_circle)
+                  : null,
               enabled: widget.enabled,
             ),
             builder: (context, state) => _address.geolocation != null
@@ -120,8 +122,8 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
                     setState(
                       () => _suggestedAddress =
                           addressWithParsedObjects.toString().trim().isEmpty
-                              ? null
-                              : addressWithParsedObjects,
+                          ? null
+                          : addressWithParsedObjects,
                     );
                   }
                 : null,
@@ -179,8 +181,8 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
             enabled: widget.enabled,
             onCreateCustom: (name) =>
                 DatabaseService.I.metadata.districts.createObject(
-              newObject: District(id: const Uuid().v4(), name: name),
-            ),
+                  newObject: District(id: const Uuid().v4(), name: name),
+                ),
             listController: (s) =>
                 _listControllerFor(DatabaseService.I.metadata.districts, s),
             initialValue: _address.district,
@@ -204,9 +206,9 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
               where: _address.area != null
                   ? [
                       Filter(
-                        StreetFields()
-                            .areasRel
-                            .redirectTo(AreasStreetsFields().areaId),
+                        StreetFields().areasRel.redirectTo(
+                          AreasStreetsFields().areaId,
+                        ),
                         PrimitiveOperator.eq,
                         _address.area!.id,
                       ),
@@ -269,7 +271,8 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
                       FilteringTextInputFormatter.singleLineFormatter,
                     ],
                     autovalidateMode: AutovalidateMode.onUserInteraction,
-                    validator: (value) => value != null &&
+                    validator: (value) =>
+                        value != null &&
                             value.isNotEmpty &&
                             int.tryParse(value) == null
                         ? 'برجاء ادخال رقم صحيح'
@@ -315,7 +318,8 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
                       FilteringTextInputFormatter.singleLineFormatter,
                     ],
                     autovalidateMode: AutovalidateMode.onUserInteraction,
-                    validator: (value) => value != null &&
+                    validator: (value) =>
+                        value != null &&
                             value.isNotEmpty &&
                             int.tryParse(value) == null
                         ? 'برجاء ادخال رقم صحيح'
@@ -352,7 +356,8 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
                       FilteringTextInputFormatter.singleLineFormatter,
                     ],
                     autovalidateMode: AutovalidateMode.onUserInteraction,
-                    validator: (value) => value != null &&
+                    validator: (value) =>
+                        value != null &&
                             value.isNotEmpty &&
                             int.tryParse(value) == null
                         ? 'برجاء ادخال رقم صحيح'
@@ -425,26 +430,26 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
   Future<Address> _parseAddressParentObjects(Address address) async {
     final area = address.area != null
         ? await DatabaseService.I.areas
-            .streamAll(searchQuery: Stream.value(address.area!.name))
-            .first
+              .streamAll(searchQuery: Stream.value(address.area!.name))
+              .first
         : null;
 
     final street = address.street != null
         ? await DatabaseService.I.streets
-            .streamAll(
-              searchQuery: Stream.value(
-                address.street!.name
-                    .replaceAll(RegExp('(شارع)|(الشارع)'), '')
-                    .trim(),
-              ),
-            )
-            .first
+              .streamAll(
+                searchQuery: Stream.value(
+                  address.street!.name
+                      .replaceAll(RegExp('(شارع)|(الشارع)'), '')
+                      .trim(),
+                ),
+              )
+              .first
         : null;
 
     final district = address.district != null
         ? await DatabaseService.I.metadata.districts
-            .streamAll(searchQuery: Stream.value(address.district!.name))
-            .first
+              .streamAll(searchQuery: Stream.value(address.district!.name))
+              .first
         : null;
 
     return address.copyWith(

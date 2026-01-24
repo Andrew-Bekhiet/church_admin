@@ -45,13 +45,13 @@ class ViewableObjectWidget<T extends Viewable> extends StatelessWidget {
     ViewableObjectWidgetConfig? config,
     ViewableObjectService? viewableObjectService,
     super.key,
-  })  : viewableObjectService =
-            viewableObjectService ?? ViewableObjectService.I,
-        config = config ?? const ViewableObjectWidgetConfig();
+  }) : viewableObjectService = viewableObjectService ?? ViewableObjectService.I,
+       config = config ?? const ViewableObjectWidgetConfig();
 
   @override
   Widget build(BuildContext context) {
-    final foregroundColor = object.color?.findInvert() ??
+    final foregroundColor =
+        object.color?.findInvert() ??
         (wrapInCard ?? config.wrapInCard
             ? CardTheme.of(context).color?.findInvert()
             : ListTileTheme.of(context).textColor);
@@ -67,7 +67,8 @@ class ViewableObjectWidget<T extends Viewable> extends StatelessWidget {
       tileColor: object.color,
       dense: isDense ?? config.isDense,
       enabled: enabled ?? config.enabled,
-      leading: photo ??
+      leading:
+          photo ??
           config.photo ??
           (object is IImage
               ? ImageObjectWidget(
@@ -79,7 +80,8 @@ class ViewableObjectWidget<T extends Viewable> extends StatelessWidget {
                 )
               : null),
       title: title ?? Text(object.name, overflow: TextOverflow.ellipsis),
-      subtitle: subtitle ??
+      subtitle:
+          subtitle ??
           (secondLine != null
               ? Text(
                   secondLine,
@@ -87,8 +89,8 @@ class ViewableObjectWidget<T extends Viewable> extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                 )
               : forceShowSecondLine ?? config.forceShowSecondLine
-                  ? const SizedBox()
-                  : null),
+              ? const SizedBox()
+              : null),
       onTap: _onTap != null ? () => _onTap!(object) : null,
       onLongPress: _onLongPress != null ? () => _onLongPress!(object) : null,
       isThreeLine: isThreeLine ?? config.isThreeLine,

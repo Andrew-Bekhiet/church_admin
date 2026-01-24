@@ -6,9 +6,9 @@ class Line with EquatableMixin implements Spatial {
   const Line(this.coordinates);
 
   Line.fromJson(Json json)
-      : this(
-          (json['coordinates'] as List).map((p) => Point(p[1], p[0])).toList(),
-        );
+    : this(
+        (json['coordinates'] as List).map((p) => Point(p[1], p[0])).toList(),
+      );
 
   Json? asPostGISLineString() {
     if (coordinates.isEmpty) return null;

@@ -23,8 +23,9 @@ class NotificationsServiceCallbacks {
     if (notification.type == NotificationType.manualPushRemote) {
       await NotificationsService.I.notify(
         notification,
-        notificationDetails:
-            await NotificationsService.notificationsDetailsFor(notification),
+        notificationDetails: await NotificationsService.notificationsDetailsFor(
+          notification,
+        ),
       );
     }
   }
@@ -45,8 +46,9 @@ class NotificationsServiceCallbacks {
 
     if (notificationId == null) return;
 
-    final notification =
-        await NotificationsStorage.I.readNotification(notificationId);
+    final notification = await NotificationsStorage.I.readNotification(
+      notificationId,
+    );
 
     if (notification == null) return;
 
@@ -168,9 +170,11 @@ class NotificationsServiceCallbacks {
       ],
       orderBy: [
         OrderBy(
-          field: aggField.redirectTo(AggregateDataFields()
-              .max
-              .redirectTo(LastRecordedByInfoFields().time)),
+          field: aggField.redirectTo(
+            AggregateDataFields().max.redirectTo(
+              LastRecordedByInfoFields().time,
+            ),
+          ),
           value: OrderByValue.desc,
         ),
         OrderBy(field: LastRecordedByInfoFields().time),

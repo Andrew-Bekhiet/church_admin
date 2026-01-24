@@ -26,18 +26,21 @@ class _EditStreetState extends State<EditStreet> {
     final Street? oldStreet = widget.street;
 
     _controller = EditObjectController(
-      afterCreate: (object) => ViewStreetRoute(id: object.id, $extra: object)
-          .pushReplacement(context),
+      afterCreate: (object) => ViewStreetRoute(
+        id: object.id,
+        $extra: object,
+      ).pushReplacement(context),
       onCreate: (object) =>
           DatabaseService.I.streets.createObject(newObject: object),
       onUpdate: (oldStreet, newStreet) =>
           DatabaseService.I.streets.updateObject(
-        oldObject: oldStreet,
-        newObject: newStreet,
-      ),
+            oldObject: oldStreet,
+            newObject: newStreet,
+          ),
       onDelete: (object) => DatabaseService.I.streets.deleteById(id: object.id),
       toJson: (object) => object.toJson(),
-      newObject: oldStreet ??
+      newObject:
+          oldStreet ??
           Street(
             id: const Uuid().v4(),
             name: '',
@@ -74,8 +77,9 @@ class _EditStreetState extends State<EditStreet> {
           ),
           MultiObjectSelectionField<Area>(
             listController: (s) => ViewableObjectListController(
-              objectsPaginatableStream:
-                  DatabaseService.I.areas.streamAll(searchQuery: s),
+              objectsPaginatableStream: DatabaseService.I.areas.streamAll(
+                searchQuery: s,
+              ),
             ),
             initialValue: newStreet.areas?.toSet() ?? {},
             onChanged: (value) => setState(
@@ -122,22 +126,22 @@ class _EditStreetState extends State<EditStreet> {
   }
 
   void Function() _editGeolocation(BuildContext context) => () async {
-        final Street? result = await Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => EditStreetLineMap(
-              onSaved: Navigator.of(context).pop,
-              initialStreet: newStreet,
-              geomapOptions: GeomapOptions(
-                layers: const {
-                  GeoMapLayer.streets,
-                },
-                selectedStreets: {newStreet},
-              ),
-            ),
+    final Street? result = await Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => EditStreetLineMap(
+          onSaved: Navigator.of(context).pop,
+          initialStreet: newStreet,
+          geomapOptions: GeomapOptions(
+            layers: const {
+              GeoMapLayer.streets,
+            },
+            selectedStreets: {newStreet},
           ),
-        );
-        if (result != null) {
-          newStreet = result;
-        }
-      };
+        ),
+      ),
+    );
+    if (result != null) {
+      newStreet = result;
+    }
+  };
 }

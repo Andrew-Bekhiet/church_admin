@@ -37,7 +37,8 @@ class UpdateObjectConfig<T> extends DAOMethodTemplate<T> {
   }
 }
 
-typedef UpdateObjectConfigVarsConstructor<T> = Json Function({
-  required T newObject,
-  required T oldObject,
-});
+typedef UpdateObjectConfigVarsConstructor<T> =
+    Json Function({
+      required T newObject,
+      required T oldObject,
+    });

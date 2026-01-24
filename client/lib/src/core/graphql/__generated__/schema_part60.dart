@@ -1,7 +1,6 @@
 // Part 60 of the schema
 part of "schema.graphql.dart";
 
-
 String toJson_Enum_JobsUpdateColumn(Enum_JobsUpdateColumn e) {
   switch (e) {
     case Enum_JobsUpdateColumn.name:

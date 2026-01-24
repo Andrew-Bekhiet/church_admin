@@ -12,8 +12,9 @@ final class MultiFactorLoginScreenKeys {
   static const passwordFieldKey = ValueKey('Password Field Key');
   static const enrollButtonKey = ValueKey('Enroll Button Key');
 
-  static const verificationCodeFieldKey =
-      ValueKey('Verification Code Field Key');
+  static const verificationCodeFieldKey = ValueKey(
+    'Verification Code Field Key',
+  );
   static const verifyButtonKey = ValueKey('Verify Button Key');
   static const resendCodeButtonKey = ValueKey('Resend Code Button Key');
 }
@@ -82,7 +83,7 @@ class _MultifactorStateLogin extends State<MultiFactorLogin> {
                   loading: state is AuthLoading,
                 ),
               AuthAuthenticated(
-                authUser: AuthUser(isMultiFactorEnabled: false)
+                authUser: AuthUser(isMultiFactorEnabled: false),
               ) =>
                 _EnrollMultiFactor(
                   onPhoneNumberSubmitted: (phoneNumber, password) {
@@ -127,7 +128,7 @@ class _EnrollMultiFactor extends StatefulWidget {
   });
 
   final void Function(String phoneNumber, String password)
-      onPhoneNumberSubmitted;
+  onPhoneNumberSubmitted;
   final bool loading;
 
   @override
@@ -253,12 +254,12 @@ class _VerifyMultiFactorState extends State<_VerifyMultiFactor> {
     return BlocBuilder<AuthBloc, AuthState>(
       bloc: AuthBloc.I,
       builder: (context, state) {
-        if (state.unwrapped
-            case AuthMultiFactorChallengeInProgress(
-              :final session,
-              :final challenge
-            )) {
-          final phoneNumber = session.phoneNumber ??
+        if (state.unwrapped case AuthMultiFactorChallengeInProgress(
+          :final session,
+          :final challenge,
+        )) {
+          final phoneNumber =
+              session.phoneNumber ??
               session.enrolledFactors.firstOrNull?.phoneNumber ??
               'هاتفك';
 
@@ -308,8 +309,9 @@ class _VerifyMultiFactorState extends State<_VerifyMultiFactor> {
                       ),
                       decoration: BoxDecoration(
                         color: theme.colorScheme.surfaceContainer,
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(20)),
+                        borderRadius: const BorderRadius.all(
+                          Radius.circular(20),
+                        ),
                       ),
                     ),
                   ),

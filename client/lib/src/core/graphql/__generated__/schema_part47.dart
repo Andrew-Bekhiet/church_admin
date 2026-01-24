@@ -1,7 +1,6 @@
 // Part 47 of the schema
 part of "schema.graphql.dart";
 
-
 abstract class CopyWith_Input_QualificationsBoolExp<TRes> {
   factory CopyWith_Input_QualificationsBoolExp(
     Input_QualificationsBoolExp instance,

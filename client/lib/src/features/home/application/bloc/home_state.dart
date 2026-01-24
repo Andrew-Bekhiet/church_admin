@@ -21,13 +21,13 @@ final class HomeState extends Equatable {
 
   @override
   List<Object?> get props => [
-        mode,
-        currentPage,
-        ...pages,
-        dailyData,
-        showSnowflakeAnimation,
-        pageController,
-      ];
+    mode,
+    currentPage,
+    ...pages,
+    dailyData,
+    showSnowflakeAnimation,
+    pageController,
+  ];
 
   HomeState copyWith({
     HomeMode? mode,

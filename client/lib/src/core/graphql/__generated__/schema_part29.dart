@@ -1,7 +1,6 @@
 // Part 29 of the schema
 part of "schema.graphql.dart";
 
-
 abstract class CopyWith_Input_HistoryConfessionHistoryMinOrderBy<TRes> {
   factory CopyWith_Input_HistoryConfessionHistoryMinOrderBy(
     Input_HistoryConfessionHistoryMinOrderBy instance,

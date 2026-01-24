@@ -31,7 +31,7 @@ class DateTimeField extends StatelessWidget {
     this.withTime = true,
     super.key,
   }) : dateFormat =
-            dateFormat ?? DateFormat(withTime ? 'yyyy/M/d h:m a' : 'yyyy/M/d');
+           dateFormat ?? DateFormat(withTime ? 'yyyy/M/d h:m a' : 'yyyy/M/d');
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +44,8 @@ class DateTimeField extends StatelessWidget {
       onTap: (state) async {
         final focusScope = FocusScope.of(context);
 
-        final newValue = await _selectDateTime(
+        final newValue =
+            await _selectDateTime(
               context,
               state.value ?? DateTime.now(),
             ) ??
@@ -83,7 +84,8 @@ class DateTimeField extends StatelessWidget {
             ? Text(dateFormat.format(state.value!))
             : null;
       },
-      validator: validator ??
+      validator:
+          validator ??
           (v) => v == null && !nullable ? 'برجاء ادخال $label' : null,
     );
   }

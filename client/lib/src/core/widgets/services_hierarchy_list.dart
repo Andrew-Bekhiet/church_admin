@@ -6,32 +6,36 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 
-typedef ServiceTrailingBuilder = Widget Function(
-  BuildContext,
-  Service, {
-  void Function(Service)? onLongPress,
-  void Function(Service)? onTap,
-  Widget? trailing,
-});
+typedef ServiceTrailingBuilder =
+    Widget Function(
+      BuildContext,
+      Service, {
+      void Function(Service)? onLongPress,
+      void Function(Service)? onTap,
+      Widget? trailing,
+    });
 
-typedef StudyYearBuilder = Widget Function(
-  BuildContext, {
-  required Service service,
-  required StudyYear studyYear,
-});
+typedef StudyYearBuilder =
+    Widget Function(
+      BuildContext, {
+      required Service service,
+      required StudyYear studyYear,
+    });
 
-typedef GroupBuilder = Widget Function(
-  BuildContext, {
-  required Service service,
-  required Group group,
-});
+typedef GroupBuilder =
+    Widget Function(
+      BuildContext, {
+      required Service service,
+      required Group group,
+    });
 
-typedef ClassBuilder = Widget Function(
-  BuildContext, {
-  required Service service,
-  required Class $class,
-  required StudyYear studyYear,
-});
+typedef ClassBuilder =
+    Widget Function(
+      BuildContext, {
+      required Service service,
+      required Class $class,
+      required StudyYear studyYear,
+    });
 
 class ServicesHierarchyList extends StatefulWidget {
   final bool showClasses;
@@ -77,7 +81,8 @@ class _ServicesHierarchyListState extends State<ServicesHierarchyList>
       addSeparator: false,
       itemsExpandable: true,
       objectsController: widget.listController,
-      itemBuilder: listType == ViewableObjectListType.grid ||
+      itemBuilder:
+          listType == ViewableObjectListType.grid ||
               listType == ViewableObjectListType.grid3
           ? _buildServiceCard
           : _buildHierarchyServiceTile,
@@ -109,11 +114,11 @@ class _ServicesHierarchyListState extends State<ServicesHierarchyList>
     Service service,
     ViewableObjectWidgetConfig? config,
   ) {
-    final topController =
-        _animationControllers[service] ??= AnimationController(
-      duration: const Duration(milliseconds: 225),
-      vsync: this,
-    );
+    final topController = _animationControllers[service] ??=
+        AnimationController(
+          duration: const Duration(milliseconds: 225),
+          vsync: this,
+        );
 
     return AnimatedBuilder(
       animation: topController.drive(
@@ -225,7 +230,8 @@ class _Classes extends StatelessWidget {
           if (classes.length > 1)
             Padding(
               padding: EdgeInsets.only(right: animationValue * 20),
-              child: studyYearBuilder?.call(
+              child:
+                  studyYearBuilder?.call(
                     context,
                     service: service,
                     studyYear: studyYear,
@@ -243,7 +249,8 @@ class _Classes extends StatelessWidget {
                             padding: EdgeInsets.only(
                               right: animationValue * 20,
                             ),
-                            child: classBuilder?.call(
+                            child:
+                                classBuilder?.call(
                                   context,
                                   studyYear: studyYear,
                                   service: service,
@@ -267,7 +274,8 @@ class _Classes extends StatelessWidget {
           else
             Padding(
               padding: EdgeInsets.only(right: animationValue * 20),
-              child: classBuilder?.call(
+              child:
+                  classBuilder?.call(
                     context,
                     service: service,
                     studyYear: studyYear,
@@ -307,7 +315,8 @@ class _Groups extends StatelessWidget {
         for (final g in service.groups ?? <Group>[])
           Padding(
             padding: EdgeInsets.only(right: animationValue * 20),
-            child: groupBuilder?.call(context, group: g, service: service) ??
+            child:
+                groupBuilder?.call(context, group: g, service: service) ??
                 ViewableObjectWidget(
                   g,
                   photo: ImageObjectWidget(

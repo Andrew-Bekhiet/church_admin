@@ -33,7 +33,8 @@ class StudyYearRangeField extends StatelessWidget {
       initialValue: initialValue,
       autovalidateMode: autovalidateMode,
       onSaved: onSaved,
-      validator: validator ??
+      validator:
+          validator ??
           (v) => v == null && !nullable ? 'برجاء ادخال $label' : null,
       builder: (state) {
         return InputDecorator(
@@ -57,14 +58,16 @@ class StudyYearRangeField extends StatelessWidget {
               Text(
                 'من',
                 style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                      color: Theme.of(context).colorScheme.primaryContainer,
-                    ),
+                  color: Theme.of(context).colorScheme.primaryContainer,
+                ),
               ),
               Expanded(
                 child: ObjectSelectionField(
                   listController: (s) => ViewableObjectListController(
                     objectsPaginatableStream: DatabaseService
-                        .I.metadata.studyYears
+                        .I
+                        .metadata
+                        .studyYears
                         .streamAll(searchQuery: s),
                   ),
                   builder: (context, state) => Text(
@@ -85,14 +88,16 @@ class StudyYearRangeField extends StatelessWidget {
               Text(
                 'إلى',
                 style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                      color: Theme.of(context).colorScheme.primaryContainer,
-                    ),
+                  color: Theme.of(context).colorScheme.primaryContainer,
+                ),
               ),
               Expanded(
                 child: ObjectSelectionField(
                   listController: (s) => ViewableObjectListController(
                     objectsPaginatableStream: DatabaseService
-                        .I.metadata.studyYears
+                        .I
+                        .metadata
+                        .studyYears
                         .streamAll(searchQuery: s),
                   ),
                   builder: (context, state) => Text(

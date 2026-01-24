@@ -16,10 +16,10 @@ class NotificationsSettingsStorage {
 
   static const NotificationSetting _defaultNotificationSetting =
       NotificationSetting(
-    hours: 11,
-    minutes: 0,
-    intervalInDays: 7,
-  );
+        hours: 11,
+        minutes: 0,
+        intervalInDays: 7,
+      );
 
   final SyncKVStore<NotificationSetting> _box;
 

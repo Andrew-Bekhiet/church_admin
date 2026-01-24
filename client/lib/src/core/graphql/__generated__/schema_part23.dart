@@ -1,7 +1,6 @@
 // Part 23 of the schema
 part of "schema.graphql.dart";
 
-
 abstract class CopyWith_Input_HistoryAttendanceDaysConstraintsBoolExp<TRes> {
   factory CopyWith_Input_HistoryAttendanceDaysConstraintsBoolExp(
     Input_HistoryAttendanceDaysConstraintsBoolExp instance,

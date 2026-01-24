@@ -52,8 +52,9 @@ class FirebaseInit implements Initializer {
   }
 
   Future<void> _initializeFirebaseEmulators(String kEmulatorsHost) async {
-    FirebaseFunctions.instanceFor(region: 'europe-west6')
-        .useFunctionsEmulator(kEmulatorsHost, 5001);
+    FirebaseFunctions.instanceFor(
+      region: 'europe-west6',
+    ).useFunctionsEmulator(kEmulatorsHost, 5001);
     FirebaseFunctions.instance.useFunctionsEmulator(kEmulatorsHost, 5001);
   }
 

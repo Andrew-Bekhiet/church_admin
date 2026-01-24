@@ -137,8 +137,9 @@ void main() {
 
       await act.tap(spotKey(HomeScreenSummaryKeys.sundaySchoolButtonKey));
 
-      verify(homeBloc.add(const HomeChangeMode(HomeMode.sundaySchool)))
-          .called(1);
+      verify(
+        homeBloc.add(const HomeChangeMode(HomeMode.sundaySchool)),
+      ).called(1);
     });
   });
 }

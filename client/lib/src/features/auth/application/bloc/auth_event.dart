@@ -101,11 +101,11 @@ final class StartMultiFactorChallenge extends AuthEvent {
 
   @override
   List<Object?> get props => [
-        session,
-        selectedFactor,
-        phoneNumber,
-        resendToken,
-      ];
+    session,
+    selectedFactor,
+    phoneNumber,
+    resendToken,
+  ];
 }
 
 final class CompleteMultiFactorChallenge extends AuthEvent {
@@ -123,11 +123,11 @@ final class CompleteMultiFactorChallenge extends AuthEvent {
 
   @override
   List<Object?> get props => [
-        session,
-        challenge,
-        verificationCode,
-        selectedFactor,
-      ];
+    session,
+    challenge,
+    verificationCode,
+    selectedFactor,
+  ];
 }
 
 final class SendPasswordResetEmail extends AuthEvent {

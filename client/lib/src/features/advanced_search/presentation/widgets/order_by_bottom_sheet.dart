@@ -54,10 +54,10 @@ class OrderByBottomSheet extends StatelessWidget {
                     onRemoved: i == 0
                         ? null
                         : () => onChanged(
-                              orderByValue
-                                  .whereIndexed((j, _) => j != i)
-                                  .toList(),
-                            ),
+                            orderByValue
+                                .whereIndexed((j, _) => j != i)
+                                .toList(),
+                          ),
                   ),
                 ),
                 Padding(

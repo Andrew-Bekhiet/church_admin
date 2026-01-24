@@ -1,7 +1,6 @@
 // Part 15 of the schema
 part of "schema.graphql.dart";
 
-
 abstract class CopyWith_Input_DistrictsObjRelInsertInput<TRes> {
   factory CopyWith_Input_DistrictsObjRelInsertInput(
     Input_DistrictsObjRelInsertInput instance,

@@ -71,9 +71,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   late final PageController _pageController;
   final Map<Type, ViewableObjectListController> _controllersToDispose = {};
-  final Map<Type,
-          ({Stream<List<Filter>>? where, Stream<List<OrderBy>>? orderBy})>
-      _paginatableStreamsParams = {};
+  final Map<
+    Type,
+    ({Stream<List<Filter>>? where, Stream<List<OrderBy>>? orderBy})
+  >
+  _paginatableStreamsParams = {};
 
   late final Map<HomeMode, List<HomePageConfig>> _pagesConfigState = {
     HomeMode.sundaySchool: [
@@ -116,17 +118,17 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     required HomeDailyDataRepository homeDailyDataRepository,
     required DatabaseService databaseService,
     required PageController pageController,
-  })  : _pageController = pageController,
-        _databaseService = databaseService,
-        _homeDailyDataRepository = homeDailyDataRepository,
-        super(
-          HomeState(
-            pageController: pageController,
-            pages: const [_HomePagesConfig.summaryPage],
-            showSnowflakeAnimation:
-                LiturgySeason.current == LiturgySeason.christmas,
-          ),
-        ) {
+  }) : _pageController = pageController,
+       _databaseService = databaseService,
+       _homeDailyDataRepository = homeDailyDataRepository,
+       super(
+         HomeState(
+           pageController: pageController,
+           pages: const [_HomePagesConfig.summaryPage],
+           showSnowflakeAnimation:
+               LiturgySeason.current == LiturgySeason.christmas,
+         ),
+       ) {
     on<LoadHomeSummaryAndTabs>(
       _onLoadHomeSummaryAndTabs,
       transformer: (events, mapper) => events
@@ -153,20 +155,23 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       Stream<String?>? searchQuery,
       Stream<List<Filter>>? where,
       Stream<List<OrderBy>>? orderBy,
-    }) paginatableStreamFactory,
+    })
+    paginatableStreamFactory,
   ) {
     return config.copyWith(
-      objectsController: () => _controllersToDispose.putIfAbsent(
-        T,
-        () {
-          return ViewableObjectListController<T>(
-            objectsPaginatableStream: paginatableStreamFactory(
-              where: _paginatableStreamsParams[T]?.where,
-              orderBy: _paginatableStreamsParams[T]?.orderBy,
-            ),
-          );
-        },
-      ) as ViewableObjectListController<T>,
+      objectsController: () =>
+          _controllersToDispose.putIfAbsent(
+                T,
+                () {
+                  return ViewableObjectListController<T>(
+                    objectsPaginatableStream: paginatableStreamFactory(
+                      where: _paginatableStreamsParams[T]?.where,
+                      orderBy: _paginatableStreamsParams[T]?.orderBy,
+                    ),
+                  );
+                },
+              )
+              as ViewableObjectListController<T>,
     );
   }
 
@@ -216,7 +221,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           verse: currentData.verse,
           sneksar: currentData.sneksar,
           saying: currentData.saying,
-          birthdaysText: birthdays.take(3).join('، ') +
+          birthdaysText:
+              birthdays.take(3).join('، ') +
               (birthdays.length > 3 ? '، ...' : ''),
           birthdaysQuery: _homeDailyDataRepository.getTodaysBirthdaysQuery(),
         ),
@@ -240,11 +246,13 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     Emitter<HomeState> emit,
   ) {
     final newText = switch (event.type) {
-      HomeDailyDataType.verse =>
-        _homeDailyDataRepository.getVerse(forceRefresh: true),
+      HomeDailyDataType.verse => _homeDailyDataRepository.getVerse(
+        forceRefresh: true,
+      ),
       HomeDailyDataType.sneksar => _homeDailyDataRepository.getTodaysSneksar(),
-      HomeDailyDataType.saying =>
-        _homeDailyDataRepository.getSaying(forceRefresh: true),
+      HomeDailyDataType.saying => _homeDailyDataRepository.getSaying(
+        forceRefresh: true,
+      ),
     };
 
     final newData = state.dailyData!.copyWithNewText(

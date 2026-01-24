@@ -9,49 +9,50 @@ class StreetsDAO extends FullCRUDDAO<Street> {
   @override
   late final StreamAllConfig<Street> baseStreamAllConfig =
       const StreamAllConfig(
-    document: documentNodeSubscriptionwatchAllStreets,
-  );
+        document: documentNodeSubscriptionwatchAllStreets,
+      );
 
   @override
   late final StreamCountConfig<Street> baseStreamCountConfig =
       const StreamCountConfig(
-    document: documentNodeSubscriptionwatchStreetsCount,
-  );
+        document: documentNodeSubscriptionwatchStreetsCount,
+      );
 
   @override
   late final StreamSingleByIdConfig<Street> baseStreamSingleByIdConfig =
       StreamSingleByIdConfig(
-    document: documentNodeSubscriptionwatchStreet,
-    varsConstructor: _streamSingleByIdVarsConstructor,
-  );
+        document: documentNodeSubscriptionwatchStreet,
+        varsConstructor: _streamSingleByIdVarsConstructor,
+      );
 
   @override
   late final DeleteSingleByIdConfig<Street> baseDeleteSingleByIdConfig =
       DeleteSingleByIdConfig(
-    document: documentNodeMutationdeleteStreet,
-    varsConstructor: _deleteSingleByIdVarsConstructor,
-  );
+        document: documentNodeMutationdeleteStreet,
+        varsConstructor: _deleteSingleByIdVarsConstructor,
+      );
 
   @override
   late final UpdateObjectConfig<Street> baseUpdateObjectConfig =
       UpdateObjectConfig(
-    document: documentNodeMutationupdateStreet,
-    varsConstructor: _updateStreetVarsConstructor,
-  );
+        document: documentNodeMutationupdateStreet,
+        varsConstructor: _updateStreetVarsConstructor,
+      );
 
   @override
   late final CreateObjectConfig<Street> baseCreateObjectConfig =
       CreateObjectConfig(
-    document: documentNodeMutationinsertStreet,
-    varsConstructor: _createStreetVarsConstructor,
-  );
+        document: documentNodeMutationinsertStreet,
+        varsConstructor: _createStreetVarsConstructor,
+      );
 
   Json _streamSingleByIdVarsConstructor({required UuidValue id}) =>
       Variables_Subscription_watchStreet(id: id).toJson();
 
   Json _createStreetVarsConstructor({required Street newObject}) =>
-      Variables_Mutation_insertStreet(newStreet: newObject.toInsertInput())
-          .toJson();
+      Variables_Mutation_insertStreet(
+        newStreet: newObject.toInsertInput(),
+      ).toJson();
 
   Json _updateStreetVarsConstructor({
     required Street newObject,

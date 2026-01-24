@@ -20,11 +20,15 @@ void main() {
     });
 
     test('birthDayTimeSetting', () async {
-      const setting =
-          NotificationSetting(hours: 12, minutes: 0, intervalInDays: 7);
+      const setting = NotificationSetting(
+        hours: 12,
+        minutes: 0,
+        intervalInDays: 7,
+      );
 
-      when(mockBox.get(NotificationsSettingsStorage.birthDayTimeKey))
-          .thenReturn(setting);
+      when(
+        mockBox.get(NotificationsSettingsStorage.birthDayTimeKey),
+      ).thenReturn(setting);
       expect(storage.birthDayTimeSetting, setting);
 
       await storage.setBirthDayTime(setting);
@@ -32,38 +36,51 @@ void main() {
     });
 
     test('kodasTimeSetting', () async {
-      const setting =
-          NotificationSetting(hours: 13, minutes: 0, intervalInDays: 7);
+      const setting = NotificationSetting(
+        hours: 13,
+        minutes: 0,
+        intervalInDays: 7,
+      );
 
-      when(mockBox.get(NotificationsSettingsStorage.kodasTimeKey))
-          .thenReturn(setting);
+      when(
+        mockBox.get(NotificationsSettingsStorage.kodasTimeKey),
+      ).thenReturn(setting);
       expect(storage.kodasTimeSetting, setting);
 
       await storage.setKodasTime(setting);
-      verify(mockBox.put(NotificationsSettingsStorage.kodasTimeKey, setting))
-          .called(1);
+      verify(
+        mockBox.put(NotificationsSettingsStorage.kodasTimeKey, setting),
+      ).called(1);
     });
 
     test('attendanceTimeSetting', () async {
-      const setting =
-          NotificationSetting(hours: 14, minutes: 0, intervalInDays: 7);
+      const setting = NotificationSetting(
+        hours: 14,
+        minutes: 0,
+        intervalInDays: 7,
+      );
 
-      when(mockBox.get(NotificationsSettingsStorage.attendanceTimeKey))
-          .thenReturn(setting);
+      when(
+        mockBox.get(NotificationsSettingsStorage.attendanceTimeKey),
+      ).thenReturn(setting);
       expect(storage.attendanceTimeSetting, setting);
 
       await storage.setAttendanceTime(setting);
-      verify(mockBox.put(
-              NotificationsSettingsStorage.attendanceTimeKey, setting))
-          .called(1);
+      verify(
+        mockBox.put(NotificationsSettingsStorage.attendanceTimeKey, setting),
+      ).called(1);
     });
 
     test('confessionTimeSetting', () async {
-      const setting =
-          NotificationSetting(hours: 15, minutes: 0, intervalInDays: 7);
+      const setting = NotificationSetting(
+        hours: 15,
+        minutes: 0,
+        intervalInDays: 7,
+      );
 
-      when(mockBox.get(NotificationsSettingsStorage.confessionTimeKey))
-          .thenReturn(setting);
+      when(
+        mockBox.get(NotificationsSettingsStorage.confessionTimeKey),
+      ).thenReturn(setting);
       expect(storage.confessionTimeSetting, setting);
 
       await storage.setConfessionTime(setting);

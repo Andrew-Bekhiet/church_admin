@@ -36,7 +36,7 @@ class CAErrorDialog extends StatelessWidget {
           child: Text(
             exception is FlutterErrorDetails
                 ? (exception as FlutterErrorDetails).exceptionAsString() +
-                    (exception as FlutterErrorDetails).toString()
+                      (exception as FlutterErrorDetails).toString()
                 : exception.toString(),
             style: TextStyle(
               color: theme.colorScheme.onErrorContainer,

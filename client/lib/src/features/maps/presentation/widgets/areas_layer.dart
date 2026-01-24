@@ -30,7 +30,8 @@ class _AreasLayer extends StatelessWidget {
               color: a.color?.withValues(alpha: 0.2) ?? Colors.transparent,
               borderStrokeWidth: 3,
               borderColor: a.color ?? Colors.black54,
-              points: a.bounds?.coordinates
+              points:
+                  a.bounds?.coordinates
                       .map(
                         (e) => LatLng(e.latitude, e.longitude),
                       )

@@ -1,7 +1,6 @@
 // Part 41 of the schema
 part of "schema.graphql.dart";
 
-
 abstract class CopyWith_Input_PersonsHobbiesMaxOrderBy<TRes> {
   factory CopyWith_Input_PersonsHobbiesMaxOrderBy(
     Input_PersonsHobbiesMaxOrderBy instance,

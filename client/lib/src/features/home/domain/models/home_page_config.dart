@@ -23,13 +23,13 @@ class HomePageConfig<T extends Viewable> extends Equatable {
 
   @override
   List<Object?> get props => [
-        label,
-        pageIcon,
-        fabIcon,
-        fabOnTapLocation,
-        listType,
-        type,
-      ];
+    label,
+    pageIcon,
+    fabIcon,
+    fabOnTapLocation,
+    listType,
+    type,
+  ];
 
   HomePageConfig<T> copyWith({
     String? label,

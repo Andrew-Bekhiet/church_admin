@@ -10,20 +10,20 @@ class CollegesDAO extends DAOBase<College>
 
   @override
   StreamAllConfig<College> get baseStreamAllConfig => const StreamAllConfig(
-        document: documentNodeSubscriptionwatchAllColleges,
-      );
+    document: documentNodeSubscriptionwatchAllColleges,
+  );
   @override
   StreamSingleByIdConfig<College> get baseStreamSingleByIdConfig =>
       throw UnimplementedError();
 
   @override
   CreateObjectConfig<College> get baseCreateObjectConfig => CreateObjectConfig(
-        document: documentNodeMutationcreateCollege,
-        varsConstructor: _createCollegeVarsConstructor,
-        parserFn: db.parser.singleParser(fromJson),
-      );
+    document: documentNodeMutationcreateCollege,
+    varsConstructor: _createCollegeVarsConstructor,
+    parserFn: db.parser.singleParser(fromJson),
+  );
 
   Json _createCollegeVarsConstructor({required College newObject}) => {
-        'object': {'name': newObject.name},
-      };
+    'object': {'name': newObject.name},
+  };
 }

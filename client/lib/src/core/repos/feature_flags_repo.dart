@@ -26,8 +26,8 @@ class FeatureFlagsRepository {
   FeatureFlagsRepository({
     required FirebaseRemoteConfig remoteConfig,
     required PackageInfo packageInfo,
-  })  : _packageInfo = packageInfo,
-        _remoteConfig = remoteConfig;
+  }) : _packageInfo = packageInfo,
+       _remoteConfig = remoteConfig;
 
   Version get latestVersion =>
       Version.parse(_remoteConfig.getString(latestVersionKey));
@@ -85,8 +85,9 @@ class FeatureFlagsRepository {
 
   Stream<void> get onConfigChanged => kIsWeb
       ? Stream.value(null)
-      : _remoteConfig.onConfigUpdated
-          .asyncMap((_) => _remoteConfig.fetchAndActivate());
+      : _remoteConfig.onConfigUpdated.asyncMap(
+          (_) => _remoteConfig.fetchAndActivate(),
+        );
 
   Future<void> initialize() async {
     await _remoteConfig.fetchAndActivate();
@@ -114,7 +115,7 @@ class FeatureFlagsRepository {
         advancedQueriesMetadata.father.name,
         advancedQueriesMetadata.hobby.name,
         advancedQueriesMetadata.tag.name,
-      ].join(',')
+      ].join(','),
     });
   }
 
@@ -129,7 +130,7 @@ class FeatureFlagsRepository {
     return rawValue.split(',').contains(typeName);
   }
 
-  Json toJson() => _remoteConfig
-      .getAll()
-      .map((key, value) => MapEntry(key, value.asString()));
+  Json toJson() => _remoteConfig.getAll().map(
+    (key, value) => MapEntry(key, value.asString()),
+  );
 }

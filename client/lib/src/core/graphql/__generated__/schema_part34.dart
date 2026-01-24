@@ -1,7 +1,6 @@
 // Part 34 of the schema
 part of "schema.graphql.dart";
 
-
 abstract class CopyWith_Input_HistoryVisitHistoryStreamCursorValueInput<TRes> {
   factory CopyWith_Input_HistoryVisitHistoryStreamCursorValueInput(
     Input_HistoryVisitHistoryStreamCursorValueInput instance,

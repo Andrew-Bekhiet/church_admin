@@ -18,7 +18,7 @@ enum DateRangeOperator implements Operator<DateTimeRange> {
       '_and': [
         field.queryToJson({'_gte': dateToString(filterValue.start)}),
         field.queryToJson({'_lte': dateToString(filterValue.end)}),
-      ]
+      ],
     };
   }
 

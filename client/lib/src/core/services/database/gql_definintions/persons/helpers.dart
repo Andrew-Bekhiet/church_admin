@@ -16,10 +16,10 @@ class PersonUpdateHelper {
   late final IterableDifferenceResult<ID> _tagsDiff;
 
   PersonUpdateHelper({required this.newPerson, required this.oldPerson})
-      : _personDelta = computeObjectDelta(
-          newPerson.toJson(),
-          oldPerson.toJson(),
-        ) {
+    : _personDelta = computeObjectDelta(
+        newPerson.toJson(),
+        oldPerson.toJson(),
+      ) {
     _servicesDiff = _getDifferenceUsing((p) => p.services);
     _groupsDiff = _getDifferenceUsing((p) => p.groups);
     _hobbiesDiff = _getDifferenceUsing((p) => p.hobbies);

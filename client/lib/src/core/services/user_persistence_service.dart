@@ -20,11 +20,12 @@ class UserPersistenceService {
     required FirebaseDatabase firebaseDatabase,
     ConnectivityService? connectivityService,
     AuthBloc? auth,
-  })  : _connectivity = connectivityService ?? ConnectivityService.I,
-        _auth = auth ?? AuthBloc.I,
-        _firebaseDatabase = firebaseDatabase {
-    _connectivitySubscription =
-        _connectivity.connectivityStream.listen(_onConnectivityChanged);
+  }) : _connectivity = connectivityService ?? ConnectivityService.I,
+       _auth = auth ?? AuthBloc.I,
+       _firebaseDatabase = firebaseDatabase {
+    _connectivitySubscription = _connectivity.connectivityStream.listen(
+      _onConnectivityChanged,
+    );
   }
 
   bool get canRecordPersistence =>

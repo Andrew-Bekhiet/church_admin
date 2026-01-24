@@ -55,8 +55,10 @@ void main() {
   test(
     'Image Url Cache Service: isUrlFileCached',
     () async {
-      final baseCacheManager =
-          getMockedCacheManager('cachedUrl', uncachedUrl: 'uncachedUrl');
+      final baseCacheManager = getMockedCacheManager(
+        'cachedUrl',
+        uncachedUrl: 'uncachedUrl',
+      );
 
       final unit = ImageUrlCacheService(
         box: FakeSyncKVStore(),
@@ -98,8 +100,10 @@ void main() {
     'Image Url Cache Service: getImageUrl',
     () async {
       // Setup:
-      final baseCacheManager =
-          getMockedCacheManager('cachedUrl', uncachedUrl: 'uncachedUrl');
+      final baseCacheManager = getMockedCacheManager(
+        'cachedUrl',
+        uncachedUrl: 'uncachedUrl',
+      );
 
       final testExpiredUrl = Uri(
         host: 'example.com',
@@ -165,8 +169,10 @@ void main() {
   );
 
   test('Image Url Cache Service: getImageFileFromCache', () async {
-    final baseCacheManager =
-        getMockedCacheManager('cachedUrl', uncachedUrl: 'uncachedUrl');
+    final baseCacheManager = getMockedCacheManager(
+      'cachedUrl',
+      uncachedUrl: 'uncachedUrl',
+    );
 
     final unit = ImageUrlCacheService(
       box: FakeSyncKVStore(),
@@ -174,8 +180,9 @@ void main() {
     );
 
     final srvc = getMockedFunctionsSrvc('person1', 'cachedUrl');
-    when(srvc.getDownloadUrl('persons', 'person2'))
-        .thenAnswer((_) async => 'uncachedUrl');
+    when(
+      srvc.getDownloadUrl('persons', 'person2'),
+    ).thenAnswer((_) async => 'uncachedUrl');
     registerFunctionsService(srvc);
 
     final person = Person(
@@ -242,7 +249,8 @@ MockFunctionsService getMockedFunctionsSrvc(
 ) {
   final mockFunctionsService = MockFunctionsService();
 
-  when(mockFunctionsService.getDownloadUrl('persons', personId))
-      .thenAnswer((_) async => urlFromNetwork);
+  when(
+    mockFunctionsService.getDownloadUrl('persons', personId),
+  ).thenAnswer((_) async => urlFromNetwork);
   return mockFunctionsService;
 }

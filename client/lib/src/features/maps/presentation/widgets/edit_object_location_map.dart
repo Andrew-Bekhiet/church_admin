@@ -72,10 +72,9 @@ class _EditObjectLocationMap<T extends ViewableWithID>
           ),
         ),
         child: DataGeomap(
-          initialPerson:
-              widget.initialObject is Person
-                  ? widget.initialObject as Person
-                  : null,
+          initialPerson: widget.initialObject is Person
+              ? widget.initialObject as Person
+              : null,
           onUserLocationChanged: _userLocationSubject.add,
           geomapOptionsStream: _mapOptionsStream,
           addLayers: [
@@ -102,21 +101,20 @@ class _EditObjectLocationMap<T extends ViewableWithID>
               },
             ),
           ],
-          createMapOptions:
-              (center) => MapOptions(
-                onTap: (pos, point) {
-                  resultObject.value = widget.copyWithNewLocation(
-                    resultObject.value,
-                    Point(point.latitude, point.longitude),
-                  );
-                },
-                maxZoom: 18,
-                initialZoom: 14,
-                interactionOptions: const InteractionOptions(
-                  flags: InteractiveFlag.all & ~InteractiveFlag.flingAnimation,
-                ),
-                initialCenter: center,
-              ),
+          createMapOptions: (center) => MapOptions(
+            onTap: (pos, point) {
+              resultObject.value = widget.copyWithNewLocation(
+                resultObject.value,
+                Point(point.latitude, point.longitude),
+              );
+            },
+            maxZoom: 18,
+            initialZoom: 14,
+            interactionOptions: const InteractionOptions(
+              flags: InteractiveFlag.all & ~InteractiveFlag.flingAnimation,
+            ),
+            initialCenter: center,
+          ),
         ),
       ),
       floatingActionButton: Column(
@@ -171,23 +169,22 @@ class _EditObjectLocationMap<T extends ViewableWithID>
 
     final result = await showDialog<String?>(
       context: context,
-      builder:
-          (context) => AlertDialog(
-            title: const Text('تحديد الموقع من لينك Google Maps'),
-            content: TextField(
-              autofocus: true,
-              autofillHints: const [AutofillHints.url],
-              textInputAction: TextInputAction.done,
-              controller: controller,
-              onSubmitted: Navigator.of(context).pop,
-            ),
-            actions: [
-              OutlinedButton(
-                onPressed: () => Navigator.of(context).pop(controller.text),
-                child: const Text('تحديد الموقع'),
-              ),
-            ],
+      builder: (context) => AlertDialog(
+        title: const Text('تحديد الموقع من لينك Google Maps'),
+        content: TextField(
+          autofocus: true,
+          autofillHints: const [AutofillHints.url],
+          textInputAction: TextInputAction.done,
+          controller: controller,
+          onSubmitted: Navigator.of(context).pop,
+        ),
+        actions: [
+          OutlinedButton(
+            onPressed: () => Navigator.of(context).pop(controller.text),
+            child: const Text('تحديد الموقع'),
           ),
+        ],
+      ),
     );
 
     if (result == null) return null;
@@ -203,12 +200,11 @@ class _EditObjectLocationMap<T extends ViewableWithID>
       ),
     );
 
-    final locationResult =
-        Uri.tryParse(result) != null
-            ? await LocationParsingService.I.maybeParseLocationUri(
-              Uri.parse(result),
-            )
-            : null;
+    final locationResult = Uri.tryParse(result) != null
+        ? await LocationParsingService.I.maybeParseLocationUri(
+            Uri.parse(result),
+          )
+        : null;
 
     scaffoldMessenger.hideCurrentSnackBar();
 

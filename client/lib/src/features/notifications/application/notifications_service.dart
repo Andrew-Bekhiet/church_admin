@@ -18,20 +18,20 @@ class NotificationsService extends BlocObserver {
 
   static const NotificationDetails defaultRemoteNotificationsDetails =
       NotificationDetails(
-    android: AndroidNotificationDetails(
-      'Others',
-      'أخرى',
-      importance: Importance.max,
-      priority: Priority.high,
-    ),
-    iOS: DarwinNotificationDetails(
-      presentAlert: true,
-      presentBadge: true,
-      presentSound: true,
-      presentList: true,
-      interruptionLevel: InterruptionLevel.active,
-    ),
-  );
+        android: AndroidNotificationDetails(
+          'Others',
+          'أخرى',
+          importance: Importance.max,
+          priority: Priority.high,
+        ),
+        iOS: DarwinNotificationDetails(
+          presentAlert: true,
+          presentBadge: true,
+          presentSound: true,
+          presentList: true,
+          interruptionLevel: InterruptionLevel.active,
+        ),
+      );
 
   static Future<NotificationDetails> notificationsDetailsFor(
     Notification notification,
@@ -52,8 +52,9 @@ class NotificationsService extends BlocObserver {
           defaultAndroidNotificationDetails.channelName,
           importance: defaultAndroidNotificationDetails.importance,
           priority: defaultAndroidNotificationDetails.priority,
-          styleInformation:
-              BigPictureStyleInformation(FilePathAndroidBitmap(photo.path)),
+          styleInformation: BigPictureStyleInformation(
+            FilePathAndroidBitmap(photo.path),
+          ),
         ),
         iOS: DarwinNotificationDetails(
           presentAlert: defaultIOSNotificationDetails.presentAlert,
@@ -81,13 +82,13 @@ class NotificationsService extends BlocObserver {
     FunctionsService? functionsService,
     NotificationsStorage? storage,
     NotificationsSettingsStorage? settings,
-  })  : _storage = storage ?? NotificationsStorage.I,
-        _settings = settings ?? NotificationsSettingsStorage.I,
-        _firebaseMessaging = firebaseMessaging,
-        _localNotificationsPlugin = localNotificationsPlugin,
-        _authBloc = authBloc,
-        _userSettingsService = userSettingsService ?? UserSettingsService.I,
-        _functionsService = functionsService ?? FunctionsService.I {
+  }) : _storage = storage ?? NotificationsStorage.I,
+       _settings = settings ?? NotificationsSettingsStorage.I,
+       _firebaseMessaging = firebaseMessaging,
+       _localNotificationsPlugin = localNotificationsPlugin,
+       _authBloc = authBloc,
+       _userSettingsService = userSettingsService ?? UserSettingsService.I,
+       _functionsService = functionsService ?? FunctionsService.I {
     //
     _onForegroundMessageSubscription = onForegroundMessageStream
         .map(Notification.fromRemoteMessage)
@@ -177,7 +178,8 @@ class NotificationsService extends BlocObserver {
       code: 'BirthDay'.hashCode,
       callback: NotificationsServiceCallbacks.showBirthDayNotification,
       settingsCallback: _settings.setBirthDayTime,
-      notificationSetting: notificationSetting ??
+      notificationSetting:
+          notificationSetting ??
           const NotificationSetting(hours: 11, minutes: 0, intervalInDays: 1),
     );
   }
@@ -189,7 +191,8 @@ class NotificationsService extends BlocObserver {
       code: 'Attendance'.hashCode,
       callback: NotificationsServiceCallbacks.showAttendanceNotification,
       settingsCallback: _settings.setAttendanceTime,
-      notificationSetting: notificationSetting ??
+      notificationSetting:
+          notificationSetting ??
           const NotificationSetting(hours: 11, minutes: 0, intervalInDays: 7),
     );
   }
@@ -201,7 +204,8 @@ class NotificationsService extends BlocObserver {
       code: 'Kodas'.hashCode,
       callback: NotificationsServiceCallbacks.showKodasNotification,
       settingsCallback: _settings.setKodasTime,
-      notificationSetting: notificationSetting ??
+      notificationSetting:
+          notificationSetting ??
           const NotificationSetting(hours: 11, minutes: 0, intervalInDays: 7),
     );
   }
@@ -213,7 +217,8 @@ class NotificationsService extends BlocObserver {
       code: 'Confession'.hashCode,
       callback: NotificationsServiceCallbacks.showConfessionNotification,
       settingsCallback: _settings.setConfessionTime,
-      notificationSetting: notificationSetting ??
+      notificationSetting:
+          notificationSetting ??
           const NotificationSetting(hours: 11, minutes: 0, intervalInDays: 7),
     );
   }
@@ -303,8 +308,8 @@ class NotificationsService extends BlocObserver {
   }
 
   Future<bool> requestNotificationsPermission() async {
-    final notificationPermissionStatus =
-        await Permission.notification.request();
+    final notificationPermissionStatus = await Permission.notification
+        .request();
     if (notificationPermissionStatus == PermissionStatus.granted ||
         notificationPermissionStatus == PermissionStatus.limited) {
       final fcmPermission = await _firebaseMessaging.requestPermission();

@@ -11,8 +11,9 @@ class AndroidAlarmManagerPluginInit implements Initializer {
   Future<void> initialize() async {
     if (kIsWeb) return;
 
-    final currentPlatformService =
-        globalProviderContainer.read(currentPlatformServiceProvider);
+    final currentPlatformService = globalProviderContainer.read(
+      currentPlatformServiceProvider,
+    );
 
     final isAndroid = currentPlatformService.isAndroid;
     if (!isAndroid) return;

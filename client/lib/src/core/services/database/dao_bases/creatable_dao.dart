@@ -4,8 +4,10 @@ import 'package:meta/meta.dart';
 
 mixin CreatableDAO<T extends ViewableWithID> on DAOBase<T> {
   @protected
-  late final CreatableDAOProxy<T> createObjectProxy =
-      CreatableDAOProxy<T>(db: db, fromJson: fromJson);
+  late final CreatableDAOProxy<T> createObjectProxy = CreatableDAOProxy<T>(
+    db: db,
+    fromJson: fromJson,
+  );
 
   @protected
   CreateObjectConfig<T> get baseCreateObjectConfig;
@@ -33,9 +35,11 @@ class CreatableDAOProxy<T extends ViewableWithID> extends DAOBase<T> {
           MutationOptions(
             document: createObjectConfig.document,
             operationName: createObjectConfig.effectiveOperationName,
-            variables: createObjectConfig.variables ??
-                createObjectConfig.varsConstructor
-                    ?.call(newObject: newObject) ??
+            variables:
+                createObjectConfig.variables ??
+                createObjectConfig.varsConstructor?.call(
+                  newObject: newObject,
+                ) ??
                 {},
             parserFn:
                 createObjectConfig.parserFn ?? db.parser.singleParser(fromJson),

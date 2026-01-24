@@ -1,7 +1,6 @@
 // Part 52 of the schema
 part of "schema.graphql.dart";
 
-
 abstract class CopyWith_Input_StoresSetInput<TRes> {
   factory CopyWith_Input_StoresSetInput(
     Input_StoresSetInput instance,

@@ -1,7 +1,6 @@
 // Part 12 of the schema
 part of "schema.graphql.dart";
 
-
 abstract class CopyWith_Input_ClassesOrderBy<TRes> {
   factory CopyWith_Input_ClassesOrderBy(
     Input_ClassesOrderBy instance,

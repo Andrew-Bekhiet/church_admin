@@ -11,7 +11,7 @@ class PersonAnalysisChart extends StatefulWidget {
   final DateTimeRange range;
   final HistoryAggregateData analysisData;
   final ViewableObjectListController<LastRecordedByInfo> Function()
-      getHistoryListController;
+  getHistoryListController;
 
   final String title;
   final String lastTimeName;
@@ -34,8 +34,9 @@ class PersonAnalysisChart extends StatefulWidget {
 }
 
 class _PersonAnalysisChartState extends State<PersonAnalysisChart> {
-  late final groupedAnalysisData = widget.analysisData.nodes
-      .groupListsBy((d) => DateTime(d.time.year, d.time.month, d.time.day));
+  late final groupedAnalysisData = widget.analysisData.nodes.groupListsBy(
+    (d) => DateTime(d.time.year, d.time.month, d.time.day),
+  );
 
   late final vAvgDiff = groupedAnalysisData.values.map((e) => e.length).average;
 
@@ -120,8 +121,9 @@ class _PersonAnalysisChartState extends State<PersonAnalysisChart> {
                                 Duration(days: e.x.toInt()),
                               ),
                             )}\n',
-                            themeData.textTheme.bodySmall!
-                                .copyWith(color: colorScheme.onSurface),
+                            themeData.textTheme.bodySmall!.copyWith(
+                              color: colorScheme.onSurface,
+                            ),
                             children: [
                               TextSpan(
                                 locale: const Locale('ar', 'EG'),
@@ -133,8 +135,8 @@ class _PersonAnalysisChartState extends State<PersonAnalysisChart> {
                         .toList(),
                   ),
                 ),
-                maxY: groupedAnalysisData[groupedAnalysisData.maxOrNull!]!
-                        .length
+                maxY:
+                    groupedAnalysisData[groupedAnalysisData.maxOrNull!]!.length
                         .toDouble() +
                     (groupedAnalysisData[groupedAnalysisData.maxOrNull!]!
                                 .length *

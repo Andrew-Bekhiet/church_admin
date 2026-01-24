@@ -14,15 +14,15 @@ final class AdvancedQueriesMetadata extends _$AdvancedQueriesMetadata {
 
   @override
   List<QueryableType<Object>> get allQueryables => {
-        person,
-        service,
-        $class,
-        group,
-        family,
-        store,
-        street,
-        area,
-        user,
-        ...super.allQueryables
-      }.toList();
+    person,
+    service,
+    $class,
+    group,
+    family,
+    store,
+    street,
+    area,
+    user,
+    ...super.allQueryables,
+  }.toList();
 }

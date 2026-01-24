@@ -19,24 +19,24 @@ class RedirectingFieldMetadata<P extends Object, T extends Object>
     String? alias,
     String? label,
   }) : super(
-          parentType: parentField.parentType,
-          name: alias ?? targetField.name,
-          label: label ?? targetField.label,
-          isCodeOnly: targetField.isCodeOnly,
-          isOrderable: isOrderable ?? targetField.isOrderable,
-          type: targetField.type,
-          operators: targetField.operators,
-          getValue: (obj) {
-            final parentValue = parentField.getValue(obj);
+         parentType: parentField.parentType,
+         name: alias ?? targetField.name,
+         label: label ?? targetField.label,
+         isCodeOnly: targetField.isCodeOnly,
+         isOrderable: isOrderable ?? targetField.isOrderable,
+         type: targetField.type,
+         operators: targetField.operators,
+         getValue: (obj) {
+           final parentValue = parentField.getValue(obj);
 
-            if (parentValue == null) return null;
+           if (parentValue == null) return null;
 
-            return targetField.getValue(parentValue);
-          },
-        );
+           return targetField.getValue(parentValue);
+         },
+       );
 
   static RedirectingFieldMetadata<P, T>
-      fromJson<P extends Object, T extends Object>(
+  fromJson<P extends Object, T extends Object>(
     Json json,
   ) {
     final parentField = FieldMetadata.fromJson(json['parentField'] as Json);
@@ -69,8 +69,9 @@ class RedirectingFieldMetadata<P extends Object, T extends Object>
 
   @override
   Json serializeOrderBy(Object serializedValue) {
-    return parentField
-        .serializeOrderBy(targetField.serializeOrderBy(serializedValue));
+    return parentField.serializeOrderBy(
+      targetField.serializeOrderBy(serializedValue),
+    );
   }
 
   @override

@@ -100,9 +100,9 @@ void main() {
 
       expect(
         dateRangeFromString(
-          dateRangeToString(dateTimeRange)
-              ?.replaceAll(']', ')')
-              .replaceAll('[', '('),
+          dateRangeToString(
+            dateTimeRange,
+          )?.replaceAll(']', ')').replaceAll('[', '('),
         ),
         expectedDateTimeRange,
       );

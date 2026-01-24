@@ -18,8 +18,9 @@ class AdminOnDataWidget extends StatelessWidget {
           minVerticalPadding: 0,
           title: Text(
             'المناطق المسؤول عنها',
-            style: themeData.textTheme.titleMedium
-                ?.copyWith(fontWeight: FontWeight.bold),
+            style: themeData.textTheme.titleMedium?.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
           ),
           subtitle: Column(
             mainAxisSize: MainAxisSize.min,
@@ -39,16 +40,18 @@ class AdminOnDataWidget extends StatelessWidget {
           minVerticalPadding: 0,
           title: Text(
             'الخدمات المسؤول عنها',
-            style: themeData.textTheme.titleMedium
-                ?.copyWith(fontWeight: FontWeight.bold),
+            style: themeData.textTheme.titleMedium?.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
           ),
           subtitle: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              for (final MapEntry(:key, :value) in adminOn
-                  .where((a) => a.service != null)
-                  .groupListsBy((a) => a.service!)
-                  .entries)
+              for (final MapEntry(:key, :value)
+                  in adminOn
+                      .where((a) => a.service != null)
+                      .groupListsBy((a) => a.service!)
+                      .entries)
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 4),
                   child: Card(
@@ -63,8 +66,9 @@ class AdminOnDataWidget extends StatelessWidget {
           minVerticalPadding: 0,
           title: Text(
             'المجموعات المسؤول عنها',
-            style: themeData.textTheme.titleMedium
-                ?.copyWith(fontWeight: FontWeight.bold),
+            style: themeData.textTheme.titleMedium?.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
           ),
           subtitle: Column(
             mainAxisSize: MainAxisSize.min,

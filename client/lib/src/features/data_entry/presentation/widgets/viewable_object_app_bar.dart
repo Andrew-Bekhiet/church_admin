@@ -48,23 +48,24 @@ class ViewableObjectAppBarState extends State<ViewableObjectAppBar> {
     ],
   );
 
-  late final _borderRadiusTween = BorderRadiusTween(
-    begin: const BorderRadius.all(Radius.circular(10)),
-    end: const BorderRadius.all(Radius.circular(90)),
-  ).chain(
-    CurveTween(
-      curve: const Interval(0.25, 1, curve: Curves.easeOutExpo),
-    ),
-  );
+  late final _borderRadiusTween =
+      BorderRadiusTween(
+        begin: const BorderRadius.all(Radius.circular(10)),
+        end: const BorderRadius.all(Radius.circular(90)),
+      ).chain(
+        CurveTween(
+          curve: const Interval(0.25, 1, curve: Curves.easeOutExpo),
+        ),
+      );
 
   late final _textStyleTween = TextStyleTween(
     begin: Theme.of(context).textTheme.headlineMedium!.copyWith(
-          color: Theme.of(context).textTheme.titleLarge!.color,
-        ),
+      color: Theme.of(context).textTheme.titleLarge!.color,
+    ),
     end: Theme.of(context).textTheme.titleLarge!.copyWith(
-          color: widget.foregroundColor,
-          fontSize: Theme.of(context).textTheme.titleLarge!.fontSize! * 0.8,
-        ),
+      color: widget.foregroundColor,
+      fontSize: Theme.of(context).textTheme.titleLarge!.fontSize! * 0.8,
+    ),
   );
 
   late final _foregroundColorTween = ColorTween(
@@ -79,16 +80,18 @@ class ViewableObjectAppBarState extends State<ViewableObjectAppBar> {
       child: SafeArea(
         child: LayoutBuilder(
           builder: (context, constraints) {
-            final animationValue = (1 -
-                    ((constraints.biggest.height - kToolbarHeight) /
-                        (widget.appBarMaxHeight - kToolbarHeight)))
-                .clamp(0.0, 1.0);
+            final animationValue =
+                (1 -
+                        ((constraints.biggest.height - kToolbarHeight) /
+                            (widget.appBarMaxHeight - kToolbarHeight)))
+                    .clamp(0.0, 1.0);
 
             final BorderRadius? borderRadiusValue = _borderRadiusTween
                 .transform(widget.circleCrop ? animationValue : 0);
 
-            final Alignment textAlignValue =
-                _textAlignTween.transform(animationValue);
+            final Alignment textAlignValue = _textAlignTween.transform(
+              animationValue,
+            );
 
             return Stack(
               alignment: Alignment.center,
@@ -171,7 +174,8 @@ class _AppBarPhoto extends StatelessWidget {
             onTap: onTap,
             child: AbsorbPointer(
               absorbing: onTap != null,
-              child: overrideImage ??
+              child:
+                  overrideImage ??
                   ImageObjectWidget(
                     viewable,
                     size: height,

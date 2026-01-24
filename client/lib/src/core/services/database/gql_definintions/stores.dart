@@ -14,37 +14,37 @@ class StoresDAO extends FullCRUDDAO<Store> {
   @override
   late final StreamCountConfig<Store> baseStreamCountConfig =
       const StreamCountConfig(
-    document: documentNodeSubscriptionwatchStoresCount,
-  );
+        document: documentNodeSubscriptionwatchStoresCount,
+      );
 
   @override
   late final StreamSingleByIdConfig<Store> baseStreamSingleByIdConfig =
       StreamSingleByIdConfig(
-    document: documentNodeSubscriptionwatchStore,
-    varsConstructor: _streamSingleByIdVarsConstructor,
-  );
+        document: documentNodeSubscriptionwatchStore,
+        varsConstructor: _streamSingleByIdVarsConstructor,
+      );
 
   @override
   late final DeleteSingleByIdConfig<Store> baseDeleteSingleByIdConfig =
       DeleteSingleByIdConfig(
-    document: documentNodeMutationdeleteStore,
-    varsConstructor: _deleteSingleByIdVarsConstructor,
-  );
+        document: documentNodeMutationdeleteStore,
+        varsConstructor: _deleteSingleByIdVarsConstructor,
+      );
 
   @override
   late final UpdateObjectConfig<Store> baseUpdateObjectConfig =
       UpdateObjectConfig(
-    document: documentNodeMutationupdateStore,
-    varsConstructor: _updateStoreVarsConstructor,
-    parserFn: db.parser.singleOrNullParser(fromJson, 'updateStoresByPk'),
-  );
+        document: documentNodeMutationupdateStore,
+        varsConstructor: _updateStoreVarsConstructor,
+        parserFn: db.parser.singleOrNullParser(fromJson, 'updateStoresByPk'),
+      );
 
   @override
   late final CreateObjectConfig<Store> baseCreateObjectConfig =
       CreateObjectConfig(
-    document: documentNodeMutationinsertStore,
-    varsConstructor: _createStoreVarsConstructor,
-  );
+        document: documentNodeMutationinsertStore,
+        varsConstructor: _createStoreVarsConstructor,
+      );
 
   Json _streamSingleByIdVarsConstructor({required UuidValue id}) =>
       Variables_Subscription_watchStore(id: id).toJson();

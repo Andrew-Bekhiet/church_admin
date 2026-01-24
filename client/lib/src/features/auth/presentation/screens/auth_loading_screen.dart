@@ -8,40 +8,41 @@ class AuthLoadingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AuthBloc, AuthState>(
-        bloc: AuthBloc.I,
-        builder: (context, state) {
-          if (state is AuthExceptionState) {
-            return Scaffold(
-              appBar: AppBar(
-                title: const Text('خطأ في تسجيل الدخول'),
-                actions: const [SignOutButton()],
-              ),
-              body: Center(
-                child: ErrorWidget.builder(
-                  FlutterErrorDetails(
-                    exception:
-                        state.exception ?? Exception('Unknown Auth Exception'),
-                    stack: state.stackTrace,
-                    library: 'AuthLoadingScreen',
-                  ),
-                ),
-              ),
-            );
-          }
-
+      bloc: AuthBloc.I,
+      builder: (context, state) {
+        if (state is AuthExceptionState) {
           return Scaffold(
             appBar: AppBar(
+              title: const Text('خطأ في تسجيل الدخول'),
               actions: const [SignOutButton()],
             ),
-            body: const Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              spacing: 15,
-              children: [
-                Center(child: CircularProgressIndicator()),
-                Text('جاري التحميل...'),
-              ],
+            body: Center(
+              child: ErrorWidget.builder(
+                FlutterErrorDetails(
+                  exception:
+                      state.exception ?? Exception('Unknown Auth Exception'),
+                  stack: state.stackTrace,
+                  library: 'AuthLoadingScreen',
+                ),
+              ),
             ),
           );
-        });
+        }
+
+        return Scaffold(
+          appBar: AppBar(
+            actions: const [SignOutButton()],
+          ),
+          body: const Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            spacing: 15,
+            children: [
+              Center(child: CircularProgressIndicator()),
+              Text('جاري التحميل...'),
+            ],
+          ),
+        );
+      },
+    );
   }
 }

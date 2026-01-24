@@ -92,22 +92,22 @@ class _EditAreaState extends State<EditArea> {
   }
 
   void Function() _editGeolocation(BuildContext context) => () async {
-        final Area? result = await Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => EditAreaPolygonMap(
-              onSaved: Navigator.of(context).pop,
-              initialArea: newArea,
-              geomapOptions: GeomapOptions(
-                layers: const {
-                  GeoMapLayer.areas,
-                },
-                selectedAreas: {newArea},
-              ),
-            ),
+    final Area? result = await Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => EditAreaPolygonMap(
+          onSaved: Navigator.of(context).pop,
+          initialArea: newArea,
+          geomapOptions: GeomapOptions(
+            layers: const {
+              GeoMapLayer.areas,
+            },
+            selectedAreas: {newArea},
           ),
-        );
-        if (result != null) {
-          newArea = result;
-        }
-      };
+        ),
+      ),
+    );
+    if (result != null) {
+      newArea = result;
+    }
+  };
 }

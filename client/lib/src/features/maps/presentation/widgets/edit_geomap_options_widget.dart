@@ -111,18 +111,20 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
                     (e) => CheckboxListTile(
                       title: Text(e.label),
                       value: stagingMapOptions.layers.contains(e),
-                      onChanged: stagingMapOptions.layers.length == 1 &&
+                      onChanged:
+                          stagingMapOptions.layers.length == 1 &&
                               stagingMapOptions.layers.single == e
                           ? null
                           : (v) => setState(
-                                () => stagingMapOptions =
-                                    stagingMapOptions.copyWith(
-                                  layers: v ?? false
-                                      ? stagingMapOptions.layers.union({e})
-                                      : stagingMapOptions.layers
-                                          .difference({e}),
-                                ),
-                              ),
+                              () => stagingMapOptions = stagingMapOptions
+                                  .copyWith(
+                                    layers: v ?? false
+                                        ? stagingMapOptions.layers.union({e})
+                                        : stagingMapOptions.layers.difference({
+                                            e,
+                                          }),
+                                  ),
+                            ),
                     ),
                   )
                   .toList(),
@@ -261,8 +263,9 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
             actions: [
               IconButton(
                 icon: const Icon(Symbols.select_all),
-                onPressed: () => controller.selectionController
-                    .selectAll(controller.currentFilteredObjectsOrNull ?? []),
+                onPressed: () => controller.selectionController.selectAll(
+                  controller.currentFilteredObjectsOrNull ?? [],
+                ),
                 tooltip: 'تحديد الكل',
               ),
               IconButton(

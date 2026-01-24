@@ -5,7 +5,7 @@ import 'package:flutter/foundation.dart';
 
 class ViewableEnumWithID<T extends LabeledEnum> implements ViewableWithID {
   static PaginatableStream<ViewableEnumWithID<T>, String?>
-      createPaginatableStream<T extends LabeledEnum>(
+  createPaginatableStream<T extends LabeledEnum>(
     List<T> values,
     Stream<String?> search,
   ) {

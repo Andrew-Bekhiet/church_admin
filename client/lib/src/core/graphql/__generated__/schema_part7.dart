@@ -1,7 +1,6 @@
 // Part 7 of the schema
 part of "schema.graphql.dart";
 
-
 abstract class CopyWith_Input_AuthUsersAdminOnMinOrderBy<TRes> {
   factory CopyWith_Input_AuthUsersAdminOnMinOrderBy(
     Input_AuthUsersAdminOnMinOrderBy instance,

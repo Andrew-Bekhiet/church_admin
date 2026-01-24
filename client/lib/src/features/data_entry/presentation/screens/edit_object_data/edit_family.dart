@@ -38,19 +38,22 @@ class _EditFamilyState extends State<EditFamily> {
     final oldFamily = widget.family;
 
     _controller = EditObjectController(
-      afterCreate: (object) => ViewFamilyRoute(id: object.id, $extra: object)
-          .pushReplacement(context),
+      afterCreate: (object) => ViewFamilyRoute(
+        id: object.id,
+        $extra: object,
+      ).pushReplacement(context),
       onCreate: (object) =>
           DatabaseService.I.families.createObject(newObject: object),
       onUpdate: (oldFamily, newFamily) =>
           DatabaseService.I.families.updateFamily(
-        oldFamily: oldFamily,
-        newFamily: newFamily,
-      ),
+            oldFamily: oldFamily,
+            newFamily: newFamily,
+          ),
       onDelete: (object) =>
           DatabaseService.I.families.deleteById(id: object.id),
       toJson: (object) => object.toJson(),
-      newObject: oldFamily ??
+      newObject:
+          oldFamily ??
           Family(
             id: const Uuid().v4(),
             name: '',
@@ -89,11 +92,11 @@ class _EditFamilyState extends State<EditFamily> {
             initialValue: newFamily.church,
             onCreateCustom: (name) =>
                 DatabaseService.I.metadata.churches.createObject(
-              newObject: Church(id: const Uuid().v4(), name: name),
-            ),
+                  newObject: Church(id: const Uuid().v4(), name: name),
+                ),
             listController: (s) => ViewableObjectListController(
-              objectsPaginatableStream:
-                  DatabaseService.I.metadata.churches.streamAll(searchQuery: s),
+              objectsPaginatableStream: DatabaseService.I.metadata.churches
+                  .streamAll(searchQuery: s),
             ),
             dialogFieldLabel: 'الكنيسة',
             onChanged: (value) => newFamily = newFamily.copyWith(church: value),
@@ -108,9 +111,9 @@ class _EditFamilyState extends State<EditFamily> {
             listController: (s) => ViewableObjectListController(
               objectsPaginatableStream:
                   ViewableEnumWithID.createPaginatableStream(
-                MartialStatus.values,
-                s,
-              ),
+                    MartialStatus.values,
+                    s,
+                  ),
             ),
             onChanged: (value) => setState(
               () => newFamily = newFamily.copyWith(status: value!.enumValue),
@@ -184,8 +187,9 @@ class _EditFamilyState extends State<EditFamily> {
             ),
             initialValue: newFamily.parents?.toSet() ?? {},
             listController: (s) => ViewableObjectListController(
-              objectsPaginatableStream:
-                  DatabaseService.I.families.streamAll(searchQuery: s),
+              objectsPaginatableStream: DatabaseService.I.families.streamAll(
+                searchQuery: s,
+              ),
             ),
             labelText: 'عائلات الأب والأم',
             onChanged: (value) => newFamily = newFamily.copyWith(
@@ -236,8 +240,9 @@ class _EditFamilyState extends State<EditFamily> {
             ),
             initialValue: newFamily.children?.toSet() ?? {},
             listController: (s) => ViewableObjectListController(
-              objectsPaginatableStream:
-                  DatabaseService.I.families.streamAll(searchQuery: s),
+              objectsPaginatableStream: DatabaseService.I.families.streamAll(
+                searchQuery: s,
+              ),
             ),
             labelText: 'عائلات الأبناء',
             onChanged: (value) => newFamily = newFamily.copyWith(

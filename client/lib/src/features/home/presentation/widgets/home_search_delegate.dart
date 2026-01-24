@@ -21,7 +21,8 @@ class HomeSearchDelegate extends SearchDelegate {
     final theme = Theme.of(context);
 
     return theme.copyWith(
-      inputDecorationTheme: searchFieldDecorationTheme ??
+      inputDecorationTheme:
+          searchFieldDecorationTheme ??
           const InputDecorationTheme(
             border: InputBorder.none,
           ),

@@ -61,12 +61,14 @@ class EmailVerificationScreen extends StatelessWidget {
                     onPressed: isLoading
                         ? null
                         : () async {
-                            final scaffoldMessenger =
-                                ScaffoldMessenger.of(context);
+                            final scaffoldMessenger = ScaffoldMessenger.of(
+                              context,
+                            );
 
                             authBloc.add(const SendEmailVerification());
-                            final nextState = await authBloc.stream
-                                .firstWhere((state) => state is! AuthLoading);
+                            final nextState = await authBloc.stream.firstWhere(
+                              (state) => state is! AuthLoading,
+                            );
 
                             if (nextState is AuthExceptionState) {
                               scaffoldMessenger.showErrorSnackBar(

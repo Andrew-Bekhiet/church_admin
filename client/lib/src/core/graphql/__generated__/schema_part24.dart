@@ -1,7 +1,6 @@
 // Part 24 of the schema
 part of "schema.graphql.dart";
 
-
 abstract class CopyWith_Input_HistoryAttendanceDaysConstraintsStreamCursorValueInput<
   TRes
 > {

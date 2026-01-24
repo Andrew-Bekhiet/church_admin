@@ -14,50 +14,49 @@ class PersonsDAO extends FullCRUDDAO<Person> {
   @override
   late final StreamAllConfig<Person> baseStreamAllConfig =
       const StreamAllConfig(
-    document: documentNodeSubscriptionwatchAllPersons,
-  );
+        document: documentNodeSubscriptionwatchAllPersons,
+      );
   @override
   late final StreamCountConfig<Person> baseStreamCountConfig =
       const StreamCountConfig(
-    document: documentNodeSubscriptionwatchPersonsCount,
-  );
+        document: documentNodeSubscriptionwatchPersonsCount,
+      );
   @override
   final StreamSingleByIdConfig<Person> baseStreamSingleByIdConfig =
       const StreamSingleByIdConfig(
-    document: documentNodeSubscriptionwatchPerson,
-  );
+        document: documentNodeSubscriptionwatchPerson,
+      );
   @override
   late final DeleteSingleByIdConfig<Person> baseDeleteSingleByIdConfig =
       DeleteSingleByIdConfig(
-    document: documentNodeMutationdeletePerson,
-    varsConstructor: _deleteSingleByIdVarsConstructor,
-  );
+        document: documentNodeMutationdeletePerson,
+        varsConstructor: _deleteSingleByIdVarsConstructor,
+      );
   @override
   late final UpdateObjectConfig<Person> baseUpdateObjectConfig =
       UpdateObjectConfig(
-    document: documentNodeMutationupdatePerson,
-    varsConstructor: _updatePersonVarsConstructor,
-    parserFn: db.parser.singleOrNullParser(fromJson, 'updatePersonsByPk'),
-  );
+        document: documentNodeMutationupdatePerson,
+        varsConstructor: _updatePersonVarsConstructor,
+        parserFn: db.parser.singleOrNullParser(fromJson, 'updatePersonsByPk'),
+      );
   @override
   late final CreateObjectConfig<Person> baseCreateObjectConfig =
       CreateObjectConfig(
-    document: documentNodeMutationinsertPerson,
-    varsConstructor: _createPersonVarsConstructor,
-  );
+        document: documentNodeMutationinsertPerson,
+        varsConstructor: _createPersonVarsConstructor,
+      );
 
   Json _streamSingleByIdVarsConstructor({
     required UuidValue id,
     int? servicesLimit = 6,
     int? classesLimit = 6,
     int? groupsLimit = 6,
-  }) =>
-      Variables_Subscription_watchPerson(
-        id: id,
-        servicesLimit: servicesLimit,
-        classesLimit: classesLimit,
-        groupsLimit: groupsLimit,
-      ).toJson();
+  }) => Variables_Subscription_watchPerson(
+    id: id,
+    servicesLimit: servicesLimit,
+    classesLimit: classesLimit,
+    groupsLimit: groupsLimit,
+  ).toJson();
 
   Json _createPersonVarsConstructor({required Person newObject}) =>
       Variables_Mutation_insertPerson(
@@ -67,11 +66,10 @@ class PersonsDAO extends FullCRUDDAO<Person> {
   Json _updatePersonVarsConstructor({
     required Person newObject,
     required Person oldObject,
-  }) =>
-      PersonUpdateHelper(
-        newPerson: newObject,
-        oldPerson: oldObject,
-      ).variables.toJson();
+  }) => PersonUpdateHelper(
+    newPerson: newObject,
+    oldPerson: oldObject,
+  ).variables.toJson();
 
   Json _deleteSingleByIdVarsConstructor({required UuidValue id}) =>
       Variables_Mutation_deletePerson(personId: id).toJson();

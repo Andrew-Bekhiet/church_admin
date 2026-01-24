@@ -26,7 +26,8 @@ extension AddSelectionFields on DocumentNode {
                       span: d.selectionSet.span,
                       selections: d.selectionSet.selections
                           .map(
-                            (f) => f is FieldNode &&
+                            (f) =>
+                                f is FieldNode &&
                                     fieldsToAdd.containsKey(f.name.value)
                                 ? FieldNode(
                                     name: f.name,
@@ -62,8 +63,8 @@ extension GQLSelectionNode on Json {
         name: NameNode(value: e.key),
         selectionSet: e.value is Map<String, Object?>
             ? SelectionSetNode(
-                selections:
-                    (e.value as Map<String, Object?>).asGQLSelectionNode(),
+                selections: (e.value as Map<String, Object?>)
+                    .asGQLSelectionNode(),
               )
             : null,
       );
@@ -83,7 +84,7 @@ extension StringGQLSelectionNode on List<String> {
                 selections: sublist(1).asGQLSelectionNode(),
               )
             : null,
-      )
+      ),
     ];
   }
 }
