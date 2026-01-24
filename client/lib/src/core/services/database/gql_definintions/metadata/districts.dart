@@ -8,8 +8,8 @@ class DistrictsDAO extends DAOBase<District>
 
   @override
   StreamAllConfig<District> get baseStreamAllConfig => const StreamAllConfig(
-        document: documentNodeSubscriptionwatchAllDistricts,
-      );
+    document: documentNodeSubscriptionwatchAllDistricts,
+  );
 
   @override
   StreamSingleByIdConfig<District> get baseStreamSingleByIdConfig =>
@@ -17,12 +17,12 @@ class DistrictsDAO extends DAOBase<District>
 
   @override
   CreateObjectConfig<District> get baseCreateObjectConfig => CreateObjectConfig(
-        document: documentNodeMutationcreateDistrict,
-        varsConstructor: _createDistrictVarsConstructor,
-        parserFn: db.parser.singleParser(fromJson, 'insertDistrictsOne'),
-      );
+    document: documentNodeMutationcreateDistrict,
+    varsConstructor: _createDistrictVarsConstructor,
+    parserFn: db.parser.singleParser(fromJson, 'insertDistrictsOne'),
+  );
 
   Json _createDistrictVarsConstructor({required District newObject}) => {
-        'object': {'name': newObject.name},
-      };
+    'object': {'name': newObject.name},
+  };
 }

@@ -15,13 +15,15 @@ class ConnectivityService {
     SecretsService? secretsService,
     LoggingService? loggingService,
     String? urlToPing,
-  })  : assert((secretsService == null) != (urlToPing == null)),
-        _connectivityPlugin = connectivityPlugin,
-        _dio = dio,
-        _loggingService = loggingService ?? LoggingService.I,
-        urlToPing = urlToPing ??
-            Uri.parse(secretsService!.hasuraServer)
-                .replace(pathSegments: ['healthz']).toString() {
+  }) : assert((secretsService == null) != (urlToPing == null)),
+       _connectivityPlugin = connectivityPlugin,
+       _dio = dio,
+       _loggingService = loggingService ?? LoggingService.I,
+       urlToPing =
+           urlToPing ??
+           Uri.parse(
+             secretsService!.hasuraServer,
+           ).replace(pathSegments: ['healthz']).toString() {
     _connectivityStreamSubscription = _createConnectivityStreamSubscription();
   }
 
@@ -75,8 +77,9 @@ class ConnectivityService {
 
   Future<bool> _canPingUrl() async {
     try {
-      final response =
-          await _dio.get(urlToPing).timeout(const Duration(seconds: 8));
+      final response = await _dio
+          .get(urlToPing)
+          .timeout(const Duration(seconds: 8));
 
       return response.statusCode == 200;
     } on Exception {

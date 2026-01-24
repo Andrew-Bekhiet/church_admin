@@ -25,8 +25,11 @@ extension DateTimeX on DateTime {
     if (appendSince) {
       return format(this, locale: 'ar', clock: now ?? clock.now());
     }
-    return format(this, locale: 'ar', clock: now ?? clock.now())
-        .replaceAll('منذ ', '');
+    return format(
+      this,
+      locale: 'ar',
+      clock: now ?? clock.now(),
+    ).replaceAll('منذ ', '');
   }
 
   DateTime truncateToDay() {
@@ -140,8 +143,9 @@ extension NextItem<T> on Stream<T> {
       },
       onDone: () async {
         if (!completer.isCompleted && !ignoreStreamDone) {
-          completer
-              .completeError(StateError('Stream finished with no more items'));
+          completer.completeError(
+            StateError('Stream finished with no more items'),
+          );
         } else {
           completer.complete();
         }
@@ -152,7 +156,8 @@ extension NextItem<T> on Stream<T> {
     return completer.future;
   }
 
-  Future<T> get nextNonNullStrict => nextWhere(
+  Future<T> get nextNonNullStrict =>
+      nextWhere(
         (o) => o != null,
       ).then(
         (value) {
@@ -170,9 +175,9 @@ extension NextItem<T> on Stream<T> {
 
 extension WithPadding on Widget {
   Widget withPadding(EdgeInsetsGeometry padding) => Padding(
-        padding: padding,
-        child: this,
-      );
+    padding: padding,
+    child: this,
+  );
 }
 
 extension CopyDateTimeRange on DateTimeRange {

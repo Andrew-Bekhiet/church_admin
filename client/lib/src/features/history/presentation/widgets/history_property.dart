@@ -20,9 +20,9 @@ class HistoryProperty<T extends LastRecordedByInfo> extends StatelessWidget {
   final void Function()? onRecordNow;
 
   DateFormat get dateFormat => DateFormat(
-        'التاريخ: yyyy/M/d${showTime ? '\nالساعة: h:m a' : ''}',
-        'ar-EG',
-      );
+    'التاريخ: yyyy/M/d${showTime ? '\nالساعة: h:m a' : ''}',
+    'ar-EG',
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -61,21 +61,21 @@ class HistoryProperty<T extends LastRecordedByInfo> extends StatelessWidget {
   }
 
   void Function() _onHistoryTap(BuildContext context) => () async {
-        final viewableObjectListController = getHistoryListController();
+    final viewableObjectListController = getHistoryListController();
 
-        await showDialog(
-          context: context,
-          builder: (context) {
-            return Dialog(
-              backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-              child: ViewableObjectList<T>(
-                objectsController: viewableObjectListController,
-                itemBuilder: (
+    await showDialog(
+      context: context,
+      builder: (context) {
+        return Dialog(
+          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+          child: ViewableObjectList<T>(
+            objectsController: viewableObjectListController,
+            itemBuilder:
+                (
                   context,
                   o,
                   config,
-                ) =>
-                    ViewableObjectWidget<User>(
+                ) => ViewableObjectWidget<User>(
                   o.user ??
                       User(
                         name: o.name,
@@ -92,14 +92,15 @@ class HistoryProperty<T extends LastRecordedByInfo> extends StatelessWidget {
                   onLongPress: config?.onLongPress != null
                       ? (_) => config!.onLongPress!(o)
                       : null,
-                  onTap:
-                      config?.onTap != null ? (_) => config!.onTap!(o) : null,
+                  onTap: config?.onTap != null
+                      ? (_) => config!.onTap!(o)
+                      : null,
                   trailing: config?.trailing,
                 ),
-              ),
-            );
-          },
+          ),
         );
-        await viewableObjectListController.dispose();
-      };
+      },
+    );
+    await viewableObjectListController.dispose();
+  };
 }

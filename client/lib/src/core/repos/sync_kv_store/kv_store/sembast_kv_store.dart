@@ -59,24 +59,26 @@ class SembastKvStore<T> implements KVStore<T> {
 
   @override
   Future<void> putAll(Map<String, T?> values) async {
-    final (:putRecordsKeys, :putRecordsValues, :deleteRecordsKeys) =
-        values.entries.map((e) => MapEntry(e.key, e.value)).fold(
-      (
-        putRecordsKeys: <String>[],
-        putRecordsValues: <T>[],
-        deleteRecordsKeys: <String>[]
-      ),
-      (acc, e) {
-        if (e.value == null) {
-          acc.deleteRecordsKeys.add(e.key);
-        } else {
-          acc.putRecordsKeys.add(e.key);
-          acc.putRecordsValues.add(e.value as T);
-        }
+    final (:putRecordsKeys, :putRecordsValues, :deleteRecordsKeys) = values
+        .entries
+        .map((e) => MapEntry(e.key, e.value))
+        .fold(
+          (
+            putRecordsKeys: <String>[],
+            putRecordsValues: <T>[],
+            deleteRecordsKeys: <String>[],
+          ),
+          (acc, e) {
+            if (e.value == null) {
+              acc.deleteRecordsKeys.add(e.key);
+            } else {
+              acc.putRecordsKeys.add(e.key);
+              acc.putRecordsValues.add(e.value as T);
+            }
 
-        return acc;
-      },
-    );
+            return acc;
+          },
+        );
 
     await _storeRef.records(putRecordsKeys).put(_dbClient, putRecordsValues);
     await _storeRef.records(deleteRecordsKeys).delete(_dbClient);

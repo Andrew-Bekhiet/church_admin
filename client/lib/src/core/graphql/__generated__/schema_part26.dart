@@ -1,7 +1,6 @@
 // Part 26 of the schema
 part of "schema.graphql.dart";
 
-
 class _CopyWithImpl_Input_HistoryAttendanceHistoryInsertInput<TRes>
     implements CopyWith_Input_HistoryAttendanceHistoryInsertInput<TRes> {
   _CopyWithImpl_Input_HistoryAttendanceHistoryInsertInput(

@@ -54,8 +54,9 @@ void main() {
         when(repository.getVerse()).thenReturn('test verse');
         when(repository.getTodaysSneksar()).thenReturn('test sneksar');
         when(repository.getSaying()).thenReturn('test saying');
-        when(repository.getTodaysBirthdaysData())
-            .thenAnswer((_) async => ['person']);
+        when(
+          repository.getTodaysBirthdaysData(),
+        ).thenAnswer((_) async => ['person']);
         when(repository.getTodaysBirthdaysQuery()).thenReturn(birthdaysQuery);
       });
 
@@ -84,14 +85,15 @@ void main() {
                 HomeMode.sundaySchool,
               )
               .having(
-            (s) => s.pages.map((e) => e.type),
-            'pages types',
-            [anything, Service, Person],
-          ).having(
-            (s) => s.pages.map((e) => e.objectsController),
-            'every page has objectsController',
-            [anything, isNotNull, isNotNull],
-          ),
+                (s) => s.pages.map((e) => e.type),
+                'pages types',
+                [anything, Service, Person],
+              )
+              .having(
+                (s) => s.pages.map((e) => e.objectsController),
+                'every page has objectsController',
+                [anything, isNotNull, isNotNull],
+              ),
           isA<HomeState>().having(
             (s) => s.dailyData,
             'dailyData',
@@ -193,108 +195,112 @@ void main() {
           expect: () => [
             isA<HomeState>()
                 .having(
-              (s) => s.mode,
-              'mode',
-              HomeMode.churchData,
-            )
+                  (s) => s.mode,
+                  'mode',
+                  HomeMode.churchData,
+                )
                 .having(
-              (s) => s.pages.map((e) => e.type),
-              'pages types',
-              [
-                anything,
-                Area,
-                Street,
-                Family,
-                Store,
-                Person,
-              ],
-            ).having(
-              (s) => s.pages.map((e) => e.objectsController),
-              'every page has objectsController',
-              [
-                anything,
-                isNotNull,
-                isNotNull,
-                isNotNull,
-                isNotNull,
-                isNotNull,
-              ],
-            ),
+                  (s) => s.pages.map((e) => e.type),
+                  'pages types',
+                  [
+                    anything,
+                    Area,
+                    Street,
+                    Family,
+                    Store,
+                    Person,
+                  ],
+                )
+                .having(
+                  (s) => s.pages.map((e) => e.objectsController),
+                  'every page has objectsController',
+                  [
+                    anything,
+                    isNotNull,
+                    isNotNull,
+                    isNotNull,
+                    isNotNull,
+                    isNotNull,
+                  ],
+                ),
             isA<HomeState>()
                 .having(
-              (s) => s.mode,
-              'mode',
-              HomeMode.sundaySchool,
-            )
+                  (s) => s.mode,
+                  'mode',
+                  HomeMode.sundaySchool,
+                )
                 .having(
-              (s) => s.pages.map((e) => e.type),
-              'pages types',
-              [
-                anything,
-                Service,
-                Person,
-              ],
-            ).having(
-              (s) => s.pages.map((e) => e.objectsController),
-              'every page has objectsController',
-              [
-                anything,
-                isNotNull,
-                isNotNull,
-              ],
-            ),
+                  (s) => s.pages.map((e) => e.type),
+                  'pages types',
+                  [
+                    anything,
+                    Service,
+                    Person,
+                  ],
+                )
+                .having(
+                  (s) => s.pages.map((e) => e.objectsController),
+                  'every page has objectsController',
+                  [
+                    anything,
+                    isNotNull,
+                    isNotNull,
+                  ],
+                ),
             isA<HomeState>()
                 .having(
-              (s) => s.mode,
-              'mode',
-              HomeMode.churchData,
-            )
+                  (s) => s.mode,
+                  'mode',
+                  HomeMode.churchData,
+                )
                 .having(
-              (s) => s.pages.map((e) => e.type),
-              'pages types',
-              [
-                anything,
-                Area,
-                Street,
-                Family,
-                Store,
-                Person,
-              ],
-            ).having(
-              (s) => s.pages.map((e) => e.objectsController),
-              'every page has objectsController',
-              [
-                anything,
-                isNotNull,
-                isNotNull,
-                isNotNull,
-                isNotNull,
-                isNotNull,
-              ],
-            ),
+                  (s) => s.pages.map((e) => e.type),
+                  'pages types',
+                  [
+                    anything,
+                    Area,
+                    Street,
+                    Family,
+                    Store,
+                    Person,
+                  ],
+                )
+                .having(
+                  (s) => s.pages.map((e) => e.objectsController),
+                  'every page has objectsController',
+                  [
+                    anything,
+                    isNotNull,
+                    isNotNull,
+                    isNotNull,
+                    isNotNull,
+                    isNotNull,
+                  ],
+                ),
             isA<HomeState>()
                 .having(
-              (s) => s.mode,
-              'mode',
-              HomeMode.sundaySchool,
-            )
+                  (s) => s.mode,
+                  'mode',
+                  HomeMode.sundaySchool,
+                )
                 .having(
-              (s) => s.pages.map((e) => e.type),
-              'pages types',
-              [
-                anything,
-                Service,
-                Person,
-              ],
-            ).having(
-              (s) => s.pages.map((e) => e.objectsController),
-              'every page has objectsController',
-              [
-                anything,
-                isNotNull,
-                isNotNull,
-              ],
-            ),
+                  (s) => s.pages.map((e) => e.type),
+                  'pages types',
+                  [
+                    anything,
+                    Service,
+                    Person,
+                  ],
+                )
+                .having(
+                  (s) => s.pages.map((e) => e.objectsController),
+                  'every page has objectsController',
+                  [
+                    anything,
+                    isNotNull,
+                    isNotNull,
+                  ],
+                ),
           ],
         );
       },
@@ -376,8 +382,9 @@ void main() {
             });
             when(mockPageController.hasClients).thenReturn(true);
             when(mockPageController.initialPage).thenReturn(0);
-            when(mockPageController.removeListener(any))
-                .thenAnswer((invocation) {
+            when(mockPageController.removeListener(any)).thenAnswer((
+              invocation,
+            ) {
               final listener =
                   invocation.positionalArguments.first as VoidCallback;
               listeners.remove(listener);

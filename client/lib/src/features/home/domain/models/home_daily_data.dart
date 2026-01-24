@@ -17,8 +17,13 @@ class HomeDailyData extends Equatable {
   });
 
   @override
-  List<Object?> get props =>
-      [verse, sneksar, saying, birthdaysText, birthdaysQuery];
+  List<Object?> get props => [
+    verse,
+    sneksar,
+    saying,
+    birthdaysText,
+    birthdaysQuery,
+  ];
 
   HomeDailyData copyWithNewText({
     required HomeDailyDataType type,
@@ -34,8 +39,8 @@ class HomeDailyData extends Equatable {
   }
 
   String select(HomeDailyDataType type) => switch (type) {
-        HomeDailyDataType.verse => verse,
-        HomeDailyDataType.sneksar => sneksar,
-        HomeDailyDataType.saying => saying,
-      };
+    HomeDailyDataType.verse => verse,
+    HomeDailyDataType.sneksar => sneksar,
+    HomeDailyDataType.saying => saying,
+  };
 }

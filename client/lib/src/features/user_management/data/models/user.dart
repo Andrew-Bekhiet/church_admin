@@ -117,11 +117,10 @@ class User extends ViewableWithIDAndImage
       Service(:final userCanEdit) ||
       Group(:final userCanEdit) ||
       Class(:final userCanEdit) ||
-      Person(:final userCanEdit) =>
-        userCanEdit,
+      Person(:final userCanEdit) => userCanEdit,
       User(:final currentUserCanManageThisUser, :final uid) =>
         currentUserCanManageThisUser && this.uid != uid,
-      _ => false
+      _ => false,
     };
   }
 
@@ -143,50 +142,50 @@ class UserFields extends _UserFields {
 
   @override
   FieldMetadata<String> get uid => FieldMetadata<String>(
-        parentType: User,
-        name: 'uid',
-        label: 'معرف المستخدم',
-        operators: {...StringOperator.values},
-        isCodeOnly: true,
-        getValue: (obj) => obj is User ? obj.uid : null,
-      );
+    parentType: User,
+    name: 'uid',
+    label: 'معرف المستخدم',
+    operators: {...StringOperator.values},
+    isCodeOnly: true,
+    getValue: (obj) => obj is User ? obj.uid : null,
+  );
 
   @override
   FieldMetadata<String> get email => FieldMetadata<String>(
-        parentType: User,
-        name: 'email',
-        label: 'البريد الإلكتروني',
-        operators: {...StringOperator.values},
-        isCodeOnly: true,
-        getValue: (obj) => obj is User ? obj.email : null,
-      );
+    parentType: User,
+    name: 'email',
+    label: 'البريد الإلكتروني',
+    operators: {...StringOperator.values},
+    isCodeOnly: true,
+    getValue: (obj) => obj is User ? obj.email : null,
+  );
 
   @override
   FieldMetadata<bool> get currentUserCanManageThisUser => FieldMetadata(
-        parentType: super.currentUserCanManageThisUser.parentType,
-        name: 'currentUserCanManageThisUser',
-        label: super.currentUserCanManageThisUser.label,
-        isOrderable: super.currentUserCanManageThisUser.isOrderable,
-        operators: super.currentUserCanManageThisUser.operators,
-        getValue: super.currentUserCanManageThisUser.getValue,
-        isCodeOnly: true,
-      );
+    parentType: super.currentUserCanManageThisUser.parentType,
+    name: 'currentUserCanManageThisUser',
+    label: super.currentUserCanManageThisUser.label,
+    isOrderable: super.currentUserCanManageThisUser.isOrderable,
+    operators: super.currentUserCanManageThisUser.operators,
+    getValue: super.currentUserCanManageThisUser.getValue,
+    isCodeOnly: true,
+  );
 
   FieldMetadata<AggregateData> get permissionsAggregate => FieldMetadata(
-        parentType: User,
-        name: 'permissionsAggregate',
-        label: 'permissionsAggregate',
-        isCodeOnly: true,
-        isOrderable: false,
-        operators: {...MultiSelectOperator.values},
-        getValue: (obj) => obj is User ? obj.permissions : null,
-      );
+    parentType: User,
+    name: 'permissionsAggregate',
+    label: 'permissionsAggregate',
+    isCodeOnly: true,
+    isOrderable: false,
+    operators: {...MultiSelectOperator.values},
+    getValue: (obj) => obj is User ? obj.permissions : null,
+  );
 
   @override
   List<FieldMetadata<Object>> get allFields => [
-        ...super.allFields,
-        permissionsAggregate,
-      ];
+    ...super.allFields,
+    permissionsAggregate,
+  ];
 
   @override
   Map<String, FieldMetadata<Object>> get allFieldsByName {

@@ -21,11 +21,12 @@ class EditAreaPolygonMap extends StatelessWidget {
         return resultAreaStream.map(
           (resultAreaValue) =>
               (response ?? const PersonsGeolocationsResponse()).copyWith(
-            areas: {
-              ...response?.areas.where((s) => s.id != resultAreaValue.id) ?? {},
-              resultAreaValue,
-            },
-          ),
+                areas: {
+                  ...response?.areas.where((s) => s.id != resultAreaValue.id) ??
+                      {},
+                  resultAreaValue,
+                },
+              ),
         );
       },
       initialObject: initialArea,

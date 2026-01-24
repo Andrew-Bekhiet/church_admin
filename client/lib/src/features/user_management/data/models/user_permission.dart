@@ -54,19 +54,19 @@ enum UserPermission implements LabeledEnum {
       UserPermission.approved,
       ...switch (this) {
         UserPermission.manageAllUsers => {
-            UserPermission.writeAllData,
-            ...UserPermission.writeAllData.requires,
-          },
+          UserPermission.writeAllData,
+          ...UserPermission.writeAllData.requires,
+        },
         UserPermission.writeAllData => {
-            UserPermission.readAllData,
-            ...UserPermission.readAllData.requires
-          },
+          UserPermission.readAllData,
+          ...UserPermission.readAllData.requires,
+        },
         UserPermission.recoverDeleted => {
-            UserPermission.readAllData,
-            ...UserPermission.readAllData.requires
-          },
+          UserPermission.readAllData,
+          ...UserPermission.readAllData.requires,
+        },
         _ => {},
-      }
+      },
     };
   }
 }

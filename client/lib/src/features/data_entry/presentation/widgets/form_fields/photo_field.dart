@@ -60,36 +60,36 @@ class PhotoField extends StatelessWidget {
                 object.hasImage,
               )) {
                 (true, false, _) => ClipPath(
-                    clipper: ShapeBorderClipper(
-                      shape: circleCrop
-                          ? const CircleBorder()
-                          : const RoundedRectangleBorder(
-                              borderRadius: ImageObjectWidget.clipBorderRadius,
-                            ),
-                      textDirection: Directionality.maybeOf(context),
-                    ),
-                    child: Image.file(
-                      File(state.value!.newPhoto!.path),
-                      height: photoSize,
-                    ),
+                  clipper: ShapeBorderClipper(
+                    shape: circleCrop
+                        ? const CircleBorder()
+                        : const RoundedRectangleBorder(
+                            borderRadius: ImageObjectWidget.clipBorderRadius,
+                          ),
+                    textDirection: Directionality.maybeOf(context),
                   ),
+                  child: Image.file(
+                    File(state.value!.newPhoto!.path),
+                    height: photoSize,
+                  ),
+                ),
                 (true, true, _) || (_, _, false) => DecoratedBox(
-                    decoration: ShapeDecoration(
-                      shape: const CircleBorder(),
-                      color: colorScheme.primaryContainer,
+                  decoration: ShapeDecoration(
+                    shape: const CircleBorder(),
+                    color: colorScheme.primaryContainer,
+                  ),
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints.expand(
+                      height: photoSize,
+                      width: photoSize,
                     ),
-                    child: ConstrainedBox(
-                      constraints: BoxConstraints.expand(
-                        height: photoSize,
-                        width: photoSize,
-                      ),
-                      child: Icon(
-                        Symbols.camera_alt,
-                        size: 2 * photoSize / 3,
-                        color: colorScheme.onPrimaryContainer,
-                      ),
+                    child: Icon(
+                      Symbols.camera_alt,
+                      size: 2 * photoSize / 3,
+                      color: colorScheme.onPrimaryContainer,
                     ),
                   ),
+                ),
                 (_, _, _) => null,
               },
             );
@@ -102,38 +102,37 @@ class PhotoField extends StatelessWidget {
   void Function() _changeImage(
     BuildContext context,
     FormFieldState<PhotoFieldState> state,
-  ) =>
-      () async {
-        final source = await ImagePickerService.I.showSourceSheet(
-          context: context,
-          canDelete: canDelete,
-        );
+  ) => () async {
+    final source = await ImagePickerService.I.showSourceSheet(
+      context: context,
+      canDelete: canDelete,
+    );
 
-        if (source == null) {
-          return;
-        } else if (source == ImagePickerService.deleteImage) {
-          state
-            ..didChange(PhotoFieldState(deletePhoto: true))
-            ..save();
-          return;
-        }
+    if (source == null) {
+      return;
+    } else if (source == ImagePickerService.deleteImage) {
+      state
+        ..didChange(PhotoFieldState(deletePhoto: true))
+        ..save();
+      return;
+    }
 
-        if (context.mounted) {
-          final newPhoto = await ImagePickerService.I.pickAndCropImage(
-            context: context,
-            source: source as ImageSource,
-            lockAspectRatio: true,
-          );
-          if (newPhoto != null) {
-            state
-              ..didChange(
-                PhotoFieldState(
-                  deletePhoto: false,
-                  newPhoto: newPhoto,
-                ),
-              )
-              ..save();
-          }
-        }
-      };
+    if (context.mounted) {
+      final newPhoto = await ImagePickerService.I.pickAndCropImage(
+        context: context,
+        source: source as ImageSource,
+        lockAspectRatio: true,
+      );
+      if (newPhoto != null) {
+        state
+          ..didChange(
+            PhotoFieldState(
+              deletePhoto: false,
+              newPhoto: newPhoto,
+            ),
+          )
+          ..save();
+      }
+    }
+  };
 }

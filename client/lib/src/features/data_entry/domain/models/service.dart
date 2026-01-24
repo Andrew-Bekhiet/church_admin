@@ -112,9 +112,9 @@ class ServiceFields extends _ServiceFields {
 
   @override
   FieldMetadata<User> get adminUsers => adminUsersRel.redirectTo(
-        AdminOnDataFields().user,
-        label: adminUsersRel.label,
-        isExpandable: false,
-        isOrderable: false,
-      );
+    AdminOnDataFields().user,
+    label: adminUsersRel.label,
+    isExpandable: false,
+    isOrderable: false,
+  );
 }

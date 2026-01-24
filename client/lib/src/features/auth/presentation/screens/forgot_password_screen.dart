@@ -112,8 +112,9 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
       ),
     );
 
-    final result =
-        await _authBloc.stream.firstWhere((state) => state is! AuthLoading);
+    final result = await _authBloc.stream.firstWhere(
+      (state) => state is! AuthLoading,
+    );
 
     if (result is AuthExceptionState && mounted) {
       ScaffoldMessenger.of(context).showErrorSnackBar(

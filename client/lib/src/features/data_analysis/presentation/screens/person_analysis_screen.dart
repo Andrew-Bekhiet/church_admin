@@ -2,11 +2,12 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 
-typedef EditOptionsBuiderFn = Widget Function(
-  BuildContext,
-  PersonAnalysisOptions?,
-  void Function(PersonAnalysisOptions),
-);
+typedef EditOptionsBuiderFn =
+    Widget Function(
+      BuildContext,
+      PersonAnalysisOptions?,
+      void Function(PersonAnalysisOptions),
+    );
 
 class PersonAnalysis extends StatefulWidget {
   final Person? person;
@@ -78,8 +79,9 @@ class _PersonAnalysisState extends State<PersonAnalysis> {
               tooltip: 'تحديث البيانات',
             ),
         ],
-        title:
-            Text('تحليل الحضور ل${widget.user?.name ?? widget.person!.name}'),
+        title: Text(
+          'تحليل الحضور ل${widget.user?.name ?? widget.person!.name}',
+        ),
       ),
       body: SingleChildScrollView(
         child: FutureBuilder<ViewableWithID?>(
@@ -121,9 +123,10 @@ class _PersonAnalysisState extends State<PersonAnalysis> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                for (final s in user?.servicesHistory?.map((e) => e.service!) ??
-                    person?.services ??
-                    <Service>[])
+                for (final s
+                    in user?.servicesHistory?.map((e) => e.service!) ??
+                        person?.services ??
+                        <Service>[])
                   if (s.attendanceHistoryAggregate == null ||
                       s.attendanceDaysConstraintsAggregate == null)
                     const Center(child: CircularProgressIndicator())
@@ -138,22 +141,26 @@ class _PersonAnalysisState extends State<PersonAnalysis> {
                             s.attendanceDaysConstraintsAggregate!,
                         getHistoryListController: () =>
                             ViewableObjectListController(
-                          objectsPaginatableStream: DatabaseService.I.persons
-                              .paginatePersonServiceAttendance(
-                            personId:
-                                widget.user?.person?.id ?? widget.person!.id,
-                            asAdmin: widget.user != null,
-                            serviceId: s.id,
-                          ),
-                        ),
+                              objectsPaginatableStream: DatabaseService
+                                  .I
+                                  .persons
+                                  .paginatePersonServiceAttendance(
+                                    personId:
+                                        widget.user?.person?.id ??
+                                        widget.person!.id,
+                                    asAdmin: widget.user != null,
+                                    serviceId: s.id,
+                                  ),
+                            ),
                         color: s.color ?? userColor,
                       ),
                     ),
-                for (final c in user?.classesHistory
-                        ?.map((e) => e.classes)
-                        .expand((e) => e) ??
-                    person?.classes ??
-                    <Class>[])
+                for (final c
+                    in user?.classesHistory
+                            ?.map((e) => e.classes)
+                            .expand((e) => e) ??
+                        person?.classes ??
+                        <Class>[])
                   if (c.attendanceHistoryAggregate == null ||
                       c.attendanceDaysConstraintsAggregate == null)
                     const Center(child: CircularProgressIndicator())
@@ -168,20 +175,24 @@ class _PersonAnalysisState extends State<PersonAnalysis> {
                             c.attendanceDaysConstraintsAggregate!,
                         getHistoryListController: () =>
                             ViewableObjectListController(
-                          objectsPaginatableStream: DatabaseService.I.persons
-                              .paginatePersonClassAttendance(
-                            personId:
-                                widget.user?.person?.id ?? widget.person!.id,
-                            asAdmin: widget.user != null,
-                            classId: c.id,
-                          ),
-                        ),
+                              objectsPaginatableStream: DatabaseService
+                                  .I
+                                  .persons
+                                  .paginatePersonClassAttendance(
+                                    personId:
+                                        widget.user?.person?.id ??
+                                        widget.person!.id,
+                                    asAdmin: widget.user != null,
+                                    classId: c.id,
+                                  ),
+                            ),
                         color: c.color ?? userColor,
                       ),
                     ),
-                for (final g in user?.groupsHistory?.map((e) => e.group!) ??
-                    person?.groups ??
-                    <Group>[])
+                for (final g
+                    in user?.groupsHistory?.map((e) => e.group!) ??
+                        person?.groups ??
+                        <Group>[])
                   if (g.attendanceHistoryAggregate == null ||
                       g.attendanceDaysConstraintsAggregate == null)
                     const Center(child: CircularProgressIndicator())
@@ -196,14 +207,17 @@ class _PersonAnalysisState extends State<PersonAnalysis> {
                             g.attendanceDaysConstraintsAggregate!,
                         getHistoryListController: () =>
                             ViewableObjectListController(
-                          objectsPaginatableStream: DatabaseService.I.persons
-                              .paginatePersonGroupAttendance(
-                            personId:
-                                widget.user?.person?.id ?? widget.person!.id,
-                            asAdmin: widget.user != null,
-                            groupId: g.id,
-                          ),
-                        ),
+                              objectsPaginatableStream: DatabaseService
+                                  .I
+                                  .persons
+                                  .paginatePersonGroupAttendance(
+                                    personId:
+                                        widget.user?.person?.id ??
+                                        widget.person!.id,
+                                    asAdmin: widget.user != null,
+                                    groupId: g.id,
+                                  ),
+                            ),
                         color: g.color ?? userColor,
                       ),
                     ),
@@ -218,11 +232,13 @@ class _PersonAnalysisState extends State<PersonAnalysis> {
                           analysisData: person!.kodasHistoryAggregate!,
                           getHistoryListController: () =>
                               ViewableObjectListController(
-                            objectsPaginatableStream: DatabaseService.I.history
-                                .paginatePersonConfessionHistory(
-                              personId: widget.person!.id,
-                            ),
-                          ),
+                                objectsPaginatableStream: DatabaseService
+                                    .I
+                                    .history
+                                    .paginatePersonConfessionHistory(
+                                      personId: widget.person!.id,
+                                    ),
+                              ),
                           title: 'الاعتراف',
                           range: dateRange,
                           lastTimeName: 'أخر اعتراف',
@@ -238,11 +254,13 @@ class _PersonAnalysisState extends State<PersonAnalysis> {
                           analysisData: person!.confessionHistoryAggregate!,
                           getHistoryListController: () =>
                               ViewableObjectListController(
-                            objectsPaginatableStream: DatabaseService.I.history
-                                .paginatePersonKodasHistory(
-                              personId: widget.person!.id,
-                            ),
-                          ),
+                                objectsPaginatableStream: DatabaseService
+                                    .I
+                                    .history
+                                    .paginatePersonKodasHistory(
+                                      personId: widget.person!.id,
+                                    ),
+                              ),
                           title: 'حضور القداس',
                           range: dateRange,
                           lastTimeName: 'أخر حضور قداس',
@@ -258,11 +276,13 @@ class _PersonAnalysisState extends State<PersonAnalysis> {
                           analysisData: person!.callHistoryAggregate!,
                           getHistoryListController: () =>
                               ViewableObjectListController(
-                            objectsPaginatableStream: DatabaseService.I.history
-                                .paginatePersonCallHistory(
-                              personId: widget.person!.id,
-                            ),
-                          ),
+                                objectsPaginatableStream: DatabaseService
+                                    .I
+                                    .history
+                                    .paginatePersonCallHistory(
+                                      personId: widget.person!.id,
+                                    ),
+                              ),
                           title: 'خدمة المكالمات',
                           range: dateRange,
                           lastTimeName: 'أخر مكالمة',
@@ -278,11 +298,13 @@ class _PersonAnalysisState extends State<PersonAnalysis> {
                           analysisData: person!.visitHistoryAggregate!,
                           getHistoryListController: () =>
                               ViewableObjectListController(
-                            objectsPaginatableStream: DatabaseService.I.history
-                                .paginatePersonVisitHistory(
-                              personId: widget.person!.id,
-                            ),
-                          ),
+                                objectsPaginatableStream: DatabaseService
+                                    .I
+                                    .history
+                                    .paginatePersonVisitHistory(
+                                      personId: widget.person!.id,
+                                    ),
+                              ),
                           title: 'الافتقاد',
                           range: dateRange,
                           lastTimeName: 'أخر افتقاد',
@@ -298,11 +320,13 @@ class _PersonAnalysisState extends State<PersonAnalysis> {
                           analysisData: person!.editHistoryAggregate!,
                           getHistoryListController: () =>
                               ViewableObjectListController(
-                            objectsPaginatableStream: DatabaseService.I.history
-                                .paginateEditHistory<Person>(
-                              id: widget.person!.id,
-                            ),
-                          ),
+                                objectsPaginatableStream: DatabaseService
+                                    .I
+                                    .history
+                                    .paginateEditHistory<Person>(
+                                      id: widget.person!.id,
+                                    ),
+                              ),
                           title: 'تحديث البيانات',
                           range: dateRange,
                           lastTimeName: 'أخر تحديث للبيانات',

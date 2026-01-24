@@ -23,8 +23,9 @@ class Filter<T extends Object> with EquatableMixin {
       );
     }
 
-    final operator = field.operators
-        .firstWhereOrNull((o) => o.serializationId == json['operator']);
+    final operator = field.operators.firstWhereOrNull(
+      (o) => o.serializationId == json['operator'],
+    );
 
     if (operator == null) {
       throw ArgumentError(

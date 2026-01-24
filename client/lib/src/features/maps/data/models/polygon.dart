@@ -6,11 +6,9 @@ class Polygon with EquatableMixin implements Spatial {
   const Polygon(this.coordinates);
 
   Polygon.fromJson(Json json)
-      : this(
-          (json['coordinates'][0] as List)
-              .map((p) => Point(p[1], p[0]))
-              .toList(),
-        );
+    : this(
+        (json['coordinates'][0] as List).map((p) => Point(p[1], p[0])).toList(),
+      );
 
   Json? asPostGISPolygon() {
     if (coordinates.isEmpty) return null;
@@ -23,11 +21,8 @@ class Polygon with EquatableMixin implements Spatial {
     };
   }
 
-  String asWKT() => 'POLYGON((${[
-        ...coordinates.map((p) => '${p.longitude} ${p.latitude}'),
-        if (coordinates.isNotEmpty)
-          '${coordinates.first.longitude} ${coordinates.first.latitude}'
-      ].join(', ')}))';
+  String asWKT() =>
+      'POLYGON((${[...coordinates.map((p) => '${p.longitude} ${p.latitude}'), if (coordinates.isNotEmpty) '${coordinates.first.longitude} ${coordinates.first.latitude}'].join(', ')}))';
 
   @override
   List<Object?> get props => coordinates;

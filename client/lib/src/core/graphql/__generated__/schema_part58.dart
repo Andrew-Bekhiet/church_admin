@@ -1,7 +1,6 @@
 // Part 58 of the schema
 part of "schema.graphql.dart";
 
-
 abstract class CopyWith_Input_historyVisitHistoryAggregateBoolExpBool_and<
   TRes
 > {

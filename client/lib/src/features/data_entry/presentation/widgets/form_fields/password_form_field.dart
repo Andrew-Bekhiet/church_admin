@@ -47,17 +47,20 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
       padding: widget.padding ?? const EdgeInsets.symmetric(vertical: 10),
       child: TextFormField(
         autovalidateMode: widget.autoValidateMode,
-        decoration: (widget.decoration ??
-                InputDecoration(
-                  labelText: widget.labelText ?? 'كلمة السر',
-                  errorMaxLines: 5,
-                ))
-            .copyWith(
-          suffixIcon: IconButton(
-            icon: Icon(visible ? Symbols.visibility_off : Symbols.visibility),
-            onPressed: () => setState(() => visible = !visible),
-          ),
-        ),
+        decoration:
+            (widget.decoration ??
+                    InputDecoration(
+                      labelText: widget.labelText ?? 'كلمة السر',
+                      errorMaxLines: 5,
+                    ))
+                .copyWith(
+                  suffixIcon: IconButton(
+                    icon: Icon(
+                      visible ? Symbols.visibility_off : Symbols.visibility,
+                    ),
+                    onPressed: () => setState(() => visible = !visible),
+                  ),
+                ),
         focusNode: widget.focusNode,
         autofillHints: widget.autoFillHints,
         obscureText: !visible,
@@ -70,7 +73,8 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
           widget.onFieldSubmitted?.call(value);
         },
         onSaved: widget.onSaved,
-        validator: widget.validator ??
+        validator:
+            widget.validator ??
             (value) {
               if (value?.isEmpty ?? true) {
                 return 'برجاء ادخال كلمة السر';

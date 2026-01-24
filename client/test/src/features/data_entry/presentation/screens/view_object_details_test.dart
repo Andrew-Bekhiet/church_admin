@@ -252,10 +252,10 @@ Future<void> _pumpWidget(
       },
       floatingActionButtonBuilder: (context, tabController, person) =>
           FloatingActionButton(
-        key: const ValueKey('floatingActionButton'),
-        child: const Icon(Symbols.add),
-        onPressed: () {},
-      ),
+            key: const ValueKey('floatingActionButton'),
+            child: const Icon(Symbols.add),
+            onPressed: () {},
+          ),
     ),
     surfaceSize: size,
     wrapper: materialAppWrapper(

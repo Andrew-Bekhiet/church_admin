@@ -47,25 +47,25 @@ class _LocationsLayerState<T extends Viewable> extends State<_LocationsLayer<T>>
         .map((o) => (object: o, location: widget.getLocation(o)))
         .where((element) => element.location != null)
         .fold(
-      (markers: [], focusedObject: null),
-      (acc, object) {
-        final location = object.location!;
-        final isFocused = widget.currentFocusedLocation == location;
+          (markers: [], focusedObject: null),
+          (acc, object) {
+            final location = object.location!;
+            final isFocused = widget.currentFocusedLocation == location;
 
-        return (
-          markers: [
-            ...acc.markers,
-            if (!isFocused)
-              _makeMarkerFromPoint(
-                isFocused: false,
-                location: location,
-                object: object.object,
-              ),
-          ],
-          focusedObject: isFocused ? object.object : acc.focusedObject,
+            return (
+              markers: [
+                ...acc.markers,
+                if (!isFocused)
+                  _makeMarkerFromPoint(
+                    isFocused: false,
+                    location: location,
+                    object: object.object,
+                  ),
+              ],
+              focusedObject: isFocused ? object.object : acc.focusedObject,
+            );
+          },
         );
-      },
-    );
   }
 
   Marker _makeMarkerFromPoint({
@@ -82,9 +82,11 @@ class _LocationsLayerState<T extends Viewable> extends State<_LocationsLayer<T>>
         afterTap: () async {
           _recentlyTappedLocations = _recentlyTappedLocations.union({location});
 
-          unawaited(_animatedMapMove(
-            LatLng(location.latitude, location.longitude),
-          ));
+          unawaited(
+            _animatedMapMove(
+              LatLng(location.latitude, location.longitude),
+            ),
+          );
 
           widget.afterTap?.call(object, location);
 
@@ -93,8 +95,9 @@ class _LocationsLayerState<T extends Viewable> extends State<_LocationsLayer<T>>
           if (!mounted) return;
 
           setState(() {
-            _recentlyTappedLocations =
-                _recentlyTappedLocations.difference({location});
+            _recentlyTappedLocations = _recentlyTappedLocations.difference({
+              location,
+            });
           });
         },
       ),

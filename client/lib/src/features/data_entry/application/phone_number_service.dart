@@ -9,26 +9,26 @@ class PhoneNumberService {
   const PhoneNumberService();
 
   bool validate(String phone) => PhoneNumber.parse(
-        phone,
-        destinationCountry:
-            PhoneNumber.findPotentialPhoneNumbers(phone).singleOrNull == null
-                ? IsoCode.EG
-                : null,
-      ).isValid();
+    phone,
+    destinationCountry:
+        PhoneNumber.findPotentialPhoneNumbers(phone).singleOrNull == null
+        ? IsoCode.EG
+        : null,
+  ).isValid();
 
   String format(String phone) => PhoneNumber.parse(
-        phone,
-        destinationCountry:
-            PhoneNumber.findPotentialPhoneNumbers(phone).singleOrNull == null
-                ? IsoCode.EG
-                : null,
-      ).nsn;
+    phone,
+    destinationCountry:
+        PhoneNumber.findPotentialPhoneNumbers(phone).singleOrNull == null
+        ? IsoCode.EG
+        : null,
+  ).nsn;
 
   String formatInternational(String phone) => PhoneNumber.parse(
-        phone,
-        destinationCountry:
-            PhoneNumber.findPotentialPhoneNumbers(phone).singleOrNull == null
-                ? IsoCode.EG
-                : null,
-      ).international;
+    phone,
+    destinationCountry:
+        PhoneNumber.findPotentialPhoneNumbers(phone).singleOrNull == null
+        ? IsoCode.EG
+        : null,
+  ).international;
 }

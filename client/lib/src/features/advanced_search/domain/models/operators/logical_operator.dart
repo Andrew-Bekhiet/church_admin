@@ -1,10 +1,12 @@
 import 'package:church_admin/church_admin.dart';
 
 enum LogicalOperator<
-    Field extends FieldMetadata,
-    OperatorT extends Operator,
-    V extends Object,
-    FilterT extends Filter<V>> implements Operator<List<FilterT>> {
+  Field extends FieldMetadata,
+  OperatorT extends Operator,
+  V extends Object,
+  FilterT extends Filter<V>
+>
+    implements Operator<List<FilterT>> {
   or('_or', 'أو'),
   and('_and', 'و'),
   not('_not', 'ليس');

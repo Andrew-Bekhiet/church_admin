@@ -5,8 +5,11 @@ void main() {
   test(
     'Stream.startWithFuture',
     () async {
-      final stream =
-          Stream.fromIterable([1, 2, 3]).startWithFuture(Future(() async => 0));
+      final stream = Stream.fromIterable([
+        1,
+        2,
+        3,
+      ]).startWithFuture(Future(() async => 0));
 
       expect(stream, emitsInOrder([0, 1, 2, 3]));
     },

@@ -6,7 +6,7 @@ class Point with EquatableMixin implements Spatial {
 
   const Point(this.latitude, this.longitude);
   Point.fromJson(Json json)
-      : this(json['coordinates'][1], json['coordinates'][0]);
+    : this(json['coordinates'][1], json['coordinates'][0]);
 
   Json toPostGISJson() {
     return {

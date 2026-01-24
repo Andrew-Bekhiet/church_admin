@@ -29,22 +29,23 @@ enum StringOperator implements Operator<String?> {
       StringOperator.eq => field.queryToJson({'_eq': value}),
       StringOperator.neq => field.queryToJson({'_neq': value}),
       StringOperator.contains => field.queryToJson({'_ilike': '%$value%'}),
-      StringOperator.doesNotContain =>
-        field.queryToJson({'_nilike': '%$value%'}),
+      StringOperator.doesNotContain => field.queryToJson({
+        '_nilike': '%$value%',
+      }),
       StringOperator.startsWith => field.queryToJson({'_ilike': '$value%'}),
       StringOperator.endsWith => field.queryToJson({'_ilike': '%$value'}),
       StringOperator.isEmpty => {
-          '_or': [
-            field.queryToJson({'_eq': ''}),
-            field.queryToJson({'_isNull': true}),
-          ]
-        },
+        '_or': [
+          field.queryToJson({'_eq': ''}),
+          field.queryToJson({'_isNull': true}),
+        ],
+      },
       StringOperator.isNotEmpty => {
-          '_and': [
-            field.queryToJson({'_neq': ''}),
-            field.queryToJson({'_isNull': false}),
-          ]
-        },
+        '_and': [
+          field.queryToJson({'_neq': ''}),
+          field.queryToJson({'_isNull': false}),
+        ],
+      },
     };
   }
 

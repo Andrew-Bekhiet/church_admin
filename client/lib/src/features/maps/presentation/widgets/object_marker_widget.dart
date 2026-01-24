@@ -21,8 +21,9 @@ class ObjectMarkerWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final objectColor = object.color ?? Theme.of(context).colorScheme.primary;
 
-    final color =
-        isFocused ? objectColor.brighten(18).saturate(8) : objectColor;
+    final color = isFocused
+        ? objectColor.brighten(18).saturate(8)
+        : objectColor;
 
     final child = Stack(
       alignment: Alignment.center,
@@ -67,8 +68,8 @@ class ObjectMarkerWidget extends StatelessWidget {
             content: Text(object.name),
             backgroundColor:
                 object.color != null && object.color != Colors.transparent
-                    ? object.color?.withValues(alpha: 1)
-                    : null,
+                ? object.color?.withValues(alpha: 1)
+                : null,
             action: SnackBarAction(
               label: 'فتح',
               onPressed: () => ViewableObjectService.I.onTap(object),

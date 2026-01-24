@@ -20,11 +20,9 @@ class EditFamilyLocationMap extends StatelessWidget {
       onSaved: onSaved,
       initialObject: initialFamily,
       getLocation: (f) => f.geolocation,
-      copyWithNewLocation:
-          (f, l) => f.copyWith(
-            address:
-                f.address?.copyWith(geolocation: l) ?? Address(geolocation: l),
-          ),
+      copyWithNewLocation: (f, l) => f.copyWith(
+        address: f.address?.copyWith(geolocation: l) ?? Address(geolocation: l),
+      ),
       geomapOptions: geomapOptions,
     );
   }

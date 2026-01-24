@@ -43,20 +43,20 @@ class Notification with _$Notification {
   Map<String, dynamic> toJson() => _$NotificationToJson(this);
 
   factory Notification.fromRemoteMessage(RemoteMessage message) => Notification(
-        id: message.messageId ??
-            DateTime.now().millisecondsSinceEpoch.toString(),
-        type: NotificationType.values.byName(
-          message.data['type'] ?? NotificationType.remote.name,
-        ),
-        body: message.notification?.body ??
-            message.data['body'] ??
-            message.data['content'],
-        title: message.notification?.title ?? message.data['title'],
-        sentTime: message.sentTime ?? DateTime.now(),
-        senderUID: message.data['senderUID']!,
-        imageURL: _getImageURL(message),
-        additionalData: message.data,
-      );
+    id: message.messageId ?? DateTime.now().millisecondsSinceEpoch.toString(),
+    type: NotificationType.values.byName(
+      message.data['type'] ?? NotificationType.remote.name,
+    ),
+    body:
+        message.notification?.body ??
+        message.data['body'] ??
+        message.data['content'],
+    title: message.notification?.title ?? message.data['title'],
+    sentTime: message.sentTime ?? DateTime.now(),
+    senderUID: message.data['senderUID']!,
+    imageURL: _getImageURL(message),
+    additionalData: message.data,
+  );
 
   static String? _getImageURL(RemoteMessage message) {
     if (message.data['imageURL'] != null) return message.data['imageURL'];
@@ -81,5 +81,5 @@ enum NotificationType {
   local,
   remote,
   manualPushRemote,
-  triggerShorebirdUpdate
+  triggerShorebirdUpdate,
 }

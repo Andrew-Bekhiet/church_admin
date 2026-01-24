@@ -1,7 +1,6 @@
 // Part 57 of the schema
 part of "schema.graphql.dart";
 
-
 abstract class CopyWith_Input_historyAttendanceDaysConstraintsAggregateBoolExpBool_and<
   TRes
 > {

@@ -10,8 +10,8 @@ class PersonTypesDAO extends DAOBase<PersonType>
 
   @override
   StreamAllConfig<PersonType> get baseStreamAllConfig => const StreamAllConfig(
-        document: documentNodeSubscriptionwatchAllPersonTypes,
-      );
+    document: documentNodeSubscriptionwatchAllPersonTypes,
+  );
 
   @override
   StreamSingleByIdConfig<PersonType> get baseStreamSingleByIdConfig =>
@@ -35,13 +35,15 @@ class PersonTypesDAO extends DAOBase<PersonType>
       streamAllConfig: baseStreamAllConfig,
       streamCountConfig: baseStreamCountConfig,
       searchQuery: searchQuery,
-      where: where ??
+      where:
+          where ??
           Stream.value(
             [
               Filter(PersonTypeFields().isHidden, BooleanOperator.is$, false),
             ],
           ),
-      orderBy: orderBy ??
+      orderBy:
+          orderBy ??
           Stream.value(
             [
               OrderBy(
@@ -56,6 +58,6 @@ class PersonTypesDAO extends DAOBase<PersonType>
   }
 
   Json _createPersonTypeVarsConstructor({required PersonType newObject}) => {
-        'object': {'name': newObject.name},
-      };
+    'object': {'name': newObject.name},
+  };
 }

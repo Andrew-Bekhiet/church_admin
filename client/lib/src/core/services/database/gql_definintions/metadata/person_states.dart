@@ -9,8 +9,8 @@ class PersonStatesDAO extends DAOBase<PersonState>
 
   @override
   StreamAllConfig<PersonState> get baseStreamAllConfig => const StreamAllConfig(
-        document: documentNodeSubscriptionwatchAllPersonStates,
-      );
+    document: documentNodeSubscriptionwatchAllPersonStates,
+  );
 
   @override
   StreamSingleByIdConfig<PersonState> get baseStreamSingleByIdConfig =>

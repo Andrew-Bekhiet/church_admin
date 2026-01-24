@@ -21,7 +21,8 @@ class LazyTabPage extends StatelessWidget {
 
     return AnimatedBuilder(
       animation: tabController,
-      builder: (context, _) => tabController.index == index ||
+      builder: (context, _) =>
+          tabController.index == index ||
               tabController.animation?.value.ceil() == index ||
               tabController.animation?.value.floor() == index
           ? builder(context)

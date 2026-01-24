@@ -21,8 +21,10 @@ class _EditStoreState extends State<EditStore> {
     final Store? oldStore = widget.store;
 
     _controller = EditObjectController(
-      afterCreate: (object) => ViewStoreRoute(id: object.id, $extra: object)
-          .pushReplacement(context),
+      afterCreate: (object) => ViewStoreRoute(
+        id: object.id,
+        $extra: object,
+      ).pushReplacement(context),
       onCreate: (object) =>
           DatabaseService.I.stores.createObject(newObject: object),
       onUpdate: (oldStore, newStore) => DatabaseService.I.stores.updateObject(
@@ -31,7 +33,8 @@ class _EditStoreState extends State<EditStore> {
       ),
       onDelete: (object) => DatabaseService.I.stores.deleteById(id: object.id),
       toJson: (object) => object.toJson(),
-      newObject: oldStore ??
+      newObject:
+          oldStore ??
           Store(
             id: const Uuid().v4(),
             name: '',
@@ -70,8 +73,9 @@ class _EditStoreState extends State<EditStore> {
             decoration: const InputDecoration(errorMaxLines: 2),
             initialValue: newStore.family,
             listController: (s) => ViewableObjectListController(
-              objectsPaginatableStream:
-                  DatabaseService.I.families.streamAll(searchQuery: s),
+              objectsPaginatableStream: DatabaseService.I.families.streamAll(
+                searchQuery: s,
+              ),
             ),
             dialogFieldLabel: 'العائلة المسؤولة',
             onChanged: (value) => newStore = newStore.copyWith(

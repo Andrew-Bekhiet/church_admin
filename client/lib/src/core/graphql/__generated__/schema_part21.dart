@@ -1,7 +1,6 @@
 // Part 21 of the schema
 part of "schema.graphql.dart";
 
-
 abstract class CopyWith_Input_GroupsMaxOrderBy<TRes> {
   factory CopyWith_Input_GroupsMaxOrderBy(
     Input_GroupsMaxOrderBy instance,

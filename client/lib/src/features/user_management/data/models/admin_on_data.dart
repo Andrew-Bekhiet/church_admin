@@ -11,7 +11,7 @@ part 'admin_on_data.g.dart';
   labelsOverrides: {
     'serviceWriteRelatedFamilies': 'يمكنه تعديل عائلات المخدومين بالخدمة',
     'groupWriteRelatedFamilies': 'يمكنه تعديل عائلات المخدومين بالمجموعة',
-  }
+  },
 )
 @JsonSerializable()
 class AdminOnData with _$AdminOnData implements ToJson {

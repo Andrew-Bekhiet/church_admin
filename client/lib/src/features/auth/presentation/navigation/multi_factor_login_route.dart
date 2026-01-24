@@ -20,8 +20,8 @@ class MultiFactorLoginRoute extends GoRouteData with $MultiFactorLoginRoute {
 
     switch (authState) {
       case AuthAuthenticated(
-          authUser: AuthUser(emailVerified: true, isMultiFactorEnabled: false),
-        ):
+        authUser: AuthUser(emailVerified: true, isMultiFactorEnabled: false),
+      ):
       case AuthMultiFactorChallengeInProgress():
         return null;
 

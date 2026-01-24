@@ -30,8 +30,8 @@ class HomeScreenWebRoute extends GoRouteData with $HomeScreenWebRoute {
         return const AuthLoadingRoute().location;
 
       case AuthAuthenticated(
-          userData: User(permissions: PermissionsSet(approved: false))
-        ):
+        userData: User(permissions: PermissionsSet(approved: false)),
+      ):
         return const UnapprovedUserRoute().location;
 
       case AuthAuthenticated(userData: User(person: final person))

@@ -1,7 +1,6 @@
 // Part 32 of the schema
 part of "schema.graphql.dart";
 
-
 abstract class CopyWith_Input_HistoryLatestEditsOrderBy<TRes> {
   factory CopyWith_Input_HistoryLatestEditsOrderBy(
     Input_HistoryLatestEditsOrderBy instance,

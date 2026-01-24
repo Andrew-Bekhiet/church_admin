@@ -10,22 +10,22 @@ class ChurchesDAO extends DAOBase<Church>
 
   @override
   StreamAllConfig<Church> get baseStreamAllConfig => const StreamAllConfig(
-        document: documentNodeSubscriptionwatchAllChurches,
-      );
+    document: documentNodeSubscriptionwatchAllChurches,
+  );
   @override
   StreamSingleByIdConfig<Church> get baseStreamSingleByIdConfig =>
       throw UnimplementedError();
 
   @override
   CreateObjectConfig<Church> get baseCreateObjectConfig => CreateObjectConfig(
-        document: documentNodeMutationcreateChurch,
-        varsConstructor: _createChurchVarsConstructor,
-        parserFn: db.parser.singleParser(fromJson),
-      );
+    document: documentNodeMutationcreateChurch,
+    varsConstructor: _createChurchVarsConstructor,
+    parserFn: db.parser.singleParser(fromJson),
+  );
 
   Json _createChurchVarsConstructor({required Church newObject}) => {
-        'object': {'name': newObject.name},
-      };
+    'object': {'name': newObject.name},
+  };
 
   @override
   PaginatableStreamBase<Church> streamAll({
@@ -37,13 +37,15 @@ class ChurchesDAO extends DAOBase<Church>
       streamAllConfig: baseStreamAllConfig,
       streamCountConfig: baseStreamCountConfig,
       searchQuery: searchQuery,
-      where: where ??
+      where:
+          where ??
           Stream.value(
             [
               Filter(ChurchFields().isHidden, BooleanOperator.is$, false),
             ],
           ),
-      orderBy: orderBy ??
+      orderBy:
+          orderBy ??
           Stream.value(
             [
               OrderBy(field: ChurchFields().name),

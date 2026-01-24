@@ -10,14 +10,14 @@ class DotField extends FieldMetadata<Object> {
   static T _identity<T>(T value) => value;
 
   const DotField()
-      : super(
-          parentType: Object,
-          name: '',
-          label: '',
-          isCodeOnly: true,
-          isOrderable: false,
-          getValue: _identity,
-        );
+    : super(
+        parentType: Object,
+        name: '',
+        label: '',
+        isCodeOnly: true,
+        isOrderable: false,
+        getValue: _identity,
+      );
 
   @override
   Json queryToJson(Json serializedValue) {

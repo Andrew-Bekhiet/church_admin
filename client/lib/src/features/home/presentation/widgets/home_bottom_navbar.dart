@@ -17,8 +17,10 @@ class HomeBottomNavBar extends StatelessWidget {
         buildWhen: (previous, current) =>
             previous.pageController != current.pageController ||
             previous.currentPage.round() != current.currentPage.round() ||
-            !const DeepCollectionEquality()
-                .equals(previous.pages, current.pages),
+            !const DeepCollectionEquality().equals(
+              previous.pages,
+              current.pages,
+            ),
         builder: (context, homeState) {
           final theme = Theme.of(context);
 
@@ -84,8 +86,9 @@ class HomeBottomNavBar extends StatelessWidget {
                     builder: (context, snapshot) {
                       return Text(
                         '${snapshot.data}',
-                        style: theme.textTheme.labelLarge
-                            ?.copyWith(color: theme.colorScheme.onPrimary),
+                        style: theme.textTheme.labelLarge?.copyWith(
+                          color: theme.colorScheme.onPrimary,
+                        ),
                         textAlign: TextAlign.center,
                       );
                     },

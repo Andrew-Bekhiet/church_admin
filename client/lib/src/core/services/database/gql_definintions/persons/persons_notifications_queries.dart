@@ -39,12 +39,12 @@ class PersonsNotificationsQueries {
         Input_PersonsBoolExp(
           confessionHistoryAggregate:
               Input_HistoryConfessionHistoryAggregateBoolExp(
-            count: Input_historyConfessionHistoryAggregateBoolExpCount(
-              predicate: Input_IntComparisonExp(
-                $_neq: 0,
+                count: Input_historyConfessionHistoryAggregateBoolExpCount(
+                  predicate: Input_IntComparisonExp(
+                    $_neq: 0,
+                  ),
+                ),
               ),
-            ),
-          ),
           $_not: Input_PersonsBoolExp(
             confessionHistory: Input_HistoryConfessionHistoryBoolExp(
               dayId: Input_DateComparisonExp(
@@ -90,12 +90,12 @@ class PersonsNotificationsQueries {
         Input_PersonsBoolExp(
           attendanceHistoryAggregate:
               Input_HistoryAttendanceHistoryAggregateBoolExp(
-            count: Input_historyAttendanceHistoryAggregateBoolExpCount(
-              predicate: Input_IntComparisonExp(
-                $_neq: 0,
+                count: Input_historyAttendanceHistoryAggregateBoolExpCount(
+                  predicate: Input_IntComparisonExp(
+                    $_neq: 0,
+                  ),
+                ),
               ),
-            ),
-          ),
           $_not: Input_PersonsBoolExp(
             attendanceHistory: Input_HistoryAttendanceHistoryBoolExp(
               dayId: Input_DateComparisonExp(

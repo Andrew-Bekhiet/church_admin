@@ -41,7 +41,8 @@ class AuthUser with _$AuthUser {
   }
 
   @override
-  String toString() => 'AuthUser(uid: $uid, '
+  String toString() =>
+      'AuthUser(uid: $uid, '
       'email: $email, '
       'emailVerified: $emailVerified, '
       'claims: $filteredClaims, '

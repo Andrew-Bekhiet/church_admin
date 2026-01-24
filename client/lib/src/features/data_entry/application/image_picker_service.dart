@@ -18,8 +18,8 @@ class ImagePickerService {
   ImagePickerService({
     required ImagePicker imagePicker,
     required ImageCropper imageCropper,
-  })  : _imagePicker = imagePicker,
-        _imageCropper = imageCropper;
+  }) : _imagePicker = imagePicker,
+       _imageCropper = imageCropper;
 
   final ImagePicker _imagePicker;
   final ImageCropper _imageCropper;
@@ -67,8 +67,9 @@ class ImagePickerService {
                             const SizedBox(height: 3),
                             Text(
                               'الكاميرا',
-                              style: theme.textTheme.bodyMedium!
-                                  .copyWith(color: primary),
+                              style: theme.textTheme.bodyMedium!.copyWith(
+                                color: primary,
+                              ),
                               textAlign: TextAlign.center,
                             ),
                           ],
@@ -90,8 +91,9 @@ class ImagePickerService {
                             const SizedBox(height: 3),
                             Text(
                               'من المعرض',
-                              style: theme.textTheme.bodyMedium!
-                                  .copyWith(color: primary),
+                              style: theme.textTheme.bodyMedium!.copyWith(
+                                color: primary,
+                              ),
                               textAlign: TextAlign.center,
                             ),
                           ],

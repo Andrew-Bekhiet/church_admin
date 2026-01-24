@@ -9,7 +9,7 @@ class PersonAttendanceIndicator extends StatelessWidget {
   final HistoryAggregateData analysisData;
   final HistoryAggregateData totalAnalysisData;
   final ViewableObjectListController<LastRecordedByInfo> Function()
-      getHistoryListController;
+  getHistoryListController;
 
   final String name;
   final Color? color;
@@ -39,8 +39,9 @@ class PersonAttendanceIndicator extends StatelessWidget {
     totalAnalysisData.nodes.map((n) => n.time),
   );
 
-  final ValueNotifier<CalendarFormat> _calendarFormat =
-      ValueNotifier(CalendarFormat.week);
+  final ValueNotifier<CalendarFormat> _calendarFormat = ValueNotifier(
+    CalendarFormat.week,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -128,17 +129,18 @@ class PersonAttendanceIndicator extends StatelessWidget {
                       calendarBuilders: CalendarBuilders(
                         disabledBuilder: (context, day, focusedDay) =>
                             Container(
-                          margin: const EdgeInsets.all(4),
-                          alignment: Alignment.center,
-                          decoration:
-                              const BoxDecoration(shape: BoxShape.circle),
-                          child: Text(
-                            day.day.toString(),
-                            style: themeData.textTheme.bodyMedium!.copyWith(
-                              color: themeData.disabledColor,
+                              margin: const EdgeInsets.all(4),
+                              alignment: Alignment.center,
+                              decoration: const BoxDecoration(
+                                shape: BoxShape.circle,
+                              ),
+                              child: Text(
+                                day.day.toString(),
+                                style: themeData.textTheme.bodyMedium!.copyWith(
+                                  color: themeData.disabledColor,
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
                         defaultBuilder: (context, day, focusedDay) => Container(
                           margin: const EdgeInsets.all(4),
                           alignment: Alignment.center,

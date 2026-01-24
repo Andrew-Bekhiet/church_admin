@@ -1,7 +1,6 @@
 // Part 31 of the schema
 part of "schema.graphql.dart";
 
-
 abstract class CopyWith_Input_HistoryKodasHistoryOrderBy<TRes> {
   factory CopyWith_Input_HistoryKodasHistoryOrderBy(
     Input_HistoryKodasHistoryOrderBy instance,

@@ -76,8 +76,8 @@ class _UpdateUserSpiritDataState extends State<UpdateUserSpiritData> {
                     : value.isBefore(
                         DateTime.now().subtract(const Duration(days: 60)),
                       )
-                        ? 'يجب أن يكون التاريخ منذ شهرين على الأكثر'
-                        : null,
+                    ? 'يجب أن يكون التاريخ منذ شهرين على الأكثر'
+                    : null,
               ),
               const SizedBox(height: 20),
               TappableFormField<DateTime?>(
@@ -117,8 +117,8 @@ class _UpdateUserSpiritDataState extends State<UpdateUserSpiritData> {
                     : value.isBefore(
                         DateTime.now().subtract(const Duration(days: 60)),
                       )
-                        ? 'يجب أن يكون التاريخ منذ شهرين على الأكثر'
-                        : null,
+                    ? 'يجب أن يكون التاريخ منذ شهرين على الأكثر'
+                    : null,
               ),
               const SizedBox(height: 40),
             ],

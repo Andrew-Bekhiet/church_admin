@@ -69,8 +69,8 @@ enum PrimitiveOperator<V> implements Operator<V?> {
     return data is V
         ? data
         : this == isNull || this == isNotNull
-            ? null
-            : DateTime.tryParse(data.toString()) as V? ??
-                (throw ArgumentError('Cannot deserialize $V from $data'));
+        ? null
+        : DateTime.tryParse(data.toString()) as V? ??
+              (throw ArgumentError('Cannot deserialize $V from $data'));
   }
 }

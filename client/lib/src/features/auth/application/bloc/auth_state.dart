@@ -8,11 +8,12 @@ sealed class AuthState extends Equatable {
   /// this state is a wrapper state (e.g. [AuthLoading], [AuthExceptionState])
   /// returns `this` if it is not a wrapper state
   AuthState get unwrapped => switch (this) {
-        AuthLoading(:final previousState) ||
-        AuthExceptionState(:final previousState) =>
-          previousState?.unwrapped ?? this,
-        _ => this,
-      };
+    AuthLoading(:final previousState) ||
+    AuthExceptionState(
+      :final previousState,
+    ) => previousState?.unwrapped ?? this,
+    _ => this,
+  };
 }
 
 final class AuthLoading extends AuthState {

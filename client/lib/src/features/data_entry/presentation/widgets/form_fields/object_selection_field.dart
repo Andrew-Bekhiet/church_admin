@@ -8,7 +8,7 @@ class ObjectSelectionField<T extends ViewableWithID, F extends T?>
   static final Object _selectionNewFromSearch = Object();
 
   final ViewableObjectListController<T> Function(Stream<String?>)
-      listController;
+  listController;
   final Widget? Function(BuildContext, FormFieldState<F>) builder;
   final F initialValue;
   final String dialogFieldLabel;
@@ -50,7 +50,8 @@ class ObjectSelectionField<T extends ViewableWithID, F extends T?>
       autovalidateMode: autovalidateMode,
       focusNode: focusNode,
       onSaved: onSaved,
-      validator: validator ??
+      validator:
+          validator ??
           (nullable
               ? (_) => null
               : (v) => v == null ? 'برجاء اختيار $effectiveFieldLabel' : null),
@@ -85,8 +86,9 @@ class ObjectSelectionField<T extends ViewableWithID, F extends T?>
                                 if (snapshot.data case final newName?) {
                                   return OutlinedButton.icon(
                                     icon: const Icon(Symbols.add),
-                                    onPressed: () => Navigator.of(context)
-                                        .pop(_selectionNewFromSearch),
+                                    onPressed: () => Navigator.of(
+                                      context,
+                                    ).pop(_selectionNewFromSearch),
                                     label: Text('إضافة $newName'),
                                   );
                                 }
@@ -99,9 +101,9 @@ class ObjectSelectionField<T extends ViewableWithID, F extends T?>
                               objectsController: controller,
                               viewableObjectWidgetConfig:
                                   ViewableObjectWidgetConfig(
-                                onTap: Navigator.of(context).pop,
-                                forceShowSecondLine: false,
-                              ),
+                                    onTap: Navigator.of(context).pop,
+                                    forceShowSecondLine: false,
+                                  ),
                             ),
                           ),
                         ],

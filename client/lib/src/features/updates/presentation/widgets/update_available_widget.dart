@@ -11,8 +11,9 @@ class UpdateAvailableWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final featureFlagRepo = FeatureFlagsRepository.I;
     final launcherService = LauncherService.I;
-    final packageInfo =
-        globalProviderContainer.read(packageInfoPluginProvider).requireValue;
+    final packageInfo = globalProviderContainer
+        .read(packageInfoPluginProvider)
+        .requireValue;
 
     final releaseNotesUrl = featureFlagRepo.releaseNotesUrl;
 
@@ -42,8 +43,9 @@ class UpdateAvailableWidget extends StatelessWidget {
                   leading: const Icon(Symbols.upgrade),
                   actions: [
                     FilledButton(
-                      onPressed: () => launcherService
-                          .launchUrl(featureFlagRepo.downloadUrl),
+                      onPressed: () => launcherService.launchUrl(
+                        featureFlagRepo.downloadUrl,
+                      ),
                       child: const Text('تحديث الآن!'),
                     ),
                     if (releaseNotesUrl != null)

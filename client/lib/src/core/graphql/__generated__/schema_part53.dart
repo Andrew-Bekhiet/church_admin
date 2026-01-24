@@ -1,7 +1,6 @@
 // Part 53 of the schema
 part of "schema.graphql.dart";
 
-
 class _CopyWithImpl_Input_StreetsInsertInput<TRes>
     implements CopyWith_Input_StreetsInsertInput<TRes> {
   _CopyWithImpl_Input_StreetsInsertInput(this._instance, this._then);

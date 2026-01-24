@@ -10,20 +10,20 @@ class SchoolsDAO extends DAOBase<School>
 
   @override
   StreamAllConfig<School> get baseStreamAllConfig => const StreamAllConfig(
-        document: documentNodeSubscriptionwatchAllSchools,
-      );
+    document: documentNodeSubscriptionwatchAllSchools,
+  );
   @override
   StreamSingleByIdConfig<School> get baseStreamSingleByIdConfig =>
       throw UnimplementedError();
 
   @override
   CreateObjectConfig<School> get baseCreateObjectConfig => CreateObjectConfig(
-        document: documentNodeMutationcreateSchool,
-        varsConstructor: _createSchoolVarsConstructor,
-        parserFn: db.parser.singleParser(fromJson),
-      );
+    document: documentNodeMutationcreateSchool,
+    varsConstructor: _createSchoolVarsConstructor,
+    parserFn: db.parser.singleParser(fromJson),
+  );
 
   Json _createSchoolVarsConstructor({required School newObject}) => {
-        'object': {'name': newObject.name},
-      };
+    'object': {'name': newObject.name},
+  };
 }

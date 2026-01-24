@@ -21,16 +21,17 @@ class ViewableObjectListItem<T extends Viewable> extends StatelessWidget {
 
   late final ViewableObjectWidgetConfig<T> effectiveConfig =
       (viewableObjectWidgetConfig ?? ViewableObjectWidgetConfig<T>()).copyWith(
-    onLongPress: _onLongPress,
-    onTap: _onTap,
-  );
+        onLongPress: _onLongPress,
+        onTap: _onTap,
+      );
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<bool?>(
       initialData: selectionController.currentValue?.contains(item),
-      stream:
-          selectionController.stream.map((s) => s?.contains(item)).distinct(),
+      stream: selectionController.stream
+          .map((s) => s?.contains(item))
+          .distinct(),
       builder: (context, selectionData) {
         final config = effectiveConfig.copyWith(
           selected: selectionData.data,
@@ -74,7 +75,8 @@ class ViewableObjectListItem<T extends Viewable> extends StatelessWidget {
 
   void _onTap(T item) {
     if (!selectionController.isSelecting) {
-      final effectiveOnTap = viewableObjectWidgetConfig?.onTap ??
+      final effectiveOnTap =
+          viewableObjectWidgetConfig?.onTap ??
           ViewableObjectWidgetConfig<T>().onTap ??
           viewableObjectService.onTap;
 
@@ -85,7 +87,8 @@ class ViewableObjectListItem<T extends Viewable> extends StatelessWidget {
   }
 
   void _onLongPress(T item) {
-    final effectiveOnLongPress = viewableObjectWidgetConfig?.onLongPress ??
+    final effectiveOnLongPress =
+        viewableObjectWidgetConfig?.onLongPress ??
         ViewableObjectWidgetConfig<T>().onLongPress;
 
     if (effectiveOnLongPress != null) {

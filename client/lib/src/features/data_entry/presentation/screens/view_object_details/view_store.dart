@@ -29,10 +29,11 @@ class _ViewStoreState extends State<ViewStore> {
     ),
   );
 
-  final BehaviorSubject<List<OrderBy>> _personsOrderBy =
-      BehaviorSubject.seeded([
-    OrderBy(field: PersonFields().name),
-  ]);
+  final BehaviorSubject<List<OrderBy>> _personsOrderBy = BehaviorSubject.seeded(
+    [
+      OrderBy(field: PersonFields().name),
+    ],
+  );
 
   late final viewableObjectService = ViewableObjectService.I;
 
@@ -49,17 +50,16 @@ class _ViewStoreState extends State<ViewStore> {
       childrenTypes: const [Person],
       tabsContentBuilders: {
         Person: (context) => StreamBuilder(
-              stream: _personsOrderBy.stream,
-              initialData: _personsOrderBy.value,
-              builder: (context, orderBySnapshot) => ViewableObjectList(
-                scrollController: PrimaryScrollController.maybeOf(context),
-                viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
-                  secondLineField:
-                      orderBySnapshot.data?.first.getSecondLineField(),
-                ),
-                objectsController: _personsController,
-              ),
+          stream: _personsOrderBy.stream,
+          initialData: _personsOrderBy.value,
+          builder: (context, orderBySnapshot) => ViewableObjectList(
+            scrollController: PrimaryScrollController.maybeOf(context),
+            viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
+              secondLineField: orderBySnapshot.data?.first.getSecondLineField(),
             ),
+            objectsController: _personsController,
+          ),
+        ),
       },
       sliverPersistentHeaderDelegate: ChipTabBarPersistentHeaderDelegate(
         filtersWidget: Builder(
@@ -145,10 +145,10 @@ class _ViewStoreState extends State<ViewStore> {
             name: 'أخر تحديث للبيانات',
             value: store.lastEdit?.time,
             getHistoryListController: () => ViewableObjectListController(
-              objectsPaginatableStream:
-                  DatabaseService.I.history.paginateEditHistory<Store>(
-                id: store.id,
-              ),
+              objectsPaginatableStream: DatabaseService.I.history
+                  .paginateEditHistory<Store>(
+                    id: store.id,
+                  ),
             ),
           ),
           const SizedBox(height: 40),

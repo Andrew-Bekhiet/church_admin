@@ -1,7 +1,6 @@
 // Part 14 of the schema
 part of "schema.graphql.dart";
 
-
 abstract class CopyWith_Input_CollegesMinOrderBy<TRes> {
   factory CopyWith_Input_CollegesMinOrderBy(
     Input_CollegesMinOrderBy instance,

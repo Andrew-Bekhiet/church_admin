@@ -17,19 +17,19 @@ class QueryableType<T extends Object> with EquatableMixin {
     required T Function(Json) this.fromJson,
     this.fieldsMetadataByName = const {},
     this.fieldsMetadata = const [],
-  })  : byName = null,
-        enumValues = const [],
-        isEnum = false;
+  }) : byName = null,
+       enumValues = const [],
+       isEnum = false;
 
   QueryableType.enum$({
     required this.name,
     required this.label,
     required T Function(String) this.byName,
     required this.enumValues,
-  })  : fieldsMetadataByName = const {},
-        fieldsMetadata = const [],
-        fromJson = null,
-        isEnum = true;
+  }) : fieldsMetadataByName = const {},
+       fieldsMetadata = const [],
+       fromJson = null,
+       isEnum = true;
 
   Type get type => T;
 

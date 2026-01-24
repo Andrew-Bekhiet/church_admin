@@ -17,149 +17,150 @@ void main() {
       ];
       addTearDown(() => Future.wait(searchStreams.map((e) => e.close())));
 
-      final deviceBuilder = DeviceBuilder(
-        wrap: materialAppWrapper(
-          theme: ThemingService.getDefault(
-            isDarkOverride: false,
-            greatFeastThemeOverride: false,
-          ),
-        ),
-      )
-        ..addScenario(
-          name: 'initial',
-          widget: Scaffold(
-            appBar: AppBar(
-              title: TitleSearchField(
-                searchStream: searchStreams[0],
-                title: const Text('Test Title'),
+      final deviceBuilder =
+          DeviceBuilder(
+              wrap: materialAppWrapper(
+                theme: ThemingService.getDefault(
+                  isDarkOverride: false,
+                  greatFeastThemeOverride: false,
+                ),
               ),
-            ),
-          ),
-          onCreate: (key) async {
-            searchStreams[0].add(null);
-            await tester.pumpAndSettle();
+            )
+            ..addScenario(
+              name: 'initial',
+              widget: Scaffold(
+                appBar: AppBar(
+                  title: TitleSearchField(
+                    searchStream: searchStreams[0],
+                    title: const Text('Test Title'),
+                  ),
+                ),
+              ),
+              onCreate: (key) async {
+                searchStreams[0].add(null);
+                await tester.pumpAndSettle();
 
-            expect(
-              find.descendant(
-                of: find.byKey(key),
-                matching: find.text('Test Title'),
+                expect(
+                  find.descendant(
+                    of: find.byKey(key),
+                    matching: find.text('Test Title'),
+                  ),
+                  findsOneWidget,
+                );
+                expect(
+                  find.descendant(
+                    of: find.byKey(key),
+                    matching: find.byIcon(Symbols.search),
+                  ),
+                  findsOneWidget,
+                );
+                expect(
+                  find.descendant(
+                    of: find.byKey(key),
+                    matching: find.byType(TextField),
+                  ),
+                  findsNothing,
+                );
+              },
+            )
+            ..addScenario(
+              name: 'search',
+              widget: Scaffold(
+                appBar: AppBar(
+                  title: TitleSearchField(
+                    searchStream: searchStreams[1],
+                    title: const Text('Test Title'),
+                  ),
+                ),
               ),
-              findsOneWidget,
-            );
-            expect(
-              find.descendant(
-                of: find.byKey(key),
-                matching: find.byIcon(Symbols.search),
-              ),
-              findsOneWidget,
-            );
-            expect(
-              find.descendant(
-                of: find.byKey(key),
-                matching: find.byType(TextField),
-              ),
-              findsNothing,
-            );
-          },
-        )
-        ..addScenario(
-          name: 'search',
-          widget: Scaffold(
-            appBar: AppBar(
-              title: TitleSearchField(
-                searchStream: searchStreams[1],
-                title: const Text('Test Title'),
-              ),
-            ),
-          ),
-          onCreate: (key) async {
-            searchStreams[1].add(null);
-            await tester.pumpAndSettle();
+              onCreate: (key) async {
+                searchStreams[1].add(null);
+                await tester.pumpAndSettle();
 
-            await tester.tap(
-              find.descendant(
-                of: find.byKey(key),
-                matching: find.byIcon(Symbols.search),
-              ),
-            );
-            await tester.pumpAndSettle();
+                await tester.tap(
+                  find.descendant(
+                    of: find.byKey(key),
+                    matching: find.byIcon(Symbols.search),
+                  ),
+                );
+                await tester.pumpAndSettle();
 
-            expect(
-              find.descendant(
-                of: find.byKey(key),
-                matching: find.text('Test Title'),
+                expect(
+                  find.descendant(
+                    of: find.byKey(key),
+                    matching: find.text('Test Title'),
+                  ),
+                  findsNothing,
+                );
+                expect(
+                  find.descendant(
+                    of: find.byKey(key),
+                    matching: find.byIcon(Symbols.search),
+                  ),
+                  findsNothing,
+                );
+                expect(
+                  find.descendant(
+                    of: find.byKey(key),
+                    matching: find.byType(TextField),
+                  ),
+                  findsOneWidget,
+                );
+              },
+            )
+            ..addScenario(
+              name: 'clear',
+              widget: Scaffold(
+                appBar: AppBar(
+                  title: TitleSearchField(
+                    searchStream: searchStreams[2],
+                    title: const Text('Test Title'),
+                  ),
+                ),
               ),
-              findsNothing,
-            );
-            expect(
-              find.descendant(
-                of: find.byKey(key),
-                matching: find.byIcon(Symbols.search),
-              ),
-              findsNothing,
-            );
-            expect(
-              find.descendant(
-                of: find.byKey(key),
-                matching: find.byType(TextField),
-              ),
-              findsOneWidget,
-            );
-          },
-        )
-        ..addScenario(
-          name: 'clear',
-          widget: Scaffold(
-            appBar: AppBar(
-              title: TitleSearchField(
-                searchStream: searchStreams[2],
-                title: const Text('Test Title'),
-              ),
-            ),
-          ),
-          onCreate: (key) async {
-            searchStreams[2].add(null);
-            await tester.pumpAndSettle();
+              onCreate: (key) async {
+                searchStreams[2].add(null);
+                await tester.pumpAndSettle();
 
-            await tester.tap(
-              find.descendant(
-                of: find.byKey(key),
-                matching: find.byIcon(Symbols.search),
-              ),
-            );
-            await tester.pumpAndSettle();
+                await tester.tap(
+                  find.descendant(
+                    of: find.byKey(key),
+                    matching: find.byIcon(Symbols.search),
+                  ),
+                );
+                await tester.pumpAndSettle();
 
-            await tester.tap(
-              find.descendant(
-                of: find.byKey(key),
-                matching: find.byIcon(Symbols.clear),
-              ),
-            );
-            await tester.pumpAndSettle();
+                await tester.tap(
+                  find.descendant(
+                    of: find.byKey(key),
+                    matching: find.byIcon(Symbols.clear),
+                  ),
+                );
+                await tester.pumpAndSettle();
 
-            expect(
-              find.descendant(
-                of: find.byKey(key),
-                matching: find.text('Test Title'),
-              ),
-              findsOneWidget,
+                expect(
+                  find.descendant(
+                    of: find.byKey(key),
+                    matching: find.text('Test Title'),
+                  ),
+                  findsOneWidget,
+                );
+                expect(
+                  find.descendant(
+                    of: find.byKey(key),
+                    matching: find.byIcon(Symbols.search),
+                  ),
+                  findsOneWidget,
+                );
+                expect(
+                  find.descendant(
+                    of: find.byKey(key),
+                    matching: find.byType(TextField),
+                  ),
+                  findsNothing,
+                );
+              },
             );
-            expect(
-              find.descendant(
-                of: find.byKey(key),
-                matching: find.byIcon(Symbols.search),
-              ),
-              findsOneWidget,
-            );
-            expect(
-              find.descendant(
-                of: find.byKey(key),
-                matching: find.byType(TextField),
-              ),
-              findsNothing,
-            );
-          },
-        );
 
       await tester.pumpDeviceBuilder(deviceBuilder);
 

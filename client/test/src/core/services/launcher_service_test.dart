@@ -27,8 +27,10 @@ void main() {
           await unit.launchUrl(url);
 
           verify(
-            (UrlLauncherPlatform.instance as MockUrlLauncherPlatform)
-                .launchUrl(url.toString(), any),
+            (UrlLauncherPlatform.instance as MockUrlLauncherPlatform).launchUrl(
+              url.toString(),
+              any,
+            ),
           );
         },
       );

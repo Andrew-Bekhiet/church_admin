@@ -1,7 +1,6 @@
 // Part 50 of the schema
 part of "schema.graphql.dart";
 
-
 abstract class CopyWith_Input_ShammasLevelsBoolExp<TRes> {
   factory CopyWith_Input_ShammasLevelsBoolExp(
     Input_ShammasLevelsBoolExp instance,

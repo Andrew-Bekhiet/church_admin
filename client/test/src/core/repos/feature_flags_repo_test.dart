@@ -75,36 +75,44 @@ void main() {
         'Can parse feature flags correctly',
         () async {
           when(
-            mockFirebaseRemoteConfig
-                .getBool(FeatureFlagsRepository.mustForceUpdateKey),
+            mockFirebaseRemoteConfig.getBool(
+              FeatureFlagsRepository.mustForceUpdateKey,
+            ),
           ).thenReturn(true);
           when(
-            mockFirebaseRemoteConfig
-                .getString(FeatureFlagsRepository.forceUpdateMessageKey),
+            mockFirebaseRemoteConfig.getString(
+              FeatureFlagsRepository.forceUpdateMessageKey,
+            ),
           ).thenReturn('force update message');
           when(
-            mockFirebaseRemoteConfig
-                .getBool(FeatureFlagsRepository.isUnderMaintenanceKey),
+            mockFirebaseRemoteConfig.getBool(
+              FeatureFlagsRepository.isUnderMaintenanceKey,
+            ),
           ).thenReturn(true);
           when(
-            mockFirebaseRemoteConfig
-                .getString(FeatureFlagsRepository.maintenanceMessageKey),
+            mockFirebaseRemoteConfig.getString(
+              FeatureFlagsRepository.maintenanceMessageKey,
+            ),
           ).thenReturn('maintenance message');
           when(
-            mockFirebaseRemoteConfig
-                .getString(FeatureFlagsRepository.disabledRoutesKey),
+            mockFirebaseRemoteConfig.getString(
+              FeatureFlagsRepository.disabledRoutesKey,
+            ),
           ).thenReturn('disabledRoute1,disabledRoute2');
           when(
-            mockFirebaseRemoteConfig
-                .getString(FeatureFlagsRepository.latestVersionKey),
+            mockFirebaseRemoteConfig.getString(
+              FeatureFlagsRepository.latestVersionKey,
+            ),
           ).thenReturn('2.0.0');
           when(
-            mockFirebaseRemoteConfig
-                .getString(FeatureFlagsRepository.downloadPageURLKey),
+            mockFirebaseRemoteConfig.getString(
+              FeatureFlagsRepository.downloadPageURLKey,
+            ),
           ).thenReturn('https://download.url');
           when(
-            mockFirebaseRemoteConfig
-                .getString(FeatureFlagsRepository.releaseNotesURLKey),
+            mockFirebaseRemoteConfig.getString(
+              FeatureFlagsRepository.releaseNotesURLKey,
+            ),
           ).thenReturn('https://release.notes.url');
 
           final repo = FeatureFlagsRepository(

@@ -61,8 +61,11 @@ void main() {
           await unit.getUploadUrl(contentType: 'contentType');
 
           verify(
-            FunctionsService.I
-                .getUploadUrl('table', 'id', contentType: 'contentType'),
+            FunctionsService.I.getUploadUrl(
+              'table',
+              'id',
+              contentType: 'contentType',
+            ),
           );
         },
       );

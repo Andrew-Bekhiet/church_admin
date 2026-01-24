@@ -7,14 +7,18 @@ class HiveInit implements Initializer {
   @override
   Future<void> initialize() async {
     try {
-      final mainSembastInstance = await globalProviderContainer
-          .read(sembastProvider(KvDatabase.main).future);
-      final sharedSembastInstance = await globalProviderContainer
-          .read(sembastProvider(KvDatabase.shared).future);
+      final mainSembastInstance = await globalProviderContainer.read(
+        sembastProvider(KvDatabase.main).future,
+      );
+      final sharedSembastInstance = await globalProviderContainer.read(
+        sembastProvider(KvDatabase.shared).future,
+      );
 
       await SyncKVStore.load<Json>(sharedSembastInstance.kv('GQLCache'));
       await SyncKVStore.load(mainSembastInstance.kv('Settings'));
-      await SyncKVStore.load<String>(sharedSembastInstance.kv('ImageUrlsCache'));
+      await SyncKVStore.load<String>(
+        sharedSembastInstance.kv('ImageUrlsCache'),
+      );
       await SyncKVStore.load<NotificationSetting>(
         mainSembastInstance.serializableKv(
           'NotificationsSettings',

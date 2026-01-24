@@ -17,6 +17,11 @@ class MultiFactorSession extends Equatable {
   final List<MultiFactorInfo> enrolledFactors;
 
   @override
-  List<Object?> get props =>
-      [id, email, password, phoneNumber, enrolledFactors];
+  List<Object?> get props => [
+    id,
+    email,
+    password,
+    phoneNumber,
+    enrolledFactors,
+  ];
 }

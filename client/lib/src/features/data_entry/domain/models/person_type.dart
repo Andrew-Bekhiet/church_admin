@@ -58,11 +58,11 @@ class PersonTypeFields extends _PersonTypeFields {
 
   @override
   FieldMetadata<bool> get isHidden => FieldMetadata<bool>(
-        getValue: super.isHidden.getValue,
-        parentType: super.isHidden.parentType,
-        name: super.isHidden.name,
-        label: super.isHidden.label,
-        operators: super.isHidden.operators,
-        isCodeOnly: true,
-      );
+    getValue: super.isHidden.getValue,
+    parentType: super.isHidden.parentType,
+    name: super.isHidden.name,
+    label: super.isHidden.label,
+    operators: super.isHidden.operators,
+    isCodeOnly: true,
+  );
 }

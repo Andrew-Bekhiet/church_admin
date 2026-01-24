@@ -10,13 +10,13 @@ class DBGraphQLClient extends GraphQLClient {
     super.alwaysRebroadcast,
     super.defaultPolicies,
   }) : _fetchPolicyStream = connectivityStream
-            .map(
-              (connected) => connected
-                  ? FetchPolicy.cacheAndNetwork
-                  : FetchPolicy.cacheFirst,
-            )
-            .distinct()
-            .shareValueSeeded(FetchPolicy.cacheAndNetwork);
+           .map(
+             (connected) => connected
+                 ? FetchPolicy.cacheAndNetwork
+                 : FetchPolicy.cacheFirst,
+           )
+           .distinct()
+           .shareValueSeeded(FetchPolicy.cacheAndNetwork);
 
   final bool autoChangeFetchPolicy;
 
@@ -26,9 +26,9 @@ class DBGraphQLClient extends GraphQLClient {
   Q _exceptionsMiddleware<T, Q extends QueryResult<T>>(Q result) {
     switch (result.exception) {
       case null ||
-            OperationException(
-              linkException: UnexpectedResponseStructureException()
-            ):
+          OperationException(
+            linkException: UnexpectedResponseStructureException(),
+          ):
         return result;
 
       case final exception:
@@ -60,16 +60,20 @@ class DBGraphQLClient extends GraphQLClient {
     MutationOptions<T?> options, {
     bool? autoChangeFetchPolicy,
   }) {
-    return mutate(options, autoChangeFetchPolicy: autoChangeFetchPolicy)
-        .then((r) => r.parsedData);
+    return mutate(
+      options,
+      autoChangeFetchPolicy: autoChangeFetchPolicy,
+    ).then((r) => r.parsedData);
   }
 
   Future<T> mutateAndReturnParsed<T>(
     MutationOptions<T> options, {
     bool? autoChangeFetchPolicy,
   }) {
-    return mutate(options, autoChangeFetchPolicy: autoChangeFetchPolicy)
-        .then((r) => r.parsedData!);
+    return mutate(
+      options,
+      autoChangeFetchPolicy: autoChangeFetchPolicy,
+    ).then((r) => r.parsedData!);
   }
 
   @override
@@ -98,8 +102,10 @@ class DBGraphQLClient extends GraphQLClient {
     SubscriptionOptions<T?> options, {
     bool? autoChangeFetchPolicy,
   }) {
-    return subscribe(options, autoChangeFetchPolicy: autoChangeFetchPolicy)
-        .map((r) => r.parsedData);
+    return subscribe(
+      options,
+      autoChangeFetchPolicy: autoChangeFetchPolicy,
+    ).map((r) => r.parsedData);
   }
 
   Stream<T> subscribeAndReturnParsed<T>(
@@ -111,19 +117,17 @@ class DBGraphQLClient extends GraphQLClient {
   Stream<T?> watchQueryAndReturnParsedNullable<T>(
     WatchQueryOptions<T?> options,
   ) {
-    return watchQuery(options)
-        .stream
-        .map(_exceptionsMiddleware)
-        .map((r) => r.parsedData);
+    return watchQuery(
+      options,
+    ).stream.map(_exceptionsMiddleware).map((r) => r.parsedData);
   }
 
   Stream<T> watchQueryAndReturnParsed<T>(
     WatchQueryOptions<T> options,
   ) {
-    return watchQuery(options)
-        .stream
-        .map(_exceptionsMiddleware)
-        .map((r) => r.parsedData!);
+    return watchQuery(
+      options,
+    ).stream.map(_exceptionsMiddleware).map((r) => r.parsedData!);
   }
 
   @override
@@ -150,15 +154,19 @@ class DBGraphQLClient extends GraphQLClient {
     QueryOptions<T?> options, {
     bool? autoChangeFetchPolicy,
   }) {
-    return query(options, autoChangeFetchPolicy: autoChangeFetchPolicy)
-        .then((r) => r.parsedData);
+    return query(
+      options,
+      autoChangeFetchPolicy: autoChangeFetchPolicy,
+    ).then((r) => r.parsedData);
   }
 
   Future<T> queryAndReturnParsed<T>(
     QueryOptions<T> options, {
     bool? autoChangeFetchPolicy,
   }) {
-    return query(options, autoChangeFetchPolicy: autoChangeFetchPolicy)
-        .then((r) => r.parsedData!);
+    return query(
+      options,
+      autoChangeFetchPolicy: autoChangeFetchPolicy,
+    ).then((r) => r.parsedData!);
   }
 }

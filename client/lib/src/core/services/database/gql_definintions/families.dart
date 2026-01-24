@@ -17,36 +17,36 @@ class FamiliesDAO extends FullCRUDDAO<Family> {
   @override
   late final StreamCountConfig<Family> baseStreamCountConfig =
       const StreamCountConfig(
-    document: documentNodeSubscriptionwatchFamiliesCount,
-  );
+        document: documentNodeSubscriptionwatchFamiliesCount,
+      );
 
   @override
   late final StreamSingleByIdConfig<Family> baseStreamSingleByIdConfig =
       StreamSingleByIdConfig(
-    document: documentNodeSubscriptionwatchFamily,
-    varsConstructor: _streamSingleByIdVarsConstructor,
-  );
+        document: documentNodeSubscriptionwatchFamily,
+        varsConstructor: _streamSingleByIdVarsConstructor,
+      );
 
   @override
   late final DeleteSingleByIdConfig<Family> baseDeleteSingleByIdConfig =
       DeleteSingleByIdConfig(
-    document: documentNodeMutationdeleteFamily,
-    varsConstructor: _deleteSingleByIdVarsConstructor,
-  );
+        document: documentNodeMutationdeleteFamily,
+        varsConstructor: _deleteSingleByIdVarsConstructor,
+      );
 
   @override
   late final UpdateObjectConfig<Family> baseUpdateObjectConfig =
       UpdateObjectConfig(
-    document: documentNodeMutationupdateFamily,
-    varsConstructor: _updateFamilyVarsConstructor,
-  );
+        document: documentNodeMutationupdateFamily,
+        varsConstructor: _updateFamilyVarsConstructor,
+      );
 
   @override
   late final CreateObjectConfig<Family> baseCreateObjectConfig =
       CreateObjectConfig(
-    document: documentNodeMutationinsertFamily,
-    varsConstructor: _createFamilyVarsConstructor,
-  );
+        document: documentNodeMutationinsertFamily,
+        varsConstructor: _createFamilyVarsConstructor,
+      );
 
   Json _streamSingleByIdVarsConstructor({required UuidValue id}) =>
       Variables_Subscription_watchFamily(id: id).toJson();
@@ -57,11 +57,10 @@ class FamiliesDAO extends FullCRUDDAO<Family> {
   Json _updateFamilyVarsConstructor({
     required Family newObject,
     required Family oldObject,
-  }) =>
-      FamilyUpdateHelper(
-        newFamily: newObject,
-        oldFamily: oldObject,
-      ).variables.toJson();
+  }) => FamilyUpdateHelper(
+    newFamily: newObject,
+    oldFamily: oldObject,
+  ).variables.toJson();
 
   Json _deleteSingleByIdVarsConstructor({required UuidValue id}) =>
       Variables_Mutation_deleteFamily(familyId: id).toJson();
@@ -126,19 +125,18 @@ class FamiliesDAO extends FullCRUDDAO<Family> {
   Stream<PaginatableStreamResponse<Family>> _streamAllFactory(
     StreamAllConfig<Family> streamAllConfig,
     PaginatableStreamRequest<Family, StreamableDAOParameters<Family>?> request,
-  ) =>
-      graphQLClient.subscribeAndReturnParsed(
-        streamAllConfig.operationOptions ??
-            SubscriptionOptions(
-              document: streamAllConfig.document,
-              operationName: streamAllConfig.effectiveOperationName,
-              variables: streamAllConfig.variables ??
-                  streamAllConfig.transformRequest?.call(request) ??
-                  db.varsTransformer
-                      .transformrequestForPagination<Family>(request),
-              parserFn: streamAllConfig.parserFn ??
-                  db.parser
-                      .singleListParser(fromJson, pageSize: request.pageSize),
-            ),
-      );
+  ) => graphQLClient.subscribeAndReturnParsed(
+    streamAllConfig.operationOptions ??
+        SubscriptionOptions(
+          document: streamAllConfig.document,
+          operationName: streamAllConfig.effectiveOperationName,
+          variables:
+              streamAllConfig.variables ??
+              streamAllConfig.transformRequest?.call(request) ??
+              db.varsTransformer.transformrequestForPagination<Family>(request),
+          parserFn:
+              streamAllConfig.parserFn ??
+              db.parser.singleListParser(fromJson, pageSize: request.pageSize),
+        ),
+  );
 }

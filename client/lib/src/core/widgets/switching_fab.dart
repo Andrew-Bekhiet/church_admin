@@ -16,9 +16,9 @@ class SwitchingFloatingActionButton extends StatelessWidget {
     required this.icons,
     required this.onTap,
     super.key,
-  })  : animation = tabController.animation!,
-        getIndex = (() => tabController.index),
-        getOffset = (() => tabController.offset);
+  }) : animation = tabController.animation!,
+       getIndex = (() => tabController.index),
+       getOffset = (() => tabController.offset);
 
   final Listenable animation;
   final List<Widget?> icons;

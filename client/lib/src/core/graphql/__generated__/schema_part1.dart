@@ -1,7 +1,6 @@
 // Part 1 of the schema
 part of "schema.graphql.dart";
 
-
 class Input_AddressesAggregateOrderBy {
   factory Input_AddressesAggregateOrderBy({
     Input_AddressesAvgOrderBy? avg,

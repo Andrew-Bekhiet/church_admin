@@ -75,21 +75,22 @@ class Street extends ViewableWithIDAndImage
   String get typeName => AdvancedQueriesMetadata().street.name;
 
   Input_StreetsInsertInput toInsertInput() => Input_StreetsInsertInput(
-        name: name,
-        line: line?.asPostGISLineString(),
-        color: colorToInt(color),
-        areas: Input_AreasStreetsArrRelInsertInput(
-          data: areas
-                  ?.map(
-                    (a) => Input_AreasStreetsInsertInput(areaId: a.id.toUuid()),
-                  )
-                  .toList() ??
-              [],
-          onConflict: Input_AreasStreetsOnConflict(
-            constraint: Enum_AreasStreetsConstraint.areas_streets_pk,
-          ),
-        ),
-      );
+    name: name,
+    line: line?.asPostGISLineString(),
+    color: colorToInt(color),
+    areas: Input_AreasStreetsArrRelInsertInput(
+      data:
+          areas
+              ?.map(
+                (a) => Input_AreasStreetsInsertInput(areaId: a.id.toUuid()),
+              )
+              .toList() ??
+          [],
+      onConflict: Input_AreasStreetsOnConflict(
+        constraint: Enum_AreasStreetsConstraint.areas_streets_pk,
+      ),
+    ),
+  );
 
   Input_StreetsSetInput toUpdateInput({required Street oldStreet}) {
     Input_StreetsSetInput result = Input_StreetsSetInput();

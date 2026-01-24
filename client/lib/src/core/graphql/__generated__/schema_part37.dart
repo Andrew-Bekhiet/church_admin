@@ -1,7 +1,6 @@
 // Part 37 of the schema
 part of "schema.graphql.dart";
 
-
 class _CopyWithImpl_Input_PersonTypesBoolExp<TRes>
     implements CopyWith_Input_PersonTypesBoolExp<TRes> {
   _CopyWithImpl_Input_PersonTypesBoolExp(this._instance, this._then);

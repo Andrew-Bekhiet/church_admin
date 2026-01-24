@@ -36,6 +36,7 @@ class StreamSingleByIdConfig<T> extends DAOMethodTemplate<T?> {
   }
 }
 
-typedef StreamSingleByIdConfigVarsConstructor = Json Function({
-  required UuidValue id,
-});
+typedef StreamSingleByIdConfigVarsConstructor =
+    Json Function({
+      required UuidValue id,
+    });

@@ -160,7 +160,9 @@ class _EditUserState extends State<EditUser> {
         _controller.newObject = _controller.newObject.copyWith(
           permissions: PermissionsSet.fromSet(
             {
-              ..._controller.newObject.permissions.where((p) => p != permission)
+              ..._controller.newObject.permissions.where(
+                (p) => p != permission,
+              ),
             },
           ),
         );

@@ -1,7 +1,6 @@
 // Part 25 of the schema
 part of "schema.graphql.dart";
 
-
 abstract class CopyWith_Input_HistoryAttendanceHistoryAggregateBoolExp<TRes> {
   factory CopyWith_Input_HistoryAttendanceHistoryAggregateBoolExp(
     Input_HistoryAttendanceHistoryAggregateBoolExp instance,

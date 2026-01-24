@@ -1,7 +1,6 @@
 // Part 13 of the schema
 part of "schema.graphql.dart";
 
-
 abstract class CopyWith_Input_ClassesStreamCursorInput<TRes> {
   factory CopyWith_Input_ClassesStreamCursorInput(
     Input_ClassesStreamCursorInput instance,

@@ -5,5 +5,5 @@ import 'package:sqflite/sqflite.dart' as sqflite;
 
 DatabaseFactory getDatabaseFactory(KvDatabase database) =>
     database == KvDatabase.shared
-        ? getDatabaseFactorySqflite(sqflite.databaseFactory)
-        : databaseFactoryIo;
+    ? getDatabaseFactorySqflite(sqflite.databaseFactory)
+    : databaseFactoryIo;

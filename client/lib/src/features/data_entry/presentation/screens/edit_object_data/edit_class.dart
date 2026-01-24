@@ -29,8 +29,10 @@ class _EditClassState extends State<EditClass> {
     );
 
     _controller = EditObjectController(
-      afterCreate: (object) => ViewClassRoute(id: object.id, $extra: object)
-          .pushReplacement(context),
+      afterCreate: (object) => ViewClassRoute(
+        id: object.id,
+        $extra: object,
+      ).pushReplacement(context),
       onCreate: (object) =>
           DatabaseService.I.classes.createObject(newObject: object),
       onUpdate: (oldClass, newClass) => DatabaseService.I.classes.updateObject(
@@ -39,7 +41,8 @@ class _EditClassState extends State<EditClass> {
       ),
       onDelete: (object) => DatabaseService.I.classes.deleteById(id: object.id),
       toJson: (object) => object.toJson(),
-      newObject: oldClass ??
+      newObject:
+          oldClass ??
           Class(
             id: const Uuid().v4(),
             name: '',
@@ -86,8 +89,9 @@ class _EditClassState extends State<EditClass> {
             dialogFieldLabel: 'الخدمة الحالية',
             initialValue: newClass.service,
             listController: (s) => ViewableObjectListController(
-              objectsPaginatableStream:
-                  DatabaseService.I.services.streamAll(searchQuery: s),
+              objectsPaginatableStream: DatabaseService.I.services.streamAll(
+                searchQuery: s,
+              ),
             ),
             onChanged: (value) => newClass = newClass.copyWith(
               service: value,

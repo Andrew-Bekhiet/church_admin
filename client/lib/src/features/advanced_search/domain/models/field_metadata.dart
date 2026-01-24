@@ -30,8 +30,7 @@ class FieldMetadata<T extends Object> with EquatableMixin {
     final fieldName = json['name'] as String;
     final typeName = json['parentQueryableType'] as String;
 
-    return AdvancedQueriesMetadata()
-            .allQueryables
+    return AdvancedQueriesMetadata().allQueryables
             .firstWhere((q) => q.name == typeName)
             .fieldsMetadataByName[fieldName] ??
         (throw ArgumentError(
@@ -56,13 +55,13 @@ class FieldMetadata<T extends Object> with EquatableMixin {
 
     return switch (subFields) {
       {'order': FieldMetadata(:final orderByFieldPath)} => [
-          ...fieldPath,
-          ...orderByFieldPath
-        ],
+        ...fieldPath,
+        ...orderByFieldPath,
+      ],
       {'name': FieldMetadata(:final orderByFieldPath)} => [
-          ...fieldPath,
-          ...orderByFieldPath
-        ],
+        ...fieldPath,
+        ...orderByFieldPath,
+      ],
       _ => fieldPath,
     };
   }
@@ -87,14 +86,15 @@ class FieldMetadata<T extends Object> with EquatableMixin {
         ?.fieldsMetadataByName;
 
     return {
-      name: name == 'id' ||
+      name:
+          name == 'id' ||
               name == 'uid' ||
               serializedValue is Map ||
               serializedValue is List
           ? serializedValue
           : subFields?['order']?.serializeOrderBy(serializedValue) ??
-              subFields?['name']?.serializeOrderBy(serializedValue) ??
-              serializedValue,
+                subFields?['name']?.serializeOrderBy(serializedValue) ??
+                serializedValue,
     };
   }
 
@@ -120,13 +120,12 @@ class FieldMetadata<T extends Object> with EquatableMixin {
     String? label,
     bool isExpandable = true,
     bool? isOrderable,
-  }) =>
-      RedirectingFieldMetadata<T, U>(
-        parentField: this,
-        targetField: targetField,
-        alias: alias,
-        label: label,
-        isExpandable: isExpandable,
-        isOrderable: isOrderable,
-      );
+  }) => RedirectingFieldMetadata<T, U>(
+    parentField: this,
+    targetField: targetField,
+    alias: alias,
+    label: label,
+    isExpandable: isExpandable,
+    isOrderable: isOrderable,
+  );
 }

@@ -3,19 +3,23 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-final emailRegex =
-    RegExp(r'^[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}$');
+final emailRegex = RegExp(
+  r'^[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}$',
+);
 
 abstract final class LoginScreenKeys {
   static const Key emailFieldKey = ValueKey('Email Field Key');
   static const Key passwordFieldKey = ValueKey('Password Field Key');
-  static const Key passwordConfirmationFieldKey =
-      ValueKey('PasswordConfirmationFieldKey');
-  static const Key forgotPasswordButtonKey =
-      ValueKey('Forgot Password Button Key');
+  static const Key passwordConfirmationFieldKey = ValueKey(
+    'PasswordConfirmationFieldKey',
+  );
+  static const Key forgotPasswordButtonKey = ValueKey(
+    'Forgot Password Button Key',
+  );
   static const Key loginSignupButtonKey = ValueKey('Login/Signup Button Key');
-  static const Key switchLoginSignupButtonKey =
-      ValueKey('SwitchLogin/Signup Button Key');
+  static const Key switchLoginSignupButtonKey = ValueKey(
+    'SwitchLogin/Signup Button Key',
+  );
 }
 
 class LoginScreen extends StatefulWidget {
@@ -38,17 +42,17 @@ class _LoginScreenState extends State<LoginScreen> {
 
   late final _termsOfServiceRecognizer = TapGestureRecognizer()
     ..onTap = () => LauncherService.I.launchUrl(
-          Uri.parse(
-            'https://church-data-admin.firebaseapp.com/terms-of-service/',
-          ),
-        );
+      Uri.parse(
+        'https://church-data-admin.firebaseapp.com/terms-of-service/',
+      ),
+    );
 
   late final _privacyPolicyRecognizer = TapGestureRecognizer()
     ..onTap = () => LauncherService.I.launchUrl(
-          Uri.parse(
-            'https://church-data-admin.firebaseapp.com/privacy-policy/',
-          ),
-        );
+      Uri.parse(
+        'https://church-data-admin.firebaseapp.com/privacy-policy/',
+      ),
+    );
 
   @override
   Widget build(BuildContext context) {
@@ -165,10 +169,10 @@ class _LoginScreenState extends State<LoginScreen> {
                                         .push(context),
                                     child: Text(
                                       'نسيت كلمة المرور؟',
-                                      style:
-                                          theme.textTheme.bodyLarge?.copyWith(
-                                        color: theme.colorScheme.primary,
-                                      ),
+                                      style: theme.textTheme.bodyLarge
+                                          ?.copyWith(
+                                            color: theme.colorScheme.primary,
+                                          ),
                                     ),
                                   ),
                                 ),
@@ -342,8 +346,9 @@ class _LoginTitle extends StatelessWidget {
           child: Text(
             'كنيسة السيدة العذراء مريم',
             style: theme.textTheme.headlineMedium?.copyWith(
-              color:
-                  theme.textTheme.headlineMedium?.color?.withValues(alpha: 1),
+              color: theme.textTheme.headlineMedium?.color?.withValues(
+                alpha: 1,
+              ),
             ),
           ),
         ),

@@ -55,7 +55,9 @@ LatLng getMapCenter({
     );
   } else if (areas.where((o) => o.bounds != null).isNotEmpty) {
     return getCentralGeoCoordinate(
-      areas.where((o) => o.bounds != null).expand(
+      areas
+          .where((o) => o.bounds != null)
+          .expand(
             (a) => a.bounds!.coordinates.map(
               (e) => LatLng(e.latitude, e.longitude),
             ),
@@ -63,7 +65,9 @@ LatLng getMapCenter({
     );
   } else if (streets.where((o) => o.line != null).isNotEmpty) {
     return getCentralGeoCoordinate(
-      streets.where((o) => o.line != null).expand(
+      streets
+          .where((o) => o.line != null)
+          .expand(
             (s) => s.line!.coordinates.map(
               (e) => LatLng(e.latitude, e.longitude),
             ),
@@ -71,19 +75,25 @@ LatLng getMapCenter({
     );
   } else if (families.where((o) => o.geolocation != null).isNotEmpty) {
     return getCentralGeoCoordinate(
-      families.where((o) => o.geolocation != null).map(
+      families
+          .where((o) => o.geolocation != null)
+          .map(
             (f) => LatLng(f.geolocation!.latitude, f.geolocation!.longitude),
           ),
     );
   } else if (stores.where((o) => o.geolocation != null).isNotEmpty) {
     return getCentralGeoCoordinate(
-      stores.where((o) => o.geolocation != null).map(
+      stores
+          .where((o) => o.geolocation != null)
+          .map(
             (s) => LatLng(s.geolocation!.latitude, s.geolocation!.longitude),
           ),
     );
   } else if (persons.where((o) => o.geolocation != null).isNotEmpty) {
     return getCentralGeoCoordinate(
-      persons.where((o) => o.geolocation != null).map(
+      persons
+          .where((o) => o.geolocation != null)
+          .map(
             (p) => LatLng(p.geolocation!.latitude, p.geolocation!.longitude),
           ),
     );

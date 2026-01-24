@@ -49,19 +49,18 @@ class ViewableObjectWidgetConfig<T extends Viewable> {
     void Function(T)? onTap,
     void Function(T)? onLongPress,
     FieldMetadata? secondLineField,
-  }) =>
-      ViewableObjectWidgetConfig(
-        selected: selected ?? this.selected,
-        wrapInCard: wrapInCard ?? this.wrapInCard,
-        isDense: isDense ?? this.isDense,
-        enabled: enabled ?? this.enabled,
-        forceShowSecondLine: forceShowSecondLine ?? this.forceShowSecondLine,
-        isThreeLine: isThreeLine ?? this.isThreeLine,
-        shouldCircleCrop: shouldCircleCrop ?? this.shouldCircleCrop,
-        photo: photo ?? this.photo,
-        trailing: trailing ?? this.trailing,
-        onTap: onTap ?? this.onTap,
-        onLongPress: onLongPress ?? this.onLongPress,
-        secondLineField: secondLineField ?? this.secondLineField,
-      );
+  }) => ViewableObjectWidgetConfig(
+    selected: selected ?? this.selected,
+    wrapInCard: wrapInCard ?? this.wrapInCard,
+    isDense: isDense ?? this.isDense,
+    enabled: enabled ?? this.enabled,
+    forceShowSecondLine: forceShowSecondLine ?? this.forceShowSecondLine,
+    isThreeLine: isThreeLine ?? this.isThreeLine,
+    shouldCircleCrop: shouldCircleCrop ?? this.shouldCircleCrop,
+    photo: photo ?? this.photo,
+    trailing: trailing ?? this.trailing,
+    onTap: onTap ?? this.onTap,
+    onLongPress: onLongPress ?? this.onLongPress,
+    secondLineField: secondLineField ?? this.secondLineField,
+  );
 }

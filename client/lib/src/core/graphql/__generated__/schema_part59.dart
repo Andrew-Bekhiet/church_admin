@@ -1,7 +1,6 @@
 // Part 59 of the schema
 part of "schema.graphql.dart";
 
-
 String toJson_Enum_ChurchesConstraint(Enum_ChurchesConstraint e) {
   switch (e) {
     case Enum_ChurchesConstraint.churches_name_key:

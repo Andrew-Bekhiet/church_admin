@@ -24,7 +24,7 @@ class LocationParsingService {
         case Uri(
               scheme: 'https',
               host: 'www.google.com' || 'google.com',
-              pathSegments: ['maps', 'search', final String location]
+              pathSegments: ['maps', 'search', final String location],
             )
             when location.split(',').length == 2 &&
                 double.tryParse(location.split(',')[0]) != null &&
@@ -36,7 +36,7 @@ class LocationParsingService {
         case Uri(
               scheme: 'https',
               host: 'maps.google.com',
-              queryParameters: {'q': final String location}
+              queryParameters: {'q': final String location},
             )
             when location.split(',').length == 2 &&
                 double.tryParse(location.split(',')[0]) != null &&
@@ -46,15 +46,16 @@ class LocationParsingService {
           return Point(double.parse(lat), double.parse(lng));
 
         case Uri(scheme: 'https', host: 'maps.app.goo.gl', pathSegments: [_]) ||
-              Uri(scheme: 'https', host: 'goo.gl', pathSegments: ['maps', _]):
+            Uri(scheme: 'https', host: 'goo.gl', pathSegments: ['maps', _]):
           Uri? redirectLocation;
 
           try {
-            final redirectResponse =
-                await globalProviderContainer.read(dioProvider).getUri(
-                      uri,
-                      options: Options(followRedirects: true, maxRedirects: 1),
-                    );
+            final redirectResponse = await globalProviderContainer
+                .read(dioProvider)
+                .getUri(
+                  uri,
+                  options: Options(followRedirects: true, maxRedirects: 1),
+                );
 
             redirectLocation =
                 redirectResponse.redirects.singleOrNull?.location;

@@ -1,7 +1,6 @@
 // Part 42 of the schema
 part of "schema.graphql.dart";
 
-
 abstract class CopyWith_Input_PersonsInsertInput<TRes> {
   factory CopyWith_Input_PersonsInsertInput(
     Input_PersonsInsertInput instance,

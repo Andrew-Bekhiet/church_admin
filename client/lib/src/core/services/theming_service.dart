@@ -109,7 +109,8 @@ class ThemingService with WidgetsBindingObserver {
     late final effectiveUserSettingsService =
         userSettingsService ?? UserSettingsService.I;
 
-    bool isDark = isDarkOverride ??
+    bool isDark =
+        isDarkOverride ??
         effectiveUserSettingsService.darkTheme ??
         PlatformDispatcher.instance.platformBrightness == Brightness.dark;
 
@@ -138,8 +139,9 @@ class ThemingService with WidgetsBindingObserver {
 
     final bool isLight = !isDark;
 
-    final flexThemeDataFactory =
-        isDark ? FlexThemeData.dark : FlexThemeData.light;
+    final flexThemeDataFactory = isDark
+        ? FlexThemeData.dark
+        : FlexThemeData.light;
 
     final flexSchemeColor = effectiveSeedOverride != null
         ? FlexSchemeColor.from(
@@ -162,17 +164,20 @@ class ThemingService with WidgetsBindingObserver {
         interactionEffects: true,
         tintedDisabledControls: true,
         scaffoldBackgroundBaseColor: FlexScaffoldBaseColor.surfaceContainer,
-        scaffoldBackgroundSchemeColor:
-            isLight ? SchemeColor.tertiaryFixed : SchemeColor.onTertiary,
+        scaffoldBackgroundSchemeColor: isLight
+            ? SchemeColor.tertiaryFixed
+            : SchemeColor.onTertiary,
         useM2StyleDividerInM3: true,
         defaultRadius: 10,
         switchThumbSchemeColor: SchemeColor.secondaryContainer,
         inputDecoratorBorderType: FlexInputBorderType.outline,
         inputDecoratorUnfocusedBorderIsColored: true,
-        inputDecoratorPrefixIconSchemeColor:
-            isLight ? SchemeColor.primary : null,
-        inputDecoratorSuffixIconSchemeColor:
-            isLight ? SchemeColor.primary : null,
+        inputDecoratorPrefixIconSchemeColor: isLight
+            ? SchemeColor.primary
+            : null,
+        inputDecoratorSuffixIconSchemeColor: isLight
+            ? SchemeColor.primary
+            : null,
         fabUseShape: true,
         fabAlwaysCircular: true,
         fabForegroundSchemeColor: isUsingGreatFeastTheme
@@ -184,8 +189,9 @@ class ThemingService with WidgetsBindingObserver {
         chipIconSize: 22,
         chipRadius: 5,
         alignedDropdown: true,
-        dialogBackgroundSchemeColor:
-            isLight ? SchemeColor.secondaryContainer : null,
+        dialogBackgroundSchemeColor: isLight
+            ? SchemeColor.secondaryContainer
+            : null,
         appBarBackgroundSchemeColor: isLight ? SchemeColor.tertiary : null,
         useInputDecoratorThemeInDialogs: true,
         bottomNavigationBarSelectedLabelSchemeColor: SchemeColor.onPrimary,
@@ -312,8 +318,8 @@ class ThemingService with WidgetsBindingObserver {
   ThemingService.withInitialThemeata({
     required UserSettingsService userSettingsService,
     required ThemeData initialTheme,
-  })  : _userSettingsService = userSettingsService,
-        _themeData = BehaviorSubject.seeded(initialTheme) {
+  }) : _userSettingsService = userSettingsService,
+       _themeData = BehaviorSubject.seeded(initialTheme) {
     WidgetsBinding.instance.addObserver(this);
   }
 
@@ -347,13 +353,12 @@ extension ChurchAdminTheming on ThemeData {
   /// Workaround for flutter issue [#118063](https://github.com/flutter/flutter/issues/118063)
   ButtonStyle? get filledTonalButtonStyleWorkaround =>
       brightness == Brightness.light
-          ? filledButtonTheme.style?.copyWith(
-              backgroundColor:
-                  WidgetStateProperty.all(colorScheme.primaryFixed),
-            )
-          : filledButtonTheme.style;
+      ? filledButtonTheme.style?.copyWith(
+          backgroundColor: WidgetStateProperty.all(colorScheme.primaryFixed),
+        )
+      : filledButtonTheme.style;
 
   ButtonStyle get largeFilledButtonStyle => filledButtonTheme.style!.copyWith(
-        textStyle: WidgetStateProperty.all(textTheme.titleLarge),
-      );
+    textStyle: WidgetStateProperty.all(textTheme.titleLarge),
+  );
 }

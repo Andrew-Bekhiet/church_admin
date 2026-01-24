@@ -11,7 +11,7 @@ class HistoryDAO {
   HistoryDAO({required this.db});
 
   PaginatableStreamBase<LastRecordedByInfo>
-      paginateEditHistory<T extends Viewable>({
+  paginateEditHistory<T extends Viewable>({
     required String id,
   }) {
     return PaginatableStream.simple(
@@ -52,7 +52,7 @@ class HistoryDAO {
   }
 
   PaginatableStreamBase<LastRecordedByInfo>
-      paginateVisitHistory<T extends Viewable>({
+  paginateVisitHistory<T extends Viewable>({
     required String id,
     bool fatherVisit = false,
   }) {
@@ -242,8 +242,9 @@ class HistoryDAO {
           personId: personId.toUuid(),
           lastCall: lastCall,
         ).toJson(),
-        parserFn: db.parser
-            .singleOrNullParser(db.parser.singleOrNullParser(Person.fromJson)),
+        parserFn: db.parser.singleOrNullParser(
+          db.parser.singleOrNullParser(Person.fromJson),
+        ),
       ),
     );
   }
@@ -260,8 +261,9 @@ class HistoryDAO {
           personId: personId.toUuid(),
           lastConfession: lastConfession,
         ).toJson(),
-        parserFn: db.parser
-            .singleOrNullParser(db.parser.singleOrNullParser(Person.fromJson)),
+        parserFn: db.parser.singleOrNullParser(
+          db.parser.singleOrNullParser(Person.fromJson),
+        ),
       ),
     );
   }
@@ -278,8 +280,9 @@ class HistoryDAO {
           personId: personId.toUuid(),
           lastKodas: lastKodas,
         ).toJson(),
-        parserFn: db.parser
-            .singleOrNullParser(db.parser.singleOrNullParser(Person.fromJson)),
+        parserFn: db.parser.singleOrNullParser(
+          db.parser.singleOrNullParser(Person.fromJson),
+        ),
       ),
     );
   }

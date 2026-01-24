@@ -1,7 +1,6 @@
 // Part 36 of the schema
 part of "schema.graphql.dart";
 
-
 abstract class CopyWith_Input_NameComparisonExp<TRes> {
   factory CopyWith_Input_NameComparisonExp(
     Input_NameComparisonExp instance,

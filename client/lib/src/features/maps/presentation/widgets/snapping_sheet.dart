@@ -34,8 +34,9 @@ class MapSnappingSheet extends StatelessWidget {
           grabbingContentOffset: GrabbingContentOffset.bottom,
         ),
       ],
-      initialSnappingPosition:
-          const SnappingPosition.factor(positionFactor: 0.15),
+      initialSnappingPosition: const SnappingPosition.factor(
+        positionFactor: 0.15,
+      ),
       grabbing: showGrabbing
           ? ClipRRect(
               borderRadius: const BorderRadius.vertical(

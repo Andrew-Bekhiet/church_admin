@@ -41,15 +41,15 @@ class SembastSerializableKvStore<T> implements SembastKvStore<T> {
 
   @override
   Future<Map<String, T>> toMap() async => (await _inner.toMap()).map(
-        (key, value) => MapEntry(key, fromJson(value)),
-      );
+    (key, value) => MapEntry(key, fromJson(value)),
+  );
 
   @override
   Future<void> putAll(Map<String, T?> values) async => _inner.putAll(
-        values.map(
-          (key, value) => MapEntry(key, value == null ? null : toJson(value)),
-        ),
-      );
+    values.map(
+      (key, value) => MapEntry(key, value == null ? null : toJson(value)),
+    ),
+  );
 }
 
 extension SerializableKvStoreExtension on DatabaseClient {

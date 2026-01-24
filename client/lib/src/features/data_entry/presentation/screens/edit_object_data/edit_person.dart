@@ -57,18 +57,21 @@ class _EditPersonState extends State<EditPerson> {
     );
 
     _controller = EditObjectController(
-      afterCreate: (object) => ViewPersonRoute(id: object.id, $extra: object)
-          .pushReplacement(context),
+      afterCreate: (object) => ViewPersonRoute(
+        id: object.id,
+        $extra: object,
+      ).pushReplacement(context),
       onCreate: (object) =>
           DatabaseService.I.persons.createObject(newObject: object),
       onUpdate: (oldPerson, newPerson) =>
           DatabaseService.I.persons.updateObject(
-        oldObject: oldPerson,
-        newObject: newPerson,
-      ),
+            oldObject: oldPerson,
+            newObject: newPerson,
+          ),
       onDelete: (object) => DatabaseService.I.persons.deleteById(id: object.id),
       toJson: (object) => object.toJson(),
-      newObject: oldPerson ??
+      newObject:
+          oldPerson ??
           Person(
             id: const Uuid().v4(),
             name: '',
@@ -126,7 +129,8 @@ class _EditPersonState extends State<EditPerson> {
                 onChanged: (value) => newPerson = newPerson.copyWith(
                   nationalId: int.tryParse(value),
                 ),
-                validator: (v) => v != null &&
+                validator: (v) =>
+                    v != null &&
                         v.isNotEmpty &&
                         (int.tryParse(v) ?? 0) < 20000000000000
                     ? 'برجاء إدخال رقم قومي صالح'
@@ -137,7 +141,8 @@ class _EditPersonState extends State<EditPerson> {
                 key: ValueKey(newPerson.mainPhone),
                 decoration: InputDecoration(
                   labelText: 'رقم الهاتف',
-                  suffixIcon: CurrentPlatformService.I.isAndroid ||
+                  suffixIcon:
+                      CurrentPlatformService.I.isAndroid ||
                           CurrentPlatformService.I.isIOS
                       ? IconButton(
                           tooltip: 'اختيار من جهات الاتصال',
@@ -308,8 +313,10 @@ class _EditPersonState extends State<EditPerson> {
               builder: (context, state) {
                 return state.value != null
                     ? IgnorePointer(
-                        child:
-                            ViewableObjectWidget(state.value!, isDense: true),
+                        child: ViewableObjectWidget(
+                          state.value!,
+                          isDense: true,
+                        ),
                       )
                     : null;
               },
@@ -347,15 +354,18 @@ class _EditPersonState extends State<EditPerson> {
 
                 final currentUserData = AuthBloc.I.currentUserData!;
 
-                final canEditFamily = newPerson.family == null ||
+                final canEditFamily =
+                    newPerson.family == null ||
                     currentUserData.canEditObject(newPerson.family!);
 
-                final canEditAddress = newPerson.address?.area == null ||
+                final canEditAddress =
+                    newPerson.address?.area == null ||
                     newPerson.address?.street == null ||
                     currentUserData.canEditObject(newPerson.address!.area!);
 
-                final servicesAndGroups =
-                    <ViewableWithID>{}.union(v?.$1 ?? {}).union(v?.$2 ?? {});
+                final servicesAndGroups = <ViewableWithID>{}
+                    .union(v?.$1 ?? {})
+                    .union(v?.$2 ?? {});
 
                 if (!canEditFamily &&
                     !canEditAddress &&
@@ -436,10 +446,12 @@ class _EditPersonState extends State<EditPerson> {
                 labelText: 'حالة العمل',
               ),
               items: WorkStatus.values
-                  .map((status) => DropdownMenuItem(
-                        value: status,
-                        child: Text(status.label),
-                      ))
+                  .map(
+                    (status) => DropdownMenuItem(
+                      value: status,
+                      child: Text(status.label),
+                    ),
+                  )
                   .toList(),
               onChanged: (value) => setState(
                 () => newPerson = newPerson.copyWith(workStatus: value),
@@ -450,7 +462,9 @@ class _EditPersonState extends State<EditPerson> {
                 initialValue: newPerson.studyYear,
                 listController: (s) => ViewableObjectListController(
                   objectsPaginatableStream: DatabaseService
-                      .I.metadata.studyYears
+                      .I
+                      .metadata
+                      .studyYears
                       .streamAll(searchQuery: s),
                 ),
                 dialogFieldLabel: 'السنة الدراسية',
@@ -485,11 +499,13 @@ class _EditPersonState extends State<EditPerson> {
                   initialValue: newPerson.college,
                   onCreateCustom: (name) =>
                       DatabaseService.I.metadata.colleges.createObject(
-                    newObject: College(id: const Uuid().v4(), name: name),
-                  ),
+                        newObject: College(id: const Uuid().v4(), name: name),
+                      ),
                   listController: (s) => ViewableObjectListController(
                     objectsPaginatableStream: DatabaseService
-                        .I.metadata.colleges
+                        .I
+                        .metadata
+                        .colleges
                         .streamAll(searchQuery: s),
                   ),
                   dialogFieldLabel: 'الكلية',
@@ -510,8 +526,8 @@ class _EditPersonState extends State<EditPerson> {
                   initialValue: newPerson.school,
                   onCreateCustom: (name) =>
                       DatabaseService.I.metadata.schools.createObject(
-                    newObject: School(id: const Uuid().v4(), name: name),
-                  ),
+                        newObject: School(id: const Uuid().v4(), name: name),
+                      ),
                   listController: (s) => ViewableObjectListController(
                     objectsPaginatableStream: DatabaseService.I.metadata.schools
                         .streamAll(searchQuery: s),
@@ -534,11 +550,16 @@ class _EditPersonState extends State<EditPerson> {
                 initialValue: newPerson.qualification,
                 onCreateCustom: (name) =>
                     DatabaseService.I.metadata.qualifications.createObject(
-                  newObject: Qualification(id: const Uuid().v4(), name: name),
-                ),
+                      newObject: Qualification(
+                        id: const Uuid().v4(),
+                        name: name,
+                      ),
+                    ),
                 listController: (s) => ViewableObjectListController(
                   objectsPaginatableStream: DatabaseService
-                      .I.metadata.qualifications
+                      .I
+                      .metadata
+                      .qualifications
                       .streamAll(searchQuery: s),
                 ),
                 dialogFieldLabel: 'المؤهل',
@@ -560,11 +581,11 @@ class _EditPersonState extends State<EditPerson> {
                 initialValue: newPerson.job,
                 onCreateCustom: (name) =>
                     DatabaseService.I.metadata.jobs.createObject(
-                  newObject: Job(id: const Uuid().v4(), name: name),
-                ),
+                      newObject: Job(id: const Uuid().v4(), name: name),
+                    ),
                 listController: (s) => ViewableObjectListController(
-                  objectsPaginatableStream:
-                      DatabaseService.I.metadata.jobs.streamAll(searchQuery: s),
+                  objectsPaginatableStream: DatabaseService.I.metadata.jobs
+                      .streamAll(searchQuery: s),
                 ),
                 dialogFieldLabel: 'الوظيفة',
                 onChanged: (value) => newPerson = newPerson.copyWith(
@@ -605,17 +626,19 @@ class _EditPersonState extends State<EditPerson> {
             ObjectSelectionField(
               nullable: false,
               initialValue: ViewableEnumWithID.wrap(
-                  newPerson.martialStatus ?? MartialStatus.single),
+                newPerson.martialStatus ?? MartialStatus.single,
+              ),
               listController: (s) => ViewableObjectListController(
                 objectsPaginatableStream:
                     ViewableEnumWithID.createPaginatableStream(
-                  MartialStatus.values,
-                  s,
-                ),
+                      MartialStatus.values,
+                      s,
+                    ),
               ),
               onChanged: (value) => setState(
-                () => newPerson =
-                    newPerson.copyWith(martialStatus: value!.enumValue),
+                () => newPerson = newPerson.copyWith(
+                  martialStatus: value!.enumValue,
+                ),
               ),
               dialogFieldLabel: 'الحالة الاجتماعية',
               builder: (context, state) => Text(state.value?.name ?? ''),
@@ -624,8 +647,8 @@ class _EditPersonState extends State<EditPerson> {
               initialValue: newPerson.personType,
               onCreateCustom: (name) async =>
                   DatabaseService.I.metadata.personTypes.createObject(
-                newObject: PersonType(id: const Uuid().v4(), name: name),
-              ),
+                    newObject: PersonType(id: const Uuid().v4(), name: name),
+                  ),
               listController: (s) => ViewableObjectListController(
                 objectsPaginatableStream: DatabaseService.I.metadata.personTypes
                     .streamAll(searchQuery: s),
@@ -648,8 +671,8 @@ class _EditPersonState extends State<EditPerson> {
               initialValue: newPerson.church,
               onCreateCustom: (name) =>
                   DatabaseService.I.metadata.churches.createObject(
-                newObject: Church(id: const Uuid().v4(), name: name),
-              ),
+                    newObject: Church(id: const Uuid().v4(), name: name),
+                  ),
               listController: (s) => ViewableObjectListController(
                 objectsPaginatableStream: DatabaseService.I.metadata.churches
                     .streamAll(searchQuery: s),
@@ -671,8 +694,8 @@ class _EditPersonState extends State<EditPerson> {
               initialValue: newPerson.father,
               onCreateCustom: (name) =>
                   DatabaseService.I.metadata.fathers.createObject(
-                newObject: Father(id: const Uuid().v4(), name: name),
-              ),
+                    newObject: Father(id: const Uuid().v4(), name: name),
+                  ),
               listController: (s) => ViewableObjectListController(
                 objectsPaginatableStream: DatabaseService.I.metadata.fathers
                     .streamAll(searchQuery: s),
@@ -707,8 +730,8 @@ class _EditPersonState extends State<EditPerson> {
                 initialValue: newPerson.servingChurch,
                 onCreateCustom: (name) =>
                     DatabaseService.I.metadata.churches.createObject(
-                  newObject: Church(id: const Uuid().v4(), name: name),
-                ),
+                      newObject: Church(id: const Uuid().v4(), name: name),
+                    ),
                 listController: (s) => ViewableObjectListController(
                   objectsPaginatableStream: DatabaseService.I.metadata.churches
                       .streamAll(searchQuery: s),
@@ -752,7 +775,9 @@ class _EditPersonState extends State<EditPerson> {
                 nullable: false,
                 listController: (s) => ViewableObjectListController(
                   objectsPaginatableStream: DatabaseService
-                      .I.metadata.shammasLevels
+                      .I
+                      .metadata
+                      .shammasLevels
                       .streamAll(searchQuery: s),
                 ),
                 dialogFieldLabel: 'رتبة الشموسية',
@@ -771,7 +796,9 @@ class _EditPersonState extends State<EditPerson> {
               initialValue: newPerson.state,
               listController: (s) => ViewableObjectListController(
                 objectsPaginatableStream: DatabaseService
-                    .I.metadata.personStates
+                    .I
+                    .metadata
+                    .personStates
                     .streamAll(searchQuery: s),
               ),
               dialogFieldLabel: 'الحالة الروحية',
@@ -817,8 +844,8 @@ class _EditPersonState extends State<EditPerson> {
               ),
               onCreateCustom: (name) =>
                   DatabaseService.I.metadata.hobbies.createObject(
-                newObject: Hobby(id: const Uuid().v4(), name: name),
-              ),
+                    newObject: Hobby(id: const Uuid().v4(), name: name),
+                  ),
               onChanged: (s) =>
                   newPerson = newPerson.copyWith(hobbies: s?.toList()),
               initialValue: newPerson.hobbies?.toSet() ?? {},
@@ -837,7 +864,8 @@ class _EditPersonState extends State<EditPerson> {
                           for (final hobby in state.value ?? <Hobby>[])
                             Chip(
                               side: BorderSide(
-                                color: hobby.color?.findInvert() ??
+                                color:
+                                    hobby.color?.findInvert() ??
                                     labelStyle.color!,
                               ),
                               label: Text(
@@ -861,15 +889,15 @@ class _EditPersonState extends State<EditPerson> {
               ),
               onCreateCustom: (name) =>
                   DatabaseService.I.metadata.tags.createObject(
-                newObject: Tag(id: const Uuid().v4(), name: name),
-              ),
+                    newObject: Tag(id: const Uuid().v4(), name: name),
+                  ),
               onChanged: (s) =>
                   newPerson = newPerson.copyWith(tags: s?.toList()),
               initialValue: newPerson.tags?.toSet() ?? {},
               nullable: false,
               listController: (s) => ViewableObjectListController(
-                objectsPaginatableStream:
-                    DatabaseService.I.metadata.tags.streamAll(searchQuery: s),
+                objectsPaginatableStream: DatabaseService.I.metadata.tags
+                    .streamAll(searchQuery: s),
               ),
               labelText: 'الشارات',
               builder: (context, state) {
@@ -881,7 +909,8 @@ class _EditPersonState extends State<EditPerson> {
                           for (final tag in state.value ?? <Tag>[])
                             Chip(
                               side: BorderSide(
-                                color: tag.color?.findInvert() ??
+                                color:
+                                    tag.color?.findInvert() ??
                                     labelStyle.color!,
                               ),
                               label: Text(
@@ -1067,8 +1096,8 @@ class _EditPersonState extends State<EditPerson> {
             validator: (v) => v == null || v.isEmpty
                 ? 'برجاء ادخال اسم رقم الهاتف'
                 : PhoneNumberService.I.validate(v)
-                    ? 'لا يجب ادخال رقم الهاتف هنا'
-                    : null,
+                ? 'لا يجب ادخال رقم الهاتف هنا'
+                : null,
           ),
         ),
         actions: [
@@ -1123,36 +1152,39 @@ class _EditPersonState extends State<EditPerson> {
                   ),
                   ...contact.phones
                       .where(
-                    (e) => e.normalizedNumber.isNotEmpty || e.number.isNotEmpty,
-                  )
+                        (e) =>
+                            e.normalizedNumber.isNotEmpty ||
+                            e.number.isNotEmpty,
+                      )
                       .map((e) {
-                    final String label =
-                        e.customLabel.isNotEmpty ? e.customLabel : e.label.name;
-                    final String value = e.normalizedNumber.isNotEmpty
-                        ? e.normalizedNumber
-                        : e.number;
+                        final String label = e.customLabel.isNotEmpty
+                            ? e.customLabel
+                            : e.label.name;
+                        final String value = e.normalizedNumber.isNotEmpty
+                            ? e.normalizedNumber
+                            : e.number;
 
-                    return CheckboxListTile(
-                      title: Text(label),
-                      subtitle: Text(value),
-                      value: numbersToImport.contains((label, value)),
-                      onChanged: (v) => setState(
-                        () => v ?? false
-                            ? numbersToImport.add(
-                                (
-                                  label,
-                                  value,
-                                ),
-                              )
-                            : numbersToImport.remove(
-                                (
-                                  label,
-                                  value,
-                                ),
-                              ),
-                      ),
-                    );
-                  }),
+                        return CheckboxListTile(
+                          title: Text(label),
+                          subtitle: Text(value),
+                          value: numbersToImport.contains((label, value)),
+                          onChanged: (v) => setState(
+                            () => v ?? false
+                                ? numbersToImport.add(
+                                    (
+                                      label,
+                                      value,
+                                    ),
+                                  )
+                                : numbersToImport.remove(
+                                    (
+                                      label,
+                                      value,
+                                    ),
+                                  ),
+                          ),
+                        );
+                      }),
                 ],
               ),
             );
@@ -1235,14 +1267,14 @@ class _EditPersonState extends State<EditPerson> {
             (newPerson.services?.isEmpty ?? true) &&
             (newPerson.groups?.isEmpty ?? true)
         ? 'يجب تحديد على الأقل واحد من الآتي:\n'
-            '(العنوان - العائلة - خدمة أو أكثر - مجموعة أو أكثر)'
+              '(العنوان - العائلة - خدمة أو أكثر - مجموعة أو أكثر)'
         : null;
   }
 
   String? _validatePhoneField(String? v) =>
       v != null && !PhoneNumberService.I.validate(v)
-          ? 'برجاء ادخال رقم هاتف صالح'
-          : null;
+      ? 'برجاء ادخال رقم هاتف صالح'
+      : null;
 
   List<Service> _combineGroupsWithServices(
     Iterable<Service> services,
@@ -1298,75 +1330,76 @@ class __SelectServicesPageState extends State<_SelectServicesPage>
       body: ServicesHierarchyList(
         listController: listController,
         showClasses: false,
-        groupBuilder: (
-          context, {
-          required service,
-          required group,
-        }) =>
-            StreamBuilder<bool>(
-          initialData: false,
-          stream: selected.map(
-            (selection) =>
-                selection[service.id]?.groups?.singleWhereOrNull(
+        groupBuilder:
+            (
+              context, {
+              required service,
+              required group,
+            }) => StreamBuilder<bool>(
+              initialData: false,
+              stream: selected.map(
+                (selection) =>
+                    selection[service.id]?.groups?.singleWhereOrNull(
                       (g) => g.id == group.id,
                     ) !=
-                null,
-          ),
-          builder: (context, entryChecked) => CheckboxListTile(
-            onChanged: (c) {
-              if (c ?? false) {
-                selected.add({
-                  ...selected.value,
-                  service.id: (selected.value[service.id] ?? service).copyWith(
-                    groups: [
-                      ...selected.value[service.id]?.groups ?? [],
-                      group,
-                    ],
-                  ),
-                });
-              } else {
-                selected.add({
-                  ...selected.value,
-                  service.id: selected.value[service.id]!.copyWith(
-                    groups: selected.value[service.id]!.groups!
-                        .where((o) => o.id != group.id)
-                        .toList(),
-                  ),
-                });
-              }
-            },
-            value: entryChecked.requireData,
-            secondary: ImageObjectWidget(group),
-            title: Text(group.name),
-          ),
-        ),
-        serviceTrailingBuilder: (
-          context,
-          s, {
-          onLongPress,
-          onTap,
-          subtitle,
-          trailing,
-        }) =>
-            StreamBuilder<bool>(
-          initialData: false,
-          stream: selected.map(
-            (selection) => selection.containsKey(s.id),
-          ),
-          builder: (context, entryChecked) => Checkbox(
-            onChanged: (c) {
-              if (c ?? false) {
-                selected.add({
-                  ...selected.value,
-                  s.id: s.copyWith(groups: []),
-                });
-              } else {
-                selected.add({...selected.value..remove(s.id)});
-              }
-            },
-            value: entryChecked.requireData,
-          ),
-        ),
+                    null,
+              ),
+              builder: (context, entryChecked) => CheckboxListTile(
+                onChanged: (c) {
+                  if (c ?? false) {
+                    selected.add({
+                      ...selected.value,
+                      service.id: (selected.value[service.id] ?? service)
+                          .copyWith(
+                            groups: [
+                              ...selected.value[service.id]?.groups ?? [],
+                              group,
+                            ],
+                          ),
+                    });
+                  } else {
+                    selected.add({
+                      ...selected.value,
+                      service.id: selected.value[service.id]!.copyWith(
+                        groups: selected.value[service.id]!.groups!
+                            .where((o) => o.id != group.id)
+                            .toList(),
+                      ),
+                    });
+                  }
+                },
+                value: entryChecked.requireData,
+                secondary: ImageObjectWidget(group),
+                title: Text(group.name),
+              ),
+            ),
+        serviceTrailingBuilder:
+            (
+              context,
+              s, {
+              onLongPress,
+              onTap,
+              subtitle,
+              trailing,
+            }) => StreamBuilder<bool>(
+              initialData: false,
+              stream: selected.map(
+                (selection) => selection.containsKey(s.id),
+              ),
+              builder: (context, entryChecked) => Checkbox(
+                onChanged: (c) {
+                  if (c ?? false) {
+                    selected.add({
+                      ...selected.value,
+                      s.id: s.copyWith(groups: []),
+                    });
+                  } else {
+                    selected.add({...selected.value..remove(s.id)});
+                  }
+                },
+                value: entryChecked.requireData,
+              ),
+            ),
       ),
     );
   }

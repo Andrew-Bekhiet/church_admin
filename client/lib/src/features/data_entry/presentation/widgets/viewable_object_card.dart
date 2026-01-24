@@ -32,9 +32,8 @@ class ViewableObjectCard<T extends Viewable> extends StatelessWidget {
     ViewableObjectWidgetConfig? config,
     ViewableObjectService? viewableObjectService,
     super.key,
-  })  : viewableObjectService =
-            viewableObjectService ?? ViewableObjectService.I,
-        config = config ?? const ViewableObjectWidgetConfig();
+  }) : viewableObjectService = viewableObjectService ?? ViewableObjectService.I,
+       config = config ?? const ViewableObjectWidgetConfig();
 
   @override
   Widget build(BuildContext context) {
@@ -45,8 +44,9 @@ class ViewableObjectCard<T extends Viewable> extends StatelessWidget {
         color: object.color,
         child: InkWell(
           onTap: _onTap != null ? () => _onTap!(object) : null,
-          onLongPress:
-              _onLongPress != null ? () => _onLongPress!(object) : null,
+          onLongPress: _onLongPress != null
+              ? () => _onLongPress!(object)
+              : null,
           child: Padding(
             padding: const EdgeInsets.all(8),
             child: Column(
@@ -55,13 +55,15 @@ class ViewableObjectCard<T extends Viewable> extends StatelessWidget {
               children: [
                 Expanded(
                   child: AbsorbPointer(
-                    child: photo ??
+                    child:
+                        photo ??
                         config.photo ??
                         (object is IImage
                             ? ImageObjectWidget(
                                 object as IImage,
                                 heroTag: heroTag,
-                                circleCrop: circleCrop ??
+                                circleCrop:
+                                    circleCrop ??
                                     config.shouldCircleCrop(object as IImage),
                               )
                             : null),

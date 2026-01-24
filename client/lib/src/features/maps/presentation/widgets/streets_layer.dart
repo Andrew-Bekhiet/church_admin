@@ -16,7 +16,8 @@ class _StreetsLayer extends StatelessWidget {
             (s) => Polyline(
               color: s.color?.withValues(alpha: 0.9) ?? Colors.transparent,
               strokeWidth: 2,
-              points: s.line?.coordinates
+              points:
+                  s.line?.coordinates
                       .map(
                         (e) => LatLng(e.latitude, e.longitude),
                       )

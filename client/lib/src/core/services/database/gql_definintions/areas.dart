@@ -14,33 +14,33 @@ class AreasDAO extends FullCRUDDAO<Area> {
   @override
   late final StreamCountConfig<Area> baseStreamCountConfig =
       const StreamCountConfig(
-    document: documentNodeSubscriptionwatchAreasCount,
-  );
+        document: documentNodeSubscriptionwatchAreasCount,
+      );
 
   @override
   late final StreamSingleByIdConfig<Area> baseStreamSingleByIdConfig =
       StreamSingleByIdConfig(
-    document: documentNodeSubscriptionwatchArea,
-    varsConstructor: _streamSingleByIdVarsConstructor,
-  );
+        document: documentNodeSubscriptionwatchArea,
+        varsConstructor: _streamSingleByIdVarsConstructor,
+      );
   @override
   late final DeleteSingleByIdConfig<Area> baseDeleteSingleByIdConfig =
       DeleteSingleByIdConfig(
-    document: documentNodeMutationdeleteArea,
-    varsConstructor: _deleteSingleByIdVarsConstructor,
-  );
+        document: documentNodeMutationdeleteArea,
+        varsConstructor: _deleteSingleByIdVarsConstructor,
+      );
   @override
   late final UpdateObjectConfig<Area> baseUpdateObjectConfig =
       UpdateObjectConfig(
-    document: documentNodeMutationupdateArea,
-    varsConstructor: _updateAreaVarsConstructor,
-  );
+        document: documentNodeMutationupdateArea,
+        varsConstructor: _updateAreaVarsConstructor,
+      );
   @override
   late final CreateObjectConfig<Area> baseCreateObjectConfig =
       CreateObjectConfig(
-    document: documentNodeMutationinsertArea,
-    varsConstructor: _createAreaVarsConstructor,
-  );
+        document: documentNodeMutationinsertArea,
+        varsConstructor: _createAreaVarsConstructor,
+      );
 
   Json _streamSingleByIdVarsConstructor({required UuidValue id}) =>
       Variables_Subscription_watchArea(id: id).toJson();
@@ -51,11 +51,10 @@ class AreasDAO extends FullCRUDDAO<Area> {
   Json _updateAreaVarsConstructor({
     required Area newObject,
     required Area oldObject,
-  }) =>
-      AreaUpdateHelper(
-        oldArea: oldObject,
-        newArea: newObject,
-      ).variables.toJson();
+  }) => AreaUpdateHelper(
+    oldArea: oldObject,
+    newArea: newObject,
+  ).variables.toJson();
 
   Json _deleteSingleByIdVarsConstructor({required UuidValue id}) =>
       Variables_Mutation_deleteArea(areaId: id).toJson();

@@ -1,7 +1,6 @@
 // Part 18 of the schema
 part of "schema.graphql.dart";
 
-
 abstract class CopyWith_Input_FamiliesSetInput<TRes> {
   factory CopyWith_Input_FamiliesSetInput(
     Input_FamiliesSetInput instance,

@@ -10,8 +10,7 @@ class AddAuthLink extends Link {
   static WebSocketLink defaultCreateWSLink(
     String url,
     SocketClientConfig config,
-  ) =>
-      WebSocketLink(url, config: config);
+  ) => WebSocketLink(url, config: config);
 
   final String url;
   final HttpLink Function(String) createHttpLink;
@@ -48,23 +47,22 @@ class AddAuthLink extends Link {
     _httpLink ??= createHttpLink(url);
 
     return _idTokenStream.whereNotNull().switchMap(
-          (t) => _httpLink!.request(
-            request
-                .updateContextEntry<HttpLinkHeaders>(_getHeadersWithToken(t)),
-            forward,
-          ),
-        );
+      (t) => _httpLink!.request(
+        request.updateContextEntry<HttpLinkHeaders>(_getHeadersWithToken(t)),
+        forward,
+      ),
+    );
   }
 
   HttpLinkHeaders Function(HttpLinkHeaders?) _getHeadersWithToken(
     String token,
   ) =>
       (headers) => HttpLinkHeaders(
-            headers: {
-              ...headers?.headers ?? {},
-              'Authorization': 'Bearer $token',
-            },
-          );
+        headers: {
+          ...headers?.headers ?? {},
+          'Authorization': 'Bearer $token',
+        },
+      );
 
   @visibleForTesting
   Stream<Response> getWebSocketResponse(
@@ -88,8 +86,10 @@ class AddAuthLink extends Link {
 
   SocketClientConfig _createWSConfig() {
     return SocketClientConfig(
-      delayBetweenReconnectionAttempts:
-          const Duration(seconds: 1, milliseconds: 500),
+      delayBetweenReconnectionAttempts: const Duration(
+        seconds: 1,
+        milliseconds: 500,
+      ),
       onConnectionLost: (code, reason) {
         log('Connection lost: $code, reason: $reason');
         return null;

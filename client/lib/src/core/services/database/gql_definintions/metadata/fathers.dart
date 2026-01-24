@@ -10,8 +10,8 @@ class FathersDAO extends DAOBase<Father>
 
   @override
   StreamAllConfig<Father> get baseStreamAllConfig => const StreamAllConfig(
-        document: documentNodeSubscriptionwatchAllFathers,
-      );
+    document: documentNodeSubscriptionwatchAllFathers,
+  );
 
   @override
   StreamSingleByIdConfig<Father> get baseStreamSingleByIdConfig =>
@@ -19,14 +19,14 @@ class FathersDAO extends DAOBase<Father>
 
   @override
   CreateObjectConfig<Father> get baseCreateObjectConfig => CreateObjectConfig(
-        document: documentNodeMutationcreateFather,
-        varsConstructor: _createFatherVarsConstructor,
-        parserFn: db.parser.singleParser(fromJson),
-      );
+    document: documentNodeMutationcreateFather,
+    varsConstructor: _createFatherVarsConstructor,
+    parserFn: db.parser.singleParser(fromJson),
+  );
 
   Json _createFatherVarsConstructor({required Father newObject}) => {
-        'object': {'name': newObject.name},
-      };
+    'object': {'name': newObject.name},
+  };
 
   @override
   PaginatableStreamBase<Father> streamAll({
@@ -38,13 +38,15 @@ class FathersDAO extends DAOBase<Father>
       streamAllConfig: baseStreamAllConfig,
       streamCountConfig: baseStreamCountConfig,
       searchQuery: searchQuery,
-      where: where ??
+      where:
+          where ??
           Stream.value(
             [
               Filter(FatherFields().isHidden, BooleanOperator.is$, false),
             ],
           ),
-      orderBy: orderBy ??
+      orderBy:
+          orderBy ??
           Stream.value(
             [
               OrderBy(field: FatherFields().name),

@@ -62,7 +62,7 @@ enum OrderByValue {
   desc;
 
   String get serializedName => switch (this) {
-        OrderByValue.asc => 'ASC_NULLS_LAST',
-        OrderByValue.desc => 'DESC_NULLS_LAST',
-      };
+    OrderByValue.asc => 'ASC_NULLS_LAST',
+    OrderByValue.desc => 'DESC_NULLS_LAST',
+  };
 }

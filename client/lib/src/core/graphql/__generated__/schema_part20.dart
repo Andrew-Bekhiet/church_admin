@@ -1,7 +1,6 @@
 // Part 20 of the schema
 part of "schema.graphql.dart";
 
-
 abstract class CopyWith_Input_GroupsAggregateBoolExp<TRes> {
   factory CopyWith_Input_GroupsAggregateBoolExp(
     Input_GroupsAggregateBoolExp instance,

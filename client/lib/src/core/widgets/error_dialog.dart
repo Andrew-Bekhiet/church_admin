@@ -34,10 +34,10 @@ class CAErrorDialog extends StatelessWidget {
         content: Directionality(
           textDirection: TextDirection.ltr,
           child: Text(
-            exception is FlutterErrorDetails
-                ? (exception as FlutterErrorDetails).exceptionAsString() +
-                    (exception as FlutterErrorDetails).toString()
-                : exception.toString(),
+            switch (exception) {
+              final FlutterErrorDetails e => '${e.exceptionAsString()}\n$e',
+              _ => exception.toString(),
+            },
             style: TextStyle(
               color: theme.colorScheme.onErrorContainer,
             ),
