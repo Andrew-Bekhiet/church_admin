@@ -9,7 +9,6 @@ part of 'user.dart';
 // FreezedGenerator
 // **************************************************************************
 
-// dart format off
 T _$identity<T>(T value) => value;
 
 /// @nodoc
@@ -49,20 +48,30 @@ mixin _$User {
             (identical(other.blurhash, blurhash) ||
                 other.blurhash == blurhash) &&
             const DeepCollectionEquality().equals(other.adminOn, adminOn) &&
-            const DeepCollectionEquality()
-                .equals(other.permissions, permissions) &&
+            const DeepCollectionEquality().equals(
+              other.permissions,
+              permissions,
+            ) &&
             (identical(other.authId, authId) || other.authId == authId) &&
             (identical(other.lastEdit, lastEdit) ||
                 other.lastEdit == lastEdit) &&
             (identical(other.person, person) || other.person == person) &&
-            const DeepCollectionEquality()
-                .equals(other.servicesHistory, servicesHistory) &&
-            const DeepCollectionEquality()
-                .equals(other.classesHistory, classesHistory) &&
-            const DeepCollectionEquality()
-                .equals(other.groupsHistory, groupsHistory) &&
-            (identical(other.currentUserCanManageThisUser,
-                    currentUserCanManageThisUser) ||
+            const DeepCollectionEquality().equals(
+              other.servicesHistory,
+              servicesHistory,
+            ) &&
+            const DeepCollectionEquality().equals(
+              other.classesHistory,
+              classesHistory,
+            ) &&
+            const DeepCollectionEquality().equals(
+              other.groupsHistory,
+              groupsHistory,
+            ) &&
+            (identical(
+                  other.currentUserCanManageThisUser,
+                  currentUserCanManageThisUser,
+                ) ||
                 other.currentUserCanManageThisUser ==
                     currentUserCanManageThisUser));
   }
@@ -70,21 +79,22 @@ mixin _$User {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      uid,
-      name,
-      email,
-      photoUpdatedAt,
-      blurhash,
-      const DeepCollectionEquality().hash(adminOn),
-      const DeepCollectionEquality().hash(permissions),
-      authId,
-      lastEdit,
-      person,
-      const DeepCollectionEquality().hash(servicesHistory),
-      const DeepCollectionEquality().hash(classesHistory),
-      const DeepCollectionEquality().hash(groupsHistory),
-      currentUserCanManageThisUser);
+    runtimeType,
+    uid,
+    name,
+    email,
+    photoUpdatedAt,
+    blurhash,
+    const DeepCollectionEquality().hash(adminOn),
+    const DeepCollectionEquality().hash(permissions),
+    authId,
+    lastEdit,
+    person,
+    const DeepCollectionEquality().hash(servicesHistory),
+    const DeepCollectionEquality().hash(classesHistory),
+    const DeepCollectionEquality().hash(groupsHistory),
+    currentUserCanManageThisUser,
+  );
 
   @override
   String toString() {
@@ -97,21 +107,22 @@ abstract mixin class $UserCopyWith<$Res> {
   factory $UserCopyWith(User value, $Res Function(User) _then) =
       _$UserCopyWithImpl;
   @useResult
-  $Res call(
-      {String uid,
-      String name,
-      String? email,
-      DateTime? photoUpdatedAt,
-      String? blurhash,
-      List<AdminOnData>? adminOn,
-      PermissionsSet permissions,
-      String? authId,
-      LastRecordedByInfo? lastEdit,
-      Person? person,
-      List<AdminOnData>? servicesHistory,
-      List<AdminOnData>? classesHistory,
-      List<AdminOnData>? groupsHistory,
-      bool currentUserCanManageThisUser});
+  $Res call({
+    String uid,
+    String name,
+    String? email,
+    DateTime? photoUpdatedAt,
+    String? blurhash,
+    List<AdminOnData>? adminOn,
+    PermissionsSet permissions,
+    String? authId,
+    LastRecordedByInfo? lastEdit,
+    Person? person,
+    List<AdminOnData>? servicesHistory,
+    List<AdminOnData>? classesHistory,
+    List<AdminOnData>? groupsHistory,
+    bool currentUserCanManageThisUser,
+  });
 }
 
 /// @nodoc
@@ -141,65 +152,65 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
     Object? groupsHistory = freezed,
     Object? currentUserCanManageThisUser = null,
   }) {
-    return _then(User(
-      uid: null == uid
-          ? _self.uid
-          : uid // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _self.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      email: freezed == email
-          ? _self.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as String?,
-      photoUpdatedAt: freezed == photoUpdatedAt
-          ? _self.photoUpdatedAt
-          : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      blurhash: freezed == blurhash
-          ? _self.blurhash
-          : blurhash // ignore: cast_nullable_to_non_nullable
-              as String?,
-      adminOn: freezed == adminOn
-          ? _self.adminOn
-          : adminOn // ignore: cast_nullable_to_non_nullable
-              as List<AdminOnData>?,
-      permissions: null == permissions
-          ? _self.permissions
-          : permissions // ignore: cast_nullable_to_non_nullable
-              as PermissionsSet,
-      authId: freezed == authId
-          ? _self.authId
-          : authId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      lastEdit: freezed == lastEdit
-          ? _self.lastEdit
-          : lastEdit // ignore: cast_nullable_to_non_nullable
-              as LastRecordedByInfo?,
-      person: freezed == person
-          ? _self.person
-          : person // ignore: cast_nullable_to_non_nullable
-              as Person?,
-      servicesHistory: freezed == servicesHistory
-          ? _self.servicesHistory
-          : servicesHistory // ignore: cast_nullable_to_non_nullable
-              as List<AdminOnData>?,
-      classesHistory: freezed == classesHistory
-          ? _self.classesHistory
-          : classesHistory // ignore: cast_nullable_to_non_nullable
-              as List<AdminOnData>?,
-      groupsHistory: freezed == groupsHistory
-          ? _self.groupsHistory
-          : groupsHistory // ignore: cast_nullable_to_non_nullable
-              as List<AdminOnData>?,
-      currentUserCanManageThisUser: null == currentUserCanManageThisUser
-          ? _self.currentUserCanManageThisUser
-          : currentUserCanManageThisUser // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
+    return _then(
+      User(
+        uid: null == uid
+            ? _self.uid
+            : uid // ignore: cast_nullable_to_non_nullable
+                  as String,
+        name: null == name
+            ? _self.name
+            : name // ignore: cast_nullable_to_non_nullable
+                  as String,
+        email: freezed == email
+            ? _self.email
+            : email // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        photoUpdatedAt: freezed == photoUpdatedAt
+            ? _self.photoUpdatedAt
+            : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
+                  as DateTime?,
+        blurhash: freezed == blurhash
+            ? _self.blurhash
+            : blurhash // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        adminOn: freezed == adminOn
+            ? _self.adminOn
+            : adminOn // ignore: cast_nullable_to_non_nullable
+                  as List<AdminOnData>?,
+        permissions: null == permissions
+            ? _self.permissions
+            : permissions // ignore: cast_nullable_to_non_nullable
+                  as PermissionsSet,
+        authId: freezed == authId
+            ? _self.authId
+            : authId // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        lastEdit: freezed == lastEdit
+            ? _self.lastEdit
+            : lastEdit // ignore: cast_nullable_to_non_nullable
+                  as LastRecordedByInfo?,
+        person: freezed == person
+            ? _self.person
+            : person // ignore: cast_nullable_to_non_nullable
+                  as Person?,
+        servicesHistory: freezed == servicesHistory
+            ? _self.servicesHistory
+            : servicesHistory // ignore: cast_nullable_to_non_nullable
+                  as List<AdminOnData>?,
+        classesHistory: freezed == classesHistory
+            ? _self.classesHistory
+            : classesHistory // ignore: cast_nullable_to_non_nullable
+                  as List<AdminOnData>?,
+        groupsHistory: freezed == groupsHistory
+            ? _self.groupsHistory
+            : groupsHistory // ignore: cast_nullable_to_non_nullable
+                  as List<AdminOnData>?,
+        currentUserCanManageThisUser: null == currentUserCanManageThisUser
+            ? _self.currentUserCanManageThisUser
+            : currentUserCanManageThisUser // ignore: cast_nullable_to_non_nullable
+                  as bool,
+      ),
+    );
   }
 }
-
-// dart format on

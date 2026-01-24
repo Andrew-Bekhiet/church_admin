@@ -6,30 +6,22 @@ part of 'view_area_route.dart';
 // GoRouterGenerator
 // **************************************************************************
 
-List<RouteBase> get $appRoutes => [
-      $viewAreaRoute,
-    ];
+List<RouteBase> get $appRoutes => [$viewAreaRoute];
 
-RouteBase get $viewAreaRoute => GoRouteData.$route(
-      path: '/view_area',
-      factory: _$ViewAreaRoute._fromState,
-    );
+RouteBase get $viewAreaRoute =>
+    GoRouteData.$route(path: '/view_area', factory: $ViewAreaRoute._fromState);
 
-mixin _$ViewAreaRoute on GoRouteData {
+mixin $ViewAreaRoute on GoRouteData {
   static ViewAreaRoute _fromState(GoRouterState state) => ViewAreaRoute(
-        id: state.uri.queryParameters['id']!,
-        $extra: state.extra as Area?,
-      );
+    id: state.uri.queryParameters['id']!,
+    $extra: state.extra as Area?,
+  );
 
   ViewAreaRoute get _self => this as ViewAreaRoute;
 
   @override
-  String get location => GoRouteData.$location(
-        '/view_area',
-        queryParams: {
-          'id': _self.id,
-        },
-      );
+  String get location =>
+      GoRouteData.$location('/view_area', queryParams: {'id': _self.id});
 
   @override
   void go(BuildContext context) => context.go(location, extra: _self.$extra);

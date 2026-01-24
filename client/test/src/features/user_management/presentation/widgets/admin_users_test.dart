@@ -1,10 +1,10 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/misc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:riverpod/riverpod.dart';
 
 import 'admin_users_test.mocks.dart';
 
@@ -19,8 +19,10 @@ void main() {
 
   group('AdminUsers =>', () {
     testWidgets('Displays at most 7 users', (tester) async {
-      final users =
-          List.generate(10, (i) => User(uid: 'uid$i', name: 'name$i'));
+      final users = List.generate(
+        10,
+        (i) => User(uid: 'uid$i', name: 'name$i'),
+      );
 
       await tester.pumpWidget(
         MaterialApp(
@@ -86,8 +88,9 @@ void _setUp() {
 Override _setUpViewableObjectService() {
   final viewableObjectService = MockViewableObjectService();
 
-  when(viewableObjectService.getDefaultIconFor<Person>(any))
-      .thenReturn(Symbols.person);
+  when(
+    viewableObjectService.getDefaultIconFor<Person>(any),
+  ).thenReturn(Symbols.person);
 
   return viewableObjectServiceProvider.overrideWithValue(viewableObjectService);
 }

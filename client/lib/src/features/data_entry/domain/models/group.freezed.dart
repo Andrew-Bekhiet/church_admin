@@ -9,7 +9,6 @@ part of 'group.dart';
 // FreezedGenerator
 // **************************************************************************
 
-// dart format off
 T _$identity<T>(T value) => value;
 
 /// @nodoc
@@ -54,14 +53,20 @@ mixin _$Group {
                 other.validity == validity) &&
             (identical(other.lastEdit, lastEdit) ||
                 other.lastEdit == lastEdit) &&
-            const DeepCollectionEquality()
-                .equals(other.adminUsers, adminUsers) &&
-            (identical(other.attendanceHistoryAggregate,
-                    attendanceHistoryAggregate) ||
+            const DeepCollectionEquality().equals(
+              other.adminUsers,
+              adminUsers,
+            ) &&
+            (identical(
+                  other.attendanceHistoryAggregate,
+                  attendanceHistoryAggregate,
+                ) ||
                 other.attendanceHistoryAggregate ==
                     attendanceHistoryAggregate) &&
-            (identical(other.attendanceDaysConstraintsAggregate,
-                    attendanceDaysConstraintsAggregate) ||
+            (identical(
+                  other.attendanceDaysConstraintsAggregate,
+                  attendanceDaysConstraintsAggregate,
+                ) ||
                 other.attendanceDaysConstraintsAggregate ==
                     attendanceDaysConstraintsAggregate) &&
             (identical(other.userCanEdit, userCanEdit) ||
@@ -71,20 +76,21 @@ mixin _$Group {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      name,
-      color,
-      photoUpdatedAt,
-      blurhash,
-      serviceId,
-      service,
-      validity,
-      lastEdit,
-      const DeepCollectionEquality().hash(adminUsers),
-      attendanceHistoryAggregate,
-      attendanceDaysConstraintsAggregate,
-      userCanEdit);
+    runtimeType,
+    id,
+    name,
+    color,
+    photoUpdatedAt,
+    blurhash,
+    serviceId,
+    service,
+    validity,
+    lastEdit,
+    const DeepCollectionEquality().hash(adminUsers),
+    attendanceHistoryAggregate,
+    attendanceDaysConstraintsAggregate,
+    userCanEdit,
+  );
 
   @override
   String toString() {
@@ -97,20 +103,21 @@ abstract mixin class $GroupCopyWith<$Res> {
   factory $GroupCopyWith(Group value, $Res Function(Group) _then) =
       _$GroupCopyWithImpl;
   @useResult
-  $Res call(
-      {String id,
-      String name,
-      Color? color,
-      DateTime? photoUpdatedAt,
-      String? blurhash,
-      String? serviceId,
-      Service? service,
-      DateTimeRange<DateTime>? validity,
-      LastRecordedByInfo? lastEdit,
-      List<User>? adminUsers,
-      HistoryAggregateData? attendanceHistoryAggregate,
-      HistoryAggregateData? attendanceDaysConstraintsAggregate,
-      bool userCanEdit});
+  $Res call({
+    String id,
+    String name,
+    Color? color,
+    DateTime? photoUpdatedAt,
+    String? blurhash,
+    String? serviceId,
+    Service? service,
+    DateTimeRange<DateTime>? validity,
+    LastRecordedByInfo? lastEdit,
+    List<User>? adminUsers,
+    HistoryAggregateData? attendanceHistoryAggregate,
+    HistoryAggregateData? attendanceDaysConstraintsAggregate,
+    bool userCanEdit,
+  });
 }
 
 /// @nodoc
@@ -139,62 +146,62 @@ class _$GroupCopyWithImpl<$Res> implements $GroupCopyWith<$Res> {
     Object? attendanceDaysConstraintsAggregate = freezed,
     Object? userCanEdit = null,
   }) {
-    return _then(Group(
-      id: null == id
-          ? _self.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _self.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      color: freezed == color
-          ? _self.color
-          : color // ignore: cast_nullable_to_non_nullable
-              as Color?,
-      photoUpdatedAt: freezed == photoUpdatedAt
-          ? _self.photoUpdatedAt
-          : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      blurhash: freezed == blurhash
-          ? _self.blurhash
-          : blurhash // ignore: cast_nullable_to_non_nullable
-              as String?,
-      serviceId: freezed == serviceId
-          ? _self.serviceId
-          : serviceId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      service: freezed == service
-          ? _self.service
-          : service // ignore: cast_nullable_to_non_nullable
-              as Service?,
-      validity: freezed == validity
-          ? _self.validity
-          : validity // ignore: cast_nullable_to_non_nullable
-              as DateTimeRange<DateTime>?,
-      lastEdit: freezed == lastEdit
-          ? _self.lastEdit
-          : lastEdit // ignore: cast_nullable_to_non_nullable
-              as LastRecordedByInfo?,
-      adminUsers: freezed == adminUsers
-          ? _self.adminUsers
-          : adminUsers // ignore: cast_nullable_to_non_nullable
-              as List<User>?,
-      attendanceHistoryAggregate: freezed == attendanceHistoryAggregate
-          ? _self.attendanceHistoryAggregate
-          : attendanceHistoryAggregate // ignore: cast_nullable_to_non_nullable
-              as HistoryAggregateData?,
-      attendanceDaysConstraintsAggregate: freezed ==
-              attendanceDaysConstraintsAggregate
-          ? _self.attendanceDaysConstraintsAggregate
-          : attendanceDaysConstraintsAggregate // ignore: cast_nullable_to_non_nullable
-              as HistoryAggregateData?,
-      userCanEdit: null == userCanEdit
-          ? _self.userCanEdit
-          : userCanEdit // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
+    return _then(
+      Group(
+        id: null == id
+            ? _self.id
+            : id // ignore: cast_nullable_to_non_nullable
+                  as String,
+        name: null == name
+            ? _self.name
+            : name // ignore: cast_nullable_to_non_nullable
+                  as String,
+        color: freezed == color
+            ? _self.color
+            : color // ignore: cast_nullable_to_non_nullable
+                  as Color?,
+        photoUpdatedAt: freezed == photoUpdatedAt
+            ? _self.photoUpdatedAt
+            : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
+                  as DateTime?,
+        blurhash: freezed == blurhash
+            ? _self.blurhash
+            : blurhash // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        serviceId: freezed == serviceId
+            ? _self.serviceId
+            : serviceId // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        service: freezed == service
+            ? _self.service
+            : service // ignore: cast_nullable_to_non_nullable
+                  as Service?,
+        validity: freezed == validity
+            ? _self.validity
+            : validity // ignore: cast_nullable_to_non_nullable
+                  as DateTimeRange<DateTime>?,
+        lastEdit: freezed == lastEdit
+            ? _self.lastEdit
+            : lastEdit // ignore: cast_nullable_to_non_nullable
+                  as LastRecordedByInfo?,
+        adminUsers: freezed == adminUsers
+            ? _self.adminUsers
+            : adminUsers // ignore: cast_nullable_to_non_nullable
+                  as List<User>?,
+        attendanceHistoryAggregate: freezed == attendanceHistoryAggregate
+            ? _self.attendanceHistoryAggregate
+            : attendanceHistoryAggregate // ignore: cast_nullable_to_non_nullable
+                  as HistoryAggregateData?,
+        attendanceDaysConstraintsAggregate:
+            freezed == attendanceDaysConstraintsAggregate
+            ? _self.attendanceDaysConstraintsAggregate
+            : attendanceDaysConstraintsAggregate // ignore: cast_nullable_to_non_nullable
+                  as HistoryAggregateData?,
+        userCanEdit: null == userCanEdit
+            ? _self.userCanEdit
+            : userCanEdit // ignore: cast_nullable_to_non_nullable
+                  as bool,
+      ),
+    );
   }
 }
-
-// dart format on

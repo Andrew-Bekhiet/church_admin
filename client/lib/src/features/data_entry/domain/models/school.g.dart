@@ -32,7 +32,7 @@ class SchoolFields {
   late final List<FieldMetadata<Object>> allFields = [id, name];
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'id': id,
-    'name': name
+    'name': name,
   };
 }
 
@@ -41,11 +41,11 @@ class SchoolFields {
 // **************************************************************************
 
 School _$SchoolFromJson(Map json) => School(
-      id: json['id'] as String? ?? '',
-      name: json['name'] as String? ?? '',
-    );
+  id: json['id'] as String? ?? '',
+  name: json['name'] as String? ?? '',
+);
 
 Map<String, dynamic> _$SchoolToJson(School instance) => <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
-    };
+  'id': instance.id,
+  'name': instance.name,
+};

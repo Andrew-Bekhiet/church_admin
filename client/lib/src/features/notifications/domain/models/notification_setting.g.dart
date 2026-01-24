@@ -14,9 +14,9 @@ NotificationSetting _$NotificationSettingFromJson(Map json) =>
     );
 
 Map<String, dynamic> _$NotificationSettingToJson(
-        NotificationSetting instance) =>
-    <String, dynamic>{
-      'hours': instance.hours,
-      'minutes': instance.minutes,
-      'intervalInDays': instance.intervalInDays,
-    };
+  NotificationSetting instance,
+) => <String, dynamic>{
+  'hours': instance.hours,
+  'minutes': instance.minutes,
+  'intervalInDays': instance.intervalInDays,
+};

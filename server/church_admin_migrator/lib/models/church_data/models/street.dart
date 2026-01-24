@@ -46,7 +46,7 @@ class Street extends DataObject with PhotoObject {
   Map<String, dynamic> getMap() => {
     'Name': name,
     'AreaId': areaId,
-    'Color': color?.value,
+    'Color': color?.toARGB32(),
     'Location': locationPoints.sublist(0),
     'LocationConfirmed': locationConfirmed,
     'LastVisit': lastVisit,

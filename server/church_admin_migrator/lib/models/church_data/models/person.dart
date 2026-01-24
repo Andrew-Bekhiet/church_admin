@@ -162,7 +162,7 @@ class Person extends DataObject with PhotoObject {
     'Phones': (phones.map(MapEntry.new))
       ..removeWhere((k, v) => v.toString().isEmpty),
     'HasPhoto': hasPhoto,
-    'Color': color?.value,
+    'Color': color?.toARGB32(),
     'BirthDate': birthDate,
     'IsStudent': isStudent,
     'StudyYear': studyYear,

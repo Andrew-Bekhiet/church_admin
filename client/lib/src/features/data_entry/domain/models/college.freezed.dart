@@ -9,7 +9,6 @@ part of 'college.dart';
 // FreezedGenerator
 // **************************************************************************
 
-// dart format off
 T _$identity<T>(T value) => value;
 
 /// @nodoc
@@ -70,21 +69,21 @@ class _$CollegeCopyWithImpl<$Res> implements $CollegeCopyWith<$Res> {
     Object? name = null,
     Object? universityId = freezed,
   }) {
-    return _then(College(
-      id: null == id
-          ? _self.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _self.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      universityId: freezed == universityId
-          ? _self.universityId
-          : universityId // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
+    return _then(
+      College(
+        id: null == id
+            ? _self.id
+            : id // ignore: cast_nullable_to_non_nullable
+                  as String,
+        name: null == name
+            ? _self.name
+            : name // ignore: cast_nullable_to_non_nullable
+                  as String,
+        universityId: freezed == universityId
+            ? _self.universityId
+            : universityId // ignore: cast_nullable_to_non_nullable
+                  as String?,
+      ),
+    );
   }
 }
-
-// dart format on

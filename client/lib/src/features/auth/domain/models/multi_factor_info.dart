@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 
+// TODO: support totp
 enum MultiFactorType { phone }
 
 class MultiFactorInfo extends Equatable {

@@ -69,9 +69,9 @@ class _ViewUserState extends State<ViewUser> {
               ),
             ),
             const Divider(thickness: 1),
-            if (AuthBloc.I.state.unwrapped
-                case AuthAuthenticated(userData: User(id: final userId))
-                when userId == user.id)
+            if (AuthBloc.I.state.unwrapped case AuthAuthenticated(
+              userData: User(id: final userId),
+            ) when userId == user.id)
               ListTile(
                 title: FilledButton.icon(
                   style: FilledButton.styleFrom(
@@ -102,19 +102,19 @@ class _ViewUserState extends State<ViewUser> {
     );
   }
 
-  void _attendanceAnalysis(User user) {
-    PersonAnalysisRoute(
+  Future<void> _attendanceAnalysis(User user) async {
+    await PersonAnalysisRoute(
       $extra: PersonAnalysisExtra(
-        editOptionsBuilder: (
-          context,
-          options,
-          void Function(PersonAnalysisOptions) onComplete,
-        ) =>
-            _SelectAttendanceOptions(
-          user: user,
-          onComplete: onComplete,
-          options: options,
-        ),
+        editOptionsBuilder:
+            (
+              context,
+              options,
+              void Function(PersonAnalysisOptions) onComplete,
+            ) => _SelectAttendanceOptions(
+              user: user,
+              onComplete: onComplete,
+              options: options,
+            ),
         person: user.person,
         user: user,
       ),
@@ -170,11 +170,13 @@ class _ViewUserState extends State<ViewUser> {
       await FunctionsService.I.deleteMyAccount();
       AuthBloc.I.add(const SignOut());
     } catch (err, stkTrace) {
-      await LoggingService.I
-          .exception(LogRecord(error: err, stackTrace: stkTrace));
+      await LoggingService.I.exception(
+        LogRecord(error: err, stackTrace: stkTrace),
+      );
 
-      scaffoldMessenger
-          .showErrorSnackBar('حدث خطأ أثناء حذف الحساب، يرجى المحاولة لاحقا');
+      scaffoldMessenger.showErrorSnackBar(
+        'حدث خطأ أثناء حذف الحساب، يرجى المحاولة لاحقا',
+      );
       return;
     }
 
@@ -222,7 +224,8 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
           },
   );
 
-  late DateTimeRange dateRange = widget.options?.dateRange ??
+  late DateTimeRange dateRange =
+      widget.options?.dateRange ??
       DateTimeRange(
         start: DateTime.now().subtract(const Duration(days: 30)),
         end: DateTime.now(),
@@ -259,23 +262,27 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
                       ListTile(
                         title: Text(
                           'الخدمات المسؤول عنها',
-                          style: themeData.textTheme.titleMedium
-                              ?.copyWith(fontWeight: FontWeight.bold),
+                          style: themeData.textTheme.titleMedium?.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         subtitle: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             for (final MapEntry(
                                   key: service,
-                                  value: permissions
-                                ) in (widget.user.adminOn
-                                            ?.where((a) => a.service != null) ??
+                                  value: permissions,
+                                )
+                                in (widget.user.adminOn?.where(
+                                          (a) => a.service != null,
+                                        ) ??
                                         [])
                                     .groupListsBy((a) => a.service!)
                                     .entries)
                               Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 4),
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 4,
+                                ),
                                 child: Card(
                                   child: AdminOnServiceWidget(
                                     serviceData: (service, permissions),
@@ -283,16 +290,19 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
                                         _toggle(s, !selected.value.contains(s)),
                                     trailingBuilder: (context, s) =>
                                         StreamBuilder<bool>(
-                                      initialData: false,
-                                      stream:
-                                          selected.map((o) => o.contains(s)),
-                                      builder: (context, entryChecked) =>
-                                          Checkbox(
-                                        onChanged: (checked) =>
-                                            _toggle(s, checked ?? false),
-                                        value: entryChecked.requireData,
-                                      ),
-                                    ),
+                                          initialData: false,
+                                          stream: selected.map(
+                                            (o) => o.contains(s),
+                                          ),
+                                          builder: (context, entryChecked) =>
+                                              Checkbox(
+                                                onChanged: (checked) => _toggle(
+                                                  s,
+                                                  checked ?? false,
+                                                ),
+                                                value: entryChecked.requireData,
+                                              ),
+                                        ),
                                   ),
                                 ),
                               ),
@@ -302,15 +312,18 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
                       ListTile(
                         title: Text(
                           'المجموعات المسؤول عنها',
-                          style: themeData.textTheme.titleMedium
-                              ?.copyWith(fontWeight: FontWeight.bold),
+                          style: themeData.textTheme.titleMedium?.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         subtitle: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            for (final adminData in widget.user.adminOn
-                                    ?.where((a) => a.group != null) ??
-                                <AdminOnData>[])
+                            for (final adminData
+                                in widget.user.adminOn?.where(
+                                      (a) => a.group != null,
+                                    ) ??
+                                    <AdminOnData>[])
                               Card(
                                 child: ViewableObjectWidget(
                                   adminData.group!,
@@ -325,12 +338,12 @@ class _SelectAttendanceOptionsState extends State<_SelectAttendanceOptions> {
                                     ),
                                     builder: (context, entryChecked) =>
                                         Checkbox(
-                                      onChanged: (checked) => _toggle(
-                                        adminData.group!,
-                                        checked ?? false,
-                                      ),
-                                      value: entryChecked.requireData,
-                                    ),
+                                          onChanged: (checked) => _toggle(
+                                            adminData.group!,
+                                            checked ?? false,
+                                          ),
+                                          value: entryChecked.requireData,
+                                        ),
                                   ),
                                 ),
                               ),

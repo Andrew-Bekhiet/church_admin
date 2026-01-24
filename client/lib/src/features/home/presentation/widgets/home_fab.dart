@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,7 +28,7 @@ class HomeFloatingActionButton extends StatelessWidget {
 
             if (location == null) return;
 
-            context.push(location);
+            unawaited(context.push(location));
           },
         );
       },

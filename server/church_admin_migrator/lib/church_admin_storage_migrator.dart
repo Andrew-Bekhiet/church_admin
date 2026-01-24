@@ -597,7 +597,7 @@ Future<void> _waitForTransferJobsToComplete({
               .where((op) => op.done != true)
               .length;
           logger.d(
-            'Job $jobName: ${inProgressOps} operation(s) still in progress',
+            'Job $jobName: $inProgressOps operation(s) still in progress',
           );
         }
       } catch (e) {

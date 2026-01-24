@@ -9,7 +9,6 @@ part of 'family.dart';
 // FreezedGenerator
 // **************************************************************************
 
-// dart format off
 T _$identity<T>(T value) => value;
 
 /// @nodoc
@@ -62,8 +61,10 @@ mixin _$Family {
                 other.blurhash == blurhash) &&
             const DeepCollectionEquality().equals(other.children, children) &&
             const DeepCollectionEquality().equals(other.parents, parents) &&
-            const DeepCollectionEquality()
-                .equals(other.familyAdminsPhones, familyAdminsPhones) &&
+            const DeepCollectionEquality().equals(
+              other.familyAdminsPhones,
+              familyAdminsPhones,
+            ) &&
             (identical(other.lastEdit, lastEdit) ||
                 other.lastEdit == lastEdit) &&
             (identical(other.lastVisit, lastVisit) ||
@@ -77,25 +78,26 @@ mixin _$Family {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      name,
-      address,
-      status,
-      marriageDate,
-      deceasedSpouseName,
-      church,
-      notes,
-      color,
-      photoUpdatedAt,
-      blurhash,
-      const DeepCollectionEquality().hash(children),
-      const DeepCollectionEquality().hash(parents),
-      const DeepCollectionEquality().hash(familyAdminsPhones),
-      lastEdit,
-      lastVisit,
-      lastFatherVisit,
-      userCanEdit);
+    runtimeType,
+    id,
+    name,
+    address,
+    status,
+    marriageDate,
+    deceasedSpouseName,
+    church,
+    notes,
+    color,
+    photoUpdatedAt,
+    blurhash,
+    const DeepCollectionEquality().hash(children),
+    const DeepCollectionEquality().hash(parents),
+    const DeepCollectionEquality().hash(familyAdminsPhones),
+    lastEdit,
+    lastVisit,
+    lastFatherVisit,
+    userCanEdit,
+  );
 
   @override
   String toString() {
@@ -108,25 +110,26 @@ abstract mixin class $FamilyCopyWith<$Res> {
   factory $FamilyCopyWith(Family value, $Res Function(Family) _then) =
       _$FamilyCopyWithImpl;
   @useResult
-  $Res call(
-      {String id,
-      String name,
-      Address? address,
-      MartialStatus status,
-      DateTime? marriageDate,
-      String? deceasedSpouseName,
-      Church? church,
-      String? notes,
-      Color? color,
-      DateTime? photoUpdatedAt,
-      String? blurhash,
-      List<Family>? children,
-      List<Family>? parents,
-      LastRecordedByInfo? lastEdit,
-      LastRecordedByInfo? lastVisit,
-      LastRecordedByInfo? lastFatherVisit,
-      Map<String, dynamic>? familyAdminsPhones,
-      bool userCanEdit});
+  $Res call({
+    String id,
+    String name,
+    Address? address,
+    MartialStatus status,
+    DateTime? marriageDate,
+    String? deceasedSpouseName,
+    Church? church,
+    String? notes,
+    Color? color,
+    DateTime? photoUpdatedAt,
+    String? blurhash,
+    List<Family>? children,
+    List<Family>? parents,
+    LastRecordedByInfo? lastEdit,
+    LastRecordedByInfo? lastVisit,
+    LastRecordedByInfo? lastFatherVisit,
+    Map<String, dynamic>? familyAdminsPhones,
+    bool userCanEdit,
+  });
 }
 
 /// @nodoc
@@ -160,81 +163,81 @@ class _$FamilyCopyWithImpl<$Res> implements $FamilyCopyWith<$Res> {
     Object? familyAdminsPhones = freezed,
     Object? userCanEdit = null,
   }) {
-    return _then(Family(
-      id: null == id
-          ? _self.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _self.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      address: freezed == address
-          ? _self.address
-          : address // ignore: cast_nullable_to_non_nullable
-              as Address?,
-      status: null == status
-          ? _self.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as MartialStatus,
-      marriageDate: freezed == marriageDate
-          ? _self.marriageDate
-          : marriageDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      deceasedSpouseName: freezed == deceasedSpouseName
-          ? _self.deceasedSpouseName
-          : deceasedSpouseName // ignore: cast_nullable_to_non_nullable
-              as String?,
-      church: freezed == church
-          ? _self.church
-          : church // ignore: cast_nullable_to_non_nullable
-              as Church?,
-      notes: freezed == notes
-          ? _self.notes
-          : notes // ignore: cast_nullable_to_non_nullable
-              as String?,
-      color: freezed == color
-          ? _self.color
-          : color // ignore: cast_nullable_to_non_nullable
-              as Color?,
-      photoUpdatedAt: freezed == photoUpdatedAt
-          ? _self.photoUpdatedAt
-          : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      blurhash: freezed == blurhash
-          ? _self.blurhash
-          : blurhash // ignore: cast_nullable_to_non_nullable
-              as String?,
-      children: freezed == children
-          ? _self.children
-          : children // ignore: cast_nullable_to_non_nullable
-              as List<Family>?,
-      parents: freezed == parents
-          ? _self.parents
-          : parents // ignore: cast_nullable_to_non_nullable
-              as List<Family>?,
-      lastEdit: freezed == lastEdit
-          ? _self.lastEdit
-          : lastEdit // ignore: cast_nullable_to_non_nullable
-              as LastRecordedByInfo?,
-      lastVisit: freezed == lastVisit
-          ? _self.lastVisit
-          : lastVisit // ignore: cast_nullable_to_non_nullable
-              as LastRecordedByInfo?,
-      lastFatherVisit: freezed == lastFatherVisit
-          ? _self.lastFatherVisit
-          : lastFatherVisit // ignore: cast_nullable_to_non_nullable
-              as LastRecordedByInfo?,
-      familyAdminsPhones: freezed == familyAdminsPhones
-          ? _self.familyAdminsPhones
-          : familyAdminsPhones // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
-      userCanEdit: null == userCanEdit
-          ? _self.userCanEdit
-          : userCanEdit // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
+    return _then(
+      Family(
+        id: null == id
+            ? _self.id
+            : id // ignore: cast_nullable_to_non_nullable
+                  as String,
+        name: null == name
+            ? _self.name
+            : name // ignore: cast_nullable_to_non_nullable
+                  as String,
+        address: freezed == address
+            ? _self.address
+            : address // ignore: cast_nullable_to_non_nullable
+                  as Address?,
+        status: null == status
+            ? _self.status
+            : status // ignore: cast_nullable_to_non_nullable
+                  as MartialStatus,
+        marriageDate: freezed == marriageDate
+            ? _self.marriageDate
+            : marriageDate // ignore: cast_nullable_to_non_nullable
+                  as DateTime?,
+        deceasedSpouseName: freezed == deceasedSpouseName
+            ? _self.deceasedSpouseName
+            : deceasedSpouseName // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        church: freezed == church
+            ? _self.church
+            : church // ignore: cast_nullable_to_non_nullable
+                  as Church?,
+        notes: freezed == notes
+            ? _self.notes
+            : notes // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        color: freezed == color
+            ? _self.color
+            : color // ignore: cast_nullable_to_non_nullable
+                  as Color?,
+        photoUpdatedAt: freezed == photoUpdatedAt
+            ? _self.photoUpdatedAt
+            : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
+                  as DateTime?,
+        blurhash: freezed == blurhash
+            ? _self.blurhash
+            : blurhash // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        children: freezed == children
+            ? _self.children
+            : children // ignore: cast_nullable_to_non_nullable
+                  as List<Family>?,
+        parents: freezed == parents
+            ? _self.parents
+            : parents // ignore: cast_nullable_to_non_nullable
+                  as List<Family>?,
+        lastEdit: freezed == lastEdit
+            ? _self.lastEdit
+            : lastEdit // ignore: cast_nullable_to_non_nullable
+                  as LastRecordedByInfo?,
+        lastVisit: freezed == lastVisit
+            ? _self.lastVisit
+            : lastVisit // ignore: cast_nullable_to_non_nullable
+                  as LastRecordedByInfo?,
+        lastFatherVisit: freezed == lastFatherVisit
+            ? _self.lastFatherVisit
+            : lastFatherVisit // ignore: cast_nullable_to_non_nullable
+                  as LastRecordedByInfo?,
+        familyAdminsPhones: freezed == familyAdminsPhones
+            ? _self.familyAdminsPhones
+            : familyAdminsPhones // ignore: cast_nullable_to_non_nullable
+                  as Map<String, dynamic>?,
+        userCanEdit: null == userCanEdit
+            ? _self.userCanEdit
+            : userCanEdit // ignore: cast_nullable_to_non_nullable
+                  as bool,
+      ),
+    );
   }
 }
-
-// dart format on

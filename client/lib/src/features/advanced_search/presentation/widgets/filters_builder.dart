@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
@@ -22,8 +24,9 @@ class FiltersBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final filterableFields =
-        queryableType.fieldsMetadata.where((field) => !field.isCodeOnly);
+    final filterableFields = queryableType.fieldsMetadata.where(
+      (field) => !field.isCodeOnly,
+    );
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -39,11 +42,13 @@ class FiltersBuilder extends StatelessWidget {
                   !(field.fieldQueryableType?.isSelectableAsReference ??
                       true)) {
                 final newField = field.redirectTo(
-                  field.fieldQueryableType!.fieldsMetadata.firstWhere((f) =>
-                      !f.isCodeOnly &&
-                      (f.operators.isNotEmpty ||
-                          (f.fieldQueryableType?.isSelectableAsReference ??
-                              false))),
+                  field.fieldQueryableType!.fieldsMetadata.firstWhere(
+                    (f) =>
+                        !f.isCodeOnly &&
+                        (f.operators.isNotEmpty ||
+                            (f.fieldQueryableType?.isSelectableAsReference ??
+                                false)),
+                  ),
                 );
                 newFilter = Filter(
                   newField,
@@ -98,7 +103,8 @@ class FiltersBuilder extends StatelessWidget {
             ]),
             icon: const Icon(Symbols.filter_alt),
             label: Text(
-                'إضافة شرط ل${queryableType.label.replaceFirst(RegExp('^ال'), 'ل')}'),
+              'إضافة شرط ل${queryableType.label.replaceFirst(RegExp('^ال'), 'ل')}',
+            ),
           ),
       ],
     );
@@ -213,7 +219,7 @@ class FilterBuilder extends StatelessWidget {
                   right: BorderSide(
                     color:
                         theme.inputDecorationTheme.border?.borderSide.color ??
-                            theme.colorScheme.primary,
+                        theme.colorScheme.primary,
                     width: 1.2,
                   ),
                 ),
@@ -225,15 +231,21 @@ class FilterBuilder extends StatelessWidget {
                   if (field.operators.isEmpty ||
                       !(field.fieldQueryableType?.isSelectableAsReference ??
                           true)) {
-                    onFieldChanged(parentField.redirectTo(
-                      field.redirectTo(field.fieldQueryableType!.fieldsMetadata
-                          .firstWhere((f) =>
-                              !f.isCodeOnly &&
-                              (f.operators.isNotEmpty ||
-                                  (f.fieldQueryableType
-                                          ?.isSelectableAsReference ??
-                                      false)))),
-                    ));
+                    onFieldChanged(
+                      parentField.redirectTo(
+                        field.redirectTo(
+                          field.fieldQueryableType!.fieldsMetadata.firstWhere(
+                            (f) =>
+                                !f.isCodeOnly &&
+                                (f.operators.isNotEmpty ||
+                                    (f
+                                            .fieldQueryableType
+                                            ?.isSelectableAsReference ??
+                                        false)),
+                          ),
+                        ),
+                      ),
+                    );
                   } else {
                     onFieldChanged(parentField.redirectTo(newField));
                   }
@@ -346,16 +358,16 @@ class _ValueInputWidget extends StatelessWidget {
         );
 
       case FieldMetadata<LabeledEnum>(
-            fieldQueryableType: QueryableType(:final enumValues, isEnum: true)
+            fieldQueryableType: QueryableType(:final enumValues, isEnum: true),
           )
           when operator is MultiSelectOperator:
         widget = MultiObjectSelectionField<ViewableEnumWithID>(
           listController: (s) => ViewableObjectListController(
             objectsPaginatableStream:
                 ViewableEnumWithID.createPaginatableStream(
-              enumValues,
-              s,
-            ),
+                  enumValues,
+                  s,
+                ),
           ),
           builder: (context, state) {
             if (state.value != null) {
@@ -373,7 +385,7 @@ class _ValueInputWidget extends StatelessWidget {
         );
 
       case FieldMetadata<ViewableWithID>(
-            fieldQueryableType: QueryableType(:final dao?)
+            fieldQueryableType: QueryableType(:final dao?),
           )
           when operator is MultiSelectOperator:
         widget = MultiObjectSelectionField<ViewableWithID>(
@@ -397,16 +409,20 @@ class _ValueInputWidget extends StatelessWidget {
 
       default:
         if (kDebugMode) {
-          LoggingService.I.warning(LogRecord(
-            moduleName: 'FilterBuilder',
-            data: {
-              'field': field.toJson(),
-              'operator': operator.serializationId,
-              'value': value.toString(),
-            },
-            message:
-                'No widget for type ${field.fieldQueryableType} and operator $operator',
-          ));
+          unawaited(
+            LoggingService.I.warning(
+              LogRecord(
+                moduleName: 'FilterBuilder',
+                data: {
+                  'field': field.toJson(),
+                  'operator': operator.serializationId,
+                  'value': value.toString(),
+                },
+                message:
+                    'No widget for type ${field.fieldQueryableType} and operator $operator',
+              ),
+            ),
+          );
         }
 
         return const SizedBox.shrink();
@@ -419,7 +435,8 @@ class _ValueInputWidget extends StatelessWidget {
       decoration: BoxDecoration(
         border: Border(
           right: BorderSide(
-            color: theme.inputDecorationTheme.border?.borderSide.color ??
+            color:
+                theme.inputDecorationTheme.border?.borderSide.color ??
                 theme.colorScheme.primary,
             width: 1.2,
           ),
@@ -457,8 +474,9 @@ class _SelectPolygon extends StatelessWidget {
                 initialObject: initialArea,
                 getObjectPoints: (p0) => p0.bounds?.coordinates,
                 overrideResponseObjects: (response, areaStream) {
-                  return areaStream
-                      .map((value) => response!.copyWith(areas: {value}));
+                  return areaStream.map(
+                    (value) => response!.copyWith(areas: {value}),
+                  );
                 },
                 onModify: (newCoords, resultArea) =>
                     resultArea.copyWith(bounds: Polygon(newCoords)),
@@ -502,7 +520,8 @@ class BirthdayFilter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //2025-07-05T
-    final [month, day] = value?.split('-') ??
+    final [month, day] =
+        value?.split('-') ??
         DateTime.now()
             .toIso8601String()
             .split('T')[0]
@@ -523,8 +542,9 @@ class BirthdayFilter extends StatelessWidget {
                 .map(
                   (i) => DropdownMenuItem(
                     value: i,
-                    child:
-                        Text(DateFormat.MMMM('ar-EG').format(DateTime(0, i))),
+                    child: Text(
+                      DateFormat.MMMM('ar-EG').format(DateTime(0, i)),
+                    ),
                   ),
                 )
                 .toList(),

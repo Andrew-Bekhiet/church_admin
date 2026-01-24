@@ -6,26 +6,21 @@ part of 'edit_person_route.dart';
 // GoRouterGenerator
 // **************************************************************************
 
-List<RouteBase> get $appRoutes => [
-      $editPersonRoute,
-    ];
+List<RouteBase> get $appRoutes => [$editPersonRoute];
 
 RouteBase get $editPersonRoute => GoRouteData.$route(
-      path: '/edit_person',
-      factory: _$EditPersonRoute._fromState,
-    );
+  path: '/edit_person',
+  factory: $EditPersonRoute._fromState,
+);
 
-mixin _$EditPersonRoute on GoRouteData {
-  static EditPersonRoute _fromState(GoRouterState state) => EditPersonRoute(
-        $extra: state.extra as EditPersonExtra?,
-      );
+mixin $EditPersonRoute on GoRouteData {
+  static EditPersonRoute _fromState(GoRouterState state) =>
+      EditPersonRoute($extra: state.extra as EditPersonExtra?);
 
   EditPersonRoute get _self => this as EditPersonRoute;
 
   @override
-  String get location => GoRouteData.$location(
-        '/edit_person',
-      );
+  String get location => GoRouteData.$location('/edit_person');
 
   @override
   void go(BuildContext context) => context.go(location, extra: _self.$extra);
@@ -48,30 +43,29 @@ mixin _$EditPersonRoute on GoRouteData {
 // **************************************************************************
 
 EditPersonExtra _$EditPersonExtraFromJson(Map json) => EditPersonExtra(
-      person: json['person'] == null
-          ? null
-          : Person.fromJson(Map<String, Object?>.from(json['person'] as Map)),
-      family: json['family'] == null
-          ? null
-          : Family.fromJson(Map<String, Object?>.from(json['family'] as Map)),
-      street: json['street'] == null
-          ? null
-          : Street.fromJson(Map<String, Object?>.from(json['street'] as Map)),
-      area: json['area'] == null
-          ? null
-          : Area.fromJson(Map<String, Object?>.from(json['area'] as Map)),
-      service: json['service'] == null
-          ? null
-          : Service.fromJson(Map<String, Object?>.from(json['service'] as Map)),
-      group: json['group'] == null
-          ? null
-          : Group.fromJson(Map<String, Object?>.from(json['group'] as Map)),
-      studyYear: json['studyYear'] == null
-          ? null
-          : StudyYear.fromJson(
-              Map<String, Object?>.from(json['studyYear'] as Map)),
-      gender: json['gender'] as bool?,
-    );
+  person: json['person'] == null
+      ? null
+      : Person.fromJson(Map<String, Object?>.from(json['person'] as Map)),
+  family: json['family'] == null
+      ? null
+      : Family.fromJson(Map<String, Object?>.from(json['family'] as Map)),
+  street: json['street'] == null
+      ? null
+      : Street.fromJson(Map<String, Object?>.from(json['street'] as Map)),
+  area: json['area'] == null
+      ? null
+      : Area.fromJson(Map<String, Object?>.from(json['area'] as Map)),
+  service: json['service'] == null
+      ? null
+      : Service.fromJson(Map<String, Object?>.from(json['service'] as Map)),
+  group: json['group'] == null
+      ? null
+      : Group.fromJson(Map<String, Object?>.from(json['group'] as Map)),
+  studyYear: json['studyYear'] == null
+      ? null
+      : StudyYear.fromJson(Map<String, Object?>.from(json['studyYear'] as Map)),
+  gender: json['gender'] as bool?,
+);
 
 Map<String, dynamic> _$EditPersonExtraToJson(EditPersonExtra instance) =>
     <String, dynamic>{

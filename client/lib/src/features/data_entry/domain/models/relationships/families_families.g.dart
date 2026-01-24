@@ -51,13 +51,13 @@ class FamiliesFamiliesFields {
     parent,
     child,
     parentFamilyId,
-    childFamilyId
+    childFamilyId,
   ];
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'parent': parent,
     'child': child,
     'parentFamilyId': parentFamilyId,
-    'childFamilyId': childFamilyId
+    'childFamilyId': childFamilyId,
   };
 }
 
@@ -66,11 +66,11 @@ class FamiliesFamiliesFields {
 // **************************************************************************
 
 FamiliesFamilies _$FamiliesFamiliesFromJson(Map json) => FamiliesFamilies(
-      parent: Family.fromJson(Map<String, Object?>.from(json['parent'] as Map)),
-      child: Family.fromJson(Map<String, Object?>.from(json['child'] as Map)),
-      parentFamilyId: json['parentFamilyId'] as String,
-      childFamilyId: json['childFamilyId'] as String,
-    );
+  parent: Family.fromJson(Map<String, Object?>.from(json['parent'] as Map)),
+  child: Family.fromJson(Map<String, Object?>.from(json['child'] as Map)),
+  parentFamilyId: json['parentFamilyId'] as String,
+  childFamilyId: json['childFamilyId'] as String,
+);
 
 Map<String, dynamic> _$FamiliesFamiliesToJson(FamiliesFamilies instance) =>
     <String, dynamic>{

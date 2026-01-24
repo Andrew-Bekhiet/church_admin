@@ -1,12 +1,12 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:derived_colors/derived_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/misc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:riverpod/riverpod.dart';
 
 import 'viewable_object_app_bar_test.mocks.dart';
 
@@ -15,8 +15,8 @@ import 'viewable_object_app_bar_test.mocks.dart';
   MockSpec<ViewableObjectService>(),
   MockSpec<ImageUrlCacheService>(),
 ])
-void main() {
-  loadAppFonts();
+Future<void> main() async {
+  await loadAppFonts();
 
   setUp(_setUp);
   tearDown(resetGlobalProviderContainer);
@@ -197,8 +197,9 @@ void _setUp() {
 Override _setUpViewableObjectService() {
   final viewableObjectService = MockViewableObjectService();
 
-  when(viewableObjectService.getDefaultIconFor<Person>(any))
-      .thenReturn(Symbols.person);
+  when(
+    viewableObjectService.getDefaultIconFor<Person>(any),
+  ).thenReturn(Symbols.person);
 
   return viewableObjectServiceProvider.overrideWithValue(viewableObjectService);
 }

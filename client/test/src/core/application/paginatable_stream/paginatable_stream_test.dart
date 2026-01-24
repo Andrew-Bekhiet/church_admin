@@ -15,14 +15,16 @@ void main() {
 
   setUp(() {
     testData = List.generate(
-        100, (index) => 'Item ${index.toString().padLeft(2, '0')}');
+      100,
+      (index) => 'Item ${index.toString().padLeft(2, '0')}',
+    );
     searchController = BehaviorSubject<String?>.seeded(null);
   });
 
-  tearDown(() {
-    paginatableStream.dispose();
+  tearDown(() async {
+    await paginatableStream.dispose();
     if (!searchController.isClosed) {
-      searchController.close();
+      await searchController.close();
     }
   });
 

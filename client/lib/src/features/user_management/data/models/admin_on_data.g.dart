@@ -20,7 +20,7 @@ class AdminOnDataFields {
     operators: {
       ...MultiSelectOperator.values,
       PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
+      PrimitiveOperator.isNotNull,
     },
   );
 
@@ -33,7 +33,7 @@ class AdminOnDataFields {
     operators: {
       ...BooleanOperator.values,
       PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
+      PrimitiveOperator.isNotNull,
     },
   );
 
@@ -46,7 +46,7 @@ class AdminOnDataFields {
     operators: {
       ...BooleanOperator.values,
       PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
+      PrimitiveOperator.isNotNull,
     },
   );
 
@@ -59,23 +59,23 @@ class AdminOnDataFields {
     operators: {
       ...MultiSelectOperator.values,
       PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
+      PrimitiveOperator.isNotNull,
     },
   );
 
   final FieldMetadata<StudyYear> serviceStudyYearData =
       FieldMetadata<StudyYear>(
-    getValue: (obj) => obj is AdminOnData ? obj.serviceStudyYearData : null,
-    parentType: AdminOnData,
-    name: 'serviceStudyYearData',
-    label: 'السنة الدراسية',
-    isCodeOnly: false,
-    operators: {
-      ...MultiSelectOperator.values,
-      PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
-    },
-  );
+        getValue: (obj) => obj is AdminOnData ? obj.serviceStudyYearData : null,
+        parentType: AdminOnData,
+        name: 'serviceStudyYearData',
+        label: 'السنة الدراسية',
+        isCodeOnly: false,
+        operators: {
+          ...MultiSelectOperator.values,
+          PrimitiveOperator.isNull,
+          PrimitiveOperator.isNotNull,
+        },
+      );
 
   final FieldMetadata<bool> serviceGender = FieldMetadata<bool>(
     getValue: (obj) => obj is AdminOnData ? obj.serviceGender : null,
@@ -86,7 +86,7 @@ class AdminOnDataFields {
     operators: {
       ...BooleanOperator.values,
       PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
+      PrimitiveOperator.isNotNull,
     },
   );
 
@@ -99,7 +99,7 @@ class AdminOnDataFields {
     operators: {
       ...BooleanOperator.values,
       PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
+      PrimitiveOperator.isNotNull,
     },
   );
 
@@ -112,7 +112,7 @@ class AdminOnDataFields {
     operators: {
       ...BooleanOperator.values,
       PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
+      PrimitiveOperator.isNotNull,
     },
   );
 
@@ -126,7 +126,7 @@ class AdminOnDataFields {
     operators: {
       ...BooleanOperator.values,
       PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
+      PrimitiveOperator.isNotNull,
     },
   );
 
@@ -149,7 +149,7 @@ class AdminOnDataFields {
     operators: {
       ...MultiSelectOperator.values,
       PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
+      PrimitiveOperator.isNotNull,
     },
   );
 
@@ -162,7 +162,7 @@ class AdminOnDataFields {
     operators: {
       ...BooleanOperator.values,
       PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
+      PrimitiveOperator.isNotNull,
     },
   );
 
@@ -175,7 +175,7 @@ class AdminOnDataFields {
     operators: {
       ...BooleanOperator.values,
       PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
+      PrimitiveOperator.isNotNull,
     },
   );
 
@@ -189,7 +189,7 @@ class AdminOnDataFields {
     operators: {
       ...BooleanOperator.values,
       PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
+      PrimitiveOperator.isNotNull,
     },
   );
 
@@ -202,7 +202,7 @@ class AdminOnDataFields {
     operators: {
       ...MultiSelectOperator.values,
       PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
+      PrimitiveOperator.isNotNull,
     },
   );
 
@@ -221,7 +221,7 @@ class AdminOnDataFields {
     groupAllowEdit,
     groupAdminOnUsers,
     groupWriteRelatedFamilies,
-    user
+    user,
   ];
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'area': area,
@@ -238,7 +238,7 @@ class AdminOnDataFields {
     'groupAllowEdit': groupAllowEdit,
     'groupAdminOnUsers': groupAdminOnUsers,
     'groupWriteRelatedFamilies': groupWriteRelatedFamilies,
-    'user': user
+    'user': user,
   };
 }
 
@@ -247,37 +247,39 @@ class AdminOnDataFields {
 // **************************************************************************
 
 AdminOnData _$AdminOnDataFromJson(Map json) => AdminOnData(
-      permissionId: json['permissionId'] as String,
-      area: json['area'] == null
-          ? null
-          : Area.fromJson(Map<String, Object?>.from(json['area'] as Map)),
-      areaAllowEdit: json['areaAllowEdit'] as bool?,
-      areaAdminOnUsers: json['areaAdminOnUsers'] as bool?,
-      service: json['service'] == null
-          ? null
-          : Service.fromJson(Map<String, Object?>.from(json['service'] as Map)),
-      serviceStudyYearData: json['serviceStudyYearData'] == null
-          ? null
-          : StudyYear.fromJson(
-              Map<String, Object?>.from(json['serviceStudyYearData'] as Map)),
-      serviceGender: json['serviceGender'] as bool?,
-      serviceAllowEdit: json['serviceAllowEdit'] as bool?,
-      serviceAdminOnUsers: json['serviceAdminOnUsers'] as bool?,
-      serviceWriteRelatedFamilies: json['serviceWriteRelatedFamilies'] as bool?,
-      classes: (json['classes'] as List<dynamic>?)
-              ?.map((e) => Class.fromJson(Map<String, Object?>.from(e as Map)))
-              .toList() ??
-          const [],
-      group: json['group'] == null
-          ? null
-          : Group.fromJson(Map<String, Object?>.from(json['group'] as Map)),
-      groupAllowEdit: json['groupAllowEdit'] as bool?,
-      groupAdminOnUsers: json['groupAdminOnUsers'] as bool?,
-      groupWriteRelatedFamilies: json['groupWriteRelatedFamilies'] as bool?,
-      user: json['user'] == null
-          ? null
-          : User.fromJson(Map<String, Object?>.from(json['user'] as Map)),
-    );
+  permissionId: json['permissionId'] as String,
+  area: json['area'] == null
+      ? null
+      : Area.fromJson(Map<String, Object?>.from(json['area'] as Map)),
+  areaAllowEdit: json['areaAllowEdit'] as bool?,
+  areaAdminOnUsers: json['areaAdminOnUsers'] as bool?,
+  service: json['service'] == null
+      ? null
+      : Service.fromJson(Map<String, Object?>.from(json['service'] as Map)),
+  serviceStudyYearData: json['serviceStudyYearData'] == null
+      ? null
+      : StudyYear.fromJson(
+          Map<String, Object?>.from(json['serviceStudyYearData'] as Map),
+        ),
+  serviceGender: json['serviceGender'] as bool?,
+  serviceAllowEdit: json['serviceAllowEdit'] as bool?,
+  serviceAdminOnUsers: json['serviceAdminOnUsers'] as bool?,
+  serviceWriteRelatedFamilies: json['serviceWriteRelatedFamilies'] as bool?,
+  classes:
+      (json['classes'] as List<dynamic>?)
+          ?.map((e) => Class.fromJson(Map<String, Object?>.from(e as Map)))
+          .toList() ??
+      const [],
+  group: json['group'] == null
+      ? null
+      : Group.fromJson(Map<String, Object?>.from(json['group'] as Map)),
+  groupAllowEdit: json['groupAllowEdit'] as bool?,
+  groupAdminOnUsers: json['groupAdminOnUsers'] as bool?,
+  groupWriteRelatedFamilies: json['groupWriteRelatedFamilies'] as bool?,
+  user: json['user'] == null
+      ? null
+      : User.fromJson(Map<String, Object?>.from(json['user'] as Map)),
+);
 
 Map<String, dynamic> _$AdminOnDataToJson(AdminOnData instance) =>
     <String, dynamic>{

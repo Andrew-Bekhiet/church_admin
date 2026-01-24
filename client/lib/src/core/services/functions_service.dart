@@ -33,15 +33,20 @@ class FunctionsService {
     String? contentType,
   }) async {
     final hash = Object.hash(table, id, contentType);
-    _pendingDownloadUrls[hash] ??= httpsCallable('getDownloadUrl').call(
-        {'table': table, 'id': id, 'contentType': contentType}).then((value) {
-      _pendingDownloadUrls.remove(hash);
-      return value.data;
-    });
+    _pendingDownloadUrls[hash] ??= httpsCallable('getDownloadUrl')
+        .call({'table': table, 'id': id, 'contentType': contentType})
+        .then((value) {
+          // Map.remove returns the removed value
+          // which the analyzer marks as unawaited
+          unawaited(_pendingDownloadUrls.remove(hash));
+          return value.data;
+        });
 
     try {
       return await _pendingDownloadUrls[hash]!;
     } catch (e) {
+      // Map.remove returns the removed value
+      // which the analyzer marks as unawaited
       unawaited(_pendingDownloadUrls.remove(hash));
       rethrow;
     }
@@ -54,8 +59,7 @@ class FunctionsService {
   }) async {
     return (await httpsCallable(
       'getUploadUrl',
-    ).call({'table': table, 'id': id, 'contentType': contentType}))
-        .data;
+    ).call({'table': table, 'id': id, 'contentType': contentType})).data;
   }
 
   Future<void> deletePhoto(String table, String id) async {
@@ -98,7 +102,7 @@ class FunctionsService {
       data: fileStream,
       options: Options(
         contentType: contentType,
-        headers: {if (fileLength != null) 'content-length': fileLength},
+        headers: {'content-length': ?fileLength},
       ),
       onSendProgress: onSendProgress,
     );

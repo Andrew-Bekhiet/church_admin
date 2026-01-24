@@ -41,7 +41,7 @@ class UserSettingsService extends BlocObserver {
     }
 
     if (currentState is! AuthAuthenticated && nextState is AuthAuthenticated) {
-      setupDefaults();
+      unawaited(setupDefaults());
     }
   }
 

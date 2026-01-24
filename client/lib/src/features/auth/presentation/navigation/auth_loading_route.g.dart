@@ -6,23 +6,19 @@ part of 'auth_loading_route.dart';
 // GoRouterGenerator
 // **************************************************************************
 
-List<RouteBase> get $appRoutes => [
-      $authLoadingRoute,
-    ];
+List<RouteBase> get $appRoutes => [$authLoadingRoute];
 
 RouteBase get $authLoadingRoute => GoRouteData.$route(
-      path: '/auth_loading',
-      factory: _$AuthLoadingRoute._fromState,
-    );
+  path: '/auth_loading',
+  factory: $AuthLoadingRoute._fromState,
+);
 
-mixin _$AuthLoadingRoute on GoRouteData {
+mixin $AuthLoadingRoute on GoRouteData {
   static AuthLoadingRoute _fromState(GoRouterState state) =>
       const AuthLoadingRoute();
 
   @override
-  String get location => GoRouteData.$location(
-        '/auth_loading',
-      );
+  String get location => GoRouteData.$location('/auth_loading');
 
   @override
   void go(BuildContext context) => context.go(location);

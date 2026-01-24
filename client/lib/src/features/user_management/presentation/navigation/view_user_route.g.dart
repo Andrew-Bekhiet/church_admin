@@ -6,30 +6,22 @@ part of 'view_user_route.dart';
 // GoRouterGenerator
 // **************************************************************************
 
-List<RouteBase> get $appRoutes => [
-      $viewUserRoute,
-    ];
+List<RouteBase> get $appRoutes => [$viewUserRoute];
 
-RouteBase get $viewUserRoute => GoRouteData.$route(
-      path: '/view_user',
-      factory: _$ViewUserRoute._fromState,
-    );
+RouteBase get $viewUserRoute =>
+    GoRouteData.$route(path: '/view_user', factory: $ViewUserRoute._fromState);
 
-mixin _$ViewUserRoute on GoRouteData {
+mixin $ViewUserRoute on GoRouteData {
   static ViewUserRoute _fromState(GoRouterState state) => ViewUserRoute(
-        uid: state.uri.queryParameters['uid']!,
-        $extra: state.extra as User?,
-      );
+    uid: state.uri.queryParameters['uid']!,
+    $extra: state.extra as User?,
+  );
 
   ViewUserRoute get _self => this as ViewUserRoute;
 
   @override
-  String get location => GoRouteData.$location(
-        '/view_user',
-        queryParams: {
-          'uid': _self.uid,
-        },
-      );
+  String get location =>
+      GoRouteData.$location('/view_user', queryParams: {'uid': _self.uid});
 
   @override
   void go(BuildContext context) => context.go(location, extra: _self.$extra);

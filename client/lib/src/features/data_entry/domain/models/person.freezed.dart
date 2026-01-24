@@ -9,7 +9,6 @@ part of 'person.dart';
 // FreezedGenerator
 // **************************************************************************
 
-// dart format off
 T _$identity<T>(T value) => value;
 
 /// @nodoc
@@ -103,8 +102,10 @@ mixin _$Person {
             (identical(other.address, address) || other.address == address) &&
             (identical(other.mainPhone, mainPhone) ||
                 other.mainPhone == mainPhone) &&
-            const DeepCollectionEquality()
-                .equals(other.otherPhones, otherPhones) &&
+            const DeepCollectionEquality().equals(
+              other.otherPhones,
+              otherPhones,
+            ) &&
             (identical(other.birthdate, birthdate) ||
                 other.birthdate == birthdate) &&
             (identical(other.birthday, birthday) ||
@@ -185,104 +186,128 @@ mixin _$Person {
             const DeepCollectionEquality().equals(other.tags, tags) &&
             const DeepCollectionEquality().equals(other.hobbies, hobbies) &&
             (identical(other.user, user) || other.user == user) &&
-            const DeepCollectionEquality()
-                .equals(other.kodasHistory, kodasHistory) &&
-            const DeepCollectionEquality()
-                .equals(other.attendanceHistory, attendanceHistory) &&
-            const DeepCollectionEquality()
-                .equals(other.confessionHistory, confessionHistory) &&
-            const DeepCollectionEquality()
-                .equals(other.callHistory, callHistory) &&
-            const DeepCollectionEquality()
-                .equals(other.visitHistory, visitHistory) &&
-            const DeepCollectionEquality()
-                .equals(other.editHistory, editHistory) &&
+            const DeepCollectionEquality().equals(
+              other.kodasHistory,
+              kodasHistory,
+            ) &&
+            const DeepCollectionEquality().equals(
+              other.attendanceHistory,
+              attendanceHistory,
+            ) &&
+            const DeepCollectionEquality().equals(
+              other.confessionHistory,
+              confessionHistory,
+            ) &&
+            const DeepCollectionEquality().equals(
+              other.callHistory,
+              callHistory,
+            ) &&
+            const DeepCollectionEquality().equals(
+              other.visitHistory,
+              visitHistory,
+            ) &&
+            const DeepCollectionEquality().equals(
+              other.editHistory,
+              editHistory,
+            ) &&
             (identical(other.kodasHistoryAggregate, kodasHistoryAggregate) ||
                 other.kodasHistoryAggregate == kodasHistoryAggregate) &&
             (identical(
-                    other.attendanceHistoryAggregate, attendanceHistoryAggregate) ||
-                other.attendanceHistoryAggregate == attendanceHistoryAggregate) &&
-            (identical(other.confessionHistoryAggregate, confessionHistoryAggregate) || other.confessionHistoryAggregate == confessionHistoryAggregate) &&
-            (identical(other.callHistoryAggregate, callHistoryAggregate) || other.callHistoryAggregate == callHistoryAggregate) &&
-            (identical(other.visitHistoryAggregate, visitHistoryAggregate) || other.visitHistoryAggregate == visitHistoryAggregate) &&
-            (identical(other.editHistoryAggregate, editHistoryAggregate) || other.editHistoryAggregate == editHistoryAggregate) &&
-            (identical(other.userCanEdit, userCanEdit) || other.userCanEdit == userCanEdit));
+                  other.attendanceHistoryAggregate,
+                  attendanceHistoryAggregate,
+                ) ||
+                other.attendanceHistoryAggregate ==
+                    attendanceHistoryAggregate) &&
+            (identical(
+                  other.confessionHistoryAggregate,
+                  confessionHistoryAggregate,
+                ) ||
+                other.confessionHistoryAggregate ==
+                    confessionHistoryAggregate) &&
+            (identical(other.callHistoryAggregate, callHistoryAggregate) ||
+                other.callHistoryAggregate == callHistoryAggregate) &&
+            (identical(other.visitHistoryAggregate, visitHistoryAggregate) ||
+                other.visitHistoryAggregate == visitHistoryAggregate) &&
+            (identical(other.editHistoryAggregate, editHistoryAggregate) ||
+                other.editHistoryAggregate == editHistoryAggregate) &&
+            (identical(other.userCanEdit, userCanEdit) ||
+                other.userCanEdit == userCanEdit));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hashAll([
-        runtimeType,
-        id,
-        nationalId,
-        name,
-        address,
-        mainPhone,
-        const DeepCollectionEquality().hash(otherPhones),
-        birthdate,
-        birthday,
-        gender,
-        isShammas,
-        shammasLevelId,
-        shammasLevel,
-        school,
-        schoolId,
-        college,
-        collegeId,
-        church,
-        churchId,
-        father,
-        fatherId,
-        workStatus,
-        job,
-        jobId,
-        jobDescription,
-        qualification,
-        qualificationId,
-        martialStatus,
-        personType,
-        personTypeId,
-        state,
-        stateId,
-        isServant,
-        servingChurch,
-        serviceType,
-        notes,
-        family,
-        familyId,
-        store,
-        storeId,
-        studyYear,
-        studyYearId,
-        color,
-        photoUpdatedAt,
-        blurhash,
-        lastConfession,
-        lastKodas,
-        lastAttendance,
-        lastCall,
-        lastVisit,
-        lastEdit,
-        const DeepCollectionEquality().hash(classes),
-        const DeepCollectionEquality().hash(groups),
-        const DeepCollectionEquality().hash(services),
-        const DeepCollectionEquality().hash(tags),
-        const DeepCollectionEquality().hash(hobbies),
-        user,
-        const DeepCollectionEquality().hash(kodasHistory),
-        const DeepCollectionEquality().hash(attendanceHistory),
-        const DeepCollectionEquality().hash(confessionHistory),
-        const DeepCollectionEquality().hash(callHistory),
-        const DeepCollectionEquality().hash(visitHistory),
-        const DeepCollectionEquality().hash(editHistory),
-        kodasHistoryAggregate,
-        attendanceHistoryAggregate,
-        confessionHistoryAggregate,
-        callHistoryAggregate,
-        visitHistoryAggregate,
-        editHistoryAggregate,
-        userCanEdit
-      ]);
+    runtimeType,
+    id,
+    nationalId,
+    name,
+    address,
+    mainPhone,
+    const DeepCollectionEquality().hash(otherPhones),
+    birthdate,
+    birthday,
+    gender,
+    isShammas,
+    shammasLevelId,
+    shammasLevel,
+    school,
+    schoolId,
+    college,
+    collegeId,
+    church,
+    churchId,
+    father,
+    fatherId,
+    workStatus,
+    job,
+    jobId,
+    jobDescription,
+    qualification,
+    qualificationId,
+    martialStatus,
+    personType,
+    personTypeId,
+    state,
+    stateId,
+    isServant,
+    servingChurch,
+    serviceType,
+    notes,
+    family,
+    familyId,
+    store,
+    storeId,
+    studyYear,
+    studyYearId,
+    color,
+    photoUpdatedAt,
+    blurhash,
+    lastConfession,
+    lastKodas,
+    lastAttendance,
+    lastCall,
+    lastVisit,
+    lastEdit,
+    const DeepCollectionEquality().hash(classes),
+    const DeepCollectionEquality().hash(groups),
+    const DeepCollectionEquality().hash(services),
+    const DeepCollectionEquality().hash(tags),
+    const DeepCollectionEquality().hash(hobbies),
+    user,
+    const DeepCollectionEquality().hash(kodasHistory),
+    const DeepCollectionEquality().hash(attendanceHistory),
+    const DeepCollectionEquality().hash(confessionHistory),
+    const DeepCollectionEquality().hash(callHistory),
+    const DeepCollectionEquality().hash(visitHistory),
+    const DeepCollectionEquality().hash(editHistory),
+    kodasHistoryAggregate,
+    attendanceHistoryAggregate,
+    confessionHistoryAggregate,
+    callHistoryAggregate,
+    visitHistoryAggregate,
+    editHistoryAggregate,
+    userCanEdit,
+  ]);
 
   @override
   String toString() {
@@ -295,76 +320,77 @@ abstract mixin class $PersonCopyWith<$Res> {
   factory $PersonCopyWith(Person value, $Res Function(Person) _then) =
       _$PersonCopyWithImpl;
   @useResult
-  $Res call(
-      {String id,
-      String name,
-      int? nationalId,
-      Address? address,
-      String? mainPhone,
-      Map<String, dynamic> otherPhones,
-      DateTime? birthdate,
-      String? birthday,
-      bool gender,
-      bool isShammas,
-      String? shammasLevelId,
-      ShammasLevel? shammasLevel,
-      School? school,
-      String? schoolId,
-      College? college,
-      String? collegeId,
-      Church? church,
-      String? churchId,
-      Father? father,
-      String? fatherId,
-      WorkStatus? workStatus,
-      Job? job,
-      String? jobId,
-      String? jobDescription,
-      Qualification? qualification,
-      String? qualificationId,
-      MartialStatus? martialStatus,
-      PersonType? personType,
-      String? personTypeId,
-      PersonState? state,
-      String? stateId,
-      bool isServant,
-      Church? servingChurch,
-      String? serviceType,
-      String? notes,
-      Family? family,
-      String? familyId,
-      Store? store,
-      String? storeId,
-      StudyYear? studyYear,
-      int? studyYearId,
-      Color? color,
-      DateTime? photoUpdatedAt,
-      String? blurhash,
-      LastRecordedByInfo? lastConfession,
-      LastRecordedByInfo? lastKodas,
-      LastRecordedByInfo? lastAttendance,
-      LastRecordedByInfo? lastCall,
-      LastRecordedByInfo? lastVisit,
-      LastRecordedByInfo? lastEdit,
-      List<Class>? classes,
-      List<Group>? groups,
-      List<Service>? services,
-      List<Tag>? tags,
-      List<Hobby>? hobbies,
-      User? user,
-      List<LastRecordedByInfo>? kodasHistory,
-      List<LastRecordedByInfo>? attendanceHistory,
-      List<LastRecordedByInfo>? confessionHistory,
-      List<LastRecordedByInfo>? callHistory,
-      List<LastRecordedByInfo>? visitHistory,
-      List<LastRecordedByInfo>? editHistory,
-      HistoryAggregateData? kodasHistoryAggregate,
-      HistoryAggregateData? attendanceHistoryAggregate,
-      HistoryAggregateData? confessionHistoryAggregate,
-      HistoryAggregateData? callHistoryAggregate,
-      HistoryAggregateData? visitHistoryAggregate,
-      HistoryAggregateData? editHistoryAggregate,
-      bool userCanEdit});
+  $Res call({
+    String id,
+    String name,
+    int? nationalId,
+    Address? address,
+    String? mainPhone,
+    Map<String, dynamic> otherPhones,
+    DateTime? birthdate,
+    String? birthday,
+    bool gender,
+    bool isShammas,
+    String? shammasLevelId,
+    ShammasLevel? shammasLevel,
+    School? school,
+    String? schoolId,
+    College? college,
+    String? collegeId,
+    Church? church,
+    String? churchId,
+    Father? father,
+    String? fatherId,
+    WorkStatus? workStatus,
+    Job? job,
+    String? jobId,
+    String? jobDescription,
+    Qualification? qualification,
+    String? qualificationId,
+    MartialStatus? martialStatus,
+    PersonType? personType,
+    String? personTypeId,
+    PersonState? state,
+    String? stateId,
+    bool isServant,
+    Church? servingChurch,
+    String? serviceType,
+    String? notes,
+    Family? family,
+    String? familyId,
+    Store? store,
+    String? storeId,
+    StudyYear? studyYear,
+    int? studyYearId,
+    Color? color,
+    DateTime? photoUpdatedAt,
+    String? blurhash,
+    LastRecordedByInfo? lastConfession,
+    LastRecordedByInfo? lastKodas,
+    LastRecordedByInfo? lastAttendance,
+    LastRecordedByInfo? lastCall,
+    LastRecordedByInfo? lastVisit,
+    LastRecordedByInfo? lastEdit,
+    List<Class>? classes,
+    List<Group>? groups,
+    List<Service>? services,
+    List<Tag>? tags,
+    List<Hobby>? hobbies,
+    User? user,
+    List<LastRecordedByInfo>? kodasHistory,
+    List<LastRecordedByInfo>? attendanceHistory,
+    List<LastRecordedByInfo>? confessionHistory,
+    List<LastRecordedByInfo>? callHistory,
+    List<LastRecordedByInfo>? visitHistory,
+    List<LastRecordedByInfo>? editHistory,
+    HistoryAggregateData? kodasHistoryAggregate,
+    HistoryAggregateData? attendanceHistoryAggregate,
+    HistoryAggregateData? confessionHistoryAggregate,
+    HistoryAggregateData? callHistoryAggregate,
+    HistoryAggregateData? visitHistoryAggregate,
+    HistoryAggregateData? editHistoryAggregate,
+    bool userCanEdit,
+  });
 }
 
 /// @nodoc
@@ -449,285 +475,285 @@ class _$PersonCopyWithImpl<$Res> implements $PersonCopyWith<$Res> {
     Object? editHistoryAggregate = freezed,
     Object? userCanEdit = null,
   }) {
-    return _then(Person(
-      id: null == id
-          ? _self.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _self.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      nationalId: freezed == nationalId
-          ? _self.nationalId
-          : nationalId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      address: freezed == address
-          ? _self.address
-          : address // ignore: cast_nullable_to_non_nullable
-              as Address?,
-      mainPhone: freezed == mainPhone
-          ? _self.mainPhone
-          : mainPhone // ignore: cast_nullable_to_non_nullable
-              as String?,
-      otherPhones: null == otherPhones
-          ? _self.otherPhones
-          : otherPhones // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
-      birthdate: freezed == birthdate
-          ? _self.birthdate
-          : birthdate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      birthday: freezed == birthday
-          ? _self.birthday
-          : birthday // ignore: cast_nullable_to_non_nullable
-              as String?,
-      gender: null == gender
-          ? _self.gender
-          : gender // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isShammas: null == isShammas
-          ? _self.isShammas
-          : isShammas // ignore: cast_nullable_to_non_nullable
-              as bool,
-      shammasLevelId: freezed == shammasLevelId
-          ? _self.shammasLevelId
-          : shammasLevelId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      shammasLevel: freezed == shammasLevel
-          ? _self.shammasLevel
-          : shammasLevel // ignore: cast_nullable_to_non_nullable
-              as ShammasLevel?,
-      school: freezed == school
-          ? _self.school
-          : school // ignore: cast_nullable_to_non_nullable
-              as School?,
-      schoolId: freezed == schoolId
-          ? _self.schoolId
-          : schoolId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      college: freezed == college
-          ? _self.college
-          : college // ignore: cast_nullable_to_non_nullable
-              as College?,
-      collegeId: freezed == collegeId
-          ? _self.collegeId
-          : collegeId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      church: freezed == church
-          ? _self.church
-          : church // ignore: cast_nullable_to_non_nullable
-              as Church?,
-      churchId: freezed == churchId
-          ? _self.churchId
-          : churchId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      father: freezed == father
-          ? _self.father
-          : father // ignore: cast_nullable_to_non_nullable
-              as Father?,
-      fatherId: freezed == fatherId
-          ? _self.fatherId
-          : fatherId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      workStatus: freezed == workStatus
-          ? _self.workStatus
-          : workStatus // ignore: cast_nullable_to_non_nullable
-              as WorkStatus?,
-      job: freezed == job
-          ? _self.job
-          : job // ignore: cast_nullable_to_non_nullable
-              as Job?,
-      jobId: freezed == jobId
-          ? _self.jobId
-          : jobId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      jobDescription: freezed == jobDescription
-          ? _self.jobDescription
-          : jobDescription // ignore: cast_nullable_to_non_nullable
-              as String?,
-      qualification: freezed == qualification
-          ? _self.qualification
-          : qualification // ignore: cast_nullable_to_non_nullable
-              as Qualification?,
-      qualificationId: freezed == qualificationId
-          ? _self.qualificationId
-          : qualificationId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      martialStatus: freezed == martialStatus
-          ? _self.martialStatus
-          : martialStatus // ignore: cast_nullable_to_non_nullable
-              as MartialStatus?,
-      personType: freezed == personType
-          ? _self.personType
-          : personType // ignore: cast_nullable_to_non_nullable
-              as PersonType?,
-      personTypeId: freezed == personTypeId
-          ? _self.personTypeId
-          : personTypeId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      state: freezed == state
-          ? _self.state
-          : state // ignore: cast_nullable_to_non_nullable
-              as PersonState?,
-      stateId: freezed == stateId
-          ? _self.stateId
-          : stateId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      isServant: null == isServant
-          ? _self.isServant
-          : isServant // ignore: cast_nullable_to_non_nullable
-              as bool,
-      servingChurch: freezed == servingChurch
-          ? _self.servingChurch
-          : servingChurch // ignore: cast_nullable_to_non_nullable
-              as Church?,
-      serviceType: freezed == serviceType
-          ? _self.serviceType
-          : serviceType // ignore: cast_nullable_to_non_nullable
-              as String?,
-      notes: freezed == notes
-          ? _self.notes
-          : notes // ignore: cast_nullable_to_non_nullable
-              as String?,
-      family: freezed == family
-          ? _self.family
-          : family // ignore: cast_nullable_to_non_nullable
-              as Family?,
-      familyId: freezed == familyId
-          ? _self.familyId
-          : familyId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      store: freezed == store
-          ? _self.store
-          : store // ignore: cast_nullable_to_non_nullable
-              as Store?,
-      storeId: freezed == storeId
-          ? _self.storeId
-          : storeId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      studyYear: freezed == studyYear
-          ? _self.studyYear
-          : studyYear // ignore: cast_nullable_to_non_nullable
-              as StudyYear?,
-      studyYearId: freezed == studyYearId
-          ? _self.studyYearId
-          : studyYearId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      color: freezed == color
-          ? _self.color
-          : color // ignore: cast_nullable_to_non_nullable
-              as Color?,
-      photoUpdatedAt: freezed == photoUpdatedAt
-          ? _self.photoUpdatedAt
-          : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      blurhash: freezed == blurhash
-          ? _self.blurhash
-          : blurhash // ignore: cast_nullable_to_non_nullable
-              as String?,
-      lastConfession: freezed == lastConfession
-          ? _self.lastConfession
-          : lastConfession // ignore: cast_nullable_to_non_nullable
-              as LastRecordedByInfo?,
-      lastKodas: freezed == lastKodas
-          ? _self.lastKodas
-          : lastKodas // ignore: cast_nullable_to_non_nullable
-              as LastRecordedByInfo?,
-      lastAttendance: freezed == lastAttendance
-          ? _self.lastAttendance
-          : lastAttendance // ignore: cast_nullable_to_non_nullable
-              as LastRecordedByInfo?,
-      lastCall: freezed == lastCall
-          ? _self.lastCall
-          : lastCall // ignore: cast_nullable_to_non_nullable
-              as LastRecordedByInfo?,
-      lastVisit: freezed == lastVisit
-          ? _self.lastVisit
-          : lastVisit // ignore: cast_nullable_to_non_nullable
-              as LastRecordedByInfo?,
-      lastEdit: freezed == lastEdit
-          ? _self.lastEdit
-          : lastEdit // ignore: cast_nullable_to_non_nullable
-              as LastRecordedByInfo?,
-      classes: freezed == classes
-          ? _self.classes
-          : classes // ignore: cast_nullable_to_non_nullable
-              as List<Class>?,
-      groups: freezed == groups
-          ? _self.groups
-          : groups // ignore: cast_nullable_to_non_nullable
-              as List<Group>?,
-      services: freezed == services
-          ? _self.services
-          : services // ignore: cast_nullable_to_non_nullable
-              as List<Service>?,
-      tags: freezed == tags
-          ? _self.tags
-          : tags // ignore: cast_nullable_to_non_nullable
-              as List<Tag>?,
-      hobbies: freezed == hobbies
-          ? _self.hobbies
-          : hobbies // ignore: cast_nullable_to_non_nullable
-              as List<Hobby>?,
-      user: freezed == user
-          ? _self.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as User?,
-      kodasHistory: freezed == kodasHistory
-          ? _self.kodasHistory
-          : kodasHistory // ignore: cast_nullable_to_non_nullable
-              as List<LastRecordedByInfo>?,
-      attendanceHistory: freezed == attendanceHistory
-          ? _self.attendanceHistory
-          : attendanceHistory // ignore: cast_nullable_to_non_nullable
-              as List<LastRecordedByInfo>?,
-      confessionHistory: freezed == confessionHistory
-          ? _self.confessionHistory
-          : confessionHistory // ignore: cast_nullable_to_non_nullable
-              as List<LastRecordedByInfo>?,
-      callHistory: freezed == callHistory
-          ? _self.callHistory
-          : callHistory // ignore: cast_nullable_to_non_nullable
-              as List<LastRecordedByInfo>?,
-      visitHistory: freezed == visitHistory
-          ? _self.visitHistory
-          : visitHistory // ignore: cast_nullable_to_non_nullable
-              as List<LastRecordedByInfo>?,
-      editHistory: freezed == editHistory
-          ? _self.editHistory
-          : editHistory // ignore: cast_nullable_to_non_nullable
-              as List<LastRecordedByInfo>?,
-      kodasHistoryAggregate: freezed == kodasHistoryAggregate
-          ? _self.kodasHistoryAggregate
-          : kodasHistoryAggregate // ignore: cast_nullable_to_non_nullable
-              as HistoryAggregateData?,
-      attendanceHistoryAggregate: freezed == attendanceHistoryAggregate
-          ? _self.attendanceHistoryAggregate
-          : attendanceHistoryAggregate // ignore: cast_nullable_to_non_nullable
-              as HistoryAggregateData?,
-      confessionHistoryAggregate: freezed == confessionHistoryAggregate
-          ? _self.confessionHistoryAggregate
-          : confessionHistoryAggregate // ignore: cast_nullable_to_non_nullable
-              as HistoryAggregateData?,
-      callHistoryAggregate: freezed == callHistoryAggregate
-          ? _self.callHistoryAggregate
-          : callHistoryAggregate // ignore: cast_nullable_to_non_nullable
-              as HistoryAggregateData?,
-      visitHistoryAggregate: freezed == visitHistoryAggregate
-          ? _self.visitHistoryAggregate
-          : visitHistoryAggregate // ignore: cast_nullable_to_non_nullable
-              as HistoryAggregateData?,
-      editHistoryAggregate: freezed == editHistoryAggregate
-          ? _self.editHistoryAggregate
-          : editHistoryAggregate // ignore: cast_nullable_to_non_nullable
-              as HistoryAggregateData?,
-      userCanEdit: null == userCanEdit
-          ? _self.userCanEdit
-          : userCanEdit // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
+    return _then(
+      Person(
+        id: null == id
+            ? _self.id
+            : id // ignore: cast_nullable_to_non_nullable
+                  as String,
+        name: null == name
+            ? _self.name
+            : name // ignore: cast_nullable_to_non_nullable
+                  as String,
+        nationalId: freezed == nationalId
+            ? _self.nationalId
+            : nationalId // ignore: cast_nullable_to_non_nullable
+                  as int?,
+        address: freezed == address
+            ? _self.address
+            : address // ignore: cast_nullable_to_non_nullable
+                  as Address?,
+        mainPhone: freezed == mainPhone
+            ? _self.mainPhone
+            : mainPhone // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        otherPhones: null == otherPhones
+            ? _self.otherPhones
+            : otherPhones // ignore: cast_nullable_to_non_nullable
+                  as Map<String, dynamic>,
+        birthdate: freezed == birthdate
+            ? _self.birthdate
+            : birthdate // ignore: cast_nullable_to_non_nullable
+                  as DateTime?,
+        birthday: freezed == birthday
+            ? _self.birthday
+            : birthday // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        gender: null == gender
+            ? _self.gender
+            : gender // ignore: cast_nullable_to_non_nullable
+                  as bool,
+        isShammas: null == isShammas
+            ? _self.isShammas
+            : isShammas // ignore: cast_nullable_to_non_nullable
+                  as bool,
+        shammasLevelId: freezed == shammasLevelId
+            ? _self.shammasLevelId
+            : shammasLevelId // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        shammasLevel: freezed == shammasLevel
+            ? _self.shammasLevel
+            : shammasLevel // ignore: cast_nullable_to_non_nullable
+                  as ShammasLevel?,
+        school: freezed == school
+            ? _self.school
+            : school // ignore: cast_nullable_to_non_nullable
+                  as School?,
+        schoolId: freezed == schoolId
+            ? _self.schoolId
+            : schoolId // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        college: freezed == college
+            ? _self.college
+            : college // ignore: cast_nullable_to_non_nullable
+                  as College?,
+        collegeId: freezed == collegeId
+            ? _self.collegeId
+            : collegeId // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        church: freezed == church
+            ? _self.church
+            : church // ignore: cast_nullable_to_non_nullable
+                  as Church?,
+        churchId: freezed == churchId
+            ? _self.churchId
+            : churchId // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        father: freezed == father
+            ? _self.father
+            : father // ignore: cast_nullable_to_non_nullable
+                  as Father?,
+        fatherId: freezed == fatherId
+            ? _self.fatherId
+            : fatherId // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        workStatus: freezed == workStatus
+            ? _self.workStatus
+            : workStatus // ignore: cast_nullable_to_non_nullable
+                  as WorkStatus?,
+        job: freezed == job
+            ? _self.job
+            : job // ignore: cast_nullable_to_non_nullable
+                  as Job?,
+        jobId: freezed == jobId
+            ? _self.jobId
+            : jobId // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        jobDescription: freezed == jobDescription
+            ? _self.jobDescription
+            : jobDescription // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        qualification: freezed == qualification
+            ? _self.qualification
+            : qualification // ignore: cast_nullable_to_non_nullable
+                  as Qualification?,
+        qualificationId: freezed == qualificationId
+            ? _self.qualificationId
+            : qualificationId // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        martialStatus: freezed == martialStatus
+            ? _self.martialStatus
+            : martialStatus // ignore: cast_nullable_to_non_nullable
+                  as MartialStatus?,
+        personType: freezed == personType
+            ? _self.personType
+            : personType // ignore: cast_nullable_to_non_nullable
+                  as PersonType?,
+        personTypeId: freezed == personTypeId
+            ? _self.personTypeId
+            : personTypeId // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        state: freezed == state
+            ? _self.state
+            : state // ignore: cast_nullable_to_non_nullable
+                  as PersonState?,
+        stateId: freezed == stateId
+            ? _self.stateId
+            : stateId // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        isServant: null == isServant
+            ? _self.isServant
+            : isServant // ignore: cast_nullable_to_non_nullable
+                  as bool,
+        servingChurch: freezed == servingChurch
+            ? _self.servingChurch
+            : servingChurch // ignore: cast_nullable_to_non_nullable
+                  as Church?,
+        serviceType: freezed == serviceType
+            ? _self.serviceType
+            : serviceType // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        notes: freezed == notes
+            ? _self.notes
+            : notes // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        family: freezed == family
+            ? _self.family
+            : family // ignore: cast_nullable_to_non_nullable
+                  as Family?,
+        familyId: freezed == familyId
+            ? _self.familyId
+            : familyId // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        store: freezed == store
+            ? _self.store
+            : store // ignore: cast_nullable_to_non_nullable
+                  as Store?,
+        storeId: freezed == storeId
+            ? _self.storeId
+            : storeId // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        studyYear: freezed == studyYear
+            ? _self.studyYear
+            : studyYear // ignore: cast_nullable_to_non_nullable
+                  as StudyYear?,
+        studyYearId: freezed == studyYearId
+            ? _self.studyYearId
+            : studyYearId // ignore: cast_nullable_to_non_nullable
+                  as int?,
+        color: freezed == color
+            ? _self.color
+            : color // ignore: cast_nullable_to_non_nullable
+                  as Color?,
+        photoUpdatedAt: freezed == photoUpdatedAt
+            ? _self.photoUpdatedAt
+            : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
+                  as DateTime?,
+        blurhash: freezed == blurhash
+            ? _self.blurhash
+            : blurhash // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        lastConfession: freezed == lastConfession
+            ? _self.lastConfession
+            : lastConfession // ignore: cast_nullable_to_non_nullable
+                  as LastRecordedByInfo?,
+        lastKodas: freezed == lastKodas
+            ? _self.lastKodas
+            : lastKodas // ignore: cast_nullable_to_non_nullable
+                  as LastRecordedByInfo?,
+        lastAttendance: freezed == lastAttendance
+            ? _self.lastAttendance
+            : lastAttendance // ignore: cast_nullable_to_non_nullable
+                  as LastRecordedByInfo?,
+        lastCall: freezed == lastCall
+            ? _self.lastCall
+            : lastCall // ignore: cast_nullable_to_non_nullable
+                  as LastRecordedByInfo?,
+        lastVisit: freezed == lastVisit
+            ? _self.lastVisit
+            : lastVisit // ignore: cast_nullable_to_non_nullable
+                  as LastRecordedByInfo?,
+        lastEdit: freezed == lastEdit
+            ? _self.lastEdit
+            : lastEdit // ignore: cast_nullable_to_non_nullable
+                  as LastRecordedByInfo?,
+        classes: freezed == classes
+            ? _self.classes
+            : classes // ignore: cast_nullable_to_non_nullable
+                  as List<Class>?,
+        groups: freezed == groups
+            ? _self.groups
+            : groups // ignore: cast_nullable_to_non_nullable
+                  as List<Group>?,
+        services: freezed == services
+            ? _self.services
+            : services // ignore: cast_nullable_to_non_nullable
+                  as List<Service>?,
+        tags: freezed == tags
+            ? _self.tags
+            : tags // ignore: cast_nullable_to_non_nullable
+                  as List<Tag>?,
+        hobbies: freezed == hobbies
+            ? _self.hobbies
+            : hobbies // ignore: cast_nullable_to_non_nullable
+                  as List<Hobby>?,
+        user: freezed == user
+            ? _self.user
+            : user // ignore: cast_nullable_to_non_nullable
+                  as User?,
+        kodasHistory: freezed == kodasHistory
+            ? _self.kodasHistory
+            : kodasHistory // ignore: cast_nullable_to_non_nullable
+                  as List<LastRecordedByInfo>?,
+        attendanceHistory: freezed == attendanceHistory
+            ? _self.attendanceHistory
+            : attendanceHistory // ignore: cast_nullable_to_non_nullable
+                  as List<LastRecordedByInfo>?,
+        confessionHistory: freezed == confessionHistory
+            ? _self.confessionHistory
+            : confessionHistory // ignore: cast_nullable_to_non_nullable
+                  as List<LastRecordedByInfo>?,
+        callHistory: freezed == callHistory
+            ? _self.callHistory
+            : callHistory // ignore: cast_nullable_to_non_nullable
+                  as List<LastRecordedByInfo>?,
+        visitHistory: freezed == visitHistory
+            ? _self.visitHistory
+            : visitHistory // ignore: cast_nullable_to_non_nullable
+                  as List<LastRecordedByInfo>?,
+        editHistory: freezed == editHistory
+            ? _self.editHistory
+            : editHistory // ignore: cast_nullable_to_non_nullable
+                  as List<LastRecordedByInfo>?,
+        kodasHistoryAggregate: freezed == kodasHistoryAggregate
+            ? _self.kodasHistoryAggregate
+            : kodasHistoryAggregate // ignore: cast_nullable_to_non_nullable
+                  as HistoryAggregateData?,
+        attendanceHistoryAggregate: freezed == attendanceHistoryAggregate
+            ? _self.attendanceHistoryAggregate
+            : attendanceHistoryAggregate // ignore: cast_nullable_to_non_nullable
+                  as HistoryAggregateData?,
+        confessionHistoryAggregate: freezed == confessionHistoryAggregate
+            ? _self.confessionHistoryAggregate
+            : confessionHistoryAggregate // ignore: cast_nullable_to_non_nullable
+                  as HistoryAggregateData?,
+        callHistoryAggregate: freezed == callHistoryAggregate
+            ? _self.callHistoryAggregate
+            : callHistoryAggregate // ignore: cast_nullable_to_non_nullable
+                  as HistoryAggregateData?,
+        visitHistoryAggregate: freezed == visitHistoryAggregate
+            ? _self.visitHistoryAggregate
+            : visitHistoryAggregate // ignore: cast_nullable_to_non_nullable
+                  as HistoryAggregateData?,
+        editHistoryAggregate: freezed == editHistoryAggregate
+            ? _self.editHistoryAggregate
+            : editHistoryAggregate // ignore: cast_nullable_to_non_nullable
+                  as HistoryAggregateData?,
+        userCanEdit: null == userCanEdit
+            ? _self.userCanEdit
+            : userCanEdit // ignore: cast_nullable_to_non_nullable
+                  as bool,
+      ),
+    );
   }
 }
-
-// dart format on

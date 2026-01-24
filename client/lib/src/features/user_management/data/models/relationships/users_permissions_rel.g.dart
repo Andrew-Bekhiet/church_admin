@@ -32,19 +32,19 @@ class UsersPermissionsRelFields {
 
   final FieldMetadata<UserPermission> permission =
       FieldMetadata<UserPermission>(
-    getValue: (obj) => obj is UsersPermissionsRel ? obj.permission : null,
-    parentType: UsersPermissionsRel,
-    name: 'permission',
-    label: 'الصلاحية',
-    isCodeOnly: false,
-    operators: {...MultiSelectOperator.values},
-  );
+        getValue: (obj) => obj is UsersPermissionsRel ? obj.permission : null,
+        parentType: UsersPermissionsRel,
+        name: 'permission',
+        label: 'الصلاحية',
+        isCodeOnly: false,
+        operators: {...MultiSelectOperator.values},
+      );
 
   late final List<FieldMetadata<Object>> allFields = [uid, user, permission];
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'uid': uid,
     'user': user,
-    'permission': permission
+    'permission': permission,
   };
 }
 
@@ -60,12 +60,12 @@ UsersPermissionsRel _$UsersPermissionsRelFromJson(Map json) =>
     );
 
 Map<String, dynamic> _$UsersPermissionsRelToJson(
-        UsersPermissionsRel instance) =>
-    <String, dynamic>{
-      'uid': instance.uid,
-      'user': instance.user.toJson(),
-      'permission': _$UserPermissionEnumMap[instance.permission]!,
-    };
+  UsersPermissionsRel instance,
+) => <String, dynamic>{
+  'uid': instance.uid,
+  'user': instance.user.toJson(),
+  'permission': _$UserPermissionEnumMap[instance.permission]!,
+};
 
 const _$UserPermissionEnumMap = {
   UserPermission.approved: 'approved',

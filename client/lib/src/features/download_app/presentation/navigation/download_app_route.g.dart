@@ -6,23 +6,19 @@ part of 'download_app_route.dart';
 // GoRouterGenerator
 // **************************************************************************
 
-List<RouteBase> get $appRoutes => [
-      $downloadAppRoute,
-    ];
+List<RouteBase> get $appRoutes => [$downloadAppRoute];
 
 RouteBase get $downloadAppRoute => GoRouteData.$route(
-      path: '/download',
-      factory: _$DownloadAppRoute._fromState,
-    );
+  path: '/download',
+  factory: $DownloadAppRoute._fromState,
+);
 
-mixin _$DownloadAppRoute on GoRouteData {
+mixin $DownloadAppRoute on GoRouteData {
   static DownloadAppRoute _fromState(GoRouterState state) =>
       const DownloadAppRoute();
 
   @override
-  String get location => GoRouteData.$location(
-        '/download',
-      );
+  String get location => GoRouteData.$location('/download');
 
   @override
   void go(BuildContext context) => context.go(location);

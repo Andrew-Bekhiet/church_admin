@@ -4,6 +4,7 @@ targets:
       freezed:
         enabled: true
         options:
+          format: true
           map: false
           when: false
       json_serializable:

@@ -6,29 +6,24 @@ part of 'authenticate_route.dart';
 // GoRouterGenerator
 // **************************************************************************
 
-List<RouteBase> get $appRoutes => [
-      $authenticateRoute,
-    ];
+List<RouteBase> get $appRoutes => [$authenticateRoute];
 
 RouteBase get $authenticateRoute => GoRouteData.$route(
-      path: '/authenticate',
-      factory: _$AuthenticateRoute._fromState,
-    );
+  path: '/authenticate',
+  factory: $AuthenticateRoute._fromState,
+);
 
-mixin _$AuthenticateRoute on GoRouteData {
-  static AuthenticateRoute _fromState(GoRouterState state) => AuthenticateRoute(
-        next: state.uri.queryParameters['next'] ?? '/',
-      );
+mixin $AuthenticateRoute on GoRouteData {
+  static AuthenticateRoute _fromState(GoRouterState state) =>
+      AuthenticateRoute(next: state.uri.queryParameters['next'] ?? '/');
 
   AuthenticateRoute get _self => this as AuthenticateRoute;
 
   @override
   String get location => GoRouteData.$location(
-        '/authenticate',
-        queryParams: {
-          if (_self.next != '/') 'next': _self.next,
-        },
-      );
+    '/authenticate',
+    queryParams: {if (_self.next != '/') 'next': _self.next},
+  );
 
   @override
   void go(BuildContext context) => context.go(location);

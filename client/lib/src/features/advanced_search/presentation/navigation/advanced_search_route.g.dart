@@ -6,27 +6,21 @@ part of 'advanced_search_route.dart';
 // GoRouterGenerator
 // **************************************************************************
 
-List<RouteBase> get $appRoutes => [
-      $advancedSearchRoute,
-    ];
+List<RouteBase> get $appRoutes => [$advancedSearchRoute];
 
 RouteBase get $advancedSearchRoute => GoRouteData.$route(
-      path: '/advanced_search',
-      factory: _$AdvancedSearchRoute._fromState,
-    );
+  path: '/advanced_search',
+  factory: $AdvancedSearchRoute._fromState,
+);
 
-mixin _$AdvancedSearchRoute on GoRouteData {
+mixin $AdvancedSearchRoute on GoRouteData {
   static AdvancedSearchRoute _fromState(GoRouterState state) =>
-      AdvancedSearchRoute(
-        $extra: state.extra as AdvancedQuery?,
-      );
+      AdvancedSearchRoute($extra: state.extra as AdvancedQuery?);
 
   AdvancedSearchRoute get _self => this as AdvancedSearchRoute;
 
   @override
-  String get location => GoRouteData.$location(
-        '/advanced_search',
-      );
+  String get location => GoRouteData.$location('/advanced_search');
 
   @override
   void go(BuildContext context) => context.go(location, extra: _self.$extra);

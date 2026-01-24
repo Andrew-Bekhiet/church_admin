@@ -51,13 +51,13 @@ class PersonsServicesFields {
     person,
     service,
     personId,
-    serviceId
+    serviceId,
   ];
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'person': person,
     'service': service,
     'personId': personId,
-    'serviceId': serviceId
+    'serviceId': serviceId,
   };
 }
 
@@ -66,12 +66,11 @@ class PersonsServicesFields {
 // **************************************************************************
 
 PersonsServices _$PersonsServicesFromJson(Map json) => PersonsServices(
-      person: Person.fromJson(Map<String, Object?>.from(json['person'] as Map)),
-      service:
-          Service.fromJson(Map<String, Object?>.from(json['service'] as Map)),
-      personId: json['personId'] as String,
-      serviceId: json['serviceId'] as String,
-    );
+  person: Person.fromJson(Map<String, Object?>.from(json['person'] as Map)),
+  service: Service.fromJson(Map<String, Object?>.from(json['service'] as Map)),
+  personId: json['personId'] as String,
+  serviceId: json['serviceId'] as String,
+);
 
 Map<String, dynamic> _$PersonsServicesToJson(PersonsServices instance) =>
     <String, dynamic>{

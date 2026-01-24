@@ -41,6 +41,6 @@ class Class {
     'StudyYear': studyYear,
     'Gender': gender,
     'HasPhoto': hasPhoto,
-    'Color': color?.value,
+    'Color': color?.toARGB32(),
   };
 }

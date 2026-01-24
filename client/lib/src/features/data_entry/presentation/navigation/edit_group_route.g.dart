@@ -6,26 +6,21 @@ part of 'edit_group_route.dart';
 // GoRouterGenerator
 // **************************************************************************
 
-List<RouteBase> get $appRoutes => [
-      $editGroupRoute,
-    ];
+List<RouteBase> get $appRoutes => [$editGroupRoute];
 
 RouteBase get $editGroupRoute => GoRouteData.$route(
-      path: '/edit_group',
-      factory: _$EditGroupRoute._fromState,
-    );
+  path: '/edit_group',
+  factory: $EditGroupRoute._fromState,
+);
 
-mixin _$EditGroupRoute on GoRouteData {
-  static EditGroupRoute _fromState(GoRouterState state) => EditGroupRoute(
-        $extra: state.extra as EditGroupExtra?,
-      );
+mixin $EditGroupRoute on GoRouteData {
+  static EditGroupRoute _fromState(GoRouterState state) =>
+      EditGroupRoute($extra: state.extra as EditGroupExtra?);
 
   EditGroupRoute get _self => this as EditGroupRoute;
 
   @override
-  String get location => GoRouteData.$location(
-        '/edit_group',
-      );
+  String get location => GoRouteData.$location('/edit_group');
 
   @override
   void go(BuildContext context) => context.go(location, extra: _self.$extra);
@@ -48,13 +43,13 @@ mixin _$EditGroupRoute on GoRouteData {
 // **************************************************************************
 
 EditGroupExtra _$EditGroupExtraFromJson(Map json) => EditGroupExtra(
-      group: json['group'] == null
-          ? null
-          : Group.fromJson(Map<String, Object?>.from(json['group'] as Map)),
-      service: json['service'] == null
-          ? null
-          : Service.fromJson(Map<String, Object?>.from(json['service'] as Map)),
-    );
+  group: json['group'] == null
+      ? null
+      : Group.fromJson(Map<String, Object?>.from(json['group'] as Map)),
+  service: json['service'] == null
+      ? null
+      : Service.fromJson(Map<String, Object?>.from(json['service'] as Map)),
+);
 
 Map<String, dynamic> _$EditGroupExtraToJson(EditGroupExtra instance) =>
     <String, dynamic>{

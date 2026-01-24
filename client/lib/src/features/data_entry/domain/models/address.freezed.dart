@@ -9,7 +9,6 @@ part of 'address.dart';
 // FreezedGenerator
 // **************************************************************************
 
-// dart format off
 T _$identity<T>(T value) => value;
 
 /// @nodoc
@@ -66,20 +65,21 @@ mixin _$Address {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      countryIsoCode,
-      district,
-      area,
-      street,
-      substreetName,
-      geolocation,
-      storeyNumber,
-      houseNumber,
-      apartmentNumber,
-      specialLandmark,
-      family,
-      store);
+    runtimeType,
+    id,
+    countryIsoCode,
+    district,
+    area,
+    street,
+    substreetName,
+    geolocation,
+    storeyNumber,
+    houseNumber,
+    apartmentNumber,
+    specialLandmark,
+    family,
+    store,
+  );
 }
 
 /// @nodoc
@@ -87,20 +87,21 @@ abstract mixin class $AddressCopyWith<$Res> {
   factory $AddressCopyWith(Address value, $Res Function(Address) _then) =
       _$AddressCopyWithImpl;
   @useResult
-  $Res call(
-      {String? id,
-      String countryIsoCode,
-      District? district,
-      Area? area,
-      Street? street,
-      String? substreetName,
-      Point? geolocation,
-      int? storeyNumber,
-      int? houseNumber,
-      int? apartmentNumber,
-      String? specialLandmark,
-      Family? family,
-      Store? store});
+  $Res call({
+    String? id,
+    String countryIsoCode,
+    District? district,
+    Area? area,
+    Street? street,
+    String? substreetName,
+    Point? geolocation,
+    int? storeyNumber,
+    int? houseNumber,
+    int? apartmentNumber,
+    String? specialLandmark,
+    Family? family,
+    Store? store,
+  });
 }
 
 /// @nodoc
@@ -129,61 +130,61 @@ class _$AddressCopyWithImpl<$Res> implements $AddressCopyWith<$Res> {
     Object? family = freezed,
     Object? store = freezed,
   }) {
-    return _then(Address(
-      id: freezed == id
-          ? _self.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String?,
-      countryIsoCode: null == countryIsoCode
-          ? _self.countryIsoCode
-          : countryIsoCode // ignore: cast_nullable_to_non_nullable
-              as String,
-      district: freezed == district
-          ? _self.district
-          : district // ignore: cast_nullable_to_non_nullable
-              as District?,
-      area: freezed == area
-          ? _self.area
-          : area // ignore: cast_nullable_to_non_nullable
-              as Area?,
-      street: freezed == street
-          ? _self.street
-          : street // ignore: cast_nullable_to_non_nullable
-              as Street?,
-      substreetName: freezed == substreetName
-          ? _self.substreetName
-          : substreetName // ignore: cast_nullable_to_non_nullable
-              as String?,
-      geolocation: freezed == geolocation
-          ? _self.geolocation
-          : geolocation // ignore: cast_nullable_to_non_nullable
-              as Point?,
-      storeyNumber: freezed == storeyNumber
-          ? _self.storeyNumber
-          : storeyNumber // ignore: cast_nullable_to_non_nullable
-              as int?,
-      houseNumber: freezed == houseNumber
-          ? _self.houseNumber
-          : houseNumber // ignore: cast_nullable_to_non_nullable
-              as int?,
-      apartmentNumber: freezed == apartmentNumber
-          ? _self.apartmentNumber
-          : apartmentNumber // ignore: cast_nullable_to_non_nullable
-              as int?,
-      specialLandmark: freezed == specialLandmark
-          ? _self.specialLandmark
-          : specialLandmark // ignore: cast_nullable_to_non_nullable
-              as String?,
-      family: freezed == family
-          ? _self.family
-          : family // ignore: cast_nullable_to_non_nullable
-              as Family?,
-      store: freezed == store
-          ? _self.store
-          : store // ignore: cast_nullable_to_non_nullable
-              as Store?,
-    ));
+    return _then(
+      Address(
+        id: freezed == id
+            ? _self.id
+            : id // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        countryIsoCode: null == countryIsoCode
+            ? _self.countryIsoCode
+            : countryIsoCode // ignore: cast_nullable_to_non_nullable
+                  as String,
+        district: freezed == district
+            ? _self.district
+            : district // ignore: cast_nullable_to_non_nullable
+                  as District?,
+        area: freezed == area
+            ? _self.area
+            : area // ignore: cast_nullable_to_non_nullable
+                  as Area?,
+        street: freezed == street
+            ? _self.street
+            : street // ignore: cast_nullable_to_non_nullable
+                  as Street?,
+        substreetName: freezed == substreetName
+            ? _self.substreetName
+            : substreetName // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        geolocation: freezed == geolocation
+            ? _self.geolocation
+            : geolocation // ignore: cast_nullable_to_non_nullable
+                  as Point?,
+        storeyNumber: freezed == storeyNumber
+            ? _self.storeyNumber
+            : storeyNumber // ignore: cast_nullable_to_non_nullable
+                  as int?,
+        houseNumber: freezed == houseNumber
+            ? _self.houseNumber
+            : houseNumber // ignore: cast_nullable_to_non_nullable
+                  as int?,
+        apartmentNumber: freezed == apartmentNumber
+            ? _self.apartmentNumber
+            : apartmentNumber // ignore: cast_nullable_to_non_nullable
+                  as int?,
+        specialLandmark: freezed == specialLandmark
+            ? _self.specialLandmark
+            : specialLandmark // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        family: freezed == family
+            ? _self.family
+            : family // ignore: cast_nullable_to_non_nullable
+                  as Family?,
+        store: freezed == store
+            ? _self.store
+            : store // ignore: cast_nullable_to_non_nullable
+                  as Store?,
+      ),
+    );
   }
 }
-
-// dart format on

@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 part 'force_update_route.g.dart';
 
 @TypedGoRoute<ForceUpdateRoute>(path: '/force_update')
-class ForceUpdateRoute extends GoRouteData with _$ForceUpdateRoute {
+class ForceUpdateRoute extends GoRouteData with $ForceUpdateRoute {
   const ForceUpdateRoute();
 
   @override

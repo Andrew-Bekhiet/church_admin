@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -34,12 +36,11 @@ class HomeDrawer extends StatelessWidget {
             icon: const Icon(Symbols.home),
             onTap: () => homeBloc.add(const HomeSwitchMode()),
           ),
-          if (state
-              case AuthAuthenticated(
-                userData: User(
-                  canManageSomeUsers: true,
-                ),
-              ))
+          if (state case AuthAuthenticated(
+            userData: User(
+              canManageSomeUsers: true,
+            ),
+          ))
             HomeDrawerDestination(
               icon: const Icon(Symbols.manage_accounts),
               label: const Text('إدارة الخدام'),
@@ -67,8 +68,8 @@ class HomeDrawer extends StatelessWidget {
               onTap: () => Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) {
-                    final gqlClient = graphQLClientProvider.read(
-                      globalProviderContainer,
+                    final gqlClient = globalProviderContainer.read(
+                      graphQLClientProvider,
                     );
 
                     return GraphqlCacheInspector(
@@ -98,7 +99,7 @@ class HomeDrawer extends StatelessWidget {
                   title: const Text('حسابي'),
                   onTap: () {
                     Scaffold.of(context).openEndDrawer();
-                    const MyAccountRoute().push(context);
+                    unawaited(const MyAccountRoute().push(context));
                   },
                 ),
               Expanded(
@@ -123,7 +124,7 @@ class HomeDrawer extends StatelessWidget {
                 title: const Text('حول'),
                 onTap: () {
                   Scaffold.of(context).openEndDrawer();
-                  AboutAppService.I.showAboutDialog(context);
+                  unawaited(AboutAppService.I.showAboutDialog(context));
                 },
               ),
               ListTile(

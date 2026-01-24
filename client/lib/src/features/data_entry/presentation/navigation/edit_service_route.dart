@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 part 'edit_service_route.g.dart';
 
 @TypedGoRoute<EditServiceRoute>(path: '/edit_service')
-class EditServiceRoute extends GoRouteData with _$EditServiceRoute {
+class EditServiceRoute extends GoRouteData with $EditServiceRoute {
   const EditServiceRoute({this.$extra});
 
   final Service? $extra;

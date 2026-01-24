@@ -20,7 +20,7 @@ class AddressFields {
     operators: {
       ...MultiSelectOperator.values,
       PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
+      PrimitiveOperator.isNotNull,
     },
   );
 
@@ -33,7 +33,7 @@ class AddressFields {
     operators: {
       ...MultiSelectOperator.values,
       PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
+      PrimitiveOperator.isNotNull,
     },
   );
 
@@ -46,7 +46,7 @@ class AddressFields {
     operators: {
       ...MultiSelectOperator.values,
       PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
+      PrimitiveOperator.isNotNull,
     },
   );
 
@@ -59,7 +59,7 @@ class AddressFields {
     operators: {
       ...StringOperator.values,
       PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
+      PrimitiveOperator.isNotNull,
     },
   );
 
@@ -72,7 +72,7 @@ class AddressFields {
     operators: {
       ...SpatialOperator.values,
       PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
+      PrimitiveOperator.isNotNull,
     },
   );
 
@@ -85,7 +85,7 @@ class AddressFields {
     operators: {
       ...PrimitiveOperator.values,
       PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
+      PrimitiveOperator.isNotNull,
     },
   );
 
@@ -98,7 +98,7 @@ class AddressFields {
     operators: {
       ...PrimitiveOperator.values,
       PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
+      PrimitiveOperator.isNotNull,
     },
   );
 
@@ -111,7 +111,7 @@ class AddressFields {
     operators: {
       ...PrimitiveOperator.values,
       PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
+      PrimitiveOperator.isNotNull,
     },
   );
 
@@ -124,7 +124,7 @@ class AddressFields {
     operators: {
       ...StringOperator.values,
       PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
+      PrimitiveOperator.isNotNull,
     },
   );
 
@@ -137,7 +137,7 @@ class AddressFields {
     operators: {
       ...MultiSelectOperator.values,
       PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
+      PrimitiveOperator.isNotNull,
     },
   );
 
@@ -150,7 +150,7 @@ class AddressFields {
     operators: {
       ...MultiSelectOperator.values,
       PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
+      PrimitiveOperator.isNotNull,
     },
   );
 
@@ -165,7 +165,7 @@ class AddressFields {
     apartmentNumber,
     specialLandmark,
     family,
-    store
+    store,
   ];
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'district': district,
@@ -178,7 +178,7 @@ class AddressFields {
     'apartmentNumber': apartmentNumber,
     'specialLandmark': specialLandmark,
     'family': family,
-    'store': store
+    'store': store,
   };
 }
 
@@ -187,44 +187,43 @@ class AddressFields {
 // **************************************************************************
 
 Address _$AddressFromJson(Map json) => Address(
-      id: json['id'] as String?,
-      countryIsoCode: json['countryIsoCode'] as String? ?? 'EG',
-      district: json['district'] == null
-          ? null
-          : District.fromJson(
-              Map<String, Object?>.from(json['district'] as Map)),
-      area: json['area'] == null
-          ? null
-          : Area.fromJson(Map<String, Object?>.from(json['area'] as Map)),
-      street: json['street'] == null
-          ? null
-          : Street.fromJson(Map<String, Object?>.from(json['street'] as Map)),
-      substreetName: json['substreetName'] as String?,
-      geolocation: pointFromJson(json['geolocation']),
-      storeyNumber: (json['storeyNumber'] as num?)?.toInt(),
-      houseNumber: (json['houseNumber'] as num?)?.toInt(),
-      apartmentNumber: (json['apartmentNumber'] as num?)?.toInt(),
-      specialLandmark: json['specialLandmark'] as String?,
-      family: json['family'] == null
-          ? null
-          : Family.fromJson(Map<String, Object?>.from(json['family'] as Map)),
-      store: json['store'] == null
-          ? null
-          : Store.fromJson(Map<String, Object?>.from(json['store'] as Map)),
-    );
+  id: json['id'] as String?,
+  countryIsoCode: json['countryIsoCode'] as String? ?? 'EG',
+  district: json['district'] == null
+      ? null
+      : District.fromJson(Map<String, Object?>.from(json['district'] as Map)),
+  area: json['area'] == null
+      ? null
+      : Area.fromJson(Map<String, Object?>.from(json['area'] as Map)),
+  street: json['street'] == null
+      ? null
+      : Street.fromJson(Map<String, Object?>.from(json['street'] as Map)),
+  substreetName: json['substreetName'] as String?,
+  geolocation: pointFromJson(json['geolocation']),
+  storeyNumber: (json['storeyNumber'] as num?)?.toInt(),
+  houseNumber: (json['houseNumber'] as num?)?.toInt(),
+  apartmentNumber: (json['apartmentNumber'] as num?)?.toInt(),
+  specialLandmark: json['specialLandmark'] as String?,
+  family: json['family'] == null
+      ? null
+      : Family.fromJson(Map<String, Object?>.from(json['family'] as Map)),
+  store: json['store'] == null
+      ? null
+      : Store.fromJson(Map<String, Object?>.from(json['store'] as Map)),
+);
 
 Map<String, dynamic> _$AddressToJson(Address instance) => <String, dynamic>{
-      'id': instance.id,
-      'countryIsoCode': instance.countryIsoCode,
-      'district': instance.district?.toJson(),
-      'area': instance.area?.toJson(),
-      'street': instance.street?.toJson(),
-      'substreetName': instance.substreetName,
-      'geolocation': pointToJson(instance.geolocation),
-      'storeyNumber': instance.storeyNumber,
-      'houseNumber': instance.houseNumber,
-      'apartmentNumber': instance.apartmentNumber,
-      'specialLandmark': instance.specialLandmark,
-      'family': instance.family?.toJson(),
-      'store': instance.store?.toJson(),
-    };
+  'id': instance.id,
+  'countryIsoCode': instance.countryIsoCode,
+  'district': instance.district?.toJson(),
+  'area': instance.area?.toJson(),
+  'street': instance.street?.toJson(),
+  'substreetName': instance.substreetName,
+  'geolocation': pointToJson(instance.geolocation),
+  'storeyNumber': instance.storeyNumber,
+  'houseNumber': instance.houseNumber,
+  'apartmentNumber': instance.apartmentNumber,
+  'specialLandmark': instance.specialLandmark,
+  'family': instance.family?.toJson(),
+  'store': instance.store?.toJson(),
+};

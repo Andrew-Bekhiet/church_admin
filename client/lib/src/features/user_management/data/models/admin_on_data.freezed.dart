@@ -9,7 +9,6 @@ part of 'admin_on_data.dart';
 // FreezedGenerator
 // **************************************************************************
 
-// dart format off
 T _$identity<T>(T value) => value;
 
 /// @nodoc
@@ -59,8 +58,10 @@ mixin _$AdminOnData {
                 other.serviceAllowEdit == serviceAllowEdit) &&
             (identical(other.serviceAdminOnUsers, serviceAdminOnUsers) ||
                 other.serviceAdminOnUsers == serviceAdminOnUsers) &&
-            (identical(other.serviceWriteRelatedFamilies,
-                    serviceWriteRelatedFamilies) ||
+            (identical(
+                  other.serviceWriteRelatedFamilies,
+                  serviceWriteRelatedFamilies,
+                ) ||
                 other.serviceWriteRelatedFamilies ==
                     serviceWriteRelatedFamilies) &&
             const DeepCollectionEquality().equals(other.classes, classes) &&
@@ -69,8 +70,10 @@ mixin _$AdminOnData {
                 other.groupAllowEdit == groupAllowEdit) &&
             (identical(other.groupAdminOnUsers, groupAdminOnUsers) ||
                 other.groupAdminOnUsers == groupAdminOnUsers) &&
-            (identical(other.groupWriteRelatedFamilies,
-                    groupWriteRelatedFamilies) ||
+            (identical(
+                  other.groupWriteRelatedFamilies,
+                  groupWriteRelatedFamilies,
+                ) ||
                 other.groupWriteRelatedFamilies == groupWriteRelatedFamilies) &&
             (identical(other.user, user) || other.user == user));
   }
@@ -78,23 +81,24 @@ mixin _$AdminOnData {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      permissionId,
-      area,
-      areaAllowEdit,
-      areaAdminOnUsers,
-      service,
-      serviceStudyYearData,
-      serviceGender,
-      serviceAllowEdit,
-      serviceAdminOnUsers,
-      serviceWriteRelatedFamilies,
-      const DeepCollectionEquality().hash(classes),
-      group,
-      groupAllowEdit,
-      groupAdminOnUsers,
-      groupWriteRelatedFamilies,
-      user);
+    runtimeType,
+    permissionId,
+    area,
+    areaAllowEdit,
+    areaAdminOnUsers,
+    service,
+    serviceStudyYearData,
+    serviceGender,
+    serviceAllowEdit,
+    serviceAdminOnUsers,
+    serviceWriteRelatedFamilies,
+    const DeepCollectionEquality().hash(classes),
+    group,
+    groupAllowEdit,
+    groupAdminOnUsers,
+    groupWriteRelatedFamilies,
+    user,
+  );
 
   @override
   String toString() {
@@ -105,26 +109,28 @@ mixin _$AdminOnData {
 /// @nodoc
 abstract mixin class $AdminOnDataCopyWith<$Res> {
   factory $AdminOnDataCopyWith(
-          AdminOnData value, $Res Function(AdminOnData) _then) =
-      _$AdminOnDataCopyWithImpl;
+    AdminOnData value,
+    $Res Function(AdminOnData) _then,
+  ) = _$AdminOnDataCopyWithImpl;
   @useResult
-  $Res call(
-      {String permissionId,
-      Area? area,
-      bool? areaAllowEdit,
-      bool? areaAdminOnUsers,
-      Service? service,
-      StudyYear? serviceStudyYearData,
-      bool? serviceGender,
-      bool? serviceAllowEdit,
-      bool? serviceAdminOnUsers,
-      bool? serviceWriteRelatedFamilies,
-      List<Class> classes,
-      Group? group,
-      bool? groupAllowEdit,
-      bool? groupAdminOnUsers,
-      bool? groupWriteRelatedFamilies,
-      User? user});
+  $Res call({
+    String permissionId,
+    Area? area,
+    bool? areaAllowEdit,
+    bool? areaAdminOnUsers,
+    Service? service,
+    StudyYear? serviceStudyYearData,
+    bool? serviceGender,
+    bool? serviceAllowEdit,
+    bool? serviceAdminOnUsers,
+    bool? serviceWriteRelatedFamilies,
+    List<Class> classes,
+    Group? group,
+    bool? groupAllowEdit,
+    bool? groupAdminOnUsers,
+    bool? groupWriteRelatedFamilies,
+    User? user,
+  });
 }
 
 /// @nodoc
@@ -156,73 +162,73 @@ class _$AdminOnDataCopyWithImpl<$Res> implements $AdminOnDataCopyWith<$Res> {
     Object? groupWriteRelatedFamilies = freezed,
     Object? user = freezed,
   }) {
-    return _then(AdminOnData(
-      permissionId: null == permissionId
-          ? _self.permissionId
-          : permissionId // ignore: cast_nullable_to_non_nullable
-              as String,
-      area: freezed == area
-          ? _self.area
-          : area // ignore: cast_nullable_to_non_nullable
-              as Area?,
-      areaAllowEdit: freezed == areaAllowEdit
-          ? _self.areaAllowEdit
-          : areaAllowEdit // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      areaAdminOnUsers: freezed == areaAdminOnUsers
-          ? _self.areaAdminOnUsers
-          : areaAdminOnUsers // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      service: freezed == service
-          ? _self.service
-          : service // ignore: cast_nullable_to_non_nullable
-              as Service?,
-      serviceStudyYearData: freezed == serviceStudyYearData
-          ? _self.serviceStudyYearData
-          : serviceStudyYearData // ignore: cast_nullable_to_non_nullable
-              as StudyYear?,
-      serviceGender: freezed == serviceGender
-          ? _self.serviceGender
-          : serviceGender // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      serviceAllowEdit: freezed == serviceAllowEdit
-          ? _self.serviceAllowEdit
-          : serviceAllowEdit // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      serviceAdminOnUsers: freezed == serviceAdminOnUsers
-          ? _self.serviceAdminOnUsers
-          : serviceAdminOnUsers // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      serviceWriteRelatedFamilies: freezed == serviceWriteRelatedFamilies
-          ? _self.serviceWriteRelatedFamilies
-          : serviceWriteRelatedFamilies // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      classes: null == classes
-          ? _self.classes
-          : classes // ignore: cast_nullable_to_non_nullable
-              as List<Class>,
-      group: freezed == group
-          ? _self.group
-          : group // ignore: cast_nullable_to_non_nullable
-              as Group?,
-      groupAllowEdit: freezed == groupAllowEdit
-          ? _self.groupAllowEdit
-          : groupAllowEdit // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      groupAdminOnUsers: freezed == groupAdminOnUsers
-          ? _self.groupAdminOnUsers
-          : groupAdminOnUsers // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      groupWriteRelatedFamilies: freezed == groupWriteRelatedFamilies
-          ? _self.groupWriteRelatedFamilies
-          : groupWriteRelatedFamilies // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      user: freezed == user
-          ? _self.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as User?,
-    ));
+    return _then(
+      AdminOnData(
+        permissionId: null == permissionId
+            ? _self.permissionId
+            : permissionId // ignore: cast_nullable_to_non_nullable
+                  as String,
+        area: freezed == area
+            ? _self.area
+            : area // ignore: cast_nullable_to_non_nullable
+                  as Area?,
+        areaAllowEdit: freezed == areaAllowEdit
+            ? _self.areaAllowEdit
+            : areaAllowEdit // ignore: cast_nullable_to_non_nullable
+                  as bool?,
+        areaAdminOnUsers: freezed == areaAdminOnUsers
+            ? _self.areaAdminOnUsers
+            : areaAdminOnUsers // ignore: cast_nullable_to_non_nullable
+                  as bool?,
+        service: freezed == service
+            ? _self.service
+            : service // ignore: cast_nullable_to_non_nullable
+                  as Service?,
+        serviceStudyYearData: freezed == serviceStudyYearData
+            ? _self.serviceStudyYearData
+            : serviceStudyYearData // ignore: cast_nullable_to_non_nullable
+                  as StudyYear?,
+        serviceGender: freezed == serviceGender
+            ? _self.serviceGender
+            : serviceGender // ignore: cast_nullable_to_non_nullable
+                  as bool?,
+        serviceAllowEdit: freezed == serviceAllowEdit
+            ? _self.serviceAllowEdit
+            : serviceAllowEdit // ignore: cast_nullable_to_non_nullable
+                  as bool?,
+        serviceAdminOnUsers: freezed == serviceAdminOnUsers
+            ? _self.serviceAdminOnUsers
+            : serviceAdminOnUsers // ignore: cast_nullable_to_non_nullable
+                  as bool?,
+        serviceWriteRelatedFamilies: freezed == serviceWriteRelatedFamilies
+            ? _self.serviceWriteRelatedFamilies
+            : serviceWriteRelatedFamilies // ignore: cast_nullable_to_non_nullable
+                  as bool?,
+        classes: null == classes
+            ? _self.classes
+            : classes // ignore: cast_nullable_to_non_nullable
+                  as List<Class>,
+        group: freezed == group
+            ? _self.group
+            : group // ignore: cast_nullable_to_non_nullable
+                  as Group?,
+        groupAllowEdit: freezed == groupAllowEdit
+            ? _self.groupAllowEdit
+            : groupAllowEdit // ignore: cast_nullable_to_non_nullable
+                  as bool?,
+        groupAdminOnUsers: freezed == groupAdminOnUsers
+            ? _self.groupAdminOnUsers
+            : groupAdminOnUsers // ignore: cast_nullable_to_non_nullable
+                  as bool?,
+        groupWriteRelatedFamilies: freezed == groupWriteRelatedFamilies
+            ? _self.groupWriteRelatedFamilies
+            : groupWriteRelatedFamilies // ignore: cast_nullable_to_non_nullable
+                  as bool?,
+        user: freezed == user
+            ? _self.user
+            : user // ignore: cast_nullable_to_non_nullable
+                  as User?,
+      ),
+    );
   }
 }
-
-// dart format on

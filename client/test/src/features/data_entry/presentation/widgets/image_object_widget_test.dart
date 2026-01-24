@@ -6,13 +6,13 @@ import 'package:church_admin/church_admin.dart';
 import 'package:file/file.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:flutter_riverpod/misc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:photo_view/photo_view.dart';
-import 'package:riverpod/riverpod.dart';
 
 import 'image_object_widget_test.mocks.dart';
 
@@ -51,8 +51,11 @@ void main() {
   testWidgets(
     'Image Object Widget => has image',
     (tester) async {
-      final person =
-          Person(id: 'id', name: 'name', photoUpdatedAt: DateTime.now());
+      final person = Person(
+        id: 'id',
+        name: 'name',
+        photoUpdatedAt: DateTime.now(),
+      );
 
       final freshImageFinder = find.descendant(
         of: find.byType(ImageObjectWidget),
@@ -124,8 +127,11 @@ void main() {
   testWidgets(
     'Image Object Widget => circleCrop',
     (tester) async {
-      final person =
-          Person(id: 'id', name: 'name', photoUpdatedAt: DateTime.now());
+      final person = Person(
+        id: 'id',
+        name: 'name',
+        photoUpdatedAt: DateTime.now(),
+      );
 
       await tester.pumpWidgetBuilder(
         Scaffold(
@@ -175,8 +181,11 @@ void main() {
   testWidgets(
     'Image Object Widget => circleCrop: false',
     (tester) async {
-      final person =
-          Person(id: 'id', name: 'name', photoUpdatedAt: DateTime.now());
+      final person = Person(
+        id: 'id',
+        name: 'name',
+        photoUpdatedAt: DateTime.now(),
+      );
 
       await tester.pumpWidgetBuilder(
         Scaffold(
@@ -227,8 +236,11 @@ void main() {
   testWidgets(
     'Image Object Widget => onTap',
     (tester) async {
-      final person =
-          Person(id: 'id', name: 'name', photoUpdatedAt: DateTime.now());
+      final person = Person(
+        id: 'id',
+        name: 'name',
+        photoUpdatedAt: DateTime.now(),
+      );
 
       await tester.pumpWidgetBuilder(
         Scaffold(
@@ -307,12 +319,15 @@ Override _setUpCacheManager() {
 
 Override _setUpImageUrlCacheService() {
   final imageUrlCacheService = MockImageUrlCacheService();
-  when(imageUrlCacheService.getNonExpiredCachedImageUrl(any))
-      .thenReturn('cachedImageUrl');
-  when(imageUrlCacheService.getCachedImageUrl(any))
-      .thenReturn('maybeExpiredImageUrl');
-  when(imageUrlCacheService.getImageUrl(any))
-      .thenAnswer((_) => Future.value('imageUrl'));
+  when(
+    imageUrlCacheService.getNonExpiredCachedImageUrl(any),
+  ).thenReturn('cachedImageUrl');
+  when(
+    imageUrlCacheService.getCachedImageUrl(any),
+  ).thenReturn('maybeExpiredImageUrl');
+  when(
+    imageUrlCacheService.getImageUrl(any),
+  ).thenAnswer((_) => Future.value('imageUrl'));
 
   return imageUrlCacheServiceProvider.overrideWithValue(imageUrlCacheService);
 }
@@ -320,8 +335,9 @@ Override _setUpImageUrlCacheService() {
 Override _setUpViewableObjectService() {
   final viewableObjectService = MockViewableObjectService();
 
-  when(viewableObjectService.getDefaultIconFor<Person>(any))
-      .thenReturn(Symbols.person);
+  when(
+    viewableObjectService.getDefaultIconFor<Person>(any),
+  ).thenReturn(Symbols.person);
 
   return viewableObjectServiceProvider.overrideWithValue(viewableObjectService);
 }

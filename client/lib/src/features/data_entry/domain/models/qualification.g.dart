@@ -32,7 +32,7 @@ class QualificationFields {
   late final List<FieldMetadata<Object>> allFields = [id, name];
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'id': id,
-    'name': name
+    'name': name,
   };
 }
 
@@ -41,12 +41,9 @@ class QualificationFields {
 // **************************************************************************
 
 Qualification _$QualificationFromJson(Map json) => Qualification(
-      id: json['id'] as String? ?? '',
-      name: json['name'] as String? ?? '',
-    );
+  id: json['id'] as String? ?? '',
+  name: json['name'] as String? ?? '',
+);
 
 Map<String, dynamic> _$QualificationToJson(Qualification instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
-    };
+    <String, dynamic>{'id': instance.id, 'name': instance.name};

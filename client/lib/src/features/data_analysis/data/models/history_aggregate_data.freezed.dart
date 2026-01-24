@@ -9,7 +9,6 @@ part of 'history_aggregate_data.dart';
 // FreezedGenerator
 // **************************************************************************
 
-// dart format off
 T _$identity<T>(T value) => value;
 
 /// @nodoc
@@ -23,7 +22,9 @@ mixin _$HistoryAggregateData {
   @pragma('vm:prefer-inline')
   $HistoryAggregateDataCopyWith<HistoryAggregateData> get copyWith =>
       _$HistoryAggregateDataCopyWithImpl<HistoryAggregateData>(
-          this as HistoryAggregateData, _$identity);
+        this as HistoryAggregateData,
+        _$identity,
+      );
 
   @override
   bool operator ==(Object other) {
@@ -38,7 +39,10 @@ mixin _$HistoryAggregateData {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-      runtimeType, aggregate, const DeepCollectionEquality().hash(nodes));
+    runtimeType,
+    aggregate,
+    const DeepCollectionEquality().hash(nodes),
+  );
 
   @override
   String toString() {
@@ -48,9 +52,10 @@ mixin _$HistoryAggregateData {
 
 /// @nodoc
 abstract mixin class $HistoryAggregateDataCopyWith<$Res> {
-  factory $HistoryAggregateDataCopyWith(HistoryAggregateData value,
-          $Res Function(HistoryAggregateData) _then) =
-      _$HistoryAggregateDataCopyWithImpl;
+  factory $HistoryAggregateDataCopyWith(
+    HistoryAggregateData value,
+    $Res Function(HistoryAggregateData) _then,
+  ) = _$HistoryAggregateDataCopyWithImpl;
   @useResult
   $Res call({AggregateData aggregate, List<LastRecordedByInfo> nodes});
 }
@@ -67,21 +72,18 @@ class _$HistoryAggregateDataCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? aggregate = null,
-    Object? nodes = null,
-  }) {
-    return _then(HistoryAggregateData(
-      aggregate: null == aggregate
-          ? _self.aggregate
-          : aggregate // ignore: cast_nullable_to_non_nullable
-              as AggregateData,
-      nodes: null == nodes
-          ? _self.nodes
-          : nodes // ignore: cast_nullable_to_non_nullable
-              as List<LastRecordedByInfo>,
-    ));
+  $Res call({Object? aggregate = null, Object? nodes = null}) {
+    return _then(
+      HistoryAggregateData(
+        aggregate: null == aggregate
+            ? _self.aggregate
+            : aggregate // ignore: cast_nullable_to_non_nullable
+                  as AggregateData,
+        nodes: null == nodes
+            ? _self.nodes
+            : nodes // ignore: cast_nullable_to_non_nullable
+                  as List<LastRecordedByInfo>,
+      ),
+    );
   }
 }
-
-// dart format on

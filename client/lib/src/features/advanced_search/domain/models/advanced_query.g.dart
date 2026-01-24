@@ -7,19 +7,19 @@ part of 'advanced_query.dart';
 // **************************************************************************
 
 AdvancedQuery _$AdvancedQueryFromJson(Map json) => AdvancedQuery(
-      queryableType: queryableTypeFromJson(json['queryableType'] as String),
-      name: json['name'] as String?,
-      filters: json['filters'] == null
-          ? const []
-          : conditionsFromJson(json['filters'] as List),
-      logicalOperator: $enumDecodeNullable(
-              _$LogicalOperatorEnumMap, json['logicalOperator']) ??
-          LogicalOperator.and,
-      orderBy: json['orderBy'] == null
-          ? const []
-          : orderBysFromJson(json['orderBy'] as List),
-      limit: (json['limit'] as num?)?.toInt(),
-    );
+  queryableType: queryableTypeFromJson(json['queryableType'] as String),
+  name: json['name'] as String?,
+  filters: json['filters'] == null
+      ? const []
+      : conditionsFromJson(json['filters'] as List),
+  logicalOperator:
+      $enumDecodeNullable(_$LogicalOperatorEnumMap, json['logicalOperator']) ??
+      LogicalOperator.and,
+  orderBy: json['orderBy'] == null
+      ? const []
+      : orderBysFromJson(json['orderBy'] as List),
+  limit: (json['limit'] as num?)?.toInt(),
+);
 
 Map<String, dynamic> _$AdvancedQueryToJson(AdvancedQuery instance) =>
     <String, dynamic>{

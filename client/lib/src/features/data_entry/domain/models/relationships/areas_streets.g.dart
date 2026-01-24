@@ -51,13 +51,13 @@ class AreasStreetsFields {
     area,
     street,
     areaId,
-    streetId
+    streetId,
   ];
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'area': area,
     'street': street,
     'areaId': areaId,
-    'streetId': streetId
+    'streetId': streetId,
   };
 }
 
@@ -66,11 +66,11 @@ class AreasStreetsFields {
 // **************************************************************************
 
 AreasStreets _$AreasStreetsFromJson(Map json) => AreasStreets(
-      area: Area.fromJson(Map<String, Object?>.from(json['area'] as Map)),
-      street: Street.fromJson(Map<String, Object?>.from(json['street'] as Map)),
-      areaId: json['areaId'] as String,
-      streetId: json['streetId'] as String,
-    );
+  area: Area.fromJson(Map<String, Object?>.from(json['area'] as Map)),
+  street: Street.fromJson(Map<String, Object?>.from(json['street'] as Map)),
+  areaId: json['areaId'] as String,
+  streetId: json['streetId'] as String,
+);
 
 Map<String, dynamic> _$AreasStreetsToJson(AreasStreets instance) =>
     <String, dynamic>{

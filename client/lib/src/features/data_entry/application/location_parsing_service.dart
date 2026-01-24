@@ -6,7 +6,7 @@ import 'package:dio/dio.dart';
 
 class LocationParsingService {
   static LocationParsingService get I =>
-      locationParsingServiceProvider.read(globalProviderContainer);
+      globalProviderContainer.read(locationParsingServiceProvider);
 
   const LocationParsingService();
 
@@ -51,7 +51,7 @@ class LocationParsingService {
 
           try {
             final redirectResponse =
-                await dioProvider.read(globalProviderContainer).getUri(
+                await globalProviderContainer.read(dioProvider).getUri(
                       uri,
                       options: Options(followRedirects: true, maxRedirects: 1),
                     );

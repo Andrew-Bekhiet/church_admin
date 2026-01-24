@@ -6,30 +6,24 @@ part of 'view_family_route.dart';
 // GoRouterGenerator
 // **************************************************************************
 
-List<RouteBase> get $appRoutes => [
-      $viewFamilyRoute,
-    ];
+List<RouteBase> get $appRoutes => [$viewFamilyRoute];
 
 RouteBase get $viewFamilyRoute => GoRouteData.$route(
-      path: '/view_family',
-      factory: _$ViewFamilyRoute._fromState,
-    );
+  path: '/view_family',
+  factory: $ViewFamilyRoute._fromState,
+);
 
-mixin _$ViewFamilyRoute on GoRouteData {
+mixin $ViewFamilyRoute on GoRouteData {
   static ViewFamilyRoute _fromState(GoRouterState state) => ViewFamilyRoute(
-        id: state.uri.queryParameters['id']!,
-        $extra: state.extra as Family?,
-      );
+    id: state.uri.queryParameters['id']!,
+    $extra: state.extra as Family?,
+  );
 
   ViewFamilyRoute get _self => this as ViewFamilyRoute;
 
   @override
-  String get location => GoRouteData.$location(
-        '/view_family',
-        queryParams: {
-          'id': _self.id,
-        },
-      );
+  String get location =>
+      GoRouteData.$location('/view_family', queryParams: {'id': _self.id});
 
   @override
   void go(BuildContext context) => context.go(location, extra: _self.$extra);

@@ -9,7 +9,6 @@ part of 'advanced_query.dart';
 // FreezedGenerator
 // **************************************************************************
 
-// dart format off
 T _$identity<T>(T value) => value;
 
 /// @nodoc
@@ -27,7 +26,9 @@ mixin _$AdvancedQuery {
   @pragma('vm:prefer-inline')
   $AdvancedQueryCopyWith<AdvancedQuery> get copyWith =>
       _$AdvancedQueryCopyWithImpl<AdvancedQuery>(
-          this as AdvancedQuery, _$identity);
+        this as AdvancedQuery,
+        _$identity,
+      );
 
   @override
   bool operator ==(Object other) {
@@ -47,13 +48,14 @@ mixin _$AdvancedQuery {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      name,
-      queryableType,
-      const DeepCollectionEquality().hash(filters),
-      logicalOperator,
-      const DeepCollectionEquality().hash(orderBy),
-      limit);
+    runtimeType,
+    name,
+    queryableType,
+    const DeepCollectionEquality().hash(filters),
+    logicalOperator,
+    const DeepCollectionEquality().hash(orderBy),
+    limit,
+  );
 
   @override
   String toString() {
@@ -64,18 +66,24 @@ mixin _$AdvancedQuery {
 /// @nodoc
 abstract mixin class $AdvancedQueryCopyWith<$Res> {
   factory $AdvancedQueryCopyWith(
-          AdvancedQuery value, $Res Function(AdvancedQuery) _then) =
-      _$AdvancedQueryCopyWithImpl;
+    AdvancedQuery value,
+    $Res Function(AdvancedQuery) _then,
+  ) = _$AdvancedQueryCopyWithImpl;
   @useResult
-  $Res call(
-      {QueryableType<Object> queryableType,
-      String? name,
-      List<Filter<Object>> filters,
-      LogicalOperator<FieldMetadata<Object>, Operator<dynamic>, Object,
-              Filter<Object>>
-          logicalOperator,
-      List<OrderBy> orderBy,
-      int? limit});
+  $Res call({
+    QueryableType<Object> queryableType,
+    String? name,
+    List<Filter<Object>> filters,
+    LogicalOperator<
+      FieldMetadata<Object>,
+      Operator<dynamic>,
+      Object,
+      Filter<Object>
+    >
+    logicalOperator,
+    List<OrderBy> orderBy,
+    int? limit,
+  });
 }
 
 /// @nodoc
@@ -98,34 +106,38 @@ class _$AdvancedQueryCopyWithImpl<$Res>
     Object? orderBy = null,
     Object? limit = freezed,
   }) {
-    return _then(AdvancedQuery(
-      queryableType: null == queryableType
-          ? _self.queryableType
-          : queryableType // ignore: cast_nullable_to_non_nullable
-              as QueryableType<Object>,
-      name: freezed == name
-          ? _self.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String?,
-      filters: null == filters
-          ? _self.filters
-          : filters // ignore: cast_nullable_to_non_nullable
-              as List<Filter<Object>>,
-      logicalOperator: null == logicalOperator
-          ? _self.logicalOperator
-          : logicalOperator // ignore: cast_nullable_to_non_nullable
-              as LogicalOperator<FieldMetadata<Object>, Operator<dynamic>,
-                  Object, Filter<Object>>,
-      orderBy: null == orderBy
-          ? _self.orderBy
-          : orderBy // ignore: cast_nullable_to_non_nullable
-              as List<OrderBy>,
-      limit: freezed == limit
-          ? _self.limit
-          : limit // ignore: cast_nullable_to_non_nullable
-              as int?,
-    ));
+    return _then(
+      AdvancedQuery(
+        queryableType: null == queryableType
+            ? _self.queryableType
+            : queryableType // ignore: cast_nullable_to_non_nullable
+                  as QueryableType<Object>,
+        name: freezed == name
+            ? _self.name
+            : name // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        filters: null == filters
+            ? _self.filters
+            : filters // ignore: cast_nullable_to_non_nullable
+                  as List<Filter<Object>>,
+        logicalOperator: null == logicalOperator
+            ? _self.logicalOperator
+            : logicalOperator // ignore: cast_nullable_to_non_nullable
+                  as LogicalOperator<
+                    FieldMetadata<Object>,
+                    Operator<dynamic>,
+                    Object,
+                    Filter<Object>
+                  >,
+        orderBy: null == orderBy
+            ? _self.orderBy
+            : orderBy // ignore: cast_nullable_to_non_nullable
+                  as List<OrderBy>,
+        limit: freezed == limit
+            ? _self.limit
+            : limit // ignore: cast_nullable_to_non_nullable
+                  as int?,
+      ),
+    );
   }
 }
-
-// dart format on

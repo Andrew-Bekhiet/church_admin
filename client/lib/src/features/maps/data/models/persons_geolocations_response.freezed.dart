@@ -9,7 +9,6 @@ part of 'persons_geolocations_response.dart';
 // FreezedGenerator
 // **************************************************************************
 
-// dart format off
 T _$identity<T>(T value) => value;
 
 /// @nodoc
@@ -25,9 +24,11 @@ mixin _$PersonsGeolocationsResponse {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
   $PersonsGeolocationsResponseCopyWith<PersonsGeolocationsResponse>
-      get copyWith => _$PersonsGeolocationsResponseCopyWithImpl<
-              PersonsGeolocationsResponse>(
-          this as PersonsGeolocationsResponse, _$identity);
+  get copyWith =>
+      _$PersonsGeolocationsResponseCopyWithImpl<PersonsGeolocationsResponse>(
+        this as PersonsGeolocationsResponse,
+        _$identity,
+      );
 
   @override
   bool operator ==(Object other) {
@@ -44,12 +45,13 @@ mixin _$PersonsGeolocationsResponse {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(areas),
-      const DeepCollectionEquality().hash(streets),
-      const DeepCollectionEquality().hash(families),
-      const DeepCollectionEquality().hash(stores),
-      const DeepCollectionEquality().hash(persons));
+    runtimeType,
+    const DeepCollectionEquality().hash(areas),
+    const DeepCollectionEquality().hash(streets),
+    const DeepCollectionEquality().hash(families),
+    const DeepCollectionEquality().hash(stores),
+    const DeepCollectionEquality().hash(persons),
+  );
 
   @override
   String toString() {
@@ -60,16 +62,17 @@ mixin _$PersonsGeolocationsResponse {
 /// @nodoc
 abstract mixin class $PersonsGeolocationsResponseCopyWith<$Res> {
   factory $PersonsGeolocationsResponseCopyWith(
-          PersonsGeolocationsResponse value,
-          $Res Function(PersonsGeolocationsResponse) _then) =
-      _$PersonsGeolocationsResponseCopyWithImpl;
+    PersonsGeolocationsResponse value,
+    $Res Function(PersonsGeolocationsResponse) _then,
+  ) = _$PersonsGeolocationsResponseCopyWithImpl;
   @useResult
-  $Res call(
-      {Set<Area> areas,
-      Set<Street> streets,
-      Set<Family> families,
-      Set<Store> stores,
-      Set<Person> persons});
+  $Res call({
+    Set<Area> areas,
+    Set<Street> streets,
+    Set<Family> families,
+    Set<Store> stores,
+    Set<Person> persons,
+  });
 }
 
 /// @nodoc
@@ -91,29 +94,29 @@ class _$PersonsGeolocationsResponseCopyWithImpl<$Res>
     Object? stores = null,
     Object? persons = null,
   }) {
-    return _then(PersonsGeolocationsResponse(
-      areas: null == areas
-          ? _self.areas
-          : areas // ignore: cast_nullable_to_non_nullable
-              as Set<Area>,
-      streets: null == streets
-          ? _self.streets
-          : streets // ignore: cast_nullable_to_non_nullable
-              as Set<Street>,
-      families: null == families
-          ? _self.families
-          : families // ignore: cast_nullable_to_non_nullable
-              as Set<Family>,
-      stores: null == stores
-          ? _self.stores
-          : stores // ignore: cast_nullable_to_non_nullable
-              as Set<Store>,
-      persons: null == persons
-          ? _self.persons
-          : persons // ignore: cast_nullable_to_non_nullable
-              as Set<Person>,
-    ));
+    return _then(
+      PersonsGeolocationsResponse(
+        areas: null == areas
+            ? _self.areas
+            : areas // ignore: cast_nullable_to_non_nullable
+                  as Set<Area>,
+        streets: null == streets
+            ? _self.streets
+            : streets // ignore: cast_nullable_to_non_nullable
+                  as Set<Street>,
+        families: null == families
+            ? _self.families
+            : families // ignore: cast_nullable_to_non_nullable
+                  as Set<Family>,
+        stores: null == stores
+            ? _self.stores
+            : stores // ignore: cast_nullable_to_non_nullable
+                  as Set<Store>,
+        persons: null == persons
+            ? _self.persons
+            : persons // ignore: cast_nullable_to_non_nullable
+                  as Set<Person>,
+      ),
+    );
   }
 }
-
-// dart format on

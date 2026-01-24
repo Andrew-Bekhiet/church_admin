@@ -9,7 +9,6 @@ part of 'church.dart';
 // FreezedGenerator
 // **************************************************************************
 
-// dart format off
 T _$identity<T>(T value) => value;
 
 /// @nodoc
@@ -65,26 +64,22 @@ class _$ChurchCopyWithImpl<$Res> implements $ChurchCopyWith<$Res> {
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? id = null,
-    Object? name = null,
-    Object? isHidden = null,
-  }) {
-    return _then(Church(
-      id: null == id
-          ? _self.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _self.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      isHidden: null == isHidden
-          ? _self.isHidden
-          : isHidden // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
+  $Res call({Object? id = null, Object? name = null, Object? isHidden = null}) {
+    return _then(
+      Church(
+        id: null == id
+            ? _self.id
+            : id // ignore: cast_nullable_to_non_nullable
+                  as String,
+        name: null == name
+            ? _self.name
+            : name // ignore: cast_nullable_to_non_nullable
+                  as String,
+        isHidden: null == isHidden
+            ? _self.isHidden
+            : isHidden // ignore: cast_nullable_to_non_nullable
+                  as bool,
+      ),
+    );
   }
 }
-
-// dart format on

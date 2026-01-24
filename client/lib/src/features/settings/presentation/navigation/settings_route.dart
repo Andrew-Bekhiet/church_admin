@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 part 'settings_route.g.dart';
 
 @TypedGoRoute<SettingsRoute>(path: '/settings')
-class SettingsRoute extends GoRouteData with _$SettingsRoute {
+class SettingsRoute extends GoRouteData with $SettingsRoute {
   const SettingsRoute();
 
   @override

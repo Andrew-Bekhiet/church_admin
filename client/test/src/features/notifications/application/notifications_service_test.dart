@@ -9,12 +9,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter_cache_manager/file.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:flutter_riverpod/misc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:permission_handler_platform_interface/permission_handler_platform_interface.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
-import 'package:riverpod/riverpod.dart';
 
 import 'notifications_service_test.mocks.dart';
 
@@ -59,8 +59,9 @@ void main() {
               );
 
               verifyInOrder([
-                PermissionHandlerPlatform.instance
-                    .requestPermissions([Permission.notification]),
+                PermissionHandlerPlatform.instance.requestPermissions([
+                  Permission.notification,
+                ]),
                 globalProviderContainer
                     .read(firebaseMessagingProvider)
                     .requestPermission(),
@@ -79,8 +80,9 @@ void main() {
                         as MockPermissionHandlerPlatform)
                     .requestPermissions(any),
               ).thenAnswer(
-                (i) async =>
-                    {i.positionalArguments[0][0]: PermissionStatus.denied},
+                (i) async => {
+                  i.positionalArguments[0][0]: PermissionStatus.denied,
+                },
               );
 
               await expectLater(
@@ -89,8 +91,9 @@ void main() {
               );
 
               verify(
-                PermissionHandlerPlatform.instance
-                    .requestPermissions([Permission.notification]),
+                PermissionHandlerPlatform.instance.requestPermissions([
+                  Permission.notification,
+                ]),
               );
               verifyNever(
                 globalProviderContainer
@@ -107,8 +110,9 @@ void main() {
               addTearDown(unit.dispose);
 
               final notificationSettings = MockNotificationSettings();
-              when(notificationSettings.authorizationStatus)
-                  .thenReturn(AuthorizationStatus.denied);
+              when(
+                notificationSettings.authorizationStatus,
+              ).thenReturn(AuthorizationStatus.denied);
 
               when(
                 globalProviderContainer
@@ -124,8 +128,9 @@ void main() {
               );
 
               verifyInOrder([
-                PermissionHandlerPlatform.instance
-                    .requestPermissions([Permission.notification]),
+                PermissionHandlerPlatform.instance.requestPermissions([
+                  Permission.notification,
+                ]),
                 globalProviderContainer
                     .read(firebaseMessagingProvider)
                     .requestPermission(),
@@ -175,8 +180,8 @@ void main() {
 
               final notificationDetails =
                   await NotificationsService.notificationsDetailsFor(
-                notification,
-              );
+                    notification,
+                  );
 
               expect(
                 notificationDetails.android?.styleInformation,
@@ -211,8 +216,8 @@ void main() {
 
               final notificationDetails =
                   await NotificationsService.notificationsDetailsFor(
-                notification,
-              );
+                    notification,
+                  );
 
               expect(
                 notificationDetails,
@@ -247,7 +252,9 @@ void main() {
           );
 
           verify(
-            globalProviderContainer.read(localNotificationsPluginProvider).show(
+            globalProviderContainer
+                .read(localNotificationsPluginProvider)
+                .show(
                   notification.hashCode,
                   notification.title,
                   notification.body,
@@ -263,7 +270,9 @@ void main() {
           );
 
           verify(
-            globalProviderContainer.read(localNotificationsPluginProvider).show(
+            globalProviderContainer
+                .read(localNotificationsPluginProvider)
+                .show(
                   1234,
                   notification.title,
                   notification.body,
@@ -300,8 +309,10 @@ void main() {
               addTearDown(unit.dispose);
 
               final initialRemoteMessage = RemoteMessage(
-                notification:
-                    const RemoteNotification(title: 'title', body: 'body'),
+                notification: const RemoteNotification(
+                  title: 'title',
+                  body: 'body',
+                ),
                 data: {'aa': 'bb', 'senderUID': 'foobar'},
                 messageId: 'foo',
                 sentTime: DateTime.now(),
@@ -400,10 +411,12 @@ void main() {
               final unit = NotificationsService(
                 authBloc: MockAuthBloc(),
                 settings: MockNotificationsSettingsStorage(),
-                localNotificationsPlugin: globalProviderContainer
-                    .read(localNotificationsPluginProvider),
-                firebaseMessaging:
-                    globalProviderContainer.read(firebaseMessagingProvider),
+                localNotificationsPlugin: globalProviderContainer.read(
+                  localNotificationsPluginProvider,
+                ),
+                firebaseMessaging: globalProviderContainer.read(
+                  firebaseMessagingProvider,
+                ),
                 onMessageOpenedAppStream: onMessageOpenedAppStream.stream,
                 onForegroundMessageStream: onForegroundMessageStream.stream,
               );
@@ -449,8 +462,9 @@ void main() {
               ];
 
               await expectLater(
-                unit.onNotificationTapStream
-                    .timeout(const Duration(seconds: 2)),
+                unit.onNotificationTapStream.timeout(
+                  const Duration(seconds: 2),
+                ),
                 emitsError(isA<TimeoutException>()),
               );
 
@@ -504,8 +518,9 @@ void main() {
 
               await Future.delayed(Duration.zero);
 
-              final localNotificationsPlugin = globalProviderContainer
-                  .read(localNotificationsPluginProvider);
+              final localNotificationsPlugin = globalProviderContainer.read(
+                localNotificationsPluginProvider,
+              );
 
               verifyInOrder(
                 [
@@ -593,8 +608,9 @@ void main() {
                 },
               );
 
-              final expectedNotification =
-                  Notification.fromRemoteMessage(remoteMessage);
+              final expectedNotification = Notification.fromRemoteMessage(
+                remoteMessage,
+              );
 
               await NotificationsServiceCallbacks.onBackgroundMessageReceived(
                 remoteMessage,
@@ -607,8 +623,8 @@ void main() {
                   expectedNotification,
                   notificationDetails:
                       await NotificationsService.notificationsDetailsFor(
-                    expectedNotification,
-                  ),
+                        expectedNotification,
+                      ),
                 ),
               ]);
             },
@@ -622,7 +638,7 @@ void main() {
                 sentTime: DateTime.now(),
                 data: {
                   'senderUID': 'foobar',
-                  'type': NotificationType.remote.name
+                  'type': NotificationType.remote.name,
                 },
                 notification: const RemoteNotification(
                   body: 'body',
@@ -630,8 +646,9 @@ void main() {
                 ),
               );
 
-              final expectedNotification =
-                  Notification.fromRemoteMessage(remoteMessage);
+              final expectedNotification = Notification.fromRemoteMessage(
+                remoteMessage,
+              );
 
               await NotificationsServiceCallbacks.onBackgroundMessageReceived(
                 remoteMessage,
@@ -659,7 +676,7 @@ void main() {
                 sentTime: DateTime.now(),
                 data: {
                   'senderUID': 'foobar',
-                  'type': NotificationType.triggerShorebirdUpdate.name
+                  'type': NotificationType.triggerShorebirdUpdate.name,
                 },
                 notification: const RemoteNotification(
                   body: 'body',
@@ -667,8 +684,9 @@ void main() {
                 ),
               );
 
-              final expectedNotification =
-                  Notification.fromRemoteMessage(remoteMessage);
+              final expectedNotification = Notification.fromRemoteMessage(
+                remoteMessage,
+              );
 
               await NotificationsServiceCallbacks.onBackgroundMessageReceived(
                 remoteMessage,
@@ -684,8 +702,9 @@ void main() {
                   id: anyNamed('id'),
                 ),
               );
-              verifyNever(NotificationsStorage.I
-                  .writeNotification(expectedNotification));
+              verifyNever(
+                NotificationsStorage.I.writeNotification(expectedNotification),
+              );
             },
           );
         },
@@ -705,13 +724,17 @@ void main() {
 
               final unit = _createNewUnit();
 
-              const notificationSetting =
-                  NotificationSetting(hours: 4, minutes: 5, intervalInDays: 2);
+              const notificationSetting = NotificationSetting(
+                hours: 4,
+                minutes: 5,
+                intervalInDays: 2,
+              );
               await unit.scheduleBirthDayNotification(notificationSetting);
 
               verify(
-                NotificationsSettingsStorage.I
-                    .setBirthDayTime(notificationSetting),
+                NotificationsSettingsStorage.I.setBirthDayTime(
+                  notificationSetting,
+                ),
               );
 
               expect(capturedCall, isNotNull);
@@ -739,13 +762,17 @@ void main() {
 
               final unit = _createNewUnit();
 
-              const notificationSetting =
-                  NotificationSetting(hours: 4, minutes: 5, intervalInDays: 2);
+              const notificationSetting = NotificationSetting(
+                hours: 4,
+                minutes: 5,
+                intervalInDays: 2,
+              );
               await unit.scheduleAttendanceNotification(notificationSetting);
 
               verify(
-                NotificationsSettingsStorage.I
-                    .setAttendanceTime(notificationSetting),
+                NotificationsSettingsStorage.I.setAttendanceTime(
+                  notificationSetting,
+                ),
               );
 
               expect(capturedCall, isNotNull);
@@ -773,13 +800,17 @@ void main() {
 
               final unit = _createNewUnit();
 
-              const notificationSetting =
-                  NotificationSetting(hours: 4, minutes: 5, intervalInDays: 2);
+              const notificationSetting = NotificationSetting(
+                hours: 4,
+                minutes: 5,
+                intervalInDays: 2,
+              );
               await unit.scheduleKodasNotification(notificationSetting);
 
               verify(
-                NotificationsSettingsStorage.I
-                    .setKodasTime(notificationSetting),
+                NotificationsSettingsStorage.I.setKodasTime(
+                  notificationSetting,
+                ),
               );
 
               expect(capturedCall, isNotNull);
@@ -806,13 +837,17 @@ void main() {
 
               final unit = _createNewUnit();
 
-              const notificationSetting =
-                  NotificationSetting(hours: 4, minutes: 5, intervalInDays: 2);
+              const notificationSetting = NotificationSetting(
+                hours: 4,
+                minutes: 5,
+                intervalInDays: 2,
+              );
               await unit.scheduleConfessionNotification(notificationSetting);
 
               verify(
-                NotificationsSettingsStorage.I
-                    .setConfessionTime(notificationSetting),
+                NotificationsSettingsStorage.I.setConfessionTime(
+                  notificationSetting,
+                ),
               );
 
               expect(capturedCall, isNotNull);
@@ -877,8 +912,9 @@ List<Object> _callArgumentsMatchFor({
 NotificationsService _createNewUnit() {
   return NotificationsService(
     authBloc: AuthBloc.I,
-    localNotificationsPlugin:
-        globalProviderContainer.read(localNotificationsPluginProvider),
+    localNotificationsPlugin: globalProviderContainer.read(
+      localNotificationsPluginProvider,
+    ),
     firebaseMessaging: globalProviderContainer.read(firebaseMessagingProvider),
     onForegroundMessageStream: const Stream.empty(),
     onMessageOpenedAppStream: const Stream.empty(),
@@ -906,13 +942,15 @@ Future<void> _setUp() async {
 }
 
 Override _setUpInitializationService() {
-  return initializationServiceProvider
-      .overrideWithValue(MockInitializationService());
+  return initializationServiceProvider.overrideWithValue(
+    MockInitializationService(),
+  );
 }
 
 Override _setUpStorage() {
-  return notificationsStorageProvider
-      .overrideWithValue(MockNotificationsStorage());
+  return notificationsStorageProvider.overrideWithValue(
+    MockNotificationsStorage(),
+  );
 }
 
 Override _setUpFunctionsService() {
@@ -920,8 +958,9 @@ Override _setUpFunctionsService() {
 }
 
 Override _setUpUserSettingsService() {
-  return userSettingsServiceProvider
-      .overrideWithValue(MockUserSettingsService());
+  return userSettingsServiceProvider.overrideWithValue(
+    MockUserSettingsService(),
+  );
 }
 
 Override _setUpAuthBloc() {
@@ -940,8 +979,9 @@ Override _setUpLocalNotificationsPlugin() {
 
 Future<Override> _setUpFirebaseMessaging() async {
   final notificationSettings = MockNotificationSettings();
-  when(notificationSettings.authorizationStatus)
-      .thenReturn(AuthorizationStatus.authorized);
+  when(
+    notificationSettings.authorizationStatus,
+  ).thenReturn(AuthorizationStatus.authorized);
 
   final mockFirebaseMessaging = MockFirebaseMessaging();
   when(mockFirebaseMessaging.requestPermission()).thenAnswer(
@@ -974,14 +1014,15 @@ void _setUpAlarmManagerPlatformChannel(
 ) {
   TestDefaultBinaryMessengerBinding.instance.defaultBinaryMessenger
       .setMockMethodCallHandler(
-    AndroidAlarmManager.channel,
-    onMethodCall,
-  );
+        AndroidAlarmManager.channel,
+        onMethodCall,
+      );
 }
 
 Override _setUpNotificationsSettingsStorage() {
-  return notificationsSettingsProvider
-      .overrideWithValue(MockNotificationsSettingsStorage());
+  return notificationsSettingsProvider.overrideWithValue(
+    MockNotificationsSettingsStorage(),
+  );
 }
 
 Override _setUpCacheManager() {

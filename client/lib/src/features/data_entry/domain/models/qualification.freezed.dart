@@ -9,7 +9,6 @@ part of 'qualification.dart';
 // FreezedGenerator
 // **************************************************************************
 
-// dart format off
 T _$identity<T>(T value) => value;
 
 /// @nodoc
@@ -23,7 +22,9 @@ mixin _$Qualification {
   @pragma('vm:prefer-inline')
   $QualificationCopyWith<Qualification> get copyWith =>
       _$QualificationCopyWithImpl<Qualification>(
-          this as Qualification, _$identity);
+        this as Qualification,
+        _$identity,
+      );
 
   @override
   bool operator ==(Object other) {
@@ -47,8 +48,9 @@ mixin _$Qualification {
 /// @nodoc
 abstract mixin class $QualificationCopyWith<$Res> {
   factory $QualificationCopyWith(
-          Qualification value, $Res Function(Qualification) _then) =
-      _$QualificationCopyWithImpl;
+    Qualification value,
+    $Res Function(Qualification) _then,
+  ) = _$QualificationCopyWithImpl;
   @useResult
   $Res call({String id, String name});
 }
@@ -65,21 +67,18 @@ class _$QualificationCopyWithImpl<$Res>
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? id = null,
-    Object? name = null,
-  }) {
-    return _then(Qualification(
-      id: null == id
-          ? _self.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _self.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
+  $Res call({Object? id = null, Object? name = null}) {
+    return _then(
+      Qualification(
+        id: null == id
+            ? _self.id
+            : id // ignore: cast_nullable_to_non_nullable
+                  as String,
+        name: null == name
+            ? _self.name
+            : name // ignore: cast_nullable_to_non_nullable
+                  as String,
+      ),
+    );
   }
 }
-
-// dart format on

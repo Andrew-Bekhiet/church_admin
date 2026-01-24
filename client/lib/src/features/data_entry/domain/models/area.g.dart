@@ -36,7 +36,7 @@ class _AreaFields {
     operators: {
       ...SpatialOperator.values,
       PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
+      PrimitiveOperator.isNotNull,
     },
   );
 
@@ -49,7 +49,7 @@ class _AreaFields {
     operators: {
       ...ColorOperator.values,
       PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
+      PrimitiveOperator.isNotNull,
     },
   );
 
@@ -63,37 +63,37 @@ class _AreaFields {
       ...DateTimeOperator.values,
       ...DateRangeOperator.values,
       PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
+      PrimitiveOperator.isNotNull,
     },
   );
 
   final FieldMetadata<LastRecordedByInfo> lastVisit =
       FieldMetadata<LastRecordedByInfo>(
-    getValue: (obj) => obj is Area ? obj.lastVisit : null,
-    parentType: Area,
-    name: 'lastVisit',
-    label: 'أخر افتقاد',
-    isCodeOnly: false,
-    operators: {
-      ...MultiSelectOperator.values,
-      PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
-    },
-  );
+        getValue: (obj) => obj is Area ? obj.lastVisit : null,
+        parentType: Area,
+        name: 'lastVisit',
+        label: 'أخر افتقاد',
+        isCodeOnly: false,
+        operators: {
+          ...MultiSelectOperator.values,
+          PrimitiveOperator.isNull,
+          PrimitiveOperator.isNotNull,
+        },
+      );
 
   final FieldMetadata<LastRecordedByInfo> lastEdit =
       FieldMetadata<LastRecordedByInfo>(
-    getValue: (obj) => obj is Area ? obj.lastEdit : null,
-    parentType: Area,
-    name: 'lastEdit',
-    label: 'أخر تحديث البيانات',
-    isCodeOnly: false,
-    operators: {
-      ...MultiSelectOperator.values,
-      PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
-    },
-  );
+        getValue: (obj) => obj is Area ? obj.lastEdit : null,
+        parentType: Area,
+        name: 'lastEdit',
+        label: 'أخر تحديث البيانات',
+        isCodeOnly: false,
+        operators: {
+          ...MultiSelectOperator.values,
+          PrimitiveOperator.isNull,
+          PrimitiveOperator.isNotNull,
+        },
+      );
 
   final FieldMetadata<AdminOnData> adminUsersRel = FieldMetadata<AdminOnData>(
     getValue: (obj) => obj is Area ? obj.adminUsers : null,
@@ -118,7 +118,7 @@ class _AreaFields {
     photoUpdatedAt,
     lastVisit,
     lastEdit,
-    adminUsers
+    adminUsers,
   ];
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'id': id,
@@ -128,7 +128,7 @@ class _AreaFields {
     'photoUpdatedAt': photoUpdatedAt,
     'lastVisit': lastVisit,
     'lastEdit': lastEdit,
-    'adminUsers': adminUsers
+    'adminUsers': adminUsers,
   };
 }
 
@@ -137,34 +137,36 @@ class _AreaFields {
 // **************************************************************************
 
 Area _$AreaFromJson(Map json) => Area(
-      id: json['id'] as String? ?? '',
-      name: json['name'] as String? ?? '',
-      bounds: polygonFromJson(json['bounds']),
-      color: colorFromInt((json['color'] as num?)?.toInt()),
-      photoUpdatedAt: json['photoUpdatedAt'] == null
-          ? null
-          : DateTime.parse(json['photoUpdatedAt'] as String),
-      blurhash: json['blurhash'] as String?,
-      lastVisit: json['lastVisit'] == null
-          ? null
-          : LastRecordedByInfo.fromJson(
-              Map<String, Object?>.from(json['lastVisit'] as Map)),
-      lastEdit: json['lastEdit'] == null
-          ? null
-          : LastRecordedByInfo.fromJson(
-              Map<String, Object?>.from(json['lastEdit'] as Map)),
-      adminUsers: adminUsersFromJson(json['adminUsers'] as List?),
-      userCanEdit: json['userCanEdit'] as bool? ?? false,
-    );
+  id: json['id'] as String? ?? '',
+  name: json['name'] as String? ?? '',
+  bounds: polygonFromJson(json['bounds']),
+  color: colorFromInt((json['color'] as num?)?.toInt()),
+  photoUpdatedAt: json['photoUpdatedAt'] == null
+      ? null
+      : DateTime.parse(json['photoUpdatedAt'] as String),
+  blurhash: json['blurhash'] as String?,
+  lastVisit: json['lastVisit'] == null
+      ? null
+      : LastRecordedByInfo.fromJson(
+          Map<String, Object?>.from(json['lastVisit'] as Map),
+        ),
+  lastEdit: json['lastEdit'] == null
+      ? null
+      : LastRecordedByInfo.fromJson(
+          Map<String, Object?>.from(json['lastEdit'] as Map),
+        ),
+  adminUsers: adminUsersFromJson(json['adminUsers'] as List?),
+  userCanEdit: json['userCanEdit'] as bool? ?? false,
+);
 
 Map<String, dynamic> _$AreaToJson(Area instance) => <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
-      'bounds': polygonToJson(instance.bounds),
-      'color': colorToInt(instance.color),
-      'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
-      'blurhash': instance.blurhash,
-      'lastVisit': instance.lastVisit?.toJson(),
-      'lastEdit': instance.lastEdit?.toJson(),
-      'adminUsers': adminUsersToJson(instance.adminUsers),
-    };
+  'id': instance.id,
+  'name': instance.name,
+  'bounds': polygonToJson(instance.bounds),
+  'color': colorToInt(instance.color),
+  'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+  'blurhash': instance.blurhash,
+  'lastVisit': instance.lastVisit?.toJson(),
+  'lastEdit': instance.lastEdit?.toJson(),
+  'adminUsers': adminUsersToJson(instance.adminUsers),
+};

@@ -9,7 +9,6 @@ part of 'attendance_record.dart';
 // FreezedGenerator
 // **************************************************************************
 
-// dart format off
 T _$identity<T>(T value) => value;
 
 /// @nodoc
@@ -32,7 +31,9 @@ mixin _$AttendanceRecord {
   @pragma('vm:prefer-inline')
   $AttendanceRecordCopyWith<AttendanceRecord> get copyWith =>
       _$AttendanceRecordCopyWithImpl<AttendanceRecord>(
-          this as AttendanceRecord, _$identity);
+        this as AttendanceRecord,
+        _$identity,
+      );
 
   @override
   bool operator ==(Object other) {
@@ -57,8 +58,20 @@ mixin _$AttendanceRecord {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, dayId, time, service, person,
-      recordedByUser, asAdmin, studyYear, serviceGender, group, class$);
+  int get hashCode => Object.hash(
+    runtimeType,
+    id,
+    dayId,
+    time,
+    service,
+    person,
+    recordedByUser,
+    asAdmin,
+    studyYear,
+    serviceGender,
+    group,
+    class$,
+  );
 
   @override
   String toString() {
@@ -69,21 +82,23 @@ mixin _$AttendanceRecord {
 /// @nodoc
 abstract mixin class $AttendanceRecordCopyWith<$Res> {
   factory $AttendanceRecordCopyWith(
-          AttendanceRecord value, $Res Function(AttendanceRecord) _then) =
-      _$AttendanceRecordCopyWithImpl;
+    AttendanceRecord value,
+    $Res Function(AttendanceRecord) _then,
+  ) = _$AttendanceRecordCopyWithImpl;
   @useResult
-  $Res call(
-      {String id,
-      DateTime dayId,
-      DateTime time,
-      Service service,
-      Person person,
-      User recordedByUser,
-      bool asAdmin,
-      StudyYear? studyYear,
-      bool? serviceGender,
-      Group? group,
-      Class? class$});
+  $Res call({
+    String id,
+    DateTime dayId,
+    DateTime time,
+    Service service,
+    Person person,
+    User recordedByUser,
+    bool asAdmin,
+    StudyYear? studyYear,
+    bool? serviceGender,
+    Group? group,
+    Class? class$,
+  });
 }
 
 /// @nodoc
@@ -111,53 +126,53 @@ class _$AttendanceRecordCopyWithImpl<$Res>
     Object? group = freezed,
     Object? class$ = freezed,
   }) {
-    return _then(AttendanceRecord(
-      id: null == id
-          ? _self.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      dayId: null == dayId
-          ? _self.dayId
-          : dayId // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      time: null == time
-          ? _self.time
-          : time // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      service: null == service
-          ? _self.service
-          : service // ignore: cast_nullable_to_non_nullable
-              as Service,
-      person: null == person
-          ? _self.person
-          : person // ignore: cast_nullable_to_non_nullable
-              as Person,
-      recordedByUser: null == recordedByUser
-          ? _self.recordedByUser
-          : recordedByUser // ignore: cast_nullable_to_non_nullable
-              as User,
-      asAdmin: null == asAdmin
-          ? _self.asAdmin
-          : asAdmin // ignore: cast_nullable_to_non_nullable
-              as bool,
-      studyYear: freezed == studyYear
-          ? _self.studyYear
-          : studyYear // ignore: cast_nullable_to_non_nullable
-              as StudyYear?,
-      serviceGender: freezed == serviceGender
-          ? _self.serviceGender
-          : serviceGender // ignore: cast_nullable_to_non_nullable
-              as bool?,
-      group: freezed == group
-          ? _self.group
-          : group // ignore: cast_nullable_to_non_nullable
-              as Group?,
-      class$: freezed == class$
-          ? _self.class$
-          : class$ // ignore: cast_nullable_to_non_nullable
-              as Class?,
-    ));
+    return _then(
+      AttendanceRecord(
+        id: null == id
+            ? _self.id
+            : id // ignore: cast_nullable_to_non_nullable
+                  as String,
+        dayId: null == dayId
+            ? _self.dayId
+            : dayId // ignore: cast_nullable_to_non_nullable
+                  as DateTime,
+        time: null == time
+            ? _self.time
+            : time // ignore: cast_nullable_to_non_nullable
+                  as DateTime,
+        service: null == service
+            ? _self.service
+            : service // ignore: cast_nullable_to_non_nullable
+                  as Service,
+        person: null == person
+            ? _self.person
+            : person // ignore: cast_nullable_to_non_nullable
+                  as Person,
+        recordedByUser: null == recordedByUser
+            ? _self.recordedByUser
+            : recordedByUser // ignore: cast_nullable_to_non_nullable
+                  as User,
+        asAdmin: null == asAdmin
+            ? _self.asAdmin
+            : asAdmin // ignore: cast_nullable_to_non_nullable
+                  as bool,
+        studyYear: freezed == studyYear
+            ? _self.studyYear
+            : studyYear // ignore: cast_nullable_to_non_nullable
+                  as StudyYear?,
+        serviceGender: freezed == serviceGender
+            ? _self.serviceGender
+            : serviceGender // ignore: cast_nullable_to_non_nullable
+                  as bool?,
+        group: freezed == group
+            ? _self.group
+            : group // ignore: cast_nullable_to_non_nullable
+                  as Group?,
+        class$: freezed == class$
+            ? _self.class$
+            : class$ // ignore: cast_nullable_to_non_nullable
+                  as Class?,
+      ),
+    );
   }
 }
-
-// dart format on

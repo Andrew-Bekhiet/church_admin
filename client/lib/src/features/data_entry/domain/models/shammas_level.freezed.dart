@@ -9,7 +9,6 @@ part of 'shammas_level.dart';
 // FreezedGenerator
 // **************************************************************************
 
-// dart format off
 T _$identity<T>(T value) => value;
 
 /// @nodoc
@@ -24,7 +23,9 @@ mixin _$ShammasLevel {
   @pragma('vm:prefer-inline')
   $ShammasLevelCopyWith<ShammasLevel> get copyWith =>
       _$ShammasLevelCopyWithImpl<ShammasLevel>(
-          this as ShammasLevel, _$identity);
+        this as ShammasLevel,
+        _$identity,
+      );
 
   @override
   bool operator ==(Object other) {
@@ -49,8 +50,9 @@ mixin _$ShammasLevel {
 /// @nodoc
 abstract mixin class $ShammasLevelCopyWith<$Res> {
   factory $ShammasLevelCopyWith(
-          ShammasLevel value, $Res Function(ShammasLevel) _then) =
-      _$ShammasLevelCopyWithImpl;
+    ShammasLevel value,
+    $Res Function(ShammasLevel) _then,
+  ) = _$ShammasLevelCopyWithImpl;
   @useResult
   $Res call({int order, String name, String id});
 }
@@ -66,26 +68,22 @@ class _$ShammasLevelCopyWithImpl<$Res> implements $ShammasLevelCopyWith<$Res> {
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? order = null,
-    Object? name = null,
-    Object? id = null,
-  }) {
-    return _then(ShammasLevel(
-      order: null == order
-          ? _self.order
-          : order // ignore: cast_nullable_to_non_nullable
-              as int,
-      name: null == name
-          ? _self.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      id: null == id
-          ? _self.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
+  $Res call({Object? order = null, Object? name = null, Object? id = null}) {
+    return _then(
+      ShammasLevel(
+        order: null == order
+            ? _self.order
+            : order // ignore: cast_nullable_to_non_nullable
+                  as int,
+        name: null == name
+            ? _self.name
+            : name // ignore: cast_nullable_to_non_nullable
+                  as String,
+        id: null == id
+            ? _self.id
+            : id // ignore: cast_nullable_to_non_nullable
+                  as String,
+      ),
+    );
   }
 }
-
-// dart format on

@@ -24,7 +24,7 @@ class EditStoreExtra extends SerializableExtra {
 }
 
 @TypedGoRoute<EditStoreRoute>(path: '/edit_store')
-class EditStoreRoute extends GoRouteData with _$EditStoreRoute {
+class EditStoreRoute extends GoRouteData with $EditStoreRoute {
   const EditStoreRoute({this.$extra});
 
   final EditStoreExtra? $extra;

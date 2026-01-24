@@ -9,7 +9,6 @@ part of 'last_recorded_by_info.dart';
 // FreezedGenerator
 // **************************************************************************
 
-// dart format off
 T _$identity<T>(T value) => value;
 
 /// @nodoc
@@ -25,7 +24,9 @@ mixin _$LastRecordedByInfo {
   @pragma('vm:prefer-inline')
   $LastRecordedByInfoCopyWith<LastRecordedByInfo> get copyWith =>
       _$LastRecordedByInfoCopyWithImpl<LastRecordedByInfo>(
-          this as LastRecordedByInfo, _$identity);
+        this as LastRecordedByInfo,
+        _$identity,
+      );
 
   @override
   bool operator ==(Object other) {
@@ -54,11 +55,16 @@ mixin _$LastRecordedByInfo {
 /// @nodoc
 abstract mixin class $LastRecordedByInfoCopyWith<$Res> {
   factory $LastRecordedByInfoCopyWith(
-          LastRecordedByInfo value, $Res Function(LastRecordedByInfo) _then) =
-      _$LastRecordedByInfoCopyWithImpl;
+    LastRecordedByInfo value,
+    $Res Function(LastRecordedByInfo) _then,
+  ) = _$LastRecordedByInfoCopyWithImpl;
   @useResult
-  $Res call(
-      {DateTime? time, String? recordedBy, User? user, bool isFatherVisit});
+  $Res call({
+    DateTime? time,
+    String? recordedBy,
+    User? user,
+    bool isFatherVisit,
+  });
 }
 
 /// @nodoc
@@ -79,25 +85,25 @@ class _$LastRecordedByInfoCopyWithImpl<$Res>
     Object? user = freezed,
     Object? isFatherVisit = null,
   }) {
-    return _then(LastRecordedByInfo(
-      time: freezed == time
-          ? _self.time!
-          : time // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      recordedBy: freezed == recordedBy
-          ? _self.recordedBy
-          : recordedBy // ignore: cast_nullable_to_non_nullable
-              as String?,
-      user: freezed == user
-          ? _self.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as User?,
-      isFatherVisit: null == isFatherVisit
-          ? _self.isFatherVisit
-          : isFatherVisit // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
+    return _then(
+      LastRecordedByInfo(
+        time: freezed == time
+            ? _self.time!
+            : time // ignore: cast_nullable_to_non_nullable
+                  as DateTime?,
+        recordedBy: freezed == recordedBy
+            ? _self.recordedBy
+            : recordedBy // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        user: freezed == user
+            ? _self.user
+            : user // ignore: cast_nullable_to_non_nullable
+                  as User?,
+        isFatherVisit: null == isFatherVisit
+            ? _self.isFatherVisit
+            : isFatherVisit // ignore: cast_nullable_to_non_nullable
+                  as bool,
+      ),
+    );
   }
 }
-
-// dart format on

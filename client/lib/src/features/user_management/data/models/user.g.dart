@@ -36,7 +36,7 @@ class _UserFields {
     operators: {
       ...StringOperator.values,
       PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
+      PrimitiveOperator.isNotNull,
     },
   );
 
@@ -50,7 +50,7 @@ class _UserFields {
       ...DateTimeOperator.values,
       ...DateRangeOperator.values,
       PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
+      PrimitiveOperator.isNotNull,
     },
   );
 
@@ -65,34 +65,34 @@ class _UserFields {
 
   final FieldMetadata<UsersPermissionsRel> permissionsRel =
       FieldMetadata<UsersPermissionsRel>(
-    getValue: (obj) => obj is User ? obj.permissions : null,
-    parentType: User,
-    name: 'permissions',
-    label: 'permissions',
-    isCodeOnly: true,
-    isOrderable: false,
-  );
+        getValue: (obj) => obj is User ? obj.permissions : null,
+        parentType: User,
+        name: 'permissions',
+        label: 'permissions',
+        isCodeOnly: true,
+        isOrderable: false,
+      );
 
-  late final FieldMetadata<UserPermission> permissions =
-      permissionsRel.redirectTo(
-    UsersPermissionsRelFields().permission,
-    isExpandable: false,
-    isOrderable: false,
-  );
+  late final FieldMetadata<UserPermission> permissions = permissionsRel
+      .redirectTo(
+        UsersPermissionsRelFields().permission,
+        isExpandable: false,
+        isOrderable: false,
+      );
 
   final FieldMetadata<LastRecordedByInfo> lastEdit =
       FieldMetadata<LastRecordedByInfo>(
-    getValue: (obj) => obj is User ? obj.lastEdit : null,
-    parentType: User,
-    name: 'lastEdit',
-    label: 'أخر تحديث البيانات',
-    isCodeOnly: false,
-    operators: {
-      ...MultiSelectOperator.values,
-      PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
-    },
-  );
+        getValue: (obj) => obj is User ? obj.lastEdit : null,
+        parentType: User,
+        name: 'lastEdit',
+        label: 'أخر تحديث البيانات',
+        isCodeOnly: false,
+        operators: {
+          ...MultiSelectOperator.values,
+          PrimitiveOperator.isNull,
+          PrimitiveOperator.isNotNull,
+        },
+      );
 
   final FieldMetadata<Person> person = FieldMetadata<Person>(
     getValue: (obj) => obj is User ? obj.person : null,
@@ -103,7 +103,7 @@ class _UserFields {
     operators: {
       ...MultiSelectOperator.values,
       PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
+      PrimitiveOperator.isNotNull,
     },
   );
 
@@ -125,7 +125,7 @@ class _UserFields {
     permissions,
     lastEdit,
     person,
-    currentUserCanManageThisUser
+    currentUserCanManageThisUser,
   ];
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'uid': uid,
@@ -136,7 +136,7 @@ class _UserFields {
     'permissions': permissions,
     'lastEdit': lastEdit,
     'person': person,
-    'currentUserCanManageThisUser': currentUserCanManageThisUser
+    'currentUserCanManageThisUser': currentUserCanManageThisUser,
   };
 }
 
@@ -145,58 +145,53 @@ class _UserFields {
 // **************************************************************************
 
 User _$UserFromJson(Map json) => User(
-      uid: json['uid'] as String? ?? '',
-      name: json['name'] as String? ?? '',
-      email: json['email'] as String?,
-      photoUpdatedAt: json['photoUpdatedAt'] == null
-          ? null
-          : DateTime.parse(json['photoUpdatedAt'] as String),
-      blurhash: json['blurhash'] as String?,
-      adminOn: (json['adminOn'] as List<dynamic>?)
-          ?.map(
-              (e) => AdminOnData.fromJson(Map<String, Object?>.from(e as Map)))
-          .toList(),
-      permissions: json['permissions'] == null
-          ? const PermissionsSet.empty()
-          : permissionsSetFromJson(json['permissions']),
-      authId: json['authId'] as String?,
-      lastEdit: json['lastEdit'] == null
-          ? null
-          : LastRecordedByInfo.fromJson(
-              Map<String, Object?>.from(json['lastEdit'] as Map)),
-      person: json['person'] == null
-          ? null
-          : Person.fromJson(Map<String, Object?>.from(json['person'] as Map)),
-      servicesHistory: (json['servicesHistory'] as List<dynamic>?)
-          ?.map(
-              (e) => AdminOnData.fromJson(Map<String, Object?>.from(e as Map)))
-          .toList(),
-      classesHistory: (json['classesHistory'] as List<dynamic>?)
-          ?.map(
-              (e) => AdminOnData.fromJson(Map<String, Object?>.from(e as Map)))
-          .toList(),
-      groupsHistory: (json['groupsHistory'] as List<dynamic>?)
-          ?.map(
-              (e) => AdminOnData.fromJson(Map<String, Object?>.from(e as Map)))
-          .toList(),
-      currentUserCanManageThisUser:
-          json['currentUserCanManageThisUser'] as bool? ?? false,
-    );
+  uid: json['uid'] as String? ?? '',
+  name: json['name'] as String? ?? '',
+  email: json['email'] as String?,
+  photoUpdatedAt: json['photoUpdatedAt'] == null
+      ? null
+      : DateTime.parse(json['photoUpdatedAt'] as String),
+  blurhash: json['blurhash'] as String?,
+  adminOn: (json['adminOn'] as List<dynamic>?)
+      ?.map((e) => AdminOnData.fromJson(Map<String, Object?>.from(e as Map)))
+      .toList(),
+  permissions: json['permissions'] == null
+      ? const PermissionsSet.empty()
+      : permissionsSetFromJson(json['permissions']),
+  authId: json['authId'] as String?,
+  lastEdit: json['lastEdit'] == null
+      ? null
+      : LastRecordedByInfo.fromJson(
+          Map<String, Object?>.from(json['lastEdit'] as Map),
+        ),
+  person: json['person'] == null
+      ? null
+      : Person.fromJson(Map<String, Object?>.from(json['person'] as Map)),
+  servicesHistory: (json['servicesHistory'] as List<dynamic>?)
+      ?.map((e) => AdminOnData.fromJson(Map<String, Object?>.from(e as Map)))
+      .toList(),
+  classesHistory: (json['classesHistory'] as List<dynamic>?)
+      ?.map((e) => AdminOnData.fromJson(Map<String, Object?>.from(e as Map)))
+      .toList(),
+  groupsHistory: (json['groupsHistory'] as List<dynamic>?)
+      ?.map((e) => AdminOnData.fromJson(Map<String, Object?>.from(e as Map)))
+      .toList(),
+  currentUserCanManageThisUser:
+      json['currentUserCanManageThisUser'] as bool? ?? false,
+);
 
 Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
-      'uid': instance.uid,
-      'name': instance.name,
-      'email': instance.email,
-      'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
-      'blurhash': instance.blurhash,
-      'adminOn': instance.adminOn?.map((e) => e.toJson()).toList(),
-      'permissions': permissionsSetToJson(instance.permissions),
-      'authId': instance.authId,
-      'lastEdit': instance.lastEdit?.toJson(),
-      'person': instance.person?.toJson(),
-      'servicesHistory':
-          instance.servicesHistory?.map((e) => e.toJson()).toList(),
-      'classesHistory':
-          instance.classesHistory?.map((e) => e.toJson()).toList(),
-      'groupsHistory': instance.groupsHistory?.map((e) => e.toJson()).toList(),
-    };
+  'uid': instance.uid,
+  'name': instance.name,
+  'email': instance.email,
+  'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+  'blurhash': instance.blurhash,
+  'adminOn': instance.adminOn?.map((e) => e.toJson()).toList(),
+  'permissions': permissionsSetToJson(instance.permissions),
+  'authId': instance.authId,
+  'lastEdit': instance.lastEdit?.toJson(),
+  'person': instance.person?.toJson(),
+  'servicesHistory': instance.servicesHistory?.map((e) => e.toJson()).toList(),
+  'classesHistory': instance.classesHistory?.map((e) => e.toJson()).toList(),
+  'groupsHistory': instance.groupsHistory?.map((e) => e.toJson()).toList(),
+};

@@ -9,7 +9,6 @@ part of 'geomap_options.dart';
 // FreezedGenerator
 // **************************************************************************
 
-// dart format off
 T _$identity<T>(T value) => value;
 
 /// @nodoc
@@ -29,7 +28,9 @@ mixin _$GeomapOptions {
   @pragma('vm:prefer-inline')
   $GeomapOptionsCopyWith<GeomapOptions> get copyWith =>
       _$GeomapOptionsCopyWithImpl<GeomapOptions>(
-          this as GeomapOptions, _$identity);
+        this as GeomapOptions,
+        _$identity,
+      );
 
   @override
   bool operator ==(Object other) {
@@ -37,34 +38,49 @@ mixin _$GeomapOptions {
         (other.runtimeType == runtimeType &&
             other is GeomapOptions &&
             const DeepCollectionEquality().equals(other.layers, layers) &&
-            const DeepCollectionEquality()
-                .equals(other.selectedAreas, selectedAreas) &&
-            const DeepCollectionEquality()
-                .equals(other.selectedStreets, selectedStreets) &&
-            const DeepCollectionEquality()
-                .equals(other.selectedFamilies, selectedFamilies) &&
-            const DeepCollectionEquality()
-                .equals(other.selectedStores, selectedStores) &&
-            const DeepCollectionEquality()
-                .equals(other.selectedServices, selectedServices) &&
-            const DeepCollectionEquality()
-                .equals(other.selectedClasses, selectedClasses) &&
-            const DeepCollectionEquality()
-                .equals(other.selectedGroups, selectedGroups));
+            const DeepCollectionEquality().equals(
+              other.selectedAreas,
+              selectedAreas,
+            ) &&
+            const DeepCollectionEquality().equals(
+              other.selectedStreets,
+              selectedStreets,
+            ) &&
+            const DeepCollectionEquality().equals(
+              other.selectedFamilies,
+              selectedFamilies,
+            ) &&
+            const DeepCollectionEquality().equals(
+              other.selectedStores,
+              selectedStores,
+            ) &&
+            const DeepCollectionEquality().equals(
+              other.selectedServices,
+              selectedServices,
+            ) &&
+            const DeepCollectionEquality().equals(
+              other.selectedClasses,
+              selectedClasses,
+            ) &&
+            const DeepCollectionEquality().equals(
+              other.selectedGroups,
+              selectedGroups,
+            ));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(layers),
-      const DeepCollectionEquality().hash(selectedAreas),
-      const DeepCollectionEquality().hash(selectedStreets),
-      const DeepCollectionEquality().hash(selectedFamilies),
-      const DeepCollectionEquality().hash(selectedStores),
-      const DeepCollectionEquality().hash(selectedServices),
-      const DeepCollectionEquality().hash(selectedClasses),
-      const DeepCollectionEquality().hash(selectedGroups));
+    runtimeType,
+    const DeepCollectionEquality().hash(layers),
+    const DeepCollectionEquality().hash(selectedAreas),
+    const DeepCollectionEquality().hash(selectedStreets),
+    const DeepCollectionEquality().hash(selectedFamilies),
+    const DeepCollectionEquality().hash(selectedStores),
+    const DeepCollectionEquality().hash(selectedServices),
+    const DeepCollectionEquality().hash(selectedClasses),
+    const DeepCollectionEquality().hash(selectedGroups),
+  );
 
   @override
   String toString() {
@@ -75,18 +91,20 @@ mixin _$GeomapOptions {
 /// @nodoc
 abstract mixin class $GeomapOptionsCopyWith<$Res> {
   factory $GeomapOptionsCopyWith(
-          GeomapOptions value, $Res Function(GeomapOptions) _then) =
-      _$GeomapOptionsCopyWithImpl;
+    GeomapOptions value,
+    $Res Function(GeomapOptions) _then,
+  ) = _$GeomapOptionsCopyWithImpl;
   @useResult
-  $Res call(
-      {Set<GeoMapLayer> layers,
-      Set<Area> selectedAreas,
-      Set<Street> selectedStreets,
-      Set<Family> selectedFamilies,
-      Set<Store> selectedStores,
-      Set<Service> selectedServices,
-      Set<Class> selectedClasses,
-      Set<Group> selectedGroups});
+  $Res call({
+    Set<GeoMapLayer> layers,
+    Set<Area> selectedAreas,
+    Set<Street> selectedStreets,
+    Set<Family> selectedFamilies,
+    Set<Store> selectedStores,
+    Set<Service> selectedServices,
+    Set<Class> selectedClasses,
+    Set<Group> selectedGroups,
+  });
 }
 
 /// @nodoc
@@ -111,41 +129,41 @@ class _$GeomapOptionsCopyWithImpl<$Res>
     Object? selectedClasses = null,
     Object? selectedGroups = null,
   }) {
-    return _then(GeomapOptions(
-      layers: null == layers
-          ? _self.layers
-          : layers // ignore: cast_nullable_to_non_nullable
-              as Set<GeoMapLayer>,
-      selectedAreas: null == selectedAreas
-          ? _self.selectedAreas
-          : selectedAreas // ignore: cast_nullable_to_non_nullable
-              as Set<Area>,
-      selectedStreets: null == selectedStreets
-          ? _self.selectedStreets
-          : selectedStreets // ignore: cast_nullable_to_non_nullable
-              as Set<Street>,
-      selectedFamilies: null == selectedFamilies
-          ? _self.selectedFamilies
-          : selectedFamilies // ignore: cast_nullable_to_non_nullable
-              as Set<Family>,
-      selectedStores: null == selectedStores
-          ? _self.selectedStores
-          : selectedStores // ignore: cast_nullable_to_non_nullable
-              as Set<Store>,
-      selectedServices: null == selectedServices
-          ? _self.selectedServices
-          : selectedServices // ignore: cast_nullable_to_non_nullable
-              as Set<Service>,
-      selectedClasses: null == selectedClasses
-          ? _self.selectedClasses
-          : selectedClasses // ignore: cast_nullable_to_non_nullable
-              as Set<Class>,
-      selectedGroups: null == selectedGroups
-          ? _self.selectedGroups
-          : selectedGroups // ignore: cast_nullable_to_non_nullable
-              as Set<Group>,
-    ));
+    return _then(
+      GeomapOptions(
+        layers: null == layers
+            ? _self.layers
+            : layers // ignore: cast_nullable_to_non_nullable
+                  as Set<GeoMapLayer>,
+        selectedAreas: null == selectedAreas
+            ? _self.selectedAreas
+            : selectedAreas // ignore: cast_nullable_to_non_nullable
+                  as Set<Area>,
+        selectedStreets: null == selectedStreets
+            ? _self.selectedStreets
+            : selectedStreets // ignore: cast_nullable_to_non_nullable
+                  as Set<Street>,
+        selectedFamilies: null == selectedFamilies
+            ? _self.selectedFamilies
+            : selectedFamilies // ignore: cast_nullable_to_non_nullable
+                  as Set<Family>,
+        selectedStores: null == selectedStores
+            ? _self.selectedStores
+            : selectedStores // ignore: cast_nullable_to_non_nullable
+                  as Set<Store>,
+        selectedServices: null == selectedServices
+            ? _self.selectedServices
+            : selectedServices // ignore: cast_nullable_to_non_nullable
+                  as Set<Service>,
+        selectedClasses: null == selectedClasses
+            ? _self.selectedClasses
+            : selectedClasses // ignore: cast_nullable_to_non_nullable
+                  as Set<Class>,
+        selectedGroups: null == selectedGroups
+            ? _self.selectedGroups
+            : selectedGroups // ignore: cast_nullable_to_non_nullable
+                  as Set<Group>,
+      ),
+    );
   }
 }
-
-// dart format on

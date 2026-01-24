@@ -9,7 +9,6 @@ part of 'notification_setting.dart';
 // FreezedGenerator
 // **************************************************************************
 
-// dart format off
 T _$identity<T>(T value) => value;
 
 /// @nodoc
@@ -24,7 +23,9 @@ mixin _$NotificationSetting {
   @pragma('vm:prefer-inline')
   $NotificationSettingCopyWith<NotificationSetting> get copyWith =>
       _$NotificationSettingCopyWithImpl<NotificationSetting>(
-          this as NotificationSetting, _$identity);
+        this as NotificationSetting,
+        _$identity,
+      );
 
   @override
   bool operator ==(Object other) {
@@ -50,8 +51,9 @@ mixin _$NotificationSetting {
 /// @nodoc
 abstract mixin class $NotificationSettingCopyWith<$Res> {
   factory $NotificationSettingCopyWith(
-          NotificationSetting value, $Res Function(NotificationSetting) _then) =
-      _$NotificationSettingCopyWithImpl;
+    NotificationSetting value,
+    $Res Function(NotificationSetting) _then,
+  ) = _$NotificationSettingCopyWithImpl;
   @useResult
   $Res call({int hours, int minutes, int intervalInDays});
 }
@@ -73,21 +75,21 @@ class _$NotificationSettingCopyWithImpl<$Res>
     Object? minutes = null,
     Object? intervalInDays = null,
   }) {
-    return _then(NotificationSetting(
-      hours: null == hours
-          ? _self.hours
-          : hours // ignore: cast_nullable_to_non_nullable
-              as int,
-      minutes: null == minutes
-          ? _self.minutes
-          : minutes // ignore: cast_nullable_to_non_nullable
-              as int,
-      intervalInDays: null == intervalInDays
-          ? _self.intervalInDays
-          : intervalInDays // ignore: cast_nullable_to_non_nullable
-              as int,
-    ));
+    return _then(
+      NotificationSetting(
+        hours: null == hours
+            ? _self.hours
+            : hours // ignore: cast_nullable_to_non_nullable
+                  as int,
+        minutes: null == minutes
+            ? _self.minutes
+            : minutes // ignore: cast_nullable_to_non_nullable
+                  as int,
+        intervalInDays: null == intervalInDays
+            ? _self.intervalInDays
+            : intervalInDays // ignore: cast_nullable_to_non_nullable
+                  as int,
+      ),
+    );
   }
 }
-
-// dart format on

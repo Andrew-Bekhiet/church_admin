@@ -7,18 +7,19 @@ part of 'notification.dart';
 // **************************************************************************
 
 Notification _$NotificationFromJson(Map json) => Notification(
-      id: json['id'] as String,
-      title: json['title'] as String,
-      body: json['body'] as String,
-      sentTime: DateTime.parse(json['sentTime'] as String),
-      senderUID: json['senderUID'] as String,
-      imageURL: json['imageURL'] as String?,
-      type: $enumDecodeNullable(_$NotificationTypeEnumMap, json['type']) ??
-          NotificationType.remote,
-      additionalData: (json['additionalData'] as Map?)?.map(
-        (k, e) => MapEntry(k as String, e),
-      ),
-    );
+  id: json['id'] as String,
+  title: json['title'] as String,
+  body: json['body'] as String,
+  sentTime: DateTime.parse(json['sentTime'] as String),
+  senderUID: json['senderUID'] as String,
+  imageURL: json['imageURL'] as String?,
+  type:
+      $enumDecodeNullable(_$NotificationTypeEnumMap, json['type']) ??
+      NotificationType.remote,
+  additionalData: (json['additionalData'] as Map?)?.map(
+    (k, e) => MapEntry(k as String, e),
+  ),
+);
 
 Map<String, dynamic> _$NotificationToJson(Notification instance) =>
     <String, dynamic>{

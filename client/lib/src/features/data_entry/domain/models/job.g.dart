@@ -32,7 +32,7 @@ class JobFields {
   late final List<FieldMetadata<Object>> allFields = [id, name];
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'id': id,
-    'name': name
+    'name': name,
   };
 }
 
@@ -40,12 +40,10 @@ class JobFields {
 // JsonSerializableGenerator
 // **************************************************************************
 
-Job _$JobFromJson(Map json) => Job(
-      id: json['id'] as String? ?? '',
-      name: json['name'] as String? ?? '',
-    );
+Job _$JobFromJson(Map json) =>
+    Job(id: json['id'] as String? ?? '', name: json['name'] as String? ?? '');
 
 Map<String, dynamic> _$JobToJson(Job instance) => <String, dynamic>{
-      'id': instance.id,
-      'name': instance.name,
-    };
+  'id': instance.id,
+  'name': instance.name,
+};

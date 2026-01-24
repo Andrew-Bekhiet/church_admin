@@ -16,8 +16,9 @@ final sembastProvider = FutureProvider.family<DatabaseClient, KvDatabase>(
     if (kIsWeb) {
       db = await getDatabaseFactory(database).openDatabase(
         dbName,
-        codec:
-            await ref.read(encryptionServiceProvider).getSembastCodec(dbName),
+        codec: await ref
+            .read(encryptionServiceProvider)
+            .getSembastCodec(dbName),
       );
     } else {
       final dir = await p.getApplicationDocumentsDirectory();
@@ -25,8 +26,9 @@ final sembastProvider = FutureProvider.family<DatabaseClient, KvDatabase>(
 
       db = await getDatabaseFactory(database).openDatabase(
         p.join(dir.path, dbName),
-        codec:
-            await ref.read(encryptionServiceProvider).getSembastCodec(dbName),
+        codec: await ref
+            .read(encryptionServiceProvider)
+            .getSembastCodec(dbName),
       );
     }
     ref.onDispose(db.close);
@@ -40,7 +42,7 @@ enum KvDatabase {
   shared;
 
   String get filename => switch (this) {
-        KvDatabase.main => 'main.db',
-        KvDatabase.shared => 'shared.db',
-      };
+    KvDatabase.main => 'main.db',
+    KvDatabase.shared => 'shared.db',
+  };
 }

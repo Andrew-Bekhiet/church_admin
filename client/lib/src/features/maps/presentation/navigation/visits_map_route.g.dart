@@ -6,23 +6,19 @@ part of 'visits_map_route.dart';
 // GoRouterGenerator
 // **************************************************************************
 
-List<RouteBase> get $appRoutes => [
-      $visitsMapRoute,
-    ];
+List<RouteBase> get $appRoutes => [$visitsMapRoute];
 
 RouteBase get $visitsMapRoute => GoRouteData.$route(
-      path: '/visits_map',
-      factory: _$VisitsMapRoute._fromState,
-    );
+  path: '/visits_map',
+  factory: $VisitsMapRoute._fromState,
+);
 
-mixin _$VisitsMapRoute on GoRouteData {
+mixin $VisitsMapRoute on GoRouteData {
   static VisitsMapRoute _fromState(GoRouterState state) =>
       const VisitsMapRoute();
 
   @override
-  String get location => GoRouteData.$location(
-        '/visits_map',
-      );
+  String get location => GoRouteData.$location('/visits_map');
 
   @override
   void go(BuildContext context) => context.go(location);

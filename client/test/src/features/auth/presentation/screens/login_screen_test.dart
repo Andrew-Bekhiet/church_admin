@@ -2,13 +2,13 @@ import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/misc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:golden_toolkit/golden_toolkit.dart' hide loadAppFonts;
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:package_info_plus/package_info_plus.dart';
-import 'package:riverpod/riverpod.dart' hide Family;
 import 'package:rxdart/rxdart.dart';
 import 'package:spot/spot.dart';
 
@@ -28,8 +28,8 @@ import 'login_screen_test.mocks.dart';
   MockSpec<LoggingService>(),
   MockSpec<PackageInfo>(),
 ])
-void main() {
-  loadAppFonts();
+Future<void> main() async {
+  await loadAppFonts();
 
   setUp(() => provideDummy<AuthState>(const AuthUnauthenticated()));
 
@@ -46,38 +46,39 @@ void main() {
 
         initGlobalProviderContainer(overrides);
 
-        final builder = DeviceBuilder(
-          wrap: materialAppWithThemeAndLocale(),
-        )
-          ..overrideDevicesForAllScenarios(devices: [Device.iphone11])
-          ..addScenario(
-            widget: const LoginScreen(),
-            name: 'login_screen',
-          )
-          ..addScenario(
-            widget: const LoginScreen(),
-            name: 'login_screen_signup',
-            onCreate: (key) async {
-              await act.dragUntilVisible(
-                dragTarget: spotKey(
-                  LoginScreenKeys.switchLoginSignupButtonKey,
-                  parents: [spotKey(key)],
-                ),
-                dragStart: spotKey(
-                  LoginScreenKeys.emailFieldKey,
-                  parents: [spotKey(key)],
-                ),
-                moveStep: const Offset(0, -100),
-              );
+        final builder =
+            DeviceBuilder(
+                wrap: materialAppWithThemeAndLocale(),
+              )
+              ..overrideDevicesForAllScenarios(devices: [Device.iphone11])
+              ..addScenario(
+                widget: const LoginScreen(),
+                name: 'login_screen',
+              )
+              ..addScenario(
+                widget: const LoginScreen(),
+                name: 'login_screen_signup',
+                onCreate: (key) async {
+                  await act.dragUntilVisible(
+                    dragTarget: spotKey(
+                      LoginScreenKeys.switchLoginSignupButtonKey,
+                      parents: [spotKey(key)],
+                    ),
+                    dragStart: spotKey(
+                      LoginScreenKeys.emailFieldKey,
+                      parents: [spotKey(key)],
+                    ),
+                    moveStep: const Offset(0, -100),
+                  );
 
-              await act.tap(
-                spotKey(
-                  LoginScreenKeys.switchLoginSignupButtonKey,
-                  parents: [spotKey(key)],
-                ),
+                  await act.tap(
+                    spotKey(
+                      LoginScreenKeys.switchLoginSignupButtonKey,
+                      parents: [spotKey(key)],
+                    ),
+                  );
+                },
               );
-            },
-          );
 
         await tester.pumpDeviceBuilder(
           builder,
@@ -232,8 +233,10 @@ void main() {
             initGlobalProviderContainer(overrides);
 
             expect(
-              const LoginRoute()
-                  .redirect(MockBuildContext(), MockGoRouterState()),
+              const LoginRoute().redirect(
+                MockBuildContext(),
+                MockGoRouterState(),
+              ),
               null,
             );
           },
@@ -250,8 +253,10 @@ void main() {
             initGlobalProviderContainer(overrides);
 
             expect(
-              const LoginRoute()
-                  .redirect(MockBuildContext(), MockGoRouterState()),
+              const LoginRoute().redirect(
+                MockBuildContext(),
+                MockGoRouterState(),
+              ),
               const HomeScreenRoute().location,
             );
           },

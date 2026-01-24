@@ -34,7 +34,7 @@ part 'home_screen_route.g.dart';
     TypedGoRoute<SettingsRoute>(path: 'settings'),
   ],
 )
-class HomeScreenRoute extends GoRouteData with _$HomeScreenRoute {
+class HomeScreenRoute extends GoRouteData with $HomeScreenRoute {
   const HomeScreenRoute();
 
   @override

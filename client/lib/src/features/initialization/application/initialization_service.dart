@@ -12,19 +12,19 @@ class InitializationService {
       globalProviderContainer.read(initializationServiceProvider);
 
   Set<Initializer> get steps => const {
-        WebNavigationInit(),
-        SentryInit(),
-        PackageInfoInit(),
-        DeviceInfoInit(),
-        HiveInit(),
-        FirebaseInit(),
-        FeatureFlagsInit(),
-        FMTCInit(),
-        IntlLocaleMessagesInit(),
-        AndroidAlarmManagerPluginInit(),
-        FlutterLocalNotificationsPluginInit(),
-        BlocObserverInit(),
-      };
+    WebNavigationInit(),
+    SentryInit(),
+    PackageInfoInit(),
+    DeviceInfoInit(),
+    HiveInit(),
+    FirebaseInit(),
+    FeatureFlagsInit(),
+    FMTCInit(),
+    IntlLocaleMessagesInit(),
+    AndroidAlarmManagerPluginInit(),
+    FlutterLocalNotificationsPluginInit(),
+    BlocObserverInit(),
+  };
 
   InitializationService();
 
@@ -52,7 +52,8 @@ class InitializationService {
   }
 
   Future<void> _reportInitExceptions(
-      List<(Object, StackTrace)> exceptions) async {
+    List<(Object, StackTrace)> exceptions,
+  ) async {
     await exceptions.map(
       (exception) async {
         final (e, stackTrace) = exception;

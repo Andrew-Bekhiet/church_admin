@@ -9,7 +9,6 @@ part of 'order_by.dart';
 // FreezedGenerator
 // **************************************************************************
 
-// dart format off
 T _$identity<T>(T value) => value;
 
 /// @nodoc
@@ -62,21 +61,18 @@ class _$OrderByCopyWithImpl<$Res> implements $OrderByCopyWith<$Res> {
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? field = null,
-    Object? value = null,
-  }) {
-    return _then(OrderBy(
-      field: null == field
-          ? _self.field
-          : field // ignore: cast_nullable_to_non_nullable
-              as FieldMetadata<Object>,
-      value: null == value
-          ? _self.value
-          : value // ignore: cast_nullable_to_non_nullable
-              as OrderByValue,
-    ));
+  $Res call({Object? field = null, Object? value = null}) {
+    return _then(
+      OrderBy(
+        field: null == field
+            ? _self.field
+            : field // ignore: cast_nullable_to_non_nullable
+                  as FieldMetadata<Object>,
+        value: null == value
+            ? _self.value
+            : value // ignore: cast_nullable_to_non_nullable
+                  as OrderByValue,
+      ),
+    );
   }
 }
-
-// dart format on

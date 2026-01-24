@@ -133,10 +133,7 @@ class LocalAuthService with WidgetsBindingObserver {
       localAuthentication
           .authenticate(
         localizedReason: 'برجاء التحقق للمتابعة',
-        options: AuthenticationOptions(
-          biometricOnly: !_currentPlatformService.isWindows,
-          useErrorDialogs: false,
-        ),
+        biometricOnly: !_currentPlatformService.isWindows,
       )
           .then(
         (result) {

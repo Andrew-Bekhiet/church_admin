@@ -1,11 +1,11 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/misc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:golden_toolkit/golden_toolkit.dart' hide loadAppFonts;
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:riverpod/riverpod.dart' hide Family;
 import 'package:rxdart/rxdart.dart';
 import 'package:spot/spot.dart';
 
@@ -23,8 +23,8 @@ import 'email_verification_screen_test.mocks.dart';
   MockSpec<GoRouterState>(),
   MockSpec<LoggingService>(),
 ])
-void main() {
-  loadAppFonts();
+Future<void> main() async {
+  await loadAppFonts();
 
   setUp(() => provideDummy<AuthState>(const AuthUnauthenticated()));
 
@@ -41,14 +41,15 @@ void main() {
 
         initGlobalProviderContainer(overrides);
 
-        final builder = DeviceBuilder(
-          wrap: materialAppWithThemeAndLocale(),
-        )
-          ..overrideDevicesForAllScenarios(devices: [Device.iphone11])
-          ..addScenario(
-            widget: const EmailVerificationScreen(),
-            name: 'email_verification_screen',
-          );
+        final builder =
+            DeviceBuilder(
+                wrap: materialAppWithThemeAndLocale(),
+              )
+              ..overrideDevicesForAllScenarios(devices: [Device.iphone11])
+              ..addScenario(
+                widget: const EmailVerificationScreen(),
+                name: 'email_verification_screen',
+              );
 
         await tester.pumpDeviceBuilder(
           builder,
@@ -129,8 +130,10 @@ void main() {
           initGlobalProviderContainer(overrides);
 
           expect(
-            const EmailVerificationRoute()
-                .redirect(MockBuildContext(), MockGoRouterState()),
+            const EmailVerificationRoute().redirect(
+              MockBuildContext(),
+              MockGoRouterState(),
+            ),
             const LoginRoute().location,
           );
         },
@@ -147,8 +150,10 @@ void main() {
           initGlobalProviderContainer(overrides);
 
           expect(
-            const EmailVerificationRoute()
-                .redirect(MockBuildContext(), MockGoRouterState()),
+            const EmailVerificationRoute().redirect(
+              MockBuildContext(),
+              MockGoRouterState(),
+            ),
             null,
           );
         },
@@ -165,8 +170,10 @@ void main() {
           initGlobalProviderContainer(overrides);
 
           expect(
-            const EmailVerificationRoute()
-                .redirect(MockBuildContext(), MockGoRouterState()),
+            const EmailVerificationRoute().redirect(
+              MockBuildContext(),
+              MockGoRouterState(),
+            ),
             isNotNull,
           );
         },

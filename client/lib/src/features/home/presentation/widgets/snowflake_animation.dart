@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
@@ -39,7 +40,7 @@ class _SnowflakeAnimationState extends State<SnowflakeAnimation>
       sizeFactor: _rng.nextDouble(),
       speedMultiplier:
           _rng.nextDouble() * (maxSpeedMultiplier - minSpeedMultiplier) +
-              minSpeedMultiplier,
+          minSpeedMultiplier,
       rotation: _rng.nextDouble(),
     ),
   );
@@ -52,7 +53,8 @@ class _SnowflakeAnimationState extends State<SnowflakeAnimation>
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(seconds: 20),
-    )..repeat();
+    );
+    unawaited(_controller.repeat());
   }
 
   @override
@@ -77,7 +79,7 @@ class _SnowflakeAnimationState extends State<SnowflakeAnimation>
             return Stack(
               fit: StackFit.expand,
               children: [
-                if (child != null) child,
+                ?child,
                 ...particles.map(
                   (p) {
                     final double size =
@@ -89,7 +91,7 @@ class _SnowflakeAnimationState extends State<SnowflakeAnimation>
 
                     final double y =
                         (p.yInitial * animationHeight + speed * value) %
-                            animationHeight;
+                        animationHeight;
 
                     return Positioned(
                       left: x,
@@ -100,8 +102,9 @@ class _SnowflakeAnimationState extends State<SnowflakeAnimation>
                           child: Icon(
                             Symbols.ac_unit,
                             size: size,
-                            color: Colors.white
-                                .withValues(alpha: 0.6 + p.sizeFactor * 0.4),
+                            color: Colors.white.withValues(
+                              alpha: 0.6 + p.sizeFactor * 0.4,
+                            ),
                           ),
                         ),
                       ),

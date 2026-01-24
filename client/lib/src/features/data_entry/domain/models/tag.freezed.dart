@@ -9,7 +9,6 @@ part of 'tag.dart';
 // FreezedGenerator
 // **************************************************************************
 
-// dart format off
 T _$identity<T>(T value) => value;
 
 /// @nodoc
@@ -63,26 +62,22 @@ class _$TagCopyWithImpl<$Res> implements $TagCopyWith<$Res> {
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? id = null,
-    Object? name = null,
-    Object? color = freezed,
-  }) {
-    return _then(Tag(
-      id: null == id
-          ? _self.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _self.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      color: freezed == color
-          ? _self.color
-          : color // ignore: cast_nullable_to_non_nullable
-              as Color?,
-    ));
+  $Res call({Object? id = null, Object? name = null, Object? color = freezed}) {
+    return _then(
+      Tag(
+        id: null == id
+            ? _self.id
+            : id // ignore: cast_nullable_to_non_nullable
+                  as String,
+        name: null == name
+            ? _self.name
+            : name // ignore: cast_nullable_to_non_nullable
+                  as String,
+        color: freezed == color
+            ? _self.color
+            : color // ignore: cast_nullable_to_non_nullable
+                  as Color?,
+      ),
+    );
   }
 }
-
-// dart format on

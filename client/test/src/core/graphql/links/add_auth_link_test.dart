@@ -1,13 +1,13 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
+import 'package:flutter_riverpod/misc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gql/ast.dart';
 import 'package:graphql_flutter/graphql_flutter.dart' as h show HttpLink;
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:riverpod/riverpod.dart';
 import 'package:rxdart/rxdart.dart';
 
 import 'add_auth_link_test.mocks.dart';
@@ -65,7 +65,7 @@ void main() {
         url: 'url',
         createHttpLink: (url) => mockHttpLink,
         createWSLink: (url, config) {
-          expectLater(
+          expect(
             config.initialPayload(),
             completion(
               containsPair(
@@ -190,7 +190,7 @@ void main() {
         createHttpLink: (url) => mockHttpLink,
         createWSLink: (url, config) {
           expect(url, 'wss://example.com');
-          expectLater(
+          expect(
             config.initialPayload(),
             completion(
               containsPair(
@@ -244,15 +244,17 @@ void main() {
         emits(mockResponse),
       );
 
-      final captured =
-          verify(mockRequest.updateContextEntry(captureAny)).captured;
+      final captured = verify(
+        mockRequest.updateContextEntry(captureAny),
+      ).captured;
 
       expect(
         captured,
         contains(
           predicate<HttpLinkHeaders Function(HttpLinkHeaders)?>((f) {
-            final returnedHeaders =
-                f?.call(const HttpLinkHeaders(headers: {'foo': 'bar'})).headers;
+            final returnedHeaders = f
+                ?.call(const HttpLinkHeaders(headers: {'foo': 'bar'}))
+                .headers;
 
             return containsPair('foo', 'bar').matches(returnedHeaders, {}) &&
                 containsPair(
@@ -300,8 +302,9 @@ MockOperation _createMockOperation(bool isSubscription) {
         OperationDefinitionNode(
           name: const NameNode(value: 's'),
           selectionSet: const SelectionSetNode(),
-          type:
-              isSubscription ? OperationType.subscription : OperationType.query,
+          type: isSubscription
+              ? OperationType.subscription
+              : OperationType.query,
         ),
       ],
     ),

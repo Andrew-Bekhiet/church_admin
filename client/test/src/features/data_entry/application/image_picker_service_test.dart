@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/misc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_cropper_platform_interface/image_cropper_platform_interface.dart';
@@ -12,7 +13,6 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:permission_handler_platform_interface/permission_handler_platform_interface.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
-import 'package:riverpod/riverpod.dart';
 
 import './image_picker_service_test.mocks.dart';
 
@@ -159,8 +159,9 @@ void main() {
             (tester) async {
               final capturedContext = await _captureBuildContext(tester);
 
-              final unit =
-                  globalProviderContainer.read(imagePickerServiceProvider);
+              final unit = globalProviderContainer.read(
+                imagePickerServiceProvider,
+              );
 
               unawaited(unit.showSourceSheet(context: capturedContext));
 
@@ -203,8 +204,9 @@ void main() {
             (tester) async {
               final capturedContext = await _captureBuildContext(tester);
 
-              final unit =
-                  globalProviderContainer.read(imagePickerServiceProvider);
+              final unit = globalProviderContainer.read(
+                imagePickerServiceProvider,
+              );
 
               expect(
                 unit.showSourceSheet(context: capturedContext),
@@ -235,8 +237,9 @@ void main() {
             (tester) async {
               final capturedContext = await _captureBuildContext(tester);
 
-              final unit =
-                  globalProviderContainer.read(imagePickerServiceProvider);
+              final unit = globalProviderContainer.read(
+                imagePickerServiceProvider,
+              );
 
               expect(
                 unit.showSourceSheet(context: capturedContext),
@@ -296,15 +299,15 @@ void main() {
           verifyInOrder([
             (ImagePickerPlatform.instance as MockImagePickerPlatform)
                 .getImageFromSource(
-              source: ImageSource.camera,
-              options: anyNamed('options'),
-            ),
+                  source: ImageSource.camera,
+                  options: anyNamed('options'),
+                ),
             (ImageCropperPlatform.instance as MockImageCropperPlatform)
                 .cropImage(
-              sourcePath: '/path/foo/bar/XFile',
-              aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
-              uiSettings: anyNamed('uiSettings'),
-            ),
+                  sourcePath: '/path/foo/bar/XFile',
+                  aspectRatio: const CropAspectRatio(ratioX: 1, ratioY: 1),
+                  uiSettings: anyNamed('uiSettings'),
+                ),
           ]);
         },
       );

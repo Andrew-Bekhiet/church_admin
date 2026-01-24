@@ -9,7 +9,6 @@ part of 'area.dart';
 // FreezedGenerator
 // **************************************************************************
 
-// dart format off
 T _$identity<T>(T value) => value;
 
 /// @nodoc
@@ -49,8 +48,10 @@ mixin _$Area {
                 other.lastVisit == lastVisit) &&
             (identical(other.lastEdit, lastEdit) ||
                 other.lastEdit == lastEdit) &&
-            const DeepCollectionEquality()
-                .equals(other.adminUsers, adminUsers) &&
+            const DeepCollectionEquality().equals(
+              other.adminUsers,
+              adminUsers,
+            ) &&
             (identical(other.userCanEdit, userCanEdit) ||
                 other.userCanEdit == userCanEdit));
   }
@@ -58,17 +59,18 @@ mixin _$Area {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      name,
-      bounds,
-      color,
-      photoUpdatedAt,
-      blurhash,
-      lastVisit,
-      lastEdit,
-      const DeepCollectionEquality().hash(adminUsers),
-      userCanEdit);
+    runtimeType,
+    id,
+    name,
+    bounds,
+    color,
+    photoUpdatedAt,
+    blurhash,
+    lastVisit,
+    lastEdit,
+    const DeepCollectionEquality().hash(adminUsers),
+    userCanEdit,
+  );
 
   @override
   String toString() {
@@ -81,17 +83,18 @@ abstract mixin class $AreaCopyWith<$Res> {
   factory $AreaCopyWith(Area value, $Res Function(Area) _then) =
       _$AreaCopyWithImpl;
   @useResult
-  $Res call(
-      {String id,
-      String name,
-      Polygon? bounds,
-      Color? color,
-      DateTime? photoUpdatedAt,
-      String? blurhash,
-      LastRecordedByInfo? lastVisit,
-      LastRecordedByInfo? lastEdit,
-      List<User>? adminUsers,
-      bool userCanEdit});
+  $Res call({
+    String id,
+    String name,
+    Polygon? bounds,
+    Color? color,
+    DateTime? photoUpdatedAt,
+    String? blurhash,
+    LastRecordedByInfo? lastVisit,
+    LastRecordedByInfo? lastEdit,
+    List<User>? adminUsers,
+    bool userCanEdit,
+  });
 }
 
 /// @nodoc
@@ -117,49 +120,49 @@ class _$AreaCopyWithImpl<$Res> implements $AreaCopyWith<$Res> {
     Object? adminUsers = freezed,
     Object? userCanEdit = null,
   }) {
-    return _then(Area(
-      id: null == id
-          ? _self.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _self.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      bounds: freezed == bounds
-          ? _self.bounds
-          : bounds // ignore: cast_nullable_to_non_nullable
-              as Polygon?,
-      color: freezed == color
-          ? _self.color
-          : color // ignore: cast_nullable_to_non_nullable
-              as Color?,
-      photoUpdatedAt: freezed == photoUpdatedAt
-          ? _self.photoUpdatedAt
-          : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      blurhash: freezed == blurhash
-          ? _self.blurhash
-          : blurhash // ignore: cast_nullable_to_non_nullable
-              as String?,
-      lastVisit: freezed == lastVisit
-          ? _self.lastVisit
-          : lastVisit // ignore: cast_nullable_to_non_nullable
-              as LastRecordedByInfo?,
-      lastEdit: freezed == lastEdit
-          ? _self.lastEdit
-          : lastEdit // ignore: cast_nullable_to_non_nullable
-              as LastRecordedByInfo?,
-      adminUsers: freezed == adminUsers
-          ? _self.adminUsers
-          : adminUsers // ignore: cast_nullable_to_non_nullable
-              as List<User>?,
-      userCanEdit: null == userCanEdit
-          ? _self.userCanEdit
-          : userCanEdit // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
+    return _then(
+      Area(
+        id: null == id
+            ? _self.id
+            : id // ignore: cast_nullable_to_non_nullable
+                  as String,
+        name: null == name
+            ? _self.name
+            : name // ignore: cast_nullable_to_non_nullable
+                  as String,
+        bounds: freezed == bounds
+            ? _self.bounds
+            : bounds // ignore: cast_nullable_to_non_nullable
+                  as Polygon?,
+        color: freezed == color
+            ? _self.color
+            : color // ignore: cast_nullable_to_non_nullable
+                  as Color?,
+        photoUpdatedAt: freezed == photoUpdatedAt
+            ? _self.photoUpdatedAt
+            : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
+                  as DateTime?,
+        blurhash: freezed == blurhash
+            ? _self.blurhash
+            : blurhash // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        lastVisit: freezed == lastVisit
+            ? _self.lastVisit
+            : lastVisit // ignore: cast_nullable_to_non_nullable
+                  as LastRecordedByInfo?,
+        lastEdit: freezed == lastEdit
+            ? _self.lastEdit
+            : lastEdit // ignore: cast_nullable_to_non_nullable
+                  as LastRecordedByInfo?,
+        adminUsers: freezed == adminUsers
+            ? _self.adminUsers
+            : adminUsers // ignore: cast_nullable_to_non_nullable
+                  as List<User>?,
+        userCanEdit: null == userCanEdit
+            ? _self.userCanEdit
+            : userCanEdit // ignore: cast_nullable_to_non_nullable
+                  as bool,
+      ),
+    );
   }
 }
-
-// dart format on

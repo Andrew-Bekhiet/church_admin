@@ -6,26 +6,21 @@ part of 'edit_street_route.dart';
 // GoRouterGenerator
 // **************************************************************************
 
-List<RouteBase> get $appRoutes => [
-      $editStreetRoute,
-    ];
+List<RouteBase> get $appRoutes => [$editStreetRoute];
 
 RouteBase get $editStreetRoute => GoRouteData.$route(
-      path: '/edit_street',
-      factory: _$EditStreetRoute._fromState,
-    );
+  path: '/edit_street',
+  factory: $EditStreetRoute._fromState,
+);
 
-mixin _$EditStreetRoute on GoRouteData {
-  static EditStreetRoute _fromState(GoRouterState state) => EditStreetRoute(
-        $extra: state.extra as EditStreetExtra?,
-      );
+mixin $EditStreetRoute on GoRouteData {
+  static EditStreetRoute _fromState(GoRouterState state) =>
+      EditStreetRoute($extra: state.extra as EditStreetExtra?);
 
   EditStreetRoute get _self => this as EditStreetRoute;
 
   @override
-  String get location => GoRouteData.$location(
-        '/edit_street',
-      );
+  String get location => GoRouteData.$location('/edit_street');
 
   @override
   void go(BuildContext context) => context.go(location, extra: _self.$extra);
@@ -48,13 +43,13 @@ mixin _$EditStreetRoute on GoRouteData {
 // **************************************************************************
 
 EditStreetExtra _$EditStreetExtraFromJson(Map json) => EditStreetExtra(
-      street: json['street'] == null
-          ? null
-          : Street.fromJson(Map<String, Object?>.from(json['street'] as Map)),
-      area: json['area'] == null
-          ? null
-          : Area.fromJson(Map<String, Object?>.from(json['area'] as Map)),
-    );
+  street: json['street'] == null
+      ? null
+      : Street.fromJson(Map<String, Object?>.from(json['street'] as Map)),
+  area: json['area'] == null
+      ? null
+      : Area.fromJson(Map<String, Object?>.from(json['area'] as Map)),
+);
 
 Map<String, dynamic> _$EditStreetExtraToJson(EditStreetExtra instance) =>
     <String, dynamic>{

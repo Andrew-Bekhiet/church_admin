@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
@@ -64,8 +66,8 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
 
   @override
   void dispose() {
-    _search.close();
-    _usersController.dispose();
+    unawaited(_search.close());
+    unawaited(_usersController.dispose());
 
     super.dispose();
   }

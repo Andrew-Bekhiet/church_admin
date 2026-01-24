@@ -21,84 +21,71 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
+// ignore_for_file: invalid_use_of_internal_member
 
 /// A class which mocks [SyncKVStore].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockSyncKVStore<T> extends _i1.Mock implements _i2.SyncKVStore<T> {
   @override
-  T? get(String? key) => (super.noSuchMethod(
-        Invocation.method(
-          #get,
-          [key],
-        ),
-        returnValueForMissingStub: null,
-      ) as T?);
-
-  @override
-  _i3.Future<void> put(
-    String? key,
-    T? value,
-  ) =>
+  T? get(String? key) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #put,
-          [
-            key,
-            value,
-          ],
-        ),
-        returnValue: _i3.Future<void>.value(),
-        returnValueForMissingStub: _i3.Future<void>.value(),
-      ) as _i3.Future<void>);
+            Invocation.method(#get, [key]),
+            returnValueForMissingStub: null,
+          )
+          as T?);
 
   @override
-  _i3.Future<void> putAll(Map<String, T?>? values) => (super.noSuchMethod(
-        Invocation.method(
-          #putAll,
-          [values],
-        ),
-        returnValue: _i3.Future<void>.value(),
-        returnValueForMissingStub: _i3.Future<void>.value(),
-      ) as _i3.Future<void>);
+  _i3.Future<void> put(String? key, T? value) =>
+      (super.noSuchMethod(
+            Invocation.method(#put, [key, value]),
+            returnValue: _i3.Future<void>.value(),
+            returnValueForMissingStub: _i3.Future<void>.value(),
+          )
+          as _i3.Future<void>);
 
   @override
-  _i3.Future<void> delete(String? key) => (super.noSuchMethod(
-        Invocation.method(
-          #delete,
-          [key],
-        ),
-        returnValue: _i3.Future<void>.value(),
-        returnValueForMissingStub: _i3.Future<void>.value(),
-      ) as _i3.Future<void>);
+  _i3.Future<void> putAll(Map<String, T?>? values) =>
+      (super.noSuchMethod(
+            Invocation.method(#putAll, [values]),
+            returnValue: _i3.Future<void>.value(),
+            returnValueForMissingStub: _i3.Future<void>.value(),
+          )
+          as _i3.Future<void>);
 
   @override
-  _i3.Future<void> clear() => (super.noSuchMethod(
-        Invocation.method(
-          #clear,
-          [],
-        ),
-        returnValue: _i3.Future<void>.value(),
-        returnValueForMissingStub: _i3.Future<void>.value(),
-      ) as _i3.Future<void>);
+  _i3.Future<void> delete(String? key) =>
+      (super.noSuchMethod(
+            Invocation.method(#delete, [key]),
+            returnValue: _i3.Future<void>.value(),
+            returnValueForMissingStub: _i3.Future<void>.value(),
+          )
+          as _i3.Future<void>);
 
   @override
-  _i3.Future<void> close() => (super.noSuchMethod(
-        Invocation.method(
-          #close,
-          [],
-        ),
-        returnValue: _i3.Future<void>.value(),
-        returnValueForMissingStub: _i3.Future<void>.value(),
-      ) as _i3.Future<void>);
+  _i3.Future<void> clear() =>
+      (super.noSuchMethod(
+            Invocation.method(#clear, []),
+            returnValue: _i3.Future<void>.value(),
+            returnValueForMissingStub: _i3.Future<void>.value(),
+          )
+          as _i3.Future<void>);
 
   @override
-  Map<String, T?> toMap() => (super.noSuchMethod(
-        Invocation.method(
-          #toMap,
-          [],
-        ),
-        returnValue: <String, T?>{},
-        returnValueForMissingStub: <String, T?>{},
-      ) as Map<String, T?>);
+  _i3.Future<void> close() =>
+      (super.noSuchMethod(
+            Invocation.method(#close, []),
+            returnValue: _i3.Future<void>.value(),
+            returnValueForMissingStub: _i3.Future<void>.value(),
+          )
+          as _i3.Future<void>);
+
+  @override
+  Map<String, T?> toMap() =>
+      (super.noSuchMethod(
+            Invocation.method(#toMap, []),
+            returnValue: <String, T?>{},
+            returnValueForMissingStub: <String, T?>{},
+          )
+          as Map<String, T?>);
 }

@@ -60,7 +60,7 @@ class Area extends DataObject with PhotoObject {
     'hasPhoto': hasPhoto,
     'Location': locationPoints.sublist(0),
     'LocationConfirmed': locationConfirmed,
-    'Color': color?.value,
+    'Color': color?.toARGB32(),
     'LastVisit': lastVisit,
     'FatherLastVisit': fatherLastVisit,
     'Allowed': allowedUsers,

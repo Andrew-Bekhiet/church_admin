@@ -26,8 +26,9 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
 
     _listenToLocalAuth();
-    _appLifecycleListener =
-        AppLifecycleListener(onStateChange: _onAppLifecycleStateChanged);
+    _appLifecycleListener = AppLifecycleListener(
+      onStateChange: _onAppLifecycleStateChanged,
+    );
   }
 
   @override
@@ -63,14 +64,14 @@ class _HomeScreenState extends State<HomeScreen> {
   void _onAppLifecycleStateChanged(AppLifecycleState state) {
     switch (state) {
       case AppLifecycleState.resumed when !_authEntry.mounted:
-        UserPersistenceService.I.recordActive();
+        unawaited(UserPersistenceService.I.recordActive());
 
       case AppLifecycleState.resumed:
       case AppLifecycleState.inactive:
       case AppLifecycleState.paused:
       case AppLifecycleState.detached:
       case AppLifecycleState.hidden:
-        UserPersistenceService.I.recordLastSeen();
+        unawaited(UserPersistenceService.I.recordLastSeen());
     }
   }
 
@@ -78,8 +79,8 @@ class _HomeScreenState extends State<HomeScreen> {
   void dispose() {
     _appLifecycleListener.dispose();
 
-    homeBloc.close();
-    _localAuthListener.cancel();
+    unawaited(homeBloc.close());
+    unawaited(_localAuthListener.cancel());
 
     super.dispose();
   }

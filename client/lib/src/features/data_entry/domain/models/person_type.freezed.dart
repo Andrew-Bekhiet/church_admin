@@ -9,7 +9,6 @@ part of 'person_type.dart';
 // FreezedGenerator
 // **************************************************************************
 
-// dart format off
 T _$identity<T>(T value) => value;
 
 /// @nodoc
@@ -55,11 +54,17 @@ mixin _$PersonType {
 /// @nodoc
 abstract mixin class $PersonTypeCopyWith<$Res> {
   factory $PersonTypeCopyWith(
-          PersonType value, $Res Function(PersonType) _then) =
-      _$PersonTypeCopyWithImpl;
+    PersonType value,
+    $Res Function(PersonType) _then,
+  ) = _$PersonTypeCopyWithImpl;
   @useResult
-  $Res call(
-      {String id, String name, int order, bool isFamilyAdmin, bool isHidden});
+  $Res call({
+    String id,
+    String name,
+    int order,
+    bool isFamilyAdmin,
+    bool isHidden,
+  });
 }
 
 /// @nodoc
@@ -80,29 +85,29 @@ class _$PersonTypeCopyWithImpl<$Res> implements $PersonTypeCopyWith<$Res> {
     Object? isFamilyAdmin = null,
     Object? isHidden = null,
   }) {
-    return _then(PersonType(
-      id: null == id
-          ? _self.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _self.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      order: null == order
-          ? _self.order
-          : order // ignore: cast_nullable_to_non_nullable
-              as int,
-      isFamilyAdmin: null == isFamilyAdmin
-          ? _self.isFamilyAdmin
-          : isFamilyAdmin // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isHidden: null == isHidden
-          ? _self.isHidden
-          : isHidden // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
+    return _then(
+      PersonType(
+        id: null == id
+            ? _self.id
+            : id // ignore: cast_nullable_to_non_nullable
+                  as String,
+        name: null == name
+            ? _self.name
+            : name // ignore: cast_nullable_to_non_nullable
+                  as String,
+        order: null == order
+            ? _self.order
+            : order // ignore: cast_nullable_to_non_nullable
+                  as int,
+        isFamilyAdmin: null == isFamilyAdmin
+            ? _self.isFamilyAdmin
+            : isFamilyAdmin // ignore: cast_nullable_to_non_nullable
+                  as bool,
+        isHidden: null == isHidden
+            ? _self.isHidden
+            : isHidden // ignore: cast_nullable_to_non_nullable
+                  as bool,
+      ),
+    );
   }
 }
-
-// dart format on

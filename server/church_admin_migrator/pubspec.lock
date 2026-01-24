@@ -97,6 +97,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.13.0"
+  auto_size_text:
+    dependency: transitive
+    description:
+      name: auto_size_text
+      sha256: "3f5261cd3fb5f2a9ab4e2fc3fba84fd9fcaac8821f20a1d4e71f557521b22599"
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.0"
   bloc:
     dependency: transitive
     description:
@@ -231,7 +239,7 @@ packages:
       path: "../../client"
       relative: true
     source: path
-    version: "2.9.0+38"
+    version: "2.10.0+39"
   circle_flags:
     dependency: transitive
     description:
@@ -910,10 +918,10 @@ packages:
     dependency: transitive
     description:
       name: flutter_riverpod
-      sha256: "9532ee6db4a943a1ed8383072a2e3eeda041db5657cdf6d2acecf3c21ecbe7e1"
+      sha256: "9e2d6907f12cc7d23a846847615941bddee8709bf2bfd274acdf5e80bcf22fde"
       url: "https://pub.dev"
     source: hosted
-    version: "2.6.1"
+    version: "3.0.3"
   flutter_rotation_sensor:
     dependency: transitive
     description:
@@ -1080,10 +1088,10 @@ packages:
     dependency: transitive
     description:
       name: go_router
-      sha256: c752e2d08d088bf83742cb05bf83003f3e9d276ff1519b5c92f9d5e60e5ddd23
+      sha256: c92d18e1fe994cb06d48aa786c46b142a5633067e8297cff6b5a3ac742620104
       url: "https://pub.dev"
     source: hosted
-    version: "16.2.4"
+    version: "17.0.0"
   google_identity_services_web:
     dependency: transitive
     description:
@@ -1272,26 +1280,26 @@ packages:
     dependency: transitive
     description:
       name: image_cropper
-      sha256: "4e9c96c029eb5a23798da1b6af39787f964da6ffc78fd8447c140542a9f7c6fc"
+      sha256: "46c8f9aae51c8350b2a2982462f85a129e77b04675d35b09db5499437d7a996b"
       url: "https://pub.dev"
     source: hosted
-    version: "9.1.0"
+    version: "11.0.0"
   image_cropper_for_web:
     dependency: transitive
     description:
       name: image_cropper_for_web
-      sha256: fd81ebe36f636576094377aab32673c4e5d1609b32dec16fad98d2b71f1250a9
+      sha256: e09749714bc24c4e3b31fbafa2e5b7229b0ff23e8b14d4ba44bd723b77611a0f
       url: "https://pub.dev"
     source: hosted
-    version: "6.1.0"
+    version: "7.0.0"
   image_cropper_platform_interface:
     dependency: transitive
     description:
       name: image_cropper_platform_interface
-      sha256: "2d8db8f4b638e448fa89a1e77cd8f053b4547472bd3ae073169e86626d03afef"
+      sha256: "886a30ec199362cdcc2fbb053b8e53347fbfb9dbbdaa94f9ff85622609f5e7ff"
       url: "https://pub.dev"
     source: hosted
-    version: "7.2.0"
+    version: "8.0.0"
   image_picker:
     dependency: transitive
     description:
@@ -1456,42 +1464,42 @@ packages:
     dependency: transitive
     description:
       name: local_auth
-      sha256: "434d854cf478f17f12ab29a76a02b3067f86a63a6d6c4eb8fbfdcfe4879c1b7b"
+      sha256: a4f1bf57f0236a4aeb5e8f0ec180e197f4b112a3456baa6c1e73b546630b0422
       url: "https://pub.dev"
     source: hosted
-    version: "2.3.0"
+    version: "3.0.0"
   local_auth_android:
     dependency: transitive
     description:
       name: local_auth_android
-      sha256: "1ee0e63fb8b5c6fa286796b5fb1570d256857c2f4a262127e728b36b80a570cf"
+      sha256: "04dd9050b59cb4bcaf051d44eec65865779a9b2f6daccc523f59f96b565a5d54"
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.53"
+    version: "2.0.3"
   local_auth_darwin:
     dependency: transitive
     description:
       name: local_auth_darwin
-      sha256: "699873970067a40ef2f2c09b4c72eb1cfef64224ef041b3df9fdc5c4c1f91f49"
+      sha256: "668ea65edaab17380956e9713f57e34f78ede505ca0cfd8d39db34e2f260bfee"
       url: "https://pub.dev"
     source: hosted
-    version: "1.6.1"
+    version: "2.0.1"
   local_auth_platform_interface:
     dependency: transitive
     description:
       name: local_auth_platform_interface
-      sha256: "1b842ff177a7068442eae093b64abe3592f816afd2a533c0ebcdbe40f9d2075a"
+      sha256: f98b8e388588583d3f781f6806e4f4c9f9e189d898d27f0c249b93a1973dd122
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.10"
+    version: "1.1.0"
   local_auth_windows:
     dependency: transitive
     description:
       name: local_auth_windows
-      sha256: bc4e66a29b0fdf751aafbec923b5bed7ad6ed3614875d8151afe2578520b2ab5
+      sha256: be12c5b8ba5e64896983123655c5f67d2484ecfcc95e367952ad6e3bff94cb16
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.11"
+    version: "2.0.1"
   logger:
     dependency: "direct main"
     description:
@@ -1512,10 +1520,10 @@ packages:
     dependency: transitive
     description:
       name: map_launcher
-      sha256: "7436d6ef9ae57ff15beafcedafe0a8f0604006cbecd2d26024c4cfb0158c2b9a"
+      sha256: "39af937533f3d9af306357c28546ded909a0f81c76097e118724df4d0713d2f2"
       url: "https://pub.dev"
     source: hosted
-    version: "3.5.0"
+    version: "4.4.2"
   matcher:
     dependency: transitive
     description:
@@ -1552,10 +1560,10 @@ packages:
     dependency: "direct main"
     description:
       name: meta
-      sha256: e3641ec5d63ebf0d9b41bd43201a66e3fc79a65db5f61fc181f04cd27aab950c
+      sha256: "23f08335362185a5ea2ad3a4e597f1375e78bce8a040df5c600c8d3552ef2394"
       url: "https://pub.dev"
     source: hosted
-    version: "1.16.0"
+    version: "1.17.0"
   mgrs_dart:
     dependency: transitive
     description:
@@ -1848,10 +1856,10 @@ packages:
     dependency: transitive
     description:
       name: pinput
-      sha256: c41f42ee301505ae2375ec32871c985d3717bf8aee845620465b286e0140aad2
+      sha256: "692e1c29703abefad6c502e97b4d946d506384397438ea242afadbfe48354819"
       url: "https://pub.dev"
     source: hosted
-    version: "5.0.2"
+    version: "6.0.1"
   platform:
     dependency: transitive
     description:
@@ -1928,10 +1936,10 @@ packages:
     dependency: transitive
     description:
       name: riverpod
-      sha256: "59062512288d3056b2321804332a13ffdd1bf16df70dcc8e506e411280a72959"
+      sha256: c406de02bff19d920b832bddfb8283548bfa05ce41c59afba57ce643e116aa59
       url: "https://pub.dev"
     source: hosted
-    version: "2.6.1"
+    version: "3.0.3"
   rxdart:
     dependency: transitive
     description:
@@ -2197,26 +2205,26 @@ packages:
     dependency: "direct dev"
     description:
       name: test
-      sha256: "65e29d831719be0591f7b3b1a32a3cda258ec98c58c7b25f7b84241bc31215bb"
+      sha256: "75906bf273541b676716d1ca7627a17e4c4070a3a16272b7a3dc7da3b9f3f6b7"
       url: "https://pub.dev"
     source: hosted
-    version: "1.26.2"
+    version: "1.26.3"
   test_api:
     dependency: transitive
     description:
       name: test_api
-      sha256: "522f00f556e73044315fa4585ec3270f1808a4b186c936e612cab0b565ff1e00"
+      sha256: ab2726c1a94d3176a45960b6234466ec367179b87dd74f1611adb1f3b5fb9d55
       url: "https://pub.dev"
     source: hosted
-    version: "0.7.6"
+    version: "0.7.7"
   test_core:
     dependency: transitive
     description:
       name: test_core
-      sha256: "80bf5a02b60af04b09e14f6fe68b921aad119493e26e490deaca5993fef1b05a"
+      sha256: "0cc24b5ff94b38d2ae73e1eb43cc302b77964fbf67abad1e296025b78deb53d0"
       url: "https://pub.dev"
     source: hosted
-    version: "0.6.11"
+    version: "0.6.12"
   timeago:
     dependency: transitive
     description:

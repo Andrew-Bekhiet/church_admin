@@ -91,7 +91,7 @@ class Family extends DataObject with PhotoObject {
     'Name': name,
     'Address': address,
     'Notes': notes,
-    'Color': color?.value,
+    'Color': color?.toARGB32(),
     'Location': locationPoint,
     'LocationConfirmed': locationConfirmed,
     'LastVisit': lastVisit,

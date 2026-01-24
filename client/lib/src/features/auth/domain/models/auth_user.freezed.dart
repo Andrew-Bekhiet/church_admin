@@ -9,7 +9,6 @@ part of 'auth_user.dart';
 // FreezedGenerator
 // **************************************************************************
 
-// dart format off
 T _$identity<T>(T value) => value;
 
 /// @nodoc
@@ -46,13 +45,14 @@ mixin _$AuthUser {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      uid,
-      email,
-      emailVerified,
-      idToken,
-      const DeepCollectionEquality().hash(claims),
-      isMultiFactorEnabled);
+    runtimeType,
+    uid,
+    email,
+    emailVerified,
+    idToken,
+    const DeepCollectionEquality().hash(claims),
+    isMultiFactorEnabled,
+  );
 }
 
 /// @nodoc
@@ -60,13 +60,14 @@ abstract mixin class $AuthUserCopyWith<$Res> {
   factory $AuthUserCopyWith(AuthUser value, $Res Function(AuthUser) _then) =
       _$AuthUserCopyWithImpl;
   @useResult
-  $Res call(
-      {String uid,
-      String email,
-      bool emailVerified,
-      String idToken,
-      Map<String, dynamic> claims,
-      bool isMultiFactorEnabled});
+  $Res call({
+    String uid,
+    String email,
+    bool emailVerified,
+    String idToken,
+    Map<String, dynamic> claims,
+    bool isMultiFactorEnabled,
+  });
 }
 
 /// @nodoc
@@ -88,33 +89,33 @@ class _$AuthUserCopyWithImpl<$Res> implements $AuthUserCopyWith<$Res> {
     Object? claims = null,
     Object? isMultiFactorEnabled = null,
   }) {
-    return _then(AuthUser(
-      uid: null == uid
-          ? _self.uid
-          : uid // ignore: cast_nullable_to_non_nullable
-              as String,
-      email: null == email
-          ? _self.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as String,
-      emailVerified: null == emailVerified
-          ? _self.emailVerified
-          : emailVerified // ignore: cast_nullable_to_non_nullable
-              as bool,
-      idToken: null == idToken
-          ? _self.idToken
-          : idToken // ignore: cast_nullable_to_non_nullable
-              as String,
-      claims: null == claims
-          ? _self.claims
-          : claims // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
-      isMultiFactorEnabled: null == isMultiFactorEnabled
-          ? _self.isMultiFactorEnabled
-          : isMultiFactorEnabled // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
+    return _then(
+      AuthUser(
+        uid: null == uid
+            ? _self.uid
+            : uid // ignore: cast_nullable_to_non_nullable
+                  as String,
+        email: null == email
+            ? _self.email
+            : email // ignore: cast_nullable_to_non_nullable
+                  as String,
+        emailVerified: null == emailVerified
+            ? _self.emailVerified
+            : emailVerified // ignore: cast_nullable_to_non_nullable
+                  as bool,
+        idToken: null == idToken
+            ? _self.idToken
+            : idToken // ignore: cast_nullable_to_non_nullable
+                  as String,
+        claims: null == claims
+            ? _self.claims
+            : claims // ignore: cast_nullable_to_non_nullable
+                  as Map<String, dynamic>,
+        isMultiFactorEnabled: null == isMultiFactorEnabled
+            ? _self.isMultiFactorEnabled
+            : isMultiFactorEnabled // ignore: cast_nullable_to_non_nullable
+                  as bool,
+      ),
+    );
   }
 }
-
-// dart format on

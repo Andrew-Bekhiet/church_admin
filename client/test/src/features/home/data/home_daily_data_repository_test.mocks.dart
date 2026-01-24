@@ -21,16 +21,12 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
+// ignore_for_file: invalid_use_of_internal_member
 
 class _FakePaginatableStreamBase_0<T> extends _i1.SmartFake
     implements _i2.PaginatableStreamBase<T> {
-  _FakePaginatableStreamBase_0(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakePaginatableStreamBase_0(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 /// A class which mocks [AdvancedQueryParser].
@@ -44,35 +40,24 @@ class MockAdvancedQueryParser extends _i1.Mock
     _i3.Stream<String?>? searchStream,
   ]) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #createPaginatableStream,
-          [
-            query,
-            searchStream,
-          ],
-        ),
-        returnValue: _FakePaginatableStreamBase_0<_i2.ViewableWithID>(
-          this,
-          Invocation.method(
-            #createPaginatableStream,
-            [
-              query,
-              searchStream,
-            ],
-          ),
-        ),
-        returnValueForMissingStub:
-            _FakePaginatableStreamBase_0<_i2.ViewableWithID>(
-          this,
-          Invocation.method(
-            #createPaginatableStream,
-            [
-              query,
-              searchStream,
-            ],
-          ),
-        ),
-      ) as _i2.PaginatableStreamBase<_i2.ViewableWithID>);
+            Invocation.method(#createPaginatableStream, [query, searchStream]),
+            returnValue: _FakePaginatableStreamBase_0<_i2.ViewableWithID>(
+              this,
+              Invocation.method(#createPaginatableStream, [
+                query,
+                searchStream,
+              ]),
+            ),
+            returnValueForMissingStub:
+                _FakePaginatableStreamBase_0<_i2.ViewableWithID>(
+                  this,
+                  Invocation.method(#createPaginatableStream, [
+                    query,
+                    searchStream,
+                  ]),
+                ),
+          )
+          as _i2.PaginatableStreamBase<_i2.ViewableWithID>);
 }
 
 /// A class which mocks [SyncKVStore].
@@ -81,79 +66,64 @@ class MockAdvancedQueryParser extends _i1.Mock
 class MockSyncKVStore extends _i1.Mock
     implements _i2.SyncKVStore<Map<dynamic, dynamic>> {
   @override
-  Map<dynamic, dynamic>? get(String? key) => (super.noSuchMethod(
-        Invocation.method(
-          #get,
-          [key],
-        ),
-        returnValueForMissingStub: null,
-      ) as Map<dynamic, dynamic>?);
+  Map<dynamic, dynamic>? get(String? key) =>
+      (super.noSuchMethod(
+            Invocation.method(#get, [key]),
+            returnValueForMissingStub: null,
+          )
+          as Map<dynamic, dynamic>?);
 
   @override
-  _i3.Future<void> put(
-    String? key,
-    Map<dynamic, dynamic>? value,
-  ) =>
+  _i3.Future<void> put(String? key, Map<dynamic, dynamic>? value) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #put,
-          [
-            key,
-            value,
-          ],
-        ),
-        returnValue: _i3.Future<void>.value(),
-        returnValueForMissingStub: _i3.Future<void>.value(),
-      ) as _i3.Future<void>);
+            Invocation.method(#put, [key, value]),
+            returnValue: _i3.Future<void>.value(),
+            returnValueForMissingStub: _i3.Future<void>.value(),
+          )
+          as _i3.Future<void>);
 
   @override
   _i3.Future<void> putAll(Map<String, Map<dynamic, dynamic>?>? values) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #putAll,
-          [values],
-        ),
-        returnValue: _i3.Future<void>.value(),
-        returnValueForMissingStub: _i3.Future<void>.value(),
-      ) as _i3.Future<void>);
+            Invocation.method(#putAll, [values]),
+            returnValue: _i3.Future<void>.value(),
+            returnValueForMissingStub: _i3.Future<void>.value(),
+          )
+          as _i3.Future<void>);
 
   @override
-  _i3.Future<void> delete(String? key) => (super.noSuchMethod(
-        Invocation.method(
-          #delete,
-          [key],
-        ),
-        returnValue: _i3.Future<void>.value(),
-        returnValueForMissingStub: _i3.Future<void>.value(),
-      ) as _i3.Future<void>);
+  _i3.Future<void> delete(String? key) =>
+      (super.noSuchMethod(
+            Invocation.method(#delete, [key]),
+            returnValue: _i3.Future<void>.value(),
+            returnValueForMissingStub: _i3.Future<void>.value(),
+          )
+          as _i3.Future<void>);
 
   @override
-  _i3.Future<void> clear() => (super.noSuchMethod(
-        Invocation.method(
-          #clear,
-          [],
-        ),
-        returnValue: _i3.Future<void>.value(),
-        returnValueForMissingStub: _i3.Future<void>.value(),
-      ) as _i3.Future<void>);
+  _i3.Future<void> clear() =>
+      (super.noSuchMethod(
+            Invocation.method(#clear, []),
+            returnValue: _i3.Future<void>.value(),
+            returnValueForMissingStub: _i3.Future<void>.value(),
+          )
+          as _i3.Future<void>);
 
   @override
-  _i3.Future<void> close() => (super.noSuchMethod(
-        Invocation.method(
-          #close,
-          [],
-        ),
-        returnValue: _i3.Future<void>.value(),
-        returnValueForMissingStub: _i3.Future<void>.value(),
-      ) as _i3.Future<void>);
+  _i3.Future<void> close() =>
+      (super.noSuchMethod(
+            Invocation.method(#close, []),
+            returnValue: _i3.Future<void>.value(),
+            returnValueForMissingStub: _i3.Future<void>.value(),
+          )
+          as _i3.Future<void>);
 
   @override
-  Map<String, Map<dynamic, dynamic>?> toMap() => (super.noSuchMethod(
-        Invocation.method(
-          #toMap,
-          [],
-        ),
-        returnValue: <String, Map<dynamic, dynamic>?>{},
-        returnValueForMissingStub: <String, Map<dynamic, dynamic>?>{},
-      ) as Map<String, Map<dynamic, dynamic>?>);
+  Map<String, Map<dynamic, dynamic>?> toMap() =>
+      (super.noSuchMethod(
+            Invocation.method(#toMap, []),
+            returnValue: <String, Map<dynamic, dynamic>?>{},
+            returnValueForMissingStub: <String, Map<dynamic, dynamic>?>{},
+          )
+          as Map<String, Map<dynamic, dynamic>?>);
 }

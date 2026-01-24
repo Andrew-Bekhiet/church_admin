@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 part 'multi_factor_login_route.g.dart';
 
 @TypedGoRoute<MultiFactorLoginRoute>(path: '/multifactor')
-class MultiFactorLoginRoute extends GoRouteData with _$MultiFactorLoginRoute {
+class MultiFactorLoginRoute extends GoRouteData with $MultiFactorLoginRoute {
   const MultiFactorLoginRoute();
 
   @override

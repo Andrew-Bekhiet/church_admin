@@ -24,157 +24,112 @@ import 'package:package_info_plus/package_info_plus.dart' as _i6;
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
+// ignore_for_file: invalid_use_of_internal_member
 
 /// A class which mocks [HomeBloc].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockHomeBloc extends _i1.Mock implements _i2.HomeBloc {
   @override
-  _i2.HomeState get state => (super.noSuchMethod(
-        Invocation.getter(#state),
-        returnValue: _i3.dummyValue<_i2.HomeState>(
-          this,
-          Invocation.getter(#state),
-        ),
-        returnValueForMissingStub: _i3.dummyValue<_i2.HomeState>(
-          this,
-          Invocation.getter(#state),
-        ),
-      ) as _i2.HomeState);
+  _i2.HomeState get state =>
+      (super.noSuchMethod(
+            Invocation.getter(#state),
+            returnValue: _i3.dummyValue<_i2.HomeState>(
+              this,
+              Invocation.getter(#state),
+            ),
+            returnValueForMissingStub: _i3.dummyValue<_i2.HomeState>(
+              this,
+              Invocation.getter(#state),
+            ),
+          )
+          as _i2.HomeState);
 
   @override
-  _i4.Stream<_i2.HomeState> get stream => (super.noSuchMethod(
-        Invocation.getter(#stream),
-        returnValue: _i4.Stream<_i2.HomeState>.empty(),
-        returnValueForMissingStub: _i4.Stream<_i2.HomeState>.empty(),
-      ) as _i4.Stream<_i2.HomeState>);
+  _i4.Stream<_i2.HomeState> get stream =>
+      (super.noSuchMethod(
+            Invocation.getter(#stream),
+            returnValue: _i4.Stream<_i2.HomeState>.empty(),
+            returnValueForMissingStub: _i4.Stream<_i2.HomeState>.empty(),
+          )
+          as _i4.Stream<_i2.HomeState>);
 
   @override
-  bool get isClosed => (super.noSuchMethod(
-        Invocation.getter(#isClosed),
-        returnValue: false,
-        returnValueForMissingStub: false,
-      ) as bool);
+  bool get isClosed =>
+      (super.noSuchMethod(
+            Invocation.getter(#isClosed),
+            returnValue: false,
+            returnValueForMissingStub: false,
+          )
+          as bool);
 
   @override
-  _i4.Future<void> close() => (super.noSuchMethod(
-        Invocation.method(
-          #close,
-          [],
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+  _i4.Future<void> close() =>
+      (super.noSuchMethod(
+            Invocation.method(#close, []),
+            returnValue: _i4.Future<void>.value(),
+            returnValueForMissingStub: _i4.Future<void>.value(),
+          )
+          as _i4.Future<void>);
 
   @override
   void add(_i2.HomeEvent? event) => super.noSuchMethod(
-        Invocation.method(
-          #add,
-          [event],
-        ),
-        returnValueForMissingStub: null,
-      );
+    Invocation.method(#add, [event]),
+    returnValueForMissingStub: null,
+  );
 
   @override
   void onEvent(_i2.HomeEvent? event) => super.noSuchMethod(
-        Invocation.method(
-          #onEvent,
-          [event],
-        ),
-        returnValueForMissingStub: null,
-      );
+    Invocation.method(#onEvent, [event]),
+    returnValueForMissingStub: null,
+  );
 
   @override
   void emit(_i2.HomeState? state) => super.noSuchMethod(
-        Invocation.method(
-          #emit,
-          [state],
-        ),
-        returnValueForMissingStub: null,
-      );
+    Invocation.method(#emit, [state]),
+    returnValueForMissingStub: null,
+  );
 
   @override
   void on<E extends _i2.HomeEvent>(
     _i5.EventHandler<E, _i2.HomeState>? handler, {
     _i5.EventTransformer<E>? transformer,
-  }) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #on,
-          [handler],
-          {#transformer: transformer},
-        ),
-        returnValueForMissingStub: null,
-      );
+  }) => super.noSuchMethod(
+    Invocation.method(#on, [handler], {#transformer: transformer}),
+    returnValueForMissingStub: null,
+  );
 
   @override
   void onTransition(_i5.Transition<_i2.HomeEvent, _i2.HomeState>? transition) =>
       super.noSuchMethod(
-        Invocation.method(
-          #onTransition,
-          [transition],
-        ),
+        Invocation.method(#onTransition, [transition]),
         returnValueForMissingStub: null,
       );
 
   @override
-  void onDone(
-    _i2.HomeEvent? event, [
-    Object? error,
-    StackTrace? stackTrace,
-  ]) =>
+  void onDone(_i2.HomeEvent? event, [Object? error, StackTrace? stackTrace]) =>
       super.noSuchMethod(
-        Invocation.method(
-          #onDone,
-          [
-            event,
-            error,
-            stackTrace,
-          ],
-        ),
+        Invocation.method(#onDone, [event, error, stackTrace]),
         returnValueForMissingStub: null,
       );
 
   @override
   void onChange(_i5.Change<_i2.HomeState>? change) => super.noSuchMethod(
-        Invocation.method(
-          #onChange,
-          [change],
-        ),
-        returnValueForMissingStub: null,
-      );
+    Invocation.method(#onChange, [change]),
+    returnValueForMissingStub: null,
+  );
 
   @override
-  void addError(
-    Object? error, [
-    StackTrace? stackTrace,
-  ]) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #addError,
-          [
-            error,
-            stackTrace,
-          ],
-        ),
-        returnValueForMissingStub: null,
-      );
+  void addError(Object? error, [StackTrace? stackTrace]) => super.noSuchMethod(
+    Invocation.method(#addError, [error, stackTrace]),
+    returnValueForMissingStub: null,
+  );
 
   @override
-  void onError(
-    Object? error,
-    StackTrace? stackTrace,
-  ) =>
-      super.noSuchMethod(
-        Invocation.method(
-          #onError,
-          [
-            error,
-            stackTrace,
-          ],
-        ),
-        returnValueForMissingStub: null,
-      );
+  void onError(Object? error, StackTrace? stackTrace) => super.noSuchMethod(
+    Invocation.method(#onError, [error, stackTrace]),
+    returnValueForMissingStub: null,
+  );
 }
 
 /// A class which mocks [ShareService].
@@ -182,14 +137,13 @@ class MockHomeBloc extends _i1.Mock implements _i2.HomeBloc {
 /// See the documentation for Mockito's code generation for more information.
 class MockShareService extends _i1.Mock implements _i2.ShareService {
   @override
-  _i4.Future<void> shareText(String? text) => (super.noSuchMethod(
-        Invocation.method(
-          #shareText,
-          [text],
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+  _i4.Future<void> shareText(String? text) =>
+      (super.noSuchMethod(
+            Invocation.method(#shareText, [text]),
+            returnValue: _i4.Future<void>.value(),
+            returnValueForMissingStub: _i4.Future<void>.value(),
+          )
+          as _i4.Future<void>);
 }
 
 /// A class which mocks [PackageInfo].
@@ -197,74 +151,86 @@ class MockShareService extends _i1.Mock implements _i2.ShareService {
 /// See the documentation for Mockito's code generation for more information.
 class MockPackageInfo extends _i1.Mock implements _i6.PackageInfo {
   @override
-  String get appName => (super.noSuchMethod(
-        Invocation.getter(#appName),
-        returnValue: _i3.dummyValue<String>(
-          this,
-          Invocation.getter(#appName),
-        ),
-        returnValueForMissingStub: _i3.dummyValue<String>(
-          this,
-          Invocation.getter(#appName),
-        ),
-      ) as String);
+  String get appName =>
+      (super.noSuchMethod(
+            Invocation.getter(#appName),
+            returnValue: _i3.dummyValue<String>(
+              this,
+              Invocation.getter(#appName),
+            ),
+            returnValueForMissingStub: _i3.dummyValue<String>(
+              this,
+              Invocation.getter(#appName),
+            ),
+          )
+          as String);
 
   @override
-  String get packageName => (super.noSuchMethod(
-        Invocation.getter(#packageName),
-        returnValue: _i3.dummyValue<String>(
-          this,
-          Invocation.getter(#packageName),
-        ),
-        returnValueForMissingStub: _i3.dummyValue<String>(
-          this,
-          Invocation.getter(#packageName),
-        ),
-      ) as String);
+  String get packageName =>
+      (super.noSuchMethod(
+            Invocation.getter(#packageName),
+            returnValue: _i3.dummyValue<String>(
+              this,
+              Invocation.getter(#packageName),
+            ),
+            returnValueForMissingStub: _i3.dummyValue<String>(
+              this,
+              Invocation.getter(#packageName),
+            ),
+          )
+          as String);
 
   @override
-  String get version => (super.noSuchMethod(
-        Invocation.getter(#version),
-        returnValue: _i3.dummyValue<String>(
-          this,
-          Invocation.getter(#version),
-        ),
-        returnValueForMissingStub: _i3.dummyValue<String>(
-          this,
-          Invocation.getter(#version),
-        ),
-      ) as String);
+  String get version =>
+      (super.noSuchMethod(
+            Invocation.getter(#version),
+            returnValue: _i3.dummyValue<String>(
+              this,
+              Invocation.getter(#version),
+            ),
+            returnValueForMissingStub: _i3.dummyValue<String>(
+              this,
+              Invocation.getter(#version),
+            ),
+          )
+          as String);
 
   @override
-  String get buildNumber => (super.noSuchMethod(
-        Invocation.getter(#buildNumber),
-        returnValue: _i3.dummyValue<String>(
-          this,
-          Invocation.getter(#buildNumber),
-        ),
-        returnValueForMissingStub: _i3.dummyValue<String>(
-          this,
-          Invocation.getter(#buildNumber),
-        ),
-      ) as String);
+  String get buildNumber =>
+      (super.noSuchMethod(
+            Invocation.getter(#buildNumber),
+            returnValue: _i3.dummyValue<String>(
+              this,
+              Invocation.getter(#buildNumber),
+            ),
+            returnValueForMissingStub: _i3.dummyValue<String>(
+              this,
+              Invocation.getter(#buildNumber),
+            ),
+          )
+          as String);
 
   @override
-  String get buildSignature => (super.noSuchMethod(
-        Invocation.getter(#buildSignature),
-        returnValue: _i3.dummyValue<String>(
-          this,
-          Invocation.getter(#buildSignature),
-        ),
-        returnValueForMissingStub: _i3.dummyValue<String>(
-          this,
-          Invocation.getter(#buildSignature),
-        ),
-      ) as String);
+  String get buildSignature =>
+      (super.noSuchMethod(
+            Invocation.getter(#buildSignature),
+            returnValue: _i3.dummyValue<String>(
+              this,
+              Invocation.getter(#buildSignature),
+            ),
+            returnValueForMissingStub: _i3.dummyValue<String>(
+              this,
+              Invocation.getter(#buildSignature),
+            ),
+          )
+          as String);
 
   @override
-  Map<String, dynamic> get data => (super.noSuchMethod(
-        Invocation.getter(#data),
-        returnValue: <String, dynamic>{},
-        returnValueForMissingStub: <String, dynamic>{},
-      ) as Map<String, dynamic>);
+  Map<String, dynamic> get data =>
+      (super.noSuchMethod(
+            Invocation.getter(#data),
+            returnValue: <String, dynamic>{},
+            returnValueForMissingStub: <String, dynamic>{},
+          )
+          as Map<String, dynamic>);
 }

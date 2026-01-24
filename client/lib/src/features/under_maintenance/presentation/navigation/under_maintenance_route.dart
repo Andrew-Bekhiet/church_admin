@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 part 'under_maintenance_route.g.dart';
 
 @TypedGoRoute<UnderMaintenanceRoute>(path: '/under_maintenance')
-class UnderMaintenanceRoute extends GoRouteData with _$UnderMaintenanceRoute {
+class UnderMaintenanceRoute extends GoRouteData with $UnderMaintenanceRoute {
   const UnderMaintenanceRoute();
 
   @override

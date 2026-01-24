@@ -9,7 +9,6 @@ part of 'aggregate_data.dart';
 // FreezedGenerator
 // **************************************************************************
 
-// dart format off
 T _$identity<T>(T value) => value;
 
 /// @nodoc
@@ -24,7 +23,9 @@ mixin _$AggregateData {
   @pragma('vm:prefer-inline')
   $AggregateDataCopyWith<AggregateData> get copyWith =>
       _$AggregateDataCopyWithImpl<AggregateData>(
-          this as AggregateData, _$identity);
+        this as AggregateData,
+        _$identity,
+      );
 
   @override
   bool operator ==(Object other) {
@@ -49,8 +50,9 @@ mixin _$AggregateData {
 /// @nodoc
 abstract mixin class $AggregateDataCopyWith<$Res> {
   factory $AggregateDataCopyWith(
-          AggregateData value, $Res Function(AggregateData) _then) =
-      _$AggregateDataCopyWithImpl;
+    AggregateData value,
+    $Res Function(AggregateData) _then,
+  ) = _$AggregateDataCopyWithImpl;
   @useResult
   $Res call({int? count, LastRecordedByInfo? max, LastRecordedByInfo? min});
 }
@@ -72,21 +74,21 @@ class _$AggregateDataCopyWithImpl<$Res>
     Object? max = freezed,
     Object? min = freezed,
   }) {
-    return _then(AggregateData(
-      count: freezed == count
-          ? _self.count
-          : count // ignore: cast_nullable_to_non_nullable
-              as int?,
-      max: freezed == max
-          ? _self.max
-          : max // ignore: cast_nullable_to_non_nullable
-              as LastRecordedByInfo?,
-      min: freezed == min
-          ? _self.min
-          : min // ignore: cast_nullable_to_non_nullable
-              as LastRecordedByInfo?,
-    ));
+    return _then(
+      AggregateData(
+        count: freezed == count
+            ? _self.count
+            : count // ignore: cast_nullable_to_non_nullable
+                  as int?,
+        max: freezed == max
+            ? _self.max
+            : max // ignore: cast_nullable_to_non_nullable
+                  as LastRecordedByInfo?,
+        min: freezed == min
+            ? _self.min
+            : min // ignore: cast_nullable_to_non_nullable
+                  as LastRecordedByInfo?,
+      ),
+    );
   }
 }
-
-// dart format on

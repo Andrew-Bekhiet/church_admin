@@ -47,7 +47,7 @@ class QueryableFieldsGenerator extends GeneratorForAnnotation<Queryable> {
     )
         .map(
       (g) {
-        final annotation = const TypeChecker.fromRuntime(QueryableField)
+        final annotation = const TypeChecker.typeNamed(QueryableField)
             .annotationsOf(g)
             .singleOrNull;
         final renameTo = annotation?.getField('renameTo')?.toStringValue();
@@ -92,7 +92,7 @@ class QueryableFieldsGenerator extends GeneratorForAnnotation<Queryable> {
         _writeClassFields(classElement, labelsOverrides, fields),
         '\n\n',
       )
-      ..writeln(_collectAllClassFields(classElement.name, fields))
+      ..writeln(_collectAllClassFields(classElement.displayName, fields))
       ..writeln('}');
 
     return buffer.toString();
@@ -126,21 +126,23 @@ class QueryableFieldsGenerator extends GeneratorForAnnotation<Queryable> {
       }
 
       if (f.type is InterfaceType &&
-          (f.type as InterfaceType)
-              .allSupertypes
-              .any((t) => t.name == 'Iterable')) {
+          (f.type as InterfaceType).allSupertypes.any(
+                (t) => t
+                    .getDisplayStringWithoutNullability()
+                    .startsWith('Iterable'),
+              )) {
         log.info({
           'type': f.type,
           'isList': true,
         });
-        final type = (f.type as InterfaceType)
-            .allSupertypes
-            .firstWhere((t) => t.name == 'Iterable')
-            .typeArguments
-            .first;
+        final iterableType = (f.type as InterfaceType).allSupertypes.firstWhere(
+              (t) =>
+                  t.getDisplayStringWithoutNullability().startsWith('Iterable'),
+            );
+        final type = iterableType.typeArguments.first;
 
         final annotation = f.element != null
-            ? const TypeChecker.fromRuntime(QueryableField)
+            ? const TypeChecker.typeNamed(QueryableField)
                 .annotationsOf(f.element!)
                 .singleOrNull
             : null;

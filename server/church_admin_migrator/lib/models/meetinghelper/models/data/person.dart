@@ -116,7 +116,7 @@ class Person {
 
   Map<String, dynamic> toJson() => {
     'Name': name,
-    'Color': color?.value,
+    'Color': color?.toARGB32(),
     'HasPhoto': hasPhoto,
     'Address': address,
     'Location': location,

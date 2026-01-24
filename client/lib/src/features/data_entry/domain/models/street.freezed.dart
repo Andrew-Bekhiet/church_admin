@@ -9,7 +9,6 @@ part of 'street.dart';
 // FreezedGenerator
 // **************************************************************************
 
-// dart format off
 T _$identity<T>(T value) => value;
 
 /// @nodoc
@@ -57,17 +56,18 @@ mixin _$Street {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      name,
-      line,
-      color,
-      photoUpdatedAt,
-      blurhash,
-      const DeepCollectionEquality().hash(areas),
-      lastVisit,
-      lastEdit,
-      userCanEdit);
+    runtimeType,
+    id,
+    name,
+    line,
+    color,
+    photoUpdatedAt,
+    blurhash,
+    const DeepCollectionEquality().hash(areas),
+    lastVisit,
+    lastEdit,
+    userCanEdit,
+  );
 
   @override
   String toString() {
@@ -80,17 +80,18 @@ abstract mixin class $StreetCopyWith<$Res> {
   factory $StreetCopyWith(Street value, $Res Function(Street) _then) =
       _$StreetCopyWithImpl;
   @useResult
-  $Res call(
-      {String id,
-      String name,
-      Line? line,
-      Color? color,
-      DateTime? photoUpdatedAt,
-      String? blurhash,
-      List<Area>? areas,
-      LastRecordedByInfo? lastVisit,
-      LastRecordedByInfo? lastEdit,
-      bool userCanEdit});
+  $Res call({
+    String id,
+    String name,
+    Line? line,
+    Color? color,
+    DateTime? photoUpdatedAt,
+    String? blurhash,
+    List<Area>? areas,
+    LastRecordedByInfo? lastVisit,
+    LastRecordedByInfo? lastEdit,
+    bool userCanEdit,
+  });
 }
 
 /// @nodoc
@@ -116,49 +117,49 @@ class _$StreetCopyWithImpl<$Res> implements $StreetCopyWith<$Res> {
     Object? lastEdit = freezed,
     Object? userCanEdit = null,
   }) {
-    return _then(Street(
-      id: null == id
-          ? _self.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _self.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      line: freezed == line
-          ? _self.line
-          : line // ignore: cast_nullable_to_non_nullable
-              as Line?,
-      color: freezed == color
-          ? _self.color
-          : color // ignore: cast_nullable_to_non_nullable
-              as Color?,
-      photoUpdatedAt: freezed == photoUpdatedAt
-          ? _self.photoUpdatedAt
-          : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      blurhash: freezed == blurhash
-          ? _self.blurhash
-          : blurhash // ignore: cast_nullable_to_non_nullable
-              as String?,
-      areas: freezed == areas
-          ? _self.areas
-          : areas // ignore: cast_nullable_to_non_nullable
-              as List<Area>?,
-      lastVisit: freezed == lastVisit
-          ? _self.lastVisit
-          : lastVisit // ignore: cast_nullable_to_non_nullable
-              as LastRecordedByInfo?,
-      lastEdit: freezed == lastEdit
-          ? _self.lastEdit
-          : lastEdit // ignore: cast_nullable_to_non_nullable
-              as LastRecordedByInfo?,
-      userCanEdit: null == userCanEdit
-          ? _self.userCanEdit
-          : userCanEdit // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
+    return _then(
+      Street(
+        id: null == id
+            ? _self.id
+            : id // ignore: cast_nullable_to_non_nullable
+                  as String,
+        name: null == name
+            ? _self.name
+            : name // ignore: cast_nullable_to_non_nullable
+                  as String,
+        line: freezed == line
+            ? _self.line
+            : line // ignore: cast_nullable_to_non_nullable
+                  as Line?,
+        color: freezed == color
+            ? _self.color
+            : color // ignore: cast_nullable_to_non_nullable
+                  as Color?,
+        photoUpdatedAt: freezed == photoUpdatedAt
+            ? _self.photoUpdatedAt
+            : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
+                  as DateTime?,
+        blurhash: freezed == blurhash
+            ? _self.blurhash
+            : blurhash // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        areas: freezed == areas
+            ? _self.areas
+            : areas // ignore: cast_nullable_to_non_nullable
+                  as List<Area>?,
+        lastVisit: freezed == lastVisit
+            ? _self.lastVisit
+            : lastVisit // ignore: cast_nullable_to_non_nullable
+                  as LastRecordedByInfo?,
+        lastEdit: freezed == lastEdit
+            ? _self.lastEdit
+            : lastEdit // ignore: cast_nullable_to_non_nullable
+                  as LastRecordedByInfo?,
+        userCanEdit: null == userCanEdit
+            ? _self.userCanEdit
+            : userCanEdit // ignore: cast_nullable_to_non_nullable
+                  as bool,
+      ),
+    );
   }
 }
-
-// dart format on

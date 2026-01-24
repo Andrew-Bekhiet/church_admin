@@ -13,11 +13,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     required AuthStorage authStorage,
     required Stream<bool> connectivityStream,
     bool loadCachedUser = true,
-  })  : _authRepository = authRepository,
-        _databaseService = databaseService,
-        _authStorage = authStorage,
-        _connectivityStream = connectivityStream,
-        super(const AuthInitial()) {
+  }) : _authRepository = authRepository,
+       _databaseService = databaseService,
+       _authStorage = authStorage,
+       _connectivityStream = connectivityStream,
+       super(const AuthInitial()) {
     on<ListenToSubscriptions>(
       _onListenToSubscriptions,
       transformer: (events, mapper) => events
@@ -52,19 +52,19 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   bool get isSignedIn => state.unwrapped is AuthAuthenticated;
 
   AuthUser? get currentUser => switch (state.unwrapped) {
-        AuthAuthenticated(:final authUser) => authUser,
-        _ => null
-      };
+    AuthAuthenticated(:final authUser) => authUser,
+    _ => null,
+  };
 
   User? get currentUserData => switch (state.unwrapped) {
-        AuthAuthenticated(:final userData) => userData,
-        _ => null
-      };
+    AuthAuthenticated(:final userData) => userData,
+    _ => null,
+  };
 
   String? get currentIdToken => switch (state.unwrapped) {
-        AuthAuthenticated(:final authUser) => authUser.idToken,
-        _ => null
-      };
+    AuthAuthenticated(:final authUser) => authUser.idToken,
+    _ => null,
+  };
 
   Stream<AuthUser?> get userStream =>
       stream.map((_) => currentUser).startWith(currentUser).distinct();
@@ -79,16 +79,17 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       stream.map((_) => isSignedIn).startWith(isSignedIn).distinct();
 
   Future<void> get loaded => switch (state.unwrapped) {
-        AuthAuthenticated(userData: null) || AuthLoading() => stream
-            .firstWhere(
-              (state) =>
-                  state is! AuthLoading &&
-                  (state is! AuthAuthenticated || state.userData != null),
-            )
-            .timeout(const Duration(seconds: 8))
-            .whenComplete(() {}),
-        _ => Future.value(),
-      };
+    AuthAuthenticated(userData: null) || AuthLoading() =>
+      stream
+          .firstWhere(
+            (state) =>
+                state is! AuthLoading &&
+                (state is! AuthAuthenticated || state.userData != null),
+          )
+          .timeout(const Duration(seconds: 8))
+          .whenComplete(() {}),
+    _ => Future.value(),
+  };
 
   Future<void> _onListenToSubscriptions(
     ListenToSubscriptions event,
@@ -171,7 +172,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           final tokenExpiry = _getTokenExpiry(state.authUser);
 
           if (tokenExpiry.isBefore(DateTime.now())) {
-            _authRepository.refreshToken();
+            unawaited(_authRepository.refreshToken());
           }
         }
       },

@@ -357,7 +357,7 @@ abstract final class _$AdvancedQueriesMetadata {
     adminOnData,
     usersPermissionsRel,
     user,
-    userPermission
+    userPermission,
   ];
   late final allQueryablesByType = <Type, QueryableType<Object>>{
     AttendanceRecord: attendanceRecord,
@@ -398,6 +398,6 @@ abstract final class _$AdvancedQueriesMetadata {
     AdminOnData: adminOnData,
     UsersPermissionsRel: usersPermissionsRel,
     User: user,
-    UserPermission: userPermission
+    UserPermission: userPermission,
   };
 }

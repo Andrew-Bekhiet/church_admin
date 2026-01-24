@@ -9,7 +9,6 @@ part of 'father.dart';
 // FreezedGenerator
 // **************************************************************************
 
-// dart format off
 T _$identity<T>(T value) => value;
 
 /// @nodoc
@@ -74,25 +73,25 @@ class _$FatherCopyWithImpl<$Res> implements $FatherCopyWith<$Res> {
     Object? churchId = freezed,
     Object? isHidden = null,
   }) {
-    return _then(Father(
-      id: null == id
-          ? _self.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _self.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      churchId: freezed == churchId
-          ? _self.churchId
-          : churchId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      isHidden: null == isHidden
-          ? _self.isHidden
-          : isHidden // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
+    return _then(
+      Father(
+        id: null == id
+            ? _self.id
+            : id // ignore: cast_nullable_to_non_nullable
+                  as String,
+        name: null == name
+            ? _self.name
+            : name // ignore: cast_nullable_to_non_nullable
+                  as String,
+        churchId: freezed == churchId
+            ? _self.churchId
+            : churchId // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        isHidden: null == isHidden
+            ? _self.isHidden
+            : isHidden // ignore: cast_nullable_to_non_nullable
+                  as bool,
+      ),
+    );
   }
 }
-
-// dart format on

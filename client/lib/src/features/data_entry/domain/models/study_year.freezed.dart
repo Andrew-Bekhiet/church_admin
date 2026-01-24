@@ -9,7 +9,6 @@ part of 'study_year.dart';
 // FreezedGenerator
 // **************************************************************************
 
-// dart format off
 T _$identity<T>(T value) => value;
 
 /// @nodoc
@@ -62,21 +61,18 @@ class _$StudyYearCopyWithImpl<$Res> implements $StudyYearCopyWith<$Res> {
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? order = null,
-    Object? name = null,
-  }) {
-    return _then(StudyYear(
-      order: null == order
-          ? _self.order
-          : order // ignore: cast_nullable_to_non_nullable
-              as int,
-      name: null == name
-          ? _self.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-    ));
+  $Res call({Object? order = null, Object? name = null}) {
+    return _then(
+      StudyYear(
+        order: null == order
+            ? _self.order
+            : order // ignore: cast_nullable_to_non_nullable
+                  as int,
+        name: null == name
+            ? _self.name
+            : name // ignore: cast_nullable_to_non_nullable
+                  as String,
+      ),
+    );
   }
 }
-
-// dart format on

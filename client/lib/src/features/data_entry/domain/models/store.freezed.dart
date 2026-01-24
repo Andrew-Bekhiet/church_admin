@@ -9,7 +9,6 @@ part of 'store.dart';
 // FreezedGenerator
 // **************************************************************************
 
-// dart format off
 T _$identity<T>(T value) => value;
 
 /// @nodoc
@@ -56,8 +55,19 @@ mixin _$Store {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, address, family,
-      familyId, color, lastEdit, photoUpdatedAt, blurhash, userCanEdit);
+  int get hashCode => Object.hash(
+    runtimeType,
+    id,
+    name,
+    address,
+    family,
+    familyId,
+    color,
+    lastEdit,
+    photoUpdatedAt,
+    blurhash,
+    userCanEdit,
+  );
 
   @override
   String toString() {
@@ -70,17 +80,18 @@ abstract mixin class $StoreCopyWith<$Res> {
   factory $StoreCopyWith(Store value, $Res Function(Store) _then) =
       _$StoreCopyWithImpl;
   @useResult
-  $Res call(
-      {String id,
-      String name,
-      Address? address,
-      Family? family,
-      String? familyId,
-      Color? color,
-      LastRecordedByInfo? lastEdit,
-      DateTime? photoUpdatedAt,
-      String? blurhash,
-      bool userCanEdit});
+  $Res call({
+    String id,
+    String name,
+    Address? address,
+    Family? family,
+    String? familyId,
+    Color? color,
+    LastRecordedByInfo? lastEdit,
+    DateTime? photoUpdatedAt,
+    String? blurhash,
+    bool userCanEdit,
+  });
 }
 
 /// @nodoc
@@ -106,49 +117,49 @@ class _$StoreCopyWithImpl<$Res> implements $StoreCopyWith<$Res> {
     Object? blurhash = freezed,
     Object? userCanEdit = null,
   }) {
-    return _then(Store(
-      id: null == id
-          ? _self.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _self.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      address: freezed == address
-          ? _self.address
-          : address // ignore: cast_nullable_to_non_nullable
-              as Address?,
-      family: freezed == family
-          ? _self.family
-          : family // ignore: cast_nullable_to_non_nullable
-              as Family?,
-      familyId: freezed == familyId
-          ? _self.familyId
-          : familyId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      color: freezed == color
-          ? _self.color
-          : color // ignore: cast_nullable_to_non_nullable
-              as Color?,
-      lastEdit: freezed == lastEdit
-          ? _self.lastEdit
-          : lastEdit // ignore: cast_nullable_to_non_nullable
-              as LastRecordedByInfo?,
-      photoUpdatedAt: freezed == photoUpdatedAt
-          ? _self.photoUpdatedAt
-          : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      blurhash: freezed == blurhash
-          ? _self.blurhash
-          : blurhash // ignore: cast_nullable_to_non_nullable
-              as String?,
-      userCanEdit: null == userCanEdit
-          ? _self.userCanEdit
-          : userCanEdit // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
+    return _then(
+      Store(
+        id: null == id
+            ? _self.id
+            : id // ignore: cast_nullable_to_non_nullable
+                  as String,
+        name: null == name
+            ? _self.name
+            : name // ignore: cast_nullable_to_non_nullable
+                  as String,
+        address: freezed == address
+            ? _self.address
+            : address // ignore: cast_nullable_to_non_nullable
+                  as Address?,
+        family: freezed == family
+            ? _self.family
+            : family // ignore: cast_nullable_to_non_nullable
+                  as Family?,
+        familyId: freezed == familyId
+            ? _self.familyId
+            : familyId // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        color: freezed == color
+            ? _self.color
+            : color // ignore: cast_nullable_to_non_nullable
+                  as Color?,
+        lastEdit: freezed == lastEdit
+            ? _self.lastEdit
+            : lastEdit // ignore: cast_nullable_to_non_nullable
+                  as LastRecordedByInfo?,
+        photoUpdatedAt: freezed == photoUpdatedAt
+            ? _self.photoUpdatedAt
+            : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
+                  as DateTime?,
+        blurhash: freezed == blurhash
+            ? _self.blurhash
+            : blurhash // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        userCanEdit: null == userCanEdit
+            ? _self.userCanEdit
+            : userCanEdit // ignore: cast_nullable_to_non_nullable
+                  as bool,
+      ),
+    );
   }
 }
-
-// dart format on

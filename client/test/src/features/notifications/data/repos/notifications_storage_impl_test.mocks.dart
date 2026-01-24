@@ -22,109 +22,95 @@ import 'package:mockito/src/dummies.dart' as _i3;
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
+// ignore_for_file: invalid_use_of_internal_member
 
 /// A class which mocks [KVStore].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockKVStore<T> extends _i1.Mock implements _i2.KVStore<T> {
   @override
-  String get name => (super.noSuchMethod(
-        Invocation.getter(#name),
-        returnValue: _i3.dummyValue<String>(
-          this,
-          Invocation.getter(#name),
-        ),
-        returnValueForMissingStub: _i3.dummyValue<String>(
-          this,
-          Invocation.getter(#name),
-        ),
-      ) as String);
-
-  @override
-  _i4.Future<bool> containsKey(String? key) => (super.noSuchMethod(
-        Invocation.method(
-          #containsKey,
-          [key],
-        ),
-        returnValue: _i4.Future<bool>.value(false),
-        returnValueForMissingStub: _i4.Future<bool>.value(false),
-      ) as _i4.Future<bool>);
-
-  @override
-  _i4.Future<T?> get(String? key) => (super.noSuchMethod(
-        Invocation.method(
-          #get,
-          [key],
-        ),
-        returnValue: _i4.Future<T?>.value(),
-        returnValueForMissingStub: _i4.Future<T?>.value(),
-      ) as _i4.Future<T?>);
-
-  @override
-  _i4.Future<void> put(
-    String? key,
-    T? value,
-  ) =>
+  String get name =>
       (super.noSuchMethod(
-        Invocation.method(
-          #put,
-          [
-            key,
-            value,
-          ],
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+            Invocation.getter(#name),
+            returnValue: _i3.dummyValue<String>(this, Invocation.getter(#name)),
+            returnValueForMissingStub: _i3.dummyValue<String>(
+              this,
+              Invocation.getter(#name),
+            ),
+          )
+          as String);
 
   @override
-  _i4.Future<void> putAll(Map<String, T?>? values) => (super.noSuchMethod(
-        Invocation.method(
-          #putAll,
-          [values],
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+  _i4.Future<bool> containsKey(String? key) =>
+      (super.noSuchMethod(
+            Invocation.method(#containsKey, [key]),
+            returnValue: _i4.Future<bool>.value(false),
+            returnValueForMissingStub: _i4.Future<bool>.value(false),
+          )
+          as _i4.Future<bool>);
 
   @override
-  _i4.Future<void> delete(String? key) => (super.noSuchMethod(
-        Invocation.method(
-          #delete,
-          [key],
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+  _i4.Future<T?> get(String? key) =>
+      (super.noSuchMethod(
+            Invocation.method(#get, [key]),
+            returnValue: _i4.Future<T?>.value(),
+            returnValueForMissingStub: _i4.Future<T?>.value(),
+          )
+          as _i4.Future<T?>);
 
   @override
-  _i4.Future<Map<String, T>> toMap() => (super.noSuchMethod(
-        Invocation.method(
-          #toMap,
-          [],
-        ),
-        returnValue: _i4.Future<Map<String, T>>.value(<String, T>{}),
-        returnValueForMissingStub:
-            _i4.Future<Map<String, T>>.value(<String, T>{}),
-      ) as _i4.Future<Map<String, T>>);
+  _i4.Future<void> put(String? key, T? value) =>
+      (super.noSuchMethod(
+            Invocation.method(#put, [key, value]),
+            returnValue: _i4.Future<void>.value(),
+            returnValueForMissingStub: _i4.Future<void>.value(),
+          )
+          as _i4.Future<void>);
 
   @override
-  _i4.Future<void> clear() => (super.noSuchMethod(
-        Invocation.method(
-          #clear,
-          [],
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+  _i4.Future<void> putAll(Map<String, T?>? values) =>
+      (super.noSuchMethod(
+            Invocation.method(#putAll, [values]),
+            returnValue: _i4.Future<void>.value(),
+            returnValueForMissingStub: _i4.Future<void>.value(),
+          )
+          as _i4.Future<void>);
 
   @override
-  _i4.Future<void> close() => (super.noSuchMethod(
-        Invocation.method(
-          #close,
-          [],
-        ),
-        returnValue: _i4.Future<void>.value(),
-        returnValueForMissingStub: _i4.Future<void>.value(),
-      ) as _i4.Future<void>);
+  _i4.Future<void> delete(String? key) =>
+      (super.noSuchMethod(
+            Invocation.method(#delete, [key]),
+            returnValue: _i4.Future<void>.value(),
+            returnValueForMissingStub: _i4.Future<void>.value(),
+          )
+          as _i4.Future<void>);
+
+  @override
+  _i4.Future<Map<String, T>> toMap() =>
+      (super.noSuchMethod(
+            Invocation.method(#toMap, []),
+            returnValue: _i4.Future<Map<String, T>>.value(<String, T>{}),
+            returnValueForMissingStub: _i4.Future<Map<String, T>>.value(
+              <String, T>{},
+            ),
+          )
+          as _i4.Future<Map<String, T>>);
+
+  @override
+  _i4.Future<void> clear() =>
+      (super.noSuchMethod(
+            Invocation.method(#clear, []),
+            returnValue: _i4.Future<void>.value(),
+            returnValueForMissingStub: _i4.Future<void>.value(),
+          )
+          as _i4.Future<void>);
+
+  @override
+  _i4.Future<void> close() =>
+      (super.noSuchMethod(
+            Invocation.method(#close, []),
+            returnValue: _i4.Future<void>.value(),
+            returnValueForMissingStub: _i4.Future<void>.value(),
+          )
+          as _i4.Future<void>);
 }

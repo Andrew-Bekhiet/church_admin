@@ -20,43 +20,43 @@ class AggregateDataFields {
     operators: {
       ...PrimitiveOperator.values,
       PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
+      PrimitiveOperator.isNotNull,
     },
   );
 
   final FieldMetadata<LastRecordedByInfo> max =
       FieldMetadata<LastRecordedByInfo>(
-    getValue: (obj) => obj is AggregateData ? obj.max : null,
-    parentType: AggregateData,
-    name: 'max',
-    label: 'أقصى',
-    isCodeOnly: false,
-    operators: {
-      ...MultiSelectOperator.values,
-      PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
-    },
-  );
+        getValue: (obj) => obj is AggregateData ? obj.max : null,
+        parentType: AggregateData,
+        name: 'max',
+        label: 'أقصى',
+        isCodeOnly: false,
+        operators: {
+          ...MultiSelectOperator.values,
+          PrimitiveOperator.isNull,
+          PrimitiveOperator.isNotNull,
+        },
+      );
 
   final FieldMetadata<LastRecordedByInfo> min =
       FieldMetadata<LastRecordedByInfo>(
-    getValue: (obj) => obj is AggregateData ? obj.min : null,
-    parentType: AggregateData,
-    name: 'min',
-    label: 'أدنى',
-    isCodeOnly: false,
-    operators: {
-      ...MultiSelectOperator.values,
-      PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull
-    },
-  );
+        getValue: (obj) => obj is AggregateData ? obj.min : null,
+        parentType: AggregateData,
+        name: 'min',
+        label: 'أدنى',
+        isCodeOnly: false,
+        operators: {
+          ...MultiSelectOperator.values,
+          PrimitiveOperator.isNull,
+          PrimitiveOperator.isNotNull,
+        },
+      );
 
   late final List<FieldMetadata<Object>> allFields = [count, max, min];
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'count': count,
     'max': max,
-    'min': min
+    'min': min,
   };
 }
 
@@ -65,16 +65,22 @@ class AggregateDataFields {
 // **************************************************************************
 
 AggregateData _$AggregateDataFromJson(Map json) => AggregateData(
-      count: (json['count'] as num?)?.toInt(),
-      max: _readLastRecordedByInfo(json, 'max') == null
-          ? null
-          : LastRecordedByInfo.fromJson(Map<String, Object?>.from(
-              _readLastRecordedByInfo(json, 'max') as Map)),
-      min: _readLastRecordedByInfo(json, 'min') == null
-          ? null
-          : LastRecordedByInfo.fromJson(Map<String, Object?>.from(
-              _readLastRecordedByInfo(json, 'min') as Map)),
-    );
+  count: (json['count'] as num?)?.toInt(),
+  max: _readLastRecordedByInfo(json, 'max') == null
+      ? null
+      : LastRecordedByInfo.fromJson(
+          Map<String, Object?>.from(
+            _readLastRecordedByInfo(json, 'max') as Map,
+          ),
+        ),
+  min: _readLastRecordedByInfo(json, 'min') == null
+      ? null
+      : LastRecordedByInfo.fromJson(
+          Map<String, Object?>.from(
+            _readLastRecordedByInfo(json, 'min') as Map,
+          ),
+        ),
+);
 
 Map<String, dynamic> _$AggregateDataToJson(AggregateData instance) =>
     <String, dynamic>{

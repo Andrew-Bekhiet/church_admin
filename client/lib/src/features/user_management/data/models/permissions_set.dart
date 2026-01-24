@@ -10,16 +10,17 @@ class PermissionsSet extends DelegatingSet<UserPermission> with EquatableMixin {
   const PermissionsSet.empty() : super(const {});
 
   PermissionsSet.parse(Set<String> permissions)
-      : super(
-          permissions
-              .map(
-                (p) =>
-                    UserPermission.values.firstWhereOrNull((e) => e.name == p),
-              )
-              .nonNulls
-              .toSet(),
-        );
+    : super(
+        permissions
+            .map(
+              (p) => UserPermission.values.firstWhereOrNull((e) => e.name == p),
+            )
+            .nonNulls
+            .toSet(),
+      );
 
+  // Ignored for readability
+  // ignore: matching_super_parameters
   const PermissionsSet.fromSet(super.permissions);
 
   bool get approved => contains(UserPermission.approved);
@@ -80,5 +81,5 @@ extension RemoveQuotes on String {
 List<Json> permissionsSetToJson(PermissionsSet data) =>
     data.map((e) => {'permission': e.name}).toList();
 PermissionsSet permissionsSetFromJson(dynamic data) => PermissionsSet.parse(
-      (data as List?)?.map((o) => o['permission']).toSet().cast() ?? {},
-    );
+  (data as List?)?.map((o) => o['permission']).toSet().cast() ?? {},
+);

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/features/home/presentation/widgets/snowflake_animation.dart';
 import 'package:collection/collection.dart';
@@ -28,8 +30,10 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
               previous.currentPage.round() != current.currentPage.round() ||
               previous.showSnowflakeAnimation !=
                   current.showSnowflakeAnimation ||
-              !const DeepCollectionEquality()
-                  .equals(previous.pages, current.pages),
+              !const DeepCollectionEquality().equals(
+                previous.pages,
+                current.pages,
+              ),
           builder: (context, homeState) {
             final int pageIndex = homeState.currentPage.round();
 
@@ -46,17 +50,17 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
                   IconButton(
                     onPressed: listType == ViewableObjectListType.list
                         ? () => homeBloc.add(
-                              HomeSwitchPageListType(
-                                pageIndex,
-                                ViewableObjectListType.grid,
-                              ),
-                            )
-                        : () => homeBloc.add(
-                              HomeSwitchPageListType(
-                                pageIndex,
-                                ViewableObjectListType.list,
-                              ),
+                            HomeSwitchPageListType(
+                              pageIndex,
+                              ViewableObjectListType.grid,
                             ),
+                          )
+                        : () => homeBloc.add(
+                            HomeSwitchPageListType(
+                              pageIndex,
+                              ViewableObjectListType.list,
+                            ),
+                          ),
                     icon: const Icon(Symbols.lists),
                   ),
               ],
@@ -106,9 +110,11 @@ class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   void onSearch(BuildContext context) {
-    showSearch(
-      context: context,
-      delegate: HomeSearchDelegate(DatabaseService.I.home),
+    unawaited(
+      showSearch(
+        context: context,
+        delegate: HomeSearchDelegate(DatabaseService.I.home),
+      ),
     );
   }
 }

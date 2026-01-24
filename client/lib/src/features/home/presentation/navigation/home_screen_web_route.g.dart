@@ -6,23 +6,17 @@ part of 'home_screen_web_route.dart';
 // GoRouterGenerator
 // **************************************************************************
 
-List<RouteBase> get $appRoutes => [
-      $homeScreenWebRoute,
-    ];
+List<RouteBase> get $appRoutes => [$homeScreenWebRoute];
 
-RouteBase get $homeScreenWebRoute => GoRouteData.$route(
-      path: '/',
-      factory: _$HomeScreenWebRoute._fromState,
-    );
+RouteBase get $homeScreenWebRoute =>
+    GoRouteData.$route(path: '/', factory: $HomeScreenWebRoute._fromState);
 
-mixin _$HomeScreenWebRoute on GoRouteData {
+mixin $HomeScreenWebRoute on GoRouteData {
   static HomeScreenWebRoute _fromState(GoRouterState state) =>
       const HomeScreenWebRoute();
 
   @override
-  String get location => GoRouteData.$location(
-        '/',
-      );
+  String get location => GoRouteData.$location('/');
 
   @override
   void go(BuildContext context) => context.go(location);

@@ -1,9 +1,9 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:flutter_riverpod/misc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:riverpod/riverpod.dart';
 import 'package:rxdart_ext/rxdart_ext.dart';
 
 import 'user_persistence_service_test.mocks.dart';
@@ -23,15 +23,17 @@ void main() {
     'Persistence Service => recordActive',
     () async {
       final unit = UserPersistenceService(
-        firebaseDatabase:
-            globalProviderContainer.read(firebaseDatabaseProvider),
+        firebaseDatabase: globalProviderContainer.read(
+          firebaseDatabaseProvider,
+        ),
       );
       addTearDown(unit.dispose);
 
       await unit.recordActive();
 
-      final mockRef =
-          globalProviderContainer.read(firebaseDatabaseProvider).ref();
+      final mockRef = globalProviderContainer
+          .read(firebaseDatabaseProvider)
+          .ref();
       final mockOnDisconnect = mockRef.onDisconnect();
 
       verifyInOrder(
@@ -50,15 +52,17 @@ void main() {
     'Persistence Service => recordLastSeen',
     () async {
       final unit = UserPersistenceService(
-        firebaseDatabase:
-            globalProviderContainer.read(firebaseDatabaseProvider),
+        firebaseDatabase: globalProviderContainer.read(
+          firebaseDatabaseProvider,
+        ),
       );
       addTearDown(unit.dispose);
 
       await unit.recordLastSeen();
 
-      final mockRef =
-          globalProviderContainer.read(firebaseDatabaseProvider).ref();
+      final mockRef = globalProviderContainer
+          .read(firebaseDatabaseProvider)
+          .ref();
       final mockOnDisconnect = mockRef.onDisconnect();
 
       verifyInOrder(
@@ -77,15 +81,17 @@ void main() {
     'Persistence Service => scheduleOnDisconnect',
     () async {
       final unit = UserPersistenceService(
-        firebaseDatabase:
-            globalProviderContainer.read(firebaseDatabaseProvider),
+        firebaseDatabase: globalProviderContainer.read(
+          firebaseDatabaseProvider,
+        ),
       );
       addTearDown(unit.dispose);
 
       await unit.scheduleOnDisconnect();
 
-      final mockRef =
-          globalProviderContainer.read(firebaseDatabaseProvider).ref();
+      final mockRef = globalProviderContainer
+          .read(firebaseDatabaseProvider)
+          .ref();
       final mockOnDisconnect = mockRef.onDisconnect();
       verifyInOrder(
         [
@@ -100,15 +106,17 @@ void main() {
     'Persistence Service => cancelOnDisconnect',
     () async {
       final unit = UserPersistenceService(
-        firebaseDatabase:
-            globalProviderContainer.read(firebaseDatabaseProvider),
+        firebaseDatabase: globalProviderContainer.read(
+          firebaseDatabaseProvider,
+        ),
       );
       addTearDown(unit.dispose);
 
       await unit.cancelOnDisconnect();
 
-      final mockRef =
-          globalProviderContainer.read(firebaseDatabaseProvider).ref();
+      final mockRef = globalProviderContainer
+          .read(firebaseDatabaseProvider)
+          .ref();
       final mockOnDisconnect = mockRef.onDisconnect();
       verifyInOrder(
         [
@@ -123,19 +131,22 @@ void main() {
   test(
     'Persistence Service => connectivity listener',
     () async {
-      when(ConnectivityService.I.connectivityStream)
-          .thenAnswer((_) => BehaviorSubject.seeded(true));
+      when(
+        ConnectivityService.I.connectivityStream,
+      ).thenAnswer((_) => BehaviorSubject.seeded(true));
 
       final unit = UserPersistenceService(
-        firebaseDatabase:
-            globalProviderContainer.read(firebaseDatabaseProvider),
+        firebaseDatabase: globalProviderContainer.read(
+          firebaseDatabaseProvider,
+        ),
       );
       addTearDown(unit.dispose);
 
       await Future.delayed(Duration.zero);
 
-      final mockRef =
-          globalProviderContainer.read(firebaseDatabaseProvider).ref();
+      final mockRef = globalProviderContainer
+          .read(firebaseDatabaseProvider)
+          .ref();
       final mockOnDisconnect = mockRef.onDisconnect();
 
       verifyInOrder(
@@ -221,8 +232,9 @@ Override _setUpAuthBloc() {
 Override _setUpConnectivityService() {
   final mock = MockConnectivityService();
 
-  when(mock.connectivityStream)
-      .thenAnswer((_) => ValueStreamController(false).stream);
+  when(
+    mock.connectivityStream,
+  ).thenAnswer((_) => ValueStreamController(false).stream);
 
   return connectivityServiceProvider.overrideWithValue(mock);
 }

@@ -24,36 +24,22 @@ import 'package:mockito/src/dummies.dart' as _i6;
 // ignore_for_file: unnecessary_parenthesis
 // ignore_for_file: camel_case_types
 // ignore_for_file: subtype_of_sealed_class
+// ignore_for_file: invalid_use_of_internal_member
 
 class _FakeHttpsCallable_0 extends _i1.SmartFake implements _i2.HttpsCallable {
-  _FakeHttpsCallable_0(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeHttpsCallable_0(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeHttpsCallableResult_1<T> extends _i1.SmartFake
     implements _i2.HttpsCallableResult<T> {
-  _FakeHttpsCallableResult_1(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeHttpsCallableResult_1(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 class _FakeResponse_2<T> extends _i1.SmartFake implements _i3.Response<T> {
-  _FakeResponse_2(
-    Object parent,
-    Invocation parentInvocation,
-  ) : super(
-          parent,
-          parentInvocation,
-        );
+  _FakeResponse_2(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
 }
 
 /// A class which mocks [FunctionsService].
@@ -66,55 +52,51 @@ class MockFunctionsService extends _i1.Mock implements _i4.FunctionsService {
     _i2.HttpsCallableOptions? options,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #httpsCallable,
-          [functionName],
-          {#options: options},
-        ),
-        returnValue: _FakeHttpsCallable_0(
-          this,
-          Invocation.method(
-            #httpsCallable,
-            [functionName],
-            {#options: options},
-          ),
-        ),
-        returnValueForMissingStub: _FakeHttpsCallable_0(
-          this,
-          Invocation.method(
-            #httpsCallable,
-            [functionName],
-            {#options: options},
-          ),
-        ),
-      ) as _i2.HttpsCallable);
+            Invocation.method(
+              #httpsCallable,
+              [functionName],
+              {#options: options},
+            ),
+            returnValue: _FakeHttpsCallable_0(
+              this,
+              Invocation.method(
+                #httpsCallable,
+                [functionName],
+                {#options: options},
+              ),
+            ),
+            returnValueForMissingStub: _FakeHttpsCallable_0(
+              this,
+              Invocation.method(
+                #httpsCallable,
+                [functionName],
+                {#options: options},
+              ),
+            ),
+          )
+          as _i2.HttpsCallable);
 
   @override
   _i5.Future<_i2.HttpsCallableResult<dynamic>> registerFCMToken(
-          String? token) =>
+    String? token,
+  ) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #registerFCMToken,
-          [token],
-        ),
-        returnValue: _i5.Future<_i2.HttpsCallableResult<dynamic>>.value(
-            _FakeHttpsCallableResult_1<dynamic>(
-          this,
-          Invocation.method(
-            #registerFCMToken,
-            [token],
-          ),
-        )),
-        returnValueForMissingStub:
-            _i5.Future<_i2.HttpsCallableResult<dynamic>>.value(
-                _FakeHttpsCallableResult_1<dynamic>(
-          this,
-          Invocation.method(
-            #registerFCMToken,
-            [token],
-          ),
-        )),
-      ) as _i5.Future<_i2.HttpsCallableResult<dynamic>>);
+            Invocation.method(#registerFCMToken, [token]),
+            returnValue: _i5.Future<_i2.HttpsCallableResult<dynamic>>.value(
+              _FakeHttpsCallableResult_1<dynamic>(
+                this,
+                Invocation.method(#registerFCMToken, [token]),
+              ),
+            ),
+            returnValueForMissingStub:
+                _i5.Future<_i2.HttpsCallableResult<dynamic>>.value(
+                  _FakeHttpsCallableResult_1<dynamic>(
+                    this,
+                    Invocation.method(#registerFCMToken, [token]),
+                  ),
+                ),
+          )
+          as _i5.Future<_i2.HttpsCallableResult<dynamic>>);
 
   @override
   _i5.Future<String> getDownloadUrl(
@@ -123,38 +105,33 @@ class MockFunctionsService extends _i1.Mock implements _i4.FunctionsService {
     String? contentType,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #getDownloadUrl,
-          [
-            table,
-            id,
-          ],
-          {#contentType: contentType},
-        ),
-        returnValue: _i5.Future<String>.value(_i6.dummyValue<String>(
-          this,
-          Invocation.method(
-            #getDownloadUrl,
-            [
-              table,
-              id,
-            ],
-            {#contentType: contentType},
-          ),
-        )),
-        returnValueForMissingStub:
-            _i5.Future<String>.value(_i6.dummyValue<String>(
-          this,
-          Invocation.method(
-            #getDownloadUrl,
-            [
-              table,
-              id,
-            ],
-            {#contentType: contentType},
-          ),
-        )),
-      ) as _i5.Future<String>);
+            Invocation.method(
+              #getDownloadUrl,
+              [table, id],
+              {#contentType: contentType},
+            ),
+            returnValue: _i5.Future<String>.value(
+              _i6.dummyValue<String>(
+                this,
+                Invocation.method(
+                  #getDownloadUrl,
+                  [table, id],
+                  {#contentType: contentType},
+                ),
+              ),
+            ),
+            returnValueForMissingStub: _i5.Future<String>.value(
+              _i6.dummyValue<String>(
+                this,
+                Invocation.method(
+                  #getDownloadUrl,
+                  [table, id],
+                  {#contentType: contentType},
+                ),
+              ),
+            ),
+          )
+          as _i5.Future<String>);
 
   @override
   _i5.Future<String> getUploadUrl(
@@ -163,66 +140,51 @@ class MockFunctionsService extends _i1.Mock implements _i4.FunctionsService {
     String? contentType,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #getUploadUrl,
-          [
-            table,
-            id,
-          ],
-          {#contentType: contentType},
-        ),
-        returnValue: _i5.Future<String>.value(_i6.dummyValue<String>(
-          this,
-          Invocation.method(
-            #getUploadUrl,
-            [
-              table,
-              id,
-            ],
-            {#contentType: contentType},
-          ),
-        )),
-        returnValueForMissingStub:
-            _i5.Future<String>.value(_i6.dummyValue<String>(
-          this,
-          Invocation.method(
-            #getUploadUrl,
-            [
-              table,
-              id,
-            ],
-            {#contentType: contentType},
-          ),
-        )),
-      ) as _i5.Future<String>);
+            Invocation.method(
+              #getUploadUrl,
+              [table, id],
+              {#contentType: contentType},
+            ),
+            returnValue: _i5.Future<String>.value(
+              _i6.dummyValue<String>(
+                this,
+                Invocation.method(
+                  #getUploadUrl,
+                  [table, id],
+                  {#contentType: contentType},
+                ),
+              ),
+            ),
+            returnValueForMissingStub: _i5.Future<String>.value(
+              _i6.dummyValue<String>(
+                this,
+                Invocation.method(
+                  #getUploadUrl,
+                  [table, id],
+                  {#contentType: contentType},
+                ),
+              ),
+            ),
+          )
+          as _i5.Future<String>);
 
   @override
-  _i5.Future<void> deletePhoto(
-    String? table,
-    String? id,
-  ) =>
+  _i5.Future<void> deletePhoto(String? table, String? id) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #deletePhoto,
-          [
-            table,
-            id,
-          ],
-        ),
-        returnValue: _i5.Future<void>.value(),
-        returnValueForMissingStub: _i5.Future<void>.value(),
-      ) as _i5.Future<void>);
+            Invocation.method(#deletePhoto, [table, id]),
+            returnValue: _i5.Future<void>.value(),
+            returnValueForMissingStub: _i5.Future<void>.value(),
+          )
+          as _i5.Future<void>);
 
   @override
   _i5.Future<_i4.Address?> getAddressFromLocation(_i4.Point? location) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #getAddressFromLocation,
-          [location],
-        ),
-        returnValue: _i5.Future<_i4.Address?>.value(),
-        returnValueForMissingStub: _i5.Future<_i4.Address?>.value(),
-      ) as _i5.Future<_i4.Address?>);
+            Invocation.method(#getAddressFromLocation, [location]),
+            returnValue: _i5.Future<_i4.Address?>.value(),
+            returnValueForMissingStub: _i5.Future<_i4.Address?>.value(),
+          )
+          as _i5.Future<_i4.Address?>);
 
   @override
   _i5.Future<_i3.Response<dynamic>> uploadPhoto({
@@ -230,107 +192,86 @@ class MockFunctionsService extends _i1.Mock implements _i4.FunctionsService {
     required _i5.Stream<List<int>>? fileStream,
     String? contentType,
     int? fileLength,
-    void Function(
-      int,
-      int,
-    )? onSendProgress,
+    void Function(int, int)? onSendProgress,
   }) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #uploadPhoto,
-          [],
-          {
-            #url: url,
-            #fileStream: fileStream,
-            #contentType: contentType,
-            #fileLength: fileLength,
-            #onSendProgress: onSendProgress,
-          },
-        ),
-        returnValue:
-            _i5.Future<_i3.Response<dynamic>>.value(_FakeResponse_2<dynamic>(
-          this,
-          Invocation.method(
-            #uploadPhoto,
-            [],
-            {
+            Invocation.method(#uploadPhoto, [], {
               #url: url,
               #fileStream: fileStream,
               #contentType: contentType,
               #fileLength: fileLength,
               #onSendProgress: onSendProgress,
-            },
-          ),
-        )),
-        returnValueForMissingStub:
-            _i5.Future<_i3.Response<dynamic>>.value(_FakeResponse_2<dynamic>(
-          this,
-          Invocation.method(
-            #uploadPhoto,
-            [],
-            {
-              #url: url,
-              #fileStream: fileStream,
-              #contentType: contentType,
-              #fileLength: fileLength,
-              #onSendProgress: onSendProgress,
-            },
-          ),
-        )),
-      ) as _i5.Future<_i3.Response<dynamic>>);
+            }),
+            returnValue: _i5.Future<_i3.Response<dynamic>>.value(
+              _FakeResponse_2<dynamic>(
+                this,
+                Invocation.method(#uploadPhoto, [], {
+                  #url: url,
+                  #fileStream: fileStream,
+                  #contentType: contentType,
+                  #fileLength: fileLength,
+                  #onSendProgress: onSendProgress,
+                }),
+              ),
+            ),
+            returnValueForMissingStub: _i5.Future<_i3.Response<dynamic>>.value(
+              _FakeResponse_2<dynamic>(
+                this,
+                Invocation.method(#uploadPhoto, [], {
+                  #url: url,
+                  #fileStream: fileStream,
+                  #contentType: contentType,
+                  #fileLength: fileLength,
+                  #onSendProgress: onSendProgress,
+                }),
+              ),
+            ),
+          )
+          as _i5.Future<_i3.Response<dynamic>>);
 
   @override
-  _i5.Future<bool> checkHasuraHealth() => (super.noSuchMethod(
-        Invocation.method(
-          #checkHasuraHealth,
-          [],
-        ),
-        returnValue: _i5.Future<bool>.value(false),
-        returnValueForMissingStub: _i5.Future<bool>.value(false),
-      ) as _i5.Future<bool>);
+  _i5.Future<bool> checkHasuraHealth() =>
+      (super.noSuchMethod(
+            Invocation.method(#checkHasuraHealth, []),
+            returnValue: _i5.Future<bool>.value(false),
+            returnValueForMissingStub: _i5.Future<bool>.value(false),
+          )
+          as _i5.Future<bool>);
 
   @override
   _i5.Future<void> registerUserWithCode(String? registerCode) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #registerUserWithCode,
-          [registerCode],
-        ),
-        returnValue: _i5.Future<void>.value(),
-        returnValueForMissingStub: _i5.Future<void>.value(),
-      ) as _i5.Future<void>);
+            Invocation.method(#registerUserWithCode, [registerCode]),
+            returnValue: _i5.Future<void>.value(),
+            returnValueForMissingStub: _i5.Future<void>.value(),
+          )
+          as _i5.Future<void>);
 
   @override
   _i5.Future<String> getAppDownloadLink(String? platform) =>
       (super.noSuchMethod(
-        Invocation.method(
-          #getAppDownloadLink,
-          [platform],
-        ),
-        returnValue: _i5.Future<String>.value(_i6.dummyValue<String>(
-          this,
-          Invocation.method(
-            #getAppDownloadLink,
-            [platform],
-          ),
-        )),
-        returnValueForMissingStub:
-            _i5.Future<String>.value(_i6.dummyValue<String>(
-          this,
-          Invocation.method(
-            #getAppDownloadLink,
-            [platform],
-          ),
-        )),
-      ) as _i5.Future<String>);
+            Invocation.method(#getAppDownloadLink, [platform]),
+            returnValue: _i5.Future<String>.value(
+              _i6.dummyValue<String>(
+                this,
+                Invocation.method(#getAppDownloadLink, [platform]),
+              ),
+            ),
+            returnValueForMissingStub: _i5.Future<String>.value(
+              _i6.dummyValue<String>(
+                this,
+                Invocation.method(#getAppDownloadLink, [platform]),
+              ),
+            ),
+          )
+          as _i5.Future<String>);
 
   @override
-  _i5.Future<void> deleteMyAccount() => (super.noSuchMethod(
-        Invocation.method(
-          #deleteMyAccount,
-          [],
-        ),
-        returnValue: _i5.Future<void>.value(),
-        returnValueForMissingStub: _i5.Future<void>.value(),
-      ) as _i5.Future<void>);
+  _i5.Future<void> deleteMyAccount() =>
+      (super.noSuchMethod(
+            Invocation.method(#deleteMyAccount, []),
+            returnValue: _i5.Future<void>.value(),
+            returnValueForMissingStub: _i5.Future<void>.value(),
+          )
+          as _i5.Future<void>);
 }

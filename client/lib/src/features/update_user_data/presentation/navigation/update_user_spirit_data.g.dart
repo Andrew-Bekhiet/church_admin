@@ -6,20 +6,22 @@ part of 'update_user_spirit_data.dart';
 // GoRouterGenerator
 // **************************************************************************
 
-List<RouteBase> get $appRoutes => [
-      $updateUserSpiritDataRoute,
-    ];
+List<RouteBase> get $appRoutes => [$updateUserSpiritDataRoute];
 
 RouteBase get $updateUserSpiritDataRoute => GoRouteData.$route(
-      path: '/update_user_spirit_data',
-      factory: _$UpdateUserSpiritDataRoute._fromState,
-    );
+  path: '/update_user_spirit_data',
+  factory: $UpdateUserSpiritDataRoute._fromState,
+);
 
-mixin _$UpdateUserSpiritDataRoute on GoRouteData {
+mixin $UpdateUserSpiritDataRoute on GoRouteData {
   static UpdateUserSpiritDataRoute _fromState(GoRouterState state) =>
       UpdateUserSpiritDataRoute(
-        forced: _$convertMapValue(
-                'forced', state.uri.queryParameters, _$boolConverter) ??
+        forced:
+            _$convertMapValue(
+              'forced',
+              state.uri.queryParameters,
+              _$boolConverter,
+            ) ??
             false,
         $extra: state.extra as Person?,
       );
@@ -28,11 +30,9 @@ mixin _$UpdateUserSpiritDataRoute on GoRouteData {
 
   @override
   String get location => GoRouteData.$location(
-        '/update_user_spirit_data',
-        queryParams: {
-          if (_self.forced != false) 'forced': _self.forced.toString(),
-        },
-      );
+    '/update_user_spirit_data',
+    queryParams: {if (_self.forced != false) 'forced': _self.forced.toString()},
+  );
 
   @override
   void go(BuildContext context) => context.go(location, extra: _self.$extra);

@@ -1,1 +1,1 @@
-export 'navigation/settings_route.dart';
+export 'navigation/settings_route.dart' show $settingsRoute, SettingsRoute;

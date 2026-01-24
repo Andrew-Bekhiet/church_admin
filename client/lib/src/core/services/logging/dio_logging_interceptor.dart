@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:dio/dio.dart';
 
@@ -8,16 +10,18 @@ class DioLoggingInterceptor extends Interceptor {
 
   @override
   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
-    loggingService.config(
-      LogRecord(
-        moduleName: 'Dio',
-        eventName: 'request',
-        data: {
-          'method': options.method,
-          'url': options.uri.toString(),
-          'headers': options.headers,
-          'data': options.data,
-        },
+    unawaited(
+      loggingService.config(
+        LogRecord(
+          moduleName: 'Dio',
+          eventName: 'request',
+          data: {
+            'method': options.method,
+            'url': options.uri.toString(),
+            'headers': options.headers,
+            'data': options.data,
+          },
+        ),
       ),
     );
 
@@ -26,14 +30,16 @@ class DioLoggingInterceptor extends Interceptor {
 
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
-    loggingService.error(
-      LogRecord(
-        moduleName: 'Dio',
-        eventName: err.type.name,
-        message: err.message,
-        data: {'response.data': err.response?.data.toString()},
-        error: err.error,
-        stackTrace: err.stackTrace,
+    unawaited(
+      loggingService.error(
+        LogRecord(
+          moduleName: 'Dio',
+          eventName: err.type.name,
+          message: err.message,
+          data: {'response.data': err.response?.data.toString()},
+          error: err.error,
+          stackTrace: err.stackTrace,
+        ),
       ),
     );
 

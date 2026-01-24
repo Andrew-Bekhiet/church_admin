@@ -9,7 +9,6 @@ part of 'service.dart';
 // FreezedGenerator
 // **************************************************************************
 
-// dart format off
 T _$identity<T>(T value) => value;
 
 /// @nodoc
@@ -68,14 +67,20 @@ mixin _$Service {
             const DeepCollectionEquality().equals(other.groups, groups) &&
             (identical(other.lastEdit, lastEdit) ||
                 other.lastEdit == lastEdit) &&
-            const DeepCollectionEquality()
-                .equals(other.adminUsers, adminUsers) &&
-            (identical(other.attendanceHistoryAggregate,
-                    attendanceHistoryAggregate) ||
+            const DeepCollectionEquality().equals(
+              other.adminUsers,
+              adminUsers,
+            ) &&
+            (identical(
+                  other.attendanceHistoryAggregate,
+                  attendanceHistoryAggregate,
+                ) ||
                 other.attendanceHistoryAggregate ==
                     attendanceHistoryAggregate) &&
-            (identical(other.attendanceDaysConstraintsAggregate,
-                    attendanceDaysConstraintsAggregate) ||
+            (identical(
+                  other.attendanceDaysConstraintsAggregate,
+                  attendanceDaysConstraintsAggregate,
+                ) ||
                 other.attendanceDaysConstraintsAggregate ==
                     attendanceDaysConstraintsAggregate) &&
             (identical(other.userCanEdit, userCanEdit) ||
@@ -85,25 +90,26 @@ mixin _$Service {
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      name,
-      studyYearFrom,
-      studyYearTo,
-      studyYearFromId,
-      studyYearToId,
-      nextService,
-      nextServiceId,
-      color,
-      photoUpdatedAt,
-      blurhash,
-      const DeepCollectionEquality().hash(classes),
-      const DeepCollectionEquality().hash(groups),
-      lastEdit,
-      const DeepCollectionEquality().hash(adminUsers),
-      attendanceHistoryAggregate,
-      attendanceDaysConstraintsAggregate,
-      userCanEdit);
+    runtimeType,
+    id,
+    name,
+    studyYearFrom,
+    studyYearTo,
+    studyYearFromId,
+    studyYearToId,
+    nextService,
+    nextServiceId,
+    color,
+    photoUpdatedAt,
+    blurhash,
+    const DeepCollectionEquality().hash(classes),
+    const DeepCollectionEquality().hash(groups),
+    lastEdit,
+    const DeepCollectionEquality().hash(adminUsers),
+    attendanceHistoryAggregate,
+    attendanceDaysConstraintsAggregate,
+    userCanEdit,
+  );
 
   @override
   String toString() {
@@ -116,25 +122,26 @@ abstract mixin class $ServiceCopyWith<$Res> {
   factory $ServiceCopyWith(Service value, $Res Function(Service) _then) =
       _$ServiceCopyWithImpl;
   @useResult
-  $Res call(
-      {String id,
-      String name,
-      StudyYear? studyYearFrom,
-      StudyYear? studyYearTo,
-      int? studyYearFromId,
-      int? studyYearToId,
-      Service? nextService,
-      String? nextServiceId,
-      Color? color,
-      DateTime? photoUpdatedAt,
-      String? blurhash,
-      List<Class>? classes,
-      List<Group>? groups,
-      LastRecordedByInfo? lastEdit,
-      List<User>? adminUsers,
-      HistoryAggregateData? attendanceHistoryAggregate,
-      HistoryAggregateData? attendanceDaysConstraintsAggregate,
-      bool userCanEdit});
+  $Res call({
+    String id,
+    String name,
+    StudyYear? studyYearFrom,
+    StudyYear? studyYearTo,
+    int? studyYearFromId,
+    int? studyYearToId,
+    Service? nextService,
+    String? nextServiceId,
+    Color? color,
+    DateTime? photoUpdatedAt,
+    String? blurhash,
+    List<Class>? classes,
+    List<Group>? groups,
+    LastRecordedByInfo? lastEdit,
+    List<User>? adminUsers,
+    HistoryAggregateData? attendanceHistoryAggregate,
+    HistoryAggregateData? attendanceDaysConstraintsAggregate,
+    bool userCanEdit,
+  });
 }
 
 /// @nodoc
@@ -168,82 +175,82 @@ class _$ServiceCopyWithImpl<$Res> implements $ServiceCopyWith<$Res> {
     Object? attendanceDaysConstraintsAggregate = freezed,
     Object? userCanEdit = null,
   }) {
-    return _then(Service(
-      id: null == id
-          ? _self.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _self.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      studyYearFrom: freezed == studyYearFrom
-          ? _self.studyYearFrom
-          : studyYearFrom // ignore: cast_nullable_to_non_nullable
-              as StudyYear?,
-      studyYearTo: freezed == studyYearTo
-          ? _self.studyYearTo
-          : studyYearTo // ignore: cast_nullable_to_non_nullable
-              as StudyYear?,
-      studyYearFromId: freezed == studyYearFromId
-          ? _self.studyYearFromId
-          : studyYearFromId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      studyYearToId: freezed == studyYearToId
-          ? _self.studyYearToId
-          : studyYearToId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      nextService: freezed == nextService
-          ? _self.nextService
-          : nextService // ignore: cast_nullable_to_non_nullable
-              as Service?,
-      nextServiceId: freezed == nextServiceId
-          ? _self.nextServiceId
-          : nextServiceId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      color: freezed == color
-          ? _self.color
-          : color // ignore: cast_nullable_to_non_nullable
-              as Color?,
-      photoUpdatedAt: freezed == photoUpdatedAt
-          ? _self.photoUpdatedAt
-          : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      blurhash: freezed == blurhash
-          ? _self.blurhash
-          : blurhash // ignore: cast_nullable_to_non_nullable
-              as String?,
-      classes: freezed == classes
-          ? _self.classes
-          : classes // ignore: cast_nullable_to_non_nullable
-              as List<Class>?,
-      groups: freezed == groups
-          ? _self.groups
-          : groups // ignore: cast_nullable_to_non_nullable
-              as List<Group>?,
-      lastEdit: freezed == lastEdit
-          ? _self.lastEdit
-          : lastEdit // ignore: cast_nullable_to_non_nullable
-              as LastRecordedByInfo?,
-      adminUsers: freezed == adminUsers
-          ? _self.adminUsers
-          : adminUsers // ignore: cast_nullable_to_non_nullable
-              as List<User>?,
-      attendanceHistoryAggregate: freezed == attendanceHistoryAggregate
-          ? _self.attendanceHistoryAggregate
-          : attendanceHistoryAggregate // ignore: cast_nullable_to_non_nullable
-              as HistoryAggregateData?,
-      attendanceDaysConstraintsAggregate: freezed ==
-              attendanceDaysConstraintsAggregate
-          ? _self.attendanceDaysConstraintsAggregate
-          : attendanceDaysConstraintsAggregate // ignore: cast_nullable_to_non_nullable
-              as HistoryAggregateData?,
-      userCanEdit: null == userCanEdit
-          ? _self.userCanEdit
-          : userCanEdit // ignore: cast_nullable_to_non_nullable
-              as bool,
-    ));
+    return _then(
+      Service(
+        id: null == id
+            ? _self.id
+            : id // ignore: cast_nullable_to_non_nullable
+                  as String,
+        name: null == name
+            ? _self.name
+            : name // ignore: cast_nullable_to_non_nullable
+                  as String,
+        studyYearFrom: freezed == studyYearFrom
+            ? _self.studyYearFrom
+            : studyYearFrom // ignore: cast_nullable_to_non_nullable
+                  as StudyYear?,
+        studyYearTo: freezed == studyYearTo
+            ? _self.studyYearTo
+            : studyYearTo // ignore: cast_nullable_to_non_nullable
+                  as StudyYear?,
+        studyYearFromId: freezed == studyYearFromId
+            ? _self.studyYearFromId
+            : studyYearFromId // ignore: cast_nullable_to_non_nullable
+                  as int?,
+        studyYearToId: freezed == studyYearToId
+            ? _self.studyYearToId
+            : studyYearToId // ignore: cast_nullable_to_non_nullable
+                  as int?,
+        nextService: freezed == nextService
+            ? _self.nextService
+            : nextService // ignore: cast_nullable_to_non_nullable
+                  as Service?,
+        nextServiceId: freezed == nextServiceId
+            ? _self.nextServiceId
+            : nextServiceId // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        color: freezed == color
+            ? _self.color
+            : color // ignore: cast_nullable_to_non_nullable
+                  as Color?,
+        photoUpdatedAt: freezed == photoUpdatedAt
+            ? _self.photoUpdatedAt
+            : photoUpdatedAt // ignore: cast_nullable_to_non_nullable
+                  as DateTime?,
+        blurhash: freezed == blurhash
+            ? _self.blurhash
+            : blurhash // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        classes: freezed == classes
+            ? _self.classes
+            : classes // ignore: cast_nullable_to_non_nullable
+                  as List<Class>?,
+        groups: freezed == groups
+            ? _self.groups
+            : groups // ignore: cast_nullable_to_non_nullable
+                  as List<Group>?,
+        lastEdit: freezed == lastEdit
+            ? _self.lastEdit
+            : lastEdit // ignore: cast_nullable_to_non_nullable
+                  as LastRecordedByInfo?,
+        adminUsers: freezed == adminUsers
+            ? _self.adminUsers
+            : adminUsers // ignore: cast_nullable_to_non_nullable
+                  as List<User>?,
+        attendanceHistoryAggregate: freezed == attendanceHistoryAggregate
+            ? _self.attendanceHistoryAggregate
+            : attendanceHistoryAggregate // ignore: cast_nullable_to_non_nullable
+                  as HistoryAggregateData?,
+        attendanceDaysConstraintsAggregate:
+            freezed == attendanceDaysConstraintsAggregate
+            ? _self.attendanceDaysConstraintsAggregate
+            : attendanceDaysConstraintsAggregate // ignore: cast_nullable_to_non_nullable
+                  as HistoryAggregateData?,
+        userCanEdit: null == userCanEdit
+            ? _self.userCanEdit
+            : userCanEdit // ignore: cast_nullable_to_non_nullable
+                  as bool,
+      ),
+    );
   }
 }
-
-// dart format on

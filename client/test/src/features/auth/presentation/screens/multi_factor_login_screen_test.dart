@@ -3,12 +3,12 @@ import 'dart:math';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/misc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:golden_toolkit/golden_toolkit.dart' hide loadAppFonts;
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:riverpod/riverpod.dart';
 import 'package:spot/spot.dart';
 
 import '../../../../utils.dart';
@@ -44,8 +44,8 @@ MultiFactorChallenge mockChallengeWithResendToken = MultiFactorChallenge(
   MockSpec<BuildContext>(),
   MockSpec<GoRouterState>(),
 ])
-void main() {
-  loadAppFonts();
+Future<void> main() async {
+  await loadAppFonts();
 
   setUp(_setUp);
   tearDown(defaultTearDown);
@@ -56,14 +56,15 @@ void main() {
       testGoldens(
         'UI: initial state',
         (tester) async {
-          final deviceBuilder = DeviceBuilder(
-            wrap: materialAppWithThemeAndLocale(),
-          )
-            ..overrideDevicesForAllScenarios(devices: [Device.iphone11])
-            ..addScenario(
-              widget: const MultiFactorLogin(),
-              name: 'initial state',
-            );
+          final deviceBuilder =
+              DeviceBuilder(
+                  wrap: materialAppWithThemeAndLocale(),
+                )
+                ..overrideDevicesForAllScenarios(devices: [Device.iphone11])
+                ..addScenario(
+                  widget: const MultiFactorLogin(),
+                  name: 'initial state',
+                );
 
           await tester.pumpDeviceBuilder(deviceBuilder);
           await tester.pumpAndSettle();
@@ -87,14 +88,15 @@ void main() {
             ),
           );
 
-          final deviceBuilder = DeviceBuilder(
-            wrap: materialAppWithThemeAndLocale(),
-          )
-            ..overrideDevicesForAllScenarios(devices: [Device.iphone11])
-            ..addScenario(
-              widget: const MultiFactorLogin(),
-              name: 'multi factor challenge in progress',
-            );
+          final deviceBuilder =
+              DeviceBuilder(
+                  wrap: materialAppWithThemeAndLocale(),
+                )
+                ..overrideDevicesForAllScenarios(devices: [Device.iphone11])
+                ..addScenario(
+                  widget: const MultiFactorLogin(),
+                  name: 'multi factor challenge in progress',
+                );
 
           await tester.pumpDeviceBuilder(deviceBuilder);
           await tester.pumpAndSettle();
@@ -137,8 +139,9 @@ void main() {
           );
 
           final captured = verify(
-            (AuthBloc.I as MockAuthBloc)
-                .add(captureThat(isA<CompleteMultiFactorChallenge>())),
+            (AuthBloc.I as MockAuthBloc).add(
+              captureThat(isA<CompleteMultiFactorChallenge>()),
+            ),
           ).captured.single;
 
           expect(
@@ -207,12 +210,14 @@ void main() {
 
           await tester.pumpAndSettle(const Duration(seconds: 33));
 
-          await act
-              .tap(spotKey(MultiFactorLoginScreenKeys.resendCodeButtonKey));
+          await act.tap(
+            spotKey(MultiFactorLoginScreenKeys.resendCodeButtonKey),
+          );
 
           final captured = verify(
-            (AuthBloc.I as MockAuthBloc)
-                .add(captureThat(isA<StartMultiFactorChallenge>())),
+            (AuthBloc.I as MockAuthBloc).add(
+              captureThat(isA<StartMultiFactorChallenge>()),
+            ),
           ).captured.single;
 
           expect(
@@ -291,8 +296,10 @@ void main() {
               );
 
               expect(
-                const MultiFactorLoginRoute()
-                    .redirect(MockBuildContext(), MockGoRouterState()),
+                const MultiFactorLoginRoute().redirect(
+                  MockBuildContext(),
+                  MockGoRouterState(),
+                ),
                 isNotNull,
               );
             },
@@ -313,8 +320,10 @@ void main() {
               );
 
               expect(
-                const MultiFactorLoginRoute()
-                    .redirect(MockBuildContext(), MockGoRouterState()),
+                const MultiFactorLoginRoute().redirect(
+                  MockBuildContext(),
+                  MockGoRouterState(),
+                ),
                 isNotNull,
               );
             },
@@ -335,8 +344,10 @@ void main() {
               );
 
               expect(
-                const MultiFactorLoginRoute()
-                    .redirect(MockBuildContext(), MockGoRouterState()),
+                const MultiFactorLoginRoute().redirect(
+                  MockBuildContext(),
+                  MockGoRouterState(),
+                ),
                 isNull,
               );
             },
@@ -353,8 +364,10 @@ void main() {
               );
 
               expect(
-                const MultiFactorLoginRoute()
-                    .redirect(MockBuildContext(), MockGoRouterState()),
+                const MultiFactorLoginRoute().redirect(
+                  MockBuildContext(),
+                  MockGoRouterState(),
+                ),
                 isNull,
               );
             },
@@ -368,8 +381,10 @@ void main() {
               );
 
               expect(
-                const MultiFactorLoginRoute()
-                    .redirect(MockBuildContext(), MockGoRouterState()),
+                const MultiFactorLoginRoute().redirect(
+                  MockBuildContext(),
+                  MockGoRouterState(),
+                ),
                 isNotNull,
               );
             },

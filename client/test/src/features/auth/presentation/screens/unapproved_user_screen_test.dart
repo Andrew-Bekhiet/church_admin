@@ -2,12 +2,12 @@ import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/misc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:golden_toolkit/golden_toolkit.dart' hide loadAppFonts;
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:riverpod/riverpod.dart';
 import 'package:spot/spot.dart';
 
 import '../../../../utils.dart';
@@ -19,8 +19,8 @@ import 'unapproved_user_screen_test.mocks.dart';
   MockSpec<BuildContext>(),
   MockSpec<GoRouterState>(),
 ])
-void main() {
-  loadAppFonts();
+Future<void> main() async {
+  await loadAppFonts();
 
   setUp(_setUp);
   tearDown(defaultTearDown);
@@ -31,14 +31,15 @@ void main() {
       testGoldens(
         'UI',
         (tester) async {
-          final deviceBuilder = DeviceBuilder(
-            wrap: materialAppWithThemeAndLocale(),
-          )
-            ..overrideDevicesForAllScenarios(devices: [Device.iphone11])
-            ..addScenario(
-              widget: const UnapprovedUserScreen(),
-              name: 'initial state',
-            );
+          final deviceBuilder =
+              DeviceBuilder(
+                  wrap: materialAppWithThemeAndLocale(),
+                )
+                ..overrideDevicesForAllScenarios(devices: [Device.iphone11])
+                ..addScenario(
+                  widget: const UnapprovedUserScreen(),
+                  name: 'initial state',
+                );
 
           await tester.pumpDeviceBuilder(deviceBuilder);
           await tester.pumpAndSettle();
@@ -56,8 +57,9 @@ void main() {
           const inviteCode = 'VALID_INVITE_CODE';
           final mockFunctions = FunctionsService.I as MockFunctionsService;
 
-          when(mockFunctions.registerUserWithCode(inviteCode))
-              .thenAnswer((_) async {
+          when(mockFunctions.registerUserWithCode(inviteCode)).thenAnswer((
+            _,
+          ) async {
             return;
           });
 
@@ -89,8 +91,9 @@ void main() {
           const inviteCode = 'ENTER_KEY_CODE';
           final mockFunctions = FunctionsService.I as MockFunctionsService;
 
-          when(mockFunctions.registerUserWithCode(inviteCode))
-              .thenAnswer((_) async {
+          when(mockFunctions.registerUserWithCode(inviteCode)).thenAnswer((
+            _,
+          ) async {
             return;
           });
 
@@ -145,8 +148,9 @@ void main() {
                   userData: User(
                     uid: '123',
                     name: 'test',
-                    permissions:
-                        PermissionsSet.fromSet({UserPermission.approved}),
+                    permissions: PermissionsSet.fromSet({
+                      UserPermission.approved,
+                    }),
                   ),
                 ),
               );
