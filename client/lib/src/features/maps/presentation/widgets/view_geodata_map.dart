@@ -31,12 +31,19 @@ class _ViewGeodataMapState extends State<ViewGeodataMap>
   final _sheetScrollController = ScrollController();
 
   Point? _focusedLocation;
-  late Alignment _fabAlignment = AlignmentDirectional.bottomEnd.resolve(
-    Directionality.of(context),
-  );
+  Alignment? _fabAlignment;
 
   late final BehaviorSubject<GeomapOptions> _mapOptions =
       BehaviorSubject.seeded(widget.initialGeomapOptions);
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    _fabAlignment = AlignmentDirectional.bottomEnd.resolve(
+      Directionality.of(context),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
