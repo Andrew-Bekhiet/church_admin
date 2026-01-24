@@ -201,11 +201,11 @@ class LoggingService extends BlocObserver {
           (key, value) => MapEntry(
             key,
             switch (value) {
-              final bool v => SentryLogAttribute.bool(v),
-              final int v => SentryLogAttribute.int(v),
-              final double v => SentryLogAttribute.double(v),
-              final String v => SentryLogAttribute.string(v),
-              final Object? v => SentryLogAttribute.string(v.toString()),
+              final bool v => SentryAttribute.bool(v),
+              final int v => SentryAttribute.int(v),
+              final double v => SentryAttribute.double(v),
+              final String v => SentryAttribute.string(v),
+              final Object? v => SentryAttribute.string(v.toString()),
             },
           ),
         ),
