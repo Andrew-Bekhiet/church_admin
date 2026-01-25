@@ -39,7 +39,29 @@ class _ViewUserState extends State<ViewUser> {
               'البريد الاكتروني',
               user.email,
             ),
-            //TODO: approving pending users
+            if (AuthBloc.I.currentUserData!.permissions.manageAllUsers &&
+                !user.permissions.approved)
+              ListTile(
+                title: FilledButton.tonalIcon(
+                  style: Theme.of(context).filledTonalButtonStyleWorkaround,
+                  icon: const Icon(Symbols.person_check),
+                  label: const Text('تفعيل الحساب'),
+                  onPressed: () => _approveUser(user),
+                ),
+              )
+            else if (AuthBloc.I.currentUserData!.permissions.manageAllUsers &&
+                user.permissions.approved)
+              ListTile(
+                title: FilledButton.tonalIcon(
+                  style: FilledButton.styleFrom(
+                    backgroundColor: ColorScheme.of(context).errorContainer,
+                    foregroundColor: ColorScheme.of(context).onErrorContainer,
+                  ),
+                  icon: const Icon(Symbols.person_off),
+                  label: const Text('إلغاء تفعيل الحساب'),
+                  onPressed: () => _unapproveUser(user),
+                ),
+              ),
             const Divider(thickness: 1),
             ListTile(
               title: const Text('الصلاحيات'),
@@ -188,6 +210,75 @@ class _ViewUserState extends State<ViewUser> {
           duration: Duration(seconds: 3),
         ),
       );
+  }
+
+  Future<void> _approveUser(User user) async {
+    try {
+      await DatabaseService.I.userPermissions.approveUser(user.uid);
+
+      if (!mounted) return;
+
+      scaffoldMessenger.showSnackBar(
+        const SnackBar(
+          content: Text('تم تفعيل الحساب بنجاح'),
+          duration: Duration(seconds: 3),
+        ),
+      );
+    } catch (err, stkTrace) {
+      await LoggingService.I
+          .exception(LogRecord(error: err, stackTrace: stkTrace));
+
+      if (!mounted) return;
+
+      scaffoldMessenger
+          .showErrorSnackBar('حدث خطأ أثناء تفعيل الحساب، يرجى المحاولة لاحقا');
+    }
+  }
+
+  Future<void> _unapproveUser(User user) async {
+    final bool? dialogResult = await showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('هل تريد إلغاء تفعيل هذا الحساب؟'),
+        content: Text(
+          'سيتم إلغاء تفعيل حساب ${user.name} ولن يتمكن من الوصول إلى التطبيق',
+        ),
+        actions: [
+          OutlinedButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: const Text('إلغاء'),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child: const Text('تأكيد'),
+          ),
+        ],
+      ),
+    );
+
+    if (dialogResult != true || !mounted) return;
+
+    try {
+      await DatabaseService.I.userPermissions.unapproveUser(user.uid);
+
+      if (!mounted) return;
+
+      scaffoldMessenger.showSnackBar(
+        const SnackBar(
+          content: Text('تم إلغاء تفعيل الحساب بنجاح'),
+          duration: Duration(seconds: 3),
+        ),
+      );
+    } catch (err, stkTrace) {
+      await LoggingService.I
+          .exception(LogRecord(error: err, stackTrace: stkTrace));
+
+      if (!mounted) return;
+
+      scaffoldMessenger.showErrorSnackBar(
+        'حدث خطأ أثناء إلغاء تفعيل الحساب، يرجى المحاولة لاحقا',
+      );
+    }
   }
 
   @override
