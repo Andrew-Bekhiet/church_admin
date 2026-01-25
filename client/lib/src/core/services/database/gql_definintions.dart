@@ -9,4 +9,5 @@ export 'gql_definintions/persons.dart';
 export 'gql_definintions/services.dart';
 export 'gql_definintions/stores.dart';
 export 'gql_definintions/streets.dart';
+export 'gql_definintions/user_permissions.dart';
 export 'gql_definintions/users.dart';

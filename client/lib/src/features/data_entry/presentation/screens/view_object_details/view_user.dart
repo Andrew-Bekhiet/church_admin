@@ -32,61 +32,99 @@ class _ViewUserState extends State<ViewUser> {
       objectId: widget.userId,
       object: widget.user,
       objectStream: stream,
-      detailsBuilder: (context, user) => SliverList(
-        delegate: SliverChildListDelegate(
-          [
-            CopiablePropertyWidget(
-              'البريد الاكتروني',
-              user.email,
+      detailsBuilder: (context, user) {
+        final currentUserData = AuthBloc.I.currentUserData;
+        final appUserPermissions =
+            currentUserData?.permissions ?? const PermissionsSet.empty();
+        final isMyAccount = currentUserData?.id == user.id;
+        final isUserApproved = user.permissions.approved;
+
+        final userInfoWidgets = [
+          const Divider(thickness: 1),
+          ListTile(
+            title: const Text('الصلاحيات'),
+            subtitle: user.permissions.permissions.isEmpty
+                ? const Text('لا يملك هذا الخادم صلاحيات محددة')
+                : PermissionsSetWidget(permissions: user.permissions),
+          ),
+          const Divider(thickness: 1),
+          const SizedBox(height: 10),
+          AdminOnDataWidget(adminOn: user.adminOn ?? []),
+          const Divider(thickness: 1),
+          ListTile(
+            title: FilledButton.tonalIcon(
+              style: Theme.of(context).filledTonalButtonStyleWorkaround,
+              icon: const Icon(Symbols.query_stats),
+              label: const Text('احصائيات الحضور'),
+              onPressed: () => _attendanceAnalysis(user),
             ),
-            //TODO: approving pending users
-            const Divider(thickness: 1),
+          ),
+          const Divider(thickness: 1),
+          HistoryProperty(
+            name: 'أخر تحديث لبيانات الخادم',
+            value: user.lastEdit?.time,
+            getHistoryListController: () => ViewableObjectListController(
+              objectsPaginatableStream: DatabaseService.I.history
+                  .paginateEditHistory<User>(id: user.id),
+            ),
+          ),
+          const Divider(thickness: 1),
+          if (isMyAccount)
             ListTile(
-              title: const Text('الصلاحيات'),
-              subtitle: user.permissions.permissions.isEmpty
-                  ? const Text('لا يملك هذا الخادم صلاحيات محددة')
-                  : PermissionsSetWidget(permissions: user.permissions),
-            ),
-            const Divider(thickness: 1),
-            const SizedBox(height: 10),
-            AdminOnDataWidget(adminOn: user.adminOn ?? []),
-            const Divider(thickness: 1),
-            ListTile(
-              title: FilledButton.tonalIcon(
-                style: Theme.of(context).filledTonalButtonStyleWorkaround,
-                icon: const Icon(Symbols.query_stats),
-                label: const Text('احصائيات الحضور'),
-                onPressed: () => _attendanceAnalysis(user),
-              ),
-            ),
-            const Divider(thickness: 1),
-            HistoryProperty(
-              name: 'أخر تحديث لبيانات الخادم',
-              value: user.lastEdit?.time,
-              getHistoryListController: () => ViewableObjectListController(
-                objectsPaginatableStream: DatabaseService.I.history
-                    .paginateEditHistory<User>(id: user.id),
-              ),
-            ),
-            const Divider(thickness: 1),
-            if (AuthBloc.I.state.unwrapped case AuthAuthenticated(
-              userData: User(id: final userId),
-            ) when userId == user.id)
-              ListTile(
-                title: FilledButton.icon(
-                  style: FilledButton.styleFrom(
-                    backgroundColor: ColorScheme.of(context).error,
-                    foregroundColor: ColorScheme.of(context).onError,
-                  ),
-                  icon: const Icon(Symbols.delete_forever),
-                  label: const Text('حذف حسابي'),
-                  onPressed: _confirmDeleteMyAccount,
+              title: FilledButton.icon(
+                style: FilledButton.styleFrom(
+                  backgroundColor: ColorScheme.of(context).error,
+                  foregroundColor: ColorScheme.of(context).onError,
                 ),
+                icon: const Icon(Symbols.delete_forever),
+                label: const Text('حذف حسابي'),
+                onPressed: _confirmDeleteMyAccount,
               ),
-            const SizedBox(height: 50),
-          ],
-        ),
-      ),
+            ),
+        ];
+
+        return SliverList(
+          delegate: SliverChildListDelegate(
+            [
+              CopiablePropertyWidget(
+                'البريد الاكتروني',
+                user.email,
+              ),
+              if (appUserPermissions.manageAllUsers && !isUserApproved) ...[
+                const ListTile(
+                  leading: Icon(Symbols.person_off),
+                  title: Text('حساب غير مفعل'),
+                  subtitle: Text('يجب تفعيل الحساب للسماح للمستخدم بالدخول'),
+                ),
+                ListTile(
+                  title: FilledButton.tonalIcon(
+                    style: Theme.of(context).filledTonalButtonStyleWorkaround,
+                    icon: const Icon(Symbols.person_check),
+                    label: const Text('تفعيل الحساب'),
+                    onPressed: () => _approveUser(user),
+                  ),
+                ),
+              ],
+              if (isUserApproved) ...userInfoWidgets,
+              if (appUserPermissions.manageAllUsers &&
+                  isUserApproved &&
+                  !isMyAccount)
+                ListTile(
+                  title: FilledButton.tonalIcon(
+                    style: FilledButton.styleFrom(
+                      backgroundColor: ColorScheme.of(context).errorContainer,
+                      foregroundColor: ColorScheme.of(context).onErrorContainer,
+                    ),
+                    icon: const Icon(Symbols.person_off),
+                    label: const Text('إلغاء تفعيل الحساب'),
+                    onPressed: () => _unapproveUser(user),
+                  ),
+                ),
+              const SizedBox(height: 50),
+            ],
+          ),
+        );
+      },
       editButtonBuilder: (context, user) => IconButton(
         tooltip: 'تعديل',
         onPressed: () =>
@@ -188,6 +226,78 @@ class _ViewUserState extends State<ViewUser> {
           duration: Duration(seconds: 3),
         ),
       );
+  }
+
+  Future<void> _approveUser(User user) async {
+    try {
+      await DatabaseService.I.userPermissions.approveUser(user.uid);
+
+      if (!mounted) return;
+
+      scaffoldMessenger.showSnackBar(
+        const SnackBar(
+          content: Text('تم تفعيل الحساب بنجاح'),
+          duration: Duration(seconds: 3),
+        ),
+      );
+    } catch (err, stkTrace) {
+      await LoggingService.I.exception(
+        LogRecord(error: err, stackTrace: stkTrace),
+      );
+
+      if (!mounted) return;
+
+      scaffoldMessenger.showErrorSnackBar(
+        'حدث خطأ أثناء تفعيل الحساب، يرجى المحاولة لاحقا',
+      );
+    }
+  }
+
+  Future<void> _unapproveUser(User user) async {
+    final bool? dialogResult = await showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: const Text('هل تريد إلغاء تفعيل هذا الحساب؟'),
+        content: Text(
+          'سيتم إلغاء تفعيل حساب ${user.name} ولن يتمكن من الوصول إلى التطبيق',
+        ),
+        actions: [
+          OutlinedButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: const Text('إلغاء'),
+          ),
+          FilledButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            child: const Text('تأكيد'),
+          ),
+        ],
+      ),
+    );
+
+    if (dialogResult != true || !mounted) return;
+
+    try {
+      await DatabaseService.I.userPermissions.unapproveUser(user.uid);
+
+      if (!mounted) return;
+
+      scaffoldMessenger.showSnackBar(
+        const SnackBar(
+          content: Text('تم إلغاء تفعيل الحساب بنجاح'),
+          duration: Duration(seconds: 3),
+        ),
+      );
+    } catch (err, stkTrace) {
+      await LoggingService.I.exception(
+        LogRecord(error: err, stackTrace: stkTrace),
+      );
+
+      if (!mounted) return;
+
+      scaffoldMessenger.showErrorSnackBar(
+        'حدث خطأ أثناء إلغاء تفعيل الحساب، يرجى المحاولة لاحقا',
+      );
+    }
   }
 
   @override

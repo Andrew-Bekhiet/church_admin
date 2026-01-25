@@ -1,0 +1,17 @@
+mutation approveUser($uid: uuid!) {
+  insertAuthUsersPermissionsOne(
+    object: { uid: $uid, permission: "approved" }
+    onConflict: { constraint: users_permissions_pkey, updateColumns: [] }
+  ) {
+    uid
+    permission
+  }
+}
+
+mutation unapproveUser($uid: uuid!) {
+  deleteAuthUsersPermissions(
+    where: { _and: [{ uid: { _eq: $uid } }, { permission: { _eq: "approved" } }] }
+  ) {
+    affectedRows
+  }
+}

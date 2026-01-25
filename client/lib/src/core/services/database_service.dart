@@ -37,6 +37,7 @@ class DatabaseService {
   late final groups = GroupsDAO(db: this);
 
   late final users = UsersDAO(db: this);
+  late final userPermissions = UserPermissionsDAO(db: this);
 
   late final metadata = MetadataDAO(db: this);
 
