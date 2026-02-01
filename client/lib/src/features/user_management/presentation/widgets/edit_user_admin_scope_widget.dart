@@ -60,7 +60,7 @@ class EditUserAdminScopeWidget extends StatelessWidget {
               spacing: 2,
               children: [
                 Expanded(
-                  flex: 2,
+                  flex: 3,
                   child: ObjectSelectionField(
                     listController: (s) => ViewableObjectListController(
                       objectsPaginatableStream: DatabaseService
@@ -99,6 +99,7 @@ class EditUserAdminScopeWidget extends StatelessWidget {
                   ),
                 ),
                 Expanded(
+                  flex: 2,
                   child: GenderField(
                     type: GenderFieldType.dropdown,
                     nullable: true,
