@@ -74,7 +74,7 @@ class PermissionsSetWidget extends StatelessWidget {
               leading: Icon(UserPermission.deleteData.icon),
               title: Text(UserPermission.deleteData.label),
               subtitle: const Text(
-                'السماح بحذف البيانات اللتي يمكن تعديلها',
+                'السماح بحذف البيانات التي يمكن تعديلها',
               ),
             ),
           if (permissions.recoverDeleted)
