@@ -1,8 +1,16 @@
 {
-"language": "Dart, GraphQL, TypeScript",
-"guide": [
-{
-"context": "GraphQL Code Generation",
+  "language": "Dart, GraphQL, TypeScript",
+  "guide": [
+    {
+      "context": "Git",
+      "rules": "Use conventional commit messages"
+    },
+    {
+      "context": "Code Style",
+      "rules": "Always use code style as defined in the analysis_options.yaml file. Always use clean, SOLID, DRY, and maintainable code."
+    },
+    {
+      "context": "GraphQL Code Generation",
       "rules": "Use graphql_codegen for generating GraphQL queries and the database service module for backend access. Ensure the generated code is kept up to date with schema changes."
     },
     {
