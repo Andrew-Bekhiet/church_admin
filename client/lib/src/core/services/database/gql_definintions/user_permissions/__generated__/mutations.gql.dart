@@ -721,7 +721,7 @@ const documentNodeMutationupdateUserPermissions = DocumentNode(
             name: NameNode(value: 'Boolean'),
             isNonNull: true,
           ),
-          defaultValue: DefaultValueNode(value: BooleanValueNode(value: true)),
+          defaultValue: DefaultValueNode(value: BooleanValueNode(value: false)),
           directives: [],
         ),
         VariableDefinitionNode(
@@ -730,7 +730,7 @@ const documentNodeMutationupdateUserPermissions = DocumentNode(
             name: NameNode(value: 'Boolean'),
             isNonNull: true,
           ),
-          defaultValue: DefaultValueNode(value: BooleanValueNode(value: true)),
+          defaultValue: DefaultValueNode(value: BooleanValueNode(value: false)),
           directives: [],
         ),
         VariableDefinitionNode(
