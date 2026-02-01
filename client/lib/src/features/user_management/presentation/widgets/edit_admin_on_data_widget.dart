@@ -205,5 +205,12 @@ class EditAdminOnDataWidget extends StatelessWidget {
       for (final group in groupsDiff.added)
         AdminOnData(permissionId: '', group: group),
     ]);
+
+    await Future.wait([
+      areasSelectionController.dispose(),
+      servicesSelectionController.dispose(),
+      groupsSelectionController.dispose(),
+      search.close(),
+    ]);
   }
 }
