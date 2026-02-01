@@ -39,17 +39,31 @@ class _ViewUserState extends State<ViewUser> {
         final isMyAccount = currentUserData?.id == user.id;
         final isUserApproved = user.permissions.approved;
 
+        final theme = Theme.of(context);
+        final permissions = user.permissions;
+
         final userInfoWidgets = [
           const Divider(thickness: 1),
-          ListTile(
-            title: const Text('الصلاحيات'),
-            subtitle: user.permissions.permissions.isEmpty
-                ? const Text('لا يملك هذا الخادم صلاحيات محددة')
-                : PermissionsSetWidget(permissions: user.permissions),
-          ),
-          const Divider(thickness: 1),
-          const SizedBox(height: 10),
+          if (permissions.permissions.isEmpty)
+            const ListTile(
+              title: Text('الصلاحيات'),
+              subtitle: Text('لا يملك هذا الخادم صلاحيات محددة'),
+            )
+          else ...[
+            ListTile(
+              leading: const Icon(Symbols.shield),
+              title: Text(
+                'صلاحيات عامة',
+                style: theme.textTheme.titleMedium,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: PermissionsSetWidget(permissions: permissions),
+            ),
+          ],
           AdminOnDataWidget(adminOn: user.adminOn ?? []),
+          const SizedBox(height: 10),
           const Divider(thickness: 1),
           ListTile(
             title: FilledButton.tonalIcon(

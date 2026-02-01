@@ -2,8 +2,12 @@ mutation updateUserPermissions(
   $uid: uuid!
   $permissionsToDelete: [String!]!
   $permissionsToInsert: [AuthUsersPermissionsInsertInput!]!
-  $deletePermissions: Boolean! = true
-  $insertPermissions: Boolean! = true
+  $deletePermissionIds: [uuid!]!
+  $newAdminOn: [AuthUsersAdminOnInsertInput!]!
+  $deletePermissions: Boolean! = false
+  $insertPermissions: Boolean! = false
+  $deleteAdminOn: Boolean! = false
+  $insertAdminOn: Boolean! = false
 ) {
   deleteAuthUsersPermissions(
     where: {
@@ -18,6 +22,14 @@ mutation updateUserPermissions(
 
   insertAuthUsersPermissions(objects: $permissionsToInsert)
     @include(if: $insertPermissions) {
+    affectedRows
+  }
+  deleteAuthUsersAdminOn(
+    where: { permissionId: { _in: $deletePermissionIds } }
+  ) @include(if: $deleteAdminOn) {
+    affectedRows
+  }
+  insertAuthUsersAdminOn(objects: $newAdminOn) @include(if: $insertAdminOn) {
     affectedRows
   }
 }

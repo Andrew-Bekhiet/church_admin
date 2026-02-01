@@ -10,78 +10,123 @@ class AdminOnDataWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
+    final textStyle = themeData.textTheme.titleSmall;
+
+    final areas = adminOn.where((a) => a.area != null);
+    final groupedServices = adminOn
+        .where((a) => a.service != null)
+        .groupListsBy((a) => a.service!)
+        .entries;
+    final groups = adminOn.where((a) => a.group != null);
 
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         ListTile(
-          minVerticalPadding: 0,
           title: Text(
-            'المناطق المسؤول عنها',
+            'أمين على مناطق',
             style: themeData.textTheme.titleMedium?.copyWith(
               fontWeight: FontWeight.bold,
             ),
           ),
-          subtitle: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              for (final adminOnData in adminOn.where((a) => a.area != null))
-                ViewableObjectWidget(
-                  adminOnData.area!,
-                  wrapInCard: true,
-                  forceShowSecondLine: false,
-                  trailing: AdminOnDataIndicator(adminOnData: adminOnData),
-                ),
-            ],
-          ),
+          subtitle: areas.isEmpty
+              ? Text(
+                  'لا يوجد مناطق محددة',
+                  style: textStyle,
+                )
+              : null,
         ),
-        const SizedBox(height: 10),
+        if (areas.isNotEmpty)
+          Card.outlined(
+            margin: const EdgeInsets.symmetric(horizontal: 8),
+            color: themeData.colorScheme.surfaceContainerLow,
+            shape: RoundedRectangleBorder(
+              side: BorderSide(color: themeData.colorScheme.outline),
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                for (final adminOnData in areas)
+                  ViewableObjectWidget(
+                    adminOnData.area!,
+                    wrapInCard: false,
+                    forceShowSecondLine: false,
+                    trailing: AdminOnDataIndicator(
+                      adminOnData: adminOnData,
+                    ),
+                  ),
+              ],
+            ),
+          ),
         ListTile(
-          minVerticalPadding: 0,
           title: Text(
-            'الخدمات المسؤول عنها',
+            'أمين على خدمات',
             style: themeData.textTheme.titleMedium?.copyWith(
               fontWeight: FontWeight.bold,
             ),
           ),
-          subtitle: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              for (final MapEntry(:key, :value)
-                  in adminOn
-                      .where((a) => a.service != null)
-                      .groupListsBy((a) => a.service!)
-                      .entries)
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 4),
-                  child: Card(
+          subtitle: groupedServices.isEmpty
+              ? Text(
+                  'لا يوجد خدمات محددة',
+                  style: textStyle,
+                )
+              : null,
+        ),
+        if (groupedServices.isNotEmpty)
+          Card.outlined(
+            margin: const EdgeInsets.symmetric(horizontal: 8),
+            color: themeData.colorScheme.surfaceContainerLow,
+            shape: RoundedRectangleBorder(
+              side: BorderSide(color: themeData.colorScheme.outline),
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                for (final MapEntry(:key, :value) in groupedServices)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 4),
                     child: AdminOnServiceWidget(serviceData: (key, value)),
                   ),
-                ),
-            ],
+              ],
+            ),
           ),
-        ),
-        const SizedBox(height: 10),
         ListTile(
-          minVerticalPadding: 0,
           title: Text(
-            'المجموعات المسؤول عنها',
+            'أمين على مجموعات',
             style: themeData.textTheme.titleMedium?.copyWith(
               fontWeight: FontWeight.bold,
             ),
           ),
-          subtitle: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              for (final adminOnData in adminOn.where((a) => a.group != null))
-                ViewableObjectWidget(
-                  adminOnData.group!,
-                  forceShowSecondLine: false,
-                  trailing: AdminOnDataIndicator(adminOnData: adminOnData),
-                ),
-            ],
-          ),
+          subtitle: groups.isEmpty
+              ? Text(
+                  'لا يوجد مجموعات محددة',
+                  style: textStyle,
+                )
+              : null,
         ),
+        if (groups.isNotEmpty)
+          Card.outlined(
+            color: themeData.colorScheme.surfaceContainerLow,
+            shape: RoundedRectangleBorder(
+              side: BorderSide(color: themeData.colorScheme.outline),
+              borderRadius: BorderRadius.circular(16),
+            ),
+            margin: const EdgeInsets.symmetric(horizontal: 8),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                for (final adminOnData in groups)
+                  ViewableObjectWidget(
+                    adminOnData.group!,
+                    wrapInCard: false,
+                    forceShowSecondLine: false,
+                    trailing: AdminOnDataIndicator(adminOnData: adminOnData),
+                  ),
+              ],
+            ),
+          ),
       ],
     );
   }

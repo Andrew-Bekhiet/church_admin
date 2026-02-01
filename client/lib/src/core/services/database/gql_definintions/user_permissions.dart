@@ -1,5 +1,7 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/__generated__/user_permissions.graphql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/user_permissions/__generated__/mutations.gql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/user_permissions/helpers.dart';
 import 'package:graphql/client.dart';
 
 class UserPermissionsDAO {
@@ -26,6 +28,33 @@ class UserPermissionsDAO {
         operationName: 'unapproveUser',
         variables: Variables_Mutation_unapproveUser(uid: uid.toUuid()).toJson(),
         parserFn: Mutation_unapproveUser.fromJson,
+      ),
+    );
+  }
+
+  Future<void> updateUserPermissions({
+    required String userId,
+    required PermissionsSet newPermissions,
+    required PermissionsSet oldPermissions,
+    required List<AdminOnData> newAdminOn,
+    required List<AdminOnData> oldAdminOn,
+  }) async {
+    final helper = UserPermissionsUpdateHelper(
+      userId: userId,
+      newAdminOn: newAdminOn,
+      oldAdminOn: oldAdminOn,
+      newPermissions: newPermissions,
+      oldPermissions: oldPermissions,
+    );
+
+    if (!helper.hasChanges) return;
+
+    return graphQLClient.mutateAndReturnParsedNullable(
+      MutationOptions(
+        document: documentNodeMutationupdateUserPermissions,
+        operationName: 'updateUserPermissions',
+        variables: helper.variables.toJson(),
+        parserFn: (_) => null,
       ),
     );
   }

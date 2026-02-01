@@ -103,19 +103,25 @@ class _FakeUsersDAO_13 extends _i1.SmartFake implements _i2.UsersDAO {
     : super(parent, parentInvocation);
 }
 
-class _FakeMetadataDAO_14 extends _i1.SmartFake implements _i2.MetadataDAO {
-  _FakeMetadataDAO_14(Object parent, Invocation parentInvocation)
+class _FakeUserPermissionsDAO_14 extends _i1.SmartFake
+    implements _i2.UserPermissionsDAO {
+  _FakeUserPermissionsDAO_14(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeHistoryDAO_15 extends _i1.SmartFake implements _i2.HistoryDAO {
-  _FakeHistoryDAO_15(Object parent, Invocation parentInvocation)
+class _FakeMetadataDAO_15 extends _i1.SmartFake implements _i2.MetadataDAO {
+  _FakeMetadataDAO_15(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeScrollPosition_16 extends _i1.SmartFake
+class _FakeHistoryDAO_16 extends _i1.SmartFake implements _i2.HistoryDAO {
+  _FakeHistoryDAO_16(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
+}
+
+class _FakeScrollPosition_17 extends _i1.SmartFake
     implements _i3.ScrollPosition {
-  _FakeScrollPosition_16(Object parent, Invocation parentInvocation)
+  _FakeScrollPosition_17(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
@@ -366,14 +372,29 @@ class MockDatabaseService extends _i1.Mock implements _i2.DatabaseService {
           as _i2.UsersDAO);
 
   @override
+  _i2.UserPermissionsDAO get userPermissions =>
+      (super.noSuchMethod(
+            Invocation.getter(#userPermissions),
+            returnValue: _FakeUserPermissionsDAO_14(
+              this,
+              Invocation.getter(#userPermissions),
+            ),
+            returnValueForMissingStub: _FakeUserPermissionsDAO_14(
+              this,
+              Invocation.getter(#userPermissions),
+            ),
+          )
+          as _i2.UserPermissionsDAO);
+
+  @override
   _i2.MetadataDAO get metadata =>
       (super.noSuchMethod(
             Invocation.getter(#metadata),
-            returnValue: _FakeMetadataDAO_14(
+            returnValue: _FakeMetadataDAO_15(
               this,
               Invocation.getter(#metadata),
             ),
-            returnValueForMissingStub: _FakeMetadataDAO_14(
+            returnValueForMissingStub: _FakeMetadataDAO_15(
               this,
               Invocation.getter(#metadata),
             ),
@@ -384,8 +405,8 @@ class MockDatabaseService extends _i1.Mock implements _i2.DatabaseService {
   _i2.HistoryDAO get history =>
       (super.noSuchMethod(
             Invocation.getter(#history),
-            returnValue: _FakeHistoryDAO_15(this, Invocation.getter(#history)),
-            returnValueForMissingStub: _FakeHistoryDAO_15(
+            returnValue: _FakeHistoryDAO_16(this, Invocation.getter(#history)),
+            returnValueForMissingStub: _FakeHistoryDAO_16(
               this,
               Invocation.getter(#history),
             ),
@@ -474,11 +495,11 @@ class MockPageController extends _i1.Mock implements _i6.PageController {
   _i3.ScrollPosition get position =>
       (super.noSuchMethod(
             Invocation.getter(#position),
-            returnValue: _FakeScrollPosition_16(
+            returnValue: _FakeScrollPosition_17(
               this,
               Invocation.getter(#position),
             ),
-            returnValueForMissingStub: _FakeScrollPosition_16(
+            returnValueForMissingStub: _FakeScrollPosition_17(
               this,
               Invocation.getter(#position),
             ),
@@ -568,7 +589,7 @@ class MockPageController extends _i1.Mock implements _i6.PageController {
               context,
               oldPosition,
             ]),
-            returnValue: _FakeScrollPosition_16(
+            returnValue: _FakeScrollPosition_17(
               this,
               Invocation.method(#createScrollPosition, [
                 physics,
@@ -576,7 +597,7 @@ class MockPageController extends _i1.Mock implements _i6.PageController {
                 oldPosition,
               ]),
             ),
-            returnValueForMissingStub: _FakeScrollPosition_16(
+            returnValueForMissingStub: _FakeScrollPosition_17(
               this,
               Invocation.method(#createScrollPosition, [
                 physics,

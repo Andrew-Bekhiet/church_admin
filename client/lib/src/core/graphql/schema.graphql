@@ -694,12 +694,14 @@ input AuthUsersAdminOnInsertInput {
   group: GroupsObjRelInsertInput
   groupAdminOnUsers: Boolean
   groupAllowEdit: Boolean
+  groupWriteRelatedFamilies: Boolean
   service: ServicesObjRelInsertInput
   serviceAdminOnUsers: Boolean
   serviceAllowEdit: Boolean
   serviceGender: Boolean
   serviceStudyYear: Int
   serviceStudyYearData: StudyYearsObjRelInsertInput
+  serviceWriteRelatedFamilies: Boolean
   uid: uuid
 }
 

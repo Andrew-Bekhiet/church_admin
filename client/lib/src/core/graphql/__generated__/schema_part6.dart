@@ -1510,12 +1510,14 @@ class Input_AuthUsersAdminOnInsertInput {
     Input_GroupsObjRelInsertInput? group,
     bool? groupAdminOnUsers,
     bool? groupAllowEdit,
+    bool? groupWriteRelatedFamilies,
     Input_ServicesObjRelInsertInput? service,
     bool? serviceAdminOnUsers,
     bool? serviceAllowEdit,
     bool? serviceGender,
     int? serviceStudyYear,
     Input_StudyYearsObjRelInsertInput? serviceStudyYearData,
+    bool? serviceWriteRelatedFamilies,
     UuidValue? uid,
   }) => Input_AuthUsersAdminOnInsertInput._({
     if (adminOnArea != null) r'adminOnArea': adminOnArea,
@@ -1528,6 +1530,8 @@ class Input_AuthUsersAdminOnInsertInput {
     if (group != null) r'group': group,
     if (groupAdminOnUsers != null) r'groupAdminOnUsers': groupAdminOnUsers,
     if (groupAllowEdit != null) r'groupAllowEdit': groupAllowEdit,
+    if (groupWriteRelatedFamilies != null)
+      r'groupWriteRelatedFamilies': groupWriteRelatedFamilies,
     if (service != null) r'service': service,
     if (serviceAdminOnUsers != null)
       r'serviceAdminOnUsers': serviceAdminOnUsers,
@@ -1536,6 +1540,8 @@ class Input_AuthUsersAdminOnInsertInput {
     if (serviceStudyYear != null) r'serviceStudyYear': serviceStudyYear,
     if (serviceStudyYearData != null)
       r'serviceStudyYearData': serviceStudyYearData,
+    if (serviceWriteRelatedFamilies != null)
+      r'serviceWriteRelatedFamilies': serviceWriteRelatedFamilies,
     if (uid != null) r'uid': uid,
   });
 
@@ -1603,6 +1609,11 @@ class Input_AuthUsersAdminOnInsertInput {
       final l$groupAllowEdit = data['groupAllowEdit'];
       result$data['groupAllowEdit'] = (l$groupAllowEdit as bool?);
     }
+    if (data.containsKey('groupWriteRelatedFamilies')) {
+      final l$groupWriteRelatedFamilies = data['groupWriteRelatedFamilies'];
+      result$data['groupWriteRelatedFamilies'] =
+          (l$groupWriteRelatedFamilies as bool?);
+    }
     if (data.containsKey('service')) {
       final l$service = data['service'];
       result$data['service'] = l$service == null
@@ -1634,6 +1645,11 @@ class Input_AuthUsersAdminOnInsertInput {
           : Input_StudyYearsObjRelInsertInput.fromJson(
               (l$serviceStudyYearData as Map<String, dynamic>),
             );
+    }
+    if (data.containsKey('serviceWriteRelatedFamilies')) {
+      final l$serviceWriteRelatedFamilies = data['serviceWriteRelatedFamilies'];
+      result$data['serviceWriteRelatedFamilies'] =
+          (l$serviceWriteRelatedFamilies as bool?);
     }
     if (data.containsKey('uid')) {
       final l$uid = data['uid'];
@@ -1667,6 +1683,9 @@ class Input_AuthUsersAdminOnInsertInput {
 
   bool? get groupAllowEdit => (_$data['groupAllowEdit'] as bool?);
 
+  bool? get groupWriteRelatedFamilies =>
+      (_$data['groupWriteRelatedFamilies'] as bool?);
+
   Input_ServicesObjRelInsertInput? get service =>
       (_$data['service'] as Input_ServicesObjRelInsertInput?);
 
@@ -1680,6 +1699,9 @@ class Input_AuthUsersAdminOnInsertInput {
 
   Input_StudyYearsObjRelInsertInput? get serviceStudyYearData =>
       (_$data['serviceStudyYearData'] as Input_StudyYearsObjRelInsertInput?);
+
+  bool? get serviceWriteRelatedFamilies =>
+      (_$data['serviceWriteRelatedFamilies'] as bool?);
 
   UuidValue? get uid => (_$data['uid'] as UuidValue?);
 
@@ -1731,6 +1753,10 @@ class Input_AuthUsersAdminOnInsertInput {
       final l$groupAllowEdit = groupAllowEdit;
       result$data['groupAllowEdit'] = l$groupAllowEdit;
     }
+    if (_$data.containsKey('groupWriteRelatedFamilies')) {
+      final l$groupWriteRelatedFamilies = groupWriteRelatedFamilies;
+      result$data['groupWriteRelatedFamilies'] = l$groupWriteRelatedFamilies;
+    }
     if (_$data.containsKey('service')) {
       final l$service = service;
       result$data['service'] = l$service?.toJson();
@@ -1754,6 +1780,11 @@ class Input_AuthUsersAdminOnInsertInput {
     if (_$data.containsKey('serviceStudyYearData')) {
       final l$serviceStudyYearData = serviceStudyYearData;
       result$data['serviceStudyYearData'] = l$serviceStudyYearData?.toJson();
+    }
+    if (_$data.containsKey('serviceWriteRelatedFamilies')) {
+      final l$serviceWriteRelatedFamilies = serviceWriteRelatedFamilies;
+      result$data['serviceWriteRelatedFamilies'] =
+          l$serviceWriteRelatedFamilies;
     }
     if (_$data.containsKey('uid')) {
       final l$uid = uid;
@@ -1861,6 +1892,15 @@ class Input_AuthUsersAdminOnInsertInput {
     if (l$groupAllowEdit != lOther$groupAllowEdit) {
       return false;
     }
+    final l$groupWriteRelatedFamilies = groupWriteRelatedFamilies;
+    final lOther$groupWriteRelatedFamilies = other.groupWriteRelatedFamilies;
+    if (_$data.containsKey('groupWriteRelatedFamilies') !=
+        other._$data.containsKey('groupWriteRelatedFamilies')) {
+      return false;
+    }
+    if (l$groupWriteRelatedFamilies != lOther$groupWriteRelatedFamilies) {
+      return false;
+    }
     final l$service = service;
     final lOther$service = other.service;
     if (_$data.containsKey('service') != other._$data.containsKey('service')) {
@@ -1914,6 +1954,16 @@ class Input_AuthUsersAdminOnInsertInput {
     if (l$serviceStudyYearData != lOther$serviceStudyYearData) {
       return false;
     }
+    final l$serviceWriteRelatedFamilies = serviceWriteRelatedFamilies;
+    final lOther$serviceWriteRelatedFamilies =
+        other.serviceWriteRelatedFamilies;
+    if (_$data.containsKey('serviceWriteRelatedFamilies') !=
+        other._$data.containsKey('serviceWriteRelatedFamilies')) {
+      return false;
+    }
+    if (l$serviceWriteRelatedFamilies != lOther$serviceWriteRelatedFamilies) {
+      return false;
+    }
     final l$uid = uid;
     final lOther$uid = other.uid;
     if (_$data.containsKey('uid') != other._$data.containsKey('uid')) {
@@ -1937,12 +1987,14 @@ class Input_AuthUsersAdminOnInsertInput {
     final l$group = group;
     final l$groupAdminOnUsers = groupAdminOnUsers;
     final l$groupAllowEdit = groupAllowEdit;
+    final l$groupWriteRelatedFamilies = groupWriteRelatedFamilies;
     final l$service = service;
     final l$serviceAdminOnUsers = serviceAdminOnUsers;
     final l$serviceAllowEdit = serviceAllowEdit;
     final l$serviceGender = serviceGender;
     final l$serviceStudyYear = serviceStudyYear;
     final l$serviceStudyYearData = serviceStudyYearData;
+    final l$serviceWriteRelatedFamilies = serviceWriteRelatedFamilies;
     final l$uid = uid;
     return Object.hashAll([
       _$data.containsKey('adminOnArea') ? l$adminOnArea : const {},
@@ -1955,6 +2007,9 @@ class Input_AuthUsersAdminOnInsertInput {
       _$data.containsKey('group') ? l$group : const {},
       _$data.containsKey('groupAdminOnUsers') ? l$groupAdminOnUsers : const {},
       _$data.containsKey('groupAllowEdit') ? l$groupAllowEdit : const {},
+      _$data.containsKey('groupWriteRelatedFamilies')
+          ? l$groupWriteRelatedFamilies
+          : const {},
       _$data.containsKey('service') ? l$service : const {},
       _$data.containsKey('serviceAdminOnUsers')
           ? l$serviceAdminOnUsers
@@ -1964,6 +2019,9 @@ class Input_AuthUsersAdminOnInsertInput {
       _$data.containsKey('serviceStudyYear') ? l$serviceStudyYear : const {},
       _$data.containsKey('serviceStudyYearData')
           ? l$serviceStudyYearData
+          : const {},
+      _$data.containsKey('serviceWriteRelatedFamilies')
+          ? l$serviceWriteRelatedFamilies
           : const {},
       _$data.containsKey('uid') ? l$uid : const {},
     ]);
@@ -1990,12 +2048,14 @@ abstract class CopyWith_Input_AuthUsersAdminOnInsertInput<TRes> {
     Input_GroupsObjRelInsertInput? group,
     bool? groupAdminOnUsers,
     bool? groupAllowEdit,
+    bool? groupWriteRelatedFamilies,
     Input_ServicesObjRelInsertInput? service,
     bool? serviceAdminOnUsers,
     bool? serviceAllowEdit,
     bool? serviceGender,
     int? serviceStudyYear,
     Input_StudyYearsObjRelInsertInput? serviceStudyYearData,
+    bool? serviceWriteRelatedFamilies,
     UuidValue? uid,
   });
   CopyWith_Input_AreasObjRelInsertInput<TRes> get area;
@@ -2026,12 +2086,14 @@ class _CopyWithImpl_Input_AuthUsersAdminOnInsertInput<TRes>
     Object? group = _undefined,
     Object? groupAdminOnUsers = _undefined,
     Object? groupAllowEdit = _undefined,
+    Object? groupWriteRelatedFamilies = _undefined,
     Object? service = _undefined,
     Object? serviceAdminOnUsers = _undefined,
     Object? serviceAllowEdit = _undefined,
     Object? serviceGender = _undefined,
     Object? serviceStudyYear = _undefined,
     Object? serviceStudyYearData = _undefined,
+    Object? serviceWriteRelatedFamilies = _undefined,
     Object? uid = _undefined,
   }) => _then(
     Input_AuthUsersAdminOnInsertInput._({
@@ -2054,6 +2116,8 @@ class _CopyWithImpl_Input_AuthUsersAdminOnInsertInput<TRes>
         'groupAdminOnUsers': (groupAdminOnUsers as bool?),
       if (groupAllowEdit != _undefined)
         'groupAllowEdit': (groupAllowEdit as bool?),
+      if (groupWriteRelatedFamilies != _undefined)
+        'groupWriteRelatedFamilies': (groupWriteRelatedFamilies as bool?),
       if (service != _undefined)
         'service': (service as Input_ServicesObjRelInsertInput?),
       if (serviceAdminOnUsers != _undefined)
@@ -2067,6 +2131,8 @@ class _CopyWithImpl_Input_AuthUsersAdminOnInsertInput<TRes>
       if (serviceStudyYearData != _undefined)
         'serviceStudyYearData':
             (serviceStudyYearData as Input_StudyYearsObjRelInsertInput?),
+      if (serviceWriteRelatedFamilies != _undefined)
+        'serviceWriteRelatedFamilies': (serviceWriteRelatedFamilies as bool?),
       if (uid != _undefined) 'uid': (uid as UuidValue?),
     }),
   );
@@ -2139,12 +2205,14 @@ class _CopyWithStubImpl_Input_AuthUsersAdminOnInsertInput<TRes>
     Input_GroupsObjRelInsertInput? group,
     bool? groupAdminOnUsers,
     bool? groupAllowEdit,
+    bool? groupWriteRelatedFamilies,
     Input_ServicesObjRelInsertInput? service,
     bool? serviceAdminOnUsers,
     bool? serviceAllowEdit,
     bool? serviceGender,
     int? serviceStudyYear,
     Input_StudyYearsObjRelInsertInput? serviceStudyYearData,
+    bool? serviceWriteRelatedFamilies,
     UuidValue? uid,
   }) => _res;
 
