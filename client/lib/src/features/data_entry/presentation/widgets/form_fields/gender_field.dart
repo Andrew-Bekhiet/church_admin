@@ -46,14 +46,13 @@ class GenderField extends StatelessWidget {
           autovalidateMode: autovalidateMode,
           validator: validator,
           onSaved: onSaved,
-          onChanged: onChanged,
+          onChanged: enabled ? onChanged : null,
           decoration: InputDecoration(
             enabled: enabled,
             labelText: label,
-            errorText: validator?.call(initialValue),
           ),
           items: [
-            DropdownMenuItem(child: Text(nullLabel)),
+            if (nullable) DropdownMenuItem(child: Text(nullLabel)),
             DropdownMenuItem(value: true, child: Text(maleLabel)),
             DropdownMenuItem(value: false, child: Text(femaleLabel)),
           ],
