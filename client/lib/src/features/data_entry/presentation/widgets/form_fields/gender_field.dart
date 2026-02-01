@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 
+enum GenderFieldType {
+  radio,
+  dropdown,
+}
+
 class GenderField extends StatelessWidget {
+  final GenderFieldType type;
   final bool nullable;
   final bool enabled;
   final bool? initialValue;
@@ -16,6 +22,7 @@ class GenderField extends StatelessWidget {
   final String nullLabel;
 
   const GenderField({
+    this.type = GenderFieldType.radio,
     this.nullable = false,
     this.enabled = true,
     this.initialValue,
@@ -32,86 +39,110 @@ class GenderField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FormField<bool>(
-      initialValue: initialValue,
-      autovalidateMode: autovalidateMode,
-      onSaved: onSaved,
-      validator: validator,
-      enabled: enabled,
-      builder: (state) {
-        final theme = Theme.of(context);
-        return InputDecorator(
+    switch (type) {
+      case GenderFieldType.dropdown:
+        return DropdownButtonFormField<bool?>(
+          initialValue: initialValue,
+          autovalidateMode: autovalidateMode,
+          validator: validator,
+          onSaved: onSaved,
+          onChanged: onChanged,
           decoration: InputDecoration(
+            enabled: enabled,
             labelText: label,
-            errorText: state.errorText,
+            errorText: validator?.call(initialValue),
           ),
-          child: RadioGroup<bool?>(
-            groupValue: state.value,
-            onChanged: (v) => _onChanged(state, v),
-            child: Row(
-              children: [
-                if (nullable)
-                  Expanded(
-                    flex: 5,
-                    child: Row(
-                      children: [
-                        const Radio<bool?>(
-                          materialTapTargetSize:
-                              MaterialTapTargetSize.shrinkWrap,
-                          value: null,
-                        ),
-                        GestureDetector(
-                          onTap: () => _onChanged(state, null),
-                          child: Text(
-                            nullLabel,
-                            style: theme.textTheme.titleMedium,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                Expanded(
-                  flex: 4,
-                  child: Row(
-                    children: [
-                      const Radio<bool?>(
-                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                        value: true,
-                      ),
-                      GestureDetector(
-                        onTap: () => _onChanged(state, true),
-                        child: Text(
-                          maleLabel,
-                          style: theme.textTheme.titleMedium,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Expanded(
-                  flex: 4,
-                  child: Row(
-                    children: [
-                      const Radio<bool?>(
-                        materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                        value: false,
-                      ),
-                      GestureDetector(
-                        onTap: () => _onChanged(state, false),
-                        child: Text(
-                          femaleLabel,
-                          style: theme.textTheme.titleMedium,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
+          items: [
+            DropdownMenuItem(child: Text(nullLabel)),
+            DropdownMenuItem(value: true, child: Text(maleLabel)),
+            DropdownMenuItem(value: false, child: Text(femaleLabel)),
+          ],
         );
-      },
-    );
+
+      case GenderFieldType.radio:
+        return FormField<bool>(
+          initialValue: initialValue,
+          autovalidateMode: autovalidateMode,
+          onSaved: onSaved,
+          validator: validator,
+          enabled: enabled,
+          builder: (state) {
+            final theme = Theme.of(context);
+            return InputDecorator(
+              decoration: InputDecoration(
+                labelText: label,
+                errorText: state.errorText,
+              ),
+              child: RadioGroup<bool?>(
+                groupValue: state.value,
+                onChanged: (v) => _onChanged(state, v),
+                child: Row(
+                  children: [
+                    if (nullable)
+                      Expanded(
+                        flex: 5,
+                        child: Row(
+                          children: [
+                            const Radio<bool?>(
+                              materialTapTargetSize:
+                                  MaterialTapTargetSize.shrinkWrap,
+                              value: null,
+                            ),
+                            GestureDetector(
+                              onTap: () => _onChanged(state, null),
+                              child: Text(
+                                nullLabel,
+                                style: theme.textTheme.titleMedium,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    Expanded(
+                      flex: 4,
+                      child: Row(
+                        children: [
+                          const Radio<bool?>(
+                            materialTapTargetSize:
+                                MaterialTapTargetSize.shrinkWrap,
+                            value: true,
+                          ),
+                          GestureDetector(
+                            onTap: () => _onChanged(state, true),
+                            child: Text(
+                              maleLabel,
+                              style: theme.textTheme.titleMedium,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Expanded(
+                      flex: 4,
+                      child: Row(
+                        children: [
+                          const Radio<bool?>(
+                            materialTapTargetSize:
+                                MaterialTapTargetSize.shrinkWrap,
+                            value: false,
+                          ),
+                          GestureDetector(
+                            onTap: () => _onChanged(state, false),
+                            child: Text(
+                              femaleLabel,
+                              style: theme.textTheme.titleMedium,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+    }
   }
 
   void _onChanged(FormFieldState<bool?> state, bool? value) {

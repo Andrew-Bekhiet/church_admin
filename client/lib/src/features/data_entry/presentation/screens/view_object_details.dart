@@ -13,7 +13,6 @@ export 'view_object_details/view_person.dart';
 export 'view_object_details/view_service.dart';
 export 'view_object_details/view_store.dart';
 export 'view_object_details/view_street.dart';
-export 'view_object_details/view_user.dart';
 
 typedef WidgetBuilderWithObject<T> = WBuilderWithObject<T, Widget>;
 

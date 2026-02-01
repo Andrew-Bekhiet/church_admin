@@ -18,17 +18,29 @@ class AdminOnDataIndicator extends StatelessWidget {
             adminOnData.groupAdminOnUsers ??
             adminOnData.areaAdminOnUsers ??
             false)
-          Icon(UserPermission.manageAllUsers.icon),
+          Tooltip(
+            message: 'ادارة وتعديل المستخدمين',
+            child: Icon(UserPermission.manageAllUsers.icon),
+          ),
         if (adminOnData.serviceWriteRelatedFamilies ??
             adminOnData.groupWriteRelatedFamilies ??
             false)
-          Icon(ViewableObjectService.I.getDefaultIconFor<Family>()),
+          Tooltip(
+            message: 'تعديل عائلات المخدومين',
+            child: Icon(ViewableObjectService.I.getDefaultIconFor<Family>()),
+          ),
         if (adminOnData.serviceAllowEdit ??
             adminOnData.groupAllowEdit ??
             adminOnData.areaAllowEdit ??
             false)
-          Icon(UserPermission.writeAllData.icon),
-        Icon(UserPermission.readAllData.icon),
+          Tooltip(
+            message: 'تعديل البيانات',
+            child: Icon(UserPermission.writeAllData.icon),
+          ),
+        Tooltip(
+          message: 'رؤية البيانات',
+          child: Icon(UserPermission.readAllData.icon),
+        ),
       ],
     );
   }

@@ -15,69 +15,93 @@ class AdminOnDataWidget extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         ListTile(
-          minVerticalPadding: 0,
           title: Text(
-            'المناطق المسؤول عنها',
+            'أمين على مناطق',
             style: themeData.textTheme.titleMedium?.copyWith(
               fontWeight: FontWeight.bold,
             ),
           ),
-          subtitle: Column(
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               for (final adminOnData in adminOn.where((a) => a.area != null))
-                ViewableObjectWidget(
-                  adminOnData.area!,
-                  wrapInCard: true,
-                  forceShowSecondLine: false,
-                  trailing: AdminOnDataIndicator(adminOnData: adminOnData),
-                ),
-            ],
-          ),
-        ),
-        const SizedBox(height: 10),
-        ListTile(
-          minVerticalPadding: 0,
-          title: Text(
-            'الخدمات المسؤول عنها',
-            style: themeData.textTheme.titleMedium?.copyWith(
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          subtitle: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              for (final MapEntry(:key, :value)
-                  in adminOn
-                      .where((a) => a.service != null)
-                      .groupListsBy((a) => a.service!)
-                      .entries)
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 4),
-                  child: Card(
-                    child: AdminOnServiceWidget(serviceData: (key, value)),
+                Card.outlined(
+                  color: themeData.colorScheme.surfaceContainerLow,
+                  shape: RoundedRectangleBorder(
+                    side: BorderSide(color: themeData.colorScheme.outline),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: ViewableObjectWidget(
+                    adminOnData.area!,
+                    wrapInCard: false,
+                    forceShowSecondLine: false,
+                    trailing: AdminOnDataIndicator(adminOnData: adminOnData),
                   ),
                 ),
             ],
           ),
         ),
-        const SizedBox(height: 10),
         ListTile(
-          minVerticalPadding: 0,
           title: Text(
-            'المجموعات المسؤول عنها',
+            'أمين على خدمات',
             style: themeData.textTheme.titleMedium?.copyWith(
               fontWeight: FontWeight.bold,
             ),
           ),
-          subtitle: Column(
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          child: Card.outlined(
+            color: themeData.colorScheme.surfaceContainerLow,
+            shape: RoundedRectangleBorder(
+              side: BorderSide(color: themeData.colorScheme.outline),
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                for (final MapEntry(:key, :value)
+                    in adminOn
+                        .where((a) => a.service != null)
+                        .groupListsBy((a) => a.service!)
+                        .entries)
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 4),
+                    child: AdminOnServiceWidget(serviceData: (key, value)),
+                  ),
+              ],
+            ),
+          ),
+        ),
+        ListTile(
+          title: Text(
+            'أمين على مجموعات',
+            style: themeData.textTheme.titleMedium?.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               for (final adminOnData in adminOn.where((a) => a.group != null))
-                ViewableObjectWidget(
-                  adminOnData.group!,
-                  forceShowSecondLine: false,
-                  trailing: AdminOnDataIndicator(adminOnData: adminOnData),
+                Card.outlined(
+                  color: themeData.colorScheme.surfaceContainerLow,
+                  shape: RoundedRectangleBorder(
+                    side: BorderSide(color: themeData.colorScheme.outline),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: ViewableObjectWidget(
+                    adminOnData.group!,
+                    wrapInCard: false,
+                    forceShowSecondLine: false,
+                    trailing: AdminOnDataIndicator(adminOnData: adminOnData),
+                  ),
                 ),
             ],
           ),

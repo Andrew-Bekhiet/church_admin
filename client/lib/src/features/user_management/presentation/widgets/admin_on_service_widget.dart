@@ -15,6 +15,8 @@ class AdminOnServiceWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -35,8 +37,12 @@ class AdminOnServiceWidget extends StatelessWidget {
           if (adminOnData.classes.isEmpty && trailingBuilder == null)
             Padding(
               padding: const EdgeInsets.only(right: 26),
-              child: Card(
-                elevation: 0,
+              child: Card.outlined(
+                color: theme.colorScheme.surfaceContainerLow,
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(color: theme.colorScheme.outline),
+                  borderRadius: BorderRadius.circular(16),
+                ),
                 child: ListTile(
                   title: Text(adminOnData.describeServicePermission()),
                   dense: true,
@@ -48,8 +54,12 @@ class AdminOnServiceWidget extends StatelessWidget {
             for (final class$ in adminOnData.classes)
               Padding(
                 padding: const EdgeInsets.only(right: 26),
-                child: Card(
-                  elevation: 0,
+                child: Card.outlined(
+                  color: theme.colorScheme.surfaceContainerLow,
+                  shape: RoundedRectangleBorder(
+                    side: BorderSide(color: theme.colorScheme.outline),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
                   child: ViewableObjectWidget(
                     class$,
                     isDense: true,

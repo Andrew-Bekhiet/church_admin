@@ -1,5 +1,4 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/users/__generated__/mutations.gql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/users/__generated__/queries.gql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/users/__generated__/subscriptions.gql.dart';
 import 'package:graphql/client.dart';
@@ -90,37 +89,5 @@ class UsersDAO extends DAOBase<User> with StreamableDAO<User> {
     );
 
     return graphQLClient.queryAndReturnParsedNullable(queryOptions);
-  }
-
-  Future<void> updateUserPermissions({
-    required String userId,
-    required PermissionsSet newPermissions,
-    required PermissionsSet oldPermissions,
-  }) async {
-    final difference = diff(oldPermissions, newPermissions);
-
-    return graphQLClient.mutateAndReturnParsedNullable(
-      MutationOptions(
-        document: documentNodeMutationupdateUserPermissions,
-        operationName: 'updateUserPermissions',
-        variables: Variables_Mutation_updateUserPermissions(
-          uid: userId.toUuid(),
-          insertPermissions: difference.added.isNotEmpty,
-          deletePermissions: difference.removed.isNotEmpty,
-          permissionsToDelete: difference.removed
-              .map((permission) => permission.name)
-              .toList(),
-          permissionsToInsert: difference.added
-              .map(
-                (permission) => Input_AuthUsersPermissionsInsertInput(
-                  uid: userId.toUuid(),
-                  permission: permission.name,
-                ),
-              )
-              .toList(),
-        ).toJson(),
-        parserFn: (_) => null,
-      ),
-    );
   }
 }
