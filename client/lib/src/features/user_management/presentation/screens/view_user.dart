@@ -62,8 +62,8 @@ class _ViewUserState extends State<ViewUser> {
               child: PermissionsSetWidget(permissions: permissions),
             ),
           ],
-          const SizedBox(height: 10),
           AdminOnDataWidget(adminOn: user.adminOn ?? []),
+          const SizedBox(height: 10),
           const Divider(thickness: 1),
           ListTile(
             title: FilledButton.tonalIcon(
