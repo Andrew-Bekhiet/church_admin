@@ -182,6 +182,13 @@ class EditAdminOnDataWidget extends StatelessWidget {
           ),
         );
 
+    await Future.wait([
+      areasSelectionController.dispose(),
+      servicesSelectionController.dispose(),
+      groupsSelectionController.dispose(),
+      search.close(),
+    ]);
+
     if (result == null) return;
 
     final areasDiff = diff(existingAreas.toSet(), result.areas);
@@ -204,13 +211,6 @@ class EditAdminOnDataWidget extends StatelessWidget {
         AdminOnData(permissionId: '', service: service),
       for (final group in groupsDiff.added)
         AdminOnData(permissionId: '', group: group),
-    ]);
-
-    await Future.wait([
-      areasSelectionController.dispose(),
-      servicesSelectionController.dispose(),
-      groupsSelectionController.dispose(),
-      search.close(),
     ]);
   }
 }
