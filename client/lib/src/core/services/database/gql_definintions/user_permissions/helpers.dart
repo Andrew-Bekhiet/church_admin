@@ -33,7 +33,8 @@ class UserPermissionsUpdateHelper {
   }
 
   bool get hasChanges =>
-      _adminOnDiff.added.isNotEmpty || _adminOnDiff.removed.isNotEmpty;
+      _adminOnDiff.added.isNotEmpty || _adminOnDiff.removed.isNotEmpty
+      || _permissionsDiff.added.isNotEmpty || _permissionsDiff.removed.isNotEmpty;
 
   bool get _deleteAdminOn => _adminOnDiff.removed.isNotEmpty;
   bool get _insertAdminOn => _adminOnDiff.added.isNotEmpty;
