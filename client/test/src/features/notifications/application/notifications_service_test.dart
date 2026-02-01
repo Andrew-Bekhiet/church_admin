@@ -255,10 +255,10 @@ void main() {
             globalProviderContainer
                 .read(localNotificationsPluginProvider)
                 .show(
-                  notification.hashCode,
-                  notification.title,
-                  notification.body,
-                  notificationDetails,
+                  id: notification.hashCode,
+                  title: notification.title,
+                  body: notification.body,
+                  notificationDetails: notificationDetails,
                   payload: notification.id,
                 ),
           );
@@ -273,10 +273,10 @@ void main() {
             globalProviderContainer
                 .read(localNotificationsPluginProvider)
                 .show(
-                  1234,
-                  notification.title,
-                  notification.body,
-                  notificationDetails,
+                  id: 1234,
+                  title: notification.title,
+                  body: notification.body,
+                  notificationDetails: notificationDetails,
                   payload: 'id2',
                 ),
           );
@@ -526,21 +526,23 @@ void main() {
                 [
                   localNotificationsPlugin.getNotificationAppLaunchDetails(),
                   localNotificationsPlugin.show(
-                    expectedNotifications[0].hashCode,
-                    expectedNotifications[0].title,
-                    expectedNotifications[0].body,
-                    await NotificationsService.notificationsDetailsFor(
-                      expectedNotifications[0],
-                    ),
+                    id: expectedNotifications[0].hashCode,
+                    title: expectedNotifications[0].title,
+                    body: expectedNotifications[0].body,
+                    notificationDetails:
+                        await NotificationsService.notificationsDetailsFor(
+                          expectedNotifications[0],
+                        ),
                     payload: expectedNotifications[0].id,
                   ),
                   localNotificationsPlugin.show(
-                    expectedNotifications[2].hashCode,
-                    expectedNotifications[2].title,
-                    expectedNotifications[2].body,
-                    await NotificationsService.notificationsDetailsFor(
-                      expectedNotifications[2],
-                    ),
+                    id: expectedNotifications[2].hashCode,
+                    title: expectedNotifications[2].title,
+                    body: expectedNotifications[2].body,
+                    notificationDetails:
+                        await NotificationsService.notificationsDetailsFor(
+                          expectedNotifications[2],
+                        ),
                     payload: expectedNotifications[2].id,
                   ),
                 ],

@@ -268,10 +268,10 @@ class NotificationsService extends BlocObserver {
     NotificationDetails? notificationDetails,
   }) async {
     await _localNotificationsPlugin.show(
-      id ?? notification.hashCode,
-      notification.title,
-      notification.body,
-      notificationDetails,
+      id: id ?? notification.hashCode,
+      title: notification.title,
+      body: notification.body,
+      notificationDetails: notificationDetails,
       payload: notification.id,
     );
   }

@@ -44,7 +44,7 @@ dependencies:
   flutter_blurhash: ^0.9.1
   flutter_cache_manager: ^3.3.0
   flutter_contacts: ^1.1.5
-  flutter_local_notifications: ^19.1.0
+  flutter_local_notifications: ^20.0.0
   flutter_localizations:
     sdk: flutter
   flutter_map: ^8.1.1
@@ -74,7 +74,7 @@ dependencies:
   meta: ^1.8.0
   mime: ^2.0.0
   omni_datetime_picker: ^2.0.1
-  package_info_plus: ^8.0.0
+  package_info_plus: ^9.0.0
   path: ^1.9.1
   path_provider: ^2.1.5
   percent_indicator: ^4.2.2
