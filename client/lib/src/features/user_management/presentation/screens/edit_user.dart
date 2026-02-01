@@ -58,7 +58,7 @@ class _EditUserState extends State<EditUser> {
         return Column(
           children: [
             CopiablePropertyWidget(
-              'البريد الاكتروني',
+              'البريد الإكتروني',
               user.email,
             ),
             const Divider(thickness: 1),
@@ -119,7 +119,7 @@ class _EditUserState extends State<EditUser> {
                     permission: UserPermission.deleteData,
                     permissions: permissions,
                     onToggle: _togglePermission,
-                    subtitleText: 'السماح بحذف البيانات اللتي يمكن تعديلها',
+                    subtitleText: 'السماح بحذف البيانات التي يمكن تعديلها',
                   ),
                   PermissionCheckWidget(
                     permission: UserPermission.recoverDeleted,
