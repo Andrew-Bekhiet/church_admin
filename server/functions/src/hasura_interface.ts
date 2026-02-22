@@ -21,7 +21,7 @@ export async function checkUserApproved(uid: string): Promise<boolean> {
 
     return (
       permissions.find(
-        (o) => o?.["permission"]?.toLowerCase().replace("'", "") == "approved"
+        (o) => o?.["permission"]?.toLowerCase().replace("'", "") == "approved",
       ) != null
     );
   } catch (e) {
@@ -32,7 +32,7 @@ export async function checkUserApproved(uid: string): Promise<boolean> {
 }
 
 export async function getHasuraUID(
-  firebaseAuthUID: string
+  firebaseAuthUID: string,
 ): Promise<string | null> {
   try {
     const hasura_response = await makeGraphqlRequest({
@@ -58,7 +58,7 @@ export async function getHasuraUID(
 }
 
 export async function getPersonIdFromUser(
-  hasuraUID: string
+  hasuraUID: string,
 ): Promise<string | null> {
   try {
     const hasura_response = await makeGraphqlRequest({
@@ -90,7 +90,7 @@ export async function getPersonIdFromUser(
 export async function checkUserAccessToPerson(
   table: PhotoTable,
   id: string,
-  hasuraUid: string
+  hasuraUid: string,
 ): Promise<{ canRead: boolean; canWrite: boolean; personUid: string | null }> {
   try {
     if (table == "users") {
@@ -239,7 +239,7 @@ export async function unapproveUser(hasuraUID: string): Promise<void> {
 export async function updatePhotoTime(
   table: PhotoTable,
   id: string,
-  time: Date | null
+  time: Date | null,
 ): Promise<void> {
   try {
     const op_name = `update${
@@ -251,8 +251,8 @@ export async function updatePhotoTime(
       query: `
             mutation updatePhotoTime($id: uuid!, $photoUpdatedAt: timestamptz) {
               ${op_name}(pkColumns: {${
-        table == "users" ? "u" : ""
-      }id: $id}, _set: {photoUpdatedAt: $photoUpdatedAt}) {
+                table == "users" ? "u" : ""
+              }id: $id}, _set: {photoUpdatedAt: $photoUpdatedAt}) {
                 ${table == "users" ? "u" : ""}id
               }
             }
@@ -274,7 +274,7 @@ export async function updatePhotoTime(
       throw new https.HttpsError(
         "not-found",
         `Object ${id} was not found in ${table}`,
-        hasura_response.data?.["errors"]
+        hasura_response.data?.["errors"],
       );
   } catch (e) {
     console.error(e);
@@ -285,7 +285,7 @@ export async function updatePhotoTime(
 export async function updatePhotoBlurHash(
   table: PhotoTable,
   id: string,
-  blurhash: string
+  blurhash: string,
 ): Promise<void> {
   try {
     const op_name = `update${
@@ -297,8 +297,8 @@ export async function updatePhotoBlurHash(
       query: `
             mutation updatePhotoBlurHash($id: uuid!, $blurhash: String) {
               ${op_name}(pkColumns: {${
-        table == "users" ? "u" : ""
-      }id: $id}, _set: {blurhash: $blurhash}) {
+                table == "users" ? "u" : ""
+              }id: $id}, _set: {blurhash: $blurhash}) {
                 ${table == "users" ? "u" : ""}id
               }
             }
@@ -318,7 +318,7 @@ export async function updatePhotoBlurHash(
       throw new https.HttpsError(
         "not-found",
         `Object ${id} was not found in ${table}`,
-        hasura_response.data?.["errors"]
+        hasura_response.data?.["errors"],
       );
   } catch (e) {
     console.error(e);
@@ -346,10 +346,14 @@ export async function makeGraphqlRequest({
   query,
   variables,
   operationName,
+  asUser,
+  asRole,
 }: {
   query: string;
   variables: object;
   operationName?: string;
+  asUser?: string;
+  asRole?: string;
 }): Promise<AxiosResponse> {
   return axios.post(
     process.env["HASURA_SERVER"]!,
@@ -363,8 +367,9 @@ export async function makeGraphqlRequest({
       headers: {
         "content-type": "application/json",
         "x-hasura-admin-secret": process.env["HASURA_ADMIN_SECRET"]!,
-        "x-hasura-role": "admin",
+        "x-hasura-role": asRole ?? "admin",
+        ...(asUser ? { "x-hasura-user-id": asUser } : {}),
       },
-    }
+    },
   );
 }

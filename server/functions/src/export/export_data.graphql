@@ -1,0 +1,373 @@
+query exportData(
+  $areasWhere: AreasBoolExp
+  $servicesWhere: ServicesBoolExp
+  $classesWhere: ClassesBoolExp
+  $groupsWhere: GroupsBoolExp
+  $personsWhere: PersonsBoolExp
+  $familiesWhere: FamiliesBoolExp
+  $storesWhere: StoresBoolExp
+  $streetsWhere: StreetsBoolExp
+  $includeFamilies: Boolean = true
+  $includeStores: Boolean = true
+  $includeStreets: Boolean = true
+  $includeAreas: Boolean = true
+  $includeClasses: Boolean = true
+  $includeGroups: Boolean = true
+  $includeServices: Boolean = true
+) {
+  persons(where: $personsWhere) {
+    address {
+      id
+      apartmentNumber
+      houseNumber
+      storeyNumber
+      substreetName
+      district {
+        id
+        name
+      }
+      street {
+        id
+        name
+      }
+      area {
+        id
+        name
+      }
+      specialLandmark
+      geolocation
+    }
+    birthdate
+    birthday
+    church {
+      id
+      name
+    }
+    classes {
+      class {
+        id
+        name
+      }
+    }
+    college {
+      id
+      name
+    }
+    color
+    family {
+      id
+      name
+    }
+    confessionFather: father {
+      id
+      name
+    }
+    gender
+    groups {
+      group {
+        id
+        name
+      }
+    }
+    hobbies {
+      hobby {
+        id
+        name
+      }
+    }
+    id
+    isServant
+    isShammas
+    isStudent
+    job {
+      id
+      name
+    }
+    jobDescription
+    lastCall {
+      time
+      user {
+        uid
+        name
+      }
+    }
+    lastConfession {
+      time
+      user {
+        uid
+        name
+      }
+    }
+    lastEdit {
+      time
+      user {
+        uid
+        name
+      }
+    }
+    lastKodas {
+      time
+      user {
+        uid
+        name
+      }
+    }
+    lastVisit {
+      time
+      user {
+        uid
+        name
+      }
+    }
+    mainPhone
+    martialStatus
+    name
+    notes
+    otherPhones
+    personType {
+      id
+      name
+      order
+    }
+    qualification {
+      id
+      name
+    }
+    school {
+      id
+      name
+    }
+    studyYear {
+      id
+      order
+      name
+    }
+    serviceType
+    services {
+      service {
+        id
+        name
+      }
+    }
+    servingChurch {
+      id
+      name
+    }
+    shammasLevel {
+      id
+      name
+    }
+    state {
+      id
+      name
+    }
+    store {
+      id
+      name
+    }
+    tags {
+      tag {
+        id
+        name
+      }
+    }
+    uid
+    user {
+      uid
+      name
+    }
+    workStatus
+  }
+  families(where: $familiesWhere) @include(if: $includeFamilies) {
+    address {
+      id
+      apartmentNumber
+      houseNumber
+      storeyNumber
+      substreetName
+      district {
+        id
+        name
+      }
+      street {
+        id
+        name
+      }
+      area {
+        id
+        name
+      }
+      specialLandmark
+      geolocation
+    }
+    church {
+      id
+      name
+    }
+    color
+    deceasedSpouseName
+    id
+    lastEdit {
+      time
+      user {
+        uid
+        name
+      }
+    }
+    lastFatherVisit {
+      time
+      user {
+        uid
+        name
+      }
+    }
+    lastVisit {
+      time
+      user {
+        uid
+        name
+      }
+    }
+    marriageDate
+    name
+    notes
+    status
+    stores {
+      id
+      name
+    }
+  }
+  stores(where: $storesWhere) @include(if: $includeStores) {
+    address {
+      id
+      apartmentNumber
+      houseNumber
+      storeyNumber
+      substreetName
+      district {
+        id
+        name
+      }
+      street {
+        id
+        name
+      }
+      area {
+        id
+        name
+      }
+      specialLandmark
+      geolocation
+    }
+    color
+    adminFamily: family {
+      id
+      name
+    }
+    id
+    lastEdit {
+      time
+      user {
+        uid
+        name
+      }
+    }
+    name
+  }
+  streets(where: $streetsWhere) @include(if: $includeStreets) {
+    areas {
+      area {
+        id
+        name
+      }
+    }
+    color
+    id
+    lastEdit {
+      time
+      user {
+        uid
+        name
+      }
+    }
+    line
+    name
+  }
+  areas(where: $areasWhere) @include(if: $includeAreas) {
+    color
+    id
+    lastEdit {
+      time
+      user {
+        uid
+        name
+      }
+    }
+    name
+  }
+  classes(where: $classesWhere) @include(if: $includeClasses) {
+    color
+    id
+    lastEdit {
+      time
+      user {
+        uid
+        name
+      }
+    }
+    name
+    service {
+      id
+      name
+    }
+    gender: serviceGender
+    studyYear {
+      id
+      name
+      order
+    }
+  }
+  groups(where: $groupsWhere) @include(if: $includeGroups) {
+    color
+    id
+    lastEdit {
+      time
+      user {
+        uid
+        name
+      }
+    }
+    name
+    service {
+      id
+      name
+    }
+    validity
+  }
+  services(where: $servicesWhere) @include(if: $includeServices) {
+    color
+    id
+    lastEdit {
+      time
+      user {
+        uid
+        name
+      }
+    }
+    name
+    nextService {
+      id
+      name
+    }
+    studyYearFrom {
+      id
+      name
+      order
+    }
+    studyYearTo {
+      id
+      name
+      order
+    }
+  }
+}

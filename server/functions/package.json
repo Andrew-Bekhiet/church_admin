@@ -2,9 +2,10 @@
   "name": "functions",
   "scripts": {
     "lint": "eslint --ext .js,.ts .",
-    "build": "npx tsc",
+    "build": "npx tsc && cp src/export/*.graphql lib/export/",
     "build:watch": "npx tsc --watch",
     "serve": "npm run build && firebase emulators:start --only functions",
+    "run:export": "node lib/export/export.js",
     "shell": "npm run build && firebase functions:shell",
     "start": "npm run shell",
     "deploy": "npm run build && firebase deploy --only functions",
@@ -20,7 +21,10 @@
     "blurhash": "^2.0.5",
     "firebase-admin": "^13.2.0",
     "firebase-functions": "^6.3.2",
-    "sharp": "^0.34.1"
+    "sharp": "^0.34.1",
+    "xlsx": "^0.18.5",
+    "xlsx-js-style": "^1.2.0",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@eslint/compat": "^1.2.8",
