@@ -1,3 +1,4 @@
+import { LocalizationRowMapper } from "../LocalizationRowMapper";
 import { AddressRowMapper } from "../fragments/AddressRowMapper";
 import { AuditLogRowMapper } from "../fragments/AuditLogRowMapper";
 import { ObjectRefRowMapper } from "../fragments/ObjectRefRowMapper";
@@ -8,12 +9,14 @@ export class StoreRowMapper implements RowMapper {
   private readonly mapper: RowMapper;
 
   constructor() {
-    this.mapper = new MultiRowMapper([
-      new ViewableRowMapper(),
-      new AddressRowMapper(),
-      new ObjectRefRowMapper("adminFamily"),
-      new AuditLogRowMapper("lastEdit"),
-    ]);
+    this.mapper = new LocalizationRowMapper(
+      new MultiRowMapper([
+        new ViewableRowMapper(),
+        new AddressRowMapper(),
+        new ObjectRefRowMapper("adminFamily"),
+        new AuditLogRowMapper("lastEdit"),
+      ]),
+    );
   }
 
   map(row: Record<string, unknown>): Record<string, unknown> {
