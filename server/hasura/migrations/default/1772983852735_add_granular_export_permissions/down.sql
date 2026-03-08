@@ -1,8 +1,8 @@
 alter table "auth"."users_admin_on" drop constraint "users_admin_on_admin_edit_logic";
-alter table "auth"."users_admin_on" add constraint "users_admin_on_admin_edit_logic" check (CHECK((not COALESCE(service_allow_edit, false) or admin_on_service is not null) and (not COALESCE(group_allow_edit, false) or admin_on_group is not null) and (not COALESCE(area_allow_edit, false) or admin_on_area is not null) and (not COALESCE(service_admin_on_users, false) or COALESCE(service_allow_edit, false)) and (not COALESCE(group_admin_on_users, false) or COALESCE(group_allow_edit, false)) and (not COALESCE(area_admin_on_users, false) or COALESCE(area_allow_edit, false))));
+alter table "auth"."users_admin_on" add constraint "users_admin_on_admin_edit_logic" check ((not COALESCE(service_allow_edit, false) or admin_on_service is not null) and (not COALESCE(group_allow_edit, false) or admin_on_group is not null) and (not COALESCE(area_allow_edit, false) or admin_on_area is not null) and (not COALESCE(service_admin_on_users, false) or COALESCE(service_allow_edit, false)) and (not COALESCE(group_admin_on_users, false) or COALESCE(group_allow_edit, false)) and (not COALESCE(area_admin_on_users, false) or COALESCE(area_allow_edit, false)));
 
 alter table "auth"."users_admin_on" drop constraint "users_admin_on_either_area_service_group";
-alter table "auth"."users_admin_on" add constraint "users_admin_on_area_service_group" check (CHECK(((admin_on_area is not null)::integer + (admin_on_service is not null)::integer + (admin_on_group is not null)::integer) = 1));
+alter table "auth"."users_admin_on" add constraint "users_admin_on_area_service_group" check (((admin_on_area is not null)::integer + (admin_on_service is not null)::integer + (admin_on_group is not null)::integer) = 1);
 
 alter table "auth"."users_admin_on" drop column if exists "group_allow_export";
 alter table "auth"."users_admin_on" drop column if exists "service_allow_export";
