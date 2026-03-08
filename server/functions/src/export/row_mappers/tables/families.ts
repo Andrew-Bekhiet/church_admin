@@ -22,7 +22,6 @@ export class FamilyRowMapper implements RowMapper {
         new RawFieldRowMapper("notes"),
         new AuditLogRowMapper("lastVisit"),
         new AuditLogRowMapper("lastFatherVisit"),
-        new AuditLogRowMapper("lastEdit"),
         new ListNamesAndIdsRowMapper("stores"),
         new AuditLogRowMapper("lastEdit"),
       ]),
