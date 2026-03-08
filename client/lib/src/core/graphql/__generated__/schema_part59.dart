@@ -1,6 +1,38 @@
 // Part 59 of the schema
 part of "schema.graphql.dart";
 
+String toJson_Enum_AuthUsersPermissionsUpdateColumn(
+  Enum_AuthUsersPermissionsUpdateColumn e,
+) {
+  switch (e) {
+    case Enum_AuthUsersPermissionsUpdateColumn.$_PLACEHOLDER:
+      return r'_PLACEHOLDER';
+    case Enum_AuthUsersPermissionsUpdateColumn.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_AuthUsersPermissionsUpdateColumn
+fromJson_Enum_AuthUsersPermissionsUpdateColumn(String value) {
+  switch (value) {
+    case r'_PLACEHOLDER':
+      return Enum_AuthUsersPermissionsUpdateColumn.$_PLACEHOLDER;
+    default:
+      return Enum_AuthUsersPermissionsUpdateColumn.$unknown;
+  }
+}
+
+enum Enum_ChurchesConstraint {
+  churches_name_key,
+  churches_pkey,
+  $unknown;
+
+  factory Enum_ChurchesConstraint.fromJson(String value) =>
+      fromJson_Enum_ChurchesConstraint(value);
+
+  String toJson() => toJson_Enum_ChurchesConstraint(this);
+}
+
 String toJson_Enum_ChurchesConstraint(Enum_ChurchesConstraint e) {
   switch (e) {
     case Enum_ChurchesConstraint.churches_name_key:
@@ -2491,36 +2523,4 @@ enum Enum_JobsSelectColumn {
       fromJson_Enum_JobsSelectColumn(value);
 
   String toJson() => toJson_Enum_JobsSelectColumn(this);
-}
-
-String toJson_Enum_JobsSelectColumn(Enum_JobsSelectColumn e) {
-  switch (e) {
-    case Enum_JobsSelectColumn.id:
-      return r'id';
-    case Enum_JobsSelectColumn.name:
-      return r'name';
-    case Enum_JobsSelectColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_JobsSelectColumn fromJson_Enum_JobsSelectColumn(String value) {
-  switch (value) {
-    case r'id':
-      return Enum_JobsSelectColumn.id;
-    case r'name':
-      return Enum_JobsSelectColumn.name;
-    default:
-      return Enum_JobsSelectColumn.$unknown;
-  }
-}
-
-enum Enum_JobsUpdateColumn {
-  name,
-  $unknown;
-
-  factory Enum_JobsUpdateColumn.fromJson(String value) =>
-      fromJson_Enum_JobsUpdateColumn(value);
-
-  String toJson() => toJson_Enum_JobsUpdateColumn(this);
 }

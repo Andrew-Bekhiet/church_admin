@@ -53,16 +53,36 @@ export async function exportDataHandler(
     );
   }
 
-  const userHasPermissionToExport = await checkUserHasPermissionToExport({
+  const {
+    canExportAllAreas,
+    canExportAllServices,
+    canExportAllClasses,
+    canExportAllGroups,
+  } = await authenticateExportRequest({
     hasuraUID,
+    exportDataRequest: requestData.data,
   });
+  const canExportAll =
+    canExportAllAreas &&
+    canExportAllServices &&
+    canExportAllClasses &&
+    canExportAllGroups;
 
-  if (!userHasPermissionToExport) {
+  if (!canExportAll) {
+    console.error("User does not have permission to export requested data", {
+      canExportAllAreas,
+      canExportAllServices,
+      canExportAllClasses,
+      canExportAllGroups,
+    });
+
     throw new https.HttpsError(
       "permission-denied",
-      "User does not have permission to export data",
+      "User does not have permission to export requested data",
     );
   }
+
+  const exportId = new Date().toISOString();
 
   const { areasIds, servicesIds, classesIds, groupsIds } = requestData.data;
 
@@ -77,19 +97,20 @@ export async function exportDataHandler(
   const payload = result.data?.["data"] as ExportPayload | undefined;
   if (!payload) {
     const errors = result.data?.["errors"];
-    throw new https.HttpsError(
-      "internal",
-      errors ? String(errors) : "Export query returned no data",
-    );
+    console.error("Failed to fetch export data", errors);
+
+    throw new https.HttpsError("internal", "Failed to fetch export data");
   }
 
-  const buffer = buildWorkbookBuffer(payload);
-  const exportId = new Date().toISOString();
-  const storagePath = `Exports/${hasuraUID}/${exportId}.xlsx`;
-  const file = storage().bucket(EXPORT_BUCKET).file(storagePath);
-  await file.save(buffer, {
+  const workbookDataBuffer = buildWorkbookBuffer(payload);
+
+  const file = storage()
+    .bucket(EXPORT_BUCKET)
+    .file(`exports/${hasuraUID}/${exportId}.xlsx`);
+  await file.save(workbookDataBuffer, {
     metadata: {
-      contentType: "application/vnd.ms-excel",
+      contentType:
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
     },
   });
 
@@ -102,22 +123,86 @@ export async function exportDataHandler(
   return { downloadUrl };
 }
 
-async function checkUserHasPermissionToExport({
+async function authenticateExportRequest({
   hasuraUID,
+  exportDataRequest,
 }: {
   hasuraUID: string;
-}): Promise<boolean> {
+  exportDataRequest: z.infer<typeof ExportDataRequestData>;
+}): Promise<{
+  canExportAllAreas: boolean;
+  canExportAllServices: boolean;
+  canExportAllClasses: boolean;
+  canExportAllGroups: boolean;
+}> {
   const response = await makeGraphqlRequest({
-    query: `query checkUserCanExport($uid: uuid!) {
-  authUsersPermissions(where: {_and: {uid: {_eq: $uid}, permission: {_eq: "exportData"}}}) {
-    uid
-  }
-}`,
-    variables: { uid: hasuraUID },
-    operationName: "checkUserCanExport",
+    query: await getAuthorizeExportRequestGQLQuery(),
+    variables: {
+      uid: hasuraUID,
+      areasIds: exportDataRequest.areasIds,
+      servicesIds: exportDataRequest.servicesIds,
+      classesIds: exportDataRequest.classesIds,
+      groupsIds: exportDataRequest.groupsIds,
+    },
+    operationName: "authorizeExportRequest",
   });
 
-  return response.data?.["data"]?.["authUsersPermissions"]?.length > 0;
+  const data =
+    response.data?.["data"]?.["authUsersPermissionsByEntityId"] ?? [];
+
+  type PermissionRecord = {
+    permissionId: string;
+    uid: string;
+    allowEdit: boolean;
+    allowExport: boolean;
+    entityId: string;
+    entityType: string;
+    table: string;
+    hint: string;
+  };
+  type EntityType = "any" | "area" | "service" | "class" | "group";
+
+  const entitiesIdsByType: Record<EntityType, Set<string>> = data.reduce(
+    (acc: Record<EntityType, Set<string>>, p: PermissionRecord) => {
+      const entityType = p.entityType as EntityType;
+      acc[entityType] ??= new Set<string>();
+      acc[entityType].add(p.entityId);
+
+      return acc;
+    },
+    {} as Record<EntityType, Set<string>>,
+  );
+
+  if (entitiesIdsByType["any"] && entitiesIdsByType["any"].size > 0) {
+    return {
+      canExportAllAreas: true,
+      canExportAllServices: true,
+      canExportAllClasses: true,
+      canExportAllGroups: true,
+    };
+  }
+
+  const { areasIds, servicesIds, classesIds, groupsIds } = exportDataRequest;
+
+  const canExportAllAreas = areasIds.every((id) =>
+    entitiesIdsByType["area"]?.has(id),
+  );
+  const canExportAllServices = servicesIds.every((id) =>
+    entitiesIdsByType["service"]?.has(id),
+  );
+  const canExportAllClasses = classesIds.every((id) =>
+    entitiesIdsByType["class"]?.has(id),
+  );
+  const canExportAllGroups = groupsIds.every((id) =>
+    entitiesIdsByType["group"]?.has(id),
+  );
+
+  return {
+    canExportAllAreas,
+    canExportAllServices,
+    canExportAllClasses,
+    canExportAllGroups,
+  };
 }
 
 async function fetchExportData({
@@ -147,6 +232,13 @@ async function fetchExportData({
     operationName: "exportData",
     asUser: hasuraUID,
   });
+}
+
+async function getAuthorizeExportRequestGQLQuery() {
+  return await fs.promises.readFile(
+    path.join(__dirname, "authorize_export_request.graphql"),
+    "utf8",
+  );
 }
 
 async function getExportDataGQLQuery() {

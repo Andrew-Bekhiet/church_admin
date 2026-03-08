@@ -97,6 +97,12 @@ class _EditUserState extends State<EditUser> {
                     subtitleText: 'السماح بتعديل جميع بيانات التطبيق',
                   ),
                   PermissionCheckWidget(
+                    permission: UserPermission.exportAllData,
+                    permissions: permissions,
+                    onToggle: _togglePermission,
+                    subtitleText: 'السماح بتصدير جميع البيانات',
+                  ),
+                  PermissionCheckWidget(
                     permission: UserPermission.readAllData,
                     permissions: permissions,
                     onToggle: _togglePermission,
@@ -126,12 +132,6 @@ class _EditUserState extends State<EditUser> {
                     permissions: permissions,
                     onToggle: _togglePermission,
                     subtitleText: 'السماح باسترجاع البيانات المحذوفة',
-                  ),
-                  PermissionCheckWidget(
-                    permission: UserPermission.exportData,
-                    permissions: permissions,
-                    onToggle: _togglePermission,
-                    subtitleText: 'السماح بتصدير البيانات',
                   ),
                 ],
               ),

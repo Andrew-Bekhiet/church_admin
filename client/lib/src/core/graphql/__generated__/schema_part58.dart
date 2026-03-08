@@ -2228,12 +2228,15 @@ enum Enum_AuthUsersAdminOnSelectColumn {
   adminOnService,
   areaAdminOnUsers,
   areaAllowEdit,
+  areaAllowExport,
   groupAdminOnUsers,
   groupAllowEdit,
+  groupAllowExport,
   groupWriteRelatedFamilies,
   permissionId,
   serviceAdminOnUsers,
   serviceAllowEdit,
+  serviceAllowExport,
   serviceGender,
   serviceStudyYear,
   serviceWriteRelatedFamilies,
@@ -2260,10 +2263,14 @@ String toJson_Enum_AuthUsersAdminOnSelectColumn(
       return r'areaAdminOnUsers';
     case Enum_AuthUsersAdminOnSelectColumn.areaAllowEdit:
       return r'areaAllowEdit';
+    case Enum_AuthUsersAdminOnSelectColumn.areaAllowExport:
+      return r'areaAllowExport';
     case Enum_AuthUsersAdminOnSelectColumn.groupAdminOnUsers:
       return r'groupAdminOnUsers';
     case Enum_AuthUsersAdminOnSelectColumn.groupAllowEdit:
       return r'groupAllowEdit';
+    case Enum_AuthUsersAdminOnSelectColumn.groupAllowExport:
+      return r'groupAllowExport';
     case Enum_AuthUsersAdminOnSelectColumn.groupWriteRelatedFamilies:
       return r'groupWriteRelatedFamilies';
     case Enum_AuthUsersAdminOnSelectColumn.permissionId:
@@ -2272,6 +2279,8 @@ String toJson_Enum_AuthUsersAdminOnSelectColumn(
       return r'serviceAdminOnUsers';
     case Enum_AuthUsersAdminOnSelectColumn.serviceAllowEdit:
       return r'serviceAllowEdit';
+    case Enum_AuthUsersAdminOnSelectColumn.serviceAllowExport:
+      return r'serviceAllowExport';
     case Enum_AuthUsersAdminOnSelectColumn.serviceGender:
       return r'serviceGender';
     case Enum_AuthUsersAdminOnSelectColumn.serviceStudyYear:
@@ -2299,10 +2308,14 @@ Enum_AuthUsersAdminOnSelectColumn fromJson_Enum_AuthUsersAdminOnSelectColumn(
       return Enum_AuthUsersAdminOnSelectColumn.areaAdminOnUsers;
     case r'areaAllowEdit':
       return Enum_AuthUsersAdminOnSelectColumn.areaAllowEdit;
+    case r'areaAllowExport':
+      return Enum_AuthUsersAdminOnSelectColumn.areaAllowExport;
     case r'groupAdminOnUsers':
       return Enum_AuthUsersAdminOnSelectColumn.groupAdminOnUsers;
     case r'groupAllowEdit':
       return Enum_AuthUsersAdminOnSelectColumn.groupAllowEdit;
+    case r'groupAllowExport':
+      return Enum_AuthUsersAdminOnSelectColumn.groupAllowExport;
     case r'groupWriteRelatedFamilies':
       return Enum_AuthUsersAdminOnSelectColumn.groupWriteRelatedFamilies;
     case r'permissionId':
@@ -2311,6 +2324,8 @@ Enum_AuthUsersAdminOnSelectColumn fromJson_Enum_AuthUsersAdminOnSelectColumn(
       return Enum_AuthUsersAdminOnSelectColumn.serviceAdminOnUsers;
     case r'serviceAllowEdit':
       return Enum_AuthUsersAdminOnSelectColumn.serviceAllowEdit;
+    case r'serviceAllowExport':
+      return Enum_AuthUsersAdminOnSelectColumn.serviceAllowExport;
     case r'serviceGender':
       return Enum_AuthUsersAdminOnSelectColumn.serviceGender;
     case r'serviceStudyYear':
@@ -2488,36 +2503,4 @@ enum Enum_AuthUsersPermissionsUpdateColumn {
       fromJson_Enum_AuthUsersPermissionsUpdateColumn(value);
 
   String toJson() => toJson_Enum_AuthUsersPermissionsUpdateColumn(this);
-}
-
-String toJson_Enum_AuthUsersPermissionsUpdateColumn(
-  Enum_AuthUsersPermissionsUpdateColumn e,
-) {
-  switch (e) {
-    case Enum_AuthUsersPermissionsUpdateColumn.$_PLACEHOLDER:
-      return r'_PLACEHOLDER';
-    case Enum_AuthUsersPermissionsUpdateColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_AuthUsersPermissionsUpdateColumn
-fromJson_Enum_AuthUsersPermissionsUpdateColumn(String value) {
-  switch (value) {
-    case r'_PLACEHOLDER':
-      return Enum_AuthUsersPermissionsUpdateColumn.$_PLACEHOLDER;
-    default:
-      return Enum_AuthUsersPermissionsUpdateColumn.$unknown;
-  }
-}
-
-enum Enum_ChurchesConstraint {
-  churches_name_key,
-  churches_pkey,
-  $unknown;
-
-  factory Enum_ChurchesConstraint.fromJson(String value) =>
-      fromJson_Enum_ChurchesConstraint(value);
-
-  String toJson() => toJson_Enum_ChurchesConstraint(this);
 }

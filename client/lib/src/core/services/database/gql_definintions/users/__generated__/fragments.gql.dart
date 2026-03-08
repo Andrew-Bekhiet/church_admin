@@ -2195,16 +2195,19 @@ class Fragment_UserDetails_adminOn implements Fragment_UserAdminOn_adminOn {
   Fragment_UserDetails_adminOn({
     required this.permissionId,
     this.area,
+    this.areaAllowExport,
     this.areaAllowEdit,
     this.areaAdminOnUsers,
     this.service,
     this.serviceStudyYearData,
     this.serviceGender,
+    this.serviceAllowExport,
     this.serviceAllowEdit,
     this.serviceAdminOnUsers,
     required this.serviceWriteRelatedFamilies,
     required this.classes,
     this.group,
+    this.groupAllowExport,
     this.groupAllowEdit,
     this.groupAdminOnUsers,
     required this.groupWriteRelatedFamilies,
@@ -2214,16 +2217,19 @@ class Fragment_UserDetails_adminOn implements Fragment_UserAdminOn_adminOn {
   factory Fragment_UserDetails_adminOn.fromJson(Map<String, dynamic> json) {
     final l$permissionId = json['permissionId'];
     final l$area = json['area'];
+    final l$areaAllowExport = json['areaAllowExport'];
     final l$areaAllowEdit = json['areaAllowEdit'];
     final l$areaAdminOnUsers = json['areaAdminOnUsers'];
     final l$service = json['service'];
     final l$serviceStudyYearData = json['serviceStudyYearData'];
     final l$serviceGender = json['serviceGender'];
+    final l$serviceAllowExport = json['serviceAllowExport'];
     final l$serviceAllowEdit = json['serviceAllowEdit'];
     final l$serviceAdminOnUsers = json['serviceAdminOnUsers'];
     final l$serviceWriteRelatedFamilies = json['serviceWriteRelatedFamilies'];
     final l$classes = json['classes'];
     final l$group = json['group'];
+    final l$groupAllowExport = json['groupAllowExport'];
     final l$groupAllowEdit = json['groupAllowEdit'];
     final l$groupAdminOnUsers = json['groupAdminOnUsers'];
     final l$groupWriteRelatedFamilies = json['groupWriteRelatedFamilies'];
@@ -2233,6 +2239,7 @@ class Fragment_UserDetails_adminOn implements Fragment_UserAdminOn_adminOn {
       area: l$area == null
           ? null
           : Fragment_Area.fromJson((l$area as Map<String, dynamic>)),
+      areaAllowExport: (l$areaAllowExport as bool?),
       areaAllowEdit: (l$areaAllowEdit as bool?),
       areaAdminOnUsers: (l$areaAdminOnUsers as bool?),
       service: l$service == null
@@ -2246,6 +2253,7 @@ class Fragment_UserDetails_adminOn implements Fragment_UserAdminOn_adminOn {
               (l$serviceStudyYearData as Map<String, dynamic>),
             ),
       serviceGender: (l$serviceGender as bool?),
+      serviceAllowExport: (l$serviceAllowExport as bool?),
       serviceAllowEdit: (l$serviceAllowEdit as bool?),
       serviceAdminOnUsers: (l$serviceAdminOnUsers as bool?),
       serviceWriteRelatedFamilies: (l$serviceWriteRelatedFamilies as bool),
@@ -2255,6 +2263,7 @@ class Fragment_UserDetails_adminOn implements Fragment_UserAdminOn_adminOn {
       group: l$group == null
           ? null
           : Fragment_Group.fromJson((l$group as Map<String, dynamic>)),
+      groupAllowExport: (l$groupAllowExport as bool?),
       groupAllowEdit: (l$groupAllowEdit as bool?),
       groupAdminOnUsers: (l$groupAdminOnUsers as bool?),
       groupWriteRelatedFamilies: (l$groupWriteRelatedFamilies as bool),
@@ -2266,6 +2275,8 @@ class Fragment_UserDetails_adminOn implements Fragment_UserAdminOn_adminOn {
 
   final Fragment_Area? area;
 
+  final bool? areaAllowExport;
+
   final bool? areaAllowEdit;
 
   final bool? areaAdminOnUsers;
@@ -2276,6 +2287,8 @@ class Fragment_UserDetails_adminOn implements Fragment_UserAdminOn_adminOn {
 
   final bool? serviceGender;
 
+  final bool? serviceAllowExport;
+
   final bool? serviceAllowEdit;
 
   final bool? serviceAdminOnUsers;
@@ -2285,6 +2298,8 @@ class Fragment_UserDetails_adminOn implements Fragment_UserAdminOn_adminOn {
   final List<Fragment_Class> classes;
 
   final Fragment_Group? group;
+
+  final bool? groupAllowExport;
 
   final bool? groupAllowEdit;
 
@@ -2300,6 +2315,8 @@ class Fragment_UserDetails_adminOn implements Fragment_UserAdminOn_adminOn {
     _resultData['permissionId'] = uuidToString(l$permissionId);
     final l$area = area;
     _resultData['area'] = l$area?.toJson();
+    final l$areaAllowExport = areaAllowExport;
+    _resultData['areaAllowExport'] = l$areaAllowExport;
     final l$areaAllowEdit = areaAllowEdit;
     _resultData['areaAllowEdit'] = l$areaAllowEdit;
     final l$areaAdminOnUsers = areaAdminOnUsers;
@@ -2310,6 +2327,8 @@ class Fragment_UserDetails_adminOn implements Fragment_UserAdminOn_adminOn {
     _resultData['serviceStudyYearData'] = l$serviceStudyYearData?.toJson();
     final l$serviceGender = serviceGender;
     _resultData['serviceGender'] = l$serviceGender;
+    final l$serviceAllowExport = serviceAllowExport;
+    _resultData['serviceAllowExport'] = l$serviceAllowExport;
     final l$serviceAllowEdit = serviceAllowEdit;
     _resultData['serviceAllowEdit'] = l$serviceAllowEdit;
     final l$serviceAdminOnUsers = serviceAdminOnUsers;
@@ -2320,6 +2339,8 @@ class Fragment_UserDetails_adminOn implements Fragment_UserAdminOn_adminOn {
     _resultData['classes'] = l$classes.map((e) => e.toJson()).toList();
     final l$group = group;
     _resultData['group'] = l$group?.toJson();
+    final l$groupAllowExport = groupAllowExport;
+    _resultData['groupAllowExport'] = l$groupAllowExport;
     final l$groupAllowEdit = groupAllowEdit;
     _resultData['groupAllowEdit'] = l$groupAllowEdit;
     final l$groupAdminOnUsers = groupAdminOnUsers;
@@ -2335,16 +2356,19 @@ class Fragment_UserDetails_adminOn implements Fragment_UserAdminOn_adminOn {
   int get hashCode {
     final l$permissionId = permissionId;
     final l$area = area;
+    final l$areaAllowExport = areaAllowExport;
     final l$areaAllowEdit = areaAllowEdit;
     final l$areaAdminOnUsers = areaAdminOnUsers;
     final l$service = service;
     final l$serviceStudyYearData = serviceStudyYearData;
     final l$serviceGender = serviceGender;
+    final l$serviceAllowExport = serviceAllowExport;
     final l$serviceAllowEdit = serviceAllowEdit;
     final l$serviceAdminOnUsers = serviceAdminOnUsers;
     final l$serviceWriteRelatedFamilies = serviceWriteRelatedFamilies;
     final l$classes = classes;
     final l$group = group;
+    final l$groupAllowExport = groupAllowExport;
     final l$groupAllowEdit = groupAllowEdit;
     final l$groupAdminOnUsers = groupAdminOnUsers;
     final l$groupWriteRelatedFamilies = groupWriteRelatedFamilies;
@@ -2352,16 +2376,19 @@ class Fragment_UserDetails_adminOn implements Fragment_UserAdminOn_adminOn {
     return Object.hashAll([
       l$permissionId,
       l$area,
+      l$areaAllowExport,
       l$areaAllowEdit,
       l$areaAdminOnUsers,
       l$service,
       l$serviceStudyYearData,
       l$serviceGender,
+      l$serviceAllowExport,
       l$serviceAllowEdit,
       l$serviceAdminOnUsers,
       l$serviceWriteRelatedFamilies,
       Object.hashAll(l$classes.map((v) => v)),
       l$group,
+      l$groupAllowExport,
       l$groupAllowEdit,
       l$groupAdminOnUsers,
       l$groupWriteRelatedFamilies,
@@ -2388,6 +2415,11 @@ class Fragment_UserDetails_adminOn implements Fragment_UserAdminOn_adminOn {
     if (l$area != lOther$area) {
       return false;
     }
+    final l$areaAllowExport = areaAllowExport;
+    final lOther$areaAllowExport = other.areaAllowExport;
+    if (l$areaAllowExport != lOther$areaAllowExport) {
+      return false;
+    }
     final l$areaAllowEdit = areaAllowEdit;
     final lOther$areaAllowEdit = other.areaAllowEdit;
     if (l$areaAllowEdit != lOther$areaAllowEdit) {
@@ -2411,6 +2443,11 @@ class Fragment_UserDetails_adminOn implements Fragment_UserAdminOn_adminOn {
     final l$serviceGender = serviceGender;
     final lOther$serviceGender = other.serviceGender;
     if (l$serviceGender != lOther$serviceGender) {
+      return false;
+    }
+    final l$serviceAllowExport = serviceAllowExport;
+    final lOther$serviceAllowExport = other.serviceAllowExport;
+    if (l$serviceAllowExport != lOther$serviceAllowExport) {
       return false;
     }
     final l$serviceAllowEdit = serviceAllowEdit;
@@ -2444,6 +2481,11 @@ class Fragment_UserDetails_adminOn implements Fragment_UserAdminOn_adminOn {
     final l$group = group;
     final lOther$group = other.group;
     if (l$group != lOther$group) {
+      return false;
+    }
+    final l$groupAllowExport = groupAllowExport;
+    final lOther$groupAllowExport = other.groupAllowExport;
+    if (l$groupAllowExport != lOther$groupAllowExport) {
       return false;
     }
     final l$groupAllowEdit = groupAllowEdit;
@@ -2488,16 +2530,19 @@ abstract class CopyWith_Fragment_UserDetails_adminOn<TRes> {
   TRes call({
     UuidValue? permissionId,
     Fragment_Area? area,
+    bool? areaAllowExport,
     bool? areaAllowEdit,
     bool? areaAdminOnUsers,
     Fragment_UserDetails_adminOn_service? service,
     Fragment_UserDetails_adminOn_serviceStudyYearData? serviceStudyYearData,
     bool? serviceGender,
+    bool? serviceAllowExport,
     bool? serviceAllowEdit,
     bool? serviceAdminOnUsers,
     bool? serviceWriteRelatedFamilies,
     List<Fragment_Class>? classes,
     Fragment_Group? group,
+    bool? groupAllowExport,
     bool? groupAllowEdit,
     bool? groupAdminOnUsers,
     bool? groupWriteRelatedFamilies,
@@ -2529,16 +2574,19 @@ class _CopyWithImpl_Fragment_UserDetails_adminOn<TRes>
   TRes call({
     Object? permissionId = _undefined,
     Object? area = _undefined,
+    Object? areaAllowExport = _undefined,
     Object? areaAllowEdit = _undefined,
     Object? areaAdminOnUsers = _undefined,
     Object? service = _undefined,
     Object? serviceStudyYearData = _undefined,
     Object? serviceGender = _undefined,
+    Object? serviceAllowExport = _undefined,
     Object? serviceAllowEdit = _undefined,
     Object? serviceAdminOnUsers = _undefined,
     Object? serviceWriteRelatedFamilies = _undefined,
     Object? classes = _undefined,
     Object? group = _undefined,
+    Object? groupAllowExport = _undefined,
     Object? groupAllowEdit = _undefined,
     Object? groupAdminOnUsers = _undefined,
     Object? groupWriteRelatedFamilies = _undefined,
@@ -2549,6 +2597,9 @@ class _CopyWithImpl_Fragment_UserDetails_adminOn<TRes>
           ? _instance.permissionId
           : (permissionId as UuidValue),
       area: area == _undefined ? _instance.area : (area as Fragment_Area?),
+      areaAllowExport: areaAllowExport == _undefined
+          ? _instance.areaAllowExport
+          : (areaAllowExport as bool?),
       areaAllowEdit: areaAllowEdit == _undefined
           ? _instance.areaAllowEdit
           : (areaAllowEdit as bool?),
@@ -2565,6 +2616,9 @@ class _CopyWithImpl_Fragment_UserDetails_adminOn<TRes>
       serviceGender: serviceGender == _undefined
           ? _instance.serviceGender
           : (serviceGender as bool?),
+      serviceAllowExport: serviceAllowExport == _undefined
+          ? _instance.serviceAllowExport
+          : (serviceAllowExport as bool?),
       serviceAllowEdit: serviceAllowEdit == _undefined
           ? _instance.serviceAllowEdit
           : (serviceAllowEdit as bool?),
@@ -2580,6 +2634,9 @@ class _CopyWithImpl_Fragment_UserDetails_adminOn<TRes>
           ? _instance.classes
           : (classes as List<Fragment_Class>),
       group: group == _undefined ? _instance.group : (group as Fragment_Group?),
+      groupAllowExport: groupAllowExport == _undefined
+          ? _instance.groupAllowExport
+          : (groupAllowExport as bool?),
       groupAllowEdit: groupAllowEdit == _undefined
           ? _instance.groupAllowEdit
           : (groupAllowEdit as bool?),
@@ -2655,16 +2712,19 @@ class _CopyWithStubImpl_Fragment_UserDetails_adminOn<TRes>
   call({
     UuidValue? permissionId,
     Fragment_Area? area,
+    bool? areaAllowExport,
     bool? areaAllowEdit,
     bool? areaAdminOnUsers,
     Fragment_UserDetails_adminOn_service? service,
     Fragment_UserDetails_adminOn_serviceStudyYearData? serviceStudyYearData,
     bool? serviceGender,
+    bool? serviceAllowExport,
     bool? serviceAllowEdit,
     bool? serviceAdminOnUsers,
     bool? serviceWriteRelatedFamilies,
     List<Fragment_Class>? classes,
     Fragment_Group? group,
+    bool? groupAllowExport,
     bool? groupAllowEdit,
     bool? groupAdminOnUsers,
     bool? groupWriteRelatedFamilies,
@@ -4041,6 +4101,13 @@ const fragmentDefinitionUserAdminOn = FragmentDefinitionNode(
               ),
             ),
             FieldNode(
+              name: NameNode(value: 'areaAllowExport'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
               name: NameNode(value: 'areaAllowEdit'),
               alias: null,
               arguments: [],
@@ -4176,6 +4243,13 @@ const fragmentDefinitionUserAdminOn = FragmentDefinitionNode(
               selectionSet: null,
             ),
             FieldNode(
+              name: NameNode(value: 'serviceAllowExport'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
               name: NameNode(value: 'serviceAllowEdit'),
               alias: null,
               arguments: [],
@@ -4251,6 +4325,13 @@ const fragmentDefinitionUserAdminOn = FragmentDefinitionNode(
               ),
             ),
             FieldNode(
+              name: NameNode(value: 'groupAllowExport'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
               name: NameNode(value: 'groupAllowEdit'),
               alias: null,
               arguments: [],
@@ -4309,16 +4390,19 @@ class Fragment_UserAdminOn_adminOn {
   Fragment_UserAdminOn_adminOn({
     required this.permissionId,
     this.area,
+    this.areaAllowExport,
     this.areaAllowEdit,
     this.areaAdminOnUsers,
     this.service,
     this.serviceStudyYearData,
     this.serviceGender,
+    this.serviceAllowExport,
     this.serviceAllowEdit,
     this.serviceAdminOnUsers,
     required this.serviceWriteRelatedFamilies,
     required this.classes,
     this.group,
+    this.groupAllowExport,
     this.groupAllowEdit,
     this.groupAdminOnUsers,
     required this.groupWriteRelatedFamilies,
@@ -4328,16 +4412,19 @@ class Fragment_UserAdminOn_adminOn {
   factory Fragment_UserAdminOn_adminOn.fromJson(Map<String, dynamic> json) {
     final l$permissionId = json['permissionId'];
     final l$area = json['area'];
+    final l$areaAllowExport = json['areaAllowExport'];
     final l$areaAllowEdit = json['areaAllowEdit'];
     final l$areaAdminOnUsers = json['areaAdminOnUsers'];
     final l$service = json['service'];
     final l$serviceStudyYearData = json['serviceStudyYearData'];
     final l$serviceGender = json['serviceGender'];
+    final l$serviceAllowExport = json['serviceAllowExport'];
     final l$serviceAllowEdit = json['serviceAllowEdit'];
     final l$serviceAdminOnUsers = json['serviceAdminOnUsers'];
     final l$serviceWriteRelatedFamilies = json['serviceWriteRelatedFamilies'];
     final l$classes = json['classes'];
     final l$group = json['group'];
+    final l$groupAllowExport = json['groupAllowExport'];
     final l$groupAllowEdit = json['groupAllowEdit'];
     final l$groupAdminOnUsers = json['groupAdminOnUsers'];
     final l$groupWriteRelatedFamilies = json['groupWriteRelatedFamilies'];
@@ -4347,6 +4434,7 @@ class Fragment_UserAdminOn_adminOn {
       area: l$area == null
           ? null
           : Fragment_Area.fromJson((l$area as Map<String, dynamic>)),
+      areaAllowExport: (l$areaAllowExport as bool?),
       areaAllowEdit: (l$areaAllowEdit as bool?),
       areaAdminOnUsers: (l$areaAdminOnUsers as bool?),
       service: l$service == null
@@ -4360,6 +4448,7 @@ class Fragment_UserAdminOn_adminOn {
               (l$serviceStudyYearData as Map<String, dynamic>),
             ),
       serviceGender: (l$serviceGender as bool?),
+      serviceAllowExport: (l$serviceAllowExport as bool?),
       serviceAllowEdit: (l$serviceAllowEdit as bool?),
       serviceAdminOnUsers: (l$serviceAdminOnUsers as bool?),
       serviceWriteRelatedFamilies: (l$serviceWriteRelatedFamilies as bool),
@@ -4369,6 +4458,7 @@ class Fragment_UserAdminOn_adminOn {
       group: l$group == null
           ? null
           : Fragment_Group.fromJson((l$group as Map<String, dynamic>)),
+      groupAllowExport: (l$groupAllowExport as bool?),
       groupAllowEdit: (l$groupAllowEdit as bool?),
       groupAdminOnUsers: (l$groupAdminOnUsers as bool?),
       groupWriteRelatedFamilies: (l$groupWriteRelatedFamilies as bool),
@@ -4380,6 +4470,8 @@ class Fragment_UserAdminOn_adminOn {
 
   final Fragment_Area? area;
 
+  final bool? areaAllowExport;
+
   final bool? areaAllowEdit;
 
   final bool? areaAdminOnUsers;
@@ -4390,6 +4482,8 @@ class Fragment_UserAdminOn_adminOn {
 
   final bool? serviceGender;
 
+  final bool? serviceAllowExport;
+
   final bool? serviceAllowEdit;
 
   final bool? serviceAdminOnUsers;
@@ -4399,6 +4493,8 @@ class Fragment_UserAdminOn_adminOn {
   final List<Fragment_Class> classes;
 
   final Fragment_Group? group;
+
+  final bool? groupAllowExport;
 
   final bool? groupAllowEdit;
 
@@ -4414,6 +4510,8 @@ class Fragment_UserAdminOn_adminOn {
     _resultData['permissionId'] = uuidToString(l$permissionId);
     final l$area = area;
     _resultData['area'] = l$area?.toJson();
+    final l$areaAllowExport = areaAllowExport;
+    _resultData['areaAllowExport'] = l$areaAllowExport;
     final l$areaAllowEdit = areaAllowEdit;
     _resultData['areaAllowEdit'] = l$areaAllowEdit;
     final l$areaAdminOnUsers = areaAdminOnUsers;
@@ -4424,6 +4522,8 @@ class Fragment_UserAdminOn_adminOn {
     _resultData['serviceStudyYearData'] = l$serviceStudyYearData?.toJson();
     final l$serviceGender = serviceGender;
     _resultData['serviceGender'] = l$serviceGender;
+    final l$serviceAllowExport = serviceAllowExport;
+    _resultData['serviceAllowExport'] = l$serviceAllowExport;
     final l$serviceAllowEdit = serviceAllowEdit;
     _resultData['serviceAllowEdit'] = l$serviceAllowEdit;
     final l$serviceAdminOnUsers = serviceAdminOnUsers;
@@ -4434,6 +4534,8 @@ class Fragment_UserAdminOn_adminOn {
     _resultData['classes'] = l$classes.map((e) => e.toJson()).toList();
     final l$group = group;
     _resultData['group'] = l$group?.toJson();
+    final l$groupAllowExport = groupAllowExport;
+    _resultData['groupAllowExport'] = l$groupAllowExport;
     final l$groupAllowEdit = groupAllowEdit;
     _resultData['groupAllowEdit'] = l$groupAllowEdit;
     final l$groupAdminOnUsers = groupAdminOnUsers;
@@ -4449,16 +4551,19 @@ class Fragment_UserAdminOn_adminOn {
   int get hashCode {
     final l$permissionId = permissionId;
     final l$area = area;
+    final l$areaAllowExport = areaAllowExport;
     final l$areaAllowEdit = areaAllowEdit;
     final l$areaAdminOnUsers = areaAdminOnUsers;
     final l$service = service;
     final l$serviceStudyYearData = serviceStudyYearData;
     final l$serviceGender = serviceGender;
+    final l$serviceAllowExport = serviceAllowExport;
     final l$serviceAllowEdit = serviceAllowEdit;
     final l$serviceAdminOnUsers = serviceAdminOnUsers;
     final l$serviceWriteRelatedFamilies = serviceWriteRelatedFamilies;
     final l$classes = classes;
     final l$group = group;
+    final l$groupAllowExport = groupAllowExport;
     final l$groupAllowEdit = groupAllowEdit;
     final l$groupAdminOnUsers = groupAdminOnUsers;
     final l$groupWriteRelatedFamilies = groupWriteRelatedFamilies;
@@ -4466,16 +4571,19 @@ class Fragment_UserAdminOn_adminOn {
     return Object.hashAll([
       l$permissionId,
       l$area,
+      l$areaAllowExport,
       l$areaAllowEdit,
       l$areaAdminOnUsers,
       l$service,
       l$serviceStudyYearData,
       l$serviceGender,
+      l$serviceAllowExport,
       l$serviceAllowEdit,
       l$serviceAdminOnUsers,
       l$serviceWriteRelatedFamilies,
       Object.hashAll(l$classes.map((v) => v)),
       l$group,
+      l$groupAllowExport,
       l$groupAllowEdit,
       l$groupAdminOnUsers,
       l$groupWriteRelatedFamilies,
@@ -4502,6 +4610,11 @@ class Fragment_UserAdminOn_adminOn {
     if (l$area != lOther$area) {
       return false;
     }
+    final l$areaAllowExport = areaAllowExport;
+    final lOther$areaAllowExport = other.areaAllowExport;
+    if (l$areaAllowExport != lOther$areaAllowExport) {
+      return false;
+    }
     final l$areaAllowEdit = areaAllowEdit;
     final lOther$areaAllowEdit = other.areaAllowEdit;
     if (l$areaAllowEdit != lOther$areaAllowEdit) {
@@ -4525,6 +4638,11 @@ class Fragment_UserAdminOn_adminOn {
     final l$serviceGender = serviceGender;
     final lOther$serviceGender = other.serviceGender;
     if (l$serviceGender != lOther$serviceGender) {
+      return false;
+    }
+    final l$serviceAllowExport = serviceAllowExport;
+    final lOther$serviceAllowExport = other.serviceAllowExport;
+    if (l$serviceAllowExport != lOther$serviceAllowExport) {
       return false;
     }
     final l$serviceAllowEdit = serviceAllowEdit;
@@ -4558,6 +4676,11 @@ class Fragment_UserAdminOn_adminOn {
     final l$group = group;
     final lOther$group = other.group;
     if (l$group != lOther$group) {
+      return false;
+    }
+    final l$groupAllowExport = groupAllowExport;
+    final lOther$groupAllowExport = other.groupAllowExport;
+    if (l$groupAllowExport != lOther$groupAllowExport) {
       return false;
     }
     final l$groupAllowEdit = groupAllowEdit;
@@ -4602,16 +4725,19 @@ abstract class CopyWith_Fragment_UserAdminOn_adminOn<TRes> {
   TRes call({
     UuidValue? permissionId,
     Fragment_Area? area,
+    bool? areaAllowExport,
     bool? areaAllowEdit,
     bool? areaAdminOnUsers,
     Fragment_UserAdminOn_adminOn_service? service,
     Fragment_UserAdminOn_adminOn_serviceStudyYearData? serviceStudyYearData,
     bool? serviceGender,
+    bool? serviceAllowExport,
     bool? serviceAllowEdit,
     bool? serviceAdminOnUsers,
     bool? serviceWriteRelatedFamilies,
     List<Fragment_Class>? classes,
     Fragment_Group? group,
+    bool? groupAllowExport,
     bool? groupAllowEdit,
     bool? groupAdminOnUsers,
     bool? groupWriteRelatedFamilies,
@@ -4643,16 +4769,19 @@ class _CopyWithImpl_Fragment_UserAdminOn_adminOn<TRes>
   TRes call({
     Object? permissionId = _undefined,
     Object? area = _undefined,
+    Object? areaAllowExport = _undefined,
     Object? areaAllowEdit = _undefined,
     Object? areaAdminOnUsers = _undefined,
     Object? service = _undefined,
     Object? serviceStudyYearData = _undefined,
     Object? serviceGender = _undefined,
+    Object? serviceAllowExport = _undefined,
     Object? serviceAllowEdit = _undefined,
     Object? serviceAdminOnUsers = _undefined,
     Object? serviceWriteRelatedFamilies = _undefined,
     Object? classes = _undefined,
     Object? group = _undefined,
+    Object? groupAllowExport = _undefined,
     Object? groupAllowEdit = _undefined,
     Object? groupAdminOnUsers = _undefined,
     Object? groupWriteRelatedFamilies = _undefined,
@@ -4663,6 +4792,9 @@ class _CopyWithImpl_Fragment_UserAdminOn_adminOn<TRes>
           ? _instance.permissionId
           : (permissionId as UuidValue),
       area: area == _undefined ? _instance.area : (area as Fragment_Area?),
+      areaAllowExport: areaAllowExport == _undefined
+          ? _instance.areaAllowExport
+          : (areaAllowExport as bool?),
       areaAllowEdit: areaAllowEdit == _undefined
           ? _instance.areaAllowEdit
           : (areaAllowEdit as bool?),
@@ -4679,6 +4811,9 @@ class _CopyWithImpl_Fragment_UserAdminOn_adminOn<TRes>
       serviceGender: serviceGender == _undefined
           ? _instance.serviceGender
           : (serviceGender as bool?),
+      serviceAllowExport: serviceAllowExport == _undefined
+          ? _instance.serviceAllowExport
+          : (serviceAllowExport as bool?),
       serviceAllowEdit: serviceAllowEdit == _undefined
           ? _instance.serviceAllowEdit
           : (serviceAllowEdit as bool?),
@@ -4694,6 +4829,9 @@ class _CopyWithImpl_Fragment_UserAdminOn_adminOn<TRes>
           ? _instance.classes
           : (classes as List<Fragment_Class>),
       group: group == _undefined ? _instance.group : (group as Fragment_Group?),
+      groupAllowExport: groupAllowExport == _undefined
+          ? _instance.groupAllowExport
+          : (groupAllowExport as bool?),
       groupAllowEdit: groupAllowEdit == _undefined
           ? _instance.groupAllowEdit
           : (groupAllowEdit as bool?),
@@ -4769,16 +4907,19 @@ class _CopyWithStubImpl_Fragment_UserAdminOn_adminOn<TRes>
   call({
     UuidValue? permissionId,
     Fragment_Area? area,
+    bool? areaAllowExport,
     bool? areaAllowEdit,
     bool? areaAdminOnUsers,
     Fragment_UserAdminOn_adminOn_service? service,
     Fragment_UserAdminOn_adminOn_serviceStudyYearData? serviceStudyYearData,
     bool? serviceGender,
+    bool? serviceAllowExport,
     bool? serviceAllowEdit,
     bool? serviceAdminOnUsers,
     bool? serviceWriteRelatedFamilies,
     List<Fragment_Class>? classes,
     Fragment_Group? group,
+    bool? groupAllowExport,
     bool? groupAllowEdit,
     bool? groupAdminOnUsers,
     bool? groupWriteRelatedFamilies,

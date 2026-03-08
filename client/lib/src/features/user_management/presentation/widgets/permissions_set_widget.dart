@@ -37,6 +37,14 @@ class PermissionsSetWidget extends StatelessWidget {
                 'السماح بتعديل جميع بيانات التطبيق',
               ),
             ),
+          if (permissions.exportAllData)
+            ListTile(
+              leading: Icon(UserPermission.exportAllData.icon),
+              title: Text(UserPermission.exportAllData.label),
+              subtitle: const Text(
+                'السماح بتصدير جميع البيانات',
+              ),
+            ),
           if (permissions.readAllData)
             ListTile(
               leading: Icon(UserPermission.readAllData.icon),
@@ -47,11 +55,11 @@ class PermissionsSetWidget extends StatelessWidget {
             ),
           if ((permissions.manageAllUsers ||
                   permissions.readAllData ||
-                  permissions.writeAllData) &&
+                  permissions.writeAllData ||
+                  permissions.exportAllData) &&
               (permissions.recordHistory ||
                   permissions.changeOldHistory ||
-                  permissions.recoverDeleted ||
-                  permissions.exportData))
+                  permissions.recoverDeleted))
             const Divider(),
           if (permissions.recordHistory)
             ListTile(
@@ -83,14 +91,6 @@ class PermissionsSetWidget extends StatelessWidget {
               title: Text(UserPermission.recoverDeleted.label),
               subtitle: const Text(
                 'السماح باسترجاع البيانات المحذوفة',
-              ),
-            ),
-          if (permissions.exportData)
-            ListTile(
-              leading: Icon(UserPermission.exportData.icon),
-              title: Text(UserPermission.exportData.label),
-              subtitle: const Text(
-                'السماح بتصدير البيانات',
               ),
             ),
         ],

@@ -120,7 +120,8 @@ END {
 }
 ' "$BACKUP_FILE"
 
+rm "$BACKUP_FILE"
 dart format "$OUTPUT_DIR"
 
-echo "Schema split complete. Original file backed up at $BACKUP_FILE" 
+echo "Schema split complete"
 

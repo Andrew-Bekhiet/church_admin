@@ -145,6 +145,20 @@ class EditUserAdminScopeWidget extends StatelessWidget {
               ),
             ),
           ),
+          CheckboxListTile(
+            dense: true,
+            secondary: Icon(UserPermission.exportAllData.icon),
+            title: const Text('تصدير البيانات'),
+            subtitle: Text(
+              'السماح بتصدير جميع البيانات داخل ال$objectLabel',
+            ),
+            value: userAdminScope.canExportData,
+            onChanged: (value) => onChanged(
+              userAdminScope.copyWith(
+                canExportData: value,
+              ),
+            ),
+          ),
           if (userAdminScope.object is Service ||
               userAdminScope.object is Group)
             CheckboxListTile(

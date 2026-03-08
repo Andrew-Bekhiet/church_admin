@@ -33,8 +33,10 @@ class UserPermissionsUpdateHelper {
   }
 
   bool get hasChanges =>
-      _adminOnDiff.added.isNotEmpty || _adminOnDiff.removed.isNotEmpty
-      || _permissionsDiff.added.isNotEmpty || _permissionsDiff.removed.isNotEmpty;
+      _adminOnDiff.added.isNotEmpty ||
+      _adminOnDiff.removed.isNotEmpty ||
+      _permissionsDiff.added.isNotEmpty ||
+      _permissionsDiff.removed.isNotEmpty;
 
   bool get _deleteAdminOn => _adminOnDiff.removed.isNotEmpty;
   bool get _insertAdminOn => _adminOnDiff.added.isNotEmpty;
@@ -52,15 +54,18 @@ class UserPermissionsUpdateHelper {
       uid: userId.toUuid(),
       adminOnArea: data.area?.id.toUuid(),
       areaAllowEdit: data.areaAllowEdit,
+      areaAllowExport: data.areaAllowExport,
       areaAdminOnUsers: data.areaAdminOnUsers,
       adminOnService: data.service?.id.toUuid(),
       serviceStudyYear: data.serviceStudyYearData?.order,
       serviceGender: data.serviceGender,
       serviceAllowEdit: data.serviceAllowEdit,
+      serviceAllowExport: data.serviceAllowExport,
       serviceAdminOnUsers: data.serviceAdminOnUsers,
       serviceWriteRelatedFamilies: data.serviceWriteRelatedFamilies,
       adminOnGroup: data.group?.id.toUuid(),
       groupAllowEdit: data.groupAllowEdit,
+      groupAllowExport: data.groupAllowExport,
       groupAdminOnUsers: data.groupAdminOnUsers,
       groupWriteRelatedFamilies: data.groupWriteRelatedFamilies,
     );

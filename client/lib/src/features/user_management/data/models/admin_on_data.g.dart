@@ -24,6 +24,19 @@ class AdminOnDataFields {
     },
   );
 
+  final FieldMetadata<bool> areaAllowExport = FieldMetadata<bool>(
+    getValue: (obj) => obj is AdminOnData ? obj.areaAllowExport : null,
+    parentType: AdminOnData,
+    name: 'areaAllowExport',
+    label: 'يمكنه تصدير بيانات المنطقة',
+    isCodeOnly: false,
+    operators: {
+      ...BooleanOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull,
+    },
+  );
+
   final FieldMetadata<bool> areaAllowEdit = FieldMetadata<bool>(
     getValue: (obj) => obj is AdminOnData ? obj.areaAllowEdit : null,
     parentType: AdminOnData,
@@ -82,6 +95,19 @@ class AdminOnDataFields {
     parentType: AdminOnData,
     name: 'serviceGender',
     label: 'نوع المخدومين المسؤول عنهم',
+    isCodeOnly: false,
+    operators: {
+      ...BooleanOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull,
+    },
+  );
+
+  final FieldMetadata<bool> serviceAllowExport = FieldMetadata<bool>(
+    getValue: (obj) => obj is AdminOnData ? obj.serviceAllowExport : null,
+    parentType: AdminOnData,
+    name: 'serviceAllowExport',
+    label: 'يمكنه تصدير بيانات الخدمة',
     isCodeOnly: false,
     operators: {
       ...BooleanOperator.values,
@@ -153,6 +179,19 @@ class AdminOnDataFields {
     },
   );
 
+  final FieldMetadata<bool> groupAllowExport = FieldMetadata<bool>(
+    getValue: (obj) => obj is AdminOnData ? obj.groupAllowExport : null,
+    parentType: AdminOnData,
+    name: 'groupAllowExport',
+    label: 'يمكنه تصدير بيانات المجموعة',
+    isCodeOnly: false,
+    operators: {
+      ...BooleanOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull,
+    },
+  );
+
   final FieldMetadata<bool> groupAllowEdit = FieldMetadata<bool>(
     getValue: (obj) => obj is AdminOnData ? obj.groupAllowEdit : null,
     parentType: AdminOnData,
@@ -208,16 +247,19 @@ class AdminOnDataFields {
 
   late final List<FieldMetadata<Object>> allFields = [
     area,
+    areaAllowExport,
     areaAllowEdit,
     areaAdminOnUsers,
     service,
     serviceStudyYearData,
     serviceGender,
+    serviceAllowExport,
     serviceAllowEdit,
     serviceAdminOnUsers,
     serviceWriteRelatedFamilies,
     classes,
     group,
+    groupAllowExport,
     groupAllowEdit,
     groupAdminOnUsers,
     groupWriteRelatedFamilies,
@@ -225,16 +267,19 @@ class AdminOnDataFields {
   ];
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'area': area,
+    'areaAllowExport': areaAllowExport,
     'areaAllowEdit': areaAllowEdit,
     'areaAdminOnUsers': areaAdminOnUsers,
     'service': service,
     'serviceStudyYearData': serviceStudyYearData,
     'serviceGender': serviceGender,
+    'serviceAllowExport': serviceAllowExport,
     'serviceAllowEdit': serviceAllowEdit,
     'serviceAdminOnUsers': serviceAdminOnUsers,
     'serviceWriteRelatedFamilies': serviceWriteRelatedFamilies,
     'classes': classes,
     'group': group,
+    'groupAllowExport': groupAllowExport,
     'groupAllowEdit': groupAllowEdit,
     'groupAdminOnUsers': groupAdminOnUsers,
     'groupWriteRelatedFamilies': groupWriteRelatedFamilies,
@@ -251,6 +296,7 @@ AdminOnData _$AdminOnDataFromJson(Map json) => AdminOnData(
   area: json['area'] == null
       ? null
       : Area.fromJson(Map<String, Object?>.from(json['area'] as Map)),
+  areaAllowExport: json['areaAllowExport'] as bool?,
   areaAllowEdit: json['areaAllowEdit'] as bool?,
   areaAdminOnUsers: json['areaAdminOnUsers'] as bool?,
   service: json['service'] == null
@@ -262,6 +308,7 @@ AdminOnData _$AdminOnDataFromJson(Map json) => AdminOnData(
           Map<String, Object?>.from(json['serviceStudyYearData'] as Map),
         ),
   serviceGender: json['serviceGender'] as bool?,
+  serviceAllowExport: json['serviceAllowExport'] as bool?,
   serviceAllowEdit: json['serviceAllowEdit'] as bool?,
   serviceAdminOnUsers: json['serviceAdminOnUsers'] as bool?,
   serviceWriteRelatedFamilies: json['serviceWriteRelatedFamilies'] as bool?,
@@ -273,6 +320,7 @@ AdminOnData _$AdminOnDataFromJson(Map json) => AdminOnData(
   group: json['group'] == null
       ? null
       : Group.fromJson(Map<String, Object?>.from(json['group'] as Map)),
+  groupAllowExport: json['groupAllowExport'] as bool?,
   groupAllowEdit: json['groupAllowEdit'] as bool?,
   groupAdminOnUsers: json['groupAdminOnUsers'] as bool?,
   groupWriteRelatedFamilies: json['groupWriteRelatedFamilies'] as bool?,
@@ -285,16 +333,19 @@ Map<String, dynamic> _$AdminOnDataToJson(AdminOnData instance) =>
     <String, dynamic>{
       'permissionId': instance.permissionId,
       'area': instance.area?.toJson(),
+      'areaAllowExport': instance.areaAllowExport,
       'areaAllowEdit': instance.areaAllowEdit,
       'areaAdminOnUsers': instance.areaAdminOnUsers,
       'service': instance.service?.toJson(),
       'serviceStudyYearData': instance.serviceStudyYearData?.toJson(),
       'serviceGender': instance.serviceGender,
+      'serviceAllowExport': instance.serviceAllowExport,
       'serviceAllowEdit': instance.serviceAllowEdit,
       'serviceAdminOnUsers': instance.serviceAdminOnUsers,
       'serviceWriteRelatedFamilies': instance.serviceWriteRelatedFamilies,
       'classes': instance.classes.map((e) => e.toJson()).toList(),
       'group': instance.group?.toJson(),
+      'groupAllowExport': instance.groupAllowExport,
       'groupAllowEdit': instance.groupAllowEdit,
       'groupAdminOnUsers': instance.groupAdminOnUsers,
       'groupWriteRelatedFamilies': instance.groupWriteRelatedFamilies,

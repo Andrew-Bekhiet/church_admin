@@ -37,6 +37,14 @@ class AdminOnDataIndicator extends StatelessWidget {
             message: 'تعديل البيانات',
             child: Icon(UserPermission.writeAllData.icon),
           ),
+        if (adminOnData.serviceAllowExport ??
+            adminOnData.groupAllowExport ??
+            adminOnData.areaAllowExport ??
+            false)
+          Tooltip(
+            message: 'تصدير البيانات',
+            child: Icon(UserPermission.exportAllData.icon),
+          ),
         Tooltip(
           message: 'رؤية البيانات',
           child: Icon(UserPermission.readAllData.icon),
