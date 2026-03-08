@@ -14,33 +14,29 @@ class AdminOnDataIndicator extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        if (adminOnData.serviceAdminOnUsers ??
-            adminOnData.groupAdminOnUsers ??
-            adminOnData.areaAdminOnUsers ??
-            false)
+        if ((adminOnData.serviceAdminOnUsers ?? false) ||
+            (adminOnData.groupAdminOnUsers ?? false) ||
+            (adminOnData.areaAdminOnUsers ?? false))
           Tooltip(
             message: 'ادارة وتعديل المستخدمين',
             child: Icon(UserPermission.manageAllUsers.icon),
           ),
-        if (adminOnData.serviceWriteRelatedFamilies ??
-            adminOnData.groupWriteRelatedFamilies ??
-            false)
+        if ((adminOnData.serviceWriteRelatedFamilies ?? false) ||
+            (adminOnData.groupWriteRelatedFamilies ?? false))
           Tooltip(
             message: 'تعديل عائلات المخدومين',
             child: Icon(ViewableObjectService.I.getDefaultIconFor<Family>()),
           ),
-        if (adminOnData.serviceAllowEdit ??
-            adminOnData.groupAllowEdit ??
-            adminOnData.areaAllowEdit ??
-            false)
+        if ((adminOnData.serviceAllowEdit ?? false) ||
+            (adminOnData.groupAllowEdit ?? false) ||
+            (adminOnData.areaAllowEdit ?? false))
           Tooltip(
             message: 'تعديل البيانات',
             child: Icon(UserPermission.writeAllData.icon),
           ),
-        if (adminOnData.serviceAllowExport ??
-            adminOnData.groupAllowExport ??
-            adminOnData.areaAllowExport ??
-            false)
+        if ((adminOnData.serviceAllowExport ?? false) ||
+            (adminOnData.groupAllowExport ?? false) ||
+            (adminOnData.areaAllowExport ?? false))
           Tooltip(
             message: 'تصدير البيانات',
             child: Icon(UserPermission.exportAllData.icon),
