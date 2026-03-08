@@ -16,19 +16,19 @@ export interface ExportSelectionIds {
   groupsIds: string[];
 }
 
-function combineWhereParts(parts: Where[]): Where {
-  if (parts.length === 0) return {};
+function combineWhereParts(parts: Where[]): Where | null {
+  if (parts.length === 0) return null;
   if (parts.length === 1) return parts[0]!;
   return { _or: parts };
 }
 
 export function buildExportVariables(selection: ExportSelectionIds) {
   const { areasIds, servicesIds, classesIds, groupsIds } = selection;
-  const hasAnySelection =
-    areasIds.length > 0 ||
-    servicesIds.length > 0 ||
-    classesIds.length > 0 ||
-    groupsIds.length > 0;
+  const hasAreas = areasIds.length > 0;
+  const hasServices = servicesIds.length > 0;
+  const hasClasses = classesIds.length > 0;
+  const hasGroups = groupsIds.length > 0;
+  const hasAnySelection = hasAreas || hasServices || hasClasses || hasGroups;
 
   const personsWhere = buildPersonsWhere(selection);
   const familiesWhere = buildFamiliesWhere(selection);
@@ -48,17 +48,17 @@ export function buildExportVariables(selection: ExportSelectionIds) {
     familiesWhere,
     storesWhere,
     streetsWhere,
-    includeFamilies: hasAnySelection,
-    includeStores: hasAnySelection,
-    includeStreets: hasAnySelection,
-    includeAreas: hasAnySelection,
-    includeClasses: hasAnySelection,
-    includeGroups: hasAnySelection,
-    includeServices: hasAnySelection,
+    includeFamilies: familiesWhere && (hasAreas || hasServices || hasClasses),
+    includeStores: storesWhere && hasAreas,
+    includeStreets: streetsWhere && hasAnySelection,
+    includeAreas: areasWhere && hasAnySelection,
+    includeClasses: classesWhere && hasAnySelection,
+    includeGroups: groupsWhere && (hasGroups || hasServices || hasClasses),
+    includeServices: servicesWhere && hasAnySelection,
   };
 }
 
-function buildPersonsWhere(params: ExportSelectionIds): Where {
+function buildPersonsWhere(params: ExportSelectionIds): Where | null {
   const parts: Where[] = [];
   if (params.areasIds.length > 0) {
     parts.push({ address: { area: { id: { _in: params.areasIds } } } });
@@ -75,16 +75,20 @@ function buildPersonsWhere(params: ExportSelectionIds): Where {
   return combineWhereParts(parts);
 }
 
-function buildFamiliesWhere(params: ExportSelectionIds): Where {
+function buildFamiliesWhere(params: ExportSelectionIds): Where | null {
   const parts: Where[] = [];
   if (params.areasIds.length > 0) {
     parts.push({ address: { area: { id: { _in: params.areasIds } } } });
   }
   if (params.servicesIds.length > 0) {
-    parts.push({ persons: { services: { serviceId: { _in: params.servicesIds } } } });
+    parts.push({
+      persons: { services: { serviceId: { _in: params.servicesIds } } },
+    });
   }
   if (params.classesIds.length > 0) {
-    parts.push({ persons: { classes: { classId: { _in: params.classesIds } } } });
+    parts.push({
+      persons: { classes: { classId: { _in: params.classesIds } } },
+    });
   }
   if (params.groupsIds.length > 0) {
     parts.push({ persons: { groups: { groupId: { _in: params.groupsIds } } } });
@@ -108,19 +112,29 @@ function streetWhereViaPersons(personsWhere: Where): Where {
   };
 }
 
-function buildStreetsWhere(params: ExportSelectionIds): Where {
+function buildStreetsWhere(params: ExportSelectionIds): Where | null {
   const parts: Where[] = [];
   if (params.areasIds.length > 0) {
     parts.push({ areas: { areaId: { _in: params.areasIds } } });
   }
   if (params.servicesIds.length > 0) {
-    parts.push(streetWhereViaPersons({ services: { serviceId: { _in: params.servicesIds } } }));
+    parts.push(
+      streetWhereViaPersons({
+        services: { serviceId: { _in: params.servicesIds } },
+      }),
+    );
   }
   if (params.classesIds.length > 0) {
-    parts.push(streetWhereViaPersons({ classes: { classId: { _in: params.classesIds } } }));
+    parts.push(
+      streetWhereViaPersons({
+        classes: { classId: { _in: params.classesIds } },
+      }),
+    );
   }
   if (params.groupsIds.length > 0) {
-    parts.push(streetWhereViaPersons({ groups: { groupId: { _in: params.groupsIds } } }));
+    parts.push(
+      streetWhereViaPersons({ groups: { groupId: { _in: params.groupsIds } } }),
+    );
   }
   return combineWhereParts(parts);
 }
@@ -130,28 +144,38 @@ function areaWhereViaPersons(personsWhere: Where): Where {
   return { addresses: { family: { persons: personsWhere } } };
 }
 
-function buildAreasWhere(params: ExportSelectionIds): Where {
+function buildAreasWhere(params: ExportSelectionIds): Where | null {
   const parts: Where[] = [];
   if (params.areasIds.length > 0) {
     parts.push({ id: { _in: params.areasIds } });
   }
   if (params.servicesIds.length > 0) {
-    parts.push(areaWhereViaPersons({ services: { serviceId: { _in: params.servicesIds } } }));
+    parts.push(
+      areaWhereViaPersons({
+        services: { serviceId: { _in: params.servicesIds } },
+      }),
+    );
   }
   if (params.classesIds.length > 0) {
-    parts.push(areaWhereViaPersons({ classes: { classId: { _in: params.classesIds } } }));
+    parts.push(
+      areaWhereViaPersons({ classes: { classId: { _in: params.classesIds } } }),
+    );
   }
   if (params.groupsIds.length > 0) {
-    parts.push(areaWhereViaPersons({ groups: { groupId: { _in: params.groupsIds } } }));
+    parts.push(
+      areaWhereViaPersons({ groups: { groupId: { _in: params.groupsIds } } }),
+    );
   }
   return combineWhereParts(parts);
 }
 
-function buildClassesWhere(params: ExportSelectionIds): Where {
+function buildClassesWhere(params: ExportSelectionIds): Where | null {
   const parts: Where[] = [];
   if (params.areasIds.length > 0) {
     parts.push({
-      persons: { person: { address: { area: { id: { _in: params.areasIds } } } } },
+      persons: {
+        person: { address: { area: { id: { _in: params.areasIds } } } },
+      },
     });
   }
   if (params.servicesIds.length > 0) {
@@ -168,7 +192,7 @@ function buildClassesWhere(params: ExportSelectionIds): Where {
   return combineWhereParts(parts);
 }
 
-function buildGroupsWhere(params: ExportSelectionIds): Where {
+function buildGroupsWhere(params: ExportSelectionIds): Where | null {
   const parts: Where[] = [];
   if (params.servicesIds.length > 0) {
     parts.push({ serviceId: { _in: params.servicesIds } });
@@ -184,11 +208,13 @@ function buildGroupsWhere(params: ExportSelectionIds): Where {
   return combineWhereParts(parts);
 }
 
-function buildServicesWhere(params: ExportSelectionIds): Where {
+function buildServicesWhere(params: ExportSelectionIds): Where | null {
   const parts: Where[] = [];
   if (params.areasIds.length > 0) {
     parts.push({
-      persons: { person: { address: { area: { id: { _in: params.areasIds } } } } },
+      persons: {
+        person: { address: { area: { id: { _in: params.areasIds } } } },
+      },
     });
   }
   if (params.servicesIds.length > 0) {
