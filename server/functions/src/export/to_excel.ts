@@ -123,7 +123,7 @@ function adjustColumnsWidths(
   sheet["!cols"] = Object.keys(firstRow).map((propertyName) => {
     const maxCharWidth = jsonRows.reduce(
       (max, current) =>
-        Math.max(max, (current[propertyName] as string)?.length ?? 0),
+        Math.max(max, String(current[propertyName] ?? "").length),
       propertyName.length,
     );
 
