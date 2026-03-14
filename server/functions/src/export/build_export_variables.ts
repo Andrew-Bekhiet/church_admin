@@ -1,9 +1,12 @@
 /**
- * Builds GraphQL variables for the exportData query according to the plan:
- * - By area: subdata = streets, families, stores, persons; related = classes, services, groups
- * - By service: subdata = classes, groups, persons; related = families, stores, streets, areas
- * - By class: subdata = persons; related = families, stores, streets, areas
- * - By group: subdata = persons; related = families, stores, streets, areas
+ * Builds GraphQL variables for the exportData query.
+ *
+ * Per selection type (when only that type is selected):
+ * - By area: subdata = streets, families, stores, persons; related = classes, services (groups are not included).
+ * - By service: subdata = classes, groups, persons; related = families, streets, areas.
+ * - By class: subdata = persons; related = families, streets, areas, classes, groups, services.
+ * - By group: subdata = persons; related = streets, areas, classes, groups, services (families only if areas, services, or classes also selected).
+ *
  * When multiple selection types are provided, filters are combined with _or (union of scopes).
  */
 
