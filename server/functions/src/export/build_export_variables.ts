@@ -96,8 +96,8 @@ function buildFamiliesWhere(params: ExportSelectionIds): Where | null {
   return combineWhereParts(parts);
 }
 
-function buildStoresWhere(params: ExportSelectionIds): Where {
-  if (params.areasIds.length === 0) return {};
+function buildStoresWhere(params: ExportSelectionIds): Where | null {
+  if (params.areasIds.length === 0) return null;
   return { address: { area: { id: { _in: params.areasIds } } } };
 }
 
