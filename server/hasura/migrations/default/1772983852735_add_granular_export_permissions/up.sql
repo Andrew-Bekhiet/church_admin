@@ -18,6 +18,10 @@ alter table "auth"."users_admin_on" add constraint "users_admin_on_admin_edit_lo
     and (not COALESCE(area_admin_on_users, FALSE) or COALESCE(area_allow_edit, FALSE))
 );
 
+insert into auth.permissions (name)
+values ('exportAllData')
+on conflict (name) do nothing;
+
 update auth.users_permissions
 set permission = 'exportAllData'
 where permission = 'exportData';
