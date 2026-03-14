@@ -6,7 +6,10 @@ export class ViewableRowMapper implements RowMapper {
     const r = row as Viewable;
 
     const hexColor =
-      r.color && typeof r.color === "number"
+      r.color != null &&
+      typeof r.color === "number" &&
+      r.color != 0 &&
+      r.color != 0xff000000
         ? r.color.toString(16).padStart(8, "0")
         : null;
 
