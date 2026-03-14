@@ -2,7 +2,7 @@
   "language": "Dart, GraphQL, TypeScript",
   "guide": [
     {
-      "context": "After implememting a feature",
+      "context": "After implementing a feature",
       "rules": "DO NOT WRITE A SUMMARY OR A README, unless explicitly asked to do so"
     },
     {
@@ -15,7 +15,7 @@
     },
     {
       "context": "Code Quality",
-      "rules": "Orgnaize multiple files into a directory by feature or domain"
+      "rules": "Organize multiple files into a directory by feature or domain"
     },
     {
       "context": "Code Quality",
