@@ -18,6 +18,13 @@ alter table "auth"."users_admin_on" add constraint "users_admin_on_admin_edit_lo
     and (not COALESCE(area_admin_on_users, FALSE) or COALESCE(area_allow_edit, FALSE))
 );
 
+update auth.users_permissions
+set permission = 'exportAllData'
+where permission = 'exportData';
+
+delete from auth.users_permissions
+where permission = 'exportData';
+
 drop view if exists auth.users_permissions_by_entity_id;
 create or replace view auth.users_permissions_by_entity_id (
     uid,

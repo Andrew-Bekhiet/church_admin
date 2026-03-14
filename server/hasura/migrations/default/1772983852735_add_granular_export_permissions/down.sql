@@ -8,6 +8,17 @@ alter table "auth"."users_admin_on" drop column if exists "group_allow_export";
 alter table "auth"."users_admin_on" drop column if exists "service_allow_export";
 alter table "auth"."users_admin_on" drop column if exists "area_allow_export";
 
+insert into auth.permissions (name)
+values ('exportData')
+on conflict do nothing;
+
+update auth.users_permissions
+set permission = 'exportData'
+where permission = 'exportAllData';
+
+delete from auth.permissions
+where name = 'exportAllData';
+
 drop view if exists auth.users_permissions_by_entity_id;
 create or replace view auth.users_permissions_by_entity_id (
     uid,
