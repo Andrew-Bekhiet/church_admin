@@ -51,13 +51,15 @@ export function buildExportVariables(selection: ExportSelectionIds) {
     familiesWhere,
     storesWhere,
     streetsWhere,
-    includeFamilies: familiesWhere && (hasAreas || hasServices || hasClasses),
-    includeStores: storesWhere && hasAreas,
-    includeStreets: streetsWhere && hasAnySelection,
-    includeAreas: areasWhere && hasAnySelection,
-    includeClasses: classesWhere && hasAnySelection,
-    includeGroups: groupsWhere && (hasGroups || hasServices || hasClasses),
-    includeServices: servicesWhere && hasAnySelection,
+    includeFamilies:
+      familiesWhere != null && (hasAreas || hasServices || hasClasses),
+    includeStores: storesWhere != null && hasAreas,
+    includeStreets: streetsWhere != null && hasAnySelection,
+    includeAreas: areasWhere != null && hasAnySelection,
+    includeClasses: classesWhere != null && hasAnySelection,
+    includeGroups:
+      groupsWhere != null && (hasGroups || hasServices || hasClasses),
+    includeServices: servicesWhere != null && hasAnySelection,
   };
 }
 
