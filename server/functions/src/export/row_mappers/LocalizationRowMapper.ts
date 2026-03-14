@@ -20,7 +20,7 @@ export class LocalizationRowMapper implements RowMapper {
 
   private localizeKey(key: string): string {
     if (key.includes(".") && !key.endsWith("id")) {
-      const localizedKeys = key.split(".").map(this.localizeKey);
+      const localizedKeys = key.split(".").map((k) => this.localizeKey(k));
 
       if (key.endsWith(".name")) return localizedKeys.slice(0, -1).join(": ");
 
