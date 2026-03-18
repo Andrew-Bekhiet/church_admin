@@ -1,11 +1,10 @@
 {
   "name": "functions",
   "scripts": {
-    "lint": "eslint --ext .js,.ts .",
+    "lint": "eslint --ext .js,.ts src/",
     "build": "npx tsc && cp src/export/*.graphql lib/export/",
     "build:watch": "npx tsc --watch",
     "serve": "npm run build && firebase emulators:start --only functions",
-    "run:export": "node lib/export/export.js",
     "shell": "npm run build && firebase functions:shell",
     "start": "npm run shell",
     "deploy": "npm run build && firebase deploy --only functions",
