@@ -229,6 +229,7 @@ async function fetchExportData({
     variables,
     operationName: "exportData",
     asUser: hasuraUID,
+    asRole: "user",
   });
 }
 
