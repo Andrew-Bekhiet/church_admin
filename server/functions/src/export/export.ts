@@ -150,20 +150,18 @@ async function authenticateExportRequest({
   const data =
     response.data?.["data"]?.["authUsersPermissionsByEntityId"] ?? [];
 
-  type PermissionRecord = {
-    permissionId: string | null;
-    uid: string;
-    allowEdit: boolean;
+  type PermissionRecordResponse = {
     allowExport: boolean;
     entityId: string | null;
     entityType: string;
-    table: string;
-    hint: string;
   };
   type EntityType = "any" | "area" | "service" | "class" | "group";
 
   const entitiesIdsByType: Record<EntityType, Set<string | null>> = data.reduce(
-    (acc: Record<EntityType, Set<string | null>>, p: PermissionRecord) => {
+    (
+      acc: Record<EntityType, Set<string | null>>,
+      p: PermissionRecordResponse,
+    ) => {
       const entityType = p.entityType as EntityType;
       acc[entityType] ??= new Set<string | null>();
       acc[entityType].add(p.entityId);
