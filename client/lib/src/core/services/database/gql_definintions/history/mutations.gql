@@ -72,3 +72,21 @@ mutation insertFamilyLastVisit(
     }
   }
 }
+
+mutation insertStreetLastVisit(
+  $streetId: uuid!
+  $lastVisit: timestamptz!
+) {
+  insertHistoryVisitHistoryOne(
+    object: {
+      table: "streets"
+      recordId: $streetId
+      time: $lastVisit
+    }
+  ) {
+    time
+    user {
+      ...User
+    }
+  }
+}
