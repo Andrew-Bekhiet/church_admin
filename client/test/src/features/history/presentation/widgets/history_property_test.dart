@@ -119,7 +119,7 @@ Future<void> main() async {
       );
       await tester.tap(
         find.descendant(
-          of: find.byType(IconButton),
+          of: find.byType(OutlinedButton),
           matching: find.byIcon(Symbols.task_alt),
         ),
       );
@@ -186,10 +186,7 @@ Future<void> main() async {
         );
 
         await tester.tap(
-          find.descendant(
-            of: find.byType(IconButton),
-            matching: find.byIcon(Symbols.history),
-          ),
+          find.byType(HistoryProperty<LastRecordedByInfo>),
         );
 
         await tester.pumpAndSettle();
