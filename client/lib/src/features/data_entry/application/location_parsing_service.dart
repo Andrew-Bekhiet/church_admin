@@ -13,7 +13,7 @@ class LocationParsingService {
   Future<Point?> maybeParseLocationUri(Uri uri) async {
     try {
       switch (uri) {
-        case Uri(scheme: 'geo', path: final String path)
+        case Uri(scheme: 'geo', :final String path)
             when path.split(',').length == 2 &&
                 double.tryParse(path.split(',')[0]) != null &&
                 double.tryParse(path.split(',')[1]) != null:

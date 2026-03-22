@@ -48,12 +48,13 @@ jobs:
           fetch-depth: 1
 
       - name: Get Flutter
-        uses: subosito/flutter-action@v2
+        id: flutter-action
+        uses: subosito/flutter-action@4efee115f1f8f612aafcb187ee16db202d7e4376
         with:
           cache: true
+          flutter-version-file: client/.fvmrc
           pub-cache-key: "flutter-pub:os:-:channel:-:version:-:arch:"
           cache-key: "flutter:os:-:channel:-:version:-:arch:"
-          channel: "stable"
 
       - name: Install Codemagic CLI tools
         if: ${{ matrix.os == 'macos-latest' }}
@@ -144,7 +145,7 @@ jobs:
         with:
           platform: android
           working-directory: client
-          args: --release-version ${{ inputs.base_version }} --allow-asset-diffs
+          args: --release-version ${{ inputs.base_version }} --allow-asset-diffs --flutter-version=${{ steps.flutter-action.outputs.VERSION }}
 
       - name: Run pod repo update
         if: ${{ matrix.os == 'macos-latest' }}
@@ -164,7 +165,7 @@ jobs:
         with:
           platform: ios
           working-directory: client
-          args: --release-version ${{ inputs.base_version }} --export-options-plist="$HOME/export_options.plist" --allow-asset-diffs
+          args: --release-version ${{ inputs.base_version }} --export-options-plist="$HOME/export_options.plist" --allow-asset-diffs --flutter-version=${{ steps.flutter-action.outputs.VERSION }}
 
   patch-web:
     if: ${{ github.event_name == 'push' || github.event.inputs.web == 'true' }}
@@ -176,12 +177,13 @@ jobs:
           fetch-depth: 1
 
       - name: Get Flutter
-        uses: subosito/flutter-action@v2
+        id: flutter-action
+        uses: subosito/flutter-action@4efee115f1f8f612aafcb187ee16db202d7e4376
         with:
           cache: true
+          flutter-version-file: client/.fvmrc
           pub-cache-key: "flutter-pub:os:-:channel:-:version:-:arch:"
           cache-key: "flutter:os:-:channel:-:version:-:arch:"
-          channel: "stable"
 
       - name: Populate the Flutter tool's cache of binary artifacts
         run: flutter precache

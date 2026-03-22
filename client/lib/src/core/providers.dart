@@ -156,8 +156,7 @@ final authBlocProvider = Provider<AuthBloc>((ref) {
 });
 
 final loggingServiceProvider = Provider<LoggingService>(
-  (ref) =>
-      LoggingService(sentryDSN: ref.watch(secretsServiceProvider).sentryDSN),
+  (ref) => LoggingService(),
 );
 
 final userSettingsServiceProvider = Provider<UserSettingsService>(

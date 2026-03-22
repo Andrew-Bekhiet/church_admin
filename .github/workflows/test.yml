@@ -27,12 +27,12 @@ jobs:
           fetch-depth: 2
 
       - name: Setup Flutter
-        uses: subosito/flutter-action@v2
+        uses: subosito/flutter-action@4efee115f1f8f612aafcb187ee16db202d7e4376
         with:
           cache: true
+          flutter-version-file: client/.fvmrc
           pub-cache-key: "flutter-pub:os:-:channel:-:version:-:arch:"
           cache-key: "flutter:os:-:channel:-:version:-:arch:"
-          channel: "stable"
 
       - name: Populate Flutter cache
         run: flutter precache

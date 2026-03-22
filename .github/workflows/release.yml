@@ -78,12 +78,12 @@ jobs:
           fetch-depth: 2
 
       - name: Setup Flutter
-        uses: subosito/flutter-action@v2
+        uses: subosito/flutter-action@4efee115f1f8f612aafcb187ee16db202d7e4376
         with:
           cache: true
+          flutter-version-file: client/.fvmrc
           pub-cache-key: "flutter-pub:os:-:channel:-:version:-:arch:"
           cache-key: "flutter:os:-:channel:-:version:-:arch:"
-          channel: "stable"
 
       - name: Populate Flutter cache
         run: flutter precache
@@ -139,12 +139,13 @@ jobs:
           fetch-depth: 1
 
       - name: Get Flutter
-        uses: subosito/flutter-action@v2
+        id: flutter-action
+        uses: subosito/flutter-action@4efee115f1f8f612aafcb187ee16db202d7e4376
         with:
           cache: true
+          flutter-version-file: client/.fvmrc
           pub-cache-key: "flutter-pub:os:-:channel:-:version:-:arch:"
           cache-key: "flutter:os:-:channel:-:version:-:arch:"
-          channel: "stable"
 
       - name: Install Codemagic CLI tools
         run: pip install codemagic-cli-tools
@@ -234,7 +235,7 @@ jobs:
         with:
           working-directory: client
           platform: android
-          args: --artifact=apk
+          args: --artifact=apk --flutter-version=${{ steps.flutter-action.outputs.VERSION }}
 
       - name: Run pod repo update
         if: ${{ matrix.os == 'macos-latest' }}
@@ -264,7 +265,7 @@ jobs:
         with:
           working-directory: client
           platform: ios
-          args: --build-name ${{ steps.version.outputs.version }} --export-options-plist="$HOME/export_options.plist"
+          args: --build-name ${{ steps.version.outputs.version }} --export-options-plist="$HOME/export_options.plist" --flutter-version=${{ steps.flutter-action.outputs.VERSION }}
 
       - name: Publish to Google Play
         if: ${{ matrix.os == 'ubuntu-latest' }}
@@ -338,12 +339,13 @@ jobs:
           fetch-depth: 1
 
       - name: Get Flutter
-        uses: subosito/flutter-action@v2
+        id: flutter-action
+        uses: subosito/flutter-action@4efee115f1f8f612aafcb187ee16db202d7e4376
         with:
           cache: true
+          flutter-version-file: client/.fvmrc
           pub-cache-key: "flutter-pub:os:-:channel:-:version:-:arch:"
           cache-key: "flutter:os:-:channel:-:version:-:arch:"
-          channel: "stable"
 
       - name: Populate the Flutter tool's cache of binary artifacts
         run: flutter precache

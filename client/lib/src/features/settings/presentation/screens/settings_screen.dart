@@ -46,14 +46,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       children: <Widget>[
                         ChoiceChip(
                           label: const Text('المظهر الداكن'),
-                          // Ignored to keep selected argument consistent
-                          // ignore: use_if_null_to_convert_nulls_to_bools
-                          selected: darkTheme == true,
+                          selected: darkTheme ?? false,
                           onSelected: _onDarkThemeChanged(true),
                         ),
                         ChoiceChip(
                           label: const Text('المظهر الفاتح'),
-                          selected: darkTheme == false,
+                          selected: !(darkTheme ?? false),
                           onSelected: _onDarkThemeChanged(false),
                         ),
                         ChoiceChip(
