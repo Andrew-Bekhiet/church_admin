@@ -11,6 +11,9 @@ part 'admin_on_data.g.dart';
   labelsOverrides: {
     'serviceWriteRelatedFamilies': 'يمكنه تعديل عائلات المخدومين بالخدمة',
     'groupWriteRelatedFamilies': 'يمكنه تعديل عائلات المخدومين بالمجموعة',
+    'areaAllowExport': 'يمكنه تصدير بيانات المنطقة',
+    'serviceAllowExport': 'يمكنه تصدير بيانات الخدمة',
+    'groupAllowExport': 'يمكنه تصدير بيانات المجموعة',
   },
 )
 @JsonSerializable()
@@ -20,6 +23,9 @@ class AdminOnData with _$AdminOnData implements ToJson {
 
   @override
   final Area? area;
+
+  @override
+  final bool? areaAllowExport;
 
   @override
   final bool? areaAllowEdit;
@@ -37,6 +43,9 @@ class AdminOnData with _$AdminOnData implements ToJson {
   final bool? serviceGender;
 
   @override
+  final bool? serviceAllowExport;
+
+  @override
   final bool? serviceAllowEdit;
 
   @override
@@ -50,6 +59,9 @@ class AdminOnData with _$AdminOnData implements ToJson {
 
   @override
   final Group? group;
+
+  @override
+  final bool? groupAllowExport;
 
   @override
   final bool? groupAllowEdit;
@@ -66,16 +78,19 @@ class AdminOnData with _$AdminOnData implements ToJson {
   const AdminOnData({
     required this.permissionId,
     this.area,
+    this.areaAllowExport,
     this.areaAllowEdit,
     this.areaAdminOnUsers,
     this.service,
     this.serviceStudyYearData,
     this.serviceGender,
+    this.serviceAllowExport,
     this.serviceAllowEdit,
     this.serviceAdminOnUsers,
     this.serviceWriteRelatedFamilies,
     this.classes = const [],
     this.group,
+    this.groupAllowExport,
     this.groupAllowEdit,
     this.groupAdminOnUsers,
     this.groupWriteRelatedFamilies,

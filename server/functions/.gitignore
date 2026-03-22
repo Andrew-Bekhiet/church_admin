@@ -1,4 +1,6 @@
 # Compiled JavaScript files
+lib/**/*.graphql
+lib/**/*.gql
 lib/**/*.js
 lib/**/*.js.map
 

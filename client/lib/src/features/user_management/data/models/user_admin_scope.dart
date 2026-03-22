@@ -6,6 +6,7 @@ class UserAdminScope<T extends ViewableWithID> {
   final T object;
   final bool canManageUsers;
   final bool canWriteData;
+  final bool canExportData;
   final bool? canWriteRelatedFamilies;
 
   final StudyYear? studyYear;
@@ -15,6 +16,7 @@ class UserAdminScope<T extends ViewableWithID> {
     required this.object,
     required this.canManageUsers,
     required this.canWriteData,
+    required this.canExportData,
     this.canWriteRelatedFamilies,
     this.studyYear,
     this.gender,
@@ -27,6 +29,7 @@ class UserAdminScope<T extends ViewableWithID> {
           object: area,
           canManageUsers: adminOnData.areaAdminOnUsers ?? false,
           canWriteData: adminOnData.areaAllowEdit ?? false,
+          canExportData: adminOnData.areaAllowExport ?? false,
         );
 
       case AdminOnData(service: final service?):
@@ -34,6 +37,7 @@ class UserAdminScope<T extends ViewableWithID> {
           object: service,
           canManageUsers: adminOnData.serviceAdminOnUsers ?? false,
           canWriteData: adminOnData.serviceAllowEdit ?? false,
+          canExportData: adminOnData.serviceAllowExport ?? false,
           canWriteRelatedFamilies:
               adminOnData.serviceWriteRelatedFamilies ?? false,
           studyYear: adminOnData.serviceStudyYearData,
@@ -45,6 +49,7 @@ class UserAdminScope<T extends ViewableWithID> {
           object: group,
           canManageUsers: adminOnData.groupAdminOnUsers ?? false,
           canWriteData: adminOnData.groupAllowEdit ?? false,
+          canExportData: adminOnData.groupAllowExport ?? false,
           canWriteRelatedFamilies:
               adminOnData.groupWriteRelatedFamilies ?? false,
         );
@@ -57,16 +62,19 @@ class UserAdminScope<T extends ViewableWithID> {
   UserAdminScope copyWith({
     bool? canManageUsers,
     bool? canWriteData,
+    bool? canExportData,
     bool? canWriteRelatedFamilies,
     Object? studyYear = _undefined,
     Object? gender = _undefined,
   }) {
     final newCanWriteData = canWriteData ?? this.canWriteData;
+
     return UserAdminScope(
       object: object,
       canManageUsers:
           newCanWriteData && (canManageUsers ?? this.canManageUsers),
       canWriteData: newCanWriteData,
+      canExportData: canExportData ?? this.canExportData,
       canWriteRelatedFamilies:
           canWriteRelatedFamilies ?? this.canWriteRelatedFamilies,
       studyYear: studyYear is StudyYear? ? studyYear : this.studyYear,
@@ -82,6 +90,7 @@ class UserAdminScope<T extends ViewableWithID> {
           area: area,
           areaAdminOnUsers: canManageUsers,
           areaAllowEdit: canWriteData,
+          areaAllowExport: canExportData,
         );
 
       case final Service service:
@@ -90,6 +99,7 @@ class UserAdminScope<T extends ViewableWithID> {
           service: service,
           serviceAdminOnUsers: canManageUsers,
           serviceAllowEdit: canWriteData,
+          serviceAllowExport: canExportData,
           serviceWriteRelatedFamilies: canWriteRelatedFamilies,
           serviceStudyYearData: studyYear,
           serviceGender: gender,
@@ -101,6 +111,7 @@ class UserAdminScope<T extends ViewableWithID> {
           group: group,
           groupAdminOnUsers: canManageUsers,
           groupAllowEdit: canWriteData,
+          groupAllowExport: canExportData,
           groupWriteRelatedFamilies: canWriteRelatedFamilies,
         );
 

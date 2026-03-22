@@ -2,12 +2,36 @@
   "language": "Dart, GraphQL, TypeScript",
   "guide": [
     {
+      "context": "After implementing a feature",
+      "rules": "DO NOT WRITE A SUMMARY OR A README, unless explicitly asked to do so"
+    },
+    {
       "context": "Git",
       "rules": "Use conventional commit messages"
     },
     {
       "context": "Code Style",
-      "rules": "Always use code style as defined in the analysis_options.yaml file. Always use clean, SOLID, DRY, and maintainable code."
+      "rules": "Always use code style as defined in the analysis_options.yaml file."
+    },
+    {
+      "context": "Code Quality",
+      "rules": "Organize multiple files into a directory by feature or domain"
+    },
+    {
+      "context": "Code Quality",
+      "rules": "Always use clean, SOLID, DRY, and maintainable code. Break down complex code into smaller, more manageable functions, classes and modules."
+    },
+    {
+      "context": "Code Style",
+      "rules": "Always use similar code style and patterns as the existing code."
+    },
+    {
+      "context": "Code Quality",
+      "rules": "Try to use design patterns"
+    },
+    {
+      "context": "Code Quality",
+      "rules": "Always use best practices"
     },
     {
       "context": "GraphQL Code Generation",

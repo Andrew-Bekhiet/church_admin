@@ -72,9 +72,9 @@ const _$UserPermissionEnumMap = {
   UserPermission.manageAllUsers: 'manageAllUsers',
   UserPermission.readAllData: 'readAllData',
   UserPermission.writeAllData: 'writeAllData',
+  UserPermission.exportAllData: 'exportAllData',
   UserPermission.recordHistory: 'recordHistory',
   UserPermission.changeOldHistory: 'changeOldHistory',
   UserPermission.deleteData: 'deleteData',
   UserPermission.recoverDeleted: 'recoverDeleted',
-  UserPermission.exportData: 'exportData',
 };

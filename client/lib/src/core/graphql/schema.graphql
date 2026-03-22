@@ -595,6 +595,7 @@ type AuthUsersAdminOn {
   area: Areas
   areaAdminOnUsers: Boolean
   areaAllowEdit: Boolean
+  areaAllowExport: Boolean
   classes(
     distinctOn: [ClassesSelectColumn!]
     limit: Int
@@ -612,11 +613,13 @@ type AuthUsersAdminOn {
   group: Groups
   groupAdminOnUsers: Boolean
   groupAllowEdit: Boolean
+  groupAllowExport: Boolean
   groupWriteRelatedFamilies: Boolean!
   permissionId: uuid!
   service: Services
   serviceAdminOnUsers: Boolean
   serviceAllowEdit: Boolean
+  serviceAllowExport: Boolean
   serviceGender: Boolean
   serviceStudyYear: Int
   serviceStudyYearData: StudyYears
@@ -658,16 +661,19 @@ input AuthUsersAdminOnBoolExp {
   area: AreasBoolExp
   areaAdminOnUsers: BooleanComparisonExp
   areaAllowEdit: BooleanComparisonExp
+  areaAllowExport: BooleanComparisonExp
   classes: ClassesBoolExp
   classesAggregate: ClassesAggregateBoolExp
   group: GroupsBoolExp
   groupAdminOnUsers: BooleanComparisonExp
   groupAllowEdit: BooleanComparisonExp
+  groupAllowExport: BooleanComparisonExp
   groupWriteRelatedFamilies: BooleanComparisonExp
   permissionId: UuidComparisonExp
   service: ServicesBoolExp
   serviceAdminOnUsers: BooleanComparisonExp
   serviceAllowEdit: BooleanComparisonExp
+  serviceAllowExport: BooleanComparisonExp
   serviceGender: BooleanComparisonExp
   serviceStudyYear: IntComparisonExp
   serviceStudyYearData: StudyYearsBoolExp
@@ -690,14 +696,17 @@ input AuthUsersAdminOnInsertInput {
   area: AreasObjRelInsertInput
   areaAdminOnUsers: Boolean
   areaAllowEdit: Boolean
+  areaAllowExport: Boolean
   classes: ClassesArrRelInsertInput
   group: GroupsObjRelInsertInput
   groupAdminOnUsers: Boolean
   groupAllowEdit: Boolean
+  groupAllowExport: Boolean
   groupWriteRelatedFamilies: Boolean
   service: ServicesObjRelInsertInput
   serviceAdminOnUsers: Boolean
   serviceAllowEdit: Boolean
+  serviceAllowExport: Boolean
   serviceGender: Boolean
   serviceStudyYear: Int
   serviceStudyYearData: StudyYearsObjRelInsertInput
@@ -740,15 +749,18 @@ input AuthUsersAdminOnOrderBy {
   area: AreasOrderBy
   areaAdminOnUsers: OrderBy
   areaAllowEdit: OrderBy
+  areaAllowExport: OrderBy
   classesAggregate: ClassesAggregateOrderBy
   group: GroupsOrderBy
   groupAdminOnUsers: OrderBy
   groupAllowEdit: OrderBy
+  groupAllowExport: OrderBy
   groupWriteRelatedFamilies: OrderBy
   permissionId: OrderBy
   service: ServicesOrderBy
   serviceAdminOnUsers: OrderBy
   serviceAllowEdit: OrderBy
+  serviceAllowExport: OrderBy
   serviceGender: OrderBy
   serviceStudyYear: OrderBy
   serviceStudyYearData: StudyYearsOrderBy
@@ -763,12 +775,15 @@ enum AuthUsersAdminOnSelectColumn {
   adminOnService
   areaAdminOnUsers
   areaAllowEdit
+  areaAllowExport
   groupAdminOnUsers
   groupAllowEdit
+  groupAllowExport
   groupWriteRelatedFamilies
   permissionId
   serviceAdminOnUsers
   serviceAllowEdit
+  serviceAllowExport
   serviceGender
   serviceStudyYear
   serviceWriteRelatedFamilies
@@ -797,12 +812,15 @@ input AuthUsersAdminOnStreamCursorValueInput {
   adminOnService: uuid
   areaAdminOnUsers: Boolean
   areaAllowEdit: Boolean
+  areaAllowExport: Boolean
   groupAdminOnUsers: Boolean
   groupAllowEdit: Boolean
+  groupAllowExport: Boolean
   groupWriteRelatedFamilies: Boolean
   permissionId: uuid
   serviceAdminOnUsers: Boolean
   serviceAllowEdit: Boolean
+  serviceAllowExport: Boolean
   serviceGender: Boolean
   serviceStudyYear: Int
   serviceWriteRelatedFamilies: Boolean

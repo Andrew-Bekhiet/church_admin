@@ -1,0 +1,54 @@
+query authorizeExportRequest(
+  $uid: uuid!
+  $areasIds: [uuid!]!
+  $servicesIds: [uuid!]!
+  $classesIds: [uuid!]!
+  $groupsIds: [uuid!]!
+) {
+  authUsersPermissionsByEntityId(
+    where: {
+      _and: [
+        { uid: { _eq: $uid } }
+        { allowExport: { _eq: true } }
+        {
+          _or: [
+            {
+              _and: [
+                { entityType: { _eq: "any" } }
+                { entityId: { _isNull: true } }
+              ]
+            }
+            {
+              _and: [
+                { entityType: { _eq: "area" } }
+                { entityId: { _in: $areasIds } }
+              ]
+            }
+            {
+              _and: [
+                { entityType: { _eq: "service" } }
+                { entityId: { _in: $servicesIds } }
+              ]
+            }
+            {
+              _and: [
+                { entityType: { _eq: "class" } }
+                { entityId: { _in: $classesIds } }
+              ]
+            }
+            {
+              _and: [
+                { entityType: { _eq: "group" } }
+                { entityId: { _in: $groupsIds } }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ) {
+    allowExport
+    entityId
+    entityType
+  }
+}

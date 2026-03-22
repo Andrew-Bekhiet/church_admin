@@ -21,6 +21,7 @@ enum UserPermission implements LabeledEnum {
     label: 'تعديل جميع البيانات',
     icon: Symbols.edit,
   ),
+  exportAllData(label: 'تصدير جميع البيانات', icon: Symbols.upload),
   recordHistory(
     label: 'تسجيل الحضور',
     icon: Symbols.event_available,
@@ -36,8 +37,7 @@ enum UserPermission implements LabeledEnum {
   recoverDeleted(
     label: 'استرجاع المحذوفات',
     icon: Symbols.restore_from_trash,
-  ),
-  exportData(label: 'تصدير البيانات', icon: Symbols.upload);
+  );
 
   static UserPermission byName(String value) => values.byName(value);
 
@@ -57,7 +57,7 @@ enum UserPermission implements LabeledEnum {
           UserPermission.writeAllData,
           ...UserPermission.writeAllData.requires,
         },
-        UserPermission.writeAllData => {
+        UserPermission.exportAllData || UserPermission.writeAllData => {
           UserPermission.readAllData,
           ...UserPermission.readAllData.requires,
         },

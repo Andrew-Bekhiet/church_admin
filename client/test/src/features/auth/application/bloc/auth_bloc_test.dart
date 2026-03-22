@@ -24,7 +24,7 @@ final initialUserData = User(
     UserPermission.recordHistory,
     UserPermission.changeOldHistory,
     UserPermission.recoverDeleted,
-    UserPermission.exportData,
+    UserPermission.exportAllData,
   }),
   photoUpdatedAt: DateTime.now(),
   lastEdit: LastRecordedByInfo(

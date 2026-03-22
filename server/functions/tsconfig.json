@@ -4,12 +4,12 @@
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "outDir": "lib",
+    "skipLibCheck": true,
     "sourceMap": true,
     "strict": true,
-    "target": "es2017"
+    "target": "es2017",
+    "types": ["node"]
   },
   "compileOnSave": true,
-  "include": [
-    "src"
-  ]
+  "include": ["src"]
 }

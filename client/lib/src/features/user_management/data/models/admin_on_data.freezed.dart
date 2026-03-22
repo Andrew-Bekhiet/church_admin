@@ -15,16 +15,19 @@ T _$identity<T>(T value) => value;
 mixin _$AdminOnData {
   String get permissionId;
   Area? get area;
+  bool? get areaAllowExport;
   bool? get areaAllowEdit;
   bool? get areaAdminOnUsers;
   Service? get service;
   StudyYear? get serviceStudyYearData;
   bool? get serviceGender;
+  bool? get serviceAllowExport;
   bool? get serviceAllowEdit;
   bool? get serviceAdminOnUsers;
   bool? get serviceWriteRelatedFamilies;
   List<Class> get classes;
   Group? get group;
+  bool? get groupAllowExport;
   bool? get groupAllowEdit;
   bool? get groupAdminOnUsers;
   bool? get groupWriteRelatedFamilies;
@@ -45,6 +48,8 @@ mixin _$AdminOnData {
             (identical(other.permissionId, permissionId) ||
                 other.permissionId == permissionId) &&
             (identical(other.area, area) || other.area == area) &&
+            (identical(other.areaAllowExport, areaAllowExport) ||
+                other.areaAllowExport == areaAllowExport) &&
             (identical(other.areaAllowEdit, areaAllowEdit) ||
                 other.areaAllowEdit == areaAllowEdit) &&
             (identical(other.areaAdminOnUsers, areaAdminOnUsers) ||
@@ -54,6 +59,8 @@ mixin _$AdminOnData {
                 other.serviceStudyYearData == serviceStudyYearData) &&
             (identical(other.serviceGender, serviceGender) ||
                 other.serviceGender == serviceGender) &&
+            (identical(other.serviceAllowExport, serviceAllowExport) ||
+                other.serviceAllowExport == serviceAllowExport) &&
             (identical(other.serviceAllowEdit, serviceAllowEdit) ||
                 other.serviceAllowEdit == serviceAllowEdit) &&
             (identical(other.serviceAdminOnUsers, serviceAdminOnUsers) ||
@@ -66,6 +73,8 @@ mixin _$AdminOnData {
                     serviceWriteRelatedFamilies) &&
             const DeepCollectionEquality().equals(other.classes, classes) &&
             (identical(other.group, group) || other.group == group) &&
+            (identical(other.groupAllowExport, groupAllowExport) ||
+                other.groupAllowExport == groupAllowExport) &&
             (identical(other.groupAllowEdit, groupAllowEdit) ||
                 other.groupAllowEdit == groupAllowEdit) &&
             (identical(other.groupAdminOnUsers, groupAdminOnUsers) ||
@@ -80,29 +89,32 @@ mixin _$AdminOnData {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
+  int get hashCode => Object.hashAll([
     runtimeType,
     permissionId,
     area,
+    areaAllowExport,
     areaAllowEdit,
     areaAdminOnUsers,
     service,
     serviceStudyYearData,
     serviceGender,
+    serviceAllowExport,
     serviceAllowEdit,
     serviceAdminOnUsers,
     serviceWriteRelatedFamilies,
     const DeepCollectionEquality().hash(classes),
     group,
+    groupAllowExport,
     groupAllowEdit,
     groupAdminOnUsers,
     groupWriteRelatedFamilies,
     user,
-  );
+  ]);
 
   @override
   String toString() {
-    return 'AdminOnData(permissionId: $permissionId, area: $area, areaAllowEdit: $areaAllowEdit, areaAdminOnUsers: $areaAdminOnUsers, service: $service, serviceStudyYearData: $serviceStudyYearData, serviceGender: $serviceGender, serviceAllowEdit: $serviceAllowEdit, serviceAdminOnUsers: $serviceAdminOnUsers, serviceWriteRelatedFamilies: $serviceWriteRelatedFamilies, classes: $classes, group: $group, groupAllowEdit: $groupAllowEdit, groupAdminOnUsers: $groupAdminOnUsers, groupWriteRelatedFamilies: $groupWriteRelatedFamilies, user: $user)';
+    return 'AdminOnData(permissionId: $permissionId, area: $area, areaAllowExport: $areaAllowExport, areaAllowEdit: $areaAllowEdit, areaAdminOnUsers: $areaAdminOnUsers, service: $service, serviceStudyYearData: $serviceStudyYearData, serviceGender: $serviceGender, serviceAllowExport: $serviceAllowExport, serviceAllowEdit: $serviceAllowEdit, serviceAdminOnUsers: $serviceAdminOnUsers, serviceWriteRelatedFamilies: $serviceWriteRelatedFamilies, classes: $classes, group: $group, groupAllowExport: $groupAllowExport, groupAllowEdit: $groupAllowEdit, groupAdminOnUsers: $groupAdminOnUsers, groupWriteRelatedFamilies: $groupWriteRelatedFamilies, user: $user)';
   }
 }
 
@@ -116,16 +128,19 @@ abstract mixin class $AdminOnDataCopyWith<$Res> {
   $Res call({
     String permissionId,
     Area? area,
+    bool? areaAllowExport,
     bool? areaAllowEdit,
     bool? areaAdminOnUsers,
     Service? service,
     StudyYear? serviceStudyYearData,
     bool? serviceGender,
+    bool? serviceAllowExport,
     bool? serviceAllowEdit,
     bool? serviceAdminOnUsers,
     bool? serviceWriteRelatedFamilies,
     List<Class> classes,
     Group? group,
+    bool? groupAllowExport,
     bool? groupAllowEdit,
     bool? groupAdminOnUsers,
     bool? groupWriteRelatedFamilies,
@@ -147,16 +162,19 @@ class _$AdminOnDataCopyWithImpl<$Res> implements $AdminOnDataCopyWith<$Res> {
   $Res call({
     Object? permissionId = null,
     Object? area = freezed,
+    Object? areaAllowExport = freezed,
     Object? areaAllowEdit = freezed,
     Object? areaAdminOnUsers = freezed,
     Object? service = freezed,
     Object? serviceStudyYearData = freezed,
     Object? serviceGender = freezed,
+    Object? serviceAllowExport = freezed,
     Object? serviceAllowEdit = freezed,
     Object? serviceAdminOnUsers = freezed,
     Object? serviceWriteRelatedFamilies = freezed,
     Object? classes = null,
     Object? group = freezed,
+    Object? groupAllowExport = freezed,
     Object? groupAllowEdit = freezed,
     Object? groupAdminOnUsers = freezed,
     Object? groupWriteRelatedFamilies = freezed,
@@ -172,6 +190,10 @@ class _$AdminOnDataCopyWithImpl<$Res> implements $AdminOnDataCopyWith<$Res> {
             ? _self.area
             : area // ignore: cast_nullable_to_non_nullable
                   as Area?,
+        areaAllowExport: freezed == areaAllowExport
+            ? _self.areaAllowExport
+            : areaAllowExport // ignore: cast_nullable_to_non_nullable
+                  as bool?,
         areaAllowEdit: freezed == areaAllowEdit
             ? _self.areaAllowEdit
             : areaAllowEdit // ignore: cast_nullable_to_non_nullable
@@ -191,6 +213,10 @@ class _$AdminOnDataCopyWithImpl<$Res> implements $AdminOnDataCopyWith<$Res> {
         serviceGender: freezed == serviceGender
             ? _self.serviceGender
             : serviceGender // ignore: cast_nullable_to_non_nullable
+                  as bool?,
+        serviceAllowExport: freezed == serviceAllowExport
+            ? _self.serviceAllowExport
+            : serviceAllowExport // ignore: cast_nullable_to_non_nullable
                   as bool?,
         serviceAllowEdit: freezed == serviceAllowEdit
             ? _self.serviceAllowEdit
@@ -212,6 +238,10 @@ class _$AdminOnDataCopyWithImpl<$Res> implements $AdminOnDataCopyWith<$Res> {
             ? _self.group
             : group // ignore: cast_nullable_to_non_nullable
                   as Group?,
+        groupAllowExport: freezed == groupAllowExport
+            ? _self.groupAllowExport
+            : groupAllowExport // ignore: cast_nullable_to_non_nullable
+                  as bool?,
         groupAllowEdit: freezed == groupAllowEdit
             ? _self.groupAllowEdit
             : groupAllowEdit // ignore: cast_nullable_to_non_nullable

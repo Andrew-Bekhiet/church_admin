@@ -1,6 +1,613 @@
 // Part 10 of the schema
 part of "schema.graphql.dart";
 
+abstract class CopyWith_Input_ChurchesInsertInput<TRes> {
+  factory CopyWith_Input_ChurchesInsertInput(
+    Input_ChurchesInsertInput instance,
+    TRes Function(Input_ChurchesInsertInput) then,
+  ) = _CopyWithImpl_Input_ChurchesInsertInput;
+
+  factory CopyWith_Input_ChurchesInsertInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_ChurchesInsertInput;
+
+  TRes call({
+    Input_FathersArrRelInsertInput? fathers,
+    String? name,
+    Input_PersonsArrRelInsertInput? persons,
+  });
+  CopyWith_Input_FathersArrRelInsertInput<TRes> get fathers;
+  CopyWith_Input_PersonsArrRelInsertInput<TRes> get persons;
+}
+
+class _CopyWithImpl_Input_ChurchesInsertInput<TRes>
+    implements CopyWith_Input_ChurchesInsertInput<TRes> {
+  _CopyWithImpl_Input_ChurchesInsertInput(this._instance, this._then);
+
+  final Input_ChurchesInsertInput _instance;
+
+  final TRes Function(Input_ChurchesInsertInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? fathers = _undefined,
+    Object? name = _undefined,
+    Object? persons = _undefined,
+  }) => _then(
+    Input_ChurchesInsertInput._({
+      ..._instance._$data,
+      if (fathers != _undefined)
+        'fathers': (fathers as Input_FathersArrRelInsertInput?),
+      if (name != _undefined) 'name': (name as String?),
+      if (persons != _undefined)
+        'persons': (persons as Input_PersonsArrRelInsertInput?),
+    }),
+  );
+
+  CopyWith_Input_FathersArrRelInsertInput<TRes> get fathers {
+    final local$fathers = _instance.fathers;
+    return local$fathers == null
+        ? CopyWith_Input_FathersArrRelInsertInput.stub(_then(_instance))
+        : CopyWith_Input_FathersArrRelInsertInput(
+            local$fathers,
+            (e) => call(fathers: e),
+          );
+  }
+
+  CopyWith_Input_PersonsArrRelInsertInput<TRes> get persons {
+    final local$persons = _instance.persons;
+    return local$persons == null
+        ? CopyWith_Input_PersonsArrRelInsertInput.stub(_then(_instance))
+        : CopyWith_Input_PersonsArrRelInsertInput(
+            local$persons,
+            (e) => call(persons: e),
+          );
+  }
+}
+
+class _CopyWithStubImpl_Input_ChurchesInsertInput<TRes>
+    implements CopyWith_Input_ChurchesInsertInput<TRes> {
+  _CopyWithStubImpl_Input_ChurchesInsertInput(this._res);
+
+  TRes _res;
+
+  call({
+    Input_FathersArrRelInsertInput? fathers,
+    String? name,
+    Input_PersonsArrRelInsertInput? persons,
+  }) => _res;
+
+  CopyWith_Input_FathersArrRelInsertInput<TRes> get fathers =>
+      CopyWith_Input_FathersArrRelInsertInput.stub(_res);
+
+  CopyWith_Input_PersonsArrRelInsertInput<TRes> get persons =>
+      CopyWith_Input_PersonsArrRelInsertInput.stub(_res);
+}
+
+class Input_ChurchesObjRelInsertInput {
+  factory Input_ChurchesObjRelInsertInput({
+    required Input_ChurchesInsertInput data,
+    Input_ChurchesOnConflict? onConflict,
+  }) => Input_ChurchesObjRelInsertInput._({
+    r'data': data,
+    if (onConflict != null) r'onConflict': onConflict,
+  });
+
+  Input_ChurchesObjRelInsertInput._(this._$data);
+
+  factory Input_ChurchesObjRelInsertInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$data = data['data'];
+    result$data['data'] = Input_ChurchesInsertInput.fromJson(
+      (l$data as Map<String, dynamic>),
+    );
+    if (data.containsKey('onConflict')) {
+      final l$onConflict = data['onConflict'];
+      result$data['onConflict'] = l$onConflict == null
+          ? null
+          : Input_ChurchesOnConflict.fromJson(
+              (l$onConflict as Map<String, dynamic>),
+            );
+    }
+    return Input_ChurchesObjRelInsertInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Input_ChurchesInsertInput get data =>
+      (_$data['data'] as Input_ChurchesInsertInput);
+
+  Input_ChurchesOnConflict? get onConflict =>
+      (_$data['onConflict'] as Input_ChurchesOnConflict?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$data = data;
+    result$data['data'] = l$data.toJson();
+    if (_$data.containsKey('onConflict')) {
+      final l$onConflict = onConflict;
+      result$data['onConflict'] = l$onConflict?.toJson();
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_ChurchesObjRelInsertInput<Input_ChurchesObjRelInsertInput>
+  get copyWith => CopyWith_Input_ChurchesObjRelInsertInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_ChurchesObjRelInsertInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$data = data;
+    final lOther$data = other.data;
+    if (l$data != lOther$data) {
+      return false;
+    }
+    final l$onConflict = onConflict;
+    final lOther$onConflict = other.onConflict;
+    if (_$data.containsKey('onConflict') !=
+        other._$data.containsKey('onConflict')) {
+      return false;
+    }
+    if (l$onConflict != lOther$onConflict) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$data = data;
+    final l$onConflict = onConflict;
+    return Object.hashAll([
+      l$data,
+      _$data.containsKey('onConflict') ? l$onConflict : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_ChurchesObjRelInsertInput<TRes> {
+  factory CopyWith_Input_ChurchesObjRelInsertInput(
+    Input_ChurchesObjRelInsertInput instance,
+    TRes Function(Input_ChurchesObjRelInsertInput) then,
+  ) = _CopyWithImpl_Input_ChurchesObjRelInsertInput;
+
+  factory CopyWith_Input_ChurchesObjRelInsertInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_ChurchesObjRelInsertInput;
+
+  TRes call({
+    Input_ChurchesInsertInput? data,
+    Input_ChurchesOnConflict? onConflict,
+  });
+  CopyWith_Input_ChurchesInsertInput<TRes> get data;
+  CopyWith_Input_ChurchesOnConflict<TRes> get onConflict;
+}
+
+class _CopyWithImpl_Input_ChurchesObjRelInsertInput<TRes>
+    implements CopyWith_Input_ChurchesObjRelInsertInput<TRes> {
+  _CopyWithImpl_Input_ChurchesObjRelInsertInput(this._instance, this._then);
+
+  final Input_ChurchesObjRelInsertInput _instance;
+
+  final TRes Function(Input_ChurchesObjRelInsertInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? data = _undefined, Object? onConflict = _undefined}) =>
+      _then(
+        Input_ChurchesObjRelInsertInput._({
+          ..._instance._$data,
+          if (data != _undefined && data != null)
+            'data': (data as Input_ChurchesInsertInput),
+          if (onConflict != _undefined)
+            'onConflict': (onConflict as Input_ChurchesOnConflict?),
+        }),
+      );
+
+  CopyWith_Input_ChurchesInsertInput<TRes> get data {
+    final local$data = _instance.data;
+    return CopyWith_Input_ChurchesInsertInput(local$data, (e) => call(data: e));
+  }
+
+  CopyWith_Input_ChurchesOnConflict<TRes> get onConflict {
+    final local$onConflict = _instance.onConflict;
+    return local$onConflict == null
+        ? CopyWith_Input_ChurchesOnConflict.stub(_then(_instance))
+        : CopyWith_Input_ChurchesOnConflict(
+            local$onConflict,
+            (e) => call(onConflict: e),
+          );
+  }
+}
+
+class _CopyWithStubImpl_Input_ChurchesObjRelInsertInput<TRes>
+    implements CopyWith_Input_ChurchesObjRelInsertInput<TRes> {
+  _CopyWithStubImpl_Input_ChurchesObjRelInsertInput(this._res);
+
+  TRes _res;
+
+  call({
+    Input_ChurchesInsertInput? data,
+    Input_ChurchesOnConflict? onConflict,
+  }) => _res;
+
+  CopyWith_Input_ChurchesInsertInput<TRes> get data =>
+      CopyWith_Input_ChurchesInsertInput.stub(_res);
+
+  CopyWith_Input_ChurchesOnConflict<TRes> get onConflict =>
+      CopyWith_Input_ChurchesOnConflict.stub(_res);
+}
+
+class Input_ChurchesOnConflict {
+  factory Input_ChurchesOnConflict({
+    required Enum_ChurchesConstraint constraint,
+    List<Enum_ChurchesUpdateColumn>? updateColumns,
+    Input_ChurchesBoolExp? where,
+  }) => Input_ChurchesOnConflict._({
+    r'constraint': constraint,
+    if (updateColumns != null) r'updateColumns': updateColumns,
+    if (where != null) r'where': where,
+  });
+
+  Input_ChurchesOnConflict._(this._$data);
+
+  factory Input_ChurchesOnConflict.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$constraint = data['constraint'];
+    result$data['constraint'] = fromJson_Enum_ChurchesConstraint(
+      (l$constraint as String),
+    );
+    if (data.containsKey('updateColumns')) {
+      final l$updateColumns = data['updateColumns'];
+      result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
+          .map((e) => fromJson_Enum_ChurchesUpdateColumn((e as String)))
+          .toList();
+    }
+    if (data.containsKey('where')) {
+      final l$where = data['where'];
+      result$data['where'] = l$where == null
+          ? null
+          : Input_ChurchesBoolExp.fromJson((l$where as Map<String, dynamic>));
+    }
+    return Input_ChurchesOnConflict._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Enum_ChurchesConstraint get constraint =>
+      (_$data['constraint'] as Enum_ChurchesConstraint);
+
+  List<Enum_ChurchesUpdateColumn>? get updateColumns =>
+      (_$data['updateColumns'] as List<Enum_ChurchesUpdateColumn>?);
+
+  Input_ChurchesBoolExp? get where =>
+      (_$data['where'] as Input_ChurchesBoolExp?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$constraint = constraint;
+    result$data['constraint'] = toJson_Enum_ChurchesConstraint(l$constraint);
+    if (_$data.containsKey('updateColumns')) {
+      final l$updateColumns = updateColumns;
+      result$data['updateColumns'] =
+          (l$updateColumns as List<Enum_ChurchesUpdateColumn>)
+              .map((e) => toJson_Enum_ChurchesUpdateColumn(e))
+              .toList();
+    }
+    if (_$data.containsKey('where')) {
+      final l$where = where;
+      result$data['where'] = l$where?.toJson();
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_ChurchesOnConflict<Input_ChurchesOnConflict> get copyWith =>
+      CopyWith_Input_ChurchesOnConflict(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_ChurchesOnConflict ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$constraint = constraint;
+    final lOther$constraint = other.constraint;
+    if (l$constraint != lOther$constraint) {
+      return false;
+    }
+    final l$updateColumns = updateColumns;
+    final lOther$updateColumns = other.updateColumns;
+    if (_$data.containsKey('updateColumns') !=
+        other._$data.containsKey('updateColumns')) {
+      return false;
+    }
+    if (l$updateColumns != null && lOther$updateColumns != null) {
+      if (l$updateColumns.length != lOther$updateColumns.length) {
+        return false;
+      }
+      for (int i = 0; i < l$updateColumns.length; i++) {
+        final l$updateColumns$entry = l$updateColumns[i];
+        final lOther$updateColumns$entry = lOther$updateColumns[i];
+        if (l$updateColumns$entry != lOther$updateColumns$entry) {
+          return false;
+        }
+      }
+    } else if (l$updateColumns != lOther$updateColumns) {
+      return false;
+    }
+    final l$where = where;
+    final lOther$where = other.where;
+    if (_$data.containsKey('where') != other._$data.containsKey('where')) {
+      return false;
+    }
+    if (l$where != lOther$where) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$constraint = constraint;
+    final l$updateColumns = updateColumns;
+    final l$where = where;
+    return Object.hashAll([
+      l$constraint,
+      _$data.containsKey('updateColumns')
+          ? l$updateColumns == null
+                ? null
+                : Object.hashAll(l$updateColumns.map((v) => v))
+          : const {},
+      _$data.containsKey('where') ? l$where : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_ChurchesOnConflict<TRes> {
+  factory CopyWith_Input_ChurchesOnConflict(
+    Input_ChurchesOnConflict instance,
+    TRes Function(Input_ChurchesOnConflict) then,
+  ) = _CopyWithImpl_Input_ChurchesOnConflict;
+
+  factory CopyWith_Input_ChurchesOnConflict.stub(TRes res) =
+      _CopyWithStubImpl_Input_ChurchesOnConflict;
+
+  TRes call({
+    Enum_ChurchesConstraint? constraint,
+    List<Enum_ChurchesUpdateColumn>? updateColumns,
+    Input_ChurchesBoolExp? where,
+  });
+  CopyWith_Input_ChurchesBoolExp<TRes> get where;
+}
+
+class _CopyWithImpl_Input_ChurchesOnConflict<TRes>
+    implements CopyWith_Input_ChurchesOnConflict<TRes> {
+  _CopyWithImpl_Input_ChurchesOnConflict(this._instance, this._then);
+
+  final Input_ChurchesOnConflict _instance;
+
+  final TRes Function(Input_ChurchesOnConflict) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? constraint = _undefined,
+    Object? updateColumns = _undefined,
+    Object? where = _undefined,
+  }) => _then(
+    Input_ChurchesOnConflict._({
+      ..._instance._$data,
+      if (constraint != _undefined && constraint != null)
+        'constraint': (constraint as Enum_ChurchesConstraint),
+      if (updateColumns != _undefined && updateColumns != null)
+        'updateColumns': (updateColumns as List<Enum_ChurchesUpdateColumn>),
+      if (where != _undefined) 'where': (where as Input_ChurchesBoolExp?),
+    }),
+  );
+
+  CopyWith_Input_ChurchesBoolExp<TRes> get where {
+    final local$where = _instance.where;
+    return local$where == null
+        ? CopyWith_Input_ChurchesBoolExp.stub(_then(_instance))
+        : CopyWith_Input_ChurchesBoolExp(local$where, (e) => call(where: e));
+  }
+}
+
+class _CopyWithStubImpl_Input_ChurchesOnConflict<TRes>
+    implements CopyWith_Input_ChurchesOnConflict<TRes> {
+  _CopyWithStubImpl_Input_ChurchesOnConflict(this._res);
+
+  TRes _res;
+
+  call({
+    Enum_ChurchesConstraint? constraint,
+    List<Enum_ChurchesUpdateColumn>? updateColumns,
+    Input_ChurchesBoolExp? where,
+  }) => _res;
+
+  CopyWith_Input_ChurchesBoolExp<TRes> get where =>
+      CopyWith_Input_ChurchesBoolExp.stub(_res);
+}
+
+class Input_ChurchesOrderBy {
+  factory Input_ChurchesOrderBy({
+    Input_FathersAggregateOrderBy? fathersAggregate,
+    Enum_OrderBy? id,
+    Enum_OrderBy? isHidden,
+    Enum_OrderBy? name,
+    Input_PersonsAggregateOrderBy? personsAggregate,
+  }) => Input_ChurchesOrderBy._({
+    if (fathersAggregate != null) r'fathersAggregate': fathersAggregate,
+    if (id != null) r'id': id,
+    if (isHidden != null) r'isHidden': isHidden,
+    if (name != null) r'name': name,
+    if (personsAggregate != null) r'personsAggregate': personsAggregate,
+  });
+
+  Input_ChurchesOrderBy._(this._$data);
+
+  factory Input_ChurchesOrderBy.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('fathersAggregate')) {
+      final l$fathersAggregate = data['fathersAggregate'];
+      result$data['fathersAggregate'] = l$fathersAggregate == null
+          ? null
+          : Input_FathersAggregateOrderBy.fromJson(
+              (l$fathersAggregate as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('id')) {
+      final l$id = data['id'];
+      result$data['id'] = l$id == null
+          ? null
+          : fromJson_Enum_OrderBy((l$id as String));
+    }
+    if (data.containsKey('isHidden')) {
+      final l$isHidden = data['isHidden'];
+      result$data['isHidden'] = l$isHidden == null
+          ? null
+          : fromJson_Enum_OrderBy((l$isHidden as String));
+    }
+    if (data.containsKey('name')) {
+      final l$name = data['name'];
+      result$data['name'] = l$name == null
+          ? null
+          : fromJson_Enum_OrderBy((l$name as String));
+    }
+    if (data.containsKey('personsAggregate')) {
+      final l$personsAggregate = data['personsAggregate'];
+      result$data['personsAggregate'] = l$personsAggregate == null
+          ? null
+          : Input_PersonsAggregateOrderBy.fromJson(
+              (l$personsAggregate as Map<String, dynamic>),
+            );
+    }
+    return Input_ChurchesOrderBy._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Input_FathersAggregateOrderBy? get fathersAggregate =>
+      (_$data['fathersAggregate'] as Input_FathersAggregateOrderBy?);
+
+  Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get isHidden => (_$data['isHidden'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
+
+  Input_PersonsAggregateOrderBy? get personsAggregate =>
+      (_$data['personsAggregate'] as Input_PersonsAggregateOrderBy?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('fathersAggregate')) {
+      final l$fathersAggregate = fathersAggregate;
+      result$data['fathersAggregate'] = l$fathersAggregate?.toJson();
+    }
+    if (_$data.containsKey('id')) {
+      final l$id = id;
+      result$data['id'] = l$id == null ? null : toJson_Enum_OrderBy(l$id);
+    }
+    if (_$data.containsKey('isHidden')) {
+      final l$isHidden = isHidden;
+      result$data['isHidden'] = l$isHidden == null
+          ? null
+          : toJson_Enum_OrderBy(l$isHidden);
+    }
+    if (_$data.containsKey('name')) {
+      final l$name = name;
+      result$data['name'] = l$name == null ? null : toJson_Enum_OrderBy(l$name);
+    }
+    if (_$data.containsKey('personsAggregate')) {
+      final l$personsAggregate = personsAggregate;
+      result$data['personsAggregate'] = l$personsAggregate?.toJson();
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_ChurchesOrderBy<Input_ChurchesOrderBy> get copyWith =>
+      CopyWith_Input_ChurchesOrderBy(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_ChurchesOrderBy || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$fathersAggregate = fathersAggregate;
+    final lOther$fathersAggregate = other.fathersAggregate;
+    if (_$data.containsKey('fathersAggregate') !=
+        other._$data.containsKey('fathersAggregate')) {
+      return false;
+    }
+    if (l$fathersAggregate != lOther$fathersAggregate) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
+      return false;
+    }
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$isHidden = isHidden;
+    final lOther$isHidden = other.isHidden;
+    if (_$data.containsKey('isHidden') !=
+        other._$data.containsKey('isHidden')) {
+      return false;
+    }
+    if (l$isHidden != lOther$isHidden) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (_$data.containsKey('name') != other._$data.containsKey('name')) {
+      return false;
+    }
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$personsAggregate = personsAggregate;
+    final lOther$personsAggregate = other.personsAggregate;
+    if (_$data.containsKey('personsAggregate') !=
+        other._$data.containsKey('personsAggregate')) {
+      return false;
+    }
+    if (l$personsAggregate != lOther$personsAggregate) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$fathersAggregate = fathersAggregate;
+    final l$id = id;
+    final l$isHidden = isHidden;
+    final l$name = name;
+    final l$personsAggregate = personsAggregate;
+    return Object.hashAll([
+      _$data.containsKey('fathersAggregate') ? l$fathersAggregate : const {},
+      _$data.containsKey('id') ? l$id : const {},
+      _$data.containsKey('isHidden') ? l$isHidden : const {},
+      _$data.containsKey('name') ? l$name : const {},
+      _$data.containsKey('personsAggregate') ? l$personsAggregate : const {},
+    ]);
+  }
+}
+
 abstract class CopyWith_Input_ChurchesOrderBy<TRes> {
   factory CopyWith_Input_ChurchesOrderBy(
     Input_ChurchesOrderBy instance,
