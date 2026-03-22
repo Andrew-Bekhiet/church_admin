@@ -84,7 +84,6 @@ jobs:
           flutter-version-file: client/.fvmrc
           pub-cache-key: "flutter-pub:os:-:channel:-:version:-:arch:"
           cache-key: "flutter:os:-:channel:-:version:-:arch:"
-          channel: "stable"
 
       - name: Populate Flutter cache
         run: flutter precache
@@ -147,7 +146,6 @@ jobs:
           flutter-version-file: client/.fvmrc
           pub-cache-key: "flutter-pub:os:-:channel:-:version:-:arch:"
           cache-key: "flutter:os:-:channel:-:version:-:arch:"
-          channel: "stable"
 
       - name: Install Codemagic CLI tools
         run: pip install codemagic-cli-tools
@@ -348,7 +346,6 @@ jobs:
           flutter-version-file: client/.fvmrc
           pub-cache-key: "flutter-pub:os:-:channel:-:version:-:arch:"
           cache-key: "flutter:os:-:channel:-:version:-:arch:"
-          channel: "stable"
 
       - name: Populate the Flutter tool's cache of binary artifacts
         run: flutter precache
