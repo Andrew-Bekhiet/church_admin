@@ -2,9 +2,9 @@
   "folders": [
     {
       "name": "church_admin",
-      "path": "."
+      "path": ".",
     },
-    { "name": "server", "path": "./server" }
+    { "name": "server", "path": "./server" },
   ],
   "launch": {
     "version": "0.2.0",
@@ -13,28 +13,28 @@
         "name": "church_admin",
         "request": "launch",
         "type": "dart",
-        "cwd": "${workspaceFolder:church_admin}/client"
+        "cwd": "${workspaceFolder:church_admin}/client",
       },
       {
         "name": "church_admin (profile mode)",
         "request": "launch",
         "type": "dart",
         "flutterMode": "profile",
-        "cwd": "${workspaceFolder:church_admin}/client/"
+        "cwd": "${workspaceFolder:church_admin}/client/",
       },
       {
         "name": "church_admin (release mode)",
         "request": "launch",
         "type": "dart",
         "flutterMode": "release",
-        "cwd": "${workspaceFolder:church_admin}/client/"
+        "cwd": "${workspaceFolder:church_admin}/client/",
       },
       {
         "name": "church_admin (web debug mode)",
         "request": "launch",
         "type": "dart",
         "cwd": "${workspaceFolder:church_admin}/client/",
-        "args": ["--web-port", "5083"]
+        "args": ["--web-port", "5083"],
       },
       {
         "name": "Debug Build Generator",
@@ -42,17 +42,17 @@
         "program": ".dart_tool/build/entrypoint/build.dart",
         "type": "dart",
         "args": ["build", "--delete-conflicting-outputs"],
-        "cwd": "${workspaceFolder:church_admin}/client/"
+        "cwd": "${workspaceFolder:church_admin}/client/",
       },
       {
         "name": "Golden",
         "request": "launch",
         "type": "dart",
         "codeLens": {
-          "for": ["run-test", "run-test-file"]
+          "for": ["run-test", "run-test-file"],
         },
         "args": ["--update-goldens"],
-        "cwd": "${workspaceFolder:church_admin}/client/"
+        "cwd": "${workspaceFolder:church_admin}/client/",
       },
       {
         "name": "Debug Migration Script",
@@ -75,11 +75,11 @@
           "-a",
           "--no-migrate-data",
           "-a",
-          "--migrate-storage"
-        ]
-      }
+          "--migrate-storage",
+        ],
+      },
     ],
-    "compounds": []
+    "compounds": [],
   },
   "tasks": {
     "version": "2.0.0",
@@ -87,12 +87,12 @@
       {
         "group": {
           "kind": "test",
-          "isDefault": true
+          "isDefault": true,
         },
         "label": "Flutter test coverage",
         "type": "shell",
         "options": {
-          "cwd": "${workspaceFolder:church_admin}/client"
+          "cwd": "${workspaceFolder:church_admin}/client",
         },
         "command": "flutter",
         "args": [
@@ -114,13 +114,17 @@
           "-r",
           "'.freezed.dart$'",
           "-r",
-          "'__generated__'"
+          "'__generated__'",
         ],
-        "problemMatcher": []
-      }
-    ]
+        "problemMatcher": [],
+      },
+    ],
   },
   "settings": {
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
+    "dart.flutterSdkPath": "client/.fvm/flutter_sdk",
     "workbench.colorCustomizations": {
       "activityBar.activeBackground": "#00c9b6",
       "activityBar.activeBorder": "#ca00df",
@@ -140,14 +144,14 @@
       "titleBar.inactiveBackground": "#00968899",
       "titleBar.inactiveForeground": "#e7e7e799",
       "commandCenter.border": "#e7e7e799",
-      "elixirLS.projectDir": "./backend-beta"
+      "elixirLS.projectDir": "./backend-beta",
     },
     "peacock.color": "009688",
     "json.schemas": [
       {
         "fileMatch": ["**/metadata.json"],
-        "url": "https://github.com/hasura/graphql-engine/raw/refs/heads/master/contrib/metadata-types/src/metadata-schemas/MetadataExport.schema.json"
-      }
+        "url": "https://github.com/hasura/graphql-engine/raw/refs/heads/master/contrib/metadata-types/src/metadata-schemas/MetadataExport.schema.json",
+      },
     ],
     "yaml.schemas": {
       "https://github.com/hasura/graphql-engine/raw/refs/heads/master/contrib/metadata-types/src/metadata-schemas/ActionsYAML.schema.json": "**/actions.yaml",
@@ -160,12 +164,12 @@
       "https://json.schemastore.org/dart-build": [
         "build.yaml",
         "*.build.yaml",
-        "build.*.yaml"
-      ]
+        "build.*.yaml",
+      ],
     },
     "autoHide.autoHideSideBar": false,
     "autoHide.autoHidePanel": true,
     "cSpell.words": ["Shammas"],
-    "sqlfluff.excludeRules": ["RF06"]
-  }
+    "sqlfluff.excludeRules": ["RF06"],
+  },
 }
