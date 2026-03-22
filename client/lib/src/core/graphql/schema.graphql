@@ -6750,6 +6750,7 @@ type Streets {
   ): HistoryEditHistoryAggregate!
   id: uuid!
   lastEdit: HistoryLatestEdits
+  lastVisit: HistoryLatestVisits
   line: geography
   name: String!
   photoUpdatedAt: timestamptz
@@ -6790,6 +6791,7 @@ input StreetsBoolExp {
   editHistoryAggregate: HistoryEditHistoryAggregateBoolExp
   id: UuidComparisonExp
   lastEdit: HistoryLatestEditsBoolExp
+  lastVisit: HistoryLatestVisitsBoolExp
   line: GeographyComparisonExp
   name: StringComparisonExp
   photoUpdatedAt: TimestamptzComparisonExp
@@ -6849,6 +6851,7 @@ input StreetsOrderBy {
   editHistoryAggregate: HistoryEditHistoryAggregateOrderBy
   id: OrderBy
   lastEdit: HistoryLatestEditsOrderBy
+  lastVisit: HistoryLatestVisitsOrderBy
   line: OrderBy
   name: OrderBy
   photoUpdatedAt: OrderBy

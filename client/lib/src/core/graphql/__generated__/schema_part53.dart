@@ -1,6 +1,26 @@
 // Part 53 of the schema
 part of "schema.graphql.dart";
 
+abstract class CopyWith_Input_StreetsInsertInput<TRes> {
+  factory CopyWith_Input_StreetsInsertInput(
+    Input_StreetsInsertInput instance,
+    TRes Function(Input_StreetsInsertInput) then,
+  ) = _CopyWithImpl_Input_StreetsInsertInput;
+
+  factory CopyWith_Input_StreetsInsertInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_StreetsInsertInput;
+
+  TRes call({
+    Input_AddressesArrRelInsertInput? addresses,
+    Input_AreasStreetsArrRelInsertInput? areas,
+    int? color,
+    Map<String, dynamic>? line,
+    String? name,
+  });
+  CopyWith_Input_AddressesArrRelInsertInput<TRes> get addresses;
+  CopyWith_Input_AreasStreetsArrRelInsertInput<TRes> get areas;
+}
+
 class _CopyWithImpl_Input_StreetsInsertInput<TRes>
     implements CopyWith_Input_StreetsInsertInput<TRes> {
   _CopyWithImpl_Input_StreetsInsertInput(this._instance, this._then);
@@ -430,6 +450,7 @@ class Input_StreetsOrderBy {
     Input_HistoryEditHistoryAggregateOrderBy? editHistoryAggregate,
     Enum_OrderBy? id,
     Input_HistoryLatestEditsOrderBy? lastEdit,
+    Input_HistoryLatestVisitsOrderBy? lastVisit,
     Enum_OrderBy? line,
     Enum_OrderBy? name,
     Enum_OrderBy? photoUpdatedAt,
@@ -443,6 +464,7 @@ class Input_StreetsOrderBy {
       r'editHistoryAggregate': editHistoryAggregate,
     if (id != null) r'id': id,
     if (lastEdit != null) r'lastEdit': lastEdit,
+    if (lastVisit != null) r'lastVisit': lastVisit,
     if (line != null) r'line': line,
     if (name != null) r'name': name,
     if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
@@ -503,6 +525,14 @@ class Input_StreetsOrderBy {
               (l$lastEdit as Map<String, dynamic>),
             );
     }
+    if (data.containsKey('lastVisit')) {
+      final l$lastVisit = data['lastVisit'];
+      result$data['lastVisit'] = l$lastVisit == null
+          ? null
+          : Input_HistoryLatestVisitsOrderBy.fromJson(
+              (l$lastVisit as Map<String, dynamic>),
+            );
+    }
     if (data.containsKey('line')) {
       final l$line = data['line'];
       result$data['line'] = l$line == null
@@ -551,6 +581,9 @@ class Input_StreetsOrderBy {
   Input_HistoryLatestEditsOrderBy? get lastEdit =>
       (_$data['lastEdit'] as Input_HistoryLatestEditsOrderBy?);
 
+  Input_HistoryLatestVisitsOrderBy? get lastVisit =>
+      (_$data['lastVisit'] as Input_HistoryLatestVisitsOrderBy?);
+
   Enum_OrderBy? get line => (_$data['line'] as Enum_OrderBy?);
 
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
@@ -593,6 +626,10 @@ class Input_StreetsOrderBy {
     if (_$data.containsKey('lastEdit')) {
       final l$lastEdit = lastEdit;
       result$data['lastEdit'] = l$lastEdit?.toJson();
+    }
+    if (_$data.containsKey('lastVisit')) {
+      final l$lastVisit = lastVisit;
+      result$data['lastVisit'] = l$lastVisit?.toJson();
     }
     if (_$data.containsKey('line')) {
       final l$line = line;
@@ -689,6 +726,15 @@ class Input_StreetsOrderBy {
     if (l$lastEdit != lOther$lastEdit) {
       return false;
     }
+    final l$lastVisit = lastVisit;
+    final lOther$lastVisit = other.lastVisit;
+    if (_$data.containsKey('lastVisit') !=
+        other._$data.containsKey('lastVisit')) {
+      return false;
+    }
+    if (l$lastVisit != lOther$lastVisit) {
+      return false;
+    }
     final l$line = line;
     final lOther$line = other.line;
     if (_$data.containsKey('line') != other._$data.containsKey('line')) {
@@ -735,6 +781,7 @@ class Input_StreetsOrderBy {
     final l$editHistoryAggregate = editHistoryAggregate;
     final l$id = id;
     final l$lastEdit = lastEdit;
+    final l$lastVisit = lastVisit;
     final l$line = line;
     final l$name = name;
     final l$photoUpdatedAt = photoUpdatedAt;
@@ -751,6 +798,7 @@ class Input_StreetsOrderBy {
           : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('lastEdit') ? l$lastEdit : const {},
+      _$data.containsKey('lastVisit') ? l$lastVisit : const {},
       _$data.containsKey('line') ? l$line : const {},
       _$data.containsKey('name') ? l$name : const {},
       _$data.containsKey('photoUpdatedAt') ? l$photoUpdatedAt : const {},
@@ -776,6 +824,7 @@ abstract class CopyWith_Input_StreetsOrderBy<TRes> {
     Input_HistoryEditHistoryAggregateOrderBy? editHistoryAggregate,
     Enum_OrderBy? id,
     Input_HistoryLatestEditsOrderBy? lastEdit,
+    Input_HistoryLatestVisitsOrderBy? lastVisit,
     Enum_OrderBy? line,
     Enum_OrderBy? name,
     Enum_OrderBy? photoUpdatedAt,
@@ -786,6 +835,7 @@ abstract class CopyWith_Input_StreetsOrderBy<TRes> {
   CopyWith_Input_HistoryEditHistoryAggregateOrderBy<TRes>
   get editHistoryAggregate;
   CopyWith_Input_HistoryLatestEditsOrderBy<TRes> get lastEdit;
+  CopyWith_Input_HistoryLatestVisitsOrderBy<TRes> get lastVisit;
 }
 
 class _CopyWithImpl_Input_StreetsOrderBy<TRes>
@@ -806,6 +856,7 @@ class _CopyWithImpl_Input_StreetsOrderBy<TRes>
     Object? editHistoryAggregate = _undefined,
     Object? id = _undefined,
     Object? lastEdit = _undefined,
+    Object? lastVisit = _undefined,
     Object? line = _undefined,
     Object? name = _undefined,
     Object? photoUpdatedAt = _undefined,
@@ -827,6 +878,8 @@ class _CopyWithImpl_Input_StreetsOrderBy<TRes>
       if (id != _undefined) 'id': (id as Enum_OrderBy?),
       if (lastEdit != _undefined)
         'lastEdit': (lastEdit as Input_HistoryLatestEditsOrderBy?),
+      if (lastVisit != _undefined)
+        'lastVisit': (lastVisit as Input_HistoryLatestVisitsOrderBy?),
       if (line != _undefined) 'line': (line as Enum_OrderBy?),
       if (name != _undefined) 'name': (name as Enum_OrderBy?),
       if (photoUpdatedAt != _undefined)
@@ -878,6 +931,16 @@ class _CopyWithImpl_Input_StreetsOrderBy<TRes>
             (e) => call(lastEdit: e),
           );
   }
+
+  CopyWith_Input_HistoryLatestVisitsOrderBy<TRes> get lastVisit {
+    final local$lastVisit = _instance.lastVisit;
+    return local$lastVisit == null
+        ? CopyWith_Input_HistoryLatestVisitsOrderBy.stub(_then(_instance))
+        : CopyWith_Input_HistoryLatestVisitsOrderBy(
+            local$lastVisit,
+            (e) => call(lastVisit: e),
+          );
+  }
 }
 
 class _CopyWithStubImpl_Input_StreetsOrderBy<TRes>
@@ -894,6 +957,7 @@ class _CopyWithStubImpl_Input_StreetsOrderBy<TRes>
     Input_HistoryEditHistoryAggregateOrderBy? editHistoryAggregate,
     Enum_OrderBy? id,
     Input_HistoryLatestEditsOrderBy? lastEdit,
+    Input_HistoryLatestVisitsOrderBy? lastVisit,
     Enum_OrderBy? line,
     Enum_OrderBy? name,
     Enum_OrderBy? photoUpdatedAt,
@@ -912,6 +976,9 @@ class _CopyWithStubImpl_Input_StreetsOrderBy<TRes>
 
   CopyWith_Input_HistoryLatestEditsOrderBy<TRes> get lastEdit =>
       CopyWith_Input_HistoryLatestEditsOrderBy.stub(_res);
+
+  CopyWith_Input_HistoryLatestVisitsOrderBy<TRes> get lastVisit =>
+      CopyWith_Input_HistoryLatestVisitsOrderBy.stub(_res);
 }
 
 class Input_StreetsPkColumnsInput {
