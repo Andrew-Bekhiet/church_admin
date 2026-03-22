@@ -31,31 +31,36 @@ class HistoryProperty<T extends LastRecordedByInfo> extends StatelessWidget {
         name,
         style: Theme.of(context).textTheme.headlineSmall,
       ),
-      subtitle: Row(
-        children: <Widget>[
-          Expanded(
-            child: Text(
-              value?.toDurationString() ?? '',
-              style: Theme.of(context).textTheme.titleMedium,
+      subtitle: InkWell(
+        onTap: _onHistoryTap(context),
+        child: Row(
+          spacing: 10,
+          children: [
+            Expanded(
+              child: Text(
+                value?.toDurationString() ?? '',
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
             ),
-          ),
-          Text(
-            value != null ? dateFormat.format(value!) : '',
-            style: Theme.of(context).textTheme.labelMedium,
-          ),
-          IconButton(
-            padding: const EdgeInsets.only(right: 42),
-            tooltip: 'السجل',
-            icon: const Icon(Symbols.history, size: 36),
-            onPressed: _onHistoryTap(context),
-          ),
-          if (onRecordNow != null)
-            IconButton(
-              onPressed: onRecordNow,
-              icon: const Icon(Symbols.task_alt),
-              tooltip: 'تسجيل $name',
+            Text(
+              value != null ? dateFormat.format(value!) : '',
+              style: Theme.of(context).textTheme.labelMedium,
             ),
-        ],
+            if (onRecordNow != null)
+              OutlinedButton.icon(
+                style: OutlinedButton.styleFrom(
+                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  side: BorderSide(
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                ),
+                onPressed: onRecordNow,
+                icon: const Icon(Symbols.task_alt),
+                label: const Text('تحديث الآن'),
+              ),
+          ],
+        ),
       ),
     );
   }
