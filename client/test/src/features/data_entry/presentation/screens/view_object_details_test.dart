@@ -216,16 +216,19 @@ Future<void> _pumpWidget(
   StreamController<Area?>? streamController,
   Size? size,
 }) async {
-  size ??= const Size(1080, 1920);
+  final surfaceSize = size ?? const Size(1080, 1920);
+  final objectStreamController =
+      streamController ?? (StreamController<Area?>()..add(area));
+
   if (streamController == null) {
-    streamController = StreamController<Area?>()..add(area);
-    addTearDown(streamController.close);
+    addTearDown(objectStreamController.close);
   }
+
   await tester.pumpWidgetBuilder(
     ViewObjectDetails<Area>(
       object: area,
       objectId: area.id,
-      objectStream: streamController.stream,
+      objectStream: objectStreamController.stream,
       notFoundBuilder: (context) =>
           const Placeholder(key: ValueKey('notFound')),
       editButtonBuilder: (context, person) => const Icon(
@@ -257,7 +260,7 @@ Future<void> _pumpWidget(
             onPressed: () {},
           ),
     ),
-    surfaceSize: size,
+    surfaceSize: surfaceSize,
     wrapper: materialAppWrapper(
       localeOverrides: [const Locale('ar', 'EG')],
       localizations: [
