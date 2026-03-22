@@ -327,7 +327,10 @@ class HistoryDAO {
     );
   }
 
-  Future<LastRecordedByInfo?> updateStreetLastVisit({required String streetId, required DateTime lastVisit}) {
+  Future<LastRecordedByInfo?> updateStreetLastVisit({
+    required String streetId,
+    required DateTime lastVisit,
+  }) {
     return graphQLClient.mutateAndReturnParsed(
       MutationOptions(
         document: documentNodeMutationinsertStreetLastVisit,
