@@ -34,7 +34,7 @@ class HomeScreenWebRoute extends GoRouteData with $HomeScreenWebRoute {
       ):
         return const UnapprovedUserRoute().location;
 
-      case AuthAuthenticated(userData: User(person: final person))
+      case AuthAuthenticated(userData: User(:final person))
           when !(person?.spiritDataUpToDate() ?? false):
         return Uri(
           path: const UpdateUserSpiritDataRoute().location,
