@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:graphql/client.dart';
@@ -22,11 +21,9 @@ class LoggingService extends BlocObserver {
 
   late final Link loggingLink = LoggingLink(this);
 
-  LoggingService({required String sentryDSN}) {
+  LoggingService() {
     FlutterError.onError = _onFlutterError;
     ErrorWidget.builder = _errorWidgetBuilder;
-
-    unawaited(_initSentry(sentryDSN));
   }
 
   Future<void> _onFlutterError(FlutterErrorDetails flutterError) async {
@@ -47,29 +44,6 @@ class LoggingService extends BlocObserver {
           'حدث خطأ:\n${error.summary}',
         ),
       ),
-    );
-  }
-
-  Future<void> _initSentry(String sentryDSN) async {
-    await SentryFlutter.init(
-      (options) => options
-        ..dsn = sentryDSN
-        ..environment = kReleaseMode ? 'release' : 'debug'
-        ..enableAutoPerformanceTracing = true
-        ..sendDefaultPii = true
-        ..enableTimeToFullDisplayTracing = true
-        ..anrEnabled = true
-        ..debug = false
-        ..enableNativeCrashHandling = true
-        ..enableDeduplication = true
-        ..attachThreads = true
-        ..enableWindowMetricBreadcrumbs = true
-        ..reportSilentFlutterErrors = true
-        ..attachScreenshot = true
-        ..screenshotQuality = SentryScreenshotQuality.low
-        ..attachViewHierarchy = true
-        ..enableLogs = true
-        ..enableUserInteractionTracing = true,
     );
   }
 

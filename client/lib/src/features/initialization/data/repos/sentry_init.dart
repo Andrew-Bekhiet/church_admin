@@ -12,11 +12,23 @@ class SentryInit implements Initializer {
     await SentryFlutter.init(
       (options) => options
         ..dsn = globalProviderContainer.read(secretsServiceProvider).sentryDSN
-        ..diagnosticLevel = SentryLevel.warning
-        ..environment = kReleaseMode ? 'Production' : 'Debug'
+        ..environment = kReleaseMode ? 'release' : 'debug'
+        ..enableAutoPerformanceTracing = true
+        ..sendDefaultPii = true
+        ..enableTimeToFullDisplayTracing = true
+        ..anrEnabled = true
+        ..debug = false
+        ..enableNativeCrashHandling = true
+        ..enableDeduplication = true
+        ..attachThreads = true
+        ..enableWindowMetricBreadcrumbs = true
+        ..reportSilentFlutterErrors = true
         ..attachScreenshot = true
+        ..screenshotQuality = SentryScreenshotQuality.low
+        // We'll use it even if it's experimental
+        // ignore: experimental_member_use
         ..attachViewHierarchy = true
-        ..screenshotQuality = SentryScreenshotQuality.medium
+        ..enableLogs = true
         ..enableUserInteractionTracing = true,
     );
   }
