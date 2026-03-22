@@ -1662,6 +1662,27 @@ const documentNodeSubscriptionwatchStreet = DocumentNode(
                   ),
                 ),
                 FieldNode(
+                  name: NameNode(value: 'lastVisit'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: SelectionSetNode(
+                    selections: [
+                      FragmentSpreadNode(
+                        name: NameNode(value: 'LatestVisitHistory'),
+                        directives: [],
+                      ),
+                      FieldNode(
+                        name: NameNode(value: '__typename'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                    ],
+                  ),
+                ),
+                FieldNode(
                   name: NameNode(value: '__typename'),
                   alias: null,
                   arguments: [],
@@ -1681,6 +1702,7 @@ const documentNodeSubscriptionwatchStreet = DocumentNode(
     fragmentDefinitionLatestEditHistory,
     fragmentDefinitionUser,
     fragmentDefinitionUserNoPhoto,
+    fragmentDefinitionLatestVisitHistory,
   ],
 );
 
@@ -1697,6 +1719,7 @@ class Subscription_watchStreet_streetsByPk
     required this.areas,
     this.line,
     this.lastEdit,
+    this.lastVisit,
   });
 
   factory Subscription_watchStreet_streetsByPk.fromJson(
@@ -1712,6 +1735,7 @@ class Subscription_watchStreet_streetsByPk
     final l$areas = json['areas'];
     final l$line = json['line'];
     final l$lastEdit = json['lastEdit'];
+    final l$lastVisit = json['lastVisit'];
     return Subscription_watchStreet_streetsByPk(
       id: stringToUuid(l$id),
       name: (l$name as String),
@@ -1735,6 +1759,11 @@ class Subscription_watchStreet_streetsByPk
           : Fragment_LatestEditHistory.fromJson(
               (l$lastEdit as Map<String, dynamic>),
             ),
+      lastVisit: l$lastVisit == null
+          ? null
+          : Fragment_LatestVisitHistory.fromJson(
+              (l$lastVisit as Map<String, dynamic>),
+            ),
     );
   }
 
@@ -1757,6 +1786,8 @@ class Subscription_watchStreet_streetsByPk
   final Map<String, dynamic>? line;
 
   final Fragment_LatestEditHistory? lastEdit;
+
+  final Fragment_LatestVisitHistory? lastVisit;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -1782,6 +1813,8 @@ class Subscription_watchStreet_streetsByPk
     _resultData['line'] = l$line;
     final l$lastEdit = lastEdit;
     _resultData['lastEdit'] = l$lastEdit?.toJson();
+    final l$lastVisit = lastVisit;
+    _resultData['lastVisit'] = l$lastVisit?.toJson();
     return _resultData;
   }
 
@@ -1797,6 +1830,7 @@ class Subscription_watchStreet_streetsByPk
     final l$areas = areas;
     final l$line = line;
     final l$lastEdit = lastEdit;
+    final l$lastVisit = lastVisit;
     return Object.hashAll([
       l$id,
       l$name,
@@ -1808,6 +1842,7 @@ class Subscription_watchStreet_streetsByPk
       Object.hashAll(l$areas.map((v) => v)),
       l$line,
       l$lastEdit,
+      l$lastVisit,
     ]);
   }
 
@@ -1877,6 +1912,11 @@ class Subscription_watchStreet_streetsByPk
     if (l$lastEdit != lOther$lastEdit) {
       return false;
     }
+    final l$lastVisit = lastVisit;
+    final lOther$lastVisit = other.lastVisit;
+    if (l$lastVisit != lOther$lastVisit) {
+      return false;
+    }
     return true;
   }
 }
@@ -1909,6 +1949,7 @@ abstract class CopyWith_Subscription_watchStreet_streetsByPk<TRes> {
     List<Subscription_watchStreet_streetsByPk_areas>? areas,
     Map<String, dynamic>? line,
     Fragment_LatestEditHistory? lastEdit,
+    Fragment_LatestVisitHistory? lastVisit,
   });
   TRes areas(
     Iterable<Subscription_watchStreet_streetsByPk_areas> Function(
@@ -1921,6 +1962,7 @@ abstract class CopyWith_Subscription_watchStreet_streetsByPk<TRes> {
     _fn,
   );
   CopyWith_Fragment_LatestEditHistory<TRes> get lastEdit;
+  CopyWith_Fragment_LatestVisitHistory<TRes> get lastVisit;
 }
 
 class _CopyWithImpl_Subscription_watchStreet_streetsByPk<TRes>
@@ -1947,6 +1989,7 @@ class _CopyWithImpl_Subscription_watchStreet_streetsByPk<TRes>
     Object? areas = _undefined,
     Object? line = _undefined,
     Object? lastEdit = _undefined,
+    Object? lastVisit = _undefined,
   }) => _then(
     Subscription_watchStreet_streetsByPk(
       id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
@@ -1975,6 +2018,9 @@ class _CopyWithImpl_Subscription_watchStreet_streetsByPk<TRes>
       lastEdit: lastEdit == _undefined
           ? _instance.lastEdit
           : (lastEdit as Fragment_LatestEditHistory?),
+      lastVisit: lastVisit == _undefined
+          ? _instance.lastVisit
+          : (lastVisit as Fragment_LatestVisitHistory?),
     ),
   );
 
@@ -2004,6 +2050,16 @@ class _CopyWithImpl_Subscription_watchStreet_streetsByPk<TRes>
             (e) => call(lastEdit: e),
           );
   }
+
+  CopyWith_Fragment_LatestVisitHistory<TRes> get lastVisit {
+    final local$lastVisit = _instance.lastVisit;
+    return local$lastVisit == null
+        ? CopyWith_Fragment_LatestVisitHistory.stub(_then(_instance))
+        : CopyWith_Fragment_LatestVisitHistory(
+            local$lastVisit,
+            (e) => call(lastVisit: e),
+          );
+  }
 }
 
 class _CopyWithStubImpl_Subscription_watchStreet_streetsByPk<TRes>
@@ -2023,12 +2079,16 @@ class _CopyWithStubImpl_Subscription_watchStreet_streetsByPk<TRes>
     List<Subscription_watchStreet_streetsByPk_areas>? areas,
     Map<String, dynamic>? line,
     Fragment_LatestEditHistory? lastEdit,
+    Fragment_LatestVisitHistory? lastVisit,
   }) => _res;
 
   areas(_fn) => _res;
 
   CopyWith_Fragment_LatestEditHistory<TRes> get lastEdit =>
       CopyWith_Fragment_LatestEditHistory.stub(_res);
+
+  CopyWith_Fragment_LatestVisitHistory<TRes> get lastVisit =>
+      CopyWith_Fragment_LatestVisitHistory.stub(_res);
 }
 
 class Subscription_watchStreet_streetsByPk_areas {

@@ -203,6 +203,10 @@ class _ViewStreetState extends State<ViewStreet> {
               objectsPaginatableStream: DatabaseService.I.history
                   .paginateVisitHistory<Street>(id: street.id),
             ),
+            onRecordNow: () => DatabaseService.I.history.updateStreetLastVisit(
+              streetId: widget.streetId,
+              lastVisit: DateTime.now(),
+            ),
           ),
           HistoryProperty(
             name: 'أخر تحديث للبيانات',

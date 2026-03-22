@@ -326,4 +326,23 @@ class HistoryDAO {
       ),
     );
   }
+
+  Future<LastRecordedByInfo?> updateStreetLastVisit({
+    required String streetId,
+    required DateTime lastVisit,
+  }) {
+    return graphQLClient.mutateAndReturnParsed(
+      MutationOptions(
+        document: documentNodeMutationinsertStreetLastVisit,
+        operationName: 'insertStreetLastVisit',
+        variables: Variables_Mutation_insertStreetLastVisit(
+          streetId: streetId.toUuid(),
+          lastVisit: lastVisit,
+        ).toJson(),
+        parserFn: db.parser.singleOrNullParser(
+          db.parser.singleOrNullParser(LastRecordedByInfo.fromJson),
+        ),
+      ),
+    );
+  }
 }

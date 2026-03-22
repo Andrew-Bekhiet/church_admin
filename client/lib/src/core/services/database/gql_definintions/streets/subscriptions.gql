@@ -29,5 +29,8 @@ subscription watchStreet($id: uuid!) {
     lastEdit {
       ...LatestEditHistory
     }
+    lastVisit {
+      ...LatestVisitHistory
+    }
   }
 }

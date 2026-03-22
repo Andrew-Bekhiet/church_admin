@@ -1432,6 +1432,7 @@ class Input_StreetsBoolExp {
     Input_HistoryEditHistoryAggregateBoolExp? editHistoryAggregate,
     Input_UuidComparisonExp? id,
     Input_HistoryLatestEditsBoolExp? lastEdit,
+    Input_HistoryLatestVisitsBoolExp? lastVisit,
     Input_GeographyComparisonExp? line,
     Input_StringComparisonExp? name,
     Input_TimestamptzComparisonExp? photoUpdatedAt,
@@ -1449,6 +1450,7 @@ class Input_StreetsBoolExp {
       r'editHistoryAggregate': editHistoryAggregate,
     if (id != null) r'id': id,
     if (lastEdit != null) r'lastEdit': lastEdit,
+    if (lastVisit != null) r'lastVisit': lastVisit,
     if (line != null) r'line': line,
     if (name != null) r'name': name,
     if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
@@ -1543,6 +1545,14 @@ class Input_StreetsBoolExp {
               (l$lastEdit as Map<String, dynamic>),
             );
     }
+    if (data.containsKey('lastVisit')) {
+      final l$lastVisit = data['lastVisit'];
+      result$data['lastVisit'] = l$lastVisit == null
+          ? null
+          : Input_HistoryLatestVisitsBoolExp.fromJson(
+              (l$lastVisit as Map<String, dynamic>),
+            );
+    }
     if (data.containsKey('line')) {
       final l$line = data['line'];
       result$data['line'] = l$line == null
@@ -1612,6 +1622,9 @@ class Input_StreetsBoolExp {
   Input_HistoryLatestEditsBoolExp? get lastEdit =>
       (_$data['lastEdit'] as Input_HistoryLatestEditsBoolExp?);
 
+  Input_HistoryLatestVisitsBoolExp? get lastVisit =>
+      (_$data['lastVisit'] as Input_HistoryLatestVisitsBoolExp?);
+
   Input_GeographyComparisonExp? get line =>
       (_$data['line'] as Input_GeographyComparisonExp?);
 
@@ -1669,6 +1682,10 @@ class Input_StreetsBoolExp {
     if (_$data.containsKey('lastEdit')) {
       final l$lastEdit = lastEdit;
       result$data['lastEdit'] = l$lastEdit?.toJson();
+    }
+    if (_$data.containsKey('lastVisit')) {
+      final l$lastVisit = lastVisit;
+      result$data['lastVisit'] = l$lastVisit?.toJson();
     }
     if (_$data.containsKey('line')) {
       final l$line = line;
@@ -1815,6 +1832,15 @@ class Input_StreetsBoolExp {
     if (l$lastEdit != lOther$lastEdit) {
       return false;
     }
+    final l$lastVisit = lastVisit;
+    final lOther$lastVisit = other.lastVisit;
+    if (_$data.containsKey('lastVisit') !=
+        other._$data.containsKey('lastVisit')) {
+      return false;
+    }
+    if (l$lastVisit != lOther$lastVisit) {
+      return false;
+    }
     final l$line = line;
     final lOther$line = other.line;
     if (_$data.containsKey('line') != other._$data.containsKey('line')) {
@@ -1865,6 +1891,7 @@ class Input_StreetsBoolExp {
     final l$editHistoryAggregate = editHistoryAggregate;
     final l$id = id;
     final l$lastEdit = lastEdit;
+    final l$lastVisit = lastVisit;
     final l$line = line;
     final l$name = name;
     final l$photoUpdatedAt = photoUpdatedAt;
@@ -1891,6 +1918,7 @@ class Input_StreetsBoolExp {
           : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('lastEdit') ? l$lastEdit : const {},
+      _$data.containsKey('lastVisit') ? l$lastVisit : const {},
       _$data.containsKey('line') ? l$line : const {},
       _$data.containsKey('name') ? l$name : const {},
       _$data.containsKey('photoUpdatedAt') ? l$photoUpdatedAt : const {},
@@ -1920,6 +1948,7 @@ abstract class CopyWith_Input_StreetsBoolExp<TRes> {
     Input_HistoryEditHistoryAggregateBoolExp? editHistoryAggregate,
     Input_UuidComparisonExp? id,
     Input_HistoryLatestEditsBoolExp? lastEdit,
+    Input_HistoryLatestVisitsBoolExp? lastVisit,
     Input_GeographyComparisonExp? line,
     Input_StringComparisonExp? name,
     Input_TimestamptzComparisonExp? photoUpdatedAt,
@@ -1947,6 +1976,7 @@ abstract class CopyWith_Input_StreetsBoolExp<TRes> {
   get editHistoryAggregate;
   CopyWith_Input_UuidComparisonExp<TRes> get id;
   CopyWith_Input_HistoryLatestEditsBoolExp<TRes> get lastEdit;
+  CopyWith_Input_HistoryLatestVisitsBoolExp<TRes> get lastVisit;
   CopyWith_Input_GeographyComparisonExp<TRes> get line;
   CopyWith_Input_StringComparisonExp<TRes> get name;
   CopyWith_Input_TimestamptzComparisonExp<TRes> get photoUpdatedAt;
@@ -1975,6 +2005,7 @@ class _CopyWithImpl_Input_StreetsBoolExp<TRes>
     Object? editHistoryAggregate = _undefined,
     Object? id = _undefined,
     Object? lastEdit = _undefined,
+    Object? lastVisit = _undefined,
     Object? line = _undefined,
     Object? name = _undefined,
     Object? photoUpdatedAt = _undefined,
@@ -1999,6 +2030,8 @@ class _CopyWithImpl_Input_StreetsBoolExp<TRes>
       if (id != _undefined) 'id': (id as Input_UuidComparisonExp?),
       if (lastEdit != _undefined)
         'lastEdit': (lastEdit as Input_HistoryLatestEditsBoolExp?),
+      if (lastVisit != _undefined)
+        'lastVisit': (lastVisit as Input_HistoryLatestVisitsBoolExp?),
       if (line != _undefined) 'line': (line as Input_GeographyComparisonExp?),
       if (name != _undefined) 'name': (name as Input_StringComparisonExp?),
       if (photoUpdatedAt != _undefined)
@@ -2117,6 +2150,16 @@ class _CopyWithImpl_Input_StreetsBoolExp<TRes>
           );
   }
 
+  CopyWith_Input_HistoryLatestVisitsBoolExp<TRes> get lastVisit {
+    final local$lastVisit = _instance.lastVisit;
+    return local$lastVisit == null
+        ? CopyWith_Input_HistoryLatestVisitsBoolExp.stub(_then(_instance))
+        : CopyWith_Input_HistoryLatestVisitsBoolExp(
+            local$lastVisit,
+            (e) => call(lastVisit: e),
+          );
+  }
+
   CopyWith_Input_GeographyComparisonExp<TRes> get line {
     final local$line = _instance.line;
     return local$line == null
@@ -2173,6 +2216,7 @@ class _CopyWithStubImpl_Input_StreetsBoolExp<TRes>
     Input_HistoryEditHistoryAggregateBoolExp? editHistoryAggregate,
     Input_UuidComparisonExp? id,
     Input_HistoryLatestEditsBoolExp? lastEdit,
+    Input_HistoryLatestVisitsBoolExp? lastVisit,
     Input_GeographyComparisonExp? line,
     Input_StringComparisonExp? name,
     Input_TimestamptzComparisonExp? photoUpdatedAt,
@@ -2210,6 +2254,9 @@ class _CopyWithStubImpl_Input_StreetsBoolExp<TRes>
 
   CopyWith_Input_HistoryLatestEditsBoolExp<TRes> get lastEdit =>
       CopyWith_Input_HistoryLatestEditsBoolExp.stub(_res);
+
+  CopyWith_Input_HistoryLatestVisitsBoolExp<TRes> get lastVisit =>
+      CopyWith_Input_HistoryLatestVisitsBoolExp.stub(_res);
 
   CopyWith_Input_GeographyComparisonExp<TRes> get line =>
       CopyWith_Input_GeographyComparisonExp.stub(_res);
@@ -2480,24 +2527,4 @@ class Input_StreetsInsertInput {
       _$data.containsKey('name') ? l$name : const {},
     ]);
   }
-}
-
-abstract class CopyWith_Input_StreetsInsertInput<TRes> {
-  factory CopyWith_Input_StreetsInsertInput(
-    Input_StreetsInsertInput instance,
-    TRes Function(Input_StreetsInsertInput) then,
-  ) = _CopyWithImpl_Input_StreetsInsertInput;
-
-  factory CopyWith_Input_StreetsInsertInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_StreetsInsertInput;
-
-  TRes call({
-    Input_AddressesArrRelInsertInput? addresses,
-    Input_AreasStreetsArrRelInsertInput? areas,
-    int? color,
-    Map<String, dynamic>? line,
-    String? name,
-  });
-  CopyWith_Input_AddressesArrRelInsertInput<TRes> get addresses;
-  CopyWith_Input_AreasStreetsArrRelInsertInput<TRes> get areas;
 }
