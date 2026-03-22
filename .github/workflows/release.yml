@@ -81,6 +81,7 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           cache: true
+          flutter-version-file: client/.fvmrc
           pub-cache-key: "flutter-pub:os:-:channel:-:version:-:arch:"
           cache-key: "flutter:os:-:channel:-:version:-:arch:"
           channel: "stable"
@@ -139,9 +140,11 @@ jobs:
           fetch-depth: 1
 
       - name: Get Flutter
+        id: flutter-action
         uses: subosito/flutter-action@v2
         with:
           cache: true
+          flutter-version-file: client/.fvmrc
           pub-cache-key: "flutter-pub:os:-:channel:-:version:-:arch:"
           cache-key: "flutter:os:-:channel:-:version:-:arch:"
           channel: "stable"
@@ -234,7 +237,7 @@ jobs:
         with:
           working-directory: client
           platform: android
-          args: --artifact=apk
+          args: --artifact=apk --flutter-version=${{ steps.flutter-action.outputs.VERSION }}
 
       - name: Run pod repo update
         if: ${{ matrix.os == 'macos-latest' }}
@@ -264,7 +267,7 @@ jobs:
         with:
           working-directory: client
           platform: ios
-          args: --build-name ${{ steps.version.outputs.version }} --export-options-plist="$HOME/export_options.plist"
+          args: --build-name ${{ steps.version.outputs.version }} --export-options-plist="$HOME/export_options.plist" --flutter-version=${{ steps.flutter-action.outputs.VERSION }}
 
       - name: Publish to Google Play
         if: ${{ matrix.os == 'ubuntu-latest' }}
@@ -338,9 +341,11 @@ jobs:
           fetch-depth: 1
 
       - name: Get Flutter
+        id: flutter-action
         uses: subosito/flutter-action@v2
         with:
           cache: true
+          flutter-version-file: client/.fvmrc
           pub-cache-key: "flutter-pub:os:-:channel:-:version:-:arch:"
           cache-key: "flutter:os:-:channel:-:version:-:arch:"
           channel: "stable"

@@ -48,9 +48,11 @@ jobs:
           fetch-depth: 1
 
       - name: Get Flutter
+        id: flutter-action
         uses: subosito/flutter-action@v2
         with:
           cache: true
+          flutter-version-file: client/.fvmrc
           pub-cache-key: "flutter-pub:os:-:channel:-:version:-:arch:"
           cache-key: "flutter:os:-:channel:-:version:-:arch:"
           channel: "stable"
@@ -144,7 +146,7 @@ jobs:
         with:
           platform: android
           working-directory: client
-          args: --release-version ${{ inputs.base_version }} --allow-asset-diffs
+          args: --release-version ${{ inputs.base_version }} --allow-asset-diffs --flutter-version=${{ steps.flutter-action.outputs.VERSION }}
 
       - name: Run pod repo update
         if: ${{ matrix.os == 'macos-latest' }}
@@ -164,7 +166,7 @@ jobs:
         with:
           platform: ios
           working-directory: client
-          args: --release-version ${{ inputs.base_version }} --export-options-plist="$HOME/export_options.plist" --allow-asset-diffs
+          args: --release-version ${{ inputs.base_version }} --export-options-plist="$HOME/export_options.plist" --allow-asset-diffs --flutter-version=${{ steps.flutter-action.outputs.VERSION }}
 
   patch-web:
     if: ${{ github.event_name == 'push' || github.event.inputs.web == 'true' }}
@@ -176,9 +178,11 @@ jobs:
           fetch-depth: 1
 
       - name: Get Flutter
+        id: flutter-action
         uses: subosito/flutter-action@v2
         with:
           cache: true
+          flutter-version-file: client/.fvmrc
           pub-cache-key: "flutter-pub:os:-:channel:-:version:-:arch:"
           cache-key: "flutter:os:-:channel:-:version:-:arch:"
           channel: "stable"
