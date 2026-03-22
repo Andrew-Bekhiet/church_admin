@@ -25,8 +25,6 @@ class SentryInit implements Initializer {
         ..reportSilentFlutterErrors = true
         ..attachScreenshot = true
         ..screenshotQuality = SentryScreenshotQuality.low
-        // We'll use it even if it's experimental
-        // ignore: experimental_member_use
         ..attachViewHierarchy = true
         ..enableLogs = true
         ..enableUserInteractionTracing = true,
