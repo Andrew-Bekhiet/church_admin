@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -12,11 +14,29 @@ class AuthenticateRoute extends GoRouteData with $AuthenticateRoute {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
+    // Workaround until https://github.com/flutter/flutter/issues/116651 is fixed
+    unawaited(_maybeForceRedirect(context));
+
     return AuthenticateScreen(next: next != '/' ? next : null);
+  }
+
+  Future<void> _maybeForceRedirect(BuildContext context) async {
+    final goRouter = GoRouter.of(context);
+
+    await WidgetsBinding.instance.endOfFrame;
+
+    final redirectLocation = _redirectLocation();
+    if (redirectLocation != null) {
+      goRouter.go(redirectLocation);
+    }
   }
 
   @override
   String? redirect(BuildContext context, GoRouterState state) {
+    return _redirectLocation();
+  }
+
+  String? _redirectLocation() {
     final AuthBloc authBloc = AuthBloc.I;
     final LocalAuthService localAuthService = LocalAuthService.I;
 
