@@ -88,7 +88,7 @@ class OrderByBottomSheet extends StatelessWidget {
   }
 }
 
-Future<List<OrderBy>?> showOrderByBottomSheet(
+Future<void> showOrderByBottomSheet(
   BuildContext context, {
   required QueryableType queryableType,
   required ValueStream<List<OrderBy>> orderBySubject,
