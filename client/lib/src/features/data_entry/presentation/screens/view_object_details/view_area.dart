@@ -32,9 +32,12 @@ class _ViewAreaState extends State<ViewArea> {
   );
 
   final BehaviorSubject<List<OrderBy>> _streetsOrderBy = BehaviorSubject.seeded(
-    [
-      OrderBy(field: StreetFields().name),
-    ],
+    ViewObjectDetails.getLastOrderByFor(
+      type: AdvancedQueriesMetadata().street,
+      orElse: () => [
+        OrderBy(field: StreetFields().name),
+      ],
+    ),
   );
 
   late final _familiesController = _ensureWillDispose(
@@ -53,9 +56,12 @@ class _ViewAreaState extends State<ViewArea> {
   );
 
   final BehaviorSubject<List<OrderBy>> _familiesOrderBy =
-      BehaviorSubject.seeded([
-        OrderBy(field: FamilyFields().name),
-      ]);
+      BehaviorSubject.seeded(
+        ViewObjectDetails.getLastOrderByFor(
+          type: AdvancedQueriesMetadata().family,
+          orElse: () => [OrderBy(field: FamilyFields().name)],
+        ),
+      );
 
   late final _storesController = _ensureWillDispose(
     ViewableObjectListController(
@@ -72,9 +78,14 @@ class _ViewAreaState extends State<ViewArea> {
     ),
   );
 
-  final BehaviorSubject<List<OrderBy>> _storesOrderBy = BehaviorSubject.seeded([
-    OrderBy(field: StoreFields().name),
-  ]);
+  final BehaviorSubject<List<OrderBy>> _storesOrderBy = BehaviorSubject.seeded(
+    ViewObjectDetails.getLastOrderByFor(
+      type: AdvancedQueriesMetadata().store,
+      orElse: () => [
+        OrderBy(field: StoreFields().name),
+      ],
+    ),
+  );
 
   late final _personsController = _ensureWillDispose(
     ViewableObjectListController(
@@ -92,9 +103,12 @@ class _ViewAreaState extends State<ViewArea> {
   );
 
   final BehaviorSubject<List<OrderBy>> _personsOrderBy = BehaviorSubject.seeded(
-    [
-      OrderBy(field: PersonFields().name),
-    ],
+    ViewObjectDetails.getLastOrderByFor(
+      type: AdvancedQueriesMetadata().person,
+      orElse: () => [
+        OrderBy(field: PersonFields().name),
+      ],
+    ),
   );
 
   final Set<ViewableObjectListController> _controllersToDispose = {};
@@ -329,15 +343,20 @@ class _ViewAreaState extends State<ViewArea> {
       _ => throw UnimplementedError(),
     };
 
-    final newOrderBy = await showOrderByBottomSheet(
+    await showOrderByBottomSheet(
       context,
       queryableType: queryableType,
       orderBySubject: orderBySubject,
+      onChanged: (newOrderBy) {
+        orderBySubject.add(newOrderBy);
+        unawaited(
+          ViewObjectDetails.saveLastOrderByFor(
+            type: queryableType,
+            orderBy: newOrderBy,
+          ),
+        );
+      },
     );
-
-    if (newOrderBy == null) return;
-
-    orderBySubject.add(newOrderBy);
   }
 
   ViewableObjectListController<T>

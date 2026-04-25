@@ -27,6 +27,33 @@ class ViewObjectDetails<T extends ViewableWithIDAndImage>
   static const snapPositions = <double>[0, 0.85, 1];
   static const snapDuration = Duration(milliseconds: 300);
 
+  static List<OrderBy> getLastOrderByFor({
+    required QueryableType type,
+    required List<OrderBy> Function() orElse,
+  }) {
+    final lastOrderBy = UserSettingsService.I.getLastOrderByForType(type);
+    if (lastOrderBy != null) {
+      return lastOrderBy;
+    }
+
+    final newOrderBy = orElse();
+    unawaited(
+      UserSettingsService.I.setLastOrderByForType(
+        type,
+        newOrderBy,
+      ),
+    );
+
+    return newOrderBy;
+  }
+
+  static Future<void> saveLastOrderByFor({
+    required QueryableType type,
+    required List<OrderBy> orderBy,
+  }) async {
+    await UserSettingsService.I.setLastOrderByForType(type, orderBy);
+  }
+
   final T? object;
   final String objectId;
 
@@ -171,9 +198,7 @@ class _ViewObjectDetailsState<T extends ViewableWithIDAndImage>
             widget.bottomNavBarBuilder != null) {
           newTheme = newTheme.copyWith(
             floatingActionButtonTheme: newTheme.floatingActionButtonTheme
-                .copyWith(
-                  elevation: 0,
-                ),
+                .copyWith(elevation: 0),
           );
         }
 

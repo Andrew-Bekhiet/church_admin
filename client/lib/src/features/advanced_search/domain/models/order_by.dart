@@ -50,7 +50,7 @@ class OrderBy with _$OrderBy {
 OrderByValue orderByValueFromJson(Object? data) =>
     data is String ? OrderByValue.values.byName(data) : OrderByValue.asc;
 
-Object orderByValueToJson(OrderByValue value) => value.serializedName;
+Object orderByValueToJson(OrderByValue value) => value.name;
 
 FieldMetadata fieldMetadataFromJson(Object? data) =>
     FieldMetadata.fromJson(Json.from(data! as Map));

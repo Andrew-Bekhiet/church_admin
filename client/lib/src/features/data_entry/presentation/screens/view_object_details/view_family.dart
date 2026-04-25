@@ -35,17 +35,20 @@ class _ViewFamilyState extends State<ViewFamily> {
   );
 
   final BehaviorSubject<List<OrderBy>> _personsOrderBy = BehaviorSubject.seeded(
-    [
-      OrderBy(
-        field: PersonFields().personType.redirectTo(
-          PersonTypeFields().isFamilyAdmin,
+    ViewObjectDetails.getLastOrderByFor(
+      type: AdvancedQueriesMetadata().person,
+      orElse: () => [
+        OrderBy(
+          field: PersonFields().personType.redirectTo(
+            PersonTypeFields().isFamilyAdmin,
+          ),
+          value: OrderByValue.desc,
         ),
-        value: OrderByValue.desc,
-      ),
-      OrderBy(
-        field: PersonFields().personType.redirectTo(PersonTypeFields().order),
-      ),
-    ],
+        OrderBy(
+          field: PersonFields().personType.redirectTo(PersonTypeFields().order),
+        ),
+      ],
+    ),
   );
 
   late final _childrenFamiliesController = _ensureWillDispose(
@@ -68,9 +71,14 @@ class _ViewFamilyState extends State<ViewFamily> {
   );
 
   final BehaviorSubject<List<OrderBy>> _childrenFamiliesOrderBy =
-      BehaviorSubject.seeded([
-        OrderBy(field: FamilyFields().name),
-      ]);
+      BehaviorSubject.seeded(
+        ViewObjectDetails.getLastOrderByFor(
+          type: AdvancedQueriesMetadata().family,
+          orElse: () => [
+            OrderBy(field: FamilyFields().name),
+          ],
+        ),
+      );
 
   late final _parentFamiliesController = _ensureWillDispose(
     ViewableObjectListController(
@@ -92,9 +100,14 @@ class _ViewFamilyState extends State<ViewFamily> {
   );
 
   final BehaviorSubject<List<OrderBy>> _parentFamiliesOrderBy =
-      BehaviorSubject.seeded([
-        OrderBy(field: FamilyFields().name),
-      ]);
+      BehaviorSubject.seeded(
+        ViewObjectDetails.getLastOrderByFor(
+          type: AdvancedQueriesMetadata().family,
+          orElse: () => [
+            OrderBy(field: FamilyFields().name),
+          ],
+        ),
+      );
 
   late final _storesController = _ensureWillDispose(
     ViewableObjectListController(
@@ -113,9 +126,14 @@ class _ViewFamilyState extends State<ViewFamily> {
     ),
   );
 
-  final BehaviorSubject<List<OrderBy>> _storesOrderBy = BehaviorSubject.seeded([
-    OrderBy(field: StoreFields().name),
-  ]);
+  final BehaviorSubject<List<OrderBy>> _storesOrderBy = BehaviorSubject.seeded(
+    ViewObjectDetails.getLastOrderByFor(
+      type: AdvancedQueriesMetadata().store,
+      orElse: () => [
+        OrderBy(field: StoreFields().name),
+      ],
+    ),
+  );
 
   final Set<ViewableObjectListController> _controllersToDispose = {};
 
@@ -417,15 +435,20 @@ class _ViewFamilyState extends State<ViewFamily> {
       _ => throw UnimplementedError(),
     };
 
-    final newOrderBy = await showOrderByBottomSheet(
+    await showOrderByBottomSheet(
       context,
       queryableType: queryableType,
       orderBySubject: orderBySubject,
+      onChanged: (newOrderBy) {
+        orderBySubject.add(newOrderBy);
+        unawaited(
+          ViewObjectDetails.saveLastOrderByFor(
+            type: queryableType,
+            orderBy: newOrderBy,
+          ),
+        );
+      },
     );
-
-    if (newOrderBy == null) return;
-
-    orderBySubject.add(newOrderBy);
   }
 
   ViewableObjectListController<T>

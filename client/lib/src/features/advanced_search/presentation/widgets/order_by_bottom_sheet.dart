@@ -91,7 +91,8 @@ class OrderByBottomSheet extends StatelessWidget {
 Future<List<OrderBy>?> showOrderByBottomSheet(
   BuildContext context, {
   required QueryableType queryableType,
-  required BehaviorSubject<List<OrderBy>> orderBySubject,
+  required ValueStream<List<OrderBy>> orderBySubject,
+  required void Function(List<OrderBy>) onChanged,
 }) {
   return showModalBottomSheet<List<OrderBy>?>(
     context: context,
@@ -102,10 +103,10 @@ Future<List<OrderBy>?> showOrderByBottomSheet(
     ),
     builder: (context) => StreamBuilder<List<OrderBy>>(
       initialData: orderBySubject.value,
-      stream: orderBySubject.stream,
+      stream: orderBySubject,
       builder: (context, snapshot) => OrderByBottomSheet(
         initialOrderBy: snapshot.requireData,
-        onChanged: orderBySubject.add,
+        onChanged: onChanged,
         queryableType: queryableType,
       ),
     ),
