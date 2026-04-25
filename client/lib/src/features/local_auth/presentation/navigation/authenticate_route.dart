@@ -24,6 +24,7 @@ class AuthenticateRoute extends GoRouteData with $AuthenticateRoute {
     final goRouter = GoRouter.of(context);
 
     await WidgetsBinding.instance.endOfFrame;
+    if (!context.mounted) return;
 
     final redirectLocation = _redirectLocation();
     if (redirectLocation != null) {
