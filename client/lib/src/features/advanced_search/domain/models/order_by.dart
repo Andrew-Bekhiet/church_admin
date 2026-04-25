@@ -47,8 +47,12 @@ class OrderBy with _$OrderBy {
   }
 }
 
-OrderByValue orderByValueFromJson(Object? data) =>
-    data is String ? OrderByValue.values.byName(data) : OrderByValue.asc;
+OrderByValue orderByValueFromJson(Object? data) => data is String
+    ? OrderByValue.values.firstWhere(
+        (e) => e.name == data,
+        orElse: () => OrderByValue.asc,
+      )
+    : OrderByValue.asc;
 
 Object orderByValueToJson(OrderByValue value) => value.name;
 
