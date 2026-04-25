@@ -26,13 +26,9 @@ class UserSettingsService extends BlocObserver {
 
     final value = box.get(key);
 
-    if (value == null) return null;
+    if (value == null || value is! List) return null;
 
-    return (value as List)
-        .cast<Map>()
-        .map(Json.from)
-        .map(OrderBy.fromJson)
-        .toList();
+    return value.whereType<Map>().map(Json.from).map(OrderBy.fromJson).toList();
   }
 
   Future<void> setLastOrderByForType(
