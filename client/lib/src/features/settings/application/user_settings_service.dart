@@ -21,6 +21,24 @@ class UserSettingsService extends BlocObserver {
   Future<void> setGreatFeastTheme(bool value) =>
       box.put('greatFeastTheme', value);
 
+  List<OrderBy>? getLastOrderByForType(QueryableType type) {
+    final key = 'lastOrderByFor${type.name}';
+
+    final value = box.get(key);
+
+    if (value == null || value is! List) return null;
+
+    return value.whereType<Map>().map(Json.from).map(OrderBy.fromJson).toList();
+  }
+
+  Future<void> setLastOrderByForType(
+    QueryableType type,
+    List<OrderBy> orderBy,
+  ) => box.put(
+    'lastOrderByFor${type.name}',
+    orderBy.map((o) => o.toJson()).toList(),
+  );
+
   Future<void> setupDefaults() async {
     await setGreatFeastTheme(true);
   }

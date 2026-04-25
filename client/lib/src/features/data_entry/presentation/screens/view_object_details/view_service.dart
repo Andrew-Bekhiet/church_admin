@@ -38,10 +38,13 @@ class _ViewServiceState extends State<ViewService> {
   );
 
   final BehaviorSubject<List<OrderBy>> _classesOrderBy = BehaviorSubject.seeded(
-    [
-      OrderBy(field: ClassFields().studyYear),
-      OrderBy(field: ClassFields().name),
-    ],
+    ViewObjectDetails.getLastOrderByFor(
+      type: AdvancedQueriesMetadata().$class,
+      orElse: () => [
+        OrderBy(field: ClassFields().studyYear),
+        OrderBy(field: ClassFields().name),
+      ],
+    ),
   );
 
   late final _groupsController = _ensureWillDispose(
@@ -61,9 +64,14 @@ class _ViewServiceState extends State<ViewService> {
     ),
   );
 
-  final BehaviorSubject<List<OrderBy>> _groupsOrderBy = BehaviorSubject.seeded([
-    OrderBy(field: GroupFields().name),
-  ]);
+  final BehaviorSubject<List<OrderBy>> _groupsOrderBy = BehaviorSubject.seeded(
+    ViewObjectDetails.getLastOrderByFor(
+      type: AdvancedQueriesMetadata().group,
+      orElse: () => [
+        OrderBy(field: GroupFields().name),
+      ],
+    ),
+  );
 
   late final _personsController = _ensureWillDispose(
     ViewableObjectListController(
@@ -85,10 +93,13 @@ class _ViewServiceState extends State<ViewService> {
   );
 
   final BehaviorSubject<List<OrderBy>> _personsOrderBy = BehaviorSubject.seeded(
-    [
-      OrderBy(field: PersonFields().studyYear),
-      OrderBy(field: PersonFields().name),
-    ],
+    ViewObjectDetails.getLastOrderByFor(
+      type: AdvancedQueriesMetadata().person,
+      orElse: () => [
+        OrderBy(field: PersonFields().studyYear),
+        OrderBy(field: PersonFields().name),
+      ],
+    ),
   );
 
   final Set<ViewableObjectListController> _controllersToDispose = {};
@@ -289,15 +300,20 @@ class _ViewServiceState extends State<ViewService> {
       _ => throw UnimplementedError(),
     };
 
-    final newOrderBy = await showOrderByBottomSheet(
+    await showOrderByBottomSheet(
       context,
       queryableType: queryableType,
       orderBySubject: orderBySubject,
+      onChanged: (newOrderBy) {
+        orderBySubject.add(newOrderBy);
+        unawaited(
+          ViewObjectDetails.saveLastOrderByFor(
+            type: queryableType,
+            orderBy: newOrderBy,
+          ),
+        );
+      },
     );
-
-    if (newOrderBy == null) return;
-
-    orderBySubject.add(newOrderBy);
   }
 
   ViewableObjectListController<T>

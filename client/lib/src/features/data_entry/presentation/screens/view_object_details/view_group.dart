@@ -37,10 +37,13 @@ class _ViewGroupState extends State<ViewGroup> {
   );
 
   final BehaviorSubject<List<OrderBy>> _personsOrderBy = BehaviorSubject.seeded(
-    [
-      OrderBy(field: PersonFields().studyYear),
-      OrderBy(field: PersonFields().name),
-    ],
+    ViewObjectDetails.getLastOrderByFor(
+      type: AdvancedQueriesMetadata().person,
+      orElse: () => [
+        OrderBy(field: PersonFields().studyYear),
+        OrderBy(field: PersonFields().name),
+      ],
+    ),
   );
   late final viewableObjectService = ViewableObjectService.I;
 
@@ -164,15 +167,22 @@ class _ViewGroupState extends State<ViewGroup> {
   }
 
   Future<void> _showOrderBySheet() async {
-    final newOrderBy = await showOrderByBottomSheet(
+    final queryableType = AdvancedQueriesMetadata().person;
+
+    await showOrderByBottomSheet(
       context,
-      queryableType: AdvancedQueriesMetadata().person,
+      queryableType: queryableType,
       orderBySubject: _personsOrderBy,
+      onChanged: (newOrderBy) {
+        _personsOrderBy.add(newOrderBy);
+        unawaited(
+          ViewObjectDetails.saveLastOrderByFor(
+            type: queryableType,
+            orderBy: newOrderBy,
+          ),
+        );
+      },
     );
-
-    if (newOrderBy == null) return;
-
-    _personsOrderBy.add(newOrderBy);
   }
 
   @override
