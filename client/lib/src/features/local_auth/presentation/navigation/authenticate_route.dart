@@ -8,9 +8,11 @@ part 'authenticate_route.g.dart';
 
 @TypedGoRoute<AuthenticateRoute>(path: '/authenticate')
 class AuthenticateRoute extends GoRouteData with $AuthenticateRoute {
-  const AuthenticateRoute({this.next = '/'});
+  bool _redirectedOnce = false;
 
   final String next;
+
+  AuthenticateRoute({this.next = '/'});
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
@@ -27,7 +29,8 @@ class AuthenticateRoute extends GoRouteData with $AuthenticateRoute {
     if (!context.mounted) return;
 
     final redirectLocation = _redirectLocation();
-    if (redirectLocation != null) {
+    if (redirectLocation != null && !_redirectedOnce) {
+      _redirectedOnce = true;
       goRouter.go(redirectLocation);
     }
   }
