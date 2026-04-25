@@ -1129,8 +1129,8 @@ class _EditPersonState extends State<EditPerson> {
     final contact = await ContactsService.I.pickContact();
     if (contact == null) return;
 
-    var importName = false;
-    final Set<(String, String)> numbersToImport = {};
+    bool useContactName = false;
+    final Set<({String label, String number})> numbersToImport = {};
 
     if (!mounted) return;
     final rslt = await showDialog(
@@ -1146,42 +1146,38 @@ class _EditPersonState extends State<EditPerson> {
                 children: [
                   CheckboxListTile(
                     title: const Text('الاسم'),
-                    subtitle: Text(contact.displayName),
-                    value: importName,
-                    onChanged: (v) => setState(() => importName = v!),
+                    subtitle: Text(contact.displayName ?? ''),
+                    value: useContactName,
+                    onChanged: (v) => setState(() => useContactName = v!),
                   ),
                   ...contact.phones
                       .where(
                         (e) =>
-                            e.normalizedNumber.isNotEmpty ||
+                            (e.normalizedNumber?.isNotEmpty ?? false) ||
                             e.number.isNotEmpty,
                       )
                       .map((e) {
-                        final String label = e.customLabel.isNotEmpty
-                            ? e.customLabel
-                            : e.label.name;
-                        final String value = e.normalizedNumber.isNotEmpty
-                            ? e.normalizedNumber
-                            : e.number;
+                        final String label =
+                            e.label.customLabel ?? e.label.label.name;
+                        final String value = e.normalizedNumber ?? e.number;
 
                         return CheckboxListTile(
                           title: Text(label),
                           subtitle: Text(value),
-                          value: numbersToImport.contains((label, value)),
+                          value: numbersToImport.contains((
+                            label: label,
+                            number: value,
+                          )),
                           onChanged: (v) => setState(
                             () => v ?? false
-                                ? numbersToImport.add(
-                                    (
-                                      label,
-                                      value,
-                                    ),
-                                  )
-                                : numbersToImport.remove(
-                                    (
-                                      label,
-                                      value,
-                                    ),
-                                  ),
+                                ? numbersToImport.add((
+                                    label: label,
+                                    number: value,
+                                  ))
+                                : numbersToImport.remove((
+                                    label: label,
+                                    number: value,
+                                  )),
                           ),
                         );
                       }),
@@ -1201,10 +1197,10 @@ class _EditPersonState extends State<EditPerson> {
 
     if (rslt == true) {
       newPerson = newPerson.copyWith(
-        name: importName ? contact.displayName : newPerson.name,
+        name: useContactName ? (contact.displayName ?? '') : newPerson.name,
         otherPhones: {
           ...newPerson.otherPhones,
-          for (final n in numbersToImport) n.$1: n.$2,
+          for (final n in numbersToImport) n.label: n.number,
         },
       );
       if (mounted) setState(() {});

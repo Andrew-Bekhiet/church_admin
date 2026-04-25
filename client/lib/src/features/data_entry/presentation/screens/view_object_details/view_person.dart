@@ -4,6 +4,7 @@ import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
 import 'package:derived_colors/derived_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_contacts/flutter_contacts.dart' as contacts;
 import 'package:intl/intl.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -535,12 +536,12 @@ class _ViewPersonState extends State<ViewPerson> {
         : null;
 
     await ContactsService.I.insertContact(
-      Contact(
-        name: Name(first: nameController.text),
+      contacts.Contact(
+        name: contacts.Name(first: nameController.text),
         photo: imageFile != null && imageFile.lengthSync() <= 100 * 1024 * 1024
-            ? await imageFile.readAsBytes()
+            ? contacts.Photo(fullSize: await imageFile.readAsBytes())
             : null,
-        phones: [Phone(phone)],
+        phones: [contacts.Phone(number: phone)],
       ),
     );
   }
