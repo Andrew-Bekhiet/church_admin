@@ -9,10 +9,8 @@ part 'last_recorded_by_info.g.dart';
 @JsonSerializable()
 @Queryable(
   classLabel: 'بيانات آخر تسجيل',
+  allowExtension: true,
   ignoreFields: ['id', 'name', 'recordedBy'],
-  labelsOverrides: {
-    'isFatherVisit': 'زيارة أب كاهن',
-  },
 )
 class LastRecordedByInfo extends ViewableWithID
     with _$LastRecordedByInfo
@@ -55,3 +53,22 @@ class LastRecordedByInfo extends ViewableWithID
 
 String? readRecordedBy(Map json, String _) =>
     json['recordedBy'] ?? json['recorded_by'];
+
+class LastRecordedByInfoFields extends _LastRecordedByInfoFields {
+  static final LastRecordedByInfoFields _instance =
+      LastRecordedByInfoFields._();
+
+  factory LastRecordedByInfoFields() => _instance;
+
+  LastRecordedByInfoFields._();
+
+  @override
+  FieldMetadata<bool> get isFatherVisit => FieldMetadata<bool>(
+    getValue: (obj) => obj is LastRecordedByInfo ? obj.isFatherVisit : null,
+    parentType: LastRecordedByInfo,
+    name: 'isFatherVisit',
+    label: 'زيارة أب كاهن',
+    isOrderable: false,
+    operators: {...BooleanOperator.values},
+  );
+}
