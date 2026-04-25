@@ -193,7 +193,7 @@ void main() {
       initGlobalProviderContainer([_setUpAuthBloc(), _setUpLocalAuth()]);
 
       expect(
-        const AuthenticateRoute().redirect(
+        AuthenticateRoute().redirect(
           MockBuildContext(),
           MockGoRouterState(),
         ),
@@ -211,7 +211,7 @@ void main() {
         ]);
 
         expect(
-          const AuthenticateRoute().redirect(
+          AuthenticateRoute().redirect(
             MockBuildContext(),
             MockGoRouterState(),
           ),
@@ -229,7 +229,7 @@ void main() {
         ]);
 
         expect(
-          const AuthenticateRoute().redirect(
+          AuthenticateRoute().redirect(
             MockBuildContext(),
             MockGoRouterState(),
           ),
@@ -247,7 +247,7 @@ void main() {
         ]);
 
         expect(
-          const AuthenticateRoute(
+          AuthenticateRoute(
             next: '/next',
           ).redirect(MockBuildContext(), MockGoRouterState()),
           '/next',
@@ -267,7 +267,7 @@ void main() {
         when(mockGoRouterState.uri).thenReturn(Uri());
 
         expect(
-          const AuthenticateRoute().redirect(
+          AuthenticateRoute().redirect(
             MockBuildContext(),
             mockGoRouterState,
           ),
@@ -285,7 +285,7 @@ void main() {
         ]);
 
         expect(
-          const AuthenticateRoute(
+          AuthenticateRoute(
             next: '/test',
           ).redirect(MockBuildContext(), MockGoRouterState()),
           '/test',
@@ -296,7 +296,7 @@ void main() {
         ).thenReturn(true);
 
         expect(
-          const AuthenticateRoute(
+          AuthenticateRoute(
             next: '/test',
           ).redirect(MockBuildContext(), MockGoRouterState()),
           null,
@@ -306,7 +306,7 @@ void main() {
         ).thenReturn(false);
 
         expect(
-          const AuthenticateRoute(
+          AuthenticateRoute(
             next: '/test',
           ).redirect(MockBuildContext(), MockGoRouterState()),
           '/test',

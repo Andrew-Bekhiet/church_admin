@@ -10,7 +10,17 @@ class ContactsService {
 
   const ContactsService();
 
-  Future<Contact?> pickContact() => FlutterContacts.openExternalPick();
-  Future<Contact> insertContact(Contact contact) =>
-      FlutterContacts.insertContact(contact);
+  Future<Contact?> pickContact() async {
+    final contactId = await FlutterContacts.native.showPicker();
+    if (contactId == null) return null;
+
+    return FlutterContacts.get(
+      contactId,
+      properties: {ContactProperty.name, ContactProperty.phone},
+    );
+  }
+
+  Future<void> insertContact(Contact contact) async {
+    await FlutterContacts.create(contact);
+  }
 }
