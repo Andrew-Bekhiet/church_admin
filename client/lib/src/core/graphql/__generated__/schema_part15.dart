@@ -1846,7 +1846,6 @@ class Input_FamiliesBoolExp {
     Input_FamiliesBoolExp? $_not,
     List<Input_FamiliesBoolExp>? $_or,
     Input_AddressesBoolExp? address,
-    Input_StringComparisonExp? addressText,
     Input_StringComparisonExp? blurhash,
     Input_FamiliesFamiliesBoolExp? children,
     Input_ChurchesBoolExp? church,
@@ -1856,7 +1855,6 @@ class Input_FamiliesBoolExp {
     Input_HistoryEditHistoryBoolExp? editHistory,
     Input_HistoryEditHistoryAggregateBoolExp? editHistoryAggregate,
     Input_FamiliesAdminsPhonesBoolExp? familyAdminsPhones,
-    Input_GeographyComparisonExp? geolocation,
     Input_UuidComparisonExp? id,
     Input_HistoryLatestEditsBoolExp? lastEdit,
     Input_HistoryLatestFatherVisitsBoolExp? lastFatherVisit,
@@ -1879,7 +1877,6 @@ class Input_FamiliesBoolExp {
     if ($_not != null) r'_not': $_not,
     if ($_or != null) r'_or': $_or,
     if (address != null) r'address': address,
-    if (addressText != null) r'addressText': addressText,
     if (blurhash != null) r'blurhash': blurhash,
     if (children != null) r'children': children,
     if (church != null) r'church': church,
@@ -1890,7 +1887,6 @@ class Input_FamiliesBoolExp {
     if (editHistoryAggregate != null)
       r'editHistoryAggregate': editHistoryAggregate,
     if (familyAdminsPhones != null) r'familyAdminsPhones': familyAdminsPhones,
-    if (geolocation != null) r'geolocation': geolocation,
     if (id != null) r'id': id,
     if (lastEdit != null) r'lastEdit': lastEdit,
     if (lastFatherVisit != null) r'lastFatherVisit': lastFatherVisit,
@@ -1943,14 +1939,6 @@ class Input_FamiliesBoolExp {
           ? null
           : Input_AddressesBoolExp.fromJson(
               (l$address as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('addressText')) {
-      final l$addressText = data['addressText'];
-      result$data['addressText'] = l$addressText == null
-          ? null
-          : Input_StringComparisonExp.fromJson(
-              (l$addressText as Map<String, dynamic>),
             );
     }
     if (data.containsKey('blurhash')) {
@@ -2021,14 +2009,6 @@ class Input_FamiliesBoolExp {
           ? null
           : Input_FamiliesAdminsPhonesBoolExp.fromJson(
               (l$familyAdminsPhones as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('geolocation')) {
-      final l$geolocation = data['geolocation'];
-      result$data['geolocation'] = l$geolocation == null
-          ? null
-          : Input_GeographyComparisonExp.fromJson(
-              (l$geolocation as Map<String, dynamic>),
             );
     }
     if (data.containsKey('id')) {
@@ -2178,9 +2158,6 @@ class Input_FamiliesBoolExp {
   Input_AddressesBoolExp? get address =>
       (_$data['address'] as Input_AddressesBoolExp?);
 
-  Input_StringComparisonExp? get addressText =>
-      (_$data['addressText'] as Input_StringComparisonExp?);
-
   Input_StringComparisonExp? get blurhash =>
       (_$data['blurhash'] as Input_StringComparisonExp?);
 
@@ -2208,9 +2185,6 @@ class Input_FamiliesBoolExp {
 
   Input_FamiliesAdminsPhonesBoolExp? get familyAdminsPhones =>
       (_$data['familyAdminsPhones'] as Input_FamiliesAdminsPhonesBoolExp?);
-
-  Input_GeographyComparisonExp? get geolocation =>
-      (_$data['geolocation'] as Input_GeographyComparisonExp?);
 
   Input_UuidComparisonExp? get id => (_$data['id'] as Input_UuidComparisonExp?);
 
@@ -2280,10 +2254,6 @@ class Input_FamiliesBoolExp {
       final l$address = address;
       result$data['address'] = l$address?.toJson();
     }
-    if (_$data.containsKey('addressText')) {
-      final l$addressText = addressText;
-      result$data['addressText'] = l$addressText?.toJson();
-    }
     if (_$data.containsKey('blurhash')) {
       final l$blurhash = blurhash;
       result$data['blurhash'] = l$blurhash?.toJson();
@@ -2319,10 +2289,6 @@ class Input_FamiliesBoolExp {
     if (_$data.containsKey('familyAdminsPhones')) {
       final l$familyAdminsPhones = familyAdminsPhones;
       result$data['familyAdminsPhones'] = l$familyAdminsPhones?.toJson();
-    }
-    if (_$data.containsKey('geolocation')) {
-      final l$geolocation = geolocation;
-      result$data['geolocation'] = l$geolocation?.toJson();
     }
     if (_$data.containsKey('id')) {
       final l$id = id;
@@ -2460,15 +2426,6 @@ class Input_FamiliesBoolExp {
     if (l$address != lOther$address) {
       return false;
     }
-    final l$addressText = addressText;
-    final lOther$addressText = other.addressText;
-    if (_$data.containsKey('addressText') !=
-        other._$data.containsKey('addressText')) {
-      return false;
-    }
-    if (l$addressText != lOther$addressText) {
-      return false;
-    }
     final l$blurhash = blurhash;
     final lOther$blurhash = other.blurhash;
     if (_$data.containsKey('blurhash') !=
@@ -2546,15 +2503,6 @@ class Input_FamiliesBoolExp {
       return false;
     }
     if (l$familyAdminsPhones != lOther$familyAdminsPhones) {
-      return false;
-    }
-    final l$geolocation = geolocation;
-    final lOther$geolocation = other.geolocation;
-    if (_$data.containsKey('geolocation') !=
-        other._$data.containsKey('geolocation')) {
-      return false;
-    }
-    if (l$geolocation != lOther$geolocation) {
       return false;
     }
     final l$id = id;
@@ -2712,7 +2660,6 @@ class Input_FamiliesBoolExp {
     final l$$_not = $_not;
     final l$$_or = $_or;
     final l$address = address;
-    final l$addressText = addressText;
     final l$blurhash = blurhash;
     final l$children = children;
     final l$church = church;
@@ -2722,7 +2669,6 @@ class Input_FamiliesBoolExp {
     final l$editHistory = editHistory;
     final l$editHistoryAggregate = editHistoryAggregate;
     final l$familyAdminsPhones = familyAdminsPhones;
-    final l$geolocation = geolocation;
     final l$id = id;
     final l$lastEdit = lastEdit;
     final l$lastFatherVisit = lastFatherVisit;
@@ -2753,7 +2699,6 @@ class Input_FamiliesBoolExp {
                 : Object.hashAll(l$$_or.map((v) => v))
           : const {},
       _$data.containsKey('address') ? l$address : const {},
-      _$data.containsKey('addressText') ? l$addressText : const {},
       _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('children') ? l$children : const {},
       _$data.containsKey('church') ? l$church : const {},
@@ -2769,7 +2714,6 @@ class Input_FamiliesBoolExp {
       _$data.containsKey('familyAdminsPhones')
           ? l$familyAdminsPhones
           : const {},
-      _$data.containsKey('geolocation') ? l$geolocation : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('lastEdit') ? l$lastEdit : const {},
       _$data.containsKey('lastFatherVisit') ? l$lastFatherVisit : const {},

@@ -11,11 +11,9 @@ abstract class CopyWith_Input_FamiliesSetInput<TRes> {
       _CopyWithStubImpl_Input_FamiliesSetInput;
 
   TRes call({
-    String? addressText,
     UuidValue? churchId,
     int? color,
     String? deceasedSpouseName,
-    Map<String, dynamic>? geolocation,
     DateTime? marriageDate,
     String? name,
     String? notes,
@@ -34,11 +32,9 @@ class _CopyWithImpl_Input_FamiliesSetInput<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
-    Object? addressText = _undefined,
     Object? churchId = _undefined,
     Object? color = _undefined,
     Object? deceasedSpouseName = _undefined,
-    Object? geolocation = _undefined,
     Object? marriageDate = _undefined,
     Object? name = _undefined,
     Object? notes = _undefined,
@@ -46,13 +42,10 @@ class _CopyWithImpl_Input_FamiliesSetInput<TRes>
   }) => _then(
     Input_FamiliesSetInput._({
       ..._instance._$data,
-      if (addressText != _undefined) 'addressText': (addressText as String?),
       if (churchId != _undefined) 'churchId': (churchId as UuidValue?),
       if (color != _undefined) 'color': (color as int?),
       if (deceasedSpouseName != _undefined)
         'deceasedSpouseName': (deceasedSpouseName as String?),
-      if (geolocation != _undefined)
-        'geolocation': (geolocation as Map<String, dynamic>?),
       if (marriageDate != _undefined)
         'marriageDate': (marriageDate as DateTime?),
       if (name != _undefined) 'name': (name as String?),
@@ -69,11 +62,9 @@ class _CopyWithStubImpl_Input_FamiliesSetInput<TRes>
   TRes _res;
 
   call({
-    String? addressText,
     UuidValue? churchId,
     int? color,
     String? deceasedSpouseName,
-    Map<String, dynamic>? geolocation,
     DateTime? marriageDate,
     String? name,
     String? notes,
@@ -233,12 +224,10 @@ class _CopyWithStubImpl_Input_FamiliesStreamCursorInput<TRes>
 
 class Input_FamiliesStreamCursorValueInput {
   factory Input_FamiliesStreamCursorValueInput({
-    String? addressText,
     String? blurhash,
     UuidValue? churchId,
     int? color,
     String? deceasedSpouseName,
-    Map<String, dynamic>? geolocation,
     UuidValue? id,
     DateTime? marriageDate,
     String? name,
@@ -246,12 +235,10 @@ class Input_FamiliesStreamCursorValueInput {
     DateTime? photoUpdatedAt,
     String? status,
   }) => Input_FamiliesStreamCursorValueInput._({
-    if (addressText != null) r'addressText': addressText,
     if (blurhash != null) r'blurhash': blurhash,
     if (churchId != null) r'churchId': churchId,
     if (color != null) r'color': color,
     if (deceasedSpouseName != null) r'deceasedSpouseName': deceasedSpouseName,
-    if (geolocation != null) r'geolocation': geolocation,
     if (id != null) r'id': id,
     if (marriageDate != null) r'marriageDate': marriageDate,
     if (name != null) r'name': name,
@@ -266,10 +253,6 @@ class Input_FamiliesStreamCursorValueInput {
     Map<String, dynamic> data,
   ) {
     final result$data = <String, dynamic>{};
-    if (data.containsKey('addressText')) {
-      final l$addressText = data['addressText'];
-      result$data['addressText'] = (l$addressText as String?);
-    }
     if (data.containsKey('blurhash')) {
       final l$blurhash = data['blurhash'];
       result$data['blurhash'] = (l$blurhash as String?);
@@ -287,10 +270,6 @@ class Input_FamiliesStreamCursorValueInput {
     if (data.containsKey('deceasedSpouseName')) {
       final l$deceasedSpouseName = data['deceasedSpouseName'];
       result$data['deceasedSpouseName'] = (l$deceasedSpouseName as String?);
-    }
-    if (data.containsKey('geolocation')) {
-      final l$geolocation = data['geolocation'];
-      result$data['geolocation'] = (l$geolocation as Map<String, dynamic>?);
     }
     if (data.containsKey('id')) {
       final l$id = data['id'];
@@ -325,8 +304,6 @@ class Input_FamiliesStreamCursorValueInput {
 
   Map<String, dynamic> _$data;
 
-  String? get addressText => (_$data['addressText'] as String?);
-
   String? get blurhash => (_$data['blurhash'] as String?);
 
   UuidValue? get churchId => (_$data['churchId'] as UuidValue?);
@@ -334,9 +311,6 @@ class Input_FamiliesStreamCursorValueInput {
   int? get color => (_$data['color'] as int?);
 
   String? get deceasedSpouseName => (_$data['deceasedSpouseName'] as String?);
-
-  Map<String, dynamic>? get geolocation =>
-      (_$data['geolocation'] as Map<String, dynamic>?);
 
   UuidValue? get id => (_$data['id'] as UuidValue?);
 
@@ -352,10 +326,6 @@ class Input_FamiliesStreamCursorValueInput {
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
-    if (_$data.containsKey('addressText')) {
-      final l$addressText = addressText;
-      result$data['addressText'] = l$addressText;
-    }
     if (_$data.containsKey('blurhash')) {
       final l$blurhash = blurhash;
       result$data['blurhash'] = l$blurhash;
@@ -373,10 +343,6 @@ class Input_FamiliesStreamCursorValueInput {
     if (_$data.containsKey('deceasedSpouseName')) {
       final l$deceasedSpouseName = deceasedSpouseName;
       result$data['deceasedSpouseName'] = l$deceasedSpouseName;
-    }
-    if (_$data.containsKey('geolocation')) {
-      final l$geolocation = geolocation;
-      result$data['geolocation'] = l$geolocation;
     }
     if (_$data.containsKey('id')) {
       final l$id = id;
@@ -423,15 +389,6 @@ class Input_FamiliesStreamCursorValueInput {
         runtimeType != other.runtimeType) {
       return false;
     }
-    final l$addressText = addressText;
-    final lOther$addressText = other.addressText;
-    if (_$data.containsKey('addressText') !=
-        other._$data.containsKey('addressText')) {
-      return false;
-    }
-    if (l$addressText != lOther$addressText) {
-      return false;
-    }
     final l$blurhash = blurhash;
     final lOther$blurhash = other.blurhash;
     if (_$data.containsKey('blurhash') !=
@@ -465,15 +422,6 @@ class Input_FamiliesStreamCursorValueInput {
       return false;
     }
     if (l$deceasedSpouseName != lOther$deceasedSpouseName) {
-      return false;
-    }
-    final l$geolocation = geolocation;
-    final lOther$geolocation = other.geolocation;
-    if (_$data.containsKey('geolocation') !=
-        other._$data.containsKey('geolocation')) {
-      return false;
-    }
-    if (l$geolocation != lOther$geolocation) {
       return false;
     }
     final l$id = id;
@@ -531,12 +479,10 @@ class Input_FamiliesStreamCursorValueInput {
 
   @override
   int get hashCode {
-    final l$addressText = addressText;
     final l$blurhash = blurhash;
     final l$churchId = churchId;
     final l$color = color;
     final l$deceasedSpouseName = deceasedSpouseName;
-    final l$geolocation = geolocation;
     final l$id = id;
     final l$marriageDate = marriageDate;
     final l$name = name;
@@ -544,14 +490,12 @@ class Input_FamiliesStreamCursorValueInput {
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$status = status;
     return Object.hashAll([
-      _$data.containsKey('addressText') ? l$addressText : const {},
       _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('churchId') ? l$churchId : const {},
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('deceasedSpouseName')
           ? l$deceasedSpouseName
           : const {},
-      _$data.containsKey('geolocation') ? l$geolocation : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('marriageDate') ? l$marriageDate : const {},
       _$data.containsKey('name') ? l$name : const {},
@@ -572,12 +516,10 @@ abstract class CopyWith_Input_FamiliesStreamCursorValueInput<TRes> {
       _CopyWithStubImpl_Input_FamiliesStreamCursorValueInput;
 
   TRes call({
-    String? addressText,
     String? blurhash,
     UuidValue? churchId,
     int? color,
     String? deceasedSpouseName,
-    Map<String, dynamic>? geolocation,
     UuidValue? id,
     DateTime? marriageDate,
     String? name,
@@ -601,12 +543,10 @@ class _CopyWithImpl_Input_FamiliesStreamCursorValueInput<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
-    Object? addressText = _undefined,
     Object? blurhash = _undefined,
     Object? churchId = _undefined,
     Object? color = _undefined,
     Object? deceasedSpouseName = _undefined,
-    Object? geolocation = _undefined,
     Object? id = _undefined,
     Object? marriageDate = _undefined,
     Object? name = _undefined,
@@ -616,14 +556,11 @@ class _CopyWithImpl_Input_FamiliesStreamCursorValueInput<TRes>
   }) => _then(
     Input_FamiliesStreamCursorValueInput._({
       ..._instance._$data,
-      if (addressText != _undefined) 'addressText': (addressText as String?),
       if (blurhash != _undefined) 'blurhash': (blurhash as String?),
       if (churchId != _undefined) 'churchId': (churchId as UuidValue?),
       if (color != _undefined) 'color': (color as int?),
       if (deceasedSpouseName != _undefined)
         'deceasedSpouseName': (deceasedSpouseName as String?),
-      if (geolocation != _undefined)
-        'geolocation': (geolocation as Map<String, dynamic>?),
       if (id != _undefined) 'id': (id as UuidValue?),
       if (marriageDate != _undefined)
         'marriageDate': (marriageDate as DateTime?),
@@ -643,12 +580,10 @@ class _CopyWithStubImpl_Input_FamiliesStreamCursorValueInput<TRes>
   TRes _res;
 
   call({
-    String? addressText,
     String? blurhash,
     UuidValue? churchId,
     int? color,
     String? deceasedSpouseName,
-    Map<String, dynamic>? geolocation,
     UuidValue? id,
     DateTime? marriageDate,
     String? name,

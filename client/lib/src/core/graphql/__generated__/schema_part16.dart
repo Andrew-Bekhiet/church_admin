@@ -15,7 +15,6 @@ abstract class CopyWith_Input_FamiliesBoolExp<TRes> {
     Input_FamiliesBoolExp? $_not,
     List<Input_FamiliesBoolExp>? $_or,
     Input_AddressesBoolExp? address,
-    Input_StringComparisonExp? addressText,
     Input_StringComparisonExp? blurhash,
     Input_FamiliesFamiliesBoolExp? children,
     Input_ChurchesBoolExp? church,
@@ -25,7 +24,6 @@ abstract class CopyWith_Input_FamiliesBoolExp<TRes> {
     Input_HistoryEditHistoryBoolExp? editHistory,
     Input_HistoryEditHistoryAggregateBoolExp? editHistoryAggregate,
     Input_FamiliesAdminsPhonesBoolExp? familyAdminsPhones,
-    Input_GeographyComparisonExp? geolocation,
     Input_UuidComparisonExp? id,
     Input_HistoryLatestEditsBoolExp? lastEdit,
     Input_HistoryLatestFatherVisitsBoolExp? lastFatherVisit,
@@ -58,7 +56,6 @@ abstract class CopyWith_Input_FamiliesBoolExp<TRes> {
     _fn,
   );
   CopyWith_Input_AddressesBoolExp<TRes> get address;
-  CopyWith_Input_StringComparisonExp<TRes> get addressText;
   CopyWith_Input_StringComparisonExp<TRes> get blurhash;
   CopyWith_Input_FamiliesFamiliesBoolExp<TRes> get children;
   CopyWith_Input_ChurchesBoolExp<TRes> get church;
@@ -69,7 +66,6 @@ abstract class CopyWith_Input_FamiliesBoolExp<TRes> {
   CopyWith_Input_HistoryEditHistoryAggregateBoolExp<TRes>
   get editHistoryAggregate;
   CopyWith_Input_FamiliesAdminsPhonesBoolExp<TRes> get familyAdminsPhones;
-  CopyWith_Input_GeographyComparisonExp<TRes> get geolocation;
   CopyWith_Input_UuidComparisonExp<TRes> get id;
   CopyWith_Input_HistoryLatestEditsBoolExp<TRes> get lastEdit;
   CopyWith_Input_HistoryLatestFatherVisitsBoolExp<TRes> get lastFatherVisit;
@@ -105,7 +101,6 @@ class _CopyWithImpl_Input_FamiliesBoolExp<TRes>
     Object? $_not = _undefined,
     Object? $_or = _undefined,
     Object? address = _undefined,
-    Object? addressText = _undefined,
     Object? blurhash = _undefined,
     Object? children = _undefined,
     Object? church = _undefined,
@@ -115,7 +110,6 @@ class _CopyWithImpl_Input_FamiliesBoolExp<TRes>
     Object? editHistory = _undefined,
     Object? editHistoryAggregate = _undefined,
     Object? familyAdminsPhones = _undefined,
-    Object? geolocation = _undefined,
     Object? id = _undefined,
     Object? lastEdit = _undefined,
     Object? lastFatherVisit = _undefined,
@@ -141,8 +135,6 @@ class _CopyWithImpl_Input_FamiliesBoolExp<TRes>
       if ($_or != _undefined) '_or': ($_or as List<Input_FamiliesBoolExp>?),
       if (address != _undefined)
         'address': (address as Input_AddressesBoolExp?),
-      if (addressText != _undefined)
-        'addressText': (addressText as Input_StringComparisonExp?),
       if (blurhash != _undefined)
         'blurhash': (blurhash as Input_StringComparisonExp?),
       if (children != _undefined)
@@ -162,8 +154,6 @@ class _CopyWithImpl_Input_FamiliesBoolExp<TRes>
       if (familyAdminsPhones != _undefined)
         'familyAdminsPhones':
             (familyAdminsPhones as Input_FamiliesAdminsPhonesBoolExp?),
-      if (geolocation != _undefined)
-        'geolocation': (geolocation as Input_GeographyComparisonExp?),
       if (id != _undefined) 'id': (id as Input_UuidComparisonExp?),
       if (lastEdit != _undefined)
         'lastEdit': (lastEdit as Input_HistoryLatestEditsBoolExp?),
@@ -236,16 +226,6 @@ class _CopyWithImpl_Input_FamiliesBoolExp<TRes>
         : CopyWith_Input_AddressesBoolExp(
             local$address,
             (e) => call(address: e),
-          );
-  }
-
-  CopyWith_Input_StringComparisonExp<TRes> get addressText {
-    final local$addressText = _instance.addressText;
-    return local$addressText == null
-        ? CopyWith_Input_StringComparisonExp.stub(_then(_instance))
-        : CopyWith_Input_StringComparisonExp(
-            local$addressText,
-            (e) => call(addressText: e),
           );
   }
 
@@ -336,16 +316,6 @@ class _CopyWithImpl_Input_FamiliesBoolExp<TRes>
         : CopyWith_Input_FamiliesAdminsPhonesBoolExp(
             local$familyAdminsPhones,
             (e) => call(familyAdminsPhones: e),
-          );
-  }
-
-  CopyWith_Input_GeographyComparisonExp<TRes> get geolocation {
-    final local$geolocation = _instance.geolocation;
-    return local$geolocation == null
-        ? CopyWith_Input_GeographyComparisonExp.stub(_then(_instance))
-        : CopyWith_Input_GeographyComparisonExp(
-            local$geolocation,
-            (e) => call(geolocation: e),
           );
   }
 
@@ -522,7 +492,6 @@ class _CopyWithStubImpl_Input_FamiliesBoolExp<TRes>
     Input_FamiliesBoolExp? $_not,
     List<Input_FamiliesBoolExp>? $_or,
     Input_AddressesBoolExp? address,
-    Input_StringComparisonExp? addressText,
     Input_StringComparisonExp? blurhash,
     Input_FamiliesFamiliesBoolExp? children,
     Input_ChurchesBoolExp? church,
@@ -532,7 +501,6 @@ class _CopyWithStubImpl_Input_FamiliesBoolExp<TRes>
     Input_HistoryEditHistoryBoolExp? editHistory,
     Input_HistoryEditHistoryAggregateBoolExp? editHistoryAggregate,
     Input_FamiliesAdminsPhonesBoolExp? familyAdminsPhones,
-    Input_GeographyComparisonExp? geolocation,
     Input_UuidComparisonExp? id,
     Input_HistoryLatestEditsBoolExp? lastEdit,
     Input_HistoryLatestFatherVisitsBoolExp? lastFatherVisit,
@@ -562,9 +530,6 @@ class _CopyWithStubImpl_Input_FamiliesBoolExp<TRes>
   CopyWith_Input_AddressesBoolExp<TRes> get address =>
       CopyWith_Input_AddressesBoolExp.stub(_res);
 
-  CopyWith_Input_StringComparisonExp<TRes> get addressText =>
-      CopyWith_Input_StringComparisonExp.stub(_res);
-
   CopyWith_Input_StringComparisonExp<TRes> get blurhash =>
       CopyWith_Input_StringComparisonExp.stub(_res);
 
@@ -592,9 +557,6 @@ class _CopyWithStubImpl_Input_FamiliesBoolExp<TRes>
 
   CopyWith_Input_FamiliesAdminsPhonesBoolExp<TRes> get familyAdminsPhones =>
       CopyWith_Input_FamiliesAdminsPhonesBoolExp.stub(_res);
-
-  CopyWith_Input_GeographyComparisonExp<TRes> get geolocation =>
-      CopyWith_Input_GeographyComparisonExp.stub(_res);
 
   CopyWith_Input_UuidComparisonExp<TRes> get id =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
