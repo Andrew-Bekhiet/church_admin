@@ -129,8 +129,8 @@ class Address with _$Address {
       if (district case District(name: final districtName))
         'حي ${districtName.replaceAll(RegExp('حي|الحي|حى|الحى'), '').trim()}',
       ?specialLandmark,
-      if (storeyNumber case final storeyNumber?) 'الدور $storeyNumber ',
-      if (apartmentNumber case final apartmentNumber?) 'شقة $apartmentNumber ',
+      if (storeyNumber case final storeyNumber?) 'الدور $storeyNumber',
+      if (apartmentNumber case final apartmentNumber?) 'شقة $apartmentNumber',
     ].join(' ').trim();
   }
 
