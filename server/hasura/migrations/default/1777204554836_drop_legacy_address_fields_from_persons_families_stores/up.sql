@@ -28,6 +28,10 @@ BEGIN
 END;
 $$;
 
+DROP VIEW IF EXISTS deleted.persons;
+DROP VIEW IF EXISTS deleted.families;
+DROP VIEW IF EXISTS deleted.stores;
+
 ALTER TABLE public.persons
 DROP COLUMN IF EXISTS address_text,
 DROP COLUMN IF EXISTS geolocation;
@@ -39,3 +43,10 @@ DROP COLUMN IF EXISTS geolocation;
 ALTER TABLE public.stores
 DROP COLUMN IF EXISTS address_text,
 DROP COLUMN IF EXISTS geolocation;
+
+CREATE OR REPLACE VIEW deleted.persons AS SELECT * FROM persons
+WHERE deleted_at IS NOT NULL;
+CREATE OR REPLACE VIEW deleted.families AS SELECT * FROM families
+WHERE deleted_at IS NOT NULL;
+CREATE OR REPLACE VIEW deleted.stores AS SELECT * FROM stores
+WHERE deleted_at IS NOT NULL;
