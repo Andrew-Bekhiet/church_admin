@@ -232,7 +232,7 @@ class DataGeomapState extends State<DataGeomap> {
   Future<Position?> _requestAndGetLocation() async {
     if (!widget.showUserLocation) return null;
 
-    final permissionStatus = await Permission.location.request();
+    final permissionStatus = await Permission.locationWhenInUse.request();
     if (await Geolocator.isLocationServiceEnabled() &&
         (permissionStatus == PermissionStatus.granted ||
             permissionStatus == PermissionStatus.limited)) {
