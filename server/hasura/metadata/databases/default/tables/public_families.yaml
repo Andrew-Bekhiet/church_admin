@@ -110,11 +110,9 @@ insert_permissions:
     permission:
       check: {}
       columns:
-        - address_text
         - church_id
         - color
         - deceased_spouse_name
-        - geolocation
         - marriage_date
         - name
         - notes
@@ -123,12 +121,10 @@ select_permissions:
   - role: user
     permission:
       columns:
-        - address_text
         - blurhash
         - church_id
         - color
         - deceased_spouse_name
-        - geolocation
         - id
         - marriage_date
         - name
@@ -168,11 +164,9 @@ update_permissions:
   - role: user
     permission:
       columns:
-        - address_text
         - church_id
         - color
         - deceased_spouse_name
-        - geolocation
         - marriage_date
         - name
         - notes

@@ -12,6 +12,7 @@ class Fragment_Address {
     this.district,
     this.street,
     this.substreetName,
+    this.fullAddressText,
     this.geolocation,
     this.houseNumber,
     this.storeyNumber,
@@ -27,6 +28,7 @@ class Fragment_Address {
     final l$district = json['district'];
     final l$street = json['street'];
     final l$substreetName = json['substreetName'];
+    final l$fullAddressText = json['fullAddressText'];
     final l$geolocation = json['geolocation'];
     final l$houseNumber = json['houseNumber'];
     final l$storeyNumber = json['storeyNumber'];
@@ -48,6 +50,7 @@ class Fragment_Address {
           ? null
           : Fragment_Street.fromJson((l$street as Map<String, dynamic>)),
       substreetName: (l$substreetName as String?),
+      fullAddressText: (l$fullAddressText as String?),
       geolocation: (l$geolocation as Map<String, dynamic>?),
       houseNumber: (l$houseNumber as int?),
       storeyNumber: (l$storeyNumber as int?),
@@ -68,6 +71,8 @@ class Fragment_Address {
   final Fragment_Street? street;
 
   final String? substreetName;
+
+  final String? fullAddressText;
 
   final Map<String, dynamic>? geolocation;
 
@@ -95,6 +100,8 @@ class Fragment_Address {
     _resultData['street'] = l$street?.toJson();
     final l$substreetName = substreetName;
     _resultData['substreetName'] = l$substreetName;
+    final l$fullAddressText = fullAddressText;
+    _resultData['fullAddressText'] = l$fullAddressText;
     final l$geolocation = geolocation;
     _resultData['geolocation'] = l$geolocation;
     final l$houseNumber = houseNumber;
@@ -118,6 +125,7 @@ class Fragment_Address {
     final l$district = district;
     final l$street = street;
     final l$substreetName = substreetName;
+    final l$fullAddressText = fullAddressText;
     final l$geolocation = geolocation;
     final l$houseNumber = houseNumber;
     final l$storeyNumber = storeyNumber;
@@ -131,6 +139,7 @@ class Fragment_Address {
       l$district,
       l$street,
       l$substreetName,
+      l$fullAddressText,
       l$geolocation,
       l$houseNumber,
       l$storeyNumber,
@@ -176,6 +185,11 @@ class Fragment_Address {
     final l$substreetName = substreetName;
     final lOther$substreetName = other.substreetName;
     if (l$substreetName != lOther$substreetName) {
+      return false;
+    }
+    final l$fullAddressText = fullAddressText;
+    final lOther$fullAddressText = other.fullAddressText;
+    if (l$fullAddressText != lOther$fullAddressText) {
       return false;
     }
     final l$geolocation = geolocation;
@@ -233,6 +247,7 @@ abstract class CopyWith_Fragment_Address<TRes> {
     Fragment_Address_district? district,
     Fragment_Street? street,
     String? substreetName,
+    String? fullAddressText,
     Map<String, dynamic>? geolocation,
     int? houseNumber,
     int? storeyNumber,
@@ -262,6 +277,7 @@ class _CopyWithImpl_Fragment_Address<TRes>
     Object? district = _undefined,
     Object? street = _undefined,
     Object? substreetName = _undefined,
+    Object? fullAddressText = _undefined,
     Object? geolocation = _undefined,
     Object? houseNumber = _undefined,
     Object? storeyNumber = _undefined,
@@ -284,6 +300,9 @@ class _CopyWithImpl_Fragment_Address<TRes>
       substreetName: substreetName == _undefined
           ? _instance.substreetName
           : (substreetName as String?),
+      fullAddressText: fullAddressText == _undefined
+          ? _instance.fullAddressText
+          : (fullAddressText as String?),
       geolocation: geolocation == _undefined
           ? _instance.geolocation
           : (geolocation as Map<String, dynamic>?),
@@ -343,6 +362,7 @@ class _CopyWithStubImpl_Fragment_Address<TRes>
     Fragment_Address_district? district,
     Fragment_Street? street,
     String? substreetName,
+    String? fullAddressText,
     Map<String, dynamic>? geolocation,
     int? houseNumber,
     int? storeyNumber,
@@ -457,6 +477,13 @@ const fragmentDefinitionAddress = FragmentDefinitionNode(
       ),
       FieldNode(
         name: NameNode(value: 'substreetName'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'fullAddressText'),
         alias: null,
         arguments: [],
         directives: [],

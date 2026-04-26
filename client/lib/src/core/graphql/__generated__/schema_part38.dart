@@ -398,7 +398,6 @@ class Input_PersonsBoolExp {
     Input_PersonsBoolExp? $_not,
     List<Input_PersonsBoolExp>? $_or,
     Input_AddressesBoolExp? address,
-    Input_StringComparisonExp? addressText,
     Input_HistoryAttendanceHistoryBoolExp? attendanceHistory,
     Input_HistoryAttendanceHistoryAggregateBoolExp? attendanceHistoryAggregate,
     Input_DateComparisonExp? birthdate,
@@ -421,7 +420,6 @@ class Input_PersonsBoolExp {
     Input_FathersBoolExp? father,
     Input_UuidComparisonExp? fatherId,
     Input_BooleanComparisonExp? gender,
-    Input_GeographyComparisonExp? geolocation,
     Input_PersonsGroupsBoolExp? groups,
     Input_PersonsHobbiesBoolExp? hobbies,
     Input_UuidComparisonExp? id,
@@ -475,7 +473,6 @@ class Input_PersonsBoolExp {
     if ($_not != null) r'_not': $_not,
     if ($_or != null) r'_or': $_or,
     if (address != null) r'address': address,
-    if (addressText != null) r'addressText': addressText,
     if (attendanceHistory != null) r'attendanceHistory': attendanceHistory,
     if (attendanceHistoryAggregate != null)
       r'attendanceHistoryAggregate': attendanceHistoryAggregate,
@@ -502,7 +499,6 @@ class Input_PersonsBoolExp {
     if (father != null) r'father': father,
     if (fatherId != null) r'fatherId': fatherId,
     if (gender != null) r'gender': gender,
-    if (geolocation != null) r'geolocation': geolocation,
     if (groups != null) r'groups': groups,
     if (hobbies != null) r'hobbies': hobbies,
     if (id != null) r'id': id,
@@ -587,14 +583,6 @@ class Input_PersonsBoolExp {
           ? null
           : Input_AddressesBoolExp.fromJson(
               (l$address as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('addressText')) {
-      final l$addressText = data['addressText'];
-      result$data['addressText'] = l$addressText == null
-          ? null
-          : Input_StringComparisonExp.fromJson(
-              (l$addressText as Map<String, dynamic>),
             );
     }
     if (data.containsKey('attendanceHistory')) {
@@ -765,14 +753,6 @@ class Input_PersonsBoolExp {
           ? null
           : Input_BooleanComparisonExp.fromJson(
               (l$gender as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('geolocation')) {
-      final l$geolocation = data['geolocation'];
-      result$data['geolocation'] = l$geolocation == null
-          ? null
-          : Input_GeographyComparisonExp.fromJson(
-              (l$geolocation as Map<String, dynamic>),
             );
     }
     if (data.containsKey('groups')) {
@@ -1161,9 +1141,6 @@ class Input_PersonsBoolExp {
   Input_AddressesBoolExp? get address =>
       (_$data['address'] as Input_AddressesBoolExp?);
 
-  Input_StringComparisonExp? get addressText =>
-      (_$data['addressText'] as Input_StringComparisonExp?);
-
   Input_HistoryAttendanceHistoryBoolExp? get attendanceHistory =>
       (_$data['attendanceHistory'] as Input_HistoryAttendanceHistoryBoolExp?);
 
@@ -1235,9 +1212,6 @@ class Input_PersonsBoolExp {
 
   Input_BooleanComparisonExp? get gender =>
       (_$data['gender'] as Input_BooleanComparisonExp?);
-
-  Input_GeographyComparisonExp? get geolocation =>
-      (_$data['geolocation'] as Input_GeographyComparisonExp?);
 
   Input_PersonsGroupsBoolExp? get groups =>
       (_$data['groups'] as Input_PersonsGroupsBoolExp?);
@@ -1400,10 +1374,6 @@ class Input_PersonsBoolExp {
       final l$address = address;
       result$data['address'] = l$address?.toJson();
     }
-    if (_$data.containsKey('addressText')) {
-      final l$addressText = addressText;
-      result$data['addressText'] = l$addressText?.toJson();
-    }
     if (_$data.containsKey('attendanceHistory')) {
       final l$attendanceHistory = attendanceHistory;
       result$data['attendanceHistory'] = l$attendanceHistory?.toJson();
@@ -1493,10 +1463,6 @@ class Input_PersonsBoolExp {
     if (_$data.containsKey('gender')) {
       final l$gender = gender;
       result$data['gender'] = l$gender?.toJson();
-    }
-    if (_$data.containsKey('geolocation')) {
-      final l$geolocation = geolocation;
-      result$data['geolocation'] = l$geolocation?.toJson();
     }
     if (_$data.containsKey('groups')) {
       final l$groups = groups;
@@ -1758,15 +1724,6 @@ class Input_PersonsBoolExp {
     if (l$address != lOther$address) {
       return false;
     }
-    final l$addressText = addressText;
-    final lOther$addressText = other.addressText;
-    if (_$data.containsKey('addressText') !=
-        other._$data.containsKey('addressText')) {
-      return false;
-    }
-    if (l$addressText != lOther$addressText) {
-      return false;
-    }
     final l$attendanceHistory = attendanceHistory;
     final lOther$attendanceHistory = other.attendanceHistory;
     if (_$data.containsKey('attendanceHistory') !=
@@ -1956,15 +1913,6 @@ class Input_PersonsBoolExp {
       return false;
     }
     if (l$gender != lOther$gender) {
-      return false;
-    }
-    final l$geolocation = geolocation;
-    final lOther$geolocation = other.geolocation;
-    if (_$data.containsKey('geolocation') !=
-        other._$data.containsKey('geolocation')) {
-      return false;
-    }
-    if (l$geolocation != lOther$geolocation) {
       return false;
     }
     final l$groups = groups;
@@ -2393,7 +2341,6 @@ class Input_PersonsBoolExp {
     final l$$_not = $_not;
     final l$$_or = $_or;
     final l$address = address;
-    final l$addressText = addressText;
     final l$attendanceHistory = attendanceHistory;
     final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
     final l$birthdate = birthdate;
@@ -2416,7 +2363,6 @@ class Input_PersonsBoolExp {
     final l$father = father;
     final l$fatherId = fatherId;
     final l$gender = gender;
-    final l$geolocation = geolocation;
     final l$groups = groups;
     final l$hobbies = hobbies;
     final l$id = id;
@@ -2478,7 +2424,6 @@ class Input_PersonsBoolExp {
                 : Object.hashAll(l$$_or.map((v) => v))
           : const {},
       _$data.containsKey('address') ? l$address : const {},
-      _$data.containsKey('addressText') ? l$addressText : const {},
       _$data.containsKey('attendanceHistory') ? l$attendanceHistory : const {},
       _$data.containsKey('attendanceHistoryAggregate')
           ? l$attendanceHistoryAggregate
@@ -2509,7 +2454,6 @@ class Input_PersonsBoolExp {
       _$data.containsKey('father') ? l$father : const {},
       _$data.containsKey('fatherId') ? l$fatherId : const {},
       _$data.containsKey('gender') ? l$gender : const {},
-      _$data.containsKey('geolocation') ? l$geolocation : const {},
       _$data.containsKey('groups') ? l$groups : const {},
       _$data.containsKey('hobbies') ? l$hobbies : const {},
       _$data.containsKey('id') ? l$id : const {},

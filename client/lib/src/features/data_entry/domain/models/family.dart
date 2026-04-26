@@ -231,9 +231,13 @@ class FamilyFields extends _FamilyFields {
   FieldMetadata<District> get district =>
       address.redirectTo(AddressFields().district, isExpandable: false);
 
+  FieldMetadata<String> get fullAddressText =>
+      address.redirectTo(AddressFields().fullAddressText, isExpandable: false);
+
   @override
   List<FieldMetadata<Object>> get allFields => [
     ...super.allFields,
+    fullAddressText,
     area,
     street,
     district,
@@ -243,6 +247,7 @@ class FamilyFields extends _FamilyFields {
   Map<String, FieldMetadata<Object>> get allFieldsByName {
     return {
       ...super.allFieldsByName,
+      fullAddressText.name: fullAddressText,
       area.name: area,
       street.name: street,
       district.name: district,

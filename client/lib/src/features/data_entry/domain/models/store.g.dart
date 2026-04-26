@@ -31,7 +31,7 @@ class _StoreFields {
     getValue: (obj) => obj is Store ? obj.address : null,
     parentType: Store,
     name: 'address',
-    label: 'العنوان',
+    label: 'تفاصيل العنوان',
     isCodeOnly: false,
   );
 

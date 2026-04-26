@@ -925,6 +925,7 @@ class Input_AddressesBoolExp {
     Input_UuidComparisonExp? districtId,
     Input_FamiliesBoolExp? family,
     Input_UuidComparisonExp? familyId,
+    Input_StringComparisonExp? fullAddressText,
     Input_GeographyComparisonExp? geolocation,
     Input_SmallintComparisonExp? houseNumber,
     Input_UuidComparisonExp? id,
@@ -947,6 +948,7 @@ class Input_AddressesBoolExp {
     if (districtId != null) r'districtId': districtId,
     if (family != null) r'family': family,
     if (familyId != null) r'familyId': familyId,
+    if (fullAddressText != null) r'fullAddressText': fullAddressText,
     if (geolocation != null) r'geolocation': geolocation,
     if (houseNumber != null) r'houseNumber': houseNumber,
     if (id != null) r'id': id,
@@ -1043,6 +1045,14 @@ class Input_AddressesBoolExp {
           ? null
           : Input_UuidComparisonExp.fromJson(
               (l$familyId as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('fullAddressText')) {
+      final l$fullAddressText = data['fullAddressText'];
+      result$data['fullAddressText'] = l$fullAddressText == null
+          ? null
+          : Input_StringComparisonExp.fromJson(
+              (l$fullAddressText as Map<String, dynamic>),
             );
     }
     if (data.containsKey('geolocation')) {
@@ -1156,6 +1166,9 @@ class Input_AddressesBoolExp {
   Input_UuidComparisonExp? get familyId =>
       (_$data['familyId'] as Input_UuidComparisonExp?);
 
+  Input_StringComparisonExp? get fullAddressText =>
+      (_$data['fullAddressText'] as Input_StringComparisonExp?);
+
   Input_GeographyComparisonExp? get geolocation =>
       (_$data['geolocation'] as Input_GeographyComparisonExp?);
 
@@ -1229,6 +1242,10 @@ class Input_AddressesBoolExp {
     if (_$data.containsKey('familyId')) {
       final l$familyId = familyId;
       result$data['familyId'] = l$familyId?.toJson();
+    }
+    if (_$data.containsKey('fullAddressText')) {
+      final l$fullAddressText = fullAddressText;
+      result$data['fullAddressText'] = l$fullAddressText?.toJson();
     }
     if (_$data.containsKey('geolocation')) {
       final l$geolocation = geolocation;
@@ -1399,6 +1416,15 @@ class Input_AddressesBoolExp {
     if (l$familyId != lOther$familyId) {
       return false;
     }
+    final l$fullAddressText = fullAddressText;
+    final lOther$fullAddressText = other.fullAddressText;
+    if (_$data.containsKey('fullAddressText') !=
+        other._$data.containsKey('fullAddressText')) {
+      return false;
+    }
+    if (l$fullAddressText != lOther$fullAddressText) {
+      return false;
+    }
     final l$geolocation = geolocation;
     final lOther$geolocation = other.geolocation;
     if (_$data.containsKey('geolocation') !=
@@ -1501,6 +1527,7 @@ class Input_AddressesBoolExp {
     final l$districtId = districtId;
     final l$family = family;
     final l$familyId = familyId;
+    final l$fullAddressText = fullAddressText;
     final l$geolocation = geolocation;
     final l$houseNumber = houseNumber;
     final l$id = id;
@@ -1531,6 +1558,7 @@ class Input_AddressesBoolExp {
       _$data.containsKey('districtId') ? l$districtId : const {},
       _$data.containsKey('family') ? l$family : const {},
       _$data.containsKey('familyId') ? l$familyId : const {},
+      _$data.containsKey('fullAddressText') ? l$fullAddressText : const {},
       _$data.containsKey('geolocation') ? l$geolocation : const {},
       _$data.containsKey('houseNumber') ? l$houseNumber : const {},
       _$data.containsKey('id') ? l$id : const {},
@@ -1566,6 +1594,7 @@ abstract class CopyWith_Input_AddressesBoolExp<TRes> {
     Input_UuidComparisonExp? districtId,
     Input_FamiliesBoolExp? family,
     Input_UuidComparisonExp? familyId,
+    Input_StringComparisonExp? fullAddressText,
     Input_GeographyComparisonExp? geolocation,
     Input_SmallintComparisonExp? houseNumber,
     Input_UuidComparisonExp? id,
@@ -1598,6 +1627,7 @@ abstract class CopyWith_Input_AddressesBoolExp<TRes> {
   CopyWith_Input_UuidComparisonExp<TRes> get districtId;
   CopyWith_Input_FamiliesBoolExp<TRes> get family;
   CopyWith_Input_UuidComparisonExp<TRes> get familyId;
+  CopyWith_Input_StringComparisonExp<TRes> get fullAddressText;
   CopyWith_Input_GeographyComparisonExp<TRes> get geolocation;
   CopyWith_Input_SmallintComparisonExp<TRes> get houseNumber;
   CopyWith_Input_UuidComparisonExp<TRes> get id;
@@ -1632,6 +1662,7 @@ class _CopyWithImpl_Input_AddressesBoolExp<TRes>
     Object? districtId = _undefined,
     Object? family = _undefined,
     Object? familyId = _undefined,
+    Object? fullAddressText = _undefined,
     Object? geolocation = _undefined,
     Object? houseNumber = _undefined,
     Object? id = _undefined,
@@ -1661,6 +1692,8 @@ class _CopyWithImpl_Input_AddressesBoolExp<TRes>
       if (family != _undefined) 'family': (family as Input_FamiliesBoolExp?),
       if (familyId != _undefined)
         'familyId': (familyId as Input_UuidComparisonExp?),
+      if (fullAddressText != _undefined)
+        'fullAddressText': (fullAddressText as Input_StringComparisonExp?),
       if (geolocation != _undefined)
         'geolocation': (geolocation as Input_GeographyComparisonExp?),
       if (houseNumber != _undefined)
@@ -1784,6 +1817,16 @@ class _CopyWithImpl_Input_AddressesBoolExp<TRes>
           );
   }
 
+  CopyWith_Input_StringComparisonExp<TRes> get fullAddressText {
+    final local$fullAddressText = _instance.fullAddressText;
+    return local$fullAddressText == null
+        ? CopyWith_Input_StringComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_StringComparisonExp(
+            local$fullAddressText,
+            (e) => call(fullAddressText: e),
+          );
+  }
+
   CopyWith_Input_GeographyComparisonExp<TRes> get geolocation {
     final local$geolocation = _instance.geolocation;
     return local$geolocation == null
@@ -1894,6 +1937,7 @@ class _CopyWithStubImpl_Input_AddressesBoolExp<TRes>
     Input_UuidComparisonExp? districtId,
     Input_FamiliesBoolExp? family,
     Input_UuidComparisonExp? familyId,
+    Input_StringComparisonExp? fullAddressText,
     Input_GeographyComparisonExp? geolocation,
     Input_SmallintComparisonExp? houseNumber,
     Input_UuidComparisonExp? id,
@@ -1936,6 +1980,9 @@ class _CopyWithStubImpl_Input_AddressesBoolExp<TRes>
 
   CopyWith_Input_UuidComparisonExp<TRes> get familyId =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
+
+  CopyWith_Input_StringComparisonExp<TRes> get fullAddressText =>
+      CopyWith_Input_StringComparisonExp.stub(_res);
 
   CopyWith_Input_GeographyComparisonExp<TRes> get geolocation =>
       CopyWith_Input_GeographyComparisonExp.stub(_res);

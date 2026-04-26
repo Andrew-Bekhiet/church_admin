@@ -31,7 +31,7 @@ class _PersonFields {
     getValue: (obj) => obj is Person ? obj.address : null,
     parentType: Person,
     name: 'address',
-    label: 'العنوان',
+    label: 'تفاصيل العنوان',
     isCodeOnly: false,
   );
 
