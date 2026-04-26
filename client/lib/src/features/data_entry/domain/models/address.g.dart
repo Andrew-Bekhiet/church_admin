@@ -11,19 +11,6 @@ class AddressFields {
   factory AddressFields() => _instance;
   AddressFields._();
 
-  final FieldMetadata<District> district = FieldMetadata<District>(
-    getValue: (obj) => obj is Address ? obj.district : null,
-    parentType: Address,
-    name: 'district',
-    label: 'الحي',
-    isCodeOnly: false,
-    operators: {
-      ...MultiSelectOperator.values,
-      PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull,
-    },
-  );
-
   final FieldMetadata<Area> area = FieldMetadata<Area>(
     getValue: (obj) => obj is Address ? obj.area : null,
     parentType: Address,
@@ -32,6 +19,19 @@ class AddressFields {
     isCodeOnly: false,
     operators: {
       ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull,
+    },
+  );
+
+  final FieldMetadata<int> houseNumber = FieldMetadata<int>(
+    getValue: (obj) => obj is Address ? obj.houseNumber : null,
+    parentType: Address,
+    name: 'houseNumber',
+    label: 'رقم العمارة',
+    isCodeOnly: false,
+    operators: {
+      ...PrimitiveOperator.values,
       PrimitiveOperator.isNull,
       PrimitiveOperator.isNotNull,
     },
@@ -63,14 +63,27 @@ class AddressFields {
     },
   );
 
-  final FieldMetadata<Point> geolocation = FieldMetadata<Point>(
-    getValue: (obj) => obj is Address ? obj.geolocation : null,
+  final FieldMetadata<District> district = FieldMetadata<District>(
+    getValue: (obj) => obj is Address ? obj.district : null,
     parentType: Address,
-    name: 'geolocation',
-    label: 'الموقع',
+    name: 'district',
+    label: 'الحي',
     isCodeOnly: false,
     operators: {
-      ...SpatialOperator.values,
+      ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull,
+    },
+  );
+
+  final FieldMetadata<String> specialLandmark = FieldMetadata<String>(
+    getValue: (obj) => obj is Address ? obj.specialLandmark : null,
+    parentType: Address,
+    name: 'specialLandmark',
+    label: 'علامة مميزة',
+    isCodeOnly: false,
+    operators: {
+      ...StringOperator.values,
       PrimitiveOperator.isNull,
       PrimitiveOperator.isNotNull,
     },
@@ -81,19 +94,6 @@ class AddressFields {
     parentType: Address,
     name: 'storeyNumber',
     label: 'رقم الدور',
-    isCodeOnly: false,
-    operators: {
-      ...PrimitiveOperator.values,
-      PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull,
-    },
-  );
-
-  final FieldMetadata<int> houseNumber = FieldMetadata<int>(
-    getValue: (obj) => obj is Address ? obj.houseNumber : null,
-    parentType: Address,
-    name: 'houseNumber',
-    label: 'رقم العمارة',
     isCodeOnly: false,
     operators: {
       ...PrimitiveOperator.values,
@@ -115,14 +115,27 @@ class AddressFields {
     },
   );
 
-  final FieldMetadata<String> specialLandmark = FieldMetadata<String>(
-    getValue: (obj) => obj is Address ? obj.specialLandmark : null,
+  final FieldMetadata<String> fullAddressText = FieldMetadata<String>(
+    getValue: (obj) => obj is Address ? obj.fullAddressText : null,
     parentType: Address,
-    name: 'specialLandmark',
-    label: 'علامة مميزة',
+    name: 'fullAddressText',
+    label: 'العنوان الكامل',
     isCodeOnly: false,
     operators: {
       ...StringOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull,
+    },
+  );
+
+  final FieldMetadata<Point> geolocation = FieldMetadata<Point>(
+    getValue: (obj) => obj is Address ? obj.geolocation : null,
+    parentType: Address,
+    name: 'geolocation',
+    label: 'الموقع',
+    isCodeOnly: false,
+    operators: {
+      ...SpatialOperator.values,
       PrimitiveOperator.isNull,
       PrimitiveOperator.isNotNull,
     },
@@ -155,28 +168,30 @@ class AddressFields {
   );
 
   late final List<FieldMetadata<Object>> allFields = [
-    district,
     area,
+    houseNumber,
     street,
     substreetName,
-    geolocation,
-    storeyNumber,
-    houseNumber,
-    apartmentNumber,
+    district,
     specialLandmark,
+    storeyNumber,
+    apartmentNumber,
+    fullAddressText,
+    geolocation,
     family,
     store,
   ];
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
-    'district': district,
     'area': area,
+    'houseNumber': houseNumber,
     'street': street,
     'substreetName': substreetName,
-    'geolocation': geolocation,
-    'storeyNumber': storeyNumber,
-    'houseNumber': houseNumber,
-    'apartmentNumber': apartmentNumber,
+    'district': district,
     'specialLandmark': specialLandmark,
+    'storeyNumber': storeyNumber,
+    'apartmentNumber': apartmentNumber,
+    'fullAddressText': fullAddressText,
+    'geolocation': geolocation,
     'family': family,
     'store': store,
   };
@@ -188,22 +203,23 @@ class AddressFields {
 
 Address _$AddressFromJson(Map json) => Address(
   id: json['id'] as String?,
-  countryIsoCode: json['countryIsoCode'] as String? ?? 'EG',
-  district: json['district'] == null
-      ? null
-      : District.fromJson(Map<String, Object?>.from(json['district'] as Map)),
   area: json['area'] == null
       ? null
       : Area.fromJson(Map<String, Object?>.from(json['area'] as Map)),
+  countryIsoCode: json['countryIsoCode'] as String? ?? 'EG',
+  houseNumber: (json['houseNumber'] as num?)?.toInt(),
   street: json['street'] == null
       ? null
       : Street.fromJson(Map<String, Object?>.from(json['street'] as Map)),
   substreetName: json['substreetName'] as String?,
-  geolocation: pointFromJson(json['geolocation']),
-  storeyNumber: (json['storeyNumber'] as num?)?.toInt(),
-  houseNumber: (json['houseNumber'] as num?)?.toInt(),
-  apartmentNumber: (json['apartmentNumber'] as num?)?.toInt(),
+  district: json['district'] == null
+      ? null
+      : District.fromJson(Map<String, Object?>.from(json['district'] as Map)),
   specialLandmark: json['specialLandmark'] as String?,
+  storeyNumber: (json['storeyNumber'] as num?)?.toInt(),
+  apartmentNumber: (json['apartmentNumber'] as num?)?.toInt(),
+  fullAddressText: json['fullAddressText'] as String?,
+  geolocation: pointFromJson(json['geolocation']),
   family: json['family'] == null
       ? null
       : Family.fromJson(Map<String, Object?>.from(json['family'] as Map)),
@@ -214,16 +230,17 @@ Address _$AddressFromJson(Map json) => Address(
 
 Map<String, dynamic> _$AddressToJson(Address instance) => <String, dynamic>{
   'id': instance.id,
-  'countryIsoCode': instance.countryIsoCode,
-  'district': instance.district?.toJson(),
   'area': instance.area?.toJson(),
+  'countryIsoCode': instance.countryIsoCode,
+  'houseNumber': instance.houseNumber,
   'street': instance.street?.toJson(),
   'substreetName': instance.substreetName,
-  'geolocation': pointToJson(instance.geolocation),
-  'storeyNumber': instance.storeyNumber,
-  'houseNumber': instance.houseNumber,
-  'apartmentNumber': instance.apartmentNumber,
+  'district': instance.district?.toJson(),
   'specialLandmark': instance.specialLandmark,
+  'storeyNumber': instance.storeyNumber,
+  'apartmentNumber': instance.apartmentNumber,
+  'fullAddressText': instance.fullAddressText,
+  'geolocation': pointToJson(instance.geolocation),
   'family': instance.family?.toJson(),
   'store': instance.store?.toJson(),
 };

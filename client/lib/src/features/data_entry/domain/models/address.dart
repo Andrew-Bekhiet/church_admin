@@ -8,48 +8,67 @@ part 'address.g.dart';
 
 @freezed
 @JsonSerializable()
-@Queryable(classLabel: 'العنوان', ignoreFields: ['id', 'countryIsoCode'])
+@Queryable(
+  classLabel: 'العنوان',
+  ignoreFields: ['id', 'countryIsoCode'],
+)
 class Address with _$Address {
   @override
   final String? id;
-  @override
-  final String countryIsoCode;
-  @override
-  final District? district;
+
   @override
   final Area? area;
+
+  @override
+  final String countryIsoCode;
+
+  @override
+  final int? houseNumber;
+
   @override
   final Street? street;
+
   @override
   final String? substreetName;
+
+  @override
+  final District? district;
+
+  @override
+  final String? specialLandmark;
+
+  @override
+  final int? storeyNumber;
+
+  @override
+  final int? apartmentNumber;
+
+  @override
+  final String? fullAddressText;
+
   @override
   @JsonKey(fromJson: pointFromJson, toJson: pointToJson)
   final Point? geolocation;
-  @override
-  final int? storeyNumber;
-  @override
-  final int? houseNumber;
-  @override
-  final int? apartmentNumber;
-  @override
-  final String? specialLandmark;
+
   @override
   final Family? family;
+
   @override
   final Store? store;
 
   const Address({
     this.id,
-    this.countryIsoCode = 'EG',
-    this.district,
     this.area,
+    this.countryIsoCode = 'EG',
+    this.houseNumber,
     this.street,
     this.substreetName,
-    this.geolocation,
-    this.storeyNumber,
-    this.houseNumber,
-    this.apartmentNumber,
+    this.district,
     this.specialLandmark,
+    this.storeyNumber,
+    this.apartmentNumber,
+    this.fullAddressText,
+    this.geolocation,
     this.family,
     this.store,
   });
@@ -95,44 +114,24 @@ class Address with _$Address {
 
   @override
   String toString() {
+    if (fullAddressText case final fullAddressText?
+        when fullAddressText.isNotEmpty) {
+      return fullAddressText;
+    }
+
     // 45 شارع النصر, متفرع من شارع التحرير, حي الزهور بجوار مستشفى السلام الدور الثاني شقة 5
-    final StringBuffer buffer = StringBuffer();
-
-    if (houseNumber != null) {
-      buffer.write('$houseNumber ');
-    }
-
-    if (street != null) {
-      buffer.write(
-        'ش ${street!.name.replaceAll(RegExp('شارع|الشارع'), '').trim()} ',
-      );
-    }
-
-    if (substreetName != null) {
-      buffer.write(
-        'متفرع من ${substreetName!.replaceAll(RegExp('شارع|الشارع'), '').trim()} ',
-      );
-    }
-
-    if (district != null) {
-      buffer.write(
-        'حي ${district!.name.replaceAll(RegExp('حي|الحي|حى|الحى'), '').trim()} ',
-      );
-    }
-
-    if (specialLandmark != null) {
-      buffer.write('$specialLandmark ');
-    }
-
-    if (storeyNumber != null) {
-      buffer.write('الدور $storeyNumber ');
-    }
-
-    if (apartmentNumber != null) {
-      buffer.write('شقة $apartmentNumber ');
-    }
-
-    return buffer.toString().trim();
+    return [
+      if (houseNumber case final houseNumber?) houseNumber.toString(),
+      if (street case Street(name: final streetName))
+        'ش ${streetName.replaceAll(RegExp('شارع|الشارع'), '').trim()}',
+      if (substreetName case final substreetName?)
+        'متفرع من ${substreetName.replaceAll(RegExp('شارع|الشارع'), '').trim()}',
+      if (district case District(name: final districtName))
+        'حي ${districtName.replaceAll(RegExp('حي|الحي|حى|الحى'), '').trim()}',
+      ?specialLandmark,
+      if (storeyNumber case final storeyNumber?) 'الدور $storeyNumber ',
+      if (apartmentNumber case final apartmentNumber?) 'شقة $apartmentNumber ',
+    ].join(' ').trim();
   }
 
   Input_AddressesInsertInput toInsertInput() {

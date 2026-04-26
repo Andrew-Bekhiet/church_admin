@@ -12,6 +12,7 @@ fragment Address on Addresses {
     ...Street
   }
   substreetName
+  fullAddressText
   geolocation
   houseNumber
   storeyNumber

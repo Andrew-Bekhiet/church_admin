@@ -973,6 +973,26 @@ class MockUserSettingsService extends _i1.Mock
           as _i11.Future<void>);
 
   @override
+  List<_i4.OrderBy>? getLastOrderByForType(_i4.QueryableType<Object>? type) =>
+      (super.noSuchMethod(
+            Invocation.method(#getLastOrderByForType, [type]),
+            returnValueForMissingStub: null,
+          )
+          as List<_i4.OrderBy>?);
+
+  @override
+  _i11.Future<void> setLastOrderByForType(
+    _i4.QueryableType<Object>? type,
+    List<_i4.OrderBy>? orderBy,
+  ) =>
+      (super.noSuchMethod(
+            Invocation.method(#setLastOrderByForType, [type, orderBy]),
+            returnValue: _i11.Future<void>.value(),
+            returnValueForMissingStub: _i11.Future<void>.value(),
+          )
+          as _i11.Future<void>);
+
+  @override
   _i11.Future<void> setupDefaults() =>
       (super.noSuchMethod(
             Invocation.method(#setupDefaults, []),

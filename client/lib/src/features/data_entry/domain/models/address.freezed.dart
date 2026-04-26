@@ -14,16 +14,17 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Address {
   String? get id;
-  String get countryIsoCode;
-  District? get district;
   Area? get area;
+  String get countryIsoCode;
+  int? get houseNumber;
   Street? get street;
   String? get substreetName;
-  Point? get geolocation;
-  int? get storeyNumber;
-  int? get houseNumber;
-  int? get apartmentNumber;
+  District? get district;
   String? get specialLandmark;
+  int? get storeyNumber;
+  int? get apartmentNumber;
+  String? get fullAddressText;
+  Point? get geolocation;
   Family? get family;
   Store? get store;
 
@@ -40,24 +41,26 @@ mixin _$Address {
         (other.runtimeType == runtimeType &&
             other is Address &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.area, area) || other.area == area) &&
             (identical(other.countryIsoCode, countryIsoCode) ||
                 other.countryIsoCode == countryIsoCode) &&
-            (identical(other.district, district) ||
-                other.district == district) &&
-            (identical(other.area, area) || other.area == area) &&
+            (identical(other.houseNumber, houseNumber) ||
+                other.houseNumber == houseNumber) &&
             (identical(other.street, street) || other.street == street) &&
             (identical(other.substreetName, substreetName) ||
                 other.substreetName == substreetName) &&
-            (identical(other.geolocation, geolocation) ||
-                other.geolocation == geolocation) &&
-            (identical(other.storeyNumber, storeyNumber) ||
-                other.storeyNumber == storeyNumber) &&
-            (identical(other.houseNumber, houseNumber) ||
-                other.houseNumber == houseNumber) &&
-            (identical(other.apartmentNumber, apartmentNumber) ||
-                other.apartmentNumber == apartmentNumber) &&
+            (identical(other.district, district) ||
+                other.district == district) &&
             (identical(other.specialLandmark, specialLandmark) ||
                 other.specialLandmark == specialLandmark) &&
+            (identical(other.storeyNumber, storeyNumber) ||
+                other.storeyNumber == storeyNumber) &&
+            (identical(other.apartmentNumber, apartmentNumber) ||
+                other.apartmentNumber == apartmentNumber) &&
+            (identical(other.fullAddressText, fullAddressText) ||
+                other.fullAddressText == fullAddressText) &&
+            (identical(other.geolocation, geolocation) ||
+                other.geolocation == geolocation) &&
             (identical(other.family, family) || other.family == family) &&
             (identical(other.store, store) || other.store == store));
   }
@@ -67,16 +70,17 @@ mixin _$Address {
   int get hashCode => Object.hash(
     runtimeType,
     id,
-    countryIsoCode,
-    district,
     area,
+    countryIsoCode,
+    houseNumber,
     street,
     substreetName,
-    geolocation,
-    storeyNumber,
-    houseNumber,
-    apartmentNumber,
+    district,
     specialLandmark,
+    storeyNumber,
+    apartmentNumber,
+    fullAddressText,
+    geolocation,
     family,
     store,
   );
@@ -89,16 +93,17 @@ abstract mixin class $AddressCopyWith<$Res> {
   @useResult
   $Res call({
     String? id,
-    String countryIsoCode,
-    District? district,
     Area? area,
+    String countryIsoCode,
+    int? houseNumber,
     Street? street,
     String? substreetName,
-    Point? geolocation,
-    int? storeyNumber,
-    int? houseNumber,
-    int? apartmentNumber,
+    District? district,
     String? specialLandmark,
+    int? storeyNumber,
+    int? apartmentNumber,
+    String? fullAddressText,
+    Point? geolocation,
     Family? family,
     Store? store,
   });
@@ -117,16 +122,17 @@ class _$AddressCopyWithImpl<$Res> implements $AddressCopyWith<$Res> {
   @override
   $Res call({
     Object? id = freezed,
-    Object? countryIsoCode = null,
-    Object? district = freezed,
     Object? area = freezed,
+    Object? countryIsoCode = null,
+    Object? houseNumber = freezed,
     Object? street = freezed,
     Object? substreetName = freezed,
-    Object? geolocation = freezed,
-    Object? storeyNumber = freezed,
-    Object? houseNumber = freezed,
-    Object? apartmentNumber = freezed,
+    Object? district = freezed,
     Object? specialLandmark = freezed,
+    Object? storeyNumber = freezed,
+    Object? apartmentNumber = freezed,
+    Object? fullAddressText = freezed,
+    Object? geolocation = freezed,
     Object? family = freezed,
     Object? store = freezed,
   }) {
@@ -136,18 +142,18 @@ class _$AddressCopyWithImpl<$Res> implements $AddressCopyWith<$Res> {
             ? _self.id
             : id // ignore: cast_nullable_to_non_nullable
                   as String?,
-        countryIsoCode: null == countryIsoCode
-            ? _self.countryIsoCode
-            : countryIsoCode // ignore: cast_nullable_to_non_nullable
-                  as String,
-        district: freezed == district
-            ? _self.district
-            : district // ignore: cast_nullable_to_non_nullable
-                  as District?,
         area: freezed == area
             ? _self.area
             : area // ignore: cast_nullable_to_non_nullable
                   as Area?,
+        countryIsoCode: null == countryIsoCode
+            ? _self.countryIsoCode
+            : countryIsoCode // ignore: cast_nullable_to_non_nullable
+                  as String,
+        houseNumber: freezed == houseNumber
+            ? _self.houseNumber
+            : houseNumber // ignore: cast_nullable_to_non_nullable
+                  as int?,
         street: freezed == street
             ? _self.street
             : street // ignore: cast_nullable_to_non_nullable
@@ -156,26 +162,30 @@ class _$AddressCopyWithImpl<$Res> implements $AddressCopyWith<$Res> {
             ? _self.substreetName
             : substreetName // ignore: cast_nullable_to_non_nullable
                   as String?,
-        geolocation: freezed == geolocation
-            ? _self.geolocation
-            : geolocation // ignore: cast_nullable_to_non_nullable
-                  as Point?,
+        district: freezed == district
+            ? _self.district
+            : district // ignore: cast_nullable_to_non_nullable
+                  as District?,
+        specialLandmark: freezed == specialLandmark
+            ? _self.specialLandmark
+            : specialLandmark // ignore: cast_nullable_to_non_nullable
+                  as String?,
         storeyNumber: freezed == storeyNumber
             ? _self.storeyNumber
             : storeyNumber // ignore: cast_nullable_to_non_nullable
-                  as int?,
-        houseNumber: freezed == houseNumber
-            ? _self.houseNumber
-            : houseNumber // ignore: cast_nullable_to_non_nullable
                   as int?,
         apartmentNumber: freezed == apartmentNumber
             ? _self.apartmentNumber
             : apartmentNumber // ignore: cast_nullable_to_non_nullable
                   as int?,
-        specialLandmark: freezed == specialLandmark
-            ? _self.specialLandmark
-            : specialLandmark // ignore: cast_nullable_to_non_nullable
+        fullAddressText: freezed == fullAddressText
+            ? _self.fullAddressText
+            : fullAddressText // ignore: cast_nullable_to_non_nullable
                   as String?,
+        geolocation: freezed == geolocation
+            ? _self.geolocation
+            : geolocation // ignore: cast_nullable_to_non_nullable
+                  as Point?,
         family: freezed == family
             ? _self.family
             : family // ignore: cast_nullable_to_non_nullable

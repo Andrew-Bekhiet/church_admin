@@ -31,7 +31,7 @@ class _FamilyFields {
     getValue: (obj) => obj is Family ? obj.address : null,
     parentType: Family,
     name: 'address',
-    label: 'العنوان',
+    label: 'تفاصيل العنوان',
     isCodeOnly: false,
   );
 

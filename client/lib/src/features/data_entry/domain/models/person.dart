@@ -679,6 +679,9 @@ class PersonFields extends _PersonFields {
   FieldMetadata<District> get district =>
       address.redirectTo(AddressFields().district, isExpandable: false);
 
+  FieldMetadata<String> get fullAddressText =>
+      address.redirectTo(AddressFields().fullAddressText, isExpandable: false);
+
   @override
   FieldMetadata<Point> get geolocation =>
       address.redirectTo(AddressFields().geolocation, isExpandable: false);
@@ -688,6 +691,7 @@ class PersonFields extends _PersonFields {
     id,
     name,
     address,
+    fullAddressText,
     area,
     street,
     district,

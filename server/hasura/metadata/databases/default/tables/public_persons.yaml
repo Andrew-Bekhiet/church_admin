@@ -206,7 +206,6 @@ insert_permissions:
     permission:
       check: {}
       columns:
-        - address_text
         - birthdate
         - church_id
         - college_id
@@ -214,7 +213,6 @@ insert_permissions:
         - family_id
         - father_id
         - gender
-        - geolocation
         - is_servant
         - is_shammas
         - is_student
@@ -240,7 +238,6 @@ select_permissions:
   - role: user
     permission:
       columns:
-        - address_text
         - birthdate
         - blurhash
         - church_id
@@ -249,7 +246,6 @@ select_permissions:
         - family_id
         - father_id
         - gender
-        - geolocation
         - id
         - is_servant
         - is_shammas
@@ -307,7 +303,6 @@ update_permissions:
   - role: user
     permission:
       columns:
-        - address_text
         - birthdate
         - church_id
         - college_id
@@ -315,7 +310,6 @@ update_permissions:
         - family_id
         - father_id
         - gender
-        - geolocation
         - is_servant
         - is_shammas
         - is_student
