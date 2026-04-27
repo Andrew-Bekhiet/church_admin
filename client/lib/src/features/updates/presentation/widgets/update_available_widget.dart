@@ -21,12 +21,12 @@ class UpdateAvailableWidget extends StatelessWidget {
 
     return StreamBuilder(
       stream: featureFlagRepo.onConfigChanged
+          .startWith(null)
           .map(
             (e) =>
                 featureFlagRepo.latestVersion >
                 Version.parse(packageInfo.version),
-          )
-          .startWith(false),
+          ),
       builder: (context, snapshot) {
         return AnimatedSize(
           duration: const Duration(milliseconds: 200),
