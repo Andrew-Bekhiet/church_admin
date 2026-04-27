@@ -31,15 +31,18 @@ jobs:
     permissions:
       contents: write
 
-    if: ${{ github.event_name == 'push' || (github.event.inputs.android == 'true' || github.event.inputs.ios == 'true') }}
+    if: ${{ github.event_name == 'push' || (github.event.inputs.android == 'true' ||
+      github.event.inputs.ios == 'true') }}
     strategy:
       matrix:
-        os: [ubuntu-latest, macos-latest]
+        os: [ ubuntu-latest, macos-latest ]
         exclude:
           # Skip Ubuntu (Android) if only iOS is requested
-          - os: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.android == 'false' && 'ubuntu-latest' }}
+          - os: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.android
+              == 'false' && 'ubuntu-latest' }}
           # Skip macOS (iOS) if only Android is requested
-          - os: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.ios == 'false' && 'macos-latest' }}
+          - os: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.ios ==
+              'false' && 'macos-latest' }}
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -145,7 +148,7 @@ jobs:
         with:
           platform: android
           working-directory: client
-          args: --release-version ${{ inputs.base_version }} --allow-asset-diffs --flutter-version=${{ steps.flutter-action.outputs.VERSION }}
+          args: --release-version ${{ inputs.base_version }} --allow-asset-diffs
 
       - name: Run pod repo update
         if: ${{ matrix.os == 'macos-latest' }}
@@ -165,7 +168,9 @@ jobs:
         with:
           platform: ios
           working-directory: client
-          args: --release-version ${{ inputs.base_version }} --export-options-plist="$HOME/export_options.plist" --allow-asset-diffs --flutter-version=${{ steps.flutter-action.outputs.VERSION }}
+          args: --release-version ${{ inputs.base_version }}
+            --export-options-plist="$HOME/export_options.plist"
+            --allow-asset-diffs
 
   patch-web:
     if: ${{ github.event_name == 'push' || github.event.inputs.web == 'true' }}
