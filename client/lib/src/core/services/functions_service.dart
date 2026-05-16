@@ -136,4 +136,20 @@ class FunctionsService {
   Future<void> deleteMyAccount() async {
     await httpsCallable('deleteMyAccount').call();
   }
+
+  Future<String> exportData({
+    List<String> areasIds = const [],
+    List<String> servicesIds = const [],
+    List<String> classesIds = const [],
+    List<String> groupsIds = const [],
+  }) async {
+    final response = await httpsCallable('exportData').call({
+      'areasIds': areasIds,
+      'servicesIds': servicesIds,
+      'classesIds': classesIds,
+      'groupsIds': groupsIds,
+    });
+
+    return (response.data as Map)['downloadUrl'] as String;
+  }
 }

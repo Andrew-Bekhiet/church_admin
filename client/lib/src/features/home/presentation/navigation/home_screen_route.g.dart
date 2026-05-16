@@ -63,6 +63,10 @@ RouteBase get $homeScreenRoute => GoRouteData.$route(
       path: 'manage_users',
       factory: $ManageUsersRoute._fromState,
     ),
+    GoRouteData.$route(
+      path: 'export_entities_selection',
+      factory: $ExportEntitiesSelectionRoute._fromState,
+    ),
     GoRouteData.$route(path: 'visits_map', factory: $VisitsMapRoute._fromState),
     GoRouteData.$route(
       path: 'advanced_search',
@@ -625,6 +629,27 @@ mixin $ManageUsersRoute on GoRouteData {
 
   @override
   String get location => GoRouteData.$location('/manage_users');
+
+  @override
+  void go(BuildContext context) => context.go(location);
+
+  @override
+  Future<T?> push<T>(BuildContext context) => context.push<T>(location);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location);
+
+  @override
+  void replace(BuildContext context) => context.replace(location);
+}
+
+mixin $ExportEntitiesSelectionRoute on GoRouteData {
+  static ExportEntitiesSelectionRoute _fromState(GoRouterState state) =>
+      const ExportEntitiesSelectionRoute();
+
+  @override
+  String get location => GoRouteData.$location('/export_entities_selection');
 
   @override
   void go(BuildContext context) => context.go(location);

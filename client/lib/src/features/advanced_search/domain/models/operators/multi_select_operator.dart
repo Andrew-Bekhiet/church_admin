@@ -54,6 +54,9 @@ enum MultiSelectOperator<V extends Object> implements Operator<List<V>?> {
           name: filterValue.map((e) => e.id).toList(),
         },
       },
+      final List<String> filterValue => {
+        name: filterValue,
+      },
       _ => throw UnsupportedError(
         'MultiSelectOperator does not support $name: $filterValue',
       ),

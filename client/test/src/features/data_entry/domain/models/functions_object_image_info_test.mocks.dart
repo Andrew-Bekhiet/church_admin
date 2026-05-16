@@ -274,4 +274,43 @@ class MockFunctionsService extends _i1.Mock implements _i4.FunctionsService {
             returnValueForMissingStub: _i5.Future<void>.value(),
           )
           as _i5.Future<void>);
+
+  @override
+  _i5.Future<String> exportData({
+    List<String>? areasIds = const [],
+    List<String>? servicesIds = const [],
+    List<String>? classesIds = const [],
+    List<String>? groupsIds = const [],
+  }) =>
+      (super.noSuchMethod(
+            Invocation.method(#exportData, [], {
+              #areasIds: areasIds,
+              #servicesIds: servicesIds,
+              #classesIds: classesIds,
+              #groupsIds: groupsIds,
+            }),
+            returnValue: _i5.Future<String>.value(
+              _i6.dummyValue<String>(
+                this,
+                Invocation.method(#exportData, [], {
+                  #areasIds: areasIds,
+                  #servicesIds: servicesIds,
+                  #classesIds: classesIds,
+                  #groupsIds: groupsIds,
+                }),
+              ),
+            ),
+            returnValueForMissingStub: _i5.Future<String>.value(
+              _i6.dummyValue<String>(
+                this,
+                Invocation.method(#exportData, [], {
+                  #areasIds: areasIds,
+                  #servicesIds: servicesIds,
+                  #classesIds: classesIds,
+                  #groupsIds: groupsIds,
+                }),
+              ),
+            ),
+          )
+          as _i5.Future<String>);
 }
