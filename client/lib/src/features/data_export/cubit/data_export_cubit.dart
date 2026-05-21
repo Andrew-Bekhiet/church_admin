@@ -85,16 +85,22 @@ class DataExportCubit extends Cubit<DataExportState> {
   }
 
   void _maybeInitControllers() {
-    final userAdminOnStream = _authBloc.userDataStream.map(
-      (u) => u?.adminOn?.map(UserAdminScope.fromAdminOnData).toList() ?? [],
-    );
+    final canExportAllData =
+        _authBloc.currentUserData?.permissions.exportAllData ?? false;
+
+    final userAdminOnStream = canExportAllData
+        ? null
+        : _authBloc.userDataStream.map(
+            (u) =>
+                u?.adminOn?.map(UserAdminScope.fromAdminOnData).toList() ?? [],
+          );
 
     _areasController ??= ViewableObjectListController(
       selectionController: _areasSelectionController,
       filterStream: _searchSubject.stream,
       objectsPaginatableStream: DatabaseService.I.areas.streamAll(
         searchQuery: _searchSubject.stream,
-        where: userAdminOnStream.map(
+        where: userAdminOnStream?.map(
           (adminOn) => [
             Filter(
               AreaFields().id,
@@ -111,7 +117,7 @@ class DataExportCubit extends Cubit<DataExportState> {
       filterStream: _searchSubject.stream,
       objectsPaginatableStream: DatabaseService.I.services.streamAll(
         searchQuery: _searchSubject.stream,
-        where: userAdminOnStream.map(
+        where: userAdminOnStream?.map(
           (adminOn) => [
             Filter(
               ServiceFields().id,
@@ -128,7 +134,7 @@ class DataExportCubit extends Cubit<DataExportState> {
       filterStream: _searchSubject.stream,
       objectsPaginatableStream: DatabaseService.I.classes.streamAll(
         searchQuery: _searchSubject.stream,
-        where: userAdminOnStream.map(
+        where: userAdminOnStream?.map(
           (adminOn) => [
             Filter(
               ClassFields().id,
@@ -145,7 +151,7 @@ class DataExportCubit extends Cubit<DataExportState> {
       filterStream: _searchSubject.stream,
       objectsPaginatableStream: DatabaseService.I.groups.streamAll(
         searchQuery: _searchSubject.stream,
-        where: userAdminOnStream.map(
+        where: userAdminOnStream?.map(
           (adminOn) => [
             Filter(
               GroupFields().id,
