@@ -20,17 +20,17 @@ const ExportDataRequestData = z
   .refine(
     (data) =>
       (data.areasIds?.length ?? 0) +
-        (data.servicesIds?.length ?? 0) +
-        (data.classesIds?.length ?? 0) +
-        (data.groupsIds?.length ?? 0) >
-      0,
+          (data.servicesIds?.length ?? 0) +
+          (data.classesIds?.length ?? 0) +
+          (data.groupsIds?.length ?? 0) >
+        0,
     {
       message:
         "At least one of areasIds, servicesIds, classesIds, groupsIds must be provided",
     },
   );
 
-export const exportData = https.onCall(exportDataHandler);
+export const exportData = https.onCall({ memory: "512MiB" }, exportDataHandler);
 export async function exportDataHandler(
   data: https.CallableRequest<z.infer<typeof ExportDataRequestData>>,
 ) {
@@ -62,8 +62,7 @@ export async function exportDataHandler(
     hasuraUID,
     exportDataRequest: requestData.data,
   });
-  const canExportAll =
-    canExportAllAreas &&
+  const canExportAll = canExportAllAreas &&
     canExportAllServices &&
     canExportAllClasses &&
     canExportAllGroups;
@@ -147,8 +146,8 @@ async function authenticateExportRequest({
     operationName: "authorizeExportRequest",
   });
 
-  const data =
-    response.data?.["data"]?.["authUsersPermissionsByEntityId"] ?? [];
+  const data = response.data?.["data"]?.["authUsersPermissionsByEntityId"] ??
+    [];
 
   type PermissionRecordResponse = {
     allowExport: boolean;
@@ -183,16 +182,16 @@ async function authenticateExportRequest({
   const { areasIds, servicesIds, classesIds, groupsIds } = exportDataRequest;
 
   const canExportAllAreas = areasIds.every((id) =>
-    entitiesIdsByType["area"]?.has(id),
+    entitiesIdsByType["area"]?.has(id)
   );
   const canExportAllServices = servicesIds.every((id) =>
-    entitiesIdsByType["service"]?.has(id),
+    entitiesIdsByType["service"]?.has(id)
   );
   const canExportAllClasses = classesIds.every((id) =>
-    entitiesIdsByType["class"]?.has(id),
+    entitiesIdsByType["class"]?.has(id)
   );
   const canExportAllGroups = groupsIds.every((id) =>
-    entitiesIdsByType["group"]?.has(id),
+    entitiesIdsByType["group"]?.has(id)
   );
 
   return {
