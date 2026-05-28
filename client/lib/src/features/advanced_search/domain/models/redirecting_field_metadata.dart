@@ -51,6 +51,22 @@ class RedirectingFieldMetadata<P extends Object, T extends Object>
     );
   }
 
+  // Intentionally ignoring runtimeType to ignore the type parameters
+  // because deserialized fields can't be created with the same
+  // type parameters as original fields
+  @override
+  bool operator ==(Object other) {
+    return other is RedirectingFieldMetadata &&
+        parentField == other.parentField &&
+        targetField == other.targetField;
+  }
+
+  // Intentionally ignoring runtimeType to ignore the type parameters
+  // because deserialized fields can't be created with the same
+  // type parameters as original fields
+  @override
+  int get hashCode => Object.hash(parentField, targetField);
+
   @override
   Json toJson() {
     return {
