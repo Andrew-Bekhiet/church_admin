@@ -521,7 +521,7 @@ packages:
     source: hosted
     version: "2.2.0"
   file:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: file
       sha256: a3b4f84adafef897088c160faf7dfffb7696046cb13ae90b508c2cbc95d3b8d4
@@ -1621,7 +1621,7 @@ packages:
     source: hosted
     version: "5.6.4"
   mocktail:
-    dependency: transitive
+    dependency: "direct dev"
     description:
       name: mocktail
       sha256: "5e1bf53cc7baa8062a33b84424deb61513858ea05c601b8509e683815b5914aa"

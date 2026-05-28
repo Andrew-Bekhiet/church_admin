@@ -1,20 +1,32 @@
 import 'package:church_admin/church_admin.dart';
+import 'package:dio/dio.dart';
+import 'package:file/file.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:meta/meta.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart' as p;
 import 'package:rxdart/rxdart.dart';
-import 'package:universal_io/universal_io.dart';
 
 class ExportOperationsStorage {
   static final _exportOperationsStorageProvider =
-      Provider<ExportOperationsStorage>((ref) => ExportOperationsStorage());
+      Provider<ExportOperationsStorage>(
+        (ref) => ExportOperationsStorage(
+          dioClient: ref.read(dioProvider),
+          fileSystem: ref.read(fileSystemProvider),
+        ),
+      );
 
   static ExportOperationsStorage get I =>
       globalProviderContainer.read(_exportOperationsStorageProvider);
 
-  late final _dioClient = globalProviderContainer.read(dioProvider);
+  final Dio _dioClient;
+  final FileSystem _fileSystem;
 
-  ExportOperationsStorage();
+  const ExportOperationsStorage({
+    required Dio dioClient,
+    required FileSystem fileSystem,
+  }) : _dioClient = dioClient,
+       _fileSystem = fileSystem;
 
   Future<DataExportFile> saveFile({
     required String downloadUrl,
@@ -45,14 +57,21 @@ class ExportOperationsStorage {
   Future<File> _getFileFromUri(Uri uri) async {
     final exportsDir = await _maybeCreateExportsDirectory();
 
-    return File(p.join(exportsDir.path, uri.pathSegments.last));
+    return _fileSystem.file(p.join(exportsDir.path, uri.pathSegments.last));
   }
 
   Future<Directory> _maybeCreateExportsDirectory() async {
-    final documentsDir = await p.getApplicationDocumentsDirectory();
-
-    final exportsDir = Directory(p.join(documentsDir.path, 'exports'));
+    final exportsDir = await getExportsDirectory();
 
     return exportsDir.create(recursive: true);
+  }
+
+  @visibleForTesting
+  Future<Directory> getExportsDirectory() async {
+    final documentsDir = await p.getApplicationDocumentsDirectory();
+
+    return _fileSystem.directory(
+      p.join(documentsDir.path, 'exports'),
+    );
   }
 }
