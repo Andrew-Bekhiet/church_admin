@@ -29,6 +29,7 @@ dependencies:
   dio: ^5.1.1
   equatable: ^2.0.5
   fancy_password_field: ^2.0.0
+  file: ^7.0.1
   firebase_app_check: ^0.4.0+1
   firebase_auth: ^6.0.1
   firebase_core: ^4.0.0
@@ -74,6 +75,7 @@ dependencies:
   meta: ^1.8.0
   mime: ^2.0.0
   omni_datetime_picker: ^2.0.1
+  open_file: ^3.5.11
   package_info_plus: ^9.0.0
   path: ^1.9.1
   path_provider: ^2.1.5
@@ -112,7 +114,6 @@ dev_dependencies:
     path: ../church_admin_generator
   cross_file: ^0.3.3+4
   device_info_plus_platform_interface: ^7.0.0
-  file: ^7.0.0
   firebase_app_check_platform_interface: ^0.2.0+1
   firebase_auth_platform_interface: ^8.0.0
   firebase_core_platform_interface: ^6.0.0
@@ -131,6 +132,7 @@ dev_dependencies:
   local_auth_platform_interface: ^1.0.5
   mock_data: ^2.0.0
   mockito: ^5.4.4
+  mocktail: ^1.0.5
   path_provider_platform_interface: ^2.1.0
   permission_handler_platform_interface: ^4.0.2
   plugin_platform_interface: ^2.1.3

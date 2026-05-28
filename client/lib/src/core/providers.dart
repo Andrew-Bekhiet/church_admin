@@ -3,6 +3,8 @@ import 'package:cloud_functions/cloud_functions.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dio/dio.dart';
+import 'package:file/file.dart' show FileSystem;
+import 'package:file/local.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -10,7 +12,8 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart' hide Notification;
-import 'package:flutter_cache_manager/flutter_cache_manager.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart'
+    hide FileSystem;
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_map_tile_caching/flutter_map_tile_caching.dart';
 import 'package:flutter_riverpod/misc.dart';
@@ -461,4 +464,8 @@ final flutterMapTileCacheProvider = Provider<FMTCTileProvider>(
 
     return fmtcTileProvider;
   },
+);
+
+final fileSystemProvider = Provider<FileSystem>(
+  (ref) => const LocalFileSystem(),
 );

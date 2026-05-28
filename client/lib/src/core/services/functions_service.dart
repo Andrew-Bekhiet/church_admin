@@ -136,4 +136,26 @@ class FunctionsService {
   Future<void> deleteMyAccount() async {
     await httpsCallable('deleteMyAccount').call();
   }
+
+  Future<String> exportData({
+    List<String> areasIds = const [],
+    List<String> servicesIds = const [],
+    List<String> classesIds = const [],
+    List<String> groupsIds = const [],
+  }) async {
+    final response = await httpsCallable('exportData').call({
+      'areasIds': areasIds,
+      'servicesIds': servicesIds,
+      'classesIds': classesIds,
+      'groupsIds': groupsIds,
+    });
+
+    if (response.data case {'downloadUrl': final String downloadUrl}) {
+      return downloadUrl;
+    }
+
+    throw Exception(
+      'Failed to parse export data response, expected Map<String, dynamic> got ${response.data}',
+    );
+  }
 }

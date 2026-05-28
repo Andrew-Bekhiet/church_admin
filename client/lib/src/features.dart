@@ -3,6 +3,7 @@ export 'features/attendance.dart';
 export 'features/auth.dart';
 export 'features/data_analysis.dart' hide $appRoutes;
 export 'features/data_entry.dart' hide $appRoutes;
+export 'features/data_export.dart' hide $appRoutes;
 export 'features/download_app.dart';
 export 'features/history.dart';
 export 'features/home.dart';

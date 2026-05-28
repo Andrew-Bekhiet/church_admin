@@ -52,6 +52,11 @@ class HomeDrawer extends StatelessWidget {
             onTap: () => const AdvancedSearchRoute().push(context),
           ),
           HomeDrawerDestination(
+            icon: const Icon(Symbols.upload_file),
+            label: const Text('تصدير البيانات'),
+            onTap: () => const ExportEntitiesSelectionRoute().push(context),
+          ),
+          HomeDrawerDestination(
             icon: const Icon(Symbols.map),
             label: const Text('خريطة الافتقاد'),
             onTap: () => const VisitsMapRoute().push(context),
