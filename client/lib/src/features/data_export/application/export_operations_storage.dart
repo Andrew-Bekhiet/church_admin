@@ -38,7 +38,11 @@ class ExportOperationsStorage {
     await _dioClient.downloadUri(
       downloadUri,
       file.path,
-      onReceiveProgress: (count, total) => onProgress(count / total),
+      onReceiveProgress: (count, total) {
+        if (total <= 0) return;
+
+        onProgress(count / total);
+      },
     );
 
     return DataExportFile.fromFile(file);
