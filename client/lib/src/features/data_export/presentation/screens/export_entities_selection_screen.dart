@@ -32,9 +32,11 @@ class _ExportEntitiesSelectionScreenState
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(message)),
           ),
-        DataExportException(:final error) => showDialog(
-          context: context,
-          builder: (context) => CAErrorDialog(exception: error),
+        DataExportException(:final error) => unawaited(
+          showDialog(
+            context: context,
+            builder: (context) => CAErrorDialog(exception: error),
+          ),
         ),
       },
       buildWhen: (_, current) => current is DataExportStateBuilder,
