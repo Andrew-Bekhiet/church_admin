@@ -30,6 +30,9 @@ final class DataExportException extends DataExportStateListener {
   final Object error;
 
   const DataExportException(this.error);
+
+  @override
+  List<Object?> get props => [error];
 }
 
 final class DataExportLoading extends DataExportStateBuilder {
