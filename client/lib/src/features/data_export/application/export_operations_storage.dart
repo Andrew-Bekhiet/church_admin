@@ -1,4 +1,5 @@
 import 'package:church_admin/church_admin.dart';
+import 'package:church_admin/src/features/data_export/domain/models/data_export_file.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart' as p;
@@ -16,7 +17,7 @@ class ExportOperationsStorage {
 
   ExportOperationsStorage();
 
-  Future<File> saveFile({
+  Future<DataExportFile> saveFile({
     required String downloadUrl,
     required void Function(double) onProgress,
   }) async {
@@ -29,13 +30,17 @@ class ExportOperationsStorage {
       onReceiveProgress: (count, total) => onProgress(count / total),
     );
 
-    return file;
+    return DataExportFile.fromFile(file);
   }
 
-  Future<List<File>> listSavedFiles() async {
+  Future<List<DataExportFile>> listSavedFiles() async {
     final exportsDir = await _maybeCreateExportsDirectory();
 
-    return exportsDir.list().whereType<File>().toList();
+    return exportsDir
+        .list()
+        .whereType<File>()
+        .map(DataExportFile.fromFile)
+        .toList();
   }
 
   Future<File> _getFileFromUri(Uri uri) async {

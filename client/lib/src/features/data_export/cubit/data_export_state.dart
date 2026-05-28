@@ -1,6 +1,6 @@
 import 'package:church_admin/church_admin.dart';
+import 'package:church_admin/src/features/data_export/domain/models/data_export_file.dart';
 import 'package:equatable/equatable.dart';
-import 'package:universal_io/universal_io.dart';
 
 sealed class DataExportState with EquatableMixin {
   const DataExportState();
@@ -40,7 +40,7 @@ final class DataExportLoading extends DataExportStateBuilder {
 }
 
 final class DataExportListSavedFiles extends DataExportStateBuilder {
-  final List<File> files;
+  final List<DataExportFile> files;
 
   const DataExportListSavedFiles({required this.files});
 
@@ -80,7 +80,7 @@ final class DataExportInProgress extends DataExportStateBuilder {
 }
 
 final class DataExportCompleted extends DataExportStateBuilder {
-  final File file;
+  final DataExportFile file;
 
   const DataExportCompleted({required this.file});
 

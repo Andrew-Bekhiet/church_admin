@@ -1,11 +1,11 @@
+import 'package:church_admin/src/features/data_export/domain/models/data_export_file.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
-import 'package:universal_io/universal_io.dart';
 
 class ExportListSavedFilesBody extends StatelessWidget {
-  final List<File> files;
-  final void Function(File) onTap;
+  final List<DataExportFile> files;
+  final void Function(DataExportFile) onTap;
   final VoidCallback onNewExport;
 
   const ExportListSavedFilesBody({
@@ -63,11 +63,10 @@ class ExportListSavedFilesBody extends StatelessWidget {
       itemBuilder: (context, index) {
         final file = files[index];
 
-        final lastModifiedDate = file.lastModifiedSync();
         final lastModifiedLabel = DateFormat(
           'd MMM yyyy • h:mm a',
           'ar-EG',
-        ).format(lastModifiedDate);
+        ).format(file.lastModified);
 
         return Card(
           clipBehavior: Clip.antiAlias,

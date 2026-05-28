@@ -2,11 +2,11 @@ import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/features/data_export/application/export_operations_storage.dart';
+import 'package:church_admin/src/features/data_export/domain/models/data_export_file.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:open_file/open_file.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:universal_io/universal_io.dart';
 
 class DataExportCubit extends Cubit<DataExportState> {
   late final BehaviorSubject<String?> _searchSubject = BehaviorSubject.seeded(
@@ -54,21 +54,20 @@ class DataExportCubit extends Cubit<DataExportState> {
     final files = await _exportOperationsStorage.listSavedFiles();
 
     if (files.isNotEmpty) {
-      emit(DataExportListSavedFiles(files: _sortFiles(files)));
+      emit(DataExportListSavedFiles(files: _sortFilesByLastModified(files)));
     } else {
       switchToSelectingObjects();
     }
   }
 
-  List<File> _sortFiles(List<File> files) => files.sorted(
-    (a, b) => b.lastModifiedSync().compareTo(a.lastModifiedSync()),
-  );
+  List<DataExportFile> _sortFilesByLastModified(List<DataExportFile> files) =>
+      files.sortedBy((file) => file.lastModified);
 
   Future<void> switchToSavedFiles() async {
     final files = await _exportOperationsStorage.listSavedFiles();
 
     emit(
-      DataExportListSavedFiles(files: _sortFiles(files)),
+      DataExportListSavedFiles(files: _sortFilesByLastModified(files)),
     );
   }
 
@@ -221,7 +220,8 @@ class DataExportCubit extends Cubit<DataExportState> {
     }
   }
 
-  void openExportedFile(File file) => unawaited(OpenFile.open(file.path));
+  void openExportedFile(DataExportFile file) =>
+      unawaited(OpenFile.open(file.path));
 
   void _emitListenerState(DataExportStateListener listenerState) {
     final state = this.state;
