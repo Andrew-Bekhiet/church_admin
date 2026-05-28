@@ -150,6 +150,12 @@ class FunctionsService {
       'groupsIds': groupsIds,
     });
 
-    return (response.data as Map)['downloadUrl'] as String;
+    if (response.data case {'downloadUrl': final String downloadUrl}) {
+      return downloadUrl;
+    }
+
+    throw Exception(
+      'Failed to parse export data response, expected Map<String, dynamic> got ${response.data}',
+    );
   }
 }
