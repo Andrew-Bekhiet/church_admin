@@ -1,1 +1,1 @@
-
+export 'domain/models.dart';

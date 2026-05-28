@@ -1,5 +1,4 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/src/features/data_export/domain/models/data_export_file.dart';
 import 'package:equatable/equatable.dart';
 
 sealed class DataExportState with EquatableMixin {
