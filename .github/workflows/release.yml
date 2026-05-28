@@ -122,20 +122,22 @@ jobs:
     permissions:
       contents: write
 
-    needs: [ validate-tag, run-tests ]
+    needs: [validate-tag, run-tests]
     if: ${{ always() && (needs.validate-tag.result == 'success') &&
       (needs.run-tests.result == 'success' || needs.run-tests.result ==
       'skipped') && (github.event_name == 'push' || (github.event.inputs.android
       == 'true' || github.event.inputs.ios == 'true')) }}
     strategy:
       matrix:
-        os: [ ubuntu-latest, macos-latest ]
+        os: [ubuntu-latest, macos-latest]
         exclude:
           # Skip Ubuntu (Android) if only iOS is requested
-          - os: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.android
+          - os:
+              ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.android
               == 'false' && 'ubuntu-latest' }}
           # Skip macOS (iOS) if only Android is requested
-          - os: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.ios ==
+          - os:
+              ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.ios ==
               'false' && 'macos-latest' }}
     runs-on: ${{ matrix.os }}
 
@@ -241,8 +243,7 @@ jobs:
         with:
           working-directory: client
           platform: android
-          args: --artifact=apk --flutter-version=${{ steps.flutter-action.outputs.VERSION
-            }}
+          args: --artifact=apk --flutter-version=${{ steps.flutter-action.outputs.VERSION }}
 
       - name: Run pod repo update
         if: ${{ matrix.os == 'macos-latest' }}
@@ -327,7 +328,8 @@ jobs:
         uses: "google-github-actions/upload-cloud-storage@v2"
         if: ${{ matrix.os == 'macos-latest' }}
         with:
-          path: "client/build/ios/ipa/app-release-v${{ steps.version.outputs.version
+          path:
+            "client/build/ios/ipa/app-release-v${{ steps.version.outputs.version
             }}.ipa"
           destination: "${{ secrets.APP_RELEASE_GCS_BUCKET }}"
 
@@ -340,7 +342,7 @@ jobs:
           generateReleaseNotes: true
 
   release-web:
-    needs: [ validate-tag, run-tests ]
+    needs: [validate-tag, run-tests]
     if: ${{ always() && (needs.validate-tag.result == 'success') &&
       (needs.run-tests.result == 'success' || needs.run-tests.result ==
       'skipped') && (github.event_name == 'push' || github.event.inputs.web ==
