@@ -32,5 +32,7 @@ jobs:
 
       - name: Deploy to Firebase Hosting
         working-directory: server/firebase
+        env:
+          DEPLOY_MESSAGE: ${{ github.event.head_commit.message }}
         run: |
-          firebase deploy --project "${{ secrets.FIREBASE_PROJECT_ID }}" --only storage,database,functions,hosting -m "${{ github.event.head_commit.message }}"
+          firebase deploy --project "${{ secrets.FIREBASE_PROJECT_ID }}" --only storage,database,functions,hosting -m "$DEPLOY_MESSAGE"
