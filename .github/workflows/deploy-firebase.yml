@@ -33,7 +33,7 @@ jobs:
       - name: Deploy Firebase project
         working-directory: server/firebase
         run: |
-          firebase deploy --project "${{ secrets.FIREBASE_PROJECT_ID }}" --only storage,database,hosting --message="${{ github.sha }}"
+          firebase deploy --project "${{ secrets.FIREBASE_PROJECT_ID }}" --only database,hosting --message="${{ github.sha }}"
 
       - name: Deploy Firebase Functions
         working-directory: server/firebase/functions
