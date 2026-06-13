@@ -331,24 +331,6 @@ jobs:
           tag: v${{ steps.version.outputs.version }}
           generateReleaseNotes: true
 
-  publish-web:
-    needs: [validate-tag, run-tests]
-    if: ${{ always() && (needs.validate-tag.result == 'success') && (github.event_name == 'push' || github.event.inputs.web == 'true') }}
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 1
-
-      - name: Deploy to Firebase Hosting
-        uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          firebaseServiceAccount: ${{ secrets.FIREBASE_HOSTING_DEPLOYER_KEY }}
-          entryPoint: ./server/
-          projectId: ${{ secrets.FIREBASE_PROJECT_ID }}
-          channelId: live
-
   update-app-version:
     runs-on: ubuntu-latest
     needs: release-mobile

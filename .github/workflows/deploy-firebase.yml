@@ -1,0 +1,36 @@
+name: Deploy Firebase
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - ".github/workflows/deploy-firebase.yml"
+      - "server/firebase/**"
+
+jobs:
+  deploy-firebase:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Download Firebase CLI
+        run: curl -sL https://firebase.tools | bash
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v3
+        with:
+          project_id: ${{ secrets.FIREBASE_PROJECT_ID }}
+          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ secrets.FIREBASE_DEPLOYER_SERVICE_ACCOUNT_NAME }}
+          create_credentials_file: true
+          export_environment_variables: true
+
+      - name: Deploy to Firebase Hosting
+        working-directory: server/firebase
+        run: |
+          firebase deploy --project "${{ secrets.FIREBASE_PROJECT_ID }}" --only storage,database,functions,hosting -m "${{ github.event.head_commit.message }}"
