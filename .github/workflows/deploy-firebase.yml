@@ -33,5 +33,4 @@ jobs:
       - name: Deploy to Firebase Hosting
         working-directory: server/firebase
         run: |
-          DEPLOY_MESSAGE="$(git log -1 --pretty=oneline)"
-          firebase deploy --project "${{ secrets.FIREBASE_PROJECT_ID }}" --only storage,database,functions,hosting --message="$DEPLOY_MESSAGE"
+          firebase deploy --project "${{ secrets.FIREBASE_PROJECT_ID }}" --only storage,database,functions,hosting --message="${{ github.sha }}"
