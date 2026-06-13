@@ -73,4 +73,4 @@ INSERT INTO public.martial_statuses (name) VALUES
 ('widowedWithoutChildren')
 ON CONFLICT DO NOTHING;
 
-\unrestrict T2aR9AxzTQKuuRRvCAJkXgCxWdKVhW3L;
+\unrestrict T2aR9AxzTQKuuRRvCAJkXgCxWdKVhW3L
