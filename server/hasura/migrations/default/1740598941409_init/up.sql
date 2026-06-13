@@ -24,6 +24,22 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
+-- PostGIS must load before any geography columns (init tables and later migrations).
+--
+
+CREATE SCHEMA IF NOT EXISTS "topology";
+
+CREATE EXTENSION IF NOT EXISTS "postgis" WITH SCHEMA "public" CASCADE;
+
+CREATE EXTENSION IF NOT EXISTS "postgis_topology" WITH SCHEMA "topology";
+
+COMMENT ON SCHEMA "topology" IS 'PostGIS Topology schema';
+
+COMMENT ON EXTENSION "postgis" IS 'PostGIS geometry and geography spatial types and functions';
+
+COMMENT ON EXTENSION "postgis_topology" IS 'PostGIS topology spatial types and functions';
+
+--
 -- Name: church_admin; Type: DATABASE; Schema: -; Owner: -
 --
 
@@ -101,20 +117,6 @@ CREATE SCHEMA "history";
 
 
 --
--- Name: topology; Type: SCHEMA; Schema: -; Owner: -
---
-
-CREATE SCHEMA "topology";
-
-
---
--- Name: SCHEMA "topology"; Type: COMMENT; Schema: -; Owner: -
---
-
-COMMENT ON SCHEMA "topology" IS 'PostGIS Topology schema';
-
-
---
 -- Name: citext; Type: EXTENSION; Schema: -; Owner: -
 --
 
@@ -140,34 +142,6 @@ CREATE EXTENSION IF NOT EXISTS "pgcrypto" WITH SCHEMA "public";
 --
 
 COMMENT ON EXTENSION "pgcrypto" IS 'cryptographic functions';
-
-
---
--- Name: postgis; Type: EXTENSION; Schema: -; Owner: -
---
-
-CREATE EXTENSION IF NOT EXISTS "postgis" WITH SCHEMA "public";
-
-
---
--- Name: EXTENSION "postgis"; Type: COMMENT; Schema: -; Owner: -
---
-
-COMMENT ON EXTENSION "postgis" IS 'PostGIS geometry and geography spatial types and functions';
-
-
---
--- Name: postgis_topology; Type: EXTENSION; Schema: -; Owner: -
---
-
-CREATE EXTENSION IF NOT EXISTS "postgis_topology" WITH SCHEMA "topology";
-
-
---
--- Name: EXTENSION "postgis_topology"; Type: COMMENT; Schema: -; Owner: -
---
-
-COMMENT ON EXTENSION "postgis_topology" IS 'PostGIS topology spatial types and functions';
 
 
 --
