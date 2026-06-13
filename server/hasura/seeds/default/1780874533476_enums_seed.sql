@@ -53,11 +53,11 @@ INSERT INTO public.shammas_levels (id, name, "order") VALUES
 INSERT INTO public.person_types (id, name, "order", is_family_admin, is_hidden) VALUES
 ('47030d3f-72f0-5be9-82c3-f3e6e61fae24', 'أب', 1, true, false),
 ('02686e30-195c-58c5-a226-8de805726050', 'أم', 2, true, false),
-('b91ad6b5-de93-5b83-ba54-869cc99548b4', 'ابن ', 3, false, false),
+('b91ad6b5-de93-5b83-ba54-869cc99548b4', 'ابن', 3, false, false),
 ('aa2645a7-8930-5c69-89bd-1e21a2726b1d', 'ابنة', 4, false, false),
 ('901131e1-530d-5b68-97c0-86bd334e88c7', 'جد', 5, false, false),
 ('50059ed4-ff2a-54ac-8114-385ff1521a6c', 'جدة', 6, false, false);
-SELECT pg_catalog.setval('public.person_types_order_seq', 7, true);
+SELECT pg_catalog.setval('public.person_types_order_seq', coalesce((SELECT max("order") FROM person_types), 0) + 1, false);
 
 INSERT INTO public.martial_statuses (name) VALUES
 ('married'),
