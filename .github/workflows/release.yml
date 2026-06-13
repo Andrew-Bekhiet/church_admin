@@ -25,11 +25,6 @@ on:
         required: false
         default: true
         type: boolean
-      web:
-        description: "Release for Web"
-        required: false
-        default: true
-        type: boolean
 
 jobs:
   validate-tag:
@@ -78,7 +73,7 @@ jobs:
           fetch-depth: 2
 
       - name: Setup Flutter
-        uses: subosito/flutter-action@4efee115f1f8f612aafcb187ee16db202d7e4376
+        uses: subosito/flutter-action@v2
         with:
           cache: true
           flutter-version-file: client/.fvmrc
@@ -123,22 +118,15 @@ jobs:
       contents: write
 
     needs: [validate-tag, run-tests]
-    if: ${{ always() && (needs.validate-tag.result == 'success') &&
-      (needs.run-tests.result == 'success' || needs.run-tests.result ==
-      'skipped') && (github.event_name == 'push' || (github.event.inputs.android
-      == 'true' || github.event.inputs.ios == 'true')) }}
+    if: ${{ always() && (needs.validate-tag.result == 'success') && (needs.run-tests.result == 'success' || needs.run-tests.result == 'skipped') && (github.event_name == 'push' || (github.event.inputs.android == 'true' || github.event.inputs.ios == 'true')) }}
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest]
         exclude:
           # Skip Ubuntu (Android) if only iOS is requested
-          - os:
-              ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.android
-              == 'false' && 'ubuntu-latest' }}
+          - os: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.android == 'false' && 'ubuntu-latest' }}
           # Skip macOS (iOS) if only Android is requested
-          - os:
-              ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.ios ==
-              'false' && 'macos-latest' }}
+          - os: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.ios == 'false' && 'macos-latest' }}
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -148,7 +136,7 @@ jobs:
 
       - name: Get Flutter
         id: flutter-action
-        uses: subosito/flutter-action@4efee115f1f8f612aafcb187ee16db202d7e4376
+        uses: subosito/flutter-action@v2
         with:
           cache: true
           flutter-version-file: client/.fvmrc
@@ -320,17 +308,14 @@ jobs:
         uses: "google-github-actions/upload-cloud-storage@v2"
         if: ${{ matrix.os == 'ubuntu-latest' }}
         with:
-          path: "client/build/app/outputs/flutter-apk/app-release-v${{
-            steps.version.outputs.version }}.apk"
+          path: "client/build/app/outputs/flutter-apk/app-release-v${{ steps.version.outputs.version }}.apk"
           destination: "${{ secrets.APP_RELEASE_GCS_BUCKET }}"
 
       - name: Upload ipa to Google Cloud Storage
         uses: "google-github-actions/upload-cloud-storage@v2"
         if: ${{ matrix.os == 'macos-latest' }}
         with:
-          path:
-            "client/build/ios/ipa/app-release-v${{ steps.version.outputs.version
-            }}.ipa"
+          path: "client/build/ios/ipa/app-release-v${{ steps.version.outputs.version }}.ipa"
           destination: "${{ secrets.APP_RELEASE_GCS_BUCKET }}"
 
       - name: Create release
@@ -340,63 +325,6 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: v${{ steps.version.outputs.version }}
           generateReleaseNotes: true
-
-  release-web:
-    needs: [validate-tag, run-tests]
-    if: ${{ always() && (needs.validate-tag.result == 'success') &&
-      (needs.run-tests.result == 'success' || needs.run-tests.result ==
-      'skipped') && (github.event_name == 'push' || github.event.inputs.web ==
-      'true') }}
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 1
-
-      - name: Get Flutter
-        id: flutter-action
-        uses: subosito/flutter-action@4efee115f1f8f612aafcb187ee16db202d7e4376
-        with:
-          cache: true
-          flutter-version-file: client/.fvmrc
-          pub-cache-key: "flutter-pub:os:-:channel:-:version:-:arch:"
-          cache-key: "flutter:os:-:channel:-:version:-:arch:"
-
-      - name: Populate the Flutter tool's cache of binary artifacts
-        run: flutter precache
-
-      - name: Decode and save secrets to files
-        working-directory: client
-        env:
-          FIREBASE_OPTIONS_DART: ${{ secrets.FIREBASE_OPTIONS_DART }}
-          SECRETS_SERVICE_DART: ${{ secrets.SECRETS_SERVICE_DART }}
-        run: |
-          echo $FIREBASE_OPTIONS_DART | sed 's/[^A-Za-z0-9+/=]//g' | base64 -d > ./lib/firebase_options.dart
-          echo $SECRETS_SERVICE_DART | sed 's/[^A-Za-z0-9+/=]//g' | base64 -d > ./lib/src/core/services/secrets/secrets_service_impl.dart
-
-      - name: Install dependencies
-        working-directory: client
-        run: flutter pub get
-
-      - name: Run new builder
-        working-directory: client
-        run: dart run build_runner build --delete-conflicting-outputs
-
-      - name: Build web
-        working-directory: client
-        run: flutter build web
-
-      - name: Copy web build to public folder
-        run: cp -r ./client/build/web/* ./server/public
-
-      - name: Deploy to Firebase Hosting
-        uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          firebaseServiceAccount: ${{ secrets.FIREBASE_HOSTING_DEPLOYER_KEY }}
-          entryPoint: ./server/
-          projectId: ${{ secrets.FIREBASE_PROJECT_ID }}
-          channelId: live
 
   update-app-version:
     runs-on: ubuntu-latest
