@@ -19,17 +19,6 @@ jobs:
         with:
           fetch-depth: 1
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
-          cache-dependency-path: server/firebase/functions/package-lock.json
-
-      - name: Install Firebase Functions dependencies
-        working-directory: server/firebase/functions
-        run: npm ci
-
       - name: Download Firebase CLI
         run: curl -sL https://firebase.tools | bash
       - name: Authenticate to Google Cloud
@@ -41,7 +30,12 @@ jobs:
           create_credentials_file: true
           export_environment_variables: true
 
-      - name: Deploy to Firebase Hosting
+      - name: Deploy Firebase project
         working-directory: server/firebase
         run: |
-          firebase deploy --project "${{ secrets.FIREBASE_PROJECT_ID }}" --only storage,database,functions,hosting --message="${{ github.sha }}"
+          firebase deploy --project "${{ secrets.FIREBASE_PROJECT_ID }}" --only storage,database,hosting --message="${{ github.sha }}"
+
+      - name: Deploy Firebase Functions
+        working-directory: server/firebase/functions
+        run: |
+          firebase deploy --project "${{ secrets.FIREBASE_PROJECT_ID }}" --only functions --message="${{ github.sha }}"
