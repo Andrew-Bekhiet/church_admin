@@ -31,18 +31,15 @@ jobs:
     permissions:
       contents: write
 
-    if: ${{ github.event_name == 'push' || (github.event.inputs.android == 'true' ||
-      github.event.inputs.ios == 'true') }}
+    if: ${{ github.event_name == 'push' || (github.event.inputs.android == 'true' || github.event.inputs.ios == 'true') }}
     strategy:
       matrix:
-        os: [ ubuntu-latest, macos-latest ]
+        os: [ubuntu-latest, macos-latest]
         exclude:
           # Skip Ubuntu (Android) if only iOS is requested
-          - os: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.android
-              == 'false' && 'ubuntu-latest' }}
+          - os: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.android == 'false' && 'ubuntu-latest' }}
           # Skip macOS (iOS) if only Android is requested
-          - os: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.ios ==
-              'false' && 'macos-latest' }}
+          - os: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.ios == 'false' && 'macos-latest' }}
     runs-on: ${{ matrix.os }}
 
     steps:
