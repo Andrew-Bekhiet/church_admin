@@ -25,11 +25,6 @@ on:
         required: false
         default: true
         type: boolean
-      web:
-        description: "Publish web (privacy policy, terms of service and delete account page)"
-        required: false
-        default: false
-        type: boolean
 
 jobs:
   validate-tag:

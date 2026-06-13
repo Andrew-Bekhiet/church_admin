@@ -20,11 +20,6 @@ on:
         required: false
         default: true
         type: boolean
-      web:
-        description: "Deploy web"
-        required: false
-        default: true
-        type: boolean
 
 jobs:
   patch-mobile:
