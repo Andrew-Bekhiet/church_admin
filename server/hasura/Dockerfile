@@ -1,4 +1,4 @@
-FROM hasura/graphql-engine:v2.49.1
+FROM hasura/graphql-engine:v2.49.2.cli-migrations-v3
 
 # Install PostgreSQL client 17
 RUN apt-get update && apt-get install -y curl gnupg lsb-release
@@ -8,9 +8,12 @@ RUN curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc | gpg --dearmo
 
 RUN curl -s https://packagecloud.io/install/repositories/timescale/timescaledb/script.deb.sh | bash
 
-ENV DEBIAN_FRONTEND noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && \
     apt-get install -y postgresql-client-17 postgresql-17-postgis-3 postgresql-contrib postgresql-17-postgis-3-scripts && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
+
+COPY ./migrations /hasura-migrations
+COPY ./metadata /hasura-metadata
