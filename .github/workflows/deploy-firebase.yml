@@ -40,6 +40,6 @@ jobs:
           export_environment_variables: true
 
       - name: Deploy Firebase project
-        working-directory: server/firebase
+        working-directory: server/firebase/functions
         run: |
           npx firebase deploy --project "${{ secrets.FIREBASE_PROJECT_ID }}" --only database,hosting,functions --message="${{ github.sha }}"
