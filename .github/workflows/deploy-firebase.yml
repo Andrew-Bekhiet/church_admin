@@ -31,6 +31,6 @@ jobs:
           export_environment_variables: true
 
       - name: Deploy Firebase project
-        working-directory: server/firebase
+        working-directory: server/firebase/functions
         run: |
           firebase deploy --project "${{ secrets.FIREBASE_PROJECT_ID }}" --only storage,database,functions,hosting -m "${{ github.event.head_commit.message }}"
