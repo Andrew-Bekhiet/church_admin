@@ -6,6 +6,10 @@ on:
     paths:
       - ".github/workflows/deploy-firebase.yml"
       - "server/firebase/**"
+  pull_request:
+    paths:
+      - ".github/workflows/deploy-firebase.yml"
+      - "server/firebase/**"
 
 jobs:
   deploy-firebase:
@@ -41,6 +45,14 @@ jobs:
 
       - name: Deploy Firebase project
         working-directory: server/firebase/functions
+        if: ${{ github.event_name != 'pull_request' }}
         run: |
           DEPLOY_MESSAGE="$(git log -1 --pretty=oneline)"
           npx firebase deploy --project "${{ secrets.FIREBASE_PROJECT_ID }}" --only database,functions,hosting -m "$DEPLOY_MESSAGE"
+
+      - name: Validate Firebase project
+        working-directory: server/firebase/functions
+        if: ${{ github.event_name == 'pull_request' }}
+        run: |
+          DEPLOY_MESSAGE="$(git log -1 --pretty=oneline)"
+          npx firebase deploy --project "${{ secrets.FIREBASE_PROJECT_ID }}" --only database,functions,hosting -m "$DEPLOY_MESSAGE" --dry-run
