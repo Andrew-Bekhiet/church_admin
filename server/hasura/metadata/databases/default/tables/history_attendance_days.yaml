@@ -30,13 +30,6 @@ array_relationships:
         table:
           name: kodas_history
           schema: history
-computed_fields:
-  - name: isUserAllowedToWrite
-    definition:
-      function:
-        name: user_allowed_to_write_day
-        schema: history
-      session_argument: hasura_session
 insert_permissions:
   - role: user
     permission:
@@ -58,14 +51,65 @@ update_permissions:
         - day
         - notes
       filter:
-        isUserAllowedToWrite:
-          _eq: true
+        _exists:
+          _table:
+            name: users_attendance_permissions
+            schema: auth
+          _where:
+            _and:
+              - uid:
+                  _eq: X-Hasura-User-Id
+              - _or:
+                  - allow_record_attendance:
+                      _eq: true
+                  - allow_record_servants_attendance:
+                      _eq: true
       check:
-        isUserAllowedToWrite:
-          _eq: true
+        _exists:
+          _table:
+            name: users_attendance_permissions
+            schema: auth
+          _where:
+            _and:
+              - uid:
+                  _eq: X-Hasura-User-Id
+              - _or:
+                  - allow_record_attendance:
+                      _eq: true
+                  - allow_record_servants_attendance:
+                      _eq: true
 delete_permissions:
   - role: user
     permission:
       filter:
-        isUserAllowedToWrite:
-          _eq: true
+        _and:
+          - _exists:
+              _table:
+                name: users_permissions
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - permission:
+                      _eq: readAllData
+          - _exists:
+              _table:
+                name: users_permissions
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - permission:
+                      _eq: writeAllData
+          - _exists:
+              _table:
+                name: users_permissions
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - permission:
+                      _eq: deleteData

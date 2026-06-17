@@ -71,10 +71,14 @@ insert_permissions:
         - group_admin_on_users
         - group_allow_edit
         - group_allow_export
+        - group_allow_record_attendance
+        - group_allow_record_servants_attendance
         - group_write_related_families
         - service_admin_on_users
         - service_allow_edit
         - service_allow_export
+        - service_allow_record_attendance
+        - service_allow_record_servants_attendance
         - service_gender
         - service_study_year
         - service_write_related_families
@@ -92,11 +96,15 @@ select_permissions:
         - group_admin_on_users
         - group_allow_edit
         - group_allow_export
+        - group_allow_record_attendance
+        - group_allow_record_servants_attendance
         - group_write_related_families
         - permission_id
         - service_admin_on_users
         - service_allow_edit
         - service_allow_export
+        - service_allow_record_attendance
+        - service_allow_record_servants_attendance
         - service_gender
         - service_study_year
         - service_write_related_families

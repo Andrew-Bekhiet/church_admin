@@ -1,0 +1,3 @@
+table:
+  name: users_attendance_permissions
+  schema: auth
