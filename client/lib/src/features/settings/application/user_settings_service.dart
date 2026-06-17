@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class UserSettingsService extends BlocObserver {
@@ -38,6 +39,15 @@ class UserSettingsService extends BlocObserver {
     'lastOrderByFor${type.name}',
     orderBy.map((o) => o.toJson()).toList(),
   );
+
+  HomeMode? get lastHomeMode {
+    final value = box.get('lastHomeMode') as String?;
+
+    return HomeMode.values.firstWhereOrNull((e) => e.name == value);
+  }
+
+  Future<void> setLastHomeMode(HomeMode? value) =>
+      box.put('lastHomeMode', value?.name);
 
   Future<void> setupDefaults() async {
     await setGreatFeastTheme(true);

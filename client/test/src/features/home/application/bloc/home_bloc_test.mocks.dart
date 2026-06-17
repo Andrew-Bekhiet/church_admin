@@ -4,14 +4,15 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i4;
-import 'dart:ui' as _i10;
+import 'dart:ui' as _i11;
 
 import 'package:church_admin/church_admin.dart' as _i2;
-import 'package:flutter/src/widgets/basic.dart' as _i7;
-import 'package:flutter/src/widgets/page_view.dart' as _i6;
-import 'package:flutter/src/widgets/scroll_context.dart' as _i9;
-import 'package:flutter/src/widgets/scroll_physics.dart' as _i8;
+import 'package:flutter/src/widgets/basic.dart' as _i8;
+import 'package:flutter/src/widgets/page_view.dart' as _i7;
+import 'package:flutter/src/widgets/scroll_context.dart' as _i10;
+import 'package:flutter/src/widgets/scroll_physics.dart' as _i9;
 import 'package:flutter/src/widgets/scroll_position.dart' as _i3;
+import 'package:flutter_bloc/flutter_bloc.dart' as _i6;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:mockito/src/dummies.dart' as _i5;
 
@@ -119,9 +120,15 @@ class _FakeHistoryDAO_16 extends _i1.SmartFake implements _i2.HistoryDAO {
     : super(parent, parentInvocation);
 }
 
-class _FakeScrollPosition_17 extends _i1.SmartFake
+class _FakeSyncKVStore_17<T> extends _i1.SmartFake
+    implements _i2.SyncKVStore<T> {
+  _FakeSyncKVStore_17(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
+}
+
+class _FakeScrollPosition_18 extends _i1.SmartFake
     implements _i3.ScrollPosition {
-  _FakeScrollPosition_17(Object parent, Invocation parentInvocation)
+  _FakeScrollPosition_18(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
@@ -424,10 +431,170 @@ class MockDatabaseService extends _i1.Mock implements _i2.DatabaseService {
           as Map<Type, _i2.DAOBase<_i2.ViewableWithID>>);
 }
 
+/// A class which mocks [UserSettingsService].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockUserSettingsService extends _i1.Mock
+    implements _i2.UserSettingsService {
+  @override
+  _i2.SyncKVStore<dynamic> get box =>
+      (super.noSuchMethod(
+            Invocation.getter(#box),
+            returnValue: _FakeSyncKVStore_17<dynamic>(
+              this,
+              Invocation.getter(#box),
+            ),
+            returnValueForMissingStub: _FakeSyncKVStore_17<dynamic>(
+              this,
+              Invocation.getter(#box),
+            ),
+          )
+          as _i2.SyncKVStore<dynamic>);
+
+  @override
+  bool get greatFeastTheme =>
+      (super.noSuchMethod(
+            Invocation.getter(#greatFeastTheme),
+            returnValue: false,
+            returnValueForMissingStub: false,
+          )
+          as bool);
+
+  @override
+  _i4.Future<void> setDarkTheme(bool? value) =>
+      (super.noSuchMethod(
+            Invocation.method(#setDarkTheme, [value]),
+            returnValue: _i4.Future<void>.value(),
+            returnValueForMissingStub: _i4.Future<void>.value(),
+          )
+          as _i4.Future<void>);
+
+  @override
+  _i4.Future<void> setRegisteredFCMToken(String? value) =>
+      (super.noSuchMethod(
+            Invocation.method(#setRegisteredFCMToken, [value]),
+            returnValue: _i4.Future<void>.value(),
+            returnValueForMissingStub: _i4.Future<void>.value(),
+          )
+          as _i4.Future<void>);
+
+  @override
+  _i4.Future<void> setGreatFeastTheme(bool? value) =>
+      (super.noSuchMethod(
+            Invocation.method(#setGreatFeastTheme, [value]),
+            returnValue: _i4.Future<void>.value(),
+            returnValueForMissingStub: _i4.Future<void>.value(),
+          )
+          as _i4.Future<void>);
+
+  @override
+  List<_i2.OrderBy>? getLastOrderByForType(_i2.QueryableType<Object>? type) =>
+      (super.noSuchMethod(
+            Invocation.method(#getLastOrderByForType, [type]),
+            returnValueForMissingStub: null,
+          )
+          as List<_i2.OrderBy>?);
+
+  @override
+  _i4.Future<void> setLastOrderByForType(
+    _i2.QueryableType<Object>? type,
+    List<_i2.OrderBy>? orderBy,
+  ) =>
+      (super.noSuchMethod(
+            Invocation.method(#setLastOrderByForType, [type, orderBy]),
+            returnValue: _i4.Future<void>.value(),
+            returnValueForMissingStub: _i4.Future<void>.value(),
+          )
+          as _i4.Future<void>);
+
+  @override
+  _i4.Future<void> setLastHomeMode(_i2.HomeMode? value) =>
+      (super.noSuchMethod(
+            Invocation.method(#setLastHomeMode, [value]),
+            returnValue: _i4.Future<void>.value(),
+            returnValueForMissingStub: _i4.Future<void>.value(),
+          )
+          as _i4.Future<void>);
+
+  @override
+  _i4.Future<void> setupDefaults() =>
+      (super.noSuchMethod(
+            Invocation.method(#setupDefaults, []),
+            returnValue: _i4.Future<void>.value(),
+            returnValueForMissingStub: _i4.Future<void>.value(),
+          )
+          as _i4.Future<void>);
+
+  @override
+  void onTransition(
+    _i6.Bloc<dynamic, dynamic>? bloc,
+    _i6.Transition<dynamic, dynamic>? transition,
+  ) => super.noSuchMethod(
+    Invocation.method(#onTransition, [bloc, transition]),
+    returnValueForMissingStub: null,
+  );
+
+  @override
+  Map<String, dynamic> toJson() =>
+      (super.noSuchMethod(
+            Invocation.method(#toJson, []),
+            returnValue: <String, dynamic>{},
+            returnValueForMissingStub: <String, dynamic>{},
+          )
+          as Map<String, dynamic>);
+
+  @override
+  void onCreate(_i6.BlocBase<dynamic>? bloc) => super.noSuchMethod(
+    Invocation.method(#onCreate, [bloc]),
+    returnValueForMissingStub: null,
+  );
+
+  @override
+  void onEvent(_i6.Bloc<dynamic, dynamic>? bloc, Object? event) =>
+      super.noSuchMethod(
+        Invocation.method(#onEvent, [bloc, event]),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onChange(_i6.BlocBase<dynamic>? bloc, _i6.Change<dynamic>? change) =>
+      super.noSuchMethod(
+        Invocation.method(#onChange, [bloc, change]),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  void onError(
+    _i6.BlocBase<dynamic>? bloc,
+    Object? error,
+    StackTrace? stackTrace,
+  ) => super.noSuchMethod(
+    Invocation.method(#onError, [bloc, error, stackTrace]),
+    returnValueForMissingStub: null,
+  );
+
+  @override
+  void onDone(
+    _i6.Bloc<dynamic, dynamic>? bloc,
+    Object? event, [
+    Object? error,
+    StackTrace? stackTrace,
+  ]) => super.noSuchMethod(
+    Invocation.method(#onDone, [bloc, event, error, stackTrace]),
+    returnValueForMissingStub: null,
+  );
+
+  @override
+  void onClose(_i6.BlocBase<dynamic>? bloc) => super.noSuchMethod(
+    Invocation.method(#onClose, [bloc]),
+    returnValueForMissingStub: null,
+  );
+}
+
 /// A class which mocks [PageController].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockPageController extends _i1.Mock implements _i6.PageController {
+class MockPageController extends _i1.Mock implements _i7.PageController {
   @override
   int get initialPage =>
       (super.noSuchMethod(
@@ -495,11 +662,11 @@ class MockPageController extends _i1.Mock implements _i6.PageController {
   _i3.ScrollPosition get position =>
       (super.noSuchMethod(
             Invocation.getter(#position),
-            returnValue: _FakeScrollPosition_17(
+            returnValue: _FakeScrollPosition_18(
               this,
               Invocation.getter(#position),
             ),
-            returnValueForMissingStub: _FakeScrollPosition_17(
+            returnValueForMissingStub: _FakeScrollPosition_18(
               this,
               Invocation.getter(#position),
             ),
@@ -528,7 +695,7 @@ class MockPageController extends _i1.Mock implements _i6.PageController {
   _i4.Future<void> animateToPage(
     int? page, {
     required Duration? duration,
-    required _i7.Curve? curve,
+    required _i8.Curve? curve,
   }) =>
       (super.noSuchMethod(
             Invocation.method(
@@ -550,7 +717,7 @@ class MockPageController extends _i1.Mock implements _i6.PageController {
   @override
   _i4.Future<void> nextPage({
     required Duration? duration,
-    required _i7.Curve? curve,
+    required _i8.Curve? curve,
   }) =>
       (super.noSuchMethod(
             Invocation.method(#nextPage, [], {
@@ -565,7 +732,7 @@ class MockPageController extends _i1.Mock implements _i6.PageController {
   @override
   _i4.Future<void> previousPage({
     required Duration? duration,
-    required _i7.Curve? curve,
+    required _i8.Curve? curve,
   }) =>
       (super.noSuchMethod(
             Invocation.method(#previousPage, [], {
@@ -579,8 +746,8 @@ class MockPageController extends _i1.Mock implements _i6.PageController {
 
   @override
   _i3.ScrollPosition createScrollPosition(
-    _i8.ScrollPhysics? physics,
-    _i9.ScrollContext? context,
+    _i9.ScrollPhysics? physics,
+    _i10.ScrollContext? context,
     _i3.ScrollPosition? oldPosition,
   ) =>
       (super.noSuchMethod(
@@ -589,7 +756,7 @@ class MockPageController extends _i1.Mock implements _i6.PageController {
               context,
               oldPosition,
             ]),
-            returnValue: _FakeScrollPosition_17(
+            returnValue: _FakeScrollPosition_18(
               this,
               Invocation.method(#createScrollPosition, [
                 physics,
@@ -597,7 +764,7 @@ class MockPageController extends _i1.Mock implements _i6.PageController {
                 oldPosition,
               ]),
             ),
-            returnValueForMissingStub: _FakeScrollPosition_17(
+            returnValueForMissingStub: _FakeScrollPosition_18(
               this,
               Invocation.method(#createScrollPosition, [
                 physics,
@@ -618,7 +785,7 @@ class MockPageController extends _i1.Mock implements _i6.PageController {
   _i4.Future<void> animateTo(
     double? offset, {
     required Duration? duration,
-    required _i7.Curve? curve,
+    required _i8.Curve? curve,
   }) =>
       (super.noSuchMethod(
             Invocation.method(
@@ -656,13 +823,13 @@ class MockPageController extends _i1.Mock implements _i6.PageController {
   );
 
   @override
-  void addListener(_i10.VoidCallback? listener) => super.noSuchMethod(
+  void addListener(_i11.VoidCallback? listener) => super.noSuchMethod(
     Invocation.method(#addListener, [listener]),
     returnValueForMissingStub: null,
   );
 
   @override
-  void removeListener(_i10.VoidCallback? listener) => super.noSuchMethod(
+  void removeListener(_i11.VoidCallback? listener) => super.noSuchMethod(
     Invocation.method(#removeListener, [listener]),
     returnValueForMissingStub: null,
   );

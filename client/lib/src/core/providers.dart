@@ -444,6 +444,7 @@ final homeDailyDataRepositoryProvider = Provider<HomeDailyDataRepository>(
 final homeBlocProvider = Provider<HomeBloc>(
   (ref) {
     final homeBloc = HomeBloc(
+      userSettingsService: ref.watch(userSettingsServiceProvider),
       pageController: PageController(),
       databaseService: ref.watch(databaseServiceProvider),
       homeDailyDataRepository: ref.watch(homeDailyDataRepositoryProvider),

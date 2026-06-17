@@ -11,6 +11,7 @@ import 'home_bloc_test.mocks.dart';
 @GenerateNiceMocks([
   MockSpec<HomeDailyDataRepository>(),
   MockSpec<DatabaseService>(),
+  MockSpec<UserSettingsService>(),
   MockSpec<PageController>(),
 ])
 void main() {
@@ -27,15 +28,23 @@ void main() {
     ],
   );
 
+  const lastHomeMode = HomeMode.sundaySchool;
+
   late MockHomeDailyDataRepository repository;
   late MockDatabaseService mockDatabaseService;
+  late MockUserSettingsService mockUserSettingsService;
 
   setUp(() {
     repository = MockHomeDailyDataRepository();
     mockDatabaseService = MockDatabaseService();
+    mockUserSettingsService = MockUserSettingsService();
 
     when(repository.getTodaysBirthdaysQuery()).thenReturn(null);
     when(repository.getTodaysBirthdaysData()).thenAnswer((_) async => []);
+    when(mockUserSettingsService.lastHomeMode).thenAnswer((_) => lastHomeMode);
+    when(
+      mockUserSettingsService.setLastHomeMode(lastHomeMode),
+    ).thenAnswer((_) async {});
 
     when(mockDatabaseService.daosByType).thenReturn({
       Family: mockDatabaseService.families,
@@ -63,6 +72,7 @@ void main() {
       blocTest<HomeBloc, HomeState>(
         'emits [HomeState] with initial data',
         build: () => HomeBloc(
+          userSettingsService: mockUserSettingsService,
           pageController: MockPageController(),
           homeDailyDataRepository: repository,
           databaseService: mockDatabaseService,
@@ -112,6 +122,7 @@ void main() {
           verify(repository.getSaying()).called(1);
           verify(repository.getTodaysBirthdaysData()).called(1);
           verify(repository.getTodaysBirthdaysQuery()).called(1);
+          verify(mockUserSettingsService.lastHomeMode).called(1);
         },
       );
     });
@@ -132,6 +143,7 @@ void main() {
       blocTest<HomeBloc, HomeState>(
         'updates data when requesting new data',
         build: () => HomeBloc(
+          userSettingsService: mockUserSettingsService,
           pageController: MockPageController(),
           homeDailyDataRepository: repository,
           databaseService: mockDatabaseService,
@@ -179,9 +191,19 @@ void main() {
     group(
       '$HomeChangeMode and $HomeSwitchMode',
       () {
+        HomeMode lastHomeMode = HomeMode.churchData;
         blocTest(
           'Changes mode and emits new pages',
+          setUp: () {
+            when(mockUserSettingsService.lastHomeMode).thenReturn(lastHomeMode);
+            when(
+              mockUserSettingsService.setLastHomeMode(captureAny),
+            ).thenAnswer((i) async {
+              lastHomeMode = i.positionalArguments.first as HomeMode;
+            });
+          },
           build: () => HomeBloc(
+            userSettingsService: mockUserSettingsService,
             pageController: MockPageController(),
             homeDailyDataRepository: repository,
             databaseService: mockDatabaseService,
@@ -191,7 +213,6 @@ void main() {
             ..add(const HomeChangeMode(HomeMode.sundaySchool))
             ..add(const HomeSwitchMode())
             ..add(const HomeSwitchMode()),
-          skip: 1,
           expect: () => [
             isA<HomeState>()
                 .having(
@@ -302,6 +323,10 @@ void main() {
                   ],
                 ),
           ],
+          verify: (_) {
+            verify(mockUserSettingsService.setLastHomeMode(any)).called(4);
+            expect(lastHomeMode, HomeMode.sundaySchool);
+          },
         );
       },
     );
@@ -311,6 +336,7 @@ void main() {
         blocTest(
           'Switches page list type and preserves it across modes',
           build: () => HomeBloc(
+            userSettingsService: mockUserSettingsService,
             pageController: MockPageController(),
             homeDailyDataRepository: repository,
             databaseService: mockDatabaseService,
@@ -375,7 +401,9 @@ void main() {
 
             mockPageController = MockPageController();
             when(mockPageController.page).thenAnswer((_) => page);
-            when(mockPageController.addListener(any)).thenAnswer((invocation) {
+            when(mockPageController.addListener(any)).thenAnswer((
+              invocation,
+            ) {
               final listener =
                   invocation.positionalArguments.first as VoidCallback;
               listeners.add(listener);
@@ -402,6 +430,7 @@ void main() {
         blocTest(
           'Listens to PageController page changes',
           build: () => HomeBloc(
+            userSettingsService: mockUserSettingsService,
             pageController: mockPageController,
             homeDailyDataRepository: repository,
             databaseService: mockDatabaseService,

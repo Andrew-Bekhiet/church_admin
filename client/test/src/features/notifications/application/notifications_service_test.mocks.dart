@@ -993,6 +993,15 @@ class MockUserSettingsService extends _i1.Mock
           as _i11.Future<void>);
 
   @override
+  _i11.Future<void> setLastHomeMode(_i4.HomeMode? value) =>
+      (super.noSuchMethod(
+            Invocation.method(#setLastHomeMode, [value]),
+            returnValue: _i11.Future<void>.value(),
+            returnValueForMissingStub: _i11.Future<void>.value(),
+          )
+          as _i11.Future<void>);
+
+  @override
   _i11.Future<void> setupDefaults() =>
       (super.noSuchMethod(
             Invocation.method(#setupDefaults, []),
