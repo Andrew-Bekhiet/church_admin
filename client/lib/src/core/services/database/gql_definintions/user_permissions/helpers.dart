@@ -61,11 +61,17 @@ class UserPermissionsUpdateHelper {
       serviceGender: data.serviceGender,
       serviceAllowEdit: data.serviceAllowEdit,
       serviceAllowExport: data.serviceAllowExport,
+      serviceAllowRecordAttendance: data.serviceAllowRecordAttendance,
+      serviceAllowRecordServantsAttendance:
+          data.serviceAllowRecordServantsAttendance,
       serviceAdminOnUsers: data.serviceAdminOnUsers,
       serviceWriteRelatedFamilies: data.serviceWriteRelatedFamilies,
       adminOnGroup: data.group?.id.toUuid(),
       groupAllowEdit: data.groupAllowEdit,
       groupAllowExport: data.groupAllowExport,
+      groupAllowRecordAttendance: data.groupAllowRecordAttendance,
+      groupAllowRecordServantsAttendance:
+          data.groupAllowRecordServantsAttendance,
       groupAdminOnUsers: data.groupAdminOnUsers,
       groupWriteRelatedFamilies: data.groupWriteRelatedFamilies,
     );

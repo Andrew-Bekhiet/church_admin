@@ -24,11 +24,11 @@ enum UserPermission implements LabeledEnum {
   exportAllData(label: 'تصدير جميع البيانات', icon: Symbols.upload),
   recordAllAttendance(
     label: 'تسجيل الحضور لجميع المخدومين',
-    icon: Symbols.event_available,
+    icon: Symbols.productivity,
   ),
   recordAllServantsAttendance(
     label: 'تسجيل الحضور لجميع الخدام',
-    icon: Symbols.event_available,
+    icon: Symbols.productivity,
   ),
   deleteData(
     label: 'حذف البيانات',

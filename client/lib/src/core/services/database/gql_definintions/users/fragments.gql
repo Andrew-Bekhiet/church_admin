@@ -76,6 +76,8 @@ fragment UserAdminOn on AuthUsersData {
     serviceGender
     serviceAllowExport
     serviceAllowEdit
+    serviceAllowRecordAttendance
+    serviceAllowRecordServantsAttendance
     serviceAdminOnUsers
     serviceWriteRelatedFamilies
     classes(orderBy: { name: ASC }) {
@@ -86,6 +88,8 @@ fragment UserAdminOn on AuthUsersData {
     }
     groupAllowExport
     groupAllowEdit
+    groupAllowRecordAttendance
+    groupAllowRecordServantsAttendance
     groupAdminOnUsers
     groupWriteRelatedFamilies
   }

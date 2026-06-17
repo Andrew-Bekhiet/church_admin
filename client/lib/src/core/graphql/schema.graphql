@@ -617,12 +617,16 @@ type AuthUsersAdminOn {
   groupAdminOnUsers: Boolean
   groupAllowEdit: Boolean
   groupAllowExport: Boolean
+  groupAllowRecordAttendance: Boolean
+  groupAllowRecordServantsAttendance: Boolean
   groupWriteRelatedFamilies: Boolean!
   permissionId: uuid!
   service: Services
   serviceAdminOnUsers: Boolean
   serviceAllowEdit: Boolean
   serviceAllowExport: Boolean
+  serviceAllowRecordAttendance: Boolean
+  serviceAllowRecordServantsAttendance: Boolean
   serviceGender: Boolean
   serviceStudyYear: Int
   serviceStudyYearData: StudyYears
@@ -671,12 +675,16 @@ input AuthUsersAdminOnBoolExp {
   groupAdminOnUsers: BooleanComparisonExp
   groupAllowEdit: BooleanComparisonExp
   groupAllowExport: BooleanComparisonExp
+  groupAllowRecordAttendance: BooleanComparisonExp
+  groupAllowRecordServantsAttendance: BooleanComparisonExp
   groupWriteRelatedFamilies: BooleanComparisonExp
   permissionId: UuidComparisonExp
   service: ServicesBoolExp
   serviceAdminOnUsers: BooleanComparisonExp
   serviceAllowEdit: BooleanComparisonExp
   serviceAllowExport: BooleanComparisonExp
+  serviceAllowRecordAttendance: BooleanComparisonExp
+  serviceAllowRecordServantsAttendance: BooleanComparisonExp
   serviceGender: BooleanComparisonExp
   serviceStudyYear: IntComparisonExp
   serviceStudyYearData: StudyYearsBoolExp
@@ -705,11 +713,15 @@ input AuthUsersAdminOnInsertInput {
   groupAdminOnUsers: Boolean
   groupAllowEdit: Boolean
   groupAllowExport: Boolean
+  groupAllowRecordAttendance: Boolean
+  groupAllowRecordServantsAttendance: Boolean
   groupWriteRelatedFamilies: Boolean
   service: ServicesObjRelInsertInput
   serviceAdminOnUsers: Boolean
   serviceAllowEdit: Boolean
   serviceAllowExport: Boolean
+  serviceAllowRecordAttendance: Boolean
+  serviceAllowRecordServantsAttendance: Boolean
   serviceGender: Boolean
   serviceStudyYear: Int
   serviceStudyYearData: StudyYearsObjRelInsertInput
@@ -758,12 +770,16 @@ input AuthUsersAdminOnOrderBy {
   groupAdminOnUsers: OrderBy
   groupAllowEdit: OrderBy
   groupAllowExport: OrderBy
+  groupAllowRecordAttendance: OrderBy
+  groupAllowRecordServantsAttendance: OrderBy
   groupWriteRelatedFamilies: OrderBy
   permissionId: OrderBy
   service: ServicesOrderBy
   serviceAdminOnUsers: OrderBy
   serviceAllowEdit: OrderBy
   serviceAllowExport: OrderBy
+  serviceAllowRecordAttendance: OrderBy
+  serviceAllowRecordServantsAttendance: OrderBy
   serviceGender: OrderBy
   serviceStudyYear: OrderBy
   serviceStudyYearData: StudyYearsOrderBy
@@ -782,11 +798,15 @@ enum AuthUsersAdminOnSelectColumn {
   groupAdminOnUsers
   groupAllowEdit
   groupAllowExport
+  groupAllowRecordAttendance
+  groupAllowRecordServantsAttendance
   groupWriteRelatedFamilies
   permissionId
   serviceAdminOnUsers
   serviceAllowEdit
   serviceAllowExport
+  serviceAllowRecordAttendance
+  serviceAllowRecordServantsAttendance
   serviceGender
   serviceStudyYear
   serviceWriteRelatedFamilies
@@ -819,11 +839,15 @@ input AuthUsersAdminOnStreamCursorValueInput {
   groupAdminOnUsers: Boolean
   groupAllowEdit: Boolean
   groupAllowExport: Boolean
+  groupAllowRecordAttendance: Boolean
+  groupAllowRecordServantsAttendance: Boolean
   groupWriteRelatedFamilies: Boolean
   permissionId: uuid
   serviceAdminOnUsers: Boolean
   serviceAllowEdit: Boolean
   serviceAllowExport: Boolean
+  serviceAllowRecordAttendance: Boolean
+  serviceAllowRecordServantsAttendance: Boolean
   serviceGender: Boolean
   serviceStudyYear: Int
   serviceWriteRelatedFamilies: Boolean
@@ -3219,6 +3243,7 @@ input HistoryAttendanceHistoryInsertInput {
   service: ServicesObjRelInsertInput
   serviceGender: Boolean
   serviceId: uuid
+  serviceStudyYear: Int
   studyYear: StudyYearsObjRelInsertInput
   time: timestamp
 }

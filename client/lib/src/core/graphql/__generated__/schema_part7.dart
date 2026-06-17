@@ -1,6 +1,449 @@
 // Part 7 of the schema
 part of "schema.graphql.dart";
 
+abstract class CopyWith_Input_AuthUsersAdminOnInsertInput<TRes> {
+  factory CopyWith_Input_AuthUsersAdminOnInsertInput(
+    Input_AuthUsersAdminOnInsertInput instance,
+    TRes Function(Input_AuthUsersAdminOnInsertInput) then,
+  ) = _CopyWithImpl_Input_AuthUsersAdminOnInsertInput;
+
+  factory CopyWith_Input_AuthUsersAdminOnInsertInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_AuthUsersAdminOnInsertInput;
+
+  TRes call({
+    UuidValue? adminOnArea,
+    UuidValue? adminOnGroup,
+    UuidValue? adminOnService,
+    Input_AreasObjRelInsertInput? area,
+    bool? areaAdminOnUsers,
+    bool? areaAllowEdit,
+    bool? areaAllowExport,
+    Input_ClassesArrRelInsertInput? classes,
+    Input_GroupsObjRelInsertInput? group,
+    bool? groupAdminOnUsers,
+    bool? groupAllowEdit,
+    bool? groupAllowExport,
+    bool? groupAllowRecordAttendance,
+    bool? groupAllowRecordServantsAttendance,
+    bool? groupWriteRelatedFamilies,
+    Input_ServicesObjRelInsertInput? service,
+    bool? serviceAdminOnUsers,
+    bool? serviceAllowEdit,
+    bool? serviceAllowExport,
+    bool? serviceAllowRecordAttendance,
+    bool? serviceAllowRecordServantsAttendance,
+    bool? serviceGender,
+    int? serviceStudyYear,
+    Input_StudyYearsObjRelInsertInput? serviceStudyYearData,
+    bool? serviceWriteRelatedFamilies,
+    UuidValue? uid,
+  });
+  CopyWith_Input_AreasObjRelInsertInput<TRes> get area;
+  CopyWith_Input_ClassesArrRelInsertInput<TRes> get classes;
+  CopyWith_Input_GroupsObjRelInsertInput<TRes> get group;
+  CopyWith_Input_ServicesObjRelInsertInput<TRes> get service;
+  CopyWith_Input_StudyYearsObjRelInsertInput<TRes> get serviceStudyYearData;
+}
+
+class _CopyWithImpl_Input_AuthUsersAdminOnInsertInput<TRes>
+    implements CopyWith_Input_AuthUsersAdminOnInsertInput<TRes> {
+  _CopyWithImpl_Input_AuthUsersAdminOnInsertInput(this._instance, this._then);
+
+  final Input_AuthUsersAdminOnInsertInput _instance;
+
+  final TRes Function(Input_AuthUsersAdminOnInsertInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? adminOnArea = _undefined,
+    Object? adminOnGroup = _undefined,
+    Object? adminOnService = _undefined,
+    Object? area = _undefined,
+    Object? areaAdminOnUsers = _undefined,
+    Object? areaAllowEdit = _undefined,
+    Object? areaAllowExport = _undefined,
+    Object? classes = _undefined,
+    Object? group = _undefined,
+    Object? groupAdminOnUsers = _undefined,
+    Object? groupAllowEdit = _undefined,
+    Object? groupAllowExport = _undefined,
+    Object? groupAllowRecordAttendance = _undefined,
+    Object? groupAllowRecordServantsAttendance = _undefined,
+    Object? groupWriteRelatedFamilies = _undefined,
+    Object? service = _undefined,
+    Object? serviceAdminOnUsers = _undefined,
+    Object? serviceAllowEdit = _undefined,
+    Object? serviceAllowExport = _undefined,
+    Object? serviceAllowRecordAttendance = _undefined,
+    Object? serviceAllowRecordServantsAttendance = _undefined,
+    Object? serviceGender = _undefined,
+    Object? serviceStudyYear = _undefined,
+    Object? serviceStudyYearData = _undefined,
+    Object? serviceWriteRelatedFamilies = _undefined,
+    Object? uid = _undefined,
+  }) => _then(
+    Input_AuthUsersAdminOnInsertInput._({
+      ..._instance._$data,
+      if (adminOnArea != _undefined) 'adminOnArea': (adminOnArea as UuidValue?),
+      if (adminOnGroup != _undefined)
+        'adminOnGroup': (adminOnGroup as UuidValue?),
+      if (adminOnService != _undefined)
+        'adminOnService': (adminOnService as UuidValue?),
+      if (area != _undefined) 'area': (area as Input_AreasObjRelInsertInput?),
+      if (areaAdminOnUsers != _undefined)
+        'areaAdminOnUsers': (areaAdminOnUsers as bool?),
+      if (areaAllowEdit != _undefined)
+        'areaAllowEdit': (areaAllowEdit as bool?),
+      if (areaAllowExport != _undefined)
+        'areaAllowExport': (areaAllowExport as bool?),
+      if (classes != _undefined)
+        'classes': (classes as Input_ClassesArrRelInsertInput?),
+      if (group != _undefined)
+        'group': (group as Input_GroupsObjRelInsertInput?),
+      if (groupAdminOnUsers != _undefined)
+        'groupAdminOnUsers': (groupAdminOnUsers as bool?),
+      if (groupAllowEdit != _undefined)
+        'groupAllowEdit': (groupAllowEdit as bool?),
+      if (groupAllowExport != _undefined)
+        'groupAllowExport': (groupAllowExport as bool?),
+      if (groupAllowRecordAttendance != _undefined)
+        'groupAllowRecordAttendance': (groupAllowRecordAttendance as bool?),
+      if (groupAllowRecordServantsAttendance != _undefined)
+        'groupAllowRecordServantsAttendance':
+            (groupAllowRecordServantsAttendance as bool?),
+      if (groupWriteRelatedFamilies != _undefined)
+        'groupWriteRelatedFamilies': (groupWriteRelatedFamilies as bool?),
+      if (service != _undefined)
+        'service': (service as Input_ServicesObjRelInsertInput?),
+      if (serviceAdminOnUsers != _undefined)
+        'serviceAdminOnUsers': (serviceAdminOnUsers as bool?),
+      if (serviceAllowEdit != _undefined)
+        'serviceAllowEdit': (serviceAllowEdit as bool?),
+      if (serviceAllowExport != _undefined)
+        'serviceAllowExport': (serviceAllowExport as bool?),
+      if (serviceAllowRecordAttendance != _undefined)
+        'serviceAllowRecordAttendance': (serviceAllowRecordAttendance as bool?),
+      if (serviceAllowRecordServantsAttendance != _undefined)
+        'serviceAllowRecordServantsAttendance':
+            (serviceAllowRecordServantsAttendance as bool?),
+      if (serviceGender != _undefined)
+        'serviceGender': (serviceGender as bool?),
+      if (serviceStudyYear != _undefined)
+        'serviceStudyYear': (serviceStudyYear as int?),
+      if (serviceStudyYearData != _undefined)
+        'serviceStudyYearData':
+            (serviceStudyYearData as Input_StudyYearsObjRelInsertInput?),
+      if (serviceWriteRelatedFamilies != _undefined)
+        'serviceWriteRelatedFamilies': (serviceWriteRelatedFamilies as bool?),
+      if (uid != _undefined) 'uid': (uid as UuidValue?),
+    }),
+  );
+
+  CopyWith_Input_AreasObjRelInsertInput<TRes> get area {
+    final local$area = _instance.area;
+    return local$area == null
+        ? CopyWith_Input_AreasObjRelInsertInput.stub(_then(_instance))
+        : CopyWith_Input_AreasObjRelInsertInput(
+            local$area,
+            (e) => call(area: e),
+          );
+  }
+
+  CopyWith_Input_ClassesArrRelInsertInput<TRes> get classes {
+    final local$classes = _instance.classes;
+    return local$classes == null
+        ? CopyWith_Input_ClassesArrRelInsertInput.stub(_then(_instance))
+        : CopyWith_Input_ClassesArrRelInsertInput(
+            local$classes,
+            (e) => call(classes: e),
+          );
+  }
+
+  CopyWith_Input_GroupsObjRelInsertInput<TRes> get group {
+    final local$group = _instance.group;
+    return local$group == null
+        ? CopyWith_Input_GroupsObjRelInsertInput.stub(_then(_instance))
+        : CopyWith_Input_GroupsObjRelInsertInput(
+            local$group,
+            (e) => call(group: e),
+          );
+  }
+
+  CopyWith_Input_ServicesObjRelInsertInput<TRes> get service {
+    final local$service = _instance.service;
+    return local$service == null
+        ? CopyWith_Input_ServicesObjRelInsertInput.stub(_then(_instance))
+        : CopyWith_Input_ServicesObjRelInsertInput(
+            local$service,
+            (e) => call(service: e),
+          );
+  }
+
+  CopyWith_Input_StudyYearsObjRelInsertInput<TRes> get serviceStudyYearData {
+    final local$serviceStudyYearData = _instance.serviceStudyYearData;
+    return local$serviceStudyYearData == null
+        ? CopyWith_Input_StudyYearsObjRelInsertInput.stub(_then(_instance))
+        : CopyWith_Input_StudyYearsObjRelInsertInput(
+            local$serviceStudyYearData,
+            (e) => call(serviceStudyYearData: e),
+          );
+  }
+}
+
+class _CopyWithStubImpl_Input_AuthUsersAdminOnInsertInput<TRes>
+    implements CopyWith_Input_AuthUsersAdminOnInsertInput<TRes> {
+  _CopyWithStubImpl_Input_AuthUsersAdminOnInsertInput(this._res);
+
+  TRes _res;
+
+  call({
+    UuidValue? adminOnArea,
+    UuidValue? adminOnGroup,
+    UuidValue? adminOnService,
+    Input_AreasObjRelInsertInput? area,
+    bool? areaAdminOnUsers,
+    bool? areaAllowEdit,
+    bool? areaAllowExport,
+    Input_ClassesArrRelInsertInput? classes,
+    Input_GroupsObjRelInsertInput? group,
+    bool? groupAdminOnUsers,
+    bool? groupAllowEdit,
+    bool? groupAllowExport,
+    bool? groupAllowRecordAttendance,
+    bool? groupAllowRecordServantsAttendance,
+    bool? groupWriteRelatedFamilies,
+    Input_ServicesObjRelInsertInput? service,
+    bool? serviceAdminOnUsers,
+    bool? serviceAllowEdit,
+    bool? serviceAllowExport,
+    bool? serviceAllowRecordAttendance,
+    bool? serviceAllowRecordServantsAttendance,
+    bool? serviceGender,
+    int? serviceStudyYear,
+    Input_StudyYearsObjRelInsertInput? serviceStudyYearData,
+    bool? serviceWriteRelatedFamilies,
+    UuidValue? uid,
+  }) => _res;
+
+  CopyWith_Input_AreasObjRelInsertInput<TRes> get area =>
+      CopyWith_Input_AreasObjRelInsertInput.stub(_res);
+
+  CopyWith_Input_ClassesArrRelInsertInput<TRes> get classes =>
+      CopyWith_Input_ClassesArrRelInsertInput.stub(_res);
+
+  CopyWith_Input_GroupsObjRelInsertInput<TRes> get group =>
+      CopyWith_Input_GroupsObjRelInsertInput.stub(_res);
+
+  CopyWith_Input_ServicesObjRelInsertInput<TRes> get service =>
+      CopyWith_Input_ServicesObjRelInsertInput.stub(_res);
+
+  CopyWith_Input_StudyYearsObjRelInsertInput<TRes> get serviceStudyYearData =>
+      CopyWith_Input_StudyYearsObjRelInsertInput.stub(_res);
+}
+
+class Input_AuthUsersAdminOnMaxOrderBy {
+  factory Input_AuthUsersAdminOnMaxOrderBy({
+    Enum_OrderBy? adminOnArea,
+    Enum_OrderBy? adminOnGroup,
+    Enum_OrderBy? adminOnService,
+    Enum_OrderBy? permissionId,
+    Enum_OrderBy? serviceStudyYear,
+    Enum_OrderBy? uid,
+  }) => Input_AuthUsersAdminOnMaxOrderBy._({
+    if (adminOnArea != null) r'adminOnArea': adminOnArea,
+    if (adminOnGroup != null) r'adminOnGroup': adminOnGroup,
+    if (adminOnService != null) r'adminOnService': adminOnService,
+    if (permissionId != null) r'permissionId': permissionId,
+    if (serviceStudyYear != null) r'serviceStudyYear': serviceStudyYear,
+    if (uid != null) r'uid': uid,
+  });
+
+  Input_AuthUsersAdminOnMaxOrderBy._(this._$data);
+
+  factory Input_AuthUsersAdminOnMaxOrderBy.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('adminOnArea')) {
+      final l$adminOnArea = data['adminOnArea'];
+      result$data['adminOnArea'] = l$adminOnArea == null
+          ? null
+          : fromJson_Enum_OrderBy((l$adminOnArea as String));
+    }
+    if (data.containsKey('adminOnGroup')) {
+      final l$adminOnGroup = data['adminOnGroup'];
+      result$data['adminOnGroup'] = l$adminOnGroup == null
+          ? null
+          : fromJson_Enum_OrderBy((l$adminOnGroup as String));
+    }
+    if (data.containsKey('adminOnService')) {
+      final l$adminOnService = data['adminOnService'];
+      result$data['adminOnService'] = l$adminOnService == null
+          ? null
+          : fromJson_Enum_OrderBy((l$adminOnService as String));
+    }
+    if (data.containsKey('permissionId')) {
+      final l$permissionId = data['permissionId'];
+      result$data['permissionId'] = l$permissionId == null
+          ? null
+          : fromJson_Enum_OrderBy((l$permissionId as String));
+    }
+    if (data.containsKey('serviceStudyYear')) {
+      final l$serviceStudyYear = data['serviceStudyYear'];
+      result$data['serviceStudyYear'] = l$serviceStudyYear == null
+          ? null
+          : fromJson_Enum_OrderBy((l$serviceStudyYear as String));
+    }
+    if (data.containsKey('uid')) {
+      final l$uid = data['uid'];
+      result$data['uid'] = l$uid == null
+          ? null
+          : fromJson_Enum_OrderBy((l$uid as String));
+    }
+    return Input_AuthUsersAdminOnMaxOrderBy._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Enum_OrderBy? get adminOnArea => (_$data['adminOnArea'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get adminOnGroup => (_$data['adminOnGroup'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get adminOnService =>
+      (_$data['adminOnService'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get permissionId => (_$data['permissionId'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get serviceStudyYear =>
+      (_$data['serviceStudyYear'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get uid => (_$data['uid'] as Enum_OrderBy?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('adminOnArea')) {
+      final l$adminOnArea = adminOnArea;
+      result$data['adminOnArea'] = l$adminOnArea == null
+          ? null
+          : toJson_Enum_OrderBy(l$adminOnArea);
+    }
+    if (_$data.containsKey('adminOnGroup')) {
+      final l$adminOnGroup = adminOnGroup;
+      result$data['adminOnGroup'] = l$adminOnGroup == null
+          ? null
+          : toJson_Enum_OrderBy(l$adminOnGroup);
+    }
+    if (_$data.containsKey('adminOnService')) {
+      final l$adminOnService = adminOnService;
+      result$data['adminOnService'] = l$adminOnService == null
+          ? null
+          : toJson_Enum_OrderBy(l$adminOnService);
+    }
+    if (_$data.containsKey('permissionId')) {
+      final l$permissionId = permissionId;
+      result$data['permissionId'] = l$permissionId == null
+          ? null
+          : toJson_Enum_OrderBy(l$permissionId);
+    }
+    if (_$data.containsKey('serviceStudyYear')) {
+      final l$serviceStudyYear = serviceStudyYear;
+      result$data['serviceStudyYear'] = l$serviceStudyYear == null
+          ? null
+          : toJson_Enum_OrderBy(l$serviceStudyYear);
+    }
+    if (_$data.containsKey('uid')) {
+      final l$uid = uid;
+      result$data['uid'] = l$uid == null ? null : toJson_Enum_OrderBy(l$uid);
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_AuthUsersAdminOnMaxOrderBy<Input_AuthUsersAdminOnMaxOrderBy>
+  get copyWith => CopyWith_Input_AuthUsersAdminOnMaxOrderBy(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_AuthUsersAdminOnMaxOrderBy ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$adminOnArea = adminOnArea;
+    final lOther$adminOnArea = other.adminOnArea;
+    if (_$data.containsKey('adminOnArea') !=
+        other._$data.containsKey('adminOnArea')) {
+      return false;
+    }
+    if (l$adminOnArea != lOther$adminOnArea) {
+      return false;
+    }
+    final l$adminOnGroup = adminOnGroup;
+    final lOther$adminOnGroup = other.adminOnGroup;
+    if (_$data.containsKey('adminOnGroup') !=
+        other._$data.containsKey('adminOnGroup')) {
+      return false;
+    }
+    if (l$adminOnGroup != lOther$adminOnGroup) {
+      return false;
+    }
+    final l$adminOnService = adminOnService;
+    final lOther$adminOnService = other.adminOnService;
+    if (_$data.containsKey('adminOnService') !=
+        other._$data.containsKey('adminOnService')) {
+      return false;
+    }
+    if (l$adminOnService != lOther$adminOnService) {
+      return false;
+    }
+    final l$permissionId = permissionId;
+    final lOther$permissionId = other.permissionId;
+    if (_$data.containsKey('permissionId') !=
+        other._$data.containsKey('permissionId')) {
+      return false;
+    }
+    if (l$permissionId != lOther$permissionId) {
+      return false;
+    }
+    final l$serviceStudyYear = serviceStudyYear;
+    final lOther$serviceStudyYear = other.serviceStudyYear;
+    if (_$data.containsKey('serviceStudyYear') !=
+        other._$data.containsKey('serviceStudyYear')) {
+      return false;
+    }
+    if (l$serviceStudyYear != lOther$serviceStudyYear) {
+      return false;
+    }
+    final l$uid = uid;
+    final lOther$uid = other.uid;
+    if (_$data.containsKey('uid') != other._$data.containsKey('uid')) {
+      return false;
+    }
+    if (l$uid != lOther$uid) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$adminOnArea = adminOnArea;
+    final l$adminOnGroup = adminOnGroup;
+    final l$adminOnService = adminOnService;
+    final l$permissionId = permissionId;
+    final l$serviceStudyYear = serviceStudyYear;
+    final l$uid = uid;
+    return Object.hashAll([
+      _$data.containsKey('adminOnArea') ? l$adminOnArea : const {},
+      _$data.containsKey('adminOnGroup') ? l$adminOnGroup : const {},
+      _$data.containsKey('adminOnService') ? l$adminOnService : const {},
+      _$data.containsKey('permissionId') ? l$permissionId : const {},
+      _$data.containsKey('serviceStudyYear') ? l$serviceStudyYear : const {},
+      _$data.containsKey('uid') ? l$uid : const {},
+    ]);
+  }
+}
+
 abstract class CopyWith_Input_AuthUsersAdminOnMaxOrderBy<TRes> {
   factory CopyWith_Input_AuthUsersAdminOnMaxOrderBy(
     Input_AuthUsersAdminOnMaxOrderBy instance,
@@ -560,12 +1003,16 @@ class Input_AuthUsersAdminOnOrderBy {
     Enum_OrderBy? groupAdminOnUsers,
     Enum_OrderBy? groupAllowEdit,
     Enum_OrderBy? groupAllowExport,
+    Enum_OrderBy? groupAllowRecordAttendance,
+    Enum_OrderBy? groupAllowRecordServantsAttendance,
     Enum_OrderBy? groupWriteRelatedFamilies,
     Enum_OrderBy? permissionId,
     Input_ServicesOrderBy? service,
     Enum_OrderBy? serviceAdminOnUsers,
     Enum_OrderBy? serviceAllowEdit,
     Enum_OrderBy? serviceAllowExport,
+    Enum_OrderBy? serviceAllowRecordAttendance,
+    Enum_OrderBy? serviceAllowRecordServantsAttendance,
     Enum_OrderBy? serviceGender,
     Enum_OrderBy? serviceStudyYear,
     Input_StudyYearsOrderBy? serviceStudyYearData,
@@ -585,6 +1032,10 @@ class Input_AuthUsersAdminOnOrderBy {
     if (groupAdminOnUsers != null) r'groupAdminOnUsers': groupAdminOnUsers,
     if (groupAllowEdit != null) r'groupAllowEdit': groupAllowEdit,
     if (groupAllowExport != null) r'groupAllowExport': groupAllowExport,
+    if (groupAllowRecordAttendance != null)
+      r'groupAllowRecordAttendance': groupAllowRecordAttendance,
+    if (groupAllowRecordServantsAttendance != null)
+      r'groupAllowRecordServantsAttendance': groupAllowRecordServantsAttendance,
     if (groupWriteRelatedFamilies != null)
       r'groupWriteRelatedFamilies': groupWriteRelatedFamilies,
     if (permissionId != null) r'permissionId': permissionId,
@@ -593,6 +1044,11 @@ class Input_AuthUsersAdminOnOrderBy {
       r'serviceAdminOnUsers': serviceAdminOnUsers,
     if (serviceAllowEdit != null) r'serviceAllowEdit': serviceAllowEdit,
     if (serviceAllowExport != null) r'serviceAllowExport': serviceAllowExport,
+    if (serviceAllowRecordAttendance != null)
+      r'serviceAllowRecordAttendance': serviceAllowRecordAttendance,
+    if (serviceAllowRecordServantsAttendance != null)
+      r'serviceAllowRecordServantsAttendance':
+          serviceAllowRecordServantsAttendance,
     if (serviceGender != null) r'serviceGender': serviceGender,
     if (serviceStudyYear != null) r'serviceStudyYear': serviceStudyYear,
     if (serviceStudyYearData != null)
@@ -681,6 +1137,23 @@ class Input_AuthUsersAdminOnOrderBy {
           ? null
           : fromJson_Enum_OrderBy((l$groupAllowExport as String));
     }
+    if (data.containsKey('groupAllowRecordAttendance')) {
+      final l$groupAllowRecordAttendance = data['groupAllowRecordAttendance'];
+      result$data['groupAllowRecordAttendance'] =
+          l$groupAllowRecordAttendance == null
+          ? null
+          : fromJson_Enum_OrderBy((l$groupAllowRecordAttendance as String));
+    }
+    if (data.containsKey('groupAllowRecordServantsAttendance')) {
+      final l$groupAllowRecordServantsAttendance =
+          data['groupAllowRecordServantsAttendance'];
+      result$data['groupAllowRecordServantsAttendance'] =
+          l$groupAllowRecordServantsAttendance == null
+          ? null
+          : fromJson_Enum_OrderBy(
+              (l$groupAllowRecordServantsAttendance as String),
+            );
+    }
     if (data.containsKey('groupWriteRelatedFamilies')) {
       final l$groupWriteRelatedFamilies = data['groupWriteRelatedFamilies'];
       result$data['groupWriteRelatedFamilies'] =
@@ -717,6 +1190,24 @@ class Input_AuthUsersAdminOnOrderBy {
       result$data['serviceAllowExport'] = l$serviceAllowExport == null
           ? null
           : fromJson_Enum_OrderBy((l$serviceAllowExport as String));
+    }
+    if (data.containsKey('serviceAllowRecordAttendance')) {
+      final l$serviceAllowRecordAttendance =
+          data['serviceAllowRecordAttendance'];
+      result$data['serviceAllowRecordAttendance'] =
+          l$serviceAllowRecordAttendance == null
+          ? null
+          : fromJson_Enum_OrderBy((l$serviceAllowRecordAttendance as String));
+    }
+    if (data.containsKey('serviceAllowRecordServantsAttendance')) {
+      final l$serviceAllowRecordServantsAttendance =
+          data['serviceAllowRecordServantsAttendance'];
+      result$data['serviceAllowRecordServantsAttendance'] =
+          l$serviceAllowRecordServantsAttendance == null
+          ? null
+          : fromJson_Enum_OrderBy(
+              (l$serviceAllowRecordServantsAttendance as String),
+            );
     }
     if (data.containsKey('serviceGender')) {
       final l$serviceGender = data['serviceGender'];
@@ -795,6 +1286,12 @@ class Input_AuthUsersAdminOnOrderBy {
   Enum_OrderBy? get groupAllowExport =>
       (_$data['groupAllowExport'] as Enum_OrderBy?);
 
+  Enum_OrderBy? get groupAllowRecordAttendance =>
+      (_$data['groupAllowRecordAttendance'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get groupAllowRecordServantsAttendance =>
+      (_$data['groupAllowRecordServantsAttendance'] as Enum_OrderBy?);
+
   Enum_OrderBy? get groupWriteRelatedFamilies =>
       (_$data['groupWriteRelatedFamilies'] as Enum_OrderBy?);
 
@@ -811,6 +1308,12 @@ class Input_AuthUsersAdminOnOrderBy {
 
   Enum_OrderBy? get serviceAllowExport =>
       (_$data['serviceAllowExport'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get serviceAllowRecordAttendance =>
+      (_$data['serviceAllowRecordAttendance'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get serviceAllowRecordServantsAttendance =>
+      (_$data['serviceAllowRecordServantsAttendance'] as Enum_OrderBy?);
 
   Enum_OrderBy? get serviceGender => (_$data['serviceGender'] as Enum_OrderBy?);
 
@@ -896,6 +1399,21 @@ class Input_AuthUsersAdminOnOrderBy {
           ? null
           : toJson_Enum_OrderBy(l$groupAllowExport);
     }
+    if (_$data.containsKey('groupAllowRecordAttendance')) {
+      final l$groupAllowRecordAttendance = groupAllowRecordAttendance;
+      result$data['groupAllowRecordAttendance'] =
+          l$groupAllowRecordAttendance == null
+          ? null
+          : toJson_Enum_OrderBy(l$groupAllowRecordAttendance);
+    }
+    if (_$data.containsKey('groupAllowRecordServantsAttendance')) {
+      final l$groupAllowRecordServantsAttendance =
+          groupAllowRecordServantsAttendance;
+      result$data['groupAllowRecordServantsAttendance'] =
+          l$groupAllowRecordServantsAttendance == null
+          ? null
+          : toJson_Enum_OrderBy(l$groupAllowRecordServantsAttendance);
+    }
     if (_$data.containsKey('groupWriteRelatedFamilies')) {
       final l$groupWriteRelatedFamilies = groupWriteRelatedFamilies;
       result$data['groupWriteRelatedFamilies'] =
@@ -930,6 +1448,21 @@ class Input_AuthUsersAdminOnOrderBy {
       result$data['serviceAllowExport'] = l$serviceAllowExport == null
           ? null
           : toJson_Enum_OrderBy(l$serviceAllowExport);
+    }
+    if (_$data.containsKey('serviceAllowRecordAttendance')) {
+      final l$serviceAllowRecordAttendance = serviceAllowRecordAttendance;
+      result$data['serviceAllowRecordAttendance'] =
+          l$serviceAllowRecordAttendance == null
+          ? null
+          : toJson_Enum_OrderBy(l$serviceAllowRecordAttendance);
+    }
+    if (_$data.containsKey('serviceAllowRecordServantsAttendance')) {
+      final l$serviceAllowRecordServantsAttendance =
+          serviceAllowRecordServantsAttendance;
+      result$data['serviceAllowRecordServantsAttendance'] =
+          l$serviceAllowRecordServantsAttendance == null
+          ? null
+          : toJson_Enum_OrderBy(l$serviceAllowRecordServantsAttendance);
     }
     if (_$data.containsKey('serviceGender')) {
       final l$serviceGender = serviceGender;
@@ -1083,6 +1616,27 @@ class Input_AuthUsersAdminOnOrderBy {
     if (l$groupAllowExport != lOther$groupAllowExport) {
       return false;
     }
+    final l$groupAllowRecordAttendance = groupAllowRecordAttendance;
+    final lOther$groupAllowRecordAttendance = other.groupAllowRecordAttendance;
+    if (_$data.containsKey('groupAllowRecordAttendance') !=
+        other._$data.containsKey('groupAllowRecordAttendance')) {
+      return false;
+    }
+    if (l$groupAllowRecordAttendance != lOther$groupAllowRecordAttendance) {
+      return false;
+    }
+    final l$groupAllowRecordServantsAttendance =
+        groupAllowRecordServantsAttendance;
+    final lOther$groupAllowRecordServantsAttendance =
+        other.groupAllowRecordServantsAttendance;
+    if (_$data.containsKey('groupAllowRecordServantsAttendance') !=
+        other._$data.containsKey('groupAllowRecordServantsAttendance')) {
+      return false;
+    }
+    if (l$groupAllowRecordServantsAttendance !=
+        lOther$groupAllowRecordServantsAttendance) {
+      return false;
+    }
     final l$groupWriteRelatedFamilies = groupWriteRelatedFamilies;
     final lOther$groupWriteRelatedFamilies = other.groupWriteRelatedFamilies;
     if (_$data.containsKey('groupWriteRelatedFamilies') !=
@@ -1134,6 +1688,28 @@ class Input_AuthUsersAdminOnOrderBy {
       return false;
     }
     if (l$serviceAllowExport != lOther$serviceAllowExport) {
+      return false;
+    }
+    final l$serviceAllowRecordAttendance = serviceAllowRecordAttendance;
+    final lOther$serviceAllowRecordAttendance =
+        other.serviceAllowRecordAttendance;
+    if (_$data.containsKey('serviceAllowRecordAttendance') !=
+        other._$data.containsKey('serviceAllowRecordAttendance')) {
+      return false;
+    }
+    if (l$serviceAllowRecordAttendance != lOther$serviceAllowRecordAttendance) {
+      return false;
+    }
+    final l$serviceAllowRecordServantsAttendance =
+        serviceAllowRecordServantsAttendance;
+    final lOther$serviceAllowRecordServantsAttendance =
+        other.serviceAllowRecordServantsAttendance;
+    if (_$data.containsKey('serviceAllowRecordServantsAttendance') !=
+        other._$data.containsKey('serviceAllowRecordServantsAttendance')) {
+      return false;
+    }
+    if (l$serviceAllowRecordServantsAttendance !=
+        lOther$serviceAllowRecordServantsAttendance) {
       return false;
     }
     final l$serviceGender = serviceGender;
@@ -1206,12 +1782,18 @@ class Input_AuthUsersAdminOnOrderBy {
     final l$groupAdminOnUsers = groupAdminOnUsers;
     final l$groupAllowEdit = groupAllowEdit;
     final l$groupAllowExport = groupAllowExport;
+    final l$groupAllowRecordAttendance = groupAllowRecordAttendance;
+    final l$groupAllowRecordServantsAttendance =
+        groupAllowRecordServantsAttendance;
     final l$groupWriteRelatedFamilies = groupWriteRelatedFamilies;
     final l$permissionId = permissionId;
     final l$service = service;
     final l$serviceAdminOnUsers = serviceAdminOnUsers;
     final l$serviceAllowEdit = serviceAllowEdit;
     final l$serviceAllowExport = serviceAllowExport;
+    final l$serviceAllowRecordAttendance = serviceAllowRecordAttendance;
+    final l$serviceAllowRecordServantsAttendance =
+        serviceAllowRecordServantsAttendance;
     final l$serviceGender = serviceGender;
     final l$serviceStudyYear = serviceStudyYear;
     final l$serviceStudyYearData = serviceStudyYearData;
@@ -1231,6 +1813,12 @@ class Input_AuthUsersAdminOnOrderBy {
       _$data.containsKey('groupAdminOnUsers') ? l$groupAdminOnUsers : const {},
       _$data.containsKey('groupAllowEdit') ? l$groupAllowEdit : const {},
       _$data.containsKey('groupAllowExport') ? l$groupAllowExport : const {},
+      _$data.containsKey('groupAllowRecordAttendance')
+          ? l$groupAllowRecordAttendance
+          : const {},
+      _$data.containsKey('groupAllowRecordServantsAttendance')
+          ? l$groupAllowRecordServantsAttendance
+          : const {},
       _$data.containsKey('groupWriteRelatedFamilies')
           ? l$groupWriteRelatedFamilies
           : const {},
@@ -1242,6 +1830,12 @@ class Input_AuthUsersAdminOnOrderBy {
       _$data.containsKey('serviceAllowEdit') ? l$serviceAllowEdit : const {},
       _$data.containsKey('serviceAllowExport')
           ? l$serviceAllowExport
+          : const {},
+      _$data.containsKey('serviceAllowRecordAttendance')
+          ? l$serviceAllowRecordAttendance
+          : const {},
+      _$data.containsKey('serviceAllowRecordServantsAttendance')
+          ? l$serviceAllowRecordServantsAttendance
           : const {},
       _$data.containsKey('serviceGender') ? l$serviceGender : const {},
       _$data.containsKey('serviceStudyYear') ? l$serviceStudyYear : const {},
@@ -1279,12 +1873,16 @@ abstract class CopyWith_Input_AuthUsersAdminOnOrderBy<TRes> {
     Enum_OrderBy? groupAdminOnUsers,
     Enum_OrderBy? groupAllowEdit,
     Enum_OrderBy? groupAllowExport,
+    Enum_OrderBy? groupAllowRecordAttendance,
+    Enum_OrderBy? groupAllowRecordServantsAttendance,
     Enum_OrderBy? groupWriteRelatedFamilies,
     Enum_OrderBy? permissionId,
     Input_ServicesOrderBy? service,
     Enum_OrderBy? serviceAdminOnUsers,
     Enum_OrderBy? serviceAllowEdit,
     Enum_OrderBy? serviceAllowExport,
+    Enum_OrderBy? serviceAllowRecordAttendance,
+    Enum_OrderBy? serviceAllowRecordServantsAttendance,
     Enum_OrderBy? serviceGender,
     Enum_OrderBy? serviceStudyYear,
     Input_StudyYearsOrderBy? serviceStudyYearData,
@@ -1323,12 +1921,16 @@ class _CopyWithImpl_Input_AuthUsersAdminOnOrderBy<TRes>
     Object? groupAdminOnUsers = _undefined,
     Object? groupAllowEdit = _undefined,
     Object? groupAllowExport = _undefined,
+    Object? groupAllowRecordAttendance = _undefined,
+    Object? groupAllowRecordServantsAttendance = _undefined,
     Object? groupWriteRelatedFamilies = _undefined,
     Object? permissionId = _undefined,
     Object? service = _undefined,
     Object? serviceAdminOnUsers = _undefined,
     Object? serviceAllowEdit = _undefined,
     Object? serviceAllowExport = _undefined,
+    Object? serviceAllowRecordAttendance = _undefined,
+    Object? serviceAllowRecordServantsAttendance = _undefined,
     Object? serviceGender = _undefined,
     Object? serviceStudyYear = _undefined,
     Object? serviceStudyYearData = _undefined,
@@ -1361,6 +1963,12 @@ class _CopyWithImpl_Input_AuthUsersAdminOnOrderBy<TRes>
         'groupAllowEdit': (groupAllowEdit as Enum_OrderBy?),
       if (groupAllowExport != _undefined)
         'groupAllowExport': (groupAllowExport as Enum_OrderBy?),
+      if (groupAllowRecordAttendance != _undefined)
+        'groupAllowRecordAttendance':
+            (groupAllowRecordAttendance as Enum_OrderBy?),
+      if (groupAllowRecordServantsAttendance != _undefined)
+        'groupAllowRecordServantsAttendance':
+            (groupAllowRecordServantsAttendance as Enum_OrderBy?),
       if (groupWriteRelatedFamilies != _undefined)
         'groupWriteRelatedFamilies':
             (groupWriteRelatedFamilies as Enum_OrderBy?),
@@ -1373,6 +1981,12 @@ class _CopyWithImpl_Input_AuthUsersAdminOnOrderBy<TRes>
         'serviceAllowEdit': (serviceAllowEdit as Enum_OrderBy?),
       if (serviceAllowExport != _undefined)
         'serviceAllowExport': (serviceAllowExport as Enum_OrderBy?),
+      if (serviceAllowRecordAttendance != _undefined)
+        'serviceAllowRecordAttendance':
+            (serviceAllowRecordAttendance as Enum_OrderBy?),
+      if (serviceAllowRecordServantsAttendance != _undefined)
+        'serviceAllowRecordServantsAttendance':
+            (serviceAllowRecordServantsAttendance as Enum_OrderBy?),
       if (serviceGender != _undefined)
         'serviceGender': (serviceGender as Enum_OrderBy?),
       if (serviceStudyYear != _undefined)
@@ -1459,12 +2073,16 @@ class _CopyWithStubImpl_Input_AuthUsersAdminOnOrderBy<TRes>
     Enum_OrderBy? groupAdminOnUsers,
     Enum_OrderBy? groupAllowEdit,
     Enum_OrderBy? groupAllowExport,
+    Enum_OrderBy? groupAllowRecordAttendance,
+    Enum_OrderBy? groupAllowRecordServantsAttendance,
     Enum_OrderBy? groupWriteRelatedFamilies,
     Enum_OrderBy? permissionId,
     Input_ServicesOrderBy? service,
     Enum_OrderBy? serviceAdminOnUsers,
     Enum_OrderBy? serviceAllowEdit,
     Enum_OrderBy? serviceAllowExport,
+    Enum_OrderBy? serviceAllowRecordAttendance,
+    Enum_OrderBy? serviceAllowRecordServantsAttendance,
     Enum_OrderBy? serviceGender,
     Enum_OrderBy? serviceStudyYear,
     Input_StudyYearsOrderBy? serviceStudyYearData,
@@ -1930,595 +2548,4 @@ class Input_AuthUsersAdminOnStreamCursorInput {
       _$data.containsKey('ordering') ? l$ordering : const {},
     ]);
   }
-}
-
-abstract class CopyWith_Input_AuthUsersAdminOnStreamCursorInput<TRes> {
-  factory CopyWith_Input_AuthUsersAdminOnStreamCursorInput(
-    Input_AuthUsersAdminOnStreamCursorInput instance,
-    TRes Function(Input_AuthUsersAdminOnStreamCursorInput) then,
-  ) = _CopyWithImpl_Input_AuthUsersAdminOnStreamCursorInput;
-
-  factory CopyWith_Input_AuthUsersAdminOnStreamCursorInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_AuthUsersAdminOnStreamCursorInput;
-
-  TRes call({
-    Input_AuthUsersAdminOnStreamCursorValueInput? initialValue,
-    Enum_CursorOrdering? ordering,
-  });
-  CopyWith_Input_AuthUsersAdminOnStreamCursorValueInput<TRes> get initialValue;
-}
-
-class _CopyWithImpl_Input_AuthUsersAdminOnStreamCursorInput<TRes>
-    implements CopyWith_Input_AuthUsersAdminOnStreamCursorInput<TRes> {
-  _CopyWithImpl_Input_AuthUsersAdminOnStreamCursorInput(
-    this._instance,
-    this._then,
-  );
-
-  final Input_AuthUsersAdminOnStreamCursorInput _instance;
-
-  final TRes Function(Input_AuthUsersAdminOnStreamCursorInput) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? initialValue = _undefined,
-    Object? ordering = _undefined,
-  }) => _then(
-    Input_AuthUsersAdminOnStreamCursorInput._({
-      ..._instance._$data,
-      if (initialValue != _undefined && initialValue != null)
-        'initialValue':
-            (initialValue as Input_AuthUsersAdminOnStreamCursorValueInput),
-      if (ordering != _undefined)
-        'ordering': (ordering as Enum_CursorOrdering?),
-    }),
-  );
-
-  CopyWith_Input_AuthUsersAdminOnStreamCursorValueInput<TRes> get initialValue {
-    final local$initialValue = _instance.initialValue;
-    return CopyWith_Input_AuthUsersAdminOnStreamCursorValueInput(
-      local$initialValue,
-      (e) => call(initialValue: e),
-    );
-  }
-}
-
-class _CopyWithStubImpl_Input_AuthUsersAdminOnStreamCursorInput<TRes>
-    implements CopyWith_Input_AuthUsersAdminOnStreamCursorInput<TRes> {
-  _CopyWithStubImpl_Input_AuthUsersAdminOnStreamCursorInput(this._res);
-
-  TRes _res;
-
-  call({
-    Input_AuthUsersAdminOnStreamCursorValueInput? initialValue,
-    Enum_CursorOrdering? ordering,
-  }) => _res;
-
-  CopyWith_Input_AuthUsersAdminOnStreamCursorValueInput<TRes>
-  get initialValue =>
-      CopyWith_Input_AuthUsersAdminOnStreamCursorValueInput.stub(_res);
-}
-
-class Input_AuthUsersAdminOnStreamCursorValueInput {
-  factory Input_AuthUsersAdminOnStreamCursorValueInput({
-    UuidValue? adminOnArea,
-    UuidValue? adminOnGroup,
-    UuidValue? adminOnService,
-    bool? areaAdminOnUsers,
-    bool? areaAllowEdit,
-    bool? areaAllowExport,
-    bool? groupAdminOnUsers,
-    bool? groupAllowEdit,
-    bool? groupAllowExport,
-    bool? groupWriteRelatedFamilies,
-    UuidValue? permissionId,
-    bool? serviceAdminOnUsers,
-    bool? serviceAllowEdit,
-    bool? serviceAllowExport,
-    bool? serviceGender,
-    int? serviceStudyYear,
-    bool? serviceWriteRelatedFamilies,
-    UuidValue? uid,
-  }) => Input_AuthUsersAdminOnStreamCursorValueInput._({
-    if (adminOnArea != null) r'adminOnArea': adminOnArea,
-    if (adminOnGroup != null) r'adminOnGroup': adminOnGroup,
-    if (adminOnService != null) r'adminOnService': adminOnService,
-    if (areaAdminOnUsers != null) r'areaAdminOnUsers': areaAdminOnUsers,
-    if (areaAllowEdit != null) r'areaAllowEdit': areaAllowEdit,
-    if (areaAllowExport != null) r'areaAllowExport': areaAllowExport,
-    if (groupAdminOnUsers != null) r'groupAdminOnUsers': groupAdminOnUsers,
-    if (groupAllowEdit != null) r'groupAllowEdit': groupAllowEdit,
-    if (groupAllowExport != null) r'groupAllowExport': groupAllowExport,
-    if (groupWriteRelatedFamilies != null)
-      r'groupWriteRelatedFamilies': groupWriteRelatedFamilies,
-    if (permissionId != null) r'permissionId': permissionId,
-    if (serviceAdminOnUsers != null)
-      r'serviceAdminOnUsers': serviceAdminOnUsers,
-    if (serviceAllowEdit != null) r'serviceAllowEdit': serviceAllowEdit,
-    if (serviceAllowExport != null) r'serviceAllowExport': serviceAllowExport,
-    if (serviceGender != null) r'serviceGender': serviceGender,
-    if (serviceStudyYear != null) r'serviceStudyYear': serviceStudyYear,
-    if (serviceWriteRelatedFamilies != null)
-      r'serviceWriteRelatedFamilies': serviceWriteRelatedFamilies,
-    if (uid != null) r'uid': uid,
-  });
-
-  Input_AuthUsersAdminOnStreamCursorValueInput._(this._$data);
-
-  factory Input_AuthUsersAdminOnStreamCursorValueInput.fromJson(
-    Map<String, dynamic> data,
-  ) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('adminOnArea')) {
-      final l$adminOnArea = data['adminOnArea'];
-      result$data['adminOnArea'] = l$adminOnArea == null
-          ? null
-          : stringToUuid(l$adminOnArea);
-    }
-    if (data.containsKey('adminOnGroup')) {
-      final l$adminOnGroup = data['adminOnGroup'];
-      result$data['adminOnGroup'] = l$adminOnGroup == null
-          ? null
-          : stringToUuid(l$adminOnGroup);
-    }
-    if (data.containsKey('adminOnService')) {
-      final l$adminOnService = data['adminOnService'];
-      result$data['adminOnService'] = l$adminOnService == null
-          ? null
-          : stringToUuid(l$adminOnService);
-    }
-    if (data.containsKey('areaAdminOnUsers')) {
-      final l$areaAdminOnUsers = data['areaAdminOnUsers'];
-      result$data['areaAdminOnUsers'] = (l$areaAdminOnUsers as bool?);
-    }
-    if (data.containsKey('areaAllowEdit')) {
-      final l$areaAllowEdit = data['areaAllowEdit'];
-      result$data['areaAllowEdit'] = (l$areaAllowEdit as bool?);
-    }
-    if (data.containsKey('areaAllowExport')) {
-      final l$areaAllowExport = data['areaAllowExport'];
-      result$data['areaAllowExport'] = (l$areaAllowExport as bool?);
-    }
-    if (data.containsKey('groupAdminOnUsers')) {
-      final l$groupAdminOnUsers = data['groupAdminOnUsers'];
-      result$data['groupAdminOnUsers'] = (l$groupAdminOnUsers as bool?);
-    }
-    if (data.containsKey('groupAllowEdit')) {
-      final l$groupAllowEdit = data['groupAllowEdit'];
-      result$data['groupAllowEdit'] = (l$groupAllowEdit as bool?);
-    }
-    if (data.containsKey('groupAllowExport')) {
-      final l$groupAllowExport = data['groupAllowExport'];
-      result$data['groupAllowExport'] = (l$groupAllowExport as bool?);
-    }
-    if (data.containsKey('groupWriteRelatedFamilies')) {
-      final l$groupWriteRelatedFamilies = data['groupWriteRelatedFamilies'];
-      result$data['groupWriteRelatedFamilies'] =
-          (l$groupWriteRelatedFamilies as bool?);
-    }
-    if (data.containsKey('permissionId')) {
-      final l$permissionId = data['permissionId'];
-      result$data['permissionId'] = l$permissionId == null
-          ? null
-          : stringToUuid(l$permissionId);
-    }
-    if (data.containsKey('serviceAdminOnUsers')) {
-      final l$serviceAdminOnUsers = data['serviceAdminOnUsers'];
-      result$data['serviceAdminOnUsers'] = (l$serviceAdminOnUsers as bool?);
-    }
-    if (data.containsKey('serviceAllowEdit')) {
-      final l$serviceAllowEdit = data['serviceAllowEdit'];
-      result$data['serviceAllowEdit'] = (l$serviceAllowEdit as bool?);
-    }
-    if (data.containsKey('serviceAllowExport')) {
-      final l$serviceAllowExport = data['serviceAllowExport'];
-      result$data['serviceAllowExport'] = (l$serviceAllowExport as bool?);
-    }
-    if (data.containsKey('serviceGender')) {
-      final l$serviceGender = data['serviceGender'];
-      result$data['serviceGender'] = (l$serviceGender as bool?);
-    }
-    if (data.containsKey('serviceStudyYear')) {
-      final l$serviceStudyYear = data['serviceStudyYear'];
-      result$data['serviceStudyYear'] = (l$serviceStudyYear as int?);
-    }
-    if (data.containsKey('serviceWriteRelatedFamilies')) {
-      final l$serviceWriteRelatedFamilies = data['serviceWriteRelatedFamilies'];
-      result$data['serviceWriteRelatedFamilies'] =
-          (l$serviceWriteRelatedFamilies as bool?);
-    }
-    if (data.containsKey('uid')) {
-      final l$uid = data['uid'];
-      result$data['uid'] = l$uid == null ? null : stringToUuid(l$uid);
-    }
-    return Input_AuthUsersAdminOnStreamCursorValueInput._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  UuidValue? get adminOnArea => (_$data['adminOnArea'] as UuidValue?);
-
-  UuidValue? get adminOnGroup => (_$data['adminOnGroup'] as UuidValue?);
-
-  UuidValue? get adminOnService => (_$data['adminOnService'] as UuidValue?);
-
-  bool? get areaAdminOnUsers => (_$data['areaAdminOnUsers'] as bool?);
-
-  bool? get areaAllowEdit => (_$data['areaAllowEdit'] as bool?);
-
-  bool? get areaAllowExport => (_$data['areaAllowExport'] as bool?);
-
-  bool? get groupAdminOnUsers => (_$data['groupAdminOnUsers'] as bool?);
-
-  bool? get groupAllowEdit => (_$data['groupAllowEdit'] as bool?);
-
-  bool? get groupAllowExport => (_$data['groupAllowExport'] as bool?);
-
-  bool? get groupWriteRelatedFamilies =>
-      (_$data['groupWriteRelatedFamilies'] as bool?);
-
-  UuidValue? get permissionId => (_$data['permissionId'] as UuidValue?);
-
-  bool? get serviceAdminOnUsers => (_$data['serviceAdminOnUsers'] as bool?);
-
-  bool? get serviceAllowEdit => (_$data['serviceAllowEdit'] as bool?);
-
-  bool? get serviceAllowExport => (_$data['serviceAllowExport'] as bool?);
-
-  bool? get serviceGender => (_$data['serviceGender'] as bool?);
-
-  int? get serviceStudyYear => (_$data['serviceStudyYear'] as int?);
-
-  bool? get serviceWriteRelatedFamilies =>
-      (_$data['serviceWriteRelatedFamilies'] as bool?);
-
-  UuidValue? get uid => (_$data['uid'] as UuidValue?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('adminOnArea')) {
-      final l$adminOnArea = adminOnArea;
-      result$data['adminOnArea'] = l$adminOnArea == null
-          ? null
-          : uuidToString(l$adminOnArea);
-    }
-    if (_$data.containsKey('adminOnGroup')) {
-      final l$adminOnGroup = adminOnGroup;
-      result$data['adminOnGroup'] = l$adminOnGroup == null
-          ? null
-          : uuidToString(l$adminOnGroup);
-    }
-    if (_$data.containsKey('adminOnService')) {
-      final l$adminOnService = adminOnService;
-      result$data['adminOnService'] = l$adminOnService == null
-          ? null
-          : uuidToString(l$adminOnService);
-    }
-    if (_$data.containsKey('areaAdminOnUsers')) {
-      final l$areaAdminOnUsers = areaAdminOnUsers;
-      result$data['areaAdminOnUsers'] = l$areaAdminOnUsers;
-    }
-    if (_$data.containsKey('areaAllowEdit')) {
-      final l$areaAllowEdit = areaAllowEdit;
-      result$data['areaAllowEdit'] = l$areaAllowEdit;
-    }
-    if (_$data.containsKey('areaAllowExport')) {
-      final l$areaAllowExport = areaAllowExport;
-      result$data['areaAllowExport'] = l$areaAllowExport;
-    }
-    if (_$data.containsKey('groupAdminOnUsers')) {
-      final l$groupAdminOnUsers = groupAdminOnUsers;
-      result$data['groupAdminOnUsers'] = l$groupAdminOnUsers;
-    }
-    if (_$data.containsKey('groupAllowEdit')) {
-      final l$groupAllowEdit = groupAllowEdit;
-      result$data['groupAllowEdit'] = l$groupAllowEdit;
-    }
-    if (_$data.containsKey('groupAllowExport')) {
-      final l$groupAllowExport = groupAllowExport;
-      result$data['groupAllowExport'] = l$groupAllowExport;
-    }
-    if (_$data.containsKey('groupWriteRelatedFamilies')) {
-      final l$groupWriteRelatedFamilies = groupWriteRelatedFamilies;
-      result$data['groupWriteRelatedFamilies'] = l$groupWriteRelatedFamilies;
-    }
-    if (_$data.containsKey('permissionId')) {
-      final l$permissionId = permissionId;
-      result$data['permissionId'] = l$permissionId == null
-          ? null
-          : uuidToString(l$permissionId);
-    }
-    if (_$data.containsKey('serviceAdminOnUsers')) {
-      final l$serviceAdminOnUsers = serviceAdminOnUsers;
-      result$data['serviceAdminOnUsers'] = l$serviceAdminOnUsers;
-    }
-    if (_$data.containsKey('serviceAllowEdit')) {
-      final l$serviceAllowEdit = serviceAllowEdit;
-      result$data['serviceAllowEdit'] = l$serviceAllowEdit;
-    }
-    if (_$data.containsKey('serviceAllowExport')) {
-      final l$serviceAllowExport = serviceAllowExport;
-      result$data['serviceAllowExport'] = l$serviceAllowExport;
-    }
-    if (_$data.containsKey('serviceGender')) {
-      final l$serviceGender = serviceGender;
-      result$data['serviceGender'] = l$serviceGender;
-    }
-    if (_$data.containsKey('serviceStudyYear')) {
-      final l$serviceStudyYear = serviceStudyYear;
-      result$data['serviceStudyYear'] = l$serviceStudyYear;
-    }
-    if (_$data.containsKey('serviceWriteRelatedFamilies')) {
-      final l$serviceWriteRelatedFamilies = serviceWriteRelatedFamilies;
-      result$data['serviceWriteRelatedFamilies'] =
-          l$serviceWriteRelatedFamilies;
-    }
-    if (_$data.containsKey('uid')) {
-      final l$uid = uid;
-      result$data['uid'] = l$uid == null ? null : uuidToString(l$uid);
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_AuthUsersAdminOnStreamCursorValueInput<
-    Input_AuthUsersAdminOnStreamCursorValueInput
-  >
-  get copyWith =>
-      CopyWith_Input_AuthUsersAdminOnStreamCursorValueInput(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_AuthUsersAdminOnStreamCursorValueInput ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$adminOnArea = adminOnArea;
-    final lOther$adminOnArea = other.adminOnArea;
-    if (_$data.containsKey('adminOnArea') !=
-        other._$data.containsKey('adminOnArea')) {
-      return false;
-    }
-    if (l$adminOnArea != lOther$adminOnArea) {
-      return false;
-    }
-    final l$adminOnGroup = adminOnGroup;
-    final lOther$adminOnGroup = other.adminOnGroup;
-    if (_$data.containsKey('adminOnGroup') !=
-        other._$data.containsKey('adminOnGroup')) {
-      return false;
-    }
-    if (l$adminOnGroup != lOther$adminOnGroup) {
-      return false;
-    }
-    final l$adminOnService = adminOnService;
-    final lOther$adminOnService = other.adminOnService;
-    if (_$data.containsKey('adminOnService') !=
-        other._$data.containsKey('adminOnService')) {
-      return false;
-    }
-    if (l$adminOnService != lOther$adminOnService) {
-      return false;
-    }
-    final l$areaAdminOnUsers = areaAdminOnUsers;
-    final lOther$areaAdminOnUsers = other.areaAdminOnUsers;
-    if (_$data.containsKey('areaAdminOnUsers') !=
-        other._$data.containsKey('areaAdminOnUsers')) {
-      return false;
-    }
-    if (l$areaAdminOnUsers != lOther$areaAdminOnUsers) {
-      return false;
-    }
-    final l$areaAllowEdit = areaAllowEdit;
-    final lOther$areaAllowEdit = other.areaAllowEdit;
-    if (_$data.containsKey('areaAllowEdit') !=
-        other._$data.containsKey('areaAllowEdit')) {
-      return false;
-    }
-    if (l$areaAllowEdit != lOther$areaAllowEdit) {
-      return false;
-    }
-    final l$areaAllowExport = areaAllowExport;
-    final lOther$areaAllowExport = other.areaAllowExport;
-    if (_$data.containsKey('areaAllowExport') !=
-        other._$data.containsKey('areaAllowExport')) {
-      return false;
-    }
-    if (l$areaAllowExport != lOther$areaAllowExport) {
-      return false;
-    }
-    final l$groupAdminOnUsers = groupAdminOnUsers;
-    final lOther$groupAdminOnUsers = other.groupAdminOnUsers;
-    if (_$data.containsKey('groupAdminOnUsers') !=
-        other._$data.containsKey('groupAdminOnUsers')) {
-      return false;
-    }
-    if (l$groupAdminOnUsers != lOther$groupAdminOnUsers) {
-      return false;
-    }
-    final l$groupAllowEdit = groupAllowEdit;
-    final lOther$groupAllowEdit = other.groupAllowEdit;
-    if (_$data.containsKey('groupAllowEdit') !=
-        other._$data.containsKey('groupAllowEdit')) {
-      return false;
-    }
-    if (l$groupAllowEdit != lOther$groupAllowEdit) {
-      return false;
-    }
-    final l$groupAllowExport = groupAllowExport;
-    final lOther$groupAllowExport = other.groupAllowExport;
-    if (_$data.containsKey('groupAllowExport') !=
-        other._$data.containsKey('groupAllowExport')) {
-      return false;
-    }
-    if (l$groupAllowExport != lOther$groupAllowExport) {
-      return false;
-    }
-    final l$groupWriteRelatedFamilies = groupWriteRelatedFamilies;
-    final lOther$groupWriteRelatedFamilies = other.groupWriteRelatedFamilies;
-    if (_$data.containsKey('groupWriteRelatedFamilies') !=
-        other._$data.containsKey('groupWriteRelatedFamilies')) {
-      return false;
-    }
-    if (l$groupWriteRelatedFamilies != lOther$groupWriteRelatedFamilies) {
-      return false;
-    }
-    final l$permissionId = permissionId;
-    final lOther$permissionId = other.permissionId;
-    if (_$data.containsKey('permissionId') !=
-        other._$data.containsKey('permissionId')) {
-      return false;
-    }
-    if (l$permissionId != lOther$permissionId) {
-      return false;
-    }
-    final l$serviceAdminOnUsers = serviceAdminOnUsers;
-    final lOther$serviceAdminOnUsers = other.serviceAdminOnUsers;
-    if (_$data.containsKey('serviceAdminOnUsers') !=
-        other._$data.containsKey('serviceAdminOnUsers')) {
-      return false;
-    }
-    if (l$serviceAdminOnUsers != lOther$serviceAdminOnUsers) {
-      return false;
-    }
-    final l$serviceAllowEdit = serviceAllowEdit;
-    final lOther$serviceAllowEdit = other.serviceAllowEdit;
-    if (_$data.containsKey('serviceAllowEdit') !=
-        other._$data.containsKey('serviceAllowEdit')) {
-      return false;
-    }
-    if (l$serviceAllowEdit != lOther$serviceAllowEdit) {
-      return false;
-    }
-    final l$serviceAllowExport = serviceAllowExport;
-    final lOther$serviceAllowExport = other.serviceAllowExport;
-    if (_$data.containsKey('serviceAllowExport') !=
-        other._$data.containsKey('serviceAllowExport')) {
-      return false;
-    }
-    if (l$serviceAllowExport != lOther$serviceAllowExport) {
-      return false;
-    }
-    final l$serviceGender = serviceGender;
-    final lOther$serviceGender = other.serviceGender;
-    if (_$data.containsKey('serviceGender') !=
-        other._$data.containsKey('serviceGender')) {
-      return false;
-    }
-    if (l$serviceGender != lOther$serviceGender) {
-      return false;
-    }
-    final l$serviceStudyYear = serviceStudyYear;
-    final lOther$serviceStudyYear = other.serviceStudyYear;
-    if (_$data.containsKey('serviceStudyYear') !=
-        other._$data.containsKey('serviceStudyYear')) {
-      return false;
-    }
-    if (l$serviceStudyYear != lOther$serviceStudyYear) {
-      return false;
-    }
-    final l$serviceWriteRelatedFamilies = serviceWriteRelatedFamilies;
-    final lOther$serviceWriteRelatedFamilies =
-        other.serviceWriteRelatedFamilies;
-    if (_$data.containsKey('serviceWriteRelatedFamilies') !=
-        other._$data.containsKey('serviceWriteRelatedFamilies')) {
-      return false;
-    }
-    if (l$serviceWriteRelatedFamilies != lOther$serviceWriteRelatedFamilies) {
-      return false;
-    }
-    final l$uid = uid;
-    final lOther$uid = other.uid;
-    if (_$data.containsKey('uid') != other._$data.containsKey('uid')) {
-      return false;
-    }
-    if (l$uid != lOther$uid) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$adminOnArea = adminOnArea;
-    final l$adminOnGroup = adminOnGroup;
-    final l$adminOnService = adminOnService;
-    final l$areaAdminOnUsers = areaAdminOnUsers;
-    final l$areaAllowEdit = areaAllowEdit;
-    final l$areaAllowExport = areaAllowExport;
-    final l$groupAdminOnUsers = groupAdminOnUsers;
-    final l$groupAllowEdit = groupAllowEdit;
-    final l$groupAllowExport = groupAllowExport;
-    final l$groupWriteRelatedFamilies = groupWriteRelatedFamilies;
-    final l$permissionId = permissionId;
-    final l$serviceAdminOnUsers = serviceAdminOnUsers;
-    final l$serviceAllowEdit = serviceAllowEdit;
-    final l$serviceAllowExport = serviceAllowExport;
-    final l$serviceGender = serviceGender;
-    final l$serviceStudyYear = serviceStudyYear;
-    final l$serviceWriteRelatedFamilies = serviceWriteRelatedFamilies;
-    final l$uid = uid;
-    return Object.hashAll([
-      _$data.containsKey('adminOnArea') ? l$adminOnArea : const {},
-      _$data.containsKey('adminOnGroup') ? l$adminOnGroup : const {},
-      _$data.containsKey('adminOnService') ? l$adminOnService : const {},
-      _$data.containsKey('areaAdminOnUsers') ? l$areaAdminOnUsers : const {},
-      _$data.containsKey('areaAllowEdit') ? l$areaAllowEdit : const {},
-      _$data.containsKey('areaAllowExport') ? l$areaAllowExport : const {},
-      _$data.containsKey('groupAdminOnUsers') ? l$groupAdminOnUsers : const {},
-      _$data.containsKey('groupAllowEdit') ? l$groupAllowEdit : const {},
-      _$data.containsKey('groupAllowExport') ? l$groupAllowExport : const {},
-      _$data.containsKey('groupWriteRelatedFamilies')
-          ? l$groupWriteRelatedFamilies
-          : const {},
-      _$data.containsKey('permissionId') ? l$permissionId : const {},
-      _$data.containsKey('serviceAdminOnUsers')
-          ? l$serviceAdminOnUsers
-          : const {},
-      _$data.containsKey('serviceAllowEdit') ? l$serviceAllowEdit : const {},
-      _$data.containsKey('serviceAllowExport')
-          ? l$serviceAllowExport
-          : const {},
-      _$data.containsKey('serviceGender') ? l$serviceGender : const {},
-      _$data.containsKey('serviceStudyYear') ? l$serviceStudyYear : const {},
-      _$data.containsKey('serviceWriteRelatedFamilies')
-          ? l$serviceWriteRelatedFamilies
-          : const {},
-      _$data.containsKey('uid') ? l$uid : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_AuthUsersAdminOnStreamCursorValueInput<TRes> {
-  factory CopyWith_Input_AuthUsersAdminOnStreamCursorValueInput(
-    Input_AuthUsersAdminOnStreamCursorValueInput instance,
-    TRes Function(Input_AuthUsersAdminOnStreamCursorValueInput) then,
-  ) = _CopyWithImpl_Input_AuthUsersAdminOnStreamCursorValueInput;
-
-  factory CopyWith_Input_AuthUsersAdminOnStreamCursorValueInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_AuthUsersAdminOnStreamCursorValueInput;
-
-  TRes call({
-    UuidValue? adminOnArea,
-    UuidValue? adminOnGroup,
-    UuidValue? adminOnService,
-    bool? areaAdminOnUsers,
-    bool? areaAllowEdit,
-    bool? areaAllowExport,
-    bool? groupAdminOnUsers,
-    bool? groupAllowEdit,
-    bool? groupAllowExport,
-    bool? groupWriteRelatedFamilies,
-    UuidValue? permissionId,
-    bool? serviceAdminOnUsers,
-    bool? serviceAllowEdit,
-    bool? serviceAllowExport,
-    bool? serviceGender,
-    int? serviceStudyYear,
-    bool? serviceWriteRelatedFamilies,
-    UuidValue? uid,
-  });
 }

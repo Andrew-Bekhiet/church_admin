@@ -1,6 +1,1270 @@
 // Part 14 of the schema
 part of "schema.graphql.dart";
 
+class _CopyWithImpl_Input_CollegesAggregateOrderBy<TRes>
+    implements CopyWith_Input_CollegesAggregateOrderBy<TRes> {
+  _CopyWithImpl_Input_CollegesAggregateOrderBy(this._instance, this._then);
+
+  final Input_CollegesAggregateOrderBy _instance;
+
+  final TRes Function(Input_CollegesAggregateOrderBy) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? count = _undefined,
+    Object? max = _undefined,
+    Object? min = _undefined,
+  }) => _then(
+    Input_CollegesAggregateOrderBy._({
+      ..._instance._$data,
+      if (count != _undefined) 'count': (count as Enum_OrderBy?),
+      if (max != _undefined) 'max': (max as Input_CollegesMaxOrderBy?),
+      if (min != _undefined) 'min': (min as Input_CollegesMinOrderBy?),
+    }),
+  );
+
+  CopyWith_Input_CollegesMaxOrderBy<TRes> get max {
+    final local$max = _instance.max;
+    return local$max == null
+        ? CopyWith_Input_CollegesMaxOrderBy.stub(_then(_instance))
+        : CopyWith_Input_CollegesMaxOrderBy(local$max, (e) => call(max: e));
+  }
+
+  CopyWith_Input_CollegesMinOrderBy<TRes> get min {
+    final local$min = _instance.min;
+    return local$min == null
+        ? CopyWith_Input_CollegesMinOrderBy.stub(_then(_instance))
+        : CopyWith_Input_CollegesMinOrderBy(local$min, (e) => call(min: e));
+  }
+}
+
+class _CopyWithStubImpl_Input_CollegesAggregateOrderBy<TRes>
+    implements CopyWith_Input_CollegesAggregateOrderBy<TRes> {
+  _CopyWithStubImpl_Input_CollegesAggregateOrderBy(this._res);
+
+  TRes _res;
+
+  call({
+    Enum_OrderBy? count,
+    Input_CollegesMaxOrderBy? max,
+    Input_CollegesMinOrderBy? min,
+  }) => _res;
+
+  CopyWith_Input_CollegesMaxOrderBy<TRes> get max =>
+      CopyWith_Input_CollegesMaxOrderBy.stub(_res);
+
+  CopyWith_Input_CollegesMinOrderBy<TRes> get min =>
+      CopyWith_Input_CollegesMinOrderBy.stub(_res);
+}
+
+class Input_CollegesArrRelInsertInput {
+  factory Input_CollegesArrRelInsertInput({
+    required List<Input_CollegesInsertInput> data,
+    Input_CollegesOnConflict? onConflict,
+  }) => Input_CollegesArrRelInsertInput._({
+    r'data': data,
+    if (onConflict != null) r'onConflict': onConflict,
+  });
+
+  Input_CollegesArrRelInsertInput._(this._$data);
+
+  factory Input_CollegesArrRelInsertInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$data = data['data'];
+    result$data['data'] = (l$data as List<dynamic>)
+        .map(
+          (e) =>
+              Input_CollegesInsertInput.fromJson((e as Map<String, dynamic>)),
+        )
+        .toList();
+    if (data.containsKey('onConflict')) {
+      final l$onConflict = data['onConflict'];
+      result$data['onConflict'] = l$onConflict == null
+          ? null
+          : Input_CollegesOnConflict.fromJson(
+              (l$onConflict as Map<String, dynamic>),
+            );
+    }
+    return Input_CollegesArrRelInsertInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  List<Input_CollegesInsertInput> get data =>
+      (_$data['data'] as List<Input_CollegesInsertInput>);
+
+  Input_CollegesOnConflict? get onConflict =>
+      (_$data['onConflict'] as Input_CollegesOnConflict?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$data = data;
+    result$data['data'] = l$data.map((e) => e.toJson()).toList();
+    if (_$data.containsKey('onConflict')) {
+      final l$onConflict = onConflict;
+      result$data['onConflict'] = l$onConflict?.toJson();
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_CollegesArrRelInsertInput<Input_CollegesArrRelInsertInput>
+  get copyWith => CopyWith_Input_CollegesArrRelInsertInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_CollegesArrRelInsertInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$data = data;
+    final lOther$data = other.data;
+    if (l$data.length != lOther$data.length) {
+      return false;
+    }
+    for (int i = 0; i < l$data.length; i++) {
+      final l$data$entry = l$data[i];
+      final lOther$data$entry = lOther$data[i];
+      if (l$data$entry != lOther$data$entry) {
+        return false;
+      }
+    }
+    final l$onConflict = onConflict;
+    final lOther$onConflict = other.onConflict;
+    if (_$data.containsKey('onConflict') !=
+        other._$data.containsKey('onConflict')) {
+      return false;
+    }
+    if (l$onConflict != lOther$onConflict) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$data = data;
+    final l$onConflict = onConflict;
+    return Object.hashAll([
+      Object.hashAll(l$data.map((v) => v)),
+      _$data.containsKey('onConflict') ? l$onConflict : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_CollegesArrRelInsertInput<TRes> {
+  factory CopyWith_Input_CollegesArrRelInsertInput(
+    Input_CollegesArrRelInsertInput instance,
+    TRes Function(Input_CollegesArrRelInsertInput) then,
+  ) = _CopyWithImpl_Input_CollegesArrRelInsertInput;
+
+  factory CopyWith_Input_CollegesArrRelInsertInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_CollegesArrRelInsertInput;
+
+  TRes call({
+    List<Input_CollegesInsertInput>? data,
+    Input_CollegesOnConflict? onConflict,
+  });
+  TRes data(
+    Iterable<Input_CollegesInsertInput> Function(
+      Iterable<CopyWith_Input_CollegesInsertInput<Input_CollegesInsertInput>>,
+    )
+    _fn,
+  );
+  CopyWith_Input_CollegesOnConflict<TRes> get onConflict;
+}
+
+class _CopyWithImpl_Input_CollegesArrRelInsertInput<TRes>
+    implements CopyWith_Input_CollegesArrRelInsertInput<TRes> {
+  _CopyWithImpl_Input_CollegesArrRelInsertInput(this._instance, this._then);
+
+  final Input_CollegesArrRelInsertInput _instance;
+
+  final TRes Function(Input_CollegesArrRelInsertInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? data = _undefined, Object? onConflict = _undefined}) =>
+      _then(
+        Input_CollegesArrRelInsertInput._({
+          ..._instance._$data,
+          if (data != _undefined && data != null)
+            'data': (data as List<Input_CollegesInsertInput>),
+          if (onConflict != _undefined)
+            'onConflict': (onConflict as Input_CollegesOnConflict?),
+        }),
+      );
+
+  TRes data(
+    Iterable<Input_CollegesInsertInput> Function(
+      Iterable<CopyWith_Input_CollegesInsertInput<Input_CollegesInsertInput>>,
+    )
+    _fn,
+  ) => call(
+    data: _fn(
+      _instance.data.map(
+        (e) => CopyWith_Input_CollegesInsertInput(e, (i) => i),
+      ),
+    ).toList(),
+  );
+
+  CopyWith_Input_CollegesOnConflict<TRes> get onConflict {
+    final local$onConflict = _instance.onConflict;
+    return local$onConflict == null
+        ? CopyWith_Input_CollegesOnConflict.stub(_then(_instance))
+        : CopyWith_Input_CollegesOnConflict(
+            local$onConflict,
+            (e) => call(onConflict: e),
+          );
+  }
+}
+
+class _CopyWithStubImpl_Input_CollegesArrRelInsertInput<TRes>
+    implements CopyWith_Input_CollegesArrRelInsertInput<TRes> {
+  _CopyWithStubImpl_Input_CollegesArrRelInsertInput(this._res);
+
+  TRes _res;
+
+  call({
+    List<Input_CollegesInsertInput>? data,
+    Input_CollegesOnConflict? onConflict,
+  }) => _res;
+
+  data(_fn) => _res;
+
+  CopyWith_Input_CollegesOnConflict<TRes> get onConflict =>
+      CopyWith_Input_CollegesOnConflict.stub(_res);
+}
+
+class Input_CollegesBoolExp {
+  factory Input_CollegesBoolExp({
+    List<Input_CollegesBoolExp>? $_and,
+    Input_CollegesBoolExp? $_not,
+    List<Input_CollegesBoolExp>? $_or,
+    Input_UuidComparisonExp? id,
+    Input_StringComparisonExp? name,
+    Input_PersonsBoolExp? persons,
+    Input_PersonsAggregateBoolExp? personsAggregate,
+    Input_UniversitiesBoolExp? university,
+    Input_UuidComparisonExp? universityId,
+  }) => Input_CollegesBoolExp._({
+    if ($_and != null) r'_and': $_and,
+    if ($_not != null) r'_not': $_not,
+    if ($_or != null) r'_or': $_or,
+    if (id != null) r'id': id,
+    if (name != null) r'name': name,
+    if (persons != null) r'persons': persons,
+    if (personsAggregate != null) r'personsAggregate': personsAggregate,
+    if (university != null) r'university': university,
+    if (universityId != null) r'universityId': universityId,
+  });
+
+  Input_CollegesBoolExp._(this._$data);
+
+  factory Input_CollegesBoolExp.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('_and')) {
+      final l$$_and = data['_and'];
+      result$data['_and'] = (l$$_and as List<dynamic>?)
+          ?.map(
+            (e) => Input_CollegesBoolExp.fromJson((e as Map<String, dynamic>)),
+          )
+          .toList();
+    }
+    if (data.containsKey('_not')) {
+      final l$$_not = data['_not'];
+      result$data['_not'] = l$$_not == null
+          ? null
+          : Input_CollegesBoolExp.fromJson((l$$_not as Map<String, dynamic>));
+    }
+    if (data.containsKey('_or')) {
+      final l$$_or = data['_or'];
+      result$data['_or'] = (l$$_or as List<dynamic>?)
+          ?.map(
+            (e) => Input_CollegesBoolExp.fromJson((e as Map<String, dynamic>)),
+          )
+          .toList();
+    }
+    if (data.containsKey('id')) {
+      final l$id = data['id'];
+      result$data['id'] = l$id == null
+          ? null
+          : Input_UuidComparisonExp.fromJson((l$id as Map<String, dynamic>));
+    }
+    if (data.containsKey('name')) {
+      final l$name = data['name'];
+      result$data['name'] = l$name == null
+          ? null
+          : Input_StringComparisonExp.fromJson(
+              (l$name as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('persons')) {
+      final l$persons = data['persons'];
+      result$data['persons'] = l$persons == null
+          ? null
+          : Input_PersonsBoolExp.fromJson((l$persons as Map<String, dynamic>));
+    }
+    if (data.containsKey('personsAggregate')) {
+      final l$personsAggregate = data['personsAggregate'];
+      result$data['personsAggregate'] = l$personsAggregate == null
+          ? null
+          : Input_PersonsAggregateBoolExp.fromJson(
+              (l$personsAggregate as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('university')) {
+      final l$university = data['university'];
+      result$data['university'] = l$university == null
+          ? null
+          : Input_UniversitiesBoolExp.fromJson(
+              (l$university as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('universityId')) {
+      final l$universityId = data['universityId'];
+      result$data['universityId'] = l$universityId == null
+          ? null
+          : Input_UuidComparisonExp.fromJson(
+              (l$universityId as Map<String, dynamic>),
+            );
+    }
+    return Input_CollegesBoolExp._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  List<Input_CollegesBoolExp>? get $_and =>
+      (_$data['_and'] as List<Input_CollegesBoolExp>?);
+
+  Input_CollegesBoolExp? get $_not =>
+      (_$data['_not'] as Input_CollegesBoolExp?);
+
+  List<Input_CollegesBoolExp>? get $_or =>
+      (_$data['_or'] as List<Input_CollegesBoolExp>?);
+
+  Input_UuidComparisonExp? get id => (_$data['id'] as Input_UuidComparisonExp?);
+
+  Input_StringComparisonExp? get name =>
+      (_$data['name'] as Input_StringComparisonExp?);
+
+  Input_PersonsBoolExp? get persons =>
+      (_$data['persons'] as Input_PersonsBoolExp?);
+
+  Input_PersonsAggregateBoolExp? get personsAggregate =>
+      (_$data['personsAggregate'] as Input_PersonsAggregateBoolExp?);
+
+  Input_UniversitiesBoolExp? get university =>
+      (_$data['university'] as Input_UniversitiesBoolExp?);
+
+  Input_UuidComparisonExp? get universityId =>
+      (_$data['universityId'] as Input_UuidComparisonExp?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('_and')) {
+      final l$$_and = $_and;
+      result$data['_and'] = l$$_and?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('_not')) {
+      final l$$_not = $_not;
+      result$data['_not'] = l$$_not?.toJson();
+    }
+    if (_$data.containsKey('_or')) {
+      final l$$_or = $_or;
+      result$data['_or'] = l$$_or?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('id')) {
+      final l$id = id;
+      result$data['id'] = l$id?.toJson();
+    }
+    if (_$data.containsKey('name')) {
+      final l$name = name;
+      result$data['name'] = l$name?.toJson();
+    }
+    if (_$data.containsKey('persons')) {
+      final l$persons = persons;
+      result$data['persons'] = l$persons?.toJson();
+    }
+    if (_$data.containsKey('personsAggregate')) {
+      final l$personsAggregate = personsAggregate;
+      result$data['personsAggregate'] = l$personsAggregate?.toJson();
+    }
+    if (_$data.containsKey('university')) {
+      final l$university = university;
+      result$data['university'] = l$university?.toJson();
+    }
+    if (_$data.containsKey('universityId')) {
+      final l$universityId = universityId;
+      result$data['universityId'] = l$universityId?.toJson();
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_CollegesBoolExp<Input_CollegesBoolExp> get copyWith =>
+      CopyWith_Input_CollegesBoolExp(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_CollegesBoolExp || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$$_and = $_and;
+    final lOther$$_and = other.$_and;
+    if (_$data.containsKey('_and') != other._$data.containsKey('_and')) {
+      return false;
+    }
+    if (l$$_and != null && lOther$$_and != null) {
+      if (l$$_and.length != lOther$$_and.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$_and.length; i++) {
+        final l$$_and$entry = l$$_and[i];
+        final lOther$$_and$entry = lOther$$_and[i];
+        if (l$$_and$entry != lOther$$_and$entry) {
+          return false;
+        }
+      }
+    } else if (l$$_and != lOther$$_and) {
+      return false;
+    }
+    final l$$_not = $_not;
+    final lOther$$_not = other.$_not;
+    if (_$data.containsKey('_not') != other._$data.containsKey('_not')) {
+      return false;
+    }
+    if (l$$_not != lOther$$_not) {
+      return false;
+    }
+    final l$$_or = $_or;
+    final lOther$$_or = other.$_or;
+    if (_$data.containsKey('_or') != other._$data.containsKey('_or')) {
+      return false;
+    }
+    if (l$$_or != null && lOther$$_or != null) {
+      if (l$$_or.length != lOther$$_or.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$_or.length; i++) {
+        final l$$_or$entry = l$$_or[i];
+        final lOther$$_or$entry = lOther$$_or[i];
+        if (l$$_or$entry != lOther$$_or$entry) {
+          return false;
+        }
+      }
+    } else if (l$$_or != lOther$$_or) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
+      return false;
+    }
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (_$data.containsKey('name') != other._$data.containsKey('name')) {
+      return false;
+    }
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$persons = persons;
+    final lOther$persons = other.persons;
+    if (_$data.containsKey('persons') != other._$data.containsKey('persons')) {
+      return false;
+    }
+    if (l$persons != lOther$persons) {
+      return false;
+    }
+    final l$personsAggregate = personsAggregate;
+    final lOther$personsAggregate = other.personsAggregate;
+    if (_$data.containsKey('personsAggregate') !=
+        other._$data.containsKey('personsAggregate')) {
+      return false;
+    }
+    if (l$personsAggregate != lOther$personsAggregate) {
+      return false;
+    }
+    final l$university = university;
+    final lOther$university = other.university;
+    if (_$data.containsKey('university') !=
+        other._$data.containsKey('university')) {
+      return false;
+    }
+    if (l$university != lOther$university) {
+      return false;
+    }
+    final l$universityId = universityId;
+    final lOther$universityId = other.universityId;
+    if (_$data.containsKey('universityId') !=
+        other._$data.containsKey('universityId')) {
+      return false;
+    }
+    if (l$universityId != lOther$universityId) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$$_and = $_and;
+    final l$$_not = $_not;
+    final l$$_or = $_or;
+    final l$id = id;
+    final l$name = name;
+    final l$persons = persons;
+    final l$personsAggregate = personsAggregate;
+    final l$university = university;
+    final l$universityId = universityId;
+    return Object.hashAll([
+      _$data.containsKey('_and')
+          ? l$$_and == null
+                ? null
+                : Object.hashAll(l$$_and.map((v) => v))
+          : const {},
+      _$data.containsKey('_not') ? l$$_not : const {},
+      _$data.containsKey('_or')
+          ? l$$_or == null
+                ? null
+                : Object.hashAll(l$$_or.map((v) => v))
+          : const {},
+      _$data.containsKey('id') ? l$id : const {},
+      _$data.containsKey('name') ? l$name : const {},
+      _$data.containsKey('persons') ? l$persons : const {},
+      _$data.containsKey('personsAggregate') ? l$personsAggregate : const {},
+      _$data.containsKey('university') ? l$university : const {},
+      _$data.containsKey('universityId') ? l$universityId : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_CollegesBoolExp<TRes> {
+  factory CopyWith_Input_CollegesBoolExp(
+    Input_CollegesBoolExp instance,
+    TRes Function(Input_CollegesBoolExp) then,
+  ) = _CopyWithImpl_Input_CollegesBoolExp;
+
+  factory CopyWith_Input_CollegesBoolExp.stub(TRes res) =
+      _CopyWithStubImpl_Input_CollegesBoolExp;
+
+  TRes call({
+    List<Input_CollegesBoolExp>? $_and,
+    Input_CollegesBoolExp? $_not,
+    List<Input_CollegesBoolExp>? $_or,
+    Input_UuidComparisonExp? id,
+    Input_StringComparisonExp? name,
+    Input_PersonsBoolExp? persons,
+    Input_PersonsAggregateBoolExp? personsAggregate,
+    Input_UniversitiesBoolExp? university,
+    Input_UuidComparisonExp? universityId,
+  });
+  TRes $_and(
+    Iterable<Input_CollegesBoolExp>? Function(
+      Iterable<CopyWith_Input_CollegesBoolExp<Input_CollegesBoolExp>>?,
+    )
+    _fn,
+  );
+  CopyWith_Input_CollegesBoolExp<TRes> get $_not;
+  TRes $_or(
+    Iterable<Input_CollegesBoolExp>? Function(
+      Iterable<CopyWith_Input_CollegesBoolExp<Input_CollegesBoolExp>>?,
+    )
+    _fn,
+  );
+  CopyWith_Input_UuidComparisonExp<TRes> get id;
+  CopyWith_Input_StringComparisonExp<TRes> get name;
+  CopyWith_Input_PersonsBoolExp<TRes> get persons;
+  CopyWith_Input_PersonsAggregateBoolExp<TRes> get personsAggregate;
+  CopyWith_Input_UniversitiesBoolExp<TRes> get university;
+  CopyWith_Input_UuidComparisonExp<TRes> get universityId;
+}
+
+class _CopyWithImpl_Input_CollegesBoolExp<TRes>
+    implements CopyWith_Input_CollegesBoolExp<TRes> {
+  _CopyWithImpl_Input_CollegesBoolExp(this._instance, this._then);
+
+  final Input_CollegesBoolExp _instance;
+
+  final TRes Function(Input_CollegesBoolExp) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? $_and = _undefined,
+    Object? $_not = _undefined,
+    Object? $_or = _undefined,
+    Object? id = _undefined,
+    Object? name = _undefined,
+    Object? persons = _undefined,
+    Object? personsAggregate = _undefined,
+    Object? university = _undefined,
+    Object? universityId = _undefined,
+  }) => _then(
+    Input_CollegesBoolExp._({
+      ..._instance._$data,
+      if ($_and != _undefined) '_and': ($_and as List<Input_CollegesBoolExp>?),
+      if ($_not != _undefined) '_not': ($_not as Input_CollegesBoolExp?),
+      if ($_or != _undefined) '_or': ($_or as List<Input_CollegesBoolExp>?),
+      if (id != _undefined) 'id': (id as Input_UuidComparisonExp?),
+      if (name != _undefined) 'name': (name as Input_StringComparisonExp?),
+      if (persons != _undefined) 'persons': (persons as Input_PersonsBoolExp?),
+      if (personsAggregate != _undefined)
+        'personsAggregate':
+            (personsAggregate as Input_PersonsAggregateBoolExp?),
+      if (university != _undefined)
+        'university': (university as Input_UniversitiesBoolExp?),
+      if (universityId != _undefined)
+        'universityId': (universityId as Input_UuidComparisonExp?),
+    }),
+  );
+
+  TRes $_and(
+    Iterable<Input_CollegesBoolExp>? Function(
+      Iterable<CopyWith_Input_CollegesBoolExp<Input_CollegesBoolExp>>?,
+    )
+    _fn,
+  ) => call(
+    $_and: _fn(
+      _instance.$_and?.map((e) => CopyWith_Input_CollegesBoolExp(e, (i) => i)),
+    )?.toList(),
+  );
+
+  CopyWith_Input_CollegesBoolExp<TRes> get $_not {
+    final local$$_not = _instance.$_not;
+    return local$$_not == null
+        ? CopyWith_Input_CollegesBoolExp.stub(_then(_instance))
+        : CopyWith_Input_CollegesBoolExp(local$$_not, (e) => call($_not: e));
+  }
+
+  TRes $_or(
+    Iterable<Input_CollegesBoolExp>? Function(
+      Iterable<CopyWith_Input_CollegesBoolExp<Input_CollegesBoolExp>>?,
+    )
+    _fn,
+  ) => call(
+    $_or: _fn(
+      _instance.$_or?.map((e) => CopyWith_Input_CollegesBoolExp(e, (i) => i)),
+    )?.toList(),
+  );
+
+  CopyWith_Input_UuidComparisonExp<TRes> get id {
+    final local$id = _instance.id;
+    return local$id == null
+        ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_UuidComparisonExp(local$id, (e) => call(id: e));
+  }
+
+  CopyWith_Input_StringComparisonExp<TRes> get name {
+    final local$name = _instance.name;
+    return local$name == null
+        ? CopyWith_Input_StringComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_StringComparisonExp(local$name, (e) => call(name: e));
+  }
+
+  CopyWith_Input_PersonsBoolExp<TRes> get persons {
+    final local$persons = _instance.persons;
+    return local$persons == null
+        ? CopyWith_Input_PersonsBoolExp.stub(_then(_instance))
+        : CopyWith_Input_PersonsBoolExp(local$persons, (e) => call(persons: e));
+  }
+
+  CopyWith_Input_PersonsAggregateBoolExp<TRes> get personsAggregate {
+    final local$personsAggregate = _instance.personsAggregate;
+    return local$personsAggregate == null
+        ? CopyWith_Input_PersonsAggregateBoolExp.stub(_then(_instance))
+        : CopyWith_Input_PersonsAggregateBoolExp(
+            local$personsAggregate,
+            (e) => call(personsAggregate: e),
+          );
+  }
+
+  CopyWith_Input_UniversitiesBoolExp<TRes> get university {
+    final local$university = _instance.university;
+    return local$university == null
+        ? CopyWith_Input_UniversitiesBoolExp.stub(_then(_instance))
+        : CopyWith_Input_UniversitiesBoolExp(
+            local$university,
+            (e) => call(university: e),
+          );
+  }
+
+  CopyWith_Input_UuidComparisonExp<TRes> get universityId {
+    final local$universityId = _instance.universityId;
+    return local$universityId == null
+        ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_UuidComparisonExp(
+            local$universityId,
+            (e) => call(universityId: e),
+          );
+  }
+}
+
+class _CopyWithStubImpl_Input_CollegesBoolExp<TRes>
+    implements CopyWith_Input_CollegesBoolExp<TRes> {
+  _CopyWithStubImpl_Input_CollegesBoolExp(this._res);
+
+  TRes _res;
+
+  call({
+    List<Input_CollegesBoolExp>? $_and,
+    Input_CollegesBoolExp? $_not,
+    List<Input_CollegesBoolExp>? $_or,
+    Input_UuidComparisonExp? id,
+    Input_StringComparisonExp? name,
+    Input_PersonsBoolExp? persons,
+    Input_PersonsAggregateBoolExp? personsAggregate,
+    Input_UniversitiesBoolExp? university,
+    Input_UuidComparisonExp? universityId,
+  }) => _res;
+
+  $_and(_fn) => _res;
+
+  CopyWith_Input_CollegesBoolExp<TRes> get $_not =>
+      CopyWith_Input_CollegesBoolExp.stub(_res);
+
+  $_or(_fn) => _res;
+
+  CopyWith_Input_UuidComparisonExp<TRes> get id =>
+      CopyWith_Input_UuidComparisonExp.stub(_res);
+
+  CopyWith_Input_StringComparisonExp<TRes> get name =>
+      CopyWith_Input_StringComparisonExp.stub(_res);
+
+  CopyWith_Input_PersonsBoolExp<TRes> get persons =>
+      CopyWith_Input_PersonsBoolExp.stub(_res);
+
+  CopyWith_Input_PersonsAggregateBoolExp<TRes> get personsAggregate =>
+      CopyWith_Input_PersonsAggregateBoolExp.stub(_res);
+
+  CopyWith_Input_UniversitiesBoolExp<TRes> get university =>
+      CopyWith_Input_UniversitiesBoolExp.stub(_res);
+
+  CopyWith_Input_UuidComparisonExp<TRes> get universityId =>
+      CopyWith_Input_UuidComparisonExp.stub(_res);
+}
+
+class Input_CollegesInsertInput {
+  factory Input_CollegesInsertInput({
+    String? name,
+    Input_PersonsArrRelInsertInput? persons,
+    Input_UniversitiesObjRelInsertInput? university,
+    UuidValue? universityId,
+  }) => Input_CollegesInsertInput._({
+    if (name != null) r'name': name,
+    if (persons != null) r'persons': persons,
+    if (university != null) r'university': university,
+    if (universityId != null) r'universityId': universityId,
+  });
+
+  Input_CollegesInsertInput._(this._$data);
+
+  factory Input_CollegesInsertInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('name')) {
+      final l$name = data['name'];
+      result$data['name'] = (l$name as String?);
+    }
+    if (data.containsKey('persons')) {
+      final l$persons = data['persons'];
+      result$data['persons'] = l$persons == null
+          ? null
+          : Input_PersonsArrRelInsertInput.fromJson(
+              (l$persons as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('university')) {
+      final l$university = data['university'];
+      result$data['university'] = l$university == null
+          ? null
+          : Input_UniversitiesObjRelInsertInput.fromJson(
+              (l$university as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('universityId')) {
+      final l$universityId = data['universityId'];
+      result$data['universityId'] = l$universityId == null
+          ? null
+          : stringToUuid(l$universityId);
+    }
+    return Input_CollegesInsertInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String? get name => (_$data['name'] as String?);
+
+  Input_PersonsArrRelInsertInput? get persons =>
+      (_$data['persons'] as Input_PersonsArrRelInsertInput?);
+
+  Input_UniversitiesObjRelInsertInput? get university =>
+      (_$data['university'] as Input_UniversitiesObjRelInsertInput?);
+
+  UuidValue? get universityId => (_$data['universityId'] as UuidValue?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('name')) {
+      final l$name = name;
+      result$data['name'] = l$name;
+    }
+    if (_$data.containsKey('persons')) {
+      final l$persons = persons;
+      result$data['persons'] = l$persons?.toJson();
+    }
+    if (_$data.containsKey('university')) {
+      final l$university = university;
+      result$data['university'] = l$university?.toJson();
+    }
+    if (_$data.containsKey('universityId')) {
+      final l$universityId = universityId;
+      result$data['universityId'] = l$universityId == null
+          ? null
+          : uuidToString(l$universityId);
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_CollegesInsertInput<Input_CollegesInsertInput> get copyWith =>
+      CopyWith_Input_CollegesInsertInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_CollegesInsertInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (_$data.containsKey('name') != other._$data.containsKey('name')) {
+      return false;
+    }
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$persons = persons;
+    final lOther$persons = other.persons;
+    if (_$data.containsKey('persons') != other._$data.containsKey('persons')) {
+      return false;
+    }
+    if (l$persons != lOther$persons) {
+      return false;
+    }
+    final l$university = university;
+    final lOther$university = other.university;
+    if (_$data.containsKey('university') !=
+        other._$data.containsKey('university')) {
+      return false;
+    }
+    if (l$university != lOther$university) {
+      return false;
+    }
+    final l$universityId = universityId;
+    final lOther$universityId = other.universityId;
+    if (_$data.containsKey('universityId') !=
+        other._$data.containsKey('universityId')) {
+      return false;
+    }
+    if (l$universityId != lOther$universityId) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$name = name;
+    final l$persons = persons;
+    final l$university = university;
+    final l$universityId = universityId;
+    return Object.hashAll([
+      _$data.containsKey('name') ? l$name : const {},
+      _$data.containsKey('persons') ? l$persons : const {},
+      _$data.containsKey('university') ? l$university : const {},
+      _$data.containsKey('universityId') ? l$universityId : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_CollegesInsertInput<TRes> {
+  factory CopyWith_Input_CollegesInsertInput(
+    Input_CollegesInsertInput instance,
+    TRes Function(Input_CollegesInsertInput) then,
+  ) = _CopyWithImpl_Input_CollegesInsertInput;
+
+  factory CopyWith_Input_CollegesInsertInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_CollegesInsertInput;
+
+  TRes call({
+    String? name,
+    Input_PersonsArrRelInsertInput? persons,
+    Input_UniversitiesObjRelInsertInput? university,
+    UuidValue? universityId,
+  });
+  CopyWith_Input_PersonsArrRelInsertInput<TRes> get persons;
+  CopyWith_Input_UniversitiesObjRelInsertInput<TRes> get university;
+}
+
+class _CopyWithImpl_Input_CollegesInsertInput<TRes>
+    implements CopyWith_Input_CollegesInsertInput<TRes> {
+  _CopyWithImpl_Input_CollegesInsertInput(this._instance, this._then);
+
+  final Input_CollegesInsertInput _instance;
+
+  final TRes Function(Input_CollegesInsertInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? name = _undefined,
+    Object? persons = _undefined,
+    Object? university = _undefined,
+    Object? universityId = _undefined,
+  }) => _then(
+    Input_CollegesInsertInput._({
+      ..._instance._$data,
+      if (name != _undefined) 'name': (name as String?),
+      if (persons != _undefined)
+        'persons': (persons as Input_PersonsArrRelInsertInput?),
+      if (university != _undefined)
+        'university': (university as Input_UniversitiesObjRelInsertInput?),
+      if (universityId != _undefined)
+        'universityId': (universityId as UuidValue?),
+    }),
+  );
+
+  CopyWith_Input_PersonsArrRelInsertInput<TRes> get persons {
+    final local$persons = _instance.persons;
+    return local$persons == null
+        ? CopyWith_Input_PersonsArrRelInsertInput.stub(_then(_instance))
+        : CopyWith_Input_PersonsArrRelInsertInput(
+            local$persons,
+            (e) => call(persons: e),
+          );
+  }
+
+  CopyWith_Input_UniversitiesObjRelInsertInput<TRes> get university {
+    final local$university = _instance.university;
+    return local$university == null
+        ? CopyWith_Input_UniversitiesObjRelInsertInput.stub(_then(_instance))
+        : CopyWith_Input_UniversitiesObjRelInsertInput(
+            local$university,
+            (e) => call(university: e),
+          );
+  }
+}
+
+class _CopyWithStubImpl_Input_CollegesInsertInput<TRes>
+    implements CopyWith_Input_CollegesInsertInput<TRes> {
+  _CopyWithStubImpl_Input_CollegesInsertInput(this._res);
+
+  TRes _res;
+
+  call({
+    String? name,
+    Input_PersonsArrRelInsertInput? persons,
+    Input_UniversitiesObjRelInsertInput? university,
+    UuidValue? universityId,
+  }) => _res;
+
+  CopyWith_Input_PersonsArrRelInsertInput<TRes> get persons =>
+      CopyWith_Input_PersonsArrRelInsertInput.stub(_res);
+
+  CopyWith_Input_UniversitiesObjRelInsertInput<TRes> get university =>
+      CopyWith_Input_UniversitiesObjRelInsertInput.stub(_res);
+}
+
+class Input_CollegesMaxOrderBy {
+  factory Input_CollegesMaxOrderBy({
+    Enum_OrderBy? id,
+    Enum_OrderBy? name,
+    Enum_OrderBy? universityId,
+  }) => Input_CollegesMaxOrderBy._({
+    if (id != null) r'id': id,
+    if (name != null) r'name': name,
+    if (universityId != null) r'universityId': universityId,
+  });
+
+  Input_CollegesMaxOrderBy._(this._$data);
+
+  factory Input_CollegesMaxOrderBy.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('id')) {
+      final l$id = data['id'];
+      result$data['id'] = l$id == null
+          ? null
+          : fromJson_Enum_OrderBy((l$id as String));
+    }
+    if (data.containsKey('name')) {
+      final l$name = data['name'];
+      result$data['name'] = l$name == null
+          ? null
+          : fromJson_Enum_OrderBy((l$name as String));
+    }
+    if (data.containsKey('universityId')) {
+      final l$universityId = data['universityId'];
+      result$data['universityId'] = l$universityId == null
+          ? null
+          : fromJson_Enum_OrderBy((l$universityId as String));
+    }
+    return Input_CollegesMaxOrderBy._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get universityId => (_$data['universityId'] as Enum_OrderBy?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('id')) {
+      final l$id = id;
+      result$data['id'] = l$id == null ? null : toJson_Enum_OrderBy(l$id);
+    }
+    if (_$data.containsKey('name')) {
+      final l$name = name;
+      result$data['name'] = l$name == null ? null : toJson_Enum_OrderBy(l$name);
+    }
+    if (_$data.containsKey('universityId')) {
+      final l$universityId = universityId;
+      result$data['universityId'] = l$universityId == null
+          ? null
+          : toJson_Enum_OrderBy(l$universityId);
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_CollegesMaxOrderBy<Input_CollegesMaxOrderBy> get copyWith =>
+      CopyWith_Input_CollegesMaxOrderBy(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_CollegesMaxOrderBy ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
+      return false;
+    }
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (_$data.containsKey('name') != other._$data.containsKey('name')) {
+      return false;
+    }
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$universityId = universityId;
+    final lOther$universityId = other.universityId;
+    if (_$data.containsKey('universityId') !=
+        other._$data.containsKey('universityId')) {
+      return false;
+    }
+    if (l$universityId != lOther$universityId) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$name = name;
+    final l$universityId = universityId;
+    return Object.hashAll([
+      _$data.containsKey('id') ? l$id : const {},
+      _$data.containsKey('name') ? l$name : const {},
+      _$data.containsKey('universityId') ? l$universityId : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_CollegesMaxOrderBy<TRes> {
+  factory CopyWith_Input_CollegesMaxOrderBy(
+    Input_CollegesMaxOrderBy instance,
+    TRes Function(Input_CollegesMaxOrderBy) then,
+  ) = _CopyWithImpl_Input_CollegesMaxOrderBy;
+
+  factory CopyWith_Input_CollegesMaxOrderBy.stub(TRes res) =
+      _CopyWithStubImpl_Input_CollegesMaxOrderBy;
+
+  TRes call({Enum_OrderBy? id, Enum_OrderBy? name, Enum_OrderBy? universityId});
+}
+
+class _CopyWithImpl_Input_CollegesMaxOrderBy<TRes>
+    implements CopyWith_Input_CollegesMaxOrderBy<TRes> {
+  _CopyWithImpl_Input_CollegesMaxOrderBy(this._instance, this._then);
+
+  final Input_CollegesMaxOrderBy _instance;
+
+  final TRes Function(Input_CollegesMaxOrderBy) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? name = _undefined,
+    Object? universityId = _undefined,
+  }) => _then(
+    Input_CollegesMaxOrderBy._({
+      ..._instance._$data,
+      if (id != _undefined) 'id': (id as Enum_OrderBy?),
+      if (name != _undefined) 'name': (name as Enum_OrderBy?),
+      if (universityId != _undefined)
+        'universityId': (universityId as Enum_OrderBy?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_CollegesMaxOrderBy<TRes>
+    implements CopyWith_Input_CollegesMaxOrderBy<TRes> {
+  _CopyWithStubImpl_Input_CollegesMaxOrderBy(this._res);
+
+  TRes _res;
+
+  call({Enum_OrderBy? id, Enum_OrderBy? name, Enum_OrderBy? universityId}) =>
+      _res;
+}
+
+class Input_CollegesMinOrderBy {
+  factory Input_CollegesMinOrderBy({
+    Enum_OrderBy? id,
+    Enum_OrderBy? name,
+    Enum_OrderBy? universityId,
+  }) => Input_CollegesMinOrderBy._({
+    if (id != null) r'id': id,
+    if (name != null) r'name': name,
+    if (universityId != null) r'universityId': universityId,
+  });
+
+  Input_CollegesMinOrderBy._(this._$data);
+
+  factory Input_CollegesMinOrderBy.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('id')) {
+      final l$id = data['id'];
+      result$data['id'] = l$id == null
+          ? null
+          : fromJson_Enum_OrderBy((l$id as String));
+    }
+    if (data.containsKey('name')) {
+      final l$name = data['name'];
+      result$data['name'] = l$name == null
+          ? null
+          : fromJson_Enum_OrderBy((l$name as String));
+    }
+    if (data.containsKey('universityId')) {
+      final l$universityId = data['universityId'];
+      result$data['universityId'] = l$universityId == null
+          ? null
+          : fromJson_Enum_OrderBy((l$universityId as String));
+    }
+    return Input_CollegesMinOrderBy._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get universityId => (_$data['universityId'] as Enum_OrderBy?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('id')) {
+      final l$id = id;
+      result$data['id'] = l$id == null ? null : toJson_Enum_OrderBy(l$id);
+    }
+    if (_$data.containsKey('name')) {
+      final l$name = name;
+      result$data['name'] = l$name == null ? null : toJson_Enum_OrderBy(l$name);
+    }
+    if (_$data.containsKey('universityId')) {
+      final l$universityId = universityId;
+      result$data['universityId'] = l$universityId == null
+          ? null
+          : toJson_Enum_OrderBy(l$universityId);
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_CollegesMinOrderBy<Input_CollegesMinOrderBy> get copyWith =>
+      CopyWith_Input_CollegesMinOrderBy(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_CollegesMinOrderBy ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
+      return false;
+    }
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (_$data.containsKey('name') != other._$data.containsKey('name')) {
+      return false;
+    }
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$universityId = universityId;
+    final lOther$universityId = other.universityId;
+    if (_$data.containsKey('universityId') !=
+        other._$data.containsKey('universityId')) {
+      return false;
+    }
+    if (l$universityId != lOther$universityId) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$name = name;
+    final l$universityId = universityId;
+    return Object.hashAll([
+      _$data.containsKey('id') ? l$id : const {},
+      _$data.containsKey('name') ? l$name : const {},
+      _$data.containsKey('universityId') ? l$universityId : const {},
+    ]);
+  }
+}
+
 abstract class CopyWith_Input_CollegesMinOrderBy<TRes> {
   factory CopyWith_Input_CollegesMinOrderBy(
     Input_CollegesMinOrderBy instance,
@@ -1244,1288 +2508,6 @@ class Input_CollegesUpdates {
     return Object.hashAll([
       _$data.containsKey('_set') ? l$$_set : const {},
       l$where,
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_CollegesUpdates<TRes> {
-  factory CopyWith_Input_CollegesUpdates(
-    Input_CollegesUpdates instance,
-    TRes Function(Input_CollegesUpdates) then,
-  ) = _CopyWithImpl_Input_CollegesUpdates;
-
-  factory CopyWith_Input_CollegesUpdates.stub(TRes res) =
-      _CopyWithStubImpl_Input_CollegesUpdates;
-
-  TRes call({Input_CollegesSetInput? $_set, Input_CollegesBoolExp? where});
-  CopyWith_Input_CollegesSetInput<TRes> get $_set;
-  CopyWith_Input_CollegesBoolExp<TRes> get where;
-}
-
-class _CopyWithImpl_Input_CollegesUpdates<TRes>
-    implements CopyWith_Input_CollegesUpdates<TRes> {
-  _CopyWithImpl_Input_CollegesUpdates(this._instance, this._then);
-
-  final Input_CollegesUpdates _instance;
-
-  final TRes Function(Input_CollegesUpdates) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({Object? $_set = _undefined, Object? where = _undefined}) => _then(
-    Input_CollegesUpdates._({
-      ..._instance._$data,
-      if ($_set != _undefined) '_set': ($_set as Input_CollegesSetInput?),
-      if (where != _undefined && where != null)
-        'where': (where as Input_CollegesBoolExp),
-    }),
-  );
-
-  CopyWith_Input_CollegesSetInput<TRes> get $_set {
-    final local$$_set = _instance.$_set;
-    return local$$_set == null
-        ? CopyWith_Input_CollegesSetInput.stub(_then(_instance))
-        : CopyWith_Input_CollegesSetInput(local$$_set, (e) => call($_set: e));
-  }
-
-  CopyWith_Input_CollegesBoolExp<TRes> get where {
-    final local$where = _instance.where;
-    return CopyWith_Input_CollegesBoolExp(local$where, (e) => call(where: e));
-  }
-}
-
-class _CopyWithStubImpl_Input_CollegesUpdates<TRes>
-    implements CopyWith_Input_CollegesUpdates<TRes> {
-  _CopyWithStubImpl_Input_CollegesUpdates(this._res);
-
-  TRes _res;
-
-  call({Input_CollegesSetInput? $_set, Input_CollegesBoolExp? where}) => _res;
-
-  CopyWith_Input_CollegesSetInput<TRes> get $_set =>
-      CopyWith_Input_CollegesSetInput.stub(_res);
-
-  CopyWith_Input_CollegesBoolExp<TRes> get where =>
-      CopyWith_Input_CollegesBoolExp.stub(_res);
-}
-
-class Input_DateComparisonExp {
-  factory Input_DateComparisonExp({
-    DateTime? $_eq,
-    DateTime? $_gt,
-    DateTime? $_gte,
-    List<DateTime>? $_in,
-    bool? $_isNull,
-    DateTime? $_lt,
-    DateTime? $_lte,
-    DateTime? $_neq,
-    List<DateTime>? $_nin,
-  }) => Input_DateComparisonExp._({
-    if ($_eq != null) r'_eq': $_eq,
-    if ($_gt != null) r'_gt': $_gt,
-    if ($_gte != null) r'_gte': $_gte,
-    if ($_in != null) r'_in': $_in,
-    if ($_isNull != null) r'_isNull': $_isNull,
-    if ($_lt != null) r'_lt': $_lt,
-    if ($_lte != null) r'_lte': $_lte,
-    if ($_neq != null) r'_neq': $_neq,
-    if ($_nin != null) r'_nin': $_nin,
-  });
-
-  Input_DateComparisonExp._(this._$data);
-
-  factory Input_DateComparisonExp.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('_eq')) {
-      final l$$_eq = data['_eq'];
-      result$data['_eq'] = l$$_eq == null ? null : dateFromString(l$$_eq);
-    }
-    if (data.containsKey('_gt')) {
-      final l$$_gt = data['_gt'];
-      result$data['_gt'] = l$$_gt == null ? null : dateFromString(l$$_gt);
-    }
-    if (data.containsKey('_gte')) {
-      final l$$_gte = data['_gte'];
-      result$data['_gte'] = l$$_gte == null ? null : dateFromString(l$$_gte);
-    }
-    if (data.containsKey('_in')) {
-      final l$$_in = data['_in'];
-      result$data['_in'] = (l$$_in as List<dynamic>?)
-          ?.map((e) => dateFromString(e))
-          .toList();
-    }
-    if (data.containsKey('_isNull')) {
-      final l$$_isNull = data['_isNull'];
-      result$data['_isNull'] = (l$$_isNull as bool?);
-    }
-    if (data.containsKey('_lt')) {
-      final l$$_lt = data['_lt'];
-      result$data['_lt'] = l$$_lt == null ? null : dateFromString(l$$_lt);
-    }
-    if (data.containsKey('_lte')) {
-      final l$$_lte = data['_lte'];
-      result$data['_lte'] = l$$_lte == null ? null : dateFromString(l$$_lte);
-    }
-    if (data.containsKey('_neq')) {
-      final l$$_neq = data['_neq'];
-      result$data['_neq'] = l$$_neq == null ? null : dateFromString(l$$_neq);
-    }
-    if (data.containsKey('_nin')) {
-      final l$$_nin = data['_nin'];
-      result$data['_nin'] = (l$$_nin as List<dynamic>?)
-          ?.map((e) => dateFromString(e))
-          .toList();
-    }
-    return Input_DateComparisonExp._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  DateTime? get $_eq => (_$data['_eq'] as DateTime?);
-
-  DateTime? get $_gt => (_$data['_gt'] as DateTime?);
-
-  DateTime? get $_gte => (_$data['_gte'] as DateTime?);
-
-  List<DateTime>? get $_in => (_$data['_in'] as List<DateTime>?);
-
-  bool? get $_isNull => (_$data['_isNull'] as bool?);
-
-  DateTime? get $_lt => (_$data['_lt'] as DateTime?);
-
-  DateTime? get $_lte => (_$data['_lte'] as DateTime?);
-
-  DateTime? get $_neq => (_$data['_neq'] as DateTime?);
-
-  List<DateTime>? get $_nin => (_$data['_nin'] as List<DateTime>?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('_eq')) {
-      final l$$_eq = $_eq;
-      result$data['_eq'] = l$$_eq == null ? null : dateToString(l$$_eq);
-    }
-    if (_$data.containsKey('_gt')) {
-      final l$$_gt = $_gt;
-      result$data['_gt'] = l$$_gt == null ? null : dateToString(l$$_gt);
-    }
-    if (_$data.containsKey('_gte')) {
-      final l$$_gte = $_gte;
-      result$data['_gte'] = l$$_gte == null ? null : dateToString(l$$_gte);
-    }
-    if (_$data.containsKey('_in')) {
-      final l$$_in = $_in;
-      result$data['_in'] = l$$_in?.map((e) => dateToString(e)).toList();
-    }
-    if (_$data.containsKey('_isNull')) {
-      final l$$_isNull = $_isNull;
-      result$data['_isNull'] = l$$_isNull;
-    }
-    if (_$data.containsKey('_lt')) {
-      final l$$_lt = $_lt;
-      result$data['_lt'] = l$$_lt == null ? null : dateToString(l$$_lt);
-    }
-    if (_$data.containsKey('_lte')) {
-      final l$$_lte = $_lte;
-      result$data['_lte'] = l$$_lte == null ? null : dateToString(l$$_lte);
-    }
-    if (_$data.containsKey('_neq')) {
-      final l$$_neq = $_neq;
-      result$data['_neq'] = l$$_neq == null ? null : dateToString(l$$_neq);
-    }
-    if (_$data.containsKey('_nin')) {
-      final l$$_nin = $_nin;
-      result$data['_nin'] = l$$_nin?.map((e) => dateToString(e)).toList();
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_DateComparisonExp<Input_DateComparisonExp> get copyWith =>
-      CopyWith_Input_DateComparisonExp(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_DateComparisonExp || runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$$_eq = $_eq;
-    final lOther$$_eq = other.$_eq;
-    if (_$data.containsKey('_eq') != other._$data.containsKey('_eq')) {
-      return false;
-    }
-    if (l$$_eq != lOther$$_eq) {
-      return false;
-    }
-    final l$$_gt = $_gt;
-    final lOther$$_gt = other.$_gt;
-    if (_$data.containsKey('_gt') != other._$data.containsKey('_gt')) {
-      return false;
-    }
-    if (l$$_gt != lOther$$_gt) {
-      return false;
-    }
-    final l$$_gte = $_gte;
-    final lOther$$_gte = other.$_gte;
-    if (_$data.containsKey('_gte') != other._$data.containsKey('_gte')) {
-      return false;
-    }
-    if (l$$_gte != lOther$$_gte) {
-      return false;
-    }
-    final l$$_in = $_in;
-    final lOther$$_in = other.$_in;
-    if (_$data.containsKey('_in') != other._$data.containsKey('_in')) {
-      return false;
-    }
-    if (l$$_in != null && lOther$$_in != null) {
-      if (l$$_in.length != lOther$$_in.length) {
-        return false;
-      }
-      for (int i = 0; i < l$$_in.length; i++) {
-        final l$$_in$entry = l$$_in[i];
-        final lOther$$_in$entry = lOther$$_in[i];
-        if (l$$_in$entry != lOther$$_in$entry) {
-          return false;
-        }
-      }
-    } else if (l$$_in != lOther$$_in) {
-      return false;
-    }
-    final l$$_isNull = $_isNull;
-    final lOther$$_isNull = other.$_isNull;
-    if (_$data.containsKey('_isNull') != other._$data.containsKey('_isNull')) {
-      return false;
-    }
-    if (l$$_isNull != lOther$$_isNull) {
-      return false;
-    }
-    final l$$_lt = $_lt;
-    final lOther$$_lt = other.$_lt;
-    if (_$data.containsKey('_lt') != other._$data.containsKey('_lt')) {
-      return false;
-    }
-    if (l$$_lt != lOther$$_lt) {
-      return false;
-    }
-    final l$$_lte = $_lte;
-    final lOther$$_lte = other.$_lte;
-    if (_$data.containsKey('_lte') != other._$data.containsKey('_lte')) {
-      return false;
-    }
-    if (l$$_lte != lOther$$_lte) {
-      return false;
-    }
-    final l$$_neq = $_neq;
-    final lOther$$_neq = other.$_neq;
-    if (_$data.containsKey('_neq') != other._$data.containsKey('_neq')) {
-      return false;
-    }
-    if (l$$_neq != lOther$$_neq) {
-      return false;
-    }
-    final l$$_nin = $_nin;
-    final lOther$$_nin = other.$_nin;
-    if (_$data.containsKey('_nin') != other._$data.containsKey('_nin')) {
-      return false;
-    }
-    if (l$$_nin != null && lOther$$_nin != null) {
-      if (l$$_nin.length != lOther$$_nin.length) {
-        return false;
-      }
-      for (int i = 0; i < l$$_nin.length; i++) {
-        final l$$_nin$entry = l$$_nin[i];
-        final lOther$$_nin$entry = lOther$$_nin[i];
-        if (l$$_nin$entry != lOther$$_nin$entry) {
-          return false;
-        }
-      }
-    } else if (l$$_nin != lOther$$_nin) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$$_eq = $_eq;
-    final l$$_gt = $_gt;
-    final l$$_gte = $_gte;
-    final l$$_in = $_in;
-    final l$$_isNull = $_isNull;
-    final l$$_lt = $_lt;
-    final l$$_lte = $_lte;
-    final l$$_neq = $_neq;
-    final l$$_nin = $_nin;
-    return Object.hashAll([
-      _$data.containsKey('_eq') ? l$$_eq : const {},
-      _$data.containsKey('_gt') ? l$$_gt : const {},
-      _$data.containsKey('_gte') ? l$$_gte : const {},
-      _$data.containsKey('_in')
-          ? l$$_in == null
-                ? null
-                : Object.hashAll(l$$_in.map((v) => v))
-          : const {},
-      _$data.containsKey('_isNull') ? l$$_isNull : const {},
-      _$data.containsKey('_lt') ? l$$_lt : const {},
-      _$data.containsKey('_lte') ? l$$_lte : const {},
-      _$data.containsKey('_neq') ? l$$_neq : const {},
-      _$data.containsKey('_nin')
-          ? l$$_nin == null
-                ? null
-                : Object.hashAll(l$$_nin.map((v) => v))
-          : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_DateComparisonExp<TRes> {
-  factory CopyWith_Input_DateComparisonExp(
-    Input_DateComparisonExp instance,
-    TRes Function(Input_DateComparisonExp) then,
-  ) = _CopyWithImpl_Input_DateComparisonExp;
-
-  factory CopyWith_Input_DateComparisonExp.stub(TRes res) =
-      _CopyWithStubImpl_Input_DateComparisonExp;
-
-  TRes call({
-    DateTime? $_eq,
-    DateTime? $_gt,
-    DateTime? $_gte,
-    List<DateTime>? $_in,
-    bool? $_isNull,
-    DateTime? $_lt,
-    DateTime? $_lte,
-    DateTime? $_neq,
-    List<DateTime>? $_nin,
-  });
-}
-
-class _CopyWithImpl_Input_DateComparisonExp<TRes>
-    implements CopyWith_Input_DateComparisonExp<TRes> {
-  _CopyWithImpl_Input_DateComparisonExp(this._instance, this._then);
-
-  final Input_DateComparisonExp _instance;
-
-  final TRes Function(Input_DateComparisonExp) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? $_eq = _undefined,
-    Object? $_gt = _undefined,
-    Object? $_gte = _undefined,
-    Object? $_in = _undefined,
-    Object? $_isNull = _undefined,
-    Object? $_lt = _undefined,
-    Object? $_lte = _undefined,
-    Object? $_neq = _undefined,
-    Object? $_nin = _undefined,
-  }) => _then(
-    Input_DateComparisonExp._({
-      ..._instance._$data,
-      if ($_eq != _undefined) '_eq': ($_eq as DateTime?),
-      if ($_gt != _undefined) '_gt': ($_gt as DateTime?),
-      if ($_gte != _undefined) '_gte': ($_gte as DateTime?),
-      if ($_in != _undefined) '_in': ($_in as List<DateTime>?),
-      if ($_isNull != _undefined) '_isNull': ($_isNull as bool?),
-      if ($_lt != _undefined) '_lt': ($_lt as DateTime?),
-      if ($_lte != _undefined) '_lte': ($_lte as DateTime?),
-      if ($_neq != _undefined) '_neq': ($_neq as DateTime?),
-      if ($_nin != _undefined) '_nin': ($_nin as List<DateTime>?),
-    }),
-  );
-}
-
-class _CopyWithStubImpl_Input_DateComparisonExp<TRes>
-    implements CopyWith_Input_DateComparisonExp<TRes> {
-  _CopyWithStubImpl_Input_DateComparisonExp(this._res);
-
-  TRes _res;
-
-  call({
-    DateTime? $_eq,
-    DateTime? $_gt,
-    DateTime? $_gte,
-    List<DateTime>? $_in,
-    bool? $_isNull,
-    DateTime? $_lt,
-    DateTime? $_lte,
-    DateTime? $_neq,
-    List<DateTime>? $_nin,
-  }) => _res;
-}
-
-class Input_DaterangeComparisonExp {
-  factory Input_DaterangeComparisonExp({
-    DateTimeRange? $_eq,
-    DateTimeRange? $_gt,
-    DateTimeRange? $_gte,
-    List<DateTimeRange>? $_in,
-    bool? $_isNull,
-    DateTimeRange? $_lt,
-    DateTimeRange? $_lte,
-    DateTimeRange? $_neq,
-    List<DateTimeRange>? $_nin,
-  }) => Input_DaterangeComparisonExp._({
-    if ($_eq != null) r'_eq': $_eq,
-    if ($_gt != null) r'_gt': $_gt,
-    if ($_gte != null) r'_gte': $_gte,
-    if ($_in != null) r'_in': $_in,
-    if ($_isNull != null) r'_isNull': $_isNull,
-    if ($_lt != null) r'_lt': $_lt,
-    if ($_lte != null) r'_lte': $_lte,
-    if ($_neq != null) r'_neq': $_neq,
-    if ($_nin != null) r'_nin': $_nin,
-  });
-
-  Input_DaterangeComparisonExp._(this._$data);
-
-  factory Input_DaterangeComparisonExp.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('_eq')) {
-      final l$$_eq = data['_eq'];
-      result$data['_eq'] = l$$_eq == null ? null : dateRangeFromString(l$$_eq);
-    }
-    if (data.containsKey('_gt')) {
-      final l$$_gt = data['_gt'];
-      result$data['_gt'] = l$$_gt == null ? null : dateRangeFromString(l$$_gt);
-    }
-    if (data.containsKey('_gte')) {
-      final l$$_gte = data['_gte'];
-      result$data['_gte'] = l$$_gte == null
-          ? null
-          : dateRangeFromString(l$$_gte);
-    }
-    if (data.containsKey('_in')) {
-      final l$$_in = data['_in'];
-      result$data['_in'] = (l$$_in as List<dynamic>?)
-          ?.map((e) => dateRangeFromString(e))
-          .toList();
-    }
-    if (data.containsKey('_isNull')) {
-      final l$$_isNull = data['_isNull'];
-      result$data['_isNull'] = (l$$_isNull as bool?);
-    }
-    if (data.containsKey('_lt')) {
-      final l$$_lt = data['_lt'];
-      result$data['_lt'] = l$$_lt == null ? null : dateRangeFromString(l$$_lt);
-    }
-    if (data.containsKey('_lte')) {
-      final l$$_lte = data['_lte'];
-      result$data['_lte'] = l$$_lte == null
-          ? null
-          : dateRangeFromString(l$$_lte);
-    }
-    if (data.containsKey('_neq')) {
-      final l$$_neq = data['_neq'];
-      result$data['_neq'] = l$$_neq == null
-          ? null
-          : dateRangeFromString(l$$_neq);
-    }
-    if (data.containsKey('_nin')) {
-      final l$$_nin = data['_nin'];
-      result$data['_nin'] = (l$$_nin as List<dynamic>?)
-          ?.map((e) => dateRangeFromString(e))
-          .toList();
-    }
-    return Input_DaterangeComparisonExp._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  DateTimeRange? get $_eq => (_$data['_eq'] as DateTimeRange?);
-
-  DateTimeRange? get $_gt => (_$data['_gt'] as DateTimeRange?);
-
-  DateTimeRange? get $_gte => (_$data['_gte'] as DateTimeRange?);
-
-  List<DateTimeRange>? get $_in => (_$data['_in'] as List<DateTimeRange>?);
-
-  bool? get $_isNull => (_$data['_isNull'] as bool?);
-
-  DateTimeRange? get $_lt => (_$data['_lt'] as DateTimeRange?);
-
-  DateTimeRange? get $_lte => (_$data['_lte'] as DateTimeRange?);
-
-  DateTimeRange? get $_neq => (_$data['_neq'] as DateTimeRange?);
-
-  List<DateTimeRange>? get $_nin => (_$data['_nin'] as List<DateTimeRange>?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('_eq')) {
-      final l$$_eq = $_eq;
-      result$data['_eq'] = l$$_eq == null ? null : dateRangeToString(l$$_eq);
-    }
-    if (_$data.containsKey('_gt')) {
-      final l$$_gt = $_gt;
-      result$data['_gt'] = l$$_gt == null ? null : dateRangeToString(l$$_gt);
-    }
-    if (_$data.containsKey('_gte')) {
-      final l$$_gte = $_gte;
-      result$data['_gte'] = l$$_gte == null ? null : dateRangeToString(l$$_gte);
-    }
-    if (_$data.containsKey('_in')) {
-      final l$$_in = $_in;
-      result$data['_in'] = l$$_in?.map((e) => dateRangeToString(e)).toList();
-    }
-    if (_$data.containsKey('_isNull')) {
-      final l$$_isNull = $_isNull;
-      result$data['_isNull'] = l$$_isNull;
-    }
-    if (_$data.containsKey('_lt')) {
-      final l$$_lt = $_lt;
-      result$data['_lt'] = l$$_lt == null ? null : dateRangeToString(l$$_lt);
-    }
-    if (_$data.containsKey('_lte')) {
-      final l$$_lte = $_lte;
-      result$data['_lte'] = l$$_lte == null ? null : dateRangeToString(l$$_lte);
-    }
-    if (_$data.containsKey('_neq')) {
-      final l$$_neq = $_neq;
-      result$data['_neq'] = l$$_neq == null ? null : dateRangeToString(l$$_neq);
-    }
-    if (_$data.containsKey('_nin')) {
-      final l$$_nin = $_nin;
-      result$data['_nin'] = l$$_nin?.map((e) => dateRangeToString(e)).toList();
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_DaterangeComparisonExp<Input_DaterangeComparisonExp>
-  get copyWith => CopyWith_Input_DaterangeComparisonExp(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_DaterangeComparisonExp ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$$_eq = $_eq;
-    final lOther$$_eq = other.$_eq;
-    if (_$data.containsKey('_eq') != other._$data.containsKey('_eq')) {
-      return false;
-    }
-    if (l$$_eq != lOther$$_eq) {
-      return false;
-    }
-    final l$$_gt = $_gt;
-    final lOther$$_gt = other.$_gt;
-    if (_$data.containsKey('_gt') != other._$data.containsKey('_gt')) {
-      return false;
-    }
-    if (l$$_gt != lOther$$_gt) {
-      return false;
-    }
-    final l$$_gte = $_gte;
-    final lOther$$_gte = other.$_gte;
-    if (_$data.containsKey('_gte') != other._$data.containsKey('_gte')) {
-      return false;
-    }
-    if (l$$_gte != lOther$$_gte) {
-      return false;
-    }
-    final l$$_in = $_in;
-    final lOther$$_in = other.$_in;
-    if (_$data.containsKey('_in') != other._$data.containsKey('_in')) {
-      return false;
-    }
-    if (l$$_in != null && lOther$$_in != null) {
-      if (l$$_in.length != lOther$$_in.length) {
-        return false;
-      }
-      for (int i = 0; i < l$$_in.length; i++) {
-        final l$$_in$entry = l$$_in[i];
-        final lOther$$_in$entry = lOther$$_in[i];
-        if (l$$_in$entry != lOther$$_in$entry) {
-          return false;
-        }
-      }
-    } else if (l$$_in != lOther$$_in) {
-      return false;
-    }
-    final l$$_isNull = $_isNull;
-    final lOther$$_isNull = other.$_isNull;
-    if (_$data.containsKey('_isNull') != other._$data.containsKey('_isNull')) {
-      return false;
-    }
-    if (l$$_isNull != lOther$$_isNull) {
-      return false;
-    }
-    final l$$_lt = $_lt;
-    final lOther$$_lt = other.$_lt;
-    if (_$data.containsKey('_lt') != other._$data.containsKey('_lt')) {
-      return false;
-    }
-    if (l$$_lt != lOther$$_lt) {
-      return false;
-    }
-    final l$$_lte = $_lte;
-    final lOther$$_lte = other.$_lte;
-    if (_$data.containsKey('_lte') != other._$data.containsKey('_lte')) {
-      return false;
-    }
-    if (l$$_lte != lOther$$_lte) {
-      return false;
-    }
-    final l$$_neq = $_neq;
-    final lOther$$_neq = other.$_neq;
-    if (_$data.containsKey('_neq') != other._$data.containsKey('_neq')) {
-      return false;
-    }
-    if (l$$_neq != lOther$$_neq) {
-      return false;
-    }
-    final l$$_nin = $_nin;
-    final lOther$$_nin = other.$_nin;
-    if (_$data.containsKey('_nin') != other._$data.containsKey('_nin')) {
-      return false;
-    }
-    if (l$$_nin != null && lOther$$_nin != null) {
-      if (l$$_nin.length != lOther$$_nin.length) {
-        return false;
-      }
-      for (int i = 0; i < l$$_nin.length; i++) {
-        final l$$_nin$entry = l$$_nin[i];
-        final lOther$$_nin$entry = lOther$$_nin[i];
-        if (l$$_nin$entry != lOther$$_nin$entry) {
-          return false;
-        }
-      }
-    } else if (l$$_nin != lOther$$_nin) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$$_eq = $_eq;
-    final l$$_gt = $_gt;
-    final l$$_gte = $_gte;
-    final l$$_in = $_in;
-    final l$$_isNull = $_isNull;
-    final l$$_lt = $_lt;
-    final l$$_lte = $_lte;
-    final l$$_neq = $_neq;
-    final l$$_nin = $_nin;
-    return Object.hashAll([
-      _$data.containsKey('_eq') ? l$$_eq : const {},
-      _$data.containsKey('_gt') ? l$$_gt : const {},
-      _$data.containsKey('_gte') ? l$$_gte : const {},
-      _$data.containsKey('_in')
-          ? l$$_in == null
-                ? null
-                : Object.hashAll(l$$_in.map((v) => v))
-          : const {},
-      _$data.containsKey('_isNull') ? l$$_isNull : const {},
-      _$data.containsKey('_lt') ? l$$_lt : const {},
-      _$data.containsKey('_lte') ? l$$_lte : const {},
-      _$data.containsKey('_neq') ? l$$_neq : const {},
-      _$data.containsKey('_nin')
-          ? l$$_nin == null
-                ? null
-                : Object.hashAll(l$$_nin.map((v) => v))
-          : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_DaterangeComparisonExp<TRes> {
-  factory CopyWith_Input_DaterangeComparisonExp(
-    Input_DaterangeComparisonExp instance,
-    TRes Function(Input_DaterangeComparisonExp) then,
-  ) = _CopyWithImpl_Input_DaterangeComparisonExp;
-
-  factory CopyWith_Input_DaterangeComparisonExp.stub(TRes res) =
-      _CopyWithStubImpl_Input_DaterangeComparisonExp;
-
-  TRes call({
-    DateTimeRange? $_eq,
-    DateTimeRange? $_gt,
-    DateTimeRange? $_gte,
-    List<DateTimeRange>? $_in,
-    bool? $_isNull,
-    DateTimeRange? $_lt,
-    DateTimeRange? $_lte,
-    DateTimeRange? $_neq,
-    List<DateTimeRange>? $_nin,
-  });
-}
-
-class _CopyWithImpl_Input_DaterangeComparisonExp<TRes>
-    implements CopyWith_Input_DaterangeComparisonExp<TRes> {
-  _CopyWithImpl_Input_DaterangeComparisonExp(this._instance, this._then);
-
-  final Input_DaterangeComparisonExp _instance;
-
-  final TRes Function(Input_DaterangeComparisonExp) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? $_eq = _undefined,
-    Object? $_gt = _undefined,
-    Object? $_gte = _undefined,
-    Object? $_in = _undefined,
-    Object? $_isNull = _undefined,
-    Object? $_lt = _undefined,
-    Object? $_lte = _undefined,
-    Object? $_neq = _undefined,
-    Object? $_nin = _undefined,
-  }) => _then(
-    Input_DaterangeComparisonExp._({
-      ..._instance._$data,
-      if ($_eq != _undefined) '_eq': ($_eq as DateTimeRange?),
-      if ($_gt != _undefined) '_gt': ($_gt as DateTimeRange?),
-      if ($_gte != _undefined) '_gte': ($_gte as DateTimeRange?),
-      if ($_in != _undefined) '_in': ($_in as List<DateTimeRange>?),
-      if ($_isNull != _undefined) '_isNull': ($_isNull as bool?),
-      if ($_lt != _undefined) '_lt': ($_lt as DateTimeRange?),
-      if ($_lte != _undefined) '_lte': ($_lte as DateTimeRange?),
-      if ($_neq != _undefined) '_neq': ($_neq as DateTimeRange?),
-      if ($_nin != _undefined) '_nin': ($_nin as List<DateTimeRange>?),
-    }),
-  );
-}
-
-class _CopyWithStubImpl_Input_DaterangeComparisonExp<TRes>
-    implements CopyWith_Input_DaterangeComparisonExp<TRes> {
-  _CopyWithStubImpl_Input_DaterangeComparisonExp(this._res);
-
-  TRes _res;
-
-  call({
-    DateTimeRange? $_eq,
-    DateTimeRange? $_gt,
-    DateTimeRange? $_gte,
-    List<DateTimeRange>? $_in,
-    bool? $_isNull,
-    DateTimeRange? $_lt,
-    DateTimeRange? $_lte,
-    DateTimeRange? $_neq,
-    List<DateTimeRange>? $_nin,
-  }) => _res;
-}
-
-class Input_DistrictsBoolExp {
-  factory Input_DistrictsBoolExp({
-    List<Input_DistrictsBoolExp>? $_and,
-    Input_DistrictsBoolExp? $_not,
-    List<Input_DistrictsBoolExp>? $_or,
-    Input_UuidComparisonExp? id,
-    Input_StringComparisonExp? name,
-  }) => Input_DistrictsBoolExp._({
-    if ($_and != null) r'_and': $_and,
-    if ($_not != null) r'_not': $_not,
-    if ($_or != null) r'_or': $_or,
-    if (id != null) r'id': id,
-    if (name != null) r'name': name,
-  });
-
-  Input_DistrictsBoolExp._(this._$data);
-
-  factory Input_DistrictsBoolExp.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('_and')) {
-      final l$$_and = data['_and'];
-      result$data['_and'] = (l$$_and as List<dynamic>?)
-          ?.map(
-            (e) => Input_DistrictsBoolExp.fromJson((e as Map<String, dynamic>)),
-          )
-          .toList();
-    }
-    if (data.containsKey('_not')) {
-      final l$$_not = data['_not'];
-      result$data['_not'] = l$$_not == null
-          ? null
-          : Input_DistrictsBoolExp.fromJson((l$$_not as Map<String, dynamic>));
-    }
-    if (data.containsKey('_or')) {
-      final l$$_or = data['_or'];
-      result$data['_or'] = (l$$_or as List<dynamic>?)
-          ?.map(
-            (e) => Input_DistrictsBoolExp.fromJson((e as Map<String, dynamic>)),
-          )
-          .toList();
-    }
-    if (data.containsKey('id')) {
-      final l$id = data['id'];
-      result$data['id'] = l$id == null
-          ? null
-          : Input_UuidComparisonExp.fromJson((l$id as Map<String, dynamic>));
-    }
-    if (data.containsKey('name')) {
-      final l$name = data['name'];
-      result$data['name'] = l$name == null
-          ? null
-          : Input_StringComparisonExp.fromJson(
-              (l$name as Map<String, dynamic>),
-            );
-    }
-    return Input_DistrictsBoolExp._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  List<Input_DistrictsBoolExp>? get $_and =>
-      (_$data['_and'] as List<Input_DistrictsBoolExp>?);
-
-  Input_DistrictsBoolExp? get $_not =>
-      (_$data['_not'] as Input_DistrictsBoolExp?);
-
-  List<Input_DistrictsBoolExp>? get $_or =>
-      (_$data['_or'] as List<Input_DistrictsBoolExp>?);
-
-  Input_UuidComparisonExp? get id => (_$data['id'] as Input_UuidComparisonExp?);
-
-  Input_StringComparisonExp? get name =>
-      (_$data['name'] as Input_StringComparisonExp?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('_and')) {
-      final l$$_and = $_and;
-      result$data['_and'] = l$$_and?.map((e) => e.toJson()).toList();
-    }
-    if (_$data.containsKey('_not')) {
-      final l$$_not = $_not;
-      result$data['_not'] = l$$_not?.toJson();
-    }
-    if (_$data.containsKey('_or')) {
-      final l$$_or = $_or;
-      result$data['_or'] = l$$_or?.map((e) => e.toJson()).toList();
-    }
-    if (_$data.containsKey('id')) {
-      final l$id = id;
-      result$data['id'] = l$id?.toJson();
-    }
-    if (_$data.containsKey('name')) {
-      final l$name = name;
-      result$data['name'] = l$name?.toJson();
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_DistrictsBoolExp<Input_DistrictsBoolExp> get copyWith =>
-      CopyWith_Input_DistrictsBoolExp(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_DistrictsBoolExp || runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$$_and = $_and;
-    final lOther$$_and = other.$_and;
-    if (_$data.containsKey('_and') != other._$data.containsKey('_and')) {
-      return false;
-    }
-    if (l$$_and != null && lOther$$_and != null) {
-      if (l$$_and.length != lOther$$_and.length) {
-        return false;
-      }
-      for (int i = 0; i < l$$_and.length; i++) {
-        final l$$_and$entry = l$$_and[i];
-        final lOther$$_and$entry = lOther$$_and[i];
-        if (l$$_and$entry != lOther$$_and$entry) {
-          return false;
-        }
-      }
-    } else if (l$$_and != lOther$$_and) {
-      return false;
-    }
-    final l$$_not = $_not;
-    final lOther$$_not = other.$_not;
-    if (_$data.containsKey('_not') != other._$data.containsKey('_not')) {
-      return false;
-    }
-    if (l$$_not != lOther$$_not) {
-      return false;
-    }
-    final l$$_or = $_or;
-    final lOther$$_or = other.$_or;
-    if (_$data.containsKey('_or') != other._$data.containsKey('_or')) {
-      return false;
-    }
-    if (l$$_or != null && lOther$$_or != null) {
-      if (l$$_or.length != lOther$$_or.length) {
-        return false;
-      }
-      for (int i = 0; i < l$$_or.length; i++) {
-        final l$$_or$entry = l$$_or[i];
-        final lOther$$_or$entry = lOther$$_or[i];
-        if (l$$_or$entry != lOther$$_or$entry) {
-          return false;
-        }
-      }
-    } else if (l$$_or != lOther$$_or) {
-      return false;
-    }
-    final l$id = id;
-    final lOther$id = other.id;
-    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
-      return false;
-    }
-    if (l$id != lOther$id) {
-      return false;
-    }
-    final l$name = name;
-    final lOther$name = other.name;
-    if (_$data.containsKey('name') != other._$data.containsKey('name')) {
-      return false;
-    }
-    if (l$name != lOther$name) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$$_and = $_and;
-    final l$$_not = $_not;
-    final l$$_or = $_or;
-    final l$id = id;
-    final l$name = name;
-    return Object.hashAll([
-      _$data.containsKey('_and')
-          ? l$$_and == null
-                ? null
-                : Object.hashAll(l$$_and.map((v) => v))
-          : const {},
-      _$data.containsKey('_not') ? l$$_not : const {},
-      _$data.containsKey('_or')
-          ? l$$_or == null
-                ? null
-                : Object.hashAll(l$$_or.map((v) => v))
-          : const {},
-      _$data.containsKey('id') ? l$id : const {},
-      _$data.containsKey('name') ? l$name : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_DistrictsBoolExp<TRes> {
-  factory CopyWith_Input_DistrictsBoolExp(
-    Input_DistrictsBoolExp instance,
-    TRes Function(Input_DistrictsBoolExp) then,
-  ) = _CopyWithImpl_Input_DistrictsBoolExp;
-
-  factory CopyWith_Input_DistrictsBoolExp.stub(TRes res) =
-      _CopyWithStubImpl_Input_DistrictsBoolExp;
-
-  TRes call({
-    List<Input_DistrictsBoolExp>? $_and,
-    Input_DistrictsBoolExp? $_not,
-    List<Input_DistrictsBoolExp>? $_or,
-    Input_UuidComparisonExp? id,
-    Input_StringComparisonExp? name,
-  });
-  TRes $_and(
-    Iterable<Input_DistrictsBoolExp>? Function(
-      Iterable<CopyWith_Input_DistrictsBoolExp<Input_DistrictsBoolExp>>?,
-    )
-    _fn,
-  );
-  CopyWith_Input_DistrictsBoolExp<TRes> get $_not;
-  TRes $_or(
-    Iterable<Input_DistrictsBoolExp>? Function(
-      Iterable<CopyWith_Input_DistrictsBoolExp<Input_DistrictsBoolExp>>?,
-    )
-    _fn,
-  );
-  CopyWith_Input_UuidComparisonExp<TRes> get id;
-  CopyWith_Input_StringComparisonExp<TRes> get name;
-}
-
-class _CopyWithImpl_Input_DistrictsBoolExp<TRes>
-    implements CopyWith_Input_DistrictsBoolExp<TRes> {
-  _CopyWithImpl_Input_DistrictsBoolExp(this._instance, this._then);
-
-  final Input_DistrictsBoolExp _instance;
-
-  final TRes Function(Input_DistrictsBoolExp) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? $_and = _undefined,
-    Object? $_not = _undefined,
-    Object? $_or = _undefined,
-    Object? id = _undefined,
-    Object? name = _undefined,
-  }) => _then(
-    Input_DistrictsBoolExp._({
-      ..._instance._$data,
-      if ($_and != _undefined) '_and': ($_and as List<Input_DistrictsBoolExp>?),
-      if ($_not != _undefined) '_not': ($_not as Input_DistrictsBoolExp?),
-      if ($_or != _undefined) '_or': ($_or as List<Input_DistrictsBoolExp>?),
-      if (id != _undefined) 'id': (id as Input_UuidComparisonExp?),
-      if (name != _undefined) 'name': (name as Input_StringComparisonExp?),
-    }),
-  );
-
-  TRes $_and(
-    Iterable<Input_DistrictsBoolExp>? Function(
-      Iterable<CopyWith_Input_DistrictsBoolExp<Input_DistrictsBoolExp>>?,
-    )
-    _fn,
-  ) => call(
-    $_and: _fn(
-      _instance.$_and?.map((e) => CopyWith_Input_DistrictsBoolExp(e, (i) => i)),
-    )?.toList(),
-  );
-
-  CopyWith_Input_DistrictsBoolExp<TRes> get $_not {
-    final local$$_not = _instance.$_not;
-    return local$$_not == null
-        ? CopyWith_Input_DistrictsBoolExp.stub(_then(_instance))
-        : CopyWith_Input_DistrictsBoolExp(local$$_not, (e) => call($_not: e));
-  }
-
-  TRes $_or(
-    Iterable<Input_DistrictsBoolExp>? Function(
-      Iterable<CopyWith_Input_DistrictsBoolExp<Input_DistrictsBoolExp>>?,
-    )
-    _fn,
-  ) => call(
-    $_or: _fn(
-      _instance.$_or?.map((e) => CopyWith_Input_DistrictsBoolExp(e, (i) => i)),
-    )?.toList(),
-  );
-
-  CopyWith_Input_UuidComparisonExp<TRes> get id {
-    final local$id = _instance.id;
-    return local$id == null
-        ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
-        : CopyWith_Input_UuidComparisonExp(local$id, (e) => call(id: e));
-  }
-
-  CopyWith_Input_StringComparisonExp<TRes> get name {
-    final local$name = _instance.name;
-    return local$name == null
-        ? CopyWith_Input_StringComparisonExp.stub(_then(_instance))
-        : CopyWith_Input_StringComparisonExp(local$name, (e) => call(name: e));
-  }
-}
-
-class _CopyWithStubImpl_Input_DistrictsBoolExp<TRes>
-    implements CopyWith_Input_DistrictsBoolExp<TRes> {
-  _CopyWithStubImpl_Input_DistrictsBoolExp(this._res);
-
-  TRes _res;
-
-  call({
-    List<Input_DistrictsBoolExp>? $_and,
-    Input_DistrictsBoolExp? $_not,
-    List<Input_DistrictsBoolExp>? $_or,
-    Input_UuidComparisonExp? id,
-    Input_StringComparisonExp? name,
-  }) => _res;
-
-  $_and(_fn) => _res;
-
-  CopyWith_Input_DistrictsBoolExp<TRes> get $_not =>
-      CopyWith_Input_DistrictsBoolExp.stub(_res);
-
-  $_or(_fn) => _res;
-
-  CopyWith_Input_UuidComparisonExp<TRes> get id =>
-      CopyWith_Input_UuidComparisonExp.stub(_res);
-
-  CopyWith_Input_StringComparisonExp<TRes> get name =>
-      CopyWith_Input_StringComparisonExp.stub(_res);
-}
-
-class Input_DistrictsInsertInput {
-  factory Input_DistrictsInsertInput({String? name}) =>
-      Input_DistrictsInsertInput._({if (name != null) r'name': name});
-
-  Input_DistrictsInsertInput._(this._$data);
-
-  factory Input_DistrictsInsertInput.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('name')) {
-      final l$name = data['name'];
-      result$data['name'] = (l$name as String?);
-    }
-    return Input_DistrictsInsertInput._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  String? get name => (_$data['name'] as String?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('name')) {
-      final l$name = name;
-      result$data['name'] = l$name;
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_DistrictsInsertInput<Input_DistrictsInsertInput>
-  get copyWith => CopyWith_Input_DistrictsInsertInput(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_DistrictsInsertInput ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$name = name;
-    final lOther$name = other.name;
-    if (_$data.containsKey('name') != other._$data.containsKey('name')) {
-      return false;
-    }
-    if (l$name != lOther$name) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$name = name;
-    return Object.hashAll([_$data.containsKey('name') ? l$name : const {}]);
-  }
-}
-
-abstract class CopyWith_Input_DistrictsInsertInput<TRes> {
-  factory CopyWith_Input_DistrictsInsertInput(
-    Input_DistrictsInsertInput instance,
-    TRes Function(Input_DistrictsInsertInput) then,
-  ) = _CopyWithImpl_Input_DistrictsInsertInput;
-
-  factory CopyWith_Input_DistrictsInsertInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_DistrictsInsertInput;
-
-  TRes call({String? name});
-}
-
-class _CopyWithImpl_Input_DistrictsInsertInput<TRes>
-    implements CopyWith_Input_DistrictsInsertInput<TRes> {
-  _CopyWithImpl_Input_DistrictsInsertInput(this._instance, this._then);
-
-  final Input_DistrictsInsertInput _instance;
-
-  final TRes Function(Input_DistrictsInsertInput) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({Object? name = _undefined}) => _then(
-    Input_DistrictsInsertInput._({
-      ..._instance._$data,
-      if (name != _undefined) 'name': (name as String?),
-    }),
-  );
-}
-
-class _CopyWithStubImpl_Input_DistrictsInsertInput<TRes>
-    implements CopyWith_Input_DistrictsInsertInput<TRes> {
-  _CopyWithStubImpl_Input_DistrictsInsertInput(this._res);
-
-  TRes _res;
-
-  call({String? name}) => _res;
-}
-
-class Input_DistrictsObjRelInsertInput {
-  factory Input_DistrictsObjRelInsertInput({
-    required Input_DistrictsInsertInput data,
-    Input_DistrictsOnConflict? onConflict,
-  }) => Input_DistrictsObjRelInsertInput._({
-    r'data': data,
-    if (onConflict != null) r'onConflict': onConflict,
-  });
-
-  Input_DistrictsObjRelInsertInput._(this._$data);
-
-  factory Input_DistrictsObjRelInsertInput.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    final l$data = data['data'];
-    result$data['data'] = Input_DistrictsInsertInput.fromJson(
-      (l$data as Map<String, dynamic>),
-    );
-    if (data.containsKey('onConflict')) {
-      final l$onConflict = data['onConflict'];
-      result$data['onConflict'] = l$onConflict == null
-          ? null
-          : Input_DistrictsOnConflict.fromJson(
-              (l$onConflict as Map<String, dynamic>),
-            );
-    }
-    return Input_DistrictsObjRelInsertInput._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  Input_DistrictsInsertInput get data =>
-      (_$data['data'] as Input_DistrictsInsertInput);
-
-  Input_DistrictsOnConflict? get onConflict =>
-      (_$data['onConflict'] as Input_DistrictsOnConflict?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    final l$data = data;
-    result$data['data'] = l$data.toJson();
-    if (_$data.containsKey('onConflict')) {
-      final l$onConflict = onConflict;
-      result$data['onConflict'] = l$onConflict?.toJson();
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_DistrictsObjRelInsertInput<Input_DistrictsObjRelInsertInput>
-  get copyWith => CopyWith_Input_DistrictsObjRelInsertInput(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_DistrictsObjRelInsertInput ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$data = data;
-    final lOther$data = other.data;
-    if (l$data != lOther$data) {
-      return false;
-    }
-    final l$onConflict = onConflict;
-    final lOther$onConflict = other.onConflict;
-    if (_$data.containsKey('onConflict') !=
-        other._$data.containsKey('onConflict')) {
-      return false;
-    }
-    if (l$onConflict != lOther$onConflict) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$data = data;
-    final l$onConflict = onConflict;
-    return Object.hashAll([
-      l$data,
-      _$data.containsKey('onConflict') ? l$onConflict : const {},
     ]);
   }
 }

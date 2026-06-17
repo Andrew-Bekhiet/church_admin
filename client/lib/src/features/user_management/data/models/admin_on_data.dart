@@ -11,6 +11,10 @@ part 'admin_on_data.g.dart';
   labelsOverrides: {
     'serviceWriteRelatedFamilies': 'يمكنه تعديل عائلات المخدومين بالخدمة',
     'groupWriteRelatedFamilies': 'يمكنه تعديل عائلات المخدومين بالمجموعة',
+    'serviceAllowRecordAttendance': 'يمكنه تسجيل الحضور للمخدومين بالخدمة',
+    'serviceAllowRecordServantsAttendance': 'يمكنه تسجيل الحضور للخدام بالخدمة',
+    'groupAllowRecordAttendance': 'يمكنه تسجيل الحضور للمخدومين بالمجموعة',
+    'groupAllowRecordServantsAttendance': 'يمكنه تسجيل الحضور للخدام بالمجموعة',
     'areaAllowExport': 'يمكنه تصدير بيانات المنطقة',
     'serviceAllowExport': 'يمكنه تصدير بيانات الخدمة',
     'groupAllowExport': 'يمكنه تصدير بيانات المجموعة',
@@ -49,6 +53,12 @@ class AdminOnData with _$AdminOnData implements ToJson {
   final bool? serviceAllowEdit;
 
   @override
+  final bool? serviceAllowRecordAttendance;
+
+  @override
+  final bool? serviceAllowRecordServantsAttendance;
+
+  @override
   final bool? serviceAdminOnUsers;
 
   @override
@@ -65,6 +75,12 @@ class AdminOnData with _$AdminOnData implements ToJson {
 
   @override
   final bool? groupAllowEdit;
+
+  @override
+  final bool? groupAllowRecordAttendance;
+
+  @override
+  final bool? groupAllowRecordServantsAttendance;
 
   @override
   final bool? groupAdminOnUsers;
@@ -86,12 +102,16 @@ class AdminOnData with _$AdminOnData implements ToJson {
     this.serviceGender,
     this.serviceAllowExport,
     this.serviceAllowEdit,
+    this.serviceAllowRecordAttendance,
+    this.serviceAllowRecordServantsAttendance,
     this.serviceAdminOnUsers,
     this.serviceWriteRelatedFamilies,
     this.classes = const [],
     this.group,
     this.groupAllowExport,
     this.groupAllowEdit,
+    this.groupAllowRecordAttendance,
+    this.groupAllowRecordServantsAttendance,
     this.groupAdminOnUsers,
     this.groupWriteRelatedFamilies,
     this.user,

@@ -2203,12 +2203,16 @@ class Fragment_UserDetails_adminOn implements Fragment_UserAdminOn_adminOn {
     this.serviceGender,
     this.serviceAllowExport,
     this.serviceAllowEdit,
+    this.serviceAllowRecordAttendance,
+    this.serviceAllowRecordServantsAttendance,
     this.serviceAdminOnUsers,
     required this.serviceWriteRelatedFamilies,
     required this.classes,
     this.group,
     this.groupAllowExport,
     this.groupAllowEdit,
+    this.groupAllowRecordAttendance,
+    this.groupAllowRecordServantsAttendance,
     this.groupAdminOnUsers,
     required this.groupWriteRelatedFamilies,
     this.$__typename = 'AuthUsersAdminOn',
@@ -2225,12 +2229,18 @@ class Fragment_UserDetails_adminOn implements Fragment_UserAdminOn_adminOn {
     final l$serviceGender = json['serviceGender'];
     final l$serviceAllowExport = json['serviceAllowExport'];
     final l$serviceAllowEdit = json['serviceAllowEdit'];
+    final l$serviceAllowRecordAttendance = json['serviceAllowRecordAttendance'];
+    final l$serviceAllowRecordServantsAttendance =
+        json['serviceAllowRecordServantsAttendance'];
     final l$serviceAdminOnUsers = json['serviceAdminOnUsers'];
     final l$serviceWriteRelatedFamilies = json['serviceWriteRelatedFamilies'];
     final l$classes = json['classes'];
     final l$group = json['group'];
     final l$groupAllowExport = json['groupAllowExport'];
     final l$groupAllowEdit = json['groupAllowEdit'];
+    final l$groupAllowRecordAttendance = json['groupAllowRecordAttendance'];
+    final l$groupAllowRecordServantsAttendance =
+        json['groupAllowRecordServantsAttendance'];
     final l$groupAdminOnUsers = json['groupAdminOnUsers'];
     final l$groupWriteRelatedFamilies = json['groupWriteRelatedFamilies'];
     final l$$__typename = json['__typename'];
@@ -2255,6 +2265,9 @@ class Fragment_UserDetails_adminOn implements Fragment_UserAdminOn_adminOn {
       serviceGender: (l$serviceGender as bool?),
       serviceAllowExport: (l$serviceAllowExport as bool?),
       serviceAllowEdit: (l$serviceAllowEdit as bool?),
+      serviceAllowRecordAttendance: (l$serviceAllowRecordAttendance as bool?),
+      serviceAllowRecordServantsAttendance:
+          (l$serviceAllowRecordServantsAttendance as bool?),
       serviceAdminOnUsers: (l$serviceAdminOnUsers as bool?),
       serviceWriteRelatedFamilies: (l$serviceWriteRelatedFamilies as bool),
       classes: (l$classes as List<dynamic>)
@@ -2265,6 +2278,9 @@ class Fragment_UserDetails_adminOn implements Fragment_UserAdminOn_adminOn {
           : Fragment_Group.fromJson((l$group as Map<String, dynamic>)),
       groupAllowExport: (l$groupAllowExport as bool?),
       groupAllowEdit: (l$groupAllowEdit as bool?),
+      groupAllowRecordAttendance: (l$groupAllowRecordAttendance as bool?),
+      groupAllowRecordServantsAttendance:
+          (l$groupAllowRecordServantsAttendance as bool?),
       groupAdminOnUsers: (l$groupAdminOnUsers as bool?),
       groupWriteRelatedFamilies: (l$groupWriteRelatedFamilies as bool),
       $__typename: (l$$__typename as String),
@@ -2291,6 +2307,10 @@ class Fragment_UserDetails_adminOn implements Fragment_UserAdminOn_adminOn {
 
   final bool? serviceAllowEdit;
 
+  final bool? serviceAllowRecordAttendance;
+
+  final bool? serviceAllowRecordServantsAttendance;
+
   final bool? serviceAdminOnUsers;
 
   final bool serviceWriteRelatedFamilies;
@@ -2302,6 +2322,10 @@ class Fragment_UserDetails_adminOn implements Fragment_UserAdminOn_adminOn {
   final bool? groupAllowExport;
 
   final bool? groupAllowEdit;
+
+  final bool? groupAllowRecordAttendance;
+
+  final bool? groupAllowRecordServantsAttendance;
 
   final bool? groupAdminOnUsers;
 
@@ -2331,6 +2355,13 @@ class Fragment_UserDetails_adminOn implements Fragment_UserAdminOn_adminOn {
     _resultData['serviceAllowExport'] = l$serviceAllowExport;
     final l$serviceAllowEdit = serviceAllowEdit;
     _resultData['serviceAllowEdit'] = l$serviceAllowEdit;
+    final l$serviceAllowRecordAttendance = serviceAllowRecordAttendance;
+    _resultData['serviceAllowRecordAttendance'] =
+        l$serviceAllowRecordAttendance;
+    final l$serviceAllowRecordServantsAttendance =
+        serviceAllowRecordServantsAttendance;
+    _resultData['serviceAllowRecordServantsAttendance'] =
+        l$serviceAllowRecordServantsAttendance;
     final l$serviceAdminOnUsers = serviceAdminOnUsers;
     _resultData['serviceAdminOnUsers'] = l$serviceAdminOnUsers;
     final l$serviceWriteRelatedFamilies = serviceWriteRelatedFamilies;
@@ -2343,6 +2374,12 @@ class Fragment_UserDetails_adminOn implements Fragment_UserAdminOn_adminOn {
     _resultData['groupAllowExport'] = l$groupAllowExport;
     final l$groupAllowEdit = groupAllowEdit;
     _resultData['groupAllowEdit'] = l$groupAllowEdit;
+    final l$groupAllowRecordAttendance = groupAllowRecordAttendance;
+    _resultData['groupAllowRecordAttendance'] = l$groupAllowRecordAttendance;
+    final l$groupAllowRecordServantsAttendance =
+        groupAllowRecordServantsAttendance;
+    _resultData['groupAllowRecordServantsAttendance'] =
+        l$groupAllowRecordServantsAttendance;
     final l$groupAdminOnUsers = groupAdminOnUsers;
     _resultData['groupAdminOnUsers'] = l$groupAdminOnUsers;
     final l$groupWriteRelatedFamilies = groupWriteRelatedFamilies;
@@ -2364,12 +2401,18 @@ class Fragment_UserDetails_adminOn implements Fragment_UserAdminOn_adminOn {
     final l$serviceGender = serviceGender;
     final l$serviceAllowExport = serviceAllowExport;
     final l$serviceAllowEdit = serviceAllowEdit;
+    final l$serviceAllowRecordAttendance = serviceAllowRecordAttendance;
+    final l$serviceAllowRecordServantsAttendance =
+        serviceAllowRecordServantsAttendance;
     final l$serviceAdminOnUsers = serviceAdminOnUsers;
     final l$serviceWriteRelatedFamilies = serviceWriteRelatedFamilies;
     final l$classes = classes;
     final l$group = group;
     final l$groupAllowExport = groupAllowExport;
     final l$groupAllowEdit = groupAllowEdit;
+    final l$groupAllowRecordAttendance = groupAllowRecordAttendance;
+    final l$groupAllowRecordServantsAttendance =
+        groupAllowRecordServantsAttendance;
     final l$groupAdminOnUsers = groupAdminOnUsers;
     final l$groupWriteRelatedFamilies = groupWriteRelatedFamilies;
     final l$$__typename = $__typename;
@@ -2384,12 +2427,16 @@ class Fragment_UserDetails_adminOn implements Fragment_UserAdminOn_adminOn {
       l$serviceGender,
       l$serviceAllowExport,
       l$serviceAllowEdit,
+      l$serviceAllowRecordAttendance,
+      l$serviceAllowRecordServantsAttendance,
       l$serviceAdminOnUsers,
       l$serviceWriteRelatedFamilies,
       Object.hashAll(l$classes.map((v) => v)),
       l$group,
       l$groupAllowExport,
       l$groupAllowEdit,
+      l$groupAllowRecordAttendance,
+      l$groupAllowRecordServantsAttendance,
       l$groupAdminOnUsers,
       l$groupWriteRelatedFamilies,
       l$$__typename,
@@ -2455,6 +2502,20 @@ class Fragment_UserDetails_adminOn implements Fragment_UserAdminOn_adminOn {
     if (l$serviceAllowEdit != lOther$serviceAllowEdit) {
       return false;
     }
+    final l$serviceAllowRecordAttendance = serviceAllowRecordAttendance;
+    final lOther$serviceAllowRecordAttendance =
+        other.serviceAllowRecordAttendance;
+    if (l$serviceAllowRecordAttendance != lOther$serviceAllowRecordAttendance) {
+      return false;
+    }
+    final l$serviceAllowRecordServantsAttendance =
+        serviceAllowRecordServantsAttendance;
+    final lOther$serviceAllowRecordServantsAttendance =
+        other.serviceAllowRecordServantsAttendance;
+    if (l$serviceAllowRecordServantsAttendance !=
+        lOther$serviceAllowRecordServantsAttendance) {
+      return false;
+    }
     final l$serviceAdminOnUsers = serviceAdminOnUsers;
     final lOther$serviceAdminOnUsers = other.serviceAdminOnUsers;
     if (l$serviceAdminOnUsers != lOther$serviceAdminOnUsers) {
@@ -2491,6 +2552,19 @@ class Fragment_UserDetails_adminOn implements Fragment_UserAdminOn_adminOn {
     final l$groupAllowEdit = groupAllowEdit;
     final lOther$groupAllowEdit = other.groupAllowEdit;
     if (l$groupAllowEdit != lOther$groupAllowEdit) {
+      return false;
+    }
+    final l$groupAllowRecordAttendance = groupAllowRecordAttendance;
+    final lOther$groupAllowRecordAttendance = other.groupAllowRecordAttendance;
+    if (l$groupAllowRecordAttendance != lOther$groupAllowRecordAttendance) {
+      return false;
+    }
+    final l$groupAllowRecordServantsAttendance =
+        groupAllowRecordServantsAttendance;
+    final lOther$groupAllowRecordServantsAttendance =
+        other.groupAllowRecordServantsAttendance;
+    if (l$groupAllowRecordServantsAttendance !=
+        lOther$groupAllowRecordServantsAttendance) {
       return false;
     }
     final l$groupAdminOnUsers = groupAdminOnUsers;
@@ -2538,12 +2612,16 @@ abstract class CopyWith_Fragment_UserDetails_adminOn<TRes> {
     bool? serviceGender,
     bool? serviceAllowExport,
     bool? serviceAllowEdit,
+    bool? serviceAllowRecordAttendance,
+    bool? serviceAllowRecordServantsAttendance,
     bool? serviceAdminOnUsers,
     bool? serviceWriteRelatedFamilies,
     List<Fragment_Class>? classes,
     Fragment_Group? group,
     bool? groupAllowExport,
     bool? groupAllowEdit,
+    bool? groupAllowRecordAttendance,
+    bool? groupAllowRecordServantsAttendance,
     bool? groupAdminOnUsers,
     bool? groupWriteRelatedFamilies,
     String? $__typename,
@@ -2582,12 +2660,16 @@ class _CopyWithImpl_Fragment_UserDetails_adminOn<TRes>
     Object? serviceGender = _undefined,
     Object? serviceAllowExport = _undefined,
     Object? serviceAllowEdit = _undefined,
+    Object? serviceAllowRecordAttendance = _undefined,
+    Object? serviceAllowRecordServantsAttendance = _undefined,
     Object? serviceAdminOnUsers = _undefined,
     Object? serviceWriteRelatedFamilies = _undefined,
     Object? classes = _undefined,
     Object? group = _undefined,
     Object? groupAllowExport = _undefined,
     Object? groupAllowEdit = _undefined,
+    Object? groupAllowRecordAttendance = _undefined,
+    Object? groupAllowRecordServantsAttendance = _undefined,
     Object? groupAdminOnUsers = _undefined,
     Object? groupWriteRelatedFamilies = _undefined,
     Object? $__typename = _undefined,
@@ -2622,6 +2704,13 @@ class _CopyWithImpl_Fragment_UserDetails_adminOn<TRes>
       serviceAllowEdit: serviceAllowEdit == _undefined
           ? _instance.serviceAllowEdit
           : (serviceAllowEdit as bool?),
+      serviceAllowRecordAttendance: serviceAllowRecordAttendance == _undefined
+          ? _instance.serviceAllowRecordAttendance
+          : (serviceAllowRecordAttendance as bool?),
+      serviceAllowRecordServantsAttendance:
+          serviceAllowRecordServantsAttendance == _undefined
+          ? _instance.serviceAllowRecordServantsAttendance
+          : (serviceAllowRecordServantsAttendance as bool?),
       serviceAdminOnUsers: serviceAdminOnUsers == _undefined
           ? _instance.serviceAdminOnUsers
           : (serviceAdminOnUsers as bool?),
@@ -2640,6 +2729,13 @@ class _CopyWithImpl_Fragment_UserDetails_adminOn<TRes>
       groupAllowEdit: groupAllowEdit == _undefined
           ? _instance.groupAllowEdit
           : (groupAllowEdit as bool?),
+      groupAllowRecordAttendance: groupAllowRecordAttendance == _undefined
+          ? _instance.groupAllowRecordAttendance
+          : (groupAllowRecordAttendance as bool?),
+      groupAllowRecordServantsAttendance:
+          groupAllowRecordServantsAttendance == _undefined
+          ? _instance.groupAllowRecordServantsAttendance
+          : (groupAllowRecordServantsAttendance as bool?),
       groupAdminOnUsers: groupAdminOnUsers == _undefined
           ? _instance.groupAdminOnUsers
           : (groupAdminOnUsers as bool?),
@@ -2720,12 +2816,16 @@ class _CopyWithStubImpl_Fragment_UserDetails_adminOn<TRes>
     bool? serviceGender,
     bool? serviceAllowExport,
     bool? serviceAllowEdit,
+    bool? serviceAllowRecordAttendance,
+    bool? serviceAllowRecordServantsAttendance,
     bool? serviceAdminOnUsers,
     bool? serviceWriteRelatedFamilies,
     List<Fragment_Class>? classes,
     Fragment_Group? group,
     bool? groupAllowExport,
     bool? groupAllowEdit,
+    bool? groupAllowRecordAttendance,
+    bool? groupAllowRecordServantsAttendance,
     bool? groupAdminOnUsers,
     bool? groupWriteRelatedFamilies,
     String? $__typename,
@@ -4257,6 +4357,20 @@ const fragmentDefinitionUserAdminOn = FragmentDefinitionNode(
               selectionSet: null,
             ),
             FieldNode(
+              name: NameNode(value: 'serviceAllowRecordAttendance'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: 'serviceAllowRecordServantsAttendance'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
               name: NameNode(value: 'serviceAdminOnUsers'),
               alias: null,
               arguments: [],
@@ -4339,6 +4453,20 @@ const fragmentDefinitionUserAdminOn = FragmentDefinitionNode(
               selectionSet: null,
             ),
             FieldNode(
+              name: NameNode(value: 'groupAllowRecordAttendance'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: 'groupAllowRecordServantsAttendance'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
               name: NameNode(value: 'groupAdminOnUsers'),
               alias: null,
               arguments: [],
@@ -4398,12 +4526,16 @@ class Fragment_UserAdminOn_adminOn {
     this.serviceGender,
     this.serviceAllowExport,
     this.serviceAllowEdit,
+    this.serviceAllowRecordAttendance,
+    this.serviceAllowRecordServantsAttendance,
     this.serviceAdminOnUsers,
     required this.serviceWriteRelatedFamilies,
     required this.classes,
     this.group,
     this.groupAllowExport,
     this.groupAllowEdit,
+    this.groupAllowRecordAttendance,
+    this.groupAllowRecordServantsAttendance,
     this.groupAdminOnUsers,
     required this.groupWriteRelatedFamilies,
     this.$__typename = 'AuthUsersAdminOn',
@@ -4420,12 +4552,18 @@ class Fragment_UserAdminOn_adminOn {
     final l$serviceGender = json['serviceGender'];
     final l$serviceAllowExport = json['serviceAllowExport'];
     final l$serviceAllowEdit = json['serviceAllowEdit'];
+    final l$serviceAllowRecordAttendance = json['serviceAllowRecordAttendance'];
+    final l$serviceAllowRecordServantsAttendance =
+        json['serviceAllowRecordServantsAttendance'];
     final l$serviceAdminOnUsers = json['serviceAdminOnUsers'];
     final l$serviceWriteRelatedFamilies = json['serviceWriteRelatedFamilies'];
     final l$classes = json['classes'];
     final l$group = json['group'];
     final l$groupAllowExport = json['groupAllowExport'];
     final l$groupAllowEdit = json['groupAllowEdit'];
+    final l$groupAllowRecordAttendance = json['groupAllowRecordAttendance'];
+    final l$groupAllowRecordServantsAttendance =
+        json['groupAllowRecordServantsAttendance'];
     final l$groupAdminOnUsers = json['groupAdminOnUsers'];
     final l$groupWriteRelatedFamilies = json['groupWriteRelatedFamilies'];
     final l$$__typename = json['__typename'];
@@ -4450,6 +4588,9 @@ class Fragment_UserAdminOn_adminOn {
       serviceGender: (l$serviceGender as bool?),
       serviceAllowExport: (l$serviceAllowExport as bool?),
       serviceAllowEdit: (l$serviceAllowEdit as bool?),
+      serviceAllowRecordAttendance: (l$serviceAllowRecordAttendance as bool?),
+      serviceAllowRecordServantsAttendance:
+          (l$serviceAllowRecordServantsAttendance as bool?),
       serviceAdminOnUsers: (l$serviceAdminOnUsers as bool?),
       serviceWriteRelatedFamilies: (l$serviceWriteRelatedFamilies as bool),
       classes: (l$classes as List<dynamic>)
@@ -4460,6 +4601,9 @@ class Fragment_UserAdminOn_adminOn {
           : Fragment_Group.fromJson((l$group as Map<String, dynamic>)),
       groupAllowExport: (l$groupAllowExport as bool?),
       groupAllowEdit: (l$groupAllowEdit as bool?),
+      groupAllowRecordAttendance: (l$groupAllowRecordAttendance as bool?),
+      groupAllowRecordServantsAttendance:
+          (l$groupAllowRecordServantsAttendance as bool?),
       groupAdminOnUsers: (l$groupAdminOnUsers as bool?),
       groupWriteRelatedFamilies: (l$groupWriteRelatedFamilies as bool),
       $__typename: (l$$__typename as String),
@@ -4486,6 +4630,10 @@ class Fragment_UserAdminOn_adminOn {
 
   final bool? serviceAllowEdit;
 
+  final bool? serviceAllowRecordAttendance;
+
+  final bool? serviceAllowRecordServantsAttendance;
+
   final bool? serviceAdminOnUsers;
 
   final bool serviceWriteRelatedFamilies;
@@ -4497,6 +4645,10 @@ class Fragment_UserAdminOn_adminOn {
   final bool? groupAllowExport;
 
   final bool? groupAllowEdit;
+
+  final bool? groupAllowRecordAttendance;
+
+  final bool? groupAllowRecordServantsAttendance;
 
   final bool? groupAdminOnUsers;
 
@@ -4526,6 +4678,13 @@ class Fragment_UserAdminOn_adminOn {
     _resultData['serviceAllowExport'] = l$serviceAllowExport;
     final l$serviceAllowEdit = serviceAllowEdit;
     _resultData['serviceAllowEdit'] = l$serviceAllowEdit;
+    final l$serviceAllowRecordAttendance = serviceAllowRecordAttendance;
+    _resultData['serviceAllowRecordAttendance'] =
+        l$serviceAllowRecordAttendance;
+    final l$serviceAllowRecordServantsAttendance =
+        serviceAllowRecordServantsAttendance;
+    _resultData['serviceAllowRecordServantsAttendance'] =
+        l$serviceAllowRecordServantsAttendance;
     final l$serviceAdminOnUsers = serviceAdminOnUsers;
     _resultData['serviceAdminOnUsers'] = l$serviceAdminOnUsers;
     final l$serviceWriteRelatedFamilies = serviceWriteRelatedFamilies;
@@ -4538,6 +4697,12 @@ class Fragment_UserAdminOn_adminOn {
     _resultData['groupAllowExport'] = l$groupAllowExport;
     final l$groupAllowEdit = groupAllowEdit;
     _resultData['groupAllowEdit'] = l$groupAllowEdit;
+    final l$groupAllowRecordAttendance = groupAllowRecordAttendance;
+    _resultData['groupAllowRecordAttendance'] = l$groupAllowRecordAttendance;
+    final l$groupAllowRecordServantsAttendance =
+        groupAllowRecordServantsAttendance;
+    _resultData['groupAllowRecordServantsAttendance'] =
+        l$groupAllowRecordServantsAttendance;
     final l$groupAdminOnUsers = groupAdminOnUsers;
     _resultData['groupAdminOnUsers'] = l$groupAdminOnUsers;
     final l$groupWriteRelatedFamilies = groupWriteRelatedFamilies;
@@ -4559,12 +4724,18 @@ class Fragment_UserAdminOn_adminOn {
     final l$serviceGender = serviceGender;
     final l$serviceAllowExport = serviceAllowExport;
     final l$serviceAllowEdit = serviceAllowEdit;
+    final l$serviceAllowRecordAttendance = serviceAllowRecordAttendance;
+    final l$serviceAllowRecordServantsAttendance =
+        serviceAllowRecordServantsAttendance;
     final l$serviceAdminOnUsers = serviceAdminOnUsers;
     final l$serviceWriteRelatedFamilies = serviceWriteRelatedFamilies;
     final l$classes = classes;
     final l$group = group;
     final l$groupAllowExport = groupAllowExport;
     final l$groupAllowEdit = groupAllowEdit;
+    final l$groupAllowRecordAttendance = groupAllowRecordAttendance;
+    final l$groupAllowRecordServantsAttendance =
+        groupAllowRecordServantsAttendance;
     final l$groupAdminOnUsers = groupAdminOnUsers;
     final l$groupWriteRelatedFamilies = groupWriteRelatedFamilies;
     final l$$__typename = $__typename;
@@ -4579,12 +4750,16 @@ class Fragment_UserAdminOn_adminOn {
       l$serviceGender,
       l$serviceAllowExport,
       l$serviceAllowEdit,
+      l$serviceAllowRecordAttendance,
+      l$serviceAllowRecordServantsAttendance,
       l$serviceAdminOnUsers,
       l$serviceWriteRelatedFamilies,
       Object.hashAll(l$classes.map((v) => v)),
       l$group,
       l$groupAllowExport,
       l$groupAllowEdit,
+      l$groupAllowRecordAttendance,
+      l$groupAllowRecordServantsAttendance,
       l$groupAdminOnUsers,
       l$groupWriteRelatedFamilies,
       l$$__typename,
@@ -4650,6 +4825,20 @@ class Fragment_UserAdminOn_adminOn {
     if (l$serviceAllowEdit != lOther$serviceAllowEdit) {
       return false;
     }
+    final l$serviceAllowRecordAttendance = serviceAllowRecordAttendance;
+    final lOther$serviceAllowRecordAttendance =
+        other.serviceAllowRecordAttendance;
+    if (l$serviceAllowRecordAttendance != lOther$serviceAllowRecordAttendance) {
+      return false;
+    }
+    final l$serviceAllowRecordServantsAttendance =
+        serviceAllowRecordServantsAttendance;
+    final lOther$serviceAllowRecordServantsAttendance =
+        other.serviceAllowRecordServantsAttendance;
+    if (l$serviceAllowRecordServantsAttendance !=
+        lOther$serviceAllowRecordServantsAttendance) {
+      return false;
+    }
     final l$serviceAdminOnUsers = serviceAdminOnUsers;
     final lOther$serviceAdminOnUsers = other.serviceAdminOnUsers;
     if (l$serviceAdminOnUsers != lOther$serviceAdminOnUsers) {
@@ -4686,6 +4875,19 @@ class Fragment_UserAdminOn_adminOn {
     final l$groupAllowEdit = groupAllowEdit;
     final lOther$groupAllowEdit = other.groupAllowEdit;
     if (l$groupAllowEdit != lOther$groupAllowEdit) {
+      return false;
+    }
+    final l$groupAllowRecordAttendance = groupAllowRecordAttendance;
+    final lOther$groupAllowRecordAttendance = other.groupAllowRecordAttendance;
+    if (l$groupAllowRecordAttendance != lOther$groupAllowRecordAttendance) {
+      return false;
+    }
+    final l$groupAllowRecordServantsAttendance =
+        groupAllowRecordServantsAttendance;
+    final lOther$groupAllowRecordServantsAttendance =
+        other.groupAllowRecordServantsAttendance;
+    if (l$groupAllowRecordServantsAttendance !=
+        lOther$groupAllowRecordServantsAttendance) {
       return false;
     }
     final l$groupAdminOnUsers = groupAdminOnUsers;
@@ -4733,12 +4935,16 @@ abstract class CopyWith_Fragment_UserAdminOn_adminOn<TRes> {
     bool? serviceGender,
     bool? serviceAllowExport,
     bool? serviceAllowEdit,
+    bool? serviceAllowRecordAttendance,
+    bool? serviceAllowRecordServantsAttendance,
     bool? serviceAdminOnUsers,
     bool? serviceWriteRelatedFamilies,
     List<Fragment_Class>? classes,
     Fragment_Group? group,
     bool? groupAllowExport,
     bool? groupAllowEdit,
+    bool? groupAllowRecordAttendance,
+    bool? groupAllowRecordServantsAttendance,
     bool? groupAdminOnUsers,
     bool? groupWriteRelatedFamilies,
     String? $__typename,
@@ -4777,12 +4983,16 @@ class _CopyWithImpl_Fragment_UserAdminOn_adminOn<TRes>
     Object? serviceGender = _undefined,
     Object? serviceAllowExport = _undefined,
     Object? serviceAllowEdit = _undefined,
+    Object? serviceAllowRecordAttendance = _undefined,
+    Object? serviceAllowRecordServantsAttendance = _undefined,
     Object? serviceAdminOnUsers = _undefined,
     Object? serviceWriteRelatedFamilies = _undefined,
     Object? classes = _undefined,
     Object? group = _undefined,
     Object? groupAllowExport = _undefined,
     Object? groupAllowEdit = _undefined,
+    Object? groupAllowRecordAttendance = _undefined,
+    Object? groupAllowRecordServantsAttendance = _undefined,
     Object? groupAdminOnUsers = _undefined,
     Object? groupWriteRelatedFamilies = _undefined,
     Object? $__typename = _undefined,
@@ -4817,6 +5027,13 @@ class _CopyWithImpl_Fragment_UserAdminOn_adminOn<TRes>
       serviceAllowEdit: serviceAllowEdit == _undefined
           ? _instance.serviceAllowEdit
           : (serviceAllowEdit as bool?),
+      serviceAllowRecordAttendance: serviceAllowRecordAttendance == _undefined
+          ? _instance.serviceAllowRecordAttendance
+          : (serviceAllowRecordAttendance as bool?),
+      serviceAllowRecordServantsAttendance:
+          serviceAllowRecordServantsAttendance == _undefined
+          ? _instance.serviceAllowRecordServantsAttendance
+          : (serviceAllowRecordServantsAttendance as bool?),
       serviceAdminOnUsers: serviceAdminOnUsers == _undefined
           ? _instance.serviceAdminOnUsers
           : (serviceAdminOnUsers as bool?),
@@ -4835,6 +5052,13 @@ class _CopyWithImpl_Fragment_UserAdminOn_adminOn<TRes>
       groupAllowEdit: groupAllowEdit == _undefined
           ? _instance.groupAllowEdit
           : (groupAllowEdit as bool?),
+      groupAllowRecordAttendance: groupAllowRecordAttendance == _undefined
+          ? _instance.groupAllowRecordAttendance
+          : (groupAllowRecordAttendance as bool?),
+      groupAllowRecordServantsAttendance:
+          groupAllowRecordServantsAttendance == _undefined
+          ? _instance.groupAllowRecordServantsAttendance
+          : (groupAllowRecordServantsAttendance as bool?),
       groupAdminOnUsers: groupAdminOnUsers == _undefined
           ? _instance.groupAdminOnUsers
           : (groupAdminOnUsers as bool?),
@@ -4915,12 +5139,16 @@ class _CopyWithStubImpl_Fragment_UserAdminOn_adminOn<TRes>
     bool? serviceGender,
     bool? serviceAllowExport,
     bool? serviceAllowEdit,
+    bool? serviceAllowRecordAttendance,
+    bool? serviceAllowRecordServantsAttendance,
     bool? serviceAdminOnUsers,
     bool? serviceWriteRelatedFamilies,
     List<Fragment_Class>? classes,
     Fragment_Group? group,
     bool? groupAllowExport,
     bool? groupAllowEdit,
+    bool? groupAllowRecordAttendance,
+    bool? groupAllowRecordServantsAttendance,
     bool? groupAdminOnUsers,
     bool? groupWriteRelatedFamilies,
     String? $__typename,

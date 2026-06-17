@@ -1,6 +1,494 @@
 // Part 19 of the schema
 part of "schema.graphql.dart";
 
+abstract class CopyWith_Input_FathersMaxOrderBy<TRes> {
+  factory CopyWith_Input_FathersMaxOrderBy(
+    Input_FathersMaxOrderBy instance,
+    TRes Function(Input_FathersMaxOrderBy) then,
+  ) = _CopyWithImpl_Input_FathersMaxOrderBy;
+
+  factory CopyWith_Input_FathersMaxOrderBy.stub(TRes res) =
+      _CopyWithStubImpl_Input_FathersMaxOrderBy;
+
+  TRes call({Enum_OrderBy? churchId, Enum_OrderBy? id, Enum_OrderBy? name});
+}
+
+class _CopyWithImpl_Input_FathersMaxOrderBy<TRes>
+    implements CopyWith_Input_FathersMaxOrderBy<TRes> {
+  _CopyWithImpl_Input_FathersMaxOrderBy(this._instance, this._then);
+
+  final Input_FathersMaxOrderBy _instance;
+
+  final TRes Function(Input_FathersMaxOrderBy) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? churchId = _undefined,
+    Object? id = _undefined,
+    Object? name = _undefined,
+  }) => _then(
+    Input_FathersMaxOrderBy._({
+      ..._instance._$data,
+      if (churchId != _undefined) 'churchId': (churchId as Enum_OrderBy?),
+      if (id != _undefined) 'id': (id as Enum_OrderBy?),
+      if (name != _undefined) 'name': (name as Enum_OrderBy?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_FathersMaxOrderBy<TRes>
+    implements CopyWith_Input_FathersMaxOrderBy<TRes> {
+  _CopyWithStubImpl_Input_FathersMaxOrderBy(this._res);
+
+  TRes _res;
+
+  call({Enum_OrderBy? churchId, Enum_OrderBy? id, Enum_OrderBy? name}) => _res;
+}
+
+class Input_FathersMinOrderBy {
+  factory Input_FathersMinOrderBy({
+    Enum_OrderBy? churchId,
+    Enum_OrderBy? id,
+    Enum_OrderBy? name,
+  }) => Input_FathersMinOrderBy._({
+    if (churchId != null) r'churchId': churchId,
+    if (id != null) r'id': id,
+    if (name != null) r'name': name,
+  });
+
+  Input_FathersMinOrderBy._(this._$data);
+
+  factory Input_FathersMinOrderBy.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('churchId')) {
+      final l$churchId = data['churchId'];
+      result$data['churchId'] = l$churchId == null
+          ? null
+          : fromJson_Enum_OrderBy((l$churchId as String));
+    }
+    if (data.containsKey('id')) {
+      final l$id = data['id'];
+      result$data['id'] = l$id == null
+          ? null
+          : fromJson_Enum_OrderBy((l$id as String));
+    }
+    if (data.containsKey('name')) {
+      final l$name = data['name'];
+      result$data['name'] = l$name == null
+          ? null
+          : fromJson_Enum_OrderBy((l$name as String));
+    }
+    return Input_FathersMinOrderBy._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Enum_OrderBy? get churchId => (_$data['churchId'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('churchId')) {
+      final l$churchId = churchId;
+      result$data['churchId'] = l$churchId == null
+          ? null
+          : toJson_Enum_OrderBy(l$churchId);
+    }
+    if (_$data.containsKey('id')) {
+      final l$id = id;
+      result$data['id'] = l$id == null ? null : toJson_Enum_OrderBy(l$id);
+    }
+    if (_$data.containsKey('name')) {
+      final l$name = name;
+      result$data['name'] = l$name == null ? null : toJson_Enum_OrderBy(l$name);
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_FathersMinOrderBy<Input_FathersMinOrderBy> get copyWith =>
+      CopyWith_Input_FathersMinOrderBy(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_FathersMinOrderBy || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$churchId = churchId;
+    final lOther$churchId = other.churchId;
+    if (_$data.containsKey('churchId') !=
+        other._$data.containsKey('churchId')) {
+      return false;
+    }
+    if (l$churchId != lOther$churchId) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
+      return false;
+    }
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (_$data.containsKey('name') != other._$data.containsKey('name')) {
+      return false;
+    }
+    if (l$name != lOther$name) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$churchId = churchId;
+    final l$id = id;
+    final l$name = name;
+    return Object.hashAll([
+      _$data.containsKey('churchId') ? l$churchId : const {},
+      _$data.containsKey('id') ? l$id : const {},
+      _$data.containsKey('name') ? l$name : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_FathersMinOrderBy<TRes> {
+  factory CopyWith_Input_FathersMinOrderBy(
+    Input_FathersMinOrderBy instance,
+    TRes Function(Input_FathersMinOrderBy) then,
+  ) = _CopyWithImpl_Input_FathersMinOrderBy;
+
+  factory CopyWith_Input_FathersMinOrderBy.stub(TRes res) =
+      _CopyWithStubImpl_Input_FathersMinOrderBy;
+
+  TRes call({Enum_OrderBy? churchId, Enum_OrderBy? id, Enum_OrderBy? name});
+}
+
+class _CopyWithImpl_Input_FathersMinOrderBy<TRes>
+    implements CopyWith_Input_FathersMinOrderBy<TRes> {
+  _CopyWithImpl_Input_FathersMinOrderBy(this._instance, this._then);
+
+  final Input_FathersMinOrderBy _instance;
+
+  final TRes Function(Input_FathersMinOrderBy) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? churchId = _undefined,
+    Object? id = _undefined,
+    Object? name = _undefined,
+  }) => _then(
+    Input_FathersMinOrderBy._({
+      ..._instance._$data,
+      if (churchId != _undefined) 'churchId': (churchId as Enum_OrderBy?),
+      if (id != _undefined) 'id': (id as Enum_OrderBy?),
+      if (name != _undefined) 'name': (name as Enum_OrderBy?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_FathersMinOrderBy<TRes>
+    implements CopyWith_Input_FathersMinOrderBy<TRes> {
+  _CopyWithStubImpl_Input_FathersMinOrderBy(this._res);
+
+  TRes _res;
+
+  call({Enum_OrderBy? churchId, Enum_OrderBy? id, Enum_OrderBy? name}) => _res;
+}
+
+class Input_FathersObjRelInsertInput {
+  factory Input_FathersObjRelInsertInput({
+    required Input_FathersInsertInput data,
+    Input_FathersOnConflict? onConflict,
+  }) => Input_FathersObjRelInsertInput._({
+    r'data': data,
+    if (onConflict != null) r'onConflict': onConflict,
+  });
+
+  Input_FathersObjRelInsertInput._(this._$data);
+
+  factory Input_FathersObjRelInsertInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$data = data['data'];
+    result$data['data'] = Input_FathersInsertInput.fromJson(
+      (l$data as Map<String, dynamic>),
+    );
+    if (data.containsKey('onConflict')) {
+      final l$onConflict = data['onConflict'];
+      result$data['onConflict'] = l$onConflict == null
+          ? null
+          : Input_FathersOnConflict.fromJson(
+              (l$onConflict as Map<String, dynamic>),
+            );
+    }
+    return Input_FathersObjRelInsertInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Input_FathersInsertInput get data =>
+      (_$data['data'] as Input_FathersInsertInput);
+
+  Input_FathersOnConflict? get onConflict =>
+      (_$data['onConflict'] as Input_FathersOnConflict?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$data = data;
+    result$data['data'] = l$data.toJson();
+    if (_$data.containsKey('onConflict')) {
+      final l$onConflict = onConflict;
+      result$data['onConflict'] = l$onConflict?.toJson();
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_FathersObjRelInsertInput<Input_FathersObjRelInsertInput>
+  get copyWith => CopyWith_Input_FathersObjRelInsertInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_FathersObjRelInsertInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$data = data;
+    final lOther$data = other.data;
+    if (l$data != lOther$data) {
+      return false;
+    }
+    final l$onConflict = onConflict;
+    final lOther$onConflict = other.onConflict;
+    if (_$data.containsKey('onConflict') !=
+        other._$data.containsKey('onConflict')) {
+      return false;
+    }
+    if (l$onConflict != lOther$onConflict) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$data = data;
+    final l$onConflict = onConflict;
+    return Object.hashAll([
+      l$data,
+      _$data.containsKey('onConflict') ? l$onConflict : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_FathersObjRelInsertInput<TRes> {
+  factory CopyWith_Input_FathersObjRelInsertInput(
+    Input_FathersObjRelInsertInput instance,
+    TRes Function(Input_FathersObjRelInsertInput) then,
+  ) = _CopyWithImpl_Input_FathersObjRelInsertInput;
+
+  factory CopyWith_Input_FathersObjRelInsertInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_FathersObjRelInsertInput;
+
+  TRes call({
+    Input_FathersInsertInput? data,
+    Input_FathersOnConflict? onConflict,
+  });
+  CopyWith_Input_FathersInsertInput<TRes> get data;
+  CopyWith_Input_FathersOnConflict<TRes> get onConflict;
+}
+
+class _CopyWithImpl_Input_FathersObjRelInsertInput<TRes>
+    implements CopyWith_Input_FathersObjRelInsertInput<TRes> {
+  _CopyWithImpl_Input_FathersObjRelInsertInput(this._instance, this._then);
+
+  final Input_FathersObjRelInsertInput _instance;
+
+  final TRes Function(Input_FathersObjRelInsertInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? data = _undefined, Object? onConflict = _undefined}) =>
+      _then(
+        Input_FathersObjRelInsertInput._({
+          ..._instance._$data,
+          if (data != _undefined && data != null)
+            'data': (data as Input_FathersInsertInput),
+          if (onConflict != _undefined)
+            'onConflict': (onConflict as Input_FathersOnConflict?),
+        }),
+      );
+
+  CopyWith_Input_FathersInsertInput<TRes> get data {
+    final local$data = _instance.data;
+    return CopyWith_Input_FathersInsertInput(local$data, (e) => call(data: e));
+  }
+
+  CopyWith_Input_FathersOnConflict<TRes> get onConflict {
+    final local$onConflict = _instance.onConflict;
+    return local$onConflict == null
+        ? CopyWith_Input_FathersOnConflict.stub(_then(_instance))
+        : CopyWith_Input_FathersOnConflict(
+            local$onConflict,
+            (e) => call(onConflict: e),
+          );
+  }
+}
+
+class _CopyWithStubImpl_Input_FathersObjRelInsertInput<TRes>
+    implements CopyWith_Input_FathersObjRelInsertInput<TRes> {
+  _CopyWithStubImpl_Input_FathersObjRelInsertInput(this._res);
+
+  TRes _res;
+
+  call({Input_FathersInsertInput? data, Input_FathersOnConflict? onConflict}) =>
+      _res;
+
+  CopyWith_Input_FathersInsertInput<TRes> get data =>
+      CopyWith_Input_FathersInsertInput.stub(_res);
+
+  CopyWith_Input_FathersOnConflict<TRes> get onConflict =>
+      CopyWith_Input_FathersOnConflict.stub(_res);
+}
+
+class Input_FathersOnConflict {
+  factory Input_FathersOnConflict({
+    required Enum_FathersConstraint constraint,
+    List<Enum_FathersUpdateColumn>? updateColumns,
+    Input_FathersBoolExp? where,
+  }) => Input_FathersOnConflict._({
+    r'constraint': constraint,
+    if (updateColumns != null) r'updateColumns': updateColumns,
+    if (where != null) r'where': where,
+  });
+
+  Input_FathersOnConflict._(this._$data);
+
+  factory Input_FathersOnConflict.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$constraint = data['constraint'];
+    result$data['constraint'] = fromJson_Enum_FathersConstraint(
+      (l$constraint as String),
+    );
+    if (data.containsKey('updateColumns')) {
+      final l$updateColumns = data['updateColumns'];
+      result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
+          .map((e) => fromJson_Enum_FathersUpdateColumn((e as String)))
+          .toList();
+    }
+    if (data.containsKey('where')) {
+      final l$where = data['where'];
+      result$data['where'] = l$where == null
+          ? null
+          : Input_FathersBoolExp.fromJson((l$where as Map<String, dynamic>));
+    }
+    return Input_FathersOnConflict._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Enum_FathersConstraint get constraint =>
+      (_$data['constraint'] as Enum_FathersConstraint);
+
+  List<Enum_FathersUpdateColumn>? get updateColumns =>
+      (_$data['updateColumns'] as List<Enum_FathersUpdateColumn>?);
+
+  Input_FathersBoolExp? get where => (_$data['where'] as Input_FathersBoolExp?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$constraint = constraint;
+    result$data['constraint'] = toJson_Enum_FathersConstraint(l$constraint);
+    if (_$data.containsKey('updateColumns')) {
+      final l$updateColumns = updateColumns;
+      result$data['updateColumns'] =
+          (l$updateColumns as List<Enum_FathersUpdateColumn>)
+              .map((e) => toJson_Enum_FathersUpdateColumn(e))
+              .toList();
+    }
+    if (_$data.containsKey('where')) {
+      final l$where = where;
+      result$data['where'] = l$where?.toJson();
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_FathersOnConflict<Input_FathersOnConflict> get copyWith =>
+      CopyWith_Input_FathersOnConflict(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_FathersOnConflict || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$constraint = constraint;
+    final lOther$constraint = other.constraint;
+    if (l$constraint != lOther$constraint) {
+      return false;
+    }
+    final l$updateColumns = updateColumns;
+    final lOther$updateColumns = other.updateColumns;
+    if (_$data.containsKey('updateColumns') !=
+        other._$data.containsKey('updateColumns')) {
+      return false;
+    }
+    if (l$updateColumns != null && lOther$updateColumns != null) {
+      if (l$updateColumns.length != lOther$updateColumns.length) {
+        return false;
+      }
+      for (int i = 0; i < l$updateColumns.length; i++) {
+        final l$updateColumns$entry = l$updateColumns[i];
+        final lOther$updateColumns$entry = lOther$updateColumns[i];
+        if (l$updateColumns$entry != lOther$updateColumns$entry) {
+          return false;
+        }
+      }
+    } else if (l$updateColumns != lOther$updateColumns) {
+      return false;
+    }
+    final l$where = where;
+    final lOther$where = other.where;
+    if (_$data.containsKey('where') != other._$data.containsKey('where')) {
+      return false;
+    }
+    if (l$where != lOther$where) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$constraint = constraint;
+    final l$updateColumns = updateColumns;
+    final l$where = where;
+    return Object.hashAll([
+      l$constraint,
+      _$data.containsKey('updateColumns')
+          ? l$updateColumns == null
+                ? null
+                : Object.hashAll(l$updateColumns.map((v) => v))
+          : const {},
+      _$data.containsKey('where') ? l$where : const {},
+    ]);
+  }
+}
+
 abstract class CopyWith_Input_FathersOnConflict<TRes> {
   factory CopyWith_Input_FathersOnConflict(
     Input_FathersOnConflict instance,
@@ -2274,239 +2762,5 @@ class Input_GeometryComparisonExp {
       _$data.containsKey('_stTouches') ? l$$_stTouches : const {},
       _$data.containsKey('_stWithin') ? l$$_stWithin : const {},
     ]);
-  }
-}
-
-abstract class CopyWith_Input_GeometryComparisonExp<TRes> {
-  factory CopyWith_Input_GeometryComparisonExp(
-    Input_GeometryComparisonExp instance,
-    TRes Function(Input_GeometryComparisonExp) then,
-  ) = _CopyWithImpl_Input_GeometryComparisonExp;
-
-  factory CopyWith_Input_GeometryComparisonExp.stub(TRes res) =
-      _CopyWithStubImpl_Input_GeometryComparisonExp;
-
-  TRes call({
-    Input_GeometryCastExp? $_cast,
-    Map<String, dynamic>? $_eq,
-    Map<String, dynamic>? $_gt,
-    Map<String, dynamic>? $_gte,
-    List<Map<String, dynamic>>? $_in,
-    bool? $_isNull,
-    Map<String, dynamic>? $_lt,
-    Map<String, dynamic>? $_lte,
-    Map<String, dynamic>? $_neq,
-    List<Map<String, dynamic>>? $_nin,
-    Input_st_d_within_input? $_st3dDWithin,
-    Map<String, dynamic>? $_st3dIntersects,
-    Map<String, dynamic>? $_stContains,
-    Map<String, dynamic>? $_stCrosses,
-    Input_st_d_within_input? $_stDWithin,
-    Map<String, dynamic>? $_stEquals,
-    Map<String, dynamic>? $_stIntersects,
-    Map<String, dynamic>? $_stOverlaps,
-    Map<String, dynamic>? $_stTouches,
-    Map<String, dynamic>? $_stWithin,
-  });
-  CopyWith_Input_GeometryCastExp<TRes> get $_cast;
-  CopyWith_Input_st_d_within_input<TRes> get $_st3dDWithin;
-  CopyWith_Input_st_d_within_input<TRes> get $_stDWithin;
-}
-
-class _CopyWithImpl_Input_GeometryComparisonExp<TRes>
-    implements CopyWith_Input_GeometryComparisonExp<TRes> {
-  _CopyWithImpl_Input_GeometryComparisonExp(this._instance, this._then);
-
-  final Input_GeometryComparisonExp _instance;
-
-  final TRes Function(Input_GeometryComparisonExp) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? $_cast = _undefined,
-    Object? $_eq = _undefined,
-    Object? $_gt = _undefined,
-    Object? $_gte = _undefined,
-    Object? $_in = _undefined,
-    Object? $_isNull = _undefined,
-    Object? $_lt = _undefined,
-    Object? $_lte = _undefined,
-    Object? $_neq = _undefined,
-    Object? $_nin = _undefined,
-    Object? $_st3dDWithin = _undefined,
-    Object? $_st3dIntersects = _undefined,
-    Object? $_stContains = _undefined,
-    Object? $_stCrosses = _undefined,
-    Object? $_stDWithin = _undefined,
-    Object? $_stEquals = _undefined,
-    Object? $_stIntersects = _undefined,
-    Object? $_stOverlaps = _undefined,
-    Object? $_stTouches = _undefined,
-    Object? $_stWithin = _undefined,
-  }) => _then(
-    Input_GeometryComparisonExp._({
-      ..._instance._$data,
-      if ($_cast != _undefined) '_cast': ($_cast as Input_GeometryCastExp?),
-      if ($_eq != _undefined) '_eq': ($_eq as Map<String, dynamic>?),
-      if ($_gt != _undefined) '_gt': ($_gt as Map<String, dynamic>?),
-      if ($_gte != _undefined) '_gte': ($_gte as Map<String, dynamic>?),
-      if ($_in != _undefined) '_in': ($_in as List<Map<String, dynamic>>?),
-      if ($_isNull != _undefined) '_isNull': ($_isNull as bool?),
-      if ($_lt != _undefined) '_lt': ($_lt as Map<String, dynamic>?),
-      if ($_lte != _undefined) '_lte': ($_lte as Map<String, dynamic>?),
-      if ($_neq != _undefined) '_neq': ($_neq as Map<String, dynamic>?),
-      if ($_nin != _undefined) '_nin': ($_nin as List<Map<String, dynamic>>?),
-      if ($_st3dDWithin != _undefined)
-        '_st3dDWithin': ($_st3dDWithin as Input_st_d_within_input?),
-      if ($_st3dIntersects != _undefined)
-        '_st3dIntersects': ($_st3dIntersects as Map<String, dynamic>?),
-      if ($_stContains != _undefined)
-        '_stContains': ($_stContains as Map<String, dynamic>?),
-      if ($_stCrosses != _undefined)
-        '_stCrosses': ($_stCrosses as Map<String, dynamic>?),
-      if ($_stDWithin != _undefined)
-        '_stDWithin': ($_stDWithin as Input_st_d_within_input?),
-      if ($_stEquals != _undefined)
-        '_stEquals': ($_stEquals as Map<String, dynamic>?),
-      if ($_stIntersects != _undefined)
-        '_stIntersects': ($_stIntersects as Map<String, dynamic>?),
-      if ($_stOverlaps != _undefined)
-        '_stOverlaps': ($_stOverlaps as Map<String, dynamic>?),
-      if ($_stTouches != _undefined)
-        '_stTouches': ($_stTouches as Map<String, dynamic>?),
-      if ($_stWithin != _undefined)
-        '_stWithin': ($_stWithin as Map<String, dynamic>?),
-    }),
-  );
-
-  CopyWith_Input_GeometryCastExp<TRes> get $_cast {
-    final local$$_cast = _instance.$_cast;
-    return local$$_cast == null
-        ? CopyWith_Input_GeometryCastExp.stub(_then(_instance))
-        : CopyWith_Input_GeometryCastExp(local$$_cast, (e) => call($_cast: e));
-  }
-
-  CopyWith_Input_st_d_within_input<TRes> get $_st3dDWithin {
-    final local$$_st3dDWithin = _instance.$_st3dDWithin;
-    return local$$_st3dDWithin == null
-        ? CopyWith_Input_st_d_within_input.stub(_then(_instance))
-        : CopyWith_Input_st_d_within_input(
-            local$$_st3dDWithin,
-            (e) => call($_st3dDWithin: e),
-          );
-  }
-
-  CopyWith_Input_st_d_within_input<TRes> get $_stDWithin {
-    final local$$_stDWithin = _instance.$_stDWithin;
-    return local$$_stDWithin == null
-        ? CopyWith_Input_st_d_within_input.stub(_then(_instance))
-        : CopyWith_Input_st_d_within_input(
-            local$$_stDWithin,
-            (e) => call($_stDWithin: e),
-          );
-  }
-}
-
-class _CopyWithStubImpl_Input_GeometryComparisonExp<TRes>
-    implements CopyWith_Input_GeometryComparisonExp<TRes> {
-  _CopyWithStubImpl_Input_GeometryComparisonExp(this._res);
-
-  TRes _res;
-
-  call({
-    Input_GeometryCastExp? $_cast,
-    Map<String, dynamic>? $_eq,
-    Map<String, dynamic>? $_gt,
-    Map<String, dynamic>? $_gte,
-    List<Map<String, dynamic>>? $_in,
-    bool? $_isNull,
-    Map<String, dynamic>? $_lt,
-    Map<String, dynamic>? $_lte,
-    Map<String, dynamic>? $_neq,
-    List<Map<String, dynamic>>? $_nin,
-    Input_st_d_within_input? $_st3dDWithin,
-    Map<String, dynamic>? $_st3dIntersects,
-    Map<String, dynamic>? $_stContains,
-    Map<String, dynamic>? $_stCrosses,
-    Input_st_d_within_input? $_stDWithin,
-    Map<String, dynamic>? $_stEquals,
-    Map<String, dynamic>? $_stIntersects,
-    Map<String, dynamic>? $_stOverlaps,
-    Map<String, dynamic>? $_stTouches,
-    Map<String, dynamic>? $_stWithin,
-  }) => _res;
-
-  CopyWith_Input_GeometryCastExp<TRes> get $_cast =>
-      CopyWith_Input_GeometryCastExp.stub(_res);
-
-  CopyWith_Input_st_d_within_input<TRes> get $_st3dDWithin =>
-      CopyWith_Input_st_d_within_input.stub(_res);
-
-  CopyWith_Input_st_d_within_input<TRes> get $_stDWithin =>
-      CopyWith_Input_st_d_within_input.stub(_res);
-}
-
-class Input_GroupsAggregateBoolExp {
-  factory Input_GroupsAggregateBoolExp({
-    Input_groupsAggregateBoolExpCount? count,
-  }) => Input_GroupsAggregateBoolExp._({if (count != null) r'count': count});
-
-  Input_GroupsAggregateBoolExp._(this._$data);
-
-  factory Input_GroupsAggregateBoolExp.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('count')) {
-      final l$count = data['count'];
-      result$data['count'] = l$count == null
-          ? null
-          : Input_groupsAggregateBoolExpCount.fromJson(
-              (l$count as Map<String, dynamic>),
-            );
-    }
-    return Input_GroupsAggregateBoolExp._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  Input_groupsAggregateBoolExpCount? get count =>
-      (_$data['count'] as Input_groupsAggregateBoolExpCount?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('count')) {
-      final l$count = count;
-      result$data['count'] = l$count?.toJson();
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_GroupsAggregateBoolExp<Input_GroupsAggregateBoolExp>
-  get copyWith => CopyWith_Input_GroupsAggregateBoolExp(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_GroupsAggregateBoolExp ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$count = count;
-    final lOther$count = other.count;
-    if (_$data.containsKey('count') != other._$data.containsKey('count')) {
-      return false;
-    }
-    if (l$count != lOther$count) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$count = count;
-    return Object.hashAll([_$data.containsKey('count') ? l$count : const {}]);
   }
 }

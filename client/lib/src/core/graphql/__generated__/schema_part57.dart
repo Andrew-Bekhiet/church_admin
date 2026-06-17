@@ -2232,11 +2232,15 @@ enum Enum_AuthUsersAdminOnSelectColumn {
   groupAdminOnUsers,
   groupAllowEdit,
   groupAllowExport,
+  groupAllowRecordAttendance,
+  groupAllowRecordServantsAttendance,
   groupWriteRelatedFamilies,
   permissionId,
   serviceAdminOnUsers,
   serviceAllowEdit,
   serviceAllowExport,
+  serviceAllowRecordAttendance,
+  serviceAllowRecordServantsAttendance,
   serviceGender,
   serviceStudyYear,
   serviceWriteRelatedFamilies,
@@ -2271,6 +2275,10 @@ String toJson_Enum_AuthUsersAdminOnSelectColumn(
       return r'groupAllowEdit';
     case Enum_AuthUsersAdminOnSelectColumn.groupAllowExport:
       return r'groupAllowExport';
+    case Enum_AuthUsersAdminOnSelectColumn.groupAllowRecordAttendance:
+      return r'groupAllowRecordAttendance';
+    case Enum_AuthUsersAdminOnSelectColumn.groupAllowRecordServantsAttendance:
+      return r'groupAllowRecordServantsAttendance';
     case Enum_AuthUsersAdminOnSelectColumn.groupWriteRelatedFamilies:
       return r'groupWriteRelatedFamilies';
     case Enum_AuthUsersAdminOnSelectColumn.permissionId:
@@ -2281,6 +2289,10 @@ String toJson_Enum_AuthUsersAdminOnSelectColumn(
       return r'serviceAllowEdit';
     case Enum_AuthUsersAdminOnSelectColumn.serviceAllowExport:
       return r'serviceAllowExport';
+    case Enum_AuthUsersAdminOnSelectColumn.serviceAllowRecordAttendance:
+      return r'serviceAllowRecordAttendance';
+    case Enum_AuthUsersAdminOnSelectColumn.serviceAllowRecordServantsAttendance:
+      return r'serviceAllowRecordServantsAttendance';
     case Enum_AuthUsersAdminOnSelectColumn.serviceGender:
       return r'serviceGender';
     case Enum_AuthUsersAdminOnSelectColumn.serviceStudyYear:
@@ -2316,6 +2328,11 @@ Enum_AuthUsersAdminOnSelectColumn fromJson_Enum_AuthUsersAdminOnSelectColumn(
       return Enum_AuthUsersAdminOnSelectColumn.groupAllowEdit;
     case r'groupAllowExport':
       return Enum_AuthUsersAdminOnSelectColumn.groupAllowExport;
+    case r'groupAllowRecordAttendance':
+      return Enum_AuthUsersAdminOnSelectColumn.groupAllowRecordAttendance;
+    case r'groupAllowRecordServantsAttendance':
+      return Enum_AuthUsersAdminOnSelectColumn
+          .groupAllowRecordServantsAttendance;
     case r'groupWriteRelatedFamilies':
       return Enum_AuthUsersAdminOnSelectColumn.groupWriteRelatedFamilies;
     case r'permissionId':
@@ -2326,6 +2343,11 @@ Enum_AuthUsersAdminOnSelectColumn fromJson_Enum_AuthUsersAdminOnSelectColumn(
       return Enum_AuthUsersAdminOnSelectColumn.serviceAllowEdit;
     case r'serviceAllowExport':
       return Enum_AuthUsersAdminOnSelectColumn.serviceAllowExport;
+    case r'serviceAllowRecordAttendance':
+      return Enum_AuthUsersAdminOnSelectColumn.serviceAllowRecordAttendance;
+    case r'serviceAllowRecordServantsAttendance':
+      return Enum_AuthUsersAdminOnSelectColumn
+          .serviceAllowRecordServantsAttendance;
     case r'serviceGender':
       return Enum_AuthUsersAdminOnSelectColumn.serviceGender;
     case r'serviceStudyYear':

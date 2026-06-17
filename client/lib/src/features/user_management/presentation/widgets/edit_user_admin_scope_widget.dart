@@ -145,6 +145,36 @@ class EditUserAdminScopeWidget extends StatelessWidget {
               ),
             ),
           ),
+          if (userAdminScope.object case Service() || Group())
+            CheckboxListTile(
+              dense: true,
+              secondary: Icon(UserPermission.recordAllAttendance.icon),
+              title: const Text('تسجيل الحضور لجميع المخدومين'),
+              subtitle: Text(
+                'السماح بتسجيل الحضور لجميع المخدومين في ال$objectLabel',
+              ),
+              value: userAdminScope.canRecordAttendance,
+              onChanged: (value) => onChanged(
+                userAdminScope.copyWith(
+                  canRecordAttendance: value,
+                ),
+              ),
+            ),
+          if (userAdminScope.object case Service() || Group())
+            CheckboxListTile(
+              dense: true,
+              secondary: Icon(UserPermission.recordAllServantsAttendance.icon),
+              title: const Text('تسجيل الحضور لجميع الخدام'),
+              subtitle: Text(
+                'السماح بتسجيل الحضور لجميع الخدام في ال$objectLabel',
+              ),
+              value: userAdminScope.canRecordServantsAttendance,
+              onChanged: (value) => onChanged(
+                userAdminScope.copyWith(
+                  canRecordServantsAttendance: value,
+                ),
+              ),
+            ),
           CheckboxListTile(
             dense: true,
             secondary: Icon(UserPermission.exportAllData.icon),
@@ -159,8 +189,7 @@ class EditUserAdminScopeWidget extends StatelessWidget {
               ),
             ),
           ),
-          if (userAdminScope.object is Service ||
-              userAdminScope.object is Group)
+          if (userAdminScope.object case Service() || Group())
             CheckboxListTile(
               dense: true,
               secondary: Icon(
