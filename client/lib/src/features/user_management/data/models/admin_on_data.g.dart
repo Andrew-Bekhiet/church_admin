@@ -129,6 +129,36 @@ class AdminOnDataFields {
     },
   );
 
+  final FieldMetadata<bool> serviceAllowRecordAttendance = FieldMetadata<bool>(
+    getValue: (obj) =>
+        obj is AdminOnData ? obj.serviceAllowRecordAttendance : null,
+    parentType: AdminOnData,
+    name: 'serviceAllowRecordAttendance',
+    label: 'يمكنه تسجيل الحضور للمخدومين بالخدمة',
+    isCodeOnly: false,
+    operators: {
+      ...BooleanOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull,
+    },
+  );
+
+  final FieldMetadata<bool> serviceAllowRecordServantsAttendance =
+      FieldMetadata<bool>(
+        getValue: (obj) => obj is AdminOnData
+            ? obj.serviceAllowRecordServantsAttendance
+            : null,
+        parentType: AdminOnData,
+        name: 'serviceAllowRecordServantsAttendance',
+        label: 'يمكنه تسجيل الحضور للخدام بالخدمة',
+        isCodeOnly: false,
+        operators: {
+          ...BooleanOperator.values,
+          PrimitiveOperator.isNull,
+          PrimitiveOperator.isNotNull,
+        },
+      );
+
   final FieldMetadata<bool> serviceAdminOnUsers = FieldMetadata<bool>(
     getValue: (obj) => obj is AdminOnData ? obj.serviceAdminOnUsers : null,
     parentType: AdminOnData,
@@ -205,6 +235,35 @@ class AdminOnDataFields {
     },
   );
 
+  final FieldMetadata<bool> groupAllowRecordAttendance = FieldMetadata<bool>(
+    getValue: (obj) =>
+        obj is AdminOnData ? obj.groupAllowRecordAttendance : null,
+    parentType: AdminOnData,
+    name: 'groupAllowRecordAttendance',
+    label: 'يمكنه تسجيل الحضور للمخدومين بالمجموعة',
+    isCodeOnly: false,
+    operators: {
+      ...BooleanOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull,
+    },
+  );
+
+  final FieldMetadata<bool> groupAllowRecordServantsAttendance =
+      FieldMetadata<bool>(
+        getValue: (obj) =>
+            obj is AdminOnData ? obj.groupAllowRecordServantsAttendance : null,
+        parentType: AdminOnData,
+        name: 'groupAllowRecordServantsAttendance',
+        label: 'يمكنه تسجيل الحضور للخدام بالمجموعة',
+        isCodeOnly: false,
+        operators: {
+          ...BooleanOperator.values,
+          PrimitiveOperator.isNull,
+          PrimitiveOperator.isNotNull,
+        },
+      );
+
   final FieldMetadata<bool> groupAdminOnUsers = FieldMetadata<bool>(
     getValue: (obj) => obj is AdminOnData ? obj.groupAdminOnUsers : null,
     parentType: AdminOnData,
@@ -255,12 +314,16 @@ class AdminOnDataFields {
     serviceGender,
     serviceAllowExport,
     serviceAllowEdit,
+    serviceAllowRecordAttendance,
+    serviceAllowRecordServantsAttendance,
     serviceAdminOnUsers,
     serviceWriteRelatedFamilies,
     classes,
     group,
     groupAllowExport,
     groupAllowEdit,
+    groupAllowRecordAttendance,
+    groupAllowRecordServantsAttendance,
     groupAdminOnUsers,
     groupWriteRelatedFamilies,
     user,
@@ -275,12 +338,17 @@ class AdminOnDataFields {
     'serviceGender': serviceGender,
     'serviceAllowExport': serviceAllowExport,
     'serviceAllowEdit': serviceAllowEdit,
+    'serviceAllowRecordAttendance': serviceAllowRecordAttendance,
+    'serviceAllowRecordServantsAttendance':
+        serviceAllowRecordServantsAttendance,
     'serviceAdminOnUsers': serviceAdminOnUsers,
     'serviceWriteRelatedFamilies': serviceWriteRelatedFamilies,
     'classes': classes,
     'group': group,
     'groupAllowExport': groupAllowExport,
     'groupAllowEdit': groupAllowEdit,
+    'groupAllowRecordAttendance': groupAllowRecordAttendance,
+    'groupAllowRecordServantsAttendance': groupAllowRecordServantsAttendance,
     'groupAdminOnUsers': groupAdminOnUsers,
     'groupWriteRelatedFamilies': groupWriteRelatedFamilies,
     'user': user,
@@ -310,6 +378,9 @@ AdminOnData _$AdminOnDataFromJson(Map json) => AdminOnData(
   serviceGender: json['serviceGender'] as bool?,
   serviceAllowExport: json['serviceAllowExport'] as bool?,
   serviceAllowEdit: json['serviceAllowEdit'] as bool?,
+  serviceAllowRecordAttendance: json['serviceAllowRecordAttendance'] as bool?,
+  serviceAllowRecordServantsAttendance:
+      json['serviceAllowRecordServantsAttendance'] as bool?,
   serviceAdminOnUsers: json['serviceAdminOnUsers'] as bool?,
   serviceWriteRelatedFamilies: json['serviceWriteRelatedFamilies'] as bool?,
   classes:
@@ -322,6 +393,9 @@ AdminOnData _$AdminOnDataFromJson(Map json) => AdminOnData(
       : Group.fromJson(Map<String, Object?>.from(json['group'] as Map)),
   groupAllowExport: json['groupAllowExport'] as bool?,
   groupAllowEdit: json['groupAllowEdit'] as bool?,
+  groupAllowRecordAttendance: json['groupAllowRecordAttendance'] as bool?,
+  groupAllowRecordServantsAttendance:
+      json['groupAllowRecordServantsAttendance'] as bool?,
   groupAdminOnUsers: json['groupAdminOnUsers'] as bool?,
   groupWriteRelatedFamilies: json['groupWriteRelatedFamilies'] as bool?,
   user: json['user'] == null
@@ -341,12 +415,18 @@ Map<String, dynamic> _$AdminOnDataToJson(AdminOnData instance) =>
       'serviceGender': instance.serviceGender,
       'serviceAllowExport': instance.serviceAllowExport,
       'serviceAllowEdit': instance.serviceAllowEdit,
+      'serviceAllowRecordAttendance': instance.serviceAllowRecordAttendance,
+      'serviceAllowRecordServantsAttendance':
+          instance.serviceAllowRecordServantsAttendance,
       'serviceAdminOnUsers': instance.serviceAdminOnUsers,
       'serviceWriteRelatedFamilies': instance.serviceWriteRelatedFamilies,
       'classes': instance.classes.map((e) => e.toJson()).toList(),
       'group': instance.group?.toJson(),
       'groupAllowExport': instance.groupAllowExport,
       'groupAllowEdit': instance.groupAllowEdit,
+      'groupAllowRecordAttendance': instance.groupAllowRecordAttendance,
+      'groupAllowRecordServantsAttendance':
+          instance.groupAllowRecordServantsAttendance,
       'groupAdminOnUsers': instance.groupAdminOnUsers,
       'groupWriteRelatedFamilies': instance.groupWriteRelatedFamilies,
       'user': instance.user?.toJson(),

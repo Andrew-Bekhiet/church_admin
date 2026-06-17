@@ -23,12 +23,16 @@ mixin _$AdminOnData {
   bool? get serviceGender;
   bool? get serviceAllowExport;
   bool? get serviceAllowEdit;
+  bool? get serviceAllowRecordAttendance;
+  bool? get serviceAllowRecordServantsAttendance;
   bool? get serviceAdminOnUsers;
   bool? get serviceWriteRelatedFamilies;
   List<Class> get classes;
   Group? get group;
   bool? get groupAllowExport;
   bool? get groupAllowEdit;
+  bool? get groupAllowRecordAttendance;
+  bool? get groupAllowRecordServantsAttendance;
   bool? get groupAdminOnUsers;
   bool? get groupWriteRelatedFamilies;
   User? get user;
@@ -63,6 +67,18 @@ mixin _$AdminOnData {
                 other.serviceAllowExport == serviceAllowExport) &&
             (identical(other.serviceAllowEdit, serviceAllowEdit) ||
                 other.serviceAllowEdit == serviceAllowEdit) &&
+            (identical(
+                  other.serviceAllowRecordAttendance,
+                  serviceAllowRecordAttendance,
+                ) ||
+                other.serviceAllowRecordAttendance ==
+                    serviceAllowRecordAttendance) &&
+            (identical(
+                  other.serviceAllowRecordServantsAttendance,
+                  serviceAllowRecordServantsAttendance,
+                ) ||
+                other.serviceAllowRecordServantsAttendance ==
+                    serviceAllowRecordServantsAttendance) &&
             (identical(other.serviceAdminOnUsers, serviceAdminOnUsers) ||
                 other.serviceAdminOnUsers == serviceAdminOnUsers) &&
             (identical(
@@ -77,6 +93,18 @@ mixin _$AdminOnData {
                 other.groupAllowExport == groupAllowExport) &&
             (identical(other.groupAllowEdit, groupAllowEdit) ||
                 other.groupAllowEdit == groupAllowEdit) &&
+            (identical(
+                  other.groupAllowRecordAttendance,
+                  groupAllowRecordAttendance,
+                ) ||
+                other.groupAllowRecordAttendance ==
+                    groupAllowRecordAttendance) &&
+            (identical(
+                  other.groupAllowRecordServantsAttendance,
+                  groupAllowRecordServantsAttendance,
+                ) ||
+                other.groupAllowRecordServantsAttendance ==
+                    groupAllowRecordServantsAttendance) &&
             (identical(other.groupAdminOnUsers, groupAdminOnUsers) ||
                 other.groupAdminOnUsers == groupAdminOnUsers) &&
             (identical(
@@ -101,12 +129,16 @@ mixin _$AdminOnData {
     serviceGender,
     serviceAllowExport,
     serviceAllowEdit,
+    serviceAllowRecordAttendance,
+    serviceAllowRecordServantsAttendance,
     serviceAdminOnUsers,
     serviceWriteRelatedFamilies,
     const DeepCollectionEquality().hash(classes),
     group,
     groupAllowExport,
     groupAllowEdit,
+    groupAllowRecordAttendance,
+    groupAllowRecordServantsAttendance,
     groupAdminOnUsers,
     groupWriteRelatedFamilies,
     user,
@@ -114,7 +146,7 @@ mixin _$AdminOnData {
 
   @override
   String toString() {
-    return 'AdminOnData(permissionId: $permissionId, area: $area, areaAllowExport: $areaAllowExport, areaAllowEdit: $areaAllowEdit, areaAdminOnUsers: $areaAdminOnUsers, service: $service, serviceStudyYearData: $serviceStudyYearData, serviceGender: $serviceGender, serviceAllowExport: $serviceAllowExport, serviceAllowEdit: $serviceAllowEdit, serviceAdminOnUsers: $serviceAdminOnUsers, serviceWriteRelatedFamilies: $serviceWriteRelatedFamilies, classes: $classes, group: $group, groupAllowExport: $groupAllowExport, groupAllowEdit: $groupAllowEdit, groupAdminOnUsers: $groupAdminOnUsers, groupWriteRelatedFamilies: $groupWriteRelatedFamilies, user: $user)';
+    return 'AdminOnData(permissionId: $permissionId, area: $area, areaAllowExport: $areaAllowExport, areaAllowEdit: $areaAllowEdit, areaAdminOnUsers: $areaAdminOnUsers, service: $service, serviceStudyYearData: $serviceStudyYearData, serviceGender: $serviceGender, serviceAllowExport: $serviceAllowExport, serviceAllowEdit: $serviceAllowEdit, serviceAllowRecordAttendance: $serviceAllowRecordAttendance, serviceAllowRecordServantsAttendance: $serviceAllowRecordServantsAttendance, serviceAdminOnUsers: $serviceAdminOnUsers, serviceWriteRelatedFamilies: $serviceWriteRelatedFamilies, classes: $classes, group: $group, groupAllowExport: $groupAllowExport, groupAllowEdit: $groupAllowEdit, groupAllowRecordAttendance: $groupAllowRecordAttendance, groupAllowRecordServantsAttendance: $groupAllowRecordServantsAttendance, groupAdminOnUsers: $groupAdminOnUsers, groupWriteRelatedFamilies: $groupWriteRelatedFamilies, user: $user)';
   }
 }
 
@@ -136,12 +168,16 @@ abstract mixin class $AdminOnDataCopyWith<$Res> {
     bool? serviceGender,
     bool? serviceAllowExport,
     bool? serviceAllowEdit,
+    bool? serviceAllowRecordAttendance,
+    bool? serviceAllowRecordServantsAttendance,
     bool? serviceAdminOnUsers,
     bool? serviceWriteRelatedFamilies,
     List<Class> classes,
     Group? group,
     bool? groupAllowExport,
     bool? groupAllowEdit,
+    bool? groupAllowRecordAttendance,
+    bool? groupAllowRecordServantsAttendance,
     bool? groupAdminOnUsers,
     bool? groupWriteRelatedFamilies,
     User? user,
@@ -170,12 +206,16 @@ class _$AdminOnDataCopyWithImpl<$Res> implements $AdminOnDataCopyWith<$Res> {
     Object? serviceGender = freezed,
     Object? serviceAllowExport = freezed,
     Object? serviceAllowEdit = freezed,
+    Object? serviceAllowRecordAttendance = freezed,
+    Object? serviceAllowRecordServantsAttendance = freezed,
     Object? serviceAdminOnUsers = freezed,
     Object? serviceWriteRelatedFamilies = freezed,
     Object? classes = null,
     Object? group = freezed,
     Object? groupAllowExport = freezed,
     Object? groupAllowEdit = freezed,
+    Object? groupAllowRecordAttendance = freezed,
+    Object? groupAllowRecordServantsAttendance = freezed,
     Object? groupAdminOnUsers = freezed,
     Object? groupWriteRelatedFamilies = freezed,
     Object? user = freezed,
@@ -222,6 +262,15 @@ class _$AdminOnDataCopyWithImpl<$Res> implements $AdminOnDataCopyWith<$Res> {
             ? _self.serviceAllowEdit
             : serviceAllowEdit // ignore: cast_nullable_to_non_nullable
                   as bool?,
+        serviceAllowRecordAttendance: freezed == serviceAllowRecordAttendance
+            ? _self.serviceAllowRecordAttendance
+            : serviceAllowRecordAttendance // ignore: cast_nullable_to_non_nullable
+                  as bool?,
+        serviceAllowRecordServantsAttendance:
+            freezed == serviceAllowRecordServantsAttendance
+            ? _self.serviceAllowRecordServantsAttendance
+            : serviceAllowRecordServantsAttendance // ignore: cast_nullable_to_non_nullable
+                  as bool?,
         serviceAdminOnUsers: freezed == serviceAdminOnUsers
             ? _self.serviceAdminOnUsers
             : serviceAdminOnUsers // ignore: cast_nullable_to_non_nullable
@@ -245,6 +294,15 @@ class _$AdminOnDataCopyWithImpl<$Res> implements $AdminOnDataCopyWith<$Res> {
         groupAllowEdit: freezed == groupAllowEdit
             ? _self.groupAllowEdit
             : groupAllowEdit // ignore: cast_nullable_to_non_nullable
+                  as bool?,
+        groupAllowRecordAttendance: freezed == groupAllowRecordAttendance
+            ? _self.groupAllowRecordAttendance
+            : groupAllowRecordAttendance // ignore: cast_nullable_to_non_nullable
+                  as bool?,
+        groupAllowRecordServantsAttendance:
+            freezed == groupAllowRecordServantsAttendance
+            ? _self.groupAllowRecordServantsAttendance
+            : groupAllowRecordServantsAttendance // ignore: cast_nullable_to_non_nullable
                   as bool?,
         groupAdminOnUsers: freezed == groupAdminOnUsers
             ? _self.groupAdminOnUsers

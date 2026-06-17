@@ -18,7 +18,7 @@ insert_permissions:
   - role: user
     permission:
       check:
-        _and:
+        _or:
           - _exists:
               _table:
                 name: users_permissions
@@ -28,55 +28,64 @@ insert_permissions:
                   - uid:
                       _eq: X-Hasura-User-Id
                   - permission:
-                      _eq: recordHistory
-          - _or:
-              - _exists:
-                  _table:
-                    name: users_permissions
-                    schema: auth
-                  _where:
-                    _and:
-                      - uid:
-                          _eq: X-Hasura-User-Id
-                      - permission:
-                          _eq: writeAllData
-              - _exists:
-                  _table:
-                    name: users_admin_on
-                    schema: auth
-                  _where:
-                    _and:
-                      - uid:
-                          _eq: X-Hasura-User-Id
-                      - _or:
-                          - _and:
-                              - admin_on_group:
+                      _eq: recordAllAttendance
+          - _exists:
+              _table:
+                name: users_permissions
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - permission:
+                      _eq: recordAllServantsAttendance
+          - _exists:
+              _table:
+                name: users_attendance_permissions
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - _or:
+                      - allow_record_attendance:
+                          _eq: true
+                      - allow_record_servants_attendance:
+                          _eq: true
+                  - _or:
+                      - _and:
+                          - entity_type:
+                              _eq: any
+                          - entity_id:
+                              _is_null: true
+                      - _and:
+                          - entity_type:
+                              _eq: group
+                          - entity_id:
+                              _ceq:
+                                - $
+                                - group_id
+                      - _and:
+                          - entity_type:
+                              _eq: service
+                          - entity_id:
+                              _ceq:
+                                - $
+                                - service_id
+                          - _or:
+                              - service_study_year:
+                                  _is_null: true
+                              - service_study_year:
                                   _ceq:
                                     - $
-                                    - group_id
-                              - group_allow_edit:
-                                  _eq: true
-                          - _and:
-                              - admin_on_service:
+                                    - service_study_year
+                          - _or:
+                              - service_gender:
+                                  _is_null: true
+                              - service_gender:
                                   _ceq:
                                     - $
-                                    - service_id
-                              - service_allow_edit:
-                                  _eq: true
-                              - _or:
-                                  - service_gender:
-                                      _is_null: true
-                                  - service_gender:
-                                      _ceq:
-                                        - $
-                                        - service_gender
-                              - _or:
-                                  - service_study_year:
-                                      _is_null: true
-                                  - service_study_year:
-                                      _ceq:
-                                        - $
-                                        - service_study_year
+                                    - service_gender
       columns:
         - day_id
         - group_id
@@ -94,7 +103,7 @@ select_permissions:
         - id
         - service_id
       filter:
-        _and:
+        _or:
           - _exists:
               _table:
                 name: users_permissions
@@ -104,55 +113,46 @@ select_permissions:
                   - uid:
                       _eq: X-Hasura-User-Id
                   - permission:
-                      _eq: recordHistory
-          - _or:
-              - _exists:
-                  _table:
-                    name: users_permissions
-                    schema: auth
-                  _where:
-                    _and:
-                      - uid:
-                          _eq: X-Hasura-User-Id
-                      - permission:
-                          _eq: readAllData
-              - _exists:
-                  _table:
-                    name: users_admin_on
-                    schema: auth
-                  _where:
-                    _and:
-                      - uid:
-                          _eq: X-Hasura-User-Id
-                      - _or:
-                          - _and:
-                              - admin_on_group:
+                      _eq: readAllData
+          - _exists:
+              _table:
+                name: users_admin_on
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - _or:
+                      - _and:
+                          - admin_on_group:
+                              _ceq:
+                                - $
+                                - group_id
+                      - _and:
+                          - admin_on_service:
+                              _ceq:
+                                - $
+                                - service_id
+                          - _or:
+                              - service_gender:
+                                  _is_null: true
+                              - service_gender:
                                   _ceq:
                                     - $
-                                    - group_id
-                          - _and:
-                              - admin_on_service:
+                                    - service_gender
+                          - _or:
+                              - service_study_year:
+                                  _is_null: true
+                              - service_study_year:
                                   _ceq:
                                     - $
-                                    - service_id
-                              - _or:
-                                  - service_gender:
-                                      _is_null: true
-                                  - service_gender:
-                                      _ceq:
-                                        - $
-                                        - service_gender
-                              - _or:
-                                  - service_study_year:
-                                      _ceq:
-                                        - $
-                                        - service_study_year
+                                    - service_study_year
       allow_aggregations: true
 delete_permissions:
   - role: user
     permission:
       filter:
-        _and:
+        _or:
           - _exists:
               _table:
                 name: users_permissions
@@ -162,52 +162,51 @@ delete_permissions:
                   - uid:
                       _eq: X-Hasura-User-Id
                   - permission:
-                      _eq: recordHistory
-          - _or:
-              - _exists:
-                  _table:
-                    name: users_permissions
-                    schema: auth
-                  _where:
-                    _and:
-                      - uid:
-                          _eq: X-Hasura-User-Id
-                      - permission:
-                          _eq: writeAllData
-              - _exists:
-                  _table:
-                    name: users_admin_on
-                    schema: auth
-                  _where:
-                    _and:
-                      - uid:
-                          _eq: X-Hasura-User-Id
-                      - _or:
-                          - _and:
-                              - admin_on_group:
+                      _eq: writeAllData
+          - _exists:
+              _table:
+                name: users_attendance_permissions
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - _or:
+                      - allow_record_attendance:
+                          _eq: true
+                      - allow_record_servants_attendance:
+                          _eq: true
+                  - _or:
+                      - _and:
+                          - entity_type:
+                              _eq: any
+                          - entity_id:
+                              _is_null: true
+                      - _and:
+                          - entity_type:
+                              _eq: group
+                          - entity_id:
+                              _ceq:
+                                - $
+                                - group_id
+                      - _and:
+                          - entity_type:
+                              _eq: service
+                          - entity_id:
+                              _ceq:
+                                - $
+                                - service_id
+                          - _or:
+                              - service_study_year:
+                                  _is_null: true
+                              - service_study_year:
                                   _ceq:
                                     - $
-                                    - group_id
-                              - group_allow_edit:
-                                  _eq: true
-                          - _and:
-                              - admin_on_service:
+                                    - service_study_year
+                          - _or:
+                              - service_gender:
+                                  _is_null: true
+                              - service_gender:
                                   _ceq:
                                     - $
-                                    - service_id
-                              - service_allow_edit:
-                                  _eq: true
-                              - _or:
-                                  - service_gender:
-                                      _is_null: true
-                                  - service_gender:
-                                      _ceq:
-                                        - $
-                                        - service_gender
-                              - _or:
-                                  - service_study_year:
-                                      _is_null: true
-                                  - service_study_year:
-                                      _ceq:
-                                        - $
-                                        - service_study_year
+                                    - service_gender

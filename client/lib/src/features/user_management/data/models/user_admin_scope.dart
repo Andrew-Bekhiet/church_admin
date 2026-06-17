@@ -8,6 +8,8 @@ class UserAdminScope<T extends ViewableWithID> {
   final bool canWriteData;
   final bool canExportData;
   final bool? canWriteRelatedFamilies;
+  final bool? canRecordAttendance;
+  final bool? canRecordServantsAttendance;
 
   final StudyYear? studyYear;
   final bool? gender;
@@ -18,6 +20,8 @@ class UserAdminScope<T extends ViewableWithID> {
     required this.canWriteData,
     required this.canExportData,
     this.canWriteRelatedFamilies,
+    this.canRecordAttendance,
+    this.canRecordServantsAttendance,
     this.studyYear,
     this.gender,
   });
@@ -40,6 +44,10 @@ class UserAdminScope<T extends ViewableWithID> {
           canExportData: adminOnData.serviceAllowExport ?? false,
           canWriteRelatedFamilies:
               adminOnData.serviceWriteRelatedFamilies ?? false,
+          canRecordAttendance:
+              adminOnData.serviceAllowRecordAttendance ?? false,
+          canRecordServantsAttendance:
+              adminOnData.serviceAllowRecordServantsAttendance ?? false,
           studyYear: adminOnData.serviceStudyYearData,
           gender: adminOnData.serviceGender,
         );
@@ -52,6 +60,9 @@ class UserAdminScope<T extends ViewableWithID> {
           canExportData: adminOnData.groupAllowExport ?? false,
           canWriteRelatedFamilies:
               adminOnData.groupWriteRelatedFamilies ?? false,
+          canRecordAttendance: adminOnData.groupAllowRecordAttendance ?? false,
+          canRecordServantsAttendance:
+              adminOnData.groupAllowRecordServantsAttendance ?? false,
         );
 
       default:
@@ -66,6 +77,8 @@ class UserAdminScope<T extends ViewableWithID> {
     bool? canWriteRelatedFamilies,
     Object? studyYear = _undefined,
     Object? gender = _undefined,
+    bool? canRecordAttendance,
+    bool? canRecordServantsAttendance,
   }) {
     final newCanWriteData = canWriteData ?? this.canWriteData;
 
@@ -77,6 +90,9 @@ class UserAdminScope<T extends ViewableWithID> {
       canExportData: canExportData ?? this.canExportData,
       canWriteRelatedFamilies:
           canWriteRelatedFamilies ?? this.canWriteRelatedFamilies,
+      canRecordAttendance: canRecordAttendance ?? this.canRecordAttendance,
+      canRecordServantsAttendance:
+          canRecordServantsAttendance ?? this.canRecordServantsAttendance,
       studyYear: studyYear is StudyYear? ? studyYear : this.studyYear,
       gender: gender is bool? ? gender : this.gender,
     );
@@ -101,6 +117,8 @@ class UserAdminScope<T extends ViewableWithID> {
           serviceAllowEdit: canWriteData,
           serviceAllowExport: canExportData,
           serviceWriteRelatedFamilies: canWriteRelatedFamilies,
+          serviceAllowRecordAttendance: canRecordAttendance,
+          serviceAllowRecordServantsAttendance: canRecordServantsAttendance,
           serviceStudyYearData: studyYear,
           serviceGender: gender,
         );
@@ -113,6 +131,8 @@ class UserAdminScope<T extends ViewableWithID> {
           groupAllowEdit: canWriteData,
           groupAllowExport: canExportData,
           groupWriteRelatedFamilies: canWriteRelatedFamilies,
+          groupAllowRecordAttendance: canRecordAttendance,
+          groupAllowRecordServantsAttendance: canRecordServantsAttendance,
         );
 
       default:

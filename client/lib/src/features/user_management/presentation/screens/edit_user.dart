@@ -83,57 +83,17 @@ class _EditUserState extends State<EditUser> {
                 borderRadius: BorderRadius.circular(16),
               ),
               child: Column(
-                children: [
-                  PermissionCheckWidget(
-                    permission: UserPermission.manageAllUsers,
-                    permissions: permissions,
-                    onToggle: _togglePermission,
-                    subtitleText: 'السماح بإضافة وتعديل وحذف المستخدمين',
-                  ),
-                  PermissionCheckWidget(
-                    permission: UserPermission.writeAllData,
-                    permissions: permissions,
-                    onToggle: _togglePermission,
-                    subtitleText: 'السماح بتعديل جميع بيانات التطبيق',
-                  ),
-                  PermissionCheckWidget(
-                    permission: UserPermission.exportAllData,
-                    permissions: permissions,
-                    onToggle: _togglePermission,
-                    subtitleText: 'السماح بتصدير جميع البيانات',
-                  ),
-                  PermissionCheckWidget(
-                    permission: UserPermission.readAllData,
-                    permissions: permissions,
-                    onToggle: _togglePermission,
-                    subtitleText: 'السماح برؤية جميع بيانات التطبيق',
-                  ),
-                  const Divider(),
-                  PermissionCheckWidget(
-                    permission: UserPermission.recordHistory,
-                    permissions: permissions,
-                    onToggle: _togglePermission,
-                    subtitleText: 'السماح بتسجيل الحضور للخدام والمخدومين',
-                  ),
-                  PermissionCheckWidget(
-                    permission: UserPermission.changeOldHistory,
-                    permissions: permissions,
-                    onToggle: _togglePermission,
-                    subtitleText: 'السماح بتعديل سجلات الحضور لأي يوم سابق',
-                  ),
-                  PermissionCheckWidget(
-                    permission: UserPermission.deleteData,
-                    permissions: permissions,
-                    onToggle: _togglePermission,
-                    subtitleText: 'السماح بحذف البيانات التي يمكن تعديلها',
-                  ),
-                  PermissionCheckWidget(
-                    permission: UserPermission.recoverDeleted,
-                    permissions: permissions,
-                    onToggle: _togglePermission,
-                    subtitleText: 'السماح باسترجاع البيانات المحذوفة',
-                  ),
-                ],
+                children: UserPermission.values
+                    .where((p) => p != UserPermission.approved)
+                    .map(
+                      (p) => PermissionCheckWidget(
+                        permission: p,
+                        permissions: permissions,
+                        onToggle: _togglePermission,
+                        subtitleText: p.label,
+                      ),
+                    )
+                    .toList(),
               ),
             ),
             ListTile(

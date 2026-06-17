@@ -21,78 +21,14 @@ class PermissionsSetWidget extends StatelessWidget {
       ),
       child: Column(
         children: [
-          if (permissions.manageAllUsers)
-            ListTile(
-              leading: Icon(UserPermission.manageAllUsers.icon),
-              title: Text(UserPermission.manageAllUsers.label),
-              subtitle: const Text(
-                'السماح بإضافة وتعديل وحذف المستخدمين',
+          for (final permission in UserPermission.values)
+            if (permission != UserPermission.approved &&
+                permissions.contains(permission))
+              ListTile(
+                leading: Icon(permission.icon),
+                title: Text(permission.label),
+                subtitle: Text(permission.label),
               ),
-            ),
-          if (permissions.writeAllData)
-            ListTile(
-              leading: Icon(UserPermission.writeAllData.icon),
-              title: Text(UserPermission.writeAllData.label),
-              subtitle: const Text(
-                'السماح بتعديل جميع بيانات التطبيق',
-              ),
-            ),
-          if (permissions.exportAllData)
-            ListTile(
-              leading: Icon(UserPermission.exportAllData.icon),
-              title: Text(UserPermission.exportAllData.label),
-              subtitle: const Text(
-                'السماح بتصدير جميع البيانات',
-              ),
-            ),
-          if (permissions.readAllData)
-            ListTile(
-              leading: Icon(UserPermission.readAllData.icon),
-              title: Text(UserPermission.readAllData.label),
-              subtitle: const Text(
-                'السماح برؤية جميع بيانات التطبيق',
-              ),
-            ),
-          if ((permissions.manageAllUsers ||
-                  permissions.readAllData ||
-                  permissions.writeAllData ||
-                  permissions.exportAllData) &&
-              (permissions.recordHistory ||
-                  permissions.changeOldHistory ||
-                  permissions.recoverDeleted))
-            const Divider(),
-          if (permissions.recordHistory)
-            ListTile(
-              leading: Icon(UserPermission.recordHistory.icon),
-              title: Text(UserPermission.recordHistory.label),
-              subtitle: const Text(
-                'السماح بتسجيل الحضور للخدام والمخدومين',
-              ),
-            ),
-          if (permissions.changeOldHistory)
-            ListTile(
-              leading: Icon(UserPermission.changeOldHistory.icon),
-              title: Text(UserPermission.changeOldHistory.label),
-              subtitle: const Text(
-                'السماح بتعديل سجلات الحضور لأي يوم سابق',
-              ),
-            ),
-          if (permissions.deleteData)
-            ListTile(
-              leading: Icon(UserPermission.deleteData.icon),
-              title: Text(UserPermission.deleteData.label),
-              subtitle: const Text(
-                'السماح بحذف البيانات التي يمكن تعديلها',
-              ),
-            ),
-          if (permissions.recoverDeleted)
-            ListTile(
-              leading: Icon(UserPermission.recoverDeleted.icon),
-              title: Text(UserPermission.recoverDeleted.label),
-              subtitle: const Text(
-                'السماح باسترجاع البيانات المحذوفة',
-              ),
-            ),
         ],
       ),
     );

@@ -22,13 +22,13 @@ enum UserPermission implements LabeledEnum {
     icon: Symbols.edit,
   ),
   exportAllData(label: 'تصدير جميع البيانات', icon: Symbols.upload),
-  recordHistory(
-    label: 'تسجيل الحضور',
-    icon: Symbols.event_available,
+  recordAllAttendance(
+    label: 'تسجيل الحضور لجميع المخدومين',
+    icon: Symbols.productivity,
   ),
-  changeOldHistory(
-    label: 'تغيير الحضور لأي يوم',
-    icon: Symbols.history,
+  recordAllServantsAttendance(
+    label: 'تسجيل الحضور لجميع الخدام',
+    icon: Symbols.productivity,
   ),
   deleteData(
     label: 'حذف البيانات',
@@ -57,7 +57,10 @@ enum UserPermission implements LabeledEnum {
           UserPermission.writeAllData,
           ...UserPermission.writeAllData.requires,
         },
-        UserPermission.exportAllData || UserPermission.writeAllData => {
+        UserPermission.writeAllData ||
+        UserPermission.exportAllData ||
+        UserPermission.recordAllAttendance ||
+        UserPermission.recordAllServantsAttendance => {
           UserPermission.readAllData,
           ...UserPermission.readAllData.requires,
         },
@@ -69,4 +72,8 @@ enum UserPermission implements LabeledEnum {
       },
     };
   }
+
+  String get subtitle => this != UserPermission.approved
+      ? 'السماح ب$label'
+      : 'يجب تفعيل الحساب للسماح للمستخدم بالدخول';
 }

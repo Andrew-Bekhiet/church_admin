@@ -7,8 +7,8 @@ INSERT INTO auth.permissions (name) VALUES
 ('manageAllUsers'),
 ('readAllData'),
 ('writeAllData'),
-('recordHistory'),
-('changeOldHistory'),
+('recordAllAttendance'),
+('recordAllServantsAttendance'),
 ('recoverDeleted'),
 ('deleteData'),
 ('exportAllData')

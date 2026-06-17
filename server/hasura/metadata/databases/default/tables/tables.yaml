@@ -1,5 +1,6 @@
 - "!include auth_permissions.yaml"
 - "!include auth_users_admin_on.yaml"
+- "!include auth_users_attendance_permissions.yaml"
 - "!include auth_users_data.yaml"
 - "!include auth_users_permissions.yaml"
 - "!include auth_users_permissions_by_entity_id.yaml"

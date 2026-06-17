@@ -1,6 +1,731 @@
 // Part 8 of the schema
 part of "schema.graphql.dart";
 
+abstract class CopyWith_Input_AuthUsersAdminOnStreamCursorInput<TRes> {
+  factory CopyWith_Input_AuthUsersAdminOnStreamCursorInput(
+    Input_AuthUsersAdminOnStreamCursorInput instance,
+    TRes Function(Input_AuthUsersAdminOnStreamCursorInput) then,
+  ) = _CopyWithImpl_Input_AuthUsersAdminOnStreamCursorInput;
+
+  factory CopyWith_Input_AuthUsersAdminOnStreamCursorInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_AuthUsersAdminOnStreamCursorInput;
+
+  TRes call({
+    Input_AuthUsersAdminOnStreamCursorValueInput? initialValue,
+    Enum_CursorOrdering? ordering,
+  });
+  CopyWith_Input_AuthUsersAdminOnStreamCursorValueInput<TRes> get initialValue;
+}
+
+class _CopyWithImpl_Input_AuthUsersAdminOnStreamCursorInput<TRes>
+    implements CopyWith_Input_AuthUsersAdminOnStreamCursorInput<TRes> {
+  _CopyWithImpl_Input_AuthUsersAdminOnStreamCursorInput(
+    this._instance,
+    this._then,
+  );
+
+  final Input_AuthUsersAdminOnStreamCursorInput _instance;
+
+  final TRes Function(Input_AuthUsersAdminOnStreamCursorInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? initialValue = _undefined,
+    Object? ordering = _undefined,
+  }) => _then(
+    Input_AuthUsersAdminOnStreamCursorInput._({
+      ..._instance._$data,
+      if (initialValue != _undefined && initialValue != null)
+        'initialValue':
+            (initialValue as Input_AuthUsersAdminOnStreamCursorValueInput),
+      if (ordering != _undefined)
+        'ordering': (ordering as Enum_CursorOrdering?),
+    }),
+  );
+
+  CopyWith_Input_AuthUsersAdminOnStreamCursorValueInput<TRes> get initialValue {
+    final local$initialValue = _instance.initialValue;
+    return CopyWith_Input_AuthUsersAdminOnStreamCursorValueInput(
+      local$initialValue,
+      (e) => call(initialValue: e),
+    );
+  }
+}
+
+class _CopyWithStubImpl_Input_AuthUsersAdminOnStreamCursorInput<TRes>
+    implements CopyWith_Input_AuthUsersAdminOnStreamCursorInput<TRes> {
+  _CopyWithStubImpl_Input_AuthUsersAdminOnStreamCursorInput(this._res);
+
+  TRes _res;
+
+  call({
+    Input_AuthUsersAdminOnStreamCursorValueInput? initialValue,
+    Enum_CursorOrdering? ordering,
+  }) => _res;
+
+  CopyWith_Input_AuthUsersAdminOnStreamCursorValueInput<TRes>
+  get initialValue =>
+      CopyWith_Input_AuthUsersAdminOnStreamCursorValueInput.stub(_res);
+}
+
+class Input_AuthUsersAdminOnStreamCursorValueInput {
+  factory Input_AuthUsersAdminOnStreamCursorValueInput({
+    UuidValue? adminOnArea,
+    UuidValue? adminOnGroup,
+    UuidValue? adminOnService,
+    bool? areaAdminOnUsers,
+    bool? areaAllowEdit,
+    bool? areaAllowExport,
+    bool? groupAdminOnUsers,
+    bool? groupAllowEdit,
+    bool? groupAllowExport,
+    bool? groupAllowRecordAttendance,
+    bool? groupAllowRecordServantsAttendance,
+    bool? groupWriteRelatedFamilies,
+    UuidValue? permissionId,
+    bool? serviceAdminOnUsers,
+    bool? serviceAllowEdit,
+    bool? serviceAllowExport,
+    bool? serviceAllowRecordAttendance,
+    bool? serviceAllowRecordServantsAttendance,
+    bool? serviceGender,
+    int? serviceStudyYear,
+    bool? serviceWriteRelatedFamilies,
+    UuidValue? uid,
+  }) => Input_AuthUsersAdminOnStreamCursorValueInput._({
+    if (adminOnArea != null) r'adminOnArea': adminOnArea,
+    if (adminOnGroup != null) r'adminOnGroup': adminOnGroup,
+    if (adminOnService != null) r'adminOnService': adminOnService,
+    if (areaAdminOnUsers != null) r'areaAdminOnUsers': areaAdminOnUsers,
+    if (areaAllowEdit != null) r'areaAllowEdit': areaAllowEdit,
+    if (areaAllowExport != null) r'areaAllowExport': areaAllowExport,
+    if (groupAdminOnUsers != null) r'groupAdminOnUsers': groupAdminOnUsers,
+    if (groupAllowEdit != null) r'groupAllowEdit': groupAllowEdit,
+    if (groupAllowExport != null) r'groupAllowExport': groupAllowExport,
+    if (groupAllowRecordAttendance != null)
+      r'groupAllowRecordAttendance': groupAllowRecordAttendance,
+    if (groupAllowRecordServantsAttendance != null)
+      r'groupAllowRecordServantsAttendance': groupAllowRecordServantsAttendance,
+    if (groupWriteRelatedFamilies != null)
+      r'groupWriteRelatedFamilies': groupWriteRelatedFamilies,
+    if (permissionId != null) r'permissionId': permissionId,
+    if (serviceAdminOnUsers != null)
+      r'serviceAdminOnUsers': serviceAdminOnUsers,
+    if (serviceAllowEdit != null) r'serviceAllowEdit': serviceAllowEdit,
+    if (serviceAllowExport != null) r'serviceAllowExport': serviceAllowExport,
+    if (serviceAllowRecordAttendance != null)
+      r'serviceAllowRecordAttendance': serviceAllowRecordAttendance,
+    if (serviceAllowRecordServantsAttendance != null)
+      r'serviceAllowRecordServantsAttendance':
+          serviceAllowRecordServantsAttendance,
+    if (serviceGender != null) r'serviceGender': serviceGender,
+    if (serviceStudyYear != null) r'serviceStudyYear': serviceStudyYear,
+    if (serviceWriteRelatedFamilies != null)
+      r'serviceWriteRelatedFamilies': serviceWriteRelatedFamilies,
+    if (uid != null) r'uid': uid,
+  });
+
+  Input_AuthUsersAdminOnStreamCursorValueInput._(this._$data);
+
+  factory Input_AuthUsersAdminOnStreamCursorValueInput.fromJson(
+    Map<String, dynamic> data,
+  ) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('adminOnArea')) {
+      final l$adminOnArea = data['adminOnArea'];
+      result$data['adminOnArea'] = l$adminOnArea == null
+          ? null
+          : stringToUuid(l$adminOnArea);
+    }
+    if (data.containsKey('adminOnGroup')) {
+      final l$adminOnGroup = data['adminOnGroup'];
+      result$data['adminOnGroup'] = l$adminOnGroup == null
+          ? null
+          : stringToUuid(l$adminOnGroup);
+    }
+    if (data.containsKey('adminOnService')) {
+      final l$adminOnService = data['adminOnService'];
+      result$data['adminOnService'] = l$adminOnService == null
+          ? null
+          : stringToUuid(l$adminOnService);
+    }
+    if (data.containsKey('areaAdminOnUsers')) {
+      final l$areaAdminOnUsers = data['areaAdminOnUsers'];
+      result$data['areaAdminOnUsers'] = (l$areaAdminOnUsers as bool?);
+    }
+    if (data.containsKey('areaAllowEdit')) {
+      final l$areaAllowEdit = data['areaAllowEdit'];
+      result$data['areaAllowEdit'] = (l$areaAllowEdit as bool?);
+    }
+    if (data.containsKey('areaAllowExport')) {
+      final l$areaAllowExport = data['areaAllowExport'];
+      result$data['areaAllowExport'] = (l$areaAllowExport as bool?);
+    }
+    if (data.containsKey('groupAdminOnUsers')) {
+      final l$groupAdminOnUsers = data['groupAdminOnUsers'];
+      result$data['groupAdminOnUsers'] = (l$groupAdminOnUsers as bool?);
+    }
+    if (data.containsKey('groupAllowEdit')) {
+      final l$groupAllowEdit = data['groupAllowEdit'];
+      result$data['groupAllowEdit'] = (l$groupAllowEdit as bool?);
+    }
+    if (data.containsKey('groupAllowExport')) {
+      final l$groupAllowExport = data['groupAllowExport'];
+      result$data['groupAllowExport'] = (l$groupAllowExport as bool?);
+    }
+    if (data.containsKey('groupAllowRecordAttendance')) {
+      final l$groupAllowRecordAttendance = data['groupAllowRecordAttendance'];
+      result$data['groupAllowRecordAttendance'] =
+          (l$groupAllowRecordAttendance as bool?);
+    }
+    if (data.containsKey('groupAllowRecordServantsAttendance')) {
+      final l$groupAllowRecordServantsAttendance =
+          data['groupAllowRecordServantsAttendance'];
+      result$data['groupAllowRecordServantsAttendance'] =
+          (l$groupAllowRecordServantsAttendance as bool?);
+    }
+    if (data.containsKey('groupWriteRelatedFamilies')) {
+      final l$groupWriteRelatedFamilies = data['groupWriteRelatedFamilies'];
+      result$data['groupWriteRelatedFamilies'] =
+          (l$groupWriteRelatedFamilies as bool?);
+    }
+    if (data.containsKey('permissionId')) {
+      final l$permissionId = data['permissionId'];
+      result$data['permissionId'] = l$permissionId == null
+          ? null
+          : stringToUuid(l$permissionId);
+    }
+    if (data.containsKey('serviceAdminOnUsers')) {
+      final l$serviceAdminOnUsers = data['serviceAdminOnUsers'];
+      result$data['serviceAdminOnUsers'] = (l$serviceAdminOnUsers as bool?);
+    }
+    if (data.containsKey('serviceAllowEdit')) {
+      final l$serviceAllowEdit = data['serviceAllowEdit'];
+      result$data['serviceAllowEdit'] = (l$serviceAllowEdit as bool?);
+    }
+    if (data.containsKey('serviceAllowExport')) {
+      final l$serviceAllowExport = data['serviceAllowExport'];
+      result$data['serviceAllowExport'] = (l$serviceAllowExport as bool?);
+    }
+    if (data.containsKey('serviceAllowRecordAttendance')) {
+      final l$serviceAllowRecordAttendance =
+          data['serviceAllowRecordAttendance'];
+      result$data['serviceAllowRecordAttendance'] =
+          (l$serviceAllowRecordAttendance as bool?);
+    }
+    if (data.containsKey('serviceAllowRecordServantsAttendance')) {
+      final l$serviceAllowRecordServantsAttendance =
+          data['serviceAllowRecordServantsAttendance'];
+      result$data['serviceAllowRecordServantsAttendance'] =
+          (l$serviceAllowRecordServantsAttendance as bool?);
+    }
+    if (data.containsKey('serviceGender')) {
+      final l$serviceGender = data['serviceGender'];
+      result$data['serviceGender'] = (l$serviceGender as bool?);
+    }
+    if (data.containsKey('serviceStudyYear')) {
+      final l$serviceStudyYear = data['serviceStudyYear'];
+      result$data['serviceStudyYear'] = (l$serviceStudyYear as int?);
+    }
+    if (data.containsKey('serviceWriteRelatedFamilies')) {
+      final l$serviceWriteRelatedFamilies = data['serviceWriteRelatedFamilies'];
+      result$data['serviceWriteRelatedFamilies'] =
+          (l$serviceWriteRelatedFamilies as bool?);
+    }
+    if (data.containsKey('uid')) {
+      final l$uid = data['uid'];
+      result$data['uid'] = l$uid == null ? null : stringToUuid(l$uid);
+    }
+    return Input_AuthUsersAdminOnStreamCursorValueInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  UuidValue? get adminOnArea => (_$data['adminOnArea'] as UuidValue?);
+
+  UuidValue? get adminOnGroup => (_$data['adminOnGroup'] as UuidValue?);
+
+  UuidValue? get adminOnService => (_$data['adminOnService'] as UuidValue?);
+
+  bool? get areaAdminOnUsers => (_$data['areaAdminOnUsers'] as bool?);
+
+  bool? get areaAllowEdit => (_$data['areaAllowEdit'] as bool?);
+
+  bool? get areaAllowExport => (_$data['areaAllowExport'] as bool?);
+
+  bool? get groupAdminOnUsers => (_$data['groupAdminOnUsers'] as bool?);
+
+  bool? get groupAllowEdit => (_$data['groupAllowEdit'] as bool?);
+
+  bool? get groupAllowExport => (_$data['groupAllowExport'] as bool?);
+
+  bool? get groupAllowRecordAttendance =>
+      (_$data['groupAllowRecordAttendance'] as bool?);
+
+  bool? get groupAllowRecordServantsAttendance =>
+      (_$data['groupAllowRecordServantsAttendance'] as bool?);
+
+  bool? get groupWriteRelatedFamilies =>
+      (_$data['groupWriteRelatedFamilies'] as bool?);
+
+  UuidValue? get permissionId => (_$data['permissionId'] as UuidValue?);
+
+  bool? get serviceAdminOnUsers => (_$data['serviceAdminOnUsers'] as bool?);
+
+  bool? get serviceAllowEdit => (_$data['serviceAllowEdit'] as bool?);
+
+  bool? get serviceAllowExport => (_$data['serviceAllowExport'] as bool?);
+
+  bool? get serviceAllowRecordAttendance =>
+      (_$data['serviceAllowRecordAttendance'] as bool?);
+
+  bool? get serviceAllowRecordServantsAttendance =>
+      (_$data['serviceAllowRecordServantsAttendance'] as bool?);
+
+  bool? get serviceGender => (_$data['serviceGender'] as bool?);
+
+  int? get serviceStudyYear => (_$data['serviceStudyYear'] as int?);
+
+  bool? get serviceWriteRelatedFamilies =>
+      (_$data['serviceWriteRelatedFamilies'] as bool?);
+
+  UuidValue? get uid => (_$data['uid'] as UuidValue?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('adminOnArea')) {
+      final l$adminOnArea = adminOnArea;
+      result$data['adminOnArea'] = l$adminOnArea == null
+          ? null
+          : uuidToString(l$adminOnArea);
+    }
+    if (_$data.containsKey('adminOnGroup')) {
+      final l$adminOnGroup = adminOnGroup;
+      result$data['adminOnGroup'] = l$adminOnGroup == null
+          ? null
+          : uuidToString(l$adminOnGroup);
+    }
+    if (_$data.containsKey('adminOnService')) {
+      final l$adminOnService = adminOnService;
+      result$data['adminOnService'] = l$adminOnService == null
+          ? null
+          : uuidToString(l$adminOnService);
+    }
+    if (_$data.containsKey('areaAdminOnUsers')) {
+      final l$areaAdminOnUsers = areaAdminOnUsers;
+      result$data['areaAdminOnUsers'] = l$areaAdminOnUsers;
+    }
+    if (_$data.containsKey('areaAllowEdit')) {
+      final l$areaAllowEdit = areaAllowEdit;
+      result$data['areaAllowEdit'] = l$areaAllowEdit;
+    }
+    if (_$data.containsKey('areaAllowExport')) {
+      final l$areaAllowExport = areaAllowExport;
+      result$data['areaAllowExport'] = l$areaAllowExport;
+    }
+    if (_$data.containsKey('groupAdminOnUsers')) {
+      final l$groupAdminOnUsers = groupAdminOnUsers;
+      result$data['groupAdminOnUsers'] = l$groupAdminOnUsers;
+    }
+    if (_$data.containsKey('groupAllowEdit')) {
+      final l$groupAllowEdit = groupAllowEdit;
+      result$data['groupAllowEdit'] = l$groupAllowEdit;
+    }
+    if (_$data.containsKey('groupAllowExport')) {
+      final l$groupAllowExport = groupAllowExport;
+      result$data['groupAllowExport'] = l$groupAllowExport;
+    }
+    if (_$data.containsKey('groupAllowRecordAttendance')) {
+      final l$groupAllowRecordAttendance = groupAllowRecordAttendance;
+      result$data['groupAllowRecordAttendance'] = l$groupAllowRecordAttendance;
+    }
+    if (_$data.containsKey('groupAllowRecordServantsAttendance')) {
+      final l$groupAllowRecordServantsAttendance =
+          groupAllowRecordServantsAttendance;
+      result$data['groupAllowRecordServantsAttendance'] =
+          l$groupAllowRecordServantsAttendance;
+    }
+    if (_$data.containsKey('groupWriteRelatedFamilies')) {
+      final l$groupWriteRelatedFamilies = groupWriteRelatedFamilies;
+      result$data['groupWriteRelatedFamilies'] = l$groupWriteRelatedFamilies;
+    }
+    if (_$data.containsKey('permissionId')) {
+      final l$permissionId = permissionId;
+      result$data['permissionId'] = l$permissionId == null
+          ? null
+          : uuidToString(l$permissionId);
+    }
+    if (_$data.containsKey('serviceAdminOnUsers')) {
+      final l$serviceAdminOnUsers = serviceAdminOnUsers;
+      result$data['serviceAdminOnUsers'] = l$serviceAdminOnUsers;
+    }
+    if (_$data.containsKey('serviceAllowEdit')) {
+      final l$serviceAllowEdit = serviceAllowEdit;
+      result$data['serviceAllowEdit'] = l$serviceAllowEdit;
+    }
+    if (_$data.containsKey('serviceAllowExport')) {
+      final l$serviceAllowExport = serviceAllowExport;
+      result$data['serviceAllowExport'] = l$serviceAllowExport;
+    }
+    if (_$data.containsKey('serviceAllowRecordAttendance')) {
+      final l$serviceAllowRecordAttendance = serviceAllowRecordAttendance;
+      result$data['serviceAllowRecordAttendance'] =
+          l$serviceAllowRecordAttendance;
+    }
+    if (_$data.containsKey('serviceAllowRecordServantsAttendance')) {
+      final l$serviceAllowRecordServantsAttendance =
+          serviceAllowRecordServantsAttendance;
+      result$data['serviceAllowRecordServantsAttendance'] =
+          l$serviceAllowRecordServantsAttendance;
+    }
+    if (_$data.containsKey('serviceGender')) {
+      final l$serviceGender = serviceGender;
+      result$data['serviceGender'] = l$serviceGender;
+    }
+    if (_$data.containsKey('serviceStudyYear')) {
+      final l$serviceStudyYear = serviceStudyYear;
+      result$data['serviceStudyYear'] = l$serviceStudyYear;
+    }
+    if (_$data.containsKey('serviceWriteRelatedFamilies')) {
+      final l$serviceWriteRelatedFamilies = serviceWriteRelatedFamilies;
+      result$data['serviceWriteRelatedFamilies'] =
+          l$serviceWriteRelatedFamilies;
+    }
+    if (_$data.containsKey('uid')) {
+      final l$uid = uid;
+      result$data['uid'] = l$uid == null ? null : uuidToString(l$uid);
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_AuthUsersAdminOnStreamCursorValueInput<
+    Input_AuthUsersAdminOnStreamCursorValueInput
+  >
+  get copyWith =>
+      CopyWith_Input_AuthUsersAdminOnStreamCursorValueInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_AuthUsersAdminOnStreamCursorValueInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$adminOnArea = adminOnArea;
+    final lOther$adminOnArea = other.adminOnArea;
+    if (_$data.containsKey('adminOnArea') !=
+        other._$data.containsKey('adminOnArea')) {
+      return false;
+    }
+    if (l$adminOnArea != lOther$adminOnArea) {
+      return false;
+    }
+    final l$adminOnGroup = adminOnGroup;
+    final lOther$adminOnGroup = other.adminOnGroup;
+    if (_$data.containsKey('adminOnGroup') !=
+        other._$data.containsKey('adminOnGroup')) {
+      return false;
+    }
+    if (l$adminOnGroup != lOther$adminOnGroup) {
+      return false;
+    }
+    final l$adminOnService = adminOnService;
+    final lOther$adminOnService = other.adminOnService;
+    if (_$data.containsKey('adminOnService') !=
+        other._$data.containsKey('adminOnService')) {
+      return false;
+    }
+    if (l$adminOnService != lOther$adminOnService) {
+      return false;
+    }
+    final l$areaAdminOnUsers = areaAdminOnUsers;
+    final lOther$areaAdminOnUsers = other.areaAdminOnUsers;
+    if (_$data.containsKey('areaAdminOnUsers') !=
+        other._$data.containsKey('areaAdminOnUsers')) {
+      return false;
+    }
+    if (l$areaAdminOnUsers != lOther$areaAdminOnUsers) {
+      return false;
+    }
+    final l$areaAllowEdit = areaAllowEdit;
+    final lOther$areaAllowEdit = other.areaAllowEdit;
+    if (_$data.containsKey('areaAllowEdit') !=
+        other._$data.containsKey('areaAllowEdit')) {
+      return false;
+    }
+    if (l$areaAllowEdit != lOther$areaAllowEdit) {
+      return false;
+    }
+    final l$areaAllowExport = areaAllowExport;
+    final lOther$areaAllowExport = other.areaAllowExport;
+    if (_$data.containsKey('areaAllowExport') !=
+        other._$data.containsKey('areaAllowExport')) {
+      return false;
+    }
+    if (l$areaAllowExport != lOther$areaAllowExport) {
+      return false;
+    }
+    final l$groupAdminOnUsers = groupAdminOnUsers;
+    final lOther$groupAdminOnUsers = other.groupAdminOnUsers;
+    if (_$data.containsKey('groupAdminOnUsers') !=
+        other._$data.containsKey('groupAdminOnUsers')) {
+      return false;
+    }
+    if (l$groupAdminOnUsers != lOther$groupAdminOnUsers) {
+      return false;
+    }
+    final l$groupAllowEdit = groupAllowEdit;
+    final lOther$groupAllowEdit = other.groupAllowEdit;
+    if (_$data.containsKey('groupAllowEdit') !=
+        other._$data.containsKey('groupAllowEdit')) {
+      return false;
+    }
+    if (l$groupAllowEdit != lOther$groupAllowEdit) {
+      return false;
+    }
+    final l$groupAllowExport = groupAllowExport;
+    final lOther$groupAllowExport = other.groupAllowExport;
+    if (_$data.containsKey('groupAllowExport') !=
+        other._$data.containsKey('groupAllowExport')) {
+      return false;
+    }
+    if (l$groupAllowExport != lOther$groupAllowExport) {
+      return false;
+    }
+    final l$groupAllowRecordAttendance = groupAllowRecordAttendance;
+    final lOther$groupAllowRecordAttendance = other.groupAllowRecordAttendance;
+    if (_$data.containsKey('groupAllowRecordAttendance') !=
+        other._$data.containsKey('groupAllowRecordAttendance')) {
+      return false;
+    }
+    if (l$groupAllowRecordAttendance != lOther$groupAllowRecordAttendance) {
+      return false;
+    }
+    final l$groupAllowRecordServantsAttendance =
+        groupAllowRecordServantsAttendance;
+    final lOther$groupAllowRecordServantsAttendance =
+        other.groupAllowRecordServantsAttendance;
+    if (_$data.containsKey('groupAllowRecordServantsAttendance') !=
+        other._$data.containsKey('groupAllowRecordServantsAttendance')) {
+      return false;
+    }
+    if (l$groupAllowRecordServantsAttendance !=
+        lOther$groupAllowRecordServantsAttendance) {
+      return false;
+    }
+    final l$groupWriteRelatedFamilies = groupWriteRelatedFamilies;
+    final lOther$groupWriteRelatedFamilies = other.groupWriteRelatedFamilies;
+    if (_$data.containsKey('groupWriteRelatedFamilies') !=
+        other._$data.containsKey('groupWriteRelatedFamilies')) {
+      return false;
+    }
+    if (l$groupWriteRelatedFamilies != lOther$groupWriteRelatedFamilies) {
+      return false;
+    }
+    final l$permissionId = permissionId;
+    final lOther$permissionId = other.permissionId;
+    if (_$data.containsKey('permissionId') !=
+        other._$data.containsKey('permissionId')) {
+      return false;
+    }
+    if (l$permissionId != lOther$permissionId) {
+      return false;
+    }
+    final l$serviceAdminOnUsers = serviceAdminOnUsers;
+    final lOther$serviceAdminOnUsers = other.serviceAdminOnUsers;
+    if (_$data.containsKey('serviceAdminOnUsers') !=
+        other._$data.containsKey('serviceAdminOnUsers')) {
+      return false;
+    }
+    if (l$serviceAdminOnUsers != lOther$serviceAdminOnUsers) {
+      return false;
+    }
+    final l$serviceAllowEdit = serviceAllowEdit;
+    final lOther$serviceAllowEdit = other.serviceAllowEdit;
+    if (_$data.containsKey('serviceAllowEdit') !=
+        other._$data.containsKey('serviceAllowEdit')) {
+      return false;
+    }
+    if (l$serviceAllowEdit != lOther$serviceAllowEdit) {
+      return false;
+    }
+    final l$serviceAllowExport = serviceAllowExport;
+    final lOther$serviceAllowExport = other.serviceAllowExport;
+    if (_$data.containsKey('serviceAllowExport') !=
+        other._$data.containsKey('serviceAllowExport')) {
+      return false;
+    }
+    if (l$serviceAllowExport != lOther$serviceAllowExport) {
+      return false;
+    }
+    final l$serviceAllowRecordAttendance = serviceAllowRecordAttendance;
+    final lOther$serviceAllowRecordAttendance =
+        other.serviceAllowRecordAttendance;
+    if (_$data.containsKey('serviceAllowRecordAttendance') !=
+        other._$data.containsKey('serviceAllowRecordAttendance')) {
+      return false;
+    }
+    if (l$serviceAllowRecordAttendance != lOther$serviceAllowRecordAttendance) {
+      return false;
+    }
+    final l$serviceAllowRecordServantsAttendance =
+        serviceAllowRecordServantsAttendance;
+    final lOther$serviceAllowRecordServantsAttendance =
+        other.serviceAllowRecordServantsAttendance;
+    if (_$data.containsKey('serviceAllowRecordServantsAttendance') !=
+        other._$data.containsKey('serviceAllowRecordServantsAttendance')) {
+      return false;
+    }
+    if (l$serviceAllowRecordServantsAttendance !=
+        lOther$serviceAllowRecordServantsAttendance) {
+      return false;
+    }
+    final l$serviceGender = serviceGender;
+    final lOther$serviceGender = other.serviceGender;
+    if (_$data.containsKey('serviceGender') !=
+        other._$data.containsKey('serviceGender')) {
+      return false;
+    }
+    if (l$serviceGender != lOther$serviceGender) {
+      return false;
+    }
+    final l$serviceStudyYear = serviceStudyYear;
+    final lOther$serviceStudyYear = other.serviceStudyYear;
+    if (_$data.containsKey('serviceStudyYear') !=
+        other._$data.containsKey('serviceStudyYear')) {
+      return false;
+    }
+    if (l$serviceStudyYear != lOther$serviceStudyYear) {
+      return false;
+    }
+    final l$serviceWriteRelatedFamilies = serviceWriteRelatedFamilies;
+    final lOther$serviceWriteRelatedFamilies =
+        other.serviceWriteRelatedFamilies;
+    if (_$data.containsKey('serviceWriteRelatedFamilies') !=
+        other._$data.containsKey('serviceWriteRelatedFamilies')) {
+      return false;
+    }
+    if (l$serviceWriteRelatedFamilies != lOther$serviceWriteRelatedFamilies) {
+      return false;
+    }
+    final l$uid = uid;
+    final lOther$uid = other.uid;
+    if (_$data.containsKey('uid') != other._$data.containsKey('uid')) {
+      return false;
+    }
+    if (l$uid != lOther$uid) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$adminOnArea = adminOnArea;
+    final l$adminOnGroup = adminOnGroup;
+    final l$adminOnService = adminOnService;
+    final l$areaAdminOnUsers = areaAdminOnUsers;
+    final l$areaAllowEdit = areaAllowEdit;
+    final l$areaAllowExport = areaAllowExport;
+    final l$groupAdminOnUsers = groupAdminOnUsers;
+    final l$groupAllowEdit = groupAllowEdit;
+    final l$groupAllowExport = groupAllowExport;
+    final l$groupAllowRecordAttendance = groupAllowRecordAttendance;
+    final l$groupAllowRecordServantsAttendance =
+        groupAllowRecordServantsAttendance;
+    final l$groupWriteRelatedFamilies = groupWriteRelatedFamilies;
+    final l$permissionId = permissionId;
+    final l$serviceAdminOnUsers = serviceAdminOnUsers;
+    final l$serviceAllowEdit = serviceAllowEdit;
+    final l$serviceAllowExport = serviceAllowExport;
+    final l$serviceAllowRecordAttendance = serviceAllowRecordAttendance;
+    final l$serviceAllowRecordServantsAttendance =
+        serviceAllowRecordServantsAttendance;
+    final l$serviceGender = serviceGender;
+    final l$serviceStudyYear = serviceStudyYear;
+    final l$serviceWriteRelatedFamilies = serviceWriteRelatedFamilies;
+    final l$uid = uid;
+    return Object.hashAll([
+      _$data.containsKey('adminOnArea') ? l$adminOnArea : const {},
+      _$data.containsKey('adminOnGroup') ? l$adminOnGroup : const {},
+      _$data.containsKey('adminOnService') ? l$adminOnService : const {},
+      _$data.containsKey('areaAdminOnUsers') ? l$areaAdminOnUsers : const {},
+      _$data.containsKey('areaAllowEdit') ? l$areaAllowEdit : const {},
+      _$data.containsKey('areaAllowExport') ? l$areaAllowExport : const {},
+      _$data.containsKey('groupAdminOnUsers') ? l$groupAdminOnUsers : const {},
+      _$data.containsKey('groupAllowEdit') ? l$groupAllowEdit : const {},
+      _$data.containsKey('groupAllowExport') ? l$groupAllowExport : const {},
+      _$data.containsKey('groupAllowRecordAttendance')
+          ? l$groupAllowRecordAttendance
+          : const {},
+      _$data.containsKey('groupAllowRecordServantsAttendance')
+          ? l$groupAllowRecordServantsAttendance
+          : const {},
+      _$data.containsKey('groupWriteRelatedFamilies')
+          ? l$groupWriteRelatedFamilies
+          : const {},
+      _$data.containsKey('permissionId') ? l$permissionId : const {},
+      _$data.containsKey('serviceAdminOnUsers')
+          ? l$serviceAdminOnUsers
+          : const {},
+      _$data.containsKey('serviceAllowEdit') ? l$serviceAllowEdit : const {},
+      _$data.containsKey('serviceAllowExport')
+          ? l$serviceAllowExport
+          : const {},
+      _$data.containsKey('serviceAllowRecordAttendance')
+          ? l$serviceAllowRecordAttendance
+          : const {},
+      _$data.containsKey('serviceAllowRecordServantsAttendance')
+          ? l$serviceAllowRecordServantsAttendance
+          : const {},
+      _$data.containsKey('serviceGender') ? l$serviceGender : const {},
+      _$data.containsKey('serviceStudyYear') ? l$serviceStudyYear : const {},
+      _$data.containsKey('serviceWriteRelatedFamilies')
+          ? l$serviceWriteRelatedFamilies
+          : const {},
+      _$data.containsKey('uid') ? l$uid : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_AuthUsersAdminOnStreamCursorValueInput<TRes> {
+  factory CopyWith_Input_AuthUsersAdminOnStreamCursorValueInput(
+    Input_AuthUsersAdminOnStreamCursorValueInput instance,
+    TRes Function(Input_AuthUsersAdminOnStreamCursorValueInput) then,
+  ) = _CopyWithImpl_Input_AuthUsersAdminOnStreamCursorValueInput;
+
+  factory CopyWith_Input_AuthUsersAdminOnStreamCursorValueInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_AuthUsersAdminOnStreamCursorValueInput;
+
+  TRes call({
+    UuidValue? adminOnArea,
+    UuidValue? adminOnGroup,
+    UuidValue? adminOnService,
+    bool? areaAdminOnUsers,
+    bool? areaAllowEdit,
+    bool? areaAllowExport,
+    bool? groupAdminOnUsers,
+    bool? groupAllowEdit,
+    bool? groupAllowExport,
+    bool? groupAllowRecordAttendance,
+    bool? groupAllowRecordServantsAttendance,
+    bool? groupWriteRelatedFamilies,
+    UuidValue? permissionId,
+    bool? serviceAdminOnUsers,
+    bool? serviceAllowEdit,
+    bool? serviceAllowExport,
+    bool? serviceAllowRecordAttendance,
+    bool? serviceAllowRecordServantsAttendance,
+    bool? serviceGender,
+    int? serviceStudyYear,
+    bool? serviceWriteRelatedFamilies,
+    UuidValue? uid,
+  });
+}
+
 class _CopyWithImpl_Input_AuthUsersAdminOnStreamCursorValueInput<TRes>
     implements CopyWith_Input_AuthUsersAdminOnStreamCursorValueInput<TRes> {
   _CopyWithImpl_Input_AuthUsersAdminOnStreamCursorValueInput(
@@ -24,11 +749,15 @@ class _CopyWithImpl_Input_AuthUsersAdminOnStreamCursorValueInput<TRes>
     Object? groupAdminOnUsers = _undefined,
     Object? groupAllowEdit = _undefined,
     Object? groupAllowExport = _undefined,
+    Object? groupAllowRecordAttendance = _undefined,
+    Object? groupAllowRecordServantsAttendance = _undefined,
     Object? groupWriteRelatedFamilies = _undefined,
     Object? permissionId = _undefined,
     Object? serviceAdminOnUsers = _undefined,
     Object? serviceAllowEdit = _undefined,
     Object? serviceAllowExport = _undefined,
+    Object? serviceAllowRecordAttendance = _undefined,
+    Object? serviceAllowRecordServantsAttendance = _undefined,
     Object? serviceGender = _undefined,
     Object? serviceStudyYear = _undefined,
     Object? serviceWriteRelatedFamilies = _undefined,
@@ -53,6 +782,11 @@ class _CopyWithImpl_Input_AuthUsersAdminOnStreamCursorValueInput<TRes>
         'groupAllowEdit': (groupAllowEdit as bool?),
       if (groupAllowExport != _undefined)
         'groupAllowExport': (groupAllowExport as bool?),
+      if (groupAllowRecordAttendance != _undefined)
+        'groupAllowRecordAttendance': (groupAllowRecordAttendance as bool?),
+      if (groupAllowRecordServantsAttendance != _undefined)
+        'groupAllowRecordServantsAttendance':
+            (groupAllowRecordServantsAttendance as bool?),
       if (groupWriteRelatedFamilies != _undefined)
         'groupWriteRelatedFamilies': (groupWriteRelatedFamilies as bool?),
       if (permissionId != _undefined)
@@ -63,6 +797,11 @@ class _CopyWithImpl_Input_AuthUsersAdminOnStreamCursorValueInput<TRes>
         'serviceAllowEdit': (serviceAllowEdit as bool?),
       if (serviceAllowExport != _undefined)
         'serviceAllowExport': (serviceAllowExport as bool?),
+      if (serviceAllowRecordAttendance != _undefined)
+        'serviceAllowRecordAttendance': (serviceAllowRecordAttendance as bool?),
+      if (serviceAllowRecordServantsAttendance != _undefined)
+        'serviceAllowRecordServantsAttendance':
+            (serviceAllowRecordServantsAttendance as bool?),
       if (serviceGender != _undefined)
         'serviceGender': (serviceGender as bool?),
       if (serviceStudyYear != _undefined)
@@ -90,11 +829,15 @@ class _CopyWithStubImpl_Input_AuthUsersAdminOnStreamCursorValueInput<TRes>
     bool? groupAdminOnUsers,
     bool? groupAllowEdit,
     bool? groupAllowExport,
+    bool? groupAllowRecordAttendance,
+    bool? groupAllowRecordServantsAttendance,
     bool? groupWriteRelatedFamilies,
     UuidValue? permissionId,
     bool? serviceAdminOnUsers,
     bool? serviceAllowEdit,
     bool? serviceAllowExport,
+    bool? serviceAllowRecordAttendance,
+    bool? serviceAllowRecordServantsAttendance,
     bool? serviceGender,
     int? serviceStudyYear,
     bool? serviceWriteRelatedFamilies,
@@ -1842,750 +2585,6 @@ class Input_AuthUsersDataStreamCursorInput {
     return Object.hashAll([
       l$initialValue,
       _$data.containsKey('ordering') ? l$ordering : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_AuthUsersDataStreamCursorInput<TRes> {
-  factory CopyWith_Input_AuthUsersDataStreamCursorInput(
-    Input_AuthUsersDataStreamCursorInput instance,
-    TRes Function(Input_AuthUsersDataStreamCursorInput) then,
-  ) = _CopyWithImpl_Input_AuthUsersDataStreamCursorInput;
-
-  factory CopyWith_Input_AuthUsersDataStreamCursorInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_AuthUsersDataStreamCursorInput;
-
-  TRes call({
-    Input_AuthUsersDataStreamCursorValueInput? initialValue,
-    Enum_CursorOrdering? ordering,
-  });
-  CopyWith_Input_AuthUsersDataStreamCursorValueInput<TRes> get initialValue;
-}
-
-class _CopyWithImpl_Input_AuthUsersDataStreamCursorInput<TRes>
-    implements CopyWith_Input_AuthUsersDataStreamCursorInput<TRes> {
-  _CopyWithImpl_Input_AuthUsersDataStreamCursorInput(
-    this._instance,
-    this._then,
-  );
-
-  final Input_AuthUsersDataStreamCursorInput _instance;
-
-  final TRes Function(Input_AuthUsersDataStreamCursorInput) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? initialValue = _undefined,
-    Object? ordering = _undefined,
-  }) => _then(
-    Input_AuthUsersDataStreamCursorInput._({
-      ..._instance._$data,
-      if (initialValue != _undefined && initialValue != null)
-        'initialValue':
-            (initialValue as Input_AuthUsersDataStreamCursorValueInput),
-      if (ordering != _undefined)
-        'ordering': (ordering as Enum_CursorOrdering?),
-    }),
-  );
-
-  CopyWith_Input_AuthUsersDataStreamCursorValueInput<TRes> get initialValue {
-    final local$initialValue = _instance.initialValue;
-    return CopyWith_Input_AuthUsersDataStreamCursorValueInput(
-      local$initialValue,
-      (e) => call(initialValue: e),
-    );
-  }
-}
-
-class _CopyWithStubImpl_Input_AuthUsersDataStreamCursorInput<TRes>
-    implements CopyWith_Input_AuthUsersDataStreamCursorInput<TRes> {
-  _CopyWithStubImpl_Input_AuthUsersDataStreamCursorInput(this._res);
-
-  TRes _res;
-
-  call({
-    Input_AuthUsersDataStreamCursorValueInput? initialValue,
-    Enum_CursorOrdering? ordering,
-  }) => _res;
-
-  CopyWith_Input_AuthUsersDataStreamCursorValueInput<TRes> get initialValue =>
-      CopyWith_Input_AuthUsersDataStreamCursorValueInput.stub(_res);
-}
-
-class Input_AuthUsersDataStreamCursorValueInput {
-  factory Input_AuthUsersDataStreamCursorValueInput({
-    String? blurhash,
-    String? email,
-    String? name,
-    DateTime? photoUpdatedAt,
-    UuidValue? uid,
-  }) => Input_AuthUsersDataStreamCursorValueInput._({
-    if (blurhash != null) r'blurhash': blurhash,
-    if (email != null) r'email': email,
-    if (name != null) r'name': name,
-    if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
-    if (uid != null) r'uid': uid,
-  });
-
-  Input_AuthUsersDataStreamCursorValueInput._(this._$data);
-
-  factory Input_AuthUsersDataStreamCursorValueInput.fromJson(
-    Map<String, dynamic> data,
-  ) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('blurhash')) {
-      final l$blurhash = data['blurhash'];
-      result$data['blurhash'] = (l$blurhash as String?);
-    }
-    if (data.containsKey('email')) {
-      final l$email = data['email'];
-      result$data['email'] = (l$email as String?);
-    }
-    if (data.containsKey('name')) {
-      final l$name = data['name'];
-      result$data['name'] = (l$name as String?);
-    }
-    if (data.containsKey('photoUpdatedAt')) {
-      final l$photoUpdatedAt = data['photoUpdatedAt'];
-      result$data['photoUpdatedAt'] = l$photoUpdatedAt == null
-          ? null
-          : tstzFromString(l$photoUpdatedAt);
-    }
-    if (data.containsKey('uid')) {
-      final l$uid = data['uid'];
-      result$data['uid'] = l$uid == null ? null : stringToUuid(l$uid);
-    }
-    return Input_AuthUsersDataStreamCursorValueInput._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  String? get blurhash => (_$data['blurhash'] as String?);
-
-  String? get email => (_$data['email'] as String?);
-
-  String? get name => (_$data['name'] as String?);
-
-  DateTime? get photoUpdatedAt => (_$data['photoUpdatedAt'] as DateTime?);
-
-  UuidValue? get uid => (_$data['uid'] as UuidValue?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('blurhash')) {
-      final l$blurhash = blurhash;
-      result$data['blurhash'] = l$blurhash;
-    }
-    if (_$data.containsKey('email')) {
-      final l$email = email;
-      result$data['email'] = l$email;
-    }
-    if (_$data.containsKey('name')) {
-      final l$name = name;
-      result$data['name'] = l$name;
-    }
-    if (_$data.containsKey('photoUpdatedAt')) {
-      final l$photoUpdatedAt = photoUpdatedAt;
-      result$data['photoUpdatedAt'] = l$photoUpdatedAt == null
-          ? null
-          : tstzToString(l$photoUpdatedAt);
-    }
-    if (_$data.containsKey('uid')) {
-      final l$uid = uid;
-      result$data['uid'] = l$uid == null ? null : uuidToString(l$uid);
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_AuthUsersDataStreamCursorValueInput<
-    Input_AuthUsersDataStreamCursorValueInput
-  >
-  get copyWith =>
-      CopyWith_Input_AuthUsersDataStreamCursorValueInput(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_AuthUsersDataStreamCursorValueInput ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$blurhash = blurhash;
-    final lOther$blurhash = other.blurhash;
-    if (_$data.containsKey('blurhash') !=
-        other._$data.containsKey('blurhash')) {
-      return false;
-    }
-    if (l$blurhash != lOther$blurhash) {
-      return false;
-    }
-    final l$email = email;
-    final lOther$email = other.email;
-    if (_$data.containsKey('email') != other._$data.containsKey('email')) {
-      return false;
-    }
-    if (l$email != lOther$email) {
-      return false;
-    }
-    final l$name = name;
-    final lOther$name = other.name;
-    if (_$data.containsKey('name') != other._$data.containsKey('name')) {
-      return false;
-    }
-    if (l$name != lOther$name) {
-      return false;
-    }
-    final l$photoUpdatedAt = photoUpdatedAt;
-    final lOther$photoUpdatedAt = other.photoUpdatedAt;
-    if (_$data.containsKey('photoUpdatedAt') !=
-        other._$data.containsKey('photoUpdatedAt')) {
-      return false;
-    }
-    if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
-      return false;
-    }
-    final l$uid = uid;
-    final lOther$uid = other.uid;
-    if (_$data.containsKey('uid') != other._$data.containsKey('uid')) {
-      return false;
-    }
-    if (l$uid != lOther$uid) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$blurhash = blurhash;
-    final l$email = email;
-    final l$name = name;
-    final l$photoUpdatedAt = photoUpdatedAt;
-    final l$uid = uid;
-    return Object.hashAll([
-      _$data.containsKey('blurhash') ? l$blurhash : const {},
-      _$data.containsKey('email') ? l$email : const {},
-      _$data.containsKey('name') ? l$name : const {},
-      _$data.containsKey('photoUpdatedAt') ? l$photoUpdatedAt : const {},
-      _$data.containsKey('uid') ? l$uid : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_AuthUsersDataStreamCursorValueInput<TRes> {
-  factory CopyWith_Input_AuthUsersDataStreamCursorValueInput(
-    Input_AuthUsersDataStreamCursorValueInput instance,
-    TRes Function(Input_AuthUsersDataStreamCursorValueInput) then,
-  ) = _CopyWithImpl_Input_AuthUsersDataStreamCursorValueInput;
-
-  factory CopyWith_Input_AuthUsersDataStreamCursorValueInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_AuthUsersDataStreamCursorValueInput;
-
-  TRes call({
-    String? blurhash,
-    String? email,
-    String? name,
-    DateTime? photoUpdatedAt,
-    UuidValue? uid,
-  });
-}
-
-class _CopyWithImpl_Input_AuthUsersDataStreamCursorValueInput<TRes>
-    implements CopyWith_Input_AuthUsersDataStreamCursorValueInput<TRes> {
-  _CopyWithImpl_Input_AuthUsersDataStreamCursorValueInput(
-    this._instance,
-    this._then,
-  );
-
-  final Input_AuthUsersDataStreamCursorValueInput _instance;
-
-  final TRes Function(Input_AuthUsersDataStreamCursorValueInput) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? blurhash = _undefined,
-    Object? email = _undefined,
-    Object? name = _undefined,
-    Object? photoUpdatedAt = _undefined,
-    Object? uid = _undefined,
-  }) => _then(
-    Input_AuthUsersDataStreamCursorValueInput._({
-      ..._instance._$data,
-      if (blurhash != _undefined) 'blurhash': (blurhash as String?),
-      if (email != _undefined) 'email': (email as String?),
-      if (name != _undefined) 'name': (name as String?),
-      if (photoUpdatedAt != _undefined)
-        'photoUpdatedAt': (photoUpdatedAt as DateTime?),
-      if (uid != _undefined) 'uid': (uid as UuidValue?),
-    }),
-  );
-}
-
-class _CopyWithStubImpl_Input_AuthUsersDataStreamCursorValueInput<TRes>
-    implements CopyWith_Input_AuthUsersDataStreamCursorValueInput<TRes> {
-  _CopyWithStubImpl_Input_AuthUsersDataStreamCursorValueInput(this._res);
-
-  TRes _res;
-
-  call({
-    String? blurhash,
-    String? email,
-    String? name,
-    DateTime? photoUpdatedAt,
-    UuidValue? uid,
-  }) => _res;
-}
-
-class Input_AuthUsersPermissionsAggregateOrderBy {
-  factory Input_AuthUsersPermissionsAggregateOrderBy({
-    Enum_OrderBy? count,
-    Input_AuthUsersPermissionsMaxOrderBy? max,
-    Input_AuthUsersPermissionsMinOrderBy? min,
-  }) => Input_AuthUsersPermissionsAggregateOrderBy._({
-    if (count != null) r'count': count,
-    if (max != null) r'max': max,
-    if (min != null) r'min': min,
-  });
-
-  Input_AuthUsersPermissionsAggregateOrderBy._(this._$data);
-
-  factory Input_AuthUsersPermissionsAggregateOrderBy.fromJson(
-    Map<String, dynamic> data,
-  ) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('count')) {
-      final l$count = data['count'];
-      result$data['count'] = l$count == null
-          ? null
-          : fromJson_Enum_OrderBy((l$count as String));
-    }
-    if (data.containsKey('max')) {
-      final l$max = data['max'];
-      result$data['max'] = l$max == null
-          ? null
-          : Input_AuthUsersPermissionsMaxOrderBy.fromJson(
-              (l$max as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('min')) {
-      final l$min = data['min'];
-      result$data['min'] = l$min == null
-          ? null
-          : Input_AuthUsersPermissionsMinOrderBy.fromJson(
-              (l$min as Map<String, dynamic>),
-            );
-    }
-    return Input_AuthUsersPermissionsAggregateOrderBy._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  Enum_OrderBy? get count => (_$data['count'] as Enum_OrderBy?);
-
-  Input_AuthUsersPermissionsMaxOrderBy? get max =>
-      (_$data['max'] as Input_AuthUsersPermissionsMaxOrderBy?);
-
-  Input_AuthUsersPermissionsMinOrderBy? get min =>
-      (_$data['min'] as Input_AuthUsersPermissionsMinOrderBy?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('count')) {
-      final l$count = count;
-      result$data['count'] = l$count == null
-          ? null
-          : toJson_Enum_OrderBy(l$count);
-    }
-    if (_$data.containsKey('max')) {
-      final l$max = max;
-      result$data['max'] = l$max?.toJson();
-    }
-    if (_$data.containsKey('min')) {
-      final l$min = min;
-      result$data['min'] = l$min?.toJson();
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_AuthUsersPermissionsAggregateOrderBy<
-    Input_AuthUsersPermissionsAggregateOrderBy
-  >
-  get copyWith =>
-      CopyWith_Input_AuthUsersPermissionsAggregateOrderBy(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_AuthUsersPermissionsAggregateOrderBy ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$count = count;
-    final lOther$count = other.count;
-    if (_$data.containsKey('count') != other._$data.containsKey('count')) {
-      return false;
-    }
-    if (l$count != lOther$count) {
-      return false;
-    }
-    final l$max = max;
-    final lOther$max = other.max;
-    if (_$data.containsKey('max') != other._$data.containsKey('max')) {
-      return false;
-    }
-    if (l$max != lOther$max) {
-      return false;
-    }
-    final l$min = min;
-    final lOther$min = other.min;
-    if (_$data.containsKey('min') != other._$data.containsKey('min')) {
-      return false;
-    }
-    if (l$min != lOther$min) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$count = count;
-    final l$max = max;
-    final l$min = min;
-    return Object.hashAll([
-      _$data.containsKey('count') ? l$count : const {},
-      _$data.containsKey('max') ? l$max : const {},
-      _$data.containsKey('min') ? l$min : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_AuthUsersPermissionsAggregateOrderBy<TRes> {
-  factory CopyWith_Input_AuthUsersPermissionsAggregateOrderBy(
-    Input_AuthUsersPermissionsAggregateOrderBy instance,
-    TRes Function(Input_AuthUsersPermissionsAggregateOrderBy) then,
-  ) = _CopyWithImpl_Input_AuthUsersPermissionsAggregateOrderBy;
-
-  factory CopyWith_Input_AuthUsersPermissionsAggregateOrderBy.stub(TRes res) =
-      _CopyWithStubImpl_Input_AuthUsersPermissionsAggregateOrderBy;
-
-  TRes call({
-    Enum_OrderBy? count,
-    Input_AuthUsersPermissionsMaxOrderBy? max,
-    Input_AuthUsersPermissionsMinOrderBy? min,
-  });
-  CopyWith_Input_AuthUsersPermissionsMaxOrderBy<TRes> get max;
-  CopyWith_Input_AuthUsersPermissionsMinOrderBy<TRes> get min;
-}
-
-class _CopyWithImpl_Input_AuthUsersPermissionsAggregateOrderBy<TRes>
-    implements CopyWith_Input_AuthUsersPermissionsAggregateOrderBy<TRes> {
-  _CopyWithImpl_Input_AuthUsersPermissionsAggregateOrderBy(
-    this._instance,
-    this._then,
-  );
-
-  final Input_AuthUsersPermissionsAggregateOrderBy _instance;
-
-  final TRes Function(Input_AuthUsersPermissionsAggregateOrderBy) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? count = _undefined,
-    Object? max = _undefined,
-    Object? min = _undefined,
-  }) => _then(
-    Input_AuthUsersPermissionsAggregateOrderBy._({
-      ..._instance._$data,
-      if (count != _undefined) 'count': (count as Enum_OrderBy?),
-      if (max != _undefined)
-        'max': (max as Input_AuthUsersPermissionsMaxOrderBy?),
-      if (min != _undefined)
-        'min': (min as Input_AuthUsersPermissionsMinOrderBy?),
-    }),
-  );
-
-  CopyWith_Input_AuthUsersPermissionsMaxOrderBy<TRes> get max {
-    final local$max = _instance.max;
-    return local$max == null
-        ? CopyWith_Input_AuthUsersPermissionsMaxOrderBy.stub(_then(_instance))
-        : CopyWith_Input_AuthUsersPermissionsMaxOrderBy(
-            local$max,
-            (e) => call(max: e),
-          );
-  }
-
-  CopyWith_Input_AuthUsersPermissionsMinOrderBy<TRes> get min {
-    final local$min = _instance.min;
-    return local$min == null
-        ? CopyWith_Input_AuthUsersPermissionsMinOrderBy.stub(_then(_instance))
-        : CopyWith_Input_AuthUsersPermissionsMinOrderBy(
-            local$min,
-            (e) => call(min: e),
-          );
-  }
-}
-
-class _CopyWithStubImpl_Input_AuthUsersPermissionsAggregateOrderBy<TRes>
-    implements CopyWith_Input_AuthUsersPermissionsAggregateOrderBy<TRes> {
-  _CopyWithStubImpl_Input_AuthUsersPermissionsAggregateOrderBy(this._res);
-
-  TRes _res;
-
-  call({
-    Enum_OrderBy? count,
-    Input_AuthUsersPermissionsMaxOrderBy? max,
-    Input_AuthUsersPermissionsMinOrderBy? min,
-  }) => _res;
-
-  CopyWith_Input_AuthUsersPermissionsMaxOrderBy<TRes> get max =>
-      CopyWith_Input_AuthUsersPermissionsMaxOrderBy.stub(_res);
-
-  CopyWith_Input_AuthUsersPermissionsMinOrderBy<TRes> get min =>
-      CopyWith_Input_AuthUsersPermissionsMinOrderBy.stub(_res);
-}
-
-class Input_AuthUsersPermissionsBoolExp {
-  factory Input_AuthUsersPermissionsBoolExp({
-    List<Input_AuthUsersPermissionsBoolExp>? $_and,
-    Input_AuthUsersPermissionsBoolExp? $_not,
-    List<Input_AuthUsersPermissionsBoolExp>? $_or,
-    Input_StringComparisonExp? permission,
-    Input_UuidComparisonExp? uid,
-    Input_AuthUsersDataBoolExp? user,
-  }) => Input_AuthUsersPermissionsBoolExp._({
-    if ($_and != null) r'_and': $_and,
-    if ($_not != null) r'_not': $_not,
-    if ($_or != null) r'_or': $_or,
-    if (permission != null) r'permission': permission,
-    if (uid != null) r'uid': uid,
-    if (user != null) r'user': user,
-  });
-
-  Input_AuthUsersPermissionsBoolExp._(this._$data);
-
-  factory Input_AuthUsersPermissionsBoolExp.fromJson(
-    Map<String, dynamic> data,
-  ) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('_and')) {
-      final l$$_and = data['_and'];
-      result$data['_and'] = (l$$_and as List<dynamic>?)
-          ?.map(
-            (e) => Input_AuthUsersPermissionsBoolExp.fromJson(
-              (e as Map<String, dynamic>),
-            ),
-          )
-          .toList();
-    }
-    if (data.containsKey('_not')) {
-      final l$$_not = data['_not'];
-      result$data['_not'] = l$$_not == null
-          ? null
-          : Input_AuthUsersPermissionsBoolExp.fromJson(
-              (l$$_not as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('_or')) {
-      final l$$_or = data['_or'];
-      result$data['_or'] = (l$$_or as List<dynamic>?)
-          ?.map(
-            (e) => Input_AuthUsersPermissionsBoolExp.fromJson(
-              (e as Map<String, dynamic>),
-            ),
-          )
-          .toList();
-    }
-    if (data.containsKey('permission')) {
-      final l$permission = data['permission'];
-      result$data['permission'] = l$permission == null
-          ? null
-          : Input_StringComparisonExp.fromJson(
-              (l$permission as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('uid')) {
-      final l$uid = data['uid'];
-      result$data['uid'] = l$uid == null
-          ? null
-          : Input_UuidComparisonExp.fromJson((l$uid as Map<String, dynamic>));
-    }
-    if (data.containsKey('user')) {
-      final l$user = data['user'];
-      result$data['user'] = l$user == null
-          ? null
-          : Input_AuthUsersDataBoolExp.fromJson(
-              (l$user as Map<String, dynamic>),
-            );
-    }
-    return Input_AuthUsersPermissionsBoolExp._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  List<Input_AuthUsersPermissionsBoolExp>? get $_and =>
-      (_$data['_and'] as List<Input_AuthUsersPermissionsBoolExp>?);
-
-  Input_AuthUsersPermissionsBoolExp? get $_not =>
-      (_$data['_not'] as Input_AuthUsersPermissionsBoolExp?);
-
-  List<Input_AuthUsersPermissionsBoolExp>? get $_or =>
-      (_$data['_or'] as List<Input_AuthUsersPermissionsBoolExp>?);
-
-  Input_StringComparisonExp? get permission =>
-      (_$data['permission'] as Input_StringComparisonExp?);
-
-  Input_UuidComparisonExp? get uid =>
-      (_$data['uid'] as Input_UuidComparisonExp?);
-
-  Input_AuthUsersDataBoolExp? get user =>
-      (_$data['user'] as Input_AuthUsersDataBoolExp?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('_and')) {
-      final l$$_and = $_and;
-      result$data['_and'] = l$$_and?.map((e) => e.toJson()).toList();
-    }
-    if (_$data.containsKey('_not')) {
-      final l$$_not = $_not;
-      result$data['_not'] = l$$_not?.toJson();
-    }
-    if (_$data.containsKey('_or')) {
-      final l$$_or = $_or;
-      result$data['_or'] = l$$_or?.map((e) => e.toJson()).toList();
-    }
-    if (_$data.containsKey('permission')) {
-      final l$permission = permission;
-      result$data['permission'] = l$permission?.toJson();
-    }
-    if (_$data.containsKey('uid')) {
-      final l$uid = uid;
-      result$data['uid'] = l$uid?.toJson();
-    }
-    if (_$data.containsKey('user')) {
-      final l$user = user;
-      result$data['user'] = l$user?.toJson();
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_AuthUsersPermissionsBoolExp<Input_AuthUsersPermissionsBoolExp>
-  get copyWith => CopyWith_Input_AuthUsersPermissionsBoolExp(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_AuthUsersPermissionsBoolExp ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$$_and = $_and;
-    final lOther$$_and = other.$_and;
-    if (_$data.containsKey('_and') != other._$data.containsKey('_and')) {
-      return false;
-    }
-    if (l$$_and != null && lOther$$_and != null) {
-      if (l$$_and.length != lOther$$_and.length) {
-        return false;
-      }
-      for (int i = 0; i < l$$_and.length; i++) {
-        final l$$_and$entry = l$$_and[i];
-        final lOther$$_and$entry = lOther$$_and[i];
-        if (l$$_and$entry != lOther$$_and$entry) {
-          return false;
-        }
-      }
-    } else if (l$$_and != lOther$$_and) {
-      return false;
-    }
-    final l$$_not = $_not;
-    final lOther$$_not = other.$_not;
-    if (_$data.containsKey('_not') != other._$data.containsKey('_not')) {
-      return false;
-    }
-    if (l$$_not != lOther$$_not) {
-      return false;
-    }
-    final l$$_or = $_or;
-    final lOther$$_or = other.$_or;
-    if (_$data.containsKey('_or') != other._$data.containsKey('_or')) {
-      return false;
-    }
-    if (l$$_or != null && lOther$$_or != null) {
-      if (l$$_or.length != lOther$$_or.length) {
-        return false;
-      }
-      for (int i = 0; i < l$$_or.length; i++) {
-        final l$$_or$entry = l$$_or[i];
-        final lOther$$_or$entry = lOther$$_or[i];
-        if (l$$_or$entry != lOther$$_or$entry) {
-          return false;
-        }
-      }
-    } else if (l$$_or != lOther$$_or) {
-      return false;
-    }
-    final l$permission = permission;
-    final lOther$permission = other.permission;
-    if (_$data.containsKey('permission') !=
-        other._$data.containsKey('permission')) {
-      return false;
-    }
-    if (l$permission != lOther$permission) {
-      return false;
-    }
-    final l$uid = uid;
-    final lOther$uid = other.uid;
-    if (_$data.containsKey('uid') != other._$data.containsKey('uid')) {
-      return false;
-    }
-    if (l$uid != lOther$uid) {
-      return false;
-    }
-    final l$user = user;
-    final lOther$user = other.user;
-    if (_$data.containsKey('user') != other._$data.containsKey('user')) {
-      return false;
-    }
-    if (l$user != lOther$user) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$$_and = $_and;
-    final l$$_not = $_not;
-    final l$$_or = $_or;
-    final l$permission = permission;
-    final l$uid = uid;
-    final l$user = user;
-    return Object.hashAll([
-      _$data.containsKey('_and')
-          ? l$$_and == null
-                ? null
-                : Object.hashAll(l$$_and.map((v) => v))
-          : const {},
-      _$data.containsKey('_not') ? l$$_not : const {},
-      _$data.containsKey('_or')
-          ? l$$_or == null
-                ? null
-                : Object.hashAll(l$$_or.map((v) => v))
-          : const {},
-      _$data.containsKey('permission') ? l$permission : const {},
-      _$data.containsKey('uid') ? l$uid : const {},
-      _$data.containsKey('user') ? l$user : const {},
     ]);
   }
 }

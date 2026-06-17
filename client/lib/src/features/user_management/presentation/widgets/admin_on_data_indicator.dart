@@ -13,6 +13,7 @@ class AdminOnDataIndicator extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisSize: MainAxisSize.min,
+      spacing: 2,
       children: [
         if ((adminOnData.serviceAdminOnUsers ?? false) ||
             (adminOnData.groupAdminOnUsers ?? false) ||
@@ -40,6 +41,18 @@ class AdminOnDataIndicator extends StatelessWidget {
           Tooltip(
             message: 'تصدير البيانات',
             child: Icon(UserPermission.exportAllData.icon),
+          ),
+        if ((adminOnData.serviceAllowRecordAttendance ?? false) ||
+            (adminOnData.groupAllowRecordAttendance ?? false))
+          Tooltip(
+            message: 'تسجيل الحضور لجميع المخدومين',
+            child: Icon(UserPermission.recordAllAttendance.icon),
+          ),
+        if ((adminOnData.serviceAllowRecordServantsAttendance ?? false) ||
+            (adminOnData.groupAllowRecordServantsAttendance ?? false))
+          Tooltip(
+            message: 'تسجيل الحضور لجميع الخدام',
+            child: Icon(UserPermission.recordAllServantsAttendance.icon),
           ),
         Tooltip(
           message: 'رؤية البيانات',

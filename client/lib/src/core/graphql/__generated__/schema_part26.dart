@@ -1,6 +1,39 @@
 // Part 26 of the schema
 part of "schema.graphql.dart";
 
+abstract class CopyWith_Input_HistoryAttendanceHistoryInsertInput<TRes> {
+  factory CopyWith_Input_HistoryAttendanceHistoryInsertInput(
+    Input_HistoryAttendanceHistoryInsertInput instance,
+    TRes Function(Input_HistoryAttendanceHistoryInsertInput) then,
+  ) = _CopyWithImpl_Input_HistoryAttendanceHistoryInsertInput;
+
+  factory CopyWith_Input_HistoryAttendanceHistoryInsertInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_HistoryAttendanceHistoryInsertInput;
+
+  TRes call({
+    bool? asAdmin,
+    Input_ClassesObjRelInsertInput? $class,
+    Input_HistoryAttendanceDaysObjRelInsertInput? day,
+    DateTime? dayId,
+    Input_GroupsObjRelInsertInput? group,
+    UuidValue? groupId,
+    Input_PersonsObjRelInsertInput? person,
+    UuidValue? personId,
+    Input_ServicesObjRelInsertInput? service,
+    bool? serviceGender,
+    UuidValue? serviceId,
+    int? serviceStudyYear,
+    Input_StudyYearsObjRelInsertInput? studyYear,
+    DateTime? time,
+  });
+  CopyWith_Input_ClassesObjRelInsertInput<TRes> get $class;
+  CopyWith_Input_HistoryAttendanceDaysObjRelInsertInput<TRes> get day;
+  CopyWith_Input_GroupsObjRelInsertInput<TRes> get group;
+  CopyWith_Input_PersonsObjRelInsertInput<TRes> get person;
+  CopyWith_Input_ServicesObjRelInsertInput<TRes> get service;
+  CopyWith_Input_StudyYearsObjRelInsertInput<TRes> get studyYear;
+}
+
 class _CopyWithImpl_Input_HistoryAttendanceHistoryInsertInput<TRes>
     implements CopyWith_Input_HistoryAttendanceHistoryInsertInput<TRes> {
   _CopyWithImpl_Input_HistoryAttendanceHistoryInsertInput(
@@ -26,6 +59,7 @@ class _CopyWithImpl_Input_HistoryAttendanceHistoryInsertInput<TRes>
     Object? service = _undefined,
     Object? serviceGender = _undefined,
     Object? serviceId = _undefined,
+    Object? serviceStudyYear = _undefined,
     Object? studyYear = _undefined,
     Object? time = _undefined,
   }) => _then(
@@ -48,6 +82,8 @@ class _CopyWithImpl_Input_HistoryAttendanceHistoryInsertInput<TRes>
       if (serviceGender != _undefined)
         'serviceGender': (serviceGender as bool?),
       if (serviceId != _undefined) 'serviceId': (serviceId as UuidValue?),
+      if (serviceStudyYear != _undefined)
+        'serviceStudyYear': (serviceStudyYear as int?),
       if (studyYear != _undefined)
         'studyYear': (studyYear as Input_StudyYearsObjRelInsertInput?),
       if (time != _undefined) 'time': (time as DateTime?),
@@ -135,6 +171,7 @@ class _CopyWithStubImpl_Input_HistoryAttendanceHistoryInsertInput<TRes>
     Input_ServicesObjRelInsertInput? service,
     bool? serviceGender,
     UuidValue? serviceId,
+    int? serviceStudyYear,
     Input_StudyYearsObjRelInsertInput? studyYear,
     DateTime? time,
   }) => _res;
