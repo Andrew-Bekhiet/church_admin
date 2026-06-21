@@ -2,26 +2,12 @@ table:
   name: attendance_days
   schema: history
 array_relationships:
-  - name: attendanceHistory
-    using:
-      foreign_key_constraint_on:
-        column: day_id
-        table:
-          name: attendance_history
-          schema: history
   - name: confessionHistory
     using:
       foreign_key_constraint_on:
         column: day_id
         table:
           name: confession_history
-          schema: history
-  - name: constraints
-    using:
-      foreign_key_constraint_on:
-        column: day_id
-        table:
-          name: attendance_days_constraints
           schema: history
   - name: kodasHistory
     using:
@@ -50,34 +36,8 @@ update_permissions:
       columns:
         - day
         - notes
-      filter:
-        _exists:
-          _table:
-            name: users_attendance_permissions
-            schema: auth
-          _where:
-            _and:
-              - uid:
-                  _eq: X-Hasura-User-Id
-              - _or:
-                  - allow_record_attendance:
-                      _eq: true
-                  - allow_record_servants_attendance:
-                      _eq: true
-      check:
-        _exists:
-          _table:
-            name: users_attendance_permissions
-            schema: auth
-          _where:
-            _and:
-              - uid:
-                  _eq: X-Hasura-User-Id
-              - _or:
-                  - allow_record_attendance:
-                      _eq: true
-                  - allow_record_servants_attendance:
-                      _eq: true
+      filter: {}
+      check: {}
 delete_permissions:
   - role: user
     permission:

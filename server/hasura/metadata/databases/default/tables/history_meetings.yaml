@@ -1,0 +1,189 @@
+table:
+  name: meetings
+  schema: history
+object_relationships:
+  - name: group
+    using:
+      foreign_key_constraint_on: group_id
+  - name: service
+    using:
+      foreign_key_constraint_on: service_id
+  - name: studyYear
+    using:
+      foreign_key_constraint_on: service_study_year
+array_relationships:
+  - name: attendanceHistory
+    using:
+      foreign_key_constraint_on:
+        column: meeting_id
+        table:
+          name: attendance_history
+          schema: history
+insert_permissions:
+  - role: user
+    permission:
+      check: &meeting_write_permission
+        _or:
+          - _and:
+              - audience:
+                  _in:
+                    - onlyPersons
+                    - personsAndServants
+              - _exists:
+                  _table:
+                    name: users_permissions
+                    schema: auth
+                  _where:
+                    _and:
+                      - uid:
+                          _eq: X-Hasura-User-Id
+                      - permission:
+                          _eq: recordAllAttendance
+          - _and:
+              - audience:
+                  _in:
+                    - onlyServants
+                    - personsAndServants
+              - _exists:
+                  _table:
+                    name: users_permissions
+                    schema: auth
+                  _where:
+                    _and:
+                      - uid:
+                          _eq: X-Hasura-User-Id
+                      - permission:
+                          _eq: recordAllServantsAttendance
+          - _exists:
+              _table:
+                name: users_permissions_by_entity_id
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - entity_type:
+                      _eq: group
+                  - entity_id:
+                      _ceq:
+                        - $
+                        - group_id
+          - _exists:
+              _table:
+                name: users_admin_on
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - _and:
+                      - admin_on_service:
+                          _is_null: false
+                      - admin_on_service:
+                          _ceq:
+                            - $
+                            - service_id
+                  - _or:
+                      - service_study_year:
+                          _is_null: true
+                      - service_study_year:
+                          _ceq:
+                            - $
+                            - service_study_year
+                  - _or:
+                      - service_gender:
+                          _is_null: true
+                      - service_gender:
+                          _ceq:
+                            - $
+                            - service_gender
+      columns:
+        - name
+        - audience
+        - group_id
+        - service_id
+        - service_study_year
+        - service_gender
+        - archived
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - id
+        - name
+        - audience
+        - group_id
+        - service_id
+        - service_study_year
+        - service_gender
+        - archived
+      filter:
+        _or:
+          - _exists:
+              _table:
+                name: users_permissions
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - permission:
+                      _eq: readAllData
+          - _exists:
+              _table:
+                name: users_permissions_by_entity_id
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - entity_type:
+                      _eq: group
+                  - entity_id:
+                      _ceq:
+                        - $
+                        - group_id
+          - _exists:
+              _table:
+                name: users_admin_on
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - _and:
+                      - admin_on_service:
+                          _is_null: false
+                      - admin_on_service:
+                          _ceq:
+                            - $
+                            - service_id
+                  - _or:
+                      - service_study_year:
+                          _is_null: true
+                      - service_study_year:
+                          _ceq:
+                            - $
+                            - service_study_year
+                  - _or:
+                      - service_gender:
+                          _is_null: true
+                      - service_gender:
+                          _ceq:
+                            - $
+                            - service_gender
+
+      allow_aggregations: false
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - name
+        - audience
+        - archived
+      filter: *meeting_write_permission
+      check: *meeting_write_permission
+delete_permissions:
+  - role: user
+    permission:
+      filter: *meeting_write_permission

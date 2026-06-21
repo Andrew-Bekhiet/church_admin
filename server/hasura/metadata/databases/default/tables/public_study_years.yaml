@@ -2,12 +2,12 @@ table:
   name: study_years
   schema: public
 array_relationships:
-  - name: attendanceDaysConstraints
+  - name: meetings
     using:
       foreign_key_constraint_on:
         column: service_study_year
         table:
-          name: attendance_days_constraints
+          name: meetings
           schema: history
   - name: classes
     using:
