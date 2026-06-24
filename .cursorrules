@@ -56,6 +56,10 @@
     {
       "context": "Testing and Validation",
       "rules": "Use standard widget testing for Flutter and run integration tests for each API module to ensure reliability across the app."
+    },
+    {
+      "context": "SQL files",
+      "rules": "Always use sqlfluff to lint and format SQL files if installed on the user's machine."
     }
   ]
 }

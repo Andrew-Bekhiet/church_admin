@@ -30,21 +30,12 @@ array_relationships:
         remote_table:
           name: users_admin_on
           schema: auth
-  - name: attendanceDaysConstraints
-    using:
-      manual_configuration:
-        column_mapping:
-          id: service_id
-        insertion_order: null
-        remote_table:
-          name: attendance_days_constraints
-          schema: history
-  - name: attendanceHistory
+  - name: meetings
     using:
       foreign_key_constraint_on:
         column: service_id
         table:
-          name: attendance_history
+          name: meetings
           schema: history
   - name: classes
     using:

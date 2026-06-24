@@ -2,47 +2,35 @@ table:
   name: attendance_history
   schema: history
 object_relationships:
-  - name: class
+  - name: meeting
     using:
-      manual_configuration:
-        column_mapping:
-          service_gender: service_gender
-          service_id: service_id
-          service_study_year: service_study_year
-        insertion_order: null
-        remote_table:
-          name: classes
-          schema: public
-  - name: day
-    using:
-      foreign_key_constraint_on: day_id
-  - name: group
-    using:
-      foreign_key_constraint_on: group_id
+      foreign_key_constraint_on: meeting_id
   - name: person
     using:
       foreign_key_constraint_on: person_id
   - name: recordedByUser
     using:
       foreign_key_constraint_on: recorded_by
-  - name: service
-    using:
-      foreign_key_constraint_on: service_id
-  - name: studyYear
-    using:
-      foreign_key_constraint_on: service_study_year
 insert_permissions:
   - role: user
     permission:
-      check:
+      check: &check_record_attendance_permission
         _and:
+          - meeting:
+              archived:
+                _eq: false
           - _or:
               - _and:
-                  - as_admin:
+                  - as_servant:
                       _eq: false
+                  - meeting:
+                      audience:
+                        _in:
+                          - onlyPersons
+                          - personsAndServants
                   - _exists:
                       _table:
-                        name: users_attendance_permissions
+                        name: users_admin_on_meetings
                         schema: auth
                       _where:
                         _and:
@@ -50,81 +38,35 @@ insert_permissions:
                               _eq: X-Hasura-User-Id
                           - allow_record_attendance:
                               _eq: true
-                          - _or:
-                              - _and:
-                                  - entity_type:
-                                      _eq: any
-                                  - entity_id:
-                                      _is_null: true
-                              - _and:
-                                  - entity_type:
-                                      _eq: service
-                                  - entity_id:
-                                      _ceq:
-                                        - $
-                                        - service_id
-                                  - _or:
-                                      - service_study_year:
-                                          _is_null: true
-                                      - service_study_year:
-                                          _ceq:
-                                            - $
-                                            - service_study_year
-                                  - _or:
-                                      - service_gender:
-                                          _is_null: true
-                                      - service_gender:
-                                          _ceq:
-                                            - $
-                                            - service_gender
-                              - _and:
-                                  - entity_type:
-                                      _eq: group
-                                  - entity_id:
-                                      _ceq:
-                                        - $
-                                        - group_id
-                  - _or:
-                      - _and:
-                          - group_id:
-                              _is_null: false
-                          - _exists:
-                              _table:
-                                name: persons_groups
-                                schema: public
-                              _where:
-                                _and:
-                                  - person_id:
-                                      _ceq:
-                                        - $
-                                        - person_id
-                                  - group_id:
-                                      _ceq:
-                                        - $
-                                        - group_id
-                      - _and:
-                          - group_id:
-                              _is_null: true
-                          - _exists:
-                              _table:
-                                name: persons_services
-                                schema: public
-                              _where:
-                                _and:
-                                  - person_id:
-                                      _ceq:
-                                        - $
-                                        - person_id
-                                  - service_id:
-                                      _ceq:
-                                        - $
-                                        - service_id
-              - _and:
-                  - as_admin:
-                      _eq: true
+                          - meeting_id:
+                              _ceq:
+                                - $
+                                - meeting_id
                   - _exists:
                       _table:
-                        name: users_attendance_permissions
+                        name: meetings_persons
+                        schema: history
+                      _where:
+                        _and:
+                          - meeting_id:
+                              _ceq:
+                                - $
+                                - meeting_id
+                          - person_id:
+                              _ceq:
+                                - $
+                                - person_id
+              - _and:
+                  - as_servant:
+                      _eq: true
+                  - meeting:
+                      audience:
+                        _in:
+                          - onlyServants
+                          - personsAndServants
+                  - _exists:
+                      _table:
+                        name: users_admin_on_meetings
                         schema: auth
                       _where:
                         _and:
@@ -132,109 +74,41 @@ insert_permissions:
                               _eq: X-Hasura-User-Id
                           - allow_record_servants_attendance:
                               _eq: true
-                          - _or:
-                              - _and:
-                                  - entity_type:
-                                      _eq: any
-                                  - entity_id:
-                                      _is_null: true
-                              - _and:
-                                  - entity_type:
-                                      _eq: service
-                                  - entity_id:
-                                      _ceq:
-                                        - $
-                                        - service_id
-                                  - _or:
-                                      - service_study_year:
-                                          _is_null: true
-                                      - service_study_year:
-                                          _ceq:
-                                            - $
-                                            - service_study_year
-                                  - _or:
-                                      - service_gender:
-                                          _is_null: true
-                                      - service_gender:
-                                          _ceq:
-                                            - $
-                                            - service_gender
-                              - _and:
-                                  - entity_type:
-                                      _eq: group
-                                  - entity_id:
-                                      _ceq:
-                                        - $
-                                        - group_id
+                          - meeting_id:
+                              _ceq:
+                                - $
+                                - meeting_id
                   - _exists:
                       _table:
-                        name: users_attendance_permissions
+                        name: users_admin_on_meetings
                         schema: auth
                       _where:
                         _and:
+                          - meeting_id:
+                              _ceq:
+                                - $
+                                - meeting_id
                           - user_person_id:
                               _ceq:
                                 - $
                                 - person_id
-                          - _or:
-                              - _and:
-                                  - entity_type:
-                                      _eq: any
-                                  - entity_id:
-                                      _is_null: true
-                              - _and:
-                                  - entity_type:
-                                      _eq: service
-                                  - entity_id:
-                                      _ceq:
-                                        - $
-                                        - service_id
-                                  - _or:
-                                      - service_study_year:
-                                          _is_null: true
-                                      - service_study_year:
-                                          _ceq:
-                                            - $
-                                            - service_study_year
-                                  - _or:
-                                      - service_gender:
-                                          _is_null: true
-                                      - service_gender:
-                                          _ceq:
-                                            - $
-                                            - service_gender
-                              - _and:
-                                  - entity_type:
-                                      _eq: group
-                                  - entity_id:
-                                      _ceq:
-                                        - $
-                                        - group_id
       set:
         recorded_by: x-hasura-user-id
       columns:
-        - as_admin
-        - day_id
-        - group_id
+        - as_servant
+        - datetime
+        - meeting_id
         - person_id
-        - service_gender
-        - service_id
-        - service_study_year
-        - time
 select_permissions:
   - role: user
     permission:
       columns:
-        - as_admin
-        - day_id
-        - group_id
         - id
+        - as_servant
+        - datetime
+        - meeting_id
         - person_id
         - recorded_by
-        - service_gender
-        - service_id
-        - service_study_year
-        - time
       filter:
         _or:
           - _exists:
@@ -265,565 +139,25 @@ select_permissions:
                                 - person_id
               - _exists:
                   _table:
-                    name: users_permissions_by_entity_id
+                    name: users_admin_on_meetings
                     schema: auth
                   _where:
                     _and:
                       - uid:
                           _eq: X-Hasura-User-Id
-                      - _or:
-                          - _and:
-                              - entity_type:
-                                  _eq: service
-                              - entity_id:
-                                  _ceq:
-                                    - $
-                                    - service_id
-                          - _and:
-                              - entity_type:
-                                  _eq: group
-                              - entity_id:
-                                  _ceq:
-                                    - $
-                                    - group_id
+                      - meeting_id:
+                          _ceq:
+                            - $
+                            - meeting_id
       allow_aggregations: true
 update_permissions:
   - role: user
     permission:
       columns:
-        - day_id
-        - group_id
-        - person_id
-        - service_id
-        - time
-      filter:
-        _and:
-          - _or:
-              - _and:
-                  - as_admin:
-                      _eq: false
-                  - _exists:
-                      _table:
-                        name: users_attendance_permissions
-                        schema: auth
-                      _where:
-                        _and:
-                          - uid:
-                              _eq: X-Hasura-User-Id
-                          - allow_record_attendance:
-                              _eq: true
-                          - _or:
-                              - _and:
-                                  - entity_type:
-                                      _eq: any
-                                  - entity_id:
-                                      _is_null: true
-                              - _and:
-                                  - entity_type:
-                                      _eq: service
-                                  - entity_id:
-                                      _ceq:
-                                        - $
-                                        - service_id
-                                  - _or:
-                                      - service_study_year:
-                                          _is_null: true
-                                      - service_study_year:
-                                          _ceq:
-                                            - $
-                                            - service_study_year
-                                  - _or:
-                                      - service_gender:
-                                          _is_null: true
-                                      - service_gender:
-                                          _ceq:
-                                            - $
-                                            - service_gender
-                              - _and:
-                                  - entity_type:
-                                      _eq: group
-                                  - entity_id:
-                                      _ceq:
-                                        - $
-                                        - group_id
-                  - _or:
-                      - _and:
-                          - group_id:
-                              _is_null: false
-                          - _exists:
-                              _table:
-                                name: persons_groups
-                                schema: public
-                              _where:
-                                _and:
-                                  - person_id:
-                                      _ceq:
-                                        - $
-                                        - person_id
-                                  - group_id:
-                                      _ceq:
-                                        - $
-                                        - group_id
-                      - _and:
-                          - group_id:
-                              _is_null: true
-                          - _exists:
-                              _table:
-                                name: persons_services
-                                schema: public
-                              _where:
-                                _and:
-                                  - person_id:
-                                      _ceq:
-                                        - $
-                                        - person_id
-                                  - service_id:
-                                      _ceq:
-                                        - $
-                                        - service_id
-              - _and:
-                  - as_admin:
-                      _eq: true
-                  - _exists:
-                      _table:
-                        name: users_attendance_permissions
-                        schema: auth
-                      _where:
-                        _and:
-                          - uid:
-                              _eq: X-Hasura-User-Id
-                          - allow_record_servants_attendance:
-                              _eq: true
-                          - _or:
-                              - _and:
-                                  - entity_type:
-                                      _eq: any
-                                  - entity_id:
-                                      _is_null: true
-                              - _and:
-                                  - entity_type:
-                                      _eq: service
-                                  - entity_id:
-                                      _ceq:
-                                        - $
-                                        - service_id
-                                  - _or:
-                                      - service_study_year:
-                                          _is_null: true
-                                      - service_study_year:
-                                          _ceq:
-                                            - $
-                                            - service_study_year
-                                  - _or:
-                                      - service_gender:
-                                          _is_null: true
-                                      - service_gender:
-                                          _ceq:
-                                            - $
-                                            - service_gender
-                              - _and:
-                                  - entity_type:
-                                      _eq: group
-                                  - entity_id:
-                                      _ceq:
-                                        - $
-                                        - group_id
-                  - _exists:
-                      _table:
-                        name: users_attendance_permissions
-                        schema: auth
-                      _where:
-                        _and:
-                          - user_person_id:
-                              _ceq:
-                                - $
-                                - person_id
-                          - _or:
-                              - _and:
-                                  - entity_type:
-                                      _eq: any
-                                  - entity_id:
-                                      _is_null: true
-                              - _and:
-                                  - entity_type:
-                                      _eq: service
-                                  - entity_id:
-                                      _ceq:
-                                        - $
-                                        - service_id
-                                  - _or:
-                                      - service_study_year:
-                                          _is_null: true
-                                      - service_study_year:
-                                          _ceq:
-                                            - $
-                                            - service_study_year
-                                  - _or:
-                                      - service_gender:
-                                          _is_null: true
-                                      - service_gender:
-                                          _ceq:
-                                            - $
-                                            - service_gender
-                              - _and:
-                                  - entity_type:
-                                      _eq: group
-                                  - entity_id:
-                                      _ceq:
-                                        - $
-                                        - group_id
-      check:
-        _and:
-          - _or:
-              - _and:
-                  - as_admin:
-                      _eq: false
-                  - _exists:
-                      _table:
-                        name: users_attendance_permissions
-                        schema: auth
-                      _where:
-                        _and:
-                          - uid:
-                              _eq: X-Hasura-User-Id
-                          - allow_record_attendance:
-                              _eq: true
-                          - _or:
-                              - _and:
-                                  - entity_type:
-                                      _eq: any
-                                  - entity_id:
-                                      _is_null: true
-                              - _and:
-                                  - entity_type:
-                                      _eq: service
-                                  - entity_id:
-                                      _ceq:
-                                        - $
-                                        - service_id
-                                  - _or:
-                                      - service_study_year:
-                                          _is_null: true
-                                      - service_study_year:
-                                          _ceq:
-                                            - $
-                                            - service_study_year
-                                  - _or:
-                                      - service_gender:
-                                          _is_null: true
-                                      - service_gender:
-                                          _ceq:
-                                            - $
-                                            - service_gender
-                              - _and:
-                                  - entity_type:
-                                      _eq: group
-                                  - entity_id:
-                                      _ceq:
-                                        - $
-                                        - group_id
-                  - _or:
-                      - _and:
-                          - group_id:
-                              _is_null: false
-                          - _exists:
-                              _table:
-                                name: persons_groups
-                                schema: public
-                              _where:
-                                _and:
-                                  - person_id:
-                                      _ceq:
-                                        - $
-                                        - person_id
-                                  - group_id:
-                                      _ceq:
-                                        - $
-                                        - group_id
-                      - _and:
-                          - group_id:
-                              _is_null: true
-                          - _exists:
-                              _table:
-                                name: persons_services
-                                schema: public
-                              _where:
-                                _and:
-                                  - person_id:
-                                      _ceq:
-                                        - $
-                                        - person_id
-                                  - service_id:
-                                      _ceq:
-                                        - $
-                                        - service_id
-              - _and:
-                  - as_admin:
-                      _eq: true
-                  - _exists:
-                      _table:
-                        name: users_attendance_permissions
-                        schema: auth
-                      _where:
-                        _and:
-                          - uid:
-                              _eq: X-Hasura-User-Id
-                          - allow_record_servants_attendance:
-                              _eq: true
-                          - _or:
-                              - _and:
-                                  - entity_type:
-                                      _eq: any
-                                  - entity_id:
-                                      _is_null: true
-                              - _and:
-                                  - entity_type:
-                                      _eq: service
-                                  - entity_id:
-                                      _ceq:
-                                        - $
-                                        - service_id
-                                  - _or:
-                                      - service_study_year:
-                                          _is_null: true
-                                      - service_study_year:
-                                          _ceq:
-                                            - $
-                                            - service_study_year
-                                  - _or:
-                                      - service_gender:
-                                          _is_null: true
-                                      - service_gender:
-                                          _ceq:
-                                            - $
-                                            - service_gender
-                              - _and:
-                                  - entity_type:
-                                      _eq: group
-                                  - entity_id:
-                                      _ceq:
-                                        - $
-                                        - group_id
-                  - _exists:
-                      _table:
-                        name: users_attendance_permissions
-                        schema: auth
-                      _where:
-                        _and:
-                          - user_person_id:
-                              _ceq:
-                                - $
-                                - person_id
-                          - _or:
-                              - _and:
-                                  - entity_type:
-                                      _eq: any
-                                  - entity_id:
-                                      _is_null: true
-                              - _and:
-                                  - entity_type:
-                                      _eq: service
-                                  - entity_id:
-                                      _ceq:
-                                        - $
-                                        - service_id
-                                  - _or:
-                                      - service_study_year:
-                                          _is_null: true
-                                      - service_study_year:
-                                          _ceq:
-                                            - $
-                                            - service_study_year
-                                  - _or:
-                                      - service_gender:
-                                          _is_null: true
-                                      - service_gender:
-                                          _ceq:
-                                            - $
-                                            - service_gender
-                              - _and:
-                                  - entity_type:
-                                      _eq: group
-                                  - entity_id:
-                                      _ceq:
-                                        - $
-                                        - group_id
+        - datetime
+      filter: *check_record_attendance_permission
+      check: *check_record_attendance_permission
 delete_permissions:
   - role: user
     permission:
-      filter:
-        _and:
-          - _or:
-              - _and:
-                  - as_admin:
-                      _eq: false
-                  - _exists:
-                      _table:
-                        name: users_attendance_permissions
-                        schema: auth
-                      _where:
-                        _and:
-                          - uid:
-                              _eq: X-Hasura-User-Id
-                          - allow_record_attendance:
-                              _eq: true
-                          - _or:
-                              - _and:
-                                  - entity_type:
-                                      _eq: any
-                                  - entity_id:
-                                      _is_null: true
-                              - _and:
-                                  - entity_type:
-                                      _eq: service
-                                  - entity_id:
-                                      _ceq:
-                                        - $
-                                        - service_id
-                                  - _or:
-                                      - service_study_year:
-                                          _is_null: true
-                                      - service_study_year:
-                                          _ceq:
-                                            - $
-                                            - service_study_year
-                                  - _or:
-                                      - service_gender:
-                                          _is_null: true
-                                      - service_gender:
-                                          _ceq:
-                                            - $
-                                            - service_gender
-                              - _and:
-                                  - entity_type:
-                                      _eq: group
-                                  - entity_id:
-                                      _ceq:
-                                        - $
-                                        - group_id
-                  - _or:
-                      - _and:
-                          - group_id:
-                              _is_null: false
-                          - _exists:
-                              _table:
-                                name: persons_groups
-                                schema: public
-                              _where:
-                                _and:
-                                  - person_id:
-                                      _ceq:
-                                        - $
-                                        - person_id
-                                  - group_id:
-                                      _ceq:
-                                        - $
-                                        - group_id
-                      - _and:
-                          - group_id:
-                              _is_null: true
-                          - _exists:
-                              _table:
-                                name: persons_services
-                                schema: public
-                              _where:
-                                _and:
-                                  - person_id:
-                                      _ceq:
-                                        - $
-                                        - person_id
-                                  - service_id:
-                                      _ceq:
-                                        - $
-                                        - service_id
-              - _and:
-                  - as_admin:
-                      _eq: true
-                  - _exists:
-                      _table:
-                        name: users_attendance_permissions
-                        schema: auth
-                      _where:
-                        _and:
-                          - uid:
-                              _eq: X-Hasura-User-Id
-                          - allow_record_servants_attendance:
-                              _eq: true
-                          - _or:
-                              - _and:
-                                  - entity_type:
-                                      _eq: any
-                                  - entity_id:
-                                      _is_null: true
-                              - _and:
-                                  - entity_type:
-                                      _eq: service
-                                  - entity_id:
-                                      _ceq:
-                                        - $
-                                        - service_id
-                                  - _or:
-                                      - service_study_year:
-                                          _is_null: true
-                                      - service_study_year:
-                                          _ceq:
-                                            - $
-                                            - service_study_year
-                                  - _or:
-                                      - service_gender:
-                                          _is_null: true
-                                      - service_gender:
-                                          _ceq:
-                                            - $
-                                            - service_gender
-                              - _and:
-                                  - entity_type:
-                                      _eq: group
-                                  - entity_id:
-                                      _ceq:
-                                        - $
-                                        - group_id
-                  - _exists:
-                      _table:
-                        name: users_attendance_permissions
-                        schema: auth
-                      _where:
-                        _and:
-                          - user_person_id:
-                              _ceq:
-                                - $
-                                - person_id
-                          - _or:
-                              - _and:
-                                  - entity_type:
-                                      _eq: any
-                                  - entity_id:
-                                      _is_null: true
-                              - _and:
-                                  - entity_type:
-                                      _eq: service
-                                  - entity_id:
-                                      _ceq:
-                                        - $
-                                        - service_id
-                                  - _or:
-                                      - service_study_year:
-                                          _is_null: true
-                                      - service_study_year:
-                                          _ceq:
-                                            - $
-                                            - service_study_year
-                                  - _or:
-                                      - service_gender:
-                                          _is_null: true
-                                      - service_gender:
-                                          _ceq:
-                                            - $
-                                            - service_gender
-                              - _and:
-                                  - entity_type:
-                                      _eq: group
-                                  - entity_id:
-                                      _ceq:
-                                        - $
-                                        - group_id
+      filter: *check_record_attendance_permission

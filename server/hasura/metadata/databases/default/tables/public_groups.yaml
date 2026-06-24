@@ -22,19 +22,12 @@ array_relationships:
         table:
           name: users_admin_on
           schema: auth
-  - name: attendanceDaysConstraints
+  - name: meetings
     using:
       foreign_key_constraint_on:
         column: group_id
         table:
-          name: attendance_days_constraints
-          schema: history
-  - name: attendanceHistory
-    using:
-      foreign_key_constraint_on:
-        column: group_id
-        table:
-          name: attendance_history
+          name: meetings
           schema: history
   - name: editHistroy
     using:

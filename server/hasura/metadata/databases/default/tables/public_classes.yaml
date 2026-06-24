@@ -29,7 +29,7 @@ array_relationships:
         remote_table:
           name: users_admin_on
           schema: auth
-  - name: attendanceDaysConstraints
+  - name: meetings
     using:
       manual_configuration:
         column_mapping:
@@ -38,18 +38,7 @@ array_relationships:
           service_study_year: service_study_year
         insertion_order: null
         remote_table:
-          name: attendance_days_constraints
-          schema: history
-  - name: attendanceHistory
-    using:
-      manual_configuration:
-        column_mapping:
-          service_gender: service_gender
-          service_id: service_id
-          service_study_year: service_study_year
-        insertion_order: null
-        remote_table:
-          name: attendance_history
+          name: meetings
           schema: history
   - name: editHistory
     using:

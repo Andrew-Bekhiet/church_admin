@@ -1,0 +1,3 @@
+table:
+  name: meetings_persons
+  schema: history
