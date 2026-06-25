@@ -1,4 +1,4 @@
-FROM hasura/graphql-engine:v2.49.2.cli-migrations-v3
+FROM hasura/graphql-engine:v2.49.3.cli-migrations-v3
 
 # Install PostgreSQL client 17
 RUN apt-get update && apt-get install -y curl gnupg lsb-release
