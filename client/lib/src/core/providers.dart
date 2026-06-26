@@ -140,7 +140,7 @@ final connectivityServiceProvider = Provider<ConnectivityService>((ref) {
 });
 
 final secretsServiceProvider = Provider<SecretsService>(
-  (ref) => SecretsServiceImpl(),
+  (ref) => const SecretsService(),
 );
 
 final authBlocProvider = Provider<AuthBloc>((ref) {
