@@ -1,17 +1,14 @@
 import axios from "axios";
-import { auth, storage } from "firebase-admin";
-import { https, identity } from "firebase-functions";
-import { BlockingFunction, region } from "firebase-functions/v1";
+import { storage } from "firebase-admin";
+import { HttpsError } from "firebase-functions/v2/https";
+import {
+  beforeUserCreated,
+  beforeUserSignedIn,
+} from "firebase-functions/v2/identity";
 import { Readable } from "stream";
 import { getHasuraUID, upsertUser } from "./hasura_interface";
 
-export let beforeUserSignIn: BlockingFunction | undefined = undefined;
-if (process.env.FUNCTIONS_EMULATOR)
-  beforeUserSignIn = identity.beforeUserSignedIn(async (user) => {
-    console.dir(user, { depth: 4 });
-  });
-
-export const beforeUserSignUp = identity.beforeUserCreated(async (event) => {
+export const beforeUserSignUp = beforeUserCreated(async (event) => {
   const authUser = event.data!;
 
   console.dir(authUser, { depth: 4 });
@@ -24,7 +21,7 @@ export const beforeUserSignUp = identity.beforeUserCreated(async (event) => {
 
     if (!dbUser) {
       console.error("Could not insert user into database");
-      throw new https.HttpsError("unknown", "");
+      throw new HttpsError("unknown", "");
     }
 
     const { person_id, hasura_uid } = dbUser;
@@ -68,19 +65,28 @@ export const beforeUserSignUp = identity.beforeUserCreated(async (event) => {
   }
 });
 
-export const onUserSignUp = region("europe-west6")
-  .auth.user()
-  .onCreate(async (user) => {
-    console.dir(user, { depth: 4 });
-    try {
-      await auth().setCustomUserClaims(user.uid, {
-        "x-hasura-user-id": await getHasuraUID(user.uid),
+export const beforeUserSignIn = beforeUserSignedIn(async (event) => {
+  const authUser = event.data!;
+
+  console.dir(authUser, { depth: 4 });
+  try {
+    const hasura_uid = await getHasuraUID(authUser.uid!);
+
+    if (!hasura_uid) {
+      console.error("Could not find hasura_uid for user", authUser.uid);
+      throw new HttpsError("not-found", "User not found in database");
+    }
+
+    return {
+      customClaims: {
+        "x-hasura-user-id": hasura_uid,
         "x-hasura-default-role": "user",
         "x-hasura-allowed-roles": ["user"],
-      });
-    } catch (e) {
-      console.error(e);
-      console.dir(e, { depth: 4 });
-      throw e;
-    }
-  });
+      },
+    };
+  } catch (e) {
+    console.error(e);
+    console.dir(e, { depth: 4 });
+    throw e;
+  }
+});
