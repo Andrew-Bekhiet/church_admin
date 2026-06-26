@@ -83,10 +83,6 @@ jobs:
       - name: Populate Flutter cache
         run: flutter precache
 
-      - name: Override files for CI
-        working-directory: client
-        run: cp --force lib/firebase_options_ci.dart lib/firebase_options.dart
-
       - name: Install dependencies
         working-directory: client
         run: flutter pub get
@@ -190,15 +186,6 @@ jobs:
       - name: Populate the Flutter tool's cache of binary artifacts
         run: flutter precache
 
-      - name: Decode and save secrets to files
-        working-directory: client
-        env:
-          FIREBASE_OPTIONS_DART: ${{ secrets.FIREBASE_OPTIONS_DART }}
-          SECRETS_SERVICE_DART: ${{ secrets.SECRETS_SERVICE_DART }}
-        run: |
-          echo $FIREBASE_OPTIONS_DART | sed 's/[^A-Za-z0-9+/=]//g' | base64 -d > ./lib/firebase_options.dart
-          echo $SECRETS_SERVICE_DART | sed 's/[^A-Za-z0-9+/=]//g' | base64 -d > ./lib/src/core/services/secrets/secrets_service_impl.dart
-
       - name: Decode and save android secrets
         working-directory: client
         if: ${{ matrix.os == 'ubuntu-latest' }}
@@ -221,6 +208,12 @@ jobs:
         working-directory: client
         run: dart run build_runner build --delete-conflicting-outputs
 
+      - name: Decode app production environment
+        working-directory: client
+        env:
+          APP_PROD_ENV_FILE: ${{ secrets.APP_PROD_ENV_FILE }}
+        run: echo "$APP_PROD_ENV_FILE" | base64 -d > .env
+
       - name: 🚀 Shorebird Release
         if: ${{ matrix.os == 'ubuntu-latest' }}
         uses: shorebirdtech/shorebird-release@v0
@@ -229,7 +222,9 @@ jobs:
         with:
           working-directory: client
           platform: android
-          args: --artifact=apk --flutter-version=${{ steps.flutter-action.outputs.VERSION }}
+          args: --artifact=apk
+            --flutter-version=${{ steps.flutter-action.outputs.VERSION }}
+            --dart-define-from-file=.env
 
       - name: Run pod repo update
         if: ${{ matrix.os == 'macos-latest' }}
@@ -262,6 +257,12 @@ jobs:
           args: --build-name ${{ steps.version.outputs.version }}
             --export-options-plist="$HOME/export_options.plist"
             --flutter-version=${{ steps.flutter-action.outputs.VERSION }}
+            --dart-define-from-file=.env
+
+      - name: Delete app production environment
+        if: ${{ always() }}
+        working-directory: client
+        run: rm -f .env
 
       - name: Publish to Google Play
         if: ${{ matrix.os == 'ubuntu-latest' }}

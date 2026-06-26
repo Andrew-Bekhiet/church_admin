@@ -37,10 +37,6 @@ jobs:
       - name: Populate Flutter cache
         run: flutter precache
 
-      - name: Override files for CI
-        working-directory: client
-        run: cp --force lib/firebase_options_ci.dart lib/firebase_options.dart
-
       - name: Install dependencies
         working-directory: client
         run: flutter pub get
