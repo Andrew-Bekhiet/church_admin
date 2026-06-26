@@ -85,9 +85,7 @@ jobs:
 
       - name: Override files for CI
         working-directory: client
-        run: |
-          cp --force lib/firebase_options_ci.dart lib/firebase_options.dart
-          cp --force lib/src/core/services/secrets/secrets_service_ci_impl.dart lib/src/core/services/secrets/secrets_service_impl.dart
+        run: cp --force lib/firebase_options_ci.dart lib/firebase_options.dart
 
       - name: Install dependencies
         working-directory: client

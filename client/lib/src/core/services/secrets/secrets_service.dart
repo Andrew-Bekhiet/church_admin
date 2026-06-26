@@ -1,14 +1,17 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:collection/collection.dart';
 
-abstract class SecretsService extends DelegatingMap with UnmodifiableMapMixin {
+class SecretsService {
   static SecretsService get I =>
       globalProviderContainer.read(secretsServiceProvider);
 
-  const SecretsService(super.base);
+  const SecretsService();
 
-  String get hasuraServer => this['HASURA_SERVER'];
-  String get sentryDSN => this['SENTRY_DSN'];
+  @pragma('vm:prefer-inline')
+  String get hasuraServer => const String.fromEnvironment('HASURA_SERVER');
+  @pragma('vm:prefer-inline')
+  String get sentryDSN => const String.fromEnvironment('SENTRY_DSN');
 
-  String get webRecaptchaSiteKey => this['WEB_RECAPTCHA_SITE_KEY'];
+  @pragma('vm:prefer-inline')
+  String get webRecaptchaSiteKey =>
+      const String.fromEnvironment('WEB_RECAPTCHA_SITE_KEY');
 }
