@@ -26,7 +26,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version-file: server/firebase/functions/package.json
+          node-version-file: server/firebase/functions/.nvmrc
           cache: npm
           cache-dependency-path: server/firebase/functions/package-lock.json
 
