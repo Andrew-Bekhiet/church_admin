@@ -34,7 +34,6 @@ class DefaultFirebaseOptions {
     projectId: String.fromEnvironment('FIREBASE_PROJECT_ID'),
     authDomain: String.fromEnvironment('FIREBASE_AUTH_DOMAIN'),
     databaseURL: String.fromEnvironment('FIREBASE_DATABASE_URL'),
-    storageBucket: String.fromEnvironment('FIREBASE_STORAGE_BUCKET'),
   );
 
   @pragma('vm:prefer-inline')
@@ -44,7 +43,6 @@ class DefaultFirebaseOptions {
     messagingSenderId: String.fromEnvironment('FIREBASE_MESSAGING_SENDER_ID'),
     projectId: String.fromEnvironment('FIREBASE_PROJECT_ID'),
     databaseURL: String.fromEnvironment('FIREBASE_DATABASE_URL'),
-    storageBucket: String.fromEnvironment('FIREBASE_STORAGE_BUCKET'),
   );
 
   @pragma('vm:prefer-inline')
@@ -54,7 +52,6 @@ class DefaultFirebaseOptions {
     messagingSenderId: String.fromEnvironment('FIREBASE_MESSAGING_SENDER_ID'),
     projectId: String.fromEnvironment('FIREBASE_PROJECT_ID'),
     databaseURL: String.fromEnvironment('FIREBASE_DATABASE_URL'),
-    storageBucket: String.fromEnvironment('FIREBASE_STORAGE_BUCKET'),
     iosClientId: String.fromEnvironment('FIREBASE_IOS_CLIENT_ID'),
   );
 }
