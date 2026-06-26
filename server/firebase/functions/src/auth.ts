@@ -1,5 +1,6 @@
 import axios from "axios";
 import { storage } from "firebase-admin";
+import { storageBucket } from "firebase-functions/params";
 import { HttpsError } from "firebase-functions/v2/https";
 import {
   beforeUserCreated,
@@ -28,7 +29,7 @@ export const beforeUserSignUp = beforeUserCreated(async (event) => {
 
     if (authUser.photoURL) {
       const fileWriteStream = storage()
-        .bucket("church-data-admin.appspot.com")
+        .bucket(storageBucket.value())
         .file("persons/" + person_id)
         .createWriteStream({
           contentType: "image/jpeg",

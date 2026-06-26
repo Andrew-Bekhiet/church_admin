@@ -1,4 +1,5 @@
 import { storage } from "firebase-admin";
+import { storageBucket } from "firebase-functions/params";
 import { https } from "firebase-functions/v2";
 import * as fs from "fs";
 import * as path from "path";
@@ -7,7 +8,6 @@ import { checkUserApproved, makeGraphqlRequest } from "../hasura_interface";
 import { buildExportVariables } from "./build_export_variables";
 import { buildWorkbookBuffer, type ExportPayload } from "./to_excel";
 
-const EXPORT_BUCKET = "church-data-admin.appspot.com";
 const EXPORT_DOWNLOAD_URL_EXPIRY_MS = 1000 * 60 * 10; // 10 minutes
 
 const ExportDataRequestData = z
@@ -104,7 +104,7 @@ export async function exportDataHandler(
   const workbookDataBuffer = buildWorkbookBuffer(payload);
 
   const file = storage()
-    .bucket(EXPORT_BUCKET)
+    .bucket(storageBucket.value())
     .file(`exports/${hasuraUID}/${exportId}.xlsx`);
   await file.save(workbookDataBuffer, {
     metadata: {

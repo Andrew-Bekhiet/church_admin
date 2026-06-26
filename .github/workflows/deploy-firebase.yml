@@ -43,6 +43,13 @@ jobs:
           create_credentials_file: true
           export_environment_variables: true
 
+      - name: Set Firebase project environment variables
+        working-directory: server/firebase/functions
+        if: ${{ github.event_name != 'pull_request' }}
+        env:
+          FUNCTIONS_PROD_ENV_FILE: ${{ secrets.FUNCTIONS_PROD_ENV_FILE }}
+        run: echo "$FUNCTIONS_PROD_ENV_FILE" | base64 -d > .env
+
       - name: Deploy Firebase project
         working-directory: server/firebase/functions
         if: ${{ github.event_name != 'pull_request' }}

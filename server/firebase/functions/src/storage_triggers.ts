@@ -1,5 +1,6 @@
 import { encode } from "blurhash";
 import { storage } from "firebase-admin";
+import { storageBucket } from "firebase-functions/params";
 import { storage as functions_storage } from "firebase-functions/v2";
 import * as sharp from "sharp";
 import {
@@ -10,7 +11,7 @@ import {
 } from "./hasura_interface";
 
 export const onPhotoUploaded = functions_storage.onObjectFinalized(
-  "church-data-admin.appspot.com",
+  storageBucket,
   async (event) => {
     const { data: object } = event;
 
@@ -27,12 +28,12 @@ export const onPhotoUploaded = functions_storage.onObjectFinalized(
       console.error(error);
       throw error;
     }
-  }
+  },
 );
 
 export async function getImageBlurHash(object: { name?: string }) {
   const downloadData = await storage()
-    .bucket("church-data-admin.appspot.com")
+    .bucket(storageBucket.value())
     .file(object.name!)
     .download();
 
@@ -50,17 +51,19 @@ export async function getImageBlurHash(object: { name?: string }) {
 }
 
 function _checkIsValidObject(
-  object: functions_storage.StorageObjectData
+  object: functions_storage.StorageObjectData,
 ): { table: PhotoTable; file: string } | null {
   const regexp = RegExp(
-    `^church-data-admin\\.appspot\\.com\\/(?<table>(${photoTables
-      .map((s) => `(${s})`)
-      .join(
-        "|"
-      )}))\\/(?<file>([0-9a-fA-F]{8}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{12}))\\/(?<time>(\\d+))$`
+    `^church-data-admin\\.appspot\\.com\\/(?<table>(${
+      photoTables
+        .map((s) => `(${s})`)
+        .join(
+          "|",
+        )
+    }))\\/(?<file>([0-9a-fA-F]{8}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{4}\\b-[0-9a-fA-F]{12}))\\/(?<time>(\\d+))$`,
   );
   const match = object.id.match(
-    regexp
+    regexp,
     //Expexted output: ^church-data-admin\.appspot\.com\/(?<table>((areas)|(families)|(groups)|(persons)|(services)|(stores)|(streets)))\/(?<file>([0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12})\/(?<time>(\d)+)$
   );
   if (!match) {
@@ -68,7 +71,7 @@ function _checkIsValidObject(
       `Object id ${object.id} doesn't match RegExp `,
       regexp,
       "\n",
-      "Exiting"
+      "Exiting",
     );
     return null;
   }
