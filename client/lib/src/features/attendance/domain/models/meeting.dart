@@ -51,6 +51,9 @@ class Meeting extends ViewableWithID
   @override
   final Group? group;
 
+  @override
+  String get typeName => AdvancedQueriesMetadata().meeting.name;
+
   const Meeting({
     required this.id,
     required this.name,
@@ -71,9 +74,6 @@ class Meeting extends ViewableWithID
 
   @override
   Json toJson() => _$MeetingToJson(this);
-
-  @override
-  String get typeName => AdvancedQueriesMetadata().meeting.name;
 
   Input_HistoryMeetingsInsertInput toInsertInput() {
     return Input_HistoryMeetingsInsertInput(
