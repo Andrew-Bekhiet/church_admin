@@ -3,7 +3,7 @@ fragment Meeting on HistoryMeetings {
   name
   audience
   color
-  archived
+  isArchived
   serviceId
   serviceGender
   serviceStudyYear

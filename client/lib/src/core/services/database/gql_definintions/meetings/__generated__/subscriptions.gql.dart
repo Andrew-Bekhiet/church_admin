@@ -1216,6 +1216,21 @@ const documentNodeSubscriptionwatchMeetingRoster = DocumentNode(
                     ),
                   ],
                 ),
+                ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'person'),
+                      value: ObjectValueNode(
+                        fields: [
+                          ObjectFieldNode(
+                            name: NameNode(value: 'id'),
+                            value: EnumValueNode(name: NameNode(value: 'ASC')),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
               ],
             ),
           ),
@@ -1383,6 +1398,23 @@ const documentNodeSubscriptionwatchMeetingRoster = DocumentNode(
                                 ),
                               ],
                             ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    ArgumentNode(
+                      name: NameNode(value: 'orderBy'),
+                      value: ListValueNode(
+                        values: [
+                          ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                name: NameNode(value: 'datetime'),
+                                value: EnumValueNode(
+                                  name: NameNode(value: 'DESC'),
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),

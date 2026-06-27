@@ -17,7 +17,7 @@ insert_permissions:
       check: &check_record_attendance_permission
         _and:
           - meeting:
-              archived:
+              is_archived:
                 _eq: false
           - _or:
               - _and:

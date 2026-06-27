@@ -49,5 +49,8 @@ subscription watchService($id: uuid!) {
     nextService {
       ...Service
     }
+    meetings {
+      ...Meeting
+    }
   }
 }

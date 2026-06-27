@@ -24,7 +24,7 @@ class Meeting extends ViewableWithID
   final MeetingAudience audience;
 
   @override
-  final bool archived;
+  final bool isArchived;
 
   @override
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
@@ -58,7 +58,7 @@ class Meeting extends ViewableWithID
     required this.id,
     required this.name,
     required this.audience,
-    required this.archived,
+    required this.isArchived,
     this.color,
     this.serviceId,
     this.service,
@@ -80,7 +80,7 @@ class Meeting extends ViewableWithID
       name: name,
       audience: audience.name,
       color: colorToInt(color),
-      archived: archived,
+      isArchived: isArchived,
       serviceId: service?.id.toUuid() ?? serviceId?.toUuid(),
       serviceStudyYear: serviceStudyYear,
       serviceGender: serviceGender,
@@ -99,8 +99,8 @@ class Meeting extends ViewableWithID
     if (color != oldMeeting.color) {
       result = result.copyWith(color: colorToInt(color));
     }
-    if (archived != oldMeeting.archived) {
-      result = result.copyWith(archived: archived);
+    if (isArchived != oldMeeting.isArchived) {
+      result = result.copyWith(isArchived: isArchived);
     }
     return result;
   }

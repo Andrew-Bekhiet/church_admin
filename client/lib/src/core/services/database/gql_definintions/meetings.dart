@@ -63,7 +63,7 @@ class MeetingsDAO extends DAOBase<Meeting>
         operationName: 'updateMeeting',
         variables: Variables_Mutation_updateMeeting(
           id: meetingId.toUuid(),
-          $set: Input_HistoryMeetingsSetInput(archived: isArchived),
+          $set: Input_HistoryMeetingsSetInput(isArchived: isArchived),
         ).toJson(),
         parserFn: db.parser.singleOrNullParser(Meeting.fromJson),
       ),

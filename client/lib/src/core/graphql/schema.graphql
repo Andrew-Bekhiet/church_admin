@@ -3617,7 +3617,6 @@ input HistoryLatestVisitsOrderBy {
 }
 
 type HistoryMeetings {
-  archived: Boolean!
   attendanceHistory(
     distinctOn: [HistoryAttendanceHistorySelectColumn!]
     limit: Int
@@ -3637,6 +3636,7 @@ type HistoryMeetings {
   group: Groups
   groupId: uuid
   id: uuid!
+  isArchived: Boolean!
   name: String!
   persons(
     distinctOn: [HistoryMeetingsPersonsSelectColumn!]
@@ -3687,7 +3687,6 @@ input HistoryMeetingsBoolExp {
   _and: [HistoryMeetingsBoolExp!]
   _not: HistoryMeetingsBoolExp
   _or: [HistoryMeetingsBoolExp!]
-  archived: BooleanComparisonExp
   attendanceHistory: HistoryAttendanceHistoryBoolExp
   attendanceHistoryAggregate: HistoryAttendanceHistoryAggregateBoolExp
   audience: MeetingAudienceComparisonExp
@@ -3695,6 +3694,7 @@ input HistoryMeetingsBoolExp {
   group: GroupsBoolExp
   groupId: UuidComparisonExp
   id: UuidComparisonExp
+  isArchived: BooleanComparisonExp
   name: StringComparisonExp
   persons: HistoryMeetingsPersonsBoolExp
   personsAggregate: HistoryMeetingsPersonsAggregateBoolExp
@@ -3714,12 +3714,12 @@ input HistoryMeetingsIncInput {
 }
 
 input HistoryMeetingsInsertInput {
-  archived: Boolean
   attendanceHistory: HistoryAttendanceHistoryArrRelInsertInput
   audience: meeting_audience
   color: bigint
   group: GroupsObjRelInsertInput
   groupId: uuid
+  isArchived: Boolean
   name: String
   service: ServicesObjRelInsertInput
   serviceGender: Boolean
@@ -3764,13 +3764,13 @@ input HistoryMeetingsOnConflict {
   where: HistoryMeetingsBoolExp
 }
 input HistoryMeetingsOrderBy {
-  archived: OrderBy
   attendanceHistoryAggregate: HistoryAttendanceHistoryAggregateOrderBy
   audience: OrderBy
   color: OrderBy
   group: GroupsOrderBy
   groupId: OrderBy
   id: OrderBy
+  isArchived: OrderBy
   name: OrderBy
   personsAggregate: HistoryMeetingsPersonsAggregateOrderBy
   service: ServicesOrderBy
@@ -3877,11 +3877,11 @@ input HistoryMeetingsPkColumnsInput {
 }
 
 enum HistoryMeetingsSelectColumn {
-  archived
   audience
   color
   groupId
   id
+  isArchived
   name
   serviceGender
   serviceId
@@ -3889,9 +3889,9 @@ enum HistoryMeetingsSelectColumn {
 }
 
 input HistoryMeetingsSetInput {
-  archived: Boolean
   audience: meeting_audience
   color: bigint
+  isArchived: Boolean
   name: String
 }
 
@@ -3915,11 +3915,11 @@ input HistoryMeetingsStreamCursorInput {
   ordering: CursorOrdering
 }
 input HistoryMeetingsStreamCursorValueInput {
-  archived: Boolean
   audience: meeting_audience
   color: bigint
   groupId: uuid
   id: uuid
+  isArchived: Boolean
   name: String
   serviceGender: Boolean
   serviceId: uuid
@@ -3932,9 +3932,9 @@ input HistoryMeetingsSumOrderBy {
 }
 
 enum HistoryMeetingsUpdateColumn {
-  archived
   audience
   color
+  isArchived
   name
 }
 

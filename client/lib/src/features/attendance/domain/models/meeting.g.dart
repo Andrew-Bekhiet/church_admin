@@ -39,11 +39,11 @@ class MeetingFields {
         operators: {...MultiSelectOperator.values},
       );
 
-  final FieldMetadata<bool> archived = FieldMetadata<bool>(
-    getValue: (obj) => obj is Meeting ? obj.archived : null,
+  final FieldMetadata<bool> isArchived = FieldMetadata<bool>(
+    getValue: (obj) => obj is Meeting ? obj.isArchived : null,
     parentType: Meeting,
-    name: 'archived',
-    label: 'archived',
+    name: 'isArchived',
+    label: 'isArchived',
     isCodeOnly: false,
     operators: {...BooleanOperator.values},
   );
@@ -130,7 +130,7 @@ class MeetingFields {
     id,
     name,
     audience,
-    archived,
+    isArchived,
     color,
     service,
     serviceStudyYear,
@@ -142,7 +142,7 @@ class MeetingFields {
     'id': id,
     'name': name,
     'audience': audience,
-    'archived': archived,
+    'isArchived': isArchived,
     'color': color,
     'service': service,
     'serviceStudyYear': serviceStudyYear,
@@ -160,7 +160,7 @@ Meeting _$MeetingFromJson(Map json) => Meeting(
   id: json['id'] as String? ?? '',
   name: json['name'] as String? ?? '',
   audience: $enumDecode(_$MeetingAudienceEnumMap, json['audience']),
-  archived: json['archived'] as bool,
+  isArchived: json['isArchived'] as bool,
   color: colorFromInt((json['color'] as num?)?.toInt()),
   serviceId: json['serviceId'] as String?,
   service: json['service'] == null
@@ -181,7 +181,7 @@ Map<String, dynamic> _$MeetingToJson(Meeting instance) => <String, dynamic>{
   'id': instance.id,
   'name': instance.name,
   'audience': _$MeetingAudienceEnumMap[instance.audience]!,
-  'archived': instance.archived,
+  'isArchived': instance.isArchived,
   'color': colorToInt(instance.color),
   'serviceId': instance.serviceId,
   'service': instance.service?.toJson(),

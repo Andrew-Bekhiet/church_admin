@@ -114,7 +114,7 @@ insert_permissions:
         - service_id
         - service_study_year
         - service_gender
-        - archived
+        - is_archived
 select_permissions:
   - role: user
     permission:
@@ -127,7 +127,7 @@ select_permissions:
         - service_id
         - service_study_year
         - service_gender
-        - archived
+        - is_archived
       filter:
         _or:
           - _exists:
@@ -192,7 +192,7 @@ update_permissions:
         - name
         - audience
         - color
-        - archived
+        - is_archived
       filter: *meeting_write_permission
       check: *meeting_write_permission
 delete_permissions:
