@@ -14,16 +14,13 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$AttendanceRecord {
   String get id;
-  DateTime get dayId;
-  DateTime get time;
-  Service get service;
-  Person get person;
-  User get recordedByUser;
-  bool get asAdmin;
-  StudyYear? get studyYear;
-  bool? get serviceGender;
-  Group? get group;
-  Class? get class$;
+  String get meetingId;
+  Meeting? get meeting;
+  String get personId;
+  Person? get person;
+  DateTime get datetime;
+  bool get asServant;
+  User? get recordedByUser;
 
   /// Create a copy of AttendanceRecord
   /// with the given fields replaced by the non-null parameter values.
@@ -41,19 +38,18 @@ mixin _$AttendanceRecord {
         (other.runtimeType == runtimeType &&
             other is AttendanceRecord &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.dayId, dayId) || other.dayId == dayId) &&
-            (identical(other.time, time) || other.time == time) &&
-            (identical(other.service, service) || other.service == service) &&
+            (identical(other.meetingId, meetingId) ||
+                other.meetingId == meetingId) &&
+            (identical(other.meeting, meeting) || other.meeting == meeting) &&
+            (identical(other.personId, personId) ||
+                other.personId == personId) &&
             (identical(other.person, person) || other.person == person) &&
+            (identical(other.datetime, datetime) ||
+                other.datetime == datetime) &&
+            (identical(other.asServant, asServant) ||
+                other.asServant == asServant) &&
             (identical(other.recordedByUser, recordedByUser) ||
-                other.recordedByUser == recordedByUser) &&
-            (identical(other.asAdmin, asAdmin) || other.asAdmin == asAdmin) &&
-            (identical(other.studyYear, studyYear) ||
-                other.studyYear == studyYear) &&
-            (identical(other.serviceGender, serviceGender) ||
-                other.serviceGender == serviceGender) &&
-            (identical(other.group, group) || other.group == group) &&
-            (identical(other.class$, class$) || other.class$ == class$));
+                other.recordedByUser == recordedByUser));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -61,21 +57,18 @@ mixin _$AttendanceRecord {
   int get hashCode => Object.hash(
     runtimeType,
     id,
-    dayId,
-    time,
-    service,
+    meetingId,
+    meeting,
+    personId,
     person,
+    datetime,
+    asServant,
     recordedByUser,
-    asAdmin,
-    studyYear,
-    serviceGender,
-    group,
-    class$,
   );
 
   @override
   String toString() {
-    return 'AttendanceRecord(id: $id, dayId: $dayId, time: $time, service: $service, person: $person, recordedByUser: $recordedByUser, asAdmin: $asAdmin, studyYear: $studyYear, serviceGender: $serviceGender, group: $group, class\$: ${class$})';
+    return 'AttendanceRecord(id: $id, meetingId: $meetingId, meeting: $meeting, personId: $personId, person: $person, datetime: $datetime, asServant: $asServant, recordedByUser: $recordedByUser)';
   }
 }
 
@@ -88,16 +81,13 @@ abstract mixin class $AttendanceRecordCopyWith<$Res> {
   @useResult
   $Res call({
     String id,
-    DateTime dayId,
-    DateTime time,
-    Service service,
-    Person person,
-    User recordedByUser,
-    bool asAdmin,
-    StudyYear? studyYear,
-    bool? serviceGender,
-    Group? group,
-    Class? class$,
+    String meetingId,
+    String personId,
+    DateTime datetime,
+    bool asServant,
+    Meeting? meeting,
+    Person? person,
+    User? recordedByUser,
   });
 }
 
@@ -115,16 +105,13 @@ class _$AttendanceRecordCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? dayId = null,
-    Object? time = null,
-    Object? service = null,
-    Object? person = null,
-    Object? recordedByUser = null,
-    Object? asAdmin = null,
-    Object? studyYear = freezed,
-    Object? serviceGender = freezed,
-    Object? group = freezed,
-    Object? class$ = freezed,
+    Object? meetingId = null,
+    Object? personId = null,
+    Object? datetime = null,
+    Object? asServant = null,
+    Object? meeting = freezed,
+    Object? person = freezed,
+    Object? recordedByUser = freezed,
   }) {
     return _then(
       AttendanceRecord(
@@ -132,46 +119,34 @@ class _$AttendanceRecordCopyWithImpl<$Res>
             ? _self.id
             : id // ignore: cast_nullable_to_non_nullable
                   as String,
-        dayId: null == dayId
-            ? _self.dayId
-            : dayId // ignore: cast_nullable_to_non_nullable
+        meetingId: null == meetingId
+            ? _self.meetingId
+            : meetingId // ignore: cast_nullable_to_non_nullable
+                  as String,
+        personId: null == personId
+            ? _self.personId
+            : personId // ignore: cast_nullable_to_non_nullable
+                  as String,
+        datetime: null == datetime
+            ? _self.datetime
+            : datetime // ignore: cast_nullable_to_non_nullable
                   as DateTime,
-        time: null == time
-            ? _self.time
-            : time // ignore: cast_nullable_to_non_nullable
-                  as DateTime,
-        service: null == service
-            ? _self.service
-            : service // ignore: cast_nullable_to_non_nullable
-                  as Service,
-        person: null == person
+        asServant: null == asServant
+            ? _self.asServant
+            : asServant // ignore: cast_nullable_to_non_nullable
+                  as bool,
+        meeting: freezed == meeting
+            ? _self.meeting
+            : meeting // ignore: cast_nullable_to_non_nullable
+                  as Meeting?,
+        person: freezed == person
             ? _self.person
             : person // ignore: cast_nullable_to_non_nullable
-                  as Person,
-        recordedByUser: null == recordedByUser
+                  as Person?,
+        recordedByUser: freezed == recordedByUser
             ? _self.recordedByUser
             : recordedByUser // ignore: cast_nullable_to_non_nullable
-                  as User,
-        asAdmin: null == asAdmin
-            ? _self.asAdmin
-            : asAdmin // ignore: cast_nullable_to_non_nullable
-                  as bool,
-        studyYear: freezed == studyYear
-            ? _self.studyYear
-            : studyYear // ignore: cast_nullable_to_non_nullable
-                  as StudyYear?,
-        serviceGender: freezed == serviceGender
-            ? _self.serviceGender
-            : serviceGender // ignore: cast_nullable_to_non_nullable
-                  as bool?,
-        group: freezed == group
-            ? _self.group
-            : group // ignore: cast_nullable_to_non_nullable
-                  as Group?,
-        class$: freezed == class$
-            ? _self.class$
-            : class$ // ignore: cast_nullable_to_non_nullable
-                  as Class?,
+                  as User?,
       ),
     );
   }

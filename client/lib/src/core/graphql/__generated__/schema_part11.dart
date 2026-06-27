@@ -542,17 +542,13 @@ class Input_ClassesBoolExp {
     Input_ClassesBoolExp? $_not,
     List<Input_ClassesBoolExp>? $_or,
     Input_AuthUsersAdminOnBoolExp? adminUsers,
-    Input_HistoryAttendanceDaysConstraintsBoolExp? attendanceDaysConstraints,
-    Input_HistoryAttendanceDaysConstraintsAggregateBoolExp?
-    attendanceDaysConstraintsAggregate,
-    Input_HistoryAttendanceHistoryBoolExp? attendanceHistory,
-    Input_HistoryAttendanceHistoryAggregateBoolExp? attendanceHistoryAggregate,
     Input_StringComparisonExp? blurhash,
     Input_BigintComparisonExp? color,
     Input_HistoryEditHistoryBoolExp? editHistory,
     Input_HistoryEditHistoryAggregateBoolExp? editHistoryAggregate,
     Input_UuidComparisonExp? id,
     Input_HistoryLatestEditsBoolExp? lastEdit,
+    Input_HistoryMeetingsBoolExp? meetings,
     Input_StringComparisonExp? name,
     Input_ClassesPersonsBoolExp? persons,
     Input_TimestamptzComparisonExp? photoUpdatedAt,
@@ -567,13 +563,6 @@ class Input_ClassesBoolExp {
     if ($_not != null) r'_not': $_not,
     if ($_or != null) r'_or': $_or,
     if (adminUsers != null) r'adminUsers': adminUsers,
-    if (attendanceDaysConstraints != null)
-      r'attendanceDaysConstraints': attendanceDaysConstraints,
-    if (attendanceDaysConstraintsAggregate != null)
-      r'attendanceDaysConstraintsAggregate': attendanceDaysConstraintsAggregate,
-    if (attendanceHistory != null) r'attendanceHistory': attendanceHistory,
-    if (attendanceHistoryAggregate != null)
-      r'attendanceHistoryAggregate': attendanceHistoryAggregate,
     if (blurhash != null) r'blurhash': blurhash,
     if (color != null) r'color': color,
     if (editHistory != null) r'editHistory': editHistory,
@@ -581,6 +570,7 @@ class Input_ClassesBoolExp {
       r'editHistoryAggregate': editHistoryAggregate,
     if (id != null) r'id': id,
     if (lastEdit != null) r'lastEdit': lastEdit,
+    if (meetings != null) r'meetings': meetings,
     if (name != null) r'name': name,
     if (persons != null) r'persons': persons,
     if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
@@ -624,42 +614,6 @@ class Input_ClassesBoolExp {
           ? null
           : Input_AuthUsersAdminOnBoolExp.fromJson(
               (l$adminUsers as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('attendanceDaysConstraints')) {
-      final l$attendanceDaysConstraints = data['attendanceDaysConstraints'];
-      result$data['attendanceDaysConstraints'] =
-          l$attendanceDaysConstraints == null
-          ? null
-          : Input_HistoryAttendanceDaysConstraintsBoolExp.fromJson(
-              (l$attendanceDaysConstraints as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('attendanceDaysConstraintsAggregate')) {
-      final l$attendanceDaysConstraintsAggregate =
-          data['attendanceDaysConstraintsAggregate'];
-      result$data['attendanceDaysConstraintsAggregate'] =
-          l$attendanceDaysConstraintsAggregate == null
-          ? null
-          : Input_HistoryAttendanceDaysConstraintsAggregateBoolExp.fromJson(
-              (l$attendanceDaysConstraintsAggregate as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('attendanceHistory')) {
-      final l$attendanceHistory = data['attendanceHistory'];
-      result$data['attendanceHistory'] = l$attendanceHistory == null
-          ? null
-          : Input_HistoryAttendanceHistoryBoolExp.fromJson(
-              (l$attendanceHistory as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('attendanceHistoryAggregate')) {
-      final l$attendanceHistoryAggregate = data['attendanceHistoryAggregate'];
-      result$data['attendanceHistoryAggregate'] =
-          l$attendanceHistoryAggregate == null
-          ? null
-          : Input_HistoryAttendanceHistoryAggregateBoolExp.fromJson(
-              (l$attendanceHistoryAggregate as Map<String, dynamic>),
             );
     }
     if (data.containsKey('blurhash')) {
@@ -706,6 +660,14 @@ class Input_ClassesBoolExp {
           ? null
           : Input_HistoryLatestEditsBoolExp.fromJson(
               (l$lastEdit as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('meetings')) {
+      final l$meetings = data['meetings'];
+      result$data['meetings'] = l$meetings == null
+          ? null
+          : Input_HistoryMeetingsBoolExp.fromJson(
+              (l$meetings as Map<String, dynamic>),
             );
     }
     if (data.containsKey('name')) {
@@ -794,24 +756,6 @@ class Input_ClassesBoolExp {
   Input_AuthUsersAdminOnBoolExp? get adminUsers =>
       (_$data['adminUsers'] as Input_AuthUsersAdminOnBoolExp?);
 
-  Input_HistoryAttendanceDaysConstraintsBoolExp?
-  get attendanceDaysConstraints =>
-      (_$data['attendanceDaysConstraints']
-          as Input_HistoryAttendanceDaysConstraintsBoolExp?);
-
-  Input_HistoryAttendanceDaysConstraintsAggregateBoolExp?
-  get attendanceDaysConstraintsAggregate =>
-      (_$data['attendanceDaysConstraintsAggregate']
-          as Input_HistoryAttendanceDaysConstraintsAggregateBoolExp?);
-
-  Input_HistoryAttendanceHistoryBoolExp? get attendanceHistory =>
-      (_$data['attendanceHistory'] as Input_HistoryAttendanceHistoryBoolExp?);
-
-  Input_HistoryAttendanceHistoryAggregateBoolExp?
-  get attendanceHistoryAggregate =>
-      (_$data['attendanceHistoryAggregate']
-          as Input_HistoryAttendanceHistoryAggregateBoolExp?);
-
   Input_StringComparisonExp? get blurhash =>
       (_$data['blurhash'] as Input_StringComparisonExp?);
 
@@ -829,6 +773,9 @@ class Input_ClassesBoolExp {
 
   Input_HistoryLatestEditsBoolExp? get lastEdit =>
       (_$data['lastEdit'] as Input_HistoryLatestEditsBoolExp?);
+
+  Input_HistoryMeetingsBoolExp? get meetings =>
+      (_$data['meetings'] as Input_HistoryMeetingsBoolExp?);
 
   Input_StringComparisonExp? get name =>
       (_$data['name'] as Input_StringComparisonExp?);
@@ -875,26 +822,6 @@ class Input_ClassesBoolExp {
       final l$adminUsers = adminUsers;
       result$data['adminUsers'] = l$adminUsers?.toJson();
     }
-    if (_$data.containsKey('attendanceDaysConstraints')) {
-      final l$attendanceDaysConstraints = attendanceDaysConstraints;
-      result$data['attendanceDaysConstraints'] = l$attendanceDaysConstraints
-          ?.toJson();
-    }
-    if (_$data.containsKey('attendanceDaysConstraintsAggregate')) {
-      final l$attendanceDaysConstraintsAggregate =
-          attendanceDaysConstraintsAggregate;
-      result$data['attendanceDaysConstraintsAggregate'] =
-          l$attendanceDaysConstraintsAggregate?.toJson();
-    }
-    if (_$data.containsKey('attendanceHistory')) {
-      final l$attendanceHistory = attendanceHistory;
-      result$data['attendanceHistory'] = l$attendanceHistory?.toJson();
-    }
-    if (_$data.containsKey('attendanceHistoryAggregate')) {
-      final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
-      result$data['attendanceHistoryAggregate'] = l$attendanceHistoryAggregate
-          ?.toJson();
-    }
     if (_$data.containsKey('blurhash')) {
       final l$blurhash = blurhash;
       result$data['blurhash'] = l$blurhash?.toJson();
@@ -918,6 +845,10 @@ class Input_ClassesBoolExp {
     if (_$data.containsKey('lastEdit')) {
       final l$lastEdit = lastEdit;
       result$data['lastEdit'] = l$lastEdit?.toJson();
+    }
+    if (_$data.containsKey('meetings')) {
+      final l$meetings = meetings;
+      result$data['meetings'] = l$meetings?.toJson();
     }
     if (_$data.containsKey('name')) {
       final l$name = name;
@@ -1024,45 +955,6 @@ class Input_ClassesBoolExp {
     if (l$adminUsers != lOther$adminUsers) {
       return false;
     }
-    final l$attendanceDaysConstraints = attendanceDaysConstraints;
-    final lOther$attendanceDaysConstraints = other.attendanceDaysConstraints;
-    if (_$data.containsKey('attendanceDaysConstraints') !=
-        other._$data.containsKey('attendanceDaysConstraints')) {
-      return false;
-    }
-    if (l$attendanceDaysConstraints != lOther$attendanceDaysConstraints) {
-      return false;
-    }
-    final l$attendanceDaysConstraintsAggregate =
-        attendanceDaysConstraintsAggregate;
-    final lOther$attendanceDaysConstraintsAggregate =
-        other.attendanceDaysConstraintsAggregate;
-    if (_$data.containsKey('attendanceDaysConstraintsAggregate') !=
-        other._$data.containsKey('attendanceDaysConstraintsAggregate')) {
-      return false;
-    }
-    if (l$attendanceDaysConstraintsAggregate !=
-        lOther$attendanceDaysConstraintsAggregate) {
-      return false;
-    }
-    final l$attendanceHistory = attendanceHistory;
-    final lOther$attendanceHistory = other.attendanceHistory;
-    if (_$data.containsKey('attendanceHistory') !=
-        other._$data.containsKey('attendanceHistory')) {
-      return false;
-    }
-    if (l$attendanceHistory != lOther$attendanceHistory) {
-      return false;
-    }
-    final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
-    final lOther$attendanceHistoryAggregate = other.attendanceHistoryAggregate;
-    if (_$data.containsKey('attendanceHistoryAggregate') !=
-        other._$data.containsKey('attendanceHistoryAggregate')) {
-      return false;
-    }
-    if (l$attendanceHistoryAggregate != lOther$attendanceHistoryAggregate) {
-      return false;
-    }
     final l$blurhash = blurhash;
     final lOther$blurhash = other.blurhash;
     if (_$data.containsKey('blurhash') !=
@@ -1113,6 +1005,15 @@ class Input_ClassesBoolExp {
       return false;
     }
     if (l$lastEdit != lOther$lastEdit) {
+      return false;
+    }
+    final l$meetings = meetings;
+    final lOther$meetings = other.meetings;
+    if (_$data.containsKey('meetings') !=
+        other._$data.containsKey('meetings')) {
+      return false;
+    }
+    if (l$meetings != lOther$meetings) {
       return false;
     }
     final l$name = name;
@@ -1202,17 +1103,13 @@ class Input_ClassesBoolExp {
     final l$$_not = $_not;
     final l$$_or = $_or;
     final l$adminUsers = adminUsers;
-    final l$attendanceDaysConstraints = attendanceDaysConstraints;
-    final l$attendanceDaysConstraintsAggregate =
-        attendanceDaysConstraintsAggregate;
-    final l$attendanceHistory = attendanceHistory;
-    final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
     final l$blurhash = blurhash;
     final l$color = color;
     final l$editHistory = editHistory;
     final l$editHistoryAggregate = editHistoryAggregate;
     final l$id = id;
     final l$lastEdit = lastEdit;
+    final l$meetings = meetings;
     final l$name = name;
     final l$persons = persons;
     final l$photoUpdatedAt = photoUpdatedAt;
@@ -1235,16 +1132,6 @@ class Input_ClassesBoolExp {
                 : Object.hashAll(l$$_or.map((v) => v))
           : const {},
       _$data.containsKey('adminUsers') ? l$adminUsers : const {},
-      _$data.containsKey('attendanceDaysConstraints')
-          ? l$attendanceDaysConstraints
-          : const {},
-      _$data.containsKey('attendanceDaysConstraintsAggregate')
-          ? l$attendanceDaysConstraintsAggregate
-          : const {},
-      _$data.containsKey('attendanceHistory') ? l$attendanceHistory : const {},
-      _$data.containsKey('attendanceHistoryAggregate')
-          ? l$attendanceHistoryAggregate
-          : const {},
       _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('editHistory') ? l$editHistory : const {},
@@ -1253,6 +1140,7 @@ class Input_ClassesBoolExp {
           : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('lastEdit') ? l$lastEdit : const {},
+      _$data.containsKey('meetings') ? l$meetings : const {},
       _$data.containsKey('name') ? l$name : const {},
       _$data.containsKey('persons') ? l$persons : const {},
       _$data.containsKey('photoUpdatedAt') ? l$photoUpdatedAt : const {},
@@ -1280,17 +1168,13 @@ abstract class CopyWith_Input_ClassesBoolExp<TRes> {
     Input_ClassesBoolExp? $_not,
     List<Input_ClassesBoolExp>? $_or,
     Input_AuthUsersAdminOnBoolExp? adminUsers,
-    Input_HistoryAttendanceDaysConstraintsBoolExp? attendanceDaysConstraints,
-    Input_HistoryAttendanceDaysConstraintsAggregateBoolExp?
-    attendanceDaysConstraintsAggregate,
-    Input_HistoryAttendanceHistoryBoolExp? attendanceHistory,
-    Input_HistoryAttendanceHistoryAggregateBoolExp? attendanceHistoryAggregate,
     Input_StringComparisonExp? blurhash,
     Input_BigintComparisonExp? color,
     Input_HistoryEditHistoryBoolExp? editHistory,
     Input_HistoryEditHistoryAggregateBoolExp? editHistoryAggregate,
     Input_UuidComparisonExp? id,
     Input_HistoryLatestEditsBoolExp? lastEdit,
+    Input_HistoryMeetingsBoolExp? meetings,
     Input_StringComparisonExp? name,
     Input_ClassesPersonsBoolExp? persons,
     Input_TimestamptzComparisonExp? photoUpdatedAt,
@@ -1315,13 +1199,6 @@ abstract class CopyWith_Input_ClassesBoolExp<TRes> {
     _fn,
   );
   CopyWith_Input_AuthUsersAdminOnBoolExp<TRes> get adminUsers;
-  CopyWith_Input_HistoryAttendanceDaysConstraintsBoolExp<TRes>
-  get attendanceDaysConstraints;
-  CopyWith_Input_HistoryAttendanceDaysConstraintsAggregateBoolExp<TRes>
-  get attendanceDaysConstraintsAggregate;
-  CopyWith_Input_HistoryAttendanceHistoryBoolExp<TRes> get attendanceHistory;
-  CopyWith_Input_HistoryAttendanceHistoryAggregateBoolExp<TRes>
-  get attendanceHistoryAggregate;
   CopyWith_Input_StringComparisonExp<TRes> get blurhash;
   CopyWith_Input_BigintComparisonExp<TRes> get color;
   CopyWith_Input_HistoryEditHistoryBoolExp<TRes> get editHistory;
@@ -1329,6 +1206,7 @@ abstract class CopyWith_Input_ClassesBoolExp<TRes> {
   get editHistoryAggregate;
   CopyWith_Input_UuidComparisonExp<TRes> get id;
   CopyWith_Input_HistoryLatestEditsBoolExp<TRes> get lastEdit;
+  CopyWith_Input_HistoryMeetingsBoolExp<TRes> get meetings;
   CopyWith_Input_StringComparisonExp<TRes> get name;
   CopyWith_Input_ClassesPersonsBoolExp<TRes> get persons;
   CopyWith_Input_TimestamptzComparisonExp<TRes> get photoUpdatedAt;
@@ -1355,16 +1233,13 @@ class _CopyWithImpl_Input_ClassesBoolExp<TRes>
     Object? $_not = _undefined,
     Object? $_or = _undefined,
     Object? adminUsers = _undefined,
-    Object? attendanceDaysConstraints = _undefined,
-    Object? attendanceDaysConstraintsAggregate = _undefined,
-    Object? attendanceHistory = _undefined,
-    Object? attendanceHistoryAggregate = _undefined,
     Object? blurhash = _undefined,
     Object? color = _undefined,
     Object? editHistory = _undefined,
     Object? editHistoryAggregate = _undefined,
     Object? id = _undefined,
     Object? lastEdit = _undefined,
+    Object? meetings = _undefined,
     Object? name = _undefined,
     Object? persons = _undefined,
     Object? photoUpdatedAt = _undefined,
@@ -1382,21 +1257,6 @@ class _CopyWithImpl_Input_ClassesBoolExp<TRes>
       if ($_or != _undefined) '_or': ($_or as List<Input_ClassesBoolExp>?),
       if (adminUsers != _undefined)
         'adminUsers': (adminUsers as Input_AuthUsersAdminOnBoolExp?),
-      if (attendanceDaysConstraints != _undefined)
-        'attendanceDaysConstraints':
-            (attendanceDaysConstraints
-                as Input_HistoryAttendanceDaysConstraintsBoolExp?),
-      if (attendanceDaysConstraintsAggregate != _undefined)
-        'attendanceDaysConstraintsAggregate':
-            (attendanceDaysConstraintsAggregate
-                as Input_HistoryAttendanceDaysConstraintsAggregateBoolExp?),
-      if (attendanceHistory != _undefined)
-        'attendanceHistory':
-            (attendanceHistory as Input_HistoryAttendanceHistoryBoolExp?),
-      if (attendanceHistoryAggregate != _undefined)
-        'attendanceHistoryAggregate':
-            (attendanceHistoryAggregate
-                as Input_HistoryAttendanceHistoryAggregateBoolExp?),
       if (blurhash != _undefined)
         'blurhash': (blurhash as Input_StringComparisonExp?),
       if (color != _undefined) 'color': (color as Input_BigintComparisonExp?),
@@ -1408,6 +1268,8 @@ class _CopyWithImpl_Input_ClassesBoolExp<TRes>
       if (id != _undefined) 'id': (id as Input_UuidComparisonExp?),
       if (lastEdit != _undefined)
         'lastEdit': (lastEdit as Input_HistoryLatestEditsBoolExp?),
+      if (meetings != _undefined)
+        'meetings': (meetings as Input_HistoryMeetingsBoolExp?),
       if (name != _undefined) 'name': (name as Input_StringComparisonExp?),
       if (persons != _undefined)
         'persons': (persons as Input_ClassesPersonsBoolExp?),
@@ -1463,57 +1325,6 @@ class _CopyWithImpl_Input_ClassesBoolExp<TRes>
         : CopyWith_Input_AuthUsersAdminOnBoolExp(
             local$adminUsers,
             (e) => call(adminUsers: e),
-          );
-  }
-
-  CopyWith_Input_HistoryAttendanceDaysConstraintsBoolExp<TRes>
-  get attendanceDaysConstraints {
-    final local$attendanceDaysConstraints = _instance.attendanceDaysConstraints;
-    return local$attendanceDaysConstraints == null
-        ? CopyWith_Input_HistoryAttendanceDaysConstraintsBoolExp.stub(
-            _then(_instance),
-          )
-        : CopyWith_Input_HistoryAttendanceDaysConstraintsBoolExp(
-            local$attendanceDaysConstraints,
-            (e) => call(attendanceDaysConstraints: e),
-          );
-  }
-
-  CopyWith_Input_HistoryAttendanceDaysConstraintsAggregateBoolExp<TRes>
-  get attendanceDaysConstraintsAggregate {
-    final local$attendanceDaysConstraintsAggregate =
-        _instance.attendanceDaysConstraintsAggregate;
-    return local$attendanceDaysConstraintsAggregate == null
-        ? CopyWith_Input_HistoryAttendanceDaysConstraintsAggregateBoolExp.stub(
-            _then(_instance),
-          )
-        : CopyWith_Input_HistoryAttendanceDaysConstraintsAggregateBoolExp(
-            local$attendanceDaysConstraintsAggregate,
-            (e) => call(attendanceDaysConstraintsAggregate: e),
-          );
-  }
-
-  CopyWith_Input_HistoryAttendanceHistoryBoolExp<TRes> get attendanceHistory {
-    final local$attendanceHistory = _instance.attendanceHistory;
-    return local$attendanceHistory == null
-        ? CopyWith_Input_HistoryAttendanceHistoryBoolExp.stub(_then(_instance))
-        : CopyWith_Input_HistoryAttendanceHistoryBoolExp(
-            local$attendanceHistory,
-            (e) => call(attendanceHistory: e),
-          );
-  }
-
-  CopyWith_Input_HistoryAttendanceHistoryAggregateBoolExp<TRes>
-  get attendanceHistoryAggregate {
-    final local$attendanceHistoryAggregate =
-        _instance.attendanceHistoryAggregate;
-    return local$attendanceHistoryAggregate == null
-        ? CopyWith_Input_HistoryAttendanceHistoryAggregateBoolExp.stub(
-            _then(_instance),
-          )
-        : CopyWith_Input_HistoryAttendanceHistoryAggregateBoolExp(
-            local$attendanceHistoryAggregate,
-            (e) => call(attendanceHistoryAggregate: e),
           );
   }
 
@@ -1574,6 +1385,16 @@ class _CopyWithImpl_Input_ClassesBoolExp<TRes>
         : CopyWith_Input_HistoryLatestEditsBoolExp(
             local$lastEdit,
             (e) => call(lastEdit: e),
+          );
+  }
+
+  CopyWith_Input_HistoryMeetingsBoolExp<TRes> get meetings {
+    final local$meetings = _instance.meetings;
+    return local$meetings == null
+        ? CopyWith_Input_HistoryMeetingsBoolExp.stub(_then(_instance))
+        : CopyWith_Input_HistoryMeetingsBoolExp(
+            local$meetings,
+            (e) => call(meetings: e),
           );
   }
 
@@ -1676,17 +1497,13 @@ class _CopyWithStubImpl_Input_ClassesBoolExp<TRes>
     Input_ClassesBoolExp? $_not,
     List<Input_ClassesBoolExp>? $_or,
     Input_AuthUsersAdminOnBoolExp? adminUsers,
-    Input_HistoryAttendanceDaysConstraintsBoolExp? attendanceDaysConstraints,
-    Input_HistoryAttendanceDaysConstraintsAggregateBoolExp?
-    attendanceDaysConstraintsAggregate,
-    Input_HistoryAttendanceHistoryBoolExp? attendanceHistory,
-    Input_HistoryAttendanceHistoryAggregateBoolExp? attendanceHistoryAggregate,
     Input_StringComparisonExp? blurhash,
     Input_BigintComparisonExp? color,
     Input_HistoryEditHistoryBoolExp? editHistory,
     Input_HistoryEditHistoryAggregateBoolExp? editHistoryAggregate,
     Input_UuidComparisonExp? id,
     Input_HistoryLatestEditsBoolExp? lastEdit,
+    Input_HistoryMeetingsBoolExp? meetings,
     Input_StringComparisonExp? name,
     Input_ClassesPersonsBoolExp? persons,
     Input_TimestamptzComparisonExp? photoUpdatedAt,
@@ -1708,23 +1525,6 @@ class _CopyWithStubImpl_Input_ClassesBoolExp<TRes>
   CopyWith_Input_AuthUsersAdminOnBoolExp<TRes> get adminUsers =>
       CopyWith_Input_AuthUsersAdminOnBoolExp.stub(_res);
 
-  CopyWith_Input_HistoryAttendanceDaysConstraintsBoolExp<TRes>
-  get attendanceDaysConstraints =>
-      CopyWith_Input_HistoryAttendanceDaysConstraintsBoolExp.stub(_res);
-
-  CopyWith_Input_HistoryAttendanceDaysConstraintsAggregateBoolExp<TRes>
-  get attendanceDaysConstraintsAggregate =>
-      CopyWith_Input_HistoryAttendanceDaysConstraintsAggregateBoolExp.stub(
-        _res,
-      );
-
-  CopyWith_Input_HistoryAttendanceHistoryBoolExp<TRes> get attendanceHistory =>
-      CopyWith_Input_HistoryAttendanceHistoryBoolExp.stub(_res);
-
-  CopyWith_Input_HistoryAttendanceHistoryAggregateBoolExp<TRes>
-  get attendanceHistoryAggregate =>
-      CopyWith_Input_HistoryAttendanceHistoryAggregateBoolExp.stub(_res);
-
   CopyWith_Input_StringComparisonExp<TRes> get blurhash =>
       CopyWith_Input_StringComparisonExp.stub(_res);
 
@@ -1743,6 +1543,9 @@ class _CopyWithStubImpl_Input_ClassesBoolExp<TRes>
 
   CopyWith_Input_HistoryLatestEditsBoolExp<TRes> get lastEdit =>
       CopyWith_Input_HistoryLatestEditsBoolExp.stub(_res);
+
+  CopyWith_Input_HistoryMeetingsBoolExp<TRes> get meetings =>
+      CopyWith_Input_HistoryMeetingsBoolExp.stub(_res);
 
   CopyWith_Input_StringComparisonExp<TRes> get name =>
       CopyWith_Input_StringComparisonExp.stub(_res);
@@ -1902,10 +1705,8 @@ class _CopyWithStubImpl_Input_ClassesIncInput<TRes>
 class Input_ClassesInsertInput {
   factory Input_ClassesInsertInput({
     Input_AuthUsersAdminOnArrRelInsertInput? adminUsers,
-    Input_HistoryAttendanceDaysConstraintsArrRelInsertInput?
-    attendanceDaysConstraints,
-    Input_HistoryAttendanceHistoryArrRelInsertInput? attendanceHistory,
     int? color,
+    Input_HistoryMeetingsArrRelInsertInput? meetings,
     String? name,
     Input_ServicesObjRelInsertInput? service,
     bool? serviceGender,
@@ -1914,10 +1715,8 @@ class Input_ClassesInsertInput {
     Input_StudyYearsObjRelInsertInput? studyYear,
   }) => Input_ClassesInsertInput._({
     if (adminUsers != null) r'adminUsers': adminUsers,
-    if (attendanceDaysConstraints != null)
-      r'attendanceDaysConstraints': attendanceDaysConstraints,
-    if (attendanceHistory != null) r'attendanceHistory': attendanceHistory,
     if (color != null) r'color': color,
+    if (meetings != null) r'meetings': meetings,
     if (name != null) r'name': name,
     if (service != null) r'service': service,
     if (serviceGender != null) r'serviceGender': serviceGender,
@@ -1938,26 +1737,17 @@ class Input_ClassesInsertInput {
               (l$adminUsers as Map<String, dynamic>),
             );
     }
-    if (data.containsKey('attendanceDaysConstraints')) {
-      final l$attendanceDaysConstraints = data['attendanceDaysConstraints'];
-      result$data['attendanceDaysConstraints'] =
-          l$attendanceDaysConstraints == null
-          ? null
-          : Input_HistoryAttendanceDaysConstraintsArrRelInsertInput.fromJson(
-              (l$attendanceDaysConstraints as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('attendanceHistory')) {
-      final l$attendanceHistory = data['attendanceHistory'];
-      result$data['attendanceHistory'] = l$attendanceHistory == null
-          ? null
-          : Input_HistoryAttendanceHistoryArrRelInsertInput.fromJson(
-              (l$attendanceHistory as Map<String, dynamic>),
-            );
-    }
     if (data.containsKey('color')) {
       final l$color = data['color'];
       result$data['color'] = (l$color as int?);
+    }
+    if (data.containsKey('meetings')) {
+      final l$meetings = data['meetings'];
+      result$data['meetings'] = l$meetings == null
+          ? null
+          : Input_HistoryMeetingsArrRelInsertInput.fromJson(
+              (l$meetings as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('name')) {
       final l$name = data['name'];
@@ -2001,16 +1791,10 @@ class Input_ClassesInsertInput {
   Input_AuthUsersAdminOnArrRelInsertInput? get adminUsers =>
       (_$data['adminUsers'] as Input_AuthUsersAdminOnArrRelInsertInput?);
 
-  Input_HistoryAttendanceDaysConstraintsArrRelInsertInput?
-  get attendanceDaysConstraints =>
-      (_$data['attendanceDaysConstraints']
-          as Input_HistoryAttendanceDaysConstraintsArrRelInsertInput?);
-
-  Input_HistoryAttendanceHistoryArrRelInsertInput? get attendanceHistory =>
-      (_$data['attendanceHistory']
-          as Input_HistoryAttendanceHistoryArrRelInsertInput?);
-
   int? get color => (_$data['color'] as int?);
+
+  Input_HistoryMeetingsArrRelInsertInput? get meetings =>
+      (_$data['meetings'] as Input_HistoryMeetingsArrRelInsertInput?);
 
   String? get name => (_$data['name'] as String?);
 
@@ -2032,18 +1816,13 @@ class Input_ClassesInsertInput {
       final l$adminUsers = adminUsers;
       result$data['adminUsers'] = l$adminUsers?.toJson();
     }
-    if (_$data.containsKey('attendanceDaysConstraints')) {
-      final l$attendanceDaysConstraints = attendanceDaysConstraints;
-      result$data['attendanceDaysConstraints'] = l$attendanceDaysConstraints
-          ?.toJson();
-    }
-    if (_$data.containsKey('attendanceHistory')) {
-      final l$attendanceHistory = attendanceHistory;
-      result$data['attendanceHistory'] = l$attendanceHistory?.toJson();
-    }
     if (_$data.containsKey('color')) {
       final l$color = color;
       result$data['color'] = l$color;
+    }
+    if (_$data.containsKey('meetings')) {
+      final l$meetings = meetings;
+      result$data['meetings'] = l$meetings?.toJson();
     }
     if (_$data.containsKey('name')) {
       final l$name = name;
@@ -2095,30 +1874,21 @@ class Input_ClassesInsertInput {
     if (l$adminUsers != lOther$adminUsers) {
       return false;
     }
-    final l$attendanceDaysConstraints = attendanceDaysConstraints;
-    final lOther$attendanceDaysConstraints = other.attendanceDaysConstraints;
-    if (_$data.containsKey('attendanceDaysConstraints') !=
-        other._$data.containsKey('attendanceDaysConstraints')) {
-      return false;
-    }
-    if (l$attendanceDaysConstraints != lOther$attendanceDaysConstraints) {
-      return false;
-    }
-    final l$attendanceHistory = attendanceHistory;
-    final lOther$attendanceHistory = other.attendanceHistory;
-    if (_$data.containsKey('attendanceHistory') !=
-        other._$data.containsKey('attendanceHistory')) {
-      return false;
-    }
-    if (l$attendanceHistory != lOther$attendanceHistory) {
-      return false;
-    }
     final l$color = color;
     final lOther$color = other.color;
     if (_$data.containsKey('color') != other._$data.containsKey('color')) {
       return false;
     }
     if (l$color != lOther$color) {
+      return false;
+    }
+    final l$meetings = meetings;
+    final lOther$meetings = other.meetings;
+    if (_$data.containsKey('meetings') !=
+        other._$data.containsKey('meetings')) {
+      return false;
+    }
+    if (l$meetings != lOther$meetings) {
       return false;
     }
     final l$name = name;
@@ -2179,9 +1949,8 @@ class Input_ClassesInsertInput {
   @override
   int get hashCode {
     final l$adminUsers = adminUsers;
-    final l$attendanceDaysConstraints = attendanceDaysConstraints;
-    final l$attendanceHistory = attendanceHistory;
     final l$color = color;
+    final l$meetings = meetings;
     final l$name = name;
     final l$service = service;
     final l$serviceGender = serviceGender;
@@ -2190,11 +1959,8 @@ class Input_ClassesInsertInput {
     final l$studyYear = studyYear;
     return Object.hashAll([
       _$data.containsKey('adminUsers') ? l$adminUsers : const {},
-      _$data.containsKey('attendanceDaysConstraints')
-          ? l$attendanceDaysConstraints
-          : const {},
-      _$data.containsKey('attendanceHistory') ? l$attendanceHistory : const {},
       _$data.containsKey('color') ? l$color : const {},
+      _$data.containsKey('meetings') ? l$meetings : const {},
       _$data.containsKey('name') ? l$name : const {},
       _$data.containsKey('service') ? l$service : const {},
       _$data.containsKey('serviceGender') ? l$serviceGender : const {},
@@ -2216,10 +1982,8 @@ abstract class CopyWith_Input_ClassesInsertInput<TRes> {
 
   TRes call({
     Input_AuthUsersAdminOnArrRelInsertInput? adminUsers,
-    Input_HistoryAttendanceDaysConstraintsArrRelInsertInput?
-    attendanceDaysConstraints,
-    Input_HistoryAttendanceHistoryArrRelInsertInput? attendanceHistory,
     int? color,
+    Input_HistoryMeetingsArrRelInsertInput? meetings,
     String? name,
     Input_ServicesObjRelInsertInput? service,
     bool? serviceGender,
@@ -2228,10 +1992,7 @@ abstract class CopyWith_Input_ClassesInsertInput<TRes> {
     Input_StudyYearsObjRelInsertInput? studyYear,
   });
   CopyWith_Input_AuthUsersAdminOnArrRelInsertInput<TRes> get adminUsers;
-  CopyWith_Input_HistoryAttendanceDaysConstraintsArrRelInsertInput<TRes>
-  get attendanceDaysConstraints;
-  CopyWith_Input_HistoryAttendanceHistoryArrRelInsertInput<TRes>
-  get attendanceHistory;
+  CopyWith_Input_HistoryMeetingsArrRelInsertInput<TRes> get meetings;
   CopyWith_Input_ServicesObjRelInsertInput<TRes> get service;
   CopyWith_Input_StudyYearsObjRelInsertInput<TRes> get studyYear;
 }
@@ -2248,9 +2009,8 @@ class _CopyWithImpl_Input_ClassesInsertInput<TRes>
 
   TRes call({
     Object? adminUsers = _undefined,
-    Object? attendanceDaysConstraints = _undefined,
-    Object? attendanceHistory = _undefined,
     Object? color = _undefined,
+    Object? meetings = _undefined,
     Object? name = _undefined,
     Object? service = _undefined,
     Object? serviceGender = _undefined,
@@ -2262,15 +2022,9 @@ class _CopyWithImpl_Input_ClassesInsertInput<TRes>
       ..._instance._$data,
       if (adminUsers != _undefined)
         'adminUsers': (adminUsers as Input_AuthUsersAdminOnArrRelInsertInput?),
-      if (attendanceDaysConstraints != _undefined)
-        'attendanceDaysConstraints':
-            (attendanceDaysConstraints
-                as Input_HistoryAttendanceDaysConstraintsArrRelInsertInput?),
-      if (attendanceHistory != _undefined)
-        'attendanceHistory':
-            (attendanceHistory
-                as Input_HistoryAttendanceHistoryArrRelInsertInput?),
       if (color != _undefined) 'color': (color as int?),
+      if (meetings != _undefined)
+        'meetings': (meetings as Input_HistoryMeetingsArrRelInsertInput?),
       if (name != _undefined) 'name': (name as String?),
       if (service != _undefined)
         'service': (service as Input_ServicesObjRelInsertInput?),
@@ -2296,29 +2050,13 @@ class _CopyWithImpl_Input_ClassesInsertInput<TRes>
           );
   }
 
-  CopyWith_Input_HistoryAttendanceDaysConstraintsArrRelInsertInput<TRes>
-  get attendanceDaysConstraints {
-    final local$attendanceDaysConstraints = _instance.attendanceDaysConstraints;
-    return local$attendanceDaysConstraints == null
-        ? CopyWith_Input_HistoryAttendanceDaysConstraintsArrRelInsertInput.stub(
-            _then(_instance),
-          )
-        : CopyWith_Input_HistoryAttendanceDaysConstraintsArrRelInsertInput(
-            local$attendanceDaysConstraints,
-            (e) => call(attendanceDaysConstraints: e),
-          );
-  }
-
-  CopyWith_Input_HistoryAttendanceHistoryArrRelInsertInput<TRes>
-  get attendanceHistory {
-    final local$attendanceHistory = _instance.attendanceHistory;
-    return local$attendanceHistory == null
-        ? CopyWith_Input_HistoryAttendanceHistoryArrRelInsertInput.stub(
-            _then(_instance),
-          )
-        : CopyWith_Input_HistoryAttendanceHistoryArrRelInsertInput(
-            local$attendanceHistory,
-            (e) => call(attendanceHistory: e),
+  CopyWith_Input_HistoryMeetingsArrRelInsertInput<TRes> get meetings {
+    final local$meetings = _instance.meetings;
+    return local$meetings == null
+        ? CopyWith_Input_HistoryMeetingsArrRelInsertInput.stub(_then(_instance))
+        : CopyWith_Input_HistoryMeetingsArrRelInsertInput(
+            local$meetings,
+            (e) => call(meetings: e),
           );
   }
 
@@ -2351,10 +2089,8 @@ class _CopyWithStubImpl_Input_ClassesInsertInput<TRes>
 
   call({
     Input_AuthUsersAdminOnArrRelInsertInput? adminUsers,
-    Input_HistoryAttendanceDaysConstraintsArrRelInsertInput?
-    attendanceDaysConstraints,
-    Input_HistoryAttendanceHistoryArrRelInsertInput? attendanceHistory,
     int? color,
+    Input_HistoryMeetingsArrRelInsertInput? meetings,
     String? name,
     Input_ServicesObjRelInsertInput? service,
     bool? serviceGender,
@@ -2366,15 +2102,8 @@ class _CopyWithStubImpl_Input_ClassesInsertInput<TRes>
   CopyWith_Input_AuthUsersAdminOnArrRelInsertInput<TRes> get adminUsers =>
       CopyWith_Input_AuthUsersAdminOnArrRelInsertInput.stub(_res);
 
-  CopyWith_Input_HistoryAttendanceDaysConstraintsArrRelInsertInput<TRes>
-  get attendanceDaysConstraints =>
-      CopyWith_Input_HistoryAttendanceDaysConstraintsArrRelInsertInput.stub(
-        _res,
-      );
-
-  CopyWith_Input_HistoryAttendanceHistoryArrRelInsertInput<TRes>
-  get attendanceHistory =>
-      CopyWith_Input_HistoryAttendanceHistoryArrRelInsertInput.stub(_res);
+  CopyWith_Input_HistoryMeetingsArrRelInsertInput<TRes> get meetings =>
+      CopyWith_Input_HistoryMeetingsArrRelInsertInput.stub(_res);
 
   CopyWith_Input_ServicesObjRelInsertInput<TRes> get service =>
       CopyWith_Input_ServicesObjRelInsertInput.stub(_res);
@@ -2521,6 +2250,301 @@ class Input_ClassesMaxOrderBy {
       return true;
     }
     if (other is! Input_ClassesMaxOrderBy || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
+      return false;
+    }
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
+    final l$color = color;
+    final lOther$color = other.color;
+    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
+      return false;
+    }
+    if (l$color != lOther$color) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
+      return false;
+    }
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (_$data.containsKey('name') != other._$data.containsKey('name')) {
+      return false;
+    }
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$photoUpdatedAt = photoUpdatedAt;
+    final lOther$photoUpdatedAt = other.photoUpdatedAt;
+    if (_$data.containsKey('photoUpdatedAt') !=
+        other._$data.containsKey('photoUpdatedAt')) {
+      return false;
+    }
+    if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
+      return false;
+    }
+    final l$serviceId = serviceId;
+    final lOther$serviceId = other.serviceId;
+    if (_$data.containsKey('serviceId') !=
+        other._$data.containsKey('serviceId')) {
+      return false;
+    }
+    if (l$serviceId != lOther$serviceId) {
+      return false;
+    }
+    final l$serviceStudyYear = serviceStudyYear;
+    final lOther$serviceStudyYear = other.serviceStudyYear;
+    if (_$data.containsKey('serviceStudyYear') !=
+        other._$data.containsKey('serviceStudyYear')) {
+      return false;
+    }
+    if (l$serviceStudyYear != lOther$serviceStudyYear) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$blurhash = blurhash;
+    final l$color = color;
+    final l$id = id;
+    final l$name = name;
+    final l$photoUpdatedAt = photoUpdatedAt;
+    final l$serviceId = serviceId;
+    final l$serviceStudyYear = serviceStudyYear;
+    return Object.hashAll([
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
+      _$data.containsKey('color') ? l$color : const {},
+      _$data.containsKey('id') ? l$id : const {},
+      _$data.containsKey('name') ? l$name : const {},
+      _$data.containsKey('photoUpdatedAt') ? l$photoUpdatedAt : const {},
+      _$data.containsKey('serviceId') ? l$serviceId : const {},
+      _$data.containsKey('serviceStudyYear') ? l$serviceStudyYear : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_ClassesMaxOrderBy<TRes> {
+  factory CopyWith_Input_ClassesMaxOrderBy(
+    Input_ClassesMaxOrderBy instance,
+    TRes Function(Input_ClassesMaxOrderBy) then,
+  ) = _CopyWithImpl_Input_ClassesMaxOrderBy;
+
+  factory CopyWith_Input_ClassesMaxOrderBy.stub(TRes res) =
+      _CopyWithStubImpl_Input_ClassesMaxOrderBy;
+
+  TRes call({
+    Enum_OrderBy? blurhash,
+    Enum_OrderBy? color,
+    Enum_OrderBy? id,
+    Enum_OrderBy? name,
+    Enum_OrderBy? photoUpdatedAt,
+    Enum_OrderBy? serviceId,
+    Enum_OrderBy? serviceStudyYear,
+  });
+}
+
+class _CopyWithImpl_Input_ClassesMaxOrderBy<TRes>
+    implements CopyWith_Input_ClassesMaxOrderBy<TRes> {
+  _CopyWithImpl_Input_ClassesMaxOrderBy(this._instance, this._then);
+
+  final Input_ClassesMaxOrderBy _instance;
+
+  final TRes Function(Input_ClassesMaxOrderBy) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? blurhash = _undefined,
+    Object? color = _undefined,
+    Object? id = _undefined,
+    Object? name = _undefined,
+    Object? photoUpdatedAt = _undefined,
+    Object? serviceId = _undefined,
+    Object? serviceStudyYear = _undefined,
+  }) => _then(
+    Input_ClassesMaxOrderBy._({
+      ..._instance._$data,
+      if (blurhash != _undefined) 'blurhash': (blurhash as Enum_OrderBy?),
+      if (color != _undefined) 'color': (color as Enum_OrderBy?),
+      if (id != _undefined) 'id': (id as Enum_OrderBy?),
+      if (name != _undefined) 'name': (name as Enum_OrderBy?),
+      if (photoUpdatedAt != _undefined)
+        'photoUpdatedAt': (photoUpdatedAt as Enum_OrderBy?),
+      if (serviceId != _undefined) 'serviceId': (serviceId as Enum_OrderBy?),
+      if (serviceStudyYear != _undefined)
+        'serviceStudyYear': (serviceStudyYear as Enum_OrderBy?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_ClassesMaxOrderBy<TRes>
+    implements CopyWith_Input_ClassesMaxOrderBy<TRes> {
+  _CopyWithStubImpl_Input_ClassesMaxOrderBy(this._res);
+
+  TRes _res;
+
+  call({
+    Enum_OrderBy? blurhash,
+    Enum_OrderBy? color,
+    Enum_OrderBy? id,
+    Enum_OrderBy? name,
+    Enum_OrderBy? photoUpdatedAt,
+    Enum_OrderBy? serviceId,
+    Enum_OrderBy? serviceStudyYear,
+  }) => _res;
+}
+
+class Input_ClassesMinOrderBy {
+  factory Input_ClassesMinOrderBy({
+    Enum_OrderBy? blurhash,
+    Enum_OrderBy? color,
+    Enum_OrderBy? id,
+    Enum_OrderBy? name,
+    Enum_OrderBy? photoUpdatedAt,
+    Enum_OrderBy? serviceId,
+    Enum_OrderBy? serviceStudyYear,
+  }) => Input_ClassesMinOrderBy._({
+    if (blurhash != null) r'blurhash': blurhash,
+    if (color != null) r'color': color,
+    if (id != null) r'id': id,
+    if (name != null) r'name': name,
+    if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
+    if (serviceId != null) r'serviceId': serviceId,
+    if (serviceStudyYear != null) r'serviceStudyYear': serviceStudyYear,
+  });
+
+  Input_ClassesMinOrderBy._(this._$data);
+
+  factory Input_ClassesMinOrderBy.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = l$blurhash == null
+          ? null
+          : fromJson_Enum_OrderBy((l$blurhash as String));
+    }
+    if (data.containsKey('color')) {
+      final l$color = data['color'];
+      result$data['color'] = l$color == null
+          ? null
+          : fromJson_Enum_OrderBy((l$color as String));
+    }
+    if (data.containsKey('id')) {
+      final l$id = data['id'];
+      result$data['id'] = l$id == null
+          ? null
+          : fromJson_Enum_OrderBy((l$id as String));
+    }
+    if (data.containsKey('name')) {
+      final l$name = data['name'];
+      result$data['name'] = l$name == null
+          ? null
+          : fromJson_Enum_OrderBy((l$name as String));
+    }
+    if (data.containsKey('photoUpdatedAt')) {
+      final l$photoUpdatedAt = data['photoUpdatedAt'];
+      result$data['photoUpdatedAt'] = l$photoUpdatedAt == null
+          ? null
+          : fromJson_Enum_OrderBy((l$photoUpdatedAt as String));
+    }
+    if (data.containsKey('serviceId')) {
+      final l$serviceId = data['serviceId'];
+      result$data['serviceId'] = l$serviceId == null
+          ? null
+          : fromJson_Enum_OrderBy((l$serviceId as String));
+    }
+    if (data.containsKey('serviceStudyYear')) {
+      final l$serviceStudyYear = data['serviceStudyYear'];
+      result$data['serviceStudyYear'] = l$serviceStudyYear == null
+          ? null
+          : fromJson_Enum_OrderBy((l$serviceStudyYear as String));
+    }
+    return Input_ClassesMinOrderBy._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Enum_OrderBy? get blurhash => (_$data['blurhash'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get photoUpdatedAt =>
+      (_$data['photoUpdatedAt'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get serviceId => (_$data['serviceId'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get serviceStudyYear =>
+      (_$data['serviceStudyYear'] as Enum_OrderBy?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] = l$blurhash == null
+          ? null
+          : toJson_Enum_OrderBy(l$blurhash);
+    }
+    if (_$data.containsKey('color')) {
+      final l$color = color;
+      result$data['color'] = l$color == null
+          ? null
+          : toJson_Enum_OrderBy(l$color);
+    }
+    if (_$data.containsKey('id')) {
+      final l$id = id;
+      result$data['id'] = l$id == null ? null : toJson_Enum_OrderBy(l$id);
+    }
+    if (_$data.containsKey('name')) {
+      final l$name = name;
+      result$data['name'] = l$name == null ? null : toJson_Enum_OrderBy(l$name);
+    }
+    if (_$data.containsKey('photoUpdatedAt')) {
+      final l$photoUpdatedAt = photoUpdatedAt;
+      result$data['photoUpdatedAt'] = l$photoUpdatedAt == null
+          ? null
+          : toJson_Enum_OrderBy(l$photoUpdatedAt);
+    }
+    if (_$data.containsKey('serviceId')) {
+      final l$serviceId = serviceId;
+      result$data['serviceId'] = l$serviceId == null
+          ? null
+          : toJson_Enum_OrderBy(l$serviceId);
+    }
+    if (_$data.containsKey('serviceStudyYear')) {
+      final l$serviceStudyYear = serviceStudyYear;
+      result$data['serviceStudyYear'] = l$serviceStudyYear == null
+          ? null
+          : toJson_Enum_OrderBy(l$serviceStudyYear);
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_ClassesMinOrderBy<Input_ClassesMinOrderBy> get copyWith =>
+      CopyWith_Input_ClassesMinOrderBy(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_ClassesMinOrderBy || runtimeType != other.runtimeType) {
       return false;
     }
     final l$blurhash = blurhash;

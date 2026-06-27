@@ -55,6 +55,8 @@ abstract class CopyWith_Input_PersonsBoolExp<TRes> {
     Input_HistoryLatestVisitsBoolExp? lastVisit,
     Input_StringComparisonExp? mainPhone,
     Input_StringComparisonExp? martialStatus,
+    Input_HistoryMeetingsPersonsBoolExp? meetings,
+    Input_HistoryMeetingsPersonsAggregateBoolExp? meetingsAggregate,
     Input_StringComparisonExp? name,
     Input_IntComparisonExp? nationalId,
     Input_StringComparisonExp? notes,
@@ -145,6 +147,9 @@ abstract class CopyWith_Input_PersonsBoolExp<TRes> {
   CopyWith_Input_HistoryLatestVisitsBoolExp<TRes> get lastVisit;
   CopyWith_Input_StringComparisonExp<TRes> get mainPhone;
   CopyWith_Input_StringComparisonExp<TRes> get martialStatus;
+  CopyWith_Input_HistoryMeetingsPersonsBoolExp<TRes> get meetings;
+  CopyWith_Input_HistoryMeetingsPersonsAggregateBoolExp<TRes>
+  get meetingsAggregate;
   CopyWith_Input_StringComparisonExp<TRes> get name;
   CopyWith_Input_IntComparisonExp<TRes> get nationalId;
   CopyWith_Input_StringComparisonExp<TRes> get notes;
@@ -233,6 +238,8 @@ class _CopyWithImpl_Input_PersonsBoolExp<TRes>
     Object? lastVisit = _undefined,
     Object? mainPhone = _undefined,
     Object? martialStatus = _undefined,
+    Object? meetings = _undefined,
+    Object? meetingsAggregate = _undefined,
     Object? name = _undefined,
     Object? nationalId = _undefined,
     Object? notes = _undefined,
@@ -354,6 +361,12 @@ class _CopyWithImpl_Input_PersonsBoolExp<TRes>
         'mainPhone': (mainPhone as Input_StringComparisonExp?),
       if (martialStatus != _undefined)
         'martialStatus': (martialStatus as Input_StringComparisonExp?),
+      if (meetings != _undefined)
+        'meetings': (meetings as Input_HistoryMeetingsPersonsBoolExp?),
+      if (meetingsAggregate != _undefined)
+        'meetingsAggregate':
+            (meetingsAggregate
+                as Input_HistoryMeetingsPersonsAggregateBoolExp?),
       if (name != _undefined) 'name': (name as Input_StringComparisonExp?),
       if (nationalId != _undefined)
         'nationalId': (nationalId as Input_IntComparisonExp?),
@@ -849,6 +862,29 @@ class _CopyWithImpl_Input_PersonsBoolExp<TRes>
           );
   }
 
+  CopyWith_Input_HistoryMeetingsPersonsBoolExp<TRes> get meetings {
+    final local$meetings = _instance.meetings;
+    return local$meetings == null
+        ? CopyWith_Input_HistoryMeetingsPersonsBoolExp.stub(_then(_instance))
+        : CopyWith_Input_HistoryMeetingsPersonsBoolExp(
+            local$meetings,
+            (e) => call(meetings: e),
+          );
+  }
+
+  CopyWith_Input_HistoryMeetingsPersonsAggregateBoolExp<TRes>
+  get meetingsAggregate {
+    final local$meetingsAggregate = _instance.meetingsAggregate;
+    return local$meetingsAggregate == null
+        ? CopyWith_Input_HistoryMeetingsPersonsAggregateBoolExp.stub(
+            _then(_instance),
+          )
+        : CopyWith_Input_HistoryMeetingsPersonsAggregateBoolExp(
+            local$meetingsAggregate,
+            (e) => call(meetingsAggregate: e),
+          );
+  }
+
   CopyWith_Input_StringComparisonExp<TRes> get name {
     final local$name = _instance.name;
     return local$name == null
@@ -1186,6 +1222,8 @@ class _CopyWithStubImpl_Input_PersonsBoolExp<TRes>
     Input_HistoryLatestVisitsBoolExp? lastVisit,
     Input_StringComparisonExp? mainPhone,
     Input_StringComparisonExp? martialStatus,
+    Input_HistoryMeetingsPersonsBoolExp? meetings,
+    Input_HistoryMeetingsPersonsAggregateBoolExp? meetingsAggregate,
     Input_StringComparisonExp? name,
     Input_IntComparisonExp? nationalId,
     Input_StringComparisonExp? notes,
@@ -1352,6 +1390,13 @@ class _CopyWithStubImpl_Input_PersonsBoolExp<TRes>
 
   CopyWith_Input_StringComparisonExp<TRes> get martialStatus =>
       CopyWith_Input_StringComparisonExp.stub(_res);
+
+  CopyWith_Input_HistoryMeetingsPersonsBoolExp<TRes> get meetings =>
+      CopyWith_Input_HistoryMeetingsPersonsBoolExp.stub(_res);
+
+  CopyWith_Input_HistoryMeetingsPersonsAggregateBoolExp<TRes>
+  get meetingsAggregate =>
+      CopyWith_Input_HistoryMeetingsPersonsAggregateBoolExp.stub(_res);
 
   CopyWith_Input_StringComparisonExp<TRes> get name =>
       CopyWith_Input_StringComparisonExp.stub(_res);
@@ -2467,298 +2512,4 @@ abstract class CopyWith_Input_PersonsGroupsBoolExp<TRes> {
   CopyWith_Input_UuidComparisonExp<TRes> get groupId;
   CopyWith_Input_PersonsBoolExp<TRes> get person;
   CopyWith_Input_UuidComparisonExp<TRes> get personId;
-}
-
-class _CopyWithImpl_Input_PersonsGroupsBoolExp<TRes>
-    implements CopyWith_Input_PersonsGroupsBoolExp<TRes> {
-  _CopyWithImpl_Input_PersonsGroupsBoolExp(this._instance, this._then);
-
-  final Input_PersonsGroupsBoolExp _instance;
-
-  final TRes Function(Input_PersonsGroupsBoolExp) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? $_and = _undefined,
-    Object? $_not = _undefined,
-    Object? $_or = _undefined,
-    Object? group = _undefined,
-    Object? groupId = _undefined,
-    Object? person = _undefined,
-    Object? personId = _undefined,
-  }) => _then(
-    Input_PersonsGroupsBoolExp._({
-      ..._instance._$data,
-      if ($_and != _undefined)
-        '_and': ($_and as List<Input_PersonsGroupsBoolExp>?),
-      if ($_not != _undefined) '_not': ($_not as Input_PersonsGroupsBoolExp?),
-      if ($_or != _undefined)
-        '_or': ($_or as List<Input_PersonsGroupsBoolExp>?),
-      if (group != _undefined) 'group': (group as Input_GroupsBoolExp?),
-      if (groupId != _undefined)
-        'groupId': (groupId as Input_UuidComparisonExp?),
-      if (person != _undefined) 'person': (person as Input_PersonsBoolExp?),
-      if (personId != _undefined)
-        'personId': (personId as Input_UuidComparisonExp?),
-    }),
-  );
-
-  TRes $_and(
-    Iterable<Input_PersonsGroupsBoolExp>? Function(
-      Iterable<
-        CopyWith_Input_PersonsGroupsBoolExp<Input_PersonsGroupsBoolExp>
-      >?,
-    )
-    _fn,
-  ) => call(
-    $_and: _fn(
-      _instance.$_and?.map(
-        (e) => CopyWith_Input_PersonsGroupsBoolExp(e, (i) => i),
-      ),
-    )?.toList(),
-  );
-
-  CopyWith_Input_PersonsGroupsBoolExp<TRes> get $_not {
-    final local$$_not = _instance.$_not;
-    return local$$_not == null
-        ? CopyWith_Input_PersonsGroupsBoolExp.stub(_then(_instance))
-        : CopyWith_Input_PersonsGroupsBoolExp(
-            local$$_not,
-            (e) => call($_not: e),
-          );
-  }
-
-  TRes $_or(
-    Iterable<Input_PersonsGroupsBoolExp>? Function(
-      Iterable<
-        CopyWith_Input_PersonsGroupsBoolExp<Input_PersonsGroupsBoolExp>
-      >?,
-    )
-    _fn,
-  ) => call(
-    $_or: _fn(
-      _instance.$_or?.map(
-        (e) => CopyWith_Input_PersonsGroupsBoolExp(e, (i) => i),
-      ),
-    )?.toList(),
-  );
-
-  CopyWith_Input_GroupsBoolExp<TRes> get group {
-    final local$group = _instance.group;
-    return local$group == null
-        ? CopyWith_Input_GroupsBoolExp.stub(_then(_instance))
-        : CopyWith_Input_GroupsBoolExp(local$group, (e) => call(group: e));
-  }
-
-  CopyWith_Input_UuidComparisonExp<TRes> get groupId {
-    final local$groupId = _instance.groupId;
-    return local$groupId == null
-        ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
-        : CopyWith_Input_UuidComparisonExp(
-            local$groupId,
-            (e) => call(groupId: e),
-          );
-  }
-
-  CopyWith_Input_PersonsBoolExp<TRes> get person {
-    final local$person = _instance.person;
-    return local$person == null
-        ? CopyWith_Input_PersonsBoolExp.stub(_then(_instance))
-        : CopyWith_Input_PersonsBoolExp(local$person, (e) => call(person: e));
-  }
-
-  CopyWith_Input_UuidComparisonExp<TRes> get personId {
-    final local$personId = _instance.personId;
-    return local$personId == null
-        ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
-        : CopyWith_Input_UuidComparisonExp(
-            local$personId,
-            (e) => call(personId: e),
-          );
-  }
-}
-
-class _CopyWithStubImpl_Input_PersonsGroupsBoolExp<TRes>
-    implements CopyWith_Input_PersonsGroupsBoolExp<TRes> {
-  _CopyWithStubImpl_Input_PersonsGroupsBoolExp(this._res);
-
-  TRes _res;
-
-  call({
-    List<Input_PersonsGroupsBoolExp>? $_and,
-    Input_PersonsGroupsBoolExp? $_not,
-    List<Input_PersonsGroupsBoolExp>? $_or,
-    Input_GroupsBoolExp? group,
-    Input_UuidComparisonExp? groupId,
-    Input_PersonsBoolExp? person,
-    Input_UuidComparisonExp? personId,
-  }) => _res;
-
-  $_and(_fn) => _res;
-
-  CopyWith_Input_PersonsGroupsBoolExp<TRes> get $_not =>
-      CopyWith_Input_PersonsGroupsBoolExp.stub(_res);
-
-  $_or(_fn) => _res;
-
-  CopyWith_Input_GroupsBoolExp<TRes> get group =>
-      CopyWith_Input_GroupsBoolExp.stub(_res);
-
-  CopyWith_Input_UuidComparisonExp<TRes> get groupId =>
-      CopyWith_Input_UuidComparisonExp.stub(_res);
-
-  CopyWith_Input_PersonsBoolExp<TRes> get person =>
-      CopyWith_Input_PersonsBoolExp.stub(_res);
-
-  CopyWith_Input_UuidComparisonExp<TRes> get personId =>
-      CopyWith_Input_UuidComparisonExp.stub(_res);
-}
-
-class Input_PersonsGroupsInsertInput {
-  factory Input_PersonsGroupsInsertInput({
-    Input_GroupsObjRelInsertInput? group,
-    UuidValue? groupId,
-    Input_PersonsObjRelInsertInput? person,
-    UuidValue? personId,
-  }) => Input_PersonsGroupsInsertInput._({
-    if (group != null) r'group': group,
-    if (groupId != null) r'groupId': groupId,
-    if (person != null) r'person': person,
-    if (personId != null) r'personId': personId,
-  });
-
-  Input_PersonsGroupsInsertInput._(this._$data);
-
-  factory Input_PersonsGroupsInsertInput.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('group')) {
-      final l$group = data['group'];
-      result$data['group'] = l$group == null
-          ? null
-          : Input_GroupsObjRelInsertInput.fromJson(
-              (l$group as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('groupId')) {
-      final l$groupId = data['groupId'];
-      result$data['groupId'] = l$groupId == null
-          ? null
-          : stringToUuid(l$groupId);
-    }
-    if (data.containsKey('person')) {
-      final l$person = data['person'];
-      result$data['person'] = l$person == null
-          ? null
-          : Input_PersonsObjRelInsertInput.fromJson(
-              (l$person as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('personId')) {
-      final l$personId = data['personId'];
-      result$data['personId'] = l$personId == null
-          ? null
-          : stringToUuid(l$personId);
-    }
-    return Input_PersonsGroupsInsertInput._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  Input_GroupsObjRelInsertInput? get group =>
-      (_$data['group'] as Input_GroupsObjRelInsertInput?);
-
-  UuidValue? get groupId => (_$data['groupId'] as UuidValue?);
-
-  Input_PersonsObjRelInsertInput? get person =>
-      (_$data['person'] as Input_PersonsObjRelInsertInput?);
-
-  UuidValue? get personId => (_$data['personId'] as UuidValue?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('group')) {
-      final l$group = group;
-      result$data['group'] = l$group?.toJson();
-    }
-    if (_$data.containsKey('groupId')) {
-      final l$groupId = groupId;
-      result$data['groupId'] = l$groupId == null
-          ? null
-          : uuidToString(l$groupId);
-    }
-    if (_$data.containsKey('person')) {
-      final l$person = person;
-      result$data['person'] = l$person?.toJson();
-    }
-    if (_$data.containsKey('personId')) {
-      final l$personId = personId;
-      result$data['personId'] = l$personId == null
-          ? null
-          : uuidToString(l$personId);
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_PersonsGroupsInsertInput<Input_PersonsGroupsInsertInput>
-  get copyWith => CopyWith_Input_PersonsGroupsInsertInput(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_PersonsGroupsInsertInput ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$group = group;
-    final lOther$group = other.group;
-    if (_$data.containsKey('group') != other._$data.containsKey('group')) {
-      return false;
-    }
-    if (l$group != lOther$group) {
-      return false;
-    }
-    final l$groupId = groupId;
-    final lOther$groupId = other.groupId;
-    if (_$data.containsKey('groupId') != other._$data.containsKey('groupId')) {
-      return false;
-    }
-    if (l$groupId != lOther$groupId) {
-      return false;
-    }
-    final l$person = person;
-    final lOther$person = other.person;
-    if (_$data.containsKey('person') != other._$data.containsKey('person')) {
-      return false;
-    }
-    if (l$person != lOther$person) {
-      return false;
-    }
-    final l$personId = personId;
-    final lOther$personId = other.personId;
-    if (_$data.containsKey('personId') !=
-        other._$data.containsKey('personId')) {
-      return false;
-    }
-    if (l$personId != lOther$personId) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$group = group;
-    final l$groupId = groupId;
-    final l$person = person;
-    final l$personId = personId;
-    return Object.hashAll([
-      _$data.containsKey('group') ? l$group : const {},
-      _$data.containsKey('groupId') ? l$groupId : const {},
-      _$data.containsKey('person') ? l$person : const {},
-      _$data.containsKey('personId') ? l$personId : const {},
-    ]);
-  }
 }

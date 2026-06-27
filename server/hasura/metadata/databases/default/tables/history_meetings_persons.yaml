@@ -1,3 +1,80 @@
 table:
   name: meetings_persons
   schema: history
+array_relationships:
+  - name: attendanceHistory
+    using:
+      manual_configuration:
+        column_mapping:
+          meeting_id: meeting_id
+          person_id: person_id
+        insertion_order: null
+        remote_table:
+          name: attendance_history
+          schema: history
+object_relationships:
+  - name: meeting
+    using:
+      manual_configuration:
+        column_mapping:
+          meeting_id: id
+        insertion_order: null
+        remote_table:
+          name: meetings
+          schema: history
+  - name: person
+    using:
+      manual_configuration:
+        column_mapping:
+          person_id: id
+        insertion_order: null
+        remote_table:
+          name: persons
+          schema: public
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - meeting_id
+        - person_id
+      filter:
+        _or:
+          - _exists:
+              _table:
+                name: users_permissions
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - permission:
+                      _eq: readAllData
+          - _and:
+              - _exists:
+                  _table:
+                    name: users_permissions_by_entity_id
+                    schema: auth
+                  _where:
+                    _and:
+                      - uid:
+                          _eq: X-Hasura-User-Id
+                      - _and:
+                          - entity_type:
+                              _eq: person
+                          - entity_id:
+                              _ceq:
+                                - $
+                                - person_id
+              - _exists:
+                  _table:
+                    name: users_admin_on_meetings
+                    schema: auth
+                  _where:
+                    _and:
+                      - uid:
+                          _eq: X-Hasura-User-Id
+                      - meeting_id:
+                          _ceq:
+                            - $
+                            - meeting_id
+      allow_aggregations: true

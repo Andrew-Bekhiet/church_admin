@@ -24,7 +24,6 @@ mixin _$Group {
   LastRecordedByInfo? get lastEdit;
   List<User>? get adminUsers;
   HistoryAggregateData? get attendanceHistoryAggregate;
-  HistoryAggregateData? get attendanceDaysConstraintsAggregate;
   bool get userCanEdit;
 
   /// Create a copy of Group
@@ -63,12 +62,6 @@ mixin _$Group {
                 ) ||
                 other.attendanceHistoryAggregate ==
                     attendanceHistoryAggregate) &&
-            (identical(
-                  other.attendanceDaysConstraintsAggregate,
-                  attendanceDaysConstraintsAggregate,
-                ) ||
-                other.attendanceDaysConstraintsAggregate ==
-                    attendanceDaysConstraintsAggregate) &&
             (identical(other.userCanEdit, userCanEdit) ||
                 other.userCanEdit == userCanEdit));
   }
@@ -88,13 +81,12 @@ mixin _$Group {
     lastEdit,
     const DeepCollectionEquality().hash(adminUsers),
     attendanceHistoryAggregate,
-    attendanceDaysConstraintsAggregate,
     userCanEdit,
   );
 
   @override
   String toString() {
-    return 'Group(id: $id, name: $name, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, serviceId: $serviceId, service: $service, validity: $validity, lastEdit: $lastEdit, adminUsers: $adminUsers, attendanceHistoryAggregate: $attendanceHistoryAggregate, attendanceDaysConstraintsAggregate: $attendanceDaysConstraintsAggregate, userCanEdit: $userCanEdit)';
+    return 'Group(id: $id, name: $name, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, serviceId: $serviceId, service: $service, validity: $validity, lastEdit: $lastEdit, adminUsers: $adminUsers, attendanceHistoryAggregate: $attendanceHistoryAggregate, userCanEdit: $userCanEdit)';
   }
 }
 
@@ -115,7 +107,6 @@ abstract mixin class $GroupCopyWith<$Res> {
     LastRecordedByInfo? lastEdit,
     List<User>? adminUsers,
     HistoryAggregateData? attendanceHistoryAggregate,
-    HistoryAggregateData? attendanceDaysConstraintsAggregate,
     bool userCanEdit,
   });
 }
@@ -143,7 +134,6 @@ class _$GroupCopyWithImpl<$Res> implements $GroupCopyWith<$Res> {
     Object? lastEdit = freezed,
     Object? adminUsers = freezed,
     Object? attendanceHistoryAggregate = freezed,
-    Object? attendanceDaysConstraintsAggregate = freezed,
     Object? userCanEdit = null,
   }) {
     return _then(
@@ -191,11 +181,6 @@ class _$GroupCopyWithImpl<$Res> implements $GroupCopyWith<$Res> {
         attendanceHistoryAggregate: freezed == attendanceHistoryAggregate
             ? _self.attendanceHistoryAggregate
             : attendanceHistoryAggregate // ignore: cast_nullable_to_non_nullable
-                  as HistoryAggregateData?,
-        attendanceDaysConstraintsAggregate:
-            freezed == attendanceDaysConstraintsAggregate
-            ? _self.attendanceDaysConstraintsAggregate
-            : attendanceDaysConstraintsAggregate // ignore: cast_nullable_to_non_nullable
                   as HistoryAggregateData?,
         userCanEdit: null == userCanEdit
             ? _self.userCanEdit

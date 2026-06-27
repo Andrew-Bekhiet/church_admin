@@ -1,0 +1,21 @@
+fragment Meeting on HistoryMeetings {
+  id
+  name
+  audience
+  color
+  archived
+  serviceId
+  serviceGender
+  serviceStudyYear
+  groupId
+  service {
+    ...ServiceNoPhoto
+  }
+  studyYear {
+    name
+    order
+  }
+  group {
+    ...GroupNoPhoto
+  }
+}

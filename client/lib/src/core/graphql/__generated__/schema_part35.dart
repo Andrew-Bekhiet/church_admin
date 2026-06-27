@@ -1,262 +1,6 @@
 // Part 35 of the schema
 part of "schema.graphql.dart";
 
-abstract class CopyWith_Input_JobsBoolExp<TRes> {
-  factory CopyWith_Input_JobsBoolExp(
-    Input_JobsBoolExp instance,
-    TRes Function(Input_JobsBoolExp) then,
-  ) = _CopyWithImpl_Input_JobsBoolExp;
-
-  factory CopyWith_Input_JobsBoolExp.stub(TRes res) =
-      _CopyWithStubImpl_Input_JobsBoolExp;
-
-  TRes call({
-    List<Input_JobsBoolExp>? $_and,
-    Input_JobsBoolExp? $_not,
-    List<Input_JobsBoolExp>? $_or,
-    Input_UuidComparisonExp? id,
-    Input_StringComparisonExp? name,
-    Input_PersonsBoolExp? persons,
-    Input_PersonsAggregateBoolExp? personsAggregate,
-  });
-  TRes $_and(
-    Iterable<Input_JobsBoolExp>? Function(
-      Iterable<CopyWith_Input_JobsBoolExp<Input_JobsBoolExp>>?,
-    )
-    _fn,
-  );
-  CopyWith_Input_JobsBoolExp<TRes> get $_not;
-  TRes $_or(
-    Iterable<Input_JobsBoolExp>? Function(
-      Iterable<CopyWith_Input_JobsBoolExp<Input_JobsBoolExp>>?,
-    )
-    _fn,
-  );
-  CopyWith_Input_UuidComparisonExp<TRes> get id;
-  CopyWith_Input_StringComparisonExp<TRes> get name;
-  CopyWith_Input_PersonsBoolExp<TRes> get persons;
-  CopyWith_Input_PersonsAggregateBoolExp<TRes> get personsAggregate;
-}
-
-class _CopyWithImpl_Input_JobsBoolExp<TRes>
-    implements CopyWith_Input_JobsBoolExp<TRes> {
-  _CopyWithImpl_Input_JobsBoolExp(this._instance, this._then);
-
-  final Input_JobsBoolExp _instance;
-
-  final TRes Function(Input_JobsBoolExp) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? $_and = _undefined,
-    Object? $_not = _undefined,
-    Object? $_or = _undefined,
-    Object? id = _undefined,
-    Object? name = _undefined,
-    Object? persons = _undefined,
-    Object? personsAggregate = _undefined,
-  }) => _then(
-    Input_JobsBoolExp._({
-      ..._instance._$data,
-      if ($_and != _undefined) '_and': ($_and as List<Input_JobsBoolExp>?),
-      if ($_not != _undefined) '_not': ($_not as Input_JobsBoolExp?),
-      if ($_or != _undefined) '_or': ($_or as List<Input_JobsBoolExp>?),
-      if (id != _undefined) 'id': (id as Input_UuidComparisonExp?),
-      if (name != _undefined) 'name': (name as Input_StringComparisonExp?),
-      if (persons != _undefined) 'persons': (persons as Input_PersonsBoolExp?),
-      if (personsAggregate != _undefined)
-        'personsAggregate':
-            (personsAggregate as Input_PersonsAggregateBoolExp?),
-    }),
-  );
-
-  TRes $_and(
-    Iterable<Input_JobsBoolExp>? Function(
-      Iterable<CopyWith_Input_JobsBoolExp<Input_JobsBoolExp>>?,
-    )
-    _fn,
-  ) => call(
-    $_and: _fn(
-      _instance.$_and?.map((e) => CopyWith_Input_JobsBoolExp(e, (i) => i)),
-    )?.toList(),
-  );
-
-  CopyWith_Input_JobsBoolExp<TRes> get $_not {
-    final local$$_not = _instance.$_not;
-    return local$$_not == null
-        ? CopyWith_Input_JobsBoolExp.stub(_then(_instance))
-        : CopyWith_Input_JobsBoolExp(local$$_not, (e) => call($_not: e));
-  }
-
-  TRes $_or(
-    Iterable<Input_JobsBoolExp>? Function(
-      Iterable<CopyWith_Input_JobsBoolExp<Input_JobsBoolExp>>?,
-    )
-    _fn,
-  ) => call(
-    $_or: _fn(
-      _instance.$_or?.map((e) => CopyWith_Input_JobsBoolExp(e, (i) => i)),
-    )?.toList(),
-  );
-
-  CopyWith_Input_UuidComparisonExp<TRes> get id {
-    final local$id = _instance.id;
-    return local$id == null
-        ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
-        : CopyWith_Input_UuidComparisonExp(local$id, (e) => call(id: e));
-  }
-
-  CopyWith_Input_StringComparisonExp<TRes> get name {
-    final local$name = _instance.name;
-    return local$name == null
-        ? CopyWith_Input_StringComparisonExp.stub(_then(_instance))
-        : CopyWith_Input_StringComparisonExp(local$name, (e) => call(name: e));
-  }
-
-  CopyWith_Input_PersonsBoolExp<TRes> get persons {
-    final local$persons = _instance.persons;
-    return local$persons == null
-        ? CopyWith_Input_PersonsBoolExp.stub(_then(_instance))
-        : CopyWith_Input_PersonsBoolExp(local$persons, (e) => call(persons: e));
-  }
-
-  CopyWith_Input_PersonsAggregateBoolExp<TRes> get personsAggregate {
-    final local$personsAggregate = _instance.personsAggregate;
-    return local$personsAggregate == null
-        ? CopyWith_Input_PersonsAggregateBoolExp.stub(_then(_instance))
-        : CopyWith_Input_PersonsAggregateBoolExp(
-            local$personsAggregate,
-            (e) => call(personsAggregate: e),
-          );
-  }
-}
-
-class _CopyWithStubImpl_Input_JobsBoolExp<TRes>
-    implements CopyWith_Input_JobsBoolExp<TRes> {
-  _CopyWithStubImpl_Input_JobsBoolExp(this._res);
-
-  TRes _res;
-
-  call({
-    List<Input_JobsBoolExp>? $_and,
-    Input_JobsBoolExp? $_not,
-    List<Input_JobsBoolExp>? $_or,
-    Input_UuidComparisonExp? id,
-    Input_StringComparisonExp? name,
-    Input_PersonsBoolExp? persons,
-    Input_PersonsAggregateBoolExp? personsAggregate,
-  }) => _res;
-
-  $_and(_fn) => _res;
-
-  CopyWith_Input_JobsBoolExp<TRes> get $_not =>
-      CopyWith_Input_JobsBoolExp.stub(_res);
-
-  $_or(_fn) => _res;
-
-  CopyWith_Input_UuidComparisonExp<TRes> get id =>
-      CopyWith_Input_UuidComparisonExp.stub(_res);
-
-  CopyWith_Input_StringComparisonExp<TRes> get name =>
-      CopyWith_Input_StringComparisonExp.stub(_res);
-
-  CopyWith_Input_PersonsBoolExp<TRes> get persons =>
-      CopyWith_Input_PersonsBoolExp.stub(_res);
-
-  CopyWith_Input_PersonsAggregateBoolExp<TRes> get personsAggregate =>
-      CopyWith_Input_PersonsAggregateBoolExp.stub(_res);
-}
-
-class Input_JobsInsertInput {
-  factory Input_JobsInsertInput({
-    String? name,
-    Input_PersonsArrRelInsertInput? persons,
-  }) => Input_JobsInsertInput._({
-    if (name != null) r'name': name,
-    if (persons != null) r'persons': persons,
-  });
-
-  Input_JobsInsertInput._(this._$data);
-
-  factory Input_JobsInsertInput.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('name')) {
-      final l$name = data['name'];
-      result$data['name'] = (l$name as String?);
-    }
-    if (data.containsKey('persons')) {
-      final l$persons = data['persons'];
-      result$data['persons'] = l$persons == null
-          ? null
-          : Input_PersonsArrRelInsertInput.fromJson(
-              (l$persons as Map<String, dynamic>),
-            );
-    }
-    return Input_JobsInsertInput._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  String? get name => (_$data['name'] as String?);
-
-  Input_PersonsArrRelInsertInput? get persons =>
-      (_$data['persons'] as Input_PersonsArrRelInsertInput?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('name')) {
-      final l$name = name;
-      result$data['name'] = l$name;
-    }
-    if (_$data.containsKey('persons')) {
-      final l$persons = persons;
-      result$data['persons'] = l$persons?.toJson();
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_JobsInsertInput<Input_JobsInsertInput> get copyWith =>
-      CopyWith_Input_JobsInsertInput(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_JobsInsertInput || runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$name = name;
-    final lOther$name = other.name;
-    if (_$data.containsKey('name') != other._$data.containsKey('name')) {
-      return false;
-    }
-    if (l$name != lOther$name) {
-      return false;
-    }
-    final l$persons = persons;
-    final lOther$persons = other.persons;
-    if (_$data.containsKey('persons') != other._$data.containsKey('persons')) {
-      return false;
-    }
-    if (l$persons != lOther$persons) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$name = name;
-    final l$persons = persons;
-    return Object.hashAll([
-      _$data.containsKey('name') ? l$name : const {},
-      _$data.containsKey('persons') ? l$persons : const {},
-    ]);
-  }
-}
-
 abstract class CopyWith_Input_JobsInsertInput<TRes> {
   factory CopyWith_Input_JobsInsertInput(
     Input_JobsInsertInput instance,
@@ -2466,8 +2210,8 @@ class _CopyWithStubImpl_Input_JsonbComparisonExp<TRes>
       CopyWith_Input_JsonbCastExp.stub(_res);
 }
 
-class Input_NameComparisonExp {
-  factory Input_NameComparisonExp({
+class Input_MeetingAudienceComparisonExp {
+  factory Input_MeetingAudienceComparisonExp({
     String? $_eq,
     String? $_gt,
     String? $_gte,
@@ -2477,7 +2221,7 @@ class Input_NameComparisonExp {
     String? $_lte,
     String? $_neq,
     List<String>? $_nin,
-  }) => Input_NameComparisonExp._({
+  }) => Input_MeetingAudienceComparisonExp._({
     if ($_eq != null) r'_eq': $_eq,
     if ($_gt != null) r'_gt': $_gt,
     if ($_gte != null) r'_gte': $_gte,
@@ -2489,9 +2233,11 @@ class Input_NameComparisonExp {
     if ($_nin != null) r'_nin': $_nin,
   });
 
-  Input_NameComparisonExp._(this._$data);
+  Input_MeetingAudienceComparisonExp._(this._$data);
 
-  factory Input_NameComparisonExp.fromJson(Map<String, dynamic> data) {
+  factory Input_MeetingAudienceComparisonExp.fromJson(
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('_eq')) {
       final l$$_eq = data['_eq'];
@@ -2533,7 +2279,7 @@ class Input_NameComparisonExp {
           ?.map((e) => (e as String))
           .toList();
     }
-    return Input_NameComparisonExp._(result$data);
+    return Input_MeetingAudienceComparisonExp._(result$data);
   }
 
   Map<String, dynamic> _$data;
@@ -2597,15 +2343,18 @@ class Input_NameComparisonExp {
     return result$data;
   }
 
-  CopyWith_Input_NameComparisonExp<Input_NameComparisonExp> get copyWith =>
-      CopyWith_Input_NameComparisonExp(this, (i) => i);
+  CopyWith_Input_MeetingAudienceComparisonExp<
+    Input_MeetingAudienceComparisonExp
+  >
+  get copyWith => CopyWith_Input_MeetingAudienceComparisonExp(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input_NameComparisonExp || runtimeType != other.runtimeType) {
+    if (other is! Input_MeetingAudienceComparisonExp ||
+        runtimeType != other.runtimeType) {
       return false;
     }
     final l$$_eq = $_eq;
@@ -2736,4 +2485,26 @@ class Input_NameComparisonExp {
           : const {},
     ]);
   }
+}
+
+abstract class CopyWith_Input_MeetingAudienceComparisonExp<TRes> {
+  factory CopyWith_Input_MeetingAudienceComparisonExp(
+    Input_MeetingAudienceComparisonExp instance,
+    TRes Function(Input_MeetingAudienceComparisonExp) then,
+  ) = _CopyWithImpl_Input_MeetingAudienceComparisonExp;
+
+  factory CopyWith_Input_MeetingAudienceComparisonExp.stub(TRes res) =
+      _CopyWithStubImpl_Input_MeetingAudienceComparisonExp;
+
+  TRes call({
+    String? $_eq,
+    String? $_gt,
+    String? $_gte,
+    List<String>? $_in,
+    bool? $_isNull,
+    String? $_lt,
+    String? $_lte,
+    String? $_neq,
+    List<String>? $_nin,
+  });
 }

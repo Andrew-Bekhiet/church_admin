@@ -438,6 +438,8 @@ class Input_PersonsBoolExp {
     Input_HistoryLatestVisitsBoolExp? lastVisit,
     Input_StringComparisonExp? mainPhone,
     Input_StringComparisonExp? martialStatus,
+    Input_HistoryMeetingsPersonsBoolExp? meetings,
+    Input_HistoryMeetingsPersonsAggregateBoolExp? meetingsAggregate,
     Input_StringComparisonExp? name,
     Input_IntComparisonExp? nationalId,
     Input_StringComparisonExp? notes,
@@ -518,6 +520,8 @@ class Input_PersonsBoolExp {
     if (lastVisit != null) r'lastVisit': lastVisit,
     if (mainPhone != null) r'mainPhone': mainPhone,
     if (martialStatus != null) r'martialStatus': martialStatus,
+    if (meetings != null) r'meetings': meetings,
+    if (meetingsAggregate != null) r'meetingsAggregate': meetingsAggregate,
     if (name != null) r'name': name,
     if (nationalId != null) r'nationalId': nationalId,
     if (notes != null) r'notes': notes,
@@ -893,6 +897,22 @@ class Input_PersonsBoolExp {
               (l$martialStatus as Map<String, dynamic>),
             );
     }
+    if (data.containsKey('meetings')) {
+      final l$meetings = data['meetings'];
+      result$data['meetings'] = l$meetings == null
+          ? null
+          : Input_HistoryMeetingsPersonsBoolExp.fromJson(
+              (l$meetings as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('meetingsAggregate')) {
+      final l$meetingsAggregate = data['meetingsAggregate'];
+      result$data['meetingsAggregate'] = l$meetingsAggregate == null
+          ? null
+          : Input_HistoryMeetingsPersonsAggregateBoolExp.fromJson(
+              (l$meetingsAggregate as Map<String, dynamic>),
+            );
+    }
     if (data.containsKey('name')) {
       final l$name = data['name'];
       result$data['name'] = l$name == null
@@ -1266,6 +1286,13 @@ class Input_PersonsBoolExp {
   Input_StringComparisonExp? get martialStatus =>
       (_$data['martialStatus'] as Input_StringComparisonExp?);
 
+  Input_HistoryMeetingsPersonsBoolExp? get meetings =>
+      (_$data['meetings'] as Input_HistoryMeetingsPersonsBoolExp?);
+
+  Input_HistoryMeetingsPersonsAggregateBoolExp? get meetingsAggregate =>
+      (_$data['meetingsAggregate']
+          as Input_HistoryMeetingsPersonsAggregateBoolExp?);
+
   Input_StringComparisonExp? get name =>
       (_$data['name'] as Input_StringComparisonExp?);
 
@@ -1535,6 +1562,14 @@ class Input_PersonsBoolExp {
     if (_$data.containsKey('martialStatus')) {
       final l$martialStatus = martialStatus;
       result$data['martialStatus'] = l$martialStatus?.toJson();
+    }
+    if (_$data.containsKey('meetings')) {
+      final l$meetings = meetings;
+      result$data['meetings'] = l$meetings?.toJson();
+    }
+    if (_$data.containsKey('meetingsAggregate')) {
+      final l$meetingsAggregate = meetingsAggregate;
+      result$data['meetingsAggregate'] = l$meetingsAggregate?.toJson();
     }
     if (_$data.containsKey('name')) {
       final l$name = name;
@@ -2072,6 +2107,24 @@ class Input_PersonsBoolExp {
     if (l$martialStatus != lOther$martialStatus) {
       return false;
     }
+    final l$meetings = meetings;
+    final lOther$meetings = other.meetings;
+    if (_$data.containsKey('meetings') !=
+        other._$data.containsKey('meetings')) {
+      return false;
+    }
+    if (l$meetings != lOther$meetings) {
+      return false;
+    }
+    final l$meetingsAggregate = meetingsAggregate;
+    final lOther$meetingsAggregate = other.meetingsAggregate;
+    if (_$data.containsKey('meetingsAggregate') !=
+        other._$data.containsKey('meetingsAggregate')) {
+      return false;
+    }
+    if (l$meetingsAggregate != lOther$meetingsAggregate) {
+      return false;
+    }
     final l$name = name;
     final lOther$name = other.name;
     if (_$data.containsKey('name') != other._$data.containsKey('name')) {
@@ -2381,6 +2434,8 @@ class Input_PersonsBoolExp {
     final l$lastVisit = lastVisit;
     final l$mainPhone = mainPhone;
     final l$martialStatus = martialStatus;
+    final l$meetings = meetings;
+    final l$meetingsAggregate = meetingsAggregate;
     final l$name = name;
     final l$nationalId = nationalId;
     final l$notes = notes;
@@ -2474,6 +2529,8 @@ class Input_PersonsBoolExp {
       _$data.containsKey('lastVisit') ? l$lastVisit : const {},
       _$data.containsKey('mainPhone') ? l$mainPhone : const {},
       _$data.containsKey('martialStatus') ? l$martialStatus : const {},
+      _$data.containsKey('meetings') ? l$meetings : const {},
+      _$data.containsKey('meetingsAggregate') ? l$meetingsAggregate : const {},
       _$data.containsKey('name') ? l$name : const {},
       _$data.containsKey('nationalId') ? l$nationalId : const {},
       _$data.containsKey('notes') ? l$notes : const {},

@@ -207,97 +207,16 @@ query personHistoryAnalysis(
     services(where: { serviceId: { _in: $servicesIds } }) {
       service {
         ...ServiceNoPhoto
-        attendanceHistoryAggregate(
-          where: {
-            dayId: { _gte: $dateFrom, _lte: $dateTo }
-            personId: { _eq: $personId }
-            asAdmin: { _eq: false }
-          }
-        ) {
-          aggregate {
-            count
-            max {
-              dayId
-            }
-          }
-          nodes {
-            dayId
-          }
-        }
-        attendanceDaysConstraintsAggregate(
-          where: { dayId: { _gte: $dateFrom, _lte: $dateTo } }
-        ) {
-          aggregate {
-            count
-          }
-          nodes {
-            dayId
-          }
-        }
       }
     }
     classes(where: { classId: { _in: $classesIds } }) {
       class {
         ...ClassNoPhoto
-        attendanceHistoryAggregate(
-          where: {
-            dayId: { _gte: $dateFrom, _lte: $dateTo }
-            personId: { _eq: $personId }
-            asAdmin: { _eq: false }
-          }
-        ) {
-          aggregate {
-            count
-            max {
-              dayId
-            }
-          }
-          nodes {
-            dayId
-          }
-        }
-        attendanceDaysConstraintsAggregate(
-          where: { dayId: { _gte: $dateFrom, _lte: $dateTo } }
-        ) {
-          aggregate {
-            count
-          }
-          nodes {
-            dayId
-          }
-        }
       }
     }
     groups(where: { groupId: { _in: $groupsIds } }) {
       group {
         ...GroupNoPhoto
-        attendanceHistoryAggregate(
-          where: {
-            dayId: { _gte: $dateFrom, _lte: $dateTo }
-            personId: { _eq: $personId }
-            asAdmin: { _eq: false }
-          }
-        ) {
-          aggregate {
-            count
-            max {
-              dayId
-            }
-          }
-          nodes {
-            dayId
-          }
-        }
-        attendanceDaysConstraintsAggregate(
-          where: { dayId: { _gte: $dateFrom, _lte: $dateTo } }
-        ) {
-          aggregate {
-            count
-          }
-          nodes {
-            dayId
-          }
-        }
       }
     }
   }

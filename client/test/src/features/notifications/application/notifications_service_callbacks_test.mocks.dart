@@ -116,20 +116,25 @@ class _FakeHistoryDAO_16 extends _i1.SmartFake implements _i2.HistoryDAO {
     : super(parent, parentInvocation);
 }
 
-class _FakePaginatableStreamBase_17<T> extends _i1.SmartFake
+class _FakeMeetingsDAO_17 extends _i1.SmartFake implements _i2.MeetingsDAO {
+  _FakeMeetingsDAO_17(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
+}
+
+class _FakePaginatableStreamBase_18<T> extends _i1.SmartFake
     implements _i2.PaginatableStreamBase<T> {
-  _FakePaginatableStreamBase_17(Object parent, Invocation parentInvocation)
+  _FakePaginatableStreamBase_18(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeStreamSubscription_18<T1> extends _i1.SmartFake
+class _FakeStreamSubscription_19<T1> extends _i1.SmartFake
     implements _i3.StreamSubscription<T1> {
-  _FakeStreamSubscription_18(Object parent, Invocation parentInvocation)
+  _FakeStreamSubscription_19(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeFuture_19<T1> extends _i1.SmartFake implements _i3.Future<T1> {
-  _FakeFuture_19(Object parent, Invocation parentInvocation)
+class _FakeFuture_20<T1> extends _i1.SmartFake implements _i3.Future<T1> {
+  _FakeFuture_20(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
@@ -786,6 +791,21 @@ class MockDatabaseService extends _i1.Mock implements _i2.DatabaseService {
           as _i2.HistoryDAO);
 
   @override
+  _i2.MeetingsDAO get meetings =>
+      (super.noSuchMethod(
+            Invocation.getter(#meetings),
+            returnValue: _FakeMeetingsDAO_17(
+              this,
+              Invocation.getter(#meetings),
+            ),
+            returnValueForMissingStub: _FakeMeetingsDAO_17(
+              this,
+              Invocation.getter(#meetings),
+            ),
+          )
+          as _i2.MeetingsDAO);
+
+  @override
   Map<Type, _i2.DAOBase<_i2.ViewableWithID>> get daosByType =>
       (super.noSuchMethod(
             Invocation.getter(#daosByType),
@@ -808,7 +828,7 @@ class MockAdvancedQueryParser extends _i1.Mock
   ]) =>
       (super.noSuchMethod(
             Invocation.method(#createPaginatableStream, [query, searchStream]),
-            returnValue: _FakePaginatableStreamBase_17<_i2.ViewableWithID>(
+            returnValue: _FakePaginatableStreamBase_18<_i2.ViewableWithID>(
               this,
               Invocation.method(#createPaginatableStream, [
                 query,
@@ -816,7 +836,7 @@ class MockAdvancedQueryParser extends _i1.Mock
               ]),
             ),
             returnValueForMissingStub:
-                _FakePaginatableStreamBase_17<_i2.ViewableWithID>(
+                _FakePaginatableStreamBase_18<_i2.ViewableWithID>(
                   this,
                   Invocation.method(#createPaginatableStream, [
                     query,
@@ -1008,7 +1028,7 @@ class MockPaginatableStreamBase<T> extends _i1.Mock
                 #cancelOnError: cancelOnError,
               },
             ),
-            returnValue: _FakeStreamSubscription_18<List<T>>(
+            returnValue: _FakeStreamSubscription_19<List<T>>(
               this,
               Invocation.method(
                 #listen,
@@ -1020,7 +1040,7 @@ class MockPaginatableStreamBase<T> extends _i1.Mock
                 },
               ),
             ),
-            returnValueForMissingStub: _FakeStreamSubscription_18<List<T>>(
+            returnValueForMissingStub: _FakeStreamSubscription_19<List<T>>(
               this,
               Invocation.method(
                 #listen,
@@ -1133,7 +1153,7 @@ class MockPaginatableStreamBase<T> extends _i1.Mock
                   ),
                   (S v) => _i3.Future<S>.value(v),
                 ) ??
-                _FakeFuture_19<S>(
+                _FakeFuture_20<S>(
                   this,
                   Invocation.method(#fold, [initialValue, combine]),
                 ),
@@ -1145,7 +1165,7 @@ class MockPaginatableStreamBase<T> extends _i1.Mock
                   ),
                   (S v) => _i3.Future<S>.value(v),
                 ) ??
-                _FakeFuture_19<S>(
+                _FakeFuture_20<S>(
                   this,
                   Invocation.method(#fold, [initialValue, combine]),
                 ),
@@ -1250,7 +1270,7 @@ class MockPaginatableStreamBase<T> extends _i1.Mock
                   ),
                   (E v) => _i3.Future<E>.value(v),
                 ) ??
-                _FakeFuture_19<E>(
+                _FakeFuture_20<E>(
                   this,
                   Invocation.method(#drain, [futureValue]),
                 ),
@@ -1262,7 +1282,7 @@ class MockPaginatableStreamBase<T> extends _i1.Mock
                   ),
                   (E v) => _i3.Future<E>.value(v),
                 ) ??
-                _FakeFuture_19<E>(
+                _FakeFuture_20<E>(
                   this,
                   Invocation.method(#drain, [futureValue]),
                 ),

@@ -98,7 +98,7 @@ class PersonsNotificationsQueries {
               ),
           $_not: Input_PersonsBoolExp(
             attendanceHistory: Input_HistoryAttendanceHistoryBoolExp(
-              dayId: Input_DateComparisonExp(
+              datetime: Input_TimestamptzComparisonExp(
                 $_gt: date,
               ),
             ),

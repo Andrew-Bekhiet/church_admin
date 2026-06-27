@@ -14,40 +14,29 @@ class AttendanceRecord
   @override
   final String id;
   @override
-  final DateTime dayId;
+  final String meetingId;
   @override
-  final DateTime time;
+  final Meeting? meeting;
   @override
-  final Service service;
+  final String personId;
   @override
-  final Person person;
+  final Person? person;
   @override
-  final User recordedByUser;
+  final DateTime datetime;
   @override
-  final bool asAdmin;
+  final bool asServant;
   @override
-  final StudyYear? studyYear;
-  @override
-  final bool? serviceGender;
-  @override
-  final Group? group;
-  @override
-  @JsonKey(name: 'class')
-  @QueryableField(renameTo: 'class')
-  final Class? class$;
+  final User? recordedByUser;
 
   const AttendanceRecord({
     required this.id,
-    required this.dayId,
-    required this.time,
-    required this.service,
-    required this.person,
-    required this.recordedByUser,
-    required this.asAdmin,
-    this.studyYear,
-    this.serviceGender,
-    this.group,
-    this.class$,
+    required this.meetingId,
+    required this.personId,
+    required this.datetime,
+    required this.asServant,
+    this.meeting,
+    this.person,
+    this.recordedByUser,
   });
 
   factory AttendanceRecord.fromJson(Map<String, Object?> json) =>

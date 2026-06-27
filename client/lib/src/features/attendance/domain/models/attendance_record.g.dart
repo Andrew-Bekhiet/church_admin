@@ -20,22 +20,17 @@ class AttendanceRecordFields {
     operators: {...MultiSelectOperator.values},
   );
 
-  final FieldMetadata<DateTime> time = FieldMetadata<DateTime>(
-    getValue: (obj) => obj is AttendanceRecord ? obj.time : null,
+  final FieldMetadata<Meeting> meeting = FieldMetadata<Meeting>(
+    getValue: (obj) => obj is AttendanceRecord ? obj.meeting : null,
     parentType: AttendanceRecord,
-    name: 'time',
-    label: 'الوقت',
+    name: 'meeting',
+    label: 'meeting',
     isCodeOnly: false,
-    operators: {...DateTimeOperator.values, ...DateRangeOperator.values},
-  );
-
-  final FieldMetadata<Service> service = FieldMetadata<Service>(
-    getValue: (obj) => obj is AttendanceRecord ? obj.service : null,
-    parentType: AttendanceRecord,
-    name: 'service',
-    label: 'الخدمة',
-    isCodeOnly: false,
-    operators: {...MultiSelectOperator.values},
+    operators: {
+      ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull,
+    },
   );
 
   final FieldMetadata<Person> person = FieldMetadata<Person>(
@@ -44,7 +39,29 @@ class AttendanceRecordFields {
     name: 'person',
     label: 'بيانات المخدوم',
     isCodeOnly: false,
-    operators: {...MultiSelectOperator.values},
+    operators: {
+      ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull,
+    },
+  );
+
+  final FieldMetadata<DateTime> datetime = FieldMetadata<DateTime>(
+    getValue: (obj) => obj is AttendanceRecord ? obj.datetime : null,
+    parentType: AttendanceRecord,
+    name: 'datetime',
+    label: 'datetime',
+    isCodeOnly: false,
+    operators: {...DateTimeOperator.values, ...DateRangeOperator.values},
+  );
+
+  final FieldMetadata<bool> asServant = FieldMetadata<bool>(
+    getValue: (obj) => obj is AttendanceRecord ? obj.asServant : null,
+    parentType: AttendanceRecord,
+    name: 'asServant',
+    label: 'asServant',
+    isCodeOnly: false,
+    operators: {...BooleanOperator.values},
   );
 
   final FieldMetadata<User> recordedByUser = FieldMetadata<User>(
@@ -52,63 +69,6 @@ class AttendanceRecordFields {
     parentType: AttendanceRecord,
     name: 'recordedByUser',
     label: 'الخادم الذي سجل',
-    isCodeOnly: false,
-    operators: {...MultiSelectOperator.values},
-  );
-
-  final FieldMetadata<bool> asAdmin = FieldMetadata<bool>(
-    getValue: (obj) => obj is AttendanceRecord ? obj.asAdmin : null,
-    parentType: AttendanceRecord,
-    name: 'asAdmin',
-    label: 'asAdmin',
-    isCodeOnly: false,
-    operators: {...BooleanOperator.values},
-  );
-
-  final FieldMetadata<StudyYear> studyYear = FieldMetadata<StudyYear>(
-    getValue: (obj) => obj is AttendanceRecord ? obj.studyYear : null,
-    parentType: AttendanceRecord,
-    name: 'studyYear',
-    label: 'السنة الدراسية',
-    isCodeOnly: false,
-    operators: {
-      ...MultiSelectOperator.values,
-      PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull,
-    },
-  );
-
-  final FieldMetadata<bool> serviceGender = FieldMetadata<bool>(
-    getValue: (obj) => obj is AttendanceRecord ? obj.serviceGender : null,
-    parentType: AttendanceRecord,
-    name: 'serviceGender',
-    label: 'نوع المخدومين المسؤول عنهم',
-    isCodeOnly: false,
-    operators: {
-      ...BooleanOperator.values,
-      PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull,
-    },
-  );
-
-  final FieldMetadata<Group> group = FieldMetadata<Group>(
-    getValue: (obj) => obj is AttendanceRecord ? obj.group : null,
-    parentType: AttendanceRecord,
-    name: 'group',
-    label: 'المجموعة',
-    isCodeOnly: false,
-    operators: {
-      ...MultiSelectOperator.values,
-      PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull,
-    },
-  );
-
-  final FieldMetadata<Class> class$ = FieldMetadata<Class>(
-    getValue: (obj) => obj is AttendanceRecord ? obj.class$ : null,
-    parentType: AttendanceRecord,
-    name: 'class',
-    label: 'الفصل',
     isCodeOnly: false,
     operators: {
       ...MultiSelectOperator.values,
@@ -119,27 +79,19 @@ class AttendanceRecordFields {
 
   late final List<FieldMetadata<Object>> allFields = [
     id,
-    time,
-    service,
+    meeting,
     person,
+    datetime,
+    asServant,
     recordedByUser,
-    asAdmin,
-    studyYear,
-    serviceGender,
-    group,
-    class$,
   ];
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'id': id,
-    'time': time,
-    'service': service,
+    'meeting': meeting,
     'person': person,
+    'datetime': datetime,
+    'asServant': asServant,
     'recordedByUser': recordedByUser,
-    'asAdmin': asAdmin,
-    'studyYear': studyYear,
-    'serviceGender': serviceGender,
-    'group': group,
-    'class': class$,
   };
 }
 
@@ -149,37 +101,29 @@ class AttendanceRecordFields {
 
 AttendanceRecord _$AttendanceRecordFromJson(Map json) => AttendanceRecord(
   id: json['id'] as String,
-  dayId: DateTime.parse(json['dayId'] as String),
-  time: DateTime.parse(json['time'] as String),
-  service: Service.fromJson(Map<String, Object?>.from(json['service'] as Map)),
-  person: Person.fromJson(Map<String, Object?>.from(json['person'] as Map)),
-  recordedByUser: User.fromJson(
-    Map<String, Object?>.from(json['recordedByUser'] as Map),
-  ),
-  asAdmin: json['asAdmin'] as bool,
-  studyYear: json['studyYear'] == null
+  meetingId: json['meetingId'] as String,
+  personId: json['personId'] as String,
+  datetime: DateTime.parse(json['datetime'] as String),
+  asServant: json['asServant'] as bool,
+  meeting: json['meeting'] == null
       ? null
-      : StudyYear.fromJson(Map<String, Object?>.from(json['studyYear'] as Map)),
-  serviceGender: json['serviceGender'] as bool?,
-  group: json['group'] == null
+      : Meeting.fromJson(Map<String, Object?>.from(json['meeting'] as Map)),
+  person: json['person'] == null
       ? null
-      : Group.fromJson(Map<String, Object?>.from(json['group'] as Map)),
-  class$: json['class'] == null
+      : Person.fromJson(Map<String, Object?>.from(json['person'] as Map)),
+  recordedByUser: json['recordedByUser'] == null
       ? null
-      : Class.fromJson(Map<String, Object?>.from(json['class'] as Map)),
+      : User.fromJson(Map<String, Object?>.from(json['recordedByUser'] as Map)),
 );
 
 Map<String, dynamic> _$AttendanceRecordToJson(AttendanceRecord instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'dayId': instance.dayId.toIso8601String(),
-      'time': instance.time.toIso8601String(),
-      'service': instance.service.toJson(),
-      'person': instance.person.toJson(),
-      'recordedByUser': instance.recordedByUser.toJson(),
-      'asAdmin': instance.asAdmin,
-      'studyYear': instance.studyYear?.toJson(),
-      'serviceGender': instance.serviceGender,
-      'group': instance.group?.toJson(),
-      'class': instance.class$?.toJson(),
+      'meetingId': instance.meetingId,
+      'meeting': instance.meeting?.toJson(),
+      'personId': instance.personId,
+      'person': instance.person?.toJson(),
+      'datetime': instance.datetime.toIso8601String(),
+      'asServant': instance.asServant,
+      'recordedByUser': instance.recordedByUser?.toJson(),
     };

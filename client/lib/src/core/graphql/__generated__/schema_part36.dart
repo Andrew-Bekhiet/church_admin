@@ -1,6 +1,333 @@
 // Part 36 of the schema
 part of "schema.graphql.dart";
 
+class _CopyWithImpl_Input_MeetingAudienceComparisonExp<TRes>
+    implements CopyWith_Input_MeetingAudienceComparisonExp<TRes> {
+  _CopyWithImpl_Input_MeetingAudienceComparisonExp(this._instance, this._then);
+
+  final Input_MeetingAudienceComparisonExp _instance;
+
+  final TRes Function(Input_MeetingAudienceComparisonExp) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? $_eq = _undefined,
+    Object? $_gt = _undefined,
+    Object? $_gte = _undefined,
+    Object? $_in = _undefined,
+    Object? $_isNull = _undefined,
+    Object? $_lt = _undefined,
+    Object? $_lte = _undefined,
+    Object? $_neq = _undefined,
+    Object? $_nin = _undefined,
+  }) => _then(
+    Input_MeetingAudienceComparisonExp._({
+      ..._instance._$data,
+      if ($_eq != _undefined) '_eq': ($_eq as String?),
+      if ($_gt != _undefined) '_gt': ($_gt as String?),
+      if ($_gte != _undefined) '_gte': ($_gte as String?),
+      if ($_in != _undefined) '_in': ($_in as List<String>?),
+      if ($_isNull != _undefined) '_isNull': ($_isNull as bool?),
+      if ($_lt != _undefined) '_lt': ($_lt as String?),
+      if ($_lte != _undefined) '_lte': ($_lte as String?),
+      if ($_neq != _undefined) '_neq': ($_neq as String?),
+      if ($_nin != _undefined) '_nin': ($_nin as List<String>?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_MeetingAudienceComparisonExp<TRes>
+    implements CopyWith_Input_MeetingAudienceComparisonExp<TRes> {
+  _CopyWithStubImpl_Input_MeetingAudienceComparisonExp(this._res);
+
+  TRes _res;
+
+  call({
+    String? $_eq,
+    String? $_gt,
+    String? $_gte,
+    List<String>? $_in,
+    bool? $_isNull,
+    String? $_lt,
+    String? $_lte,
+    String? $_neq,
+    List<String>? $_nin,
+  }) => _res;
+}
+
+class Input_NameComparisonExp {
+  factory Input_NameComparisonExp({
+    String? $_eq,
+    String? $_gt,
+    String? $_gte,
+    List<String>? $_in,
+    bool? $_isNull,
+    String? $_lt,
+    String? $_lte,
+    String? $_neq,
+    List<String>? $_nin,
+  }) => Input_NameComparisonExp._({
+    if ($_eq != null) r'_eq': $_eq,
+    if ($_gt != null) r'_gt': $_gt,
+    if ($_gte != null) r'_gte': $_gte,
+    if ($_in != null) r'_in': $_in,
+    if ($_isNull != null) r'_isNull': $_isNull,
+    if ($_lt != null) r'_lt': $_lt,
+    if ($_lte != null) r'_lte': $_lte,
+    if ($_neq != null) r'_neq': $_neq,
+    if ($_nin != null) r'_nin': $_nin,
+  });
+
+  Input_NameComparisonExp._(this._$data);
+
+  factory Input_NameComparisonExp.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('_eq')) {
+      final l$$_eq = data['_eq'];
+      result$data['_eq'] = (l$$_eq as String?);
+    }
+    if (data.containsKey('_gt')) {
+      final l$$_gt = data['_gt'];
+      result$data['_gt'] = (l$$_gt as String?);
+    }
+    if (data.containsKey('_gte')) {
+      final l$$_gte = data['_gte'];
+      result$data['_gte'] = (l$$_gte as String?);
+    }
+    if (data.containsKey('_in')) {
+      final l$$_in = data['_in'];
+      result$data['_in'] = (l$$_in as List<dynamic>?)
+          ?.map((e) => (e as String))
+          .toList();
+    }
+    if (data.containsKey('_isNull')) {
+      final l$$_isNull = data['_isNull'];
+      result$data['_isNull'] = (l$$_isNull as bool?);
+    }
+    if (data.containsKey('_lt')) {
+      final l$$_lt = data['_lt'];
+      result$data['_lt'] = (l$$_lt as String?);
+    }
+    if (data.containsKey('_lte')) {
+      final l$$_lte = data['_lte'];
+      result$data['_lte'] = (l$$_lte as String?);
+    }
+    if (data.containsKey('_neq')) {
+      final l$$_neq = data['_neq'];
+      result$data['_neq'] = (l$$_neq as String?);
+    }
+    if (data.containsKey('_nin')) {
+      final l$$_nin = data['_nin'];
+      result$data['_nin'] = (l$$_nin as List<dynamic>?)
+          ?.map((e) => (e as String))
+          .toList();
+    }
+    return Input_NameComparisonExp._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String? get $_eq => (_$data['_eq'] as String?);
+
+  String? get $_gt => (_$data['_gt'] as String?);
+
+  String? get $_gte => (_$data['_gte'] as String?);
+
+  List<String>? get $_in => (_$data['_in'] as List<String>?);
+
+  bool? get $_isNull => (_$data['_isNull'] as bool?);
+
+  String? get $_lt => (_$data['_lt'] as String?);
+
+  String? get $_lte => (_$data['_lte'] as String?);
+
+  String? get $_neq => (_$data['_neq'] as String?);
+
+  List<String>? get $_nin => (_$data['_nin'] as List<String>?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('_eq')) {
+      final l$$_eq = $_eq;
+      result$data['_eq'] = l$$_eq;
+    }
+    if (_$data.containsKey('_gt')) {
+      final l$$_gt = $_gt;
+      result$data['_gt'] = l$$_gt;
+    }
+    if (_$data.containsKey('_gte')) {
+      final l$$_gte = $_gte;
+      result$data['_gte'] = l$$_gte;
+    }
+    if (_$data.containsKey('_in')) {
+      final l$$_in = $_in;
+      result$data['_in'] = l$$_in?.map((e) => e).toList();
+    }
+    if (_$data.containsKey('_isNull')) {
+      final l$$_isNull = $_isNull;
+      result$data['_isNull'] = l$$_isNull;
+    }
+    if (_$data.containsKey('_lt')) {
+      final l$$_lt = $_lt;
+      result$data['_lt'] = l$$_lt;
+    }
+    if (_$data.containsKey('_lte')) {
+      final l$$_lte = $_lte;
+      result$data['_lte'] = l$$_lte;
+    }
+    if (_$data.containsKey('_neq')) {
+      final l$$_neq = $_neq;
+      result$data['_neq'] = l$$_neq;
+    }
+    if (_$data.containsKey('_nin')) {
+      final l$$_nin = $_nin;
+      result$data['_nin'] = l$$_nin?.map((e) => e).toList();
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_NameComparisonExp<Input_NameComparisonExp> get copyWith =>
+      CopyWith_Input_NameComparisonExp(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_NameComparisonExp || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$$_eq = $_eq;
+    final lOther$$_eq = other.$_eq;
+    if (_$data.containsKey('_eq') != other._$data.containsKey('_eq')) {
+      return false;
+    }
+    if (l$$_eq != lOther$$_eq) {
+      return false;
+    }
+    final l$$_gt = $_gt;
+    final lOther$$_gt = other.$_gt;
+    if (_$data.containsKey('_gt') != other._$data.containsKey('_gt')) {
+      return false;
+    }
+    if (l$$_gt != lOther$$_gt) {
+      return false;
+    }
+    final l$$_gte = $_gte;
+    final lOther$$_gte = other.$_gte;
+    if (_$data.containsKey('_gte') != other._$data.containsKey('_gte')) {
+      return false;
+    }
+    if (l$$_gte != lOther$$_gte) {
+      return false;
+    }
+    final l$$_in = $_in;
+    final lOther$$_in = other.$_in;
+    if (_$data.containsKey('_in') != other._$data.containsKey('_in')) {
+      return false;
+    }
+    if (l$$_in != null && lOther$$_in != null) {
+      if (l$$_in.length != lOther$$_in.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$_in.length; i++) {
+        final l$$_in$entry = l$$_in[i];
+        final lOther$$_in$entry = lOther$$_in[i];
+        if (l$$_in$entry != lOther$$_in$entry) {
+          return false;
+        }
+      }
+    } else if (l$$_in != lOther$$_in) {
+      return false;
+    }
+    final l$$_isNull = $_isNull;
+    final lOther$$_isNull = other.$_isNull;
+    if (_$data.containsKey('_isNull') != other._$data.containsKey('_isNull')) {
+      return false;
+    }
+    if (l$$_isNull != lOther$$_isNull) {
+      return false;
+    }
+    final l$$_lt = $_lt;
+    final lOther$$_lt = other.$_lt;
+    if (_$data.containsKey('_lt') != other._$data.containsKey('_lt')) {
+      return false;
+    }
+    if (l$$_lt != lOther$$_lt) {
+      return false;
+    }
+    final l$$_lte = $_lte;
+    final lOther$$_lte = other.$_lte;
+    if (_$data.containsKey('_lte') != other._$data.containsKey('_lte')) {
+      return false;
+    }
+    if (l$$_lte != lOther$$_lte) {
+      return false;
+    }
+    final l$$_neq = $_neq;
+    final lOther$$_neq = other.$_neq;
+    if (_$data.containsKey('_neq') != other._$data.containsKey('_neq')) {
+      return false;
+    }
+    if (l$$_neq != lOther$$_neq) {
+      return false;
+    }
+    final l$$_nin = $_nin;
+    final lOther$$_nin = other.$_nin;
+    if (_$data.containsKey('_nin') != other._$data.containsKey('_nin')) {
+      return false;
+    }
+    if (l$$_nin != null && lOther$$_nin != null) {
+      if (l$$_nin.length != lOther$$_nin.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$_nin.length; i++) {
+        final l$$_nin$entry = l$$_nin[i];
+        final lOther$$_nin$entry = lOther$$_nin[i];
+        if (l$$_nin$entry != lOther$$_nin$entry) {
+          return false;
+        }
+      }
+    } else if (l$$_nin != lOther$$_nin) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$$_eq = $_eq;
+    final l$$_gt = $_gt;
+    final l$$_gte = $_gte;
+    final l$$_in = $_in;
+    final l$$_isNull = $_isNull;
+    final l$$_lt = $_lt;
+    final l$$_lte = $_lte;
+    final l$$_neq = $_neq;
+    final l$$_nin = $_nin;
+    return Object.hashAll([
+      _$data.containsKey('_eq') ? l$$_eq : const {},
+      _$data.containsKey('_gt') ? l$$_gt : const {},
+      _$data.containsKey('_gte') ? l$$_gte : const {},
+      _$data.containsKey('_in')
+          ? l$$_in == null
+                ? null
+                : Object.hashAll(l$$_in.map((v) => v))
+          : const {},
+      _$data.containsKey('_isNull') ? l$$_isNull : const {},
+      _$data.containsKey('_lt') ? l$$_lt : const {},
+      _$data.containsKey('_lte') ? l$$_lte : const {},
+      _$data.containsKey('_neq') ? l$$_neq : const {},
+      _$data.containsKey('_nin')
+          ? l$$_nin == null
+                ? null
+                : Object.hashAll(l$$_nin.map((v) => v))
+          : const {},
+    ]);
+  }
+}
+
 abstract class CopyWith_Input_NameComparisonExp<TRes> {
   factory CopyWith_Input_NameComparisonExp(
     Input_NameComparisonExp instance,
@@ -2486,47 +2813,4 @@ class Input_PersonTypesBoolExp {
       _$data.containsKey('personsAggregate') ? l$personsAggregate : const {},
     ]);
   }
-}
-
-abstract class CopyWith_Input_PersonTypesBoolExp<TRes> {
-  factory CopyWith_Input_PersonTypesBoolExp(
-    Input_PersonTypesBoolExp instance,
-    TRes Function(Input_PersonTypesBoolExp) then,
-  ) = _CopyWithImpl_Input_PersonTypesBoolExp;
-
-  factory CopyWith_Input_PersonTypesBoolExp.stub(TRes res) =
-      _CopyWithStubImpl_Input_PersonTypesBoolExp;
-
-  TRes call({
-    List<Input_PersonTypesBoolExp>? $_and,
-    Input_PersonTypesBoolExp? $_not,
-    List<Input_PersonTypesBoolExp>? $_or,
-    Input_UuidComparisonExp? id,
-    Input_BooleanComparisonExp? isFamilyAdmin,
-    Input_BooleanComparisonExp? isHidden,
-    Input_StringComparisonExp? name,
-    Input_IntComparisonExp? order,
-    Input_PersonsBoolExp? persons,
-    Input_PersonsAggregateBoolExp? personsAggregate,
-  });
-  TRes $_and(
-    Iterable<Input_PersonTypesBoolExp>? Function(
-      Iterable<CopyWith_Input_PersonTypesBoolExp<Input_PersonTypesBoolExp>>?,
-    )
-    _fn,
-  );
-  CopyWith_Input_PersonTypesBoolExp<TRes> get $_not;
-  TRes $_or(
-    Iterable<Input_PersonTypesBoolExp>? Function(
-      Iterable<CopyWith_Input_PersonTypesBoolExp<Input_PersonTypesBoolExp>>?,
-    )
-    _fn,
-  );
-  CopyWith_Input_UuidComparisonExp<TRes> get id;
-  CopyWith_Input_BooleanComparisonExp<TRes> get isFamilyAdmin;
-  CopyWith_Input_BooleanComparisonExp<TRes> get isHidden;
-  CopyWith_Input_StringComparisonExp<TRes> get name;
-  CopyWith_Input_IntComparisonExp<TRes> get order;
-  CopyWith_Input_PersonsBoolExp<TRes> get persons;
-  CopyWith_Input_PersonsAggregateBoolExp<TRes> get personsAggregate;
 }

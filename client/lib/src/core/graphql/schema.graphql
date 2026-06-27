@@ -1182,34 +1182,6 @@ type Classes {
     orderBy: [AuthUsersAdminOnOrderBy!]
     where: AuthUsersAdminOnBoolExp
   ): [AuthUsersAdminOn!]!
-  attendanceDaysConstraints(
-    distinctOn: [HistoryAttendanceDaysConstraintsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryAttendanceDaysConstraintsOrderBy!]
-    where: HistoryAttendanceDaysConstraintsBoolExp
-  ): [HistoryAttendanceDaysConstraints!]!
-  attendanceDaysConstraintsAggregate(
-    distinctOn: [HistoryAttendanceDaysConstraintsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryAttendanceDaysConstraintsOrderBy!]
-    where: HistoryAttendanceDaysConstraintsBoolExp
-  ): HistoryAttendanceDaysConstraintsAggregate!
-  attendanceHistory(
-    distinctOn: [HistoryAttendanceHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryAttendanceHistoryOrderBy!]
-    where: HistoryAttendanceHistoryBoolExp
-  ): [HistoryAttendanceHistory!]!
-  attendanceHistoryAggregate(
-    distinctOn: [HistoryAttendanceHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryAttendanceHistoryOrderBy!]
-    where: HistoryAttendanceHistoryBoolExp
-  ): HistoryAttendanceHistoryAggregate!
   blurhash: String
   color: bigint
   editHistory(
@@ -1228,6 +1200,13 @@ type Classes {
   ): HistoryEditHistoryAggregate!
   id: uuid!
   lastEdit: HistoryLatestEdits
+  meetings(
+    distinctOn: [HistoryMeetingsSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [HistoryMeetingsOrderBy!]
+    where: HistoryMeetingsBoolExp
+  ): [HistoryMeetings!]!
   name: String!
   persons(
     distinctOn: [ClassesPersonsSelectColumn!]
@@ -1303,16 +1282,13 @@ input ClassesBoolExp {
   _not: ClassesBoolExp
   _or: [ClassesBoolExp!]
   adminUsers: AuthUsersAdminOnBoolExp
-  attendanceDaysConstraints: HistoryAttendanceDaysConstraintsBoolExp
-  attendanceDaysConstraintsAggregate: HistoryAttendanceDaysConstraintsAggregateBoolExp
-  attendanceHistory: HistoryAttendanceHistoryBoolExp
-  attendanceHistoryAggregate: HistoryAttendanceHistoryAggregateBoolExp
   blurhash: StringComparisonExp
   color: BigintComparisonExp
   editHistory: HistoryEditHistoryBoolExp
   editHistoryAggregate: HistoryEditHistoryAggregateBoolExp
   id: UuidComparisonExp
   lastEdit: HistoryLatestEditsBoolExp
+  meetings: HistoryMeetingsBoolExp
   name: StringComparisonExp
   persons: ClassesPersonsBoolExp
   photoUpdatedAt: TimestamptzComparisonExp
@@ -1335,9 +1311,8 @@ input ClassesIncInput {
 
 input ClassesInsertInput {
   adminUsers: AuthUsersAdminOnArrRelInsertInput
-  attendanceDaysConstraints: HistoryAttendanceDaysConstraintsArrRelInsertInput
-  attendanceHistory: HistoryAttendanceHistoryArrRelInsertInput
   color: bigint
+  meetings: HistoryMeetingsArrRelInsertInput
   name: String
   service: ServicesObjRelInsertInput
   serviceGender: Boolean
@@ -1389,11 +1364,6 @@ type ClassesMutationResponse {
   returning: [Classes!]!
 }
 
-input ClassesObjRelInsertInput {
-  data: ClassesInsertInput!
-  onConflict: ClassesOnConflict
-}
-
 input ClassesOnConflict {
   constraint: ClassesConstraint!
   updateColumns: [ClassesUpdateColumn!]! = []
@@ -1401,13 +1371,12 @@ input ClassesOnConflict {
 }
 input ClassesOrderBy {
   adminUsersAggregate: AuthUsersAdminOnAggregateOrderBy
-  attendanceDaysConstraintsAggregate: HistoryAttendanceDaysConstraintsAggregateOrderBy
-  attendanceHistoryAggregate: HistoryAttendanceHistoryAggregateOrderBy
   blurhash: OrderBy
   color: OrderBy
   editHistoryAggregate: HistoryEditHistoryAggregateOrderBy
   id: OrderBy
   lastEdit: HistoryLatestEditsOrderBy
+  meetingsAggregate: HistoryMeetingsAggregateOrderBy
   name: OrderBy
   personsAggregate: ClassesPersonsAggregateOrderBy
   photoUpdatedAt: OrderBy
@@ -2435,34 +2404,6 @@ type Groups {
     orderBy: [AuthUsersAdminOnOrderBy!]
     where: AuthUsersAdminOnBoolExp
   ): [AuthUsersAdminOn!]!
-  attendanceDaysConstraints(
-    distinctOn: [HistoryAttendanceDaysConstraintsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryAttendanceDaysConstraintsOrderBy!]
-    where: HistoryAttendanceDaysConstraintsBoolExp
-  ): [HistoryAttendanceDaysConstraints!]!
-  attendanceDaysConstraintsAggregate(
-    distinctOn: [HistoryAttendanceDaysConstraintsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryAttendanceDaysConstraintsOrderBy!]
-    where: HistoryAttendanceDaysConstraintsBoolExp
-  ): HistoryAttendanceDaysConstraintsAggregate!
-  attendanceHistory(
-    distinctOn: [HistoryAttendanceHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryAttendanceHistoryOrderBy!]
-    where: HistoryAttendanceHistoryBoolExp
-  ): [HistoryAttendanceHistory!]!
-  attendanceHistoryAggregate(
-    distinctOn: [HistoryAttendanceHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryAttendanceHistoryOrderBy!]
-    where: HistoryAttendanceHistoryBoolExp
-  ): HistoryAttendanceHistoryAggregate!
   blurhash: String
   color: bigint
   editHistroy(
@@ -2481,6 +2422,13 @@ type Groups {
   ): HistoryEditHistoryAggregate!
   id: uuid!
   lastEdit: HistoryLatestEdits
+  meetings(
+    distinctOn: [HistoryMeetingsSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [HistoryMeetingsOrderBy!]
+    where: HistoryMeetingsBoolExp
+  ): [HistoryMeetings!]!
   name: String!
   persons(
     distinctOn: [PersonsGroupsSelectColumn!]
@@ -2550,16 +2498,13 @@ input GroupsBoolExp {
   _not: GroupsBoolExp
   _or: [GroupsBoolExp!]
   adminUsers: AuthUsersAdminOnBoolExp
-  attendanceDaysConstraints: HistoryAttendanceDaysConstraintsBoolExp
-  attendanceDaysConstraintsAggregate: HistoryAttendanceDaysConstraintsAggregateBoolExp
-  attendanceHistory: HistoryAttendanceHistoryBoolExp
-  attendanceHistoryAggregate: HistoryAttendanceHistoryAggregateBoolExp
   blurhash: StringComparisonExp
   color: BigintComparisonExp
   editHistroy: HistoryEditHistoryBoolExp
   editHistroyAggregate: HistoryEditHistoryAggregateBoolExp
   id: UuidComparisonExp
   lastEdit: HistoryLatestEditsBoolExp
+  meetings: HistoryMeetingsBoolExp
   name: StringComparisonExp
   persons: PersonsGroupsBoolExp
   photoUpdatedAt: TimestamptzComparisonExp
@@ -2579,9 +2524,8 @@ input GroupsIncInput {
 
 input GroupsInsertInput {
   adminUsers: AuthUsersAdminOnArrRelInsertInput
-  attendanceDaysConstraints: HistoryAttendanceDaysConstraintsArrRelInsertInput
-  attendanceHistory: HistoryAttendanceHistoryArrRelInsertInput
   color: bigint
+  meetings: HistoryMeetingsArrRelInsertInput
   name: String
   persons: PersonsGroupsArrRelInsertInput
   service: ServicesObjRelInsertInput
@@ -2640,13 +2584,12 @@ input GroupsOnConflict {
 }
 input GroupsOrderBy {
   adminUsersAggregate: AuthUsersAdminOnAggregateOrderBy
-  attendanceDaysConstraintsAggregate: HistoryAttendanceDaysConstraintsAggregateOrderBy
-  attendanceHistoryAggregate: HistoryAttendanceHistoryAggregateOrderBy
   blurhash: OrderBy
   color: OrderBy
   editHistroyAggregate: HistoryEditHistoryAggregateOrderBy
   id: OrderBy
   lastEdit: HistoryLatestEditsOrderBy
+  meetingsAggregate: HistoryMeetingsAggregateOrderBy
   name: OrderBy
   personsAggregate: PersonsGroupsAggregateOrderBy
   photoUpdatedAt: OrderBy
@@ -2753,20 +2696,6 @@ input GroupsVarianceOrderBy {
 }
 
 type HistoryAttendanceDays {
-  attendanceHistory(
-    distinctOn: [HistoryAttendanceHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryAttendanceHistoryOrderBy!]
-    where: HistoryAttendanceHistoryBoolExp
-  ): [HistoryAttendanceHistory!]!
-  attendanceHistoryAggregate(
-    distinctOn: [HistoryAttendanceHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryAttendanceHistoryOrderBy!]
-    where: HistoryAttendanceHistoryBoolExp
-  ): HistoryAttendanceHistoryAggregate!
   confessionHistory(
     distinctOn: [HistoryConfessionHistorySelectColumn!]
     limit: Int
@@ -2781,20 +2710,6 @@ type HistoryAttendanceDays {
     orderBy: [HistoryConfessionHistoryOrderBy!]
     where: HistoryConfessionHistoryBoolExp
   ): HistoryConfessionHistoryAggregate!
-  constraints(
-    distinctOn: [HistoryAttendanceDaysConstraintsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryAttendanceDaysConstraintsOrderBy!]
-    where: HistoryAttendanceDaysConstraintsBoolExp
-  ): [HistoryAttendanceDaysConstraints!]!
-  constraintsAggregate(
-    distinctOn: [HistoryAttendanceDaysConstraintsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryAttendanceDaysConstraintsOrderBy!]
-    where: HistoryAttendanceDaysConstraintsBoolExp
-  ): HistoryAttendanceDaysConstraintsAggregate!
   day: date!
   kodasHistory(
     distinctOn: [HistoryKodasHistorySelectColumn!]
@@ -2817,12 +2732,8 @@ input HistoryAttendanceDaysBoolExp {
   _and: [HistoryAttendanceDaysBoolExp!]
   _not: HistoryAttendanceDaysBoolExp
   _or: [HistoryAttendanceDaysBoolExp!]
-  attendanceHistory: HistoryAttendanceHistoryBoolExp
-  attendanceHistoryAggregate: HistoryAttendanceHistoryAggregateBoolExp
   confessionHistory: HistoryConfessionHistoryBoolExp
   confessionHistoryAggregate: HistoryConfessionHistoryAggregateBoolExp
-  constraints: HistoryAttendanceDaysConstraintsBoolExp
-  constraintsAggregate: HistoryAttendanceDaysConstraintsAggregateBoolExp
   day: DateComparisonExp
   kodasHistory: HistoryKodasHistoryBoolExp
   kodasHistoryAggregate: HistoryKodasHistoryAggregateBoolExp
@@ -2833,244 +2744,8 @@ enum HistoryAttendanceDaysConstraint {
   attendance_days_pkey
 }
 
-type HistoryAttendanceDaysConstraints {
-  day: HistoryAttendanceDays!
-  dayId: date!
-  group: Groups
-  groupId: uuid
-  id: uuid!
-  service: Services!
-  serviceGender: Boolean
-  serviceId: uuid!
-  serviceStudyYear: Int
-  studyYear: StudyYears
-}
-
-type HistoryAttendanceDaysConstraintsAggregate {
-  aggregate: HistoryAttendanceDaysConstraintsAggregateFields
-  nodes: [HistoryAttendanceDaysConstraints!]!
-}
-
-input HistoryAttendanceDaysConstraintsAggregateBoolExp {
-  bool_and: historyAttendanceDaysConstraintsAggregateBoolExpBool_and
-  bool_or: historyAttendanceDaysConstraintsAggregateBoolExpBool_or
-  count: historyAttendanceDaysConstraintsAggregateBoolExpCount
-}
-
-type HistoryAttendanceDaysConstraintsAggregateFields {
-  avg: HistoryAttendanceDaysConstraintsAvgFields
-  count(columns: [HistoryAttendanceDaysConstraintsSelectColumn!], distinct: Boolean): Int!
-  max: HistoryAttendanceDaysConstraintsMaxFields
-  min: HistoryAttendanceDaysConstraintsMinFields
-  stddev: HistoryAttendanceDaysConstraintsStddevFields
-  stddevPop: HistoryAttendanceDaysConstraintsStddevPopFields
-  stddevSamp: HistoryAttendanceDaysConstraintsStddevSampFields
-  sum: HistoryAttendanceDaysConstraintsSumFields
-  varPop: HistoryAttendanceDaysConstraintsVarPopFields
-  varSamp: HistoryAttendanceDaysConstraintsVarSampFields
-  variance: HistoryAttendanceDaysConstraintsVarianceFields
-}
-
-input HistoryAttendanceDaysConstraintsAggregateOrderBy {
-  avg: HistoryAttendanceDaysConstraintsAvgOrderBy
-  count: OrderBy
-  max: HistoryAttendanceDaysConstraintsMaxOrderBy
-  min: HistoryAttendanceDaysConstraintsMinOrderBy
-  stddev: HistoryAttendanceDaysConstraintsStddevOrderBy
-  stddevPop: HistoryAttendanceDaysConstraintsStddevPopOrderBy
-  stddevSamp: HistoryAttendanceDaysConstraintsStddevSampOrderBy
-  sum: HistoryAttendanceDaysConstraintsSumOrderBy
-  varPop: HistoryAttendanceDaysConstraintsVarPopOrderBy
-  varSamp: HistoryAttendanceDaysConstraintsVarSampOrderBy
-  variance: HistoryAttendanceDaysConstraintsVarianceOrderBy
-}
-
-input HistoryAttendanceDaysConstraintsArrRelInsertInput {
-  data: [HistoryAttendanceDaysConstraintsInsertInput!]!
-  onConflict: HistoryAttendanceDaysConstraintsOnConflict
-}
-type HistoryAttendanceDaysConstraintsAvgFields {
-  serviceStudyYear: Float
-}
-
-input HistoryAttendanceDaysConstraintsAvgOrderBy {
-  serviceStudyYear: OrderBy
-}
-
-input HistoryAttendanceDaysConstraintsBoolExp {
-  _and: [HistoryAttendanceDaysConstraintsBoolExp!]
-  _not: HistoryAttendanceDaysConstraintsBoolExp
-  _or: [HistoryAttendanceDaysConstraintsBoolExp!]
-  day: HistoryAttendanceDaysBoolExp
-  dayId: DateComparisonExp
-  group: GroupsBoolExp
-  groupId: UuidComparisonExp
-  id: UuidComparisonExp
-  service: ServicesBoolExp
-  serviceGender: BooleanComparisonExp
-  serviceId: UuidComparisonExp
-  serviceStudyYear: IntComparisonExp
-  studyYear: StudyYearsBoolExp
-}
-
-enum HistoryAttendanceDaysConstraintsConstraint {
-  attendance_days_constraints_day_service_service_study_year_s_ke
-  attendance_days_constraints_pkey
-}
-
-input HistoryAttendanceDaysConstraintsInsertInput {
-  day: HistoryAttendanceDaysObjRelInsertInput
-  dayId: date
-  group: GroupsObjRelInsertInput
-  groupId: uuid
-  service: ServicesObjRelInsertInput
-  serviceGender: Boolean
-  serviceId: uuid
-  serviceStudyYear: Int
-  studyYear: StudyYearsObjRelInsertInput
-}
-type HistoryAttendanceDaysConstraintsMaxFields {
-  dayId: date
-  groupId: uuid
-  id: uuid
-  serviceId: uuid
-  serviceStudyYear: Int
-}
-
-input HistoryAttendanceDaysConstraintsMaxOrderBy {
-  dayId: OrderBy
-  groupId: OrderBy
-  id: OrderBy
-  serviceId: OrderBy
-  serviceStudyYear: OrderBy
-}
-type HistoryAttendanceDaysConstraintsMinFields {
-  dayId: date
-  groupId: uuid
-  id: uuid
-  serviceId: uuid
-  serviceStudyYear: Int
-}
-
-input HistoryAttendanceDaysConstraintsMinOrderBy {
-  dayId: OrderBy
-  groupId: OrderBy
-  id: OrderBy
-  serviceId: OrderBy
-  serviceStudyYear: OrderBy
-}
-
-type HistoryAttendanceDaysConstraintsMutationResponse {
-  affectedRows: Int!
-  returning: [HistoryAttendanceDaysConstraints!]!
-}
-
-input HistoryAttendanceDaysConstraintsOnConflict {
-  constraint: HistoryAttendanceDaysConstraintsConstraint!
-  updateColumns: [HistoryAttendanceDaysConstraintsUpdateColumn!]! = []
-  where: HistoryAttendanceDaysConstraintsBoolExp
-}
-
-input HistoryAttendanceDaysConstraintsOrderBy {
-  day: HistoryAttendanceDaysOrderBy
-  dayId: OrderBy
-  group: GroupsOrderBy
-  groupId: OrderBy
-  id: OrderBy
-  service: ServicesOrderBy
-  serviceGender: OrderBy
-  serviceId: OrderBy
-  serviceStudyYear: OrderBy
-  studyYear: StudyYearsOrderBy
-}
-
-enum HistoryAttendanceDaysConstraintsSelectColumn {
-  dayId
-  groupId
-  id
-  serviceGender
-  serviceId
-  serviceStudyYear
-}
-
-enum HistoryAttendanceDaysConstraintsSelectColumnHistoryAttendanceDaysConstraintsAggregateBoolExpBool_andArgumentsColumns {
-  serviceGender
-}
-
-enum HistoryAttendanceDaysConstraintsSelectColumnHistoryAttendanceDaysConstraintsAggregateBoolExpBool_orArgumentsColumns {
-  serviceGender
-}
-type HistoryAttendanceDaysConstraintsStddevFields {
-  serviceStudyYear: Float
-}
-
-input HistoryAttendanceDaysConstraintsStddevOrderBy {
-  serviceStudyYear: OrderBy
-}
-type HistoryAttendanceDaysConstraintsStddevPopFields {
-  serviceStudyYear: Float
-}
-
-input HistoryAttendanceDaysConstraintsStddevPopOrderBy {
-  serviceStudyYear: OrderBy
-}
-type HistoryAttendanceDaysConstraintsStddevSampFields {
-  serviceStudyYear: Float
-}
-
-input HistoryAttendanceDaysConstraintsStddevSampOrderBy {
-  serviceStudyYear: OrderBy
-}
-
-input HistoryAttendanceDaysConstraintsStreamCursorInput {
-  initialValue: HistoryAttendanceDaysConstraintsStreamCursorValueInput!
-  ordering: CursorOrdering
-}
-input HistoryAttendanceDaysConstraintsStreamCursorValueInput {
-  dayId: date
-  groupId: uuid
-  id: uuid
-  serviceGender: Boolean
-  serviceId: uuid
-  serviceStudyYear: Int
-}
-type HistoryAttendanceDaysConstraintsSumFields {
-  serviceStudyYear: Int
-}
-
-input HistoryAttendanceDaysConstraintsSumOrderBy {
-  serviceStudyYear: OrderBy
-}
-
-enum HistoryAttendanceDaysConstraintsUpdateColumn {
-  _PLACEHOLDER
-}
-type HistoryAttendanceDaysConstraintsVarPopFields {
-  serviceStudyYear: Float
-}
-
-input HistoryAttendanceDaysConstraintsVarPopOrderBy {
-  serviceStudyYear: OrderBy
-}
-type HistoryAttendanceDaysConstraintsVarSampFields {
-  serviceStudyYear: Float
-}
-
-input HistoryAttendanceDaysConstraintsVarSampOrderBy {
-  serviceStudyYear: OrderBy
-}
-type HistoryAttendanceDaysConstraintsVarianceFields {
-  serviceStudyYear: Float
-}
-
-input HistoryAttendanceDaysConstraintsVarianceOrderBy {
-  serviceStudyYear: OrderBy
-}
-
 input HistoryAttendanceDaysInsertInput {
-  attendanceHistory: HistoryAttendanceHistoryArrRelInsertInput
   confessionHistory: HistoryConfessionHistoryArrRelInsertInput
-  constraints: HistoryAttendanceDaysConstraintsArrRelInsertInput
   day: date
   kodasHistory: HistoryKodasHistoryArrRelInsertInput
   notes: String
@@ -3092,9 +2767,7 @@ input HistoryAttendanceDaysOnConflict {
   where: HistoryAttendanceDaysBoolExp
 }
 input HistoryAttendanceDaysOrderBy {
-  attendanceHistoryAggregate: HistoryAttendanceHistoryAggregateOrderBy
   confessionHistoryAggregate: HistoryConfessionHistoryAggregateOrderBy
-  constraintsAggregate: HistoryAttendanceDaysConstraintsAggregateOrderBy
   day: OrderBy
   kodasHistoryAggregate: HistoryKodasHistoryAggregateOrderBy
   notes: OrderBy
@@ -3133,23 +2806,15 @@ input HistoryAttendanceDaysUpdates {
 }
 
 type HistoryAttendanceHistory {
-  asAdmin: Boolean!
-  class: Classes
-  day: HistoryAttendanceDays!
-  dayId: date!
-  group: Groups
-  groupId: uuid
+  asServant: Boolean!
+  datetime: timestamptz!
   id: uuid!
+  meeting: HistoryMeetings!
+  meetingId: uuid!
   person: Persons!
   personId: uuid!
   recordedBy: uuid!
   recordedByUser: AuthUsersData!
-  service: Services!
-  serviceGender: Boolean
-  serviceId: uuid!
-  serviceStudyYear: Int
-  studyYear: StudyYears
-  time: timestamp!
 }
 
 type HistoryAttendanceHistoryAggregate {
@@ -3164,130 +2829,79 @@ input HistoryAttendanceHistoryAggregateBoolExp {
 }
 
 type HistoryAttendanceHistoryAggregateFields {
-  avg: HistoryAttendanceHistoryAvgFields
   count(columns: [HistoryAttendanceHistorySelectColumn!], distinct: Boolean): Int!
   max: HistoryAttendanceHistoryMaxFields
   min: HistoryAttendanceHistoryMinFields
-  stddev: HistoryAttendanceHistoryStddevFields
-  stddevPop: HistoryAttendanceHistoryStddevPopFields
-  stddevSamp: HistoryAttendanceHistoryStddevSampFields
-  sum: HistoryAttendanceHistorySumFields
-  varPop: HistoryAttendanceHistoryVarPopFields
-  varSamp: HistoryAttendanceHistoryVarSampFields
-  variance: HistoryAttendanceHistoryVarianceFields
 }
 
 input HistoryAttendanceHistoryAggregateOrderBy {
-  avg: HistoryAttendanceHistoryAvgOrderBy
   count: OrderBy
   max: HistoryAttendanceHistoryMaxOrderBy
   min: HistoryAttendanceHistoryMinOrderBy
-  stddev: HistoryAttendanceHistoryStddevOrderBy
-  stddevPop: HistoryAttendanceHistoryStddevPopOrderBy
-  stddevSamp: HistoryAttendanceHistoryStddevSampOrderBy
-  sum: HistoryAttendanceHistorySumOrderBy
-  varPop: HistoryAttendanceHistoryVarPopOrderBy
-  varSamp: HistoryAttendanceHistoryVarSampOrderBy
-  variance: HistoryAttendanceHistoryVarianceOrderBy
 }
 
 input HistoryAttendanceHistoryArrRelInsertInput {
   data: [HistoryAttendanceHistoryInsertInput!]!
   onConflict: HistoryAttendanceHistoryOnConflict
 }
-type HistoryAttendanceHistoryAvgFields {
-  serviceStudyYear: Float
-}
-
-input HistoryAttendanceHistoryAvgOrderBy {
-  serviceStudyYear: OrderBy
-}
 
 input HistoryAttendanceHistoryBoolExp {
   _and: [HistoryAttendanceHistoryBoolExp!]
   _not: HistoryAttendanceHistoryBoolExp
   _or: [HistoryAttendanceHistoryBoolExp!]
-  asAdmin: BooleanComparisonExp
-  class: ClassesBoolExp
-  day: HistoryAttendanceDaysBoolExp
-  dayId: DateComparisonExp
-  group: GroupsBoolExp
-  groupId: UuidComparisonExp
+  asServant: BooleanComparisonExp
+  datetime: TimestamptzComparisonExp
   id: UuidComparisonExp
+  meeting: HistoryMeetingsBoolExp
+  meetingId: UuidComparisonExp
   person: PersonsBoolExp
   personId: UuidComparisonExp
   recordedBy: UuidComparisonExp
   recordedByUser: AuthUsersDataBoolExp
-  service: ServicesBoolExp
-  serviceGender: BooleanComparisonExp
-  serviceId: UuidComparisonExp
-  serviceStudyYear: IntComparisonExp
-  studyYear: StudyYearsBoolExp
-  time: TimestampComparisonExp
 }
 
 enum HistoryAttendanceHistoryConstraint {
-  attendance_history_day_id_service_id_group_id_person_id_key
+  attendance_history_meeting_person_day_idx
   attendance_history_pkey
 }
 
 input HistoryAttendanceHistoryInsertInput {
-  asAdmin: Boolean
-  class: ClassesObjRelInsertInput
-  day: HistoryAttendanceDaysObjRelInsertInput
-  dayId: date
-  group: GroupsObjRelInsertInput
-  groupId: uuid
+  asServant: Boolean
+  datetime: timestamptz
+  meeting: HistoryMeetingsObjRelInsertInput
+  meetingId: uuid
   person: PersonsObjRelInsertInput
   personId: uuid
-  service: ServicesObjRelInsertInput
-  serviceGender: Boolean
-  serviceId: uuid
-  serviceStudyYear: Int
-  studyYear: StudyYearsObjRelInsertInput
-  time: timestamp
 }
 type HistoryAttendanceHistoryMaxFields {
-  dayId: date
-  groupId: uuid
+  datetime: timestamptz
   id: uuid
+  meetingId: uuid
   personId: uuid
   recordedBy: uuid
-  serviceId: uuid
-  serviceStudyYear: Int
-  time: timestamp
 }
 
 input HistoryAttendanceHistoryMaxOrderBy {
-  dayId: OrderBy
-  groupId: OrderBy
+  datetime: OrderBy
   id: OrderBy
+  meetingId: OrderBy
   personId: OrderBy
   recordedBy: OrderBy
-  serviceId: OrderBy
-  serviceStudyYear: OrderBy
-  time: OrderBy
 }
 type HistoryAttendanceHistoryMinFields {
-  dayId: date
-  groupId: uuid
+  datetime: timestamptz
   id: uuid
+  meetingId: uuid
   personId: uuid
   recordedBy: uuid
-  serviceId: uuid
-  serviceStudyYear: Int
-  time: timestamp
 }
 
 input HistoryAttendanceHistoryMinOrderBy {
-  dayId: OrderBy
-  groupId: OrderBy
+  datetime: OrderBy
   id: OrderBy
+  meetingId: OrderBy
   personId: OrderBy
   recordedBy: OrderBy
-  serviceId: OrderBy
-  serviceStudyYear: OrderBy
-  time: OrderBy
 }
 
 type HistoryAttendanceHistoryMutationResponse {
@@ -3302,78 +2916,39 @@ input HistoryAttendanceHistoryOnConflict {
 }
 
 input HistoryAttendanceHistoryOrderBy {
-  asAdmin: OrderBy
-  class: ClassesOrderBy
-  day: HistoryAttendanceDaysOrderBy
-  dayId: OrderBy
-  group: GroupsOrderBy
-  groupId: OrderBy
+  asServant: OrderBy
+  datetime: OrderBy
   id: OrderBy
+  meeting: HistoryMeetingsOrderBy
+  meetingId: OrderBy
   person: PersonsOrderBy
   personId: OrderBy
   recordedBy: OrderBy
   recordedByUser: AuthUsersDataOrderBy
-  service: ServicesOrderBy
-  serviceGender: OrderBy
-  serviceId: OrderBy
-  serviceStudyYear: OrderBy
-  studyYear: StudyYearsOrderBy
-  time: OrderBy
 }
 input HistoryAttendanceHistoryPkColumnsInput {
   id: uuid!
 }
 
 enum HistoryAttendanceHistorySelectColumn {
-  asAdmin
-  dayId
-  groupId
+  asServant
+  datetime
   id
+  meetingId
   personId
   recordedBy
-  serviceGender
-  serviceId
-  serviceStudyYear
-  time
 }
 
 enum HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_andArgumentsColumns {
-  asAdmin
-  serviceGender
+  asServant
 }
 
 enum HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_orArgumentsColumns {
-  asAdmin
-  serviceGender
+  asServant
 }
 
 input HistoryAttendanceHistorySetInput {
-  dayId: date
-  groupId: uuid
-  personId: uuid
-  serviceId: uuid
-  time: timestamp
-}
-type HistoryAttendanceHistoryStddevFields {
-  serviceStudyYear: Float
-}
-
-input HistoryAttendanceHistoryStddevOrderBy {
-  serviceStudyYear: OrderBy
-}
-type HistoryAttendanceHistoryStddevPopFields {
-  serviceStudyYear: Float
-}
-
-input HistoryAttendanceHistoryStddevPopOrderBy {
-  serviceStudyYear: OrderBy
-}
-type HistoryAttendanceHistoryStddevSampFields {
-  serviceStudyYear: Float
-}
-
-input HistoryAttendanceHistoryStddevSampOrderBy {
-  serviceStudyYear: OrderBy
+  datetime: timestamptz
 }
 
 input HistoryAttendanceHistoryStreamCursorInput {
@@ -3381,57 +2956,21 @@ input HistoryAttendanceHistoryStreamCursorInput {
   ordering: CursorOrdering
 }
 input HistoryAttendanceHistoryStreamCursorValueInput {
-  asAdmin: Boolean
-  dayId: date
-  groupId: uuid
+  asServant: Boolean
+  datetime: timestamptz
   id: uuid
+  meetingId: uuid
   personId: uuid
   recordedBy: uuid
-  serviceGender: Boolean
-  serviceId: uuid
-  serviceStudyYear: Int
-  time: timestamp
-}
-type HistoryAttendanceHistorySumFields {
-  serviceStudyYear: Int
-}
-
-input HistoryAttendanceHistorySumOrderBy {
-  serviceStudyYear: OrderBy
 }
 
 enum HistoryAttendanceHistoryUpdateColumn {
-  dayId
-  groupId
-  personId
-  serviceId
-  time
+  datetime
 }
 
 input HistoryAttendanceHistoryUpdates {
   _set: HistoryAttendanceHistorySetInput
   where: HistoryAttendanceHistoryBoolExp!
-}
-type HistoryAttendanceHistoryVarPopFields {
-  serviceStudyYear: Float
-}
-
-input HistoryAttendanceHistoryVarPopOrderBy {
-  serviceStudyYear: OrderBy
-}
-type HistoryAttendanceHistoryVarSampFields {
-  serviceStudyYear: Float
-}
-
-input HistoryAttendanceHistoryVarSampOrderBy {
-  serviceStudyYear: OrderBy
-}
-type HistoryAttendanceHistoryVarianceFields {
-  serviceStudyYear: Float
-}
-
-input HistoryAttendanceHistoryVarianceOrderBy {
-  serviceStudyYear: OrderBy
 }
 
 type HistoryCallHistory {
@@ -4077,6 +3616,349 @@ input HistoryLatestVisitsOrderBy {
   visitId: OrderBy
 }
 
+type HistoryMeetings {
+  archived: Boolean!
+  attendanceHistory(
+    distinctOn: [HistoryAttendanceHistorySelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [HistoryAttendanceHistoryOrderBy!]
+    where: HistoryAttendanceHistoryBoolExp
+  ): [HistoryAttendanceHistory!]!
+  attendanceHistoryAggregate(
+    distinctOn: [HistoryAttendanceHistorySelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [HistoryAttendanceHistoryOrderBy!]
+    where: HistoryAttendanceHistoryBoolExp
+  ): HistoryAttendanceHistoryAggregate!
+  audience: meeting_audience!
+  color: bigint
+  group: Groups
+  groupId: uuid
+  id: uuid!
+  name: String!
+  persons(
+    distinctOn: [HistoryMeetingsPersonsSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [HistoryMeetingsPersonsOrderBy!]
+    where: HistoryMeetingsPersonsBoolExp
+  ): [HistoryMeetingsPersons!]!
+  personsAggregate(
+    distinctOn: [HistoryMeetingsPersonsSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [HistoryMeetingsPersonsOrderBy!]
+    where: HistoryMeetingsPersonsBoolExp
+  ): HistoryMeetingsPersonsAggregate!
+  service: Services
+  serviceGender: Boolean
+  serviceId: uuid
+  serviceStudyYear: Int
+  studyYear: StudyYears
+}
+
+input HistoryMeetingsAggregateOrderBy {
+  avg: HistoryMeetingsAvgOrderBy
+  count: OrderBy
+  max: HistoryMeetingsMaxOrderBy
+  min: HistoryMeetingsMinOrderBy
+  stddev: HistoryMeetingsStddevOrderBy
+  stddevPop: HistoryMeetingsStddevPopOrderBy
+  stddevSamp: HistoryMeetingsStddevSampOrderBy
+  sum: HistoryMeetingsSumOrderBy
+  varPop: HistoryMeetingsVarPopOrderBy
+  varSamp: HistoryMeetingsVarSampOrderBy
+  variance: HistoryMeetingsVarianceOrderBy
+}
+
+input HistoryMeetingsArrRelInsertInput {
+  data: [HistoryMeetingsInsertInput!]!
+  onConflict: HistoryMeetingsOnConflict
+}
+
+input HistoryMeetingsAvgOrderBy {
+  color: OrderBy
+  serviceStudyYear: OrderBy
+}
+
+input HistoryMeetingsBoolExp {
+  _and: [HistoryMeetingsBoolExp!]
+  _not: HistoryMeetingsBoolExp
+  _or: [HistoryMeetingsBoolExp!]
+  archived: BooleanComparisonExp
+  attendanceHistory: HistoryAttendanceHistoryBoolExp
+  attendanceHistoryAggregate: HistoryAttendanceHistoryAggregateBoolExp
+  audience: MeetingAudienceComparisonExp
+  color: BigintComparisonExp
+  group: GroupsBoolExp
+  groupId: UuidComparisonExp
+  id: UuidComparisonExp
+  name: StringComparisonExp
+  persons: HistoryMeetingsPersonsBoolExp
+  personsAggregate: HistoryMeetingsPersonsAggregateBoolExp
+  service: ServicesBoolExp
+  serviceGender: BooleanComparisonExp
+  serviceId: UuidComparisonExp
+  serviceStudyYear: IntComparisonExp
+  studyYear: StudyYearsBoolExp
+}
+
+enum HistoryMeetingsConstraint {
+  meetings_pkey
+}
+
+input HistoryMeetingsIncInput {
+  color: bigint
+}
+
+input HistoryMeetingsInsertInput {
+  archived: Boolean
+  attendanceHistory: HistoryAttendanceHistoryArrRelInsertInput
+  audience: meeting_audience
+  color: bigint
+  group: GroupsObjRelInsertInput
+  groupId: uuid
+  name: String
+  service: ServicesObjRelInsertInput
+  serviceGender: Boolean
+  serviceId: uuid
+  serviceStudyYear: Int
+  studyYear: StudyYearsObjRelInsertInput
+}
+
+input HistoryMeetingsMaxOrderBy {
+  audience: OrderBy
+  color: OrderBy
+  groupId: OrderBy
+  id: OrderBy
+  name: OrderBy
+  serviceId: OrderBy
+  serviceStudyYear: OrderBy
+}
+
+input HistoryMeetingsMinOrderBy {
+  audience: OrderBy
+  color: OrderBy
+  groupId: OrderBy
+  id: OrderBy
+  name: OrderBy
+  serviceId: OrderBy
+  serviceStudyYear: OrderBy
+}
+
+type HistoryMeetingsMutationResponse {
+  affectedRows: Int!
+  returning: [HistoryMeetings!]!
+}
+
+input HistoryMeetingsObjRelInsertInput {
+  data: HistoryMeetingsInsertInput!
+  onConflict: HistoryMeetingsOnConflict
+}
+
+input HistoryMeetingsOnConflict {
+  constraint: HistoryMeetingsConstraint!
+  updateColumns: [HistoryMeetingsUpdateColumn!]! = []
+  where: HistoryMeetingsBoolExp
+}
+input HistoryMeetingsOrderBy {
+  archived: OrderBy
+  attendanceHistoryAggregate: HistoryAttendanceHistoryAggregateOrderBy
+  audience: OrderBy
+  color: OrderBy
+  group: GroupsOrderBy
+  groupId: OrderBy
+  id: OrderBy
+  name: OrderBy
+  personsAggregate: HistoryMeetingsPersonsAggregateOrderBy
+  service: ServicesOrderBy
+  serviceGender: OrderBy
+  serviceId: OrderBy
+  serviceStudyYear: OrderBy
+  studyYear: StudyYearsOrderBy
+}
+
+type HistoryMeetingsPersons {
+  attendanceHistory(
+    distinctOn: [HistoryAttendanceHistorySelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [HistoryAttendanceHistoryOrderBy!]
+    where: HistoryAttendanceHistoryBoolExp
+  ): [HistoryAttendanceHistory!]!
+  attendanceHistoryAggregate(
+    distinctOn: [HistoryAttendanceHistorySelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [HistoryAttendanceHistoryOrderBy!]
+    where: HistoryAttendanceHistoryBoolExp
+  ): HistoryAttendanceHistoryAggregate!
+  meeting: HistoryMeetings
+  meetingId: uuid
+  person: Persons
+  personId: uuid
+}
+
+type HistoryMeetingsPersonsAggregate {
+  aggregate: HistoryMeetingsPersonsAggregateFields
+  nodes: [HistoryMeetingsPersons!]!
+}
+
+input HistoryMeetingsPersonsAggregateBoolExp {
+  count: historyMeetingsPersonsAggregateBoolExpCount
+}
+
+type HistoryMeetingsPersonsAggregateFields {
+  count(columns: [HistoryMeetingsPersonsSelectColumn!], distinct: Boolean): Int!
+  max: HistoryMeetingsPersonsMaxFields
+  min: HistoryMeetingsPersonsMinFields
+}
+
+input HistoryMeetingsPersonsAggregateOrderBy {
+  count: OrderBy
+  max: HistoryMeetingsPersonsMaxOrderBy
+  min: HistoryMeetingsPersonsMinOrderBy
+}
+
+input HistoryMeetingsPersonsBoolExp {
+  _and: [HistoryMeetingsPersonsBoolExp!]
+  _not: HistoryMeetingsPersonsBoolExp
+  _or: [HistoryMeetingsPersonsBoolExp!]
+  attendanceHistory: HistoryAttendanceHistoryBoolExp
+  attendanceHistoryAggregate: HistoryAttendanceHistoryAggregateBoolExp
+  meeting: HistoryMeetingsBoolExp
+  meetingId: UuidComparisonExp
+  person: PersonsBoolExp
+  personId: UuidComparisonExp
+}
+type HistoryMeetingsPersonsMaxFields {
+  meetingId: uuid
+  personId: uuid
+}
+
+input HistoryMeetingsPersonsMaxOrderBy {
+  meetingId: OrderBy
+  personId: OrderBy
+}
+type HistoryMeetingsPersonsMinFields {
+  meetingId: uuid
+  personId: uuid
+}
+
+input HistoryMeetingsPersonsMinOrderBy {
+  meetingId: OrderBy
+  personId: OrderBy
+}
+input HistoryMeetingsPersonsOrderBy {
+  attendanceHistoryAggregate: HistoryAttendanceHistoryAggregateOrderBy
+  meeting: HistoryMeetingsOrderBy
+  meetingId: OrderBy
+  person: PersonsOrderBy
+  personId: OrderBy
+}
+
+enum HistoryMeetingsPersonsSelectColumn {
+  meetingId
+  personId
+}
+
+input HistoryMeetingsPersonsStreamCursorInput {
+  initialValue: HistoryMeetingsPersonsStreamCursorValueInput!
+  ordering: CursorOrdering
+}
+input HistoryMeetingsPersonsStreamCursorValueInput {
+  meetingId: uuid
+  personId: uuid
+}
+input HistoryMeetingsPkColumnsInput {
+  id: uuid!
+}
+
+enum HistoryMeetingsSelectColumn {
+  archived
+  audience
+  color
+  groupId
+  id
+  name
+  serviceGender
+  serviceId
+  serviceStudyYear
+}
+
+input HistoryMeetingsSetInput {
+  archived: Boolean
+  audience: meeting_audience
+  color: bigint
+  name: String
+}
+
+input HistoryMeetingsStddevOrderBy {
+  color: OrderBy
+  serviceStudyYear: OrderBy
+}
+
+input HistoryMeetingsStddevPopOrderBy {
+  color: OrderBy
+  serviceStudyYear: OrderBy
+}
+
+input HistoryMeetingsStddevSampOrderBy {
+  color: OrderBy
+  serviceStudyYear: OrderBy
+}
+
+input HistoryMeetingsStreamCursorInput {
+  initialValue: HistoryMeetingsStreamCursorValueInput!
+  ordering: CursorOrdering
+}
+input HistoryMeetingsStreamCursorValueInput {
+  archived: Boolean
+  audience: meeting_audience
+  color: bigint
+  groupId: uuid
+  id: uuid
+  name: String
+  serviceGender: Boolean
+  serviceId: uuid
+  serviceStudyYear: Int
+}
+
+input HistoryMeetingsSumOrderBy {
+  color: OrderBy
+  serviceStudyYear: OrderBy
+}
+
+enum HistoryMeetingsUpdateColumn {
+  archived
+  audience
+  color
+  name
+}
+
+input HistoryMeetingsUpdates {
+  _inc: HistoryMeetingsIncInput
+  _set: HistoryMeetingsSetInput
+  where: HistoryMeetingsBoolExp!
+}
+
+input HistoryMeetingsVarPopOrderBy {
+  color: OrderBy
+  serviceStudyYear: OrderBy
+}
+
+input HistoryMeetingsVarSampOrderBy {
+  color: OrderBy
+  serviceStudyYear: OrderBy
+}
+
+input HistoryMeetingsVarianceOrderBy {
+  color: OrderBy
+  serviceStudyYear: OrderBy
+}
+
 type HistoryVisitHistory {
   isFatherVisit: Boolean!
   recordId: uuid!
@@ -4450,6 +4332,18 @@ input JsonbComparisonExp {
   _nin: [jsonb!]
 }
 
+input MeetingAudienceComparisonExp {
+  _eq: meeting_audience
+  _gt: meeting_audience
+  _gte: meeting_audience
+  _in: [meeting_audience!]
+  _isNull: Boolean
+  _lt: meeting_audience
+  _lte: meeting_audience
+  _neq: meeting_audience
+  _nin: [meeting_audience!]
+}
+
 input NameComparisonExp {
   _eq: name
   _gt: name
@@ -4800,6 +4694,20 @@ type Persons {
   lastVisit: HistoryLatestVisits
   mainPhone: String
   martialStatus: String!
+  meetings(
+    distinctOn: [HistoryMeetingsPersonsSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [HistoryMeetingsPersonsOrderBy!]
+    where: HistoryMeetingsPersonsBoolExp
+  ): [HistoryMeetingsPersons!]!
+  meetingsAggregate(
+    distinctOn: [HistoryMeetingsPersonsSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [HistoryMeetingsPersonsOrderBy!]
+    where: HistoryMeetingsPersonsBoolExp
+  ): HistoryMeetingsPersonsAggregate!
   name: String!
   nationalId: Int
   notes: String
@@ -4961,6 +4869,8 @@ input PersonsBoolExp {
   lastVisit: HistoryLatestVisitsBoolExp
   mainPhone: StringComparisonExp
   martialStatus: StringComparisonExp
+  meetings: HistoryMeetingsPersonsBoolExp
+  meetingsAggregate: HistoryMeetingsPersonsAggregateBoolExp
   name: StringComparisonExp
   nationalId: IntComparisonExp
   notes: StringComparisonExp
@@ -5414,6 +5324,7 @@ input PersonsOrderBy {
   lastVisit: HistoryLatestVisitsOrderBy
   mainPhone: OrderBy
   martialStatus: OrderBy
+  meetingsAggregate: HistoryMeetingsPersonsAggregateOrderBy
   name: OrderBy
   nationalId: OrderBy
   notes: OrderBy
@@ -6061,34 +5972,6 @@ type Services {
     orderBy: [AuthUsersAdminOnOrderBy!]
     where: AuthUsersAdminOnBoolExp
   ): [AuthUsersAdminOn!]!
-  attendanceDaysConstraints(
-    distinctOn: [HistoryAttendanceDaysConstraintsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryAttendanceDaysConstraintsOrderBy!]
-    where: HistoryAttendanceDaysConstraintsBoolExp
-  ): [HistoryAttendanceDaysConstraints!]!
-  attendanceDaysConstraintsAggregate(
-    distinctOn: [HistoryAttendanceDaysConstraintsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryAttendanceDaysConstraintsOrderBy!]
-    where: HistoryAttendanceDaysConstraintsBoolExp
-  ): HistoryAttendanceDaysConstraintsAggregate!
-  attendanceHistory(
-    distinctOn: [HistoryAttendanceHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryAttendanceHistoryOrderBy!]
-    where: HistoryAttendanceHistoryBoolExp
-  ): [HistoryAttendanceHistory!]!
-  attendanceHistoryAggregate(
-    distinctOn: [HistoryAttendanceHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryAttendanceHistoryOrderBy!]
-    where: HistoryAttendanceHistoryBoolExp
-  ): HistoryAttendanceHistoryAggregate!
   blurhash: String
   classes(
     distinctOn: [ClassesSelectColumn!]
@@ -6135,6 +6018,13 @@ type Services {
   ): GroupsAggregate!
   id: uuid!
   lastEdit: HistoryLatestEdits
+  meetings(
+    distinctOn: [HistoryMeetingsSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [HistoryMeetingsOrderBy!]
+    where: HistoryMeetingsBoolExp
+  ): [HistoryMeetings!]!
   name: String!
   nextService: Services
   nextServiceId: uuid
@@ -6182,10 +6072,6 @@ input ServicesBoolExp {
   _not: ServicesBoolExp
   _or: [ServicesBoolExp!]
   adminUsers: AuthUsersAdminOnBoolExp
-  attendanceDaysConstraints: HistoryAttendanceDaysConstraintsBoolExp
-  attendanceDaysConstraintsAggregate: HistoryAttendanceDaysConstraintsAggregateBoolExp
-  attendanceHistory: HistoryAttendanceHistoryBoolExp
-  attendanceHistoryAggregate: HistoryAttendanceHistoryAggregateBoolExp
   blurhash: StringComparisonExp
   classes: ClassesBoolExp
   classesAggregate: ClassesAggregateBoolExp
@@ -6196,6 +6082,7 @@ input ServicesBoolExp {
   groupsAggregate: GroupsAggregateBoolExp
   id: UuidComparisonExp
   lastEdit: HistoryLatestEditsBoolExp
+  meetings: HistoryMeetingsBoolExp
   name: StringComparisonExp
   nextService: ServicesBoolExp
   nextServiceId: UuidComparisonExp
@@ -6221,11 +6108,10 @@ input ServicesIncInput {
 
 input ServicesInsertInput {
   adminUsers: AuthUsersAdminOnArrRelInsertInput
-  attendanceDaysConstraints: HistoryAttendanceDaysConstraintsArrRelInsertInput
-  attendanceHistory: HistoryAttendanceHistoryArrRelInsertInput
   classes: ClassesArrRelInsertInput
   color: bigint
   groups: GroupsArrRelInsertInput
+  meetings: HistoryMeetingsArrRelInsertInput
   name: String
   nextService: ServicesObjRelInsertInput
   nextServiceId: uuid
@@ -6273,8 +6159,6 @@ input ServicesOnConflict {
 }
 input ServicesOrderBy {
   adminUsersAggregate: AuthUsersAdminOnAggregateOrderBy
-  attendanceDaysConstraintsAggregate: HistoryAttendanceDaysConstraintsAggregateOrderBy
-  attendanceHistoryAggregate: HistoryAttendanceHistoryAggregateOrderBy
   blurhash: OrderBy
   classesAggregate: ClassesAggregateOrderBy
   color: OrderBy
@@ -6282,6 +6166,7 @@ input ServicesOrderBy {
   groupsAggregate: GroupsAggregateOrderBy
   id: OrderBy
   lastEdit: HistoryLatestEditsOrderBy
+  meetingsAggregate: HistoryMeetingsAggregateOrderBy
   name: OrderBy
   nextService: ServicesOrderBy
   nextServiceId: OrderBy
@@ -6933,20 +6818,6 @@ input StringComparisonExp {
 }
 
 type StudyYears {
-  attendanceDaysConstraints(
-    distinctOn: [HistoryAttendanceDaysConstraintsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryAttendanceDaysConstraintsOrderBy!]
-    where: HistoryAttendanceDaysConstraintsBoolExp
-  ): [HistoryAttendanceDaysConstraints!]!
-  attendanceDaysConstraintsAggregate(
-    distinctOn: [HistoryAttendanceDaysConstraintsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryAttendanceDaysConstraintsOrderBy!]
-    where: HistoryAttendanceDaysConstraintsBoolExp
-  ): HistoryAttendanceDaysConstraintsAggregate!
   classes(
     distinctOn: [ClassesSelectColumn!]
     limit: Int
@@ -6962,6 +6833,13 @@ type StudyYears {
     where: ClassesBoolExp
   ): ClassesAggregate!
   id: String
+  meetings(
+    distinctOn: [HistoryMeetingsSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [HistoryMeetingsOrderBy!]
+    where: HistoryMeetingsBoolExp
+  ): [HistoryMeetings!]!
   name: String!
   order: smallint!
   persons(
@@ -6984,11 +6862,10 @@ input StudyYearsBoolExp {
   _and: [StudyYearsBoolExp!]
   _not: StudyYearsBoolExp
   _or: [StudyYearsBoolExp!]
-  attendanceDaysConstraints: HistoryAttendanceDaysConstraintsBoolExp
-  attendanceDaysConstraintsAggregate: HistoryAttendanceDaysConstraintsAggregateBoolExp
   classes: ClassesBoolExp
   classesAggregate: ClassesAggregateBoolExp
   id: StringComparisonExp
+  meetings: HistoryMeetingsBoolExp
   name: StringComparisonExp
   order: SmallintComparisonExp
   persons: PersonsBoolExp
@@ -7002,8 +6879,8 @@ enum StudyYearsConstraint {
 }
 
 input StudyYearsInsertInput {
-  attendanceDaysConstraints: HistoryAttendanceDaysConstraintsArrRelInsertInput
   classes: ClassesArrRelInsertInput
+  meetings: HistoryMeetingsArrRelInsertInput
   name: String
   order: smallint
   persons: PersonsArrRelInsertInput
@@ -7025,9 +6902,9 @@ input StudyYearsOnConflict {
   where: StudyYearsBoolExp
 }
 input StudyYearsOrderBy {
-  attendanceDaysConstraintsAggregate: HistoryAttendanceDaysConstraintsAggregateOrderBy
   classesAggregate: ClassesAggregateOrderBy
   id: OrderBy
+  meetingsAggregate: HistoryMeetingsAggregateOrderBy
   name: OrderBy
   order: OrderBy
   personsAggregate: PersonsAggregateOrderBy
@@ -7158,18 +7035,6 @@ input TagsUpdates {
   _inc: TagsIncInput
   _set: TagsSetInput
   where: TagsBoolExp!
-}
-
-input TimestampComparisonExp {
-  _eq: timestamp
-  _gt: timestamp
-  _gte: timestamp
-  _in: [timestamp!]
-  _isNull: Boolean
-  _lt: timestamp
-  _lte: timestamp
-  _neq: timestamp
-  _nin: [timestamp!]
 }
 
 input TimestamptzComparisonExp {
@@ -7316,27 +7181,6 @@ input groupsAggregateBoolExpCount {
   predicate: IntComparisonExp!
 }
 
-input historyAttendanceDaysConstraintsAggregateBoolExpBool_and {
-  arguments: HistoryAttendanceDaysConstraintsSelectColumnHistoryAttendanceDaysConstraintsAggregateBoolExpBool_andArgumentsColumns!
-  distinct: Boolean
-  filter: HistoryAttendanceDaysConstraintsBoolExp
-  predicate: BooleanComparisonExp!
-}
-
-input historyAttendanceDaysConstraintsAggregateBoolExpBool_or {
-  arguments: HistoryAttendanceDaysConstraintsSelectColumnHistoryAttendanceDaysConstraintsAggregateBoolExpBool_orArgumentsColumns!
-  distinct: Boolean
-  filter: HistoryAttendanceDaysConstraintsBoolExp
-  predicate: BooleanComparisonExp!
-}
-
-input historyAttendanceDaysConstraintsAggregateBoolExpCount {
-  arguments: [HistoryAttendanceDaysConstraintsSelectColumn!]
-  distinct: Boolean
-  filter: HistoryAttendanceDaysConstraintsBoolExp
-  predicate: IntComparisonExp!
-}
-
 input historyAttendanceHistoryAggregateBoolExpBool_and {
   arguments: HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_andArgumentsColumns!
   distinct: Boolean
@@ -7386,6 +7230,13 @@ input historyKodasHistoryAggregateBoolExpCount {
   predicate: IntComparisonExp!
 }
 
+input historyMeetingsPersonsAggregateBoolExpCount {
+  arguments: [HistoryMeetingsPersonsSelectColumn!]
+  distinct: Boolean
+  filter: HistoryMeetingsPersonsBoolExp
+  predicate: IntComparisonExp!
+}
+
 input historyVisitHistoryAggregateBoolExpBool_and {
   arguments: HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_andArgumentsColumns!
   distinct: Boolean
@@ -7410,6 +7261,8 @@ input historyVisitHistoryAggregateBoolExpCount {
 scalar json
 
 scalar jsonb
+
+scalar meeting_audience
 type mutation_root {
   deleteAddresses(
     where: AddressesBoolExp!
@@ -7466,14 +7319,14 @@ type mutation_root {
     where: HistoryAttendanceDaysBoolExp!
   ): HistoryAttendanceDaysMutationResponse
   deleteHistoryAttendanceDaysByPk(day: date!): HistoryAttendanceDays
-  deleteHistoryAttendanceDaysConstraints(
-    where: HistoryAttendanceDaysConstraintsBoolExp!
-  ): HistoryAttendanceDaysConstraintsMutationResponse
-  deleteHistoryAttendanceDaysConstraintsByPk(id: uuid!): HistoryAttendanceDaysConstraints
   deleteHistoryAttendanceHistory(
     where: HistoryAttendanceHistoryBoolExp!
   ): HistoryAttendanceHistoryMutationResponse
   deleteHistoryAttendanceHistoryByPk(id: uuid!): HistoryAttendanceHistory
+  deleteHistoryMeetings(
+    where: HistoryMeetingsBoolExp!
+  ): HistoryMeetingsMutationResponse
+  deleteHistoryMeetingsByPk(id: uuid!): HistoryMeetings
   deleteHobbies(
     where: HobbiesBoolExp!
   ): HobbiesMutationResponse
@@ -7650,14 +7503,6 @@ type mutation_root {
     objects: [HistoryAttendanceDaysInsertInput!]!
     onConflict: HistoryAttendanceDaysOnConflict
   ): HistoryAttendanceDaysMutationResponse
-  insertHistoryAttendanceDaysConstraints(
-    objects: [HistoryAttendanceDaysConstraintsInsertInput!]!
-    onConflict: HistoryAttendanceDaysConstraintsOnConflict
-  ): HistoryAttendanceDaysConstraintsMutationResponse
-  insertHistoryAttendanceDaysConstraintsOne(
-    object: HistoryAttendanceDaysConstraintsInsertInput!
-    onConflict: HistoryAttendanceDaysConstraintsOnConflict
-  ): HistoryAttendanceDaysConstraints
   insertHistoryAttendanceDaysOne(
     object: HistoryAttendanceDaysInsertInput!
     onConflict: HistoryAttendanceDaysOnConflict
@@ -7694,6 +7539,14 @@ type mutation_root {
     object: HistoryKodasHistoryInsertInput!
     onConflict: HistoryKodasHistoryOnConflict
   ): HistoryKodasHistory
+  insertHistoryMeetings(
+    objects: [HistoryMeetingsInsertInput!]!
+    onConflict: HistoryMeetingsOnConflict
+  ): HistoryMeetingsMutationResponse
+  insertHistoryMeetingsOne(
+    object: HistoryMeetingsInsertInput!
+    onConflict: HistoryMeetingsOnConflict
+  ): HistoryMeetings
   insertHistoryVisitHistory(
     objects: [HistoryVisitHistoryInsertInput!]!
     onConflict: HistoryVisitHistoryOnConflict
@@ -7969,6 +7822,19 @@ type mutation_root {
   updateHistoryAttendanceHistoryMany(
     updates: [HistoryAttendanceHistoryUpdates!]!
   ): [HistoryAttendanceHistoryMutationResponse]
+  updateHistoryMeetings(
+    _inc: HistoryMeetingsIncInput
+    _set: HistoryMeetingsSetInput
+    where: HistoryMeetingsBoolExp!
+  ): HistoryMeetingsMutationResponse
+  updateHistoryMeetingsByPk(
+    _inc: HistoryMeetingsIncInput
+    _set: HistoryMeetingsSetInput
+    pkColumns: HistoryMeetingsPkColumnsInput!
+  ): HistoryMeetings
+  updateHistoryMeetingsMany(
+    updates: [HistoryMeetingsUpdates!]!
+  ): [HistoryMeetingsMutationResponse]
   updateHobbies(
     _inc: HobbiesIncInput
     _set: HobbiesSetInput
@@ -8356,21 +8222,6 @@ type query_root {
     where: HistoryAttendanceDaysBoolExp
   ): [HistoryAttendanceDays!]!
   historyAttendanceDaysByPk(day: date!): HistoryAttendanceDays
-  historyAttendanceDaysConstraints(
-    distinctOn: [HistoryAttendanceDaysConstraintsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryAttendanceDaysConstraintsOrderBy!]
-    where: HistoryAttendanceDaysConstraintsBoolExp
-  ): [HistoryAttendanceDaysConstraints!]!
-  historyAttendanceDaysConstraintsAggregate(
-    distinctOn: [HistoryAttendanceDaysConstraintsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryAttendanceDaysConstraintsOrderBy!]
-    where: HistoryAttendanceDaysConstraintsBoolExp
-  ): HistoryAttendanceDaysConstraintsAggregate!
-  historyAttendanceDaysConstraintsByPk(id: uuid!): HistoryAttendanceDaysConstraints
   historyAttendanceHistory(
     distinctOn: [HistoryAttendanceHistorySelectColumn!]
     limit: Int
@@ -8445,6 +8296,28 @@ type query_root {
     where: HistoryKodasHistoryBoolExp
   ): HistoryKodasHistoryAggregate!
   historyKodasHistoryByPk(id: uuid!): HistoryKodasHistory
+  historyMeetings(
+    distinctOn: [HistoryMeetingsSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [HistoryMeetingsOrderBy!]
+    where: HistoryMeetingsBoolExp
+  ): [HistoryMeetings!]!
+  historyMeetingsByPk(id: uuid!): HistoryMeetings
+  historyMeetingsPersons(
+    distinctOn: [HistoryMeetingsPersonsSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [HistoryMeetingsPersonsOrderBy!]
+    where: HistoryMeetingsPersonsBoolExp
+  ): [HistoryMeetingsPersons!]!
+  historyMeetingsPersonsAggregate(
+    distinctOn: [HistoryMeetingsPersonsSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [HistoryMeetingsPersonsOrderBy!]
+    where: HistoryMeetingsPersonsBoolExp
+  ): HistoryMeetingsPersonsAggregate!
   historyVisitHistory(
     distinctOn: [HistoryVisitHistorySelectColumn!]
     limit: Int
@@ -8899,26 +8772,6 @@ type subscription_root {
     where: HistoryAttendanceDaysBoolExp
   ): [HistoryAttendanceDays!]!
   historyAttendanceDaysByPk(day: date!): HistoryAttendanceDays
-  historyAttendanceDaysConstraints(
-    distinctOn: [HistoryAttendanceDaysConstraintsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryAttendanceDaysConstraintsOrderBy!]
-    where: HistoryAttendanceDaysConstraintsBoolExp
-  ): [HistoryAttendanceDaysConstraints!]!
-  historyAttendanceDaysConstraintsAggregate(
-    distinctOn: [HistoryAttendanceDaysConstraintsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryAttendanceDaysConstraintsOrderBy!]
-    where: HistoryAttendanceDaysConstraintsBoolExp
-  ): HistoryAttendanceDaysConstraintsAggregate!
-  historyAttendanceDaysConstraintsByPk(id: uuid!): HistoryAttendanceDaysConstraints
-  historyAttendanceDaysConstraintsStream(
-    batchSize: Int!
-    cursor: [HistoryAttendanceDaysConstraintsStreamCursorInput]!
-    where: HistoryAttendanceDaysConstraintsBoolExp
-  ): [HistoryAttendanceDaysConstraints!]!
   historyAttendanceDaysStream(
     batchSize: Int!
     cursor: [HistoryAttendanceDaysStreamCursorInput]!
@@ -9023,6 +8876,38 @@ type subscription_root {
     cursor: [HistoryKodasHistoryStreamCursorInput]!
     where: HistoryKodasHistoryBoolExp
   ): [HistoryKodasHistory!]!
+  historyMeetings(
+    distinctOn: [HistoryMeetingsSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [HistoryMeetingsOrderBy!]
+    where: HistoryMeetingsBoolExp
+  ): [HistoryMeetings!]!
+  historyMeetingsByPk(id: uuid!): HistoryMeetings
+  historyMeetingsPersons(
+    distinctOn: [HistoryMeetingsPersonsSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [HistoryMeetingsPersonsOrderBy!]
+    where: HistoryMeetingsPersonsBoolExp
+  ): [HistoryMeetingsPersons!]!
+  historyMeetingsPersonsAggregate(
+    distinctOn: [HistoryMeetingsPersonsSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [HistoryMeetingsPersonsOrderBy!]
+    where: HistoryMeetingsPersonsBoolExp
+  ): HistoryMeetingsPersonsAggregate!
+  historyMeetingsPersonsStream(
+    batchSize: Int!
+    cursor: [HistoryMeetingsPersonsStreamCursorInput]!
+    where: HistoryMeetingsPersonsBoolExp
+  ): [HistoryMeetingsPersons!]!
+  historyMeetingsStream(
+    batchSize: Int!
+    cursor: [HistoryMeetingsStreamCursorInput]!
+    where: HistoryMeetingsBoolExp
+  ): [HistoryMeetings!]!
   historyVisitHistory(
     distinctOn: [HistoryVisitHistorySelectColumn!]
     limit: Int
@@ -9302,8 +9187,6 @@ type subscription_root {
     where: UniversitiesBoolExp
   ): [Universities!]!
 }
-
-scalar timestamp
 
 scalar timestamptz
 

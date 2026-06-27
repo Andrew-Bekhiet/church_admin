@@ -43,6 +43,8 @@ class DatabaseService {
 
   late final history = HistoryDAO(db: this);
 
+  late final meetings = MeetingsDAO(db: this);
+
   late final Map<Type, DAOBase> daosByType = {
     Area: areas,
     Street: streets,
@@ -53,6 +55,7 @@ class DatabaseService {
     Group: groups,
     User: users,
     Person: persons,
+    Meeting: meetings,
     Church: metadata.churches,
     College: metadata.colleges,
     District: metadata.districts,

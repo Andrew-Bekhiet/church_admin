@@ -32,14 +32,6 @@ subscription watchPerson(
     classes(limit: $classesLimit, orderBy: { class: { name: ASC } }) {
       class {
         ...Class
-
-        attendanceHistoryAggregate(where: { personId: { _eq: $id } }) {
-          aggregate {
-            max {
-              time
-            }
-          }
-        }
       }
     }
     church {
@@ -65,14 +57,6 @@ subscription watchPerson(
     groups(limit: $groupsLimit, orderBy: { group: { name: ASC } }) {
       group {
         ...Group
-
-        attendanceHistoryAggregate(where: { personId: { _eq: $id } }) {
-          aggregate {
-            max {
-              time
-            }
-          }
-        }
       }
     }
     isServant
@@ -122,14 +106,6 @@ subscription watchPerson(
     services(limit: $servicesLimit, orderBy: { service: { name: ASC } }) {
       service {
         ...ServiceWithStudyYears
-
-        attendanceHistoryAggregate(where: { personId: { _eq: $id } }) {
-          aggregate {
-            max {
-              time
-            }
-          }
-        }
       }
     }
     shammasLevel {
@@ -171,7 +147,7 @@ subscription watchPerson(
 
 subscription personAttendance(
   $where: [HistoryAttendanceHistoryBoolExp!] = {}
-  $orderBy: [HistoryAttendanceHistoryOrderBy!] = { time: DESC }
+  $orderBy: [HistoryAttendanceHistoryOrderBy!] = { datetime: DESC }
   $limit: Int! = 200
 ) {
   historyAttendanceHistory(

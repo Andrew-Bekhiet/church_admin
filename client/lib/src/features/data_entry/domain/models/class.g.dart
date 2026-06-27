@@ -131,16 +131,6 @@ class _ClassFields {
         isCodeOnly: true,
       );
 
-  final FieldMetadata<AggregateData> attendanceDaysConstraintsAggregate =
-      FieldMetadata<AggregateData>(
-        getValue: (obj) =>
-            obj is Class ? obj.attendanceDaysConstraintsAggregate : null,
-        parentType: Class,
-        name: 'attendanceDaysConstraintsAggregate',
-        label: 'attendanceDaysConstraintsAggregate',
-        isCodeOnly: true,
-      );
-
   late final List<FieldMetadata<Object>> allFields = [
     id,
     name,
@@ -152,7 +142,6 @@ class _ClassFields {
     lastEdit,
     adminUsers,
     attendanceHistoryAggregate,
-    attendanceDaysConstraintsAggregate,
   ];
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'id': id,
@@ -165,7 +154,6 @@ class _ClassFields {
     'lastEdit': lastEdit,
     'adminUsers': adminUsers,
     'attendanceHistoryAggregate': attendanceHistoryAggregate,
-    'attendanceDaysConstraintsAggregate': attendanceDaysConstraintsAggregate,
   };
 }
 
@@ -201,14 +189,6 @@ Class _$ClassFromJson(Map json) => Class(
       : HistoryAggregateData.fromJson(
           Map<String, dynamic>.from(json['attendanceHistoryAggregate'] as Map),
         ),
-  attendanceDaysConstraintsAggregate:
-      json['attendanceDaysConstraintsAggregate'] == null
-      ? null
-      : HistoryAggregateData.fromJson(
-          Map<String, dynamic>.from(
-            json['attendanceDaysConstraintsAggregate'] as Map,
-          ),
-        ),
   userCanEdit: json['userCanEdit'] as bool? ?? false,
 );
 
@@ -226,7 +206,4 @@ Map<String, dynamic> _$ClassToJson(Class instance) => <String, dynamic>{
   'lastEdit': instance.lastEdit?.toJson(),
   'adminUsers': adminUsersToJson(instance.adminUsers),
   'attendanceHistoryAggregate': instance.attendanceHistoryAggregate?.toJson(),
-  'attendanceDaysConstraintsAggregate': instance
-      .attendanceDaysConstraintsAggregate
-      ?.toJson(),
 };

@@ -1,6 +1,49 @@
 // Part 37 of the schema
 part of "schema.graphql.dart";
 
+abstract class CopyWith_Input_PersonTypesBoolExp<TRes> {
+  factory CopyWith_Input_PersonTypesBoolExp(
+    Input_PersonTypesBoolExp instance,
+    TRes Function(Input_PersonTypesBoolExp) then,
+  ) = _CopyWithImpl_Input_PersonTypesBoolExp;
+
+  factory CopyWith_Input_PersonTypesBoolExp.stub(TRes res) =
+      _CopyWithStubImpl_Input_PersonTypesBoolExp;
+
+  TRes call({
+    List<Input_PersonTypesBoolExp>? $_and,
+    Input_PersonTypesBoolExp? $_not,
+    List<Input_PersonTypesBoolExp>? $_or,
+    Input_UuidComparisonExp? id,
+    Input_BooleanComparisonExp? isFamilyAdmin,
+    Input_BooleanComparisonExp? isHidden,
+    Input_StringComparisonExp? name,
+    Input_IntComparisonExp? order,
+    Input_PersonsBoolExp? persons,
+    Input_PersonsAggregateBoolExp? personsAggregate,
+  });
+  TRes $_and(
+    Iterable<Input_PersonTypesBoolExp>? Function(
+      Iterable<CopyWith_Input_PersonTypesBoolExp<Input_PersonTypesBoolExp>>?,
+    )
+    _fn,
+  );
+  CopyWith_Input_PersonTypesBoolExp<TRes> get $_not;
+  TRes $_or(
+    Iterable<Input_PersonTypesBoolExp>? Function(
+      Iterable<CopyWith_Input_PersonTypesBoolExp<Input_PersonTypesBoolExp>>?,
+    )
+    _fn,
+  );
+  CopyWith_Input_UuidComparisonExp<TRes> get id;
+  CopyWith_Input_BooleanComparisonExp<TRes> get isFamilyAdmin;
+  CopyWith_Input_BooleanComparisonExp<TRes> get isHidden;
+  CopyWith_Input_StringComparisonExp<TRes> get name;
+  CopyWith_Input_IntComparisonExp<TRes> get order;
+  CopyWith_Input_PersonsBoolExp<TRes> get persons;
+  CopyWith_Input_PersonsAggregateBoolExp<TRes> get personsAggregate;
+}
+
 class _CopyWithImpl_Input_PersonTypesBoolExp<TRes>
     implements CopyWith_Input_PersonTypesBoolExp<TRes> {
   _CopyWithImpl_Input_PersonTypesBoolExp(this._instance, this._then);

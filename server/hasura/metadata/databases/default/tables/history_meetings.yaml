@@ -19,6 +19,15 @@ array_relationships:
         table:
           name: attendance_history
           schema: history
+  - name: persons
+    using:
+      manual_configuration:
+        column_mapping:
+          id: meeting_id
+        insertion_order: null
+        remote_table:
+          name: meetings_persons
+          schema: history
 insert_permissions:
   - role: user
     permission:
@@ -100,6 +109,7 @@ insert_permissions:
       columns:
         - name
         - audience
+        - color
         - group_id
         - service_id
         - service_study_year
@@ -112,6 +122,7 @@ select_permissions:
         - id
         - name
         - audience
+        - color
         - group_id
         - service_id
         - service_study_year
@@ -180,6 +191,7 @@ update_permissions:
       columns:
         - name
         - audience
+        - color
         - archived
       filter: *meeting_write_permission
       check: *meeting_write_permission

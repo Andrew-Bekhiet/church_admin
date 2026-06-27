@@ -1,243 +1,6 @@
 // Part 33 of the schema
 part of "schema.graphql.dart";
 
-abstract class CopyWith_Input_HistoryVisitHistoryAggregateBoolExp<TRes> {
-  factory CopyWith_Input_HistoryVisitHistoryAggregateBoolExp(
-    Input_HistoryVisitHistoryAggregateBoolExp instance,
-    TRes Function(Input_HistoryVisitHistoryAggregateBoolExp) then,
-  ) = _CopyWithImpl_Input_HistoryVisitHistoryAggregateBoolExp;
-
-  factory CopyWith_Input_HistoryVisitHistoryAggregateBoolExp.stub(TRes res) =
-      _CopyWithStubImpl_Input_HistoryVisitHistoryAggregateBoolExp;
-
-  TRes call({
-    Input_historyVisitHistoryAggregateBoolExpBool_and? bool_and,
-    Input_historyVisitHistoryAggregateBoolExpBool_or? bool_or,
-    Input_historyVisitHistoryAggregateBoolExpCount? count,
-  });
-  CopyWith_Input_historyVisitHistoryAggregateBoolExpBool_and<TRes> get bool_and;
-  CopyWith_Input_historyVisitHistoryAggregateBoolExpBool_or<TRes> get bool_or;
-  CopyWith_Input_historyVisitHistoryAggregateBoolExpCount<TRes> get count;
-}
-
-class _CopyWithImpl_Input_HistoryVisitHistoryAggregateBoolExp<TRes>
-    implements CopyWith_Input_HistoryVisitHistoryAggregateBoolExp<TRes> {
-  _CopyWithImpl_Input_HistoryVisitHistoryAggregateBoolExp(
-    this._instance,
-    this._then,
-  );
-
-  final Input_HistoryVisitHistoryAggregateBoolExp _instance;
-
-  final TRes Function(Input_HistoryVisitHistoryAggregateBoolExp) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? bool_and = _undefined,
-    Object? bool_or = _undefined,
-    Object? count = _undefined,
-  }) => _then(
-    Input_HistoryVisitHistoryAggregateBoolExp._({
-      ..._instance._$data,
-      if (bool_and != _undefined)
-        'bool_and':
-            (bool_and as Input_historyVisitHistoryAggregateBoolExpBool_and?),
-      if (bool_or != _undefined)
-        'bool_or':
-            (bool_or as Input_historyVisitHistoryAggregateBoolExpBool_or?),
-      if (count != _undefined)
-        'count': (count as Input_historyVisitHistoryAggregateBoolExpCount?),
-    }),
-  );
-
-  CopyWith_Input_historyVisitHistoryAggregateBoolExpBool_and<TRes>
-  get bool_and {
-    final local$bool_and = _instance.bool_and;
-    return local$bool_and == null
-        ? CopyWith_Input_historyVisitHistoryAggregateBoolExpBool_and.stub(
-            _then(_instance),
-          )
-        : CopyWith_Input_historyVisitHistoryAggregateBoolExpBool_and(
-            local$bool_and,
-            (e) => call(bool_and: e),
-          );
-  }
-
-  CopyWith_Input_historyVisitHistoryAggregateBoolExpBool_or<TRes> get bool_or {
-    final local$bool_or = _instance.bool_or;
-    return local$bool_or == null
-        ? CopyWith_Input_historyVisitHistoryAggregateBoolExpBool_or.stub(
-            _then(_instance),
-          )
-        : CopyWith_Input_historyVisitHistoryAggregateBoolExpBool_or(
-            local$bool_or,
-            (e) => call(bool_or: e),
-          );
-  }
-
-  CopyWith_Input_historyVisitHistoryAggregateBoolExpCount<TRes> get count {
-    final local$count = _instance.count;
-    return local$count == null
-        ? CopyWith_Input_historyVisitHistoryAggregateBoolExpCount.stub(
-            _then(_instance),
-          )
-        : CopyWith_Input_historyVisitHistoryAggregateBoolExpCount(
-            local$count,
-            (e) => call(count: e),
-          );
-  }
-}
-
-class _CopyWithStubImpl_Input_HistoryVisitHistoryAggregateBoolExp<TRes>
-    implements CopyWith_Input_HistoryVisitHistoryAggregateBoolExp<TRes> {
-  _CopyWithStubImpl_Input_HistoryVisitHistoryAggregateBoolExp(this._res);
-
-  TRes _res;
-
-  call({
-    Input_historyVisitHistoryAggregateBoolExpBool_and? bool_and,
-    Input_historyVisitHistoryAggregateBoolExpBool_or? bool_or,
-    Input_historyVisitHistoryAggregateBoolExpCount? count,
-  }) => _res;
-
-  CopyWith_Input_historyVisitHistoryAggregateBoolExpBool_and<TRes>
-  get bool_and =>
-      CopyWith_Input_historyVisitHistoryAggregateBoolExpBool_and.stub(_res);
-
-  CopyWith_Input_historyVisitHistoryAggregateBoolExpBool_or<TRes> get bool_or =>
-      CopyWith_Input_historyVisitHistoryAggregateBoolExpBool_or.stub(_res);
-
-  CopyWith_Input_historyVisitHistoryAggregateBoolExpCount<TRes> get count =>
-      CopyWith_Input_historyVisitHistoryAggregateBoolExpCount.stub(_res);
-}
-
-class Input_HistoryVisitHistoryAggregateOrderBy {
-  factory Input_HistoryVisitHistoryAggregateOrderBy({
-    Enum_OrderBy? count,
-    Input_HistoryVisitHistoryMaxOrderBy? max,
-    Input_HistoryVisitHistoryMinOrderBy? min,
-  }) => Input_HistoryVisitHistoryAggregateOrderBy._({
-    if (count != null) r'count': count,
-    if (max != null) r'max': max,
-    if (min != null) r'min': min,
-  });
-
-  Input_HistoryVisitHistoryAggregateOrderBy._(this._$data);
-
-  factory Input_HistoryVisitHistoryAggregateOrderBy.fromJson(
-    Map<String, dynamic> data,
-  ) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('count')) {
-      final l$count = data['count'];
-      result$data['count'] = l$count == null
-          ? null
-          : fromJson_Enum_OrderBy((l$count as String));
-    }
-    if (data.containsKey('max')) {
-      final l$max = data['max'];
-      result$data['max'] = l$max == null
-          ? null
-          : Input_HistoryVisitHistoryMaxOrderBy.fromJson(
-              (l$max as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('min')) {
-      final l$min = data['min'];
-      result$data['min'] = l$min == null
-          ? null
-          : Input_HistoryVisitHistoryMinOrderBy.fromJson(
-              (l$min as Map<String, dynamic>),
-            );
-    }
-    return Input_HistoryVisitHistoryAggregateOrderBy._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  Enum_OrderBy? get count => (_$data['count'] as Enum_OrderBy?);
-
-  Input_HistoryVisitHistoryMaxOrderBy? get max =>
-      (_$data['max'] as Input_HistoryVisitHistoryMaxOrderBy?);
-
-  Input_HistoryVisitHistoryMinOrderBy? get min =>
-      (_$data['min'] as Input_HistoryVisitHistoryMinOrderBy?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('count')) {
-      final l$count = count;
-      result$data['count'] = l$count == null
-          ? null
-          : toJson_Enum_OrderBy(l$count);
-    }
-    if (_$data.containsKey('max')) {
-      final l$max = max;
-      result$data['max'] = l$max?.toJson();
-    }
-    if (_$data.containsKey('min')) {
-      final l$min = min;
-      result$data['min'] = l$min?.toJson();
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_HistoryVisitHistoryAggregateOrderBy<
-    Input_HistoryVisitHistoryAggregateOrderBy
-  >
-  get copyWith =>
-      CopyWith_Input_HistoryVisitHistoryAggregateOrderBy(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_HistoryVisitHistoryAggregateOrderBy ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$count = count;
-    final lOther$count = other.count;
-    if (_$data.containsKey('count') != other._$data.containsKey('count')) {
-      return false;
-    }
-    if (l$count != lOther$count) {
-      return false;
-    }
-    final l$max = max;
-    final lOther$max = other.max;
-    if (_$data.containsKey('max') != other._$data.containsKey('max')) {
-      return false;
-    }
-    if (l$max != lOther$max) {
-      return false;
-    }
-    final l$min = min;
-    final lOther$min = other.min;
-    if (_$data.containsKey('min') != other._$data.containsKey('min')) {
-      return false;
-    }
-    if (l$min != lOther$min) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$count = count;
-    final l$max = max;
-    final l$min = min;
-    return Object.hashAll([
-      _$data.containsKey('count') ? l$count : const {},
-      _$data.containsKey('max') ? l$max : const {},
-      _$data.containsKey('min') ? l$min : const {},
-    ]);
-  }
-}
-
 abstract class CopyWith_Input_HistoryVisitHistoryAggregateOrderBy<TRes> {
   factory CopyWith_Input_HistoryVisitHistoryAggregateOrderBy(
     Input_HistoryVisitHistoryAggregateOrderBy instance,
@@ -2600,6 +2363,329 @@ class Input_HistoryVisitHistoryStreamCursorValueInput {
       _$data.containsKey('table') ? l$table : const {},
       _$data.containsKey('time') ? l$time : const {},
       _$data.containsKey('visitId') ? l$visitId : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_HistoryVisitHistoryStreamCursorValueInput<TRes> {
+  factory CopyWith_Input_HistoryVisitHistoryStreamCursorValueInput(
+    Input_HistoryVisitHistoryStreamCursorValueInput instance,
+    TRes Function(Input_HistoryVisitHistoryStreamCursorValueInput) then,
+  ) = _CopyWithImpl_Input_HistoryVisitHistoryStreamCursorValueInput;
+
+  factory CopyWith_Input_HistoryVisitHistoryStreamCursorValueInput.stub(
+    TRes res,
+  ) = _CopyWithStubImpl_Input_HistoryVisitHistoryStreamCursorValueInput;
+
+  TRes call({
+    bool? isFatherVisit,
+    UuidValue? recordId,
+    UuidValue? recordedBy,
+    String? table,
+    DateTime? time,
+    UuidValue? visitId,
+  });
+}
+
+class _CopyWithImpl_Input_HistoryVisitHistoryStreamCursorValueInput<TRes>
+    implements CopyWith_Input_HistoryVisitHistoryStreamCursorValueInput<TRes> {
+  _CopyWithImpl_Input_HistoryVisitHistoryStreamCursorValueInput(
+    this._instance,
+    this._then,
+  );
+
+  final Input_HistoryVisitHistoryStreamCursorValueInput _instance;
+
+  final TRes Function(Input_HistoryVisitHistoryStreamCursorValueInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? isFatherVisit = _undefined,
+    Object? recordId = _undefined,
+    Object? recordedBy = _undefined,
+    Object? table = _undefined,
+    Object? time = _undefined,
+    Object? visitId = _undefined,
+  }) => _then(
+    Input_HistoryVisitHistoryStreamCursorValueInput._({
+      ..._instance._$data,
+      if (isFatherVisit != _undefined)
+        'isFatherVisit': (isFatherVisit as bool?),
+      if (recordId != _undefined) 'recordId': (recordId as UuidValue?),
+      if (recordedBy != _undefined) 'recordedBy': (recordedBy as UuidValue?),
+      if (table != _undefined) 'table': (table as String?),
+      if (time != _undefined) 'time': (time as DateTime?),
+      if (visitId != _undefined) 'visitId': (visitId as UuidValue?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_HistoryVisitHistoryStreamCursorValueInput<TRes>
+    implements CopyWith_Input_HistoryVisitHistoryStreamCursorValueInput<TRes> {
+  _CopyWithStubImpl_Input_HistoryVisitHistoryStreamCursorValueInput(this._res);
+
+  TRes _res;
+
+  call({
+    bool? isFatherVisit,
+    UuidValue? recordId,
+    UuidValue? recordedBy,
+    String? table,
+    DateTime? time,
+    UuidValue? visitId,
+  }) => _res;
+}
+
+class Input_HobbiesBoolExp {
+  factory Input_HobbiesBoolExp({
+    List<Input_HobbiesBoolExp>? $_and,
+    Input_HobbiesBoolExp? $_not,
+    List<Input_HobbiesBoolExp>? $_or,
+    Input_BigintComparisonExp? color,
+    Input_UuidComparisonExp? id,
+    Input_StringComparisonExp? name,
+    Input_PersonsHobbiesBoolExp? persons,
+  }) => Input_HobbiesBoolExp._({
+    if ($_and != null) r'_and': $_and,
+    if ($_not != null) r'_not': $_not,
+    if ($_or != null) r'_or': $_or,
+    if (color != null) r'color': color,
+    if (id != null) r'id': id,
+    if (name != null) r'name': name,
+    if (persons != null) r'persons': persons,
+  });
+
+  Input_HobbiesBoolExp._(this._$data);
+
+  factory Input_HobbiesBoolExp.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('_and')) {
+      final l$$_and = data['_and'];
+      result$data['_and'] = (l$$_and as List<dynamic>?)
+          ?.map(
+            (e) => Input_HobbiesBoolExp.fromJson((e as Map<String, dynamic>)),
+          )
+          .toList();
+    }
+    if (data.containsKey('_not')) {
+      final l$$_not = data['_not'];
+      result$data['_not'] = l$$_not == null
+          ? null
+          : Input_HobbiesBoolExp.fromJson((l$$_not as Map<String, dynamic>));
+    }
+    if (data.containsKey('_or')) {
+      final l$$_or = data['_or'];
+      result$data['_or'] = (l$$_or as List<dynamic>?)
+          ?.map(
+            (e) => Input_HobbiesBoolExp.fromJson((e as Map<String, dynamic>)),
+          )
+          .toList();
+    }
+    if (data.containsKey('color')) {
+      final l$color = data['color'];
+      result$data['color'] = l$color == null
+          ? null
+          : Input_BigintComparisonExp.fromJson(
+              (l$color as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('id')) {
+      final l$id = data['id'];
+      result$data['id'] = l$id == null
+          ? null
+          : Input_UuidComparisonExp.fromJson((l$id as Map<String, dynamic>));
+    }
+    if (data.containsKey('name')) {
+      final l$name = data['name'];
+      result$data['name'] = l$name == null
+          ? null
+          : Input_StringComparisonExp.fromJson(
+              (l$name as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('persons')) {
+      final l$persons = data['persons'];
+      result$data['persons'] = l$persons == null
+          ? null
+          : Input_PersonsHobbiesBoolExp.fromJson(
+              (l$persons as Map<String, dynamic>),
+            );
+    }
+    return Input_HobbiesBoolExp._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  List<Input_HobbiesBoolExp>? get $_and =>
+      (_$data['_and'] as List<Input_HobbiesBoolExp>?);
+
+  Input_HobbiesBoolExp? get $_not => (_$data['_not'] as Input_HobbiesBoolExp?);
+
+  List<Input_HobbiesBoolExp>? get $_or =>
+      (_$data['_or'] as List<Input_HobbiesBoolExp>?);
+
+  Input_BigintComparisonExp? get color =>
+      (_$data['color'] as Input_BigintComparisonExp?);
+
+  Input_UuidComparisonExp? get id => (_$data['id'] as Input_UuidComparisonExp?);
+
+  Input_StringComparisonExp? get name =>
+      (_$data['name'] as Input_StringComparisonExp?);
+
+  Input_PersonsHobbiesBoolExp? get persons =>
+      (_$data['persons'] as Input_PersonsHobbiesBoolExp?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('_and')) {
+      final l$$_and = $_and;
+      result$data['_and'] = l$$_and?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('_not')) {
+      final l$$_not = $_not;
+      result$data['_not'] = l$$_not?.toJson();
+    }
+    if (_$data.containsKey('_or')) {
+      final l$$_or = $_or;
+      result$data['_or'] = l$$_or?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('color')) {
+      final l$color = color;
+      result$data['color'] = l$color?.toJson();
+    }
+    if (_$data.containsKey('id')) {
+      final l$id = id;
+      result$data['id'] = l$id?.toJson();
+    }
+    if (_$data.containsKey('name')) {
+      final l$name = name;
+      result$data['name'] = l$name?.toJson();
+    }
+    if (_$data.containsKey('persons')) {
+      final l$persons = persons;
+      result$data['persons'] = l$persons?.toJson();
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_HobbiesBoolExp<Input_HobbiesBoolExp> get copyWith =>
+      CopyWith_Input_HobbiesBoolExp(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_HobbiesBoolExp || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$$_and = $_and;
+    final lOther$$_and = other.$_and;
+    if (_$data.containsKey('_and') != other._$data.containsKey('_and')) {
+      return false;
+    }
+    if (l$$_and != null && lOther$$_and != null) {
+      if (l$$_and.length != lOther$$_and.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$_and.length; i++) {
+        final l$$_and$entry = l$$_and[i];
+        final lOther$$_and$entry = lOther$$_and[i];
+        if (l$$_and$entry != lOther$$_and$entry) {
+          return false;
+        }
+      }
+    } else if (l$$_and != lOther$$_and) {
+      return false;
+    }
+    final l$$_not = $_not;
+    final lOther$$_not = other.$_not;
+    if (_$data.containsKey('_not') != other._$data.containsKey('_not')) {
+      return false;
+    }
+    if (l$$_not != lOther$$_not) {
+      return false;
+    }
+    final l$$_or = $_or;
+    final lOther$$_or = other.$_or;
+    if (_$data.containsKey('_or') != other._$data.containsKey('_or')) {
+      return false;
+    }
+    if (l$$_or != null && lOther$$_or != null) {
+      if (l$$_or.length != lOther$$_or.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$_or.length; i++) {
+        final l$$_or$entry = l$$_or[i];
+        final lOther$$_or$entry = lOther$$_or[i];
+        if (l$$_or$entry != lOther$$_or$entry) {
+          return false;
+        }
+      }
+    } else if (l$$_or != lOther$$_or) {
+      return false;
+    }
+    final l$color = color;
+    final lOther$color = other.color;
+    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
+      return false;
+    }
+    if (l$color != lOther$color) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
+      return false;
+    }
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (_$data.containsKey('name') != other._$data.containsKey('name')) {
+      return false;
+    }
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$persons = persons;
+    final lOther$persons = other.persons;
+    if (_$data.containsKey('persons') != other._$data.containsKey('persons')) {
+      return false;
+    }
+    if (l$persons != lOther$persons) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$$_and = $_and;
+    final l$$_not = $_not;
+    final l$$_or = $_or;
+    final l$color = color;
+    final l$id = id;
+    final l$name = name;
+    final l$persons = persons;
+    return Object.hashAll([
+      _$data.containsKey('_and')
+          ? l$$_and == null
+                ? null
+                : Object.hashAll(l$$_and.map((v) => v))
+          : const {},
+      _$data.containsKey('_not') ? l$$_not : const {},
+      _$data.containsKey('_or')
+          ? l$$_or == null
+                ? null
+                : Object.hashAll(l$$_or.map((v) => v))
+          : const {},
+      _$data.containsKey('color') ? l$color : const {},
+      _$data.containsKey('id') ? l$id : const {},
+      _$data.containsKey('name') ? l$name : const {},
+      _$data.containsKey('persons') ? l$persons : const {},
     ]);
   }
 }
