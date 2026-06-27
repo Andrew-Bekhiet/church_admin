@@ -20,7 +20,7 @@ subscription watchMeetingRoster(
   $fromDate: timestamptz!
   $toDate: timestamptz!
   $where: [HistoryMeetingsPersonsBoolExp!] = []
-  $orderBy: [HistoryMeetingsPersonsOrderBy!] = [{ person: { name: ASC } }]
+  $orderBy: [HistoryMeetingsPersonsOrderBy!] = [{ person: { name: ASC } }, { person: { id: ASC } }]
   $limit: Int = 200
 ) {
   historyMeetingsPersons(
@@ -43,6 +43,7 @@ subscription watchMeetingRoster(
         asServant: { _eq: $asServant }
         datetime: { _gte: $fromDate, _lt: $toDate }
       }
+      orderBy: [{ datetime: DESC }]
       limit: 1
     ) {
       id

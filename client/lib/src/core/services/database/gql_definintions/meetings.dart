@@ -2,7 +2,6 @@ import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/meetings/__generated__/mutations.gql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/meetings/__generated__/subscriptions.gql.dart';
 import 'package:graphql/client.dart';
-import 'package:rxdart/rxdart.dart';
 
 class MeetingsDAO extends DAOBase<Meeting>
     with StreamableDAO<Meeting>, CreatableDAO<Meeting>, UpdatableDAO<Meeting> {
@@ -86,57 +85,69 @@ class MeetingsDAO extends DAOBase<Meeting>
     Stream<String?>? searchQuery,
     int limit = 200,
   }) {
-    final searchStream = (searchQuery ?? Stream.value(null)).shareValue();
-
-    return PaginatableStream.simple(
+    return PaginatableStream.withSearch(
       pageSize: limit,
+      searchStream: searchQuery ?? Stream.value(null),
       factory: (request) {
-        return searchStream.switchMap((search) {
-          final whereFilters = [
-            if (search != null && search.isNotEmpty)
-              Input_HistoryMeetingsPersonsBoolExp(
-                person: Input_PersonsBoolExp(
-                  $_or: [
-                    Input_PersonsBoolExp(
-                      name: Input_StringComparisonExp($_ilike: '%$search%'),
-                    ),
-                    Input_PersonsBoolExp(
-                      mainPhone: Input_StringComparisonExp(
-                        $_ilike: '%$search%',
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            if (request.cursor case final cursor?)
-              Input_HistoryMeetingsPersonsBoolExp(
-                person: Input_PersonsBoolExp(
-                  name: Input_StringComparisonExp(
-                    $_gt: cursor.person.name,
+        final search = request.param;
+        final whereFilters = [
+          if (search != null && search.isNotEmpty)
+            Input_HistoryMeetingsPersonsBoolExp(
+              person: Input_PersonsBoolExp(
+                $_or: [
+                  Input_PersonsBoolExp(
+                    name: Input_StringComparisonExp($_ilike: '%$search%'),
                   ),
-                ),
-              ),
-          ];
-
-          return graphQLClient.subscribeAndReturnParsed(
-            SubscriptionOptions(
-              document: documentNodeSubscriptionwatchMeetingRoster,
-              operationName: 'watchMeetingRoster',
-              variables: Variables_Subscription_watchMeetingRoster(
-                meetingId: meetingId.toUuid(),
-                asServant: asServant,
-                fromDate: fromDate,
-                toDate: toDate,
-                where: whereFilters,
-                limit: request.pageSize + 1,
-              ).toJson(),
-              parserFn: db.parser.singleListParser(
-                MeetingRosterEntry.fromJson,
-                pageSize: request.pageSize,
+                  Input_PersonsBoolExp(
+                    mainPhone: Input_StringComparisonExp(
+                      $_ilike: '%$search%',
+                    ),
+                  ),
+                ],
               ),
             ),
-          );
-        });
+          if (request.cursor case final cursor?)
+            Input_HistoryMeetingsPersonsBoolExp(
+              $_or: [
+                Input_HistoryMeetingsPersonsBoolExp(
+                  person: Input_PersonsBoolExp(
+                    name: Input_StringComparisonExp(
+                      $_gt: cursor.person.name,
+                    ),
+                  ),
+                ),
+                Input_HistoryMeetingsPersonsBoolExp(
+                  person: Input_PersonsBoolExp(
+                    name: Input_StringComparisonExp(
+                      $_eq: cursor.person.name,
+                    ),
+                    id: Input_UuidComparisonExp(
+                      $_gt: cursor.person.id.toUuid(),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+        ];
+
+        return graphQLClient.subscribeAndReturnParsed(
+          SubscriptionOptions(
+            document: documentNodeSubscriptionwatchMeetingRoster,
+            operationName: 'watchMeetingRoster',
+            variables: Variables_Subscription_watchMeetingRoster(
+              meetingId: meetingId.toUuid(),
+              asServant: asServant,
+              fromDate: fromDate,
+              toDate: toDate,
+              where: whereFilters,
+              limit: request.pageSize + 1,
+            ).toJson(),
+            parserFn: db.parser.singleListParser(
+              MeetingRosterEntry.fromJson,
+              pageSize: request.pageSize,
+            ),
+          ),
+        );
       },
     );
   }
@@ -205,7 +216,7 @@ class MeetingsDAO extends DAOBase<Meeting>
     required List<String> personIds,
     bool asServant = false,
   }) {
-    return graphQLClient.mutateAndReturnParsedNullable(
+    return graphQLClient.mutate(
       MutationOptions(
         document: documentNodeMutationmarkAttendanceMany,
         operationName: 'markAttendanceMany',
@@ -220,21 +231,19 @@ class MeetingsDAO extends DAOBase<Meeting>
               )
               .toList(),
         ).toJson(),
-        parserFn: (_) => null,
       ),
     );
   }
 
   /// Unmarks attendance by the attendance record [id] (preferred when id is known).
   Future<void> unmarkAttendance({required String id}) {
-    return graphQLClient.mutateAndReturnParsedNullable(
+    return graphQLClient.mutate(
       MutationOptions(
         document: documentNodeMutationunmarkAttendance,
         operationName: 'unmarkAttendance',
         variables: Variables_Mutation_unmarkAttendance(
           id: id.toUuid(),
         ).toJson(),
-        parserFn: (_) => null,
       ),
     );
   }
@@ -245,7 +254,7 @@ class MeetingsDAO extends DAOBase<Meeting>
     required String personId,
     bool asServant = false,
   }) {
-    return graphQLClient.mutateAndReturnParsedNullable(
+    return graphQLClient.mutate(
       MutationOptions(
         document: documentNodeMutationunmarkAttendanceBy,
         operationName: 'unmarkAttendanceBy',
@@ -254,7 +263,6 @@ class MeetingsDAO extends DAOBase<Meeting>
           personId: personId.toUuid(),
           asServant: asServant,
         ).toJson(),
-        parserFn: (_) => null,
       ),
     );
   }
