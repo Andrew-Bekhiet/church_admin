@@ -200,58 +200,25 @@ class PersonsDAO extends FullCRUDDAO<Person> {
     return graphQLClient.queryAndReturnParsedNullable(queryOptions);
   }
 
-  PaginatableStreamBase<LastRecordedByInfo> paginatePersonClassAttendance({
-    required String personId,
-    required String classId,
-    bool asAdmin = false,
-    List<Filter>? where,
-  }) {
-    return _paginatePersonAttendance(
-      asAdmin: asAdmin,
-      personId: personId,
-      where: [
-        Filter(
-          AttendanceRecordFields().class$.redirectTo(ClassFields().id),
-          PrimitiveOperator.eq,
-          classId,
-        ),
-        if (where != null) ...where,
-      ],
-    );
-  }
+  // TODO(ENG-99-follow-up): Re-implement these analysis methods on top of the
+  // new meetings model. The old attendance_history fields (service/class/group
+  // direct joins, asAdmin, dayId) are gone after migration #70.
 
-  PaginatableStreamBase<LastRecordedByInfo> paginatePersonGroupAttendance({
-    required String personId,
-    required String groupId,
-    bool asAdmin = false,
-    List<Filter>? where,
-  }) {
-    return _paginatePersonAttendance(
-      asAdmin: asAdmin,
-      personId: personId,
-      where: [
-        Filter(
-          AttendanceRecordFields().group.redirectTo(GroupFields().id),
-          PrimitiveOperator.eq,
-          groupId,
-        ),
-        if (where != null) ...where,
-      ],
-    );
-  }
-
+  /// Returns attendance history for a person filtered by service.
   PaginatableStreamBase<LastRecordedByInfo> paginatePersonServiceAttendance({
     required String personId,
     required String serviceId,
-    bool asAdmin = false,
+    bool asServant = false,
     List<Filter>? where,
   }) {
     return _paginatePersonAttendance(
-      asAdmin: asAdmin,
       personId: personId,
+      asServant: asServant,
       where: [
         Filter(
-          AttendanceRecordFields().service.redirectTo(ServiceFields().id),
+          AttendanceRecordFields().meeting.redirectTo(
+            MeetingFields().service.redirectTo(ServiceFields().id),
+          ),
           PrimitiveOperator.eq,
           serviceId,
         ),
@@ -260,9 +227,48 @@ class PersonsDAO extends FullCRUDDAO<Person> {
     );
   }
 
+  /// Returns attendance history for a person filtered by group.
+  PaginatableStreamBase<LastRecordedByInfo> paginatePersonGroupAttendance({
+    required String personId,
+    required String groupId,
+    bool asServant = false,
+    List<Filter>? where,
+  }) {
+    return _paginatePersonAttendance(
+      personId: personId,
+      asServant: asServant,
+      where: [
+        Filter(
+          AttendanceRecordFields().meeting.redirectTo(
+            MeetingFields().group.redirectTo(GroupFields().id),
+          ),
+          PrimitiveOperator.eq,
+          groupId,
+        ),
+        if (where != null) ...where,
+      ],
+    );
+  }
+
+  /// Stub — classes are no longer directly linked to attendance_history after
+  /// migration #70. Always returns an empty stream.
+  /// TODO(ENG-99-follow-up): Implement via meeting.serviceId + serviceStudyYear.
+  PaginatableStreamBase<LastRecordedByInfo> paginatePersonClassAttendance({
+    required String personId,
+    required String classId,
+    bool asServant = false,
+    List<Filter>? where,
+  }) {
+    return PaginatableStream.simple(
+      factory: (_) => Stream.value(
+        PaginatableStreamResponse<LastRecordedByInfo>(data: [], cursor: null),
+      ),
+    );
+  }
+
   PaginatableStreamBase<LastRecordedByInfo> _paginatePersonAttendance({
     required String personId,
-    required bool asAdmin,
+    bool asServant = false,
     required List<Filter>? where,
     int? limit,
   }) {
@@ -283,14 +289,14 @@ class PersonsDAO extends FullCRUDDAO<Person> {
                   personId,
                 ),
                 Filter(
-                  AttendanceRecordFields().asAdmin,
+                  AttendanceRecordFields().asServant,
                   PrimitiveOperator.eq,
-                  asAdmin,
+                  asServant,
                 ),
                 if (where != null) ...where,
                 if (request.cursor != null)
                   Filter(
-                    AttendanceRecordFields().time,
+                    AttendanceRecordFields().datetime,
                     PrimitiveOperator.lt,
                     request.cursor!.time,
                   ),

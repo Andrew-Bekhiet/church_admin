@@ -17,6 +17,14 @@ abstract final class _$AdvancedQueriesMetadata {
     fromJson: AttendanceRecord.fromJson,
   );
 
+  final meeting = QueryableType<Meeting>(
+    name: 'Meeting',
+    label: 'اجتماع',
+    fieldsMetadata: MeetingFields().allFields,
+    fieldsMetadataByName: MeetingFields().allFieldsByName,
+    fromJson: Meeting.fromJson,
+  );
+
   final aggregateData = QueryableType<AggregateData>(
     name: 'AggregateData',
     label: 'الإحصائيات',
@@ -320,6 +328,7 @@ abstract final class _$AdvancedQueriesMetadata {
 
   late final allQueryables = <QueryableType<Object>>[
     attendanceRecord,
+    meeting,
     aggregateData,
     historyAggregateData,
     address,
@@ -361,6 +370,7 @@ abstract final class _$AdvancedQueriesMetadata {
   ];
   late final allQueryablesByType = <Type, QueryableType<Object>>{
     AttendanceRecord: attendanceRecord,
+    Meeting: meeting,
     AggregateData: aggregateData,
     HistoryAggregateData: historyAggregateData,
     Address: address,

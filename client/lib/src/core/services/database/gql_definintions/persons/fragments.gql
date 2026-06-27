@@ -126,45 +126,5 @@ fragment FullPersonData on Persons {
   }
 }
 
-fragment FullPersonDataWithAttendance on Persons {
-  ...FullPersonData
-  classes(limit: 6, orderBy: { class: { name: ASC } }) {
-    class {
-      ...Class
-
-      attendanceHistoryAggregate(where: { personId: { _eq: $personId } }) {
-        aggregate {
-          max {
-            time
-          }
-        }
-      }
-    }
-  }
-  groups(limit: 6, orderBy: { group: { name: ASC } }) {
-    group {
-      ...Group
-
-      attendanceHistoryAggregate(where: { personId: { _eq: $personId } }) {
-        aggregate {
-          max {
-            time
-          }
-        }
-      }
-    }
-  }
-  services(limit: 6, orderBy: { service: { name: ASC } }) {
-    service {
-      ...ServiceWithStudyYears
-
-      attendanceHistoryAggregate(where: { personId: { _eq: $personId } }) {
-        aggregate {
-          max {
-            time
-          }
-        }
-      }
-    }
-  }
-}
+# FullPersonDataWithAttendance removed — attendanceHistoryAggregate no longer
+# exists on Classes, Services, Groups after migrations #70/#67.

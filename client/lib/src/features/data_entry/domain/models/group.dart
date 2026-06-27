@@ -55,9 +55,6 @@ class Group extends ViewableWithIDAndImage
   final HistoryAggregateData? attendanceHistoryAggregate;
 
   @override
-  final HistoryAggregateData? attendanceDaysConstraintsAggregate;
-
-  @override
   @JsonKey(includeToJson: false)
   final bool userCanEdit;
 
@@ -73,7 +70,6 @@ class Group extends ViewableWithIDAndImage
     this.lastEdit,
     this.adminUsers,
     this.attendanceHistoryAggregate,
-    this.attendanceDaysConstraintsAggregate,
     this.userCanEdit = false,
   });
 

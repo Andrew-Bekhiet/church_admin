@@ -103,33 +103,6 @@ fragment AttendanceFields on AuthUsersData {
     permissionId
     service {
       ...Service
-      attendanceHistoryAggregate(
-        where: {
-          dayId: { _gte: $dateFrom, _lte: $dateTo }
-          personId: { _eq: $personId }
-          asAdmin: { _eq: true }
-        }
-      ) {
-        aggregate {
-          count
-          max {
-            dayId
-          }
-        }
-        nodes {
-          dayId
-        }
-      }
-      attendanceDaysConstraintsAggregate(
-        where: { dayId: { _gte: $dateFrom, _lte: $dateTo } }
-      ) {
-        aggregate {
-          count
-        }
-        nodes {
-          dayId
-        }
-      }
     }
   }
   classesHistory: adminOn(
@@ -139,33 +112,6 @@ fragment AttendanceFields on AuthUsersData {
     permissionId
     classes(where: { id: { _in: $classesIds } }, distinctOn: id) {
       ...Class
-      attendanceHistoryAggregate(
-        where: {
-          dayId: { _gte: $dateFrom, _lte: $dateTo }
-          personId: { _eq: $personId }
-          asAdmin: { _eq: true }
-        }
-      ) {
-        aggregate {
-          count
-          max {
-            dayId
-          }
-        }
-        nodes {
-          dayId
-        }
-      }
-      attendanceDaysConstraintsAggregate(
-        where: { dayId: { _gte: $dateFrom, _lte: $dateTo } }
-      ) {
-        aggregate {
-          count
-        }
-        nodes {
-          dayId
-        }
-      }
     }
   }
   groupsHistory: adminOn(
@@ -175,33 +121,6 @@ fragment AttendanceFields on AuthUsersData {
     permissionId
     group {
       ...Group
-      attendanceHistoryAggregate(
-        where: {
-          dayId: { _gte: $dateFrom, _lte: $dateTo }
-          personId: { _eq: $personId }
-          asAdmin: { _eq: true }
-        }
-      ) {
-        aggregate {
-          count
-          max {
-            dayId
-          }
-        }
-        nodes {
-          dayId
-        }
-      }
-      attendanceDaysConstraintsAggregate(
-        where: { dayId: { _gte: $dateFrom, _lte: $dateTo } }
-      ) {
-        aggregate {
-          count
-        }
-        nodes {
-          dayId
-        }
-      }
     }
   }
 }

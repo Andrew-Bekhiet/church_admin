@@ -120,15 +120,20 @@ class _FakeHistoryDAO_16 extends _i1.SmartFake implements _i2.HistoryDAO {
     : super(parent, parentInvocation);
 }
 
-class _FakeSyncKVStore_17<T> extends _i1.SmartFake
-    implements _i2.SyncKVStore<T> {
-  _FakeSyncKVStore_17(Object parent, Invocation parentInvocation)
+class _FakeMeetingsDAO_17 extends _i1.SmartFake implements _i2.MeetingsDAO {
+  _FakeMeetingsDAO_17(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeScrollPosition_18 extends _i1.SmartFake
+class _FakeSyncKVStore_18<T> extends _i1.SmartFake
+    implements _i2.SyncKVStore<T> {
+  _FakeSyncKVStore_18(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
+}
+
+class _FakeScrollPosition_19 extends _i1.SmartFake
     implements _i3.ScrollPosition {
-  _FakeScrollPosition_18(Object parent, Invocation parentInvocation)
+  _FakeScrollPosition_19(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
@@ -421,6 +426,21 @@ class MockDatabaseService extends _i1.Mock implements _i2.DatabaseService {
           as _i2.HistoryDAO);
 
   @override
+  _i2.MeetingsDAO get meetings =>
+      (super.noSuchMethod(
+            Invocation.getter(#meetings),
+            returnValue: _FakeMeetingsDAO_17(
+              this,
+              Invocation.getter(#meetings),
+            ),
+            returnValueForMissingStub: _FakeMeetingsDAO_17(
+              this,
+              Invocation.getter(#meetings),
+            ),
+          )
+          as _i2.MeetingsDAO);
+
+  @override
   Map<Type, _i2.DAOBase<_i2.ViewableWithID>> get daosByType =>
       (super.noSuchMethod(
             Invocation.getter(#daosByType),
@@ -440,11 +460,11 @@ class MockUserSettingsService extends _i1.Mock
   _i2.SyncKVStore<dynamic> get box =>
       (super.noSuchMethod(
             Invocation.getter(#box),
-            returnValue: _FakeSyncKVStore_17<dynamic>(
+            returnValue: _FakeSyncKVStore_18<dynamic>(
               this,
               Invocation.getter(#box),
             ),
-            returnValueForMissingStub: _FakeSyncKVStore_17<dynamic>(
+            returnValueForMissingStub: _FakeSyncKVStore_18<dynamic>(
               this,
               Invocation.getter(#box),
             ),
@@ -662,11 +682,11 @@ class MockPageController extends _i1.Mock implements _i7.PageController {
   _i3.ScrollPosition get position =>
       (super.noSuchMethod(
             Invocation.getter(#position),
-            returnValue: _FakeScrollPosition_18(
+            returnValue: _FakeScrollPosition_19(
               this,
               Invocation.getter(#position),
             ),
-            returnValueForMissingStub: _FakeScrollPosition_18(
+            returnValueForMissingStub: _FakeScrollPosition_19(
               this,
               Invocation.getter(#position),
             ),
@@ -756,7 +776,7 @@ class MockPageController extends _i1.Mock implements _i7.PageController {
               context,
               oldPosition,
             ]),
-            returnValue: _FakeScrollPosition_18(
+            returnValue: _FakeScrollPosition_19(
               this,
               Invocation.method(#createScrollPosition, [
                 physics,
@@ -764,7 +784,7 @@ class MockPageController extends _i1.Mock implements _i7.PageController {
                 oldPosition,
               ]),
             ),
-            returnValueForMissingStub: _FakeScrollPosition_18(
+            returnValueForMissingStub: _FakeScrollPosition_19(
               this,
               Invocation.method(#createScrollPosition, [
                 physics,

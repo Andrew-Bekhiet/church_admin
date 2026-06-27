@@ -1,114 +1,185 @@
 // Part 54 of the schema
 part of "schema.graphql.dart";
 
-abstract class CopyWith_Input_UniversitiesOrderBy<TRes> {
-  factory CopyWith_Input_UniversitiesOrderBy(
-    Input_UniversitiesOrderBy instance,
-    TRes Function(Input_UniversitiesOrderBy) then,
-  ) = _CopyWithImpl_Input_UniversitiesOrderBy;
+abstract class CopyWith_Input_StudyYearsInsertInput<TRes> {
+  factory CopyWith_Input_StudyYearsInsertInput(
+    Input_StudyYearsInsertInput instance,
+    TRes Function(Input_StudyYearsInsertInput) then,
+  ) = _CopyWithImpl_Input_StudyYearsInsertInput;
 
-  factory CopyWith_Input_UniversitiesOrderBy.stub(TRes res) =
-      _CopyWithStubImpl_Input_UniversitiesOrderBy;
+  factory CopyWith_Input_StudyYearsInsertInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_StudyYearsInsertInput;
 
   TRes call({
-    Input_CollegesAggregateOrderBy? collegesAggregate,
-    Enum_OrderBy? id,
-    Enum_OrderBy? name,
+    Input_ClassesArrRelInsertInput? classes,
+    Input_HistoryMeetingsArrRelInsertInput? meetings,
+    String? name,
+    int? order,
+    Input_PersonsArrRelInsertInput? persons,
   });
-  CopyWith_Input_CollegesAggregateOrderBy<TRes> get collegesAggregate;
+  CopyWith_Input_ClassesArrRelInsertInput<TRes> get classes;
+  CopyWith_Input_HistoryMeetingsArrRelInsertInput<TRes> get meetings;
+  CopyWith_Input_PersonsArrRelInsertInput<TRes> get persons;
 }
 
-class _CopyWithImpl_Input_UniversitiesOrderBy<TRes>
-    implements CopyWith_Input_UniversitiesOrderBy<TRes> {
-  _CopyWithImpl_Input_UniversitiesOrderBy(this._instance, this._then);
+class _CopyWithImpl_Input_StudyYearsInsertInput<TRes>
+    implements CopyWith_Input_StudyYearsInsertInput<TRes> {
+  _CopyWithImpl_Input_StudyYearsInsertInput(this._instance, this._then);
 
-  final Input_UniversitiesOrderBy _instance;
+  final Input_StudyYearsInsertInput _instance;
 
-  final TRes Function(Input_UniversitiesOrderBy) _then;
+  final TRes Function(Input_StudyYearsInsertInput) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
-    Object? collegesAggregate = _undefined,
-    Object? id = _undefined,
+    Object? classes = _undefined,
+    Object? meetings = _undefined,
     Object? name = _undefined,
+    Object? order = _undefined,
+    Object? persons = _undefined,
   }) => _then(
-    Input_UniversitiesOrderBy._({
+    Input_StudyYearsInsertInput._({
       ..._instance._$data,
-      if (collegesAggregate != _undefined)
-        'collegesAggregate':
-            (collegesAggregate as Input_CollegesAggregateOrderBy?),
-      if (id != _undefined) 'id': (id as Enum_OrderBy?),
-      if (name != _undefined) 'name': (name as Enum_OrderBy?),
+      if (classes != _undefined)
+        'classes': (classes as Input_ClassesArrRelInsertInput?),
+      if (meetings != _undefined)
+        'meetings': (meetings as Input_HistoryMeetingsArrRelInsertInput?),
+      if (name != _undefined) 'name': (name as String?),
+      if (order != _undefined) 'order': (order as int?),
+      if (persons != _undefined)
+        'persons': (persons as Input_PersonsArrRelInsertInput?),
     }),
   );
 
-  CopyWith_Input_CollegesAggregateOrderBy<TRes> get collegesAggregate {
-    final local$collegesAggregate = _instance.collegesAggregate;
-    return local$collegesAggregate == null
-        ? CopyWith_Input_CollegesAggregateOrderBy.stub(_then(_instance))
-        : CopyWith_Input_CollegesAggregateOrderBy(
-            local$collegesAggregate,
-            (e) => call(collegesAggregate: e),
+  CopyWith_Input_ClassesArrRelInsertInput<TRes> get classes {
+    final local$classes = _instance.classes;
+    return local$classes == null
+        ? CopyWith_Input_ClassesArrRelInsertInput.stub(_then(_instance))
+        : CopyWith_Input_ClassesArrRelInsertInput(
+            local$classes,
+            (e) => call(classes: e),
+          );
+  }
+
+  CopyWith_Input_HistoryMeetingsArrRelInsertInput<TRes> get meetings {
+    final local$meetings = _instance.meetings;
+    return local$meetings == null
+        ? CopyWith_Input_HistoryMeetingsArrRelInsertInput.stub(_then(_instance))
+        : CopyWith_Input_HistoryMeetingsArrRelInsertInput(
+            local$meetings,
+            (e) => call(meetings: e),
+          );
+  }
+
+  CopyWith_Input_PersonsArrRelInsertInput<TRes> get persons {
+    final local$persons = _instance.persons;
+    return local$persons == null
+        ? CopyWith_Input_PersonsArrRelInsertInput.stub(_then(_instance))
+        : CopyWith_Input_PersonsArrRelInsertInput(
+            local$persons,
+            (e) => call(persons: e),
           );
   }
 }
 
-class _CopyWithStubImpl_Input_UniversitiesOrderBy<TRes>
-    implements CopyWith_Input_UniversitiesOrderBy<TRes> {
-  _CopyWithStubImpl_Input_UniversitiesOrderBy(this._res);
+class _CopyWithStubImpl_Input_StudyYearsInsertInput<TRes>
+    implements CopyWith_Input_StudyYearsInsertInput<TRes> {
+  _CopyWithStubImpl_Input_StudyYearsInsertInput(this._res);
 
   TRes _res;
 
   call({
-    Input_CollegesAggregateOrderBy? collegesAggregate,
-    Enum_OrderBy? id,
-    Enum_OrderBy? name,
+    Input_ClassesArrRelInsertInput? classes,
+    Input_HistoryMeetingsArrRelInsertInput? meetings,
+    String? name,
+    int? order,
+    Input_PersonsArrRelInsertInput? persons,
   }) => _res;
 
-  CopyWith_Input_CollegesAggregateOrderBy<TRes> get collegesAggregate =>
-      CopyWith_Input_CollegesAggregateOrderBy.stub(_res);
+  CopyWith_Input_ClassesArrRelInsertInput<TRes> get classes =>
+      CopyWith_Input_ClassesArrRelInsertInput.stub(_res);
+
+  CopyWith_Input_HistoryMeetingsArrRelInsertInput<TRes> get meetings =>
+      CopyWith_Input_HistoryMeetingsArrRelInsertInput.stub(_res);
+
+  CopyWith_Input_PersonsArrRelInsertInput<TRes> get persons =>
+      CopyWith_Input_PersonsArrRelInsertInput.stub(_res);
 }
 
-class Input_UniversitiesPkColumnsInput {
-  factory Input_UniversitiesPkColumnsInput({required UuidValue id}) =>
-      Input_UniversitiesPkColumnsInput._({r'id': id});
+class Input_StudyYearsObjRelInsertInput {
+  factory Input_StudyYearsObjRelInsertInput({
+    required Input_StudyYearsInsertInput data,
+    Input_StudyYearsOnConflict? onConflict,
+  }) => Input_StudyYearsObjRelInsertInput._({
+    r'data': data,
+    if (onConflict != null) r'onConflict': onConflict,
+  });
 
-  Input_UniversitiesPkColumnsInput._(this._$data);
+  Input_StudyYearsObjRelInsertInput._(this._$data);
 
-  factory Input_UniversitiesPkColumnsInput.fromJson(Map<String, dynamic> data) {
+  factory Input_StudyYearsObjRelInsertInput.fromJson(
+    Map<String, dynamic> data,
+  ) {
     final result$data = <String, dynamic>{};
-    final l$id = data['id'];
-    result$data['id'] = stringToUuid(l$id);
-    return Input_UniversitiesPkColumnsInput._(result$data);
+    final l$data = data['data'];
+    result$data['data'] = Input_StudyYearsInsertInput.fromJson(
+      (l$data as Map<String, dynamic>),
+    );
+    if (data.containsKey('onConflict')) {
+      final l$onConflict = data['onConflict'];
+      result$data['onConflict'] = l$onConflict == null
+          ? null
+          : Input_StudyYearsOnConflict.fromJson(
+              (l$onConflict as Map<String, dynamic>),
+            );
+    }
+    return Input_StudyYearsObjRelInsertInput._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  UuidValue get id => (_$data['id'] as UuidValue);
+  Input_StudyYearsInsertInput get data =>
+      (_$data['data'] as Input_StudyYearsInsertInput);
+
+  Input_StudyYearsOnConflict? get onConflict =>
+      (_$data['onConflict'] as Input_StudyYearsOnConflict?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
-    final l$id = id;
-    result$data['id'] = uuidToString(l$id);
+    final l$data = data;
+    result$data['data'] = l$data.toJson();
+    if (_$data.containsKey('onConflict')) {
+      final l$onConflict = onConflict;
+      result$data['onConflict'] = l$onConflict?.toJson();
+    }
     return result$data;
   }
 
-  CopyWith_Input_UniversitiesPkColumnsInput<Input_UniversitiesPkColumnsInput>
-  get copyWith => CopyWith_Input_UniversitiesPkColumnsInput(this, (i) => i);
+  CopyWith_Input_StudyYearsObjRelInsertInput<Input_StudyYearsObjRelInsertInput>
+  get copyWith => CopyWith_Input_StudyYearsObjRelInsertInput(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input_UniversitiesPkColumnsInput ||
+    if (other is! Input_StudyYearsObjRelInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
-    final l$id = id;
-    final lOther$id = other.id;
-    if (l$id != lOther$id) {
+    final l$data = data;
+    final lOther$data = other.data;
+    if (l$data != lOther$data) {
+      return false;
+    }
+    final l$onConflict = onConflict;
+    final lOther$onConflict = other.onConflict;
+    if (_$data.containsKey('onConflict') !=
+        other._$data.containsKey('onConflict')) {
+      return false;
+    }
+    if (l$onConflict != lOther$onConflict) {
       return false;
     }
     return true;
@@ -116,63 +187,698 @@ class Input_UniversitiesPkColumnsInput {
 
   @override
   int get hashCode {
-    final l$id = id;
-    return Object.hashAll([l$id]);
+    final l$data = data;
+    final l$onConflict = onConflict;
+    return Object.hashAll([
+      l$data,
+      _$data.containsKey('onConflict') ? l$onConflict : const {},
+    ]);
   }
 }
 
-abstract class CopyWith_Input_UniversitiesPkColumnsInput<TRes> {
-  factory CopyWith_Input_UniversitiesPkColumnsInput(
-    Input_UniversitiesPkColumnsInput instance,
-    TRes Function(Input_UniversitiesPkColumnsInput) then,
-  ) = _CopyWithImpl_Input_UniversitiesPkColumnsInput;
+abstract class CopyWith_Input_StudyYearsObjRelInsertInput<TRes> {
+  factory CopyWith_Input_StudyYearsObjRelInsertInput(
+    Input_StudyYearsObjRelInsertInput instance,
+    TRes Function(Input_StudyYearsObjRelInsertInput) then,
+  ) = _CopyWithImpl_Input_StudyYearsObjRelInsertInput;
 
-  factory CopyWith_Input_UniversitiesPkColumnsInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_UniversitiesPkColumnsInput;
+  factory CopyWith_Input_StudyYearsObjRelInsertInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_StudyYearsObjRelInsertInput;
 
-  TRes call({UuidValue? id});
+  TRes call({
+    Input_StudyYearsInsertInput? data,
+    Input_StudyYearsOnConflict? onConflict,
+  });
+  CopyWith_Input_StudyYearsInsertInput<TRes> get data;
+  CopyWith_Input_StudyYearsOnConflict<TRes> get onConflict;
 }
 
-class _CopyWithImpl_Input_UniversitiesPkColumnsInput<TRes>
-    implements CopyWith_Input_UniversitiesPkColumnsInput<TRes> {
-  _CopyWithImpl_Input_UniversitiesPkColumnsInput(this._instance, this._then);
+class _CopyWithImpl_Input_StudyYearsObjRelInsertInput<TRes>
+    implements CopyWith_Input_StudyYearsObjRelInsertInput<TRes> {
+  _CopyWithImpl_Input_StudyYearsObjRelInsertInput(this._instance, this._then);
 
-  final Input_UniversitiesPkColumnsInput _instance;
+  final Input_StudyYearsObjRelInsertInput _instance;
 
-  final TRes Function(Input_UniversitiesPkColumnsInput) _then;
+  final TRes Function(Input_StudyYearsObjRelInsertInput) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? id = _undefined}) => _then(
-    Input_UniversitiesPkColumnsInput._({
+  TRes call({Object? data = _undefined, Object? onConflict = _undefined}) =>
+      _then(
+        Input_StudyYearsObjRelInsertInput._({
+          ..._instance._$data,
+          if (data != _undefined && data != null)
+            'data': (data as Input_StudyYearsInsertInput),
+          if (onConflict != _undefined)
+            'onConflict': (onConflict as Input_StudyYearsOnConflict?),
+        }),
+      );
+
+  CopyWith_Input_StudyYearsInsertInput<TRes> get data {
+    final local$data = _instance.data;
+    return CopyWith_Input_StudyYearsInsertInput(
+      local$data,
+      (e) => call(data: e),
+    );
+  }
+
+  CopyWith_Input_StudyYearsOnConflict<TRes> get onConflict {
+    final local$onConflict = _instance.onConflict;
+    return local$onConflict == null
+        ? CopyWith_Input_StudyYearsOnConflict.stub(_then(_instance))
+        : CopyWith_Input_StudyYearsOnConflict(
+            local$onConflict,
+            (e) => call(onConflict: e),
+          );
+  }
+}
+
+class _CopyWithStubImpl_Input_StudyYearsObjRelInsertInput<TRes>
+    implements CopyWith_Input_StudyYearsObjRelInsertInput<TRes> {
+  _CopyWithStubImpl_Input_StudyYearsObjRelInsertInput(this._res);
+
+  TRes _res;
+
+  call({
+    Input_StudyYearsInsertInput? data,
+    Input_StudyYearsOnConflict? onConflict,
+  }) => _res;
+
+  CopyWith_Input_StudyYearsInsertInput<TRes> get data =>
+      CopyWith_Input_StudyYearsInsertInput.stub(_res);
+
+  CopyWith_Input_StudyYearsOnConflict<TRes> get onConflict =>
+      CopyWith_Input_StudyYearsOnConflict.stub(_res);
+}
+
+class Input_StudyYearsOnConflict {
+  factory Input_StudyYearsOnConflict({
+    required Enum_StudyYearsConstraint constraint,
+    List<Enum_StudyYearsUpdateColumn>? updateColumns,
+    Input_StudyYearsBoolExp? where,
+  }) => Input_StudyYearsOnConflict._({
+    r'constraint': constraint,
+    if (updateColumns != null) r'updateColumns': updateColumns,
+    if (where != null) r'where': where,
+  });
+
+  Input_StudyYearsOnConflict._(this._$data);
+
+  factory Input_StudyYearsOnConflict.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$constraint = data['constraint'];
+    result$data['constraint'] = fromJson_Enum_StudyYearsConstraint(
+      (l$constraint as String),
+    );
+    if (data.containsKey('updateColumns')) {
+      final l$updateColumns = data['updateColumns'];
+      result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
+          .map((e) => fromJson_Enum_StudyYearsUpdateColumn((e as String)))
+          .toList();
+    }
+    if (data.containsKey('where')) {
+      final l$where = data['where'];
+      result$data['where'] = l$where == null
+          ? null
+          : Input_StudyYearsBoolExp.fromJson((l$where as Map<String, dynamic>));
+    }
+    return Input_StudyYearsOnConflict._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Enum_StudyYearsConstraint get constraint =>
+      (_$data['constraint'] as Enum_StudyYearsConstraint);
+
+  List<Enum_StudyYearsUpdateColumn>? get updateColumns =>
+      (_$data['updateColumns'] as List<Enum_StudyYearsUpdateColumn>?);
+
+  Input_StudyYearsBoolExp? get where =>
+      (_$data['where'] as Input_StudyYearsBoolExp?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$constraint = constraint;
+    result$data['constraint'] = toJson_Enum_StudyYearsConstraint(l$constraint);
+    if (_$data.containsKey('updateColumns')) {
+      final l$updateColumns = updateColumns;
+      result$data['updateColumns'] =
+          (l$updateColumns as List<Enum_StudyYearsUpdateColumn>)
+              .map((e) => toJson_Enum_StudyYearsUpdateColumn(e))
+              .toList();
+    }
+    if (_$data.containsKey('where')) {
+      final l$where = where;
+      result$data['where'] = l$where?.toJson();
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_StudyYearsOnConflict<Input_StudyYearsOnConflict>
+  get copyWith => CopyWith_Input_StudyYearsOnConflict(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_StudyYearsOnConflict ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$constraint = constraint;
+    final lOther$constraint = other.constraint;
+    if (l$constraint != lOther$constraint) {
+      return false;
+    }
+    final l$updateColumns = updateColumns;
+    final lOther$updateColumns = other.updateColumns;
+    if (_$data.containsKey('updateColumns') !=
+        other._$data.containsKey('updateColumns')) {
+      return false;
+    }
+    if (l$updateColumns != null && lOther$updateColumns != null) {
+      if (l$updateColumns.length != lOther$updateColumns.length) {
+        return false;
+      }
+      for (int i = 0; i < l$updateColumns.length; i++) {
+        final l$updateColumns$entry = l$updateColumns[i];
+        final lOther$updateColumns$entry = lOther$updateColumns[i];
+        if (l$updateColumns$entry != lOther$updateColumns$entry) {
+          return false;
+        }
+      }
+    } else if (l$updateColumns != lOther$updateColumns) {
+      return false;
+    }
+    final l$where = where;
+    final lOther$where = other.where;
+    if (_$data.containsKey('where') != other._$data.containsKey('where')) {
+      return false;
+    }
+    if (l$where != lOther$where) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$constraint = constraint;
+    final l$updateColumns = updateColumns;
+    final l$where = where;
+    return Object.hashAll([
+      l$constraint,
+      _$data.containsKey('updateColumns')
+          ? l$updateColumns == null
+                ? null
+                : Object.hashAll(l$updateColumns.map((v) => v))
+          : const {},
+      _$data.containsKey('where') ? l$where : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_StudyYearsOnConflict<TRes> {
+  factory CopyWith_Input_StudyYearsOnConflict(
+    Input_StudyYearsOnConflict instance,
+    TRes Function(Input_StudyYearsOnConflict) then,
+  ) = _CopyWithImpl_Input_StudyYearsOnConflict;
+
+  factory CopyWith_Input_StudyYearsOnConflict.stub(TRes res) =
+      _CopyWithStubImpl_Input_StudyYearsOnConflict;
+
+  TRes call({
+    Enum_StudyYearsConstraint? constraint,
+    List<Enum_StudyYearsUpdateColumn>? updateColumns,
+    Input_StudyYearsBoolExp? where,
+  });
+  CopyWith_Input_StudyYearsBoolExp<TRes> get where;
+}
+
+class _CopyWithImpl_Input_StudyYearsOnConflict<TRes>
+    implements CopyWith_Input_StudyYearsOnConflict<TRes> {
+  _CopyWithImpl_Input_StudyYearsOnConflict(this._instance, this._then);
+
+  final Input_StudyYearsOnConflict _instance;
+
+  final TRes Function(Input_StudyYearsOnConflict) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? constraint = _undefined,
+    Object? updateColumns = _undefined,
+    Object? where = _undefined,
+  }) => _then(
+    Input_StudyYearsOnConflict._({
       ..._instance._$data,
-      if (id != _undefined && id != null) 'id': (id as UuidValue),
+      if (constraint != _undefined && constraint != null)
+        'constraint': (constraint as Enum_StudyYearsConstraint),
+      if (updateColumns != _undefined && updateColumns != null)
+        'updateColumns': (updateColumns as List<Enum_StudyYearsUpdateColumn>),
+      if (where != _undefined) 'where': (where as Input_StudyYearsBoolExp?),
+    }),
+  );
+
+  CopyWith_Input_StudyYearsBoolExp<TRes> get where {
+    final local$where = _instance.where;
+    return local$where == null
+        ? CopyWith_Input_StudyYearsBoolExp.stub(_then(_instance))
+        : CopyWith_Input_StudyYearsBoolExp(local$where, (e) => call(where: e));
+  }
+}
+
+class _CopyWithStubImpl_Input_StudyYearsOnConflict<TRes>
+    implements CopyWith_Input_StudyYearsOnConflict<TRes> {
+  _CopyWithStubImpl_Input_StudyYearsOnConflict(this._res);
+
+  TRes _res;
+
+  call({
+    Enum_StudyYearsConstraint? constraint,
+    List<Enum_StudyYearsUpdateColumn>? updateColumns,
+    Input_StudyYearsBoolExp? where,
+  }) => _res;
+
+  CopyWith_Input_StudyYearsBoolExp<TRes> get where =>
+      CopyWith_Input_StudyYearsBoolExp.stub(_res);
+}
+
+class Input_StudyYearsOrderBy {
+  factory Input_StudyYearsOrderBy({
+    Input_ClassesAggregateOrderBy? classesAggregate,
+    Enum_OrderBy? id,
+    Input_HistoryMeetingsAggregateOrderBy? meetingsAggregate,
+    Enum_OrderBy? name,
+    Enum_OrderBy? order,
+    Input_PersonsAggregateOrderBy? personsAggregate,
+  }) => Input_StudyYearsOrderBy._({
+    if (classesAggregate != null) r'classesAggregate': classesAggregate,
+    if (id != null) r'id': id,
+    if (meetingsAggregate != null) r'meetingsAggregate': meetingsAggregate,
+    if (name != null) r'name': name,
+    if (order != null) r'order': order,
+    if (personsAggregate != null) r'personsAggregate': personsAggregate,
+  });
+
+  Input_StudyYearsOrderBy._(this._$data);
+
+  factory Input_StudyYearsOrderBy.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('classesAggregate')) {
+      final l$classesAggregate = data['classesAggregate'];
+      result$data['classesAggregate'] = l$classesAggregate == null
+          ? null
+          : Input_ClassesAggregateOrderBy.fromJson(
+              (l$classesAggregate as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('id')) {
+      final l$id = data['id'];
+      result$data['id'] = l$id == null
+          ? null
+          : fromJson_Enum_OrderBy((l$id as String));
+    }
+    if (data.containsKey('meetingsAggregate')) {
+      final l$meetingsAggregate = data['meetingsAggregate'];
+      result$data['meetingsAggregate'] = l$meetingsAggregate == null
+          ? null
+          : Input_HistoryMeetingsAggregateOrderBy.fromJson(
+              (l$meetingsAggregate as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('name')) {
+      final l$name = data['name'];
+      result$data['name'] = l$name == null
+          ? null
+          : fromJson_Enum_OrderBy((l$name as String));
+    }
+    if (data.containsKey('order')) {
+      final l$order = data['order'];
+      result$data['order'] = l$order == null
+          ? null
+          : fromJson_Enum_OrderBy((l$order as String));
+    }
+    if (data.containsKey('personsAggregate')) {
+      final l$personsAggregate = data['personsAggregate'];
+      result$data['personsAggregate'] = l$personsAggregate == null
+          ? null
+          : Input_PersonsAggregateOrderBy.fromJson(
+              (l$personsAggregate as Map<String, dynamic>),
+            );
+    }
+    return Input_StudyYearsOrderBy._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Input_ClassesAggregateOrderBy? get classesAggregate =>
+      (_$data['classesAggregate'] as Input_ClassesAggregateOrderBy?);
+
+  Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
+
+  Input_HistoryMeetingsAggregateOrderBy? get meetingsAggregate =>
+      (_$data['meetingsAggregate'] as Input_HistoryMeetingsAggregateOrderBy?);
+
+  Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get order => (_$data['order'] as Enum_OrderBy?);
+
+  Input_PersonsAggregateOrderBy? get personsAggregate =>
+      (_$data['personsAggregate'] as Input_PersonsAggregateOrderBy?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('classesAggregate')) {
+      final l$classesAggregate = classesAggregate;
+      result$data['classesAggregate'] = l$classesAggregate?.toJson();
+    }
+    if (_$data.containsKey('id')) {
+      final l$id = id;
+      result$data['id'] = l$id == null ? null : toJson_Enum_OrderBy(l$id);
+    }
+    if (_$data.containsKey('meetingsAggregate')) {
+      final l$meetingsAggregate = meetingsAggregate;
+      result$data['meetingsAggregate'] = l$meetingsAggregate?.toJson();
+    }
+    if (_$data.containsKey('name')) {
+      final l$name = name;
+      result$data['name'] = l$name == null ? null : toJson_Enum_OrderBy(l$name);
+    }
+    if (_$data.containsKey('order')) {
+      final l$order = order;
+      result$data['order'] = l$order == null
+          ? null
+          : toJson_Enum_OrderBy(l$order);
+    }
+    if (_$data.containsKey('personsAggregate')) {
+      final l$personsAggregate = personsAggregate;
+      result$data['personsAggregate'] = l$personsAggregate?.toJson();
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_StudyYearsOrderBy<Input_StudyYearsOrderBy> get copyWith =>
+      CopyWith_Input_StudyYearsOrderBy(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_StudyYearsOrderBy || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$classesAggregate = classesAggregate;
+    final lOther$classesAggregate = other.classesAggregate;
+    if (_$data.containsKey('classesAggregate') !=
+        other._$data.containsKey('classesAggregate')) {
+      return false;
+    }
+    if (l$classesAggregate != lOther$classesAggregate) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
+      return false;
+    }
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$meetingsAggregate = meetingsAggregate;
+    final lOther$meetingsAggregate = other.meetingsAggregate;
+    if (_$data.containsKey('meetingsAggregate') !=
+        other._$data.containsKey('meetingsAggregate')) {
+      return false;
+    }
+    if (l$meetingsAggregate != lOther$meetingsAggregate) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (_$data.containsKey('name') != other._$data.containsKey('name')) {
+      return false;
+    }
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$order = order;
+    final lOther$order = other.order;
+    if (_$data.containsKey('order') != other._$data.containsKey('order')) {
+      return false;
+    }
+    if (l$order != lOther$order) {
+      return false;
+    }
+    final l$personsAggregate = personsAggregate;
+    final lOther$personsAggregate = other.personsAggregate;
+    if (_$data.containsKey('personsAggregate') !=
+        other._$data.containsKey('personsAggregate')) {
+      return false;
+    }
+    if (l$personsAggregate != lOther$personsAggregate) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$classesAggregate = classesAggregate;
+    final l$id = id;
+    final l$meetingsAggregate = meetingsAggregate;
+    final l$name = name;
+    final l$order = order;
+    final l$personsAggregate = personsAggregate;
+    return Object.hashAll([
+      _$data.containsKey('classesAggregate') ? l$classesAggregate : const {},
+      _$data.containsKey('id') ? l$id : const {},
+      _$data.containsKey('meetingsAggregate') ? l$meetingsAggregate : const {},
+      _$data.containsKey('name') ? l$name : const {},
+      _$data.containsKey('order') ? l$order : const {},
+      _$data.containsKey('personsAggregate') ? l$personsAggregate : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_StudyYearsOrderBy<TRes> {
+  factory CopyWith_Input_StudyYearsOrderBy(
+    Input_StudyYearsOrderBy instance,
+    TRes Function(Input_StudyYearsOrderBy) then,
+  ) = _CopyWithImpl_Input_StudyYearsOrderBy;
+
+  factory CopyWith_Input_StudyYearsOrderBy.stub(TRes res) =
+      _CopyWithStubImpl_Input_StudyYearsOrderBy;
+
+  TRes call({
+    Input_ClassesAggregateOrderBy? classesAggregate,
+    Enum_OrderBy? id,
+    Input_HistoryMeetingsAggregateOrderBy? meetingsAggregate,
+    Enum_OrderBy? name,
+    Enum_OrderBy? order,
+    Input_PersonsAggregateOrderBy? personsAggregate,
+  });
+  CopyWith_Input_ClassesAggregateOrderBy<TRes> get classesAggregate;
+  CopyWith_Input_HistoryMeetingsAggregateOrderBy<TRes> get meetingsAggregate;
+  CopyWith_Input_PersonsAggregateOrderBy<TRes> get personsAggregate;
+}
+
+class _CopyWithImpl_Input_StudyYearsOrderBy<TRes>
+    implements CopyWith_Input_StudyYearsOrderBy<TRes> {
+  _CopyWithImpl_Input_StudyYearsOrderBy(this._instance, this._then);
+
+  final Input_StudyYearsOrderBy _instance;
+
+  final TRes Function(Input_StudyYearsOrderBy) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? classesAggregate = _undefined,
+    Object? id = _undefined,
+    Object? meetingsAggregate = _undefined,
+    Object? name = _undefined,
+    Object? order = _undefined,
+    Object? personsAggregate = _undefined,
+  }) => _then(
+    Input_StudyYearsOrderBy._({
+      ..._instance._$data,
+      if (classesAggregate != _undefined)
+        'classesAggregate':
+            (classesAggregate as Input_ClassesAggregateOrderBy?),
+      if (id != _undefined) 'id': (id as Enum_OrderBy?),
+      if (meetingsAggregate != _undefined)
+        'meetingsAggregate':
+            (meetingsAggregate as Input_HistoryMeetingsAggregateOrderBy?),
+      if (name != _undefined) 'name': (name as Enum_OrderBy?),
+      if (order != _undefined) 'order': (order as Enum_OrderBy?),
+      if (personsAggregate != _undefined)
+        'personsAggregate':
+            (personsAggregate as Input_PersonsAggregateOrderBy?),
+    }),
+  );
+
+  CopyWith_Input_ClassesAggregateOrderBy<TRes> get classesAggregate {
+    final local$classesAggregate = _instance.classesAggregate;
+    return local$classesAggregate == null
+        ? CopyWith_Input_ClassesAggregateOrderBy.stub(_then(_instance))
+        : CopyWith_Input_ClassesAggregateOrderBy(
+            local$classesAggregate,
+            (e) => call(classesAggregate: e),
+          );
+  }
+
+  CopyWith_Input_HistoryMeetingsAggregateOrderBy<TRes> get meetingsAggregate {
+    final local$meetingsAggregate = _instance.meetingsAggregate;
+    return local$meetingsAggregate == null
+        ? CopyWith_Input_HistoryMeetingsAggregateOrderBy.stub(_then(_instance))
+        : CopyWith_Input_HistoryMeetingsAggregateOrderBy(
+            local$meetingsAggregate,
+            (e) => call(meetingsAggregate: e),
+          );
+  }
+
+  CopyWith_Input_PersonsAggregateOrderBy<TRes> get personsAggregate {
+    final local$personsAggregate = _instance.personsAggregate;
+    return local$personsAggregate == null
+        ? CopyWith_Input_PersonsAggregateOrderBy.stub(_then(_instance))
+        : CopyWith_Input_PersonsAggregateOrderBy(
+            local$personsAggregate,
+            (e) => call(personsAggregate: e),
+          );
+  }
+}
+
+class _CopyWithStubImpl_Input_StudyYearsOrderBy<TRes>
+    implements CopyWith_Input_StudyYearsOrderBy<TRes> {
+  _CopyWithStubImpl_Input_StudyYearsOrderBy(this._res);
+
+  TRes _res;
+
+  call({
+    Input_ClassesAggregateOrderBy? classesAggregate,
+    Enum_OrderBy? id,
+    Input_HistoryMeetingsAggregateOrderBy? meetingsAggregate,
+    Enum_OrderBy? name,
+    Enum_OrderBy? order,
+    Input_PersonsAggregateOrderBy? personsAggregate,
+  }) => _res;
+
+  CopyWith_Input_ClassesAggregateOrderBy<TRes> get classesAggregate =>
+      CopyWith_Input_ClassesAggregateOrderBy.stub(_res);
+
+  CopyWith_Input_HistoryMeetingsAggregateOrderBy<TRes> get meetingsAggregate =>
+      CopyWith_Input_HistoryMeetingsAggregateOrderBy.stub(_res);
+
+  CopyWith_Input_PersonsAggregateOrderBy<TRes> get personsAggregate =>
+      CopyWith_Input_PersonsAggregateOrderBy.stub(_res);
+}
+
+class Input_StudyYearsPkColumnsInput {
+  factory Input_StudyYearsPkColumnsInput({required int order}) =>
+      Input_StudyYearsPkColumnsInput._({r'order': order});
+
+  Input_StudyYearsPkColumnsInput._(this._$data);
+
+  factory Input_StudyYearsPkColumnsInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$order = data['order'];
+    result$data['order'] = (l$order as int);
+    return Input_StudyYearsPkColumnsInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  int get order => (_$data['order'] as int);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$order = order;
+    result$data['order'] = l$order;
+    return result$data;
+  }
+
+  CopyWith_Input_StudyYearsPkColumnsInput<Input_StudyYearsPkColumnsInput>
+  get copyWith => CopyWith_Input_StudyYearsPkColumnsInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_StudyYearsPkColumnsInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$order = order;
+    final lOther$order = other.order;
+    if (l$order != lOther$order) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$order = order;
+    return Object.hashAll([l$order]);
+  }
+}
+
+abstract class CopyWith_Input_StudyYearsPkColumnsInput<TRes> {
+  factory CopyWith_Input_StudyYearsPkColumnsInput(
+    Input_StudyYearsPkColumnsInput instance,
+    TRes Function(Input_StudyYearsPkColumnsInput) then,
+  ) = _CopyWithImpl_Input_StudyYearsPkColumnsInput;
+
+  factory CopyWith_Input_StudyYearsPkColumnsInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_StudyYearsPkColumnsInput;
+
+  TRes call({int? order});
+}
+
+class _CopyWithImpl_Input_StudyYearsPkColumnsInput<TRes>
+    implements CopyWith_Input_StudyYearsPkColumnsInput<TRes> {
+  _CopyWithImpl_Input_StudyYearsPkColumnsInput(this._instance, this._then);
+
+  final Input_StudyYearsPkColumnsInput _instance;
+
+  final TRes Function(Input_StudyYearsPkColumnsInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? order = _undefined}) => _then(
+    Input_StudyYearsPkColumnsInput._({
+      ..._instance._$data,
+      if (order != _undefined && order != null) 'order': (order as int),
     }),
   );
 }
 
-class _CopyWithStubImpl_Input_UniversitiesPkColumnsInput<TRes>
-    implements CopyWith_Input_UniversitiesPkColumnsInput<TRes> {
-  _CopyWithStubImpl_Input_UniversitiesPkColumnsInput(this._res);
+class _CopyWithStubImpl_Input_StudyYearsPkColumnsInput<TRes>
+    implements CopyWith_Input_StudyYearsPkColumnsInput<TRes> {
+  _CopyWithStubImpl_Input_StudyYearsPkColumnsInput(this._res);
 
   TRes _res;
 
-  call({UuidValue? id}) => _res;
+  call({int? order}) => _res;
 }
 
-class Input_UniversitiesSetInput {
-  factory Input_UniversitiesSetInput({String? name}) =>
-      Input_UniversitiesSetInput._({if (name != null) r'name': name});
+class Input_StudyYearsSetInput {
+  factory Input_StudyYearsSetInput({String? name}) =>
+      Input_StudyYearsSetInput._({if (name != null) r'name': name});
 
-  Input_UniversitiesSetInput._(this._$data);
+  Input_StudyYearsSetInput._(this._$data);
 
-  factory Input_UniversitiesSetInput.fromJson(Map<String, dynamic> data) {
+  factory Input_StudyYearsSetInput.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('name')) {
       final l$name = data['name'];
       result$data['name'] = (l$name as String?);
     }
-    return Input_UniversitiesSetInput._(result$data);
+    return Input_StudyYearsSetInput._(result$data);
   }
 
   Map<String, dynamic> _$data;
@@ -188,15 +894,15 @@ class Input_UniversitiesSetInput {
     return result$data;
   }
 
-  CopyWith_Input_UniversitiesSetInput<Input_UniversitiesSetInput>
-  get copyWith => CopyWith_Input_UniversitiesSetInput(this, (i) => i);
+  CopyWith_Input_StudyYearsSetInput<Input_StudyYearsSetInput> get copyWith =>
+      CopyWith_Input_StudyYearsSetInput(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input_UniversitiesSetInput ||
+    if (other is! Input_StudyYearsSetInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -218,63 +924,63 @@ class Input_UniversitiesSetInput {
   }
 }
 
-abstract class CopyWith_Input_UniversitiesSetInput<TRes> {
-  factory CopyWith_Input_UniversitiesSetInput(
-    Input_UniversitiesSetInput instance,
-    TRes Function(Input_UniversitiesSetInput) then,
-  ) = _CopyWithImpl_Input_UniversitiesSetInput;
+abstract class CopyWith_Input_StudyYearsSetInput<TRes> {
+  factory CopyWith_Input_StudyYearsSetInput(
+    Input_StudyYearsSetInput instance,
+    TRes Function(Input_StudyYearsSetInput) then,
+  ) = _CopyWithImpl_Input_StudyYearsSetInput;
 
-  factory CopyWith_Input_UniversitiesSetInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_UniversitiesSetInput;
+  factory CopyWith_Input_StudyYearsSetInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_StudyYearsSetInput;
 
   TRes call({String? name});
 }
 
-class _CopyWithImpl_Input_UniversitiesSetInput<TRes>
-    implements CopyWith_Input_UniversitiesSetInput<TRes> {
-  _CopyWithImpl_Input_UniversitiesSetInput(this._instance, this._then);
+class _CopyWithImpl_Input_StudyYearsSetInput<TRes>
+    implements CopyWith_Input_StudyYearsSetInput<TRes> {
+  _CopyWithImpl_Input_StudyYearsSetInput(this._instance, this._then);
 
-  final Input_UniversitiesSetInput _instance;
+  final Input_StudyYearsSetInput _instance;
 
-  final TRes Function(Input_UniversitiesSetInput) _then;
+  final TRes Function(Input_StudyYearsSetInput) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? name = _undefined}) => _then(
-    Input_UniversitiesSetInput._({
+    Input_StudyYearsSetInput._({
       ..._instance._$data,
       if (name != _undefined) 'name': (name as String?),
     }),
   );
 }
 
-class _CopyWithStubImpl_Input_UniversitiesSetInput<TRes>
-    implements CopyWith_Input_UniversitiesSetInput<TRes> {
-  _CopyWithStubImpl_Input_UniversitiesSetInput(this._res);
+class _CopyWithStubImpl_Input_StudyYearsSetInput<TRes>
+    implements CopyWith_Input_StudyYearsSetInput<TRes> {
+  _CopyWithStubImpl_Input_StudyYearsSetInput(this._res);
 
   TRes _res;
 
   call({String? name}) => _res;
 }
 
-class Input_UniversitiesStreamCursorInput {
-  factory Input_UniversitiesStreamCursorInput({
-    required Input_UniversitiesStreamCursorValueInput initialValue,
+class Input_StudyYearsStreamCursorInput {
+  factory Input_StudyYearsStreamCursorInput({
+    required Input_StudyYearsStreamCursorValueInput initialValue,
     Enum_CursorOrdering? ordering,
-  }) => Input_UniversitiesStreamCursorInput._({
+  }) => Input_StudyYearsStreamCursorInput._({
     r'initialValue': initialValue,
     if (ordering != null) r'ordering': ordering,
   });
 
-  Input_UniversitiesStreamCursorInput._(this._$data);
+  Input_StudyYearsStreamCursorInput._(this._$data);
 
-  factory Input_UniversitiesStreamCursorInput.fromJson(
+  factory Input_StudyYearsStreamCursorInput.fromJson(
     Map<String, dynamic> data,
   ) {
     final result$data = <String, dynamic>{};
     final l$initialValue = data['initialValue'];
     result$data['initialValue'] =
-        Input_UniversitiesStreamCursorValueInput.fromJson(
+        Input_StudyYearsStreamCursorValueInput.fromJson(
           (l$initialValue as Map<String, dynamic>),
         );
     if (data.containsKey('ordering')) {
@@ -283,13 +989,13 @@ class Input_UniversitiesStreamCursorInput {
           ? null
           : fromJson_Enum_CursorOrdering((l$ordering as String));
     }
-    return Input_UniversitiesStreamCursorInput._(result$data);
+    return Input_StudyYearsStreamCursorInput._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  Input_UniversitiesStreamCursorValueInput get initialValue =>
-      (_$data['initialValue'] as Input_UniversitiesStreamCursorValueInput);
+  Input_StudyYearsStreamCursorValueInput get initialValue =>
+      (_$data['initialValue'] as Input_StudyYearsStreamCursorValueInput);
 
   Enum_CursorOrdering? get ordering =>
       (_$data['ordering'] as Enum_CursorOrdering?);
@@ -307,17 +1013,15 @@ class Input_UniversitiesStreamCursorInput {
     return result$data;
   }
 
-  CopyWith_Input_UniversitiesStreamCursorInput<
-    Input_UniversitiesStreamCursorInput
-  >
-  get copyWith => CopyWith_Input_UniversitiesStreamCursorInput(this, (i) => i);
+  CopyWith_Input_StudyYearsStreamCursorInput<Input_StudyYearsStreamCursorInput>
+  get copyWith => CopyWith_Input_StudyYearsStreamCursorInput(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input_UniversitiesStreamCursorInput ||
+    if (other is! Input_StudyYearsStreamCursorInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -349,29 +1053,29 @@ class Input_UniversitiesStreamCursorInput {
   }
 }
 
-abstract class CopyWith_Input_UniversitiesStreamCursorInput<TRes> {
-  factory CopyWith_Input_UniversitiesStreamCursorInput(
-    Input_UniversitiesStreamCursorInput instance,
-    TRes Function(Input_UniversitiesStreamCursorInput) then,
-  ) = _CopyWithImpl_Input_UniversitiesStreamCursorInput;
+abstract class CopyWith_Input_StudyYearsStreamCursorInput<TRes> {
+  factory CopyWith_Input_StudyYearsStreamCursorInput(
+    Input_StudyYearsStreamCursorInput instance,
+    TRes Function(Input_StudyYearsStreamCursorInput) then,
+  ) = _CopyWithImpl_Input_StudyYearsStreamCursorInput;
 
-  factory CopyWith_Input_UniversitiesStreamCursorInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_UniversitiesStreamCursorInput;
+  factory CopyWith_Input_StudyYearsStreamCursorInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_StudyYearsStreamCursorInput;
 
   TRes call({
-    Input_UniversitiesStreamCursorValueInput? initialValue,
+    Input_StudyYearsStreamCursorValueInput? initialValue,
     Enum_CursorOrdering? ordering,
   });
-  CopyWith_Input_UniversitiesStreamCursorValueInput<TRes> get initialValue;
+  CopyWith_Input_StudyYearsStreamCursorValueInput<TRes> get initialValue;
 }
 
-class _CopyWithImpl_Input_UniversitiesStreamCursorInput<TRes>
-    implements CopyWith_Input_UniversitiesStreamCursorInput<TRes> {
-  _CopyWithImpl_Input_UniversitiesStreamCursorInput(this._instance, this._then);
+class _CopyWithImpl_Input_StudyYearsStreamCursorInput<TRes>
+    implements CopyWith_Input_StudyYearsStreamCursorInput<TRes> {
+  _CopyWithImpl_Input_StudyYearsStreamCursorInput(this._instance, this._then);
 
-  final Input_UniversitiesStreamCursorInput _instance;
+  final Input_StudyYearsStreamCursorInput _instance;
 
-  final TRes Function(Input_UniversitiesStreamCursorInput) _then;
+  final TRes Function(Input_StudyYearsStreamCursorInput) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -379,97 +1083,109 @@ class _CopyWithImpl_Input_UniversitiesStreamCursorInput<TRes>
     Object? initialValue = _undefined,
     Object? ordering = _undefined,
   }) => _then(
-    Input_UniversitiesStreamCursorInput._({
+    Input_StudyYearsStreamCursorInput._({
       ..._instance._$data,
       if (initialValue != _undefined && initialValue != null)
         'initialValue':
-            (initialValue as Input_UniversitiesStreamCursorValueInput),
+            (initialValue as Input_StudyYearsStreamCursorValueInput),
       if (ordering != _undefined)
         'ordering': (ordering as Enum_CursorOrdering?),
     }),
   );
 
-  CopyWith_Input_UniversitiesStreamCursorValueInput<TRes> get initialValue {
+  CopyWith_Input_StudyYearsStreamCursorValueInput<TRes> get initialValue {
     final local$initialValue = _instance.initialValue;
-    return CopyWith_Input_UniversitiesStreamCursorValueInput(
+    return CopyWith_Input_StudyYearsStreamCursorValueInput(
       local$initialValue,
       (e) => call(initialValue: e),
     );
   }
 }
 
-class _CopyWithStubImpl_Input_UniversitiesStreamCursorInput<TRes>
-    implements CopyWith_Input_UniversitiesStreamCursorInput<TRes> {
-  _CopyWithStubImpl_Input_UniversitiesStreamCursorInput(this._res);
+class _CopyWithStubImpl_Input_StudyYearsStreamCursorInput<TRes>
+    implements CopyWith_Input_StudyYearsStreamCursorInput<TRes> {
+  _CopyWithStubImpl_Input_StudyYearsStreamCursorInput(this._res);
 
   TRes _res;
 
   call({
-    Input_UniversitiesStreamCursorValueInput? initialValue,
+    Input_StudyYearsStreamCursorValueInput? initialValue,
     Enum_CursorOrdering? ordering,
   }) => _res;
 
-  CopyWith_Input_UniversitiesStreamCursorValueInput<TRes> get initialValue =>
-      CopyWith_Input_UniversitiesStreamCursorValueInput.stub(_res);
+  CopyWith_Input_StudyYearsStreamCursorValueInput<TRes> get initialValue =>
+      CopyWith_Input_StudyYearsStreamCursorValueInput.stub(_res);
 }
 
-class Input_UniversitiesStreamCursorValueInput {
-  factory Input_UniversitiesStreamCursorValueInput({
-    UuidValue? id,
+class Input_StudyYearsStreamCursorValueInput {
+  factory Input_StudyYearsStreamCursorValueInput({
+    String? id,
     String? name,
-  }) => Input_UniversitiesStreamCursorValueInput._({
+    int? order,
+  }) => Input_StudyYearsStreamCursorValueInput._({
     if (id != null) r'id': id,
     if (name != null) r'name': name,
+    if (order != null) r'order': order,
   });
 
-  Input_UniversitiesStreamCursorValueInput._(this._$data);
+  Input_StudyYearsStreamCursorValueInput._(this._$data);
 
-  factory Input_UniversitiesStreamCursorValueInput.fromJson(
+  factory Input_StudyYearsStreamCursorValueInput.fromJson(
     Map<String, dynamic> data,
   ) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('id')) {
       final l$id = data['id'];
-      result$data['id'] = l$id == null ? null : stringToUuid(l$id);
+      result$data['id'] = (l$id as String?);
     }
     if (data.containsKey('name')) {
       final l$name = data['name'];
       result$data['name'] = (l$name as String?);
     }
-    return Input_UniversitiesStreamCursorValueInput._(result$data);
+    if (data.containsKey('order')) {
+      final l$order = data['order'];
+      result$data['order'] = (l$order as int?);
+    }
+    return Input_StudyYearsStreamCursorValueInput._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  UuidValue? get id => (_$data['id'] as UuidValue?);
+  String? get id => (_$data['id'] as String?);
 
   String? get name => (_$data['name'] as String?);
+
+  int? get order => (_$data['order'] as int?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('id')) {
       final l$id = id;
-      result$data['id'] = l$id == null ? null : uuidToString(l$id);
+      result$data['id'] = l$id;
     }
     if (_$data.containsKey('name')) {
       final l$name = name;
       result$data['name'] = l$name;
     }
+    if (_$data.containsKey('order')) {
+      final l$order = order;
+      result$data['order'] = l$order;
+    }
     return result$data;
   }
 
-  CopyWith_Input_UniversitiesStreamCursorValueInput<
-    Input_UniversitiesStreamCursorValueInput
+  CopyWith_Input_StudyYearsStreamCursorValueInput<
+    Input_StudyYearsStreamCursorValueInput
   >
   get copyWith =>
-      CopyWith_Input_UniversitiesStreamCursorValueInput(this, (i) => i);
+      CopyWith_Input_StudyYearsStreamCursorValueInput(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input_UniversitiesStreamCursorValueInput ||
+    if (other is! Input_StudyYearsStreamCursorValueInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -489,6 +1205,14 @@ class Input_UniversitiesStreamCursorValueInput {
     if (l$name != lOther$name) {
       return false;
     }
+    final l$order = order;
+    final lOther$order = other.order;
+    if (_$data.containsKey('order') != other._$data.containsKey('order')) {
+      return false;
+    }
+    if (l$order != lOther$order) {
+      return false;
+    }
     return true;
   }
 
@@ -496,91 +1220,98 @@ class Input_UniversitiesStreamCursorValueInput {
   int get hashCode {
     final l$id = id;
     final l$name = name;
+    final l$order = order;
     return Object.hashAll([
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('name') ? l$name : const {},
+      _$data.containsKey('order') ? l$order : const {},
     ]);
   }
 }
 
-abstract class CopyWith_Input_UniversitiesStreamCursorValueInput<TRes> {
-  factory CopyWith_Input_UniversitiesStreamCursorValueInput(
-    Input_UniversitiesStreamCursorValueInput instance,
-    TRes Function(Input_UniversitiesStreamCursorValueInput) then,
-  ) = _CopyWithImpl_Input_UniversitiesStreamCursorValueInput;
+abstract class CopyWith_Input_StudyYearsStreamCursorValueInput<TRes> {
+  factory CopyWith_Input_StudyYearsStreamCursorValueInput(
+    Input_StudyYearsStreamCursorValueInput instance,
+    TRes Function(Input_StudyYearsStreamCursorValueInput) then,
+  ) = _CopyWithImpl_Input_StudyYearsStreamCursorValueInput;
 
-  factory CopyWith_Input_UniversitiesStreamCursorValueInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_UniversitiesStreamCursorValueInput;
+  factory CopyWith_Input_StudyYearsStreamCursorValueInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_StudyYearsStreamCursorValueInput;
 
-  TRes call({UuidValue? id, String? name});
+  TRes call({String? id, String? name, int? order});
 }
 
-class _CopyWithImpl_Input_UniversitiesStreamCursorValueInput<TRes>
-    implements CopyWith_Input_UniversitiesStreamCursorValueInput<TRes> {
-  _CopyWithImpl_Input_UniversitiesStreamCursorValueInput(
+class _CopyWithImpl_Input_StudyYearsStreamCursorValueInput<TRes>
+    implements CopyWith_Input_StudyYearsStreamCursorValueInput<TRes> {
+  _CopyWithImpl_Input_StudyYearsStreamCursorValueInput(
     this._instance,
     this._then,
   );
 
-  final Input_UniversitiesStreamCursorValueInput _instance;
+  final Input_StudyYearsStreamCursorValueInput _instance;
 
-  final TRes Function(Input_UniversitiesStreamCursorValueInput) _then;
+  final TRes Function(Input_StudyYearsStreamCursorValueInput) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? id = _undefined, Object? name = _undefined}) => _then(
-    Input_UniversitiesStreamCursorValueInput._({
+  TRes call({
+    Object? id = _undefined,
+    Object? name = _undefined,
+    Object? order = _undefined,
+  }) => _then(
+    Input_StudyYearsStreamCursorValueInput._({
       ..._instance._$data,
-      if (id != _undefined) 'id': (id as UuidValue?),
+      if (id != _undefined) 'id': (id as String?),
       if (name != _undefined) 'name': (name as String?),
+      if (order != _undefined) 'order': (order as int?),
     }),
   );
 }
 
-class _CopyWithStubImpl_Input_UniversitiesStreamCursorValueInput<TRes>
-    implements CopyWith_Input_UniversitiesStreamCursorValueInput<TRes> {
-  _CopyWithStubImpl_Input_UniversitiesStreamCursorValueInput(this._res);
+class _CopyWithStubImpl_Input_StudyYearsStreamCursorValueInput<TRes>
+    implements CopyWith_Input_StudyYearsStreamCursorValueInput<TRes> {
+  _CopyWithStubImpl_Input_StudyYearsStreamCursorValueInput(this._res);
 
   TRes _res;
 
-  call({UuidValue? id, String? name}) => _res;
+  call({String? id, String? name, int? order}) => _res;
 }
 
-class Input_UniversitiesUpdates {
-  factory Input_UniversitiesUpdates({
-    Input_UniversitiesSetInput? $_set,
-    required Input_UniversitiesBoolExp where,
-  }) => Input_UniversitiesUpdates._({
+class Input_StudyYearsUpdates {
+  factory Input_StudyYearsUpdates({
+    Input_StudyYearsSetInput? $_set,
+    required Input_StudyYearsBoolExp where,
+  }) => Input_StudyYearsUpdates._({
     if ($_set != null) r'_set': $_set,
     r'where': where,
   });
 
-  Input_UniversitiesUpdates._(this._$data);
+  Input_StudyYearsUpdates._(this._$data);
 
-  factory Input_UniversitiesUpdates.fromJson(Map<String, dynamic> data) {
+  factory Input_StudyYearsUpdates.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     if (data.containsKey('_set')) {
       final l$$_set = data['_set'];
       result$data['_set'] = l$$_set == null
           ? null
-          : Input_UniversitiesSetInput.fromJson(
+          : Input_StudyYearsSetInput.fromJson(
               (l$$_set as Map<String, dynamic>),
             );
     }
     final l$where = data['where'];
-    result$data['where'] = Input_UniversitiesBoolExp.fromJson(
+    result$data['where'] = Input_StudyYearsBoolExp.fromJson(
       (l$where as Map<String, dynamic>),
     );
-    return Input_UniversitiesUpdates._(result$data);
+    return Input_StudyYearsUpdates._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  Input_UniversitiesSetInput? get $_set =>
-      (_$data['_set'] as Input_UniversitiesSetInput?);
+  Input_StudyYearsSetInput? get $_set =>
+      (_$data['_set'] as Input_StudyYearsSetInput?);
 
-  Input_UniversitiesBoolExp get where =>
-      (_$data['where'] as Input_UniversitiesBoolExp);
+  Input_StudyYearsBoolExp get where =>
+      (_$data['where'] as Input_StudyYearsBoolExp);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -593,16 +1324,15 @@ class Input_UniversitiesUpdates {
     return result$data;
   }
 
-  CopyWith_Input_UniversitiesUpdates<Input_UniversitiesUpdates> get copyWith =>
-      CopyWith_Input_UniversitiesUpdates(this, (i) => i);
+  CopyWith_Input_StudyYearsUpdates<Input_StudyYearsUpdates> get copyWith =>
+      CopyWith_Input_StudyYearsUpdates(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input_UniversitiesUpdates ||
-        runtimeType != other.runtimeType) {
+    if (other is! Input_StudyYearsUpdates || runtimeType != other.runtimeType) {
       return false;
     }
     final l$$_set = $_set;
@@ -632,1470 +1362,283 @@ class Input_UniversitiesUpdates {
   }
 }
 
-abstract class CopyWith_Input_UniversitiesUpdates<TRes> {
-  factory CopyWith_Input_UniversitiesUpdates(
-    Input_UniversitiesUpdates instance,
-    TRes Function(Input_UniversitiesUpdates) then,
-  ) = _CopyWithImpl_Input_UniversitiesUpdates;
+abstract class CopyWith_Input_StudyYearsUpdates<TRes> {
+  factory CopyWith_Input_StudyYearsUpdates(
+    Input_StudyYearsUpdates instance,
+    TRes Function(Input_StudyYearsUpdates) then,
+  ) = _CopyWithImpl_Input_StudyYearsUpdates;
 
-  factory CopyWith_Input_UniversitiesUpdates.stub(TRes res) =
-      _CopyWithStubImpl_Input_UniversitiesUpdates;
+  factory CopyWith_Input_StudyYearsUpdates.stub(TRes res) =
+      _CopyWithStubImpl_Input_StudyYearsUpdates;
 
-  TRes call({
-    Input_UniversitiesSetInput? $_set,
-    Input_UniversitiesBoolExp? where,
-  });
-  CopyWith_Input_UniversitiesSetInput<TRes> get $_set;
-  CopyWith_Input_UniversitiesBoolExp<TRes> get where;
+  TRes call({Input_StudyYearsSetInput? $_set, Input_StudyYearsBoolExp? where});
+  CopyWith_Input_StudyYearsSetInput<TRes> get $_set;
+  CopyWith_Input_StudyYearsBoolExp<TRes> get where;
 }
 
-class _CopyWithImpl_Input_UniversitiesUpdates<TRes>
-    implements CopyWith_Input_UniversitiesUpdates<TRes> {
-  _CopyWithImpl_Input_UniversitiesUpdates(this._instance, this._then);
+class _CopyWithImpl_Input_StudyYearsUpdates<TRes>
+    implements CopyWith_Input_StudyYearsUpdates<TRes> {
+  _CopyWithImpl_Input_StudyYearsUpdates(this._instance, this._then);
 
-  final Input_UniversitiesUpdates _instance;
+  final Input_StudyYearsUpdates _instance;
 
-  final TRes Function(Input_UniversitiesUpdates) _then;
+  final TRes Function(Input_StudyYearsUpdates) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({Object? $_set = _undefined, Object? where = _undefined}) => _then(
-    Input_UniversitiesUpdates._({
+    Input_StudyYearsUpdates._({
       ..._instance._$data,
-      if ($_set != _undefined) '_set': ($_set as Input_UniversitiesSetInput?),
+      if ($_set != _undefined) '_set': ($_set as Input_StudyYearsSetInput?),
       if (where != _undefined && where != null)
-        'where': (where as Input_UniversitiesBoolExp),
+        'where': (where as Input_StudyYearsBoolExp),
     }),
   );
 
-  CopyWith_Input_UniversitiesSetInput<TRes> get $_set {
+  CopyWith_Input_StudyYearsSetInput<TRes> get $_set {
     final local$$_set = _instance.$_set;
     return local$$_set == null
-        ? CopyWith_Input_UniversitiesSetInput.stub(_then(_instance))
-        : CopyWith_Input_UniversitiesSetInput(
-            local$$_set,
-            (e) => call($_set: e),
-          );
+        ? CopyWith_Input_StudyYearsSetInput.stub(_then(_instance))
+        : CopyWith_Input_StudyYearsSetInput(local$$_set, (e) => call($_set: e));
   }
 
-  CopyWith_Input_UniversitiesBoolExp<TRes> get where {
+  CopyWith_Input_StudyYearsBoolExp<TRes> get where {
     final local$where = _instance.where;
-    return CopyWith_Input_UniversitiesBoolExp(
-      local$where,
-      (e) => call(where: e),
-    );
+    return CopyWith_Input_StudyYearsBoolExp(local$where, (e) => call(where: e));
   }
 }
 
-class _CopyWithStubImpl_Input_UniversitiesUpdates<TRes>
-    implements CopyWith_Input_UniversitiesUpdates<TRes> {
-  _CopyWithStubImpl_Input_UniversitiesUpdates(this._res);
+class _CopyWithStubImpl_Input_StudyYearsUpdates<TRes>
+    implements CopyWith_Input_StudyYearsUpdates<TRes> {
+  _CopyWithStubImpl_Input_StudyYearsUpdates(this._res);
 
   TRes _res;
 
-  call({Input_UniversitiesSetInput? $_set, Input_UniversitiesBoolExp? where}) =>
+  call({Input_StudyYearsSetInput? $_set, Input_StudyYearsBoolExp? where}) =>
       _res;
 
-  CopyWith_Input_UniversitiesSetInput<TRes> get $_set =>
-      CopyWith_Input_UniversitiesSetInput.stub(_res);
+  CopyWith_Input_StudyYearsSetInput<TRes> get $_set =>
+      CopyWith_Input_StudyYearsSetInput.stub(_res);
 
-  CopyWith_Input_UniversitiesBoolExp<TRes> get where =>
-      CopyWith_Input_UniversitiesBoolExp.stub(_res);
+  CopyWith_Input_StudyYearsBoolExp<TRes> get where =>
+      CopyWith_Input_StudyYearsBoolExp.stub(_res);
 }
 
-class Input_UuidComparisonExp {
-  factory Input_UuidComparisonExp({
-    UuidValue? $_eq,
-    UuidValue? $_gt,
-    UuidValue? $_gte,
-    List<UuidValue>? $_in,
-    bool? $_isNull,
-    UuidValue? $_lt,
-    UuidValue? $_lte,
-    UuidValue? $_neq,
-    List<UuidValue>? $_nin,
-  }) => Input_UuidComparisonExp._({
-    if ($_eq != null) r'_eq': $_eq,
-    if ($_gt != null) r'_gt': $_gt,
-    if ($_gte != null) r'_gte': $_gte,
-    if ($_in != null) r'_in': $_in,
-    if ($_isNull != null) r'_isNull': $_isNull,
-    if ($_lt != null) r'_lt': $_lt,
-    if ($_lte != null) r'_lte': $_lte,
-    if ($_neq != null) r'_neq': $_neq,
-    if ($_nin != null) r'_nin': $_nin,
+class Input_TagsBoolExp {
+  factory Input_TagsBoolExp({
+    List<Input_TagsBoolExp>? $_and,
+    Input_TagsBoolExp? $_not,
+    List<Input_TagsBoolExp>? $_or,
+    Input_BigintComparisonExp? color,
+    Input_UuidComparisonExp? id,
+    Input_StringComparisonExp? name,
+    Input_PersonsTagsBoolExp? persons,
+  }) => Input_TagsBoolExp._({
+    if ($_and != null) r'_and': $_and,
+    if ($_not != null) r'_not': $_not,
+    if ($_or != null) r'_or': $_or,
+    if (color != null) r'color': color,
+    if (id != null) r'id': id,
+    if (name != null) r'name': name,
+    if (persons != null) r'persons': persons,
   });
 
-  Input_UuidComparisonExp._(this._$data);
+  Input_TagsBoolExp._(this._$data);
 
-  factory Input_UuidComparisonExp.fromJson(Map<String, dynamic> data) {
+  factory Input_TagsBoolExp.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
-    if (data.containsKey('_eq')) {
-      final l$$_eq = data['_eq'];
-      result$data['_eq'] = l$$_eq == null ? null : stringToUuid(l$$_eq);
-    }
-    if (data.containsKey('_gt')) {
-      final l$$_gt = data['_gt'];
-      result$data['_gt'] = l$$_gt == null ? null : stringToUuid(l$$_gt);
-    }
-    if (data.containsKey('_gte')) {
-      final l$$_gte = data['_gte'];
-      result$data['_gte'] = l$$_gte == null ? null : stringToUuid(l$$_gte);
-    }
-    if (data.containsKey('_in')) {
-      final l$$_in = data['_in'];
-      result$data['_in'] = (l$$_in as List<dynamic>?)
-          ?.map((e) => stringToUuid(e))
+    if (data.containsKey('_and')) {
+      final l$$_and = data['_and'];
+      result$data['_and'] = (l$$_and as List<dynamic>?)
+          ?.map((e) => Input_TagsBoolExp.fromJson((e as Map<String, dynamic>)))
           .toList();
     }
-    if (data.containsKey('_isNull')) {
-      final l$$_isNull = data['_isNull'];
-      result$data['_isNull'] = (l$$_isNull as bool?);
-    }
-    if (data.containsKey('_lt')) {
-      final l$$_lt = data['_lt'];
-      result$data['_lt'] = l$$_lt == null ? null : stringToUuid(l$$_lt);
-    }
-    if (data.containsKey('_lte')) {
-      final l$$_lte = data['_lte'];
-      result$data['_lte'] = l$$_lte == null ? null : stringToUuid(l$$_lte);
-    }
-    if (data.containsKey('_neq')) {
-      final l$$_neq = data['_neq'];
-      result$data['_neq'] = l$$_neq == null ? null : stringToUuid(l$$_neq);
-    }
-    if (data.containsKey('_nin')) {
-      final l$$_nin = data['_nin'];
-      result$data['_nin'] = (l$$_nin as List<dynamic>?)
-          ?.map((e) => stringToUuid(e))
-          .toList();
-    }
-    return Input_UuidComparisonExp._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  UuidValue? get $_eq => (_$data['_eq'] as UuidValue?);
-
-  UuidValue? get $_gt => (_$data['_gt'] as UuidValue?);
-
-  UuidValue? get $_gte => (_$data['_gte'] as UuidValue?);
-
-  List<UuidValue>? get $_in => (_$data['_in'] as List<UuidValue>?);
-
-  bool? get $_isNull => (_$data['_isNull'] as bool?);
-
-  UuidValue? get $_lt => (_$data['_lt'] as UuidValue?);
-
-  UuidValue? get $_lte => (_$data['_lte'] as UuidValue?);
-
-  UuidValue? get $_neq => (_$data['_neq'] as UuidValue?);
-
-  List<UuidValue>? get $_nin => (_$data['_nin'] as List<UuidValue>?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('_eq')) {
-      final l$$_eq = $_eq;
-      result$data['_eq'] = l$$_eq == null ? null : uuidToString(l$$_eq);
-    }
-    if (_$data.containsKey('_gt')) {
-      final l$$_gt = $_gt;
-      result$data['_gt'] = l$$_gt == null ? null : uuidToString(l$$_gt);
-    }
-    if (_$data.containsKey('_gte')) {
-      final l$$_gte = $_gte;
-      result$data['_gte'] = l$$_gte == null ? null : uuidToString(l$$_gte);
-    }
-    if (_$data.containsKey('_in')) {
-      final l$$_in = $_in;
-      result$data['_in'] = l$$_in?.map((e) => uuidToString(e)).toList();
-    }
-    if (_$data.containsKey('_isNull')) {
-      final l$$_isNull = $_isNull;
-      result$data['_isNull'] = l$$_isNull;
-    }
-    if (_$data.containsKey('_lt')) {
-      final l$$_lt = $_lt;
-      result$data['_lt'] = l$$_lt == null ? null : uuidToString(l$$_lt);
-    }
-    if (_$data.containsKey('_lte')) {
-      final l$$_lte = $_lte;
-      result$data['_lte'] = l$$_lte == null ? null : uuidToString(l$$_lte);
-    }
-    if (_$data.containsKey('_neq')) {
-      final l$$_neq = $_neq;
-      result$data['_neq'] = l$$_neq == null ? null : uuidToString(l$$_neq);
-    }
-    if (_$data.containsKey('_nin')) {
-      final l$$_nin = $_nin;
-      result$data['_nin'] = l$$_nin?.map((e) => uuidToString(e)).toList();
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_UuidComparisonExp<Input_UuidComparisonExp> get copyWith =>
-      CopyWith_Input_UuidComparisonExp(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_UuidComparisonExp || runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$$_eq = $_eq;
-    final lOther$$_eq = other.$_eq;
-    if (_$data.containsKey('_eq') != other._$data.containsKey('_eq')) {
-      return false;
-    }
-    if (l$$_eq != lOther$$_eq) {
-      return false;
-    }
-    final l$$_gt = $_gt;
-    final lOther$$_gt = other.$_gt;
-    if (_$data.containsKey('_gt') != other._$data.containsKey('_gt')) {
-      return false;
-    }
-    if (l$$_gt != lOther$$_gt) {
-      return false;
-    }
-    final l$$_gte = $_gte;
-    final lOther$$_gte = other.$_gte;
-    if (_$data.containsKey('_gte') != other._$data.containsKey('_gte')) {
-      return false;
-    }
-    if (l$$_gte != lOther$$_gte) {
-      return false;
-    }
-    final l$$_in = $_in;
-    final lOther$$_in = other.$_in;
-    if (_$data.containsKey('_in') != other._$data.containsKey('_in')) {
-      return false;
-    }
-    if (l$$_in != null && lOther$$_in != null) {
-      if (l$$_in.length != lOther$$_in.length) {
-        return false;
-      }
-      for (int i = 0; i < l$$_in.length; i++) {
-        final l$$_in$entry = l$$_in[i];
-        final lOther$$_in$entry = lOther$$_in[i];
-        if (l$$_in$entry != lOther$$_in$entry) {
-          return false;
-        }
-      }
-    } else if (l$$_in != lOther$$_in) {
-      return false;
-    }
-    final l$$_isNull = $_isNull;
-    final lOther$$_isNull = other.$_isNull;
-    if (_$data.containsKey('_isNull') != other._$data.containsKey('_isNull')) {
-      return false;
-    }
-    if (l$$_isNull != lOther$$_isNull) {
-      return false;
-    }
-    final l$$_lt = $_lt;
-    final lOther$$_lt = other.$_lt;
-    if (_$data.containsKey('_lt') != other._$data.containsKey('_lt')) {
-      return false;
-    }
-    if (l$$_lt != lOther$$_lt) {
-      return false;
-    }
-    final l$$_lte = $_lte;
-    final lOther$$_lte = other.$_lte;
-    if (_$data.containsKey('_lte') != other._$data.containsKey('_lte')) {
-      return false;
-    }
-    if (l$$_lte != lOther$$_lte) {
-      return false;
-    }
-    final l$$_neq = $_neq;
-    final lOther$$_neq = other.$_neq;
-    if (_$data.containsKey('_neq') != other._$data.containsKey('_neq')) {
-      return false;
-    }
-    if (l$$_neq != lOther$$_neq) {
-      return false;
-    }
-    final l$$_nin = $_nin;
-    final lOther$$_nin = other.$_nin;
-    if (_$data.containsKey('_nin') != other._$data.containsKey('_nin')) {
-      return false;
-    }
-    if (l$$_nin != null && lOther$$_nin != null) {
-      if (l$$_nin.length != lOther$$_nin.length) {
-        return false;
-      }
-      for (int i = 0; i < l$$_nin.length; i++) {
-        final l$$_nin$entry = l$$_nin[i];
-        final lOther$$_nin$entry = lOther$$_nin[i];
-        if (l$$_nin$entry != lOther$$_nin$entry) {
-          return false;
-        }
-      }
-    } else if (l$$_nin != lOther$$_nin) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$$_eq = $_eq;
-    final l$$_gt = $_gt;
-    final l$$_gte = $_gte;
-    final l$$_in = $_in;
-    final l$$_isNull = $_isNull;
-    final l$$_lt = $_lt;
-    final l$$_lte = $_lte;
-    final l$$_neq = $_neq;
-    final l$$_nin = $_nin;
-    return Object.hashAll([
-      _$data.containsKey('_eq') ? l$$_eq : const {},
-      _$data.containsKey('_gt') ? l$$_gt : const {},
-      _$data.containsKey('_gte') ? l$$_gte : const {},
-      _$data.containsKey('_in')
-          ? l$$_in == null
-                ? null
-                : Object.hashAll(l$$_in.map((v) => v))
-          : const {},
-      _$data.containsKey('_isNull') ? l$$_isNull : const {},
-      _$data.containsKey('_lt') ? l$$_lt : const {},
-      _$data.containsKey('_lte') ? l$$_lte : const {},
-      _$data.containsKey('_neq') ? l$$_neq : const {},
-      _$data.containsKey('_nin')
-          ? l$$_nin == null
-                ? null
-                : Object.hashAll(l$$_nin.map((v) => v))
-          : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_UuidComparisonExp<TRes> {
-  factory CopyWith_Input_UuidComparisonExp(
-    Input_UuidComparisonExp instance,
-    TRes Function(Input_UuidComparisonExp) then,
-  ) = _CopyWithImpl_Input_UuidComparisonExp;
-
-  factory CopyWith_Input_UuidComparisonExp.stub(TRes res) =
-      _CopyWithStubImpl_Input_UuidComparisonExp;
-
-  TRes call({
-    UuidValue? $_eq,
-    UuidValue? $_gt,
-    UuidValue? $_gte,
-    List<UuidValue>? $_in,
-    bool? $_isNull,
-    UuidValue? $_lt,
-    UuidValue? $_lte,
-    UuidValue? $_neq,
-    List<UuidValue>? $_nin,
-  });
-}
-
-class _CopyWithImpl_Input_UuidComparisonExp<TRes>
-    implements CopyWith_Input_UuidComparisonExp<TRes> {
-  _CopyWithImpl_Input_UuidComparisonExp(this._instance, this._then);
-
-  final Input_UuidComparisonExp _instance;
-
-  final TRes Function(Input_UuidComparisonExp) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? $_eq = _undefined,
-    Object? $_gt = _undefined,
-    Object? $_gte = _undefined,
-    Object? $_in = _undefined,
-    Object? $_isNull = _undefined,
-    Object? $_lt = _undefined,
-    Object? $_lte = _undefined,
-    Object? $_neq = _undefined,
-    Object? $_nin = _undefined,
-  }) => _then(
-    Input_UuidComparisonExp._({
-      ..._instance._$data,
-      if ($_eq != _undefined) '_eq': ($_eq as UuidValue?),
-      if ($_gt != _undefined) '_gt': ($_gt as UuidValue?),
-      if ($_gte != _undefined) '_gte': ($_gte as UuidValue?),
-      if ($_in != _undefined) '_in': ($_in as List<UuidValue>?),
-      if ($_isNull != _undefined) '_isNull': ($_isNull as bool?),
-      if ($_lt != _undefined) '_lt': ($_lt as UuidValue?),
-      if ($_lte != _undefined) '_lte': ($_lte as UuidValue?),
-      if ($_neq != _undefined) '_neq': ($_neq as UuidValue?),
-      if ($_nin != _undefined) '_nin': ($_nin as List<UuidValue>?),
-    }),
-  );
-}
-
-class _CopyWithStubImpl_Input_UuidComparisonExp<TRes>
-    implements CopyWith_Input_UuidComparisonExp<TRes> {
-  _CopyWithStubImpl_Input_UuidComparisonExp(this._res);
-
-  TRes _res;
-
-  call({
-    UuidValue? $_eq,
-    UuidValue? $_gt,
-    UuidValue? $_gte,
-    List<UuidValue>? $_in,
-    bool? $_isNull,
-    UuidValue? $_lt,
-    UuidValue? $_lte,
-    UuidValue? $_neq,
-    List<UuidValue>? $_nin,
-  }) => _res;
-}
-
-class Input_classesAggregateBoolExpBool_and {
-  factory Input_classesAggregateBoolExpBool_and({
-    required Enum_ClassesSelectColumnClassesAggregateBoolExpBool_andArgumentsColumns
-    arguments,
-    bool? distinct,
-    Input_ClassesBoolExp? filter,
-    required Input_BooleanComparisonExp predicate,
-  }) => Input_classesAggregateBoolExpBool_and._({
-    r'arguments': arguments,
-    if (distinct != null) r'distinct': distinct,
-    if (filter != null) r'filter': filter,
-    r'predicate': predicate,
-  });
-
-  Input_classesAggregateBoolExpBool_and._(this._$data);
-
-  factory Input_classesAggregateBoolExpBool_and.fromJson(
-    Map<String, dynamic> data,
-  ) {
-    final result$data = <String, dynamic>{};
-    final l$arguments = data['arguments'];
-    result$data['arguments'] =
-        fromJson_Enum_ClassesSelectColumnClassesAggregateBoolExpBool_andArgumentsColumns(
-          (l$arguments as String),
-        );
-    if (data.containsKey('distinct')) {
-      final l$distinct = data['distinct'];
-      result$data['distinct'] = (l$distinct as bool?);
-    }
-    if (data.containsKey('filter')) {
-      final l$filter = data['filter'];
-      result$data['filter'] = l$filter == null
+    if (data.containsKey('_not')) {
+      final l$$_not = data['_not'];
+      result$data['_not'] = l$$_not == null
           ? null
-          : Input_ClassesBoolExp.fromJson((l$filter as Map<String, dynamic>));
+          : Input_TagsBoolExp.fromJson((l$$_not as Map<String, dynamic>));
     }
-    final l$predicate = data['predicate'];
-    result$data['predicate'] = Input_BooleanComparisonExp.fromJson(
-      (l$predicate as Map<String, dynamic>),
-    );
-    return Input_classesAggregateBoolExpBool_and._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  Enum_ClassesSelectColumnClassesAggregateBoolExpBool_andArgumentsColumns
-  get arguments =>
-      (_$data['arguments']
-          as Enum_ClassesSelectColumnClassesAggregateBoolExpBool_andArgumentsColumns);
-
-  bool? get distinct => (_$data['distinct'] as bool?);
-
-  Input_ClassesBoolExp? get filter =>
-      (_$data['filter'] as Input_ClassesBoolExp?);
-
-  Input_BooleanComparisonExp get predicate =>
-      (_$data['predicate'] as Input_BooleanComparisonExp);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    final l$arguments = arguments;
-    result$data['arguments'] =
-        toJson_Enum_ClassesSelectColumnClassesAggregateBoolExpBool_andArgumentsColumns(
-          l$arguments,
-        );
-    if (_$data.containsKey('distinct')) {
-      final l$distinct = distinct;
-      result$data['distinct'] = l$distinct;
-    }
-    if (_$data.containsKey('filter')) {
-      final l$filter = filter;
-      result$data['filter'] = l$filter?.toJson();
-    }
-    final l$predicate = predicate;
-    result$data['predicate'] = l$predicate.toJson();
-    return result$data;
-  }
-
-  CopyWith_Input_classesAggregateBoolExpBool_and<
-    Input_classesAggregateBoolExpBool_and
-  >
-  get copyWith =>
-      CopyWith_Input_classesAggregateBoolExpBool_and(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_classesAggregateBoolExpBool_and ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$arguments = arguments;
-    final lOther$arguments = other.arguments;
-    if (l$arguments != lOther$arguments) {
-      return false;
-    }
-    final l$distinct = distinct;
-    final lOther$distinct = other.distinct;
-    if (_$data.containsKey('distinct') !=
-        other._$data.containsKey('distinct')) {
-      return false;
-    }
-    if (l$distinct != lOther$distinct) {
-      return false;
-    }
-    final l$filter = filter;
-    final lOther$filter = other.filter;
-    if (_$data.containsKey('filter') != other._$data.containsKey('filter')) {
-      return false;
-    }
-    if (l$filter != lOther$filter) {
-      return false;
-    }
-    final l$predicate = predicate;
-    final lOther$predicate = other.predicate;
-    if (l$predicate != lOther$predicate) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$arguments = arguments;
-    final l$distinct = distinct;
-    final l$filter = filter;
-    final l$predicate = predicate;
-    return Object.hashAll([
-      l$arguments,
-      _$data.containsKey('distinct') ? l$distinct : const {},
-      _$data.containsKey('filter') ? l$filter : const {},
-      l$predicate,
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_classesAggregateBoolExpBool_and<TRes> {
-  factory CopyWith_Input_classesAggregateBoolExpBool_and(
-    Input_classesAggregateBoolExpBool_and instance,
-    TRes Function(Input_classesAggregateBoolExpBool_and) then,
-  ) = _CopyWithImpl_Input_classesAggregateBoolExpBool_and;
-
-  factory CopyWith_Input_classesAggregateBoolExpBool_and.stub(TRes res) =
-      _CopyWithStubImpl_Input_classesAggregateBoolExpBool_and;
-
-  TRes call({
-    Enum_ClassesSelectColumnClassesAggregateBoolExpBool_andArgumentsColumns?
-    arguments,
-    bool? distinct,
-    Input_ClassesBoolExp? filter,
-    Input_BooleanComparisonExp? predicate,
-  });
-  CopyWith_Input_ClassesBoolExp<TRes> get filter;
-  CopyWith_Input_BooleanComparisonExp<TRes> get predicate;
-}
-
-class _CopyWithImpl_Input_classesAggregateBoolExpBool_and<TRes>
-    implements CopyWith_Input_classesAggregateBoolExpBool_and<TRes> {
-  _CopyWithImpl_Input_classesAggregateBoolExpBool_and(
-    this._instance,
-    this._then,
-  );
-
-  final Input_classesAggregateBoolExpBool_and _instance;
-
-  final TRes Function(Input_classesAggregateBoolExpBool_and) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? arguments = _undefined,
-    Object? distinct = _undefined,
-    Object? filter = _undefined,
-    Object? predicate = _undefined,
-  }) => _then(
-    Input_classesAggregateBoolExpBool_and._({
-      ..._instance._$data,
-      if (arguments != _undefined && arguments != null)
-        'arguments':
-            (arguments
-                as Enum_ClassesSelectColumnClassesAggregateBoolExpBool_andArgumentsColumns),
-      if (distinct != _undefined) 'distinct': (distinct as bool?),
-      if (filter != _undefined) 'filter': (filter as Input_ClassesBoolExp?),
-      if (predicate != _undefined && predicate != null)
-        'predicate': (predicate as Input_BooleanComparisonExp),
-    }),
-  );
-
-  CopyWith_Input_ClassesBoolExp<TRes> get filter {
-    final local$filter = _instance.filter;
-    return local$filter == null
-        ? CopyWith_Input_ClassesBoolExp.stub(_then(_instance))
-        : CopyWith_Input_ClassesBoolExp(local$filter, (e) => call(filter: e));
-  }
-
-  CopyWith_Input_BooleanComparisonExp<TRes> get predicate {
-    final local$predicate = _instance.predicate;
-    return CopyWith_Input_BooleanComparisonExp(
-      local$predicate,
-      (e) => call(predicate: e),
-    );
-  }
-}
-
-class _CopyWithStubImpl_Input_classesAggregateBoolExpBool_and<TRes>
-    implements CopyWith_Input_classesAggregateBoolExpBool_and<TRes> {
-  _CopyWithStubImpl_Input_classesAggregateBoolExpBool_and(this._res);
-
-  TRes _res;
-
-  call({
-    Enum_ClassesSelectColumnClassesAggregateBoolExpBool_andArgumentsColumns?
-    arguments,
-    bool? distinct,
-    Input_ClassesBoolExp? filter,
-    Input_BooleanComparisonExp? predicate,
-  }) => _res;
-
-  CopyWith_Input_ClassesBoolExp<TRes> get filter =>
-      CopyWith_Input_ClassesBoolExp.stub(_res);
-
-  CopyWith_Input_BooleanComparisonExp<TRes> get predicate =>
-      CopyWith_Input_BooleanComparisonExp.stub(_res);
-}
-
-class Input_classesAggregateBoolExpBool_or {
-  factory Input_classesAggregateBoolExpBool_or({
-    required Enum_ClassesSelectColumnClassesAggregateBoolExpBool_orArgumentsColumns
-    arguments,
-    bool? distinct,
-    Input_ClassesBoolExp? filter,
-    required Input_BooleanComparisonExp predicate,
-  }) => Input_classesAggregateBoolExpBool_or._({
-    r'arguments': arguments,
-    if (distinct != null) r'distinct': distinct,
-    if (filter != null) r'filter': filter,
-    r'predicate': predicate,
-  });
-
-  Input_classesAggregateBoolExpBool_or._(this._$data);
-
-  factory Input_classesAggregateBoolExpBool_or.fromJson(
-    Map<String, dynamic> data,
-  ) {
-    final result$data = <String, dynamic>{};
-    final l$arguments = data['arguments'];
-    result$data['arguments'] =
-        fromJson_Enum_ClassesSelectColumnClassesAggregateBoolExpBool_orArgumentsColumns(
-          (l$arguments as String),
-        );
-    if (data.containsKey('distinct')) {
-      final l$distinct = data['distinct'];
-      result$data['distinct'] = (l$distinct as bool?);
-    }
-    if (data.containsKey('filter')) {
-      final l$filter = data['filter'];
-      result$data['filter'] = l$filter == null
-          ? null
-          : Input_ClassesBoolExp.fromJson((l$filter as Map<String, dynamic>));
-    }
-    final l$predicate = data['predicate'];
-    result$data['predicate'] = Input_BooleanComparisonExp.fromJson(
-      (l$predicate as Map<String, dynamic>),
-    );
-    return Input_classesAggregateBoolExpBool_or._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  Enum_ClassesSelectColumnClassesAggregateBoolExpBool_orArgumentsColumns
-  get arguments =>
-      (_$data['arguments']
-          as Enum_ClassesSelectColumnClassesAggregateBoolExpBool_orArgumentsColumns);
-
-  bool? get distinct => (_$data['distinct'] as bool?);
-
-  Input_ClassesBoolExp? get filter =>
-      (_$data['filter'] as Input_ClassesBoolExp?);
-
-  Input_BooleanComparisonExp get predicate =>
-      (_$data['predicate'] as Input_BooleanComparisonExp);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    final l$arguments = arguments;
-    result$data['arguments'] =
-        toJson_Enum_ClassesSelectColumnClassesAggregateBoolExpBool_orArgumentsColumns(
-          l$arguments,
-        );
-    if (_$data.containsKey('distinct')) {
-      final l$distinct = distinct;
-      result$data['distinct'] = l$distinct;
-    }
-    if (_$data.containsKey('filter')) {
-      final l$filter = filter;
-      result$data['filter'] = l$filter?.toJson();
-    }
-    final l$predicate = predicate;
-    result$data['predicate'] = l$predicate.toJson();
-    return result$data;
-  }
-
-  CopyWith_Input_classesAggregateBoolExpBool_or<
-    Input_classesAggregateBoolExpBool_or
-  >
-  get copyWith => CopyWith_Input_classesAggregateBoolExpBool_or(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_classesAggregateBoolExpBool_or ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$arguments = arguments;
-    final lOther$arguments = other.arguments;
-    if (l$arguments != lOther$arguments) {
-      return false;
-    }
-    final l$distinct = distinct;
-    final lOther$distinct = other.distinct;
-    if (_$data.containsKey('distinct') !=
-        other._$data.containsKey('distinct')) {
-      return false;
-    }
-    if (l$distinct != lOther$distinct) {
-      return false;
-    }
-    final l$filter = filter;
-    final lOther$filter = other.filter;
-    if (_$data.containsKey('filter') != other._$data.containsKey('filter')) {
-      return false;
-    }
-    if (l$filter != lOther$filter) {
-      return false;
-    }
-    final l$predicate = predicate;
-    final lOther$predicate = other.predicate;
-    if (l$predicate != lOther$predicate) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$arguments = arguments;
-    final l$distinct = distinct;
-    final l$filter = filter;
-    final l$predicate = predicate;
-    return Object.hashAll([
-      l$arguments,
-      _$data.containsKey('distinct') ? l$distinct : const {},
-      _$data.containsKey('filter') ? l$filter : const {},
-      l$predicate,
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_classesAggregateBoolExpBool_or<TRes> {
-  factory CopyWith_Input_classesAggregateBoolExpBool_or(
-    Input_classesAggregateBoolExpBool_or instance,
-    TRes Function(Input_classesAggregateBoolExpBool_or) then,
-  ) = _CopyWithImpl_Input_classesAggregateBoolExpBool_or;
-
-  factory CopyWith_Input_classesAggregateBoolExpBool_or.stub(TRes res) =
-      _CopyWithStubImpl_Input_classesAggregateBoolExpBool_or;
-
-  TRes call({
-    Enum_ClassesSelectColumnClassesAggregateBoolExpBool_orArgumentsColumns?
-    arguments,
-    bool? distinct,
-    Input_ClassesBoolExp? filter,
-    Input_BooleanComparisonExp? predicate,
-  });
-  CopyWith_Input_ClassesBoolExp<TRes> get filter;
-  CopyWith_Input_BooleanComparisonExp<TRes> get predicate;
-}
-
-class _CopyWithImpl_Input_classesAggregateBoolExpBool_or<TRes>
-    implements CopyWith_Input_classesAggregateBoolExpBool_or<TRes> {
-  _CopyWithImpl_Input_classesAggregateBoolExpBool_or(
-    this._instance,
-    this._then,
-  );
-
-  final Input_classesAggregateBoolExpBool_or _instance;
-
-  final TRes Function(Input_classesAggregateBoolExpBool_or) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? arguments = _undefined,
-    Object? distinct = _undefined,
-    Object? filter = _undefined,
-    Object? predicate = _undefined,
-  }) => _then(
-    Input_classesAggregateBoolExpBool_or._({
-      ..._instance._$data,
-      if (arguments != _undefined && arguments != null)
-        'arguments':
-            (arguments
-                as Enum_ClassesSelectColumnClassesAggregateBoolExpBool_orArgumentsColumns),
-      if (distinct != _undefined) 'distinct': (distinct as bool?),
-      if (filter != _undefined) 'filter': (filter as Input_ClassesBoolExp?),
-      if (predicate != _undefined && predicate != null)
-        'predicate': (predicate as Input_BooleanComparisonExp),
-    }),
-  );
-
-  CopyWith_Input_ClassesBoolExp<TRes> get filter {
-    final local$filter = _instance.filter;
-    return local$filter == null
-        ? CopyWith_Input_ClassesBoolExp.stub(_then(_instance))
-        : CopyWith_Input_ClassesBoolExp(local$filter, (e) => call(filter: e));
-  }
-
-  CopyWith_Input_BooleanComparisonExp<TRes> get predicate {
-    final local$predicate = _instance.predicate;
-    return CopyWith_Input_BooleanComparisonExp(
-      local$predicate,
-      (e) => call(predicate: e),
-    );
-  }
-}
-
-class _CopyWithStubImpl_Input_classesAggregateBoolExpBool_or<TRes>
-    implements CopyWith_Input_classesAggregateBoolExpBool_or<TRes> {
-  _CopyWithStubImpl_Input_classesAggregateBoolExpBool_or(this._res);
-
-  TRes _res;
-
-  call({
-    Enum_ClassesSelectColumnClassesAggregateBoolExpBool_orArgumentsColumns?
-    arguments,
-    bool? distinct,
-    Input_ClassesBoolExp? filter,
-    Input_BooleanComparisonExp? predicate,
-  }) => _res;
-
-  CopyWith_Input_ClassesBoolExp<TRes> get filter =>
-      CopyWith_Input_ClassesBoolExp.stub(_res);
-
-  CopyWith_Input_BooleanComparisonExp<TRes> get predicate =>
-      CopyWith_Input_BooleanComparisonExp.stub(_res);
-}
-
-class Input_classesAggregateBoolExpCount {
-  factory Input_classesAggregateBoolExpCount({
-    List<Enum_ClassesSelectColumn>? arguments,
-    bool? distinct,
-    Input_ClassesBoolExp? filter,
-    required Input_IntComparisonExp predicate,
-  }) => Input_classesAggregateBoolExpCount._({
-    if (arguments != null) r'arguments': arguments,
-    if (distinct != null) r'distinct': distinct,
-    if (filter != null) r'filter': filter,
-    r'predicate': predicate,
-  });
-
-  Input_classesAggregateBoolExpCount._(this._$data);
-
-  factory Input_classesAggregateBoolExpCount.fromJson(
-    Map<String, dynamic> data,
-  ) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('arguments')) {
-      final l$arguments = data['arguments'];
-      result$data['arguments'] = (l$arguments as List<dynamic>?)
-          ?.map((e) => fromJson_Enum_ClassesSelectColumn((e as String)))
+    if (data.containsKey('_or')) {
+      final l$$_or = data['_or'];
+      result$data['_or'] = (l$$_or as List<dynamic>?)
+          ?.map((e) => Input_TagsBoolExp.fromJson((e as Map<String, dynamic>)))
           .toList();
     }
-    if (data.containsKey('distinct')) {
-      final l$distinct = data['distinct'];
-      result$data['distinct'] = (l$distinct as bool?);
-    }
-    if (data.containsKey('filter')) {
-      final l$filter = data['filter'];
-      result$data['filter'] = l$filter == null
+    if (data.containsKey('color')) {
+      final l$color = data['color'];
+      result$data['color'] = l$color == null
           ? null
-          : Input_ClassesBoolExp.fromJson((l$filter as Map<String, dynamic>));
-    }
-    final l$predicate = data['predicate'];
-    result$data['predicate'] = Input_IntComparisonExp.fromJson(
-      (l$predicate as Map<String, dynamic>),
-    );
-    return Input_classesAggregateBoolExpCount._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  List<Enum_ClassesSelectColumn>? get arguments =>
-      (_$data['arguments'] as List<Enum_ClassesSelectColumn>?);
-
-  bool? get distinct => (_$data['distinct'] as bool?);
-
-  Input_ClassesBoolExp? get filter =>
-      (_$data['filter'] as Input_ClassesBoolExp?);
-
-  Input_IntComparisonExp get predicate =>
-      (_$data['predicate'] as Input_IntComparisonExp);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('arguments')) {
-      final l$arguments = arguments;
-      result$data['arguments'] = l$arguments
-          ?.map((e) => toJson_Enum_ClassesSelectColumn(e))
-          .toList();
-    }
-    if (_$data.containsKey('distinct')) {
-      final l$distinct = distinct;
-      result$data['distinct'] = l$distinct;
-    }
-    if (_$data.containsKey('filter')) {
-      final l$filter = filter;
-      result$data['filter'] = l$filter?.toJson();
-    }
-    final l$predicate = predicate;
-    result$data['predicate'] = l$predicate.toJson();
-    return result$data;
-  }
-
-  CopyWith_Input_classesAggregateBoolExpCount<
-    Input_classesAggregateBoolExpCount
-  >
-  get copyWith => CopyWith_Input_classesAggregateBoolExpCount(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_classesAggregateBoolExpCount ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$arguments = arguments;
-    final lOther$arguments = other.arguments;
-    if (_$data.containsKey('arguments') !=
-        other._$data.containsKey('arguments')) {
-      return false;
-    }
-    if (l$arguments != null && lOther$arguments != null) {
-      if (l$arguments.length != lOther$arguments.length) {
-        return false;
-      }
-      for (int i = 0; i < l$arguments.length; i++) {
-        final l$arguments$entry = l$arguments[i];
-        final lOther$arguments$entry = lOther$arguments[i];
-        if (l$arguments$entry != lOther$arguments$entry) {
-          return false;
-        }
-      }
-    } else if (l$arguments != lOther$arguments) {
-      return false;
-    }
-    final l$distinct = distinct;
-    final lOther$distinct = other.distinct;
-    if (_$data.containsKey('distinct') !=
-        other._$data.containsKey('distinct')) {
-      return false;
-    }
-    if (l$distinct != lOther$distinct) {
-      return false;
-    }
-    final l$filter = filter;
-    final lOther$filter = other.filter;
-    if (_$data.containsKey('filter') != other._$data.containsKey('filter')) {
-      return false;
-    }
-    if (l$filter != lOther$filter) {
-      return false;
-    }
-    final l$predicate = predicate;
-    final lOther$predicate = other.predicate;
-    if (l$predicate != lOther$predicate) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$arguments = arguments;
-    final l$distinct = distinct;
-    final l$filter = filter;
-    final l$predicate = predicate;
-    return Object.hashAll([
-      _$data.containsKey('arguments')
-          ? l$arguments == null
-                ? null
-                : Object.hashAll(l$arguments.map((v) => v))
-          : const {},
-      _$data.containsKey('distinct') ? l$distinct : const {},
-      _$data.containsKey('filter') ? l$filter : const {},
-      l$predicate,
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_classesAggregateBoolExpCount<TRes> {
-  factory CopyWith_Input_classesAggregateBoolExpCount(
-    Input_classesAggregateBoolExpCount instance,
-    TRes Function(Input_classesAggregateBoolExpCount) then,
-  ) = _CopyWithImpl_Input_classesAggregateBoolExpCount;
-
-  factory CopyWith_Input_classesAggregateBoolExpCount.stub(TRes res) =
-      _CopyWithStubImpl_Input_classesAggregateBoolExpCount;
-
-  TRes call({
-    List<Enum_ClassesSelectColumn>? arguments,
-    bool? distinct,
-    Input_ClassesBoolExp? filter,
-    Input_IntComparisonExp? predicate,
-  });
-  CopyWith_Input_ClassesBoolExp<TRes> get filter;
-  CopyWith_Input_IntComparisonExp<TRes> get predicate;
-}
-
-class _CopyWithImpl_Input_classesAggregateBoolExpCount<TRes>
-    implements CopyWith_Input_classesAggregateBoolExpCount<TRes> {
-  _CopyWithImpl_Input_classesAggregateBoolExpCount(this._instance, this._then);
-
-  final Input_classesAggregateBoolExpCount _instance;
-
-  final TRes Function(Input_classesAggregateBoolExpCount) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? arguments = _undefined,
-    Object? distinct = _undefined,
-    Object? filter = _undefined,
-    Object? predicate = _undefined,
-  }) => _then(
-    Input_classesAggregateBoolExpCount._({
-      ..._instance._$data,
-      if (arguments != _undefined)
-        'arguments': (arguments as List<Enum_ClassesSelectColumn>?),
-      if (distinct != _undefined) 'distinct': (distinct as bool?),
-      if (filter != _undefined) 'filter': (filter as Input_ClassesBoolExp?),
-      if (predicate != _undefined && predicate != null)
-        'predicate': (predicate as Input_IntComparisonExp),
-    }),
-  );
-
-  CopyWith_Input_ClassesBoolExp<TRes> get filter {
-    final local$filter = _instance.filter;
-    return local$filter == null
-        ? CopyWith_Input_ClassesBoolExp.stub(_then(_instance))
-        : CopyWith_Input_ClassesBoolExp(local$filter, (e) => call(filter: e));
-  }
-
-  CopyWith_Input_IntComparisonExp<TRes> get predicate {
-    final local$predicate = _instance.predicate;
-    return CopyWith_Input_IntComparisonExp(
-      local$predicate,
-      (e) => call(predicate: e),
-    );
-  }
-}
-
-class _CopyWithStubImpl_Input_classesAggregateBoolExpCount<TRes>
-    implements CopyWith_Input_classesAggregateBoolExpCount<TRes> {
-  _CopyWithStubImpl_Input_classesAggregateBoolExpCount(this._res);
-
-  TRes _res;
-
-  call({
-    List<Enum_ClassesSelectColumn>? arguments,
-    bool? distinct,
-    Input_ClassesBoolExp? filter,
-    Input_IntComparisonExp? predicate,
-  }) => _res;
-
-  CopyWith_Input_ClassesBoolExp<TRes> get filter =>
-      CopyWith_Input_ClassesBoolExp.stub(_res);
-
-  CopyWith_Input_IntComparisonExp<TRes> get predicate =>
-      CopyWith_Input_IntComparisonExp.stub(_res);
-}
-
-class Input_groupsAggregateBoolExpCount {
-  factory Input_groupsAggregateBoolExpCount({
-    List<Enum_GroupsSelectColumn>? arguments,
-    bool? distinct,
-    Input_GroupsBoolExp? filter,
-    required Input_IntComparisonExp predicate,
-  }) => Input_groupsAggregateBoolExpCount._({
-    if (arguments != null) r'arguments': arguments,
-    if (distinct != null) r'distinct': distinct,
-    if (filter != null) r'filter': filter,
-    r'predicate': predicate,
-  });
-
-  Input_groupsAggregateBoolExpCount._(this._$data);
-
-  factory Input_groupsAggregateBoolExpCount.fromJson(
-    Map<String, dynamic> data,
-  ) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('arguments')) {
-      final l$arguments = data['arguments'];
-      result$data['arguments'] = (l$arguments as List<dynamic>?)
-          ?.map((e) => fromJson_Enum_GroupsSelectColumn((e as String)))
-          .toList();
-    }
-    if (data.containsKey('distinct')) {
-      final l$distinct = data['distinct'];
-      result$data['distinct'] = (l$distinct as bool?);
-    }
-    if (data.containsKey('filter')) {
-      final l$filter = data['filter'];
-      result$data['filter'] = l$filter == null
-          ? null
-          : Input_GroupsBoolExp.fromJson((l$filter as Map<String, dynamic>));
-    }
-    final l$predicate = data['predicate'];
-    result$data['predicate'] = Input_IntComparisonExp.fromJson(
-      (l$predicate as Map<String, dynamic>),
-    );
-    return Input_groupsAggregateBoolExpCount._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  List<Enum_GroupsSelectColumn>? get arguments =>
-      (_$data['arguments'] as List<Enum_GroupsSelectColumn>?);
-
-  bool? get distinct => (_$data['distinct'] as bool?);
-
-  Input_GroupsBoolExp? get filter => (_$data['filter'] as Input_GroupsBoolExp?);
-
-  Input_IntComparisonExp get predicate =>
-      (_$data['predicate'] as Input_IntComparisonExp);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('arguments')) {
-      final l$arguments = arguments;
-      result$data['arguments'] = l$arguments
-          ?.map((e) => toJson_Enum_GroupsSelectColumn(e))
-          .toList();
-    }
-    if (_$data.containsKey('distinct')) {
-      final l$distinct = distinct;
-      result$data['distinct'] = l$distinct;
-    }
-    if (_$data.containsKey('filter')) {
-      final l$filter = filter;
-      result$data['filter'] = l$filter?.toJson();
-    }
-    final l$predicate = predicate;
-    result$data['predicate'] = l$predicate.toJson();
-    return result$data;
-  }
-
-  CopyWith_Input_groupsAggregateBoolExpCount<Input_groupsAggregateBoolExpCount>
-  get copyWith => CopyWith_Input_groupsAggregateBoolExpCount(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_groupsAggregateBoolExpCount ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$arguments = arguments;
-    final lOther$arguments = other.arguments;
-    if (_$data.containsKey('arguments') !=
-        other._$data.containsKey('arguments')) {
-      return false;
-    }
-    if (l$arguments != null && lOther$arguments != null) {
-      if (l$arguments.length != lOther$arguments.length) {
-        return false;
-      }
-      for (int i = 0; i < l$arguments.length; i++) {
-        final l$arguments$entry = l$arguments[i];
-        final lOther$arguments$entry = lOther$arguments[i];
-        if (l$arguments$entry != lOther$arguments$entry) {
-          return false;
-        }
-      }
-    } else if (l$arguments != lOther$arguments) {
-      return false;
-    }
-    final l$distinct = distinct;
-    final lOther$distinct = other.distinct;
-    if (_$data.containsKey('distinct') !=
-        other._$data.containsKey('distinct')) {
-      return false;
-    }
-    if (l$distinct != lOther$distinct) {
-      return false;
-    }
-    final l$filter = filter;
-    final lOther$filter = other.filter;
-    if (_$data.containsKey('filter') != other._$data.containsKey('filter')) {
-      return false;
-    }
-    if (l$filter != lOther$filter) {
-      return false;
-    }
-    final l$predicate = predicate;
-    final lOther$predicate = other.predicate;
-    if (l$predicate != lOther$predicate) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$arguments = arguments;
-    final l$distinct = distinct;
-    final l$filter = filter;
-    final l$predicate = predicate;
-    return Object.hashAll([
-      _$data.containsKey('arguments')
-          ? l$arguments == null
-                ? null
-                : Object.hashAll(l$arguments.map((v) => v))
-          : const {},
-      _$data.containsKey('distinct') ? l$distinct : const {},
-      _$data.containsKey('filter') ? l$filter : const {},
-      l$predicate,
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_groupsAggregateBoolExpCount<TRes> {
-  factory CopyWith_Input_groupsAggregateBoolExpCount(
-    Input_groupsAggregateBoolExpCount instance,
-    TRes Function(Input_groupsAggregateBoolExpCount) then,
-  ) = _CopyWithImpl_Input_groupsAggregateBoolExpCount;
-
-  factory CopyWith_Input_groupsAggregateBoolExpCount.stub(TRes res) =
-      _CopyWithStubImpl_Input_groupsAggregateBoolExpCount;
-
-  TRes call({
-    List<Enum_GroupsSelectColumn>? arguments,
-    bool? distinct,
-    Input_GroupsBoolExp? filter,
-    Input_IntComparisonExp? predicate,
-  });
-  CopyWith_Input_GroupsBoolExp<TRes> get filter;
-  CopyWith_Input_IntComparisonExp<TRes> get predicate;
-}
-
-class _CopyWithImpl_Input_groupsAggregateBoolExpCount<TRes>
-    implements CopyWith_Input_groupsAggregateBoolExpCount<TRes> {
-  _CopyWithImpl_Input_groupsAggregateBoolExpCount(this._instance, this._then);
-
-  final Input_groupsAggregateBoolExpCount _instance;
-
-  final TRes Function(Input_groupsAggregateBoolExpCount) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? arguments = _undefined,
-    Object? distinct = _undefined,
-    Object? filter = _undefined,
-    Object? predicate = _undefined,
-  }) => _then(
-    Input_groupsAggregateBoolExpCount._({
-      ..._instance._$data,
-      if (arguments != _undefined)
-        'arguments': (arguments as List<Enum_GroupsSelectColumn>?),
-      if (distinct != _undefined) 'distinct': (distinct as bool?),
-      if (filter != _undefined) 'filter': (filter as Input_GroupsBoolExp?),
-      if (predicate != _undefined && predicate != null)
-        'predicate': (predicate as Input_IntComparisonExp),
-    }),
-  );
-
-  CopyWith_Input_GroupsBoolExp<TRes> get filter {
-    final local$filter = _instance.filter;
-    return local$filter == null
-        ? CopyWith_Input_GroupsBoolExp.stub(_then(_instance))
-        : CopyWith_Input_GroupsBoolExp(local$filter, (e) => call(filter: e));
-  }
-
-  CopyWith_Input_IntComparisonExp<TRes> get predicate {
-    final local$predicate = _instance.predicate;
-    return CopyWith_Input_IntComparisonExp(
-      local$predicate,
-      (e) => call(predicate: e),
-    );
-  }
-}
-
-class _CopyWithStubImpl_Input_groupsAggregateBoolExpCount<TRes>
-    implements CopyWith_Input_groupsAggregateBoolExpCount<TRes> {
-  _CopyWithStubImpl_Input_groupsAggregateBoolExpCount(this._res);
-
-  TRes _res;
-
-  call({
-    List<Enum_GroupsSelectColumn>? arguments,
-    bool? distinct,
-    Input_GroupsBoolExp? filter,
-    Input_IntComparisonExp? predicate,
-  }) => _res;
-
-  CopyWith_Input_GroupsBoolExp<TRes> get filter =>
-      CopyWith_Input_GroupsBoolExp.stub(_res);
-
-  CopyWith_Input_IntComparisonExp<TRes> get predicate =>
-      CopyWith_Input_IntComparisonExp.stub(_res);
-}
-
-class Input_historyAttendanceHistoryAggregateBoolExpBool_and {
-  factory Input_historyAttendanceHistoryAggregateBoolExpBool_and({
-    required Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_andArgumentsColumns
-    arguments,
-    bool? distinct,
-    Input_HistoryAttendanceHistoryBoolExp? filter,
-    required Input_BooleanComparisonExp predicate,
-  }) => Input_historyAttendanceHistoryAggregateBoolExpBool_and._({
-    r'arguments': arguments,
-    if (distinct != null) r'distinct': distinct,
-    if (filter != null) r'filter': filter,
-    r'predicate': predicate,
-  });
-
-  Input_historyAttendanceHistoryAggregateBoolExpBool_and._(this._$data);
-
-  factory Input_historyAttendanceHistoryAggregateBoolExpBool_and.fromJson(
-    Map<String, dynamic> data,
-  ) {
-    final result$data = <String, dynamic>{};
-    final l$arguments = data['arguments'];
-    result$data['arguments'] =
-        fromJson_Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_andArgumentsColumns(
-          (l$arguments as String),
-        );
-    if (data.containsKey('distinct')) {
-      final l$distinct = data['distinct'];
-      result$data['distinct'] = (l$distinct as bool?);
-    }
-    if (data.containsKey('filter')) {
-      final l$filter = data['filter'];
-      result$data['filter'] = l$filter == null
-          ? null
-          : Input_HistoryAttendanceHistoryBoolExp.fromJson(
-              (l$filter as Map<String, dynamic>),
+          : Input_BigintComparisonExp.fromJson(
+              (l$color as Map<String, dynamic>),
             );
     }
-    final l$predicate = data['predicate'];
-    result$data['predicate'] = Input_BooleanComparisonExp.fromJson(
-      (l$predicate as Map<String, dynamic>),
-    );
-    return Input_historyAttendanceHistoryAggregateBoolExpBool_and._(
-      result$data,
-    );
+    if (data.containsKey('id')) {
+      final l$id = data['id'];
+      result$data['id'] = l$id == null
+          ? null
+          : Input_UuidComparisonExp.fromJson((l$id as Map<String, dynamic>));
+    }
+    if (data.containsKey('name')) {
+      final l$name = data['name'];
+      result$data['name'] = l$name == null
+          ? null
+          : Input_StringComparisonExp.fromJson(
+              (l$name as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('persons')) {
+      final l$persons = data['persons'];
+      result$data['persons'] = l$persons == null
+          ? null
+          : Input_PersonsTagsBoolExp.fromJson(
+              (l$persons as Map<String, dynamic>),
+            );
+    }
+    return Input_TagsBoolExp._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_andArgumentsColumns
-  get arguments =>
-      (_$data['arguments']
-          as Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_andArgumentsColumns);
+  List<Input_TagsBoolExp>? get $_and =>
+      (_$data['_and'] as List<Input_TagsBoolExp>?);
 
-  bool? get distinct => (_$data['distinct'] as bool?);
+  Input_TagsBoolExp? get $_not => (_$data['_not'] as Input_TagsBoolExp?);
 
-  Input_HistoryAttendanceHistoryBoolExp? get filter =>
-      (_$data['filter'] as Input_HistoryAttendanceHistoryBoolExp?);
+  List<Input_TagsBoolExp>? get $_or =>
+      (_$data['_or'] as List<Input_TagsBoolExp>?);
 
-  Input_BooleanComparisonExp get predicate =>
-      (_$data['predicate'] as Input_BooleanComparisonExp);
+  Input_BigintComparisonExp? get color =>
+      (_$data['color'] as Input_BigintComparisonExp?);
+
+  Input_UuidComparisonExp? get id => (_$data['id'] as Input_UuidComparisonExp?);
+
+  Input_StringComparisonExp? get name =>
+      (_$data['name'] as Input_StringComparisonExp?);
+
+  Input_PersonsTagsBoolExp? get persons =>
+      (_$data['persons'] as Input_PersonsTagsBoolExp?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
-    final l$arguments = arguments;
-    result$data['arguments'] =
-        toJson_Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_andArgumentsColumns(
-          l$arguments,
-        );
-    if (_$data.containsKey('distinct')) {
-      final l$distinct = distinct;
-      result$data['distinct'] = l$distinct;
+    if (_$data.containsKey('_and')) {
+      final l$$_and = $_and;
+      result$data['_and'] = l$$_and?.map((e) => e.toJson()).toList();
     }
-    if (_$data.containsKey('filter')) {
-      final l$filter = filter;
-      result$data['filter'] = l$filter?.toJson();
+    if (_$data.containsKey('_not')) {
+      final l$$_not = $_not;
+      result$data['_not'] = l$$_not?.toJson();
     }
-    final l$predicate = predicate;
-    result$data['predicate'] = l$predicate.toJson();
+    if (_$data.containsKey('_or')) {
+      final l$$_or = $_or;
+      result$data['_or'] = l$$_or?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('color')) {
+      final l$color = color;
+      result$data['color'] = l$color?.toJson();
+    }
+    if (_$data.containsKey('id')) {
+      final l$id = id;
+      result$data['id'] = l$id?.toJson();
+    }
+    if (_$data.containsKey('name')) {
+      final l$name = name;
+      result$data['name'] = l$name?.toJson();
+    }
+    if (_$data.containsKey('persons')) {
+      final l$persons = persons;
+      result$data['persons'] = l$persons?.toJson();
+    }
     return result$data;
   }
 
-  CopyWith_Input_historyAttendanceHistoryAggregateBoolExpBool_and<
-    Input_historyAttendanceHistoryAggregateBoolExpBool_and
-  >
-  get copyWith =>
-      CopyWith_Input_historyAttendanceHistoryAggregateBoolExpBool_and(
-        this,
-        (i) => i,
-      );
+  CopyWith_Input_TagsBoolExp<Input_TagsBoolExp> get copyWith =>
+      CopyWith_Input_TagsBoolExp(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input_historyAttendanceHistoryAggregateBoolExpBool_and ||
-        runtimeType != other.runtimeType) {
+    if (other is! Input_TagsBoolExp || runtimeType != other.runtimeType) {
       return false;
     }
-    final l$arguments = arguments;
-    final lOther$arguments = other.arguments;
-    if (l$arguments != lOther$arguments) {
+    final l$$_and = $_and;
+    final lOther$$_and = other.$_and;
+    if (_$data.containsKey('_and') != other._$data.containsKey('_and')) {
       return false;
     }
-    final l$distinct = distinct;
-    final lOther$distinct = other.distinct;
-    if (_$data.containsKey('distinct') !=
-        other._$data.containsKey('distinct')) {
+    if (l$$_and != null && lOther$$_and != null) {
+      if (l$$_and.length != lOther$$_and.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$_and.length; i++) {
+        final l$$_and$entry = l$$_and[i];
+        final lOther$$_and$entry = lOther$$_and[i];
+        if (l$$_and$entry != lOther$$_and$entry) {
+          return false;
+        }
+      }
+    } else if (l$$_and != lOther$$_and) {
       return false;
     }
-    if (l$distinct != lOther$distinct) {
+    final l$$_not = $_not;
+    final lOther$$_not = other.$_not;
+    if (_$data.containsKey('_not') != other._$data.containsKey('_not')) {
       return false;
     }
-    final l$filter = filter;
-    final lOther$filter = other.filter;
-    if (_$data.containsKey('filter') != other._$data.containsKey('filter')) {
+    if (l$$_not != lOther$$_not) {
       return false;
     }
-    if (l$filter != lOther$filter) {
+    final l$$_or = $_or;
+    final lOther$$_or = other.$_or;
+    if (_$data.containsKey('_or') != other._$data.containsKey('_or')) {
       return false;
     }
-    final l$predicate = predicate;
-    final lOther$predicate = other.predicate;
-    if (l$predicate != lOther$predicate) {
+    if (l$$_or != null && lOther$$_or != null) {
+      if (l$$_or.length != lOther$$_or.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$_or.length; i++) {
+        final l$$_or$entry = l$$_or[i];
+        final lOther$$_or$entry = lOther$$_or[i];
+        if (l$$_or$entry != lOther$$_or$entry) {
+          return false;
+        }
+      }
+    } else if (l$$_or != lOther$$_or) {
+      return false;
+    }
+    final l$color = color;
+    final lOther$color = other.color;
+    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
+      return false;
+    }
+    if (l$color != lOther$color) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
+      return false;
+    }
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (_$data.containsKey('name') != other._$data.containsKey('name')) {
+      return false;
+    }
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$persons = persons;
+    final lOther$persons = other.persons;
+    if (_$data.containsKey('persons') != other._$data.containsKey('persons')) {
+      return false;
+    }
+    if (l$persons != lOther$persons) {
       return false;
     }
     return true;
@@ -2103,244 +1646,247 @@ class Input_historyAttendanceHistoryAggregateBoolExpBool_and {
 
   @override
   int get hashCode {
-    final l$arguments = arguments;
-    final l$distinct = distinct;
-    final l$filter = filter;
-    final l$predicate = predicate;
+    final l$$_and = $_and;
+    final l$$_not = $_not;
+    final l$$_or = $_or;
+    final l$color = color;
+    final l$id = id;
+    final l$name = name;
+    final l$persons = persons;
     return Object.hashAll([
-      l$arguments,
-      _$data.containsKey('distinct') ? l$distinct : const {},
-      _$data.containsKey('filter') ? l$filter : const {},
-      l$predicate,
+      _$data.containsKey('_and')
+          ? l$$_and == null
+                ? null
+                : Object.hashAll(l$$_and.map((v) => v))
+          : const {},
+      _$data.containsKey('_not') ? l$$_not : const {},
+      _$data.containsKey('_or')
+          ? l$$_or == null
+                ? null
+                : Object.hashAll(l$$_or.map((v) => v))
+          : const {},
+      _$data.containsKey('color') ? l$color : const {},
+      _$data.containsKey('id') ? l$id : const {},
+      _$data.containsKey('name') ? l$name : const {},
+      _$data.containsKey('persons') ? l$persons : const {},
     ]);
   }
 }
 
-abstract class CopyWith_Input_historyAttendanceHistoryAggregateBoolExpBool_and<
-  TRes
-> {
-  factory CopyWith_Input_historyAttendanceHistoryAggregateBoolExpBool_and(
-    Input_historyAttendanceHistoryAggregateBoolExpBool_and instance,
-    TRes Function(Input_historyAttendanceHistoryAggregateBoolExpBool_and) then,
-  ) = _CopyWithImpl_Input_historyAttendanceHistoryAggregateBoolExpBool_and;
+abstract class CopyWith_Input_TagsBoolExp<TRes> {
+  factory CopyWith_Input_TagsBoolExp(
+    Input_TagsBoolExp instance,
+    TRes Function(Input_TagsBoolExp) then,
+  ) = _CopyWithImpl_Input_TagsBoolExp;
 
-  factory CopyWith_Input_historyAttendanceHistoryAggregateBoolExpBool_and.stub(
-    TRes res,
-  ) = _CopyWithStubImpl_Input_historyAttendanceHistoryAggregateBoolExpBool_and;
+  factory CopyWith_Input_TagsBoolExp.stub(TRes res) =
+      _CopyWithStubImpl_Input_TagsBoolExp;
 
   TRes call({
-    Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_andArgumentsColumns?
-    arguments,
-    bool? distinct,
-    Input_HistoryAttendanceHistoryBoolExp? filter,
-    Input_BooleanComparisonExp? predicate,
+    List<Input_TagsBoolExp>? $_and,
+    Input_TagsBoolExp? $_not,
+    List<Input_TagsBoolExp>? $_or,
+    Input_BigintComparisonExp? color,
+    Input_UuidComparisonExp? id,
+    Input_StringComparisonExp? name,
+    Input_PersonsTagsBoolExp? persons,
   });
-  CopyWith_Input_HistoryAttendanceHistoryBoolExp<TRes> get filter;
-  CopyWith_Input_BooleanComparisonExp<TRes> get predicate;
+  TRes $_and(
+    Iterable<Input_TagsBoolExp>? Function(
+      Iterable<CopyWith_Input_TagsBoolExp<Input_TagsBoolExp>>?,
+    )
+    _fn,
+  );
+  CopyWith_Input_TagsBoolExp<TRes> get $_not;
+  TRes $_or(
+    Iterable<Input_TagsBoolExp>? Function(
+      Iterable<CopyWith_Input_TagsBoolExp<Input_TagsBoolExp>>?,
+    )
+    _fn,
+  );
+  CopyWith_Input_BigintComparisonExp<TRes> get color;
+  CopyWith_Input_UuidComparisonExp<TRes> get id;
+  CopyWith_Input_StringComparisonExp<TRes> get name;
+  CopyWith_Input_PersonsTagsBoolExp<TRes> get persons;
 }
 
-class _CopyWithImpl_Input_historyAttendanceHistoryAggregateBoolExpBool_and<TRes>
-    implements
-        CopyWith_Input_historyAttendanceHistoryAggregateBoolExpBool_and<TRes> {
-  _CopyWithImpl_Input_historyAttendanceHistoryAggregateBoolExpBool_and(
-    this._instance,
-    this._then,
-  );
+class _CopyWithImpl_Input_TagsBoolExp<TRes>
+    implements CopyWith_Input_TagsBoolExp<TRes> {
+  _CopyWithImpl_Input_TagsBoolExp(this._instance, this._then);
 
-  final Input_historyAttendanceHistoryAggregateBoolExpBool_and _instance;
+  final Input_TagsBoolExp _instance;
 
-  final TRes Function(Input_historyAttendanceHistoryAggregateBoolExpBool_and)
-  _then;
+  final TRes Function(Input_TagsBoolExp) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
-    Object? arguments = _undefined,
-    Object? distinct = _undefined,
-    Object? filter = _undefined,
-    Object? predicate = _undefined,
+    Object? $_and = _undefined,
+    Object? $_not = _undefined,
+    Object? $_or = _undefined,
+    Object? color = _undefined,
+    Object? id = _undefined,
+    Object? name = _undefined,
+    Object? persons = _undefined,
   }) => _then(
-    Input_historyAttendanceHistoryAggregateBoolExpBool_and._({
+    Input_TagsBoolExp._({
       ..._instance._$data,
-      if (arguments != _undefined && arguments != null)
-        'arguments':
-            (arguments
-                as Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_andArgumentsColumns),
-      if (distinct != _undefined) 'distinct': (distinct as bool?),
-      if (filter != _undefined)
-        'filter': (filter as Input_HistoryAttendanceHistoryBoolExp?),
-      if (predicate != _undefined && predicate != null)
-        'predicate': (predicate as Input_BooleanComparisonExp),
+      if ($_and != _undefined) '_and': ($_and as List<Input_TagsBoolExp>?),
+      if ($_not != _undefined) '_not': ($_not as Input_TagsBoolExp?),
+      if ($_or != _undefined) '_or': ($_or as List<Input_TagsBoolExp>?),
+      if (color != _undefined) 'color': (color as Input_BigintComparisonExp?),
+      if (id != _undefined) 'id': (id as Input_UuidComparisonExp?),
+      if (name != _undefined) 'name': (name as Input_StringComparisonExp?),
+      if (persons != _undefined)
+        'persons': (persons as Input_PersonsTagsBoolExp?),
     }),
   );
 
-  CopyWith_Input_HistoryAttendanceHistoryBoolExp<TRes> get filter {
-    final local$filter = _instance.filter;
-    return local$filter == null
-        ? CopyWith_Input_HistoryAttendanceHistoryBoolExp.stub(_then(_instance))
-        : CopyWith_Input_HistoryAttendanceHistoryBoolExp(
-            local$filter,
-            (e) => call(filter: e),
+  TRes $_and(
+    Iterable<Input_TagsBoolExp>? Function(
+      Iterable<CopyWith_Input_TagsBoolExp<Input_TagsBoolExp>>?,
+    )
+    _fn,
+  ) => call(
+    $_and: _fn(
+      _instance.$_and?.map((e) => CopyWith_Input_TagsBoolExp(e, (i) => i)),
+    )?.toList(),
+  );
+
+  CopyWith_Input_TagsBoolExp<TRes> get $_not {
+    final local$$_not = _instance.$_not;
+    return local$$_not == null
+        ? CopyWith_Input_TagsBoolExp.stub(_then(_instance))
+        : CopyWith_Input_TagsBoolExp(local$$_not, (e) => call($_not: e));
+  }
+
+  TRes $_or(
+    Iterable<Input_TagsBoolExp>? Function(
+      Iterable<CopyWith_Input_TagsBoolExp<Input_TagsBoolExp>>?,
+    )
+    _fn,
+  ) => call(
+    $_or: _fn(
+      _instance.$_or?.map((e) => CopyWith_Input_TagsBoolExp(e, (i) => i)),
+    )?.toList(),
+  );
+
+  CopyWith_Input_BigintComparisonExp<TRes> get color {
+    final local$color = _instance.color;
+    return local$color == null
+        ? CopyWith_Input_BigintComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_BigintComparisonExp(
+            local$color,
+            (e) => call(color: e),
           );
   }
 
-  CopyWith_Input_BooleanComparisonExp<TRes> get predicate {
-    final local$predicate = _instance.predicate;
-    return CopyWith_Input_BooleanComparisonExp(
-      local$predicate,
-      (e) => call(predicate: e),
-    );
+  CopyWith_Input_UuidComparisonExp<TRes> get id {
+    final local$id = _instance.id;
+    return local$id == null
+        ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_UuidComparisonExp(local$id, (e) => call(id: e));
+  }
+
+  CopyWith_Input_StringComparisonExp<TRes> get name {
+    final local$name = _instance.name;
+    return local$name == null
+        ? CopyWith_Input_StringComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_StringComparisonExp(local$name, (e) => call(name: e));
+  }
+
+  CopyWith_Input_PersonsTagsBoolExp<TRes> get persons {
+    final local$persons = _instance.persons;
+    return local$persons == null
+        ? CopyWith_Input_PersonsTagsBoolExp.stub(_then(_instance))
+        : CopyWith_Input_PersonsTagsBoolExp(
+            local$persons,
+            (e) => call(persons: e),
+          );
   }
 }
 
-class _CopyWithStubImpl_Input_historyAttendanceHistoryAggregateBoolExpBool_and<
-  TRes
->
-    implements
-        CopyWith_Input_historyAttendanceHistoryAggregateBoolExpBool_and<TRes> {
-  _CopyWithStubImpl_Input_historyAttendanceHistoryAggregateBoolExpBool_and(
-    this._res,
-  );
+class _CopyWithStubImpl_Input_TagsBoolExp<TRes>
+    implements CopyWith_Input_TagsBoolExp<TRes> {
+  _CopyWithStubImpl_Input_TagsBoolExp(this._res);
 
   TRes _res;
 
   call({
-    Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_andArgumentsColumns?
-    arguments,
-    bool? distinct,
-    Input_HistoryAttendanceHistoryBoolExp? filter,
-    Input_BooleanComparisonExp? predicate,
+    List<Input_TagsBoolExp>? $_and,
+    Input_TagsBoolExp? $_not,
+    List<Input_TagsBoolExp>? $_or,
+    Input_BigintComparisonExp? color,
+    Input_UuidComparisonExp? id,
+    Input_StringComparisonExp? name,
+    Input_PersonsTagsBoolExp? persons,
   }) => _res;
 
-  CopyWith_Input_HistoryAttendanceHistoryBoolExp<TRes> get filter =>
-      CopyWith_Input_HistoryAttendanceHistoryBoolExp.stub(_res);
+  $_and(_fn) => _res;
 
-  CopyWith_Input_BooleanComparisonExp<TRes> get predicate =>
-      CopyWith_Input_BooleanComparisonExp.stub(_res);
+  CopyWith_Input_TagsBoolExp<TRes> get $_not =>
+      CopyWith_Input_TagsBoolExp.stub(_res);
+
+  $_or(_fn) => _res;
+
+  CopyWith_Input_BigintComparisonExp<TRes> get color =>
+      CopyWith_Input_BigintComparisonExp.stub(_res);
+
+  CopyWith_Input_UuidComparisonExp<TRes> get id =>
+      CopyWith_Input_UuidComparisonExp.stub(_res);
+
+  CopyWith_Input_StringComparisonExp<TRes> get name =>
+      CopyWith_Input_StringComparisonExp.stub(_res);
+
+  CopyWith_Input_PersonsTagsBoolExp<TRes> get persons =>
+      CopyWith_Input_PersonsTagsBoolExp.stub(_res);
 }
 
-class Input_historyAttendanceHistoryAggregateBoolExpBool_or {
-  factory Input_historyAttendanceHistoryAggregateBoolExpBool_or({
-    required Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_orArgumentsColumns
-    arguments,
-    bool? distinct,
-    Input_HistoryAttendanceHistoryBoolExp? filter,
-    required Input_BooleanComparisonExp predicate,
-  }) => Input_historyAttendanceHistoryAggregateBoolExpBool_or._({
-    r'arguments': arguments,
-    if (distinct != null) r'distinct': distinct,
-    if (filter != null) r'filter': filter,
-    r'predicate': predicate,
-  });
+class Input_TagsIncInput {
+  factory Input_TagsIncInput({int? color}) =>
+      Input_TagsIncInput._({if (color != null) r'color': color});
 
-  Input_historyAttendanceHistoryAggregateBoolExpBool_or._(this._$data);
+  Input_TagsIncInput._(this._$data);
 
-  factory Input_historyAttendanceHistoryAggregateBoolExpBool_or.fromJson(
-    Map<String, dynamic> data,
-  ) {
+  factory Input_TagsIncInput.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
-    final l$arguments = data['arguments'];
-    result$data['arguments'] =
-        fromJson_Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_orArgumentsColumns(
-          (l$arguments as String),
-        );
-    if (data.containsKey('distinct')) {
-      final l$distinct = data['distinct'];
-      result$data['distinct'] = (l$distinct as bool?);
+    if (data.containsKey('color')) {
+      final l$color = data['color'];
+      result$data['color'] = (l$color as int?);
     }
-    if (data.containsKey('filter')) {
-      final l$filter = data['filter'];
-      result$data['filter'] = l$filter == null
-          ? null
-          : Input_HistoryAttendanceHistoryBoolExp.fromJson(
-              (l$filter as Map<String, dynamic>),
-            );
-    }
-    final l$predicate = data['predicate'];
-    result$data['predicate'] = Input_BooleanComparisonExp.fromJson(
-      (l$predicate as Map<String, dynamic>),
-    );
-    return Input_historyAttendanceHistoryAggregateBoolExpBool_or._(result$data);
+    return Input_TagsIncInput._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_orArgumentsColumns
-  get arguments =>
-      (_$data['arguments']
-          as Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_orArgumentsColumns);
-
-  bool? get distinct => (_$data['distinct'] as bool?);
-
-  Input_HistoryAttendanceHistoryBoolExp? get filter =>
-      (_$data['filter'] as Input_HistoryAttendanceHistoryBoolExp?);
-
-  Input_BooleanComparisonExp get predicate =>
-      (_$data['predicate'] as Input_BooleanComparisonExp);
+  int? get color => (_$data['color'] as int?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
-    final l$arguments = arguments;
-    result$data['arguments'] =
-        toJson_Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_orArgumentsColumns(
-          l$arguments,
-        );
-    if (_$data.containsKey('distinct')) {
-      final l$distinct = distinct;
-      result$data['distinct'] = l$distinct;
+    if (_$data.containsKey('color')) {
+      final l$color = color;
+      result$data['color'] = l$color;
     }
-    if (_$data.containsKey('filter')) {
-      final l$filter = filter;
-      result$data['filter'] = l$filter?.toJson();
-    }
-    final l$predicate = predicate;
-    result$data['predicate'] = l$predicate.toJson();
     return result$data;
   }
 
-  CopyWith_Input_historyAttendanceHistoryAggregateBoolExpBool_or<
-    Input_historyAttendanceHistoryAggregateBoolExpBool_or
-  >
-  get copyWith =>
-      CopyWith_Input_historyAttendanceHistoryAggregateBoolExpBool_or(
-        this,
-        (i) => i,
-      );
+  CopyWith_Input_TagsIncInput<Input_TagsIncInput> get copyWith =>
+      CopyWith_Input_TagsIncInput(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input_historyAttendanceHistoryAggregateBoolExpBool_or ||
-        runtimeType != other.runtimeType) {
+    if (other is! Input_TagsIncInput || runtimeType != other.runtimeType) {
       return false;
     }
-    final l$arguments = arguments;
-    final lOther$arguments = other.arguments;
-    if (l$arguments != lOther$arguments) {
+    final l$color = color;
+    final lOther$color = other.color;
+    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
       return false;
     }
-    final l$distinct = distinct;
-    final lOther$distinct = other.distinct;
-    if (_$data.containsKey('distinct') !=
-        other._$data.containsKey('distinct')) {
-      return false;
-    }
-    if (l$distinct != lOther$distinct) {
-      return false;
-    }
-    final l$filter = filter;
-    final lOther$filter = other.filter;
-    if (_$data.containsKey('filter') != other._$data.containsKey('filter')) {
-      return false;
-    }
-    if (l$filter != lOther$filter) {
-      return false;
-    }
-    final l$predicate = predicate;
-    final lOther$predicate = other.predicate;
-    if (l$predicate != lOther$predicate) {
+    if (l$color != lOther$color) {
       return false;
     }
     return true;
@@ -2348,261 +1894,299 @@ class Input_historyAttendanceHistoryAggregateBoolExpBool_or {
 
   @override
   int get hashCode {
-    final l$arguments = arguments;
-    final l$distinct = distinct;
-    final l$filter = filter;
-    final l$predicate = predicate;
+    final l$color = color;
+    return Object.hashAll([_$data.containsKey('color') ? l$color : const {}]);
+  }
+}
+
+abstract class CopyWith_Input_TagsIncInput<TRes> {
+  factory CopyWith_Input_TagsIncInput(
+    Input_TagsIncInput instance,
+    TRes Function(Input_TagsIncInput) then,
+  ) = _CopyWithImpl_Input_TagsIncInput;
+
+  factory CopyWith_Input_TagsIncInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_TagsIncInput;
+
+  TRes call({int? color});
+}
+
+class _CopyWithImpl_Input_TagsIncInput<TRes>
+    implements CopyWith_Input_TagsIncInput<TRes> {
+  _CopyWithImpl_Input_TagsIncInput(this._instance, this._then);
+
+  final Input_TagsIncInput _instance;
+
+  final TRes Function(Input_TagsIncInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? color = _undefined}) => _then(
+    Input_TagsIncInput._({
+      ..._instance._$data,
+      if (color != _undefined) 'color': (color as int?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_TagsIncInput<TRes>
+    implements CopyWith_Input_TagsIncInput<TRes> {
+  _CopyWithStubImpl_Input_TagsIncInput(this._res);
+
+  TRes _res;
+
+  call({int? color}) => _res;
+}
+
+class Input_TagsInsertInput {
+  factory Input_TagsInsertInput({
+    int? color,
+    String? name,
+    Input_PersonsTagsArrRelInsertInput? persons,
+  }) => Input_TagsInsertInput._({
+    if (color != null) r'color': color,
+    if (name != null) r'name': name,
+    if (persons != null) r'persons': persons,
+  });
+
+  Input_TagsInsertInput._(this._$data);
+
+  factory Input_TagsInsertInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('color')) {
+      final l$color = data['color'];
+      result$data['color'] = (l$color as int?);
+    }
+    if (data.containsKey('name')) {
+      final l$name = data['name'];
+      result$data['name'] = (l$name as String?);
+    }
+    if (data.containsKey('persons')) {
+      final l$persons = data['persons'];
+      result$data['persons'] = l$persons == null
+          ? null
+          : Input_PersonsTagsArrRelInsertInput.fromJson(
+              (l$persons as Map<String, dynamic>),
+            );
+    }
+    return Input_TagsInsertInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  int? get color => (_$data['color'] as int?);
+
+  String? get name => (_$data['name'] as String?);
+
+  Input_PersonsTagsArrRelInsertInput? get persons =>
+      (_$data['persons'] as Input_PersonsTagsArrRelInsertInput?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('color')) {
+      final l$color = color;
+      result$data['color'] = l$color;
+    }
+    if (_$data.containsKey('name')) {
+      final l$name = name;
+      result$data['name'] = l$name;
+    }
+    if (_$data.containsKey('persons')) {
+      final l$persons = persons;
+      result$data['persons'] = l$persons?.toJson();
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_TagsInsertInput<Input_TagsInsertInput> get copyWith =>
+      CopyWith_Input_TagsInsertInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_TagsInsertInput || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$color = color;
+    final lOther$color = other.color;
+    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
+      return false;
+    }
+    if (l$color != lOther$color) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (_$data.containsKey('name') != other._$data.containsKey('name')) {
+      return false;
+    }
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$persons = persons;
+    final lOther$persons = other.persons;
+    if (_$data.containsKey('persons') != other._$data.containsKey('persons')) {
+      return false;
+    }
+    if (l$persons != lOther$persons) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$color = color;
+    final l$name = name;
+    final l$persons = persons;
     return Object.hashAll([
-      l$arguments,
-      _$data.containsKey('distinct') ? l$distinct : const {},
-      _$data.containsKey('filter') ? l$filter : const {},
-      l$predicate,
+      _$data.containsKey('color') ? l$color : const {},
+      _$data.containsKey('name') ? l$name : const {},
+      _$data.containsKey('persons') ? l$persons : const {},
     ]);
   }
 }
 
-abstract class CopyWith_Input_historyAttendanceHistoryAggregateBoolExpBool_or<
-  TRes
-> {
-  factory CopyWith_Input_historyAttendanceHistoryAggregateBoolExpBool_or(
-    Input_historyAttendanceHistoryAggregateBoolExpBool_or instance,
-    TRes Function(Input_historyAttendanceHistoryAggregateBoolExpBool_or) then,
-  ) = _CopyWithImpl_Input_historyAttendanceHistoryAggregateBoolExpBool_or;
+abstract class CopyWith_Input_TagsInsertInput<TRes> {
+  factory CopyWith_Input_TagsInsertInput(
+    Input_TagsInsertInput instance,
+    TRes Function(Input_TagsInsertInput) then,
+  ) = _CopyWithImpl_Input_TagsInsertInput;
 
-  factory CopyWith_Input_historyAttendanceHistoryAggregateBoolExpBool_or.stub(
-    TRes res,
-  ) = _CopyWithStubImpl_Input_historyAttendanceHistoryAggregateBoolExpBool_or;
+  factory CopyWith_Input_TagsInsertInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_TagsInsertInput;
 
   TRes call({
-    Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_orArgumentsColumns?
-    arguments,
-    bool? distinct,
-    Input_HistoryAttendanceHistoryBoolExp? filter,
-    Input_BooleanComparisonExp? predicate,
+    int? color,
+    String? name,
+    Input_PersonsTagsArrRelInsertInput? persons,
   });
-  CopyWith_Input_HistoryAttendanceHistoryBoolExp<TRes> get filter;
-  CopyWith_Input_BooleanComparisonExp<TRes> get predicate;
+  CopyWith_Input_PersonsTagsArrRelInsertInput<TRes> get persons;
 }
 
-class _CopyWithImpl_Input_historyAttendanceHistoryAggregateBoolExpBool_or<TRes>
-    implements
-        CopyWith_Input_historyAttendanceHistoryAggregateBoolExpBool_or<TRes> {
-  _CopyWithImpl_Input_historyAttendanceHistoryAggregateBoolExpBool_or(
-    this._instance,
-    this._then,
-  );
+class _CopyWithImpl_Input_TagsInsertInput<TRes>
+    implements CopyWith_Input_TagsInsertInput<TRes> {
+  _CopyWithImpl_Input_TagsInsertInput(this._instance, this._then);
 
-  final Input_historyAttendanceHistoryAggregateBoolExpBool_or _instance;
+  final Input_TagsInsertInput _instance;
 
-  final TRes Function(Input_historyAttendanceHistoryAggregateBoolExpBool_or)
-  _then;
+  final TRes Function(Input_TagsInsertInput) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
-    Object? arguments = _undefined,
-    Object? distinct = _undefined,
-    Object? filter = _undefined,
-    Object? predicate = _undefined,
+    Object? color = _undefined,
+    Object? name = _undefined,
+    Object? persons = _undefined,
   }) => _then(
-    Input_historyAttendanceHistoryAggregateBoolExpBool_or._({
+    Input_TagsInsertInput._({
       ..._instance._$data,
-      if (arguments != _undefined && arguments != null)
-        'arguments':
-            (arguments
-                as Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_orArgumentsColumns),
-      if (distinct != _undefined) 'distinct': (distinct as bool?),
-      if (filter != _undefined)
-        'filter': (filter as Input_HistoryAttendanceHistoryBoolExp?),
-      if (predicate != _undefined && predicate != null)
-        'predicate': (predicate as Input_BooleanComparisonExp),
+      if (color != _undefined) 'color': (color as int?),
+      if (name != _undefined) 'name': (name as String?),
+      if (persons != _undefined)
+        'persons': (persons as Input_PersonsTagsArrRelInsertInput?),
     }),
   );
 
-  CopyWith_Input_HistoryAttendanceHistoryBoolExp<TRes> get filter {
-    final local$filter = _instance.filter;
-    return local$filter == null
-        ? CopyWith_Input_HistoryAttendanceHistoryBoolExp.stub(_then(_instance))
-        : CopyWith_Input_HistoryAttendanceHistoryBoolExp(
-            local$filter,
-            (e) => call(filter: e),
+  CopyWith_Input_PersonsTagsArrRelInsertInput<TRes> get persons {
+    final local$persons = _instance.persons;
+    return local$persons == null
+        ? CopyWith_Input_PersonsTagsArrRelInsertInput.stub(_then(_instance))
+        : CopyWith_Input_PersonsTagsArrRelInsertInput(
+            local$persons,
+            (e) => call(persons: e),
           );
-  }
-
-  CopyWith_Input_BooleanComparisonExp<TRes> get predicate {
-    final local$predicate = _instance.predicate;
-    return CopyWith_Input_BooleanComparisonExp(
-      local$predicate,
-      (e) => call(predicate: e),
-    );
   }
 }
 
-class _CopyWithStubImpl_Input_historyAttendanceHistoryAggregateBoolExpBool_or<
-  TRes
->
-    implements
-        CopyWith_Input_historyAttendanceHistoryAggregateBoolExpBool_or<TRes> {
-  _CopyWithStubImpl_Input_historyAttendanceHistoryAggregateBoolExpBool_or(
-    this._res,
-  );
+class _CopyWithStubImpl_Input_TagsInsertInput<TRes>
+    implements CopyWith_Input_TagsInsertInput<TRes> {
+  _CopyWithStubImpl_Input_TagsInsertInput(this._res);
 
   TRes _res;
 
   call({
-    Enum_HistoryAttendanceHistorySelectColumnHistoryAttendanceHistoryAggregateBoolExpBool_orArgumentsColumns?
-    arguments,
-    bool? distinct,
-    Input_HistoryAttendanceHistoryBoolExp? filter,
-    Input_BooleanComparisonExp? predicate,
+    int? color,
+    String? name,
+    Input_PersonsTagsArrRelInsertInput? persons,
   }) => _res;
 
-  CopyWith_Input_HistoryAttendanceHistoryBoolExp<TRes> get filter =>
-      CopyWith_Input_HistoryAttendanceHistoryBoolExp.stub(_res);
-
-  CopyWith_Input_BooleanComparisonExp<TRes> get predicate =>
-      CopyWith_Input_BooleanComparisonExp.stub(_res);
+  CopyWith_Input_PersonsTagsArrRelInsertInput<TRes> get persons =>
+      CopyWith_Input_PersonsTagsArrRelInsertInput.stub(_res);
 }
 
-class Input_historyAttendanceHistoryAggregateBoolExpCount {
-  factory Input_historyAttendanceHistoryAggregateBoolExpCount({
-    List<Enum_HistoryAttendanceHistorySelectColumn>? arguments,
-    bool? distinct,
-    Input_HistoryAttendanceHistoryBoolExp? filter,
-    required Input_IntComparisonExp predicate,
-  }) => Input_historyAttendanceHistoryAggregateBoolExpCount._({
-    if (arguments != null) r'arguments': arguments,
-    if (distinct != null) r'distinct': distinct,
-    if (filter != null) r'filter': filter,
-    r'predicate': predicate,
+class Input_TagsObjRelInsertInput {
+  factory Input_TagsObjRelInsertInput({
+    required Input_TagsInsertInput data,
+    Input_TagsOnConflict? onConflict,
+  }) => Input_TagsObjRelInsertInput._({
+    r'data': data,
+    if (onConflict != null) r'onConflict': onConflict,
   });
 
-  Input_historyAttendanceHistoryAggregateBoolExpCount._(this._$data);
+  Input_TagsObjRelInsertInput._(this._$data);
 
-  factory Input_historyAttendanceHistoryAggregateBoolExpCount.fromJson(
-    Map<String, dynamic> data,
-  ) {
+  factory Input_TagsObjRelInsertInput.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
-    if (data.containsKey('arguments')) {
-      final l$arguments = data['arguments'];
-      result$data['arguments'] = (l$arguments as List<dynamic>?)
-          ?.map(
-            (e) => fromJson_Enum_HistoryAttendanceHistorySelectColumn(
-              (e as String),
-            ),
-          )
-          .toList();
-    }
-    if (data.containsKey('distinct')) {
-      final l$distinct = data['distinct'];
-      result$data['distinct'] = (l$distinct as bool?);
-    }
-    if (data.containsKey('filter')) {
-      final l$filter = data['filter'];
-      result$data['filter'] = l$filter == null
+    final l$data = data['data'];
+    result$data['data'] = Input_TagsInsertInput.fromJson(
+      (l$data as Map<String, dynamic>),
+    );
+    if (data.containsKey('onConflict')) {
+      final l$onConflict = data['onConflict'];
+      result$data['onConflict'] = l$onConflict == null
           ? null
-          : Input_HistoryAttendanceHistoryBoolExp.fromJson(
-              (l$filter as Map<String, dynamic>),
+          : Input_TagsOnConflict.fromJson(
+              (l$onConflict as Map<String, dynamic>),
             );
     }
-    final l$predicate = data['predicate'];
-    result$data['predicate'] = Input_IntComparisonExp.fromJson(
-      (l$predicate as Map<String, dynamic>),
-    );
-    return Input_historyAttendanceHistoryAggregateBoolExpCount._(result$data);
+    return Input_TagsObjRelInsertInput._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  List<Enum_HistoryAttendanceHistorySelectColumn>? get arguments =>
-      (_$data['arguments'] as List<Enum_HistoryAttendanceHistorySelectColumn>?);
+  Input_TagsInsertInput get data => (_$data['data'] as Input_TagsInsertInput);
 
-  bool? get distinct => (_$data['distinct'] as bool?);
-
-  Input_HistoryAttendanceHistoryBoolExp? get filter =>
-      (_$data['filter'] as Input_HistoryAttendanceHistoryBoolExp?);
-
-  Input_IntComparisonExp get predicate =>
-      (_$data['predicate'] as Input_IntComparisonExp);
+  Input_TagsOnConflict? get onConflict =>
+      (_$data['onConflict'] as Input_TagsOnConflict?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
-    if (_$data.containsKey('arguments')) {
-      final l$arguments = arguments;
-      result$data['arguments'] = l$arguments
-          ?.map((e) => toJson_Enum_HistoryAttendanceHistorySelectColumn(e))
-          .toList();
+    final l$data = data;
+    result$data['data'] = l$data.toJson();
+    if (_$data.containsKey('onConflict')) {
+      final l$onConflict = onConflict;
+      result$data['onConflict'] = l$onConflict?.toJson();
     }
-    if (_$data.containsKey('distinct')) {
-      final l$distinct = distinct;
-      result$data['distinct'] = l$distinct;
-    }
-    if (_$data.containsKey('filter')) {
-      final l$filter = filter;
-      result$data['filter'] = l$filter?.toJson();
-    }
-    final l$predicate = predicate;
-    result$data['predicate'] = l$predicate.toJson();
     return result$data;
   }
 
-  CopyWith_Input_historyAttendanceHistoryAggregateBoolExpCount<
-    Input_historyAttendanceHistoryAggregateBoolExpCount
-  >
-  get copyWith => CopyWith_Input_historyAttendanceHistoryAggregateBoolExpCount(
-    this,
-    (i) => i,
-  );
+  CopyWith_Input_TagsObjRelInsertInput<Input_TagsObjRelInsertInput>
+  get copyWith => CopyWith_Input_TagsObjRelInsertInput(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input_historyAttendanceHistoryAggregateBoolExpCount ||
+    if (other is! Input_TagsObjRelInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
-    final l$arguments = arguments;
-    final lOther$arguments = other.arguments;
-    if (_$data.containsKey('arguments') !=
-        other._$data.containsKey('arguments')) {
+    final l$data = data;
+    final lOther$data = other.data;
+    if (l$data != lOther$data) {
       return false;
     }
-    if (l$arguments != null && lOther$arguments != null) {
-      if (l$arguments.length != lOther$arguments.length) {
-        return false;
-      }
-      for (int i = 0; i < l$arguments.length; i++) {
-        final l$arguments$entry = l$arguments[i];
-        final lOther$arguments$entry = lOther$arguments[i];
-        if (l$arguments$entry != lOther$arguments$entry) {
-          return false;
-        }
-      }
-    } else if (l$arguments != lOther$arguments) {
+    final l$onConflict = onConflict;
+    final lOther$onConflict = other.onConflict;
+    if (_$data.containsKey('onConflict') !=
+        other._$data.containsKey('onConflict')) {
       return false;
     }
-    final l$distinct = distinct;
-    final lOther$distinct = other.distinct;
-    if (_$data.containsKey('distinct') !=
-        other._$data.containsKey('distinct')) {
-      return false;
-    }
-    if (l$distinct != lOther$distinct) {
-      return false;
-    }
-    final l$filter = filter;
-    final lOther$filter = other.filter;
-    if (_$data.containsKey('filter') != other._$data.containsKey('filter')) {
-      return false;
-    }
-    if (l$filter != lOther$filter) {
-      return false;
-    }
-    final l$predicate = predicate;
-    final lOther$predicate = other.predicate;
-    if (l$predicate != lOther$predicate) {
+    if (l$onConflict != lOther$onConflict) {
       return false;
     }
     return true;
@@ -2610,19 +2194,411 @@ class Input_historyAttendanceHistoryAggregateBoolExpCount {
 
   @override
   int get hashCode {
-    final l$arguments = arguments;
-    final l$distinct = distinct;
-    final l$filter = filter;
-    final l$predicate = predicate;
+    final l$data = data;
+    final l$onConflict = onConflict;
     return Object.hashAll([
-      _$data.containsKey('arguments')
-          ? l$arguments == null
+      l$data,
+      _$data.containsKey('onConflict') ? l$onConflict : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_TagsObjRelInsertInput<TRes> {
+  factory CopyWith_Input_TagsObjRelInsertInput(
+    Input_TagsObjRelInsertInput instance,
+    TRes Function(Input_TagsObjRelInsertInput) then,
+  ) = _CopyWithImpl_Input_TagsObjRelInsertInput;
+
+  factory CopyWith_Input_TagsObjRelInsertInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_TagsObjRelInsertInput;
+
+  TRes call({Input_TagsInsertInput? data, Input_TagsOnConflict? onConflict});
+  CopyWith_Input_TagsInsertInput<TRes> get data;
+  CopyWith_Input_TagsOnConflict<TRes> get onConflict;
+}
+
+class _CopyWithImpl_Input_TagsObjRelInsertInput<TRes>
+    implements CopyWith_Input_TagsObjRelInsertInput<TRes> {
+  _CopyWithImpl_Input_TagsObjRelInsertInput(this._instance, this._then);
+
+  final Input_TagsObjRelInsertInput _instance;
+
+  final TRes Function(Input_TagsObjRelInsertInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? data = _undefined, Object? onConflict = _undefined}) =>
+      _then(
+        Input_TagsObjRelInsertInput._({
+          ..._instance._$data,
+          if (data != _undefined && data != null)
+            'data': (data as Input_TagsInsertInput),
+          if (onConflict != _undefined)
+            'onConflict': (onConflict as Input_TagsOnConflict?),
+        }),
+      );
+
+  CopyWith_Input_TagsInsertInput<TRes> get data {
+    final local$data = _instance.data;
+    return CopyWith_Input_TagsInsertInput(local$data, (e) => call(data: e));
+  }
+
+  CopyWith_Input_TagsOnConflict<TRes> get onConflict {
+    final local$onConflict = _instance.onConflict;
+    return local$onConflict == null
+        ? CopyWith_Input_TagsOnConflict.stub(_then(_instance))
+        : CopyWith_Input_TagsOnConflict(
+            local$onConflict,
+            (e) => call(onConflict: e),
+          );
+  }
+}
+
+class _CopyWithStubImpl_Input_TagsObjRelInsertInput<TRes>
+    implements CopyWith_Input_TagsObjRelInsertInput<TRes> {
+  _CopyWithStubImpl_Input_TagsObjRelInsertInput(this._res);
+
+  TRes _res;
+
+  call({Input_TagsInsertInput? data, Input_TagsOnConflict? onConflict}) => _res;
+
+  CopyWith_Input_TagsInsertInput<TRes> get data =>
+      CopyWith_Input_TagsInsertInput.stub(_res);
+
+  CopyWith_Input_TagsOnConflict<TRes> get onConflict =>
+      CopyWith_Input_TagsOnConflict.stub(_res);
+}
+
+class Input_TagsOnConflict {
+  factory Input_TagsOnConflict({
+    required Enum_TagsConstraint constraint,
+    List<Enum_TagsUpdateColumn>? updateColumns,
+    Input_TagsBoolExp? where,
+  }) => Input_TagsOnConflict._({
+    r'constraint': constraint,
+    if (updateColumns != null) r'updateColumns': updateColumns,
+    if (where != null) r'where': where,
+  });
+
+  Input_TagsOnConflict._(this._$data);
+
+  factory Input_TagsOnConflict.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$constraint = data['constraint'];
+    result$data['constraint'] = fromJson_Enum_TagsConstraint(
+      (l$constraint as String),
+    );
+    if (data.containsKey('updateColumns')) {
+      final l$updateColumns = data['updateColumns'];
+      result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
+          .map((e) => fromJson_Enum_TagsUpdateColumn((e as String)))
+          .toList();
+    }
+    if (data.containsKey('where')) {
+      final l$where = data['where'];
+      result$data['where'] = l$where == null
+          ? null
+          : Input_TagsBoolExp.fromJson((l$where as Map<String, dynamic>));
+    }
+    return Input_TagsOnConflict._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Enum_TagsConstraint get constraint =>
+      (_$data['constraint'] as Enum_TagsConstraint);
+
+  List<Enum_TagsUpdateColumn>? get updateColumns =>
+      (_$data['updateColumns'] as List<Enum_TagsUpdateColumn>?);
+
+  Input_TagsBoolExp? get where => (_$data['where'] as Input_TagsBoolExp?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$constraint = constraint;
+    result$data['constraint'] = toJson_Enum_TagsConstraint(l$constraint);
+    if (_$data.containsKey('updateColumns')) {
+      final l$updateColumns = updateColumns;
+      result$data['updateColumns'] =
+          (l$updateColumns as List<Enum_TagsUpdateColumn>)
+              .map((e) => toJson_Enum_TagsUpdateColumn(e))
+              .toList();
+    }
+    if (_$data.containsKey('where')) {
+      final l$where = where;
+      result$data['where'] = l$where?.toJson();
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_TagsOnConflict<Input_TagsOnConflict> get copyWith =>
+      CopyWith_Input_TagsOnConflict(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_TagsOnConflict || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$constraint = constraint;
+    final lOther$constraint = other.constraint;
+    if (l$constraint != lOther$constraint) {
+      return false;
+    }
+    final l$updateColumns = updateColumns;
+    final lOther$updateColumns = other.updateColumns;
+    if (_$data.containsKey('updateColumns') !=
+        other._$data.containsKey('updateColumns')) {
+      return false;
+    }
+    if (l$updateColumns != null && lOther$updateColumns != null) {
+      if (l$updateColumns.length != lOther$updateColumns.length) {
+        return false;
+      }
+      for (int i = 0; i < l$updateColumns.length; i++) {
+        final l$updateColumns$entry = l$updateColumns[i];
+        final lOther$updateColumns$entry = lOther$updateColumns[i];
+        if (l$updateColumns$entry != lOther$updateColumns$entry) {
+          return false;
+        }
+      }
+    } else if (l$updateColumns != lOther$updateColumns) {
+      return false;
+    }
+    final l$where = where;
+    final lOther$where = other.where;
+    if (_$data.containsKey('where') != other._$data.containsKey('where')) {
+      return false;
+    }
+    if (l$where != lOther$where) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$constraint = constraint;
+    final l$updateColumns = updateColumns;
+    final l$where = where;
+    return Object.hashAll([
+      l$constraint,
+      _$data.containsKey('updateColumns')
+          ? l$updateColumns == null
                 ? null
-                : Object.hashAll(l$arguments.map((v) => v))
+                : Object.hashAll(l$updateColumns.map((v) => v))
           : const {},
-      _$data.containsKey('distinct') ? l$distinct : const {},
-      _$data.containsKey('filter') ? l$filter : const {},
-      l$predicate,
+      _$data.containsKey('where') ? l$where : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_TagsOnConflict<TRes> {
+  factory CopyWith_Input_TagsOnConflict(
+    Input_TagsOnConflict instance,
+    TRes Function(Input_TagsOnConflict) then,
+  ) = _CopyWithImpl_Input_TagsOnConflict;
+
+  factory CopyWith_Input_TagsOnConflict.stub(TRes res) =
+      _CopyWithStubImpl_Input_TagsOnConflict;
+
+  TRes call({
+    Enum_TagsConstraint? constraint,
+    List<Enum_TagsUpdateColumn>? updateColumns,
+    Input_TagsBoolExp? where,
+  });
+  CopyWith_Input_TagsBoolExp<TRes> get where;
+}
+
+class _CopyWithImpl_Input_TagsOnConflict<TRes>
+    implements CopyWith_Input_TagsOnConflict<TRes> {
+  _CopyWithImpl_Input_TagsOnConflict(this._instance, this._then);
+
+  final Input_TagsOnConflict _instance;
+
+  final TRes Function(Input_TagsOnConflict) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? constraint = _undefined,
+    Object? updateColumns = _undefined,
+    Object? where = _undefined,
+  }) => _then(
+    Input_TagsOnConflict._({
+      ..._instance._$data,
+      if (constraint != _undefined && constraint != null)
+        'constraint': (constraint as Enum_TagsConstraint),
+      if (updateColumns != _undefined && updateColumns != null)
+        'updateColumns': (updateColumns as List<Enum_TagsUpdateColumn>),
+      if (where != _undefined) 'where': (where as Input_TagsBoolExp?),
+    }),
+  );
+
+  CopyWith_Input_TagsBoolExp<TRes> get where {
+    final local$where = _instance.where;
+    return local$where == null
+        ? CopyWith_Input_TagsBoolExp.stub(_then(_instance))
+        : CopyWith_Input_TagsBoolExp(local$where, (e) => call(where: e));
+  }
+}
+
+class _CopyWithStubImpl_Input_TagsOnConflict<TRes>
+    implements CopyWith_Input_TagsOnConflict<TRes> {
+  _CopyWithStubImpl_Input_TagsOnConflict(this._res);
+
+  TRes _res;
+
+  call({
+    Enum_TagsConstraint? constraint,
+    List<Enum_TagsUpdateColumn>? updateColumns,
+    Input_TagsBoolExp? where,
+  }) => _res;
+
+  CopyWith_Input_TagsBoolExp<TRes> get where =>
+      CopyWith_Input_TagsBoolExp.stub(_res);
+}
+
+class Input_TagsOrderBy {
+  factory Input_TagsOrderBy({
+    Enum_OrderBy? color,
+    Enum_OrderBy? id,
+    Enum_OrderBy? name,
+    Input_PersonsTagsAggregateOrderBy? personsAggregate,
+  }) => Input_TagsOrderBy._({
+    if (color != null) r'color': color,
+    if (id != null) r'id': id,
+    if (name != null) r'name': name,
+    if (personsAggregate != null) r'personsAggregate': personsAggregate,
+  });
+
+  Input_TagsOrderBy._(this._$data);
+
+  factory Input_TagsOrderBy.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('color')) {
+      final l$color = data['color'];
+      result$data['color'] = l$color == null
+          ? null
+          : fromJson_Enum_OrderBy((l$color as String));
+    }
+    if (data.containsKey('id')) {
+      final l$id = data['id'];
+      result$data['id'] = l$id == null
+          ? null
+          : fromJson_Enum_OrderBy((l$id as String));
+    }
+    if (data.containsKey('name')) {
+      final l$name = data['name'];
+      result$data['name'] = l$name == null
+          ? null
+          : fromJson_Enum_OrderBy((l$name as String));
+    }
+    if (data.containsKey('personsAggregate')) {
+      final l$personsAggregate = data['personsAggregate'];
+      result$data['personsAggregate'] = l$personsAggregate == null
+          ? null
+          : Input_PersonsTagsAggregateOrderBy.fromJson(
+              (l$personsAggregate as Map<String, dynamic>),
+            );
+    }
+    return Input_TagsOrderBy._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
+
+  Input_PersonsTagsAggregateOrderBy? get personsAggregate =>
+      (_$data['personsAggregate'] as Input_PersonsTagsAggregateOrderBy?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('color')) {
+      final l$color = color;
+      result$data['color'] = l$color == null
+          ? null
+          : toJson_Enum_OrderBy(l$color);
+    }
+    if (_$data.containsKey('id')) {
+      final l$id = id;
+      result$data['id'] = l$id == null ? null : toJson_Enum_OrderBy(l$id);
+    }
+    if (_$data.containsKey('name')) {
+      final l$name = name;
+      result$data['name'] = l$name == null ? null : toJson_Enum_OrderBy(l$name);
+    }
+    if (_$data.containsKey('personsAggregate')) {
+      final l$personsAggregate = personsAggregate;
+      result$data['personsAggregate'] = l$personsAggregate?.toJson();
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_TagsOrderBy<Input_TagsOrderBy> get copyWith =>
+      CopyWith_Input_TagsOrderBy(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_TagsOrderBy || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$color = color;
+    final lOther$color = other.color;
+    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
+      return false;
+    }
+    if (l$color != lOther$color) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
+      return false;
+    }
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (_$data.containsKey('name') != other._$data.containsKey('name')) {
+      return false;
+    }
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$personsAggregate = personsAggregate;
+    final lOther$personsAggregate = other.personsAggregate;
+    if (_$data.containsKey('personsAggregate') !=
+        other._$data.containsKey('personsAggregate')) {
+      return false;
+    }
+    if (l$personsAggregate != lOther$personsAggregate) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$color = color;
+    final l$id = id;
+    final l$name = name;
+    final l$personsAggregate = personsAggregate;
+    return Object.hashAll([
+      _$data.containsKey('color') ? l$color : const {},
+      _$data.containsKey('id') ? l$id : const {},
+      _$data.containsKey('name') ? l$name : const {},
+      _$data.containsKey('personsAggregate') ? l$personsAggregate : const {},
     ]);
   }
 }

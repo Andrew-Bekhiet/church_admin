@@ -434,15 +434,24 @@ class _CopyWithStubImpl_Input_HistoryMeetingsArrRelInsertInput<TRes>
 }
 
 class Input_HistoryMeetingsAvgOrderBy {
-  factory Input_HistoryMeetingsAvgOrderBy({Enum_OrderBy? serviceStudyYear}) =>
-      Input_HistoryMeetingsAvgOrderBy._({
-        if (serviceStudyYear != null) r'serviceStudyYear': serviceStudyYear,
-      });
+  factory Input_HistoryMeetingsAvgOrderBy({
+    Enum_OrderBy? color,
+    Enum_OrderBy? serviceStudyYear,
+  }) => Input_HistoryMeetingsAvgOrderBy._({
+    if (color != null) r'color': color,
+    if (serviceStudyYear != null) r'serviceStudyYear': serviceStudyYear,
+  });
 
   Input_HistoryMeetingsAvgOrderBy._(this._$data);
 
   factory Input_HistoryMeetingsAvgOrderBy.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
+    if (data.containsKey('color')) {
+      final l$color = data['color'];
+      result$data['color'] = l$color == null
+          ? null
+          : fromJson_Enum_OrderBy((l$color as String));
+    }
     if (data.containsKey('serviceStudyYear')) {
       final l$serviceStudyYear = data['serviceStudyYear'];
       result$data['serviceStudyYear'] = l$serviceStudyYear == null
@@ -454,11 +463,19 @@ class Input_HistoryMeetingsAvgOrderBy {
 
   Map<String, dynamic> _$data;
 
+  Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Enum_OrderBy? get serviceStudyYear =>
       (_$data['serviceStudyYear'] as Enum_OrderBy?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
+    if (_$data.containsKey('color')) {
+      final l$color = color;
+      result$data['color'] = l$color == null
+          ? null
+          : toJson_Enum_OrderBy(l$color);
+    }
     if (_$data.containsKey('serviceStudyYear')) {
       final l$serviceStudyYear = serviceStudyYear;
       result$data['serviceStudyYear'] = l$serviceStudyYear == null
@@ -480,6 +497,14 @@ class Input_HistoryMeetingsAvgOrderBy {
         runtimeType != other.runtimeType) {
       return false;
     }
+    final l$color = color;
+    final lOther$color = other.color;
+    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
+      return false;
+    }
+    if (l$color != lOther$color) {
+      return false;
+    }
     final l$serviceStudyYear = serviceStudyYear;
     final lOther$serviceStudyYear = other.serviceStudyYear;
     if (_$data.containsKey('serviceStudyYear') !=
@@ -494,8 +519,10 @@ class Input_HistoryMeetingsAvgOrderBy {
 
   @override
   int get hashCode {
+    final l$color = color;
     final l$serviceStudyYear = serviceStudyYear;
     return Object.hashAll([
+      _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('serviceStudyYear') ? l$serviceStudyYear : const {},
     ]);
   }
@@ -510,7 +537,7 @@ abstract class CopyWith_Input_HistoryMeetingsAvgOrderBy<TRes> {
   factory CopyWith_Input_HistoryMeetingsAvgOrderBy.stub(TRes res) =
       _CopyWithStubImpl_Input_HistoryMeetingsAvgOrderBy;
 
-  TRes call({Enum_OrderBy? serviceStudyYear});
+  TRes call({Enum_OrderBy? color, Enum_OrderBy? serviceStudyYear});
 }
 
 class _CopyWithImpl_Input_HistoryMeetingsAvgOrderBy<TRes>
@@ -523,9 +550,13 @@ class _CopyWithImpl_Input_HistoryMeetingsAvgOrderBy<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? serviceStudyYear = _undefined}) => _then(
+  TRes call({
+    Object? color = _undefined,
+    Object? serviceStudyYear = _undefined,
+  }) => _then(
     Input_HistoryMeetingsAvgOrderBy._({
       ..._instance._$data,
+      if (color != _undefined) 'color': (color as Enum_OrderBy?),
       if (serviceStudyYear != _undefined)
         'serviceStudyYear': (serviceStudyYear as Enum_OrderBy?),
     }),
@@ -538,7 +569,7 @@ class _CopyWithStubImpl_Input_HistoryMeetingsAvgOrderBy<TRes>
 
   TRes _res;
 
-  call({Enum_OrderBy? serviceStudyYear}) => _res;
+  call({Enum_OrderBy? color, Enum_OrderBy? serviceStudyYear}) => _res;
 }
 
 class Input_HistoryMeetingsBoolExp {
@@ -550,10 +581,13 @@ class Input_HistoryMeetingsBoolExp {
     Input_HistoryAttendanceHistoryBoolExp? attendanceHistory,
     Input_HistoryAttendanceHistoryAggregateBoolExp? attendanceHistoryAggregate,
     Input_MeetingAudienceComparisonExp? audience,
+    Input_BigintComparisonExp? color,
     Input_GroupsBoolExp? group,
     Input_UuidComparisonExp? groupId,
     Input_UuidComparisonExp? id,
     Input_StringComparisonExp? name,
+    Input_HistoryMeetingsPersonsBoolExp? persons,
+    Input_HistoryMeetingsPersonsAggregateBoolExp? personsAggregate,
     Input_ServicesBoolExp? service,
     Input_BooleanComparisonExp? serviceGender,
     Input_UuidComparisonExp? serviceId,
@@ -568,10 +602,13 @@ class Input_HistoryMeetingsBoolExp {
     if (attendanceHistoryAggregate != null)
       r'attendanceHistoryAggregate': attendanceHistoryAggregate,
     if (audience != null) r'audience': audience,
+    if (color != null) r'color': color,
     if (group != null) r'group': group,
     if (groupId != null) r'groupId': groupId,
     if (id != null) r'id': id,
     if (name != null) r'name': name,
+    if (persons != null) r'persons': persons,
+    if (personsAggregate != null) r'personsAggregate': personsAggregate,
     if (service != null) r'service': service,
     if (serviceGender != null) r'serviceGender': serviceGender,
     if (serviceId != null) r'serviceId': serviceId,
@@ -644,6 +681,14 @@ class Input_HistoryMeetingsBoolExp {
               (l$audience as Map<String, dynamic>),
             );
     }
+    if (data.containsKey('color')) {
+      final l$color = data['color'];
+      result$data['color'] = l$color == null
+          ? null
+          : Input_BigintComparisonExp.fromJson(
+              (l$color as Map<String, dynamic>),
+            );
+    }
     if (data.containsKey('group')) {
       final l$group = data['group'];
       result$data['group'] = l$group == null
@@ -670,6 +715,22 @@ class Input_HistoryMeetingsBoolExp {
           ? null
           : Input_StringComparisonExp.fromJson(
               (l$name as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('persons')) {
+      final l$persons = data['persons'];
+      result$data['persons'] = l$persons == null
+          ? null
+          : Input_HistoryMeetingsPersonsBoolExp.fromJson(
+              (l$persons as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('personsAggregate')) {
+      final l$personsAggregate = data['personsAggregate'];
+      result$data['personsAggregate'] = l$personsAggregate == null
+          ? null
+          : Input_HistoryMeetingsPersonsAggregateBoolExp.fromJson(
+              (l$personsAggregate as Map<String, dynamic>),
             );
     }
     if (data.containsKey('service')) {
@@ -738,6 +799,9 @@ class Input_HistoryMeetingsBoolExp {
   Input_MeetingAudienceComparisonExp? get audience =>
       (_$data['audience'] as Input_MeetingAudienceComparisonExp?);
 
+  Input_BigintComparisonExp? get color =>
+      (_$data['color'] as Input_BigintComparisonExp?);
+
   Input_GroupsBoolExp? get group => (_$data['group'] as Input_GroupsBoolExp?);
 
   Input_UuidComparisonExp? get groupId =>
@@ -747,6 +811,13 @@ class Input_HistoryMeetingsBoolExp {
 
   Input_StringComparisonExp? get name =>
       (_$data['name'] as Input_StringComparisonExp?);
+
+  Input_HistoryMeetingsPersonsBoolExp? get persons =>
+      (_$data['persons'] as Input_HistoryMeetingsPersonsBoolExp?);
+
+  Input_HistoryMeetingsPersonsAggregateBoolExp? get personsAggregate =>
+      (_$data['personsAggregate']
+          as Input_HistoryMeetingsPersonsAggregateBoolExp?);
 
   Input_ServicesBoolExp? get service =>
       (_$data['service'] as Input_ServicesBoolExp?);
@@ -794,6 +865,10 @@ class Input_HistoryMeetingsBoolExp {
       final l$audience = audience;
       result$data['audience'] = l$audience?.toJson();
     }
+    if (_$data.containsKey('color')) {
+      final l$color = color;
+      result$data['color'] = l$color?.toJson();
+    }
     if (_$data.containsKey('group')) {
       final l$group = group;
       result$data['group'] = l$group?.toJson();
@@ -809,6 +884,14 @@ class Input_HistoryMeetingsBoolExp {
     if (_$data.containsKey('name')) {
       final l$name = name;
       result$data['name'] = l$name?.toJson();
+    }
+    if (_$data.containsKey('persons')) {
+      final l$persons = persons;
+      result$data['persons'] = l$persons?.toJson();
+    }
+    if (_$data.containsKey('personsAggregate')) {
+      final l$personsAggregate = personsAggregate;
+      result$data['personsAggregate'] = l$personsAggregate?.toJson();
     }
     if (_$data.containsKey('service')) {
       final l$service = service;
@@ -927,6 +1010,14 @@ class Input_HistoryMeetingsBoolExp {
     if (l$audience != lOther$audience) {
       return false;
     }
+    final l$color = color;
+    final lOther$color = other.color;
+    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
+      return false;
+    }
+    if (l$color != lOther$color) {
+      return false;
+    }
     final l$group = group;
     final lOther$group = other.group;
     if (_$data.containsKey('group') != other._$data.containsKey('group')) {
@@ -957,6 +1048,23 @@ class Input_HistoryMeetingsBoolExp {
       return false;
     }
     if (l$name != lOther$name) {
+      return false;
+    }
+    final l$persons = persons;
+    final lOther$persons = other.persons;
+    if (_$data.containsKey('persons') != other._$data.containsKey('persons')) {
+      return false;
+    }
+    if (l$persons != lOther$persons) {
+      return false;
+    }
+    final l$personsAggregate = personsAggregate;
+    final lOther$personsAggregate = other.personsAggregate;
+    if (_$data.containsKey('personsAggregate') !=
+        other._$data.containsKey('personsAggregate')) {
+      return false;
+    }
+    if (l$personsAggregate != lOther$personsAggregate) {
       return false;
     }
     final l$service = service;
@@ -1015,10 +1123,13 @@ class Input_HistoryMeetingsBoolExp {
     final l$attendanceHistory = attendanceHistory;
     final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
     final l$audience = audience;
+    final l$color = color;
     final l$group = group;
     final l$groupId = groupId;
     final l$id = id;
     final l$name = name;
+    final l$persons = persons;
+    final l$personsAggregate = personsAggregate;
     final l$service = service;
     final l$serviceGender = serviceGender;
     final l$serviceId = serviceId;
@@ -1042,10 +1153,13 @@ class Input_HistoryMeetingsBoolExp {
           ? l$attendanceHistoryAggregate
           : const {},
       _$data.containsKey('audience') ? l$audience : const {},
+      _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('group') ? l$group : const {},
       _$data.containsKey('groupId') ? l$groupId : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('name') ? l$name : const {},
+      _$data.containsKey('persons') ? l$persons : const {},
+      _$data.containsKey('personsAggregate') ? l$personsAggregate : const {},
       _$data.containsKey('service') ? l$service : const {},
       _$data.containsKey('serviceGender') ? l$serviceGender : const {},
       _$data.containsKey('serviceId') ? l$serviceId : const {},
@@ -1072,10 +1186,13 @@ abstract class CopyWith_Input_HistoryMeetingsBoolExp<TRes> {
     Input_HistoryAttendanceHistoryBoolExp? attendanceHistory,
     Input_HistoryAttendanceHistoryAggregateBoolExp? attendanceHistoryAggregate,
     Input_MeetingAudienceComparisonExp? audience,
+    Input_BigintComparisonExp? color,
     Input_GroupsBoolExp? group,
     Input_UuidComparisonExp? groupId,
     Input_UuidComparisonExp? id,
     Input_StringComparisonExp? name,
+    Input_HistoryMeetingsPersonsBoolExp? persons,
+    Input_HistoryMeetingsPersonsAggregateBoolExp? personsAggregate,
     Input_ServicesBoolExp? service,
     Input_BooleanComparisonExp? serviceGender,
     Input_UuidComparisonExp? serviceId,
@@ -1104,10 +1221,14 @@ abstract class CopyWith_Input_HistoryMeetingsBoolExp<TRes> {
   CopyWith_Input_HistoryAttendanceHistoryAggregateBoolExp<TRes>
   get attendanceHistoryAggregate;
   CopyWith_Input_MeetingAudienceComparisonExp<TRes> get audience;
+  CopyWith_Input_BigintComparisonExp<TRes> get color;
   CopyWith_Input_GroupsBoolExp<TRes> get group;
   CopyWith_Input_UuidComparisonExp<TRes> get groupId;
   CopyWith_Input_UuidComparisonExp<TRes> get id;
   CopyWith_Input_StringComparisonExp<TRes> get name;
+  CopyWith_Input_HistoryMeetingsPersonsBoolExp<TRes> get persons;
+  CopyWith_Input_HistoryMeetingsPersonsAggregateBoolExp<TRes>
+  get personsAggregate;
   CopyWith_Input_ServicesBoolExp<TRes> get service;
   CopyWith_Input_BooleanComparisonExp<TRes> get serviceGender;
   CopyWith_Input_UuidComparisonExp<TRes> get serviceId;
@@ -1133,10 +1254,13 @@ class _CopyWithImpl_Input_HistoryMeetingsBoolExp<TRes>
     Object? attendanceHistory = _undefined,
     Object? attendanceHistoryAggregate = _undefined,
     Object? audience = _undefined,
+    Object? color = _undefined,
     Object? group = _undefined,
     Object? groupId = _undefined,
     Object? id = _undefined,
     Object? name = _undefined,
+    Object? persons = _undefined,
+    Object? personsAggregate = _undefined,
     Object? service = _undefined,
     Object? serviceGender = _undefined,
     Object? serviceId = _undefined,
@@ -1161,11 +1285,17 @@ class _CopyWithImpl_Input_HistoryMeetingsBoolExp<TRes>
                 as Input_HistoryAttendanceHistoryAggregateBoolExp?),
       if (audience != _undefined)
         'audience': (audience as Input_MeetingAudienceComparisonExp?),
+      if (color != _undefined) 'color': (color as Input_BigintComparisonExp?),
       if (group != _undefined) 'group': (group as Input_GroupsBoolExp?),
       if (groupId != _undefined)
         'groupId': (groupId as Input_UuidComparisonExp?),
       if (id != _undefined) 'id': (id as Input_UuidComparisonExp?),
       if (name != _undefined) 'name': (name as Input_StringComparisonExp?),
+      if (persons != _undefined)
+        'persons': (persons as Input_HistoryMeetingsPersonsBoolExp?),
+      if (personsAggregate != _undefined)
+        'personsAggregate':
+            (personsAggregate as Input_HistoryMeetingsPersonsAggregateBoolExp?),
       if (service != _undefined) 'service': (service as Input_ServicesBoolExp?),
       if (serviceGender != _undefined)
         'serviceGender': (serviceGender as Input_BooleanComparisonExp?),
@@ -1262,6 +1392,16 @@ class _CopyWithImpl_Input_HistoryMeetingsBoolExp<TRes>
           );
   }
 
+  CopyWith_Input_BigintComparisonExp<TRes> get color {
+    final local$color = _instance.color;
+    return local$color == null
+        ? CopyWith_Input_BigintComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_BigintComparisonExp(
+            local$color,
+            (e) => call(color: e),
+          );
+  }
+
   CopyWith_Input_GroupsBoolExp<TRes> get group {
     final local$group = _instance.group;
     return local$group == null
@@ -1291,6 +1431,29 @@ class _CopyWithImpl_Input_HistoryMeetingsBoolExp<TRes>
     return local$name == null
         ? CopyWith_Input_StringComparisonExp.stub(_then(_instance))
         : CopyWith_Input_StringComparisonExp(local$name, (e) => call(name: e));
+  }
+
+  CopyWith_Input_HistoryMeetingsPersonsBoolExp<TRes> get persons {
+    final local$persons = _instance.persons;
+    return local$persons == null
+        ? CopyWith_Input_HistoryMeetingsPersonsBoolExp.stub(_then(_instance))
+        : CopyWith_Input_HistoryMeetingsPersonsBoolExp(
+            local$persons,
+            (e) => call(persons: e),
+          );
+  }
+
+  CopyWith_Input_HistoryMeetingsPersonsAggregateBoolExp<TRes>
+  get personsAggregate {
+    final local$personsAggregate = _instance.personsAggregate;
+    return local$personsAggregate == null
+        ? CopyWith_Input_HistoryMeetingsPersonsAggregateBoolExp.stub(
+            _then(_instance),
+          )
+        : CopyWith_Input_HistoryMeetingsPersonsAggregateBoolExp(
+            local$personsAggregate,
+            (e) => call(personsAggregate: e),
+          );
   }
 
   CopyWith_Input_ServicesBoolExp<TRes> get service {
@@ -1358,10 +1521,13 @@ class _CopyWithStubImpl_Input_HistoryMeetingsBoolExp<TRes>
     Input_HistoryAttendanceHistoryBoolExp? attendanceHistory,
     Input_HistoryAttendanceHistoryAggregateBoolExp? attendanceHistoryAggregate,
     Input_MeetingAudienceComparisonExp? audience,
+    Input_BigintComparisonExp? color,
     Input_GroupsBoolExp? group,
     Input_UuidComparisonExp? groupId,
     Input_UuidComparisonExp? id,
     Input_StringComparisonExp? name,
+    Input_HistoryMeetingsPersonsBoolExp? persons,
+    Input_HistoryMeetingsPersonsAggregateBoolExp? personsAggregate,
     Input_ServicesBoolExp? service,
     Input_BooleanComparisonExp? serviceGender,
     Input_UuidComparisonExp? serviceId,
@@ -1389,6 +1555,9 @@ class _CopyWithStubImpl_Input_HistoryMeetingsBoolExp<TRes>
   CopyWith_Input_MeetingAudienceComparisonExp<TRes> get audience =>
       CopyWith_Input_MeetingAudienceComparisonExp.stub(_res);
 
+  CopyWith_Input_BigintComparisonExp<TRes> get color =>
+      CopyWith_Input_BigintComparisonExp.stub(_res);
+
   CopyWith_Input_GroupsBoolExp<TRes> get group =>
       CopyWith_Input_GroupsBoolExp.stub(_res);
 
@@ -1400,6 +1569,13 @@ class _CopyWithStubImpl_Input_HistoryMeetingsBoolExp<TRes>
 
   CopyWith_Input_StringComparisonExp<TRes> get name =>
       CopyWith_Input_StringComparisonExp.stub(_res);
+
+  CopyWith_Input_HistoryMeetingsPersonsBoolExp<TRes> get persons =>
+      CopyWith_Input_HistoryMeetingsPersonsBoolExp.stub(_res);
+
+  CopyWith_Input_HistoryMeetingsPersonsAggregateBoolExp<TRes>
+  get personsAggregate =>
+      CopyWith_Input_HistoryMeetingsPersonsAggregateBoolExp.stub(_res);
 
   CopyWith_Input_ServicesBoolExp<TRes> get service =>
       CopyWith_Input_ServicesBoolExp.stub(_res);
@@ -1417,11 +1593,109 @@ class _CopyWithStubImpl_Input_HistoryMeetingsBoolExp<TRes>
       CopyWith_Input_StudyYearsBoolExp.stub(_res);
 }
 
+class Input_HistoryMeetingsIncInput {
+  factory Input_HistoryMeetingsIncInput({int? color}) =>
+      Input_HistoryMeetingsIncInput._({if (color != null) r'color': color});
+
+  Input_HistoryMeetingsIncInput._(this._$data);
+
+  factory Input_HistoryMeetingsIncInput.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('color')) {
+      final l$color = data['color'];
+      result$data['color'] = (l$color as int?);
+    }
+    return Input_HistoryMeetingsIncInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  int? get color => (_$data['color'] as int?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('color')) {
+      final l$color = color;
+      result$data['color'] = l$color;
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_HistoryMeetingsIncInput<Input_HistoryMeetingsIncInput>
+  get copyWith => CopyWith_Input_HistoryMeetingsIncInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_HistoryMeetingsIncInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$color = color;
+    final lOther$color = other.color;
+    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
+      return false;
+    }
+    if (l$color != lOther$color) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$color = color;
+    return Object.hashAll([_$data.containsKey('color') ? l$color : const {}]);
+  }
+}
+
+abstract class CopyWith_Input_HistoryMeetingsIncInput<TRes> {
+  factory CopyWith_Input_HistoryMeetingsIncInput(
+    Input_HistoryMeetingsIncInput instance,
+    TRes Function(Input_HistoryMeetingsIncInput) then,
+  ) = _CopyWithImpl_Input_HistoryMeetingsIncInput;
+
+  factory CopyWith_Input_HistoryMeetingsIncInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_HistoryMeetingsIncInput;
+
+  TRes call({int? color});
+}
+
+class _CopyWithImpl_Input_HistoryMeetingsIncInput<TRes>
+    implements CopyWith_Input_HistoryMeetingsIncInput<TRes> {
+  _CopyWithImpl_Input_HistoryMeetingsIncInput(this._instance, this._then);
+
+  final Input_HistoryMeetingsIncInput _instance;
+
+  final TRes Function(Input_HistoryMeetingsIncInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? color = _undefined}) => _then(
+    Input_HistoryMeetingsIncInput._({
+      ..._instance._$data,
+      if (color != _undefined) 'color': (color as int?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_HistoryMeetingsIncInput<TRes>
+    implements CopyWith_Input_HistoryMeetingsIncInput<TRes> {
+  _CopyWithStubImpl_Input_HistoryMeetingsIncInput(this._res);
+
+  TRes _res;
+
+  call({int? color}) => _res;
+}
+
 class Input_HistoryMeetingsInsertInput {
   factory Input_HistoryMeetingsInsertInput({
     bool? archived,
     Input_HistoryAttendanceHistoryArrRelInsertInput? attendanceHistory,
     String? audience,
+    int? color,
     Input_GroupsObjRelInsertInput? group,
     UuidValue? groupId,
     String? name,
@@ -1434,6 +1708,7 @@ class Input_HistoryMeetingsInsertInput {
     if (archived != null) r'archived': archived,
     if (attendanceHistory != null) r'attendanceHistory': attendanceHistory,
     if (audience != null) r'audience': audience,
+    if (color != null) r'color': color,
     if (group != null) r'group': group,
     if (groupId != null) r'groupId': groupId,
     if (name != null) r'name': name,
@@ -1463,6 +1738,10 @@ class Input_HistoryMeetingsInsertInput {
     if (data.containsKey('audience')) {
       final l$audience = data['audience'];
       result$data['audience'] = (l$audience as String?);
+    }
+    if (data.containsKey('color')) {
+      final l$color = data['color'];
+      result$data['color'] = (l$color as int?);
     }
     if (data.containsKey('group')) {
       final l$group = data['group'];
@@ -1525,6 +1804,8 @@ class Input_HistoryMeetingsInsertInput {
 
   String? get audience => (_$data['audience'] as String?);
 
+  int? get color => (_$data['color'] as int?);
+
   Input_GroupsObjRelInsertInput? get group =>
       (_$data['group'] as Input_GroupsObjRelInsertInput?);
 
@@ -1557,6 +1838,10 @@ class Input_HistoryMeetingsInsertInput {
     if (_$data.containsKey('audience')) {
       final l$audience = audience;
       result$data['audience'] = l$audience;
+    }
+    if (_$data.containsKey('color')) {
+      final l$color = color;
+      result$data['color'] = l$color;
     }
     if (_$data.containsKey('group')) {
       final l$group = group;
@@ -1636,6 +1921,14 @@ class Input_HistoryMeetingsInsertInput {
     if (l$audience != lOther$audience) {
       return false;
     }
+    final l$color = color;
+    final lOther$color = other.color;
+    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
+      return false;
+    }
+    if (l$color != lOther$color) {
+      return false;
+    }
     final l$group = group;
     final lOther$group = other.group;
     if (_$data.containsKey('group') != other._$data.containsKey('group')) {
@@ -1712,6 +2005,7 @@ class Input_HistoryMeetingsInsertInput {
     final l$archived = archived;
     final l$attendanceHistory = attendanceHistory;
     final l$audience = audience;
+    final l$color = color;
     final l$group = group;
     final l$groupId = groupId;
     final l$name = name;
@@ -1724,6 +2018,7 @@ class Input_HistoryMeetingsInsertInput {
       _$data.containsKey('archived') ? l$archived : const {},
       _$data.containsKey('attendanceHistory') ? l$attendanceHistory : const {},
       _$data.containsKey('audience') ? l$audience : const {},
+      _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('group') ? l$group : const {},
       _$data.containsKey('groupId') ? l$groupId : const {},
       _$data.containsKey('name') ? l$name : const {},
@@ -1749,6 +2044,7 @@ abstract class CopyWith_Input_HistoryMeetingsInsertInput<TRes> {
     bool? archived,
     Input_HistoryAttendanceHistoryArrRelInsertInput? attendanceHistory,
     String? audience,
+    int? color,
     Input_GroupsObjRelInsertInput? group,
     UuidValue? groupId,
     String? name,
@@ -1779,6 +2075,7 @@ class _CopyWithImpl_Input_HistoryMeetingsInsertInput<TRes>
     Object? archived = _undefined,
     Object? attendanceHistory = _undefined,
     Object? audience = _undefined,
+    Object? color = _undefined,
     Object? group = _undefined,
     Object? groupId = _undefined,
     Object? name = _undefined,
@@ -1796,6 +2093,7 @@ class _CopyWithImpl_Input_HistoryMeetingsInsertInput<TRes>
             (attendanceHistory
                 as Input_HistoryAttendanceHistoryArrRelInsertInput?),
       if (audience != _undefined) 'audience': (audience as String?),
+      if (color != _undefined) 'color': (color as int?),
       if (group != _undefined)
         'group': (group as Input_GroupsObjRelInsertInput?),
       if (groupId != _undefined) 'groupId': (groupId as UuidValue?),
@@ -1866,6 +2164,7 @@ class _CopyWithStubImpl_Input_HistoryMeetingsInsertInput<TRes>
     bool? archived,
     Input_HistoryAttendanceHistoryArrRelInsertInput? attendanceHistory,
     String? audience,
+    int? color,
     Input_GroupsObjRelInsertInput? group,
     UuidValue? groupId,
     String? name,
@@ -1893,6 +2192,7 @@ class _CopyWithStubImpl_Input_HistoryMeetingsInsertInput<TRes>
 class Input_HistoryMeetingsMaxOrderBy {
   factory Input_HistoryMeetingsMaxOrderBy({
     Enum_OrderBy? audience,
+    Enum_OrderBy? color,
     Enum_OrderBy? groupId,
     Enum_OrderBy? id,
     Enum_OrderBy? name,
@@ -1900,6 +2200,7 @@ class Input_HistoryMeetingsMaxOrderBy {
     Enum_OrderBy? serviceStudyYear,
   }) => Input_HistoryMeetingsMaxOrderBy._({
     if (audience != null) r'audience': audience,
+    if (color != null) r'color': color,
     if (groupId != null) r'groupId': groupId,
     if (id != null) r'id': id,
     if (name != null) r'name': name,
@@ -1916,6 +2217,12 @@ class Input_HistoryMeetingsMaxOrderBy {
       result$data['audience'] = l$audience == null
           ? null
           : fromJson_Enum_OrderBy((l$audience as String));
+    }
+    if (data.containsKey('color')) {
+      final l$color = data['color'];
+      result$data['color'] = l$color == null
+          ? null
+          : fromJson_Enum_OrderBy((l$color as String));
     }
     if (data.containsKey('groupId')) {
       final l$groupId = data['groupId'];
@@ -1954,6 +2261,8 @@ class Input_HistoryMeetingsMaxOrderBy {
 
   Enum_OrderBy? get audience => (_$data['audience'] as Enum_OrderBy?);
 
+  Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Enum_OrderBy? get groupId => (_$data['groupId'] as Enum_OrderBy?);
 
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
@@ -1972,6 +2281,12 @@ class Input_HistoryMeetingsMaxOrderBy {
       result$data['audience'] = l$audience == null
           ? null
           : toJson_Enum_OrderBy(l$audience);
+    }
+    if (_$data.containsKey('color')) {
+      final l$color = color;
+      result$data['color'] = l$color == null
+          ? null
+          : toJson_Enum_OrderBy(l$color);
     }
     if (_$data.containsKey('groupId')) {
       final l$groupId = groupId;
@@ -2023,6 +2338,14 @@ class Input_HistoryMeetingsMaxOrderBy {
     if (l$audience != lOther$audience) {
       return false;
     }
+    final l$color = color;
+    final lOther$color = other.color;
+    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
+      return false;
+    }
+    if (l$color != lOther$color) {
+      return false;
+    }
     final l$groupId = groupId;
     final lOther$groupId = other.groupId;
     if (_$data.containsKey('groupId') != other._$data.containsKey('groupId')) {
@@ -2071,6 +2394,7 @@ class Input_HistoryMeetingsMaxOrderBy {
   @override
   int get hashCode {
     final l$audience = audience;
+    final l$color = color;
     final l$groupId = groupId;
     final l$id = id;
     final l$name = name;
@@ -2078,6 +2402,7 @@ class Input_HistoryMeetingsMaxOrderBy {
     final l$serviceStudyYear = serviceStudyYear;
     return Object.hashAll([
       _$data.containsKey('audience') ? l$audience : const {},
+      _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('groupId') ? l$groupId : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('name') ? l$name : const {},
@@ -2098,6 +2423,7 @@ abstract class CopyWith_Input_HistoryMeetingsMaxOrderBy<TRes> {
 
   TRes call({
     Enum_OrderBy? audience,
+    Enum_OrderBy? color,
     Enum_OrderBy? groupId,
     Enum_OrderBy? id,
     Enum_OrderBy? name,
@@ -2118,6 +2444,7 @@ class _CopyWithImpl_Input_HistoryMeetingsMaxOrderBy<TRes>
 
   TRes call({
     Object? audience = _undefined,
+    Object? color = _undefined,
     Object? groupId = _undefined,
     Object? id = _undefined,
     Object? name = _undefined,
@@ -2127,6 +2454,7 @@ class _CopyWithImpl_Input_HistoryMeetingsMaxOrderBy<TRes>
     Input_HistoryMeetingsMaxOrderBy._({
       ..._instance._$data,
       if (audience != _undefined) 'audience': (audience as Enum_OrderBy?),
+      if (color != _undefined) 'color': (color as Enum_OrderBy?),
       if (groupId != _undefined) 'groupId': (groupId as Enum_OrderBy?),
       if (id != _undefined) 'id': (id as Enum_OrderBy?),
       if (name != _undefined) 'name': (name as Enum_OrderBy?),
@@ -2145,6 +2473,7 @@ class _CopyWithStubImpl_Input_HistoryMeetingsMaxOrderBy<TRes>
 
   call({
     Enum_OrderBy? audience,
+    Enum_OrderBy? color,
     Enum_OrderBy? groupId,
     Enum_OrderBy? id,
     Enum_OrderBy? name,
@@ -2156,6 +2485,7 @@ class _CopyWithStubImpl_Input_HistoryMeetingsMaxOrderBy<TRes>
 class Input_HistoryMeetingsMinOrderBy {
   factory Input_HistoryMeetingsMinOrderBy({
     Enum_OrderBy? audience,
+    Enum_OrderBy? color,
     Enum_OrderBy? groupId,
     Enum_OrderBy? id,
     Enum_OrderBy? name,
@@ -2163,6 +2493,7 @@ class Input_HistoryMeetingsMinOrderBy {
     Enum_OrderBy? serviceStudyYear,
   }) => Input_HistoryMeetingsMinOrderBy._({
     if (audience != null) r'audience': audience,
+    if (color != null) r'color': color,
     if (groupId != null) r'groupId': groupId,
     if (id != null) r'id': id,
     if (name != null) r'name': name,
@@ -2179,6 +2510,12 @@ class Input_HistoryMeetingsMinOrderBy {
       result$data['audience'] = l$audience == null
           ? null
           : fromJson_Enum_OrderBy((l$audience as String));
+    }
+    if (data.containsKey('color')) {
+      final l$color = data['color'];
+      result$data['color'] = l$color == null
+          ? null
+          : fromJson_Enum_OrderBy((l$color as String));
     }
     if (data.containsKey('groupId')) {
       final l$groupId = data['groupId'];
@@ -2217,6 +2554,8 @@ class Input_HistoryMeetingsMinOrderBy {
 
   Enum_OrderBy? get audience => (_$data['audience'] as Enum_OrderBy?);
 
+  Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
   Enum_OrderBy? get groupId => (_$data['groupId'] as Enum_OrderBy?);
 
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
@@ -2235,6 +2574,12 @@ class Input_HistoryMeetingsMinOrderBy {
       result$data['audience'] = l$audience == null
           ? null
           : toJson_Enum_OrderBy(l$audience);
+    }
+    if (_$data.containsKey('color')) {
+      final l$color = color;
+      result$data['color'] = l$color == null
+          ? null
+          : toJson_Enum_OrderBy(l$color);
     }
     if (_$data.containsKey('groupId')) {
       final l$groupId = groupId;
@@ -2286,6 +2631,14 @@ class Input_HistoryMeetingsMinOrderBy {
     if (l$audience != lOther$audience) {
       return false;
     }
+    final l$color = color;
+    final lOther$color = other.color;
+    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
+      return false;
+    }
+    if (l$color != lOther$color) {
+      return false;
+    }
     final l$groupId = groupId;
     final lOther$groupId = other.groupId;
     if (_$data.containsKey('groupId') != other._$data.containsKey('groupId')) {
@@ -2334,6 +2687,7 @@ class Input_HistoryMeetingsMinOrderBy {
   @override
   int get hashCode {
     final l$audience = audience;
+    final l$color = color;
     final l$groupId = groupId;
     final l$id = id;
     final l$name = name;
@@ -2341,169 +2695,12 @@ class Input_HistoryMeetingsMinOrderBy {
     final l$serviceStudyYear = serviceStudyYear;
     return Object.hashAll([
       _$data.containsKey('audience') ? l$audience : const {},
+      _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('groupId') ? l$groupId : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('name') ? l$name : const {},
       _$data.containsKey('serviceId') ? l$serviceId : const {},
       _$data.containsKey('serviceStudyYear') ? l$serviceStudyYear : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_HistoryMeetingsMinOrderBy<TRes> {
-  factory CopyWith_Input_HistoryMeetingsMinOrderBy(
-    Input_HistoryMeetingsMinOrderBy instance,
-    TRes Function(Input_HistoryMeetingsMinOrderBy) then,
-  ) = _CopyWithImpl_Input_HistoryMeetingsMinOrderBy;
-
-  factory CopyWith_Input_HistoryMeetingsMinOrderBy.stub(TRes res) =
-      _CopyWithStubImpl_Input_HistoryMeetingsMinOrderBy;
-
-  TRes call({
-    Enum_OrderBy? audience,
-    Enum_OrderBy? groupId,
-    Enum_OrderBy? id,
-    Enum_OrderBy? name,
-    Enum_OrderBy? serviceId,
-    Enum_OrderBy? serviceStudyYear,
-  });
-}
-
-class _CopyWithImpl_Input_HistoryMeetingsMinOrderBy<TRes>
-    implements CopyWith_Input_HistoryMeetingsMinOrderBy<TRes> {
-  _CopyWithImpl_Input_HistoryMeetingsMinOrderBy(this._instance, this._then);
-
-  final Input_HistoryMeetingsMinOrderBy _instance;
-
-  final TRes Function(Input_HistoryMeetingsMinOrderBy) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? audience = _undefined,
-    Object? groupId = _undefined,
-    Object? id = _undefined,
-    Object? name = _undefined,
-    Object? serviceId = _undefined,
-    Object? serviceStudyYear = _undefined,
-  }) => _then(
-    Input_HistoryMeetingsMinOrderBy._({
-      ..._instance._$data,
-      if (audience != _undefined) 'audience': (audience as Enum_OrderBy?),
-      if (groupId != _undefined) 'groupId': (groupId as Enum_OrderBy?),
-      if (id != _undefined) 'id': (id as Enum_OrderBy?),
-      if (name != _undefined) 'name': (name as Enum_OrderBy?),
-      if (serviceId != _undefined) 'serviceId': (serviceId as Enum_OrderBy?),
-      if (serviceStudyYear != _undefined)
-        'serviceStudyYear': (serviceStudyYear as Enum_OrderBy?),
-    }),
-  );
-}
-
-class _CopyWithStubImpl_Input_HistoryMeetingsMinOrderBy<TRes>
-    implements CopyWith_Input_HistoryMeetingsMinOrderBy<TRes> {
-  _CopyWithStubImpl_Input_HistoryMeetingsMinOrderBy(this._res);
-
-  TRes _res;
-
-  call({
-    Enum_OrderBy? audience,
-    Enum_OrderBy? groupId,
-    Enum_OrderBy? id,
-    Enum_OrderBy? name,
-    Enum_OrderBy? serviceId,
-    Enum_OrderBy? serviceStudyYear,
-  }) => _res;
-}
-
-class Input_HistoryMeetingsObjRelInsertInput {
-  factory Input_HistoryMeetingsObjRelInsertInput({
-    required Input_HistoryMeetingsInsertInput data,
-    Input_HistoryMeetingsOnConflict? onConflict,
-  }) => Input_HistoryMeetingsObjRelInsertInput._({
-    r'data': data,
-    if (onConflict != null) r'onConflict': onConflict,
-  });
-
-  Input_HistoryMeetingsObjRelInsertInput._(this._$data);
-
-  factory Input_HistoryMeetingsObjRelInsertInput.fromJson(
-    Map<String, dynamic> data,
-  ) {
-    final result$data = <String, dynamic>{};
-    final l$data = data['data'];
-    result$data['data'] = Input_HistoryMeetingsInsertInput.fromJson(
-      (l$data as Map<String, dynamic>),
-    );
-    if (data.containsKey('onConflict')) {
-      final l$onConflict = data['onConflict'];
-      result$data['onConflict'] = l$onConflict == null
-          ? null
-          : Input_HistoryMeetingsOnConflict.fromJson(
-              (l$onConflict as Map<String, dynamic>),
-            );
-    }
-    return Input_HistoryMeetingsObjRelInsertInput._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  Input_HistoryMeetingsInsertInput get data =>
-      (_$data['data'] as Input_HistoryMeetingsInsertInput);
-
-  Input_HistoryMeetingsOnConflict? get onConflict =>
-      (_$data['onConflict'] as Input_HistoryMeetingsOnConflict?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    final l$data = data;
-    result$data['data'] = l$data.toJson();
-    if (_$data.containsKey('onConflict')) {
-      final l$onConflict = onConflict;
-      result$data['onConflict'] = l$onConflict?.toJson();
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_HistoryMeetingsObjRelInsertInput<
-    Input_HistoryMeetingsObjRelInsertInput
-  >
-  get copyWith =>
-      CopyWith_Input_HistoryMeetingsObjRelInsertInput(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_HistoryMeetingsObjRelInsertInput ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$data = data;
-    final lOther$data = other.data;
-    if (l$data != lOther$data) {
-      return false;
-    }
-    final l$onConflict = onConflict;
-    final lOther$onConflict = other.onConflict;
-    if (_$data.containsKey('onConflict') !=
-        other._$data.containsKey('onConflict')) {
-      return false;
-    }
-    if (l$onConflict != lOther$onConflict) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$data = data;
-    final l$onConflict = onConflict;
-    return Object.hashAll([
-      l$data,
-      _$data.containsKey('onConflict') ? l$onConflict : const {},
     ]);
   }
 }

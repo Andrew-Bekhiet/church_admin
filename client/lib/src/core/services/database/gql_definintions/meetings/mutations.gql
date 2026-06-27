@@ -1,0 +1,65 @@
+mutation insertMeeting($object: HistoryMeetingsInsertInput!) {
+  insertHistoryMeetingsOne(object: $object) {
+    ...Meeting
+  }
+}
+
+mutation updateMeeting($id: uuid!, $set: HistoryMeetingsSetInput!) {
+  updateHistoryMeetingsByPk(pkColumns: { id: $id }, _set: $set) {
+    ...Meeting
+  }
+}
+
+mutation markAttendance($object: HistoryAttendanceHistoryInsertInput!) {
+  insertHistoryAttendanceHistoryOne(object: $object) {
+    id
+    meetingId
+    personId
+    datetime
+    asServant
+    recordedBy
+    recordedByUser {
+      ...User
+    }
+  }
+}
+
+mutation markAttendanceMany($objects: [HistoryAttendanceHistoryInsertInput!]!) {
+  insertHistoryAttendanceHistory(objects: $objects) {
+    returning {
+      id
+      meetingId
+      personId
+      datetime
+      asServant
+    }
+  }
+}
+
+mutation unmarkAttendance($id: uuid!) {
+  deleteHistoryAttendanceHistoryByPk(id: $id) {
+    id
+    meetingId
+    personId
+  }
+}
+
+mutation unmarkAttendanceBy(
+  $meetingId: uuid!
+  $personId: uuid!
+  $asServant: Boolean!
+) {
+  deleteHistoryAttendanceHistory(
+    where: {
+      meetingId: { _eq: $meetingId }
+      personId: { _eq: $personId }
+      asServant: { _eq: $asServant }
+    }
+  ) {
+    returning {
+      id
+      meetingId
+      personId
+    }
+  }
+}

@@ -68,4 +68,6 @@ targets:
               type: Map<String, dynamic>
             geometry:
               type: Map<String, dynamic>
+            meeting_audience:
+              type: String
           clients: []

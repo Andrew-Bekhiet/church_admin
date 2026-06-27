@@ -111,116 +111,21 @@ class _PersonAnalysisState extends State<PersonAnalysis> {
               return const Center(child: CircularProgressIndicator());
             }
 
-            final user = snapshot.requireData! is User
-                ? snapshot.requireData! as User
-                : null;
             final person = snapshot.requireData! is Person
                 ? snapshot.requireData! as Person
                 : null;
-            final userColor = user?.color ?? person?.color;
 
             return Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                for (final s
-                    in user?.servicesHistory?.map((e) => e.service!) ??
-                        person?.services ??
-                        <Service>[])
-                  if (s.attendanceHistoryAggregate == null ||
-                      s.attendanceDaysConstraintsAggregate == null)
-                    const Center(child: CircularProgressIndicator())
-                  else
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8),
-                      child: PersonAttendanceIndicator(
-                        name: s.name,
-                        range: dateRange,
-                        analysisData: s.attendanceHistoryAggregate!,
-                        totalAnalysisData:
-                            s.attendanceDaysConstraintsAggregate!,
-                        getHistoryListController: () =>
-                            ViewableObjectListController(
-                              objectsPaginatableStream: DatabaseService
-                                  .I
-                                  .persons
-                                  .paginatePersonServiceAttendance(
-                                    personId:
-                                        widget.user?.person?.id ??
-                                        widget.person!.id,
-                                    asAdmin: widget.user != null,
-                                    serviceId: s.id,
-                                  ),
-                            ),
-                        color: s.color ?? userColor,
-                      ),
-                    ),
-                for (final c
-                    in user?.classesHistory
-                            ?.map((e) => e.classes)
-                            .expand((e) => e) ??
-                        person?.classes ??
-                        <Class>[])
-                  if (c.attendanceHistoryAggregate == null ||
-                      c.attendanceDaysConstraintsAggregate == null)
-                    const Center(child: CircularProgressIndicator())
-                  else
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8),
-                      child: PersonAttendanceIndicator(
-                        name: c.name,
-                        range: dateRange,
-                        analysisData: c.attendanceHistoryAggregate!,
-                        totalAnalysisData:
-                            c.attendanceDaysConstraintsAggregate!,
-                        getHistoryListController: () =>
-                            ViewableObjectListController(
-                              objectsPaginatableStream: DatabaseService
-                                  .I
-                                  .persons
-                                  .paginatePersonClassAttendance(
-                                    personId:
-                                        widget.user?.person?.id ??
-                                        widget.person!.id,
-                                    asAdmin: widget.user != null,
-                                    classId: c.id,
-                                  ),
-                            ),
-                        color: c.color ?? userColor,
-                      ),
-                    ),
-                for (final g
-                    in user?.groupsHistory?.map((e) => e.group!) ??
-                        person?.groups ??
-                        <Group>[])
-                  if (g.attendanceHistoryAggregate == null ||
-                      g.attendanceDaysConstraintsAggregate == null)
-                    const Center(child: CircularProgressIndicator())
-                  else
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8),
-                      child: PersonAttendanceIndicator(
-                        name: g.name,
-                        range: dateRange,
-                        analysisData: g.attendanceHistoryAggregate!,
-                        totalAnalysisData:
-                            g.attendanceDaysConstraintsAggregate!,
-                        getHistoryListController: () =>
-                            ViewableObjectListController(
-                              objectsPaginatableStream: DatabaseService
-                                  .I
-                                  .persons
-                                  .paginatePersonGroupAttendance(
-                                    personId:
-                                        widget.user?.person?.id ??
-                                        widget.person!.id,
-                                    asAdmin: widget.user != null,
-                                    groupId: g.id,
-                                  ),
-                            ),
-                        color: g.color ?? userColor,
-                      ),
-                    ),
+                // TODO(ENG-99-follow-up): Migrate attendance analysis charts
+                // to the new meetings model. The old attendance_history fields
+                // (dayId, asAdmin, service/class/group direct joins) no longer
+                // exist in the schema after the meetings migration (#70).
+                // This section is temporarily hidden until the analysis
+                // data layer is rebuilt on top of meetings.
+                const SizedBox.shrink(),
                 if (widget.person != null) ...[
                   if (options!.kodasAnalysis)
                     if (person?.kodasHistoryAggregate == null)
