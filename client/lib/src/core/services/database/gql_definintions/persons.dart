@@ -261,15 +261,15 @@ class PersonsDAO extends FullCRUDDAO<Person> {
   }) {
     return PaginatableStream.simple(
       factory: (_) => Stream.value(
-        PaginatableStreamResponse<LastRecordedByInfo>(data: [], cursor: null),
+        const PaginatableStreamResponse<LastRecordedByInfo>(data: []),
       ),
     );
   }
 
   PaginatableStreamBase<LastRecordedByInfo> _paginatePersonAttendance({
     required String personId,
-    bool asServant = false,
     required List<Filter>? where,
+    bool asServant = false,
     int? limit,
   }) {
     return PaginatableStream.simple(

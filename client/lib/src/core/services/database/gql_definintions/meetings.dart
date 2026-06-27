@@ -73,7 +73,7 @@ class MeetingsDAO extends DAOBase<Meeting>
 
   /// Streams the roster of persons eligible for [meetingId].
   ///
-  /// Returns one entry per eligible person. [attendanceId] / [attendanceDatetime]
+  /// Returns one entry per eligible person. [MeetingRosterEntry.attendance]
   /// are non-null if the person attended in the [fromDate, toDate) window as
   /// [asServant]; otherwise null (person has not been marked yet for that session).
   ///

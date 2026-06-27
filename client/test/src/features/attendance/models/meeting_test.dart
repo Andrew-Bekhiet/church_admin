@@ -57,11 +57,14 @@ void main() {
       expect(MeetingAudience.onlyServants.includesPersons, isFalse);
     });
 
-    test('includesServants is true for onlyServants and personsAndServants', () {
-      expect(MeetingAudience.onlyServants.includesServants, isTrue);
-      expect(MeetingAudience.personsAndServants.includesServants, isTrue);
-      expect(MeetingAudience.onlyPersons.includesServants, isFalse);
-    });
+    test(
+      'includesServants is true for onlyServants and personsAndServants',
+      () {
+        expect(MeetingAudience.onlyServants.includesServants, isTrue);
+        expect(MeetingAudience.personsAndServants.includesServants, isTrue);
+        expect(MeetingAudience.onlyPersons.includesServants, isFalse);
+      },
+    );
   });
 
   group('Meeting.fromJson', () {
@@ -135,7 +138,6 @@ void main() {
     test('builds insert input for group meeting', () {
       final meeting = _meeting(
         name: 'Group Meeting',
-        audience: MeetingAudience.onlyPersons,
         groupId: 'grp-abc',
       );
       final input = meeting.toInsertInput();
@@ -153,7 +155,7 @@ void main() {
   });
 
   group('Meeting.toUpdateInput', () {
-    final original = _meeting(name: 'Old Name', audience: MeetingAudience.onlyPersons);
+    final original = _meeting(name: 'Old Name');
 
     test('includes changed name', () {
       final updated = _meeting(name: 'New Name');
