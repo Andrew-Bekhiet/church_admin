@@ -61,7 +61,7 @@ class MeetingsDAO extends DAOBase<Meeting>
     return graphQLClient.mutateAndReturnParsedNullable(
       MutationOptions(
         document: documentNodeMutationupdateMeeting,
-        operationName: 'archiveMeeting',
+        operationName: 'updateMeeting',
         variables: Variables_Mutation_updateMeeting(
           id: meetingId.toUuid(),
           $set: Input_HistoryMeetingsSetInput(archived: isArchived),
