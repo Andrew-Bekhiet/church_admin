@@ -14,6 +14,15 @@ final String _churchAdminMigrationNamespace = Uuid().v5(
   'migration-v2-2025-10',
 );
 
+/// `recorded_by` value used for migrated `confession_history` / `kodas_history`
+/// rows. Those columns are NOT NULL with an FK to `auth.users_data(uid)`, and
+/// migrated historical records have no real author.
+///
+/// IMPORTANT: replace this with the UID of a real (system/migration) user that
+/// exists in `auth.users_data` before importing, otherwise the foreign key will
+/// reject these rows.
+const String migrationRecordedByUid = '00000000-0000-0000-0000-000000000000';
+
 class ChurchAdminCsvExporter {
   final Directory dir;
   final ChurchAdminContext churchAdminContext;
@@ -42,6 +51,11 @@ class ChurchAdminCsvExporter {
     await _exportPersons();
     await _exportStores();
     await _exportStreets();
+
+    await _exportVisitHistory();
+    await _exportCallHistory();
+    await _exportConfessionHistory();
+    await _exportKodasHistory();
 
     await _exportAreasIdsMapping();
     await _exportStreetsIdsMapping();
@@ -456,6 +470,113 @@ class ChurchAdminCsvExporter {
         ),
       ),
     );
+  }
+
+  Future<void> _exportVisitHistory() async {
+    final seen = <String>{};
+    final rows = <Map<String, Object?>>[];
+
+    for (final visit in churchAdminContext.visitHistory) {
+      final recordId = _uuidFromFirestoreId(visit.recordId);
+      if (recordId == null) continue;
+
+      final key =
+          '${visit.table}|$recordId|${visit.isFatherVisit}|${visit.time.toIso8601String()}';
+      if (!seen.add(key)) continue;
+
+      rows.add({
+        'table': visit.table,
+        'record_id': recordId,
+        'time': visit.time.toUtc().toIso8601String(),
+        'is_father_visit': visit.isFatherVisit,
+      });
+    }
+
+    await _exportRaw('visit_history', rows);
+  }
+
+  Future<void> _exportCallHistory() async {
+    final seen = <String>{};
+    final rows = <Map<String, Object?>>[];
+
+    for (final call in churchAdminContext.callHistory) {
+      final personId = _uuidFromFirestoreId(call.personId);
+      if (personId == null) continue;
+
+      final key = '$personId|${call.time.toIso8601String()}';
+      if (!seen.add(key)) continue;
+
+      rows.add({
+        'person_id': personId,
+        'time': call.time.toUtc().toIso8601String(),
+      });
+    }
+
+    await _exportRaw('call_history', rows);
+  }
+
+  Future<void> _exportConfessionHistory() async {
+    await _exportRaw(
+      'confession_history',
+      _personDayRows(churchAdminContext.confessionHistory),
+    );
+  }
+
+  Future<void> _exportKodasHistory() async {
+    await _exportRaw(
+      'kodas_history',
+      _personDayRows(churchAdminContext.kodasHistory),
+    );
+  }
+
+  /// Builds `{day_id, person_id, recorded_by}` rows for the confession/kodas
+  /// history tables, de-duplicated per (person, day). The `time` column on
+  /// those tables is generated from `day_id`, so it is intentionally omitted.
+  List<Map<String, Object?>> _personDayRows(
+    List<({String personId, DateTime time})> records,
+  ) {
+    final seen = <String>{};
+    final rows = <Map<String, Object?>>[];
+
+    for (final record in records) {
+      final personId = _uuidFromFirestoreId(record.personId);
+      if (personId == null) continue;
+
+      final day = _dateOnly(record.time);
+      final key = '$personId|$day';
+      if (!seen.add(key)) continue;
+
+      rows.add({
+        'day_id': day,
+        'person_id': personId,
+        'recorded_by': migrationRecordedByUid,
+      });
+    }
+
+    return rows;
+  }
+
+  String _dateOnly(DateTime dt) =>
+      '${dt.year.toString().padLeft(4, '0')}-'
+      '${dt.month.toString().padLeft(2, '0')}-'
+      '${dt.day.toString().padLeft(2, '0')}';
+
+  /// Writes rows verbatim (no `*_id` → UUID transformation). Used for history
+  /// tables whose `day_id` column holds a date, not an id.
+  Future<void> _exportRaw(
+    String filename,
+    List<Map<String, Object?>> rows,
+  ) async {
+    if (rows.isEmpty) return;
+
+    final file = _getExportFile(filename);
+    final writer = CsvWriter.withHeaders(file.openWrite(), rows.first.keys);
+
+    for (final row in rows) {
+      writer.writeData(data: row);
+    }
+
+    await writer.close();
   }
 
   Future<void> _exportIdMappings<T extends ID>(

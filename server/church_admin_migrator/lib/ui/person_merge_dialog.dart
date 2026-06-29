@@ -361,14 +361,35 @@ class _PersonMergeDialogState extends State<_PersonMergeDialog> {
       geolocation: location,
     );
 
-    var shammasLevel = controllers.shammasLevel.value
+    final candidateShammasLevel = controllers.shammasLevel.value
         ? churchAdminContext.shammasLevels[IdReference.fromPath(
             'ShammasLevels/${newPerson.shammasLevel}',
           )]
         : existingPerson.shammasLevel;
-    var gender = controllers.gender.value
+    final gender = controllers.gender.value
         ? newPerson.gender
         : existingPerson.gender;
+    final isShammas =
+        gender &&
+        candidateShammasLevel != null &&
+        (controllers.isShammas.value
+            ? newPerson.isShammas
+            : existingPerson.isShammas);
+    // shammas_level_id must be null when is_shammas is false (check constraint).
+    final shammasLevel = isShammas ? candidateShammasLevel : null;
+
+    // Union the existing services with the incoming person's services so that
+    // service memberships are not lost when two records are merged.
+    final mergedServicesById = <String, Service>{
+      for (final service in existingPerson.services ?? const <Service>[])
+        service.id: service,
+    };
+    for (final serviceRef in newPerson.services) {
+      final service = churchAdminContext.services[serviceRef];
+      if (service != null) mergedServicesById[service.id] = service;
+    }
+    final mergedServices = mergedServicesById.values.toList();
+
     final merged = existingPerson.copyWith(
       name: controllers.name.value ? newPerson.name : existingPerson.name,
       birthdate: controllers.birthdate.value
@@ -379,7 +400,7 @@ class _PersonMergeDialogState extends State<_PersonMergeDialog> {
           ? newPerson.phone
           : existingPerson.mainPhone,
       otherPhones: controllers.otherPhones.value
-          ? newPerson.phones.cast<String, String>()
+          ? newPerson.otherPhonesWithParents
           : existingPerson.otherPhones,
       church: controllers.church.value
           ? churchAdminContext.churches[newPerson.church]
@@ -414,12 +435,8 @@ class _PersonMergeDialogState extends State<_PersonMergeDialog> {
           ? churchAdminContext.fathers[newPerson.cFather]
           : existingPerson.father,
       shammasLevel: shammasLevel,
-      isShammas:
-          gender &&
-          shammasLevel != null &&
-          (controllers.isShammas.value
-              ? newPerson.isShammas
-              : existingPerson.isShammas),
+      isShammas: isShammas,
+      services: mergedServices,
       school: controllers.school.value
           ? churchAdminContext.schools[newPerson.school]
           : existingPerson.school,

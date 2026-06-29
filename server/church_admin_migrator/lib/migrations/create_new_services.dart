@@ -52,15 +52,70 @@ Future<void> migrateAndCreateNewServices(
 
   for (final MapEntry(key: oldRef, value: service)
       in meetingHelperContext.services.entries) {
+    // The legacy StudyYearRange holds references to MeetingHelper StudyYear
+    // docs, not numbers. Resolve them to the new study-year `order` scale.
+    final fromOrder = _resolveStudyYearOrder(
+      service.studyYearRange?.from,
+      meetingHelperContext,
+      churchAdminContext,
+    );
+    final toOrder = _resolveStudyYearOrder(
+      service.studyYearRange?.to,
+      meetingHelperContext,
+      churchAdminContext,
+    );
+
+    // The services table requires the range to be either fully null or a valid
+    // ordered pair (study_year_from_id <= study_year_to_id).
+    final hasValidRange =
+        fromOrder != null && toOrder != null && fromOrder <= toOrder;
+
     final newService = Service(
       id: service.ref.id,
       name: service.name,
-      studyYearFromId:
-          int.tryParse(service.studyYearRange?.from?.id ?? '') ?? 0,
-      studyYearToId: int.tryParse(service.studyYearRange?.to?.id ?? '') ?? 0,
+      studyYearFromId: hasValidRange ? fromOrder : null,
+      studyYearToId: hasValidRange ? toOrder : null,
       color: service.color,
     );
 
     churchAdminContext.services[oldRef] = newService;
   }
+}
+
+int? _resolveStudyYearOrder(
+  IdReference? studyYearRef,
+  MeetingHelperContext meetingHelperContext,
+  ChurchAdminContext churchAdminContext,
+) {
+  if (studyYearRef == null) return null;
+
+  final grade = meetingHelperContext.studyYears[studyYearRef]?.grade;
+  if (grade == null) return null;
+
+  return churchAdminContext.studyYears[grade]?.order;
+}
+
+/// Returns the standard migrated [Service] whose study-year range contains
+/// [studyYearOrder]. Falls back to the servants-preparation service for orders
+/// that fall outside every range. Used to attach migrated classes to a service.
+Service? serviceForStudyYearOrder(
+  ChurchAdminContext churchAdminContext,
+  int studyYearOrder,
+) {
+  for (final base in _newServices) {
+    final from = base.studyYearFromId;
+    final to = base.studyYearToId;
+    if (from != null &&
+        to != null &&
+        studyYearOrder >= from &&
+        studyYearOrder <= to) {
+      return churchAdminContext.services[IdReference.fromPath(
+        'Services/${base.id}',
+      )];
+    }
+  }
+
+  return churchAdminContext.services[IdReference.fromPath(
+    'Services/خدمة إعداد خدام',
+  )];
 }

@@ -21,6 +21,7 @@ import 'package:church_admin_migrator/utils/fuzzy_match.dart';
 import 'package:church_admin_migrator/utils/normalize_string.dart';
 import 'package:collection/collection.dart';
 import 'package:dart_firebase_admin/dart_firebase_admin.dart';
+import 'package:dart_firebase_admin/firestore.dart' show Timestamp;
 import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 
@@ -32,6 +33,11 @@ final logger = Logger(
   ),
 );
 final bool isDryRun = bool.fromEnvironment('dryRun', defaultValue: false);
+
+/// When true the migration runs without prompting for merge/family decisions,
+/// applying the automatic defaults instead. Kept as a single switch so the
+/// interactive UI can be re-enabled in one place.
+const bool isSilentMigration = true;
 
 Future<void> migrate({
   required FirebaseAdminApp churchDataApp,
@@ -88,6 +94,9 @@ Future<void> _migrateWithTiming({
   beforeStepStart('Migrating and creating new Services');
   await migrateAndCreateNewServices(meetingHelperContext, churchAdminContext);
 
+  beforeStepStart('Migrating Classes');
+  _migrateClasses(meetingHelperContext, churchAdminContext);
+
   beforeStepStart('Migrating ShammasLevels');
   _migrateShammasLevels(meetingHelperContext, churchAdminContext);
 
@@ -107,9 +116,6 @@ Future<void> _migrateWithTiming({
   _migrateJobs(churchDataContext, churchAdminContext);
 
   beforeStepStart('Migrating Qualifications');
-  _migrateQualifications(churchDataContext, churchAdminContext);
-
-  beforeStepStart('Migrating Persons Types');
   _migrateQualifications(churchDataContext, churchAdminContext);
 
   beforeStepStart('Migrating Areas');
@@ -208,6 +214,14 @@ void _migrateChurchDataPersons(
 
     churchAdminContext.persons[newRef] = newPerson;
     churchAdminContext.persons[oldRef] = newPerson;
+
+    _recordPersonHistory(
+      churchAdminContext,
+      personId: newRef.id,
+      lastConfession: person.lastConfession,
+      lastTanawol: person.lastTanawol,
+      lastCall: person.lastCall,
+    );
   }
 }
 
@@ -222,39 +236,80 @@ Future<void> _migrateMeetingHelperPersons(
       a.family!.id: a,
   };
 
+  // Build the person/family match indexes once from the already-migrated
+  // (ChurchData) records. They grow as MeetingHelper persons are added so that
+  // later persons can still de-duplicate against earlier ones.
+  final personIndex = _PersonMatchIndex();
+  for (final person in _dedupById(churchAdminContext.persons.values)) {
+    personIndex.add(
+      _PersonMatchEntry.of(
+        person,
+        addressesByFamilyId[person.family?.id]?.specialLandmark,
+      ),
+    );
+  }
+
+  final familyIndex = _FamilyMatchIndex();
+  final membersByFamilyId = <String, List<Person>>{};
+  for (final person in _dedupById(churchAdminContext.persons.values)) {
+    final familyId = person.family?.id;
+    if (familyId != null) {
+      membersByFamilyId.putIfAbsent(familyId, () => []).add(person);
+    }
+  }
+  for (final family in _dedupById(churchAdminContext.families.values)) {
+    familyIndex.add(family, membersByFamilyId[family.id] ?? const []);
+  }
+
   logger.i('Migrating Meeting Helper Persons');
   for (final MapEntry(key: oldRef, value: person)
       in meetingHelperContext.persons.entries
           .take(isDryRun ? 10 : meetingHelperContext.persons.length)
           .sortedBy((e) => e.value.name)) {
-    final duplicate = churchAdminContext.persons.values
-        .map((p) {
-          final similarity = PersonSimilarity(
-            name1: p.name,
-            name2: person.name,
-            birthdate1: p.birthdate,
-            birthdate2: person.birthDate,
-            phone1: p.mainPhone,
-            phone2: person.phone,
-            address1: addressesByFamilyId[p.family?.id]?.specialLandmark,
-            address2: person.address,
-          );
+    // Pre-normalize the incoming person once and reuse across all candidates.
+    final personNormName = person.name.normalize();
+    final personNormFirstName = person.name.split(' ').first.normalize();
+    final personPhoneDigits = (person.phone ?? '').replaceAll(
+      RegExp(r'\D'),
+      '',
+    );
+    final personNormAddress = person.address?.normalize();
 
-          return (person: p, score: similarity.calculate());
-        })
-        .where((e) => e.score > 0.84)
-        .sorted((a, b) => b.score.compareTo(a.score))
-        .firstOrNull;
+    // Only score candidates that share a (normalized) first name or phone,
+    // instead of every migrated person.
+    ({Person person, double score})? duplicate;
+    var bestScore = 0.84;
+    for (final candidate in personIndex.candidatesFor(
+      firstName: personNormFirstName,
+      phoneDigits: personPhoneDigits,
+    )) {
+      final score = PersonSimilarity(
+        firstName1: candidate.normFirstName,
+        firstName2: personNormFirstName,
+        name1: candidate.normName,
+        name2: personNormName,
+        birthdate1: candidate.person.birthdate,
+        birthdate2: person.birthDate,
+        phoneDigits1: candidate.phoneDigits,
+        phoneDigits2: personPhoneDigits,
+        address1: candidate.normAddress,
+        address2: personNormAddress,
+      ).calculate();
 
-    final bool merged;
+      if (score > bestScore) {
+        bestScore = score;
+        duplicate = (person: candidate.person, score: score);
+      }
+    }
+
     if (duplicate != null) {
       final newAddress = Address(
         id: 'family_${duplicate.person.family?.id}_address',
       );
       final existingFamilyAddress =
           addressesByFamilyId[duplicate.person.family?.id] ?? newAddress;
-      merged = await _maybeMergePersons(
-        silent: true,
+      final merged = await _maybeMergePersons(
+        silent: isSilentMigration,
         existingFamilyAddress: existingFamilyAddress,
         person: person,
         duplicate: duplicate,
@@ -263,75 +318,69 @@ Future<void> _migrateMeetingHelperPersons(
       );
 
       if (merged) {
+        // Keep the index current so later persons can match the merged record.
+        final mergedPerson = churchAdminContext
+            .persons[IdReference.fromPath('Persons/${duplicate.person.id}')];
+        if (mergedPerson != null) {
+          personIndex.add(
+            _PersonMatchEntry.of(
+              mergedPerson,
+              existingFamilyAddress.specialLandmark,
+            ),
+          );
+        }
         continue;
       }
-    } else {
-      merged = false;
     }
 
-    var similarFamily = churchAdminContext.families.values
-        .map((f) {
-          final familyNameScore = f.name.normalize().levenshteinSimilarity(
-            person.name.normalize(),
-          );
+    // Find the most similar existing family by (family name vs full name) and
+    // best phone match among its members.
+    _FamilyMatchEntry? similarFamily;
+    var bestFamilyScore = 0.9;
+    for (final entry in familyIndex.entries) {
+      final nameScore = entry.normName.levenshteinSimilarity(
+        personNormName,
+        threshold: 0.85,
+      );
+      if (nameScore < 0.85) continue;
 
-          if (familyNameScore < 0.85) {
-            return (family: f, score: 0.0, familyMembers: <Person>[]);
-          }
+      var phoneScore = 0.0;
+      if (personPhoneDigits.isNotEmpty) {
+        for (final memberDigits in entry.memberPhoneDigits) {
+          final score = memberDigits.levenshteinSimilarity(personPhoneDigits);
+          if (score > phoneScore) phoneScore = score;
+        }
+      }
 
-          final familyMembers = churchAdminContext.persons.values
-              .where((p) => p.family?.id == f.id)
-              .toList();
+      final combinedScore = (nameScore + 1.3 * phoneScore) / 2.3;
+      if (combinedScore > bestFamilyScore) {
+        bestFamilyScore = combinedScore;
+        similarFamily = entry;
+      }
+    }
 
-          final phoneScore = familyMembers
-              .map((member) {
-                if (member.mainPhone == null || person.phone == null) {
-                  return 0.0;
-                }
+    Family? family = similarFamily?.family;
 
-                return member.mainPhone!
-                    .replaceAll(RegExp(r'\D'), '')
-                    .levenshteinSimilarity(
-                      person.phone!.replaceAll(RegExp(r'\D'), ''),
-                    );
-              })
-              .fold(0.0, (max, score) => score > max ? score : max);
-
-          final combinedScore = (familyNameScore + 1.3 * phoneScore) / 2.3;
-
-          return (
-            family: f,
-            score: combinedScore,
-            familyMembers: familyMembers,
-          );
-        })
-        .where((e) => e.score > 0.9)
-        .sorted((a, b) => b.score.compareTo(a.score))
-        .firstOrNull;
-
-    var family = similarFamily?.family;
-
-    if (similarFamily != null) {
-      final familyMembers = similarFamily.familyMembers;
-
-      final shouldUseExistingFamily = await showUIForResult<bool>((
-        context,
-        complete,
-      ) {
-        return showFamilySelectionDialog(
-          silent: true,
-          complete: complete,
-          family: similarFamily.family,
-          familyMembers: familyMembers,
-          personName: person.name,
-          personPhone: person.phone,
-          personAddress: person.address,
-          personNotes: person.notes,
-        );
-      });
+    final matchedFamily = similarFamily;
+    if (matchedFamily != null) {
+      final shouldUseExistingFamily = isSilentMigration
+          ? true
+          : await showUIForResult<bool>((context, complete) {
+              return showFamilySelectionDialog(
+                silent: false,
+                complete: complete,
+                family: matchedFamily.family,
+                familyMembers: matchedFamily.members,
+                personName: person.name,
+                personPhone: person.phone,
+                personAddress: person.address,
+                personNotes: person.notes,
+              );
+            });
 
       if (!shouldUseExistingFamily) {
         family = null;
+        similarFamily = null;
       }
     }
 
@@ -362,26 +411,26 @@ Future<void> _migrateMeetingHelperPersons(
       );
 
       churchAdminContext.addresses[addressId] = address;
-      churchAdminContext.families[familyId] = family;
-    }
 
-    if (merged) continue;
+      // Make the new family discoverable for subsequent persons.
+      similarFamily = familyIndex.add(family, const []);
+    }
 
     final newRef = IdReference.fromPath('Persons/${person.ref.id}');
 
-    final birthdate = person.birthDate;
-
-    var shammasLevel =
+    final shammasLevel =
         churchAdminContext.shammasLevels[IdReference.fromPath(
           'ShammasLevels/${person.shammasLevel}',
         )];
+    final isShammas = shammasLevel != null && person.gender && person.isShammas;
+
     final newPerson = Person(
       id: newRef.id,
       name: person.name,
-      birthdate: birthdate,
+      birthdate: person.birthDate,
       gender: person.gender,
       mainPhone: person.phone,
-      otherPhones: person.phones.cast<String, String>(),
+      otherPhones: person.otherPhonesWithParents,
       church: churchAdminContext.churches[person.church],
       college: churchAdminContext.colleges[person.college],
       color: person.color,
@@ -395,14 +444,130 @@ Future<void> _migrateMeetingHelperPersons(
       ],
       workStatus: WorkStatus.student,
       father: churchAdminContext.fathers[person.cFather],
-      shammasLevel: shammasLevel,
-      isShammas: shammasLevel != null && person.gender && person.isShammas,
+      // shammas_level_id must be null when is_shammas is false to satisfy the
+      // persons_shammas_level check constraint.
+      shammasLevel: isShammas ? shammasLevel : null,
+      isShammas: isShammas,
       school: churchAdminContext.schools[person.school],
       notes: person.notes,
     );
 
     churchAdminContext.persons[newRef] = newPerson;
     churchAdminContext.persons[oldRef] = newPerson;
+
+    _recordPersonHistory(
+      churchAdminContext,
+      personId: newRef.id,
+      lastConfession: person.lastConfession,
+      lastKodas: person.lastKodas,
+      lastTanawol: person.lastTanawol,
+      lastCall: person.lastCall,
+      lastVisit: person.lastVisit,
+    );
+
+    // Keep both indexes current for later persons.
+    personIndex.add(_PersonMatchEntry.of(newPerson, person.address));
+    similarFamily!.addMember(newPerson);
+  }
+}
+
+/// De-duplicates a collection of identifiable objects by their `id`, preserving
+/// order. Migrated records are stored under multiple keys, so iterating `.values`
+/// can yield the same object more than once.
+Iterable<T> _dedupById<T extends ID>(Iterable<T> items) sync* {
+  final seen = <String>{};
+  for (final item in items) {
+    if (seen.add(item.id)) yield item;
+  }
+}
+
+/// A migrated person with its match keys pre-computed once.
+class _PersonMatchEntry {
+  final Person person;
+  final String normFirstName;
+  final String normName;
+  final String phoneDigits;
+  final String? normAddress;
+
+  _PersonMatchEntry({
+    required this.person,
+    required this.normFirstName,
+    required this.normName,
+    required this.phoneDigits,
+    required this.normAddress,
+  });
+
+  factory _PersonMatchEntry.of(Person person, String? addressText) {
+    return _PersonMatchEntry(
+      person: person,
+      normFirstName: person.name.split(' ').first.normalize(),
+      normName: person.name.normalize(),
+      phoneDigits: (person.mainPhone ?? '').replaceAll(RegExp(r'\D'), ''),
+      normAddress: addressText?.normalize(),
+    );
+  }
+}
+
+/// Blocking index over migrated persons keyed by normalized first name and by
+/// phone digits, so an incoming person is only compared against plausible
+/// candidates instead of every record.
+class _PersonMatchIndex {
+  final Map<String, List<_PersonMatchEntry>> _byFirstName = {};
+  final Map<String, List<_PersonMatchEntry>> _byPhone = {};
+
+  void add(_PersonMatchEntry entry) {
+    _byFirstName.putIfAbsent(entry.normFirstName, () => []).add(entry);
+    if (entry.phoneDigits.isNotEmpty) {
+      _byPhone.putIfAbsent(entry.phoneDigits, () => []).add(entry);
+    }
+  }
+
+  Iterable<_PersonMatchEntry> candidatesFor({
+    required String firstName,
+    required String phoneDigits,
+  }) {
+    final seen = <_PersonMatchEntry>{};
+    final result = <_PersonMatchEntry>[];
+    for (final entry in [
+      ...?_byFirstName[firstName],
+      if (phoneDigits.isNotEmpty) ...?_byPhone[phoneDigits],
+    ]) {
+      if (seen.add(entry)) result.add(entry);
+    }
+    return result;
+  }
+}
+
+/// A migrated family with its match keys and members' phone digits cached.
+class _FamilyMatchEntry {
+  final Family family;
+  final String normName;
+  final List<Person> members;
+  final List<String> memberPhoneDigits;
+
+  _FamilyMatchEntry(this.family, this.normName, this.members)
+    : memberPhoneDigits = [
+        for (final m in members)
+          if ((m.mainPhone ?? '').replaceAll(RegExp(r'\D'), '').isNotEmpty)
+            m.mainPhone!.replaceAll(RegExp(r'\D'), ''),
+      ];
+
+  void addMember(Person person) {
+    members.add(person);
+    final digits = (person.mainPhone ?? '').replaceAll(RegExp(r'\D'), '');
+    if (digits.isNotEmpty) memberPhoneDigits.add(digits);
+  }
+}
+
+class _FamilyMatchIndex {
+  final List<_FamilyMatchEntry> entries = [];
+
+  _FamilyMatchEntry add(Family family, List<Person> members) {
+    final entry = _FamilyMatchEntry(family, family.name.normalize(), [
+      ...members,
+    ]);
+    entries.add(entry);
+    return entry;
   }
 }
 
@@ -473,6 +638,16 @@ Future<bool> _maybeMergePersons({
   churchAdminContext.persons[newRef] = mergedPerson.copyWith(id: newRef.id);
   churchAdminContext.persons[oldRef] = mergedPerson.copyWith(id: newRef.id);
 
+  _recordPersonHistory(
+    churchAdminContext,
+    personId: newRef.id,
+    lastConfession: person.lastConfession,
+    lastKodas: person.lastKodas,
+    lastTanawol: person.lastTanawol,
+    lastCall: person.lastCall,
+    lastVisit: person.lastVisit,
+  );
+
   return true;
 }
 
@@ -516,6 +691,14 @@ void _migrateStores(
 
     churchAdminContext.stores[newRef] = newStore;
     churchAdminContext.stores[oldRef] = newStore;
+
+    _recordVisitHistory(
+      churchAdminContext,
+      table: 'stores',
+      recordId: newStore.id,
+      lastVisit: store.lastVisit,
+      fatherLastVisit: store.fatherLastVisit,
+    );
   }
 }
 
@@ -578,6 +761,14 @@ void _migrateFamilies(
 
     churchAdminContext.families[newRef] = newFamily;
     churchAdminContext.families[oldRef] = newFamily;
+
+    _recordVisitHistory(
+      churchAdminContext,
+      table: 'families',
+      recordId: newFamily.id,
+      lastVisit: family.lastVisit,
+      fatherLastVisit: family.fatherLastVisit,
+    );
   }
 
   for (final (:childFamilyId, :parentFamilyId)
@@ -959,6 +1150,61 @@ void _migrateQualifications(
   logger.i('Merged Qualifications:\n$prettyPrintMerged');
 }
 
+void _migrateClasses(
+  MeetingHelperContext meetingHelperContext,
+  ChurchAdminContext churchAdminContext,
+) {
+  logger.i('Migrating Classes');
+
+  var skipped = 0;
+  for (final MapEntry(key: oldRef, value: mhClass)
+      in meetingHelperContext.classes.entries) {
+    final grade = mhClass.studyYear != null
+        ? meetingHelperContext.studyYears[mhClass.studyYear]?.grade
+        : null;
+    final studyYear = grade != null
+        ? churchAdminContext.studyYears[grade]
+        : null;
+
+    // classes.service_id and classes.service_study_year are NOT NULL, so a
+    // class we cannot anchor to a study year/service cannot be represented.
+    if (studyYear == null) {
+      skipped++;
+      continue;
+    }
+
+    final service = serviceForStudyYearOrder(
+      churchAdminContext,
+      studyYear.order,
+    );
+    if (service == null) {
+      skipped++;
+      continue;
+    }
+
+    final newClass = Class(
+      id: mhClass.ref.id,
+      name: mhClass.name,
+      color: mhClass.color,
+      service: service,
+      serviceId: service.id,
+      studyYear: studyYear,
+      serviceStudyYear: studyYear.order,
+      serviceGender: mhClass.gender,
+    );
+
+    final newRef = IdReference.fromPath('Classes/${newClass.id}');
+    churchAdminContext.classes[newRef] = newClass;
+    churchAdminContext.classes[oldRef] = newClass;
+  }
+
+  if (skipped > 0) {
+    logger.w(
+      'Skipped $skipped class(es) without a resolvable study year/service',
+    );
+  }
+}
+
 void _migrateShammasLevels(
   MeetingHelperContext meetingHelperContext,
   ChurchAdminContext churchAdminContext,
@@ -1030,6 +1276,86 @@ void _migratePersonsTypes(ChurchAdminContext churchAdminContext) {
         )] =
         personType;
     migratedIds.add(personType.id);
+  }
+}
+
+DateTime? _asDateTime(Object? value) {
+  if (value == null) return null;
+  if (value is DateTime) return value;
+  if (value is Timestamp) {
+    return DateTime.fromMillisecondsSinceEpoch(value.seconds * 1000);
+  }
+  return null;
+}
+
+/// Records the legacy "last ..." timestamps of a person into the corresponding
+/// history collections. [lastTanawol] has no dedicated table in the new schema,
+/// so (per migration decision) it is recorded as a kodas-history entry.
+void _recordPersonHistory(
+  ChurchAdminContext churchAdminContext, {
+  required String personId,
+  Object? lastConfession,
+  Object? lastKodas,
+  Object? lastTanawol,
+  Object? lastCall,
+  Object? lastVisit,
+}) {
+  final confession = _asDateTime(lastConfession);
+  if (confession != null) {
+    churchAdminContext.confessionHistory.add((
+      personId: personId,
+      time: confession,
+    ));
+  }
+
+  for (final kodas in [_asDateTime(lastKodas), _asDateTime(lastTanawol)]) {
+    if (kodas != null) {
+      churchAdminContext.kodasHistory.add((personId: personId, time: kodas));
+    }
+  }
+
+  final call = _asDateTime(lastCall);
+  if (call != null) {
+    churchAdminContext.callHistory.add((personId: personId, time: call));
+  }
+
+  final visit = _asDateTime(lastVisit);
+  if (visit != null) {
+    churchAdminContext.visitHistory.add((
+      table: 'persons',
+      recordId: personId,
+      time: visit,
+      isFatherVisit: false,
+    ));
+  }
+}
+
+/// Records the legacy visit timestamps of a family/store into visit history.
+void _recordVisitHistory(
+  ChurchAdminContext churchAdminContext, {
+  required String table,
+  required String recordId,
+  Object? lastVisit,
+  Object? fatherLastVisit,
+}) {
+  final visit = _asDateTime(lastVisit);
+  if (visit != null) {
+    churchAdminContext.visitHistory.add((
+      table: table,
+      recordId: recordId,
+      time: visit,
+      isFatherVisit: false,
+    ));
+  }
+
+  final fatherVisit = _asDateTime(fatherLastVisit);
+  if (fatherVisit != null) {
+    churchAdminContext.visitHistory.add((
+      table: table,
+      recordId: recordId,
+      time: fatherVisit,
+      isFatherVisit: true,
+    ));
   }
 }
 

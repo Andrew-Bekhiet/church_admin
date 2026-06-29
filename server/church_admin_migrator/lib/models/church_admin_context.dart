@@ -26,6 +26,22 @@ class ChurchAdminContext {
   final Map<IdReference, Store> stores;
   final Map<IdReference, Street> streets;
 
+  /// `history.visit_history` rows. [recordId] is the original Firestore id of
+  /// the visited family/store/person (converted to a UUID on export).
+  final List<
+    ({String table, String recordId, DateTime time, bool isFatherVisit})
+  >
+  visitHistory;
+
+  /// `history.call_history` rows.
+  final List<({String personId, DateTime time})> callHistory;
+
+  /// `history.confession_history` rows.
+  final List<({String personId, DateTime time})> confessionHistory;
+
+  /// `history.kodas_history` rows (also receives the legacy `lastTanawol`).
+  final List<({String personId, DateTime time})> kodasHistory;
+
   ChurchAdminContext()
     : churches = {},
       jobs = {},
@@ -46,5 +62,9 @@ class ChurchAdminContext {
       persons = {},
       stores = {},
       streets = {},
-      services = {};
+      services = {},
+      visitHistory = [],
+      callHistory = [],
+      confessionHistory = [],
+      kodasHistory = [];
 }

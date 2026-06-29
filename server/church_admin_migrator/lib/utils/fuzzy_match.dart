@@ -31,12 +31,40 @@ extension FuzzyMatchString on String {
 
   /// Levenshtein-based similarity (0.0 to 1.0)
   /// Better for distinguishing similar names with different key components
-  double levenshteinSimilarity(String other) {
+  ///
+  /// When [threshold] is provided the computation may short-circuit: if the
+  /// length difference alone makes [threshold] unreachable, or the running
+  /// edit distance exceeds the budget implied by [threshold], it returns 0.0
+  /// instead of finishing the full matrix. Callers that immediately filter on
+  /// `>= threshold` get identical results far more cheaply.
+  double levenshteinSimilarity(String other, {double threshold = 0.0}) {
     if (this == other) return 1.0;
     if (isEmpty || other.isEmpty) return 0.0;
 
-    final distance = _levenshteinDistance(this, other);
     final maxLength = max(length, other.length);
+
+    // The minimum possible edit distance is the length difference, so the
+    // maximum possible similarity is bounded by it. Bail out early when even
+    // the best case cannot reach the requested threshold. The epsilon keeps a
+    // pair whose similarity exactly equals the threshold (which floating-point
+    // rounding can otherwise push just under it).
+    const epsilon = 1e-9;
+    if (threshold > 0.0) {
+      final lengthDiff = (length - other.length).abs();
+      if (1.0 - (lengthDiff / maxLength) < threshold - epsilon) return 0.0;
+    }
+
+    final maxDistance = threshold > 0.0
+        ? ((1.0 - threshold) * maxLength + epsilon).floor()
+        : null;
+
+    final distance = _levenshteinDistance(
+      this,
+      other,
+      maxDistance: maxDistance,
+    );
+
+    if (maxDistance != null && distance > maxDistance) return 0.0;
 
     return 1.0 - (distance / maxLength);
   }
@@ -116,40 +144,55 @@ extension FuzzyMatchString on String {
         3;
   }
 
-  int _levenshteinDistance(String s1, String s2) {
+  /// Edit distance using two rolling rows (O(min(m, n)) memory instead of the
+  /// full matrix). When [maxDistance] is provided, the loop aborts as soon as
+  /// every cell in a row exceeds it, returning `maxDistance + 1` as a sentinel
+  /// "too far" value.
+  int _levenshteinDistance(String s1, String s2, {int? maxDistance}) {
+    // Work with the shorter string as the inner dimension to minimise memory.
+    if (s1.length < s2.length) {
+      final tmp = s1;
+      s1 = s2;
+      s2 = tmp;
+    }
+
     final len1 = s1.length;
     final len2 = s2.length;
 
-    // Create a matrix to store distances
-    final matrix = List.generate(
-      len1 + 1,
-      (i) => List<int>.filled(len2 + 1, 0),
-    );
+    if (len2 == 0) return len1;
 
-    // Initialize first row and column
-    for (int i = 0; i <= len1; i++) {
-      matrix[i][0] = i;
-    }
-    for (int j = 0; j <= len2; j++) {
-      matrix[0][j] = j;
-    }
+    var previous = List<int>.generate(len2 + 1, (j) => j, growable: false);
+    var current = List<int>.filled(len2 + 1, 0);
 
-    // Calculate distances
     for (int i = 1; i <= len1; i++) {
-      for (int j = 1; j <= len2; j++) {
-        final cost = s1[i - 1] == s2[j - 1] ? 0 : 1;
+      current[0] = i;
+      int rowMin = current[0];
+      final c1 = s1.codeUnitAt(i - 1);
 
-        matrix[i][j] = min(
-          min(
-            matrix[i - 1][j] + 1, // deletion
-            matrix[i][j - 1] + 1, // insertion
-          ),
-          matrix[i - 1][j - 1] + cost, // substitution
-        );
+      for (int j = 1; j <= len2; j++) {
+        final cost = c1 == s2.codeUnitAt(j - 1) ? 0 : 1;
+
+        final deletion = previous[j] + 1;
+        final insertion = current[j - 1] + 1;
+        final substitution = previous[j - 1] + cost;
+
+        int value = deletion < insertion ? deletion : insertion;
+        if (substitution < value) value = substitution;
+
+        current[j] = value;
+        if (value < rowMin) rowMin = value;
       }
+
+      if (maxDistance != null && rowMin > maxDistance) {
+        return maxDistance + 1;
+      }
+
+      final tmp = previous;
+      previous = current;
+      current = tmp;
     }
 
-    return matrix[len1][len2];
+    return previous[len2];
   }
 }
 
@@ -177,88 +220,89 @@ extension FuzzyMatchDateTime on DateTime {
   }
 }
 
-/// Multi-property weighted similarity for person matching
+/// Multi-property weighted similarity for person matching.
+///
+/// All string inputs are expected to be **pre-normalized** by the caller
+/// (names via [NormalizeString.normalize], phones reduced to digits only).
+/// This keeps the normalization out of the per-comparison hot path, since a
+/// single incoming person is scored against many candidates.
 class PersonSimilarity {
+  /// Normalized first name (first whitespace-separated token).
+  final String? firstName1;
+  final String? firstName2;
+
+  /// Normalized full name.
   final String? name1;
   final String? name2;
+
   final DateTime? birthdate1;
   final DateTime? birthdate2;
-  final String? phone1;
-  final String? phone2;
+
+  /// Digits-only phone numbers.
+  final String? phoneDigits1;
+  final String? phoneDigits2;
+
+  /// Normalized address text.
   final String? address1;
   final String? address2;
 
   PersonSimilarity({
+    this.firstName1,
+    this.firstName2,
     this.name1,
     this.name2,
     this.birthdate1,
     this.birthdate2,
-    this.phone1,
-    this.phone2,
+    this.phoneDigits1,
+    this.phoneDigits2,
     this.address1,
     this.address2,
   });
 
   /// Calculate weighted similarity score (0.0 to 1.0)
-  /// Weights: birthdate=3, phone=3, name=2.5, address=2
+  /// Weights: birthdate=3, phone=3, first name=2.6, name=2.5, address=2.5
   /// Returns 1.0 (100%) when all properties match
   double calculate() {
     double totalWeight = 0;
     double totalScore = 0;
 
-    // First Name comparison (weight: 2.7)
-    if (name1 != null && name2 != null) {
-      final nameScore = name1!
-          .split(' ')
-          .first
-          .normalize()
-          .levenshteinSimilarity(name2!.split(' ').first.normalize());
-      totalScore += nameScore * 2.6;
+    // First name comparison (weight: 2.6)
+    if (firstName1 != null && firstName2 != null) {
+      totalScore += firstName1!.levenshteinSimilarity(firstName2!) * 2.6;
       totalWeight += 2.6;
     }
 
-    // Name comparison (weight: 2.5)
+    // Full name comparison (weight: 2.5)
     if (name1 != null && name2 != null) {
-      final nameScore = name1!.normalize().levenshteinSimilarity(
-        name2!.normalize(),
-      );
-      totalScore += nameScore * 2.5;
+      totalScore += name1!.levenshteinSimilarity(name2!) * 2.5;
       totalWeight += 2.5;
     }
 
     // Birthdate comparison (weight: 3)
     if (birthdate1 != null && birthdate2 != null) {
-      final birthdateScore = birthdate1!.birthdateSimilarity(birthdate2!);
-      totalScore += birthdateScore * 3;
+      totalScore += birthdate1!.birthdateSimilarity(birthdate2!) * 3;
       totalWeight += 3;
     }
 
-    // Phone comparison (weight: 3)
-    if (phone1 != null && phone2 != null) {
-      final normalizedPhone1 = _normalizePhone(phone1!);
-      final normalizedPhone2 = _normalizePhone(phone2!);
-
-      // Exact match for phones after normalization
-      final phoneScore = normalizedPhone1 == normalizedPhone2 ? 1.0 : 0.0;
-      totalScore += phoneScore * 3;
+    // Phone comparison (weight: 3) — exact match after digit normalization
+    if (phoneDigits1 != null &&
+        phoneDigits1!.isNotEmpty &&
+        phoneDigits2 != null &&
+        phoneDigits2!.isNotEmpty) {
+      totalScore += (phoneDigits1 == phoneDigits2 ? 1.0 : 0.0) * 3;
       totalWeight += 3;
     }
 
-    // Address comparison (weight: 2)
-    if (address1 != null && address2 != null) {
-      final addressScore = address1!.normalize().jaroWinklerSimilarity(
-        address2!.normalize(),
-      );
-      totalScore += addressScore * 2.5;
+    // Address comparison (weight: 2.5)
+    if (address1 != null &&
+        address1!.isNotEmpty &&
+        address2 != null &&
+        address2!.isNotEmpty) {
+      totalScore += address1!.jaroWinklerSimilarity(address2!) * 2.5;
       totalWeight += 2.5;
     }
 
     // Return normalized score (0.0 to 1.0)
     return totalWeight > 0 ? totalScore / totalWeight : 0.0;
-  }
-
-  /// Normalize phone number by removing non-digit characters
-  String _normalizePhone(String phone) {
-    return phone.replaceAll(RegExp(r'\D'), '');
   }
 }

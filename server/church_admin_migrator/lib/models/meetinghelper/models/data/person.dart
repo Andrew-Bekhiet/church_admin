@@ -114,6 +114,24 @@ class Person {
     return phone is DocumentReference ? (phone).path : phone as String?;
   }
 
+  /// The [phones] map combined with the father/mother phones so they are not
+  /// lost during migration. Document-reference style values (legacy data where
+  /// a phone field pointed at another document) are skipped.
+  Map<String, String> get otherPhonesWithParents {
+    final result = <String, String>{...phones.cast<String, String>()};
+
+    void addPhone(String label, String? value) {
+      final trimmed = value?.trim() ?? '';
+      if (trimmed.isEmpty || trimmed.contains('/')) return;
+      result[label] = trimmed;
+    }
+
+    addPhone('هاتف الأب', fatherPhone);
+    addPhone('هاتف الأم', motherPhone);
+
+    return result;
+  }
+
   Map<String, dynamic> toJson() => {
     'Name': name,
     'Color': color?.toARGB32(),
