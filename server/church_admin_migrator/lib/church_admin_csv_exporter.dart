@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:church_admin/church_admin.dart';
+import 'package:church_admin_migrator/migrations/create_new_services.dart';
 import 'package:church_admin_migrator/models/church_admin_context.dart';
 import 'package:church_admin_migrator/models/id_reference.dart';
 import 'package:csvwriter/csvwriter.dart';
@@ -415,9 +416,29 @@ class ChurchAdminCsvExporter {
       'persons_services',
       churchAdminContext.persons.values
           .expand(
-            (p) => (p.services ?? []).map(
-              (s) => (personId: p.id, serviceId: s.id),
-            ),
+            (p) {
+              // Each person keeps their legacy service links, plus is auto
+              // enrolled into the standard study-year service whose range
+              // contains their study year (KG/primary/middle/high/university).
+              final serviceIds = <String>{
+                ...?p.services?.map((s) => s.id),
+              };
+
+              final studyYearOrder = p.studyYear?.order;
+              if (studyYearOrder != null) {
+                final standardService = standardServiceForStudyYearOrder(
+                  churchAdminContext,
+                  studyYearOrder,
+                );
+                if (standardService != null) {
+                  serviceIds.add(standardService.id);
+                }
+              }
+
+              return serviceIds.map(
+                (serviceId) => (personId: p.id, serviceId: serviceId),
+              );
+            },
           )
           .map(
             (ps) => _ToJsonAdapter(

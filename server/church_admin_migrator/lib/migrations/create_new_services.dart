@@ -96,9 +96,11 @@ int? _resolveStudyYearOrder(
 }
 
 /// Returns the standard migrated [Service] whose study-year range contains
-/// [studyYearOrder]. Falls back to the servants-preparation service for orders
-/// that fall outside every range. Used to attach migrated classes to a service.
-Service? serviceForStudyYearOrder(
+/// [studyYearOrder], or `null` when [studyYearOrder] falls outside every
+/// range. Unlike [serviceForStudyYearOrder] there is no servants-preparation
+/// fallback — used to auto-enrol persons into the study-year service they
+/// belong to, where an out-of-range person should simply not be enrolled.
+Service? standardServiceForStudyYearOrder(
   ChurchAdminContext churchAdminContext,
   int studyYearOrder,
 ) {
@@ -115,7 +117,18 @@ Service? serviceForStudyYearOrder(
     }
   }
 
-  return churchAdminContext.services[IdReference.fromPath(
-    'Services/خدمة إعداد خدام',
-  )];
+  return null;
+}
+
+/// Returns the standard migrated [Service] whose study-year range contains
+/// [studyYearOrder]. Falls back to the servants-preparation service for orders
+/// that fall outside every range. Used to attach migrated classes to a service.
+Service? serviceForStudyYearOrder(
+  ChurchAdminContext churchAdminContext,
+  int studyYearOrder,
+) {
+  return standardServiceForStudyYearOrder(churchAdminContext, studyYearOrder) ??
+      churchAdminContext.services[IdReference.fromPath(
+        'Services/خدمة إعداد خدام',
+      )];
 }

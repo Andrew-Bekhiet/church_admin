@@ -90,7 +90,7 @@
           "-a",
           "lib/church-data-admin.json",
           "-a",
-          "--no-migrate-data",
+          "--migrate-data",
           "-a",
           "--migrate-storage",
         ],

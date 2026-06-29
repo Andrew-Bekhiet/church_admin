@@ -77,4 +77,8 @@ Future<void> main(List<String> arguments) async {
       exportDir: Directory('./export'),
     );
   }
+
+  logger.i('Migration completed at ${DateTime.now()}', time: DateTime.now());
+
+  exit(0);
 }
