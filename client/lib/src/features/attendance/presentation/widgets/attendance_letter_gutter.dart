@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 /// area lines up exactly with what's drawn, and the strip stays compact (and
 /// centred) regardless of how tall the surrounding scroll body grows.
 class AttendanceLetterGutter extends StatelessWidget {
-  static const double kGutterWidth = 18;
+  static const double kGutterWidth = 16;
   static const double _slotHeight = 16;
 
   final List<String> letters;

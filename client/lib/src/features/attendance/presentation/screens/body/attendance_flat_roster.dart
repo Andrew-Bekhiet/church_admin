@@ -23,6 +23,7 @@ class AttendanceFlatRoster extends StatelessWidget {
         return AttendancePersonCard(
           entry: entry,
           onToggle: onToggle,
+          removeEndPadding: true,
         );
       },
     );

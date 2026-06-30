@@ -12,10 +12,12 @@ class AttendancePersonCard extends StatelessWidget {
 
   final MeetingRosterEntry entry;
   final ValueChanged<MeetingRosterEntry> onToggle;
+  final bool removeEndPadding;
 
   const AttendancePersonCard({
     required this.entry,
     required this.onToggle,
+    this.removeEndPadding = false,
     super.key,
   });
 
@@ -29,7 +31,10 @@ class AttendancePersonCard extends StatelessWidget {
     final attendanceTime = present ? entry.attendance?.datetime : null;
 
     return Card(
-      margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+      margin: const EdgeInsetsDirectional.symmetric(
+        horizontal: 8,
+        vertical: 4,
+      ).copyWith(end: removeEndPadding ? 0 : null),
       clipBehavior: Clip.antiAlias,
       child: InkWell(
         onTap: () => onToggle(entry),

@@ -22,6 +22,7 @@ class _AttendanceSearchBarState extends State<AttendanceSearchBar> {
   void _clear() {
     _controller.clear();
     widget.onChanged(null);
+    FocusScope.of(context).unfocus();
   }
 
   @override
@@ -43,7 +44,7 @@ class _AttendanceSearchBarState extends State<AttendanceSearchBar> {
               textInputAction: TextInputAction.search,
               onChanged: _onChanged,
               decoration: InputDecoration(
-                hintText: 'بحث ...',
+                hintText: 'بحث بالاسم أو رقم الهاتف ...',
                 prefixIcon: const Icon(Symbols.search),
                 suffixIcon: value.text.isEmpty
                     ? null

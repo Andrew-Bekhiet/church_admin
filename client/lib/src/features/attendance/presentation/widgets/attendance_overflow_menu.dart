@@ -23,23 +23,43 @@ class AttendanceOverflowMenu extends StatelessWidget {
     return PopupMenuButton<void>(
       icon: const Icon(Symbols.more_vert),
       itemBuilder: (context) => [
-        CheckedPopupMenuItem<void>(
-          checked: sorting == AttendanceSorting.byAttendanceTime,
+        PopupMenuItem<void>(
           onTap: () => onSortChanged(
             sorting == AttendanceSorting.byAttendanceTime
                 ? AttendanceSorting.byName
                 : AttendanceSorting.byAttendanceTime,
           ),
-          child: const Text('ترتيب حسب وقت الحضور'),
+          child: ListTile(
+            contentPadding: EdgeInsets.zero,
+            leading: const Icon(Symbols.access_time),
+            title: const Text('ترتيب حسب وقت الحضور'),
+            trailing: Visibility(
+              visible: sorting == AttendanceSorting.byAttendanceTime,
+              maintainAnimation: true,
+              maintainSize: true,
+              maintainState: true,
+              child: const Icon(Symbols.check),
+            ),
+          ),
         ),
-        CheckedPopupMenuItem<void>(
-          checked: grouping == AttendanceGrouping.studyYear,
+        PopupMenuItem<void>(
           onTap: () => onGroupingChanged(
             grouping == AttendanceGrouping.studyYear
                 ? AttendanceGrouping.none
                 : AttendanceGrouping.studyYear,
           ),
-          child: const Text('تقسيم حسب السنة الدراسية'),
+          child: ListTile(
+            contentPadding: EdgeInsets.zero,
+            leading: const Icon(Symbols.school),
+            title: const Text('تقسيم حسب السنة الدراسية'),
+            trailing: Visibility(
+              visible: grouping == AttendanceGrouping.studyYear,
+              maintainAnimation: true,
+              maintainSize: true,
+              maintainState: true,
+              child: const Icon(Symbols.check),
+            ),
+          ),
         ),
       ],
     );
