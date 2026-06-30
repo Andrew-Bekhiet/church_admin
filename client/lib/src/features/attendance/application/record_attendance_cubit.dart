@@ -253,9 +253,18 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
 
     for (final entry in entries) {
       final personId = entry.person.id;
-      if (_optimisticPresence[personId] != entry.attendanceTime) continue;
 
-      _optimisticPresence.remove(personId);
+      final optimisticAttendanceTime = _optimisticPresence[personId];
+      final serverAttendanceTime = entry.attendanceTime;
+
+      switch ((optimisticAttendanceTime, serverAttendanceTime)) {
+        case (null, null):
+        case (final a?, final b?) when a.isAtSameMomentAs(b):
+          _optimisticPresence.remove(personId);
+
+        default:
+          continue;
+      }
     }
 
     _emitLoaded();
