@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 /// centred) regardless of how tall the surrounding scroll body grows.
 class AttendanceLetterGutter extends StatelessWidget {
   static const double kGutterWidth = 16;
-  static const double _slotHeight = 16;
+  static const double _slotHeight = 32;
 
   final List<String> letters;
   final ValueChanged<String> onLetterSelected;
