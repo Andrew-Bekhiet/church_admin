@@ -15,20 +15,14 @@ class MeetingListTile extends StatelessWidget {
     super.key,
   });
 
-  /// A short description of who the meeting scopes to, shown as the subtitle.
-  String? get _subtitle {
-    final parts = [
-      meeting.studyYear?.name,
-      meeting.service?.name,
-      meeting.group?.name,
-    ].whereType<String>().where((name) => name.isNotEmpty).toList();
-    return parts.isEmpty ? null : parts.join(' • ');
-  }
-
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final subtitle = _subtitle;
+    final subtitle = [
+      meeting.service?.name,
+      meeting.studyYear?.name,
+      meeting.group?.name,
+    ].nonNulls.where((s) => s.isNotEmpty).join(' • ');
 
     return Card(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
@@ -37,22 +31,26 @@ class MeetingListTile extends StatelessWidget {
           : theme.colorScheme.surfaceContainerHigh,
       child: ListTile(
         onTap: onTap,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        leading: MeetingAvatar(meeting: meeting),
+        selected: selected,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(12)),
+        ),
         title: Text(
           meeting.name,
           style: theme.textTheme.titleMedium?.copyWith(
             fontWeight: FontWeight.bold,
           ),
         ),
-        subtitle: subtitle == null ? null : Text(subtitle),
-        trailing: Icon(
-          selected ? Symbols.check_circle : Symbols.remove,
-          color: selected
-              ? theme.colorScheme.primary
-              : theme.colorScheme.outline,
-          fill: selected ? 1 : 0,
-        ),
+        subtitle: Text(subtitle),
+        trailing: selected
+            ? Icon(
+                Symbols.check_circle,
+                color: theme.colorScheme.primary,
+                size: 30,
+                fill: 1,
+                opticalSize: 40,
+              )
+            : null,
       ),
     );
   }
