@@ -15,8 +15,6 @@ class AttendancePersonToggle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colors = Theme.of(context).colorScheme;
-
     return IconButton(
       onPressed: onTap,
       iconSize: 32,
@@ -24,7 +22,6 @@ class AttendancePersonToggle extends StatelessWidget {
       icon: Icon(
         isPresent ? Symbols.check_circle : Symbols.radio_button_unchecked,
         fill: isPresent ? 1 : 0,
-        color: isPresent ? colors.onPrimaryContainer : colors.onSurfaceVariant,
       ),
     );
   }

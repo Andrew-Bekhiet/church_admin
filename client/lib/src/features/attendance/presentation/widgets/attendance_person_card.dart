@@ -6,9 +6,12 @@ import 'package:intl/intl.dart';
 /// present/absent toggle. Tapping toggles attendance; long-pressing opens the
 /// person's details.
 class AttendancePersonCard extends StatelessWidget {
+  static const double _cardVerticalMargin = 1.5;
+  static const double _cardVerticalPadding = 6;
+
   /// Fixed height of a person card, used both for layout and the gutter's
   /// jump-to-index math.
-  static const double kCardExtent = 72;
+  static const double kCardExtent = 63;
 
   final MeetingRosterEntry entry;
   final ValueChanged<MeetingRosterEntry> onToggle;
@@ -26,52 +29,47 @@ class AttendancePersonCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     final present = entry.attended;
     final attendanceTime = present ? entry.attendance?.datetime : null;
+
+    const minTileHeight =
+        kCardExtent - _cardVerticalMargin * 2 - _cardVerticalPadding * 2;
 
     return Card(
       margin: const EdgeInsetsDirectional.symmetric(
         horizontal: 8,
-        vertical: 4,
+        vertical: _cardVerticalMargin,
       ).copyWith(end: removeEndPadding ? 0 : null),
       clipBehavior: Clip.antiAlias,
-      child: InkWell(
+      elevation: 0,
+      color: ColorScheme.of(context).surfaceContainerLow,
+      child: ListTile(
+        minTileHeight: minTileHeight,
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 12,
+          vertical: _cardVerticalPadding,
+        ),
         onTap: () => onToggle(entry),
         onLongPress: () => _openDetails(context),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-          child: Row(
-            spacing: 12,
-            children: [
-              ImageObjectWidget(entry.person, size: 44),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      entry.person.name,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: theme.textTheme.titleSmall,
-                    ),
-                    if (attendanceTime != null)
-                      Text(
-                        DateFormat.jm('ar').format(attendanceTime),
-                        style: theme.textTheme.bodySmall?.copyWith(
-                          color: theme.colorScheme.onSurfaceVariant,
-                        ),
-                      ),
-                  ],
-                ),
+        leading: ImageObjectWidget(entry.person, size: 44),
+        title: Row(
+          children: [
+            Expanded(
+              child: Text(
+                entry.person.name,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
               ),
-              AttendancePersonToggle(
-                isPresent: present,
-                onTap: () => onToggle(entry),
+            ),
+            if (attendanceTime != null)
+              Text(
+                DateFormat.jm('ar').format(attendanceTime),
               ),
-            ],
-          ),
+          ],
+        ),
+        trailing: AttendancePersonToggle(
+          isPresent: present,
+          onTap: () => onToggle(entry),
         ),
       ),
     );
