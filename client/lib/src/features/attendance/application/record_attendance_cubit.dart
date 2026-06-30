@@ -235,7 +235,6 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
     _rosterSub = _dao
         .streamMeetingRoster(
           meetingId: _meeting.id,
-          asServant: _asServant,
           fromDate: _fromDate,
           toDate: _toDate,
           groupByStudyYear: _grouping == AttendanceGrouping.studyYear,
@@ -311,6 +310,7 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
     final query = _searchSubject.valueOrNull?.trim() ?? '';
     final filtered = _serverEntries
         .map(_applyOptimistic)
+        .where((e) => e.asServant == _asServant)
         .where(_matchesPresenceFilter)
         .where((e) => _matchesSearch(e, query))
         .toList();
@@ -356,6 +356,7 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
     final optimisticIsAttended = optimisticAttendanceTime != null;
 
     return MeetingRosterEntry(
+      asServant: entry.asServant,
       person: entry.person,
       attendanceHistory: optimisticIsAttended
           ? [

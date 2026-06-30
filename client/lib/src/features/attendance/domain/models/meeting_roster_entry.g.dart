@@ -7,6 +7,7 @@ part of 'meeting_roster_entry.dart';
 // **************************************************************************
 
 MeetingRosterEntry _$MeetingRosterEntryFromJson(Map json) => MeetingRosterEntry(
+  asServant: json['asServant'] as bool,
   person: Person.fromJson(Map<String, Object?>.from(json['person'] as Map)),
   attendanceHistory: (json['attendanceHistory'] as List<dynamic>)
       .map(
@@ -17,6 +18,7 @@ MeetingRosterEntry _$MeetingRosterEntryFromJson(Map json) => MeetingRosterEntry(
 
 Map<String, dynamic> _$MeetingRosterEntryToJson(MeetingRosterEntry instance) =>
     <String, dynamic>{
+      'asServant': instance.asServant,
       'person': instance.person.toJson(),
       'attendanceHistory': instance.attendanceHistory
           .map((e) => e.toJson())

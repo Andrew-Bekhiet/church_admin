@@ -694,7 +694,6 @@ const documentNodeSubscriptionwatchMeeting = DocumentNode(
 class Variables_Subscription_watchMeetingRoster {
   factory Variables_Subscription_watchMeetingRoster({
     required UuidValue meetingId,
-    required bool asServant,
     required DateTime fromDate,
     required DateTime toDate,
     List<Input_HistoryMeetingRosterBoolExp>? where,
@@ -702,7 +701,6 @@ class Variables_Subscription_watchMeetingRoster {
     int? limit,
   }) => Variables_Subscription_watchMeetingRoster._({
     r'meetingId': meetingId,
-    r'asServant': asServant,
     r'fromDate': fromDate,
     r'toDate': toDate,
     if (where != null) r'where': where,
@@ -718,8 +716,6 @@ class Variables_Subscription_watchMeetingRoster {
     final result$data = <String, dynamic>{};
     final l$meetingId = data['meetingId'];
     result$data['meetingId'] = stringToUuid(l$meetingId);
-    final l$asServant = data['asServant'];
-    result$data['asServant'] = (l$asServant as bool);
     final l$fromDate = data['fromDate'];
     result$data['fromDate'] = tstzFromString(l$fromDate);
     final l$toDate = data['toDate'];
@@ -755,8 +751,6 @@ class Variables_Subscription_watchMeetingRoster {
 
   UuidValue get meetingId => (_$data['meetingId'] as UuidValue);
 
-  bool get asServant => (_$data['asServant'] as bool);
-
   DateTime get fromDate => (_$data['fromDate'] as DateTime);
 
   DateTime get toDate => (_$data['toDate'] as DateTime);
@@ -773,8 +767,6 @@ class Variables_Subscription_watchMeetingRoster {
     final result$data = <String, dynamic>{};
     final l$meetingId = meetingId;
     result$data['meetingId'] = uuidToString(l$meetingId);
-    final l$asServant = asServant;
-    result$data['asServant'] = l$asServant;
     final l$fromDate = fromDate;
     result$data['fromDate'] = tstzToString(l$fromDate);
     final l$toDate = toDate;
@@ -812,11 +804,6 @@ class Variables_Subscription_watchMeetingRoster {
     final l$meetingId = meetingId;
     final lOther$meetingId = other.meetingId;
     if (l$meetingId != lOther$meetingId) {
-      return false;
-    }
-    final l$asServant = asServant;
-    final lOther$asServant = other.asServant;
-    if (l$asServant != lOther$asServant) {
       return false;
     }
     final l$fromDate = fromDate;
@@ -881,7 +868,6 @@ class Variables_Subscription_watchMeetingRoster {
   @override
   int get hashCode {
     final l$meetingId = meetingId;
-    final l$asServant = asServant;
     final l$fromDate = fromDate;
     final l$toDate = toDate;
     final l$where = where;
@@ -889,7 +875,6 @@ class Variables_Subscription_watchMeetingRoster {
     final l$limit = limit;
     return Object.hashAll([
       l$meetingId,
-      l$asServant,
       l$fromDate,
       l$toDate,
       _$data.containsKey('where')
@@ -918,7 +903,6 @@ abstract class CopyWith_Variables_Subscription_watchMeetingRoster<TRes> {
 
   TRes call({
     UuidValue? meetingId,
-    bool? asServant,
     DateTime? fromDate,
     DateTime? toDate,
     List<Input_HistoryMeetingRosterBoolExp>? where,
@@ -942,7 +926,6 @@ class _CopyWithImpl_Variables_Subscription_watchMeetingRoster<TRes>
 
   TRes call({
     Object? meetingId = _undefined,
-    Object? asServant = _undefined,
     Object? fromDate = _undefined,
     Object? toDate = _undefined,
     Object? where = _undefined,
@@ -953,8 +936,6 @@ class _CopyWithImpl_Variables_Subscription_watchMeetingRoster<TRes>
       ..._instance._$data,
       if (meetingId != _undefined && meetingId != null)
         'meetingId': (meetingId as UuidValue),
-      if (asServant != _undefined && asServant != null)
-        'asServant': (asServant as bool),
       if (fromDate != _undefined && fromDate != null)
         'fromDate': (fromDate as DateTime),
       if (toDate != _undefined && toDate != null)
@@ -976,7 +957,6 @@ class _CopyWithStubImpl_Variables_Subscription_watchMeetingRoster<TRes>
 
   call({
     UuidValue? meetingId,
-    bool? asServant,
     DateTime? fromDate,
     DateTime? toDate,
     List<Input_HistoryMeetingRosterBoolExp>? where,
@@ -1146,15 +1126,6 @@ const documentNodeSubscriptionwatchMeetingRoster = DocumentNode(
           directives: [],
         ),
         VariableDefinitionNode(
-          variable: VariableNode(name: NameNode(value: 'asServant')),
-          type: NamedTypeNode(
-            name: NameNode(value: 'Boolean'),
-            isNonNull: true,
-          ),
-          defaultValue: DefaultValueNode(value: null),
-          directives: [],
-        ),
-        VariableDefinitionNode(
           variable: VariableNode(name: NameNode(value: 'fromDate')),
           type: NamedTypeNode(
             name: NameNode(value: 'timestamptz'),
@@ -1249,19 +1220,6 @@ const documentNodeSubscriptionwatchMeetingRoster = DocumentNode(
                       ),
                     ),
                     ObjectFieldNode(
-                      name: NameNode(value: 'asServant'),
-                      value: ObjectValueNode(
-                        fields: [
-                          ObjectFieldNode(
-                            name: NameNode(value: '_eq'),
-                            value: VariableNode(
-                              name: NameNode(value: 'asServant'),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    ObjectFieldNode(
                       name: NameNode(value: '_and'),
                       value: VariableNode(name: NameNode(value: 'where')),
                     ),
@@ -1338,6 +1296,13 @@ const documentNodeSubscriptionwatchMeetingRoster = DocumentNode(
                 ),
                 FieldNode(
                   name: NameNode(value: 'blurhash'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: 'asServant'),
                   alias: null,
                   arguments: [],
                   directives: [],
@@ -1470,6 +1435,7 @@ class Subscription_watchMeetingRoster_historyMeetingRoster {
     this.studyYearName,
     this.photoUpdatedAt,
     this.blurhash,
+    this.asServant,
     required this.attendanceHistory,
     this.$__typename = 'HistoryMeetingRoster',
   });
@@ -1486,6 +1452,7 @@ class Subscription_watchMeetingRoster_historyMeetingRoster {
     final l$studyYearName = json['studyYearName'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
     final l$blurhash = json['blurhash'];
+    final l$asServant = json['asServant'];
     final l$attendanceHistory = json['attendanceHistory'];
     final l$$__typename = json['__typename'];
     return Subscription_watchMeetingRoster_historyMeetingRoster(
@@ -1500,6 +1467,7 @@ class Subscription_watchMeetingRoster_historyMeetingRoster {
           ? null
           : tstzFromString(l$photoUpdatedAt),
       blurhash: (l$blurhash as String?),
+      asServant: (l$asServant as bool?),
       attendanceHistory: (l$attendanceHistory as List<dynamic>)
           .map(
             (e) =>
@@ -1529,6 +1497,8 @@ class Subscription_watchMeetingRoster_historyMeetingRoster {
   final DateTime? photoUpdatedAt;
 
   final String? blurhash;
+
+  final bool? asServant;
 
   final List<
     Subscription_watchMeetingRoster_historyMeetingRoster_attendanceHistory
@@ -1561,6 +1531,8 @@ class Subscription_watchMeetingRoster_historyMeetingRoster {
         : tstzToString(l$photoUpdatedAt);
     final l$blurhash = blurhash;
     _resultData['blurhash'] = l$blurhash;
+    final l$asServant = asServant;
+    _resultData['asServant'] = l$asServant;
     final l$attendanceHistory = attendanceHistory;
     _resultData['attendanceHistory'] = l$attendanceHistory
         .map((e) => e.toJson())
@@ -1581,6 +1553,7 @@ class Subscription_watchMeetingRoster_historyMeetingRoster {
     final l$studyYearName = studyYearName;
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$blurhash = blurhash;
+    final l$asServant = asServant;
     final l$attendanceHistory = attendanceHistory;
     final l$$__typename = $__typename;
     return Object.hashAll([
@@ -1593,6 +1566,7 @@ class Subscription_watchMeetingRoster_historyMeetingRoster {
       l$studyYearName,
       l$photoUpdatedAt,
       l$blurhash,
+      l$asServant,
       Object.hashAll(l$attendanceHistory.map((v) => v)),
       l$$__typename,
     ]);
@@ -1652,6 +1626,11 @@ class Subscription_watchMeetingRoster_historyMeetingRoster {
     if (l$blurhash != lOther$blurhash) {
       return false;
     }
+    final l$asServant = asServant;
+    final lOther$asServant = other.asServant;
+    if (l$asServant != lOther$asServant) {
+      return false;
+    }
     final l$attendanceHistory = attendanceHistory;
     final lOther$attendanceHistory = other.attendanceHistory;
     if (l$attendanceHistory.length != lOther$attendanceHistory.length) {
@@ -1706,6 +1685,7 @@ abstract class CopyWith_Subscription_watchMeetingRoster_historyMeetingRoster<
     String? studyYearName,
     DateTime? photoUpdatedAt,
     String? blurhash,
+    bool? asServant,
     List<
       Subscription_watchMeetingRoster_historyMeetingRoster_attendanceHistory
     >?
@@ -1752,6 +1732,7 @@ class _CopyWithImpl_Subscription_watchMeetingRoster_historyMeetingRoster<TRes>
     Object? studyYearName = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? blurhash = _undefined,
+    Object? asServant = _undefined,
     Object? attendanceHistory = _undefined,
     Object? $__typename = _undefined,
   }) => _then(
@@ -1777,6 +1758,9 @@ class _CopyWithImpl_Subscription_watchMeetingRoster_historyMeetingRoster<TRes>
       blurhash: blurhash == _undefined
           ? _instance.blurhash
           : (blurhash as String?),
+      asServant: asServant == _undefined
+          ? _instance.asServant
+          : (asServant as bool?),
       attendanceHistory:
           attendanceHistory == _undefined || attendanceHistory == null
           ? _instance.attendanceHistory
@@ -1836,6 +1820,7 @@ class _CopyWithStubImpl_Subscription_watchMeetingRoster_historyMeetingRoster<
     String? studyYearName,
     DateTime? photoUpdatedAt,
     String? blurhash,
+    bool? asServant,
     List<
       Subscription_watchMeetingRoster_historyMeetingRoster_attendanceHistory
     >?

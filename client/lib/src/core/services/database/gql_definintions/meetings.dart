@@ -75,7 +75,6 @@ class MeetingsDAO extends DAOBase<Meeting>
   /// presence filtering are applied client side on the fully loaded roster.
   PaginatableStreamBase<MeetingRosterEntry> streamMeetingRoster({
     required String meetingId,
-    required bool asServant,
     required DateTime fromDate,
     required DateTime toDate,
     required bool groupByStudyYear,
@@ -115,7 +114,6 @@ class MeetingsDAO extends DAOBase<Meeting>
             operationName: 'watchMeetingRoster',
             variables: Variables_Subscription_watchMeetingRoster(
               meetingId: meetingId.toUuid(),
-              asServant: asServant,
               fromDate: fromDate,
               toDate: toDate,
               where: whereFilters,

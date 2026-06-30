@@ -16,7 +16,6 @@ subscription watchMeeting($id: uuid!) {
 
 subscription watchMeetingRoster(
   $meetingId: uuid!
-  $asServant: Boolean!
   $fromDate: timestamptz!
   $toDate: timestamptz!
   $where: [HistoryMeetingRosterBoolExp!] = []
@@ -24,11 +23,7 @@ subscription watchMeetingRoster(
   $limit: Int = 200
 ) {
   historyMeetingRoster(
-    where: {
-      meetingId: { _eq: $meetingId }
-      asServant: { _eq: $asServant }
-      _and: $where
-    }
+    where: { meetingId: { _eq: $meetingId }, _and: $where }
     orderBy: $orderBy
     limit: $limit
   ) {
@@ -41,6 +36,7 @@ subscription watchMeetingRoster(
     studyYearName
     photoUpdatedAt
     blurhash
+    asServant
     attendanceHistory(
       where: { datetime: { _gte: $fromDate, _lt: $toDate } }
       orderBy: [{ datetime: DESC }]
