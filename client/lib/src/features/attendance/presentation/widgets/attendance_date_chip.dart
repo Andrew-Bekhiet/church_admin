@@ -25,21 +25,21 @@ class AttendanceDateChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    final textTheme = Theme.of(context).textTheme;
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    final textTheme = theme.textTheme;
 
     return FilledButton.icon(
       onPressed: () => _pickDate(context),
       icon: const Icon(Symbols.calendar_month, size: 16),
       label: Text(DateFormat.yMMMEd('ar').format(date)),
       style: FilledButton.styleFrom(
-        backgroundColor: colorScheme.primaryContainer,
-        foregroundColor: colorScheme.onPrimaryContainer,
+        side: const BorderSide(),
+        backgroundColor: colorScheme.surfaceContainerLow,
+        foregroundColor: colorScheme.onSurface,
         textStyle: textTheme.labelMedium,
         visualDensity: VisualDensity.compact,
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-        // start=4 aligns the calendar icon with the meeting title text edge
-        padding: const EdgeInsetsDirectional.fromSTEB(4, 0, 12, 0),
       ),
     );
   }

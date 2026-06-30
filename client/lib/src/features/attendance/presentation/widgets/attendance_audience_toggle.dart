@@ -30,9 +30,10 @@ class AttendanceAudienceToggle extends StatelessWidget {
       onSelectionChanged: (_) => onToggle(),
       showSelectedIcon: false,
       style: SegmentedButton.styleFrom(
-        selectedBackgroundColor: colorScheme.primary,
-        selectedForegroundColor: colorScheme.onPrimary,
-        backgroundColor: colorScheme.surfaceContainerHighest,
+        side: const BorderSide(),
+        selectedBackgroundColor: colorScheme.surfaceContainerLow,
+        selectedForegroundColor: colorScheme.surfaceTint,
+        backgroundColor: colorScheme.surfaceContainerLow,
         foregroundColor: colorScheme.onSurface,
         visualDensity: VisualDensity.compact,
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,

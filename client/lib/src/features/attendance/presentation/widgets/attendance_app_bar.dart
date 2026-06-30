@@ -47,8 +47,7 @@ class AttendanceAppBar extends StatelessWidget {
       leadingWidth: 28,
       title: Column(
         mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        spacing: 6,
+        spacing: 10,
         children: [
           MeetingSelectorButton(
             meeting: meeting,
