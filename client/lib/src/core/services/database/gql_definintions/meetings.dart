@@ -171,14 +171,13 @@ class MeetingsDAO extends DAOBase<Meeting>
     );
   }
 
-  /// Marks a person as present at a meeting.
-  Future<AttendanceRecord?> markAttendance({
+  Future<AttendanceRecord> markAttendance({
     required String meetingId,
     required String personId,
     required DateTime datetime,
     bool asServant = false,
   }) {
-    return graphQLClient.mutateAndReturnParsedNullable(
+    return graphQLClient.mutateAndReturnParsed(
       MutationOptions(
         document: documentNodeMutationmarkAttendance,
         operationName: 'markAttendance',
@@ -190,26 +189,22 @@ class MeetingsDAO extends DAOBase<Meeting>
             datetime: datetime,
           ),
         ).toJson(),
-        parserFn: db.parser.singleOrNullParser(AttendanceRecord.fromJson),
+        parserFn: db.parser.singleParser(AttendanceRecord.fromJson),
       ),
     );
   }
 
-  /// Unmarks attendance by meeting + person + asServant when record id is not known.
-  Future<void> unmarkAttendanceBy({
-    required String meetingId,
-    required String personId,
-    bool asServant = false,
+  Future<AttendanceRecord> unmarkAttendance({
+    required String attendanceRecordId,
   }) {
-    return graphQLClient.mutate(
+    return graphQLClient.mutateAndReturnParsed(
       MutationOptions(
-        document: documentNodeMutationunmarkAttendanceBy,
-        operationName: 'unmarkAttendanceBy',
-        variables: Variables_Mutation_unmarkAttendanceBy(
-          meetingId: meetingId.toUuid(),
-          personId: personId.toUuid(),
-          asServant: asServant,
+        document: documentNodeMutationunmarkAttendance,
+        operationName: 'unmarkAttendance',
+        variables: Variables_Mutation_unmarkAttendance(
+          id: attendanceRecordId.toUuid(),
         ).toJson(),
+        parserFn: db.parser.singleParser(AttendanceRecord.fromJson),
       ),
     );
   }

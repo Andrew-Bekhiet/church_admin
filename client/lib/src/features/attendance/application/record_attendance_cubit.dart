@@ -155,25 +155,36 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
 
     try {
       if (newIsPresent) {
-        await _dao.markAttendance(
+        final record = await _dao.markAttendance(
           meetingId: _meeting.id,
           personId: personId,
           asServant: _asServant,
           datetime: attendanceTime,
         );
-      } else {
-        await _dao.unmarkAttendanceBy(
-          meetingId: _meeting.id,
-          personId: personId,
-          asServant: _asServant,
+
+        _showUndoSnackBar(
+          entry,
+          isPresent: true,
+          onUndo: () => _dao.unmarkAttendance(
+            attendanceRecordId: record.id,
+          ),
+        );
+      } else if (entry.attendance?.id case final attendanceRecordId?) {
+        final record = await _dao.unmarkAttendance(
+          attendanceRecordId: attendanceRecordId,
+        );
+
+        _showUndoSnackBar(
+          entry,
+          isPresent: false,
+          onUndo: () => _dao.markAttendance(
+            meetingId: record.meetingId,
+            personId: record.personId,
+            datetime: record.datetime,
+            asServant: record.asServant,
+          ),
         );
       }
-
-      _showUndoSnackBar(
-        entry.person.name,
-        present: newIsPresent,
-        entry: entry,
-      );
     } catch (error, stackTrace) {
       _optimisticPresence.remove(personId);
 
@@ -192,34 +203,34 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
     }
   }
 
+  DateTime? _displayedPresenceTime(String personId, MeetingRosterEntry entry) =>
+      _optimisticPresence[personId] ?? entry.attendanceTime;
+
   void _showUndoSnackBar(
-    String personName, {
-    required bool present,
-    required MeetingRosterEntry entry,
+    MeetingRosterEntry entry, {
+    required bool isPresent,
+    required VoidCallback onUndo,
   }) {
     if (isClosed) return;
+
+    final personName = entry.person.name;
 
     scaffoldMessenger
       ..clearSnackBars()
       ..showSnackBar(
         SnackBar(
           content: Text(
-            present ? 'تم تسجيل حضور $personName' : 'تم إلغاء حضور $personName',
+            isPresent
+                ? 'تم تسجيل حضور $personName'
+                : 'تم إلغاء حضور $personName',
           ),
           action: SnackBarAction(
             label: 'تراجع',
-            onPressed: () =>
-                unawaited(toggleAttendance(_latestEntryFor(entry))),
+            onPressed: onUndo,
           ),
         ),
       );
   }
-
-  MeetingRosterEntry _latestEntryFor(MeetingRosterEntry fallback) =>
-      _serverEntries.firstWhereOrNull(
-        (e) => e.person.id == fallback.person.id,
-      ) ??
-      fallback;
 
   Future<void> _restartSession() async {
     await _subscribeRoster(showLoading: true);
@@ -254,17 +265,7 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
     for (final entry in entries) {
       final personId = entry.person.id;
 
-      final optimisticAttendanceTime = _optimisticPresence[personId];
-      final serverAttendanceTime = entry.attendanceTime;
-
-      switch ((optimisticAttendanceTime, serverAttendanceTime)) {
-        case (null, null):
-        case (final a?, final b?) when a.isAtSameMomentAs(b):
-          _optimisticPresence.remove(personId);
-
-        default:
-          continue;
-      }
+      _optimisticPresence.remove(personId);
     }
 
     _emitLoaded();
@@ -351,9 +352,6 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
       ),
     );
   }
-
-  DateTime? _displayedPresenceTime(String personId, MeetingRosterEntry entry) =>
-      _optimisticPresence[personId] ?? entry.attendanceTime;
 
   MeetingRosterEntry _applyOptimistic(MeetingRosterEntry entry) {
     final shouldApplyOptimisticAttendance = _optimisticPresence.containsKey(
