@@ -42,22 +42,6 @@ final class RecordAttendanceLoaded extends RecordAttendanceState {
 
   final bool canToggleAudience;
 
-  const RecordAttendanceLoaded({
-    required this.meeting,
-    required this.selectedDate,
-    required this.view,
-    required this.canToggleAudience,
-    required this.filter,
-    required this.grouping,
-    required this.sort,
-    required this.rosterStatus,
-    required this.entries,
-    required this.gutterLetters,
-    required this.presentCount,
-    required this.eligibleCount,
-    this.searchQuery,
-  });
-
   int? get absentCount => (presentCount != null && eligibleCount != null)
       ? (eligibleCount! - presentCount!).clamp(0, eligibleCount!)
       : null;
@@ -78,4 +62,20 @@ final class RecordAttendanceLoaded extends RecordAttendanceState {
     presentCount,
     eligibleCount,
   ];
+
+  const RecordAttendanceLoaded({
+    required this.meeting,
+    required this.selectedDate,
+    required this.view,
+    required this.canToggleAudience,
+    required this.filter,
+    required this.grouping,
+    required this.sort,
+    required this.rosterStatus,
+    required this.entries,
+    required this.gutterLetters,
+    required this.presentCount,
+    required this.eligibleCount,
+    this.searchQuery,
+  });
 }
