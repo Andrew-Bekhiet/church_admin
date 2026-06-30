@@ -253,7 +253,10 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
           groupByStudyYear: _grouping == AttendanceGrouping.studyYear,
           limit: _rosterLimit,
         )
-        .listen(_onServerEntries, onError: _onRosterError);
+        .listen(
+          _onServerEntries,
+          onError: _onRosterError,
+        );
   }
 
   void _onServerEntries(List<MeetingRosterEntry> entries) {
@@ -298,7 +301,6 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
             _presentCount = count;
             if (state is RecordAttendanceLoaded) _emitLoaded();
           },
-          onDone: _eligibleCountSub?.cancel,
         );
   }
 
@@ -312,7 +314,6 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
             _eligibleCount = count;
             if (state is RecordAttendanceLoaded) _emitLoaded();
           },
-          onDone: _eligibleCountSub?.cancel,
         );
   }
 
