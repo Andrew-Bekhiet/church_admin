@@ -188,5 +188,6 @@
     "autoHide.autoHidePanel": true,
     "cSpell.words": ["Shammas"],
     "sqlfluff.excludeRules": ["RF06"],
+    "postman.settings.dotenv-detection-notification-visibility": false,
   },
 }

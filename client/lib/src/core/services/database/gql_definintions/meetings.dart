@@ -92,38 +92,26 @@ class MeetingsDAO extends DAOBase<Meeting>
         final search = request.param;
         final whereFilters = [
           if (search != null && search.isNotEmpty)
-            Input_HistoryMeetingsPersonsBoolExp(
-              person: Input_PersonsBoolExp(
-                $_or: [
-                  Input_PersonsBoolExp(
-                    name: Input_StringComparisonExp($_ilike: '%$search%'),
-                  ),
-                  Input_PersonsBoolExp(
-                    mainPhone: Input_StringComparisonExp(
-                      $_ilike: '%$search%',
-                    ),
-                  ),
-                ],
-              ),
+            Input_HistoryMeetingRosterBoolExp(
+              $_or: [
+                Input_HistoryMeetingRosterBoolExp(
+                  name: Input_StringComparisonExp($_ilike: '%$search%'),
+                ),
+                Input_HistoryMeetingRosterBoolExp(
+                  mainPhone: Input_StringComparisonExp($_ilike: '%$search%'),
+                ),
+              ],
             ),
           if (request.cursor case final cursor?)
-            Input_HistoryMeetingsPersonsBoolExp(
+            Input_HistoryMeetingRosterBoolExp(
               $_or: [
-                Input_HistoryMeetingsPersonsBoolExp(
-                  person: Input_PersonsBoolExp(
-                    name: Input_StringComparisonExp(
-                      $_gt: cursor.person.name,
-                    ),
-                  ),
+                Input_HistoryMeetingRosterBoolExp(
+                  name: Input_StringComparisonExp($_gt: cursor.person.name),
                 ),
-                Input_HistoryMeetingsPersonsBoolExp(
-                  person: Input_PersonsBoolExp(
-                    name: Input_StringComparisonExp(
-                      $_eq: cursor.person.name,
-                    ),
-                    id: Input_UuidComparisonExp(
-                      $_gt: cursor.person.id.toUuid(),
-                    ),
+                Input_HistoryMeetingRosterBoolExp(
+                  name: Input_StringComparisonExp($_eq: cursor.person.name),
+                  personId: Input_UuidComparisonExp(
+                    $_gt: cursor.person.id.toUuid(),
                   ),
                 ),
               ],
@@ -174,14 +162,19 @@ class MeetingsDAO extends DAOBase<Meeting>
     );
   }
 
-  /// Live count of persons eligible for [meetingId] via the `meeting_roster` view.
-  Stream<int?> streamEligibleCount({required String meetingId}) {
+  /// Live count of persons eligible for [meetingId] via the `meeting_roster`
+  /// view, scoped to the [asServant] audience.
+  Stream<int?> streamEligibleCount({
+    required String meetingId,
+    required bool asServant,
+  }) {
     return graphQLClient.subscribeAndReturnParsed(
       SubscriptionOptions(
         document: documentNodeSubscriptionwatchMeetingEligibleCount,
         operationName: 'watchMeetingEligibleCount',
         variables: Variables_Subscription_watchMeetingEligibleCount(
           meetingId: meetingId.toUuid(),
+          asServant: asServant,
         ).toJson(),
         parserFn: db.parser.countParser,
       ),
@@ -192,6 +185,7 @@ class MeetingsDAO extends DAOBase<Meeting>
   Future<AttendanceRecord?> markAttendance({
     required String meetingId,
     required String personId,
+    required DateTime datetime,
     bool asServant = false,
   }) {
     return graphQLClient.mutateAndReturnParsedNullable(
@@ -203,47 +197,10 @@ class MeetingsDAO extends DAOBase<Meeting>
             meetingId: meetingId.toUuid(),
             personId: personId.toUuid(),
             asServant: asServant,
+            datetime: datetime,
           ),
         ).toJson(),
         parserFn: db.parser.singleOrNullParser(AttendanceRecord.fromJson),
-      ),
-    );
-  }
-
-  /// Marks multiple persons as present at a meeting in a single request.
-  Future<void> markAttendanceMany({
-    required String meetingId,
-    required List<String> personIds,
-    bool asServant = false,
-  }) {
-    return graphQLClient.mutate(
-      MutationOptions(
-        document: documentNodeMutationmarkAttendanceMany,
-        operationName: 'markAttendanceMany',
-        variables: Variables_Mutation_markAttendanceMany(
-          objects: personIds
-              .map(
-                (id) => Input_HistoryAttendanceHistoryInsertInput(
-                  meetingId: meetingId.toUuid(),
-                  personId: id.toUuid(),
-                  asServant: asServant,
-                ),
-              )
-              .toList(),
-        ).toJson(),
-      ),
-    );
-  }
-
-  /// Unmarks attendance by the attendance record [id] (preferred when id is known).
-  Future<void> unmarkAttendance({required String id}) {
-    return graphQLClient.mutate(
-      MutationOptions(
-        document: documentNodeMutationunmarkAttendance,
-        operationName: 'unmarkAttendance',
-        variables: Variables_Mutation_unmarkAttendance(
-          id: id.toUuid(),
-        ).toJson(),
       ),
     );
   }

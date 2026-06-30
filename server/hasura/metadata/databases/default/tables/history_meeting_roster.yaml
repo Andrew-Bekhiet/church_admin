@@ -1,0 +1,132 @@
+table:
+  name: meeting_roster
+  schema: history
+array_relationships:
+  - name: attendanceHistory
+    using:
+      manual_configuration:
+        column_mapping:
+          meeting_id: meeting_id
+          person_id: person_id
+          as_servant: as_servant
+        insertion_order: null
+        remote_table:
+          name: attendance_history
+          schema: history
+object_relationships:
+  - name: meeting
+    using:
+      manual_configuration:
+        column_mapping:
+          meeting_id: id
+        insertion_order: null
+        remote_table:
+          name: meetings
+          schema: history
+  - name: person
+    using:
+      manual_configuration:
+        column_mapping:
+          person_id: id
+        insertion_order: null
+        remote_table:
+          name: persons
+          schema: public
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - meeting_id
+        - person_id
+        - as_servant
+        - name
+        - main_phone
+        - gender
+        - study_year_id
+        - study_year_name
+        - color
+        - photo_updated_at
+        - blurhash
+      # Visibility, gated on the view's own columns so we never traverse the
+      # `person` relationship (which would re-apply persons' per-row permission).
+      #
+      # A served row is visible when the recording admin's service/group scope
+      # covers that person's study-year / gender -- the recorder's mirror of the
+      # meeting-scope narrowing in the view's `served_in_services` CTE, resolved
+      # against the 27-row `users_admin_on` (indexed) instead of the 4,985-row
+      # persons scan. This is necessary because a meeting can be defined on a
+      # whole service while the recorder only administers a sub-scope of it
+      # (e.g. 3rd-grade boys), so a meeting-level check alone is too permissive.
+      #
+      # Servant rows are gated only on being an admin of the meeting: servant
+      # admins are usually not members of the scope they administer, so the
+      # recorder holds no service/group grant covering them.
+      #
+      # `service_id` / `group_id` are referenced here but intentionally omitted
+      # from `columns` -- they exist only to correlate the recorder's scope.
+      filter:
+        _or:
+          - _exists:
+              _table:
+                name: users_permissions
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - permission:
+                      _eq: readAllData
+          - _and:
+              - _exists:
+                  _table:
+                    name: users_admin_on_meetings
+                    schema: auth
+                  _where:
+                    _and:
+                      - uid:
+                          _eq: X-Hasura-User-Id
+                      - meeting_id:
+                          _ceq:
+                            - $
+                            - meeting_id
+              - _or:
+                  - as_servant:
+                      _eq: true
+                  - _exists:
+                      _table:
+                        name: users_admin_on
+                        schema: auth
+                      _where:
+                        _and:
+                          - uid:
+                              _eq: X-Hasura-User-Id
+                          - _or:
+                              - _and:
+                                  - admin_on_group:
+                                      _is_null: false
+                                  - admin_on_group:
+                                      _ceq:
+                                        - $
+                                        - group_id
+                              - _and:
+                                  - admin_on_service:
+                                      _is_null: false
+                                  - admin_on_service:
+                                      _ceq:
+                                        - $
+                                        - service_id
+                                  - _or:
+                                      - service_study_year:
+                                          _is_null: true
+                                      - service_study_year:
+                                          _ceq:
+                                            - $
+                                            - study_year_id
+                                  - _or:
+                                      - service_gender:
+                                          _is_null: true
+                                      - service_gender:
+                                          _ceq:
+                                            - $
+                                            - gender
+      allow_aggregations: true

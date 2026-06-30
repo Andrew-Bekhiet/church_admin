@@ -697,8 +697,8 @@ class Variables_Subscription_watchMeetingRoster {
     required bool asServant,
     required DateTime fromDate,
     required DateTime toDate,
-    List<Input_HistoryMeetingsPersonsBoolExp>? where,
-    List<Input_HistoryMeetingsPersonsOrderBy>? orderBy,
+    List<Input_HistoryMeetingRosterBoolExp>? where,
+    List<Input_HistoryMeetingRosterOrderBy>? orderBy,
     int? limit,
   }) => Variables_Subscription_watchMeetingRoster._({
     r'meetingId': meetingId,
@@ -728,7 +728,7 @@ class Variables_Subscription_watchMeetingRoster {
       final l$where = data['where'];
       result$data['where'] = (l$where as List<dynamic>?)
           ?.map(
-            (e) => Input_HistoryMeetingsPersonsBoolExp.fromJson(
+            (e) => Input_HistoryMeetingRosterBoolExp.fromJson(
               (e as Map<String, dynamic>),
             ),
           )
@@ -738,7 +738,7 @@ class Variables_Subscription_watchMeetingRoster {
       final l$orderBy = data['orderBy'];
       result$data['orderBy'] = (l$orderBy as List<dynamic>?)
           ?.map(
-            (e) => Input_HistoryMeetingsPersonsOrderBy.fromJson(
+            (e) => Input_HistoryMeetingRosterOrderBy.fromJson(
               (e as Map<String, dynamic>),
             ),
           )
@@ -761,11 +761,11 @@ class Variables_Subscription_watchMeetingRoster {
 
   DateTime get toDate => (_$data['toDate'] as DateTime);
 
-  List<Input_HistoryMeetingsPersonsBoolExp>? get where =>
-      (_$data['where'] as List<Input_HistoryMeetingsPersonsBoolExp>?);
+  List<Input_HistoryMeetingRosterBoolExp>? get where =>
+      (_$data['where'] as List<Input_HistoryMeetingRosterBoolExp>?);
 
-  List<Input_HistoryMeetingsPersonsOrderBy>? get orderBy =>
-      (_$data['orderBy'] as List<Input_HistoryMeetingsPersonsOrderBy>?);
+  List<Input_HistoryMeetingRosterOrderBy>? get orderBy =>
+      (_$data['orderBy'] as List<Input_HistoryMeetingRosterOrderBy>?);
 
   int? get limit => (_$data['limit'] as int?);
 
@@ -921,8 +921,8 @@ abstract class CopyWith_Variables_Subscription_watchMeetingRoster<TRes> {
     bool? asServant,
     DateTime? fromDate,
     DateTime? toDate,
-    List<Input_HistoryMeetingsPersonsBoolExp>? where,
-    List<Input_HistoryMeetingsPersonsOrderBy>? orderBy,
+    List<Input_HistoryMeetingRosterBoolExp>? where,
+    List<Input_HistoryMeetingRosterOrderBy>? orderBy,
     int? limit,
   });
 }
@@ -960,9 +960,9 @@ class _CopyWithImpl_Variables_Subscription_watchMeetingRoster<TRes>
       if (toDate != _undefined && toDate != null)
         'toDate': (toDate as DateTime),
       if (where != _undefined)
-        'where': (where as List<Input_HistoryMeetingsPersonsBoolExp>?),
+        'where': (where as List<Input_HistoryMeetingRosterBoolExp>?),
       if (orderBy != _undefined)
-        'orderBy': (orderBy as List<Input_HistoryMeetingsPersonsOrderBy>?),
+        'orderBy': (orderBy as List<Input_HistoryMeetingRosterOrderBy>?),
       if (limit != _undefined) 'limit': (limit as int?),
     }),
   );
@@ -979,22 +979,22 @@ class _CopyWithStubImpl_Variables_Subscription_watchMeetingRoster<TRes>
     bool? asServant,
     DateTime? fromDate,
     DateTime? toDate,
-    List<Input_HistoryMeetingsPersonsBoolExp>? where,
-    List<Input_HistoryMeetingsPersonsOrderBy>? orderBy,
+    List<Input_HistoryMeetingRosterBoolExp>? where,
+    List<Input_HistoryMeetingRosterOrderBy>? orderBy,
     int? limit,
   }) => _res;
 }
 
 class Subscription_watchMeetingRoster {
-  Subscription_watchMeetingRoster({required this.historyMeetingsPersons});
+  Subscription_watchMeetingRoster({required this.historyMeetingRoster});
 
   factory Subscription_watchMeetingRoster.fromJson(Map<String, dynamic> json) {
-    final l$historyMeetingsPersons = json['historyMeetingsPersons'];
+    final l$historyMeetingRoster = json['historyMeetingRoster'];
     return Subscription_watchMeetingRoster(
-      historyMeetingsPersons: (l$historyMeetingsPersons as List<dynamic>)
+      historyMeetingRoster: (l$historyMeetingRoster as List<dynamic>)
           .map(
             (e) =>
-                Subscription_watchMeetingRoster_historyMeetingsPersons.fromJson(
+                Subscription_watchMeetingRoster_historyMeetingRoster.fromJson(
                   (e as Map<String, dynamic>),
                 ),
           )
@@ -1002,13 +1002,13 @@ class Subscription_watchMeetingRoster {
     );
   }
 
-  final List<Subscription_watchMeetingRoster_historyMeetingsPersons>
-  historyMeetingsPersons;
+  final List<Subscription_watchMeetingRoster_historyMeetingRoster>
+  historyMeetingRoster;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
-    final l$historyMeetingsPersons = historyMeetingsPersons;
-    _resultData['historyMeetingsPersons'] = l$historyMeetingsPersons
+    final l$historyMeetingRoster = historyMeetingRoster;
+    _resultData['historyMeetingRoster'] = l$historyMeetingRoster
         .map((e) => e.toJson())
         .toList();
     return _resultData;
@@ -1016,9 +1016,9 @@ class Subscription_watchMeetingRoster {
 
   @override
   int get hashCode {
-    final l$historyMeetingsPersons = historyMeetingsPersons;
+    final l$historyMeetingRoster = historyMeetingRoster;
     return Object.hashAll([
-      Object.hashAll(l$historyMeetingsPersons.map((v) => v)),
+      Object.hashAll(l$historyMeetingRoster.map((v) => v)),
     ]);
   }
 
@@ -1031,18 +1031,15 @@ class Subscription_watchMeetingRoster {
         runtimeType != other.runtimeType) {
       return false;
     }
-    final l$historyMeetingsPersons = historyMeetingsPersons;
-    final lOther$historyMeetingsPersons = other.historyMeetingsPersons;
-    if (l$historyMeetingsPersons.length !=
-        lOther$historyMeetingsPersons.length) {
+    final l$historyMeetingRoster = historyMeetingRoster;
+    final lOther$historyMeetingRoster = other.historyMeetingRoster;
+    if (l$historyMeetingRoster.length != lOther$historyMeetingRoster.length) {
       return false;
     }
-    for (int i = 0; i < l$historyMeetingsPersons.length; i++) {
-      final l$historyMeetingsPersons$entry = l$historyMeetingsPersons[i];
-      final lOther$historyMeetingsPersons$entry =
-          lOther$historyMeetingsPersons[i];
-      if (l$historyMeetingsPersons$entry !=
-          lOther$historyMeetingsPersons$entry) {
+    for (int i = 0; i < l$historyMeetingRoster.length; i++) {
+      final l$historyMeetingRoster$entry = l$historyMeetingRoster[i];
+      final lOther$historyMeetingRoster$entry = lOther$historyMeetingRoster[i];
+      if (l$historyMeetingRoster$entry != lOther$historyMeetingRoster$entry) {
         return false;
       }
     }
@@ -1066,14 +1063,14 @@ abstract class CopyWith_Subscription_watchMeetingRoster<TRes> {
       _CopyWithStubImpl_Subscription_watchMeetingRoster;
 
   TRes call({
-    List<Subscription_watchMeetingRoster_historyMeetingsPersons>?
-    historyMeetingsPersons,
+    List<Subscription_watchMeetingRoster_historyMeetingRoster>?
+    historyMeetingRoster,
   });
-  TRes historyMeetingsPersons(
-    Iterable<Subscription_watchMeetingRoster_historyMeetingsPersons> Function(
+  TRes historyMeetingRoster(
+    Iterable<Subscription_watchMeetingRoster_historyMeetingRoster> Function(
       Iterable<
-        CopyWith_Subscription_watchMeetingRoster_historyMeetingsPersons<
-          Subscription_watchMeetingRoster_historyMeetingsPersons
+        CopyWith_Subscription_watchMeetingRoster_historyMeetingRoster<
+          Subscription_watchMeetingRoster_historyMeetingRoster
         >
       >,
     )
@@ -1091,31 +1088,29 @@ class _CopyWithImpl_Subscription_watchMeetingRoster<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? historyMeetingsPersons = _undefined}) => _then(
+  TRes call({Object? historyMeetingRoster = _undefined}) => _then(
     Subscription_watchMeetingRoster(
-      historyMeetingsPersons:
-          historyMeetingsPersons == _undefined || historyMeetingsPersons == null
-          ? _instance.historyMeetingsPersons
-          : (historyMeetingsPersons
-                as List<
-                  Subscription_watchMeetingRoster_historyMeetingsPersons
-                >),
+      historyMeetingRoster:
+          historyMeetingRoster == _undefined || historyMeetingRoster == null
+          ? _instance.historyMeetingRoster
+          : (historyMeetingRoster
+                as List<Subscription_watchMeetingRoster_historyMeetingRoster>),
     ),
   );
 
-  TRes historyMeetingsPersons(
-    Iterable<Subscription_watchMeetingRoster_historyMeetingsPersons> Function(
+  TRes historyMeetingRoster(
+    Iterable<Subscription_watchMeetingRoster_historyMeetingRoster> Function(
       Iterable<
-        CopyWith_Subscription_watchMeetingRoster_historyMeetingsPersons<
-          Subscription_watchMeetingRoster_historyMeetingsPersons
+        CopyWith_Subscription_watchMeetingRoster_historyMeetingRoster<
+          Subscription_watchMeetingRoster_historyMeetingRoster
         >
       >,
     )
     _fn,
   ) => call(
-    historyMeetingsPersons: _fn(
-      _instance.historyMeetingsPersons.map(
-        (e) => CopyWith_Subscription_watchMeetingRoster_historyMeetingsPersons(
+    historyMeetingRoster: _fn(
+      _instance.historyMeetingRoster.map(
+        (e) => CopyWith_Subscription_watchMeetingRoster_historyMeetingRoster(
           e,
           (i) => i,
         ),
@@ -1131,11 +1126,11 @@ class _CopyWithStubImpl_Subscription_watchMeetingRoster<TRes>
   TRes _res;
 
   call({
-    List<Subscription_watchMeetingRoster_historyMeetingsPersons>?
-    historyMeetingsPersons,
+    List<Subscription_watchMeetingRoster_historyMeetingRoster>?
+    historyMeetingRoster,
   }) => _res;
 
-  historyMeetingsPersons(_fn) => _res;
+  historyMeetingRoster(_fn) => _res;
 }
 
 const documentNodeSubscriptionwatchMeetingRoster = DocumentNode(
@@ -1181,7 +1176,7 @@ const documentNodeSubscriptionwatchMeetingRoster = DocumentNode(
           variable: VariableNode(name: NameNode(value: 'where')),
           type: ListTypeNode(
             type: NamedTypeNode(
-              name: NameNode(value: 'HistoryMeetingsPersonsBoolExp'),
+              name: NameNode(value: 'HistoryMeetingRosterBoolExp'),
               isNonNull: true,
             ),
             isNonNull: false,
@@ -1193,7 +1188,7 @@ const documentNodeSubscriptionwatchMeetingRoster = DocumentNode(
           variable: VariableNode(name: NameNode(value: 'orderBy')),
           type: ListTypeNode(
             type: NamedTypeNode(
-              name: NameNode(value: 'HistoryMeetingsPersonsOrderBy'),
+              name: NameNode(value: 'HistoryMeetingRosterOrderBy'),
               isNonNull: true,
             ),
             isNonNull: false,
@@ -1204,30 +1199,16 @@ const documentNodeSubscriptionwatchMeetingRoster = DocumentNode(
                 ObjectValueNode(
                   fields: [
                     ObjectFieldNode(
-                      name: NameNode(value: 'person'),
-                      value: ObjectValueNode(
-                        fields: [
-                          ObjectFieldNode(
-                            name: NameNode(value: 'name'),
-                            value: EnumValueNode(name: NameNode(value: 'ASC')),
-                          ),
-                        ],
-                      ),
+                      name: NameNode(value: 'name'),
+                      value: EnumValueNode(name: NameNode(value: 'ASC')),
                     ),
                   ],
                 ),
                 ObjectValueNode(
                   fields: [
                     ObjectFieldNode(
-                      name: NameNode(value: 'person'),
-                      value: ObjectValueNode(
-                        fields: [
-                          ObjectFieldNode(
-                            name: NameNode(value: 'id'),
-                            value: EnumValueNode(name: NameNode(value: 'ASC')),
-                          ),
-                        ],
-                      ),
+                      name: NameNode(value: 'personId'),
+                      value: EnumValueNode(name: NameNode(value: 'ASC')),
                     ),
                   ],
                 ),
@@ -1247,7 +1228,7 @@ const documentNodeSubscriptionwatchMeetingRoster = DocumentNode(
       selectionSet: SelectionSetNode(
         selections: [
           FieldNode(
-            name: NameNode(value: 'historyMeetingsPersons'),
+            name: NameNode(value: 'historyMeetingRoster'),
             alias: null,
             arguments: [
               ArgumentNode(
@@ -1262,6 +1243,19 @@ const documentNodeSubscriptionwatchMeetingRoster = DocumentNode(
                             name: NameNode(value: '_eq'),
                             value: VariableNode(
                               name: NameNode(value: 'meetingId'),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    ObjectFieldNode(
+                      name: NameNode(value: 'asServant'),
+                      value: ObjectValueNode(
+                        fields: [
+                          ObjectFieldNode(
+                            name: NameNode(value: '_eq'),
+                            value: VariableNode(
+                              name: NameNode(value: 'asServant'),
                             ),
                           ),
                         ],
@@ -1287,77 +1281,67 @@ const documentNodeSubscriptionwatchMeetingRoster = DocumentNode(
             selectionSet: SelectionSetNode(
               selections: [
                 FieldNode(
-                  name: NameNode(value: 'person'),
+                  name: NameNode(value: 'personId'),
                   alias: null,
                   arguments: [],
                   directives: [],
-                  selectionSet: SelectionSetNode(
-                    selections: [
-                      FieldNode(
-                        name: NameNode(value: 'id'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null,
-                      ),
-                      FieldNode(
-                        name: NameNode(value: 'name'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null,
-                      ),
-                      FieldNode(
-                        name: NameNode(value: 'mainPhone'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null,
-                      ),
-                      FieldNode(
-                        name: NameNode(value: 'gender'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null,
-                      ),
-                      FieldNode(
-                        name: NameNode(value: 'color'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null,
-                      ),
-                      FieldNode(
-                        name: NameNode(value: 'studyYearId'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null,
-                      ),
-                      FieldNode(
-                        name: NameNode(value: 'photoUpdatedAt'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null,
-                      ),
-                      FieldNode(
-                        name: NameNode(value: 'blurhash'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null,
-                      ),
-                      FieldNode(
-                        name: NameNode(value: '__typename'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null,
-                      ),
-                    ],
-                  ),
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: 'name'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: 'mainPhone'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: 'gender'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: 'color'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: 'studyYearId'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: 'studyYearName'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: 'photoUpdatedAt'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: 'blurhash'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
                 ),
                 FieldNode(
                   name: NameNode(value: 'attendanceHistory'),
@@ -1367,19 +1351,6 @@ const documentNodeSubscriptionwatchMeetingRoster = DocumentNode(
                       name: NameNode(value: 'where'),
                       value: ObjectValueNode(
                         fields: [
-                          ObjectFieldNode(
-                            name: NameNode(value: 'asServant'),
-                            value: ObjectValueNode(
-                              fields: [
-                                ObjectFieldNode(
-                                  name: NameNode(value: '_eq'),
-                                  value: VariableNode(
-                                    name: NameNode(value: 'asServant'),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
                           ObjectFieldNode(
                             name: NameNode(value: 'datetime'),
                             value: ObjectValueNode(
@@ -1488,29 +1459,51 @@ const documentNodeSubscriptionwatchMeetingRoster = DocumentNode(
   ],
 );
 
-class Subscription_watchMeetingRoster_historyMeetingsPersons {
-  Subscription_watchMeetingRoster_historyMeetingsPersons({
-    this.person,
+class Subscription_watchMeetingRoster_historyMeetingRoster {
+  Subscription_watchMeetingRoster_historyMeetingRoster({
+    this.personId,
+    this.name,
+    this.mainPhone,
+    this.gender,
+    this.color,
+    this.studyYearId,
+    this.studyYearName,
+    this.photoUpdatedAt,
+    this.blurhash,
     required this.attendanceHistory,
-    this.$__typename = 'HistoryMeetingsPersons',
+    this.$__typename = 'HistoryMeetingRoster',
   });
 
-  factory Subscription_watchMeetingRoster_historyMeetingsPersons.fromJson(
+  factory Subscription_watchMeetingRoster_historyMeetingRoster.fromJson(
     Map<String, dynamic> json,
   ) {
-    final l$person = json['person'];
+    final l$personId = json['personId'];
+    final l$name = json['name'];
+    final l$mainPhone = json['mainPhone'];
+    final l$gender = json['gender'];
+    final l$color = json['color'];
+    final l$studyYearId = json['studyYearId'];
+    final l$studyYearName = json['studyYearName'];
+    final l$photoUpdatedAt = json['photoUpdatedAt'];
+    final l$blurhash = json['blurhash'];
     final l$attendanceHistory = json['attendanceHistory'];
     final l$$__typename = json['__typename'];
-    return Subscription_watchMeetingRoster_historyMeetingsPersons(
-      person: l$person == null
+    return Subscription_watchMeetingRoster_historyMeetingRoster(
+      personId: l$personId == null ? null : stringToUuid(l$personId),
+      name: (l$name as String?),
+      mainPhone: (l$mainPhone as String?),
+      gender: (l$gender as bool?),
+      color: (l$color as int?),
+      studyYearId: (l$studyYearId as int?),
+      studyYearName: (l$studyYearName as String?),
+      photoUpdatedAt: l$photoUpdatedAt == null
           ? null
-          : Subscription_watchMeetingRoster_historyMeetingsPersons_person.fromJson(
-              (l$person as Map<String, dynamic>),
-            ),
+          : tstzFromString(l$photoUpdatedAt),
+      blurhash: (l$blurhash as String?),
       attendanceHistory: (l$attendanceHistory as List<dynamic>)
           .map(
             (e) =>
-                Subscription_watchMeetingRoster_historyMeetingsPersons_attendanceHistory.fromJson(
+                Subscription_watchMeetingRoster_historyMeetingRoster_attendanceHistory.fromJson(
                   (e as Map<String, dynamic>),
                 ),
           )
@@ -1519,10 +1512,26 @@ class Subscription_watchMeetingRoster_historyMeetingsPersons {
     );
   }
 
-  final Subscription_watchMeetingRoster_historyMeetingsPersons_person? person;
+  final UuidValue? personId;
+
+  final String? name;
+
+  final String? mainPhone;
+
+  final bool? gender;
+
+  final int? color;
+
+  final int? studyYearId;
+
+  final String? studyYearName;
+
+  final DateTime? photoUpdatedAt;
+
+  final String? blurhash;
 
   final List<
-    Subscription_watchMeetingRoster_historyMeetingsPersons_attendanceHistory
+    Subscription_watchMeetingRoster_historyMeetingRoster_attendanceHistory
   >
   attendanceHistory;
 
@@ -1530,8 +1539,28 @@ class Subscription_watchMeetingRoster_historyMeetingsPersons {
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
-    final l$person = person;
-    _resultData['person'] = l$person?.toJson();
+    final l$personId = personId;
+    _resultData['personId'] = l$personId == null
+        ? null
+        : uuidToString(l$personId);
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$mainPhone = mainPhone;
+    _resultData['mainPhone'] = l$mainPhone;
+    final l$gender = gender;
+    _resultData['gender'] = l$gender;
+    final l$color = color;
+    _resultData['color'] = l$color;
+    final l$studyYearId = studyYearId;
+    _resultData['studyYearId'] = l$studyYearId;
+    final l$studyYearName = studyYearName;
+    _resultData['studyYearName'] = l$studyYearName;
+    final l$photoUpdatedAt = photoUpdatedAt;
+    _resultData['photoUpdatedAt'] = l$photoUpdatedAt == null
+        ? null
+        : tstzToString(l$photoUpdatedAt);
+    final l$blurhash = blurhash;
+    _resultData['blurhash'] = l$blurhash;
     final l$attendanceHistory = attendanceHistory;
     _resultData['attendanceHistory'] = l$attendanceHistory
         .map((e) => e.toJson())
@@ -1543,11 +1572,27 @@ class Subscription_watchMeetingRoster_historyMeetingsPersons {
 
   @override
   int get hashCode {
-    final l$person = person;
+    final l$personId = personId;
+    final l$name = name;
+    final l$mainPhone = mainPhone;
+    final l$gender = gender;
+    final l$color = color;
+    final l$studyYearId = studyYearId;
+    final l$studyYearName = studyYearName;
+    final l$photoUpdatedAt = photoUpdatedAt;
+    final l$blurhash = blurhash;
     final l$attendanceHistory = attendanceHistory;
     final l$$__typename = $__typename;
     return Object.hashAll([
-      l$person,
+      l$personId,
+      l$name,
+      l$mainPhone,
+      l$gender,
+      l$color,
+      l$studyYearId,
+      l$studyYearName,
+      l$photoUpdatedAt,
+      l$blurhash,
       Object.hashAll(l$attendanceHistory.map((v) => v)),
       l$$__typename,
     ]);
@@ -1558,310 +1603,13 @@ class Subscription_watchMeetingRoster_historyMeetingsPersons {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Subscription_watchMeetingRoster_historyMeetingsPersons ||
+    if (other is! Subscription_watchMeetingRoster_historyMeetingRoster ||
         runtimeType != other.runtimeType) {
       return false;
     }
-    final l$person = person;
-    final lOther$person = other.person;
-    if (l$person != lOther$person) {
-      return false;
-    }
-    final l$attendanceHistory = attendanceHistory;
-    final lOther$attendanceHistory = other.attendanceHistory;
-    if (l$attendanceHistory.length != lOther$attendanceHistory.length) {
-      return false;
-    }
-    for (int i = 0; i < l$attendanceHistory.length; i++) {
-      final l$attendanceHistory$entry = l$attendanceHistory[i];
-      final lOther$attendanceHistory$entry = lOther$attendanceHistory[i];
-      if (l$attendanceHistory$entry != lOther$attendanceHistory$entry) {
-        return false;
-      }
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension_Subscription_watchMeetingRoster_historyMeetingsPersons
-    on Subscription_watchMeetingRoster_historyMeetingsPersons {
-  CopyWith_Subscription_watchMeetingRoster_historyMeetingsPersons<
-    Subscription_watchMeetingRoster_historyMeetingsPersons
-  >
-  get copyWith =>
-      CopyWith_Subscription_watchMeetingRoster_historyMeetingsPersons(
-        this,
-        (i) => i,
-      );
-}
-
-abstract class CopyWith_Subscription_watchMeetingRoster_historyMeetingsPersons<
-  TRes
-> {
-  factory CopyWith_Subscription_watchMeetingRoster_historyMeetingsPersons(
-    Subscription_watchMeetingRoster_historyMeetingsPersons instance,
-    TRes Function(Subscription_watchMeetingRoster_historyMeetingsPersons) then,
-  ) = _CopyWithImpl_Subscription_watchMeetingRoster_historyMeetingsPersons;
-
-  factory CopyWith_Subscription_watchMeetingRoster_historyMeetingsPersons.stub(
-    TRes res,
-  ) = _CopyWithStubImpl_Subscription_watchMeetingRoster_historyMeetingsPersons;
-
-  TRes call({
-    Subscription_watchMeetingRoster_historyMeetingsPersons_person? person,
-    List<
-      Subscription_watchMeetingRoster_historyMeetingsPersons_attendanceHistory
-    >?
-    attendanceHistory,
-    String? $__typename,
-  });
-  CopyWith_Subscription_watchMeetingRoster_historyMeetingsPersons_person<TRes>
-  get person;
-  TRes attendanceHistory(
-    Iterable<
-      Subscription_watchMeetingRoster_historyMeetingsPersons_attendanceHistory
-    >
-    Function(
-      Iterable<
-        CopyWith_Subscription_watchMeetingRoster_historyMeetingsPersons_attendanceHistory<
-          Subscription_watchMeetingRoster_historyMeetingsPersons_attendanceHistory
-        >
-      >,
-    )
-    _fn,
-  );
-}
-
-class _CopyWithImpl_Subscription_watchMeetingRoster_historyMeetingsPersons<TRes>
-    implements
-        CopyWith_Subscription_watchMeetingRoster_historyMeetingsPersons<TRes> {
-  _CopyWithImpl_Subscription_watchMeetingRoster_historyMeetingsPersons(
-    this._instance,
-    this._then,
-  );
-
-  final Subscription_watchMeetingRoster_historyMeetingsPersons _instance;
-
-  final TRes Function(Subscription_watchMeetingRoster_historyMeetingsPersons)
-  _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? person = _undefined,
-    Object? attendanceHistory = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
-    Subscription_watchMeetingRoster_historyMeetingsPersons(
-      person: person == _undefined
-          ? _instance.person
-          : (person
-                as Subscription_watchMeetingRoster_historyMeetingsPersons_person?),
-      attendanceHistory:
-          attendanceHistory == _undefined || attendanceHistory == null
-          ? _instance.attendanceHistory
-          : (attendanceHistory
-                as List<
-                  Subscription_watchMeetingRoster_historyMeetingsPersons_attendanceHistory
-                >),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
-    ),
-  );
-
-  CopyWith_Subscription_watchMeetingRoster_historyMeetingsPersons_person<TRes>
-  get person {
-    final local$person = _instance.person;
-    return local$person == null
-        ? CopyWith_Subscription_watchMeetingRoster_historyMeetingsPersons_person.stub(
-            _then(_instance),
-          )
-        : CopyWith_Subscription_watchMeetingRoster_historyMeetingsPersons_person(
-            local$person,
-            (e) => call(person: e),
-          );
-  }
-
-  TRes attendanceHistory(
-    Iterable<
-      Subscription_watchMeetingRoster_historyMeetingsPersons_attendanceHistory
-    >
-    Function(
-      Iterable<
-        CopyWith_Subscription_watchMeetingRoster_historyMeetingsPersons_attendanceHistory<
-          Subscription_watchMeetingRoster_historyMeetingsPersons_attendanceHistory
-        >
-      >,
-    )
-    _fn,
-  ) => call(
-    attendanceHistory: _fn(
-      _instance.attendanceHistory.map(
-        (e) =>
-            CopyWith_Subscription_watchMeetingRoster_historyMeetingsPersons_attendanceHistory(
-              e,
-              (i) => i,
-            ),
-      ),
-    ).toList(),
-  );
-}
-
-class _CopyWithStubImpl_Subscription_watchMeetingRoster_historyMeetingsPersons<
-  TRes
->
-    implements
-        CopyWith_Subscription_watchMeetingRoster_historyMeetingsPersons<TRes> {
-  _CopyWithStubImpl_Subscription_watchMeetingRoster_historyMeetingsPersons(
-    this._res,
-  );
-
-  TRes _res;
-
-  call({
-    Subscription_watchMeetingRoster_historyMeetingsPersons_person? person,
-    List<
-      Subscription_watchMeetingRoster_historyMeetingsPersons_attendanceHistory
-    >?
-    attendanceHistory,
-    String? $__typename,
-  }) => _res;
-
-  CopyWith_Subscription_watchMeetingRoster_historyMeetingsPersons_person<TRes>
-  get person =>
-      CopyWith_Subscription_watchMeetingRoster_historyMeetingsPersons_person.stub(
-        _res,
-      );
-
-  attendanceHistory(_fn) => _res;
-}
-
-class Subscription_watchMeetingRoster_historyMeetingsPersons_person {
-  Subscription_watchMeetingRoster_historyMeetingsPersons_person({
-    required this.id,
-    required this.name,
-    this.mainPhone,
-    required this.gender,
-    this.color,
-    this.studyYearId,
-    this.photoUpdatedAt,
-    this.blurhash,
-    this.$__typename = 'Persons',
-  });
-
-  factory Subscription_watchMeetingRoster_historyMeetingsPersons_person.fromJson(
-    Map<String, dynamic> json,
-  ) {
-    final l$id = json['id'];
-    final l$name = json['name'];
-    final l$mainPhone = json['mainPhone'];
-    final l$gender = json['gender'];
-    final l$color = json['color'];
-    final l$studyYearId = json['studyYearId'];
-    final l$photoUpdatedAt = json['photoUpdatedAt'];
-    final l$blurhash = json['blurhash'];
-    final l$$__typename = json['__typename'];
-    return Subscription_watchMeetingRoster_historyMeetingsPersons_person(
-      id: stringToUuid(l$id),
-      name: (l$name as String),
-      mainPhone: (l$mainPhone as String?),
-      gender: (l$gender as bool),
-      color: (l$color as int?),
-      studyYearId: (l$studyYearId as int?),
-      photoUpdatedAt: l$photoUpdatedAt == null
-          ? null
-          : tstzFromString(l$photoUpdatedAt),
-      blurhash: (l$blurhash as String?),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final UuidValue id;
-
-  final String name;
-
-  final String? mainPhone;
-
-  final bool gender;
-
-  final int? color;
-
-  final int? studyYearId;
-
-  final DateTime? photoUpdatedAt;
-
-  final String? blurhash;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$id = id;
-    _resultData['id'] = uuidToString(l$id);
-    final l$name = name;
-    _resultData['name'] = l$name;
-    final l$mainPhone = mainPhone;
-    _resultData['mainPhone'] = l$mainPhone;
-    final l$gender = gender;
-    _resultData['gender'] = l$gender;
-    final l$color = color;
-    _resultData['color'] = l$color;
-    final l$studyYearId = studyYearId;
-    _resultData['studyYearId'] = l$studyYearId;
-    final l$photoUpdatedAt = photoUpdatedAt;
-    _resultData['photoUpdatedAt'] = l$photoUpdatedAt == null
-        ? null
-        : tstzToString(l$photoUpdatedAt);
-    final l$blurhash = blurhash;
-    _resultData['blurhash'] = l$blurhash;
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$id = id;
-    final l$name = name;
-    final l$mainPhone = mainPhone;
-    final l$gender = gender;
-    final l$color = color;
-    final l$studyYearId = studyYearId;
-    final l$photoUpdatedAt = photoUpdatedAt;
-    final l$blurhash = blurhash;
-    final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$id,
-      l$name,
-      l$mainPhone,
-      l$gender,
-      l$color,
-      l$studyYearId,
-      l$photoUpdatedAt,
-      l$blurhash,
-      l$$__typename,
-    ]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other
-            is! Subscription_watchMeetingRoster_historyMeetingsPersons_person ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$id = id;
-    final lOther$id = other.id;
-    if (l$id != lOther$id) {
+    final l$personId = personId;
+    final lOther$personId = other.personId;
+    if (l$personId != lOther$personId) {
       return false;
     }
     final l$name = name;
@@ -1889,6 +1637,11 @@ class Subscription_watchMeetingRoster_historyMeetingsPersons_person {
     if (l$studyYearId != lOther$studyYearId) {
       return false;
     }
+    final l$studyYearName = studyYearName;
+    final lOther$studyYearName = other.studyYearName;
+    if (l$studyYearName != lOther$studyYearName) {
+      return false;
+    }
     final l$photoUpdatedAt = photoUpdatedAt;
     final lOther$photoUpdatedAt = other.photoUpdatedAt;
     if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
@@ -1899,6 +1652,18 @@ class Subscription_watchMeetingRoster_historyMeetingsPersons_person {
     if (l$blurhash != lOther$blurhash) {
       return false;
     }
+    final l$attendanceHistory = attendanceHistory;
+    final lOther$attendanceHistory = other.attendanceHistory;
+    if (l$attendanceHistory.length != lOther$attendanceHistory.length) {
+      return false;
+    }
+    for (int i = 0; i < l$attendanceHistory.length; i++) {
+      final l$attendanceHistory$entry = l$attendanceHistory[i];
+      final lOther$attendanceHistory$entry = lOther$attendanceHistory[i];
+      if (l$attendanceHistory$entry != lOther$attendanceHistory$entry) {
+        return false;
+      }
+    }
     final l$$__typename = $__typename;
     final lOther$$__typename = other.$__typename;
     if (l$$__typename != lOther$$__typename) {
@@ -1908,132 +1673,181 @@ class Subscription_watchMeetingRoster_historyMeetingsPersons_person {
   }
 }
 
-extension UtilityExtension_Subscription_watchMeetingRoster_historyMeetingsPersons_person
-    on Subscription_watchMeetingRoster_historyMeetingsPersons_person {
-  CopyWith_Subscription_watchMeetingRoster_historyMeetingsPersons_person<
-    Subscription_watchMeetingRoster_historyMeetingsPersons_person
+extension UtilityExtension_Subscription_watchMeetingRoster_historyMeetingRoster
+    on Subscription_watchMeetingRoster_historyMeetingRoster {
+  CopyWith_Subscription_watchMeetingRoster_historyMeetingRoster<
+    Subscription_watchMeetingRoster_historyMeetingRoster
   >
-  get copyWith =>
-      CopyWith_Subscription_watchMeetingRoster_historyMeetingsPersons_person(
-        this,
-        (i) => i,
-      );
+  get copyWith => CopyWith_Subscription_watchMeetingRoster_historyMeetingRoster(
+    this,
+    (i) => i,
+  );
 }
 
-abstract class CopyWith_Subscription_watchMeetingRoster_historyMeetingsPersons_person<
+abstract class CopyWith_Subscription_watchMeetingRoster_historyMeetingRoster<
   TRes
 > {
-  factory CopyWith_Subscription_watchMeetingRoster_historyMeetingsPersons_person(
-    Subscription_watchMeetingRoster_historyMeetingsPersons_person instance,
-    TRes Function(Subscription_watchMeetingRoster_historyMeetingsPersons_person)
-    then,
-  ) = _CopyWithImpl_Subscription_watchMeetingRoster_historyMeetingsPersons_person;
+  factory CopyWith_Subscription_watchMeetingRoster_historyMeetingRoster(
+    Subscription_watchMeetingRoster_historyMeetingRoster instance,
+    TRes Function(Subscription_watchMeetingRoster_historyMeetingRoster) then,
+  ) = _CopyWithImpl_Subscription_watchMeetingRoster_historyMeetingRoster;
 
-  factory CopyWith_Subscription_watchMeetingRoster_historyMeetingsPersons_person.stub(
+  factory CopyWith_Subscription_watchMeetingRoster_historyMeetingRoster.stub(
     TRes res,
-  ) = _CopyWithStubImpl_Subscription_watchMeetingRoster_historyMeetingsPersons_person;
+  ) = _CopyWithStubImpl_Subscription_watchMeetingRoster_historyMeetingRoster;
 
   TRes call({
-    UuidValue? id,
+    UuidValue? personId,
     String? name,
     String? mainPhone,
     bool? gender,
     int? color,
     int? studyYearId,
+    String? studyYearName,
     DateTime? photoUpdatedAt,
     String? blurhash,
+    List<
+      Subscription_watchMeetingRoster_historyMeetingRoster_attendanceHistory
+    >?
+    attendanceHistory,
     String? $__typename,
   });
+  TRes attendanceHistory(
+    Iterable<
+      Subscription_watchMeetingRoster_historyMeetingRoster_attendanceHistory
+    >
+    Function(
+      Iterable<
+        CopyWith_Subscription_watchMeetingRoster_historyMeetingRoster_attendanceHistory<
+          Subscription_watchMeetingRoster_historyMeetingRoster_attendanceHistory
+        >
+      >,
+    )
+    _fn,
+  );
 }
 
-class _CopyWithImpl_Subscription_watchMeetingRoster_historyMeetingsPersons_person<
-  TRes
->
+class _CopyWithImpl_Subscription_watchMeetingRoster_historyMeetingRoster<TRes>
     implements
-        CopyWith_Subscription_watchMeetingRoster_historyMeetingsPersons_person<
-          TRes
-        > {
-  _CopyWithImpl_Subscription_watchMeetingRoster_historyMeetingsPersons_person(
+        CopyWith_Subscription_watchMeetingRoster_historyMeetingRoster<TRes> {
+  _CopyWithImpl_Subscription_watchMeetingRoster_historyMeetingRoster(
     this._instance,
     this._then,
   );
 
-  final Subscription_watchMeetingRoster_historyMeetingsPersons_person _instance;
+  final Subscription_watchMeetingRoster_historyMeetingRoster _instance;
 
-  final TRes Function(
-    Subscription_watchMeetingRoster_historyMeetingsPersons_person,
-  )
+  final TRes Function(Subscription_watchMeetingRoster_historyMeetingRoster)
   _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
-    Object? id = _undefined,
+    Object? personId = _undefined,
     Object? name = _undefined,
     Object? mainPhone = _undefined,
     Object? gender = _undefined,
     Object? color = _undefined,
     Object? studyYearId = _undefined,
+    Object? studyYearName = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? blurhash = _undefined,
+    Object? attendanceHistory = _undefined,
     Object? $__typename = _undefined,
   }) => _then(
-    Subscription_watchMeetingRoster_historyMeetingsPersons_person(
-      id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
-      name: name == _undefined || name == null
-          ? _instance.name
-          : (name as String),
+    Subscription_watchMeetingRoster_historyMeetingRoster(
+      personId: personId == _undefined
+          ? _instance.personId
+          : (personId as UuidValue?),
+      name: name == _undefined ? _instance.name : (name as String?),
       mainPhone: mainPhone == _undefined
           ? _instance.mainPhone
           : (mainPhone as String?),
-      gender: gender == _undefined || gender == null
-          ? _instance.gender
-          : (gender as bool),
+      gender: gender == _undefined ? _instance.gender : (gender as bool?),
       color: color == _undefined ? _instance.color : (color as int?),
       studyYearId: studyYearId == _undefined
           ? _instance.studyYearId
           : (studyYearId as int?),
+      studyYearName: studyYearName == _undefined
+          ? _instance.studyYearName
+          : (studyYearName as String?),
       photoUpdatedAt: photoUpdatedAt == _undefined
           ? _instance.photoUpdatedAt
           : (photoUpdatedAt as DateTime?),
       blurhash: blurhash == _undefined
           ? _instance.blurhash
           : (blurhash as String?),
+      attendanceHistory:
+          attendanceHistory == _undefined || attendanceHistory == null
+          ? _instance.attendanceHistory
+          : (attendanceHistory
+                as List<
+                  Subscription_watchMeetingRoster_historyMeetingRoster_attendanceHistory
+                >),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
     ),
   );
+
+  TRes attendanceHistory(
+    Iterable<
+      Subscription_watchMeetingRoster_historyMeetingRoster_attendanceHistory
+    >
+    Function(
+      Iterable<
+        CopyWith_Subscription_watchMeetingRoster_historyMeetingRoster_attendanceHistory<
+          Subscription_watchMeetingRoster_historyMeetingRoster_attendanceHistory
+        >
+      >,
+    )
+    _fn,
+  ) => call(
+    attendanceHistory: _fn(
+      _instance.attendanceHistory.map(
+        (e) =>
+            CopyWith_Subscription_watchMeetingRoster_historyMeetingRoster_attendanceHistory(
+              e,
+              (i) => i,
+            ),
+      ),
+    ).toList(),
+  );
 }
 
-class _CopyWithStubImpl_Subscription_watchMeetingRoster_historyMeetingsPersons_person<
+class _CopyWithStubImpl_Subscription_watchMeetingRoster_historyMeetingRoster<
   TRes
 >
     implements
-        CopyWith_Subscription_watchMeetingRoster_historyMeetingsPersons_person<
-          TRes
-        > {
-  _CopyWithStubImpl_Subscription_watchMeetingRoster_historyMeetingsPersons_person(
+        CopyWith_Subscription_watchMeetingRoster_historyMeetingRoster<TRes> {
+  _CopyWithStubImpl_Subscription_watchMeetingRoster_historyMeetingRoster(
     this._res,
   );
 
   TRes _res;
 
   call({
-    UuidValue? id,
+    UuidValue? personId,
     String? name,
     String? mainPhone,
     bool? gender,
     int? color,
     int? studyYearId,
+    String? studyYearName,
     DateTime? photoUpdatedAt,
     String? blurhash,
+    List<
+      Subscription_watchMeetingRoster_historyMeetingRoster_attendanceHistory
+    >?
+    attendanceHistory,
     String? $__typename,
   }) => _res;
+
+  attendanceHistory(_fn) => _res;
 }
 
-class Subscription_watchMeetingRoster_historyMeetingsPersons_attendanceHistory {
-  Subscription_watchMeetingRoster_historyMeetingsPersons_attendanceHistory({
+class Subscription_watchMeetingRoster_historyMeetingRoster_attendanceHistory {
+  Subscription_watchMeetingRoster_historyMeetingRoster_attendanceHistory({
     required this.id,
     required this.meetingId,
     required this.personId,
@@ -2042,7 +1856,7 @@ class Subscription_watchMeetingRoster_historyMeetingsPersons_attendanceHistory {
     this.$__typename = 'HistoryAttendanceHistory',
   });
 
-  factory Subscription_watchMeetingRoster_historyMeetingsPersons_attendanceHistory.fromJson(
+  factory Subscription_watchMeetingRoster_historyMeetingRoster_attendanceHistory.fromJson(
     Map<String, dynamic> json,
   ) {
     final l$id = json['id'];
@@ -2051,7 +1865,7 @@ class Subscription_watchMeetingRoster_historyMeetingsPersons_attendanceHistory {
     final l$datetime = json['datetime'];
     final l$asServant = json['asServant'];
     final l$$__typename = json['__typename'];
-    return Subscription_watchMeetingRoster_historyMeetingsPersons_attendanceHistory(
+    return Subscription_watchMeetingRoster_historyMeetingRoster_attendanceHistory(
       id: stringToUuid(l$id),
       meetingId: stringToUuid(l$meetingId),
       personId: stringToUuid(l$personId),
@@ -2114,7 +1928,7 @@ class Subscription_watchMeetingRoster_historyMeetingsPersons_attendanceHistory {
       return true;
     }
     if (other
-            is! Subscription_watchMeetingRoster_historyMeetingsPersons_attendanceHistory ||
+            is! Subscription_watchMeetingRoster_historyMeetingRoster_attendanceHistory ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -2152,33 +1966,33 @@ class Subscription_watchMeetingRoster_historyMeetingsPersons_attendanceHistory {
   }
 }
 
-extension UtilityExtension_Subscription_watchMeetingRoster_historyMeetingsPersons_attendanceHistory
-    on Subscription_watchMeetingRoster_historyMeetingsPersons_attendanceHistory {
-  CopyWith_Subscription_watchMeetingRoster_historyMeetingsPersons_attendanceHistory<
-    Subscription_watchMeetingRoster_historyMeetingsPersons_attendanceHistory
+extension UtilityExtension_Subscription_watchMeetingRoster_historyMeetingRoster_attendanceHistory
+    on Subscription_watchMeetingRoster_historyMeetingRoster_attendanceHistory {
+  CopyWith_Subscription_watchMeetingRoster_historyMeetingRoster_attendanceHistory<
+    Subscription_watchMeetingRoster_historyMeetingRoster_attendanceHistory
   >
   get copyWith =>
-      CopyWith_Subscription_watchMeetingRoster_historyMeetingsPersons_attendanceHistory(
+      CopyWith_Subscription_watchMeetingRoster_historyMeetingRoster_attendanceHistory(
         this,
         (i) => i,
       );
 }
 
-abstract class CopyWith_Subscription_watchMeetingRoster_historyMeetingsPersons_attendanceHistory<
+abstract class CopyWith_Subscription_watchMeetingRoster_historyMeetingRoster_attendanceHistory<
   TRes
 > {
-  factory CopyWith_Subscription_watchMeetingRoster_historyMeetingsPersons_attendanceHistory(
-    Subscription_watchMeetingRoster_historyMeetingsPersons_attendanceHistory
+  factory CopyWith_Subscription_watchMeetingRoster_historyMeetingRoster_attendanceHistory(
+    Subscription_watchMeetingRoster_historyMeetingRoster_attendanceHistory
     instance,
     TRes Function(
-      Subscription_watchMeetingRoster_historyMeetingsPersons_attendanceHistory,
+      Subscription_watchMeetingRoster_historyMeetingRoster_attendanceHistory,
     )
     then,
-  ) = _CopyWithImpl_Subscription_watchMeetingRoster_historyMeetingsPersons_attendanceHistory;
+  ) = _CopyWithImpl_Subscription_watchMeetingRoster_historyMeetingRoster_attendanceHistory;
 
-  factory CopyWith_Subscription_watchMeetingRoster_historyMeetingsPersons_attendanceHistory.stub(
+  factory CopyWith_Subscription_watchMeetingRoster_historyMeetingRoster_attendanceHistory.stub(
     TRes res,
-  ) = _CopyWithStubImpl_Subscription_watchMeetingRoster_historyMeetingsPersons_attendanceHistory;
+  ) = _CopyWithStubImpl_Subscription_watchMeetingRoster_historyMeetingRoster_attendanceHistory;
 
   TRes call({
     UuidValue? id,
@@ -2190,23 +2004,23 @@ abstract class CopyWith_Subscription_watchMeetingRoster_historyMeetingsPersons_a
   });
 }
 
-class _CopyWithImpl_Subscription_watchMeetingRoster_historyMeetingsPersons_attendanceHistory<
+class _CopyWithImpl_Subscription_watchMeetingRoster_historyMeetingRoster_attendanceHistory<
   TRes
 >
     implements
-        CopyWith_Subscription_watchMeetingRoster_historyMeetingsPersons_attendanceHistory<
+        CopyWith_Subscription_watchMeetingRoster_historyMeetingRoster_attendanceHistory<
           TRes
         > {
-  _CopyWithImpl_Subscription_watchMeetingRoster_historyMeetingsPersons_attendanceHistory(
+  _CopyWithImpl_Subscription_watchMeetingRoster_historyMeetingRoster_attendanceHistory(
     this._instance,
     this._then,
   );
 
-  final Subscription_watchMeetingRoster_historyMeetingsPersons_attendanceHistory
+  final Subscription_watchMeetingRoster_historyMeetingRoster_attendanceHistory
   _instance;
 
   final TRes Function(
-    Subscription_watchMeetingRoster_historyMeetingsPersons_attendanceHistory,
+    Subscription_watchMeetingRoster_historyMeetingRoster_attendanceHistory,
   )
   _then;
 
@@ -2220,7 +2034,7 @@ class _CopyWithImpl_Subscription_watchMeetingRoster_historyMeetingsPersons_atten
     Object? asServant = _undefined,
     Object? $__typename = _undefined,
   }) => _then(
-    Subscription_watchMeetingRoster_historyMeetingsPersons_attendanceHistory(
+    Subscription_watchMeetingRoster_historyMeetingRoster_attendanceHistory(
       id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
       meetingId: meetingId == _undefined || meetingId == null
           ? _instance.meetingId
@@ -2241,14 +2055,14 @@ class _CopyWithImpl_Subscription_watchMeetingRoster_historyMeetingsPersons_atten
   );
 }
 
-class _CopyWithStubImpl_Subscription_watchMeetingRoster_historyMeetingsPersons_attendanceHistory<
+class _CopyWithStubImpl_Subscription_watchMeetingRoster_historyMeetingRoster_attendanceHistory<
   TRes
 >
     implements
-        CopyWith_Subscription_watchMeetingRoster_historyMeetingsPersons_attendanceHistory<
+        CopyWith_Subscription_watchMeetingRoster_historyMeetingRoster_attendanceHistory<
           TRes
         > {
-  _CopyWithStubImpl_Subscription_watchMeetingRoster_historyMeetingsPersons_attendanceHistory(
+  _CopyWithStubImpl_Subscription_watchMeetingRoster_historyMeetingRoster_attendanceHistory(
     this._res,
   );
 
@@ -3051,8 +2865,10 @@ class _CopyWithStubImpl_Subscription_watchMeetingPresentCount_historyAttendanceH
 class Variables_Subscription_watchMeetingEligibleCount {
   factory Variables_Subscription_watchMeetingEligibleCount({
     required UuidValue meetingId,
+    required bool asServant,
   }) => Variables_Subscription_watchMeetingEligibleCount._({
     r'meetingId': meetingId,
+    r'asServant': asServant,
   });
 
   Variables_Subscription_watchMeetingEligibleCount._(this._$data);
@@ -3063,6 +2879,8 @@ class Variables_Subscription_watchMeetingEligibleCount {
     final result$data = <String, dynamic>{};
     final l$meetingId = data['meetingId'];
     result$data['meetingId'] = stringToUuid(l$meetingId);
+    final l$asServant = data['asServant'];
+    result$data['asServant'] = (l$asServant as bool);
     return Variables_Subscription_watchMeetingEligibleCount._(result$data);
   }
 
@@ -3070,10 +2888,14 @@ class Variables_Subscription_watchMeetingEligibleCount {
 
   UuidValue get meetingId => (_$data['meetingId'] as UuidValue);
 
+  bool get asServant => (_$data['asServant'] as bool);
+
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     final l$meetingId = meetingId;
     result$data['meetingId'] = uuidToString(l$meetingId);
+    final l$asServant = asServant;
+    result$data['asServant'] = l$asServant;
     return result$data;
   }
 
@@ -3097,13 +2919,19 @@ class Variables_Subscription_watchMeetingEligibleCount {
     if (l$meetingId != lOther$meetingId) {
       return false;
     }
+    final l$asServant = asServant;
+    final lOther$asServant = other.asServant;
+    if (l$asServant != lOther$asServant) {
+      return false;
+    }
     return true;
   }
 
   @override
   int get hashCode {
     final l$meetingId = meetingId;
-    return Object.hashAll([l$meetingId]);
+    final l$asServant = asServant;
+    return Object.hashAll([l$meetingId, l$asServant]);
   }
 }
 
@@ -3117,7 +2945,7 @@ abstract class CopyWith_Variables_Subscription_watchMeetingEligibleCount<TRes> {
     TRes res,
   ) = _CopyWithStubImpl_Variables_Subscription_watchMeetingEligibleCount;
 
-  TRes call({UuidValue? meetingId});
+  TRes call({UuidValue? meetingId, bool? asServant});
 }
 
 class _CopyWithImpl_Variables_Subscription_watchMeetingEligibleCount<TRes>
@@ -3133,13 +2961,16 @@ class _CopyWithImpl_Variables_Subscription_watchMeetingEligibleCount<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? meetingId = _undefined}) => _then(
-    Variables_Subscription_watchMeetingEligibleCount._({
-      ..._instance._$data,
-      if (meetingId != _undefined && meetingId != null)
-        'meetingId': (meetingId as UuidValue),
-    }),
-  );
+  TRes call({Object? meetingId = _undefined, Object? asServant = _undefined}) =>
+      _then(
+        Variables_Subscription_watchMeetingEligibleCount._({
+          ..._instance._$data,
+          if (meetingId != _undefined && meetingId != null)
+            'meetingId': (meetingId as UuidValue),
+          if (asServant != _undefined && asServant != null)
+            'asServant': (asServant as bool),
+        }),
+      );
 }
 
 class _CopyWithStubImpl_Variables_Subscription_watchMeetingEligibleCount<TRes>
@@ -3148,38 +2979,42 @@ class _CopyWithStubImpl_Variables_Subscription_watchMeetingEligibleCount<TRes>
 
   TRes _res;
 
-  call({UuidValue? meetingId}) => _res;
+  call({UuidValue? meetingId, bool? asServant}) => _res;
 }
 
 class Subscription_watchMeetingEligibleCount {
-  Subscription_watchMeetingEligibleCount({required this.personsAggregate});
+  Subscription_watchMeetingEligibleCount({
+    required this.historyMeetingRosterAggregate,
+  });
 
   factory Subscription_watchMeetingEligibleCount.fromJson(
     Map<String, dynamic> json,
   ) {
-    final l$personsAggregate = json['personsAggregate'];
+    final l$historyMeetingRosterAggregate =
+        json['historyMeetingRosterAggregate'];
     return Subscription_watchMeetingEligibleCount(
-      personsAggregate:
-          Subscription_watchMeetingEligibleCount_personsAggregate.fromJson(
-            (l$personsAggregate as Map<String, dynamic>),
+      historyMeetingRosterAggregate:
+          Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate.fromJson(
+            (l$historyMeetingRosterAggregate as Map<String, dynamic>),
           ),
     );
   }
 
-  final Subscription_watchMeetingEligibleCount_personsAggregate
-  personsAggregate;
+  final Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate
+  historyMeetingRosterAggregate;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
-    final l$personsAggregate = personsAggregate;
-    _resultData['personsAggregate'] = l$personsAggregate.toJson();
+    final l$historyMeetingRosterAggregate = historyMeetingRosterAggregate;
+    _resultData['historyMeetingRosterAggregate'] =
+        l$historyMeetingRosterAggregate.toJson();
     return _resultData;
   }
 
   @override
   int get hashCode {
-    final l$personsAggregate = personsAggregate;
-    return Object.hashAll([l$personsAggregate]);
+    final l$historyMeetingRosterAggregate = historyMeetingRosterAggregate;
+    return Object.hashAll([l$historyMeetingRosterAggregate]);
   }
 
   @override
@@ -3191,9 +3026,11 @@ class Subscription_watchMeetingEligibleCount {
         runtimeType != other.runtimeType) {
       return false;
     }
-    final l$personsAggregate = personsAggregate;
-    final lOther$personsAggregate = other.personsAggregate;
-    if (l$personsAggregate != lOther$personsAggregate) {
+    final l$historyMeetingRosterAggregate = historyMeetingRosterAggregate;
+    final lOther$historyMeetingRosterAggregate =
+        other.historyMeetingRosterAggregate;
+    if (l$historyMeetingRosterAggregate !=
+        lOther$historyMeetingRosterAggregate) {
       return false;
     }
     return true;
@@ -3219,10 +3056,13 @@ abstract class CopyWith_Subscription_watchMeetingEligibleCount<TRes> {
       _CopyWithStubImpl_Subscription_watchMeetingEligibleCount;
 
   TRes call({
-    Subscription_watchMeetingEligibleCount_personsAggregate? personsAggregate,
+    Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate?
+    historyMeetingRosterAggregate,
   });
-  CopyWith_Subscription_watchMeetingEligibleCount_personsAggregate<TRes>
-  get personsAggregate;
+  CopyWith_Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate<
+    TRes
+  >
+  get historyMeetingRosterAggregate;
 }
 
 class _CopyWithImpl_Subscription_watchMeetingEligibleCount<TRes>
@@ -3238,22 +3078,26 @@ class _CopyWithImpl_Subscription_watchMeetingEligibleCount<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? personsAggregate = _undefined}) => _then(
+  TRes call({Object? historyMeetingRosterAggregate = _undefined}) => _then(
     Subscription_watchMeetingEligibleCount(
-      personsAggregate:
-          personsAggregate == _undefined || personsAggregate == null
-          ? _instance.personsAggregate
-          : (personsAggregate
-                as Subscription_watchMeetingEligibleCount_personsAggregate),
+      historyMeetingRosterAggregate:
+          historyMeetingRosterAggregate == _undefined ||
+              historyMeetingRosterAggregate == null
+          ? _instance.historyMeetingRosterAggregate
+          : (historyMeetingRosterAggregate
+                as Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate),
     ),
   );
 
-  CopyWith_Subscription_watchMeetingEligibleCount_personsAggregate<TRes>
-  get personsAggregate {
-    final local$personsAggregate = _instance.personsAggregate;
-    return CopyWith_Subscription_watchMeetingEligibleCount_personsAggregate(
-      local$personsAggregate,
-      (e) => call(personsAggregate: e),
+  CopyWith_Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate<
+    TRes
+  >
+  get historyMeetingRosterAggregate {
+    final local$historyMeetingRosterAggregate =
+        _instance.historyMeetingRosterAggregate;
+    return CopyWith_Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate(
+      local$historyMeetingRosterAggregate,
+      (e) => call(historyMeetingRosterAggregate: e),
     );
   }
 }
@@ -3265,12 +3109,15 @@ class _CopyWithStubImpl_Subscription_watchMeetingEligibleCount<TRes>
   TRes _res;
 
   call({
-    Subscription_watchMeetingEligibleCount_personsAggregate? personsAggregate,
+    Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate?
+    historyMeetingRosterAggregate,
   }) => _res;
 
-  CopyWith_Subscription_watchMeetingEligibleCount_personsAggregate<TRes>
-  get personsAggregate =>
-      CopyWith_Subscription_watchMeetingEligibleCount_personsAggregate.stub(
+  CopyWith_Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate<
+    TRes
+  >
+  get historyMeetingRosterAggregate =>
+      CopyWith_Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate.stub(
         _res,
       );
 }
@@ -3287,12 +3134,21 @@ const documentNodeSubscriptionwatchMeetingEligibleCount = DocumentNode(
           defaultValue: DefaultValueNode(value: null),
           directives: [],
         ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'asServant')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'Boolean'),
+            isNonNull: true,
+          ),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
       ],
       directives: [],
       selectionSet: SelectionSetNode(
         selections: [
           FieldNode(
-            name: NameNode(value: 'personsAggregate'),
+            name: NameNode(value: 'historyMeetingRosterAggregate'),
             alias: null,
             arguments: [
               ArgumentNode(
@@ -3300,20 +3156,26 @@ const documentNodeSubscriptionwatchMeetingEligibleCount = DocumentNode(
                 value: ObjectValueNode(
                   fields: [
                     ObjectFieldNode(
-                      name: NameNode(value: 'meetings'),
+                      name: NameNode(value: 'meetingId'),
                       value: ObjectValueNode(
                         fields: [
                           ObjectFieldNode(
-                            name: NameNode(value: 'meetingId'),
-                            value: ObjectValueNode(
-                              fields: [
-                                ObjectFieldNode(
-                                  name: NameNode(value: '_eq'),
-                                  value: VariableNode(
-                                    name: NameNode(value: 'meetingId'),
-                                  ),
-                                ),
-                              ],
+                            name: NameNode(value: '_eq'),
+                            value: VariableNode(
+                              name: NameNode(value: 'meetingId'),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    ObjectFieldNode(
+                      name: NameNode(value: 'asServant'),
+                      value: ObjectValueNode(
+                        fields: [
+                          ObjectFieldNode(
+                            name: NameNode(value: '_eq'),
+                            value: VariableNode(
+                              name: NameNode(value: 'asServant'),
                             ),
                           ),
                         ],
@@ -3366,28 +3228,28 @@ const documentNodeSubscriptionwatchMeetingEligibleCount = DocumentNode(
   ],
 );
 
-class Subscription_watchMeetingEligibleCount_personsAggregate {
-  Subscription_watchMeetingEligibleCount_personsAggregate({
+class Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate {
+  Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate({
     this.aggregate,
-    this.$__typename = 'PersonsAggregate',
+    this.$__typename = 'HistoryMeetingRosterAggregate',
   });
 
-  factory Subscription_watchMeetingEligibleCount_personsAggregate.fromJson(
+  factory Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate.fromJson(
     Map<String, dynamic> json,
   ) {
     final l$aggregate = json['aggregate'];
     final l$$__typename = json['__typename'];
-    return Subscription_watchMeetingEligibleCount_personsAggregate(
+    return Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate(
       aggregate: l$aggregate == null
           ? null
-          : Subscription_watchMeetingEligibleCount_personsAggregate_aggregate.fromJson(
+          : Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate_aggregate.fromJson(
               (l$aggregate as Map<String, dynamic>),
             ),
       $__typename: (l$$__typename as String),
     );
   }
 
-  final Subscription_watchMeetingEligibleCount_personsAggregate_aggregate?
+  final Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate_aggregate?
   aggregate;
 
   final String $__typename;
@@ -3413,7 +3275,8 @@ class Subscription_watchMeetingEligibleCount_personsAggregate {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Subscription_watchMeetingEligibleCount_personsAggregate ||
+    if (other
+            is! Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3431,54 +3294,63 @@ class Subscription_watchMeetingEligibleCount_personsAggregate {
   }
 }
 
-extension UtilityExtension_Subscription_watchMeetingEligibleCount_personsAggregate
-    on Subscription_watchMeetingEligibleCount_personsAggregate {
-  CopyWith_Subscription_watchMeetingEligibleCount_personsAggregate<
-    Subscription_watchMeetingEligibleCount_personsAggregate
+extension UtilityExtension_Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate
+    on Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate {
+  CopyWith_Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate<
+    Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate
   >
   get copyWith =>
-      CopyWith_Subscription_watchMeetingEligibleCount_personsAggregate(
+      CopyWith_Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate(
         this,
         (i) => i,
       );
 }
 
-abstract class CopyWith_Subscription_watchMeetingEligibleCount_personsAggregate<
+abstract class CopyWith_Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate<
   TRes
 > {
-  factory CopyWith_Subscription_watchMeetingEligibleCount_personsAggregate(
-    Subscription_watchMeetingEligibleCount_personsAggregate instance,
-    TRes Function(Subscription_watchMeetingEligibleCount_personsAggregate) then,
-  ) = _CopyWithImpl_Subscription_watchMeetingEligibleCount_personsAggregate;
+  factory CopyWith_Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate(
+    Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate
+    instance,
+    TRes Function(
+      Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate,
+    )
+    then,
+  ) = _CopyWithImpl_Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate;
 
-  factory CopyWith_Subscription_watchMeetingEligibleCount_personsAggregate.stub(
+  factory CopyWith_Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate.stub(
     TRes res,
-  ) = _CopyWithStubImpl_Subscription_watchMeetingEligibleCount_personsAggregate;
+  ) = _CopyWithStubImpl_Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate;
 
   TRes call({
-    Subscription_watchMeetingEligibleCount_personsAggregate_aggregate?
+    Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate_aggregate?
     aggregate,
     String? $__typename,
   });
-  CopyWith_Subscription_watchMeetingEligibleCount_personsAggregate_aggregate<
+  CopyWith_Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate_aggregate<
     TRes
   >
   get aggregate;
 }
 
-class _CopyWithImpl_Subscription_watchMeetingEligibleCount_personsAggregate<
+class _CopyWithImpl_Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate<
   TRes
 >
     implements
-        CopyWith_Subscription_watchMeetingEligibleCount_personsAggregate<TRes> {
-  _CopyWithImpl_Subscription_watchMeetingEligibleCount_personsAggregate(
+        CopyWith_Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate<
+          TRes
+        > {
+  _CopyWithImpl_Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate(
     this._instance,
     this._then,
   );
 
-  final Subscription_watchMeetingEligibleCount_personsAggregate _instance;
+  final Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate
+  _instance;
 
-  final TRes Function(Subscription_watchMeetingEligibleCount_personsAggregate)
+  final TRes Function(
+    Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate,
+  )
   _then;
 
   static const _undefined = <dynamic, dynamic>{};
@@ -3487,71 +3359,73 @@ class _CopyWithImpl_Subscription_watchMeetingEligibleCount_personsAggregate<
     Object? aggregate = _undefined,
     Object? $__typename = _undefined,
   }) => _then(
-    Subscription_watchMeetingEligibleCount_personsAggregate(
+    Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate(
       aggregate: aggregate == _undefined
           ? _instance.aggregate
           : (aggregate
-                as Subscription_watchMeetingEligibleCount_personsAggregate_aggregate?),
+                as Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate_aggregate?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
     ),
   );
 
-  CopyWith_Subscription_watchMeetingEligibleCount_personsAggregate_aggregate<
+  CopyWith_Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate_aggregate<
     TRes
   >
   get aggregate {
     final local$aggregate = _instance.aggregate;
     return local$aggregate == null
-        ? CopyWith_Subscription_watchMeetingEligibleCount_personsAggregate_aggregate.stub(
+        ? CopyWith_Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate_aggregate.stub(
             _then(_instance),
           )
-        : CopyWith_Subscription_watchMeetingEligibleCount_personsAggregate_aggregate(
+        : CopyWith_Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate_aggregate(
             local$aggregate,
             (e) => call(aggregate: e),
           );
   }
 }
 
-class _CopyWithStubImpl_Subscription_watchMeetingEligibleCount_personsAggregate<
+class _CopyWithStubImpl_Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate<
   TRes
 >
     implements
-        CopyWith_Subscription_watchMeetingEligibleCount_personsAggregate<TRes> {
-  _CopyWithStubImpl_Subscription_watchMeetingEligibleCount_personsAggregate(
+        CopyWith_Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate<
+          TRes
+        > {
+  _CopyWithStubImpl_Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate(
     this._res,
   );
 
   TRes _res;
 
   call({
-    Subscription_watchMeetingEligibleCount_personsAggregate_aggregate?
+    Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate_aggregate?
     aggregate,
     String? $__typename,
   }) => _res;
 
-  CopyWith_Subscription_watchMeetingEligibleCount_personsAggregate_aggregate<
+  CopyWith_Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate_aggregate<
     TRes
   >
   get aggregate =>
-      CopyWith_Subscription_watchMeetingEligibleCount_personsAggregate_aggregate.stub(
+      CopyWith_Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate_aggregate.stub(
         _res,
       );
 }
 
-class Subscription_watchMeetingEligibleCount_personsAggregate_aggregate {
-  Subscription_watchMeetingEligibleCount_personsAggregate_aggregate({
+class Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate_aggregate {
+  Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate_aggregate({
     required this.count,
-    this.$__typename = 'PersonsAggregateFields',
+    this.$__typename = 'HistoryMeetingRosterAggregateFields',
   });
 
-  factory Subscription_watchMeetingEligibleCount_personsAggregate_aggregate.fromJson(
+  factory Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate_aggregate.fromJson(
     Map<String, dynamic> json,
   ) {
     final l$count = json['count'];
     final l$$__typename = json['__typename'];
-    return Subscription_watchMeetingEligibleCount_personsAggregate_aggregate(
+    return Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate_aggregate(
       count: (l$count as int),
       $__typename: (l$$__typename as String),
     );
@@ -3583,7 +3457,7 @@ class Subscription_watchMeetingEligibleCount_personsAggregate_aggregate {
       return true;
     }
     if (other
-            is! Subscription_watchMeetingEligibleCount_personsAggregate_aggregate ||
+            is! Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate_aggregate ||
         runtimeType != other.runtimeType) {
       return false;
     }
@@ -3601,79 +3475,82 @@ class Subscription_watchMeetingEligibleCount_personsAggregate_aggregate {
   }
 }
 
-extension UtilityExtension_Subscription_watchMeetingEligibleCount_personsAggregate_aggregate
-    on Subscription_watchMeetingEligibleCount_personsAggregate_aggregate {
-  CopyWith_Subscription_watchMeetingEligibleCount_personsAggregate_aggregate<
-    Subscription_watchMeetingEligibleCount_personsAggregate_aggregate
+extension UtilityExtension_Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate_aggregate
+    on Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate_aggregate {
+  CopyWith_Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate_aggregate<
+    Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate_aggregate
   >
   get copyWith =>
-      CopyWith_Subscription_watchMeetingEligibleCount_personsAggregate_aggregate(
+      CopyWith_Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate_aggregate(
         this,
         (i) => i,
       );
 }
 
-abstract class CopyWith_Subscription_watchMeetingEligibleCount_personsAggregate_aggregate<
+abstract class CopyWith_Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate_aggregate<
   TRes
 > {
-  factory CopyWith_Subscription_watchMeetingEligibleCount_personsAggregate_aggregate(
-    Subscription_watchMeetingEligibleCount_personsAggregate_aggregate instance,
+  factory CopyWith_Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate_aggregate(
+    Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate_aggregate
+    instance,
     TRes Function(
-      Subscription_watchMeetingEligibleCount_personsAggregate_aggregate,
+      Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate_aggregate,
     )
     then,
-  ) = _CopyWithImpl_Subscription_watchMeetingEligibleCount_personsAggregate_aggregate;
+  ) = _CopyWithImpl_Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate_aggregate;
 
-  factory CopyWith_Subscription_watchMeetingEligibleCount_personsAggregate_aggregate.stub(
+  factory CopyWith_Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate_aggregate.stub(
     TRes res,
-  ) = _CopyWithStubImpl_Subscription_watchMeetingEligibleCount_personsAggregate_aggregate;
+  ) = _CopyWithStubImpl_Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate_aggregate;
 
   TRes call({int? count, String? $__typename});
 }
 
-class _CopyWithImpl_Subscription_watchMeetingEligibleCount_personsAggregate_aggregate<
+class _CopyWithImpl_Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate_aggregate<
   TRes
 >
     implements
-        CopyWith_Subscription_watchMeetingEligibleCount_personsAggregate_aggregate<
+        CopyWith_Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate_aggregate<
           TRes
         > {
-  _CopyWithImpl_Subscription_watchMeetingEligibleCount_personsAggregate_aggregate(
+  _CopyWithImpl_Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate_aggregate(
     this._instance,
     this._then,
   );
 
-  final Subscription_watchMeetingEligibleCount_personsAggregate_aggregate
+  final Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate_aggregate
   _instance;
 
   final TRes Function(
-    Subscription_watchMeetingEligibleCount_personsAggregate_aggregate,
+    Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate_aggregate,
   )
   _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? count = _undefined, Object? $__typename = _undefined}) =>
-      _then(
-        Subscription_watchMeetingEligibleCount_personsAggregate_aggregate(
-          count: count == _undefined || count == null
-              ? _instance.count
-              : (count as int),
-          $__typename: $__typename == _undefined || $__typename == null
-              ? _instance.$__typename
-              : ($__typename as String),
-        ),
-      );
+  TRes call({
+    Object? count = _undefined,
+    Object? $__typename = _undefined,
+  }) => _then(
+    Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate_aggregate(
+      count: count == _undefined || count == null
+          ? _instance.count
+          : (count as int),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 }
 
-class _CopyWithStubImpl_Subscription_watchMeetingEligibleCount_personsAggregate_aggregate<
+class _CopyWithStubImpl_Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate_aggregate<
   TRes
 >
     implements
-        CopyWith_Subscription_watchMeetingEligibleCount_personsAggregate_aggregate<
+        CopyWith_Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate_aggregate<
           TRes
         > {
-  _CopyWithStubImpl_Subscription_watchMeetingEligibleCount_personsAggregate_aggregate(
+  _CopyWithStubImpl_Subscription_watchMeetingEligibleCount_historyMeetingRosterAggregate_aggregate(
     this._res,
   );
 

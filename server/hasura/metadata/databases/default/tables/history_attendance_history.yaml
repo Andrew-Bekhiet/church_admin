@@ -14,20 +14,39 @@ object_relationships:
 insert_permissions:
   - role: user
     permission:
+      # Two independent concerns, AND-ed together:
+      #   1. Eligibility -- (person, as_servant) is on the roster for the
+      #      meeting. `history.meeting_roster` is the single source of truth the
+      #      UI also reads, so "what is shown" == "what is recordable"; it
+      #      already encodes audience, is_archived, membership/scope and the
+      #      `approved` servant gate, so none of those are repeated here.
+      #   2. Authorization -- the recorder holds the matching record permission
+      #      on the meeting (`allow_record_attendance` for served,
+      #      `allow_record_servants_attendance` for servants).
       check: &check_record_attendance_permission
         _and:
-          - meeting:
-              is_archived:
-                _eq: false
+          - _exists:
+              _table:
+                name: meeting_roster
+                schema: history
+              _where:
+                _and:
+                  - meeting_id:
+                      _ceq:
+                        - $
+                        - meeting_id
+                  - person_id:
+                      _ceq:
+                        - $
+                        - person_id
+                  - as_servant:
+                      _ceq:
+                        - $
+                        - as_servant
           - _or:
               - _and:
                   - as_servant:
                       _eq: false
-                  - meeting:
-                      audience:
-                        _in:
-                          - onlyPersons
-                          - personsAndServants
                   - _exists:
                       _table:
                         name: users_admin_on_meetings
@@ -42,28 +61,9 @@ insert_permissions:
                               _ceq:
                                 - $
                                 - meeting_id
-                  - _exists:
-                      _table:
-                        name: meetings_persons
-                        schema: history
-                      _where:
-                        _and:
-                          - meeting_id:
-                              _ceq:
-                                - $
-                                - meeting_id
-                          - person_id:
-                              _ceq:
-                                - $
-                                - person_id
               - _and:
                   - as_servant:
                       _eq: true
-                  - meeting:
-                      audience:
-                        _in:
-                          - onlyServants
-                          - personsAndServants
                   - _exists:
                       _table:
                         name: users_admin_on_meetings
@@ -78,20 +78,6 @@ insert_permissions:
                               _ceq:
                                 - $
                                 - meeting_id
-                  - _exists:
-                      _table:
-                        name: users_admin_on_meetings
-                        schema: auth
-                      _where:
-                        _and:
-                          - meeting_id:
-                              _ceq:
-                                - $
-                                - meeting_id
-                          - user_person_id:
-                              _ceq:
-                                - $
-                                - person_id
       set:
         recorded_by: x-hasura-user-id
       columns:

@@ -21,6 +21,36 @@ class MeetingRosterEntry with _$MeetingRosterEntry {
     required this.attendanceHistory,
   });
 
-  factory MeetingRosterEntry.fromJson(Map<String, Object?> json) =>
-      _$MeetingRosterEntryFromJson(json);
+  /// Builds an entry from a flattened `history.meeting_roster` row.
+  ///
+  /// The roster view carries the person's display fields directly (rather than
+  /// through a `person` relationship) so the subscription never traverses
+  /// `public.persons`' per-row permission. We reassemble a partial [Person]
+  /// (and its [StudyYear], from the flattened `studyYearId`/`studyYearName`)
+  /// here so the UI can keep consuming [person] unchanged.
+  factory MeetingRosterEntry.fromJson(Map<String, Object?> json) {
+    final studyYearId = json['studyYearId'] as int?;
+
+    return MeetingRosterEntry(
+      // The roster row's keys already line up with `Person`'s JSON keys, so we
+      // let `Person.fromJson` parse the whole row and only patch the deltas:
+      // rename `personId` -> `id`, rebuild the nested `studyYear` from the flat
+      // `studyYearId`/`studyYearName`, and drop `attendanceHistory` (which
+      // collides with `Person`'s own field of the same name). The copy keeps the
+      // original `json` intact for the attendance parse below.
+      person: Person.fromJson({
+        ...json,
+        'id': json['personId'],
+        'studyYear': studyYearId == null
+            ? null
+            : {'order': studyYearId, 'name': json['studyYearName']},
+      }..remove('attendanceHistory')),
+      attendanceHistory:
+          (json['attendanceHistory'] as List?)
+              ?.whereType<Map>()
+              .map((e) => AttendanceRecord.fromJson(e.cast<String, Object?>()))
+              .toList() ??
+          const [],
+    );
+  }
 }

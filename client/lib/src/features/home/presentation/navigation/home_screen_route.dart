@@ -12,6 +12,7 @@ part 'home_screen_route.g.dart';
     TypedGoRoute<ViewAreaRoute>(path: 'view_area'),
     TypedGoRoute<EditAreaRoute>(path: 'edit_area'),
     TypedGoRoute<ViewServiceRoute>(path: 'view_service'),
+    TypedGoRoute<RecordAttendanceRoute>(path: 'record_attendance'),
     TypedGoRoute<EditServiceRoute>(path: 'edit_service'),
     TypedGoRoute<ViewUserRoute>(path: 'view_user'),
     TypedGoRoute<EditUserRoute>(path: 'edit_user'),
