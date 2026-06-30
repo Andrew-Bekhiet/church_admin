@@ -52,6 +52,8 @@ class MeetingRosterEntry with _$MeetingRosterEntry {
         'studyYear': studyYearId == null
             ? null
             : {'order': studyYearId, 'name': json['studyYearName']},
+        'attendanceHistory': null,
+        'asServant': null,
       }),
       attendanceHistory:
           (json['attendanceHistory'] as List?)
