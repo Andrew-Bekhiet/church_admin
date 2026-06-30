@@ -233,8 +233,12 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
   }
 
   Future<void> _restartSession() async {
-    await _subscribeRoster(showLoading: true);
-    _subscribePresentCount();
+    try {
+      await _subscribeRoster(showLoading: true);
+      _subscribePresentCount();
+    } catch (error, stackTrace) {
+      _onRosterError(error, stackTrace);
+    }
   }
 
   Future<void> _subscribeRoster({required bool showLoading}) async {
@@ -277,7 +281,11 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
   void _onRosterError(Object error, StackTrace stackTrace) {
     unawaited(
       LoggingService.I.exception(
-        LogRecord(error: error, stackTrace: stackTrace),
+        LogRecord(
+          moduleName: '$RecordAttendanceCubit',
+          error: error,
+          stackTrace: stackTrace,
+        ),
       ),
     );
     if (isClosed) return;
