@@ -11,24 +11,29 @@ import 'package:rxdart/rxdart.dart';
 /// gutter and group counts stay accurate), live present/eligible counts and
 /// optimistic one-tap marking with undo.
 class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
+  static const AttendanceNameAlphabet _alphabet = AttendanceNameAlphabet();
   static const Duration _searchDebounce = Duration(milliseconds: 300);
-
   static const int _rosterLimit = 5000;
 
-  static const AttendanceNameAlphabet _alphabet = AttendanceNameAlphabet();
-
   final MeetingsDAO _dao;
+  final AuthBloc _authBloc;
 
   final BehaviorSubject<String?> _searchSubject = BehaviorSubject.seeded(null);
+  StreamSubscription<String?>? _searchSub;
 
   Meeting _meeting;
   DateTime _selectedDate;
-  AttendanceRosterAudienceView _view;
+
+  late AttendanceRosterAudienceView _view;
+  bool _canRecordPersons = false;
+  bool _canRecordServants = false;
+
   AttendancePresenceFilter _filter = AttendancePresenceFilter.all;
   AttendanceGrouping _grouping = AttendanceGrouping.none;
   AttendanceSorting _sort = AttendanceSorting.byName;
 
   StreamSubscription<List<MeetingRosterEntry>>? _rosterSub;
+
   RosterStatus _rosterStatus = RosterStatus.loading;
   List<MeetingRosterEntry> _serverEntries = const [];
   List<MeetingRosterEntry> _displayEntries = const [];
@@ -38,7 +43,7 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
   int? _presentCount;
   int? _eligibleCount;
 
-  final Map<String, bool> _optimisticPresence = {};
+  final Map<String, DateTime?> _optimisticPresence = {};
 
   final Set<String> _inFlight = {};
 
@@ -46,12 +51,21 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
     required Meeting meeting,
     DateTime? initialDate,
     MeetingsDAO? dao,
+    AuthBloc? authBloc,
   }) : _dao = dao ?? DatabaseService.I.meetings,
+       _authBloc = authBloc ?? AuthBloc.I,
        _meeting = meeting,
        _selectedDate = DateUtils.dateOnly(initialDate ?? DateTime.now()),
-       _view = AttendanceRosterAudienceView.defaultFor(meeting.audience),
        super(const RecordAttendanceLoading()) {
+    _updateRecordRights();
+    _view = _defaultView();
+
     _subscribeEligibleCount();
+    _searchSub = _searchSubject
+        .debounceTime(_searchDebounce)
+        .distinct((a, b) => (a ?? '') == (b ?? ''))
+        .listen((_) => _emitLoaded());
+
     unawaited(_restartSession());
   }
 
@@ -61,6 +75,11 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
   DateTime get _toDate => _selectedDate.add(const Duration(days: 1));
   bool get _asServant => _view.asServant;
 
+  bool get _canToggleAudience =>
+      _meeting.audience == MeetingAudience.personsAndServants &&
+      _canRecordPersons &&
+      _canRecordServants;
+
   int indexForLetter(String letter) => _displayEntries.indexWhere(
     (e) => _alphabet.firstLetterOf(e.person.name) == letter,
   );
@@ -69,7 +88,8 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
     if (meeting.id == _meeting.id) return;
 
     _meeting = meeting;
-    _view = AttendanceRosterAudienceView.defaultFor(meeting.audience);
+    _updateRecordRights();
+    _view = _defaultView();
     _resetOptimistic();
     _subscribeEligibleCount();
     unawaited(_restartSession());
@@ -85,12 +105,10 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
   }
 
   void toggleAudience() {
-    if (_meeting.audience != MeetingAudience.personsAndServants) return;
+    if (!_canToggleAudience) return;
 
     _view = _view.toggled;
     _resetOptimistic();
-    // The eligible roster differs between the persons and servants audiences,
-    // so its live count must be re-subscribed for the new `asServant` scope.
     _subscribeEligibleCount();
     unawaited(_restartSession());
   }
@@ -105,8 +123,10 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
   void changeGrouping(AttendanceGrouping grouping) {
     if (_grouping == grouping) return;
 
+    // Grouping changes the server ordering (study-year prefix), so re-subscribe.
+    // Keep the current entries visible until the re-ordered batch arrives.
     _grouping = grouping;
-    _emitLoaded();
+    unawaited(_subscribeRoster(showLoading: false));
   }
 
   void changeSorting(AttendanceSorting sort) {
@@ -124,9 +144,10 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
     final personId = entry.person.id;
     if (_inFlight.contains(personId)) return;
 
-    final newIsPresent = !_displayedPresence(personId, entry);
+    final newIsPresent = _displayedPresenceTime(personId, entry) == null;
+    final attendanceTime = _selectedDate.replaceTime(now);
 
-    _optimisticPresence[personId] = newIsPresent;
+    _optimisticPresence[personId] = newIsPresent ? attendanceTime : null;
     _inFlight.add(personId);
     _emitLoaded();
 
@@ -136,7 +157,7 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
           meetingId: _meeting.id,
           personId: personId,
           asServant: _asServant,
-          datetime: _selectedDate.replaceTime(now),
+          datetime: attendanceTime,
         );
       } else {
         await _dao.unmarkAttendanceBy(
@@ -175,6 +196,7 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
     required MeetingRosterEntry entry,
   }) {
     if (isClosed) return;
+
     scaffoldMessenger
       ..clearSnackBars()
       ..showSnackBar(
@@ -198,32 +220,28 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
       fallback;
 
   Future<void> _restartSession() async {
-    _rosterStatus = RosterStatus.loading;
-    _serverEntries = const [];
+    await _subscribeRoster(showLoading: true);
+    _subscribePresentCount();
+  }
+
+  Future<void> _subscribeRoster({required bool showLoading}) async {
+    if (showLoading) {
+      _rosterStatus = RosterStatus.loading;
+      _serverEntries = const [];
+    }
     _emitLoaded();
 
-    await _disposeRoster();
-
-    final searchStream = _searchSubject
-        .debounceTime(_searchDebounce)
-        .distinct((a, b) => (a ?? '') == (b ?? ''));
-
+    await _rosterSub?.cancel();
     _rosterSub = _dao
         .streamMeetingRoster(
           meetingId: _meeting.id,
           asServant: _asServant,
           fromDate: _fromDate,
           toDate: _toDate,
-          searchQuery: searchStream,
+          groupByStudyYear: _grouping == AttendanceGrouping.studyYear,
           limit: _rosterLimit,
         )
-        .listen(
-          _onServerEntries,
-          onDone: _rosterSub?.cancel,
-          onError: _onRosterError,
-        );
-
-    _subscribePresentCount();
+        .listen(_onServerEntries, onError: _onRosterError);
   }
 
   void _onServerEntries(List<MeetingRosterEntry> entries) {
@@ -231,10 +249,14 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
 
     _serverEntries = entries;
     _rosterStatus = RosterStatus.ready;
-    _optimisticPresence.removeWhere((personId, desiredPresent) {
-      final entry = entries.firstWhereOrNull((e) => e.person.id == personId);
-      return entry != null && entry.attended == desiredPresent;
-    });
+
+    for (final entry in entries) {
+      final personId = entry.person.id;
+      if (_optimisticPresence[personId] != entry.attendanceTime) continue;
+
+      _optimisticPresence.remove(personId);
+    }
+
     _emitLoaded();
   }
 
@@ -286,15 +308,24 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
   void _emitLoaded() {
     if (isClosed) return;
 
-    final merged = _serverEntries.map(_applyOptimistic).toList();
-    final filtered = merged.where(_matchesPresenceFilter).toList();
-    _displayEntries = _applySort(filtered);
+    final query = _searchSubject.valueOrNull?.trim() ?? '';
+    final filtered = _serverEntries
+        .map(_applyOptimistic)
+        .where(_matchesPresenceFilter)
+        .where((e) => _matchesSearch(e, query))
+        .toList();
+    _displayEntries = _applySorting(
+      filtered,
+      sorting: _sort,
+      grouping: _grouping,
+    );
 
     emit(
       RecordAttendanceLoaded(
         meeting: _meeting,
         selectedDate: _selectedDate,
         view: _view,
+        canToggleAudience: _canToggleAudience,
         filter: _filter,
         grouping: _grouping,
         sort: _sort,
@@ -304,36 +335,48 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
         gutterLetters: _alphabet.lettersFrom(
           _displayEntries.map((e) => e.person.name),
         ),
-        pendingPersonIds: Set.unmodifiable(_inFlight),
         presentCount: _presentCount,
         eligibleCount: _eligibleCount,
       ),
     );
   }
 
-  bool _displayedPresence(String personId, MeetingRosterEntry entry) =>
-      _optimisticPresence[personId] ?? entry.attended;
+  DateTime? _displayedPresenceTime(String personId, MeetingRosterEntry entry) =>
+      _optimisticPresence[personId] ?? entry.attendanceTime;
 
   MeetingRosterEntry _applyOptimistic(MeetingRosterEntry entry) {
-    final desiredPresent = _optimisticPresence[entry.person.id];
-    if (desiredPresent == null || desiredPresent == entry.attended) {
+    final shouldApplyOptimisticAttendance = _optimisticPresence.containsKey(
+      entry.person.id,
+    );
+    if (!shouldApplyOptimisticAttendance) {
       return entry;
     }
 
+    final optimisticAttendanceTime = _optimisticPresence[entry.person.id];
+    final optimisticIsAttended = optimisticAttendanceTime != null;
+
     return MeetingRosterEntry(
       person: entry.person,
-      attendanceHistory: desiredPresent
+      attendanceHistory: optimisticIsAttended
           ? [
               AttendanceRecord(
                 id: _meeting.id, // placeholder id for the optimistic record
                 meetingId: _meeting.id,
                 personId: entry.person.id,
-                datetime: DateTime.now(),
+                datetime: optimisticAttendanceTime,
                 asServant: _asServant,
               ),
             ]
           : const [],
     );
+  }
+
+  bool _matchesSearch(MeetingRosterEntry entry, String query) {
+    if (query.isEmpty) return true;
+
+    final person = entry.person;
+    return person.name.toLowerCase().contains(query.toLowerCase()) ||
+        (person.mainPhone?.contains(query) ?? false);
   }
 
   bool _matchesPresenceFilter(MeetingRosterEntry entry) => switch (_filter) {
@@ -342,24 +385,87 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
     AttendancePresenceFilter.absent => !entry.attended,
   };
 
-  List<MeetingRosterEntry> _applySort(List<MeetingRosterEntry> entries) {
-    switch (_sort) {
-      case AttendanceSorting.byName:
-        // The server already returns entries ordered by name ascending.
-        return entries;
+  /// By-name order is left to the server. By-attendance-time is sorted here
+  /// (the day-windowed attendance can't be expressed in the server ORDER BY),
+  /// keeping the study-year prefix so grouping stays a pure partition.
+  List<MeetingRosterEntry> _applySorting(
+    List<MeetingRosterEntry> entries, {
+    required AttendanceSorting sorting,
+    required AttendanceGrouping grouping,
+  }) {
+    int studyYearOrder(MeetingRosterEntry entry) =>
+        entry.person.studyYear?.order ?? 1 << 16;
 
-      case AttendanceSorting.byAttendanceTime:
-        return entries.sorted((a, b) {
-          final at = a.attendance?.datetime;
-          final bt = b.attendance?.datetime;
-          if (at == null && bt == null) {
-            return a.person.name.compareTo(b.person.name);
-          }
-          if (at == null) return 1;
-          if (bt == null) return -1;
-          return bt.compareTo(at);
-        });
+    return switch (sorting) {
+      AttendanceSorting.byName => entries,
+      AttendanceSorting.byAttendanceTime => entries.sorted((a, b) {
+        if (grouping == AttendanceGrouping.studyYear) {
+          final gradeComparison = studyYearOrder(
+            a,
+          ).compareTo(studyYearOrder(b));
+
+          if (gradeComparison != 0) return gradeComparison;
+        }
+
+        final at = a.attendance?.datetime;
+        final bt = b.attendance?.datetime;
+
+        if (at == null && bt == null) {
+          return a.person.name.compareTo(b.person.name);
+        }
+
+        if (at == null) return 1;
+        if (bt == null) return -1;
+
+        return bt.compareTo(at);
+      }),
+    };
+  }
+
+  void _updateRecordRights() {
+    final user = _authBloc.currentUserData;
+    final permissions = user?.permissions;
+    final canReadAll = permissions?.readAllData ?? false;
+
+    bool canRecordPersons =
+        canReadAll && (permissions?.recordAllAttendance ?? false);
+    bool canRecordServants =
+        canReadAll && (permissions?.recordAllServantsAttendance ?? false);
+
+    for (final adminOn in user?.adminOn ?? const <AdminOnData>[]) {
+      final scope = RecordAttendanceScope.fromAdminOnData(adminOn);
+      if (scope == null || !_scopeCoversMeeting(scope)) continue;
+
+      canRecordPersons = canRecordPersons || scope.canRecordPersons;
+      canRecordServants = canRecordServants || scope.canRecordServants;
     }
+
+    _canRecordPersons = canRecordPersons;
+    _canRecordServants = canRecordServants;
+  }
+
+  bool _scopeCoversMeeting(RecordAttendanceScope scope) => switch (scope) {
+    ServiceAttendanceScope(:final service, :final studyYear, :final gender) =>
+      service.id == _meeting.serviceId &&
+          (studyYear == null ||
+              _meeting.serviceStudyYear == null ||
+              studyYear.order == _meeting.serviceStudyYear) &&
+          (gender == null ||
+              _meeting.serviceGender == null ||
+              gender == _meeting.serviceGender),
+    GroupAttendanceScope(:final group) => group.id == _meeting.groupId,
+  };
+
+  AttendanceRosterAudienceView _defaultView() {
+    if (_meeting.audience != MeetingAudience.personsAndServants) {
+      return AttendanceRosterAudienceView.defaultFor(_meeting.audience);
+    }
+
+    if (_canRecordServants && !_canRecordPersons) {
+      return AttendanceRosterAudienceView.servants;
+    }
+
+    return AttendanceRosterAudienceView.persons;
   }
 
   void _resetOptimistic() {
@@ -377,6 +483,7 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
   @override
   Future<void> close() async {
     await _disposeRoster();
+    await _searchSub?.cancel();
     await _presentCountSub?.cancel();
     await _eligibleCountSub?.cancel();
     await _searchSubject.close();

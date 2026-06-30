@@ -37,23 +37,22 @@ final class RecordAttendanceLoaded extends RecordAttendanceState {
   /// Ordered first letters present in [entries], for the name-jump gutter.
   final List<String> gutterLetters;
 
-  /// Persons whose mark/unmark mutation is currently in flight.
-  final Set<String> pendingPersonIds;
-
   final int? presentCount;
   final int? eligibleCount;
+
+  final bool canToggleAudience;
 
   const RecordAttendanceLoaded({
     required this.meeting,
     required this.selectedDate,
     required this.view,
+    required this.canToggleAudience,
     required this.filter,
     required this.grouping,
     required this.sort,
     required this.rosterStatus,
     required this.entries,
     required this.gutterLetters,
-    required this.pendingPersonIds,
     required this.presentCount,
     required this.eligibleCount,
     this.searchQuery,
@@ -62,11 +61,6 @@ final class RecordAttendanceLoaded extends RecordAttendanceState {
   int? get absentCount => (presentCount != null && eligibleCount != null)
       ? (eligibleCount! - presentCount!).clamp(0, eligibleCount!)
       : null;
-
-  bool get canToggleAudience =>
-      meeting.audience == MeetingAudience.personsAndServants;
-
-  bool isPending(String personId) => pendingPersonIds.contains(personId);
 
   @override
   List<Object?> get props => [
@@ -78,9 +72,9 @@ final class RecordAttendanceLoaded extends RecordAttendanceState {
     sort,
     rosterStatus,
     searchQuery,
+    canToggleAudience,
     entries,
     gutterLetters,
-    pendingPersonIds,
     presentCount,
     eligibleCount,
   ];

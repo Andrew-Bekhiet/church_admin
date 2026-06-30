@@ -12,6 +12,7 @@ class AttendanceAppBar extends StatelessWidget {
   final AttendanceRosterAudienceView audienceView;
   final AttendanceSorting sorting;
   final AttendanceGrouping grouping;
+  final bool canToggleAudience;
 
   const AttendanceAppBar({
     required this.meeting,
@@ -19,6 +20,7 @@ class AttendanceAppBar extends StatelessWidget {
     required this.audienceView,
     required this.sorting,
     required this.grouping,
+    required this.canToggleAudience,
     super.key,
   });
 
@@ -60,7 +62,7 @@ class AttendanceAppBar extends StatelessWidget {
                 date: selectedDate,
                 onDateSelected: cubit.selectDate,
               ),
-              if (meeting.audience == MeetingAudience.personsAndServants)
+              if (canToggleAudience)
                 AttendanceAudienceToggle(
                   view: audienceView,
                   onToggle: cubit.toggleAudience,

@@ -19,18 +19,16 @@ class AttendanceSummarySegment extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return Expanded(
-      child: InkWell(
-        onTap: onTap,
-        child: Center(
-          child: Text(
-            '$count $label',
-            style: theme.textTheme.titleMedium?.copyWith(
-              color: selected
-                  ? theme.colorScheme.primary
-                  : theme.colorScheme.onSurface,
-              fontWeight: selected ? FontWeight.bold : FontWeight.normal,
-            ),
+    return InkWell(
+      onTap: onTap,
+      child: Center(
+        child: Text(
+          '$count $label',
+          style: theme.textTheme.titleMedium?.copyWith(
+            color: selected
+                ? theme.colorScheme.primary
+                : theme.colorScheme.onSurface,
+            fontWeight: selected ? FontWeight.bold : FontWeight.normal,
           ),
         ),
       ),

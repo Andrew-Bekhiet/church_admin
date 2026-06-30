@@ -7,7 +7,6 @@ export 'widgets/attendance_overflow_menu.dart';
 export 'widgets/attendance_person_card.dart';
 export 'widgets/attendance_person_toggle.dart';
 export 'widgets/attendance_search_bar.dart';
-export 'widgets/attendance_study_year_section.dart';
 export 'widgets/attendance_summary_bar.dart';
 export 'widgets/attendance_summary_segment.dart';
 export 'widgets/meeting_avatar.dart';

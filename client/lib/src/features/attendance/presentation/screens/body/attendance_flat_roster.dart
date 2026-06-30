@@ -4,12 +4,10 @@ import 'package:flutter/material.dart';
 /// A flat, name-sorted roster sliver (used alongside the alphabet gutter).
 class AttendanceFlatRoster extends StatelessWidget {
   final List<MeetingRosterEntry> entries;
-  final Set<String> pendingPersonIds;
   final ValueChanged<MeetingRosterEntry> onToggle;
 
   const AttendanceFlatRoster({
     required this.entries,
-    required this.pendingPersonIds,
     required this.onToggle,
     super.key,
   });
@@ -24,7 +22,6 @@ class AttendanceFlatRoster extends StatelessWidget {
 
         return AttendancePersonCard(
           entry: entry,
-          pending: pendingPersonIds.contains(entry.person.id),
           onToggle: onToggle,
         );
       },

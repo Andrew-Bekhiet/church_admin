@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -13,8 +15,9 @@ class MeetingRosterEntry with _$MeetingRosterEntry {
   @override
   final List<AttendanceRecord> attendanceHistory;
 
-  AttendanceRecord? get attendance => attendanceHistory.firstOrNull;
   bool get attended => attendanceHistory.isNotEmpty;
+  AttendanceRecord? get attendance => attendanceHistory.firstOrNull;
+  DateTime? get attendanceTime => attendance?.datetime;
 
   const MeetingRosterEntry({
     required this.person,
@@ -38,17 +41,20 @@ class MeetingRosterEntry with _$MeetingRosterEntry {
       // `studyYearId`/`studyYearName`, and drop `attendanceHistory` (which
       // collides with `Person`'s own field of the same name). The copy keeps the
       // original `json` intact for the attendance parse below.
-      person: Person.fromJson({
-        ...json,
-        'id': json['personId'],
-        'studyYear': studyYearId == null
-            ? null
-            : {'order': studyYearId, 'name': json['studyYearName']},
-      }..remove('attendanceHistory')),
+      person: Person.fromJson(
+        {
+          ...json,
+          'id': json['personId'],
+          'studyYear': studyYearId == null
+              ? null
+              : {'order': studyYearId, 'name': json['studyYearName']},
+        }..remove('attendanceHistory'),
+      ),
       attendanceHistory:
           (json['attendanceHistory'] as List?)
               ?.whereType<Map>()
-              .map((e) => AttendanceRecord.fromJson(e.cast<String, Object?>()))
+              .map(Map<String, Object?>.from)
+              .map(AttendanceRecord.fromJson)
               .toList() ??
           const [],
     );

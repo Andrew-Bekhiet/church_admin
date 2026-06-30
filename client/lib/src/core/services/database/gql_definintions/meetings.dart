@@ -70,38 +70,29 @@ class MeetingsDAO extends DAOBase<Meeting>
     );
   }
 
-  /// Streams the roster of persons eligible for [meetingId].
-  ///
-  /// Returns one entry per eligible person. [MeetingRosterEntry.attendance]
-  /// are non-null if the person attended in the [fromDate, toDate) window as
-  /// [asServant]; otherwise null (person has not been marked yet for that session).
-  ///
-  /// Pass [searchQuery] for search-as-you-type on name/phone.
+  /// Streams the roster of persons eligible for [meetingId], ordered by name
+  /// (prefixed by study year when [groupByStudyYear]). Name/phone search and
+  /// presence filtering are applied client side on the fully loaded roster.
   PaginatableStreamBase<MeetingRosterEntry> streamMeetingRoster({
     required String meetingId,
     required bool asServant,
     required DateTime fromDate,
     required DateTime toDate,
-    Stream<String?>? searchQuery,
+    required bool groupByStudyYear,
     int limit = 200,
   }) {
+    final orderBy = [
+      if (groupByStudyYear)
+        Input_HistoryMeetingRosterOrderBy(studyYearId: Enum_OrderBy.ASC),
+      Input_HistoryMeetingRosterOrderBy(name: Enum_OrderBy.ASC),
+      Input_HistoryMeetingRosterOrderBy(personId: Enum_OrderBy.ASC),
+    ];
+
     return PaginatableStream.withSearch(
       pageSize: limit,
-      searchStream: searchQuery ?? Stream.value(null),
+      searchStream: Stream.value(null),
       factory: (request) {
-        final search = request.param;
         final whereFilters = [
-          if (search != null && search.isNotEmpty)
-            Input_HistoryMeetingRosterBoolExp(
-              $_or: [
-                Input_HistoryMeetingRosterBoolExp(
-                  name: Input_StringComparisonExp($_ilike: '%$search%'),
-                ),
-                Input_HistoryMeetingRosterBoolExp(
-                  mainPhone: Input_StringComparisonExp($_ilike: '%$search%'),
-                ),
-              ],
-            ),
           if (request.cursor case final cursor?)
             Input_HistoryMeetingRosterBoolExp(
               $_or: [
@@ -128,6 +119,7 @@ class MeetingsDAO extends DAOBase<Meeting>
               fromDate: fromDate,
               toDate: toDate,
               where: whereFilters,
+              orderBy: orderBy,
               limit: request.pageSize + 1,
             ).toJson(),
             parserFn: db.parser.singleListParser(

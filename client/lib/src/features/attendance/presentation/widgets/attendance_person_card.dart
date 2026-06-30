@@ -11,12 +11,10 @@ class AttendancePersonCard extends StatelessWidget {
   static const double kCardExtent = 72;
 
   final MeetingRosterEntry entry;
-  final bool pending;
   final ValueChanged<MeetingRosterEntry> onToggle;
 
   const AttendancePersonCard({
     required this.entry,
-    required this.pending,
     required this.onToggle,
     super.key,
   });
@@ -64,7 +62,7 @@ class AttendancePersonCard extends StatelessWidget {
                 ),
               ),
               AttendancePersonToggle(
-                isPresent: present || pending,
+                isPresent: present,
                 onTap: () => onToggle(entry),
               ),
             ],

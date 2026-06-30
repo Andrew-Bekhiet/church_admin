@@ -38,12 +38,15 @@ class AttendanceSummaryBar extends StatelessWidget {
         height: kAttendanceSummaryHeight,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            AttendanceSummarySegment(
-              label: AttendancePresenceFilter.present.label,
-              count: presentCount,
-              selected: filter == AttendancePresenceFilter.present,
-              onTap: () => _onSegmentTap(AttendancePresenceFilter.present),
+            Expanded(
+              child: AttendanceSummarySegment(
+                label: AttendancePresenceFilter.present.label,
+                count: presentCount,
+                selected: filter == AttendancePresenceFilter.present,
+                onTap: () => _onSegmentTap(AttendancePresenceFilter.present),
+              ),
             ),
             VerticalDivider(
               width: 1,
@@ -51,11 +54,13 @@ class AttendanceSummaryBar extends StatelessWidget {
               endIndent: 8,
               color: dividerColor,
             ),
-            AttendanceSummarySegment(
-              label: AttendancePresenceFilter.absent.label,
-              count: absentCount,
-              selected: filter == AttendancePresenceFilter.absent,
-              onTap: () => _onSegmentTap(AttendancePresenceFilter.absent),
+            Expanded(
+              child: AttendanceSummarySegment(
+                label: AttendancePresenceFilter.absent.label,
+                count: absentCount,
+                selected: filter == AttendancePresenceFilter.absent,
+                onTap: () => _onSegmentTap(AttendancePresenceFilter.absent),
+              ),
             ),
             VerticalDivider(
               width: 1,
@@ -63,11 +68,13 @@ class AttendanceSummaryBar extends StatelessWidget {
               endIndent: 8,
               color: dividerColor,
             ),
-            AttendanceSummarySegment(
-              label: AttendancePresenceFilter.all.label,
-              count: totalCount,
-              selected: filter == AttendancePresenceFilter.all,
-              onTap: () => _onSegmentTap(AttendancePresenceFilter.all),
+            Expanded(
+              child: AttendanceSummarySegment(
+                label: AttendancePresenceFilter.all.label,
+                count: totalCount,
+                selected: filter == AttendancePresenceFilter.all,
+                onTap: () => _onSegmentTap(AttendancePresenceFilter.all),
+              ),
             ),
           ],
         ),

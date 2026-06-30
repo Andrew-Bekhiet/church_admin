@@ -46,13 +46,7 @@ class RecordAttendanceLoadedView extends StatelessWidget {
           audienceView: state.view,
           sorting: state.sort,
           grouping: state.grouping,
-        ),
-        AttendanceSummaryBar(
-          presentCount: state.presentCount ?? 0,
-          absentCount: state.absentCount ?? 0,
-          totalCount: state.eligibleCount ?? 0,
-          filter: state.filter,
-          onFilterChanged: cubit.changePresenceFilter,
+          canToggleAudience: state.canToggleAudience,
         ),
       ],
       body: Builder(
@@ -63,37 +57,50 @@ class RecordAttendanceLoadedView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Expanded(
-                child: switch (state.rosterStatus) {
-                  RosterStatus.loading => const Center(
-                    child: CircularProgressIndicator(),
-                  ),
-                  RosterStatus.error => AttendanceErrorView(
-                    message: 'تعذر تحميل قائمة الحضور',
-                    onRetry: cubit.retry,
-                  ),
-                  RosterStatus.ready => CustomScrollView(
-                    slivers: [
-                      switch (state.grouping) {
-                        _ when state.entries.isEmpty =>
-                          const SliverFillRemaining(
-                            hasScrollBody: false,
-                            child: Center(child: Text('لا يوجد مخدومين')),
-                          ),
+                child: CustomScrollView(
+                  slivers: [
+                    AttendanceSummaryBar(
+                      presentCount: state.presentCount ?? 0,
+                      absentCount: state.absentCount ?? 0,
+                      totalCount: state.eligibleCount ?? 0,
+                      filter: state.filter,
+                      onFilterChanged: cubit.changePresenceFilter,
+                    ),
+                    switch (state.rosterStatus) {
+                      RosterStatus.loading => const SliverFillRemaining(
+                        child: Center(child: CircularProgressIndicator()),
+                      ),
+
+                      RosterStatus.error => SliverFillRemaining(
+                        child: AttendanceErrorView(
+                          message: 'تعذر تحميل قائمة الحضور',
+                          onRetry: cubit.retry,
+                        ),
+                      ),
+
+                      RosterStatus.ready when state.entries.isEmpty =>
+                        const SliverFillRemaining(
+                          hasScrollBody: false,
+                          child: Center(child: Text('لا يوجد مخدومين')),
+                        ),
+
+                      RosterStatus.ready => switch (state.grouping) {
                         AttendanceGrouping.none => AttendanceFlatRoster(
                           entries: state.entries,
-                          pendingPersonIds: state.pendingPersonIds,
                           onToggle: cubit.toggleAttendance,
                         ),
                         AttendanceGrouping.studyYear => AttendanceGroupedRoster(
                           entries: state.entries,
-                          pendingPersonIds: state.pendingPersonIds,
                           onToggle: cubit.toggleAttendance,
                         ),
                       },
+                    },
+
+                    if (state.rosterStatus == RosterStatus.ready &&
+                        state.entries.isNotEmpty)
                       const SliverToBoxAdapter(child: SizedBox(height: 88)),
-                    ],
-                  ),
-                },
+                  ],
+                ),
               ),
               if (showGutter && state.rosterStatus == RosterStatus.ready)
                 SafeArea(
