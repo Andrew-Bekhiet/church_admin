@@ -81,7 +81,9 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
       _canRecordServants;
 
   int indexForLetter(String letter) => _displayEntries.indexWhere(
-    (e) => _alphabet.firstLetterOf(e.person.name) == letter,
+    (e) =>
+        (_filter != AttendancePresenceFilter.all || !e.attended) &&
+        _alphabet.firstLetterOf(e.person.name) == letter,
   );
 
   void switchMeeting(Meeting meeting) {
