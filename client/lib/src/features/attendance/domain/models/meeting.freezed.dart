@@ -16,7 +16,7 @@ mixin _$Meeting {
   String get id;
   String get name;
   MeetingAudience get audience;
-  bool get archived;
+  bool get isArchived;
   Color? get color;
   String? get serviceId;
   Service? get service;
@@ -42,8 +42,8 @@ mixin _$Meeting {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.audience, audience) ||
                 other.audience == audience) &&
-            (identical(other.archived, archived) ||
-                other.archived == archived) &&
+            (identical(other.isArchived, isArchived) ||
+                other.isArchived == isArchived) &&
             (identical(other.color, color) || other.color == color) &&
             (identical(other.serviceId, serviceId) ||
                 other.serviceId == serviceId) &&
@@ -65,7 +65,7 @@ mixin _$Meeting {
     id,
     name,
     audience,
-    archived,
+    isArchived,
     color,
     serviceId,
     service,
@@ -78,7 +78,7 @@ mixin _$Meeting {
 
   @override
   String toString() {
-    return 'Meeting(id: $id, name: $name, audience: $audience, archived: $archived, color: $color, serviceId: $serviceId, service: $service, serviceStudyYear: $serviceStudyYear, studyYear: $studyYear, serviceGender: $serviceGender, groupId: $groupId, group: $group)';
+    return 'Meeting(id: $id, name: $name, audience: $audience, isArchived: $isArchived, color: $color, serviceId: $serviceId, service: $service, serviceStudyYear: $serviceStudyYear, studyYear: $studyYear, serviceGender: $serviceGender, groupId: $groupId, group: $group)';
   }
 }
 
@@ -91,7 +91,7 @@ abstract mixin class $MeetingCopyWith<$Res> {
     String id,
     String name,
     MeetingAudience audience,
-    bool archived,
+    bool isArchived,
     Color? color,
     String? serviceId,
     Service? service,
@@ -118,7 +118,7 @@ class _$MeetingCopyWithImpl<$Res> implements $MeetingCopyWith<$Res> {
     Object? id = null,
     Object? name = null,
     Object? audience = null,
-    Object? archived = null,
+    Object? isArchived = null,
     Object? color = freezed,
     Object? serviceId = freezed,
     Object? service = freezed,
@@ -142,9 +142,9 @@ class _$MeetingCopyWithImpl<$Res> implements $MeetingCopyWith<$Res> {
             ? _self.audience
             : audience // ignore: cast_nullable_to_non_nullable
                   as MeetingAudience,
-        archived: null == archived
-            ? _self.archived
-            : archived // ignore: cast_nullable_to_non_nullable
+        isArchived: null == isArchived
+            ? _self.isArchived
+            : isArchived // ignore: cast_nullable_to_non_nullable
                   as bool,
         color: freezed == color
             ? _self.color

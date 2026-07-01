@@ -173,6 +173,8 @@ class ViewableObjectService {
       return Symbols.groups;
     } else if (imageObject is Person || _isSubtype<T, Person>()) {
       return Symbols.person;
+    } else if (imageObject is Meeting || _isSubtype<T, Meeting>()) {
+      return Symbols.productivity;
     } else if (imageObject is User || _isSubtype<T, User>()) {
       return Symbols.person;
     }

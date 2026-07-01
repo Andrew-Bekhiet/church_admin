@@ -7,7 +7,7 @@ Meeting _meeting({
   String id = 'm1',
   String name = 'Test Meeting',
   MeetingAudience audience = MeetingAudience.onlyPersons,
-  bool archived = false,
+  bool isArchived = false,
   Color? color,
   String? serviceId,
   int? serviceStudyYear,
@@ -17,7 +17,7 @@ Meeting _meeting({
   id: id,
   name: name,
   audience: audience,
-  archived: archived,
+  isArchived: isArchived,
   color: color,
   serviceId: serviceId,
   serviceStudyYear: serviceStudyYear,
@@ -46,7 +46,7 @@ void main() {
         'id': 'm1',
         'name': 'test',
         'audience': 'unknownAudience',
-        'archived': false,
+        'isArchived': false,
       };
       expect(() => Meeting.fromJson(json), throwsA(anything));
     });
@@ -73,13 +73,13 @@ void main() {
         'id': 'meet-1',
         'name': 'Sunday Meeting',
         'audience': 'onlyPersons',
-        'archived': false,
+        'isArchived': false,
       };
       final meeting = Meeting.fromJson(json);
       expect(meeting.id, 'meet-1');
       expect(meeting.name, 'Sunday Meeting');
       expect(meeting.audience, MeetingAudience.onlyPersons);
-      expect(meeting.archived, isFalse);
+      expect(meeting.isArchived, isFalse);
       expect(meeting.color, isNull);
     });
 
@@ -88,7 +88,7 @@ void main() {
         'id': 'meet-1',
         'name': 'Coloured Meeting',
         'audience': 'onlyPersons',
-        'archived': false,
+        'isArchived': false,
         'color': 0xFF2196F3,
       };
       final meeting = Meeting.fromJson(json);
@@ -100,14 +100,14 @@ void main() {
         'id': 'meet-2',
         'name': 'Servants Meeting',
         'audience': 'onlyServants',
-        'archived': true,
+        'isArchived': true,
         'serviceId': 'svc-uuid',
         'serviceStudyYear': 3,
         'serviceGender': true,
         'groupId': null,
       };
       final meeting = Meeting.fromJson(json);
-      expect(meeting.archived, isTrue);
+      expect(meeting.isArchived, isTrue);
       expect(meeting.audience, MeetingAudience.onlyServants);
       expect(meeting.serviceId, 'svc-uuid');
       expect(meeting.serviceStudyYear, 3);
@@ -129,7 +129,7 @@ void main() {
       final input = meeting.toInsertInput();
       expect(input.name, 'New Meeting');
       expect(input.audience, 'personsAndServants');
-      expect(input.archived, isFalse);
+      expect(input.isArchived, isFalse);
       expect(input.color, isNotNull);
       expect(input.serviceStudyYear, 2);
       expect(input.serviceGender, isFalse);
@@ -176,16 +176,16 @@ void main() {
     });
 
     test('includes archived flag when changed', () {
-      final updated = _meeting(archived: true);
+      final updated = _meeting(isArchived: true);
       final input = updated.toUpdateInput(oldMeeting: original);
-      expect(input.archived, isTrue);
+      expect(input.isArchived, isTrue);
     });
 
     test('returns empty input when nothing changed', () {
       final input = original.toUpdateInput(oldMeeting: original);
       expect(input.name, isNull);
       expect(input.audience, isNull);
-      expect(input.archived, isNull);
+      expect(input.isArchived, isNull);
       expect(input.color, isNull);
     });
   });

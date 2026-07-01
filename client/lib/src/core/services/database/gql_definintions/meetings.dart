@@ -63,67 +63,45 @@ class MeetingsDAO extends DAOBase<Meeting>
         operationName: 'updateMeeting',
         variables: Variables_Mutation_updateMeeting(
           id: meetingId.toUuid(),
-          $set: Input_HistoryMeetingsSetInput(archived: isArchived),
+          $set: Input_HistoryMeetingsSetInput(isArchived: isArchived),
         ).toJson(),
         parserFn: db.parser.singleOrNullParser(Meeting.fromJson),
       ),
     );
   }
 
-  /// Streams the roster of persons eligible for [meetingId].
-  ///
-  /// Returns one entry per eligible person. [MeetingRosterEntry.attendance]
-  /// are non-null if the person attended in the [fromDate, toDate) window as
-  /// [asServant]; otherwise null (person has not been marked yet for that session).
-  ///
-  /// Pass [searchQuery] for search-as-you-type on name/phone.
+  /// Streams the roster of persons eligible for [meetingId], ordered by name
+  /// (prefixed by study year when [groupByStudyYear]). Name/phone search and
+  /// presence filtering are applied client side on the fully loaded roster.
   PaginatableStreamBase<MeetingRosterEntry> streamMeetingRoster({
     required String meetingId,
-    required bool asServant,
     required DateTime fromDate,
     required DateTime toDate,
-    Stream<String?>? searchQuery,
+    required bool groupByStudyYear,
     int limit = 200,
   }) {
+    final orderBy = [
+      if (groupByStudyYear)
+        Input_HistoryMeetingRosterOrderBy(studyYearId: Enum_OrderBy.ASC),
+      Input_HistoryMeetingRosterOrderBy(name: Enum_OrderBy.ASC),
+      Input_HistoryMeetingRosterOrderBy(personId: Enum_OrderBy.ASC),
+    ];
+
     return PaginatableStream.withSearch(
       pageSize: limit,
-      searchStream: searchQuery ?? Stream.value(null),
+      searchStream: Stream.value(null),
       factory: (request) {
-        final search = request.param;
         final whereFilters = [
-          if (search != null && search.isNotEmpty)
-            Input_HistoryMeetingsPersonsBoolExp(
-              person: Input_PersonsBoolExp(
-                $_or: [
-                  Input_PersonsBoolExp(
-                    name: Input_StringComparisonExp($_ilike: '%$search%'),
-                  ),
-                  Input_PersonsBoolExp(
-                    mainPhone: Input_StringComparisonExp(
-                      $_ilike: '%$search%',
-                    ),
-                  ),
-                ],
-              ),
-            ),
           if (request.cursor case final cursor?)
-            Input_HistoryMeetingsPersonsBoolExp(
+            Input_HistoryMeetingRosterBoolExp(
               $_or: [
-                Input_HistoryMeetingsPersonsBoolExp(
-                  person: Input_PersonsBoolExp(
-                    name: Input_StringComparisonExp(
-                      $_gt: cursor.person.name,
-                    ),
-                  ),
+                Input_HistoryMeetingRosterBoolExp(
+                  name: Input_StringComparisonExp($_gt: cursor.person.name),
                 ),
-                Input_HistoryMeetingsPersonsBoolExp(
-                  person: Input_PersonsBoolExp(
-                    name: Input_StringComparisonExp(
-                      $_eq: cursor.person.name,
-                    ),
-                    id: Input_UuidComparisonExp(
-                      $_gt: cursor.person.id.toUuid(),
-                    ),
+                Input_HistoryMeetingRosterBoolExp(
+                  name: Input_StringComparisonExp($_eq: cursor.person.name),
+                  personId: Input_UuidComparisonExp(
+                    $_gt: cursor.person.id.toUuid(),
                   ),
                 ),
               ],
@@ -136,10 +114,10 @@ class MeetingsDAO extends DAOBase<Meeting>
             operationName: 'watchMeetingRoster',
             variables: Variables_Subscription_watchMeetingRoster(
               meetingId: meetingId.toUuid(),
-              asServant: asServant,
               fromDate: fromDate,
               toDate: toDate,
               where: whereFilters,
+              orderBy: orderBy,
               limit: request.pageSize + 1,
             ).toJson(),
             parserFn: db.parser.singleListParser(
@@ -174,27 +152,32 @@ class MeetingsDAO extends DAOBase<Meeting>
     );
   }
 
-  /// Live count of persons eligible for [meetingId] via the `meeting_roster` view.
-  Stream<int?> streamEligibleCount({required String meetingId}) {
+  /// Live count of persons eligible for [meetingId] via the `meeting_roster`
+  /// view, scoped to the [asServant] audience.
+  Stream<int?> streamEligibleCount({
+    required String meetingId,
+    required bool asServant,
+  }) {
     return graphQLClient.subscribeAndReturnParsed(
       SubscriptionOptions(
         document: documentNodeSubscriptionwatchMeetingEligibleCount,
         operationName: 'watchMeetingEligibleCount',
         variables: Variables_Subscription_watchMeetingEligibleCount(
           meetingId: meetingId.toUuid(),
+          asServant: asServant,
         ).toJson(),
         parserFn: db.parser.countParser,
       ),
     );
   }
 
-  /// Marks a person as present at a meeting.
-  Future<AttendanceRecord?> markAttendance({
+  Future<AttendanceRecord> markAttendance({
     required String meetingId,
     required String personId,
+    required DateTime datetime,
     bool asServant = false,
   }) {
-    return graphQLClient.mutateAndReturnParsedNullable(
+    return graphQLClient.mutateAndReturnParsed(
       MutationOptions(
         document: documentNodeMutationmarkAttendance,
         operationName: 'markAttendance',
@@ -203,66 +186,25 @@ class MeetingsDAO extends DAOBase<Meeting>
             meetingId: meetingId.toUuid(),
             personId: personId.toUuid(),
             asServant: asServant,
+            datetime: datetime,
           ),
         ).toJson(),
-        parserFn: db.parser.singleOrNullParser(AttendanceRecord.fromJson),
+        parserFn: db.parser.singleParser(AttendanceRecord.fromJson),
       ),
     );
   }
 
-  /// Marks multiple persons as present at a meeting in a single request.
-  Future<void> markAttendanceMany({
-    required String meetingId,
-    required List<String> personIds,
-    bool asServant = false,
+  Future<AttendanceRecord> unmarkAttendance({
+    required String attendanceRecordId,
   }) {
-    return graphQLClient.mutate(
-      MutationOptions(
-        document: documentNodeMutationmarkAttendanceMany,
-        operationName: 'markAttendanceMany',
-        variables: Variables_Mutation_markAttendanceMany(
-          objects: personIds
-              .map(
-                (id) => Input_HistoryAttendanceHistoryInsertInput(
-                  meetingId: meetingId.toUuid(),
-                  personId: id.toUuid(),
-                  asServant: asServant,
-                ),
-              )
-              .toList(),
-        ).toJson(),
-      ),
-    );
-  }
-
-  /// Unmarks attendance by the attendance record [id] (preferred when id is known).
-  Future<void> unmarkAttendance({required String id}) {
-    return graphQLClient.mutate(
+    return graphQLClient.mutateAndReturnParsed(
       MutationOptions(
         document: documentNodeMutationunmarkAttendance,
         operationName: 'unmarkAttendance',
         variables: Variables_Mutation_unmarkAttendance(
-          id: id.toUuid(),
+          id: attendanceRecordId.toUuid(),
         ).toJson(),
-      ),
-    );
-  }
-
-  /// Unmarks attendance by meeting + person + asServant when record id is not known.
-  Future<void> unmarkAttendanceBy({
-    required String meetingId,
-    required String personId,
-    bool asServant = false,
-  }) {
-    return graphQLClient.mutate(
-      MutationOptions(
-        document: documentNodeMutationunmarkAttendanceBy,
-        operationName: 'unmarkAttendanceBy',
-        variables: Variables_Mutation_unmarkAttendanceBy(
-          meetingId: meetingId.toUuid(),
-          personId: personId.toUuid(),
-          asServant: asServant,
-        ).toJson(),
+        parserFn: db.parser.singleParser(AttendanceRecord.fromJson),
       ),
     );
   }

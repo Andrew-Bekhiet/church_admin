@@ -24,42 +24,13 @@ mutation markAttendance($object: HistoryAttendanceHistoryInsertInput!) {
   }
 }
 
-mutation markAttendanceMany($objects: [HistoryAttendanceHistoryInsertInput!]!) {
-  insertHistoryAttendanceHistory(objects: $objects) {
-    returning {
-      id
-      meetingId
-      personId
-      datetime
-      asServant
-    }
-  }
-}
-
 mutation unmarkAttendance($id: uuid!) {
   deleteHistoryAttendanceHistoryByPk(id: $id) {
     id
     meetingId
     personId
-  }
-}
-
-mutation unmarkAttendanceBy(
-  $meetingId: uuid!
-  $personId: uuid!
-  $asServant: Boolean!
-) {
-  deleteHistoryAttendanceHistory(
-    where: {
-      meetingId: { _eq: $meetingId }
-      personId: { _eq: $personId }
-      asServant: { _eq: $asServant }
-    }
-  ) {
-    returning {
-      id
-      meetingId
-      personId
-    }
+    datetime
+    asServant
+    recordedBy
   }
 }

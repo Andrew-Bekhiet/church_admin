@@ -2497,317 +2497,526 @@ class _CopyWithStubImpl_Input_HistoryLatestVisitsOrderBy<TRes>
       CopyWith_Input_AuthUsersDataOrderBy.stub(_res);
 }
 
-class Input_HistoryMeetingsAggregateOrderBy {
-  factory Input_HistoryMeetingsAggregateOrderBy({
-    Input_HistoryMeetingsAvgOrderBy? avg,
-    Enum_OrderBy? count,
-    Input_HistoryMeetingsMaxOrderBy? max,
-    Input_HistoryMeetingsMinOrderBy? min,
-    Input_HistoryMeetingsStddevOrderBy? stddev,
-    Input_HistoryMeetingsStddevPopOrderBy? stddevPop,
-    Input_HistoryMeetingsStddevSampOrderBy? stddevSamp,
-    Input_HistoryMeetingsSumOrderBy? sum,
-    Input_HistoryMeetingsVarPopOrderBy? varPop,
-    Input_HistoryMeetingsVarSampOrderBy? varSamp,
-    Input_HistoryMeetingsVarianceOrderBy? variance,
-  }) => Input_HistoryMeetingsAggregateOrderBy._({
-    if (avg != null) r'avg': avg,
-    if (count != null) r'count': count,
-    if (max != null) r'max': max,
-    if (min != null) r'min': min,
-    if (stddev != null) r'stddev': stddev,
-    if (stddevPop != null) r'stddevPop': stddevPop,
-    if (stddevSamp != null) r'stddevSamp': stddevSamp,
-    if (sum != null) r'sum': sum,
-    if (varPop != null) r'varPop': varPop,
-    if (varSamp != null) r'varSamp': varSamp,
-    if (variance != null) r'variance': variance,
+class Input_HistoryMeetingRosterBoolExp {
+  factory Input_HistoryMeetingRosterBoolExp({
+    List<Input_HistoryMeetingRosterBoolExp>? $_and,
+    Input_HistoryMeetingRosterBoolExp? $_not,
+    List<Input_HistoryMeetingRosterBoolExp>? $_or,
+    Input_BooleanComparisonExp? asServant,
+    Input_HistoryAttendanceHistoryBoolExp? attendanceHistory,
+    Input_HistoryAttendanceHistoryAggregateBoolExp? attendanceHistoryAggregate,
+    Input_StringComparisonExp? blurhash,
+    Input_BigintComparisonExp? color,
+    Input_BooleanComparisonExp? gender,
+    Input_StringComparisonExp? mainPhone,
+    Input_HistoryMeetingsBoolExp? meeting,
+    Input_UuidComparisonExp? meetingId,
+    Input_StringComparisonExp? name,
+    Input_PersonsBoolExp? person,
+    Input_UuidComparisonExp? personId,
+    Input_TimestamptzComparisonExp? photoUpdatedAt,
+    Input_IntComparisonExp? studyYearId,
+    Input_StringComparisonExp? studyYearName,
+  }) => Input_HistoryMeetingRosterBoolExp._({
+    if ($_and != null) r'_and': $_and,
+    if ($_not != null) r'_not': $_not,
+    if ($_or != null) r'_or': $_or,
+    if (asServant != null) r'asServant': asServant,
+    if (attendanceHistory != null) r'attendanceHistory': attendanceHistory,
+    if (attendanceHistoryAggregate != null)
+      r'attendanceHistoryAggregate': attendanceHistoryAggregate,
+    if (blurhash != null) r'blurhash': blurhash,
+    if (color != null) r'color': color,
+    if (gender != null) r'gender': gender,
+    if (mainPhone != null) r'mainPhone': mainPhone,
+    if (meeting != null) r'meeting': meeting,
+    if (meetingId != null) r'meetingId': meetingId,
+    if (name != null) r'name': name,
+    if (person != null) r'person': person,
+    if (personId != null) r'personId': personId,
+    if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
+    if (studyYearId != null) r'studyYearId': studyYearId,
+    if (studyYearName != null) r'studyYearName': studyYearName,
   });
 
-  Input_HistoryMeetingsAggregateOrderBy._(this._$data);
+  Input_HistoryMeetingRosterBoolExp._(this._$data);
 
-  factory Input_HistoryMeetingsAggregateOrderBy.fromJson(
+  factory Input_HistoryMeetingRosterBoolExp.fromJson(
     Map<String, dynamic> data,
   ) {
     final result$data = <String, dynamic>{};
-    if (data.containsKey('avg')) {
-      final l$avg = data['avg'];
-      result$data['avg'] = l$avg == null
+    if (data.containsKey('_and')) {
+      final l$$_and = data['_and'];
+      result$data['_and'] = (l$$_and as List<dynamic>?)
+          ?.map(
+            (e) => Input_HistoryMeetingRosterBoolExp.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
+          .toList();
+    }
+    if (data.containsKey('_not')) {
+      final l$$_not = data['_not'];
+      result$data['_not'] = l$$_not == null
           ? null
-          : Input_HistoryMeetingsAvgOrderBy.fromJson(
-              (l$avg as Map<String, dynamic>),
+          : Input_HistoryMeetingRosterBoolExp.fromJson(
+              (l$$_not as Map<String, dynamic>),
             );
     }
-    if (data.containsKey('count')) {
-      final l$count = data['count'];
-      result$data['count'] = l$count == null
-          ? null
-          : fromJson_Enum_OrderBy((l$count as String));
+    if (data.containsKey('_or')) {
+      final l$$_or = data['_or'];
+      result$data['_or'] = (l$$_or as List<dynamic>?)
+          ?.map(
+            (e) => Input_HistoryMeetingRosterBoolExp.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
+          .toList();
     }
-    if (data.containsKey('max')) {
-      final l$max = data['max'];
-      result$data['max'] = l$max == null
+    if (data.containsKey('asServant')) {
+      final l$asServant = data['asServant'];
+      result$data['asServant'] = l$asServant == null
           ? null
-          : Input_HistoryMeetingsMaxOrderBy.fromJson(
-              (l$max as Map<String, dynamic>),
+          : Input_BooleanComparisonExp.fromJson(
+              (l$asServant as Map<String, dynamic>),
             );
     }
-    if (data.containsKey('min')) {
-      final l$min = data['min'];
-      result$data['min'] = l$min == null
+    if (data.containsKey('attendanceHistory')) {
+      final l$attendanceHistory = data['attendanceHistory'];
+      result$data['attendanceHistory'] = l$attendanceHistory == null
           ? null
-          : Input_HistoryMeetingsMinOrderBy.fromJson(
-              (l$min as Map<String, dynamic>),
+          : Input_HistoryAttendanceHistoryBoolExp.fromJson(
+              (l$attendanceHistory as Map<String, dynamic>),
             );
     }
-    if (data.containsKey('stddev')) {
-      final l$stddev = data['stddev'];
-      result$data['stddev'] = l$stddev == null
+    if (data.containsKey('attendanceHistoryAggregate')) {
+      final l$attendanceHistoryAggregate = data['attendanceHistoryAggregate'];
+      result$data['attendanceHistoryAggregate'] =
+          l$attendanceHistoryAggregate == null
           ? null
-          : Input_HistoryMeetingsStddevOrderBy.fromJson(
-              (l$stddev as Map<String, dynamic>),
+          : Input_HistoryAttendanceHistoryAggregateBoolExp.fromJson(
+              (l$attendanceHistoryAggregate as Map<String, dynamic>),
             );
     }
-    if (data.containsKey('stddevPop')) {
-      final l$stddevPop = data['stddevPop'];
-      result$data['stddevPop'] = l$stddevPop == null
+    if (data.containsKey('blurhash')) {
+      final l$blurhash = data['blurhash'];
+      result$data['blurhash'] = l$blurhash == null
           ? null
-          : Input_HistoryMeetingsStddevPopOrderBy.fromJson(
-              (l$stddevPop as Map<String, dynamic>),
+          : Input_StringComparisonExp.fromJson(
+              (l$blurhash as Map<String, dynamic>),
             );
     }
-    if (data.containsKey('stddevSamp')) {
-      final l$stddevSamp = data['stddevSamp'];
-      result$data['stddevSamp'] = l$stddevSamp == null
+    if (data.containsKey('color')) {
+      final l$color = data['color'];
+      result$data['color'] = l$color == null
           ? null
-          : Input_HistoryMeetingsStddevSampOrderBy.fromJson(
-              (l$stddevSamp as Map<String, dynamic>),
+          : Input_BigintComparisonExp.fromJson(
+              (l$color as Map<String, dynamic>),
             );
     }
-    if (data.containsKey('sum')) {
-      final l$sum = data['sum'];
-      result$data['sum'] = l$sum == null
+    if (data.containsKey('gender')) {
+      final l$gender = data['gender'];
+      result$data['gender'] = l$gender == null
           ? null
-          : Input_HistoryMeetingsSumOrderBy.fromJson(
-              (l$sum as Map<String, dynamic>),
+          : Input_BooleanComparisonExp.fromJson(
+              (l$gender as Map<String, dynamic>),
             );
     }
-    if (data.containsKey('varPop')) {
-      final l$varPop = data['varPop'];
-      result$data['varPop'] = l$varPop == null
+    if (data.containsKey('mainPhone')) {
+      final l$mainPhone = data['mainPhone'];
+      result$data['mainPhone'] = l$mainPhone == null
           ? null
-          : Input_HistoryMeetingsVarPopOrderBy.fromJson(
-              (l$varPop as Map<String, dynamic>),
+          : Input_StringComparisonExp.fromJson(
+              (l$mainPhone as Map<String, dynamic>),
             );
     }
-    if (data.containsKey('varSamp')) {
-      final l$varSamp = data['varSamp'];
-      result$data['varSamp'] = l$varSamp == null
+    if (data.containsKey('meeting')) {
+      final l$meeting = data['meeting'];
+      result$data['meeting'] = l$meeting == null
           ? null
-          : Input_HistoryMeetingsVarSampOrderBy.fromJson(
-              (l$varSamp as Map<String, dynamic>),
+          : Input_HistoryMeetingsBoolExp.fromJson(
+              (l$meeting as Map<String, dynamic>),
             );
     }
-    if (data.containsKey('variance')) {
-      final l$variance = data['variance'];
-      result$data['variance'] = l$variance == null
+    if (data.containsKey('meetingId')) {
+      final l$meetingId = data['meetingId'];
+      result$data['meetingId'] = l$meetingId == null
           ? null
-          : Input_HistoryMeetingsVarianceOrderBy.fromJson(
-              (l$variance as Map<String, dynamic>),
+          : Input_UuidComparisonExp.fromJson(
+              (l$meetingId as Map<String, dynamic>),
             );
     }
-    return Input_HistoryMeetingsAggregateOrderBy._(result$data);
+    if (data.containsKey('name')) {
+      final l$name = data['name'];
+      result$data['name'] = l$name == null
+          ? null
+          : Input_StringComparisonExp.fromJson(
+              (l$name as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('person')) {
+      final l$person = data['person'];
+      result$data['person'] = l$person == null
+          ? null
+          : Input_PersonsBoolExp.fromJson((l$person as Map<String, dynamic>));
+    }
+    if (data.containsKey('personId')) {
+      final l$personId = data['personId'];
+      result$data['personId'] = l$personId == null
+          ? null
+          : Input_UuidComparisonExp.fromJson(
+              (l$personId as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('photoUpdatedAt')) {
+      final l$photoUpdatedAt = data['photoUpdatedAt'];
+      result$data['photoUpdatedAt'] = l$photoUpdatedAt == null
+          ? null
+          : Input_TimestamptzComparisonExp.fromJson(
+              (l$photoUpdatedAt as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('studyYearId')) {
+      final l$studyYearId = data['studyYearId'];
+      result$data['studyYearId'] = l$studyYearId == null
+          ? null
+          : Input_IntComparisonExp.fromJson(
+              (l$studyYearId as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('studyYearName')) {
+      final l$studyYearName = data['studyYearName'];
+      result$data['studyYearName'] = l$studyYearName == null
+          ? null
+          : Input_StringComparisonExp.fromJson(
+              (l$studyYearName as Map<String, dynamic>),
+            );
+    }
+    return Input_HistoryMeetingRosterBoolExp._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  Input_HistoryMeetingsAvgOrderBy? get avg =>
-      (_$data['avg'] as Input_HistoryMeetingsAvgOrderBy?);
+  List<Input_HistoryMeetingRosterBoolExp>? get $_and =>
+      (_$data['_and'] as List<Input_HistoryMeetingRosterBoolExp>?);
 
-  Enum_OrderBy? get count => (_$data['count'] as Enum_OrderBy?);
+  Input_HistoryMeetingRosterBoolExp? get $_not =>
+      (_$data['_not'] as Input_HistoryMeetingRosterBoolExp?);
 
-  Input_HistoryMeetingsMaxOrderBy? get max =>
-      (_$data['max'] as Input_HistoryMeetingsMaxOrderBy?);
+  List<Input_HistoryMeetingRosterBoolExp>? get $_or =>
+      (_$data['_or'] as List<Input_HistoryMeetingRosterBoolExp>?);
 
-  Input_HistoryMeetingsMinOrderBy? get min =>
-      (_$data['min'] as Input_HistoryMeetingsMinOrderBy?);
+  Input_BooleanComparisonExp? get asServant =>
+      (_$data['asServant'] as Input_BooleanComparisonExp?);
 
-  Input_HistoryMeetingsStddevOrderBy? get stddev =>
-      (_$data['stddev'] as Input_HistoryMeetingsStddevOrderBy?);
+  Input_HistoryAttendanceHistoryBoolExp? get attendanceHistory =>
+      (_$data['attendanceHistory'] as Input_HistoryAttendanceHistoryBoolExp?);
 
-  Input_HistoryMeetingsStddevPopOrderBy? get stddevPop =>
-      (_$data['stddevPop'] as Input_HistoryMeetingsStddevPopOrderBy?);
+  Input_HistoryAttendanceHistoryAggregateBoolExp?
+  get attendanceHistoryAggregate =>
+      (_$data['attendanceHistoryAggregate']
+          as Input_HistoryAttendanceHistoryAggregateBoolExp?);
 
-  Input_HistoryMeetingsStddevSampOrderBy? get stddevSamp =>
-      (_$data['stddevSamp'] as Input_HistoryMeetingsStddevSampOrderBy?);
+  Input_StringComparisonExp? get blurhash =>
+      (_$data['blurhash'] as Input_StringComparisonExp?);
 
-  Input_HistoryMeetingsSumOrderBy? get sum =>
-      (_$data['sum'] as Input_HistoryMeetingsSumOrderBy?);
+  Input_BigintComparisonExp? get color =>
+      (_$data['color'] as Input_BigintComparisonExp?);
 
-  Input_HistoryMeetingsVarPopOrderBy? get varPop =>
-      (_$data['varPop'] as Input_HistoryMeetingsVarPopOrderBy?);
+  Input_BooleanComparisonExp? get gender =>
+      (_$data['gender'] as Input_BooleanComparisonExp?);
 
-  Input_HistoryMeetingsVarSampOrderBy? get varSamp =>
-      (_$data['varSamp'] as Input_HistoryMeetingsVarSampOrderBy?);
+  Input_StringComparisonExp? get mainPhone =>
+      (_$data['mainPhone'] as Input_StringComparisonExp?);
 
-  Input_HistoryMeetingsVarianceOrderBy? get variance =>
-      (_$data['variance'] as Input_HistoryMeetingsVarianceOrderBy?);
+  Input_HistoryMeetingsBoolExp? get meeting =>
+      (_$data['meeting'] as Input_HistoryMeetingsBoolExp?);
+
+  Input_UuidComparisonExp? get meetingId =>
+      (_$data['meetingId'] as Input_UuidComparisonExp?);
+
+  Input_StringComparisonExp? get name =>
+      (_$data['name'] as Input_StringComparisonExp?);
+
+  Input_PersonsBoolExp? get person =>
+      (_$data['person'] as Input_PersonsBoolExp?);
+
+  Input_UuidComparisonExp? get personId =>
+      (_$data['personId'] as Input_UuidComparisonExp?);
+
+  Input_TimestamptzComparisonExp? get photoUpdatedAt =>
+      (_$data['photoUpdatedAt'] as Input_TimestamptzComparisonExp?);
+
+  Input_IntComparisonExp? get studyYearId =>
+      (_$data['studyYearId'] as Input_IntComparisonExp?);
+
+  Input_StringComparisonExp? get studyYearName =>
+      (_$data['studyYearName'] as Input_StringComparisonExp?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
-    if (_$data.containsKey('avg')) {
-      final l$avg = avg;
-      result$data['avg'] = l$avg?.toJson();
+    if (_$data.containsKey('_and')) {
+      final l$$_and = $_and;
+      result$data['_and'] = l$$_and?.map((e) => e.toJson()).toList();
     }
-    if (_$data.containsKey('count')) {
-      final l$count = count;
-      result$data['count'] = l$count == null
-          ? null
-          : toJson_Enum_OrderBy(l$count);
+    if (_$data.containsKey('_not')) {
+      final l$$_not = $_not;
+      result$data['_not'] = l$$_not?.toJson();
     }
-    if (_$data.containsKey('max')) {
-      final l$max = max;
-      result$data['max'] = l$max?.toJson();
+    if (_$data.containsKey('_or')) {
+      final l$$_or = $_or;
+      result$data['_or'] = l$$_or?.map((e) => e.toJson()).toList();
     }
-    if (_$data.containsKey('min')) {
-      final l$min = min;
-      result$data['min'] = l$min?.toJson();
+    if (_$data.containsKey('asServant')) {
+      final l$asServant = asServant;
+      result$data['asServant'] = l$asServant?.toJson();
     }
-    if (_$data.containsKey('stddev')) {
-      final l$stddev = stddev;
-      result$data['stddev'] = l$stddev?.toJson();
+    if (_$data.containsKey('attendanceHistory')) {
+      final l$attendanceHistory = attendanceHistory;
+      result$data['attendanceHistory'] = l$attendanceHistory?.toJson();
     }
-    if (_$data.containsKey('stddevPop')) {
-      final l$stddevPop = stddevPop;
-      result$data['stddevPop'] = l$stddevPop?.toJson();
+    if (_$data.containsKey('attendanceHistoryAggregate')) {
+      final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
+      result$data['attendanceHistoryAggregate'] = l$attendanceHistoryAggregate
+          ?.toJson();
     }
-    if (_$data.containsKey('stddevSamp')) {
-      final l$stddevSamp = stddevSamp;
-      result$data['stddevSamp'] = l$stddevSamp?.toJson();
+    if (_$data.containsKey('blurhash')) {
+      final l$blurhash = blurhash;
+      result$data['blurhash'] = l$blurhash?.toJson();
     }
-    if (_$data.containsKey('sum')) {
-      final l$sum = sum;
-      result$data['sum'] = l$sum?.toJson();
+    if (_$data.containsKey('color')) {
+      final l$color = color;
+      result$data['color'] = l$color?.toJson();
     }
-    if (_$data.containsKey('varPop')) {
-      final l$varPop = varPop;
-      result$data['varPop'] = l$varPop?.toJson();
+    if (_$data.containsKey('gender')) {
+      final l$gender = gender;
+      result$data['gender'] = l$gender?.toJson();
     }
-    if (_$data.containsKey('varSamp')) {
-      final l$varSamp = varSamp;
-      result$data['varSamp'] = l$varSamp?.toJson();
+    if (_$data.containsKey('mainPhone')) {
+      final l$mainPhone = mainPhone;
+      result$data['mainPhone'] = l$mainPhone?.toJson();
     }
-    if (_$data.containsKey('variance')) {
-      final l$variance = variance;
-      result$data['variance'] = l$variance?.toJson();
+    if (_$data.containsKey('meeting')) {
+      final l$meeting = meeting;
+      result$data['meeting'] = l$meeting?.toJson();
+    }
+    if (_$data.containsKey('meetingId')) {
+      final l$meetingId = meetingId;
+      result$data['meetingId'] = l$meetingId?.toJson();
+    }
+    if (_$data.containsKey('name')) {
+      final l$name = name;
+      result$data['name'] = l$name?.toJson();
+    }
+    if (_$data.containsKey('person')) {
+      final l$person = person;
+      result$data['person'] = l$person?.toJson();
+    }
+    if (_$data.containsKey('personId')) {
+      final l$personId = personId;
+      result$data['personId'] = l$personId?.toJson();
+    }
+    if (_$data.containsKey('photoUpdatedAt')) {
+      final l$photoUpdatedAt = photoUpdatedAt;
+      result$data['photoUpdatedAt'] = l$photoUpdatedAt?.toJson();
+    }
+    if (_$data.containsKey('studyYearId')) {
+      final l$studyYearId = studyYearId;
+      result$data['studyYearId'] = l$studyYearId?.toJson();
+    }
+    if (_$data.containsKey('studyYearName')) {
+      final l$studyYearName = studyYearName;
+      result$data['studyYearName'] = l$studyYearName?.toJson();
     }
     return result$data;
   }
 
-  CopyWith_Input_HistoryMeetingsAggregateOrderBy<
-    Input_HistoryMeetingsAggregateOrderBy
-  >
-  get copyWith =>
-      CopyWith_Input_HistoryMeetingsAggregateOrderBy(this, (i) => i);
+  CopyWith_Input_HistoryMeetingRosterBoolExp<Input_HistoryMeetingRosterBoolExp>
+  get copyWith => CopyWith_Input_HistoryMeetingRosterBoolExp(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input_HistoryMeetingsAggregateOrderBy ||
+    if (other is! Input_HistoryMeetingRosterBoolExp ||
         runtimeType != other.runtimeType) {
       return false;
     }
-    final l$avg = avg;
-    final lOther$avg = other.avg;
-    if (_$data.containsKey('avg') != other._$data.containsKey('avg')) {
+    final l$$_and = $_and;
+    final lOther$$_and = other.$_and;
+    if (_$data.containsKey('_and') != other._$data.containsKey('_and')) {
       return false;
     }
-    if (l$avg != lOther$avg) {
+    if (l$$_and != null && lOther$$_and != null) {
+      if (l$$_and.length != lOther$$_and.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$_and.length; i++) {
+        final l$$_and$entry = l$$_and[i];
+        final lOther$$_and$entry = lOther$$_and[i];
+        if (l$$_and$entry != lOther$$_and$entry) {
+          return false;
+        }
+      }
+    } else if (l$$_and != lOther$$_and) {
       return false;
     }
-    final l$count = count;
-    final lOther$count = other.count;
-    if (_$data.containsKey('count') != other._$data.containsKey('count')) {
+    final l$$_not = $_not;
+    final lOther$$_not = other.$_not;
+    if (_$data.containsKey('_not') != other._$data.containsKey('_not')) {
       return false;
     }
-    if (l$count != lOther$count) {
+    if (l$$_not != lOther$$_not) {
       return false;
     }
-    final l$max = max;
-    final lOther$max = other.max;
-    if (_$data.containsKey('max') != other._$data.containsKey('max')) {
+    final l$$_or = $_or;
+    final lOther$$_or = other.$_or;
+    if (_$data.containsKey('_or') != other._$data.containsKey('_or')) {
       return false;
     }
-    if (l$max != lOther$max) {
+    if (l$$_or != null && lOther$$_or != null) {
+      if (l$$_or.length != lOther$$_or.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$_or.length; i++) {
+        final l$$_or$entry = l$$_or[i];
+        final lOther$$_or$entry = lOther$$_or[i];
+        if (l$$_or$entry != lOther$$_or$entry) {
+          return false;
+        }
+      }
+    } else if (l$$_or != lOther$$_or) {
       return false;
     }
-    final l$min = min;
-    final lOther$min = other.min;
-    if (_$data.containsKey('min') != other._$data.containsKey('min')) {
+    final l$asServant = asServant;
+    final lOther$asServant = other.asServant;
+    if (_$data.containsKey('asServant') !=
+        other._$data.containsKey('asServant')) {
       return false;
     }
-    if (l$min != lOther$min) {
+    if (l$asServant != lOther$asServant) {
       return false;
     }
-    final l$stddev = stddev;
-    final lOther$stddev = other.stddev;
-    if (_$data.containsKey('stddev') != other._$data.containsKey('stddev')) {
+    final l$attendanceHistory = attendanceHistory;
+    final lOther$attendanceHistory = other.attendanceHistory;
+    if (_$data.containsKey('attendanceHistory') !=
+        other._$data.containsKey('attendanceHistory')) {
       return false;
     }
-    if (l$stddev != lOther$stddev) {
+    if (l$attendanceHistory != lOther$attendanceHistory) {
       return false;
     }
-    final l$stddevPop = stddevPop;
-    final lOther$stddevPop = other.stddevPop;
-    if (_$data.containsKey('stddevPop') !=
-        other._$data.containsKey('stddevPop')) {
+    final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
+    final lOther$attendanceHistoryAggregate = other.attendanceHistoryAggregate;
+    if (_$data.containsKey('attendanceHistoryAggregate') !=
+        other._$data.containsKey('attendanceHistoryAggregate')) {
       return false;
     }
-    if (l$stddevPop != lOther$stddevPop) {
+    if (l$attendanceHistoryAggregate != lOther$attendanceHistoryAggregate) {
       return false;
     }
-    final l$stddevSamp = stddevSamp;
-    final lOther$stddevSamp = other.stddevSamp;
-    if (_$data.containsKey('stddevSamp') !=
-        other._$data.containsKey('stddevSamp')) {
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (_$data.containsKey('blurhash') !=
+        other._$data.containsKey('blurhash')) {
       return false;
     }
-    if (l$stddevSamp != lOther$stddevSamp) {
+    if (l$blurhash != lOther$blurhash) {
       return false;
     }
-    final l$sum = sum;
-    final lOther$sum = other.sum;
-    if (_$data.containsKey('sum') != other._$data.containsKey('sum')) {
+    final l$color = color;
+    final lOther$color = other.color;
+    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
       return false;
     }
-    if (l$sum != lOther$sum) {
+    if (l$color != lOther$color) {
       return false;
     }
-    final l$varPop = varPop;
-    final lOther$varPop = other.varPop;
-    if (_$data.containsKey('varPop') != other._$data.containsKey('varPop')) {
+    final l$gender = gender;
+    final lOther$gender = other.gender;
+    if (_$data.containsKey('gender') != other._$data.containsKey('gender')) {
       return false;
     }
-    if (l$varPop != lOther$varPop) {
+    if (l$gender != lOther$gender) {
       return false;
     }
-    final l$varSamp = varSamp;
-    final lOther$varSamp = other.varSamp;
-    if (_$data.containsKey('varSamp') != other._$data.containsKey('varSamp')) {
+    final l$mainPhone = mainPhone;
+    final lOther$mainPhone = other.mainPhone;
+    if (_$data.containsKey('mainPhone') !=
+        other._$data.containsKey('mainPhone')) {
       return false;
     }
-    if (l$varSamp != lOther$varSamp) {
+    if (l$mainPhone != lOther$mainPhone) {
       return false;
     }
-    final l$variance = variance;
-    final lOther$variance = other.variance;
-    if (_$data.containsKey('variance') !=
-        other._$data.containsKey('variance')) {
+    final l$meeting = meeting;
+    final lOther$meeting = other.meeting;
+    if (_$data.containsKey('meeting') != other._$data.containsKey('meeting')) {
       return false;
     }
-    if (l$variance != lOther$variance) {
+    if (l$meeting != lOther$meeting) {
+      return false;
+    }
+    final l$meetingId = meetingId;
+    final lOther$meetingId = other.meetingId;
+    if (_$data.containsKey('meetingId') !=
+        other._$data.containsKey('meetingId')) {
+      return false;
+    }
+    if (l$meetingId != lOther$meetingId) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (_$data.containsKey('name') != other._$data.containsKey('name')) {
+      return false;
+    }
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$person = person;
+    final lOther$person = other.person;
+    if (_$data.containsKey('person') != other._$data.containsKey('person')) {
+      return false;
+    }
+    if (l$person != lOther$person) {
+      return false;
+    }
+    final l$personId = personId;
+    final lOther$personId = other.personId;
+    if (_$data.containsKey('personId') !=
+        other._$data.containsKey('personId')) {
+      return false;
+    }
+    if (l$personId != lOther$personId) {
+      return false;
+    }
+    final l$photoUpdatedAt = photoUpdatedAt;
+    final lOther$photoUpdatedAt = other.photoUpdatedAt;
+    if (_$data.containsKey('photoUpdatedAt') !=
+        other._$data.containsKey('photoUpdatedAt')) {
+      return false;
+    }
+    if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
+      return false;
+    }
+    final l$studyYearId = studyYearId;
+    final lOther$studyYearId = other.studyYearId;
+    if (_$data.containsKey('studyYearId') !=
+        other._$data.containsKey('studyYearId')) {
+      return false;
+    }
+    if (l$studyYearId != lOther$studyYearId) {
+      return false;
+    }
+    final l$studyYearName = studyYearName;
+    final lOther$studyYearName = other.studyYearName;
+    if (_$data.containsKey('studyYearName') !=
+        other._$data.containsKey('studyYearName')) {
+      return false;
+    }
+    if (l$studyYearName != lOther$studyYearName) {
       return false;
     }
     return true;
@@ -2815,29 +3024,53 @@ class Input_HistoryMeetingsAggregateOrderBy {
 
   @override
   int get hashCode {
-    final l$avg = avg;
-    final l$count = count;
-    final l$max = max;
-    final l$min = min;
-    final l$stddev = stddev;
-    final l$stddevPop = stddevPop;
-    final l$stddevSamp = stddevSamp;
-    final l$sum = sum;
-    final l$varPop = varPop;
-    final l$varSamp = varSamp;
-    final l$variance = variance;
+    final l$$_and = $_and;
+    final l$$_not = $_not;
+    final l$$_or = $_or;
+    final l$asServant = asServant;
+    final l$attendanceHistory = attendanceHistory;
+    final l$attendanceHistoryAggregate = attendanceHistoryAggregate;
+    final l$blurhash = blurhash;
+    final l$color = color;
+    final l$gender = gender;
+    final l$mainPhone = mainPhone;
+    final l$meeting = meeting;
+    final l$meetingId = meetingId;
+    final l$name = name;
+    final l$person = person;
+    final l$personId = personId;
+    final l$photoUpdatedAt = photoUpdatedAt;
+    final l$studyYearId = studyYearId;
+    final l$studyYearName = studyYearName;
     return Object.hashAll([
-      _$data.containsKey('avg') ? l$avg : const {},
-      _$data.containsKey('count') ? l$count : const {},
-      _$data.containsKey('max') ? l$max : const {},
-      _$data.containsKey('min') ? l$min : const {},
-      _$data.containsKey('stddev') ? l$stddev : const {},
-      _$data.containsKey('stddevPop') ? l$stddevPop : const {},
-      _$data.containsKey('stddevSamp') ? l$stddevSamp : const {},
-      _$data.containsKey('sum') ? l$sum : const {},
-      _$data.containsKey('varPop') ? l$varPop : const {},
-      _$data.containsKey('varSamp') ? l$varSamp : const {},
-      _$data.containsKey('variance') ? l$variance : const {},
+      _$data.containsKey('_and')
+          ? l$$_and == null
+                ? null
+                : Object.hashAll(l$$_and.map((v) => v))
+          : const {},
+      _$data.containsKey('_not') ? l$$_not : const {},
+      _$data.containsKey('_or')
+          ? l$$_or == null
+                ? null
+                : Object.hashAll(l$$_or.map((v) => v))
+          : const {},
+      _$data.containsKey('asServant') ? l$asServant : const {},
+      _$data.containsKey('attendanceHistory') ? l$attendanceHistory : const {},
+      _$data.containsKey('attendanceHistoryAggregate')
+          ? l$attendanceHistoryAggregate
+          : const {},
+      _$data.containsKey('blurhash') ? l$blurhash : const {},
+      _$data.containsKey('color') ? l$color : const {},
+      _$data.containsKey('gender') ? l$gender : const {},
+      _$data.containsKey('mainPhone') ? l$mainPhone : const {},
+      _$data.containsKey('meeting') ? l$meeting : const {},
+      _$data.containsKey('meetingId') ? l$meetingId : const {},
+      _$data.containsKey('name') ? l$name : const {},
+      _$data.containsKey('person') ? l$person : const {},
+      _$data.containsKey('personId') ? l$personId : const {},
+      _$data.containsKey('photoUpdatedAt') ? l$photoUpdatedAt : const {},
+      _$data.containsKey('studyYearId') ? l$studyYearId : const {},
+      _$data.containsKey('studyYearName') ? l$studyYearName : const {},
     ]);
   }
 }

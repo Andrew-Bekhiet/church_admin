@@ -26,6 +26,7 @@ mixin _$Service {
   String? get blurhash;
   List<Class>? get classes;
   List<Group>? get groups;
+  List<Meeting>? get meetings;
   LastRecordedByInfo? get lastEdit;
   List<User>? get adminUsers;
   HistoryAggregateData? get attendanceHistoryAggregate;
@@ -64,6 +65,7 @@ mixin _$Service {
                 other.blurhash == blurhash) &&
             const DeepCollectionEquality().equals(other.classes, classes) &&
             const DeepCollectionEquality().equals(other.groups, groups) &&
+            const DeepCollectionEquality().equals(other.meetings, meetings) &&
             (identical(other.lastEdit, lastEdit) ||
                 other.lastEdit == lastEdit) &&
             const DeepCollectionEquality().equals(
@@ -97,6 +99,7 @@ mixin _$Service {
     blurhash,
     const DeepCollectionEquality().hash(classes),
     const DeepCollectionEquality().hash(groups),
+    const DeepCollectionEquality().hash(meetings),
     lastEdit,
     const DeepCollectionEquality().hash(adminUsers),
     attendanceHistoryAggregate,
@@ -105,7 +108,7 @@ mixin _$Service {
 
   @override
   String toString() {
-    return 'Service(id: $id, name: $name, studyYearFrom: $studyYearFrom, studyYearTo: $studyYearTo, studyYearFromId: $studyYearFromId, studyYearToId: $studyYearToId, nextService: $nextService, nextServiceId: $nextServiceId, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, classes: $classes, groups: $groups, lastEdit: $lastEdit, adminUsers: $adminUsers, attendanceHistoryAggregate: $attendanceHistoryAggregate, userCanEdit: $userCanEdit)';
+    return 'Service(id: $id, name: $name, studyYearFrom: $studyYearFrom, studyYearTo: $studyYearTo, studyYearFromId: $studyYearFromId, studyYearToId: $studyYearToId, nextService: $nextService, nextServiceId: $nextServiceId, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, classes: $classes, groups: $groups, meetings: $meetings, lastEdit: $lastEdit, adminUsers: $adminUsers, attendanceHistoryAggregate: $attendanceHistoryAggregate, userCanEdit: $userCanEdit)';
   }
 }
 
@@ -128,6 +131,7 @@ abstract mixin class $ServiceCopyWith<$Res> {
     String? blurhash,
     List<Class>? classes,
     List<Group>? groups,
+    List<Meeting>? meetings,
     LastRecordedByInfo? lastEdit,
     List<User>? adminUsers,
     HistoryAggregateData? attendanceHistoryAggregate,
@@ -160,6 +164,7 @@ class _$ServiceCopyWithImpl<$Res> implements $ServiceCopyWith<$Res> {
     Object? blurhash = freezed,
     Object? classes = freezed,
     Object? groups = freezed,
+    Object? meetings = freezed,
     Object? lastEdit = freezed,
     Object? adminUsers = freezed,
     Object? attendanceHistoryAggregate = freezed,
@@ -219,6 +224,10 @@ class _$ServiceCopyWithImpl<$Res> implements $ServiceCopyWith<$Res> {
             ? _self.groups
             : groups // ignore: cast_nullable_to_non_nullable
                   as List<Group>?,
+        meetings: freezed == meetings
+            ? _self.meetings
+            : meetings // ignore: cast_nullable_to_non_nullable
+                  as List<Meeting>?,
         lastEdit: freezed == lastEdit
             ? _self.lastEdit
             : lastEdit // ignore: cast_nullable_to_non_nullable

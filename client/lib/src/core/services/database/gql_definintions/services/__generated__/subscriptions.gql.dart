@@ -2,6 +2,7 @@ import '../../../../../graphql/__generated__/schema.graphql.dart';
 import '../../classes/__generated__/fragments.gql.dart';
 import '../../gql/__generated__/fragments.gql.dart';
 import '../../groups/__generated__/fragments.gql.dart';
+import '../../meetings/__generated__/fragments.gql.dart';
 import '../../users/__generated__/fragments.gql.dart';
 import 'fragments.gql.dart';
 import 'package:church_admin/src/core/graphql/scalars.dart';
@@ -2976,6 +2977,27 @@ const documentNodeSubscriptionwatchService = DocumentNode(
                   ),
                 ),
                 FieldNode(
+                  name: NameNode(value: 'meetings'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: SelectionSetNode(
+                    selections: [
+                      FragmentSpreadNode(
+                        name: NameNode(value: 'Meeting'),
+                        directives: [],
+                      ),
+                      FieldNode(
+                        name: NameNode(value: '__typename'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                    ],
+                  ),
+                ),
+                FieldNode(
                   name: NameNode(value: '__typename'),
                   alias: null,
                   arguments: [],
@@ -2994,6 +3016,8 @@ const documentNodeSubscriptionwatchService = DocumentNode(
     fragmentDefinitionUser,
     fragmentDefinitionUserNoPhoto,
     fragmentDefinitionService,
+    fragmentDefinitionMeeting,
+    fragmentDefinitionGroupNoPhoto,
   ],
 );
 
@@ -3012,6 +3036,7 @@ class Subscription_watchService_servicesByPk
     this.lastEdit,
     required this.adminUsers,
     this.nextService,
+    required this.meetings,
   });
 
   factory Subscription_watchService_servicesByPk.fromJson(
@@ -3029,6 +3054,7 @@ class Subscription_watchService_servicesByPk
     final l$lastEdit = json['lastEdit'];
     final l$adminUsers = json['adminUsers'];
     final l$nextService = json['nextService'];
+    final l$meetings = json['meetings'];
     return Subscription_watchService_servicesByPk(
       id: stringToUuid(l$id),
       name: (l$name as String),
@@ -3064,6 +3090,9 @@ class Subscription_watchService_servicesByPk
       nextService: l$nextService == null
           ? null
           : Fragment_Service.fromJson((l$nextService as Map<String, dynamic>)),
+      meetings: (l$meetings as List<dynamic>)
+          .map((e) => Fragment_Meeting.fromJson((e as Map<String, dynamic>)))
+          .toList(),
     );
   }
 
@@ -3090,6 +3119,8 @@ class Subscription_watchService_servicesByPk
   final List<Subscription_watchService_servicesByPk_adminUsers> adminUsers;
 
   final Fragment_Service? nextService;
+
+  final List<Fragment_Meeting> meetings;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -3119,6 +3150,8 @@ class Subscription_watchService_servicesByPk
     _resultData['adminUsers'] = l$adminUsers.map((e) => e.toJson()).toList();
     final l$nextService = nextService;
     _resultData['nextService'] = l$nextService?.toJson();
+    final l$meetings = meetings;
+    _resultData['meetings'] = l$meetings.map((e) => e.toJson()).toList();
     return _resultData;
   }
 
@@ -3136,6 +3169,7 @@ class Subscription_watchService_servicesByPk
     final l$lastEdit = lastEdit;
     final l$adminUsers = adminUsers;
     final l$nextService = nextService;
+    final l$meetings = meetings;
     return Object.hashAll([
       l$id,
       l$name,
@@ -3149,6 +3183,7 @@ class Subscription_watchService_servicesByPk
       l$lastEdit,
       Object.hashAll(l$adminUsers.map((v) => v)),
       l$nextService,
+      Object.hashAll(l$meetings.map((v) => v)),
     ]);
   }
 
@@ -3228,6 +3263,18 @@ class Subscription_watchService_servicesByPk
     if (l$nextService != lOther$nextService) {
       return false;
     }
+    final l$meetings = meetings;
+    final lOther$meetings = other.meetings;
+    if (l$meetings.length != lOther$meetings.length) {
+      return false;
+    }
+    for (int i = 0; i < l$meetings.length; i++) {
+      final l$meetings$entry = l$meetings[i];
+      final lOther$meetings$entry = lOther$meetings[i];
+      if (l$meetings$entry != lOther$meetings$entry) {
+        return false;
+      }
+    }
     return true;
   }
 }
@@ -3263,6 +3310,7 @@ abstract class CopyWith_Subscription_watchService_servicesByPk<TRes> {
     Fragment_LatestEditHistory? lastEdit,
     List<Subscription_watchService_servicesByPk_adminUsers>? adminUsers,
     Fragment_Service? nextService,
+    List<Fragment_Meeting>? meetings,
   });
   CopyWith_Subscription_watchService_servicesByPk_studyYearFrom<TRes>
   get studyYearFrom;
@@ -3280,6 +3328,12 @@ abstract class CopyWith_Subscription_watchService_servicesByPk<TRes> {
     _fn,
   );
   CopyWith_Fragment_Service<TRes> get nextService;
+  TRes meetings(
+    Iterable<Fragment_Meeting> Function(
+      Iterable<CopyWith_Fragment_Meeting<Fragment_Meeting>>,
+    )
+    _fn,
+  );
 }
 
 class _CopyWithImpl_Subscription_watchService_servicesByPk<TRes>
@@ -3308,6 +3362,7 @@ class _CopyWithImpl_Subscription_watchService_servicesByPk<TRes>
     Object? lastEdit = _undefined,
     Object? adminUsers = _undefined,
     Object? nextService = _undefined,
+    Object? meetings = _undefined,
   }) => _then(
     Subscription_watchService_servicesByPk(
       id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
@@ -3345,6 +3400,9 @@ class _CopyWithImpl_Subscription_watchService_servicesByPk<TRes>
       nextService: nextService == _undefined
           ? _instance.nextService
           : (nextService as Fragment_Service?),
+      meetings: meetings == _undefined || meetings == null
+          ? _instance.meetings
+          : (meetings as List<Fragment_Meeting>),
     ),
   );
 
@@ -3413,6 +3471,17 @@ class _CopyWithImpl_Subscription_watchService_servicesByPk<TRes>
             (e) => call(nextService: e),
           );
   }
+
+  TRes meetings(
+    Iterable<Fragment_Meeting> Function(
+      Iterable<CopyWith_Fragment_Meeting<Fragment_Meeting>>,
+    )
+    _fn,
+  ) => call(
+    meetings: _fn(
+      _instance.meetings.map((e) => CopyWith_Fragment_Meeting(e, (i) => i)),
+    ).toList(),
+  );
 }
 
 class _CopyWithStubImpl_Subscription_watchService_servicesByPk<TRes>
@@ -3434,6 +3503,7 @@ class _CopyWithStubImpl_Subscription_watchService_servicesByPk<TRes>
     Fragment_LatestEditHistory? lastEdit,
     List<Subscription_watchService_servicesByPk_adminUsers>? adminUsers,
     Fragment_Service? nextService,
+    List<Fragment_Meeting>? meetings,
   }) => _res;
 
   CopyWith_Subscription_watchService_servicesByPk_studyYearFrom<TRes>
@@ -3451,6 +3521,8 @@ class _CopyWithStubImpl_Subscription_watchService_servicesByPk<TRes>
 
   CopyWith_Fragment_Service<TRes> get nextService =>
       CopyWith_Fragment_Service.stub(_res);
+
+  meetings(_fn) => _res;
 }
 
 class Subscription_watchService_servicesByPk_studyYearFrom

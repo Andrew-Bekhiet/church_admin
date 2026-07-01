@@ -9,7 +9,7 @@ class Fragment_Meeting {
     required this.name,
     required this.audience,
     this.color,
-    required this.archived,
+    required this.isArchived,
     this.serviceId,
     this.serviceGender,
     this.serviceStudyYear,
@@ -25,7 +25,7 @@ class Fragment_Meeting {
     final l$name = json['name'];
     final l$audience = json['audience'];
     final l$color = json['color'];
-    final l$archived = json['archived'];
+    final l$isArchived = json['isArchived'];
     final l$serviceId = json['serviceId'];
     final l$serviceGender = json['serviceGender'];
     final l$serviceStudyYear = json['serviceStudyYear'];
@@ -39,7 +39,7 @@ class Fragment_Meeting {
       name: (l$name as String),
       audience: (l$audience as String),
       color: (l$color as int?),
-      archived: (l$archived as bool),
+      isArchived: (l$isArchived as bool),
       serviceId: l$serviceId == null ? null : stringToUuid(l$serviceId),
       serviceGender: (l$serviceGender as bool?),
       serviceStudyYear: (l$serviceStudyYear as int?),
@@ -69,7 +69,7 @@ class Fragment_Meeting {
 
   final int? color;
 
-  final bool archived;
+  final bool isArchived;
 
   final UuidValue? serviceId;
 
@@ -97,8 +97,8 @@ class Fragment_Meeting {
     _resultData['audience'] = l$audience;
     final l$color = color;
     _resultData['color'] = l$color;
-    final l$archived = archived;
-    _resultData['archived'] = l$archived;
+    final l$isArchived = isArchived;
+    _resultData['isArchived'] = l$isArchived;
     final l$serviceId = serviceId;
     _resultData['serviceId'] = l$serviceId == null
         ? null
@@ -126,7 +126,7 @@ class Fragment_Meeting {
     final l$name = name;
     final l$audience = audience;
     final l$color = color;
-    final l$archived = archived;
+    final l$isArchived = isArchived;
     final l$serviceId = serviceId;
     final l$serviceGender = serviceGender;
     final l$serviceStudyYear = serviceStudyYear;
@@ -140,7 +140,7 @@ class Fragment_Meeting {
       l$name,
       l$audience,
       l$color,
-      l$archived,
+      l$isArchived,
       l$serviceId,
       l$serviceGender,
       l$serviceStudyYear,
@@ -180,9 +180,9 @@ class Fragment_Meeting {
     if (l$color != lOther$color) {
       return false;
     }
-    final l$archived = archived;
-    final lOther$archived = other.archived;
-    if (l$archived != lOther$archived) {
+    final l$isArchived = isArchived;
+    final lOther$isArchived = other.isArchived;
+    if (l$isArchived != lOther$isArchived) {
       return false;
     }
     final l$serviceId = serviceId;
@@ -248,7 +248,7 @@ abstract class CopyWith_Fragment_Meeting<TRes> {
     String? name,
     String? audience,
     int? color,
-    bool? archived,
+    bool? isArchived,
     UuidValue? serviceId,
     bool? serviceGender,
     int? serviceStudyYear,
@@ -278,7 +278,7 @@ class _CopyWithImpl_Fragment_Meeting<TRes>
     Object? name = _undefined,
     Object? audience = _undefined,
     Object? color = _undefined,
-    Object? archived = _undefined,
+    Object? isArchived = _undefined,
     Object? serviceId = _undefined,
     Object? serviceGender = _undefined,
     Object? serviceStudyYear = _undefined,
@@ -297,9 +297,9 @@ class _CopyWithImpl_Fragment_Meeting<TRes>
           ? _instance.audience
           : (audience as String),
       color: color == _undefined ? _instance.color : (color as int?),
-      archived: archived == _undefined || archived == null
-          ? _instance.archived
-          : (archived as bool),
+      isArchived: isArchived == _undefined || isArchived == null
+          ? _instance.isArchived
+          : (isArchived as bool),
       serviceId: serviceId == _undefined
           ? _instance.serviceId
           : (serviceId as UuidValue?),
@@ -366,7 +366,7 @@ class _CopyWithStubImpl_Fragment_Meeting<TRes>
     String? name,
     String? audience,
     int? color,
-    bool? archived,
+    bool? isArchived,
     UuidValue? serviceId,
     bool? serviceGender,
     int? serviceStudyYear,
@@ -427,7 +427,7 @@ const fragmentDefinitionMeeting = FragmentDefinitionNode(
         selectionSet: null,
       ),
       FieldNode(
-        name: NameNode(value: 'archived'),
+        name: NameNode(value: 'isArchived'),
         alias: null,
         arguments: [],
         directives: [],

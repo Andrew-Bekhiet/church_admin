@@ -113,6 +113,16 @@ class _ServiceFields {
     operators: {...MultiSelectOperator.values},
   );
 
+  final FieldMetadata<Meeting> meetings = FieldMetadata<Meeting>(
+    getValue: (obj) => obj is Service ? obj.meetings : null,
+    parentType: Service,
+    name: 'meetings',
+    label: 'meetings',
+    isCodeOnly: false,
+    isOrderable: false,
+    operators: {...MultiSelectOperator.values},
+  );
+
   final FieldMetadata<LastRecordedByInfo> lastEdit =
       FieldMetadata<LastRecordedByInfo>(
         getValue: (obj) => obj is Service ? obj.lastEdit : null,
@@ -162,6 +172,7 @@ class _ServiceFields {
     photoUpdatedAt,
     classes,
     groups,
+    meetings,
     lastEdit,
     adminUsers,
     attendanceHistoryAggregate,
@@ -176,6 +187,7 @@ class _ServiceFields {
     'photoUpdatedAt': photoUpdatedAt,
     'classes': classes,
     'groups': groups,
+    'meetings': meetings,
     'lastEdit': lastEdit,
     'adminUsers': adminUsers,
     'attendanceHistoryAggregate': attendanceHistoryAggregate,
@@ -216,6 +228,9 @@ Service _$ServiceFromJson(Map json) => Service(
   groups: (json['groups'] as List<dynamic>?)
       ?.map((e) => Group.fromJson(Map<String, Object?>.from(e as Map)))
       .toList(),
+  meetings: (json['meetings'] as List<dynamic>?)
+      ?.map((e) => Meeting.fromJson(Map<String, Object?>.from(e as Map)))
+      .toList(),
   lastEdit: json['lastEdit'] == null
       ? null
       : LastRecordedByInfo.fromJson(
@@ -244,6 +259,7 @@ Map<String, dynamic> _$ServiceToJson(Service instance) => <String, dynamic>{
   'blurhash': instance.blurhash,
   'classes': instance.classes?.map((e) => e.toJson()).toList(),
   'groups': instance.groups?.map((e) => e.toJson()).toList(),
+  'meetings': instance.meetings?.map((e) => e.toJson()).toList(),
   'lastEdit': instance.lastEdit?.toJson(),
   'adminUsers': adminUsersToJson(instance.adminUsers),
   'attendanceHistoryAggregate': instance.attendanceHistoryAggregate?.toJson(),

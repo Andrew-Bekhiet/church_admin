@@ -27,6 +27,10 @@ RouteBase get $homeScreenRoute => GoRouteData.$route(
       factory: $ViewServiceRoute._fromState,
     ),
     GoRouteData.$route(
+      path: 'record_attendance',
+      factory: $RecordAttendanceRoute._fromState,
+    ),
+    GoRouteData.$route(
       path: 'edit_service',
       factory: $EditServiceRoute._fromState,
     ),
@@ -214,6 +218,31 @@ mixin $ViewServiceRoute on GoRouteData {
   @override
   String get location =>
       GoRouteData.$location('/view_service', queryParams: {'id': _self.id});
+
+  @override
+  void go(BuildContext context) => context.go(location, extra: _self.$extra);
+
+  @override
+  Future<T?> push<T>(BuildContext context) =>
+      context.push<T>(location, extra: _self.$extra);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location, extra: _self.$extra);
+
+  @override
+  void replace(BuildContext context) =>
+      context.replace(location, extra: _self.$extra);
+}
+
+mixin $RecordAttendanceRoute on GoRouteData {
+  static RecordAttendanceRoute _fromState(GoRouterState state) =>
+      RecordAttendanceRoute($extra: state.extra as Meeting);
+
+  RecordAttendanceRoute get _self => this as RecordAttendanceRoute;
+
+  @override
+  String get location => GoRouteData.$location('/record_attendance');
 
   @override
   void go(BuildContext context) => context.go(location, extra: _self.$extra);

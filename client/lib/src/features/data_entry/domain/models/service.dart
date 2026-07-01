@@ -55,6 +55,9 @@ class Service extends ViewableWithIDAndImage
   final List<Group>? groups;
 
   @override
+  final List<Meeting>? meetings;
+
+  @override
   final LastRecordedByInfo? lastEdit;
 
   @override
@@ -83,6 +86,7 @@ class Service extends ViewableWithIDAndImage
     this.blurhash,
     this.classes,
     this.groups,
+    this.meetings,
     this.lastEdit,
     this.adminUsers,
     this.attendanceHistoryAggregate,

@@ -1,7 +1,7 @@
 IO.puts("Getting GQL schema from the server...")
 
 System.shell(
-  "graphql-inspector introspect 'https://church-admin.up.railway.app/v1/graphql' --comments false -w ./lib/src/core/graphql/schema.graphql get-schema -h 'x-hasura-admin-secret: #{System.get_env("HASURA_ADMIN_SECRET")}' -h 'x-hasura-role: user'"
+  "graphql-inspector introspect 'https://burly-lunchroom-staging.up.railway.app/v1/graphql' --comments false -w ./lib/src/core/graphql/schema.graphql get-schema -h 'x-hasura-admin-secret: #{System.get_env("HASURA_ADMIN_SECRET")}' -h 'x-hasura-role: user'"
 )
 
 IO.puts("Stripping comments from the schema...")

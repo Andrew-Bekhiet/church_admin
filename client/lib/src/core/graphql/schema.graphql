@@ -3616,8 +3616,179 @@ input HistoryLatestVisitsOrderBy {
   visitId: OrderBy
 }
 
+type HistoryMeetingRoster {
+  asServant: Boolean
+  attendanceHistory(
+    distinctOn: [HistoryAttendanceHistorySelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [HistoryAttendanceHistoryOrderBy!]
+    where: HistoryAttendanceHistoryBoolExp
+  ): [HistoryAttendanceHistory!]!
+  attendanceHistoryAggregate(
+    distinctOn: [HistoryAttendanceHistorySelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [HistoryAttendanceHistoryOrderBy!]
+    where: HistoryAttendanceHistoryBoolExp
+  ): HistoryAttendanceHistoryAggregate!
+  blurhash: String
+  color: bigint
+  gender: Boolean
+  mainPhone: String
+  meeting: HistoryMeetings
+  meetingId: uuid
+  name: String
+  person: Persons
+  personId: uuid
+  photoUpdatedAt: timestamptz
+  studyYearId: Int
+  studyYearName: String
+}
+
+type HistoryMeetingRosterAggregate {
+  aggregate: HistoryMeetingRosterAggregateFields
+  nodes: [HistoryMeetingRoster!]!
+}
+
+type HistoryMeetingRosterAggregateFields {
+  avg: HistoryMeetingRosterAvgFields
+  count(columns: [HistoryMeetingRosterSelectColumn!], distinct: Boolean): Int!
+  max: HistoryMeetingRosterMaxFields
+  min: HistoryMeetingRosterMinFields
+  stddev: HistoryMeetingRosterStddevFields
+  stddevPop: HistoryMeetingRosterStddevPopFields
+  stddevSamp: HistoryMeetingRosterStddevSampFields
+  sum: HistoryMeetingRosterSumFields
+  varPop: HistoryMeetingRosterVarPopFields
+  varSamp: HistoryMeetingRosterVarSampFields
+  variance: HistoryMeetingRosterVarianceFields
+}
+type HistoryMeetingRosterAvgFields {
+  color: Float
+  studyYearId: Float
+}
+
+input HistoryMeetingRosterBoolExp {
+  _and: [HistoryMeetingRosterBoolExp!]
+  _not: HistoryMeetingRosterBoolExp
+  _or: [HistoryMeetingRosterBoolExp!]
+  asServant: BooleanComparisonExp
+  attendanceHistory: HistoryAttendanceHistoryBoolExp
+  attendanceHistoryAggregate: HistoryAttendanceHistoryAggregateBoolExp
+  blurhash: StringComparisonExp
+  color: BigintComparisonExp
+  gender: BooleanComparisonExp
+  mainPhone: StringComparisonExp
+  meeting: HistoryMeetingsBoolExp
+  meetingId: UuidComparisonExp
+  name: StringComparisonExp
+  person: PersonsBoolExp
+  personId: UuidComparisonExp
+  photoUpdatedAt: TimestamptzComparisonExp
+  studyYearId: IntComparisonExp
+  studyYearName: StringComparisonExp
+}
+type HistoryMeetingRosterMaxFields {
+  blurhash: String
+  color: bigint
+  mainPhone: String
+  meetingId: uuid
+  name: String
+  personId: uuid
+  photoUpdatedAt: timestamptz
+  studyYearId: Int
+  studyYearName: String
+}
+type HistoryMeetingRosterMinFields {
+  blurhash: String
+  color: bigint
+  mainPhone: String
+  meetingId: uuid
+  name: String
+  personId: uuid
+  photoUpdatedAt: timestamptz
+  studyYearId: Int
+  studyYearName: String
+}
+input HistoryMeetingRosterOrderBy {
+  asServant: OrderBy
+  attendanceHistoryAggregate: HistoryAttendanceHistoryAggregateOrderBy
+  blurhash: OrderBy
+  color: OrderBy
+  gender: OrderBy
+  mainPhone: OrderBy
+  meeting: HistoryMeetingsOrderBy
+  meetingId: OrderBy
+  name: OrderBy
+  person: PersonsOrderBy
+  personId: OrderBy
+  photoUpdatedAt: OrderBy
+  studyYearId: OrderBy
+  studyYearName: OrderBy
+}
+
+enum HistoryMeetingRosterSelectColumn {
+  asServant
+  blurhash
+  color
+  gender
+  mainPhone
+  meetingId
+  name
+  personId
+  photoUpdatedAt
+  studyYearId
+  studyYearName
+}
+type HistoryMeetingRosterStddevFields {
+  color: Float
+  studyYearId: Float
+}
+type HistoryMeetingRosterStddevPopFields {
+  color: Float
+  studyYearId: Float
+}
+type HistoryMeetingRosterStddevSampFields {
+  color: Float
+  studyYearId: Float
+}
+
+input HistoryMeetingRosterStreamCursorInput {
+  initialValue: HistoryMeetingRosterStreamCursorValueInput!
+  ordering: CursorOrdering
+}
+input HistoryMeetingRosterStreamCursorValueInput {
+  asServant: Boolean
+  blurhash: String
+  color: bigint
+  gender: Boolean
+  mainPhone: String
+  meetingId: uuid
+  name: String
+  personId: uuid
+  photoUpdatedAt: timestamptz
+  studyYearId: Int
+  studyYearName: String
+}
+type HistoryMeetingRosterSumFields {
+  color: bigint
+  studyYearId: Int
+}
+type HistoryMeetingRosterVarPopFields {
+  color: Float
+  studyYearId: Float
+}
+type HistoryMeetingRosterVarSampFields {
+  color: Float
+  studyYearId: Float
+}
+type HistoryMeetingRosterVarianceFields {
+  color: Float
+  studyYearId: Float
+}
+
 type HistoryMeetings {
-  archived: Boolean!
   attendanceHistory(
     distinctOn: [HistoryAttendanceHistorySelectColumn!]
     limit: Int
@@ -3637,6 +3808,7 @@ type HistoryMeetings {
   group: Groups
   groupId: uuid
   id: uuid!
+  isArchived: Boolean!
   name: String!
   persons(
     distinctOn: [HistoryMeetingsPersonsSelectColumn!]
@@ -3687,7 +3859,6 @@ input HistoryMeetingsBoolExp {
   _and: [HistoryMeetingsBoolExp!]
   _not: HistoryMeetingsBoolExp
   _or: [HistoryMeetingsBoolExp!]
-  archived: BooleanComparisonExp
   attendanceHistory: HistoryAttendanceHistoryBoolExp
   attendanceHistoryAggregate: HistoryAttendanceHistoryAggregateBoolExp
   audience: MeetingAudienceComparisonExp
@@ -3695,6 +3866,7 @@ input HistoryMeetingsBoolExp {
   group: GroupsBoolExp
   groupId: UuidComparisonExp
   id: UuidComparisonExp
+  isArchived: BooleanComparisonExp
   name: StringComparisonExp
   persons: HistoryMeetingsPersonsBoolExp
   personsAggregate: HistoryMeetingsPersonsAggregateBoolExp
@@ -3714,12 +3886,12 @@ input HistoryMeetingsIncInput {
 }
 
 input HistoryMeetingsInsertInput {
-  archived: Boolean
   attendanceHistory: HistoryAttendanceHistoryArrRelInsertInput
   audience: meeting_audience
   color: bigint
   group: GroupsObjRelInsertInput
   groupId: uuid
+  isArchived: Boolean
   name: String
   service: ServicesObjRelInsertInput
   serviceGender: Boolean
@@ -3764,13 +3936,13 @@ input HistoryMeetingsOnConflict {
   where: HistoryMeetingsBoolExp
 }
 input HistoryMeetingsOrderBy {
-  archived: OrderBy
   attendanceHistoryAggregate: HistoryAttendanceHistoryAggregateOrderBy
   audience: OrderBy
   color: OrderBy
   group: GroupsOrderBy
   groupId: OrderBy
   id: OrderBy
+  isArchived: OrderBy
   name: OrderBy
   personsAggregate: HistoryMeetingsPersonsAggregateOrderBy
   service: ServicesOrderBy
@@ -3877,11 +4049,11 @@ input HistoryMeetingsPkColumnsInput {
 }
 
 enum HistoryMeetingsSelectColumn {
-  archived
   audience
   color
   groupId
   id
+  isArchived
   name
   serviceGender
   serviceId
@@ -3889,9 +4061,9 @@ enum HistoryMeetingsSelectColumn {
 }
 
 input HistoryMeetingsSetInput {
-  archived: Boolean
   audience: meeting_audience
   color: bigint
+  isArchived: Boolean
   name: String
 }
 
@@ -3915,11 +4087,11 @@ input HistoryMeetingsStreamCursorInput {
   ordering: CursorOrdering
 }
 input HistoryMeetingsStreamCursorValueInput {
-  archived: Boolean
   audience: meeting_audience
   color: bigint
   groupId: uuid
   id: uuid
+  isArchived: Boolean
   name: String
   serviceGender: Boolean
   serviceId: uuid
@@ -3932,9 +4104,9 @@ input HistoryMeetingsSumOrderBy {
 }
 
 enum HistoryMeetingsUpdateColumn {
-  archived
   audience
   color
+  isArchived
   name
 }
 
@@ -8296,6 +8468,20 @@ type query_root {
     where: HistoryKodasHistoryBoolExp
   ): HistoryKodasHistoryAggregate!
   historyKodasHistoryByPk(id: uuid!): HistoryKodasHistory
+  historyMeetingRoster(
+    distinctOn: [HistoryMeetingRosterSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [HistoryMeetingRosterOrderBy!]
+    where: HistoryMeetingRosterBoolExp
+  ): [HistoryMeetingRoster!]!
+  historyMeetingRosterAggregate(
+    distinctOn: [HistoryMeetingRosterSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [HistoryMeetingRosterOrderBy!]
+    where: HistoryMeetingRosterBoolExp
+  ): HistoryMeetingRosterAggregate!
   historyMeetings(
     distinctOn: [HistoryMeetingsSelectColumn!]
     limit: Int
@@ -8876,6 +9062,25 @@ type subscription_root {
     cursor: [HistoryKodasHistoryStreamCursorInput]!
     where: HistoryKodasHistoryBoolExp
   ): [HistoryKodasHistory!]!
+  historyMeetingRoster(
+    distinctOn: [HistoryMeetingRosterSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [HistoryMeetingRosterOrderBy!]
+    where: HistoryMeetingRosterBoolExp
+  ): [HistoryMeetingRoster!]!
+  historyMeetingRosterAggregate(
+    distinctOn: [HistoryMeetingRosterSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [HistoryMeetingRosterOrderBy!]
+    where: HistoryMeetingRosterBoolExp
+  ): HistoryMeetingRosterAggregate!
+  historyMeetingRosterStream(
+    batchSize: Int!
+    cursor: [HistoryMeetingRosterStreamCursorInput]!
+    where: HistoryMeetingRosterBoolExp
+  ): [HistoryMeetingRoster!]!
   historyMeetings(
     distinctOn: [HistoryMeetingsSelectColumn!]
     limit: Int
