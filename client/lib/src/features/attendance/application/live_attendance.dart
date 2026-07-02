@@ -18,6 +18,9 @@ final class LiveAttendance {
 
   void endInFlight(String personId) => _inFlight.remove(personId);
 
+  bool isOptimistic(String personId) =>
+      _optimisticPresence.containsKey(personId);
+
   /// Marks [personId] as optimistically present at [time], or absent when [time] is null.
   void markOptimistic(String personId, DateTime? time) {
     _optimisticPresence[personId] = time;

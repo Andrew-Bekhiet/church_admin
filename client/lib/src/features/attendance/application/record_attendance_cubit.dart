@@ -143,7 +143,10 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
 
   Future<void> toggleAttendance(MeetingRosterEntry entry) async {
     final personId = entry.person.id;
-    if (_liveAttendance.isInFlight(personId)) return;
+    if (_liveAttendance.isInFlight(personId) ||
+        _liveAttendance.isOptimistic(personId)) {
+      return;
+    }
 
     final effectiveAttendanceRecord = _liveAttendance.effectiveAttendanceRecord(
       personId: personId,
