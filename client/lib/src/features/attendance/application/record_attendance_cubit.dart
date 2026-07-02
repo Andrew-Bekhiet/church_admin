@@ -23,6 +23,7 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
 
   final BehaviorSubject<String?> _searchSubject = BehaviorSubject.seeded(null);
   StreamSubscription<String?>? _searchSub;
+  String _searchQuery = '';
 
   Meeting _meeting;
   DateTime _selectedDate;
@@ -67,8 +68,10 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
 
     _searchSub = _searchSubject
         .debounceTime(_searchDebounce)
-        .distinct((a, b) => (a ?? '') == (b ?? ''))
-        .listen((searchQuery) => _emitLoaded(searchQuery: searchQuery));
+        .map((query) => query?.trim().toLowerCase() ?? '')
+        .distinct((a, b) => a == b)
+        .doOnData((query) => _searchQuery = query)
+        .listen((_) => _emitLoaded());
   }
 
   int indexForLetter(String letter) {
@@ -265,7 +268,7 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
     _emitLoaded();
   }
 
-  void _emitLoaded({String? searchQuery}) {
+  void _emitLoaded() {
     if (isClosed) return;
 
     final allEligibleEntries = _rosterPersons
@@ -275,7 +278,7 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
 
     final filteredEntries = allEligibleEntries
         .where(_matchesPresenceFilter)
-        .where((e) => _matchesSearch(e, searchQuery?.trim() ?? ''))
+        .where((e) => _matchesSearch(e, _searchQuery))
         .toList();
 
     final sorted = _sortedEntries(filteredEntries);
@@ -291,7 +294,7 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
         grouping: _grouping,
         sort: _sort,
         rosterStatus: _rosterStatus,
-        searchQuery: searchQuery,
+        searchQuery: _searchQuery,
         entries: sorted,
         gutterLetters: _alphabet.lettersFrom(sorted.map((e) => e.person.name)),
         presentCount: allEligibleEntries.where((e) => e.attended).length,
