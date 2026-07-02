@@ -57,7 +57,7 @@ enum PrimitiveOperator<V> implements Operator<V?> {
 
     switch (value) {
       case DateTime():
-        return value..toUtc().toIso8601String();
+        return value.toUtc().toIso8601String();
 
       case _:
         return value as Object?;
