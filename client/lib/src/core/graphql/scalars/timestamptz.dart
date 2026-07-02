@@ -1,2 +1,2 @@
-DateTime tstzFromString(dynamic data) => DateTime.parse(data);
-String tstzToString(DateTime date) => date.toIso8601String();
+DateTime tstzFromString(dynamic data) => DateTime.parse(data).toLocal();
+String tstzToString(DateTime date) => date.toUtc().toIso8601String();

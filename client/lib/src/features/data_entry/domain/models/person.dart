@@ -46,6 +46,7 @@ class Person extends ViewableWithIDAndImage
   final Json otherPhones;
 
   @override
+  @LocalDateTimeConverter()
   final DateTime? birthdate;
 
   @override
@@ -155,6 +156,7 @@ class Person extends ViewableWithIDAndImage
   final Color? color;
 
   @override
+  @LocalDateTimeConverter()
   final DateTime? photoUpdatedAt;
 
   @override

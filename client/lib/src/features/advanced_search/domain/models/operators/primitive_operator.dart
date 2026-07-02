@@ -57,7 +57,7 @@ enum PrimitiveOperator<V> implements Operator<V?> {
 
     switch (value) {
       case DateTime():
-        return value.toIso8601String();
+        return value..toUtc().toIso8601String();
 
       case _:
         return value as Object?;
@@ -70,7 +70,7 @@ enum PrimitiveOperator<V> implements Operator<V?> {
         ? data
         : this == isNull || this == isNotNull
         ? null
-        : DateTime.tryParse(data.toString()) as V? ??
+        : DateTime.tryParse(data.toString())?.toLocal() as V? ??
               (throw ArgumentError('Cannot deserialize $V from $data'));
   }
 }

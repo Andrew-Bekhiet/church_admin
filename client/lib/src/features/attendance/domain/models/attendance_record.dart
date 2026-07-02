@@ -22,6 +22,7 @@ class AttendanceRecord
   @override
   final Person? person;
   @override
+  @LocalDateTimeConverter()
   final DateTime datetime;
   @override
   final bool asServant;

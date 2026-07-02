@@ -148,9 +148,10 @@ User _$UserFromJson(Map json) => User(
   uid: json['uid'] as String? ?? '',
   name: json['name'] as String? ?? '',
   email: json['email'] as String?,
-  photoUpdatedAt: json['photoUpdatedAt'] == null
-      ? null
-      : DateTime.parse(json['photoUpdatedAt'] as String),
+  photoUpdatedAt: _$JsonConverterFromJson<String, DateTime>(
+    json['photoUpdatedAt'],
+    const LocalDateTimeConverter().fromJson,
+  ),
   blurhash: json['blurhash'] as String?,
   adminOn: (json['adminOn'] as List<dynamic>?)
       ?.map((e) => AdminOnData.fromJson(Map<String, Object?>.from(e as Map)))
@@ -184,7 +185,10 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
   'uid': instance.uid,
   'name': instance.name,
   'email': instance.email,
-  'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+  'photoUpdatedAt': _$JsonConverterToJson<String, DateTime>(
+    instance.photoUpdatedAt,
+    const LocalDateTimeConverter().toJson,
+  ),
   'blurhash': instance.blurhash,
   'adminOn': instance.adminOn?.map((e) => e.toJson()).toList(),
   'permissions': permissionsSetToJson(instance.permissions),
@@ -195,3 +199,13 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
   'classesHistory': instance.classesHistory?.map((e) => e.toJson()).toList(),
   'groupsHistory': instance.groupsHistory?.map((e) => e.toJson()).toList(),
 };
+
+Value? _$JsonConverterFromJson<Json, Value>(
+  Object? json,
+  Value? Function(Json json) fromJson,
+) => json == null ? null : fromJson(json as Json);
+
+Json? _$JsonConverterToJson<Json, Value>(
+  Value? value,
+  Json? Function(Value value) toJson,
+) => value == null ? null : toJson(value);

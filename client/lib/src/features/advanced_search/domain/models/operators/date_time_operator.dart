@@ -21,14 +21,14 @@ enum DateTimeOperator implements Operator<DateTime> {
 
   @override
   Json queryToJson(FieldMetadata field, DateTime value) {
-    return field.queryToJson({_operatorValue: value.toIso8601String()});
+    return field.queryToJson({_operatorValue: value.toUtc().toIso8601String()});
   }
 
   @override
-  Object serializeValue(DateTime value) => value.toIso8601String();
+  Object serializeValue(DateTime value) => value.toUtc().toIso8601String();
 
   @override
   DateTime deserializeValue(Object? data) => data is String
-      ? DateTime.parse(data)
+      ? DateTime.parse(data).toLocal()
       : throw ArgumentError('Cannot deserialize DateTime from $data');
 }
