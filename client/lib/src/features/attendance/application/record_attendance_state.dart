@@ -22,8 +22,8 @@ enum RosterStatus { loading, ready, error }
 final class RecordAttendanceLoaded extends RecordAttendanceState {
   final Meeting meeting;
   final DateTime selectedDate;
-  final AttendanceRosterAudienceView view;
-  final AttendancePresenceFilter filter;
+  final AttendanceRosterAudienceView audienceView;
+  final AttendancePresenceFilter presenceFilter;
   final AttendanceGrouping grouping;
   final AttendanceSorting sort;
   final String? searchQuery;
@@ -50,8 +50,8 @@ final class RecordAttendanceLoaded extends RecordAttendanceState {
   List<Object?> get props => [
     meeting,
     selectedDate,
-    view,
-    filter,
+    audienceView,
+    presenceFilter,
     grouping,
     sort,
     rosterStatus,
@@ -66,9 +66,9 @@ final class RecordAttendanceLoaded extends RecordAttendanceState {
   const RecordAttendanceLoaded({
     required this.meeting,
     required this.selectedDate,
-    required this.view,
+    required this.audienceView,
     required this.canToggleAudience,
-    required this.filter,
+    required this.presenceFilter,
     required this.grouping,
     required this.sort,
     required this.rosterStatus,

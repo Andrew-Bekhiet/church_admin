@@ -42,6 +42,8 @@ sealed class RecordAttendanceScope {
         return null;
     }
   }
+
+  bool coversMeeting(Meeting meeting);
 }
 
 /// Service-based scope: attendance is recorded for persons in a given service,
@@ -62,6 +64,25 @@ final class ServiceAttendanceScope extends RecordAttendanceScope {
     this.studyYear,
     this.gender,
   });
+
+  @override
+  bool coversMeeting(Meeting meeting) {
+    if (service.id != meeting.serviceId) return false;
+
+    final studyYear = this.studyYear;
+    final gender = this.gender;
+
+    final studyYearsMatch =
+        studyYear == null ||
+        meeting.serviceStudyYear == null ||
+        studyYear.order == meeting.serviceStudyYear;
+    final gendersMatch =
+        gender == null ||
+        meeting.serviceGender == null ||
+        gender == meeting.serviceGender;
+
+    return studyYearsMatch && gendersMatch;
+  }
 }
 
 /// Group-based scope: attendance is recorded for all members of a group.
@@ -73,4 +94,7 @@ final class GroupAttendanceScope extends RecordAttendanceScope {
     required super.canRecordPersons,
     required super.canRecordServants,
   });
+
+  @override
+  bool coversMeeting(Meeting meeting) => group.id == meeting.groupId;
 }

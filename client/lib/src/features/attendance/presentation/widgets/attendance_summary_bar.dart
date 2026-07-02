@@ -34,49 +34,51 @@ class AttendanceSummaryBar extends StatelessWidget {
       automaticallyImplyLeading: false,
       toolbarHeight: kAttendanceSummaryHeight,
       titleSpacing: 0,
-      title: SizedBox(
-        height: kAttendanceSummaryHeight,
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Expanded(
-              child: AttendanceSummarySegment(
-                label: AttendancePresenceFilter.present.label,
-                count: presentCount,
-                selected: filter == AttendancePresenceFilter.present,
-                onTap: () => _onSegmentTap(AttendancePresenceFilter.present),
+      title: RepaintBoundary(
+        child: SizedBox(
+          height: kAttendanceSummaryHeight,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Expanded(
+                child: AttendanceSummarySegment(
+                  label: AttendancePresenceFilter.present.label,
+                  count: presentCount,
+                  selected: filter == AttendancePresenceFilter.present,
+                  onTap: () => _onSegmentTap(AttendancePresenceFilter.present),
+                ),
               ),
-            ),
-            VerticalDivider(
-              width: 1,
-              indent: 8,
-              endIndent: 8,
-              color: dividerColor,
-            ),
-            Expanded(
-              child: AttendanceSummarySegment(
-                label: AttendancePresenceFilter.absent.label,
-                count: absentCount,
-                selected: filter == AttendancePresenceFilter.absent,
-                onTap: () => _onSegmentTap(AttendancePresenceFilter.absent),
+              VerticalDivider(
+                width: 1,
+                indent: 8,
+                endIndent: 8,
+                color: dividerColor,
               ),
-            ),
-            VerticalDivider(
-              width: 1,
-              indent: 8,
-              endIndent: 8,
-              color: dividerColor,
-            ),
-            Expanded(
-              child: AttendanceSummarySegment(
-                label: AttendancePresenceFilter.all.label,
-                count: totalCount,
-                selected: filter == AttendancePresenceFilter.all,
-                onTap: () => _onSegmentTap(AttendancePresenceFilter.all),
+              Expanded(
+                child: AttendanceSummarySegment(
+                  label: AttendancePresenceFilter.absent.label,
+                  count: absentCount,
+                  selected: filter == AttendancePresenceFilter.absent,
+                  onTap: () => _onSegmentTap(AttendancePresenceFilter.absent),
+                ),
               ),
-            ),
-          ],
+              VerticalDivider(
+                width: 1,
+                indent: 8,
+                endIndent: 8,
+                color: dividerColor,
+              ),
+              Expanded(
+                child: AttendanceSummarySegment(
+                  label: AttendancePresenceFilter.all.label,
+                  count: totalCount,
+                  selected: filter == AttendancePresenceFilter.all,
+                  onTap: () => _onSegmentTap(AttendancePresenceFilter.all),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

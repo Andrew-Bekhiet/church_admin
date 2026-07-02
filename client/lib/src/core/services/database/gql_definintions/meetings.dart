@@ -1,5 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/meetings/__generated__/mutations.gql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/meetings/__generated__/queries.gql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/meetings/__generated__/subscriptions.gql.dart';
 import 'package:graphql/client.dart';
 
@@ -70,15 +71,13 @@ class MeetingsDAO extends DAOBase<Meeting>
     );
   }
 
-  /// Streams the roster of persons eligible for [meetingId], ordered by name
-  /// (prefixed by study year when [groupByStudyYear]). Name/phone search and
-  /// presence filtering are applied client side on the fully loaded roster.
-  PaginatableStreamBase<MeetingRosterEntry> streamMeetingRoster({
+  /// Fetches the roster of persons eligible for [meetingId] once. Eligibility
+  /// is date-independent (governed by the `history.meeting_roster` view), so
+  /// this query only re-runs when the meeting or grouping changes.
+  Future<List<MeetingRosterEntry>> getMeetingRoster({
     required String meetingId,
-    required DateTime fromDate,
-    required DateTime toDate,
     required bool groupByStudyYear,
-    int limit = 200,
+    int limit = 1000,
   }) {
     final orderBy = [
       if (groupByStudyYear)
@@ -87,86 +86,38 @@ class MeetingsDAO extends DAOBase<Meeting>
       Input_HistoryMeetingRosterOrderBy(personId: Enum_OrderBy.ASC),
     ];
 
-    return PaginatableStream.withSearch(
-      pageSize: limit,
-      searchStream: Stream.value(null),
-      factory: (request) {
-        final whereFilters = [
-          if (request.cursor case final cursor?)
-            Input_HistoryMeetingRosterBoolExp(
-              $_or: [
-                Input_HistoryMeetingRosterBoolExp(
-                  name: Input_StringComparisonExp($_gt: cursor.person.name),
-                ),
-                Input_HistoryMeetingRosterBoolExp(
-                  name: Input_StringComparisonExp($_eq: cursor.person.name),
-                  personId: Input_UuidComparisonExp(
-                    $_gt: cursor.person.id.toUuid(),
-                  ),
-                ),
-              ],
-            ),
-        ];
-
-        return graphQLClient.subscribeAndReturnParsed(
-          SubscriptionOptions(
-            document: documentNodeSubscriptionwatchMeetingRoster,
-            operationName: 'watchMeetingRoster',
-            variables: Variables_Subscription_watchMeetingRoster(
-              meetingId: meetingId.toUuid(),
-              fromDate: fromDate,
-              toDate: toDate,
-              where: whereFilters,
-              orderBy: orderBy,
-              limit: request.pageSize + 1,
-            ).toJson(),
-            parserFn: db.parser.singleListParser(
-              MeetingRosterEntry.fromJson,
-              pageSize: request.pageSize,
-            ),
-          ),
-        );
-      },
-    );
-  }
-
-  /// Live count of persons who have attended [meetingId] for the given [asServant] flag.
-  Stream<int?> streamPresentCount({
-    required String meetingId,
-    required DateTime fromDate,
-    required DateTime toDate,
-    bool asServant = false,
-  }) {
-    return graphQLClient.subscribeAndReturnParsed(
-      SubscriptionOptions(
-        document: documentNodeSubscriptionwatchMeetingPresentCount,
-        operationName: 'watchMeetingPresentCount',
-        variables: Variables_Subscription_watchMeetingPresentCount(
+    return graphQLClient.queryAndReturnParsed(
+      QueryOptions(
+        document: documentNodeQueryhistoryMeetingRoster,
+        operationName: 'historyMeetingRoster',
+        variables: Variables_Query_historyMeetingRoster(
           meetingId: meetingId.toUuid(),
-          asServant: asServant,
-          fromDate: fromDate,
-          toDate: toDate,
+          orderBy: orderBy,
+          limit: limit,
         ).toJson(),
-        parserFn: db.parser.countParser,
+        parserFn: db.parser.listParser(MeetingRosterEntry.fromJson),
       ),
     );
   }
 
-  /// Live count of persons eligible for [meetingId] via the `meeting_roster`
-  /// view, scoped to the [asServant] audience.
-  Stream<int?> streamEligibleCount({
+  /// Subscribes to all attendance records for [meetingId] within the given day
+  /// window. Streams only the small set of attendance rows so the large person
+  /// list (from [getMeetingRoster]) doesn't reload on each mark/unmark.
+  Stream<List<AttendanceRecord>> streamAttendanceHistory({
     required String meetingId,
-    required bool asServant,
+    required DateTime fromDate,
+    required DateTime toDate,
   }) {
     return graphQLClient.subscribeAndReturnParsed(
       SubscriptionOptions(
-        document: documentNodeSubscriptionwatchMeetingEligibleCount,
-        operationName: 'watchMeetingEligibleCount',
-        variables: Variables_Subscription_watchMeetingEligibleCount(
+        document: documentNodeSubscriptionwatchAttendanceHistory,
+        operationName: 'watchAttendanceHistory',
+        variables: Variables_Subscription_watchAttendanceHistory(
           meetingId: meetingId.toUuid(),
-          asServant: asServant,
+          fromDate: fromDate,
+          toDate: toDate,
         ).toJson(),
-        parserFn: db.parser.countParser,
+        parserFn: db.parser.listParser(AttendanceRecord.fromJson),
       ),
     );
   }
