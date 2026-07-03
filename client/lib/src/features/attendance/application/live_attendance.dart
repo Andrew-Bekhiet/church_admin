@@ -2,12 +2,13 @@ import 'package:church_admin/church_admin.dart';
 
 /// Tracks live attendance records from the server plus pending optimistic marks.
 ///
-/// Optimistic flow: `markPending` → user sees instant feedback → `applyServerRecords`
-/// reconciles and removes the pending mark. `rollback` removes it on error.
+/// Optimistic flow: markOptimistic → user sees instant feedback →
+/// refreshWithServerRecords reconciles and removes the pending mark when the
+/// server confirms. rollbackOptimistic removes it on error.
 final class LiveAttendance {
   Map<(String personId, bool asServant), AttendanceRecord>
   _attendanceRecordsByKey = {};
-  Map<String, DateTime?> _optimisticPresence = {};
+  Map<(String personId, bool asServant), DateTime?> _optimisticPresence = {};
   Set<String> _inFlight = {};
 
   LiveAttendance();
@@ -18,16 +19,15 @@ final class LiveAttendance {
 
   void endInFlight(String personId) => _inFlight.remove(personId);
 
-  bool isOptimistic(String personId) =>
-      _optimisticPresence.containsKey(personId);
+  bool isOptimistic(String personId, bool asServant) =>
+      _optimisticPresence.containsKey((personId, asServant));
 
-  /// Marks [personId] as optimistically present at [time], or absent when [time] is null.
-  void markOptimistic(String personId, DateTime? time) {
-    _optimisticPresence[personId] = time;
+  void markOptimistic(String personId, bool asServant, DateTime? time) {
+    _optimisticPresence[(personId, asServant)] = time;
   }
 
-  void rollbackOptimistic(String personId) =>
-      _optimisticPresence.remove(personId);
+  void rollbackOptimistic(String personId, bool asServant) =>
+      _optimisticPresence.remove((personId, asServant));
 
   void refreshWithServerRecords(List<AttendanceRecord> records) {
     _attendanceRecordsByKey = {
@@ -38,10 +38,13 @@ final class LiveAttendance {
     // the server record agrees with the optimistic state. A stale subscription
     // snapshot (one that predates the committed INSERT/DELETE) would otherwise
     // clear the mark early and flash the person to the wrong sort position.
-    _optimisticPresence.removeWhere((personId, optimisticTime) {
+    _optimisticPresence.removeWhere((key, optimisticTime) {
+      final (personId, asServant) = key;
       if (_inFlight.contains(personId)) return false;
 
-      final serverHasRecord = records.any((r) => r.personId == personId);
+      final serverHasRecord = _attendanceRecordsByKey.containsKey(
+        (personId, asServant),
+      );
       return optimisticTime != null ? serverHasRecord : !serverHasRecord;
     });
   }
@@ -54,9 +57,10 @@ final class LiveAttendance {
     required String personId,
     required bool asServant,
   }) {
-    if (_optimisticPresence.containsKey(personId)) {
-      final time = _optimisticPresence[personId];
-      if (time == null) return null; // optimistic absence
+    final key = (personId, asServant);
+    if (_optimisticPresence.containsKey(key)) {
+      final time = _optimisticPresence[key];
+      if (time == null) return null;
 
       return AttendanceRecord(
         id: meetingId,
@@ -71,6 +75,7 @@ final class LiveAttendance {
   }
 
   void reset() {
+    _attendanceRecordsByKey = {};
     _optimisticPresence = {};
     _inFlight = {};
   }

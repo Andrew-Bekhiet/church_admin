@@ -33,7 +33,7 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
 
   AttendancePresenceFilter _presenceFilter = AttendancePresenceFilter.all;
   AttendanceGrouping _grouping = AttendanceGrouping.none;
-  AttendanceSorting _sort = AttendanceSorting.byName;
+  AttendanceSorting _sort = AttendanceSorting.byName();
 
   int _rosterRequestId = 0;
   List<MeetingRosterEntry> _rosterPersons = const [];
@@ -47,6 +47,13 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
   DateTime get _fromDate => _selectedDate;
   DateTime get _toDate => _selectedDate.add(const Duration(days: 1));
   bool get _asServant => _audienceView.asServant;
+
+  // Wraps _sort with a study-year prefix when grouping is active, so the
+  // client-side order always matches the grouped roster layout.
+  AttendanceSorting get _effectiveSort => switch (_grouping) {
+    AttendanceGrouping.none => _sort,
+    AttendanceGrouping.studyYear => AttendanceSortingByStudyYear(then: _sort),
+  };
 
   bool get _canToggleAudience =>
       _meeting.audience == MeetingAudience.personsAndServants &&
@@ -112,7 +119,6 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
     if (!_canToggleAudience) return;
 
     _audienceView = _audienceView.toggled;
-    _liveAttendance.reset();
     _emitLoaded();
   }
 
@@ -144,7 +150,7 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
   Future<void> toggleAttendance(MeetingRosterEntry entry) async {
     final personId = entry.person.id;
     if (_liveAttendance.isInFlight(personId) ||
-        _liveAttendance.isOptimistic(personId)) {
+        _liveAttendance.isOptimistic(personId, _asServant)) {
       return;
     }
 
@@ -157,7 +163,11 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
     final attendanceTime = _selectedDate.replaceTime(DateTime.now());
 
     _liveAttendance
-      ..markOptimistic(personId, newIsPresent ? attendanceTime : null)
+      ..markOptimistic(
+        personId,
+        _asServant,
+        newIsPresent ? attendanceTime : null,
+      )
       ..beginInFlight(personId);
     _emitLoaded();
 
@@ -192,7 +202,7 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
         );
       }
     } catch (error, stackTrace) {
-      _liveAttendance.rollbackOptimistic(personId);
+      _liveAttendance.rollbackOptimistic(personId, _asServant);
 
       unawaited(
         LoggingService.I.exception(
@@ -210,6 +220,7 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
   Future<void> _restartSession() async {
     try {
       await _loadRoster(showLoading: true);
+      if (isClosed) return;
       _subscribeAttendance();
     } catch (error, stackTrace) {
       _onRosterError(error, stackTrace);
@@ -276,16 +287,22 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
 
     final allEligibleEntries = _rosterPersons
         .map(_withLiveAttendance)
-        .where((e) => e.asServant == _audienceView.asServant)
+        .where(_audienceView.matches)
         .toList();
 
     final filteredEntries = allEligibleEntries
-        .where(_matchesPresenceFilter)
+        .where(_presenceFilter.matches)
         .where((e) => _matchesSearch(e, _searchQuery))
         .toList();
 
-    final sorted = _sortedEntries(filteredEntries);
+    final sorted = filteredEntries.sorted(_effectiveSort.compare);
     _displayEntries = sorted;
+
+    // Only include a gutter letter when there is at least one navigable
+    // (absent) entry under it, keeping gutterLetters in sync with indexForLetter.
+    final gutterEntries = _presenceFilter == AttendancePresenceFilter.all
+        ? sorted.where((e) => !e.attended)
+        : sorted;
 
     emit(
       RecordAttendanceLoaded(
@@ -299,7 +316,9 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
         rosterStatus: _rosterStatus,
         searchQuery: _searchQuery,
         entries: sorted,
-        gutterLetters: _alphabet.lettersFrom(sorted.map((e) => e.person.name)),
+        gutterLetters: _alphabet.lettersFrom(
+          gutterEntries.map((e) => e.person.name),
+        ),
         presentCount: allEligibleEntries.where((e) => e.attended).length,
         eligibleCount: allEligibleEntries.length,
       ),
@@ -313,17 +332,8 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
       meetingId: _meeting.id,
     );
 
-    return entry.copyWith(
-      attendanceHistory: [?record],
-    );
+    return entry.copyWith(attendanceHistory: [?record]);
   }
-
-  bool _matchesPresenceFilter(MeetingRosterEntry entry) =>
-      switch (_presenceFilter) {
-        AttendancePresenceFilter.all => true,
-        AttendancePresenceFilter.present => entry.attended,
-        AttendancePresenceFilter.absent => !entry.attended,
-      };
 
   bool _matchesSearch(MeetingRosterEntry entry, String query) {
     if (query.isEmpty) return true;
@@ -333,31 +343,6 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
     final mainPhone = person.mainPhone?.toLowerCase().trim() ?? '';
 
     return personName.contains(query) || mainPhone.contains(query);
-  }
-
-  // Sorted here because day-windowed attendance can't be expressed in the server ORDER BY.
-  List<MeetingRosterEntry> _sortedEntries(List<MeetingRosterEntry> entries) {
-    int gradeOf(MeetingRosterEntry e) => e.person.studyYear?.order ?? 1 << 16;
-
-    return switch (_sort) {
-      AttendanceSorting.byName => entries,
-      AttendanceSorting.byAttendanceTime => entries.sorted((a, b) {
-        if (_grouping == AttendanceGrouping.studyYear) {
-          final cmp = gradeOf(a).compareTo(gradeOf(b));
-          if (cmp != 0) return cmp;
-        }
-
-        final at = a.attendanceTime;
-        final bt = b.attendanceTime;
-
-        if (at == null && bt == null) {
-          return a.person.name.compareTo(b.person.name);
-        }
-        if (at == null) return 1;
-        if (bt == null) return -1;
-        return bt.compareTo(at);
-      }),
-    };
   }
 
   @override

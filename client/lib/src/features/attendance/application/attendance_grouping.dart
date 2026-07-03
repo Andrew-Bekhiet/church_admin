@@ -5,5 +5,10 @@
 /// because grouping by grade conflicts with a single alphabetical ordering.
 enum AttendanceGrouping {
   none,
-  studyYear,
+  studyYear;
+
+  AttendanceGrouping get toggled => switch (this) {
+    AttendanceGrouping.none => AttendanceGrouping.studyYear,
+    AttendanceGrouping.studyYear => AttendanceGrouping.none,
+  };
 }
