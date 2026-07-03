@@ -3,24 +3,33 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   test(
-    'tstzToString',
+    'tstzToString returns ISO date in UTC',
     () {
       final value = DateTime.now();
-      final valueUtc = DateTime.now().toUtc();
+      final valueUtc = value.toUtc();
 
-      expect(tstzToString(value), value.toIso8601String());
+      expect(tstzToString(value), valueUtc.toIso8601String());
       expect(tstzToString(valueUtc), valueUtc.toIso8601String());
+      expect(
+        tstzToString(DateTime.utc(2026, 7, 3, 12)),
+        '2026-07-03T12:00:00.000Z',
+      );
     },
   );
 
   test(
-    'tstzFromString',
+    'tstzFromString parses ISO date in local timezone',
     () {
       final value = DateTime.now();
-      final valueUtc = DateTime.now().toUtc();
+      final valueUtc = value.toUtc();
 
       expect(tstzFromString(value.toIso8601String()), value);
-      expect(tstzFromString(valueUtc.toIso8601String()), valueUtc);
+      expect(tstzFromString(valueUtc.toIso8601String()), value);
+
+      expect(
+        tstzFromString('2026-07-03T12:00:00.000Z'),
+        DateTime.utc(2026, 7, 3, 12).toLocal(),
+      );
     },
   );
 
@@ -28,19 +37,10 @@ void main() {
     'tstzFromString <=> tstzToString',
     () {
       final value = DateTime.now();
-      final valueUtc = DateTime.now().toUtc();
+      final valueUtc = value.toUtc();
 
-      expect(
-        tstzToString(tstzFromString(value.toIso8601String())),
-        value.toIso8601String(),
-      );
-      expect(tstzFromString(tstzToString(valueUtc)), valueUtc);
-
-      expect(
-        tstzToString(tstzFromString(value.toIso8601String())),
-        value.toIso8601String(),
-      );
-      expect(tstzFromString(tstzToString(valueUtc)), valueUtc);
+      expect(tstzFromString(tstzToString(value)), value);
+      expect(tstzFromString(tstzToString(valueUtc)), value);
     },
   );
 }

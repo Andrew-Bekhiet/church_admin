@@ -39,6 +39,7 @@ class Store extends ViewableWithIDAndImage
   final LastRecordedByInfo? lastEdit;
 
   @override
+  @LocalDateTimeConverter()
   final DateTime? photoUpdatedAt;
 
   @override

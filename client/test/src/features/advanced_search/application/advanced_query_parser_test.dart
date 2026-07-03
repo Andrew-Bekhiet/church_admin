@@ -57,6 +57,7 @@ void main() {
                     'lastEdit': {
                       'time': {
                         '_gt': (query.filters.first.value! as DateTime)
+                            .toUtc()
                             .toIso8601String(),
                       },
                     },
@@ -169,7 +170,7 @@ void main() {
                       {
                         'lastVisit': {
                           'time': {
-                            '_gt': dateValue.toIso8601String(),
+                            '_gt': dateValue.toUtc().toIso8601String(),
                           },
                         },
                       },

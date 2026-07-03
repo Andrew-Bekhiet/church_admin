@@ -141,9 +141,10 @@ Area _$AreaFromJson(Map json) => Area(
   name: json['name'] as String? ?? '',
   bounds: polygonFromJson(json['bounds']),
   color: colorFromInt((json['color'] as num?)?.toInt()),
-  photoUpdatedAt: json['photoUpdatedAt'] == null
-      ? null
-      : DateTime.parse(json['photoUpdatedAt'] as String),
+  photoUpdatedAt: _$JsonConverterFromJson<String, DateTime>(
+    json['photoUpdatedAt'],
+    const LocalDateTimeConverter().fromJson,
+  ),
   blurhash: json['blurhash'] as String?,
   lastVisit: json['lastVisit'] == null
       ? null
@@ -164,9 +165,22 @@ Map<String, dynamic> _$AreaToJson(Area instance) => <String, dynamic>{
   'name': instance.name,
   'bounds': polygonToJson(instance.bounds),
   'color': colorToInt(instance.color),
-  'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+  'photoUpdatedAt': _$JsonConverterToJson<String, DateTime>(
+    instance.photoUpdatedAt,
+    const LocalDateTimeConverter().toJson,
+  ),
   'blurhash': instance.blurhash,
   'lastVisit': instance.lastVisit?.toJson(),
   'lastEdit': instance.lastEdit?.toJson(),
   'adminUsers': adminUsersToJson(instance.adminUsers),
 };
+
+Value? _$JsonConverterFromJson<Json, Value>(
+  Object? json,
+  Value? Function(Json json) fromJson,
+) => json == null ? null : fromJson(json as Json);
+
+Json? _$JsonConverterToJson<Json, Value>(
+  Value? value,
+  Json? Function(Value value) toJson,
+) => value == null ? null : toJson(value);
