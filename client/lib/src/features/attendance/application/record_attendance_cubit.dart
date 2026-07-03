@@ -42,7 +42,7 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
   final LiveAttendance _liveAttendance = LiveAttendance();
 
   RosterStatus _rosterStatus = RosterStatus.loading;
-  List<MeetingRosterEntry> _displayEntries = const [];
+  Map<String, int> _gutterIndex = const {};
 
   DateTime get _fromDate => _selectedDate;
   DateTime get _toDate => _selectedDate.add(const Duration(days: 1));
@@ -81,13 +81,7 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
         .listen((_) => _emitLoaded());
   }
 
-  int indexForLetter(String letter) {
-    return _displayEntries.indexWhere(
-      (e) =>
-          (_presenceFilter != AttendancePresenceFilter.all || !e.attended) &&
-          _alphabet.firstLetterOf(e.person.name) == letter,
-    );
-  }
+  int indexForLetter(String letter) => _gutterIndex[letter] ?? -1;
 
   void switchMeeting(Meeting meeting) {
     if (meeting.id == _meeting.id) return;
@@ -296,13 +290,18 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
         .toList();
 
     final sorted = filteredEntries.sorted(_effectiveSort.compare);
-    _displayEntries = sorted;
 
-    // Only include a gutter letter when there is at least one navigable
-    // (absent) entry under it, keeping gutterLetters in sync with indexForLetter.
-    final gutterEntries = _presenceFilter == AttendancePresenceFilter.all
-        ? sorted.where((e) => !e.attended)
-        : sorted;
+    _gutterIndex = _alphabet.buildGutterLettersIndex(
+      sorted,
+      nameOf: (e) => e.person.name,
+      navigable: (e) =>
+          !(_presenceFilter == AttendancePresenceFilter.all &&
+              _sort.isSortingByTime) ||
+          !e.attended,
+    );
+    final sortedGutterLetters = _alphabet.sortGutterLettersFirst(
+      _gutterIndex.keys.toList(),
+    );
 
     emit(
       RecordAttendanceLoaded(
@@ -316,9 +315,7 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
         rosterStatus: _rosterStatus,
         searchQuery: _searchQuery,
         entries: sorted,
-        gutterLetters: _alphabet.lettersFrom(
-          gutterEntries.map((e) => e.person.name),
-        ),
+        gutterLetters: sortedGutterLetters,
         presentCount: allEligibleEntries.where((e) => e.attended).length,
         eligibleCount: allEligibleEntries.length,
       ),
