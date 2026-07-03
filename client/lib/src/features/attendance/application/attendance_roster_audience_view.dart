@@ -18,10 +18,17 @@ enum AttendanceRosterAudienceView {
     AttendanceRosterAudienceView.servants => 'الخدام',
   };
 
-  AttendanceRosterAudienceView get toggled =>
-      this == AttendanceRosterAudienceView.persons
-      ? AttendanceRosterAudienceView.servants
-      : AttendanceRosterAudienceView.persons;
+  AttendanceRosterAudienceView get toggled => switch (this) {
+    AttendanceRosterAudienceView.persons =>
+      AttendanceRosterAudienceView.servants,
+    AttendanceRosterAudienceView.servants =>
+      AttendanceRosterAudienceView.persons,
+  };
+
+  bool matches(MeetingRosterEntry entry) => switch (this) {
+    AttendanceRosterAudienceView.persons => !entry.asServant,
+    AttendanceRosterAudienceView.servants => entry.asServant,
+  };
 
   /// The view a freshly opened meeting should default to.
   static AttendanceRosterAudienceView defaultFor(MeetingAudience audience) =>

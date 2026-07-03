@@ -804,9 +804,10 @@ Person _$PersonFromJson(Map json) => Person(
   otherPhones:
       (json['otherPhones'] as Map?)?.map((k, e) => MapEntry(k as String, e)) ??
       const {},
-  birthdate: json['birthdate'] == null
-      ? null
-      : DateTime.parse(json['birthdate'] as String),
+  birthdate: _$JsonConverterFromJson<String, DateTime>(
+    json['birthdate'],
+    const LocalDateTimeConverter().fromJson,
+  ),
   birthday: json['birthday'] as String?,
   gender: json['gender'] as bool? ?? true,
   isShammas: json['isShammas'] as bool? ?? false,
@@ -880,9 +881,10 @@ Person _$PersonFromJson(Map json) => Person(
       : StudyYear.fromJson(Map<String, Object?>.from(json['studyYear'] as Map)),
   studyYearId: (json['studyYearId'] as num?)?.toInt(),
   color: colorFromInt((json['color'] as num?)?.toInt()),
-  photoUpdatedAt: json['photoUpdatedAt'] == null
-      ? null
-      : DateTime.parse(json['photoUpdatedAt'] as String),
+  photoUpdatedAt: _$JsonConverterFromJson<String, DateTime>(
+    json['photoUpdatedAt'],
+    const LocalDateTimeConverter().fromJson,
+  ),
   blurhash: json['blurhash'] as String?,
   lastConfession: json['lastConfession'] == null
       ? null
@@ -992,7 +994,10 @@ Map<String, dynamic> _$PersonToJson(Person instance) => <String, dynamic>{
   'address': instance.address?.toJson(),
   'mainPhone': instance.mainPhone,
   'otherPhones': instance.otherPhones,
-  'birthdate': instance.birthdate?.toIso8601String(),
+  'birthdate': _$JsonConverterToJson<String, DateTime>(
+    instance.birthdate,
+    const LocalDateTimeConverter().toJson,
+  ),
   'birthday': instance.birthday,
   'gender': instance.gender,
   'isShammas': instance.isShammas,
@@ -1028,7 +1033,10 @@ Map<String, dynamic> _$PersonToJson(Person instance) => <String, dynamic>{
   'studyYear': instance.studyYear?.toJson(),
   'studyYearId': instance.studyYearId,
   'color': colorToInt(instance.color),
-  'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+  'photoUpdatedAt': _$JsonConverterToJson<String, DateTime>(
+    instance.photoUpdatedAt,
+    const LocalDateTimeConverter().toJson,
+  ),
   'blurhash': instance.blurhash,
   'lastConfession': instance.lastConfession?.toJson(),
   'lastKodas': instance.lastKodas?.toJson(),
@@ -1060,6 +1068,11 @@ Map<String, dynamic> _$PersonToJson(Person instance) => <String, dynamic>{
   'editHistoryAggregate': instance.editHistoryAggregate?.toJson(),
 };
 
+Value? _$JsonConverterFromJson<Json, Value>(
+  Object? json,
+  Value? Function(Json json) fromJson,
+) => json == null ? null : fromJson(json as Json);
+
 const _$WorkStatusEnumMap = {
   WorkStatus.student: 'student',
   WorkStatus.employed: 'employed',
@@ -1075,3 +1088,8 @@ const _$MartialStatusEnumMap = {
   MartialStatus.widowedWithoutChildren: 'widowedWithoutChildren',
   MartialStatus.single: 'single',
 };
+
+Json? _$JsonConverterToJson<Json, Value>(
+  Value? value,
+  Json? Function(Value value) toJson,
+) => value == null ? null : toJson(value);

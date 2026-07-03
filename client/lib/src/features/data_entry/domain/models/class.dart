@@ -29,6 +29,7 @@ class Class extends ViewableWithIDAndImage
   final Color? color;
 
   @override
+  @LocalDateTimeConverter()
   final DateTime? photoUpdatedAt;
 
   @override

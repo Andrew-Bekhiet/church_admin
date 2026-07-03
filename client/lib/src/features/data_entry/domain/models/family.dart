@@ -40,6 +40,7 @@ class Family extends ViewableWithIDAndImage
   final MartialStatus status;
 
   @override
+  @LocalDateTimeConverter()
   final DateTime? marriageDate;
 
   @override
@@ -56,6 +57,7 @@ class Family extends ViewableWithIDAndImage
   final Color? color;
 
   @override
+  @LocalDateTimeConverter()
   final DateTime? photoUpdatedAt;
 
   @override

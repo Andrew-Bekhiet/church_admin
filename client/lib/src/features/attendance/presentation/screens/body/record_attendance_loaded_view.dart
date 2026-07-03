@@ -39,8 +39,13 @@ class _RecordAttendanceLoadedViewState
     );
   }
 
-  _RosterScrollOffsetKey _rosterKeyFor(RecordAttendanceLoaded s) =>
-      (s.meeting.id, s.selectedDate, s.view, s.filter, s.grouping);
+  _RosterScrollOffsetKey _rosterKeyFor(RecordAttendanceLoaded s) => (
+    s.meeting.id,
+    s.selectedDate,
+    s.audienceView,
+    s.presenceFilter,
+    s.grouping,
+  );
 
   final Map<_RosterScrollOffsetKey, double> _savedOffsets = {};
 
@@ -104,7 +109,7 @@ class _RecordAttendanceLoadedViewState
         AttendanceAppBar(
           meeting: state.meeting,
           selectedDate: state.selectedDate,
-          audienceView: state.view,
+          audienceView: state.audienceView,
           sorting: state.sort,
           grouping: state.grouping,
           canToggleAudience: state.canToggleAudience,
@@ -125,7 +130,7 @@ class _RecordAttendanceLoadedViewState
                       presentCount: state.presentCount ?? 0,
                       absentCount: state.absentCount ?? 0,
                       totalCount: state.eligibleCount ?? 0,
-                      filter: state.filter,
+                      filter: state.presenceFilter,
                       onFilterChanged: cubit.changePresenceFilter,
                     ),
                     switch (state.rosterStatus) {

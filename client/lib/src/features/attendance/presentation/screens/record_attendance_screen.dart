@@ -31,9 +31,7 @@ class _RecordAttendanceScreenState extends State<RecordAttendanceScreen> {
       value: _cubit,
       child: Scaffold(
         extendBody: true,
-        bottomNavigationBar: AttendanceSearchBar(
-          onChanged: _cubit.searchSink.add,
-        ),
+        bottomNavigationBar: AttendanceSearchBar(onChanged: _cubit.onSearch),
         body: SafeArea(
           bottom: false,
           child: BlocBuilder<RecordAttendanceCubit, RecordAttendanceState>(

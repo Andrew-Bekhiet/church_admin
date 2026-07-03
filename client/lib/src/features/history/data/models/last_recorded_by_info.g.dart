@@ -57,7 +57,10 @@ class _LastRecordedByInfoFields {
 // **************************************************************************
 
 LastRecordedByInfo _$LastRecordedByInfoFromJson(Map json) => LastRecordedByInfo(
-  time: json['time'] == null ? null : DateTime.parse(json['time'] as String),
+  time: _$JsonConverterFromJson<String, DateTime>(
+    json['time'],
+    const LocalDateTimeConverter().fromJson,
+  ),
   recordedBy: readRecordedBy(json, 'recordedBy') as String?,
   user: json['user'] == null
       ? null
@@ -67,8 +70,13 @@ LastRecordedByInfo _$LastRecordedByInfoFromJson(Map json) => LastRecordedByInfo(
 
 Map<String, dynamic> _$LastRecordedByInfoToJson(LastRecordedByInfo instance) =>
     <String, dynamic>{
-      'time': instance.time.toIso8601String(),
+      'time': const LocalDateTimeConverter().toJson(instance.time),
       'recordedBy': instance.recordedBy,
       'user': instance.user?.toJson(),
       'isFatherVisit': instance.isFatherVisit,
     };
+
+Value? _$JsonConverterFromJson<Json, Value>(
+  Object? json,
+  Value? Function(Json json) fromJson,
+) => json == null ? null : fromJson(json as Json);

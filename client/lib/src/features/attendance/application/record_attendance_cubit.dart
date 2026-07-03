@@ -1,8 +1,11 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
+import 'package:church_admin/src/features/attendance/application/attendance_undo_presenter.dart';
+import 'package:church_admin/src/features/attendance/application/live_attendance.dart';
+import 'package:church_admin/src/features/attendance/domain/attendance_record_rights.dart';
 import 'package:collection/collection.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' show DateUtils;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -11,124 +14,120 @@ import 'package:rxdart/rxdart.dart';
 /// gutter and group counts stay accurate), live present/eligible counts and
 /// optimistic one-tap marking with undo.
 class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
-  static const AttendanceNameAlphabet _alphabet = AttendanceNameAlphabet();
   static const Duration _searchDebounce = Duration(milliseconds: 300);
-  static const int _rosterLimit = 5000;
+  static const AttendanceNameAlphabet _alphabet = AttendanceNameAlphabet();
 
   final MeetingsDAO _dao;
   final AuthBloc _authBloc;
+  final AttendanceUndoPresenter _presenter;
 
   final BehaviorSubject<String?> _searchSubject = BehaviorSubject.seeded(null);
   StreamSubscription<String?>? _searchSub;
+  String _searchQuery = '';
 
   Meeting _meeting;
   DateTime _selectedDate;
 
-  late AttendanceRosterAudienceView _view;
-  bool _canRecordPersons = false;
-  bool _canRecordServants = false;
+  late AttendanceRosterAudienceView _audienceView;
+  late AttendanceRecordRights _recordAttendanceRights;
 
-  AttendancePresenceFilter _filter = AttendancePresenceFilter.all;
+  AttendancePresenceFilter _presenceFilter = AttendancePresenceFilter.all;
   AttendanceGrouping _grouping = AttendanceGrouping.none;
-  AttendanceSorting _sort = AttendanceSorting.byName;
+  AttendanceSorting _sort = AttendanceSorting.byName();
 
-  StreamSubscription<List<MeetingRosterEntry>>? _rosterSub;
+  int _rosterRequestId = 0;
+  List<MeetingRosterEntry> _rosterPersons = const [];
+
+  StreamSubscription<List<AttendanceRecord>>? _attendanceSub;
+  final LiveAttendance _liveAttendance = LiveAttendance();
 
   RosterStatus _rosterStatus = RosterStatus.loading;
-  List<MeetingRosterEntry> _serverEntries = const [];
-  List<MeetingRosterEntry> _displayEntries = const [];
+  Map<String, int> _gutterIndex = const {};
 
-  StreamSubscription<int?>? _presentCountSub;
-  StreamSubscription<int?>? _eligibleCountSub;
-  int? _presentCount;
-  int? _eligibleCount;
+  DateTime get _fromDate => _selectedDate;
+  DateTime get _toDate => _selectedDate.add(const Duration(days: 1));
+  bool get _asServant => _audienceView.asServant;
 
-  final Map<String, DateTime?> _optimisticPresence = {};
+  // Wraps _sort with a study-year prefix when grouping is active, so the
+  // client-side order always matches the grouped roster layout.
+  AttendanceSorting get _effectiveSort => switch (_grouping) {
+    AttendanceGrouping.none => _sort,
+    AttendanceGrouping.studyYear => AttendanceSortingByStudyYear(then: _sort),
+  };
 
-  final Set<String> _inFlight = {};
+  bool get _canToggleAudience =>
+      _meeting.audience == MeetingAudience.personsAndServants &&
+      _recordAttendanceRights.canToggleAudience;
 
   RecordAttendanceCubit({
     required Meeting meeting,
     DateTime? initialDate,
     MeetingsDAO? dao,
     AuthBloc? authBloc,
+    AttendanceUndoPresenter? presenter,
   }) : _dao = dao ?? DatabaseService.I.meetings,
        _authBloc = authBloc ?? AuthBloc.I,
+       _presenter = presenter ?? const ScaffoldAttendanceUndoPresenter(),
        _meeting = meeting,
        _selectedDate = DateUtils.dateOnly(initialDate ?? DateTime.now()),
        super(const RecordAttendanceLoading()) {
-    _updateRecordRights();
-    _view = _defaultView();
+    _forceSwitchMeeting(_meeting);
 
-    _subscribeEligibleCount();
     _searchSub = _searchSubject
         .debounceTime(_searchDebounce)
-        .distinct((a, b) => (a ?? '') == (b ?? ''))
+        .map((query) => query?.trim().toLowerCase() ?? '')
+        .distinct((a, b) => a == b)
+        .doOnData((query) => _searchQuery = query)
         .listen((_) => _emitLoaded());
-
-    unawaited(_restartSession());
   }
 
-  StreamSink<String?> get searchSink => _searchSubject.sink;
-
-  DateTime get _fromDate => _selectedDate;
-  DateTime get _toDate => _selectedDate.add(const Duration(days: 1));
-  bool get _asServant => _view.asServant;
-
-  bool get _canToggleAudience =>
-      _meeting.audience == MeetingAudience.personsAndServants &&
-      _canRecordPersons &&
-      _canRecordServants;
-
-  int indexForLetter(String letter) => _displayEntries.indexWhere(
-    (e) =>
-        (_filter != AttendancePresenceFilter.all || !e.attended) &&
-        _alphabet.firstLetterOf(e.person.name) == letter,
-  );
+  int indexForLetter(String letter) => _gutterIndex[letter] ?? -1;
 
   void switchMeeting(Meeting meeting) {
     if (meeting.id == _meeting.id) return;
 
+    _forceSwitchMeeting(meeting);
+  }
+
+  void _forceSwitchMeeting(Meeting meeting) {
     _meeting = meeting;
-    _updateRecordRights();
-    _view = _defaultView();
-    _resetOptimistic();
-    _subscribeEligibleCount();
+    _recordAttendanceRights = AttendanceRecordRights.resolve(
+      user: _authBloc.currentUserData,
+      meeting: _meeting,
+    );
+    _audienceView = _recordAttendanceRights.initialViewFor(_meeting);
+    _liveAttendance.reset();
     unawaited(_restartSession());
   }
 
   void selectDate(DateTime date) {
-    final normalized = DateUtils.dateOnly(date);
-    if (normalized == _selectedDate) return;
+    final dayOnly = DateUtils.dateOnly(date);
+    if (dayOnly == _selectedDate) return;
 
-    _selectedDate = normalized;
-    _resetOptimistic();
-    unawaited(_restartSession());
+    _selectedDate = dayOnly;
+    _liveAttendance.reset();
+    _subscribeAttendance();
   }
 
   void toggleAudience() {
     if (!_canToggleAudience) return;
 
-    _view = _view.toggled;
-    _resetOptimistic();
-    _subscribeEligibleCount();
-    unawaited(_restartSession());
+    _audienceView = _audienceView.toggled;
+    _emitLoaded();
   }
 
   void changePresenceFilter(AttendancePresenceFilter filter) {
-    if (_filter == filter) return;
+    if (_presenceFilter == filter) return;
 
-    _filter = filter;
+    _presenceFilter = filter;
     _emitLoaded();
   }
 
   void changeGrouping(AttendanceGrouping grouping) {
     if (_grouping == grouping) return;
 
-    // Grouping changes the server ordering (study-year prefix), so re-subscribe.
-    // Keep the current entries visible until the re-ordered batch arrives.
     _grouping = grouping;
-    unawaited(_subscribeRoster(showLoading: false));
+    _emitLoaded();
   }
 
   void changeSorting(AttendanceSorting sort) {
@@ -138,19 +137,32 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
     _emitLoaded();
   }
 
+  void onSearch(String? query) => _searchSubject.sink.add(query);
+
   void retry() => unawaited(_restartSession());
 
   Future<void> toggleAttendance(MeetingRosterEntry entry) async {
-    final now = DateTime.now();
-
     final personId = entry.person.id;
-    if (_inFlight.contains(personId)) return;
+    if (_liveAttendance.isInFlight(personId) ||
+        _liveAttendance.isOptimistic(personId, _asServant)) {
+      return;
+    }
 
-    final newIsPresent = _displayedPresenceTime(personId, entry) == null;
-    final attendanceTime = _selectedDate.replaceTime(now);
+    final effectiveAttendanceRecord = _liveAttendance.effectiveAttendanceRecord(
+      personId: personId,
+      asServant: _asServant,
+      meetingId: _meeting.id,
+    );
+    final newIsPresent = effectiveAttendanceRecord == null;
+    final attendanceTime = _selectedDate.replaceTime(DateTime.now());
 
-    _optimisticPresence[personId] = newIsPresent ? attendanceTime : null;
-    _inFlight.add(personId);
+    _liveAttendance
+      ..markOptimistic(
+        personId,
+        _asServant,
+        newIsPresent ? attendanceTime : null,
+      )
+      ..beginInFlight(personId);
     _emitLoaded();
 
     try {
@@ -162,20 +174,18 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
           datetime: attendanceTime,
         );
 
-        _showUndoSnackBar(
-          entry,
+        _presenter.showUndo(
+          personName: entry.person.name,
           isPresent: true,
-          onUndo: () => _dao.unmarkAttendance(
-            attendanceRecordId: record.id,
-          ),
+          onUndo: () => _dao.unmarkAttendance(attendanceRecordId: record.id),
         );
       } else if (entry.attendance?.id case final attendanceRecordId?) {
         final record = await _dao.unmarkAttendance(
           attendanceRecordId: attendanceRecordId,
         );
 
-        _showUndoSnackBar(
-          entry,
+        _presenter.showUndo(
+          personName: entry.person.name,
           isPresent: false,
           onUndo: () => _dao.markAttendance(
             meetingId: record.meetingId,
@@ -186,7 +196,7 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
         );
       }
     } catch (error, stackTrace) {
-      _optimisticPresence.remove(personId);
+      _liveAttendance.rollbackOptimistic(personId, _asServant);
 
       unawaited(
         LoggingService.I.exception(
@@ -194,87 +204,59 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
         ),
       );
 
-      if (!isClosed) {
-        scaffoldMessenger.showErrorSnackBar('تعذر حفظ الحضور، حاول مرة أخرى');
-      }
+      if (!isClosed) _presenter.showError('تعذر حفظ الحضور، حاول مرة أخرى');
     } finally {
-      _inFlight.remove(personId);
+      _liveAttendance.endInFlight(personId);
       _emitLoaded();
     }
   }
 
-  DateTime? _displayedPresenceTime(String personId, MeetingRosterEntry entry) =>
-      _optimisticPresence[personId] ?? entry.attendanceTime;
-
-  void _showUndoSnackBar(
-    MeetingRosterEntry entry, {
-    required bool isPresent,
-    required VoidCallback onUndo,
-  }) {
-    if (isClosed) return;
-
-    final personName = entry.person.name;
-
-    scaffoldMessenger
-      ..clearSnackBars()
-      ..showSnackBar(
-        SnackBar(
-          content: Text(
-            isPresent
-                ? 'تم تسجيل حضور $personName'
-                : 'تم إلغاء حضور $personName',
-          ),
-          action: SnackBarAction(
-            label: 'تراجع',
-            onPressed: onUndo,
-          ),
-        ),
-      );
-  }
-
   Future<void> _restartSession() async {
     try {
-      await _subscribeRoster(showLoading: true);
-      _subscribePresentCount();
+      await _loadRoster(showLoading: true);
+      if (isClosed) return;
+      _subscribeAttendance();
     } catch (error, stackTrace) {
       _onRosterError(error, stackTrace);
     }
   }
 
-  Future<void> _subscribeRoster({required bool showLoading}) async {
+  Future<void> _loadRoster({required bool showLoading}) async {
     if (showLoading) {
       _rosterStatus = RosterStatus.loading;
-      _serverEntries = const [];
+      _rosterPersons = const [];
+      _emitLoaded();
     }
-    _emitLoaded();
 
-    await _rosterSub?.cancel();
-    _rosterSub = _dao
-        .streamMeetingRoster(
+    final requestId = ++_rosterRequestId;
+
+    final entries = await _dao.getMeetingRoster(
+      meetingId: _meeting.id,
+      groupByStudyYear: _grouping == AttendanceGrouping.studyYear,
+    );
+
+    if (requestId != _rosterRequestId || isClosed) return;
+
+    _rosterPersons = entries;
+    _rosterStatus = RosterStatus.ready;
+    _emitLoaded();
+  }
+
+  void _subscribeAttendance() {
+    unawaited(_attendanceSub?.cancel());
+    _attendanceSub = _dao
+        .streamAttendanceHistory(
           meetingId: _meeting.id,
           fromDate: _fromDate,
           toDate: _toDate,
-          groupByStudyYear: _grouping == AttendanceGrouping.studyYear,
-          limit: _rosterLimit,
         )
-        .listen(
-          _onServerEntries,
-          onError: _onRosterError,
-        );
+        .listen(_onServerAttendanceRecords, onError: _onRosterError);
   }
 
-  void _onServerEntries(List<MeetingRosterEntry> entries) {
+  void _onServerAttendanceRecords(List<AttendanceRecord> records) {
     if (isClosed) return;
 
-    _serverEntries = entries;
-    _rosterStatus = RosterStatus.ready;
-
-    for (final entry in entries) {
-      final personId = entry.person.id;
-
-      _optimisticPresence.remove(personId);
-    }
-
+    _liveAttendance.refreshWithServerRecords(records);
     _emitLoaded();
   }
 
@@ -294,217 +276,76 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
     _emitLoaded();
   }
 
-  void _subscribePresentCount() {
-    unawaited(_presentCountSub?.cancel());
-    _presentCount = null;
-    _presentCountSub = _dao
-        .streamPresentCount(
-          meetingId: _meeting.id,
-          fromDate: _fromDate,
-          toDate: _toDate,
-          asServant: _asServant,
-        )
-        .listen(
-          (count) {
-            _presentCount = count;
-            if (state is RecordAttendanceLoaded) _emitLoaded();
-          },
-        );
-  }
-
-  void _subscribeEligibleCount() {
-    unawaited(_eligibleCountSub?.cancel());
-    _eligibleCount = null;
-    _eligibleCountSub = _dao
-        .streamEligibleCount(meetingId: _meeting.id, asServant: _asServant)
-        .listen(
-          (count) {
-            _eligibleCount = count;
-            if (state is RecordAttendanceLoaded) _emitLoaded();
-          },
-        );
-  }
-
   void _emitLoaded() {
     if (isClosed) return;
 
-    final query = _searchSubject.valueOrNull?.trim() ?? '';
-    final filtered = _serverEntries
-        .map(_applyOptimistic)
-        .where((e) => e.asServant == _asServant)
-        .where(_matchesPresenceFilter)
-        .where((e) => _matchesSearch(e, query))
+    final allEligibleEntries = _rosterPersons
+        .map(_withLiveAttendance)
+        .where(_audienceView.matches)
         .toList();
-    _displayEntries = _applySorting(
-      filtered,
-      sorting: _sort,
-      grouping: _grouping,
+
+    final filteredEntries = allEligibleEntries
+        .where(_presenceFilter.matches)
+        .where((e) => _matchesSearch(e, _searchQuery))
+        .toList();
+
+    final sorted = filteredEntries.sorted(_effectiveSort.compare);
+
+    _gutterIndex = _alphabet.buildGutterLettersIndex(
+      sorted,
+      nameOf: (e) => e.person.name,
+      navigable: (e) =>
+          !(_presenceFilter == AttendancePresenceFilter.all &&
+              _sort.isSortingByTime) ||
+          !e.attended,
+    );
+    final sortedGutterLetters = _alphabet.sortGutterLettersFirst(
+      _gutterIndex.keys.toList(),
     );
 
     emit(
       RecordAttendanceLoaded(
         meeting: _meeting,
         selectedDate: _selectedDate,
-        view: _view,
+        audienceView: _audienceView,
         canToggleAudience: _canToggleAudience,
-        filter: _filter,
+        presenceFilter: _presenceFilter,
         grouping: _grouping,
         sort: _sort,
         rosterStatus: _rosterStatus,
-        searchQuery: _searchSubject.valueOrNull,
-        entries: _displayEntries,
-        gutterLetters: _alphabet.lettersFrom(
-          _displayEntries.map((e) => e.person.name),
-        ),
-        presentCount: _presentCount,
-        eligibleCount: _eligibleCount,
+        searchQuery: _searchQuery,
+        entries: sorted,
+        gutterLetters: sortedGutterLetters,
+        presentCount: allEligibleEntries.where((e) => e.attended).length,
+        eligibleCount: allEligibleEntries.length,
       ),
     );
   }
 
-  MeetingRosterEntry _applyOptimistic(MeetingRosterEntry entry) {
-    final shouldApplyOptimisticAttendance = _optimisticPresence.containsKey(
-      entry.person.id,
-    );
-    if (!shouldApplyOptimisticAttendance) {
-      return entry;
-    }
-
-    final optimisticAttendanceTime = _optimisticPresence[entry.person.id];
-    final optimisticIsAttended = optimisticAttendanceTime != null;
-
-    return MeetingRosterEntry(
+  MeetingRosterEntry _withLiveAttendance(MeetingRosterEntry entry) {
+    final record = _liveAttendance.effectiveAttendanceRecord(
+      personId: entry.person.id,
       asServant: entry.asServant,
-      person: entry.person,
-      attendanceHistory: optimisticIsAttended
-          ? [
-              AttendanceRecord(
-                id: _meeting.id, // placeholder id for the optimistic record
-                meetingId: _meeting.id,
-                personId: entry.person.id,
-                datetime: optimisticAttendanceTime,
-                asServant: _asServant,
-              ),
-            ]
-          : const [],
+      meetingId: _meeting.id,
     );
+
+    return entry.copyWith(attendanceHistory: [?record]);
   }
 
   bool _matchesSearch(MeetingRosterEntry entry, String query) {
     if (query.isEmpty) return true;
 
     final person = entry.person;
-    return person.name.toLowerCase().contains(query.toLowerCase()) ||
-        (person.mainPhone?.contains(query) ?? false);
-  }
+    final personName = person.name.toLowerCase().trim();
+    final mainPhone = person.mainPhone?.toLowerCase().trim() ?? '';
 
-  bool _matchesPresenceFilter(MeetingRosterEntry entry) => switch (_filter) {
-    AttendancePresenceFilter.all => true,
-    AttendancePresenceFilter.present => entry.attended,
-    AttendancePresenceFilter.absent => !entry.attended,
-  };
-
-  /// By-name order is left to the server. By-attendance-time is sorted here
-  /// (the day-windowed attendance can't be expressed in the server ORDER BY),
-  /// keeping the study-year prefix so grouping stays a pure partition.
-  List<MeetingRosterEntry> _applySorting(
-    List<MeetingRosterEntry> entries, {
-    required AttendanceSorting sorting,
-    required AttendanceGrouping grouping,
-  }) {
-    int studyYearOrder(MeetingRosterEntry entry) =>
-        entry.person.studyYear?.order ?? 1 << 16;
-
-    return switch (sorting) {
-      AttendanceSorting.byName => entries,
-      AttendanceSorting.byAttendanceTime => entries.sorted((a, b) {
-        if (grouping == AttendanceGrouping.studyYear) {
-          final gradeComparison = studyYearOrder(
-            a,
-          ).compareTo(studyYearOrder(b));
-
-          if (gradeComparison != 0) return gradeComparison;
-        }
-
-        final at = a.attendance?.datetime;
-        final bt = b.attendance?.datetime;
-
-        if (at == null && bt == null) {
-          return a.person.name.compareTo(b.person.name);
-        }
-
-        if (at == null) return 1;
-        if (bt == null) return -1;
-
-        return bt.compareTo(at);
-      }),
-    };
-  }
-
-  void _updateRecordRights() {
-    final user = _authBloc.currentUserData;
-    final permissions = user?.permissions;
-    final canReadAll = permissions?.readAllData ?? false;
-
-    bool canRecordPersons =
-        canReadAll && (permissions?.recordAllAttendance ?? false);
-    bool canRecordServants =
-        canReadAll && (permissions?.recordAllServantsAttendance ?? false);
-
-    for (final adminOn in user?.adminOn ?? const <AdminOnData>[]) {
-      final scope = RecordAttendanceScope.fromAdminOnData(adminOn);
-      if (scope == null || !_scopeCoversMeeting(scope)) continue;
-
-      canRecordPersons = canRecordPersons || scope.canRecordPersons;
-      canRecordServants = canRecordServants || scope.canRecordServants;
-    }
-
-    _canRecordPersons = canRecordPersons;
-    _canRecordServants = canRecordServants;
-  }
-
-  bool _scopeCoversMeeting(RecordAttendanceScope scope) => switch (scope) {
-    ServiceAttendanceScope(:final service, :final studyYear, :final gender) =>
-      service.id == _meeting.serviceId &&
-          (studyYear == null ||
-              _meeting.serviceStudyYear == null ||
-              studyYear.order == _meeting.serviceStudyYear) &&
-          (gender == null ||
-              _meeting.serviceGender == null ||
-              gender == _meeting.serviceGender),
-    GroupAttendanceScope(:final group) => group.id == _meeting.groupId,
-  };
-
-  AttendanceRosterAudienceView _defaultView() {
-    if (_meeting.audience != MeetingAudience.personsAndServants) {
-      return AttendanceRosterAudienceView.defaultFor(_meeting.audience);
-    }
-
-    if (_canRecordServants && !_canRecordPersons) {
-      return AttendanceRosterAudienceView.servants;
-    }
-
-    return AttendanceRosterAudienceView.persons;
-  }
-
-  void _resetOptimistic() {
-    _optimisticPresence.clear();
-    _inFlight.clear();
-  }
-
-  Future<void> _disposeRoster() async {
-    await _rosterSub?.cancel();
-    _rosterSub = null;
-    _serverEntries = const [];
-    _displayEntries = const [];
+    return personName.contains(query) || mainPhone.contains(query);
   }
 
   @override
   Future<void> close() async {
-    await _disposeRoster();
+    await _attendanceSub?.cancel();
     await _searchSub?.cancel();
-    await _presentCountSub?.cancel();
-    await _eligibleCountSub?.cancel();
     await _searchSubject.close();
     await super.close();
   }

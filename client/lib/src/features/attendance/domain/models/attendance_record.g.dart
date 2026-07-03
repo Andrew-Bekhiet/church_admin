@@ -103,7 +103,7 @@ AttendanceRecord _$AttendanceRecordFromJson(Map json) => AttendanceRecord(
   id: json['id'] as String,
   meetingId: json['meetingId'] as String,
   personId: json['personId'] as String,
-  datetime: DateTime.parse(json['datetime'] as String),
+  datetime: const LocalDateTimeConverter().fromJson(json['datetime'] as String),
   asServant: json['asServant'] as bool,
   meeting: json['meeting'] == null
       ? null
@@ -123,7 +123,7 @@ Map<String, dynamic> _$AttendanceRecordToJson(AttendanceRecord instance) =>
       'meeting': instance.meeting?.toJson(),
       'personId': instance.personId,
       'person': instance.person?.toJson(),
-      'datetime': instance.datetime.toIso8601String(),
+      'datetime': const LocalDateTimeConverter().toJson(instance.datetime),
       'asServant': instance.asServant,
       'recordedByUser': instance.recordedByUser?.toJson(),
     };

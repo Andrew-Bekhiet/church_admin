@@ -33,6 +33,7 @@ class User extends ViewableWithIDAndImage
   final String? email;
 
   @override
+  @LocalDateTimeConverter()
   final DateTime? photoUpdatedAt;
 
   @override

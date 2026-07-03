@@ -262,18 +262,20 @@ Family _$FamilyFromJson(Map json) => Family(
   status:
       $enumDecodeNullable(_$MartialStatusEnumMap, json['status']) ??
       MartialStatus.married,
-  marriageDate: json['marriageDate'] == null
-      ? null
-      : DateTime.parse(json['marriageDate'] as String),
+  marriageDate: _$JsonConverterFromJson<String, DateTime>(
+    json['marriageDate'],
+    const LocalDateTimeConverter().fromJson,
+  ),
   deceasedSpouseName: json['deceasedSpouseName'] as String?,
   church: json['church'] == null
       ? null
       : Church.fromJson(Map<String, Object?>.from(json['church'] as Map)),
   notes: json['notes'] as String?,
   color: colorFromInt((json['color'] as num?)?.toInt()),
-  photoUpdatedAt: json['photoUpdatedAt'] == null
-      ? null
-      : DateTime.parse(json['photoUpdatedAt'] as String),
+  photoUpdatedAt: _$JsonConverterFromJson<String, DateTime>(
+    json['photoUpdatedAt'],
+    const LocalDateTimeConverter().fromJson,
+  ),
   blurhash: json['blurhash'] as String?,
   children: familyChildrenFromJson(json['children'] as List?),
   parents: familyParentsFromJson(json['parents'] as List?),
@@ -304,12 +306,18 @@ Map<String, dynamic> _$FamilyToJson(Family instance) => <String, dynamic>{
   'name': instance.name,
   'address': instance.address?.toJson(),
   'status': _$MartialStatusEnumMap[instance.status]!,
-  'marriageDate': instance.marriageDate?.toIso8601String(),
+  'marriageDate': _$JsonConverterToJson<String, DateTime>(
+    instance.marriageDate,
+    const LocalDateTimeConverter().toJson,
+  ),
   'deceasedSpouseName': instance.deceasedSpouseName,
   'church': instance.church?.toJson(),
   'notes': instance.notes,
   'color': colorToInt(instance.color),
-  'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+  'photoUpdatedAt': _$JsonConverterToJson<String, DateTime>(
+    instance.photoUpdatedAt,
+    const LocalDateTimeConverter().toJson,
+  ),
   'blurhash': instance.blurhash,
   'children': familyChildrenToJson(instance.children),
   'parents': familyParentsToJson(instance.parents),
@@ -327,3 +335,13 @@ const _$MartialStatusEnumMap = {
   MartialStatus.widowedWithoutChildren: 'widowedWithoutChildren',
   MartialStatus.single: 'single',
 };
+
+Value? _$JsonConverterFromJson<Json, Value>(
+  Object? json,
+  Value? Function(Json json) fromJson,
+) => json == null ? null : fromJson(json as Json);
+
+Json? _$JsonConverterToJson<Json, Value>(
+  Value? value,
+  Json? Function(Value value) toJson,
+) => value == null ? null : toJson(value);

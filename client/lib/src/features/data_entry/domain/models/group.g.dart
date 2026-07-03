@@ -146,9 +146,10 @@ Group _$GroupFromJson(Map json) => Group(
   id: json['id'] as String? ?? '',
   name: json['name'] as String? ?? '',
   color: colorFromInt((json['color'] as num?)?.toInt()),
-  photoUpdatedAt: json['photoUpdatedAt'] == null
-      ? null
-      : DateTime.parse(json['photoUpdatedAt'] as String),
+  photoUpdatedAt: _$JsonConverterFromJson<String, DateTime>(
+    json['photoUpdatedAt'],
+    const LocalDateTimeConverter().fromJson,
+  ),
   blurhash: json['blurhash'] as String?,
   serviceId: json['serviceId'] as String?,
   service: json['service'] == null
@@ -173,7 +174,10 @@ Map<String, dynamic> _$GroupToJson(Group instance) => <String, dynamic>{
   'id': instance.id,
   'name': instance.name,
   'color': colorToInt(instance.color),
-  'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+  'photoUpdatedAt': _$JsonConverterToJson<String, DateTime>(
+    instance.photoUpdatedAt,
+    const LocalDateTimeConverter().toJson,
+  ),
   'blurhash': instance.blurhash,
   'serviceId': instance.serviceId,
   'service': instance.service?.toJson(),
@@ -182,3 +186,13 @@ Map<String, dynamic> _$GroupToJson(Group instance) => <String, dynamic>{
   'adminUsers': adminUsersToJson(instance.adminUsers),
   'attendanceHistoryAggregate': instance.attendanceHistoryAggregate?.toJson(),
 };
+
+Value? _$JsonConverterFromJson<Json, Value>(
+  Object? json,
+  Value? Function(Json json) fromJson,
+) => json == null ? null : fromJson(json as Json);
+
+Json? _$JsonConverterToJson<Json, Value>(
+  Value? value,
+  Json? Function(Value value) toJson,
+) => value == null ? null : toJson(value);

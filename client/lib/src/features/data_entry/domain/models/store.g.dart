@@ -144,9 +144,10 @@ Store _$StoreFromJson(Map json) => Store(
       : LastRecordedByInfo.fromJson(
           Map<String, Object?>.from(json['lastEdit'] as Map),
         ),
-  photoUpdatedAt: json['photoUpdatedAt'] == null
-      ? null
-      : DateTime.parse(json['photoUpdatedAt'] as String),
+  photoUpdatedAt: _$JsonConverterFromJson<String, DateTime>(
+    json['photoUpdatedAt'],
+    const LocalDateTimeConverter().fromJson,
+  ),
   blurhash: json['blurhash'] as String?,
   userCanEdit: json['userCanEdit'] as bool? ?? false,
 );
@@ -159,6 +160,19 @@ Map<String, dynamic> _$StoreToJson(Store instance) => <String, dynamic>{
   'adminFamily': instance.familyId,
   'color': colorToInt(instance.color),
   'lastEdit': instance.lastEdit?.toJson(),
-  'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+  'photoUpdatedAt': _$JsonConverterToJson<String, DateTime>(
+    instance.photoUpdatedAt,
+    const LocalDateTimeConverter().toJson,
+  ),
   'blurhash': instance.blurhash,
 };
+
+Value? _$JsonConverterFromJson<Json, Value>(
+  Object? json,
+  Value? Function(Json json) fromJson,
+) => json == null ? null : fromJson(json as Json);
+
+Json? _$JsonConverterToJson<Json, Value>(
+  Value? value,
+  Json? Function(Value value) toJson,
+) => value == null ? null : toJson(value);

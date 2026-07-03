@@ -43,6 +43,7 @@ class Service extends ViewableWithIDAndImage
   final Color? color;
 
   @override
+  @LocalDateTimeConverter()
   final DateTime? photoUpdatedAt;
 
   @override

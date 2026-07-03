@@ -14,71 +14,21 @@ subscription watchMeeting($id: uuid!) {
   }
 }
 
-subscription watchMeetingRoster(
+subscription watchAttendanceHistory(
   $meetingId: uuid!
   $fromDate: timestamptz!
   $toDate: timestamptz!
-  $where: [HistoryMeetingRosterBoolExp!] = []
-  $orderBy: [HistoryMeetingRosterOrderBy!] = [{ name: ASC }, { personId: ASC }]
-  $limit: Int = 200
 ) {
-  historyMeetingRoster(
-    where: { meetingId: { _eq: $meetingId }, _and: $where }
-    orderBy: $orderBy
-    limit: $limit
-  ) {
-    personId
-    name
-    mainPhone
-    gender
-    color
-    studyYearId
-    studyYearName
-    photoUpdatedAt
-    blurhash
-    asServant
-    attendanceHistory(
-      where: { datetime: { _gte: $fromDate, _lt: $toDate } }
-      orderBy: [{ datetime: DESC }]
-      limit: 1
-    ) {
-      id
-      meetingId
-      personId
-      datetime
-      asServant
-    }
-  }
-}
-
-subscription watchMeetingPresentCount(
-  $meetingId: uuid!
-  $asServant: Boolean!
-  $fromDate: timestamptz!
-  $toDate: timestamptz!
-) {
-  historyAttendanceHistoryAggregate(
+  historyAttendanceHistory(
     where: {
       meetingId: { _eq: $meetingId }
-      asServant: { _eq: $asServant }
       datetime: { _gte: $fromDate, _lt: $toDate }
     }
   ) {
-    aggregate {
-      count
-    }
-  }
-}
-
-subscription watchMeetingEligibleCount(
-  $meetingId: uuid!
-  $asServant: Boolean!
-) {
-  historyMeetingRosterAggregate(
-    where: { meetingId: { _eq: $meetingId }, asServant: { _eq: $asServant } }
-  ) {
-    aggregate {
-      count
-    }
+    id
+    meetingId
+    personId
+    datetime
+    asServant
   }
 }

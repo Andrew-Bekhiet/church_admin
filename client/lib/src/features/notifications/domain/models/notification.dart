@@ -16,6 +16,7 @@ class Notification with _$Notification {
   @override
   final String body;
   @override
+  @LocalDateTimeConverter()
   final DateTime sentTime;
   @override
   final String senderUID;

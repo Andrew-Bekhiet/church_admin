@@ -16,6 +16,7 @@ class LastRecordedByInfo extends ViewableWithID
     with _$LastRecordedByInfo
     implements SerializableExtra {
   @override
+  @LocalDateTimeConverter()
   final DateTime time;
 
   @override

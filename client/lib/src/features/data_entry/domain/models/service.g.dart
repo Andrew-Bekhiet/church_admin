@@ -218,9 +218,10 @@ Service _$ServiceFromJson(Map json) => Service(
       : Service.fromJson(Map<String, Object?>.from(json['nextService'] as Map)),
   nextServiceId: json['nextServiceId'] as String?,
   color: colorFromInt((json['color'] as num?)?.toInt()),
-  photoUpdatedAt: json['photoUpdatedAt'] == null
-      ? null
-      : DateTime.parse(json['photoUpdatedAt'] as String),
+  photoUpdatedAt: _$JsonConverterFromJson<String, DateTime>(
+    json['photoUpdatedAt'],
+    const LocalDateTimeConverter().fromJson,
+  ),
   blurhash: json['blurhash'] as String?,
   classes: (json['classes'] as List<dynamic>?)
       ?.map((e) => Class.fromJson(Map<String, Object?>.from(e as Map)))
@@ -255,7 +256,10 @@ Map<String, dynamic> _$ServiceToJson(Service instance) => <String, dynamic>{
   'nextService': instance.nextService?.toJson(),
   'nextServiceId': instance.nextServiceId,
   'color': colorToInt(instance.color),
-  'photoUpdatedAt': instance.photoUpdatedAt?.toIso8601String(),
+  'photoUpdatedAt': _$JsonConverterToJson<String, DateTime>(
+    instance.photoUpdatedAt,
+    const LocalDateTimeConverter().toJson,
+  ),
   'blurhash': instance.blurhash,
   'classes': instance.classes?.map((e) => e.toJson()).toList(),
   'groups': instance.groups?.map((e) => e.toJson()).toList(),
@@ -264,3 +268,13 @@ Map<String, dynamic> _$ServiceToJson(Service instance) => <String, dynamic>{
   'adminUsers': adminUsersToJson(instance.adminUsers),
   'attendanceHistoryAggregate': instance.attendanceHistoryAggregate?.toJson(),
 };
+
+Value? _$JsonConverterFromJson<Json, Value>(
+  Object? json,
+  Value? Function(Json json) fromJson,
+) => json == null ? null : fromJson(json as Json);
+
+Json? _$JsonConverterToJson<Json, Value>(
+  Value? value,
+  Json? Function(Value value) toJson,
+) => value == null ? null : toJson(value);

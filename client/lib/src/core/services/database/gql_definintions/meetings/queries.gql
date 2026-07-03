@@ -1,0 +1,23 @@
+query historyMeetingRoster(
+  $meetingId: uuid!
+  $where: [HistoryMeetingRosterBoolExp!] = []
+  $orderBy: [HistoryMeetingRosterOrderBy!] = [{ name: ASC }, { personId: ASC }]
+  $limit: Int = 200
+) {
+  historyMeetingRoster(
+    where: { meetingId: { _eq: $meetingId }, _and: $where }
+    orderBy: $orderBy
+    limit: $limit
+  ) {
+    personId
+    name
+    mainPhone
+    gender
+    color
+    studyYearId
+    studyYearName
+    photoUpdatedAt
+    blurhash
+    asServant
+  }
+}

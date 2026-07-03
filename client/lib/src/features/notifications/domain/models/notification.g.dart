@@ -10,7 +10,7 @@ Notification _$NotificationFromJson(Map json) => Notification(
   id: json['id'] as String,
   title: json['title'] as String,
   body: json['body'] as String,
-  sentTime: DateTime.parse(json['sentTime'] as String),
+  sentTime: const LocalDateTimeConverter().fromJson(json['sentTime'] as String),
   senderUID: json['senderUID'] as String,
   imageURL: json['imageURL'] as String?,
   type:
@@ -26,7 +26,7 @@ Map<String, dynamic> _$NotificationToJson(Notification instance) =>
       'id': instance.id,
       'title': instance.title,
       'body': instance.body,
-      'sentTime': instance.sentTime.toIso8601String(),
+      'sentTime': const LocalDateTimeConverter().toJson(instance.sentTime),
       'senderUID': instance.senderUID,
       'imageURL': instance.imageURL,
       'type': _$NotificationTypeEnumMap[instance.type]!,

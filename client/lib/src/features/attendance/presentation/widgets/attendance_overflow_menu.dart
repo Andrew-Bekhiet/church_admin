@@ -24,17 +24,13 @@ class AttendanceOverflowMenu extends StatelessWidget {
       icon: const Icon(Symbols.more_vert),
       itemBuilder: (context) => [
         PopupMenuItem<void>(
-          onTap: () => onSortChanged(
-            sorting == AttendanceSorting.byAttendanceTime
-                ? AttendanceSorting.byName
-                : AttendanceSorting.byAttendanceTime,
-          ),
           child: ListTile(
+            onTap: () => onSortChanged(sorting.toggleAttendanceTimeSorting()),
             contentPadding: EdgeInsets.zero,
             leading: const Icon(Symbols.access_time),
             title: const Text('ترتيب حسب وقت الحضور'),
             trailing: Visibility(
-              visible: sorting == AttendanceSorting.byAttendanceTime,
+              visible: sorting.isSortingByTime,
               maintainAnimation: true,
               maintainSize: true,
               maintainState: true,
@@ -43,11 +39,7 @@ class AttendanceOverflowMenu extends StatelessWidget {
           ),
         ),
         PopupMenuItem<void>(
-          onTap: () => onGroupingChanged(
-            grouping == AttendanceGrouping.studyYear
-                ? AttendanceGrouping.none
-                : AttendanceGrouping.studyYear,
-          ),
+          onTap: () => onGroupingChanged(grouping.toggled),
           child: ListTile(
             contentPadding: EdgeInsets.zero,
             leading: const Icon(Symbols.school),

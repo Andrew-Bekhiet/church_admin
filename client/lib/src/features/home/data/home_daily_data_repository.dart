@@ -57,9 +57,11 @@ class HomeDailyDataRepository {
       return [];
     }
 
-    final persons = await _advancedQueryParser
-        .createPaginatableStream(birthdaysQuery)
-        .first;
+    final personsStream = _advancedQueryParser.createPaginatableStream(
+      birthdaysQuery,
+    );
+    final persons = await personsStream.first;
+    await personsStream.dispose();
 
     return persons.map((p) => p.name).toList();
   }
