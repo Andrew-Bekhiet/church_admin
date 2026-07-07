@@ -1,9 +1,5 @@
 import 'package:collection/collection.dart';
 
-/// Maps Arabic person names onto a stable alphabet used by the name-jump gutter.
-///
-/// Encapsulates first-letter normalization and alphabetical ordering so the rest
-/// of the feature never deals with raw letter math.
 final class AttendanceNameAlphabet {
   const AttendanceNameAlphabet();
 
@@ -66,7 +62,6 @@ final class AttendanceNameAlphabet {
     'Z',
   };
 
-  /// The normalized first letter a name is bucketed under.
   String normalizedFirstLetterOf(String name) {
     final trimmed = name.trim();
     if (trimmed.isEmpty) return _other;
@@ -78,19 +73,12 @@ final class AttendanceNameAlphabet {
 
   String _normalize(String letter) {
     return letter
-        .toLowerCase()
+        .toUpperCase()
         .replaceAll(RegExp('[أإآ]'), 'ا')
         .replaceAll('ة', 'ه')
         .replaceAll('ى', 'ي');
   }
 
-  /// Builds the gutter index from [entries] in display order. An entry whose
-  /// [nameOf] maps to a letter not yet seen becomes the anchor for that letter.
-  /// Entries for which [navigable] returns false are skipped as anchors: their
-  /// letter won't appear in the gutter even if it would otherwise be new.
-  ///
-  /// Returns `firstIndexByLetter` mapping each letter to its first navigable
-  /// position in the original [entries] list
   Map<String, int> buildGutterLettersIndex<T>(
     List<T> entries, {
     required String Function(T) nameOf,
@@ -111,19 +99,25 @@ final class AttendanceNameAlphabet {
   }
 
   List<String> sortGutterLettersFirst(List<String> letters) {
-    return letters.sorted((a, b) {
-      final aIsStandard = _letters.contains(a);
-      final bIsStandard = _letters.contains(b);
+    final standardOrder = _letters.toList();
 
-      if (aIsStandard && bIsStandard) {
-        return 0;
+    return letters.sorted((a, b) {
+      final aIndex = standardOrder.indexOf(a);
+      final bIndex = standardOrder.indexOf(b);
+
+      if (aIndex != -1 && bIndex != -1) {
+        return aIndex.compareTo(bIndex);
       }
 
-      if (aIsStandard) {
+      if (aIndex != -1) {
         return -1;
       }
 
-      return 1;
+      if (bIndex != -1) {
+        return 1;
+      }
+
+      return a.compareTo(b);
     });
   }
 }

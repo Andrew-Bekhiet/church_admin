@@ -105,15 +105,6 @@ class _GroupFields {
     isOrderable: false,
   );
 
-  final FieldMetadata<AggregateData> attendanceHistoryAggregate =
-      FieldMetadata<AggregateData>(
-        getValue: (obj) => obj is Group ? obj.attendanceHistoryAggregate : null,
-        parentType: Group,
-        name: 'attendanceHistoryAggregate',
-        label: 'attendanceHistoryAggregate',
-        isCodeOnly: true,
-      );
-
   late final List<FieldMetadata<Object>> allFields = [
     id,
     name,
@@ -123,7 +114,6 @@ class _GroupFields {
     validity,
     lastEdit,
     adminUsers,
-    attendanceHistoryAggregate,
   ];
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'id': id,
@@ -134,7 +124,6 @@ class _GroupFields {
     'validity': validity,
     'lastEdit': lastEdit,
     'adminUsers': adminUsers,
-    'attendanceHistoryAggregate': attendanceHistoryAggregate,
   };
 }
 
@@ -162,11 +151,6 @@ Group _$GroupFromJson(Map json) => Group(
           Map<String, Object?>.from(json['lastEdit'] as Map),
         ),
   adminUsers: adminUsersFromJson(json['adminUsers'] as List?),
-  attendanceHistoryAggregate: json['attendanceHistoryAggregate'] == null
-      ? null
-      : HistoryAggregateData.fromJson(
-          Map<String, dynamic>.from(json['attendanceHistoryAggregate'] as Map),
-        ),
   userCanEdit: json['userCanEdit'] as bool? ?? false,
 );
 
@@ -184,7 +168,6 @@ Map<String, dynamic> _$GroupToJson(Group instance) => <String, dynamic>{
   'validity': dateRangeToString(instance.validity),
   'lastEdit': instance.lastEdit?.toJson(),
   'adminUsers': adminUsersToJson(instance.adminUsers),
-  'attendanceHistoryAggregate': instance.attendanceHistoryAggregate?.toJson(),
 };
 
 Value? _$JsonConverterFromJson<Json, Value>(

@@ -17,6 +17,7 @@ dependencies:
   async: ^2.9.0
   auto_size_text: ^3.0.0
   cached_network_image: ^3.2.3
+  calendar_date_picker2: ^3.0.0
   clock: ^1.1.1
   cloud_functions: ^6.0.1
   collection: ^1.17.0
@@ -74,7 +75,6 @@ dependencies:
   material_symbols_icons: ^4.2762.0
   meta: ^1.8.0
   mime: ^2.0.0
-  omni_datetime_picker: ^2.0.1
   open_file: ^3.5.11
   package_info_plus: ^9.0.0
   path: ^1.9.1

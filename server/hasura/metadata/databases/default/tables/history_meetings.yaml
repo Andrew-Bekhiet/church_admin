@@ -19,6 +19,15 @@ array_relationships:
         table:
           name: attendance_history
           schema: history
+  - name: days
+    using:
+      manual_configuration:
+        column_mapping:
+          id: meeting_id
+        insertion_order: null
+        remote_table:
+          name: meeting_days
+          schema: history
   - name: persons
     using:
       manual_configuration:

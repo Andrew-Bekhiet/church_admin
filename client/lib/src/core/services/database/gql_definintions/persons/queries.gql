@@ -131,9 +131,6 @@ query personHistoryAnalysis(
   $timeFrom: timestamptz!
   $timeTo: timestamptz!
   $personId: uuid!
-  $groupsIds: [uuid!] = []
-  $classesIds: [uuid!] = []
-  $servicesIds: [uuid!] = []
   $callHistory: Boolean! = false
   $visitHistory: Boolean! = false
   $editHistory: Boolean! = false
@@ -202,21 +199,6 @@ query personHistoryAnalysis(
       }
       nodes {
         time
-      }
-    }
-    services(where: { serviceId: { _in: $servicesIds } }) {
-      service {
-        ...ServiceNoPhoto
-      }
-    }
-    classes(where: { classId: { _in: $classesIds } }) {
-      class {
-        ...ClassNoPhoto
-      }
-    }
-    groups(where: { groupId: { _in: $groupsIds } }) {
-      group {
-        ...GroupNoPhoto
       }
     }
   }

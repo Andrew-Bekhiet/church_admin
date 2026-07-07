@@ -1,6 +1,8 @@
 import '../../../../../graphql/__generated__/schema.graphql.dart';
+import '../../gql/__generated__/fragments.gql.dart';
 import '../../groups/__generated__/fragments.gql.dart';
 import '../../services/__generated__/fragments.gql.dart';
+import '../../users/__generated__/fragments.gql.dart';
 import 'fragments.gql.dart';
 import 'package:church_admin/src/core/graphql/scalars.dart';
 import 'package:gql/ast.dart';
@@ -1350,3 +1352,458 @@ class _CopyWithStubImpl_Subscription_watchAttendanceHistory_historyAttendanceHis
     String? $__typename,
   }) => _res;
 }
+
+class Variables_Subscription_personMeetingAttendance {
+  factory Variables_Subscription_personMeetingAttendance({
+    List<Input_HistoryAttendanceHistoryBoolExp>? where,
+    List<Input_HistoryAttendanceHistoryOrderBy>? orderBy,
+    int? limit,
+  }) => Variables_Subscription_personMeetingAttendance._({
+    if (where != null) r'where': where,
+    if (orderBy != null) r'orderBy': orderBy,
+    if (limit != null) r'limit': limit,
+  });
+
+  Variables_Subscription_personMeetingAttendance._(this._$data);
+
+  factory Variables_Subscription_personMeetingAttendance.fromJson(
+    Map<String, dynamic> data,
+  ) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('where')) {
+      final l$where = data['where'];
+      result$data['where'] = (l$where as List<dynamic>?)
+          ?.map(
+            (e) => Input_HistoryAttendanceHistoryBoolExp.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
+          .toList();
+    }
+    if (data.containsKey('orderBy')) {
+      final l$orderBy = data['orderBy'];
+      result$data['orderBy'] = (l$orderBy as List<dynamic>?)
+          ?.map(
+            (e) => Input_HistoryAttendanceHistoryOrderBy.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
+          .toList();
+    }
+    if (data.containsKey('limit')) {
+      final l$limit = data['limit'];
+      result$data['limit'] = (l$limit as int);
+    }
+    return Variables_Subscription_personMeetingAttendance._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  List<Input_HistoryAttendanceHistoryBoolExp>? get where =>
+      (_$data['where'] as List<Input_HistoryAttendanceHistoryBoolExp>?);
+
+  List<Input_HistoryAttendanceHistoryOrderBy>? get orderBy =>
+      (_$data['orderBy'] as List<Input_HistoryAttendanceHistoryOrderBy>?);
+
+  int? get limit => (_$data['limit'] as int?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('where')) {
+      final l$where = where;
+      result$data['where'] = l$where?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('orderBy')) {
+      final l$orderBy = orderBy;
+      result$data['orderBy'] = l$orderBy?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('limit')) {
+      final l$limit = limit;
+      result$data['limit'] = (l$limit as int);
+    }
+    return result$data;
+  }
+
+  CopyWith_Variables_Subscription_personMeetingAttendance<
+    Variables_Subscription_personMeetingAttendance
+  >
+  get copyWith =>
+      CopyWith_Variables_Subscription_personMeetingAttendance(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Variables_Subscription_personMeetingAttendance ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$where = where;
+    final lOther$where = other.where;
+    if (_$data.containsKey('where') != other._$data.containsKey('where')) {
+      return false;
+    }
+    if (l$where != null && lOther$where != null) {
+      if (l$where.length != lOther$where.length) {
+        return false;
+      }
+      for (int i = 0; i < l$where.length; i++) {
+        final l$where$entry = l$where[i];
+        final lOther$where$entry = lOther$where[i];
+        if (l$where$entry != lOther$where$entry) {
+          return false;
+        }
+      }
+    } else if (l$where != lOther$where) {
+      return false;
+    }
+    final l$orderBy = orderBy;
+    final lOther$orderBy = other.orderBy;
+    if (_$data.containsKey('orderBy') != other._$data.containsKey('orderBy')) {
+      return false;
+    }
+    if (l$orderBy != null && lOther$orderBy != null) {
+      if (l$orderBy.length != lOther$orderBy.length) {
+        return false;
+      }
+      for (int i = 0; i < l$orderBy.length; i++) {
+        final l$orderBy$entry = l$orderBy[i];
+        final lOther$orderBy$entry = lOther$orderBy[i];
+        if (l$orderBy$entry != lOther$orderBy$entry) {
+          return false;
+        }
+      }
+    } else if (l$orderBy != lOther$orderBy) {
+      return false;
+    }
+    final l$limit = limit;
+    final lOther$limit = other.limit;
+    if (_$data.containsKey('limit') != other._$data.containsKey('limit')) {
+      return false;
+    }
+    if (l$limit != lOther$limit) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$where = where;
+    final l$orderBy = orderBy;
+    final l$limit = limit;
+    return Object.hashAll([
+      _$data.containsKey('where')
+          ? l$where == null
+                ? null
+                : Object.hashAll(l$where.map((v) => v))
+          : const {},
+      _$data.containsKey('orderBy')
+          ? l$orderBy == null
+                ? null
+                : Object.hashAll(l$orderBy.map((v) => v))
+          : const {},
+      _$data.containsKey('limit') ? l$limit : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Variables_Subscription_personMeetingAttendance<TRes> {
+  factory CopyWith_Variables_Subscription_personMeetingAttendance(
+    Variables_Subscription_personMeetingAttendance instance,
+    TRes Function(Variables_Subscription_personMeetingAttendance) then,
+  ) = _CopyWithImpl_Variables_Subscription_personMeetingAttendance;
+
+  factory CopyWith_Variables_Subscription_personMeetingAttendance.stub(
+    TRes res,
+  ) = _CopyWithStubImpl_Variables_Subscription_personMeetingAttendance;
+
+  TRes call({
+    List<Input_HistoryAttendanceHistoryBoolExp>? where,
+    List<Input_HistoryAttendanceHistoryOrderBy>? orderBy,
+    int? limit,
+  });
+}
+
+class _CopyWithImpl_Variables_Subscription_personMeetingAttendance<TRes>
+    implements CopyWith_Variables_Subscription_personMeetingAttendance<TRes> {
+  _CopyWithImpl_Variables_Subscription_personMeetingAttendance(
+    this._instance,
+    this._then,
+  );
+
+  final Variables_Subscription_personMeetingAttendance _instance;
+
+  final TRes Function(Variables_Subscription_personMeetingAttendance) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? where = _undefined,
+    Object? orderBy = _undefined,
+    Object? limit = _undefined,
+  }) => _then(
+    Variables_Subscription_personMeetingAttendance._({
+      ..._instance._$data,
+      if (where != _undefined)
+        'where': (where as List<Input_HistoryAttendanceHistoryBoolExp>?),
+      if (orderBy != _undefined)
+        'orderBy': (orderBy as List<Input_HistoryAttendanceHistoryOrderBy>?),
+      if (limit != _undefined && limit != null) 'limit': (limit as int),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Variables_Subscription_personMeetingAttendance<TRes>
+    implements CopyWith_Variables_Subscription_personMeetingAttendance<TRes> {
+  _CopyWithStubImpl_Variables_Subscription_personMeetingAttendance(this._res);
+
+  TRes _res;
+
+  call({
+    List<Input_HistoryAttendanceHistoryBoolExp>? where,
+    List<Input_HistoryAttendanceHistoryOrderBy>? orderBy,
+    int? limit,
+  }) => _res;
+}
+
+class Subscription_personMeetingAttendance {
+  Subscription_personMeetingAttendance({
+    required this.historyAttendanceHistory,
+  });
+
+  factory Subscription_personMeetingAttendance.fromJson(
+    Map<String, dynamic> json,
+  ) {
+    final l$historyAttendanceHistory = json['historyAttendanceHistory'];
+    return Subscription_personMeetingAttendance(
+      historyAttendanceHistory: (l$historyAttendanceHistory as List<dynamic>)
+          .map(
+            (e) => Fragment_AttendanceHistory.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
+          .toList(),
+    );
+  }
+
+  final List<Fragment_AttendanceHistory> historyAttendanceHistory;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$historyAttendanceHistory = historyAttendanceHistory;
+    _resultData['historyAttendanceHistory'] = l$historyAttendanceHistory
+        .map((e) => e.toJson())
+        .toList();
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$historyAttendanceHistory = historyAttendanceHistory;
+    return Object.hashAll([
+      Object.hashAll(l$historyAttendanceHistory.map((v) => v)),
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Subscription_personMeetingAttendance ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$historyAttendanceHistory = historyAttendanceHistory;
+    final lOther$historyAttendanceHistory = other.historyAttendanceHistory;
+    if (l$historyAttendanceHistory.length !=
+        lOther$historyAttendanceHistory.length) {
+      return false;
+    }
+    for (int i = 0; i < l$historyAttendanceHistory.length; i++) {
+      final l$historyAttendanceHistory$entry = l$historyAttendanceHistory[i];
+      final lOther$historyAttendanceHistory$entry =
+          lOther$historyAttendanceHistory[i];
+      if (l$historyAttendanceHistory$entry !=
+          lOther$historyAttendanceHistory$entry) {
+        return false;
+      }
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Subscription_personMeetingAttendance
+    on Subscription_personMeetingAttendance {
+  CopyWith_Subscription_personMeetingAttendance<
+    Subscription_personMeetingAttendance
+  >
+  get copyWith => CopyWith_Subscription_personMeetingAttendance(this, (i) => i);
+}
+
+abstract class CopyWith_Subscription_personMeetingAttendance<TRes> {
+  factory CopyWith_Subscription_personMeetingAttendance(
+    Subscription_personMeetingAttendance instance,
+    TRes Function(Subscription_personMeetingAttendance) then,
+  ) = _CopyWithImpl_Subscription_personMeetingAttendance;
+
+  factory CopyWith_Subscription_personMeetingAttendance.stub(TRes res) =
+      _CopyWithStubImpl_Subscription_personMeetingAttendance;
+
+  TRes call({List<Fragment_AttendanceHistory>? historyAttendanceHistory});
+  TRes historyAttendanceHistory(
+    Iterable<Fragment_AttendanceHistory> Function(
+      Iterable<CopyWith_Fragment_AttendanceHistory<Fragment_AttendanceHistory>>,
+    )
+    _fn,
+  );
+}
+
+class _CopyWithImpl_Subscription_personMeetingAttendance<TRes>
+    implements CopyWith_Subscription_personMeetingAttendance<TRes> {
+  _CopyWithImpl_Subscription_personMeetingAttendance(
+    this._instance,
+    this._then,
+  );
+
+  final Subscription_personMeetingAttendance _instance;
+
+  final TRes Function(Subscription_personMeetingAttendance) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? historyAttendanceHistory = _undefined}) => _then(
+    Subscription_personMeetingAttendance(
+      historyAttendanceHistory:
+          historyAttendanceHistory == _undefined ||
+              historyAttendanceHistory == null
+          ? _instance.historyAttendanceHistory
+          : (historyAttendanceHistory as List<Fragment_AttendanceHistory>),
+    ),
+  );
+
+  TRes historyAttendanceHistory(
+    Iterable<Fragment_AttendanceHistory> Function(
+      Iterable<CopyWith_Fragment_AttendanceHistory<Fragment_AttendanceHistory>>,
+    )
+    _fn,
+  ) => call(
+    historyAttendanceHistory: _fn(
+      _instance.historyAttendanceHistory.map(
+        (e) => CopyWith_Fragment_AttendanceHistory(e, (i) => i),
+      ),
+    ).toList(),
+  );
+}
+
+class _CopyWithStubImpl_Subscription_personMeetingAttendance<TRes>
+    implements CopyWith_Subscription_personMeetingAttendance<TRes> {
+  _CopyWithStubImpl_Subscription_personMeetingAttendance(this._res);
+
+  TRes _res;
+
+  call({List<Fragment_AttendanceHistory>? historyAttendanceHistory}) => _res;
+
+  historyAttendanceHistory(_fn) => _res;
+}
+
+const documentNodeSubscriptionpersonMeetingAttendance = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.subscription,
+      name: NameNode(value: 'personMeetingAttendance'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'where')),
+          type: ListTypeNode(
+            type: NamedTypeNode(
+              name: NameNode(value: 'HistoryAttendanceHistoryBoolExp'),
+              isNonNull: true,
+            ),
+            isNonNull: false,
+          ),
+          defaultValue: DefaultValueNode(value: ObjectValueNode(fields: [])),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'orderBy')),
+          type: ListTypeNode(
+            type: NamedTypeNode(
+              name: NameNode(value: 'HistoryAttendanceHistoryOrderBy'),
+              isNonNull: true,
+            ),
+            isNonNull: false,
+          ),
+          defaultValue: DefaultValueNode(
+            value: ObjectValueNode(
+              fields: [
+                ObjectFieldNode(
+                  name: NameNode(value: 'datetime'),
+                  value: EnumValueNode(name: NameNode(value: 'DESC')),
+                ),
+              ],
+            ),
+          ),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'limit')),
+          type: NamedTypeNode(name: NameNode(value: 'Int'), isNonNull: true),
+          defaultValue: DefaultValueNode(value: IntValueNode(value: '200')),
+          directives: [],
+        ),
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
+          FieldNode(
+            name: NameNode(value: 'historyAttendanceHistory'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'where'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: '_and'),
+                      value: VariableNode(name: NameNode(value: 'where')),
+                    ),
+                  ],
+                ),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'orderBy'),
+                value: VariableNode(name: NameNode(value: 'orderBy')),
+              ),
+              ArgumentNode(
+                name: NameNode(value: 'limit'),
+                value: VariableNode(name: NameNode(value: 'limit')),
+              ),
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FragmentSpreadNode(
+                  name: NameNode(value: 'AttendanceHistory'),
+                  directives: [],
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    ),
+    fragmentDefinitionAttendanceHistory,
+    fragmentDefinitionUser,
+    fragmentDefinitionUserNoPhoto,
+  ],
+);

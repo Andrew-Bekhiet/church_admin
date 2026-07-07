@@ -3,10 +3,6 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 
-/// A roster sliver grouped into study-year sections. Entries arrive already
-/// ordered by study year (then name / attendance time) from the cubit, so
-/// sections are formed by a single grouping pass. Each section header is
-/// pinned and collapses its body on tap.
 class AttendanceGroupedRoster extends StatefulWidget {
   final List<MeetingRosterEntry> entries;
   final ValueChanged<MeetingRosterEntry> onToggle;

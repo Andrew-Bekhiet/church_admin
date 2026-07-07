@@ -7,35 +7,9 @@ part 'person_analysis_route.g.dart';
 
 @JsonSerializable()
 class PersonAnalysisExtra extends SerializableExtra {
-  static final List<EditOptionsBuiderFn> _serialzedCallbacks = [];
+  final Person person;
 
-  static EditOptionsBuiderFn _editOptionsBuilderFromJson(int id) {
-    return _serialzedCallbacks[id];
-  }
-
-  static int _editOptionsBuilderToJson(EditOptionsBuiderFn fn) {
-    final id = _serialzedCallbacks.length;
-    _serialzedCallbacks.add(fn);
-
-    return id;
-  }
-
-  final Person? person;
-  final User? user;
-  final PersonAnalysisOptions? options;
-
-  @JsonKey(
-    fromJson: _editOptionsBuilderFromJson,
-    toJson: _editOptionsBuilderToJson,
-  )
-  final EditOptionsBuiderFn editOptionsBuilder;
-
-  const PersonAnalysisExtra({
-    required this.editOptionsBuilder,
-    this.person,
-    this.user,
-    this.options,
-  });
+  const PersonAnalysisExtra({required this.person});
 
   factory PersonAnalysisExtra.fromJson(Json json) =>
       _$PersonAnalysisExtraFromJson(json);
@@ -44,16 +18,7 @@ class PersonAnalysisExtra extends SerializableExtra {
   String get typeName => 'PersonAnalysisExtra';
 
   @override
-  Json toJson() {
-    final id = _serialzedCallbacks.length;
-
-    _serialzedCallbacks.add(editOptionsBuilder);
-
-    return {
-      ..._$PersonAnalysisExtraToJson(this),
-      'editOptionsBuilder': id,
-    };
-  }
+  Json toJson() => _$PersonAnalysisExtraToJson(this);
 }
 
 @TypedGoRoute<PersonAnalysisRoute>(path: '/person_analysis')
@@ -64,11 +29,6 @@ class PersonAnalysisRoute extends GoRouteData with $PersonAnalysisRoute {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return PersonAnalysis(
-      person: $extra.person,
-      user: $extra.user,
-      options: $extra.options,
-      editOptionsBuilder: $extra.editOptionsBuilder,
-    );
+    return PersonAnalysis(person: $extra.person);
   }
 }

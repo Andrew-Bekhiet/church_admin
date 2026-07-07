@@ -2808,6 +2808,7 @@ input HistoryAttendanceDaysUpdates {
 type HistoryAttendanceHistory {
   asServant: Boolean!
   datetime: timestamptz!
+  day: date
   id: uuid!
   meeting: HistoryMeetings!
   meetingId: uuid!
@@ -2851,6 +2852,7 @@ input HistoryAttendanceHistoryBoolExp {
   _or: [HistoryAttendanceHistoryBoolExp!]
   asServant: BooleanComparisonExp
   datetime: TimestamptzComparisonExp
+  day: DateComparisonExp
   id: UuidComparisonExp
   meeting: HistoryMeetingsBoolExp
   meetingId: UuidComparisonExp
@@ -2875,6 +2877,7 @@ input HistoryAttendanceHistoryInsertInput {
 }
 type HistoryAttendanceHistoryMaxFields {
   datetime: timestamptz
+  day: date
   id: uuid
   meetingId: uuid
   personId: uuid
@@ -2883,6 +2886,7 @@ type HistoryAttendanceHistoryMaxFields {
 
 input HistoryAttendanceHistoryMaxOrderBy {
   datetime: OrderBy
+  day: OrderBy
   id: OrderBy
   meetingId: OrderBy
   personId: OrderBy
@@ -2890,6 +2894,7 @@ input HistoryAttendanceHistoryMaxOrderBy {
 }
 type HistoryAttendanceHistoryMinFields {
   datetime: timestamptz
+  day: date
   id: uuid
   meetingId: uuid
   personId: uuid
@@ -2898,6 +2903,7 @@ type HistoryAttendanceHistoryMinFields {
 
 input HistoryAttendanceHistoryMinOrderBy {
   datetime: OrderBy
+  day: OrderBy
   id: OrderBy
   meetingId: OrderBy
   personId: OrderBy
@@ -2918,6 +2924,7 @@ input HistoryAttendanceHistoryOnConflict {
 input HistoryAttendanceHistoryOrderBy {
   asServant: OrderBy
   datetime: OrderBy
+  day: OrderBy
   id: OrderBy
   meeting: HistoryMeetingsOrderBy
   meetingId: OrderBy
@@ -2933,6 +2940,7 @@ input HistoryAttendanceHistoryPkColumnsInput {
 enum HistoryAttendanceHistorySelectColumn {
   asServant
   datetime
+  day
   id
   meetingId
   personId
@@ -2958,6 +2966,7 @@ input HistoryAttendanceHistoryStreamCursorInput {
 input HistoryAttendanceHistoryStreamCursorValueInput {
   asServant: Boolean
   datetime: timestamptz
+  day: date
   id: uuid
   meetingId: uuid
   personId: uuid
@@ -3616,6 +3625,253 @@ input HistoryLatestVisitsOrderBy {
   visitId: OrderBy
 }
 
+type HistoryMeetingDays {
+  day: date
+  gender: Boolean
+  meeting: HistoryMeetings
+  meetingId: uuid
+  personsCount: Int
+  servantsCount: Int
+  studyYear: StudyYears
+  studyYearId: smallint
+  totalCount: Int
+}
+
+type HistoryMeetingDaysAggregate {
+  aggregate: HistoryMeetingDaysAggregateFields
+  nodes: [HistoryMeetingDays!]!
+}
+
+input HistoryMeetingDaysAggregateBoolExp {
+  bool_and: historyMeetingDaysAggregateBoolExpBool_and
+  bool_or: historyMeetingDaysAggregateBoolExpBool_or
+  count: historyMeetingDaysAggregateBoolExpCount
+}
+
+type HistoryMeetingDaysAggregateFields {
+  avg: HistoryMeetingDaysAvgFields
+  count(columns: [HistoryMeetingDaysSelectColumn!], distinct: Boolean): Int!
+  max: HistoryMeetingDaysMaxFields
+  min: HistoryMeetingDaysMinFields
+  stddev: HistoryMeetingDaysStddevFields
+  stddevPop: HistoryMeetingDaysStddevPopFields
+  stddevSamp: HistoryMeetingDaysStddevSampFields
+  sum: HistoryMeetingDaysSumFields
+  varPop: HistoryMeetingDaysVarPopFields
+  varSamp: HistoryMeetingDaysVarSampFields
+  variance: HistoryMeetingDaysVarianceFields
+}
+
+input HistoryMeetingDaysAggregateOrderBy {
+  avg: HistoryMeetingDaysAvgOrderBy
+  count: OrderBy
+  max: HistoryMeetingDaysMaxOrderBy
+  min: HistoryMeetingDaysMinOrderBy
+  stddev: HistoryMeetingDaysStddevOrderBy
+  stddevPop: HistoryMeetingDaysStddevPopOrderBy
+  stddevSamp: HistoryMeetingDaysStddevSampOrderBy
+  sum: HistoryMeetingDaysSumOrderBy
+  varPop: HistoryMeetingDaysVarPopOrderBy
+  varSamp: HistoryMeetingDaysVarSampOrderBy
+  variance: HistoryMeetingDaysVarianceOrderBy
+}
+type HistoryMeetingDaysAvgFields {
+  personsCount: Float
+  servantsCount: Float
+  studyYearId: Float
+  totalCount: Float
+}
+
+input HistoryMeetingDaysAvgOrderBy {
+  personsCount: OrderBy
+  servantsCount: OrderBy
+  studyYearId: OrderBy
+  totalCount: OrderBy
+}
+
+input HistoryMeetingDaysBoolExp {
+  _and: [HistoryMeetingDaysBoolExp!]
+  _not: HistoryMeetingDaysBoolExp
+  _or: [HistoryMeetingDaysBoolExp!]
+  day: DateComparisonExp
+  gender: BooleanComparisonExp
+  meeting: HistoryMeetingsBoolExp
+  meetingId: UuidComparisonExp
+  personsCount: IntComparisonExp
+  servantsCount: IntComparisonExp
+  studyYear: StudyYearsBoolExp
+  studyYearId: SmallintComparisonExp
+  totalCount: IntComparisonExp
+}
+type HistoryMeetingDaysMaxFields {
+  day: date
+  meetingId: uuid
+  personsCount: Int
+  servantsCount: Int
+  studyYearId: smallint
+  totalCount: Int
+}
+
+input HistoryMeetingDaysMaxOrderBy {
+  day: OrderBy
+  meetingId: OrderBy
+  personsCount: OrderBy
+  servantsCount: OrderBy
+  studyYearId: OrderBy
+  totalCount: OrderBy
+}
+type HistoryMeetingDaysMinFields {
+  day: date
+  meetingId: uuid
+  personsCount: Int
+  servantsCount: Int
+  studyYearId: smallint
+  totalCount: Int
+}
+
+input HistoryMeetingDaysMinOrderBy {
+  day: OrderBy
+  meetingId: OrderBy
+  personsCount: OrderBy
+  servantsCount: OrderBy
+  studyYearId: OrderBy
+  totalCount: OrderBy
+}
+input HistoryMeetingDaysOrderBy {
+  day: OrderBy
+  gender: OrderBy
+  meeting: HistoryMeetingsOrderBy
+  meetingId: OrderBy
+  personsCount: OrderBy
+  servantsCount: OrderBy
+  studyYear: StudyYearsOrderBy
+  studyYearId: OrderBy
+  totalCount: OrderBy
+}
+
+enum HistoryMeetingDaysSelectColumn {
+  day
+  gender
+  meetingId
+  personsCount
+  servantsCount
+  studyYearId
+  totalCount
+}
+
+enum HistoryMeetingDaysSelectColumnHistoryMeetingDaysAggregateBoolExpBool_andArgumentsColumns {
+  gender
+}
+
+enum HistoryMeetingDaysSelectColumnHistoryMeetingDaysAggregateBoolExpBool_orArgumentsColumns {
+  gender
+}
+type HistoryMeetingDaysStddevFields {
+  personsCount: Float
+  servantsCount: Float
+  studyYearId: Float
+  totalCount: Float
+}
+
+input HistoryMeetingDaysStddevOrderBy {
+  personsCount: OrderBy
+  servantsCount: OrderBy
+  studyYearId: OrderBy
+  totalCount: OrderBy
+}
+type HistoryMeetingDaysStddevPopFields {
+  personsCount: Float
+  servantsCount: Float
+  studyYearId: Float
+  totalCount: Float
+}
+
+input HistoryMeetingDaysStddevPopOrderBy {
+  personsCount: OrderBy
+  servantsCount: OrderBy
+  studyYearId: OrderBy
+  totalCount: OrderBy
+}
+type HistoryMeetingDaysStddevSampFields {
+  personsCount: Float
+  servantsCount: Float
+  studyYearId: Float
+  totalCount: Float
+}
+
+input HistoryMeetingDaysStddevSampOrderBy {
+  personsCount: OrderBy
+  servantsCount: OrderBy
+  studyYearId: OrderBy
+  totalCount: OrderBy
+}
+
+input HistoryMeetingDaysStreamCursorInput {
+  initialValue: HistoryMeetingDaysStreamCursorValueInput!
+  ordering: CursorOrdering
+}
+input HistoryMeetingDaysStreamCursorValueInput {
+  day: date
+  gender: Boolean
+  meetingId: uuid
+  personsCount: Int
+  servantsCount: Int
+  studyYearId: smallint
+  totalCount: Int
+}
+type HistoryMeetingDaysSumFields {
+  personsCount: Int
+  servantsCount: Int
+  studyYearId: smallint
+  totalCount: Int
+}
+
+input HistoryMeetingDaysSumOrderBy {
+  personsCount: OrderBy
+  servantsCount: OrderBy
+  studyYearId: OrderBy
+  totalCount: OrderBy
+}
+type HistoryMeetingDaysVarPopFields {
+  personsCount: Float
+  servantsCount: Float
+  studyYearId: Float
+  totalCount: Float
+}
+
+input HistoryMeetingDaysVarPopOrderBy {
+  personsCount: OrderBy
+  servantsCount: OrderBy
+  studyYearId: OrderBy
+  totalCount: OrderBy
+}
+type HistoryMeetingDaysVarSampFields {
+  personsCount: Float
+  servantsCount: Float
+  studyYearId: Float
+  totalCount: Float
+}
+
+input HistoryMeetingDaysVarSampOrderBy {
+  personsCount: OrderBy
+  servantsCount: OrderBy
+  studyYearId: OrderBy
+  totalCount: OrderBy
+}
+type HistoryMeetingDaysVarianceFields {
+  personsCount: Float
+  servantsCount: Float
+  studyYearId: Float
+  totalCount: Float
+}
+
+input HistoryMeetingDaysVarianceOrderBy {
+  personsCount: OrderBy
+  servantsCount: OrderBy
+  studyYearId: OrderBy
+  totalCount: OrderBy
+}
+
 type HistoryMeetingRoster {
   asServant: Boolean
   attendanceHistory(
@@ -3805,6 +4061,20 @@ type HistoryMeetings {
   ): HistoryAttendanceHistoryAggregate!
   audience: meeting_audience!
   color: bigint
+  days(
+    distinctOn: [HistoryMeetingDaysSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [HistoryMeetingDaysOrderBy!]
+    where: HistoryMeetingDaysBoolExp
+  ): [HistoryMeetingDays!]!
+  daysAggregate(
+    distinctOn: [HistoryMeetingDaysSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [HistoryMeetingDaysOrderBy!]
+    where: HistoryMeetingDaysBoolExp
+  ): HistoryMeetingDaysAggregate!
   group: Groups
   groupId: uuid
   id: uuid!
@@ -3863,6 +4133,8 @@ input HistoryMeetingsBoolExp {
   attendanceHistoryAggregate: HistoryAttendanceHistoryAggregateBoolExp
   audience: MeetingAudienceComparisonExp
   color: BigintComparisonExp
+  days: HistoryMeetingDaysBoolExp
+  daysAggregate: HistoryMeetingDaysAggregateBoolExp
   group: GroupsBoolExp
   groupId: UuidComparisonExp
   id: UuidComparisonExp
@@ -3939,6 +4211,7 @@ input HistoryMeetingsOrderBy {
   attendanceHistoryAggregate: HistoryAttendanceHistoryAggregateOrderBy
   audience: OrderBy
   color: OrderBy
+  daysAggregate: HistoryMeetingDaysAggregateOrderBy
   group: GroupsOrderBy
   groupId: OrderBy
   id: OrderBy
@@ -7402,6 +7675,27 @@ input historyKodasHistoryAggregateBoolExpCount {
   predicate: IntComparisonExp!
 }
 
+input historyMeetingDaysAggregateBoolExpBool_and {
+  arguments: HistoryMeetingDaysSelectColumnHistoryMeetingDaysAggregateBoolExpBool_andArgumentsColumns!
+  distinct: Boolean
+  filter: HistoryMeetingDaysBoolExp
+  predicate: BooleanComparisonExp!
+}
+
+input historyMeetingDaysAggregateBoolExpBool_or {
+  arguments: HistoryMeetingDaysSelectColumnHistoryMeetingDaysAggregateBoolExpBool_orArgumentsColumns!
+  distinct: Boolean
+  filter: HistoryMeetingDaysBoolExp
+  predicate: BooleanComparisonExp!
+}
+
+input historyMeetingDaysAggregateBoolExpCount {
+  arguments: [HistoryMeetingDaysSelectColumn!]
+  distinct: Boolean
+  filter: HistoryMeetingDaysBoolExp
+  predicate: IntComparisonExp!
+}
+
 input historyMeetingsPersonsAggregateBoolExpCount {
   arguments: [HistoryMeetingsPersonsSelectColumn!]
   distinct: Boolean
@@ -8468,6 +8762,20 @@ type query_root {
     where: HistoryKodasHistoryBoolExp
   ): HistoryKodasHistoryAggregate!
   historyKodasHistoryByPk(id: uuid!): HistoryKodasHistory
+  historyMeetingDays(
+    distinctOn: [HistoryMeetingDaysSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [HistoryMeetingDaysOrderBy!]
+    where: HistoryMeetingDaysBoolExp
+  ): [HistoryMeetingDays!]!
+  historyMeetingDaysAggregate(
+    distinctOn: [HistoryMeetingDaysSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [HistoryMeetingDaysOrderBy!]
+    where: HistoryMeetingDaysBoolExp
+  ): HistoryMeetingDaysAggregate!
   historyMeetingRoster(
     distinctOn: [HistoryMeetingRosterSelectColumn!]
     limit: Int
@@ -9062,6 +9370,25 @@ type subscription_root {
     cursor: [HistoryKodasHistoryStreamCursorInput]!
     where: HistoryKodasHistoryBoolExp
   ): [HistoryKodasHistory!]!
+  historyMeetingDays(
+    distinctOn: [HistoryMeetingDaysSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [HistoryMeetingDaysOrderBy!]
+    where: HistoryMeetingDaysBoolExp
+  ): [HistoryMeetingDays!]!
+  historyMeetingDaysAggregate(
+    distinctOn: [HistoryMeetingDaysSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [HistoryMeetingDaysOrderBy!]
+    where: HistoryMeetingDaysBoolExp
+  ): HistoryMeetingDaysAggregate!
+  historyMeetingDaysStream(
+    batchSize: Int!
+    cursor: [HistoryMeetingDaysStreamCursorInput]!
+    where: HistoryMeetingDaysBoolExp
+  ): [HistoryMeetingDays!]!
   historyMeetingRoster(
     distinctOn: [HistoryMeetingRosterSelectColumn!]
     limit: Int

@@ -7,13 +7,11 @@ part 'person_analysis_options.g.dart';
 class PersonAnalysisOptions {
   PersonAnalysisOptions({
     required this.dateRange,
-    this.groups = const [],
-    this.classes = const [],
-    this.services = const [],
-    this.confessionAnalysis = false,
-    this.kodasAnalysis = false,
-    this.visitHistoryAnalysis = false,
-    this.callHistoryAnalysis = false,
+    this.meetings = const [],
+    this.confessionAnalysis = true,
+    this.kodasAnalysis = true,
+    this.visitHistoryAnalysis = true,
+    this.callHistoryAnalysis = true,
     this.editHistoryAnalysis = false,
   });
 
@@ -26,9 +24,7 @@ class PersonAnalysisOptions {
   )
   final DateTimeRange dateRange;
 
-  final List<Group> groups;
-  final List<Class> classes;
-  final List<Service> services;
+  final List<Meeting> meetings;
 
   final bool confessionAnalysis;
   final bool kodasAnalysis;
@@ -38,6 +34,26 @@ class PersonAnalysisOptions {
   final bool editHistoryAnalysis;
 
   Map<String, dynamic> toJson() => _$PersonAnalysisOptionsToJson(this);
+
+  PersonAnalysisOptions copyWith({
+    DateTimeRange? dateRange,
+    List<Meeting>? meetings,
+    bool? confessionAnalysis,
+    bool? kodasAnalysis,
+    bool? visitHistoryAnalysis,
+    bool? callHistoryAnalysis,
+    bool? editHistoryAnalysis,
+  }) {
+    return PersonAnalysisOptions(
+      dateRange: dateRange ?? this.dateRange,
+      meetings: meetings ?? this.meetings,
+      confessionAnalysis: confessionAnalysis ?? this.confessionAnalysis,
+      kodasAnalysis: kodasAnalysis ?? this.kodasAnalysis,
+      visitHistoryAnalysis: visitHistoryAnalysis ?? this.visitHistoryAnalysis,
+      callHistoryAnalysis: callHistoryAnalysis ?? this.callHistoryAnalysis,
+      editHistoryAnalysis: editHistoryAnalysis ?? this.editHistoryAnalysis,
+    );
+  }
 }
 
 DateTimeRange dateRangeFromNonNullString(dynamic data) =>

@@ -3,8 +3,6 @@ import 'dart:async';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 
-/// Bottom sheet that lists the available meetings and lets the user switch the
-/// active recording session. Pops with the chosen [Meeting], or `null` on cancel.
 class SelectMeetingBottomSheet extends StatefulWidget {
   final Meeting currentMeeting;
 

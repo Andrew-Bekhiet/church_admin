@@ -1,17 +1,15 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:material_symbols_icons/material_symbols_icons.dart';
 
-/// A single roster row: photo, name, recorded attendance time and a one-tap
-/// present/absent toggle. Tapping toggles attendance; long-pressing opens the
-/// person's details.
 class AttendancePersonCard extends StatelessWidget {
+  static const int _staleWeeks = 3;
+
   static const double _cardVerticalMargin = 1.5;
   static const double _cardVerticalPadding = 6;
 
-  /// Fixed height of a person card, used both for layout and the gutter's
-  /// jump-to-index math.
-  static const double kCardExtent = 63;
+  static const double kCardExtent = 78;
 
   final MeetingRosterEntry entry;
   final ValueChanged<MeetingRosterEntry> onToggle;
@@ -67,11 +65,95 @@ class AttendancePersonCard extends StatelessWidget {
               ),
           ],
         ),
+        subtitle: _TrackRecordLine(
+          analysis: entry.personAttendanceAnalysis,
+          staleWeeks: _staleWeeks,
+        ),
         trailing: AttendancePersonToggle(
           isPresent: present,
           onTap: () => onToggle(entry),
         ),
       ),
     );
+  }
+}
+
+class _TrackRecordLine extends StatelessWidget {
+  final PersonMeetingAttendanceAnalysis? analysis;
+  final int staleWeeks;
+
+  const _TrackRecordLine({required this.analysis, required this.staleWeeks});
+
+  @override
+  Widget build(BuildContext context) {
+    final analysis = this.analysis;
+    if (analysis == null) return const SizedBox(height: 16);
+
+    final themeData = Theme.of(context);
+    final colorScheme = themeData.colorScheme;
+    final last = analysis.lastAttended;
+
+    final weeksSince = analysis.weeksSinceLastAttended;
+    final isStale = weeksSince != null && weeksSince >= staleWeeks;
+
+    final lastLabel = last == null
+        ? 'لم يسبق الحضور'
+        : 'آخر حضور: ${_formatRelativeAttendanceDate(last)}';
+    final lastColor = last == null || isStale ? colorScheme.error : null;
+
+    return Row(
+      children: [
+        if (analysis.currentStreak > 0) ...[
+          Icon(
+            Symbols.local_fire_department,
+            size: 15,
+            color: colorScheme.primary,
+          ),
+          Text(
+            '${analysis.currentStreak}',
+            style: themeData.textTheme.labelMedium?.copyWith(
+              color: colorScheme.primary,
+            ),
+          ),
+          const SizedBox(width: 8),
+        ] else if (analysis.absenceStreak > 0) ...[
+          Icon(
+            Symbols.warning,
+            size: 15,
+            color: colorScheme.error,
+          ),
+          Text(
+            'غاب ${analysis.absenceStreak} مرة',
+            style: themeData.textTheme.labelMedium?.copyWith(
+              color: colorScheme.error,
+            ),
+          ),
+          const SizedBox(width: 8),
+        ],
+        Expanded(
+          child: Text(
+            lastLabel,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: themeData.textTheme.bodySmall?.copyWith(color: lastColor),
+          ),
+        ),
+      ],
+    );
+  }
+
+  String _formatRelativeAttendanceDate(DateTime date) {
+    final today = DateUtils.dateOnly(DateTime.now());
+    final daysSince = today.difference(DateUtils.dateOnly(date)).inDays;
+
+    if (daysSince <= 0) return 'اليوم';
+    if (daysSince == 1) return 'أمس';
+    if (daysSince <= 30) {
+      return daysSince < 7
+          ? 'منذ $daysSince يوم'
+          : 'منذ ${daysSince ~/ 7} أسبوع';
+    }
+
+    return DateFormat.yMd('ar').format(date);
   }
 }

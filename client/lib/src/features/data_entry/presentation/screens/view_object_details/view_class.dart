@@ -93,8 +93,19 @@ class _ViewClassState extends State<ViewClass> {
               style: Theme.of(context).largeFilledButtonStyle,
               icon: const Icon(Symbols.query_stats),
               label: const Text('الاحصائيات'),
-              // TODO: add service analysis
-              onPressed: () {},
+              onPressed: () => unawaited(
+                MeetingsAnalysisRoute(
+                  $extra: MeetingsAnalysisExtra(
+                    title: 'احصائيات ${$class.name}',
+                    initialRangePreset: PastQuarterDateTimeRangePreset(),
+                    load: (range) =>
+                        DatabaseService.I.meetings.getClassAttendanceAnalysis(
+                          class$: $class,
+                          range: range,
+                        ),
+                  ),
+                ).push(context),
+              ),
             ),
           ),
         ]),

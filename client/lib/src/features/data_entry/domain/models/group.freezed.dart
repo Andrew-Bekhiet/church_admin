@@ -23,7 +23,6 @@ mixin _$Group {
   DateTimeRange? get validity;
   LastRecordedByInfo? get lastEdit;
   List<User>? get adminUsers;
-  HistoryAggregateData? get attendanceHistoryAggregate;
   bool get userCanEdit;
 
   /// Create a copy of Group
@@ -56,12 +55,6 @@ mixin _$Group {
               other.adminUsers,
               adminUsers,
             ) &&
-            (identical(
-                  other.attendanceHistoryAggregate,
-                  attendanceHistoryAggregate,
-                ) ||
-                other.attendanceHistoryAggregate ==
-                    attendanceHistoryAggregate) &&
             (identical(other.userCanEdit, userCanEdit) ||
                 other.userCanEdit == userCanEdit));
   }
@@ -80,13 +73,12 @@ mixin _$Group {
     validity,
     lastEdit,
     const DeepCollectionEquality().hash(adminUsers),
-    attendanceHistoryAggregate,
     userCanEdit,
   );
 
   @override
   String toString() {
-    return 'Group(id: $id, name: $name, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, serviceId: $serviceId, service: $service, validity: $validity, lastEdit: $lastEdit, adminUsers: $adminUsers, attendanceHistoryAggregate: $attendanceHistoryAggregate, userCanEdit: $userCanEdit)';
+    return 'Group(id: $id, name: $name, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, serviceId: $serviceId, service: $service, validity: $validity, lastEdit: $lastEdit, adminUsers: $adminUsers, userCanEdit: $userCanEdit)';
   }
 }
 
@@ -106,7 +98,6 @@ abstract mixin class $GroupCopyWith<$Res> {
     DateTimeRange<DateTime>? validity,
     LastRecordedByInfo? lastEdit,
     List<User>? adminUsers,
-    HistoryAggregateData? attendanceHistoryAggregate,
     bool userCanEdit,
   });
 }
@@ -133,7 +124,6 @@ class _$GroupCopyWithImpl<$Res> implements $GroupCopyWith<$Res> {
     Object? validity = freezed,
     Object? lastEdit = freezed,
     Object? adminUsers = freezed,
-    Object? attendanceHistoryAggregate = freezed,
     Object? userCanEdit = null,
   }) {
     return _then(
@@ -178,10 +168,6 @@ class _$GroupCopyWithImpl<$Res> implements $GroupCopyWith<$Res> {
             ? _self.adminUsers
             : adminUsers // ignore: cast_nullable_to_non_nullable
                   as List<User>?,
-        attendanceHistoryAggregate: freezed == attendanceHistoryAggregate
-            ? _self.attendanceHistoryAggregate
-            : attendanceHistoryAggregate // ignore: cast_nullable_to_non_nullable
-                  as HistoryAggregateData?,
         userCanEdit: null == userCanEdit
             ? _self.userCanEdit
             : userCanEdit // ignore: cast_nullable_to_non_nullable

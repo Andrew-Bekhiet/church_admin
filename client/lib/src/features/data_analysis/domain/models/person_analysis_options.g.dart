@@ -9,27 +9,17 @@ part of 'person_analysis_options.dart';
 PersonAnalysisOptions _$PersonAnalysisOptionsFromJson(Map json) =>
     PersonAnalysisOptions(
       dateRange: dateRangeFromNonNullString(json['dateRange']),
-      groups:
-          (json['groups'] as List<dynamic>?)
-              ?.map((e) => Group.fromJson(Map<String, Object?>.from(e as Map)))
-              .toList() ??
-          const [],
-      classes:
-          (json['classes'] as List<dynamic>?)
-              ?.map((e) => Class.fromJson(Map<String, Object?>.from(e as Map)))
-              .toList() ??
-          const [],
-      services:
-          (json['services'] as List<dynamic>?)
+      meetings:
+          (json['meetings'] as List<dynamic>?)
               ?.map(
-                (e) => Service.fromJson(Map<String, Object?>.from(e as Map)),
+                (e) => Meeting.fromJson(Map<String, Object?>.from(e as Map)),
               )
               .toList() ??
           const [],
-      confessionAnalysis: json['confessionAnalysis'] as bool? ?? false,
-      kodasAnalysis: json['kodasAnalysis'] as bool? ?? false,
-      visitHistoryAnalysis: json['visitHistoryAnalysis'] as bool? ?? false,
-      callHistoryAnalysis: json['callHistoryAnalysis'] as bool? ?? false,
+      confessionAnalysis: json['confessionAnalysis'] as bool? ?? true,
+      kodasAnalysis: json['kodasAnalysis'] as bool? ?? true,
+      visitHistoryAnalysis: json['visitHistoryAnalysis'] as bool? ?? true,
+      callHistoryAnalysis: json['callHistoryAnalysis'] as bool? ?? true,
       editHistoryAnalysis: json['editHistoryAnalysis'] as bool? ?? false,
     );
 
@@ -37,9 +27,7 @@ Map<String, dynamic> _$PersonAnalysisOptionsToJson(
   PersonAnalysisOptions instance,
 ) => <String, dynamic>{
   'dateRange': dateRangeToNonNullString(instance.dateRange),
-  'groups': instance.groups.map((e) => e.toJson()).toList(),
-  'classes': instance.classes.map((e) => e.toJson()).toList(),
-  'services': instance.services.map((e) => e.toJson()).toList(),
+  'meetings': instance.meetings.map((e) => e.toJson()).toList(),
   'confessionAnalysis': instance.confessionAnalysis,
   'kodasAnalysis': instance.kodasAnalysis,
   'visitHistoryAnalysis': instance.visitHistoryAnalysis,

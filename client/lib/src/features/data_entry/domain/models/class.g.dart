@@ -122,15 +122,6 @@ class _ClassFields {
     isOrderable: false,
   );
 
-  final FieldMetadata<AggregateData> attendanceHistoryAggregate =
-      FieldMetadata<AggregateData>(
-        getValue: (obj) => obj is Class ? obj.attendanceHistoryAggregate : null,
-        parentType: Class,
-        name: 'attendanceHistoryAggregate',
-        label: 'attendanceHistoryAggregate',
-        isCodeOnly: true,
-      );
-
   late final List<FieldMetadata<Object>> allFields = [
     id,
     name,
@@ -141,7 +132,6 @@ class _ClassFields {
     serviceGender,
     lastEdit,
     adminUsers,
-    attendanceHistoryAggregate,
   ];
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'id': id,
@@ -153,7 +143,6 @@ class _ClassFields {
     'serviceGender': serviceGender,
     'lastEdit': lastEdit,
     'adminUsers': adminUsers,
-    'attendanceHistoryAggregate': attendanceHistoryAggregate,
   };
 }
 
@@ -185,11 +174,6 @@ Class _$ClassFromJson(Map json) => Class(
           Map<String, Object?>.from(json['lastEdit'] as Map),
         ),
   adminUsers: adminUsersFromJson(json['adminUsers'] as List?),
-  attendanceHistoryAggregate: json['attendanceHistoryAggregate'] == null
-      ? null
-      : HistoryAggregateData.fromJson(
-          Map<String, dynamic>.from(json['attendanceHistoryAggregate'] as Map),
-        ),
   userCanEdit: json['userCanEdit'] as bool? ?? false,
 );
 
@@ -209,7 +193,6 @@ Map<String, dynamic> _$ClassToJson(Class instance) => <String, dynamic>{
   'serviceGender': instance.serviceGender,
   'lastEdit': instance.lastEdit?.toJson(),
   'adminUsers': adminUsersToJson(instance.adminUsers),
-  'attendanceHistoryAggregate': instance.attendanceHistoryAggregate?.toJson(),
 };
 
 Value? _$JsonConverterFromJson<Json, Value>(

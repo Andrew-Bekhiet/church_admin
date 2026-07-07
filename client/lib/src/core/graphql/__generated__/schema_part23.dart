@@ -735,6 +735,7 @@ class Input_HistoryAttendanceHistoryBoolExp {
     List<Input_HistoryAttendanceHistoryBoolExp>? $_or,
     Input_BooleanComparisonExp? asServant,
     Input_TimestamptzComparisonExp? datetime,
+    Input_DateComparisonExp? day,
     Input_UuidComparisonExp? id,
     Input_HistoryMeetingsBoolExp? meeting,
     Input_UuidComparisonExp? meetingId,
@@ -748,6 +749,7 @@ class Input_HistoryAttendanceHistoryBoolExp {
     if ($_or != null) r'_or': $_or,
     if (asServant != null) r'asServant': asServant,
     if (datetime != null) r'datetime': datetime,
+    if (day != null) r'day': day,
     if (id != null) r'id': id,
     if (meeting != null) r'meeting': meeting,
     if (meetingId != null) r'meetingId': meetingId,
@@ -806,6 +808,12 @@ class Input_HistoryAttendanceHistoryBoolExp {
           : Input_TimestamptzComparisonExp.fromJson(
               (l$datetime as Map<String, dynamic>),
             );
+    }
+    if (data.containsKey('day')) {
+      final l$day = data['day'];
+      result$data['day'] = l$day == null
+          ? null
+          : Input_DateComparisonExp.fromJson((l$day as Map<String, dynamic>));
     }
     if (data.containsKey('id')) {
       final l$id = data['id'];
@@ -879,6 +887,9 @@ class Input_HistoryAttendanceHistoryBoolExp {
   Input_TimestamptzComparisonExp? get datetime =>
       (_$data['datetime'] as Input_TimestamptzComparisonExp?);
 
+  Input_DateComparisonExp? get day =>
+      (_$data['day'] as Input_DateComparisonExp?);
+
   Input_UuidComparisonExp? get id => (_$data['id'] as Input_UuidComparisonExp?);
 
   Input_HistoryMeetingsBoolExp? get meeting =>
@@ -920,6 +931,10 @@ class Input_HistoryAttendanceHistoryBoolExp {
     if (_$data.containsKey('datetime')) {
       final l$datetime = datetime;
       result$data['datetime'] = l$datetime?.toJson();
+    }
+    if (_$data.containsKey('day')) {
+      final l$day = day;
+      result$data['day'] = l$day?.toJson();
     }
     if (_$data.containsKey('id')) {
       final l$id = id;
@@ -1031,6 +1046,14 @@ class Input_HistoryAttendanceHistoryBoolExp {
     if (l$datetime != lOther$datetime) {
       return false;
     }
+    final l$day = day;
+    final lOther$day = other.day;
+    if (_$data.containsKey('day') != other._$data.containsKey('day')) {
+      return false;
+    }
+    if (l$day != lOther$day) {
+      return false;
+    }
     final l$id = id;
     final lOther$id = other.id;
     if (_$data.containsKey('id') != other._$data.containsKey('id')) {
@@ -1101,6 +1124,7 @@ class Input_HistoryAttendanceHistoryBoolExp {
     final l$$_or = $_or;
     final l$asServant = asServant;
     final l$datetime = datetime;
+    final l$day = day;
     final l$id = id;
     final l$meeting = meeting;
     final l$meetingId = meetingId;
@@ -1122,6 +1146,7 @@ class Input_HistoryAttendanceHistoryBoolExp {
           : const {},
       _$data.containsKey('asServant') ? l$asServant : const {},
       _$data.containsKey('datetime') ? l$datetime : const {},
+      _$data.containsKey('day') ? l$day : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('meeting') ? l$meeting : const {},
       _$data.containsKey('meetingId') ? l$meetingId : const {},
@@ -1148,6 +1173,7 @@ abstract class CopyWith_Input_HistoryAttendanceHistoryBoolExp<TRes> {
     List<Input_HistoryAttendanceHistoryBoolExp>? $_or,
     Input_BooleanComparisonExp? asServant,
     Input_TimestamptzComparisonExp? datetime,
+    Input_DateComparisonExp? day,
     Input_UuidComparisonExp? id,
     Input_HistoryMeetingsBoolExp? meeting,
     Input_UuidComparisonExp? meetingId,
@@ -1179,6 +1205,7 @@ abstract class CopyWith_Input_HistoryAttendanceHistoryBoolExp<TRes> {
   );
   CopyWith_Input_BooleanComparisonExp<TRes> get asServant;
   CopyWith_Input_TimestamptzComparisonExp<TRes> get datetime;
+  CopyWith_Input_DateComparisonExp<TRes> get day;
   CopyWith_Input_UuidComparisonExp<TRes> get id;
   CopyWith_Input_HistoryMeetingsBoolExp<TRes> get meeting;
   CopyWith_Input_UuidComparisonExp<TRes> get meetingId;
@@ -1207,6 +1234,7 @@ class _CopyWithImpl_Input_HistoryAttendanceHistoryBoolExp<TRes>
     Object? $_or = _undefined,
     Object? asServant = _undefined,
     Object? datetime = _undefined,
+    Object? day = _undefined,
     Object? id = _undefined,
     Object? meeting = _undefined,
     Object? meetingId = _undefined,
@@ -1227,6 +1255,7 @@ class _CopyWithImpl_Input_HistoryAttendanceHistoryBoolExp<TRes>
         'asServant': (asServant as Input_BooleanComparisonExp?),
       if (datetime != _undefined)
         'datetime': (datetime as Input_TimestamptzComparisonExp?),
+      if (day != _undefined) 'day': (day as Input_DateComparisonExp?),
       if (id != _undefined) 'id': (id as Input_UuidComparisonExp?),
       if (meeting != _undefined)
         'meeting': (meeting as Input_HistoryMeetingsBoolExp?),
@@ -1306,6 +1335,13 @@ class _CopyWithImpl_Input_HistoryAttendanceHistoryBoolExp<TRes>
           );
   }
 
+  CopyWith_Input_DateComparisonExp<TRes> get day {
+    final local$day = _instance.day;
+    return local$day == null
+        ? CopyWith_Input_DateComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_DateComparisonExp(local$day, (e) => call(day: e));
+  }
+
   CopyWith_Input_UuidComparisonExp<TRes> get id {
     final local$id = _instance.id;
     return local$id == null
@@ -1383,6 +1419,7 @@ class _CopyWithStubImpl_Input_HistoryAttendanceHistoryBoolExp<TRes>
     List<Input_HistoryAttendanceHistoryBoolExp>? $_or,
     Input_BooleanComparisonExp? asServant,
     Input_TimestamptzComparisonExp? datetime,
+    Input_DateComparisonExp? day,
     Input_UuidComparisonExp? id,
     Input_HistoryMeetingsBoolExp? meeting,
     Input_UuidComparisonExp? meetingId,
@@ -1404,6 +1441,9 @@ class _CopyWithStubImpl_Input_HistoryAttendanceHistoryBoolExp<TRes>
 
   CopyWith_Input_TimestamptzComparisonExp<TRes> get datetime =>
       CopyWith_Input_TimestamptzComparisonExp.stub(_res);
+
+  CopyWith_Input_DateComparisonExp<TRes> get day =>
+      CopyWith_Input_DateComparisonExp.stub(_res);
 
   CopyWith_Input_UuidComparisonExp<TRes> get id =>
       CopyWith_Input_UuidComparisonExp.stub(_res);
@@ -1732,12 +1772,14 @@ class _CopyWithStubImpl_Input_HistoryAttendanceHistoryInsertInput<TRes>
 class Input_HistoryAttendanceHistoryMaxOrderBy {
   factory Input_HistoryAttendanceHistoryMaxOrderBy({
     Enum_OrderBy? datetime,
+    Enum_OrderBy? day,
     Enum_OrderBy? id,
     Enum_OrderBy? meetingId,
     Enum_OrderBy? personId,
     Enum_OrderBy? recordedBy,
   }) => Input_HistoryAttendanceHistoryMaxOrderBy._({
     if (datetime != null) r'datetime': datetime,
+    if (day != null) r'day': day,
     if (id != null) r'id': id,
     if (meetingId != null) r'meetingId': meetingId,
     if (personId != null) r'personId': personId,
@@ -1755,6 +1797,12 @@ class Input_HistoryAttendanceHistoryMaxOrderBy {
       result$data['datetime'] = l$datetime == null
           ? null
           : fromJson_Enum_OrderBy((l$datetime as String));
+    }
+    if (data.containsKey('day')) {
+      final l$day = data['day'];
+      result$data['day'] = l$day == null
+          ? null
+          : fromJson_Enum_OrderBy((l$day as String));
     }
     if (data.containsKey('id')) {
       final l$id = data['id'];
@@ -1787,6 +1835,8 @@ class Input_HistoryAttendanceHistoryMaxOrderBy {
 
   Enum_OrderBy? get datetime => (_$data['datetime'] as Enum_OrderBy?);
 
+  Enum_OrderBy? get day => (_$data['day'] as Enum_OrderBy?);
+
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
 
   Enum_OrderBy? get meetingId => (_$data['meetingId'] as Enum_OrderBy?);
@@ -1802,6 +1852,10 @@ class Input_HistoryAttendanceHistoryMaxOrderBy {
       result$data['datetime'] = l$datetime == null
           ? null
           : toJson_Enum_OrderBy(l$datetime);
+    }
+    if (_$data.containsKey('day')) {
+      final l$day = day;
+      result$data['day'] = l$day == null ? null : toJson_Enum_OrderBy(l$day);
     }
     if (_$data.containsKey('id')) {
       final l$id = id;
@@ -1852,6 +1906,14 @@ class Input_HistoryAttendanceHistoryMaxOrderBy {
     if (l$datetime != lOther$datetime) {
       return false;
     }
+    final l$day = day;
+    final lOther$day = other.day;
+    if (_$data.containsKey('day') != other._$data.containsKey('day')) {
+      return false;
+    }
+    if (l$day != lOther$day) {
+      return false;
+    }
     final l$id = id;
     final lOther$id = other.id;
     if (_$data.containsKey('id') != other._$data.containsKey('id')) {
@@ -1893,12 +1955,14 @@ class Input_HistoryAttendanceHistoryMaxOrderBy {
   @override
   int get hashCode {
     final l$datetime = datetime;
+    final l$day = day;
     final l$id = id;
     final l$meetingId = meetingId;
     final l$personId = personId;
     final l$recordedBy = recordedBy;
     return Object.hashAll([
       _$data.containsKey('datetime') ? l$datetime : const {},
+      _$data.containsKey('day') ? l$day : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('meetingId') ? l$meetingId : const {},
       _$data.containsKey('personId') ? l$personId : const {},
@@ -1918,6 +1982,7 @@ abstract class CopyWith_Input_HistoryAttendanceHistoryMaxOrderBy<TRes> {
 
   TRes call({
     Enum_OrderBy? datetime,
+    Enum_OrderBy? day,
     Enum_OrderBy? id,
     Enum_OrderBy? meetingId,
     Enum_OrderBy? personId,
@@ -1940,6 +2005,7 @@ class _CopyWithImpl_Input_HistoryAttendanceHistoryMaxOrderBy<TRes>
 
   TRes call({
     Object? datetime = _undefined,
+    Object? day = _undefined,
     Object? id = _undefined,
     Object? meetingId = _undefined,
     Object? personId = _undefined,
@@ -1948,6 +2014,7 @@ class _CopyWithImpl_Input_HistoryAttendanceHistoryMaxOrderBy<TRes>
     Input_HistoryAttendanceHistoryMaxOrderBy._({
       ..._instance._$data,
       if (datetime != _undefined) 'datetime': (datetime as Enum_OrderBy?),
+      if (day != _undefined) 'day': (day as Enum_OrderBy?),
       if (id != _undefined) 'id': (id as Enum_OrderBy?),
       if (meetingId != _undefined) 'meetingId': (meetingId as Enum_OrderBy?),
       if (personId != _undefined) 'personId': (personId as Enum_OrderBy?),
@@ -1964,6 +2031,7 @@ class _CopyWithStubImpl_Input_HistoryAttendanceHistoryMaxOrderBy<TRes>
 
   call({
     Enum_OrderBy? datetime,
+    Enum_OrderBy? day,
     Enum_OrderBy? id,
     Enum_OrderBy? meetingId,
     Enum_OrderBy? personId,
@@ -1974,12 +2042,14 @@ class _CopyWithStubImpl_Input_HistoryAttendanceHistoryMaxOrderBy<TRes>
 class Input_HistoryAttendanceHistoryMinOrderBy {
   factory Input_HistoryAttendanceHistoryMinOrderBy({
     Enum_OrderBy? datetime,
+    Enum_OrderBy? day,
     Enum_OrderBy? id,
     Enum_OrderBy? meetingId,
     Enum_OrderBy? personId,
     Enum_OrderBy? recordedBy,
   }) => Input_HistoryAttendanceHistoryMinOrderBy._({
     if (datetime != null) r'datetime': datetime,
+    if (day != null) r'day': day,
     if (id != null) r'id': id,
     if (meetingId != null) r'meetingId': meetingId,
     if (personId != null) r'personId': personId,
@@ -1997,6 +2067,12 @@ class Input_HistoryAttendanceHistoryMinOrderBy {
       result$data['datetime'] = l$datetime == null
           ? null
           : fromJson_Enum_OrderBy((l$datetime as String));
+    }
+    if (data.containsKey('day')) {
+      final l$day = data['day'];
+      result$data['day'] = l$day == null
+          ? null
+          : fromJson_Enum_OrderBy((l$day as String));
     }
     if (data.containsKey('id')) {
       final l$id = data['id'];
@@ -2029,6 +2105,8 @@ class Input_HistoryAttendanceHistoryMinOrderBy {
 
   Enum_OrderBy? get datetime => (_$data['datetime'] as Enum_OrderBy?);
 
+  Enum_OrderBy? get day => (_$data['day'] as Enum_OrderBy?);
+
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
 
   Enum_OrderBy? get meetingId => (_$data['meetingId'] as Enum_OrderBy?);
@@ -2044,6 +2122,10 @@ class Input_HistoryAttendanceHistoryMinOrderBy {
       result$data['datetime'] = l$datetime == null
           ? null
           : toJson_Enum_OrderBy(l$datetime);
+    }
+    if (_$data.containsKey('day')) {
+      final l$day = day;
+      result$data['day'] = l$day == null ? null : toJson_Enum_OrderBy(l$day);
     }
     if (_$data.containsKey('id')) {
       final l$id = id;
@@ -2094,6 +2176,14 @@ class Input_HistoryAttendanceHistoryMinOrderBy {
     if (l$datetime != lOther$datetime) {
       return false;
     }
+    final l$day = day;
+    final lOther$day = other.day;
+    if (_$data.containsKey('day') != other._$data.containsKey('day')) {
+      return false;
+    }
+    if (l$day != lOther$day) {
+      return false;
+    }
     final l$id = id;
     final lOther$id = other.id;
     if (_$data.containsKey('id') != other._$data.containsKey('id')) {
@@ -2135,12 +2225,14 @@ class Input_HistoryAttendanceHistoryMinOrderBy {
   @override
   int get hashCode {
     final l$datetime = datetime;
+    final l$day = day;
     final l$id = id;
     final l$meetingId = meetingId;
     final l$personId = personId;
     final l$recordedBy = recordedBy;
     return Object.hashAll([
       _$data.containsKey('datetime') ? l$datetime : const {},
+      _$data.containsKey('day') ? l$day : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('meetingId') ? l$meetingId : const {},
       _$data.containsKey('personId') ? l$personId : const {},
@@ -2160,6 +2252,7 @@ abstract class CopyWith_Input_HistoryAttendanceHistoryMinOrderBy<TRes> {
 
   TRes call({
     Enum_OrderBy? datetime,
+    Enum_OrderBy? day,
     Enum_OrderBy? id,
     Enum_OrderBy? meetingId,
     Enum_OrderBy? personId,
@@ -2182,6 +2275,7 @@ class _CopyWithImpl_Input_HistoryAttendanceHistoryMinOrderBy<TRes>
 
   TRes call({
     Object? datetime = _undefined,
+    Object? day = _undefined,
     Object? id = _undefined,
     Object? meetingId = _undefined,
     Object? personId = _undefined,
@@ -2190,6 +2284,7 @@ class _CopyWithImpl_Input_HistoryAttendanceHistoryMinOrderBy<TRes>
     Input_HistoryAttendanceHistoryMinOrderBy._({
       ..._instance._$data,
       if (datetime != _undefined) 'datetime': (datetime as Enum_OrderBy?),
+      if (day != _undefined) 'day': (day as Enum_OrderBy?),
       if (id != _undefined) 'id': (id as Enum_OrderBy?),
       if (meetingId != _undefined) 'meetingId': (meetingId as Enum_OrderBy?),
       if (personId != _undefined) 'personId': (personId as Enum_OrderBy?),
@@ -2206,6 +2301,7 @@ class _CopyWithStubImpl_Input_HistoryAttendanceHistoryMinOrderBy<TRes>
 
   call({
     Enum_OrderBy? datetime,
+    Enum_OrderBy? day,
     Enum_OrderBy? id,
     Enum_OrderBy? meetingId,
     Enum_OrderBy? personId,
@@ -2434,6 +2530,7 @@ class Input_HistoryAttendanceHistoryOrderBy {
   factory Input_HistoryAttendanceHistoryOrderBy({
     Enum_OrderBy? asServant,
     Enum_OrderBy? datetime,
+    Enum_OrderBy? day,
     Enum_OrderBy? id,
     Input_HistoryMeetingsOrderBy? meeting,
     Enum_OrderBy? meetingId,
@@ -2444,6 +2541,7 @@ class Input_HistoryAttendanceHistoryOrderBy {
   }) => Input_HistoryAttendanceHistoryOrderBy._({
     if (asServant != null) r'asServant': asServant,
     if (datetime != null) r'datetime': datetime,
+    if (day != null) r'day': day,
     if (id != null) r'id': id,
     if (meeting != null) r'meeting': meeting,
     if (meetingId != null) r'meetingId': meetingId,
@@ -2470,6 +2568,12 @@ class Input_HistoryAttendanceHistoryOrderBy {
       result$data['datetime'] = l$datetime == null
           ? null
           : fromJson_Enum_OrderBy((l$datetime as String));
+    }
+    if (data.containsKey('day')) {
+      final l$day = data['day'];
+      result$data['day'] = l$day == null
+          ? null
+          : fromJson_Enum_OrderBy((l$day as String));
     }
     if (data.containsKey('id')) {
       final l$id = data['id'];
@@ -2526,6 +2630,8 @@ class Input_HistoryAttendanceHistoryOrderBy {
 
   Enum_OrderBy? get datetime => (_$data['datetime'] as Enum_OrderBy?);
 
+  Enum_OrderBy? get day => (_$data['day'] as Enum_OrderBy?);
+
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
 
   Input_HistoryMeetingsOrderBy? get meeting =>
@@ -2556,6 +2662,10 @@ class Input_HistoryAttendanceHistoryOrderBy {
       result$data['datetime'] = l$datetime == null
           ? null
           : toJson_Enum_OrderBy(l$datetime);
+    }
+    if (_$data.containsKey('day')) {
+      final l$day = day;
+      result$data['day'] = l$day == null ? null : toJson_Enum_OrderBy(l$day);
     }
     if (_$data.containsKey('id')) {
       final l$id = id;
@@ -2627,6 +2737,14 @@ class Input_HistoryAttendanceHistoryOrderBy {
     if (l$datetime != lOther$datetime) {
       return false;
     }
+    final l$day = day;
+    final lOther$day = other.day;
+    if (_$data.containsKey('day') != other._$data.containsKey('day')) {
+      return false;
+    }
+    if (l$day != lOther$day) {
+      return false;
+    }
     final l$id = id;
     final lOther$id = other.id;
     if (_$data.containsKey('id') != other._$data.containsKey('id')) {
@@ -2694,6 +2812,7 @@ class Input_HistoryAttendanceHistoryOrderBy {
   int get hashCode {
     final l$asServant = asServant;
     final l$datetime = datetime;
+    final l$day = day;
     final l$id = id;
     final l$meeting = meeting;
     final l$meetingId = meetingId;
@@ -2704,6 +2823,7 @@ class Input_HistoryAttendanceHistoryOrderBy {
     return Object.hashAll([
       _$data.containsKey('asServant') ? l$asServant : const {},
       _$data.containsKey('datetime') ? l$datetime : const {},
+      _$data.containsKey('day') ? l$day : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('meeting') ? l$meeting : const {},
       _$data.containsKey('meetingId') ? l$meetingId : const {},

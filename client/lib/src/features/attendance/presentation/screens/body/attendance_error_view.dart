@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// Centered error message with a retry button.
 class AttendanceErrorView extends StatelessWidget {
   final String message;
   final VoidCallback onRetry;

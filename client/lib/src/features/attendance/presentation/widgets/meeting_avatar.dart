@@ -1,7 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 
-/// A small circular avatar showing a meeting's first letter over its color.
 class MeetingAvatar extends StatelessWidget {
   final Meeting meeting;
   final double radius;

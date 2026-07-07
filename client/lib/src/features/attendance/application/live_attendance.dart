@@ -1,10 +1,5 @@
 import 'package:church_admin/church_admin.dart';
 
-/// Tracks live attendance records from the server plus pending optimistic marks.
-///
-/// Optimistic flow: markOptimistic → user sees instant feedback →
-/// refreshWithServerRecords reconciles and removes the pending mark when the
-/// server confirms. rollbackOptimistic removes it on error.
 final class LiveAttendance {
   Map<(String personId, bool asServant), AttendanceRecord>
   _attendanceRecordsByKey = {};
@@ -49,9 +44,6 @@ final class LiveAttendance {
     });
   }
 
-  /// Returns the effective attendance for [personId]/[asServant], giving
-  /// priority to pending optimistic state. Uses [meetingId] as a placeholder
-  /// id for optimistic-present records (real id arrives with server echo).
   AttendanceRecord? effectiveAttendanceRecord({
     required String meetingId,
     required String personId,

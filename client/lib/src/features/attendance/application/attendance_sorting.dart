@@ -2,7 +2,6 @@ import 'package:church_admin/church_admin.dart';
 import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
-/// How roster entries are ordered in the recording screen.
 @immutable
 sealed class AttendanceSorting with EquatableMixin {
   const AttendanceSorting();
@@ -17,11 +16,8 @@ sealed class AttendanceSorting with EquatableMixin {
 
   int compare(MeetingRosterEntry a, MeetingRosterEntry b);
 
-  /// Whether attendance time is part of this sort's comparison chain.
   bool get isSortingByTime;
 
-  /// Returns a sort with attendance-time ordering toggled: adds it if absent,
-  /// removes it if present.
   AttendanceSorting toggleAttendanceTimeSorting();
 
   @override

@@ -15,7 +15,8 @@ T _$identity<T>(T value) => value;
 mixin _$MeetingRosterEntry {
   bool get asServant;
   Person get person;
-  List<AttendanceRecord> get attendanceHistory;
+  AttendanceRecord? get attendanceRecord;
+  PersonMeetingAttendanceAnalysis? get personAttendanceAnalysis;
 
   /// Create a copy of MeetingRosterEntry
   /// with the given fields replaced by the non-null parameter values.
@@ -35,10 +36,13 @@ mixin _$MeetingRosterEntry {
             (identical(other.asServant, asServant) ||
                 other.asServant == asServant) &&
             (identical(other.person, person) || other.person == person) &&
-            const DeepCollectionEquality().equals(
-              other.attendanceHistory,
-              attendanceHistory,
-            ));
+            (identical(other.attendanceRecord, attendanceRecord) ||
+                other.attendanceRecord == attendanceRecord) &&
+            (identical(
+                  other.personAttendanceAnalysis,
+                  personAttendanceAnalysis,
+                ) ||
+                other.personAttendanceAnalysis == personAttendanceAnalysis));
   }
 
   @override
@@ -46,12 +50,13 @@ mixin _$MeetingRosterEntry {
     runtimeType,
     asServant,
     person,
-    const DeepCollectionEquality().hash(attendanceHistory),
+    attendanceRecord,
+    personAttendanceAnalysis,
   );
 
   @override
   String toString() {
-    return 'MeetingRosterEntry(asServant: $asServant, person: $person, attendanceHistory: $attendanceHistory)';
+    return 'MeetingRosterEntry(asServant: $asServant, person: $person, attendanceRecord: $attendanceRecord, personAttendanceAnalysis: $personAttendanceAnalysis)';
   }
 }
 
@@ -65,7 +70,8 @@ abstract mixin class $MeetingRosterEntryCopyWith<$Res> {
   $Res call({
     bool asServant,
     Person person,
-    List<AttendanceRecord> attendanceHistory,
+    AttendanceRecord? attendanceRecord,
+    PersonMeetingAttendanceAnalysis? personAttendanceAnalysis,
   });
 }
 
@@ -84,7 +90,8 @@ class _$MeetingRosterEntryCopyWithImpl<$Res>
   $Res call({
     Object? asServant = null,
     Object? person = null,
-    Object? attendanceHistory = null,
+    Object? attendanceRecord = freezed,
+    Object? personAttendanceAnalysis = freezed,
   }) {
     return _then(
       MeetingRosterEntry(
@@ -96,10 +103,14 @@ class _$MeetingRosterEntryCopyWithImpl<$Res>
             ? _self.person
             : person // ignore: cast_nullable_to_non_nullable
                   as Person,
-        attendanceHistory: null == attendanceHistory
-            ? _self.attendanceHistory
-            : attendanceHistory // ignore: cast_nullable_to_non_nullable
-                  as List<AttendanceRecord>,
+        attendanceRecord: freezed == attendanceRecord
+            ? _self.attendanceRecord
+            : attendanceRecord // ignore: cast_nullable_to_non_nullable
+                  as AttendanceRecord?,
+        personAttendanceAnalysis: freezed == personAttendanceAnalysis
+            ? _self.personAttendanceAnalysis
+            : personAttendanceAnalysis // ignore: cast_nullable_to_non_nullable
+                  as PersonMeetingAttendanceAnalysis?,
       ),
     );
   }

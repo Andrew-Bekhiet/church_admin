@@ -1,11 +1,8 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 
-/// Height of the pinned present/absent/all summary bar.
 const double kAttendanceSummaryHeight = 48;
 
-/// The pinned fragment showing live present/absent/all counts. Tapping a segment
-/// filters the roster; tapping the active segment clears the filter.
 class AttendanceSummaryBar extends StatelessWidget {
   final int presentCount;
   final int absentCount;

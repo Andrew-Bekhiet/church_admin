@@ -19,7 +19,9 @@ class HistoryProperty<T extends LastRecordedByInfo> extends StatelessWidget {
   final ViewableObjectListController<T> Function() getHistoryListController;
   final void Function()? onRecordNow;
 
-  DateFormat get dateFormat => DateFormat(
+  DateFormat get dateFormat => _dateFormat(showTime: showTime);
+
+  static DateFormat _dateFormat({required bool showTime}) => DateFormat(
     'التاريخ: yyyy/M/d${showTime ? '\nالساعة: h:m a' : ''}',
     'ar-EG',
   );
@@ -65,8 +67,20 @@ class HistoryProperty<T extends LastRecordedByInfo> extends StatelessWidget {
     );
   }
 
-  void Function() _onHistoryTap(BuildContext context) => () async {
+  void Function() _onHistoryTap(BuildContext context) => () =>
+      showHistoryDialog<T>(context, getHistoryListController, showTime: showTime);
+
+  /// Opens the paginated "recorded by" history list produced by
+  /// [getHistoryListController] in a dialog and disposes the controller after.
+  /// Shared with the attendance KPI cards, which reuse this list without the
+  /// surrounding [HistoryProperty] tile.
+  static Future<void> showHistoryDialog<T extends LastRecordedByInfo>(
+    BuildContext context,
+    ViewableObjectListController<T> Function() getHistoryListController, {
+    bool showTime = true,
+  }) async {
     final viewableObjectListController = getHistoryListController();
+    final dateFormat = _dateFormat(showTime: showTime);
 
     await showDialog(
       context: context,
@@ -107,5 +121,5 @@ class HistoryProperty<T extends LastRecordedByInfo> extends StatelessWidget {
       },
     );
     await viewableObjectListController.dispose();
-  };
+  }
 }

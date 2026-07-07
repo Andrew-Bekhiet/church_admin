@@ -13,6 +13,7 @@ abstract class CopyWith_Input_HistoryAttendanceHistoryOrderBy<TRes> {
   TRes call({
     Enum_OrderBy? asServant,
     Enum_OrderBy? datetime,
+    Enum_OrderBy? day,
     Enum_OrderBy? id,
     Input_HistoryMeetingsOrderBy? meeting,
     Enum_OrderBy? meetingId,
@@ -42,6 +43,7 @@ class _CopyWithImpl_Input_HistoryAttendanceHistoryOrderBy<TRes>
   TRes call({
     Object? asServant = _undefined,
     Object? datetime = _undefined,
+    Object? day = _undefined,
     Object? id = _undefined,
     Object? meeting = _undefined,
     Object? meetingId = _undefined,
@@ -54,6 +56,7 @@ class _CopyWithImpl_Input_HistoryAttendanceHistoryOrderBy<TRes>
       ..._instance._$data,
       if (asServant != _undefined) 'asServant': (asServant as Enum_OrderBy?),
       if (datetime != _undefined) 'datetime': (datetime as Enum_OrderBy?),
+      if (day != _undefined) 'day': (day as Enum_OrderBy?),
       if (id != _undefined) 'id': (id as Enum_OrderBy?),
       if (meeting != _undefined)
         'meeting': (meeting as Input_HistoryMeetingsOrderBy?),
@@ -103,6 +106,7 @@ class _CopyWithStubImpl_Input_HistoryAttendanceHistoryOrderBy<TRes>
   call({
     Enum_OrderBy? asServant,
     Enum_OrderBy? datetime,
+    Enum_OrderBy? day,
     Enum_OrderBy? id,
     Input_HistoryMeetingsOrderBy? meeting,
     Enum_OrderBy? meetingId,
@@ -505,6 +509,7 @@ class Input_HistoryAttendanceHistoryStreamCursorValueInput {
   factory Input_HistoryAttendanceHistoryStreamCursorValueInput({
     bool? asServant,
     DateTime? datetime,
+    DateTime? day,
     UuidValue? id,
     UuidValue? meetingId,
     UuidValue? personId,
@@ -512,6 +517,7 @@ class Input_HistoryAttendanceHistoryStreamCursorValueInput {
   }) => Input_HistoryAttendanceHistoryStreamCursorValueInput._({
     if (asServant != null) r'asServant': asServant,
     if (datetime != null) r'datetime': datetime,
+    if (day != null) r'day': day,
     if (id != null) r'id': id,
     if (meetingId != null) r'meetingId': meetingId,
     if (personId != null) r'personId': personId,
@@ -533,6 +539,10 @@ class Input_HistoryAttendanceHistoryStreamCursorValueInput {
       result$data['datetime'] = l$datetime == null
           ? null
           : tstzFromString(l$datetime);
+    }
+    if (data.containsKey('day')) {
+      final l$day = data['day'];
+      result$data['day'] = l$day == null ? null : dateFromString(l$day);
     }
     if (data.containsKey('id')) {
       final l$id = data['id'];
@@ -565,6 +575,8 @@ class Input_HistoryAttendanceHistoryStreamCursorValueInput {
 
   DateTime? get datetime => (_$data['datetime'] as DateTime?);
 
+  DateTime? get day => (_$data['day'] as DateTime?);
+
   UuidValue? get id => (_$data['id'] as UuidValue?);
 
   UuidValue? get meetingId => (_$data['meetingId'] as UuidValue?);
@@ -584,6 +596,10 @@ class Input_HistoryAttendanceHistoryStreamCursorValueInput {
       result$data['datetime'] = l$datetime == null
           ? null
           : tstzToString(l$datetime);
+    }
+    if (_$data.containsKey('day')) {
+      final l$day = day;
+      result$data['day'] = l$day == null ? null : dateToString(l$day);
     }
     if (_$data.containsKey('id')) {
       final l$id = id;
@@ -645,6 +661,14 @@ class Input_HistoryAttendanceHistoryStreamCursorValueInput {
     if (l$datetime != lOther$datetime) {
       return false;
     }
+    final l$day = day;
+    final lOther$day = other.day;
+    if (_$data.containsKey('day') != other._$data.containsKey('day')) {
+      return false;
+    }
+    if (l$day != lOther$day) {
+      return false;
+    }
     final l$id = id;
     final lOther$id = other.id;
     if (_$data.containsKey('id') != other._$data.containsKey('id')) {
@@ -687,6 +711,7 @@ class Input_HistoryAttendanceHistoryStreamCursorValueInput {
   int get hashCode {
     final l$asServant = asServant;
     final l$datetime = datetime;
+    final l$day = day;
     final l$id = id;
     final l$meetingId = meetingId;
     final l$personId = personId;
@@ -694,6 +719,7 @@ class Input_HistoryAttendanceHistoryStreamCursorValueInput {
     return Object.hashAll([
       _$data.containsKey('asServant') ? l$asServant : const {},
       _$data.containsKey('datetime') ? l$datetime : const {},
+      _$data.containsKey('day') ? l$day : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('meetingId') ? l$meetingId : const {},
       _$data.containsKey('personId') ? l$personId : const {},
@@ -717,6 +743,7 @@ abstract class CopyWith_Input_HistoryAttendanceHistoryStreamCursorValueInput<
   TRes call({
     bool? asServant,
     DateTime? datetime,
+    DateTime? day,
     UuidValue? id,
     UuidValue? meetingId,
     UuidValue? personId,
@@ -742,6 +769,7 @@ class _CopyWithImpl_Input_HistoryAttendanceHistoryStreamCursorValueInput<TRes>
   TRes call({
     Object? asServant = _undefined,
     Object? datetime = _undefined,
+    Object? day = _undefined,
     Object? id = _undefined,
     Object? meetingId = _undefined,
     Object? personId = _undefined,
@@ -751,6 +779,7 @@ class _CopyWithImpl_Input_HistoryAttendanceHistoryStreamCursorValueInput<TRes>
       ..._instance._$data,
       if (asServant != _undefined) 'asServant': (asServant as bool?),
       if (datetime != _undefined) 'datetime': (datetime as DateTime?),
+      if (day != _undefined) 'day': (day as DateTime?),
       if (id != _undefined) 'id': (id as UuidValue?),
       if (meetingId != _undefined) 'meetingId': (meetingId as UuidValue?),
       if (personId != _undefined) 'personId': (personId as UuidValue?),
@@ -773,6 +802,7 @@ class _CopyWithStubImpl_Input_HistoryAttendanceHistoryStreamCursorValueInput<
   call({
     bool? asServant,
     DateTime? datetime,
+    DateTime? day,
     UuidValue? id,
     UuidValue? meetingId,
     UuidValue? personId,
@@ -2477,197 +2507,6 @@ class Input_HistoryCallHistoryMinOrderBy {
       _$data.containsKey('personId') ? l$personId : const {},
       _$data.containsKey('recordedBy') ? l$recordedBy : const {},
       _$data.containsKey('time') ? l$time : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_HistoryCallHistoryMinOrderBy<TRes> {
-  factory CopyWith_Input_HistoryCallHistoryMinOrderBy(
-    Input_HistoryCallHistoryMinOrderBy instance,
-    TRes Function(Input_HistoryCallHistoryMinOrderBy) then,
-  ) = _CopyWithImpl_Input_HistoryCallHistoryMinOrderBy;
-
-  factory CopyWith_Input_HistoryCallHistoryMinOrderBy.stub(TRes res) =
-      _CopyWithStubImpl_Input_HistoryCallHistoryMinOrderBy;
-
-  TRes call({
-    Enum_OrderBy? personId,
-    Enum_OrderBy? recordedBy,
-    Enum_OrderBy? time,
-  });
-}
-
-class _CopyWithImpl_Input_HistoryCallHistoryMinOrderBy<TRes>
-    implements CopyWith_Input_HistoryCallHistoryMinOrderBy<TRes> {
-  _CopyWithImpl_Input_HistoryCallHistoryMinOrderBy(this._instance, this._then);
-
-  final Input_HistoryCallHistoryMinOrderBy _instance;
-
-  final TRes Function(Input_HistoryCallHistoryMinOrderBy) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? personId = _undefined,
-    Object? recordedBy = _undefined,
-    Object? time = _undefined,
-  }) => _then(
-    Input_HistoryCallHistoryMinOrderBy._({
-      ..._instance._$data,
-      if (personId != _undefined) 'personId': (personId as Enum_OrderBy?),
-      if (recordedBy != _undefined) 'recordedBy': (recordedBy as Enum_OrderBy?),
-      if (time != _undefined) 'time': (time as Enum_OrderBy?),
-    }),
-  );
-}
-
-class _CopyWithStubImpl_Input_HistoryCallHistoryMinOrderBy<TRes>
-    implements CopyWith_Input_HistoryCallHistoryMinOrderBy<TRes> {
-  _CopyWithStubImpl_Input_HistoryCallHistoryMinOrderBy(this._res);
-
-  TRes _res;
-
-  call({
-    Enum_OrderBy? personId,
-    Enum_OrderBy? recordedBy,
-    Enum_OrderBy? time,
-  }) => _res;
-}
-
-class Input_HistoryCallHistoryOnConflict {
-  factory Input_HistoryCallHistoryOnConflict({
-    required Enum_HistoryCallHistoryConstraint constraint,
-    List<Enum_HistoryCallHistoryUpdateColumn>? updateColumns,
-    Input_HistoryCallHistoryBoolExp? where,
-  }) => Input_HistoryCallHistoryOnConflict._({
-    r'constraint': constraint,
-    if (updateColumns != null) r'updateColumns': updateColumns,
-    if (where != null) r'where': where,
-  });
-
-  Input_HistoryCallHistoryOnConflict._(this._$data);
-
-  factory Input_HistoryCallHistoryOnConflict.fromJson(
-    Map<String, dynamic> data,
-  ) {
-    final result$data = <String, dynamic>{};
-    final l$constraint = data['constraint'];
-    result$data['constraint'] = fromJson_Enum_HistoryCallHistoryConstraint(
-      (l$constraint as String),
-    );
-    if (data.containsKey('updateColumns')) {
-      final l$updateColumns = data['updateColumns'];
-      result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
-          .map(
-            (e) => fromJson_Enum_HistoryCallHistoryUpdateColumn((e as String)),
-          )
-          .toList();
-    }
-    if (data.containsKey('where')) {
-      final l$where = data['where'];
-      result$data['where'] = l$where == null
-          ? null
-          : Input_HistoryCallHistoryBoolExp.fromJson(
-              (l$where as Map<String, dynamic>),
-            );
-    }
-    return Input_HistoryCallHistoryOnConflict._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  Enum_HistoryCallHistoryConstraint get constraint =>
-      (_$data['constraint'] as Enum_HistoryCallHistoryConstraint);
-
-  List<Enum_HistoryCallHistoryUpdateColumn>? get updateColumns =>
-      (_$data['updateColumns'] as List<Enum_HistoryCallHistoryUpdateColumn>?);
-
-  Input_HistoryCallHistoryBoolExp? get where =>
-      (_$data['where'] as Input_HistoryCallHistoryBoolExp?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    final l$constraint = constraint;
-    result$data['constraint'] = toJson_Enum_HistoryCallHistoryConstraint(
-      l$constraint,
-    );
-    if (_$data.containsKey('updateColumns')) {
-      final l$updateColumns = updateColumns;
-      result$data['updateColumns'] =
-          (l$updateColumns as List<Enum_HistoryCallHistoryUpdateColumn>)
-              .map((e) => toJson_Enum_HistoryCallHistoryUpdateColumn(e))
-              .toList();
-    }
-    if (_$data.containsKey('where')) {
-      final l$where = where;
-      result$data['where'] = l$where?.toJson();
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_HistoryCallHistoryOnConflict<
-    Input_HistoryCallHistoryOnConflict
-  >
-  get copyWith => CopyWith_Input_HistoryCallHistoryOnConflict(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_HistoryCallHistoryOnConflict ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$constraint = constraint;
-    final lOther$constraint = other.constraint;
-    if (l$constraint != lOther$constraint) {
-      return false;
-    }
-    final l$updateColumns = updateColumns;
-    final lOther$updateColumns = other.updateColumns;
-    if (_$data.containsKey('updateColumns') !=
-        other._$data.containsKey('updateColumns')) {
-      return false;
-    }
-    if (l$updateColumns != null && lOther$updateColumns != null) {
-      if (l$updateColumns.length != lOther$updateColumns.length) {
-        return false;
-      }
-      for (int i = 0; i < l$updateColumns.length; i++) {
-        final l$updateColumns$entry = l$updateColumns[i];
-        final lOther$updateColumns$entry = lOther$updateColumns[i];
-        if (l$updateColumns$entry != lOther$updateColumns$entry) {
-          return false;
-        }
-      }
-    } else if (l$updateColumns != lOther$updateColumns) {
-      return false;
-    }
-    final l$where = where;
-    final lOther$where = other.where;
-    if (_$data.containsKey('where') != other._$data.containsKey('where')) {
-      return false;
-    }
-    if (l$where != lOther$where) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$constraint = constraint;
-    final l$updateColumns = updateColumns;
-    final l$where = where;
-    return Object.hashAll([
-      l$constraint,
-      _$data.containsKey('updateColumns')
-          ? l$updateColumns == null
-                ? null
-                : Object.hashAll(l$updateColumns.map((v) => v))
-          : const {},
-      _$data.containsKey('where') ? l$where : const {},
     ]);
   }
 }

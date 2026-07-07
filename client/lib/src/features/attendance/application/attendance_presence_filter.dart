@@ -1,6 +1,5 @@
 import 'package:church_admin/church_admin.dart';
 
-/// Which subset of the roster is shown in the recording screen.
 enum AttendancePresenceFilter {
   all,
   present,

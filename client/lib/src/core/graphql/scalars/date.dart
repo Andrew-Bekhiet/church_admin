@@ -1,24 +1,13 @@
 DateTime dateFromString(dynamic rawData) {
-  String data = rawData;
+  final data = rawData as String;
+  final datePart = data.split('T').first;
+  final [rawYear, rawMonth, rawDay] = datePart.split('-');
 
-  if (!data.contains('T')) {
-    data = '${data}T00:00:00Z';
-  }
-
-  final parsed = DateTime.parse(data);
-
-  return parsed.isUtc
-      ? parsed
-      : DateTime.utc(
-          parsed.year,
-          parsed.month,
-          parsed.day,
-          parsed.hour,
-          parsed.minute,
-          parsed.second,
-          parsed.millisecond,
-          parsed.microsecond,
-        );
+  return DateTime(
+    int.parse(rawYear),
+    int.parse(rawMonth),
+    int.parse(rawDay),
+  );
 }
 
 String dateToString(DateTime date) => date.toIso8601String().split('T').first;

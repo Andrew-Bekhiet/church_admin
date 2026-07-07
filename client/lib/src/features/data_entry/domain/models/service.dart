@@ -11,7 +11,7 @@ part 'service.g.dart';
 @Queryable(classLabel: 'الخدمات', allowExtension: true)
 class Service extends ViewableWithIDAndImage
     with _$Service
-    implements SerializableExtra, AttendanceAnalyzable {
+    implements SerializableExtra {
   @override
   @JsonKey(defaultValue: '')
   final String id;
@@ -67,9 +67,6 @@ class Service extends ViewableWithIDAndImage
   final List<User>? adminUsers;
 
   @override
-  final HistoryAggregateData? attendanceHistoryAggregate;
-
-  @override
   @JsonKey(includeToJson: false)
   final bool userCanEdit;
 
@@ -90,7 +87,6 @@ class Service extends ViewableWithIDAndImage
     this.meetings,
     this.lastEdit,
     this.adminUsers,
-    this.attendanceHistoryAggregate,
     this.userCanEdit = false,
   });
 

@@ -62,6 +62,14 @@ RouteBase get $homeScreenRoute => GoRouteData.$route(
       path: 'person_analysis',
       factory: $PersonAnalysisRoute._fromState,
     ),
+    GoRouteData.$route(
+      path: 'user_analysis',
+      factory: $UserAnalysisRoute._fromState,
+    ),
+    GoRouteData.$route(
+      path: 'meetings_analysis',
+      factory: $MeetingsAnalysisRoute._fromState,
+    ),
     GoRouteData.$route(path: 'my_account', factory: $MyAccountRoute._fromState),
     GoRouteData.$route(
       path: 'manage_users',
@@ -614,6 +622,56 @@ mixin $PersonAnalysisRoute on GoRouteData {
 
   @override
   String get location => GoRouteData.$location('/person_analysis');
+
+  @override
+  void go(BuildContext context) => context.go(location, extra: _self.$extra);
+
+  @override
+  Future<T?> push<T>(BuildContext context) =>
+      context.push<T>(location, extra: _self.$extra);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location, extra: _self.$extra);
+
+  @override
+  void replace(BuildContext context) =>
+      context.replace(location, extra: _self.$extra);
+}
+
+mixin $UserAnalysisRoute on GoRouteData {
+  static UserAnalysisRoute _fromState(GoRouterState state) =>
+      UserAnalysisRoute($extra: state.extra as UserAnalysisExtra);
+
+  UserAnalysisRoute get _self => this as UserAnalysisRoute;
+
+  @override
+  String get location => GoRouteData.$location('/user_analysis');
+
+  @override
+  void go(BuildContext context) => context.go(location, extra: _self.$extra);
+
+  @override
+  Future<T?> push<T>(BuildContext context) =>
+      context.push<T>(location, extra: _self.$extra);
+
+  @override
+  void pushReplacement(BuildContext context) =>
+      context.pushReplacement(location, extra: _self.$extra);
+
+  @override
+  void replace(BuildContext context) =>
+      context.replace(location, extra: _self.$extra);
+}
+
+mixin $MeetingsAnalysisRoute on GoRouteData {
+  static MeetingsAnalysisRoute _fromState(GoRouterState state) =>
+      MeetingsAnalysisRoute($extra: state.extra as MeetingsAnalysisExtra);
+
+  MeetingsAnalysisRoute get _self => this as MeetingsAnalysisRoute;
+
+  @override
+  String get location => GoRouteData.$location('/meetings_analysis');
 
   @override
   void go(BuildContext context) => context.go(location, extra: _self.$extra);

@@ -109,8 +109,19 @@ class _ViewGroupState extends State<ViewGroup> {
               title: FilledButton.icon(
                 icon: const Icon(Symbols.query_stats),
                 label: const Text('احصائيات'),
-                // TODO: add group analysis
-                onPressed: () {},
+                onPressed: () => unawaited(
+                  MeetingsAnalysisRoute(
+                    $extra: MeetingsAnalysisExtra(
+                      title: 'احصائيات ${group.name}',
+                      initialRangePreset: PastQuarterDateTimeRangePreset(),
+                      load: (range) =>
+                          DatabaseService.I.meetings.getGroupAttendanceAnalysis(
+                            group: group,
+                            range: range,
+                          ),
+                    ),
+                  ).push(context),
+                ),
               ),
             ),
             HistoryProperty(

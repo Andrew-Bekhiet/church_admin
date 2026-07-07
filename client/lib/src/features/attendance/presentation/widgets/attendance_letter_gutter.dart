@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// Right-edge alphabet gutter for rapidly jumping to a person by name. Supports
-/// tap and vertical drag scrubbing. Each letter occupies a fixed slot so the hit
-/// area lines up exactly with what's drawn, and the strip stays compact (and
-/// centred) regardless of how tall the surrounding scroll body grows.
 class AttendanceLetterGutter extends StatelessWidget {
   static const double kGutterWidth = 16;
   static const double _slotHeight = 32;

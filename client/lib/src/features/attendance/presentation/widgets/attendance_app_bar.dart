@@ -1,9 +1,10 @@
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:material_symbols_icons/material_symbols_icons.dart';
 
-/// The snapping, floating app-bar fragment: meeting selector, date chip,
-/// audience toggle and the overflow menu.
 class AttendanceAppBar extends StatelessWidget {
   static const double _kAttendanceToolbarHeight = 96;
 
@@ -12,6 +13,7 @@ class AttendanceAppBar extends StatelessWidget {
   final AttendanceRosterAudienceView audienceView;
   final AttendanceSorting sorting;
   final AttendanceGrouping grouping;
+  final int streakWindowDays;
   final bool canToggleAudience;
 
   const AttendanceAppBar({
@@ -20,6 +22,7 @@ class AttendanceAppBar extends StatelessWidget {
     required this.audienceView,
     required this.sorting,
     required this.grouping,
+    required this.streakWindowDays,
     required this.canToggleAudience,
     super.key,
   });
@@ -33,6 +36,28 @@ class AttendanceAppBar extends StatelessWidget {
       currentMeeting: meeting,
     );
     if (selected != null) cubit.switchMeeting(selected);
+  }
+
+  void _openAnalysis(BuildContext context) {
+    final selectedDay = DateUtils.dateOnly(selectedDate);
+
+    unawaited(
+      MeetingsAnalysisRoute(
+        $extra: MeetingsAnalysisExtra(
+          title: 'احصائيات ${meeting.name}',
+          initialRangePreset: selectedDay == DateUtils.dateOnly(DateTime.now())
+              ? TodayDateTimeRangePreset()
+              : CustomDateTimeRangePreset(
+                  range: DateTimeRange(start: selectedDay, end: selectedDay),
+                ),
+          load: (range) =>
+              DatabaseService.I.meetings.getPersonMeetingAttendanceAnalysis(
+                meeting: meeting,
+                range: range,
+              ),
+        ),
+      ).push(context),
+    );
   }
 
   @override
@@ -71,11 +96,18 @@ class AttendanceAppBar extends StatelessWidget {
         ],
       ),
       actions: [
+        IconButton(
+          tooltip: 'احصائيات الحضور',
+          icon: const Icon(Symbols.query_stats),
+          onPressed: () => _openAnalysis(context),
+        ),
         AttendanceOverflowMenu(
           sorting: sorting,
           grouping: grouping,
+          streakWindowDays: streakWindowDays,
           onSortChanged: cubit.changeSorting,
           onGroupingChanged: cubit.changeGrouping,
+          onStreakWindowChanged: cubit.changeStreakWindow,
         ),
       ],
     );

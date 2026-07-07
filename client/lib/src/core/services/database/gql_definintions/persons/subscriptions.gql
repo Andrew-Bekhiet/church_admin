@@ -145,17 +145,3 @@ subscription watchPerson(
     }
   }
 }
-
-subscription personAttendance(
-  $where: [HistoryAttendanceHistoryBoolExp!] = {}
-  $orderBy: [HistoryAttendanceHistoryOrderBy!] = { datetime: DESC }
-  $limit: Int! = 200
-) {
-  historyAttendanceHistory(
-    where: { _and: $where }
-    orderBy: $orderBy
-    limit: $limit
-  ) {
-    ...AttendanceHistory
-  }
-}

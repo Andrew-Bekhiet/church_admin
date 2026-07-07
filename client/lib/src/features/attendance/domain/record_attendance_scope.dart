@@ -1,6 +1,5 @@
 import 'package:church_admin/church_admin.dart';
 
-/// A scope in which the current user may record attendance.
 sealed class RecordAttendanceScope {
   final bool canRecordPersons;
   final bool canRecordServants;
@@ -46,15 +45,11 @@ sealed class RecordAttendanceScope {
   bool coversMeeting(Meeting meeting);
 }
 
-/// Service-based scope: attendance is recorded for persons in a given service,
-/// optionally filtered by study year and/or gender.
 final class ServiceAttendanceScope extends RecordAttendanceScope {
   final Service service;
-
-  /// If set, restricts the scope to a specific study year.
   final StudyYear? studyYear;
 
-  /// If set, restricts the scope to a specific gender (true=female, false=male).
+  /// true=male, false=female.
   final bool? gender;
 
   const ServiceAttendanceScope({
@@ -85,7 +80,6 @@ final class ServiceAttendanceScope extends RecordAttendanceScope {
   }
 }
 
-/// Group-based scope: attendance is recorded for all members of a group.
 final class GroupAttendanceScope extends RecordAttendanceScope {
   final Group group;
 

@@ -8,17 +8,12 @@ sealed class RecordAttendanceState with EquatableMixin {
   List<Object?> get props => [];
 }
 
-/// Seed state shown for the first frame, before the session emits its roster.
 final class RecordAttendanceLoading extends RecordAttendanceState {
   const RecordAttendanceLoading();
 }
 
-/// Load status of the roster list *within* an active session. The session shell
-/// (meeting/date/audience controls) stays visible across all three; only the
-/// persons list swaps between a spinner, an error+retry and the roster itself.
 enum RosterStatus { loading, ready, error }
 
-/// The active recording session with its current roster and counts.
 final class RecordAttendanceLoaded extends RecordAttendanceState {
   final Meeting meeting;
   final DateTime selectedDate;
@@ -28,14 +23,10 @@ final class RecordAttendanceLoaded extends RecordAttendanceState {
   final AttendanceSorting sort;
   final String? searchQuery;
 
-  /// Load status of the persons list. The shell above renders regardless.
   final RosterStatus rosterStatus;
-
-  /// Roster entries after applying optimistic marks, the active filter and sort.
   final List<MeetingRosterEntry> entries;
-
-  /// Ordered first letters present in [entries], for the name-jump gutter.
   final List<String> gutterLetters;
+  final int streakWindowDays;
 
   final int? presentCount;
   final int? eligibleCount;
@@ -59,6 +50,7 @@ final class RecordAttendanceLoaded extends RecordAttendanceState {
     canToggleAudience,
     entries,
     gutterLetters,
+    streakWindowDays,
     presentCount,
     eligibleCount,
   ];
@@ -76,6 +68,7 @@ final class RecordAttendanceLoaded extends RecordAttendanceState {
     required this.gutterLetters,
     required this.presentCount,
     required this.eligibleCount,
+    required this.streakWindowDays,
     this.searchQuery,
   });
 }

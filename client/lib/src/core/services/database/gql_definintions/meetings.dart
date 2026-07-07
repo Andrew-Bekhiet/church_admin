@@ -1,3 +1,5 @@
+import 'dart:ui' show Color;
+
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/meetings/__generated__/mutations.gql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/meetings/__generated__/queries.gql.dart';
@@ -71,14 +73,11 @@ class MeetingsDAO extends DAOBase<Meeting>
     );
   }
 
-  /// Fetches the roster of persons eligible for [meetingId] once. Eligibility
-  /// is date-independent (governed by the `history.meeting_roster` view), so
-  /// this query only re-runs when the meeting or grouping changes.
   Future<List<MeetingRosterEntry>> getMeetingRoster({
     required String meetingId,
     required bool groupByStudyYear,
     int limit = 1000,
-  }) {
+  }) async {
     final orderBy = [
       if (groupByStudyYear)
         Input_HistoryMeetingRosterOrderBy(studyYearId: Enum_OrderBy.ASC),
@@ -86,7 +85,7 @@ class MeetingsDAO extends DAOBase<Meeting>
       Input_HistoryMeetingRosterOrderBy(personId: Enum_OrderBy.ASC),
     ];
 
-    return graphQLClient.queryAndReturnParsed(
+    final result = await graphQLClient.queryAndReturnParsed(
       QueryOptions(
         document: documentNodeQueryhistoryMeetingRoster,
         operationName: 'historyMeetingRoster',
@@ -95,14 +94,15 @@ class MeetingsDAO extends DAOBase<Meeting>
           orderBy: orderBy,
           limit: limit,
         ).toJson(),
-        parserFn: db.parser.listParser(MeetingRosterEntry.fromJson),
+        parserFn: Query_historyMeetingRoster.fromJson,
       ),
     );
+
+    return result.historyMeetingRoster
+        .map(MeetingRosterEntry.fromQueryResult)
+        .toList();
   }
 
-  /// Subscribes to all attendance records for [meetingId] within the given day
-  /// window. Streams only the small set of attendance rows so the large person
-  /// list (from [getMeetingRoster]) doesn't reload on each mark/unmark.
   Stream<List<AttendanceRecord>> streamAttendanceHistory({
     required String meetingId,
     required DateTime fromDate,
@@ -157,6 +157,278 @@ class MeetingsDAO extends DAOBase<Meeting>
         ).toJson(),
         parserFn: db.parser.singleParser(AttendanceRecord.fromJson),
       ),
+    );
+  }
+
+  Future<List<PersonMeetingAttendanceAnalysis>> getPersonAttendanceAnalysis({
+    required String personId,
+    required DateTimeRange range,
+    required List<Meeting> meetings,
+    bool? asServant,
+  }) async {
+    final meetingsById = {for (final meeting in meetings) meeting.id: meeting};
+
+    final where = [
+      Input_HistoryMeetingRosterBoolExp(
+        personId: Input_UuidComparisonExp($_eq: personId.toUuid()),
+      ),
+      if (meetingsById.isNotEmpty)
+        Input_HistoryMeetingRosterBoolExp(
+          meetingId: Input_UuidComparisonExp(
+            $_in: meetingsById.keys.map((e) => e.toUuid()).toList(),
+          ),
+        ),
+      if (asServant != null)
+        Input_HistoryMeetingRosterBoolExp(
+          asServant: Input_BooleanComparisonExp($_eq: asServant),
+        ),
+    ];
+
+    final rows = await _runAttendanceAnalysis(range: range, where: where);
+
+    return rows
+        .map(
+          (row) => PersonMeetingAttendanceAnalysis.fromQueryResult(
+            row,
+            meetingsById[row.meeting?.id.uuid]!,
+          ),
+        )
+        .toList();
+  }
+
+  Future<MeetingsAttendanceAnalysis> getPersonMeetingAttendanceAnalysis({
+    required Meeting meeting,
+    required DateTimeRange range,
+  }) => _getMeetingsAttendanceAnalysis(
+    title: meeting.name,
+    color: meeting.color,
+    range: range,
+    where: [
+      Input_HistoryMeetingsBoolExp(
+        id: Input_UuidComparisonExp($_eq: meeting.id.toUuid()),
+      ),
+    ],
+  );
+
+  Future<MeetingsAttendanceAnalysis> getServiceAttendanceAnalysis({
+    required Service service,
+    required DateTimeRange range,
+  }) => _getMeetingsAttendanceAnalysis(
+    title: service.name,
+    color: service.color,
+    range: range,
+    where: [
+      Input_HistoryMeetingsBoolExp(
+        serviceId: Input_UuidComparisonExp($_eq: service.id.toUuid()),
+      ),
+    ],
+  );
+
+  Future<MeetingsAttendanceAnalysis> getGroupAttendanceAnalysis({
+    required Group group,
+    required DateTimeRange range,
+  }) => _getMeetingsAttendanceAnalysis(
+    title: group.name,
+    color: group.color,
+    range: range,
+    where: [
+      Input_HistoryMeetingsBoolExp(
+        groupId: Input_UuidComparisonExp($_eq: group.id.toUuid()),
+      ),
+    ],
+  );
+
+  // Real meetings are almost always service-wide (no serviceStudyYear/
+  // serviceGender set), so the class's study year/gender narrows the
+  // attendee demographic rows rather than the meeting selection itself.
+  Future<MeetingsAttendanceAnalysis> getClassAttendanceAnalysis({
+    required Class class$,
+    required DateTimeRange range,
+  }) {
+    final serviceId = class$.service?.id.toUuid() ?? class$.serviceId?.toUuid();
+    final serviceStudyYear = class$.studyYear?.order ?? class$.serviceStudyYear;
+    final serviceGender = class$.serviceGender;
+
+    return _getMeetingsAttendanceAnalysis(
+      title: class$.name,
+      color: class$.color,
+      range: range,
+      where: [
+        Input_HistoryMeetingsBoolExp(
+          serviceId: switch (serviceId) {
+            final serviceId? => Input_UuidComparisonExp($_eq: serviceId),
+            null => null,
+          },
+        ),
+      ],
+      demographicsWhere: [
+        Input_HistoryMeetingDaysBoolExp(
+          studyYearId: switch (serviceStudyYear) {
+            final serviceStudyYear? => Input_SmallintComparisonExp(
+              $_eq: serviceStudyYear,
+            ),
+            null => null,
+          },
+          gender: switch (serviceGender) {
+            final serviceGender? => Input_BooleanComparisonExp(
+              $_eq: serviceGender,
+            ),
+            null => null,
+          },
+        ),
+      ],
+    );
+  }
+
+  Future<MeetingsAttendanceAnalysis> _getMeetingsAttendanceAnalysis({
+    required String title,
+    required Color? color,
+    required List<Input_HistoryMeetingsBoolExp> where,
+    required DateTimeRange range,
+    List<Input_HistoryMeetingDaysBoolExp> demographicsWhere = const [],
+  }) async {
+    final result = await graphQLClient.queryAndReturnParsed(
+      QueryOptions(
+        document: documentNodeQuerymeetingsAttendanceAnalysis,
+        operationName: 'meetingsAttendanceAnalysis',
+        variables: Variables_Query_meetingsAttendanceAnalysis(
+          dayFrom: range.start,
+          dayTo: range.end,
+          where: where,
+          demographicsWhere: demographicsWhere,
+        ).toJson(),
+        parserFn: Query_meetingsAttendanceAnalysis.fromJson,
+      ),
+    );
+
+    return MeetingsAttendanceAnalysis(
+      title: title,
+      color: color,
+      meetings: result.historyMeetings
+          .map(MeetingAttendanceSummary.fromQueryResult)
+          .toList(),
+    );
+  }
+
+  Future<List<PersonMeetingAttendanceAnalysis>> getRosterTrackRecords({
+    required Meeting meeting,
+    required DateTimeRange range,
+    required bool asServant,
+  }) async {
+    final where = [
+      Input_HistoryMeetingRosterBoolExp(
+        meetingId: Input_UuidComparisonExp($_eq: meeting.id.toUuid()),
+      ),
+      Input_HistoryMeetingRosterBoolExp(
+        asServant: Input_BooleanComparisonExp($_eq: asServant),
+      ),
+    ];
+
+    final rows = await _runAttendanceAnalysis(range: range, where: where);
+
+    return rows
+        .map(
+          (row) =>
+              PersonMeetingAttendanceAnalysis.fromQueryResult(row, meeting),
+        )
+        .toList();
+  }
+
+  Future<List<Query_attendanceAnalysis_historyMeetingRoster>>
+  _runAttendanceAnalysis({
+    required DateTimeRange range,
+    required List<Input_HistoryMeetingRosterBoolExp> where,
+  }) async {
+    final result = await graphQLClient.queryAndReturnParsed(
+      QueryOptions(
+        document: documentNodeQueryattendanceAnalysis,
+        operationName: 'attendanceAnalysis',
+        variables: Variables_Query_attendanceAnalysis(
+          dayFrom: range.start,
+          dayTo: range.end,
+          where: where,
+        ).toJson(),
+        parserFn: Query_attendanceAnalysis.fromJson,
+      ),
+    );
+
+    return result.historyMeetingRoster;
+  }
+
+  Future<List<Meeting>> getPersonMeetings({
+    required String personId,
+    bool? asServant,
+  }) async {
+    final where = [
+      if (asServant != null)
+        Input_HistoryMeetingRosterBoolExp(
+          asServant: Input_BooleanComparisonExp($_eq: asServant),
+        ),
+    ];
+
+    final result = await graphQLClient.queryAndReturnParsed(
+      QueryOptions(
+        document: documentNodeQuerypersonMeetings,
+        operationName: 'personMeetings',
+        variables: Variables_Query_personMeetings(
+          personId: personId.toUuid(),
+          where: where,
+        ).toJson(),
+        parserFn: Query_personMeetings.fromJson,
+      ),
+    );
+
+    final meetings = [
+      for (final row in result.historyMeetingRoster)
+        if (row.meeting case final meeting?) Meeting.fromJson(meeting.toJson()),
+    ];
+
+    return {
+      for (final meeting in meetings) meeting.id: meeting,
+    }.values.toList();
+  }
+
+  PaginatableStreamBase<LastRecordedByInfo> paginatePersonAttendance({
+    required String personId,
+    required String meetingId,
+    bool asServant = false,
+    int? limit,
+  }) {
+    return PaginatableStream.simple(
+      pageSize: limit ?? 100,
+      factory: (request) {
+        return graphQLClient.subscribeAndReturnParsed(
+          SubscriptionOptions(
+            document: documentNodeSubscriptionpersonMeetingAttendance,
+            operationName: 'personMeetingAttendance',
+            variables: Variables_Subscription_personMeetingAttendance(
+              where: [
+                Input_HistoryAttendanceHistoryBoolExp(
+                  personId: Input_UuidComparisonExp($_eq: personId.toUuid()),
+                  meetingId: Input_UuidComparisonExp($_eq: meetingId.toUuid()),
+                  asServant: Input_BooleanComparisonExp($_eq: asServant),
+                ),
+                if (request.cursor case final cursor?)
+                  Input_HistoryAttendanceHistoryBoolExp(
+                    datetime: Input_TimestamptzComparisonExp(
+                      $_lt: cursor.time,
+                    ),
+                  ),
+              ],
+              orderBy: [
+                Input_HistoryAttendanceHistoryOrderBy(
+                  datetime: Enum_OrderBy.DESC,
+                ),
+              ],
+              limit: request.pageSize,
+            ).toJson(),
+            parserFn: db.parser.singleListParser(
+              LastRecordedByInfo.fromJson,
+              pageSize: request.pageSize,
+            ),
+          ),
+        );
+      },
     );
   }
 }

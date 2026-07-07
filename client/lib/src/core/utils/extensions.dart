@@ -36,10 +36,6 @@ extension DateTimeX on DateTime {
     return DateTime(year, month, day);
   }
 
-  DateTime truncateToUTCDay() {
-    return DateTime.utc(year, month, day);
-  }
-
   DateTime replaceTimeOfDay(TimeOfDay time) {
     return DateTime(
       year,

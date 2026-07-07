@@ -3846,9 +3846,6 @@ class Variables_Query_personHistoryAnalysis {
     required DateTime timeFrom,
     required DateTime timeTo,
     required UuidValue personId,
-    List<UuidValue>? groupsIds,
-    List<UuidValue>? classesIds,
-    List<UuidValue>? servicesIds,
     bool? callHistory,
     bool? visitHistory,
     bool? editHistory,
@@ -3860,9 +3857,6 @@ class Variables_Query_personHistoryAnalysis {
     r'timeFrom': timeFrom,
     r'timeTo': timeTo,
     r'personId': personId,
-    if (groupsIds != null) r'groupsIds': groupsIds,
-    if (classesIds != null) r'classesIds': classesIds,
-    if (servicesIds != null) r'servicesIds': servicesIds,
     if (callHistory != null) r'callHistory': callHistory,
     if (visitHistory != null) r'visitHistory': visitHistory,
     if (editHistory != null) r'editHistory': editHistory,
@@ -3886,24 +3880,6 @@ class Variables_Query_personHistoryAnalysis {
     result$data['timeTo'] = tstzFromString(l$timeTo);
     final l$personId = data['personId'];
     result$data['personId'] = stringToUuid(l$personId);
-    if (data.containsKey('groupsIds')) {
-      final l$groupsIds = data['groupsIds'];
-      result$data['groupsIds'] = (l$groupsIds as List<dynamic>?)
-          ?.map((e) => stringToUuid(e))
-          .toList();
-    }
-    if (data.containsKey('classesIds')) {
-      final l$classesIds = data['classesIds'];
-      result$data['classesIds'] = (l$classesIds as List<dynamic>?)
-          ?.map((e) => stringToUuid(e))
-          .toList();
-    }
-    if (data.containsKey('servicesIds')) {
-      final l$servicesIds = data['servicesIds'];
-      result$data['servicesIds'] = (l$servicesIds as List<dynamic>?)
-          ?.map((e) => stringToUuid(e))
-          .toList();
-    }
     if (data.containsKey('callHistory')) {
       final l$callHistory = data['callHistory'];
       result$data['callHistory'] = (l$callHistory as bool);
@@ -3939,13 +3915,6 @@ class Variables_Query_personHistoryAnalysis {
 
   UuidValue get personId => (_$data['personId'] as UuidValue);
 
-  List<UuidValue>? get groupsIds => (_$data['groupsIds'] as List<UuidValue>?);
-
-  List<UuidValue>? get classesIds => (_$data['classesIds'] as List<UuidValue>?);
-
-  List<UuidValue>? get servicesIds =>
-      (_$data['servicesIds'] as List<UuidValue>?);
-
   bool? get callHistory => (_$data['callHistory'] as bool?);
 
   bool? get visitHistory => (_$data['visitHistory'] as bool?);
@@ -3968,24 +3937,6 @@ class Variables_Query_personHistoryAnalysis {
     result$data['timeTo'] = tstzToString(l$timeTo);
     final l$personId = personId;
     result$data['personId'] = uuidToString(l$personId);
-    if (_$data.containsKey('groupsIds')) {
-      final l$groupsIds = groupsIds;
-      result$data['groupsIds'] = l$groupsIds
-          ?.map((e) => uuidToString(e))
-          .toList();
-    }
-    if (_$data.containsKey('classesIds')) {
-      final l$classesIds = classesIds;
-      result$data['classesIds'] = l$classesIds
-          ?.map((e) => uuidToString(e))
-          .toList();
-    }
-    if (_$data.containsKey('servicesIds')) {
-      final l$servicesIds = servicesIds;
-      result$data['servicesIds'] = l$servicesIds
-          ?.map((e) => uuidToString(e))
-          .toList();
-    }
     if (_$data.containsKey('callHistory')) {
       final l$callHistory = callHistory;
       result$data['callHistory'] = (l$callHistory as bool);
@@ -4049,66 +4000,6 @@ class Variables_Query_personHistoryAnalysis {
     if (l$personId != lOther$personId) {
       return false;
     }
-    final l$groupsIds = groupsIds;
-    final lOther$groupsIds = other.groupsIds;
-    if (_$data.containsKey('groupsIds') !=
-        other._$data.containsKey('groupsIds')) {
-      return false;
-    }
-    if (l$groupsIds != null && lOther$groupsIds != null) {
-      if (l$groupsIds.length != lOther$groupsIds.length) {
-        return false;
-      }
-      for (int i = 0; i < l$groupsIds.length; i++) {
-        final l$groupsIds$entry = l$groupsIds[i];
-        final lOther$groupsIds$entry = lOther$groupsIds[i];
-        if (l$groupsIds$entry != lOther$groupsIds$entry) {
-          return false;
-        }
-      }
-    } else if (l$groupsIds != lOther$groupsIds) {
-      return false;
-    }
-    final l$classesIds = classesIds;
-    final lOther$classesIds = other.classesIds;
-    if (_$data.containsKey('classesIds') !=
-        other._$data.containsKey('classesIds')) {
-      return false;
-    }
-    if (l$classesIds != null && lOther$classesIds != null) {
-      if (l$classesIds.length != lOther$classesIds.length) {
-        return false;
-      }
-      for (int i = 0; i < l$classesIds.length; i++) {
-        final l$classesIds$entry = l$classesIds[i];
-        final lOther$classesIds$entry = lOther$classesIds[i];
-        if (l$classesIds$entry != lOther$classesIds$entry) {
-          return false;
-        }
-      }
-    } else if (l$classesIds != lOther$classesIds) {
-      return false;
-    }
-    final l$servicesIds = servicesIds;
-    final lOther$servicesIds = other.servicesIds;
-    if (_$data.containsKey('servicesIds') !=
-        other._$data.containsKey('servicesIds')) {
-      return false;
-    }
-    if (l$servicesIds != null && lOther$servicesIds != null) {
-      if (l$servicesIds.length != lOther$servicesIds.length) {
-        return false;
-      }
-      for (int i = 0; i < l$servicesIds.length; i++) {
-        final l$servicesIds$entry = l$servicesIds[i];
-        final lOther$servicesIds$entry = lOther$servicesIds[i];
-        if (l$servicesIds$entry != lOther$servicesIds$entry) {
-          return false;
-        }
-      }
-    } else if (l$servicesIds != lOther$servicesIds) {
-      return false;
-    }
     final l$callHistory = callHistory;
     final lOther$callHistory = other.callHistory;
     if (_$data.containsKey('callHistory') !=
@@ -4164,9 +4055,6 @@ class Variables_Query_personHistoryAnalysis {
     final l$timeFrom = timeFrom;
     final l$timeTo = timeTo;
     final l$personId = personId;
-    final l$groupsIds = groupsIds;
-    final l$classesIds = classesIds;
-    final l$servicesIds = servicesIds;
     final l$callHistory = callHistory;
     final l$visitHistory = visitHistory;
     final l$editHistory = editHistory;
@@ -4178,21 +4066,6 @@ class Variables_Query_personHistoryAnalysis {
       l$timeFrom,
       l$timeTo,
       l$personId,
-      _$data.containsKey('groupsIds')
-          ? l$groupsIds == null
-                ? null
-                : Object.hashAll(l$groupsIds.map((v) => v))
-          : const {},
-      _$data.containsKey('classesIds')
-          ? l$classesIds == null
-                ? null
-                : Object.hashAll(l$classesIds.map((v) => v))
-          : const {},
-      _$data.containsKey('servicesIds')
-          ? l$servicesIds == null
-                ? null
-                : Object.hashAll(l$servicesIds.map((v) => v))
-          : const {},
       _$data.containsKey('callHistory') ? l$callHistory : const {},
       _$data.containsKey('visitHistory') ? l$visitHistory : const {},
       _$data.containsKey('editHistory') ? l$editHistory : const {},
@@ -4217,9 +4090,6 @@ abstract class CopyWith_Variables_Query_personHistoryAnalysis<TRes> {
     DateTime? timeFrom,
     DateTime? timeTo,
     UuidValue? personId,
-    List<UuidValue>? groupsIds,
-    List<UuidValue>? classesIds,
-    List<UuidValue>? servicesIds,
     bool? callHistory,
     bool? visitHistory,
     bool? editHistory,
@@ -4247,9 +4117,6 @@ class _CopyWithImpl_Variables_Query_personHistoryAnalysis<TRes>
     Object? timeFrom = _undefined,
     Object? timeTo = _undefined,
     Object? personId = _undefined,
-    Object? groupsIds = _undefined,
-    Object? classesIds = _undefined,
-    Object? servicesIds = _undefined,
     Object? callHistory = _undefined,
     Object? visitHistory = _undefined,
     Object? editHistory = _undefined,
@@ -4268,11 +4135,6 @@ class _CopyWithImpl_Variables_Query_personHistoryAnalysis<TRes>
         'timeTo': (timeTo as DateTime),
       if (personId != _undefined && personId != null)
         'personId': (personId as UuidValue),
-      if (groupsIds != _undefined) 'groupsIds': (groupsIds as List<UuidValue>?),
-      if (classesIds != _undefined)
-        'classesIds': (classesIds as List<UuidValue>?),
-      if (servicesIds != _undefined)
-        'servicesIds': (servicesIds as List<UuidValue>?),
       if (callHistory != _undefined && callHistory != null)
         'callHistory': (callHistory as bool),
       if (visitHistory != _undefined && visitHistory != null)
@@ -4299,9 +4161,6 @@ class _CopyWithStubImpl_Variables_Query_personHistoryAnalysis<TRes>
     DateTime? timeFrom,
     DateTime? timeTo,
     UuidValue? personId,
-    List<UuidValue>? groupsIds,
-    List<UuidValue>? classesIds,
-    List<UuidValue>? servicesIds,
     bool? callHistory,
     bool? visitHistory,
     bool? editHistory,
@@ -4486,33 +4345,6 @@ const documentNodeQuerypersonHistoryAnalysis = DocumentNode(
           variable: VariableNode(name: NameNode(value: 'personId')),
           type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
           defaultValue: DefaultValueNode(value: null),
-          directives: [],
-        ),
-        VariableDefinitionNode(
-          variable: VariableNode(name: NameNode(value: 'groupsIds')),
-          type: ListTypeNode(
-            type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
-            isNonNull: false,
-          ),
-          defaultValue: DefaultValueNode(value: ListValueNode(values: [])),
-          directives: [],
-        ),
-        VariableDefinitionNode(
-          variable: VariableNode(name: NameNode(value: 'classesIds')),
-          type: ListTypeNode(
-            type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
-            isNonNull: false,
-          ),
-          defaultValue: DefaultValueNode(value: ListValueNode(values: [])),
-          directives: [],
-        ),
-        VariableDefinitionNode(
-          variable: VariableNode(name: NameNode(value: 'servicesIds')),
-          type: ListTypeNode(
-            type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
-            isNonNull: false,
-          ),
-          defaultValue: DefaultValueNode(value: ListValueNode(values: [])),
           directives: [],
         ),
         VariableDefinitionNode(
@@ -5231,183 +5063,6 @@ const documentNodeQuerypersonHistoryAnalysis = DocumentNode(
                   ),
                 ),
                 FieldNode(
-                  name: NameNode(value: 'services'),
-                  alias: null,
-                  arguments: [
-                    ArgumentNode(
-                      name: NameNode(value: 'where'),
-                      value: ObjectValueNode(
-                        fields: [
-                          ObjectFieldNode(
-                            name: NameNode(value: 'serviceId'),
-                            value: ObjectValueNode(
-                              fields: [
-                                ObjectFieldNode(
-                                  name: NameNode(value: '_in'),
-                                  value: VariableNode(
-                                    name: NameNode(value: 'servicesIds'),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                  directives: [],
-                  selectionSet: SelectionSetNode(
-                    selections: [
-                      FieldNode(
-                        name: NameNode(value: 'service'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: SelectionSetNode(
-                          selections: [
-                            FragmentSpreadNode(
-                              name: NameNode(value: 'ServiceNoPhoto'),
-                              directives: [],
-                            ),
-                            FieldNode(
-                              name: NameNode(value: '__typename'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null,
-                            ),
-                          ],
-                        ),
-                      ),
-                      FieldNode(
-                        name: NameNode(value: '__typename'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null,
-                      ),
-                    ],
-                  ),
-                ),
-                FieldNode(
-                  name: NameNode(value: 'classes'),
-                  alias: null,
-                  arguments: [
-                    ArgumentNode(
-                      name: NameNode(value: 'where'),
-                      value: ObjectValueNode(
-                        fields: [
-                          ObjectFieldNode(
-                            name: NameNode(value: 'classId'),
-                            value: ObjectValueNode(
-                              fields: [
-                                ObjectFieldNode(
-                                  name: NameNode(value: '_in'),
-                                  value: VariableNode(
-                                    name: NameNode(value: 'classesIds'),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                  directives: [],
-                  selectionSet: SelectionSetNode(
-                    selections: [
-                      FieldNode(
-                        name: NameNode(value: 'class'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: SelectionSetNode(
-                          selections: [
-                            FragmentSpreadNode(
-                              name: NameNode(value: 'ClassNoPhoto'),
-                              directives: [],
-                            ),
-                            FieldNode(
-                              name: NameNode(value: '__typename'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null,
-                            ),
-                          ],
-                        ),
-                      ),
-                      FieldNode(
-                        name: NameNode(value: '__typename'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null,
-                      ),
-                    ],
-                  ),
-                ),
-                FieldNode(
-                  name: NameNode(value: 'groups'),
-                  alias: null,
-                  arguments: [
-                    ArgumentNode(
-                      name: NameNode(value: 'where'),
-                      value: ObjectValueNode(
-                        fields: [
-                          ObjectFieldNode(
-                            name: NameNode(value: 'groupId'),
-                            value: ObjectValueNode(
-                              fields: [
-                                ObjectFieldNode(
-                                  name: NameNode(value: '_in'),
-                                  value: VariableNode(
-                                    name: NameNode(value: 'groupsIds'),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                  directives: [],
-                  selectionSet: SelectionSetNode(
-                    selections: [
-                      FieldNode(
-                        name: NameNode(value: 'group'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: SelectionSetNode(
-                          selections: [
-                            FragmentSpreadNode(
-                              name: NameNode(value: 'GroupNoPhoto'),
-                              directives: [],
-                            ),
-                            FieldNode(
-                              name: NameNode(value: '__typename'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null,
-                            ),
-                          ],
-                        ),
-                      ),
-                      FieldNode(
-                        name: NameNode(value: '__typename'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null,
-                      ),
-                    ],
-                  ),
-                ),
-                FieldNode(
                   name: NameNode(value: '__typename'),
                   alias: null,
                   arguments: [],
@@ -5427,9 +5082,6 @@ const documentNodeQuerypersonHistoryAnalysis = DocumentNode(
         ],
       ),
     ),
-    fragmentDefinitionServiceNoPhoto,
-    fragmentDefinitionClassNoPhoto,
-    fragmentDefinitionGroupNoPhoto,
   ],
 );
 
@@ -5442,9 +5094,6 @@ class Query_personHistoryAnalysis_personsByPk {
     this.editHistoryAggregate,
     this.kodasHistoryAggregate,
     this.confessionHistoryAggregate,
-    required this.services,
-    required this.classes,
-    required this.groups,
     this.$__typename = 'Persons',
   });
 
@@ -5458,9 +5107,6 @@ class Query_personHistoryAnalysis_personsByPk {
     final l$editHistoryAggregate = json['editHistoryAggregate'];
     final l$kodasHistoryAggregate = json['kodasHistoryAggregate'];
     final l$confessionHistoryAggregate = json['confessionHistoryAggregate'];
-    final l$services = json['services'];
-    final l$classes = json['classes'];
-    final l$groups = json['groups'];
     final l$$__typename = json['__typename'];
     return Query_personHistoryAnalysis_personsByPk(
       id: stringToUuid(l$id),
@@ -5490,27 +5136,6 @@ class Query_personHistoryAnalysis_personsByPk {
           : Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate.fromJson(
               (l$confessionHistoryAggregate as Map<String, dynamic>),
             ),
-      services: (l$services as List<dynamic>)
-          .map(
-            (e) => Query_personHistoryAnalysis_personsByPk_services.fromJson(
-              (e as Map<String, dynamic>),
-            ),
-          )
-          .toList(),
-      classes: (l$classes as List<dynamic>)
-          .map(
-            (e) => Query_personHistoryAnalysis_personsByPk_classes.fromJson(
-              (e as Map<String, dynamic>),
-            ),
-          )
-          .toList(),
-      groups: (l$groups as List<dynamic>)
-          .map(
-            (e) => Query_personHistoryAnalysis_personsByPk_groups.fromJson(
-              (e as Map<String, dynamic>),
-            ),
-          )
-          .toList(),
       $__typename: (l$$__typename as String),
     );
   }
@@ -5534,12 +5159,6 @@ class Query_personHistoryAnalysis_personsByPk {
   final Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate?
   confessionHistoryAggregate;
 
-  final List<Query_personHistoryAnalysis_personsByPk_services> services;
-
-  final List<Query_personHistoryAnalysis_personsByPk_classes> classes;
-
-  final List<Query_personHistoryAnalysis_personsByPk_groups> groups;
-
   final String $__typename;
 
   Map<String, dynamic> toJson() {
@@ -5559,12 +5178,6 @@ class Query_personHistoryAnalysis_personsByPk {
     final l$confessionHistoryAggregate = confessionHistoryAggregate;
     _resultData['confessionHistoryAggregate'] = l$confessionHistoryAggregate
         ?.toJson();
-    final l$services = services;
-    _resultData['services'] = l$services.map((e) => e.toJson()).toList();
-    final l$classes = classes;
-    _resultData['classes'] = l$classes.map((e) => e.toJson()).toList();
-    final l$groups = groups;
-    _resultData['groups'] = l$groups.map((e) => e.toJson()).toList();
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -5579,9 +5192,6 @@ class Query_personHistoryAnalysis_personsByPk {
     final l$editHistoryAggregate = editHistoryAggregate;
     final l$kodasHistoryAggregate = kodasHistoryAggregate;
     final l$confessionHistoryAggregate = confessionHistoryAggregate;
-    final l$services = services;
-    final l$classes = classes;
-    final l$groups = groups;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$id,
@@ -5591,9 +5201,6 @@ class Query_personHistoryAnalysis_personsByPk {
       l$editHistoryAggregate,
       l$kodasHistoryAggregate,
       l$confessionHistoryAggregate,
-      Object.hashAll(l$services.map((v) => v)),
-      Object.hashAll(l$classes.map((v) => v)),
-      Object.hashAll(l$groups.map((v) => v)),
       l$$__typename,
     ]);
   }
@@ -5642,42 +5249,6 @@ class Query_personHistoryAnalysis_personsByPk {
     if (l$confessionHistoryAggregate != lOther$confessionHistoryAggregate) {
       return false;
     }
-    final l$services = services;
-    final lOther$services = other.services;
-    if (l$services.length != lOther$services.length) {
-      return false;
-    }
-    for (int i = 0; i < l$services.length; i++) {
-      final l$services$entry = l$services[i];
-      final lOther$services$entry = lOther$services[i];
-      if (l$services$entry != lOther$services$entry) {
-        return false;
-      }
-    }
-    final l$classes = classes;
-    final lOther$classes = other.classes;
-    if (l$classes.length != lOther$classes.length) {
-      return false;
-    }
-    for (int i = 0; i < l$classes.length; i++) {
-      final l$classes$entry = l$classes[i];
-      final lOther$classes$entry = lOther$classes[i];
-      if (l$classes$entry != lOther$classes$entry) {
-        return false;
-      }
-    }
-    final l$groups = groups;
-    final lOther$groups = other.groups;
-    if (l$groups.length != lOther$groups.length) {
-      return false;
-    }
-    for (int i = 0; i < l$groups.length; i++) {
-      final l$groups$entry = l$groups[i];
-      final lOther$groups$entry = lOther$groups[i];
-      if (l$groups$entry != lOther$groups$entry) {
-        return false;
-      }
-    }
     final l$$__typename = $__typename;
     final lOther$$__typename = other.$__typename;
     if (l$$__typename != lOther$$__typename) {
@@ -5718,9 +5289,6 @@ abstract class CopyWith_Query_personHistoryAnalysis_personsByPk<TRes> {
     kodasHistoryAggregate,
     Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate?
     confessionHistoryAggregate,
-    List<Query_personHistoryAnalysis_personsByPk_services>? services,
-    List<Query_personHistoryAnalysis_personsByPk_classes>? classes,
-    List<Query_personHistoryAnalysis_personsByPk_groups>? groups,
     String? $__typename,
   });
   CopyWith_Query_personHistoryAnalysis_personsByPk_callHistoryAggregate<TRes>
@@ -5735,36 +5303,6 @@ abstract class CopyWith_Query_personHistoryAnalysis_personsByPk<TRes> {
     TRes
   >
   get confessionHistoryAggregate;
-  TRes services(
-    Iterable<Query_personHistoryAnalysis_personsByPk_services> Function(
-      Iterable<
-        CopyWith_Query_personHistoryAnalysis_personsByPk_services<
-          Query_personHistoryAnalysis_personsByPk_services
-        >
-      >,
-    )
-    _fn,
-  );
-  TRes classes(
-    Iterable<Query_personHistoryAnalysis_personsByPk_classes> Function(
-      Iterable<
-        CopyWith_Query_personHistoryAnalysis_personsByPk_classes<
-          Query_personHistoryAnalysis_personsByPk_classes
-        >
-      >,
-    )
-    _fn,
-  );
-  TRes groups(
-    Iterable<Query_personHistoryAnalysis_personsByPk_groups> Function(
-      Iterable<
-        CopyWith_Query_personHistoryAnalysis_personsByPk_groups<
-          Query_personHistoryAnalysis_personsByPk_groups
-        >
-      >,
-    )
-    _fn,
-  );
 }
 
 class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk<TRes>
@@ -5788,9 +5326,6 @@ class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk<TRes>
     Object? editHistoryAggregate = _undefined,
     Object? kodasHistoryAggregate = _undefined,
     Object? confessionHistoryAggregate = _undefined,
-    Object? services = _undefined,
-    Object? classes = _undefined,
-    Object? groups = _undefined,
     Object? $__typename = _undefined,
   }) => _then(
     Query_personHistoryAnalysis_personsByPk(
@@ -5818,16 +5353,6 @@ class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk<TRes>
           ? _instance.confessionHistoryAggregate
           : (confessionHistoryAggregate
                 as Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate?),
-      services: services == _undefined || services == null
-          ? _instance.services
-          : (services
-                as List<Query_personHistoryAnalysis_personsByPk_services>),
-      classes: classes == _undefined || classes == null
-          ? _instance.classes
-          : (classes as List<Query_personHistoryAnalysis_personsByPk_classes>),
-      groups: groups == _undefined || groups == null
-          ? _instance.groups
-          : (groups as List<Query_personHistoryAnalysis_personsByPk_groups>),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -5901,66 +5426,6 @@ class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk<TRes>
             (e) => call(confessionHistoryAggregate: e),
           );
   }
-
-  TRes services(
-    Iterable<Query_personHistoryAnalysis_personsByPk_services> Function(
-      Iterable<
-        CopyWith_Query_personHistoryAnalysis_personsByPk_services<
-          Query_personHistoryAnalysis_personsByPk_services
-        >
-      >,
-    )
-    _fn,
-  ) => call(
-    services: _fn(
-      _instance.services.map(
-        (e) => CopyWith_Query_personHistoryAnalysis_personsByPk_services(
-          e,
-          (i) => i,
-        ),
-      ),
-    ).toList(),
-  );
-
-  TRes classes(
-    Iterable<Query_personHistoryAnalysis_personsByPk_classes> Function(
-      Iterable<
-        CopyWith_Query_personHistoryAnalysis_personsByPk_classes<
-          Query_personHistoryAnalysis_personsByPk_classes
-        >
-      >,
-    )
-    _fn,
-  ) => call(
-    classes: _fn(
-      _instance.classes.map(
-        (e) => CopyWith_Query_personHistoryAnalysis_personsByPk_classes(
-          e,
-          (i) => i,
-        ),
-      ),
-    ).toList(),
-  );
-
-  TRes groups(
-    Iterable<Query_personHistoryAnalysis_personsByPk_groups> Function(
-      Iterable<
-        CopyWith_Query_personHistoryAnalysis_personsByPk_groups<
-          Query_personHistoryAnalysis_personsByPk_groups
-        >
-      >,
-    )
-    _fn,
-  ) => call(
-    groups: _fn(
-      _instance.groups.map(
-        (e) => CopyWith_Query_personHistoryAnalysis_personsByPk_groups(
-          e,
-          (i) => i,
-        ),
-      ),
-    ).toList(),
-  );
 }
 
 class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk<TRes>
@@ -5982,9 +5447,6 @@ class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk<TRes>
     kodasHistoryAggregate,
     Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate?
     confessionHistoryAggregate,
-    List<Query_personHistoryAnalysis_personsByPk_services>? services,
-    List<Query_personHistoryAnalysis_personsByPk_classes>? classes,
-    List<Query_personHistoryAnalysis_personsByPk_groups>? groups,
     String? $__typename,
   }) => _res;
 
@@ -6019,12 +5481,6 @@ class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk<TRes>
       CopyWith_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate.stub(
         _res,
       );
-
-  services(_fn) => _res;
-
-  classes(_fn) => _res;
-
-  groups(_fn) => _res;
 }
 
 class Query_personHistoryAnalysis_personsByPk_callHistoryAggregate {
@@ -9802,393 +9258,6 @@ class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_confessionHistor
   TRes _res;
 
   call({DateTime? time, String? $__typename}) => _res;
-}
-
-class Query_personHistoryAnalysis_personsByPk_services {
-  Query_personHistoryAnalysis_personsByPk_services({
-    required this.service,
-    this.$__typename = 'PersonsServices',
-  });
-
-  factory Query_personHistoryAnalysis_personsByPk_services.fromJson(
-    Map<String, dynamic> json,
-  ) {
-    final l$service = json['service'];
-    final l$$__typename = json['__typename'];
-    return Query_personHistoryAnalysis_personsByPk_services(
-      service: Fragment_ServiceNoPhoto.fromJson(
-        (l$service as Map<String, dynamic>),
-      ),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final Fragment_ServiceNoPhoto service;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$service = service;
-    _resultData['service'] = l$service.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$service = service;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$service, l$$__typename]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Query_personHistoryAnalysis_personsByPk_services ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$service = service;
-    final lOther$service = other.service;
-    if (l$service != lOther$service) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_services
-    on Query_personHistoryAnalysis_personsByPk_services {
-  CopyWith_Query_personHistoryAnalysis_personsByPk_services<
-    Query_personHistoryAnalysis_personsByPk_services
-  >
-  get copyWith =>
-      CopyWith_Query_personHistoryAnalysis_personsByPk_services(this, (i) => i);
-}
-
-abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_services<TRes> {
-  factory CopyWith_Query_personHistoryAnalysis_personsByPk_services(
-    Query_personHistoryAnalysis_personsByPk_services instance,
-    TRes Function(Query_personHistoryAnalysis_personsByPk_services) then,
-  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_services;
-
-  factory CopyWith_Query_personHistoryAnalysis_personsByPk_services.stub(
-    TRes res,
-  ) = _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_services;
-
-  TRes call({Fragment_ServiceNoPhoto? service, String? $__typename});
-  CopyWith_Fragment_ServiceNoPhoto<TRes> get service;
-}
-
-class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_services<TRes>
-    implements CopyWith_Query_personHistoryAnalysis_personsByPk_services<TRes> {
-  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_services(
-    this._instance,
-    this._then,
-  );
-
-  final Query_personHistoryAnalysis_personsByPk_services _instance;
-
-  final TRes Function(Query_personHistoryAnalysis_personsByPk_services) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({Object? service = _undefined, Object? $__typename = _undefined}) =>
-      _then(
-        Query_personHistoryAnalysis_personsByPk_services(
-          service: service == _undefined || service == null
-              ? _instance.service
-              : (service as Fragment_ServiceNoPhoto),
-          $__typename: $__typename == _undefined || $__typename == null
-              ? _instance.$__typename
-              : ($__typename as String),
-        ),
-      );
-
-  CopyWith_Fragment_ServiceNoPhoto<TRes> get service {
-    final local$service = _instance.service;
-    return CopyWith_Fragment_ServiceNoPhoto(
-      local$service,
-      (e) => call(service: e),
-    );
-  }
-}
-
-class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_services<TRes>
-    implements CopyWith_Query_personHistoryAnalysis_personsByPk_services<TRes> {
-  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_services(this._res);
-
-  TRes _res;
-
-  call({Fragment_ServiceNoPhoto? service, String? $__typename}) => _res;
-
-  CopyWith_Fragment_ServiceNoPhoto<TRes> get service =>
-      CopyWith_Fragment_ServiceNoPhoto.stub(_res);
-}
-
-class Query_personHistoryAnalysis_personsByPk_classes {
-  Query_personHistoryAnalysis_personsByPk_classes({
-    this.$class,
-    this.$__typename = 'ClassesPersons',
-  });
-
-  factory Query_personHistoryAnalysis_personsByPk_classes.fromJson(
-    Map<String, dynamic> json,
-  ) {
-    final l$$class = json['class'];
-    final l$$__typename = json['__typename'];
-    return Query_personHistoryAnalysis_personsByPk_classes(
-      $class: l$$class == null
-          ? null
-          : Fragment_ClassNoPhoto.fromJson((l$$class as Map<String, dynamic>)),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final Fragment_ClassNoPhoto? $class;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$$class = $class;
-    _resultData['class'] = l$$class?.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$$class = $class;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$$class, l$$__typename]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Query_personHistoryAnalysis_personsByPk_classes ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$$class = $class;
-    final lOther$$class = other.$class;
-    if (l$$class != lOther$$class) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_classes
-    on Query_personHistoryAnalysis_personsByPk_classes {
-  CopyWith_Query_personHistoryAnalysis_personsByPk_classes<
-    Query_personHistoryAnalysis_personsByPk_classes
-  >
-  get copyWith =>
-      CopyWith_Query_personHistoryAnalysis_personsByPk_classes(this, (i) => i);
-}
-
-abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_classes<TRes> {
-  factory CopyWith_Query_personHistoryAnalysis_personsByPk_classes(
-    Query_personHistoryAnalysis_personsByPk_classes instance,
-    TRes Function(Query_personHistoryAnalysis_personsByPk_classes) then,
-  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes;
-
-  factory CopyWith_Query_personHistoryAnalysis_personsByPk_classes.stub(
-    TRes res,
-  ) = _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes;
-
-  TRes call({Fragment_ClassNoPhoto? $class, String? $__typename});
-  CopyWith_Fragment_ClassNoPhoto<TRes> get $class;
-}
-
-class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes<TRes>
-    implements CopyWith_Query_personHistoryAnalysis_personsByPk_classes<TRes> {
-  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_classes(
-    this._instance,
-    this._then,
-  );
-
-  final Query_personHistoryAnalysis_personsByPk_classes _instance;
-
-  final TRes Function(Query_personHistoryAnalysis_personsByPk_classes) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({Object? $class = _undefined, Object? $__typename = _undefined}) =>
-      _then(
-        Query_personHistoryAnalysis_personsByPk_classes(
-          $class: $class == _undefined
-              ? _instance.$class
-              : ($class as Fragment_ClassNoPhoto?),
-          $__typename: $__typename == _undefined || $__typename == null
-              ? _instance.$__typename
-              : ($__typename as String),
-        ),
-      );
-
-  CopyWith_Fragment_ClassNoPhoto<TRes> get $class {
-    final local$$class = _instance.$class;
-    return local$$class == null
-        ? CopyWith_Fragment_ClassNoPhoto.stub(_then(_instance))
-        : CopyWith_Fragment_ClassNoPhoto(local$$class, (e) => call($class: e));
-  }
-}
-
-class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes<TRes>
-    implements CopyWith_Query_personHistoryAnalysis_personsByPk_classes<TRes> {
-  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_classes(this._res);
-
-  TRes _res;
-
-  call({Fragment_ClassNoPhoto? $class, String? $__typename}) => _res;
-
-  CopyWith_Fragment_ClassNoPhoto<TRes> get $class =>
-      CopyWith_Fragment_ClassNoPhoto.stub(_res);
-}
-
-class Query_personHistoryAnalysis_personsByPk_groups {
-  Query_personHistoryAnalysis_personsByPk_groups({
-    required this.group,
-    this.$__typename = 'PersonsGroups',
-  });
-
-  factory Query_personHistoryAnalysis_personsByPk_groups.fromJson(
-    Map<String, dynamic> json,
-  ) {
-    final l$group = json['group'];
-    final l$$__typename = json['__typename'];
-    return Query_personHistoryAnalysis_personsByPk_groups(
-      group: Fragment_GroupNoPhoto.fromJson((l$group as Map<String, dynamic>)),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final Fragment_GroupNoPhoto group;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$group = group;
-    _resultData['group'] = l$group.toJson();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$group = group;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$group, l$$__typename]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Query_personHistoryAnalysis_personsByPk_groups ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$group = group;
-    final lOther$group = other.group;
-    if (l$group != lOther$group) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension_Query_personHistoryAnalysis_personsByPk_groups
-    on Query_personHistoryAnalysis_personsByPk_groups {
-  CopyWith_Query_personHistoryAnalysis_personsByPk_groups<
-    Query_personHistoryAnalysis_personsByPk_groups
-  >
-  get copyWith =>
-      CopyWith_Query_personHistoryAnalysis_personsByPk_groups(this, (i) => i);
-}
-
-abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_groups<TRes> {
-  factory CopyWith_Query_personHistoryAnalysis_personsByPk_groups(
-    Query_personHistoryAnalysis_personsByPk_groups instance,
-    TRes Function(Query_personHistoryAnalysis_personsByPk_groups) then,
-  ) = _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_groups;
-
-  factory CopyWith_Query_personHistoryAnalysis_personsByPk_groups.stub(
-    TRes res,
-  ) = _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_groups;
-
-  TRes call({Fragment_GroupNoPhoto? group, String? $__typename});
-  CopyWith_Fragment_GroupNoPhoto<TRes> get group;
-}
-
-class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_groups<TRes>
-    implements CopyWith_Query_personHistoryAnalysis_personsByPk_groups<TRes> {
-  _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_groups(
-    this._instance,
-    this._then,
-  );
-
-  final Query_personHistoryAnalysis_personsByPk_groups _instance;
-
-  final TRes Function(Query_personHistoryAnalysis_personsByPk_groups) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({Object? group = _undefined, Object? $__typename = _undefined}) =>
-      _then(
-        Query_personHistoryAnalysis_personsByPk_groups(
-          group: group == _undefined || group == null
-              ? _instance.group
-              : (group as Fragment_GroupNoPhoto),
-          $__typename: $__typename == _undefined || $__typename == null
-              ? _instance.$__typename
-              : ($__typename as String),
-        ),
-      );
-
-  CopyWith_Fragment_GroupNoPhoto<TRes> get group {
-    final local$group = _instance.group;
-    return CopyWith_Fragment_GroupNoPhoto(local$group, (e) => call(group: e));
-  }
-}
-
-class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_groups<TRes>
-    implements CopyWith_Query_personHistoryAnalysis_personsByPk_groups<TRes> {
-  _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_groups(this._res);
-
-  TRes _res;
-
-  call({Fragment_GroupNoPhoto? group, String? $__typename}) => _res;
-
-  CopyWith_Fragment_GroupNoPhoto<TRes> get group =>
-      CopyWith_Fragment_GroupNoPhoto.stub(_res);
 }
 
 class Variables_Query_personServicesClassesGroups {
