@@ -27,7 +27,7 @@ class AttendanceRangeSelectorTile extends StatelessWidget {
       ),
       value: [_range.start, _range.end],
     );
-    if (rslt == null) return;
+    if (rslt == null || rslt.nonNulls.length < 2) return;
 
     onChanged(
       CustomDateTimeRangePreset(
