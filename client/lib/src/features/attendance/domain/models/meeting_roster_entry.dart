@@ -41,10 +41,13 @@ class MeetingRosterEntry with _$MeetingRosterEntry {
       studyYearId: row.studyYearId,
       photoUpdatedAt: row.photoUpdatedAt,
       blurhash: row.blurhash,
-      studyYear: StudyYear(
-        order: row.studyYearId ?? 0,
-        name: row.studyYearName ?? '',
-      ),
+      studyYear: switch (row.studyYearId) {
+        null => null,
+        final studyYearId => StudyYear(
+          order: studyYearId,
+          name: row.studyYearName ?? '',
+        ),
+      },
     );
 
     return MeetingRosterEntry(
