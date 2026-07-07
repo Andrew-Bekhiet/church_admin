@@ -14,7 +14,6 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
 
   static const Duration _searchDebounce = Duration(milliseconds: 300);
   static const AttendanceNameAlphabet _alphabet = AttendanceNameAlphabet();
-  static const int _rosterLimit = 1000;
 
   final MeetingsDAO _dao;
   final AuthBloc _authBloc;
@@ -289,7 +288,6 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
     final entries = await _dao.getMeetingRoster(
       meetingId: _meeting.id,
       groupByStudyYear: _grouping == AttendanceGrouping.studyYear,
-      limit: _rosterLimit,
     );
 
     if (requestId != _rosterRequestId || isClosed) return;
