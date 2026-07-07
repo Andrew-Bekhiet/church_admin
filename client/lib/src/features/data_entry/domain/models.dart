@@ -1,6 +1,5 @@
 export 'models/address.dart';
 export 'models/area.dart';
-export 'models/attendance_analyzable.dart';
 export 'models/church.dart';
 export 'models/class.dart';
 export 'models/college.dart';

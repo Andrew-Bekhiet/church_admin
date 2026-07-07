@@ -2,7 +2,6 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 
-/// A selectable meeting row used inside the Switch-Meeting bottom sheet.
 class MeetingListTile extends StatelessWidget {
   final Meeting meeting;
   final bool selected;

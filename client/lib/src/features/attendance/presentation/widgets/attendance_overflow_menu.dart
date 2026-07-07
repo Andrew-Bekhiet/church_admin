@@ -2,19 +2,23 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 
-/// Overflow menu holding the less-frequent view options: sorting by attendance
-/// time and grouping by study year.
 class AttendanceOverflowMenu extends StatelessWidget {
+  static const List<int> _streakWindowOptions = [30, 60, 90];
+
   final AttendanceSorting sorting;
   final AttendanceGrouping grouping;
+  final int streakWindowDays;
   final ValueChanged<AttendanceSorting> onSortChanged;
   final ValueChanged<AttendanceGrouping> onGroupingChanged;
+  final ValueChanged<int> onStreakWindowChanged;
 
   const AttendanceOverflowMenu({
     required this.sorting,
     required this.grouping,
+    required this.streakWindowDays,
     required this.onSortChanged,
     required this.onGroupingChanged,
+    required this.onStreakWindowChanged,
     super.key,
   });
 
@@ -53,6 +57,30 @@ class AttendanceOverflowMenu extends StatelessWidget {
             ),
           ),
         ),
+        const PopupMenuDivider(),
+        PopupMenuItem<void>(
+          enabled: false,
+          child: Text(
+            'نافذة التحليل',
+            style: Theme.of(context).textTheme.labelSmall,
+          ),
+        ),
+        for (final days in _streakWindowOptions)
+          PopupMenuItem<void>(
+            onTap: () => onStreakWindowChanged(days),
+            child: ListTile(
+              contentPadding: EdgeInsets.zero,
+              leading: const Icon(Symbols.date_range),
+              title: Text('$days يوم'),
+              trailing: Visibility(
+                visible: streakWindowDays == days,
+                maintainAnimation: true,
+                maintainSize: true,
+                maintainState: true,
+                child: const Icon(Symbols.check),
+              ),
+            ),
+          ),
       ],
     );
   }

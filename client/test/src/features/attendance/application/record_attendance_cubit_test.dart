@@ -14,6 +14,13 @@ void main() {
   group('RecordAttendanceCubit', () {
     late _Fixture f;
 
+    setUpAll(() {
+      registerFallbackValue(_Fixture.makeMeeting());
+      registerFallbackValue(
+        DateTimeRange(start: DateTime(2026), end: DateTime(2026)),
+      );
+    });
+
     setUp(() => f = _Fixture());
     tearDown(defaultTearDown);
 
@@ -192,6 +199,54 @@ void main() {
       );
     });
 
+    group('changeStreakWindow', () {
+      blocTest<RecordAttendanceCubit, RecordAttendanceState>(
+        'reloads track records with the new window and does not re-call '
+        'getMeetingRoster or re-subscribe attendance',
+        build: () => f.createCubit(),
+        act: (cubit) async {
+          await cubit.stream.whereType<RecordAttendanceLoaded>().firstWhere(
+            (s) => s.rosterStatus == RosterStatus.ready,
+          );
+
+          final changed = cubit.stream
+              .whereType<RecordAttendanceLoaded>()
+              .firstWhere((s) => s.streakWindowDays == 30);
+          cubit.changeStreakWindow(30);
+          await changed;
+        },
+        verify: (cubit) {
+          expect(
+            (cubit.state as RecordAttendanceLoaded).streakWindowDays,
+            30,
+          );
+
+          verify(
+            () => f.dao.getMeetingRoster(
+              meetingId: any(named: 'meetingId'),
+              groupByStudyYear: any(named: 'groupByStudyYear'),
+            ),
+          ).called(1);
+
+          verify(
+            () => f.dao.streamAttendanceHistory(
+              meetingId: any(named: 'meetingId'),
+              fromDate: any(named: 'fromDate'),
+              toDate: any(named: 'toDate'),
+            ),
+          ).called(1);
+
+          verify(
+            () => f.dao.getRosterTrackRecords(
+              meeting: any(named: 'meeting'),
+              range: any(named: 'range'),
+              asServant: any(named: 'asServant'),
+            ),
+          ).called(2); // once on init, once after the window change
+        },
+      );
+    });
+
     group('switchMeeting stale-guard', () {
       blocTest<RecordAttendanceCubit, RecordAttendanceState>(
         'rapid switchMeeting applies only the latest roster',
@@ -323,6 +378,16 @@ final class _Fixture {
         attendanceRecordId: any(named: 'attendanceRecordId'),
       ),
     ).thenAnswer((_) async => unmarkAttendanceRecord!);
+
+    when(
+      () => dao.getRosterTrackRecords(
+        meeting: any(named: 'meeting'),
+        range: any(named: 'range'),
+        asServant: any(named: 'asServant'),
+      ),
+    ).thenAnswer(
+      (_) async => const [],
+    );
   }
 
   RecordAttendanceCubit createCubit() => RecordAttendanceCubit(
@@ -347,7 +412,8 @@ final class _Fixture {
   static MeetingRosterEntry rosterPerson(String personId) => MeetingRosterEntry(
     asServant: false,
     person: Person(id: personId, name: 'Person $personId'),
-    attendanceHistory: const [],
+    attendanceRecord: null,
+    personAttendanceAnalysis: null,
   );
 
   static AttendanceRecord makeRecord(

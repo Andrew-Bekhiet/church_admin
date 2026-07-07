@@ -92,9 +92,13 @@ select_permissions:
         - id
         - as_servant
         - datetime
+        - day
         - meeting_id
         - person_id
         - recorded_by
+      # Servant rows are gated only on being an admin of the meeting, mirroring
+      # meeting_roster: servant admins usually hold no person-entity grant over
+      # fellow servants.
       filter:
         _or:
           - _exists:
@@ -123,6 +127,21 @@ select_permissions:
                               _ceq:
                                 - $
                                 - person_id
+              - _exists:
+                  _table:
+                    name: users_admin_on_meetings
+                    schema: auth
+                  _where:
+                    _and:
+                      - uid:
+                          _eq: X-Hasura-User-Id
+                      - meeting_id:
+                          _ceq:
+                            - $
+                            - meeting_id
+          - _and:
+              - as_servant:
+                  _eq: true
               - _exists:
                   _table:
                     name: users_admin_on_meetings

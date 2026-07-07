@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// One tappable count segment (e.g. "5 حاضر") in the summary bar.
 class AttendanceSummarySegment extends StatelessWidget {
   final String label;
   final int count;

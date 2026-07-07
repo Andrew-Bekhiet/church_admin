@@ -20,8 +20,8 @@ void main() {
     'Date Range => fromString => [date, date]',
     () {
       final expectedDateTimeRange = DateTimeRange(
-        start: keepOnlyDate(DateTime.now().toUtc()),
-        end: keepOnlyDate(DateTime.now().toUtc().add(const Duration(days: 2))),
+        start: keepOnlyDate(DateTime.now()),
+        end: keepOnlyDate(DateTime.now().add(const Duration(days: 2))),
       );
 
       expect(
@@ -35,17 +35,13 @@ void main() {
     'Date Range => fromString => [date, date)',
     () {
       final expectedDateTimeRange = DateTimeRange(
-        start: keepOnlyDate(
-          DateTime.now().toUtc().toUtc(),
-        ),
-        end: keepOnlyDate(
-          DateTime.now().toUtc().toUtc().add(const Duration(days: 1)),
-        ),
+        start: keepOnlyDate(DateTime.now()),
+        end: keepOnlyDate(DateTime.now().add(const Duration(days: 1))),
       );
 
       final dateTimeRange = DateTimeRange(
-        start: DateTime.now().toUtc().toUtc(),
-        end: DateTime.now().toUtc().toUtc().add(const Duration(days: 2)),
+        start: DateTime.now(),
+        end: DateTime.now().add(const Duration(days: 2)),
       );
 
       expect(
@@ -60,17 +56,13 @@ void main() {
     'Date Range => fromString => (date, date]',
     () {
       final expectedDateTimeRange = DateTimeRange(
-        start: keepOnlyDate(
-          DateTime.now().toUtc().toUtc().add(const Duration(days: 1)),
-        ),
-        end: keepOnlyDate(
-          DateTime.now().toUtc().toUtc().add(const Duration(days: 2)),
-        ),
+        start: keepOnlyDate(DateTime.now().add(const Duration(days: 1))),
+        end: keepOnlyDate(DateTime.now().add(const Duration(days: 2))),
       );
 
       final dateTimeRange = DateTimeRange(
-        start: DateTime.now().toUtc().toUtc(),
-        end: DateTime.now().toUtc().toUtc().add(const Duration(days: 2)),
+        start: DateTime.now(),
+        end: DateTime.now().add(const Duration(days: 2)),
       );
 
       expect(
@@ -85,17 +77,13 @@ void main() {
     'Date Range => fromString => (date, date)',
     () {
       final expectedDateTimeRange = DateTimeRange(
-        start: keepOnlyDate(
-          DateTime.now().toUtc().toUtc().add(const Duration(days: 1)),
-        ),
-        end: keepOnlyDate(
-          DateTime.now().toUtc().toUtc().add(const Duration(days: 1)),
-        ),
+        start: keepOnlyDate(DateTime.now().add(const Duration(days: 1))),
+        end: keepOnlyDate(DateTime.now().add(const Duration(days: 1))),
       );
 
       final dateTimeRange = DateTimeRange(
-        start: DateTime.now().toUtc().toUtc(),
-        end: DateTime.now().toUtc().toUtc().add(const Duration(days: 2)),
+        start: DateTime.now(),
+        end: DateTime.now().add(const Duration(days: 2)),
       );
 
       expect(
@@ -110,6 +98,4 @@ void main() {
   );
 }
 
-DateTime keepOnlyDate(DateTime date) => date.isUtc
-    ? DateTime.utc(date.year, date.month, date.day)
-    : DateTime(date.year, date.month, date.day);
+DateTime keepOnlyDate(DateTime date) => DateTime(date.year, date.month, date.day);

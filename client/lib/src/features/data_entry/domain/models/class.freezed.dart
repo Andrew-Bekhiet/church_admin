@@ -25,7 +25,6 @@ mixin _$Class {
   bool? get serviceGender;
   LastRecordedByInfo? get lastEdit;
   List<User>? get adminUsers;
-  HistoryAggregateData? get attendanceHistoryAggregate;
   bool get userCanEdit;
 
   /// Create a copy of Class
@@ -62,12 +61,6 @@ mixin _$Class {
               other.adminUsers,
               adminUsers,
             ) &&
-            (identical(
-                  other.attendanceHistoryAggregate,
-                  attendanceHistoryAggregate,
-                ) ||
-                other.attendanceHistoryAggregate ==
-                    attendanceHistoryAggregate) &&
             (identical(other.userCanEdit, userCanEdit) ||
                 other.userCanEdit == userCanEdit));
   }
@@ -88,13 +81,12 @@ mixin _$Class {
     serviceGender,
     lastEdit,
     const DeepCollectionEquality().hash(adminUsers),
-    attendanceHistoryAggregate,
     userCanEdit,
   );
 
   @override
   String toString() {
-    return 'Class(id: $id, name: $name, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, service: $service, serviceId: $serviceId, studyYear: $studyYear, serviceStudyYear: $serviceStudyYear, serviceGender: $serviceGender, lastEdit: $lastEdit, adminUsers: $adminUsers, attendanceHistoryAggregate: $attendanceHistoryAggregate, userCanEdit: $userCanEdit)';
+    return 'Class(id: $id, name: $name, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, service: $service, serviceId: $serviceId, studyYear: $studyYear, serviceStudyYear: $serviceStudyYear, serviceGender: $serviceGender, lastEdit: $lastEdit, adminUsers: $adminUsers, userCanEdit: $userCanEdit)';
   }
 }
 
@@ -116,7 +108,6 @@ abstract mixin class $ClassCopyWith<$Res> {
     bool? serviceGender,
     LastRecordedByInfo? lastEdit,
     List<User>? adminUsers,
-    HistoryAggregateData? attendanceHistoryAggregate,
     bool userCanEdit,
   });
 }
@@ -145,7 +136,6 @@ class _$ClassCopyWithImpl<$Res> implements $ClassCopyWith<$Res> {
     Object? serviceGender = freezed,
     Object? lastEdit = freezed,
     Object? adminUsers = freezed,
-    Object? attendanceHistoryAggregate = freezed,
     Object? userCanEdit = null,
   }) {
     return _then(
@@ -198,10 +188,6 @@ class _$ClassCopyWithImpl<$Res> implements $ClassCopyWith<$Res> {
             ? _self.adminUsers
             : adminUsers // ignore: cast_nullable_to_non_nullable
                   as List<User>?,
-        attendanceHistoryAggregate: freezed == attendanceHistoryAggregate
-            ? _self.attendanceHistoryAggregate
-            : attendanceHistoryAggregate // ignore: cast_nullable_to_non_nullable
-                  as HistoryAggregateData?,
         userCanEdit: null == userCanEdit
             ? _self.userCanEdit
             : userCanEdit // ignore: cast_nullable_to_non_nullable

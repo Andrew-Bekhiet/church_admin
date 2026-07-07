@@ -1,6 +1,197 @@
 // Part 25 of the schema
 part of "schema.graphql.dart";
 
+abstract class CopyWith_Input_HistoryCallHistoryMinOrderBy<TRes> {
+  factory CopyWith_Input_HistoryCallHistoryMinOrderBy(
+    Input_HistoryCallHistoryMinOrderBy instance,
+    TRes Function(Input_HistoryCallHistoryMinOrderBy) then,
+  ) = _CopyWithImpl_Input_HistoryCallHistoryMinOrderBy;
+
+  factory CopyWith_Input_HistoryCallHistoryMinOrderBy.stub(TRes res) =
+      _CopyWithStubImpl_Input_HistoryCallHistoryMinOrderBy;
+
+  TRes call({
+    Enum_OrderBy? personId,
+    Enum_OrderBy? recordedBy,
+    Enum_OrderBy? time,
+  });
+}
+
+class _CopyWithImpl_Input_HistoryCallHistoryMinOrderBy<TRes>
+    implements CopyWith_Input_HistoryCallHistoryMinOrderBy<TRes> {
+  _CopyWithImpl_Input_HistoryCallHistoryMinOrderBy(this._instance, this._then);
+
+  final Input_HistoryCallHistoryMinOrderBy _instance;
+
+  final TRes Function(Input_HistoryCallHistoryMinOrderBy) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? personId = _undefined,
+    Object? recordedBy = _undefined,
+    Object? time = _undefined,
+  }) => _then(
+    Input_HistoryCallHistoryMinOrderBy._({
+      ..._instance._$data,
+      if (personId != _undefined) 'personId': (personId as Enum_OrderBy?),
+      if (recordedBy != _undefined) 'recordedBy': (recordedBy as Enum_OrderBy?),
+      if (time != _undefined) 'time': (time as Enum_OrderBy?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_HistoryCallHistoryMinOrderBy<TRes>
+    implements CopyWith_Input_HistoryCallHistoryMinOrderBy<TRes> {
+  _CopyWithStubImpl_Input_HistoryCallHistoryMinOrderBy(this._res);
+
+  TRes _res;
+
+  call({
+    Enum_OrderBy? personId,
+    Enum_OrderBy? recordedBy,
+    Enum_OrderBy? time,
+  }) => _res;
+}
+
+class Input_HistoryCallHistoryOnConflict {
+  factory Input_HistoryCallHistoryOnConflict({
+    required Enum_HistoryCallHistoryConstraint constraint,
+    List<Enum_HistoryCallHistoryUpdateColumn>? updateColumns,
+    Input_HistoryCallHistoryBoolExp? where,
+  }) => Input_HistoryCallHistoryOnConflict._({
+    r'constraint': constraint,
+    if (updateColumns != null) r'updateColumns': updateColumns,
+    if (where != null) r'where': where,
+  });
+
+  Input_HistoryCallHistoryOnConflict._(this._$data);
+
+  factory Input_HistoryCallHistoryOnConflict.fromJson(
+    Map<String, dynamic> data,
+  ) {
+    final result$data = <String, dynamic>{};
+    final l$constraint = data['constraint'];
+    result$data['constraint'] = fromJson_Enum_HistoryCallHistoryConstraint(
+      (l$constraint as String),
+    );
+    if (data.containsKey('updateColumns')) {
+      final l$updateColumns = data['updateColumns'];
+      result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
+          .map(
+            (e) => fromJson_Enum_HistoryCallHistoryUpdateColumn((e as String)),
+          )
+          .toList();
+    }
+    if (data.containsKey('where')) {
+      final l$where = data['where'];
+      result$data['where'] = l$where == null
+          ? null
+          : Input_HistoryCallHistoryBoolExp.fromJson(
+              (l$where as Map<String, dynamic>),
+            );
+    }
+    return Input_HistoryCallHistoryOnConflict._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Enum_HistoryCallHistoryConstraint get constraint =>
+      (_$data['constraint'] as Enum_HistoryCallHistoryConstraint);
+
+  List<Enum_HistoryCallHistoryUpdateColumn>? get updateColumns =>
+      (_$data['updateColumns'] as List<Enum_HistoryCallHistoryUpdateColumn>?);
+
+  Input_HistoryCallHistoryBoolExp? get where =>
+      (_$data['where'] as Input_HistoryCallHistoryBoolExp?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$constraint = constraint;
+    result$data['constraint'] = toJson_Enum_HistoryCallHistoryConstraint(
+      l$constraint,
+    );
+    if (_$data.containsKey('updateColumns')) {
+      final l$updateColumns = updateColumns;
+      result$data['updateColumns'] =
+          (l$updateColumns as List<Enum_HistoryCallHistoryUpdateColumn>)
+              .map((e) => toJson_Enum_HistoryCallHistoryUpdateColumn(e))
+              .toList();
+    }
+    if (_$data.containsKey('where')) {
+      final l$where = where;
+      result$data['where'] = l$where?.toJson();
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_HistoryCallHistoryOnConflict<
+    Input_HistoryCallHistoryOnConflict
+  >
+  get copyWith => CopyWith_Input_HistoryCallHistoryOnConflict(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_HistoryCallHistoryOnConflict ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$constraint = constraint;
+    final lOther$constraint = other.constraint;
+    if (l$constraint != lOther$constraint) {
+      return false;
+    }
+    final l$updateColumns = updateColumns;
+    final lOther$updateColumns = other.updateColumns;
+    if (_$data.containsKey('updateColumns') !=
+        other._$data.containsKey('updateColumns')) {
+      return false;
+    }
+    if (l$updateColumns != null && lOther$updateColumns != null) {
+      if (l$updateColumns.length != lOther$updateColumns.length) {
+        return false;
+      }
+      for (int i = 0; i < l$updateColumns.length; i++) {
+        final l$updateColumns$entry = l$updateColumns[i];
+        final lOther$updateColumns$entry = lOther$updateColumns[i];
+        if (l$updateColumns$entry != lOther$updateColumns$entry) {
+          return false;
+        }
+      }
+    } else if (l$updateColumns != lOther$updateColumns) {
+      return false;
+    }
+    final l$where = where;
+    final lOther$where = other.where;
+    if (_$data.containsKey('where') != other._$data.containsKey('where')) {
+      return false;
+    }
+    if (l$where != lOther$where) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$constraint = constraint;
+    final l$updateColumns = updateColumns;
+    final l$where = where;
+    return Object.hashAll([
+      l$constraint,
+      _$data.containsKey('updateColumns')
+          ? l$updateColumns == null
+                ? null
+                : Object.hashAll(l$updateColumns.map((v) => v))
+          : const {},
+      _$data.containsKey('where') ? l$where : const {},
+    ]);
+  }
+}
+
 abstract class CopyWith_Input_HistoryCallHistoryOnConflict<TRes> {
   factory CopyWith_Input_HistoryCallHistoryOnConflict(
     Input_HistoryCallHistoryOnConflict instance,
@@ -2497,22 +2688,4 @@ class Input_HistoryConfessionHistoryMinOrderBy {
       _$data.containsKey('time') ? l$time : const {},
     ]);
   }
-}
-
-abstract class CopyWith_Input_HistoryConfessionHistoryMinOrderBy<TRes> {
-  factory CopyWith_Input_HistoryConfessionHistoryMinOrderBy(
-    Input_HistoryConfessionHistoryMinOrderBy instance,
-    TRes Function(Input_HistoryConfessionHistoryMinOrderBy) then,
-  ) = _CopyWithImpl_Input_HistoryConfessionHistoryMinOrderBy;
-
-  factory CopyWith_Input_HistoryConfessionHistoryMinOrderBy.stub(TRes res) =
-      _CopyWithStubImpl_Input_HistoryConfessionHistoryMinOrderBy;
-
-  TRes call({
-    Enum_OrderBy? dayId,
-    Enum_OrderBy? id,
-    Enum_OrderBy? personId,
-    Enum_OrderBy? recordedBy,
-    Enum_OrderBy? time,
-  });
 }

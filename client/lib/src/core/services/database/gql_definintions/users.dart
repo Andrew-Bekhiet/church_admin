@@ -1,7 +1,5 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/users/__generated__/queries.gql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/users/__generated__/subscriptions.gql.dart';
-import 'package:graphql/client.dart';
 
 class UsersDAO extends DAOBase<User> with StreamableDAO<User> {
   UsersDAO({required super.db}) : super(fromJson: User.fromJson);
@@ -60,34 +58,5 @@ class UsersDAO extends DAOBase<User> with StreamableDAO<User> {
         ),
       ),
     );
-  }
-
-  Future<User?> analyzeUserAttendance({
-    required String personId,
-    required String userId,
-    required DateTime dateFrom,
-    required DateTime dateTo,
-    required Iterable<String> groupsIds,
-    required Iterable<String> classesIds,
-    required Iterable<String> servicesIds,
-  }) {
-    final queryOptions = WatchQueryOptions(
-      fetchResults: true,
-      eagerlyFetchResults: false,
-      document: documentNodeQueryanalyzeUserAttendance,
-      operationName: 'analyzeUserAttendance',
-      variables: Variables_Query_analyzeUserAttendance(
-        userId: userId.toUuid(),
-        personId: personId.toUuid(),
-        dateFrom: dateFrom,
-        dateTo: dateTo,
-        classesIds: classesIds.map((e) => e.toUuid()).toList(),
-        groupsIds: groupsIds.map((e) => e.toUuid()).toList(),
-        servicesIds: servicesIds.map((e) => e.toUuid()).toList(),
-      ).toJson(),
-      parserFn: db.parser.singleParser(User.fromJson),
-    );
-
-    return graphQLClient.queryAndReturnParsedNullable(queryOptions);
   }
 }

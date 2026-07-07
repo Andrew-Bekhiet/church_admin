@@ -9,11 +9,9 @@ import 'package:flutter/material.dart' show DateUtils;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rxdart/rxdart.dart';
 
-/// Manages a single attendance recording session: the active meeting, the
-/// selected day, the audience view, the scoped roster (loaded in full so the
-/// gutter and group counts stay accurate), live present/eligible counts and
-/// optimistic one-tap marking with undo.
 class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
+  static const int defaultStreakWindowDays = 60;
+
   static const Duration _searchDebounce = Duration(milliseconds: 300);
   static const AttendanceNameAlphabet _alphabet = AttendanceNameAlphabet();
 
@@ -38,6 +36,11 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
   int _rosterRequestId = 0;
   List<MeetingRosterEntry> _rosterPersons = const [];
 
+  int _trackRequestId = 0;
+  Map<String, PersonMeetingAttendanceAnalysis> _personsAttendanceAnalyses =
+      const {};
+  int _streakWindowDays = defaultStreakWindowDays;
+
   StreamSubscription<List<AttendanceRecord>>? _attendanceSub;
   final LiveAttendance _liveAttendance = LiveAttendance();
 
@@ -48,8 +51,6 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
   DateTime get _toDate => _selectedDate.add(const Duration(days: 1));
   bool get _asServant => _audienceView.asServant;
 
-  // Wraps _sort with a study-year prefix when grouping is active, so the
-  // client-side order always matches the grouped roster layout.
   AttendanceSorting get _effectiveSort => switch (_grouping) {
     AttendanceGrouping.none => _sort,
     AttendanceGrouping.studyYear => AttendanceSortingByStudyYear(then: _sort),
@@ -97,6 +98,7 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
     );
     _audienceView = _recordAttendanceRights.initialViewFor(_meeting);
     _liveAttendance.reset();
+    _personsAttendanceAnalyses = const {};
     unawaited(_restartSession());
   }
 
@@ -106,14 +108,18 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
 
     _selectedDate = dayOnly;
     _liveAttendance.reset();
+    _personsAttendanceAnalyses = const {};
     _subscribeAttendance();
+    unawaited(_loadTrackRecords());
   }
 
   void toggleAudience() {
     if (!_canToggleAudience) return;
 
     _audienceView = _audienceView.toggled;
+    _personsAttendanceAnalyses = const {};
     _emitLoaded();
+    unawaited(_loadTrackRecords());
   }
 
   void changePresenceFilter(AttendancePresenceFilter filter) {
@@ -135,6 +141,15 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
 
     _sort = sort;
     _emitLoaded();
+  }
+
+  void changeStreakWindow(int days) {
+    if (_streakWindowDays == days) return;
+
+    _streakWindowDays = days;
+    _personsAttendanceAnalyses = const {};
+    _emitLoaded();
+    unawaited(_loadTrackRecords());
   }
 
   void onSearch(String? query) => _searchSubject.sink.add(query);
@@ -216,8 +231,48 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
       await _loadRoster(showLoading: true);
       if (isClosed) return;
       _subscribeAttendance();
+      unawaited(_loadTrackRecords());
     } catch (error, stackTrace) {
       _onRosterError(error, stackTrace);
+    }
+  }
+
+  Future<void> _loadTrackRecords() async {
+    final requestId = ++_trackRequestId;
+
+    try {
+      final trackRecords = await _dao.getRosterTrackRecords(
+        meeting: _meeting,
+        // Ends the day before selectedDate so marking attendance today doesn't
+        // retroactively change the shown incoming track record.
+        range: DateTimeRange(
+          start: _selectedDate.subtract(Duration(days: _streakWindowDays)),
+          end: _selectedDate.subtract(const Duration(days: 1)),
+        ),
+        asServant: _asServant,
+      );
+
+      if (requestId != _trackRequestId || isClosed) return;
+
+      _personsAttendanceAnalyses = {
+        for (final record in trackRecords) record.personId: record,
+      };
+      _emitLoaded();
+    } catch (error, stackTrace) {
+      unawaited(
+        LoggingService.I.exception(
+          LogRecord(
+            moduleName: '$RecordAttendanceCubit',
+            error: error,
+            stackTrace: stackTrace,
+          ),
+        ),
+      );
+
+      if (requestId != _trackRequestId || isClosed) return;
+
+      _personsAttendanceAnalyses = const {};
+      _emitLoaded();
     }
   }
 
@@ -281,6 +336,11 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
 
     final allEligibleEntries = _rosterPersons
         .map(_withLiveAttendance)
+        .map(
+          (e) => e.copyWith(
+            personAttendanceAnalysis: _personsAttendanceAnalyses[e.person.id],
+          ),
+        )
         .where(_audienceView.matches)
         .toList();
 
@@ -316,6 +376,7 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
         searchQuery: _searchQuery,
         entries: sorted,
         gutterLetters: sortedGutterLetters,
+        streakWindowDays: _streakWindowDays,
         presentCount: allEligibleEntries.where((e) => e.attended).length,
         eligibleCount: allEligibleEntries.length,
       ),
@@ -329,7 +390,7 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
       meetingId: _meeting.id,
     );
 
-    return entry.copyWith(attendanceHistory: [?record]);
+    return entry.copyWith(attendanceRecord: record);
   }
 
   bool _matchesSearch(MeetingRosterEntry entry, String query) {

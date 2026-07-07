@@ -94,33 +94,3 @@ fragment UserAdminOn on AuthUsersData {
     groupWriteRelatedFamilies
   }
 }
-
-fragment AttendanceFields on AuthUsersData {
-  servicesHistory: adminOn(
-    where: { service: { id: { _in: $servicesIds } } }
-    distinctOn: adminOnService
-  ) {
-    permissionId
-    service {
-      ...Service
-    }
-  }
-  classesHistory: adminOn(
-    where: { classes: { id: { _in: $classesIds } } }
-    distinctOn: adminOnService
-  ) {
-    permissionId
-    classes(where: { id: { _in: $classesIds } }, distinctOn: id) {
-      ...Class
-    }
-  }
-  groupsHistory: adminOn(
-    where: { group: { id: { _in: $groupsIds } } }
-    distinctOn: adminOnGroup
-  ) {
-    permissionId
-    group {
-      ...Group
-    }
-  }
-}

@@ -15,7 +15,7 @@ part 'class.g.dart';
 )
 class Class extends ViewableWithIDAndImage
     with _$Class
-    implements SerializableExtra, AttendanceAnalyzable {
+    implements SerializableExtra {
   @override
   @JsonKey(defaultValue: '')
   final String id;
@@ -59,9 +59,6 @@ class Class extends ViewableWithIDAndImage
   final List<User>? adminUsers;
 
   @override
-  final HistoryAggregateData? attendanceHistoryAggregate;
-
-  @override
   @JsonKey(includeToJson: false)
   final bool userCanEdit;
 
@@ -78,7 +75,6 @@ class Class extends ViewableWithIDAndImage
     this.serviceGender,
     this.lastEdit,
     this.adminUsers,
-    this.attendanceHistoryAggregate,
     this.userCanEdit = false,
   });
 

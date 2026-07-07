@@ -6,6 +6,7 @@ final Map<String, Object Function(Json)> fromJsonByTypeName = {
   'EditFamilyExtra': EditFamilyExtra.fromJson,
   'EditStoreExtra': EditStoreExtra.fromJson,
   'PersonAnalysisExtra': PersonAnalysisExtra.fromJson,
+  'UserAnalysisExtra': UserAnalysisExtra.fromJson,
   'EditPersonExtra': EditPersonExtra.fromJson,
   'EditClassExtra': EditClassExtra.fromJson,
   'EditGroupExtra': EditGroupExtra.fromJson,

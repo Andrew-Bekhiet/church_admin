@@ -292,15 +292,26 @@ class ThemingService with WidgetsBindingObserver {
         endIndent: 16,
         color: colorScheme.secondary.withValues(alpha: 0.54),
       ),
+      // colorScheme.onPrimary is white, computed under the assumption that
+      // primary is a dark saturated tone; this app's primary is a light
+      // gold/tan brand color, so white content on it is washed out.
+      // onPrimaryContainer stays properly dark against that same color.
       chipTheme: themeData.chipTheme.copyWith(
         color: WidgetStateProperty.resolveWith(
           (states) => states.contains(WidgetState.selected)
               ? themeData.colorScheme.primary
               : themeData.scaffoldBackgroundColor,
         ),
-        labelStyle: themeData.textTheme.titleMedium,
+        checkmarkColor: colorScheme.onPrimaryContainer,
+        labelStyle: themeData.textTheme.titleMedium!.copyWith(
+          color: WidgetStateColor.resolveWith(
+            (states) => states.contains(WidgetState.selected)
+                ? colorScheme.onPrimaryContainer
+                : themeData.textTheme.titleMedium!.color!,
+          ),
+        ),
         secondaryLabelStyle: themeData.textTheme.titleMedium!.copyWith(
-          color: colorScheme.onPrimary,
+          color: colorScheme.onPrimaryContainer,
         ),
       ),
       visualDensity: VisualDensity.adaptivePlatformDensity,

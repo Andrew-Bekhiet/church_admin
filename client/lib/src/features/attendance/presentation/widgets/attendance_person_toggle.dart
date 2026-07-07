@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 
-/// The one-tap present/absent control for a person, with a pending spinner while
-/// a mark/unmark mutation is in flight.
 class AttendancePersonToggle extends StatelessWidget {
   final bool isPresent;
   final VoidCallback onTap;

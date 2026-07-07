@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 
-/// Always-visible floating search bar for fast access while recording. Owns its
-/// text so the clear button both empties the field and resets the query.
 class AttendanceSearchBar extends StatefulWidget {
   final ValueChanged<String?> onChanged;
 

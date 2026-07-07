@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 
-/// Chip showing the active attendance day; tapping it opens a date picker.
 class AttendanceDateChip extends StatelessWidget {
   final DateTime date;
   final ValueChanged<DateTime> onDateSelected;

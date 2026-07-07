@@ -32,3 +32,19 @@ subscription watchAttendanceHistory(
     asServant
   }
 }
+
+# Paginated attendance records for a person within a single meeting, used to
+# list the "last attended" history behind the analysis indicator.
+subscription personMeetingAttendance(
+  $where: [HistoryAttendanceHistoryBoolExp!] = {}
+  $orderBy: [HistoryAttendanceHistoryOrderBy!] = { datetime: DESC }
+  $limit: Int! = 200
+) {
+  historyAttendanceHistory(
+    where: { _and: $where }
+    orderBy: $orderBy
+    limit: $limit
+  ) {
+    ...AttendanceHistory
+  }
+}

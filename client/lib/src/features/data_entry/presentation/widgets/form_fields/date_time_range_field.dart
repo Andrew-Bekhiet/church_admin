@@ -1,9 +1,9 @@
+import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
-import 'package:omni_datetime_picker/omni_datetime_picker.dart';
 
 class DateTimeRangeField extends StatelessWidget {
   final String label;
@@ -45,16 +45,28 @@ class DateTimeRangeField extends StatelessWidget {
       onTap: (state) async {
         final focusScope = FocusScope.of(context);
 
-        final rslt = await showOmniDateTimeRangePicker(
+        final rslt = await showCalendarDatePicker2Dialog(
           context: context,
-          type: OmniDateTimePickerType.date,
-          startFirstDate: startFirstDate,
-          startInitialDate: state.value?.start,
-          endInitialDate: state.value?.end,
+          dialogSize: Size(
+            MediaQuery.widthOf(context) - 16,
+            410,
+          ),
+          config: CalendarDatePicker2WithActionButtonsConfig(
+            calendarType: CalendarDatePicker2Type.range,
+            firstDate: startFirstDate ?? DateTime(2000),
+            lastDate: DateTime.now(),
+          ),
+          value: [state.value?.start, state.value?.end],
         );
         if (rslt == null) return;
 
-        final newValue = DateTimeRange(start: rslt.min, end: rslt.max);
+        final selectedDates = rslt.nonNulls.toList();
+        if (selectedDates.length < 2) return;
+
+        final newValue = DateTimeRange(
+          start: selectedDates.min,
+          end: selectedDates.max,
+        );
 
         if (newValue != state.value) {
           state.didChange(newValue);

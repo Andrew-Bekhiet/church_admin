@@ -200,118 +200,6 @@ class PersonsDAO extends FullCRUDDAO<Person> {
     return graphQLClient.queryAndReturnParsedNullable(queryOptions);
   }
 
-  // TODO(ENG-99-follow-up): Re-implement these analysis methods on top of the
-  // new meetings model. The old attendance_history fields (service/class/group
-  // direct joins, asAdmin, dayId) are gone after migration #70.
-
-  /// Returns attendance history for a person filtered by service.
-  PaginatableStreamBase<LastRecordedByInfo> paginatePersonServiceAttendance({
-    required String personId,
-    required String serviceId,
-    bool asServant = false,
-    List<Filter>? where,
-  }) {
-    return _paginatePersonAttendance(
-      personId: personId,
-      asServant: asServant,
-      where: [
-        Filter(
-          AttendanceRecordFields().meeting.redirectTo(
-            MeetingFields().service.redirectTo(ServiceFields().id),
-          ),
-          PrimitiveOperator.eq,
-          serviceId,
-        ),
-        if (where != null) ...where,
-      ],
-    );
-  }
-
-  /// Returns attendance history for a person filtered by group.
-  PaginatableStreamBase<LastRecordedByInfo> paginatePersonGroupAttendance({
-    required String personId,
-    required String groupId,
-    bool asServant = false,
-    List<Filter>? where,
-  }) {
-    return _paginatePersonAttendance(
-      personId: personId,
-      asServant: asServant,
-      where: [
-        Filter(
-          AttendanceRecordFields().meeting.redirectTo(
-            MeetingFields().group.redirectTo(GroupFields().id),
-          ),
-          PrimitiveOperator.eq,
-          groupId,
-        ),
-        if (where != null) ...where,
-      ],
-    );
-  }
-
-  /// Stub — classes are no longer directly linked to attendance_history after
-  /// migration #70. Always returns an empty stream.
-  /// TODO(ENG-99-follow-up): Implement via meeting.serviceId + serviceStudyYear.
-  PaginatableStreamBase<LastRecordedByInfo> paginatePersonClassAttendance({
-    required String personId,
-    required String classId,
-    bool asServant = false,
-    List<Filter>? where,
-  }) {
-    return PaginatableStream.simple(
-      factory: (_) => Stream.value(
-        const PaginatableStreamResponse<LastRecordedByInfo>(data: []),
-      ),
-    );
-  }
-
-  PaginatableStreamBase<LastRecordedByInfo> _paginatePersonAttendance({
-    required String personId,
-    required List<Filter>? where,
-    bool asServant = false,
-    int? limit,
-  }) {
-    return PaginatableStream.simple(
-      pageSize: limit ?? 100,
-      factory: (request) {
-        return graphQLClient.subscribeAndReturnParsed(
-          SubscriptionOptions(
-            document: documentNodeSubscriptionpersonAttendance,
-            operationName: 'personAttendance',
-            variables: AdvancedQuery(
-              queryableType: AdvancedQueriesMetadata().attendanceRecord,
-              limit: request.pageSize,
-              filters: [
-                Filter(
-                  AttendanceRecordFields().person.redirectTo(PersonFields().id),
-                  PrimitiveOperator.eq,
-                  personId,
-                ),
-                Filter(
-                  AttendanceRecordFields().asServant,
-                  PrimitiveOperator.eq,
-                  asServant,
-                ),
-                if (where != null) ...where,
-                if (request.cursor != null)
-                  Filter(
-                    AttendanceRecordFields().datetime,
-                    PrimitiveOperator.lt,
-                    request.cursor!.time,
-                  ),
-              ],
-            ).toJson(),
-            parserFn: db.parser.singleListParser(
-              LastRecordedByInfo.fromJson,
-              pageSize: request.pageSize,
-            ),
-          ),
-        );
-      },
-    );
-  }
-
   Future<Person?> getPersonAnalysis({
     required String personId,
     required PersonAnalysisOptions options,
@@ -326,9 +214,6 @@ class PersonsDAO extends FullCRUDDAO<Person> {
         dateTo: options.dateRange.end,
         timeFrom: options.dateRange.start,
         timeTo: options.dateRange.end,
-        classesIds: options.classes.map((e) => e.id.toUuid()).toList(),
-        groupsIds: options.groups.map((e) => e.id.toUuid()).toList(),
-        servicesIds: options.services.map((e) => e.id.toUuid()).toList(),
         confessionHistory: options.confessionAnalysis,
         kodasHistory: options.kodasAnalysis,
         callHistory: options.callHistoryAnalysis,

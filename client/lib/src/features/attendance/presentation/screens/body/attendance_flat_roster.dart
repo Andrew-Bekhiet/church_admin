@@ -1,14 +1,15 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 
-/// A flat, name-sorted roster sliver (used alongside the alphabet gutter).
 class AttendanceFlatRoster extends StatelessWidget {
   final List<MeetingRosterEntry> entries;
+  final Map<String, PersonMeetingAttendanceAnalysis> trackRecords;
   final ValueChanged<MeetingRosterEntry> onToggle;
 
   const AttendanceFlatRoster({
     required this.entries,
     required this.onToggle,
+    this.trackRecords = const {},
     super.key,
   });
 

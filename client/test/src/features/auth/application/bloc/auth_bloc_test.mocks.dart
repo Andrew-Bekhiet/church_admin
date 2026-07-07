@@ -1127,31 +1127,6 @@ class MockUsersDAO extends _i1.Mock implements _i2.UsersDAO {
           as _i4.Stream<_i2.User?>);
 
   @override
-  _i4.Future<_i2.User?> analyzeUserAttendance({
-    required String? personId,
-    required String? userId,
-    required DateTime? dateFrom,
-    required DateTime? dateTo,
-    required Iterable<String>? groupsIds,
-    required Iterable<String>? classesIds,
-    required Iterable<String>? servicesIds,
-  }) =>
-      (super.noSuchMethod(
-            Invocation.method(#analyzeUserAttendance, [], {
-              #personId: personId,
-              #userId: userId,
-              #dateFrom: dateFrom,
-              #dateTo: dateTo,
-              #groupsIds: groupsIds,
-              #classesIds: classesIds,
-              #servicesIds: servicesIds,
-            }),
-            returnValue: _i4.Future<_i2.User?>.value(),
-            returnValueForMissingStub: _i4.Future<_i2.User?>.value(),
-          )
-          as _i4.Future<_i2.User?>);
-
-  @override
   _i2.PaginatableStreamBase<_i2.User> streamAll({
     _i4.Stream<String?>? searchQuery,
     _i4.Stream<List<_i2.Filter<Object>>>? where,

@@ -7,9 +7,6 @@ import 'package:church_admin/src/features/attendance/presentation/screens/body/a
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-/// Layout for an active recording session. The app bar spans the full width
-/// (in the [NestedScrollView] header) while the alphabet gutter only borders the
-/// roster body, so it never steals width from the app bar.
 class RecordAttendanceLoadedView extends StatefulWidget {
   final RecordAttendanceLoaded state;
 
@@ -71,18 +68,12 @@ class _RecordAttendanceLoadedViewState
   // PageStorageKey is broken here: _NestedScrollPosition.restoreScrollOffset
   // is gated on canScrollBody (false while the floating app bar is visible),
   // and the constructor calls saveScrollOffset() right after correctPixels(0),
-  // overwriting any stored value.
-  // Use PageStorageKey when https://github.com/flutter/flutter/issues/159123
-  // is fixed.
+  // overwriting any stored value. Use PageStorageKey once
+  // https://github.com/flutter/flutter/issues/159123 is fixed.
   //
-  // jumpTo is also wrong: it goes through coordinator.jumpTo which moves
+  // jumpTo is also wrong here: it goes through coordinator.jumpTo, which moves
   // BOTH inner and outer via unnestOffset/nestOffset, scrolling the app bar
   // away on every restore. Use position.correctBy on the inner position only.
-  //
-  // Targeting 0.0 when there is no saved offset resets the list to the top,
-  // since without a key on CustomScrollView the element is reused and carries
-  // the previous combination's offset into the new one.
-  //
   void _maybeUpdateControllerOffset(_RosterScrollOffsetKey key) {
     final controller = _innerController;
     if (!mounted || controller == null || !controller.hasClients) return;
@@ -112,6 +103,7 @@ class _RecordAttendanceLoadedViewState
           audienceView: state.audienceView,
           sorting: state.sort,
           grouping: state.grouping,
+          streakWindowDays: state.streakWindowDays,
           canToggleAudience: state.canToggleAudience,
         ),
       ],

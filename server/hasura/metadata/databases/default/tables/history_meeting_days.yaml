@@ -1,0 +1,60 @@
+table:
+  name: meeting_days
+  schema: history
+object_relationships:
+  - name: meeting
+    using:
+      manual_configuration:
+        column_mapping:
+          meeting_id: id
+        insertion_order: null
+        remote_table:
+          name: meetings
+          schema: history
+  - name: studyYear
+    using:
+      manual_configuration:
+        column_mapping:
+          study_year_id: order
+        insertion_order: null
+        remote_table:
+          name: study_years
+          schema: public
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - meeting_id
+        - day
+        - study_year_id
+        - gender
+        - persons_count
+        - servants_count
+        - total_count
+      # Per-demographic counts carry no person-identifying data, so visibility
+      # is gated on the meeting alone: readAllData or being an admin on it.
+      filter:
+        _or:
+          - _exists:
+              _table:
+                name: users_permissions
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - permission:
+                      _eq: readAllData
+          - _exists:
+              _table:
+                name: users_admin_on_meetings
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - meeting_id:
+                      _ceq:
+                        - $
+                        - meeting_id
+      allow_aggregations: true

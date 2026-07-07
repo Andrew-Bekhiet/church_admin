@@ -21,3 +21,76 @@ query historyMeetingRoster(
     asServant
   }
 }
+
+# distinctOn requires matching orderBy columns (personId, asServant, meetingId).
+query attendanceAnalysis(
+  $dayFrom: date!
+  $dayTo: date!
+  $where: [HistoryMeetingRosterBoolExp!] = []
+) {
+  historyMeetingRoster(
+    where: { _and: $where }
+    orderBy: [{ personId: ASC }, { asServant: ASC }, { meetingId: ASC }]
+    distinctOn: [personId, asServant, meetingId]
+  ) {
+    personId
+    asServant
+    meeting {
+      id
+      days(
+        where: { day: { _gte: $dayFrom, _lte: $dayTo } }
+        orderBy: { day: ASC }
+        distinctOn: [day]
+      ) {
+        day
+      }
+    }
+    attendanceHistory(
+      where: { day: { _gte: $dayFrom, _lte: $dayTo } }
+      orderBy: { day: ASC }
+    ) {
+      day
+    }
+  }
+}
+
+query meetingsAttendanceAnalysis(
+  $dayFrom: date!
+  $dayTo: date!
+  $where: [HistoryMeetingsBoolExp!] = []
+  $demographicsWhere: [HistoryMeetingDaysBoolExp!] = []
+) {
+  historyMeetings(where: { _and: $where }, orderBy: [{ name: ASC }]) {
+    ...Meeting
+    days(
+      where: { day: { _gte: $dayFrom, _lte: $dayTo }, _and: $demographicsWhere }
+      orderBy: { day: ASC }
+    ) {
+      day
+      studyYearId
+      studyYear {
+        name
+      }
+      gender
+      personsCount
+      servantsCount
+      totalCount
+    }
+  }
+}
+
+query personMeetings(
+  $personId: uuid!
+  $where: [HistoryMeetingRosterBoolExp!] = []
+) {
+  historyMeetingRoster(
+    where: { personId: { _eq: $personId }, _and: $where }
+    orderBy: [{ asServant: ASC }, { meetingId: ASC }]
+    distinctOn: [asServant, meetingId]
+  ) {
+    asServant
+    meeting {
+      ...Meeting
+    }
+  }
+}

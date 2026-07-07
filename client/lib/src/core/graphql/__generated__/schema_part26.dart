@@ -1,6 +1,24 @@
 // Part 26 of the schema
 part of "schema.graphql.dart";
 
+abstract class CopyWith_Input_HistoryConfessionHistoryMinOrderBy<TRes> {
+  factory CopyWith_Input_HistoryConfessionHistoryMinOrderBy(
+    Input_HistoryConfessionHistoryMinOrderBy instance,
+    TRes Function(Input_HistoryConfessionHistoryMinOrderBy) then,
+  ) = _CopyWithImpl_Input_HistoryConfessionHistoryMinOrderBy;
+
+  factory CopyWith_Input_HistoryConfessionHistoryMinOrderBy.stub(TRes res) =
+      _CopyWithStubImpl_Input_HistoryConfessionHistoryMinOrderBy;
+
+  TRes call({
+    Enum_OrderBy? dayId,
+    Enum_OrderBy? id,
+    Enum_OrderBy? personId,
+    Enum_OrderBy? recordedBy,
+    Enum_OrderBy? time,
+  });
+}
+
 class _CopyWithImpl_Input_HistoryConfessionHistoryMinOrderBy<TRes>
     implements CopyWith_Input_HistoryConfessionHistoryMinOrderBy<TRes> {
   _CopyWithImpl_Input_HistoryConfessionHistoryMinOrderBy(
