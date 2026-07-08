@@ -8,5 +8,4 @@ fragment FamilyNoPhoto on Families {
   id
   name
   color
-  userCanEdit
 }

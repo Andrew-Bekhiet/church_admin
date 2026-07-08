@@ -8,5 +8,4 @@ fragment AreaNoPhoto on Areas {
   id
   name
   color
-  userCanEdit
 }
