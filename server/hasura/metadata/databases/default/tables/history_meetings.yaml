@@ -142,47 +142,16 @@ select_permissions:
                       _eq: readAllData
           - _exists:
               _table:
-                name: users_permissions_by_entity_id
+                name: users_admin_on_meetings
                 schema: auth
               _where:
                 _and:
                   - uid:
                       _eq: X-Hasura-User-Id
-                  - entity_type:
-                      _eq: group
-                  - entity_id:
+                  - meeting_id:
                       _ceq:
                         - $
-                        - group_id
-          - _exists:
-              _table:
-                name: users_admin_on
-                schema: auth
-              _where:
-                _and:
-                  - uid:
-                      _eq: X-Hasura-User-Id
-                  - _and:
-                      - admin_on_service:
-                          _is_null: false
-                      - admin_on_service:
-                          _ceq:
-                            - $
-                            - service_id
-                  - _or:
-                      - service_study_year:
-                          _is_null: true
-                      - service_study_year:
-                          _ceq:
-                            - $
-                            - service_study_year
-                  - _or:
-                      - service_gender:
-                          _is_null: true
-                      - service_gender:
-                          _ceq:
-                            - $
-                            - service_gender
+                        - id
 
       allow_aggregations: false
 update_permissions:
