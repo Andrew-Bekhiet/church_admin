@@ -2473,7 +2473,6 @@ class Query_personsGeolocations_areas implements Fragment_AreaNoPhoto {
     required this.id,
     required this.name,
     this.color,
-    this.userCanEdit,
     this.$__typename = 'Areas',
     this.bounds,
   });
@@ -2482,14 +2481,12 @@ class Query_personsGeolocations_areas implements Fragment_AreaNoPhoto {
     final l$id = json['id'];
     final l$name = json['name'];
     final l$color = json['color'];
-    final l$userCanEdit = json['userCanEdit'];
     final l$$__typename = json['__typename'];
     final l$bounds = json['bounds'];
     return Query_personsGeolocations_areas(
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
-      userCanEdit: (l$userCanEdit as bool?),
       $__typename: (l$$__typename as String),
       bounds: (l$bounds as Map<String, dynamic>?),
     );
@@ -2500,8 +2497,6 @@ class Query_personsGeolocations_areas implements Fragment_AreaNoPhoto {
   final String name;
 
   final int? color;
-
-  final bool? userCanEdit;
 
   final String $__typename;
 
@@ -2515,8 +2510,6 @@ class Query_personsGeolocations_areas implements Fragment_AreaNoPhoto {
     _resultData['name'] = l$name;
     final l$color = color;
     _resultData['color'] = l$color;
-    final l$userCanEdit = userCanEdit;
-    _resultData['userCanEdit'] = l$userCanEdit;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     final l$bounds = bounds;
@@ -2529,17 +2522,9 @@ class Query_personsGeolocations_areas implements Fragment_AreaNoPhoto {
     final l$id = id;
     final l$name = name;
     final l$color = color;
-    final l$userCanEdit = userCanEdit;
     final l$$__typename = $__typename;
     final l$bounds = bounds;
-    return Object.hashAll([
-      l$id,
-      l$name,
-      l$color,
-      l$userCanEdit,
-      l$$__typename,
-      l$bounds,
-    ]);
+    return Object.hashAll([l$id, l$name, l$color, l$$__typename, l$bounds]);
   }
 
   @override
@@ -2564,11 +2549,6 @@ class Query_personsGeolocations_areas implements Fragment_AreaNoPhoto {
     final l$color = color;
     final lOther$color = other.color;
     if (l$color != lOther$color) {
-      return false;
-    }
-    final l$userCanEdit = userCanEdit;
-    final lOther$userCanEdit = other.userCanEdit;
-    if (l$userCanEdit != lOther$userCanEdit) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -2604,7 +2584,6 @@ abstract class CopyWith_Query_personsGeolocations_areas<TRes> {
     UuidValue? id,
     String? name,
     int? color,
-    bool? userCanEdit,
     String? $__typename,
     Map<String, dynamic>? bounds,
   });
@@ -2624,7 +2603,6 @@ class _CopyWithImpl_Query_personsGeolocations_areas<TRes>
     Object? id = _undefined,
     Object? name = _undefined,
     Object? color = _undefined,
-    Object? userCanEdit = _undefined,
     Object? $__typename = _undefined,
     Object? bounds = _undefined,
   }) => _then(
@@ -2634,9 +2612,6 @@ class _CopyWithImpl_Query_personsGeolocations_areas<TRes>
           ? _instance.name
           : (name as String),
       color: color == _undefined ? _instance.color : (color as int?),
-      userCanEdit: userCanEdit == _undefined
-          ? _instance.userCanEdit
-          : (userCanEdit as bool?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -2657,7 +2632,6 @@ class _CopyWithStubImpl_Query_personsGeolocations_areas<TRes>
     UuidValue? id,
     String? name,
     int? color,
-    bool? userCanEdit,
     String? $__typename,
     Map<String, dynamic>? bounds,
   }) => _res;
@@ -2865,7 +2839,6 @@ class Query_personsGeolocations_families implements Fragment_FamilyNoPhoto {
     required this.id,
     required this.name,
     this.color,
-    this.userCanEdit,
     this.$__typename = 'Families',
     this.address,
   });
@@ -2876,14 +2849,12 @@ class Query_personsGeolocations_families implements Fragment_FamilyNoPhoto {
     final l$id = json['id'];
     final l$name = json['name'];
     final l$color = json['color'];
-    final l$userCanEdit = json['userCanEdit'];
     final l$$__typename = json['__typename'];
     final l$address = json['address'];
     return Query_personsGeolocations_families(
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
-      userCanEdit: (l$userCanEdit as bool?),
       $__typename: (l$$__typename as String),
       address: l$address == null
           ? null
@@ -2899,8 +2870,6 @@ class Query_personsGeolocations_families implements Fragment_FamilyNoPhoto {
 
   final int? color;
 
-  final bool? userCanEdit;
-
   final String $__typename;
 
   final Query_personsGeolocations_families_address? address;
@@ -2913,8 +2882,6 @@ class Query_personsGeolocations_families implements Fragment_FamilyNoPhoto {
     _resultData['name'] = l$name;
     final l$color = color;
     _resultData['color'] = l$color;
-    final l$userCanEdit = userCanEdit;
-    _resultData['userCanEdit'] = l$userCanEdit;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     final l$address = address;
@@ -2927,17 +2894,9 @@ class Query_personsGeolocations_families implements Fragment_FamilyNoPhoto {
     final l$id = id;
     final l$name = name;
     final l$color = color;
-    final l$userCanEdit = userCanEdit;
     final l$$__typename = $__typename;
     final l$address = address;
-    return Object.hashAll([
-      l$id,
-      l$name,
-      l$color,
-      l$userCanEdit,
-      l$$__typename,
-      l$address,
-    ]);
+    return Object.hashAll([l$id, l$name, l$color, l$$__typename, l$address]);
   }
 
   @override
@@ -2962,11 +2921,6 @@ class Query_personsGeolocations_families implements Fragment_FamilyNoPhoto {
     final l$color = color;
     final lOther$color = other.color;
     if (l$color != lOther$color) {
-      return false;
-    }
-    final l$userCanEdit = userCanEdit;
-    final lOther$userCanEdit = other.userCanEdit;
-    if (l$userCanEdit != lOther$userCanEdit) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -3004,7 +2958,6 @@ abstract class CopyWith_Query_personsGeolocations_families<TRes> {
     UuidValue? id,
     String? name,
     int? color,
-    bool? userCanEdit,
     String? $__typename,
     Query_personsGeolocations_families_address? address,
   });
@@ -3025,7 +2978,6 @@ class _CopyWithImpl_Query_personsGeolocations_families<TRes>
     Object? id = _undefined,
     Object? name = _undefined,
     Object? color = _undefined,
-    Object? userCanEdit = _undefined,
     Object? $__typename = _undefined,
     Object? address = _undefined,
   }) => _then(
@@ -3035,9 +2987,6 @@ class _CopyWithImpl_Query_personsGeolocations_families<TRes>
           ? _instance.name
           : (name as String),
       color: color == _undefined ? _instance.color : (color as int?),
-      userCanEdit: userCanEdit == _undefined
-          ? _instance.userCanEdit
-          : (userCanEdit as bool?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -3070,7 +3019,6 @@ class _CopyWithStubImpl_Query_personsGeolocations_families<TRes>
     UuidValue? id,
     String? name,
     int? color,
-    bool? userCanEdit,
     String? $__typename,
     Query_personsGeolocations_families_address? address,
   }) => _res;

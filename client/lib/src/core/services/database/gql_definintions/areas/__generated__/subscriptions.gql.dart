@@ -451,7 +451,6 @@ class Subscription_watchAllAreas_areas
     required this.id,
     required this.name,
     this.color,
-    this.userCanEdit,
     this.$__typename = 'Areas',
     this.photoUpdatedAt,
     this.blurhash,
@@ -462,7 +461,6 @@ class Subscription_watchAllAreas_areas
     final l$id = json['id'];
     final l$name = json['name'];
     final l$color = json['color'];
-    final l$userCanEdit = json['userCanEdit'];
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
     final l$blurhash = json['blurhash'];
@@ -471,7 +469,6 @@ class Subscription_watchAllAreas_areas
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
-      userCanEdit: (l$userCanEdit as bool?),
       $__typename: (l$$__typename as String),
       photoUpdatedAt: l$photoUpdatedAt == null
           ? null
@@ -486,8 +483,6 @@ class Subscription_watchAllAreas_areas
   final String name;
 
   final int? color;
-
-  final bool? userCanEdit;
 
   final String $__typename;
 
@@ -505,8 +500,6 @@ class Subscription_watchAllAreas_areas
     _resultData['name'] = l$name;
     final l$color = color;
     _resultData['color'] = l$color;
-    final l$userCanEdit = userCanEdit;
-    _resultData['userCanEdit'] = l$userCanEdit;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
@@ -525,7 +518,6 @@ class Subscription_watchAllAreas_areas
     final l$id = id;
     final l$name = name;
     final l$color = color;
-    final l$userCanEdit = userCanEdit;
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$blurhash = blurhash;
@@ -534,7 +526,6 @@ class Subscription_watchAllAreas_areas
       l$id,
       l$name,
       l$color,
-      l$userCanEdit,
       l$$__typename,
       l$photoUpdatedAt,
       l$blurhash,
@@ -564,11 +555,6 @@ class Subscription_watchAllAreas_areas
     final l$color = color;
     final lOther$color = other.color;
     if (l$color != lOther$color) {
-      return false;
-    }
-    final l$userCanEdit = userCanEdit;
-    final lOther$userCanEdit = other.userCanEdit;
-    if (l$userCanEdit != lOther$userCanEdit) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -614,7 +600,6 @@ abstract class CopyWith_Subscription_watchAllAreas_areas<TRes> {
     UuidValue? id,
     String? name,
     int? color,
-    bool? userCanEdit,
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
@@ -636,7 +621,6 @@ class _CopyWithImpl_Subscription_watchAllAreas_areas<TRes>
     Object? id = _undefined,
     Object? name = _undefined,
     Object? color = _undefined,
-    Object? userCanEdit = _undefined,
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? blurhash = _undefined,
@@ -648,9 +632,6 @@ class _CopyWithImpl_Subscription_watchAllAreas_areas<TRes>
           ? _instance.name
           : (name as String),
       color: color == _undefined ? _instance.color : (color as int?),
-      userCanEdit: userCanEdit == _undefined
-          ? _instance.userCanEdit
-          : (userCanEdit as bool?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -677,7 +658,6 @@ class _CopyWithStubImpl_Subscription_watchAllAreas_areas<TRes>
     UuidValue? id,
     String? name,
     int? color,
-    bool? userCanEdit,
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
@@ -1641,11 +1621,11 @@ class Subscription_watchArea_areasByPk
     required this.id,
     required this.name,
     this.color,
-    this.userCanEdit,
     this.$__typename = 'Areas',
     this.photoUpdatedAt,
     this.blurhash,
     this.bounds,
+    this.userCanEdit,
     this.lastEdit,
     required this.adminUsers,
   });
@@ -1654,24 +1634,24 @@ class Subscription_watchArea_areasByPk
     final l$id = json['id'];
     final l$name = json['name'];
     final l$color = json['color'];
-    final l$userCanEdit = json['userCanEdit'];
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
     final l$blurhash = json['blurhash'];
     final l$bounds = json['bounds'];
+    final l$userCanEdit = json['userCanEdit'];
     final l$lastEdit = json['lastEdit'];
     final l$adminUsers = json['adminUsers'];
     return Subscription_watchArea_areasByPk(
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
-      userCanEdit: (l$userCanEdit as bool?),
       $__typename: (l$$__typename as String),
       photoUpdatedAt: l$photoUpdatedAt == null
           ? null
           : tstzFromString(l$photoUpdatedAt),
       blurhash: (l$blurhash as String?),
       bounds: (l$bounds as Map<String, dynamic>?),
+      userCanEdit: (l$userCanEdit as bool?),
       lastEdit: l$lastEdit == null
           ? null
           : Fragment_LatestEditHistory.fromJson(
@@ -1693,8 +1673,6 @@ class Subscription_watchArea_areasByPk
 
   final int? color;
 
-  final bool? userCanEdit;
-
   final String $__typename;
 
   final DateTime? photoUpdatedAt;
@@ -1702,6 +1680,8 @@ class Subscription_watchArea_areasByPk
   final String? blurhash;
 
   final Map<String, dynamic>? bounds;
+
+  final bool? userCanEdit;
 
   final Fragment_LatestEditHistory? lastEdit;
 
@@ -1715,8 +1695,6 @@ class Subscription_watchArea_areasByPk
     _resultData['name'] = l$name;
     final l$color = color;
     _resultData['color'] = l$color;
-    final l$userCanEdit = userCanEdit;
-    _resultData['userCanEdit'] = l$userCanEdit;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
@@ -1727,6 +1705,8 @@ class Subscription_watchArea_areasByPk
     _resultData['blurhash'] = l$blurhash;
     final l$bounds = bounds;
     _resultData['bounds'] = l$bounds;
+    final l$userCanEdit = userCanEdit;
+    _resultData['userCanEdit'] = l$userCanEdit;
     final l$lastEdit = lastEdit;
     _resultData['lastEdit'] = l$lastEdit?.toJson();
     final l$adminUsers = adminUsers;
@@ -1739,22 +1719,22 @@ class Subscription_watchArea_areasByPk
     final l$id = id;
     final l$name = name;
     final l$color = color;
-    final l$userCanEdit = userCanEdit;
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$blurhash = blurhash;
     final l$bounds = bounds;
+    final l$userCanEdit = userCanEdit;
     final l$lastEdit = lastEdit;
     final l$adminUsers = adminUsers;
     return Object.hashAll([
       l$id,
       l$name,
       l$color,
-      l$userCanEdit,
       l$$__typename,
       l$photoUpdatedAt,
       l$blurhash,
       l$bounds,
+      l$userCanEdit,
       l$lastEdit,
       Object.hashAll(l$adminUsers.map((v) => v)),
     ]);
@@ -1784,11 +1764,6 @@ class Subscription_watchArea_areasByPk
     if (l$color != lOther$color) {
       return false;
     }
-    final l$userCanEdit = userCanEdit;
-    final lOther$userCanEdit = other.userCanEdit;
-    if (l$userCanEdit != lOther$userCanEdit) {
-      return false;
-    }
     final l$$__typename = $__typename;
     final lOther$$__typename = other.$__typename;
     if (l$$__typename != lOther$$__typename) {
@@ -1807,6 +1782,11 @@ class Subscription_watchArea_areasByPk
     final l$bounds = bounds;
     final lOther$bounds = other.bounds;
     if (l$bounds != lOther$bounds) {
+      return false;
+    }
+    final l$userCanEdit = userCanEdit;
+    final lOther$userCanEdit = other.userCanEdit;
+    if (l$userCanEdit != lOther$userCanEdit) {
       return false;
     }
     final l$lastEdit = lastEdit;
@@ -1849,11 +1829,11 @@ abstract class CopyWith_Subscription_watchArea_areasByPk<TRes> {
     UuidValue? id,
     String? name,
     int? color,
-    bool? userCanEdit,
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
     Map<String, dynamic>? bounds,
+    bool? userCanEdit,
     Fragment_LatestEditHistory? lastEdit,
     List<Subscription_watchArea_areasByPk_adminUsers>? adminUsers,
   });
@@ -1884,11 +1864,11 @@ class _CopyWithImpl_Subscription_watchArea_areasByPk<TRes>
     Object? id = _undefined,
     Object? name = _undefined,
     Object? color = _undefined,
-    Object? userCanEdit = _undefined,
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? blurhash = _undefined,
     Object? bounds = _undefined,
+    Object? userCanEdit = _undefined,
     Object? lastEdit = _undefined,
     Object? adminUsers = _undefined,
   }) => _then(
@@ -1898,9 +1878,6 @@ class _CopyWithImpl_Subscription_watchArea_areasByPk<TRes>
           ? _instance.name
           : (name as String),
       color: color == _undefined ? _instance.color : (color as int?),
-      userCanEdit: userCanEdit == _undefined
-          ? _instance.userCanEdit
-          : (userCanEdit as bool?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -1913,6 +1890,9 @@ class _CopyWithImpl_Subscription_watchArea_areasByPk<TRes>
       bounds: bounds == _undefined
           ? _instance.bounds
           : (bounds as Map<String, dynamic>?),
+      userCanEdit: userCanEdit == _undefined
+          ? _instance.userCanEdit
+          : (userCanEdit as bool?),
       lastEdit: lastEdit == _undefined
           ? _instance.lastEdit
           : (lastEdit as Fragment_LatestEditHistory?),
@@ -1961,11 +1941,11 @@ class _CopyWithStubImpl_Subscription_watchArea_areasByPk<TRes>
     UuidValue? id,
     String? name,
     int? color,
-    bool? userCanEdit,
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
     Map<String, dynamic>? bounds,
+    bool? userCanEdit,
     Fragment_LatestEditHistory? lastEdit,
     List<Subscription_watchArea_areasByPk_adminUsers>? adminUsers,
   }) => _res;
