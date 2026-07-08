@@ -61,50 +61,72 @@ class ColorField extends StatelessWidget {
     BuildContext context,
     FormFieldState<Color?> state,
   ) async {
+    final themeData = Theme.of(context);
+
     final focusScope = FocusScope.of(context);
+    Color? newColorColor;
 
-    final Color newColor = await showColorPickerDialog(
-      context,
-      state.value ?? Theme.of(context).primaryColor,
-      title: Text(
-        'اختيار اللون',
-        style: Theme.of(context).textTheme.titleLarge,
-      ),
-      spacing: 10,
-      runSpacing: 10,
-      borderRadius: 20,
-      wheelDiameter: 165,
-      enableOpacity: true,
-      enableTonalPalette: true,
-      enableShadesSelection: false,
-      showRecentColors: true,
-      showColorName: true,
-      showColorCode: true,
-      colorCodeHasColor: true,
-      pickersEnabled: <ColorPickerType, bool>{
-        ColorPickerType.wheel: true,
-        ColorPickerType.primary: false,
-        ColorPickerType.accent: false,
-        ColorPickerType.both: false,
-        ColorPickerType.bw: false,
-        ColorPickerType.custom: false,
-        ColorPickerType.customSecondary: false,
-      },
-      copyPasteBehavior: const ColorPickerCopyPasteBehavior(
-        copyButton: true,
-        pasteButton: true,
-        longPressMenu: true,
-      ),
-      barrierColor: Colors.black54,
-      constraints: BoxConstraints(
-        minWidth: MediaQuery.sizeOf(context).height * 0.7,
-      ),
-    );
+    final primaryColor = themeData.primaryColor;
+    final dialogResult =
+        await ColorPicker(
+          color: state.value ?? themeData.primaryColor,
+          onColorChanged: (newColor) => newColorColor = newColor,
+          title: Text(
+            'اختيار اللون',
+            style: themeData.textTheme.titleLarge,
+          ),
+          subheading: Text(
+            'درجة اللون ١',
+            style: themeData.textTheme.bodyLarge,
+          ),
+          tonalSubheading: Text(
+            'درجة اللون ٢',
+            style: themeData.textTheme.bodyLarge,
+          ),
+          spacing: 10,
+          runSpacing: 10,
+          borderRadius: 20,
+          wheelDiameter: 165,
+          enableTonalPalette: true,
+          showColorCode: true,
+          pickerTypeLabels: const {
+            ColorPickerType.custom: 'ألوان جاهزة',
+            ColorPickerType.wheel: 'متقدم',
+          },
+          pickersEnabled: const <ColorPickerType, bool>{
+            ColorPickerType.wheel: true,
+            ColorPickerType.both: false,
+            ColorPickerType.primary: false,
+            ColorPickerType.accent: false,
+            ColorPickerType.bw: false,
+            ColorPickerType.custom: true,
+            ColorPickerType.customSecondary: false,
+          },
+          customColorSwatchesAndNames: {
+            for (final color in ColorTools.primaryAndAccentColors)
+              color: ColorTools.nameThatColor(color),
+            ColorTools.primarySwatch(primaryColor): ColorTools.nameThatColor(
+              primaryColor,
+            ),
+          },
+          copyPasteBehavior: const ColorPickerCopyPasteBehavior(
+            copyButton: true,
+            pasteButton: true,
+            longPressMenu: true,
+          ),
+        ).showPickerDialog(
+          context,
+          barrierColor: Colors.black54,
+        );
 
-    if (newColor != state.value) {
-      state.didChange(newColor);
-      onChanged?.call(newColor);
-      focusScope.nextFocus();
+    if (!dialogResult ||
+        newColorColor == null ||
+        newColorColor == state.value) {
+      return;
     }
+
+    state.didChange(newColorColor);
+    onChanged?.call(newColorColor);
+    focusScope.nextFocus();
   }
 }
