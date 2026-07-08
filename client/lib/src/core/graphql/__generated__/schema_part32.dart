@@ -1645,8 +1645,6 @@ class Input_HistoryMeetingsBoolExp {
     Input_UuidComparisonExp? id,
     Input_BooleanComparisonExp? isArchived,
     Input_StringComparisonExp? name,
-    Input_HistoryMeetingsPersonsBoolExp? persons,
-    Input_HistoryMeetingsPersonsAggregateBoolExp? personsAggregate,
     Input_ServicesBoolExp? service,
     Input_BooleanComparisonExp? serviceGender,
     Input_UuidComparisonExp? serviceId,
@@ -1668,8 +1666,6 @@ class Input_HistoryMeetingsBoolExp {
     if (id != null) r'id': id,
     if (isArchived != null) r'isArchived': isArchived,
     if (name != null) r'name': name,
-    if (persons != null) r'persons': persons,
-    if (personsAggregate != null) r'personsAggregate': personsAggregate,
     if (service != null) r'service': service,
     if (serviceGender != null) r'serviceGender': serviceGender,
     if (serviceId != null) r'serviceId': serviceId,
@@ -1794,22 +1790,6 @@ class Input_HistoryMeetingsBoolExp {
               (l$name as Map<String, dynamic>),
             );
     }
-    if (data.containsKey('persons')) {
-      final l$persons = data['persons'];
-      result$data['persons'] = l$persons == null
-          ? null
-          : Input_HistoryMeetingsPersonsBoolExp.fromJson(
-              (l$persons as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('personsAggregate')) {
-      final l$personsAggregate = data['personsAggregate'];
-      result$data['personsAggregate'] = l$personsAggregate == null
-          ? null
-          : Input_HistoryMeetingsPersonsAggregateBoolExp.fromJson(
-              (l$personsAggregate as Map<String, dynamic>),
-            );
-    }
     if (data.containsKey('service')) {
       final l$service = data['service'];
       result$data['service'] = l$service == null
@@ -1895,13 +1875,6 @@ class Input_HistoryMeetingsBoolExp {
   Input_StringComparisonExp? get name =>
       (_$data['name'] as Input_StringComparisonExp?);
 
-  Input_HistoryMeetingsPersonsBoolExp? get persons =>
-      (_$data['persons'] as Input_HistoryMeetingsPersonsBoolExp?);
-
-  Input_HistoryMeetingsPersonsAggregateBoolExp? get personsAggregate =>
-      (_$data['personsAggregate']
-          as Input_HistoryMeetingsPersonsAggregateBoolExp?);
-
   Input_ServicesBoolExp? get service =>
       (_$data['service'] as Input_ServicesBoolExp?);
 
@@ -1975,14 +1948,6 @@ class Input_HistoryMeetingsBoolExp {
     if (_$data.containsKey('name')) {
       final l$name = name;
       result$data['name'] = l$name?.toJson();
-    }
-    if (_$data.containsKey('persons')) {
-      final l$persons = persons;
-      result$data['persons'] = l$persons?.toJson();
-    }
-    if (_$data.containsKey('personsAggregate')) {
-      final l$personsAggregate = personsAggregate;
-      result$data['personsAggregate'] = l$personsAggregate?.toJson();
     }
     if (_$data.containsKey('service')) {
       final l$service = service;
@@ -2158,23 +2123,6 @@ class Input_HistoryMeetingsBoolExp {
     if (l$name != lOther$name) {
       return false;
     }
-    final l$persons = persons;
-    final lOther$persons = other.persons;
-    if (_$data.containsKey('persons') != other._$data.containsKey('persons')) {
-      return false;
-    }
-    if (l$persons != lOther$persons) {
-      return false;
-    }
-    final l$personsAggregate = personsAggregate;
-    final lOther$personsAggregate = other.personsAggregate;
-    if (_$data.containsKey('personsAggregate') !=
-        other._$data.containsKey('personsAggregate')) {
-      return false;
-    }
-    if (l$personsAggregate != lOther$personsAggregate) {
-      return false;
-    }
     final l$service = service;
     final lOther$service = other.service;
     if (_$data.containsKey('service') != other._$data.containsKey('service')) {
@@ -2238,8 +2186,6 @@ class Input_HistoryMeetingsBoolExp {
     final l$id = id;
     final l$isArchived = isArchived;
     final l$name = name;
-    final l$persons = persons;
-    final l$personsAggregate = personsAggregate;
     final l$service = service;
     final l$serviceGender = serviceGender;
     final l$serviceId = serviceId;
@@ -2270,8 +2216,6 @@ class Input_HistoryMeetingsBoolExp {
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('isArchived') ? l$isArchived : const {},
       _$data.containsKey('name') ? l$name : const {},
-      _$data.containsKey('persons') ? l$persons : const {},
-      _$data.containsKey('personsAggregate') ? l$personsAggregate : const {},
       _$data.containsKey('service') ? l$service : const {},
       _$data.containsKey('serviceGender') ? l$serviceGender : const {},
       _$data.containsKey('serviceId') ? l$serviceId : const {},
@@ -2305,8 +2249,6 @@ abstract class CopyWith_Input_HistoryMeetingsBoolExp<TRes> {
     Input_UuidComparisonExp? id,
     Input_BooleanComparisonExp? isArchived,
     Input_StringComparisonExp? name,
-    Input_HistoryMeetingsPersonsBoolExp? persons,
-    Input_HistoryMeetingsPersonsAggregateBoolExp? personsAggregate,
     Input_ServicesBoolExp? service,
     Input_BooleanComparisonExp? serviceGender,
     Input_UuidComparisonExp? serviceId,
@@ -2342,9 +2284,6 @@ abstract class CopyWith_Input_HistoryMeetingsBoolExp<TRes> {
   CopyWith_Input_UuidComparisonExp<TRes> get id;
   CopyWith_Input_BooleanComparisonExp<TRes> get isArchived;
   CopyWith_Input_StringComparisonExp<TRes> get name;
-  CopyWith_Input_HistoryMeetingsPersonsBoolExp<TRes> get persons;
-  CopyWith_Input_HistoryMeetingsPersonsAggregateBoolExp<TRes>
-  get personsAggregate;
   CopyWith_Input_ServicesBoolExp<TRes> get service;
   CopyWith_Input_BooleanComparisonExp<TRes> get serviceGender;
   CopyWith_Input_UuidComparisonExp<TRes> get serviceId;
@@ -2377,8 +2316,6 @@ class _CopyWithImpl_Input_HistoryMeetingsBoolExp<TRes>
     Object? id = _undefined,
     Object? isArchived = _undefined,
     Object? name = _undefined,
-    Object? persons = _undefined,
-    Object? personsAggregate = _undefined,
     Object? service = _undefined,
     Object? serviceGender = _undefined,
     Object? serviceId = _undefined,
@@ -2414,11 +2351,6 @@ class _CopyWithImpl_Input_HistoryMeetingsBoolExp<TRes>
       if (isArchived != _undefined)
         'isArchived': (isArchived as Input_BooleanComparisonExp?),
       if (name != _undefined) 'name': (name as Input_StringComparisonExp?),
-      if (persons != _undefined)
-        'persons': (persons as Input_HistoryMeetingsPersonsBoolExp?),
-      if (personsAggregate != _undefined)
-        'personsAggregate':
-            (personsAggregate as Input_HistoryMeetingsPersonsAggregateBoolExp?),
       if (service != _undefined) 'service': (service as Input_ServicesBoolExp?),
       if (serviceGender != _undefined)
         'serviceGender': (serviceGender as Input_BooleanComparisonExp?),
@@ -2578,29 +2510,6 @@ class _CopyWithImpl_Input_HistoryMeetingsBoolExp<TRes>
         : CopyWith_Input_StringComparisonExp(local$name, (e) => call(name: e));
   }
 
-  CopyWith_Input_HistoryMeetingsPersonsBoolExp<TRes> get persons {
-    final local$persons = _instance.persons;
-    return local$persons == null
-        ? CopyWith_Input_HistoryMeetingsPersonsBoolExp.stub(_then(_instance))
-        : CopyWith_Input_HistoryMeetingsPersonsBoolExp(
-            local$persons,
-            (e) => call(persons: e),
-          );
-  }
-
-  CopyWith_Input_HistoryMeetingsPersonsAggregateBoolExp<TRes>
-  get personsAggregate {
-    final local$personsAggregate = _instance.personsAggregate;
-    return local$personsAggregate == null
-        ? CopyWith_Input_HistoryMeetingsPersonsAggregateBoolExp.stub(
-            _then(_instance),
-          )
-        : CopyWith_Input_HistoryMeetingsPersonsAggregateBoolExp(
-            local$personsAggregate,
-            (e) => call(personsAggregate: e),
-          );
-  }
-
   CopyWith_Input_ServicesBoolExp<TRes> get service {
     final local$service = _instance.service;
     return local$service == null
@@ -2673,8 +2582,6 @@ class _CopyWithStubImpl_Input_HistoryMeetingsBoolExp<TRes>
     Input_UuidComparisonExp? id,
     Input_BooleanComparisonExp? isArchived,
     Input_StringComparisonExp? name,
-    Input_HistoryMeetingsPersonsBoolExp? persons,
-    Input_HistoryMeetingsPersonsAggregateBoolExp? personsAggregate,
     Input_ServicesBoolExp? service,
     Input_BooleanComparisonExp? serviceGender,
     Input_UuidComparisonExp? serviceId,
@@ -2722,13 +2629,6 @@ class _CopyWithStubImpl_Input_HistoryMeetingsBoolExp<TRes>
 
   CopyWith_Input_StringComparisonExp<TRes> get name =>
       CopyWith_Input_StringComparisonExp.stub(_res);
-
-  CopyWith_Input_HistoryMeetingsPersonsBoolExp<TRes> get persons =>
-      CopyWith_Input_HistoryMeetingsPersonsBoolExp.stub(_res);
-
-  CopyWith_Input_HistoryMeetingsPersonsAggregateBoolExp<TRes>
-  get personsAggregate =>
-      CopyWith_Input_HistoryMeetingsPersonsAggregateBoolExp.stub(_res);
 
   CopyWith_Input_ServicesBoolExp<TRes> get service =>
       CopyWith_Input_ServicesBoolExp.stub(_res);

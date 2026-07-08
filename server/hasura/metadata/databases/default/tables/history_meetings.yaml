@@ -28,15 +28,6 @@ array_relationships:
         remote_table:
           name: meeting_days
           schema: history
-  - name: persons
-    using:
-      manual_configuration:
-        column_mapping:
-          id: meeting_id
-        insertion_order: null
-        remote_table:
-          name: meetings_persons
-          schema: history
 insert_permissions:
   - role: user
     permission:

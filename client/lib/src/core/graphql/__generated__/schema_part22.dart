@@ -399,7 +399,6 @@ class Input_HistoryAttendanceDaysBoolExp {
     Input_DateComparisonExp? day,
     Input_HistoryKodasHistoryBoolExp? kodasHistory,
     Input_HistoryKodasHistoryAggregateBoolExp? kodasHistoryAggregate,
-    Input_StringComparisonExp? notes,
   }) => Input_HistoryAttendanceDaysBoolExp._({
     if ($_and != null) r'_and': $_and,
     if ($_not != null) r'_not': $_not,
@@ -411,7 +410,6 @@ class Input_HistoryAttendanceDaysBoolExp {
     if (kodasHistory != null) r'kodasHistory': kodasHistory,
     if (kodasHistoryAggregate != null)
       r'kodasHistoryAggregate': kodasHistoryAggregate,
-    if (notes != null) r'notes': notes,
   });
 
   Input_HistoryAttendanceDaysBoolExp._(this._$data);
@@ -487,14 +485,6 @@ class Input_HistoryAttendanceDaysBoolExp {
               (l$kodasHistoryAggregate as Map<String, dynamic>),
             );
     }
-    if (data.containsKey('notes')) {
-      final l$notes = data['notes'];
-      result$data['notes'] = l$notes == null
-          ? null
-          : Input_StringComparisonExp.fromJson(
-              (l$notes as Map<String, dynamic>),
-            );
-    }
     return Input_HistoryAttendanceDaysBoolExp._(result$data);
   }
 
@@ -526,9 +516,6 @@ class Input_HistoryAttendanceDaysBoolExp {
   Input_HistoryKodasHistoryAggregateBoolExp? get kodasHistoryAggregate =>
       (_$data['kodasHistoryAggregate']
           as Input_HistoryKodasHistoryAggregateBoolExp?);
-
-  Input_StringComparisonExp? get notes =>
-      (_$data['notes'] as Input_StringComparisonExp?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -564,10 +551,6 @@ class Input_HistoryAttendanceDaysBoolExp {
     if (_$data.containsKey('kodasHistoryAggregate')) {
       final l$kodasHistoryAggregate = kodasHistoryAggregate;
       result$data['kodasHistoryAggregate'] = l$kodasHistoryAggregate?.toJson();
-    }
-    if (_$data.containsKey('notes')) {
-      final l$notes = notes;
-      result$data['notes'] = l$notes?.toJson();
     }
     return result$data;
   }
@@ -676,14 +659,6 @@ class Input_HistoryAttendanceDaysBoolExp {
     if (l$kodasHistoryAggregate != lOther$kodasHistoryAggregate) {
       return false;
     }
-    final l$notes = notes;
-    final lOther$notes = other.notes;
-    if (_$data.containsKey('notes') != other._$data.containsKey('notes')) {
-      return false;
-    }
-    if (l$notes != lOther$notes) {
-      return false;
-    }
     return true;
   }
 
@@ -697,7 +672,6 @@ class Input_HistoryAttendanceDaysBoolExp {
     final l$day = day;
     final l$kodasHistory = kodasHistory;
     final l$kodasHistoryAggregate = kodasHistoryAggregate;
-    final l$notes = notes;
     return Object.hashAll([
       _$data.containsKey('_and')
           ? l$$_and == null
@@ -719,7 +693,6 @@ class Input_HistoryAttendanceDaysBoolExp {
       _$data.containsKey('kodasHistoryAggregate')
           ? l$kodasHistoryAggregate
           : const {},
-      _$data.containsKey('notes') ? l$notes : const {},
     ]);
   }
 }
@@ -742,7 +715,6 @@ abstract class CopyWith_Input_HistoryAttendanceDaysBoolExp<TRes> {
     Input_DateComparisonExp? day,
     Input_HistoryKodasHistoryBoolExp? kodasHistory,
     Input_HistoryKodasHistoryAggregateBoolExp? kodasHistoryAggregate,
-    Input_StringComparisonExp? notes,
   });
   TRes $_and(
     Iterable<Input_HistoryAttendanceDaysBoolExp>? Function(
@@ -772,7 +744,6 @@ abstract class CopyWith_Input_HistoryAttendanceDaysBoolExp<TRes> {
   CopyWith_Input_HistoryKodasHistoryBoolExp<TRes> get kodasHistory;
   CopyWith_Input_HistoryKodasHistoryAggregateBoolExp<TRes>
   get kodasHistoryAggregate;
-  CopyWith_Input_StringComparisonExp<TRes> get notes;
 }
 
 class _CopyWithImpl_Input_HistoryAttendanceDaysBoolExp<TRes>
@@ -794,7 +765,6 @@ class _CopyWithImpl_Input_HistoryAttendanceDaysBoolExp<TRes>
     Object? day = _undefined,
     Object? kodasHistory = _undefined,
     Object? kodasHistoryAggregate = _undefined,
-    Object? notes = _undefined,
   }) => _then(
     Input_HistoryAttendanceDaysBoolExp._({
       ..._instance._$data,
@@ -818,7 +788,6 @@ class _CopyWithImpl_Input_HistoryAttendanceDaysBoolExp<TRes>
         'kodasHistoryAggregate':
             (kodasHistoryAggregate
                 as Input_HistoryKodasHistoryAggregateBoolExp?),
-      if (notes != _undefined) 'notes': (notes as Input_StringComparisonExp?),
     }),
   );
 
@@ -919,16 +888,6 @@ class _CopyWithImpl_Input_HistoryAttendanceDaysBoolExp<TRes>
             (e) => call(kodasHistoryAggregate: e),
           );
   }
-
-  CopyWith_Input_StringComparisonExp<TRes> get notes {
-    final local$notes = _instance.notes;
-    return local$notes == null
-        ? CopyWith_Input_StringComparisonExp.stub(_then(_instance))
-        : CopyWith_Input_StringComparisonExp(
-            local$notes,
-            (e) => call(notes: e),
-          );
-  }
 }
 
 class _CopyWithStubImpl_Input_HistoryAttendanceDaysBoolExp<TRes>
@@ -946,7 +905,6 @@ class _CopyWithStubImpl_Input_HistoryAttendanceDaysBoolExp<TRes>
     Input_DateComparisonExp? day,
     Input_HistoryKodasHistoryBoolExp? kodasHistory,
     Input_HistoryKodasHistoryAggregateBoolExp? kodasHistoryAggregate,
-    Input_StringComparisonExp? notes,
   }) => _res;
 
   $_and(_fn) => _res;
@@ -972,9 +930,6 @@ class _CopyWithStubImpl_Input_HistoryAttendanceDaysBoolExp<TRes>
   CopyWith_Input_HistoryKodasHistoryAggregateBoolExp<TRes>
   get kodasHistoryAggregate =>
       CopyWith_Input_HistoryKodasHistoryAggregateBoolExp.stub(_res);
-
-  CopyWith_Input_StringComparisonExp<TRes> get notes =>
-      CopyWith_Input_StringComparisonExp.stub(_res);
 }
 
 class Input_HistoryAttendanceDaysInsertInput {
@@ -982,12 +937,10 @@ class Input_HistoryAttendanceDaysInsertInput {
     Input_HistoryConfessionHistoryArrRelInsertInput? confessionHistory,
     DateTime? day,
     Input_HistoryKodasHistoryArrRelInsertInput? kodasHistory,
-    String? notes,
   }) => Input_HistoryAttendanceDaysInsertInput._({
     if (confessionHistory != null) r'confessionHistory': confessionHistory,
     if (day != null) r'day': day,
     if (kodasHistory != null) r'kodasHistory': kodasHistory,
-    if (notes != null) r'notes': notes,
   });
 
   Input_HistoryAttendanceDaysInsertInput._(this._$data);
@@ -1016,10 +969,6 @@ class Input_HistoryAttendanceDaysInsertInput {
               (l$kodasHistory as Map<String, dynamic>),
             );
     }
-    if (data.containsKey('notes')) {
-      final l$notes = data['notes'];
-      result$data['notes'] = (l$notes as String?);
-    }
     return Input_HistoryAttendanceDaysInsertInput._(result$data);
   }
 
@@ -1034,8 +983,6 @@ class Input_HistoryAttendanceDaysInsertInput {
   Input_HistoryKodasHistoryArrRelInsertInput? get kodasHistory =>
       (_$data['kodasHistory'] as Input_HistoryKodasHistoryArrRelInsertInput?);
 
-  String? get notes => (_$data['notes'] as String?);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('confessionHistory')) {
@@ -1049,10 +996,6 @@ class Input_HistoryAttendanceDaysInsertInput {
     if (_$data.containsKey('kodasHistory')) {
       final l$kodasHistory = kodasHistory;
       result$data['kodasHistory'] = l$kodasHistory?.toJson();
-    }
-    if (_$data.containsKey('notes')) {
-      final l$notes = notes;
-      result$data['notes'] = l$notes;
     }
     return result$data;
   }
@@ -1098,14 +1041,6 @@ class Input_HistoryAttendanceDaysInsertInput {
     if (l$kodasHistory != lOther$kodasHistory) {
       return false;
     }
-    final l$notes = notes;
-    final lOther$notes = other.notes;
-    if (_$data.containsKey('notes') != other._$data.containsKey('notes')) {
-      return false;
-    }
-    if (l$notes != lOther$notes) {
-      return false;
-    }
     return true;
   }
 
@@ -1114,12 +1049,10 @@ class Input_HistoryAttendanceDaysInsertInput {
     final l$confessionHistory = confessionHistory;
     final l$day = day;
     final l$kodasHistory = kodasHistory;
-    final l$notes = notes;
     return Object.hashAll([
       _$data.containsKey('confessionHistory') ? l$confessionHistory : const {},
       _$data.containsKey('day') ? l$day : const {},
       _$data.containsKey('kodasHistory') ? l$kodasHistory : const {},
-      _$data.containsKey('notes') ? l$notes : const {},
     ]);
   }
 }
@@ -1137,7 +1070,6 @@ abstract class CopyWith_Input_HistoryAttendanceDaysInsertInput<TRes> {
     Input_HistoryConfessionHistoryArrRelInsertInput? confessionHistory,
     DateTime? day,
     Input_HistoryKodasHistoryArrRelInsertInput? kodasHistory,
-    String? notes,
   });
   CopyWith_Input_HistoryConfessionHistoryArrRelInsertInput<TRes>
   get confessionHistory;
@@ -1161,7 +1093,6 @@ class _CopyWithImpl_Input_HistoryAttendanceDaysInsertInput<TRes>
     Object? confessionHistory = _undefined,
     Object? day = _undefined,
     Object? kodasHistory = _undefined,
-    Object? notes = _undefined,
   }) => _then(
     Input_HistoryAttendanceDaysInsertInput._({
       ..._instance._$data,
@@ -1173,7 +1104,6 @@ class _CopyWithImpl_Input_HistoryAttendanceDaysInsertInput<TRes>
       if (kodasHistory != _undefined)
         'kodasHistory':
             (kodasHistory as Input_HistoryKodasHistoryArrRelInsertInput?),
-      if (notes != _undefined) 'notes': (notes as String?),
     }),
   );
 
@@ -1213,7 +1143,6 @@ class _CopyWithStubImpl_Input_HistoryAttendanceDaysInsertInput<TRes>
     Input_HistoryConfessionHistoryArrRelInsertInput? confessionHistory,
     DateTime? day,
     Input_HistoryKodasHistoryArrRelInsertInput? kodasHistory,
-    String? notes,
   }) => _res;
 
   CopyWith_Input_HistoryConfessionHistoryArrRelInsertInput<TRes>
@@ -1615,14 +1544,12 @@ class Input_HistoryAttendanceDaysOrderBy {
     Input_HistoryConfessionHistoryAggregateOrderBy? confessionHistoryAggregate,
     Enum_OrderBy? day,
     Input_HistoryKodasHistoryAggregateOrderBy? kodasHistoryAggregate,
-    Enum_OrderBy? notes,
   }) => Input_HistoryAttendanceDaysOrderBy._({
     if (confessionHistoryAggregate != null)
       r'confessionHistoryAggregate': confessionHistoryAggregate,
     if (day != null) r'day': day,
     if (kodasHistoryAggregate != null)
       r'kodasHistoryAggregate': kodasHistoryAggregate,
-    if (notes != null) r'notes': notes,
   });
 
   Input_HistoryAttendanceDaysOrderBy._(this._$data);
@@ -1654,12 +1581,6 @@ class Input_HistoryAttendanceDaysOrderBy {
               (l$kodasHistoryAggregate as Map<String, dynamic>),
             );
     }
-    if (data.containsKey('notes')) {
-      final l$notes = data['notes'];
-      result$data['notes'] = l$notes == null
-          ? null
-          : fromJson_Enum_OrderBy((l$notes as String));
-    }
     return Input_HistoryAttendanceDaysOrderBy._(result$data);
   }
 
@@ -1676,8 +1597,6 @@ class Input_HistoryAttendanceDaysOrderBy {
       (_$data['kodasHistoryAggregate']
           as Input_HistoryKodasHistoryAggregateOrderBy?);
 
-  Enum_OrderBy? get notes => (_$data['notes'] as Enum_OrderBy?);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('confessionHistoryAggregate')) {
@@ -1692,12 +1611,6 @@ class Input_HistoryAttendanceDaysOrderBy {
     if (_$data.containsKey('kodasHistoryAggregate')) {
       final l$kodasHistoryAggregate = kodasHistoryAggregate;
       result$data['kodasHistoryAggregate'] = l$kodasHistoryAggregate?.toJson();
-    }
-    if (_$data.containsKey('notes')) {
-      final l$notes = notes;
-      result$data['notes'] = l$notes == null
-          ? null
-          : toJson_Enum_OrderBy(l$notes);
     }
     return result$data;
   }
@@ -1742,14 +1655,6 @@ class Input_HistoryAttendanceDaysOrderBy {
     if (l$kodasHistoryAggregate != lOther$kodasHistoryAggregate) {
       return false;
     }
-    final l$notes = notes;
-    final lOther$notes = other.notes;
-    if (_$data.containsKey('notes') != other._$data.containsKey('notes')) {
-      return false;
-    }
-    if (l$notes != lOther$notes) {
-      return false;
-    }
     return true;
   }
 
@@ -1758,7 +1663,6 @@ class Input_HistoryAttendanceDaysOrderBy {
     final l$confessionHistoryAggregate = confessionHistoryAggregate;
     final l$day = day;
     final l$kodasHistoryAggregate = kodasHistoryAggregate;
-    final l$notes = notes;
     return Object.hashAll([
       _$data.containsKey('confessionHistoryAggregate')
           ? l$confessionHistoryAggregate
@@ -1767,7 +1671,6 @@ class Input_HistoryAttendanceDaysOrderBy {
       _$data.containsKey('kodasHistoryAggregate')
           ? l$kodasHistoryAggregate
           : const {},
-      _$data.containsKey('notes') ? l$notes : const {},
     ]);
   }
 }
@@ -1785,7 +1688,6 @@ abstract class CopyWith_Input_HistoryAttendanceDaysOrderBy<TRes> {
     Input_HistoryConfessionHistoryAggregateOrderBy? confessionHistoryAggregate,
     Enum_OrderBy? day,
     Input_HistoryKodasHistoryAggregateOrderBy? kodasHistoryAggregate,
-    Enum_OrderBy? notes,
   });
   CopyWith_Input_HistoryConfessionHistoryAggregateOrderBy<TRes>
   get confessionHistoryAggregate;
@@ -1807,7 +1709,6 @@ class _CopyWithImpl_Input_HistoryAttendanceDaysOrderBy<TRes>
     Object? confessionHistoryAggregate = _undefined,
     Object? day = _undefined,
     Object? kodasHistoryAggregate = _undefined,
-    Object? notes = _undefined,
   }) => _then(
     Input_HistoryAttendanceDaysOrderBy._({
       ..._instance._$data,
@@ -1820,7 +1721,6 @@ class _CopyWithImpl_Input_HistoryAttendanceDaysOrderBy<TRes>
         'kodasHistoryAggregate':
             (kodasHistoryAggregate
                 as Input_HistoryKodasHistoryAggregateOrderBy?),
-      if (notes != _undefined) 'notes': (notes as Enum_OrderBy?),
     }),
   );
 
@@ -1862,7 +1762,6 @@ class _CopyWithStubImpl_Input_HistoryAttendanceDaysOrderBy<TRes>
     Input_HistoryConfessionHistoryAggregateOrderBy? confessionHistoryAggregate,
     Enum_OrderBy? day,
     Input_HistoryKodasHistoryAggregateOrderBy? kodasHistoryAggregate,
-    Enum_OrderBy? notes,
   }) => _res;
 
   CopyWith_Input_HistoryConfessionHistoryAggregateOrderBy<TRes>
@@ -1973,11 +1872,8 @@ class _CopyWithStubImpl_Input_HistoryAttendanceDaysPkColumnsInput<TRes>
 }
 
 class Input_HistoryAttendanceDaysSetInput {
-  factory Input_HistoryAttendanceDaysSetInput({DateTime? day, String? notes}) =>
-      Input_HistoryAttendanceDaysSetInput._({
-        if (day != null) r'day': day,
-        if (notes != null) r'notes': notes,
-      });
+  factory Input_HistoryAttendanceDaysSetInput({DateTime? day}) =>
+      Input_HistoryAttendanceDaysSetInput._({if (day != null) r'day': day});
 
   Input_HistoryAttendanceDaysSetInput._(this._$data);
 
@@ -1989,10 +1885,6 @@ class Input_HistoryAttendanceDaysSetInput {
       final l$day = data['day'];
       result$data['day'] = l$day == null ? null : dateFromString(l$day);
     }
-    if (data.containsKey('notes')) {
-      final l$notes = data['notes'];
-      result$data['notes'] = (l$notes as String?);
-    }
     return Input_HistoryAttendanceDaysSetInput._(result$data);
   }
 
@@ -2000,17 +1892,11 @@ class Input_HistoryAttendanceDaysSetInput {
 
   DateTime? get day => (_$data['day'] as DateTime?);
 
-  String? get notes => (_$data['notes'] as String?);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('day')) {
       final l$day = day;
       result$data['day'] = l$day == null ? null : dateToString(l$day);
-    }
-    if (_$data.containsKey('notes')) {
-      final l$notes = notes;
-      result$data['notes'] = l$notes;
     }
     return result$data;
   }
@@ -2037,25 +1923,13 @@ class Input_HistoryAttendanceDaysSetInput {
     if (l$day != lOther$day) {
       return false;
     }
-    final l$notes = notes;
-    final lOther$notes = other.notes;
-    if (_$data.containsKey('notes') != other._$data.containsKey('notes')) {
-      return false;
-    }
-    if (l$notes != lOther$notes) {
-      return false;
-    }
     return true;
   }
 
   @override
   int get hashCode {
     final l$day = day;
-    final l$notes = notes;
-    return Object.hashAll([
-      _$data.containsKey('day') ? l$day : const {},
-      _$data.containsKey('notes') ? l$notes : const {},
-    ]);
+    return Object.hashAll([_$data.containsKey('day') ? l$day : const {}]);
   }
 }
 
@@ -2068,7 +1942,7 @@ abstract class CopyWith_Input_HistoryAttendanceDaysSetInput<TRes> {
   factory CopyWith_Input_HistoryAttendanceDaysSetInput.stub(TRes res) =
       _CopyWithStubImpl_Input_HistoryAttendanceDaysSetInput;
 
-  TRes call({DateTime? day, String? notes});
+  TRes call({DateTime? day});
 }
 
 class _CopyWithImpl_Input_HistoryAttendanceDaysSetInput<TRes>
@@ -2081,11 +1955,10 @@ class _CopyWithImpl_Input_HistoryAttendanceDaysSetInput<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? day = _undefined, Object? notes = _undefined}) => _then(
+  TRes call({Object? day = _undefined}) => _then(
     Input_HistoryAttendanceDaysSetInput._({
       ..._instance._$data,
       if (day != _undefined) 'day': (day as DateTime?),
-      if (notes != _undefined) 'notes': (notes as String?),
     }),
   );
 }
@@ -2096,7 +1969,7 @@ class _CopyWithStubImpl_Input_HistoryAttendanceDaysSetInput<TRes>
 
   TRes _res;
 
-  call({DateTime? day, String? notes}) => _res;
+  call({DateTime? day}) => _res;
 }
 
 class Input_HistoryAttendanceDaysStreamCursorInput {
@@ -2264,13 +2137,10 @@ class _CopyWithStubImpl_Input_HistoryAttendanceDaysStreamCursorInput<TRes>
 }
 
 class Input_HistoryAttendanceDaysStreamCursorValueInput {
-  factory Input_HistoryAttendanceDaysStreamCursorValueInput({
-    DateTime? day,
-    String? notes,
-  }) => Input_HistoryAttendanceDaysStreamCursorValueInput._({
-    if (day != null) r'day': day,
-    if (notes != null) r'notes': notes,
-  });
+  factory Input_HistoryAttendanceDaysStreamCursorValueInput({DateTime? day}) =>
+      Input_HistoryAttendanceDaysStreamCursorValueInput._({
+        if (day != null) r'day': day,
+      });
 
   Input_HistoryAttendanceDaysStreamCursorValueInput._(this._$data);
 
@@ -2282,10 +2152,6 @@ class Input_HistoryAttendanceDaysStreamCursorValueInput {
       final l$day = data['day'];
       result$data['day'] = l$day == null ? null : dateFromString(l$day);
     }
-    if (data.containsKey('notes')) {
-      final l$notes = data['notes'];
-      result$data['notes'] = (l$notes as String?);
-    }
     return Input_HistoryAttendanceDaysStreamCursorValueInput._(result$data);
   }
 
@@ -2293,17 +2159,11 @@ class Input_HistoryAttendanceDaysStreamCursorValueInput {
 
   DateTime? get day => (_$data['day'] as DateTime?);
 
-  String? get notes => (_$data['notes'] as String?);
-
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
     if (_$data.containsKey('day')) {
       final l$day = day;
       result$data['day'] = l$day == null ? null : dateToString(l$day);
-    }
-    if (_$data.containsKey('notes')) {
-      final l$notes = notes;
-      result$data['notes'] = l$notes;
     }
     return result$data;
   }
@@ -2333,25 +2193,13 @@ class Input_HistoryAttendanceDaysStreamCursorValueInput {
     if (l$day != lOther$day) {
       return false;
     }
-    final l$notes = notes;
-    final lOther$notes = other.notes;
-    if (_$data.containsKey('notes') != other._$data.containsKey('notes')) {
-      return false;
-    }
-    if (l$notes != lOther$notes) {
-      return false;
-    }
     return true;
   }
 
   @override
   int get hashCode {
     final l$day = day;
-    final l$notes = notes;
-    return Object.hashAll([
-      _$data.containsKey('day') ? l$day : const {},
-      _$data.containsKey('notes') ? l$notes : const {},
-    ]);
+    return Object.hashAll([_$data.containsKey('day') ? l$day : const {}]);
   }
 }
 
@@ -2367,7 +2215,7 @@ abstract class CopyWith_Input_HistoryAttendanceDaysStreamCursorValueInput<
     TRes res,
   ) = _CopyWithStubImpl_Input_HistoryAttendanceDaysStreamCursorValueInput;
 
-  TRes call({DateTime? day, String? notes});
+  TRes call({DateTime? day});
 }
 
 class _CopyWithImpl_Input_HistoryAttendanceDaysStreamCursorValueInput<TRes>
@@ -2384,11 +2232,10 @@ class _CopyWithImpl_Input_HistoryAttendanceDaysStreamCursorValueInput<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? day = _undefined, Object? notes = _undefined}) => _then(
+  TRes call({Object? day = _undefined}) => _then(
     Input_HistoryAttendanceDaysStreamCursorValueInput._({
       ..._instance._$data,
       if (day != _undefined) 'day': (day as DateTime?),
-      if (notes != _undefined) 'notes': (notes as String?),
     }),
   );
 }
@@ -2402,7 +2249,7 @@ class _CopyWithStubImpl_Input_HistoryAttendanceDaysStreamCursorValueInput<TRes>
 
   TRes _res;
 
-  call({DateTime? day, String? notes}) => _res;
+  call({DateTime? day}) => _res;
 }
 
 class Input_HistoryAttendanceDaysUpdates {
@@ -2510,4 +2357,191 @@ abstract class CopyWith_Input_HistoryAttendanceDaysUpdates<TRes> {
   });
   CopyWith_Input_HistoryAttendanceDaysSetInput<TRes> get $_set;
   CopyWith_Input_HistoryAttendanceDaysBoolExp<TRes> get where;
+}
+
+class _CopyWithImpl_Input_HistoryAttendanceDaysUpdates<TRes>
+    implements CopyWith_Input_HistoryAttendanceDaysUpdates<TRes> {
+  _CopyWithImpl_Input_HistoryAttendanceDaysUpdates(this._instance, this._then);
+
+  final Input_HistoryAttendanceDaysUpdates _instance;
+
+  final TRes Function(Input_HistoryAttendanceDaysUpdates) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? $_set = _undefined, Object? where = _undefined}) => _then(
+    Input_HistoryAttendanceDaysUpdates._({
+      ..._instance._$data,
+      if ($_set != _undefined)
+        '_set': ($_set as Input_HistoryAttendanceDaysSetInput?),
+      if (where != _undefined && where != null)
+        'where': (where as Input_HistoryAttendanceDaysBoolExp),
+    }),
+  );
+
+  CopyWith_Input_HistoryAttendanceDaysSetInput<TRes> get $_set {
+    final local$$_set = _instance.$_set;
+    return local$$_set == null
+        ? CopyWith_Input_HistoryAttendanceDaysSetInput.stub(_then(_instance))
+        : CopyWith_Input_HistoryAttendanceDaysSetInput(
+            local$$_set,
+            (e) => call($_set: e),
+          );
+  }
+
+  CopyWith_Input_HistoryAttendanceDaysBoolExp<TRes> get where {
+    final local$where = _instance.where;
+    return CopyWith_Input_HistoryAttendanceDaysBoolExp(
+      local$where,
+      (e) => call(where: e),
+    );
+  }
+}
+
+class _CopyWithStubImpl_Input_HistoryAttendanceDaysUpdates<TRes>
+    implements CopyWith_Input_HistoryAttendanceDaysUpdates<TRes> {
+  _CopyWithStubImpl_Input_HistoryAttendanceDaysUpdates(this._res);
+
+  TRes _res;
+
+  call({
+    Input_HistoryAttendanceDaysSetInput? $_set,
+    Input_HistoryAttendanceDaysBoolExp? where,
+  }) => _res;
+
+  CopyWith_Input_HistoryAttendanceDaysSetInput<TRes> get $_set =>
+      CopyWith_Input_HistoryAttendanceDaysSetInput.stub(_res);
+
+  CopyWith_Input_HistoryAttendanceDaysBoolExp<TRes> get where =>
+      CopyWith_Input_HistoryAttendanceDaysBoolExp.stub(_res);
+}
+
+class Input_HistoryAttendanceHistoryAggregateBoolExp {
+  factory Input_HistoryAttendanceHistoryAggregateBoolExp({
+    Input_historyAttendanceHistoryAggregateBoolExpBool_and? bool_and,
+    Input_historyAttendanceHistoryAggregateBoolExpBool_or? bool_or,
+    Input_historyAttendanceHistoryAggregateBoolExpCount? count,
+  }) => Input_HistoryAttendanceHistoryAggregateBoolExp._({
+    if (bool_and != null) r'bool_and': bool_and,
+    if (bool_or != null) r'bool_or': bool_or,
+    if (count != null) r'count': count,
+  });
+
+  Input_HistoryAttendanceHistoryAggregateBoolExp._(this._$data);
+
+  factory Input_HistoryAttendanceHistoryAggregateBoolExp.fromJson(
+    Map<String, dynamic> data,
+  ) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('bool_and')) {
+      final l$bool_and = data['bool_and'];
+      result$data['bool_and'] = l$bool_and == null
+          ? null
+          : Input_historyAttendanceHistoryAggregateBoolExpBool_and.fromJson(
+              (l$bool_and as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('bool_or')) {
+      final l$bool_or = data['bool_or'];
+      result$data['bool_or'] = l$bool_or == null
+          ? null
+          : Input_historyAttendanceHistoryAggregateBoolExpBool_or.fromJson(
+              (l$bool_or as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('count')) {
+      final l$count = data['count'];
+      result$data['count'] = l$count == null
+          ? null
+          : Input_historyAttendanceHistoryAggregateBoolExpCount.fromJson(
+              (l$count as Map<String, dynamic>),
+            );
+    }
+    return Input_HistoryAttendanceHistoryAggregateBoolExp._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Input_historyAttendanceHistoryAggregateBoolExpBool_and? get bool_and =>
+      (_$data['bool_and']
+          as Input_historyAttendanceHistoryAggregateBoolExpBool_and?);
+
+  Input_historyAttendanceHistoryAggregateBoolExpBool_or? get bool_or =>
+      (_$data['bool_or']
+          as Input_historyAttendanceHistoryAggregateBoolExpBool_or?);
+
+  Input_historyAttendanceHistoryAggregateBoolExpCount? get count =>
+      (_$data['count'] as Input_historyAttendanceHistoryAggregateBoolExpCount?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('bool_and')) {
+      final l$bool_and = bool_and;
+      result$data['bool_and'] = l$bool_and?.toJson();
+    }
+    if (_$data.containsKey('bool_or')) {
+      final l$bool_or = bool_or;
+      result$data['bool_or'] = l$bool_or?.toJson();
+    }
+    if (_$data.containsKey('count')) {
+      final l$count = count;
+      result$data['count'] = l$count?.toJson();
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_HistoryAttendanceHistoryAggregateBoolExp<
+    Input_HistoryAttendanceHistoryAggregateBoolExp
+  >
+  get copyWith =>
+      CopyWith_Input_HistoryAttendanceHistoryAggregateBoolExp(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_HistoryAttendanceHistoryAggregateBoolExp ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$bool_and = bool_and;
+    final lOther$bool_and = other.bool_and;
+    if (_$data.containsKey('bool_and') !=
+        other._$data.containsKey('bool_and')) {
+      return false;
+    }
+    if (l$bool_and != lOther$bool_and) {
+      return false;
+    }
+    final l$bool_or = bool_or;
+    final lOther$bool_or = other.bool_or;
+    if (_$data.containsKey('bool_or') != other._$data.containsKey('bool_or')) {
+      return false;
+    }
+    if (l$bool_or != lOther$bool_or) {
+      return false;
+    }
+    final l$count = count;
+    final lOther$count = other.count;
+    if (_$data.containsKey('count') != other._$data.containsKey('count')) {
+      return false;
+    }
+    if (l$count != lOther$count) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$bool_and = bool_and;
+    final l$bool_or = bool_or;
+    final l$count = count;
+    return Object.hashAll([
+      _$data.containsKey('bool_and') ? l$bool_and : const {},
+      _$data.containsKey('bool_or') ? l$bool_or : const {},
+      _$data.containsKey('count') ? l$count : const {},
+    ]);
+  }
 }
