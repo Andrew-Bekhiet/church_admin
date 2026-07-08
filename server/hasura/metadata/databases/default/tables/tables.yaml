@@ -8,7 +8,6 @@
 - "!include history_meetings.yaml"
 - "!include history_meeting_days.yaml"
 - "!include history_meeting_roster.yaml"
-- "!include history_meetings_persons.yaml"
 - "!include history_attendance_history.yaml"
 - "!include history_call_history.yaml"
 - "!include history_confession_history.yaml"

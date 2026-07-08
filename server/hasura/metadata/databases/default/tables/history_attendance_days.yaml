@@ -22,20 +22,17 @@ insert_permissions:
       check: {}
       columns:
         - day
-        - notes
 select_permissions:
   - role: user
     permission:
       columns:
         - day
-        - notes
       filter: {}
 update_permissions:
   - role: user
     permission:
       columns:
         - day
-        - notes
       filter: {}
       check: {}
 delete_permissions:
