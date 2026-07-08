@@ -25,7 +25,7 @@ class AdminOnDataIndicator extends StatelessWidget {
         if ((adminOnData.serviceWriteRelatedFamilies ?? false) ||
             (adminOnData.groupWriteRelatedFamilies ?? false))
           Tooltip(
-            message: 'تعديل عائلات المخدومين',
+            message: 'رؤية وتعديل عائلات المخدومين',
             child: Icon(ViewableObjectService.I.getDefaultIconFor<Family>()),
           ),
         if ((adminOnData.serviceAllowEdit ?? false) ||

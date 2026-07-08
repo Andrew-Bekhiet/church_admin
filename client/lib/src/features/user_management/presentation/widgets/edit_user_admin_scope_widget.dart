@@ -195,9 +195,9 @@ class EditUserAdminScopeWidget extends StatelessWidget {
               secondary: Icon(
                 ViewableObjectService.I.getDefaultIconFor<Family>(),
               ),
-              title: const Text('تعديل عائلات المخدومين'),
+              title: const Text('رؤية وتعديل عائلات المخدومين'),
               subtitle: Text(
-                'السماح بتعديل جميع أفراد عائلات المخدومين في ال$objectLabel',
+                'السماح برؤية وتعديل جميع أفراد عائلات المخدومين في ال$objectLabel',
               ),
               value: userAdminScope.canWriteRelatedFamilies,
               onChanged: (value) => onChanged(

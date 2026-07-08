@@ -177,7 +177,7 @@ class AdminOnDataFields {
         obj is AdminOnData ? obj.serviceWriteRelatedFamilies : null,
     parentType: AdminOnData,
     name: 'serviceWriteRelatedFamilies',
-    label: 'يمكنه تعديل عائلات المخدومين بالخدمة',
+    label: 'يمكنه رؤية وتعديل عائلات المخدومين بالخدمة',
     isCodeOnly: false,
     operators: {
       ...BooleanOperator.values,
@@ -282,7 +282,7 @@ class AdminOnDataFields {
         obj is AdminOnData ? obj.groupWriteRelatedFamilies : null,
     parentType: AdminOnData,
     name: 'groupWriteRelatedFamilies',
-    label: 'يمكنه تعديل عائلات المخدومين بالمجموعة',
+    label: 'يمكنه رؤية وتعديل عائلات المخدومين بالمجموعة',
     isCodeOnly: false,
     operators: {
       ...BooleanOperator.values,

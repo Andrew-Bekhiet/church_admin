@@ -9,8 +9,8 @@ part 'admin_on_data.g.dart';
 @Queryable(
   classLabel: 'صلاحيات الإدارة على البيانات',
   labelsOverrides: {
-    'serviceWriteRelatedFamilies': 'يمكنه تعديل عائلات المخدومين بالخدمة',
-    'groupWriteRelatedFamilies': 'يمكنه تعديل عائلات المخدومين بالمجموعة',
+    'serviceWriteRelatedFamilies': 'يمكنه رؤية وتعديل عائلات المخدومين بالخدمة',
+    'groupWriteRelatedFamilies': 'يمكنه رؤية وتعديل عائلات المخدومين بالمجموعة',
     'serviceAllowRecordAttendance': 'يمكنه تسجيل الحضور للمخدومين بالخدمة',
     'serviceAllowRecordServantsAttendance': 'يمكنه تسجيل الحضور للخدام بالخدمة',
     'groupAllowRecordAttendance': 'يمكنه تسجيل الحضور للمخدومين بالمجموعة',
