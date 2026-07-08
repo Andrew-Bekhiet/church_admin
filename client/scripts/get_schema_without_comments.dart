@@ -37,6 +37,7 @@ Future<void> main() async {
 
   stdout.writeln('Getting GQL schema from the server...');
 
+  // Install using npm: i --global @graphql-inspector/cli graphql
   final result = await Process.run('graphql-inspector', [
     'introspect',
     '$graphqlUrl',
@@ -44,7 +45,6 @@ Future<void> main() async {
     'false',
     '-w',
     schemaFilePath,
-    'get-schema',
     '-h',
     'x-hasura-admin-secret: $adminSecret',
     '-h',
