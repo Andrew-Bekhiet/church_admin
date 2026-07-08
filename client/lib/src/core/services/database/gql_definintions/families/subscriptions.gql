@@ -23,6 +23,7 @@ subscription watchAllFamiliesWithAddresses(
 ) {
   families(limit: $limit, orderBy: $orderBy, where: { _and: $where }) {
     ...Family
+    userCanEdit
     address {
       ...Address
     }

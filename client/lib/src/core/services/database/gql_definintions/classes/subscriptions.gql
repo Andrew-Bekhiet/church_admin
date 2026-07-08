@@ -19,6 +19,7 @@ subscription watchClassesCount($where: [ClassesBoolExp!] = {}, $limit: Int) {
 subscription watchClass($id: uuid!) {
   classesByPk(id: $id) {
     ...Class
+    userCanEdit
     service {
       ...ServiceWithStudyYears
     }
