@@ -124,6 +124,7 @@ class HomeSearchDelegate extends SearchDelegate {
                             .map(
                               (item) => ViewableObjectWidget(
                                 item,
+                                key: ValueKey(item.id),
                                 config: const ViewableObjectWidgetConfig(
                                   isDense: true,
                                   forceShowSecondLine: false,
