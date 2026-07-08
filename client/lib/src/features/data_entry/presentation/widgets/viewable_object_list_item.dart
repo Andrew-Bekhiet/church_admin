@@ -37,6 +37,8 @@ class ViewableObjectListItem<T extends Viewable> extends StatelessWidget {
           selected: selectionData.data,
           trailing: selectionData.data != null
               ? Checkbox(
+                  visualDensity: VisualDensity.compact,
+                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                   value: selectionData.data,
                   onChanged: (v) => _onSelect(!v!),
                 )
