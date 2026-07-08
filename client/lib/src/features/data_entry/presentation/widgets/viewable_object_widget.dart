@@ -62,6 +62,7 @@ class ViewableObjectWidget<T extends Viewable> extends StatelessWidget {
     );
 
     final tile = ListTile(
+      contentPadding: const EdgeInsets.symmetric(horizontal: 12),
       iconColor: foregroundColor,
       textColor: foregroundColor,
       tileColor: object.color,

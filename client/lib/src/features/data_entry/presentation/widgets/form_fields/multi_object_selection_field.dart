@@ -110,6 +110,7 @@ class MultiObjectSelectionField<T extends Viewable> extends StatelessWidget {
                         objectsController: controller,
                         viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
                           forceShowSecondLine: false,
+                          isDense: true,
                           onLongPress: (_) {},
                         ),
                         itemBuilder: itemBuilder,

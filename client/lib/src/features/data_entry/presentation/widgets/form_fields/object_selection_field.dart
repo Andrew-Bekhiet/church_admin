@@ -103,6 +103,7 @@ class ObjectSelectionField<T extends ViewableWithID, F extends T?>
                                   ViewableObjectWidgetConfig(
                                     onTap: Navigator.of(context).pop,
                                     forceShowSecondLine: false,
+                                    isDense: true,
                                   ),
                             ),
                           ),
