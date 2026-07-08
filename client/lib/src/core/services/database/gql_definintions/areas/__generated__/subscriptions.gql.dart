@@ -1544,6 +1544,13 @@ const documentNodeSubscriptionwatchArea = DocumentNode(
                   selectionSet: null,
                 ),
                 FieldNode(
+                  name: NameNode(value: 'userCanEdit'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
                   name: NameNode(value: 'lastEdit'),
                   alias: null,
                   arguments: [],

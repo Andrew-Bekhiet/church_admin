@@ -20,6 +20,7 @@ subscription watchStreetsCount($where: [StreetsBoolExp!] = {}, $limit: Int) {
 subscription watchStreet($id: uuid!) {
   streetsByPk(id: $id) {
     ...Street
+    userCanEdit
     areas(orderBy: { area: { name: ASC } }) {
       area {
         ...Area

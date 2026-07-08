@@ -1303,6 +1303,13 @@ const documentNodeSubscriptionwatchClass = DocumentNode(
                   directives: [],
                 ),
                 FieldNode(
+                  name: NameNode(value: 'userCanEdit'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
                   name: NameNode(value: 'service'),
                   alias: null,
                   arguments: [],
