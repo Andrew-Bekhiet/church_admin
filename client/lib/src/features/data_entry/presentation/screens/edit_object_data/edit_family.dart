@@ -241,13 +241,6 @@ class _EditFamilyState extends State<EditFamily> {
             onChanged: (value) => newFamily = newFamily.copyWith(
               children: value?.toList(),
             ),
-            itemBuilder: (context, family, config) {
-              return ViewableObjectWidget(
-                family,
-                config: config,
-                wrapInCard: true,
-              );
-            },
             builder: (context, state) {
               return state.value != null
                   ? IgnorePointer(
