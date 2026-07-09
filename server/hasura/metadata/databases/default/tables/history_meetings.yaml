@@ -65,15 +65,13 @@ insert_permissions:
                           _eq: recordAllServantsAttendance
           - _exists:
               _table:
-                name: users_permissions_by_entity_id
+                name: users_admin_on
                 schema: auth
               _where:
                 _and:
                   - uid:
                       _eq: X-Hasura-User-Id
-                  - entity_type:
-                      _eq: group
-                  - entity_id:
+                  - admin_on_group:
                       _ceq:
                         - $
                         - group_id

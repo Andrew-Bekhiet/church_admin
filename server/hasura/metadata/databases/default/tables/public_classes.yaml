@@ -149,8 +149,6 @@ update_permissions:
       columns:
         - color
         - name
-        - photo_updated_at
-        - blurhash
         - service_id
         - service_study_year
         - service_gender
