@@ -30,8 +30,8 @@ class AttendanceOverflowMenu extends StatelessWidget {
       icon: const Icon(Symbols.more_vert),
       itemBuilder: (context) => [
         PopupMenuItem<void>(
+          onTap: () => onSortChanged(sorting.toggleAttendanceTimeSorting()),
           child: ListTile(
-            onTap: () => onSortChanged(sorting.toggleAttendanceTimeSorting()),
             contentPadding: EdgeInsets.zero,
             leading: const Icon(Symbols.access_time),
             title: const Text('ترتيب حسب وقت الحضور'),
