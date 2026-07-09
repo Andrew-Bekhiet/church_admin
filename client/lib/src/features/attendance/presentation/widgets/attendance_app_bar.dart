@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:material_symbols_icons/material_symbols_icons.dart';
 
 class AttendanceAppBar extends StatelessWidget {
   static const double _kAttendanceToolbarHeight = 96;
@@ -38,28 +37,6 @@ class AttendanceAppBar extends StatelessWidget {
     if (selected != null) cubit.switchMeeting(selected);
   }
 
-  void _openAnalysis(BuildContext context) {
-    final selectedDay = DateUtils.dateOnly(selectedDate);
-
-    unawaited(
-      MeetingsAnalysisRoute(
-        $extra: MeetingsAnalysisExtra(
-          title: 'احصائيات ${meeting.name}',
-          initialRangePreset: selectedDay == DateUtils.dateOnly(DateTime.now())
-              ? TodayDateTimeRangePreset()
-              : CustomDateTimeRangePreset(
-                  range: DateTimeRange(start: selectedDay, end: selectedDay),
-                ),
-          load: (range) =>
-              DatabaseService.I.meetings.getPersonMeetingAttendanceAnalysis(
-                meeting: meeting,
-                range: range,
-              ),
-        ),
-      ).push(context),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<RecordAttendanceCubit>();
@@ -80,7 +57,7 @@ class AttendanceAppBar extends StatelessWidget {
           ),
           Row(
             mainAxisSize: MainAxisSize.min,
-            spacing: 8,
+            spacing: 4,
             children: [
               AttendanceDateChip(
                 date: selectedDate,
@@ -96,12 +73,8 @@ class AttendanceAppBar extends StatelessWidget {
         ],
       ),
       actions: [
-        IconButton(
-          tooltip: 'احصائيات الحضور',
-          icon: const Icon(Symbols.query_stats),
-          onPressed: () => _openAnalysis(context),
-        ),
         AttendanceOverflowMenu(
+          openAnalysis: () => _openAnalysis(context),
           sorting: sorting,
           grouping: grouping,
           streakWindowDays: streakWindowDays,
@@ -110,6 +83,28 @@ class AttendanceAppBar extends StatelessWidget {
           onStreakWindowChanged: cubit.changeStreakWindow,
         ),
       ],
+    );
+  }
+
+  void _openAnalysis(BuildContext context) {
+    final selectedDay = DateUtils.dateOnly(selectedDate);
+
+    unawaited(
+      MeetingsAnalysisRoute(
+        $extra: MeetingsAnalysisExtra(
+          title: 'احصائيات ${meeting.name}',
+          initialRangePreset: selectedDay == DateUtils.dateOnly(DateTime.now())
+              ? TodayDateTimeRangePreset()
+              : CustomDateTimeRangePreset(
+                  range: DateTimeRange(start: selectedDay, end: selectedDay),
+                ),
+          load: (range) =>
+              DatabaseService.I.meetings.getPersonMeetingAttendanceAnalysis(
+                meeting: meeting,
+                range: range,
+              ),
+        ),
+      ).push(context),
     );
   }
 }

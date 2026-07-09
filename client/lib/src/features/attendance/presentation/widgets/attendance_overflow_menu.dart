@@ -5,6 +5,7 @@ import 'package:material_symbols_icons/material_symbols_icons.dart';
 class AttendanceOverflowMenu extends StatelessWidget {
   static const List<int> _streakWindowOptions = [30, 60, 90];
 
+  final VoidCallback openAnalysis;
   final AttendanceSorting sorting;
   final AttendanceGrouping grouping;
   final int streakWindowDays;
@@ -13,6 +14,7 @@ class AttendanceOverflowMenu extends StatelessWidget {
   final ValueChanged<int> onStreakWindowChanged;
 
   const AttendanceOverflowMenu({
+    required this.openAnalysis,
     required this.sorting,
     required this.grouping,
     required this.streakWindowDays,
@@ -55,6 +57,14 @@ class AttendanceOverflowMenu extends StatelessWidget {
               maintainState: true,
               child: const Icon(Symbols.check),
             ),
+          ),
+        ),
+        PopupMenuItem<void>(
+          onTap: openAnalysis,
+          child: const ListTile(
+            contentPadding: EdgeInsets.zero,
+            leading: Icon(Symbols.query_stats),
+            title: Text('تحليل الحضور'),
           ),
         ),
         const PopupMenuDivider(),
