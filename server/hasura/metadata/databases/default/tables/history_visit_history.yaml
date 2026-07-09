@@ -35,7 +35,7 @@ insert_permissions:
                             - $
                             - record_id
       set:
-        recorded_by: x-hasura-User-Id
+        recorded_by: x-hasura-user-id
       columns:
         - is_father_visit
         - record_id

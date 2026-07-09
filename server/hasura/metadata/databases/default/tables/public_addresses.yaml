@@ -80,6 +80,13 @@ select_permissions:
                             - family_id
                   - _and:
                       - entity_type:
+                          _eq: store
+                      - entity_id:
+                          _ceq:
+                            - $
+                            - store_id
+                  - _and:
+                      - entity_type:
                           _eq: any
                       - entity_id:
                           _is_null: true
@@ -122,6 +129,13 @@ update_permissions:
                             - family_id
                   - _and:
                       - entity_type:
+                          _eq: store
+                      - entity_id:
+                          _ceq:
+                            - $
+                            - store_id
+                  - _and:
+                      - entity_type:
                           _eq: any
                       - entity_id:
                           _is_null: true
@@ -144,6 +158,13 @@ update_permissions:
                           _ceq:
                             - $
                             - family_id
+                  - _and:
+                      - entity_type:
+                          _eq: store
+                      - entity_id:
+                          _ceq:
+                            - $
+                            - store_id
                   - _and:
                       - entity_type:
                           _eq: any
@@ -172,6 +193,13 @@ delete_permissions:
                           _ceq:
                             - $
                             - family_id
+                  - _and:
+                      - entity_type:
+                          _eq: store
+                      - entity_id:
+                          _ceq:
+                            - $
+                            - store_id
                   - _and:
                       - entity_type:
                           _eq: any

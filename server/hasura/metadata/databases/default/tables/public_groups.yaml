@@ -148,6 +148,8 @@ update_permissions:
                 _and:
                   - uid:
                       _eq: X-Hasura-User-Id
+                  - allow_edit:
+                      _eq: true
                   - entity_type:
                       _eq: any
                   - entity_id:
@@ -160,6 +162,8 @@ update_permissions:
                 _and:
                   - uid:
                       _eq: X-Hasura-User-Id
+                  - allow_edit:
+                      _eq: true
                   - entity_type:
                       _eq: group
                   - entity_id:
@@ -176,6 +180,8 @@ update_permissions:
                 _and:
                   - uid:
                       _eq: X-Hasura-User-Id
+                  - allow_edit:
+                      _eq: true
                   - entity_type:
                       _eq: any
                   - entity_id:
@@ -188,6 +194,8 @@ update_permissions:
                 _and:
                   - uid:
                       _eq: X-Hasura-User-Id
+                  - allow_edit:
+                      _eq: true
                   - entity_type:
                       _eq: group
                   - entity_id:
@@ -218,6 +226,8 @@ delete_permissions:
                     _and:
                       - uid:
                           _eq: X-Hasura-User-Id
+                      - allow_edit:
+                          _eq: true
                       - entity_type:
                           _eq: any
                       - entity_id:
@@ -230,6 +240,8 @@ delete_permissions:
                     _and:
                       - uid:
                           _eq: X-Hasura-User-Id
+                      - allow_edit:
+                          _eq: true
                       - entity_type:
                           _eq: group
                       - entity_id:

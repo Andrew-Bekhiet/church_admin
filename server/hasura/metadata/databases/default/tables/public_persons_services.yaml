@@ -11,7 +11,30 @@ object_relationships:
 insert_permissions:
   - role: user
     permission:
-      check: {}
+      check:
+        _exists:
+          _table:
+            name: users_permissions_by_entity_id
+            schema: auth
+          _where:
+            _and:
+              - uid:
+                  _eq: X-Hasura-User-Id
+              - allow_edit:
+                  _eq: true
+              - _or:
+                  - _and:
+                      - entity_type:
+                          _eq: person
+                      - entity_id:
+                          _ceq:
+                            - $
+                            - person_id
+                  - _and:
+                      - entity_type:
+                          _eq: any
+                      - entity_id:
+                          _is_null: true
       columns:
         - person_id
         - service_id
@@ -65,7 +88,7 @@ select_permissions:
                               _eq: any
                           - entity_id:
                               _is_null: true
-      limit: 60
+      limit: 100
 update_permissions:
   - role: user
     permission:
