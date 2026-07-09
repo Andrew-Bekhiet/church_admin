@@ -31,8 +31,9 @@ class AttendanceDateChip extends StatelessWidget {
     return FilledButton.icon(
       onPressed: () => _pickDate(context),
       icon: const Icon(Symbols.calendar_month, size: 16),
-      label: Text(DateFormat.yMMMEd('ar').format(date)),
+      label: Text(DateFormat.yMEd('ar').format(date)),
       style: FilledButton.styleFrom(
+        padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
         side: const BorderSide(),
         backgroundColor: colorScheme.surfaceContainerLow,
         foregroundColor: colorScheme.onSurface,
