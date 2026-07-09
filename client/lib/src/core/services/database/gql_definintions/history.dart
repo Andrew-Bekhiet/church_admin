@@ -275,7 +275,7 @@ class HistoryDAO {
     return graphQLClient.mutateAndReturnParsed(
       MutationOptions(
         document: documentNodeMutationinsertPersonLastKodas,
-        operationName: 'updatePersonLastKodas',
+        operationName: 'insertPersonLastKodas',
         variables: Variables_Mutation_insertPersonLastKodas(
           personId: personId.toUuid(),
           lastKodas: lastKodas,
