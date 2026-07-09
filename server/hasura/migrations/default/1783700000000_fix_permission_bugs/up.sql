@@ -564,6 +564,7 @@ create or replace view auth.users_permissions_by_entity_id (
             as hint
     from admin_on_families_through_groups as f
     inner join persons as p on f.family_id = p.family_id
+    where f.group_write_related_families is TRUE
     union all
     -- recorder can read a servant's person through a shared service admin scope
     select
