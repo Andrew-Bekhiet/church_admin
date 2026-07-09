@@ -302,16 +302,20 @@ class ThemingService with WidgetsBindingObserver {
               ? themeData.colorScheme.primary
               : themeData.scaffoldBackgroundColor,
         ),
-        checkmarkColor: colorScheme.onPrimaryContainer,
-        labelStyle: themeData.textTheme.titleMedium!.copyWith(
+        checkmarkColor: colorScheme.onPrimary,
+        labelStyle: themeData.textTheme.titleMedium?.copyWith(
           color: WidgetStateColor.resolveWith(
             (states) => states.contains(WidgetState.selected)
-                ? colorScheme.onPrimaryContainer
+                ? themeData.colorScheme.onPrimary
                 : themeData.textTheme.titleMedium!.color!,
           ),
         ),
-        secondaryLabelStyle: themeData.textTheme.titleMedium!.copyWith(
-          color: colorScheme.onPrimaryContainer,
+        secondaryLabelStyle: themeData.textTheme.titleMedium?.copyWith(
+          color: WidgetStateColor.resolveWith(
+            (states) => states.contains(WidgetState.selected)
+                ? themeData.colorScheme.onPrimary
+                : themeData.textTheme.titleMedium!.color!,
+          ),
         ),
       ),
       visualDensity: VisualDensity.adaptivePlatformDensity,
