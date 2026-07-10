@@ -82,9 +82,15 @@ class _DefaultMeetingFieldState extends State<DefaultMeetingField> {
     const servicePrefix = 'خدمة';
     const meetingWord = 'اجتماع';
 
-    final trimmedParentName = parentName.trim();
+    final trimmed = parentName.trim();
 
-    return trimmedParentName.replaceFirst(servicePrefix, meetingWord);
+    return switch (trimmed) {
+      '' => '',
+      servicePrefix => meetingWord,
+      _ when trimmed.startsWith('$servicePrefix ') =>
+        '$meetingWord ${trimmed.substring(servicePrefix.length).trim()}',
+      _ => '$meetingWord $trimmed',
+    };
   }
 
   @override
