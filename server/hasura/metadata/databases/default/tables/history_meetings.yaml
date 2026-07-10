@@ -150,8 +150,6 @@ select_permissions:
                       _ceq:
                         - $
                         - id
-
-      allow_aggregations: false
 update_permissions:
   - role: user
     permission:

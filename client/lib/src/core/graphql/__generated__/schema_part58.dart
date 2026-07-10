@@ -2147,10 +2147,8 @@ fromJson_Enum_ClassesSelectColumnClassesAggregateBoolExpBool_orArgumentsColumns(
 }
 
 enum Enum_ClassesUpdateColumn {
-  blurhash,
   color,
   name,
-  photoUpdatedAt,
   serviceGender,
   serviceId,
   serviceStudyYear,
@@ -2164,14 +2162,10 @@ enum Enum_ClassesUpdateColumn {
 
 String toJson_Enum_ClassesUpdateColumn(Enum_ClassesUpdateColumn e) {
   switch (e) {
-    case Enum_ClassesUpdateColumn.blurhash:
-      return r'blurhash';
     case Enum_ClassesUpdateColumn.color:
       return r'color';
     case Enum_ClassesUpdateColumn.name:
       return r'name';
-    case Enum_ClassesUpdateColumn.photoUpdatedAt:
-      return r'photoUpdatedAt';
     case Enum_ClassesUpdateColumn.serviceGender:
       return r'serviceGender';
     case Enum_ClassesUpdateColumn.serviceId:
@@ -2185,14 +2179,10 @@ String toJson_Enum_ClassesUpdateColumn(Enum_ClassesUpdateColumn e) {
 
 Enum_ClassesUpdateColumn fromJson_Enum_ClassesUpdateColumn(String value) {
   switch (value) {
-    case r'blurhash':
-      return Enum_ClassesUpdateColumn.blurhash;
     case r'color':
       return Enum_ClassesUpdateColumn.color;
     case r'name':
       return Enum_ClassesUpdateColumn.name;
-    case r'photoUpdatedAt':
-      return Enum_ClassesUpdateColumn.photoUpdatedAt;
     case r'serviceGender':
       return Enum_ClassesUpdateColumn.serviceGender;
     case r'serviceId':
@@ -2503,4 +2493,41 @@ enum Enum_FamiliesFamiliesConstraint {
       fromJson_Enum_FamiliesFamiliesConstraint(value);
 
   String toJson() => toJson_Enum_FamiliesFamiliesConstraint(this);
+}
+
+String toJson_Enum_FamiliesFamiliesConstraint(
+  Enum_FamiliesFamiliesConstraint e,
+) {
+  switch (e) {
+    case Enum_FamiliesFamiliesConstraint.families_families_pkey:
+      return r'families_families_pkey';
+    case Enum_FamiliesFamiliesConstraint.families_families_rel_id_key:
+      return r'families_families_rel_id_key';
+    case Enum_FamiliesFamiliesConstraint.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_FamiliesFamiliesConstraint fromJson_Enum_FamiliesFamiliesConstraint(
+  String value,
+) {
+  switch (value) {
+    case r'families_families_pkey':
+      return Enum_FamiliesFamiliesConstraint.families_families_pkey;
+    case r'families_families_rel_id_key':
+      return Enum_FamiliesFamiliesConstraint.families_families_rel_id_key;
+    default:
+      return Enum_FamiliesFamiliesConstraint.$unknown;
+  }
+}
+
+enum Enum_FamiliesFamiliesSelectColumn {
+  childFamilyId,
+  parentFamilyId,
+  $unknown;
+
+  factory Enum_FamiliesFamiliesSelectColumn.fromJson(String value) =>
+      fromJson_Enum_FamiliesFamiliesSelectColumn(value);
+
+  String toJson() => toJson_Enum_FamiliesFamiliesSelectColumn(this);
 }

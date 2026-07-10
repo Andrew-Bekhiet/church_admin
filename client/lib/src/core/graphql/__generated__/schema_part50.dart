@@ -13,6 +13,7 @@ abstract class CopyWith_Input_ServicesStreamCursorValueInput<TRes> {
   TRes call({
     String? blurhash,
     int? color,
+    UuidValue? defaultMeetingId,
     UuidValue? id,
     String? name,
     UuidValue? nextServiceId,
@@ -38,6 +39,7 @@ class _CopyWithImpl_Input_ServicesStreamCursorValueInput<TRes>
   TRes call({
     Object? blurhash = _undefined,
     Object? color = _undefined,
+    Object? defaultMeetingId = _undefined,
     Object? id = _undefined,
     Object? name = _undefined,
     Object? nextServiceId = _undefined,
@@ -49,6 +51,8 @@ class _CopyWithImpl_Input_ServicesStreamCursorValueInput<TRes>
       ..._instance._$data,
       if (blurhash != _undefined) 'blurhash': (blurhash as String?),
       if (color != _undefined) 'color': (color as int?),
+      if (defaultMeetingId != _undefined)
+        'defaultMeetingId': (defaultMeetingId as UuidValue?),
       if (id != _undefined) 'id': (id as UuidValue?),
       if (name != _undefined) 'name': (name as String?),
       if (nextServiceId != _undefined)
@@ -71,6 +75,7 @@ class _CopyWithStubImpl_Input_ServicesStreamCursorValueInput<TRes>
   call({
     String? blurhash,
     int? color,
+    UuidValue? defaultMeetingId,
     UuidValue? id,
     String? name,
     UuidValue? nextServiceId,

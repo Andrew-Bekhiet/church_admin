@@ -1464,10 +1464,8 @@ enum ClassesSelectColumnClassesAggregateBoolExpBool_orArgumentsColumns {
 }
 
 input ClassesSetInput {
-  blurhash: String
   color: bigint
   name: String
-  photoUpdatedAt: timestamptz
   serviceGender: Boolean
   serviceId: uuid
   serviceStudyYear: Int
@@ -1525,10 +1523,8 @@ input ClassesSumOrderBy {
 }
 
 enum ClassesUpdateColumn {
-  blurhash
   color
   name
-  photoUpdatedAt
   serviceGender
   serviceId
   serviceStudyYear
@@ -6298,6 +6294,8 @@ type Services {
     where: ClassesBoolExp
   ): ClassesAggregate!
   color: bigint
+  defaultMeeting: HistoryMeetings
+  defaultMeetingId: uuid
   editHistory(
     distinctOn: [HistoryEditHistorySelectColumn!]
     limit: Int
@@ -6386,6 +6384,8 @@ input ServicesBoolExp {
   classes: ClassesBoolExp
   classesAggregate: ClassesAggregateBoolExp
   color: BigintComparisonExp
+  defaultMeeting: HistoryMeetingsBoolExp
+  defaultMeetingId: UuidComparisonExp
   editHistory: HistoryEditHistoryBoolExp
   editHistoryAggregate: HistoryEditHistoryAggregateBoolExp
   groups: GroupsBoolExp
@@ -6406,6 +6406,7 @@ input ServicesBoolExp {
 }
 
 enum ServicesConstraint {
+  services_default_meeting_id_key
   services_name_key
   services_pkey
 }
@@ -6420,6 +6421,8 @@ input ServicesInsertInput {
   adminUsers: AuthUsersAdminOnArrRelInsertInput
   classes: ClassesArrRelInsertInput
   color: bigint
+  defaultMeeting: HistoryMeetingsObjRelInsertInput
+  defaultMeetingId: uuid
   groups: GroupsArrRelInsertInput
   meetings: HistoryMeetingsArrRelInsertInput
   name: String
@@ -6434,6 +6437,7 @@ input ServicesInsertInput {
 type ServicesMaxFields {
   blurhash: String
   color: bigint
+  defaultMeetingId: uuid
   id: uuid
   name: String
   nextServiceId: uuid
@@ -6444,6 +6448,7 @@ type ServicesMaxFields {
 type ServicesMinFields {
   blurhash: String
   color: bigint
+  defaultMeetingId: uuid
   id: uuid
   name: String
   nextServiceId: uuid
@@ -6472,6 +6477,8 @@ input ServicesOrderBy {
   blurhash: OrderBy
   classesAggregate: ClassesAggregateOrderBy
   color: OrderBy
+  defaultMeeting: HistoryMeetingsOrderBy
+  defaultMeetingId: OrderBy
   editHistoryAggregate: HistoryEditHistoryAggregateOrderBy
   groupsAggregate: GroupsAggregateOrderBy
   id: OrderBy
@@ -6495,6 +6502,7 @@ input ServicesPkColumnsInput {
 enum ServicesSelectColumn {
   blurhash
   color
+  defaultMeetingId
   id
   name
   nextServiceId
@@ -6505,6 +6513,7 @@ enum ServicesSelectColumn {
 
 input ServicesSetInput {
   color: bigint
+  defaultMeetingId: uuid
   name: String
   nextServiceId: uuid
   studyYearFromId: smallint
@@ -6533,6 +6542,7 @@ input ServicesStreamCursorInput {
 input ServicesStreamCursorValueInput {
   blurhash: String
   color: bigint
+  defaultMeetingId: uuid
   id: uuid
   name: String
   nextServiceId: uuid
@@ -6548,6 +6558,7 @@ type ServicesSumFields {
 
 enum ServicesUpdateColumn {
   color
+  defaultMeetingId
   name
   nextServiceId
   studyYearFromId

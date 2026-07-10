@@ -11,10 +11,8 @@ abstract class CopyWith_Input_ClassesSetInput<TRes> {
       _CopyWithStubImpl_Input_ClassesSetInput;
 
   TRes call({
-    String? blurhash,
     int? color,
     String? name,
-    DateTime? photoUpdatedAt,
     bool? serviceGender,
     UuidValue? serviceId,
     int? serviceStudyYear,
@@ -32,21 +30,16 @@ class _CopyWithImpl_Input_ClassesSetInput<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
-    Object? blurhash = _undefined,
     Object? color = _undefined,
     Object? name = _undefined,
-    Object? photoUpdatedAt = _undefined,
     Object? serviceGender = _undefined,
     Object? serviceId = _undefined,
     Object? serviceStudyYear = _undefined,
   }) => _then(
     Input_ClassesSetInput._({
       ..._instance._$data,
-      if (blurhash != _undefined) 'blurhash': (blurhash as String?),
       if (color != _undefined) 'color': (color as int?),
       if (name != _undefined) 'name': (name as String?),
-      if (photoUpdatedAt != _undefined)
-        'photoUpdatedAt': (photoUpdatedAt as DateTime?),
       if (serviceGender != _undefined)
         'serviceGender': (serviceGender as bool?),
       if (serviceId != _undefined) 'serviceId': (serviceId as UuidValue?),
@@ -63,10 +56,8 @@ class _CopyWithStubImpl_Input_ClassesSetInput<TRes>
   TRes _res;
 
   call({
-    String? blurhash,
     int? color,
     String? name,
-    DateTime? photoUpdatedAt,
     bool? serviceGender,
     UuidValue? serviceId,
     int? serviceStudyYear,

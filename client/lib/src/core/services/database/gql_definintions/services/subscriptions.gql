@@ -38,6 +38,9 @@ subscription watchServicesCount($where: [ServicesBoolExp!] = {}, $limit: Int) {
 subscription watchService($id: uuid!) {
   servicesByPk(id: $id) {
     ...ServiceWithStudyYears
+    defaultMeeting {
+      ...Meeting
+    }
     userCanEdit
     lastEdit {
       ...LatestEditHistory

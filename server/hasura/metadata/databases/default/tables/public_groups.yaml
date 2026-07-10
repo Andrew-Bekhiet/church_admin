@@ -22,13 +22,6 @@ array_relationships:
         table:
           name: users_admin_on
           schema: auth
-  - name: meetings
-    using:
-      foreign_key_constraint_on:
-        column: group_id
-        table:
-          name: meetings
-          schema: history
   - name: editHistroy
     using:
       manual_configuration:
@@ -37,6 +30,13 @@ array_relationships:
         insertion_order: null
         remote_table:
           name: edit_history
+          schema: history
+  - name: meetings
+    using:
+      foreign_key_constraint_on:
+        column: group_id
+        table:
+          name: meetings
           schema: history
   - name: persons
     using:

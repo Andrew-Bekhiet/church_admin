@@ -2,13 +2,6 @@ table:
   name: study_years
   schema: public
 array_relationships:
-  - name: meetings
-    using:
-      foreign_key_constraint_on:
-        column: service_study_year
-        table:
-          name: meetings
-          schema: history
   - name: classes
     using:
       foreign_key_constraint_on:
@@ -16,6 +9,13 @@ array_relationships:
         table:
           name: classes
           schema: public
+  - name: meetings
+    using:
+      foreign_key_constraint_on:
+        column: service_study_year
+        table:
+          name: meetings
+          schema: history
   - name: persons
     using:
       foreign_key_constraint_on:

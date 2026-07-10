@@ -1,5 +1,4 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/helpers.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/services/__generated__/mutations.gql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/services/__generated__/subscriptions.gql.dart';
 
@@ -112,39 +111,12 @@ class ServicesDAO extends FullCRUDDAO<Service> {
       Variables_Subscription_watchService(id: id).toJson();
 
   Json _createServiceVarsConstructor({required Service newObject}) =>
-      Variables_Mutation_insertService(
-        newService: Input_ServicesInsertInput.fromJson(
-          computeObjectDelta(
-            newObject.toJson(),
-            const Service(id: '', name: '').toJson(),
-            ignoreFields: {
-              'id',
-              'studyYearFrom',
-              'studyYearTo',
-              'nextService',
-            },
-          ),
-        ),
-      ).toJson();
+      newObject.toInsertInput().toJson();
 
   Json _updateServiceVarsConstructor({
     required Service newObject,
     required Service oldObject,
-  }) => Variables_Mutation_updateService(
-    serviceId: newObject.id.toUuid(),
-    newService: Input_ServicesSetInput.fromJson(
-      computeObjectDelta(
-        newObject.toJson(),
-        oldObject.toJson(),
-        ignoreFields: {
-          'id',
-          'studyYearFrom',
-          'studyYearTo',
-          'nextService',
-        },
-      ),
-    ),
-  ).toJson();
+  }) => newObject.toUpdateInput(oldObject).toJson();
 
   Json _deleteSingleByIdVarsConstructor({required UuidValue id}) =>
       Variables_Mutation_deleteService(serviceId: id).toJson();

@@ -31,8 +31,6 @@ select_permissions:
         - persons_count
         - servants_count
         - total_count
-      # Per-demographic counts carry no person-identifying data, so visibility
-      # is gated on the meeting alone: readAllData or being an admin on it.
       filter:
         _or:
           - _exists:

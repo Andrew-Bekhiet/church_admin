@@ -2512,18 +2512,14 @@ class _CopyWithStubImpl_Input_ClassesPkColumnsInput<TRes>
 
 class Input_ClassesSetInput {
   factory Input_ClassesSetInput({
-    String? blurhash,
     int? color,
     String? name,
-    DateTime? photoUpdatedAt,
     bool? serviceGender,
     UuidValue? serviceId,
     int? serviceStudyYear,
   }) => Input_ClassesSetInput._({
-    if (blurhash != null) r'blurhash': blurhash,
     if (color != null) r'color': color,
     if (name != null) r'name': name,
-    if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
     if (serviceGender != null) r'serviceGender': serviceGender,
     if (serviceId != null) r'serviceId': serviceId,
     if (serviceStudyYear != null) r'serviceStudyYear': serviceStudyYear,
@@ -2533,10 +2529,6 @@ class Input_ClassesSetInput {
 
   factory Input_ClassesSetInput.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
-    if (data.containsKey('blurhash')) {
-      final l$blurhash = data['blurhash'];
-      result$data['blurhash'] = (l$blurhash as String?);
-    }
     if (data.containsKey('color')) {
       final l$color = data['color'];
       result$data['color'] = (l$color as int?);
@@ -2544,12 +2536,6 @@ class Input_ClassesSetInput {
     if (data.containsKey('name')) {
       final l$name = data['name'];
       result$data['name'] = (l$name as String?);
-    }
-    if (data.containsKey('photoUpdatedAt')) {
-      final l$photoUpdatedAt = data['photoUpdatedAt'];
-      result$data['photoUpdatedAt'] = l$photoUpdatedAt == null
-          ? null
-          : tstzFromString(l$photoUpdatedAt);
     }
     if (data.containsKey('serviceGender')) {
       final l$serviceGender = data['serviceGender'];
@@ -2570,13 +2556,9 @@ class Input_ClassesSetInput {
 
   Map<String, dynamic> _$data;
 
-  String? get blurhash => (_$data['blurhash'] as String?);
-
   int? get color => (_$data['color'] as int?);
 
   String? get name => (_$data['name'] as String?);
-
-  DateTime? get photoUpdatedAt => (_$data['photoUpdatedAt'] as DateTime?);
 
   bool? get serviceGender => (_$data['serviceGender'] as bool?);
 
@@ -2586,10 +2568,6 @@ class Input_ClassesSetInput {
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
-    if (_$data.containsKey('blurhash')) {
-      final l$blurhash = blurhash;
-      result$data['blurhash'] = l$blurhash;
-    }
     if (_$data.containsKey('color')) {
       final l$color = color;
       result$data['color'] = l$color;
@@ -2597,12 +2575,6 @@ class Input_ClassesSetInput {
     if (_$data.containsKey('name')) {
       final l$name = name;
       result$data['name'] = l$name;
-    }
-    if (_$data.containsKey('photoUpdatedAt')) {
-      final l$photoUpdatedAt = photoUpdatedAt;
-      result$data['photoUpdatedAt'] = l$photoUpdatedAt == null
-          ? null
-          : tstzToString(l$photoUpdatedAt);
     }
     if (_$data.containsKey('serviceGender')) {
       final l$serviceGender = serviceGender;
@@ -2632,15 +2604,6 @@ class Input_ClassesSetInput {
     if (other is! Input_ClassesSetInput || runtimeType != other.runtimeType) {
       return false;
     }
-    final l$blurhash = blurhash;
-    final lOther$blurhash = other.blurhash;
-    if (_$data.containsKey('blurhash') !=
-        other._$data.containsKey('blurhash')) {
-      return false;
-    }
-    if (l$blurhash != lOther$blurhash) {
-      return false;
-    }
     final l$color = color;
     final lOther$color = other.color;
     if (_$data.containsKey('color') != other._$data.containsKey('color')) {
@@ -2655,15 +2618,6 @@ class Input_ClassesSetInput {
       return false;
     }
     if (l$name != lOther$name) {
-      return false;
-    }
-    final l$photoUpdatedAt = photoUpdatedAt;
-    final lOther$photoUpdatedAt = other.photoUpdatedAt;
-    if (_$data.containsKey('photoUpdatedAt') !=
-        other._$data.containsKey('photoUpdatedAt')) {
-      return false;
-    }
-    if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
       return false;
     }
     final l$serviceGender = serviceGender;
@@ -2698,18 +2652,14 @@ class Input_ClassesSetInput {
 
   @override
   int get hashCode {
-    final l$blurhash = blurhash;
     final l$color = color;
     final l$name = name;
-    final l$photoUpdatedAt = photoUpdatedAt;
     final l$serviceGender = serviceGender;
     final l$serviceId = serviceId;
     final l$serviceStudyYear = serviceStudyYear;
     return Object.hashAll([
-      _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('name') ? l$name : const {},
-      _$data.containsKey('photoUpdatedAt') ? l$photoUpdatedAt : const {},
       _$data.containsKey('serviceGender') ? l$serviceGender : const {},
       _$data.containsKey('serviceId') ? l$serviceId : const {},
       _$data.containsKey('serviceStudyYear') ? l$serviceStudyYear : const {},

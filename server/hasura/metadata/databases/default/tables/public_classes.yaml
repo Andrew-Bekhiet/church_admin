@@ -29,6 +29,15 @@ array_relationships:
         remote_table:
           name: users_admin_on
           schema: auth
+  - name: editHistory
+    using:
+      manual_configuration:
+        column_mapping:
+          id: record_id
+        insertion_order: null
+        remote_table:
+          name: edit_history
+          schema: history
   - name: meetings
     using:
       manual_configuration:
@@ -39,15 +48,6 @@ array_relationships:
         insertion_order: null
         remote_table:
           name: meetings
-          schema: history
-  - name: editHistory
-    using:
-      manual_configuration:
-        column_mapping:
-          id: record_id
-        insertion_order: null
-        remote_table:
-          name: edit_history
           schema: history
   - name: persons
     using:

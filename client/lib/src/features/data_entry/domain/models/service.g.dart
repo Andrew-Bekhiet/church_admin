@@ -66,6 +66,19 @@ class _ServiceFields {
     },
   );
 
+  final FieldMetadata<Meeting> defaultMeeting = FieldMetadata<Meeting>(
+    getValue: (obj) => obj is Service ? obj.defaultMeeting : null,
+    parentType: Service,
+    name: 'defaultMeeting',
+    label: 'الاجتماع الافتراضي',
+    isCodeOnly: false,
+    operators: {
+      ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull,
+    },
+  );
+
   final FieldMetadata<Color> color = FieldMetadata<Color>(
     getValue: (obj) => obj is Service ? obj.color : null,
     parentType: Service,
@@ -158,6 +171,7 @@ class _ServiceFields {
     studyYearFrom,
     studyYearTo,
     nextService,
+    defaultMeeting,
     color,
     photoUpdatedAt,
     classes,
@@ -172,6 +186,7 @@ class _ServiceFields {
     'studyYearFrom': studyYearFrom,
     'studyYearTo': studyYearTo,
     'nextService': nextService,
+    'defaultMeeting': defaultMeeting,
     'color': color,
     'photoUpdatedAt': photoUpdatedAt,
     'classes': classes,
@@ -205,6 +220,11 @@ Service _$ServiceFromJson(Map json) => Service(
       ? null
       : Service.fromJson(Map<String, Object?>.from(json['nextService'] as Map)),
   nextServiceId: json['nextServiceId'] as String?,
+  defaultMeeting: json['defaultMeeting'] == null
+      ? null
+      : Meeting.fromJson(
+          Map<String, Object?>.from(json['defaultMeeting'] as Map),
+        ),
   color: colorFromInt((json['color'] as num?)?.toInt()),
   photoUpdatedAt: _$JsonConverterFromJson<String, DateTime>(
     json['photoUpdatedAt'],
@@ -238,6 +258,7 @@ Map<String, dynamic> _$ServiceToJson(Service instance) => <String, dynamic>{
   'studyYearToId': instance.studyYearToId,
   'nextService': instance.nextService?.toJson(),
   'nextServiceId': instance.nextServiceId,
+  'defaultMeeting': instance.defaultMeeting?.toJson(),
   'color': colorToInt(instance.color),
   'photoUpdatedAt': _$JsonConverterToJson<String, DateTime>(
     instance.photoUpdatedAt,

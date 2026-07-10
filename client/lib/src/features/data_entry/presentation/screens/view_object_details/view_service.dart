@@ -129,16 +129,19 @@ class _ViewServiceState extends State<ViewService> {
                     .paginateEditHistory<Service>(id: service.id),
               ),
             ),
-            if (service.meetings?.firstWhereOrNull((m) => !m.isArchived)
-                case final meeting?)
+            if ([
+                  ?service.defaultMeeting,
+                  ...?service.meetings,
+                ].firstWhereOrNull((m) => !m.isArchived)
+                case final defaultMeeting?)
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: FilledButton.icon(
                   style: Theme.of(context).largeFilledButtonStyle,
                   icon: const Icon(Symbols.productivity),
-                  label: Text('تسجيل الحضور ل${meeting.name}'),
+                  label: Text('تسجيل الحضور ل${defaultMeeting.name}'),
                   onPressed: () => RecordAttendanceRoute(
-                    $extra: meeting,
+                    $extra: defaultMeeting,
                   ).push(context),
                 ),
               ),
