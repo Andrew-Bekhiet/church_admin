@@ -1464,10 +1464,8 @@ enum ClassesSelectColumnClassesAggregateBoolExpBool_orArgumentsColumns {
 }
 
 input ClassesSetInput {
-  blurhash: String
   color: bigint
   name: String
-  photoUpdatedAt: timestamptz
   serviceGender: Boolean
   serviceId: uuid
   serviceStudyYear: Int
@@ -1525,10 +1523,8 @@ input ClassesSumOrderBy {
 }
 
 enum ClassesUpdateColumn {
-  blurhash
   color
   name
-  photoUpdatedAt
   serviceGender
   serviceId
   serviceStudyYear
@@ -6298,6 +6294,7 @@ type Services {
     where: ClassesBoolExp
   ): ClassesAggregate!
   color: bigint
+  defaultMeeting: HistoryMeetings
   editHistory(
     distinctOn: [HistoryEditHistorySelectColumn!]
     limit: Int
@@ -6386,6 +6383,7 @@ input ServicesBoolExp {
   classes: ClassesBoolExp
   classesAggregate: ClassesAggregateBoolExp
   color: BigintComparisonExp
+  defaultMeeting: HistoryMeetingsBoolExp
   editHistory: HistoryEditHistoryBoolExp
   editHistoryAggregate: HistoryEditHistoryAggregateBoolExp
   groups: GroupsBoolExp
@@ -6406,6 +6404,7 @@ input ServicesBoolExp {
 }
 
 enum ServicesConstraint {
+  services_default_meeting_id_key
   services_name_key
   services_pkey
 }
@@ -6420,6 +6419,7 @@ input ServicesInsertInput {
   adminUsers: AuthUsersAdminOnArrRelInsertInput
   classes: ClassesArrRelInsertInput
   color: bigint
+  defaultMeeting: HistoryMeetingsObjRelInsertInput
   groups: GroupsArrRelInsertInput
   meetings: HistoryMeetingsArrRelInsertInput
   name: String
@@ -6472,6 +6472,7 @@ input ServicesOrderBy {
   blurhash: OrderBy
   classesAggregate: ClassesAggregateOrderBy
   color: OrderBy
+  defaultMeeting: HistoryMeetingsOrderBy
   editHistoryAggregate: HistoryEditHistoryAggregateOrderBy
   groupsAggregate: GroupsAggregateOrderBy
   id: OrderBy

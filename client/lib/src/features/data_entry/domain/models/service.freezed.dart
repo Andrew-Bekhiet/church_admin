@@ -21,6 +21,7 @@ mixin _$Service {
   int? get studyYearToId;
   Service? get nextService;
   String? get nextServiceId;
+  Meeting? get defaultMeeting;
   Color? get color;
   DateTime? get photoUpdatedAt;
   String? get blurhash;
@@ -57,6 +58,8 @@ mixin _$Service {
                 other.nextService == nextService) &&
             (identical(other.nextServiceId, nextServiceId) ||
                 other.nextServiceId == nextServiceId) &&
+            (identical(other.defaultMeeting, defaultMeeting) ||
+                other.defaultMeeting == defaultMeeting) &&
             (identical(other.color, color) || other.color == color) &&
             (identical(other.photoUpdatedAt, photoUpdatedAt) ||
                 other.photoUpdatedAt == photoUpdatedAt) &&
@@ -87,6 +90,7 @@ mixin _$Service {
     studyYearToId,
     nextService,
     nextServiceId,
+    defaultMeeting,
     color,
     photoUpdatedAt,
     blurhash,
@@ -100,7 +104,7 @@ mixin _$Service {
 
   @override
   String toString() {
-    return 'Service(id: $id, name: $name, studyYearFrom: $studyYearFrom, studyYearTo: $studyYearTo, studyYearFromId: $studyYearFromId, studyYearToId: $studyYearToId, nextService: $nextService, nextServiceId: $nextServiceId, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, classes: $classes, groups: $groups, meetings: $meetings, lastEdit: $lastEdit, adminUsers: $adminUsers, userCanEdit: $userCanEdit)';
+    return 'Service(id: $id, name: $name, studyYearFrom: $studyYearFrom, studyYearTo: $studyYearTo, studyYearFromId: $studyYearFromId, studyYearToId: $studyYearToId, nextService: $nextService, nextServiceId: $nextServiceId, defaultMeeting: $defaultMeeting, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, classes: $classes, groups: $groups, meetings: $meetings, lastEdit: $lastEdit, adminUsers: $adminUsers, userCanEdit: $userCanEdit)';
   }
 }
 
@@ -118,6 +122,7 @@ abstract mixin class $ServiceCopyWith<$Res> {
     int? studyYearToId,
     Service? nextService,
     String? nextServiceId,
+    Meeting? defaultMeeting,
     Color? color,
     DateTime? photoUpdatedAt,
     String? blurhash,
@@ -150,6 +155,7 @@ class _$ServiceCopyWithImpl<$Res> implements $ServiceCopyWith<$Res> {
     Object? studyYearToId = freezed,
     Object? nextService = freezed,
     Object? nextServiceId = freezed,
+    Object? defaultMeeting = freezed,
     Object? color = freezed,
     Object? photoUpdatedAt = freezed,
     Object? blurhash = freezed,
@@ -194,6 +200,10 @@ class _$ServiceCopyWithImpl<$Res> implements $ServiceCopyWith<$Res> {
             ? _self.nextServiceId
             : nextServiceId // ignore: cast_nullable_to_non_nullable
                   as String?,
+        defaultMeeting: freezed == defaultMeeting
+            ? _self.defaultMeeting
+            : defaultMeeting // ignore: cast_nullable_to_non_nullable
+                  as Meeting?,
         color: freezed == color
             ? _self.color
             : color // ignore: cast_nullable_to_non_nullable

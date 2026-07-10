@@ -14,15 +14,6 @@ object_relationships:
 insert_permissions:
   - role: user
     permission:
-      # Two independent concerns, AND-ed together:
-      #   1. Eligibility -- (person, as_servant) is on the roster for the
-      #      meeting. `history.meeting_roster` is the single source of truth the
-      #      UI also reads, so "what is shown" == "what is recordable"; it
-      #      already encodes audience, is_archived, membership/scope and the
-      #      `approved` servant gate, so none of those are repeated here.
-      #   2. Authorization -- the recorder holds the matching record permission
-      #      on the meeting (`allow_record_attendance` for served,
-      #      `allow_record_servants_attendance` for servants).
       check: &check_record_attendance_permission
         _and:
           - _exists:
@@ -96,9 +87,6 @@ select_permissions:
         - meeting_id
         - person_id
         - recorded_by
-      # Servant rows are gated only on being an admin of the meeting, mirroring
-      # meeting_roster: servant admins usually hold no person-entity grant over
-      # fellow servants.
       filter:
         _or:
           - _exists:

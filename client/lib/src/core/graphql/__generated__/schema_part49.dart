@@ -52,6 +52,7 @@ class Input_ServicesInsertInput {
     Input_AuthUsersAdminOnArrRelInsertInput? adminUsers,
     Input_ClassesArrRelInsertInput? classes,
     int? color,
+    Input_HistoryMeetingsObjRelInsertInput? defaultMeeting,
     Input_GroupsArrRelInsertInput? groups,
     Input_HistoryMeetingsArrRelInsertInput? meetings,
     String? name,
@@ -66,6 +67,7 @@ class Input_ServicesInsertInput {
     if (adminUsers != null) r'adminUsers': adminUsers,
     if (classes != null) r'classes': classes,
     if (color != null) r'color': color,
+    if (defaultMeeting != null) r'defaultMeeting': defaultMeeting,
     if (groups != null) r'groups': groups,
     if (meetings != null) r'meetings': meetings,
     if (name != null) r'name': name,
@@ -101,6 +103,14 @@ class Input_ServicesInsertInput {
     if (data.containsKey('color')) {
       final l$color = data['color'];
       result$data['color'] = (l$color as int?);
+    }
+    if (data.containsKey('defaultMeeting')) {
+      final l$defaultMeeting = data['defaultMeeting'];
+      result$data['defaultMeeting'] = l$defaultMeeting == null
+          ? null
+          : Input_HistoryMeetingsObjRelInsertInput.fromJson(
+              (l$defaultMeeting as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('groups')) {
       final l$groups = data['groups'];
@@ -181,6 +191,9 @@ class Input_ServicesInsertInput {
 
   int? get color => (_$data['color'] as int?);
 
+  Input_HistoryMeetingsObjRelInsertInput? get defaultMeeting =>
+      (_$data['defaultMeeting'] as Input_HistoryMeetingsObjRelInsertInput?);
+
   Input_GroupsArrRelInsertInput? get groups =>
       (_$data['groups'] as Input_GroupsArrRelInsertInput?);
 
@@ -220,6 +233,10 @@ class Input_ServicesInsertInput {
     if (_$data.containsKey('color')) {
       final l$color = color;
       result$data['color'] = l$color;
+    }
+    if (_$data.containsKey('defaultMeeting')) {
+      final l$defaultMeeting = defaultMeeting;
+      result$data['defaultMeeting'] = l$defaultMeeting?.toJson();
     }
     if (_$data.containsKey('groups')) {
       final l$groups = groups;
@@ -301,6 +318,15 @@ class Input_ServicesInsertInput {
       return false;
     }
     if (l$color != lOther$color) {
+      return false;
+    }
+    final l$defaultMeeting = defaultMeeting;
+    final lOther$defaultMeeting = other.defaultMeeting;
+    if (_$data.containsKey('defaultMeeting') !=
+        other._$data.containsKey('defaultMeeting')) {
+      return false;
+    }
+    if (l$defaultMeeting != lOther$defaultMeeting) {
       return false;
     }
     final l$groups = groups;
@@ -398,6 +424,7 @@ class Input_ServicesInsertInput {
     final l$adminUsers = adminUsers;
     final l$classes = classes;
     final l$color = color;
+    final l$defaultMeeting = defaultMeeting;
     final l$groups = groups;
     final l$meetings = meetings;
     final l$name = name;
@@ -412,6 +439,7 @@ class Input_ServicesInsertInput {
       _$data.containsKey('adminUsers') ? l$adminUsers : const {},
       _$data.containsKey('classes') ? l$classes : const {},
       _$data.containsKey('color') ? l$color : const {},
+      _$data.containsKey('defaultMeeting') ? l$defaultMeeting : const {},
       _$data.containsKey('groups') ? l$groups : const {},
       _$data.containsKey('meetings') ? l$meetings : const {},
       _$data.containsKey('name') ? l$name : const {},
@@ -439,6 +467,7 @@ abstract class CopyWith_Input_ServicesInsertInput<TRes> {
     Input_AuthUsersAdminOnArrRelInsertInput? adminUsers,
     Input_ClassesArrRelInsertInput? classes,
     int? color,
+    Input_HistoryMeetingsObjRelInsertInput? defaultMeeting,
     Input_GroupsArrRelInsertInput? groups,
     Input_HistoryMeetingsArrRelInsertInput? meetings,
     String? name,
@@ -452,6 +481,7 @@ abstract class CopyWith_Input_ServicesInsertInput<TRes> {
   });
   CopyWith_Input_AuthUsersAdminOnArrRelInsertInput<TRes> get adminUsers;
   CopyWith_Input_ClassesArrRelInsertInput<TRes> get classes;
+  CopyWith_Input_HistoryMeetingsObjRelInsertInput<TRes> get defaultMeeting;
   CopyWith_Input_GroupsArrRelInsertInput<TRes> get groups;
   CopyWith_Input_HistoryMeetingsArrRelInsertInput<TRes> get meetings;
   CopyWith_Input_ServicesObjRelInsertInput<TRes> get nextService;
@@ -474,6 +504,7 @@ class _CopyWithImpl_Input_ServicesInsertInput<TRes>
     Object? adminUsers = _undefined,
     Object? classes = _undefined,
     Object? color = _undefined,
+    Object? defaultMeeting = _undefined,
     Object? groups = _undefined,
     Object? meetings = _undefined,
     Object? name = _undefined,
@@ -492,6 +523,9 @@ class _CopyWithImpl_Input_ServicesInsertInput<TRes>
       if (classes != _undefined)
         'classes': (classes as Input_ClassesArrRelInsertInput?),
       if (color != _undefined) 'color': (color as int?),
+      if (defaultMeeting != _undefined)
+        'defaultMeeting':
+            (defaultMeeting as Input_HistoryMeetingsObjRelInsertInput?),
       if (groups != _undefined)
         'groups': (groups as Input_GroupsArrRelInsertInput?),
       if (meetings != _undefined)
@@ -532,6 +566,16 @@ class _CopyWithImpl_Input_ServicesInsertInput<TRes>
         : CopyWith_Input_ClassesArrRelInsertInput(
             local$classes,
             (e) => call(classes: e),
+          );
+  }
+
+  CopyWith_Input_HistoryMeetingsObjRelInsertInput<TRes> get defaultMeeting {
+    final local$defaultMeeting = _instance.defaultMeeting;
+    return local$defaultMeeting == null
+        ? CopyWith_Input_HistoryMeetingsObjRelInsertInput.stub(_then(_instance))
+        : CopyWith_Input_HistoryMeetingsObjRelInsertInput(
+            local$defaultMeeting,
+            (e) => call(defaultMeeting: e),
           );
   }
 
@@ -606,6 +650,7 @@ class _CopyWithStubImpl_Input_ServicesInsertInput<TRes>
     Input_AuthUsersAdminOnArrRelInsertInput? adminUsers,
     Input_ClassesArrRelInsertInput? classes,
     int? color,
+    Input_HistoryMeetingsObjRelInsertInput? defaultMeeting,
     Input_GroupsArrRelInsertInput? groups,
     Input_HistoryMeetingsArrRelInsertInput? meetings,
     String? name,
@@ -623,6 +668,9 @@ class _CopyWithStubImpl_Input_ServicesInsertInput<TRes>
 
   CopyWith_Input_ClassesArrRelInsertInput<TRes> get classes =>
       CopyWith_Input_ClassesArrRelInsertInput.stub(_res);
+
+  CopyWith_Input_HistoryMeetingsObjRelInsertInput<TRes> get defaultMeeting =>
+      CopyWith_Input_HistoryMeetingsObjRelInsertInput.stub(_res);
 
   CopyWith_Input_GroupsArrRelInsertInput<TRes> get groups =>
       CopyWith_Input_GroupsArrRelInsertInput.stub(_res);
@@ -1002,6 +1050,7 @@ class Input_ServicesOrderBy {
     Enum_OrderBy? blurhash,
     Input_ClassesAggregateOrderBy? classesAggregate,
     Enum_OrderBy? color,
+    Input_HistoryMeetingsOrderBy? defaultMeeting,
     Input_HistoryEditHistoryAggregateOrderBy? editHistoryAggregate,
     Input_GroupsAggregateOrderBy? groupsAggregate,
     Enum_OrderBy? id,
@@ -1023,6 +1072,7 @@ class Input_ServicesOrderBy {
     if (blurhash != null) r'blurhash': blurhash,
     if (classesAggregate != null) r'classesAggregate': classesAggregate,
     if (color != null) r'color': color,
+    if (defaultMeeting != null) r'defaultMeeting': defaultMeeting,
     if (editHistoryAggregate != null)
       r'editHistoryAggregate': editHistoryAggregate,
     if (groupsAggregate != null) r'groupsAggregate': groupsAggregate,
@@ -1072,6 +1122,14 @@ class Input_ServicesOrderBy {
       result$data['color'] = l$color == null
           ? null
           : fromJson_Enum_OrderBy((l$color as String));
+    }
+    if (data.containsKey('defaultMeeting')) {
+      final l$defaultMeeting = data['defaultMeeting'];
+      result$data['defaultMeeting'] = l$defaultMeeting == null
+          ? null
+          : Input_HistoryMeetingsOrderBy.fromJson(
+              (l$defaultMeeting as Map<String, dynamic>),
+            );
     }
     if (data.containsKey('editHistoryAggregate')) {
       final l$editHistoryAggregate = data['editHistoryAggregate'];
@@ -1195,6 +1253,9 @@ class Input_ServicesOrderBy {
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
 
+  Input_HistoryMeetingsOrderBy? get defaultMeeting =>
+      (_$data['defaultMeeting'] as Input_HistoryMeetingsOrderBy?);
+
   Input_HistoryEditHistoryAggregateOrderBy? get editHistoryAggregate =>
       (_$data['editHistoryAggregate']
           as Input_HistoryEditHistoryAggregateOrderBy?);
@@ -1257,6 +1318,10 @@ class Input_ServicesOrderBy {
       result$data['color'] = l$color == null
           ? null
           : toJson_Enum_OrderBy(l$color);
+    }
+    if (_$data.containsKey('defaultMeeting')) {
+      final l$defaultMeeting = defaultMeeting;
+      result$data['defaultMeeting'] = l$defaultMeeting?.toJson();
     }
     if (_$data.containsKey('editHistoryAggregate')) {
       final l$editHistoryAggregate = editHistoryAggregate;
@@ -1375,6 +1440,15 @@ class Input_ServicesOrderBy {
       return false;
     }
     if (l$color != lOther$color) {
+      return false;
+    }
+    final l$defaultMeeting = defaultMeeting;
+    final lOther$defaultMeeting = other.defaultMeeting;
+    if (_$data.containsKey('defaultMeeting') !=
+        other._$data.containsKey('defaultMeeting')) {
+      return false;
+    }
+    if (l$defaultMeeting != lOther$defaultMeeting) {
       return false;
     }
     final l$editHistoryAggregate = editHistoryAggregate;
@@ -1519,6 +1593,7 @@ class Input_ServicesOrderBy {
     final l$blurhash = blurhash;
     final l$classesAggregate = classesAggregate;
     final l$color = color;
+    final l$defaultMeeting = defaultMeeting;
     final l$editHistoryAggregate = editHistoryAggregate;
     final l$groupsAggregate = groupsAggregate;
     final l$id = id;
@@ -1541,6 +1616,7 @@ class Input_ServicesOrderBy {
       _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('classesAggregate') ? l$classesAggregate : const {},
       _$data.containsKey('color') ? l$color : const {},
+      _$data.containsKey('defaultMeeting') ? l$defaultMeeting : const {},
       _$data.containsKey('editHistoryAggregate')
           ? l$editHistoryAggregate
           : const {},
@@ -1576,6 +1652,7 @@ abstract class CopyWith_Input_ServicesOrderBy<TRes> {
     Enum_OrderBy? blurhash,
     Input_ClassesAggregateOrderBy? classesAggregate,
     Enum_OrderBy? color,
+    Input_HistoryMeetingsOrderBy? defaultMeeting,
     Input_HistoryEditHistoryAggregateOrderBy? editHistoryAggregate,
     Input_GroupsAggregateOrderBy? groupsAggregate,
     Enum_OrderBy? id,
@@ -1594,6 +1671,7 @@ abstract class CopyWith_Input_ServicesOrderBy<TRes> {
   });
   CopyWith_Input_AuthUsersAdminOnAggregateOrderBy<TRes> get adminUsersAggregate;
   CopyWith_Input_ClassesAggregateOrderBy<TRes> get classesAggregate;
+  CopyWith_Input_HistoryMeetingsOrderBy<TRes> get defaultMeeting;
   CopyWith_Input_HistoryEditHistoryAggregateOrderBy<TRes>
   get editHistoryAggregate;
   CopyWith_Input_GroupsAggregateOrderBy<TRes> get groupsAggregate;
@@ -1620,6 +1698,7 @@ class _CopyWithImpl_Input_ServicesOrderBy<TRes>
     Object? blurhash = _undefined,
     Object? classesAggregate = _undefined,
     Object? color = _undefined,
+    Object? defaultMeeting = _undefined,
     Object? editHistoryAggregate = _undefined,
     Object? groupsAggregate = _undefined,
     Object? id = _undefined,
@@ -1646,6 +1725,8 @@ class _CopyWithImpl_Input_ServicesOrderBy<TRes>
         'classesAggregate':
             (classesAggregate as Input_ClassesAggregateOrderBy?),
       if (color != _undefined) 'color': (color as Enum_OrderBy?),
+      if (defaultMeeting != _undefined)
+        'defaultMeeting': (defaultMeeting as Input_HistoryMeetingsOrderBy?),
       if (editHistoryAggregate != _undefined)
         'editHistoryAggregate':
             (editHistoryAggregate as Input_HistoryEditHistoryAggregateOrderBy?),
@@ -1698,6 +1779,16 @@ class _CopyWithImpl_Input_ServicesOrderBy<TRes>
         : CopyWith_Input_ClassesAggregateOrderBy(
             local$classesAggregate,
             (e) => call(classesAggregate: e),
+          );
+  }
+
+  CopyWith_Input_HistoryMeetingsOrderBy<TRes> get defaultMeeting {
+    final local$defaultMeeting = _instance.defaultMeeting;
+    return local$defaultMeeting == null
+        ? CopyWith_Input_HistoryMeetingsOrderBy.stub(_then(_instance))
+        : CopyWith_Input_HistoryMeetingsOrderBy(
+            local$defaultMeeting,
+            (e) => call(defaultMeeting: e),
           );
   }
 
@@ -1796,6 +1887,7 @@ class _CopyWithStubImpl_Input_ServicesOrderBy<TRes>
     Enum_OrderBy? blurhash,
     Input_ClassesAggregateOrderBy? classesAggregate,
     Enum_OrderBy? color,
+    Input_HistoryMeetingsOrderBy? defaultMeeting,
     Input_HistoryEditHistoryAggregateOrderBy? editHistoryAggregate,
     Input_GroupsAggregateOrderBy? groupsAggregate,
     Enum_OrderBy? id,
@@ -1819,6 +1911,9 @@ class _CopyWithStubImpl_Input_ServicesOrderBy<TRes>
 
   CopyWith_Input_ClassesAggregateOrderBy<TRes> get classesAggregate =>
       CopyWith_Input_ClassesAggregateOrderBy.stub(_res);
+
+  CopyWith_Input_HistoryMeetingsOrderBy<TRes> get defaultMeeting =>
+      CopyWith_Input_HistoryMeetingsOrderBy.stub(_res);
 
   CopyWith_Input_HistoryEditHistoryAggregateOrderBy<TRes>
   get editHistoryAggregate =>

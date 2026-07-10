@@ -2892,6 +2892,27 @@ const documentNodeSubscriptionwatchService = DocumentNode(
                   directives: [],
                 ),
                 FieldNode(
+                  name: NameNode(value: 'defaultMeeting'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: SelectionSetNode(
+                    selections: [
+                      FragmentSpreadNode(
+                        name: NameNode(value: 'Meeting'),
+                        directives: [],
+                      ),
+                      FieldNode(
+                        name: NameNode(value: '__typename'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                    ],
+                  ),
+                ),
+                FieldNode(
                   name: NameNode(value: 'userCanEdit'),
                   alias: null,
                   arguments: [],
@@ -3019,12 +3040,12 @@ const documentNodeSubscriptionwatchService = DocumentNode(
     ),
     fragmentDefinitionServiceWithStudyYears,
     fragmentDefinitionServiceNoPhoto,
+    fragmentDefinitionMeeting,
+    fragmentDefinitionGroupNoPhoto,
     fragmentDefinitionLatestEditHistory,
     fragmentDefinitionUser,
     fragmentDefinitionUserNoPhoto,
     fragmentDefinitionService,
-    fragmentDefinitionMeeting,
-    fragmentDefinitionGroupNoPhoto,
   ],
 );
 
@@ -3040,6 +3061,7 @@ class Subscription_watchService_servicesByPk
     this.studyYearTo,
     this.photoUpdatedAt,
     this.blurhash,
+    this.defaultMeeting,
     this.lastEdit,
     required this.adminUsers,
     this.nextService,
@@ -3058,6 +3080,7 @@ class Subscription_watchService_servicesByPk
     final l$studyYearTo = json['studyYearTo'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
     final l$blurhash = json['blurhash'];
+    final l$defaultMeeting = json['defaultMeeting'];
     final l$lastEdit = json['lastEdit'];
     final l$adminUsers = json['adminUsers'];
     final l$nextService = json['nextService'];
@@ -3082,6 +3105,11 @@ class Subscription_watchService_servicesByPk
           ? null
           : tstzFromString(l$photoUpdatedAt),
       blurhash: (l$blurhash as String?),
+      defaultMeeting: l$defaultMeeting == null
+          ? null
+          : Fragment_Meeting.fromJson(
+              (l$defaultMeeting as Map<String, dynamic>),
+            ),
       lastEdit: l$lastEdit == null
           ? null
           : Fragment_LatestEditHistory.fromJson(
@@ -3121,6 +3149,8 @@ class Subscription_watchService_servicesByPk
 
   final String? blurhash;
 
+  final Fragment_Meeting? defaultMeeting;
+
   final Fragment_LatestEditHistory? lastEdit;
 
   final List<Subscription_watchService_servicesByPk_adminUsers> adminUsers;
@@ -3151,6 +3181,8 @@ class Subscription_watchService_servicesByPk
         : tstzToString(l$photoUpdatedAt);
     final l$blurhash = blurhash;
     _resultData['blurhash'] = l$blurhash;
+    final l$defaultMeeting = defaultMeeting;
+    _resultData['defaultMeeting'] = l$defaultMeeting?.toJson();
     final l$lastEdit = lastEdit;
     _resultData['lastEdit'] = l$lastEdit?.toJson();
     final l$adminUsers = adminUsers;
@@ -3173,6 +3205,7 @@ class Subscription_watchService_servicesByPk
     final l$studyYearTo = studyYearTo;
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$blurhash = blurhash;
+    final l$defaultMeeting = defaultMeeting;
     final l$lastEdit = lastEdit;
     final l$adminUsers = adminUsers;
     final l$nextService = nextService;
@@ -3187,6 +3220,7 @@ class Subscription_watchService_servicesByPk
       l$studyYearTo,
       l$photoUpdatedAt,
       l$blurhash,
+      l$defaultMeeting,
       l$lastEdit,
       Object.hashAll(l$adminUsers.map((v) => v)),
       l$nextService,
@@ -3246,6 +3280,11 @@ class Subscription_watchService_servicesByPk
     final l$blurhash = blurhash;
     final lOther$blurhash = other.blurhash;
     if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
+    final l$defaultMeeting = defaultMeeting;
+    final lOther$defaultMeeting = other.defaultMeeting;
+    if (l$defaultMeeting != lOther$defaultMeeting) {
       return false;
     }
     final l$lastEdit = lastEdit;
@@ -3314,6 +3353,7 @@ abstract class CopyWith_Subscription_watchService_servicesByPk<TRes> {
     Subscription_watchService_servicesByPk_studyYearTo? studyYearTo,
     DateTime? photoUpdatedAt,
     String? blurhash,
+    Fragment_Meeting? defaultMeeting,
     Fragment_LatestEditHistory? lastEdit,
     List<Subscription_watchService_servicesByPk_adminUsers>? adminUsers,
     Fragment_Service? nextService,
@@ -3323,6 +3363,7 @@ abstract class CopyWith_Subscription_watchService_servicesByPk<TRes> {
   get studyYearFrom;
   CopyWith_Subscription_watchService_servicesByPk_studyYearTo<TRes>
   get studyYearTo;
+  CopyWith_Fragment_Meeting<TRes> get defaultMeeting;
   CopyWith_Fragment_LatestEditHistory<TRes> get lastEdit;
   TRes adminUsers(
     Iterable<Subscription_watchService_servicesByPk_adminUsers> Function(
@@ -3366,6 +3407,7 @@ class _CopyWithImpl_Subscription_watchService_servicesByPk<TRes>
     Object? studyYearTo = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? blurhash = _undefined,
+    Object? defaultMeeting = _undefined,
     Object? lastEdit = _undefined,
     Object? adminUsers = _undefined,
     Object? nextService = _undefined,
@@ -3397,6 +3439,9 @@ class _CopyWithImpl_Subscription_watchService_servicesByPk<TRes>
       blurhash: blurhash == _undefined
           ? _instance.blurhash
           : (blurhash as String?),
+      defaultMeeting: defaultMeeting == _undefined
+          ? _instance.defaultMeeting
+          : (defaultMeeting as Fragment_Meeting?),
       lastEdit: lastEdit == _undefined
           ? _instance.lastEdit
           : (lastEdit as Fragment_LatestEditHistory?),
@@ -3436,6 +3481,16 @@ class _CopyWithImpl_Subscription_watchService_servicesByPk<TRes>
         : CopyWith_Subscription_watchService_servicesByPk_studyYearTo(
             local$studyYearTo,
             (e) => call(studyYearTo: e),
+          );
+  }
+
+  CopyWith_Fragment_Meeting<TRes> get defaultMeeting {
+    final local$defaultMeeting = _instance.defaultMeeting;
+    return local$defaultMeeting == null
+        ? CopyWith_Fragment_Meeting.stub(_then(_instance))
+        : CopyWith_Fragment_Meeting(
+            local$defaultMeeting,
+            (e) => call(defaultMeeting: e),
           );
   }
 
@@ -3507,6 +3562,7 @@ class _CopyWithStubImpl_Subscription_watchService_servicesByPk<TRes>
     Subscription_watchService_servicesByPk_studyYearTo? studyYearTo,
     DateTime? photoUpdatedAt,
     String? blurhash,
+    Fragment_Meeting? defaultMeeting,
     Fragment_LatestEditHistory? lastEdit,
     List<Subscription_watchService_servicesByPk_adminUsers>? adminUsers,
     Fragment_Service? nextService,
@@ -3520,6 +3576,9 @@ class _CopyWithStubImpl_Subscription_watchService_servicesByPk<TRes>
   CopyWith_Subscription_watchService_servicesByPk_studyYearTo<TRes>
   get studyYearTo =>
       CopyWith_Subscription_watchService_servicesByPk_studyYearTo.stub(_res);
+
+  CopyWith_Fragment_Meeting<TRes> get defaultMeeting =>
+      CopyWith_Fragment_Meeting.stub(_res);
 
   CopyWith_Fragment_LatestEditHistory<TRes> get lastEdit =>
       CopyWith_Fragment_LatestEditHistory.stub(_res);

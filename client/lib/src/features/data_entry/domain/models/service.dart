@@ -8,7 +8,13 @@ part 'service.g.dart';
 
 @freezed
 @JsonSerializable()
-@Queryable(classLabel: 'الخدمات', allowExtension: true)
+@Queryable(
+  classLabel: 'الخدمات',
+  allowExtension: true,
+  labelsOverrides: {
+    'defaultMeeting': 'الاجتماع الافتراضي',
+  },
+)
 class Service extends ViewableWithIDAndImage
     with _$Service
     implements SerializableExtra {
@@ -37,6 +43,9 @@ class Service extends ViewableWithIDAndImage
 
   @override
   final String? nextServiceId;
+
+  @override
+  final Meeting? defaultMeeting;
 
   @override
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
@@ -79,6 +88,7 @@ class Service extends ViewableWithIDAndImage
     this.studyYearToId,
     this.nextService,
     this.nextServiceId,
+    this.defaultMeeting,
     this.color,
     this.photoUpdatedAt,
     this.blurhash,

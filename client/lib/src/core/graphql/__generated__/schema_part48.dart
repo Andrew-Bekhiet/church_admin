@@ -1463,6 +1463,7 @@ class Input_ServicesBoolExp {
     Input_ClassesBoolExp? classes,
     Input_ClassesAggregateBoolExp? classesAggregate,
     Input_BigintComparisonExp? color,
+    Input_HistoryMeetingsBoolExp? defaultMeeting,
     Input_HistoryEditHistoryBoolExp? editHistory,
     Input_HistoryEditHistoryAggregateBoolExp? editHistoryAggregate,
     Input_GroupsBoolExp? groups,
@@ -1489,6 +1490,7 @@ class Input_ServicesBoolExp {
     if (classes != null) r'classes': classes,
     if (classesAggregate != null) r'classesAggregate': classesAggregate,
     if (color != null) r'color': color,
+    if (defaultMeeting != null) r'defaultMeeting': defaultMeeting,
     if (editHistory != null) r'editHistory': editHistory,
     if (editHistoryAggregate != null)
       r'editHistoryAggregate': editHistoryAggregate,
@@ -1571,6 +1573,14 @@ class Input_ServicesBoolExp {
           ? null
           : Input_BigintComparisonExp.fromJson(
               (l$color as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('defaultMeeting')) {
+      final l$defaultMeeting = data['defaultMeeting'];
+      result$data['defaultMeeting'] = l$defaultMeeting == null
+          ? null
+          : Input_HistoryMeetingsBoolExp.fromJson(
+              (l$defaultMeeting as Map<String, dynamic>),
             );
     }
     if (data.containsKey('editHistory')) {
@@ -1734,6 +1744,9 @@ class Input_ServicesBoolExp {
   Input_BigintComparisonExp? get color =>
       (_$data['color'] as Input_BigintComparisonExp?);
 
+  Input_HistoryMeetingsBoolExp? get defaultMeeting =>
+      (_$data['defaultMeeting'] as Input_HistoryMeetingsBoolExp?);
+
   Input_HistoryEditHistoryBoolExp? get editHistory =>
       (_$data['editHistory'] as Input_HistoryEditHistoryBoolExp?);
 
@@ -1817,6 +1830,10 @@ class Input_ServicesBoolExp {
     if (_$data.containsKey('color')) {
       final l$color = color;
       result$data['color'] = l$color?.toJson();
+    }
+    if (_$data.containsKey('defaultMeeting')) {
+      final l$defaultMeeting = defaultMeeting;
+      result$data['defaultMeeting'] = l$defaultMeeting?.toJson();
     }
     if (_$data.containsKey('editHistory')) {
       final l$editHistory = editHistory;
@@ -1989,6 +2006,15 @@ class Input_ServicesBoolExp {
     if (l$color != lOther$color) {
       return false;
     }
+    final l$defaultMeeting = defaultMeeting;
+    final lOther$defaultMeeting = other.defaultMeeting;
+    if (_$data.containsKey('defaultMeeting') !=
+        other._$data.containsKey('defaultMeeting')) {
+      return false;
+    }
+    if (l$defaultMeeting != lOther$defaultMeeting) {
+      return false;
+    }
     final l$editHistory = editHistory;
     final lOther$editHistory = other.editHistory;
     if (_$data.containsKey('editHistory') !=
@@ -2151,6 +2177,7 @@ class Input_ServicesBoolExp {
     final l$classes = classes;
     final l$classesAggregate = classesAggregate;
     final l$color = color;
+    final l$defaultMeeting = defaultMeeting;
     final l$editHistory = editHistory;
     final l$editHistoryAggregate = editHistoryAggregate;
     final l$groups = groups;
@@ -2185,6 +2212,7 @@ class Input_ServicesBoolExp {
       _$data.containsKey('classes') ? l$classes : const {},
       _$data.containsKey('classesAggregate') ? l$classesAggregate : const {},
       _$data.containsKey('color') ? l$color : const {},
+      _$data.containsKey('defaultMeeting') ? l$defaultMeeting : const {},
       _$data.containsKey('editHistory') ? l$editHistory : const {},
       _$data.containsKey('editHistoryAggregate')
           ? l$editHistoryAggregate
@@ -2226,6 +2254,7 @@ abstract class CopyWith_Input_ServicesBoolExp<TRes> {
     Input_ClassesBoolExp? classes,
     Input_ClassesAggregateBoolExp? classesAggregate,
     Input_BigintComparisonExp? color,
+    Input_HistoryMeetingsBoolExp? defaultMeeting,
     Input_HistoryEditHistoryBoolExp? editHistory,
     Input_HistoryEditHistoryAggregateBoolExp? editHistoryAggregate,
     Input_GroupsBoolExp? groups,
@@ -2262,6 +2291,7 @@ abstract class CopyWith_Input_ServicesBoolExp<TRes> {
   CopyWith_Input_ClassesBoolExp<TRes> get classes;
   CopyWith_Input_ClassesAggregateBoolExp<TRes> get classesAggregate;
   CopyWith_Input_BigintComparisonExp<TRes> get color;
+  CopyWith_Input_HistoryMeetingsBoolExp<TRes> get defaultMeeting;
   CopyWith_Input_HistoryEditHistoryBoolExp<TRes> get editHistory;
   CopyWith_Input_HistoryEditHistoryAggregateBoolExp<TRes>
   get editHistoryAggregate;
@@ -2301,6 +2331,7 @@ class _CopyWithImpl_Input_ServicesBoolExp<TRes>
     Object? classes = _undefined,
     Object? classesAggregate = _undefined,
     Object? color = _undefined,
+    Object? defaultMeeting = _undefined,
     Object? editHistory = _undefined,
     Object? editHistoryAggregate = _undefined,
     Object? groups = _undefined,
@@ -2333,6 +2364,8 @@ class _CopyWithImpl_Input_ServicesBoolExp<TRes>
         'classesAggregate':
             (classesAggregate as Input_ClassesAggregateBoolExp?),
       if (color != _undefined) 'color': (color as Input_BigintComparisonExp?),
+      if (defaultMeeting != _undefined)
+        'defaultMeeting': (defaultMeeting as Input_HistoryMeetingsBoolExp?),
       if (editHistory != _undefined)
         'editHistory': (editHistory as Input_HistoryEditHistoryBoolExp?),
       if (editHistoryAggregate != _undefined)
@@ -2441,6 +2474,16 @@ class _CopyWithImpl_Input_ServicesBoolExp<TRes>
         : CopyWith_Input_BigintComparisonExp(
             local$color,
             (e) => call(color: e),
+          );
+  }
+
+  CopyWith_Input_HistoryMeetingsBoolExp<TRes> get defaultMeeting {
+    final local$defaultMeeting = _instance.defaultMeeting;
+    return local$defaultMeeting == null
+        ? CopyWith_Input_HistoryMeetingsBoolExp.stub(_then(_instance))
+        : CopyWith_Input_HistoryMeetingsBoolExp(
+            local$defaultMeeting,
+            (e) => call(defaultMeeting: e),
           );
   }
 
@@ -2624,6 +2667,7 @@ class _CopyWithStubImpl_Input_ServicesBoolExp<TRes>
     Input_ClassesBoolExp? classes,
     Input_ClassesAggregateBoolExp? classesAggregate,
     Input_BigintComparisonExp? color,
+    Input_HistoryMeetingsBoolExp? defaultMeeting,
     Input_HistoryEditHistoryBoolExp? editHistory,
     Input_HistoryEditHistoryAggregateBoolExp? editHistoryAggregate,
     Input_GroupsBoolExp? groups,
@@ -2664,6 +2708,9 @@ class _CopyWithStubImpl_Input_ServicesBoolExp<TRes>
 
   CopyWith_Input_BigintComparisonExp<TRes> get color =>
       CopyWith_Input_BigintComparisonExp.stub(_res);
+
+  CopyWith_Input_HistoryMeetingsBoolExp<TRes> get defaultMeeting =>
+      CopyWith_Input_HistoryMeetingsBoolExp.stub(_res);
 
   CopyWith_Input_HistoryEditHistoryBoolExp<TRes> get editHistory =>
       CopyWith_Input_HistoryEditHistoryBoolExp.stub(_res);

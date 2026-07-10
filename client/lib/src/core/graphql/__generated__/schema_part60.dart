@@ -1,168 +1,6 @@
 // Part 60 of the schema
 part of "schema.graphql.dart";
 
-String toJson_Enum_PersonsSelectColumn(Enum_PersonsSelectColumn e) {
-  switch (e) {
-    case Enum_PersonsSelectColumn.birthdate:
-      return r'birthdate';
-    case Enum_PersonsSelectColumn.blurhash:
-      return r'blurhash';
-    case Enum_PersonsSelectColumn.churchId:
-      return r'churchId';
-    case Enum_PersonsSelectColumn.collegeId:
-      return r'collegeId';
-    case Enum_PersonsSelectColumn.color:
-      return r'color';
-    case Enum_PersonsSelectColumn.familyId:
-      return r'familyId';
-    case Enum_PersonsSelectColumn.fatherId:
-      return r'fatherId';
-    case Enum_PersonsSelectColumn.gender:
-      return r'gender';
-    case Enum_PersonsSelectColumn.id:
-      return r'id';
-    case Enum_PersonsSelectColumn.isServant:
-      return r'isServant';
-    case Enum_PersonsSelectColumn.isShammas:
-      return r'isShammas';
-    case Enum_PersonsSelectColumn.isStudent:
-      return r'isStudent';
-    case Enum_PersonsSelectColumn.jobDescription:
-      return r'jobDescription';
-    case Enum_PersonsSelectColumn.jobId:
-      return r'jobId';
-    case Enum_PersonsSelectColumn.mainPhone:
-      return r'mainPhone';
-    case Enum_PersonsSelectColumn.martialStatus:
-      return r'martialStatus';
-    case Enum_PersonsSelectColumn.name:
-      return r'name';
-    case Enum_PersonsSelectColumn.nationalId:
-      return r'nationalId';
-    case Enum_PersonsSelectColumn.notes:
-      return r'notes';
-    case Enum_PersonsSelectColumn.otherPhones:
-      return r'otherPhones';
-    case Enum_PersonsSelectColumn.personTypeId:
-      return r'personTypeId';
-    case Enum_PersonsSelectColumn.photoUpdatedAt:
-      return r'photoUpdatedAt';
-    case Enum_PersonsSelectColumn.qualificationId:
-      return r'qualificationId';
-    case Enum_PersonsSelectColumn.schoolId:
-      return r'schoolId';
-    case Enum_PersonsSelectColumn.serviceType:
-      return r'serviceType';
-    case Enum_PersonsSelectColumn.servingChurchId:
-      return r'servingChurchId';
-    case Enum_PersonsSelectColumn.shammasLevelId:
-      return r'shammasLevelId';
-    case Enum_PersonsSelectColumn.stateId:
-      return r'stateId';
-    case Enum_PersonsSelectColumn.storeId:
-      return r'storeId';
-    case Enum_PersonsSelectColumn.studyYearId:
-      return r'studyYearId';
-    case Enum_PersonsSelectColumn.uid:
-      return r'uid';
-    case Enum_PersonsSelectColumn.workStatus:
-      return r'workStatus';
-    case Enum_PersonsSelectColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_PersonsSelectColumn fromJson_Enum_PersonsSelectColumn(String value) {
-  switch (value) {
-    case r'birthdate':
-      return Enum_PersonsSelectColumn.birthdate;
-    case r'blurhash':
-      return Enum_PersonsSelectColumn.blurhash;
-    case r'churchId':
-      return Enum_PersonsSelectColumn.churchId;
-    case r'collegeId':
-      return Enum_PersonsSelectColumn.collegeId;
-    case r'color':
-      return Enum_PersonsSelectColumn.color;
-    case r'familyId':
-      return Enum_PersonsSelectColumn.familyId;
-    case r'fatherId':
-      return Enum_PersonsSelectColumn.fatherId;
-    case r'gender':
-      return Enum_PersonsSelectColumn.gender;
-    case r'id':
-      return Enum_PersonsSelectColumn.id;
-    case r'isServant':
-      return Enum_PersonsSelectColumn.isServant;
-    case r'isShammas':
-      return Enum_PersonsSelectColumn.isShammas;
-    case r'isStudent':
-      return Enum_PersonsSelectColumn.isStudent;
-    case r'jobDescription':
-      return Enum_PersonsSelectColumn.jobDescription;
-    case r'jobId':
-      return Enum_PersonsSelectColumn.jobId;
-    case r'mainPhone':
-      return Enum_PersonsSelectColumn.mainPhone;
-    case r'martialStatus':
-      return Enum_PersonsSelectColumn.martialStatus;
-    case r'name':
-      return Enum_PersonsSelectColumn.name;
-    case r'nationalId':
-      return Enum_PersonsSelectColumn.nationalId;
-    case r'notes':
-      return Enum_PersonsSelectColumn.notes;
-    case r'otherPhones':
-      return Enum_PersonsSelectColumn.otherPhones;
-    case r'personTypeId':
-      return Enum_PersonsSelectColumn.personTypeId;
-    case r'photoUpdatedAt':
-      return Enum_PersonsSelectColumn.photoUpdatedAt;
-    case r'qualificationId':
-      return Enum_PersonsSelectColumn.qualificationId;
-    case r'schoolId':
-      return Enum_PersonsSelectColumn.schoolId;
-    case r'serviceType':
-      return Enum_PersonsSelectColumn.serviceType;
-    case r'servingChurchId':
-      return Enum_PersonsSelectColumn.servingChurchId;
-    case r'shammasLevelId':
-      return Enum_PersonsSelectColumn.shammasLevelId;
-    case r'stateId':
-      return Enum_PersonsSelectColumn.stateId;
-    case r'storeId':
-      return Enum_PersonsSelectColumn.storeId;
-    case r'studyYearId':
-      return Enum_PersonsSelectColumn.studyYearId;
-    case r'uid':
-      return Enum_PersonsSelectColumn.uid;
-    case r'workStatus':
-      return Enum_PersonsSelectColumn.workStatus;
-    default:
-      return Enum_PersonsSelectColumn.$unknown;
-  }
-}
-
-enum Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns {
-  gender,
-  isServant,
-  isShammas,
-  isStudent,
-  $unknown;
-
-  factory Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns.fromJson(
-    String value,
-  ) =>
-      fromJson_Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns(
-        value,
-      );
-
-  String toJson() =>
-      toJson_Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns(
-        this,
-      );
-}
-
 String
 toJson_Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns(
   Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns e,
@@ -841,6 +679,7 @@ Enum_SchoolsUpdateColumn fromJson_Enum_SchoolsUpdateColumn(String value) {
 }
 
 enum Enum_ServicesConstraint {
+  services_default_meeting_id_key,
   services_name_key,
   services_pkey,
   $unknown;
@@ -853,6 +692,8 @@ enum Enum_ServicesConstraint {
 
 String toJson_Enum_ServicesConstraint(Enum_ServicesConstraint e) {
   switch (e) {
+    case Enum_ServicesConstraint.services_default_meeting_id_key:
+      return r'services_default_meeting_id_key';
     case Enum_ServicesConstraint.services_name_key:
       return r'services_name_key';
     case Enum_ServicesConstraint.services_pkey:
@@ -864,6 +705,8 @@ String toJson_Enum_ServicesConstraint(Enum_ServicesConstraint e) {
 
 Enum_ServicesConstraint fromJson_Enum_ServicesConstraint(String value) {
   switch (value) {
+    case r'services_default_meeting_id_key':
+      return Enum_ServicesConstraint.services_default_meeting_id_key;
     case r'services_name_key':
       return Enum_ServicesConstraint.services_name_key;
     case r'services_pkey':
