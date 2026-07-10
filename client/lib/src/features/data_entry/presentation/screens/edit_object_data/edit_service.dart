@@ -163,7 +163,12 @@ class _EditServiceState extends State<EditService> {
         ),
       );
 
-      return createdService.copyWith(defaultMeeting: defaultMeeting);
+      final updatedService = await DatabaseService.I.services.updateObject(
+        oldObject: createdService,
+        newObject: createdService.copyWith(defaultMeeting: defaultMeeting),
+      );
+
+      return updatedService ?? createdService;
     }
 
     return createdService;

@@ -146,7 +146,12 @@ class _EditGroupState extends State<EditGroup> {
         ),
       );
 
-      return createdGroup.copyWith(defaultMeeting: defaultMeeting);
+      final updatedGroup = await DatabaseService.I.groups.updateObject(
+        oldObject: createdGroup,
+        newObject: createdGroup.copyWith(defaultMeeting: defaultMeeting),
+      );
+
+      return updatedGroup ?? createdGroup;
     }
 
     return createdGroup;
