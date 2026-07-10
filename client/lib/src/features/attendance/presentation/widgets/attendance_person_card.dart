@@ -1,6 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:intl/intl.dart' hide TextDirection;
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 
 class AttendancePersonCard extends StatelessWidget {
@@ -91,54 +91,77 @@ class _TrackRecordLine extends StatelessWidget {
 
     final themeData = Theme.of(context);
     final colorScheme = themeData.colorScheme;
-    final last = analysis.lastAttended;
+    final lastAttended = analysis.lastAttended;
 
     final weeksSince = analysis.weeksSinceLastAttended;
     final isStale = weeksSince != null && weeksSince >= staleWeeks;
 
-    final lastLabel = last == null
-        ? 'لم يسبق الحضور'
-        : 'آخر حضور: ${_formatRelativeAttendanceDate(last)}';
-    final lastColor = last == null || isStale ? colorScheme.error : null;
+    final lastColor = lastAttended == null || isStale
+        ? colorScheme.error
+        : null;
 
-    return Row(
-      children: [
-        if (analysis.currentStreak > 0) ...[
-          Icon(
-            Symbols.local_fire_department,
-            size: 15,
-            color: colorScheme.primary,
-          ),
-          Text(
-            '${analysis.currentStreak}',
-            style: themeData.textTheme.labelMedium?.copyWith(
-              color: colorScheme.primary,
+    final textStyle = themeData.textTheme.bodySmall!.copyWith(
+      fontWeight: FontWeight.w400,
+    );
+
+    return DefaultTextStyle(
+      style: textStyle,
+      child: Row(
+        spacing: 4,
+        children: [
+          if (analysis.attendanceStreak > 0)
+            Row(
+              spacing: 1,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  Symbols.local_fire_department,
+                  size: 15,
+                  opticalSize: textStyle.fontSize,
+                  color: colorScheme.primary,
+                ),
+                Text(
+                  '${analysis.attendanceStreak}',
+                  style: TextStyle(color: colorScheme.primary),
+                ),
+              ],
+            )
+          else if (analysis.absenceStreak > 0)
+            Row(
+              spacing: 1,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  Symbols.error,
+                  size: 15,
+                  opticalSize: textStyle.fontSize,
+                  color: colorScheme.error,
+                ),
+                Text(
+                  'غياب ${analysis.absenceStreak} مرة',
+                  style: TextStyle(color: colorScheme.error),
+                ),
+              ],
             ),
-          ),
-          const SizedBox(width: 8),
-        ] else if (analysis.absenceStreak > 0) ...[
-          Icon(
-            Symbols.warning,
-            size: 15,
-            color: colorScheme.error,
-          ),
-          Text(
-            'غاب ${analysis.absenceStreak} مرة',
-            style: themeData.textTheme.labelMedium?.copyWith(
-              color: colorScheme.error,
+          if (lastAttended case final lastAttended?)
+            Row(
+              spacing: 1,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  Symbols.history,
+                  size: 15,
+                  opticalSize: textStyle.fontSize,
+                  color: lastColor,
+                ),
+                Text(
+                  _formatRelativeAttendanceDate(lastAttended),
+                  style: TextStyle(color: lastColor),
+                ),
+              ],
             ),
-          ),
-          const SizedBox(width: 8),
         ],
-        Expanded(
-          child: Text(
-            lastLabel,
-            maxLines: 1,
-            overflow: TextOverflow.ellipsis,
-            style: themeData.textTheme.bodySmall?.copyWith(color: lastColor),
-          ),
-        ),
-      ],
+      ),
     );
   }
 

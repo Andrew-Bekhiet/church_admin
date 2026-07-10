@@ -34,7 +34,7 @@ void main() {
       expect(a.percent, 0);
       expect(a.lastAttended, isNull);
       expect(a.weeksSinceLastAttended, isNull);
-      expect(a.currentStreak, 0);
+      expect(a.attendanceStreak, 0);
       expect(a.longestStreak, 0);
       expect(a.absenceStreak, 0);
       expect(a.currentStreakRange, isNull);
@@ -49,7 +49,7 @@ void main() {
       expect(a.absentCount, 0);
       expect(a.percent, 1);
       expect(a.lastAttended, d3);
-      expect(a.currentStreak, 3);
+      expect(a.attendanceStreak, 3);
       expect(a.longestStreak, 3);
       expect(a.absenceStreak, 0);
       expect(a.currentStreakRange, DateTimeRange(start: d1, end: d3));
@@ -63,7 +63,7 @@ void main() {
       expect(a.absentCount, 1);
       expect(a.percent, closeTo(2 / 3, 1e-9));
       expect(a.lastAttended, d2);
-      expect(a.currentStreak, 0);
+      expect(a.attendanceStreak, 0);
       expect(a.longestStreak, 2);
       expect(a.absenceStreak, 1);
       expect(a.currentStreakRange, isNull);
@@ -78,7 +78,7 @@ void main() {
 
       expect(a.attendedCount, 4);
       expect(a.absentCount, 1);
-      expect(a.currentStreak, 2);
+      expect(a.attendanceStreak, 2);
       expect(a.longestStreak, 2);
       expect(a.lastAttended, d5);
       expect(a.absenceStreak, 0);
@@ -92,7 +92,7 @@ void main() {
       () {
         final a = analysis(held: [d1, d2, d3], attended: const []);
 
-        expect(a.currentStreak, 0);
+        expect(a.attendanceStreak, 0);
         expect(a.absenceStreak, 3);
         expect(a.currentStreakRange, isNull);
         expect(a.longestStreakRange, isNull);
@@ -127,7 +127,7 @@ void main() {
       final a = analysis(held: [d1], attended: [d1]);
 
       expect(a.heldCount, 1);
-      expect(a.currentStreak, 1);
+      expect(a.attendanceStreak, 1);
       expect(a.longestStreak, 1);
       expect(a.percent, 1);
     });

@@ -4,21 +4,40 @@ import 'package:meta/meta.dart';
 
 @immutable
 sealed class AttendanceSorting with EquatableMixin {
+  AttendanceSorting get then => const _AttendanceSortingById();
+
   const AttendanceSorting();
 
   factory AttendanceSorting.byName() => const AttendanceSortingByName();
   factory AttendanceSorting.byAttendanceTime() => const AttendanceSortingByTime(
     then: AttendanceSortingByName(),
   );
-  factory AttendanceSorting.byStudyYear() => const AttendanceSortingByStudyYear(
-    then: AttendanceSortingByName(),
-  );
+  factory AttendanceSorting.byAttendanceStreak() =>
+      const AttendanceSortingByStreak(
+        then: AttendanceSortingByLastAttendanceTime(
+          then: AttendanceSortingByName(),
+        ),
+      );
+  factory AttendanceSorting.byLastAttendanceTime() =>
+      const AttendanceSortingByLastAttendanceTime(
+        then: AttendanceSortingByStreak(
+          then: AttendanceSortingByName(),
+        ),
+      );
 
   int compare(MeetingRosterEntry a, MeetingRosterEntry b);
 
-  bool get isSortingByTime;
+  @override
+  List<Object?> get props => [then];
+}
 
-  AttendanceSorting toggleAttendanceTimeSorting();
+final class _AttendanceSortingById extends AttendanceSorting {
+  const _AttendanceSortingById();
+
+  @override
+  int compare(MeetingRosterEntry a, MeetingRosterEntry b) {
+    return a.person.id.compareTo(b.person.id);
+  }
 
   @override
   List<Object?> get props => [];
@@ -31,16 +50,10 @@ final class AttendanceSortingByName extends AttendanceSorting {
   int compare(MeetingRosterEntry a, MeetingRosterEntry b) {
     return a.person.name.compareTo(b.person.name);
   }
-
-  @override
-  bool get isSortingByTime => false;
-
-  @override
-  AttendanceSorting toggleAttendanceTimeSorting() =>
-      AttendanceSorting.byAttendanceTime();
 }
 
 final class AttendanceSortingByTime extends AttendanceSorting {
+  @override
   final AttendanceSorting then;
 
   @override
@@ -62,15 +75,10 @@ final class AttendanceSortingByTime extends AttendanceSorting {
 
     return bt.compareTo(at);
   }
-
-  @override
-  bool get isSortingByTime => true;
-
-  @override
-  AttendanceSorting toggleAttendanceTimeSorting() => then;
 }
 
 final class AttendanceSortingByStudyYear extends AttendanceSorting {
+  @override
   final AttendanceSorting then;
 
   @override
@@ -92,11 +100,58 @@ final class AttendanceSortingByStudyYear extends AttendanceSorting {
 
     return gradeA.compareTo(gradeB);
   }
+}
+
+final class AttendanceSortingByStreak extends AttendanceSorting {
+  @override
+  final AttendanceSorting then;
 
   @override
-  bool get isSortingByTime => then.isSortingByTime;
+  List<Object?> get props => [then];
+
+  const AttendanceSortingByStreak({required this.then});
 
   @override
-  AttendanceSorting toggleAttendanceTimeSorting() =>
-      AttendanceSortingByStudyYear(then: then.toggleAttendanceTimeSorting());
+  int compare(MeetingRosterEntry a, MeetingRosterEntry b) {
+    final streakA = a.personAttendanceAnalysis?.attendanceStreak == 0
+        ? -(a.personAttendanceAnalysis?.absenceStreak ?? 0)
+        : a.personAttendanceAnalysis?.attendanceStreak;
+    final streakB = b.personAttendanceAnalysis?.attendanceStreak == 0
+        ? -(b.personAttendanceAnalysis?.absenceStreak ?? 0)
+        : b.personAttendanceAnalysis?.attendanceStreak;
+
+    if (streakA == streakB) {
+      return then.compare(a, b);
+    }
+
+    if (streakA == null) return 1;
+    if (streakB == null) return -1;
+
+    return streakA.compareTo(streakB);
+  }
+}
+
+final class AttendanceSortingByLastAttendanceTime extends AttendanceSorting {
+  @override
+  final AttendanceSorting then;
+
+  @override
+  List<Object?> get props => [then];
+
+  const AttendanceSortingByLastAttendanceTime({required this.then});
+
+  @override
+  int compare(MeetingRosterEntry a, MeetingRosterEntry b) {
+    final lastAttendanceTimeA = a.personAttendanceAnalysis?.lastAttended;
+    final lastAttendanceTimeB = b.personAttendanceAnalysis?.lastAttended;
+
+    if (lastAttendanceTimeA == lastAttendanceTimeB) {
+      return then.compare(a, b);
+    }
+
+    if (lastAttendanceTimeA == null) return 1;
+    if (lastAttendanceTimeB == null) return -1;
+
+    return lastAttendanceTimeA.compareTo(lastAttendanceTimeB);
+  }
 }

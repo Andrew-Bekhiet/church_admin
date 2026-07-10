@@ -36,14 +36,14 @@ class PersonMeetingAttendanceAnalysis {
     return null;
   }
 
-  int get currentStreak =>
+  int get attendanceStreak =>
       heldDays.reversed.takeWhile(attendedDays.contains).length;
 
   int get absenceStreak =>
       heldDays.reversed.takeWhile((d) => !attendedDays.contains(d)).length;
 
   DateTimeRange? get currentStreakRange {
-    final streak = currentStreak;
+    final streak = attendanceStreak;
     if (streak == 0) return null;
 
     final streakDays = heldDays.sublist(heldDays.length - streak);

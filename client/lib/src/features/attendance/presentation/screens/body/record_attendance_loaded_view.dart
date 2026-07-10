@@ -92,7 +92,10 @@ class _RecordAttendanceLoadedViewState
   Widget build(BuildContext context) {
     final cubit = context.read<RecordAttendanceCubit>();
     final state = widget.state;
-    final showGutter = state.grouping == AttendanceGrouping.none;
+    final showGutter =
+        state.grouping == AttendanceGrouping.none &&
+        (state.sort is AttendanceSortingByTime ||
+            state.sort is AttendanceSortingByName);
 
     return NestedScrollView(
       floatHeaderSlivers: true,
@@ -145,6 +148,7 @@ class _RecordAttendanceLoadedViewState
 
                       RosterStatus.ready => switch (state.grouping) {
                         AttendanceGrouping.none => AttendanceFlatRoster(
+                          removeEndPadding: showGutter,
                           entries: state.entries,
                           onToggle: cubit.toggleAttendance,
                         ),

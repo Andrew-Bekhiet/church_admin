@@ -356,7 +356,7 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
       nameOf: (e) => e.person.name,
       navigable: (e) =>
           !(_presenceFilter == AttendancePresenceFilter.all &&
-              _sort.isSortingByTime) ||
+              _sort is AttendanceSortingByTime) ||
           !e.attended,
     );
     final sortedGutterLetters = _alphabet.sortGutterLettersFirst(
