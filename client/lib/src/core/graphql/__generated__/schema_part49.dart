@@ -53,6 +53,7 @@ class Input_ServicesInsertInput {
     Input_ClassesArrRelInsertInput? classes,
     int? color,
     Input_HistoryMeetingsObjRelInsertInput? defaultMeeting,
+    UuidValue? defaultMeetingId,
     Input_GroupsArrRelInsertInput? groups,
     Input_HistoryMeetingsArrRelInsertInput? meetings,
     String? name,
@@ -68,6 +69,7 @@ class Input_ServicesInsertInput {
     if (classes != null) r'classes': classes,
     if (color != null) r'color': color,
     if (defaultMeeting != null) r'defaultMeeting': defaultMeeting,
+    if (defaultMeetingId != null) r'defaultMeetingId': defaultMeetingId,
     if (groups != null) r'groups': groups,
     if (meetings != null) r'meetings': meetings,
     if (name != null) r'name': name,
@@ -111,6 +113,12 @@ class Input_ServicesInsertInput {
           : Input_HistoryMeetingsObjRelInsertInput.fromJson(
               (l$defaultMeeting as Map<String, dynamic>),
             );
+    }
+    if (data.containsKey('defaultMeetingId')) {
+      final l$defaultMeetingId = data['defaultMeetingId'];
+      result$data['defaultMeetingId'] = l$defaultMeetingId == null
+          ? null
+          : stringToUuid(l$defaultMeetingId);
     }
     if (data.containsKey('groups')) {
       final l$groups = data['groups'];
@@ -194,6 +202,8 @@ class Input_ServicesInsertInput {
   Input_HistoryMeetingsObjRelInsertInput? get defaultMeeting =>
       (_$data['defaultMeeting'] as Input_HistoryMeetingsObjRelInsertInput?);
 
+  UuidValue? get defaultMeetingId => (_$data['defaultMeetingId'] as UuidValue?);
+
   Input_GroupsArrRelInsertInput? get groups =>
       (_$data['groups'] as Input_GroupsArrRelInsertInput?);
 
@@ -237,6 +247,12 @@ class Input_ServicesInsertInput {
     if (_$data.containsKey('defaultMeeting')) {
       final l$defaultMeeting = defaultMeeting;
       result$data['defaultMeeting'] = l$defaultMeeting?.toJson();
+    }
+    if (_$data.containsKey('defaultMeetingId')) {
+      final l$defaultMeetingId = defaultMeetingId;
+      result$data['defaultMeetingId'] = l$defaultMeetingId == null
+          ? null
+          : uuidToString(l$defaultMeetingId);
     }
     if (_$data.containsKey('groups')) {
       final l$groups = groups;
@@ -327,6 +343,15 @@ class Input_ServicesInsertInput {
       return false;
     }
     if (l$defaultMeeting != lOther$defaultMeeting) {
+      return false;
+    }
+    final l$defaultMeetingId = defaultMeetingId;
+    final lOther$defaultMeetingId = other.defaultMeetingId;
+    if (_$data.containsKey('defaultMeetingId') !=
+        other._$data.containsKey('defaultMeetingId')) {
+      return false;
+    }
+    if (l$defaultMeetingId != lOther$defaultMeetingId) {
       return false;
     }
     final l$groups = groups;
@@ -425,6 +450,7 @@ class Input_ServicesInsertInput {
     final l$classes = classes;
     final l$color = color;
     final l$defaultMeeting = defaultMeeting;
+    final l$defaultMeetingId = defaultMeetingId;
     final l$groups = groups;
     final l$meetings = meetings;
     final l$name = name;
@@ -440,6 +466,7 @@ class Input_ServicesInsertInput {
       _$data.containsKey('classes') ? l$classes : const {},
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('defaultMeeting') ? l$defaultMeeting : const {},
+      _$data.containsKey('defaultMeetingId') ? l$defaultMeetingId : const {},
       _$data.containsKey('groups') ? l$groups : const {},
       _$data.containsKey('meetings') ? l$meetings : const {},
       _$data.containsKey('name') ? l$name : const {},
@@ -468,6 +495,7 @@ abstract class CopyWith_Input_ServicesInsertInput<TRes> {
     Input_ClassesArrRelInsertInput? classes,
     int? color,
     Input_HistoryMeetingsObjRelInsertInput? defaultMeeting,
+    UuidValue? defaultMeetingId,
     Input_GroupsArrRelInsertInput? groups,
     Input_HistoryMeetingsArrRelInsertInput? meetings,
     String? name,
@@ -505,6 +533,7 @@ class _CopyWithImpl_Input_ServicesInsertInput<TRes>
     Object? classes = _undefined,
     Object? color = _undefined,
     Object? defaultMeeting = _undefined,
+    Object? defaultMeetingId = _undefined,
     Object? groups = _undefined,
     Object? meetings = _undefined,
     Object? name = _undefined,
@@ -526,6 +555,8 @@ class _CopyWithImpl_Input_ServicesInsertInput<TRes>
       if (defaultMeeting != _undefined)
         'defaultMeeting':
             (defaultMeeting as Input_HistoryMeetingsObjRelInsertInput?),
+      if (defaultMeetingId != _undefined)
+        'defaultMeetingId': (defaultMeetingId as UuidValue?),
       if (groups != _undefined)
         'groups': (groups as Input_GroupsArrRelInsertInput?),
       if (meetings != _undefined)
@@ -651,6 +682,7 @@ class _CopyWithStubImpl_Input_ServicesInsertInput<TRes>
     Input_ClassesArrRelInsertInput? classes,
     int? color,
     Input_HistoryMeetingsObjRelInsertInput? defaultMeeting,
+    UuidValue? defaultMeetingId,
     Input_GroupsArrRelInsertInput? groups,
     Input_HistoryMeetingsArrRelInsertInput? meetings,
     String? name,
@@ -1051,6 +1083,7 @@ class Input_ServicesOrderBy {
     Input_ClassesAggregateOrderBy? classesAggregate,
     Enum_OrderBy? color,
     Input_HistoryMeetingsOrderBy? defaultMeeting,
+    Enum_OrderBy? defaultMeetingId,
     Input_HistoryEditHistoryAggregateOrderBy? editHistoryAggregate,
     Input_GroupsAggregateOrderBy? groupsAggregate,
     Enum_OrderBy? id,
@@ -1073,6 +1106,7 @@ class Input_ServicesOrderBy {
     if (classesAggregate != null) r'classesAggregate': classesAggregate,
     if (color != null) r'color': color,
     if (defaultMeeting != null) r'defaultMeeting': defaultMeeting,
+    if (defaultMeetingId != null) r'defaultMeetingId': defaultMeetingId,
     if (editHistoryAggregate != null)
       r'editHistoryAggregate': editHistoryAggregate,
     if (groupsAggregate != null) r'groupsAggregate': groupsAggregate,
@@ -1130,6 +1164,12 @@ class Input_ServicesOrderBy {
           : Input_HistoryMeetingsOrderBy.fromJson(
               (l$defaultMeeting as Map<String, dynamic>),
             );
+    }
+    if (data.containsKey('defaultMeetingId')) {
+      final l$defaultMeetingId = data['defaultMeetingId'];
+      result$data['defaultMeetingId'] = l$defaultMeetingId == null
+          ? null
+          : fromJson_Enum_OrderBy((l$defaultMeetingId as String));
     }
     if (data.containsKey('editHistoryAggregate')) {
       final l$editHistoryAggregate = data['editHistoryAggregate'];
@@ -1256,6 +1296,9 @@ class Input_ServicesOrderBy {
   Input_HistoryMeetingsOrderBy? get defaultMeeting =>
       (_$data['defaultMeeting'] as Input_HistoryMeetingsOrderBy?);
 
+  Enum_OrderBy? get defaultMeetingId =>
+      (_$data['defaultMeetingId'] as Enum_OrderBy?);
+
   Input_HistoryEditHistoryAggregateOrderBy? get editHistoryAggregate =>
       (_$data['editHistoryAggregate']
           as Input_HistoryEditHistoryAggregateOrderBy?);
@@ -1322,6 +1365,12 @@ class Input_ServicesOrderBy {
     if (_$data.containsKey('defaultMeeting')) {
       final l$defaultMeeting = defaultMeeting;
       result$data['defaultMeeting'] = l$defaultMeeting?.toJson();
+    }
+    if (_$data.containsKey('defaultMeetingId')) {
+      final l$defaultMeetingId = defaultMeetingId;
+      result$data['defaultMeetingId'] = l$defaultMeetingId == null
+          ? null
+          : toJson_Enum_OrderBy(l$defaultMeetingId);
     }
     if (_$data.containsKey('editHistoryAggregate')) {
       final l$editHistoryAggregate = editHistoryAggregate;
@@ -1449,6 +1498,15 @@ class Input_ServicesOrderBy {
       return false;
     }
     if (l$defaultMeeting != lOther$defaultMeeting) {
+      return false;
+    }
+    final l$defaultMeetingId = defaultMeetingId;
+    final lOther$defaultMeetingId = other.defaultMeetingId;
+    if (_$data.containsKey('defaultMeetingId') !=
+        other._$data.containsKey('defaultMeetingId')) {
+      return false;
+    }
+    if (l$defaultMeetingId != lOther$defaultMeetingId) {
       return false;
     }
     final l$editHistoryAggregate = editHistoryAggregate;
@@ -1594,6 +1652,7 @@ class Input_ServicesOrderBy {
     final l$classesAggregate = classesAggregate;
     final l$color = color;
     final l$defaultMeeting = defaultMeeting;
+    final l$defaultMeetingId = defaultMeetingId;
     final l$editHistoryAggregate = editHistoryAggregate;
     final l$groupsAggregate = groupsAggregate;
     final l$id = id;
@@ -1617,6 +1676,7 @@ class Input_ServicesOrderBy {
       _$data.containsKey('classesAggregate') ? l$classesAggregate : const {},
       _$data.containsKey('color') ? l$color : const {},
       _$data.containsKey('defaultMeeting') ? l$defaultMeeting : const {},
+      _$data.containsKey('defaultMeetingId') ? l$defaultMeetingId : const {},
       _$data.containsKey('editHistoryAggregate')
           ? l$editHistoryAggregate
           : const {},
@@ -1653,6 +1713,7 @@ abstract class CopyWith_Input_ServicesOrderBy<TRes> {
     Input_ClassesAggregateOrderBy? classesAggregate,
     Enum_OrderBy? color,
     Input_HistoryMeetingsOrderBy? defaultMeeting,
+    Enum_OrderBy? defaultMeetingId,
     Input_HistoryEditHistoryAggregateOrderBy? editHistoryAggregate,
     Input_GroupsAggregateOrderBy? groupsAggregate,
     Enum_OrderBy? id,
@@ -1699,6 +1760,7 @@ class _CopyWithImpl_Input_ServicesOrderBy<TRes>
     Object? classesAggregate = _undefined,
     Object? color = _undefined,
     Object? defaultMeeting = _undefined,
+    Object? defaultMeetingId = _undefined,
     Object? editHistoryAggregate = _undefined,
     Object? groupsAggregate = _undefined,
     Object? id = _undefined,
@@ -1727,6 +1789,8 @@ class _CopyWithImpl_Input_ServicesOrderBy<TRes>
       if (color != _undefined) 'color': (color as Enum_OrderBy?),
       if (defaultMeeting != _undefined)
         'defaultMeeting': (defaultMeeting as Input_HistoryMeetingsOrderBy?),
+      if (defaultMeetingId != _undefined)
+        'defaultMeetingId': (defaultMeetingId as Enum_OrderBy?),
       if (editHistoryAggregate != _undefined)
         'editHistoryAggregate':
             (editHistoryAggregate as Input_HistoryEditHistoryAggregateOrderBy?),
@@ -1888,6 +1952,7 @@ class _CopyWithStubImpl_Input_ServicesOrderBy<TRes>
     Input_ClassesAggregateOrderBy? classesAggregate,
     Enum_OrderBy? color,
     Input_HistoryMeetingsOrderBy? defaultMeeting,
+    Enum_OrderBy? defaultMeetingId,
     Input_HistoryEditHistoryAggregateOrderBy? editHistoryAggregate,
     Input_GroupsAggregateOrderBy? groupsAggregate,
     Enum_OrderBy? id,
@@ -2034,12 +2099,14 @@ class _CopyWithStubImpl_Input_ServicesPkColumnsInput<TRes>
 class Input_ServicesSetInput {
   factory Input_ServicesSetInput({
     int? color,
+    UuidValue? defaultMeetingId,
     String? name,
     UuidValue? nextServiceId,
     int? studyYearFromId,
     int? studyYearToId,
   }) => Input_ServicesSetInput._({
     if (color != null) r'color': color,
+    if (defaultMeetingId != null) r'defaultMeetingId': defaultMeetingId,
     if (name != null) r'name': name,
     if (nextServiceId != null) r'nextServiceId': nextServiceId,
     if (studyYearFromId != null) r'studyYearFromId': studyYearFromId,
@@ -2053,6 +2120,12 @@ class Input_ServicesSetInput {
     if (data.containsKey('color')) {
       final l$color = data['color'];
       result$data['color'] = (l$color as int?);
+    }
+    if (data.containsKey('defaultMeetingId')) {
+      final l$defaultMeetingId = data['defaultMeetingId'];
+      result$data['defaultMeetingId'] = l$defaultMeetingId == null
+          ? null
+          : stringToUuid(l$defaultMeetingId);
     }
     if (data.containsKey('name')) {
       final l$name = data['name'];
@@ -2079,6 +2152,8 @@ class Input_ServicesSetInput {
 
   int? get color => (_$data['color'] as int?);
 
+  UuidValue? get defaultMeetingId => (_$data['defaultMeetingId'] as UuidValue?);
+
   String? get name => (_$data['name'] as String?);
 
   UuidValue? get nextServiceId => (_$data['nextServiceId'] as UuidValue?);
@@ -2092,6 +2167,12 @@ class Input_ServicesSetInput {
     if (_$data.containsKey('color')) {
       final l$color = color;
       result$data['color'] = l$color;
+    }
+    if (_$data.containsKey('defaultMeetingId')) {
+      final l$defaultMeetingId = defaultMeetingId;
+      result$data['defaultMeetingId'] = l$defaultMeetingId == null
+          ? null
+          : uuidToString(l$defaultMeetingId);
     }
     if (_$data.containsKey('name')) {
       final l$name = name;
@@ -2131,6 +2212,15 @@ class Input_ServicesSetInput {
       return false;
     }
     if (l$color != lOther$color) {
+      return false;
+    }
+    final l$defaultMeetingId = defaultMeetingId;
+    final lOther$defaultMeetingId = other.defaultMeetingId;
+    if (_$data.containsKey('defaultMeetingId') !=
+        other._$data.containsKey('defaultMeetingId')) {
+      return false;
+    }
+    if (l$defaultMeetingId != lOther$defaultMeetingId) {
       return false;
     }
     final l$name = name;
@@ -2174,12 +2264,14 @@ class Input_ServicesSetInput {
   @override
   int get hashCode {
     final l$color = color;
+    final l$defaultMeetingId = defaultMeetingId;
     final l$name = name;
     final l$nextServiceId = nextServiceId;
     final l$studyYearFromId = studyYearFromId;
     final l$studyYearToId = studyYearToId;
     return Object.hashAll([
       _$data.containsKey('color') ? l$color : const {},
+      _$data.containsKey('defaultMeetingId') ? l$defaultMeetingId : const {},
       _$data.containsKey('name') ? l$name : const {},
       _$data.containsKey('nextServiceId') ? l$nextServiceId : const {},
       _$data.containsKey('studyYearFromId') ? l$studyYearFromId : const {},
@@ -2199,6 +2291,7 @@ abstract class CopyWith_Input_ServicesSetInput<TRes> {
 
   TRes call({
     int? color,
+    UuidValue? defaultMeetingId,
     String? name,
     UuidValue? nextServiceId,
     int? studyYearFromId,
@@ -2218,6 +2311,7 @@ class _CopyWithImpl_Input_ServicesSetInput<TRes>
 
   TRes call({
     Object? color = _undefined,
+    Object? defaultMeetingId = _undefined,
     Object? name = _undefined,
     Object? nextServiceId = _undefined,
     Object? studyYearFromId = _undefined,
@@ -2226,6 +2320,8 @@ class _CopyWithImpl_Input_ServicesSetInput<TRes>
     Input_ServicesSetInput._({
       ..._instance._$data,
       if (color != _undefined) 'color': (color as int?),
+      if (defaultMeetingId != _undefined)
+        'defaultMeetingId': (defaultMeetingId as UuidValue?),
       if (name != _undefined) 'name': (name as String?),
       if (nextServiceId != _undefined)
         'nextServiceId': (nextServiceId as UuidValue?),
@@ -2244,6 +2340,7 @@ class _CopyWithStubImpl_Input_ServicesSetInput<TRes>
 
   call({
     int? color,
+    UuidValue? defaultMeetingId,
     String? name,
     UuidValue? nextServiceId,
     int? studyYearFromId,
@@ -2405,6 +2502,7 @@ class Input_ServicesStreamCursorValueInput {
   factory Input_ServicesStreamCursorValueInput({
     String? blurhash,
     int? color,
+    UuidValue? defaultMeetingId,
     UuidValue? id,
     String? name,
     UuidValue? nextServiceId,
@@ -2414,6 +2512,7 @@ class Input_ServicesStreamCursorValueInput {
   }) => Input_ServicesStreamCursorValueInput._({
     if (blurhash != null) r'blurhash': blurhash,
     if (color != null) r'color': color,
+    if (defaultMeetingId != null) r'defaultMeetingId': defaultMeetingId,
     if (id != null) r'id': id,
     if (name != null) r'name': name,
     if (nextServiceId != null) r'nextServiceId': nextServiceId,
@@ -2435,6 +2534,12 @@ class Input_ServicesStreamCursorValueInput {
     if (data.containsKey('color')) {
       final l$color = data['color'];
       result$data['color'] = (l$color as int?);
+    }
+    if (data.containsKey('defaultMeetingId')) {
+      final l$defaultMeetingId = data['defaultMeetingId'];
+      result$data['defaultMeetingId'] = l$defaultMeetingId == null
+          ? null
+          : stringToUuid(l$defaultMeetingId);
     }
     if (data.containsKey('id')) {
       final l$id = data['id'];
@@ -2473,6 +2578,8 @@ class Input_ServicesStreamCursorValueInput {
 
   int? get color => (_$data['color'] as int?);
 
+  UuidValue? get defaultMeetingId => (_$data['defaultMeetingId'] as UuidValue?);
+
   UuidValue? get id => (_$data['id'] as UuidValue?);
 
   String? get name => (_$data['name'] as String?);
@@ -2494,6 +2601,12 @@ class Input_ServicesStreamCursorValueInput {
     if (_$data.containsKey('color')) {
       final l$color = color;
       result$data['color'] = l$color;
+    }
+    if (_$data.containsKey('defaultMeetingId')) {
+      final l$defaultMeetingId = defaultMeetingId;
+      result$data['defaultMeetingId'] = l$defaultMeetingId == null
+          ? null
+          : uuidToString(l$defaultMeetingId);
     }
     if (_$data.containsKey('id')) {
       final l$id = id;
@@ -2557,6 +2670,15 @@ class Input_ServicesStreamCursorValueInput {
     if (l$color != lOther$color) {
       return false;
     }
+    final l$defaultMeetingId = defaultMeetingId;
+    final lOther$defaultMeetingId = other.defaultMeetingId;
+    if (_$data.containsKey('defaultMeetingId') !=
+        other._$data.containsKey('defaultMeetingId')) {
+      return false;
+    }
+    if (l$defaultMeetingId != lOther$defaultMeetingId) {
+      return false;
+    }
     final l$id = id;
     final lOther$id = other.id;
     if (_$data.containsKey('id') != other._$data.containsKey('id')) {
@@ -2616,6 +2738,7 @@ class Input_ServicesStreamCursorValueInput {
   int get hashCode {
     final l$blurhash = blurhash;
     final l$color = color;
+    final l$defaultMeetingId = defaultMeetingId;
     final l$id = id;
     final l$name = name;
     final l$nextServiceId = nextServiceId;
@@ -2625,6 +2748,7 @@ class Input_ServicesStreamCursorValueInput {
     return Object.hashAll([
       _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('color') ? l$color : const {},
+      _$data.containsKey('defaultMeetingId') ? l$defaultMeetingId : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('name') ? l$name : const {},
       _$data.containsKey('nextServiceId') ? l$nextServiceId : const {},

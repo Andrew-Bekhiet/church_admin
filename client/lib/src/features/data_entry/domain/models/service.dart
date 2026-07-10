@@ -1,5 +1,6 @@
 import 'package:church_admin/annotations.dart';
 import 'package:church_admin/church_admin.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/services/__generated__/mutations.gql.dart';
 import 'package:flutter/material.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -112,6 +113,45 @@ class Service extends ViewableWithIDAndImage
 
   @override
   String get typeName => AdvancedQueriesMetadata().service.name;
+
+  Variables_Mutation_insertService toInsertInput() =>
+      Variables_Mutation_insertService(
+        newService: Input_ServicesInsertInput(
+          name: name,
+          studyYearFromId: studyYearFromId,
+          studyYearToId: studyYearToId,
+          nextServiceId: nextServiceId?.toUuid(),
+          defaultMeetingId: defaultMeeting?.id.toUuid(),
+          color: color?.argbValue,
+        ),
+      );
+
+  Variables_Mutation_updateService toUpdateInput(Service oldService) {
+    Input_ServicesSetInput result = Input_ServicesSetInput();
+    if (name != oldService.name) {
+      result = result.copyWith(name: name);
+    }
+    if (studyYearFromId != oldService.studyYearFromId) {
+      result = result.copyWith(studyYearFromId: studyYearFromId);
+    }
+    if (studyYearToId != oldService.studyYearToId) {
+      result = result.copyWith(studyYearToId: studyYearToId);
+    }
+    if (nextServiceId != oldService.nextServiceId) {
+      result = result.copyWith(nextServiceId: nextServiceId?.toUuid());
+    }
+    if (defaultMeeting?.id != oldService.defaultMeeting?.id) {
+      result = result.copyWith(defaultMeetingId: defaultMeeting?.id.toUuid());
+    }
+    if (color != oldService.color) {
+      result = result.copyWith(color: color?.argbValue);
+    }
+
+    return Variables_Mutation_updateService(
+      serviceId: id.toUuid(),
+      newService: result,
+    );
+  }
 }
 
 class ServiceFields extends _ServiceFields {

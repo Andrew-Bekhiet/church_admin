@@ -719,6 +719,7 @@ Enum_ServicesConstraint fromJson_Enum_ServicesConstraint(String value) {
 enum Enum_ServicesSelectColumn {
   blurhash,
   color,
+  defaultMeetingId,
   id,
   name,
   nextServiceId,
@@ -739,6 +740,8 @@ String toJson_Enum_ServicesSelectColumn(Enum_ServicesSelectColumn e) {
       return r'blurhash';
     case Enum_ServicesSelectColumn.color:
       return r'color';
+    case Enum_ServicesSelectColumn.defaultMeetingId:
+      return r'defaultMeetingId';
     case Enum_ServicesSelectColumn.id:
       return r'id';
     case Enum_ServicesSelectColumn.name:
@@ -762,6 +765,8 @@ Enum_ServicesSelectColumn fromJson_Enum_ServicesSelectColumn(String value) {
       return Enum_ServicesSelectColumn.blurhash;
     case r'color':
       return Enum_ServicesSelectColumn.color;
+    case r'defaultMeetingId':
+      return Enum_ServicesSelectColumn.defaultMeetingId;
     case r'id':
       return Enum_ServicesSelectColumn.id;
     case r'name':
@@ -781,6 +786,7 @@ Enum_ServicesSelectColumn fromJson_Enum_ServicesSelectColumn(String value) {
 
 enum Enum_ServicesUpdateColumn {
   color,
+  defaultMeetingId,
   name,
   nextServiceId,
   studyYearFromId,
@@ -797,6 +803,8 @@ String toJson_Enum_ServicesUpdateColumn(Enum_ServicesUpdateColumn e) {
   switch (e) {
     case Enum_ServicesUpdateColumn.color:
       return r'color';
+    case Enum_ServicesUpdateColumn.defaultMeetingId:
+      return r'defaultMeetingId';
     case Enum_ServicesUpdateColumn.name:
       return r'name';
     case Enum_ServicesUpdateColumn.nextServiceId:
@@ -814,6 +822,8 @@ Enum_ServicesUpdateColumn fromJson_Enum_ServicesUpdateColumn(String value) {
   switch (value) {
     case r'color':
       return Enum_ServicesUpdateColumn.color;
+    case r'defaultMeetingId':
+      return Enum_ServicesUpdateColumn.defaultMeetingId;
     case r'name':
       return Enum_ServicesUpdateColumn.name;
     case r'nextServiceId':
