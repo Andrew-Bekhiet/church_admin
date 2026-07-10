@@ -45,6 +45,7 @@ class ChurchAdminCsvExporter {
     await _exportAreas();
     await _exportAreasStreets();
     await _exportServices();
+    await _exportMeetings();
     await _exportClasses();
     await _exportFamilies();
     await _exportFamiliesFamilies();
@@ -313,9 +314,33 @@ class ChurchAdminCsvExporter {
             'next_service_id': _uuidFromFirestoreId(
               s.nextService?.id ?? s.nextServiceId,
             ),
+            'default_meeting_id': _uuidFromFirestoreId(s.defaultMeeting?.id),
             'color': colorToInt(s.color),
             'photo_updated_at': s.photoUpdatedAt?.toIso8601String(),
             'blurhash': s.blurhash,
+          },
+        ),
+      ),
+    );
+  }
+
+  Future<void> _exportMeetings() async {
+    await _exportSerializables(
+      'meetings',
+      churchAdminContext.meetings.values.map(
+        (meeting) => _ToJsonAdapter(
+          meeting,
+          meeting.id,
+          (m) => {
+            'id': _uuidFromFirestoreId(m.id),
+            'name': m.name,
+            'service_id': _uuidFromFirestoreId(m.service?.id ?? m.serviceId),
+            'service_study_year': m.serviceStudyYear,
+            'service_gender': m.serviceGender,
+            'group_id': _uuidFromFirestoreId(m.group?.id ?? m.groupId),
+            'audience': m.audience.name,
+            'is_archived': m.isArchived,
+            'color': colorToInt(m.color),
           },
         ),
       ),

@@ -295,6 +295,7 @@ Enum_FathersUpdateColumn fromJson_Enum_FathersUpdateColumn(String value) {
 }
 
 enum Enum_GroupsConstraint {
+  groups_default_meeting_id_key,
   groups_pkey,
   $unknown;
 
@@ -306,6 +307,8 @@ enum Enum_GroupsConstraint {
 
 String toJson_Enum_GroupsConstraint(Enum_GroupsConstraint e) {
   switch (e) {
+    case Enum_GroupsConstraint.groups_default_meeting_id_key:
+      return r'groups_default_meeting_id_key';
     case Enum_GroupsConstraint.groups_pkey:
       return r'groups_pkey';
     case Enum_GroupsConstraint.$unknown:
@@ -315,6 +318,8 @@ String toJson_Enum_GroupsConstraint(Enum_GroupsConstraint e) {
 
 Enum_GroupsConstraint fromJson_Enum_GroupsConstraint(String value) {
   switch (value) {
+    case r'groups_default_meeting_id_key':
+      return Enum_GroupsConstraint.groups_default_meeting_id_key;
     case r'groups_pkey':
       return Enum_GroupsConstraint.groups_pkey;
     default:
@@ -325,6 +330,7 @@ Enum_GroupsConstraint fromJson_Enum_GroupsConstraint(String value) {
 enum Enum_GroupsSelectColumn {
   blurhash,
   color,
+  defaultMeetingId,
   id,
   name,
   photoUpdatedAt,
@@ -344,6 +350,8 @@ String toJson_Enum_GroupsSelectColumn(Enum_GroupsSelectColumn e) {
       return r'blurhash';
     case Enum_GroupsSelectColumn.color:
       return r'color';
+    case Enum_GroupsSelectColumn.defaultMeetingId:
+      return r'defaultMeetingId';
     case Enum_GroupsSelectColumn.id:
       return r'id';
     case Enum_GroupsSelectColumn.name:
@@ -365,6 +373,8 @@ Enum_GroupsSelectColumn fromJson_Enum_GroupsSelectColumn(String value) {
       return Enum_GroupsSelectColumn.blurhash;
     case r'color':
       return Enum_GroupsSelectColumn.color;
+    case r'defaultMeetingId':
+      return Enum_GroupsSelectColumn.defaultMeetingId;
     case r'id':
       return Enum_GroupsSelectColumn.id;
     case r'name':
@@ -382,6 +392,7 @@ Enum_GroupsSelectColumn fromJson_Enum_GroupsSelectColumn(String value) {
 
 enum Enum_GroupsUpdateColumn {
   color,
+  defaultMeetingId,
   name,
   serviceId,
   validity,
@@ -397,6 +408,8 @@ String toJson_Enum_GroupsUpdateColumn(Enum_GroupsUpdateColumn e) {
   switch (e) {
     case Enum_GroupsUpdateColumn.color:
       return r'color';
+    case Enum_GroupsUpdateColumn.defaultMeetingId:
+      return r'defaultMeetingId';
     case Enum_GroupsUpdateColumn.name:
       return r'name';
     case Enum_GroupsUpdateColumn.serviceId:
@@ -412,6 +425,8 @@ Enum_GroupsUpdateColumn fromJson_Enum_GroupsUpdateColumn(String value) {
   switch (value) {
     case r'color':
       return Enum_GroupsUpdateColumn.color;
+    case r'defaultMeetingId':
+      return Enum_GroupsUpdateColumn.defaultMeetingId;
     case r'name':
       return Enum_GroupsUpdateColumn.name;
     case r'serviceId':

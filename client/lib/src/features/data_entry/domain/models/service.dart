@@ -121,7 +121,12 @@ class Service extends ViewableWithIDAndImage
           studyYearFromId: studyYearFromId,
           studyYearToId: studyYearToId,
           nextServiceId: nextServiceId?.toUuid(),
-          defaultMeetingId: defaultMeeting?.id.toUuid(),
+          defaultMeeting: switch (defaultMeeting) {
+            final meeting? => Input_HistoryMeetingsObjRelInsertInput(
+              data: meeting.toInsertInput(),
+            ),
+            null => null,
+          },
           color: color?.argbValue,
         ),
       );

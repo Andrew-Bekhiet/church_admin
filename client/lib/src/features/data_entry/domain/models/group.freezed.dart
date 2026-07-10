@@ -20,6 +20,8 @@ mixin _$Group {
   String? get blurhash;
   String? get serviceId;
   Service? get service;
+  Meeting? get defaultMeeting;
+  List<Meeting>? get meetings;
   DateTimeRange? get validity;
   LastRecordedByInfo? get lastEdit;
   List<User>? get adminUsers;
@@ -47,6 +49,9 @@ mixin _$Group {
             (identical(other.serviceId, serviceId) ||
                 other.serviceId == serviceId) &&
             (identical(other.service, service) || other.service == service) &&
+            (identical(other.defaultMeeting, defaultMeeting) ||
+                other.defaultMeeting == defaultMeeting) &&
+            const DeepCollectionEquality().equals(other.meetings, meetings) &&
             (identical(other.validity, validity) ||
                 other.validity == validity) &&
             (identical(other.lastEdit, lastEdit) ||
@@ -70,6 +75,8 @@ mixin _$Group {
     blurhash,
     serviceId,
     service,
+    defaultMeeting,
+    const DeepCollectionEquality().hash(meetings),
     validity,
     lastEdit,
     const DeepCollectionEquality().hash(adminUsers),
@@ -78,7 +85,7 @@ mixin _$Group {
 
   @override
   String toString() {
-    return 'Group(id: $id, name: $name, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, serviceId: $serviceId, service: $service, validity: $validity, lastEdit: $lastEdit, adminUsers: $adminUsers, userCanEdit: $userCanEdit)';
+    return 'Group(id: $id, name: $name, color: $color, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, serviceId: $serviceId, service: $service, defaultMeeting: $defaultMeeting, meetings: $meetings, validity: $validity, lastEdit: $lastEdit, adminUsers: $adminUsers, userCanEdit: $userCanEdit)';
   }
 }
 
@@ -95,7 +102,9 @@ abstract mixin class $GroupCopyWith<$Res> {
     String? blurhash,
     String? serviceId,
     Service? service,
+    Meeting? defaultMeeting,
     DateTimeRange<DateTime>? validity,
+    List<Meeting>? meetings,
     LastRecordedByInfo? lastEdit,
     List<User>? adminUsers,
     bool userCanEdit,
@@ -121,7 +130,9 @@ class _$GroupCopyWithImpl<$Res> implements $GroupCopyWith<$Res> {
     Object? blurhash = freezed,
     Object? serviceId = freezed,
     Object? service = freezed,
+    Object? defaultMeeting = freezed,
     Object? validity = freezed,
+    Object? meetings = freezed,
     Object? lastEdit = freezed,
     Object? adminUsers = freezed,
     Object? userCanEdit = null,
@@ -156,10 +167,18 @@ class _$GroupCopyWithImpl<$Res> implements $GroupCopyWith<$Res> {
             ? _self.service
             : service // ignore: cast_nullable_to_non_nullable
                   as Service?,
+        defaultMeeting: freezed == defaultMeeting
+            ? _self.defaultMeeting
+            : defaultMeeting // ignore: cast_nullable_to_non_nullable
+                  as Meeting?,
         validity: freezed == validity
             ? _self.validity
             : validity // ignore: cast_nullable_to_non_nullable
                   as DateTimeRange<DateTime>?,
+        meetings: freezed == meetings
+            ? _self.meetings
+            : meetings // ignore: cast_nullable_to_non_nullable
+                  as List<Meeting>?,
         lastEdit: freezed == lastEdit
             ? _self.lastEdit
             : lastEdit // ignore: cast_nullable_to_non_nullable

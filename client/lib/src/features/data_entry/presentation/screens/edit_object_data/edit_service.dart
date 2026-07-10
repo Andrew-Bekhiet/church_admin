@@ -17,6 +17,11 @@ class EditService extends StatefulWidget {
 class _EditServiceState extends State<EditService> {
   late final EditObjectController<Service> _controller;
 
+  late final TextEditingController _nameController = TextEditingController(
+    text: newService.name,
+  );
+  String? _defaultMeetingName;
+
   @override
   void initState() {
     super.initState();
@@ -31,8 +36,7 @@ class _EditServiceState extends State<EditService> {
         id: object.id,
         $extra: object,
       ).pushReplacement(context),
-      onCreate: (object) =>
-          DatabaseService.I.services.createObject(newObject: object),
+      onCreate: _createService,
       onUpdate: (oldService, newService) =>
           DatabaseService.I.services.updateObject(
             oldObject: oldService,
@@ -56,6 +60,12 @@ class _EditServiceState extends State<EditService> {
   set newService(Service a) => _controller.newObject = a;
 
   @override
+  void dispose() {
+    _nameController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return EditObjectData(
       objectData: widget.service,
@@ -65,11 +75,10 @@ class _EditServiceState extends State<EditService> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           NameField(
-            initialValue: newService.name,
+            controller: _nameController,
             hintText: 'اسم الخدمة',
-            onValueChanged: (value) => newService = newService.copyWith(
-              name: value.trim(),
-            ),
+            onValueChanged: (value) =>
+                newService = newService.copyWith(name: value.trim()),
             padding: const EdgeInsets.symmetric(vertical: 8),
           ),
           ObjectSelectionField<Service, Service?>(
@@ -120,6 +129,11 @@ class _EditServiceState extends State<EditService> {
               return null;
             },
           ),
+          if (_controller.isCreate)
+            DefaultMeetingField(
+              parentNameController: _nameController,
+              onChanged: (name) => _defaultMeetingName = name,
+            ),
           ColorField(
             initialValue: newService.color,
             onChanged: (value) => setState(
@@ -129,5 +143,29 @@ class _EditServiceState extends State<EditService> {
         ],
       ),
     );
+  }
+
+  Future<Service> _createService(Service newObject) async {
+    final createdService = await DatabaseService.I.services.createObject(
+      newObject: newObject,
+    );
+
+    if (_defaultMeetingName case final meetingName?
+        when meetingName.isNotEmpty) {
+      final defaultMeeting = await DatabaseService.I.meetings.createObject(
+        newObject: Meeting(
+          id: const Uuid().v4(),
+          name: meetingName,
+          audience: MeetingAudience.personsAndServants,
+          isArchived: false,
+          color: createdService.color,
+          serviceId: createdService.id,
+        ),
+      );
+
+      return createdService.copyWith(defaultMeeting: defaultMeeting);
+    }
+
+    return createdService;
   }
 }

@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
@@ -101,10 +102,28 @@ class _ViewGroupState extends State<ViewGroup> {
               title: const Text('الصلاحية'),
               subtitle: group.validity != null
                   ? Text(
-                      'من ${DateFormat('yyyy/M/d').format(group.validity!.start)} إلى ${DateFormat('yyyy/M/d').format(group.validity!.end)}',
+                      'من ${DateFormat('yyyy/M/d').format(group.validity!.start)} '
+                      'إلى '
+                      '${DateFormat('yyyy/M/d').format(group.validity!.end)}',
                     )
                   : const Text('لا يوجد'),
             ),
+            if ([
+                  ?group.defaultMeeting,
+                  ...?group.meetings,
+                ].firstWhereOrNull((m) => !m.isArchived)
+                case final defaultMeeting?)
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: FilledButton.icon(
+                  style: Theme.of(context).largeFilledButtonStyle,
+                  icon: const Icon(Symbols.productivity),
+                  label: Text('تسجيل الحضور ل${defaultMeeting.name}'),
+                  onPressed: () => RecordAttendanceRoute(
+                    $extra: defaultMeeting,
+                  ).push(context),
+                ),
+              ),
             ListTile(
               title: FilledButton.icon(
                 icon: const Icon(Symbols.query_stats),
