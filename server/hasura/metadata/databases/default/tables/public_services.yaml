@@ -98,6 +98,7 @@ insert_permissions:
         - next_service_id
         - study_year_from_id
         - study_year_to_id
+        - default_meeting_id
 select_permissions:
   - role: user
     permission:
@@ -106,6 +107,7 @@ select_permissions:
         - id
         - name
         - next_service_id
+        - default_meeting_id
         - photo_updated_at
         - blurhash
         - study_year_from_id
@@ -123,6 +125,7 @@ update_permissions:
         - color
         - name
         - next_service_id
+        - default_meeting_id
         - study_year_from_id
         - study_year_to_id
       filter:
