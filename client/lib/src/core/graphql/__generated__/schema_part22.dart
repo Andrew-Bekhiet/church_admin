@@ -1,6 +1,150 @@
 // Part 22 of the schema
 part of "schema.graphql.dart";
 
+abstract class CopyWith_Input_GroupsSumOrderBy<TRes> {
+  factory CopyWith_Input_GroupsSumOrderBy(
+    Input_GroupsSumOrderBy instance,
+    TRes Function(Input_GroupsSumOrderBy) then,
+  ) = _CopyWithImpl_Input_GroupsSumOrderBy;
+
+  factory CopyWith_Input_GroupsSumOrderBy.stub(TRes res) =
+      _CopyWithStubImpl_Input_GroupsSumOrderBy;
+
+  TRes call({Enum_OrderBy? color});
+}
+
+class _CopyWithImpl_Input_GroupsSumOrderBy<TRes>
+    implements CopyWith_Input_GroupsSumOrderBy<TRes> {
+  _CopyWithImpl_Input_GroupsSumOrderBy(this._instance, this._then);
+
+  final Input_GroupsSumOrderBy _instance;
+
+  final TRes Function(Input_GroupsSumOrderBy) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? color = _undefined}) => _then(
+    Input_GroupsSumOrderBy._({
+      ..._instance._$data,
+      if (color != _undefined) 'color': (color as Enum_OrderBy?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_GroupsSumOrderBy<TRes>
+    implements CopyWith_Input_GroupsSumOrderBy<TRes> {
+  _CopyWithStubImpl_Input_GroupsSumOrderBy(this._res);
+
+  TRes _res;
+
+  call({Enum_OrderBy? color}) => _res;
+}
+
+class Input_GroupsUpdates {
+  factory Input_GroupsUpdates({
+    Input_GroupsIncInput? $_inc,
+    Input_GroupsSetInput? $_set,
+    required Input_GroupsBoolExp where,
+  }) => Input_GroupsUpdates._({
+    if ($_inc != null) r'_inc': $_inc,
+    if ($_set != null) r'_set': $_set,
+    r'where': where,
+  });
+
+  Input_GroupsUpdates._(this._$data);
+
+  factory Input_GroupsUpdates.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('_inc')) {
+      final l$$_inc = data['_inc'];
+      result$data['_inc'] = l$$_inc == null
+          ? null
+          : Input_GroupsIncInput.fromJson((l$$_inc as Map<String, dynamic>));
+    }
+    if (data.containsKey('_set')) {
+      final l$$_set = data['_set'];
+      result$data['_set'] = l$$_set == null
+          ? null
+          : Input_GroupsSetInput.fromJson((l$$_set as Map<String, dynamic>));
+    }
+    final l$where = data['where'];
+    result$data['where'] = Input_GroupsBoolExp.fromJson(
+      (l$where as Map<String, dynamic>),
+    );
+    return Input_GroupsUpdates._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Input_GroupsIncInput? get $_inc => (_$data['_inc'] as Input_GroupsIncInput?);
+
+  Input_GroupsSetInput? get $_set => (_$data['_set'] as Input_GroupsSetInput?);
+
+  Input_GroupsBoolExp get where => (_$data['where'] as Input_GroupsBoolExp);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('_inc')) {
+      final l$$_inc = $_inc;
+      result$data['_inc'] = l$$_inc?.toJson();
+    }
+    if (_$data.containsKey('_set')) {
+      final l$$_set = $_set;
+      result$data['_set'] = l$$_set?.toJson();
+    }
+    final l$where = where;
+    result$data['where'] = l$where.toJson();
+    return result$data;
+  }
+
+  CopyWith_Input_GroupsUpdates<Input_GroupsUpdates> get copyWith =>
+      CopyWith_Input_GroupsUpdates(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_GroupsUpdates || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$$_inc = $_inc;
+    final lOther$$_inc = other.$_inc;
+    if (_$data.containsKey('_inc') != other._$data.containsKey('_inc')) {
+      return false;
+    }
+    if (l$$_inc != lOther$$_inc) {
+      return false;
+    }
+    final l$$_set = $_set;
+    final lOther$$_set = other.$_set;
+    if (_$data.containsKey('_set') != other._$data.containsKey('_set')) {
+      return false;
+    }
+    if (l$$_set != lOther$$_set) {
+      return false;
+    }
+    final l$where = where;
+    final lOther$where = other.where;
+    if (l$where != lOther$where) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$$_inc = $_inc;
+    final l$$_set = $_set;
+    final l$where = where;
+    return Object.hashAll([
+      _$data.containsKey('_inc') ? l$$_inc : const {},
+      _$data.containsKey('_set') ? l$$_set : const {},
+      l$where,
+    ]);
+  }
+}
+
 abstract class CopyWith_Input_GroupsUpdates<TRes> {
   factory CopyWith_Input_GroupsUpdates(
     Input_GroupsUpdates instance,
@@ -2357,191 +2501,4 @@ abstract class CopyWith_Input_HistoryAttendanceDaysUpdates<TRes> {
   });
   CopyWith_Input_HistoryAttendanceDaysSetInput<TRes> get $_set;
   CopyWith_Input_HistoryAttendanceDaysBoolExp<TRes> get where;
-}
-
-class _CopyWithImpl_Input_HistoryAttendanceDaysUpdates<TRes>
-    implements CopyWith_Input_HistoryAttendanceDaysUpdates<TRes> {
-  _CopyWithImpl_Input_HistoryAttendanceDaysUpdates(this._instance, this._then);
-
-  final Input_HistoryAttendanceDaysUpdates _instance;
-
-  final TRes Function(Input_HistoryAttendanceDaysUpdates) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({Object? $_set = _undefined, Object? where = _undefined}) => _then(
-    Input_HistoryAttendanceDaysUpdates._({
-      ..._instance._$data,
-      if ($_set != _undefined)
-        '_set': ($_set as Input_HistoryAttendanceDaysSetInput?),
-      if (where != _undefined && where != null)
-        'where': (where as Input_HistoryAttendanceDaysBoolExp),
-    }),
-  );
-
-  CopyWith_Input_HistoryAttendanceDaysSetInput<TRes> get $_set {
-    final local$$_set = _instance.$_set;
-    return local$$_set == null
-        ? CopyWith_Input_HistoryAttendanceDaysSetInput.stub(_then(_instance))
-        : CopyWith_Input_HistoryAttendanceDaysSetInput(
-            local$$_set,
-            (e) => call($_set: e),
-          );
-  }
-
-  CopyWith_Input_HistoryAttendanceDaysBoolExp<TRes> get where {
-    final local$where = _instance.where;
-    return CopyWith_Input_HistoryAttendanceDaysBoolExp(
-      local$where,
-      (e) => call(where: e),
-    );
-  }
-}
-
-class _CopyWithStubImpl_Input_HistoryAttendanceDaysUpdates<TRes>
-    implements CopyWith_Input_HistoryAttendanceDaysUpdates<TRes> {
-  _CopyWithStubImpl_Input_HistoryAttendanceDaysUpdates(this._res);
-
-  TRes _res;
-
-  call({
-    Input_HistoryAttendanceDaysSetInput? $_set,
-    Input_HistoryAttendanceDaysBoolExp? where,
-  }) => _res;
-
-  CopyWith_Input_HistoryAttendanceDaysSetInput<TRes> get $_set =>
-      CopyWith_Input_HistoryAttendanceDaysSetInput.stub(_res);
-
-  CopyWith_Input_HistoryAttendanceDaysBoolExp<TRes> get where =>
-      CopyWith_Input_HistoryAttendanceDaysBoolExp.stub(_res);
-}
-
-class Input_HistoryAttendanceHistoryAggregateBoolExp {
-  factory Input_HistoryAttendanceHistoryAggregateBoolExp({
-    Input_historyAttendanceHistoryAggregateBoolExpBool_and? bool_and,
-    Input_historyAttendanceHistoryAggregateBoolExpBool_or? bool_or,
-    Input_historyAttendanceHistoryAggregateBoolExpCount? count,
-  }) => Input_HistoryAttendanceHistoryAggregateBoolExp._({
-    if (bool_and != null) r'bool_and': bool_and,
-    if (bool_or != null) r'bool_or': bool_or,
-    if (count != null) r'count': count,
-  });
-
-  Input_HistoryAttendanceHistoryAggregateBoolExp._(this._$data);
-
-  factory Input_HistoryAttendanceHistoryAggregateBoolExp.fromJson(
-    Map<String, dynamic> data,
-  ) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('bool_and')) {
-      final l$bool_and = data['bool_and'];
-      result$data['bool_and'] = l$bool_and == null
-          ? null
-          : Input_historyAttendanceHistoryAggregateBoolExpBool_and.fromJson(
-              (l$bool_and as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('bool_or')) {
-      final l$bool_or = data['bool_or'];
-      result$data['bool_or'] = l$bool_or == null
-          ? null
-          : Input_historyAttendanceHistoryAggregateBoolExpBool_or.fromJson(
-              (l$bool_or as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('count')) {
-      final l$count = data['count'];
-      result$data['count'] = l$count == null
-          ? null
-          : Input_historyAttendanceHistoryAggregateBoolExpCount.fromJson(
-              (l$count as Map<String, dynamic>),
-            );
-    }
-    return Input_HistoryAttendanceHistoryAggregateBoolExp._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  Input_historyAttendanceHistoryAggregateBoolExpBool_and? get bool_and =>
-      (_$data['bool_and']
-          as Input_historyAttendanceHistoryAggregateBoolExpBool_and?);
-
-  Input_historyAttendanceHistoryAggregateBoolExpBool_or? get bool_or =>
-      (_$data['bool_or']
-          as Input_historyAttendanceHistoryAggregateBoolExpBool_or?);
-
-  Input_historyAttendanceHistoryAggregateBoolExpCount? get count =>
-      (_$data['count'] as Input_historyAttendanceHistoryAggregateBoolExpCount?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('bool_and')) {
-      final l$bool_and = bool_and;
-      result$data['bool_and'] = l$bool_and?.toJson();
-    }
-    if (_$data.containsKey('bool_or')) {
-      final l$bool_or = bool_or;
-      result$data['bool_or'] = l$bool_or?.toJson();
-    }
-    if (_$data.containsKey('count')) {
-      final l$count = count;
-      result$data['count'] = l$count?.toJson();
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_HistoryAttendanceHistoryAggregateBoolExp<
-    Input_HistoryAttendanceHistoryAggregateBoolExp
-  >
-  get copyWith =>
-      CopyWith_Input_HistoryAttendanceHistoryAggregateBoolExp(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_HistoryAttendanceHistoryAggregateBoolExp ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$bool_and = bool_and;
-    final lOther$bool_and = other.bool_and;
-    if (_$data.containsKey('bool_and') !=
-        other._$data.containsKey('bool_and')) {
-      return false;
-    }
-    if (l$bool_and != lOther$bool_and) {
-      return false;
-    }
-    final l$bool_or = bool_or;
-    final lOther$bool_or = other.bool_or;
-    if (_$data.containsKey('bool_or') != other._$data.containsKey('bool_or')) {
-      return false;
-    }
-    if (l$bool_or != lOther$bool_or) {
-      return false;
-    }
-    final l$count = count;
-    final lOther$count = other.count;
-    if (_$data.containsKey('count') != other._$data.containsKey('count')) {
-      return false;
-    }
-    if (l$count != lOther$count) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$bool_and = bool_and;
-    final l$bool_or = bool_or;
-    final l$count = count;
-    return Object.hashAll([
-      _$data.containsKey('bool_and') ? l$bool_and : const {},
-      _$data.containsKey('bool_or') ? l$bool_or : const {},
-      _$data.containsKey('count') ? l$count : const {},
-    ]);
-  }
 }

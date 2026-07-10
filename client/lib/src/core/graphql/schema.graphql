@@ -2402,6 +2402,8 @@ type Groups {
   ): [AuthUsersAdminOn!]!
   blurhash: String
   color: bigint
+  defaultMeeting: HistoryMeetings
+  defaultMeetingId: uuid
   editHistroy(
     distinctOn: [HistoryEditHistorySelectColumn!]
     limit: Int
@@ -2496,6 +2498,8 @@ input GroupsBoolExp {
   adminUsers: AuthUsersAdminOnBoolExp
   blurhash: StringComparisonExp
   color: BigintComparisonExp
+  defaultMeeting: HistoryMeetingsBoolExp
+  defaultMeetingId: UuidComparisonExp
   editHistroy: HistoryEditHistoryBoolExp
   editHistroyAggregate: HistoryEditHistoryAggregateBoolExp
   id: UuidComparisonExp
@@ -2511,6 +2515,7 @@ input GroupsBoolExp {
 }
 
 enum GroupsConstraint {
+  groups_default_meeting_id_key
   groups_pkey
 }
 
@@ -2521,6 +2526,8 @@ input GroupsIncInput {
 input GroupsInsertInput {
   adminUsers: AuthUsersAdminOnArrRelInsertInput
   color: bigint
+  defaultMeeting: HistoryMeetingsObjRelInsertInput
+  defaultMeetingId: uuid
   meetings: HistoryMeetingsArrRelInsertInput
   name: String
   persons: PersonsGroupsArrRelInsertInput
@@ -2531,6 +2538,7 @@ input GroupsInsertInput {
 type GroupsMaxFields {
   blurhash: String
   color: bigint
+  defaultMeetingId: uuid
   id: uuid
   name: String
   photoUpdatedAt: timestamptz
@@ -2548,6 +2556,7 @@ input GroupsMaxOrderBy {
 type GroupsMinFields {
   blurhash: String
   color: bigint
+  defaultMeetingId: uuid
   id: uuid
   name: String
   photoUpdatedAt: timestamptz
@@ -2582,6 +2591,8 @@ input GroupsOrderBy {
   adminUsersAggregate: AuthUsersAdminOnAggregateOrderBy
   blurhash: OrderBy
   color: OrderBy
+  defaultMeeting: HistoryMeetingsOrderBy
+  defaultMeetingId: OrderBy
   editHistroyAggregate: HistoryEditHistoryAggregateOrderBy
   id: OrderBy
   lastEdit: HistoryLatestEditsOrderBy
@@ -2601,6 +2612,7 @@ input GroupsPkColumnsInput {
 enum GroupsSelectColumn {
   blurhash
   color
+  defaultMeetingId
   id
   name
   photoUpdatedAt
@@ -2610,6 +2622,7 @@ enum GroupsSelectColumn {
 
 input GroupsSetInput {
   color: bigint
+  defaultMeetingId: uuid
   name: String
   serviceId: uuid
   validity: daterange
@@ -2643,6 +2656,7 @@ input GroupsStreamCursorInput {
 input GroupsStreamCursorValueInput {
   blurhash: String
   color: bigint
+  defaultMeetingId: uuid
   id: uuid
   name: String
   photoUpdatedAt: timestamptz
@@ -2659,6 +2673,7 @@ input GroupsSumOrderBy {
 
 enum GroupsUpdateColumn {
   color
+  defaultMeetingId
   name
   serviceId
   validity

@@ -11,6 +11,9 @@ part 'group.g.dart';
 @Queryable(
   classLabel: 'المجموعات',
   allowExtension: true,
+  labelsOverrides: {
+    'defaultMeeting': 'الاجتماع الافتراضي',
+  },
 )
 class Group extends ViewableWithIDAndImage
     with _$Group
@@ -41,6 +44,12 @@ class Group extends ViewableWithIDAndImage
   final Service? service;
 
   @override
+  final Meeting? defaultMeeting;
+
+  @override
+  final List<Meeting>? meetings;
+
+  @override
   @JsonKey(fromJson: dateRangeFromString, toJson: dateRangeToString)
   final DateTimeRange? validity;
 
@@ -64,7 +73,9 @@ class Group extends ViewableWithIDAndImage
     this.blurhash,
     this.serviceId,
     this.service,
+    this.defaultMeeting,
     this.validity,
+    this.meetings,
     this.lastEdit,
     this.adminUsers,
     this.userCanEdit = false,
@@ -87,6 +98,7 @@ class Group extends ViewableWithIDAndImage
       name: name,
       color: colorToInt(color),
       serviceId: service?.id.toUuid() ?? serviceId?.toUuid(),
+      defaultMeetingId: defaultMeeting?.id.toUuid(),
       validity: validity,
     );
   }
@@ -106,6 +118,10 @@ class Group extends ViewableWithIDAndImage
 
     if (service?.id != oldObject.service?.id) {
       result = result.copyWith(serviceId: service?.id.toUuid());
+    }
+
+    if (defaultMeeting?.id != oldObject.defaultMeeting?.id) {
+      result = result.copyWith(defaultMeetingId: defaultMeeting?.id.toUuid());
     }
 
     if (validity != oldObject.validity) {

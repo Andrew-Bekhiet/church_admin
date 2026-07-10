@@ -43,11 +43,17 @@ Future<void> migrateAndCreateNewServices(
 ) async {
   for (var i = 0; i < _newServices.length; i++) {
     final service = _newServices[i];
+    final meeting = _defaultMeetingFor(service);
+
     churchAdminContext.services[IdReference.fromPath(
       'Services/${service.id}',
     )] = service.copyWith(
       nextService: _newServices.elementAtOrNull(i + 1),
+      defaultMeeting: meeting,
     );
+    churchAdminContext.meetings[IdReference.fromPath(
+      'Meetings/${service.id}',
+    )] = meeting;
   }
 
   for (final MapEntry(key: oldRef, value: service)
@@ -70,16 +76,45 @@ Future<void> migrateAndCreateNewServices(
     final hasValidRange =
         fromOrder != null && toOrder != null && fromOrder <= toOrder;
 
-    final newService = Service(
+    final baseService = Service(
       id: service.ref.id,
       name: service.name,
       studyYearFromId: hasValidRange ? fromOrder : null,
       studyYearToId: hasValidRange ? toOrder : null,
       color: service.color,
     );
+    final meeting = _defaultMeetingFor(baseService);
 
-    churchAdminContext.services[oldRef] = newService;
+    churchAdminContext.services[oldRef] = baseService.copyWith(
+      defaultMeeting: meeting,
+    );
+    churchAdminContext.meetings[IdReference.fromPath(
+      'Meetings/${baseService.id}',
+    )] = meeting;
   }
+}
+
+Meeting _defaultMeetingFor(Service service) => Meeting(
+  id: 'Meetings/${service.id}',
+  name: _defaultMeetingName(service.name),
+  audience: MeetingAudience.personsAndServants,
+  isArchived: false,
+  color: service.color,
+  serviceId: service.id,
+);
+
+String _defaultMeetingName(String serviceName) {
+  const servicePrefix = 'خدمة';
+  const meetingWord = 'اجتماع';
+  final trimmed = serviceName.trim();
+
+  return switch (trimmed) {
+    '' => '',
+    servicePrefix => meetingWord,
+    _ when trimmed.startsWith('$servicePrefix ') =>
+      '$meetingWord ${trimmed.substring(servicePrefix.length).trim()}',
+    _ => '$meetingWord $trimmed',
+  };
 }
 
 int? _resolveStudyYearOrder(

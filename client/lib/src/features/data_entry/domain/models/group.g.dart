@@ -67,6 +67,29 @@ class _GroupFields {
     },
   );
 
+  final FieldMetadata<Meeting> defaultMeeting = FieldMetadata<Meeting>(
+    getValue: (obj) => obj is Group ? obj.defaultMeeting : null,
+    parentType: Group,
+    name: 'defaultMeeting',
+    label: 'الاجتماع الافتراضي',
+    isCodeOnly: false,
+    operators: {
+      ...MultiSelectOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull,
+    },
+  );
+
+  final FieldMetadata<Meeting> meetings = FieldMetadata<Meeting>(
+    getValue: (obj) => obj is Group ? obj.meetings : null,
+    parentType: Group,
+    name: 'meetings',
+    label: 'meetings',
+    isCodeOnly: false,
+    isOrderable: false,
+    operators: {...MultiSelectOperator.values},
+  );
+
   final FieldMetadata<DateTimeRange<DateTime>> validity =
       FieldMetadata<DateTimeRange<DateTime>>(
         getValue: (obj) => obj is Group ? obj.validity : null,
@@ -111,6 +134,8 @@ class _GroupFields {
     color,
     photoUpdatedAt,
     service,
+    defaultMeeting,
+    meetings,
     validity,
     lastEdit,
     adminUsers,
@@ -121,6 +146,8 @@ class _GroupFields {
     'color': color,
     'photoUpdatedAt': photoUpdatedAt,
     'service': service,
+    'defaultMeeting': defaultMeeting,
+    'meetings': meetings,
     'validity': validity,
     'lastEdit': lastEdit,
     'adminUsers': adminUsers,
@@ -144,7 +171,15 @@ Group _$GroupFromJson(Map json) => Group(
   service: json['service'] == null
       ? null
       : Service.fromJson(Map<String, Object?>.from(json['service'] as Map)),
+  defaultMeeting: json['defaultMeeting'] == null
+      ? null
+      : Meeting.fromJson(
+          Map<String, Object?>.from(json['defaultMeeting'] as Map),
+        ),
   validity: dateRangeFromString(json['validity']),
+  meetings: (json['meetings'] as List<dynamic>?)
+      ?.map((e) => Meeting.fromJson(Map<String, Object?>.from(e as Map)))
+      .toList(),
   lastEdit: json['lastEdit'] == null
       ? null
       : LastRecordedByInfo.fromJson(
@@ -165,6 +200,8 @@ Map<String, dynamic> _$GroupToJson(Group instance) => <String, dynamic>{
   'blurhash': instance.blurhash,
   'serviceId': instance.serviceId,
   'service': instance.service?.toJson(),
+  'defaultMeeting': instance.defaultMeeting?.toJson(),
+  'meetings': instance.meetings?.map((e) => e.toJson()).toList(),
   'validity': dateRangeToString(instance.validity),
   'lastEdit': instance.lastEdit?.toJson(),
   'adminUsers': adminUsersToJson(instance.adminUsers),

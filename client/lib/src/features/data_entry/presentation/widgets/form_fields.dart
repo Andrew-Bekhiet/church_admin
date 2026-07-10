@@ -2,6 +2,7 @@ export 'form_fields/address_with_location_field.dart';
 export 'form_fields/color_field.dart';
 export 'form_fields/date_time_field.dart';
 export 'form_fields/date_time_range_field.dart';
+export 'form_fields/default_meeting_field.dart';
 export 'form_fields/gender_field.dart';
 export 'form_fields/multi_object_selection_field.dart';
 export 'form_fields/name_field.dart';

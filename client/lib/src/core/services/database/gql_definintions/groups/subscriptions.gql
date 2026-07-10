@@ -19,6 +19,12 @@ subscription watchGroupsCount($where: [GroupsBoolExp!] = {}, $limit: Int) {
 subscription watchGroup($id: uuid!) {
   groupsByPk(id: $id) {
     ...Group
+    defaultMeeting {
+      ...Meeting
+    }
+    meetings {
+      ...Meeting
+    }
     userCanEdit
     service {
       ...ServiceWithStudyYears

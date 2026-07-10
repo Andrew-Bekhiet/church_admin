@@ -1,5 +1,6 @@
 import '../../../../../graphql/__generated__/schema.graphql.dart';
 import '../../gql/__generated__/fragments.gql.dart';
+import '../../meetings/__generated__/fragments.gql.dart';
 import '../../services/__generated__/fragments.gql.dart';
 import '../../users/__generated__/fragments.gql.dart';
 import 'fragments.gql.dart';
@@ -1293,6 +1294,48 @@ const documentNodeSubscriptionwatchGroup = DocumentNode(
                   directives: [],
                 ),
                 FieldNode(
+                  name: NameNode(value: 'defaultMeeting'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: SelectionSetNode(
+                    selections: [
+                      FragmentSpreadNode(
+                        name: NameNode(value: 'Meeting'),
+                        directives: [],
+                      ),
+                      FieldNode(
+                        name: NameNode(value: '__typename'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                    ],
+                  ),
+                ),
+                FieldNode(
+                  name: NameNode(value: 'meetings'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: SelectionSetNode(
+                    selections: [
+                      FragmentSpreadNode(
+                        name: NameNode(value: 'Meeting'),
+                        directives: [],
+                      ),
+                      FieldNode(
+                        name: NameNode(value: '__typename'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                    ],
+                  ),
+                ),
+                FieldNode(
                   name: NameNode(value: 'userCanEdit'),
                   alias: null,
                   arguments: [],
@@ -1406,8 +1449,9 @@ const documentNodeSubscriptionwatchGroup = DocumentNode(
     ),
     fragmentDefinitionGroup,
     fragmentDefinitionGroupNoPhoto,
-    fragmentDefinitionServiceWithStudyYears,
+    fragmentDefinitionMeeting,
     fragmentDefinitionServiceNoPhoto,
+    fragmentDefinitionServiceWithStudyYears,
     fragmentDefinitionLatestEditHistory,
     fragmentDefinitionUser,
     fragmentDefinitionUserNoPhoto,
@@ -1424,6 +1468,8 @@ class Subscription_watchGroup_groupsByPk
     this.$__typename = 'Groups',
     this.photoUpdatedAt,
     this.blurhash,
+    this.defaultMeeting,
+    required this.meetings,
     required this.service,
     this.lastEdit,
     this.validity,
@@ -1440,6 +1486,8 @@ class Subscription_watchGroup_groupsByPk
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
     final l$blurhash = json['blurhash'];
+    final l$defaultMeeting = json['defaultMeeting'];
+    final l$meetings = json['meetings'];
     final l$service = json['service'];
     final l$lastEdit = json['lastEdit'];
     final l$validity = json['validity'];
@@ -1454,6 +1502,14 @@ class Subscription_watchGroup_groupsByPk
           ? null
           : tstzFromString(l$photoUpdatedAt),
       blurhash: (l$blurhash as String?),
+      defaultMeeting: l$defaultMeeting == null
+          ? null
+          : Fragment_Meeting.fromJson(
+              (l$defaultMeeting as Map<String, dynamic>),
+            ),
+      meetings: (l$meetings as List<dynamic>)
+          .map((e) => Fragment_Meeting.fromJson((e as Map<String, dynamic>)))
+          .toList(),
       service: Fragment_ServiceWithStudyYears.fromJson(
         (l$service as Map<String, dynamic>),
       ),
@@ -1487,6 +1543,10 @@ class Subscription_watchGroup_groupsByPk
 
   final String? blurhash;
 
+  final Fragment_Meeting? defaultMeeting;
+
+  final List<Fragment_Meeting> meetings;
+
   final Fragment_ServiceWithStudyYears service;
 
   final Fragment_LatestEditHistory? lastEdit;
@@ -1513,6 +1573,10 @@ class Subscription_watchGroup_groupsByPk
         : tstzToString(l$photoUpdatedAt);
     final l$blurhash = blurhash;
     _resultData['blurhash'] = l$blurhash;
+    final l$defaultMeeting = defaultMeeting;
+    _resultData['defaultMeeting'] = l$defaultMeeting?.toJson();
+    final l$meetings = meetings;
+    _resultData['meetings'] = l$meetings.map((e) => e.toJson()).toList();
     final l$service = service;
     _resultData['service'] = l$service.toJson();
     final l$lastEdit = lastEdit;
@@ -1535,6 +1599,8 @@ class Subscription_watchGroup_groupsByPk
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$blurhash = blurhash;
+    final l$defaultMeeting = defaultMeeting;
+    final l$meetings = meetings;
     final l$service = service;
     final l$lastEdit = lastEdit;
     final l$validity = validity;
@@ -1547,6 +1613,8 @@ class Subscription_watchGroup_groupsByPk
       l$$__typename,
       l$photoUpdatedAt,
       l$blurhash,
+      l$defaultMeeting,
+      Object.hashAll(l$meetings.map((v) => v)),
       l$service,
       l$lastEdit,
       l$validity,
@@ -1597,6 +1665,23 @@ class Subscription_watchGroup_groupsByPk
     final lOther$blurhash = other.blurhash;
     if (l$blurhash != lOther$blurhash) {
       return false;
+    }
+    final l$defaultMeeting = defaultMeeting;
+    final lOther$defaultMeeting = other.defaultMeeting;
+    if (l$defaultMeeting != lOther$defaultMeeting) {
+      return false;
+    }
+    final l$meetings = meetings;
+    final lOther$meetings = other.meetings;
+    if (l$meetings.length != lOther$meetings.length) {
+      return false;
+    }
+    for (int i = 0; i < l$meetings.length; i++) {
+      final l$meetings$entry = l$meetings[i];
+      final lOther$meetings$entry = lOther$meetings[i];
+      if (l$meetings$entry != lOther$meetings$entry) {
+        return false;
+      }
     }
     final l$service = service;
     final lOther$service = other.service;
@@ -1654,11 +1739,20 @@ abstract class CopyWith_Subscription_watchGroup_groupsByPk<TRes> {
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
+    Fragment_Meeting? defaultMeeting,
+    List<Fragment_Meeting>? meetings,
     Fragment_ServiceWithStudyYears? service,
     Fragment_LatestEditHistory? lastEdit,
     DateTimeRange? validity,
     List<Subscription_watchGroup_groupsByPk_adminUsers>? adminUsers,
   });
+  CopyWith_Fragment_Meeting<TRes> get defaultMeeting;
+  TRes meetings(
+    Iterable<Fragment_Meeting> Function(
+      Iterable<CopyWith_Fragment_Meeting<Fragment_Meeting>>,
+    )
+    _fn,
+  );
   CopyWith_Fragment_ServiceWithStudyYears<TRes> get service;
   CopyWith_Fragment_LatestEditHistory<TRes> get lastEdit;
   TRes adminUsers(
@@ -1691,6 +1785,8 @@ class _CopyWithImpl_Subscription_watchGroup_groupsByPk<TRes>
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? blurhash = _undefined,
+    Object? defaultMeeting = _undefined,
+    Object? meetings = _undefined,
     Object? service = _undefined,
     Object? lastEdit = _undefined,
     Object? validity = _undefined,
@@ -1714,6 +1810,12 @@ class _CopyWithImpl_Subscription_watchGroup_groupsByPk<TRes>
       blurhash: blurhash == _undefined
           ? _instance.blurhash
           : (blurhash as String?),
+      defaultMeeting: defaultMeeting == _undefined
+          ? _instance.defaultMeeting
+          : (defaultMeeting as Fragment_Meeting?),
+      meetings: meetings == _undefined || meetings == null
+          ? _instance.meetings
+          : (meetings as List<Fragment_Meeting>),
       service: service == _undefined || service == null
           ? _instance.service
           : (service as Fragment_ServiceWithStudyYears),
@@ -1727,6 +1829,27 @@ class _CopyWithImpl_Subscription_watchGroup_groupsByPk<TRes>
           ? _instance.adminUsers
           : (adminUsers as List<Subscription_watchGroup_groupsByPk_adminUsers>),
     ),
+  );
+
+  CopyWith_Fragment_Meeting<TRes> get defaultMeeting {
+    final local$defaultMeeting = _instance.defaultMeeting;
+    return local$defaultMeeting == null
+        ? CopyWith_Fragment_Meeting.stub(_then(_instance))
+        : CopyWith_Fragment_Meeting(
+            local$defaultMeeting,
+            (e) => call(defaultMeeting: e),
+          );
+  }
+
+  TRes meetings(
+    Iterable<Fragment_Meeting> Function(
+      Iterable<CopyWith_Fragment_Meeting<Fragment_Meeting>>,
+    )
+    _fn,
+  ) => call(
+    meetings: _fn(
+      _instance.meetings.map((e) => CopyWith_Fragment_Meeting(e, (i) => i)),
+    ).toList(),
   );
 
   CopyWith_Fragment_ServiceWithStudyYears<TRes> get service {
@@ -1780,11 +1903,18 @@ class _CopyWithStubImpl_Subscription_watchGroup_groupsByPk<TRes>
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
+    Fragment_Meeting? defaultMeeting,
+    List<Fragment_Meeting>? meetings,
     Fragment_ServiceWithStudyYears? service,
     Fragment_LatestEditHistory? lastEdit,
     DateTimeRange? validity,
     List<Subscription_watchGroup_groupsByPk_adminUsers>? adminUsers,
   }) => _res;
+
+  CopyWith_Fragment_Meeting<TRes> get defaultMeeting =>
+      CopyWith_Fragment_Meeting.stub(_res);
+
+  meetings(_fn) => _res;
 
   CopyWith_Fragment_ServiceWithStudyYears<TRes> get service =>
       CopyWith_Fragment_ServiceWithStudyYears.stub(_res);

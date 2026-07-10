@@ -19,6 +19,7 @@ class ChurchAdminContext {
   final List<({IdReference areaId, IdReference streetId})> areasStreets;
   final Map<IdReference, Class> classes;
   final Map<IdReference, Service> services;
+  final Map<IdReference, Meeting> meetings;
   final Map<IdReference, Family> families;
   final List<({IdReference parentFamilyId, IdReference childFamilyId})>
   familiesFamilies;
@@ -63,6 +64,7 @@ class ChurchAdminContext {
       stores = {},
       streets = {},
       services = {},
+      meetings = {},
       visitHistory = [],
       callHistory = [],
       confessionHistory = [],

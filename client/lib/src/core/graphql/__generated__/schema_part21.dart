@@ -1,6 +1,25 @@
 // Part 21 of the schema
 part of "schema.graphql.dart";
 
+abstract class CopyWith_Input_GroupsMaxOrderBy<TRes> {
+  factory CopyWith_Input_GroupsMaxOrderBy(
+    Input_GroupsMaxOrderBy instance,
+    TRes Function(Input_GroupsMaxOrderBy) then,
+  ) = _CopyWithImpl_Input_GroupsMaxOrderBy;
+
+  factory CopyWith_Input_GroupsMaxOrderBy.stub(TRes res) =
+      _CopyWithStubImpl_Input_GroupsMaxOrderBy;
+
+  TRes call({
+    Enum_OrderBy? blurhash,
+    Enum_OrderBy? color,
+    Enum_OrderBy? id,
+    Enum_OrderBy? name,
+    Enum_OrderBy? photoUpdatedAt,
+    Enum_OrderBy? serviceId,
+  });
+}
+
 class _CopyWithImpl_Input_GroupsMaxOrderBy<TRes>
     implements CopyWith_Input_GroupsMaxOrderBy<TRes> {
   _CopyWithImpl_Input_GroupsMaxOrderBy(this._instance, this._then);
@@ -664,6 +683,8 @@ class Input_GroupsOrderBy {
     Input_AuthUsersAdminOnAggregateOrderBy? adminUsersAggregate,
     Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
+    Input_HistoryMeetingsOrderBy? defaultMeeting,
+    Enum_OrderBy? defaultMeetingId,
     Input_HistoryEditHistoryAggregateOrderBy? editHistroyAggregate,
     Enum_OrderBy? id,
     Input_HistoryLatestEditsOrderBy? lastEdit,
@@ -680,6 +701,8 @@ class Input_GroupsOrderBy {
       r'adminUsersAggregate': adminUsersAggregate,
     if (blurhash != null) r'blurhash': blurhash,
     if (color != null) r'color': color,
+    if (defaultMeeting != null) r'defaultMeeting': defaultMeeting,
+    if (defaultMeetingId != null) r'defaultMeetingId': defaultMeetingId,
     if (editHistroyAggregate != null)
       r'editHistroyAggregate': editHistroyAggregate,
     if (id != null) r'id': id,
@@ -717,6 +740,20 @@ class Input_GroupsOrderBy {
       result$data['color'] = l$color == null
           ? null
           : fromJson_Enum_OrderBy((l$color as String));
+    }
+    if (data.containsKey('defaultMeeting')) {
+      final l$defaultMeeting = data['defaultMeeting'];
+      result$data['defaultMeeting'] = l$defaultMeeting == null
+          ? null
+          : Input_HistoryMeetingsOrderBy.fromJson(
+              (l$defaultMeeting as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('defaultMeetingId')) {
+      final l$defaultMeetingId = data['defaultMeetingId'];
+      result$data['defaultMeetingId'] = l$defaultMeetingId == null
+          ? null
+          : fromJson_Enum_OrderBy((l$defaultMeetingId as String));
     }
     if (data.containsKey('editHistroyAggregate')) {
       final l$editHistroyAggregate = data['editHistroyAggregate'];
@@ -805,6 +842,12 @@ class Input_GroupsOrderBy {
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
 
+  Input_HistoryMeetingsOrderBy? get defaultMeeting =>
+      (_$data['defaultMeeting'] as Input_HistoryMeetingsOrderBy?);
+
+  Enum_OrderBy? get defaultMeetingId =>
+      (_$data['defaultMeetingId'] as Enum_OrderBy?);
+
   Input_HistoryEditHistoryAggregateOrderBy? get editHistroyAggregate =>
       (_$data['editHistroyAggregate']
           as Input_HistoryEditHistoryAggregateOrderBy?);
@@ -851,6 +894,16 @@ class Input_GroupsOrderBy {
       result$data['color'] = l$color == null
           ? null
           : toJson_Enum_OrderBy(l$color);
+    }
+    if (_$data.containsKey('defaultMeeting')) {
+      final l$defaultMeeting = defaultMeeting;
+      result$data['defaultMeeting'] = l$defaultMeeting?.toJson();
+    }
+    if (_$data.containsKey('defaultMeetingId')) {
+      final l$defaultMeetingId = defaultMeetingId;
+      result$data['defaultMeetingId'] = l$defaultMeetingId == null
+          ? null
+          : toJson_Enum_OrderBy(l$defaultMeetingId);
     }
     if (_$data.containsKey('editHistroyAggregate')) {
       final l$editHistroyAggregate = editHistroyAggregate;
@@ -942,6 +995,24 @@ class Input_GroupsOrderBy {
       return false;
     }
     if (l$color != lOther$color) {
+      return false;
+    }
+    final l$defaultMeeting = defaultMeeting;
+    final lOther$defaultMeeting = other.defaultMeeting;
+    if (_$data.containsKey('defaultMeeting') !=
+        other._$data.containsKey('defaultMeeting')) {
+      return false;
+    }
+    if (l$defaultMeeting != lOther$defaultMeeting) {
+      return false;
+    }
+    final l$defaultMeetingId = defaultMeetingId;
+    final lOther$defaultMeetingId = other.defaultMeetingId;
+    if (_$data.containsKey('defaultMeetingId') !=
+        other._$data.containsKey('defaultMeetingId')) {
+      return false;
+    }
+    if (l$defaultMeetingId != lOther$defaultMeetingId) {
       return false;
     }
     final l$editHistroyAggregate = editHistroyAggregate;
@@ -1048,6 +1119,8 @@ class Input_GroupsOrderBy {
     final l$adminUsersAggregate = adminUsersAggregate;
     final l$blurhash = blurhash;
     final l$color = color;
+    final l$defaultMeeting = defaultMeeting;
+    final l$defaultMeetingId = defaultMeetingId;
     final l$editHistroyAggregate = editHistroyAggregate;
     final l$id = id;
     final l$lastEdit = lastEdit;
@@ -1065,6 +1138,8 @@ class Input_GroupsOrderBy {
           : const {},
       _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('color') ? l$color : const {},
+      _$data.containsKey('defaultMeeting') ? l$defaultMeeting : const {},
+      _$data.containsKey('defaultMeetingId') ? l$defaultMeetingId : const {},
       _$data.containsKey('editHistroyAggregate')
           ? l$editHistroyAggregate
           : const {},
@@ -1095,6 +1170,8 @@ abstract class CopyWith_Input_GroupsOrderBy<TRes> {
     Input_AuthUsersAdminOnAggregateOrderBy? adminUsersAggregate,
     Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
+    Input_HistoryMeetingsOrderBy? defaultMeeting,
+    Enum_OrderBy? defaultMeetingId,
     Input_HistoryEditHistoryAggregateOrderBy? editHistroyAggregate,
     Enum_OrderBy? id,
     Input_HistoryLatestEditsOrderBy? lastEdit,
@@ -1108,6 +1185,7 @@ abstract class CopyWith_Input_GroupsOrderBy<TRes> {
     Enum_OrderBy? validity,
   });
   CopyWith_Input_AuthUsersAdminOnAggregateOrderBy<TRes> get adminUsersAggregate;
+  CopyWith_Input_HistoryMeetingsOrderBy<TRes> get defaultMeeting;
   CopyWith_Input_HistoryEditHistoryAggregateOrderBy<TRes>
   get editHistroyAggregate;
   CopyWith_Input_HistoryLatestEditsOrderBy<TRes> get lastEdit;
@@ -1130,6 +1208,8 @@ class _CopyWithImpl_Input_GroupsOrderBy<TRes>
     Object? adminUsersAggregate = _undefined,
     Object? blurhash = _undefined,
     Object? color = _undefined,
+    Object? defaultMeeting = _undefined,
+    Object? defaultMeetingId = _undefined,
     Object? editHistroyAggregate = _undefined,
     Object? id = _undefined,
     Object? lastEdit = _undefined,
@@ -1149,6 +1229,10 @@ class _CopyWithImpl_Input_GroupsOrderBy<TRes>
             (adminUsersAggregate as Input_AuthUsersAdminOnAggregateOrderBy?),
       if (blurhash != _undefined) 'blurhash': (blurhash as Enum_OrderBy?),
       if (color != _undefined) 'color': (color as Enum_OrderBy?),
+      if (defaultMeeting != _undefined)
+        'defaultMeeting': (defaultMeeting as Input_HistoryMeetingsOrderBy?),
+      if (defaultMeetingId != _undefined)
+        'defaultMeetingId': (defaultMeetingId as Enum_OrderBy?),
       if (editHistroyAggregate != _undefined)
         'editHistroyAggregate':
             (editHistroyAggregate as Input_HistoryEditHistoryAggregateOrderBy?),
@@ -1180,6 +1264,16 @@ class _CopyWithImpl_Input_GroupsOrderBy<TRes>
         : CopyWith_Input_AuthUsersAdminOnAggregateOrderBy(
             local$adminUsersAggregate,
             (e) => call(adminUsersAggregate: e),
+          );
+  }
+
+  CopyWith_Input_HistoryMeetingsOrderBy<TRes> get defaultMeeting {
+    final local$defaultMeeting = _instance.defaultMeeting;
+    return local$defaultMeeting == null
+        ? CopyWith_Input_HistoryMeetingsOrderBy.stub(_then(_instance))
+        : CopyWith_Input_HistoryMeetingsOrderBy(
+            local$defaultMeeting,
+            (e) => call(defaultMeeting: e),
           );
   }
 
@@ -1247,6 +1341,8 @@ class _CopyWithStubImpl_Input_GroupsOrderBy<TRes>
     Input_AuthUsersAdminOnAggregateOrderBy? adminUsersAggregate,
     Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
+    Input_HistoryMeetingsOrderBy? defaultMeeting,
+    Enum_OrderBy? defaultMeetingId,
     Input_HistoryEditHistoryAggregateOrderBy? editHistroyAggregate,
     Enum_OrderBy? id,
     Input_HistoryLatestEditsOrderBy? lastEdit,
@@ -1263,6 +1359,9 @@ class _CopyWithStubImpl_Input_GroupsOrderBy<TRes>
   CopyWith_Input_AuthUsersAdminOnAggregateOrderBy<TRes>
   get adminUsersAggregate =>
       CopyWith_Input_AuthUsersAdminOnAggregateOrderBy.stub(_res);
+
+  CopyWith_Input_HistoryMeetingsOrderBy<TRes> get defaultMeeting =>
+      CopyWith_Input_HistoryMeetingsOrderBy.stub(_res);
 
   CopyWith_Input_HistoryEditHistoryAggregateOrderBy<TRes>
   get editHistroyAggregate =>
@@ -1374,11 +1473,13 @@ class _CopyWithStubImpl_Input_GroupsPkColumnsInput<TRes>
 class Input_GroupsSetInput {
   factory Input_GroupsSetInput({
     int? color,
+    UuidValue? defaultMeetingId,
     String? name,
     UuidValue? serviceId,
     DateTimeRange? validity,
   }) => Input_GroupsSetInput._({
     if (color != null) r'color': color,
+    if (defaultMeetingId != null) r'defaultMeetingId': defaultMeetingId,
     if (name != null) r'name': name,
     if (serviceId != null) r'serviceId': serviceId,
     if (validity != null) r'validity': validity,
@@ -1391,6 +1492,12 @@ class Input_GroupsSetInput {
     if (data.containsKey('color')) {
       final l$color = data['color'];
       result$data['color'] = (l$color as int?);
+    }
+    if (data.containsKey('defaultMeetingId')) {
+      final l$defaultMeetingId = data['defaultMeetingId'];
+      result$data['defaultMeetingId'] = l$defaultMeetingId == null
+          ? null
+          : stringToUuid(l$defaultMeetingId);
     }
     if (data.containsKey('name')) {
       final l$name = data['name'];
@@ -1415,6 +1522,8 @@ class Input_GroupsSetInput {
 
   int? get color => (_$data['color'] as int?);
 
+  UuidValue? get defaultMeetingId => (_$data['defaultMeetingId'] as UuidValue?);
+
   String? get name => (_$data['name'] as String?);
 
   UuidValue? get serviceId => (_$data['serviceId'] as UuidValue?);
@@ -1426,6 +1535,12 @@ class Input_GroupsSetInput {
     if (_$data.containsKey('color')) {
       final l$color = color;
       result$data['color'] = l$color;
+    }
+    if (_$data.containsKey('defaultMeetingId')) {
+      final l$defaultMeetingId = defaultMeetingId;
+      result$data['defaultMeetingId'] = l$defaultMeetingId == null
+          ? null
+          : uuidToString(l$defaultMeetingId);
     }
     if (_$data.containsKey('name')) {
       final l$name = name;
@@ -1465,6 +1580,15 @@ class Input_GroupsSetInput {
     if (l$color != lOther$color) {
       return false;
     }
+    final l$defaultMeetingId = defaultMeetingId;
+    final lOther$defaultMeetingId = other.defaultMeetingId;
+    if (_$data.containsKey('defaultMeetingId') !=
+        other._$data.containsKey('defaultMeetingId')) {
+      return false;
+    }
+    if (l$defaultMeetingId != lOther$defaultMeetingId) {
+      return false;
+    }
     final l$name = name;
     final lOther$name = other.name;
     if (_$data.containsKey('name') != other._$data.containsKey('name')) {
@@ -1497,11 +1621,13 @@ class Input_GroupsSetInput {
   @override
   int get hashCode {
     final l$color = color;
+    final l$defaultMeetingId = defaultMeetingId;
     final l$name = name;
     final l$serviceId = serviceId;
     final l$validity = validity;
     return Object.hashAll([
       _$data.containsKey('color') ? l$color : const {},
+      _$data.containsKey('defaultMeetingId') ? l$defaultMeetingId : const {},
       _$data.containsKey('name') ? l$name : const {},
       _$data.containsKey('serviceId') ? l$serviceId : const {},
       _$data.containsKey('validity') ? l$validity : const {},
@@ -1520,6 +1646,7 @@ abstract class CopyWith_Input_GroupsSetInput<TRes> {
 
   TRes call({
     int? color,
+    UuidValue? defaultMeetingId,
     String? name,
     UuidValue? serviceId,
     DateTimeRange? validity,
@@ -1538,6 +1665,7 @@ class _CopyWithImpl_Input_GroupsSetInput<TRes>
 
   TRes call({
     Object? color = _undefined,
+    Object? defaultMeetingId = _undefined,
     Object? name = _undefined,
     Object? serviceId = _undefined,
     Object? validity = _undefined,
@@ -1545,6 +1673,8 @@ class _CopyWithImpl_Input_GroupsSetInput<TRes>
     Input_GroupsSetInput._({
       ..._instance._$data,
       if (color != _undefined) 'color': (color as int?),
+      if (defaultMeetingId != _undefined)
+        'defaultMeetingId': (defaultMeetingId as UuidValue?),
       if (name != _undefined) 'name': (name as String?),
       if (serviceId != _undefined) 'serviceId': (serviceId as UuidValue?),
       if (validity != _undefined) 'validity': (validity as DateTimeRange?),
@@ -1560,6 +1690,7 @@ class _CopyWithStubImpl_Input_GroupsSetInput<TRes>
 
   call({
     int? color,
+    UuidValue? defaultMeetingId,
     String? name,
     UuidValue? serviceId,
     DateTimeRange? validity,
@@ -2023,6 +2154,7 @@ class Input_GroupsStreamCursorValueInput {
   factory Input_GroupsStreamCursorValueInput({
     String? blurhash,
     int? color,
+    UuidValue? defaultMeetingId,
     UuidValue? id,
     String? name,
     DateTime? photoUpdatedAt,
@@ -2031,6 +2163,7 @@ class Input_GroupsStreamCursorValueInput {
   }) => Input_GroupsStreamCursorValueInput._({
     if (blurhash != null) r'blurhash': blurhash,
     if (color != null) r'color': color,
+    if (defaultMeetingId != null) r'defaultMeetingId': defaultMeetingId,
     if (id != null) r'id': id,
     if (name != null) r'name': name,
     if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
@@ -2051,6 +2184,12 @@ class Input_GroupsStreamCursorValueInput {
     if (data.containsKey('color')) {
       final l$color = data['color'];
       result$data['color'] = (l$color as int?);
+    }
+    if (data.containsKey('defaultMeetingId')) {
+      final l$defaultMeetingId = data['defaultMeetingId'];
+      result$data['defaultMeetingId'] = l$defaultMeetingId == null
+          ? null
+          : stringToUuid(l$defaultMeetingId);
     }
     if (data.containsKey('id')) {
       final l$id = data['id'];
@@ -2087,6 +2226,8 @@ class Input_GroupsStreamCursorValueInput {
 
   int? get color => (_$data['color'] as int?);
 
+  UuidValue? get defaultMeetingId => (_$data['defaultMeetingId'] as UuidValue?);
+
   UuidValue? get id => (_$data['id'] as UuidValue?);
 
   String? get name => (_$data['name'] as String?);
@@ -2106,6 +2247,12 @@ class Input_GroupsStreamCursorValueInput {
     if (_$data.containsKey('color')) {
       final l$color = color;
       result$data['color'] = l$color;
+    }
+    if (_$data.containsKey('defaultMeetingId')) {
+      final l$defaultMeetingId = defaultMeetingId;
+      result$data['defaultMeetingId'] = l$defaultMeetingId == null
+          ? null
+          : uuidToString(l$defaultMeetingId);
     }
     if (_$data.containsKey('id')) {
       final l$id = id;
@@ -2167,6 +2314,15 @@ class Input_GroupsStreamCursorValueInput {
     if (l$color != lOther$color) {
       return false;
     }
+    final l$defaultMeetingId = defaultMeetingId;
+    final lOther$defaultMeetingId = other.defaultMeetingId;
+    if (_$data.containsKey('defaultMeetingId') !=
+        other._$data.containsKey('defaultMeetingId')) {
+      return false;
+    }
+    if (l$defaultMeetingId != lOther$defaultMeetingId) {
+      return false;
+    }
     final l$id = id;
     final lOther$id = other.id;
     if (_$data.containsKey('id') != other._$data.containsKey('id')) {
@@ -2217,6 +2373,7 @@ class Input_GroupsStreamCursorValueInput {
   int get hashCode {
     final l$blurhash = blurhash;
     final l$color = color;
+    final l$defaultMeetingId = defaultMeetingId;
     final l$id = id;
     final l$name = name;
     final l$photoUpdatedAt = photoUpdatedAt;
@@ -2225,6 +2382,7 @@ class Input_GroupsStreamCursorValueInput {
     return Object.hashAll([
       _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('color') ? l$color : const {},
+      _$data.containsKey('defaultMeetingId') ? l$defaultMeetingId : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('name') ? l$name : const {},
       _$data.containsKey('photoUpdatedAt') ? l$photoUpdatedAt : const {},
@@ -2246,6 +2404,7 @@ abstract class CopyWith_Input_GroupsStreamCursorValueInput<TRes> {
   TRes call({
     String? blurhash,
     int? color,
+    UuidValue? defaultMeetingId,
     UuidValue? id,
     String? name,
     DateTime? photoUpdatedAt,
@@ -2267,6 +2426,7 @@ class _CopyWithImpl_Input_GroupsStreamCursorValueInput<TRes>
   TRes call({
     Object? blurhash = _undefined,
     Object? color = _undefined,
+    Object? defaultMeetingId = _undefined,
     Object? id = _undefined,
     Object? name = _undefined,
     Object? photoUpdatedAt = _undefined,
@@ -2277,6 +2437,8 @@ class _CopyWithImpl_Input_GroupsStreamCursorValueInput<TRes>
       ..._instance._$data,
       if (blurhash != _undefined) 'blurhash': (blurhash as String?),
       if (color != _undefined) 'color': (color as int?),
+      if (defaultMeetingId != _undefined)
+        'defaultMeetingId': (defaultMeetingId as UuidValue?),
       if (id != _undefined) 'id': (id as UuidValue?),
       if (name != _undefined) 'name': (name as String?),
       if (photoUpdatedAt != _undefined)
@@ -2296,6 +2458,7 @@ class _CopyWithStubImpl_Input_GroupsStreamCursorValueInput<TRes>
   call({
     String? blurhash,
     int? color,
+    UuidValue? defaultMeetingId,
     UuidValue? id,
     String? name,
     DateTime? photoUpdatedAt,
@@ -2362,149 +2525,5 @@ class Input_GroupsSumOrderBy {
   int get hashCode {
     final l$color = color;
     return Object.hashAll([_$data.containsKey('color') ? l$color : const {}]);
-  }
-}
-
-abstract class CopyWith_Input_GroupsSumOrderBy<TRes> {
-  factory CopyWith_Input_GroupsSumOrderBy(
-    Input_GroupsSumOrderBy instance,
-    TRes Function(Input_GroupsSumOrderBy) then,
-  ) = _CopyWithImpl_Input_GroupsSumOrderBy;
-
-  factory CopyWith_Input_GroupsSumOrderBy.stub(TRes res) =
-      _CopyWithStubImpl_Input_GroupsSumOrderBy;
-
-  TRes call({Enum_OrderBy? color});
-}
-
-class _CopyWithImpl_Input_GroupsSumOrderBy<TRes>
-    implements CopyWith_Input_GroupsSumOrderBy<TRes> {
-  _CopyWithImpl_Input_GroupsSumOrderBy(this._instance, this._then);
-
-  final Input_GroupsSumOrderBy _instance;
-
-  final TRes Function(Input_GroupsSumOrderBy) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({Object? color = _undefined}) => _then(
-    Input_GroupsSumOrderBy._({
-      ..._instance._$data,
-      if (color != _undefined) 'color': (color as Enum_OrderBy?),
-    }),
-  );
-}
-
-class _CopyWithStubImpl_Input_GroupsSumOrderBy<TRes>
-    implements CopyWith_Input_GroupsSumOrderBy<TRes> {
-  _CopyWithStubImpl_Input_GroupsSumOrderBy(this._res);
-
-  TRes _res;
-
-  call({Enum_OrderBy? color}) => _res;
-}
-
-class Input_GroupsUpdates {
-  factory Input_GroupsUpdates({
-    Input_GroupsIncInput? $_inc,
-    Input_GroupsSetInput? $_set,
-    required Input_GroupsBoolExp where,
-  }) => Input_GroupsUpdates._({
-    if ($_inc != null) r'_inc': $_inc,
-    if ($_set != null) r'_set': $_set,
-    r'where': where,
-  });
-
-  Input_GroupsUpdates._(this._$data);
-
-  factory Input_GroupsUpdates.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('_inc')) {
-      final l$$_inc = data['_inc'];
-      result$data['_inc'] = l$$_inc == null
-          ? null
-          : Input_GroupsIncInput.fromJson((l$$_inc as Map<String, dynamic>));
-    }
-    if (data.containsKey('_set')) {
-      final l$$_set = data['_set'];
-      result$data['_set'] = l$$_set == null
-          ? null
-          : Input_GroupsSetInput.fromJson((l$$_set as Map<String, dynamic>));
-    }
-    final l$where = data['where'];
-    result$data['where'] = Input_GroupsBoolExp.fromJson(
-      (l$where as Map<String, dynamic>),
-    );
-    return Input_GroupsUpdates._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  Input_GroupsIncInput? get $_inc => (_$data['_inc'] as Input_GroupsIncInput?);
-
-  Input_GroupsSetInput? get $_set => (_$data['_set'] as Input_GroupsSetInput?);
-
-  Input_GroupsBoolExp get where => (_$data['where'] as Input_GroupsBoolExp);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('_inc')) {
-      final l$$_inc = $_inc;
-      result$data['_inc'] = l$$_inc?.toJson();
-    }
-    if (_$data.containsKey('_set')) {
-      final l$$_set = $_set;
-      result$data['_set'] = l$$_set?.toJson();
-    }
-    final l$where = where;
-    result$data['where'] = l$where.toJson();
-    return result$data;
-  }
-
-  CopyWith_Input_GroupsUpdates<Input_GroupsUpdates> get copyWith =>
-      CopyWith_Input_GroupsUpdates(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_GroupsUpdates || runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$$_inc = $_inc;
-    final lOther$$_inc = other.$_inc;
-    if (_$data.containsKey('_inc') != other._$data.containsKey('_inc')) {
-      return false;
-    }
-    if (l$$_inc != lOther$$_inc) {
-      return false;
-    }
-    final l$$_set = $_set;
-    final lOther$$_set = other.$_set;
-    if (_$data.containsKey('_set') != other._$data.containsKey('_set')) {
-      return false;
-    }
-    if (l$$_set != lOther$$_set) {
-      return false;
-    }
-    final l$where = where;
-    final lOther$where = other.where;
-    if (l$where != lOther$where) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$$_inc = $_inc;
-    final l$$_set = $_set;
-    final l$where = where;
-    return Object.hashAll([
-      _$data.containsKey('_inc') ? l$$_inc : const {},
-      _$data.containsKey('_set') ? l$$_set : const {},
-      l$where,
-    ]);
   }
 }

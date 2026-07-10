@@ -91,7 +91,7 @@ FROM public.fathers WITH NO DATA;
 INSERT INTO public.fathers (id, name, is_hidden) SELECT
     id,
     name,
-    false
+    false AS is_hidden
 FROM _s ON CONFLICT DO NOTHING;
 DROP TABLE _s;
 
@@ -190,6 +190,9 @@ DROP TABLE _s;
 
 -- services.next_service_id self-references services; the single COPY loads the
 -- whole batch before the FK is verified, so forward references are fine.
+-- default_meeting_id is deliberately NOT set here: it points at history.meetings
+-- while meetings.service_id points back at services. We break that cycle by
+-- inserting services without it, importing meetings, then linking them below.
 CREATE TEMP TABLE _s AS
 SELECT
     id,
@@ -197,6 +200,7 @@ SELECT
     study_year_from_id,
     study_year_to_id,
     next_service_id,
+    default_meeting_id,
     color,
     photo_updated_at,
     blurhash
@@ -213,6 +217,14 @@ SELECT
     photo_updated_at,
     blurhash
 FROM _s ON CONFLICT DO NOTHING;
+
+-- Keep the service -> default_meeting link to apply after meetings are imported.
+CREATE TEMP TABLE _service_default_meetings AS
+SELECT
+    id,
+    default_meeting_id
+FROM _s
+WHERE default_meeting_id IS NOT null;
 DROP TABLE _s;
 
 CREATE TEMP TABLE _s AS
@@ -239,6 +251,43 @@ SELECT
     blurhash
 FROM _s ON CONFLICT DO NOTHING;
 DROP TABLE _s;
+
+CREATE TEMP TABLE _s AS
+SELECT
+    id,
+    name,
+    service_id,
+    service_study_year,
+    service_gender,
+    group_id,
+    audience,
+    is_archived,
+    color
+FROM history.meetings WITH NO DATA;
+\copy _s FROM 'meetings.csv' WITH (FORMAT csv, HEADER true, FORCE_NOT_NULL("name"))
+INSERT INTO history.meetings (id, name, service_id, service_study_year, service_gender, group_id, audience, is_archived, color)
+SELECT
+    id,
+    name,
+    service_id,
+    service_study_year,
+    service_gender,
+    group_id,
+    audience,
+    is_archived,
+    color
+FROM _s ON CONFLICT DO NOTHING;
+DROP TABLE _s;
+
+-- Meetings now exist, so link each migrated service to its default meeting.
+-- Guarded on IS NULL so an existing service's default meeting is never clobbered.
+UPDATE public.services AS s
+SET default_meeting_id = sdm.default_meeting_id
+FROM _service_default_meetings AS sdm
+WHERE
+    sdm.id = s.id
+    AND s.default_meeting_id IS null;
+DROP TABLE _service_default_meetings;
 
 CREATE TEMP TABLE _s AS SELECT
     area_id,
@@ -435,12 +484,12 @@ COMMIT;
 \echo 'Entity import complete.'
 
 ---------------------------------------------------------------------------
-Pass 2: history. Separate transaction so a confession/kodas recorded_by FK
-failure does not roll back the entity import.
+-- Pass 2: history. Separate transaction so a confession/kodas recorded_by FK
+-- failure does not roll back the entity import.
 
-NOTE: confession_history / kodas_history carry recorded_by = the placeholder
-migrationRecordedByUid. That UID MUST exist in auth.users_data, or these two
-COPYs fail (and only this transaction rolls back).
+-- NOTE: confession_history / kodas_history carry recorded_by = the placeholder
+-- migrationRecordedByUid. That UID MUST exist in auth.users_data, or these two
+-- COPYs fail (and only this transaction rolls back).
 ---------------------------------------------------------------------------
 BEGIN;
 
@@ -496,7 +545,7 @@ FROM (
     SELECT day_id FROM _kodas_src
 ) AS src
 WHERE
-    day_id IS NOT NULL
+    day_id IS NOT null
     AND NOT EXISTS (
         SELECT 1 FROM history.attendance_days AS ad
         WHERE ad.day = src.day_id
@@ -519,10 +568,17 @@ DROP TABLE _kodas_src;
 COMMIT;
 \echo 'History import complete.'
 
-update persons set color = null where color = 0;
-update classes set color = null where color = 0;
-update services set color = null where color = 0;
-update families set color = null where color = 0;
-update stores set color = null where color = 0;
-update streets set color = null where color = 0;
-update areas set color = null where color = 0;
+UPDATE persons SET color = null
+WHERE color = 0;
+UPDATE classes SET color = null
+WHERE color = 0;
+UPDATE services SET color = null
+WHERE color = 0;
+UPDATE families SET color = null
+WHERE color = 0;
+UPDATE stores SET color = null
+WHERE color = 0;
+UPDATE streets SET color = null
+WHERE color = 0;
+UPDATE areas SET color = null
+WHERE color = 0;
