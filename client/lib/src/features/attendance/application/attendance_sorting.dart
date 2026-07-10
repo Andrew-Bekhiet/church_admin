@@ -4,9 +4,14 @@ import 'package:meta/meta.dart';
 
 @immutable
 sealed class AttendanceSorting with EquatableMixin {
+  final SortingDirection direction;
+
   AttendanceSorting get then => const _AttendanceSortingById();
 
-  const AttendanceSorting();
+  @override
+  List<Object?> get props => [direction, then];
+
+  const AttendanceSorting({required this.direction});
 
   factory AttendanceSorting.byName() => const AttendanceSortingByName();
   factory AttendanceSorting.byAttendanceTime() => const AttendanceSortingByTime(
@@ -25,30 +30,38 @@ sealed class AttendanceSorting with EquatableMixin {
         ),
       );
 
-  int compare(MeetingRosterEntry a, MeetingRosterEntry b);
+  AttendanceSorting withReversedDirection();
 
-  @override
-  List<Object?> get props => [then];
+  int compare(MeetingRosterEntry a, MeetingRosterEntry b);
 }
 
 final class _AttendanceSortingById extends AttendanceSorting {
-  const _AttendanceSortingById();
+  // Avoid infinite recursion by not returning [super.then]
+  @override
+  List<Object?> get props => [direction];
+
+  const _AttendanceSortingById({super.direction = SortingDirection.ascending});
+
+  @override
+  AttendanceSorting withReversedDirection() =>
+      _AttendanceSortingById(direction: direction.reversed);
 
   @override
   int compare(MeetingRosterEntry a, MeetingRosterEntry b) {
-    return a.person.id.compareTo(b.person.id);
+    return a.person.id.compareTo(b.person.id) * direction.multiplier;
   }
-
-  @override
-  List<Object?> get props => [];
 }
 
 final class AttendanceSortingByName extends AttendanceSorting {
-  const AttendanceSortingByName();
+  const AttendanceSortingByName({super.direction = SortingDirection.ascending});
+
+  @override
+  AttendanceSorting withReversedDirection() =>
+      AttendanceSortingByName(direction: direction.reversed);
 
   @override
   int compare(MeetingRosterEntry a, MeetingRosterEntry b) {
-    return a.person.name.compareTo(b.person.name);
+    return a.person.name.compareTo(b.person.name) * direction.multiplier;
   }
 }
 
@@ -56,10 +69,16 @@ final class AttendanceSortingByTime extends AttendanceSorting {
   @override
   final AttendanceSorting then;
 
-  @override
-  List<Object?> get props => [then];
+  const AttendanceSortingByTime({
+    required this.then,
+    super.direction = SortingDirection.descending,
+  });
 
-  const AttendanceSortingByTime({required this.then});
+  @override
+  AttendanceSorting withReversedDirection() => AttendanceSortingByTime(
+    then: then.withReversedDirection(),
+    direction: direction.reversed,
+  );
 
   @override
   int compare(MeetingRosterEntry a, MeetingRosterEntry b) {
@@ -73,7 +92,7 @@ final class AttendanceSortingByTime extends AttendanceSorting {
     if (at == null) return 1;
     if (bt == null) return -1;
 
-    return bt.compareTo(at);
+    return at.compareTo(bt) * direction.multiplier;
   }
 }
 
@@ -81,10 +100,16 @@ final class AttendanceSortingByStudyYear extends AttendanceSorting {
   @override
   final AttendanceSorting then;
 
-  @override
-  List<Object?> get props => [then];
+  const AttendanceSortingByStudyYear({
+    required this.then,
+    super.direction = SortingDirection.ascending,
+  });
 
-  const AttendanceSortingByStudyYear({required this.then});
+  @override
+  AttendanceSorting withReversedDirection() => AttendanceSortingByStudyYear(
+    then: then.withReversedDirection(),
+    direction: direction.reversed,
+  );
 
   @override
   int compare(MeetingRosterEntry a, MeetingRosterEntry b) {
@@ -98,7 +123,7 @@ final class AttendanceSortingByStudyYear extends AttendanceSorting {
     if (gradeA == null) return 1;
     if (gradeB == null) return -1;
 
-    return gradeA.compareTo(gradeB);
+    return gradeA.compareTo(gradeB) * direction.multiplier;
   }
 }
 
@@ -106,10 +131,16 @@ final class AttendanceSortingByStreak extends AttendanceSorting {
   @override
   final AttendanceSorting then;
 
-  @override
-  List<Object?> get props => [then];
+  const AttendanceSortingByStreak({
+    required this.then,
+    super.direction = SortingDirection.ascending,
+  });
 
-  const AttendanceSortingByStreak({required this.then});
+  @override
+  AttendanceSorting withReversedDirection() => AttendanceSortingByStreak(
+    then: then.withReversedDirection(),
+    direction: direction.reversed,
+  );
 
   @override
   int compare(MeetingRosterEntry a, MeetingRosterEntry b) {
@@ -127,7 +158,7 @@ final class AttendanceSortingByStreak extends AttendanceSorting {
     if (streakA == null) return 1;
     if (streakB == null) return -1;
 
-    return streakA.compareTo(streakB);
+    return streakA.compareTo(streakB) * direction.multiplier;
   }
 }
 
@@ -135,10 +166,17 @@ final class AttendanceSortingByLastAttendanceTime extends AttendanceSorting {
   @override
   final AttendanceSorting then;
 
-  @override
-  List<Object?> get props => [then];
+  const AttendanceSortingByLastAttendanceTime({
+    required this.then,
+    super.direction = SortingDirection.ascending,
+  });
 
-  const AttendanceSortingByLastAttendanceTime({required this.then});
+  @override
+  AttendanceSorting withReversedDirection() =>
+      AttendanceSortingByLastAttendanceTime(
+        then: then.withReversedDirection(),
+        direction: direction.reversed,
+      );
 
   @override
   int compare(MeetingRosterEntry a, MeetingRosterEntry b) {
@@ -152,6 +190,7 @@ final class AttendanceSortingByLastAttendanceTime extends AttendanceSorting {
     if (lastAttendanceTimeA == null) return 1;
     if (lastAttendanceTimeB == null) return -1;
 
-    return lastAttendanceTimeA.compareTo(lastAttendanceTimeB);
+    return lastAttendanceTimeA.compareTo(lastAttendanceTimeB) *
+        direction.multiplier;
   }
 }

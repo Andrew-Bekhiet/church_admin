@@ -27,9 +27,10 @@ class AttendanceOverflowMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PopupMenuButton<void>(
+      borderRadius: BorderRadius.circular(12),
       icon: const Icon(Symbols.more_vert),
       itemBuilder: (context) => [
-        PopupMenuItem<void>(
+        PopupMenuItem(
           onTap: () => onGroupingChanged(grouping.toggled),
           child: ListTile(
             contentPadding: EdgeInsets.zero,
@@ -45,7 +46,7 @@ class AttendanceOverflowMenu extends StatelessWidget {
           ),
         ),
         const PopupMenuDivider(),
-        PopupMenuItem<void>(
+        PopupMenuItem(
           height: kMinInteractiveDimension / 2,
           enabled: false,
           child: Text(
@@ -53,68 +54,44 @@ class AttendanceOverflowMenu extends StatelessWidget {
             style: TextTheme.of(context).labelMedium,
           ),
         ),
-        PopupMenuItem<void>(
-          onTap: () => onSortChanged(AttendanceSorting.byName()),
-          child: ListTile(
-            contentPadding: EdgeInsets.zero,
-            leading: const Icon(Symbols.person),
-            title: const Text('الاسم'),
-            trailing: Visibility(
-              visible: sorting is AttendanceSortingByName,
-              maintainAnimation: true,
-              maintainSize: true,
-              maintainState: true,
-              child: const Icon(Symbols.check),
-            ),
-          ),
+        _SortingMenuItem<AttendanceSortingByName>(
+          title: 'الاسم',
+          icon: Symbols.person,
+          currentSorting: sorting,
+          onChanged: onSortChanged,
+          value: AttendanceSorting.byName(),
         ),
-        PopupMenuItem<void>(
-          onTap: () => onSortChanged(AttendanceSorting.byAttendanceTime()),
-          child: ListTile(
-            contentPadding: EdgeInsets.zero,
-            leading: const Icon(Symbols.access_time),
-            title: const Text('وقت الحضور'),
-            trailing: Visibility(
-              visible: sorting is AttendanceSortingByTime,
-              maintainAnimation: true,
-              maintainSize: true,
-              maintainState: true,
-              child: const Icon(Symbols.check),
-            ),
-          ),
+        _SortingMenuItem<AttendanceSortingByTime>(
+          title: 'وقت الحضور',
+          icon: Symbols.access_time,
+          currentSorting: sorting,
+          onChanged: onSortChanged,
+          value: AttendanceSorting.byAttendanceTime(),
         ),
-        PopupMenuItem<void>(
-          onTap: () => onSortChanged(AttendanceSorting.byAttendanceStreak()),
-          child: ListTile(
-            contentPadding: EdgeInsets.zero,
-            leading: const Icon(Symbols.local_fire_department),
-            title: const Text('الحضور المستمر'),
-            trailing: Visibility(
-              visible: sorting is AttendanceSortingByStreak,
-              maintainAnimation: true,
-              maintainSize: true,
-              maintainState: true,
-              child: const Icon(Symbols.check),
-            ),
-          ),
+        _SortingMenuItem<AttendanceSortingByStreak>(
+          title: switch (sorting) {
+            AttendanceSortingByStreak(direction: SortingDirection.descending) =>
+              'الحضور المستمر',
+            _ => 'الغياب المستمر',
+          },
+          icon: switch (sorting) {
+            AttendanceSortingByStreak(direction: SortingDirection.descending) =>
+              Symbols.local_fire_department,
+            _ => Symbols.error,
+          },
+          currentSorting: sorting,
+          onChanged: onSortChanged,
+          value: AttendanceSorting.byAttendanceStreak(),
         ),
-        PopupMenuItem<void>(
-          onTap: () => onSortChanged(AttendanceSorting.byLastAttendanceTime()),
-          child: ListTile(
-            contentPadding: EdgeInsets.zero,
-            leading: const Icon(Symbols.history),
-            title: const Text('آخر وقت حضور'),
-            trailing: Visibility(
-              visible: sorting is AttendanceSortingByLastAttendanceTime,
-              maintainAnimation: true,
-              maintainSize: true,
-              maintainState: true,
-              child: const Icon(Symbols.check),
-            ),
-          ),
+        _SortingMenuItem<AttendanceSortingByLastAttendanceTime>(
+          title: 'آخر وقت حضور',
+          icon: Symbols.history,
+          currentSorting: sorting,
+          onChanged: onSortChanged,
+          value: AttendanceSorting.byLastAttendanceTime(),
         ),
         const PopupMenuDivider(),
-        PopupMenuItem<void>(
+        PopupMenuItem(
           height: kMinInteractiveDimension / 2,
           enabled: false,
           child: Text(
@@ -123,7 +100,7 @@ class AttendanceOverflowMenu extends StatelessWidget {
           ),
         ),
         for (final days in _streakWindowOptions)
-          PopupMenuItem<void>(
+          PopupMenuItem(
             onTap: () => onStreakWindowChanged(days),
             child: ListTile(
               contentPadding: EdgeInsets.zero,
@@ -139,7 +116,7 @@ class AttendanceOverflowMenu extends StatelessWidget {
             ),
           ),
         const PopupMenuDivider(),
-        PopupMenuItem<void>(
+        PopupMenuItem(
           onTap: openAnalysis,
           child: const ListTile(
             contentPadding: EdgeInsets.zero,
@@ -150,4 +127,43 @@ class AttendanceOverflowMenu extends StatelessWidget {
       ],
     );
   }
+}
+
+class _SortingMenuItem<T extends AttendanceSorting>
+    extends PopupMenuItem<AttendanceSorting> {
+  final String title;
+  final IconData icon;
+  final ValueChanged<AttendanceSorting> onChanged;
+  final AttendanceSorting currentSorting;
+
+  _SortingMenuItem({
+    required this.title,
+    required this.icon,
+    required this.currentSorting,
+    required this.onChanged,
+    required AttendanceSorting super.value,
+    super.key,
+  }) : super(
+         onTap: () => currentSorting is T
+             ? onChanged(currentSorting.withReversedDirection())
+             : onChanged(value),
+         child: ListTile(
+           contentPadding: EdgeInsets.zero,
+           leading: Icon(icon),
+           title: Text(title),
+           trailing: Visibility(
+             visible: currentSorting is T,
+             maintainAnimation: true,
+             maintainSize: true,
+             maintainState: true,
+             child: AnimatedRotation(
+               duration: Durations.medium1,
+               turns: currentSorting.direction == SortingDirection.ascending
+                   ? 0
+                   : 0.5,
+               child: const Icon(Symbols.arrow_upward_rounded),
+             ),
+           ),
+         ),
+       );
 }
