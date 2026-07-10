@@ -36,3 +36,17 @@ $$ language plpgsql;
 create constraint trigger "check_service_default_meeting_belongs_to_service"
 after insert or update on "public"."services"
 for each row execute function "public"."check_service_default_meeting_belongs_to_service"();
+
+create or replace function "history"."maybe_remove_service_archived_default_meeting"()
+returns trigger as $$
+begin
+  if new.is_archived = true then
+    update "public"."services" set default_meeting_id = null where default_meeting_id = old.id;
+  end if;
+  return new;
+end;
+$$ language plpgsql;
+
+create constraint trigger "maybe_remove_service_archived_default_meeting"
+after update on "history"."meetings"
+for each row execute function "history"."maybe_remove_service_archived_default_meeting"();
