@@ -6,10 +6,12 @@ import 'package:sliver_tools/sliver_tools.dart';
 class AttendanceGroupedRoster extends StatefulWidget {
   final List<MeetingRosterEntry> entries;
   final ValueChanged<MeetingRosterEntry> onToggle;
+  final void Function(MeetingRosterEntry, TimeOfDay) onChangeAttendanceTime;
 
   const AttendanceGroupedRoster({
     required this.entries,
     required this.onToggle,
+    required this.onChangeAttendanceTime,
     super.key,
   });
 
@@ -63,6 +65,8 @@ class _AttendanceGroupedRosterState extends State<AttendanceGroupedRoster> {
                 return AttendancePersonCard(
                   entry: entry,
                   onToggle: widget.onToggle,
+                  onChangeAttendanceTime: (time) =>
+                      widget.onChangeAttendanceTime(entry, time),
                 );
               },
             ),

@@ -1253,6 +1253,715 @@ class _CopyWithStubImpl_Mutation_markAttendance_insertHistoryAttendanceHistoryOn
       CopyWith_Fragment_User.stub(_res);
 }
 
+class Variables_Mutation_updateAttendanceTime {
+  factory Variables_Mutation_updateAttendanceTime({
+    required UuidValue id,
+    required DateTime datetime,
+  }) => Variables_Mutation_updateAttendanceTime._({
+    r'id': id,
+    r'datetime': datetime,
+  });
+
+  Variables_Mutation_updateAttendanceTime._(this._$data);
+
+  factory Variables_Mutation_updateAttendanceTime.fromJson(
+    Map<String, dynamic> data,
+  ) {
+    final result$data = <String, dynamic>{};
+    final l$id = data['id'];
+    result$data['id'] = stringToUuid(l$id);
+    final l$datetime = data['datetime'];
+    result$data['datetime'] = tstzFromString(l$datetime);
+    return Variables_Mutation_updateAttendanceTime._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  UuidValue get id => (_$data['id'] as UuidValue);
+
+  DateTime get datetime => (_$data['datetime'] as DateTime);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$id = id;
+    result$data['id'] = uuidToString(l$id);
+    final l$datetime = datetime;
+    result$data['datetime'] = tstzToString(l$datetime);
+    return result$data;
+  }
+
+  CopyWith_Variables_Mutation_updateAttendanceTime<
+    Variables_Mutation_updateAttendanceTime
+  >
+  get copyWith =>
+      CopyWith_Variables_Mutation_updateAttendanceTime(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Variables_Mutation_updateAttendanceTime ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$datetime = datetime;
+    final lOther$datetime = other.datetime;
+    if (l$datetime != lOther$datetime) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$datetime = datetime;
+    return Object.hashAll([l$id, l$datetime]);
+  }
+}
+
+abstract class CopyWith_Variables_Mutation_updateAttendanceTime<TRes> {
+  factory CopyWith_Variables_Mutation_updateAttendanceTime(
+    Variables_Mutation_updateAttendanceTime instance,
+    TRes Function(Variables_Mutation_updateAttendanceTime) then,
+  ) = _CopyWithImpl_Variables_Mutation_updateAttendanceTime;
+
+  factory CopyWith_Variables_Mutation_updateAttendanceTime.stub(TRes res) =
+      _CopyWithStubImpl_Variables_Mutation_updateAttendanceTime;
+
+  TRes call({UuidValue? id, DateTime? datetime});
+}
+
+class _CopyWithImpl_Variables_Mutation_updateAttendanceTime<TRes>
+    implements CopyWith_Variables_Mutation_updateAttendanceTime<TRes> {
+  _CopyWithImpl_Variables_Mutation_updateAttendanceTime(
+    this._instance,
+    this._then,
+  );
+
+  final Variables_Mutation_updateAttendanceTime _instance;
+
+  final TRes Function(Variables_Mutation_updateAttendanceTime) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? id = _undefined, Object? datetime = _undefined}) => _then(
+    Variables_Mutation_updateAttendanceTime._({
+      ..._instance._$data,
+      if (id != _undefined && id != null) 'id': (id as UuidValue),
+      if (datetime != _undefined && datetime != null)
+        'datetime': (datetime as DateTime),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Variables_Mutation_updateAttendanceTime<TRes>
+    implements CopyWith_Variables_Mutation_updateAttendanceTime<TRes> {
+  _CopyWithStubImpl_Variables_Mutation_updateAttendanceTime(this._res);
+
+  TRes _res;
+
+  call({UuidValue? id, DateTime? datetime}) => _res;
+}
+
+class Mutation_updateAttendanceTime {
+  Mutation_updateAttendanceTime({
+    this.updateHistoryAttendanceHistoryByPk,
+    this.$__typename = 'mutation_root',
+  });
+
+  factory Mutation_updateAttendanceTime.fromJson(Map<String, dynamic> json) {
+    final l$updateHistoryAttendanceHistoryByPk =
+        json['updateHistoryAttendanceHistoryByPk'];
+    final l$$__typename = json['__typename'];
+    return Mutation_updateAttendanceTime(
+      updateHistoryAttendanceHistoryByPk:
+          l$updateHistoryAttendanceHistoryByPk == null
+          ? null
+          : Mutation_updateAttendanceTime_updateHistoryAttendanceHistoryByPk.fromJson(
+              (l$updateHistoryAttendanceHistoryByPk as Map<String, dynamic>),
+            ),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Mutation_updateAttendanceTime_updateHistoryAttendanceHistoryByPk?
+  updateHistoryAttendanceHistoryByPk;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$updateHistoryAttendanceHistoryByPk =
+        updateHistoryAttendanceHistoryByPk;
+    _resultData['updateHistoryAttendanceHistoryByPk'] =
+        l$updateHistoryAttendanceHistoryByPk?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$updateHistoryAttendanceHistoryByPk =
+        updateHistoryAttendanceHistoryByPk;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$updateHistoryAttendanceHistoryByPk,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Mutation_updateAttendanceTime ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$updateHistoryAttendanceHistoryByPk =
+        updateHistoryAttendanceHistoryByPk;
+    final lOther$updateHistoryAttendanceHistoryByPk =
+        other.updateHistoryAttendanceHistoryByPk;
+    if (l$updateHistoryAttendanceHistoryByPk !=
+        lOther$updateHistoryAttendanceHistoryByPk) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Mutation_updateAttendanceTime
+    on Mutation_updateAttendanceTime {
+  CopyWith_Mutation_updateAttendanceTime<Mutation_updateAttendanceTime>
+  get copyWith => CopyWith_Mutation_updateAttendanceTime(this, (i) => i);
+}
+
+abstract class CopyWith_Mutation_updateAttendanceTime<TRes> {
+  factory CopyWith_Mutation_updateAttendanceTime(
+    Mutation_updateAttendanceTime instance,
+    TRes Function(Mutation_updateAttendanceTime) then,
+  ) = _CopyWithImpl_Mutation_updateAttendanceTime;
+
+  factory CopyWith_Mutation_updateAttendanceTime.stub(TRes res) =
+      _CopyWithStubImpl_Mutation_updateAttendanceTime;
+
+  TRes call({
+    Mutation_updateAttendanceTime_updateHistoryAttendanceHistoryByPk?
+    updateHistoryAttendanceHistoryByPk,
+    String? $__typename,
+  });
+  CopyWith_Mutation_updateAttendanceTime_updateHistoryAttendanceHistoryByPk<
+    TRes
+  >
+  get updateHistoryAttendanceHistoryByPk;
+}
+
+class _CopyWithImpl_Mutation_updateAttendanceTime<TRes>
+    implements CopyWith_Mutation_updateAttendanceTime<TRes> {
+  _CopyWithImpl_Mutation_updateAttendanceTime(this._instance, this._then);
+
+  final Mutation_updateAttendanceTime _instance;
+
+  final TRes Function(Mutation_updateAttendanceTime) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? updateHistoryAttendanceHistoryByPk = _undefined,
+    Object? $__typename = _undefined,
+  }) => _then(
+    Mutation_updateAttendanceTime(
+      updateHistoryAttendanceHistoryByPk:
+          updateHistoryAttendanceHistoryByPk == _undefined
+          ? _instance.updateHistoryAttendanceHistoryByPk
+          : (updateHistoryAttendanceHistoryByPk
+                as Mutation_updateAttendanceTime_updateHistoryAttendanceHistoryByPk?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
+
+  CopyWith_Mutation_updateAttendanceTime_updateHistoryAttendanceHistoryByPk<
+    TRes
+  >
+  get updateHistoryAttendanceHistoryByPk {
+    final local$updateHistoryAttendanceHistoryByPk =
+        _instance.updateHistoryAttendanceHistoryByPk;
+    return local$updateHistoryAttendanceHistoryByPk == null
+        ? CopyWith_Mutation_updateAttendanceTime_updateHistoryAttendanceHistoryByPk.stub(
+            _then(_instance),
+          )
+        : CopyWith_Mutation_updateAttendanceTime_updateHistoryAttendanceHistoryByPk(
+            local$updateHistoryAttendanceHistoryByPk,
+            (e) => call(updateHistoryAttendanceHistoryByPk: e),
+          );
+  }
+}
+
+class _CopyWithStubImpl_Mutation_updateAttendanceTime<TRes>
+    implements CopyWith_Mutation_updateAttendanceTime<TRes> {
+  _CopyWithStubImpl_Mutation_updateAttendanceTime(this._res);
+
+  TRes _res;
+
+  call({
+    Mutation_updateAttendanceTime_updateHistoryAttendanceHistoryByPk?
+    updateHistoryAttendanceHistoryByPk,
+    String? $__typename,
+  }) => _res;
+
+  CopyWith_Mutation_updateAttendanceTime_updateHistoryAttendanceHistoryByPk<
+    TRes
+  >
+  get updateHistoryAttendanceHistoryByPk =>
+      CopyWith_Mutation_updateAttendanceTime_updateHistoryAttendanceHistoryByPk.stub(
+        _res,
+      );
+}
+
+const documentNodeMutationupdateAttendanceTime = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.mutation,
+      name: NameNode(value: 'updateAttendanceTime'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'id')),
+          type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'datetime')),
+          type: NamedTypeNode(
+            name: NameNode(value: 'timestamptz'),
+            isNonNull: true,
+          ),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
+          FieldNode(
+            name: NameNode(value: 'updateHistoryAttendanceHistoryByPk'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'pkColumns'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'id'),
+                      value: VariableNode(name: NameNode(value: 'id')),
+                    ),
+                  ],
+                ),
+              ),
+              ArgumentNode(
+                name: NameNode(value: '_set'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'datetime'),
+                      value: VariableNode(name: NameNode(value: 'datetime')),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FieldNode(
+                  name: NameNode(value: 'id'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: 'meetingId'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: 'personId'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: 'datetime'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: 'asServant'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: 'recordedBy'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: 'recordedByUser'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: SelectionSetNode(
+                    selections: [
+                      FragmentSpreadNode(
+                        name: NameNode(value: 'User'),
+                        directives: [],
+                      ),
+                      FieldNode(
+                        name: NameNode(value: '__typename'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                    ],
+                  ),
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ],
+      ),
+    ),
+    fragmentDefinitionUser,
+    fragmentDefinitionUserNoPhoto,
+  ],
+);
+
+class Mutation_updateAttendanceTime_updateHistoryAttendanceHistoryByPk {
+  Mutation_updateAttendanceTime_updateHistoryAttendanceHistoryByPk({
+    required this.id,
+    required this.meetingId,
+    required this.personId,
+    required this.datetime,
+    required this.asServant,
+    required this.recordedBy,
+    required this.recordedByUser,
+    this.$__typename = 'HistoryAttendanceHistory',
+  });
+
+  factory Mutation_updateAttendanceTime_updateHistoryAttendanceHistoryByPk.fromJson(
+    Map<String, dynamic> json,
+  ) {
+    final l$id = json['id'];
+    final l$meetingId = json['meetingId'];
+    final l$personId = json['personId'];
+    final l$datetime = json['datetime'];
+    final l$asServant = json['asServant'];
+    final l$recordedBy = json['recordedBy'];
+    final l$recordedByUser = json['recordedByUser'];
+    final l$$__typename = json['__typename'];
+    return Mutation_updateAttendanceTime_updateHistoryAttendanceHistoryByPk(
+      id: stringToUuid(l$id),
+      meetingId: stringToUuid(l$meetingId),
+      personId: stringToUuid(l$personId),
+      datetime: tstzFromString(l$datetime),
+      asServant: (l$asServant as bool),
+      recordedBy: stringToUuid(l$recordedBy),
+      recordedByUser: Fragment_User.fromJson(
+        (l$recordedByUser as Map<String, dynamic>),
+      ),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final UuidValue id;
+
+  final UuidValue meetingId;
+
+  final UuidValue personId;
+
+  final DateTime datetime;
+
+  final bool asServant;
+
+  final UuidValue recordedBy;
+
+  final Fragment_User recordedByUser;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = uuidToString(l$id);
+    final l$meetingId = meetingId;
+    _resultData['meetingId'] = uuidToString(l$meetingId);
+    final l$personId = personId;
+    _resultData['personId'] = uuidToString(l$personId);
+    final l$datetime = datetime;
+    _resultData['datetime'] = tstzToString(l$datetime);
+    final l$asServant = asServant;
+    _resultData['asServant'] = l$asServant;
+    final l$recordedBy = recordedBy;
+    _resultData['recordedBy'] = uuidToString(l$recordedBy);
+    final l$recordedByUser = recordedByUser;
+    _resultData['recordedByUser'] = l$recordedByUser.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$meetingId = meetingId;
+    final l$personId = personId;
+    final l$datetime = datetime;
+    final l$asServant = asServant;
+    final l$recordedBy = recordedBy;
+    final l$recordedByUser = recordedByUser;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      l$meetingId,
+      l$personId,
+      l$datetime,
+      l$asServant,
+      l$recordedBy,
+      l$recordedByUser,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other
+            is! Mutation_updateAttendanceTime_updateHistoryAttendanceHistoryByPk ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$meetingId = meetingId;
+    final lOther$meetingId = other.meetingId;
+    if (l$meetingId != lOther$meetingId) {
+      return false;
+    }
+    final l$personId = personId;
+    final lOther$personId = other.personId;
+    if (l$personId != lOther$personId) {
+      return false;
+    }
+    final l$datetime = datetime;
+    final lOther$datetime = other.datetime;
+    if (l$datetime != lOther$datetime) {
+      return false;
+    }
+    final l$asServant = asServant;
+    final lOther$asServant = other.asServant;
+    if (l$asServant != lOther$asServant) {
+      return false;
+    }
+    final l$recordedBy = recordedBy;
+    final lOther$recordedBy = other.recordedBy;
+    if (l$recordedBy != lOther$recordedBy) {
+      return false;
+    }
+    final l$recordedByUser = recordedByUser;
+    final lOther$recordedByUser = other.recordedByUser;
+    if (l$recordedByUser != lOther$recordedByUser) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Mutation_updateAttendanceTime_updateHistoryAttendanceHistoryByPk
+    on Mutation_updateAttendanceTime_updateHistoryAttendanceHistoryByPk {
+  CopyWith_Mutation_updateAttendanceTime_updateHistoryAttendanceHistoryByPk<
+    Mutation_updateAttendanceTime_updateHistoryAttendanceHistoryByPk
+  >
+  get copyWith =>
+      CopyWith_Mutation_updateAttendanceTime_updateHistoryAttendanceHistoryByPk(
+        this,
+        (i) => i,
+      );
+}
+
+abstract class CopyWith_Mutation_updateAttendanceTime_updateHistoryAttendanceHistoryByPk<
+  TRes
+> {
+  factory CopyWith_Mutation_updateAttendanceTime_updateHistoryAttendanceHistoryByPk(
+    Mutation_updateAttendanceTime_updateHistoryAttendanceHistoryByPk instance,
+    TRes Function(
+      Mutation_updateAttendanceTime_updateHistoryAttendanceHistoryByPk,
+    )
+    then,
+  ) = _CopyWithImpl_Mutation_updateAttendanceTime_updateHistoryAttendanceHistoryByPk;
+
+  factory CopyWith_Mutation_updateAttendanceTime_updateHistoryAttendanceHistoryByPk.stub(
+    TRes res,
+  ) = _CopyWithStubImpl_Mutation_updateAttendanceTime_updateHistoryAttendanceHistoryByPk;
+
+  TRes call({
+    UuidValue? id,
+    UuidValue? meetingId,
+    UuidValue? personId,
+    DateTime? datetime,
+    bool? asServant,
+    UuidValue? recordedBy,
+    Fragment_User? recordedByUser,
+    String? $__typename,
+  });
+  CopyWith_Fragment_User<TRes> get recordedByUser;
+}
+
+class _CopyWithImpl_Mutation_updateAttendanceTime_updateHistoryAttendanceHistoryByPk<
+  TRes
+>
+    implements
+        CopyWith_Mutation_updateAttendanceTime_updateHistoryAttendanceHistoryByPk<
+          TRes
+        > {
+  _CopyWithImpl_Mutation_updateAttendanceTime_updateHistoryAttendanceHistoryByPk(
+    this._instance,
+    this._then,
+  );
+
+  final Mutation_updateAttendanceTime_updateHistoryAttendanceHistoryByPk
+  _instance;
+
+  final TRes Function(
+    Mutation_updateAttendanceTime_updateHistoryAttendanceHistoryByPk,
+  )
+  _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? meetingId = _undefined,
+    Object? personId = _undefined,
+    Object? datetime = _undefined,
+    Object? asServant = _undefined,
+    Object? recordedBy = _undefined,
+    Object? recordedByUser = _undefined,
+    Object? $__typename = _undefined,
+  }) => _then(
+    Mutation_updateAttendanceTime_updateHistoryAttendanceHistoryByPk(
+      id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
+      meetingId: meetingId == _undefined || meetingId == null
+          ? _instance.meetingId
+          : (meetingId as UuidValue),
+      personId: personId == _undefined || personId == null
+          ? _instance.personId
+          : (personId as UuidValue),
+      datetime: datetime == _undefined || datetime == null
+          ? _instance.datetime
+          : (datetime as DateTime),
+      asServant: asServant == _undefined || asServant == null
+          ? _instance.asServant
+          : (asServant as bool),
+      recordedBy: recordedBy == _undefined || recordedBy == null
+          ? _instance.recordedBy
+          : (recordedBy as UuidValue),
+      recordedByUser: recordedByUser == _undefined || recordedByUser == null
+          ? _instance.recordedByUser
+          : (recordedByUser as Fragment_User),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
+
+  CopyWith_Fragment_User<TRes> get recordedByUser {
+    final local$recordedByUser = _instance.recordedByUser;
+    return CopyWith_Fragment_User(
+      local$recordedByUser,
+      (e) => call(recordedByUser: e),
+    );
+  }
+}
+
+class _CopyWithStubImpl_Mutation_updateAttendanceTime_updateHistoryAttendanceHistoryByPk<
+  TRes
+>
+    implements
+        CopyWith_Mutation_updateAttendanceTime_updateHistoryAttendanceHistoryByPk<
+          TRes
+        > {
+  _CopyWithStubImpl_Mutation_updateAttendanceTime_updateHistoryAttendanceHistoryByPk(
+    this._res,
+  );
+
+  TRes _res;
+
+  call({
+    UuidValue? id,
+    UuidValue? meetingId,
+    UuidValue? personId,
+    DateTime? datetime,
+    bool? asServant,
+    UuidValue? recordedBy,
+    Fragment_User? recordedByUser,
+    String? $__typename,
+  }) => _res;
+
+  CopyWith_Fragment_User<TRes> get recordedByUser =>
+      CopyWith_Fragment_User.stub(_res);
+}
+
 class Variables_Mutation_unmarkAttendance {
   factory Variables_Mutation_unmarkAttendance({required UuidValue id}) =>
       Variables_Mutation_unmarkAttendance._({r'id': id});

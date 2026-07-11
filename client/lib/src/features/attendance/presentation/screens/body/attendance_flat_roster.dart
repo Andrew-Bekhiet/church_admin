@@ -6,10 +6,12 @@ class AttendanceFlatRoster extends StatelessWidget {
   final List<MeetingRosterEntry> entries;
   final Map<String, PersonMeetingAttendanceAnalysis> trackRecords;
   final ValueChanged<MeetingRosterEntry> onToggle;
+  final void Function(MeetingRosterEntry, TimeOfDay) onChangeAttendanceTime;
 
   const AttendanceFlatRoster({
     required this.entries,
     required this.onToggle,
+    required this.onChangeAttendanceTime,
     this.removeEndPadding = false,
     this.trackRecords = const {},
     super.key,
@@ -26,6 +28,7 @@ class AttendanceFlatRoster extends StatelessWidget {
         return AttendancePersonCard(
           entry: entry,
           onToggle: onToggle,
+          onChangeAttendanceTime: (time) => onChangeAttendanceTime(entry, time),
           removeEndPadding: removeEndPadding,
         );
       },

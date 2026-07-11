@@ -24,6 +24,23 @@ mutation markAttendance($object: HistoryAttendanceHistoryInsertInput!) {
   }
 }
 
+mutation updateAttendanceTime($id: uuid!, $datetime: timestamptz!) {
+  updateHistoryAttendanceHistoryByPk(
+    pkColumns: { id: $id }
+    _set: { datetime: $datetime }
+  ) {
+    id
+    meetingId
+    personId
+    datetime
+    asServant
+    recordedBy
+    recordedByUser {
+      ...User
+    }
+  }
+}
+
 mutation unmarkAttendance($id: uuid!) {
   deleteHistoryAttendanceHistoryByPk(id: $id) {
     id

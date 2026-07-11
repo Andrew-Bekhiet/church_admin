@@ -160,6 +160,23 @@ class MeetingsDAO extends DAOBase<Meeting>
     );
   }
 
+  Future<AttendanceRecord> updateAttendanceTime({
+    required String attendanceRecordId,
+    required DateTime datetime,
+  }) {
+    return graphQLClient.mutateAndReturnParsed(
+      MutationOptions(
+        document: documentNodeMutationupdateAttendanceTime,
+        operationName: 'updateAttendanceTime',
+        variables: Variables_Mutation_updateAttendanceTime(
+          id: attendanceRecordId.toUuid(),
+          datetime: datetime,
+        ).toJson(),
+        parserFn: db.parser.singleParser(AttendanceRecord.fromJson),
+      ),
+    );
+  }
+
   Future<List<PersonMeetingAttendanceAnalysis>> getPersonAttendanceAnalysis({
     required String personId,
     required DateTimeRange range,
