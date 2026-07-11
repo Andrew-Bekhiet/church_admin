@@ -61,7 +61,10 @@ final class AttendanceSortingByName extends AttendanceSorting {
 
   @override
   int compare(MeetingRosterEntry a, MeetingRosterEntry b) {
-    return a.person.name.compareTo(b.person.name) * direction.multiplier;
+    final result =
+        a.person.name.compareTo(b.person.name) * direction.multiplier;
+
+    return result == 0 ? then.compare(a, b) : result;
   }
 }
 
