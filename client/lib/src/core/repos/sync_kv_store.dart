@@ -120,9 +120,9 @@ interface class SyncKVStore<T> {
     _cancelTimers();
     _pendingWrites = {};
 
-    await _currentFlushOperationFuture;
-
     _memoryCache.clear();
+
+    await _currentFlushOperationFuture;
     await _storage.clear();
   }
 
