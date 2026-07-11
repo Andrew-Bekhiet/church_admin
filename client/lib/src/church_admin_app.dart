@@ -134,9 +134,8 @@ class _ChurchAdminAppState extends State<ChurchAdminApp>
 
   @override
   Future<void> dispose() async {
-    super.dispose();
-
     WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
 
     await _connectivityListener.cancel();
     await _notificationsListener.cancel();
