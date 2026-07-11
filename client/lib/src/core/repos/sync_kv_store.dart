@@ -173,7 +173,11 @@ interface class SyncKVStore<T> {
     final batch = _pendingWrites;
     _pendingWrites = <String, T?>{};
 
-    await _storage.putAll(batch);
+    try {
+      await _storage.putAll(batch);
+    } on Exception {
+      _pendingWrites = {...batch, ..._pendingWrites};
+    }
   }
 
   void _checkLoaded() {
