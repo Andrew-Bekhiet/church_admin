@@ -124,6 +124,22 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
+      - name: Free up disk space
+        if: ${{ matrix.os == 'ubuntu-latest' }}
+        run: |
+          # Space usage before cleanup
+          df -h /
+
+          # Remove unused tool caches
+          sudo rm -rf /usr/local/.ghcup
+          sudo rm -rf /usr/local/share/powershell
+          sudo rm -rf /usr/share/dotnet
+          sudo rm -rf /usr/share/swift
+          sudo rm -rf "$AGENT_TOOLSDIRECTORY"
+
+          # Verify gains
+          df -h /
+
       - uses: actions/checkout@v4
         with:
           fetch-depth: 1
