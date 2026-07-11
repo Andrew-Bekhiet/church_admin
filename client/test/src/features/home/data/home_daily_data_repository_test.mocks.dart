@@ -74,27 +74,28 @@ class MockSyncKVStore extends _i1.Mock
           as Map<dynamic, dynamic>?);
 
   @override
-  _i3.Future<void> put(String? key, Map<dynamic, dynamic>? value) =>
-      (super.noSuchMethod(
-            Invocation.method(#put, [key, value]),
-            returnValue: _i3.Future<void>.value(),
-            returnValueForMissingStub: _i3.Future<void>.value(),
-          )
-          as _i3.Future<void>);
+  void put(String? key, Map<dynamic, dynamic>? value) => super.noSuchMethod(
+    Invocation.method(#put, [key, value]),
+    returnValueForMissingStub: null,
+  );
 
   @override
-  _i3.Future<void> putAll(Map<String, Map<dynamic, dynamic>?>? values) =>
-      (super.noSuchMethod(
-            Invocation.method(#putAll, [values]),
-            returnValue: _i3.Future<void>.value(),
-            returnValueForMissingStub: _i3.Future<void>.value(),
-          )
-          as _i3.Future<void>);
+  void putAll(Map<String, Map<dynamic, dynamic>?>? values) =>
+      super.noSuchMethod(
+        Invocation.method(#putAll, [values]),
+        returnValueForMissingStub: null,
+      );
 
   @override
-  _i3.Future<void> delete(String? key) =>
+  void delete(String? key) => super.noSuchMethod(
+    Invocation.method(#delete, [key]),
+    returnValueForMissingStub: null,
+  );
+
+  @override
+  _i3.Future<void> flush() =>
       (super.noSuchMethod(
-            Invocation.method(#delete, [key]),
+            Invocation.method(#flush, []),
             returnValue: _i3.Future<void>.value(),
             returnValueForMissingStub: _i3.Future<void>.value(),
           )

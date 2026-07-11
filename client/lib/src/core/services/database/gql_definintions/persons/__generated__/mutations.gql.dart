@@ -3084,6 +3084,13 @@ const documentNodeMutationupdatePerson = DocumentNode(
             selectionSet: SelectionSetNode(
               selections: [
                 FieldNode(
+                  name: NameNode(value: 'id'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
                   name: NameNode(value: 'person'),
                   alias: null,
                   arguments: [],
@@ -3211,6 +3218,13 @@ const documentNodeMutationupdatePerson = DocumentNode(
             ],
             selectionSet: SelectionSetNode(
               selections: [
+                FieldNode(
+                  name: NameNode(value: 'id'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
                 FieldNode(
                   name: NameNode(value: 'person'),
                   alias: null,
@@ -4350,6 +4364,7 @@ class _CopyWithStubImpl_Mutation_updatePerson_deletePersonsServices<TRes>
 
 class Mutation_updatePerson_insertHistoryConfessionHistoryOne {
   Mutation_updatePerson_insertHistoryConfessionHistoryOne({
+    required this.id,
     required this.person,
     this.$__typename = 'HistoryConfessionHistory',
   });
@@ -4357,9 +4372,11 @@ class Mutation_updatePerson_insertHistoryConfessionHistoryOne {
   factory Mutation_updatePerson_insertHistoryConfessionHistoryOne.fromJson(
     Map<String, dynamic> json,
   ) {
+    final l$id = json['id'];
     final l$person = json['person'];
     final l$$__typename = json['__typename'];
     return Mutation_updatePerson_insertHistoryConfessionHistoryOne(
+      id: stringToUuid(l$id),
       person:
           Mutation_updatePerson_insertHistoryConfessionHistoryOne_person.fromJson(
             (l$person as Map<String, dynamic>),
@@ -4368,12 +4385,16 @@ class Mutation_updatePerson_insertHistoryConfessionHistoryOne {
     );
   }
 
+  final UuidValue id;
+
   final Mutation_updatePerson_insertHistoryConfessionHistoryOne_person person;
 
   final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = uuidToString(l$id);
     final l$person = person;
     _resultData['person'] = l$person.toJson();
     final l$$__typename = $__typename;
@@ -4383,9 +4404,10 @@ class Mutation_updatePerson_insertHistoryConfessionHistoryOne {
 
   @override
   int get hashCode {
+    final l$id = id;
     final l$person = person;
     final l$$__typename = $__typename;
-    return Object.hashAll([l$person, l$$__typename]);
+    return Object.hashAll([l$id, l$person, l$$__typename]);
   }
 
   @override
@@ -4395,6 +4417,11 @@ class Mutation_updatePerson_insertHistoryConfessionHistoryOne {
     }
     if (other is! Mutation_updatePerson_insertHistoryConfessionHistoryOne ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
       return false;
     }
     final l$person = person;
@@ -4436,6 +4463,7 @@ abstract class CopyWith_Mutation_updatePerson_insertHistoryConfessionHistoryOne<
   ) = _CopyWithStubImpl_Mutation_updatePerson_insertHistoryConfessionHistoryOne;
 
   TRes call({
+    UuidValue? id,
     Mutation_updatePerson_insertHistoryConfessionHistoryOne_person? person,
     String? $__typename,
   });
@@ -4461,10 +4489,12 @@ class _CopyWithImpl_Mutation_updatePerson_insertHistoryConfessionHistoryOne<
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? id = _undefined,
     Object? person = _undefined,
     Object? $__typename = _undefined,
   }) => _then(
     Mutation_updatePerson_insertHistoryConfessionHistoryOne(
+      id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
       person: person == _undefined || person == null
           ? _instance.person
           : (person
@@ -4497,6 +4527,7 @@ class _CopyWithStubImpl_Mutation_updatePerson_insertHistoryConfessionHistoryOne<
   TRes _res;
 
   call({
+    UuidValue? id,
     Mutation_updatePerson_insertHistoryConfessionHistoryOne_person? person,
     String? $__typename,
   }) => _res;
@@ -4669,6 +4700,7 @@ class _CopyWithStubImpl_Mutation_updatePerson_insertHistoryConfessionHistoryOne_
 
 class Mutation_updatePerson_insertHistoryKodasHistoryOne {
   Mutation_updatePerson_insertHistoryKodasHistoryOne({
+    required this.id,
     required this.person,
     this.$__typename = 'HistoryKodasHistory',
   });
@@ -4676,9 +4708,11 @@ class Mutation_updatePerson_insertHistoryKodasHistoryOne {
   factory Mutation_updatePerson_insertHistoryKodasHistoryOne.fromJson(
     Map<String, dynamic> json,
   ) {
+    final l$id = json['id'];
     final l$person = json['person'];
     final l$$__typename = json['__typename'];
     return Mutation_updatePerson_insertHistoryKodasHistoryOne(
+      id: stringToUuid(l$id),
       person:
           Mutation_updatePerson_insertHistoryKodasHistoryOne_person.fromJson(
             (l$person as Map<String, dynamic>),
@@ -4687,12 +4721,16 @@ class Mutation_updatePerson_insertHistoryKodasHistoryOne {
     );
   }
 
+  final UuidValue id;
+
   final Mutation_updatePerson_insertHistoryKodasHistoryOne_person person;
 
   final String $__typename;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = uuidToString(l$id);
     final l$person = person;
     _resultData['person'] = l$person.toJson();
     final l$$__typename = $__typename;
@@ -4702,9 +4740,10 @@ class Mutation_updatePerson_insertHistoryKodasHistoryOne {
 
   @override
   int get hashCode {
+    final l$id = id;
     final l$person = person;
     final l$$__typename = $__typename;
-    return Object.hashAll([l$person, l$$__typename]);
+    return Object.hashAll([l$id, l$person, l$$__typename]);
   }
 
   @override
@@ -4714,6 +4753,11 @@ class Mutation_updatePerson_insertHistoryKodasHistoryOne {
     }
     if (other is! Mutation_updatePerson_insertHistoryKodasHistoryOne ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
       return false;
     }
     final l$person = person;
@@ -4754,6 +4798,7 @@ abstract class CopyWith_Mutation_updatePerson_insertHistoryKodasHistoryOne<
   ) = _CopyWithStubImpl_Mutation_updatePerson_insertHistoryKodasHistoryOne;
 
   TRes call({
+    UuidValue? id,
     Mutation_updatePerson_insertHistoryKodasHistoryOne_person? person,
     String? $__typename,
   });
@@ -4776,10 +4821,12 @@ class _CopyWithImpl_Mutation_updatePerson_insertHistoryKodasHistoryOne<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? id = _undefined,
     Object? person = _undefined,
     Object? $__typename = _undefined,
   }) => _then(
     Mutation_updatePerson_insertHistoryKodasHistoryOne(
+      id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
       person: person == _undefined || person == null
           ? _instance.person
           : (person
@@ -4810,6 +4857,7 @@ class _CopyWithStubImpl_Mutation_updatePerson_insertHistoryKodasHistoryOne<TRes>
   TRes _res;
 
   call({
+    UuidValue? id,
     Mutation_updatePerson_insertHistoryKodasHistoryOne_person? person,
     String? $__typename,
   }) => _res;
@@ -6298,6 +6346,13 @@ const documentNodeMutationupdatePersonSpiritData = DocumentNode(
             selectionSet: SelectionSetNode(
               selections: [
                 FieldNode(
+                  name: NameNode(value: 'id'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
                   name: NameNode(value: 'person'),
                   alias: null,
                   arguments: [],
@@ -6366,6 +6421,13 @@ const documentNodeMutationupdatePersonSpiritData = DocumentNode(
             directives: [],
             selectionSet: SelectionSetNode(
               selections: [
+                FieldNode(
+                  name: NameNode(value: 'id'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
                 FieldNode(
                   name: NameNode(value: 'person'),
                   alias: null,
@@ -6638,6 +6700,7 @@ class _CopyWithStubImpl_Mutation_updatePersonSpiritData__k<TRes>
 
 class Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne {
   Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne({
+    required this.id,
     required this.person,
     this.$__typename = 'HistoryConfessionHistory',
   });
@@ -6645,13 +6708,17 @@ class Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne {
   factory Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne.fromJson(
     Map<String, dynamic> json,
   ) {
+    final l$id = json['id'];
     final l$person = json['person'];
     final l$$__typename = json['__typename'];
     return Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne(
+      id: stringToUuid(l$id),
       person: Fragment_Person.fromJson((l$person as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
+
+  final UuidValue id;
 
   final Fragment_Person person;
 
@@ -6659,6 +6726,8 @@ class Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne {
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = uuidToString(l$id);
     final l$person = person;
     _resultData['person'] = l$person.toJson();
     final l$$__typename = $__typename;
@@ -6668,9 +6737,10 @@ class Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne {
 
   @override
   int get hashCode {
+    final l$id = id;
     final l$person = person;
     final l$$__typename = $__typename;
-    return Object.hashAll([l$person, l$$__typename]);
+    return Object.hashAll([l$id, l$person, l$$__typename]);
   }
 
   @override
@@ -6681,6 +6751,11 @@ class Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne {
     if (other
             is! Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
       return false;
     }
     final l$person = person;
@@ -6724,7 +6799,7 @@ abstract class CopyWith_Mutation_updatePersonSpiritData_insertHistoryConfessionH
     TRes res,
   ) = _CopyWithStubImpl_Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne;
 
-  TRes call({Fragment_Person? person, String? $__typename});
+  TRes call({UuidValue? id, Fragment_Person? person, String? $__typename});
   CopyWith_Fragment_Person<TRes> get person;
 }
 
@@ -6750,17 +6825,21 @@ class _CopyWithImpl_Mutation_updatePersonSpiritData_insertHistoryConfessionHisto
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? person = _undefined, Object? $__typename = _undefined}) =>
-      _then(
-        Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne(
-          person: person == _undefined || person == null
-              ? _instance.person
-              : (person as Fragment_Person),
-          $__typename: $__typename == _undefined || $__typename == null
-              ? _instance.$__typename
-              : ($__typename as String),
-        ),
-      );
+  TRes call({
+    Object? id = _undefined,
+    Object? person = _undefined,
+    Object? $__typename = _undefined,
+  }) => _then(
+    Mutation_updatePersonSpiritData_insertHistoryConfessionHistoryOne(
+      id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
+      person: person == _undefined || person == null
+          ? _instance.person
+          : (person as Fragment_Person),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   CopyWith_Fragment_Person<TRes> get person {
     final local$person = _instance.person;
@@ -6781,7 +6860,7 @@ class _CopyWithStubImpl_Mutation_updatePersonSpiritData_insertHistoryConfessionH
 
   TRes _res;
 
-  call({Fragment_Person? person, String? $__typename}) => _res;
+  call({UuidValue? id, Fragment_Person? person, String? $__typename}) => _res;
 
   CopyWith_Fragment_Person<TRes> get person =>
       CopyWith_Fragment_Person.stub(_res);
@@ -6789,6 +6868,7 @@ class _CopyWithStubImpl_Mutation_updatePersonSpiritData_insertHistoryConfessionH
 
 class Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne {
   Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne({
+    required this.id,
     required this.person,
     this.$__typename = 'HistoryKodasHistory',
   });
@@ -6796,13 +6876,17 @@ class Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne {
   factory Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne.fromJson(
     Map<String, dynamic> json,
   ) {
+    final l$id = json['id'];
     final l$person = json['person'];
     final l$$__typename = json['__typename'];
     return Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne(
+      id: stringToUuid(l$id),
       person: Fragment_Person.fromJson((l$person as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
+
+  final UuidValue id;
 
   final Fragment_Person person;
 
@@ -6810,6 +6894,8 @@ class Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne {
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = uuidToString(l$id);
     final l$person = person;
     _resultData['person'] = l$person.toJson();
     final l$$__typename = $__typename;
@@ -6819,9 +6905,10 @@ class Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne {
 
   @override
   int get hashCode {
+    final l$id = id;
     final l$person = person;
     final l$$__typename = $__typename;
-    return Object.hashAll([l$person, l$$__typename]);
+    return Object.hashAll([l$id, l$person, l$$__typename]);
   }
 
   @override
@@ -6832,6 +6919,11 @@ class Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne {
     if (other
             is! Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
       return false;
     }
     final l$person = person;
@@ -6873,7 +6965,7 @@ abstract class CopyWith_Mutation_updatePersonSpiritData_insertHistoryKodasHistor
     TRes res,
   ) = _CopyWithStubImpl_Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne;
 
-  TRes call({Fragment_Person? person, String? $__typename});
+  TRes call({UuidValue? id, Fragment_Person? person, String? $__typename});
   CopyWith_Fragment_Person<TRes> get person;
 }
 
@@ -6898,17 +6990,21 @@ class _CopyWithImpl_Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? person = _undefined, Object? $__typename = _undefined}) =>
-      _then(
-        Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne(
-          person: person == _undefined || person == null
-              ? _instance.person
-              : (person as Fragment_Person),
-          $__typename: $__typename == _undefined || $__typename == null
-              ? _instance.$__typename
-              : ($__typename as String),
-        ),
-      );
+  TRes call({
+    Object? id = _undefined,
+    Object? person = _undefined,
+    Object? $__typename = _undefined,
+  }) => _then(
+    Mutation_updatePersonSpiritData_insertHistoryKodasHistoryOne(
+      id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
+      person: person == _undefined || person == null
+          ? _instance.person
+          : (person as Fragment_Person),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 
   CopyWith_Fragment_Person<TRes> get person {
     final local$person = _instance.person;
@@ -6929,7 +7025,7 @@ class _CopyWithStubImpl_Mutation_updatePersonSpiritData_insertHistoryKodasHistor
 
   TRes _res;
 
-  call({Fragment_Person? person, String? $__typename}) => _res;
+  call({UuidValue? id, Fragment_Person? person, String? $__typename}) => _res;
 
   CopyWith_Fragment_Person<TRes> get person =>
       CopyWith_Fragment_Person.stub(_res);

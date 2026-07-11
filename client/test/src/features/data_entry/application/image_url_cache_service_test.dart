@@ -87,7 +87,7 @@ void main() {
 
       expect(unit.getNonExpiredCachedImageUrl(person.imageInfo), isNull);
 
-      await fakeBox.put(
+      fakeBox.put(
         person.imageInfo.cacheKey,
         '${person.imageInfo.lastUpdatedTime!.toIso8601String()}|url',
       );
@@ -157,7 +157,7 @@ void main() {
         testNotExpiredUrl.toString(),
       );
 
-      await box.put(
+      box.put(
         person.imageInfo.cacheKey,
         '${person.imageInfo.lastUpdatedTime!.toIso8601String()}|$testExpiredUrl',
       );

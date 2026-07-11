@@ -14,9 +14,12 @@ class FakeSyncKVStore<T> implements SyncKVStore<T> {
   Future<void> close() async {}
 
   @override
-  Future<void> delete(String key) async {
+  void delete(String key) {
     _map.remove(key);
   }
+
+  @override
+  Future<void> flush() async {}
 
   @override
   T? get(String key) {
@@ -24,7 +27,7 @@ class FakeSyncKVStore<T> implements SyncKVStore<T> {
   }
 
   @override
-  Future<void> put(String key, T? value) async {
+  void put(String key, T? value) {
     if (value == null) {
       _map.remove(key);
     } else {
@@ -33,7 +36,7 @@ class FakeSyncKVStore<T> implements SyncKVStore<T> {
   }
 
   @override
-  Future<void> putAll(Map<String, T?> values) async {
+  void putAll(Map<String, T?> values) {
     for (final entry in values.entries) {
       if (entry.value == null) {
         _map.remove(entry.key);

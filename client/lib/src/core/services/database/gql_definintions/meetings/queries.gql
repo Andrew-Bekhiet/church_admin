@@ -54,6 +54,7 @@ query attendanceAnalysis(
       where: { day: { _gte: $dayFrom, _lte: $dayTo } }
       orderBy: { day: ASC }
     ) {
+      id
       day
     }
   }
@@ -74,6 +75,7 @@ query meetingsAttendanceAnalysis(
       day
       studyYearId
       studyYear {
+        order
         name
       }
       gender

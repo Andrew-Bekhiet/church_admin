@@ -38,18 +38,18 @@ class NotificationsSettingsStorage {
       _box.get(confessionTimeKey) ?? _defaultNotificationSetting;
 
   Future<void> setBirthDayTime(NotificationSetting setting) async {
-    await _box.put(birthDayTimeKey, setting);
+    _box.put(birthDayTimeKey, setting);
   }
 
   Future<void> setKodasTime(NotificationSetting setting) async {
-    await _box.put(kodasTimeKey, setting);
+    _box.put(kodasTimeKey, setting);
   }
 
   Future<void> setAttendanceTime(NotificationSetting setting) async {
-    await _box.put(attendanceTimeKey, setting);
+    _box.put(attendanceTimeKey, setting);
   }
 
   Future<void> setConfessionTime(NotificationSetting setting) async {
-    await _box.put(confessionTimeKey, setting);
+    _box.put(confessionTimeKey, setting);
   }
 }

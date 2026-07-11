@@ -863,21 +863,26 @@ const documentNodeFragmentEditHistory = DocumentNode(
 
 class Fragment_AttendanceHistory {
   Fragment_AttendanceHistory({
+    required this.id,
     required this.time,
     required this.user,
     this.$__typename = 'HistoryAttendanceHistory',
   });
 
   factory Fragment_AttendanceHistory.fromJson(Map<String, dynamic> json) {
+    final l$id = json['id'];
     final l$time = json['time'];
     final l$user = json['user'];
     final l$$__typename = json['__typename'];
     return Fragment_AttendanceHistory(
+      id: stringToUuid(l$id),
       time: tstzFromString(l$time),
       user: Fragment_User.fromJson((l$user as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
+
+  final UuidValue id;
 
   final DateTime time;
 
@@ -887,6 +892,8 @@ class Fragment_AttendanceHistory {
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = uuidToString(l$id);
     final l$time = time;
     _resultData['time'] = tstzToString(l$time);
     final l$user = user;
@@ -898,10 +905,11 @@ class Fragment_AttendanceHistory {
 
   @override
   int get hashCode {
+    final l$id = id;
     final l$time = time;
     final l$user = user;
     final l$$__typename = $__typename;
-    return Object.hashAll([l$time, l$user, l$$__typename]);
+    return Object.hashAll([l$id, l$time, l$user, l$$__typename]);
   }
 
   @override
@@ -911,6 +919,11 @@ class Fragment_AttendanceHistory {
     }
     if (other is! Fragment_AttendanceHistory ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
       return false;
     }
     final l$time = time;
@@ -947,7 +960,12 @@ abstract class CopyWith_Fragment_AttendanceHistory<TRes> {
   factory CopyWith_Fragment_AttendanceHistory.stub(TRes res) =
       _CopyWithStubImpl_Fragment_AttendanceHistory;
 
-  TRes call({DateTime? time, Fragment_User? user, String? $__typename});
+  TRes call({
+    UuidValue? id,
+    DateTime? time,
+    Fragment_User? user,
+    String? $__typename,
+  });
   CopyWith_Fragment_User<TRes> get user;
 }
 
@@ -962,11 +980,13 @@ class _CopyWithImpl_Fragment_AttendanceHistory<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? id = _undefined,
     Object? time = _undefined,
     Object? user = _undefined,
     Object? $__typename = _undefined,
   }) => _then(
     Fragment_AttendanceHistory(
+      id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
       time: time == _undefined || time == null
           ? _instance.time
           : (time as DateTime),
@@ -991,7 +1011,12 @@ class _CopyWithStubImpl_Fragment_AttendanceHistory<TRes>
 
   TRes _res;
 
-  call({DateTime? time, Fragment_User? user, String? $__typename}) => _res;
+  call({
+    UuidValue? id,
+    DateTime? time,
+    Fragment_User? user,
+    String? $__typename,
+  }) => _res;
 
   CopyWith_Fragment_User<TRes> get user => CopyWith_Fragment_User.stub(_res);
 }
@@ -1007,6 +1032,13 @@ const fragmentDefinitionAttendanceHistory = FragmentDefinitionNode(
   directives: [],
   selectionSet: SelectionSetNode(
     selections: [
+      FieldNode(
+        name: NameNode(value: 'id'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
       FieldNode(
         name: NameNode(value: 'datetime'),
         alias: NameNode(value: 'time'),
@@ -1439,21 +1471,26 @@ const documentNodeFragmentVisitHistory = DocumentNode(
 
 class Fragment_KodasHistory {
   Fragment_KodasHistory({
+    required this.id,
     this.time,
     required this.user,
     this.$__typename = 'HistoryKodasHistory',
   });
 
   factory Fragment_KodasHistory.fromJson(Map<String, dynamic> json) {
+    final l$id = json['id'];
     final l$time = json['time'];
     final l$user = json['user'];
     final l$$__typename = json['__typename'];
     return Fragment_KodasHistory(
+      id: stringToUuid(l$id),
       time: l$time == null ? null : dateFromString(l$time),
       user: Fragment_User.fromJson((l$user as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
+
+  final UuidValue id;
 
   final DateTime? time;
 
@@ -1463,6 +1500,8 @@ class Fragment_KodasHistory {
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = uuidToString(l$id);
     final l$time = time;
     _resultData['time'] = l$time == null ? null : dateToString(l$time);
     final l$user = user;
@@ -1474,10 +1513,11 @@ class Fragment_KodasHistory {
 
   @override
   int get hashCode {
+    final l$id = id;
     final l$time = time;
     final l$user = user;
     final l$$__typename = $__typename;
-    return Object.hashAll([l$time, l$user, l$$__typename]);
+    return Object.hashAll([l$id, l$time, l$user, l$$__typename]);
   }
 
   @override
@@ -1486,6 +1526,11 @@ class Fragment_KodasHistory {
       return true;
     }
     if (other is! Fragment_KodasHistory || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
       return false;
     }
     final l$time = time;
@@ -1521,7 +1566,12 @@ abstract class CopyWith_Fragment_KodasHistory<TRes> {
   factory CopyWith_Fragment_KodasHistory.stub(TRes res) =
       _CopyWithStubImpl_Fragment_KodasHistory;
 
-  TRes call({DateTime? time, Fragment_User? user, String? $__typename});
+  TRes call({
+    UuidValue? id,
+    DateTime? time,
+    Fragment_User? user,
+    String? $__typename,
+  });
   CopyWith_Fragment_User<TRes> get user;
 }
 
@@ -1536,11 +1586,13 @@ class _CopyWithImpl_Fragment_KodasHistory<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? id = _undefined,
     Object? time = _undefined,
     Object? user = _undefined,
     Object? $__typename = _undefined,
   }) => _then(
     Fragment_KodasHistory(
+      id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
       time: time == _undefined ? _instance.time : (time as DateTime?),
       user: user == _undefined || user == null
           ? _instance.user
@@ -1563,7 +1615,12 @@ class _CopyWithStubImpl_Fragment_KodasHistory<TRes>
 
   TRes _res;
 
-  call({DateTime? time, Fragment_User? user, String? $__typename}) => _res;
+  call({
+    UuidValue? id,
+    DateTime? time,
+    Fragment_User? user,
+    String? $__typename,
+  }) => _res;
 
   CopyWith_Fragment_User<TRes> get user => CopyWith_Fragment_User.stub(_res);
 }
@@ -1579,6 +1636,13 @@ const fragmentDefinitionKodasHistory = FragmentDefinitionNode(
   directives: [],
   selectionSet: SelectionSetNode(
     selections: [
+      FieldNode(
+        name: NameNode(value: 'id'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
       FieldNode(
         name: NameNode(value: 'time'),
         alias: null,
@@ -1627,21 +1691,26 @@ const documentNodeFragmentKodasHistory = DocumentNode(
 
 class Fragment_ConfessionHistory {
   Fragment_ConfessionHistory({
+    required this.id,
     this.time,
     required this.user,
     this.$__typename = 'HistoryConfessionHistory',
   });
 
   factory Fragment_ConfessionHistory.fromJson(Map<String, dynamic> json) {
+    final l$id = json['id'];
     final l$time = json['time'];
     final l$user = json['user'];
     final l$$__typename = json['__typename'];
     return Fragment_ConfessionHistory(
+      id: stringToUuid(l$id),
       time: l$time == null ? null : dateFromString(l$time),
       user: Fragment_User.fromJson((l$user as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
+
+  final UuidValue id;
 
   final DateTime? time;
 
@@ -1651,6 +1720,8 @@ class Fragment_ConfessionHistory {
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = uuidToString(l$id);
     final l$time = time;
     _resultData['time'] = l$time == null ? null : dateToString(l$time);
     final l$user = user;
@@ -1662,10 +1733,11 @@ class Fragment_ConfessionHistory {
 
   @override
   int get hashCode {
+    final l$id = id;
     final l$time = time;
     final l$user = user;
     final l$$__typename = $__typename;
-    return Object.hashAll([l$time, l$user, l$$__typename]);
+    return Object.hashAll([l$id, l$time, l$user, l$$__typename]);
   }
 
   @override
@@ -1675,6 +1747,11 @@ class Fragment_ConfessionHistory {
     }
     if (other is! Fragment_ConfessionHistory ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
       return false;
     }
     final l$time = time;
@@ -1711,7 +1788,12 @@ abstract class CopyWith_Fragment_ConfessionHistory<TRes> {
   factory CopyWith_Fragment_ConfessionHistory.stub(TRes res) =
       _CopyWithStubImpl_Fragment_ConfessionHistory;
 
-  TRes call({DateTime? time, Fragment_User? user, String? $__typename});
+  TRes call({
+    UuidValue? id,
+    DateTime? time,
+    Fragment_User? user,
+    String? $__typename,
+  });
   CopyWith_Fragment_User<TRes> get user;
 }
 
@@ -1726,11 +1808,13 @@ class _CopyWithImpl_Fragment_ConfessionHistory<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? id = _undefined,
     Object? time = _undefined,
     Object? user = _undefined,
     Object? $__typename = _undefined,
   }) => _then(
     Fragment_ConfessionHistory(
+      id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
       time: time == _undefined ? _instance.time : (time as DateTime?),
       user: user == _undefined || user == null
           ? _instance.user
@@ -1753,7 +1837,12 @@ class _CopyWithStubImpl_Fragment_ConfessionHistory<TRes>
 
   TRes _res;
 
-  call({DateTime? time, Fragment_User? user, String? $__typename}) => _res;
+  call({
+    UuidValue? id,
+    DateTime? time,
+    Fragment_User? user,
+    String? $__typename,
+  }) => _res;
 
   CopyWith_Fragment_User<TRes> get user => CopyWith_Fragment_User.stub(_res);
 }
@@ -1769,6 +1858,13 @@ const fragmentDefinitionConfessionHistory = FragmentDefinitionNode(
   directives: [],
   selectionSet: SelectionSetNode(
     selections: [
+      FieldNode(
+        name: NameNode(value: 'id'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
       FieldNode(
         name: NameNode(value: 'time'),
         alias: null,

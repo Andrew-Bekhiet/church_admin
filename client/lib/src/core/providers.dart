@@ -107,7 +107,10 @@ final graphQLClientProvider = Provider<DBGraphQLClient>(
           url: ref.watch(secretsServiceProvider).hasuraServer,
         ),
       ),
-      cache: GraphQLCache(store: ref.watch(graphQLCacheStore)),
+      cache: GraphQLCache(
+        store: ref.watch(graphQLCacheStore),
+        typePolicies: GqlTypePolicies.policies,
+      ),
       connectivityStream: ref
           .watch(connectivityServiceProvider)
           .connectivityStream,
@@ -116,7 +119,9 @@ final graphQLClientProvider = Provider<DBGraphQLClient>(
 );
 
 final graphQLCacheStore = Provider<GqlKvStore>((ref) {
-  final store = GqlKvStore(SyncKVStore.fromLoaded<Json>('GQLCache'));
+  final store = GqlKvStore(
+    SyncKVStore.fromLoaded<Json>(GqlKvStore.storeName),
+  );
 
   ref.onDispose(store.close);
 
