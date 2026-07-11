@@ -11,7 +11,7 @@ import 'gql_key_field_checker.dart';
 /// occurrence into its parent (a profiled jank source).
 void main() {
   const rules = KeyFieldRules(
-    exemptions: [(operation: 'attendanceAnalysis', field: 'attendanceHistory')],
+    exemptions: [],
     transientSuffixes: [
       'Aggregate',
       'AggregateFields',

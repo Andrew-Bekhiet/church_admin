@@ -1693,6 +1693,13 @@ const documentNodeQueryattendanceAnalysis = DocumentNode(
                   selectionSet: SelectionSetNode(
                     selections: [
                       FieldNode(
+                        name: NameNode(value: 'id'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                      FieldNode(
                         name: NameNode(value: 'day'),
                         alias: null,
                         arguments: [],
@@ -2287,6 +2294,7 @@ class _CopyWithStubImpl_Query_attendanceAnalysis_historyMeetingRoster<TRes>
 
 class Query_attendanceAnalysis_historyMeetingRoster_attendanceHistory {
   Query_attendanceAnalysis_historyMeetingRoster_attendanceHistory({
+    required this.id,
     this.day,
     this.$__typename = 'HistoryAttendanceHistory',
   });
@@ -2294,13 +2302,17 @@ class Query_attendanceAnalysis_historyMeetingRoster_attendanceHistory {
   factory Query_attendanceAnalysis_historyMeetingRoster_attendanceHistory.fromJson(
     Map<String, dynamic> json,
   ) {
+    final l$id = json['id'];
     final l$day = json['day'];
     final l$$__typename = json['__typename'];
     return Query_attendanceAnalysis_historyMeetingRoster_attendanceHistory(
+      id: stringToUuid(l$id),
       day: l$day == null ? null : dateFromString(l$day),
       $__typename: (l$$__typename as String),
     );
   }
+
+  final UuidValue id;
 
   final DateTime? day;
 
@@ -2308,6 +2320,8 @@ class Query_attendanceAnalysis_historyMeetingRoster_attendanceHistory {
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = uuidToString(l$id);
     final l$day = day;
     _resultData['day'] = l$day == null ? null : dateToString(l$day);
     final l$$__typename = $__typename;
@@ -2317,9 +2331,10 @@ class Query_attendanceAnalysis_historyMeetingRoster_attendanceHistory {
 
   @override
   int get hashCode {
+    final l$id = id;
     final l$day = day;
     final l$$__typename = $__typename;
-    return Object.hashAll([l$day, l$$__typename]);
+    return Object.hashAll([l$id, l$day, l$$__typename]);
   }
 
   @override
@@ -2330,6 +2345,11 @@ class Query_attendanceAnalysis_historyMeetingRoster_attendanceHistory {
     if (other
             is! Query_attendanceAnalysis_historyMeetingRoster_attendanceHistory ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
       return false;
     }
     final l$day = day;
@@ -2373,7 +2393,7 @@ abstract class CopyWith_Query_attendanceAnalysis_historyMeetingRoster_attendance
     TRes res,
   ) = _CopyWithStubImpl_Query_attendanceAnalysis_historyMeetingRoster_attendanceHistory;
 
-  TRes call({DateTime? day, String? $__typename});
+  TRes call({UuidValue? id, DateTime? day, String? $__typename});
 }
 
 class _CopyWithImpl_Query_attendanceAnalysis_historyMeetingRoster_attendanceHistory<
@@ -2398,15 +2418,19 @@ class _CopyWithImpl_Query_attendanceAnalysis_historyMeetingRoster_attendanceHist
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? day = _undefined, Object? $__typename = _undefined}) =>
-      _then(
-        Query_attendanceAnalysis_historyMeetingRoster_attendanceHistory(
-          day: day == _undefined ? _instance.day : (day as DateTime?),
-          $__typename: $__typename == _undefined || $__typename == null
-              ? _instance.$__typename
-              : ($__typename as String),
-        ),
-      );
+  TRes call({
+    Object? id = _undefined,
+    Object? day = _undefined,
+    Object? $__typename = _undefined,
+  }) => _then(
+    Query_attendanceAnalysis_historyMeetingRoster_attendanceHistory(
+      id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
+      day: day == _undefined ? _instance.day : (day as DateTime?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 }
 
 class _CopyWithStubImpl_Query_attendanceAnalysis_historyMeetingRoster_attendanceHistory<
@@ -2422,7 +2446,7 @@ class _CopyWithStubImpl_Query_attendanceAnalysis_historyMeetingRoster_attendance
 
   TRes _res;
 
-  call({DateTime? day, String? $__typename}) => _res;
+  call({UuidValue? id, DateTime? day, String? $__typename}) => _res;
 }
 
 class Variables_Query_meetingsAttendanceAnalysis {
