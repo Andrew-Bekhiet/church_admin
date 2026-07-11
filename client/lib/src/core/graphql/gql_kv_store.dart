@@ -10,7 +10,7 @@ class GqlKvStore extends gql.Store {
 
   static final List<String> legacyStoreNames = [
     'GQLCache',
-    for (var version = 2; version < _currentVersion; version++)
+    for (int version = 2; version < _currentVersion; version++)
       'GQLCacheV$version',
   ];
 
