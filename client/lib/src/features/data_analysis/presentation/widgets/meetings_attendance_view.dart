@@ -15,6 +15,7 @@ class MeetingsAttendanceView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
+    final textTheme = themeData.textTheme;
 
     if (analysis.heldCount == 0) {
       return Padding(
@@ -22,7 +23,7 @@ class MeetingsAttendanceView extends StatelessWidget {
         child: Center(
           child: Text(
             'لا يوجد سجل حضور خلال هذه الفترة',
-            style: themeData.textTheme.titleMedium,
+            style: textTheme.titleMedium,
           ),
         ),
       );
@@ -35,14 +36,32 @@ class MeetingsAttendanceView extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       spacing: 8,
       children: [
-        MeetingKpisSummaryTile(
-          heldCount: analysis.heldCount,
-          averageAttendance: analysis.averageAttendance,
-          peak: rolledDays.peakDayByCount,
-          granularity: granularity,
-          latestDay: analysis.latestDay?.day,
-        ),
-        MeetingAttendanceTrendChart(days: rolledDays, color: analysis.color),
+        ...switch (analysis) {
+          final SingleDayMeetingsAttendanceAnalysis single => [
+            SingleDayKpisSummaryTile(analysis: single),
+            if (single.hasDemographicBreakdown)
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: ClassAttendancePieChart(
+                  analysis: single,
+                  color: single.color,
+                ),
+              ),
+          ],
+          _ => [
+            MeetingKpisSummaryTile(
+              heldCount: analysis.heldCount,
+              averageAttendance: analysis.averageAttendance,
+              peak: rolledDays.peakDayByCount,
+              granularity: granularity,
+              latestDay: analysis.latestDay?.day,
+            ),
+            MeetingAttendanceTrendChart(
+              days: rolledDays,
+              color: analysis.color,
+            ),
+          ],
+        },
         if (analysis.hasMeetingBreakdown) ...[
           Divider(
             height: 32,
@@ -53,34 +72,31 @@ class MeetingsAttendanceView extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Text(
               'تفاصيل حسب الاجتماعات',
-              style: themeData.textTheme.titleLarge,
+              style: textTheme.titleLarge,
             ),
           ),
-          ...analysis.meetings.map(
-            (summary) {
-              final rolledDays = summary.days.rollupBy(granularity);
-
-              return ExpansionTile(
-                initiallyExpanded: true,
-                leading: MeetingAvatar(meeting: summary.meeting, radius: 18),
-                title: Text(summary.meeting.name),
-                childrenPadding: const EdgeInsets.only(bottom: 8),
-                children: [
-                  MeetingKpisSummaryTile(
-                    heldCount: summary.heldCount,
-                    averageAttendance: summary.averageAttendance,
-                    peak: rolledDays.peakDayByCount,
-                    granularity: granularity,
-                    latestDay: summary.latestDay?.day,
+          ...switch (analysis) {
+            SingleDayMeetingsAttendanceAnalysis() => [
+              for (final summary in analysis.meetings)
+                ListTile(
+                  leading: MeetingAvatar(meeting: summary.meeting, radius: 18),
+                  title: Text(summary.meeting.name),
+                  trailing: Text(
+                    summary.totalAttendances.toString(),
+                    style: textTheme.titleMedium?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                  MeetingAttendanceTrendChart(
-                    days: rolledDays,
-                    color: summary.meeting.color,
-                  ),
-                ],
-              );
-            },
-          ),
+                ),
+            ],
+            _ => [
+              for (final summary in analysis.meetings)
+                MeetingBreakdownTile(
+                  summary: summary,
+                  granularity: granularity,
+                ),
+            ],
+          },
         ],
       ],
     );

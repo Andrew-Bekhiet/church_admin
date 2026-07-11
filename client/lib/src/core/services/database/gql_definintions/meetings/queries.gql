@@ -86,6 +86,22 @@ query meetingsAttendanceAnalysis(
   }
 }
 
+query meetingsRosterDemographics(
+  $where: [HistoryMeetingsBoolExp!] = []
+  $rosterWhere: [HistoryMeetingRosterBoolExp!] = []
+) {
+  historyMeetingRoster(
+    where: { meeting: { _and: $where }, _and: $rosterWhere }
+    orderBy: [{ personId: ASC }]
+    distinctOn: [personId]
+  ) {
+    personId
+    studyYearId
+    studyYearName
+    gender
+  }
+}
+
 query personMeetings(
   $personId: uuid!
   $where: [HistoryMeetingRosterBoolExp!] = []

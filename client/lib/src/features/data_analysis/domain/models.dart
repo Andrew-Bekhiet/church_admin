@@ -1,4 +1,5 @@
 export 'models/attendance_granularity.dart';
+export 'models/class_attendance_rate.dart';
 export 'models/date_time_range_preset.dart';
 export 'models/demographic_breakdown_entry.dart';
 export 'models/meeting_attendance_summary.dart';
@@ -6,3 +7,5 @@ export 'models/meetings_attendance_analysis.dart';
 export 'models/person_analysis_options.dart';
 export 'models/person_analysis_section.dart';
 export 'models/person_meeting_attendance_analysis.dart';
+export 'models/roster_demographic_entry.dart';
+export 'models/single_day_meetings_attendance_analysis.dart';

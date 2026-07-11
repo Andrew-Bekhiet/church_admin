@@ -296,6 +296,22 @@ class MeetingsDAO extends DAOBase<Meeting>
           },
         ),
       ],
+      rosterWhere: [
+        Input_HistoryMeetingRosterBoolExp(
+          studyYearId: switch (serviceStudyYear) {
+            final serviceStudyYear? => Input_IntComparisonExp(
+              $_eq: serviceStudyYear,
+            ),
+            null => null,
+          },
+          gender: switch (serviceGender) {
+            final serviceGender? => Input_BooleanComparisonExp(
+              $_eq: serviceGender,
+            ),
+            null => null,
+          },
+        ),
+      ],
     );
   }
 
@@ -305,6 +321,7 @@ class MeetingsDAO extends DAOBase<Meeting>
     required List<Input_HistoryMeetingsBoolExp> where,
     required DateTimeRange range,
     List<Input_HistoryMeetingDaysBoolExp> demographicsWhere = const [],
+    List<Input_HistoryMeetingRosterBoolExp> rosterWhere = const [],
   }) async {
     final result = await graphQLClient.queryAndReturnParsed(
       QueryOptions(
@@ -320,13 +337,53 @@ class MeetingsDAO extends DAOBase<Meeting>
       ),
     );
 
-    return MeetingsAttendanceAnalysis(
+    final meetings = result.historyMeetings
+        .map(MeetingAttendanceSummary.fromQueryResult)
+        .toList();
+
+    if (!range.isSingleDay) {
+      return MeetingsAttendanceAnalysis(
+        title: title,
+        color: color,
+        meetings: meetings,
+      );
+    }
+
+    return SingleDayMeetingsAttendanceAnalysis(
       title: title,
       color: color,
-      meetings: result.historyMeetings
-          .map(MeetingAttendanceSummary.fromQueryResult)
-          .toList(),
+      meetings: meetings,
+      rosterDemographics: await _getRosterDemographics(
+        where: where,
+        rosterWhere: rosterWhere,
+      ),
     );
+  }
+
+  Future<List<RosterDemographicEntry>> _getRosterDemographics({
+    required List<Input_HistoryMeetingsBoolExp> where,
+    required List<Input_HistoryMeetingRosterBoolExp> rosterWhere,
+  }) async {
+    final result = await graphQLClient.queryAndReturnParsed(
+      QueryOptions(
+        document: documentNodeQuerymeetingsRosterDemographics,
+        operationName: 'meetingsRosterDemographics',
+        variables: Variables_Query_meetingsRosterDemographics(
+          where: where,
+          rosterWhere: rosterWhere,
+        ).toJson(),
+        parserFn: Query_meetingsRosterDemographics.fromJson,
+      ),
+    );
+
+    return [
+      for (final row in result.historyMeetingRoster)
+        (
+          studyYearId: row.studyYearId,
+          studyYearName: row.studyYearName,
+          gender: row.gender,
+        ),
+    ];
   }
 
   Future<List<PersonMeetingAttendanceAnalysis>> getAttendanceAnalyses({

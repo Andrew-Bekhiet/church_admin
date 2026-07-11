@@ -59,41 +59,42 @@ class _MeetingsAnalysisScreenState extends State<MeetingsAnalysisScreen> {
               preset: _rangePreset,
               onChanged: _applyPreset,
             ),
-            Padding(
-              padding: const EdgeInsetsDirectional.only(
-                start: 16,
-                end: 24,
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                spacing: 8,
-                children: [
-                  Text(
-                    'تقسيم البيانات:',
-                    style: textTheme.titleMedium,
-                  ),
-                  Expanded(
-                    child: SingleChildScrollView(
-                      reverse: true,
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        spacing: 8,
-                        children: [
-                          for (final g in AttendanceGranularity.values)
-                            ChoiceChip(
-                              shape: const StadiumBorder(),
-                              label: Text(g.label),
-                              selected: _granularity == g,
-                              onSelected: (_) =>
-                                  setState(() => _granularity = g),
-                            ),
-                        ],
+            if (!_range.isSingleDay)
+              Padding(
+                padding: const EdgeInsetsDirectional.only(
+                  start: 16,
+                  end: 24,
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  spacing: 8,
+                  children: [
+                    Text(
+                      'تقسيم البيانات:',
+                      style: textTheme.titleMedium,
+                    ),
+                    Expanded(
+                      child: SingleChildScrollView(
+                        reverse: true,
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          spacing: 8,
+                          children: [
+                            for (final g in AttendanceGranularity.values)
+                              ChoiceChip(
+                                shape: const StadiumBorder(),
+                                label: Text(g.label),
+                                selected: _granularity == g,
+                                onSelected: (_) =>
+                                    setState(() => _granularity = g),
+                              ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
             const Divider(height: 16),
             FutureBuilder<MeetingsAttendanceAnalysis>(
               future: _dataFuture,
