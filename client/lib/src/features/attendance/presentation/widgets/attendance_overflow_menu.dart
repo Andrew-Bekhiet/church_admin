@@ -27,24 +27,10 @@ class AttendanceOverflowMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PopupMenuButton<void>(
+      borderRadius: BorderRadius.circular(12),
       icon: const Icon(Symbols.more_vert),
       itemBuilder: (context) => [
-        PopupMenuItem<void>(
-          onTap: () => onSortChanged(sorting.toggleAttendanceTimeSorting()),
-          child: ListTile(
-            contentPadding: EdgeInsets.zero,
-            leading: const Icon(Symbols.access_time),
-            title: const Text('ترتيب حسب وقت الحضور'),
-            trailing: Visibility(
-              visible: sorting.isSortingByTime,
-              maintainAnimation: true,
-              maintainSize: true,
-              maintainState: true,
-              child: const Icon(Symbols.check),
-            ),
-          ),
-        ),
-        PopupMenuItem<void>(
+        PopupMenuItem(
           onTap: () => onGroupingChanged(grouping.toggled),
           child: ListTile(
             contentPadding: EdgeInsets.zero,
@@ -59,24 +45,62 @@ class AttendanceOverflowMenu extends StatelessWidget {
             ),
           ),
         ),
-        PopupMenuItem<void>(
-          onTap: openAnalysis,
-          child: const ListTile(
-            contentPadding: EdgeInsets.zero,
-            leading: Icon(Symbols.query_stats),
-            title: Text('تحليل الحضور'),
-          ),
-        ),
         const PopupMenuDivider(),
-        PopupMenuItem<void>(
+        PopupMenuItem(
+          height: kMinInteractiveDimension / 2,
           enabled: false,
           child: Text(
-            'نافذة التحليل',
-            style: Theme.of(context).textTheme.labelSmall,
+            'ترتيب حسب',
+            style: TextTheme.of(context).labelMedium,
+          ),
+        ),
+        _SortingMenuItem<AttendanceSortingByName>(
+          title: 'الاسم',
+          icon: Symbols.person,
+          currentSorting: sorting,
+          onChanged: onSortChanged,
+          value: AttendanceSorting.byName(),
+        ),
+        _SortingMenuItem<AttendanceSortingByTime>(
+          title: 'وقت الحضور',
+          icon: Symbols.access_time,
+          currentSorting: sorting,
+          onChanged: onSortChanged,
+          value: AttendanceSorting.byAttendanceTime(),
+        ),
+        _SortingMenuItem<AttendanceSortingByStreak>(
+          title: switch (sorting) {
+            AttendanceSortingByStreak(direction: SortingDirection.descending) =>
+              'الحضور المستمر',
+            _ => 'الغياب المستمر',
+          },
+          icon: switch (sorting) {
+            AttendanceSortingByStreak(direction: SortingDirection.descending) =>
+              Symbols.local_fire_department,
+            _ => Symbols.error,
+          },
+          currentSorting: sorting,
+          onChanged: onSortChanged,
+          value: AttendanceSorting.byAttendanceStreak(),
+        ),
+        _SortingMenuItem<AttendanceSortingByLastAttendanceTime>(
+          title: 'آخر وقت حضور',
+          icon: Symbols.history,
+          currentSorting: sorting,
+          onChanged: onSortChanged,
+          value: AttendanceSorting.byLastAttendanceTime(),
+        ),
+        const PopupMenuDivider(),
+        PopupMenuItem(
+          height: kMinInteractiveDimension / 2,
+          enabled: false,
+          child: Text(
+            'فترة المواظبة وتاريخ آخر الحضور',
+            style: TextTheme.of(context).labelMedium,
           ),
         ),
         for (final days in _streakWindowOptions)
-          PopupMenuItem<void>(
+          PopupMenuItem(
             onTap: () => onStreakWindowChanged(days),
             child: ListTile(
               contentPadding: EdgeInsets.zero,
@@ -91,7 +115,55 @@ class AttendanceOverflowMenu extends StatelessWidget {
               ),
             ),
           ),
+        const PopupMenuDivider(),
+        PopupMenuItem(
+          onTap: openAnalysis,
+          child: const ListTile(
+            contentPadding: EdgeInsets.zero,
+            leading: Icon(Symbols.query_stats),
+            title: Text('احصائيات الحضور'),
+          ),
+        ),
       ],
     );
   }
+}
+
+class _SortingMenuItem<T extends AttendanceSorting>
+    extends PopupMenuItem<AttendanceSorting> {
+  final String title;
+  final IconData icon;
+  final ValueChanged<AttendanceSorting> onChanged;
+  final AttendanceSorting currentSorting;
+
+  _SortingMenuItem({
+    required this.title,
+    required this.icon,
+    required this.currentSorting,
+    required this.onChanged,
+    required AttendanceSorting super.value,
+    super.key,
+  }) : super(
+         onTap: () => currentSorting is T
+             ? onChanged(currentSorting.withReversedDirection())
+             : onChanged(value),
+         child: ListTile(
+           contentPadding: EdgeInsets.zero,
+           leading: Icon(icon),
+           title: Text(title),
+           trailing: Visibility(
+             visible: currentSorting is T,
+             maintainAnimation: true,
+             maintainSize: true,
+             maintainState: true,
+             child: AnimatedRotation(
+               duration: Durations.medium1,
+               turns: currentSorting.direction == SortingDirection.ascending
+                   ? 0
+                   : 0.5,
+               child: const Icon(Symbols.arrow_upward_rounded),
+             ),
+           ),
+         ),
+       );
 }

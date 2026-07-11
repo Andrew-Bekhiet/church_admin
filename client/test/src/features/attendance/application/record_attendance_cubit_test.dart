@@ -237,7 +237,7 @@ void main() {
           ).called(1);
 
           verify(
-            () => f.dao.getRosterTrackRecords(
+            () => f.dao.getAttendanceAnalyses(
               meeting: any(named: 'meeting'),
               range: any(named: 'range'),
               asServant: any(named: 'asServant'),
@@ -380,7 +380,7 @@ final class _Fixture {
     ).thenAnswer((_) async => unmarkAttendanceRecord!);
 
     when(
-      () => dao.getRosterTrackRecords(
+      () => dao.getAttendanceAnalyses(
         meeting: any(named: 'meeting'),
         range: any(named: 'range'),
         asServant: any(named: 'asServant'),

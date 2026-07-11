@@ -2,6 +2,7 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 
 class AttendanceFlatRoster extends StatelessWidget {
+  final bool removeEndPadding;
   final List<MeetingRosterEntry> entries;
   final Map<String, PersonMeetingAttendanceAnalysis> trackRecords;
   final ValueChanged<MeetingRosterEntry> onToggle;
@@ -9,6 +10,7 @@ class AttendanceFlatRoster extends StatelessWidget {
   const AttendanceFlatRoster({
     required this.entries,
     required this.onToggle,
+    this.removeEndPadding = false,
     this.trackRecords = const {},
     super.key,
   });
@@ -24,7 +26,7 @@ class AttendanceFlatRoster extends StatelessWidget {
         return AttendancePersonCard(
           entry: entry,
           onToggle: onToggle,
-          removeEndPadding: true,
+          removeEndPadding: removeEndPadding,
         );
       },
     );

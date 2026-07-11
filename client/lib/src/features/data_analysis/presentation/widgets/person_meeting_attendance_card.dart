@@ -95,7 +95,7 @@ class PersonMeetingAttendanceCard extends StatelessWidget {
                     accentColor: accent,
                     emphasized: true,
                   ),
-                  switch ((analysis.currentStreak, analysis.absenceStreak)) {
+                  switch ((analysis.attendanceStreak, analysis.absenceStreak)) {
                     (0, > 0) => AttendanceKpiTile(
                       icon: const Icon(Symbols.event_busy),
                       label: 'غياب متواصل',
@@ -106,7 +106,7 @@ class PersonMeetingAttendanceCard extends StatelessWidget {
                     _ => AttendanceKpiTile(
                       icon: const Icon(Symbols.local_fire_department),
                       label: 'المواظبة الحالية',
-                      value: analysis.currentStreak.toString(),
+                      value: analysis.attendanceStreak.toString(),
                       caption: _rangeLabel(analysis.currentStreakRange),
                     ),
                   },

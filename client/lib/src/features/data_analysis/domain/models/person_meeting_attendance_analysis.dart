@@ -36,14 +36,14 @@ class PersonMeetingAttendanceAnalysis {
     return null;
   }
 
-  int get currentStreak =>
+  int get attendanceStreak =>
       heldDays.reversed.takeWhile(attendedDays.contains).length;
 
   int get absenceStreak =>
       heldDays.reversed.takeWhile((d) => !attendedDays.contains(d)).length;
 
   DateTimeRange? get currentStreakRange {
-    final streak = currentStreak;
+    final streak = attendanceStreak;
     if (streak == 0) return null;
 
     final streakDays = heldDays.sublist(heldDays.length - streak);
@@ -67,16 +67,13 @@ class PersonMeetingAttendanceAnalysis {
   factory PersonMeetingAttendanceAnalysis.fromQueryResult(
     Query_attendanceAnalysis_historyMeetingRoster row,
     Meeting meeting,
+    List<DateTime> heldDays,
   ) {
     return PersonMeetingAttendanceAnalysis(
       personId: row.personId?.uuid ?? '',
       meeting: meeting,
       asServant: row.asServant ?? false,
-      heldDays: (row.meeting?.days ?? const [])
-          .map((d) => d.day)
-          .nonNulls
-          .toSet()
-          .toList(),
+      heldDays: heldDays.toSet().toList(),
       attendedDays: row.attendanceHistory.map((e) => e.day).nonNulls.toSet(),
     );
   }
