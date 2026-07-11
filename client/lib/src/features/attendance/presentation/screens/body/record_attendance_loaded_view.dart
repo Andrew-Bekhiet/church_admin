@@ -151,10 +151,14 @@ class _RecordAttendanceLoadedViewState
                           removeEndPadding: showGutter,
                           entries: state.entries,
                           onToggle: cubit.toggleAttendance,
+                          onChangeAttendanceTime:
+                              cubit.updateEntryAttendanceTime,
                         ),
                         AttendanceGrouping.studyYear => AttendanceGroupedRoster(
                           entries: state.entries,
                           onToggle: cubit.toggleAttendance,
+                          onChangeAttendanceTime:
+                              cubit.updateEntryAttendanceTime,
                         ),
                       },
                     },

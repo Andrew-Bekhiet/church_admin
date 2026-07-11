@@ -13,17 +13,16 @@ class AttendancePersonCard extends StatelessWidget {
 
   final MeetingRosterEntry entry;
   final ValueChanged<MeetingRosterEntry> onToggle;
+  final ValueChanged<TimeOfDay> onChangeAttendanceTime;
   final bool removeEndPadding;
 
   const AttendancePersonCard({
     required this.entry,
     required this.onToggle,
+    required this.onChangeAttendanceTime,
     this.removeEndPadding = false,
     super.key,
   });
-
-  void _openDetails(BuildContext context) =>
-      ViewPersonRoute(id: entry.person.id, $extra: entry.person).push(context);
 
   @override
   Widget build(BuildContext context) {
@@ -50,31 +49,52 @@ class AttendancePersonCard extends StatelessWidget {
         onTap: () => onToggle(entry),
         onLongPress: () => _openDetails(context),
         leading: ImageObjectWidget(entry.person, size: 44),
-        title: Row(
-          children: [
-            Expanded(
-              child: Text(
-                entry.person.name,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-            if (attendanceTime != null)
-              Text(
-                DateFormat.jm('ar').format(attendanceTime),
-              ),
-          ],
+        horizontalTitleGap: 10,
+        title: Text(
+          entry.person.name,
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
         ),
         subtitle: _TrackRecordLine(
           analysis: entry.personAttendanceAnalysis,
           staleWeeks: _staleWeeks,
         ),
-        trailing: AttendancePersonToggle(
-          isPresent: present,
-          onTap: () => onToggle(entry),
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (attendanceTime != null)
+              TextButton(
+                style: TextButton.styleFrom(
+                  padding: EdgeInsets.zero,
+                  visualDensity: VisualDensity.compact,
+                ),
+                onPressed: () => _changeAttendanceTime(context),
+                child: Text(DateFormat.jm('ar').format(attendanceTime)),
+              ),
+            AttendancePersonToggle(
+              isPresent: present,
+              onTap: () => onToggle(entry),
+            ),
+          ],
         ),
       ),
     );
+  }
+
+  void _openDetails(BuildContext context) =>
+      ViewPersonRoute(id: entry.person.id, $extra: entry.person).push(context);
+
+  Future<void> _changeAttendanceTime(BuildContext context) async {
+    final attendanceDateTime = entry.attendance?.datetime;
+    if (attendanceDateTime == null) return;
+
+    final result = await showTimePicker(
+      context: context,
+      initialTime: TimeOfDay.fromDateTime(attendanceDateTime),
+    );
+    if (result == null) return;
+
+    onChangeAttendanceTime(result);
   }
 }
 

@@ -5,7 +5,7 @@ import 'package:church_admin/src/features/attendance/application/attendance_undo
 import 'package:church_admin/src/features/attendance/application/live_attendance.dart';
 import 'package:church_admin/src/features/attendance/domain/attendance_record_rights.dart';
 import 'package:collection/collection.dart';
-import 'package:flutter/material.dart' show DateUtils;
+import 'package:flutter/material.dart' show DateUtils, TimeOfDay;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -156,13 +156,8 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
 
   void retry() => unawaited(_restartSession());
 
-  Future<void> toggleAttendance(MeetingRosterEntry entry) async {
+  Future<void> toggleAttendance(MeetingRosterEntry entry) {
     final personId = entry.person.id;
-    if (_liveAttendance.isInFlight(personId) ||
-        _liveAttendance.isOptimistic(personId, _asServant)) {
-      return;
-    }
-
     final effectiveAttendanceRecord = _liveAttendance.effectiveAttendanceRecord(
       personId: personId,
       asServant: _asServant,
@@ -171,45 +166,81 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
     final newIsPresent = effectiveAttendanceRecord == null;
     final attendanceTime = _selectedDate.replaceTime(DateTime.now());
 
+    return _runOptimisticAttendance(
+      entry: entry,
+      optimisticTime: newIsPresent ? attendanceTime : null,
+      action: () async {
+        if (newIsPresent) {
+          final record = await _dao.markAttendance(
+            meetingId: _meeting.id,
+            personId: personId,
+            asServant: _asServant,
+            datetime: attendanceTime,
+          );
+
+          _presenter.showUndo(
+            personName: entry.person.name,
+            isPresent: true,
+            onUndo: () => _dao.unmarkAttendance(attendanceRecordId: record.id),
+          );
+        } else if (entry.attendance?.id case final attendanceRecordId?) {
+          final record = await _dao.unmarkAttendance(
+            attendanceRecordId: attendanceRecordId,
+          );
+
+          _presenter.showUndo(
+            personName: entry.person.name,
+            isPresent: false,
+            onUndo: () => _dao.markAttendance(
+              meetingId: record.meetingId,
+              personId: record.personId,
+              datetime: record.datetime,
+              asServant: record.asServant,
+            ),
+          );
+        }
+      },
+    );
+  }
+
+  Future<void> updateEntryAttendanceTime(
+    MeetingRosterEntry entry,
+    TimeOfDay time,
+  ) async {
+    final attendanceRecord = entry.attendance;
+    if (attendanceRecord == null) return;
+
+    final newDatetime = _selectedDate.replaceTimeOfDay(time);
+    if (newDatetime == attendanceRecord.datetime) return;
+
+    await _runOptimisticAttendance(
+      entry: entry,
+      optimisticTime: newDatetime,
+      action: () => _dao.updateAttendanceTime(
+        attendanceRecordId: attendanceRecord.id,
+        datetime: newDatetime,
+      ),
+    );
+  }
+
+  Future<void> _runOptimisticAttendance({
+    required MeetingRosterEntry entry,
+    required DateTime? optimisticTime,
+    required Future<void> Function() action,
+  }) async {
+    final personId = entry.person.id;
+    if (_liveAttendance.isInFlight(personId) ||
+        _liveAttendance.isOptimistic(personId, _asServant)) {
+      return;
+    }
+
     _liveAttendance
-      ..markOptimistic(
-        personId,
-        _asServant,
-        newIsPresent ? attendanceTime : null,
-      )
+      ..markOptimistic(personId, _asServant, optimisticTime)
       ..beginInFlight(personId);
     _emitLoaded();
 
     try {
-      if (newIsPresent) {
-        final record = await _dao.markAttendance(
-          meetingId: _meeting.id,
-          personId: personId,
-          asServant: _asServant,
-          datetime: attendanceTime,
-        );
-
-        _presenter.showUndo(
-          personName: entry.person.name,
-          isPresent: true,
-          onUndo: () => _dao.unmarkAttendance(attendanceRecordId: record.id),
-        );
-      } else if (entry.attendance?.id case final attendanceRecordId?) {
-        final record = await _dao.unmarkAttendance(
-          attendanceRecordId: attendanceRecordId,
-        );
-
-        _presenter.showUndo(
-          personName: entry.person.name,
-          isPresent: false,
-          onUndo: () => _dao.markAttendance(
-            meetingId: record.meetingId,
-            personId: record.personId,
-            datetime: record.datetime,
-            asServant: record.asServant,
-          ),
-        );
-      }
+      await action();
     } catch (error, stackTrace) {
       _liveAttendance.rollbackOptimistic(personId, _asServant);
 
