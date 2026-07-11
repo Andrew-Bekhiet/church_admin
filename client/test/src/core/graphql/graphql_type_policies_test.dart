@@ -5,6 +5,7 @@ import 'package:church_admin/src/core/services/database/gql_definintions/users/_
 import 'package:church_admin/src/core/services/database/gql_definintions/users/__generated__/subscriptions.gql.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:graphql/client.dart';
+import 'package:uuid/v4.dart';
 
 void main() {
   group('GqlTypePolicies', () {
@@ -54,6 +55,7 @@ void main() {
               meetingId: stringToUuid(meetingId),
               attendanceHistory: [
                 Query_attendanceAnalysis_historyMeetingRoster_attendanceHistory(
+                  id: const UuidV4().generate().toUuid(),
                   day: DateTime(2026, 6, 15),
                 ),
               ],
@@ -71,9 +73,11 @@ void main() {
         expect(store.get(rosterKey), containsPair('personId', personId));
 
         final queryEntry = store.get('Query')!;
-        final rosterField = queryEntry.entries
-            .firstWhere((e) => e.key.startsWith('historyMeetingRoster'))
-            .value as List<dynamic>;
+        final rosterField =
+            queryEntry.entries
+                    .firstWhere((e) => e.key.startsWith('historyMeetingRoster'))
+                    .value
+                as List<dynamic>;
         expect(rosterField.single, containsPair(r'$ref', rosterKey));
         expect(rosterField.single, isNot(contains('personId')));
 
