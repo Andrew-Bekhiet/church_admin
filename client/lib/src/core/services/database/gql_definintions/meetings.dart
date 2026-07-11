@@ -168,32 +168,34 @@ class MeetingsDAO extends DAOBase<Meeting>
   }) async {
     final meetingsById = {for (final meeting in meetings) meeting.id: meeting};
 
-    final where = [
-      Input_HistoryMeetingRosterBoolExp(
-        personId: Input_UuidComparisonExp($_eq: personId.toUuid()),
-      ),
-      if (meetingsById.isNotEmpty)
+    final result = await _runAttendanceAnalysis(
+      range: range,
+      where: [
         Input_HistoryMeetingRosterBoolExp(
-          meetingId: Input_UuidComparisonExp(
-            $_in: meetingsById.keys.map((e) => e.toUuid()).toList(),
+          personId: Input_UuidComparisonExp($_eq: personId.toUuid()),
+        ),
+        if (asServant != null)
+          Input_HistoryMeetingRosterBoolExp(
+            asServant: Input_BooleanComparisonExp($_eq: asServant),
           ),
-        ),
-      if (asServant != null)
-        Input_HistoryMeetingRosterBoolExp(
-          asServant: Input_BooleanComparisonExp($_eq: asServant),
-        ),
-    ];
+      ],
+      meetingIds: meetings.map((e) => e.id.toUuid()).toList(),
+    );
 
-    final rows = await _runAttendanceAnalysis(range: range, where: where);
+    final heldDaysByMeetingId = {
+      for (final meeting in result.historyMeetings)
+        meeting.id.uuid: meeting.days.map((d) => d.day).nonNulls.toList(),
+    };
 
-    return rows
-        .map(
-          (row) => PersonMeetingAttendanceAnalysis.fromQueryResult(
+    return [
+      for (final row in result.historyMeetingRoster)
+        if (row.meetingId?.uuid case final meetingId?)
+          PersonMeetingAttendanceAnalysis.fromQueryResult(
             row,
-            meetingsById[row.meeting?.id.uuid]!,
+            meetingsById[meetingId]!,
+            heldDaysByMeetingId[meetingId] ?? const [],
           ),
-        )
-        .toList();
+    ];
   }
 
   Future<MeetingsAttendanceAnalysis> getPersonMeetingAttendanceAnalysis({
@@ -310,49 +312,57 @@ class MeetingsDAO extends DAOBase<Meeting>
     );
   }
 
-  Future<List<PersonMeetingAttendanceAnalysis>> getRosterTrackRecords({
+  Future<List<PersonMeetingAttendanceAnalysis>> getAttendanceAnalyses({
     required Meeting meeting,
     required DateTimeRange range,
     required bool asServant,
   }) async {
-    final where = [
-      Input_HistoryMeetingRosterBoolExp(
-        meetingId: Input_UuidComparisonExp($_eq: meeting.id.toUuid()),
-      ),
-      Input_HistoryMeetingRosterBoolExp(
-        asServant: Input_BooleanComparisonExp($_eq: asServant),
-      ),
-    ];
+    final result = await _runAttendanceAnalysis(
+      range: range,
+      where: [
+        Input_HistoryMeetingRosterBoolExp(
+          asServant: Input_BooleanComparisonExp($_eq: asServant),
+        ),
+      ],
+      meetingIds: [meeting.id.toUuid()],
+    );
 
-    final rows = await _runAttendanceAnalysis(range: range, where: where);
+    final heldDays =
+        result.historyMeetings.singleOrNull?.days
+            .map((d) => d.day)
+            .nonNulls
+            .toList() ??
+        [];
 
-    return rows
+    return result.historyMeetingRoster
         .map(
-          (row) =>
-              PersonMeetingAttendanceAnalysis.fromQueryResult(row, meeting),
+          (row) => PersonMeetingAttendanceAnalysis.fromQueryResult(
+            row,
+            meeting,
+            heldDays,
+          ),
         )
         .toList();
   }
 
-  Future<List<Query_attendanceAnalysis_historyMeetingRoster>>
-  _runAttendanceAnalysis({
+  Future<Query_attendanceAnalysis> _runAttendanceAnalysis({
     required DateTimeRange range,
     required List<Input_HistoryMeetingRosterBoolExp> where,
+    required List<UuidValue> meetingIds,
   }) async {
-    final result = await graphQLClient.queryAndReturnParsed(
+    return graphQLClient.queryAndReturnParsed(
       QueryOptions(
         document: documentNodeQueryattendanceAnalysis,
         operationName: 'attendanceAnalysis',
         variables: Variables_Query_attendanceAnalysis(
           dayFrom: range.start,
           dayTo: range.end,
+          meetingIds: meetingIds,
           where: where,
         ).toJson(),
         parserFn: Query_attendanceAnalysis.fromJson,
       ),
     );
-
-    return result.historyMeetingRoster;
   }
 
   Future<List<Meeting>> getPersonMeetings({

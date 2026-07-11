@@ -522,6 +522,13 @@ const documentNodeQueryhistoryMeetingRoster = DocumentNode(
                   selectionSet: null,
                 ),
                 FieldNode(
+                  name: NameNode(value: 'meetingId'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
                   name: NameNode(value: 'name'),
                   alias: null,
                   arguments: [],
@@ -610,6 +617,7 @@ const documentNodeQueryhistoryMeetingRoster = DocumentNode(
 class Query_historyMeetingRoster_historyMeetingRoster {
   Query_historyMeetingRoster_historyMeetingRoster({
     this.personId,
+    this.meetingId,
     this.name,
     this.mainPhone,
     this.gender,
@@ -626,6 +634,7 @@ class Query_historyMeetingRoster_historyMeetingRoster {
     Map<String, dynamic> json,
   ) {
     final l$personId = json['personId'];
+    final l$meetingId = json['meetingId'];
     final l$name = json['name'];
     final l$mainPhone = json['mainPhone'];
     final l$gender = json['gender'];
@@ -638,6 +647,7 @@ class Query_historyMeetingRoster_historyMeetingRoster {
     final l$$__typename = json['__typename'];
     return Query_historyMeetingRoster_historyMeetingRoster(
       personId: l$personId == null ? null : stringToUuid(l$personId),
+      meetingId: l$meetingId == null ? null : stringToUuid(l$meetingId),
       name: (l$name as String?),
       mainPhone: (l$mainPhone as String?),
       gender: (l$gender as bool?),
@@ -654,6 +664,8 @@ class Query_historyMeetingRoster_historyMeetingRoster {
   }
 
   final UuidValue? personId;
+
+  final UuidValue? meetingId;
 
   final String? name;
 
@@ -681,6 +693,10 @@ class Query_historyMeetingRoster_historyMeetingRoster {
     _resultData['personId'] = l$personId == null
         ? null
         : uuidToString(l$personId);
+    final l$meetingId = meetingId;
+    _resultData['meetingId'] = l$meetingId == null
+        ? null
+        : uuidToString(l$meetingId);
     final l$name = name;
     _resultData['name'] = l$name;
     final l$mainPhone = mainPhone;
@@ -709,6 +725,7 @@ class Query_historyMeetingRoster_historyMeetingRoster {
   @override
   int get hashCode {
     final l$personId = personId;
+    final l$meetingId = meetingId;
     final l$name = name;
     final l$mainPhone = mainPhone;
     final l$gender = gender;
@@ -721,6 +738,7 @@ class Query_historyMeetingRoster_historyMeetingRoster {
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$personId,
+      l$meetingId,
       l$name,
       l$mainPhone,
       l$gender,
@@ -746,6 +764,11 @@ class Query_historyMeetingRoster_historyMeetingRoster {
     final l$personId = personId;
     final lOther$personId = other.personId;
     if (l$personId != lOther$personId) {
+      return false;
+    }
+    final l$meetingId = meetingId;
+    final lOther$meetingId = other.meetingId;
+    if (l$meetingId != lOther$meetingId) {
       return false;
     }
     final l$name = name;
@@ -823,6 +846,7 @@ abstract class CopyWith_Query_historyMeetingRoster_historyMeetingRoster<TRes> {
 
   TRes call({
     UuidValue? personId,
+    UuidValue? meetingId,
     String? name,
     String? mainPhone,
     bool? gender,
@@ -851,6 +875,7 @@ class _CopyWithImpl_Query_historyMeetingRoster_historyMeetingRoster<TRes>
 
   TRes call({
     Object? personId = _undefined,
+    Object? meetingId = _undefined,
     Object? name = _undefined,
     Object? mainPhone = _undefined,
     Object? gender = _undefined,
@@ -866,6 +891,9 @@ class _CopyWithImpl_Query_historyMeetingRoster_historyMeetingRoster<TRes>
       personId: personId == _undefined
           ? _instance.personId
           : (personId as UuidValue?),
+      meetingId: meetingId == _undefined
+          ? _instance.meetingId
+          : (meetingId as UuidValue?),
       name: name == _undefined ? _instance.name : (name as String?),
       mainPhone: mainPhone == _undefined
           ? _instance.mainPhone
@@ -902,6 +930,7 @@ class _CopyWithStubImpl_Query_historyMeetingRoster_historyMeetingRoster<TRes>
 
   call({
     UuidValue? personId,
+    UuidValue? meetingId,
     String? name,
     String? mainPhone,
     bool? gender,
@@ -919,10 +948,12 @@ class Variables_Query_attendanceAnalysis {
   factory Variables_Query_attendanceAnalysis({
     required DateTime dayFrom,
     required DateTime dayTo,
+    required List<UuidValue> meetingIds,
     List<Input_HistoryMeetingRosterBoolExp>? where,
   }) => Variables_Query_attendanceAnalysis._({
     r'dayFrom': dayFrom,
     r'dayTo': dayTo,
+    r'meetingIds': meetingIds,
     if (where != null) r'where': where,
   });
 
@@ -936,6 +967,10 @@ class Variables_Query_attendanceAnalysis {
     result$data['dayFrom'] = dateFromString(l$dayFrom);
     final l$dayTo = data['dayTo'];
     result$data['dayTo'] = dateFromString(l$dayTo);
+    final l$meetingIds = data['meetingIds'];
+    result$data['meetingIds'] = (l$meetingIds as List<dynamic>)
+        .map((e) => stringToUuid(e))
+        .toList();
     if (data.containsKey('where')) {
       final l$where = data['where'];
       result$data['where'] = (l$where as List<dynamic>?)
@@ -955,6 +990,8 @@ class Variables_Query_attendanceAnalysis {
 
   DateTime get dayTo => (_$data['dayTo'] as DateTime);
 
+  List<UuidValue> get meetingIds => (_$data['meetingIds'] as List<UuidValue>);
+
   List<Input_HistoryMeetingRosterBoolExp>? get where =>
       (_$data['where'] as List<Input_HistoryMeetingRosterBoolExp>?);
 
@@ -964,6 +1001,10 @@ class Variables_Query_attendanceAnalysis {
     result$data['dayFrom'] = dateToString(l$dayFrom);
     final l$dayTo = dayTo;
     result$data['dayTo'] = dateToString(l$dayTo);
+    final l$meetingIds = meetingIds;
+    result$data['meetingIds'] = l$meetingIds
+        .map((e) => uuidToString(e))
+        .toList();
     if (_$data.containsKey('where')) {
       final l$where = where;
       result$data['where'] = l$where?.map((e) => e.toJson()).toList();
@@ -995,6 +1036,18 @@ class Variables_Query_attendanceAnalysis {
     if (l$dayTo != lOther$dayTo) {
       return false;
     }
+    final l$meetingIds = meetingIds;
+    final lOther$meetingIds = other.meetingIds;
+    if (l$meetingIds.length != lOther$meetingIds.length) {
+      return false;
+    }
+    for (int i = 0; i < l$meetingIds.length; i++) {
+      final l$meetingIds$entry = l$meetingIds[i];
+      final lOther$meetingIds$entry = lOther$meetingIds[i];
+      if (l$meetingIds$entry != lOther$meetingIds$entry) {
+        return false;
+      }
+    }
     final l$where = where;
     final lOther$where = other.where;
     if (_$data.containsKey('where') != other._$data.containsKey('where')) {
@@ -1021,10 +1074,12 @@ class Variables_Query_attendanceAnalysis {
   int get hashCode {
     final l$dayFrom = dayFrom;
     final l$dayTo = dayTo;
+    final l$meetingIds = meetingIds;
     final l$where = where;
     return Object.hashAll([
       l$dayFrom,
       l$dayTo,
+      Object.hashAll(l$meetingIds.map((v) => v)),
       _$data.containsKey('where')
           ? l$where == null
                 ? null
@@ -1046,6 +1101,7 @@ abstract class CopyWith_Variables_Query_attendanceAnalysis<TRes> {
   TRes call({
     DateTime? dayFrom,
     DateTime? dayTo,
+    List<UuidValue>? meetingIds,
     List<Input_HistoryMeetingRosterBoolExp>? where,
   });
 }
@@ -1063,6 +1119,7 @@ class _CopyWithImpl_Variables_Query_attendanceAnalysis<TRes>
   TRes call({
     Object? dayFrom = _undefined,
     Object? dayTo = _undefined,
+    Object? meetingIds = _undefined,
     Object? where = _undefined,
   }) => _then(
     Variables_Query_attendanceAnalysis._({
@@ -1070,6 +1127,8 @@ class _CopyWithImpl_Variables_Query_attendanceAnalysis<TRes>
       if (dayFrom != _undefined && dayFrom != null)
         'dayFrom': (dayFrom as DateTime),
       if (dayTo != _undefined && dayTo != null) 'dayTo': (dayTo as DateTime),
+      if (meetingIds != _undefined && meetingIds != null)
+        'meetingIds': (meetingIds as List<UuidValue>),
       if (where != _undefined)
         'where': (where as List<Input_HistoryMeetingRosterBoolExp>?),
     }),
@@ -1085,20 +1144,30 @@ class _CopyWithStubImpl_Variables_Query_attendanceAnalysis<TRes>
   call({
     DateTime? dayFrom,
     DateTime? dayTo,
+    List<UuidValue>? meetingIds,
     List<Input_HistoryMeetingRosterBoolExp>? where,
   }) => _res;
 }
 
 class Query_attendanceAnalysis {
   Query_attendanceAnalysis({
+    required this.historyMeetings,
     required this.historyMeetingRoster,
     this.$__typename = 'query_root',
   });
 
   factory Query_attendanceAnalysis.fromJson(Map<String, dynamic> json) {
+    final l$historyMeetings = json['historyMeetings'];
     final l$historyMeetingRoster = json['historyMeetingRoster'];
     final l$$__typename = json['__typename'];
     return Query_attendanceAnalysis(
+      historyMeetings: (l$historyMeetings as List<dynamic>)
+          .map(
+            (e) => Query_attendanceAnalysis_historyMeetings.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
+          .toList(),
       historyMeetingRoster: (l$historyMeetingRoster as List<dynamic>)
           .map(
             (e) => Query_attendanceAnalysis_historyMeetingRoster.fromJson(
@@ -1110,6 +1179,8 @@ class Query_attendanceAnalysis {
     );
   }
 
+  final List<Query_attendanceAnalysis_historyMeetings> historyMeetings;
+
   final List<Query_attendanceAnalysis_historyMeetingRoster>
   historyMeetingRoster;
 
@@ -1117,6 +1188,10 @@ class Query_attendanceAnalysis {
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$historyMeetings = historyMeetings;
+    _resultData['historyMeetings'] = l$historyMeetings
+        .map((e) => e.toJson())
+        .toList();
     final l$historyMeetingRoster = historyMeetingRoster;
     _resultData['historyMeetingRoster'] = l$historyMeetingRoster
         .map((e) => e.toJson())
@@ -1128,9 +1203,11 @@ class Query_attendanceAnalysis {
 
   @override
   int get hashCode {
+    final l$historyMeetings = historyMeetings;
     final l$historyMeetingRoster = historyMeetingRoster;
     final l$$__typename = $__typename;
     return Object.hashAll([
+      Object.hashAll(l$historyMeetings.map((v) => v)),
       Object.hashAll(l$historyMeetingRoster.map((v) => v)),
       l$$__typename,
     ]);
@@ -1144,6 +1221,18 @@ class Query_attendanceAnalysis {
     if (other is! Query_attendanceAnalysis ||
         runtimeType != other.runtimeType) {
       return false;
+    }
+    final l$historyMeetings = historyMeetings;
+    final lOther$historyMeetings = other.historyMeetings;
+    if (l$historyMeetings.length != lOther$historyMeetings.length) {
+      return false;
+    }
+    for (int i = 0; i < l$historyMeetings.length; i++) {
+      final l$historyMeetings$entry = l$historyMeetings[i];
+      final lOther$historyMeetings$entry = lOther$historyMeetings[i];
+      if (l$historyMeetings$entry != lOther$historyMeetings$entry) {
+        return false;
+      }
     }
     final l$historyMeetingRoster = historyMeetingRoster;
     final lOther$historyMeetingRoster = other.historyMeetingRoster;
@@ -1182,9 +1271,20 @@ abstract class CopyWith_Query_attendanceAnalysis<TRes> {
       _CopyWithStubImpl_Query_attendanceAnalysis;
 
   TRes call({
+    List<Query_attendanceAnalysis_historyMeetings>? historyMeetings,
     List<Query_attendanceAnalysis_historyMeetingRoster>? historyMeetingRoster,
     String? $__typename,
   });
+  TRes historyMeetings(
+    Iterable<Query_attendanceAnalysis_historyMeetings> Function(
+      Iterable<
+        CopyWith_Query_attendanceAnalysis_historyMeetings<
+          Query_attendanceAnalysis_historyMeetings
+        >
+      >,
+    )
+    _fn,
+  );
   TRes historyMeetingRoster(
     Iterable<Query_attendanceAnalysis_historyMeetingRoster> Function(
       Iterable<
@@ -1208,10 +1308,14 @@ class _CopyWithImpl_Query_attendanceAnalysis<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? historyMeetings = _undefined,
     Object? historyMeetingRoster = _undefined,
     Object? $__typename = _undefined,
   }) => _then(
     Query_attendanceAnalysis(
+      historyMeetings: historyMeetings == _undefined || historyMeetings == null
+          ? _instance.historyMeetings
+          : (historyMeetings as List<Query_attendanceAnalysis_historyMeetings>),
       historyMeetingRoster:
           historyMeetingRoster == _undefined || historyMeetingRoster == null
           ? _instance.historyMeetingRoster
@@ -1221,6 +1325,23 @@ class _CopyWithImpl_Query_attendanceAnalysis<TRes>
           ? _instance.$__typename
           : ($__typename as String),
     ),
+  );
+
+  TRes historyMeetings(
+    Iterable<Query_attendanceAnalysis_historyMeetings> Function(
+      Iterable<
+        CopyWith_Query_attendanceAnalysis_historyMeetings<
+          Query_attendanceAnalysis_historyMeetings
+        >
+      >,
+    )
+    _fn,
+  ) => call(
+    historyMeetings: _fn(
+      _instance.historyMeetings.map(
+        (e) => CopyWith_Query_attendanceAnalysis_historyMeetings(e, (i) => i),
+      ),
+    ).toList(),
   );
 
   TRes historyMeetingRoster(
@@ -1249,9 +1370,12 @@ class _CopyWithStubImpl_Query_attendanceAnalysis<TRes>
   TRes _res;
 
   call({
+    List<Query_attendanceAnalysis_historyMeetings>? historyMeetings,
     List<Query_attendanceAnalysis_historyMeetingRoster>? historyMeetingRoster,
     String? $__typename,
   }) => _res;
+
+  historyMeetings(_fn) => _res;
 
   historyMeetingRoster(_fn) => _res;
 }
@@ -1275,6 +1399,15 @@ const documentNodeQueryattendanceAnalysis = DocumentNode(
           directives: [],
         ),
         VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'meetingIds')),
+          type: ListTypeNode(
+            type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+            isNonNull: true,
+          ),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+        VariableDefinitionNode(
           variable: VariableNode(name: NameNode(value: 'where')),
           type: ListTypeNode(
             type: NamedTypeNode(
@@ -1291,6 +1424,119 @@ const documentNodeQueryattendanceAnalysis = DocumentNode(
       selectionSet: SelectionSetNode(
         selections: [
           FieldNode(
+            name: NameNode(value: 'historyMeetings'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'where'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'id'),
+                      value: ObjectValueNode(
+                        fields: [
+                          ObjectFieldNode(
+                            name: NameNode(value: '_in'),
+                            value: VariableNode(
+                              name: NameNode(value: 'meetingIds'),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FieldNode(
+                  name: NameNode(value: 'id'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: 'days'),
+                  alias: null,
+                  arguments: [
+                    ArgumentNode(
+                      name: NameNode(value: 'where'),
+                      value: ObjectValueNode(
+                        fields: [
+                          ObjectFieldNode(
+                            name: NameNode(value: 'day'),
+                            value: ObjectValueNode(
+                              fields: [
+                                ObjectFieldNode(
+                                  name: NameNode(value: '_gte'),
+                                  value: VariableNode(
+                                    name: NameNode(value: 'dayFrom'),
+                                  ),
+                                ),
+                                ObjectFieldNode(
+                                  name: NameNode(value: '_lte'),
+                                  value: VariableNode(
+                                    name: NameNode(value: 'dayTo'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    ArgumentNode(
+                      name: NameNode(value: 'orderBy'),
+                      value: ObjectValueNode(
+                        fields: [
+                          ObjectFieldNode(
+                            name: NameNode(value: 'day'),
+                            value: EnumValueNode(name: NameNode(value: 'ASC')),
+                          ),
+                        ],
+                      ),
+                    ),
+                    ArgumentNode(
+                      name: NameNode(value: 'distinctOn'),
+                      value: ListValueNode(
+                        values: [EnumValueNode(name: NameNode(value: 'day'))],
+                      ),
+                    ),
+                  ],
+                  directives: [],
+                  selectionSet: SelectionSetNode(
+                    selections: [
+                      FieldNode(
+                        name: NameNode(value: 'day'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                      FieldNode(
+                        name: NameNode(value: '__typename'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                    ],
+                  ),
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
+          ),
+          FieldNode(
             name: NameNode(value: 'historyMeetingRoster'),
             alias: null,
             arguments: [
@@ -1300,7 +1546,37 @@ const documentNodeQueryattendanceAnalysis = DocumentNode(
                   fields: [
                     ObjectFieldNode(
                       name: NameNode(value: '_and'),
-                      value: VariableNode(name: NameNode(value: 'where')),
+                      value: ListValueNode(
+                        values: [
+                          ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                name: NameNode(value: 'meetingId'),
+                                value: ObjectValueNode(
+                                  fields: [
+                                    ObjectFieldNode(
+                                      name: NameNode(value: '_in'),
+                                      value: VariableNode(
+                                        name: NameNode(value: 'meetingIds'),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
+                          ObjectValueNode(
+                            fields: [
+                              ObjectFieldNode(
+                                name: NameNode(value: '_and'),
+                                value: VariableNode(
+                                  name: NameNode(value: 'where'),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -1365,100 +1641,11 @@ const documentNodeQueryattendanceAnalysis = DocumentNode(
                   selectionSet: null,
                 ),
                 FieldNode(
-                  name: NameNode(value: 'meeting'),
+                  name: NameNode(value: 'meetingId'),
                   alias: null,
                   arguments: [],
                   directives: [],
-                  selectionSet: SelectionSetNode(
-                    selections: [
-                      FieldNode(
-                        name: NameNode(value: 'id'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null,
-                      ),
-                      FieldNode(
-                        name: NameNode(value: 'days'),
-                        alias: null,
-                        arguments: [
-                          ArgumentNode(
-                            name: NameNode(value: 'where'),
-                            value: ObjectValueNode(
-                              fields: [
-                                ObjectFieldNode(
-                                  name: NameNode(value: 'day'),
-                                  value: ObjectValueNode(
-                                    fields: [
-                                      ObjectFieldNode(
-                                        name: NameNode(value: '_gte'),
-                                        value: VariableNode(
-                                          name: NameNode(value: 'dayFrom'),
-                                        ),
-                                      ),
-                                      ObjectFieldNode(
-                                        name: NameNode(value: '_lte'),
-                                        value: VariableNode(
-                                          name: NameNode(value: 'dayTo'),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          ArgumentNode(
-                            name: NameNode(value: 'orderBy'),
-                            value: ObjectValueNode(
-                              fields: [
-                                ObjectFieldNode(
-                                  name: NameNode(value: 'day'),
-                                  value: EnumValueNode(
-                                    name: NameNode(value: 'ASC'),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          ArgumentNode(
-                            name: NameNode(value: 'distinctOn'),
-                            value: ListValueNode(
-                              values: [
-                                EnumValueNode(name: NameNode(value: 'day')),
-                              ],
-                            ),
-                          ),
-                        ],
-                        directives: [],
-                        selectionSet: SelectionSetNode(
-                          selections: [
-                            FieldNode(
-                              name: NameNode(value: 'day'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null,
-                            ),
-                            FieldNode(
-                              name: NameNode(value: '__typename'),
-                              alias: null,
-                              arguments: [],
-                              directives: [],
-                              selectionSet: null,
-                            ),
-                          ],
-                        ),
-                      ),
-                      FieldNode(
-                        name: NameNode(value: '__typename'),
-                        alias: null,
-                        arguments: [],
-                        directives: [],
-                        selectionSet: null,
-                      ),
-                    ],
-                  ),
+                  selectionSet: null,
                 ),
                 FieldNode(
                   name: NameNode(value: 'attendanceHistory'),
@@ -1545,11 +1732,314 @@ const documentNodeQueryattendanceAnalysis = DocumentNode(
   ],
 );
 
+class Query_attendanceAnalysis_historyMeetings {
+  Query_attendanceAnalysis_historyMeetings({
+    required this.id,
+    required this.days,
+    this.$__typename = 'HistoryMeetings',
+  });
+
+  factory Query_attendanceAnalysis_historyMeetings.fromJson(
+    Map<String, dynamic> json,
+  ) {
+    final l$id = json['id'];
+    final l$days = json['days'];
+    final l$$__typename = json['__typename'];
+    return Query_attendanceAnalysis_historyMeetings(
+      id: stringToUuid(l$id),
+      days: (l$days as List<dynamic>)
+          .map(
+            (e) => Query_attendanceAnalysis_historyMeetings_days.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
+          .toList(),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final UuidValue id;
+
+  final List<Query_attendanceAnalysis_historyMeetings_days> days;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = uuidToString(l$id);
+    final l$days = days;
+    _resultData['days'] = l$days.map((e) => e.toJson()).toList();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$days = days;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$id,
+      Object.hashAll(l$days.map((v) => v)),
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Query_attendanceAnalysis_historyMeetings ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$days = days;
+    final lOther$days = other.days;
+    if (l$days.length != lOther$days.length) {
+      return false;
+    }
+    for (int i = 0; i < l$days.length; i++) {
+      final l$days$entry = l$days[i];
+      final lOther$days$entry = lOther$days[i];
+      if (l$days$entry != lOther$days$entry) {
+        return false;
+      }
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Query_attendanceAnalysis_historyMeetings
+    on Query_attendanceAnalysis_historyMeetings {
+  CopyWith_Query_attendanceAnalysis_historyMeetings<
+    Query_attendanceAnalysis_historyMeetings
+  >
+  get copyWith =>
+      CopyWith_Query_attendanceAnalysis_historyMeetings(this, (i) => i);
+}
+
+abstract class CopyWith_Query_attendanceAnalysis_historyMeetings<TRes> {
+  factory CopyWith_Query_attendanceAnalysis_historyMeetings(
+    Query_attendanceAnalysis_historyMeetings instance,
+    TRes Function(Query_attendanceAnalysis_historyMeetings) then,
+  ) = _CopyWithImpl_Query_attendanceAnalysis_historyMeetings;
+
+  factory CopyWith_Query_attendanceAnalysis_historyMeetings.stub(TRes res) =
+      _CopyWithStubImpl_Query_attendanceAnalysis_historyMeetings;
+
+  TRes call({
+    UuidValue? id,
+    List<Query_attendanceAnalysis_historyMeetings_days>? days,
+    String? $__typename,
+  });
+  TRes days(
+    Iterable<Query_attendanceAnalysis_historyMeetings_days> Function(
+      Iterable<
+        CopyWith_Query_attendanceAnalysis_historyMeetings_days<
+          Query_attendanceAnalysis_historyMeetings_days
+        >
+      >,
+    )
+    _fn,
+  );
+}
+
+class _CopyWithImpl_Query_attendanceAnalysis_historyMeetings<TRes>
+    implements CopyWith_Query_attendanceAnalysis_historyMeetings<TRes> {
+  _CopyWithImpl_Query_attendanceAnalysis_historyMeetings(
+    this._instance,
+    this._then,
+  );
+
+  final Query_attendanceAnalysis_historyMeetings _instance;
+
+  final TRes Function(Query_attendanceAnalysis_historyMeetings) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? days = _undefined,
+    Object? $__typename = _undefined,
+  }) => _then(
+    Query_attendanceAnalysis_historyMeetings(
+      id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
+      days: days == _undefined || days == null
+          ? _instance.days
+          : (days as List<Query_attendanceAnalysis_historyMeetings_days>),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
+
+  TRes days(
+    Iterable<Query_attendanceAnalysis_historyMeetings_days> Function(
+      Iterable<
+        CopyWith_Query_attendanceAnalysis_historyMeetings_days<
+          Query_attendanceAnalysis_historyMeetings_days
+        >
+      >,
+    )
+    _fn,
+  ) => call(
+    days: _fn(
+      _instance.days.map(
+        (e) =>
+            CopyWith_Query_attendanceAnalysis_historyMeetings_days(e, (i) => i),
+      ),
+    ).toList(),
+  );
+}
+
+class _CopyWithStubImpl_Query_attendanceAnalysis_historyMeetings<TRes>
+    implements CopyWith_Query_attendanceAnalysis_historyMeetings<TRes> {
+  _CopyWithStubImpl_Query_attendanceAnalysis_historyMeetings(this._res);
+
+  TRes _res;
+
+  call({
+    UuidValue? id,
+    List<Query_attendanceAnalysis_historyMeetings_days>? days,
+    String? $__typename,
+  }) => _res;
+
+  days(_fn) => _res;
+}
+
+class Query_attendanceAnalysis_historyMeetings_days {
+  Query_attendanceAnalysis_historyMeetings_days({
+    this.day,
+    this.$__typename = 'HistoryMeetingDays',
+  });
+
+  factory Query_attendanceAnalysis_historyMeetings_days.fromJson(
+    Map<String, dynamic> json,
+  ) {
+    final l$day = json['day'];
+    final l$$__typename = json['__typename'];
+    return Query_attendanceAnalysis_historyMeetings_days(
+      day: l$day == null ? null : dateFromString(l$day),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final DateTime? day;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$day = day;
+    _resultData['day'] = l$day == null ? null : dateToString(l$day);
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$day = day;
+    final l$$__typename = $__typename;
+    return Object.hashAll([l$day, l$$__typename]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Query_attendanceAnalysis_historyMeetings_days ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$day = day;
+    final lOther$day = other.day;
+    if (l$day != lOther$day) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Query_attendanceAnalysis_historyMeetings_days
+    on Query_attendanceAnalysis_historyMeetings_days {
+  CopyWith_Query_attendanceAnalysis_historyMeetings_days<
+    Query_attendanceAnalysis_historyMeetings_days
+  >
+  get copyWith =>
+      CopyWith_Query_attendanceAnalysis_historyMeetings_days(this, (i) => i);
+}
+
+abstract class CopyWith_Query_attendanceAnalysis_historyMeetings_days<TRes> {
+  factory CopyWith_Query_attendanceAnalysis_historyMeetings_days(
+    Query_attendanceAnalysis_historyMeetings_days instance,
+    TRes Function(Query_attendanceAnalysis_historyMeetings_days) then,
+  ) = _CopyWithImpl_Query_attendanceAnalysis_historyMeetings_days;
+
+  factory CopyWith_Query_attendanceAnalysis_historyMeetings_days.stub(
+    TRes res,
+  ) = _CopyWithStubImpl_Query_attendanceAnalysis_historyMeetings_days;
+
+  TRes call({DateTime? day, String? $__typename});
+}
+
+class _CopyWithImpl_Query_attendanceAnalysis_historyMeetings_days<TRes>
+    implements CopyWith_Query_attendanceAnalysis_historyMeetings_days<TRes> {
+  _CopyWithImpl_Query_attendanceAnalysis_historyMeetings_days(
+    this._instance,
+    this._then,
+  );
+
+  final Query_attendanceAnalysis_historyMeetings_days _instance;
+
+  final TRes Function(Query_attendanceAnalysis_historyMeetings_days) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? day = _undefined, Object? $__typename = _undefined}) =>
+      _then(
+        Query_attendanceAnalysis_historyMeetings_days(
+          day: day == _undefined ? _instance.day : (day as DateTime?),
+          $__typename: $__typename == _undefined || $__typename == null
+              ? _instance.$__typename
+              : ($__typename as String),
+        ),
+      );
+}
+
+class _CopyWithStubImpl_Query_attendanceAnalysis_historyMeetings_days<TRes>
+    implements CopyWith_Query_attendanceAnalysis_historyMeetings_days<TRes> {
+  _CopyWithStubImpl_Query_attendanceAnalysis_historyMeetings_days(this._res);
+
+  TRes _res;
+
+  call({DateTime? day, String? $__typename}) => _res;
+}
+
 class Query_attendanceAnalysis_historyMeetingRoster {
   Query_attendanceAnalysis_historyMeetingRoster({
     this.personId,
     this.asServant,
-    this.meeting,
+    this.meetingId,
     required this.attendanceHistory,
     this.$__typename = 'HistoryMeetingRoster',
   });
@@ -1559,17 +2049,13 @@ class Query_attendanceAnalysis_historyMeetingRoster {
   ) {
     final l$personId = json['personId'];
     final l$asServant = json['asServant'];
-    final l$meeting = json['meeting'];
+    final l$meetingId = json['meetingId'];
     final l$attendanceHistory = json['attendanceHistory'];
     final l$$__typename = json['__typename'];
     return Query_attendanceAnalysis_historyMeetingRoster(
       personId: l$personId == null ? null : stringToUuid(l$personId),
       asServant: (l$asServant as bool?),
-      meeting: l$meeting == null
-          ? null
-          : Query_attendanceAnalysis_historyMeetingRoster_meeting.fromJson(
-              (l$meeting as Map<String, dynamic>),
-            ),
+      meetingId: l$meetingId == null ? null : stringToUuid(l$meetingId),
       attendanceHistory: (l$attendanceHistory as List<dynamic>)
           .map(
             (e) =>
@@ -1586,7 +2072,7 @@ class Query_attendanceAnalysis_historyMeetingRoster {
 
   final bool? asServant;
 
-  final Query_attendanceAnalysis_historyMeetingRoster_meeting? meeting;
+  final UuidValue? meetingId;
 
   final List<Query_attendanceAnalysis_historyMeetingRoster_attendanceHistory>
   attendanceHistory;
@@ -1601,8 +2087,10 @@ class Query_attendanceAnalysis_historyMeetingRoster {
         : uuidToString(l$personId);
     final l$asServant = asServant;
     _resultData['asServant'] = l$asServant;
-    final l$meeting = meeting;
-    _resultData['meeting'] = l$meeting?.toJson();
+    final l$meetingId = meetingId;
+    _resultData['meetingId'] = l$meetingId == null
+        ? null
+        : uuidToString(l$meetingId);
     final l$attendanceHistory = attendanceHistory;
     _resultData['attendanceHistory'] = l$attendanceHistory
         .map((e) => e.toJson())
@@ -1616,13 +2104,13 @@ class Query_attendanceAnalysis_historyMeetingRoster {
   int get hashCode {
     final l$personId = personId;
     final l$asServant = asServant;
-    final l$meeting = meeting;
+    final l$meetingId = meetingId;
     final l$attendanceHistory = attendanceHistory;
     final l$$__typename = $__typename;
     return Object.hashAll([
       l$personId,
       l$asServant,
-      l$meeting,
+      l$meetingId,
       Object.hashAll(l$attendanceHistory.map((v) => v)),
       l$$__typename,
     ]);
@@ -1647,9 +2135,9 @@ class Query_attendanceAnalysis_historyMeetingRoster {
     if (l$asServant != lOther$asServant) {
       return false;
     }
-    final l$meeting = meeting;
-    final lOther$meeting = other.meeting;
-    if (l$meeting != lOther$meeting) {
+    final l$meetingId = meetingId;
+    final lOther$meetingId = other.meetingId;
+    if (l$meetingId != lOther$meetingId) {
       return false;
     }
     final l$attendanceHistory = attendanceHistory;
@@ -1695,13 +2183,11 @@ abstract class CopyWith_Query_attendanceAnalysis_historyMeetingRoster<TRes> {
   TRes call({
     UuidValue? personId,
     bool? asServant,
-    Query_attendanceAnalysis_historyMeetingRoster_meeting? meeting,
+    UuidValue? meetingId,
     List<Query_attendanceAnalysis_historyMeetingRoster_attendanceHistory>?
     attendanceHistory,
     String? $__typename,
   });
-  CopyWith_Query_attendanceAnalysis_historyMeetingRoster_meeting<TRes>
-  get meeting;
   TRes attendanceHistory(
     Iterable<Query_attendanceAnalysis_historyMeetingRoster_attendanceHistory>
     Function(
@@ -1731,7 +2217,7 @@ class _CopyWithImpl_Query_attendanceAnalysis_historyMeetingRoster<TRes>
   TRes call({
     Object? personId = _undefined,
     Object? asServant = _undefined,
-    Object? meeting = _undefined,
+    Object? meetingId = _undefined,
     Object? attendanceHistory = _undefined,
     Object? $__typename = _undefined,
   }) => _then(
@@ -1742,9 +2228,9 @@ class _CopyWithImpl_Query_attendanceAnalysis_historyMeetingRoster<TRes>
       asServant: asServant == _undefined
           ? _instance.asServant
           : (asServant as bool?),
-      meeting: meeting == _undefined
-          ? _instance.meeting
-          : (meeting as Query_attendanceAnalysis_historyMeetingRoster_meeting?),
+      meetingId: meetingId == _undefined
+          ? _instance.meetingId
+          : (meetingId as UuidValue?),
       attendanceHistory:
           attendanceHistory == _undefined || attendanceHistory == null
           ? _instance.attendanceHistory
@@ -1757,19 +2243,6 @@ class _CopyWithImpl_Query_attendanceAnalysis_historyMeetingRoster<TRes>
           : ($__typename as String),
     ),
   );
-
-  CopyWith_Query_attendanceAnalysis_historyMeetingRoster_meeting<TRes>
-  get meeting {
-    final local$meeting = _instance.meeting;
-    return local$meeting == null
-        ? CopyWith_Query_attendanceAnalysis_historyMeetingRoster_meeting.stub(
-            _then(_instance),
-          )
-        : CopyWith_Query_attendanceAnalysis_historyMeetingRoster_meeting(
-            local$meeting,
-            (e) => call(meeting: e),
-          );
-  }
 
   TRes attendanceHistory(
     Iterable<Query_attendanceAnalysis_historyMeetingRoster_attendanceHistory>
@@ -1803,363 +2276,13 @@ class _CopyWithStubImpl_Query_attendanceAnalysis_historyMeetingRoster<TRes>
   call({
     UuidValue? personId,
     bool? asServant,
-    Query_attendanceAnalysis_historyMeetingRoster_meeting? meeting,
+    UuidValue? meetingId,
     List<Query_attendanceAnalysis_historyMeetingRoster_attendanceHistory>?
     attendanceHistory,
     String? $__typename,
   }) => _res;
 
-  CopyWith_Query_attendanceAnalysis_historyMeetingRoster_meeting<TRes>
-  get meeting =>
-      CopyWith_Query_attendanceAnalysis_historyMeetingRoster_meeting.stub(_res);
-
   attendanceHistory(_fn) => _res;
-}
-
-class Query_attendanceAnalysis_historyMeetingRoster_meeting {
-  Query_attendanceAnalysis_historyMeetingRoster_meeting({
-    required this.id,
-    required this.days,
-    this.$__typename = 'HistoryMeetings',
-  });
-
-  factory Query_attendanceAnalysis_historyMeetingRoster_meeting.fromJson(
-    Map<String, dynamic> json,
-  ) {
-    final l$id = json['id'];
-    final l$days = json['days'];
-    final l$$__typename = json['__typename'];
-    return Query_attendanceAnalysis_historyMeetingRoster_meeting(
-      id: stringToUuid(l$id),
-      days: (l$days as List<dynamic>)
-          .map(
-            (e) =>
-                Query_attendanceAnalysis_historyMeetingRoster_meeting_days.fromJson(
-                  (e as Map<String, dynamic>),
-                ),
-          )
-          .toList(),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final UuidValue id;
-
-  final List<Query_attendanceAnalysis_historyMeetingRoster_meeting_days> days;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$id = id;
-    _resultData['id'] = uuidToString(l$id);
-    final l$days = days;
-    _resultData['days'] = l$days.map((e) => e.toJson()).toList();
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$id = id;
-    final l$days = days;
-    final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$id,
-      Object.hashAll(l$days.map((v) => v)),
-      l$$__typename,
-    ]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Query_attendanceAnalysis_historyMeetingRoster_meeting ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$id = id;
-    final lOther$id = other.id;
-    if (l$id != lOther$id) {
-      return false;
-    }
-    final l$days = days;
-    final lOther$days = other.days;
-    if (l$days.length != lOther$days.length) {
-      return false;
-    }
-    for (int i = 0; i < l$days.length; i++) {
-      final l$days$entry = l$days[i];
-      final lOther$days$entry = lOther$days[i];
-      if (l$days$entry != lOther$days$entry) {
-        return false;
-      }
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension_Query_attendanceAnalysis_historyMeetingRoster_meeting
-    on Query_attendanceAnalysis_historyMeetingRoster_meeting {
-  CopyWith_Query_attendanceAnalysis_historyMeetingRoster_meeting<
-    Query_attendanceAnalysis_historyMeetingRoster_meeting
-  >
-  get copyWith =>
-      CopyWith_Query_attendanceAnalysis_historyMeetingRoster_meeting(
-        this,
-        (i) => i,
-      );
-}
-
-abstract class CopyWith_Query_attendanceAnalysis_historyMeetingRoster_meeting<
-  TRes
-> {
-  factory CopyWith_Query_attendanceAnalysis_historyMeetingRoster_meeting(
-    Query_attendanceAnalysis_historyMeetingRoster_meeting instance,
-    TRes Function(Query_attendanceAnalysis_historyMeetingRoster_meeting) then,
-  ) = _CopyWithImpl_Query_attendanceAnalysis_historyMeetingRoster_meeting;
-
-  factory CopyWith_Query_attendanceAnalysis_historyMeetingRoster_meeting.stub(
-    TRes res,
-  ) = _CopyWithStubImpl_Query_attendanceAnalysis_historyMeetingRoster_meeting;
-
-  TRes call({
-    UuidValue? id,
-    List<Query_attendanceAnalysis_historyMeetingRoster_meeting_days>? days,
-    String? $__typename,
-  });
-  TRes days(
-    Iterable<Query_attendanceAnalysis_historyMeetingRoster_meeting_days>
-    Function(
-      Iterable<
-        CopyWith_Query_attendanceAnalysis_historyMeetingRoster_meeting_days<
-          Query_attendanceAnalysis_historyMeetingRoster_meeting_days
-        >
-      >,
-    )
-    _fn,
-  );
-}
-
-class _CopyWithImpl_Query_attendanceAnalysis_historyMeetingRoster_meeting<TRes>
-    implements
-        CopyWith_Query_attendanceAnalysis_historyMeetingRoster_meeting<TRes> {
-  _CopyWithImpl_Query_attendanceAnalysis_historyMeetingRoster_meeting(
-    this._instance,
-    this._then,
-  );
-
-  final Query_attendanceAnalysis_historyMeetingRoster_meeting _instance;
-
-  final TRes Function(Query_attendanceAnalysis_historyMeetingRoster_meeting)
-  _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? id = _undefined,
-    Object? days = _undefined,
-    Object? $__typename = _undefined,
-  }) => _then(
-    Query_attendanceAnalysis_historyMeetingRoster_meeting(
-      id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
-      days: days == _undefined || days == null
-          ? _instance.days
-          : (days
-                as List<
-                  Query_attendanceAnalysis_historyMeetingRoster_meeting_days
-                >),
-      $__typename: $__typename == _undefined || $__typename == null
-          ? _instance.$__typename
-          : ($__typename as String),
-    ),
-  );
-
-  TRes days(
-    Iterable<Query_attendanceAnalysis_historyMeetingRoster_meeting_days>
-    Function(
-      Iterable<
-        CopyWith_Query_attendanceAnalysis_historyMeetingRoster_meeting_days<
-          Query_attendanceAnalysis_historyMeetingRoster_meeting_days
-        >
-      >,
-    )
-    _fn,
-  ) => call(
-    days: _fn(
-      _instance.days.map(
-        (e) =>
-            CopyWith_Query_attendanceAnalysis_historyMeetingRoster_meeting_days(
-              e,
-              (i) => i,
-            ),
-      ),
-    ).toList(),
-  );
-}
-
-class _CopyWithStubImpl_Query_attendanceAnalysis_historyMeetingRoster_meeting<
-  TRes
->
-    implements
-        CopyWith_Query_attendanceAnalysis_historyMeetingRoster_meeting<TRes> {
-  _CopyWithStubImpl_Query_attendanceAnalysis_historyMeetingRoster_meeting(
-    this._res,
-  );
-
-  TRes _res;
-
-  call({
-    UuidValue? id,
-    List<Query_attendanceAnalysis_historyMeetingRoster_meeting_days>? days,
-    String? $__typename,
-  }) => _res;
-
-  days(_fn) => _res;
-}
-
-class Query_attendanceAnalysis_historyMeetingRoster_meeting_days {
-  Query_attendanceAnalysis_historyMeetingRoster_meeting_days({
-    this.day,
-    this.$__typename = 'HistoryMeetingDays',
-  });
-
-  factory Query_attendanceAnalysis_historyMeetingRoster_meeting_days.fromJson(
-    Map<String, dynamic> json,
-  ) {
-    final l$day = json['day'];
-    final l$$__typename = json['__typename'];
-    return Query_attendanceAnalysis_historyMeetingRoster_meeting_days(
-      day: l$day == null ? null : dateFromString(l$day),
-      $__typename: (l$$__typename as String),
-    );
-  }
-
-  final DateTime? day;
-
-  final String $__typename;
-
-  Map<String, dynamic> toJson() {
-    final _resultData = <String, dynamic>{};
-    final l$day = day;
-    _resultData['day'] = l$day == null ? null : dateToString(l$day);
-    final l$$__typename = $__typename;
-    _resultData['__typename'] = l$$__typename;
-    return _resultData;
-  }
-
-  @override
-  int get hashCode {
-    final l$day = day;
-    final l$$__typename = $__typename;
-    return Object.hashAll([l$day, l$$__typename]);
-  }
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Query_attendanceAnalysis_historyMeetingRoster_meeting_days ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$day = day;
-    final lOther$day = other.day;
-    if (l$day != lOther$day) {
-      return false;
-    }
-    final l$$__typename = $__typename;
-    final lOther$$__typename = other.$__typename;
-    if (l$$__typename != lOther$$__typename) {
-      return false;
-    }
-    return true;
-  }
-}
-
-extension UtilityExtension_Query_attendanceAnalysis_historyMeetingRoster_meeting_days
-    on Query_attendanceAnalysis_historyMeetingRoster_meeting_days {
-  CopyWith_Query_attendanceAnalysis_historyMeetingRoster_meeting_days<
-    Query_attendanceAnalysis_historyMeetingRoster_meeting_days
-  >
-  get copyWith =>
-      CopyWith_Query_attendanceAnalysis_historyMeetingRoster_meeting_days(
-        this,
-        (i) => i,
-      );
-}
-
-abstract class CopyWith_Query_attendanceAnalysis_historyMeetingRoster_meeting_days<
-  TRes
-> {
-  factory CopyWith_Query_attendanceAnalysis_historyMeetingRoster_meeting_days(
-    Query_attendanceAnalysis_historyMeetingRoster_meeting_days instance,
-    TRes Function(Query_attendanceAnalysis_historyMeetingRoster_meeting_days)
-    then,
-  ) = _CopyWithImpl_Query_attendanceAnalysis_historyMeetingRoster_meeting_days;
-
-  factory CopyWith_Query_attendanceAnalysis_historyMeetingRoster_meeting_days.stub(
-    TRes res,
-  ) = _CopyWithStubImpl_Query_attendanceAnalysis_historyMeetingRoster_meeting_days;
-
-  TRes call({DateTime? day, String? $__typename});
-}
-
-class _CopyWithImpl_Query_attendanceAnalysis_historyMeetingRoster_meeting_days<
-  TRes
->
-    implements
-        CopyWith_Query_attendanceAnalysis_historyMeetingRoster_meeting_days<
-          TRes
-        > {
-  _CopyWithImpl_Query_attendanceAnalysis_historyMeetingRoster_meeting_days(
-    this._instance,
-    this._then,
-  );
-
-  final Query_attendanceAnalysis_historyMeetingRoster_meeting_days _instance;
-
-  final TRes Function(
-    Query_attendanceAnalysis_historyMeetingRoster_meeting_days,
-  )
-  _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({Object? day = _undefined, Object? $__typename = _undefined}) =>
-      _then(
-        Query_attendanceAnalysis_historyMeetingRoster_meeting_days(
-          day: day == _undefined ? _instance.day : (day as DateTime?),
-          $__typename: $__typename == _undefined || $__typename == null
-              ? _instance.$__typename
-              : ($__typename as String),
-        ),
-      );
-}
-
-class _CopyWithStubImpl_Query_attendanceAnalysis_historyMeetingRoster_meeting_days<
-  TRes
->
-    implements
-        CopyWith_Query_attendanceAnalysis_historyMeetingRoster_meeting_days<
-          TRes
-        > {
-  _CopyWithStubImpl_Query_attendanceAnalysis_historyMeetingRoster_meeting_days(
-    this._res,
-  );
-
-  TRes _res;
-
-  call({DateTime? day, String? $__typename}) => _res;
 }
 
 class Query_attendanceAnalysis_historyMeetingRoster_attendanceHistory {
@@ -4394,7 +4517,21 @@ const documentNodeQuerypersonMeetings = DocumentNode(
             selectionSet: SelectionSetNode(
               selections: [
                 FieldNode(
+                  name: NameNode(value: 'personId'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
                   name: NameNode(value: 'asServant'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+                FieldNode(
+                  name: NameNode(value: 'meetingId'),
                   alias: null,
                   arguments: [],
                   directives: [],
@@ -4449,7 +4586,9 @@ const documentNodeQuerypersonMeetings = DocumentNode(
 
 class Query_personMeetings_historyMeetingRoster {
   Query_personMeetings_historyMeetingRoster({
+    this.personId,
     this.asServant,
+    this.meetingId,
     this.meeting,
     this.$__typename = 'HistoryMeetingRoster',
   });
@@ -4457,11 +4596,15 @@ class Query_personMeetings_historyMeetingRoster {
   factory Query_personMeetings_historyMeetingRoster.fromJson(
     Map<String, dynamic> json,
   ) {
+    final l$personId = json['personId'];
     final l$asServant = json['asServant'];
+    final l$meetingId = json['meetingId'];
     final l$meeting = json['meeting'];
     final l$$__typename = json['__typename'];
     return Query_personMeetings_historyMeetingRoster(
+      personId: l$personId == null ? null : stringToUuid(l$personId),
       asServant: (l$asServant as bool?),
+      meetingId: l$meetingId == null ? null : stringToUuid(l$meetingId),
       meeting: l$meeting == null
           ? null
           : Fragment_Meeting.fromJson((l$meeting as Map<String, dynamic>)),
@@ -4469,7 +4612,11 @@ class Query_personMeetings_historyMeetingRoster {
     );
   }
 
+  final UuidValue? personId;
+
   final bool? asServant;
+
+  final UuidValue? meetingId;
 
   final Fragment_Meeting? meeting;
 
@@ -4477,8 +4624,16 @@ class Query_personMeetings_historyMeetingRoster {
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$personId = personId;
+    _resultData['personId'] = l$personId == null
+        ? null
+        : uuidToString(l$personId);
     final l$asServant = asServant;
     _resultData['asServant'] = l$asServant;
+    final l$meetingId = meetingId;
+    _resultData['meetingId'] = l$meetingId == null
+        ? null
+        : uuidToString(l$meetingId);
     final l$meeting = meeting;
     _resultData['meeting'] = l$meeting?.toJson();
     final l$$__typename = $__typename;
@@ -4488,10 +4643,18 @@ class Query_personMeetings_historyMeetingRoster {
 
   @override
   int get hashCode {
+    final l$personId = personId;
     final l$asServant = asServant;
+    final l$meetingId = meetingId;
     final l$meeting = meeting;
     final l$$__typename = $__typename;
-    return Object.hashAll([l$asServant, l$meeting, l$$__typename]);
+    return Object.hashAll([
+      l$personId,
+      l$asServant,
+      l$meetingId,
+      l$meeting,
+      l$$__typename,
+    ]);
   }
 
   @override
@@ -4503,9 +4666,19 @@ class Query_personMeetings_historyMeetingRoster {
         runtimeType != other.runtimeType) {
       return false;
     }
+    final l$personId = personId;
+    final lOther$personId = other.personId;
+    if (l$personId != lOther$personId) {
+      return false;
+    }
     final l$asServant = asServant;
     final lOther$asServant = other.asServant;
     if (l$asServant != lOther$asServant) {
+      return false;
+    }
+    final l$meetingId = meetingId;
+    final lOther$meetingId = other.meetingId;
+    if (l$meetingId != lOther$meetingId) {
       return false;
     }
     final l$meeting = meeting;
@@ -4540,7 +4713,13 @@ abstract class CopyWith_Query_personMeetings_historyMeetingRoster<TRes> {
   factory CopyWith_Query_personMeetings_historyMeetingRoster.stub(TRes res) =
       _CopyWithStubImpl_Query_personMeetings_historyMeetingRoster;
 
-  TRes call({bool? asServant, Fragment_Meeting? meeting, String? $__typename});
+  TRes call({
+    UuidValue? personId,
+    bool? asServant,
+    UuidValue? meetingId,
+    Fragment_Meeting? meeting,
+    String? $__typename,
+  });
   CopyWith_Fragment_Meeting<TRes> get meeting;
 }
 
@@ -4558,14 +4737,22 @@ class _CopyWithImpl_Query_personMeetings_historyMeetingRoster<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? personId = _undefined,
     Object? asServant = _undefined,
+    Object? meetingId = _undefined,
     Object? meeting = _undefined,
     Object? $__typename = _undefined,
   }) => _then(
     Query_personMeetings_historyMeetingRoster(
+      personId: personId == _undefined
+          ? _instance.personId
+          : (personId as UuidValue?),
       asServant: asServant == _undefined
           ? _instance.asServant
           : (asServant as bool?),
+      meetingId: meetingId == _undefined
+          ? _instance.meetingId
+          : (meetingId as UuidValue?),
       meeting: meeting == _undefined
           ? _instance.meeting
           : (meeting as Fragment_Meeting?),
@@ -4589,8 +4776,13 @@ class _CopyWithStubImpl_Query_personMeetings_historyMeetingRoster<TRes>
 
   TRes _res;
 
-  call({bool? asServant, Fragment_Meeting? meeting, String? $__typename}) =>
-      _res;
+  call({
+    UuidValue? personId,
+    bool? asServant,
+    UuidValue? meetingId,
+    Fragment_Meeting? meeting,
+    String? $__typename,
+  }) => _res;
 
   CopyWith_Fragment_Meeting<TRes> get meeting =>
       CopyWith_Fragment_Meeting.stub(_res);

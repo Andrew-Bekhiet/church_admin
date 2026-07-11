@@ -10,6 +10,7 @@ query historyMeetingRoster(
     limit: $limit
   ) {
     personId
+    meetingId
     name
     mainPhone
     gender
@@ -22,29 +23,33 @@ query historyMeetingRoster(
   }
 }
 
-# distinctOn requires matching orderBy columns (personId, asServant, meetingId).
+# Held days live on the meeting, so they are fetched once per meeting rather
+# than duplicated on every roster row. distinctOn requires matching orderBy
+# columns (personId, asServant, meetingId).
 query attendanceAnalysis(
   $dayFrom: date!
   $dayTo: date!
+  $meetingIds: [uuid!]!
   $where: [HistoryMeetingRosterBoolExp!] = []
 ) {
+  historyMeetings(where: { id: { _in: $meetingIds } }) {
+    id
+    days(
+      where: { day: { _gte: $dayFrom, _lte: $dayTo } }
+      orderBy: { day: ASC }
+      distinctOn: [day]
+    ) {
+      day
+    }
+  }
   historyMeetingRoster(
-    where: { _and: $where }
+    where: { _and: [{ meetingId: { _in: $meetingIds } }, { _and: $where }] }
     orderBy: [{ personId: ASC }, { asServant: ASC }, { meetingId: ASC }]
     distinctOn: [personId, asServant, meetingId]
   ) {
     personId
     asServant
-    meeting {
-      id
-      days(
-        where: { day: { _gte: $dayFrom, _lte: $dayTo } }
-        orderBy: { day: ASC }
-        distinctOn: [day]
-      ) {
-        day
-      }
-    }
+    meetingId
     attendanceHistory(
       where: { day: { _gte: $dayFrom, _lte: $dayTo } }
       orderBy: { day: ASC }
@@ -88,7 +93,9 @@ query personMeetings(
     orderBy: [{ asServant: ASC }, { meetingId: ASC }]
     distinctOn: [asServant, meetingId]
   ) {
+    personId
     asServant
+    meetingId
     meeting {
       ...Meeting
     }

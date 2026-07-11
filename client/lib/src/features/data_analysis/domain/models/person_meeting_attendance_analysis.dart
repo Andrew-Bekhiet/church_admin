@@ -67,16 +67,13 @@ class PersonMeetingAttendanceAnalysis {
   factory PersonMeetingAttendanceAnalysis.fromQueryResult(
     Query_attendanceAnalysis_historyMeetingRoster row,
     Meeting meeting,
+    List<DateTime> heldDays,
   ) {
     return PersonMeetingAttendanceAnalysis(
       personId: row.personId?.uuid ?? '',
       meeting: meeting,
       asServant: row.asServant ?? false,
-      heldDays: (row.meeting?.days ?? const [])
-          .map((d) => d.day)
-          .nonNulls
-          .toSet()
-          .toList(),
+      heldDays: heldDays.toSet().toList(),
       attendedDays: row.attendanceHistory.map((e) => e.day).nonNulls.toSet(),
     );
   }

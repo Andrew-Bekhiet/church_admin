@@ -110,7 +110,7 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
     _liveAttendance.reset();
     _personsAttendanceAnalyses = const {};
     _subscribeAttendance();
-    unawaited(_loadTrackRecords());
+    unawaited(_loadAttendanceAnalyses());
   }
 
   void toggleAudience() {
@@ -119,7 +119,7 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
     _audienceView = _audienceView.toggled;
     _personsAttendanceAnalyses = const {};
     _emitLoaded();
-    unawaited(_loadTrackRecords());
+    unawaited(_loadAttendanceAnalyses());
   }
 
   void changePresenceFilter(AttendancePresenceFilter filter) {
@@ -149,7 +149,7 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
     _streakWindowDays = days;
     _personsAttendanceAnalyses = const {};
     _emitLoaded();
-    unawaited(_loadTrackRecords());
+    unawaited(_loadAttendanceAnalyses());
   }
 
   void onSearch(String? query) => _searchSubject.sink.add(query);
@@ -231,17 +231,17 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
       await _loadRoster(showLoading: true);
       if (isClosed) return;
       _subscribeAttendance();
-      unawaited(_loadTrackRecords());
+      unawaited(_loadAttendanceAnalyses());
     } catch (error, stackTrace) {
       _onRosterError(error, stackTrace);
     }
   }
 
-  Future<void> _loadTrackRecords() async {
+  Future<void> _loadAttendanceAnalyses() async {
     final requestId = ++_trackRequestId;
 
     try {
-      final trackRecords = await _dao.getRosterTrackRecords(
+      final attendanceAnalyses = await _dao.getAttendanceAnalyses(
         meeting: _meeting,
         // Ends the day before selectedDate so marking attendance today doesn't
         // retroactively change the shown incoming track record.
@@ -255,7 +255,7 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
       if (requestId != _trackRequestId || isClosed) return;
 
       _personsAttendanceAnalyses = {
-        for (final record in trackRecords) record.personId: record,
+        for (final analysis in attendanceAnalyses) analysis.personId: analysis,
       };
       _emitLoaded();
     } catch (error, stackTrace) {
