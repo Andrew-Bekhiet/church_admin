@@ -106,7 +106,7 @@ class ImageUrlCacheService {
 
     final oldCache = box.get(cacheKey);
 
-    await box.put(
+    box.put(
       cacheKey,
       '${imageInfo.lastUpdatedTime!.toIso8601String()}|$url',
     );

@@ -9,6 +9,7 @@ mutation insertPersonLastConfession($personId: uuid!, $lastConfession: date!) {
     }
     onConflict: { constraint: confession_history_day_id_person_id_key }
   ) {
+    id
     person {
       ...Person
     }
@@ -26,6 +27,7 @@ mutation insertPersonLastKodas($personId: uuid!, $lastKodas: date!) {
     }
     onConflict: { constraint: kodas_history_day_id_person_id_key }
   ) {
+    id
     person {
       ...Person
     }

@@ -12,14 +12,14 @@ class UserSettingsService extends BlocObserver {
   UserSettingsService({required this.box});
 
   bool? get darkTheme => box.get('darkTheme');
-  Future<void> setDarkTheme(bool? value) => box.put('darkTheme', value);
+  Future<void> setDarkTheme(bool? value) async => box.put('darkTheme', value);
 
   String? get registeredFCMToken => box.get('registeredFCMToken');
-  Future<void> setRegisteredFCMToken(String? value) =>
+  Future<void> setRegisteredFCMToken(String? value) async =>
       box.put('registeredFCMToken', value);
 
   bool get greatFeastTheme => box.get('greatFeastTheme') ?? true;
-  Future<void> setGreatFeastTheme(bool value) =>
+  Future<void> setGreatFeastTheme(bool value) async =>
       box.put('greatFeastTheme', value);
 
   List<OrderBy>? getLastOrderByForType(QueryableType type) {
@@ -35,7 +35,7 @@ class UserSettingsService extends BlocObserver {
   Future<void> setLastOrderByForType(
     QueryableType type,
     List<OrderBy> orderBy,
-  ) => box.put(
+  ) async => box.put(
     'lastOrderByFor${type.name}',
     orderBy.map((o) => o.toJson()).toList(),
   );
@@ -46,7 +46,7 @@ class UserSettingsService extends BlocObserver {
     return HomeMode.values.firstWhereOrNull((e) => e.name == value);
   }
 
-  Future<void> setLastHomeMode(HomeMode? value) =>
+  Future<void> setLastHomeMode(HomeMode? value) async =>
       box.put('lastHomeMode', value?.name);
 
   Future<void> setupDefaults() async {

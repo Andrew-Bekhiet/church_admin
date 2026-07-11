@@ -2153,6 +2153,13 @@ const documentNodeQuerypersonsGeolocations = DocumentNode(
                   selectionSet: SelectionSetNode(
                     selections: [
                       FieldNode(
+                        name: NameNode(value: 'id'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                      FieldNode(
                         name: NameNode(value: 'geolocation'),
                         alias: null,
                         arguments: [],
@@ -2337,6 +2344,13 @@ const documentNodeQuerypersonsGeolocations = DocumentNode(
                   selectionSet: SelectionSetNode(
                     selections: [
                       FieldNode(
+                        name: NameNode(value: 'id'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
+                      FieldNode(
                         name: NameNode(value: 'geolocation'),
                         alias: null,
                         arguments: [],
@@ -2423,6 +2437,13 @@ const documentNodeQuerypersonsGeolocations = DocumentNode(
                   directives: [],
                   selectionSet: SelectionSetNode(
                     selections: [
+                      FieldNode(
+                        name: NameNode(value: 'id'),
+                        alias: null,
+                        arguments: [],
+                        directives: [],
+                        selectionSet: null,
+                      ),
                       FieldNode(
                         name: NameNode(value: 'geolocation'),
                         alias: null,
@@ -3029,6 +3050,7 @@ class _CopyWithStubImpl_Query_personsGeolocations_families<TRes>
 
 class Query_personsGeolocations_families_address {
   Query_personsGeolocations_families_address({
+    required this.id,
     this.geolocation,
     this.$__typename = 'Addresses',
   });
@@ -3036,13 +3058,17 @@ class Query_personsGeolocations_families_address {
   factory Query_personsGeolocations_families_address.fromJson(
     Map<String, dynamic> json,
   ) {
+    final l$id = json['id'];
     final l$geolocation = json['geolocation'];
     final l$$__typename = json['__typename'];
     return Query_personsGeolocations_families_address(
+      id: stringToUuid(l$id),
       geolocation: (l$geolocation as Map<String, dynamic>?),
       $__typename: (l$$__typename as String),
     );
   }
+
+  final UuidValue id;
 
   final Map<String, dynamic>? geolocation;
 
@@ -3050,6 +3076,8 @@ class Query_personsGeolocations_families_address {
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = uuidToString(l$id);
     final l$geolocation = geolocation;
     _resultData['geolocation'] = l$geolocation;
     final l$$__typename = $__typename;
@@ -3059,9 +3087,10 @@ class Query_personsGeolocations_families_address {
 
   @override
   int get hashCode {
+    final l$id = id;
     final l$geolocation = geolocation;
     final l$$__typename = $__typename;
-    return Object.hashAll([l$geolocation, l$$__typename]);
+    return Object.hashAll([l$id, l$geolocation, l$$__typename]);
   }
 
   @override
@@ -3071,6 +3100,11 @@ class Query_personsGeolocations_families_address {
     }
     if (other is! Query_personsGeolocations_families_address ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
       return false;
     }
     final l$geolocation = geolocation;
@@ -3105,7 +3139,11 @@ abstract class CopyWith_Query_personsGeolocations_families_address<TRes> {
   factory CopyWith_Query_personsGeolocations_families_address.stub(TRes res) =
       _CopyWithStubImpl_Query_personsGeolocations_families_address;
 
-  TRes call({Map<String, dynamic>? geolocation, String? $__typename});
+  TRes call({
+    UuidValue? id,
+    Map<String, dynamic>? geolocation,
+    String? $__typename,
+  });
 }
 
 class _CopyWithImpl_Query_personsGeolocations_families_address<TRes>
@@ -3122,10 +3160,12 @@ class _CopyWithImpl_Query_personsGeolocations_families_address<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? id = _undefined,
     Object? geolocation = _undefined,
     Object? $__typename = _undefined,
   }) => _then(
     Query_personsGeolocations_families_address(
+      id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
       geolocation: geolocation == _undefined
           ? _instance.geolocation
           : (geolocation as Map<String, dynamic>?),
@@ -3142,7 +3182,11 @@ class _CopyWithStubImpl_Query_personsGeolocations_families_address<TRes>
 
   TRes _res;
 
-  call({Map<String, dynamic>? geolocation, String? $__typename}) => _res;
+  call({
+    UuidValue? id,
+    Map<String, dynamic>? geolocation,
+    String? $__typename,
+  }) => _res;
 }
 
 class Query_personsGeolocations_stores implements Fragment_StoreNoPhoto {
@@ -3362,6 +3406,7 @@ class _CopyWithStubImpl_Query_personsGeolocations_stores<TRes>
 
 class Query_personsGeolocations_stores_address {
   Query_personsGeolocations_stores_address({
+    required this.id,
     this.geolocation,
     this.$__typename = 'Addresses',
   });
@@ -3369,13 +3414,17 @@ class Query_personsGeolocations_stores_address {
   factory Query_personsGeolocations_stores_address.fromJson(
     Map<String, dynamic> json,
   ) {
+    final l$id = json['id'];
     final l$geolocation = json['geolocation'];
     final l$$__typename = json['__typename'];
     return Query_personsGeolocations_stores_address(
+      id: stringToUuid(l$id),
       geolocation: (l$geolocation as Map<String, dynamic>?),
       $__typename: (l$$__typename as String),
     );
   }
+
+  final UuidValue id;
 
   final Map<String, dynamic>? geolocation;
 
@@ -3383,6 +3432,8 @@ class Query_personsGeolocations_stores_address {
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = uuidToString(l$id);
     final l$geolocation = geolocation;
     _resultData['geolocation'] = l$geolocation;
     final l$$__typename = $__typename;
@@ -3392,9 +3443,10 @@ class Query_personsGeolocations_stores_address {
 
   @override
   int get hashCode {
+    final l$id = id;
     final l$geolocation = geolocation;
     final l$$__typename = $__typename;
-    return Object.hashAll([l$geolocation, l$$__typename]);
+    return Object.hashAll([l$id, l$geolocation, l$$__typename]);
   }
 
   @override
@@ -3404,6 +3456,11 @@ class Query_personsGeolocations_stores_address {
     }
     if (other is! Query_personsGeolocations_stores_address ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
       return false;
     }
     final l$geolocation = geolocation;
@@ -3438,7 +3495,11 @@ abstract class CopyWith_Query_personsGeolocations_stores_address<TRes> {
   factory CopyWith_Query_personsGeolocations_stores_address.stub(TRes res) =
       _CopyWithStubImpl_Query_personsGeolocations_stores_address;
 
-  TRes call({Map<String, dynamic>? geolocation, String? $__typename});
+  TRes call({
+    UuidValue? id,
+    Map<String, dynamic>? geolocation,
+    String? $__typename,
+  });
 }
 
 class _CopyWithImpl_Query_personsGeolocations_stores_address<TRes>
@@ -3455,10 +3516,12 @@ class _CopyWithImpl_Query_personsGeolocations_stores_address<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? id = _undefined,
     Object? geolocation = _undefined,
     Object? $__typename = _undefined,
   }) => _then(
     Query_personsGeolocations_stores_address(
+      id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
       geolocation: geolocation == _undefined
           ? _instance.geolocation
           : (geolocation as Map<String, dynamic>?),
@@ -3475,7 +3538,11 @@ class _CopyWithStubImpl_Query_personsGeolocations_stores_address<TRes>
 
   TRes _res;
 
-  call({Map<String, dynamic>? geolocation, String? $__typename}) => _res;
+  call({
+    UuidValue? id,
+    Map<String, dynamic>? geolocation,
+    String? $__typename,
+  }) => _res;
 }
 
 class Query_personsGeolocations_persons implements Fragment_PersonNoPhoto {
@@ -3671,6 +3738,7 @@ class _CopyWithStubImpl_Query_personsGeolocations_persons<TRes>
 
 class Query_personsGeolocations_persons_address {
   Query_personsGeolocations_persons_address({
+    required this.id,
     this.geolocation,
     this.$__typename = 'Addresses',
   });
@@ -3678,13 +3746,17 @@ class Query_personsGeolocations_persons_address {
   factory Query_personsGeolocations_persons_address.fromJson(
     Map<String, dynamic> json,
   ) {
+    final l$id = json['id'];
     final l$geolocation = json['geolocation'];
     final l$$__typename = json['__typename'];
     return Query_personsGeolocations_persons_address(
+      id: stringToUuid(l$id),
       geolocation: (l$geolocation as Map<String, dynamic>?),
       $__typename: (l$$__typename as String),
     );
   }
+
+  final UuidValue id;
 
   final Map<String, dynamic>? geolocation;
 
@@ -3692,6 +3764,8 @@ class Query_personsGeolocations_persons_address {
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = uuidToString(l$id);
     final l$geolocation = geolocation;
     _resultData['geolocation'] = l$geolocation;
     final l$$__typename = $__typename;
@@ -3701,9 +3775,10 @@ class Query_personsGeolocations_persons_address {
 
   @override
   int get hashCode {
+    final l$id = id;
     final l$geolocation = geolocation;
     final l$$__typename = $__typename;
-    return Object.hashAll([l$geolocation, l$$__typename]);
+    return Object.hashAll([l$id, l$geolocation, l$$__typename]);
   }
 
   @override
@@ -3713,6 +3788,11 @@ class Query_personsGeolocations_persons_address {
     }
     if (other is! Query_personsGeolocations_persons_address ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
       return false;
     }
     final l$geolocation = geolocation;
@@ -3747,7 +3827,11 @@ abstract class CopyWith_Query_personsGeolocations_persons_address<TRes> {
   factory CopyWith_Query_personsGeolocations_persons_address.stub(TRes res) =
       _CopyWithStubImpl_Query_personsGeolocations_persons_address;
 
-  TRes call({Map<String, dynamic>? geolocation, String? $__typename});
+  TRes call({
+    UuidValue? id,
+    Map<String, dynamic>? geolocation,
+    String? $__typename,
+  });
 }
 
 class _CopyWithImpl_Query_personsGeolocations_persons_address<TRes>
@@ -3764,10 +3848,12 @@ class _CopyWithImpl_Query_personsGeolocations_persons_address<TRes>
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? id = _undefined,
     Object? geolocation = _undefined,
     Object? $__typename = _undefined,
   }) => _then(
     Query_personsGeolocations_persons_address(
+      id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
       geolocation: geolocation == _undefined
           ? _instance.geolocation
           : (geolocation as Map<String, dynamic>?),
@@ -3784,7 +3870,11 @@ class _CopyWithStubImpl_Query_personsGeolocations_persons_address<TRes>
 
   TRes _res;
 
-  call({Map<String, dynamic>? geolocation, String? $__typename}) => _res;
+  call({
+    UuidValue? id,
+    Map<String, dynamic>? geolocation,
+    String? $__typename,
+  }) => _res;
 }
 
 class Variables_Query_personHistoryAnalysis {
@@ -4856,6 +4946,13 @@ const documentNodeQuerypersonHistoryAnalysis = DocumentNode(
                         selectionSet: SelectionSetNode(
                           selections: [
                             FieldNode(
+                              name: NameNode(value: 'id'),
+                              alias: null,
+                              arguments: [],
+                              directives: [],
+                              selectionSet: null,
+                            ),
+                            FieldNode(
                               name: NameNode(value: 'time'),
                               alias: null,
                               arguments: [],
@@ -4983,6 +5080,13 @@ const documentNodeQuerypersonHistoryAnalysis = DocumentNode(
                         directives: [],
                         selectionSet: SelectionSetNode(
                           selections: [
+                            FieldNode(
+                              name: NameNode(value: 'id'),
+                              alias: null,
+                              arguments: [],
+                              directives: [],
+                              selectionSet: null,
+                            ),
                             FieldNode(
                               name: NameNode(value: 'time'),
                               alias: null,
@@ -8304,6 +8408,7 @@ class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggr
 
 class Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_nodes {
   Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_nodes({
+    required this.id,
     this.time,
     this.$__typename = 'HistoryKodasHistory',
   });
@@ -8311,13 +8416,17 @@ class Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_nodes {
   factory Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_nodes.fromJson(
     Map<String, dynamic> json,
   ) {
+    final l$id = json['id'];
     final l$time = json['time'];
     final l$$__typename = json['__typename'];
     return Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_nodes(
+      id: stringToUuid(l$id),
       time: l$time == null ? null : dateFromString(l$time),
       $__typename: (l$$__typename as String),
     );
   }
+
+  final UuidValue id;
 
   final DateTime? time;
 
@@ -8325,6 +8434,8 @@ class Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_nodes {
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = uuidToString(l$id);
     final l$time = time;
     _resultData['time'] = l$time == null ? null : dateToString(l$time);
     final l$$__typename = $__typename;
@@ -8334,9 +8445,10 @@ class Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_nodes {
 
   @override
   int get hashCode {
+    final l$id = id;
     final l$time = time;
     final l$$__typename = $__typename;
-    return Object.hashAll([l$time, l$$__typename]);
+    return Object.hashAll([l$id, l$time, l$$__typename]);
   }
 
   @override
@@ -8347,6 +8459,11 @@ class Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_nodes {
     if (other
             is! Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_nodes ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
       return false;
     }
     final l$time = time;
@@ -8391,7 +8508,7 @@ abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggr
     TRes res,
   ) = _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_nodes;
 
-  TRes call({DateTime? time, String? $__typename});
+  TRes call({UuidValue? id, DateTime? time, String? $__typename});
 }
 
 class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_nodes<
@@ -8416,15 +8533,19 @@ class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregat
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? time = _undefined, Object? $__typename = _undefined}) =>
-      _then(
-        Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_nodes(
-          time: time == _undefined ? _instance.time : (time as DateTime?),
-          $__typename: $__typename == _undefined || $__typename == null
-              ? _instance.$__typename
-              : ($__typename as String),
-        ),
-      );
+  TRes call({
+    Object? id = _undefined,
+    Object? time = _undefined,
+    Object? $__typename = _undefined,
+  }) => _then(
+    Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_nodes(
+      id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
+      time: time == _undefined ? _instance.time : (time as DateTime?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 }
 
 class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggregate_nodes<
@@ -8440,7 +8561,7 @@ class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_kodasHistoryAggr
 
   TRes _res;
 
-  call({DateTime? time, String? $__typename}) => _res;
+  call({UuidValue? id, DateTime? time, String? $__typename}) => _res;
 }
 
 class Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate {
@@ -9067,6 +9188,7 @@ class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_confessionHistor
 
 class Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_nodes {
   Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_nodes({
+    required this.id,
     this.time,
     this.$__typename = 'HistoryConfessionHistory',
   });
@@ -9074,13 +9196,17 @@ class Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_nodes {
   factory Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_nodes.fromJson(
     Map<String, dynamic> json,
   ) {
+    final l$id = json['id'];
     final l$time = json['time'];
     final l$$__typename = json['__typename'];
     return Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_nodes(
+      id: stringToUuid(l$id),
       time: l$time == null ? null : dateFromString(l$time),
       $__typename: (l$$__typename as String),
     );
   }
+
+  final UuidValue id;
 
   final DateTime? time;
 
@@ -9088,6 +9214,8 @@ class Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_nodes {
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = uuidToString(l$id);
     final l$time = time;
     _resultData['time'] = l$time == null ? null : dateToString(l$time);
     final l$$__typename = $__typename;
@@ -9097,9 +9225,10 @@ class Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_nodes {
 
   @override
   int get hashCode {
+    final l$id = id;
     final l$time = time;
     final l$$__typename = $__typename;
-    return Object.hashAll([l$time, l$$__typename]);
+    return Object.hashAll([l$id, l$time, l$$__typename]);
   }
 
   @override
@@ -9110,6 +9239,11 @@ class Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_nodes {
     if (other
             is! Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_nodes ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
       return false;
     }
     final l$time = time;
@@ -9154,7 +9288,7 @@ abstract class CopyWith_Query_personHistoryAnalysis_personsByPk_confessionHistor
     TRes res,
   ) = _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_nodes;
 
-  TRes call({DateTime? time, String? $__typename});
+  TRes call({UuidValue? id, DateTime? time, String? $__typename});
 }
 
 class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_nodes<
@@ -9180,10 +9314,12 @@ class _CopyWithImpl_Query_personHistoryAnalysis_personsByPk_confessionHistoryAgg
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
+    Object? id = _undefined,
     Object? time = _undefined,
     Object? $__typename = _undefined,
   }) => _then(
     Query_personHistoryAnalysis_personsByPk_confessionHistoryAggregate_nodes(
+      id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
       time: time == _undefined ? _instance.time : (time as DateTime?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
@@ -9205,7 +9341,7 @@ class _CopyWithStubImpl_Query_personHistoryAnalysis_personsByPk_confessionHistor
 
   TRes _res;
 
-  call({DateTime? time, String? $__typename}) => _res;
+  call({UuidValue? id, DateTime? time, String? $__typename}) => _res;
 }
 
 class Variables_Query_personServicesClassesGroups {

@@ -27,6 +27,7 @@ fragment EditHistory on HistoryEditHistory {
 }
 
 fragment AttendanceHistory on HistoryAttendanceHistory {
+  id
   time: datetime
   user: recordedByUser {
     ...User
@@ -48,6 +49,7 @@ fragment VisitHistory on HistoryVisitHistory {
 }
 
 fragment KodasHistory on HistoryKodasHistory {
+  id
   time
   user {
     ...User
@@ -55,6 +57,7 @@ fragment KodasHistory on HistoryKodasHistory {
 }
 
 fragment ConfessionHistory on HistoryConfessionHistory {
+  id
   time
   user {
     ...User

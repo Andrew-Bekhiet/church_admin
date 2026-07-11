@@ -2,6 +2,18 @@ import 'package:church_admin/church_admin.dart';
 import 'package:graphql_flutter/graphql_flutter.dart' as gql;
 
 class GqlKvStore extends gql.Store {
+  /// Bumped from 'GQLCache' to abandon the old layout where all query results
+  /// were deep-merged into one giant `Query` root entry.
+  static const int _currentVersion = 2;
+
+  static const String storeName = 'GQLCacheV$_currentVersion';
+
+  static final List<String> legacyStoreNames = [
+    'GQLCache',
+    for (var version = 2; version < _currentVersion; version++)
+      'GQLCacheV$version',
+  ];
+
   final SyncKVStore<Map<String, dynamic>> _storage;
 
   GqlKvStore(this._storage);

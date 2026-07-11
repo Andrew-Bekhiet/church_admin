@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:math';
 
 import 'package:church_admin/church_admin.dart';
@@ -157,7 +156,7 @@ class HomeDailyDataRepository {
         HomeDailyDataType.saying.name: sayingIndex,
     };
 
-    unawaited(_currentIndexes.put(isoDate, data));
+    _currentIndexes.put(isoDate, data);
 
     return data;
   }

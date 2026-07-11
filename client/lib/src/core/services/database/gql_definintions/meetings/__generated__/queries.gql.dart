@@ -2980,6 +2980,13 @@ const documentNodeQuerymeetingsAttendanceAnalysis = DocumentNode(
                         selectionSet: SelectionSetNode(
                           selections: [
                             FieldNode(
+                              name: NameNode(value: 'order'),
+                              alias: null,
+                              arguments: [],
+                              directives: [],
+                              selectionSet: null,
+                            ),
+                            FieldNode(
                               name: NameNode(value: 'name'),
                               alias: null,
                               arguments: [],
@@ -3974,6 +3981,7 @@ class _CopyWithStubImpl_Query_meetingsAttendanceAnalysis_historyMeetings_days<
 
 class Query_meetingsAttendanceAnalysis_historyMeetings_days_studyYear {
   Query_meetingsAttendanceAnalysis_historyMeetings_days_studyYear({
+    required this.order,
     required this.name,
     this.$__typename = 'StudyYears',
   });
@@ -3981,13 +3989,17 @@ class Query_meetingsAttendanceAnalysis_historyMeetings_days_studyYear {
   factory Query_meetingsAttendanceAnalysis_historyMeetings_days_studyYear.fromJson(
     Map<String, dynamic> json,
   ) {
+    final l$order = json['order'];
     final l$name = json['name'];
     final l$$__typename = json['__typename'];
     return Query_meetingsAttendanceAnalysis_historyMeetings_days_studyYear(
+      order: (l$order as int),
       name: (l$name as String),
       $__typename: (l$$__typename as String),
     );
   }
+
+  final int order;
 
   final String name;
 
@@ -3995,6 +4007,8 @@ class Query_meetingsAttendanceAnalysis_historyMeetings_days_studyYear {
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
+    final l$order = order;
+    _resultData['order'] = l$order;
     final l$name = name;
     _resultData['name'] = l$name;
     final l$$__typename = $__typename;
@@ -4004,9 +4018,10 @@ class Query_meetingsAttendanceAnalysis_historyMeetings_days_studyYear {
 
   @override
   int get hashCode {
+    final l$order = order;
     final l$name = name;
     final l$$__typename = $__typename;
-    return Object.hashAll([l$name, l$$__typename]);
+    return Object.hashAll([l$order, l$name, l$$__typename]);
   }
 
   @override
@@ -4017,6 +4032,11 @@ class Query_meetingsAttendanceAnalysis_historyMeetings_days_studyYear {
     if (other
             is! Query_meetingsAttendanceAnalysis_historyMeetings_days_studyYear ||
         runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$order = order;
+    final lOther$order = other.order;
+    if (l$order != lOther$order) {
       return false;
     }
     final l$name = name;
@@ -4060,7 +4080,7 @@ abstract class CopyWith_Query_meetingsAttendanceAnalysis_historyMeetings_days_st
     TRes res,
   ) = _CopyWithStubImpl_Query_meetingsAttendanceAnalysis_historyMeetings_days_studyYear;
 
-  TRes call({String? name, String? $__typename});
+  TRes call({int? order, String? name, String? $__typename});
 }
 
 class _CopyWithImpl_Query_meetingsAttendanceAnalysis_historyMeetings_days_studyYear<
@@ -4085,17 +4105,23 @@ class _CopyWithImpl_Query_meetingsAttendanceAnalysis_historyMeetings_days_studyY
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({Object? name = _undefined, Object? $__typename = _undefined}) =>
-      _then(
-        Query_meetingsAttendanceAnalysis_historyMeetings_days_studyYear(
-          name: name == _undefined || name == null
-              ? _instance.name
-              : (name as String),
-          $__typename: $__typename == _undefined || $__typename == null
-              ? _instance.$__typename
-              : ($__typename as String),
-        ),
-      );
+  TRes call({
+    Object? order = _undefined,
+    Object? name = _undefined,
+    Object? $__typename = _undefined,
+  }) => _then(
+    Query_meetingsAttendanceAnalysis_historyMeetings_days_studyYear(
+      order: order == _undefined || order == null
+          ? _instance.order
+          : (order as int),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
 }
 
 class _CopyWithStubImpl_Query_meetingsAttendanceAnalysis_historyMeetings_days_studyYear<
@@ -4111,7 +4137,7 @@ class _CopyWithStubImpl_Query_meetingsAttendanceAnalysis_historyMeetings_days_st
 
   TRes _res;
 
-  call({String? name, String? $__typename}) => _res;
+  call({int? order, String? name, String? $__typename}) => _res;
 }
 
 class Variables_Query_personMeetings {

@@ -13,7 +13,8 @@ class ChurchAdminApp extends StatefulWidget {
   State<ChurchAdminApp> createState() => _ChurchAdminAppState();
 }
 
-class _ChurchAdminAppState extends State<ChurchAdminApp> {
+class _ChurchAdminAppState extends State<ChurchAdminApp>
+    with WidgetsBindingObserver {
   late final StreamSubscription<bool> _connectivityListener;
   late final StreamSubscription<Notification> _notificationsListener;
 
@@ -26,6 +27,8 @@ class _ChurchAdminAppState extends State<ChurchAdminApp> {
 
     _notificationsListener = NotificationsService.I.onNotificationTapStream
         .listen(_onNotificationTapped);
+
+    WidgetsBinding.instance.addObserver(this);
 
     super.initState();
   }
@@ -105,6 +108,20 @@ class _ChurchAdminAppState extends State<ChurchAdminApp> {
     }
   }
 
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    switch (state) {
+      case AppLifecycleState.paused:
+      case AppLifecycleState.detached:
+        unawaited(SyncKVStore.flushAll());
+
+      case AppLifecycleState.resumed:
+      case AppLifecycleState.inactive:
+      case AppLifecycleState.hidden:
+        break;
+    }
+  }
+
   void _onNotificationTapped(Notification notification) {
     WidgetsBinding.instance.addPostFrameCallback(
       (_) => showDialog(
@@ -118,6 +135,8 @@ class _ChurchAdminAppState extends State<ChurchAdminApp> {
   @override
   Future<void> dispose() async {
     super.dispose();
+
+    WidgetsBinding.instance.removeObserver(this);
 
     await _connectivityListener.cancel();
     await _notificationsListener.cancel();
