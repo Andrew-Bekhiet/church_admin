@@ -7,5 +7,5 @@ export 'models/meetings_attendance_analysis.dart';
 export 'models/person_analysis_options.dart';
 export 'models/person_analysis_section.dart';
 export 'models/person_meeting_attendance_analysis.dart';
-export 'models/roster_demographic_entry.dart';
 export 'models/single_day_meetings_attendance_analysis.dart';
+export 'models/single_day_roster_member.dart';

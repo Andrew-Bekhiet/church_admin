@@ -218,16 +218,26 @@ class MeetingsDAO extends DAOBase<Meeting>
   Future<MeetingsAttendanceAnalysis> getPersonMeetingAttendanceAnalysis({
     required Meeting meeting,
     required DateTimeRange range,
-  }) => _getMeetingsAttendanceAnalysis(
-    title: meeting.name,
-    color: meeting.color,
-    range: range,
-    where: [
-      Input_HistoryMeetingsBoolExp(
-        id: Input_UuidComparisonExp($_eq: meeting.id.toUuid()),
-      ),
-    ],
-  );
+  }) {
+    final serviceId = meeting.service?.id ?? meeting.serviceId;
+
+    return _getMeetingsAttendanceAnalysis(
+      title: meeting.name,
+      color: meeting.color,
+      range: range,
+      where: [
+        Input_HistoryMeetingsBoolExp(
+          id: Input_UuidComparisonExp($_eq: meeting.id.toUuid()),
+        ),
+      ],
+      loadClasses: switch (serviceId) {
+        final serviceId? => () => db.classes.getClassesForService(
+          serviceId: serviceId,
+        ),
+        null => null,
+      },
+    );
+  }
 
   Future<MeetingsAttendanceAnalysis> getServiceAttendanceAnalysis({
     required Service service,
@@ -241,8 +251,11 @@ class MeetingsDAO extends DAOBase<Meeting>
         serviceId: Input_UuidComparisonExp($_eq: service.id.toUuid()),
       ),
     ],
+    loadClasses: () => db.classes.getClassesForService(serviceId: service.id),
   );
 
+  // Groups span classes across study years and genders with no clean class
+  // mapping, so slices fall back to their grade/gender labels.
   Future<MeetingsAttendanceAnalysis> getGroupAttendanceAnalysis({
     required Group group,
     required DateTimeRange range,
@@ -312,6 +325,7 @@ class MeetingsDAO extends DAOBase<Meeting>
           },
         ),
       ],
+      loadClasses: () => Future.value([class$]),
     );
   }
 
@@ -322,6 +336,7 @@ class MeetingsDAO extends DAOBase<Meeting>
     required DateTimeRange range,
     List<Input_HistoryMeetingDaysBoolExp> demographicsWhere = const [],
     List<Input_HistoryMeetingRosterBoolExp> rosterWhere = const [],
+    Future<List<Class>> Function()? loadClasses,
   }) async {
     final result = await graphQLClient.queryAndReturnParsed(
       QueryOptions(
@@ -349,18 +364,26 @@ class MeetingsDAO extends DAOBase<Meeting>
       );
     }
 
+    final (rosterMembers, classes) = await (
+      _getRosterDemographics(
+        day: range.start,
+        where: where,
+        rosterWhere: rosterWhere,
+      ),
+      loadClasses?.call() ?? Future.value(const <Class>[]),
+    ).wait;
+
     return SingleDayMeetingsAttendanceAnalysis(
       title: title,
       color: color,
       meetings: meetings,
-      rosterDemographics: await _getRosterDemographics(
-        where: where,
-        rosterWhere: rosterWhere,
-      ),
+      rosterMembers: rosterMembers,
+      classes: classes,
     );
   }
 
-  Future<List<RosterDemographicEntry>> _getRosterDemographics({
+  Future<List<SingleDayRosterMember>> _getRosterDemographics({
+    required DateTime day,
     required List<Input_HistoryMeetingsBoolExp> where,
     required List<Input_HistoryMeetingRosterBoolExp> rosterWhere,
   }) async {
@@ -369,6 +392,7 @@ class MeetingsDAO extends DAOBase<Meeting>
         document: documentNodeQuerymeetingsRosterDemographics,
         operationName: 'meetingsRosterDemographics',
         variables: Variables_Query_meetingsRosterDemographics(
+          day: day,
           where: where,
           rosterWhere: rosterWhere,
         ).toJson(),
@@ -378,11 +402,14 @@ class MeetingsDAO extends DAOBase<Meeting>
 
     return [
       for (final row in result.historyMeetingRoster)
-        (
-          studyYearId: row.studyYearId,
-          studyYearName: row.studyYearName,
-          gender: row.gender,
-        ),
+        if (row.personId?.uuid case final personId?)
+          SingleDayRosterMember(
+            personId: personId,
+            studyYearId: row.studyYearId,
+            studyYearName: row.studyYearName,
+            gender: row.gender,
+            attended: row.attendanceHistory.isNotEmpty,
+          ),
     ];
   }
 

@@ -87,18 +87,25 @@ query meetingsAttendanceAnalysis(
 }
 
 query meetingsRosterDemographics(
+  $day: date!
   $where: [HistoryMeetingsBoolExp!] = []
   $rosterWhere: [HistoryMeetingRosterBoolExp!] = []
 ) {
   historyMeetingRoster(
     where: { meeting: { _and: $where }, _and: $rosterWhere }
-    orderBy: [{ personId: ASC }]
-    distinctOn: [personId]
+    orderBy: [{ personId: ASC }, { asServant: ASC }, { meetingId: ASC }]
+    distinctOn: [personId, asServant, meetingId]
   ) {
     personId
+    asServant
+    meetingId
     studyYearId
     studyYearName
     gender
+    attendanceHistory(where: { day: { _eq: $day } }) {
+      id
+      day
+    }
   }
 }
 

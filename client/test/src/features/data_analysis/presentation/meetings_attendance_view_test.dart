@@ -3,33 +3,44 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  MeetingDayDemographicCounts demographic(
-    DateTime d, {
-    int persons = 0,
+  SingleDayRosterMember member(
+    String personId, {
     int? studyYearId,
     bool? gender,
     String? studyYearName,
-  }) => MeetingDayDemographicCounts(
-    day: d,
-    personsCount: persons,
-    servantsCount: 0,
-    totalCount: persons,
+    bool attended = false,
+  }) => SingleDayRosterMember(
+    personId: personId,
     studyYearId: studyYearId,
     gender: gender,
     studyYearName: studyYearName,
+    attended: attended,
   );
+
+  final day = DateTime(2026, 7, 12);
 
   testWidgets(
     'single-day analysis renders the single-day KPIs and pie chart',
     (tester) async {
-      final day = DateTime(2026, 7, 12);
       final analysis = SingleDayMeetingsAttendanceAnalysis(
         title: 'خدمة',
-        rosterDemographics: [
-          (studyYearId: 1, gender: true, studyYearName: 'أولى'),
-          (studyYearId: 1, gender: true, studyYearName: 'أولى'),
-          (studyYearId: 2, gender: false, studyYearName: 'ثانية'),
-          (studyYearId: 2, gender: false, studyYearName: 'ثانية'),
+        rosterMembers: [
+          member(
+            'p1',
+            studyYearId: 1,
+            gender: true,
+            studyYearName: 'أولى',
+            attended: true,
+          ),
+          member('p2', studyYearId: 1, gender: true, studyYearName: 'أولى'),
+          member(
+            'p3',
+            studyYearId: 2,
+            gender: false,
+            studyYearName: 'ثانية',
+            attended: true,
+          ),
+          member('p4', studyYearId: 2, gender: false, studyYearName: 'ثانية'),
         ],
         meetings: [
           MeetingAttendanceSummary(
@@ -40,19 +51,11 @@ void main() {
               isArchived: false,
             ),
             demographics: [
-              demographic(
-                day,
-                persons: 2,
-                studyYearId: 1,
-                gender: true,
-                studyYearName: 'أولى',
-              ),
-              demographic(
-                day,
-                persons: 1,
-                studyYearId: 2,
-                gender: false,
-                studyYearName: 'ثانية',
+              MeetingDayDemographicCounts(
+                day: day,
+                personsCount: 2,
+                servantsCount: 0,
+                totalCount: 2,
               ),
             ],
           ),

@@ -42,10 +42,7 @@ class MeetingsAttendanceView extends StatelessWidget {
             if (single.hasDemographicBreakdown)
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: ClassAttendancePieChart(
-                  analysis: single,
-                  color: single.color,
-                ),
+                child: ClassAttendancePieChart(analysis: single),
               ),
           ],
           _ => [

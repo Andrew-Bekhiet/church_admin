@@ -1,6 +1,8 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/classes/__generated__/mutations.gql.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/classes/__generated__/queries.gql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/classes/__generated__/subscriptions.gql.dart';
+import 'package:graphql/client.dart';
 
 class ClassesDAO extends FullCRUDDAO<Class> {
   ClassesDAO({required super.db}) : super(fromJson: Class.fromJson);
@@ -82,4 +84,21 @@ class ClassesDAO extends FullCRUDDAO<Class> {
 
   Json _deleteSingleByIdVarsConstructor({required UuidValue id}) =>
       Variables_Mutation_deleteClass(classId: id).toJson();
+
+  Future<List<Class>> getClassesForService({required String serviceId}) async {
+    final result = await graphQLClient.queryAndReturnParsed(
+      QueryOptions(
+        document: documentNodeQueryclassesForService,
+        operationName: 'classesForService',
+        variables: Variables_Query_classesForService(
+          serviceId: serviceId.toUuid(),
+        ).toJson(),
+        parserFn: Query_classesForService.fromJson,
+      ),
+    );
+
+    return result.classes
+        .map((class$) => Class.fromJson(class$.toJson()))
+        .toList();
+  }
 }

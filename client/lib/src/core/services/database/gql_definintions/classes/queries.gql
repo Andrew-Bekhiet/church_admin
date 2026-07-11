@@ -1,0 +1,16 @@
+query classesForService($serviceId: uuid!) {
+  classes(
+    where: { serviceId: { _eq: $serviceId } }
+    orderBy: [{ name: ASC }]
+  ) {
+    id
+    name
+    color
+    serviceStudyYear
+    serviceGender
+    studyYear {
+      order
+      name
+    }
+  }
+}
