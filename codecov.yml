@@ -4,3 +4,8 @@ ignore:
   - "**.graphql.dart"
   - "**.gql.dart"
   - "**/__generated__/**"
+coverage:
+  patch:
+    default:
+      target: 60%
+      threshold: 5%
