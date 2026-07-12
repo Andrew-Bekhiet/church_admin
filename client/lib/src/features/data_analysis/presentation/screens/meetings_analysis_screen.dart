@@ -50,8 +50,6 @@ class _MeetingsAnalysisScreenState extends State<MeetingsAnalysisScreen> {
     return Scaffold(
       appBar: AppBar(title: Text(widget.title)),
       body: SingleChildScrollView(
-        // Temporary until a wider design pass: tones down the chart's
-        // headlineSmall (Hacen Algeria) to match the Cairo section headers.
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
