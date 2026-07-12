@@ -16,6 +16,7 @@ class ClassAttendancePieChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = ColorScheme.of(context);
     final textTheme = TextTheme.of(context);
 
     final classes = analysis.classAttendanceRates
@@ -23,6 +24,18 @@ class ClassAttendancePieChart extends StatelessWidget {
         .toList();
 
     if (classes.isEmpty) return const SizedBox.shrink();
+
+    final primaryColor = colorScheme.primary;
+
+    final classesColors = Expando<Color>();
+    for (int i = 0; i < classes.length; i++) {
+      final class$ = classes[i];
+      final color = class$.classColor;
+
+      classesColors[class$] = color == null || color == Colors.transparent
+          ? primaryColor.spin(i * 360 / classes.length)
+          : color;
+    }
 
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -38,24 +51,27 @@ class ClassAttendancePieChart extends StatelessWidget {
                 for (final class$ in classes)
                   PieChartSectionData(
                     value: class$.attendedCount.toDouble(),
-                    color: class$.classColor ?? Colors.transparent,
+                    color: classesColors[class$],
                     title: class$.ratePercentLabel,
-                    radius: 70,
+                    cornerRadius: 4,
+                    showTitle: true,
+                    radius: 100,
                     titleStyle: textTheme.labelMedium?.copyWith(
-                      color: (class$.classColor ?? Colors.transparent).isDark
+                      color: classesColors[class$]?.isDark ?? false
                           ? Colors.white
                           : Colors.black87,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
               ],
+              startDegreeOffset: -90,
             ),
           ),
         ),
         ClassAttendanceLegend(
           entries: [
             for (final class$ in classes)
-              (class$.displayName, class$.classColor ?? Colors.transparent),
+              (class$.displayName, classesColors[class$] ?? primaryColor),
           ],
         ),
       ],
