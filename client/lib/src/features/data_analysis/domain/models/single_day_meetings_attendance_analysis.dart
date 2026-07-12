@@ -32,17 +32,22 @@ class SingleDayMeetingsAttendanceAnalysis extends MeetingsAttendanceAnalysis {
   double? get overallAttendanceRate =>
       rosterSize == 0 ? null : attendedPersonsCount / rosterSize;
 
+  String get overallAttendanceRateLabel =>
+      ClassAttendanceRate.formatRate(overallAttendanceRate);
+
   @override
   bool get hasDemographicBreakdown => classAttendanceRates.length > 1;
 
-  List<ClassAttendanceRate> get _ratedClasses =>
-      classAttendanceRates.where((c) => c.rate != null).toList();
+  bool get hasClassRanking => _ratedClasses.length >= 2;
 
-  ClassAttendanceRate? get topClass =>
-      maxBy(_ratedClasses, (c) => c.rate ?? -1);
+  late final List<ClassAttendanceRate> _ratedClasses = classAttendanceRates
+      .where((c) => c.rate != null)
+      .toList();
+
+  ClassAttendanceRate? get topClass => maxBy(_ratedClasses, (c) => c.rate!);
 
   ClassAttendanceRate? get lowestClass =>
-      minBy(_ratedClasses, (c) => c.rate ?? -1);
+      _ratedClasses.length < 2 ? null : minBy(_ratedClasses, (c) => c.rate!);
 
   SingleDayMeetingsAttendanceAnalysis({
     required super.title,

@@ -1,5 +1,4 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/src/features/data_analysis/presentation/widgets/meeting_kpis_summary_tile.dart';
 import 'package:flutter/material.dart';
 
 class MeetingBreakdownTile extends StatelessWidget {
@@ -22,7 +21,7 @@ class MeetingBreakdownTile extends StatelessWidget {
       title: Text(summary.meeting.name),
       childrenPadding: const EdgeInsets.only(bottom: 8),
       children: [
-        MeetingKpisSummaryTile(
+        MeetingKpisSummaryGrid(
           heldCount: summary.heldCount,
           averageAttendance: summary.averageAttendance,
           peak: rolledDays.peakDayByCount,

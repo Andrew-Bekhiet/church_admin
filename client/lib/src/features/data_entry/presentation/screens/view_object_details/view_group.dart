@@ -133,11 +133,7 @@ class _ViewGroupState extends State<ViewGroup> {
                     $extra: MeetingsAnalysisExtra(
                       title: 'احصائيات ${group.name}',
                       initialRangePreset: PastQuarterDateTimeRangePreset(),
-                      load: (range) =>
-                          DatabaseService.I.meetings.getGroupAttendanceAnalysis(
-                            group: group,
-                            range: range,
-                          ),
+                      subject: GroupAnalysisSubject(group),
                     ),
                   ).push(context),
                 ),

@@ -98,11 +98,7 @@ class _ViewClassState extends State<ViewClass> {
                   $extra: MeetingsAnalysisExtra(
                     title: 'احصائيات ${$class.name}',
                     initialRangePreset: PastQuarterDateTimeRangePreset(),
-                    load: (range) =>
-                        DatabaseService.I.meetings.getClassAttendanceAnalysis(
-                          class$: $class,
-                          range: range,
-                        ),
+                    subject: ClassAnalysisSubject($class),
                   ),
                 ).push(context),
               ),

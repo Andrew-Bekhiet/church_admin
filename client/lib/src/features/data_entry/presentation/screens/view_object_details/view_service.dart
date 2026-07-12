@@ -156,11 +156,7 @@ class _ViewServiceState extends State<ViewService> {
                     $extra: MeetingsAnalysisExtra(
                       title: 'احصائيات ${service.name}',
                       initialRangePreset: PastQuarterDateTimeRangePreset(),
-                      load: (range) => DatabaseService.I.meetings
-                          .getServiceAttendanceAnalysis(
-                            service: service,
-                            range: range,
-                          ),
+                      subject: ServiceAnalysisSubject(service),
                     ),
                   ).push(context),
                 ),

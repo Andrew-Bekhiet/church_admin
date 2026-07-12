@@ -3,14 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 
-class MeetingKpisSummaryTile extends StatelessWidget {
+class MeetingKpisSummaryGrid extends StatelessWidget {
   final int heldCount;
   final double averageAttendance;
   final MeetingDay? peak;
   final AttendanceGranularity granularity;
   final DateTime? latestDay;
 
-  const MeetingKpisSummaryTile({
+  const MeetingKpisSummaryGrid({
     required this.heldCount,
     required this.averageAttendance,
     required this.peak,

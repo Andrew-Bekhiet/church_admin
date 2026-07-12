@@ -48,7 +48,9 @@ MeetingsAnalysisExtra _$MeetingsAnalysisExtraFromJson(Map json) =>
       initialRangePreset: MeetingsAnalysisExtra._dateRangePresetFromString(
         json['initialRangePreset'] as String,
       ),
-      load: MeetingsAnalysisExtra._loadFromJson((json['load'] as num).toInt()),
+      subject: MeetingsAnalysisExtra._subjectFromJson(
+        (json['subject'] as num).toInt(),
+      ),
     );
 
 Map<String, dynamic> _$MeetingsAnalysisExtraToJson(
@@ -58,5 +60,5 @@ Map<String, dynamic> _$MeetingsAnalysisExtraToJson(
   'initialRangePreset': MeetingsAnalysisExtra._dateRangePresetToString(
     instance.initialRangePreset,
   ),
-  'load': MeetingsAnalysisExtra._loadToJson(instance.load),
+  'subject': MeetingsAnalysisExtra._subjectToJson(instance.subject),
 };

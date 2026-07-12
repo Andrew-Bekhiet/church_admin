@@ -7,6 +7,9 @@ import 'dart:ui' show Color;
 /// real name and colour; otherwise the class is described by its study year and
 /// gender.
 class ClassAttendanceRate {
+  static String formatRate(double? rate) =>
+      rate == null ? '—' : '${(rate * 100).toStringAsFixed(0)}%';
+
   final int? studyYearId;
   final String? studyYearName;
   final bool? gender;
@@ -25,11 +28,7 @@ class ClassAttendanceRate {
     return _gradeGenderLabel;
   }
 
-  String get ratePercentLabel {
-    final value = rate;
-
-    return value == null ? '—' : '${(value * 100).toStringAsFixed(0)}%';
-  }
+  String get ratePercentLabel => formatRate(rate);
 
   String get _gradeGenderLabel {
     final genderLabel = switch (gender) {

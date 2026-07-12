@@ -2,13 +2,10 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 
-class SingleDayKpisSummaryTile extends StatelessWidget {
+class SingleDayKpisSummaryGrid extends StatelessWidget {
   final SingleDayMeetingsAttendanceAnalysis analysis;
 
-  const SingleDayKpisSummaryTile({required this.analysis, super.key});
-
-  static String _formatRate(double? rate) =>
-      rate == null ? '—' : '${(rate * 100).toStringAsFixed(0)}%';
+  const SingleDayKpisSummaryGrid({required this.analysis, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +18,7 @@ class SingleDayKpisSummaryTile extends StatelessWidget {
         AttendanceKpiTile(
           icon: const Icon(Symbols.percent),
           label: 'نسبة الحضور',
-          value: _formatRate(analysis.overallAttendanceRate),
+          value: analysis.overallAttendanceRateLabel,
           emphasized: true,
         ),
         AttendanceKpiTile(
@@ -30,20 +27,20 @@ class SingleDayKpisSummaryTile extends StatelessWidget {
           value: analysis.attendedPersonsCount.toString(),
           caption: 'من أصل ${analysis.rosterSize}',
         ),
-        if (analysis.classes.length >= 2)
+        if (analysis.hasClassRanking) ...[
           AttendanceKpiTile(
             icon: const Icon(Symbols.workspace_premium),
             label: 'أعلى فصل حضورًا',
             value: topClass?.displayName ?? '—',
             caption: topClass?.ratePercentLabel,
           ),
-        if (analysis.classes.length >= 2)
           AttendanceKpiTile(
             icon: const Icon(Symbols.trending_down),
             label: 'أقل فصل حضورًا',
             value: lowestClass?.displayName ?? '—',
             caption: lowestClass?.ratePercentLabel,
           ),
+        ],
       ],
     );
   }

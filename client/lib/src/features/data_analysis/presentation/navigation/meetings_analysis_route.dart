@@ -18,22 +18,23 @@ class MeetingsAnalysisRoute extends GoRouteData with $MeetingsAnalysisRoute {
     return MeetingsAnalysisScreen(
       title: $extra.title,
       initialRangePreset: $extra.initialRangePreset,
-      load: $extra.load,
+      subject: $extra.subject,
     );
   }
 }
 
 @JsonSerializable()
 class MeetingsAnalysisExtra extends SerializableExtra {
-  // Loaders can't be encoded to JSON, so the closure is stashed here and only
+  // Subjects can't be encoded to JSON, so the subject is stashed here and only
   // its index travels through serialization.
-  static final List<MeetingsAnalysisLoader> _serializedLoaders = [];
+  static final List<MeetingsAnalysisSubject> _serializedSubjects = [];
 
-  static MeetingsAnalysisLoader _loadFromJson(int id) => _serializedLoaders[id];
+  static MeetingsAnalysisSubject _subjectFromJson(int id) =>
+      _serializedSubjects[id];
 
-  static int _loadToJson(MeetingsAnalysisLoader load) {
-    final id = _serializedLoaders.length;
-    _serializedLoaders.add(load);
+  static int _subjectToJson(MeetingsAnalysisSubject subject) {
+    final id = _serializedSubjects.length;
+    _serializedSubjects.add(subject);
 
     return id;
   }
@@ -81,13 +82,13 @@ class MeetingsAnalysisExtra extends SerializableExtra {
   )
   final DateTimeRangePreset initialRangePreset;
 
-  @JsonKey(fromJson: _loadFromJson, toJson: _loadToJson)
-  final MeetingsAnalysisLoader load;
+  @JsonKey(fromJson: _subjectFromJson, toJson: _subjectToJson)
+  final MeetingsAnalysisSubject subject;
 
   const MeetingsAnalysisExtra({
     required this.title,
     required this.initialRangePreset,
-    required this.load,
+    required this.subject,
   });
 
   factory MeetingsAnalysisExtra.fromJson(Json json) =>
