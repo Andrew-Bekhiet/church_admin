@@ -19,6 +19,9 @@ class MeetingsAnalysisCubit extends Cubit<MeetingsAnalysisState> {
     unawaited(load(initialRange));
   }
 
+  // TODO: Implement one graphql query that fetches all the needed data
+  // instead of 3 queries
+  // Ideally, all the needed data should be fetched in one gql query
   Future<void> load(DateTimeRange range) async {
     emit(const MeetingsAnalysisLoading());
 
