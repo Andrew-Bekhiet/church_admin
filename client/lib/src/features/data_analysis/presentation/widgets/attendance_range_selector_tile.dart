@@ -56,7 +56,10 @@ class AttendanceRangeSelectorTile extends StatelessWidget {
         selectOnly: true,
         textStyle: textTheme.titleMedium,
         onSelected: (selectedPreset) async {
-          if (selectedPreset == null) {
+          // Both the picker entry (null when a standard preset is selected) and
+          // the currently-selected custom preset re-open the date picker.
+          if (selectedPreset == null ||
+              selectedPreset is CustomDateTimeRangePreset) {
             await _pickCustomRange(context);
             return;
           }
@@ -77,10 +80,13 @@ class AttendanceRangeSelectorTile extends StatelessWidget {
             value: PastYearDateTimeRangePreset(),
             label: 'العام الماضي',
           ),
-          const DropdownMenuEntry(
-            value: null,
+          DropdownMenuEntry(
+            // Carrying the active custom preset makes this entry match
+            // `initialSelection` so it renders as selected; a standard preset
+            // leaves it null so tapping it opens the picker.
+            value: preset is CustomDateTimeRangePreset ? preset : null,
             label: 'فترة مخصصة',
-            leadingIcon: Icon(Icons.date_range, size: 18),
+            leadingIcon: const Icon(Icons.date_range, size: 18),
           ),
         ],
       ),

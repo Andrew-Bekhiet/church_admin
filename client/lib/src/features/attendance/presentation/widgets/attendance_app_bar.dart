@@ -98,11 +98,7 @@ class AttendanceAppBar extends StatelessWidget {
               : CustomDateTimeRangePreset(
                   range: DateTimeRange(start: selectedDay, end: selectedDay),
                 ),
-          load: (range) =>
-              DatabaseService.I.meetings.getPersonMeetingAttendanceAnalysis(
-                meeting: meeting,
-                range: range,
-              ),
+          subject: MeetingAnalysisSubject(meeting),
         ),
       ).push(context),
     );

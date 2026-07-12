@@ -1,5 +1,3 @@
-import 'dart:ui' show Color;
-
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/meetings/__generated__/mutations.gql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/meetings/__generated__/queries.gql.dart';
@@ -215,63 +213,116 @@ class MeetingsDAO extends DAOBase<Meeting>
     ];
   }
 
-  Future<MeetingsAttendanceAnalysis> getPersonMeetingAttendanceAnalysis({
-    required Meeting meeting,
+  Future<MeetingsAttendanceAnalysis> getMeetingsAttendanceAnalysis({
+    required MeetingsAnalysisSubject subject,
     required DateTimeRange range,
-  }) => _getMeetingsAttendanceAnalysis(
-    title: meeting.name,
-    color: meeting.color,
-    range: range,
-    where: [
-      Input_HistoryMeetingsBoolExp(
-        id: Input_UuidComparisonExp($_eq: meeting.id.toUuid()),
-      ),
-    ],
-  );
+  }) async {
+    final filters = _subjectFilters(subject);
 
-  Future<MeetingsAttendanceAnalysis> getServiceAttendanceAnalysis({
-    required Service service,
-    required DateTimeRange range,
-  }) => _getMeetingsAttendanceAnalysis(
-    title: service.name,
-    color: service.color,
-    range: range,
-    where: [
-      Input_HistoryMeetingsBoolExp(
-        serviceId: Input_UuidComparisonExp($_eq: service.id.toUuid()),
+    final result = await graphQLClient.queryAndReturnParsed(
+      QueryOptions(
+        document: documentNodeQuerymeetingsAttendanceAnalysis,
+        operationName: 'meetingsAttendanceAnalysis',
+        variables: Variables_Query_meetingsAttendanceAnalysis(
+          dayFrom: range.start,
+          dayTo: range.end,
+          where: filters.where,
+          demographicsWhere: filters.demographicsWhere,
+        ).toJson(),
+        parserFn: Query_meetingsAttendanceAnalysis.fromJson,
       ),
-    ],
-  );
+    );
 
-  Future<MeetingsAttendanceAnalysis> getGroupAttendanceAnalysis({
-    required Group group,
-    required DateTimeRange range,
-  }) => _getMeetingsAttendanceAnalysis(
-    title: group.name,
-    color: group.color,
-    range: range,
-    where: [
-      Input_HistoryMeetingsBoolExp(
-        groupId: Input_UuidComparisonExp($_eq: group.id.toUuid()),
+    return MeetingsAttendanceAnalysis(
+      title: subject.title,
+      color: subject.color,
+      meetings: result.historyMeetings
+          .map(MeetingAttendanceSummary.fromQueryResult)
+          .toList(),
+    );
+  }
+
+  Future<List<SingleDayRosterMember>> getSingleDayRosterDemographics({
+    required MeetingsAnalysisSubject subject,
+    required DateTime day,
+  }) async {
+    final filters = _subjectFilters(subject);
+    final result = await graphQLClient.queryAndReturnParsed(
+      QueryOptions(
+        document: documentNodeQuerymeetingsRosterDemographics,
+        operationName: 'meetingsRosterDemographics',
+        variables: Variables_Query_meetingsRosterDemographics(
+          day: day,
+          where: filters.where,
+          rosterWhere: filters.rosterWhere,
+        ).toJson(),
+        parserFn: Query_meetingsRosterDemographics.fromJson,
       ),
-    ],
-  );
+    );
+
+    return [
+      for (final row in result.historyMeetingRoster)
+        if (row.personId?.uuid case final personId?)
+          SingleDayRosterMember(
+            personId: personId,
+            studyYearId: row.studyYearId,
+            studyYearName: row.studyYearName,
+            gender: row.gender,
+            attended: row.attendanceHistory.isNotEmpty,
+          ),
+    ];
+  }
+
+  ({
+    List<Input_HistoryMeetingsBoolExp> where,
+    List<Input_HistoryMeetingDaysBoolExp> demographicsWhere,
+    List<Input_HistoryMeetingRosterBoolExp> rosterWhere,
+  })
+  _subjectFilters(MeetingsAnalysisSubject subject) => switch (subject) {
+    MeetingAnalysisSubject(:final meeting) => (
+      where: [
+        Input_HistoryMeetingsBoolExp(
+          id: Input_UuidComparisonExp($_eq: meeting.id.toUuid()),
+        ),
+      ],
+      demographicsWhere: const <Input_HistoryMeetingDaysBoolExp>[],
+      rosterWhere: const <Input_HistoryMeetingRosterBoolExp>[],
+    ),
+    ServiceAnalysisSubject(:final service) => (
+      where: [
+        Input_HistoryMeetingsBoolExp(
+          serviceId: Input_UuidComparisonExp($_eq: service.id.toUuid()),
+        ),
+      ],
+      demographicsWhere: const <Input_HistoryMeetingDaysBoolExp>[],
+      rosterWhere: const <Input_HistoryMeetingRosterBoolExp>[],
+    ),
+    GroupAnalysisSubject(:final group) => (
+      where: [
+        Input_HistoryMeetingsBoolExp(
+          groupId: Input_UuidComparisonExp($_eq: group.id.toUuid()),
+        ),
+      ],
+      demographicsWhere: const <Input_HistoryMeetingDaysBoolExp>[],
+      rosterWhere: const <Input_HistoryMeetingRosterBoolExp>[],
+    ),
+    ClassAnalysisSubject(:final class$) => _classFilters(class$),
+  };
 
   // Real meetings are almost always service-wide (no serviceStudyYear/
   // serviceGender set), so the class's study year/gender narrows the
   // attendee demographic rows rather than the meeting selection itself.
-  Future<MeetingsAttendanceAnalysis> getClassAttendanceAnalysis({
-    required Class class$,
-    required DateTimeRange range,
-  }) {
+  ({
+    List<Input_HistoryMeetingsBoolExp> where,
+    List<Input_HistoryMeetingDaysBoolExp> demographicsWhere,
+    List<Input_HistoryMeetingRosterBoolExp> rosterWhere,
+  })
+  _classFilters(Class class$) {
     final serviceId = class$.service?.id.toUuid() ?? class$.serviceId?.toUuid();
     final serviceStudyYear = class$.studyYear?.order ?? class$.serviceStudyYear;
     final serviceGender = class$.serviceGender;
 
-    return _getMeetingsAttendanceAnalysis(
-      title: class$.name,
-      color: class$.color,
-      range: range,
+    return (
       where: [
         Input_HistoryMeetingsBoolExp(
           serviceId: switch (serviceId) {
@@ -296,36 +347,22 @@ class MeetingsDAO extends DAOBase<Meeting>
           },
         ),
       ],
-    );
-  }
-
-  Future<MeetingsAttendanceAnalysis> _getMeetingsAttendanceAnalysis({
-    required String title,
-    required Color? color,
-    required List<Input_HistoryMeetingsBoolExp> where,
-    required DateTimeRange range,
-    List<Input_HistoryMeetingDaysBoolExp> demographicsWhere = const [],
-  }) async {
-    final result = await graphQLClient.queryAndReturnParsed(
-      QueryOptions(
-        document: documentNodeQuerymeetingsAttendanceAnalysis,
-        operationName: 'meetingsAttendanceAnalysis',
-        variables: Variables_Query_meetingsAttendanceAnalysis(
-          dayFrom: range.start,
-          dayTo: range.end,
-          where: where,
-          demographicsWhere: demographicsWhere,
-        ).toJson(),
-        parserFn: Query_meetingsAttendanceAnalysis.fromJson,
-      ),
-    );
-
-    return MeetingsAttendanceAnalysis(
-      title: title,
-      color: color,
-      meetings: result.historyMeetings
-          .map(MeetingAttendanceSummary.fromQueryResult)
-          .toList(),
+      rosterWhere: [
+        Input_HistoryMeetingRosterBoolExp(
+          studyYearId: switch (serviceStudyYear) {
+            final serviceStudyYear? => Input_IntComparisonExp(
+              $_eq: serviceStudyYear,
+            ),
+            null => null,
+          },
+          gender: switch (serviceGender) {
+            final serviceGender? => Input_BooleanComparisonExp(
+              $_eq: serviceGender,
+            ),
+            null => null,
+          },
+        ),
+      ],
     );
   }
 

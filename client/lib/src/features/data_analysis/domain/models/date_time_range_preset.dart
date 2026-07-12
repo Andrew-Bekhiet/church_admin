@@ -20,20 +20,16 @@ sealed class _PastDateTimeRangePreset extends DateTimeRangePreset {
   );
 }
 
-sealed class _FutureOrPresentDateTimeRangePreset extends DateTimeRangePreset {
+final class TodayDateTimeRangePreset extends DateTimeRangePreset {
   final DateTime today = DateUtils.dateOnly(DateTime.now());
 
   @override
-  DateTimeRange get range => DateTimeRange(
-    start: today,
-    end: today.add(duration),
-  );
-}
-
-final class TodayDateTimeRangePreset
-    extends _FutureOrPresentDateTimeRangePreset {
-  @override
   Duration get duration => const Duration(days: 1);
+
+  /// Range bounds are consumed inclusively (`_gte`/`_lte`), so today's data is
+  /// the degenerate range [today, today].
+  @override
+  DateTimeRange get range => DateTimeRange(start: today, end: today);
 }
 
 final class PastMonthDateTimeRangePreset extends _PastDateTimeRangePreset {

@@ -81,65 +81,62 @@ class PersonMeetingAttendanceCard extends StatelessWidget {
               ),
             )
           else ...[
-            Padding(
+            AttendanceKpiGrid(
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: AttendanceKpiGrid(
-                children: [
-                  AttendanceKpiTile(
-                    icon: const Icon(Symbols.check_circle),
-                    label: 'نسبة الحضور',
-                    value: _percentLabel,
-                    caption:
-                        'حضر ${analysis.attendedCount} '
-                        'من ${analysis.heldCount} يوم',
-                    accentColor: accent,
-                    emphasized: true,
+              children: [
+                AttendanceKpiTile(
+                  icon: const Icon(Symbols.check_circle),
+                  label: 'نسبة الحضور',
+                  value: _percentLabel,
+                  caption:
+                      'حضر ${analysis.attendedCount} '
+                      'من ${analysis.heldCount} يوم',
+                  accentColor: accent,
+                  emphasized: true,
+                ),
+                switch ((analysis.attendanceStreak, analysis.absenceStreak)) {
+                  (0, > 0) => AttendanceKpiTile(
+                    icon: const Icon(Symbols.event_busy),
+                    label: 'غياب متواصل',
+                    value: analysis.absenceStreak.toString(),
+                    caption: _sinceLabel(_absenceSince),
+                    accentColor: colorScheme.error,
                   ),
-                  switch ((analysis.attendanceStreak, analysis.absenceStreak)) {
-                    (0, > 0) => AttendanceKpiTile(
-                      icon: const Icon(Symbols.event_busy),
-                      label: 'غياب متواصل',
-                      value: analysis.absenceStreak.toString(),
-                      caption: _sinceLabel(_absenceSince),
-                      accentColor: colorScheme.error,
-                    ),
-                    _ => AttendanceKpiTile(
-                      icon: const Icon(Symbols.local_fire_department),
-                      label: 'المواظبة الحالية',
-                      value: analysis.attendanceStreak.toString(),
-                      caption: _rangeLabel(analysis.currentStreakRange),
-                    ),
+                  _ => AttendanceKpiTile(
+                    icon: const Icon(Symbols.local_fire_department),
+                    label: 'المواظبة الحالية',
+                    value: analysis.attendanceStreak.toString(),
+                    caption: _rangeLabel(analysis.currentStreakRange),
+                  ),
+                },
+                AttendanceKpiTile(
+                  icon: const Icon(Symbols.trophy),
+                  label: 'أطول مواظبة',
+                  value: analysis.longestStreak.toString(),
+                  caption: _rangeLabel(analysis.longestStreakRange),
+                ),
+                AttendanceKpiTile(
+                  icon: const Icon(Symbols.history),
+                  label: 'آخر حضور',
+                  value: analysis.lastAttended?.toDurationString() ?? 'لم يحضر',
+                  caption: switch (analysis.lastAttended) {
+                    null => null,
+                    final lastAttended => DateFormat(
+                      'yyyy/M/d',
+                      'ar',
+                    ).format(lastAttended),
                   },
-                  AttendanceKpiTile(
-                    icon: const Icon(Symbols.trophy),
-                    label: 'أطول مواظبة',
-                    value: analysis.longestStreak.toString(),
-                    caption: _rangeLabel(analysis.longestStreakRange),
-                  ),
-                  AttendanceKpiTile(
-                    icon: const Icon(Symbols.history),
-                    label: 'آخر حضور',
-                    value:
-                        analysis.lastAttended?.toDurationString() ?? 'لم يحضر',
-                    caption: switch (analysis.lastAttended) {
-                      null => null,
-                      final lastAttended => DateFormat(
-                        'yyyy/M/d',
-                        'ar',
-                      ).format(lastAttended),
-                    },
-                    accentColor: _isLastAttendedAlerting
-                        ? colorScheme.error
-                        : null,
-                    onTap: () =>
-                        HistoryProperty.showHistoryDialog<LastRecordedByInfo>(
-                          context,
-                          _historyController,
-                          showTime: showTime,
-                        ),
-                  ),
-                ],
-              ),
+                  accentColor: _isLastAttendedAlerting
+                      ? colorScheme.error
+                      : null,
+                  onTap: () =>
+                      HistoryProperty.showHistoryDialog<LastRecordedByInfo>(
+                        context,
+                        _historyController,
+                        showTime: showTime,
+                      ),
+                ),
+              ],
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
