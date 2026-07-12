@@ -215,7 +215,7 @@ class MeetingsDAO extends DAOBase<Meeting>
     ];
   }
 
-  Future<MeetingsAttendanceAnalysis> getPersonMeetingAttendanceAnalysis({
+  Future<MeetingsAttendanceAnalysis> getMeetingAttendanceAnalysis({
     required Meeting meeting,
     required DateTimeRange range,
   }) {
@@ -370,7 +370,7 @@ class MeetingsDAO extends DAOBase<Meeting>
         where: where,
         rosterWhere: rosterWhere,
       ),
-      loadClasses?.call() ?? Future.value(const <Class>[]),
+      loadClasses?.call() ?? Future.value(const []),
     ).wait;
 
     return SingleDayMeetingsAttendanceAnalysis(

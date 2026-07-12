@@ -53,6 +53,7 @@ class MeetingsAttendanceView extends StatelessWidget {
               granularity: granularity,
               latestDay: analysis.latestDay?.day,
             ),
+            const SizedBox(height: 18),
             MeetingAttendanceTrendChart(
               days: rolledDays,
               color: analysis.color,

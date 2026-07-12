@@ -15,36 +15,36 @@ class SingleDayKpisSummaryTile extends StatelessWidget {
     final topClass = analysis.topClass;
     final lowestClass = analysis.lowestClass;
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: AttendanceKpiGrid(
-        children: [
-          AttendanceKpiTile(
-            icon: const Icon(Symbols.percent),
-            label: 'نسبة الحضور',
-            value: _formatRate(analysis.overallAttendanceRate),
-            emphasized: true,
-          ),
-          AttendanceKpiTile(
-            icon: const Icon(Symbols.groups),
-            label: 'إجمالي الحضور',
-            value: analysis.attendedPersonsCount.toString(),
-            caption: 'من أصل ${analysis.rosterSize}',
-          ),
+    return AttendanceKpiGrid(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      children: [
+        AttendanceKpiTile(
+          icon: const Icon(Symbols.percent),
+          label: 'نسبة الحضور',
+          value: _formatRate(analysis.overallAttendanceRate),
+          emphasized: true,
+        ),
+        AttendanceKpiTile(
+          icon: const Icon(Symbols.groups),
+          label: 'إجمالي الحضور',
+          value: analysis.attendedPersonsCount.toString(),
+          caption: 'من أصل ${analysis.rosterSize}',
+        ),
+        if (analysis.classes.length >= 2)
           AttendanceKpiTile(
             icon: const Icon(Symbols.workspace_premium),
             label: 'أعلى فصل حضورًا',
             value: topClass?.displayName ?? '—',
             caption: topClass?.ratePercentLabel,
           ),
+        if (analysis.classes.length >= 2)
           AttendanceKpiTile(
             icon: const Icon(Symbols.trending_down),
             label: 'أقل فصل حضورًا',
             value: lowestClass?.displayName ?? '—',
             caption: lowestClass?.ratePercentLabel,
           ),
-        ],
-      ),
+      ],
     );
   }
 }

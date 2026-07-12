@@ -38,13 +38,11 @@ class SingleDayMeetingsAttendanceAnalysis extends MeetingsAttendanceAnalysis {
   List<ClassAttendanceRate> get _ratedClasses =>
       classAttendanceRates.where((c) => c.rate != null).toList();
 
-  ClassAttendanceRate? get topClass => maxBy(_ratedClasses, (c) => c.rate!);
+  ClassAttendanceRate? get topClass =>
+      maxBy(_ratedClasses, (c) => c.rate ?? -1);
 
-  ClassAttendanceRate? get lowestClass {
-    final rated = _ratedClasses;
-
-    return rated.length < 2 ? null : minBy(rated, (c) => c.rate!);
-  }
+  ClassAttendanceRate? get lowestClass =>
+      minBy(_ratedClasses, (c) => c.rate ?? -1);
 
   SingleDayMeetingsAttendanceAnalysis({
     required super.title,

@@ -99,7 +99,7 @@ class AttendanceAppBar extends StatelessWidget {
                   range: DateTimeRange(start: selectedDay, end: selectedDay),
                 ),
           load: (range) =>
-              DatabaseService.I.meetings.getPersonMeetingAttendanceAnalysis(
+              DatabaseService.I.meetings.getMeetingAttendanceAnalysis(
                 meeting: meeting,
                 range: range,
               ),

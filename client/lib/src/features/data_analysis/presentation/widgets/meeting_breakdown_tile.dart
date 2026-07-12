@@ -29,6 +29,7 @@ class MeetingBreakdownTile extends StatelessWidget {
           granularity: granularity,
           latestDay: summary.latestDay?.day,
         ),
+        const SizedBox(height: 8),
         MeetingAttendanceTrendChart(
           days: rolledDays,
           color: summary.meeting.color,
