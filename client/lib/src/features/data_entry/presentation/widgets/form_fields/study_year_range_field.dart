@@ -82,7 +82,8 @@ class StudyYearRangeField extends StatelessWidget {
                   decoration: const InputDecoration(labelText: ''),
                   dialogFieldLabel: 'السنة الدراسية من',
                   onChanged: (newValue) {
-                    final newState = state.value?.copyWith(from: newValue);
+                    final newState = (state.value ?? const StudyYearRange())
+                        .copyWith(from: newValue);
 
                     state.didChange(newState);
                     onChanged?.call(newState);
@@ -115,7 +116,8 @@ class StudyYearRangeField extends StatelessWidget {
                   decoration: const InputDecoration(labelText: ''),
                   dialogFieldLabel: 'السنة الدراسية إلى',
                   onChanged: (newValue) {
-                    final newState = state.value?.copyWith(to: newValue);
+                    final newState = (state.value ?? const StudyYearRange())
+                        .copyWith(to: newValue);
 
                     state.didChange(newState);
                     onChanged?.call(newState);
