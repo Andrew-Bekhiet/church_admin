@@ -346,6 +346,11 @@ class _EditPersonState extends State<EditPerson> {
                     (s) => switch (s) {
                       Service(
                         studyYearFrom: StudyYear(order: final minGrade),
+                        studyYearTo: StudyYear(order: final maxGrade),
+                      ) =>
+                        personGrade < minGrade || personGrade > maxGrade,
+                      Service(
+                        studyYearFrom: StudyYear(order: final minGrade),
                       ) =>
                         personGrade < minGrade,
                       Service(
