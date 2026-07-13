@@ -270,6 +270,120 @@ void main() {
         },
       );
 
+      test(
+        'Authentication returns false on LocalAuthException',
+        () async {
+          final unit = LocalAuthService.noInitialAuth(
+            localAuthPlugin: globalProviderContainer.read(
+              localAuthPluginProvider,
+            ),
+          );
+
+          addTearDown(unit.dispose);
+
+          LocalAuthPlatform.instance = MockLocalAuthPlatform();
+
+          when(
+            (LocalAuthPlatform.instance as MockLocalAuthPlatform).authenticate(
+              authMessages: anyNamed('authMessages'),
+              localizedReason: anyNamed('localizedReason'),
+              options: anyNamed('options'),
+            ),
+          ).thenAnswer(
+            (_) async => throw const LocalAuthException(
+              code: LocalAuthExceptionCode.userCanceled,
+            ),
+          );
+
+          final future1 = unit.authenticate();
+          final future2 = unit.authenticate();
+          final future3 = unit.authenticate();
+
+          await expectLater(future1, completion(isFalse));
+          await expectLater(future2, completion(isFalse));
+          await expectLater(future3, completion(isFalse));
+        },
+      );
+
+      test(
+        'Authentication can be retried after LocalAuthException',
+        () async {
+          final unit = LocalAuthService.noInitialAuth(
+            localAuthPlugin: globalProviderContainer.read(
+              localAuthPluginProvider,
+            ),
+          );
+
+          addTearDown(unit.dispose);
+
+          LocalAuthPlatform.instance = MockLocalAuthPlatform();
+
+          var shouldThrow = true;
+
+          when(
+            (LocalAuthPlatform.instance as MockLocalAuthPlatform).authenticate(
+              authMessages: anyNamed('authMessages'),
+              localizedReason: 'برجاء التحقق للمتابعة',
+              options: anyNamed('options'),
+            ),
+          ).thenAnswer((_) async {
+            if (shouldThrow) {
+              throw const LocalAuthException(
+                code: LocalAuthExceptionCode.userCanceled,
+              );
+            }
+            return true;
+          });
+
+          await expectLater(unit.authenticate(), completion(isFalse));
+
+          shouldThrow = false;
+
+          await expectLater(unit.authenticate(), completion(isTrue));
+        },
+      );
+
+      test(
+        'Authentication surfaces unexpected errors to concurrent callers',
+        () async {
+          final unit = LocalAuthService.noInitialAuth(
+            localAuthPlugin: globalProviderContainer.read(
+              localAuthPluginProvider,
+            ),
+          );
+
+          addTearDown(unit.dispose);
+
+          LocalAuthPlatform.instance = MockLocalAuthPlatform();
+
+          final exception = Exception('unexpected auth failure');
+
+          when(
+            (LocalAuthPlatform.instance as MockLocalAuthPlatform).authenticate(
+              authMessages: anyNamed('authMessages'),
+              localizedReason: 'برجاء التحقق للمتابعة',
+              options: anyNamed('options'),
+            ),
+          ).thenAnswer((_) async => throw exception);
+
+          final future1 = unit.authenticate();
+          final future2 = unit.authenticate();
+
+          await expectLater(future1, completion(isFalse));
+          await expectLater(future2, throwsA(same(exception)));
+
+          when(
+            (LocalAuthPlatform.instance as MockLocalAuthPlatform).authenticate(
+              authMessages: anyNamed('authMessages'),
+              localizedReason: 'برجاء التحقق للمتابعة',
+              options: anyNamed('options'),
+            ),
+          ).thenAnswer((_) async => true);
+
+          await expectLater(unit.authenticate(), completion(isTrue));
+        },
+      );
+
       testWidgets(
         'Authentication => cancels timer if '
         'lifecycle changed in timer duration',

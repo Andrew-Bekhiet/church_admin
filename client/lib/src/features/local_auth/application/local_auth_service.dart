@@ -124,26 +124,35 @@ class LocalAuthService with WidgetsBindingObserver {
   }
 
   Future<bool> authenticate() async {
-    if (_localAuthCompleter != null) return _localAuthCompleter!.future;
+    if (_localAuthCompleter case final completer?) return completer.future;
 
-    final localAuthentication = _localAuthPlugin;
+    final localAuthPlugin = _localAuthPlugin;
     _localAuthCompleter = Completer<bool>();
 
-    _localAuthCompleter!.complete(
-      localAuthentication
-          .authenticate(
-            localizedReason: 'برجاء التحقق للمتابعة',
-            biometricOnly: !_currentPlatformService.isWindows,
-          )
-          .then(
-            (result) {
-              _localAuthCompleter = null;
-              return result;
-            },
-          ),
-    );
+    return localAuthPlugin
+        .authenticate(
+          localizedReason: 'برجاء التحقق للمتابعة',
+          biometricOnly: !_currentPlatformService.isWindows,
+          persistAcrossBackgrounding: true,
+        )
+        .then(
+          (result) {
+            _localAuthCompleter?.complete(result);
+            _localAuthCompleter = null;
 
-    return _localAuthCompleter!.future;
+            return result;
+          },
+          onError: (error, stackTrace) {
+            if (error is LocalAuthException) {
+              _localAuthCompleter?.complete(false);
+            } else {
+              _localAuthCompleter?.completeError(error, stackTrace);
+            }
+            _localAuthCompleter = null;
+
+            return false;
+          },
+        );
   }
 
   Future<bool> verifyPassword({
