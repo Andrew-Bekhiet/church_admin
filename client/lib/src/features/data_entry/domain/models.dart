@@ -26,6 +26,7 @@ export 'models/shammas_level.dart';
 export 'models/store.dart';
 export 'models/street.dart';
 export 'models/study_year.dart';
+export 'models/study_year_range.dart';
 export 'models/tag.dart';
 export 'models/viewable.dart';
 export 'models/viewable_enum_with_id.dart';

@@ -109,24 +109,34 @@ class _EditServiceState extends State<EditService> {
           ),
           StudyYearRangeField(
             label: 'السنوات الدراسية',
-            initialValue: (newService.studyYearFrom, newService.studyYearTo),
+            initialValue: StudyYearRange(
+              from: newService.studyYearFrom,
+              to: newService.studyYearTo,
+            ),
             nullable: true,
             onChanged: (value) => newService = newService.copyWith(
-              studyYearFrom: value?.$1,
-              studyYearTo: value?.$2,
-              studyYearFromId: value?.$1?.order,
-              studyYearToId: value?.$2?.order,
+              studyYearFrom: value?.from,
+              studyYearTo: value?.to,
+              studyYearFromId: value?.from?.order,
+              studyYearToId: value?.to?.order,
             ),
             autovalidateMode: AutovalidateMode.onUserInteraction,
             validator: (v) {
-              if (v != null) {
-                if (v.$1 == null || v.$2 == null) {
+              switch (v) {
+                case StudyYearRange(:final from, :final to)
+                    when from == null || to == null:
                   return 'برجاء ادخال السنتين الدراسيتين';
-                } else if (v.$1!.order > v.$2!.order) {
+
+                case StudyYearRange(
+                      from: StudyYear(order: final fromOrder),
+                      to: StudyYear(order: final toOrder),
+                    )
+                    when fromOrder > toOrder:
                   return 'السنة الدراسية الأولى لا يمكن أن تكون أكبر من الثانية';
-                }
+
+                default:
+                  return null;
               }
-              return null;
             },
           ),
           if (_controller.isCreate)

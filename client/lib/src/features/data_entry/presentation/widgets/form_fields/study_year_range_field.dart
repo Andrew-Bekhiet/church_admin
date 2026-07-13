@@ -4,12 +4,12 @@ import 'package:material_symbols_icons/material_symbols_icons.dart';
 
 class StudyYearRangeField extends StatelessWidget {
   final String label;
-  final (StudyYear?, StudyYear?)? initialValue;
+  final StudyYearRange? initialValue;
   final bool nullable;
 
-  final void Function((StudyYear?, StudyYear?)?)? onChanged;
-  final void Function((StudyYear?, StudyYear?)?)? onSaved;
-  final String? Function((StudyYear?, StudyYear?)?)? validator;
+  final void Function(StudyYearRange?)? onChanged;
+  final void Function(StudyYearRange?)? onSaved;
+  final String? Function(StudyYearRange?)? validator;
   final AutovalidateMode? autovalidateMode;
   final FocusNode? focusNode;
   final InputDecoration? decoration;
@@ -29,7 +29,7 @@ class StudyYearRangeField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FormField<(StudyYear?, StudyYear?)?>(
+    return FormField<StudyYearRange?>(
       initialValue: initialValue,
       autovalidateMode: autovalidateMode,
       onSaved: onSaved,
@@ -41,16 +41,18 @@ class StudyYearRangeField extends StatelessWidget {
           decoration: InputDecoration(
             labelText: label,
             errorText: state.errorText,
-            suffixIcon: nullable && state.value != null
-                ? IconButton(
-                    icon: const Icon(Symbols.delete),
-                    tooltip: 'حذف القيمة',
-                    onPressed: () {
-                      state.didChange(null);
-                      onChanged?.call(null);
-                    },
-                  )
-                : null,
+            suffixIcon: switch (state.value) {
+              null || StudyYearRange(from: null, to: null) => null,
+              _ when nullable => IconButton(
+                icon: const Icon(Symbols.delete),
+                tooltip: 'حذف القيمة',
+                onPressed: () {
+                  state.didChange(null);
+                  onChanged?.call(null);
+                },
+              ),
+              _ => null,
+            },
           ),
           child: Row(
             spacing: 8,
@@ -63,6 +65,7 @@ class StudyYearRangeField extends StatelessWidget {
               ),
               Expanded(
                 child: ObjectSelectionField(
+                  key: ValueKey(state.value?.from == null),
                   listController: (s) => ViewableObjectListController(
                     objectsPaginatableStream: DatabaseService
                         .I
@@ -75,12 +78,14 @@ class StudyYearRangeField extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
                   nullable: nullable && state.value == null,
-                  initialValue: state.value?.$1,
+                  initialValue: state.value?.from,
                   decoration: const InputDecoration(labelText: ''),
                   dialogFieldLabel: 'السنة الدراسية من',
                   onChanged: (newValue) {
-                    state.didChange((newValue, state.value?.$2));
-                    onChanged?.call(state.value);
+                    final newState = state.value?.copyWith(from: newValue);
+
+                    state.didChange(newState);
+                    onChanged?.call(newState);
                   },
                 ),
               ),
@@ -93,6 +98,7 @@ class StudyYearRangeField extends StatelessWidget {
               ),
               Expanded(
                 child: ObjectSelectionField(
+                  key: ValueKey(state.value?.to == null),
                   listController: (s) => ViewableObjectListController(
                     objectsPaginatableStream: DatabaseService
                         .I
@@ -105,12 +111,14 @@ class StudyYearRangeField extends StatelessWidget {
                     textAlign: TextAlign.center,
                   ),
                   nullable: nullable && state.value == null,
-                  initialValue: state.value?.$1,
+                  initialValue: state.value?.to,
                   decoration: const InputDecoration(labelText: ''),
                   dialogFieldLabel: 'السنة الدراسية إلى',
                   onChanged: (newValue) {
-                    state.didChange((state.value?.$1, newValue));
-                    onChanged?.call(state.value);
+                    final newState = state.value?.copyWith(to: newValue);
+
+                    state.didChange(newState);
+                    onChanged?.call(newState);
                   },
                 ),
               ),
