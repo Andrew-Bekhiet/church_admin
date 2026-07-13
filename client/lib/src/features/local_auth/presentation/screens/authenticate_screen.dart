@@ -108,9 +108,11 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
   }
 
   Future<void> _authenticate() async {
-    if (await LocalAuthService.I.canCheckBiometrics() &&
-        await LocalAuthService.I.authenticate()) {
-      LocalAuthService.I.resetAuthState(path: widget.next);
+    final localAuthService = LocalAuthService.I;
+
+    if (await localAuthService.canCheckBiometrics() &&
+        await localAuthService.authenticate()) {
+      localAuthService.resetAuthState(path: widget.next);
     }
   }
 
