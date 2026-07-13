@@ -453,6 +453,7 @@ final homeBlocProvider = Provider<HomeBloc>(
       pageController: PageController(),
       databaseService: ref.watch(databaseServiceProvider),
       homeDailyDataRepository: ref.watch(homeDailyDataRepositoryProvider),
+      userDataStream: ref.watch(authBlocProvider).userDataStream,
     );
     ref.onDispose(homeBloc.close);
 
