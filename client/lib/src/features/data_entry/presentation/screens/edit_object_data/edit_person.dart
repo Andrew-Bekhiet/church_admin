@@ -336,20 +336,30 @@ class _EditPersonState extends State<EditPerson> {
                 //that have studyYear range
                 //
                 //Then invoke the general check
+                final (selectedServices, selectedGroups) =
+                    v ?? (<Service>{}, <Group>{});
 
-                if (newPerson.isStudent &&
-                    newPerson.studyYear != null &&
-                    v!.$1.any(
-                      (s) =>
-                          s.studyYearFrom == null ||
-                          s.studyYearTo == null ||
-                          (newPerson.studyYear!.order <
-                                  s.studyYearFrom!.order ||
-                              newPerson.studyYear!.order >
-                                  s.studyYearTo!.order),
-                    )) {
-                  return 'بعض الخدمات لا تناسب السنة الدراسية للمخدوم'
-                      '\nيرجى تغيير السنة الدراسية او ازالة التحديد من احدى الخدمات';
+                if (newPerson.studyYear case StudyYear(
+                  order: final personGrade,
+                ) when newPerson.isStudent) {
+                  final hasOutOfRangeService = selectedServices.any(
+                    (s) => switch (s) {
+                      Service(
+                        studyYearFrom: StudyYear(order: final minGrade),
+                      ) =>
+                        personGrade < minGrade,
+                      Service(
+                        studyYearTo: StudyYear(order: final maxGrade),
+                      ) =>
+                        personGrade > maxGrade,
+                      _ => false,
+                    },
+                  );
+
+                  if (hasOutOfRangeService) {
+                    return 'بعض الخدمات لا تناسب السنة الدراسية للمخدوم'
+                        '\nيرجى تغيير السنة الدراسية او ازالة التحديد من احدى الخدمات';
+                  }
                 }
 
                 final currentUserData = AuthBloc.I.currentUserData!;
@@ -364,8 +374,8 @@ class _EditPersonState extends State<EditPerson> {
                     currentUserData.canEditObject(newPerson.address!.area!);
 
                 final servicesAndGroups = <ViewableWithID>{}
-                    .union(v?.$1 ?? {})
-                    .union(v?.$2 ?? {});
+                    .union(selectedServices)
+                    .union(selectedGroups);
 
                 if (!canEditFamily &&
                     !canEditAddress &&
