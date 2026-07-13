@@ -76,6 +76,7 @@ void main() {
           pageController: MockPageController(),
           homeDailyDataRepository: repository,
           databaseService: mockDatabaseService,
+          userDataStream: Stream.value(null),
         ),
         wait: Duration.zero,
         expect: () => [
@@ -147,6 +148,7 @@ void main() {
           pageController: MockPageController(),
           homeDailyDataRepository: repository,
           databaseService: mockDatabaseService,
+          userDataStream: Stream.value(null),
         ),
         seed: () => HomeState(
           dailyData: const HomeDailyData(
@@ -207,6 +209,7 @@ void main() {
             pageController: MockPageController(),
             homeDailyDataRepository: repository,
             databaseService: mockDatabaseService,
+            userDataStream: Stream.value(null),
           ),
           act: (bloc) => bloc
             ..add(const HomeChangeMode(HomeMode.churchData))
@@ -340,6 +343,7 @@ void main() {
             pageController: MockPageController(),
             homeDailyDataRepository: repository,
             databaseService: mockDatabaseService,
+            userDataStream: Stream.value(null),
           ),
           act: (bloc) async {
             bloc
@@ -434,6 +438,7 @@ void main() {
             pageController: mockPageController,
             homeDailyDataRepository: repository,
             databaseService: mockDatabaseService,
+            userDataStream: Stream.value(null),
           ),
           act: (bloc) async {
             await bloc.stream.first;

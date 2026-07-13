@@ -120,6 +120,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     required DatabaseService databaseService,
     required UserSettingsService userSettingsService,
     required PageController pageController,
+    required Stream<User?> userDataStream,
   }) : _pageController = pageController,
        _databaseService = databaseService,
        _homeDailyDataRepository = homeDailyDataRepository,
@@ -133,6 +134,24 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
                LiturgySeason.current == LiturgySeason.christmas,
          ),
        ) {
+    final visibilityStream = userDataStream
+        .map(HomeContainerVisibility.fromUser)
+        .shareReplay(maxSize: 1);
+    _paginatableStreamsParams.addAll({
+      Area: (
+        where: visibilityStream.map((visibility) => visibility.areaFilters),
+        orderBy: null,
+      ),
+      Street: (
+        where: visibilityStream.map((visibility) => visibility.streetFilters),
+        orderBy: null,
+      ),
+      Service: (
+        where: visibilityStream.map((visibility) => visibility.serviceFilters),
+        orderBy: null,
+      ),
+    });
+
     on<LoadHomeSummaryAndTabs>(
       _onLoadHomeSummaryAndTabs,
       transformer: (events, mapper) => events
