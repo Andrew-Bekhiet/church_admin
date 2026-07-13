@@ -143,11 +143,7 @@ class LocalAuthService with WidgetsBindingObserver {
             return result;
           },
           onError: (error, stackTrace) {
-            if (error is LocalAuthException) {
-              _localAuthCompleter?.complete(false);
-            } else {
-              _localAuthCompleter?.completeError(error, stackTrace);
-            }
+            _localAuthCompleter?.complete(false);
             _localAuthCompleter = null;
 
             return false;

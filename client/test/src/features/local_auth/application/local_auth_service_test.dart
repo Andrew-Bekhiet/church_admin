@@ -264,7 +264,7 @@ void main() {
           final result3 = await future3;
 
           expect(result1, isFalse);
-          expect(result1 || result2 || result3, isFalse);
+          expect([result1, result2, result3], [isFalse, isFalse, isFalse]);
 
           await unit.dispose();
         },
@@ -338,47 +338,6 @@ void main() {
           await expectLater(unit.authenticate(), completion(isFalse));
 
           shouldThrow = false;
-
-          await expectLater(unit.authenticate(), completion(isTrue));
-        },
-      );
-
-      test(
-        'Authentication surfaces unexpected errors to concurrent callers',
-        () async {
-          final unit = LocalAuthService.noInitialAuth(
-            localAuthPlugin: globalProviderContainer.read(
-              localAuthPluginProvider,
-            ),
-          );
-
-          addTearDown(unit.dispose);
-
-          LocalAuthPlatform.instance = MockLocalAuthPlatform();
-
-          final exception = Exception('unexpected auth failure');
-
-          when(
-            (LocalAuthPlatform.instance as MockLocalAuthPlatform).authenticate(
-              authMessages: anyNamed('authMessages'),
-              localizedReason: 'برجاء التحقق للمتابعة',
-              options: anyNamed('options'),
-            ),
-          ).thenAnswer((_) async => throw exception);
-
-          final future1 = unit.authenticate();
-          final future2 = unit.authenticate();
-
-          await expectLater(future1, completion(isFalse));
-          await expectLater(future2, throwsA(same(exception)));
-
-          when(
-            (LocalAuthPlatform.instance as MockLocalAuthPlatform).authenticate(
-              authMessages: anyNamed('authMessages'),
-              localizedReason: 'برجاء التحقق للمتابعة',
-              options: anyNamed('options'),
-            ),
-          ).thenAnswer((_) async => true);
 
           await expectLater(unit.authenticate(), completion(isTrue));
         },

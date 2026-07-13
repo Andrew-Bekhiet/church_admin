@@ -26,7 +26,7 @@ class ChipTabBar extends StatelessWidget {
     return AnimatedBuilder(
       animation: tabController.animation!,
       builder: (context, _) {
-        final isScrollable = tabs.length > 3;
+        final isScrollable = tabs.length > 2;
 
         final row = Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
