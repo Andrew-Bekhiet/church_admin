@@ -7,15 +7,15 @@ import 'package:church_admin/church_admin.dart';
 /// by the current user's global or scoped permissions.
 class HomeContainerVisibility {
   final bool hasGlobalAccess;
-  final List<Area> areas;
-  final List<Service> services;
-  final List<Group> groups;
+  final List<String> areasIds;
+  final List<String> servicesIds;
+  final List<String> groupsIds;
 
   const HomeContainerVisibility({
     required this.hasGlobalAccess,
-    required this.areas,
-    required this.services,
-    required this.groups,
+    required this.areasIds,
+    required this.servicesIds,
+    required this.groupsIds,
   });
 
   factory HomeContainerVisibility.fromUser(User? user) {
@@ -23,27 +23,38 @@ class HomeContainerVisibility {
 
     return HomeContainerVisibility(
       hasGlobalAccess: user?.permissions.readAllData ?? false,
-      areas: adminOn.map((scope) => scope.area).nonNulls.toSet().toList(),
-      services: adminOn.map((scope) => scope.service).nonNulls.toSet().toList(),
-      groups: adminOn.map((scope) => scope.group).nonNulls.toSet().toList(),
+      areasIds: adminOn
+          .map((scope) => scope.area?.id)
+          .nonNulls
+          .toSet()
+          .toList(growable: false),
+      servicesIds: adminOn
+          .map((scope) => scope.service?.id)
+          .nonNulls
+          .toSet()
+          .toList(growable: false),
+      groupsIds: adminOn
+          .map((scope) => scope.group?.id)
+          .nonNulls
+          .toSet()
+          .toList(growable: false),
     );
   }
 
-  List<Filter> get areaFilters =>
-      _fieldInFilters(AreaFields().id, areas.map((area) => area.id));
+  List<Filter> get areaFilters => _fieldInFilters(AreaFields().id, areasIds);
 
   List<Filter> get streetFilters {
     if (hasGlobalAccess) return const [];
 
-    if (areas.isEmpty) {
+    if (areasIds.isEmpty) {
       return _fieldInFilters(StreetFields().id, const []);
     }
 
     return [
       Filter(
-        StreetFields().areas,
+        StreetFields().areas.redirectTo(AreaFields().id),
         MultiSelectOperator.anyOf,
-        areas,
+        areasIds,
       ),
     ];
   }
@@ -52,17 +63,17 @@ class HomeContainerVisibility {
     if (hasGlobalAccess) return const [];
 
     final scopedFilters = <Filter>[
-      if (services.isNotEmpty)
+      if (servicesIds.isNotEmpty)
         Filter(
           ServiceFields().id,
           MultiSelectOperator.anyOf,
-          services.map((service) => service.id).toList(growable: false),
+          servicesIds,
         ),
-      if (groups.isNotEmpty)
+      if (groupsIds.isNotEmpty)
         Filter(
-          ServiceFields().groups,
+          ServiceFields().groups.redirectTo(GroupFields().id),
           MultiSelectOperator.anyOf,
-          groups,
+          groupsIds,
         ),
     ];
 
@@ -81,14 +92,14 @@ class HomeContainerVisibility {
     ];
   }
 
-  List<Filter> _fieldInFilters(FieldMetadata field, Iterable<String> ids) {
+  List<Filter> _fieldInFilters(FieldMetadata field, List<String> ids) {
     if (hasGlobalAccess) return const [];
 
     return [
       Filter(
         field,
         MultiSelectOperator.anyOf,
-        ids.toList(growable: false),
+        ids,
       ),
     ];
   }
