@@ -23,7 +23,7 @@ class HiveInit implements Initializer {
       );
 
       for (final legacyStoreName in UserPreferencesService.legacyStoreNames) {
-        await sharedSembastInstance.kv<Json>(legacyStoreName).clear();
+        await mainSembastInstance.kv<Json>(legacyStoreName).clear();
       }
       await SyncKVStore.load(
         mainSembastInstance.kv(UserPreferencesService.storeName),
