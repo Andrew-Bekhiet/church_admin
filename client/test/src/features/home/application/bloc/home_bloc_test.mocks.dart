@@ -136,21 +136,9 @@ class _FakeMeetingsDAO_19 extends _i1.SmartFake implements _i2.MeetingsDAO {
     : super(parent, parentInvocation);
 }
 
-class _FakeSyncKVStore_20<T> extends _i1.SmartFake
-    implements _i2.SyncKVStore<T> {
-  _FakeSyncKVStore_20(Object parent, Invocation parentInvocation)
-    : super(parent, parentInvocation);
-}
-
-class _FakeDatabaseService_21 extends _i1.SmartFake
-    implements _i2.DatabaseService {
-  _FakeDatabaseService_21(Object parent, Invocation parentInvocation)
-    : super(parent, parentInvocation);
-}
-
-class _FakeScrollPosition_22 extends _i1.SmartFake
+class _FakeScrollPosition_20 extends _i1.SmartFake
     implements _i3.ScrollPosition {
-  _FakeScrollPosition_22(Object parent, Invocation parentInvocation)
+  _FakeScrollPosition_20(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
@@ -498,41 +486,11 @@ class MockDatabaseService extends _i1.Mock implements _i2.DatabaseService {
           as Map<Type, _i2.DAOBase<_i2.ViewableWithID>>);
 }
 
-/// A class which mocks [UserSettingsService].
+/// A class which mocks [UserPreferencesService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockUserSettingsService extends _i1.Mock
-    implements _i2.UserSettingsService {
-  @override
-  _i2.SyncKVStore<dynamic> get _box =>
-      (super.noSuchMethod(
-            Invocation.getter(#box),
-            returnValue: _FakeSyncKVStore_20<dynamic>(
-              this,
-              Invocation.getter(#box),
-            ),
-            returnValueForMissingStub: _FakeSyncKVStore_20<dynamic>(
-              this,
-              Invocation.getter(#box),
-            ),
-          )
-          as _i2.SyncKVStore<dynamic>);
-
-  @override
-  _i2.DatabaseService get _databaseService =>
-      (super.noSuchMethod(
-            Invocation.getter(#databaseService),
-            returnValue: _FakeDatabaseService_21(
-              this,
-              Invocation.getter(#databaseService),
-            ),
-            returnValueForMissingStub: _FakeDatabaseService_21(
-              this,
-              Invocation.getter(#databaseService),
-            ),
-          )
-          as _i2.DatabaseService);
-
+class MockUserPreferencesService extends _i1.Mock
+    implements _i2.UserPreferencesService {
   @override
   bool get greatFeastTheme =>
       (super.noSuchMethod(
@@ -726,11 +684,11 @@ class MockPageController extends _i1.Mock implements _i7.PageController {
   _i3.ScrollPosition get position =>
       (super.noSuchMethod(
             Invocation.getter(#position),
-            returnValue: _FakeScrollPosition_22(
+            returnValue: _FakeScrollPosition_20(
               this,
               Invocation.getter(#position),
             ),
-            returnValueForMissingStub: _FakeScrollPosition_22(
+            returnValueForMissingStub: _FakeScrollPosition_20(
               this,
               Invocation.getter(#position),
             ),
@@ -820,7 +778,7 @@ class MockPageController extends _i1.Mock implements _i7.PageController {
               context,
               oldPosition,
             ]),
-            returnValue: _FakeScrollPosition_22(
+            returnValue: _FakeScrollPosition_20(
               this,
               Invocation.method(#createScrollPosition, [
                 physics,
@@ -828,7 +786,7 @@ class MockPageController extends _i1.Mock implements _i7.PageController {
                 oldPosition,
               ]),
             ),
-            returnValueForMissingStub: _FakeScrollPosition_22(
+            returnValueForMissingStub: _FakeScrollPosition_20(
               this,
               Invocation.method(#createScrollPosition, [
                 physics,

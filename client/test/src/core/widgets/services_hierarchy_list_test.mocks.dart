@@ -98,12 +98,6 @@ class _FakeFile_10 extends _i1.SmartFake implements _i11.File {
     : super(parent, parentInvocation);
 }
 
-class _FakeDatabaseService_11 extends _i1.SmartFake
-    implements _i9.DatabaseService {
-  _FakeDatabaseService_11(Object parent, Invocation parentInvocation)
-    : super(parent, parentInvocation);
-}
-
 /// A class which mocks [PaginatableStreamBase].
 ///
 /// See the documentation for Mockito's code generation for more information.
@@ -1117,41 +1111,11 @@ class MockImageUrlCacheService extends _i1.Mock
           as bool);
 }
 
-/// A class which mocks [UserSettingsService].
+/// A class which mocks [UserPreferencesService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockUserSettingsService extends _i1.Mock
-    implements _i9.UserSettingsService {
-  @override
-  _i9.SyncKVStore<dynamic> get _box =>
-      (super.noSuchMethod(
-            Invocation.getter(#box),
-            returnValue: _FakeSyncKVStore_8<dynamic>(
-              this,
-              Invocation.getter(#box),
-            ),
-            returnValueForMissingStub: _FakeSyncKVStore_8<dynamic>(
-              this,
-              Invocation.getter(#box),
-            ),
-          )
-          as _i9.SyncKVStore<dynamic>);
-
-  @override
-  _i9.DatabaseService get _databaseService =>
-      (super.noSuchMethod(
-            Invocation.getter(#databaseService),
-            returnValue: _FakeDatabaseService_11(
-              this,
-              Invocation.getter(#databaseService),
-            ),
-            returnValueForMissingStub: _FakeDatabaseService_11(
-              this,
-              Invocation.getter(#databaseService),
-            ),
-          )
-          as _i9.DatabaseService);
-
+class MockUserPreferencesService extends _i1.Mock
+    implements _i9.UserPreferencesService {
   @override
   bool get greatFeastTheme =>
       (super.noSuchMethod(

@@ -13,7 +13,7 @@ import 'home_search_delegate_test.mocks.dart';
   MockSpec<HomeDAO>(),
   MockSpec<ViewableObjectService>(),
   MockSpec<ImageUrlCacheService>(),
-  MockSpec<UserSettingsService>(),
+  MockSpec<UserPreferencesService>(),
 ])
 Future<void> main() async {
   await loadAppFonts();
@@ -26,7 +26,9 @@ Future<void> main() async {
       viewableObjectServiceProvider.overrideWith(
         (ref) => ViewableObjectService(router: GoRouter(routes: [])),
       ),
-      userSettingsServiceProvider.overrideWithValue(MockUserSettingsService()),
+      userPreferencesServiceProvider.overrideWithValue(
+        MockUserPreferencesService(),
+      ),
       imageUrlCacheServiceProvider.overrideWithValue(
         MockImageUrlCacheService(),
       ),

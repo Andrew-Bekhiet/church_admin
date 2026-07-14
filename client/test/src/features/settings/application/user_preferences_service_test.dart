@@ -27,8 +27,8 @@ void main() {
 
   tearDown(resetGlobalProviderContainer);
 
-  UserSettingsService createUnit({SyncKVStore? box}) {
-    return UserSettingsService(
+  UserPreferencesService createUnit({SyncKVStore? box}) {
+    return UserPreferencesService(
       box: box ?? FakeSyncKVStore(),
       databaseService: databaseService,
       authBloc: authBloc,
@@ -36,7 +36,7 @@ void main() {
   }
 
   test(
-    'UserSettingsService => darkTheme Subject: unset '
+    'UserPreferencesService => darkTheme Subject: unset '
     'Scenario: read Result: null',
     () {
       expect(createUnit().darkTheme, isNull);
@@ -44,7 +44,7 @@ void main() {
   );
 
   test(
-    'UserSettingsService => darkTheme Subject: set true/false/null '
+    'UserPreferencesService => darkTheme Subject: set true/false/null '
     'Scenario: queue writes Result: getter reflects queued values',
     () async {
       final unit = createUnit();
@@ -61,7 +61,7 @@ void main() {
   );
 
   test(
-    'UserSettingsService => greatFeastTheme Subject: unset '
+    'UserPreferencesService => greatFeastTheme Subject: unset '
     'Scenario: read Result: defaults to true',
     () {
       expect(createUnit().greatFeastTheme, isTrue);
@@ -69,7 +69,7 @@ void main() {
   );
 
   test(
-    'UserSettingsService => greatFeastTheme Subject: set false then true '
+    'UserPreferencesService => greatFeastTheme Subject: set false then true '
     'Scenario: queue writes Result: getter reflects queued values',
     () async {
       final unit = createUnit();
@@ -83,7 +83,7 @@ void main() {
   );
 
   test(
-    'UserSettingsService => darkTheme Subject: null queued while server is true '
+    'UserPreferencesService => darkTheme Subject: null queued while server is true '
     'Scenario: key present in box Result: local null overrides server',
     () async {
       final box = FakeSyncKVStore();

@@ -24,53 +24,11 @@ import 'package:mockito/mockito.dart' as _i1;
 // ignore_for_file: subtype_of_sealed_class
 // ignore_for_file: invalid_use_of_internal_member
 
-class _FakeSyncKVStore_0<T> extends _i1.SmartFake
-    implements _i2.SyncKVStore<T> {
-  _FakeSyncKVStore_0(Object parent, Invocation parentInvocation)
-    : super(parent, parentInvocation);
-}
-
-class _FakeDatabaseService_1 extends _i1.SmartFake
-    implements _i2.DatabaseService {
-  _FakeDatabaseService_1(Object parent, Invocation parentInvocation)
-    : super(parent, parentInvocation);
-}
-
-/// A class which mocks [UserSettingsService].
+/// A class which mocks [UserPreferencesService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockUserSettingsService extends _i1.Mock
-    implements _i2.UserSettingsService {
-  @override
-  _i2.SyncKVStore<dynamic> get _box =>
-      (super.noSuchMethod(
-            Invocation.getter(#box),
-            returnValue: _FakeSyncKVStore_0<dynamic>(
-              this,
-              Invocation.getter(#box),
-            ),
-            returnValueForMissingStub: _FakeSyncKVStore_0<dynamic>(
-              this,
-              Invocation.getter(#box),
-            ),
-          )
-          as _i2.SyncKVStore<dynamic>);
-
-  @override
-  _i2.DatabaseService get _databaseService =>
-      (super.noSuchMethod(
-            Invocation.getter(#databaseService),
-            returnValue: _FakeDatabaseService_1(
-              this,
-              Invocation.getter(#databaseService),
-            ),
-            returnValueForMissingStub: _FakeDatabaseService_1(
-              this,
-              Invocation.getter(#databaseService),
-            ),
-          )
-          as _i2.DatabaseService);
-
+class MockUserPreferencesService extends _i1.Mock
+    implements _i2.UserPreferencesService {
   @override
   bool get greatFeastTheme =>
       (super.noSuchMethod(

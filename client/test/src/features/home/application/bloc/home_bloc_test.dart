@@ -11,7 +11,7 @@ import 'home_bloc_test.mocks.dart';
 @GenerateNiceMocks([
   MockSpec<HomeDailyDataRepository>(),
   MockSpec<DatabaseService>(),
-  MockSpec<UserSettingsService>(),
+  MockSpec<UserPreferencesService>(),
   MockSpec<PageController>(),
 ])
 void main() {
@@ -32,18 +32,20 @@ void main() {
 
   late MockHomeDailyDataRepository repository;
   late MockDatabaseService mockDatabaseService;
-  late MockUserSettingsService mockUserSettingsService;
+  late MockUserPreferencesService mockUserPreferencesService;
 
   setUp(() {
     repository = MockHomeDailyDataRepository();
     mockDatabaseService = MockDatabaseService();
-    mockUserSettingsService = MockUserSettingsService();
+    mockUserPreferencesService = MockUserPreferencesService();
 
     when(repository.getTodaysBirthdaysQuery()).thenReturn(null);
     when(repository.getTodaysBirthdaysData()).thenAnswer((_) async => []);
-    when(mockUserSettingsService.lastHomeMode).thenAnswer((_) => lastHomeMode);
     when(
-      mockUserSettingsService.setLastHomeMode(lastHomeMode),
+      mockUserPreferencesService.lastHomeMode,
+    ).thenAnswer((_) => lastHomeMode);
+    when(
+      mockUserPreferencesService.setLastHomeMode(lastHomeMode),
     ).thenAnswer((_) async {});
 
     when(mockDatabaseService.daosByType).thenReturn({
@@ -72,7 +74,7 @@ void main() {
       blocTest<HomeBloc, HomeState>(
         'emits [HomeState] with initial data',
         build: () => HomeBloc(
-          userSettingsService: mockUserSettingsService,
+          userPreferencesService: mockUserPreferencesService,
           pageController: MockPageController(),
           homeDailyDataRepository: repository,
           databaseService: mockDatabaseService,
@@ -123,7 +125,7 @@ void main() {
           verify(repository.getSaying()).called(1);
           verify(repository.getTodaysBirthdaysData()).called(1);
           verify(repository.getTodaysBirthdaysQuery()).called(1);
-          verify(mockUserSettingsService.lastHomeMode).called(1);
+          verify(mockUserPreferencesService.lastHomeMode).called(1);
         },
       );
     });
@@ -144,7 +146,7 @@ void main() {
       blocTest<HomeBloc, HomeState>(
         'updates data when requesting new data',
         build: () => HomeBloc(
-          userSettingsService: mockUserSettingsService,
+          userPreferencesService: mockUserPreferencesService,
           pageController: MockPageController(),
           homeDailyDataRepository: repository,
           databaseService: mockDatabaseService,
@@ -197,15 +199,17 @@ void main() {
         blocTest(
           'Changes mode and emits new pages',
           setUp: () {
-            when(mockUserSettingsService.lastHomeMode).thenReturn(lastHomeMode);
             when(
-              mockUserSettingsService.setLastHomeMode(captureAny),
+              mockUserPreferencesService.lastHomeMode,
+            ).thenReturn(lastHomeMode);
+            when(
+              mockUserPreferencesService.setLastHomeMode(captureAny),
             ).thenAnswer((i) async {
               lastHomeMode = i.positionalArguments.first as HomeMode;
             });
           },
           build: () => HomeBloc(
-            userSettingsService: mockUserSettingsService,
+            userPreferencesService: mockUserPreferencesService,
             pageController: MockPageController(),
             homeDailyDataRepository: repository,
             databaseService: mockDatabaseService,
@@ -327,7 +331,7 @@ void main() {
                 ),
           ],
           verify: (_) {
-            verify(mockUserSettingsService.setLastHomeMode(any)).called(4);
+            verify(mockUserPreferencesService.setLastHomeMode(any)).called(4);
             expect(lastHomeMode, HomeMode.sundaySchool);
           },
         );
@@ -339,7 +343,7 @@ void main() {
         blocTest(
           'Switches page list type and preserves it across modes',
           build: () => HomeBloc(
-            userSettingsService: mockUserSettingsService,
+            userPreferencesService: mockUserPreferencesService,
             pageController: MockPageController(),
             homeDailyDataRepository: repository,
             databaseService: mockDatabaseService,
@@ -434,7 +438,7 @@ void main() {
         blocTest(
           'Listens to PageController page changes',
           build: () => HomeBloc(
-            userSettingsService: mockUserSettingsService,
+            userPreferencesService: mockUserPreferencesService,
             pageController: mockPageController,
             homeDailyDataRepository: repository,
             databaseService: mockDatabaseService,

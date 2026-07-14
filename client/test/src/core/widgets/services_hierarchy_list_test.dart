@@ -19,7 +19,7 @@ import 'services_hierarchy_list_test.mocks.dart';
     MockSpec<PaginatableStreamBase<Service>>(),
     MockSpec<GoRouter>(),
     MockSpec<ImageUrlCacheService>(),
-    MockSpec<UserSettingsService>(),
+    MockSpec<UserPreferencesService>(),
   ],
 )
 Future<void> main() async {
@@ -363,16 +363,16 @@ MockPaginatableStreamBase _createPaginatableStreamMock() {
 Future<void> _setUp() async {
   final overrides = [
     await _setUpImageUrlCacheService(),
-    _setUpUserSettingsService(),
+    _setUpUserPreferencesService(),
     _setUpCAViewableObjectService(),
   ];
 
   initGlobalProviderContainer(overrides);
 }
 
-Override _setUpUserSettingsService() {
-  return userSettingsServiceProvider.overrideWithValue(
-    MockUserSettingsService(),
+Override _setUpUserPreferencesService() {
+  return userPreferencesServiceProvider.overrideWithValue(
+    MockUserPreferencesService(),
   );
 }
 

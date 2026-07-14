@@ -14,7 +14,7 @@ import './view_object_details_test.mocks.dart';
 
 @GenerateNiceMocks(
   [
-    MockSpec<UserSettingsService>(),
+    MockSpec<UserPreferencesService>(),
     MockSpec<ImageUrlCacheService>(),
     MockSpec<ViewableObjectService>(),
     MockSpec<AuthBloc>(),
@@ -278,20 +278,20 @@ Future<void> _pumpWidget(
 
 void _setUp() {
   initGlobalProviderContainer([
-    _mockUserSettingsService(),
+    _mockUserPreferencesService(),
     _mockImageUrlCacheService(),
     _mockViewableObjectService(),
     _mockAuthBloc(),
   ]);
 }
 
-Override _mockUserSettingsService() {
-  final mock = MockUserSettingsService();
+Override _mockUserPreferencesService() {
+  final mock = MockUserPreferencesService();
 
   when(mock.darkTheme).thenReturn(false);
   when(mock.greatFeastTheme).thenReturn(false);
 
-  return userSettingsServiceProvider.overrideWithValue(mock);
+  return userPreferencesServiceProvider.overrideWithValue(mock);
 }
 
 Override _mockImageUrlCacheService() {

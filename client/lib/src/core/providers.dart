@@ -167,9 +167,9 @@ final loggingServiceProvider = Provider<LoggingService>(
   (ref) => LoggingService(),
 );
 
-final userSettingsServiceProvider = Provider<UserSettingsService>(
-  (ref) => UserSettingsService(
-    box: SyncKVStore.fromLoaded(UserSettingsService.storeName),
+final userPreferencesServiceProvider = Provider<UserPreferencesService>(
+  (ref) => UserPreferencesService(
+    box: SyncKVStore.fromLoaded(UserPreferencesService.storeName),
     databaseService: ref.watch(databaseServiceProvider),
     authBloc: ref.watch(authBlocProvider),
   ),
@@ -397,7 +397,7 @@ final phoneNumberServiceProvider = Provider<PhoneNumberService>(
 
 final themingServiceProvider = Provider<ThemingService>(
   (ref) => ThemingService(
-    userSettingsService: ref.watch(userSettingsServiceProvider),
+    userPreferencesService: ref.watch(userPreferencesServiceProvider),
   ),
 );
 
@@ -450,7 +450,7 @@ final homeDailyDataRepositoryProvider = Provider<HomeDailyDataRepository>(
 final homeBlocProvider = Provider<HomeBloc>(
   (ref) {
     final homeBloc = HomeBloc(
-      userSettingsService: ref.watch(userSettingsServiceProvider),
+      userPreferencesService: ref.watch(userPreferencesServiceProvider),
       pageController: PageController(),
       databaseService: ref.watch(databaseServiceProvider),
       homeDailyDataRepository: ref.watch(homeDailyDataRepositoryProvider),

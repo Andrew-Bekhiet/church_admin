@@ -123,9 +123,11 @@ List<Override> _setUp({bool withAuthBloc = true}) {
   final overrides = [
     if (withAuthBloc) _setUpAuthBloc(),
     _setUpLoggingService(),
-    userSettingsServiceProvider.overrideWithValue(FakeUserSettings()),
+    userPreferencesServiceProvider.overrideWithValue(
+      FakeUserPreferencesService(),
+    ),
     _setUpGoRouterRefreshStream(),
-    _setUpThemingService(FakeUserSettings()),
+    _setUpThemingService(FakeUserPreferencesService()),
     _setUpDatabaseRepo(),
     _setUpConnectivityService(),
     _setUpNotificationsService(),
@@ -206,11 +208,11 @@ MockAreasDAO _setUpAreasDAO() {
   return areasDAO;
 }
 
-Override _setUpThemingService(UserSettingsService userSettingsService) {
+Override _setUpThemingService(UserPreferencesService userPreferencesService) {
   return themingServiceProvider.overrideWithValue(
     ThemingService.withInitialThemeata(
       initialTheme: ThemeData.light(),
-      userSettingsService: userSettingsService,
+      userPreferencesService: userPreferencesService,
     ),
   );
 }
@@ -391,4 +393,5 @@ enum FirstScreenVariantEnum {
   home,
 }
 
-class FakeUserSettings extends Fake implements UserSettingsService {}
+class FakeUserPreferencesService extends Fake
+    implements UserPreferencesService {}

@@ -22,11 +22,11 @@ class HiveInit implements Initializer {
         sharedSembastInstance.kv(GqlKvStore.storeName),
       );
 
-      for (final legacyStoreName in UserSettingsService.legacyStoreNames) {
+      for (final legacyStoreName in UserPreferencesService.legacyStoreNames) {
         await sharedSembastInstance.kv<Json>(legacyStoreName).clear();
       }
       await SyncKVStore.load(
-        mainSembastInstance.kv(UserSettingsService.storeName),
+        mainSembastInstance.kv(UserPreferencesService.storeName),
       );
 
       await SyncKVStore.load<String>(

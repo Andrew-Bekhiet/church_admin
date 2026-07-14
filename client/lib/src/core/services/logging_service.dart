@@ -155,7 +155,7 @@ class LoggingService extends BlocObserver {
         withScope: (scope) async {
           await _configureScopeWithRecord(scope, record);
           await _configureScopeWithFeatureFlags(scope);
-          await _configureScopeWithUserSettings(scope);
+          await _configureScopeWithUserPreferences(scope);
         },
       );
     }
@@ -219,8 +219,8 @@ class LoggingService extends BlocObserver {
     await scope.setContexts('Feature Flags', FeatureFlagsRepository.I.toJson());
   }
 
-  Future<void> _configureScopeWithUserSettings(Scope scope) async {
-    await scope.setContexts('UserSettings', UserSettingsService.I.toJson());
+  Future<void> _configureScopeWithUserPreferences(Scope scope) async {
+    await scope.setContexts('UserPreferences', UserPreferencesService.I.toJson());
   }
 
   Future<void> fine(LogRecord record) async {

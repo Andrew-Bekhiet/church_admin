@@ -104,18 +104,18 @@ class ThemingService with WidgetsBindingObserver {
     Color? seedOverride,
     bool? isDarkOverride,
     bool? greatFeastThemeOverride,
-    UserSettingsService? userSettingsService,
+    UserPreferencesService? userPreferencesService,
   }) {
-    late final effectiveUserSettingsService =
-        userSettingsService ?? UserSettingsService.I;
+    late final effectiveUserPreferencesService =
+        userPreferencesService ?? UserPreferencesService.I;
 
     bool isDark =
         isDarkOverride ??
-        effectiveUserSettingsService.darkTheme ??
+        effectiveUserPreferencesService.darkTheme ??
         PlatformDispatcher.instance.platformBrightness == Brightness.dark;
 
     final bool greatFeastTheme =
-        greatFeastThemeOverride ?? effectiveUserSettingsService.greatFeastTheme;
+        greatFeastThemeOverride ?? effectiveUserPreferencesService.greatFeastTheme;
 
     Color? effectiveSeedOverride = seedOverride;
 
@@ -322,18 +322,19 @@ class ThemingService with WidgetsBindingObserver {
     );
   }
 
-  final UserSettingsService _userSettingsService;
+  final UserPreferencesService _userPreferencesService;
 
-  factory ThemingService({required UserSettingsService userSettingsService}) =>
-      ThemingService.withInitialThemeata(
-        userSettingsService: userSettingsService,
-        initialTheme: getDefault(userSettingsService: userSettingsService),
-      );
+  factory ThemingService({
+    required UserPreferencesService userPreferencesService,
+  }) => ThemingService.withInitialThemeata(
+    userPreferencesService: userPreferencesService,
+    initialTheme: getDefault(userPreferencesService: userPreferencesService),
+  );
 
   ThemingService.withInitialThemeata({
-    required UserSettingsService userSettingsService,
+    required UserPreferencesService userPreferencesService,
     required ThemeData initialTheme,
-  }) : _userSettingsService = userSettingsService,
+  }) : _userPreferencesService = userPreferencesService,
        _themeData = BehaviorSubject.seeded(initialTheme) {
     WidgetsBinding.instance.addObserver(this);
   }
@@ -350,7 +351,7 @@ class ThemingService with WidgetsBindingObserver {
   @override
   void didChangePlatformBrightness() {
     switchTheme(
-      _userSettingsService.darkTheme ??
+      _userPreferencesService.darkTheme ??
           PlatformDispatcher.instance.platformBrightness == Brightness.dark,
     );
   }

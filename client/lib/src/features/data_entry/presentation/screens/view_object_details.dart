@@ -37,11 +37,11 @@ class ViewObjectDetails<T extends ViewableWithIDAndImage>
       inServiceContext: inServiceContext,
     );
 
-    final value = UserSettingsService.I.getLastOrderByFor(key);
+    final value = UserPreferencesService.I.getLastOrderByFor(key);
     if (value != null) return value;
 
     final newOrderBy = orElse();
-    unawaited(UserSettingsService.I.setLastOrderByFor(key, newOrderBy));
+    unawaited(UserPreferencesService.I.setLastOrderByFor(key, newOrderBy));
 
     return newOrderBy;
   }
@@ -51,7 +51,7 @@ class ViewObjectDetails<T extends ViewableWithIDAndImage>
     required List<OrderBy> orderBy,
     bool inServiceContext = false,
   }) async {
-    await UserSettingsService.I.setLastOrderByFor(
+    await UserPreferencesService.I.setLastOrderByFor(
       OrderByPreferenceKey(
         type: type,
         inServiceContext: inServiceContext,

@@ -81,6 +81,24 @@ class MockSyncKVStore<T> extends _i1.Mock implements _i2.SyncKVStore<T> {
           as _i3.Future<void>);
 
   @override
+  bool containsKey(String? key) =>
+      (super.noSuchMethod(
+            Invocation.method(#containsKey, [key]),
+            returnValue: false,
+            returnValueForMissingStub: false,
+          )
+          as bool);
+
+  @override
+  bool containsValue(T? value) =>
+      (super.noSuchMethod(
+            Invocation.method(#containsValue, [value]),
+            returnValue: false,
+            returnValueForMissingStub: false,
+          )
+          as bool);
+
+  @override
   Map<String, T?> toMap() =>
       (super.noSuchMethod(
             Invocation.method(#toMap, []),

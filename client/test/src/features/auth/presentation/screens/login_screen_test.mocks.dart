@@ -145,20 +145,8 @@ class _FakeMeetingsDAO_20 extends _i1.SmartFake implements _i3.MeetingsDAO {
     : super(parent, parentInvocation);
 }
 
-class _FakeSyncKVStore_21<T> extends _i1.SmartFake
-    implements _i3.SyncKVStore<T> {
-  _FakeSyncKVStore_21(Object parent, Invocation parentInvocation)
-    : super(parent, parentInvocation);
-}
-
-class _FakeDatabaseService_22 extends _i1.SmartFake
-    implements _i3.DatabaseService {
-  _FakeDatabaseService_22(Object parent, Invocation parentInvocation)
-    : super(parent, parentInvocation);
-}
-
-class _FakeWidget_23 extends _i1.SmartFake implements _i4.Widget {
-  _FakeWidget_23(Object parent, Invocation parentInvocation)
+class _FakeWidget_21 extends _i1.SmartFake implements _i4.Widget {
+  _FakeWidget_21(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 
   @override
@@ -166,9 +154,9 @@ class _FakeWidget_23 extends _i1.SmartFake implements _i4.Widget {
       super.toString();
 }
 
-class _FakeInheritedWidget_24 extends _i1.SmartFake
+class _FakeInheritedWidget_22 extends _i1.SmartFake
     implements _i4.InheritedWidget {
-  _FakeInheritedWidget_24(Object parent, Invocation parentInvocation)
+  _FakeInheritedWidget_22(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 
   @override
@@ -176,9 +164,9 @@ class _FakeInheritedWidget_24 extends _i1.SmartFake
       super.toString();
 }
 
-class _FakeDiagnosticsNode_25 extends _i1.SmartFake
+class _FakeDiagnosticsNode_23 extends _i1.SmartFake
     implements _i4.DiagnosticsNode {
-  _FakeDiagnosticsNode_25(Object parent, Invocation parentInvocation)
+  _FakeDiagnosticsNode_23(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 
   @override
@@ -188,29 +176,29 @@ class _FakeDiagnosticsNode_25 extends _i1.SmartFake
   }) => super.toString();
 }
 
-class _FakeUri_26 extends _i1.SmartFake implements Uri {
-  _FakeUri_26(Object parent, Invocation parentInvocation)
+class _FakeUri_24 extends _i1.SmartFake implements Uri {
+  _FakeUri_24(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeValueKey_27<T> extends _i1.SmartFake implements _i4.ValueKey<T> {
-  _FakeValueKey_27(Object parent, Invocation parentInvocation)
+class _FakeValueKey_25<T> extends _i1.SmartFake implements _i4.ValueKey<T> {
+  _FakeValueKey_25(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeNavigatorObserver_28 extends _i1.SmartFake
+class _FakeNavigatorObserver_26 extends _i1.SmartFake
     implements _i4.NavigatorObserver {
-  _FakeNavigatorObserver_28(Object parent, Invocation parentInvocation)
+  _FakeNavigatorObserver_26(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeInterceptor_29 extends _i1.SmartFake implements _i6.Interceptor {
-  _FakeInterceptor_29(Object parent, Invocation parentInvocation)
+class _FakeInterceptor_27 extends _i1.SmartFake implements _i6.Interceptor {
+  _FakeInterceptor_27(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeLink_30 extends _i1.SmartFake implements _i7.Link {
-  _FakeLink_30(Object parent, Invocation parentInvocation)
+class _FakeLink_28 extends _i1.SmartFake implements _i7.Link {
+  _FakeLink_28(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
@@ -788,41 +776,11 @@ class MockDatabaseService extends _i1.Mock implements _i3.DatabaseService {
           as Map<Type, _i3.DAOBase<_i3.ViewableWithID>>);
 }
 
-/// A class which mocks [UserSettingsService].
+/// A class which mocks [UserPreferencesService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockUserSettingsService extends _i1.Mock
-    implements _i3.UserSettingsService {
-  @override
-  _i3.SyncKVStore<dynamic> get _box =>
-      (super.noSuchMethod(
-            Invocation.getter(#box),
-            returnValue: _FakeSyncKVStore_21<dynamic>(
-              this,
-              Invocation.getter(#box),
-            ),
-            returnValueForMissingStub: _FakeSyncKVStore_21<dynamic>(
-              this,
-              Invocation.getter(#box),
-            ),
-          )
-          as _i3.SyncKVStore<dynamic>);
-
-  @override
-  _i3.DatabaseService get _databaseService =>
-      (super.noSuchMethod(
-            Invocation.getter(#databaseService),
-            returnValue: _FakeDatabaseService_22(
-              this,
-              Invocation.getter(#databaseService),
-            ),
-            returnValueForMissingStub: _FakeDatabaseService_22(
-              this,
-              Invocation.getter(#databaseService),
-            ),
-          )
-          as _i3.DatabaseService);
-
+class MockUserPreferencesService extends _i1.Mock
+    implements _i3.UserPreferencesService {
   @override
   bool get greatFeastTheme =>
       (super.noSuchMethod(
@@ -1171,8 +1129,8 @@ class MockBuildContext extends _i1.Mock implements _i4.BuildContext {
   _i4.Widget get widget =>
       (super.noSuchMethod(
             Invocation.getter(#widget),
-            returnValue: _FakeWidget_23(this, Invocation.getter(#widget)),
-            returnValueForMissingStub: _FakeWidget_23(
+            returnValue: _FakeWidget_21(this, Invocation.getter(#widget)),
+            returnValueForMissingStub: _FakeWidget_21(
               this,
               Invocation.getter(#widget),
             ),
@@ -1208,7 +1166,7 @@ class MockBuildContext extends _i1.Mock implements _i4.BuildContext {
               [ancestor],
               {#aspect: aspect},
             ),
-            returnValue: _FakeInheritedWidget_24(
+            returnValue: _FakeInheritedWidget_22(
               this,
               Invocation.method(
                 #dependOnInheritedElement,
@@ -1216,7 +1174,7 @@ class MockBuildContext extends _i1.Mock implements _i4.BuildContext {
                 {#aspect: aspect},
               ),
             ),
-            returnValueForMissingStub: _FakeInheritedWidget_24(
+            returnValueForMissingStub: _FakeInheritedWidget_22(
               this,
               Invocation.method(
                 #dependOnInheritedElement,
@@ -1254,11 +1212,11 @@ class MockBuildContext extends _i1.Mock implements _i4.BuildContext {
   }) =>
       (super.noSuchMethod(
             Invocation.method(#describeElement, [name], {#style: style}),
-            returnValue: _FakeDiagnosticsNode_25(
+            returnValue: _FakeDiagnosticsNode_23(
               this,
               Invocation.method(#describeElement, [name], {#style: style}),
             ),
-            returnValueForMissingStub: _FakeDiagnosticsNode_25(
+            returnValueForMissingStub: _FakeDiagnosticsNode_23(
               this,
               Invocation.method(#describeElement, [name], {#style: style}),
             ),
@@ -1272,11 +1230,11 @@ class MockBuildContext extends _i1.Mock implements _i4.BuildContext {
   }) =>
       (super.noSuchMethod(
             Invocation.method(#describeWidget, [name], {#style: style}),
-            returnValue: _FakeDiagnosticsNode_25(
+            returnValue: _FakeDiagnosticsNode_23(
               this,
               Invocation.method(#describeWidget, [name], {#style: style}),
             ),
-            returnValueForMissingStub: _FakeDiagnosticsNode_25(
+            returnValueForMissingStub: _FakeDiagnosticsNode_23(
               this,
               Invocation.method(#describeWidget, [name], {#style: style}),
             ),
@@ -1300,11 +1258,11 @@ class MockBuildContext extends _i1.Mock implements _i4.BuildContext {
   _i4.DiagnosticsNode describeOwnershipChain(String? name) =>
       (super.noSuchMethod(
             Invocation.method(#describeOwnershipChain, [name]),
-            returnValue: _FakeDiagnosticsNode_25(
+            returnValue: _FakeDiagnosticsNode_23(
               this,
               Invocation.method(#describeOwnershipChain, [name]),
             ),
-            returnValueForMissingStub: _FakeDiagnosticsNode_25(
+            returnValueForMissingStub: _FakeDiagnosticsNode_23(
               this,
               Invocation.method(#describeOwnershipChain, [name]),
             ),
@@ -1321,8 +1279,8 @@ class MockGoRouterState extends _i1.Mock implements _i12.GoRouterState {
   Uri get uri =>
       (super.noSuchMethod(
             Invocation.getter(#uri),
-            returnValue: _FakeUri_26(this, Invocation.getter(#uri)),
-            returnValueForMissingStub: _FakeUri_26(
+            returnValue: _FakeUri_24(this, Invocation.getter(#uri)),
+            returnValueForMissingStub: _FakeUri_24(
               this,
               Invocation.getter(#uri),
             ),
@@ -1357,11 +1315,11 @@ class MockGoRouterState extends _i1.Mock implements _i12.GoRouterState {
   _i4.ValueKey<String> get pageKey =>
       (super.noSuchMethod(
             Invocation.getter(#pageKey),
-            returnValue: _FakeValueKey_27<String>(
+            returnValue: _FakeValueKey_25<String>(
               this,
               Invocation.getter(#pageKey),
             ),
-            returnValueForMissingStub: _FakeValueKey_27<String>(
+            returnValueForMissingStub: _FakeValueKey_25<String>(
               this,
               Invocation.getter(#pageKey),
             ),
@@ -1421,11 +1379,11 @@ class MockLoggingService extends _i1.Mock implements _i3.LoggingService {
   _i4.NavigatorObserver get navigatorObserver =>
       (super.noSuchMethod(
             Invocation.getter(#navigatorObserver),
-            returnValue: _FakeNavigatorObserver_28(
+            returnValue: _FakeNavigatorObserver_26(
               this,
               Invocation.getter(#navigatorObserver),
             ),
-            returnValueForMissingStub: _FakeNavigatorObserver_28(
+            returnValueForMissingStub: _FakeNavigatorObserver_26(
               this,
               Invocation.getter(#navigatorObserver),
             ),
@@ -1436,11 +1394,11 @@ class MockLoggingService extends _i1.Mock implements _i3.LoggingService {
   _i6.Interceptor get dioInterceptor =>
       (super.noSuchMethod(
             Invocation.getter(#dioInterceptor),
-            returnValue: _FakeInterceptor_29(
+            returnValue: _FakeInterceptor_27(
               this,
               Invocation.getter(#dioInterceptor),
             ),
-            returnValueForMissingStub: _FakeInterceptor_29(
+            returnValueForMissingStub: _FakeInterceptor_27(
               this,
               Invocation.getter(#dioInterceptor),
             ),
@@ -1451,8 +1409,8 @@ class MockLoggingService extends _i1.Mock implements _i3.LoggingService {
   _i7.Link get loggingLink =>
       (super.noSuchMethod(
             Invocation.getter(#loggingLink),
-            returnValue: _FakeLink_30(this, Invocation.getter(#loggingLink)),
-            returnValueForMissingStub: _FakeLink_30(
+            returnValue: _FakeLink_28(this, Invocation.getter(#loggingLink)),
+            returnValueForMissingStub: _FakeLink_28(
               this,
               Invocation.getter(#loggingLink),
             ),

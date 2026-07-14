@@ -303,41 +303,11 @@ class MockImageUrlCacheService extends _i1.Mock
           as bool);
 }
 
-/// A class which mocks [UserSettingsService].
+/// A class which mocks [UserPreferencesService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockUserSettingsService extends _i1.Mock
-    implements _i2.UserSettingsService {
-  @override
-  _i2.SyncKVStore<dynamic> get _box =>
-      (super.noSuchMethod(
-            Invocation.getter(#box),
-            returnValue: _FakeSyncKVStore_6<dynamic>(
-              this,
-              Invocation.getter(#box),
-            ),
-            returnValueForMissingStub: _FakeSyncKVStore_6<dynamic>(
-              this,
-              Invocation.getter(#box),
-            ),
-          )
-          as _i2.SyncKVStore<dynamic>);
-
-  @override
-  _i2.DatabaseService get _databaseService =>
-      (super.noSuchMethod(
-            Invocation.getter(#databaseService),
-            returnValue: _FakeDatabaseService_0(
-              this,
-              Invocation.getter(#databaseService),
-            ),
-            returnValueForMissingStub: _FakeDatabaseService_0(
-              this,
-              Invocation.getter(#databaseService),
-            ),
-          )
-          as _i2.DatabaseService);
-
+class MockUserPreferencesService extends _i1.Mock
+    implements _i2.UserPreferencesService {
   @override
   bool get greatFeastTheme =>
       (super.noSuchMethod(

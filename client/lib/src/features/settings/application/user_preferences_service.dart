@@ -4,8 +4,8 @@ import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class UserSettingsService extends BlocObserver {
-  static const storeName = 'SettingsV2';
+class UserPreferencesService extends BlocObserver {
+  static const storeName = 'UserPreferences';
   static const legacyStoreNames = ['Settings'];
 
   static const _equality = DeepCollectionEquality();
@@ -18,8 +18,8 @@ class UserSettingsService extends BlocObserver {
   // SyncKVStore/Sembast treat put(null) as delete; wrap so key presence is kept.
   static const _nullQueuedValue = <String, bool>{'pendingNull': true};
 
-  static UserSettingsService get I =>
-      globalProviderContainer.read(userSettingsServiceProvider);
+  static UserPreferencesService get I =>
+      globalProviderContainer.read(userPreferencesServiceProvider);
 
   final SyncKVStore _pendingWritesBox;
   final DatabaseService _databaseService;
@@ -68,7 +68,7 @@ class UserSettingsService extends BlocObserver {
     unawaited(_flushPending());
   }
 
-  UserSettingsService({
+  UserPreferencesService({
     required SyncKVStore box,
     required DatabaseService databaseService,
     required AuthBloc authBloc,

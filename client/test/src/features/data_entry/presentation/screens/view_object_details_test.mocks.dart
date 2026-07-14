@@ -36,31 +36,25 @@ class _FakeSyncKVStore_0<T> extends _i1.SmartFake
     : super(parent, parentInvocation);
 }
 
-class _FakeDatabaseService_1 extends _i1.SmartFake
-    implements _i2.DatabaseService {
-  _FakeDatabaseService_1(Object parent, Invocation parentInvocation)
-    : super(parent, parentInvocation);
-}
-
-class _FakeBaseCacheManager_2 extends _i1.SmartFake
+class _FakeBaseCacheManager_1 extends _i1.SmartFake
     implements _i3.BaseCacheManager {
-  _FakeBaseCacheManager_2(Object parent, Invocation parentInvocation)
+  _FakeBaseCacheManager_1(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeFile_3 extends _i1.SmartFake implements _i4.File {
-  _FakeFile_3(Object parent, Invocation parentInvocation)
+class _FakeFile_2 extends _i1.SmartFake implements _i4.File {
+  _FakeFile_2(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeGoRouter_4 extends _i1.SmartFake implements _i5.GoRouter {
-  _FakeGoRouter_4(Object parent, Invocation parentInvocation)
+class _FakeGoRouter_3 extends _i1.SmartFake implements _i5.GoRouter {
+  _FakeGoRouter_3(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeNavigatorState_5 extends _i1.SmartFake
+class _FakeNavigatorState_4 extends _i1.SmartFake
     implements _i6.NavigatorState {
-  _FakeNavigatorState_5(Object parent, Invocation parentInvocation)
+  _FakeNavigatorState_4(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 
   @override
@@ -68,53 +62,23 @@ class _FakeNavigatorState_5 extends _i1.SmartFake
       super.toString();
 }
 
-class _FakeGlobalKey_6<T extends _i6.State<_i6.StatefulWidget>>
+class _FakeGlobalKey_5<T extends _i6.State<_i6.StatefulWidget>>
     extends _i1.SmartFake
     implements _i6.GlobalKey<T> {
-  _FakeGlobalKey_6(Object parent, Invocation parentInvocation)
+  _FakeGlobalKey_5(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeIconData_7 extends _i1.SmartFake implements _i6.IconData {
-  _FakeIconData_7(Object parent, Invocation parentInvocation)
+class _FakeIconData_6 extends _i1.SmartFake implements _i6.IconData {
+  _FakeIconData_6(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-/// A class which mocks [UserSettingsService].
+/// A class which mocks [UserPreferencesService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockUserSettingsService extends _i1.Mock
-    implements _i2.UserSettingsService {
-  @override
-  _i2.SyncKVStore<dynamic> get _box =>
-      (super.noSuchMethod(
-            Invocation.getter(#box),
-            returnValue: _FakeSyncKVStore_0<dynamic>(
-              this,
-              Invocation.getter(#box),
-            ),
-            returnValueForMissingStub: _FakeSyncKVStore_0<dynamic>(
-              this,
-              Invocation.getter(#box),
-            ),
-          )
-          as _i2.SyncKVStore<dynamic>);
-
-  @override
-  _i2.DatabaseService get _databaseService =>
-      (super.noSuchMethod(
-            Invocation.getter(#databaseService),
-            returnValue: _FakeDatabaseService_1(
-              this,
-              Invocation.getter(#databaseService),
-            ),
-            returnValueForMissingStub: _FakeDatabaseService_1(
-              this,
-              Invocation.getter(#databaseService),
-            ),
-          )
-          as _i2.DatabaseService);
-
+class MockUserPreferencesService extends _i1.Mock
+    implements _i2.UserPreferencesService {
   @override
   bool get greatFeastTheme =>
       (super.noSuchMethod(
@@ -261,11 +225,11 @@ class MockImageUrlCacheService extends _i1.Mock
   _i3.BaseCacheManager get cacheManager =>
       (super.noSuchMethod(
             Invocation.getter(#cacheManager),
-            returnValue: _FakeBaseCacheManager_2(
+            returnValue: _FakeBaseCacheManager_1(
               this,
               Invocation.getter(#cacheManager),
             ),
-            returnValueForMissingStub: _FakeBaseCacheManager_2(
+            returnValueForMissingStub: _FakeBaseCacheManager_1(
               this,
               Invocation.getter(#cacheManager),
             ),
@@ -277,10 +241,10 @@ class MockImageUrlCacheService extends _i1.Mock
       (super.noSuchMethod(
             Invocation.method(#getImageFile, [imageInfo]),
             returnValue: _i8.Future<_i4.File>.value(
-              _FakeFile_3(this, Invocation.method(#getImageFile, [imageInfo])),
+              _FakeFile_2(this, Invocation.method(#getImageFile, [imageInfo])),
             ),
             returnValueForMissingStub: _i8.Future<_i4.File>.value(
-              _FakeFile_3(this, Invocation.method(#getImageFile, [imageInfo])),
+              _FakeFile_2(this, Invocation.method(#getImageFile, [imageInfo])),
             ),
           )
           as _i8.Future<_i4.File>);
@@ -348,8 +312,8 @@ class MockViewableObjectService extends _i1.Mock
   _i5.GoRouter get router =>
       (super.noSuchMethod(
             Invocation.getter(#router),
-            returnValue: _FakeGoRouter_4(this, Invocation.getter(#router)),
-            returnValueForMissingStub: _FakeGoRouter_4(
+            returnValue: _FakeGoRouter_3(this, Invocation.getter(#router)),
+            returnValueForMissingStub: _FakeGoRouter_3(
               this,
               Invocation.getter(#router),
             ),
@@ -360,11 +324,11 @@ class MockViewableObjectService extends _i1.Mock
   _i6.NavigatorState get navigator =>
       (super.noSuchMethod(
             Invocation.getter(#navigator),
-            returnValue: _FakeNavigatorState_5(
+            returnValue: _FakeNavigatorState_4(
               this,
               Invocation.getter(#navigator),
             ),
-            returnValueForMissingStub: _FakeNavigatorState_5(
+            returnValueForMissingStub: _FakeNavigatorState_4(
               this,
               Invocation.getter(#navigator),
             ),
@@ -375,11 +339,11 @@ class MockViewableObjectService extends _i1.Mock
   _i6.GlobalKey<_i6.NavigatorState> get navigatorKey =>
       (super.noSuchMethod(
             Invocation.getter(#navigatorKey),
-            returnValue: _FakeGlobalKey_6<_i6.NavigatorState>(
+            returnValue: _FakeGlobalKey_5<_i6.NavigatorState>(
               this,
               Invocation.getter(#navigatorKey),
             ),
-            returnValueForMissingStub: _FakeGlobalKey_6<_i6.NavigatorState>(
+            returnValueForMissingStub: _FakeGlobalKey_5<_i6.NavigatorState>(
               this,
               Invocation.getter(#navigatorKey),
             ),
@@ -407,11 +371,11 @@ class MockViewableObjectService extends _i1.Mock
   _i6.IconData getDefaultIconFor<T extends _i2.IImage>([T? imageObject]) =>
       (super.noSuchMethod(
             Invocation.method(#getDefaultIconFor, [imageObject]),
-            returnValue: _FakeIconData_7(
+            returnValue: _FakeIconData_6(
               this,
               Invocation.method(#getDefaultIconFor, [imageObject]),
             ),
-            returnValueForMissingStub: _FakeIconData_7(
+            returnValueForMissingStub: _FakeIconData_6(
               this,
               Invocation.method(#getDefaultIconFor, [imageObject]),
             ),
