@@ -37,7 +37,6 @@ class Area extends DataObject with PhotoObject {
   Area.fromQueryDoc(QueryDocumentSnapshot doc, IdReference ref)
     : this.createFromData(doc.data() as Map<String, dynamic>, ref);
 
-  @override
   Area.createFromData(Map<String, dynamic> data, IdReference ref)
     : allowedUsers = data['Allowed']?.cast<String>() ?? [],
       locationConfirmed = data['LocationConfirmed'] ?? false,

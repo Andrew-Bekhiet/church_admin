@@ -5,6 +5,7 @@ analyzer:
     strict-inference: false
     strict-raw-types: false
   exclude:
+    - build/**
     - lib/**.freezed.dart
     - lib/**.g.dart
     - lib/**/__generated__/*

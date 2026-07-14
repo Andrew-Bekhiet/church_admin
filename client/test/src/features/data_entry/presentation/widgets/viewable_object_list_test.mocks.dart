@@ -61,25 +61,20 @@ class _FakeGlobalKey_4<T extends _i4.State<_i4.StatefulWidget>>
     : super(parent, parentInvocation);
 }
 
-class _FakeIconData_5 extends _i1.SmartFake implements _i4.IconData {
-  _FakeIconData_5(Object parent, Invocation parentInvocation)
-    : super(parent, parentInvocation);
-}
-
-class _FakeSyncKVStore_6<T> extends _i1.SmartFake
+class _FakeSyncKVStore_5<T> extends _i1.SmartFake
     implements _i5.SyncKVStore<T> {
-  _FakeSyncKVStore_6(Object parent, Invocation parentInvocation)
+  _FakeSyncKVStore_5(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeBaseCacheManager_7 extends _i1.SmartFake
+class _FakeBaseCacheManager_6 extends _i1.SmartFake
     implements _i6.BaseCacheManager {
-  _FakeBaseCacheManager_7(Object parent, Invocation parentInvocation)
+  _FakeBaseCacheManager_6(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeFile_8 extends _i1.SmartFake implements _i7.File {
-  _FakeFile_8(Object parent, Invocation parentInvocation)
+class _FakeFile_7 extends _i1.SmartFake implements _i7.File {
+  _FakeFile_7(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
@@ -696,11 +691,11 @@ class MockViewableObjectService extends _i1.Mock
   _i4.IconData getDefaultIconFor<T extends _i5.IImage>([T? imageObject]) =>
       (super.noSuchMethod(
             Invocation.method(#getDefaultIconFor, [imageObject]),
-            returnValue: _FakeIconData_5(
+            returnValue: _i8.dummyValue<_i4.IconData>(
               this,
               Invocation.method(#getDefaultIconFor, [imageObject]),
             ),
-            returnValueForMissingStub: _FakeIconData_5(
+            returnValueForMissingStub: _i8.dummyValue<_i4.IconData>(
               this,
               Invocation.method(#getDefaultIconFor, [imageObject]),
             ),
@@ -717,11 +712,11 @@ class MockImageUrlCacheService extends _i1.Mock
   _i5.SyncKVStore<String> get box =>
       (super.noSuchMethod(
             Invocation.getter(#box),
-            returnValue: _FakeSyncKVStore_6<String>(
+            returnValue: _FakeSyncKVStore_5<String>(
               this,
               Invocation.getter(#box),
             ),
-            returnValueForMissingStub: _FakeSyncKVStore_6<String>(
+            returnValueForMissingStub: _FakeSyncKVStore_5<String>(
               this,
               Invocation.getter(#box),
             ),
@@ -732,11 +727,11 @@ class MockImageUrlCacheService extends _i1.Mock
   _i6.BaseCacheManager get cacheManager =>
       (super.noSuchMethod(
             Invocation.getter(#cacheManager),
-            returnValue: _FakeBaseCacheManager_7(
+            returnValue: _FakeBaseCacheManager_6(
               this,
               Invocation.getter(#cacheManager),
             ),
-            returnValueForMissingStub: _FakeBaseCacheManager_7(
+            returnValueForMissingStub: _FakeBaseCacheManager_6(
               this,
               Invocation.getter(#cacheManager),
             ),
@@ -748,10 +743,10 @@ class MockImageUrlCacheService extends _i1.Mock
       (super.noSuchMethod(
             Invocation.method(#getImageFile, [imageInfo]),
             returnValue: _i2.Future<_i7.File>.value(
-              _FakeFile_8(this, Invocation.method(#getImageFile, [imageInfo])),
+              _FakeFile_7(this, Invocation.method(#getImageFile, [imageInfo])),
             ),
             returnValueForMissingStub: _i2.Future<_i7.File>.value(
-              _FakeFile_8(this, Invocation.method(#getImageFile, [imageInfo])),
+              _FakeFile_7(this, Invocation.method(#getImageFile, [imageInfo])),
             ),
           )
           as _i2.Future<_i7.File>);

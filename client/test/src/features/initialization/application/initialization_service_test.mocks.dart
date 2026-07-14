@@ -97,6 +97,15 @@ class MockAuthBloc extends _i1.Mock implements _i2.AuthBloc {
           as _i3.Future<void>);
 
   @override
+  bool get isClosed =>
+      (super.noSuchMethod(
+            Invocation.getter(#isClosed),
+            returnValue: false,
+            returnValueForMissingStub: false,
+          )
+          as bool);
+
+  @override
   _i2.AuthState get state =>
       (super.noSuchMethod(
             Invocation.getter(#state),
@@ -119,15 +128,6 @@ class MockAuthBloc extends _i1.Mock implements _i2.AuthBloc {
             returnValueForMissingStub: _i3.Stream<_i2.AuthState>.empty(),
           )
           as _i3.Stream<_i2.AuthState>);
-
-  @override
-  bool get isClosed =>
-      (super.noSuchMethod(
-            Invocation.getter(#isClosed),
-            returnValue: false,
-            returnValueForMissingStub: false,
-          )
-          as bool);
 
   @override
   _i3.Future<void> close() =>

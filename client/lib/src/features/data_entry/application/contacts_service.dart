@@ -11,11 +11,7 @@ class ContactsService {
   const ContactsService();
 
   Future<Contact?> pickContact() async {
-    final contactId = await FlutterContacts.native.showPicker();
-    if (contactId == null) return null;
-
-    return FlutterContacts.get(
-      contactId,
+    return FlutterContacts.native.showPicker(
       properties: {ContactProperty.name, ContactProperty.phone},
     );
   }

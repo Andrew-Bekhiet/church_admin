@@ -69,11 +69,6 @@ class _FakeGlobalKey_5<T extends _i6.State<_i6.StatefulWidget>>
     : super(parent, parentInvocation);
 }
 
-class _FakeIconData_6 extends _i1.SmartFake implements _i6.IconData {
-  _FakeIconData_6(Object parent, Invocation parentInvocation)
-    : super(parent, parentInvocation);
-}
-
 /// A class which mocks [UserPreferencesService].
 ///
 /// See the documentation for Mockito's code generation for more information.
@@ -371,11 +366,11 @@ class MockViewableObjectService extends _i1.Mock
   _i6.IconData getDefaultIconFor<T extends _i2.IImage>([T? imageObject]) =>
       (super.noSuchMethod(
             Invocation.method(#getDefaultIconFor, [imageObject]),
-            returnValue: _FakeIconData_6(
+            returnValue: _i10.dummyValue<_i6.IconData>(
               this,
               Invocation.method(#getDefaultIconFor, [imageObject]),
             ),
-            returnValueForMissingStub: _FakeIconData_6(
+            returnValueForMissingStub: _i10.dummyValue<_i6.IconData>(
               this,
               Invocation.method(#getDefaultIconFor, [imageObject]),
             ),
@@ -442,6 +437,15 @@ class MockAuthBloc extends _i1.Mock implements _i2.AuthBloc {
           as _i8.Future<void>);
 
   @override
+  bool get isClosed =>
+      (super.noSuchMethod(
+            Invocation.getter(#isClosed),
+            returnValue: false,
+            returnValueForMissingStub: false,
+          )
+          as bool);
+
+  @override
   _i2.AuthState get state =>
       (super.noSuchMethod(
             Invocation.getter(#state),
@@ -464,15 +468,6 @@ class MockAuthBloc extends _i1.Mock implements _i2.AuthBloc {
             returnValueForMissingStub: _i8.Stream<_i2.AuthState>.empty(),
           )
           as _i8.Stream<_i2.AuthState>);
-
-  @override
-  bool get isClosed =>
-      (super.noSuchMethod(
-            Invocation.getter(#isClosed),
-            returnValue: false,
-            returnValueForMissingStub: false,
-          )
-          as bool);
 
   @override
   _i8.Future<void> close() =>
