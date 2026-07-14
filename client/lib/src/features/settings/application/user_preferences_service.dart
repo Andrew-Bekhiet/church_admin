@@ -145,9 +145,7 @@ class UserPreferencesService extends BlocObserver {
               );
             }
 
-            final scalarValue = identical(_nullQueuedValue, e.value)
-                ? null
-                : e.value;
+            final scalarValue = _isNullQueuedValue(e.value) ? null : e.value;
 
             return (
               orderByPreferences: acc.orderByPreferences,
@@ -215,7 +213,9 @@ class UserPreferencesService extends BlocObserver {
     _pendingWritesBox.put(key, value ?? _nullQueuedValue);
   }
 
-  bool _isNullQueuedValue(Object? value) => identical(_nullQueuedValue, value);
+  bool _isNullQueuedValue(Object? value) =>
+      identical(_nullQueuedValue, value) ||
+      (value is Map && value.length == 1 && value['pendingNull'] == true);
 
   List<OrderBy>? _parseOrderByList(Object? value) {
     if (value == null || value is! List) return null;
