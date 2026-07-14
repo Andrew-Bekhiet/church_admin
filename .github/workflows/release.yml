@@ -307,28 +307,28 @@ jobs:
           echo "current_version=$VERSION" >> $GITHUB_OUTPUT
 
       - name: Write service account key to file
-        working-directory: server/functions
+        working-directory: server/firebase/functions
         env:
           FIREBASE_REMOTE_CONFIG_UPDATER_KEY: ${{ secrets.FIREBASE_REMOTE_CONFIG_UPDATER_KEY }}
         run: |
           echo $FIREBASE_REMOTE_CONFIG_UPDATER_KEY | sed 's/[^A-Za-z0-9+/=]//g' | base64 -d > ./firebase-service-account.json
 
       - name: Install npm dependencies
-        working-directory: server/functions
+        working-directory: server/firebase/functions
         run: npm ci
 
       - name: Build server
-        working-directory: server/functions
+        working-directory: server/firebase/functions
         run: npm run build
 
       - name: Update remote config app version
-        working-directory: server/functions
+        working-directory: server/firebase/functions
         env:
           LATEST_VERSION: ${{ steps.get-version.outputs.current_version }}
           GOOGLE_APPLICATION_CREDENTIALS: ./firebase-service-account.json
         run: node ./lib/update_remote_config_app_version.js
 
       - name: Remove service account key file
-        working-directory: server/functions
+        working-directory: server/firebase/functions
         if: ${{ always() }}
         run: rm -f ./firebase-service-account.json
