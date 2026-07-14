@@ -14,6 +14,8 @@ part 'user.g.dart';
     'id',
     'blurhash',
     'canManageSomeUsers',
+    'preferences',
+    'fcmTokens',
   ],
   regexIgnoreFields: [r'.+History$'],
   allowExtension: true,
@@ -63,6 +65,13 @@ class User extends ViewableWithIDAndImage
   final Person? person;
 
   @override
+  final UserPreferences? preferences;
+
+  @override
+  @JsonKey(defaultValue: <FcmToken>[])
+  final List<FcmToken> fcmTokens;
+
+  @override
   final List<AdminOnData>? servicesHistory;
 
   @override
@@ -86,6 +95,8 @@ class User extends ViewableWithIDAndImage
     this.authId,
     this.lastEdit,
     this.person,
+    this.preferences,
+    this.fcmTokens = const [],
     this.servicesHistory,
     this.classesHistory,
     this.groupsHistory,

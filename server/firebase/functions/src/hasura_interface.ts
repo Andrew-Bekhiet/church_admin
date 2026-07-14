@@ -236,6 +236,43 @@ export async function unapproveUser(hasuraUID: string): Promise<void> {
   }
 }
 
+export async function insertFcmToken(
+  hasuraUID: string,
+  token: string,
+): Promise<void> {
+  try {
+    const hasura_response = await makeGraphqlRequest({
+      query: `
+            mutation insertFcmToken($uid: uuid!, $token: String!) {
+              insertUsersFcmTokensOne(
+                object: { uid: $uid, token: $token }
+                onConflict: { constraint: users_fcm_tokens_pkey, updateColumns: [] }
+              ) {
+                uid
+                token
+              }
+            }
+          `,
+      variables: {
+        uid: hasuraUID,
+        token,
+      },
+      operationName: "insertFcmToken",
+    });
+
+    if (hasura_response.data?.["errors"]) {
+      throw new https.HttpsError(
+        "internal",
+        "Failed to register FCM token",
+        hasura_response.data?.["errors"],
+      );
+    }
+  } catch (e) {
+    console.error(e);
+    throw e;
+  }
+}
+
 export async function updatePhotoTime(
   table: PhotoTable,
   id: string,

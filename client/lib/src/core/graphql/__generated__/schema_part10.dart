@@ -1,6 +1,356 @@
 // Part 10 of the schema
 part of "schema.graphql.dart";
 
+abstract class CopyWith_Input_BigintComparisonExp<TRes> {
+  factory CopyWith_Input_BigintComparisonExp(
+    Input_BigintComparisonExp instance,
+    TRes Function(Input_BigintComparisonExp) then,
+  ) = _CopyWithImpl_Input_BigintComparisonExp;
+
+  factory CopyWith_Input_BigintComparisonExp.stub(TRes res) =
+      _CopyWithStubImpl_Input_BigintComparisonExp;
+
+  TRes call({
+    int? $_eq,
+    int? $_gt,
+    int? $_gte,
+    List<int>? $_in,
+    bool? $_isNull,
+    int? $_lt,
+    int? $_lte,
+    int? $_neq,
+    List<int>? $_nin,
+  });
+}
+
+class _CopyWithImpl_Input_BigintComparisonExp<TRes>
+    implements CopyWith_Input_BigintComparisonExp<TRes> {
+  _CopyWithImpl_Input_BigintComparisonExp(this._instance, this._then);
+
+  final Input_BigintComparisonExp _instance;
+
+  final TRes Function(Input_BigintComparisonExp) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? $_eq = _undefined,
+    Object? $_gt = _undefined,
+    Object? $_gte = _undefined,
+    Object? $_in = _undefined,
+    Object? $_isNull = _undefined,
+    Object? $_lt = _undefined,
+    Object? $_lte = _undefined,
+    Object? $_neq = _undefined,
+    Object? $_nin = _undefined,
+  }) => _then(
+    Input_BigintComparisonExp._({
+      ..._instance._$data,
+      if ($_eq != _undefined) '_eq': ($_eq as int?),
+      if ($_gt != _undefined) '_gt': ($_gt as int?),
+      if ($_gte != _undefined) '_gte': ($_gte as int?),
+      if ($_in != _undefined) '_in': ($_in as List<int>?),
+      if ($_isNull != _undefined) '_isNull': ($_isNull as bool?),
+      if ($_lt != _undefined) '_lt': ($_lt as int?),
+      if ($_lte != _undefined) '_lte': ($_lte as int?),
+      if ($_neq != _undefined) '_neq': ($_neq as int?),
+      if ($_nin != _undefined) '_nin': ($_nin as List<int>?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_BigintComparisonExp<TRes>
+    implements CopyWith_Input_BigintComparisonExp<TRes> {
+  _CopyWithStubImpl_Input_BigintComparisonExp(this._res);
+
+  TRes _res;
+
+  call({
+    int? $_eq,
+    int? $_gt,
+    int? $_gte,
+    List<int>? $_in,
+    bool? $_isNull,
+    int? $_lt,
+    int? $_lte,
+    int? $_neq,
+    List<int>? $_nin,
+  }) => _res;
+}
+
+class Input_BooleanComparisonExp {
+  factory Input_BooleanComparisonExp({
+    bool? $_eq,
+    bool? $_gt,
+    bool? $_gte,
+    List<bool>? $_in,
+    bool? $_isNull,
+    bool? $_lt,
+    bool? $_lte,
+    bool? $_neq,
+    List<bool>? $_nin,
+  }) => Input_BooleanComparisonExp._({
+    if ($_eq != null) r'_eq': $_eq,
+    if ($_gt != null) r'_gt': $_gt,
+    if ($_gte != null) r'_gte': $_gte,
+    if ($_in != null) r'_in': $_in,
+    if ($_isNull != null) r'_isNull': $_isNull,
+    if ($_lt != null) r'_lt': $_lt,
+    if ($_lte != null) r'_lte': $_lte,
+    if ($_neq != null) r'_neq': $_neq,
+    if ($_nin != null) r'_nin': $_nin,
+  });
+
+  Input_BooleanComparisonExp._(this._$data);
+
+  factory Input_BooleanComparisonExp.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('_eq')) {
+      final l$$_eq = data['_eq'];
+      result$data['_eq'] = (l$$_eq as bool?);
+    }
+    if (data.containsKey('_gt')) {
+      final l$$_gt = data['_gt'];
+      result$data['_gt'] = (l$$_gt as bool?);
+    }
+    if (data.containsKey('_gte')) {
+      final l$$_gte = data['_gte'];
+      result$data['_gte'] = (l$$_gte as bool?);
+    }
+    if (data.containsKey('_in')) {
+      final l$$_in = data['_in'];
+      result$data['_in'] = (l$$_in as List<dynamic>?)
+          ?.map((e) => (e as bool))
+          .toList();
+    }
+    if (data.containsKey('_isNull')) {
+      final l$$_isNull = data['_isNull'];
+      result$data['_isNull'] = (l$$_isNull as bool?);
+    }
+    if (data.containsKey('_lt')) {
+      final l$$_lt = data['_lt'];
+      result$data['_lt'] = (l$$_lt as bool?);
+    }
+    if (data.containsKey('_lte')) {
+      final l$$_lte = data['_lte'];
+      result$data['_lte'] = (l$$_lte as bool?);
+    }
+    if (data.containsKey('_neq')) {
+      final l$$_neq = data['_neq'];
+      result$data['_neq'] = (l$$_neq as bool?);
+    }
+    if (data.containsKey('_nin')) {
+      final l$$_nin = data['_nin'];
+      result$data['_nin'] = (l$$_nin as List<dynamic>?)
+          ?.map((e) => (e as bool))
+          .toList();
+    }
+    return Input_BooleanComparisonExp._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  bool? get $_eq => (_$data['_eq'] as bool?);
+
+  bool? get $_gt => (_$data['_gt'] as bool?);
+
+  bool? get $_gte => (_$data['_gte'] as bool?);
+
+  List<bool>? get $_in => (_$data['_in'] as List<bool>?);
+
+  bool? get $_isNull => (_$data['_isNull'] as bool?);
+
+  bool? get $_lt => (_$data['_lt'] as bool?);
+
+  bool? get $_lte => (_$data['_lte'] as bool?);
+
+  bool? get $_neq => (_$data['_neq'] as bool?);
+
+  List<bool>? get $_nin => (_$data['_nin'] as List<bool>?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('_eq')) {
+      final l$$_eq = $_eq;
+      result$data['_eq'] = l$$_eq;
+    }
+    if (_$data.containsKey('_gt')) {
+      final l$$_gt = $_gt;
+      result$data['_gt'] = l$$_gt;
+    }
+    if (_$data.containsKey('_gte')) {
+      final l$$_gte = $_gte;
+      result$data['_gte'] = l$$_gte;
+    }
+    if (_$data.containsKey('_in')) {
+      final l$$_in = $_in;
+      result$data['_in'] = l$$_in?.map((e) => e).toList();
+    }
+    if (_$data.containsKey('_isNull')) {
+      final l$$_isNull = $_isNull;
+      result$data['_isNull'] = l$$_isNull;
+    }
+    if (_$data.containsKey('_lt')) {
+      final l$$_lt = $_lt;
+      result$data['_lt'] = l$$_lt;
+    }
+    if (_$data.containsKey('_lte')) {
+      final l$$_lte = $_lte;
+      result$data['_lte'] = l$$_lte;
+    }
+    if (_$data.containsKey('_neq')) {
+      final l$$_neq = $_neq;
+      result$data['_neq'] = l$$_neq;
+    }
+    if (_$data.containsKey('_nin')) {
+      final l$$_nin = $_nin;
+      result$data['_nin'] = l$$_nin?.map((e) => e).toList();
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_BooleanComparisonExp<Input_BooleanComparisonExp>
+  get copyWith => CopyWith_Input_BooleanComparisonExp(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_BooleanComparisonExp ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$$_eq = $_eq;
+    final lOther$$_eq = other.$_eq;
+    if (_$data.containsKey('_eq') != other._$data.containsKey('_eq')) {
+      return false;
+    }
+    if (l$$_eq != lOther$$_eq) {
+      return false;
+    }
+    final l$$_gt = $_gt;
+    final lOther$$_gt = other.$_gt;
+    if (_$data.containsKey('_gt') != other._$data.containsKey('_gt')) {
+      return false;
+    }
+    if (l$$_gt != lOther$$_gt) {
+      return false;
+    }
+    final l$$_gte = $_gte;
+    final lOther$$_gte = other.$_gte;
+    if (_$data.containsKey('_gte') != other._$data.containsKey('_gte')) {
+      return false;
+    }
+    if (l$$_gte != lOther$$_gte) {
+      return false;
+    }
+    final l$$_in = $_in;
+    final lOther$$_in = other.$_in;
+    if (_$data.containsKey('_in') != other._$data.containsKey('_in')) {
+      return false;
+    }
+    if (l$$_in != null && lOther$$_in != null) {
+      if (l$$_in.length != lOther$$_in.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$_in.length; i++) {
+        final l$$_in$entry = l$$_in[i];
+        final lOther$$_in$entry = lOther$$_in[i];
+        if (l$$_in$entry != lOther$$_in$entry) {
+          return false;
+        }
+      }
+    } else if (l$$_in != lOther$$_in) {
+      return false;
+    }
+    final l$$_isNull = $_isNull;
+    final lOther$$_isNull = other.$_isNull;
+    if (_$data.containsKey('_isNull') != other._$data.containsKey('_isNull')) {
+      return false;
+    }
+    if (l$$_isNull != lOther$$_isNull) {
+      return false;
+    }
+    final l$$_lt = $_lt;
+    final lOther$$_lt = other.$_lt;
+    if (_$data.containsKey('_lt') != other._$data.containsKey('_lt')) {
+      return false;
+    }
+    if (l$$_lt != lOther$$_lt) {
+      return false;
+    }
+    final l$$_lte = $_lte;
+    final lOther$$_lte = other.$_lte;
+    if (_$data.containsKey('_lte') != other._$data.containsKey('_lte')) {
+      return false;
+    }
+    if (l$$_lte != lOther$$_lte) {
+      return false;
+    }
+    final l$$_neq = $_neq;
+    final lOther$$_neq = other.$_neq;
+    if (_$data.containsKey('_neq') != other._$data.containsKey('_neq')) {
+      return false;
+    }
+    if (l$$_neq != lOther$$_neq) {
+      return false;
+    }
+    final l$$_nin = $_nin;
+    final lOther$$_nin = other.$_nin;
+    if (_$data.containsKey('_nin') != other._$data.containsKey('_nin')) {
+      return false;
+    }
+    if (l$$_nin != null && lOther$$_nin != null) {
+      if (l$$_nin.length != lOther$$_nin.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$_nin.length; i++) {
+        final l$$_nin$entry = l$$_nin[i];
+        final lOther$$_nin$entry = lOther$$_nin[i];
+        if (l$$_nin$entry != lOther$$_nin$entry) {
+          return false;
+        }
+      }
+    } else if (l$$_nin != lOther$$_nin) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$$_eq = $_eq;
+    final l$$_gt = $_gt;
+    final l$$_gte = $_gte;
+    final l$$_in = $_in;
+    final l$$_isNull = $_isNull;
+    final l$$_lt = $_lt;
+    final l$$_lte = $_lte;
+    final l$$_neq = $_neq;
+    final l$$_nin = $_nin;
+    return Object.hashAll([
+      _$data.containsKey('_eq') ? l$$_eq : const {},
+      _$data.containsKey('_gt') ? l$$_gt : const {},
+      _$data.containsKey('_gte') ? l$$_gte : const {},
+      _$data.containsKey('_in')
+          ? l$$_in == null
+                ? null
+                : Object.hashAll(l$$_in.map((v) => v))
+          : const {},
+      _$data.containsKey('_isNull') ? l$$_isNull : const {},
+      _$data.containsKey('_lt') ? l$$_lt : const {},
+      _$data.containsKey('_lte') ? l$$_lte : const {},
+      _$data.containsKey('_neq') ? l$$_neq : const {},
+      _$data.containsKey('_nin')
+          ? l$$_nin == null
+                ? null
+                : Object.hashAll(l$$_nin.map((v) => v))
+          : const {},
+    ]);
+  }
+}
+
 abstract class CopyWith_Input_BooleanComparisonExp<TRes> {
   factory CopyWith_Input_BooleanComparisonExp(
     Input_BooleanComparisonExp instance,
@@ -2160,436 +2510,6 @@ class Input_ClassesAggregateBoolExp {
       _$data.containsKey('bool_and') ? l$bool_and : const {},
       _$data.containsKey('bool_or') ? l$bool_or : const {},
       _$data.containsKey('count') ? l$count : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_ClassesAggregateBoolExp<TRes> {
-  factory CopyWith_Input_ClassesAggregateBoolExp(
-    Input_ClassesAggregateBoolExp instance,
-    TRes Function(Input_ClassesAggregateBoolExp) then,
-  ) = _CopyWithImpl_Input_ClassesAggregateBoolExp;
-
-  factory CopyWith_Input_ClassesAggregateBoolExp.stub(TRes res) =
-      _CopyWithStubImpl_Input_ClassesAggregateBoolExp;
-
-  TRes call({
-    Input_classesAggregateBoolExpBool_and? bool_and,
-    Input_classesAggregateBoolExpBool_or? bool_or,
-    Input_classesAggregateBoolExpCount? count,
-  });
-  CopyWith_Input_classesAggregateBoolExpBool_and<TRes> get bool_and;
-  CopyWith_Input_classesAggregateBoolExpBool_or<TRes> get bool_or;
-  CopyWith_Input_classesAggregateBoolExpCount<TRes> get count;
-}
-
-class _CopyWithImpl_Input_ClassesAggregateBoolExp<TRes>
-    implements CopyWith_Input_ClassesAggregateBoolExp<TRes> {
-  _CopyWithImpl_Input_ClassesAggregateBoolExp(this._instance, this._then);
-
-  final Input_ClassesAggregateBoolExp _instance;
-
-  final TRes Function(Input_ClassesAggregateBoolExp) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? bool_and = _undefined,
-    Object? bool_or = _undefined,
-    Object? count = _undefined,
-  }) => _then(
-    Input_ClassesAggregateBoolExp._({
-      ..._instance._$data,
-      if (bool_and != _undefined)
-        'bool_and': (bool_and as Input_classesAggregateBoolExpBool_and?),
-      if (bool_or != _undefined)
-        'bool_or': (bool_or as Input_classesAggregateBoolExpBool_or?),
-      if (count != _undefined)
-        'count': (count as Input_classesAggregateBoolExpCount?),
-    }),
-  );
-
-  CopyWith_Input_classesAggregateBoolExpBool_and<TRes> get bool_and {
-    final local$bool_and = _instance.bool_and;
-    return local$bool_and == null
-        ? CopyWith_Input_classesAggregateBoolExpBool_and.stub(_then(_instance))
-        : CopyWith_Input_classesAggregateBoolExpBool_and(
-            local$bool_and,
-            (e) => call(bool_and: e),
-          );
-  }
-
-  CopyWith_Input_classesAggregateBoolExpBool_or<TRes> get bool_or {
-    final local$bool_or = _instance.bool_or;
-    return local$bool_or == null
-        ? CopyWith_Input_classesAggregateBoolExpBool_or.stub(_then(_instance))
-        : CopyWith_Input_classesAggregateBoolExpBool_or(
-            local$bool_or,
-            (e) => call(bool_or: e),
-          );
-  }
-
-  CopyWith_Input_classesAggregateBoolExpCount<TRes> get count {
-    final local$count = _instance.count;
-    return local$count == null
-        ? CopyWith_Input_classesAggregateBoolExpCount.stub(_then(_instance))
-        : CopyWith_Input_classesAggregateBoolExpCount(
-            local$count,
-            (e) => call(count: e),
-          );
-  }
-}
-
-class _CopyWithStubImpl_Input_ClassesAggregateBoolExp<TRes>
-    implements CopyWith_Input_ClassesAggregateBoolExp<TRes> {
-  _CopyWithStubImpl_Input_ClassesAggregateBoolExp(this._res);
-
-  TRes _res;
-
-  call({
-    Input_classesAggregateBoolExpBool_and? bool_and,
-    Input_classesAggregateBoolExpBool_or? bool_or,
-    Input_classesAggregateBoolExpCount? count,
-  }) => _res;
-
-  CopyWith_Input_classesAggregateBoolExpBool_and<TRes> get bool_and =>
-      CopyWith_Input_classesAggregateBoolExpBool_and.stub(_res);
-
-  CopyWith_Input_classesAggregateBoolExpBool_or<TRes> get bool_or =>
-      CopyWith_Input_classesAggregateBoolExpBool_or.stub(_res);
-
-  CopyWith_Input_classesAggregateBoolExpCount<TRes> get count =>
-      CopyWith_Input_classesAggregateBoolExpCount.stub(_res);
-}
-
-class Input_ClassesAggregateOrderBy {
-  factory Input_ClassesAggregateOrderBy({
-    Input_ClassesAvgOrderBy? avg,
-    Enum_OrderBy? count,
-    Input_ClassesMaxOrderBy? max,
-    Input_ClassesMinOrderBy? min,
-    Input_ClassesStddevOrderBy? stddev,
-    Input_ClassesStddevPopOrderBy? stddevPop,
-    Input_ClassesStddevSampOrderBy? stddevSamp,
-    Input_ClassesSumOrderBy? sum,
-    Input_ClassesVarPopOrderBy? varPop,
-    Input_ClassesVarSampOrderBy? varSamp,
-    Input_ClassesVarianceOrderBy? variance,
-  }) => Input_ClassesAggregateOrderBy._({
-    if (avg != null) r'avg': avg,
-    if (count != null) r'count': count,
-    if (max != null) r'max': max,
-    if (min != null) r'min': min,
-    if (stddev != null) r'stddev': stddev,
-    if (stddevPop != null) r'stddevPop': stddevPop,
-    if (stddevSamp != null) r'stddevSamp': stddevSamp,
-    if (sum != null) r'sum': sum,
-    if (varPop != null) r'varPop': varPop,
-    if (varSamp != null) r'varSamp': varSamp,
-    if (variance != null) r'variance': variance,
-  });
-
-  Input_ClassesAggregateOrderBy._(this._$data);
-
-  factory Input_ClassesAggregateOrderBy.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('avg')) {
-      final l$avg = data['avg'];
-      result$data['avg'] = l$avg == null
-          ? null
-          : Input_ClassesAvgOrderBy.fromJson((l$avg as Map<String, dynamic>));
-    }
-    if (data.containsKey('count')) {
-      final l$count = data['count'];
-      result$data['count'] = l$count == null
-          ? null
-          : fromJson_Enum_OrderBy((l$count as String));
-    }
-    if (data.containsKey('max')) {
-      final l$max = data['max'];
-      result$data['max'] = l$max == null
-          ? null
-          : Input_ClassesMaxOrderBy.fromJson((l$max as Map<String, dynamic>));
-    }
-    if (data.containsKey('min')) {
-      final l$min = data['min'];
-      result$data['min'] = l$min == null
-          ? null
-          : Input_ClassesMinOrderBy.fromJson((l$min as Map<String, dynamic>));
-    }
-    if (data.containsKey('stddev')) {
-      final l$stddev = data['stddev'];
-      result$data['stddev'] = l$stddev == null
-          ? null
-          : Input_ClassesStddevOrderBy.fromJson(
-              (l$stddev as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('stddevPop')) {
-      final l$stddevPop = data['stddevPop'];
-      result$data['stddevPop'] = l$stddevPop == null
-          ? null
-          : Input_ClassesStddevPopOrderBy.fromJson(
-              (l$stddevPop as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('stddevSamp')) {
-      final l$stddevSamp = data['stddevSamp'];
-      result$data['stddevSamp'] = l$stddevSamp == null
-          ? null
-          : Input_ClassesStddevSampOrderBy.fromJson(
-              (l$stddevSamp as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('sum')) {
-      final l$sum = data['sum'];
-      result$data['sum'] = l$sum == null
-          ? null
-          : Input_ClassesSumOrderBy.fromJson((l$sum as Map<String, dynamic>));
-    }
-    if (data.containsKey('varPop')) {
-      final l$varPop = data['varPop'];
-      result$data['varPop'] = l$varPop == null
-          ? null
-          : Input_ClassesVarPopOrderBy.fromJson(
-              (l$varPop as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('varSamp')) {
-      final l$varSamp = data['varSamp'];
-      result$data['varSamp'] = l$varSamp == null
-          ? null
-          : Input_ClassesVarSampOrderBy.fromJson(
-              (l$varSamp as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('variance')) {
-      final l$variance = data['variance'];
-      result$data['variance'] = l$variance == null
-          ? null
-          : Input_ClassesVarianceOrderBy.fromJson(
-              (l$variance as Map<String, dynamic>),
-            );
-    }
-    return Input_ClassesAggregateOrderBy._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  Input_ClassesAvgOrderBy? get avg =>
-      (_$data['avg'] as Input_ClassesAvgOrderBy?);
-
-  Enum_OrderBy? get count => (_$data['count'] as Enum_OrderBy?);
-
-  Input_ClassesMaxOrderBy? get max =>
-      (_$data['max'] as Input_ClassesMaxOrderBy?);
-
-  Input_ClassesMinOrderBy? get min =>
-      (_$data['min'] as Input_ClassesMinOrderBy?);
-
-  Input_ClassesStddevOrderBy? get stddev =>
-      (_$data['stddev'] as Input_ClassesStddevOrderBy?);
-
-  Input_ClassesStddevPopOrderBy? get stddevPop =>
-      (_$data['stddevPop'] as Input_ClassesStddevPopOrderBy?);
-
-  Input_ClassesStddevSampOrderBy? get stddevSamp =>
-      (_$data['stddevSamp'] as Input_ClassesStddevSampOrderBy?);
-
-  Input_ClassesSumOrderBy? get sum =>
-      (_$data['sum'] as Input_ClassesSumOrderBy?);
-
-  Input_ClassesVarPopOrderBy? get varPop =>
-      (_$data['varPop'] as Input_ClassesVarPopOrderBy?);
-
-  Input_ClassesVarSampOrderBy? get varSamp =>
-      (_$data['varSamp'] as Input_ClassesVarSampOrderBy?);
-
-  Input_ClassesVarianceOrderBy? get variance =>
-      (_$data['variance'] as Input_ClassesVarianceOrderBy?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('avg')) {
-      final l$avg = avg;
-      result$data['avg'] = l$avg?.toJson();
-    }
-    if (_$data.containsKey('count')) {
-      final l$count = count;
-      result$data['count'] = l$count == null
-          ? null
-          : toJson_Enum_OrderBy(l$count);
-    }
-    if (_$data.containsKey('max')) {
-      final l$max = max;
-      result$data['max'] = l$max?.toJson();
-    }
-    if (_$data.containsKey('min')) {
-      final l$min = min;
-      result$data['min'] = l$min?.toJson();
-    }
-    if (_$data.containsKey('stddev')) {
-      final l$stddev = stddev;
-      result$data['stddev'] = l$stddev?.toJson();
-    }
-    if (_$data.containsKey('stddevPop')) {
-      final l$stddevPop = stddevPop;
-      result$data['stddevPop'] = l$stddevPop?.toJson();
-    }
-    if (_$data.containsKey('stddevSamp')) {
-      final l$stddevSamp = stddevSamp;
-      result$data['stddevSamp'] = l$stddevSamp?.toJson();
-    }
-    if (_$data.containsKey('sum')) {
-      final l$sum = sum;
-      result$data['sum'] = l$sum?.toJson();
-    }
-    if (_$data.containsKey('varPop')) {
-      final l$varPop = varPop;
-      result$data['varPop'] = l$varPop?.toJson();
-    }
-    if (_$data.containsKey('varSamp')) {
-      final l$varSamp = varSamp;
-      result$data['varSamp'] = l$varSamp?.toJson();
-    }
-    if (_$data.containsKey('variance')) {
-      final l$variance = variance;
-      result$data['variance'] = l$variance?.toJson();
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_ClassesAggregateOrderBy<Input_ClassesAggregateOrderBy>
-  get copyWith => CopyWith_Input_ClassesAggregateOrderBy(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_ClassesAggregateOrderBy ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$avg = avg;
-    final lOther$avg = other.avg;
-    if (_$data.containsKey('avg') != other._$data.containsKey('avg')) {
-      return false;
-    }
-    if (l$avg != lOther$avg) {
-      return false;
-    }
-    final l$count = count;
-    final lOther$count = other.count;
-    if (_$data.containsKey('count') != other._$data.containsKey('count')) {
-      return false;
-    }
-    if (l$count != lOther$count) {
-      return false;
-    }
-    final l$max = max;
-    final lOther$max = other.max;
-    if (_$data.containsKey('max') != other._$data.containsKey('max')) {
-      return false;
-    }
-    if (l$max != lOther$max) {
-      return false;
-    }
-    final l$min = min;
-    final lOther$min = other.min;
-    if (_$data.containsKey('min') != other._$data.containsKey('min')) {
-      return false;
-    }
-    if (l$min != lOther$min) {
-      return false;
-    }
-    final l$stddev = stddev;
-    final lOther$stddev = other.stddev;
-    if (_$data.containsKey('stddev') != other._$data.containsKey('stddev')) {
-      return false;
-    }
-    if (l$stddev != lOther$stddev) {
-      return false;
-    }
-    final l$stddevPop = stddevPop;
-    final lOther$stddevPop = other.stddevPop;
-    if (_$data.containsKey('stddevPop') !=
-        other._$data.containsKey('stddevPop')) {
-      return false;
-    }
-    if (l$stddevPop != lOther$stddevPop) {
-      return false;
-    }
-    final l$stddevSamp = stddevSamp;
-    final lOther$stddevSamp = other.stddevSamp;
-    if (_$data.containsKey('stddevSamp') !=
-        other._$data.containsKey('stddevSamp')) {
-      return false;
-    }
-    if (l$stddevSamp != lOther$stddevSamp) {
-      return false;
-    }
-    final l$sum = sum;
-    final lOther$sum = other.sum;
-    if (_$data.containsKey('sum') != other._$data.containsKey('sum')) {
-      return false;
-    }
-    if (l$sum != lOther$sum) {
-      return false;
-    }
-    final l$varPop = varPop;
-    final lOther$varPop = other.varPop;
-    if (_$data.containsKey('varPop') != other._$data.containsKey('varPop')) {
-      return false;
-    }
-    if (l$varPop != lOther$varPop) {
-      return false;
-    }
-    final l$varSamp = varSamp;
-    final lOther$varSamp = other.varSamp;
-    if (_$data.containsKey('varSamp') != other._$data.containsKey('varSamp')) {
-      return false;
-    }
-    if (l$varSamp != lOther$varSamp) {
-      return false;
-    }
-    final l$variance = variance;
-    final lOther$variance = other.variance;
-    if (_$data.containsKey('variance') !=
-        other._$data.containsKey('variance')) {
-      return false;
-    }
-    if (l$variance != lOther$variance) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$avg = avg;
-    final l$count = count;
-    final l$max = max;
-    final l$min = min;
-    final l$stddev = stddev;
-    final l$stddevPop = stddevPop;
-    final l$stddevSamp = stddevSamp;
-    final l$sum = sum;
-    final l$varPop = varPop;
-    final l$varSamp = varSamp;
-    final l$variance = variance;
-    return Object.hashAll([
-      _$data.containsKey('avg') ? l$avg : const {},
-      _$data.containsKey('count') ? l$count : const {},
-      _$data.containsKey('max') ? l$max : const {},
-      _$data.containsKey('min') ? l$min : const {},
-      _$data.containsKey('stddev') ? l$stddev : const {},
-      _$data.containsKey('stddevPop') ? l$stddevPop : const {},
-      _$data.containsKey('stddevSamp') ? l$stddevSamp : const {},
-      _$data.containsKey('sum') ? l$sum : const {},
-      _$data.containsKey('varPop') ? l$varPop : const {},
-      _$data.containsKey('varSamp') ? l$varSamp : const {},
-      _$data.containsKey('variance') ? l$variance : const {},
     ]);
   }
 }

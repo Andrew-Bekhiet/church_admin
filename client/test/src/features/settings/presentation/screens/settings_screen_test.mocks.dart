@@ -30,13 +30,19 @@ class _FakeSyncKVStore_0<T> extends _i1.SmartFake
     : super(parent, parentInvocation);
 }
 
+class _FakeDatabaseService_1 extends _i1.SmartFake
+    implements _i2.DatabaseService {
+  _FakeDatabaseService_1(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
+}
+
 /// A class which mocks [UserSettingsService].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockUserSettingsService extends _i1.Mock
     implements _i2.UserSettingsService {
   @override
-  _i2.SyncKVStore<dynamic> get box =>
+  _i2.SyncKVStore<dynamic> get _box =>
       (super.noSuchMethod(
             Invocation.getter(#box),
             returnValue: _FakeSyncKVStore_0<dynamic>(
@@ -49,6 +55,21 @@ class MockUserSettingsService extends _i1.Mock
             ),
           )
           as _i2.SyncKVStore<dynamic>);
+
+  @override
+  _i2.DatabaseService get _databaseService =>
+      (super.noSuchMethod(
+            Invocation.getter(#databaseService),
+            returnValue: _FakeDatabaseService_1(
+              this,
+              Invocation.getter(#databaseService),
+            ),
+            returnValueForMissingStub: _FakeDatabaseService_1(
+              this,
+              Invocation.getter(#databaseService),
+            ),
+          )
+          as _i2.DatabaseService);
 
   @override
   bool get greatFeastTheme =>
@@ -69,38 +90,9 @@ class MockUserSettingsService extends _i1.Mock
           as _i3.Future<void>);
 
   @override
-  _i3.Future<void> setRegisteredFCMToken(String? value) =>
-      (super.noSuchMethod(
-            Invocation.method(#setRegisteredFCMToken, [value]),
-            returnValue: _i3.Future<void>.value(),
-            returnValueForMissingStub: _i3.Future<void>.value(),
-          )
-          as _i3.Future<void>);
-
-  @override
   _i3.Future<void> setGreatFeastTheme(bool? value) =>
       (super.noSuchMethod(
             Invocation.method(#setGreatFeastTheme, [value]),
-            returnValue: _i3.Future<void>.value(),
-            returnValueForMissingStub: _i3.Future<void>.value(),
-          )
-          as _i3.Future<void>);
-
-  @override
-  List<_i2.OrderBy>? getLastOrderByForType(_i2.QueryableType<Object>? type) =>
-      (super.noSuchMethod(
-            Invocation.method(#getLastOrderByForType, [type]),
-            returnValueForMissingStub: null,
-          )
-          as List<_i2.OrderBy>?);
-
-  @override
-  _i3.Future<void> setLastOrderByForType(
-    _i2.QueryableType<Object>? type,
-    List<_i2.OrderBy>? orderBy,
-  ) =>
-      (super.noSuchMethod(
-            Invocation.method(#setLastOrderByForType, [type, orderBy]),
             returnValue: _i3.Future<void>.value(),
             returnValueForMissingStub: _i3.Future<void>.value(),
           )
@@ -116,9 +108,20 @@ class MockUserSettingsService extends _i1.Mock
           as _i3.Future<void>);
 
   @override
-  _i3.Future<void> setupDefaults() =>
+  List<_i2.OrderBy>? getLastOrderByFor(_i2.OrderByPreferenceKey? key) =>
       (super.noSuchMethod(
-            Invocation.method(#setupDefaults, []),
+            Invocation.method(#getLastOrderByFor, [key]),
+            returnValueForMissingStub: null,
+          )
+          as List<_i2.OrderBy>?);
+
+  @override
+  _i3.Future<void> setLastOrderByFor(
+    _i2.OrderByPreferenceKey? key,
+    List<_i2.OrderBy>? orderBy,
+  ) =>
+      (super.noSuchMethod(
+            Invocation.method(#setLastOrderByFor, [key, orderBy]),
             returnValue: _i3.Future<void>.value(),
             returnValueForMissingStub: _i3.Future<void>.value(),
           )

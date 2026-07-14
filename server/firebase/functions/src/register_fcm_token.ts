@@ -1,7 +1,6 @@
-import { database } from "firebase-admin";
 import { https } from "firebase-functions/v2";
 import { assertUserAuthenticatedAndApproved } from "./common";
-import { getHasuraUID } from "./hasura_interface";
+import { getHasuraUID, insertFcmToken } from "./hasura_interface";
 
 export const registerFCMToken = https.onCall({}, async (request) => {
   const currentUser = await assertUserAuthenticatedAndApproved(request.auth);
@@ -14,7 +13,5 @@ export const registerFCMToken = https.onCall({}, async (request) => {
 
   const hasuraUID = (await getHasuraUID(currentUser.uid))!;
 
-  await database()
-    .ref(`Users/${hasuraUID}/fcmTokens/${new Date().getTime()}`)
-    .set(token);
+  await insertFcmToken(hasuraUID, token);
 });

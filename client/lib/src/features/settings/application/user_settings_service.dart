@@ -5,52 +5,98 @@ import 'package:collection/collection.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class UserSettingsService extends BlocObserver {
+  static const storeName = 'SettingsV2';
+  static const legacyStoreNames = ['Settings'];
+
+  static const _equality = DeepCollectionEquality();
+
+  static const _orderByKeyPrefix = 'lastOrderByFor';
+  static const _darkThemeKey = 'darkTheme';
+  static const _greatFeastThemeKey = 'greatFeastTheme';
+  static const _lastHomeModeKey = 'lastHomeMode';
+
+  // SyncKVStore/Sembast treat put(null) as delete; wrap so key presence is kept.
+  static const _nullQueuedValue = <String, bool>{'pendingNull': true};
+
   static UserSettingsService get I =>
       globalProviderContainer.read(userSettingsServiceProvider);
-  final SyncKVStore box;
 
-  UserSettingsService({required this.box});
+  final SyncKVStore _pendingWritesBox;
+  final DatabaseService _databaseService;
+  final AuthBloc _authBloc;
 
-  bool? get darkTheme => box.get('darkTheme');
-  Future<void> setDarkTheme(bool? value) async => box.put('darkTheme', value);
+  UserPreferences? get _serverPreferences =>
+      _authBloc.currentUserData?.preferences;
 
-  String? get registeredFCMToken => box.get('registeredFCMToken');
-  Future<void> setRegisteredFCMToken(String? value) async =>
-      box.put('registeredFCMToken', value);
+  bool? get darkTheme {
+    if (_hasQueuedWrite(_darkThemeKey)) {
+      return _readQueuedWrite(_darkThemeKey) as bool?;
+    }
 
-  bool get greatFeastTheme => box.get('greatFeastTheme') ?? true;
-  Future<void> setGreatFeastTheme(bool value) async =>
-      box.put('greatFeastTheme', value);
-
-  List<OrderBy>? getLastOrderByForType(QueryableType type) {
-    final key = 'lastOrderByFor${type.name}';
-
-    final value = box.get(key);
-
-    if (value == null || value is! List) return null;
-
-    return value.whereType<Map>().map(Json.from).map(OrderBy.fromJson).toList();
+    return _serverPreferences?.darkTheme;
   }
 
-  Future<void> setLastOrderByForType(
-    QueryableType type,
-    List<OrderBy> orderBy,
-  ) async => box.put(
-    'lastOrderByFor${type.name}',
-    orderBy.map((o) => o.toJson()).toList(),
-  );
+  Future<void> setDarkTheme(bool? value) async {
+    _queueWrite(_darkThemeKey, value);
+    unawaited(_flushPending());
+  }
+
+  bool get greatFeastTheme {
+    if (_hasQueuedWrite(_greatFeastThemeKey)) {
+      return _readQueuedWrite(_greatFeastThemeKey) as bool? ?? true;
+    }
+
+    return _serverPreferences?.greatFeastTheme ?? true;
+  }
+
+  Future<void> setGreatFeastTheme(bool value) async {
+    _queueWrite(_greatFeastThemeKey, value);
+    unawaited(_flushPending());
+  }
 
   HomeMode? get lastHomeMode {
-    final value = box.get('lastHomeMode') as String?;
+    if (_hasQueuedWrite(_lastHomeModeKey)) {
+      final value = _readQueuedWrite(_lastHomeModeKey) as String?;
+      return HomeMode.values.firstWhereOrNull((e) => e.name == value);
+    }
 
-    return HomeMode.values.firstWhereOrNull((e) => e.name == value);
+    return _serverPreferences?.lastHomeMode;
   }
 
-  Future<void> setLastHomeMode(HomeMode? value) async =>
-      box.put('lastHomeMode', value?.name);
+  Future<void> setLastHomeMode(HomeMode? value) async {
+    _queueWrite(_lastHomeModeKey, value?.name);
+    unawaited(_flushPending());
+  }
 
-  Future<void> setupDefaults() async {
-    await setGreatFeastTheme(true);
+  UserSettingsService({
+    required SyncKVStore box,
+    required DatabaseService databaseService,
+    required AuthBloc authBloc,
+  }) : _authBloc = authBloc,
+       _databaseService = databaseService,
+       _pendingWritesBox = box;
+
+  List<OrderBy>? getLastOrderByFor(OrderByPreferenceKey key) {
+    final storageKey = key.storageKey;
+
+    final pendingWrite = _pendingWritesBox.get('$_orderByKeyPrefix$storageKey');
+    if (pendingWrite != null) {
+      return _parseOrderByList(pendingWrite);
+    }
+
+    final serverValue = _serverPreferences?.orderByPreferences[storageKey];
+    return _parseOrderByList(serverValue);
+  }
+
+  Future<void> setLastOrderByFor(
+    OrderByPreferenceKey key,
+    List<OrderBy> orderBy,
+  ) async {
+    _pendingWritesBox.put(
+      '$_orderByKeyPrefix${key.storageKey}',
+      orderBy.map((o) => o.toJson()).toList(),
+    );
+    unawaited(_flushPending());
   }
 
   @override
@@ -68,10 +114,123 @@ class UserSettingsService extends BlocObserver {
       return;
     }
 
-    if (currentState is! AuthAuthenticated && nextState is AuthAuthenticated) {
-      unawaited(setupDefaults());
+    if (nextState is AuthAuthenticated && nextState.userData != null) {
+      unawaited(_flushPending());
     }
   }
 
-  Json toJson() => box.toMap().cast<String, dynamic>();
+  Future<void> _flushPending() async {
+    final uid = _authBloc.currentUserData?.uid;
+    if (uid == null) return;
+
+    final (:orderByPreferences, :scalarWrites) = _pendingWritesBox
+        .toMap()
+        .entries
+        .fold(
+          (
+            orderByPreferences: <String, Object?>{},
+            scalarWrites: <String, Object?>{},
+          ),
+          (acc, e) {
+            final isOrderByEntry =
+                e.key.startsWith(_orderByKeyPrefix) && e.value is List;
+
+            if (isOrderByEntry) {
+              return (
+                orderByPreferences: {
+                  ...acc.orderByPreferences,
+                  e.key.substring(_orderByKeyPrefix.length): e.value,
+                },
+                scalarWrites: acc.scalarWrites,
+              );
+            }
+
+            return (
+              orderByPreferences: acc.orderByPreferences,
+              scalarWrites: {...acc.scalarWrites, e.key: e.value},
+            );
+          },
+        );
+
+    Input_UsersPreferencesAppendInput appendFields =
+        Input_UsersPreferencesAppendInput();
+    if (orderByPreferences.isNotEmpty) {
+      appendFields = appendFields.copyWith(
+        orderByPreferences: orderByPreferences,
+      );
+    } else if (scalarWrites.isEmpty) {
+      return;
+    }
+
+    try {
+      await _databaseService.userPreferences.updatePreferences(
+        uid: uid,
+        set: Input_UsersPreferencesSetInput.fromJson(scalarWrites),
+        append: appendFields,
+      );
+
+      for (final MapEntry(:key, :value) in scalarWrites.entries) {
+        if (!_hasQueuedWrite(key) ||
+            !_equality.equals(_readQueuedWrite(key), value)) {
+          continue;
+        }
+
+        _pendingWritesBox.delete(key);
+      }
+
+      for (final MapEntry(:key, :value) in orderByPreferences.entries) {
+        final pendingWriteKey = '$_orderByKeyPrefix$key';
+        if (!_equality.equals(
+          _pendingWritesBox.get(pendingWriteKey),
+          value,
+        )) {
+          continue;
+        }
+
+        _pendingWritesBox.delete(pendingWriteKey);
+      }
+    } on Object catch (error, stackTrace) {
+      unawaited(
+        LoggingService.I.exception(
+          LogRecord(error: error, stackTrace: stackTrace),
+        ),
+      );
+    }
+  }
+
+  bool _hasQueuedWrite(String key) => _pendingWritesBox.containsKey(key);
+
+  Object? _readQueuedWrite(String key) {
+    final value = _pendingWritesBox.get(key);
+    if (_isNullQueuedValue(value)) return null;
+
+    return value;
+  }
+
+  void _queueWrite(String key, Object? value) {
+    _pendingWritesBox.put(key, value ?? _nullQueuedValue);
+  }
+
+  bool _isNullQueuedValue(Object? value) => identical(_nullQueuedValue, value);
+
+  List<OrderBy>? _parseOrderByList(Object? value) {
+    if (value == null || value is! List) return null;
+
+    final orderBy = value
+        .whereType<Map>()
+        .map(Json.from)
+        .map((v) {
+          try {
+            return OrderBy.fromJson(v);
+          } catch (error) {
+            return null;
+          }
+        })
+        .nonNulls
+        .toList();
+
+    return orderBy.isEmpty ? null : orderBy;
+  }
+
+  Json toJson() => _pendingWritesBox.toMap().cast<String, dynamic>();
 }

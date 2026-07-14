@@ -18,6 +18,13 @@ object_relationships:
         table:
           name: persons
           schema: public
+  - name: preferences
+    using:
+      foreign_key_constraint_on:
+        column: uid
+        table:
+          name: users_preferences
+          schema: public
 array_relationships:
   - name: adminOn
     using:
@@ -26,6 +33,13 @@ array_relationships:
         table:
           name: users_admin_on
           schema: auth
+  - name: fcmTokens
+    using:
+      foreign_key_constraint_on:
+        column: uid
+        table:
+          name: users_fcm_tokens
+          schema: public
   - name: permissions
     using:
       foreign_key_constraint_on:

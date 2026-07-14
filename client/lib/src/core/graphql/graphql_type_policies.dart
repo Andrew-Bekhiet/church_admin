@@ -15,7 +15,7 @@ abstract final class GqlTypePolicies {
   static const Map<String, TypePolicy> policies = {
     ..._keyedEntities,
     ..._historyLogViews,
-    ..._junctionAndDetailRows,
+    ..._embeddedRows,
   };
 
   static const TypePolicy _embedded = TypePolicy(keyFields: {});
@@ -45,7 +45,7 @@ abstract final class GqlTypePolicies {
     'HistoryMeetingDays': _embedded,
   };
 
-  static const Map<String, TypePolicy> _junctionAndDetailRows = {
+  static const Map<String, TypePolicy> _embeddedRows = {
     'PersonsGroups': _embedded,
     'PersonsHobbies': _embedded,
     'PersonsServices': _embedded,
@@ -56,5 +56,7 @@ abstract final class GqlTypePolicies {
     'FamiliesAdminsPhones': _embedded,
     'AuthUsersAdminOn': _embedded,
     'AuthUsersPermissions': _embedded,
+    'UsersFcmTokens': _embedded,
+    'UsersPreferences': _embedded,
   };
 }

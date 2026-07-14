@@ -21,7 +21,14 @@ class HiveInit implements Initializer {
       await SyncKVStore.load<Json>(
         sharedSembastInstance.kv(GqlKvStore.storeName),
       );
-      await SyncKVStore.load(mainSembastInstance.kv('Settings'));
+
+      for (final legacyStoreName in UserSettingsService.legacyStoreNames) {
+        await sharedSembastInstance.kv<Json>(legacyStoreName).clear();
+      }
+      await SyncKVStore.load(
+        mainSembastInstance.kv(UserSettingsService.storeName),
+      );
+
       await SyncKVStore.load<String>(
         sharedSembastInstance.kv('ImageUrlsCache'),
       );

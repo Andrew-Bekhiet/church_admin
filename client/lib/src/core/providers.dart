@@ -169,7 +169,9 @@ final loggingServiceProvider = Provider<LoggingService>(
 
 final userSettingsServiceProvider = Provider<UserSettingsService>(
   (ref) => UserSettingsService(
-    box: SyncKVStore.fromLoaded('Settings'),
+    box: SyncKVStore.fromLoaded(UserSettingsService.storeName),
+    databaseService: ref.watch(databaseServiceProvider),
+    authBloc: ref.watch(authBlocProvider),
   ),
 );
 
@@ -239,8 +241,7 @@ final notificationsServiceProvider = Provider<NotificationsService>((ref) {
     localNotificationsPlugin: ref.watch(localNotificationsPluginProvider),
     firebaseMessaging: ref.watch(firebaseMessagingProvider),
     authBloc: ref.watch(authBlocProvider),
-    userSettingsService: ref.watch(userSettingsServiceProvider),
-    functionsService: ref.watch(functionsServiceProvider),
+    databaseService: ref.watch(databaseServiceProvider),
     storage: ref.watch(notificationsStorageProvider),
     onForegroundMessageStream: FirebaseMessaging.onMessage,
     onMessageOpenedAppStream: FirebaseMessaging.onMessageOpenedApp,

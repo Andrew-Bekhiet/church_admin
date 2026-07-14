@@ -1,17 +1,53 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/annotations.dart';
+import 'package:mockito/mockito.dart';
 
 import '../../../fakes/fake_box.dart';
+import 'user_settings_service_test.mocks.dart';
 
+@GenerateNiceMocks([
+  MockSpec<DatabaseService>(),
+  MockSpec<AuthBloc>(),
+])
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  test(
-    'UserSettingsService => darkTheme',
-    () async {
-      final unit = UserSettingsService(box: FakeSyncKVStore());
+  late MockDatabaseService databaseService;
+  late MockAuthBloc authBloc;
 
-      expect(unit.darkTheme, isNull);
+  setUp(() {
+    databaseService = MockDatabaseService();
+    authBloc = MockAuthBloc();
+    when(authBloc.currentUserData).thenReturn(null);
+    initGlobalProviderContainer([
+      authBlocProvider.overrideWithValue(authBloc),
+    ]);
+  });
+
+  tearDown(resetGlobalProviderContainer);
+
+  UserSettingsService createUnit({SyncKVStore? box}) {
+    return UserSettingsService(
+      box: box ?? FakeSyncKVStore(),
+      databaseService: databaseService,
+      authBloc: authBloc,
+    );
+  }
+
+  test(
+    'UserSettingsService => darkTheme Subject: unset '
+    'Scenario: read Result: null',
+    () {
+      expect(createUnit().darkTheme, isNull);
+    },
+  );
+
+  test(
+    'UserSettingsService => darkTheme Subject: set true/false/null '
+    'Scenario: queue writes Result: getter reflects queued values',
+    () async {
+      final unit = createUnit();
 
       await unit.setDarkTheme(true);
       expect(unit.darkTheme, isTrue);
@@ -23,32 +59,51 @@ void main() {
       expect(unit.darkTheme, isNull);
     },
   );
+
   test(
-    'UserSettingsService => registeredFCMToken',
-    () async {
-      final unit = UserSettingsService(box: FakeSyncKVStore());
-
-      expect(unit.registeredFCMToken, isNull);
-
-      await unit.setRegisteredFCMToken('token');
-      expect(unit.registeredFCMToken, 'token');
-
-      await unit.setRegisteredFCMToken(null);
-      expect(unit.registeredFCMToken, isNull);
+    'UserSettingsService => greatFeastTheme Subject: unset '
+    'Scenario: read Result: defaults to true',
+    () {
+      expect(createUnit().greatFeastTheme, isTrue);
     },
   );
-  test(
-    'UserSettingsService => greatFeastTheme',
-    () async {
-      final unit = UserSettingsService(box: FakeSyncKVStore());
 
-      expect(unit.greatFeastTheme, isTrue);
+  test(
+    'UserSettingsService => greatFeastTheme Subject: set false then true '
+    'Scenario: queue writes Result: getter reflects queued values',
+    () async {
+      final unit = createUnit();
 
       await unit.setGreatFeastTheme(false);
       expect(unit.greatFeastTheme, isFalse);
 
       await unit.setGreatFeastTheme(true);
       expect(unit.greatFeastTheme, isTrue);
+    },
+  );
+
+  test(
+    'UserSettingsService => darkTheme Subject: null queued while server is true '
+    'Scenario: key present in box Result: local null overrides server',
+    () async {
+      final box = FakeSyncKVStore();
+      when(authBloc.currentUserData).thenReturn(
+        const User(
+          uid: 'uid',
+          name: 'name',
+          email: 'email',
+          preferences: UserPreferences(
+            uid: 'uid',
+            darkTheme: true,
+          ),
+        ),
+      );
+
+      final unit = createUnit(box: box);
+      await unit.setDarkTheme(null);
+
+      expect(box.toMap().containsKey('darkTheme'), isTrue);
+      expect(unit.darkTheme, isNull);
     },
   );
 }

@@ -168,6 +168,16 @@ User _$UserFromJson(Map json) => User(
   person: json['person'] == null
       ? null
       : Person.fromJson(Map<String, Object?>.from(json['person'] as Map)),
+  preferences: json['preferences'] == null
+      ? null
+      : UserPreferences.fromJson(
+          Map<String, Object?>.from(json['preferences'] as Map),
+        ),
+  fcmTokens:
+      (json['fcmTokens'] as List<dynamic>?)
+          ?.map((e) => FcmToken.fromJson(Map<String, Object?>.from(e as Map)))
+          .toList() ??
+      [],
   servicesHistory: (json['servicesHistory'] as List<dynamic>?)
       ?.map((e) => AdminOnData.fromJson(Map<String, Object?>.from(e as Map)))
       .toList(),
@@ -195,6 +205,8 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
   'authId': instance.authId,
   'lastEdit': instance.lastEdit?.toJson(),
   'person': instance.person?.toJson(),
+  'preferences': instance.preferences?.toJson(),
+  'fcmTokens': instance.fcmTokens.map((e) => e.toJson()).toList(),
   'servicesHistory': instance.servicesHistory?.map((e) => e.toJson()).toList(),
   'classesHistory': instance.classesHistory?.map((e) => e.toJson()).toList(),
   'groupsHistory': instance.groupsHistory?.map((e) => e.toJson()).toList(),

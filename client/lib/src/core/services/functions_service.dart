@@ -23,10 +23,6 @@ class FunctionsService {
         .httpsCallable(functionName, options: options);
   }
 
-  Future<HttpsCallableResult> registerFCMToken(String token) {
-    return httpsCallable('registerFCMToken')({'token': token});
-  }
-
   Future<String> getDownloadUrl(
     String table,
     String id, {

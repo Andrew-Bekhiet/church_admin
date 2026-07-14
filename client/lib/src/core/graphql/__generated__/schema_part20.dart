@@ -2482,6 +2482,7 @@ class Input_GroupsMaxOrderBy {
   factory Input_GroupsMaxOrderBy({
     Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
+    Enum_OrderBy? defaultMeetingId,
     Enum_OrderBy? id,
     Enum_OrderBy? name,
     Enum_OrderBy? photoUpdatedAt,
@@ -2489,6 +2490,7 @@ class Input_GroupsMaxOrderBy {
   }) => Input_GroupsMaxOrderBy._({
     if (blurhash != null) r'blurhash': blurhash,
     if (color != null) r'color': color,
+    if (defaultMeetingId != null) r'defaultMeetingId': defaultMeetingId,
     if (id != null) r'id': id,
     if (name != null) r'name': name,
     if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
@@ -2510,6 +2512,12 @@ class Input_GroupsMaxOrderBy {
       result$data['color'] = l$color == null
           ? null
           : fromJson_Enum_OrderBy((l$color as String));
+    }
+    if (data.containsKey('defaultMeetingId')) {
+      final l$defaultMeetingId = data['defaultMeetingId'];
+      result$data['defaultMeetingId'] = l$defaultMeetingId == null
+          ? null
+          : fromJson_Enum_OrderBy((l$defaultMeetingId as String));
     }
     if (data.containsKey('id')) {
       final l$id = data['id'];
@@ -2544,6 +2552,9 @@ class Input_GroupsMaxOrderBy {
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
 
+  Enum_OrderBy? get defaultMeetingId =>
+      (_$data['defaultMeetingId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
 
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
@@ -2566,6 +2577,12 @@ class Input_GroupsMaxOrderBy {
       result$data['color'] = l$color == null
           ? null
           : toJson_Enum_OrderBy(l$color);
+    }
+    if (_$data.containsKey('defaultMeetingId')) {
+      final l$defaultMeetingId = defaultMeetingId;
+      result$data['defaultMeetingId'] = l$defaultMeetingId == null
+          ? null
+          : toJson_Enum_OrderBy(l$defaultMeetingId);
     }
     if (_$data.containsKey('id')) {
       final l$id = id;
@@ -2618,6 +2635,15 @@ class Input_GroupsMaxOrderBy {
     if (l$color != lOther$color) {
       return false;
     }
+    final l$defaultMeetingId = defaultMeetingId;
+    final lOther$defaultMeetingId = other.defaultMeetingId;
+    if (_$data.containsKey('defaultMeetingId') !=
+        other._$data.containsKey('defaultMeetingId')) {
+      return false;
+    }
+    if (l$defaultMeetingId != lOther$defaultMeetingId) {
+      return false;
+    }
     final l$id = id;
     final lOther$id = other.id;
     if (_$data.containsKey('id') != other._$data.containsKey('id')) {
@@ -2659,6 +2685,7 @@ class Input_GroupsMaxOrderBy {
   int get hashCode {
     final l$blurhash = blurhash;
     final l$color = color;
+    final l$defaultMeetingId = defaultMeetingId;
     final l$id = id;
     final l$name = name;
     final l$photoUpdatedAt = photoUpdatedAt;
@@ -2666,6 +2693,7 @@ class Input_GroupsMaxOrderBy {
     return Object.hashAll([
       _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('color') ? l$color : const {},
+      _$data.containsKey('defaultMeetingId') ? l$defaultMeetingId : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('name') ? l$name : const {},
       _$data.containsKey('photoUpdatedAt') ? l$photoUpdatedAt : const {},

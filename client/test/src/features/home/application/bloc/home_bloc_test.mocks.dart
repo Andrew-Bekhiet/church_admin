@@ -110,30 +110,47 @@ class _FakeUserPermissionsDAO_14 extends _i1.SmartFake
     : super(parent, parentInvocation);
 }
 
-class _FakeMetadataDAO_15 extends _i1.SmartFake implements _i2.MetadataDAO {
-  _FakeMetadataDAO_15(Object parent, Invocation parentInvocation)
+class _FakeUserPreferencesDAO_15 extends _i1.SmartFake
+    implements _i2.UserPreferencesDAO {
+  _FakeUserPreferencesDAO_15(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeHistoryDAO_16 extends _i1.SmartFake implements _i2.HistoryDAO {
-  _FakeHistoryDAO_16(Object parent, Invocation parentInvocation)
+class _FakeFcmTokensDAO_16 extends _i1.SmartFake implements _i2.FcmTokensDAO {
+  _FakeFcmTokensDAO_16(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeMeetingsDAO_17 extends _i1.SmartFake implements _i2.MeetingsDAO {
-  _FakeMeetingsDAO_17(Object parent, Invocation parentInvocation)
+class _FakeMetadataDAO_17 extends _i1.SmartFake implements _i2.MetadataDAO {
+  _FakeMetadataDAO_17(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeSyncKVStore_18<T> extends _i1.SmartFake
+class _FakeHistoryDAO_18 extends _i1.SmartFake implements _i2.HistoryDAO {
+  _FakeHistoryDAO_18(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
+}
+
+class _FakeMeetingsDAO_19 extends _i1.SmartFake implements _i2.MeetingsDAO {
+  _FakeMeetingsDAO_19(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
+}
+
+class _FakeSyncKVStore_20<T> extends _i1.SmartFake
     implements _i2.SyncKVStore<T> {
-  _FakeSyncKVStore_18(Object parent, Invocation parentInvocation)
+  _FakeSyncKVStore_20(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeScrollPosition_19 extends _i1.SmartFake
+class _FakeDatabaseService_21 extends _i1.SmartFake
+    implements _i2.DatabaseService {
+  _FakeDatabaseService_21(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
+}
+
+class _FakeScrollPosition_22 extends _i1.SmartFake
     implements _i3.ScrollPosition {
-  _FakeScrollPosition_19(Object parent, Invocation parentInvocation)
+  _FakeScrollPosition_22(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
@@ -399,14 +416,44 @@ class MockDatabaseService extends _i1.Mock implements _i2.DatabaseService {
           as _i2.UserPermissionsDAO);
 
   @override
+  _i2.UserPreferencesDAO get userPreferences =>
+      (super.noSuchMethod(
+            Invocation.getter(#userPreferences),
+            returnValue: _FakeUserPreferencesDAO_15(
+              this,
+              Invocation.getter(#userPreferences),
+            ),
+            returnValueForMissingStub: _FakeUserPreferencesDAO_15(
+              this,
+              Invocation.getter(#userPreferences),
+            ),
+          )
+          as _i2.UserPreferencesDAO);
+
+  @override
+  _i2.FcmTokensDAO get fcmTokens =>
+      (super.noSuchMethod(
+            Invocation.getter(#fcmTokens),
+            returnValue: _FakeFcmTokensDAO_16(
+              this,
+              Invocation.getter(#fcmTokens),
+            ),
+            returnValueForMissingStub: _FakeFcmTokensDAO_16(
+              this,
+              Invocation.getter(#fcmTokens),
+            ),
+          )
+          as _i2.FcmTokensDAO);
+
+  @override
   _i2.MetadataDAO get metadata =>
       (super.noSuchMethod(
             Invocation.getter(#metadata),
-            returnValue: _FakeMetadataDAO_15(
+            returnValue: _FakeMetadataDAO_17(
               this,
               Invocation.getter(#metadata),
             ),
-            returnValueForMissingStub: _FakeMetadataDAO_15(
+            returnValueForMissingStub: _FakeMetadataDAO_17(
               this,
               Invocation.getter(#metadata),
             ),
@@ -417,8 +464,8 @@ class MockDatabaseService extends _i1.Mock implements _i2.DatabaseService {
   _i2.HistoryDAO get history =>
       (super.noSuchMethod(
             Invocation.getter(#history),
-            returnValue: _FakeHistoryDAO_16(this, Invocation.getter(#history)),
-            returnValueForMissingStub: _FakeHistoryDAO_16(
+            returnValue: _FakeHistoryDAO_18(this, Invocation.getter(#history)),
+            returnValueForMissingStub: _FakeHistoryDAO_18(
               this,
               Invocation.getter(#history),
             ),
@@ -429,11 +476,11 @@ class MockDatabaseService extends _i1.Mock implements _i2.DatabaseService {
   _i2.MeetingsDAO get meetings =>
       (super.noSuchMethod(
             Invocation.getter(#meetings),
-            returnValue: _FakeMeetingsDAO_17(
+            returnValue: _FakeMeetingsDAO_19(
               this,
               Invocation.getter(#meetings),
             ),
-            returnValueForMissingStub: _FakeMeetingsDAO_17(
+            returnValueForMissingStub: _FakeMeetingsDAO_19(
               this,
               Invocation.getter(#meetings),
             ),
@@ -457,19 +504,34 @@ class MockDatabaseService extends _i1.Mock implements _i2.DatabaseService {
 class MockUserSettingsService extends _i1.Mock
     implements _i2.UserSettingsService {
   @override
-  _i2.SyncKVStore<dynamic> get box =>
+  _i2.SyncKVStore<dynamic> get _box =>
       (super.noSuchMethod(
             Invocation.getter(#box),
-            returnValue: _FakeSyncKVStore_18<dynamic>(
+            returnValue: _FakeSyncKVStore_20<dynamic>(
               this,
               Invocation.getter(#box),
             ),
-            returnValueForMissingStub: _FakeSyncKVStore_18<dynamic>(
+            returnValueForMissingStub: _FakeSyncKVStore_20<dynamic>(
               this,
               Invocation.getter(#box),
             ),
           )
           as _i2.SyncKVStore<dynamic>);
+
+  @override
+  _i2.DatabaseService get _databaseService =>
+      (super.noSuchMethod(
+            Invocation.getter(#databaseService),
+            returnValue: _FakeDatabaseService_21(
+              this,
+              Invocation.getter(#databaseService),
+            ),
+            returnValueForMissingStub: _FakeDatabaseService_21(
+              this,
+              Invocation.getter(#databaseService),
+            ),
+          )
+          as _i2.DatabaseService);
 
   @override
   bool get greatFeastTheme =>
@@ -490,38 +552,9 @@ class MockUserSettingsService extends _i1.Mock
           as _i4.Future<void>);
 
   @override
-  _i4.Future<void> setRegisteredFCMToken(String? value) =>
-      (super.noSuchMethod(
-            Invocation.method(#setRegisteredFCMToken, [value]),
-            returnValue: _i4.Future<void>.value(),
-            returnValueForMissingStub: _i4.Future<void>.value(),
-          )
-          as _i4.Future<void>);
-
-  @override
   _i4.Future<void> setGreatFeastTheme(bool? value) =>
       (super.noSuchMethod(
             Invocation.method(#setGreatFeastTheme, [value]),
-            returnValue: _i4.Future<void>.value(),
-            returnValueForMissingStub: _i4.Future<void>.value(),
-          )
-          as _i4.Future<void>);
-
-  @override
-  List<_i2.OrderBy>? getLastOrderByForType(_i2.QueryableType<Object>? type) =>
-      (super.noSuchMethod(
-            Invocation.method(#getLastOrderByForType, [type]),
-            returnValueForMissingStub: null,
-          )
-          as List<_i2.OrderBy>?);
-
-  @override
-  _i4.Future<void> setLastOrderByForType(
-    _i2.QueryableType<Object>? type,
-    List<_i2.OrderBy>? orderBy,
-  ) =>
-      (super.noSuchMethod(
-            Invocation.method(#setLastOrderByForType, [type, orderBy]),
             returnValue: _i4.Future<void>.value(),
             returnValueForMissingStub: _i4.Future<void>.value(),
           )
@@ -537,9 +570,20 @@ class MockUserSettingsService extends _i1.Mock
           as _i4.Future<void>);
 
   @override
-  _i4.Future<void> setupDefaults() =>
+  List<_i2.OrderBy>? getLastOrderByFor(_i2.OrderByPreferenceKey? key) =>
       (super.noSuchMethod(
-            Invocation.method(#setupDefaults, []),
+            Invocation.method(#getLastOrderByFor, [key]),
+            returnValueForMissingStub: null,
+          )
+          as List<_i2.OrderBy>?);
+
+  @override
+  _i4.Future<void> setLastOrderByFor(
+    _i2.OrderByPreferenceKey? key,
+    List<_i2.OrderBy>? orderBy,
+  ) =>
+      (super.noSuchMethod(
+            Invocation.method(#setLastOrderByFor, [key, orderBy]),
             returnValue: _i4.Future<void>.value(),
             returnValueForMissingStub: _i4.Future<void>.value(),
           )
@@ -682,11 +726,11 @@ class MockPageController extends _i1.Mock implements _i7.PageController {
   _i3.ScrollPosition get position =>
       (super.noSuchMethod(
             Invocation.getter(#position),
-            returnValue: _FakeScrollPosition_19(
+            returnValue: _FakeScrollPosition_22(
               this,
               Invocation.getter(#position),
             ),
-            returnValueForMissingStub: _FakeScrollPosition_19(
+            returnValueForMissingStub: _FakeScrollPosition_22(
               this,
               Invocation.getter(#position),
             ),
@@ -776,7 +820,7 @@ class MockPageController extends _i1.Mock implements _i7.PageController {
               context,
               oldPosition,
             ]),
-            returnValue: _FakeScrollPosition_19(
+            returnValue: _FakeScrollPosition_22(
               this,
               Invocation.method(#createScrollPosition, [
                 physics,
@@ -784,7 +828,7 @@ class MockPageController extends _i1.Mock implements _i7.PageController {
                 oldPosition,
               ]),
             ),
-            returnValueForMissingStub: _FakeScrollPosition_19(
+            returnValueForMissingStub: _FakeScrollPosition_22(
               this,
               Invocation.method(#createScrollPosition, [
                 physics,

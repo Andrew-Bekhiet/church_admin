@@ -38,6 +38,8 @@ class DatabaseService {
 
   late final users = UsersDAO(db: this);
   late final userPermissions = UserPermissionsDAO(db: this);
+  late final userPreferences = UserPreferencesDAO(db: this);
+  late final fcmTokens = FcmTokensDAO(db: this);
 
   late final metadata = MetadataDAO(db: this);
 

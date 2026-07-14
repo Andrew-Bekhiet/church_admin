@@ -23,6 +23,8 @@ mixin _$User {
   String? get authId;
   LastRecordedByInfo? get lastEdit;
   Person? get person;
+  UserPreferences? get preferences;
+  List<FcmToken> get fcmTokens;
   List<AdminOnData>? get servicesHistory;
   List<AdminOnData>? get classesHistory;
   List<AdminOnData>? get groupsHistory;
@@ -56,6 +58,9 @@ mixin _$User {
             (identical(other.lastEdit, lastEdit) ||
                 other.lastEdit == lastEdit) &&
             (identical(other.person, person) || other.person == person) &&
+            (identical(other.preferences, preferences) ||
+                other.preferences == preferences) &&
+            const DeepCollectionEquality().equals(other.fcmTokens, fcmTokens) &&
             const DeepCollectionEquality().equals(
               other.servicesHistory,
               servicesHistory,
@@ -90,6 +95,8 @@ mixin _$User {
     authId,
     lastEdit,
     person,
+    preferences,
+    const DeepCollectionEquality().hash(fcmTokens),
     const DeepCollectionEquality().hash(servicesHistory),
     const DeepCollectionEquality().hash(classesHistory),
     const DeepCollectionEquality().hash(groupsHistory),
@@ -98,7 +105,7 @@ mixin _$User {
 
   @override
   String toString() {
-    return 'User(uid: $uid, name: $name, email: $email, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, adminOn: $adminOn, permissions: $permissions, authId: $authId, lastEdit: $lastEdit, person: $person, servicesHistory: $servicesHistory, classesHistory: $classesHistory, groupsHistory: $groupsHistory, currentUserCanManageThisUser: $currentUserCanManageThisUser)';
+    return 'User(uid: $uid, name: $name, email: $email, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, adminOn: $adminOn, permissions: $permissions, authId: $authId, lastEdit: $lastEdit, person: $person, preferences: $preferences, fcmTokens: $fcmTokens, servicesHistory: $servicesHistory, classesHistory: $classesHistory, groupsHistory: $groupsHistory, currentUserCanManageThisUser: $currentUserCanManageThisUser)';
   }
 }
 
@@ -118,6 +125,8 @@ abstract mixin class $UserCopyWith<$Res> {
     String? authId,
     LastRecordedByInfo? lastEdit,
     Person? person,
+    UserPreferences? preferences,
+    List<FcmToken> fcmTokens,
     List<AdminOnData>? servicesHistory,
     List<AdminOnData>? classesHistory,
     List<AdminOnData>? groupsHistory,
@@ -147,6 +156,8 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
     Object? authId = freezed,
     Object? lastEdit = freezed,
     Object? person = freezed,
+    Object? preferences = freezed,
+    Object? fcmTokens = null,
     Object? servicesHistory = freezed,
     Object? classesHistory = freezed,
     Object? groupsHistory = freezed,
@@ -194,6 +205,14 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
             ? _self.person
             : person // ignore: cast_nullable_to_non_nullable
                   as Person?,
+        preferences: freezed == preferences
+            ? _self.preferences
+            : preferences // ignore: cast_nullable_to_non_nullable
+                  as UserPreferences?,
+        fcmTokens: null == fcmTokens
+            ? _self.fcmTokens
+            : fcmTokens // ignore: cast_nullable_to_non_nullable
+                  as List<FcmToken>,
         servicesHistory: freezed == servicesHistory
             ? _self.servicesHistory
             : servicesHistory // ignore: cast_nullable_to_non_nullable

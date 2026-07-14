@@ -1,0 +1,8 @@
+mutation registerFcmToken($object: UsersFcmTokensInsertInput!) {
+  insertUsersFcmTokensOne(
+    object: $object
+    onConflict: { constraint: users_fcm_tokens_pkey, updateColumns: [] }
+  ) {
+    ...FcmToken
+  }
+}

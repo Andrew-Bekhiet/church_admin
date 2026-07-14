@@ -78,8 +78,7 @@ class NotificationsService extends BlocObserver {
     required Stream<RemoteMessage> onForegroundMessageStream,
     required Stream<RemoteMessage> onMessageOpenedAppStream,
     required AuthBloc authBloc,
-    UserSettingsService? userSettingsService,
-    FunctionsService? functionsService,
+    DatabaseService? databaseService,
     NotificationsStorage? storage,
     NotificationsSettingsStorage? settings,
   }) : _storage = storage ?? NotificationsStorage.I,
@@ -87,8 +86,7 @@ class NotificationsService extends BlocObserver {
        _firebaseMessaging = firebaseMessaging,
        _localNotificationsPlugin = localNotificationsPlugin,
        _authBloc = authBloc,
-       _userSettingsService = userSettingsService ?? UserSettingsService.I,
-       _functionsService = functionsService ?? FunctionsService.I {
+       _databaseService = databaseService ?? DatabaseService.I {
     //
     _onForegroundMessageSubscription = onForegroundMessageStream
         .map(Notification.fromRemoteMessage)
@@ -106,8 +104,7 @@ class NotificationsService extends BlocObserver {
   final FlutterLocalNotificationsPlugin _localNotificationsPlugin;
 
   final AuthBloc _authBloc;
-  final UserSettingsService _userSettingsService;
-  final FunctionsService _functionsService;
+  final DatabaseService _databaseService;
 
   final BehaviorSubject<bool> _isPausedSubject = BehaviorSubject.seeded(true);
 
@@ -289,14 +286,19 @@ class NotificationsService extends BlocObserver {
       return false;
     }
 
+    final uid = _authBloc.currentUserData?.uid;
     final token = cachedToken ?? await _firebaseMessaging.getToken();
 
-    if (token == null || _userSettingsService.registeredFCMToken == token) {
+    if (uid == null || token == null) {
       return false;
     }
 
-    await _functionsService.registerFCMToken(token);
-    await _userSettingsService.setRegisteredFCMToken(token);
+    final alreadyRegistered =
+        _authBloc.currentUserData?.fcmTokens.any((t) => t.token == token) ??
+        false;
+    if (!alreadyRegistered) {
+      await _databaseService.fcmTokens.registerToken(uid: uid, token: token);
+    }
 
     _onFCMTokenRefresh ??= _firebaseMessaging.onTokenRefresh
         .delayWhen((_) => _isPausedSubject.where((isPaused) => !isPaused))

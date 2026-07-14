@@ -1,0 +1,5 @@
+query fcmTokenByPk($uid: uuid!, $token: String!) {
+  usersFcmTokensByPk(uid: $uid, token: $token) {
+    ...FcmToken
+  }
+}

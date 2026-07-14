@@ -96,6 +96,7 @@ class _ViewServiceState extends State<ViewService> {
   final BehaviorSubject<List<OrderBy>> _personsOrderBy = BehaviorSubject.seeded(
     ViewObjectDetails.getLastOrderByFor(
       type: AdvancedQueriesMetadata().person,
+      inServiceContext: true,
       orElse: () => [
         OrderBy(field: PersonFields().studyYear),
         OrderBy(field: PersonFields().name),
@@ -334,6 +335,7 @@ class _ViewServiceState extends State<ViewService> {
         unawaited(
           ViewObjectDetails.saveLastOrderByFor(
             type: queryableType,
+            inServiceContext: currentTabIndex == 2,
             orderBy: newOrderBy,
           ),
         );

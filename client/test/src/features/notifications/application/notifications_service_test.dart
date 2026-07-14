@@ -26,7 +26,8 @@ import 'notifications_service_test.mocks.dart';
   MockSpec<NotificationSettings>(),
   MockSpec<FlutterLocalNotificationsPlugin>(),
   MockSpec<AuthBloc>(),
-  MockSpec<UserSettingsService>(),
+  MockSpec<DatabaseService>(),
+  MockSpec<FcmTokensDAO>(),
   MockSpec<FunctionsService>(),
   MockSpec<InitializationService>(),
   MockSpec<NotificationsStorage>(),
@@ -557,6 +558,7 @@ void main() {
               addTearDown(unit.dispose);
 
               const expectedToken = '_token_';
+              const expectedUid = '_uid_';
 
               when(
                 globalProviderContainer
@@ -569,25 +571,36 @@ void main() {
                     .getToken(),
               ).thenAnswer((_) async => expectedToken);
 
+              final authBloc = globalProviderContainer.read(authBlocProvider);
+              when(authBloc.currentUserData).thenReturn(
+                const User(
+                  uid: expectedUid,
+                  name: 'n',
+                  email: 'e',
+                ),
+              );
+
+              final fcmTokens = globalProviderContainer
+                  .read(databaseServiceProvider)
+                  .fcmTokens;
               when(
-                globalProviderContainer
-                    .read(userSettingsServiceProvider)
-                    .registeredFCMToken,
-              ).thenReturn('${expectedToken}something else');
+                fcmTokens.registerToken(
+                  uid: expectedUid,
+                  token: expectedToken,
+                ),
+              ).thenAnswer((_) async => null);
 
               await expectLater(
                 unit.registerFCMTokenAndListenForChanges(),
                 completion(isTrue),
               );
 
-              verifyInOrder(
-                [
-                  FunctionsService.I.registerFCMToken(expectedToken),
-                  globalProviderContainer
-                      .read(userSettingsServiceProvider)
-                      .setRegisteredFCMToken(expectedToken),
-                ],
-              );
+              verify(
+                fcmTokens.registerToken(
+                  uid: expectedUid,
+                  token: expectedToken,
+                ),
+              ).called(1);
             },
           );
         },
@@ -914,6 +927,7 @@ List<Object> _callArgumentsMatchFor({
 NotificationsService _createNewUnit() {
   return NotificationsService(
     authBloc: AuthBloc.I,
+    databaseService: globalProviderContainer.read(databaseServiceProvider),
     localNotificationsPlugin: globalProviderContainer.read(
       localNotificationsPluginProvider,
     ),
@@ -931,7 +945,7 @@ Future<void> _setUp() async {
     await _setUpFirebaseMessaging(),
     _setUpLocalNotificationsPlugin(),
     _setUpAuthBloc(),
-    _setUpUserSettingsService(),
+    _setUpDatabaseService(),
     _setUpFunctionsService(),
     _setUpStorage(),
     _setUpNotificationsService(),
@@ -959,10 +973,11 @@ Override _setUpFunctionsService() {
   return functionsServiceProvider.overrideWithValue(MockFunctionsService());
 }
 
-Override _setUpUserSettingsService() {
-  return userSettingsServiceProvider.overrideWithValue(
-    MockUserSettingsService(),
-  );
+Override _setUpDatabaseService() {
+  final mockDatabaseService = MockDatabaseService();
+  final mockFcmTokens = MockFcmTokensDAO();
+  when(mockDatabaseService.fcmTokens).thenReturn(mockFcmTokens);
+  return databaseServiceProvider.overrideWithValue(mockDatabaseService);
 }
 
 Override _setUpAuthBloc() {

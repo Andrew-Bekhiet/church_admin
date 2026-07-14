@@ -139,6 +139,16 @@ interface class SyncKVStore<T> {
     _loadedStores.removeWhere((_, value) => value == this);
   }
 
+  bool containsKey(String key) {
+    _checkLoaded();
+    return _memoryCache.containsKey(key);
+  }
+
+  bool containsValue(T? value) {
+    _checkLoaded();
+    return _memoryCache.containsValue(value);
+  }
+
   Map<String, T?> toMap() {
     _checkLoaded();
     return UnmodifiableMapView(_memoryCache);
