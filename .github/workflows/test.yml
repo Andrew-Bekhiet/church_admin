@@ -5,11 +5,7 @@ on:
     paths:
       - "client/**"
       - ".github/workflows/test.yml"
-  push:
-    branches: [master]
-    paths:
-      - "client/**"
-      - ".github/workflows/test.yml"
+
   workflow_dispatch:
 
 jobs:
