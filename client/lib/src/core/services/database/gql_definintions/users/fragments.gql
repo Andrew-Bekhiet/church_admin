@@ -32,6 +32,12 @@ fragment UserDetails on AuthUsersData {
     ...LatestEditHistory
   }
   ...UserAdminOn
+  preferences {
+    ...UserPreferences
+  }
+  fcmTokens {
+    ...FcmToken
+  }
 }
 
 fragment UserPermissions on AuthUsersData {

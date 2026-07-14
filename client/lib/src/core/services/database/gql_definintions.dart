@@ -1,6 +1,7 @@
 export 'gql_definintions/areas.dart';
 export 'gql_definintions/classes.dart';
 export 'gql_definintions/families.dart';
+export 'gql_definintions/fcm_tokens.dart';
 export 'gql_definintions/groups.dart';
 export 'gql_definintions/history.dart';
 export 'gql_definintions/home.dart';
@@ -12,3 +13,4 @@ export 'gql_definintions/stores.dart';
 export 'gql_definintions/streets.dart';
 export 'gql_definintions/user_permissions.dart';
 export 'gql_definintions/users.dart';
+export 'gql_definintions/users_preferences.dart';

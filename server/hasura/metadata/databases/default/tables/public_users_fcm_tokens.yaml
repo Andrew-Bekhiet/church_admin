@@ -1,0 +1,26 @@
+table:
+  name: users_fcm_tokens
+  schema: public
+object_relationships:
+  - name: user
+    using:
+      foreign_key_constraint_on: uid
+insert_permissions:
+  - role: user
+    permission:
+      check:
+        uid:
+          _eq: X-Hasura-User-Id
+      columns:
+        - uid
+        - token
+select_permissions:
+  - role: user
+    permission:
+      columns:
+        - uid
+        - token
+        - created_at
+      filter:
+        uid:
+          _eq: X-Hasura-User-Id

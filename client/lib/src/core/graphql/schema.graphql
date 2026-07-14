@@ -884,6 +884,13 @@ type AuthUsersData {
   blurhash: String
   currentUserCanManageThisUser: Boolean
   email: String!
+  fcmTokens(
+    distinctOn: [UsersFcmTokensSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [UsersFcmTokensOrderBy!]
+    where: UsersFcmTokensBoolExp
+  ): [UsersFcmTokens!]!
   lastEdit: HistoryLatestEdits
   name: String!
   permissions(
@@ -895,6 +902,7 @@ type AuthUsersData {
   ): [AuthUsersPermissions!]!
   person: Persons
   photoUpdatedAt: timestamptz
+  preferences: UsersPreferences
   uid: uuid!
 }
 
@@ -917,11 +925,13 @@ input AuthUsersDataBoolExp {
   blurhash: StringComparisonExp
   currentUserCanManageThisUser: BooleanComparisonExp
   email: StringComparisonExp
+  fcmTokens: UsersFcmTokensBoolExp
   lastEdit: HistoryLatestEditsBoolExp
   name: StringComparisonExp
   permissions: AuthUsersPermissionsBoolExp
   person: PersonsBoolExp
   photoUpdatedAt: TimestamptzComparisonExp
+  preferences: UsersPreferencesBoolExp
   uid: UuidComparisonExp
 }
 type AuthUsersDataMaxFields {
@@ -943,11 +953,13 @@ input AuthUsersDataOrderBy {
   blurhash: OrderBy
   currentUserCanManageThisUser: OrderBy
   email: OrderBy
+  fcmTokensAggregate: UsersFcmTokensAggregateOrderBy
   lastEdit: HistoryLatestEditsOrderBy
   name: OrderBy
   permissionsAggregate: AuthUsersPermissionsAggregateOrderBy
   person: PersonsOrderBy
   photoUpdatedAt: OrderBy
+  preferences: UsersPreferencesOrderBy
   uid: OrderBy
 }
 
@@ -2548,6 +2560,7 @@ type GroupsMaxFields {
 input GroupsMaxOrderBy {
   blurhash: OrderBy
   color: OrderBy
+  defaultMeetingId: OrderBy
   id: OrderBy
   name: OrderBy
   photoUpdatedAt: OrderBy
@@ -2566,6 +2579,7 @@ type GroupsMinFields {
 input GroupsMinOrderBy {
   blurhash: OrderBy
   color: OrderBy
+  defaultMeetingId: OrderBy
   id: OrderBy
   name: OrderBy
   photoUpdatedAt: OrderBy
@@ -7467,6 +7481,186 @@ input UniversitiesUpdates {
   where: UniversitiesBoolExp!
 }
 
+type UsersFcmTokens {
+  createdAt: timestamptz!
+  token: String!
+  uid: uuid!
+  user: AuthUsersData!
+}
+
+input UsersFcmTokensAggregateOrderBy {
+  count: OrderBy
+  max: UsersFcmTokensMaxOrderBy
+  min: UsersFcmTokensMinOrderBy
+}
+
+input UsersFcmTokensBoolExp {
+  _and: [UsersFcmTokensBoolExp!]
+  _not: UsersFcmTokensBoolExp
+  _or: [UsersFcmTokensBoolExp!]
+  createdAt: TimestamptzComparisonExp
+  token: StringComparisonExp
+  uid: UuidComparisonExp
+  user: AuthUsersDataBoolExp
+}
+
+enum UsersFcmTokensConstraint {
+  users_fcm_tokens_pkey
+}
+
+input UsersFcmTokensInsertInput {
+  token: String
+  uid: uuid
+}
+
+input UsersFcmTokensMaxOrderBy {
+  createdAt: OrderBy
+  token: OrderBy
+  uid: OrderBy
+}
+
+input UsersFcmTokensMinOrderBy {
+  createdAt: OrderBy
+  token: OrderBy
+  uid: OrderBy
+}
+
+type UsersFcmTokensMutationResponse {
+  affectedRows: Int!
+  returning: [UsersFcmTokens!]!
+}
+
+input UsersFcmTokensOnConflict {
+  constraint: UsersFcmTokensConstraint!
+  updateColumns: [UsersFcmTokensUpdateColumn!]! = []
+  where: UsersFcmTokensBoolExp
+}
+input UsersFcmTokensOrderBy {
+  createdAt: OrderBy
+  token: OrderBy
+  uid: OrderBy
+  user: AuthUsersDataOrderBy
+}
+
+enum UsersFcmTokensSelectColumn {
+  createdAt
+  token
+  uid
+}
+
+input UsersFcmTokensStreamCursorInput {
+  initialValue: UsersFcmTokensStreamCursorValueInput!
+  ordering: CursorOrdering
+}
+input UsersFcmTokensStreamCursorValueInput {
+  createdAt: timestamptz
+  token: String
+  uid: uuid
+}
+
+enum UsersFcmTokensUpdateColumn {
+  _PLACEHOLDER
+}
+
+type UsersPreferences {
+  darkTheme: Boolean
+  greatFeastTheme: Boolean!
+  lastHomeMode: String
+  orderByPreferences(
+    path: String
+  ): jsonb!
+  uid: uuid!
+  updatedAt: timestamptz!
+  user: AuthUsersData!
+}
+input UsersPreferencesAppendInput {
+  orderByPreferences: jsonb
+}
+
+input UsersPreferencesBoolExp {
+  _and: [UsersPreferencesBoolExp!]
+  _not: UsersPreferencesBoolExp
+  _or: [UsersPreferencesBoolExp!]
+  darkTheme: BooleanComparisonExp
+  greatFeastTheme: BooleanComparisonExp
+  lastHomeMode: StringComparisonExp
+  orderByPreferences: JsonbComparisonExp
+  uid: UuidComparisonExp
+  updatedAt: TimestamptzComparisonExp
+  user: AuthUsersDataBoolExp
+}
+
+input UsersPreferencesDeleteAtPathInput {
+  orderByPreferences: [String!]
+}
+
+input UsersPreferencesDeleteElemInput {
+  orderByPreferences: Int
+}
+
+input UsersPreferencesDeleteKeyInput {
+  orderByPreferences: String
+}
+
+type UsersPreferencesMutationResponse {
+  affectedRows: Int!
+  returning: [UsersPreferences!]!
+}
+input UsersPreferencesOrderBy {
+  darkTheme: OrderBy
+  greatFeastTheme: OrderBy
+  lastHomeMode: OrderBy
+  orderByPreferences: OrderBy
+  uid: OrderBy
+  updatedAt: OrderBy
+  user: AuthUsersDataOrderBy
+}
+input UsersPreferencesPkColumnsInput {
+  uid: uuid!
+}
+input UsersPreferencesPrependInput {
+  orderByPreferences: jsonb
+}
+
+enum UsersPreferencesSelectColumn {
+  darkTheme
+  greatFeastTheme
+  lastHomeMode
+  orderByPreferences
+  uid
+  updatedAt
+}
+
+input UsersPreferencesSetInput {
+  darkTheme: Boolean
+  greatFeastTheme: Boolean
+  lastHomeMode: String
+  orderByPreferences: jsonb
+}
+
+input UsersPreferencesStreamCursorInput {
+  initialValue: UsersPreferencesStreamCursorValueInput!
+  ordering: CursorOrdering
+}
+input UsersPreferencesStreamCursorValueInput {
+  darkTheme: Boolean
+  greatFeastTheme: Boolean
+  lastHomeMode: String
+  orderByPreferences: jsonb
+  uid: uuid
+  updatedAt: timestamptz
+}
+
+input UsersPreferencesUpdates {
+  _append: UsersPreferencesAppendInput
+  _deleteAtPath: UsersPreferencesDeleteAtPathInput
+  _deleteElem: UsersPreferencesDeleteElemInput
+  _deleteKey: UsersPreferencesDeleteKeyInput
+  _prepend: UsersPreferencesPrependInput
+  _set: UsersPreferencesSetInput
+  where: UsersPreferencesBoolExp!
+}
+
 input UuidComparisonExp {
   _eq: uuid
   _gt: uuid
@@ -8041,6 +8235,14 @@ type mutation_root {
     object: UniversitiesInsertInput!
     onConflict: UniversitiesOnConflict
   ): Universities
+  insertUsersFcmTokens(
+    objects: [UsersFcmTokensInsertInput!]!
+    onConflict: UsersFcmTokensOnConflict
+  ): UsersFcmTokensMutationResponse
+  insertUsersFcmTokensOne(
+    object: UsersFcmTokensInsertInput!
+    onConflict: UsersFcmTokensOnConflict
+  ): UsersFcmTokens
   updateAddresses(
     _inc: AddressesIncInput
     _set: AddressesSetInput
@@ -8378,6 +8580,27 @@ type mutation_root {
   updateUniversitiesMany(
     updates: [UniversitiesUpdates!]!
   ): [UniversitiesMutationResponse]
+  updateUsersPreferences(
+    _append: UsersPreferencesAppendInput
+    _deleteAtPath: UsersPreferencesDeleteAtPathInput
+    _deleteElem: UsersPreferencesDeleteElemInput
+    _deleteKey: UsersPreferencesDeleteKeyInput
+    _prepend: UsersPreferencesPrependInput
+    _set: UsersPreferencesSetInput
+    where: UsersPreferencesBoolExp!
+  ): UsersPreferencesMutationResponse
+  updateUsersPreferencesByPk(
+    _append: UsersPreferencesAppendInput
+    _deleteAtPath: UsersPreferencesDeleteAtPathInput
+    _deleteElem: UsersPreferencesDeleteElemInput
+    _deleteKey: UsersPreferencesDeleteKeyInput
+    _prepend: UsersPreferencesPrependInput
+    _set: UsersPreferencesSetInput
+    pkColumns: UsersPreferencesPkColumnsInput!
+  ): UsersPreferences
+  updateUsersPreferencesMany(
+    updates: [UsersPreferencesUpdates!]!
+  ): [UsersPreferencesMutationResponse]
 }
 
 scalar name
@@ -8865,6 +9088,22 @@ type query_root {
     where: UniversitiesBoolExp
   ): [Universities!]!
   universitiesByPk(id: uuid!): Universities
+  usersFcmTokens(
+    distinctOn: [UsersFcmTokensSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [UsersFcmTokensOrderBy!]
+    where: UsersFcmTokensBoolExp
+  ): [UsersFcmTokens!]!
+  usersFcmTokensByPk(token: String!, uid: uuid!): UsersFcmTokens
+  usersPreferences(
+    distinctOn: [UsersPreferencesSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [UsersPreferencesOrderBy!]
+    where: UsersPreferencesBoolExp
+  ): [UsersPreferences!]!
+  usersPreferencesByPk(uid: uuid!): UsersPreferences
 }
 
 scalar smallint
@@ -9569,6 +9808,32 @@ type subscription_root {
     cursor: [UniversitiesStreamCursorInput]!
     where: UniversitiesBoolExp
   ): [Universities!]!
+  usersFcmTokens(
+    distinctOn: [UsersFcmTokensSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [UsersFcmTokensOrderBy!]
+    where: UsersFcmTokensBoolExp
+  ): [UsersFcmTokens!]!
+  usersFcmTokensByPk(token: String!, uid: uuid!): UsersFcmTokens
+  usersFcmTokensStream(
+    batchSize: Int!
+    cursor: [UsersFcmTokensStreamCursorInput]!
+    where: UsersFcmTokensBoolExp
+  ): [UsersFcmTokens!]!
+  usersPreferences(
+    distinctOn: [UsersPreferencesSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [UsersPreferencesOrderBy!]
+    where: UsersPreferencesBoolExp
+  ): [UsersPreferences!]!
+  usersPreferencesByPk(uid: uuid!): UsersPreferences
+  usersPreferencesStream(
+    batchSize: Int!
+    cursor: [UsersPreferencesStreamCursorInput]!
+    where: UsersPreferencesBoolExp
+  ): [UsersPreferences!]!
 }
 
 scalar timestamptz

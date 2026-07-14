@@ -13,6 +13,7 @@ abstract class CopyWith_Input_GroupsMaxOrderBy<TRes> {
   TRes call({
     Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
+    Enum_OrderBy? defaultMeetingId,
     Enum_OrderBy? id,
     Enum_OrderBy? name,
     Enum_OrderBy? photoUpdatedAt,
@@ -33,6 +34,7 @@ class _CopyWithImpl_Input_GroupsMaxOrderBy<TRes>
   TRes call({
     Object? blurhash = _undefined,
     Object? color = _undefined,
+    Object? defaultMeetingId = _undefined,
     Object? id = _undefined,
     Object? name = _undefined,
     Object? photoUpdatedAt = _undefined,
@@ -42,6 +44,8 @@ class _CopyWithImpl_Input_GroupsMaxOrderBy<TRes>
       ..._instance._$data,
       if (blurhash != _undefined) 'blurhash': (blurhash as Enum_OrderBy?),
       if (color != _undefined) 'color': (color as Enum_OrderBy?),
+      if (defaultMeetingId != _undefined)
+        'defaultMeetingId': (defaultMeetingId as Enum_OrderBy?),
       if (id != _undefined) 'id': (id as Enum_OrderBy?),
       if (name != _undefined) 'name': (name as Enum_OrderBy?),
       if (photoUpdatedAt != _undefined)
@@ -60,6 +64,7 @@ class _CopyWithStubImpl_Input_GroupsMaxOrderBy<TRes>
   call({
     Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
+    Enum_OrderBy? defaultMeetingId,
     Enum_OrderBy? id,
     Enum_OrderBy? name,
     Enum_OrderBy? photoUpdatedAt,
@@ -71,6 +76,7 @@ class Input_GroupsMinOrderBy {
   factory Input_GroupsMinOrderBy({
     Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
+    Enum_OrderBy? defaultMeetingId,
     Enum_OrderBy? id,
     Enum_OrderBy? name,
     Enum_OrderBy? photoUpdatedAt,
@@ -78,6 +84,7 @@ class Input_GroupsMinOrderBy {
   }) => Input_GroupsMinOrderBy._({
     if (blurhash != null) r'blurhash': blurhash,
     if (color != null) r'color': color,
+    if (defaultMeetingId != null) r'defaultMeetingId': defaultMeetingId,
     if (id != null) r'id': id,
     if (name != null) r'name': name,
     if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
@@ -99,6 +106,12 @@ class Input_GroupsMinOrderBy {
       result$data['color'] = l$color == null
           ? null
           : fromJson_Enum_OrderBy((l$color as String));
+    }
+    if (data.containsKey('defaultMeetingId')) {
+      final l$defaultMeetingId = data['defaultMeetingId'];
+      result$data['defaultMeetingId'] = l$defaultMeetingId == null
+          ? null
+          : fromJson_Enum_OrderBy((l$defaultMeetingId as String));
     }
     if (data.containsKey('id')) {
       final l$id = data['id'];
@@ -133,6 +146,9 @@ class Input_GroupsMinOrderBy {
 
   Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
 
+  Enum_OrderBy? get defaultMeetingId =>
+      (_$data['defaultMeetingId'] as Enum_OrderBy?);
+
   Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
 
   Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
@@ -155,6 +171,12 @@ class Input_GroupsMinOrderBy {
       result$data['color'] = l$color == null
           ? null
           : toJson_Enum_OrderBy(l$color);
+    }
+    if (_$data.containsKey('defaultMeetingId')) {
+      final l$defaultMeetingId = defaultMeetingId;
+      result$data['defaultMeetingId'] = l$defaultMeetingId == null
+          ? null
+          : toJson_Enum_OrderBy(l$defaultMeetingId);
     }
     if (_$data.containsKey('id')) {
       final l$id = id;
@@ -207,6 +229,15 @@ class Input_GroupsMinOrderBy {
     if (l$color != lOther$color) {
       return false;
     }
+    final l$defaultMeetingId = defaultMeetingId;
+    final lOther$defaultMeetingId = other.defaultMeetingId;
+    if (_$data.containsKey('defaultMeetingId') !=
+        other._$data.containsKey('defaultMeetingId')) {
+      return false;
+    }
+    if (l$defaultMeetingId != lOther$defaultMeetingId) {
+      return false;
+    }
     final l$id = id;
     final lOther$id = other.id;
     if (_$data.containsKey('id') != other._$data.containsKey('id')) {
@@ -248,6 +279,7 @@ class Input_GroupsMinOrderBy {
   int get hashCode {
     final l$blurhash = blurhash;
     final l$color = color;
+    final l$defaultMeetingId = defaultMeetingId;
     final l$id = id;
     final l$name = name;
     final l$photoUpdatedAt = photoUpdatedAt;
@@ -255,6 +287,7 @@ class Input_GroupsMinOrderBy {
     return Object.hashAll([
       _$data.containsKey('blurhash') ? l$blurhash : const {},
       _$data.containsKey('color') ? l$color : const {},
+      _$data.containsKey('defaultMeetingId') ? l$defaultMeetingId : const {},
       _$data.containsKey('id') ? l$id : const {},
       _$data.containsKey('name') ? l$name : const {},
       _$data.containsKey('photoUpdatedAt') ? l$photoUpdatedAt : const {},
@@ -275,6 +308,7 @@ abstract class CopyWith_Input_GroupsMinOrderBy<TRes> {
   TRes call({
     Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
+    Enum_OrderBy? defaultMeetingId,
     Enum_OrderBy? id,
     Enum_OrderBy? name,
     Enum_OrderBy? photoUpdatedAt,
@@ -295,6 +329,7 @@ class _CopyWithImpl_Input_GroupsMinOrderBy<TRes>
   TRes call({
     Object? blurhash = _undefined,
     Object? color = _undefined,
+    Object? defaultMeetingId = _undefined,
     Object? id = _undefined,
     Object? name = _undefined,
     Object? photoUpdatedAt = _undefined,
@@ -304,6 +339,8 @@ class _CopyWithImpl_Input_GroupsMinOrderBy<TRes>
       ..._instance._$data,
       if (blurhash != _undefined) 'blurhash': (blurhash as Enum_OrderBy?),
       if (color != _undefined) 'color': (color as Enum_OrderBy?),
+      if (defaultMeetingId != _undefined)
+        'defaultMeetingId': (defaultMeetingId as Enum_OrderBy?),
       if (id != _undefined) 'id': (id as Enum_OrderBy?),
       if (name != _undefined) 'name': (name as Enum_OrderBy?),
       if (photoUpdatedAt != _undefined)
@@ -322,6 +359,7 @@ class _CopyWithStubImpl_Input_GroupsMinOrderBy<TRes>
   call({
     Enum_OrderBy? blurhash,
     Enum_OrderBy? color,
+    Enum_OrderBy? defaultMeetingId,
     Enum_OrderBy? id,
     Enum_OrderBy? name,
     Enum_OrderBy? photoUpdatedAt,

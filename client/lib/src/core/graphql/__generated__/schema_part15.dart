@@ -1,6 +1,283 @@
 // Part 15 of the schema
 part of "schema.graphql.dart";
 
+abstract class CopyWith_Input_DaterangeComparisonExp<TRes> {
+  factory CopyWith_Input_DaterangeComparisonExp(
+    Input_DaterangeComparisonExp instance,
+    TRes Function(Input_DaterangeComparisonExp) then,
+  ) = _CopyWithImpl_Input_DaterangeComparisonExp;
+
+  factory CopyWith_Input_DaterangeComparisonExp.stub(TRes res) =
+      _CopyWithStubImpl_Input_DaterangeComparisonExp;
+
+  TRes call({
+    DateTimeRange? $_eq,
+    DateTimeRange? $_gt,
+    DateTimeRange? $_gte,
+    List<DateTimeRange>? $_in,
+    bool? $_isNull,
+    DateTimeRange? $_lt,
+    DateTimeRange? $_lte,
+    DateTimeRange? $_neq,
+    List<DateTimeRange>? $_nin,
+  });
+}
+
+class _CopyWithImpl_Input_DaterangeComparisonExp<TRes>
+    implements CopyWith_Input_DaterangeComparisonExp<TRes> {
+  _CopyWithImpl_Input_DaterangeComparisonExp(this._instance, this._then);
+
+  final Input_DaterangeComparisonExp _instance;
+
+  final TRes Function(Input_DaterangeComparisonExp) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? $_eq = _undefined,
+    Object? $_gt = _undefined,
+    Object? $_gte = _undefined,
+    Object? $_in = _undefined,
+    Object? $_isNull = _undefined,
+    Object? $_lt = _undefined,
+    Object? $_lte = _undefined,
+    Object? $_neq = _undefined,
+    Object? $_nin = _undefined,
+  }) => _then(
+    Input_DaterangeComparisonExp._({
+      ..._instance._$data,
+      if ($_eq != _undefined) '_eq': ($_eq as DateTimeRange?),
+      if ($_gt != _undefined) '_gt': ($_gt as DateTimeRange?),
+      if ($_gte != _undefined) '_gte': ($_gte as DateTimeRange?),
+      if ($_in != _undefined) '_in': ($_in as List<DateTimeRange>?),
+      if ($_isNull != _undefined) '_isNull': ($_isNull as bool?),
+      if ($_lt != _undefined) '_lt': ($_lt as DateTimeRange?),
+      if ($_lte != _undefined) '_lte': ($_lte as DateTimeRange?),
+      if ($_neq != _undefined) '_neq': ($_neq as DateTimeRange?),
+      if ($_nin != _undefined) '_nin': ($_nin as List<DateTimeRange>?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_DaterangeComparisonExp<TRes>
+    implements CopyWith_Input_DaterangeComparisonExp<TRes> {
+  _CopyWithStubImpl_Input_DaterangeComparisonExp(this._res);
+
+  TRes _res;
+
+  call({
+    DateTimeRange? $_eq,
+    DateTimeRange? $_gt,
+    DateTimeRange? $_gte,
+    List<DateTimeRange>? $_in,
+    bool? $_isNull,
+    DateTimeRange? $_lt,
+    DateTimeRange? $_lte,
+    DateTimeRange? $_neq,
+    List<DateTimeRange>? $_nin,
+  }) => _res;
+}
+
+class Input_DistrictsBoolExp {
+  factory Input_DistrictsBoolExp({
+    List<Input_DistrictsBoolExp>? $_and,
+    Input_DistrictsBoolExp? $_not,
+    List<Input_DistrictsBoolExp>? $_or,
+    Input_UuidComparisonExp? id,
+    Input_StringComparisonExp? name,
+  }) => Input_DistrictsBoolExp._({
+    if ($_and != null) r'_and': $_and,
+    if ($_not != null) r'_not': $_not,
+    if ($_or != null) r'_or': $_or,
+    if (id != null) r'id': id,
+    if (name != null) r'name': name,
+  });
+
+  Input_DistrictsBoolExp._(this._$data);
+
+  factory Input_DistrictsBoolExp.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('_and')) {
+      final l$$_and = data['_and'];
+      result$data['_and'] = (l$$_and as List<dynamic>?)
+          ?.map(
+            (e) => Input_DistrictsBoolExp.fromJson((e as Map<String, dynamic>)),
+          )
+          .toList();
+    }
+    if (data.containsKey('_not')) {
+      final l$$_not = data['_not'];
+      result$data['_not'] = l$$_not == null
+          ? null
+          : Input_DistrictsBoolExp.fromJson((l$$_not as Map<String, dynamic>));
+    }
+    if (data.containsKey('_or')) {
+      final l$$_or = data['_or'];
+      result$data['_or'] = (l$$_or as List<dynamic>?)
+          ?.map(
+            (e) => Input_DistrictsBoolExp.fromJson((e as Map<String, dynamic>)),
+          )
+          .toList();
+    }
+    if (data.containsKey('id')) {
+      final l$id = data['id'];
+      result$data['id'] = l$id == null
+          ? null
+          : Input_UuidComparisonExp.fromJson((l$id as Map<String, dynamic>));
+    }
+    if (data.containsKey('name')) {
+      final l$name = data['name'];
+      result$data['name'] = l$name == null
+          ? null
+          : Input_StringComparisonExp.fromJson(
+              (l$name as Map<String, dynamic>),
+            );
+    }
+    return Input_DistrictsBoolExp._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  List<Input_DistrictsBoolExp>? get $_and =>
+      (_$data['_and'] as List<Input_DistrictsBoolExp>?);
+
+  Input_DistrictsBoolExp? get $_not =>
+      (_$data['_not'] as Input_DistrictsBoolExp?);
+
+  List<Input_DistrictsBoolExp>? get $_or =>
+      (_$data['_or'] as List<Input_DistrictsBoolExp>?);
+
+  Input_UuidComparisonExp? get id => (_$data['id'] as Input_UuidComparisonExp?);
+
+  Input_StringComparisonExp? get name =>
+      (_$data['name'] as Input_StringComparisonExp?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('_and')) {
+      final l$$_and = $_and;
+      result$data['_and'] = l$$_and?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('_not')) {
+      final l$$_not = $_not;
+      result$data['_not'] = l$$_not?.toJson();
+    }
+    if (_$data.containsKey('_or')) {
+      final l$$_or = $_or;
+      result$data['_or'] = l$$_or?.map((e) => e.toJson()).toList();
+    }
+    if (_$data.containsKey('id')) {
+      final l$id = id;
+      result$data['id'] = l$id?.toJson();
+    }
+    if (_$data.containsKey('name')) {
+      final l$name = name;
+      result$data['name'] = l$name?.toJson();
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_DistrictsBoolExp<Input_DistrictsBoolExp> get copyWith =>
+      CopyWith_Input_DistrictsBoolExp(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_DistrictsBoolExp || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$$_and = $_and;
+    final lOther$$_and = other.$_and;
+    if (_$data.containsKey('_and') != other._$data.containsKey('_and')) {
+      return false;
+    }
+    if (l$$_and != null && lOther$$_and != null) {
+      if (l$$_and.length != lOther$$_and.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$_and.length; i++) {
+        final l$$_and$entry = l$$_and[i];
+        final lOther$$_and$entry = lOther$$_and[i];
+        if (l$$_and$entry != lOther$$_and$entry) {
+          return false;
+        }
+      }
+    } else if (l$$_and != lOther$$_and) {
+      return false;
+    }
+    final l$$_not = $_not;
+    final lOther$$_not = other.$_not;
+    if (_$data.containsKey('_not') != other._$data.containsKey('_not')) {
+      return false;
+    }
+    if (l$$_not != lOther$$_not) {
+      return false;
+    }
+    final l$$_or = $_or;
+    final lOther$$_or = other.$_or;
+    if (_$data.containsKey('_or') != other._$data.containsKey('_or')) {
+      return false;
+    }
+    if (l$$_or != null && lOther$$_or != null) {
+      if (l$$_or.length != lOther$$_or.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$_or.length; i++) {
+        final l$$_or$entry = l$$_or[i];
+        final lOther$$_or$entry = lOther$$_or[i];
+        if (l$$_or$entry != lOther$$_or$entry) {
+          return false;
+        }
+      }
+    } else if (l$$_or != lOther$$_or) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
+      return false;
+    }
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (_$data.containsKey('name') != other._$data.containsKey('name')) {
+      return false;
+    }
+    if (l$name != lOther$name) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$$_and = $_and;
+    final l$$_not = $_not;
+    final l$$_or = $_or;
+    final l$id = id;
+    final l$name = name;
+    return Object.hashAll([
+      _$data.containsKey('_and')
+          ? l$$_and == null
+                ? null
+                : Object.hashAll(l$$_and.map((v) => v))
+          : const {},
+      _$data.containsKey('_not') ? l$$_not : const {},
+      _$data.containsKey('_or')
+          ? l$$_or == null
+                ? null
+                : Object.hashAll(l$$_or.map((v) => v))
+          : const {},
+      _$data.containsKey('id') ? l$id : const {},
+      _$data.containsKey('name') ? l$name : const {},
+    ]);
+  }
+}
+
 abstract class CopyWith_Input_DistrictsBoolExp<TRes> {
   factory CopyWith_Input_DistrictsBoolExp(
     Input_DistrictsBoolExp instance,

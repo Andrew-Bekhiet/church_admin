@@ -50,4 +50,14 @@ class FakeSyncKVStore<T> implements SyncKVStore<T> {
   Map<String, T> toMap() {
     return _map;
   }
+
+  @override
+  bool containsKey(String key) {
+    return _map.containsKey(key);
+  }
+
+  @override
+  bool containsValue(T? value) {
+    return _map.containsValue(value);
+  }
 }

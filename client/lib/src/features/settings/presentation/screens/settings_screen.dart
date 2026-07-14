@@ -14,10 +14,10 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   final _formKey = GlobalKey<FormState>();
 
-  final userSettingsService = UserSettingsService.I;
+  final userPreferencesService = UserPreferencesService.I;
 
-  late bool? darkTheme = userSettingsService.darkTheme;
-  late bool greatFeastTheme = userSettingsService.greatFeastTheme;
+  late bool? darkTheme = userPreferencesService.darkTheme;
+  late bool greatFeastTheme = userPreferencesService.greatFeastTheme;
 
   bool _needsSaving = false;
 
@@ -101,8 +101,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
       });
 
   Future<void> _applyThemeChange() async {
-    await userSettingsService.setDarkTheme(darkTheme);
-    await userSettingsService.setGreatFeastTheme(greatFeastTheme);
+    await userPreferencesService.setDarkTheme(darkTheme);
+    await userPreferencesService.setGreatFeastTheme(greatFeastTheme);
 
     ThemingService.I.switchTheme(
       darkTheme ??

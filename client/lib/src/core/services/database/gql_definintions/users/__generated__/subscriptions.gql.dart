@@ -1,10 +1,12 @@
 import '../../../../../graphql/__generated__/schema.graphql.dart';
 import '../../areas/__generated__/fragments.gql.dart';
 import '../../classes/__generated__/fragments.gql.dart';
+import '../../fcm_tokens/__generated__/fragments.gql.dart';
 import '../../gql/__generated__/fragments.gql.dart';
 import '../../groups/__generated__/fragments.gql.dart';
 import '../../persons/__generated__/fragments.gql.dart';
 import '../../services/__generated__/fragments.gql.dart';
+import '../../users_preferences/__generated__/fragments.gql.dart';
 import 'fragments.gql.dart';
 import 'package:church_admin/src/core/graphql/scalars.dart';
 import 'package:gql/ast.dart';
@@ -338,6 +340,8 @@ const documentNodeSubscriptionwatchUser = DocumentNode(
     fragmentDefinitionClassNoPhoto,
     fragmentDefinitionGroup,
     fragmentDefinitionGroupNoPhoto,
+    fragmentDefinitionUserPreferences,
+    fragmentDefinitionFcmToken,
   ],
 );
 
@@ -361,6 +365,8 @@ class Subscription_watchUser_authUsersDataByPk
     this.person,
     this.lastEdit,
     required this.adminOn,
+    this.preferences,
+    required this.fcmTokens,
   });
 
   factory Subscription_watchUser_authUsersDataByPk.fromJson(
@@ -377,6 +383,8 @@ class Subscription_watchUser_authUsersDataByPk
     final l$person = json['person'];
     final l$lastEdit = json['lastEdit'];
     final l$adminOn = json['adminOn'];
+    final l$preferences = json['preferences'];
+    final l$fcmTokens = json['fcmTokens'];
     return Subscription_watchUser_authUsersDataByPk(
       uid: stringToUuid(l$uid),
       name: (l$name as String),
@@ -412,6 +420,14 @@ class Subscription_watchUser_authUsersDataByPk
             ),
           )
           .toList(),
+      preferences: l$preferences == null
+          ? null
+          : Fragment_UserPreferences.fromJson(
+              (l$preferences as Map<String, dynamic>),
+            ),
+      fcmTokens: (l$fcmTokens as List<dynamic>)
+          .map((e) => Fragment_FcmToken.fromJson((e as Map<String, dynamic>)))
+          .toList(),
     );
   }
 
@@ -436,6 +452,10 @@ class Subscription_watchUser_authUsersDataByPk
   final Fragment_LatestEditHistory? lastEdit;
 
   final List<Subscription_watchUser_authUsersDataByPk_adminOn> adminOn;
+
+  final Fragment_UserPreferences? preferences;
+
+  final List<Fragment_FcmToken> fcmTokens;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -464,6 +484,10 @@ class Subscription_watchUser_authUsersDataByPk
     _resultData['lastEdit'] = l$lastEdit?.toJson();
     final l$adminOn = adminOn;
     _resultData['adminOn'] = l$adminOn.map((e) => e.toJson()).toList();
+    final l$preferences = preferences;
+    _resultData['preferences'] = l$preferences?.toJson();
+    final l$fcmTokens = fcmTokens;
+    _resultData['fcmTokens'] = l$fcmTokens.map((e) => e.toJson()).toList();
     return _resultData;
   }
 
@@ -480,6 +504,8 @@ class Subscription_watchUser_authUsersDataByPk
     final l$person = person;
     final l$lastEdit = lastEdit;
     final l$adminOn = adminOn;
+    final l$preferences = preferences;
+    final l$fcmTokens = fcmTokens;
     return Object.hashAll([
       l$uid,
       l$name,
@@ -492,6 +518,8 @@ class Subscription_watchUser_authUsersDataByPk
       l$person,
       l$lastEdit,
       Object.hashAll(l$adminOn.map((v) => v)),
+      l$preferences,
+      Object.hashAll(l$fcmTokens.map((v) => v)),
     ]);
   }
 
@@ -574,6 +602,23 @@ class Subscription_watchUser_authUsersDataByPk
         return false;
       }
     }
+    final l$preferences = preferences;
+    final lOther$preferences = other.preferences;
+    if (l$preferences != lOther$preferences) {
+      return false;
+    }
+    final l$fcmTokens = fcmTokens;
+    final lOther$fcmTokens = other.fcmTokens;
+    if (l$fcmTokens.length != lOther$fcmTokens.length) {
+      return false;
+    }
+    for (int i = 0; i < l$fcmTokens.length; i++) {
+      final l$fcmTokens$entry = l$fcmTokens[i];
+      final lOther$fcmTokens$entry = lOther$fcmTokens[i];
+      if (l$fcmTokens$entry != lOther$fcmTokens$entry) {
+        return false;
+      }
+    }
     return true;
   }
 }
@@ -608,6 +653,8 @@ abstract class CopyWith_Subscription_watchUser_authUsersDataByPk<TRes> {
     Subscription_watchUser_authUsersDataByPk_person? person,
     Fragment_LatestEditHistory? lastEdit,
     List<Subscription_watchUser_authUsersDataByPk_adminOn>? adminOn,
+    Fragment_UserPreferences? preferences,
+    List<Fragment_FcmToken>? fcmTokens,
   });
   TRes permissions(
     Iterable<Subscription_watchUser_authUsersDataByPk_permissions> Function(
@@ -628,6 +675,13 @@ abstract class CopyWith_Subscription_watchUser_authUsersDataByPk<TRes> {
           Subscription_watchUser_authUsersDataByPk_adminOn
         >
       >,
+    )
+    _fn,
+  );
+  CopyWith_Fragment_UserPreferences<TRes> get preferences;
+  TRes fcmTokens(
+    Iterable<Fragment_FcmToken> Function(
+      Iterable<CopyWith_Fragment_FcmToken<Fragment_FcmToken>>,
     )
     _fn,
   );
@@ -658,6 +712,8 @@ class _CopyWithImpl_Subscription_watchUser_authUsersDataByPk<TRes>
     Object? person = _undefined,
     Object? lastEdit = _undefined,
     Object? adminOn = _undefined,
+    Object? preferences = _undefined,
+    Object? fcmTokens = _undefined,
   }) => _then(
     Subscription_watchUser_authUsersDataByPk(
       uid: uid == _undefined || uid == null
@@ -694,6 +750,12 @@ class _CopyWithImpl_Subscription_watchUser_authUsersDataByPk<TRes>
       adminOn: adminOn == _undefined || adminOn == null
           ? _instance.adminOn
           : (adminOn as List<Subscription_watchUser_authUsersDataByPk_adminOn>),
+      preferences: preferences == _undefined
+          ? _instance.preferences
+          : (preferences as Fragment_UserPreferences?),
+      fcmTokens: fcmTokens == _undefined || fcmTokens == null
+          ? _instance.fcmTokens
+          : (fcmTokens as List<Fragment_FcmToken>),
     ),
   );
 
@@ -758,6 +820,27 @@ class _CopyWithImpl_Subscription_watchUser_authUsersDataByPk<TRes>
       ),
     ).toList(),
   );
+
+  CopyWith_Fragment_UserPreferences<TRes> get preferences {
+    final local$preferences = _instance.preferences;
+    return local$preferences == null
+        ? CopyWith_Fragment_UserPreferences.stub(_then(_instance))
+        : CopyWith_Fragment_UserPreferences(
+            local$preferences,
+            (e) => call(preferences: e),
+          );
+  }
+
+  TRes fcmTokens(
+    Iterable<Fragment_FcmToken> Function(
+      Iterable<CopyWith_Fragment_FcmToken<Fragment_FcmToken>>,
+    )
+    _fn,
+  ) => call(
+    fcmTokens: _fn(
+      _instance.fcmTokens.map((e) => CopyWith_Fragment_FcmToken(e, (i) => i)),
+    ).toList(),
+  );
 }
 
 class _CopyWithStubImpl_Subscription_watchUser_authUsersDataByPk<TRes>
@@ -778,6 +861,8 @@ class _CopyWithStubImpl_Subscription_watchUser_authUsersDataByPk<TRes>
     Subscription_watchUser_authUsersDataByPk_person? person,
     Fragment_LatestEditHistory? lastEdit,
     List<Subscription_watchUser_authUsersDataByPk_adminOn>? adminOn,
+    Fragment_UserPreferences? preferences,
+    List<Fragment_FcmToken>? fcmTokens,
   }) => _res;
 
   permissions(_fn) => _res;
@@ -789,6 +874,11 @@ class _CopyWithStubImpl_Subscription_watchUser_authUsersDataByPk<TRes>
       CopyWith_Fragment_LatestEditHistory.stub(_res);
 
   adminOn(_fn) => _res;
+
+  CopyWith_Fragment_UserPreferences<TRes> get preferences =>
+      CopyWith_Fragment_UserPreferences.stub(_res);
+
+  fcmTokens(_fn) => _res;
 }
 
 class Subscription_watchUser_authUsersDataByPk_permissions

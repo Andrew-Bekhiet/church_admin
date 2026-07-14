@@ -66,7 +66,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   final HomeDailyDataRepository _homeDailyDataRepository;
   final DatabaseService _databaseService;
-  final UserSettingsService _userSettingsService;
+  final UserPreferencesService _userPreferencesService;
 
   VoidCallback? _pageControllerListener;
 
@@ -118,16 +118,16 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   HomeBloc({
     required HomeDailyDataRepository homeDailyDataRepository,
     required DatabaseService databaseService,
-    required UserSettingsService userSettingsService,
+    required UserPreferencesService userPreferencesService,
     required PageController pageController,
     required Stream<User?> userDataStream,
   }) : _pageController = pageController,
        _databaseService = databaseService,
        _homeDailyDataRepository = homeDailyDataRepository,
-       _userSettingsService = userSettingsService,
+       _userPreferencesService = userPreferencesService,
        super(
          HomeState(
-           mode: userSettingsService.lastHomeMode ?? HomeMode.sundaySchool,
+           mode: userPreferencesService.lastHomeMode ?? HomeMode.sundaySchool,
            pageController: pageController,
            pages: const [_HomePagesConfig.summaryPage],
            showSnowflakeAnimation:
@@ -299,7 +299,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
     _pageController.jumpToPage(commonPageIndex == -1 ? 1 : commonPageIndex);
 
-    await _userSettingsService.setLastHomeMode(mode);
+    await _userPreferencesService.setLastHomeMode(mode);
 
     emit(
       state.copyWith(

@@ -1,0 +1,8 @@
+fragment UserPreferences on UsersPreferences {
+  uid
+  orderByPreferences
+  darkTheme
+  greatFeastTheme
+  lastHomeMode
+  updatedAt
+}

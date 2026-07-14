@@ -9,7 +9,7 @@ import 'package:mockito/annotations.dart';
 import '../../../../utils.dart';
 import 'settings_screen_test.mocks.dart';
 
-@GenerateNiceMocks([MockSpec<UserSettingsService>()])
+@GenerateNiceMocks([MockSpec<UserPreferencesService>()])
 Future<void> main() async {
   await loadAppFonts();
 
@@ -20,8 +20,8 @@ Future<void> main() async {
         () {
           initGlobalProviderContainer(
             [
-              userSettingsServiceProvider.overrideWithValue(
-                MockUserSettingsService(),
+              userPreferencesServiceProvider.overrideWithValue(
+                MockUserPreferencesService(),
               ),
             ],
           );

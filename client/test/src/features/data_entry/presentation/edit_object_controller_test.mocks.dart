@@ -34,30 +34,24 @@ class _FakeHttpsCallable_0 extends _i1.SmartFake implements _i2.HttpsCallable {
     : super(parent, parentInvocation);
 }
 
-class _FakeHttpsCallableResult_1<T> extends _i1.SmartFake
-    implements _i2.HttpsCallableResult<T> {
-  _FakeHttpsCallableResult_1(Object parent, Invocation parentInvocation)
+class _FakeResponse_1<T> extends _i1.SmartFake implements _i3.Response<T> {
+  _FakeResponse_1(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeResponse_2<T> extends _i1.SmartFake implements _i3.Response<T> {
-  _FakeResponse_2(Object parent, Invocation parentInvocation)
-    : super(parent, parentInvocation);
-}
-
-class _FakeNavigatorObserver_3 extends _i1.SmartFake
+class _FakeNavigatorObserver_2 extends _i1.SmartFake
     implements _i4.NavigatorObserver {
-  _FakeNavigatorObserver_3(Object parent, Invocation parentInvocation)
+  _FakeNavigatorObserver_2(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeInterceptor_4 extends _i1.SmartFake implements _i3.Interceptor {
-  _FakeInterceptor_4(Object parent, Invocation parentInvocation)
+class _FakeInterceptor_3 extends _i1.SmartFake implements _i3.Interceptor {
+  _FakeInterceptor_3(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeLink_5 extends _i1.SmartFake implements _i5.Link {
-  _FakeLink_5(Object parent, Invocation parentInvocation)
+class _FakeLink_4 extends _i1.SmartFake implements _i5.Link {
+  _FakeLink_4(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
@@ -94,28 +88,6 @@ class MockFunctionsService extends _i1.Mock implements _i6.FunctionsService {
             ),
           )
           as _i2.HttpsCallable);
-
-  @override
-  _i7.Future<_i2.HttpsCallableResult<dynamic>> registerFCMToken(
-    String? token,
-  ) =>
-      (super.noSuchMethod(
-            Invocation.method(#registerFCMToken, [token]),
-            returnValue: _i7.Future<_i2.HttpsCallableResult<dynamic>>.value(
-              _FakeHttpsCallableResult_1<dynamic>(
-                this,
-                Invocation.method(#registerFCMToken, [token]),
-              ),
-            ),
-            returnValueForMissingStub:
-                _i7.Future<_i2.HttpsCallableResult<dynamic>>.value(
-                  _FakeHttpsCallableResult_1<dynamic>(
-                    this,
-                    Invocation.method(#registerFCMToken, [token]),
-                  ),
-                ),
-          )
-          as _i7.Future<_i2.HttpsCallableResult<dynamic>>);
 
   @override
   _i7.Future<String> getDownloadUrl(
@@ -222,7 +194,7 @@ class MockFunctionsService extends _i1.Mock implements _i6.FunctionsService {
               #onSendProgress: onSendProgress,
             }),
             returnValue: _i7.Future<_i3.Response<dynamic>>.value(
-              _FakeResponse_2<dynamic>(
+              _FakeResponse_1<dynamic>(
                 this,
                 Invocation.method(#uploadPhoto, [], {
                   #url: url,
@@ -234,7 +206,7 @@ class MockFunctionsService extends _i1.Mock implements _i6.FunctionsService {
               ),
             ),
             returnValueForMissingStub: _i7.Future<_i3.Response<dynamic>>.value(
-              _FakeResponse_2<dynamic>(
+              _FakeResponse_1<dynamic>(
                 this,
                 Invocation.method(#uploadPhoto, [], {
                   #url: url,
@@ -342,11 +314,11 @@ class MockLoggingService extends _i1.Mock implements _i6.LoggingService {
   _i4.NavigatorObserver get navigatorObserver =>
       (super.noSuchMethod(
             Invocation.getter(#navigatorObserver),
-            returnValue: _FakeNavigatorObserver_3(
+            returnValue: _FakeNavigatorObserver_2(
               this,
               Invocation.getter(#navigatorObserver),
             ),
-            returnValueForMissingStub: _FakeNavigatorObserver_3(
+            returnValueForMissingStub: _FakeNavigatorObserver_2(
               this,
               Invocation.getter(#navigatorObserver),
             ),
@@ -357,11 +329,11 @@ class MockLoggingService extends _i1.Mock implements _i6.LoggingService {
   _i3.Interceptor get dioInterceptor =>
       (super.noSuchMethod(
             Invocation.getter(#dioInterceptor),
-            returnValue: _FakeInterceptor_4(
+            returnValue: _FakeInterceptor_3(
               this,
               Invocation.getter(#dioInterceptor),
             ),
-            returnValueForMissingStub: _FakeInterceptor_4(
+            returnValueForMissingStub: _FakeInterceptor_3(
               this,
               Invocation.getter(#dioInterceptor),
             ),
@@ -372,8 +344,8 @@ class MockLoggingService extends _i1.Mock implements _i6.LoggingService {
   _i5.Link get loggingLink =>
       (super.noSuchMethod(
             Invocation.getter(#loggingLink),
-            returnValue: _FakeLink_5(this, Invocation.getter(#loggingLink)),
-            returnValueForMissingStub: _FakeLink_5(
+            returnValue: _FakeLink_4(this, Invocation.getter(#loggingLink)),
+            returnValueForMissingStub: _FakeLink_4(
               this,
               Invocation.getter(#loggingLink),
             ),

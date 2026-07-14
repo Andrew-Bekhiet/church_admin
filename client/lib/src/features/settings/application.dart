@@ -1,1 +1,1 @@
-export 'application/user_settings_service.dart';
+export 'application/user_preferences_service.dart';

@@ -167,9 +167,11 @@ final loggingServiceProvider = Provider<LoggingService>(
   (ref) => LoggingService(),
 );
 
-final userSettingsServiceProvider = Provider<UserSettingsService>(
-  (ref) => UserSettingsService(
-    box: SyncKVStore.fromLoaded('Settings'),
+final userPreferencesServiceProvider = Provider<UserPreferencesService>(
+  (ref) => UserPreferencesService(
+    box: SyncKVStore.fromLoaded(UserPreferencesService.storeName),
+    databaseService: ref.watch(databaseServiceProvider),
+    authBloc: ref.watch(authBlocProvider),
   ),
 );
 
@@ -239,8 +241,7 @@ final notificationsServiceProvider = Provider<NotificationsService>((ref) {
     localNotificationsPlugin: ref.watch(localNotificationsPluginProvider),
     firebaseMessaging: ref.watch(firebaseMessagingProvider),
     authBloc: ref.watch(authBlocProvider),
-    userSettingsService: ref.watch(userSettingsServiceProvider),
-    functionsService: ref.watch(functionsServiceProvider),
+    databaseService: ref.watch(databaseServiceProvider),
     storage: ref.watch(notificationsStorageProvider),
     onForegroundMessageStream: FirebaseMessaging.onMessage,
     onMessageOpenedAppStream: FirebaseMessaging.onMessageOpenedApp,
@@ -396,7 +397,7 @@ final phoneNumberServiceProvider = Provider<PhoneNumberService>(
 
 final themingServiceProvider = Provider<ThemingService>(
   (ref) => ThemingService(
-    userSettingsService: ref.watch(userSettingsServiceProvider),
+    userPreferencesService: ref.watch(userPreferencesServiceProvider),
   ),
 );
 
@@ -449,7 +450,7 @@ final homeDailyDataRepositoryProvider = Provider<HomeDailyDataRepository>(
 final homeBlocProvider = Provider<HomeBloc>(
   (ref) {
     final homeBloc = HomeBloc(
-      userSettingsService: ref.watch(userSettingsServiceProvider),
+      userPreferencesService: ref.watch(userPreferencesServiceProvider),
       pageController: PageController(),
       databaseService: ref.watch(databaseServiceProvider),
       homeDailyDataRepository: ref.watch(homeDailyDataRepositoryProvider),

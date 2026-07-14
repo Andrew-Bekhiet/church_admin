@@ -31,14 +31,8 @@ class _FakeHttpsCallable_0 extends _i1.SmartFake implements _i2.HttpsCallable {
     : super(parent, parentInvocation);
 }
 
-class _FakeHttpsCallableResult_1<T> extends _i1.SmartFake
-    implements _i2.HttpsCallableResult<T> {
-  _FakeHttpsCallableResult_1(Object parent, Invocation parentInvocation)
-    : super(parent, parentInvocation);
-}
-
-class _FakeResponse_2<T> extends _i1.SmartFake implements _i3.Response<T> {
-  _FakeResponse_2(Object parent, Invocation parentInvocation)
+class _FakeResponse_1<T> extends _i1.SmartFake implements _i3.Response<T> {
+  _FakeResponse_1(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
@@ -75,28 +69,6 @@ class MockFunctionsService extends _i1.Mock implements _i4.FunctionsService {
             ),
           )
           as _i2.HttpsCallable);
-
-  @override
-  _i5.Future<_i2.HttpsCallableResult<dynamic>> registerFCMToken(
-    String? token,
-  ) =>
-      (super.noSuchMethod(
-            Invocation.method(#registerFCMToken, [token]),
-            returnValue: _i5.Future<_i2.HttpsCallableResult<dynamic>>.value(
-              _FakeHttpsCallableResult_1<dynamic>(
-                this,
-                Invocation.method(#registerFCMToken, [token]),
-              ),
-            ),
-            returnValueForMissingStub:
-                _i5.Future<_i2.HttpsCallableResult<dynamic>>.value(
-                  _FakeHttpsCallableResult_1<dynamic>(
-                    this,
-                    Invocation.method(#registerFCMToken, [token]),
-                  ),
-                ),
-          )
-          as _i5.Future<_i2.HttpsCallableResult<dynamic>>);
 
   @override
   _i5.Future<String> getDownloadUrl(
@@ -203,7 +175,7 @@ class MockFunctionsService extends _i1.Mock implements _i4.FunctionsService {
               #onSendProgress: onSendProgress,
             }),
             returnValue: _i5.Future<_i3.Response<dynamic>>.value(
-              _FakeResponse_2<dynamic>(
+              _FakeResponse_1<dynamic>(
                 this,
                 Invocation.method(#uploadPhoto, [], {
                   #url: url,
@@ -215,7 +187,7 @@ class MockFunctionsService extends _i1.Mock implements _i4.FunctionsService {
               ),
             ),
             returnValueForMissingStub: _i5.Future<_i3.Response<dynamic>>.value(
-              _FakeResponse_2<dynamic>(
+              _FakeResponse_1<dynamic>(
                 this,
                 Invocation.method(#uploadPhoto, [], {
                   #url: url,

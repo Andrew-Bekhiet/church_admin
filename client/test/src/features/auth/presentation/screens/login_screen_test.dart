@@ -21,7 +21,7 @@ import 'login_screen_test.mocks.dart';
   MockSpec<AuthStorage>(),
   MockSpec<ConnectivityService>(),
   MockSpec<DatabaseService>(),
-  MockSpec<UserSettingsService>(),
+  MockSpec<UserPreferencesService>(),
   MockSpec<NotificationsService>(),
   MockSpec<BuildContext>(),
   MockSpec<GoRouterState>(),

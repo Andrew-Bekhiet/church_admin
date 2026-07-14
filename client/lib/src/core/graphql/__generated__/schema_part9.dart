@@ -1,6 +1,285 @@
 // Part 9 of the schema
 part of "schema.graphql.dart";
 
+abstract class CopyWith_Input_AuthUsersDataOrderBy<TRes> {
+  factory CopyWith_Input_AuthUsersDataOrderBy(
+    Input_AuthUsersDataOrderBy instance,
+    TRes Function(Input_AuthUsersDataOrderBy) then,
+  ) = _CopyWithImpl_Input_AuthUsersDataOrderBy;
+
+  factory CopyWith_Input_AuthUsersDataOrderBy.stub(TRes res) =
+      _CopyWithStubImpl_Input_AuthUsersDataOrderBy;
+
+  TRes call({
+    Input_AuthUsersAdminOnAggregateOrderBy? adminOnAggregate,
+    Enum_OrderBy? blurhash,
+    Enum_OrderBy? currentUserCanManageThisUser,
+    Enum_OrderBy? email,
+    Input_UsersFcmTokensAggregateOrderBy? fcmTokensAggregate,
+    Input_HistoryLatestEditsOrderBy? lastEdit,
+    Enum_OrderBy? name,
+    Input_AuthUsersPermissionsAggregateOrderBy? permissionsAggregate,
+    Input_PersonsOrderBy? person,
+    Enum_OrderBy? photoUpdatedAt,
+    Input_UsersPreferencesOrderBy? preferences,
+    Enum_OrderBy? uid,
+  });
+  CopyWith_Input_AuthUsersAdminOnAggregateOrderBy<TRes> get adminOnAggregate;
+  CopyWith_Input_UsersFcmTokensAggregateOrderBy<TRes> get fcmTokensAggregate;
+  CopyWith_Input_HistoryLatestEditsOrderBy<TRes> get lastEdit;
+  CopyWith_Input_AuthUsersPermissionsAggregateOrderBy<TRes>
+  get permissionsAggregate;
+  CopyWith_Input_PersonsOrderBy<TRes> get person;
+  CopyWith_Input_UsersPreferencesOrderBy<TRes> get preferences;
+}
+
+class _CopyWithImpl_Input_AuthUsersDataOrderBy<TRes>
+    implements CopyWith_Input_AuthUsersDataOrderBy<TRes> {
+  _CopyWithImpl_Input_AuthUsersDataOrderBy(this._instance, this._then);
+
+  final Input_AuthUsersDataOrderBy _instance;
+
+  final TRes Function(Input_AuthUsersDataOrderBy) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? adminOnAggregate = _undefined,
+    Object? blurhash = _undefined,
+    Object? currentUserCanManageThisUser = _undefined,
+    Object? email = _undefined,
+    Object? fcmTokensAggregate = _undefined,
+    Object? lastEdit = _undefined,
+    Object? name = _undefined,
+    Object? permissionsAggregate = _undefined,
+    Object? person = _undefined,
+    Object? photoUpdatedAt = _undefined,
+    Object? preferences = _undefined,
+    Object? uid = _undefined,
+  }) => _then(
+    Input_AuthUsersDataOrderBy._({
+      ..._instance._$data,
+      if (adminOnAggregate != _undefined)
+        'adminOnAggregate':
+            (adminOnAggregate as Input_AuthUsersAdminOnAggregateOrderBy?),
+      if (blurhash != _undefined) 'blurhash': (blurhash as Enum_OrderBy?),
+      if (currentUserCanManageThisUser != _undefined)
+        'currentUserCanManageThisUser':
+            (currentUserCanManageThisUser as Enum_OrderBy?),
+      if (email != _undefined) 'email': (email as Enum_OrderBy?),
+      if (fcmTokensAggregate != _undefined)
+        'fcmTokensAggregate':
+            (fcmTokensAggregate as Input_UsersFcmTokensAggregateOrderBy?),
+      if (lastEdit != _undefined)
+        'lastEdit': (lastEdit as Input_HistoryLatestEditsOrderBy?),
+      if (name != _undefined) 'name': (name as Enum_OrderBy?),
+      if (permissionsAggregate != _undefined)
+        'permissionsAggregate':
+            (permissionsAggregate
+                as Input_AuthUsersPermissionsAggregateOrderBy?),
+      if (person != _undefined) 'person': (person as Input_PersonsOrderBy?),
+      if (photoUpdatedAt != _undefined)
+        'photoUpdatedAt': (photoUpdatedAt as Enum_OrderBy?),
+      if (preferences != _undefined)
+        'preferences': (preferences as Input_UsersPreferencesOrderBy?),
+      if (uid != _undefined) 'uid': (uid as Enum_OrderBy?),
+    }),
+  );
+
+  CopyWith_Input_AuthUsersAdminOnAggregateOrderBy<TRes> get adminOnAggregate {
+    final local$adminOnAggregate = _instance.adminOnAggregate;
+    return local$adminOnAggregate == null
+        ? CopyWith_Input_AuthUsersAdminOnAggregateOrderBy.stub(_then(_instance))
+        : CopyWith_Input_AuthUsersAdminOnAggregateOrderBy(
+            local$adminOnAggregate,
+            (e) => call(adminOnAggregate: e),
+          );
+  }
+
+  CopyWith_Input_UsersFcmTokensAggregateOrderBy<TRes> get fcmTokensAggregate {
+    final local$fcmTokensAggregate = _instance.fcmTokensAggregate;
+    return local$fcmTokensAggregate == null
+        ? CopyWith_Input_UsersFcmTokensAggregateOrderBy.stub(_then(_instance))
+        : CopyWith_Input_UsersFcmTokensAggregateOrderBy(
+            local$fcmTokensAggregate,
+            (e) => call(fcmTokensAggregate: e),
+          );
+  }
+
+  CopyWith_Input_HistoryLatestEditsOrderBy<TRes> get lastEdit {
+    final local$lastEdit = _instance.lastEdit;
+    return local$lastEdit == null
+        ? CopyWith_Input_HistoryLatestEditsOrderBy.stub(_then(_instance))
+        : CopyWith_Input_HistoryLatestEditsOrderBy(
+            local$lastEdit,
+            (e) => call(lastEdit: e),
+          );
+  }
+
+  CopyWith_Input_AuthUsersPermissionsAggregateOrderBy<TRes>
+  get permissionsAggregate {
+    final local$permissionsAggregate = _instance.permissionsAggregate;
+    return local$permissionsAggregate == null
+        ? CopyWith_Input_AuthUsersPermissionsAggregateOrderBy.stub(
+            _then(_instance),
+          )
+        : CopyWith_Input_AuthUsersPermissionsAggregateOrderBy(
+            local$permissionsAggregate,
+            (e) => call(permissionsAggregate: e),
+          );
+  }
+
+  CopyWith_Input_PersonsOrderBy<TRes> get person {
+    final local$person = _instance.person;
+    return local$person == null
+        ? CopyWith_Input_PersonsOrderBy.stub(_then(_instance))
+        : CopyWith_Input_PersonsOrderBy(local$person, (e) => call(person: e));
+  }
+
+  CopyWith_Input_UsersPreferencesOrderBy<TRes> get preferences {
+    final local$preferences = _instance.preferences;
+    return local$preferences == null
+        ? CopyWith_Input_UsersPreferencesOrderBy.stub(_then(_instance))
+        : CopyWith_Input_UsersPreferencesOrderBy(
+            local$preferences,
+            (e) => call(preferences: e),
+          );
+  }
+}
+
+class _CopyWithStubImpl_Input_AuthUsersDataOrderBy<TRes>
+    implements CopyWith_Input_AuthUsersDataOrderBy<TRes> {
+  _CopyWithStubImpl_Input_AuthUsersDataOrderBy(this._res);
+
+  TRes _res;
+
+  call({
+    Input_AuthUsersAdminOnAggregateOrderBy? adminOnAggregate,
+    Enum_OrderBy? blurhash,
+    Enum_OrderBy? currentUserCanManageThisUser,
+    Enum_OrderBy? email,
+    Input_UsersFcmTokensAggregateOrderBy? fcmTokensAggregate,
+    Input_HistoryLatestEditsOrderBy? lastEdit,
+    Enum_OrderBy? name,
+    Input_AuthUsersPermissionsAggregateOrderBy? permissionsAggregate,
+    Input_PersonsOrderBy? person,
+    Enum_OrderBy? photoUpdatedAt,
+    Input_UsersPreferencesOrderBy? preferences,
+    Enum_OrderBy? uid,
+  }) => _res;
+
+  CopyWith_Input_AuthUsersAdminOnAggregateOrderBy<TRes> get adminOnAggregate =>
+      CopyWith_Input_AuthUsersAdminOnAggregateOrderBy.stub(_res);
+
+  CopyWith_Input_UsersFcmTokensAggregateOrderBy<TRes> get fcmTokensAggregate =>
+      CopyWith_Input_UsersFcmTokensAggregateOrderBy.stub(_res);
+
+  CopyWith_Input_HistoryLatestEditsOrderBy<TRes> get lastEdit =>
+      CopyWith_Input_HistoryLatestEditsOrderBy.stub(_res);
+
+  CopyWith_Input_AuthUsersPermissionsAggregateOrderBy<TRes>
+  get permissionsAggregate =>
+      CopyWith_Input_AuthUsersPermissionsAggregateOrderBy.stub(_res);
+
+  CopyWith_Input_PersonsOrderBy<TRes> get person =>
+      CopyWith_Input_PersonsOrderBy.stub(_res);
+
+  CopyWith_Input_UsersPreferencesOrderBy<TRes> get preferences =>
+      CopyWith_Input_UsersPreferencesOrderBy.stub(_res);
+}
+
+class Input_AuthUsersDataStreamCursorInput {
+  factory Input_AuthUsersDataStreamCursorInput({
+    required Input_AuthUsersDataStreamCursorValueInput initialValue,
+    Enum_CursorOrdering? ordering,
+  }) => Input_AuthUsersDataStreamCursorInput._({
+    r'initialValue': initialValue,
+    if (ordering != null) r'ordering': ordering,
+  });
+
+  Input_AuthUsersDataStreamCursorInput._(this._$data);
+
+  factory Input_AuthUsersDataStreamCursorInput.fromJson(
+    Map<String, dynamic> data,
+  ) {
+    final result$data = <String, dynamic>{};
+    final l$initialValue = data['initialValue'];
+    result$data['initialValue'] =
+        Input_AuthUsersDataStreamCursorValueInput.fromJson(
+          (l$initialValue as Map<String, dynamic>),
+        );
+    if (data.containsKey('ordering')) {
+      final l$ordering = data['ordering'];
+      result$data['ordering'] = l$ordering == null
+          ? null
+          : fromJson_Enum_CursorOrdering((l$ordering as String));
+    }
+    return Input_AuthUsersDataStreamCursorInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Input_AuthUsersDataStreamCursorValueInput get initialValue =>
+      (_$data['initialValue'] as Input_AuthUsersDataStreamCursorValueInput);
+
+  Enum_CursorOrdering? get ordering =>
+      (_$data['ordering'] as Enum_CursorOrdering?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$initialValue = initialValue;
+    result$data['initialValue'] = l$initialValue.toJson();
+    if (_$data.containsKey('ordering')) {
+      final l$ordering = ordering;
+      result$data['ordering'] = l$ordering == null
+          ? null
+          : toJson_Enum_CursorOrdering(l$ordering);
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_AuthUsersDataStreamCursorInput<
+    Input_AuthUsersDataStreamCursorInput
+  >
+  get copyWith => CopyWith_Input_AuthUsersDataStreamCursorInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_AuthUsersDataStreamCursorInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$initialValue = initialValue;
+    final lOther$initialValue = other.initialValue;
+    if (l$initialValue != lOther$initialValue) {
+      return false;
+    }
+    final l$ordering = ordering;
+    final lOther$ordering = other.ordering;
+    if (_$data.containsKey('ordering') !=
+        other._$data.containsKey('ordering')) {
+      return false;
+    }
+    if (l$ordering != lOther$ordering) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$initialValue = initialValue;
+    final l$ordering = ordering;
+    return Object.hashAll([
+      l$initialValue,
+      _$data.containsKey('ordering') ? l$ordering : const {},
+    ]);
+  }
+}
+
 abstract class CopyWith_Input_AuthUsersDataStreamCursorInput<TRes> {
   factory CopyWith_Input_AuthUsersDataStreamCursorInput(
     Input_AuthUsersDataStreamCursorInput instance,
@@ -2177,356 +2456,6 @@ class Input_BigintComparisonExp {
       return true;
     }
     if (other is! Input_BigintComparisonExp ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$$_eq = $_eq;
-    final lOther$$_eq = other.$_eq;
-    if (_$data.containsKey('_eq') != other._$data.containsKey('_eq')) {
-      return false;
-    }
-    if (l$$_eq != lOther$$_eq) {
-      return false;
-    }
-    final l$$_gt = $_gt;
-    final lOther$$_gt = other.$_gt;
-    if (_$data.containsKey('_gt') != other._$data.containsKey('_gt')) {
-      return false;
-    }
-    if (l$$_gt != lOther$$_gt) {
-      return false;
-    }
-    final l$$_gte = $_gte;
-    final lOther$$_gte = other.$_gte;
-    if (_$data.containsKey('_gte') != other._$data.containsKey('_gte')) {
-      return false;
-    }
-    if (l$$_gte != lOther$$_gte) {
-      return false;
-    }
-    final l$$_in = $_in;
-    final lOther$$_in = other.$_in;
-    if (_$data.containsKey('_in') != other._$data.containsKey('_in')) {
-      return false;
-    }
-    if (l$$_in != null && lOther$$_in != null) {
-      if (l$$_in.length != lOther$$_in.length) {
-        return false;
-      }
-      for (int i = 0; i < l$$_in.length; i++) {
-        final l$$_in$entry = l$$_in[i];
-        final lOther$$_in$entry = lOther$$_in[i];
-        if (l$$_in$entry != lOther$$_in$entry) {
-          return false;
-        }
-      }
-    } else if (l$$_in != lOther$$_in) {
-      return false;
-    }
-    final l$$_isNull = $_isNull;
-    final lOther$$_isNull = other.$_isNull;
-    if (_$data.containsKey('_isNull') != other._$data.containsKey('_isNull')) {
-      return false;
-    }
-    if (l$$_isNull != lOther$$_isNull) {
-      return false;
-    }
-    final l$$_lt = $_lt;
-    final lOther$$_lt = other.$_lt;
-    if (_$data.containsKey('_lt') != other._$data.containsKey('_lt')) {
-      return false;
-    }
-    if (l$$_lt != lOther$$_lt) {
-      return false;
-    }
-    final l$$_lte = $_lte;
-    final lOther$$_lte = other.$_lte;
-    if (_$data.containsKey('_lte') != other._$data.containsKey('_lte')) {
-      return false;
-    }
-    if (l$$_lte != lOther$$_lte) {
-      return false;
-    }
-    final l$$_neq = $_neq;
-    final lOther$$_neq = other.$_neq;
-    if (_$data.containsKey('_neq') != other._$data.containsKey('_neq')) {
-      return false;
-    }
-    if (l$$_neq != lOther$$_neq) {
-      return false;
-    }
-    final l$$_nin = $_nin;
-    final lOther$$_nin = other.$_nin;
-    if (_$data.containsKey('_nin') != other._$data.containsKey('_nin')) {
-      return false;
-    }
-    if (l$$_nin != null && lOther$$_nin != null) {
-      if (l$$_nin.length != lOther$$_nin.length) {
-        return false;
-      }
-      for (int i = 0; i < l$$_nin.length; i++) {
-        final l$$_nin$entry = l$$_nin[i];
-        final lOther$$_nin$entry = lOther$$_nin[i];
-        if (l$$_nin$entry != lOther$$_nin$entry) {
-          return false;
-        }
-      }
-    } else if (l$$_nin != lOther$$_nin) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$$_eq = $_eq;
-    final l$$_gt = $_gt;
-    final l$$_gte = $_gte;
-    final l$$_in = $_in;
-    final l$$_isNull = $_isNull;
-    final l$$_lt = $_lt;
-    final l$$_lte = $_lte;
-    final l$$_neq = $_neq;
-    final l$$_nin = $_nin;
-    return Object.hashAll([
-      _$data.containsKey('_eq') ? l$$_eq : const {},
-      _$data.containsKey('_gt') ? l$$_gt : const {},
-      _$data.containsKey('_gte') ? l$$_gte : const {},
-      _$data.containsKey('_in')
-          ? l$$_in == null
-                ? null
-                : Object.hashAll(l$$_in.map((v) => v))
-          : const {},
-      _$data.containsKey('_isNull') ? l$$_isNull : const {},
-      _$data.containsKey('_lt') ? l$$_lt : const {},
-      _$data.containsKey('_lte') ? l$$_lte : const {},
-      _$data.containsKey('_neq') ? l$$_neq : const {},
-      _$data.containsKey('_nin')
-          ? l$$_nin == null
-                ? null
-                : Object.hashAll(l$$_nin.map((v) => v))
-          : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_BigintComparisonExp<TRes> {
-  factory CopyWith_Input_BigintComparisonExp(
-    Input_BigintComparisonExp instance,
-    TRes Function(Input_BigintComparisonExp) then,
-  ) = _CopyWithImpl_Input_BigintComparisonExp;
-
-  factory CopyWith_Input_BigintComparisonExp.stub(TRes res) =
-      _CopyWithStubImpl_Input_BigintComparisonExp;
-
-  TRes call({
-    int? $_eq,
-    int? $_gt,
-    int? $_gte,
-    List<int>? $_in,
-    bool? $_isNull,
-    int? $_lt,
-    int? $_lte,
-    int? $_neq,
-    List<int>? $_nin,
-  });
-}
-
-class _CopyWithImpl_Input_BigintComparisonExp<TRes>
-    implements CopyWith_Input_BigintComparisonExp<TRes> {
-  _CopyWithImpl_Input_BigintComparisonExp(this._instance, this._then);
-
-  final Input_BigintComparisonExp _instance;
-
-  final TRes Function(Input_BigintComparisonExp) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? $_eq = _undefined,
-    Object? $_gt = _undefined,
-    Object? $_gte = _undefined,
-    Object? $_in = _undefined,
-    Object? $_isNull = _undefined,
-    Object? $_lt = _undefined,
-    Object? $_lte = _undefined,
-    Object? $_neq = _undefined,
-    Object? $_nin = _undefined,
-  }) => _then(
-    Input_BigintComparisonExp._({
-      ..._instance._$data,
-      if ($_eq != _undefined) '_eq': ($_eq as int?),
-      if ($_gt != _undefined) '_gt': ($_gt as int?),
-      if ($_gte != _undefined) '_gte': ($_gte as int?),
-      if ($_in != _undefined) '_in': ($_in as List<int>?),
-      if ($_isNull != _undefined) '_isNull': ($_isNull as bool?),
-      if ($_lt != _undefined) '_lt': ($_lt as int?),
-      if ($_lte != _undefined) '_lte': ($_lte as int?),
-      if ($_neq != _undefined) '_neq': ($_neq as int?),
-      if ($_nin != _undefined) '_nin': ($_nin as List<int>?),
-    }),
-  );
-}
-
-class _CopyWithStubImpl_Input_BigintComparisonExp<TRes>
-    implements CopyWith_Input_BigintComparisonExp<TRes> {
-  _CopyWithStubImpl_Input_BigintComparisonExp(this._res);
-
-  TRes _res;
-
-  call({
-    int? $_eq,
-    int? $_gt,
-    int? $_gte,
-    List<int>? $_in,
-    bool? $_isNull,
-    int? $_lt,
-    int? $_lte,
-    int? $_neq,
-    List<int>? $_nin,
-  }) => _res;
-}
-
-class Input_BooleanComparisonExp {
-  factory Input_BooleanComparisonExp({
-    bool? $_eq,
-    bool? $_gt,
-    bool? $_gte,
-    List<bool>? $_in,
-    bool? $_isNull,
-    bool? $_lt,
-    bool? $_lte,
-    bool? $_neq,
-    List<bool>? $_nin,
-  }) => Input_BooleanComparisonExp._({
-    if ($_eq != null) r'_eq': $_eq,
-    if ($_gt != null) r'_gt': $_gt,
-    if ($_gte != null) r'_gte': $_gte,
-    if ($_in != null) r'_in': $_in,
-    if ($_isNull != null) r'_isNull': $_isNull,
-    if ($_lt != null) r'_lt': $_lt,
-    if ($_lte != null) r'_lte': $_lte,
-    if ($_neq != null) r'_neq': $_neq,
-    if ($_nin != null) r'_nin': $_nin,
-  });
-
-  Input_BooleanComparisonExp._(this._$data);
-
-  factory Input_BooleanComparisonExp.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('_eq')) {
-      final l$$_eq = data['_eq'];
-      result$data['_eq'] = (l$$_eq as bool?);
-    }
-    if (data.containsKey('_gt')) {
-      final l$$_gt = data['_gt'];
-      result$data['_gt'] = (l$$_gt as bool?);
-    }
-    if (data.containsKey('_gte')) {
-      final l$$_gte = data['_gte'];
-      result$data['_gte'] = (l$$_gte as bool?);
-    }
-    if (data.containsKey('_in')) {
-      final l$$_in = data['_in'];
-      result$data['_in'] = (l$$_in as List<dynamic>?)
-          ?.map((e) => (e as bool))
-          .toList();
-    }
-    if (data.containsKey('_isNull')) {
-      final l$$_isNull = data['_isNull'];
-      result$data['_isNull'] = (l$$_isNull as bool?);
-    }
-    if (data.containsKey('_lt')) {
-      final l$$_lt = data['_lt'];
-      result$data['_lt'] = (l$$_lt as bool?);
-    }
-    if (data.containsKey('_lte')) {
-      final l$$_lte = data['_lte'];
-      result$data['_lte'] = (l$$_lte as bool?);
-    }
-    if (data.containsKey('_neq')) {
-      final l$$_neq = data['_neq'];
-      result$data['_neq'] = (l$$_neq as bool?);
-    }
-    if (data.containsKey('_nin')) {
-      final l$$_nin = data['_nin'];
-      result$data['_nin'] = (l$$_nin as List<dynamic>?)
-          ?.map((e) => (e as bool))
-          .toList();
-    }
-    return Input_BooleanComparisonExp._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  bool? get $_eq => (_$data['_eq'] as bool?);
-
-  bool? get $_gt => (_$data['_gt'] as bool?);
-
-  bool? get $_gte => (_$data['_gte'] as bool?);
-
-  List<bool>? get $_in => (_$data['_in'] as List<bool>?);
-
-  bool? get $_isNull => (_$data['_isNull'] as bool?);
-
-  bool? get $_lt => (_$data['_lt'] as bool?);
-
-  bool? get $_lte => (_$data['_lte'] as bool?);
-
-  bool? get $_neq => (_$data['_neq'] as bool?);
-
-  List<bool>? get $_nin => (_$data['_nin'] as List<bool>?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('_eq')) {
-      final l$$_eq = $_eq;
-      result$data['_eq'] = l$$_eq;
-    }
-    if (_$data.containsKey('_gt')) {
-      final l$$_gt = $_gt;
-      result$data['_gt'] = l$$_gt;
-    }
-    if (_$data.containsKey('_gte')) {
-      final l$$_gte = $_gte;
-      result$data['_gte'] = l$$_gte;
-    }
-    if (_$data.containsKey('_in')) {
-      final l$$_in = $_in;
-      result$data['_in'] = l$$_in?.map((e) => e).toList();
-    }
-    if (_$data.containsKey('_isNull')) {
-      final l$$_isNull = $_isNull;
-      result$data['_isNull'] = l$$_isNull;
-    }
-    if (_$data.containsKey('_lt')) {
-      final l$$_lt = $_lt;
-      result$data['_lt'] = l$$_lt;
-    }
-    if (_$data.containsKey('_lte')) {
-      final l$$_lte = $_lte;
-      result$data['_lte'] = l$$_lte;
-    }
-    if (_$data.containsKey('_neq')) {
-      final l$$_neq = $_neq;
-      result$data['_neq'] = l$$_neq;
-    }
-    if (_$data.containsKey('_nin')) {
-      final l$$_nin = $_nin;
-      result$data['_nin'] = l$$_nin?.map((e) => e).toList();
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_BooleanComparisonExp<Input_BooleanComparisonExp>
-  get copyWith => CopyWith_Input_BooleanComparisonExp(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_BooleanComparisonExp ||
         runtimeType != other.runtimeType) {
       return false;
     }

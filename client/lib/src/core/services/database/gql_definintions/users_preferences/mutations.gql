@@ -1,0 +1,13 @@
+mutation updateUserPreferences(
+  $uid: uuid!
+  $set: UsersPreferencesSetInput
+  $append: UsersPreferencesAppendInput
+) {
+  updateUsersPreferencesByPk(
+    pkColumns: { uid: $uid }
+    _set: $set
+    _append: $append
+  ) {
+    ...UserPreferences
+  }
+}

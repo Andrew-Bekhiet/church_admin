@@ -30,19 +30,18 @@ class ViewObjectDetails<T extends ViewableWithIDAndImage>
   static List<OrderBy> getLastOrderByFor({
     required QueryableType type,
     required List<OrderBy> Function() orElse,
+    bool inServiceContext = false,
   }) {
-    final lastOrderBy = UserSettingsService.I.getLastOrderByForType(type);
-    if (lastOrderBy != null) {
-      return lastOrderBy;
-    }
+    final key = OrderByPreferenceKey(
+      type: type,
+      inServiceContext: inServiceContext,
+    );
+
+    final value = UserPreferencesService.I.getLastOrderByFor(key);
+    if (value != null) return value;
 
     final newOrderBy = orElse();
-    unawaited(
-      UserSettingsService.I.setLastOrderByForType(
-        type,
-        newOrderBy,
-      ),
-    );
+    unawaited(UserPreferencesService.I.setLastOrderByFor(key, newOrderBy));
 
     return newOrderBy;
   }
@@ -50,8 +49,15 @@ class ViewObjectDetails<T extends ViewableWithIDAndImage>
   static Future<void> saveLastOrderByFor({
     required QueryableType type,
     required List<OrderBy> orderBy,
+    bool inServiceContext = false,
   }) async {
-    await UserSettingsService.I.setLastOrderByForType(type, orderBy);
+    await UserPreferencesService.I.setLastOrderByFor(
+      OrderByPreferenceKey(
+        type: type,
+        inServiceContext: inServiceContext,
+      ),
+      orderBy,
+    );
   }
 
   final T? object;
