@@ -134,7 +134,7 @@ jobs:
 
       - name: Run new builder
         working-directory: client
-        run: dart run build_runner build --delete-conflicting-outputs
+        run: rm -r lib/src/core/graphql/__generated__/; dart run build_runner build && ./scripts/split_schema_graphql_dart.sh
 
       - name: Decode app production environment
         working-directory: client

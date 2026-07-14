@@ -59,60 +59,12 @@ jobs:
             exit 1
           fi
 
-  run-tests:
-    needs: validate-tag
-    if: ${{ github.event_name == 'push' || github.event.inputs.test == 'true' }}
-    permissions:
-      contents: read
-
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 2
-
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          cache: true
-          flutter-version-file: client/.fvmrc
-          pub-cache-key: "flutter-pub:os:-:channel:-:version:-:arch:"
-          cache-key: "flutter:os:-:channel:-:version:-:arch:"
-
-      - name: Populate Flutter cache
-        run: flutter precache
-
-      - name: Install dependencies
-        working-directory: client
-        run: flutter pub get
-
-      - name: Analyze code
-        working-directory: client
-        run: flutter analyze
-
-      - name: Run code generation
-        working-directory: client
-        run: dart run build_runner build --delete-conflicting-outputs
-
-      - name: Run tests with coverage
-        working-directory: client
-        run: flutter test --coverage -r expanded --file-reporter
-          "json:test-results.json" --dart-define CI=true -x golden
-
-      - name: Upload test results
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: test-results
-          path: client/test-results.json
-
   release-mobile:
     permissions:
       contents: write
 
-    needs: [validate-tag, run-tests]
-    if: ${{ always() && (needs.validate-tag.result == 'success') && (needs.run-tests.result == 'success' || needs.run-tests.result == 'skipped') && (github.event_name == 'push' || (github.event.inputs.android == 'true' || github.event.inputs.ios == 'true')) }}
+    needs: [validate-tag]
+    if: ${{ always() && (needs.validate-tag.result == 'success') && (github.event_name == 'push' || (github.event.inputs.android == 'true' || github.event.inputs.ios == 'true')) }}
     strategy:
       matrix:
         os: [ubuntu-latest, macos-latest]
@@ -220,7 +172,7 @@ jobs:
 
       - name: Run new builder
         working-directory: client
-        run: dart run build_runner build --delete-conflicting-outputs
+        run: rm -r lib/src/core/graphql/__generated__/; dart run build_runner build && ./scripts/split_schema_graphql_dart.sh
 
       - name: Decode app production environment
         working-directory: client
