@@ -145,9 +145,13 @@ class UserPreferencesService extends BlocObserver {
               );
             }
 
+            final scalarValue = identical(_nullQueuedValue, e.value)
+                ? null
+                : e.value;
+
             return (
               orderByPreferences: acc.orderByPreferences,
-              scalarWrites: {...acc.scalarWrites, e.key: e.value},
+              scalarWrites: {...acc.scalarWrites, e.key: scalarValue},
             );
           },
         );
