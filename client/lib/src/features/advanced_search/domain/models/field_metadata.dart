@@ -1,7 +1,7 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:equatable/equatable.dart';
 
-class FieldMetadata<T extends Object> with EquatableMixin {
+class FieldMetadata<T extends Object> with Equatable {
   final Type? _type;
   final Type parentType;
   final String name;
@@ -18,9 +18,9 @@ class FieldMetadata<T extends Object> with EquatableMixin {
     required this.getValue,
     this.isCodeOnly = false,
     this.isOrderable = true,
-    Type? type,
+    this._type,
     this.operators = const {},
-  }) : _type = type;
+  });
 
   static FieldMetadata<Object> fromJson(Json json) {
     if (json.containsKey('parentField') && json.containsKey('targetField')) {

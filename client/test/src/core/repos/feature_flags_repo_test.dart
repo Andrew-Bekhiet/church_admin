@@ -7,7 +7,7 @@ import 'package:package_info_plus/package_info_plus.dart';
 import 'package:pub_semver/pub_semver.dart';
 import 'package:rxdart/rxdart.dart';
 
-import './feature_flags_repo_test.mocks.dart';
+import 'feature_flags_repo_test.mocks.dart';
 
 @GenerateNiceMocks([
   MockSpec<FirebaseRemoteConfig>(),

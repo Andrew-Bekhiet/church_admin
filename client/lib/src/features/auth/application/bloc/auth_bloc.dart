@@ -8,16 +8,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   static AuthBloc get I => globalProviderContainer.read(authBlocProvider);
 
   AuthBloc({
-    required AuthRepository authRepository,
-    required DatabaseService databaseService,
-    required AuthStorage authStorage,
-    required Stream<bool> connectivityStream,
+    required this._authRepository,
+    required this._databaseService,
+    required this._authStorage,
+    required this._connectivityStream,
     bool loadCachedUser = true,
-  }) : _authRepository = authRepository,
-       _databaseService = databaseService,
-       _authStorage = authStorage,
-       _connectivityStream = connectivityStream,
-       super(const AuthInitial()) {
+  }) : super(const AuthInitial()) {
     on<ListenToSubscriptions>(
       _onListenToSubscriptions,
       transformer: (events, mapper) => events

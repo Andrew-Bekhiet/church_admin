@@ -5,7 +5,7 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import './logging_link_test.mocks.dart';
+import 'logging_link_test.mocks.dart';
 
 @GenerateNiceMocks(
   [MockSpec<Request>(), MockSpec<Response>(), MockSpec<LoggingService>()],

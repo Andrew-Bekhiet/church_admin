@@ -4,7 +4,7 @@ import 'package:church_admin/src/core/services/database/gql_definintions/fcm_tok
 import 'package:graphql/client.dart';
 
 class FcmTokensDAO {
-  FcmTokensDAO({required DatabaseService db}) : _db = db;
+  FcmTokensDAO({required this._db});
 
   final DatabaseService _db;
   DBGraphQLClient get graphQLClient => _db.graphQLClient;

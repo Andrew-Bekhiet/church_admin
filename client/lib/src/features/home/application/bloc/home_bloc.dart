@@ -116,14 +116,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   };
 
   HomeBloc({
-    required HomeDailyDataRepository homeDailyDataRepository,
-    required DatabaseService databaseService,
+    required this._homeDailyDataRepository,
+    required this._databaseService,
     required UserPreferencesService userPreferencesService,
     required PageController pageController,
     required Stream<User?> userDataStream,
   }) : _pageController = pageController,
-       _databaseService = databaseService,
-       _homeDailyDataRepository = homeDailyDataRepository,
        _userPreferencesService = userPreferencesService,
        super(
          HomeState(

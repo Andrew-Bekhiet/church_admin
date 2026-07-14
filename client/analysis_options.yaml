@@ -31,7 +31,6 @@ linter:
     # Enabled
     avoid_futureor_void: true
     avoid_init_to_null: true
-    avoid_null_checks_in_equality_operators: true
     close_sinks: true
     library_names: true
     no_literal_bool_comparisons: true

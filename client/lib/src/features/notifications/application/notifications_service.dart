@@ -73,19 +73,16 @@ class NotificationsService extends BlocObserver {
   }
 
   NotificationsService({
-    required FirebaseMessaging firebaseMessaging,
-    required FlutterLocalNotificationsPlugin localNotificationsPlugin,
+    required this._firebaseMessaging,
+    required this._localNotificationsPlugin,
     required Stream<RemoteMessage> onForegroundMessageStream,
     required Stream<RemoteMessage> onMessageOpenedAppStream,
-    required AuthBloc authBloc,
+    required this._authBloc,
     DatabaseService? databaseService,
     NotificationsStorage? storage,
     NotificationsSettingsStorage? settings,
   }) : _storage = storage ?? NotificationsStorage.I,
        _settings = settings ?? NotificationsSettingsStorage.I,
-       _firebaseMessaging = firebaseMessaging,
-       _localNotificationsPlugin = localNotificationsPlugin,
-       _authBloc = authBloc,
        _databaseService = databaseService ?? DatabaseService.I {
     //
     _onForegroundMessageSubscription = onForegroundMessageStream

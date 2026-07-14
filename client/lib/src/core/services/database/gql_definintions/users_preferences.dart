@@ -4,7 +4,7 @@ import 'package:church_admin/src/core/services/database/gql_definintions/users_p
 import 'package:graphql/client.dart';
 
 class UserPreferencesDAO {
-  UserPreferencesDAO({required DatabaseService db}) : _db = db;
+  UserPreferencesDAO({required this._db});
 
   final DatabaseService _db;
   DBGraphQLClient get graphQLClient => _db.graphQLClient;

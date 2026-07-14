@@ -1,7 +1,7 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:equatable/equatable.dart';
 
-sealed class DataExportState with EquatableMixin {
+sealed class DataExportState with Equatable {
   const DataExportState();
 
   @override

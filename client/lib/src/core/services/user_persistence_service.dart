@@ -17,12 +17,11 @@ class UserPersistenceService {
   late final StreamSubscription<bool> _connectivitySubscription;
 
   UserPersistenceService({
-    required FirebaseDatabase firebaseDatabase,
+    required this._firebaseDatabase,
     ConnectivityService? connectivityService,
     AuthBloc? auth,
   }) : _connectivity = connectivityService ?? ConnectivityService.I,
-       _auth = auth ?? AuthBloc.I,
-       _firebaseDatabase = firebaseDatabase {
+       _auth = auth ?? AuthBloc.I {
     _connectivitySubscription = _connectivity.connectivityStream.listen(
       _onConnectivityChanged,
     );

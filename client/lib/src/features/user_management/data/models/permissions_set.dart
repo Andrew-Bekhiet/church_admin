@@ -4,7 +4,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 
-class PermissionsSet extends DelegatingSet<UserPermission> with EquatableMixin {
+class PermissionsSet extends DelegatingSet<UserPermission> with Equatable {
   Set<UserPermission> get permissions => this;
 
   const PermissionsSet.empty() : super(const {});

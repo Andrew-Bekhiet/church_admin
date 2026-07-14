@@ -3,7 +3,7 @@ import 'package:meta/meta.dart';
 import 'package:universal_io/universal_io.dart';
 
 @immutable
-class DataExportFile with EquatableMixin {
+class DataExportFile with Equatable {
   final String path;
   final DateTime lastModified;
 

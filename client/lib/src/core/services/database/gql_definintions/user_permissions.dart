@@ -5,7 +5,7 @@ import 'package:church_admin/src/core/services/database/gql_definintions/user_pe
 import 'package:graphql/client.dart';
 
 class UserPermissionsDAO {
-  UserPermissionsDAO({required DatabaseService db}) : _db = db;
+  UserPermissionsDAO({required this._db});
 
   final DatabaseService _db;
   DBGraphQLClient get graphQLClient => _db.graphQLClient;

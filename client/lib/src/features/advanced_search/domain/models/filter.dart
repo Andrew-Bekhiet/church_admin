@@ -3,7 +3,7 @@ import 'package:collection/collection.dart';
 import 'package:equatable/equatable.dart';
 
 /// Represents a filter condition for advanced search queries
-class Filter<T extends Object> with EquatableMixin {
+class Filter<T extends Object> with Equatable {
   static const _undefined = Object();
 
   final FieldMetadata<T> field;

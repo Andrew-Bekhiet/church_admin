@@ -10,7 +10,7 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:riverpod/src/framework.dart';
 
-import './view_object_details_test.mocks.dart';
+import 'view_object_details_test.mocks.dart';
 
 @GenerateNiceMocks(
   [

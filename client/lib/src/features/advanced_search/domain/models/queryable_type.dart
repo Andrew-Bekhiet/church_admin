@@ -1,7 +1,7 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:equatable/equatable.dart';
 
-class QueryableType<T extends Object> with EquatableMixin {
+class QueryableType<T extends Object> with Equatable {
   final String name;
   final String label;
   final Map<String, FieldMetadata> fieldsMetadataByName;

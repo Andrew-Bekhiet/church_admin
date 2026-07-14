@@ -10,7 +10,7 @@ class FunctionsService {
 
   final Dio _dio;
 
-  FunctionsService({required Dio dio}) : _dio = dio;
+  FunctionsService({required this._dio});
 
   final _pendingDownloadUrls = <int, Future<String>>{};
 

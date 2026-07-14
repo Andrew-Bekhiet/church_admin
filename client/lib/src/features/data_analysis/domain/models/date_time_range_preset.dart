@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
-sealed class DateTimeRangePreset with EquatableMixin {
+sealed class DateTimeRangePreset with Equatable {
   Duration get duration;
 
   DateTimeRange get range;

@@ -31,12 +31,11 @@ class LocalAuthService with WidgetsBindingObserver {
     ..add(null);
 
   LocalAuthService({
-    required LocalAuthentication localAuthPlugin,
+    required this._localAuthPlugin,
     CurrentPlatformService? currentPlatformService,
     NotificationsService? notificationService,
     this.timeToReauth = const Duration(seconds: 30),
-  }) : _localAuthPlugin = localAuthPlugin,
-       _notificationsService = notificationService ?? NotificationsService.I,
+  }) : _notificationsService = notificationService ?? NotificationsService.I,
        _currentPlatformService =
            currentPlatformService ?? CurrentPlatformService.I {
     scheduleReauth();
@@ -47,12 +46,11 @@ class LocalAuthService with WidgetsBindingObserver {
   }
 
   LocalAuthService.noInitialAuth({
-    required LocalAuthentication localAuthPlugin,
+    required this._localAuthPlugin,
     CurrentPlatformService? currentPlatformService,
     NotificationsService? notificationService,
     this.timeToReauth = const Duration(seconds: 30),
-  }) : _localAuthPlugin = localAuthPlugin,
-       _notificationsService = notificationService ?? NotificationsService.I,
+  }) : _notificationsService = notificationService ?? NotificationsService.I,
        _currentPlatformService =
            currentPlatformService ?? CurrentPlatformService.I {
     didChangeAppLifecycleState(

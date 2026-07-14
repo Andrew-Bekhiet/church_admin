@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
 @immutable
-class PaginatableStreamData<T> with EquatableMixin {
+class PaginatableStreamData<T> with Equatable {
   final List<T> items;
   final T? cursor;
   final int? totalCount;

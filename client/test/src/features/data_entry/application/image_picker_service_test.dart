@@ -14,7 +14,7 @@ import 'package:mockito/mockito.dart';
 import 'package:permission_handler_platform_interface/permission_handler_platform_interface.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
-import './image_picker_service_test.mocks.dart';
+import 'image_picker_service_test.mocks.dart';
 
 @GenerateNiceMocks([
   MockSpec<PermissionHandlerPlatform>(

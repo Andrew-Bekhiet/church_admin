@@ -1,6 +1,6 @@
 part of 'spatial.dart';
 
-class Line with EquatableMixin implements Spatial {
+class Line with Equatable implements Spatial {
   final List<Point> coordinates;
 
   const Line(this.coordinates);

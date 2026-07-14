@@ -1,6 +1,6 @@
 part of 'spatial.dart';
 
-class Point with EquatableMixin implements Spatial {
+class Point with Equatable implements Spatial {
   final double latitude;
   final double longitude;
 

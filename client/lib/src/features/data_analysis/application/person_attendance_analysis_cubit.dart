@@ -12,13 +12,11 @@ class PersonAttendanceAnalysisCubit
   final bool? _asServant;
 
   PersonAttendanceAnalysisCubit({
-    required String personId,
+    required this._personId,
     required PersonAnalysisOptions options,
-    bool? asServant,
+    this._asServant,
     MeetingsDAO? dao,
   }) : _dao = dao ?? DatabaseService.I.meetings,
-       _personId = personId,
-       _asServant = asServant,
        super(const PersonAttendanceAnalysisLoading()) {
     unawaited(load(options));
   }

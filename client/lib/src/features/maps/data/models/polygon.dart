@@ -1,6 +1,6 @@
 part of 'spatial.dart';
 
-class Polygon with EquatableMixin implements Spatial {
+class Polygon with Equatable implements Spatial {
   final List<Point> coordinates;
 
   const Polygon(this.coordinates);
