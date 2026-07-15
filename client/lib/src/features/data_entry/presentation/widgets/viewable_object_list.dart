@@ -3,6 +3,7 @@ import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 enum ViewableObjectListType {
@@ -137,6 +138,7 @@ class _ViewableObjectListState<T extends Viewable>
         if (widget.type == ViewableObjectListType.grid ||
             widget.type == ViewableObjectListType.grid3) {
           return GridView.builder(
+            scrollCacheExtent: const ScrollCacheExtent.pixels(250),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: widget.type.columns,
               crossAxisSpacing: 4,
@@ -145,16 +147,15 @@ class _ViewableObjectListState<T extends Viewable>
             padding: const EdgeInsets.all(2),
             controller: _scrollController,
             itemBuilder: itemBuilder,
-            cacheExtent: 250,
             itemCount: items.length + (items.length % 2) + 2,
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           );
         } else {
           return ListView.builder(
+            scrollCacheExtent: const ScrollCacheExtent.pixels(250),
             padding: const EdgeInsets.all(2),
             controller: _scrollController,
             itemBuilder: itemBuilder,
-            cacheExtent: 250,
             itemCount: items.length + 2,
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             prototypeItem: !widget.itemsExpandable

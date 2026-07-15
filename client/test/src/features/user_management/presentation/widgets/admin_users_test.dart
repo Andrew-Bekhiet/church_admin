@@ -86,6 +86,8 @@ void _setUp() {
 }
 
 Override _setUpViewableObjectService() {
+  provideDummy<IconData>(Symbols.person);
+
   final viewableObjectService = MockViewableObjectService();
 
   when(

@@ -65,7 +65,7 @@ ViewableObjectListController<BasicViewable> _createTestUnit(
   );
 }
 
-class BasicViewable extends ViewableWithID with EquatableMixin {
+class BasicViewable extends ViewableWithID with Equatable {
   BasicViewable({
     required this.id,
     required this.name,

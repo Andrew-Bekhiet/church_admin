@@ -1,7 +1,7 @@
 import 'package:dart_firebase_admin/firestore.dart';
 import 'package:equatable/equatable.dart';
 
-class IdReference with EquatableMixin {
+class IdReference with Equatable {
   static final Map<String, IdReference> _instances = {};
 
   final String id;

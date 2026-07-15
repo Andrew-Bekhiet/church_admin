@@ -10,8 +10,7 @@ interface class AuthStorage {
   static const String userKey = 'user';
   static const String passwordHashKey = 'passwordHash';
 
-  AuthStorage({required FlutterSecureStorage secureStorage})
-    : _secureStorage = secureStorage;
+  AuthStorage({required this._secureStorage});
 
   final FlutterSecureStorage _secureStorage;
 

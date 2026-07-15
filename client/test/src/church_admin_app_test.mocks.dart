@@ -509,6 +509,15 @@ class MockAuthBloc extends _i1.Mock implements _i5.AuthBloc {
           as _i9.Future<void>);
 
   @override
+  bool get isClosed =>
+      (super.noSuchMethod(
+            Invocation.getter(#isClosed),
+            returnValue: false,
+            returnValueForMissingStub: false,
+          )
+          as bool);
+
+  @override
   _i5.AuthState get state =>
       (super.noSuchMethod(
             Invocation.getter(#state),
@@ -531,15 +540,6 @@ class MockAuthBloc extends _i1.Mock implements _i5.AuthBloc {
             returnValueForMissingStub: _i9.Stream<_i5.AuthState>.empty(),
           )
           as _i9.Stream<_i5.AuthState>);
-
-  @override
-  bool get isClosed =>
-      (super.noSuchMethod(
-            Invocation.getter(#isClosed),
-            returnValue: false,
-            returnValueForMissingStub: false,
-          )
-          as bool);
 
   @override
   _i9.Future<void> close() =>
@@ -2500,6 +2500,15 @@ class MockNotificationsService extends _i1.Mock
 /// See the documentation for Mockito's code generation for more information.
 class MockHomeBloc extends _i1.Mock implements _i5.HomeBloc {
   @override
+  bool get isClosed =>
+      (super.noSuchMethod(
+            Invocation.getter(#isClosed),
+            returnValue: false,
+            returnValueForMissingStub: false,
+          )
+          as bool);
+
+  @override
   _i5.HomeState get state =>
       (super.noSuchMethod(
             Invocation.getter(#state),
@@ -2522,15 +2531,6 @@ class MockHomeBloc extends _i1.Mock implements _i5.HomeBloc {
             returnValueForMissingStub: _i9.Stream<_i5.HomeState>.empty(),
           )
           as _i9.Stream<_i5.HomeState>);
-
-  @override
-  bool get isClosed =>
-      (super.noSuchMethod(
-            Invocation.getter(#isClosed),
-            returnValue: false,
-            returnValueForMissingStub: false,
-          )
-          as bool);
 
   @override
   _i9.Future<void> close() =>

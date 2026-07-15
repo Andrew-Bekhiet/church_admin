@@ -10,7 +10,7 @@ import 'package:dart_firebase_admin/dart_firebase_admin.dart';
 import 'package:dart_firebase_admin/firestore.dart';
 import 'package:equatable/equatable.dart';
 
-class MeetingHelperContext with EquatableMixin {
+class MeetingHelperContext with Equatable {
   static FirebaseAdminApp? _deserializationApp;
 
   final FirebaseAdminApp app;

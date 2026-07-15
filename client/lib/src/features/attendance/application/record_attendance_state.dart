@@ -1,7 +1,7 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:equatable/equatable.dart';
 
-sealed class RecordAttendanceState with EquatableMixin {
+sealed class RecordAttendanceState with Equatable {
   const RecordAttendanceState();
 
   @override

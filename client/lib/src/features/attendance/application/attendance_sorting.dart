@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
 @immutable
-sealed class AttendanceSorting with EquatableMixin {
+sealed class AttendanceSorting with Equatable {
   final SortingDirection direction;
 
   AttendanceSorting get then => const _AttendanceSortingById();

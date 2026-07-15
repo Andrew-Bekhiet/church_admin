@@ -24,10 +24,9 @@ class FeatureFlagsRepository {
   final PackageInfo _packageInfo;
 
   FeatureFlagsRepository({
-    required FirebaseRemoteConfig remoteConfig,
-    required PackageInfo packageInfo,
-  }) : _packageInfo = packageInfo,
-       _remoteConfig = remoteConfig;
+    required this._remoteConfig,
+    required this._packageInfo,
+  });
 
   Version get latestVersion =>
       Version.parse(_remoteConfig.getString(latestVersionKey));

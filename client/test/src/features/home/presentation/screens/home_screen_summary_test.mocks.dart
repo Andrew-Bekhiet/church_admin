@@ -31,6 +31,15 @@ import 'package:package_info_plus/package_info_plus.dart' as _i6;
 /// See the documentation for Mockito's code generation for more information.
 class MockHomeBloc extends _i1.Mock implements _i2.HomeBloc {
   @override
+  bool get isClosed =>
+      (super.noSuchMethod(
+            Invocation.getter(#isClosed),
+            returnValue: false,
+            returnValueForMissingStub: false,
+          )
+          as bool);
+
+  @override
   _i2.HomeState get state =>
       (super.noSuchMethod(
             Invocation.getter(#state),
@@ -53,15 +62,6 @@ class MockHomeBloc extends _i1.Mock implements _i2.HomeBloc {
             returnValueForMissingStub: _i4.Stream<_i2.HomeState>.empty(),
           )
           as _i4.Stream<_i2.HomeState>);
-
-  @override
-  bool get isClosed =>
-      (super.noSuchMethod(
-            Invocation.getter(#isClosed),
-            returnValue: false,
-            returnValueForMissingStub: false,
-          )
-          as bool);
 
   @override
   _i4.Future<void> close() =>

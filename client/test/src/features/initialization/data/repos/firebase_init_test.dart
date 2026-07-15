@@ -40,6 +40,7 @@ void main() {
           webProvider: anyNamed('webProvider'),
           providerAndroid: anyNamed('providerAndroid'),
           providerApple: anyNamed('providerApple'),
+          providerWindows: anyNamed('providerWindows'),
           // ignore: deprecated_member_use needed to detect real calls
           androidProvider: anyNamed('androidProvider'),
           // ignore: deprecated_member_use needed to detect real calls
@@ -80,6 +81,7 @@ void _setUpMockFirebaseAppCheck() {
       webProvider: anyNamed('webProvider'),
       providerAndroid: anyNamed('providerAndroid'),
       providerApple: anyNamed('providerApple'),
+      providerWindows: anyNamed('providerWindows'),
       androidProvider: anyNamed('androidProvider'),
       appleProvider: anyNamed('appleProvider'),
     ),

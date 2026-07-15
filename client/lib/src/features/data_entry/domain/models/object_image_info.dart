@@ -1,7 +1,7 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:equatable/equatable.dart';
 
-abstract class ObjectImageInfo with EquatableMixin {
+abstract class ObjectImageInfo with Equatable {
   const ObjectImageInfo();
 
   String get cacheKey;

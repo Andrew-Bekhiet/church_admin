@@ -70,11 +70,9 @@ class UserPreferencesService extends BlocObserver {
 
   UserPreferencesService({
     required SyncKVStore box,
-    required DatabaseService databaseService,
-    required AuthBloc authBloc,
-  }) : _authBloc = authBloc,
-       _databaseService = databaseService,
-       _pendingWritesBox = box;
+    required this._databaseService,
+    required this._authBloc,
+  }) : _pendingWritesBox = box;
 
   List<OrderBy>? getLastOrderByFor(OrderByPreferenceKey key) {
     final storageKey = key.storageKey;

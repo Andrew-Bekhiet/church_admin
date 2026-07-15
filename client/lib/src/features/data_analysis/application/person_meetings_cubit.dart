@@ -10,12 +10,10 @@ class PersonMeetingsCubit extends Cubit<PersonMeetingsState> {
   final bool? _asServant;
 
   PersonMeetingsCubit({
-    required String personId,
-    bool? asServant,
+    required this._personId,
+    this._asServant,
     MeetingsDAO? dao,
   }) : _dao = dao ?? DatabaseService.I.meetings,
-       _personId = personId,
-       _asServant = asServant,
        super(const PersonMeetingsLoading()) {
     unawaited(load());
   }

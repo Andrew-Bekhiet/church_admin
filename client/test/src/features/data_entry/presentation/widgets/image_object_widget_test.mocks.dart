@@ -70,18 +70,13 @@ class _FakeGlobalKey_5<T extends _i6.State<_i6.StatefulWidget>>
     : super(parent, parentInvocation);
 }
 
-class _FakeIconData_6 extends _i1.SmartFake implements _i6.IconData {
-  _FakeIconData_6(Object parent, Invocation parentInvocation)
+class _FakeFile_6 extends _i1.SmartFake implements _i8.File {
+  _FakeFile_6(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeFile_7 extends _i1.SmartFake implements _i8.File {
-  _FakeFile_7(Object parent, Invocation parentInvocation)
-    : super(parent, parentInvocation);
-}
-
-class _FakeFileInfo_8 extends _i1.SmartFake implements _i3.FileInfo {
-  _FakeFileInfo_8(Object parent, Invocation parentInvocation)
+class _FakeFileInfo_7 extends _i1.SmartFake implements _i3.FileInfo {
+  _FakeFileInfo_7(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
@@ -255,11 +250,11 @@ class MockViewableObjectService extends _i1.Mock
   _i6.IconData getDefaultIconFor<T extends _i2.IImage>([T? imageObject]) =>
       (super.noSuchMethod(
             Invocation.method(#getDefaultIconFor, [imageObject]),
-            returnValue: _FakeIconData_6(
+            returnValue: _i10.dummyValue<_i6.IconData>(
               this,
               Invocation.method(#getDefaultIconFor, [imageObject]),
             ),
-            returnValueForMissingStub: _FakeIconData_6(
+            returnValueForMissingStub: _i10.dummyValue<_i6.IconData>(
               this,
               Invocation.method(#getDefaultIconFor, [imageObject]),
             ),
@@ -284,7 +279,7 @@ class MockBaseCacheManager extends _i1.Mock implements _i3.BaseCacheManager {
               {#key: key, #headers: headers},
             ),
             returnValue: _i9.Future<_i8.File>.value(
-              _FakeFile_7(
+              _FakeFile_6(
                 this,
                 Invocation.method(
                   #getSingleFile,
@@ -294,7 +289,7 @@ class MockBaseCacheManager extends _i1.Mock implements _i3.BaseCacheManager {
               ),
             ),
             returnValueForMissingStub: _i9.Future<_i8.File>.value(
-              _FakeFile_7(
+              _FakeFile_6(
                 this,
                 Invocation.method(
                   #getSingleFile,
@@ -351,7 +346,7 @@ class MockBaseCacheManager extends _i1.Mock implements _i3.BaseCacheManager {
               {#key: key, #authHeaders: authHeaders, #force: force},
             ),
             returnValue: _i9.Future<_i3.FileInfo>.value(
-              _FakeFileInfo_8(
+              _FakeFileInfo_7(
                 this,
                 Invocation.method(
                   #downloadFile,
@@ -361,7 +356,7 @@ class MockBaseCacheManager extends _i1.Mock implements _i3.BaseCacheManager {
               ),
             ),
             returnValueForMissingStub: _i9.Future<_i3.FileInfo>.value(
-              _FakeFileInfo_8(
+              _FakeFileInfo_7(
                 this,
                 Invocation.method(
                   #downloadFile,
@@ -419,7 +414,7 @@ class MockBaseCacheManager extends _i1.Mock implements _i3.BaseCacheManager {
               },
             ),
             returnValue: _i9.Future<_i8.File>.value(
-              _FakeFile_7(
+              _FakeFile_6(
                 this,
                 Invocation.method(
                   #putFile,
@@ -434,7 +429,7 @@ class MockBaseCacheManager extends _i1.Mock implements _i3.BaseCacheManager {
               ),
             ),
             returnValueForMissingStub: _i9.Future<_i8.File>.value(
-              _FakeFile_7(
+              _FakeFile_6(
                 this,
                 Invocation.method(
                   #putFile,
@@ -472,7 +467,7 @@ class MockBaseCacheManager extends _i1.Mock implements _i3.BaseCacheManager {
               },
             ),
             returnValue: _i9.Future<_i8.File>.value(
-              _FakeFile_7(
+              _FakeFile_6(
                 this,
                 Invocation.method(
                   #putFileStream,
@@ -487,7 +482,7 @@ class MockBaseCacheManager extends _i1.Mock implements _i3.BaseCacheManager {
               ),
             ),
             returnValueForMissingStub: _i9.Future<_i8.File>.value(
-              _FakeFile_7(
+              _FakeFile_6(
                 this,
                 Invocation.method(
                   #putFileStream,

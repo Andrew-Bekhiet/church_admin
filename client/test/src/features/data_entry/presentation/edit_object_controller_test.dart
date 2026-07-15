@@ -10,7 +10,7 @@ import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import './edit_object_controller_test.mocks.dart';
+import 'edit_object_controller_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<FunctionsService>(), MockSpec<LoggingService>()])
 void main() {

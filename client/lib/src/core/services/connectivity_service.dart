@@ -10,14 +10,12 @@ class ConnectivityService {
       globalProviderContainer.read(connectivityServiceProvider);
 
   ConnectivityService({
-    required Connectivity connectivityPlugin,
-    required Dio dio,
+    required this._connectivityPlugin,
+    required this._dio,
     SecretsService? secretsService,
     LoggingService? loggingService,
     String? urlToPing,
   }) : assert((secretsService == null) != (urlToPing == null)),
-       _connectivityPlugin = connectivityPlugin,
-       _dio = dio,
        _loggingService = loggingService ?? LoggingService.I,
        urlToPing =
            urlToPing ??

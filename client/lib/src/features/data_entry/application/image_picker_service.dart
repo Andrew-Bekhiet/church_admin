@@ -16,10 +16,9 @@ class ImagePickerService {
   static const deleteImage = _DeleteImage();
 
   ImagePickerService({
-    required ImagePicker imagePicker,
-    required ImageCropper imageCropper,
-  }) : _imagePicker = imagePicker,
-       _imageCropper = imageCropper;
+    required this._imagePicker,
+    required this._imageCropper,
+  });
 
   final ImagePicker _imagePicker;
   final ImageCropper _imageCropper;

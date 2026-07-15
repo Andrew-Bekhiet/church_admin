@@ -23,10 +23,9 @@ class ExportOperationsStorage {
   final FileSystem _fileSystem;
 
   const ExportOperationsStorage({
-    required Dio dioClient,
-    required FileSystem fileSystem,
-  }) : _dioClient = dioClient,
-       _fileSystem = fileSystem;
+    required this._dioClient,
+    required this._fileSystem,
+  });
 
   Future<DataExportFile> saveFile({
     required String downloadUrl,

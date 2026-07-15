@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import './notifications_settings_storage_test.mocks.dart';
+import 'notifications_settings_storage_test.mocks.dart';
 
 @GenerateNiceMocks([
   MockSpec<SyncKVStore>(),

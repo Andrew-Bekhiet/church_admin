@@ -298,7 +298,14 @@ void _setUp() {
 Override _setUpCacheManager() {
   final mockBaseCacheManager = MockBaseCacheManager();
 
-  when(mockBaseCacheManager.getFileStream(any)).thenAnswer((i) async* {
+  when(
+    mockBaseCacheManager.getFileStream(
+      any,
+      key: anyNamed('key'),
+      headers: anyNamed('headers'),
+      withProgress: anyNamed('withProgress'),
+    ),
+  ).thenAnswer((i) async* {
     final url = i.positionalArguments.first;
     final length = transparentImage.length;
 
@@ -333,6 +340,8 @@ Override _setUpImageUrlCacheService() {
 }
 
 Override _setUpViewableObjectService() {
+  provideDummy<IconData>(Symbols.person);
+
   final viewableObjectService = MockViewableObjectService();
 
   when(

@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:meta/meta.dart';
 
 @immutable
-class PaginatableStreamRequest<T, P> with EquatableMixin {
+class PaginatableStreamRequest<T, P> with Equatable {
   final T? cursor;
   final P? param;
   final int pageIndex;

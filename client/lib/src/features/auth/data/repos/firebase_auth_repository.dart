@@ -33,8 +33,7 @@ class FirebaseAuthRepository implements AuthRepository {
     );
   }
 
-  FirebaseAuthRepository({required firebase_auth.FirebaseAuth auth})
-    : _auth = auth;
+  FirebaseAuthRepository({required this._auth});
 
   final firebase_auth.FirebaseAuth _auth;
   // On web, verify phone number must receive the same instance of MultiFactorSession

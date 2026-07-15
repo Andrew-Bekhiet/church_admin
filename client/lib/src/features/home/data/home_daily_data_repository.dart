@@ -36,18 +36,13 @@ class HomeDailyDataRepository {
   final AdvancedQueryParser _advancedQueryParser;
 
   const HomeDailyDataRepository({
-    required List<List<String>> sneksarData,
-    required List<String> sayingData,
-    required SyncKVStore<Map> currentIndexes,
-    required List<String> versesData,
-    required AdvancedQueryParser advancedQueryParser,
+    required this._sneksarData,
+    required this._sayingData,
+    required this._currentIndexes,
+    required this._versesData,
+    required this._advancedQueryParser,
     Clock? clock,
-  }) : _sneksarData = sneksarData,
-       _versesData = versesData,
-       _sayingData = sayingData,
-       _currentIndexes = currentIndexes,
-       _clock = clock ?? const Clock(),
-       _advancedQueryParser = advancedQueryParser;
+  }) : _clock = clock ?? const Clock();
 
   Future<List<String>> getTodaysBirthdaysData() async {
     final birthdaysQuery = getTodaysBirthdaysQuery();

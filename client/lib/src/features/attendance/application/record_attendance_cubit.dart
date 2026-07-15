@@ -61,7 +61,7 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
       _recordAttendanceRights.canToggleAudience;
 
   RecordAttendanceCubit({
-    required Meeting meeting,
+    required this._meeting,
     DateTime? initialDate,
     MeetingsDAO? dao,
     AuthBloc? authBloc,
@@ -69,7 +69,6 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
   }) : _dao = dao ?? DatabaseService.I.meetings,
        _authBloc = authBloc ?? AuthBloc.I,
        _presenter = presenter ?? const ScaffoldAttendanceUndoPresenter(),
-       _meeting = meeting,
        _selectedDate = DateUtils.dateOnly(initialDate ?? DateTime.now()),
        super(const RecordAttendanceLoading()) {
     _forceSwitchMeeting(_meeting);

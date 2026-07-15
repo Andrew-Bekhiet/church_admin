@@ -210,7 +210,7 @@ class FirebaseAuthPlatform_ extends _i1.Mock
 
   @override
   _i4.FirebaseAuthPlatform setInitialValues({
-    _i4.PigeonUserDetails? currentUser,
+    _i4.InternalUserDetails? currentUser,
     String? languageCode,
   }) =>
       (super.noSuchMethod(
@@ -234,6 +234,15 @@ class FirebaseAuthPlatform_ extends _i1.Mock
             ),
           )
           as _i4.FirebaseAuthPlatform);
+
+  @override
+  _i8.Future<void> dispose() =>
+      (super.noSuchMethod(
+            Invocation.method(#dispose, []),
+            returnValue: _i8.Future<void>.value(),
+            returnValueForMissingStub: _i8.Future<void>.value(),
+          )
+          as _i8.Future<void>);
 
   @override
   void sendAuthChangesEvent(String? appName, _i4.UserPlatform? userPlatform) =>
@@ -729,6 +738,15 @@ class FirebaseAuthPlatform_ extends _i1.Mock
           as _i8.Future<void>);
 
   @override
+  _i8.Future<void> revokeAccessToken(String? accessToken) =>
+      (super.noSuchMethod(
+            Invocation.method(#revokeAccessToken, [accessToken]),
+            returnValue: _i8.Future<void>.value(),
+            returnValueForMissingStub: _i8.Future<void>.value(),
+          )
+          as _i8.Future<void>);
+
+  @override
   _i8.Future<void> initializeRecaptchaConfig() =>
       (super.noSuchMethod(
             Invocation.method(#initializeRecaptchaConfig, []),
@@ -842,6 +860,7 @@ class FirebaseAppCheckPlatform_ extends _i1.Mock
     _i5.AppleProvider? appleProvider,
     _i5.AndroidAppCheckProvider? providerAndroid,
     _i5.AppleAppCheckProvider? providerApple,
+    _i5.WindowsAppCheckProvider? providerWindows,
   }) =>
       (super.noSuchMethod(
             Invocation.method(#activate, [], {
@@ -850,6 +869,7 @@ class FirebaseAppCheckPlatform_ extends _i1.Mock
               #appleProvider: appleProvider,
               #providerAndroid: providerAndroid,
               #providerApple: providerApple,
+              #providerWindows: providerWindows,
             }),
             returnValue: _i8.Future<void>.value(),
             returnValueForMissingStub: _i8.Future<void>.value(),
@@ -926,6 +946,15 @@ class FirebaseAppCheckPlatform_ extends _i1.Mock
             ),
           )
           as _i5.FirebaseAppCheckPlatform);
+
+  @override
+  _i8.Future<void> dispose() =>
+      (super.noSuchMethod(
+            Invocation.method(#dispose, []),
+            returnValue: _i8.Future<void>.value(),
+            returnValueForMissingStub: _i8.Future<void>.value(),
+          )
+          as _i8.Future<void>);
 }
 
 /// A class which mocks [FirebaseMessagingPlatform].
@@ -1035,9 +1064,15 @@ class FirebaseMessagingPlatform_ extends _i1.Mock
           as _i8.Future<String?>);
 
   @override
-  _i8.Future<String?> getToken({String? vapidKey}) =>
+  _i8.Future<String?> getToken({
+    String? vapidKey,
+    String? serviceWorkerScriptPath,
+  }) =>
       (super.noSuchMethod(
-            Invocation.method(#getToken, [], {#vapidKey: vapidKey}),
+            Invocation.method(#getToken, [], {
+              #vapidKey: vapidKey,
+              #serviceWorkerScriptPath: serviceWorkerScriptPath,
+            }),
             returnValue: _i8.Future<String?>.value(),
             returnValueForMissingStub: _i8.Future<String?>.value(),
           )

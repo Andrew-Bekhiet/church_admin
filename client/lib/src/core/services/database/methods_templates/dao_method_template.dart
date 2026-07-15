@@ -12,10 +12,10 @@ abstract class DAOMethodTemplate<TParsed> {
 
   const DAOMethodTemplate({
     required this.document,
-    String? operationName,
+    this._operationName,
     this.variables,
     this.parserFn,
-  }) : _operationName = operationName;
+  });
 
   String get effectiveOperationName =>
       _operationName ??

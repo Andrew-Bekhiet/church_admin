@@ -332,10 +332,9 @@ class ThemingService with WidgetsBindingObserver {
   );
 
   ThemingService.withInitialThemeata({
-    required UserPreferencesService userPreferencesService,
+    required this._userPreferencesService,
     required ThemeData initialTheme,
-  }) : _userPreferencesService = userPreferencesService,
-       _themeData = BehaviorSubject.seeded(initialTheme) {
+  }) : _themeData = BehaviorSubject.seeded(initialTheme) {
     WidgetsBinding.instance.addObserver(this);
   }
 

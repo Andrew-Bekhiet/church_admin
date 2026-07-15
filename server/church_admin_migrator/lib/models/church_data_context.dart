@@ -12,7 +12,7 @@ import 'church_data/models/mini_models.dart';
 import 'church_data/models/person.dart';
 import 'church_data/models/street.dart';
 
-class ChurchDataContext with EquatableMixin {
+class ChurchDataContext with Equatable {
   static FirebaseAdminApp? _deserializationApp;
 
   final FirebaseAdminApp app;
