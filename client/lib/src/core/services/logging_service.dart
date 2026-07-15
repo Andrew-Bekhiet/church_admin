@@ -169,7 +169,7 @@ class LoggingService extends BlocObserver {
         LoggingLevel.fine || LoggingLevel.config => Sentry.logger.debug,
       };
 
-      await logFn(
+      logFn(
         message,
         attributes: record.data?.map(
           (key, value) => MapEntry(
@@ -220,7 +220,10 @@ class LoggingService extends BlocObserver {
   }
 
   Future<void> _configureScopeWithUserPreferences(Scope scope) async {
-    await scope.setContexts('UserPreferences', UserPreferencesService.I.toJson());
+    await scope.setContexts(
+      'UserPreferences',
+      UserPreferencesService.I.toJson(),
+    );
   }
 
   Future<void> fine(LogRecord record) async {

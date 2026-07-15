@@ -212,17 +212,7 @@ final functionsServiceProvider = Provider<FunctionsService>(
 final secureStorageProvider = Provider<FlutterSecureStorage>(
   (ref) => FlutterSecureStorage(
     aOptions: ref.watch(currentPlatformServiceProvider).isAndroid
-        ? AndroidOptions(
-            sharedPreferencesName: 'secure_storage',
-            encryptedSharedPreferences:
-                ref
-                    .read(deviceInfoServiceProvider)
-                    .requireValue
-                    .androidDeviceInfo!
-                    .version
-                    .sdkInt >=
-                23,
-          )
+        ? const AndroidOptions(sharedPreferencesName: 'secure_storage')
         : AndroidOptions.defaultOptions,
     webOptions: const WebOptions(
       dbName: 'secure_storage',
