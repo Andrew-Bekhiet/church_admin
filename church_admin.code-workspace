@@ -111,8 +111,9 @@
         "options": {
           "cwd": "${workspaceFolder:church_admin}/client",
         },
-        "command": "flutter",
+        "command": "fvm",
         "args": [
+          "flutter",
           "test",
           "--coverage;",
           "flutter",
@@ -161,7 +162,7 @@
       "titleBar.inactiveBackground": "#00968899",
       "titleBar.inactiveForeground": "#e7e7e799",
       "commandCenter.border": "#e7e7e799",
-      "elixirLS.projectDir": "./backend-beta"
+      "elixirLS.projectDir": "./backend-beta",
     },
     "peacock.color": "009688",
     "json.schemas": [
