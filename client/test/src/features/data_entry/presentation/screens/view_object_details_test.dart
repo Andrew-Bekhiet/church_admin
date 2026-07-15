@@ -303,6 +303,8 @@ Override _mockImageUrlCacheService() {
 }
 
 Override _mockViewableObjectService() {
+  provideDummy<IconData>(Symbols.person);
+
   final mock = MockViewableObjectService();
 
   when(mock.getDefaultIconFor<Person>(any)).thenReturn(Symbols.person);
