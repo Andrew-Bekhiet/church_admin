@@ -30,7 +30,7 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
   late AttendanceRecordRights _recordAttendanceRights;
 
   AttendancePresenceFilter _presenceFilter = AttendancePresenceFilter.all;
-  AttendanceGrouping _grouping = AttendanceGrouping.none;
+  AttendanceGrouping _grouping = AttendanceGrouping.studyYear;
   AttendanceSorting _sort = AttendanceSorting.byName();
 
   int _rosterRequestId = 0;
