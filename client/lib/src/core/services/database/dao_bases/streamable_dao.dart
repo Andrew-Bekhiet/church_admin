@@ -167,16 +167,20 @@ class StreamableDAOProxy<T extends ViewableWithID> extends DAOBase<T> {
           .name
           .value;
 
-      return configDocument.withSelectionFields(
-        {
+      final documentWithSecondLine = transform(configDocument, [
+        AddSelectionFieldsVisitor({
           firstSelectionNodeName: [
             ...secondLine.getSecondLineField().fieldPath.asGQLSelectionNode(),
             ...orderBy.expand(
               (o) => o.field.orderByFieldPath.asGQLSelectionNode(),
             ),
           ],
-        },
-      );
+        }),
+      ]);
+
+      return transform(documentWithSecondLine, [
+        const MergeDuplicateSelectionsVisitor(),
+      ]);
     }
 
     return configDocument;
