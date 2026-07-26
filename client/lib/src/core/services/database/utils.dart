@@ -12,47 +12,96 @@ extension AddSelectionFields on DocumentNode {
   DocumentNode withSelectionFields(
     Map<String, List<SelectionNode>> fieldsToAdd,
   ) {
-    return DocumentNode(
-      definitions: definitions
-          .map(
-            (d) => d is OperationDefinitionNode
-                ? OperationDefinitionNode(
-                    type: d.type,
-                    directives: d.directives,
-                    name: d.name,
-                    span: d.span,
-                    variableDefinitions: d.variableDefinitions,
-                    selectionSet: SelectionSetNode(
-                      span: d.selectionSet.span,
-                      selections: d.selectionSet.selections
-                          .map(
-                            (f) =>
-                                f is FieldNode &&
-                                    fieldsToAdd.containsKey(f.name.value)
-                                ? FieldNode(
-                                    name: f.name,
-                                    alias: f.alias,
-                                    arguments: f.arguments,
-                                    directives: f.directives,
-                                    span: f.span,
-                                    selectionSet: SelectionSetNode(
-                                      span: f.selectionSet?.span,
-                                      selections: [
-                                        ...f.selectionSet?.selections ?? [],
-                                        ...fieldsToAdd[f.name.value] ?? [],
-                                      ],
-                                    ),
-                                  )
-                                : f,
-                          )
-                          .toList(),
-                    ),
-                  )
-                : d,
-          )
-          .toList(),
-      span: span,
+    return transform(this, [_AddSelectionFieldsVisitor(fieldsToAdd)]);
+  }
+}
+
+class _AddSelectionFieldsVisitor extends TransformingVisitor {
+  const _AddSelectionFieldsVisitor(this.fieldsToAdd);
+
+  final Map<String, List<SelectionNode>> fieldsToAdd;
+
+  @override
+  OperationDefinitionNode visitOperationDefinitionNode(
+    OperationDefinitionNode node,
+  ) {
+    return OperationDefinitionNode(
+      type: node.type,
+      directives: node.directives,
+      name: node.name,
+      span: node.span,
+      variableDefinitions: node.variableDefinitions,
+      selectionSet: SelectionSetNode(
+        span: node.selectionSet.span,
+        selections: node.selectionSet.selections.map(_withAddedFields).toList(),
+      ),
     );
+  }
+
+  SelectionNode _withAddedFields(SelectionNode selection) {
+    if (selection is! FieldNode) return selection;
+
+    final additions = fieldsToAdd[selection.name.value];
+    if (additions == null) return selection;
+
+    return selection.withMergedSelections(additions);
+  }
+}
+
+extension MergeSelections on FieldNode {
+  FieldNode withMergedSelections(Iterable<SelectionNode> selections) {
+    final mergedSelections = [
+      ...?selectionSet?.selections,
+      ...selections,
+    ].mergedSelections();
+
+    return FieldNode(
+      name: name,
+      alias: alias,
+      arguments: arguments,
+      directives: directives,
+      span: span,
+      selectionSet: mergedSelections.isEmpty
+          ? null
+          : SelectionSetNode(
+              span: selectionSet?.span,
+              selections: mergedSelections,
+            ),
+    );
+  }
+}
+
+extension MergeDuplicateSelections on List<SelectionNode> {
+  /// Merges sibling [FieldNode]s sharing a response key into a single node,
+  /// recursively merging their sub selections.
+  ///
+  /// The normalized cache cannot re-read documents where the same field is
+  /// selected more than once, so `personType { name } personType { order }`
+  /// has to become `personType { name order }`.
+  List<SelectionNode> mergedSelections() {
+    final merged = <SelectionNode>[];
+    final indexesByResponseKey = <String, int>{};
+
+    for (final selection in this) {
+      if (selection is! FieldNode) {
+        merged.add(selection);
+        continue;
+      }
+
+      final responseKey = selection.alias?.value ?? selection.name.value;
+
+      switch (indexesByResponseKey[responseKey]) {
+        case final int index:
+          merged[index] = (merged[index] as FieldNode).withMergedSelections(
+            selection.selectionSet?.selections ?? const [],
+          );
+        case null:
+          indexesByResponseKey[responseKey] = merged.length;
+          merged.add(selection);
+      }
+    }
+
+    return merged;
   }
 }
 

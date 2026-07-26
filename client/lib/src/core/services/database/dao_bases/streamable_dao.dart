@@ -153,28 +153,28 @@ class StreamableDAOProxy<T extends ViewableWithID> extends DAOBase<T> {
         db.varsTransformer.transformrequestForPagination<T>(request);
   }
 
-  dynamic _getDocumentWithSecondLine(
+  DocumentNode _getDocumentWithSecondLine(
     StreamAllConfig<T> streamAllConfig, [
     List<OrderBy>? orderBy,
   ]) {
     final configDocument = streamAllConfig.document;
 
-    final firstSelectionNodeName = configDocument.definitions
-        .whereType<OperationDefinitionNode>()
-        .first
-        .firstSelectionNode
-        .name
-        .value;
+    if (orderBy case [final secondLine, ...]) {
+      final firstSelectionNodeName = configDocument.definitions
+          .whereType<OperationDefinitionNode>()
+          .first
+          .firstSelectionNode
+          .name
+          .value;
 
-    if (orderBy?.firstOrNull case final secondLine?) {
       return configDocument.withSelectionFields(
         {
-          firstSelectionNodeName: {
+          firstSelectionNodeName: [
             ...secondLine.getSecondLineField().fieldPath.asGQLSelectionNode(),
-            ...?orderBy?.expand(
+            ...orderBy.expand(
               (o) => o.field.orderByFieldPath.asGQLSelectionNode(),
             ),
-          }.toList(),
+          ],
         },
       );
     }
