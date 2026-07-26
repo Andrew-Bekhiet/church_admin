@@ -1,4 +1,5 @@
 import 'package:church_admin/church_admin.dart';
+import 'package:collection/collection.dart';
 import 'package:gql/ast.dart';
 
 IterableDifferenceResult<T> diff<T>(Set<T> old, Set<T> $new) {
@@ -17,9 +18,9 @@ extension AddSelectionFields on DocumentNode {
 }
 
 class _AddSelectionFieldsVisitor extends TransformingVisitor {
-  const _AddSelectionFieldsVisitor(this.fieldsToAdd);
-
   final Map<String, List<SelectionNode>> fieldsToAdd;
+
+  const _AddSelectionFieldsVisitor(this.fieldsToAdd);
 
   @override
   OperationDefinitionNode visitOperationDefinitionNode(
@@ -29,10 +30,8 @@ class _AddSelectionFieldsVisitor extends TransformingVisitor {
       type: node.type,
       directives: node.directives,
       name: node.name,
-      span: node.span,
       variableDefinitions: node.variableDefinitions,
       selectionSet: SelectionSetNode(
-        span: node.selectionSet.span,
         selections: node.selectionSet.selections.map(_withAddedFields).toList(),
       ),
     );
@@ -48,7 +47,13 @@ class _AddSelectionFieldsVisitor extends TransformingVisitor {
   }
 }
 
-extension MergeSelections on FieldNode {
+extension _MergeSelections on FieldNode {
+  bool canMergeWith(FieldNode other) {
+    return name.value == other.name.value &&
+        const ListEquality<Node>().equals(arguments, other.arguments) &&
+        const ListEquality<Node>().equals(directives, other.directives);
+  }
+
   FieldNode withMergedSelections(Iterable<SelectionNode> selections) {
     final mergedSelections = [
       ...?selectionSet?.selections,
@@ -60,27 +65,28 @@ extension MergeSelections on FieldNode {
       alias: alias,
       arguments: arguments,
       directives: directives,
-      span: span,
       selectionSet: mergedSelections.isEmpty
           ? null
-          : SelectionSetNode(
-              span: selectionSet?.span,
-              selections: mergedSelections,
-            ),
+          : SelectionSetNode(selections: mergedSelections),
     );
   }
 }
 
-extension MergeDuplicateSelections on List<SelectionNode> {
+extension _MergeDuplicateSelections on List<SelectionNode> {
   /// Merges sibling [FieldNode]s sharing a response key into a single node,
-  /// recursively merging their sub selections.
+  /// recursively merging their sub selections. Per GraphQL spec 5.3.2 they only
+  /// merge when their name, arguments and directives all match.
   ///
   /// The normalized cache cannot re-read documents where the same field is
   /// selected more than once, so `personType { name } personType { order }`
   /// has to become `personType { name order }`.
+  ///
+  /// Duplicates straddling a fragment spread or inline fragment are
+  /// deliberately left alone: `normalize` expands fragments and merges their
+  /// selections itself on both the cache write and read paths.
   List<SelectionNode> mergedSelections() {
     final merged = <SelectionNode>[];
-    final indexesByResponseKey = <String, int>{};
+    final indexesByResponseKey = <String, List<int>>{};
 
     for (final selection in this) {
       if (selection is! FieldNode) {
@@ -89,14 +95,19 @@ extension MergeDuplicateSelections on List<SelectionNode> {
       }
 
       final responseKey = selection.alias?.value ?? selection.name.value;
+      final indexes = indexesByResponseKey.putIfAbsent(responseKey, () => []);
 
-      switch (indexesByResponseKey[responseKey]) {
+      final matchingIndex = indexes.firstWhereOrNull(
+        (i) => (merged[i] as FieldNode).canMergeWith(selection),
+      );
+
+      switch (matchingIndex) {
         case final int index:
           merged[index] = (merged[index] as FieldNode).withMergedSelections(
             selection.selectionSet?.selections ?? const [],
           );
         case null:
-          indexesByResponseKey[responseKey] = merged.length;
+          indexes.add(merged.length);
           merged.add(selection);
       }
     }
