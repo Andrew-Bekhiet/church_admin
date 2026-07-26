@@ -2,6 +2,11 @@ import 'package:church_admin/church_admin.dart';
 import 'package:equatable/equatable.dart';
 
 class FieldMetadata<T extends Object> with Equatable {
+  /// Field names that key an entity in the normalized cache, in the order they
+  /// should be selected. A type declaring none is embedded in its parent by
+  /// every operation alike, so it needs no identity.
+  static const _keyFields = ['id', 'uid'];
+
   final Type? _type;
   final Type parentType;
   final String name;
@@ -48,21 +53,21 @@ class FieldMetadata<T extends Object> with Equatable {
 
   List<String> get fieldPath => [name];
 
-  List<String> get orderByFieldPath {
+  Json get fieldSelection => wrapSelection(const {});
+
+  /// The selection this field needs when a list is ordered by it: the field
+  /// itself, or the `order`/`name` sub-field the ordering actually sorts on.
+  Json get orderBySelection {
     final subFields = AdvancedQueriesMetadata()
         .allQueryablesByType[type]
         ?.fieldsMetadataByName;
 
     return switch (subFields) {
-      {'order': FieldMetadata(:final orderByFieldPath)} => [
-        ...fieldPath,
-        ...orderByFieldPath,
-      ],
-      {'name': FieldMetadata(:final orderByFieldPath)} => [
-        ...fieldPath,
-        ...orderByFieldPath,
-      ],
-      _ => fieldPath,
+      {'order': final FieldMetadata subField} ||
+      {'name': final FieldMetadata subField} => wrapSelection(
+        subField.orderBySelection,
+      ),
+      _ => fieldSelection,
     };
   }
 
@@ -95,6 +100,30 @@ class FieldMetadata<T extends Object> with Equatable {
           : subFields?['order']?.serializeOrderBy(serializedValue) ??
                 subFields?['name']?.serializeOrderBy(serializedValue) ??
                 serializedValue,
+    };
+  }
+
+  /// Nests [child] under this field, adding the fields `normalize` keys the
+  /// nested object by.
+  ///
+  /// Selections built from these trees are injected into documents after code
+  /// generation, so nothing else adds `__typename` to them. Without an identity
+  /// the cache embeds the object in its parent, which collides with the
+  /// generated operations that do select one and store it as a reference.
+  Json wrapSelection(Json child) {
+    if (child.isEmpty) return {name: null};
+
+    final subFields = AdvancedQueriesMetadata()
+        .allQueryablesByType[type]
+        ?.fieldsMetadataByName;
+
+    return {
+      name: {
+        '__typename': null,
+        for (final keyField in _keyFields)
+          if (subFields?.containsKey(keyField) ?? false) keyField: null,
+        ...child,
+      },
     };
   }
 

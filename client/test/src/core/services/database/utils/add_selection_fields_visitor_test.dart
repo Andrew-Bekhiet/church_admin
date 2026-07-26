@@ -24,7 +24,7 @@ void main() {
       expectAdded(
         'subscription watchAllPersons { persons { id __typename } }',
         {
-          'persons': ['personType', 'order'].asGQLSelectionNode(),
+          'persons': {'personType': {'order': null}}.asGQLSelectionNode(),
         },
         'subscription watchAllPersons '
             '{ persons { id __typename personType { order } } }',
@@ -36,8 +36,8 @@ void main() {
         'subscription watchAllPersons { persons { id } }',
         {
           'persons': [
-            ...['personType', 'name'].asGQLSelectionNode(),
-            ...['personType', 'order'].asGQLSelectionNode(),
+            ...{'personType': {'name': null}}.asGQLSelectionNode(),
+            ...{'personType': {'order': null}}.asGQLSelectionNode(),
           ],
         },
         'subscription watchAllPersons '
@@ -50,7 +50,7 @@ void main() {
         'subscription watchAllPersons { persons { id } } '
             'subscription watchNamedPersons { persons { name } }',
         {
-          'persons': ['personType', 'order'].asGQLSelectionNode(),
+          'persons': {'personType': {'order': null}}.asGQLSelectionNode(),
         },
         'subscription watchAllPersons { persons { id personType { order } } } '
             'subscription watchNamedPersons '
@@ -63,7 +63,7 @@ void main() {
         'subscription watchAllPersons { persons { ...Person } } '
             'fragment Person on Persons { id families { persons { id } } }',
         {
-          'persons': ['personType', 'order'].asGQLSelectionNode(),
+          'persons': {'personType': {'order': null}}.asGQLSelectionNode(),
         },
         'subscription watchAllPersons '
             '{ persons { ...Person personType { order } } } '

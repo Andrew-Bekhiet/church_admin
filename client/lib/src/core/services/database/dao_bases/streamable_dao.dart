@@ -170,9 +170,10 @@ class StreamableDAOProxy<T extends ViewableWithID> extends DAOBase<T> {
       final documentWithSecondLine = transform(configDocument, [
         AddSelectionFieldsVisitor({
           firstSelectionNodeName: [
-            ...secondLine.getSecondLineField().fieldPath.asGQLSelectionNode(),
+            ...secondLine.getSecondLineField().fieldSelection
+                .asGQLSelectionNode(),
             ...orderBy.expand(
-              (o) => o.field.orderByFieldPath.asGQLSelectionNode(),
+              (o) => o.field.orderBySelection.asGQLSelectionNode(),
             ),
           ],
         }),

@@ -27,23 +27,6 @@ extension GQLSelectionNode on Json {
   }
 }
 
-extension StringGQLSelectionNode on List<String> {
-  List<SelectionNode> asGQLSelectionNode() {
-    if (firstOrNull?.isEmpty ?? true) return [];
-
-    return [
-      FieldNode(
-        name: NameNode(value: first),
-        selectionSet: length > 1
-            ? SelectionSetNode(
-                selections: sublist(1).asGQLSelectionNode(),
-              )
-            : null,
-      ),
-    ];
-  }
-}
-
 extension StringToUuid on String {
   UuidValue toUuid() => UuidValue.fromString(this);
 }

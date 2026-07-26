@@ -92,4 +92,8 @@ class RedirectingFieldMetadata<P extends Object, T extends Object>
 
   @override
   List<String> get fieldPath => [...parentField.fieldPath, name];
+
+  @override
+  Json wrapSelection(Json child) =>
+      parentField.wrapSelection(super.wrapSelection(child));
 }

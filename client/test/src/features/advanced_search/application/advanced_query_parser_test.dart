@@ -277,12 +277,15 @@ Override _mockDBService() {
 }
 
 extension ToGQLFieldWithSelection on Json {
+  /// Nested objects also select `__typename`, without which `normalize` embeds
+  /// them in their parent instead of keying them.
   FieldNode toGQLFieldWithSelection() {
     return FieldNode(
       name: NameNode(value: keys.single),
       selectionSet: entries.single.value is Json
           ? SelectionSetNode(
               selections: [
+                const FieldNode(name: NameNode(value: '__typename')),
                 (entries.single.value as Json).toGQLFieldWithSelection(),
               ],
             )
