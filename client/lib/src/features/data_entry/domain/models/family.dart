@@ -139,7 +139,11 @@ class Family extends ViewableWithIDAndImage
           )
         : null,
     status: status.name,
-    marriageDate: status == MartialStatus.widowed ? null : marriageDate,
+    marriageDate:
+        status == MartialStatus.widowed ||
+            status == MartialStatus.widowedWithoutChildren
+        ? null
+        : marriageDate,
     deceasedSpouseName: status == MartialStatus.widowed
         ? deceasedSpouseName
         : null,
