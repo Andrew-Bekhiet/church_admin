@@ -121,7 +121,8 @@ class _EditFamilyState extends State<EditFamily> {
             dialogFieldLabel: 'الحالة الاجتماعية',
             builder: (context, state) => Text(state.value?.name ?? ''),
           ),
-          if (newFamily.status == MartialStatus.widowed)
+          if (newFamily.status == MartialStatus.widowed ||
+              newFamily.status == MartialStatus.widowedWithoutChildren)
             TextFormField(
               key: const ValueKey('deceasedSpouseName'),
               decoration: const InputDecoration(
