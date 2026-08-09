@@ -1,7 +1,4 @@
-include: package:solid_lints/analysis_options.yaml
-
-plugins:
-  solid_lints: 1.0.0-dev.1
+include: package:solid_lints/analysis_options_test.yaml
 
 solid_lints:
   diagnostics:
@@ -14,8 +11,8 @@ solid_lints:
         - unfreezed
     member_ordering:
       order:
-        - static_getters_setters
         - static_fields
+        - static_getters_setters
         - static_methods
         - fields
         - getters_setters
@@ -35,11 +32,6 @@ solid_lints:
         - default
         - nullable
         - super
-    number_of_parameters:
-      max_parameters: 7
-      exclude:
-        - method_name: copyWith
-    no_magic_number: false
 
 analyzer:
   language:
@@ -52,9 +44,7 @@ analyzer:
     - lib/**.g.dart
     - lib/**/__generated__/*
   errors:
-    duplicate_ignore: false
     invalid_annotation_target: false
-    undefined_hidden_name: false
 linter:
   rules:
     # Disabled

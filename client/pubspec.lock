@@ -5,10 +5,10 @@ packages:
     dependency: transitive
     description:
       name: _fe_analyzer_shared
-      sha256: c209688d9f5a5f26b2fb47a188131a6fb9e876ae9e47af3737c0b4f58a93470d
+      sha256: "3b19a47f6ea7c2632760777c78174f47f6aec1e05f0cd611380d4593b8af1dbc"
       url: "https://pub.dev"
     source: hosted
-    version: "91.0.0"
+    version: "96.0.0"
   _flutterfire_internals:
     dependency: transitive
     description:
@@ -25,14 +25,30 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.0.1"
-  analyzer:
+  analysis_server_plugin:
     dependency: transitive
     description:
-      name: analyzer
-      sha256: f51c8499b35f9b26820cfe914828a6a98a94efd5cc78b37bb7d03debae3a1d08
+      name: analysis_server_plugin
+      sha256: "0ba6a701c8d926f548a736ac3da8536f63f75fd49ad803f9dfcd091b869ef753"
       url: "https://pub.dev"
     source: hosted
-    version: "8.4.1"
+    version: "0.3.20"
+  analyzer:
+    dependency: "direct overridden"
+    description:
+      name: analyzer
+      sha256: "0c516bc4ad36a1a75759e54d5047cb9d15cded4459df01aa35a0b5ec7db2c2a0"
+      url: "https://pub.dev"
+    source: hosted
+    version: "10.2.0"
+  analyzer_plugin:
+    dependency: transitive
+    description:
+      name: analyzer_plugin
+      sha256: "8c988c96836e59db019930c603dd1493797a7aaf97ba71469ea13724602be4dd"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.14.14"
   android_alarm_manager_plus:
     dependency: "direct main"
     description:
@@ -2257,6 +2273,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.5"
+  solid_lints:
+    dependency: "direct dev"
+    description:
+      name: solid_lints
+      sha256: e06a0c50c1e449150dc0aef0994c10bc69a8b9ed94b7bca53d66a1c816723e91
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0-dev.1"
   source_gen:
     dependency: transitive
     description:
@@ -2610,14 +2634,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.2.0"
-  very_good_analysis:
-    dependency: "direct dev"
-    description:
-      name: very_good_analysis
-      sha256: "481af67ab5877af20325251dc215a4ebac7666a1c8cf09198ffd457bc612b33d"
-      url: "https://pub.dev"
-    source: hosted
-    version: "10.3.0"
   visibility_detector:
     dependency: "direct main"
     description:
@@ -2722,6 +2738,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.3"
+  yaml_edit:
+    dependency: transitive
+    description:
+      name: yaml_edit
+      sha256: "07c9e63ba42519745182b88ca12264a7ba2484d8239958778dfe4d44fe760488"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.4"
 sdks:
   dart: ">=3.12.1 <3.999.0"
   flutter: ">=3.44.0"
