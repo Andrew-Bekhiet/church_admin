@@ -8,14 +8,28 @@ import 'package:intl/intl.dart';
 class NotificationDetailsDialog extends StatelessWidget {
   final Notification notification;
 
+  late final senderDataFuture = DatabaseService.I.users
+      .streamSingleById(id: notification.senderUID)
+      .first;
+
+  void Function() _onQueryTap(BuildContext context, dynamic rawQueryData) {
+    var queryData = rawQueryData;
+
+    if (queryData is String) {
+      queryData = json.decode(queryData);
+    } else if (queryData is Map) {
+      queryData = queryData.cast<String, dynamic>();
+    }
+
+    final query = AdvancedQuery.fromJson(queryData);
+
+    return () => AdvancedSearchRoute($extra: query).push(context);
+  }
+
   NotificationDetailsDialog({
     required this.notification,
     super.key,
   });
-
-  late final senderDataFuture = DatabaseService.I.users
-      .streamSingleById(id: notification.senderUID)
-      .first;
 
   @override
   Widget build(BuildContext context) {
@@ -71,28 +85,13 @@ class NotificationDetailsDialog extends StatelessWidget {
       ],
     );
   }
-
-  void Function() _onQueryTap(BuildContext context, dynamic rawQueryData) {
-    var queryData = rawQueryData;
-
-    if (queryData is String) {
-      queryData = json.decode(queryData);
-    } else if (queryData is Map) {
-      queryData = queryData.cast<String, dynamic>();
-    }
-
-    final query = AdvancedQuery.fromJson(queryData);
-
-    return () => AdvancedSearchRoute($extra: query).push(context);
-  }
 }
 
 class _NotificationSender extends StatelessWidget {
+  final Future<User?> senderDataFuture;
   const _NotificationSender({
     required this.senderDataFuture,
   });
-
-  final Future<User?> senderDataFuture;
 
   @override
   Widget build(BuildContext context) {
@@ -126,11 +125,10 @@ class _NotificationSender extends StatelessWidget {
 }
 
 class _NotificationPhoto extends StatelessWidget {
+  final Notification notification;
   const _NotificationPhoto({
     required this.notification,
   });
-
-  final Notification notification;
 
   @override
   Widget build(BuildContext context) {

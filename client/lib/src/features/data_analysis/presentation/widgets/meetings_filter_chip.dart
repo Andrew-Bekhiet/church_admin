@@ -15,6 +15,15 @@ class MeetingsFilterChip extends StatelessWidget {
     super.key,
   });
 
+  @override
+  Widget build(BuildContext context) {
+    return ActionChip(
+      avatar: const Icon(Symbols.groups, size: 18),
+      label: Text('الاجتماعات (${selected.length}/${meetings.length})'),
+      onPressed: () => _openPicker(context),
+    );
+  }
+
   Future<void> _openPicker(BuildContext context) async {
     final picked = BehaviorSubject<Set<Meeting>>.seeded(selected.toSet());
 
@@ -58,14 +67,5 @@ class MeetingsFilterChip extends StatelessWidget {
     await picked.close();
 
     if (applied != null) onChanged(applied);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return ActionChip(
-      avatar: const Icon(Symbols.groups, size: 18),
-      label: Text('الاجتماعات (${selected.length}/${meetings.length})'),
-      onPressed: () => _openPicker(context),
-    );
   }
 }

@@ -9,6 +9,17 @@ class ConnectivityService {
   static ConnectivityService get I =>
       globalProviderContainer.read(connectivityServiceProvider);
 
+  final String urlToPing;
+
+  final Connectivity _connectivityPlugin;
+  final Dio _dio;
+  final LoggingService _loggingService;
+
+  late final StreamSubscription<bool> _connectivityStreamSubscription;
+  final BehaviorSubject<bool> _connectivityStreamSubject = BehaviorSubject();
+
+  ValueStream<bool> get connectivityStream => _connectivityStreamSubject.stream;
+
   ConnectivityService({
     required this._connectivityPlugin,
     required this._dio,
@@ -24,17 +35,6 @@ class ConnectivityService {
            ).replace(pathSegments: ['healthz']).toString() {
     _connectivityStreamSubscription = _createConnectivityStreamSubscription();
   }
-
-  final String urlToPing;
-
-  ValueStream<bool> get connectivityStream => _connectivityStreamSubject.stream;
-
-  final Connectivity _connectivityPlugin;
-  final Dio _dio;
-  final LoggingService _loggingService;
-
-  late final StreamSubscription<bool> _connectivityStreamSubscription;
-  final BehaviorSubject<bool> _connectivityStreamSubject = BehaviorSubject();
 
   StreamSubscription<bool> _createConnectivityStreamSubscription() {
     return _connectivityPlugin.onConnectivityChanged

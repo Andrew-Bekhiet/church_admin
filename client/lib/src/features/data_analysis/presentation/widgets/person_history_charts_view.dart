@@ -90,6 +90,15 @@ class _PersonHistoryChartsViewState extends State<PersonHistoryChartsView> {
   }
 
   @override
+  void didUpdateWidget(PersonHistoryChartsView oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.person.id != widget.person.id ||
+        oldWidget.options != widget.options) {
+      _analysis = _loadAnalysis();
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     final person = widget.person;
     final options = widget.options;
@@ -132,17 +141,9 @@ class _PersonHistoryChartsViewState extends State<PersonHistoryChartsView> {
     );
   }
 
-  @override
-  void didUpdateWidget(PersonHistoryChartsView oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (oldWidget.person.id != widget.person.id ||
-        oldWidget.options != widget.options) {
-      _analysis = _loadAnalysis();
-    }
-  }
-
-  Future<Person?> _loadAnalysis() => DatabaseService.I.persons.getPersonAnalysis(
-    personId: widget.person.id,
-    options: widget.options,
-  );
+  Future<Person?> _loadAnalysis() =>
+      DatabaseService.I.persons.getPersonAnalysis(
+        personId: widget.person.id,
+        options: widget.options,
+      );
 }

@@ -2,20 +2,19 @@ import 'package:church_admin/church_admin.dart';
 import 'package:equatable/equatable.dart';
 
 abstract class ObjectImageInfo with Equatable {
-  const ObjectImageInfo();
-
   String get cacheKey;
 
   DateTime? get lastUpdatedTime;
+
+  @override
+  List<Object?> get props => [cacheKey, lastUpdatedTime];
+  const ObjectImageInfo();
 
   Future<String> getDownloadUrl();
 
   Future<String> getUploadUrl({String? contentType});
 
   Future<void> delete();
-
-  @override
-  List<Object?> get props => [cacheKey, lastUpdatedTime];
 }
 
 class FunctionsObjectImageInfo extends ObjectImageInfo {
@@ -25,14 +24,17 @@ class FunctionsObjectImageInfo extends ObjectImageInfo {
   @override
   final DateTime? lastUpdatedTime;
 
+  @override
+  String get cacheKey => '$_table/$_id';
+
+  @override
+  List<Object?> get props => [cacheKey, lastUpdatedTime];
+
   const FunctionsObjectImageInfo(
     this._table,
     this._id, {
     this.lastUpdatedTime,
   });
-
-  @override
-  String get cacheKey => '$_table/$_id';
 
   @override
   Future<String> getDownloadUrl() =>
@@ -48,7 +50,4 @@ class FunctionsObjectImageInfo extends ObjectImageInfo {
 
   @override
   Future<void> delete() => FunctionsService.I.deletePhoto(_table, _id);
-
-  @override
-  List<Object?> get props => [cacheKey, lastUpdatedTime];
 }

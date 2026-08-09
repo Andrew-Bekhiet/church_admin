@@ -4,7 +4,6 @@ class _LocationsLayer<T extends Viewable> extends StatefulWidget {
   final Set<T> objects;
   final Point? currentFocusedLocation;
   final Point? Function(T) getLocation;
-  final void Function(T, Point)? afterTap;
 
   const _LocationsLayer({
     required this.objects,
@@ -12,6 +11,7 @@ class _LocationsLayer<T extends Viewable> extends StatefulWidget {
     this.afterTap,
     this.currentFocusedLocation,
   });
+  final void Function(T, Point)? afterTap;
 
   @override
   State<_LocationsLayer<T>> createState() => _LocationsLayerState();
@@ -22,25 +22,6 @@ class _LocationsLayerState<T extends Viewable> extends State<_LocationsLayer<T>>
   static const _tapRecencyDuration = Duration(seconds: 5);
 
   Set<Point> _recentlyTappedLocations = {};
-
-  @override
-  Widget build(BuildContext context) {
-    final (:T? focusedObject, :List<Marker> markers) =
-        _splitFocusedObjectFromMarkers();
-
-    return MarkerLayer(
-      rotate: true,
-      markers: [
-        ...markers,
-        if (focusedObject != null && widget.currentFocusedLocation != null)
-          _makeMarkerFromPoint(
-            isFocused: true,
-            location: widget.currentFocusedLocation!,
-            object: focusedObject,
-          ),
-      ],
-    );
-  }
 
   ({T? focusedObject, List<Marker> markers}) _splitFocusedObjectFromMarkers() {
     return widget.objects
@@ -66,6 +47,25 @@ class _LocationsLayerState<T extends Viewable> extends State<_LocationsLayer<T>>
             );
           },
         );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final (:T? focusedObject, :List<Marker> markers) =
+        _splitFocusedObjectFromMarkers();
+
+    return MarkerLayer(
+      rotate: true,
+      markers: [
+        ...markers,
+        if (focusedObject != null && widget.currentFocusedLocation != null)
+          _makeMarkerFromPoint(
+            isFocused: true,
+            location: widget.currentFocusedLocation!,
+            object: focusedObject,
+          ),
+      ],
+    );
   }
 
   Marker _makeMarkerFromPoint({

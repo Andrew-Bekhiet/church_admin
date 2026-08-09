@@ -2,10 +2,9 @@ import 'package:church_admin/church_admin.dart';
 import 'package:equatable/equatable.dart';
 
 sealed class DataExportState with Equatable {
-  const DataExportState();
-
   @override
   List<Object?> get props => [];
+  const DataExportState();
 }
 
 sealed class DataExportStateBuilder extends DataExportState {
@@ -19,19 +18,19 @@ sealed class DataExportStateListener extends DataExportState {
 final class DataExportMessage extends DataExportStateListener {
   final String message;
 
-  const DataExportMessage(this.message);
-
   @override
   List<Object?> get props => [message];
+
+  const DataExportMessage(this.message);
 }
 
 final class DataExportException extends DataExportStateListener {
   final Object error;
 
-  const DataExportException(this.error);
-
   @override
   List<Object?> get props => [error];
+
+  const DataExportException(this.error);
 }
 
 final class DataExportLoading extends DataExportStateBuilder {
@@ -41,10 +40,10 @@ final class DataExportLoading extends DataExportStateBuilder {
 final class DataExportListSavedFiles extends DataExportStateBuilder {
   final List<DataExportFile> files;
 
-  const DataExportListSavedFiles({required this.files});
-
   @override
   List<Object?> get props => [files];
+
+  const DataExportListSavedFiles({required this.files});
 }
 
 final class DataExportSelectingObjects extends DataExportStateBuilder {
@@ -53,13 +52,6 @@ final class DataExportSelectingObjects extends DataExportStateBuilder {
   final ViewableObjectListController<Class> classesController;
   final ViewableObjectListController<Group> groupsController;
 
-  const DataExportSelectingObjects({
-    required this.areasController,
-    required this.servicesController,
-    required this.classesController,
-    required this.groupsController,
-  });
-
   @override
   List<Object?> get props => [
     areasController,
@@ -67,22 +59,29 @@ final class DataExportSelectingObjects extends DataExportStateBuilder {
     classesController,
     groupsController,
   ];
+
+  const DataExportSelectingObjects({
+    required this.areasController,
+    required this.servicesController,
+    required this.classesController,
+    required this.groupsController,
+  });
 }
 
 final class DataExportInProgress extends DataExportStateBuilder {
   final double? progress;
 
-  const DataExportInProgress({this.progress});
-
   @override
   List<Object?> get props => [progress];
+
+  const DataExportInProgress({this.progress});
 }
 
 final class DataExportCompleted extends DataExportStateBuilder {
   final DataExportFile file;
 
-  const DataExportCompleted({required this.file});
-
   @override
   List<Object?> get props => [file];
+
+  const DataExportCompleted({required this.file});
 }

@@ -1,11 +1,10 @@
 part of 'data_geomap.dart';
 
 class _AreasLayer extends StatelessWidget {
+  final Set<Area> areas;
   const _AreasLayer({
     required this.areas,
   });
-
-  final Set<Area> areas;
 
   @override
   Widget build(BuildContext context) {

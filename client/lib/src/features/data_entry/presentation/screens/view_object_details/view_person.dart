@@ -420,6 +420,17 @@ class _ViewPersonState extends State<ViewPerson> {
     );
   }
 
+  @override
+  void dispose() {
+    scrollController.dispose();
+
+    unawaited(_servicesLimit.close());
+    unawaited(_classesLimit.close());
+    unawaited(_groupsLimit.close());
+
+    super.dispose();
+  }
+
   Future<void> _analysis(BuildContext context, Person person) async {
     await PersonAnalysisRoute(
       $extra: PersonAnalysisExtra(person: person),
@@ -532,20 +543,18 @@ class _ViewPersonState extends State<ViewPerson> {
       ),
     );
   }
-
-  @override
-  void dispose() {
-    scrollController.dispose();
-
-    unawaited(_servicesLimit.close());
-    unawaited(_classesLimit.close());
-    unawaited(_groupsLimit.close());
-
-    super.dispose();
-  }
 }
 
 class _ShowMore<T extends Viewable> extends StatelessWidget {
+  final Person person;
+  final List<T>? Function(Person?) getField;
+  final bool showTime;
+  final int visibleItemsLimit;
+
+  DateFormat get dateFormat => DateFormat(
+    'التاريخ: yyyy/M/d${showTime ? '\nالساعة: h:m a' : ''}',
+    'ar-EG',
+  );
   const _ShowMore({
     required this.person,
     required this.getField,
@@ -554,17 +563,6 @@ class _ShowMore<T extends Viewable> extends StatelessWidget {
     this.visibleItemsLimit = 3,
     super.key,
   });
-
-  final Person person;
-  final List<T>? Function(Person?) getField;
-  final void Function()? loadAll;
-  final bool showTime;
-  final int visibleItemsLimit;
-
-  DateFormat get dateFormat => DateFormat(
-    'التاريخ: yyyy/M/d${showTime ? '\nالساعة: h:m a' : ''}',
-    'ar-EG',
-  );
 
   @override
   Widget build(BuildContext context) {
@@ -591,4 +589,6 @@ class _ShowMore<T extends Viewable> extends StatelessWidget {
       ],
     );
   }
+
+  final void Function()? loadAll;
 }

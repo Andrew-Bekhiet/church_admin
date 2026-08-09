@@ -7,13 +7,13 @@ class DataExportFile with Equatable {
   final String path;
   final DateTime lastModified;
 
+  @override
+  List<Object?> get props => [path, lastModified];
+
   const DataExportFile({required this.path, required this.lastModified});
 
   factory DataExportFile.fromFile(File file) => DataExportFile(
     path: file.path,
     lastModified: file.lastModifiedSync(),
   );
-
-  @override
-  List<Object?> get props => [path, lastModified];
 }

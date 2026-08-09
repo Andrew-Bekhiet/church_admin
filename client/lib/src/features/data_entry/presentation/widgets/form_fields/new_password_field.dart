@@ -5,10 +5,10 @@ import 'package:material_symbols_icons/material_symbols_icons.dart';
 class NewPasswordField extends StatefulWidget {
   final TextEditingController? controller;
 
+  const NewPasswordField({super.key, this.controller, this.getEmail});
+
   /// If given, the password will be checked to not be similar to the email.
   final String Function()? getEmail;
-
-  const NewPasswordField({super.key, this.controller, this.getEmail});
 
   @override
   State<NewPasswordField> createState() => _NewPasswordFieldState();
@@ -94,12 +94,11 @@ class _NewPasswordFieldState extends State<NewPasswordField> {
 }
 
 class PreventEmailSimilarityRule extends ValidationRule {
-  final String Function()? getEmail;
-
-  PreventEmailSimilarityRule({required this.getEmail});
-
   @override
   String get name => 'لا تحتوي على اسم المستخدم';
+
+  PreventEmailSimilarityRule({required this.getEmail});
+  final String Function()? getEmail;
 
   @override
   bool validate(String value) {

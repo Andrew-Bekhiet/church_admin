@@ -3,8 +3,6 @@ import 'package:church_admin/church_admin.dart';
 enum BirthdayOperator implements Operator<String?> {
   equals;
 
-  const BirthdayOperator();
-
   @override
   final String label = '=';
 
@@ -13,6 +11,8 @@ enum BirthdayOperator implements Operator<String?> {
 
   @override
   bool get acceptsValue => true;
+
+  const BirthdayOperator();
 
   @override
   Json queryToJson(FieldMetadata field, String? filterValue) {

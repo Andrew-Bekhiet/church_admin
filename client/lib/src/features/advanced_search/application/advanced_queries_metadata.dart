@@ -8,10 +8,6 @@ part 'advanced_queries_metadata.g.dart';
 final class AdvancedQueriesMetadata extends _$AdvancedQueriesMetadata {
   static final _instance = AdvancedQueriesMetadata._();
 
-  factory AdvancedQueriesMetadata() => _instance;
-
-  AdvancedQueriesMetadata._();
-
   @override
   List<QueryableType<Object>> get allQueryables => {
     person,
@@ -25,4 +21,8 @@ final class AdvancedQueriesMetadata extends _$AdvancedQueriesMetadata {
     user,
     ...super.allQueryables,
   }.toList();
+
+  factory AdvancedQueriesMetadata() => _instance;
+
+  AdvancedQueriesMetadata._();
 }

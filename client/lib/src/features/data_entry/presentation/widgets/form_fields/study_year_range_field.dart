@@ -6,10 +6,6 @@ class StudyYearRangeField extends StatelessWidget {
   final String label;
   final StudyYearRange? initialValue;
   final bool nullable;
-
-  final void Function(StudyYearRange?)? onChanged;
-  final void Function(StudyYearRange?)? onSaved;
-  final String? Function(StudyYearRange?)? validator;
   final AutovalidateMode? autovalidateMode;
   final FocusNode? focusNode;
   final InputDecoration? decoration;
@@ -130,4 +126,8 @@ class StudyYearRangeField extends StatelessWidget {
       },
     );
   }
+
+  final void Function(StudyYearRange?)? onChanged;
+  final void Function(StudyYearRange?)? onSaved;
+  final String? Function(StudyYearRange?)? validator;
 }

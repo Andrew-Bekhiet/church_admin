@@ -16,6 +16,9 @@ class School extends ViewableWithID with _$School implements SerializableExtra {
   @JsonKey(defaultValue: '')
   final String name;
 
+  @override
+  String get typeName => AdvancedQueriesMetadata().school.name;
+
   const School({
     required this.id,
     required this.name,
@@ -25,7 +28,4 @@ class School extends ViewableWithID with _$School implements SerializableExtra {
 
   @override
   Json toJson() => _$SchoolToJson(this);
-
-  @override
-  String get typeName => AdvancedQueriesMetadata().school.name;
 }

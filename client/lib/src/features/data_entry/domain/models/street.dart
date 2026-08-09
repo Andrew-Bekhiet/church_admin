@@ -50,6 +50,13 @@ class Street extends ViewableWithIDAndImage
   @JsonKey(includeToJson: false)
   final bool userCanEdit;
 
+  @override
+  ObjectImageInfo get imageInfo =>
+      FunctionsObjectImageInfo('streets', id, lastUpdatedTime: photoUpdatedAt);
+
+  @override
+  String get typeName => AdvancedQueriesMetadata().street.name;
+
   const Street({
     required this.id,
     required this.name,
@@ -67,13 +74,6 @@ class Street extends ViewableWithIDAndImage
 
   @override
   Json toJson() => _$StreetToJson(this);
-
-  @override
-  ObjectImageInfo get imageInfo =>
-      FunctionsObjectImageInfo('streets', id, lastUpdatedTime: photoUpdatedAt);
-
-  @override
-  String get typeName => AdvancedQueriesMetadata().street.name;
 
   Input_StreetsInsertInput toInsertInput() => Input_StreetsInsertInput(
     name: name,

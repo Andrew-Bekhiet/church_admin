@@ -37,17 +37,6 @@ class _PersonMeetingAttendanceCalendarState
     if (oldWidget.analysis != analysis) _rebuildDaySets();
   }
 
-  void _rebuildDaySets() {
-    _attendedDaysSet = analysis.attendedDays.map(DateUtils.dateOnly).toSet();
-    _heldDaysSet = analysis.heldDays.map(DateUtils.dateOnly).toSet();
-  }
-
-  bool _isAttended(DateTime day) => _attendedDaysSet.contains(
-    DateUtils.dateOnly(day),
-  );
-
-  bool _isHeld(DateTime day) => _heldDaysSet.contains(DateUtils.dateOnly(day));
-
   @override
   Widget build(BuildContext context) {
     final themeData = Theme.of(context);
@@ -72,13 +61,12 @@ class _PersonMeetingAttendanceCalendarState
               fillColor: primaryColor,
               outlineColor: errorColor,
             ),
-        defaultBuilder: (context, day, focusedDay) =>
-            AttendanceCalendarDayCell(
-              day: day,
-              attended: _isAttended(day),
-              fillColor: primaryColor,
-              outlineColor: errorColor,
-            ),
+        defaultBuilder: (context, day, focusedDay) => AttendanceCalendarDayCell(
+          day: day,
+          attended: _isAttended(day),
+          fillColor: primaryColor,
+          outlineColor: errorColor,
+        ),
         disabledBuilder: (context, day, focusedDay) => Container(
           margin: const EdgeInsets.all(4),
           alignment: Alignment.center,
@@ -94,4 +82,15 @@ class _PersonMeetingAttendanceCalendarState
       weekendDays: const [DateTime.friday, DateTime.saturday],
     );
   }
+
+  void _rebuildDaySets() {
+    _attendedDaysSet = analysis.attendedDays.map(DateUtils.dateOnly).toSet();
+    _heldDaysSet = analysis.heldDays.map(DateUtils.dateOnly).toSet();
+  }
+
+  bool _isAttended(DateTime day) => _attendedDaysSet.contains(
+    DateUtils.dateOnly(day),
+  );
+
+  bool _isHeld(DateTime day) => _heldDaysSet.contains(DateUtils.dateOnly(day));
 }

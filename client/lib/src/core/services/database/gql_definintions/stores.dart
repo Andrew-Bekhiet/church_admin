@@ -4,8 +4,6 @@ import 'package:church_admin/src/core/services/database/gql_definintions/stores/
 import 'package:uuid/enums.dart';
 
 class StoresDAO extends FullCRUDDAO<Store> {
-  StoresDAO({required super.db}) : super(fromJson: Store.fromJson);
-
   @override
   late final StreamAllConfig<Store> baseStreamAllConfig = const StreamAllConfig(
     document: documentNodeSubscriptionwatchAllStores,
@@ -45,6 +43,8 @@ class StoresDAO extends FullCRUDDAO<Store> {
         document: documentNodeMutationinsertStore,
         varsConstructor: _createStoreVarsConstructor,
       );
+
+  StoresDAO({required super.db}) : super(fromJson: Store.fromJson);
 
   Json _streamSingleByIdVarsConstructor({required UuidValue id}) =>
       Variables_Subscription_watchStore(id: id).toJson();

@@ -96,6 +96,15 @@ class Family extends ViewableWithIDAndImage
   @JsonKey(includeToJson: false)
   final bool userCanEdit;
 
+  Point? get geolocation => address?.geolocation;
+
+  @override
+  ObjectImageInfo get imageInfo =>
+      FunctionsObjectImageInfo('families', id, lastUpdatedTime: photoUpdatedAt);
+
+  @override
+  String get typeName => AdvancedQueriesMetadata().family.name;
+
   const Family({
     required this.id,
     required this.name,
@@ -121,15 +130,6 @@ class Family extends ViewableWithIDAndImage
 
   @override
   Json toJson() => _$FamilyToJson(this);
-
-  Point? get geolocation => address?.geolocation;
-
-  @override
-  ObjectImageInfo get imageInfo =>
-      FunctionsObjectImageInfo('families', id, lastUpdatedTime: photoUpdatedAt);
-
-  @override
-  String get typeName => AdvancedQueriesMetadata().family.name;
 
   Input_FamiliesInsertInput toInsertInput() => Input_FamiliesInsertInput(
     name: name,
@@ -222,8 +222,6 @@ class Family extends ViewableWithIDAndImage
 }
 
 class FamilyFields extends _FamilyFields {
-  FamilyFields();
-
   @override
   FieldMetadata<Point> get geolocation =>
       address.redirectTo(AddressFields().geolocation, isExpandable: false);
@@ -259,6 +257,8 @@ class FamilyFields extends _FamilyFields {
       district.name: district,
     };
   }
+
+  FamilyFields();
 }
 
 List<Family>? familyChildrenFromJson(List? data) =>

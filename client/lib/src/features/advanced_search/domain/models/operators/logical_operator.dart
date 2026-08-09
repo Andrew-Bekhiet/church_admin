@@ -11,8 +11,6 @@ enum LogicalOperator<
   and('_and', 'و'),
   not('_not', 'ليس');
 
-  const LogicalOperator(this._value, this.label);
-
   @override
   final String label;
   final String _value;
@@ -22,6 +20,8 @@ enum LogicalOperator<
 
   @override
   bool get acceptsValue => true;
+
+  const LogicalOperator(this._value, this.label);
 
   @override
   Json queryToJson(FieldMetadata field, List<FilterT> filterValue) {

@@ -7,8 +7,6 @@ import 'package:church_admin/src/core/services/database/gql_definintions/persons
 import 'package:graphql/client.dart';
 
 class PersonsDAO extends FullCRUDDAO<Person> {
-  PersonsDAO({required super.db}) : super(fromJson: Person.fromJson);
-
   late final notificationsQueries = PersonsNotificationsQueries(db: db);
 
   @override
@@ -45,6 +43,8 @@ class PersonsDAO extends FullCRUDDAO<Person> {
         document: documentNodeMutationinsertPerson,
         varsConstructor: _createPersonVarsConstructor,
       );
+
+  PersonsDAO({required super.db}) : super(fromJson: Person.fromJson);
 
   Json _streamSingleByIdVarsConstructor({
     required UuidValue id,

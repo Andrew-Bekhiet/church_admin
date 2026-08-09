@@ -3,8 +3,6 @@ import 'package:church_admin/src/core/services/database/gql_definintions/service
 import 'package:church_admin/src/core/services/database/gql_definintions/services/__generated__/subscriptions.gql.dart';
 
 class ServicesDAO extends FullCRUDDAO<Service> {
-  ServicesDAO({required super.db}) : super(fromJson: Service.fromJson);
-
   @override
   late final StreamAllConfig<Service> baseStreamAllConfig = StreamAllConfig(
     document: documentNodeSubscriptionwatchAllServices,
@@ -40,6 +38,8 @@ class ServicesDAO extends FullCRUDDAO<Service> {
         document: documentNodeMutationinsertService,
         varsConstructor: _createServiceVarsConstructor,
       );
+
+  ServicesDAO({required super.db}) : super(fromJson: Service.fromJson);
 
   Json _streamAllVarsConstructor(
     PaginatableStreamRequest<Service, StreamableDAOParameters<Service>?>

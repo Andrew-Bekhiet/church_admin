@@ -3,6 +3,15 @@ import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:material_symbols_icons/symbols.dart';
 
 class PasswordFormField extends StatefulWidget {
+  final EdgeInsetsGeometry? padding;
+  final String? labelText;
+  final String? initialValue;
+  final TextEditingController? controller;
+  final TextInputAction? textInputAction;
+  final Iterable<String>? autoFillHints;
+  final FocusNode? focusNode;
+  final AutovalidateMode autoValidateMode;
+  final InputDecoration? decoration;
   const PasswordFormField({
     super.key,
     this.padding,
@@ -19,20 +28,10 @@ class PasswordFormField extends StatefulWidget {
     this.autoValidateMode = AutovalidateMode.disabled,
     this.decoration,
   });
-
-  final EdgeInsetsGeometry? padding;
-  final String? labelText;
-  final String? initialValue;
   final void Function(String)? onChanged;
   final void Function(String)? onFieldSubmitted;
   final void Function(String?)? onSaved;
   final String? Function(String?)? validator;
-  final TextEditingController? controller;
-  final TextInputAction? textInputAction;
-  final Iterable<String>? autoFillHints;
-  final FocusNode? focusNode;
-  final AutovalidateMode autoValidateMode;
-  final InputDecoration? decoration;
 
   @override
   State<PasswordFormField> createState() => _PasswordFormFieldState();

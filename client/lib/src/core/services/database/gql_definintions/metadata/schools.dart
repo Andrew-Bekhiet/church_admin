@@ -4,10 +4,6 @@ import 'package:church_admin/src/core/services/database/gql_definintions/metadat
 
 class SchoolsDAO extends DAOBase<School>
     with StreamableDAO<School>, CreatableDAO<School> {
-  SchoolsDAO({
-    required super.db,
-  }) : super(fromJson: School.fromJson);
-
   @override
   StreamAllConfig<School> get baseStreamAllConfig => const StreamAllConfig(
     document: documentNodeSubscriptionwatchAllSchools,
@@ -22,6 +18,10 @@ class SchoolsDAO extends DAOBase<School>
     varsConstructor: _createSchoolVarsConstructor,
     parserFn: db.parser.singleParser(fromJson),
   );
+
+  SchoolsDAO({
+    required super.db,
+  }) : super(fromJson: School.fromJson);
 
   Json _createSchoolVarsConstructor({required School newObject}) => {
     'object': {'name': newObject.name},

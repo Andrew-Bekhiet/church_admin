@@ -4,8 +4,6 @@ export 'streets/__generated__/mutations.gql.dart';
 export 'streets/__generated__/subscriptions.gql.dart';
 
 class StreetsDAO extends FullCRUDDAO<Street> {
-  StreetsDAO({required super.db}) : super(fromJson: Street.fromJson);
-
   @override
   late final StreamAllConfig<Street> baseStreamAllConfig =
       const StreamAllConfig(
@@ -45,6 +43,8 @@ class StreetsDAO extends FullCRUDDAO<Street> {
         document: documentNodeMutationinsertStreet,
         varsConstructor: _createStreetVarsConstructor,
       );
+
+  StreetsDAO({required super.db}) : super(fromJson: Street.fromJson);
 
   Json _streamSingleByIdVarsConstructor({required UuidValue id}) =>
       Variables_Subscription_watchStreet(id: id).toJson();

@@ -288,6 +288,18 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    _passwordConfirmationController.dispose();
+
+    _termsOfServiceRecognizer.dispose();
+    _privacyPolicyRecognizer.dispose();
+
+    super.dispose();
+  }
+
   Future<void> _submit() async {
     if (_formKey.currentState?.validate() ?? false) {
       try {
@@ -317,18 +329,6 @@ class _LoginScreenState extends State<LoginScreen> {
         }
       }
     }
-  }
-
-  @override
-  void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
-    _passwordConfirmationController.dispose();
-
-    _termsOfServiceRecognizer.dispose();
-    _privacyPolicyRecognizer.dispose();
-
-    super.dispose();
   }
 }
 

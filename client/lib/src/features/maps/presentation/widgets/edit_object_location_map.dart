@@ -162,6 +162,15 @@ class _EditObjectLocationMap<T extends ViewableWithID>
     );
   }
 
+  @override
+  Future<void> dispose() async {
+    super.dispose();
+
+    await _mapOptionsStream.close();
+    await _userLocationSubject.close();
+    await resultObject.close();
+  }
+
   Future<Point?> _getLocationFromGMapsLinkWithProgress() async {
     final scaffoldMessenger = ScaffoldMessenger.of(context);
 
@@ -233,14 +242,5 @@ class _EditObjectLocationMap<T extends ViewableWithID>
     }
 
     return locationResult;
-  }
-
-  @override
-  Future<void> dispose() async {
-    super.dispose();
-
-    await _mapOptionsStream.close();
-    await _userLocationSubject.close();
-    await resultObject.close();
   }
 }

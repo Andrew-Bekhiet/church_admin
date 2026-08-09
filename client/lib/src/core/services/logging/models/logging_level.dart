@@ -10,8 +10,6 @@ enum LoggingLevel implements Comparable<LoggingLevel> {
 
   final int severity;
 
-  const LoggingLevel(this.severity);
-
   SentryLevel get sentryLevel {
     switch (this) {
       case LoggingLevel.fine:
@@ -28,6 +26,8 @@ enum LoggingLevel implements Comparable<LoggingLevel> {
         return SentryLevel.fatal;
     }
   }
+
+  const LoggingLevel(this.severity);
 
   @override
   int compareTo(LoggingLevel other) => severity.compareTo(other.severity);

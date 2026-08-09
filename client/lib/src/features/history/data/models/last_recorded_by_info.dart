@@ -29,6 +29,15 @@ class LastRecordedByInfo extends ViewableWithID
   @override
   final bool isFatherVisit;
 
+  @override
+  String get id => time.toIso8601String();
+
+  @override
+  String get name => time.toString();
+
+  @override
+  String get typeName => AdvancedQueriesMetadata().lastRecordedByInfo.name;
+
   LastRecordedByInfo({
     DateTime? time,
     this.recordedBy,
@@ -41,15 +50,6 @@ class LastRecordedByInfo extends ViewableWithID
 
   @override
   Map<String, dynamic> toJson() => _$LastRecordedByInfoToJson(this);
-
-  @override
-  String get id => time.toIso8601String();
-
-  @override
-  String get name => time.toString();
-
-  @override
-  String get typeName => AdvancedQueriesMetadata().lastRecordedByInfo.name;
 }
 
 String? readRecordedBy(Map json, String _) =>
@@ -58,10 +58,6 @@ String? readRecordedBy(Map json, String _) =>
 class LastRecordedByInfoFields extends _LastRecordedByInfoFields {
   static final LastRecordedByInfoFields _instance =
       LastRecordedByInfoFields._();
-
-  factory LastRecordedByInfoFields() => _instance;
-
-  LastRecordedByInfoFields._();
 
   @override
   FieldMetadata<bool> get isFatherVisit => FieldMetadata<bool>(
@@ -72,4 +68,8 @@ class LastRecordedByInfoFields extends _LastRecordedByInfoFields {
     isOrderable: false,
     operators: {...BooleanOperator.values},
   );
+
+  factory LastRecordedByInfoFields() => _instance;
+
+  LastRecordedByInfoFields._();
 }

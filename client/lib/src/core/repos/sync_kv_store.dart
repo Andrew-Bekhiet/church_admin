@@ -58,17 +58,17 @@ interface class SyncKVStore<T> {
 
   bool _isLoaded;
 
+  T? get(String key) {
+    _checkLoaded();
+    return _memoryCache[key];
+  }
+
   @visibleForTesting
   SyncKVStore.private(this._storage) : _isLoaded = false;
 
   Future<void> _load() async {
     _memoryCache.addAll(await _storage.toMap());
     _isLoaded = true;
-  }
-
-  T? get(String key) {
-    _checkLoaded();
-    return _memoryCache[key];
   }
 
   void put(String key, T? value) {

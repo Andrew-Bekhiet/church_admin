@@ -4,10 +4,6 @@ import 'package:church_admin/src/core/services/database/gql_definintions/metadat
 
 class QualificationsDAO extends DAOBase<Qualification>
     with StreamableDAO<Qualification>, CreatableDAO<Qualification> {
-  QualificationsDAO({
-    required super.db,
-  }) : super(fromJson: Qualification.fromJson);
-
   @override
   StreamAllConfig<Qualification> get baseStreamAllConfig =>
       const StreamAllConfig(
@@ -24,6 +20,10 @@ class QualificationsDAO extends DAOBase<Qualification>
         varsConstructor: _createQualificationVarsConstructor,
         parserFn: db.parser.singleParser(fromJson),
       );
+
+  QualificationsDAO({
+    required super.db,
+  }) : super(fromJson: Qualification.fromJson);
 
   Json _createQualificationVarsConstructor({
     required Qualification newObject,

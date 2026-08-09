@@ -22,6 +22,10 @@ class _EditServiceState extends State<EditService> {
   );
   String? _defaultMeetingName;
 
+  Service get initialService => _controller.initialObject!;
+  Service get newService => _controller.newObject;
+  set newService(Service a) => _controller.newObject = a;
+
   @override
   void initState() {
     super.initState();
@@ -53,16 +57,6 @@ class _EditServiceState extends State<EditService> {
           ),
       initialObject: oldService,
     );
-  }
-
-  Service get initialService => _controller.initialObject!;
-  Service get newService => _controller.newObject;
-  set newService(Service a) => _controller.newObject = a;
-
-  @override
-  void dispose() {
-    _nameController.dispose();
-    super.dispose();
   }
 
   @override
@@ -153,6 +147,12 @@ class _EditServiceState extends State<EditService> {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    super.dispose();
   }
 
   Future<Service> _createService(Service newObject) async {

@@ -4,10 +4,6 @@ import 'package:church_admin/src/core/services/database/gql_definintions/metadat
 
 class PersonTypesDAO extends DAOBase<PersonType>
     with StreamableDAO<PersonType>, CreatableDAO<PersonType> {
-  PersonTypesDAO({
-    required super.db,
-  }) : super(fromJson: PersonType.fromJson);
-
   @override
   StreamAllConfig<PersonType> get baseStreamAllConfig => const StreamAllConfig(
     document: documentNodeSubscriptionwatchAllPersonTypes,
@@ -24,6 +20,10 @@ class PersonTypesDAO extends DAOBase<PersonType>
         varsConstructor: _createPersonTypeVarsConstructor,
         parserFn: db.parser.singleParser(fromJson, 'insertPersonTypesOne'),
       );
+
+  PersonTypesDAO({
+    required super.db,
+  }) : super(fromJson: PersonType.fromJson);
 
   @override
   PaginatableStreamBase<PersonType> streamAll({

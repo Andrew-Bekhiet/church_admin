@@ -8,13 +8,13 @@ class PaginatableStreamRequest<T, P> with Equatable {
   final int pageIndex;
   final int pageSize;
 
+  @override
+  List<Object?> get props => [cursor, param, pageIndex, pageSize];
+
   const PaginatableStreamRequest({
     required this.pageIndex,
     required this.pageSize,
     this.cursor,
     this.param,
   });
-
-  @override
-  List<Object?> get props => [cursor, param, pageIndex, pageSize];
 }

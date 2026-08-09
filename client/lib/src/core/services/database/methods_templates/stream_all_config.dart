@@ -9,10 +9,6 @@ class StreamAllConfig<T>
   final StreamAllConfigVarsConstructor<T>? transformRequest;
   final SubscriptionOptions<PaginatableStreamResponse<T>>? operationOptions;
 
-  @override
-  PaginatableStreamResponse<T> Function(Json)? get parserFn =>
-      super.parserFn as PaginatableStreamResponse<T> Function(Json)?;
-
   const StreamAllConfig({
     required super.document,
     this.transformRequest,
@@ -21,6 +17,10 @@ class StreamAllConfig<T>
     super.variables,
     PaginatableStreamResponse<T> Function(Json)? super.parserFn,
   });
+
+  @override
+  PaginatableStreamResponse<T> Function(Json)? get parserFn =>
+      super.parserFn as PaginatableStreamResponse<T> Function(Json)?;
 
   StreamAllConfig<T> copyWith({
     DocumentNode? document,

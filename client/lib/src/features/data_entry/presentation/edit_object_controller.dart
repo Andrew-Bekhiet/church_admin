@@ -17,13 +17,13 @@ class EditObjectController<T extends ViewableWithID> {
   final T? initialObject;
 
   T newObject;
-
-  final void Function(T object)? afterCreate;
-  final Future<T> Function(T object)? onCreate;
   final UpdateFunc<T>? onUpdate;
-  final Future<void> Function(T object)? onDelete;
 
   final Json Function(T object) toJson;
+
+  bool get hasChanged => initialObject != newObject;
+  bool get isCreate => initialObject == null;
+  bool get isUpdate => initialObject != null;
 
   EditObjectController({
     required this.toJson,
@@ -57,9 +57,9 @@ class EditObjectController<T extends ViewableWithID> {
     this.initialObject,
   });
 
-  bool get hasChanged => initialObject != newObject;
-  bool get isCreate => initialObject == null;
-  bool get isUpdate => initialObject != null;
+  final void Function(T object)? afterCreate;
+  final Future<T> Function(T object)? onCreate;
+  final Future<void> Function(T object)? onDelete;
 
   Future<void> save(BuildContext context) async {
     final scaffoldMessenger = ScaffoldMessenger.of(context);

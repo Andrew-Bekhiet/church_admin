@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/symbols.dart';
 
 class SaveAndCancelButtonRow extends StatelessWidget {
+  final void Function() onSave;
+  final void Function() onCancel;
   const SaveAndCancelButtonRow({
     required this.onSave,
     required this.onCancel,
     super.key,
   });
-
-  final void Function() onSave;
-  final void Function() onCancel;
   @override
   Widget build(BuildContext context) {
     return Row(

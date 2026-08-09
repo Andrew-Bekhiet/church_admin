@@ -2,8 +2,6 @@ import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/users/__generated__/subscriptions.gql.dart';
 
 class UsersDAO extends DAOBase<User> with StreamableDAO<User> {
-  UsersDAO({required super.db}) : super(fromJson: User.fromJson);
-
   @override
   late final StreamAllConfig<User> baseStreamAllConfig = StreamAllConfig(
     document: documentNodeSubscriptionwatchAllUsers,
@@ -17,6 +15,8 @@ class UsersDAO extends DAOBase<User> with StreamableDAO<User> {
   @override
   late final StreamSingleByIdConfig<User> baseStreamSingleByIdConfig =
       const StreamSingleByIdConfig(document: documentNodeSubscriptionwatchUser);
+
+  UsersDAO({required super.db}) : super(fromJson: User.fromJson);
 
   Json _streamAllVarsConstructor(
     PaginatableStreamRequest<User, StreamableDAOParameters<User>?> request,

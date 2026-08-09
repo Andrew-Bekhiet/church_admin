@@ -49,6 +49,15 @@ class Store extends ViewableWithIDAndImage
   @JsonKey(includeToJson: false)
   final bool userCanEdit;
 
+  Point? get geolocation => address?.geolocation;
+
+  @override
+  ObjectImageInfo get imageInfo =>
+      FunctionsObjectImageInfo('stores', id, lastUpdatedTime: photoUpdatedAt);
+
+  @override
+  String get typeName => AdvancedQueriesMetadata().store.name;
+
   const Store({
     required this.id,
     required this.name,
@@ -67,15 +76,6 @@ class Store extends ViewableWithIDAndImage
   @override
   Json toJson() => _$StoreToJson(this);
 
-  Point? get geolocation => address?.geolocation;
-
-  @override
-  ObjectImageInfo get imageInfo =>
-      FunctionsObjectImageInfo('stores', id, lastUpdatedTime: photoUpdatedAt);
-
-  @override
-  String get typeName => AdvancedQueriesMetadata().store.name;
-
   Input_StoresInsertInput toInsertInput() => Input_StoresInsertInput(
     name: name,
     address: address != null
@@ -93,8 +93,6 @@ class Store extends ViewableWithIDAndImage
 }
 
 class StoreFields extends _StoreFields {
-  StoreFields();
-
   @override
   FieldMetadata<Point> get geolocation =>
       address.redirectTo(AddressFields().geolocation, isExpandable: false);
@@ -130,4 +128,6 @@ class StoreFields extends _StoreFields {
       district.name: district,
     };
   }
+
+  StoreFields();
 }

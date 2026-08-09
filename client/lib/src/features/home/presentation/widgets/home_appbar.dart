@@ -10,13 +10,13 @@ import 'package:material_symbols_icons/material_symbols_icons.dart';
 class HomeAppBar extends StatelessWidget implements PreferredSizeWidget {
   final HomeBloc homeBloc;
 
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+
   const HomeAppBar({
     required this.homeBloc,
     super.key,
   });
-
-  @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 
   @override
   Widget build(BuildContext context) {

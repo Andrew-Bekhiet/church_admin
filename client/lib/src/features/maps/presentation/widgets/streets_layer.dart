@@ -1,11 +1,10 @@
 part of 'data_geomap.dart';
 
 class _StreetsLayer extends StatelessWidget {
+  final Set<Street> streets;
   const _StreetsLayer({
     required this.streets,
   });
-
-  final Set<Street> streets;
 
   @override
   Widget build(BuildContext context) {

@@ -9,6 +9,24 @@ part 'notification.g.dart';
 @freezed
 @JsonSerializable()
 class Notification with _$Notification {
+  static String? _getImageURL(RemoteMessage message) {
+    if (message.data['imageURL'] != null) return message.data['imageURL'];
+
+    switch (CurrentPlatformService.I.effectiveValue) {
+      case PlatformValue.android:
+        return message.notification?.android?.imageUrl;
+
+      case PlatformValue.ios:
+        return message.notification?.apple?.imageUrl;
+
+      case PlatformValue.web:
+        return message.notification?.web?.image;
+
+      default:
+        return null;
+    }
+  }
+
   @override
   final String id;
   @override
@@ -41,8 +59,6 @@ class Notification with _$Notification {
   factory Notification.fromJson(Map<String, Object?> json) =>
       _$NotificationFromJson(json);
 
-  Map<String, dynamic> toJson() => _$NotificationToJson(this);
-
   factory Notification.fromRemoteMessage(RemoteMessage message) => Notification(
     id: message.messageId ?? DateTime.now().millisecondsSinceEpoch.toString(),
     type: NotificationType.values.byName(
@@ -59,23 +75,7 @@ class Notification with _$Notification {
     additionalData: message.data,
   );
 
-  static String? _getImageURL(RemoteMessage message) {
-    if (message.data['imageURL'] != null) return message.data['imageURL'];
-
-    switch (CurrentPlatformService.I.effectiveValue) {
-      case PlatformValue.android:
-        return message.notification?.android?.imageUrl;
-
-      case PlatformValue.ios:
-        return message.notification?.apple?.imageUrl;
-
-      case PlatformValue.web:
-        return message.notification?.web?.image;
-
-      default:
-        return null;
-    }
-  }
+  Map<String, dynamic> toJson() => _$NotificationToJson(this);
 }
 
 enum NotificationType {

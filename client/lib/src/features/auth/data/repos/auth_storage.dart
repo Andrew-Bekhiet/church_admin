@@ -10,9 +10,9 @@ interface class AuthStorage {
   static const String userKey = 'user';
   static const String passwordHashKey = 'passwordHash';
 
-  AuthStorage({required this._secureStorage});
-
   final FlutterSecureStorage _secureStorage;
+
+  AuthStorage({required this._secureStorage});
 
   Future<AuthUser?> getAuthDataFromCache() async {
     final authDataJson = await _secureStorage.read(key: authUserKey);

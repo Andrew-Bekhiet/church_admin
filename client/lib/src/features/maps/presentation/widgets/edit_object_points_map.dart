@@ -58,83 +58,6 @@ class _EditObjectPointsMap<T extends ViewableWithID>
   late final BehaviorSubject<GeomapOptions> _mapOptionsStream =
       BehaviorSubject.seeded(widget.geomapOptions);
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        actions: [
-          IconButton(
-            onPressed: () => widget.onSaved(resultObject.value),
-            icon: const Icon(Symbols.save),
-            tooltip: 'حفظ',
-          ),
-        ],
-        title: Text('تعديل ${widget.initialObject.name}'),
-      ),
-      body: MapSnappingSheet(
-        sheetBelow: SnappingSheetContent(
-          draggable: (_) => true,
-          childScrollController: _sheetScrollController,
-          child: StreamBuilder<GeomapOptions>(
-            initialData: _mapOptionsStream.value,
-            stream: _mapOptionsStream,
-            builder: (context, snapshot) {
-              return EditGeomapOptionsWidget(
-                mapOptions: snapshot.requireData,
-                sheetScrollController: _sheetScrollController,
-                apply: _mapOptionsStream.add,
-              );
-            },
-          ),
-        ),
-        child: DataGeomap(
-          geomapOptionsStream: _mapOptionsStream,
-          overrideResponseObjects: (r) =>
-              widget.overrideResponseObjects(r, resultObject.stream),
-          addLayers: [
-            StreamBuilder<T>(
-              initialData: resultObject.value,
-              stream: resultObject,
-              builder: (context, snapshot) {
-                final points = widget.getObjectPoints(snapshot.requireData);
-
-                const markerSize = 20.0;
-
-                return DragMarkers(
-                  markers:
-                      points
-                          ?.mapIndexed(
-                            _createMarkerFromPoint(markerSize, points),
-                          )
-                          .expand((p) => p)
-                          .toList() ??
-                      [],
-                );
-              },
-            ),
-          ],
-          createMapOptions: (center) => MapOptions(
-            onTap: (_, latlng) {
-              resultObject.value = widget.onModify(
-                [
-                  ...widget.getObjectPoints(resultObject.value) ?? [],
-                  Point(latlng.latitude, latlng.longitude),
-                ],
-                resultObject.value,
-              );
-            },
-            maxZoom: 18,
-            initialZoom: 14,
-            interactionOptions: const InteractionOptions(
-              flags: InteractiveFlag.all & ~InteractiveFlag.flingAnimation,
-            ),
-            initialCenter: center,
-          ),
-        ),
-      ),
-    );
-  }
-
   List<DragMarker> Function(int i, Point p) _createMarkerFromPoint(
     double markerSize,
     List<Point> points,
@@ -223,6 +146,83 @@ class _EditObjectPointsMap<T extends ViewableWithID>
   };
 
   @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        actions: [
+          IconButton(
+            onPressed: () => widget.onSaved(resultObject.value),
+            icon: const Icon(Symbols.save),
+            tooltip: 'حفظ',
+          ),
+        ],
+        title: Text('تعديل ${widget.initialObject.name}'),
+      ),
+      body: MapSnappingSheet(
+        sheetBelow: SnappingSheetContent(
+          draggable: (_) => true,
+          childScrollController: _sheetScrollController,
+          child: StreamBuilder<GeomapOptions>(
+            initialData: _mapOptionsStream.value,
+            stream: _mapOptionsStream,
+            builder: (context, snapshot) {
+              return EditGeomapOptionsWidget(
+                mapOptions: snapshot.requireData,
+                sheetScrollController: _sheetScrollController,
+                apply: _mapOptionsStream.add,
+              );
+            },
+          ),
+        ),
+        child: DataGeomap(
+          geomapOptionsStream: _mapOptionsStream,
+          overrideResponseObjects: (r) =>
+              widget.overrideResponseObjects(r, resultObject.stream),
+          addLayers: [
+            StreamBuilder<T>(
+              initialData: resultObject.value,
+              stream: resultObject,
+              builder: (context, snapshot) {
+                final points = widget.getObjectPoints(snapshot.requireData);
+
+                const markerSize = 20.0;
+
+                return DragMarkers(
+                  markers:
+                      points
+                          ?.mapIndexed(
+                            _createMarkerFromPoint(markerSize, points),
+                          )
+                          .expand((p) => p)
+                          .toList() ??
+                      [],
+                );
+              },
+            ),
+          ],
+          createMapOptions: (center) => MapOptions(
+            onTap: (_, latlng) {
+              resultObject.value = widget.onModify(
+                [
+                  ...widget.getObjectPoints(resultObject.value) ?? [],
+                  Point(latlng.latitude, latlng.longitude),
+                ],
+                resultObject.value,
+              );
+            },
+            maxZoom: 18,
+            initialZoom: 14,
+            interactionOptions: const InteractionOptions(
+              flags: InteractiveFlag.all & ~InteractiveFlag.flingAnimation,
+            ),
+            initialCenter: center,
+          ),
+        ),
+      ),
+    );
+  }
+
+  @override
   Future<void> dispose() async {
     super.dispose();
 
@@ -232,15 +232,14 @@ class _EditObjectPointsMap<T extends ViewableWithID>
 }
 
 class _EditablePoint extends StatelessWidget {
+  final double markerSize;
+  final Color? color;
+  final IconData icon;
   const _EditablePoint({
     required this.markerSize,
     required this.icon,
     this.color,
   });
-
-  final double markerSize;
-  final Color? color;
-  final IconData icon;
 
   @override
   Widget build(BuildContext context) {

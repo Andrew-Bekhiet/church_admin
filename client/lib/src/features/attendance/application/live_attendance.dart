@@ -1,12 +1,12 @@
 import 'package:church_admin/church_admin.dart';
 
 final class LiveAttendance {
-  Map<(String personId, bool asServant), AttendanceRecord>
-  _attendanceRecordsByKey = {};
-  Map<(String personId, bool asServant), DateTime?> _optimisticPresence = {};
   Set<String> _inFlight = {};
 
   LiveAttendance();
+  Map<(String personId, bool asServant), AttendanceRecord>
+  _attendanceRecordsByKey = {};
+  Map<(String personId, bool asServant), DateTime?> _optimisticPresence = {};
 
   bool isInFlight(String personId) => _inFlight.contains(personId);
 

@@ -3,6 +3,10 @@ import 'package:flutter/services.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 
 class CopiablePropertyWidget extends StatelessWidget {
+  final String propName;
+  final String? value;
+  final bool showErrorIfEmpty;
+  final List<Widget>? additionalOptions;
   const CopiablePropertyWidget(
     this.propName,
     this.value, {
@@ -10,11 +14,6 @@ class CopiablePropertyWidget extends StatelessWidget {
     this.showErrorIfEmpty = true,
     this.additionalOptions,
   });
-
-  final String propName;
-  final String? value;
-  final bool showErrorIfEmpty;
-  final List<Widget>? additionalOptions;
 
   @override
   Widget build(BuildContext context) {

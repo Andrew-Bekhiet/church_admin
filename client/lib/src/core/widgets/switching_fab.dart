@@ -2,6 +2,11 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 
 class SwitchingFloatingActionButton extends StatelessWidget {
+  final Listenable animation;
+  final List<Widget?> icons;
+  final void Function(int) onTap;
+  final int Function() getIndex;
+  final double Function() getOffset;
   const SwitchingFloatingActionButton({
     required this.animation,
     required this.getIndex,
@@ -19,12 +24,6 @@ class SwitchingFloatingActionButton extends StatelessWidget {
   }) : animation = tabController.animation!,
        getIndex = (() => tabController.index),
        getOffset = (() => tabController.offset);
-
-  final Listenable animation;
-  final List<Widget?> icons;
-  final void Function(int) onTap;
-  final int Function() getIndex;
-  final double Function() getOffset;
 
   @override
   Widget build(BuildContext context) {

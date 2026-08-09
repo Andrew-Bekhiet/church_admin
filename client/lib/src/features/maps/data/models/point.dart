@@ -4,6 +4,9 @@ class Point with Equatable implements Spatial {
   final double latitude;
   final double longitude;
 
+  @override
+  List<Object?> get props => [longitude, latitude];
+
   const Point(this.latitude, this.longitude);
   Point.fromJson(Json json)
     : this(json['coordinates'][1], json['coordinates'][0]);
@@ -16,9 +19,6 @@ class Point with Equatable implements Spatial {
   }
 
   String asWKT() => 'POINT($longitude $latitude)';
-
-  @override
-  List<Object?> get props => [longitude, latitude];
 
   @override
   String toString() => '$latitude, $longitude';

@@ -11,10 +11,6 @@ class DateTimeRangeField extends StatelessWidget {
   final bool nullable;
   final DateFormat dateFormat;
   final DateTime? startFirstDate;
-
-  final void Function(DateTimeRange?)? onChanged;
-  final void Function(DateTimeRange?)? onSaved;
-  final String? Function(DateTimeRange?)? validator;
   final AutovalidateMode? autovalidateMode;
   final FocusNode? focusNode;
   final InputDecoration? decoration;
@@ -124,4 +120,8 @@ class DateTimeRangeField extends StatelessWidget {
           (v) => v == null && !nullable ? 'برجاء ادخال $label' : null,
     );
   }
+
+  final void Function(DateTimeRange?)? onChanged;
+  final void Function(DateTimeRange?)? onSaved;
+  final String? Function(DateTimeRange?)? validator;
 }

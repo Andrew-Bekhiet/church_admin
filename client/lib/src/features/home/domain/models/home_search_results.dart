@@ -12,19 +12,6 @@ class HomeSearchResults {
   final List<Street> streets;
   final List<Store> stores;
 
-  List<(Type, List<ViewableWithIDAndImage>)> get nonEmptySections {
-    return [
-      if (persons.isNotEmpty) (Person, persons),
-      if (areas.isNotEmpty) (Area, areas),
-      if (classes.isNotEmpty) (Class, classes),
-      if (groups.isNotEmpty) (Group, groups),
-      if (families.isNotEmpty) (Family, families),
-      if (services.isNotEmpty) (Service, services),
-      if (streets.isNotEmpty) (Street, streets),
-      if (stores.isNotEmpty) (Store, stores),
-    ];
-  }
-
   const HomeSearchResults({
     this.persons = const [],
     this.areas = const [],
@@ -71,5 +58,18 @@ class HomeSearchResults {
           .map(Area.fromJson)
           .toList(),
     );
+  }
+
+  List<(Type, List<ViewableWithIDAndImage>)> get nonEmptySections {
+    return [
+      if (persons.isNotEmpty) (Person, persons),
+      if (areas.isNotEmpty) (Area, areas),
+      if (classes.isNotEmpty) (Class, classes),
+      if (groups.isNotEmpty) (Group, groups),
+      if (families.isNotEmpty) (Family, families),
+      if (services.isNotEmpty) (Service, services),
+      if (streets.isNotEmpty) (Street, streets),
+      if (stores.isNotEmpty) (Store, stores),
+    ];
   }
 }

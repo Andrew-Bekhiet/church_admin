@@ -15,23 +15,6 @@ class UserPermissionsUpdateHelper {
   late final IterableDifferenceResult<AdminOnData> _adminOnDiff;
   late final IterableDifferenceResult<UserPermission> _permissionsDiff;
 
-  UserPermissionsUpdateHelper({
-    required this.newPermissions,
-    required this.oldPermissions,
-    required this.newAdminOn,
-    required this.oldAdminOn,
-    required this.userId,
-  }) {
-    _permissionsDiff = diff(
-      oldPermissions.toSet(),
-      newPermissions.toSet(),
-    );
-    _adminOnDiff = diff(
-      oldAdminOn.toSet(),
-      newAdminOn.toSet(),
-    );
-  }
-
   bool get hasChanges =>
       _adminOnDiff.added.isNotEmpty ||
       _adminOnDiff.removed.isNotEmpty ||
@@ -48,6 +31,45 @@ class UserPermissionsUpdateHelper {
 
   List<Input_AuthUsersAdminOnInsertInput> get _newAdminOn =>
       _adminOnDiff.added.map(_toInsertInput).toList();
+
+  Variables_Mutation_updateUserPermissions get variables =>
+      Variables_Mutation_updateUserPermissions(
+        uid: userId.toUuid(),
+        deletePermissions: _deletePermissions,
+        insertPermissions: _insertPermissions,
+        permissionsToDelete: _permissionsDiff.removed
+            .map((p) => p.name)
+            .toList(),
+        permissionsToInsert: _permissionsDiff.added
+            .map(
+              (p) => Input_AuthUsersPermissionsInsertInput(
+                uid: userId.toUuid(),
+                permission: p.name,
+              ),
+            )
+            .toList(),
+        deletePermissionIds: _deleteAdminOnIds,
+        newAdminOn: _newAdminOn,
+        deleteAdminOn: _deleteAdminOn,
+        insertAdminOn: _insertAdminOn,
+      );
+
+  UserPermissionsUpdateHelper({
+    required this.newPermissions,
+    required this.oldPermissions,
+    required this.newAdminOn,
+    required this.oldAdminOn,
+    required this.userId,
+  }) {
+    _permissionsDiff = diff(
+      oldPermissions.toSet(),
+      newPermissions.toSet(),
+    );
+    _adminOnDiff = diff(
+      oldAdminOn.toSet(),
+      newAdminOn.toSet(),
+    );
+  }
 
   Input_AuthUsersAdminOnInsertInput _toInsertInput(AdminOnData data) {
     return Input_AuthUsersAdminOnInsertInput(
@@ -76,26 +98,4 @@ class UserPermissionsUpdateHelper {
       groupWriteRelatedFamilies: data.groupWriteRelatedFamilies,
     );
   }
-
-  Variables_Mutation_updateUserPermissions get variables =>
-      Variables_Mutation_updateUserPermissions(
-        uid: userId.toUuid(),
-        deletePermissions: _deletePermissions,
-        insertPermissions: _insertPermissions,
-        permissionsToDelete: _permissionsDiff.removed
-            .map((p) => p.name)
-            .toList(),
-        permissionsToInsert: _permissionsDiff.added
-            .map(
-              (p) => Input_AuthUsersPermissionsInsertInput(
-                uid: userId.toUuid(),
-                permission: p.name,
-              ),
-            )
-            .toList(),
-        deletePermissionIds: _deleteAdminOnIds,
-        newAdminOn: _newAdminOn,
-        deleteAdminOn: _deleteAdminOn,
-        insertAdminOn: _insertAdminOn,
-      );
 }

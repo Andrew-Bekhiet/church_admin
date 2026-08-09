@@ -8,21 +8,57 @@ class PhotoFieldState {
   final bool deletePhoto;
   final XFile? newPhoto;
 
-  PhotoFieldState({required this.deletePhoto, this.newPhoto});
-
   bool get hasChanged => deletePhoto || newPhoto != null;
+
+  PhotoFieldState({required this.deletePhoto, this.newPhoto});
 }
 
 class PhotoField extends StatelessWidget {
   final ViewableWithIDAndImage object;
 
   final PhotoFieldState? initialValue;
-  final void Function(PhotoFieldState?)? onSaved;
   final bool canDelete;
 
   final Color? backgroundColor;
   final Color? foregroundColor;
   final bool circleCrop;
+
+  void Function() _changeImage(
+    BuildContext context,
+    FormFieldState<PhotoFieldState> state,
+  ) => () async {
+    final source = await ImagePickerService.I.showSourceSheet(
+      context: context,
+      canDelete: canDelete,
+    );
+
+    if (source == null) {
+      return;
+    } else if (source == ImagePickerService.deleteImage) {
+      state
+        ..didChange(PhotoFieldState(deletePhoto: true))
+        ..save();
+      return;
+    }
+
+    if (context.mounted) {
+      final newPhoto = await ImagePickerService.I.pickAndCropImage(
+        context: context,
+        source: source as ImageSource,
+        lockAspectRatio: true,
+      );
+      if (newPhoto != null) {
+        state
+          ..didChange(
+            PhotoFieldState(
+              deletePhoto: false,
+              newPhoto: newPhoto,
+            ),
+          )
+          ..save();
+      }
+    }
+  };
 
   const PhotoField({
     required this.object,
@@ -99,40 +135,5 @@ class PhotoField extends StatelessWidget {
     );
   }
 
-  void Function() _changeImage(
-    BuildContext context,
-    FormFieldState<PhotoFieldState> state,
-  ) => () async {
-    final source = await ImagePickerService.I.showSourceSheet(
-      context: context,
-      canDelete: canDelete,
-    );
-
-    if (source == null) {
-      return;
-    } else if (source == ImagePickerService.deleteImage) {
-      state
-        ..didChange(PhotoFieldState(deletePhoto: true))
-        ..save();
-      return;
-    }
-
-    if (context.mounted) {
-      final newPhoto = await ImagePickerService.I.pickAndCropImage(
-        context: context,
-        source: source as ImageSource,
-        lockAspectRatio: true,
-      );
-      if (newPhoto != null) {
-        state
-          ..didChange(
-            PhotoFieldState(
-              deletePhoto: false,
-              newPhoto: newPhoto,
-            ),
-          )
-          ..save();
-      }
-    }
-  };
+  final void Function(PhotoFieldState?)? onSaved;
 }

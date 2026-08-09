@@ -80,6 +80,13 @@ class Service extends ViewableWithIDAndImage
   @JsonKey(includeToJson: false)
   final bool userCanEdit;
 
+  @override
+  ObjectImageInfo get imageInfo =>
+      FunctionsObjectImageInfo('services', id, lastUpdatedTime: photoUpdatedAt);
+
+  @override
+  String get typeName => AdvancedQueriesMetadata().service.name;
+
   const Service({
     required this.id,
     required this.name,
@@ -106,13 +113,6 @@ class Service extends ViewableWithIDAndImage
 
   @override
   Json toJson() => _$ServiceToJson(this);
-
-  @override
-  ObjectImageInfo get imageInfo =>
-      FunctionsObjectImageInfo('services', id, lastUpdatedTime: photoUpdatedAt);
-
-  @override
-  String get typeName => AdvancedQueriesMetadata().service.name;
 
   Variables_Mutation_insertService toInsertInput() =>
       Variables_Mutation_insertService(
@@ -160,8 +160,6 @@ class Service extends ViewableWithIDAndImage
 }
 
 class ServiceFields extends _ServiceFields {
-  ServiceFields();
-
   @override
   FieldMetadata<User> get adminUsers => adminUsersRel.redirectTo(
     AdminOnDataFields().user,
@@ -169,4 +167,5 @@ class ServiceFields extends _ServiceFields {
     isExpandable: false,
     isOrderable: false,
   );
+  ServiceFields();
 }

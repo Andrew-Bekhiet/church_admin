@@ -16,29 +16,6 @@ class AttendanceRangeSelectorTile extends StatelessWidget {
     super.key,
   });
 
-  Future<void> _pickCustomRange(BuildContext context) async {
-    final rslt = await showCalendarDatePicker2Dialog(
-      context: context,
-      dialogSize: Size(MediaQuery.widthOf(context) - 16, 410),
-      config: CalendarDatePicker2WithActionButtonsConfig(
-        calendarType: CalendarDatePicker2Type.range,
-        firstDate: DateTime(2000),
-        lastDate: DateTime.now(),
-      ),
-      value: [_range.start, _range.end],
-    );
-    if (rslt == null || rslt.nonNulls.length < 2) return;
-
-    onChanged(
-      CustomDateTimeRangePreset(
-        range: DateTimeRange(
-          start: rslt.nonNulls.min,
-          end: rslt.nonNulls.max,
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     final dateFormat = DateFormat.yMMMEd('ar-EG');
@@ -89,6 +66,29 @@ class AttendanceRangeSelectorTile extends StatelessWidget {
             leadingIcon: const Icon(Icons.date_range, size: 18),
           ),
         ],
+      ),
+    );
+  }
+
+  Future<void> _pickCustomRange(BuildContext context) async {
+    final rslt = await showCalendarDatePicker2Dialog(
+      context: context,
+      dialogSize: Size(MediaQuery.widthOf(context) - 16, 410),
+      config: CalendarDatePicker2WithActionButtonsConfig(
+        calendarType: CalendarDatePicker2Type.range,
+        firstDate: DateTime(2000),
+        lastDate: DateTime.now(),
+      ),
+      value: [_range.start, _range.end],
+    );
+    if (rslt == null || rslt.nonNulls.length < 2) return;
+
+    onChanged(
+      CustomDateTimeRangePreset(
+        range: DateTimeRange(
+          start: rslt.nonNulls.min,
+          end: rslt.nonNulls.max,
+        ),
       ),
     );
   }

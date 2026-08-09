@@ -72,11 +72,6 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   late final PageController _pageController;
   final Map<Type, ViewableObjectListController> _controllersToDispose = {};
-  final Map<
-    Type,
-    ({Stream<List<Filter>>? where, Stream<List<OrderBy>>? orderBy})
-  >
-  _paginatableStreamsParams = {};
 
   late final Map<HomeMode, List<HomePageConfig>> _pagesConfigState = {
     HomeMode.sundaySchool: [
@@ -169,6 +164,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
     add(const LoadHomeSummaryAndTabs());
   }
+  final Map<
+    Type,
+    ({Stream<List<Filter>>? where, Stream<List<OrderBy>>? orderBy})
+  >
+  _paginatableStreamsParams = {};
 
   HomePageConfig<T> _ensureControllerWillDispose<T extends Viewable>(
     HomePageConfig<T> config,

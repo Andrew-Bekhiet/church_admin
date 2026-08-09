@@ -18,6 +18,9 @@ class Qualification extends ViewableWithID
   @JsonKey(defaultValue: '')
   final String name;
 
+  @override
+  String get typeName => AdvancedQueriesMetadata().qualification.name;
+
   const Qualification({
     required this.id,
     required this.name,
@@ -28,7 +31,4 @@ class Qualification extends ViewableWithID
 
   @override
   Json toJson() => _$QualificationToJson(this);
-
-  @override
-  String get typeName => AdvancedQueriesMetadata().qualification.name;
 }

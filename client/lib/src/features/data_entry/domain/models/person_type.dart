@@ -35,6 +35,9 @@ class PersonType extends ViewableWithID
   @override
   final bool isHidden;
 
+  @override
+  String get typeName => AdvancedQueriesMetadata().personType.name;
+
   const PersonType({
     required this.id,
     required this.name,
@@ -48,14 +51,9 @@ class PersonType extends ViewableWithID
 
   @override
   Json toJson() => _$PersonTypeToJson(this);
-
-  @override
-  String get typeName => AdvancedQueriesMetadata().personType.name;
 }
 
 class PersonTypeFields extends _PersonTypeFields {
-  PersonTypeFields();
-
   @override
   FieldMetadata<bool> get isHidden => FieldMetadata<bool>(
     getValue: super.isHidden.getValue,
@@ -65,4 +63,5 @@ class PersonTypeFields extends _PersonTypeFields {
     operators: super.isHidden.operators,
     isCodeOnly: true,
   );
+  PersonTypeFields();
 }

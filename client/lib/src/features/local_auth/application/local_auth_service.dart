@@ -17,18 +17,18 @@ class LocalAuthService with WidgetsBindingObserver {
   final LocalAuthentication _localAuthPlugin;
 
   final NotificationsService _notificationsService;
-
-  bool get shouldAuthenticate => _shouldAuthenticate;
   bool _shouldAuthenticate = false;
 
   final Map<String, bool> _oneTimeAuthForPath = {};
 
   Timer? _timer;
   Completer<bool>? _localAuthCompleter;
-
-  Stream<void> get refreshUIStream => _refreshUI.stream;
   final StreamController<void> _refreshUI = StreamController.broadcast()
     ..add(null);
+
+  bool get shouldAuthenticate => _shouldAuthenticate;
+
+  Stream<void> get refreshUIStream => _refreshUI.stream;
 
   LocalAuthService({
     required this._localAuthPlugin,

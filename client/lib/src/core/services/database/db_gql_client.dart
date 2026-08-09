@@ -2,6 +2,10 @@ import 'package:graphql/client.dart';
 import 'package:rxdart/rxdart.dart';
 
 class DBGraphQLClient extends GraphQLClient {
+  final bool autoChangeFetchPolicy;
+
+  final ValueStream<FetchPolicy> _fetchPolicyStream;
+  FetchPolicy get _currentFetchPolicy => _fetchPolicyStream.value;
   DBGraphQLClient({
     required ValueStream<bool> connectivityStream,
     required super.link,
@@ -17,11 +21,6 @@ class DBGraphQLClient extends GraphQLClient {
            )
            .distinct()
            .shareValueSeeded(FetchPolicy.cacheAndNetwork);
-
-  final bool autoChangeFetchPolicy;
-
-  final ValueStream<FetchPolicy> _fetchPolicyStream;
-  FetchPolicy get _currentFetchPolicy => _fetchPolicyStream.value;
 
   Q _exceptionsMiddleware<T, Q extends QueryResult<T>>(Q result) {
     switch (result.exception) {

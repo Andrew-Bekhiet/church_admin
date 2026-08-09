@@ -20,9 +20,6 @@ class ViewableObjectWidget<T extends Viewable> extends StatelessWidget {
   final Widget? trailing;
   final Widget? photo;
 
-  final void Function(T)? onTap;
-  final void Function(T)? onLongPress;
-
   final ViewableObjectService viewableObjectService;
   final ViewableObjectWidgetConfig config;
 
@@ -108,6 +105,9 @@ class ViewableObjectWidget<T extends Viewable> extends StatelessWidget {
 
     return tile;
   }
+
+  final void Function(T)? onTap;
+  final void Function(T)? onLongPress;
 
   void Function(T)? get _onTap =>
       onTap ?? config.onTap ?? viewableObjectService.onTap;

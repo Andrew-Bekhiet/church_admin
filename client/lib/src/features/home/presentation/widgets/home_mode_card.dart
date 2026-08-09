@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 
 class HomeModeCard extends StatelessWidget {
+  final void Function() onTap;
+  final String assetName;
+  final String title;
   const HomeModeCard({
     required this.assetName,
     required this.title,
     required this.onTap,
     super.key,
   });
-
-  final void Function() onTap;
-  final String assetName;
-  final String title;
 
   @override
   Widget build(BuildContext context) {

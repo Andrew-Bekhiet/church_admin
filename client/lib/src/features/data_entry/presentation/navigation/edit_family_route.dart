@@ -13,6 +13,9 @@ class EditFamilyExtra extends SerializableExtra {
   final Set<Family>? children;
   final Set<Family>? parents;
 
+  @override
+  String get typeName => 'EditFamilyExtra';
+
   const EditFamilyExtra({
     this.family,
     this.street,
@@ -25,17 +28,13 @@ class EditFamilyExtra extends SerializableExtra {
       _$EditFamilyExtraFromJson(json);
 
   @override
-  String get typeName => 'EditFamilyExtra';
-
-  @override
   Json toJson() => _$EditFamilyExtraToJson(this);
 }
 
 @TypedGoRoute<EditFamilyRoute>(path: '/edit_family')
 class EditFamilyRoute extends GoRouteData with $EditFamilyRoute {
-  const EditFamilyRoute({this.$extra});
-
   final EditFamilyExtra? $extra;
+  const EditFamilyRoute({this.$extra});
 
   @override
   Widget build(BuildContext context, GoRouterState state) {

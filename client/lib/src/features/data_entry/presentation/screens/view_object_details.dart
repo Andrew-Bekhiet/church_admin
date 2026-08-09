@@ -65,12 +65,8 @@ class ViewObjectDetails<T extends ViewableWithIDAndImage>
 
   final Stream<T?> objectStream;
   final List<Type> childrenTypes;
-  final Map<Type, Widget Function(BuildContext)> tabsContentBuilders;
-  final Widget Function(BuildContext, TabController, T)?
-  floatingActionButtonBuilder;
 
   final WidgetBuilder notFoundBuilder;
-  final Widget Function(BuildContext, TabController)? bottomNavBarBuilder;
   final WidgetBuilderWithObject<T> editButtonBuilder;
   final WidgetBuilderWithObject<T> detailsBuilder;
   final SliverPersistentHeaderDelegate? sliverPersistentHeaderDelegate;
@@ -92,6 +88,10 @@ class ViewObjectDetails<T extends ViewableWithIDAndImage>
          childrenTypes.length == 0 || sliverPersistentHeaderDelegate != null,
        ),
        assert(childrenTypes.length == tabsContentBuilders.length);
+  final Map<Type, Widget Function(BuildContext)> tabsContentBuilders;
+  final Widget Function(BuildContext, TabController, T)?
+  floatingActionButtonBuilder;
+  final Widget Function(BuildContext, TabController)? bottomNavBarBuilder;
 
   @override
   State<ViewObjectDetails<T>> createState() => _ViewObjectDetailsState<T>();
@@ -249,6 +249,12 @@ class _ViewObjectDetailsState<T extends ViewableWithIDAndImage>
     );
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+    _scrollTimer?.cancel();
+  }
+
   bool _onScrollEnd(ScrollEndNotification _) {
     if (!_scrollController.hasClients) return false;
 
@@ -290,11 +296,5 @@ class _ViewObjectDetailsState<T extends ViewableWithIDAndImage>
     );
 
     return false;
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _scrollTimer?.cancel();
   }
 }

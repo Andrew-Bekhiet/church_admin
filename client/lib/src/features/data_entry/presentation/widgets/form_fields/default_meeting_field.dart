@@ -54,6 +54,13 @@ class _DefaultMeetingFieldState extends State<DefaultMeetingField> {
     );
   }
 
+  @override
+  void dispose() {
+    widget.parentNameController.removeListener(_maybeSyncMeetingName);
+    _nameController.dispose();
+    super.dispose();
+  }
+
   void _maybeSyncMeetingName() {
     if (_nameEditedByUser) return;
 
@@ -91,12 +98,5 @@ class _DefaultMeetingFieldState extends State<DefaultMeetingField> {
         '$meetingWord ${trimmed.substring(servicePrefix.length).trim()}',
       _ => '$meetingWord $trimmed',
     };
-  }
-
-  @override
-  void dispose() {
-    widget.parentNameController.removeListener(_maybeSyncMeetingName);
-    _nameController.dispose();
-    super.dispose();
   }
 }

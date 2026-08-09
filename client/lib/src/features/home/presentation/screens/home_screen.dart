@@ -43,6 +43,16 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  @override
+  void dispose() {
+    _appLifecycleListener.dispose();
+
+    unawaited(homeBloc.close());
+    unawaited(_localAuthListener.cancel());
+
+    super.dispose();
+  }
+
   void _listenToLocalAuth() {
     final overlay = Overlay.of(context);
     WidgetsBinding.instance.addPostFrameCallback(
@@ -73,15 +83,5 @@ class _HomeScreenState extends State<HomeScreen> {
       case AppLifecycleState.hidden:
         unawaited(UserPersistenceService.I.recordLastSeen());
     }
-  }
-
-  @override
-  void dispose() {
-    _appLifecycleListener.dispose();
-
-    unawaited(homeBloc.close());
-    unawaited(_localAuthListener.cancel());
-
-    super.dispose();
   }
 }

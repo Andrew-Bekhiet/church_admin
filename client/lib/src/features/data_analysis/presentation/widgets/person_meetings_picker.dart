@@ -14,18 +14,6 @@ class PersonMeetingsPicker extends StatelessWidget {
     super.key,
   });
 
-  // Tracked by meeting id, not object equality: seeded meetings round-trip
-  // through JSON and won't deep-equal the freshly fetched ones.
-  bool _isSelected(Meeting meeting) =>
-      selected.value.any((e) => e.id == meeting.id);
-
-  void _toggle(Meeting meeting, bool isSelected) {
-    final withoutMeeting = selected.value
-        .where((e) => e.id != meeting.id)
-        .toSet();
-    selected.add(isSelected ? {...withoutMeeting, meeting} : withoutMeeting);
-  }
-
   @override
   Widget build(BuildContext context) {
     if (meetings.isEmpty) {
@@ -56,5 +44,17 @@ class PersonMeetingsPicker extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  // Tracked by meeting id, not object equality: seeded meetings round-trip
+  // through JSON and won't deep-equal the freshly fetched ones.
+  bool _isSelected(Meeting meeting) =>
+      selected.value.any((e) => e.id == meeting.id);
+
+  void _toggle(Meeting meeting, bool isSelected) {
+    final withoutMeeting = selected.value
+        .where((e) => e.id != meeting.id)
+        .toSet();
+    selected.add(isSelected ? {...withoutMeeting, meeting} : withoutMeeting);
   }
 }

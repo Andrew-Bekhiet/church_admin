@@ -5,19 +5,6 @@ part 'person_analysis_options.g.dart';
 
 @JsonSerializable()
 class PersonAnalysisOptions {
-  PersonAnalysisOptions({
-    required this.dateRange,
-    this.meetings = const [],
-    this.confessionAnalysis = true,
-    this.kodasAnalysis = true,
-    this.visitHistoryAnalysis = true,
-    this.callHistoryAnalysis = true,
-    this.editHistoryAnalysis = false,
-  });
-
-  factory PersonAnalysisOptions.fromJson(Json json) =>
-      _$PersonAnalysisOptionsFromJson(json);
-
   @JsonKey(
     fromJson: dateRangeFromNonNullString,
     toJson: dateRangeToNonNullString,
@@ -32,6 +19,18 @@ class PersonAnalysisOptions {
   final bool visitHistoryAnalysis;
   final bool callHistoryAnalysis;
   final bool editHistoryAnalysis;
+  PersonAnalysisOptions({
+    required this.dateRange,
+    this.meetings = const [],
+    this.confessionAnalysis = true,
+    this.kodasAnalysis = true,
+    this.visitHistoryAnalysis = true,
+    this.callHistoryAnalysis = true,
+    this.editHistoryAnalysis = false,
+  });
+
+  factory PersonAnalysisOptions.fromJson(Json json) =>
+      _$PersonAnalysisOptionsFromJson(json);
 
   Map<String, dynamic> toJson() => _$PersonAnalysisOptionsToJson(this);
 

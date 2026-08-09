@@ -18,16 +18,9 @@ part 'streets_layer.dart';
 class DataGeomap extends StatefulWidget {
   final Person? initialPerson;
   final ValueStream<GeomapOptions> geomapOptionsStream;
-  final void Function(Point?)? onTapLocation;
-  final MapOptions Function(LatLng)? createMapOptions;
   final List<Widget> addLayers;
-  final Stream<PersonsGeolocationsResponse?> Function(
-    PersonsGeolocationsResponse?,
-  )?
-  overrideResponseObjects;
 
   final bool showUserLocation;
-  final void Function(Position?)? onUserLocationChanged;
 
   const DataGeomap({
     required this.geomapOptionsStream,
@@ -40,6 +33,13 @@ class DataGeomap extends StatefulWidget {
     this.onTapLocation,
     super.key,
   });
+  final void Function(Point?)? onTapLocation;
+  final MapOptions Function(LatLng)? createMapOptions;
+  final Stream<PersonsGeolocationsResponse?> Function(
+    PersonsGeolocationsResponse?,
+  )?
+  overrideResponseObjects;
+  final void Function(Position?)? onUserLocationChanged;
 
   @override
   State<DataGeomap> createState() => DataGeomapState();
@@ -54,19 +54,19 @@ class DataGeomapState extends State<DataGeomap> {
     _MapStreamResponse.new,
   );
 
-  GeomapOptions get _currentMapOptions => widget.geomapOptionsStream.value;
-
-  String get packageName => globalProviderContainer
-      .read(packageInfoPluginProvider)
-      .requireValue
-      .packageName;
-
   late final _userLocationStream = const LocationMarkerDataStreamFactory()
       .fromGeolocatorPositionStream();
   late final _userLocationHeadingStream =
       const LocationMarkerDataStreamFactory().fromRotationSensorHeadingStream();
 
   Point? _currentFocusedLocation;
+
+  GeomapOptions get _currentMapOptions => widget.geomapOptionsStream.value;
+
+  String get packageName => globalProviderContainer
+      .read(packageInfoPluginProvider)
+      .requireValue
+      .packageName;
 
   @override
   Widget build(BuildContext context) {

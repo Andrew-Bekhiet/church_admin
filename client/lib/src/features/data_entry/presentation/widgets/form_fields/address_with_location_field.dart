@@ -32,28 +32,6 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
   late Address _address = widget.initialAddress ?? const Address();
   Address? _suggestedAddress;
 
-  void _setAddress(Address address, [bool setState = true]) {
-    _address = address;
-    widget.onAddressChanged(_address);
-
-    if (setState) {
-      this.setState(() {});
-    }
-  }
-
-  ViewableObjectListController<T> _listControllerFor<T extends ViewableWithID>(
-    StreamableDAO<T> dao,
-    Stream<String?> searchStream, {
-    List<Filter> where = const [],
-  }) {
-    final stream = dao.streamAll(
-      searchQuery: searchStream,
-      where: Stream.value(where),
-    );
-
-    return ViewableObjectListController<T>(objectsPaginatableStream: stream);
-  }
-
   @override
   void didUpdateWidget(covariant AddressWithLocationField oldWidget) {
     super.didUpdateWidget(oldWidget);
@@ -425,6 +403,28 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
         ],
       ),
     );
+  }
+
+  void _setAddress(Address address, [bool setState = true]) {
+    _address = address;
+    widget.onAddressChanged(_address);
+
+    if (setState) {
+      this.setState(() {});
+    }
+  }
+
+  ViewableObjectListController<T> _listControllerFor<T extends ViewableWithID>(
+    StreamableDAO<T> dao,
+    Stream<String?> searchStream, {
+    List<Filter> where = const [],
+  }) {
+    final stream = dao.streamAll(
+      searchQuery: searchStream,
+      where: Stream.value(where),
+    );
+
+    return ViewableObjectListController<T>(objectsPaginatableStream: stream);
   }
 
   Future<Address> _parseAddressParentObjects(Address address) async {

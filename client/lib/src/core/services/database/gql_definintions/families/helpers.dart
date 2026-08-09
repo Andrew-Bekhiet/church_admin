@@ -7,8 +7,6 @@ import 'package:uuid/enums.dart';
 class FamilyInsertHelper {
   final Family newFamily;
 
-  FamilyInsertHelper({required this.newFamily});
-
   Input_FamiliesFamiliesArrRelInsertInput get _childrenFamilies =>
       Input_FamiliesFamiliesArrRelInsertInput(
         data: [
@@ -37,6 +35,8 @@ class FamilyInsertHelper {
           parents: _parentsFamilies,
         ),
       );
+
+  FamilyInsertHelper({required this.newFamily});
 }
 
 class FamilyUpdateHelper {
@@ -47,24 +47,6 @@ class FamilyUpdateHelper {
 
   late final IterableDifferenceResult<ID> _childrenDiff;
   late final IterableDifferenceResult<ID> _parentsDiff;
-
-  FamilyUpdateHelper({required this.newFamily, required this.oldFamily})
-    : _familyDelta = computeObjectDelta(
-        newFamily.toJson(),
-        oldFamily.toJson(),
-      ) {
-    _childrenDiff = _getDifferenceUsing((p) => p.children);
-    _parentsDiff = _getDifferenceUsing((p) => p.parents);
-  }
-
-  IterableDifferenceResult<ID> _getDifferenceUsing(
-    Iterable<ID>? Function(Family) selector,
-  ) {
-    return diff(
-      EqualitySet<ID>.from(idEquality, selector(oldFamily) ?? []),
-      EqualitySet<ID>.from(idEquality, selector(newFamily) ?? []),
-    );
-  }
 
   bool get _updateFamily => _familyDelta.isNotEmpty;
 
@@ -112,4 +94,22 @@ class FamilyUpdateHelper {
         lastFatherVisit: newFamily.lastFatherVisit?.time,
         lastVisit: newFamily.lastVisit?.time,
       );
+
+  FamilyUpdateHelper({required this.newFamily, required this.oldFamily})
+    : _familyDelta = computeObjectDelta(
+        newFamily.toJson(),
+        oldFamily.toJson(),
+      ) {
+    _childrenDiff = _getDifferenceUsing((p) => p.children);
+    _parentsDiff = _getDifferenceUsing((p) => p.parents);
+  }
+
+  IterableDifferenceResult<ID> _getDifferenceUsing(
+    Iterable<ID>? Function(Family) selector,
+  ) {
+    return diff(
+      EqualitySet<ID>.from(idEquality, selector(oldFamily) ?? []),
+      EqualitySet<ID>.from(idEquality, selector(newFamily) ?? []),
+    );
+  }
 }

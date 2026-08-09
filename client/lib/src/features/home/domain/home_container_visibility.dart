@@ -11,36 +11,6 @@ class HomeContainerVisibility {
   final List<String> servicesIds;
   final List<String> groupsIds;
 
-  const HomeContainerVisibility({
-    required this.hasGlobalAccess,
-    required this.areasIds,
-    required this.servicesIds,
-    required this.groupsIds,
-  });
-
-  factory HomeContainerVisibility.fromUser(User? user) {
-    final adminOn = user?.adminOn ?? const <AdminOnData>[];
-
-    return HomeContainerVisibility(
-      hasGlobalAccess: user?.permissions.readAllData ?? false,
-      areasIds: adminOn
-          .map((scope) => scope.area?.id)
-          .nonNulls
-          .toSet()
-          .toList(growable: false),
-      servicesIds: adminOn
-          .map((scope) => scope.service?.id)
-          .nonNulls
-          .toSet()
-          .toList(growable: false),
-      groupsIds: adminOn
-          .map((scope) => scope.group?.id)
-          .nonNulls
-          .toSet()
-          .toList(growable: false),
-    );
-  }
-
   List<Filter> get areaFilters => _fieldInFilters(AreaFields().id, areasIds);
 
   List<Filter> get streetFilters {
@@ -90,6 +60,36 @@ class HomeContainerVisibility {
         scopedFilters,
       ),
     ];
+  }
+
+  const HomeContainerVisibility({
+    required this.hasGlobalAccess,
+    required this.areasIds,
+    required this.servicesIds,
+    required this.groupsIds,
+  });
+
+  factory HomeContainerVisibility.fromUser(User? user) {
+    final adminOn = user?.adminOn ?? const <AdminOnData>[];
+
+    return HomeContainerVisibility(
+      hasGlobalAccess: user?.permissions.readAllData ?? false,
+      areasIds: adminOn
+          .map((scope) => scope.area?.id)
+          .nonNulls
+          .toSet()
+          .toList(growable: false),
+      servicesIds: adminOn
+          .map((scope) => scope.service?.id)
+          .nonNulls
+          .toSet()
+          .toList(growable: false),
+      groupsIds: adminOn
+          .map((scope) => scope.group?.id)
+          .nonNulls
+          .toSet()
+          .toList(growable: false),
+    );
   }
 
   List<Filter> _fieldInFilters(FieldMetadata field, List<String> ids) {

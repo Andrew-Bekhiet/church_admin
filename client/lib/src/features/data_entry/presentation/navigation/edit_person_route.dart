@@ -16,6 +16,9 @@ class EditPersonExtra extends SerializableExtra {
   final StudyYear? studyYear;
   final bool? gender;
 
+  @override
+  String get typeName => 'EditPersonExtra';
+
   const EditPersonExtra({
     this.person,
     this.family,
@@ -31,17 +34,13 @@ class EditPersonExtra extends SerializableExtra {
       _$EditPersonExtraFromJson(json);
 
   @override
-  String get typeName => 'EditPersonExtra';
-
-  @override
   Json toJson() => _$EditPersonExtraToJson(this);
 }
 
 @TypedGoRoute<EditPersonRoute>(path: '/edit_person')
 class EditPersonRoute extends GoRouteData with $EditPersonRoute {
-  const EditPersonRoute({this.$extra});
-
   final EditPersonExtra? $extra;
+  const EditPersonRoute({this.$extra});
 
   @override
   Widget build(BuildContext context, GoRouterState state) {

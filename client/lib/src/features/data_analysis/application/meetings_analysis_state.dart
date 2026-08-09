@@ -2,10 +2,9 @@ import 'package:church_admin/church_admin.dart';
 import 'package:equatable/equatable.dart';
 
 sealed class MeetingsAnalysisState with Equatable {
-  const MeetingsAnalysisState();
-
   @override
   List<Object?> get props => [];
+  const MeetingsAnalysisState();
 }
 
 final class MeetingsAnalysisLoading extends MeetingsAnalysisState {

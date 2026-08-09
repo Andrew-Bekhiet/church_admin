@@ -23,6 +23,9 @@ class AdvancedQuery with _$AdvancedQuery implements ToJson, SerializableExtra {
   @override
   final int? limit;
 
+  @override
+  String get typeName => 'AdvancedQuery';
+
   const AdvancedQuery({
     required this.queryableType,
     this.name,
@@ -37,9 +40,6 @@ class AdvancedQuery with _$AdvancedQuery implements ToJson, SerializableExtra {
 
   @override
   Map<String, dynamic> toJson() => _$AdvancedQueryToJson(this);
-
-  @override
-  String get typeName => 'AdvancedQuery';
 
   Json serializeFilter() =>
       logicalOperator.queryToJson(const DotField(), filters);

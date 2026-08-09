@@ -16,10 +16,6 @@ import 'package:church_admin/src/core/services/database/gql_definintions/metadat
 class MetadataDAO {
   final DatabaseService db;
 
-  MetadataDAO({
-    required this.db,
-  });
-
   late final churches = ChurchesDAO(db: db);
   late final colleges = CollegesDAO(db: db);
   late final districts = DistrictsDAO(db: db);
@@ -33,4 +29,8 @@ class MetadataDAO {
   late final studyYears = StudyYearsDAO(db: db);
   late final tags = TagsDAO(db: db);
   late final hobbies = HobbiesDAO(db: db);
+
+  MetadataDAO({
+    required this.db,
+  });
 }

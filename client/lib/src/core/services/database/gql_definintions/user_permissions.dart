@@ -5,10 +5,9 @@ import 'package:church_admin/src/core/services/database/gql_definintions/user_pe
 import 'package:graphql/client.dart';
 
 class UserPermissionsDAO {
-  UserPermissionsDAO({required this._db});
-
   final DatabaseService _db;
   DBGraphQLClient get graphQLClient => _db.graphQLClient;
+  UserPermissionsDAO({required this._db});
 
   Future<void> approveUser(String uid) async {
     await graphQLClient.mutateAndReturnParsed(

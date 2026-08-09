@@ -7,8 +7,6 @@ import 'package:graphql/client.dart';
 import 'package:rxdart/rxdart.dart';
 
 class FamiliesDAO extends FullCRUDDAO<Family> {
-  FamiliesDAO({required super.db}) : super(fromJson: Family.fromJson);
-
   @override
   final StreamAllConfig<Family> baseStreamAllConfig = const StreamAllConfig(
     document: documentNodeSubscriptionwatchAllFamilies,
@@ -47,6 +45,8 @@ class FamiliesDAO extends FullCRUDDAO<Family> {
         document: documentNodeMutationinsertFamily,
         varsConstructor: _createFamilyVarsConstructor,
       );
+
+  FamiliesDAO({required super.db}) : super(fromJson: Family.fromJson);
 
   Json _streamSingleByIdVarsConstructor({required UuidValue id}) =>
       Variables_Subscription_watchFamily(id: id).toJson();

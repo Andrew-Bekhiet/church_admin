@@ -7,8 +7,6 @@ class CurrentPlatformService {
 
   final PlatformValue? _override;
 
-  const CurrentPlatformService([this._override]);
-
   PlatformValue get effectiveValue {
     if (_override != null) return _override;
 
@@ -41,6 +39,8 @@ class CurrentPlatformService {
   bool get isDesktop => _override?.isDesktop ?? UniversalPlatform.isDesktop;
   bool get isDesktopOrWeb =>
       _override?.isDesktopOrWeb ?? UniversalPlatform.isDesktopOrWeb;
+
+  const CurrentPlatformService([this._override]);
 }
 
 enum PlatformValue {
@@ -53,8 +53,6 @@ enum PlatformValue {
 
   final String _value;
 
-  const PlatformValue(this._value);
-
   bool get isAndroid => _value == 'android';
   bool get isIOS => _value == 'ios';
   bool get isWeb => _value == 'web';
@@ -64,4 +62,6 @@ enum PlatformValue {
 
   bool get isDesktop => isLinux || isMacOS || isWindows;
   bool get isDesktopOrWeb => isDesktop || isWeb;
+
+  const PlatformValue(this._value);
 }

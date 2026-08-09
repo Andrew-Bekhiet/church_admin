@@ -15,13 +15,13 @@ class ImagePickerService {
 
   static const deleteImage = _DeleteImage();
 
+  final ImagePicker _imagePicker;
+  final ImageCropper _imageCropper;
+
   ImagePickerService({
     required this._imagePicker,
     required this._imageCropper,
   });
-
-  final ImagePicker _imagePicker;
-  final ImageCropper _imageCropper;
 
   /// Shows a Modal Bottom Sheet to select [ImageSource]
   /// or delete the image if [canDelete] is true

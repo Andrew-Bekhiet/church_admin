@@ -12,7 +12,6 @@ class GenderField extends StatelessWidget {
   final bool? initialValue;
 
   final FormFieldSetter<bool?>? onSaved;
-  final void Function(bool?)? onChanged;
   final FormFieldValidator<bool?>? validator;
   final AutovalidateMode? autovalidateMode;
 
@@ -143,6 +142,8 @@ class GenderField extends StatelessWidget {
         );
     }
   }
+
+  final void Function(bool?)? onChanged;
 
   void _onChanged(FormFieldState<bool?> state, bool? value) {
     state.didChange(value);

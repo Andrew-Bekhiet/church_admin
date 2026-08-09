@@ -6,7 +6,6 @@ class EditUserAdminScopeWidget extends StatelessWidget {
   final UserAdminScope userAdminScope;
   final void Function(UserAdminScope) onChanged;
   final void Function() onDelete;
-  final void Function()? onDuplicate;
 
   const EditUserAdminScopeWidget({
     required this.userAdminScope,
@@ -225,4 +224,6 @@ class EditUserAdminScopeWidget extends StatelessWidget {
       ),
     );
   }
+
+  final void Function()? onDuplicate;
 }

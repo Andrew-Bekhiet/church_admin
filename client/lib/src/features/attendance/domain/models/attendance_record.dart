@@ -29,6 +29,9 @@ class AttendanceRecord
   @override
   final User? recordedByUser;
 
+  @override
+  String get typeName => AdvancedQueriesMetadata().attendanceRecord.name;
+
   const AttendanceRecord({
     required this.id,
     required this.meetingId,
@@ -45,7 +48,4 @@ class AttendanceRecord
 
   @override
   Map<String, dynamic> toJson() => _$AttendanceRecordToJson(this);
-
-  @override
-  String get typeName => AdvancedQueriesMetadata().attendanceRecord.name;
 }

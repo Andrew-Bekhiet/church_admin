@@ -31,8 +31,7 @@ Enum_ShammasLevelsSelectColumn fromJson_Enum_ShammasLevelsSelectColumn(
 
 enum Enum_StoresConstraint {
   stores_pkey,
-  $unknown
-  ;
+  $unknown;
 
   factory Enum_StoresConstraint.fromJson(String value) =>
       fromJson_Enum_StoresConstraint(value);
@@ -65,8 +64,7 @@ enum Enum_StoresSelectColumn {
   id,
   name,
   photoUpdatedAt,
-  $unknown
-  ;
+  $unknown;
 
   factory Enum_StoresSelectColumn.fromJson(String value) =>
       fromJson_Enum_StoresSelectColumn(value);
@@ -116,8 +114,7 @@ enum Enum_StoresUpdateColumn {
   adminFamily,
   color,
   name,
-  $unknown
-  ;
+  $unknown;
 
   factory Enum_StoresUpdateColumn.fromJson(String value) =>
       fromJson_Enum_StoresUpdateColumn(value);
@@ -153,8 +150,7 @@ Enum_StoresUpdateColumn fromJson_Enum_StoresUpdateColumn(String value) {
 
 enum Enum_StreetsConstraint {
   streets_pkey,
-  $unknown
-  ;
+  $unknown;
 
   factory Enum_StreetsConstraint.fromJson(String value) =>
       fromJson_Enum_StreetsConstraint(value);
@@ -187,8 +183,7 @@ enum Enum_StreetsSelectColumn {
   line,
   name,
   photoUpdatedAt,
-  $unknown
-  ;
+  $unknown;
 
   factory Enum_StreetsSelectColumn.fromJson(String value) =>
       fromJson_Enum_StreetsSelectColumn(value);
@@ -238,8 +233,7 @@ enum Enum_StreetsUpdateColumn {
   color,
   line,
   name,
-  $unknown
-  ;
+  $unknown;
 
   factory Enum_StreetsUpdateColumn.fromJson(String value) =>
       fromJson_Enum_StreetsUpdateColumn(value);
@@ -277,8 +271,7 @@ enum Enum_StudyYearsConstraint {
   study_years_name_key,
   study_years_order_key,
   study_years_pkey,
-  $unknown
-  ;
+  $unknown;
 
   factory Enum_StudyYearsConstraint.fromJson(String value) =>
       fromJson_Enum_StudyYearsConstraint(value);
@@ -316,8 +309,7 @@ enum Enum_StudyYearsSelectColumn {
   id,
   name,
   order,
-  $unknown
-  ;
+  $unknown;
 
   factory Enum_StudyYearsSelectColumn.fromJson(String value) =>
       fromJson_Enum_StudyYearsSelectColumn(value);
@@ -353,8 +345,7 @@ Enum_StudyYearsSelectColumn fromJson_Enum_StudyYearsSelectColumn(String value) {
 
 enum Enum_StudyYearsUpdateColumn {
   name,
-  $unknown
-  ;
+  $unknown;
 
   factory Enum_StudyYearsUpdateColumn.fromJson(String value) =>
       fromJson_Enum_StudyYearsUpdateColumn(value);
@@ -383,8 +374,7 @@ Enum_StudyYearsUpdateColumn fromJson_Enum_StudyYearsUpdateColumn(String value) {
 enum Enum_TagsConstraint {
   tags_name_key,
   tags_pkey,
-  $unknown
-  ;
+  $unknown;
 
   factory Enum_TagsConstraint.fromJson(String value) =>
       fromJson_Enum_TagsConstraint(value);
@@ -418,8 +408,7 @@ enum Enum_TagsSelectColumn {
   color,
   id,
   name,
-  $unknown
-  ;
+  $unknown;
 
   factory Enum_TagsSelectColumn.fromJson(String value) =>
       fromJson_Enum_TagsSelectColumn(value);
@@ -456,8 +445,7 @@ Enum_TagsSelectColumn fromJson_Enum_TagsSelectColumn(String value) {
 enum Enum_TagsUpdateColumn {
   color,
   name,
-  $unknown
-  ;
+  $unknown;
 
   factory Enum_TagsUpdateColumn.fromJson(String value) =>
       fromJson_Enum_TagsUpdateColumn(value);
@@ -490,8 +478,7 @@ Enum_TagsUpdateColumn fromJson_Enum_TagsUpdateColumn(String value) {
 enum Enum_UniversitiesConstraint {
   universities_name_key,
   universities_pkey,
-  $unknown
-  ;
+  $unknown;
 
   factory Enum_UniversitiesConstraint.fromJson(String value) =>
       fromJson_Enum_UniversitiesConstraint(value);
@@ -524,8 +511,7 @@ Enum_UniversitiesConstraint fromJson_Enum_UniversitiesConstraint(String value) {
 enum Enum_UniversitiesSelectColumn {
   id,
   name,
-  $unknown
-  ;
+  $unknown;
 
   factory Enum_UniversitiesSelectColumn.fromJson(String value) =>
       fromJson_Enum_UniversitiesSelectColumn(value);
@@ -559,8 +545,7 @@ Enum_UniversitiesSelectColumn fromJson_Enum_UniversitiesSelectColumn(
 
 enum Enum_UniversitiesUpdateColumn {
   name,
-  $unknown
-  ;
+  $unknown;
 
   factory Enum_UniversitiesUpdateColumn.fromJson(String value) =>
       fromJson_Enum_UniversitiesUpdateColumn(value);
@@ -590,8 +575,7 @@ Enum_UniversitiesUpdateColumn fromJson_Enum_UniversitiesUpdateColumn(
 
 enum Enum_UsersFcmTokensConstraint {
   users_fcm_tokens_pkey,
-  $unknown
-  ;
+  $unknown;
 
   factory Enum_UsersFcmTokensConstraint.fromJson(String value) =>
       fromJson_Enum_UsersFcmTokensConstraint(value);
@@ -623,8 +607,7 @@ enum Enum_UsersFcmTokensSelectColumn {
   createdAt,
   token,
   uid,
-  $unknown
-  ;
+  $unknown;
 
   factory Enum_UsersFcmTokensSelectColumn.fromJson(String value) =>
       fromJson_Enum_UsersFcmTokensSelectColumn(value);
@@ -664,8 +647,7 @@ Enum_UsersFcmTokensSelectColumn fromJson_Enum_UsersFcmTokensSelectColumn(
 
 enum Enum_UsersFcmTokensUpdateColumn {
   $_PLACEHOLDER,
-  $unknown
-  ;
+  $unknown;
 
   factory Enum_UsersFcmTokensUpdateColumn.fromJson(String value) =>
       fromJson_Enum_UsersFcmTokensUpdateColumn(value);
@@ -702,8 +684,7 @@ enum Enum_UsersPreferencesSelectColumn {
   orderByPreferences,
   uid,
   updatedAt,
-  $unknown
-  ;
+  $unknown;
 
   factory Enum_UsersPreferencesSelectColumn.fromJson(String value) =>
       fromJson_Enum_UsersPreferencesSelectColumn(value);
@@ -762,8 +743,7 @@ enum Enum___TypeKind {
   INPUT_OBJECT,
   LIST,
   NON_NULL,
-  $unknown
-  ;
+  $unknown;
 
   factory Enum___TypeKind.fromJson(String value) =>
       fromJson_Enum___TypeKind(value);
@@ -837,8 +817,7 @@ enum Enum___DirectiveLocation {
   ENUM_VALUE,
   INPUT_OBJECT,
   INPUT_FIELD_DEFINITION,
-  $unknown
-  ;
+  $unknown;
 
   factory Enum___DirectiveLocation.fromJson(String value) =>
       fromJson_Enum___DirectiveLocation(value);

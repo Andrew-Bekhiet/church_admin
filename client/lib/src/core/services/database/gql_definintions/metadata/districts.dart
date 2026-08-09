@@ -4,8 +4,6 @@ import 'package:church_admin/src/core/services/database/gql_definintions/metadat
 
 class DistrictsDAO extends DAOBase<District>
     with StreamableDAO<District>, CreatableDAO<District> {
-  DistrictsDAO({required super.db}) : super(fromJson: District.fromJson);
-
   @override
   StreamAllConfig<District> get baseStreamAllConfig => const StreamAllConfig(
     document: documentNodeSubscriptionwatchAllDistricts,
@@ -21,6 +19,8 @@ class DistrictsDAO extends DAOBase<District>
     varsConstructor: _createDistrictVarsConstructor,
     parserFn: db.parser.singleParser(fromJson, 'insertDistrictsOne'),
   );
+
+  DistrictsDAO({required super.db}) : super(fromJson: District.fromJson);
 
   Json _createDistrictVarsConstructor({required District newObject}) => {
     'object': {'name': newObject.name},

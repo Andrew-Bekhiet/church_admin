@@ -84,6 +84,26 @@ class User extends ViewableWithIDAndImage
   @JsonKey(includeToJson: false)
   final bool currentUserCanManageThisUser;
 
+  @override
+  ObjectImageInfo get imageInfo =>
+      FunctionsObjectImageInfo('users', id, lastUpdatedTime: photoUpdatedAt);
+
+  @override
+  String get typeName => AdvancedQueriesMetadata().user.name;
+
+  @override
+  String get id => uid;
+
+  bool get canManageSomeUsers =>
+      permissions.manageAllUsers ||
+      (adminOn?.any(
+            (p) =>
+                (p.areaAdminOnUsers ?? false) ||
+                (p.serviceAdminOnUsers ?? false) ||
+                (p.groupAdminOnUsers ?? false),
+          ) ??
+          false);
+
   const User({
     required this.uid,
     required this.name,
@@ -108,16 +128,6 @@ class User extends ViewableWithIDAndImage
   @override
   Map<String, dynamic> toJson() => _$UserToJson(this);
 
-  @override
-  ObjectImageInfo get imageInfo =>
-      FunctionsObjectImageInfo('users', id, lastUpdatedTime: photoUpdatedAt);
-
-  @override
-  String get typeName => AdvancedQueriesMetadata().user.name;
-
-  @override
-  String get id => uid;
-
   bool canEditObject(ViewableWithID object) {
     if (permissions.writeAllData) return true;
 
@@ -137,21 +147,9 @@ class User extends ViewableWithIDAndImage
   }
 
   bool canDeleteObject(ViewableWithID object) => permissions.deleteData;
-
-  bool get canManageSomeUsers =>
-      permissions.manageAllUsers ||
-      (adminOn?.any(
-            (p) =>
-                (p.areaAdminOnUsers ?? false) ||
-                (p.serviceAdminOnUsers ?? false) ||
-                (p.groupAdminOnUsers ?? false),
-          ) ??
-          false);
 }
 
 class UserFields extends _UserFields {
-  UserFields();
-
   @override
   FieldMetadata<String> get uid => FieldMetadata<String>(
     parentType: User,
@@ -206,4 +204,6 @@ class UserFields extends _UserFields {
       permissionsAggregate.name: permissionsAggregate,
     };
   }
+
+  UserFields();
 }

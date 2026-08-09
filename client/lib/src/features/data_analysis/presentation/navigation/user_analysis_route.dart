@@ -9,13 +9,13 @@ part 'user_analysis_route.g.dart';
 class UserAnalysisExtra extends SerializableExtra {
   final User user;
 
+  @override
+  String get typeName => 'UserAnalysisExtra';
+
   const UserAnalysisExtra({required this.user});
 
   factory UserAnalysisExtra.fromJson(Json json) =>
       _$UserAnalysisExtraFromJson(json);
-
-  @override
-  String get typeName => 'UserAnalysisExtra';
 
   @override
   Json toJson() => _$UserAnalysisExtraToJson(this);
@@ -23,9 +23,8 @@ class UserAnalysisExtra extends SerializableExtra {
 
 @TypedGoRoute<UserAnalysisRoute>(path: '/user_analysis')
 class UserAnalysisRoute extends GoRouteData with $UserAnalysisRoute {
-  const UserAnalysisRoute({required this.$extra});
-
   final UserAnalysisExtra $extra;
+  const UserAnalysisRoute({required this.$extra});
 
   @override
   Widget build(BuildContext context, GoRouterState state) {

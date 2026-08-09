@@ -6,9 +6,8 @@ part 'edit_area_route.g.dart';
 
 @TypedGoRoute<EditAreaRoute>(path: '/edit_area')
 class EditAreaRoute extends GoRouteData with $EditAreaRoute {
-  const EditAreaRoute({this.$extra});
-
   final Area? $extra;
+  const EditAreaRoute({this.$extra});
 
   @override
   Widget build(BuildContext context, GoRouterState state) {

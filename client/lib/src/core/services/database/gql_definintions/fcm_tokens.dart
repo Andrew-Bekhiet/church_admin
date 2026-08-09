@@ -4,10 +4,9 @@ import 'package:church_admin/src/core/services/database/gql_definintions/fcm_tok
 import 'package:graphql/client.dart';
 
 class FcmTokensDAO {
-  FcmTokensDAO({required this._db});
-
   final DatabaseService _db;
   DBGraphQLClient get graphQLClient => _db.graphQLClient;
+  FcmTokensDAO({required this._db});
 
   Future<Fragment_FcmToken?> registerToken({
     required String uid,

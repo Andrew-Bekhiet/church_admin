@@ -6,9 +6,8 @@ part 'advanced_search_route.g.dart';
 
 @TypedGoRoute<AdvancedSearchRoute>(path: '/advanced_search')
 class AdvancedSearchRoute extends GoRouteData with $AdvancedSearchRoute {
-  const AdvancedSearchRoute({this.$extra});
-
   final AdvancedQuery? $extra;
+  const AdvancedSearchRoute({this.$extra});
 
   @override
   Widget build(BuildContext context, GoRouterState state) {

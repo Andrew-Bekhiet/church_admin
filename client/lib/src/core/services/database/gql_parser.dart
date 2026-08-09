@@ -4,15 +4,6 @@ import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
 
 class GQLParser {
-  const GQLParser();
-
-  Json castMapToJson(Map data) {
-    return data.cast<String, Object?>();
-  }
-
-  int? countParser(Json d) =>
-      d.values.singleOrNull?['aggregate']?['count'] as int?;
-
   List<T> Function(Json d) listParser<T>(
     T Function(Json) mapper, {
     String? dataKey,
@@ -43,6 +34,15 @@ class GQLParser {
       );
     };
   }
+
+  const GQLParser();
+
+  Json castMapToJson(Map data) {
+    return data.cast<String, Object?>();
+  }
+
+  int? countParser(Json d) =>
+      d.values.singleOrNull?['aggregate']?['count'] as int?;
 
   ParserFn<T?> singleOrNullParser<T>(ParserFn<T?> fromJson, [String? key]) {
     return (data) {

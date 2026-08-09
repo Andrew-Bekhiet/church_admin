@@ -10,15 +10,6 @@ final class HomeState extends Equatable {
   final PageController pageController;
   final double currentPage;
 
-  const HomeState({
-    required this.pageController,
-    required this.pages,
-    this.mode = HomeMode.sundaySchool,
-    this.dailyData,
-    this.showSnowflakeAnimation = false,
-    this.currentPage = 0,
-  });
-
   @override
   List<Object?> get props => [
     mode,
@@ -28,6 +19,15 @@ final class HomeState extends Equatable {
     showSnowflakeAnimation,
     pageController,
   ];
+
+  const HomeState({
+    required this.pageController,
+    required this.pages,
+    this.mode = HomeMode.sundaySchool,
+    this.dailyData,
+    this.showSnowflakeAnimation = false,
+    this.currentPage = 0,
+  });
 
   HomeState copyWith({
     HomeMode? mode,

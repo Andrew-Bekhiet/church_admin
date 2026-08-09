@@ -37,6 +37,37 @@ class EditPerson extends StatefulWidget {
 class _EditPersonState extends State<EditPerson> {
   late EditObjectController<Person> _controller;
 
+  bool _classesAndGroupsLoaded = false;
+
+  void Function() _onEditPhoneFieldName(MapEntry<String, dynamic> phone) =>
+      () async {
+        final name = await _renamePhoneFieldName(true, phone.key);
+
+        if (name == true) {
+          newPerson = newPerson.copyWith(
+            otherPhones: {
+              for (final p in newPerson.otherPhones.entries)
+                if (p.key != phone.key) p.key: p.value,
+            },
+          );
+          if (mounted) setState(() {});
+        } else if (name is String) {
+          newPerson = newPerson.copyWith(
+            otherPhones: {
+              for (final p in newPerson.otherPhones.entries)
+                if (p.key != phone.key) p.key: p.value,
+              name: phone.value,
+            },
+          );
+
+          setState(() {});
+        }
+      };
+
+  Person get initialPerson => _controller.initialObject!;
+  Person get newPerson => _controller.newObject;
+  set newPerson(Person p) => _controller.newObject = p;
+
   @override
   void initState() {
     super.initState();
@@ -92,12 +123,6 @@ class _EditPersonState extends State<EditPerson> {
 
     _loadPersonServicesClassesGroups();
   }
-
-  Person get initialPerson => _controller.initialObject!;
-  Person get newPerson => _controller.newObject;
-  set newPerson(Person p) => _controller.newObject = p;
-
-  bool _classesAndGroupsLoaded = false;
 
   @override
   Widget build(BuildContext context) {
@@ -1066,31 +1091,6 @@ class _EditPersonState extends State<EditPerson> {
       });
     }
   }
-
-  void Function() _onEditPhoneFieldName(MapEntry<String, dynamic> phone) =>
-      () async {
-        final name = await _renamePhoneFieldName(true, phone.key);
-
-        if (name == true) {
-          newPerson = newPerson.copyWith(
-            otherPhones: {
-              for (final p in newPerson.otherPhones.entries)
-                if (p.key != phone.key) p.key: p.value,
-            },
-          );
-          if (mounted) setState(() {});
-        } else if (name is String) {
-          newPerson = newPerson.copyWith(
-            otherPhones: {
-              for (final p in newPerson.otherPhones.entries)
-                if (p.key != phone.key) p.key: p.value,
-              name: phone.value,
-            },
-          );
-
-          setState(() {});
-        }
-      };
 
   Future<Object?> _renamePhoneFieldName([
     bool canDelete = false,

@@ -18,6 +18,30 @@ class EditArea extends StatefulWidget {
 class _EditAreaState extends State<EditArea> {
   late final EditObjectController<Area> _controller;
 
+  void Function() _editGeolocation(BuildContext context) => () async {
+    final Area? result = await Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => EditAreaPolygonMap(
+          onSaved: Navigator.of(context).pop,
+          initialArea: newArea,
+          geomapOptions: GeomapOptions(
+            layers: const {
+              GeoMapLayer.areas,
+            },
+            selectedAreas: {newArea},
+          ),
+        ),
+      ),
+    );
+    if (result != null) {
+      newArea = result;
+    }
+  };
+
+  Area get initialArea => _controller.initialObject!;
+  Area get newArea => _controller.newObject;
+  set newArea(Area a) => _controller.newObject = a;
+
   @override
   void initState() {
     super.initState();
@@ -39,10 +63,6 @@ class _EditAreaState extends State<EditArea> {
       initialObject: oldArea,
     );
   }
-
-  Area get initialArea => _controller.initialObject!;
-  Area get newArea => _controller.newObject;
-  set newArea(Area a) => _controller.newObject = a;
 
   @override
   Widget build(BuildContext context) {
@@ -90,24 +110,4 @@ class _EditAreaState extends State<EditArea> {
       ),
     );
   }
-
-  void Function() _editGeolocation(BuildContext context) => () async {
-    final Area? result = await Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => EditAreaPolygonMap(
-          onSaved: Navigator.of(context).pop,
-          initialArea: newArea,
-          geomapOptions: GeomapOptions(
-            layers: const {
-              GeoMapLayer.areas,
-            },
-            selectedAreas: {newArea},
-          ),
-        ),
-      ),
-    );
-    if (result != null) {
-      newArea = result;
-    }
-  };
 }

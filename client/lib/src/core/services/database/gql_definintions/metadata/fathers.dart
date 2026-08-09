@@ -4,10 +4,6 @@ import 'package:church_admin/src/core/services/database/gql_definintions/metadat
 
 class FathersDAO extends DAOBase<Father>
     with StreamableDAO<Father>, CreatableDAO<Father> {
-  FathersDAO({
-    required super.db,
-  }) : super(fromJson: Father.fromJson);
-
   @override
   StreamAllConfig<Father> get baseStreamAllConfig => const StreamAllConfig(
     document: documentNodeSubscriptionwatchAllFathers,
@@ -23,6 +19,10 @@ class FathersDAO extends DAOBase<Father>
     varsConstructor: _createFatherVarsConstructor,
     parserFn: db.parser.singleParser(fromJson),
   );
+
+  FathersDAO({
+    required super.db,
+  }) : super(fromJson: Father.fromJson);
 
   Json _createFatherVarsConstructor({required Father newObject}) => {
     'object': {'name': newObject.name},

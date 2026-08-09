@@ -33,8 +33,6 @@ class FirebaseAuthRepository implements AuthRepository {
     );
   }
 
-  FirebaseAuthRepository({required this._auth});
-
   final firebase_auth.FirebaseAuth _auth;
   // On web, verify phone number must receive the same instance of MultiFactorSession
   // because it contains a js implementation object
@@ -63,6 +61,8 @@ class FirebaseAuthRepository implements AuthRepository {
       );
     });
   }
+
+  FirebaseAuthRepository({required this._auth});
 
   @override
   Future<void> signUpWithEmailPassword({

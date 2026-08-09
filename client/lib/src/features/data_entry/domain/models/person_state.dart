@@ -23,6 +23,9 @@ class PersonState extends ViewableWithID
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
   final Color? color;
 
+  @override
+  String get typeName => AdvancedQueriesMetadata().personState.name;
+
   const PersonState({
     required this.id,
     required this.name,
@@ -34,7 +37,4 @@ class PersonState extends ViewableWithID
 
   @override
   Json toJson() => _$PersonStateToJson(this);
-
-  @override
-  String get typeName => AdvancedQueriesMetadata().personState.name;
 }

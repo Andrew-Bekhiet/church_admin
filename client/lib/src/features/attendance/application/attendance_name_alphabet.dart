@@ -1,8 +1,6 @@
 import 'package:collection/collection.dart';
 
 final class AttendanceNameAlphabet {
-  const AttendanceNameAlphabet();
-
   static const String _other = '#';
 
   static const Set<String> _letters = {
@@ -61,6 +59,7 @@ final class AttendanceNameAlphabet {
     'Y',
     'Z',
   };
+  const AttendanceNameAlphabet();
 
   String normalizedFirstLetterOf(String name) {
     final trimmed = name.trim();

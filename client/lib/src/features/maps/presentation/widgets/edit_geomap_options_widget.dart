@@ -6,16 +6,15 @@ import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:rxdart/rxdart.dart';
 
 class EditGeomapOptionsWidget extends StatefulWidget {
+  final GeomapOptions mapOptions;
+  final ScrollController sheetScrollController;
+  final void Function(GeomapOptions) apply;
   const EditGeomapOptionsWidget({
     required this.mapOptions,
     required this.sheetScrollController,
     required this.apply,
     super.key,
   });
-
-  final GeomapOptions mapOptions;
-  final ScrollController sheetScrollController;
-  final void Function(GeomapOptions) apply;
 
   @override
   State<EditGeomapOptionsWidget> createState() =>
@@ -305,15 +304,14 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
 }
 
 class _DataSelectionTile extends StatelessWidget {
+  final String title;
+  final Set<ViewableWithID> selected;
+  final Future<void> Function() onSelect;
   const _DataSelectionTile({
     required this.title,
     required this.selected,
     required this.onSelect,
   });
-
-  final String title;
-  final Set<ViewableWithID> selected;
-  final Future<void> Function() onSelect;
 
   @override
   Widget build(BuildContext context) {

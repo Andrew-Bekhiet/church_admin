@@ -20,6 +20,9 @@ class College extends ViewableWithID
   @override
   final String? universityId;
 
+  @override
+  String get typeName => AdvancedQueriesMetadata().college.name;
+
   const College({
     required this.id,
     required this.name,
@@ -31,7 +34,4 @@ class College extends ViewableWithID
 
   @override
   Json toJson() => _$CollegeToJson(this);
-
-  @override
-  String get typeName => AdvancedQueriesMetadata().college.name;
 }

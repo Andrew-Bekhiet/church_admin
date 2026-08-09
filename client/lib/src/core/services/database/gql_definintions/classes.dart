@@ -5,8 +5,6 @@ import 'package:church_admin/src/core/services/database/gql_definintions/classes
 import 'package:graphql/client.dart';
 
 class ClassesDAO extends FullCRUDDAO<Class> {
-  ClassesDAO({required super.db}) : super(fromJson: Class.fromJson);
-
   @override
   late final StreamAllConfig<Class> baseStreamAllConfig = StreamAllConfig(
     document: documentNodeSubscriptionwatchAllClasses,
@@ -41,6 +39,8 @@ class ClassesDAO extends FullCRUDDAO<Class> {
         document: documentNodeMutationinsertClass,
         varsConstructor: _createClassVarsConstructor,
       );
+
+  ClassesDAO({required super.db}) : super(fromJson: Class.fromJson);
 
   Json _streamAllVarsConstructor(
     PaginatableStreamRequest<Class, StreamableDAOParameters<Class>?> request,

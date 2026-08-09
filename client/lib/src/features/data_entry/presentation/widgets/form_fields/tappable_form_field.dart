@@ -3,6 +3,11 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 class TappableFormField<T> extends StatefulWidget {
+  final T initialValue;
+  final String? labelText;
+  final Widget? Function(BuildContext, FormFieldState<T>) builder;
+  final AutovalidateMode? autovalidateMode;
+  final FocusNode? focusNode;
   const TappableFormField({
     required this.onTap,
     required this.initialValue,
@@ -15,16 +20,10 @@ class TappableFormField<T> extends StatefulWidget {
     this.autovalidateMode,
     this.focusNode,
   }) : assert(labelText != null || decoration != null);
-
-  final T initialValue;
   final Future<void>? Function(FormFieldState<T>)? onTap;
-  final String? labelText;
-  final Widget? Function(BuildContext, FormFieldState<T>) builder;
   final String? Function(T?)? validator;
   final void Function(T?)? onSaved;
   final InputDecoration Function(BuildContext, FormFieldState<T>)? decoration;
-  final AutovalidateMode? autovalidateMode;
-  final FocusNode? focusNode;
 
   @override
   State<TappableFormField<T>> createState() => _TappableFormFieldState<T>();

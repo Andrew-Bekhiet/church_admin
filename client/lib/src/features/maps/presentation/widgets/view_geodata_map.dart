@@ -100,6 +100,13 @@ class _ViewGeodataMapState extends State<ViewGeodataMap>
     );
   }
 
+  @override
+  Future<void> dispose() async {
+    super.dispose();
+
+    await _mapOptions.close();
+  }
+
   void _onSheetMoved(SheetPositionData position) {
     setState(() {
       _fabAlignment = AlignmentDirectional(
@@ -107,12 +114,5 @@ class _ViewGeodataMapState extends State<ViewGeodataMap>
         1 - min(0.5, position.relativeToSnappingPositions) * 2,
       ).resolve(Directionality.of(context));
     });
-  }
-
-  @override
-  Future<void> dispose() async {
-    super.dispose();
-
-    await _mapOptions.close();
   }
 }

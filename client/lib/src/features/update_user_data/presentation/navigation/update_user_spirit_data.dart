@@ -7,10 +7,9 @@ part 'update_user_spirit_data.g.dart';
 @TypedGoRoute<UpdateUserSpiritDataRoute>(path: '/update_user_spirit_data')
 class UpdateUserSpiritDataRoute extends GoRouteData
     with $UpdateUserSpiritDataRoute {
-  const UpdateUserSpiritDataRoute({this.forced = false, this.$extra});
-
   final bool forced;
   final Person? $extra;
+  const UpdateUserSpiritDataRoute({this.forced = false, this.$extra});
 
   @override
   Widget build(BuildContext context, GoRouterState state) {

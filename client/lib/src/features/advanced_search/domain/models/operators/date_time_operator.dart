@@ -7,8 +7,6 @@ enum DateTimeOperator implements Operator<DateTime> {
   isBefore('_lt', 'قبل'),
   isOnOrBefore('_lte', 'في نفس اليوم أو قبل');
 
-  const DateTimeOperator(this._operatorValue, this.label);
-
   final String _operatorValue;
   @override
   final String label;
@@ -18,6 +16,8 @@ enum DateTimeOperator implements Operator<DateTime> {
 
   @override
   bool get acceptsValue => true;
+
+  const DateTimeOperator(this._operatorValue, this.label);
 
   @override
   Json queryToJson(FieldMetadata field, DateTime value) {

@@ -4,10 +4,9 @@ import 'package:church_admin/src/core/services/database/gql_definintions/users_p
 import 'package:graphql/client.dart';
 
 class UserPreferencesDAO {
-  UserPreferencesDAO({required this._db});
-
   final DatabaseService _db;
   DBGraphQLClient get graphQLClient => _db.graphQLClient;
+  UserPreferencesDAO({required this._db});
 
   Future<Fragment_UserPreferences?> updatePreferences({
     required String uid,

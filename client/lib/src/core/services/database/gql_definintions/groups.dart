@@ -3,8 +3,6 @@ import 'package:church_admin/src/core/services/database/gql_definintions/groups/
 import 'package:church_admin/src/core/services/database/gql_definintions/groups/__generated__/subscriptions.gql.dart';
 
 class GroupsDAO extends FullCRUDDAO<Group> {
-  GroupsDAO({required super.db}) : super(fromJson: Group.fromJson);
-
   @override
   late final StreamAllConfig<Group> baseStreamAllConfig = StreamAllConfig(
     document: documentNodeSubscriptionwatchAllGroups,
@@ -39,6 +37,8 @@ class GroupsDAO extends FullCRUDDAO<Group> {
         document: documentNodeMutationinsertGroup,
         varsConstructor: _createGroupVarsConstructor,
       );
+
+  GroupsDAO({required super.db}) : super(fromJson: Group.fromJson);
 
   Json _streamAllVarsConstructor(
     PaginatableStreamRequest<Group, StreamableDAOParameters<Group>?> request,

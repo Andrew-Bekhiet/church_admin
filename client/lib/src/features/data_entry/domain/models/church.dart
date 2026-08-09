@@ -20,6 +20,9 @@ class Church extends ViewableWithID with _$Church implements SerializableExtra {
   @override
   final bool isHidden;
 
+  @override
+  String get typeName => AdvancedQueriesMetadata().church.name;
+
   const Church({
     required this.id,
     required this.name,
@@ -30,7 +33,4 @@ class Church extends ViewableWithID with _$Church implements SerializableExtra {
 
   @override
   Json toJson() => _$ChurchToJson(this);
-
-  @override
-  String get typeName => AdvancedQueriesMetadata().church.name;
 }

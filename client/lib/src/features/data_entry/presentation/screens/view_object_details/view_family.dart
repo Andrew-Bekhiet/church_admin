@@ -424,6 +424,13 @@ class _ViewFamilyState extends State<ViewFamily> {
     );
   }
 
+  @override
+  void dispose() {
+    unawaited(Future.wait(_controllersToDispose.map((e) => e.dispose())));
+
+    super.dispose();
+  }
+
   Future<void> _showOrderBySheet(int currentTabIndex) async {
     final advancedQueriesMetadata = AdvancedQueriesMetadata();
 
@@ -457,13 +464,6 @@ class _ViewFamilyState extends State<ViewFamily> {
   ) {
     _controllersToDispose.add(controller);
     return controller;
-  }
-
-  @override
-  void dispose() {
-    unawaited(Future.wait(_controllersToDispose.map((e) => e.dispose())));
-
-    super.dispose();
   }
 }
 

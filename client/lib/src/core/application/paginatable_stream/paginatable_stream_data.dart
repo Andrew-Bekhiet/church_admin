@@ -7,14 +7,14 @@ class PaginatableStreamData<T> with Equatable {
   final T? cursor;
   final int? totalCount;
 
+  bool get hasMore => cursor != null;
+
+  @override
+  List<Object?> get props => [items, cursor, totalCount];
+
   const PaginatableStreamData({
     required this.items,
     this.cursor,
     this.totalCount,
   });
-
-  bool get hasMore => cursor != null;
-
-  @override
-  List<Object?> get props => [items, cursor, totalCount];
 }

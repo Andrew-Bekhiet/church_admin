@@ -4,8 +4,6 @@ class SecretsService {
   static SecretsService get I =>
       globalProviderContainer.read(secretsServiceProvider);
 
-  const SecretsService();
-
   @pragma('vm:prefer-inline')
   String get hasuraServer => const String.fromEnvironment('HASURA_SERVER');
   @pragma('vm:prefer-inline')
@@ -14,4 +12,6 @@ class SecretsService {
   @pragma('vm:prefer-inline')
   String get webRecaptchaSiteKey =>
       const String.fromEnvironment('WEB_RECAPTCHA_SITE_KEY');
+
+  const SecretsService();
 }

@@ -65,6 +65,13 @@ class Group extends ViewableWithIDAndImage
   @JsonKey(includeToJson: false)
   final bool userCanEdit;
 
+  @override
+  ObjectImageInfo get imageInfo =>
+      FunctionsObjectImageInfo('groups', id, lastUpdatedTime: photoUpdatedAt);
+
+  @override
+  String get typeName => AdvancedQueriesMetadata().group.name;
+
   const Group({
     required this.id,
     required this.name,
@@ -85,13 +92,6 @@ class Group extends ViewableWithIDAndImage
 
   @override
   Json toJson() => _$GroupToJson(this);
-
-  @override
-  ObjectImageInfo get imageInfo =>
-      FunctionsObjectImageInfo('groups', id, lastUpdatedTime: photoUpdatedAt);
-
-  @override
-  String get typeName => AdvancedQueriesMetadata().group.name;
 
   Input_GroupsInsertInput toInsertInput() {
     return Input_GroupsInsertInput(
@@ -133,8 +133,6 @@ class Group extends ViewableWithIDAndImage
 }
 
 class GroupFields extends _GroupFields {
-  GroupFields();
-
   @override
   FieldMetadata<DateTimeRange> get validity => FieldMetadata<DateTimeRange>(
     parentType: super.validity.parentType,
@@ -154,4 +152,5 @@ class GroupFields extends _GroupFields {
     isExpandable: false,
     isOrderable: false,
   );
+  GroupFields();
 }

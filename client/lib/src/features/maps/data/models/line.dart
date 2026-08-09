@@ -3,6 +3,9 @@ part of 'spatial.dart';
 class Line with Equatable implements Spatial {
   final List<Point> coordinates;
 
+  @override
+  List<Object?> get props => coordinates;
+
   const Line(this.coordinates);
 
   Line.fromJson(Json json)
@@ -20,9 +23,6 @@ class Line with Equatable implements Spatial {
 
   String asWKT() =>
       'LINESTRING(${coordinates.map((p) => '${p.longitude} ${p.latitude}').join(', ')})';
-
-  @override
-  List<Object?> get props => coordinates;
 
   @override
   String toString() => coordinates.map((p) => p.toString()).join(', ');

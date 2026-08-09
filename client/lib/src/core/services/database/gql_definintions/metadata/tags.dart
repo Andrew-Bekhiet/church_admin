@@ -3,10 +3,6 @@ import 'package:church_admin/src/core/services/database/gql_definintions/metadat
 import 'package:church_admin/src/core/services/database/gql_definintions/metadata/tags/__generated__/subscriptions.gql.dart';
 
 class TagsDAO extends DAOBase<Tag> with StreamableDAO<Tag>, CreatableDAO<Tag> {
-  TagsDAO({
-    required super.db,
-  }) : super(fromJson: Tag.fromJson);
-
   @override
   StreamAllConfig<Tag> get baseStreamAllConfig => const StreamAllConfig(
     document: documentNodeSubscriptionwatchAllTags,
@@ -21,6 +17,10 @@ class TagsDAO extends DAOBase<Tag> with StreamableDAO<Tag>, CreatableDAO<Tag> {
     varsConstructor: _createTagVarsConstructor,
     parserFn: db.parser.singleParser(fromJson, 'insertTagsOne'),
   );
+
+  TagsDAO({
+    required super.db,
+  }) : super(fromJson: Tag.fromJson);
 
   Json _createTagVarsConstructor({required Tag newObject}) => {
     'object': {'name': newObject.name},

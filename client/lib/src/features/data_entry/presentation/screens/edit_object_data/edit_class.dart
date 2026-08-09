@@ -19,6 +19,10 @@ class EditClass extends StatefulWidget {
 class _EditClassState extends State<EditClass> {
   late final EditObjectController<Class> _controller;
 
+  Class get initialClass => _controller.initialObject!;
+  Class get newClass => _controller.newObject;
+  set newClass(Class a) => _controller.newObject = a;
+
   @override
   void initState() {
     super.initState();
@@ -52,10 +56,6 @@ class _EditClassState extends State<EditClass> {
       initialObject: oldClass,
     );
   }
-
-  Class get initialClass => _controller.initialObject!;
-  Class get newClass => _controller.newObject;
-  set newClass(Class a) => _controller.newObject = a;
 
   @override
   Widget build(BuildContext context) {

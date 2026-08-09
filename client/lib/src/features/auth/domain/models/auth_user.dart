@@ -19,6 +19,9 @@ class AuthUser with _$AuthUser {
   @override
   final bool isMultiFactorEnabled;
 
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  Map<String, dynamic> get filteredClaims => _filterClaims(claims);
+
   const AuthUser({
     required this.uid,
     required this.email,
@@ -32,9 +35,6 @@ class AuthUser with _$AuthUser {
       _$AuthUserFromJson(json);
 
   Map<String, dynamic> toJson() => _$AuthUserToJson(this);
-
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  Map<String, dynamic> get filteredClaims => _filterClaims(claims);
 
   Map<String, dynamic> _filterClaims(Map<String, dynamic> claims) {
     return {...claims, 'password': claims['password'] != null ? '***' : null};

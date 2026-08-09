@@ -6,7 +6,6 @@ class OrderByWidget extends StatelessWidget {
   final QueryableType selectedQueryableType;
   final OrderBy orderBy;
   final void Function(OrderBy) onChanged;
-  final void Function()? onRemoved;
 
   const OrderByWidget({
     required this.selectedQueryableType,
@@ -175,4 +174,6 @@ class OrderByWidget extends StatelessWidget {
       ),
     );
   }
+
+  final void Function()? onRemoved;
 }

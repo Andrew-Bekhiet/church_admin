@@ -122,14 +122,13 @@ class _MultifactorStateLogin extends State<MultiFactorLogin> {
 }
 
 class _EnrollMultiFactor extends StatefulWidget {
+  final void Function(String phoneNumber, String password)
+  onPhoneNumberSubmitted;
+  final bool loading;
   const _EnrollMultiFactor({
     required this.onPhoneNumberSubmitted,
     required this.loading,
   });
-
-  final void Function(String phoneNumber, String password)
-  onPhoneNumberSubmitted;
-  final bool loading;
 
   @override
   State<_EnrollMultiFactor> createState() => _EnrollMultiFactorState();
@@ -225,6 +224,12 @@ class _EnrollMultiFactorState extends State<_EnrollMultiFactor> {
 class _VerifyMultiFactor extends StatefulWidget {
   final Clock clock;
 
+  final MultiFactorSession session;
+  final MultiFactorInfo? selectedFactor;
+  final void Function(String code) onVerificationCodeSubmitted;
+  final void Function(int? resendToken) onResendCode;
+  final bool loading;
+
   const _VerifyMultiFactor({
     required this.session,
     required this.onVerificationCodeSubmitted,
@@ -233,12 +238,6 @@ class _VerifyMultiFactor extends StatefulWidget {
     required this.clock,
     this.selectedFactor,
   });
-
-  final MultiFactorSession session;
-  final MultiFactorInfo? selectedFactor;
-  final void Function(String code) onVerificationCodeSubmitted;
-  final void Function(int? resendToken) onResendCode;
-  final bool loading;
 
   @override
   State<_VerifyMultiFactor> createState() => _VerifyMultiFactorState();

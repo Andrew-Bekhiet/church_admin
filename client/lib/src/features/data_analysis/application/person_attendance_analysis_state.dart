@@ -2,10 +2,9 @@ import 'package:church_admin/church_admin.dart';
 import 'package:equatable/equatable.dart';
 
 sealed class PersonAttendanceAnalysisState with Equatable {
-  const PersonAttendanceAnalysisState();
-
   @override
   List<Object?> get props => [];
+  const PersonAttendanceAnalysisState();
 }
 
 final class PersonAttendanceAnalysisLoading

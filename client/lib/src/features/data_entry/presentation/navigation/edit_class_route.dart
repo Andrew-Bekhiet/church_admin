@@ -10,12 +10,12 @@ class EditClassExtra extends SerializableExtra {
   final Class? $class;
   final Service? service;
 
+  @override
+  String get typeName => 'EditClassExtra';
+
   const EditClassExtra({this.$class, this.service});
 
   factory EditClassExtra.fromJson(Json json) => _$EditClassExtraFromJson(json);
-
-  @override
-  String get typeName => 'EditClassExtra';
 
   @override
   Json toJson() => _$EditClassExtraToJson(this);
@@ -23,9 +23,8 @@ class EditClassExtra extends SerializableExtra {
 
 @TypedGoRoute<EditClassRoute>(path: '/edit_class')
 class EditClassRoute extends GoRouteData with $EditClassRoute {
-  const EditClassRoute({this.$extra});
-
   final EditClassExtra? $extra;
+  const EditClassRoute({this.$extra});
 
   @override
   Widget build(BuildContext context, GoRouterState state) {

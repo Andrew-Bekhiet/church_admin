@@ -41,16 +41,6 @@ class PersonMeetingAttendanceCard extends StatelessWidget {
     super.key,
   });
 
-  ViewableObjectListController<LastRecordedByInfo> _historyController() =>
-      ViewableObjectListController(
-        objectsPaginatableStream: DatabaseService.I.meetings
-            .paginatePersonAttendance(
-              personId: personId,
-              meetingId: analysis.meeting.id,
-              asServant: analysis.asServant,
-            ),
-      );
-
   @override
   Widget build(BuildContext context) {
     final textTheme = TextTheme.of(context);
@@ -150,6 +140,16 @@ class PersonMeetingAttendanceCard extends StatelessWidget {
       ),
     );
   }
+
+  ViewableObjectListController<LastRecordedByInfo> _historyController() =>
+      ViewableObjectListController(
+        objectsPaginatableStream: DatabaseService.I.meetings
+            .paginatePersonAttendance(
+              personId: personId,
+              meetingId: analysis.meeting.id,
+              asServant: analysis.asServant,
+            ),
+      );
 
   String? _rangeLabel(DateTimeRange? range) {
     if (range == null) return null;

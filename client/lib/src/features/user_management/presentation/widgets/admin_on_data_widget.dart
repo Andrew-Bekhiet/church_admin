@@ -3,9 +3,8 @@ import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 
 class AdminOnDataWidget extends StatelessWidget {
-  const AdminOnDataWidget({required this.adminOn, super.key});
-
   final List<AdminOnData> adminOn;
+  const AdminOnDataWidget({required this.adminOn, super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -7,9 +7,34 @@ import 'package:church_admin/church_admin.dart';
 /// nested field paths (e.g., Person.area => address.area).
 class RedirectingFieldMetadata<P extends Object, T extends Object>
     extends FieldMetadata<T> {
+  static RedirectingFieldMetadata<P, T>
+  fromJson<P extends Object, T extends Object>(
+    Json json,
+  ) {
+    final parentField = FieldMetadata.fromJson(json['parentField'] as Json);
+    final targetField = FieldMetadata.fromJson(json['targetField'] as Json);
+
+    return RedirectingFieldMetadata<P, T>(
+      parentField: parentField as FieldMetadata<P>,
+      targetField: targetField as FieldMetadata<T>,
+      alias: json['alias'] as String?,
+      label: json['label'] as String?,
+      isExpandable: json['isExpandable'] as bool? ?? true,
+    );
+  }
+
   final FieldMetadata<P> parentField;
   final FieldMetadata<T> targetField;
   final bool isExpandable;
+
+  // Intentionally ignoring runtimeType to ignore the type parameters
+  // because deserialized fields can't be created with the same
+  // type parameters as original fields
+  @override
+  int get hashCode => Object.hash(parentField, targetField);
+
+  @override
+  List<String> get fieldPath => [...parentField.fieldPath, name];
 
   RedirectingFieldMetadata({
     required this.parentField,
@@ -35,22 +60,6 @@ class RedirectingFieldMetadata<P extends Object, T extends Object>
          },
        );
 
-  static RedirectingFieldMetadata<P, T>
-  fromJson<P extends Object, T extends Object>(
-    Json json,
-  ) {
-    final parentField = FieldMetadata.fromJson(json['parentField'] as Json);
-    final targetField = FieldMetadata.fromJson(json['targetField'] as Json);
-
-    return RedirectingFieldMetadata<P, T>(
-      parentField: parentField as FieldMetadata<P>,
-      targetField: targetField as FieldMetadata<T>,
-      alias: json['alias'] as String?,
-      label: json['label'] as String?,
-      isExpandable: json['isExpandable'] as bool? ?? true,
-    );
-  }
-
   // Intentionally ignoring runtimeType to ignore the type parameters
   // because deserialized fields can't be created with the same
   // type parameters as original fields
@@ -60,12 +69,6 @@ class RedirectingFieldMetadata<P extends Object, T extends Object>
         parentField == other.parentField &&
         targetField == other.targetField;
   }
-
-  // Intentionally ignoring runtimeType to ignore the type parameters
-  // because deserialized fields can't be created with the same
-  // type parameters as original fields
-  @override
-  int get hashCode => Object.hash(parentField, targetField);
 
   @override
   Json toJson() {
@@ -89,7 +92,4 @@ class RedirectingFieldMetadata<P extends Object, T extends Object>
       targetField.serializeOrderBy(serializedValue),
     );
   }
-
-  @override
-  List<String> get fieldPath => [...parentField.fieldPath, name];
 }

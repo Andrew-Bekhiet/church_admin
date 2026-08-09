@@ -152,6 +152,12 @@ class _ViewUserState extends State<ViewUser> {
     );
   }
 
+  @override
+  void dispose() {
+    scrollController.dispose();
+    super.dispose();
+  }
+
   Future<void> _attendanceAnalysis(User user) async {
     await UserAnalysisRoute(
       $extra: UserAnalysisExtra(user: user),
@@ -297,11 +303,5 @@ class _ViewUserState extends State<ViewUser> {
         'حدث خطأ أثناء إلغاء تفعيل الحساب، يرجى المحاولة لاحقا',
       );
     }
-  }
-
-  @override
-  void dispose() {
-    scrollController.dispose();
-    super.dispose();
   }
 }

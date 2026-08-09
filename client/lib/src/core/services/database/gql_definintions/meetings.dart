@@ -6,16 +6,11 @@ import 'package:graphql/client.dart';
 
 class MeetingsDAO extends DAOBase<Meeting>
     with StreamableDAO<Meeting>, CreatableDAO<Meeting>, UpdatableDAO<Meeting> {
-  MeetingsDAO({required super.db}) : super(fromJson: Meeting.fromJson);
-
   @override
   late final StreamAllConfig<Meeting> baseStreamAllConfig =
       const StreamAllConfig(
         document: documentNodeSubscriptionwatchAllMeetings,
       );
-
-  @override
-  StreamCountConfig<Meeting>? get baseStreamCountConfig => null;
 
   @override
   late final StreamSingleByIdConfig<Meeting> baseStreamSingleByIdConfig =
@@ -37,6 +32,103 @@ class MeetingsDAO extends DAOBase<Meeting>
         document: documentNodeMutationinsertMeeting,
         varsConstructor: _createMeetingVarsConstructor,
       );
+
+  ({
+    List<Input_HistoryMeetingsBoolExp> where,
+    List<Input_HistoryMeetingDaysBoolExp> demographicsWhere,
+    List<Input_HistoryMeetingRosterBoolExp> rosterWhere,
+  })
+  _subjectFilters(MeetingsAnalysisSubject subject) => switch (subject) {
+    MeetingAnalysisSubject(:final meeting) => (
+      where: [
+        Input_HistoryMeetingsBoolExp(
+          id: Input_UuidComparisonExp($_eq: meeting.id.toUuid()),
+        ),
+      ],
+      demographicsWhere: const <Input_HistoryMeetingDaysBoolExp>[],
+      rosterWhere: const <Input_HistoryMeetingRosterBoolExp>[],
+    ),
+    ServiceAnalysisSubject(:final service) => (
+      where: [
+        Input_HistoryMeetingsBoolExp(
+          serviceId: Input_UuidComparisonExp($_eq: service.id.toUuid()),
+        ),
+      ],
+      demographicsWhere: const <Input_HistoryMeetingDaysBoolExp>[],
+      rosterWhere: const <Input_HistoryMeetingRosterBoolExp>[],
+    ),
+    GroupAnalysisSubject(:final group) => (
+      where: [
+        Input_HistoryMeetingsBoolExp(
+          groupId: Input_UuidComparisonExp($_eq: group.id.toUuid()),
+        ),
+      ],
+      demographicsWhere: const <Input_HistoryMeetingDaysBoolExp>[],
+      rosterWhere: const <Input_HistoryMeetingRosterBoolExp>[],
+    ),
+    ClassAnalysisSubject(:final class$) => _classFilters(class$),
+  };
+
+  // Real meetings are almost always service-wide (no serviceStudyYear/
+  // serviceGender set), so the class's study year/gender narrows the
+  // attendee demographic rows rather than the meeting selection itself.
+  ({
+    List<Input_HistoryMeetingsBoolExp> where,
+    List<Input_HistoryMeetingDaysBoolExp> demographicsWhere,
+    List<Input_HistoryMeetingRosterBoolExp> rosterWhere,
+  })
+  _classFilters(Class class$) {
+    final serviceId = class$.service?.id.toUuid() ?? class$.serviceId?.toUuid();
+    final serviceStudyYear = class$.studyYear?.order ?? class$.serviceStudyYear;
+    final serviceGender = class$.serviceGender;
+
+    return (
+      where: [
+        Input_HistoryMeetingsBoolExp(
+          serviceId: switch (serviceId) {
+            final serviceId? => Input_UuidComparisonExp($_eq: serviceId),
+            null => null,
+          },
+        ),
+      ],
+      demographicsWhere: [
+        Input_HistoryMeetingDaysBoolExp(
+          studyYearId: switch (serviceStudyYear) {
+            final serviceStudyYear? => Input_SmallintComparisonExp(
+              $_eq: serviceStudyYear,
+            ),
+            null => null,
+          },
+          gender: switch (serviceGender) {
+            final serviceGender? => Input_BooleanComparisonExp(
+              $_eq: serviceGender,
+            ),
+            null => null,
+          },
+        ),
+      ],
+      rosterWhere: [
+        Input_HistoryMeetingRosterBoolExp(
+          studyYearId: switch (serviceStudyYear) {
+            final serviceStudyYear? => Input_IntComparisonExp(
+              $_eq: serviceStudyYear,
+            ),
+            null => null,
+          },
+          gender: switch (serviceGender) {
+            final serviceGender? => Input_BooleanComparisonExp(
+              $_eq: serviceGender,
+            ),
+            null => null,
+          },
+        ),
+      ],
+    );
+  }
+
+  @override
+  StreamCountConfig<Meeting>? get baseStreamCountConfig => null;
+  MeetingsDAO({required super.db}) : super(fromJson: Meeting.fromJson);
 
   Json _streamSingleByIdVarsConstructor({required UuidValue id}) =>
       Variables_Subscription_watchMeeting(id: id).toJson();
@@ -271,99 +363,6 @@ class MeetingsDAO extends DAOBase<Meeting>
             attended: row.attendanceHistory.isNotEmpty,
           ),
     ];
-  }
-
-  ({
-    List<Input_HistoryMeetingsBoolExp> where,
-    List<Input_HistoryMeetingDaysBoolExp> demographicsWhere,
-    List<Input_HistoryMeetingRosterBoolExp> rosterWhere,
-  })
-  _subjectFilters(MeetingsAnalysisSubject subject) => switch (subject) {
-    MeetingAnalysisSubject(:final meeting) => (
-      where: [
-        Input_HistoryMeetingsBoolExp(
-          id: Input_UuidComparisonExp($_eq: meeting.id.toUuid()),
-        ),
-      ],
-      demographicsWhere: const <Input_HistoryMeetingDaysBoolExp>[],
-      rosterWhere: const <Input_HistoryMeetingRosterBoolExp>[],
-    ),
-    ServiceAnalysisSubject(:final service) => (
-      where: [
-        Input_HistoryMeetingsBoolExp(
-          serviceId: Input_UuidComparisonExp($_eq: service.id.toUuid()),
-        ),
-      ],
-      demographicsWhere: const <Input_HistoryMeetingDaysBoolExp>[],
-      rosterWhere: const <Input_HistoryMeetingRosterBoolExp>[],
-    ),
-    GroupAnalysisSubject(:final group) => (
-      where: [
-        Input_HistoryMeetingsBoolExp(
-          groupId: Input_UuidComparisonExp($_eq: group.id.toUuid()),
-        ),
-      ],
-      demographicsWhere: const <Input_HistoryMeetingDaysBoolExp>[],
-      rosterWhere: const <Input_HistoryMeetingRosterBoolExp>[],
-    ),
-    ClassAnalysisSubject(:final class$) => _classFilters(class$),
-  };
-
-  // Real meetings are almost always service-wide (no serviceStudyYear/
-  // serviceGender set), so the class's study year/gender narrows the
-  // attendee demographic rows rather than the meeting selection itself.
-  ({
-    List<Input_HistoryMeetingsBoolExp> where,
-    List<Input_HistoryMeetingDaysBoolExp> demographicsWhere,
-    List<Input_HistoryMeetingRosterBoolExp> rosterWhere,
-  })
-  _classFilters(Class class$) {
-    final serviceId = class$.service?.id.toUuid() ?? class$.serviceId?.toUuid();
-    final serviceStudyYear = class$.studyYear?.order ?? class$.serviceStudyYear;
-    final serviceGender = class$.serviceGender;
-
-    return (
-      where: [
-        Input_HistoryMeetingsBoolExp(
-          serviceId: switch (serviceId) {
-            final serviceId? => Input_UuidComparisonExp($_eq: serviceId),
-            null => null,
-          },
-        ),
-      ],
-      demographicsWhere: [
-        Input_HistoryMeetingDaysBoolExp(
-          studyYearId: switch (serviceStudyYear) {
-            final serviceStudyYear? => Input_SmallintComparisonExp(
-              $_eq: serviceStudyYear,
-            ),
-            null => null,
-          },
-          gender: switch (serviceGender) {
-            final serviceGender? => Input_BooleanComparisonExp(
-              $_eq: serviceGender,
-            ),
-            null => null,
-          },
-        ),
-      ],
-      rosterWhere: [
-        Input_HistoryMeetingRosterBoolExp(
-          studyYearId: switch (serviceStudyYear) {
-            final serviceStudyYear? => Input_IntComparisonExp(
-              $_eq: serviceStudyYear,
-            ),
-            null => null,
-          },
-          gender: switch (serviceGender) {
-            final serviceGender? => Input_BooleanComparisonExp(
-              $_eq: serviceGender,
-            ),
-            null => null,
-          },
-        ),
-      ],
-    );
   }
 
   Future<List<PersonMeetingAttendanceAnalysis>> getAttendanceAnalyses({

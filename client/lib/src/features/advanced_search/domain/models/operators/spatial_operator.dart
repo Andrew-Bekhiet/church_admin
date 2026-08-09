@@ -3,8 +3,6 @@ import 'package:church_admin/church_admin.dart';
 enum SpatialOperator implements Operator<Polygon> {
   intersects;
 
-  const SpatialOperator();
-
   @override
   String get label => 'يتقاطع مع';
 
@@ -13,6 +11,8 @@ enum SpatialOperator implements Operator<Polygon> {
 
   @override
   bool get acceptsValue => true;
+
+  const SpatialOperator();
 
   @override
   Json queryToJson(FieldMetadata field, Polygon filterValue) {

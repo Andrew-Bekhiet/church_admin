@@ -2,6 +2,11 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 
 class ViewableObjectAppBar extends StatefulWidget {
+  final Color? foregroundColor;
+  final ViewableWithIDAndImage viewable;
+  final double appBarMaxHeight;
+  final bool circleCrop;
+  final Widget? overrideImage;
   const ViewableObjectAppBar({
     required this.viewable,
     required this.appBarMaxHeight,
@@ -11,13 +16,7 @@ class ViewableObjectAppBar extends StatefulWidget {
     this.overrideImage,
     super.key,
   });
-
-  final Color? foregroundColor;
-  final ViewableWithIDAndImage viewable;
-  final double appBarMaxHeight;
-  final bool circleCrop;
   final void Function()? onTap;
-  final Widget? overrideImage;
 
   @override
   State<ViewableObjectAppBar> createState() => ViewableObjectAppBarState();
@@ -133,6 +132,15 @@ class ViewableObjectAppBarState extends State<ViewableObjectAppBar> {
 }
 
 class _AppBarPhoto extends StatelessWidget {
+  final ViewableWithIDAndImage viewable;
+
+  final double height;
+  final double blurhashSize;
+  final Alignment photoAlign;
+  final Color? foregroundColor;
+  final bool circleCrop;
+  final BorderRadius? borderRadius;
+  final Widget? overrideImage;
   const _AppBarPhoto({
     required this.photoAlign,
     required this.borderRadius,
@@ -144,17 +152,6 @@ class _AppBarPhoto extends StatelessWidget {
     required this.onTap,
     required this.overrideImage,
   });
-
-  final ViewableWithIDAndImage viewable;
-
-  final double height;
-  final double blurhashSize;
-  final Alignment photoAlign;
-  final Color? foregroundColor;
-  final bool circleCrop;
-  final BorderRadius? borderRadius;
-  final void Function()? onTap;
-  final Widget? overrideImage;
 
   @override
   Widget build(BuildContext context) {
@@ -188,4 +185,6 @@ class _AppBarPhoto extends StatelessWidget {
       ),
     );
   }
+
+  final void Function()? onTap;
 }

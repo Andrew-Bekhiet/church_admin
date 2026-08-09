@@ -16,13 +16,13 @@ class GqlKvStore extends gql.Store {
 
   final SyncKVStore<Map<String, dynamic>> _storage;
 
+  @override
+  Map<String, dynamic>? get(String dataId) => _storage.get(dataId);
+
   GqlKvStore(this._storage);
 
   @override
   void delete(String dataId) => _storage.delete(dataId);
-
-  @override
-  Map<String, dynamic>? get(String dataId) => _storage.get(dataId);
 
   @override
   void put(String dataId, Map<String, dynamic>? value) =>

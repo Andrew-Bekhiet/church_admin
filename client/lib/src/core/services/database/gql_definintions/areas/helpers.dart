@@ -11,6 +11,10 @@ class AreaInsertHelper {
 
   final Map<String, dynamic> _areaDelta;
 
+  Variables_Mutation_insertArea get variables => Variables_Mutation_insertArea(
+    newArea: Input_AreasInsertInput.fromJson(_areaDelta),
+  );
+
   AreaInsertHelper({
     required this.newArea,
     Area? oldArea,
@@ -19,10 +23,6 @@ class AreaInsertHelper {
          (oldArea ?? const Area(id: '', name: '')).toJson(),
          ignoreFields: _mutationNonExistentVars,
        );
-
-  Variables_Mutation_insertArea get variables => Variables_Mutation_insertArea(
-    newArea: Input_AreasInsertInput.fromJson(_areaDelta),
-  );
 }
 
 class AreaUpdateHelper {
@@ -30,12 +30,6 @@ class AreaUpdateHelper {
   final Area oldArea;
 
   final Map<String, dynamic> _areaDelta;
-
-  AreaUpdateHelper({required this.newArea, required this.oldArea})
-    : _areaDelta = computeObjectDelta(
-        newArea.toJson(),
-        oldArea.toJson(),
-      );
 
   bool get _insertHistoryVisitHistoryOne => _areaDelta['lastVisit'] != null;
 
@@ -45,4 +39,10 @@ class AreaUpdateHelper {
     updateLastVisit: _insertHistoryVisitHistoryOne,
     lastVisit: _insertHistoryVisitHistoryOne ? newArea.lastVisit!.time : null,
   );
+
+  AreaUpdateHelper({required this.newArea, required this.oldArea})
+    : _areaDelta = computeObjectDelta(
+        newArea.toJson(),
+        oldArea.toJson(),
+      );
 }

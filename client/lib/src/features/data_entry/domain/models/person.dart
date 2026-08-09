@@ -37,8 +37,6 @@ class Person extends ViewableWithIDAndImage
   @override
   final Address? address;
 
-  Point? get geolocation => address?.geolocation;
-
   @override
   final String? mainPhone;
 
@@ -248,6 +246,16 @@ class Person extends ViewableWithIDAndImage
   @JsonKey(includeToJson: false)
   final bool userCanEdit;
 
+  Point? get geolocation => address?.geolocation;
+
+  bool get isStudent => workStatus == WorkStatus.student;
+
+  @override
+  String get typeName => AdvancedQueriesMetadata().person.name;
+  @override
+  ObjectImageInfo get imageInfo =>
+      FunctionsObjectImageInfo('persons', id, lastUpdatedTime: photoUpdatedAt);
+
   Person({
     required this.id,
     required this.name,
@@ -345,17 +353,8 @@ class Person extends ViewableWithIDAndImage
 
   factory Person.fromJson(Map<String, Object?> json) => _$PersonFromJson(json);
 
-  bool get isStudent => workStatus == WorkStatus.student;
-
-  @override
-  String get typeName => AdvancedQueriesMetadata().person.name;
-
   @override
   Json toJson() => _$PersonToJson(this);
-
-  @override
-  ObjectImageInfo get imageInfo =>
-      FunctionsObjectImageInfo('persons', id, lastUpdatedTime: photoUpdatedAt);
 
   bool spiritDataUpToDate() {
     final thirtyDaysAgo = DateTime.now().subtract(const Duration(days: 60));
@@ -668,8 +667,6 @@ class Person extends ViewableWithIDAndImage
 }
 
 class PersonFields extends _PersonFields {
-  PersonFields();
-
   FieldMetadata<Area> get area => address.redirectTo(
     AddressFields().area,
     isExpandable: false,
@@ -747,6 +744,8 @@ class PersonFields extends _PersonFields {
       for (final field in allFields) field.name: field,
     };
   }
+
+  PersonFields();
 }
 
 List<Class>? personsClassesFromJson(List? data) =>

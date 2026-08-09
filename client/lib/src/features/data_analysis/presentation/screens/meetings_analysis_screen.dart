@@ -30,17 +30,6 @@ class _MeetingsAnalysisScreenState extends State<MeetingsAnalysisScreen> {
 
   DateTimeRange get _range => _rangePreset.range;
 
-  void _applyPreset(BuildContext context, DateTimeRangePreset preset) {
-    setState(() {
-      _rangePreset = preset;
-      _granularity = AttendanceGranularity.bestForDuration(
-        _rangePreset.duration,
-      );
-    });
-
-    unawaited(context.read<MeetingsAnalysisCubit>().load(preset.range));
-  }
-
   @override
   Widget build(BuildContext context) {
     final textTheme = TextTheme.of(context);
@@ -136,5 +125,16 @@ class _MeetingsAnalysisScreenState extends State<MeetingsAnalysisScreen> {
         ),
       ),
     );
+  }
+
+  void _applyPreset(BuildContext context, DateTimeRangePreset preset) {
+    setState(() {
+      _rangePreset = preset;
+      _granularity = AttendanceGranularity.bestForDuration(
+        _rangePreset.duration,
+      );
+    });
+
+    unawaited(context.read<MeetingsAnalysisCubit>().load(preset.range));
   }
 }

@@ -11,13 +11,6 @@ class DatabaseService {
   static DatabaseService get I =>
       globalProviderContainer.read(databaseServiceProvider);
 
-  DatabaseService(
-    this.graphQLClient, {
-    this.parser = const GQLParser(),
-    this.varsTransformer = const DBVarsTransformer(),
-    this.advancedQueryParser = const AdvancedQueryParser(),
-  });
-
   final DBGraphQLClient graphQLClient;
   final GQLParser parser;
   final DBVarsTransformer varsTransformer;
@@ -72,4 +65,11 @@ class DatabaseService {
     StudyYear: metadata.studyYears,
     Tag: metadata.tags,
   };
+
+  DatabaseService(
+    this.graphQLClient, {
+    this.parser = const GQLParser(),
+    this.varsTransformer = const DBVarsTransformer(),
+    this.advancedQueryParser = const AdvancedQueryParser(),
+  });
 }

@@ -115,7 +115,8 @@ class ThemingService with WidgetsBindingObserver {
         PlatformDispatcher.instance.platformBrightness == Brightness.dark;
 
     final bool greatFeastTheme =
-        greatFeastThemeOverride ?? effectiveUserPreferencesService.greatFeastTheme;
+        greatFeastThemeOverride ??
+        effectiveUserPreferencesService.greatFeastTheme;
 
     Color? effectiveSeedOverride = seedOverride;
 
@@ -324,6 +325,15 @@ class ThemingService with WidgetsBindingObserver {
 
   final UserPreferencesService _userPreferencesService;
 
+  final BehaviorSubject<ThemeData> _themeData;
+
+  Stream<ThemeData> get stream => _themeData.share();
+
+  ThemeData get theme => _themeData.value;
+  set theme(ThemeData themeData) {
+    _themeData.add(themeData);
+  }
+
   factory ThemingService({
     required UserPreferencesService userPreferencesService,
   }) => ThemingService.withInitialThemeata(
@@ -336,15 +346,6 @@ class ThemingService with WidgetsBindingObserver {
     required ThemeData initialTheme,
   }) : _themeData = BehaviorSubject.seeded(initialTheme) {
     WidgetsBinding.instance.addObserver(this);
-  }
-
-  final BehaviorSubject<ThemeData> _themeData;
-
-  Stream<ThemeData> get stream => _themeData.share();
-
-  ThemeData get theme => _themeData.value;
-  set theme(ThemeData themeData) {
-    _themeData.add(themeData);
   }
 
   @override

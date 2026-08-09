@@ -30,12 +30,6 @@ class _ChurchAdminSplashScreenState extends State<ChurchAdminSplashScreen> {
   }
 
   @override
-  void dispose() {
-    _timeoutTimer?.cancel();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -85,5 +79,11 @@ class _ChurchAdminSplashScreenState extends State<ChurchAdminSplashScreen> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _timeoutTimer?.cancel();
+    super.dispose();
   }
 }

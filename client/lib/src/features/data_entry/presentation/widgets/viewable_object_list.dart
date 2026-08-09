@@ -19,6 +19,13 @@ enum ViewableObjectListType {
 }
 
 class ViewableObjectList<T extends Viewable> extends StatefulWidget {
+  final ScrollController? scrollController;
+  final ViewableObjectListController<T> objectsController;
+  final ItemBuilder<T>? itemBuilder;
+  final ViewableObjectWidgetConfig<T>? viewableObjectWidgetConfig;
+  final bool itemsExpandable;
+  final bool addSeparator;
+  final ViewableObjectListType type;
   const ViewableObjectList({
     required this.objectsController,
     this.type = ViewableObjectListType.list,
@@ -30,14 +37,6 @@ class ViewableObjectList<T extends Viewable> extends StatefulWidget {
     super.key,
   });
 
-  final ScrollController? scrollController;
-  final ViewableObjectListController<T> objectsController;
-  final ItemBuilder<T>? itemBuilder;
-  final ViewableObjectWidgetConfig<T>? viewableObjectWidgetConfig;
-  final bool itemsExpandable;
-  final bool addSeparator;
-  final ViewableObjectListType type;
-
   @override
   State<ViewableObjectList> createState() => _ViewableObjectListState<T>();
 }
@@ -46,6 +45,12 @@ class _ViewableObjectListState<T extends Viewable>
     extends State<ViewableObjectList<T>> {
   ScrollController? _ownScrollController;
   ScrollController? _scrollController;
+
+  void Function(VisibilityInfo) _onVisibilityChanged(int i) => (info) {
+    if (info.visibleFraction >= 0.8) {
+      unawaited(objectsController.itemVisibleAt(i));
+    }
+  };
 
   ViewableObjectListController<T> get objectsController =>
       widget.objectsController;
@@ -68,17 +73,6 @@ class _ViewableObjectListState<T extends Viewable>
     _ownScrollController = null;
 
     _listenToScrollController();
-  }
-
-  void _listenToScrollController() {
-    _scrollController =
-        widget.scrollController ?? (_ownScrollController = ScrollController());
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      if (!mounted) return;
-
-      _scrollController?.addListener(_scrollListener);
-    });
   }
 
   @override
@@ -168,6 +162,26 @@ class _ViewableObjectListState<T extends Viewable>
     );
   }
 
+  @override
+  Future<void> dispose() async {
+    _scrollController?.removeListener(_scrollListener);
+
+    _ownScrollController?.dispose();
+
+    super.dispose();
+  }
+
+  void _listenToScrollController() {
+    _scrollController =
+        widget.scrollController ?? (_ownScrollController = ScrollController());
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) return;
+
+      _scrollController?.addListener(_scrollListener);
+    });
+  }
+
   void _scrollListener() {
     final position = _scrollController!.position;
 
@@ -181,21 +195,6 @@ class _ViewableObjectListState<T extends Viewable>
         }
       },
     );
-  }
-
-  void Function(VisibilityInfo) _onVisibilityChanged(int i) => (info) {
-    if (info.visibleFraction >= 0.8) {
-      unawaited(objectsController.itemVisibleAt(i));
-    }
-  };
-
-  @override
-  Future<void> dispose() async {
-    _scrollController?.removeListener(_scrollListener);
-
-    _ownScrollController?.dispose();
-
-    super.dispose();
   }
 }
 

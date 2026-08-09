@@ -25,11 +25,11 @@ class EditFamily extends StatefulWidget {
 class _EditFamilyState extends State<EditFamily> {
   late EditObjectController<Family> _controller;
 
+  bool _relatedFamiliesLoaded = false;
+
   Family get initialFamily => _controller.initialObject!;
   Family get newFamily => _controller.newObject;
   set newFamily(Family f) => _controller.newObject = f;
-
-  bool _relatedFamiliesLoaded = false;
 
   @override
   void initState() {

@@ -72,6 +72,40 @@ class NotificationsService extends BlocObserver {
     return defaultRemoteNotificationsDetails;
   }
 
+  final NotificationsSettingsStorage _settings;
+  final NotificationsStorage _storage;
+  final FirebaseMessaging _firebaseMessaging;
+  final FlutterLocalNotificationsPlugin _localNotificationsPlugin;
+
+  final AuthBloc _authBloc;
+  final DatabaseService _databaseService;
+
+  final BehaviorSubject<bool> _isPausedSubject = BehaviorSubject.seeded(true);
+
+  final BehaviorSubject<Notification> _foregroundNotificationsStreamController =
+      BehaviorSubject();
+
+  late final StreamSubscription<Notification> _onMessageOpenedAppSubscription;
+  late final StreamSubscription<Notification> _onForegroundMessageSubscription;
+  StreamSubscription<String?>? _onFCMTokenRefresh;
+
+  late final Stream<Notification> onNotificationTapStream =
+      getInitialNotification()
+          .asStream()
+          .switchMap(
+            (initial) async* {
+              if (initial != null) yield initial;
+
+              yield* _foregroundNotificationsStreamController.stream;
+            },
+          )
+          .delayWhen(
+            (_) => _isPausedSubject.where((isPaused) => !isPaused),
+          )
+          .asBroadcastStream();
+
+  bool get isPaused => _isPausedSubject.value;
+
   NotificationsService({
     required this._firebaseMessaging,
     required this._localNotificationsPlugin,
@@ -94,40 +128,6 @@ class NotificationsService extends BlocObserver {
         .map(Notification.fromRemoteMessage)
         .listen(addForegroundNotificationTap);
   }
-
-  final NotificationsSettingsStorage _settings;
-  final NotificationsStorage _storage;
-  final FirebaseMessaging _firebaseMessaging;
-  final FlutterLocalNotificationsPlugin _localNotificationsPlugin;
-
-  final AuthBloc _authBloc;
-  final DatabaseService _databaseService;
-
-  final BehaviorSubject<bool> _isPausedSubject = BehaviorSubject.seeded(true);
-
-  final BehaviorSubject<Notification> _foregroundNotificationsStreamController =
-      BehaviorSubject();
-
-  late final StreamSubscription<Notification> _onMessageOpenedAppSubscription;
-  late final StreamSubscription<Notification> _onForegroundMessageSubscription;
-  StreamSubscription<String?>? _onFCMTokenRefresh;
-
-  bool get isPaused => _isPausedSubject.value;
-
-  late final Stream<Notification> onNotificationTapStream =
-      getInitialNotification()
-          .asStream()
-          .switchMap(
-            (initial) async* {
-              if (initial != null) yield initial;
-
-              yield* _foregroundNotificationsStreamController.stream;
-            },
-          )
-          .delayWhen(
-            (_) => _isPausedSubject.where((isPaused) => !isPaused),
-          )
-          .asBroadcastStream();
 
   Future<void> _onForegroundMessage(Notification notification) async {
     await notify(

@@ -9,12 +9,12 @@ class HomeSearchDelegate extends SearchDelegate {
 
   final HomeDAO homeDAO;
 
-  HomeSearchDelegate(this.homeDAO) : super();
-
   Timer? _debounceTimer;
   String _lastQuery = '';
 
   Future<HomeSearchResults>? _searchFuture;
+
+  HomeSearchDelegate(this.homeDAO) : super();
 
   @override
   ThemeData appBarTheme(BuildContext context) {

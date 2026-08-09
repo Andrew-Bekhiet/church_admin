@@ -19,9 +19,6 @@ class AttendanceSummaryBar extends StatelessWidget {
     super.key,
   });
 
-  void _onSegmentTap(AttendancePresenceFilter tapped) =>
-      onFilterChanged(filter == tapped ? AttendancePresenceFilter.all : tapped);
-
   @override
   Widget build(BuildContext context) {
     final dividerColor = Theme.of(context).colorScheme.outlineVariant;
@@ -80,4 +77,7 @@ class AttendanceSummaryBar extends StatelessWidget {
       ),
     );
   }
+
+  void _onSegmentTap(AttendancePresenceFilter tapped) =>
+      onFilterChanged(filter == tapped ? AttendancePresenceFilter.all : tapped);
 }

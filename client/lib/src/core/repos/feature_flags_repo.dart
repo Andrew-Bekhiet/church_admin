@@ -23,11 +23,6 @@ class FeatureFlagsRepository {
   final FirebaseRemoteConfig _remoteConfig;
   final PackageInfo _packageInfo;
 
-  FeatureFlagsRepository({
-    required this._remoteConfig,
-    required this._packageInfo,
-  });
-
   Version get latestVersion =>
       Version.parse(_remoteConfig.getString(latestVersionKey));
 
@@ -87,6 +82,11 @@ class FeatureFlagsRepository {
       : _remoteConfig.onConfigUpdated.asyncMap(
           (_) => _remoteConfig.fetchAndActivate(),
         );
+
+  FeatureFlagsRepository({
+    required this._remoteConfig,
+    required this._packageInfo,
+  });
 
   Future<void> initialize() async {
     await _remoteConfig.fetchAndActivate();

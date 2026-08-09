@@ -19,16 +19,16 @@ class StudyYear extends ViewableWithID
   @JsonKey(defaultValue: '')
   final String name;
 
-  StudyYear({required this.order, required this.name});
-
-  factory StudyYear.fromJson(Map<String, Object?> json) =>
-      _$StudyYearFromJson(json);
-
   @override
   String get id => order.toString();
 
   @override
   String get typeName => AdvancedQueriesMetadata().studyYear.name;
+
+  StudyYear({required this.order, required this.name});
+
+  factory StudyYear.fromJson(Map<String, Object?> json) =>
+      _$StudyYearFromJson(json);
 
   @override
   Json toJson() => _$StudyYearToJson(this);
@@ -36,8 +36,6 @@ class StudyYear extends ViewableWithID
 
 class StudyYearFields extends _StudyYearFields {
   static T _identity<T>(T value) => value;
-
-  StudyYearFields();
 
   @override
   FieldMetadata<StudyYear> get id => const FieldMetadata<StudyYear>(
@@ -57,4 +55,6 @@ class StudyYearFields extends _StudyYearFields {
       ...super.allFieldsByName,
     };
   }
+
+  StudyYearFields();
 }

@@ -13,16 +13,6 @@ class AttendanceSearchBar extends StatefulWidget {
 class _AttendanceSearchBarState extends State<AttendanceSearchBar> {
   final TextEditingController _controller = TextEditingController();
 
-  void _onChanged(String value) {
-    widget.onChanged(value.isEmpty ? null : value);
-  }
-
-  void _clear() {
-    _controller.clear();
-    widget.onChanged(null);
-    FocusScope.of(context).unfocus();
-  }
-
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -68,5 +58,15 @@ class _AttendanceSearchBarState extends State<AttendanceSearchBar> {
   void dispose() {
     _controller.dispose();
     super.dispose();
+  }
+
+  void _onChanged(String value) {
+    widget.onChanged(value.isEmpty ? null : value);
+  }
+
+  void _clear() {
+    _controller.clear();
+    widget.onChanged(null);
+    FocusScope.of(context).unfocus();
   }
 }

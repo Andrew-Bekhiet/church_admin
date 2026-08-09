@@ -1,14 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 
 sealed class RecordAttendanceScope {
-  final bool canRecordPersons;
-  final bool canRecordServants;
-
-  const RecordAttendanceScope({
-    required this.canRecordPersons,
-    required this.canRecordServants,
-  });
-
   static RecordAttendanceScope? fromAdminOnData(AdminOnData adminOnData) {
     switch (adminOnData) {
       case AdminOnData(
@@ -41,6 +33,14 @@ sealed class RecordAttendanceScope {
         return null;
     }
   }
+
+  final bool canRecordPersons;
+  final bool canRecordServants;
+
+  const RecordAttendanceScope({
+    required this.canRecordPersons,
+    required this.canRecordServants,
+  });
 
   bool coversMeeting(Meeting meeting);
 }

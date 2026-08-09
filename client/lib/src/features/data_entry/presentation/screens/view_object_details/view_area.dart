@@ -332,6 +332,17 @@ class _ViewAreaState extends State<ViewArea> {
     );
   }
 
+  @override
+  void dispose() {
+    unawaited(Future.wait(_controllersToDispose.map((e) => e.dispose())));
+    unawaited(_streetsOrderBy.close());
+    unawaited(_familiesOrderBy.close());
+    unawaited(_personsOrderBy.close());
+    unawaited(_storesOrderBy.close());
+
+    super.dispose();
+  }
+
   Future<void> _showOrderBySheet(int currentTabIndex) async {
     final advancedQueriesMetadata = AdvancedQueriesMetadata();
 
@@ -365,16 +376,5 @@ class _ViewAreaState extends State<ViewArea> {
   ) {
     _controllersToDispose.add(controller);
     return controller;
-  }
-
-  @override
-  void dispose() {
-    unawaited(Future.wait(_controllersToDispose.map((e) => e.dispose())));
-    unawaited(_streetsOrderBy.close());
-    unawaited(_familiesOrderBy.close());
-    unawaited(_personsOrderBy.close());
-    unawaited(_storesOrderBy.close());
-
-    super.dispose();
   }
 }

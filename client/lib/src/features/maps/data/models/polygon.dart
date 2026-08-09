@@ -3,6 +3,9 @@ part of 'spatial.dart';
 class Polygon with Equatable implements Spatial {
   final List<Point> coordinates;
 
+  @override
+  List<Object?> get props => coordinates;
+
   const Polygon(this.coordinates);
 
   Polygon.fromJson(Json json)
@@ -23,9 +26,6 @@ class Polygon with Equatable implements Spatial {
 
   String asWKT() =>
       'POLYGON((${[...coordinates.map((p) => '${p.longitude} ${p.latitude}'), if (coordinates.isNotEmpty) '${coordinates.first.longitude} ${coordinates.first.latitude}'].join(', ')}))';
-
-  @override
-  List<Object?> get props => coordinates;
 
   @override
   String toString() => coordinates.map((p) => p.toString()).join(', ');

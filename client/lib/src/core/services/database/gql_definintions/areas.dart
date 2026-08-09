@@ -4,8 +4,6 @@ import 'package:church_admin/src/core/services/database/gql_definintions/areas/_
 import 'package:church_admin/src/core/services/database/gql_definintions/areas/helpers.dart';
 
 class AreasDAO extends FullCRUDDAO<Area> {
-  AreasDAO({required super.db}) : super(fromJson: Area.fromJson);
-
   @override
   late final StreamAllConfig<Area> baseStreamAllConfig = const StreamAllConfig(
     document: documentNodeSubscriptionwatchAllAreas,
@@ -41,6 +39,8 @@ class AreasDAO extends FullCRUDDAO<Area> {
         document: documentNodeMutationinsertArea,
         varsConstructor: _createAreaVarsConstructor,
       );
+
+  AreasDAO({required super.db}) : super(fromJson: Area.fromJson);
 
   Json _streamSingleByIdVarsConstructor({required UuidValue id}) =>
       Variables_Subscription_watchArea(id: id).toJson();

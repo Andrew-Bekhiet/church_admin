@@ -3,10 +3,6 @@ import 'package:church_admin/src/core/services/database/gql_definintions/metadat
 
 class ShammasLevelsDAO extends DAOBase<ShammasLevel>
     with StreamableDAO<ShammasLevel> {
-  ShammasLevelsDAO({
-    required super.db,
-  }) : super(fromJson: ShammasLevel.fromJson);
-
   @override
   StreamAllConfig<ShammasLevel> get baseStreamAllConfig =>
       const StreamAllConfig(
@@ -16,4 +12,8 @@ class ShammasLevelsDAO extends DAOBase<ShammasLevel>
   @override
   StreamSingleByIdConfig<ShammasLevel> get baseStreamSingleByIdConfig =>
       throw UnimplementedError();
+
+  ShammasLevelsDAO({
+    required super.db,
+  }) : super(fromJson: ShammasLevel.fromJson);
 }

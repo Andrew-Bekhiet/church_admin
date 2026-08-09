@@ -16,9 +16,6 @@ class ViewableObjectWidgetConfig<T extends Viewable> {
   final Widget? photo;
   final Widget? trailing;
 
-  final void Function(T)? onTap;
-  final void Function(T)? onLongPress;
-
   final FieldMetadata? secondLineField;
 
   const ViewableObjectWidgetConfig({
@@ -35,6 +32,9 @@ class ViewableObjectWidgetConfig<T extends Viewable> {
     this.onLongPress,
     this.secondLineField,
   });
+
+  final void Function(T)? onTap;
+  final void Function(T)? onLongPress;
 
   ViewableObjectWidgetConfig<NewT> copyWith<NewT extends T>({
     bool? selected,

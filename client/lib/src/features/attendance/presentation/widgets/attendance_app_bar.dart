@@ -26,17 +26,6 @@ class AttendanceAppBar extends StatelessWidget {
     super.key,
   });
 
-  Future<void> _switchMeeting(
-    BuildContext context,
-    RecordAttendanceCubit cubit,
-  ) async {
-    final selected = await SelectMeetingBottomSheet.show(
-      context,
-      currentMeeting: meeting,
-    );
-    if (selected != null) cubit.switchMeeting(selected);
-  }
-
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<RecordAttendanceCubit>();
@@ -84,6 +73,17 @@ class AttendanceAppBar extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  Future<void> _switchMeeting(
+    BuildContext context,
+    RecordAttendanceCubit cubit,
+  ) async {
+    final selected = await SelectMeetingBottomSheet.show(
+      context,
+      currentMeeting: meeting,
+    );
+    if (selected != null) cubit.switchMeeting(selected);
   }
 
   void _openAnalysis(BuildContext context) {

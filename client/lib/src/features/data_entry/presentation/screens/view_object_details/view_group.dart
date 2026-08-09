@@ -193,6 +193,13 @@ class _ViewGroupState extends State<ViewGroup> {
     );
   }
 
+  @override
+  void dispose() {
+    unawaited(_personsController.dispose());
+
+    super.dispose();
+  }
+
   Future<void> _showOrderBySheet() async {
     final queryableType = AdvancedQueriesMetadata().person;
 
@@ -211,12 +218,5 @@ class _ViewGroupState extends State<ViewGroup> {
         );
       },
     );
-  }
-
-  @override
-  void dispose() {
-    unawaited(_personsController.dispose());
-
-    super.dispose();
   }
 }

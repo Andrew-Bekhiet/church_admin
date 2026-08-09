@@ -9,6 +9,59 @@ class ImageObjectWidget extends StatelessWidget {
   static const clipBorderRadius = BorderRadius.all(Radius.circular(10));
   static const denseClipBorderRadius = BorderRadius.all(Radius.circular(10));
 
+  final ImageUrlCacheService photoUrlCacheService;
+  final ViewableObjectService viewableObjectService;
+  final IImage imageObject;
+  final bool circleCrop;
+  final bool isDense;
+  // ignore: no-object-declaration
+  final Object? heroTag;
+  final double size;
+  final BorderRadius? borderRadius;
+  final double? blurhashSize;
+
+  void Function() _onImageTap(
+    BuildContext context, {
+    required String downloadUrlOrCache,
+    required String cacheKey,
+    required bool hasBlurhash,
+    required BoxConstraints constraints,
+    required IconData defaultIcon,
+    required Widget imagePlaceholder,
+  }) {
+    return () => Navigator.of(context).push(
+      PageRouteBuilder(
+        opaque: false,
+        barrierDismissible: true,
+        barrierColor: Colors.black45,
+        pageBuilder: (context, _, _) => Dialog(
+          backgroundColor: Colors.transparent,
+          surfaceTintColor: Colors.transparent,
+          child: Hero(
+            transitionOnUserGestures: true,
+            tag: heroTag ?? imageObject,
+            child: PhotoView.customChild(
+              backgroundDecoration: const BoxDecoration(
+                color: Colors.transparent,
+              ),
+              tightMode: true,
+              childSize: constraints.smallest,
+              child: _ImageFromUrlWidget(
+                cacheKey: cacheKey,
+                defaultIcon: defaultIcon,
+                imageUrl: downloadUrlOrCache,
+                maxHeight: constraints.maxHeight,
+                fullQuality: true,
+                hasBlurhash: hasBlurhash,
+                imagePlaceholder: imagePlaceholder,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
   ImageObjectWidget(
     this.imageObject, {
     ImageUrlCacheService? imageUrlCacheService,
@@ -22,17 +75,6 @@ class ImageObjectWidget extends StatelessWidget {
     super.key,
   }) : photoUrlCacheService = imageUrlCacheService ?? ImageUrlCacheService.I,
        viewableObjectService = viewableObjectService ?? ViewableObjectService.I;
-
-  final ImageUrlCacheService photoUrlCacheService;
-  final ViewableObjectService viewableObjectService;
-  final IImage imageObject;
-  final bool circleCrop;
-  final bool isDense;
-  // ignore: no-object-declaration
-  final Object? heroTag;
-  final double size;
-  final BorderRadius? borderRadius;
-  final double? blurhashSize;
 
   @override
   Widget build(BuildContext context) {
@@ -116,52 +158,18 @@ class ImageObjectWidget extends StatelessWidget {
       ),
     );
   }
-
-  void Function() _onImageTap(
-    BuildContext context, {
-    required String downloadUrlOrCache,
-    required String cacheKey,
-    required bool hasBlurhash,
-    required BoxConstraints constraints,
-    required IconData defaultIcon,
-    required Widget imagePlaceholder,
-  }) {
-    return () => Navigator.of(context).push(
-      PageRouteBuilder(
-        opaque: false,
-        barrierDismissible: true,
-        barrierColor: Colors.black45,
-        pageBuilder: (context, _, _) => Dialog(
-          backgroundColor: Colors.transparent,
-          surfaceTintColor: Colors.transparent,
-          child: Hero(
-            transitionOnUserGestures: true,
-            tag: heroTag ?? imageObject,
-            child: PhotoView.customChild(
-              backgroundDecoration: const BoxDecoration(
-                color: Colors.transparent,
-              ),
-              tightMode: true,
-              childSize: constraints.smallest,
-              child: _ImageFromUrlWidget(
-                cacheKey: cacheKey,
-                defaultIcon: defaultIcon,
-                imageUrl: downloadUrlOrCache,
-                maxHeight: constraints.maxHeight,
-                fullQuality: true,
-                hasBlurhash: hasBlurhash,
-                imagePlaceholder: imagePlaceholder,
-              ),
-            ),
-          ),
-        ),
-      ),
-    );
-  }
 }
 
 class _ImageFromUrlWidget extends StatelessWidget {
   static const animationsDuration = Duration.zero;
+
+  final String imageUrl;
+  final String cacheKey;
+  final Widget imagePlaceholder;
+  final IconData defaultIcon;
+  final double maxHeight;
+  final bool fullQuality;
+  final bool hasBlurhash;
 
   const _ImageFromUrlWidget({
     required this.imageUrl,
@@ -172,14 +180,6 @@ class _ImageFromUrlWidget extends StatelessWidget {
     required this.hasBlurhash,
     this.fullQuality = false,
   });
-
-  final String imageUrl;
-  final String cacheKey;
-  final Widget imagePlaceholder;
-  final IconData defaultIcon;
-  final double maxHeight;
-  final bool fullQuality;
-  final bool hasBlurhash;
 
   @override
   Widget build(BuildContext context) {

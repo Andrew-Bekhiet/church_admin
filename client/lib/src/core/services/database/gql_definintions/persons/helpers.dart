@@ -15,26 +15,6 @@ class PersonUpdateHelper {
   late final IterableDifferenceResult<ID> _hobbiesDiff;
   late final IterableDifferenceResult<ID> _tagsDiff;
 
-  PersonUpdateHelper({required this.newPerson, required this.oldPerson})
-    : _personDelta = computeObjectDelta(
-        newPerson.toJson(),
-        oldPerson.toJson(),
-      ) {
-    _servicesDiff = _getDifferenceUsing((p) => p.services);
-    _groupsDiff = _getDifferenceUsing((p) => p.groups);
-    _hobbiesDiff = _getDifferenceUsing((p) => p.hobbies);
-    _tagsDiff = _getDifferenceUsing((p) => p.tags);
-  }
-
-  IterableDifferenceResult<ID> _getDifferenceUsing(
-    Iterable<ID>? Function(Person) selector,
-  ) {
-    return diff(
-      EqualitySet<ID>.from(idEquality, selector(oldPerson) ?? []),
-      EqualitySet<ID>.from(idEquality, selector(newPerson) ?? []),
-    );
-  }
-
   bool get _updatePersonsByPk => _personDelta.keys
       .where(
         (k) =>
@@ -145,6 +125,26 @@ class PersonUpdateHelper {
         insertHistoryCallHistoryOne: _insertHistoryCallHistoryOne,
         insertHistoryVisitHistoryOne: _insertHistoryVisitHistoryOne,
       );
+
+  PersonUpdateHelper({required this.newPerson, required this.oldPerson})
+    : _personDelta = computeObjectDelta(
+        newPerson.toJson(),
+        oldPerson.toJson(),
+      ) {
+    _servicesDiff = _getDifferenceUsing((p) => p.services);
+    _groupsDiff = _getDifferenceUsing((p) => p.groups);
+    _hobbiesDiff = _getDifferenceUsing((p) => p.hobbies);
+    _tagsDiff = _getDifferenceUsing((p) => p.tags);
+  }
+
+  IterableDifferenceResult<ID> _getDifferenceUsing(
+    Iterable<ID>? Function(Person) selector,
+  ) {
+    return diff(
+      EqualitySet<ID>.from(idEquality, selector(oldPerson) ?? []),
+      EqualitySet<ID>.from(idEquality, selector(newPerson) ?? []),
+    );
+  }
 
   DateTime? _getLast(String name) => _personDelta['last$name'] != null
       ? LastRecordedByInfo.fromJson(_personDelta['last$name']).time

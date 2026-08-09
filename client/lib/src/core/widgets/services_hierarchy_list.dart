@@ -89,6 +89,15 @@ class _ServicesHierarchyListState extends State<ServicesHierarchyList>
     );
   }
 
+  @override
+  Future<void> dispose() async {
+    for (final c in _animationControllers.values) {
+      c.dispose();
+    }
+
+    super.dispose();
+  }
+
   Widget _buildServiceCard(
     BuildContext context,
     Service service,
@@ -192,15 +201,6 @@ class _ServicesHierarchyListState extends State<ServicesHierarchyList>
         ),
       ),
     );
-  }
-
-  @override
-  Future<void> dispose() async {
-    for (final c in _animationControllers.values) {
-      c.dispose();
-    }
-
-    super.dispose();
   }
 }
 

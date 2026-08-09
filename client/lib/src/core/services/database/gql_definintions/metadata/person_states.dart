@@ -3,10 +3,6 @@ import 'package:church_admin/src/core/services/database/gql_definintions/metadat
 
 class PersonStatesDAO extends DAOBase<PersonState>
     with StreamableDAO<PersonState> {
-  PersonStatesDAO({
-    required super.db,
-  }) : super(fromJson: PersonState.fromJson);
-
   @override
   StreamAllConfig<PersonState> get baseStreamAllConfig => const StreamAllConfig(
     document: documentNodeSubscriptionwatchAllPersonStates,
@@ -15,4 +11,8 @@ class PersonStatesDAO extends DAOBase<PersonState>
   @override
   StreamSingleByIdConfig<PersonState> get baseStreamSingleByIdConfig =>
       throw UnimplementedError();
+
+  PersonStatesDAO({
+    required super.db,
+  }) : super(fromJson: PersonState.fromJson);
 }

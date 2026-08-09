@@ -10,9 +10,9 @@ class FunctionsService {
 
   final Dio _dio;
 
-  FunctionsService({required this._dio});
-
   final _pendingDownloadUrls = <int, Future<String>>{};
+
+  FunctionsService({required this._dio});
 
   HttpsCallable httpsCallable(
     String functionName, {

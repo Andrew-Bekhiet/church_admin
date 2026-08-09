@@ -5,10 +5,17 @@ class SembastKvStore<T> implements KVStore<T> {
   final DatabaseClient _dbClient;
   final StoreRef<String, T> _storeRef;
 
-  SembastKvStore(this._dbClient, this._storeRef);
-
   @override
   String get name => _storeRef.name;
+
+  @override
+  Future<T?> get(String key) async {
+    final value = await _storeRef.record(key).get(_dbClient);
+
+    return value;
+  }
+
+  SembastKvStore(this._dbClient, this._storeRef);
 
   @override
   Future<void> clear() async => _storeRef.delete(_dbClient);
@@ -26,13 +33,6 @@ class SembastKvStore<T> implements KVStore<T> {
   @override
   Future<void> delete(String key) async {
     await _storeRef.record(key).delete(_dbClient);
-  }
-
-  @override
-  Future<T?> get(String key) async {
-    final value = await _storeRef.record(key).get(_dbClient);
-
-    return value;
   }
 
   @override

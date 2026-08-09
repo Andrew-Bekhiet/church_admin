@@ -15,6 +15,10 @@ class EditStore extends StatefulWidget {
 class _EditStoreState extends State<EditStore> {
   late final EditObjectController<Store> _controller;
 
+  Store get initialStore => _controller.initialObject!;
+  Store get newStore => _controller.newObject;
+  set newStore(Store p) => _controller.newObject = p;
+
   @override
   void initState() {
     super.initState();
@@ -44,10 +48,6 @@ class _EditStoreState extends State<EditStore> {
       initialObject: oldStore,
     );
   }
-
-  Store get initialStore => _controller.initialObject!;
-  Store get newStore => _controller.newObject;
-  set newStore(Store p) => _controller.newObject = p;
 
   @override
   Widget build(BuildContext context) {

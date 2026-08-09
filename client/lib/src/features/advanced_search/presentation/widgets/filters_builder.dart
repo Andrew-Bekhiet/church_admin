@@ -448,13 +448,12 @@ class _ValueInputWidget extends StatelessWidget {
 }
 
 class _SelectPolygon extends StatelessWidget {
+  final Polygon? initialValue;
+  final void Function(Polygon? value) onValueChanged;
   const _SelectPolygon({
     required this.initialValue,
     required this.onValueChanged,
   });
-
-  final Polygon? initialValue;
-  final void Function(Polygon? value) onValueChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -508,14 +507,13 @@ class _SelectPolygon extends StatelessWidget {
 }
 
 class BirthdayFilter extends StatelessWidget {
+  final String? value;
+  final void Function(String? value) onChanged;
   const BirthdayFilter({
     required this.value,
     required this.onChanged,
     super.key,
   });
-
-  final String? value;
-  final void Function(String? value) onChanged;
 
   @override
   Widget build(BuildContext context) {

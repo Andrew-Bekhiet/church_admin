@@ -4,10 +4,6 @@ import 'package:church_admin/src/core/services/database/gql_definintions/metadat
 import 'package:graphql_flutter/graphql_flutter.dart';
 
 class StudyYearsDAO extends DAOBase<StudyYear> with StreamableDAO<StudyYear> {
-  StudyYearsDAO({
-    required super.db,
-  }) : super(fromJson: StudyYear.fromJson);
-
   @override
   StreamAllConfig<StudyYear> get baseStreamAllConfig => const StreamAllConfig(
     document: documentNodeSubscriptionwatchAllStudyYears,
@@ -16,6 +12,10 @@ class StudyYearsDAO extends DAOBase<StudyYear> with StreamableDAO<StudyYear> {
   @override
   StreamSingleByIdConfig<StudyYear> get baseStreamSingleByIdConfig =>
       throw UnimplementedError();
+
+  StudyYearsDAO({
+    required super.db,
+  }) : super(fromJson: StudyYear.fromJson);
 
   @override
   PaginatableStreamBase<StudyYear> streamAll({

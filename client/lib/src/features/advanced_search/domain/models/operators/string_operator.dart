@@ -10,8 +10,6 @@ enum StringOperator implements Operator<String?> {
   isEmpty('فارغ'),
   isNotEmpty('ليس فارغاً');
 
-  const StringOperator(this.label);
-
   @override
   final String label;
 
@@ -20,6 +18,8 @@ enum StringOperator implements Operator<String?> {
 
   @override
   bool get acceptsValue => !{isEmpty, isNotEmpty}.contains(this);
+
+  const StringOperator(this.label);
 
   @override
   Json queryToJson(FieldMetadata field, String? filterValue) {

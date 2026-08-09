@@ -5,12 +5,11 @@ import 'package:map_launcher/map_launcher.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 
 class GeomapFAB extends StatelessWidget {
+  final Point focusedLocation;
   const GeomapFAB({
     required this.focusedLocation,
     super.key,
   });
-
-  final Point focusedLocation;
 
   @override
   Widget build(BuildContext context) {

@@ -12,12 +12,12 @@ class EditStoreExtra extends SerializableExtra {
   final Store? store;
   final Family? family;
 
+  @override
+  String get typeName => 'EditStoreExtra';
+
   const EditStoreExtra({this.area, this.street, this.store, this.family});
 
   factory EditStoreExtra.fromJson(Json json) => _$EditStoreExtraFromJson(json);
-
-  @override
-  String get typeName => 'EditStoreExtra';
 
   @override
   Json toJson() => _$EditStoreExtraToJson(this);
@@ -25,9 +25,8 @@ class EditStoreExtra extends SerializableExtra {
 
 @TypedGoRoute<EditStoreRoute>(path: '/edit_store')
 class EditStoreRoute extends GoRouteData with $EditStoreRoute {
-  const EditStoreRoute({this.$extra});
-
   final EditStoreExtra? $extra;
+  const EditStoreRoute({this.$extra});
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
