@@ -9,7 +9,7 @@ Conventions for anyone (human or agent) writing code here. Rules are stated as r
 | `client/`                       | Flutter app. Riverpod providers + BLoC, GoRouter, `graphql_codegen` against Hasura.            |
 | `server/hasura/`                | Hasura metadata + Postgres migrations (`migrations/default/<timestamp>_<name>/{up,down}.sql`). |
 | `server/firebase/functions/`    | TypeScript Cloud Functions: auth blocking functions, callables, storage proxy, export.         |
-| `server/postgres/`              | Postgres image (`timescale-postgis-ssl:pg17`) and init scripts.                                |
+| `server/postgres/`              | Postgres image (`ghcr.io/railwayapp-templates/timescale-postgis-ssl:pg17-ts2.17`) and init scripts. |
 | `server/church_admin_migrator/` | One-off data import/export tooling.                                                            |
 
 Organise files by feature or domain, not by type. All backend access goes through the database service module (`client/lib/src/core/services/database/`) with `graphql_codegen`-generated operations — features never issue raw GraphQL themselves.
@@ -110,7 +110,7 @@ Permissions hang off `auth.users_data.uid` — never `auth_id`. `auth.users_perm
 
 ## Tooling gotchas
 
-**GraphQL codegen** — the split is not a build_runner output. `graphql_codegen` always emits `schema.graphql.dart` as one ~166k-line file, and `scripts/split_schema_graphql_dart.sh` rewrites that file in place into a stub plus `schema_partN.dart`. Any build that regenerates it destroys the split.
+**GraphQL codegen** — the split is not a build_runner output. `graphql_codegen` always emits `schema.graphql.dart` as one ~166k-line file, and `client/scripts/split_schema_graphql_dart.sh` rewrites that file in place into a stub plus `schema_partN.dart`. Any build that regenerates it destroys the split.
 
 So **default to a `--build-filter` scoped to what you changed** — that keeps the schema out of the build's output set:
 
@@ -125,6 +125,7 @@ Repeat the flag to cover several areas. The filter must match everything you cha
 Run the full sequence **only when `.graphql` documents or the Hasura schema change**, and re-split afterwards:
 
 ```sh
+cd client
 rm -r lib/src/core/graphql/__generated__/ && dart run build_runner build && ./scripts/split_schema_graphql_dart.sh
 ```
 
