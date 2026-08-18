@@ -160,6 +160,12 @@ export async function upsertUser(user: {
   uid: string;
 }): Promise<{ person_id: string; hasura_uid: string } | null> {
   try {
+    const claimed = await claimInvitedUser(user.email, user.uid);
+
+    if (claimed) {
+      return claimed;
+    }
+
     const hasura_response = await makeGraphqlRequest({
       query: `
             mutation addUser(
@@ -212,6 +218,53 @@ export async function upsertUser(user: {
   }
 
   return null;
+}
+
+/**
+ * Attaches a Firebase Auth UID to a row an admin pre-seeded for this email.
+ *
+ * The row already carries the uid every permission table keys off, so leaving
+ * it — and the person it is linked to — otherwise untouched is what preserves
+ * the pre-configured access. Returns null when there is nothing to claim.
+ */
+async function claimInvitedUser(
+  email: string,
+  firebaseAuthUID: string,
+): Promise<{ person_id: string; hasura_uid: string } | null> {
+  const hasura_response = await makeGraphqlRequest({
+    query: `
+          mutation claimInvitedUser($email: String!, $firebaseAuthUID: String!) {
+            updateAuthUsersData(
+              where: { email: { _eq: $email }, authId: { _isNull: true } }
+              _set: { authId: $firebaseAuthUID }
+            ) {
+              returning {
+                uid
+                person {
+                  id
+                }
+              }
+            }
+          }
+        `,
+    variables: { email, firebaseAuthUID },
+    operationName: "claimInvitedUser",
+  });
+
+  const rslt =
+    hasura_response.data?.["data"]?.["updateAuthUsersData"]?.["returning"]?.[0];
+
+  if (!rslt) {
+    return null;
+  }
+
+  const person_id = rslt["person"]?.["id"];
+
+  if (!person_id) {
+    throw new Error(`Invited user ${email} is not linked to a person`);
+  }
+
+  return { hasura_uid: rslt["uid"], person_id };
 }
 
 export async function unapproveUser(hasuraUID: string): Promise<void> {
