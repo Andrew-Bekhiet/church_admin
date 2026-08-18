@@ -12,6 +12,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     required this._databaseService,
     required this._authStorage,
     required this._connectivityStream,
+    required this._functionsService,
     bool loadCachedUser = true,
   }) : super(const AuthInitial()) {
     on<ListenToSubscriptions>(
@@ -42,6 +43,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final DatabaseService _databaseService;
   final AuthStorage _authStorage;
   final Stream<bool> _connectivityStream;
+  final FunctionsService _functionsService;
 
   Timer? _refreshTokenTimer;
 
@@ -107,11 +109,15 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           return Stream.value((null, null));
         }
 
+        // An invitee awaiting email verification holds no user id yet.
+        final hasuraUserId = authUser.claims['x-hasura-user-id'] as String?;
+
+        if (hasuraUserId == null) {
+          return Stream.value((authUser, null));
+        }
+
         final userDataStream = _databaseService.users
-            .streamSingleById(
-              id: authUser.claims['x-hasura-user-id'],
-              fullData: true,
-            )
+            .streamSingleById(id: hasuraUserId, fullData: true)
             .map((userData) => (authUser, userData));
 
         if (state.unwrapped case AuthAuthenticated(userData: User())) {
@@ -304,6 +310,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     try {
       emit(AuthLoading(previousState: state));
       await _authRepository.reload();
+      await _claimPendingInvitation();
     } catch (e, stackTrace) {
       emit(
         AuthExceptionState(
@@ -312,6 +319,23 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           previousState: state,
         ),
       );
+    }
+  }
+
+  /// Signup defers claiming a pre-approved account until its email is verified,
+  /// and Firebase raises no event when that happens, so confirming the address
+  /// is the moment to retry the claim.
+  Future<void> _claimPendingInvitation() async {
+    if (state.unwrapped case AuthAuthenticated(:final authUser)
+        when authUser.claims['x-hasura-user-id'] == null) {
+      // The callable reads emailVerified off the caller's token, so it needs
+      // one minted after the verification; the second refresh then picks up
+      // the claims it granted.
+      await _authRepository.refreshToken();
+
+      if (await _functionsService.claimInvitation()) {
+        await _authRepository.refreshToken();
+      }
     }
   }
 

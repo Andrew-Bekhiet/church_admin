@@ -7,15 +7,8 @@ import {
   beforeUserSignedIn,
 } from "firebase-functions/v2/identity";
 import { Readable } from "stream";
+import { hasuraClaims } from "./common";
 import { getHasuraUID, hasPendingInvite, upsertUser } from "./hasura_interface";
-
-function hasuraClaims(hasura_uid: string) {
-  return {
-    "x-hasura-user-id": hasura_uid,
-    "x-hasura-default-role": "user",
-    "x-hasura-allowed-roles": ["user"],
-  };
-}
 
 async function copyProviderPhoto(photoURL: string, person_id: string) {
   const fileWriteStream = storage()

@@ -169,6 +169,15 @@ class MockFunctionsService extends _i1.Mock implements _i6.FunctionsService {
           as _i7.Future<void>);
 
   @override
+  _i7.Future<bool> claimInvitation() =>
+      (super.noSuchMethod(
+            Invocation.method(#claimInvitation, []),
+            returnValue: _i7.Future<bool>.value(false),
+            returnValueForMissingStub: _i7.Future<bool>.value(false),
+          )
+          as _i7.Future<bool>);
+
+  @override
   _i7.Future<_i6.Address?> getAddressFromLocation(_i6.Point? location) =>
       (super.noSuchMethod(
             Invocation.method(#getAddressFromLocation, [location]),

@@ -9,6 +9,7 @@ setGlobalOptions({
 });
 
 export * from "./auth";
+export * from "./claim_invitation";
 export * from "./download_app";
 export * from "./export/export";
 export * from "./register_fcm_token";

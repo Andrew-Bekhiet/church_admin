@@ -32,6 +32,20 @@ final initialUserData = User(
   ),
 );
 
+late StreamController<AuthUser?> authUserController;
+
+final unclaimedAuthUser = AuthUser(
+  uid: 'uid',
+  email: 'email',
+  emailVerified: true,
+  idToken: 'idToken',
+  claims: {
+    'exp':
+        DateTime.now().add(const Duration(hours: 1)).millisecondsSinceEpoch ~/
+        1000,
+  },
+);
+
 AuthUser initialAuthUser = AuthUser(
   uid: 'uid',
   email: 'email',
@@ -52,6 +66,7 @@ AuthUser initialAuthUser = AuthUser(
   MockSpec<LocalAuthService>(),
   MockSpec<ConnectivityService>(),
   MockSpec<UsersDAO>(),
+  MockSpec<FunctionsService>(),
 ])
 void main() {
   group('AuthBloc =>', () {
@@ -429,6 +444,55 @@ void main() {
           verify(mockRepo.reload());
         },
       );
+
+      blocTest<AuthBloc, AuthState>(
+        'reload user with an already claimed account does not claim again',
+        build: _createAuthBloc,
+        act: (bloc) async {
+          await Future.delayed(Duration.zero);
+          bloc.add(const ReloadUser());
+          await Future.delayed(Duration.zero);
+        },
+        wait: const Duration(seconds: 1),
+        verify: (bloc) {
+          final mockFunctions =
+              globalProviderContainer.read(functionsServiceProvider)
+                  as MockFunctionsService;
+          verifyNever(mockFunctions.claimInvitation());
+        },
+      );
+
+      blocTest<AuthBloc, AuthState>(
+        'reload user without a hasura user id claims the pending invitation',
+        build: _createAuthBloc,
+        setUp: () {
+          final mockRepo =
+              globalProviderContainer.read(authRepositoryProvider)
+                  as MockFirebaseAuthRepository;
+          when(mockRepo.reload()).thenAnswer(
+            (_) async => authUserController.add(unclaimedAuthUser),
+          );
+        },
+        act: (bloc) async {
+          await Future.delayed(Duration.zero);
+          authUserController.add(unclaimedAuthUser);
+          await Future.delayed(Duration.zero);
+          bloc.add(const ReloadUser());
+          await Future.delayed(Duration.zero);
+        },
+        wait: const Duration(seconds: 1),
+        verify: (bloc) {
+          final mockFunctions =
+              globalProviderContainer.read(functionsServiceProvider)
+                  as MockFunctionsService;
+          final mockRepo =
+              globalProviderContainer.read(authRepositoryProvider)
+                  as MockFirebaseAuthRepository;
+
+          verify(mockFunctions.claimInvitation()).called(1);
+          verify(mockRepo.refreshToken()).called(2);
+        },
+      );
     });
   });
 }
@@ -439,9 +503,18 @@ Future<void> _setUp() async {
     await _setUpMockAuthRepository(),
     await _setUpMockDatabaseService(),
     await _setUpMockAuthStorage(),
+    await _setUpMockFunctionsService(),
   ];
 
   initGlobalProviderContainer(overrides);
+}
+
+Future<Override> _setUpMockFunctionsService() async {
+  final mock = MockFunctionsService();
+
+  when(mock.claimInvitation()).thenAnswer((_) async => true);
+
+  return functionsServiceProvider.overrideWithValue(mock);
 }
 
 Future<Override> _setUpMockConnectivity() async {
@@ -484,7 +557,8 @@ Future<Override> _setUpMockAuthStorage() async {
 }
 
 Future<Override> _setUpMockAuthRepository() async {
-  late final controller = StreamController<AuthUser?>.broadcast(sync: true);
+  final controller = StreamController<AuthUser?>.broadcast(sync: true);
+  authUserController = controller;
 
   final mock = MockFirebaseAuthRepository();
 
@@ -545,6 +619,7 @@ AuthBloc _createAuthBloc({bool noCachedUser = false}) {
     authRepository: globalProviderContainer.read(authRepositoryProvider),
     databaseService: globalProviderContainer.read(databaseServiceProvider),
     authStorage: globalProviderContainer.read(authStorageProvider),
+    functionsService: globalProviderContainer.read(functionsServiceProvider),
     loadCachedUser: !noCachedUser,
   );
 }
