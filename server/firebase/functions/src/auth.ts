@@ -8,7 +8,7 @@ import {
 } from "firebase-functions/v2/identity";
 import { Readable } from "stream";
 import { hasuraClaims } from "./common";
-import { getHasuraUID, hasPendingInvite, upsertUser } from "./hasura_interface";
+import { findUserByEmail, getHasuraUID, upsertUser } from "./hasura_interface";
 
 async function copyProviderPhoto(photoURL: string, person_id: string) {
   const fileWriteStream = storage()
@@ -40,10 +40,9 @@ export const beforeUserSignUp = beforeUserCreated(async (event) => {
     // address is theirs. Providers that vouch for the email (Google) qualify
     // immediately; email/password signups claim on their first verified
     // sign-in instead. Without this, guessing an invited email would be enough.
-    if (
-      !authUser.emailVerified &&
-      (await hasPendingInvite(authUser.email!))
-    ) {
+    const seeded = await findUserByEmail(authUser.email!);
+
+    if (!authUser.emailVerified && seeded && !seeded.auth_id) {
       console.info(
         "Deferring invite claim for %s until the email is verified",
         authUser.email

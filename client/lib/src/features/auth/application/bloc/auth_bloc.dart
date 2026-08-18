@@ -84,8 +84,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
                 state is! AuthLoading &&
                 (state is! AuthAuthenticated || state.userData != null),
           )
-          .timeout(const Duration(seconds: 8))
-          .whenComplete(() {}),
+          .then<void>((_) {})
+          // An invitee awaiting verification never loads user data, and startup
+          // awaits this, so timing out must not throw.
+          .timeout(const Duration(seconds: 8), onTimeout: () {}),
     _ => Future.value(),
   };
 

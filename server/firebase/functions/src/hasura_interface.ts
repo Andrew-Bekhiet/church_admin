@@ -156,8 +156,56 @@ export async function checkUserAccessToPerson(
 
 export type HasuraUserRef = { person_id: string; hasura_uid: string };
 
-export function canonicalEmail(email: string): string {
+export type SeededUser = {
+  hasura_uid: string;
+  person_id: string | null;
+  auth_id: string | null;
+};
+
+function canonicalEmail(email: string): string {
   return email.trim().toLowerCase();
+}
+
+/**
+ * Looks up the users_data row owning an email, claimed or not.
+ *
+ * Callers need the claim state to tell an invite waiting to be taken from one
+ * that already belongs to somebody else.
+ */
+export async function findUserByEmail(
+  email: string,
+): Promise<SeededUser | null> {
+  try {
+    const hasura_response = await makeGraphqlRequest({
+      query: `
+            query findUserByEmail($email: String!) {
+              authUsersData(where: { email: { _eq: $email } }, limit: 1) {
+                uid
+                authId
+                person {
+                  id
+                }
+              }
+            }
+          `,
+      variables: { email: canonicalEmail(email) },
+      operationName: "findUserByEmail",
+    });
+
+    const rslt = hasura_response.data?.["data"]?.["authUsersData"]?.[0];
+
+    return rslt
+      ? {
+          hasura_uid: rslt["uid"],
+          person_id: rslt["person"]?.["id"] ?? null,
+          auth_id: rslt["authId"] ?? null,
+        }
+      : null;
+  } catch (e) {
+    console.error(e);
+  }
+
+  return null;
 }
 
 function toUserRef(
@@ -184,10 +232,10 @@ export async function upsertUser(user: {
   uid: string;
 }): Promise<HasuraUserRef | null> {
   try {
-    const claimed = await claimInvitedUser(canonicalEmail(user.email), user.uid);
+    const existing = await findUserByEmail(user.email);
 
-    if (claimed) {
-      return claimed;
+    if (existing) {
+      return claimSeededUser(existing, user.uid);
     }
 
     const hasura_response = await makeGraphqlRequest({
@@ -235,94 +283,39 @@ export async function upsertUser(user: {
 }
 
 /**
- * Whether an admin has seeded a row for this email that nobody has claimed yet.
- *
- * Lets the caller decide the email is too sensitive to act on before it has
- * been verified, without performing the claim itself.
- */
-export async function hasPendingInvite(email: string): Promise<boolean> {
-  try {
-    const hasura_response = await makeGraphqlRequest({
-      query: `
-            query hasPendingInvite($email: String!) {
-              authUsersData(
-                where: { email: { _eq: $email }, authId: { _isNull: true } }
-                limit: 1
-              ) {
-                uid
-              }
-            }
-          `,
-      variables: { email: canonicalEmail(email) },
-      operationName: "hasPendingInvite",
-    });
-
-    return !!hasura_response.data?.["data"]?.["authUsersData"]?.[0];
-  } catch (e) {
-    console.error(e);
-  }
-
-  return false;
-}
-
-/**
- * Attaches a Firebase Auth UID to a row an admin pre-seeded for this email.
+ * Attaches a Firebase Auth UID to the row an admin pre-seeded for this email.
  *
  * The row already carries the uid every permission table keys off, so leaving
  * it — and the person it is linked to — otherwise untouched is what preserves
- * the pre-configured access. Returns null when there is nothing to claim.
+ * the pre-configured access.
  *
- * Rows already claimed by this same UID still match, so a signup that fails
- * downstream can be retried without falling through to the insert path (which
- * would overwrite the linked person's flags).
+ * A row already claimed by this same UID is returned as-is, so a signup that
+ * failed downstream can be retried; a row claimed by anyone else is refused,
+ * since taking it over would hand its permissions to the wrong person.
  */
-async function claimInvitedUser(
-  email: string,
+async function claimSeededUser(
+  seeded: SeededUser,
   firebaseAuthUID: string,
 ): Promise<HasuraUserRef | null> {
-  const pending = await makeGraphqlRequest({
-    query: `
-          query findInvitedUser($email: String!, $firebaseAuthUID: String!) {
-            authUsersData(
-              where: {
-                email: { _eq: $email }
-                _or: [
-                  { authId: { _isNull: true } }
-                  { authId: { _eq: $firebaseAuthUID } }
-                ]
-              }
-              limit: 1
-            ) {
-              uid
-              person {
-                id
-              }
-            }
-          }
-        `,
-    variables: { email, firebaseAuthUID },
-    operationName: "findInvitedUser",
-  });
-
-  const invite = pending.data?.["data"]?.["authUsersData"]?.[0];
-
-  if (!invite) {
-    return null;
+  if (seeded.auth_id && seeded.auth_id !== firebaseAuthUID) {
+    throw new Error("Email already belongs to another account");
   }
 
   // Validate before writing: a claim that commits and then throws would burn
   // the invite, leaving it unclaimable by anyone.
-  const person_id = invite["person"]?.["id"];
+  if (!seeded.person_id) {
+    throw new Error(`Seeded user ${seeded.hasura_uid} is not linked to a person`);
+  }
 
-  if (!person_id) {
-    throw new Error(`Invited user ${email} is not linked to a person`);
+  if (seeded.auth_id === firebaseAuthUID) {
+    return { hasura_uid: seeded.hasura_uid, person_id: seeded.person_id };
   }
 
   const hasura_response = await makeGraphqlRequest({
     query: `
-          mutation claimInvitedUser($uid: uuid!, $firebaseAuthUID: String!) {
+          mutation claimSeededUser($uid: uuid!, $firebaseAuthUID: String!) {
             updateAuthUsersData(
-              where: { uid: { _eq: $uid } }
+              where: { uid: { _eq: $uid }, authId: { _isNull: true } }
               _set: { authId: $firebaseAuthUID }
             ) {
               returning {
@@ -334,8 +327,8 @@ async function claimInvitedUser(
             }
           }
         `,
-    variables: { uid: invite["uid"], firebaseAuthUID },
-    operationName: "claimInvitedUser",
+    variables: { uid: seeded.hasura_uid, firebaseAuthUID },
+    operationName: "claimSeededUser",
   });
 
   return toUserRef(hasura_response, "updateAuthUsersData");

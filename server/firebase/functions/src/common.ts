@@ -40,8 +40,8 @@ export async function assertUserAuthenticatedAndApproved(
   if (!authUser.multiFactor) {
     console.error("User does not have 2FA enabled");
     throw new https.HttpsError("unauthenticated", "unauthenticated");
-  } else if (!(await checkUserApproved(authData!.token["x-hasura-user-id"]))) {
-    console.error("User is not approved", authData!.token["x-hasura-user-id"]);
+  } else if (!(await checkUserApproved(authData?.token["x-hasura-user-id"]))) {
+    console.error("User is not approved", authData?.token["x-hasura-user-id"]);
     throw new https.HttpsError("unauthenticated", "unauthenticated");
   }
 
