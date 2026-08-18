@@ -12,7 +12,7 @@ Conventions for anyone (human or agent) writing code here. Rules are stated as r
 | `server/postgres/`              | Postgres image (`timescale-postgis-ssl:pg17`) and init scripts.                                |
 | `server/church_admin_migrator/` | One-off data import/export tooling.                                                            |
 
-Organise files by feature or domain, not by type.
+Organise files by feature or domain, not by type. All backend access goes through the database service module (`client/lib/src/core/services/database/`) with `graphql_codegen`-generated operations — features never issue raw GraphQL themselves.
 
 ## Working agreements
 
@@ -37,11 +37,12 @@ Doc comments are allowed only when they add value a name cannot carry. Never res
 
 ## Dart & Flutter
 
-Follow [`solid_lints`](https://raw.githubusercontent.com/solid-software/solid_lints/refs/heads/master/lib/analysis_options.yaml) — including in generated code. Don't try to add it as a dependency if it is not there.
+Follow [`solid_lints`](https://raw.githubusercontent.com/solid-software/solid_lints/refs/heads/master/lib/analysis_options.yaml) — including in generated code. Don't try to add it as a dependency if it is not there. `client/analysis_options.yaml` is the enforced baseline on top of that.
 
 ### Structure
 
 - **One widget/class per file**, public. No private `_Foo` widget classes, no two widgets sharing a file.
+- **UI is mobile-first and responsive**; keep components modular and reusable rather than page-specific.
 - **Never return widgets from methods** (`Widget _buildFoo()`). Extract a widget class, or if the subtree is small (under ~100 lines) inline it at the call site. Non-widget helpers returning `String`/data are fine.
 - **No top-level variables or functions.** Use `static` members on the class that owns them.
 - **Files under 350 lines; 420 is a hard maximum.** Split before you reach it.
@@ -57,6 +58,7 @@ Follow [`solid_lints`](https://raw.githubusercontent.com/solid-software/solid_li
 - **No `!`** (`avoid_non_null_assertion`) — use `?.`, pattern matching, or restructure.
 - **No magic numbers** outside widget parameters. Max 7 parameters (`copyWith` exempt). Cyclomatic complexity ≤ 10.
 - **Blank line before `return`** unless it is the block's only statement. Return early rather than nesting in `else`.
+- **Handle errors thoroughly** with typed Dart exceptions, and carry user-facing messages as error codes so they can be localised later.
 
 ### Where helpers go
 
@@ -74,6 +76,7 @@ Unit tests are a **design tool**, not a bug-finding tool. Integration and manual
 - **Mock all external services** (DB, network, filesystem). Tests must not depend on ordering or live infra.
 - **Verify red before trusting green.** Break the line under test, confirm a meaningful failure, restore.
 - Don't unit-test wiring, DI registration, or configuration — that belongs in integration tests.
+- Beyond unit tests: standard **widget tests** for Flutter UI, and **integration tests per API module**.
 
 ## Backend
 
