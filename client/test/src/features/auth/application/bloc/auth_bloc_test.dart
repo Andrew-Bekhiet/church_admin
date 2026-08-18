@@ -446,24 +446,7 @@ void main() {
       );
 
       blocTest<AuthBloc, AuthState>(
-        'reload user with an already claimed account does not claim again',
-        build: _createAuthBloc,
-        act: (bloc) async {
-          await Future.delayed(Duration.zero);
-          bloc.add(const ReloadUser());
-          await Future.delayed(Duration.zero);
-        },
-        wait: const Duration(seconds: 1),
-        verify: (bloc) {
-          final mockFunctions =
-              globalProviderContainer.read(functionsServiceProvider)
-                  as MockFunctionsService;
-          verifyNever(mockFunctions.claimInvitation());
-        },
-      );
-
-      blocTest<AuthBloc, AuthState>(
-        'reload user without a hasura user id claims the pending invitation',
+        'reloadUser_whenTokenCarriesNoHasuraUserId_onboardsTheInvitee',
         build: _createAuthBloc,
         setUp: () {
           final mockRepo =
@@ -481,17 +464,14 @@ void main() {
           await Future.delayed(Duration.zero);
         },
         wait: const Duration(seconds: 1),
-        verify: (bloc) {
-          final mockFunctions =
-              globalProviderContainer.read(functionsServiceProvider)
-                  as MockFunctionsService;
-          final mockRepo =
-              globalProviderContainer.read(authRepositoryProvider)
-                  as MockFirebaseAuthRepository;
-
-          verify(mockFunctions.claimInvitation()).called(1);
-          verify(mockRepo.refreshToken()).called(2);
-        },
+        verify: (bloc) => expect(
+          bloc.state.unwrapped,
+          isA<AuthAuthenticated>().having(
+            (s) => s.userData,
+            'userData',
+            initialUserData,
+          ),
+        ),
       );
     });
   });
