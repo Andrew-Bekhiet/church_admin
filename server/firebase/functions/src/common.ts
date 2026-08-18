@@ -11,13 +11,6 @@ export function hasuraClaims(hasura_uid: string) {
   };
 }
 
-/**
- * Asserts the caller owns their email address, without requiring them to be a
- * fully onboarded user yet.
- *
- * An invitee calling this has no Hasura user, no 2FA and no approval — that is
- * precisely what claiming the invite is meant to give them.
- */
 export async function assertUserEmailVerified(
   authData: AuthData | undefined
 ): Promise<auth.UserRecord> {

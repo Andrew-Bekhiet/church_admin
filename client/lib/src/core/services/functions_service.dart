@@ -62,10 +62,9 @@ class FunctionsService {
     await httpsCallable('deletePhoto').call({'table': table, 'id': id});
   }
 
-  /// Returns false when the account's email has not been verified yet.
-  Future<bool> claimInvitation() async {
+  Future<bool> tryClaimInvitation() async {
     try {
-      await httpsCallable('claimInvitation').call<void>();
+      await httpsCallable('tryClaimInvitation').call<void>();
 
       return true;
     } on FirebaseFunctionsException catch (e) {

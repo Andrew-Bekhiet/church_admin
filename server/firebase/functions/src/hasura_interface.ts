@@ -166,12 +166,6 @@ function canonicalEmail(email: string): string {
   return email.trim().toLowerCase();
 }
 
-/**
- * Looks up the users_data row owning an email, claimed or not.
- *
- * Callers need the claim state to tell an invite waiting to be taken from one
- * that already belongs to somebody else.
- */
 export async function findUserByEmail(
   email: string,
 ): Promise<SeededUser | null> {
@@ -219,13 +213,6 @@ function toUserRef(
     : null;
 }
 
-/**
- * Attaches `user.uid` to the row an admin pre-seeded for this email, or creates
- * a fresh user when there is no invite to claim.
- *
- * Only call this once the email is known to belong to the caller: claiming a
- * seeded row hands over every permission the admin configured for it.
- */
 export async function upsertUser(user: {
   email: string;
   name: string;
@@ -282,17 +269,6 @@ export async function upsertUser(user: {
   return null;
 }
 
-/**
- * Attaches a Firebase Auth UID to the row an admin pre-seeded for this email.
- *
- * The row already carries the uid every permission table keys off, so leaving
- * it — and the person it is linked to — otherwise untouched is what preserves
- * the pre-configured access.
- *
- * A row already claimed by this same UID is returned as-is, so a signup that
- * failed downstream can be retried; a row claimed by anyone else is refused,
- * since taking it over would hand its permissions to the wrong person.
- */
 async function claimSeededUser(
   seeded: SeededUser,
   firebaseAuthUID: string,
@@ -301,8 +277,6 @@ async function claimSeededUser(
     throw new Error("Email already belongs to another account");
   }
 
-  // Validate before writing: a claim that commits and then throws would burn
-  // the invite, leaving it unclaimable by anyone.
   if (!seeded.person_id) {
     throw new Error(`Seeded user ${seeded.hasura_uid} is not linked to a person`);
   }

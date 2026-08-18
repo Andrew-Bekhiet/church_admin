@@ -492,7 +492,7 @@ Future<void> _setUp() async {
 Future<Override> _setUpMockFunctionsService() async {
   final mock = MockFunctionsService();
 
-  when(mock.claimInvitation()).thenAnswer((_) async => true);
+  when(mock.tryClaimInvitation()).thenAnswer((_) async => true);
 
   return functionsServiceProvider.overrideWithValue(mock);
 }

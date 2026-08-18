@@ -1325,9 +1325,9 @@ class MockFunctionsService extends _i1.Mock implements _i2.FunctionsService {
           as _i6.Future<void>);
 
   @override
-  _i6.Future<bool> claimInvitation() =>
+  _i6.Future<bool> tryClaimInvitation() =>
       (super.noSuchMethod(
-            Invocation.method(#claimInvitation, []),
+            Invocation.method(#tryClaimInvitation, []),
             returnValue: _i6.Future<bool>.value(false),
             returnValueForMissingStub: _i6.Future<bool>.value(false),
           )

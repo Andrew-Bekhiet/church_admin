@@ -10,7 +10,7 @@ import { Readable } from "stream";
 import { hasuraClaims } from "./common";
 import { findUserByEmail, getHasuraUID, upsertUser } from "./hasura_interface";
 
-async function copyProviderPhoto(photoURL: string, person_id: string) {
+async function uploadUserPhotoToStorage(photoURL: string, person_id: string) {
   const fileWriteStream = storage()
     .bucket(storageBucket.value())
     .file("persons/" + person_id)
@@ -28,6 +28,19 @@ async function copyProviderPhoto(photoURL: string, person_id: string) {
   );
 }
 
+async function mustVerifyEmailBeforeClaiming(authUser: {
+  email?: string;
+  emailVerified?: boolean;
+}): Promise<boolean> {
+  if (authUser.emailVerified) {
+    return false;
+  }
+
+  const seeded = await findUserByEmail(authUser.email!);
+
+  return !!seeded && !seeded.auth_id;
+}
+
 export const beforeUserSignUp = beforeUserCreated(async (event) => {
   const authUser = event.data!;
 
@@ -35,14 +48,7 @@ export const beforeUserSignUp = beforeUserCreated(async (event) => {
   try {
     const displayName = authUser.displayName ?? authUser.email!;
 
-    // Claiming a seeded invite hands over every permission an admin configured
-    // for that address, so it may only happen once the signer-up has proven the
-    // address is theirs. Providers that vouch for the email (Google) qualify
-    // immediately; email/password signups claim on their first verified
-    // sign-in instead. Without this, guessing an invited email would be enough.
-    const seeded = await findUserByEmail(authUser.email!);
-
-    if (!authUser.emailVerified && seeded && !seeded.auth_id) {
+    if (await mustVerifyEmailBeforeClaiming(authUser)) {
       console.info(
         "Deferring invite claim for %s until the email is verified",
         authUser.email
@@ -65,7 +71,7 @@ export const beforeUserSignUp = beforeUserCreated(async (event) => {
     const { person_id, hasura_uid } = dbUser;
 
     if (authUser.photoURL) {
-      await copyProviderPhoto(authUser.photoURL, person_id);
+      await uploadUserPhotoToStorage(authUser.photoURL, person_id);
     }
 
     return {
@@ -91,8 +97,6 @@ export const beforeUserSignIn = beforeUserSignedIn(async (event) => {
       return { customClaims: hasuraClaims(existing_uid) };
     }
 
-    // Signup deferred this user because their invite needed a verified email.
-    // This is the first sign-in where that holds, so claim it now.
     if (!authUser.emailVerified) {
       console.info(
         "No database user for %s yet; awaiting email verification",

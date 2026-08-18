@@ -85,8 +85,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
                 (state is! AuthAuthenticated || state.userData != null),
           )
           .then<void>((_) {})
-          // An invitee awaiting verification never loads user data, and startup
-          // awaits this, so timing out must not throw.
           .timeout(const Duration(seconds: 8), onTimeout: () {}),
     _ => Future.value(),
   };
@@ -111,7 +109,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           return Stream.value((null, null));
         }
 
-        // An invitee awaiting email verification holds no user id yet.
         final hasuraUserId = authUser.claims['x-hasura-user-id'] as String?;
 
         if (hasuraUserId == null) {
@@ -312,7 +309,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     try {
       emit(AuthLoading(previousState: state));
       await _authRepository.reload();
-      await _claimPendingInvitation();
+      await _maybeClaimPendingInvitation();
     } catch (e, stackTrace) {
       emit(
         AuthExceptionState(
@@ -324,18 +321,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     }
   }
 
-  /// Signup defers claiming a pre-approved account until its email is verified,
-  /// and Firebase raises no event when that happens, so confirming the address
-  /// is the moment to retry the claim.
-  Future<void> _claimPendingInvitation() async {
+  Future<void> _maybeClaimPendingInvitation() async {
     if (state.unwrapped case AuthAuthenticated(:final authUser)
         when authUser.claims['x-hasura-user-id'] == null) {
-      // The callable reads emailVerified off the caller's token, so it needs
-      // one minted after the verification; the second refresh then picks up
-      // the claims it granted.
       await _authRepository.refreshToken();
 
-      if (await _functionsService.claimInvitation()) {
+      if (await _functionsService.tryClaimInvitation()) {
         await _authRepository.refreshToken();
       }
     }
