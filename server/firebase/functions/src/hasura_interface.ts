@@ -154,13 +154,37 @@ export async function checkUserAccessToPerson(
   return { canRead: false, canWrite: false, personUid: null };
 }
 
+export type HasuraUserRef = { person_id: string; hasura_uid: string };
+
+export function canonicalEmail(email: string): string {
+  return email.trim().toLowerCase();
+}
+
+function toUserRef(
+  hasura_response: AxiosResponse,
+  rootField: string,
+): HasuraUserRef | null {
+  const rslt = hasura_response.data?.["data"]?.[rootField]?.["returning"]?.[0];
+
+  return rslt
+    ? { hasura_uid: rslt["uid"], person_id: rslt["person"]?.["id"] }
+    : null;
+}
+
+/**
+ * Attaches `user.uid` to the row an admin pre-seeded for this email, or creates
+ * a fresh user when there is no invite to claim.
+ *
+ * Only call this once the email is known to belong to the caller: claiming a
+ * seeded row hands over every permission the admin configured for it.
+ */
 export async function upsertUser(user: {
   email: string;
   name: string;
   uid: string;
-}): Promise<{ person_id: string; hasura_uid: string } | null> {
+}): Promise<HasuraUserRef | null> {
   try {
-    const claimed = await claimInvitedUser(user.email, user.uid);
+    const claimed = await claimInvitedUser(canonicalEmail(user.email), user.uid);
 
     if (claimed) {
       return claimed;
@@ -196,23 +220,13 @@ export async function upsertUser(user: {
           `,
       variables: {
         name: user.name,
-        email: user.email,
+        email: canonicalEmail(user.email),
         firebaseAuthUID: user.uid,
       },
       operationName: "addUser",
     });
 
-    const rslt =
-      hasura_response.data?.["data"]?.["insertAuthUsersData"]?.[
-        "returning"
-      ]?.[0];
-
-    return rslt
-      ? {
-          hasura_uid: rslt?.["uid"],
-          person_id: rslt?.["person"]?.["id"],
-        }
-      : null;
+    return toUserRef(hasura_response, "insertAuthUsersData");
   } catch (e) {
     console.error(e);
   }
@@ -221,21 +235,94 @@ export async function upsertUser(user: {
 }
 
 /**
+ * Whether an admin has seeded a row for this email that nobody has claimed yet.
+ *
+ * Lets the caller decide the email is too sensitive to act on before it has
+ * been verified, without performing the claim itself.
+ */
+export async function hasPendingInvite(email: string): Promise<boolean> {
+  try {
+    const hasura_response = await makeGraphqlRequest({
+      query: `
+            query hasPendingInvite($email: String!) {
+              authUsersData(
+                where: { email: { _eq: $email }, authId: { _isNull: true } }
+                limit: 1
+              ) {
+                uid
+              }
+            }
+          `,
+      variables: { email: canonicalEmail(email) },
+      operationName: "hasPendingInvite",
+    });
+
+    return !!hasura_response.data?.["data"]?.["authUsersData"]?.[0];
+  } catch (e) {
+    console.error(e);
+  }
+
+  return false;
+}
+
+/**
  * Attaches a Firebase Auth UID to a row an admin pre-seeded for this email.
  *
  * The row already carries the uid every permission table keys off, so leaving
  * it — and the person it is linked to — otherwise untouched is what preserves
  * the pre-configured access. Returns null when there is nothing to claim.
+ *
+ * Rows already claimed by this same UID still match, so a signup that fails
+ * downstream can be retried without falling through to the insert path (which
+ * would overwrite the linked person's flags).
  */
 async function claimInvitedUser(
   email: string,
   firebaseAuthUID: string,
-): Promise<{ person_id: string; hasura_uid: string } | null> {
+): Promise<HasuraUserRef | null> {
+  const pending = await makeGraphqlRequest({
+    query: `
+          query findInvitedUser($email: String!, $firebaseAuthUID: String!) {
+            authUsersData(
+              where: {
+                email: { _eq: $email }
+                _or: [
+                  { authId: { _isNull: true } }
+                  { authId: { _eq: $firebaseAuthUID } }
+                ]
+              }
+              limit: 1
+            ) {
+              uid
+              person {
+                id
+              }
+            }
+          }
+        `,
+    variables: { email, firebaseAuthUID },
+    operationName: "findInvitedUser",
+  });
+
+  const invite = pending.data?.["data"]?.["authUsersData"]?.[0];
+
+  if (!invite) {
+    return null;
+  }
+
+  // Validate before writing: a claim that commits and then throws would burn
+  // the invite, leaving it unclaimable by anyone.
+  const person_id = invite["person"]?.["id"];
+
+  if (!person_id) {
+    throw new Error(`Invited user ${email} is not linked to a person`);
+  }
+
   const hasura_response = await makeGraphqlRequest({
     query: `
-          mutation claimInvitedUser($email: String!, $firebaseAuthUID: String!) {
+          mutation claimInvitedUser($uid: uuid!, $firebaseAuthUID: String!) {
             updateAuthUsersData(
-              where: { email: { _eq: $email }, authId: { _isNull: true } }
+              where: { uid: { _eq: $uid } }
               _set: { authId: $firebaseAuthUID }
             ) {
               returning {
@@ -247,24 +334,11 @@ async function claimInvitedUser(
             }
           }
         `,
-    variables: { email, firebaseAuthUID },
+    variables: { uid: invite["uid"], firebaseAuthUID },
     operationName: "claimInvitedUser",
   });
 
-  const rslt =
-    hasura_response.data?.["data"]?.["updateAuthUsersData"]?.["returning"]?.[0];
-
-  if (!rslt) {
-    return null;
-  }
-
-  const person_id = rslt["person"]?.["id"];
-
-  if (!person_id) {
-    throw new Error(`Invited user ${email} is not linked to a person`);
-  }
-
-  return { hasura_uid: rslt["uid"], person_id };
+  return toUserRef(hasura_response, "updateAuthUsersData");
 }
 
 export async function unapproveUser(hasuraUID: string): Promise<void> {
