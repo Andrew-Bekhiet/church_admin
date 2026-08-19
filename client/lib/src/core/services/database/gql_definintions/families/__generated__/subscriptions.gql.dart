@@ -1533,13 +1533,6 @@ const documentNodeSubscriptionwatchAllFamiliesWithAddresses = DocumentNode(
                   directives: [],
                 ),
                 FieldNode(
-                  name: NameNode(value: 'userCanEdit'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null,
-                ),
-                FieldNode(
                   name: NameNode(value: 'address'),
                   alias: null,
                   arguments: [],
@@ -1610,10 +1603,10 @@ class Subscription_watchAllFamiliesWithAddresses_families
     required this.id,
     required this.name,
     this.color,
+    this.userCanEdit,
     this.$__typename = 'Families',
     this.photoUpdatedAt,
     this.blurhash,
-    this.userCanEdit,
     this.address,
     required this.status,
     this.deceasedSpouseName,
@@ -1626,10 +1619,10 @@ class Subscription_watchAllFamiliesWithAddresses_families
     final l$id = json['id'];
     final l$name = json['name'];
     final l$color = json['color'];
+    final l$userCanEdit = json['userCanEdit'];
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
     final l$blurhash = json['blurhash'];
-    final l$userCanEdit = json['userCanEdit'];
     final l$address = json['address'];
     final l$status = json['status'];
     final l$deceasedSpouseName = json['deceasedSpouseName'];
@@ -1638,12 +1631,12 @@ class Subscription_watchAllFamiliesWithAddresses_families
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
+      userCanEdit: (l$userCanEdit as bool?),
       $__typename: (l$$__typename as String),
       photoUpdatedAt: l$photoUpdatedAt == null
           ? null
           : tstzFromString(l$photoUpdatedAt),
       blurhash: (l$blurhash as String?),
-      userCanEdit: (l$userCanEdit as bool?),
       address: l$address == null
           ? null
           : Fragment_Address.fromJson((l$address as Map<String, dynamic>)),
@@ -1661,13 +1654,13 @@ class Subscription_watchAllFamiliesWithAddresses_families
 
   final int? color;
 
+  final bool? userCanEdit;
+
   final String $__typename;
 
   final DateTime? photoUpdatedAt;
 
   final String? blurhash;
-
-  final bool? userCanEdit;
 
   final Fragment_Address? address;
 
@@ -1685,6 +1678,8 @@ class Subscription_watchAllFamiliesWithAddresses_families
     _resultData['name'] = l$name;
     final l$color = color;
     _resultData['color'] = l$color;
+    final l$userCanEdit = userCanEdit;
+    _resultData['userCanEdit'] = l$userCanEdit;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
@@ -1693,8 +1688,6 @@ class Subscription_watchAllFamiliesWithAddresses_families
         : tstzToString(l$photoUpdatedAt);
     final l$blurhash = blurhash;
     _resultData['blurhash'] = l$blurhash;
-    final l$userCanEdit = userCanEdit;
-    _resultData['userCanEdit'] = l$userCanEdit;
     final l$address = address;
     _resultData['address'] = l$address?.toJson();
     final l$status = status;
@@ -1713,10 +1706,10 @@ class Subscription_watchAllFamiliesWithAddresses_families
     final l$id = id;
     final l$name = name;
     final l$color = color;
+    final l$userCanEdit = userCanEdit;
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$blurhash = blurhash;
-    final l$userCanEdit = userCanEdit;
     final l$address = address;
     final l$status = status;
     final l$deceasedSpouseName = deceasedSpouseName;
@@ -1725,10 +1718,10 @@ class Subscription_watchAllFamiliesWithAddresses_families
       l$id,
       l$name,
       l$color,
+      l$userCanEdit,
       l$$__typename,
       l$photoUpdatedAt,
       l$blurhash,
-      l$userCanEdit,
       l$address,
       l$status,
       l$deceasedSpouseName,
@@ -1760,6 +1753,11 @@ class Subscription_watchAllFamiliesWithAddresses_families
     if (l$color != lOther$color) {
       return false;
     }
+    final l$userCanEdit = userCanEdit;
+    final lOther$userCanEdit = other.userCanEdit;
+    if (l$userCanEdit != lOther$userCanEdit) {
+      return false;
+    }
     final l$$__typename = $__typename;
     final lOther$$__typename = other.$__typename;
     if (l$$__typename != lOther$$__typename) {
@@ -1773,11 +1771,6 @@ class Subscription_watchAllFamiliesWithAddresses_families
     final l$blurhash = blurhash;
     final lOther$blurhash = other.blurhash;
     if (l$blurhash != lOther$blurhash) {
-      return false;
-    }
-    final l$userCanEdit = userCanEdit;
-    final lOther$userCanEdit = other.userCanEdit;
-    if (l$userCanEdit != lOther$userCanEdit) {
       return false;
     }
     final l$address = address;
@@ -1831,10 +1824,10 @@ abstract class CopyWith_Subscription_watchAllFamiliesWithAddresses_families<
     UuidValue? id,
     String? name,
     int? color,
+    bool? userCanEdit,
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
-    bool? userCanEdit,
     Fragment_Address? address,
     String? status,
     String? deceasedSpouseName,
@@ -1862,10 +1855,10 @@ class _CopyWithImpl_Subscription_watchAllFamiliesWithAddresses_families<TRes>
     Object? id = _undefined,
     Object? name = _undefined,
     Object? color = _undefined,
+    Object? userCanEdit = _undefined,
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? blurhash = _undefined,
-    Object? userCanEdit = _undefined,
     Object? address = _undefined,
     Object? status = _undefined,
     Object? deceasedSpouseName = _undefined,
@@ -1877,6 +1870,9 @@ class _CopyWithImpl_Subscription_watchAllFamiliesWithAddresses_families<TRes>
           ? _instance.name
           : (name as String),
       color: color == _undefined ? _instance.color : (color as int?),
+      userCanEdit: userCanEdit == _undefined
+          ? _instance.userCanEdit
+          : (userCanEdit as bool?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -1886,9 +1882,6 @@ class _CopyWithImpl_Subscription_watchAllFamiliesWithAddresses_families<TRes>
       blurhash: blurhash == _undefined
           ? _instance.blurhash
           : (blurhash as String?),
-      userCanEdit: userCanEdit == _undefined
-          ? _instance.userCanEdit
-          : (userCanEdit as bool?),
       address: address == _undefined
           ? _instance.address
           : (address as Fragment_Address?),
@@ -1927,10 +1920,10 @@ class _CopyWithStubImpl_Subscription_watchAllFamiliesWithAddresses_families<
     UuidValue? id,
     String? name,
     int? color,
+    bool? userCanEdit,
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
-    bool? userCanEdit,
     Fragment_Address? address,
     String? status,
     String? deceasedSpouseName,
@@ -2375,6 +2368,7 @@ class Subscription_watchFamily_familiesByPk
     required this.id,
     required this.name,
     this.color,
+    this.userCanEdit,
     this.$__typename = 'Families',
     this.photoUpdatedAt,
     this.blurhash,
@@ -2396,6 +2390,7 @@ class Subscription_watchFamily_familiesByPk
     final l$id = json['id'];
     final l$name = json['name'];
     final l$color = json['color'];
+    final l$userCanEdit = json['userCanEdit'];
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
     final l$blurhash = json['blurhash'];
@@ -2413,6 +2408,7 @@ class Subscription_watchFamily_familiesByPk
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
+      userCanEdit: (l$userCanEdit as bool?),
       $__typename: (l$$__typename as String),
       photoUpdatedAt: l$photoUpdatedAt == null
           ? null
@@ -2461,6 +2457,8 @@ class Subscription_watchFamily_familiesByPk
 
   final int? color;
 
+  final bool? userCanEdit;
+
   final String $__typename;
 
   final DateTime? photoUpdatedAt;
@@ -2496,6 +2494,8 @@ class Subscription_watchFamily_familiesByPk
     _resultData['name'] = l$name;
     final l$color = color;
     _resultData['color'] = l$color;
+    final l$userCanEdit = userCanEdit;
+    _resultData['userCanEdit'] = l$userCanEdit;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
@@ -2534,6 +2534,7 @@ class Subscription_watchFamily_familiesByPk
     final l$id = id;
     final l$name = name;
     final l$color = color;
+    final l$userCanEdit = userCanEdit;
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$blurhash = blurhash;
@@ -2551,6 +2552,7 @@ class Subscription_watchFamily_familiesByPk
       l$id,
       l$name,
       l$color,
+      l$userCanEdit,
       l$$__typename,
       l$photoUpdatedAt,
       l$blurhash,
@@ -2589,6 +2591,11 @@ class Subscription_watchFamily_familiesByPk
     final l$color = color;
     final lOther$color = other.color;
     if (l$color != lOther$color) {
+      return false;
+    }
+    final l$userCanEdit = userCanEdit;
+    final lOther$userCanEdit = other.userCanEdit;
+    if (l$userCanEdit != lOther$userCanEdit) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -2682,6 +2689,7 @@ abstract class CopyWith_Subscription_watchFamily_familiesByPk<TRes> {
     UuidValue? id,
     String? name,
     int? color,
+    bool? userCanEdit,
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
@@ -2723,6 +2731,7 @@ class _CopyWithImpl_Subscription_watchFamily_familiesByPk<TRes>
     Object? id = _undefined,
     Object? name = _undefined,
     Object? color = _undefined,
+    Object? userCanEdit = _undefined,
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? blurhash = _undefined,
@@ -2743,6 +2752,9 @@ class _CopyWithImpl_Subscription_watchFamily_familiesByPk<TRes>
           ? _instance.name
           : (name as String),
       color: color == _undefined ? _instance.color : (color as int?),
+      userCanEdit: userCanEdit == _undefined
+          ? _instance.userCanEdit
+          : (userCanEdit as bool?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -2857,6 +2869,7 @@ class _CopyWithStubImpl_Subscription_watchFamily_familiesByPk<TRes>
     UuidValue? id,
     String? name,
     int? color,
+    bool? userCanEdit,
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,

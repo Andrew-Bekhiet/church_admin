@@ -24,7 +24,6 @@ subscription watchPerson(
 ) {
   personsByPk(id: $id) {
     ...Person
-    userCanEdit
     nationalId
     address {
       ...Address

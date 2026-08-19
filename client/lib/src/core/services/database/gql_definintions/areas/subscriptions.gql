@@ -21,7 +21,6 @@ subscription watchArea($id: uuid!) {
   areasByPk(id: $id) {
     ...Area
     bounds
-    userCanEdit
     lastEdit {
       ...LatestEditHistory
     }

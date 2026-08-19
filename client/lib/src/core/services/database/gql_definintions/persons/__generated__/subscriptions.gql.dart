@@ -1422,13 +1422,6 @@ const documentNodeSubscriptionwatchPerson = DocumentNode(
                   directives: [],
                 ),
                 FieldNode(
-                  name: NameNode(value: 'userCanEdit'),
-                  alias: null,
-                  arguments: [],
-                  directives: [],
-                  selectionSet: null,
-                ),
-                FieldNode(
                   name: NameNode(value: 'nationalId'),
                   alias: null,
                   arguments: [],
@@ -2479,10 +2472,10 @@ class Subscription_watchPerson_personsByPk
     required this.id,
     required this.name,
     this.color,
+    this.userCanEdit,
     this.$__typename = 'Persons',
     this.photoUpdatedAt,
     this.blurhash,
-    this.userCanEdit,
     this.nationalId,
     this.address,
     this.birthdate,
@@ -2528,10 +2521,10 @@ class Subscription_watchPerson_personsByPk
     final l$id = json['id'];
     final l$name = json['name'];
     final l$color = json['color'];
+    final l$userCanEdit = json['userCanEdit'];
     final l$$__typename = json['__typename'];
     final l$photoUpdatedAt = json['photoUpdatedAt'];
     final l$blurhash = json['blurhash'];
-    final l$userCanEdit = json['userCanEdit'];
     final l$nationalId = json['nationalId'];
     final l$address = json['address'];
     final l$birthdate = json['birthdate'];
@@ -2573,12 +2566,12 @@ class Subscription_watchPerson_personsByPk
       id: stringToUuid(l$id),
       name: (l$name as String),
       color: (l$color as int?),
+      userCanEdit: (l$userCanEdit as bool?),
       $__typename: (l$$__typename as String),
       photoUpdatedAt: l$photoUpdatedAt == null
           ? null
           : tstzFromString(l$photoUpdatedAt),
       blurhash: (l$blurhash as String?),
-      userCanEdit: (l$userCanEdit as bool?),
       nationalId: (l$nationalId as int?),
       address: l$address == null
           ? null
@@ -2727,13 +2720,13 @@ class Subscription_watchPerson_personsByPk
 
   final int? color;
 
+  final bool? userCanEdit;
+
   final String $__typename;
 
   final DateTime? photoUpdatedAt;
 
   final String? blurhash;
-
-  final bool? userCanEdit;
 
   final int? nationalId;
 
@@ -2817,6 +2810,8 @@ class Subscription_watchPerson_personsByPk
     _resultData['name'] = l$name;
     final l$color = color;
     _resultData['color'] = l$color;
+    final l$userCanEdit = userCanEdit;
+    _resultData['userCanEdit'] = l$userCanEdit;
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
@@ -2825,8 +2820,6 @@ class Subscription_watchPerson_personsByPk
         : tstzToString(l$photoUpdatedAt);
     final l$blurhash = blurhash;
     _resultData['blurhash'] = l$blurhash;
-    final l$userCanEdit = userCanEdit;
-    _resultData['userCanEdit'] = l$userCanEdit;
     final l$nationalId = nationalId;
     _resultData['nationalId'] = l$nationalId;
     final l$address = address;
@@ -2911,10 +2904,10 @@ class Subscription_watchPerson_personsByPk
     final l$id = id;
     final l$name = name;
     final l$color = color;
+    final l$userCanEdit = userCanEdit;
     final l$$__typename = $__typename;
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$blurhash = blurhash;
-    final l$userCanEdit = userCanEdit;
     final l$nationalId = nationalId;
     final l$address = address;
     final l$birthdate = birthdate;
@@ -2956,10 +2949,10 @@ class Subscription_watchPerson_personsByPk
       l$id,
       l$name,
       l$color,
+      l$userCanEdit,
       l$$__typename,
       l$photoUpdatedAt,
       l$blurhash,
-      l$userCanEdit,
       l$nationalId,
       l$address,
       l$birthdate,
@@ -3024,6 +3017,11 @@ class Subscription_watchPerson_personsByPk
     if (l$color != lOther$color) {
       return false;
     }
+    final l$userCanEdit = userCanEdit;
+    final lOther$userCanEdit = other.userCanEdit;
+    if (l$userCanEdit != lOther$userCanEdit) {
+      return false;
+    }
     final l$$__typename = $__typename;
     final lOther$$__typename = other.$__typename;
     if (l$$__typename != lOther$$__typename) {
@@ -3037,11 +3035,6 @@ class Subscription_watchPerson_personsByPk
     final l$blurhash = blurhash;
     final lOther$blurhash = other.blurhash;
     if (l$blurhash != lOther$blurhash) {
-      return false;
-    }
-    final l$userCanEdit = userCanEdit;
-    final lOther$userCanEdit = other.userCanEdit;
-    if (l$userCanEdit != lOther$userCanEdit) {
       return false;
     }
     final l$nationalId = nationalId;
@@ -3289,10 +3282,10 @@ abstract class CopyWith_Subscription_watchPerson_personsByPk<TRes> {
     UuidValue? id,
     String? name,
     int? color,
+    bool? userCanEdit,
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
-    bool? userCanEdit,
     int? nationalId,
     Fragment_Address? address,
     DateTime? birthdate,
@@ -3422,10 +3415,10 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk<TRes>
     Object? id = _undefined,
     Object? name = _undefined,
     Object? color = _undefined,
+    Object? userCanEdit = _undefined,
     Object? $__typename = _undefined,
     Object? photoUpdatedAt = _undefined,
     Object? blurhash = _undefined,
-    Object? userCanEdit = _undefined,
     Object? nationalId = _undefined,
     Object? address = _undefined,
     Object? birthdate = _undefined,
@@ -3470,6 +3463,9 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk<TRes>
           ? _instance.name
           : (name as String),
       color: color == _undefined ? _instance.color : (color as int?),
+      userCanEdit: userCanEdit == _undefined
+          ? _instance.userCanEdit
+          : (userCanEdit as bool?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -3479,9 +3475,6 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk<TRes>
       blurhash: blurhash == _undefined
           ? _instance.blurhash
           : (blurhash as String?),
-      userCanEdit: userCanEdit == _undefined
-          ? _instance.userCanEdit
-          : (userCanEdit as bool?),
       nationalId: nationalId == _undefined
           ? _instance.nationalId
           : (nationalId as int?),
@@ -3907,10 +3900,10 @@ class _CopyWithStubImpl_Subscription_watchPerson_personsByPk<TRes>
     UuidValue? id,
     String? name,
     int? color,
+    bool? userCanEdit,
     String? $__typename,
     DateTime? photoUpdatedAt,
     String? blurhash,
-    bool? userCanEdit,
     int? nationalId,
     Fragment_Address? address,
     DateTime? birthdate,

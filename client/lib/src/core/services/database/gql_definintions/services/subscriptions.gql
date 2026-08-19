@@ -41,7 +41,6 @@ subscription watchService($id: uuid!) {
     defaultMeeting {
       ...Meeting
     }
-    userCanEdit
     lastEdit {
       ...LatestEditHistory
     }

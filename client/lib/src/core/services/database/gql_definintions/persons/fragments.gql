@@ -8,11 +8,11 @@ fragment PersonNoPhoto on Persons {
   id
   name
   color
+  userCanEdit
 }
 
 fragment FullPersonData on Persons {
   ...Person
-  userCanEdit
   birthdate
   address {
     ...Address
