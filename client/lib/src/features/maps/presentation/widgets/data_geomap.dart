@@ -24,11 +24,11 @@ class DataGeomap extends StatefulWidget {
 
   const DataGeomap({
     required this.geomapOptionsStream,
+    this.addLayers = const [],
+    this.showUserLocation = true,
     this.initialPerson,
     this.createMapOptions,
-    this.addLayers = const [],
     this.overrideResponseObjects,
-    this.showUserLocation = true,
     this.onUserLocationChanged,
     this.onTapLocation,
     super.key,
@@ -225,6 +225,7 @@ class DataGeomapState extends State<DataGeomap> {
         .startWith(null)
         .map((event) {
           widget.onUserLocationChanged?.call(event);
+
           return event;
         });
   }
@@ -238,6 +239,7 @@ class DataGeomapState extends State<DataGeomap> {
             permissionStatus == PermissionStatus.limited)) {
       return Geolocator.getCurrentPosition();
     }
+
     return null;
   }
 

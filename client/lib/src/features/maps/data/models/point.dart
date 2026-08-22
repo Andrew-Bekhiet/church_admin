@@ -1,6 +1,6 @@
 part of 'spatial.dart';
 
-class Point with Equatable implements Spatial {
+class Point extends Spatial {
   final double latitude;
   final double longitude;
 

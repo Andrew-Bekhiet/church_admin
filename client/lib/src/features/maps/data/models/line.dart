@@ -1,6 +1,6 @@
 part of 'spatial.dart';
 
-class Line with Equatable implements Spatial {
+class Line extends Spatial {
   final List<Point> coordinates;
 
   @override
@@ -15,6 +15,7 @@ class Line with Equatable implements Spatial {
 
   Json? asPostGISLineString() {
     if (coordinates.isEmpty) return null;
+
     return {
       'type': 'LineString',
       'coordinates': coordinates.map((p) => [p.longitude, p.latitude]).toList(),

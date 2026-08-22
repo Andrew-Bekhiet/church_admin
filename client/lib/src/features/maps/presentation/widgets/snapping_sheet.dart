@@ -13,8 +13,8 @@ class MapSnappingSheet extends StatelessWidget {
   const MapSnappingSheet({
     required this.sheetBelow,
     required this.child,
-    this.onSheetMoved,
     this.showGrabbing = true,
+    this.onSheetMoved,
     super.key,
   });
 

@@ -27,6 +27,7 @@ class GeomapFAB extends StatelessWidget {
               coords: Coords(location.latitude, location.longitude),
               title: '',
             );
+
             return;
           }
 

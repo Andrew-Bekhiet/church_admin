@@ -141,11 +141,12 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
       title: 'اختيار المجموعات',
     );
 
-    if (rslt != null) {
-      stagingMapOptions = stagingMapOptions.copyWith(
-        selectedGroups: rslt.toSet(),
-      );
-      if (mounted) setState(() {});
+    if (rslt != null && mounted) {
+      setState(() {
+        stagingMapOptions = stagingMapOptions.copyWith(
+          selectedGroups: rslt.toSet(),
+        );
+      });
     }
   }
 
@@ -156,11 +157,12 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
       title: 'اختيار الفصول',
     );
 
-    if (rslt != null) {
-      stagingMapOptions = stagingMapOptions.copyWith(
-        selectedClasses: rslt.toSet(),
-      );
-      if (mounted) setState(() {});
+    if (rslt != null && mounted) {
+      setState(() {
+        stagingMapOptions = stagingMapOptions.copyWith(
+          selectedClasses: rslt.toSet(),
+        );
+      });
     }
   }
 
@@ -171,11 +173,12 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
       title: 'اختيار الخدمات',
     );
 
-    if (rslt != null) {
-      stagingMapOptions = stagingMapOptions.copyWith(
-        selectedServices: rslt.toSet(),
-      );
-      if (mounted) setState(() {});
+    if (rslt != null && mounted) {
+      setState(() {
+        stagingMapOptions = stagingMapOptions.copyWith(
+          selectedServices: rslt.toSet(),
+        );
+      });
     }
   }
 
@@ -186,11 +189,12 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
       title: 'اختيار المتاجر',
     );
 
-    if (rslt != null) {
-      stagingMapOptions = stagingMapOptions.copyWith(
-        selectedStores: rslt.toSet(),
-      );
-      if (mounted) setState(() {});
+    if (rslt != null && mounted) {
+      setState(() {
+        stagingMapOptions = stagingMapOptions.copyWith(
+          selectedStores: rslt.toSet(),
+        );
+      });
     }
   }
 
@@ -201,11 +205,12 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
       title: 'اختيار العائلات',
     );
 
-    if (rslt != null) {
-      stagingMapOptions = stagingMapOptions.copyWith(
-        selectedFamilies: rslt.toSet(),
-      );
-      if (mounted) setState(() {});
+    if (rslt != null && mounted) {
+      setState(() {
+        stagingMapOptions = stagingMapOptions.copyWith(
+          selectedFamilies: rslt.toSet(),
+        );
+      });
     }
   }
 
@@ -216,11 +221,12 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
       title: 'اختيار الشوارع',
     );
 
-    if (rslt != null) {
-      stagingMapOptions = stagingMapOptions.copyWith(
-        selectedStreets: rslt.toSet(),
-      );
-      if (mounted) setState(() {});
+    if (rslt != null && mounted) {
+      setState(() {
+        stagingMapOptions = stagingMapOptions.copyWith(
+          selectedStreets: rslt.toSet(),
+        );
+      });
     }
   }
 
@@ -231,11 +237,12 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
       title: 'اختيار المناطق',
     );
 
-    if (rslt != null) {
-      stagingMapOptions = stagingMapOptions.copyWith(
-        selectedAreas: rslt.toSet(),
-      );
-      if (mounted) setState(() {});
+    if (rslt != null && mounted) {
+      setState(() {
+        stagingMapOptions = stagingMapOptions.copyWith(
+          selectedAreas: rslt.toSet(),
+        );
+      });
     }
   }
 
@@ -287,7 +294,9 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
     if (rslt == true) {
       unawaited(
         controller.dispose().then((_) async {
-          if (!search.isClosed) await search.close();
+          if (search.isClosed) return;
+
+          await search.close();
         }),
       );
 
@@ -296,7 +305,9 @@ class EditGeomapOptionsWidgetState extends State<EditGeomapOptionsWidget> {
           .toList();
     }
     await controller.dispose().then((_) async {
-      if (!search.isClosed) await search.close();
+      if (search.isClosed) return;
+
+      await search.close();
     });
 
     return null;

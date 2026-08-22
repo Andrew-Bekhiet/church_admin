@@ -224,10 +224,10 @@ class _EditObjectPointsMap<T extends ViewableWithID>
 
   @override
   Future<void> dispose() async {
-    super.dispose();
-
     await _mapOptionsStream.close();
     await resultObject.close();
+
+    super.dispose();
   }
 }
 

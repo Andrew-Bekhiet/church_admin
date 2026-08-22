@@ -1,6 +1,6 @@
 part of 'spatial.dart';
 
-class Polygon with Equatable implements Spatial {
+class Polygon extends Spatial {
   final List<Point> coordinates;
 
   @override
@@ -15,6 +15,7 @@ class Polygon with Equatable implements Spatial {
 
   Json? asPostGISPolygon() {
     if (coordinates.isEmpty) return null;
+
     return {
       'type': 'Polygon',
       'coordinates': [

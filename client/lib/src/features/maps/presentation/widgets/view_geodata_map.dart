@@ -51,7 +51,9 @@ class _ViewGeodataMapState extends State<ViewGeodataMap>
       appBar: AppBar(
         actions: [
           IconButton(
-            onPressed: () => setState(() {}),
+            onPressed: () => setState(() {
+              return;
+            }),
             icon: const Icon(Symbols.refresh),
             tooltip: 'تحديث البيانات',
           ),
@@ -102,9 +104,9 @@ class _ViewGeodataMapState extends State<ViewGeodataMap>
 
   @override
   Future<void> dispose() async {
-    super.dispose();
-
     await _mapOptions.close();
+
+    super.dispose();
   }
 
   void _onSheetMoved(SheetPositionData position) {

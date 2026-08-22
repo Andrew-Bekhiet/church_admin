@@ -5,4 +5,6 @@ part 'line.dart';
 part 'point.dart';
 part 'polygon.dart';
 
-sealed class Spatial extends Equatable {}
+sealed class Spatial extends Equatable {
+  const Spatial();
+}

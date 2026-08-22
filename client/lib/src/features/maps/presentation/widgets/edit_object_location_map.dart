@@ -164,11 +164,11 @@ class _EditObjectLocationMap<T extends ViewableWithID>
 
   @override
   Future<void> dispose() async {
-    super.dispose();
-
     await _mapOptionsStream.close();
     await _userLocationSubject.close();
     await resultObject.close();
+
+    super.dispose();
   }
 
   Future<Point?> _getLocationFromGMapsLinkWithProgress() async {
