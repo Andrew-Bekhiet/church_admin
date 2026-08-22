@@ -25,7 +25,6 @@ subscription watchGroup($id: uuid!) {
     meetings {
       ...Meeting
     }
-    userCanEdit
     service {
       ...ServiceWithStudyYears
     }

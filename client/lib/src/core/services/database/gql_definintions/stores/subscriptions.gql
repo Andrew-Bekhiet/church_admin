@@ -19,7 +19,6 @@ subscription watchStoresCount($where: [StoresBoolExp!] = {}, $limit: Int) {
 subscription watchStore($id: uuid!) {
   storesByPk(id: $id) {
     ...Store
-    userCanEdit
     address {
       ...Address
     }
