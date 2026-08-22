@@ -1,5 +1,5 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/firebase_options.dart';
+import 'package:church_admin/default_firebase_options.dart';
 import 'package:firebase_app_check_platform_interface/firebase_app_check_platform_interface.dart';
 import 'package:firebase_auth_platform_interface/firebase_auth_platform_interface.dart';
 import 'package:firebase_core_platform_interface/firebase_core_platform_interface.dart';
