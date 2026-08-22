@@ -18,6 +18,9 @@ class District extends ViewableWithID
   @JsonKey(defaultValue: '')
   final String name;
 
+  @override
+  String get typeName => AdvancedQueriesMetadata().district.name;
+
   const District({
     required this.id,
     required this.name,
@@ -28,7 +31,4 @@ class District extends ViewableWithID
 
   @override
   Json toJson() => _$DistrictToJson(this);
-
-  @override
-  String get typeName => AdvancedQueriesMetadata().district.name;
 }

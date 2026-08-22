@@ -16,10 +16,10 @@ class ViewableObjectWidgetConfig<T extends Viewable> {
   final Widget? photo;
   final Widget? trailing;
 
+  final FieldMetadata? secondLineField;
+
   final void Function(T)? onTap;
   final void Function(T)? onLongPress;
-
-  final FieldMetadata? secondLineField;
 
   const ViewableObjectWidgetConfig({
     this.selected = false,

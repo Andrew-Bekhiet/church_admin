@@ -6,10 +6,9 @@ part 'view_street_route.g.dart';
 
 @TypedGoRoute<ViewStreetRoute>(path: '/view_street')
 class ViewStreetRoute extends GoRouteData with $ViewStreetRoute {
-  const ViewStreetRoute({required this.id, this.$extra});
-
   final String id;
   final Street? $extra;
+  const ViewStreetRoute({required this.id, this.$extra});
 
   @override
   Widget build(BuildContext context, GoRouterState state) {

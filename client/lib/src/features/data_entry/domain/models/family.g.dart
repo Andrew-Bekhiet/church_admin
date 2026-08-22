@@ -1,5 +1,8 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// coverage:ignore-file
+// ignore_for_file: type=lint
+
 part of 'family.dart';
 
 // **************************************************************************
@@ -7,8 +10,6 @@ part of 'family.dart';
 // **************************************************************************
 
 class _FamilyFields {
-  _FamilyFields();
-
   final FieldMetadata<Family> id = FieldMetadata<Family>(
     getValue: (obj) => obj is Family ? obj.id : null,
     parentType: Family,
@@ -247,6 +248,8 @@ class _FamilyFields {
     'lastFatherVisit': lastFatherVisit,
     'geolocation': geolocation,
   };
+
+  _FamilyFields();
 }
 
 // **************************************************************************
@@ -256,12 +259,13 @@ class _FamilyFields {
 Family _$FamilyFromJson(Map json) => Family(
   id: json['id'] as String? ?? '',
   name: json['name'] as String? ?? '',
-  address: json['address'] == null
-      ? null
-      : Address.fromJson(Map<String, Object?>.from(json['address'] as Map)),
   status:
       $enumDecodeNullable(_$MartialStatusEnumMap, json['status']) ??
       MartialStatus.married,
+  userCanEdit: json['userCanEdit'] as bool? ?? false,
+  address: json['address'] == null
+      ? null
+      : Address.fromJson(Map<String, Object?>.from(json['address'] as Map)),
   marriageDate: _$JsonConverterFromJson<String, DateTime>(
     json['marriageDate'],
     const LocalDateTimeConverter().fromJson,
@@ -298,7 +302,6 @@ Family _$FamilyFromJson(Map json) => Family(
       (_readFamilyAdminsPhones(json, 'familyAdminsPhones') as Map?)?.map(
         (k, e) => MapEntry(k as String, e),
       ),
-  userCanEdit: json['userCanEdit'] as bool? ?? false,
 );
 
 Map<String, dynamic> _$FamilyToJson(Family instance) => <String, dynamic>{

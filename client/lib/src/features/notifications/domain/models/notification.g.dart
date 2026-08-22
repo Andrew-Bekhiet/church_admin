@@ -1,5 +1,8 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// coverage:ignore-file
+// ignore_for_file: type=lint
+
 part of 'notification.dart';
 
 // **************************************************************************
@@ -12,10 +15,10 @@ Notification _$NotificationFromJson(Map json) => Notification(
   body: json['body'] as String,
   sentTime: const LocalDateTimeConverter().fromJson(json['sentTime'] as String),
   senderUID: json['senderUID'] as String,
-  imageURL: json['imageURL'] as String?,
   type:
       $enumDecodeNullable(_$NotificationTypeEnumMap, json['type']) ??
       NotificationType.remote,
+  imageURL: json['imageURL'] as String?,
   additionalData: (json['additionalData'] as Map?)?.map(
     (k, e) => MapEntry(k as String, e),
   ),

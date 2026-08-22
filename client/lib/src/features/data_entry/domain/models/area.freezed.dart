@@ -86,6 +86,7 @@ abstract mixin class $AreaCopyWith<$Res> {
   $Res call({
     String id,
     String name,
+    bool userCanEdit,
     Polygon? bounds,
     Color? color,
     DateTime? photoUpdatedAt,
@@ -93,7 +94,6 @@ abstract mixin class $AreaCopyWith<$Res> {
     LastRecordedByInfo? lastVisit,
     LastRecordedByInfo? lastEdit,
     List<User>? adminUsers,
-    bool userCanEdit,
   });
 }
 
@@ -111,6 +111,7 @@ class _$AreaCopyWithImpl<$Res> implements $AreaCopyWith<$Res> {
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? userCanEdit = null,
     Object? bounds = freezed,
     Object? color = freezed,
     Object? photoUpdatedAt = freezed,
@@ -118,7 +119,6 @@ class _$AreaCopyWithImpl<$Res> implements $AreaCopyWith<$Res> {
     Object? lastVisit = freezed,
     Object? lastEdit = freezed,
     Object? adminUsers = freezed,
-    Object? userCanEdit = null,
   }) {
     return _then(
       Area(
@@ -130,6 +130,10 @@ class _$AreaCopyWithImpl<$Res> implements $AreaCopyWith<$Res> {
             ? _self.name
             : name // ignore: cast_nullable_to_non_nullable
                   as String,
+        userCanEdit: null == userCanEdit
+            ? _self.userCanEdit
+            : userCanEdit // ignore: cast_nullable_to_non_nullable
+                  as bool,
         bounds: freezed == bounds
             ? _self.bounds
             : bounds // ignore: cast_nullable_to_non_nullable
@@ -158,10 +162,6 @@ class _$AreaCopyWithImpl<$Res> implements $AreaCopyWith<$Res> {
             ? _self.adminUsers
             : adminUsers // ignore: cast_nullable_to_non_nullable
                   as List<User>?,
-        userCanEdit: null == userCanEdit
-            ? _self.userCanEdit
-            : userCanEdit // ignore: cast_nullable_to_non_nullable
-                  as bool,
       ),
     );
   }

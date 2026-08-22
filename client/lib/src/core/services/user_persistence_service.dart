@@ -16,6 +16,9 @@ class UserPersistenceService {
 
   late final StreamSubscription<bool> _connectivitySubscription;
 
+  bool get canRecordPersistence =>
+      recordPersistence && _auth.currentUserData != null;
+
   UserPersistenceService({
     required this._firebaseDatabase,
     ConnectivityService? connectivityService,
@@ -26,9 +29,6 @@ class UserPersistenceService {
       _onConnectivityChanged,
     );
   }
-
-  bool get canRecordPersistence =>
-      recordPersistence && _auth.currentUserData != null;
 
   Future<void> _onConnectivityChanged(bool connected) async {
     if (!connected) return;
@@ -44,7 +44,7 @@ class UserPersistenceService {
         .child('Users/${_auth.currentUserData!.uid}/lastSeen')
         .onDisconnect()
         .set(ServerValue.timestamp)
-        .catchError((_) {});
+        .catchError((_) => null);
   }
 
   Future<void> cancelOnDisconnect() async {

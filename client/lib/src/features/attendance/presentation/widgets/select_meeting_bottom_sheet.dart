@@ -4,10 +4,6 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 
 class SelectMeetingBottomSheet extends StatefulWidget {
-  final Meeting currentMeeting;
-
-  const SelectMeetingBottomSheet({required this.currentMeeting, super.key});
-
   static Future<Meeting?> show(
     BuildContext context, {
     required Meeting currentMeeting,
@@ -20,6 +16,10 @@ class SelectMeetingBottomSheet extends StatefulWidget {
       builder: (_) => SelectMeetingBottomSheet(currentMeeting: currentMeeting),
     );
   }
+
+  final Meeting currentMeeting;
+
+  const SelectMeetingBottomSheet({required this.currentMeeting, super.key});
 
   @override
   State<SelectMeetingBottomSheet> createState() =>
@@ -41,12 +41,6 @@ class _SelectMeetingBottomSheetState extends State<SelectMeetingBottomSheet> {
           ),
         ]),
       );
-
-  @override
-  void dispose() {
-    unawaited(_meetingsStream.dispose());
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -107,5 +101,11 @@ class _SelectMeetingBottomSheetState extends State<SelectMeetingBottomSheet> {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    unawaited(_meetingsStream.dispose());
+    super.dispose();
   }
 }

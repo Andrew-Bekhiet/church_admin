@@ -3,7 +3,6 @@ import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:material_symbols_icons/material_symbols_icons.dart';
 
 class DateTimeRangeField extends StatelessWidget {
   final String label;
@@ -11,19 +10,15 @@ class DateTimeRangeField extends StatelessWidget {
   final bool nullable;
   final DateFormat dateFormat;
   final DateTime? startFirstDate;
-
-  final void Function(DateTimeRange?)? onChanged;
-  final void Function(DateTimeRange?)? onSaved;
-  final String? Function(DateTimeRange?)? validator;
   final AutovalidateMode? autovalidateMode;
   final FocusNode? focusNode;
   final InputDecoration? decoration;
 
   DateTimeRangeField({
     required this.label,
+    this.nullable = false,
     this.startFirstDate,
     this.initialValue,
-    this.nullable = false,
     DateFormat? dateFormat,
     this.onChanged,
     this.onSaved,
@@ -74,28 +69,13 @@ class DateTimeRangeField extends StatelessWidget {
           if (nullable) focusScope.nextFocus();
         }
       },
-      decoration: (context, state) {
-        final inputDecoration = InputDecoration(
-          labelText: label,
-          errorText: state.errorText,
-          suffixIcon: nullable && state.value != null
-              ? IconButton(
-                  icon: const Icon(Symbols.delete),
-                  tooltip: 'حذف التاريخ',
-                  onPressed: () {
-                    state.didChange(null);
-                    onChanged?.call(null);
-                  },
-                )
-              : null,
-        );
-
-        return decoration?.copyWith(
-              errorText: inputDecoration.errorText,
-              suffixIcon: inputDecoration.suffixIcon,
-            ) ??
-            inputDecoration;
-      },
+      decoration: (context, state) => ClearableDateFieldDecoration.build(
+        label: label,
+        nullable: nullable,
+        decoration: decoration,
+        state: state,
+        onChanged: onChanged,
+      ),
       builder: (context, state) {
         return state.value != null
             ? Row(
@@ -124,4 +104,8 @@ class DateTimeRangeField extends StatelessWidget {
           (v) => v == null && !nullable ? 'برجاء ادخال $label' : null,
     );
   }
+
+  final void Function(DateTimeRange?)? onChanged;
+  final void Function(DateTimeRange?)? onSaved;
+  final String? Function(DateTimeRange?)? validator;
 }

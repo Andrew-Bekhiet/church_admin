@@ -90,6 +90,7 @@ class EncryptionService {
     for (int i = 0; i < a.length; i++) {
       result |= a.codeUnitAt(i) ^ b.codeUnitAt(i);
     }
+
     return result == 0;
   }
 

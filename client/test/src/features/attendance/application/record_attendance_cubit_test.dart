@@ -21,7 +21,10 @@ void main() {
       );
     });
 
-    setUp(() => f = _Fixture());
+    setUp(() {
+      f = _Fixture();
+      addTearDown(f.dispose);
+    });
     tearDown(defaultTearDown);
 
     group('initial load', () {
@@ -107,7 +110,7 @@ void main() {
         build: () => f.createCubit(),
         act: (cubit) async {
           await cubit.stream.whereType<RecordAttendanceLoaded>().firstWhere(
-            (s) => s.entries.firstOrNull?.attended == true,
+            (s) => s.entries.firstOrNull?.attended ?? false,
           );
 
           final state = cubit.state as RecordAttendanceLoaded;
@@ -397,6 +400,12 @@ final class _Fixture {
     authBloc: authBloc,
     presenter: presenter,
   );
+
+  Future<void> dispose() => Future.wait([
+    attendanceController.close(),
+    presentCountController.close(),
+    eligibleCountController.close(),
+  ]);
 
   static Meeting makeMeeting({
     String id = 'meeting-1',

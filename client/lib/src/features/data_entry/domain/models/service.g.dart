@@ -1,5 +1,8 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// coverage:ignore-file
+// ignore_for_file: type=lint
+
 part of 'service.dart';
 
 // **************************************************************************
@@ -7,8 +10,6 @@ part of 'service.dart';
 // **************************************************************************
 
 class _ServiceFields {
-  _ServiceFields();
-
   final FieldMetadata<Service> id = FieldMetadata<Service>(
     getValue: (obj) => obj is Service ? obj.id : null,
     parentType: Service,
@@ -195,6 +196,8 @@ class _ServiceFields {
     'lastEdit': lastEdit,
     'adminUsers': adminUsers,
   };
+
+  _ServiceFields();
 }
 
 // **************************************************************************
@@ -204,6 +207,7 @@ class _ServiceFields {
 Service _$ServiceFromJson(Map json) => Service(
   id: json['id'] as String? ?? '',
   name: json['name'] as String? ?? '',
+  userCanEdit: json['userCanEdit'] as bool? ?? false,
   studyYearFrom: json['studyYearFrom'] == null
       ? null
       : StudyYear.fromJson(
@@ -246,7 +250,6 @@ Service _$ServiceFromJson(Map json) => Service(
           Map<String, Object?>.from(json['lastEdit'] as Map),
         ),
   adminUsers: adminUsersFromJson(json['adminUsers'] as List?),
-  userCanEdit: json['userCanEdit'] as bool? ?? false,
 );
 
 Map<String, dynamic> _$ServiceToJson(Service instance) => <String, dynamic>{

@@ -10,9 +10,9 @@ class FunctionsService {
 
   final Dio _dio;
 
-  FunctionsService({required this._dio});
-
   final _pendingDownloadUrls = <int, Future<String>>{};
+
+  FunctionsService({required this._dio});
 
   HttpsCallable httpsCallable(
     String functionName, {
@@ -35,6 +35,7 @@ class FunctionsService {
           // Map.remove returns the removed value
           // which the analyzer marks as unawaited
           unawaited(_pendingDownloadUrls.remove(hash));
+
           return value.data;
         });
 
@@ -112,6 +113,7 @@ class FunctionsService {
           ).replace(pathSegments: ['healthz']),
         )
         .timeout(const Duration(seconds: 15));
+
     return res.data == 'OK';
   }
 

@@ -13,12 +13,6 @@ class AttendanceLetterGutter extends StatelessWidget {
     super.key,
   });
 
-  void _selectAt(double dy) {
-    if (letters.isEmpty) return;
-    final index = (dy / _slotHeight).floor().clamp(0, letters.length - 1);
-    onLetterSelected(letters[index]);
-  }
-
   @override
   Widget build(BuildContext context) {
     if (letters.isEmpty) return const SizedBox.shrink();
@@ -54,5 +48,11 @@ class AttendanceLetterGutter extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _selectAt(double dy) {
+    if (letters.isEmpty) return;
+    final index = (dy / _slotHeight).floor().clamp(0, letters.length - 1);
+    onLetterSelected(letters[index]);
   }
 }

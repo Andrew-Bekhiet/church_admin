@@ -60,10 +60,10 @@ abstract mixin class $LastRecordedByInfoCopyWith<$Res> {
   ) = _$LastRecordedByInfoCopyWithImpl;
   @useResult
   $Res call({
+    bool isFatherVisit,
     DateTime? time,
     String? recordedBy,
     User? user,
-    bool isFatherVisit,
   });
 }
 
@@ -80,13 +80,17 @@ class _$LastRecordedByInfoCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? isFatherVisit = null,
     Object? time = freezed,
     Object? recordedBy = freezed,
     Object? user = freezed,
-    Object? isFatherVisit = null,
   }) {
     return _then(
       LastRecordedByInfo(
+        isFatherVisit: null == isFatherVisit
+            ? _self.isFatherVisit
+            : isFatherVisit // ignore: cast_nullable_to_non_nullable
+                  as bool,
         time: freezed == time
             ? _self.time!
             : time // ignore: cast_nullable_to_non_nullable
@@ -99,10 +103,6 @@ class _$LastRecordedByInfoCopyWithImpl<$Res>
             ? _self.user
             : user // ignore: cast_nullable_to_non_nullable
                   as User?,
-        isFatherVisit: null == isFatherVisit
-            ? _self.isFatherVisit
-            : isFatherVisit // ignore: cast_nullable_to_non_nullable
-                  as bool,
       ),
     );
   }

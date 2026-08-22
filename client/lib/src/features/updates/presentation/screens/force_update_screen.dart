@@ -6,9 +6,9 @@ class ForceUpdateScreen extends StatelessWidget {
   final LauncherService _launcherService;
 
   ForceUpdateScreen({
-    super.key,
     FeatureFlagsRepository? featureFlagsRepo,
     LauncherService? launcherService,
+    super.key,
   }) : _featureFlagsRepo = featureFlagsRepo ?? FeatureFlagsRepository.I,
        _launcherService = launcherService ?? LauncherService.I;
 

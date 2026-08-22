@@ -7,12 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:tinycolor2/tinycolor2.dart';
 
-abstract final class AppColors {
-  static const Color primary = Color(0xFFB38A58);
-  static const Color secondary = Color(0xFFC7A483);
-  static const Color tertiary = Color(0xFFE2CABF);
-}
-
 class ThemingService with WidgetsBindingObserver {
   static ThemingService get I =>
       globalProviderContainer.read(themingServiceProvider);
@@ -115,7 +109,8 @@ class ThemingService with WidgetsBindingObserver {
         PlatformDispatcher.instance.platformBrightness == Brightness.dark;
 
     final bool greatFeastTheme =
-        greatFeastThemeOverride ?? effectiveUserPreferencesService.greatFeastTheme;
+        greatFeastThemeOverride ??
+        effectiveUserPreferencesService.greatFeastTheme;
 
     Color? effectiveSeedOverride = seedOverride;
 
@@ -324,6 +319,15 @@ class ThemingService with WidgetsBindingObserver {
 
   final UserPreferencesService _userPreferencesService;
 
+  final BehaviorSubject<ThemeData> _themeData;
+
+  Stream<ThemeData> get stream => _themeData.share();
+
+  ThemeData get theme => _themeData.value;
+  set theme(ThemeData themeData) {
+    _themeData.add(themeData);
+  }
+
   factory ThemingService({
     required UserPreferencesService userPreferencesService,
   }) => ThemingService.withInitialThemeata(
@@ -336,15 +340,6 @@ class ThemingService with WidgetsBindingObserver {
     required ThemeData initialTheme,
   }) : _themeData = BehaviorSubject.seeded(initialTheme) {
     WidgetsBinding.instance.addObserver(this);
-  }
-
-  final BehaviorSubject<ThemeData> _themeData;
-
-  Stream<ThemeData> get stream => _themeData.share();
-
-  ThemeData get theme => _themeData.value;
-  set theme(ThemeData themeData) {
-    _themeData.add(themeData);
   }
 
   @override
@@ -362,6 +357,12 @@ class ThemingService with WidgetsBindingObserver {
   Future<void> dispose() async {
     await _themeData.close();
   }
+}
+
+abstract final class AppColors {
+  static const Color primary = Color(0xFFB38A58);
+  static const Color secondary = Color(0xFFC7A483);
+  static const Color tertiary = Color(0xFFE2CABF);
 }
 
 extension ChurchAdminTheming on ThemeData {

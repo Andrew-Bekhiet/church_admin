@@ -159,6 +159,7 @@ abstract mixin class $AdminOnDataCopyWith<$Res> {
   @useResult
   $Res call({
     String permissionId,
+    List<Class> classes,
     Area? area,
     bool? areaAllowExport,
     bool? areaAllowEdit,
@@ -172,7 +173,6 @@ abstract mixin class $AdminOnDataCopyWith<$Res> {
     bool? serviceAllowRecordServantsAttendance,
     bool? serviceAdminOnUsers,
     bool? serviceWriteRelatedFamilies,
-    List<Class> classes,
     Group? group,
     bool? groupAllowExport,
     bool? groupAllowEdit,
@@ -197,6 +197,7 @@ class _$AdminOnDataCopyWithImpl<$Res> implements $AdminOnDataCopyWith<$Res> {
   @override
   $Res call({
     Object? permissionId = null,
+    Object? classes = null,
     Object? area = freezed,
     Object? areaAllowExport = freezed,
     Object? areaAllowEdit = freezed,
@@ -210,7 +211,6 @@ class _$AdminOnDataCopyWithImpl<$Res> implements $AdminOnDataCopyWith<$Res> {
     Object? serviceAllowRecordServantsAttendance = freezed,
     Object? serviceAdminOnUsers = freezed,
     Object? serviceWriteRelatedFamilies = freezed,
-    Object? classes = null,
     Object? group = freezed,
     Object? groupAllowExport = freezed,
     Object? groupAllowEdit = freezed,
@@ -226,6 +226,10 @@ class _$AdminOnDataCopyWithImpl<$Res> implements $AdminOnDataCopyWith<$Res> {
             ? _self.permissionId
             : permissionId // ignore: cast_nullable_to_non_nullable
                   as String,
+        classes: null == classes
+            ? _self.classes
+            : classes // ignore: cast_nullable_to_non_nullable
+                  as List<Class>,
         area: freezed == area
             ? _self.area
             : area // ignore: cast_nullable_to_non_nullable
@@ -279,10 +283,6 @@ class _$AdminOnDataCopyWithImpl<$Res> implements $AdminOnDataCopyWith<$Res> {
             ? _self.serviceWriteRelatedFamilies
             : serviceWriteRelatedFamilies // ignore: cast_nullable_to_non_nullable
                   as bool?,
-        classes: null == classes
-            ? _self.classes
-            : classes // ignore: cast_nullable_to_non_nullable
-                  as List<Class>,
         group: freezed == group
             ? _self.group
             : group // ignore: cast_nullable_to_non_nullable

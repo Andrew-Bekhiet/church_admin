@@ -5,9 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 
 class HomeBody extends StatelessWidget {
-  const HomeBody({required this.homeBloc, super.key});
-
   final HomeBloc homeBloc;
+  const HomeBody({required this.homeBloc, super.key});
 
   @override
   Widget build(BuildContext context) {

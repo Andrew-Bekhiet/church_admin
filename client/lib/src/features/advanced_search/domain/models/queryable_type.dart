@@ -6,10 +6,20 @@ class QueryableType<T extends Object> with Equatable {
   final String label;
   final Map<String, FieldMetadata> fieldsMetadataByName;
   final List<FieldMetadata> fieldsMetadata;
-  final T Function(Json)? fromJson;
-  final T Function(String)? byName;
   final List<T> enumValues;
   final bool isEnum;
+  final T Function(Json)? fromJson;
+  final T Function(String)? byName;
+
+  Type get type => T;
+
+  StreamableDAO? get dao =>
+      isEnum ? null : DatabaseService.I.daosByType[T] as StreamableDAO?;
+
+  bool get isSelectableAsReference => isEnum || dao != null;
+
+  @override
+  List<Object?> get props => [name, label, fieldsMetadataByName, fromJson];
 
   QueryableType({
     required this.name,
@@ -31,17 +41,7 @@ class QueryableType<T extends Object> with Equatable {
        fromJson = null,
        isEnum = true;
 
-  Type get type => T;
-
-  StreamableDAO? get dao =>
-      isEnum ? null : DatabaseService.I.daosByType[T] as StreamableDAO?;
-
-  bool get isSelectableAsReference => isEnum || dao != null;
-
   bool hasField(String fieldName) {
     return fieldsMetadataByName.containsKey(fieldName);
   }
-
-  @override
-  List<Object?> get props => [name, label, fieldsMetadataByName, fromJson];
 }

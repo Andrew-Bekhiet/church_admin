@@ -13,14 +13,12 @@ class ViewableObjectCard<T extends Viewable> extends StatelessWidget {
   final Widget? photo;
   final double? size;
 
-  final void Function(T)? onTap;
-  final void Function(T)? onLongPress;
-
   final ViewableObjectService viewableObjectService;
   final ViewableObjectWidgetConfig config;
 
   ViewableObjectCard(
     this.object, {
+    this.size = 150,
     this.title,
     this.photo,
     this.selected,
@@ -28,7 +26,6 @@ class ViewableObjectCard<T extends Viewable> extends StatelessWidget {
     this.heroTag,
     this.onTap,
     this.onLongPress,
-    this.size = 150,
     ViewableObjectWidgetConfig? config,
     ViewableObjectService? viewableObjectService,
     super.key,
@@ -84,6 +81,9 @@ class ViewableObjectCard<T extends Viewable> extends StatelessWidget {
       ),
     );
   }
+
+  final void Function(T)? onTap;
+  final void Function(T)? onLongPress;
 
   void Function(T)? get _onTap =>
       onTap ?? config.onTap ?? viewableObjectService.onTap;

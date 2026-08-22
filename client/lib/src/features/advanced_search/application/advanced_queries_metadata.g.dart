@@ -1,5 +1,8 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// coverage:ignore-file
+// ignore_for_file: type=lint
+
 part of 'advanced_queries_metadata.dart';
 
 // **************************************************************************
@@ -7,8 +10,6 @@ part of 'advanced_queries_metadata.dart';
 // **************************************************************************
 
 abstract final class _$AdvancedQueriesMetadata {
-  _$AdvancedQueriesMetadata();
-
   final attendanceRecord = QueryableType<AttendanceRecord>(
     name: 'AttendanceRecord',
     label: 'حضور الاجتماع',
@@ -410,4 +411,5 @@ abstract final class _$AdvancedQueriesMetadata {
     User: user,
     UserPermission: userPermission,
   };
+  _$AdvancedQueriesMetadata();
 }

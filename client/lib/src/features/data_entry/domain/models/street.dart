@@ -50,9 +50,17 @@ class Street extends ViewableWithIDAndImage
   @JsonKey(includeToJson: false)
   final bool userCanEdit;
 
+  @override
+  ObjectImageInfo get imageInfo =>
+      FunctionsObjectImageInfo('streets', id, lastUpdatedTime: photoUpdatedAt);
+
+  @override
+  String get typeName => AdvancedQueriesMetadata().street.name;
+
   const Street({
     required this.id,
     required this.name,
+    this.userCanEdit = false,
     this.line,
     this.color,
     this.photoUpdatedAt,
@@ -60,20 +68,12 @@ class Street extends ViewableWithIDAndImage
     this.areas,
     this.lastVisit,
     this.lastEdit,
-    this.userCanEdit = false,
   });
 
   factory Street.fromJson(Map<String, Object?> json) => _$StreetFromJson(json);
 
   @override
   Json toJson() => _$StreetToJson(this);
-
-  @override
-  ObjectImageInfo get imageInfo =>
-      FunctionsObjectImageInfo('streets', id, lastUpdatedTime: photoUpdatedAt);
-
-  @override
-  String get typeName => AdvancedQueriesMetadata().street.name;
 
   Input_StreetsInsertInput toInsertInput() => Input_StreetsInsertInput(
     name: name,

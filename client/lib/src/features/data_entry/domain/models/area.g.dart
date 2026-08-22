@@ -1,5 +1,8 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// coverage:ignore-file
+// ignore_for_file: type=lint
+
 part of 'area.dart';
 
 // **************************************************************************
@@ -7,8 +10,6 @@ part of 'area.dart';
 // **************************************************************************
 
 class _AreaFields {
-  _AreaFields();
-
   final FieldMetadata<Area> id = FieldMetadata<Area>(
     getValue: (obj) => obj is Area ? obj.id : null,
     parentType: Area,
@@ -130,6 +131,8 @@ class _AreaFields {
     'lastEdit': lastEdit,
     'adminUsers': adminUsers,
   };
+
+  _AreaFields();
 }
 
 // **************************************************************************
@@ -139,6 +142,7 @@ class _AreaFields {
 Area _$AreaFromJson(Map json) => Area(
   id: json['id'] as String? ?? '',
   name: json['name'] as String? ?? '',
+  userCanEdit: json['userCanEdit'] as bool? ?? false,
   bounds: polygonFromJson(json['bounds']),
   color: colorFromInt((json['color'] as num?)?.toInt()),
   photoUpdatedAt: _$JsonConverterFromJson<String, DateTime>(
@@ -157,7 +161,6 @@ Area _$AreaFromJson(Map json) => Area(
           Map<String, Object?>.from(json['lastEdit'] as Map),
         ),
   adminUsers: adminUsersFromJson(json['adminUsers'] as List?),
-  userCanEdit: json['userCanEdit'] as bool? ?? false,
 );
 
 Map<String, dynamic> _$AreaToJson(Area instance) => <String, dynamic>{

@@ -84,30 +84,6 @@ class User extends ViewableWithIDAndImage
   @JsonKey(includeToJson: false)
   final bool currentUserCanManageThisUser;
 
-  const User({
-    required this.uid,
-    required this.name,
-    this.email,
-    this.photoUpdatedAt,
-    this.blurhash,
-    this.adminOn,
-    this.permissions = const PermissionsSet.empty(),
-    this.authId,
-    this.lastEdit,
-    this.person,
-    this.preferences,
-    this.fcmTokens = const [],
-    this.servicesHistory,
-    this.classesHistory,
-    this.groupsHistory,
-    this.currentUserCanManageThisUser = false,
-  });
-
-  factory User.fromJson(Map<String, Object?> json) => _$UserFromJson(json);
-
-  @override
-  Map<String, dynamic> toJson() => _$UserToJson(this);
-
   @override
   ObjectImageInfo get imageInfo =>
       FunctionsObjectImageInfo('users', id, lastUpdatedTime: photoUpdatedAt);
@@ -117,6 +93,40 @@ class User extends ViewableWithIDAndImage
 
   @override
   String get id => uid;
+
+  bool get canManageSomeUsers =>
+      permissions.manageAllUsers ||
+      (adminOn?.any(
+            (p) =>
+                (p.areaAdminOnUsers ?? false) ||
+                (p.serviceAdminOnUsers ?? false) ||
+                (p.groupAdminOnUsers ?? false),
+          ) ??
+          false);
+
+  const User({
+    required this.uid,
+    required this.name,
+    this.permissions = const PermissionsSet.empty(),
+    this.fcmTokens = const [],
+    this.currentUserCanManageThisUser = false,
+    this.email,
+    this.photoUpdatedAt,
+    this.blurhash,
+    this.adminOn,
+    this.authId,
+    this.lastEdit,
+    this.person,
+    this.preferences,
+    this.servicesHistory,
+    this.classesHistory,
+    this.groupsHistory,
+  });
+
+  factory User.fromJson(Map<String, Object?> json) => _$UserFromJson(json);
+
+  @override
+  Map<String, dynamic> toJson() => _$UserToJson(this);
 
   bool canEditObject(ViewableWithID object) {
     if (permissions.writeAllData) return true;
@@ -137,21 +147,9 @@ class User extends ViewableWithIDAndImage
   }
 
   bool canDeleteObject(ViewableWithID object) => permissions.deleteData;
-
-  bool get canManageSomeUsers =>
-      permissions.manageAllUsers ||
-      (adminOn?.any(
-            (p) =>
-                (p.areaAdminOnUsers ?? false) ||
-                (p.serviceAdminOnUsers ?? false) ||
-                (p.groupAdminOnUsers ?? false),
-          ) ??
-          false);
 }
 
 class UserFields extends _UserFields {
-  UserFields();
-
   @override
   FieldMetadata<String> get uid => FieldMetadata<String>(
     parentType: User,
@@ -206,4 +204,6 @@ class UserFields extends _UserFields {
       permissionsAggregate.name: permissionsAggregate,
     };
   }
+
+  UserFields();
 }

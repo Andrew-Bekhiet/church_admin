@@ -5,21 +5,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 
-class PhoneNumberProperty extends StatelessWidget {
-  const PhoneNumberProperty(
-    this.propName,
-    this.value,
-    this.phoneCall, {
-    this.addToContacts,
-    this.showErrorIfEmpty = true,
-    super.key,
-  });
-
+class PhoneNumberPropertyWidget extends StatelessWidget {
   final bool showErrorIfEmpty;
   final String propName;
   final String value;
   final void Function(String) phoneCall;
-  final void Function(String)? addToContacts;
+  const PhoneNumberPropertyWidget(
+    this.propName,
+    this.value,
+    this.phoneCall, {
+    this.showErrorIfEmpty = true,
+    this.addToContacts,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -89,4 +87,6 @@ class PhoneNumberProperty extends StatelessWidget {
       trailing: trailing,
     );
   }
+
+  final void Function(String)? addToContacts;
 }

@@ -6,25 +6,25 @@ sealed class AuthEvent extends Equatable {
 }
 
 final class ListenToSubscriptions extends AuthEvent {
-  const ListenToSubscriptions({this.loadCachedUser = false});
-
   final bool loadCachedUser;
 
   @override
   List<Object?> get props => [loadCachedUser];
+
+  const ListenToSubscriptions({this.loadCachedUser = false});
 }
 
 final class SignInWithEmailPassword extends AuthEvent {
-  const SignInWithEmailPassword({
-    required this.email,
-    required this.password,
-  });
-
   final String email;
   final String password;
 
   @override
   List<Object?> get props => [email, password];
+
+  const SignInWithEmailPassword({
+    required this.email,
+    required this.password,
+  });
 
   @override
   String toString() =>
@@ -32,16 +32,16 @@ final class SignInWithEmailPassword extends AuthEvent {
 }
 
 final class SignUpWithEmailPassword extends AuthEvent {
-  const SignUpWithEmailPassword({
-    required this.email,
-    required this.password,
-  });
-
   final String email;
   final String password;
 
   @override
   List<Object?> get props => [email, password];
+
+  const SignUpWithEmailPassword({
+    required this.email,
+    required this.password,
+  });
 
   @override
   String toString() =>
@@ -49,37 +49,33 @@ final class SignUpWithEmailPassword extends AuthEvent {
 }
 
 final class SignOut extends AuthEvent {
-  const SignOut();
-
   @override
   List<Object?> get props => [];
+  const SignOut();
 }
 
 final class ReloadUser extends AuthEvent {
-  const ReloadUser();
-
   @override
   List<Object?> get props => [];
+  const ReloadUser();
 }
 
 final class SendEmailVerification extends AuthEvent {
-  const SendEmailVerification();
-
   @override
   List<Object?> get props => [];
+  const SendEmailVerification();
 }
 
 final class EnrollMultiFactor extends AuthEvent {
-  const EnrollMultiFactor({
-    required this.password,
-    required this.phoneNumber,
-  });
-
   final String password;
   final String phoneNumber;
 
   @override
   List<Object?> get props => [password, phoneNumber];
+  const EnrollMultiFactor({
+    required this.password,
+    required this.phoneNumber,
+  });
 
   @override
   String toString() =>
@@ -87,13 +83,6 @@ final class EnrollMultiFactor extends AuthEvent {
 }
 
 final class StartMultiFactorChallenge extends AuthEvent {
-  const StartMultiFactorChallenge({
-    required this.session,
-    this.selectedFactor,
-    this.phoneNumber,
-    this.resendToken,
-  });
-
   final MultiFactorSession session;
   final MultiFactorInfo? selectedFactor;
   final String? phoneNumber;
@@ -106,16 +95,15 @@ final class StartMultiFactorChallenge extends AuthEvent {
     phoneNumber,
     resendToken,
   ];
+  const StartMultiFactorChallenge({
+    required this.session,
+    this.selectedFactor,
+    this.phoneNumber,
+    this.resendToken,
+  });
 }
 
 final class CompleteMultiFactorChallenge extends AuthEvent {
-  const CompleteMultiFactorChallenge({
-    required this.session,
-    required this.challenge,
-    required this.verificationCode,
-    this.selectedFactor,
-  });
-
   final MultiFactorSession session;
   final MultiFactorChallenge challenge;
   final String verificationCode;
@@ -128,13 +116,18 @@ final class CompleteMultiFactorChallenge extends AuthEvent {
     verificationCode,
     selectedFactor,
   ];
+  const CompleteMultiFactorChallenge({
+    required this.session,
+    required this.challenge,
+    required this.verificationCode,
+    this.selectedFactor,
+  });
 }
 
 final class SendPasswordResetEmail extends AuthEvent {
-  const SendPasswordResetEmail({required this.email});
-
   final String email;
 
   @override
   List<Object?> get props => [email];
+  const SendPasswordResetEmail({required this.email});
 }

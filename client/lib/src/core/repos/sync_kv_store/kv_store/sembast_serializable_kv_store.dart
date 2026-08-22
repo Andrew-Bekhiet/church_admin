@@ -6,6 +6,9 @@ class SembastSerializableKvStore<T> implements SembastKvStore<T> {
   final Map<String, dynamic> Function(T) toJson;
   final SembastKvStore<Map<String, dynamic>> _inner;
 
+  @override
+  String get name => _inner.name;
+
   SembastSerializableKvStore({
     required DatabaseClient dbClient,
     required StoreRef<String, Map<String, dynamic>> storeRef,
@@ -14,7 +17,11 @@ class SembastSerializableKvStore<T> implements SembastKvStore<T> {
   }) : _inner = SembastKvStore(dbClient, storeRef);
 
   @override
-  String get name => _inner.name;
+  Future<T?> get(String key) async {
+    final value = await _inner.get(key);
+
+    return value == null ? null : fromJson(value);
+  }
 
   @override
   Future<void> clear() async => _inner.clear();
@@ -27,13 +34,6 @@ class SembastSerializableKvStore<T> implements SembastKvStore<T> {
 
   @override
   Future<void> delete(String key) async => _inner.delete(key);
-
-  @override
-  Future<T?> get(String key) async {
-    final value = await _inner.get(key);
-
-    return value == null ? null : fromJson(value);
-  }
 
   @override
   Future<void> put(String key, T? value) async =>

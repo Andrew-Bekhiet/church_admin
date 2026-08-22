@@ -5,12 +5,13 @@ class MeetingAvatar extends StatelessWidget {
   final Meeting meeting;
   final double radius;
 
-  const MeetingAvatar({required this.meeting, this.radius = 22, super.key});
-
   String get _initial {
     final trimmed = meeting.name.trim();
+
     return trimmed.isEmpty ? '؟' : trimmed.substring(0, 1);
   }
+
+  const MeetingAvatar({required this.meeting, this.radius = 22, super.key});
 
   @override
   Widget build(BuildContext context) {

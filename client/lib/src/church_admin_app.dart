@@ -20,17 +20,14 @@ class _ChurchAdminAppState extends State<ChurchAdminApp>
 
   @override
   void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
     _connectivityListener = ConnectivityService.I.connectivityStream
         .distinct()
         .skip(1)
         .listen(_onConnectivityChanged);
-
     _notificationsListener = NotificationsService.I.onNotificationTapStream
         .listen(_onNotificationTapped);
-
-    WidgetsBinding.instance.addObserver(this);
-
-    super.initState();
   }
 
   @override
@@ -133,13 +130,13 @@ class _ChurchAdminAppState extends State<ChurchAdminApp>
   }
 
   @override
-  Future<void> dispose() async {
+  void dispose() {
     WidgetsBinding.instance.removeObserver(this);
-    super.dispose();
-
-    await _connectivityListener.cancel();
-    await _notificationsListener.cancel();
+    unawaited(_connectivityListener.cancel());
+    unawaited(_notificationsListener.cancel());
 
     globalProviderContainer.dispose();
+
+    super.dispose();
   }
 }

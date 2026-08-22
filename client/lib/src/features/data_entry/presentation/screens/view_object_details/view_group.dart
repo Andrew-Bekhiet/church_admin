@@ -75,16 +75,10 @@ class _ViewGroupState extends State<ViewGroup> {
         ],
       ),
       tabsContentBuilders: {
-        Group: (context) => StreamBuilder(
-          stream: _personsOrderBy.stream,
-          initialData: _personsOrderBy.value,
-          builder: (context, orderBySnapshot) => ViewableObjectList(
-            scrollController: PrimaryScrollController.maybeOf(context),
-            viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
-              secondLineField: orderBySnapshot.data?.first.getSecondLineField(),
-            ),
-            objectsController: _personsController,
-          ),
+        Group: (context) => OrderedViewableObjectList(
+          orderByStream: _personsOrderBy.stream,
+          initialOrderBy: _personsOrderBy.value,
+          objectsController: _personsController,
         ),
       },
       detailsBuilder: (context, group) => SliverList(
@@ -170,15 +164,10 @@ class _ViewGroupState extends State<ViewGroup> {
         ).push(context),
         icon: const Icon(Symbols.edit),
       ),
-      bottomNavBarBuilder: (context, tabController) => StreamBuilder<String?>(
-        stream: _personsController.totalCountStream.map((c) => '$c مخدوم'),
-        builder: (context, snapshot) {
-          return Text(
-            snapshot.data ?? '',
-            style: Theme.of(context).textTheme.titleLarge,
-            textAlign: TextAlign.center,
-          );
-        },
+      bottomNavBarBuilder: (context, tabController) => TotalCountLabel(
+        countStream: _personsController.totalCountStream.map(
+          (c) => '$c مخدوم',
+        ),
       ),
       floatingActionButtonBuilder: (context, tabController, group) =>
           FloatingActionButton(
@@ -193,30 +182,20 @@ class _ViewGroupState extends State<ViewGroup> {
     );
   }
 
-  Future<void> _showOrderBySheet() async {
-    final queryableType = AdvancedQueriesMetadata().person;
-
-    await showOrderByBottomSheet(
-      context,
-      queryableType: queryableType,
-      orderBySubject: _personsOrderBy,
-      onChanged: (newOrderBy) {
-        _personsOrderBy.add(newOrderBy);
-        unawaited(
-          ViewObjectDetails.saveLastOrderByFor(
-            type: queryableType,
-            inServiceContext: true,
-            orderBy: newOrderBy,
-          ),
-        );
-      },
-    );
-  }
-
   @override
   void dispose() {
     unawaited(_personsController.dispose());
+    unawaited(_personsOrderBy.close());
 
     super.dispose();
+  }
+
+  Future<void> _showOrderBySheet() async {
+    await showOrderBySheetAndSave(
+      context,
+      queryableType: AdvancedQueriesMetadata().person,
+      orderBySubject: _personsOrderBy,
+      inServiceContext: true,
+    );
   }
 }

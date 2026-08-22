@@ -1,8 +1,11 @@
 part of 'spatial.dart';
 
-class Point with Equatable implements Spatial {
+class Point extends Spatial {
   final double latitude;
   final double longitude;
+
+  @override
+  List<Object?> get props => [longitude, latitude];
 
   const Point(this.latitude, this.longitude);
   Point.fromJson(Json json)
@@ -16,9 +19,6 @@ class Point with Equatable implements Spatial {
   }
 
   String asWKT() => 'POINT($longitude $latitude)';
-
-  @override
-  List<Object?> get props => [longitude, latitude];
 
   @override
   String toString() => '$latitude, $longitude';

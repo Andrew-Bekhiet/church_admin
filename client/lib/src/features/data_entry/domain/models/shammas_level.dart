@@ -23,6 +23,9 @@ class ShammasLevel extends ViewableWithID
   @JsonKey(defaultValue: '')
   final String name;
 
+  @override
+  String get typeName => AdvancedQueriesMetadata().shammasLevel.name;
+
   const ShammasLevel({
     required this.order,
     required this.name,
@@ -34,7 +37,4 @@ class ShammasLevel extends ViewableWithID
 
   @override
   Json toJson() => _$ShammasLevelToJson(this);
-
-  @override
-  String get typeName => AdvancedQueriesMetadata().shammasLevel.name;
 }

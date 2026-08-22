@@ -1,5 +1,8 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// coverage:ignore-file
+// ignore_for_file: type=lint
+
 part of 'district.dart';
 
 // **************************************************************************
@@ -8,9 +11,6 @@ part of 'district.dart';
 
 class DistrictFields {
   static final DistrictFields _instance = DistrictFields._();
-  factory DistrictFields() => _instance;
-  DistrictFields._();
-
   final FieldMetadata<District> id = FieldMetadata<District>(
     getValue: (obj) => obj is District ? obj.id : null,
     parentType: District,
@@ -34,6 +34,8 @@ class DistrictFields {
     'id': id,
     'name': name,
   };
+  factory DistrictFields() => _instance;
+  DistrictFields._();
 }
 
 // **************************************************************************

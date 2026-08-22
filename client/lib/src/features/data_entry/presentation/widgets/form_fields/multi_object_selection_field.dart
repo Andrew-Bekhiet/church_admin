@@ -12,11 +12,6 @@ class MultiObjectSelectionField<T extends Viewable> extends StatelessWidget {
   final bool nullable;
 
   final ItemBuilder<T>? itemBuilder;
-  final Future<T> Function(String)? onCreateCustom;
-
-  final String? Function(Set<T>?)? validator;
-  final void Function(Set<T>?)? onSaved;
-  final void Function(Set<T>?)? onChanged;
   final AutovalidateMode? autovalidateMode;
   final FocusNode? focusNode;
   final InputDecoration? decoration;
@@ -26,8 +21,8 @@ class MultiObjectSelectionField<T extends Viewable> extends StatelessWidget {
     required this.builder,
     required this.initialValue,
     required this.labelText,
-    this.itemBuilder,
     this.nullable = true,
+    this.itemBuilder,
     this.onCreateCustom,
     this.validator,
     this.autovalidateMode,
@@ -111,7 +106,9 @@ class MultiObjectSelectionField<T extends Viewable> extends StatelessWidget {
                         viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
                           forceShowSecondLine: false,
                           isDense: true,
-                          onLongPress: (_) {},
+                          onLongPress: (_) {
+                            return;
+                          },
                         ),
                         itemBuilder: itemBuilder,
                       ),
@@ -157,4 +154,10 @@ class MultiObjectSelectionField<T extends Viewable> extends StatelessWidget {
       builder: builder,
     );
   }
+
+  final Future<T> Function(String)? onCreateCustom;
+
+  final String? Function(Set<T>?)? validator;
+  final void Function(Set<T>?)? onSaved;
+  final void Function(Set<T>?)? onChanged;
 }

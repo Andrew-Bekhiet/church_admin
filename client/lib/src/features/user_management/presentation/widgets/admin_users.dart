@@ -4,45 +4,7 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 
 class AdminUsers extends StatelessWidget {
-  const AdminUsers({
-    required this.users,
-    super.key,
-  });
-
   final List<User> users;
-
-  @override
-  Widget build(BuildContext context) {
-    return InkWell(
-      borderRadius: const BorderRadius.all(Radius.circular(16)),
-      onTap: _onTap(context),
-      child: GridView.builder(
-        padding: const EdgeInsets.symmetric(vertical: 8),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 7,
-          mainAxisSpacing: 10,
-          crossAxisSpacing: 10,
-        ),
-        shrinkWrap: true,
-        itemCount: min(users.length, 7),
-        physics: const NeverScrollableScrollPhysics(),
-        itemBuilder: (context, i) {
-          final user = users[i];
-
-          if (users.length > 6 && i == 6) {
-            return _RemainingAdmins(
-              lastVisibleUser: user,
-              remainingCount: users.length - 6,
-            );
-          }
-
-          return IgnorePointer(
-            child: ImageObjectWidget(user),
-          );
-        },
-      ),
-    );
-  }
 
   Future<void> Function() _onTap(BuildContext context) {
     return () async {
@@ -84,16 +46,53 @@ class AdminUsers extends StatelessWidget {
       );
     };
   }
+
+  const AdminUsers({
+    required this.users,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      borderRadius: const BorderRadius.all(Radius.circular(16)),
+      onTap: _onTap(context),
+      child: GridView.builder(
+        padding: const EdgeInsets.symmetric(vertical: 8),
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 7,
+          mainAxisSpacing: 10,
+          crossAxisSpacing: 10,
+        ),
+        shrinkWrap: true,
+        itemCount: min(users.length, 7),
+        physics: const NeverScrollableScrollPhysics(),
+        itemBuilder: (context, i) {
+          final user = users[i];
+
+          if (users.length > 6 && i == 6) {
+            return _RemainingAdmins(
+              lastVisibleUser: user,
+              remainingCount: users.length - 6,
+            );
+          }
+
+          return IgnorePointer(
+            child: ImageObjectWidget(user),
+          );
+        },
+      ),
+    );
+  }
 }
 
 class _RemainingAdmins extends StatelessWidget {
+  final User lastVisibleUser;
+  final int remainingCount;
   const _RemainingAdmins({
     required this.lastVisibleUser,
     required this.remainingCount,
   });
-
-  final User lastVisibleUser;
-  final int remainingCount;
 
   @override
   Widget build(BuildContext context) {

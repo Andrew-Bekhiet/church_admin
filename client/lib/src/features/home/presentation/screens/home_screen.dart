@@ -37,10 +37,20 @@ class _HomeScreenState extends State<HomeScreen> {
       drawer: HomeDrawer(homeBloc: homeBloc),
       appBar: HomeAppBar(homeBloc: homeBloc),
       body: HomeBody(homeBloc: homeBloc),
-      floatingActionButton: HomeFloatingActionButton(homeBloc: homeBloc),
+      floatingActionButton: HomeFAB(homeBloc: homeBloc),
       bottomNavigationBar: HomeBottomNavBar(homeBloc: homeBloc),
       extendBody: true,
     );
+  }
+
+  @override
+  void dispose() {
+    _appLifecycleListener.dispose();
+
+    unawaited(homeBloc.close());
+    unawaited(_localAuthListener.cancel());
+
+    super.dispose();
   }
 
   void _listenToLocalAuth() {
@@ -73,15 +83,5 @@ class _HomeScreenState extends State<HomeScreen> {
       case AppLifecycleState.hidden:
         unawaited(UserPersistenceService.I.recordLastSeen());
     }
-  }
-
-  @override
-  void dispose() {
-    _appLifecycleListener.dispose();
-
-    unawaited(homeBloc.close());
-    unawaited(_localAuthListener.cancel());
-
-    super.dispose();
   }
 }

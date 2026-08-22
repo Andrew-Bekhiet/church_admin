@@ -1,5 +1,8 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// coverage:ignore-file
+// ignore_for_file: type=lint
+
 part of 'meeting.dart';
 
 // **************************************************************************
@@ -8,9 +11,6 @@ part of 'meeting.dart';
 
 class MeetingFields {
   static final MeetingFields _instance = MeetingFields._();
-  factory MeetingFields() => _instance;
-  MeetingFields._();
-
   final FieldMetadata<Meeting> id = FieldMetadata<Meeting>(
     getValue: (obj) => obj is Meeting ? obj.id : null,
     parentType: Meeting,
@@ -150,6 +150,8 @@ class MeetingFields {
     'serviceGender': serviceGender,
     'group': group,
   };
+  factory MeetingFields() => _instance;
+  MeetingFields._();
 }
 
 // **************************************************************************

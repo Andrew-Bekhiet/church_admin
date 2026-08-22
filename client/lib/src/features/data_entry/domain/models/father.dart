@@ -23,18 +23,18 @@ class Father extends ViewableWithID with _$Father implements SerializableExtra {
   @override
   final bool isHidden;
 
+  @override
+  String get typeName => AdvancedQueriesMetadata().father.name;
+
   const Father({
     required this.id,
     required this.name,
-    this.churchId,
     this.isHidden = true,
+    this.churchId,
   });
 
   factory Father.fromJson(Map<String, Object?> json) => _$FatherFromJson(json);
 
   @override
   Json toJson() => _$FatherToJson(this);
-
-  @override
-  String get typeName => AdvancedQueriesMetadata().father.name;
 }

@@ -58,12 +58,6 @@ class _SnowflakeAnimationState extends State<SnowflakeAnimation>
   }
 
   @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
@@ -118,5 +112,11 @@ class _SnowflakeAnimationState extends State<SnowflakeAnimation>
         );
       },
     );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 }

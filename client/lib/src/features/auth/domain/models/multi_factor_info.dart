@@ -1,17 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-// TODO: support totp
-enum MultiFactorType { phone }
-
 class MultiFactorInfo extends Equatable {
-  const MultiFactorInfo({
-    required this.id,
-    required this.type,
-    required this.displayName,
-    required this.enrolledAt,
-    this.phoneNumber,
-  });
-
   final String id;
   final MultiFactorType type;
   final String? displayName;
@@ -20,4 +9,14 @@ class MultiFactorInfo extends Equatable {
 
   @override
   List<Object?> get props => [id, type, displayName, enrolledAt, phoneNumber];
+  const MultiFactorInfo({
+    required this.id,
+    required this.type,
+    required this.displayName,
+    required this.enrolledAt,
+    this.phoneNumber,
+  });
 }
+
+// TODO: support totp
+enum MultiFactorType { phone }

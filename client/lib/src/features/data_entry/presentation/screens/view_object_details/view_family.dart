@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -151,61 +150,29 @@ class _ViewFamilyState extends State<ViewFamily> {
       objectStream: stream,
       childrenTypes: const [Person, _ChildrenFamily, _ParentFamily, Store],
       tabsContentBuilders: {
-        Person: (context) => StreamBuilder(
-          stream: _personsOrderBy.stream,
-          initialData: _personsOrderBy.value,
-          builder: (context, orderBySnapshot) => ViewableObjectList(
-            scrollController: PrimaryScrollController.maybeOf(context),
-            viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
-              secondLineField: orderBySnapshot.data?.first.getSecondLineField(),
-            ),
-            objectsController: _personsController,
-          ),
+        Person: (context) => OrderedViewableObjectList(
+          orderByStream: _personsOrderBy.stream,
+          initialOrderBy: _personsOrderBy.value,
+          objectsController: _personsController,
         ),
-        _ChildrenFamily: (context) => StreamBuilder(
-          stream: _childrenFamiliesOrderBy.stream,
-          initialData: _childrenFamiliesOrderBy.value,
-          builder: (context, orderBySnapshot) => ViewableObjectList(
-            scrollController: PrimaryScrollController.maybeOf(context),
-            viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
-              secondLineField: orderBySnapshot.data?.first.getSecondLineField(),
-            ),
-            objectsController: _childrenFamiliesController,
-          ),
+        _ChildrenFamily: (context) => OrderedViewableObjectList(
+          orderByStream: _childrenFamiliesOrderBy.stream,
+          initialOrderBy: _childrenFamiliesOrderBy.value,
+          objectsController: _childrenFamiliesController,
         ),
-        _ParentFamily: (context) => StreamBuilder(
-          stream: _parentFamiliesOrderBy.stream,
-          initialData: _parentFamiliesOrderBy.value,
-          builder: (context, orderBySnapshot) => ViewableObjectList(
-            scrollController: PrimaryScrollController.maybeOf(context),
-            viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
-              secondLineField: orderBySnapshot.data?.first.getSecondLineField(),
-            ),
-            objectsController: _parentFamiliesController,
-          ),
+        _ParentFamily: (context) => OrderedViewableObjectList(
+          orderByStream: _parentFamiliesOrderBy.stream,
+          initialOrderBy: _parentFamiliesOrderBy.value,
+          objectsController: _parentFamiliesController,
         ),
-        Store: (context) => StreamBuilder(
-          stream: _storesOrderBy.stream,
-          initialData: _storesOrderBy.value,
-          builder: (context, orderBySnapshot) => ViewableObjectList(
-            scrollController: PrimaryScrollController.maybeOf(context),
-            viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
-              secondLineField: orderBySnapshot.data?.first.getSecondLineField(),
-            ),
-            objectsController: _storesController,
-          ),
+        Store: (context) => OrderedViewableObjectList(
+          orderByStream: _storesOrderBy.stream,
+          initialOrderBy: _storesOrderBy.value,
+          objectsController: _storesController,
         ),
       },
       sliverPersistentHeaderDelegate: ChipTabBarPersistentHeaderDelegate(
-        filtersWidget: Builder(
-          builder: (context) => IconButton(
-            visualDensity: VisualDensity.compact,
-            padding: EdgeInsets.zero,
-            icon: const Icon(Symbols.sort),
-            onPressed: () =>
-                _showOrderBySheet(DefaultTabController.of(context).index),
-          ),
-        ),
+        filtersWidget: TabAwareSortButton(onPressed: _showOrderBySheet),
         tabs: [
           (
             label: 'المخدومين',
@@ -225,122 +192,7 @@ class _ViewFamilyState extends State<ViewFamily> {
           ),
         ],
       ),
-      detailsBuilder: (context, family) => SliverList(
-        delegate: SliverChildListDelegate([
-          for (final MapEntry(key: personType, value: phone)
-              in family.familyAdminsPhones?.entries ?? {})
-            PhoneNumberProperty(
-              'رقم هاتف ال$personType',
-              phone,
-              (n) => LauncherService.I.launchCall(
-                PhoneNumberService.I.formatInternational(n),
-              ),
-            ),
-          CopiablePropertyWidget(
-            'العنوان والموقع',
-            family.address?.toString(),
-            additionalOptions: [
-              if (family.geolocation != null)
-                IconButton(
-                  icon: const Icon(Symbols.map),
-                  onPressed: () => Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => ViewGeodataMap(
-                        initialGeomapOptions: GeomapOptions(
-                          selectedFamilies: {family},
-                        ),
-                      ),
-                    ),
-                  ),
-                  tooltip: 'إظهار على الخريطة',
-                ),
-            ],
-          ),
-          ListTile(
-            title: const Text('الكنيسة'),
-            subtitle: Text(family.church?.name ?? ''),
-          ),
-          ListTile(
-            title: const Text('الحالة الاجتماعية'),
-            subtitle: Text(family.status.label),
-          ),
-          if (family.marriageDate case final marriageDate?)
-            ListTile(
-              title: const Text('تاريخ الزواج'),
-              subtitle: Text(DateFormat('yyyy/M/d').format(marriageDate)),
-            ),
-          if (family.deceasedSpouseName case final deceasedSpouseName?)
-            ListTile(
-              title: const Text('اسم المتوفي/ـة'),
-              subtitle: Text(deceasedSpouseName),
-            ),
-          CopiablePropertyWidget(
-            'ملاحظات',
-            family.notes,
-            showErrorIfEmpty: false,
-          ),
-          ListTile(
-            title: const Text('المنطقة'),
-            subtitle: family.address?.area != null
-                ? ViewableObjectCard(family.address!.area!)
-                : null,
-          ),
-          ListTile(
-            title: const Text('الشارع'),
-            subtitle: family.address?.street != null
-                ? ViewableObjectCard(family.address!.street!)
-                : null,
-          ),
-          ListTile(
-            title: FilledButton.icon(
-              icon: const Icon(Symbols.query_stats),
-              label: const Text('احصائيات'),
-              // TODO: add family analysis
-              onPressed: () {},
-            ),
-          ),
-          HistoryProperty(
-            name: 'أخر افتقاد',
-            value: family.lastVisit?.time,
-            getHistoryListController: () => ViewableObjectListController(
-              objectsPaginatableStream: DatabaseService.I.history
-                  .paginateFamilyVisitHistory(
-                    familyId: family.id,
-                  ),
-            ),
-            onRecordNow: () => DatabaseService.I.history.updateFamilyLastVisit(
-              familyId: widget.familyId,
-              lastVisit: DateTime.now(),
-            ),
-          ),
-          HistoryProperty(
-            name: 'أخر افتقاد للأب الكاهن',
-            value: family.lastFatherVisit?.time,
-            getHistoryListController: () => ViewableObjectListController(
-              objectsPaginatableStream: DatabaseService.I.history
-                  .paginateFamilyVisitHistory(
-                    familyId: family.id,
-                    fatherVisit: true,
-                  ),
-            ),
-            onRecordNow: () => DatabaseService.I.history.updateFamilyLastVisit(
-              familyId: widget.familyId,
-              lastVisit: DateTime.now(),
-              isFatherVisit: true,
-            ),
-          ),
-          HistoryProperty(
-            name: 'أخر تحديث للبيانات',
-            value: family.lastEdit?.time,
-            getHistoryListController: () => ViewableObjectListController(
-              objectsPaginatableStream: DatabaseService.I.history
-                  .paginateEditHistory<Family>(
-                    id: family.id,
-                  ),
-            ),
-          ),
-        ]),
-      ),
+      detailsBuilder: (context, family) => FamilyDetailsList(family: family),
       notFoundBuilder: (context) => Center(
         child: Text(
           'لم يتم العثور على العائلة',
@@ -354,8 +206,8 @@ class _ViewFamilyState extends State<ViewFamily> {
         ).push(context),
         icon: const Icon(Symbols.edit),
       ),
-      bottomNavBarBuilder: (context, tabController) => StreamBuilder<String?>(
-        stream: tabController.animation!.asStream().switchMap(
+      bottomNavBarBuilder: (context, tabController) => TotalCountLabel(
+        countStream: tabController.animation!.asStream().switchMap(
           (index) {
             final currentIndex = index.round();
 
@@ -376,16 +228,9 @@ class _ViewFamilyState extends State<ViewFamily> {
             );
           },
         ),
-        builder: (context, snapshot) {
-          return Text(
-            snapshot.data ?? '',
-            style: Theme.of(context).textTheme.titleLarge,
-            textAlign: TextAlign.center,
-          );
-        },
       ),
       floatingActionButtonBuilder: (context, tabController, family) =>
-          SwitchingFloatingActionButton.fromTabController(
+          SwitchingFAB.fromTabController(
             tabController: tabController,
             icons: const [
               Icon(Symbols.person_add),
@@ -424,6 +269,17 @@ class _ViewFamilyState extends State<ViewFamily> {
     );
   }
 
+  @override
+  void dispose() {
+    unawaited(Future.wait(_controllersToDispose.map((e) => e.dispose())));
+    unawaited(_personsOrderBy.close());
+    unawaited(_childrenFamiliesOrderBy.close());
+    unawaited(_parentFamiliesOrderBy.close());
+    unawaited(_storesOrderBy.close());
+
+    super.dispose();
+  }
+
   Future<void> _showOrderBySheet(int currentTabIndex) async {
     final advancedQueriesMetadata = AdvancedQueriesMetadata();
 
@@ -435,19 +291,10 @@ class _ViewFamilyState extends State<ViewFamily> {
       _ => throw UnimplementedError(),
     };
 
-    await showOrderByBottomSheet(
+    await showOrderBySheetAndSave(
       context,
       queryableType: queryableType,
       orderBySubject: orderBySubject,
-      onChanged: (newOrderBy) {
-        orderBySubject.add(newOrderBy);
-        unawaited(
-          ViewObjectDetails.saveLastOrderByFor(
-            type: queryableType,
-            orderBy: newOrderBy,
-          ),
-        );
-      },
     );
   }
 
@@ -456,14 +303,8 @@ class _ViewFamilyState extends State<ViewFamily> {
     ViewableObjectListController<T> controller,
   ) {
     _controllersToDispose.add(controller);
+
     return controller;
-  }
-
-  @override
-  void dispose() {
-    unawaited(Future.wait(_controllersToDispose.map((e) => e.dispose())));
-
-    super.dispose();
   }
 }
 

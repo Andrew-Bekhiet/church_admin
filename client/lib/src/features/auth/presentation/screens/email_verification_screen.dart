@@ -2,11 +2,6 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-final class EmailVerificationScreenKeys {
-  static const confirmEmailButtonKey = Key('Confirm Email Button Key');
-  static const resendEmailButtonKey = Key('Resend Email Button Key');
-}
-
 class EmailVerificationScreen extends StatelessWidget {
   const EmailVerificationScreen({super.key});
 
@@ -90,4 +85,9 @@ class EmailVerificationScreen extends StatelessWidget {
       },
     );
   }
+}
+
+final class EmailVerificationScreenKeys {
+  static const confirmEmailButtonKey = Key('Confirm Email Button Key');
+  static const resendEmailButtonKey = Key('Resend Email Button Key');
 }

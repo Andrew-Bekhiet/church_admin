@@ -14,9 +14,9 @@ class AttendanceKpiTile extends StatelessWidget {
     required this.icon,
     required this.label,
     required this.value,
+    this.emphasized = false,
     this.caption,
     this.accentColor,
-    this.emphasized = false,
     this.onTap,
     super.key,
   });

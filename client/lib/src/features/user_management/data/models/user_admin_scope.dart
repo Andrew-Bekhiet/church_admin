@@ -3,29 +3,6 @@ import 'package:church_admin/church_admin.dart';
 class UserAdminScope<T extends ViewableWithID> {
   static const _undefined = Object();
 
-  final T object;
-  final bool canManageUsers;
-  final bool canWriteData;
-  final bool canExportData;
-  final bool? canWriteRelatedFamilies;
-  final bool? canRecordAttendance;
-  final bool? canRecordServantsAttendance;
-
-  final StudyYear? studyYear;
-  final bool? gender;
-
-  UserAdminScope({
-    required this.object,
-    required this.canManageUsers,
-    required this.canWriteData,
-    required this.canExportData,
-    this.canWriteRelatedFamilies,
-    this.canRecordAttendance,
-    this.canRecordServantsAttendance,
-    this.studyYear,
-    this.gender,
-  });
-
   static UserAdminScope fromAdminOnData(AdminOnData adminOnData) {
     switch (adminOnData) {
       case AdminOnData(area: final area?):
@@ -70,13 +47,36 @@ class UserAdminScope<T extends ViewableWithID> {
     }
   }
 
+  final T object;
+  final bool canManageUsers;
+  final bool canWriteData;
+  final bool canExportData;
+  final bool? canWriteRelatedFamilies;
+  final bool? canRecordAttendance;
+  final bool? canRecordServantsAttendance;
+
+  final StudyYear? studyYear;
+  final bool? gender;
+
+  UserAdminScope({
+    required this.object,
+    required this.canManageUsers,
+    required this.canWriteData,
+    required this.canExportData,
+    this.canWriteRelatedFamilies,
+    this.canRecordAttendance,
+    this.canRecordServantsAttendance,
+    this.studyYear,
+    this.gender,
+  });
+
   UserAdminScope copyWith({
+    Object? studyYear = _undefined,
+    Object? gender = _undefined,
     bool? canManageUsers,
     bool? canWriteData,
     bool? canExportData,
     bool? canWriteRelatedFamilies,
-    Object? studyYear = _undefined,
-    Object? gender = _undefined,
     bool? canRecordAttendance,
     bool? canRecordServantsAttendance,
   }) {

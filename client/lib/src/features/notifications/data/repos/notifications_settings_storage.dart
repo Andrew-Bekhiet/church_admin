@@ -23,8 +23,6 @@ class NotificationsSettingsStorage {
 
   final SyncKVStore<NotificationSetting> _box;
 
-  NotificationsSettingsStorage(this._box);
-
   NotificationSetting get birthDayTimeSetting =>
       _box.get(birthDayTimeKey) ?? _defaultNotificationSetting;
 
@@ -36,6 +34,8 @@ class NotificationsSettingsStorage {
 
   NotificationSetting get confessionTimeSetting =>
       _box.get(confessionTimeKey) ?? _defaultNotificationSetting;
+
+  NotificationsSettingsStorage(this._box);
 
   Future<void> setBirthDayTime(NotificationSetting setting) async {
     _box.put(birthDayTimeKey, setting);

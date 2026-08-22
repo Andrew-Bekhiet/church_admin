@@ -16,6 +16,9 @@ class Job extends ViewableWithID with _$Job implements SerializableExtra {
   @JsonKey(defaultValue: '')
   final String name;
 
+  @override
+  String get typeName => AdvancedQueriesMetadata().job.name;
+
   const Job({
     required this.id,
     required this.name,
@@ -25,7 +28,4 @@ class Job extends ViewableWithID with _$Job implements SerializableExtra {
 
   @override
   Json toJson() => _$JobToJson(this);
-
-  @override
-  String get typeName => AdvancedQueriesMetadata().job.name;
 }

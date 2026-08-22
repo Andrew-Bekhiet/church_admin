@@ -1,5 +1,8 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// coverage:ignore-file
+// ignore_for_file: type=lint
+
 part of 'hobby.dart';
 
 // **************************************************************************
@@ -8,9 +11,6 @@ part of 'hobby.dart';
 
 class HobbyFields {
   static final HobbyFields _instance = HobbyFields._();
-  factory HobbyFields() => _instance;
-  HobbyFields._();
-
   final FieldMetadata<Hobby> id = FieldMetadata<Hobby>(
     getValue: (obj) => obj is Hobby ? obj.id : null,
     parentType: Hobby,
@@ -48,6 +48,8 @@ class HobbyFields {
     'name': name,
     'color': color,
   };
+  factory HobbyFields() => _instance;
+  HobbyFields._();
 }
 
 // **************************************************************************

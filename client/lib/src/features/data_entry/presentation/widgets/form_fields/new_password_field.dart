@@ -8,7 +8,7 @@ class NewPasswordField extends StatefulWidget {
   /// If given, the password will be checked to not be similar to the email.
   final String Function()? getEmail;
 
-  const NewPasswordField({super.key, this.controller, this.getEmail});
+  const NewPasswordField({this.controller, this.getEmail, super.key});
 
   @override
   State<NewPasswordField> createState() => _NewPasswordFieldState();
@@ -96,10 +96,10 @@ class _NewPasswordFieldState extends State<NewPasswordField> {
 class PreventEmailSimilarityRule extends ValidationRule {
   final String Function()? getEmail;
 
-  PreventEmailSimilarityRule({required this.getEmail});
-
   @override
   String get name => 'لا تحتوي على اسم المستخدم';
+
+  PreventEmailSimilarityRule({required this.getEmail});
 
   @override
   bool validate(String value) {

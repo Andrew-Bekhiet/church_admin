@@ -1,5 +1,8 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// coverage:ignore-file
+// ignore_for_file: type=lint
+
 part of 'person_type.dart';
 
 // **************************************************************************
@@ -7,8 +10,6 @@ part of 'person_type.dart';
 // **************************************************************************
 
 class _PersonTypeFields {
-  _PersonTypeFields();
-
   final FieldMetadata<PersonType> id = FieldMetadata<PersonType>(
     getValue: (obj) => obj is PersonType ? obj.id : null,
     parentType: PersonType,
@@ -68,6 +69,8 @@ class _PersonTypeFields {
     'isFamilyAdmin': isFamilyAdmin,
     'isHidden': isHidden,
   };
+
+  _PersonTypeFields();
 }
 
 // **************************************************************************

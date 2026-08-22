@@ -1,5 +1,8 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// coverage:ignore-file
+// ignore_for_file: type=lint
+
 part of 'street.dart';
 
 // **************************************************************************
@@ -8,9 +11,6 @@ part of 'street.dart';
 
 class StreetFields {
   static final StreetFields _instance = StreetFields._();
-  factory StreetFields() => _instance;
-  StreetFields._();
-
   final FieldMetadata<Street> id = FieldMetadata<Street>(
     getValue: (obj) => obj is Street ? obj.id : null,
     parentType: Street,
@@ -132,6 +132,8 @@ class StreetFields {
     'lastVisit': lastVisit,
     'lastEdit': lastEdit,
   };
+  factory StreetFields() => _instance;
+  StreetFields._();
 }
 
 // **************************************************************************
@@ -141,6 +143,7 @@ class StreetFields {
 Street _$StreetFromJson(Map json) => Street(
   id: json['id'] as String? ?? '',
   name: json['name'] as String? ?? '',
+  userCanEdit: json['userCanEdit'] as bool? ?? false,
   line: lineFromJson(json['line']),
   color: colorFromInt((json['color'] as num?)?.toInt()),
   photoUpdatedAt: _$JsonConverterFromJson<String, DateTime>(
@@ -159,7 +162,6 @@ Street _$StreetFromJson(Map json) => Street(
       : LastRecordedByInfo.fromJson(
           Map<String, Object?>.from(json['lastEdit'] as Map),
         ),
-  userCanEdit: json['userCanEdit'] as bool? ?? false,
 );
 
 Map<String, dynamic> _$StreetToJson(Street instance) => <String, dynamic>{

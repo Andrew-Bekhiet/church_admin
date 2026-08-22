@@ -29,8 +29,6 @@ class ViewableEnumWithID<T extends LabeledEnum> implements ViewableWithID {
 
   final T enumValue;
 
-  const ViewableEnumWithID.wrap(this.enumValue);
-
   @override
   String get id => enumValue.name;
 
@@ -39,6 +37,8 @@ class ViewableEnumWithID<T extends LabeledEnum> implements ViewableWithID {
 
   @override
   Color? get color => null;
+
+  const ViewableEnumWithID.wrap(this.enumValue);
 
   @override
   Future<String?> getSecondLine() => SynchronousFuture(null);

@@ -6,7 +6,6 @@ class OrderByWidget extends StatelessWidget {
   final QueryableType selectedQueryableType;
   final OrderBy orderBy;
   final void Function(OrderBy) onChanged;
-  final void Function()? onRemoved;
 
   const OrderByWidget({
     required this.selectedQueryableType,
@@ -66,25 +65,25 @@ class OrderByWidget extends StatelessWidget {
                       )
                       .toList(),
                   onChanged: (field) {
-                    final FieldMetadata newField;
-                    if (field!.operators.isEmpty ||
-                        !(field.fieldQueryableType?.isSelectableAsReference ??
-                            true)) {
-                      newField = field.redirectTo(
-                        field.fieldQueryableType!.fieldsMetadata.firstWhere(
-                          (f) =>
-                              !f.isCodeOnly &&
-                              f.isOrderable &&
-                              (f.operators.isNotEmpty ||
-                                  (f
-                                          .fieldQueryableType
-                                          ?.isSelectableAsReference ??
-                                      false)),
-                        ),
-                      );
-                    } else {
-                      newField = field;
-                    }
+                    final newField =
+                        field!.operators.isEmpty ||
+                            !(field
+                                    .fieldQueryableType
+                                    ?.isSelectableAsReference ??
+                                true)
+                        ? field.redirectTo(
+                            field.fieldQueryableType!.fieldsMetadata.firstWhere(
+                              (f) =>
+                                  !f.isCodeOnly &&
+                                  f.isOrderable &&
+                                  (f.operators.isNotEmpty ||
+                                      (f
+                                              .fieldQueryableType
+                                              ?.isSelectableAsReference ??
+                                          false)),
+                            ),
+                          )
+                        : field;
 
                     onChanged(
                       OrderBy(
@@ -175,4 +174,6 @@ class OrderByWidget extends StatelessWidget {
       ),
     );
   }
+
+  final void Function()? onRemoved;
 }

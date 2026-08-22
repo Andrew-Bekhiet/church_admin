@@ -36,14 +36,6 @@ class _RecordAttendanceLoadedViewState
     );
   }
 
-  _RosterScrollOffsetKey _rosterKeyFor(RecordAttendanceLoaded s) => (
-    s.meeting.id,
-    s.selectedDate,
-    s.audienceView,
-    s.presenceFilter,
-    s.grouping,
-  );
-
   final Map<_RosterScrollOffsetKey, double> _savedOffsets = {};
 
   ScrollController? _innerController;
@@ -63,29 +55,6 @@ class _RecordAttendanceLoadedViewState
     WidgetsBinding.instance.addPostFrameCallback(
       (_) => _maybeUpdateControllerOffset(newKey),
     );
-  }
-
-  // PageStorageKey is broken here: _NestedScrollPosition.restoreScrollOffset
-  // is gated on canScrollBody (false while the floating app bar is visible),
-  // and the constructor calls saveScrollOffset() right after correctPixels(0),
-  // overwriting any stored value. Use PageStorageKey once
-  // https://github.com/flutter/flutter/issues/159123 is fixed.
-  //
-  // jumpTo is also wrong here: it goes through coordinator.jumpTo, which moves
-  // BOTH inner and outer via unnestOffset/nestOffset, scrolling the app bar
-  // away on every restore. Use position.correctBy on the inner position only.
-  void _maybeUpdateControllerOffset(_RosterScrollOffsetKey key) {
-    final controller = _innerController;
-    if (!mounted || controller == null || !controller.hasClients) return;
-
-    final position = controller.position;
-    final target = (_savedOffsets[key] ?? 0.0).clamp(
-      0.0,
-      position.maxScrollExtent,
-    );
-    if (position.pixels == target) return;
-
-    setState(() => position.correctBy(target - position.pixels));
   }
 
   @override
@@ -184,6 +153,37 @@ class _RecordAttendanceLoadedViewState
         },
       ),
     );
+  }
+
+  _RosterScrollOffsetKey _rosterKeyFor(RecordAttendanceLoaded s) => (
+    s.meeting.id,
+    s.selectedDate,
+    s.audienceView,
+    s.presenceFilter,
+    s.grouping,
+  );
+
+  // PageStorageKey is broken here: _NestedScrollPosition.restoreScrollOffset
+  // is gated on canScrollBody (false while the floating app bar is visible),
+  // and the constructor calls saveScrollOffset() right after correctPixels(0),
+  // overwriting any stored value. Use PageStorageKey once
+  // https://github.com/flutter/flutter/issues/159123 is fixed.
+  //
+  // jumpTo is also wrong here: it goes through coordinator.jumpTo, which moves
+  // BOTH inner and outer via unnestOffset/nestOffset, scrolling the app bar
+  // away on every restore. Use position.correctBy on the inner position only.
+  void _maybeUpdateControllerOffset(_RosterScrollOffsetKey key) {
+    final controller = _innerController;
+    if (!mounted || controller == null || !controller.hasClients) return;
+
+    final position = controller.position;
+    final target = (_savedOffsets[key] ?? 0.0).clamp(
+      0.0,
+      position.maxScrollExtent,
+    );
+    if (position.pixels == target) return;
+
+    setState(() => position.correctBy(target - position.pixels));
   }
 }
 

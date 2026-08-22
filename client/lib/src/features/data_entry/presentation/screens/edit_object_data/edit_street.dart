@@ -20,6 +20,30 @@ class EditStreet extends StatefulWidget {
 class _EditStreetState extends State<EditStreet> {
   late final EditObjectController<Street> _controller;
 
+  void Function() _editGeolocation(BuildContext context) => () async {
+    final Street? result = await Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => EditStreetLineMap(
+          onSaved: Navigator.of(context).pop,
+          initialStreet: newStreet,
+          geomapOptions: GeomapOptions(
+            layers: const {
+              GeoMapLayer.streets,
+            },
+            selectedStreets: {newStreet},
+          ),
+        ),
+      ),
+    );
+    if (result != null) {
+      newStreet = result;
+    }
+  };
+
+  Street get initialStreet => _controller.initialObject!;
+  Street get newStreet => _controller.newObject;
+  set newStreet(Street p) => _controller.newObject = p;
+
   @override
   void initState() {
     super.initState();
@@ -49,10 +73,6 @@ class _EditStreetState extends State<EditStreet> {
       initialObject: oldStreet,
     );
   }
-
-  Street get initialStreet => _controller.initialObject!;
-  Street get newStreet => _controller.newObject;
-  set newStreet(Street p) => _controller.newObject = p;
 
   @override
   Widget build(BuildContext context) {
@@ -103,14 +123,14 @@ class _EditStreetState extends State<EditStreet> {
             label: 'أخر افتقاد',
             initialValue: newStreet.lastVisit?.time,
             onChanged: (v) {
-              if (v != null) {
-                newStreet = newStreet.copyWith(
-                  lastVisit: LastRecordedByInfo(
-                    time: v,
-                    recordedBy: AuthBloc.I.currentUser?.uid,
-                  ),
-                );
-              }
+              if (v == null) return;
+
+              newStreet = newStreet.copyWith(
+                lastVisit: LastRecordedByInfo(
+                  time: v,
+                  recordedBy: AuthBloc.I.currentUser?.uid,
+                ),
+              );
             },
             validator: (v) => null,
           ),
@@ -124,24 +144,4 @@ class _EditStreetState extends State<EditStreet> {
       ),
     );
   }
-
-  void Function() _editGeolocation(BuildContext context) => () async {
-    final Street? result = await Navigator.of(context).push(
-      MaterialPageRoute(
-        builder: (context) => EditStreetLineMap(
-          onSaved: Navigator.of(context).pop,
-          initialStreet: newStreet,
-          geomapOptions: GeomapOptions(
-            layers: const {
-              GeoMapLayer.streets,
-            },
-            selectedStreets: {newStreet},
-          ),
-        ),
-      ),
-    );
-    if (result != null) {
-      newStreet = result;
-    }
-  };
 }

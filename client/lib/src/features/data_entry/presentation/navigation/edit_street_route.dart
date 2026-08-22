@@ -5,10 +5,24 @@ import 'package:go_router/go_router.dart';
 
 part 'edit_street_route.g.dart';
 
+@TypedGoRoute<EditStreetRoute>(path: '/edit_street')
+class EditStreetRoute extends GoRouteData with $EditStreetRoute {
+  final EditStreetExtra? $extra;
+  const EditStreetRoute({this.$extra});
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return EditStreet(street: $extra?.street, withArea: $extra?.area);
+  }
+}
+
 @JsonSerializable()
 class EditStreetExtra extends SerializableExtra {
   final Street? street;
   final Area? area;
+
+  @override
+  String get typeName => 'EditStreetExtra';
 
   const EditStreetExtra({
     this.street,
@@ -19,20 +33,5 @@ class EditStreetExtra extends SerializableExtra {
       _$EditStreetExtraFromJson(json);
 
   @override
-  String get typeName => 'EditStreetExtra';
-
-  @override
   Json toJson() => _$EditStreetExtraToJson(this);
-}
-
-@TypedGoRoute<EditStreetRoute>(path: '/edit_street')
-class EditStreetRoute extends GoRouteData with $EditStreetRoute {
-  const EditStreetRoute({this.$extra});
-
-  final EditStreetExtra? $extra;
-
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return EditStreet(street: $extra?.street, withArea: $extra?.area);
-  }
 }

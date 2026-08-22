@@ -106,7 +106,7 @@ class _EditObjectDataState<T extends ViewableWithID>
                       horizontal: 8,
                       vertical: 4,
                     ),
-                    child: SaveAndCancelButtonRow(
+                    child: SaveAndCancelButtons(
                       onSave: () => _controller.save(context),
                       onCancel: () async {
                         final bool value = await _controller.confirmExit(

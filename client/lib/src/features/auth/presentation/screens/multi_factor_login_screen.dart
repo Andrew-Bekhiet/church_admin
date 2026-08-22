@@ -7,28 +7,16 @@ import 'package:phone_form_field/phone_form_field.dart';
 import 'package:pinput/pinput.dart';
 import 'package:rxdart/rxdart.dart';
 
-final class MultiFactorLoginScreenKeys {
-  static const phoneNumberFieldKey = ValueKey('Phone Number Field Key');
-  static const passwordFieldKey = ValueKey('Password Field Key');
-  static const enrollButtonKey = ValueKey('Enroll Button Key');
-
-  static const verificationCodeFieldKey = ValueKey(
-    'Verification Code Field Key',
-  );
-  static const verifyButtonKey = ValueKey('Verify Button Key');
-  static const resendCodeButtonKey = ValueKey('Resend Code Button Key');
-}
-
-class MultiFactorLogin extends StatefulWidget {
+class MultiFactorLoginScreen extends StatefulWidget {
   final Clock clock;
 
-  const MultiFactorLogin({super.key, this.clock = const Clock()});
+  const MultiFactorLoginScreen({this.clock = const Clock(), super.key});
 
   @override
-  State<MultiFactorLogin> createState() => _MultifactorStateLogin();
+  State<MultiFactorLoginScreen> createState() => _MultifactorStateLogin();
 }
 
-class _MultifactorStateLogin extends State<MultiFactorLogin> {
+class _MultifactorStateLogin extends State<MultiFactorLoginScreen> {
   bool _isEnrollmentInProgress = false;
 
   @override
@@ -36,10 +24,10 @@ class _MultifactorStateLogin extends State<MultiFactorLogin> {
     return BlocConsumer<AuthBloc, AuthState>(
       bloc: AuthBloc.I,
       listener: (context, state) {
-        if (state is AuthExceptionState) {
-          setState(() => _isEnrollmentInProgress = false);
-          _showAuthException(context, state);
-        }
+        if (state is! AuthExceptionState) return;
+
+        setState(() => _isEnrollmentInProgress = false);
+        _showAuthException(context, state);
       },
       builder: (context, state) {
         return Scaffold(
@@ -121,15 +109,26 @@ class _MultifactorStateLogin extends State<MultiFactorLogin> {
   }
 }
 
+final class MultiFactorLoginScreenKeys {
+  static const phoneNumberFieldKey = ValueKey('Phone Number Field Key');
+  static const passwordFieldKey = ValueKey('Password Field Key');
+  static const enrollButtonKey = ValueKey('Enroll Button Key');
+
+  static const verificationCodeFieldKey = ValueKey(
+    'Verification Code Field Key',
+  );
+  static const verifyButtonKey = ValueKey('Verify Button Key');
+  static const resendCodeButtonKey = ValueKey('Resend Code Button Key');
+}
+
 class _EnrollMultiFactor extends StatefulWidget {
+  final void Function(String phoneNumber, String password)
+  onPhoneNumberSubmitted;
+  final bool loading;
   const _EnrollMultiFactor({
     required this.onPhoneNumberSubmitted,
     required this.loading,
   });
-
-  final void Function(String phoneNumber, String password)
-  onPhoneNumberSubmitted;
-  final bool loading;
 
   @override
   State<_EnrollMultiFactor> createState() => _EnrollMultiFactorState();
@@ -174,12 +173,14 @@ class _EnrollMultiFactorState extends State<_EnrollMultiFactor> {
                   PhoneValidator.validMobile(context),
                 ]),
                 onChanged: (value) {
-                  if (value.isoCode == IsoCode.EG &&
-                      value.nsn.startsWith('01')) {
-                    _phoneNumberController.changeNationalNumber(
-                      value.nsn.replaceFirst(RegExp('^01'), '1'),
-                    );
+                  if (value.isoCode != IsoCode.EG ||
+                      !value.nsn.startsWith('01')) {
+                    return;
                   }
+
+                  _phoneNumberController.changeNationalNumber(
+                    value.nsn.replaceFirst(RegExp('^01'), '1'),
+                  );
                 },
               ),
             ),
@@ -191,6 +192,7 @@ class _EnrollMultiFactorState extends State<_EnrollMultiFactor> {
                 if (password == null || password.isEmpty) {
                   return 'من فضلك أدخل كلمة المرور';
                 }
+
                 return null;
               },
               onFieldSubmitted: (_) => _sendCode(),
@@ -225,6 +227,12 @@ class _EnrollMultiFactorState extends State<_EnrollMultiFactor> {
 class _VerifyMultiFactor extends StatefulWidget {
   final Clock clock;
 
+  final MultiFactorSession session;
+  final MultiFactorInfo? selectedFactor;
+  final void Function(String code) onVerificationCodeSubmitted;
+  final void Function(int? resendToken) onResendCode;
+  final bool loading;
+
   const _VerifyMultiFactor({
     required this.session,
     required this.onVerificationCodeSubmitted,
@@ -233,12 +241,6 @@ class _VerifyMultiFactor extends StatefulWidget {
     required this.clock,
     this.selectedFactor,
   });
-
-  final MultiFactorSession session;
-  final MultiFactorInfo? selectedFactor;
-  final void Function(String code) onVerificationCodeSubmitted;
-  final void Function(int? resendToken) onResendCode;
-  final bool loading;
 
   @override
   State<_VerifyMultiFactor> createState() => _VerifyMultiFactorState();
@@ -296,9 +298,9 @@ class _VerifyMultiFactorState extends State<_VerifyMultiFactor> {
                     controller: _code,
                     inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     onCompleted: (_) {
-                      if (!widget.loading) {
-                        widget.onVerificationCodeSubmitted(_code.text);
-                      }
+                      if (widget.loading) return;
+
+                      widget.onVerificationCodeSubmitted(_code.text);
                     },
                     isCursorAnimationEnabled: false,
                     defaultPinTheme: PinTheme(

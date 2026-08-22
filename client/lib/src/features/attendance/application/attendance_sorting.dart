@@ -116,17 +116,18 @@ final class AttendanceSortingByStudyYear extends AttendanceSorting {
 
   @override
   int compare(MeetingRosterEntry a, MeetingRosterEntry b) {
-    final gradeA = a.person.studyYear?.order;
-    final gradeB = b.person.studyYear?.order;
+    final firstStudyYearOrder = a.person.studyYear?.order;
+    final secondStudyYearOrder = b.person.studyYear?.order;
 
-    if (gradeA == gradeB) {
+    if (firstStudyYearOrder == secondStudyYearOrder) {
       return then.compare(a, b);
     }
 
-    if (gradeA == null) return 1;
-    if (gradeB == null) return -1;
+    if (firstStudyYearOrder == null) return 1;
+    if (secondStudyYearOrder == null) return -1;
 
-    return gradeA.compareTo(gradeB) * direction.multiplier;
+    return firstStudyYearOrder.compareTo(secondStudyYearOrder) *
+        direction.multiplier;
   }
 }
 
@@ -147,21 +148,21 @@ final class AttendanceSortingByStreak extends AttendanceSorting {
 
   @override
   int compare(MeetingRosterEntry a, MeetingRosterEntry b) {
-    final streakA = a.personAttendanceAnalysis?.attendanceStreak == 0
+    final firstStreak = a.personAttendanceAnalysis?.attendanceStreak == 0
         ? -(a.personAttendanceAnalysis?.absenceStreak ?? 0)
         : a.personAttendanceAnalysis?.attendanceStreak;
-    final streakB = b.personAttendanceAnalysis?.attendanceStreak == 0
+    final secondStreak = b.personAttendanceAnalysis?.attendanceStreak == 0
         ? -(b.personAttendanceAnalysis?.absenceStreak ?? 0)
         : b.personAttendanceAnalysis?.attendanceStreak;
 
-    if (streakA == streakB) {
+    if (firstStreak == secondStreak) {
       return then.compare(a, b);
     }
 
-    if (streakA == null) return 1;
-    if (streakB == null) return -1;
+    if (firstStreak == null) return 1;
+    if (secondStreak == null) return -1;
 
-    return streakA.compareTo(streakB) * direction.multiplier;
+    return firstStreak.compareTo(secondStreak) * direction.multiplier;
   }
 }
 
@@ -183,17 +184,17 @@ final class AttendanceSortingByLastAttendanceTime extends AttendanceSorting {
 
   @override
   int compare(MeetingRosterEntry a, MeetingRosterEntry b) {
-    final lastAttendanceTimeA = a.personAttendanceAnalysis?.lastAttended;
-    final lastAttendanceTimeB = b.personAttendanceAnalysis?.lastAttended;
+    final firstLastAttendedAt = a.personAttendanceAnalysis?.lastAttended;
+    final secondLastAttendedAt = b.personAttendanceAnalysis?.lastAttended;
 
-    if (lastAttendanceTimeA == lastAttendanceTimeB) {
+    if (firstLastAttendedAt == secondLastAttendedAt) {
       return then.compare(a, b);
     }
 
-    if (lastAttendanceTimeA == null) return 1;
-    if (lastAttendanceTimeB == null) return -1;
+    if (firstLastAttendedAt == null) return 1;
+    if (secondLastAttendedAt == null) return -1;
 
-    return lastAttendanceTimeA.compareTo(lastAttendanceTimeB) *
+    return firstLastAttendedAt.compareTo(secondLastAttendedAt) *
         direction.multiplier;
   }
 }

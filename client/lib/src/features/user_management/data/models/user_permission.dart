@@ -45,8 +45,6 @@ enum UserPermission implements LabeledEnum {
   final String label;
   final IconData icon;
 
-  const UserPermission({required this.label, required this.icon});
-
   Set<UserPermission> get requires {
     if (this == UserPermission.approved) return {};
 
@@ -76,4 +74,6 @@ enum UserPermission implements LabeledEnum {
   String get subtitle => this != UserPermission.approved
       ? 'السماح ب$label'
       : 'يجب تفعيل الحساب للسماح للمستخدم بالدخول';
+
+  const UserPermission({required this.label, required this.icon});
 }

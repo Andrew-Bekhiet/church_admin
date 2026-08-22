@@ -7,8 +7,6 @@ class ChipTabBar extends StatelessWidget {
     super.key,
   });
 
-  final List<({String label, IconData icon})> tabs;
-
   @override
   Widget build(BuildContext context) {
     final tabController = DefaultTabController.of(context);
@@ -63,4 +61,6 @@ class ChipTabBar extends StatelessWidget {
       },
     );
   }
+
+  final List<({String label, IconData icon})> tabs;
 }

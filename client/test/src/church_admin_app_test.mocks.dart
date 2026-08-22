@@ -1287,7 +1287,6 @@ class MockPersonsDAO extends _i1.Mock implements _i5.PersonsDAO {
 
   @override
   _i9.Future<_i5.PersonsGeolocationsResponse?> personsGeolocations({
-    String? personId,
     List<_i5.UuidValue>? areasIds = const [],
     List<_i5.UuidValue>? streetsIds = const [],
     List<_i5.UuidValue>? familiesIds = const [],
@@ -1300,10 +1299,10 @@ class MockPersonsDAO extends _i1.Mock implements _i5.PersonsDAO {
     bool? getFamilies = false,
     bool? getStores = false,
     bool? getPersons = false,
+    String? personId,
   }) =>
       (super.noSuchMethod(
             Invocation.method(#personsGeolocations, [], {
-              #personId: personId,
               #areasIds: areasIds,
               #streetsIds: streetsIds,
               #familiesIds: familiesIds,
@@ -1316,6 +1315,7 @@ class MockPersonsDAO extends _i1.Mock implements _i5.PersonsDAO {
               #getFamilies: getFamilies,
               #getStores: getStores,
               #getPersons: getPersons,
+              #personId: personId,
             }),
             returnValue: _i9.Future<_i5.PersonsGeolocationsResponse?>.value(),
             returnValueForMissingStub:
@@ -2283,15 +2283,6 @@ class MockConnectivityService extends _i1.Mock
 class MockNotificationsService extends _i1.Mock
     implements _i5.NotificationsService {
   @override
-  bool get isPaused =>
-      (super.noSuchMethod(
-            Invocation.getter(#isPaused),
-            returnValue: false,
-            returnValueForMissingStub: false,
-          )
-          as bool);
-
-  @override
   _i9.Stream<_i5.Notification> get onNotificationTapStream =>
       (super.noSuchMethod(
             Invocation.getter(#onNotificationTapStream),
@@ -2299,6 +2290,15 @@ class MockNotificationsService extends _i1.Mock
             returnValueForMissingStub: _i9.Stream<_i5.Notification>.empty(),
           )
           as _i9.Stream<_i5.Notification>);
+
+  @override
+  bool get isPaused =>
+      (super.noSuchMethod(
+            Invocation.getter(#isPaused),
+            returnValue: false,
+            returnValueForMissingStub: false,
+          )
+          as bool);
 
   @override
   void addForegroundNotificationTap(_i5.Notification? notification) =>

@@ -4,13 +4,13 @@ Conventions for anyone (human or agent) writing code here. Rules are stated as r
 
 ## Layout
 
-| Path                            | What it is                                                                                     |
-| ------------------------------- | ---------------------------------------------------------------------------------------------- |
-| `client/`                       | Flutter app. Riverpod providers + BLoC, GoRouter, `graphql_codegen` against Hasura.            |
-| `server/hasura/`                | Hasura metadata + Postgres migrations (`migrations/default/<timestamp>_<name>/{up,down}.sql`). |
-| `server/firebase/functions/`    | TypeScript Cloud Functions: auth blocking functions, callables, storage proxy, export.         |
+| Path                            | What it is                                                                                          |
+| ------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `client/`                       | Flutter app. Riverpod providers + BLoC, GoRouter, `graphql_codegen` against Hasura.                 |
+| `server/hasura/`                | Hasura metadata + Postgres migrations (`migrations/default/<timestamp>_<name>/{up,down}.sql`).      |
+| `server/firebase/functions/`    | TypeScript Cloud Functions: auth blocking functions, callables, storage proxy, export.              |
 | `server/postgres/`              | Postgres image (`ghcr.io/railwayapp-templates/timescale-postgis-ssl:pg17-ts2.17`) and init scripts. |
-| `server/church_admin_migrator/` | One-off data import/export tooling.                                                            |
+| `server/church_admin_migrator/` | One-off data import/export tooling.                                                                 |
 
 Organise files by feature or domain, not by type. All backend access goes through the database service module (`client/lib/src/core/services/database/`) with `graphql_codegen`-generated operations — features never issue raw GraphQL themselves.
 
@@ -37,7 +37,9 @@ Doc comments are allowed only when they add value a name cannot carry. Never res
 
 ## Dart & Flutter
 
-Follow [`solid_lints`](https://raw.githubusercontent.com/solid-software/solid_lints/refs/heads/master/lib/analysis_options.yaml) — including in generated code. Don't try to add it as a dependency if it is not there. `client/analysis_options.yaml` is the enforced baseline on top of that.
+Follow [`solid_lints`](https://raw.githubusercontent.com/solid-software/solid_lints/refs/heads/master/lib/analysis_options.yaml). Don't try to add it as a dependency if it is not there. `client/analysis_options.yaml` is the enforced baseline on top of that, and it is the authority: it switches several solid_lints diagnostics off.
+
+Generated code is exempt. `analyzer: exclude` covers `**.g.dart`, `**.freezed.dart`, `**.gql.dart`, `**.graphql.dart` and `**/__generated__/**`, and `client/build.yaml` stamps every `source_gen` output with a `// ignore_for_file: type=lint` preamble. When generated output breaks a rule that matters, fix the generator rather than the output.
 
 ### Structure
 
@@ -46,7 +48,8 @@ Follow [`solid_lints`](https://raw.githubusercontent.com/solid-software/solid_li
 - **Never return widgets from methods** (`Widget _buildFoo()`). Extract a widget class, or if the subtree is small (under ~100 lines) inline it at the call site. Non-widget helpers returning `String`/data are fine.
 - **No top-level variables or functions.** Use `static` members on the class that owns them.
 - **Files under 350 lines; 420 is a hard maximum.** Split before you reach it.
-- **Member order:** fields → getters/setters → constructors → methods, statics first within each group. Widget state: `initState` → `build` → `didChangeDependencies` → `didUpdateWidget` → `deactivate` → `dispose`.
+- **Member order:** every static first as one block, then instance members. `static_getters_setters` → `static_fields` → `static_methods` → `fields` → `getters_setters` → `constructors` → `methods`. The static block puts getters and setters before fields, which is the reverse of the instance block.
+- **Widget state order:** `initState` → `didChangeDependencies` → `didUpdateWidget` → `build` → `deactivate` → `dispose`. `build` sits fourth, not first.
 - **`prefer_match_file_name`** — the public class name matches the file name.
 
 ### Idioms
@@ -55,15 +58,25 @@ Follow [`solid_lints`](https://raw.githubusercontent.com/solid-software/solid_li
 - **`package:collection`** (`maxBy`, `groupListsBy`, …) instead of hand-rolled folds.
 - **Domain models are classes, not record typedefs.** Behaviour (display names, formatting) belongs on the class.
 - **`Row.spacing` / `Column.spacing`** instead of `SizedBox` gaps; `MainAxisAlignment.space*` instead of `Expanded` where it fits; `Padding` instead of `SizedBox` in linear layouts.
-- **No `!`** (`avoid_non_null_assertion`) — use `?.`, pattern matching, or restructure.
-- **No magic numbers** outside widget parameters. Max 7 parameters (`copyWith` exempt). Cyclomatic complexity ≤ 10.
-- **Blank line before `return`** unless it is the block's only statement. Return early rather than nesting in `else`.
+- **Blank line before `return`** unless it is the block's only statement (`newline_before_return`). Return early rather than nesting in `else`.
+- **`dispose()` returns `void`.** `Future<void> dispose() async` compiles and the analyzer accepts it, because any type is assignable to `void` in an override. It is still wrong: awaiting before `super.dispose()` defers the super call past the frame in which the framework treats the state as disposed. Close sinks with `unawaited(x.close())` and keep `dispose` synchronous.
+- **`close_sinks` does not catch a missing `dispose()`,** only an incomplete one. A `BehaviorSubject` field on a `State` with no `dispose` at all is invisible to it, so check by hand.
 - **Handle errors thoroughly** with typed Dart exceptions, and carry user-facing messages as error codes so they can be localised later.
+
+#### Unenforced house style
+
+`client/analysis_options.yaml` switches these four off, so nothing fails when you break them. Follow them anyway; a reviewer may still ask.
+
+- **No `!`** (`avoid_non_null_assertion`). Use `?.`, pattern matching, or restructure.
+- **No magic numbers** outside widget parameters (`no_magic_number`).
+- **Max 7 parameters**, `copyWith` exempt (`number_of_parameters`).
+- **Cyclomatic complexity ≤ 10** (`cyclomatic_complexity`).
 
 ### Where helpers go
 
 - Never put extension files in `presentation/widgets/` — that directory holds widget classes only.
 - One consumer → private member in that file. Multiple consumers → the feature's `utils/`. A model's own display behaviour → a method on the model.
+- **File size is not a reason to extract.** A helper of 20 source lines or fewer with a single consumer stays a private instance method on that consumer, even when the file then passes 350 lines. The 420 ceiling still binds. Pulling a helper out to satisfy a line limit also pushes you to pass state in as parameters, which turns a live read into a snapshot taken at the wrong moment.
 
 ## Tests
 
@@ -131,4 +144,13 @@ rm -r lib/src/core/graphql/__generated__/ && dart run build_runner build && ./sc
 
 If an unfiltered build slips through, `git checkout -- lib/src/core/graphql/__generated__/schema.graphql.dart` restores the stub; the `schema_partN.dart` files are untouched. The split script also leaves an untracked `schema.graphql.dart.bak` — delete it.
 
-**Lints** — `dart analyze` does not load the solid_lints plugin and reports a false "clean". Use the dart MCP `analyze_files` on `.` (not a single file), re-run until counts stabilise, and cross-check a flagged line against the file on disk.
+**Lints** — `dart analyze` does load the solid_lints plugin. It is declared under `plugins:` in `client/analysis_options.yaml` and the analyzer picks it up on its own, so a plain `dart analyze` already reports diagnostics such as `prefer_match_file_name`. `--plugins` is a real but undocumented flag, and redundant on Dart 3.12.2. Run the same gate CI runs:
+
+```sh
+cd client
+dart analyze --plugins --fatal-infos
+```
+
+Keep `--fatal-infos`. Most solid_lints diagnostics are `info`, so a plain run exits 0 with findings outstanding.
+
+**Run `dart format` over the whole package before committing**, not only the directory you touched. It also normalises a mixed-ending file back to one style. Formatting a single subdirectory is how the mixed endings above survived review.

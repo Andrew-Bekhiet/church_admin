@@ -1,5 +1,8 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// coverage:ignore-file
+// ignore_for_file: type=lint
+
 part of 'person_state.dart';
 
 // **************************************************************************
@@ -8,9 +11,6 @@ part of 'person_state.dart';
 
 class PersonStateFields {
   static final PersonStateFields _instance = PersonStateFields._();
-  factory PersonStateFields() => _instance;
-  PersonStateFields._();
-
   final FieldMetadata<PersonState> id = FieldMetadata<PersonState>(
     getValue: (obj) => obj is PersonState ? obj.id : null,
     parentType: PersonState,
@@ -48,6 +48,8 @@ class PersonStateFields {
     'name': name,
     'color': color,
   };
+  factory PersonStateFields() => _instance;
+  PersonStateFields._();
 }
 
 // **************************************************************************

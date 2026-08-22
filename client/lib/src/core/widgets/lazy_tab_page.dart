@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
 class LazyTabPage extends StatelessWidget {
+  final TabController? tabController;
+  final Widget Function(BuildContext) builder;
+  final int index;
+  final Widget? placeholder;
   const LazyTabPage({
     required this.builder,
     required this.index,
@@ -8,11 +12,6 @@ class LazyTabPage extends StatelessWidget {
     this.placeholder,
     super.key,
   });
-
-  final TabController? tabController;
-  final Widget Function(BuildContext) builder;
-  final int index;
-  final Widget? placeholder;
 
   @override
   Widget build(BuildContext context) {

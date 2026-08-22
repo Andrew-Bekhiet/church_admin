@@ -85,6 +85,9 @@ class MeetingsAnalysisExtra extends SerializableExtra {
   @JsonKey(fromJson: _subjectFromJson, toJson: _subjectToJson)
   final MeetingsAnalysisSubject subject;
 
+  @override
+  String get typeName => '$MeetingsAnalysisExtra';
+
   const MeetingsAnalysisExtra({
     required this.title,
     required this.initialRangePreset,
@@ -93,9 +96,6 @@ class MeetingsAnalysisExtra extends SerializableExtra {
 
   factory MeetingsAnalysisExtra.fromJson(Json json) =>
       _$MeetingsAnalysisExtraFromJson(json);
-
-  @override
-  String get typeName => '$MeetingsAnalysisExtra';
 
   @override
   Json toJson() => _$MeetingsAnalysisExtraToJson(this);

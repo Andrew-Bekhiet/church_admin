@@ -54,16 +54,10 @@ class _ViewStoreState extends State<ViewStore> {
       objectStream: stream,
       childrenTypes: const [Person],
       tabsContentBuilders: {
-        Person: (context) => StreamBuilder(
-          stream: _personsOrderBy.stream,
-          initialData: _personsOrderBy.value,
-          builder: (context, orderBySnapshot) => ViewableObjectList(
-            scrollController: PrimaryScrollController.maybeOf(context),
-            viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
-              secondLineField: orderBySnapshot.data?.first.getSecondLineField(),
-            ),
-            objectsController: _personsController,
-          ),
+        Person: (context) => OrderedViewableObjectList(
+          orderByStream: _personsOrderBy.stream,
+          initialOrderBy: _personsOrderBy.value,
+          objectsController: _personsController,
         ),
       },
       sliverPersistentHeaderDelegate: ChipTabBarPersistentHeaderDelegate(
@@ -138,14 +132,6 @@ class _ViewStoreState extends State<ViewStore> {
                   )
                 : const Text('لا يوجد'),
           ),
-          ListTile(
-            title: FilledButton.icon(
-              icon: const Icon(Symbols.query_stats),
-              label: const Text('احصائيات'),
-              // TODO: add store analysis
-              onPressed: () {},
-            ),
-          ),
           HistoryProperty(
             name: 'أخر تحديث للبيانات',
             value: store.lastEdit?.time,
@@ -162,22 +148,19 @@ class _ViewStoreState extends State<ViewStore> {
     );
   }
 
-  Future<void> _showOrderBySheet() async {
-    final queryableType = AdvancedQueriesMetadata().person;
+  @override
+  void dispose() {
+    unawaited(_personsController.dispose());
+    unawaited(_personsOrderBy.close());
 
-    await showOrderByBottomSheet(
+    super.dispose();
+  }
+
+  Future<void> _showOrderBySheet() async {
+    await showOrderBySheetAndSave(
       context,
-      queryableType: queryableType,
+      queryableType: AdvancedQueriesMetadata().person,
       orderBySubject: _personsOrderBy,
-      onChanged: (newOrderBy) {
-        _personsOrderBy.add(newOrderBy);
-        unawaited(
-          ViewObjectDetails.saveLastOrderByFor(
-            type: queryableType,
-            orderBy: newOrderBy,
-          ),
-        );
-      },
     );
   }
 }

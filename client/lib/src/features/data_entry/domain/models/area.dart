@@ -50,9 +50,17 @@ class Area extends ViewableWithIDAndImage
   @JsonKey(includeToJson: false)
   final bool userCanEdit;
 
+  @override
+  ObjectImageInfo get imageInfo =>
+      FunctionsObjectImageInfo('areas', id, lastUpdatedTime: photoUpdatedAt);
+
+  @override
+  String get typeName => AdvancedQueriesMetadata().area.name;
+
   const Area({
     required this.id,
     required this.name,
+    this.userCanEdit = false,
     this.bounds,
     this.color,
     this.photoUpdatedAt,
@@ -60,28 +68,16 @@ class Area extends ViewableWithIDAndImage
     this.lastVisit,
     this.lastEdit,
     this.adminUsers,
-    this.userCanEdit = false,
   });
 
   factory Area.fromJson(Map<String, Object?> json) => _$AreaFromJson(json);
 
   @override
   Json toJson() => _$AreaToJson(this);
-
-  @override
-  ObjectImageInfo get imageInfo =>
-      FunctionsObjectImageInfo('areas', id, lastUpdatedTime: photoUpdatedAt);
-
-  @override
-  String get typeName => AdvancedQueriesMetadata().area.name;
 }
 
 class AreaFields extends _AreaFields {
   static final AreaFields _instance = AreaFields._();
-
-  factory AreaFields() => _instance;
-
-  AreaFields._();
 
   FieldMetadata<AreasStreets> get streetsRel => FieldMetadata<AreasStreets>(
     parentType: Area,
@@ -114,6 +110,10 @@ class AreaFields extends _AreaFields {
     ...super.allFieldsByName,
     streets.name: streets,
   };
+
+  factory AreaFields() => _instance;
+
+  AreaFields._();
 }
 
 List<User>? adminUsersFromJson(List? data) =>

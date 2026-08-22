@@ -5,9 +5,9 @@ export 'kv_store/sembast_serializable_kv_store.dart';
 abstract interface class KVStore<T> {
   String get name;
 
-  Future<bool> containsKey(String key);
-
   Future<T?> get(String key);
+
+  Future<bool> containsKey(String key);
 
   Future<void> put(String key, T? value);
 

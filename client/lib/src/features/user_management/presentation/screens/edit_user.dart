@@ -119,23 +119,17 @@ class _EditUserState extends State<EditUser> {
 
   void _togglePermission(UserPermission permission) {
     setState(() {
-      if (!_controller.newObject.permissions.contains(permission)) {
-        _controller.newObject = _controller.newObject.copyWith(
-          permissions: PermissionsSet.fromSet(
-            {..._controller.newObject.permissions, permission},
-          ),
-        );
-      } else {
-        _controller.newObject = _controller.newObject.copyWith(
-          permissions: PermissionsSet.fromSet(
-            {
-              ..._controller.newObject.permissions.where(
-                (p) => p != permission,
-              ),
-            },
-          ),
-        );
-      }
+      _controller.newObject = _controller.newObject.copyWith(
+        permissions: PermissionsSet.fromSet(
+          !_controller.newObject.permissions.contains(permission)
+              ? {..._controller.newObject.permissions, permission}
+              : {
+                  ..._controller.newObject.permissions.where(
+                    (p) => p != permission,
+                  ),
+                },
+        ),
+      );
     });
   }
 }

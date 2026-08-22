@@ -65,12 +65,8 @@ class ViewObjectDetails<T extends ViewableWithIDAndImage>
 
   final Stream<T?> objectStream;
   final List<Type> childrenTypes;
-  final Map<Type, Widget Function(BuildContext)> tabsContentBuilders;
-  final Widget Function(BuildContext, TabController, T)?
-  floatingActionButtonBuilder;
 
   final WidgetBuilder notFoundBuilder;
-  final Widget Function(BuildContext, TabController)? bottomNavBarBuilder;
   final WidgetBuilderWithObject<T> editButtonBuilder;
   final WidgetBuilderWithObject<T> detailsBuilder;
   final SliverPersistentHeaderDelegate? sliverPersistentHeaderDelegate;
@@ -81,10 +77,10 @@ class ViewObjectDetails<T extends ViewableWithIDAndImage>
     required this.notFoundBuilder,
     required this.editButtonBuilder,
     required this.detailsBuilder,
-    this.bottomNavBarBuilder,
     this.childrenTypes = const [],
-    this.sliverPersistentHeaderDelegate,
     this.tabsContentBuilders = const {},
+    this.bottomNavBarBuilder,
+    this.sliverPersistentHeaderDelegate,
     this.floatingActionButtonBuilder,
     this.object,
     super.key,
@@ -92,6 +88,10 @@ class ViewObjectDetails<T extends ViewableWithIDAndImage>
          childrenTypes.length == 0 || sliverPersistentHeaderDelegate != null,
        ),
        assert(childrenTypes.length == tabsContentBuilders.length);
+  final Map<Type, Widget Function(BuildContext)> tabsContentBuilders;
+  final Widget Function(BuildContext, TabController, T)?
+  floatingActionButtonBuilder;
+  final Widget Function(BuildContext, TabController)? bottomNavBarBuilder;
 
   @override
   State<ViewObjectDetails<T>> createState() => _ViewObjectDetailsState<T>();
@@ -249,6 +249,12 @@ class _ViewObjectDetailsState<T extends ViewableWithIDAndImage>
     );
   }
 
+  @override
+  void dispose() {
+    _scrollTimer?.cancel();
+    super.dispose();
+  }
+
   bool _onScrollEnd(ScrollEndNotification _) {
     if (!_scrollController.hasClients) return false;
 
@@ -275,14 +281,16 @@ class _ViewObjectDetailsState<T extends ViewableWithIDAndImage>
         if (scrollPercent < 1 && scrollPercent != nearestSnap) {
           unawaited(
             Future.microtask(() async {
-              if (_scrollController.hasClients &&
-                  scrollPercent != nearestSnap) {
-                await _scrollController.animateTo(
-                  nearestSnap * maxScroll,
-                  duration: ViewObjectDetails.snapDuration,
-                  curve: Curves.easeOutExpo,
-                );
+              if (!_scrollController.hasClients ||
+                  scrollPercent == nearestSnap) {
+                return;
               }
+
+              await _scrollController.animateTo(
+                nearestSnap * maxScroll,
+                duration: ViewObjectDetails.snapDuration,
+                curve: Curves.easeOutExpo,
+              );
             }),
           );
         }
@@ -290,11 +298,5 @@ class _ViewObjectDetailsState<T extends ViewableWithIDAndImage>
     );
 
     return false;
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _scrollTimer?.cancel();
   }
 }

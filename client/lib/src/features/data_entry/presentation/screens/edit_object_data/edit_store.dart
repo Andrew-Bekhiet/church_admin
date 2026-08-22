@@ -15,6 +15,10 @@ class EditStore extends StatefulWidget {
 class _EditStoreState extends State<EditStore> {
   late final EditObjectController<Store> _controller;
 
+  Store get initialStore => _controller.initialObject!;
+  Store get newStore => _controller.newObject;
+  set newStore(Store p) => _controller.newObject = p;
+
   @override
   void initState() {
     super.initState();
@@ -44,10 +48,6 @@ class _EditStoreState extends State<EditStore> {
       initialObject: oldStore,
     );
   }
-
-  Store get initialStore => _controller.initialObject!;
-  Store get newStore => _controller.newObject;
-  set newStore(Store p) => _controller.newObject = p;
 
   @override
   Widget build(BuildContext context) {
@@ -86,17 +86,12 @@ class _EditStoreState extends State<EditStore> {
               if (value == null && newStore.geolocation == null) {
                 return 'يجب اختيار عائلة أو تحديد الموقع';
               }
+
               return null;
             },
-            builder: (context, state) {
-              return state.value != null
-                  ? IgnorePointer(
-                      child: ViewableObjectWidget(
-                        state.value!,
-                        isDense: true,
-                      ),
-                    )
-                  : null;
+            builder: (context, state) => switch (state.value) {
+              final family? => ObjectSelectionPreview(family),
+              null => null,
             },
           ),
           ColorField(
@@ -126,6 +121,7 @@ class _EditStoreState extends State<EditStore> {
     if (result != null) {
       newStore = result;
     }
+
     return result?.geolocation;
   }
 }

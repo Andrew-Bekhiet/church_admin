@@ -5,10 +5,10 @@ packages:
     dependency: transitive
     description:
       name: _fe_analyzer_shared
-      sha256: c209688d9f5a5f26b2fb47a188131a6fb9e876ae9e47af3737c0b4f58a93470d
+      sha256: "3b19a47f6ea7c2632760777c78174f47f6aec1e05f0cd611380d4593b8af1dbc"
       url: "https://pub.dev"
     source: hosted
-    version: "91.0.0"
+    version: "96.0.0"
   _flutterfire_internals:
     dependency: transitive
     description:
@@ -25,14 +25,30 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.0.1"
-  analyzer:
+  analysis_server_plugin:
     dependency: transitive
     description:
-      name: analyzer
-      sha256: f51c8499b35f9b26820cfe914828a6a98a94efd5cc78b37bb7d03debae3a1d08
+      name: analysis_server_plugin
+      sha256: "0ba6a701c8d926f548a736ac3da8536f63f75fd49ad803f9dfcd091b869ef753"
       url: "https://pub.dev"
     source: hosted
-    version: "8.4.1"
+    version: "0.3.20"
+  analyzer:
+    dependency: "direct overridden"
+    description:
+      name: analyzer
+      sha256: "0c516bc4ad36a1a75759e54d5047cb9d15cded4459df01aa35a0b5ec7db2c2a0"
+      url: "https://pub.dev"
+    source: hosted
+    version: "10.2.0"
+  analyzer_plugin:
+    dependency: transitive
+    description:
+      name: analyzer_plugin
+      sha256: "8c988c96836e59db019930c603dd1493797a7aaf97ba71469ea13724602be4dd"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.14.14"
   android_alarm_manager_plus:
     dependency: "direct main"
     description:
@@ -141,10 +157,10 @@ packages:
     dependency: "direct dev"
     description:
       name: build_runner
-      sha256: "5367e521935b102bdf1e735d2aab461e36b2edca6517662d088dd04cc39f8d16"
+      sha256: be46e59dcfefd6c6c7127df9f1be6c1f89219fee22ae02a923463e0f286ce652
       url: "https://pub.dev"
     source: hosted
-    version: "2.15.1"
+    version: "2.15.2"
   built_collection:
     dependency: transitive
     description:
@@ -417,13 +433,13 @@ packages:
     source: hosted
     version: "1.0.0"
   dart_style:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       name: dart_style
-      sha256: a9c30492da18ff84efe2422ba2d319a89942d93e58eb0b73d32abe822ef54b7b
+      sha256: "29f7ecc274a86d32920b1d9cfc7502fa87220da41ec60b55f329559d5732e2b2"
       url: "https://pub.dev"
     source: hosted
-    version: "3.1.3"
+    version: "3.1.7"
   dartx:
     dependency: transitive
     description:
@@ -1008,10 +1024,10 @@ packages:
     dependency: "direct dev"
     description:
       name: freezed
-      sha256: "13065f10e135263a4f5a4391b79a8efc5fb8106f8dd555a9e49b750b45393d77"
+      sha256: f23ea33b3863f119b58ed1b586e881a46bd28715ddcc4dbc33104524e3434131
       url: "https://pub.dev"
     source: hosted
-    version: "3.2.3"
+    version: "3.2.5"
   freezed_annotation:
     dependency: "direct main"
     description:
@@ -1136,10 +1152,10 @@ packages:
     dependency: transitive
     description:
       name: gql_code_builder
-      sha256: ad16d7cca772439c2a45d0ea47f9f526dea5f6c97b9e955a42a7a7b979602a5f
+      sha256: deb9a659b7236edfe9d0b72c5b724cf4a33ce50686b7eac97cc48ba2bf5615d2
       url: "https://pub.dev"
     source: hosted
-    version: "0.15.1"
+    version: "0.15.2"
   gql_code_builder_serializers:
     dependency: transitive
     description:
@@ -1472,10 +1488,10 @@ packages:
     dependency: "direct dev"
     description:
       name: json_serializable
-      sha256: c5b2ee75210a0f263c6c7b9eeea80553dbae96ea1bf57f02484e806a3ffdffa3
+      sha256: "5b89c1e32ae3840bb20a1b3434e3a590173ad3cb605896fb0f60487ce2f8104e"
       url: "https://pub.dev"
     source: hosted
-    version: "6.11.2"
+    version: "6.11.4"
   latlong2:
     dependency: "direct main"
     description:
@@ -2257,22 +2273,30 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.5"
+  solid_lints:
+    dependency: "direct dev"
+    description:
+      name: solid_lints
+      sha256: e06a0c50c1e449150dc0aef0994c10bc69a8b9ed94b7bca53d66a1c816723e91
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.0-dev.1"
   source_gen:
     dependency: transitive
     description:
       name: source_gen
-      sha256: ec37cc0e6694374cbef59ed79685572c870a54ede6fa30a3e420feb3adffea02
+      sha256: "11b6047da8e4eb6c643ccac3d0fda3f9c9e11651695f7da24a85ade8aff15a44"
       url: "https://pub.dev"
     source: hosted
-    version: "4.2.3"
+    version: "4.3.0"
   source_helper:
     dependency: transitive
     description:
       name: source_helper
-      sha256: "6a3c6cc82073a8797f8c4dc4572146114a39652851c157db37e964d9c7038723"
+      sha256: "5e6f216fdf6376c9f3852381ae037499797a3385377d388b011dac98d303c67c"
       url: "https://pub.dev"
     source: hosted
-    version: "1.3.8"
+    version: "1.3.13"
   source_map_stack_trace:
     dependency: transitive
     description:
@@ -2610,14 +2634,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.2.0"
-  very_good_analysis:
-    dependency: "direct dev"
-    description:
-      name: very_good_analysis
-      sha256: "481af67ab5877af20325251dc215a4ebac7666a1c8cf09198ffd457bc612b33d"
-      url: "https://pub.dev"
-    source: hosted
-    version: "10.3.0"
   visibility_detector:
     dependency: "direct main"
     description:
@@ -2722,6 +2738,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.1.3"
+  yaml_edit:
+    dependency: transitive
+    description:
+      name: yaml_edit
+      sha256: "07c9e63ba42519745182b88ca12264a7ba2484d8239958778dfe4d44fe760488"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.4"
 sdks:
   dart: ">=3.12.1 <3.999.0"
   flutter: ">=3.44.0"

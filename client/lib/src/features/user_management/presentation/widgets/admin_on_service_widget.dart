@@ -2,16 +2,13 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 
 class AdminOnServiceWidget extends StatelessWidget {
+  final (Service, List<AdminOnData>) serviceData;
   const AdminOnServiceWidget({
     required this.serviceData,
-    super.key,
     this.trailingBuilder,
     this.onTap,
+    super.key,
   });
-
-  final (Service, List<AdminOnData>) serviceData;
-  final Widget Function(BuildContext, ViewableWithID)? trailingBuilder;
-  final void Function(ViewableWithID)? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -75,4 +72,7 @@ class AdminOnServiceWidget extends StatelessWidget {
       ],
     );
   }
+
+  final Widget Function(BuildContext, ViewableWithID)? trailingBuilder;
+  final void Function(ViewableWithID)? onTap;
 }

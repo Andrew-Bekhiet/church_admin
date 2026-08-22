@@ -3,18 +3,17 @@ import 'package:flutter/services.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 
 class CopiablePropertyWidget extends StatelessWidget {
-  const CopiablePropertyWidget(
-    this.propName,
-    this.value, {
-    super.key,
-    this.showErrorIfEmpty = true,
-    this.additionalOptions,
-  });
-
   final String propName;
   final String? value;
   final bool showErrorIfEmpty;
   final List<Widget>? additionalOptions;
+  const CopiablePropertyWidget(
+    this.propName,
+    this.value, {
+    this.showErrorIfEmpty = true,
+    this.additionalOptions,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -34,18 +33,15 @@ class CopiablePropertyWidget extends StatelessWidget {
       copyOrError = null;
     }
 
-    final Widget? trailing;
-    if (additionalOptions != null) {
-      trailing = Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          ...additionalOptions!,
-          ?copyOrError,
-        ],
-      );
-    } else {
-      trailing = copyOrError;
-    }
+    final Widget? trailing = additionalOptions != null
+        ? Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ...additionalOptions!,
+              ?copyOrError,
+            ],
+          )
+        : copyOrError;
 
     return ListTile(
       title: Text(propName),

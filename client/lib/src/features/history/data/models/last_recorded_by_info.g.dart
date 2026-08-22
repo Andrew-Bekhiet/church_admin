@@ -1,5 +1,8 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// coverage:ignore-file
+// ignore_for_file: type=lint
+
 part of 'last_recorded_by_info.dart';
 
 // **************************************************************************
@@ -7,8 +10,6 @@ part of 'last_recorded_by_info.dart';
 // **************************************************************************
 
 class _LastRecordedByInfoFields {
-  _LastRecordedByInfoFields();
-
   final FieldMetadata<DateTime> time = FieldMetadata<DateTime>(
     getValue: (obj) => obj is LastRecordedByInfo ? obj.time : null,
     parentType: LastRecordedByInfo,
@@ -50,6 +51,8 @@ class _LastRecordedByInfoFields {
     'user': user,
     'isFatherVisit': isFatherVisit,
   };
+
+  _LastRecordedByInfoFields();
 }
 
 // **************************************************************************
@@ -57,6 +60,7 @@ class _LastRecordedByInfoFields {
 // **************************************************************************
 
 LastRecordedByInfo _$LastRecordedByInfoFromJson(Map json) => LastRecordedByInfo(
+  isFatherVisit: json['isFatherVisit'] as bool? ?? false,
   time: _$JsonConverterFromJson<String, DateTime>(
     json['time'],
     const LocalDateTimeConverter().fromJson,
@@ -65,7 +69,6 @@ LastRecordedByInfo _$LastRecordedByInfoFromJson(Map json) => LastRecordedByInfo(
   user: json['user'] == null
       ? null
       : User.fromJson(Map<String, Object?>.from(json['user'] as Map)),
-  isFatherVisit: json['isFatherVisit'] as bool? ?? false,
 );
 
 Map<String, dynamic> _$LastRecordedByInfoToJson(LastRecordedByInfo instance) =>

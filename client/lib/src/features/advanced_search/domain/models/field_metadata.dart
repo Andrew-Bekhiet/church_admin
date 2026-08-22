@@ -2,26 +2,6 @@ import 'package:church_admin/church_admin.dart';
 import 'package:equatable/equatable.dart';
 
 class FieldMetadata<T extends Object> with Equatable {
-  final Type? _type;
-  final Type parentType;
-  final String name;
-  final String label;
-  final bool isOrderable;
-  final bool isCodeOnly;
-  final Set<Operator> operators;
-  final Object? Function(Object) getValue;
-
-  const FieldMetadata({
-    required this.parentType,
-    required this.name,
-    required this.label,
-    required this.getValue,
-    this.isCodeOnly = false,
-    this.isOrderable = true,
-    this._type,
-    this.operators = const {},
-  });
-
   static FieldMetadata<Object> fromJson(Json json) {
     if (json.containsKey('parentField') && json.containsKey('targetField')) {
       return RedirectingFieldMetadata.fromJson(json);
@@ -37,6 +17,15 @@ class FieldMetadata<T extends Object> with Equatable {
           'Field $fieldName not found in type $typeName',
         ));
   }
+
+  final Type? _type;
+  final Type parentType;
+  final String name;
+  final String label;
+  final bool isOrderable;
+  final bool isCodeOnly;
+  final Set<Operator> operators;
+  final Object? Function(Object) getValue;
 
   Type get type => _type ?? T;
 
@@ -68,6 +57,17 @@ class FieldMetadata<T extends Object> with Equatable {
 
   @override
   List<Object?> get props => [name, label, operators];
+
+  const FieldMetadata({
+    required this.parentType,
+    required this.name,
+    required this.label,
+    required this.getValue,
+    this.isCodeOnly = false,
+    this.isOrderable = true,
+    this.operators = const {},
+    this._type,
+  });
 
   Json toJson() {
     return {
@@ -116,9 +116,9 @@ class FieldMetadata<T extends Object> with Equatable {
   /// ```
   RedirectingFieldMetadata<T, U> redirectTo<U extends Object>(
     FieldMetadata<U> targetField, {
+    bool isExpandable = true,
     String? alias,
     String? label,
-    bool isExpandable = true,
     bool? isOrderable,
   }) => RedirectingFieldMetadata<T, U>(
     parentField: this,

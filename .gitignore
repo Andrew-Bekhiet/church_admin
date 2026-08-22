@@ -25,3 +25,6 @@ client/resources/
 **/*/churchdata.json
 **/*/meetinghelper.json
 **/*/node_modules
+
+# FVM Version Cache
+.fvm/

@@ -9,7 +9,6 @@ environment:
 
 dependency_overrides:
   connectivity_plus: ^7.0.0
-  flutter_secure_storage_web: ^1.2.0
   js: ^0.7.1
   pointycastle: ^3.7.0
   googleapis: ^15.0.0

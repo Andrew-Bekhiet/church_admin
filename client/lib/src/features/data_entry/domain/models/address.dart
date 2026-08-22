@@ -57,9 +57,9 @@ class Address with _$Address {
   final Store? store;
 
   const Address({
+    this.countryIsoCode = 'EG',
     this.id,
     this.area,
-    this.countryIsoCode = 'EG',
     this.houseNumber,
     this.street,
     this.substreetName,
@@ -75,8 +75,6 @@ class Address with _$Address {
 
   factory Address.fromJson(Map<String, Object?> json) =>
       _$AddressFromJson(json);
-
-  Json toJson() => _$AddressToJson(this);
 
   factory Address.fromNominatimResponse(Map<String, Object?> data) {
     final addressData = data['address']! as Map<String, Object?>;
@@ -111,6 +109,8 @@ class Address with _$Address {
       countryIsoCode: countryCode ?? 'EG',
     );
   }
+
+  Json toJson() => _$AddressToJson(this);
 
   @override
   String toString() {

@@ -5,6 +5,8 @@ import 'package:collection/collection.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class UserPreferencesService extends BlocObserver {
+  static UserPreferencesService get I =>
+      globalProviderContainer.read(userPreferencesServiceProvider);
   static const storeName = 'UserPreferences';
   static const legacyStoreNames = ['Settings'];
 
@@ -17,9 +19,6 @@ class UserPreferencesService extends BlocObserver {
 
   // SyncKVStore/Sembast treat put(null) as delete; wrap so key presence is kept.
   static const _nullQueuedValue = <String, bool>{'pendingNull': true};
-
-  static UserPreferencesService get I =>
-      globalProviderContainer.read(userPreferencesServiceProvider);
 
   final SyncKVStore _pendingWritesBox;
   final DatabaseService _databaseService;
@@ -36,11 +35,6 @@ class UserPreferencesService extends BlocObserver {
     return _serverPreferences?.darkTheme;
   }
 
-  Future<void> setDarkTheme(bool? value) async {
-    _queueWrite(_darkThemeKey, value);
-    unawaited(_flushPending());
-  }
-
   bool get greatFeastTheme {
     if (_hasQueuedWrite(_greatFeastThemeKey)) {
       return _readQueuedWrite(_greatFeastThemeKey) as bool? ?? true;
@@ -49,23 +43,14 @@ class UserPreferencesService extends BlocObserver {
     return _serverPreferences?.greatFeastTheme ?? true;
   }
 
-  Future<void> setGreatFeastTheme(bool value) async {
-    _queueWrite(_greatFeastThemeKey, value);
-    unawaited(_flushPending());
-  }
-
   HomeMode? get lastHomeMode {
     if (_hasQueuedWrite(_lastHomeModeKey)) {
       final value = _readQueuedWrite(_lastHomeModeKey) as String?;
+
       return HomeMode.values.firstWhereOrNull((e) => e.name == value);
     }
 
     return _serverPreferences?.lastHomeMode;
-  }
-
-  Future<void> setLastHomeMode(HomeMode? value) async {
-    _queueWrite(_lastHomeModeKey, value?.name);
-    unawaited(_flushPending());
   }
 
   UserPreferencesService({
@@ -73,6 +58,21 @@ class UserPreferencesService extends BlocObserver {
     required this._databaseService,
     required this._authBloc,
   }) : _pendingWritesBox = box;
+
+  Future<void> setDarkTheme(bool? value) async {
+    _queueWrite(_darkThemeKey, value);
+    unawaited(_flushPending());
+  }
+
+  Future<void> setGreatFeastTheme(bool value) async {
+    _queueWrite(_greatFeastThemeKey, value);
+    unawaited(_flushPending());
+  }
+
+  Future<void> setLastHomeMode(HomeMode? value) async {
+    _queueWrite(_lastHomeModeKey, value?.name);
+    unawaited(_flushPending());
+  }
 
   List<OrderBy>? getLastOrderByFor(OrderByPreferenceKey key) {
     final storageKey = key.storageKey;
@@ -83,6 +83,7 @@ class UserPreferencesService extends BlocObserver {
     }
 
     final serverValue = _serverPreferences?.orderByPreferences[storageKey];
+
     return _parseOrderByList(serverValue);
   }
 

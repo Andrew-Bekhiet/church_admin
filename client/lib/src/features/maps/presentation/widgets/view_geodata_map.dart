@@ -51,7 +51,9 @@ class _ViewGeodataMapState extends State<ViewGeodataMap>
       appBar: AppBar(
         actions: [
           IconButton(
-            onPressed: () => setState(() {}),
+            onPressed: () => setState(() {
+              return;
+            }),
             icon: const Icon(Symbols.refresh),
             tooltip: 'تحديث البيانات',
           ),
@@ -100,6 +102,13 @@ class _ViewGeodataMapState extends State<ViewGeodataMap>
     );
   }
 
+  @override
+  void dispose() {
+    unawaited(_mapOptions.close());
+
+    super.dispose();
+  }
+
   void _onSheetMoved(SheetPositionData position) {
     setState(() {
       _fabAlignment = AlignmentDirectional(
@@ -107,12 +116,5 @@ class _ViewGeodataMapState extends State<ViewGeodataMap>
         1 - min(0.5, position.relativeToSnappingPositions) * 2,
       ).resolve(Directionality.of(context));
     });
-  }
-
-  @override
-  Future<void> dispose() async {
-    super.dispose();
-
-    await _mapOptions.close();
   }
 }

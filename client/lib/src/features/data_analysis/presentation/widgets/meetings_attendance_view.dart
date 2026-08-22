@@ -17,15 +17,7 @@ class MeetingsAttendanceView extends StatelessWidget {
     final textTheme = themeData.textTheme;
 
     if (analysis.heldCount == 0) {
-      return Padding(
-        padding: const EdgeInsets.symmetric(vertical: 32),
-        child: Center(
-          child: Text(
-            'لا يوجد سجل حضور خلال هذه الفترة',
-            style: textTheme.titleMedium,
-          ),
-        ),
-      );
+      return const EmptyAttendanceMessage();
     }
 
     final rolledDays = analysis.aggregateDays.rollupBy(granularity);

@@ -20,6 +20,22 @@ class ViewableObjectListController<T extends Viewable> {
   final _DisposablePeriodicStream _loadPageThrottlerTimer =
       _DisposablePeriodicStream(const Duration(seconds: 1, milliseconds: 450));
 
+  ValueStream<List<T>> get filteredObjectsStream => _itemsSubject.stream;
+
+  Stream<bool> get onLoadingChanged =>
+      _objectsPaginatableStream.onLoadingChanged;
+
+  Stream<int?> get totalCountStream =>
+      _objectsPaginatableStream.totalCountStream;
+
+  List<T>? get currentFilteredObjectsOrNull => _itemsSubject.valueOrNull;
+
+  int? get currentTotalCount => _objectsPaginatableStream.currentTotalCount;
+
+  bool get hasMore => _objectsPaginatableStream.hasMore;
+
+  bool get isLoading => _objectsPaginatableStream.isLoading;
+
   ViewableObjectListController({
     required PaginatableStreamBase<T> objectsPaginatableStream,
     this.filterStream,
@@ -32,35 +48,33 @@ class ViewableObjectListController<T extends Viewable> {
                (o) => (o is ID) ? (o as ID).id : o,
              ),
            ) {
-    if (filterStream == null) {
-      _itemsSubjectSubscription = _objectsPaginatableStream.listen(
-        _itemsSubject.add,
-        onError: _itemsSubject.addError,
-        onDone: _itemsSubject.close,
-      );
-    } else {
-      _itemsSubjectSubscription = _objectsPaginatableStream
-          .switchMap(
-            (objects) => filterStream!
-                .distinct(
-                  (previous, next) => (previous ?? '') == (next ?? ''),
-                )
-                .map(
-                  (search) => objects
-                      .where(
-                        (object) => normalizeString(
-                          object.name,
-                        ).contains(normalizeString(search ?? '')),
-                      )
-                      .toList(),
-                ),
-          )
-          .listen(
+    _itemsSubjectSubscription = filterStream == null
+        ? _objectsPaginatableStream.listen(
             _itemsSubject.add,
             onError: _itemsSubject.addError,
             onDone: _itemsSubject.close,
-          );
-    }
+          )
+        : _objectsPaginatableStream
+              .switchMap(
+                (objects) => filterStream!
+                    .distinct(
+                      (previous, next) => (previous ?? '') == (next ?? ''),
+                    )
+                    .map(
+                      (search) => objects
+                          .where(
+                            (object) => normalizeString(
+                              object.name,
+                            ).contains(normalizeString(search ?? '')),
+                          )
+                          .toList(),
+                    ),
+              )
+              .listen(
+                _itemsSubject.add,
+                onError: _itemsSubject.addError,
+                onDone: _itemsSubject.close,
+              );
 
     _loadPageThrottlerListener = _loadPageThrottler
         .buffer(_loadPageThrottlerTimer)
@@ -79,22 +93,6 @@ class ViewableObjectListController<T extends Viewable> {
         )
         .listen(objectsPaginatableStream.listenToPage);
   }
-
-  ValueStream<List<T>> get filteredObjectsStream => _itemsSubject.stream;
-
-  Stream<bool> get onLoadingChanged =>
-      _objectsPaginatableStream.onLoadingChanged;
-
-  Stream<int?> get totalCountStream =>
-      _objectsPaginatableStream.totalCountStream;
-
-  List<T>? get currentFilteredObjectsOrNull => _itemsSubject.valueOrNull;
-
-  int? get currentTotalCount => _objectsPaginatableStream.currentTotalCount;
-
-  bool get hasMore => _objectsPaginatableStream.hasMore;
-
-  bool get isLoading => _objectsPaginatableStream.isLoading;
 
   Future<void> listenToNextPage() async {
     await _objectsPaginatableStream.listenToNextPage();
@@ -135,6 +133,9 @@ class _DisposablePeriodicStream extends Stream<void> {
 
   late final Timer _timer;
 
+  @override
+  bool get isBroadcast => _controller.stream.isBroadcast;
+
   _DisposablePeriodicStream(this.duration) {
     _timer = Timer.periodic(duration, (_) => _controller.add(null));
   }
@@ -158,7 +159,4 @@ class _DisposablePeriodicStream extends Stream<void> {
       cancelOnError: cancelOnError,
     );
   }
-
-  @override
-  bool get isBroadcast => _controller.stream.isBroadcast;
 }

@@ -7,37 +7,6 @@ import 'package:rxdart/rxdart.dart';
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   static AuthBloc get I => globalProviderContainer.read(authBlocProvider);
 
-  AuthBloc({
-    required this._authRepository,
-    required this._databaseService,
-    required this._authStorage,
-    required this._connectivityStream,
-    bool loadCachedUser = true,
-  }) : super(const AuthInitial()) {
-    on<ListenToSubscriptions>(
-      _onListenToSubscriptions,
-      transformer: (events, mapper) => events
-          .scan(
-            (_, event, i) => i == 0
-                ? event
-                : throw Exception('Already listening to subscriptions'),
-            const ListenToSubscriptions(),
-          )
-          .switchMap(mapper),
-    );
-    on<SignInWithEmailPassword>(_onSignInWithEmailPassword);
-    on<SignUpWithEmailPassword>(_onSignUpWithEmailPassword);
-    on<SendPasswordResetEmail>(_onSendPasswordResetEmail);
-    on<SignOut>(_onSignOut);
-    on<ReloadUser>(_onReloadUser);
-    on<SendEmailVerification>(_onSendEmailVerification);
-    on<EnrollMultiFactor>(_onEnrollMultiFactor);
-    on<StartMultiFactorChallenge>(_onStartMultiFactorChallenge);
-    on<CompleteMultiFactorChallenge>(_onCompleteMultiFactorChallenge);
-
-    add(ListenToSubscriptions(loadCachedUser: loadCachedUser));
-  }
-
   final AuthRepository _authRepository;
   final DatabaseService _databaseService;
   final AuthStorage _authStorage;
@@ -83,9 +52,40 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
                 (state is! AuthAuthenticated || state.userData != null),
           )
           .timeout(const Duration(seconds: 8))
-          .whenComplete(() {}),
+          .whenComplete(() => null),
     _ => Future.value(),
   };
+
+  AuthBloc({
+    required this._authRepository,
+    required this._databaseService,
+    required this._authStorage,
+    required this._connectivityStream,
+    bool loadCachedUser = true,
+  }) : super(const AuthInitial()) {
+    on<ListenToSubscriptions>(
+      _onListenToSubscriptions,
+      transformer: (events, mapper) => events
+          .scan(
+            (_, event, i) => i == 0
+                ? event
+                : throw Exception('Already listening to subscriptions'),
+            const ListenToSubscriptions(),
+          )
+          .switchMap(mapper),
+    );
+    on<SignInWithEmailPassword>(_onSignInWithEmailPassword);
+    on<SignUpWithEmailPassword>(_onSignUpWithEmailPassword);
+    on<SendPasswordResetEmail>(_onSendPasswordResetEmail);
+    on<SignOut>(_onSignOut);
+    on<ReloadUser>(_onReloadUser);
+    on<SendEmailVerification>(_onSendEmailVerification);
+    on<EnrollMultiFactor>(_onEnrollMultiFactor);
+    on<StartMultiFactorChallenge>(_onStartMultiFactorChallenge);
+    on<CompleteMultiFactorChallenge>(_onCompleteMultiFactorChallenge);
+
+    add(ListenToSubscriptions(loadCachedUser: loadCachedUser));
+  }
 
   Future<void> _onListenToSubscriptions(
     ListenToSubscriptions event,

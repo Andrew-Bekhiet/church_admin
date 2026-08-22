@@ -21,6 +21,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
 
   bool _needsSaving = false;
 
+  void Function(bool _) _onDarkThemeChanged(bool? value) =>
+      (_) => setState(() {
+        darkTheme = value;
+      });
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -94,11 +99,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
       ),
     );
   }
-
-  void Function(bool _) _onDarkThemeChanged(bool? value) =>
-      (_) => setState(() {
-        darkTheme = value;
-      });
 
   Future<void> _applyThemeChange() async {
     await userPreferencesService.setDarkTheme(darkTheme);

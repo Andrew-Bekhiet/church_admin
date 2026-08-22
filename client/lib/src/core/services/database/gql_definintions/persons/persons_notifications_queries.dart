@@ -5,9 +5,9 @@ import 'package:graphql/client.dart';
 class PersonsNotificationsQueries {
   final DatabaseService db;
 
-  const PersonsNotificationsQueries({required this.db});
-
   DBGraphQLClient get graphQLClient => db.graphQLClient;
+
+  const PersonsNotificationsQueries({required this.db});
 
   Future<Iterable<Person>> _getPersonsNames({
     List<Input_PersonsBoolExp>? where,

@@ -4,19 +4,19 @@ import 'package:rxdart/rxdart.dart';
 class SelectionController<T> {
   final Equality<T> equality;
 
-  SelectionController({
-    Iterable<T>? initialSelection,
-    this.equality = const Equality(),
-  }) {
-    _subject = BehaviorSubject.seeded(_convertSet(initialSelection));
-  }
+  late final BehaviorSubject<Set<T>?> _subject;
 
   ValueStream<Set<T>?> get stream => _subject.stream;
   Set<T>? get currentValue => _subject.value;
 
   bool get isSelecting => currentValue != null;
 
-  late final BehaviorSubject<Set<T>?> _subject;
+  SelectionController({
+    this.equality = const Equality(),
+    Iterable<T>? initialSelection,
+  }) {
+    _subject = BehaviorSubject.seeded(_convertSet(initialSelection));
+  }
 
   void toggle(T item) {
     if (isSelected(item)) {

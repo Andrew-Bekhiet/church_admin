@@ -5,8 +5,6 @@ enum ColorOperator implements Operator<Color?> {
   eq('_eq', 'يساوي'),
   neq('_neq', 'لا يساوي');
 
-  const ColorOperator(this._value, this.label);
-
   @override
   final String label;
   final String _value;
@@ -16,6 +14,8 @@ enum ColorOperator implements Operator<Color?> {
 
   @override
   bool get acceptsValue => true;
+
+  const ColorOperator(this._value, this.label);
 
   @override
   Json queryToJson(FieldMetadata field, Color? filterValue) {

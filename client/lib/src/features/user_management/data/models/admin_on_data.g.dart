@@ -1,5 +1,8 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// coverage:ignore-file
+// ignore_for_file: type=lint
+
 part of 'admin_on_data.dart';
 
 // **************************************************************************
@@ -8,9 +11,6 @@ part of 'admin_on_data.dart';
 
 class AdminOnDataFields {
   static final AdminOnDataFields _instance = AdminOnDataFields._();
-  factory AdminOnDataFields() => _instance;
-  AdminOnDataFields._();
-
   final FieldMetadata<Area> area = FieldMetadata<Area>(
     getValue: (obj) => obj is AdminOnData ? obj.area : null,
     parentType: AdminOnData,
@@ -353,6 +353,8 @@ class AdminOnDataFields {
     'groupWriteRelatedFamilies': groupWriteRelatedFamilies,
     'user': user,
   };
+  factory AdminOnDataFields() => _instance;
+  AdminOnDataFields._();
 }
 
 // **************************************************************************
@@ -361,6 +363,11 @@ class AdminOnDataFields {
 
 AdminOnData _$AdminOnDataFromJson(Map json) => AdminOnData(
   permissionId: json['permissionId'] as String,
+  classes:
+      (json['classes'] as List<dynamic>?)
+          ?.map((e) => Class.fromJson(Map<String, Object?>.from(e as Map)))
+          .toList() ??
+      const [],
   area: json['area'] == null
       ? null
       : Area.fromJson(Map<String, Object?>.from(json['area'] as Map)),
@@ -383,11 +390,6 @@ AdminOnData _$AdminOnDataFromJson(Map json) => AdminOnData(
       json['serviceAllowRecordServantsAttendance'] as bool?,
   serviceAdminOnUsers: json['serviceAdminOnUsers'] as bool?,
   serviceWriteRelatedFamilies: json['serviceWriteRelatedFamilies'] as bool?,
-  classes:
-      (json['classes'] as List<dynamic>?)
-          ?.map((e) => Class.fromJson(Map<String, Object?>.from(e as Map)))
-          .toList() ??
-      const [],
   group: json['group'] == null
       ? null
       : Group.fromJson(Map<String, Object?>.from(json['group'] as Map)),

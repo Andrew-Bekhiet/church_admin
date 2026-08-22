@@ -1,5 +1,8 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// coverage:ignore-file
+// ignore_for_file: type=lint
+
 part of 'group.dart';
 
 // **************************************************************************
@@ -7,8 +10,6 @@ part of 'group.dart';
 // **************************************************************************
 
 class _GroupFields {
-  _GroupFields();
-
   final FieldMetadata<Group> id = FieldMetadata<Group>(
     getValue: (obj) => obj is Group ? obj.id : null,
     parentType: Group,
@@ -152,6 +153,8 @@ class _GroupFields {
     'lastEdit': lastEdit,
     'adminUsers': adminUsers,
   };
+
+  _GroupFields();
 }
 
 // **************************************************************************
@@ -161,6 +164,7 @@ class _GroupFields {
 Group _$GroupFromJson(Map json) => Group(
   id: json['id'] as String? ?? '',
   name: json['name'] as String? ?? '',
+  userCanEdit: json['userCanEdit'] as bool? ?? false,
   color: colorFromInt((json['color'] as num?)?.toInt()),
   photoUpdatedAt: _$JsonConverterFromJson<String, DateTime>(
     json['photoUpdatedAt'],
@@ -186,7 +190,6 @@ Group _$GroupFromJson(Map json) => Group(
           Map<String, Object?>.from(json['lastEdit'] as Map),
         ),
   adminUsers: adminUsersFromJson(json['adminUsers'] as List?),
-  userCanEdit: json['userCanEdit'] as bool? ?? false,
 );
 
 Map<String, dynamic> _$GroupToJson(Group instance) => <String, dynamic>{

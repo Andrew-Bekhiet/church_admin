@@ -14,11 +14,6 @@ class ObjectSelectionField<T extends ViewableWithID, F extends T?>
   final String dialogFieldLabel;
   final bool nullable;
   final bool enabled;
-
-  final String? Function(F?)? validator;
-  final void Function(F?)? onSaved;
-  final void Function(F?)? onChanged;
-  final Future<T> Function(String)? onCreateCustom;
   final AutovalidateMode? autovalidateMode;
   final FocusNode? focusNode;
   final InputDecoration? decoration;
@@ -160,4 +155,9 @@ class ObjectSelectionField<T extends ViewableWithID, F extends T?>
       builder: builder,
     );
   }
+
+  final String? Function(F?)? validator;
+  final void Function(F?)? onSaved;
+  final void Function(F?)? onChanged;
+  final Future<T> Function(String)? onCreateCustom;
 }

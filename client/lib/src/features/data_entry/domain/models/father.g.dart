@@ -1,5 +1,8 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// coverage:ignore-file
+// ignore_for_file: type=lint
+
 part of 'father.dart';
 
 // **************************************************************************
@@ -8,9 +11,6 @@ part of 'father.dart';
 
 class FatherFields {
   static final FatherFields _instance = FatherFields._();
-  factory FatherFields() => _instance;
-  FatherFields._();
-
   final FieldMetadata<Father> id = FieldMetadata<Father>(
     getValue: (obj) => obj is Father ? obj.id : null,
     parentType: Father,
@@ -44,6 +44,8 @@ class FatherFields {
     'name': name,
     'isHidden': isHidden,
   };
+  factory FatherFields() => _instance;
+  FatherFields._();
 }
 
 // **************************************************************************
@@ -53,8 +55,8 @@ class FatherFields {
 Father _$FatherFromJson(Map json) => Father(
   id: json['id'] as String? ?? '',
   name: json['name'] as String? ?? '',
-  churchId: json['churchId'] as String?,
   isHidden: json['isHidden'] as bool? ?? true,
+  churchId: json['churchId'] as String?,
 );
 
 Map<String, dynamic> _$FatherToJson(Father instance) => <String, dynamic>{

@@ -4,19 +4,6 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-abstract final class HomeScreenSummaryKeys {
-  static const Key churchDataButtonKey = Key('church_data_button');
-  static const Key sundaySchoolButtonKey = Key('sunday_school_button');
-
-  static const Key birthdaysButtonKey = Key('birthdays_button');
-  static const Key verseButtonKey = Key('verse_button');
-  static const Key sneksarButtonKey = Key('sneksar_button');
-  static const Key sayingButtonKey = Key('saying_button');
-
-  static const Key newItemButtonKey = Key('new_item_button');
-  static const Key shareButtonKey = Key('share_button');
-}
-
 class HomeScreenSummary extends StatelessWidget {
   final HomeBloc homeBloc;
 
@@ -213,4 +200,17 @@ class HomeScreenSummary extends StatelessWidget {
       ),
     );
   }
+}
+
+abstract final class HomeScreenSummaryKeys {
+  static const Key churchDataButtonKey = Key('church_data_button');
+  static const Key sundaySchoolButtonKey = Key('sunday_school_button');
+
+  static const Key birthdaysButtonKey = Key('birthdays_button');
+  static const Key verseButtonKey = Key('verse_button');
+  static const Key sneksarButtonKey = Key('sneksar_button');
+  static const Key sayingButtonKey = Key('saying_button');
+
+  static const Key newItemButtonKey = Key('new_item_button');
+  static const Key shareButtonKey = Key('share_button');
 }

@@ -11,6 +11,11 @@ targets:
         options:
           any_map: true
           explicit_to_json: true
+      source_gen:combining_builder:
+        options:
+          preamble: |-
+            // coverage:ignore-file
+            // ignore_for_file: type=lint
       graphql_codegen:
         enabled: true
         options:

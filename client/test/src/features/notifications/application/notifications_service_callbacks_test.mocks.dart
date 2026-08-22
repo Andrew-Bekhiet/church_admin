@@ -363,15 +363,6 @@ class MockAuthBloc extends _i1.Mock implements _i2.AuthBloc {
 class MockNotificationsService extends _i1.Mock
     implements _i2.NotificationsService {
   @override
-  bool get isPaused =>
-      (super.noSuchMethod(
-            Invocation.getter(#isPaused),
-            returnValue: false,
-            returnValueForMissingStub: false,
-          )
-          as bool);
-
-  @override
   _i3.Stream<_i2.Notification> get onNotificationTapStream =>
       (super.noSuchMethod(
             Invocation.getter(#onNotificationTapStream),
@@ -379,6 +370,15 @@ class MockNotificationsService extends _i1.Mock
             returnValueForMissingStub: _i3.Stream<_i2.Notification>.empty(),
           )
           as _i3.Stream<_i2.Notification>);
+
+  @override
+  bool get isPaused =>
+      (super.noSuchMethod(
+            Invocation.getter(#isPaused),
+            returnValue: false,
+            returnValueForMissingStub: false,
+          )
+          as bool);
 
   @override
   void addForegroundNotificationTap(_i2.Notification? notification) =>

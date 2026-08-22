@@ -2,17 +2,17 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-final class ForgotPasswordScreenKeys {
-  static const emailFieldKey = Key('Email Field Key');
-  static const sendResetLinkButtonKey = Key('Send Reset Link Button Key');
-  static const backButtonKey = Key('Back Button Key');
-}
-
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({super.key});
 
   @override
   State<ForgotPasswordScreen> createState() => _ForgotPasswordScreenState();
+}
+
+final class ForgotPasswordScreenKeys {
+  static const emailFieldKey = Key('Email Field Key');
+  static const sendResetLinkButtonKey = Key('Send Reset Link Button Key');
+  static const backButtonKey = Key('Back Button Key');
 }
 
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {

@@ -11,25 +11,25 @@ class InitializationService {
   static InitializationService get I =>
       globalProviderContainer.read(initializationServiceProvider);
 
+  final Completer<void> _initializationCompleter = Completer();
+  bool _isInitialized = false;
+
   Set<Initializer> get steps => const {
     WebNavigationInit(),
     SentryInit(),
     PackageInfoInit(),
     DeviceInfoInit(),
-    HiveInit(),
+    SembastInit(),
     FirebaseInit(),
     FeatureFlagsInit(),
     FMTCInit(),
     IntlLocaleMessagesInit(),
-    AndroidAlarmManagerPluginInit(),
-    FlutterLocalNotificationsPluginInit(),
+    AndroidAlarmManagerInit(),
+    FlutterLocalNotificationsInit(),
     BlocObserverInit(),
   };
 
   InitializationService();
-
-  final Completer<void> _initializationCompleter = Completer();
-  bool _isInitialized = false;
 
   Future<void> initialize() async {
     if (_isInitialized) return _initializationCompleter.future;

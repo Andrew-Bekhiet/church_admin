@@ -53,7 +53,7 @@ enum GeoMapLayer {
   stores('المتاجر'),
   persons('المخدومين');
 
-  const GeoMapLayer(this.label);
-
   final String label;
+
+  const GeoMapLayer(this.label);
 }

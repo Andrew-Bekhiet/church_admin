@@ -83,6 +83,7 @@ abstract mixin class $StoreCopyWith<$Res> {
   $Res call({
     String id,
     String name,
+    bool userCanEdit,
     Address? address,
     Family? family,
     String? familyId,
@@ -90,7 +91,6 @@ abstract mixin class $StoreCopyWith<$Res> {
     LastRecordedByInfo? lastEdit,
     DateTime? photoUpdatedAt,
     String? blurhash,
-    bool userCanEdit,
   });
 }
 
@@ -108,6 +108,7 @@ class _$StoreCopyWithImpl<$Res> implements $StoreCopyWith<$Res> {
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? userCanEdit = null,
     Object? address = freezed,
     Object? family = freezed,
     Object? familyId = freezed,
@@ -115,7 +116,6 @@ class _$StoreCopyWithImpl<$Res> implements $StoreCopyWith<$Res> {
     Object? lastEdit = freezed,
     Object? photoUpdatedAt = freezed,
     Object? blurhash = freezed,
-    Object? userCanEdit = null,
   }) {
     return _then(
       Store(
@@ -127,6 +127,10 @@ class _$StoreCopyWithImpl<$Res> implements $StoreCopyWith<$Res> {
             ? _self.name
             : name // ignore: cast_nullable_to_non_nullable
                   as String,
+        userCanEdit: null == userCanEdit
+            ? _self.userCanEdit
+            : userCanEdit // ignore: cast_nullable_to_non_nullable
+                  as bool,
         address: freezed == address
             ? _self.address
             : address // ignore: cast_nullable_to_non_nullable
@@ -155,10 +159,6 @@ class _$StoreCopyWithImpl<$Res> implements $StoreCopyWith<$Res> {
             ? _self.blurhash
             : blurhash // ignore: cast_nullable_to_non_nullable
                   as String?,
-        userCanEdit: null == userCanEdit
-            ? _self.userCanEdit
-            : userCanEdit // ignore: cast_nullable_to_non_nullable
-                  as bool,
       ),
     );
   }

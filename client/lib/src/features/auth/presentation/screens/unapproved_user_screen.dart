@@ -3,16 +3,16 @@ import 'dart:async';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 
-abstract final class UnapprovedUserScreenKeys {
-  static const Key codeField = ValueKey('Code Field Key');
-  static const Key registerButton = ValueKey('Register Button Key');
-}
-
 class UnapprovedUserScreen extends StatefulWidget {
   const UnapprovedUserScreen({super.key});
 
   @override
   State<UnapprovedUserScreen> createState() => _UnapprovedUserScreenState();
+}
+
+abstract final class UnapprovedUserScreenKeys {
+  static const Key codeField = ValueKey('Code Field Key');
+  static const Key registerButton = ValueKey('Register Button Key');
 }
 
 class _UnapprovedUserScreenState extends State<UnapprovedUserScreen> {
@@ -63,6 +63,7 @@ class _UnapprovedUserScreenState extends State<UnapprovedUserScreen> {
                   if (value!.isEmpty) {
                     return 'برجاء ادخال كود الدخول لتفعيل حسابك';
                   }
+
                   return null;
                 },
               ),

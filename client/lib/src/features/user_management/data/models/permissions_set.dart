@@ -7,22 +7,6 @@ import 'package:material_symbols_icons/material_symbols_icons.dart';
 class PermissionsSet extends DelegatingSet<UserPermission> with Equatable {
   Set<UserPermission> get permissions => this;
 
-  const PermissionsSet.empty() : super(const {});
-
-  PermissionsSet.parse(Set<String> permissions)
-    : super(
-        permissions
-            .map(
-              (p) => UserPermission.values.firstWhereOrNull((e) => e.name == p),
-            )
-            .nonNulls
-            .toSet(),
-      );
-
-  // Ignored for readability
-  // ignore: matching_super_parameters
-  const PermissionsSet.fromSet(super.permissions);
-
   bool get approved => contains(UserPermission.approved);
 
   bool get manageAllUsers => contains(UserPermission.manageAllUsers);
@@ -38,6 +22,22 @@ class PermissionsSet extends DelegatingSet<UserPermission> with Equatable {
 
   @override
   List<Object?> get props => toList();
+
+  const PermissionsSet.empty() : super(const {});
+
+  PermissionsSet.parse(Set<String> permissions)
+    : super(
+        permissions
+            .map(
+              (p) => UserPermission.values.firstWhereOrNull((e) => e.name == p),
+            )
+            .nonNulls
+            .toSet(),
+      );
+
+  // Ignored for readability
+  // ignore: matching_super_parameters
+  const PermissionsSet.fromSet(super.permissions);
 
   String toHumanReadableString() {
     if (!approved) {
@@ -73,10 +73,6 @@ class PermissionsSet extends DelegatingSet<UserPermission> with Equatable {
         if (containsAll(permission.requires)) permission,
     });
   }
-}
-
-extension RemoveQuotes on String {
-  String removeQuotes() => replaceAll('"', '').replaceAll("'", '');
 }
 
 List<Json> permissionsSetToJson(PermissionsSet data) =>

@@ -3,15 +3,13 @@ import 'package:church_admin/church_admin.dart';
 enum LogicalOperator<
   Field extends FieldMetadata,
   OperatorT extends Operator,
-  V extends Object,
-  FilterT extends Filter<V>
+  Value extends Object,
+  FilterT extends Filter<Value>
 >
     implements Operator<List<FilterT>> {
   or('_or', 'أو'),
   and('_and', 'و'),
   not('_not', 'ليس');
-
-  const LogicalOperator(this._value, this.label);
 
   @override
   final String label;
@@ -22,6 +20,8 @@ enum LogicalOperator<
 
   @override
   bool get acceptsValue => true;
+
+  const LogicalOperator(this._value, this.label);
 
   @override
   Json queryToJson(FieldMetadata field, List<FilterT> filterValue) {

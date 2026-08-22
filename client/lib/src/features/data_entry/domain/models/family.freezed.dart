@@ -113,8 +113,9 @@ abstract mixin class $FamilyCopyWith<$Res> {
   $Res call({
     String id,
     String name,
-    Address? address,
     MartialStatus status,
+    bool userCanEdit,
+    Address? address,
     DateTime? marriageDate,
     String? deceasedSpouseName,
     Church? church,
@@ -128,7 +129,6 @@ abstract mixin class $FamilyCopyWith<$Res> {
     LastRecordedByInfo? lastVisit,
     LastRecordedByInfo? lastFatherVisit,
     Map<String, dynamic>? familyAdminsPhones,
-    bool userCanEdit,
   });
 }
 
@@ -146,8 +146,9 @@ class _$FamilyCopyWithImpl<$Res> implements $FamilyCopyWith<$Res> {
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? address = freezed,
     Object? status = null,
+    Object? userCanEdit = null,
+    Object? address = freezed,
     Object? marriageDate = freezed,
     Object? deceasedSpouseName = freezed,
     Object? church = freezed,
@@ -161,7 +162,6 @@ class _$FamilyCopyWithImpl<$Res> implements $FamilyCopyWith<$Res> {
     Object? lastVisit = freezed,
     Object? lastFatherVisit = freezed,
     Object? familyAdminsPhones = freezed,
-    Object? userCanEdit = null,
   }) {
     return _then(
       Family(
@@ -173,14 +173,18 @@ class _$FamilyCopyWithImpl<$Res> implements $FamilyCopyWith<$Res> {
             ? _self.name
             : name // ignore: cast_nullable_to_non_nullable
                   as String,
-        address: freezed == address
-            ? _self.address
-            : address // ignore: cast_nullable_to_non_nullable
-                  as Address?,
         status: null == status
             ? _self.status
             : status // ignore: cast_nullable_to_non_nullable
                   as MartialStatus,
+        userCanEdit: null == userCanEdit
+            ? _self.userCanEdit
+            : userCanEdit // ignore: cast_nullable_to_non_nullable
+                  as bool,
+        address: freezed == address
+            ? _self.address
+            : address // ignore: cast_nullable_to_non_nullable
+                  as Address?,
         marriageDate: freezed == marriageDate
             ? _self.marriageDate
             : marriageDate // ignore: cast_nullable_to_non_nullable
@@ -233,10 +237,6 @@ class _$FamilyCopyWithImpl<$Res> implements $FamilyCopyWith<$Res> {
             ? _self.familyAdminsPhones
             : familyAdminsPhones // ignore: cast_nullable_to_non_nullable
                   as Map<String, dynamic>?,
-        userCanEdit: null == userCanEdit
-            ? _self.userCanEdit
-            : userCanEdit // ignore: cast_nullable_to_non_nullable
-                  as bool,
       ),
     );
   }

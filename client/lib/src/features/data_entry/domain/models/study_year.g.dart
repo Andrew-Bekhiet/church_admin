@@ -1,5 +1,8 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// coverage:ignore-file
+// ignore_for_file: type=lint
+
 part of 'study_year.dart';
 
 // **************************************************************************
@@ -7,8 +10,6 @@ part of 'study_year.dart';
 // **************************************************************************
 
 class _StudyYearFields {
-  _StudyYearFields();
-
   final FieldMetadata<int> order = FieldMetadata<int>(
     getValue: (obj) => obj is StudyYear ? obj.order : null,
     parentType: StudyYear,
@@ -42,6 +43,8 @@ class _StudyYearFields {
     'name': name,
     'id': id,
   };
+
+  _StudyYearFields();
 }
 
 // **************************************************************************

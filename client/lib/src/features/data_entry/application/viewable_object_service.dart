@@ -10,8 +10,6 @@ class ViewableObjectService {
   static ViewableObjectService get I =>
       globalProviderContainer.read(viewableObjectServiceProvider);
 
-  ViewableObjectService({required this.router});
-
   final GoRouter router;
 
   NavigatorState get navigator =>
@@ -19,6 +17,8 @@ class ViewableObjectService {
 
   GlobalKey<NavigatorState> get navigatorKey =>
       router.routeInformationParser.configuration.navigatorKey;
+
+  ViewableObjectService({required this.router});
 
   void onTap(Viewable object) {
     switch (object) {

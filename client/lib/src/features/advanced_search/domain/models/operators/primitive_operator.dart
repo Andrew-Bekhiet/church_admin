@@ -24,8 +24,6 @@ enum PrimitiveOperator<V> implements Operator<V?> {
   isNull('_isNull', 'فارغ'),
   isNotNull('_isNotNull', 'ليس فارغاً');
 
-  const PrimitiveOperator(this._operatorValue, this.label);
-
   final String _operatorValue;
   @override
   final String label;
@@ -35,6 +33,8 @@ enum PrimitiveOperator<V> implements Operator<V?> {
 
   @override
   bool get acceptsValue => !{isNull, isNotNull}.contains(this);
+
+  const PrimitiveOperator(this._operatorValue, this.label);
 
   @override
   Json queryToJson(FieldMetadata field, V? filterValue) {

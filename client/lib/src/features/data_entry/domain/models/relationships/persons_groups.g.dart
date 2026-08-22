@@ -1,5 +1,8 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// coverage:ignore-file
+// ignore_for_file: type=lint
+
 part of 'persons_groups.dart';
 
 // **************************************************************************
@@ -8,9 +11,6 @@ part of 'persons_groups.dart';
 
 class PersonsGroupsFields {
   static final PersonsGroupsFields _instance = PersonsGroupsFields._();
-  factory PersonsGroupsFields() => _instance;
-  PersonsGroupsFields._();
-
   final FieldMetadata<Person> person = FieldMetadata<Person>(
     getValue: (obj) => obj is PersonsGroups ? obj.person : null,
     parentType: PersonsGroups,
@@ -59,6 +59,8 @@ class PersonsGroupsFields {
     'personId': personId,
     'groupId': groupId,
   };
+  factory PersonsGroupsFields() => _instance;
+  PersonsGroupsFields._();
 }
 
 // **************************************************************************

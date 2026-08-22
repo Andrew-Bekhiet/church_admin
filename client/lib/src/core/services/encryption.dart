@@ -1,2 +1,2 @@
+export 'encryption/church_admin_sembast_codec.dart';
 export 'encryption/encryption_service.dart';
-export 'encryption/sembast_codec.dart';

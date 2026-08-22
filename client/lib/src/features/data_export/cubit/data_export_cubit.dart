@@ -8,7 +8,7 @@ import 'package:open_file/open_file.dart';
 import 'package:rxdart/rxdart.dart';
 
 class DataExportCubit extends Cubit<DataExportState> {
-  late final BehaviorSubject<String?> _searchSubject = BehaviorSubject.seeded(
+  late final BehaviorSubject<String?> searchController = BehaviorSubject.seeded(
     null,
   );
 
@@ -42,8 +42,6 @@ class DataExportCubit extends Cubit<DataExportState> {
   final AuthBloc _authBloc;
   final ExportOperationsStorage _exportOperationsStorage;
   final DatabaseService _databaseService;
-
-  StreamController<String?> get searchController => _searchSubject;
 
   DataExportCubit({
     FunctionsService? functionsService,
@@ -105,9 +103,9 @@ class DataExportCubit extends Cubit<DataExportState> {
 
     _areasController ??= ViewableObjectListController(
       selectionController: _areasSelectionController,
-      filterStream: _searchSubject.stream,
+      filterStream: searchController.stream,
       objectsPaginatableStream: _databaseService.areas.streamAll(
-        searchQuery: _searchSubject.stream,
+        searchQuery: searchController.stream,
         where: userAdminOnStream?.map(
           (adminOn) => [
             Filter(
@@ -122,9 +120,9 @@ class DataExportCubit extends Cubit<DataExportState> {
 
     _servicesController ??= ViewableObjectListController(
       selectionController: _servicesSelectionController,
-      filterStream: _searchSubject.stream,
+      filterStream: searchController.stream,
       objectsPaginatableStream: _databaseService.services.streamAll(
-        searchQuery: _searchSubject.stream,
+        searchQuery: searchController.stream,
         where: userAdminOnStream?.map(
           (adminOn) => [
             Filter(
@@ -139,9 +137,9 @@ class DataExportCubit extends Cubit<DataExportState> {
 
     _classesController ??= ViewableObjectListController(
       selectionController: _classesSelectionController,
-      filterStream: _searchSubject.stream,
+      filterStream: searchController.stream,
       objectsPaginatableStream: _databaseService.classes.streamAll(
-        searchQuery: _searchSubject.stream,
+        searchQuery: searchController.stream,
         where: userAdminOnStream?.map(
           (adminOn) => [
             Filter(
@@ -156,9 +154,9 @@ class DataExportCubit extends Cubit<DataExportState> {
 
     _groupsController ??= ViewableObjectListController(
       selectionController: _groupsSelectionController,
-      filterStream: _searchSubject.stream,
+      filterStream: searchController.stream,
       objectsPaginatableStream: _databaseService.groups.streamAll(
-        searchQuery: _searchSubject.stream,
+        searchQuery: searchController.stream,
         where: userAdminOnStream?.map(
           (adminOn) => [
             Filter(
@@ -204,6 +202,7 @@ class DataExportCubit extends Cubit<DataExportState> {
       _emitListenerState(
         const DataExportMessage('اختر عنصرًا واحدًا على الأقل للمتابعة'),
       );
+
       return;
     }
 
@@ -246,7 +245,7 @@ class DataExportCubit extends Cubit<DataExportState> {
         _servicesController?.dispose(),
         _classesController?.dispose(),
         _groupsController?.dispose(),
-        _searchSubject.close(),
+        searchController.close(),
       ].nonNulls,
     );
 

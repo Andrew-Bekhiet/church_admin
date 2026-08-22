@@ -24,6 +24,10 @@ class _EditGroupState extends State<EditGroup> {
   );
   String? _defaultMeetingName;
 
+  Group get initialGroup => _controller.initialObject!;
+  Group get newGroup => _controller.newObject;
+  set newGroup(Group a) => _controller.newObject = a;
+
   @override
   void initState() {
     super.initState();
@@ -56,16 +60,6 @@ class _EditGroupState extends State<EditGroup> {
     );
   }
 
-  Group get initialGroup => _controller.initialObject!;
-  Group get newGroup => _controller.newObject;
-  set newGroup(Group a) => _controller.newObject = a;
-
-  @override
-  void dispose() {
-    _groupNameController.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return EditObjectData(
@@ -94,15 +88,9 @@ class _EditGroupState extends State<EditGroup> {
               serviceId: value?.id,
             ),
             validator: (value) => value == null ? 'يجب اختيار الخدمة' : null,
-            builder: (context, state) {
-              return state.value != null
-                  ? IgnorePointer(
-                      child: ViewableObjectWidget(
-                        state.value!,
-                        isDense: true,
-                      ),
-                    )
-                  : null;
+            builder: (context, state) => switch (state.value) {
+              final service? => ObjectSelectionPreview(service),
+              null => null,
             },
           ),
           DateTimeRangeField(
@@ -126,6 +114,12 @@ class _EditGroupState extends State<EditGroup> {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _groupNameController.dispose();
+    super.dispose();
   }
 
   Future<Group> _createGroup(Group newObject) async {

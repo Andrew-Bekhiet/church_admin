@@ -3,28 +3,27 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 class TappableFormField<T> extends StatefulWidget {
+  final T initialValue;
+  final String? labelText;
+  final Widget? Function(BuildContext, FormFieldState<T>) builder;
+  final AutovalidateMode? autovalidateMode;
+  final FocusNode? focusNode;
   const TappableFormField({
     required this.onTap,
     required this.initialValue,
     required this.builder,
-    super.key,
     this.labelText,
     this.decoration,
     this.onSaved,
     this.validator,
     this.autovalidateMode,
     this.focusNode,
+    super.key,
   }) : assert(labelText != null || decoration != null);
-
-  final T initialValue;
   final Future<void>? Function(FormFieldState<T>)? onTap;
-  final String? labelText;
-  final Widget? Function(BuildContext, FormFieldState<T>) builder;
   final String? Function(T?)? validator;
   final void Function(T?)? onSaved;
   final InputDecoration Function(BuildContext, FormFieldState<T>)? decoration;
-  final AutovalidateMode? autovalidateMode;
-  final FocusNode? focusNode;
 
   @override
   State<TappableFormField<T>> createState() => _TappableFormFieldState<T>();
@@ -94,7 +93,7 @@ class _TappableFormFieldState<T> extends State<TappableFormField<T>> {
 
   @override
   void dispose() {
-    super.dispose();
     if (widget.focusNode == null) _effectiveFocusNode.dispose();
+    super.dispose();
   }
 }

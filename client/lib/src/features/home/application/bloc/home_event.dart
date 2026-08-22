@@ -2,10 +2,9 @@ import 'package:church_admin/church_admin.dart';
 import 'package:equatable/equatable.dart';
 
 sealed class HomeEvent extends Equatable {
-  const HomeEvent();
-
   @override
   List<Object?> get props => [];
+  const HomeEvent();
 }
 
 final class LoadHomeSummaryAndTabs extends HomeEvent {
@@ -32,17 +31,17 @@ final class HomeSwitchPageListType extends HomeEvent {
   final int pageIndex;
   final ViewableObjectListType listType;
 
-  const HomeSwitchPageListType(this.pageIndex, this.listType);
-
   @override
   List<Object?> get props => [pageIndex, listType];
+
+  const HomeSwitchPageListType(this.pageIndex, this.listType);
 }
 
 final class HomePageChange extends HomeEvent {
   final double page;
 
-  const HomePageChange(this.page);
-
   @override
   List<Object?> get props => [page];
+
+  const HomePageChange(this.page);
 }

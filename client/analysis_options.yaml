@@ -1,18 +1,53 @@
-include: package:very_good_analysis/analysis_options.yaml
+include: package:solid_lints/analysis_options.yaml
+
+plugins:
+  solid_lints: 1.0.0-dev.1
+
+solid_lints:
+  diagnostics:
+    avoid_unused_parameters: false
+    avoid_non_null_assertion: false
+    avoid_late_keyword: false
+    cyclomatic_complexity: false
+    member_ordering:
+      order:
+        - static_getters_setters
+        - static_fields
+        - static_methods
+        - fields
+        - getters_setters
+        - constructors
+        - methods
+      widgets_order:
+        - init_state_method
+        - did_change_dependencies_method
+        - did_update_widget_method
+        - build_method
+        - deactivate_method
+        - dispose_method
+    named_parameters_ordering:
+      order:
+        - required
+        - required_super
+        - default
+        - nullable
+        - super
+    number_of_parameters: false
+    no_magic_number: false
+
 analyzer:
   language:
     strict-casts: false
     strict-inference: false
     strict-raw-types: false
   exclude:
-    - build/**
-    - lib/**.freezed.dart
-    - lib/**.g.dart
-    - lib/**/__generated__/*
-  errors:
-    duplicate_ignore: false
-    invalid_annotation_target: false
-    undefined_hidden_name: false
+    - "build/**"
+    - "**.g.dart"
+    - "**.freezed.dart"
+    - "**.gr.dart"
+    - "**.gql.dart"
+    - "**.graphql.dart"
+    - "**/__generated__/**"
 linter:
   rules:
     # Disabled

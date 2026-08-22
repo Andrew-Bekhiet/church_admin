@@ -8,6 +8,8 @@ import 'package:path_provider/path_provider.dart' as p;
 import 'package:rxdart/rxdart.dart';
 
 class ExportOperationsStorage {
+  static ExportOperationsStorage get I =>
+      globalProviderContainer.read(_exportOperationsStorageProvider);
   static final _exportOperationsStorageProvider =
       Provider<ExportOperationsStorage>(
         (ref) => ExportOperationsStorage(
@@ -15,9 +17,6 @@ class ExportOperationsStorage {
           fileSystem: ref.read(fileSystemProvider),
         ),
       );
-
-  static ExportOperationsStorage get I =>
-      globalProviderContainer.read(_exportOperationsStorageProvider);
 
   final Dio _dioClient;
   final FileSystem _fileSystem;

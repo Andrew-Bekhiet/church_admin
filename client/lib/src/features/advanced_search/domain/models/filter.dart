@@ -12,6 +12,9 @@ class Filter<T extends Object> with Equatable {
 
   String get fieldLabel => field.label;
 
+  @override
+  List<Object?> get props => [field, operator, value];
+
   const Filter(this.field, this.operator, this.value);
 
   factory Filter.fromJson(Json json) {
@@ -37,9 +40,6 @@ class Filter<T extends Object> with Equatable {
 
     return Filter<T>(field, operator, value);
   }
-
-  @override
-  List<Object?> get props => [field, operator, value];
 
   Filter copyWith({
     Object? field = _undefined,

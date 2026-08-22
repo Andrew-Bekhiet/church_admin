@@ -11,8 +11,8 @@ class PersonAttendanceAnalysisSection extends StatelessWidget {
   const PersonAttendanceAnalysisSection({
     required this.personId,
     required this.options,
-    this.asServant,
     this.showTime = true,
+    this.asServant,
     super.key,
   });
 

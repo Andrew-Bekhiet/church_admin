@@ -1,5 +1,8 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// coverage:ignore-file
+// ignore_for_file: type=lint
+
 part of 'families_families.dart';
 
 // **************************************************************************
@@ -8,9 +11,6 @@ part of 'families_families.dart';
 
 class FamiliesFamiliesFields {
   static final FamiliesFamiliesFields _instance = FamiliesFamiliesFields._();
-  factory FamiliesFamiliesFields() => _instance;
-  FamiliesFamiliesFields._();
-
   final FieldMetadata<Family> parent = FieldMetadata<Family>(
     getValue: (obj) => obj is FamiliesFamilies ? obj.parent : null,
     parentType: FamiliesFamilies,
@@ -59,6 +59,8 @@ class FamiliesFamiliesFields {
     'parentFamilyId': parentFamilyId,
     'childFamilyId': childFamilyId,
   };
+  factory FamiliesFamiliesFields() => _instance;
+  FamiliesFamiliesFields._();
 }
 
 // **************************************************************************

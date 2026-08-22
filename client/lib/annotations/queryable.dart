@@ -1,6 +1,6 @@
 import 'package:meta/meta_meta.dart';
 
-@Target({TargetKind.classType})
+@Target({TargetKind.classType, TargetKind.enumType})
 final class Queryable {
   final Map<String, String> labelsOverrides;
   final List<String> ignoreFields;

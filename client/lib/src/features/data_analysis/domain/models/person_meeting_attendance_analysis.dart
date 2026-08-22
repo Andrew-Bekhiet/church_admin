@@ -16,6 +16,8 @@ class PersonMeetingAttendanceAnalysis {
 
   final Set<DateTime> attendedDays;
 
+  late final AttendanceStreak _longestStreak = _computeLongestStreak();
+
   int get heldCount => heldDays.length;
 
   int get attendedCount => heldDays.where(attendedDays.contains).length;
@@ -47,10 +49,9 @@ class PersonMeetingAttendanceAnalysis {
     if (streak == 0) return null;
 
     final streakDays = heldDays.sublist(heldDays.length - streak);
+
     return DateTimeRange(start: streakDays.first, end: streakDays.last);
   }
-
-  late final AttendanceStreak _longestStreak = _computeLongestStreak();
 
   int get longestStreak => _longestStreak.length;
 

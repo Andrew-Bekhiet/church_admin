@@ -3,9 +3,8 @@ import 'package:meta/meta.dart';
 
 @immutable
 abstract class SerializableExtra implements ToJson {
-  const SerializableExtra();
-
   String get typeName;
+  const SerializableExtra();
 
   @override
   Json toJson();

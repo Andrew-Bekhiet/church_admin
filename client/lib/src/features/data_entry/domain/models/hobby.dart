@@ -21,6 +21,9 @@ class Hobby extends ViewableWithID with _$Hobby implements SerializableExtra {
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
   final Color? color;
 
+  @override
+  String get typeName => AdvancedQueriesMetadata().hobby.name;
+
   const Hobby({
     required this.id,
     required this.name,
@@ -31,7 +34,4 @@ class Hobby extends ViewableWithID with _$Hobby implements SerializableExtra {
 
   @override
   Json toJson() => _$HobbyToJson(this);
-
-  @override
-  String get typeName => AdvancedQueriesMetadata().hobby.name;
 }

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 
 class HomeModeSection extends StatelessWidget {
+  final void Function() onTap;
+  final String title;
+  final String text;
+  final int? textMaxLines;
   const HomeModeSection({
     required this.onTap,
     required this.title,
@@ -8,11 +12,6 @@ class HomeModeSection extends StatelessWidget {
     this.textMaxLines,
     super.key,
   });
-
-  final void Function() onTap;
-  final String title;
-  final String text;
-  final int? textMaxLines;
 
   @override
   Widget build(BuildContext context) {

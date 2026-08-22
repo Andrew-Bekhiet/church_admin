@@ -5,7 +5,6 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:file/file.dart' show FileSystem;
 import 'package:file/local.dart';
-import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -24,7 +23,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:riverpod/riverpod.dart';
-import 'package:rxdart/rxdart.dart' hide Notification;
+import 'package:rxdart/rxdart.dart';
 
 ProviderContainer? _globalProviderContainer;
 
@@ -175,7 +174,6 @@ final userPreferencesServiceProvider = Provider<UserPreferencesService>(
   ),
 );
 
-final firebaseAppCheckProvider = Provider((_) => FirebaseAppCheck.instance);
 final firebaseAuthProvider = Provider((_) => FirebaseAuth.instance);
 final firebaseDatabaseProvider = Provider((_) => FirebaseDatabase.instance);
 final firebaseFunctionsProvider = Provider(

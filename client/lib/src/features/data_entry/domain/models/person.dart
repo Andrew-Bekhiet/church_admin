@@ -37,8 +37,6 @@ class Person extends ViewableWithIDAndImage
   @override
   final Address? address;
 
-  Point? get geolocation => address?.geolocation;
-
   @override
   final String? mainPhone;
 
@@ -248,17 +246,31 @@ class Person extends ViewableWithIDAndImage
   @JsonKey(includeToJson: false)
   final bool userCanEdit;
 
+  Point? get geolocation => address?.geolocation;
+
+  bool get isStudent => workStatus == WorkStatus.student;
+
+  @override
+  String get typeName => AdvancedQueriesMetadata().person.name;
+  @override
+  ObjectImageInfo get imageInfo =>
+      FunctionsObjectImageInfo('persons', id, lastUpdatedTime: photoUpdatedAt);
+
   Person({
     required this.id,
     required this.name,
+    this.otherPhones = const {},
+    this.gender = true,
+    this.isShammas = false,
+    this.workStatus = WorkStatus.employed,
+    this.martialStatus = MartialStatus.single,
+    this.isServant = false,
+    this.userCanEdit = false,
     this.nationalId,
     this.address,
     this.mainPhone,
-    this.otherPhones = const {},
     this.birthdate,
     this.birthday,
-    this.gender = true,
-    this.isShammas = false,
     this.shammasLevelId,
     this.shammasLevel,
     this.school,
@@ -269,18 +281,15 @@ class Person extends ViewableWithIDAndImage
     this.churchId,
     this.father,
     this.fatherId,
-    this.workStatus = WorkStatus.employed,
     this.job,
     this.jobId,
     this.jobDescription,
     this.qualification,
     this.qualificationId,
-    this.martialStatus = MartialStatus.single,
     this.personType,
     this.personTypeId,
     this.state,
     this.stateId,
-    this.isServant = false,
     this.servingChurch,
     this.serviceType,
     this.notes,
@@ -317,7 +326,6 @@ class Person extends ViewableWithIDAndImage
     this.callHistoryAggregate,
     this.visitHistoryAggregate,
     this.editHistoryAggregate,
-    this.userCanEdit = false,
   }) : lastConfession =
            lastConfession ??
            confessionHistoryAggregate?.aggregate.max ??
@@ -345,17 +353,8 @@ class Person extends ViewableWithIDAndImage
 
   factory Person.fromJson(Map<String, Object?> json) => _$PersonFromJson(json);
 
-  bool get isStudent => workStatus == WorkStatus.student;
-
-  @override
-  String get typeName => AdvancedQueriesMetadata().person.name;
-
   @override
   Json toJson() => _$PersonToJson(this);
-
-  @override
-  ObjectImageInfo get imageInfo =>
-      FunctionsObjectImageInfo('persons', id, lastUpdatedTime: photoUpdatedAt);
 
   bool spiritDataUpToDate() {
     final thirtyDaysAgo = DateTime.now().subtract(const Duration(days: 60));
@@ -668,8 +667,6 @@ class Person extends ViewableWithIDAndImage
 }
 
 class PersonFields extends _PersonFields {
-  PersonFields();
-
   FieldMetadata<Area> get area => address.redirectTo(
     AddressFields().area,
     isExpandable: false,
@@ -747,6 +744,8 @@ class PersonFields extends _PersonFields {
       for (final field in allFields) field.name: field,
     };
   }
+
+  PersonFields();
 }
 
 List<Class>? personsClassesFromJson(List? data) =>

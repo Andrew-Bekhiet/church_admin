@@ -1,5 +1,8 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// coverage:ignore-file
+// ignore_for_file: type=lint
+
 part of 'class.dart';
 
 // **************************************************************************
@@ -7,8 +10,6 @@ part of 'class.dart';
 // **************************************************************************
 
 class _ClassFields {
-  _ClassFields();
-
   final FieldMetadata<Class> id = FieldMetadata<Class>(
     getValue: (obj) => obj is Class ? obj.id : null,
     parentType: Class,
@@ -144,6 +145,8 @@ class _ClassFields {
     'lastEdit': lastEdit,
     'adminUsers': adminUsers,
   };
+
+  _ClassFields();
 }
 
 // **************************************************************************
@@ -153,6 +156,7 @@ class _ClassFields {
 Class _$ClassFromJson(Map json) => Class(
   id: json['id'] as String? ?? '',
   name: json['name'] as String? ?? '',
+  userCanEdit: json['userCanEdit'] as bool? ?? false,
   color: colorFromInt((json['color'] as num?)?.toInt()),
   photoUpdatedAt: _$JsonConverterFromJson<String, DateTime>(
     json['photoUpdatedAt'],
@@ -174,7 +178,6 @@ Class _$ClassFromJson(Map json) => Class(
           Map<String, Object?>.from(json['lastEdit'] as Map),
         ),
   adminUsers: adminUsersFromJson(json['adminUsers'] as List?),
-  userCanEdit: json['userCanEdit'] as bool? ?? false,
 );
 
 Map<String, dynamic> _$ClassToJson(Class instance) => <String, dynamic>{

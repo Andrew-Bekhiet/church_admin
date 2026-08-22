@@ -6,10 +6,9 @@ part 'view_family_route.g.dart';
 
 @TypedGoRoute<ViewFamilyRoute>(path: '/view_family')
 class ViewFamilyRoute extends GoRouteData with $ViewFamilyRoute {
-  const ViewFamilyRoute({required this.id, this.$extra});
-
   final String id;
   final Family? $extra;
+  const ViewFamilyRoute({required this.id, this.$extra});
 
   @override
   Widget build(BuildContext context, GoRouterState state) {

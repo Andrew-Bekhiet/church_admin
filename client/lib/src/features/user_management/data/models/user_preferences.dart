@@ -32,8 +32,8 @@ class UserPreferences with _$UserPreferences implements ToJson {
   const UserPreferences({
     required this.uid,
     this.orderByPreferences = const {},
-    this.darkTheme,
     this.greatFeastTheme = true,
+    this.darkTheme,
     this.lastHomeMode,
     this.updatedAt,
   });

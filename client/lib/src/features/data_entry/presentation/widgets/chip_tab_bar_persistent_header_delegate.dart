@@ -3,15 +3,9 @@ import 'package:flutter/material.dart';
 
 class ChipTabBarPersistentHeaderDelegate
     extends SliverPersistentHeaderDelegate {
-  ChipTabBarPersistentHeaderDelegate({
-    required this.tabs,
-    this.filtersWidget,
-    ViewableObjectService? viewableObjectService,
-  }) : viewableObjectService = viewableObjectService ?? ViewableObjectService.I;
-
-  final List<({String label, IconData icon})> tabs;
   final Widget? filtersWidget;
   final ViewableObjectService viewableObjectService;
+  final List<({String label, IconData icon})> tabs;
 
   bool get _hasFilters => filtersWidget != null;
 
@@ -20,6 +14,12 @@ class ChipTabBarPersistentHeaderDelegate
 
   @override
   double get maxExtent => kToolbarHeight * 1.2;
+
+  ChipTabBarPersistentHeaderDelegate({
+    required this.tabs,
+    this.filtersWidget,
+    ViewableObjectService? viewableObjectService,
+  }) : viewableObjectService = viewableObjectService ?? ViewableObjectService.I;
 
   @override
   Widget build(

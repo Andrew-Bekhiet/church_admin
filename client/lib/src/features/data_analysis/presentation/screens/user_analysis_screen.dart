@@ -1,10 +1,10 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 
-class UserAnalysis extends StatelessWidget {
+class UserAnalysisScreen extends StatelessWidget {
   final User user;
 
-  const UserAnalysis({required this.user, super.key});
+  const UserAnalysisScreen({required this.user, super.key});
 
   @override
   Widget build(BuildContext context) {

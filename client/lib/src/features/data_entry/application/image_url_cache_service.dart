@@ -9,13 +9,13 @@ class ImageUrlCacheService {
   static ImageUrlCacheService get I =>
       globalProviderContainer.read(imageUrlCacheServiceProvider);
 
+  final SyncKVStore<String> box;
+  final BaseCacheManager cacheManager;
+
   ImageUrlCacheService({
     required this.box,
     required this.cacheManager,
   });
-
-  final SyncKVStore<String> box;
-  final BaseCacheManager cacheManager;
 
   Future<File> getImageFile(ObjectImageInfo imageInfo) async {
     return cacheManager.getSingleFile(
@@ -70,6 +70,7 @@ class ImageUrlCacheService {
 
   Future<bool> isUrlFileCachedAndValid(String cacheKey) async {
     final cacheFile = await cacheManager.getFileFromCache(cacheKey);
+
     return cacheFile != null && cacheFile.validTill.isAfter(DateTime.now());
   }
 

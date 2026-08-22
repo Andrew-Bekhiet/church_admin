@@ -19,10 +19,10 @@ class GqlKvStore extends gql.Store {
   GqlKvStore(this._storage);
 
   @override
-  void delete(String dataId) => _storage.delete(dataId);
+  Map<String, dynamic>? get(String dataId) => _storage.get(dataId);
 
   @override
-  Map<String, dynamic>? get(String dataId) => _storage.get(dataId);
+  void delete(String dataId) => _storage.delete(dataId);
 
   @override
   void put(String dataId, Map<String, dynamic>? value) =>

@@ -1,5 +1,8 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// coverage:ignore-file
+// ignore_for_file: type=lint
+
 part of 'user.dart';
 
 // **************************************************************************
@@ -7,8 +10,6 @@ part of 'user.dart';
 // **************************************************************************
 
 class _UserFields {
-  _UserFields();
-
   final FieldMetadata<String> uid = FieldMetadata<String>(
     getValue: (obj) => obj is User ? obj.uid : null,
     parentType: User,
@@ -138,6 +139,8 @@ class _UserFields {
     'person': person,
     'currentUserCanManageThisUser': currentUserCanManageThisUser,
   };
+
+  _UserFields();
 }
 
 // **************************************************************************
@@ -147,6 +150,16 @@ class _UserFields {
 User _$UserFromJson(Map json) => User(
   uid: json['uid'] as String? ?? '',
   name: json['name'] as String? ?? '',
+  permissions: json['permissions'] == null
+      ? const PermissionsSet.empty()
+      : permissionsSetFromJson(json['permissions']),
+  fcmTokens:
+      (json['fcmTokens'] as List<dynamic>?)
+          ?.map((e) => FcmToken.fromJson(Map<String, Object?>.from(e as Map)))
+          .toList() ??
+      [],
+  currentUserCanManageThisUser:
+      json['currentUserCanManageThisUser'] as bool? ?? false,
   email: json['email'] as String?,
   photoUpdatedAt: _$JsonConverterFromJson<String, DateTime>(
     json['photoUpdatedAt'],
@@ -156,9 +169,6 @@ User _$UserFromJson(Map json) => User(
   adminOn: (json['adminOn'] as List<dynamic>?)
       ?.map((e) => AdminOnData.fromJson(Map<String, Object?>.from(e as Map)))
       .toList(),
-  permissions: json['permissions'] == null
-      ? const PermissionsSet.empty()
-      : permissionsSetFromJson(json['permissions']),
   authId: json['authId'] as String?,
   lastEdit: json['lastEdit'] == null
       ? null
@@ -173,11 +183,6 @@ User _$UserFromJson(Map json) => User(
       : UserPreferences.fromJson(
           Map<String, Object?>.from(json['preferences'] as Map),
         ),
-  fcmTokens:
-      (json['fcmTokens'] as List<dynamic>?)
-          ?.map((e) => FcmToken.fromJson(Map<String, Object?>.from(e as Map)))
-          .toList() ??
-      [],
   servicesHistory: (json['servicesHistory'] as List<dynamic>?)
       ?.map((e) => AdminOnData.fromJson(Map<String, Object?>.from(e as Map)))
       .toList(),
@@ -187,8 +192,6 @@ User _$UserFromJson(Map json) => User(
   groupsHistory: (json['groupsHistory'] as List<dynamic>?)
       ?.map((e) => AdminOnData.fromJson(Map<String, Object?>.from(e as Map)))
       .toList(),
-  currentUserCanManageThisUser:
-      json['currentUserCanManageThisUser'] as bool? ?? false,
 );
 
 Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{

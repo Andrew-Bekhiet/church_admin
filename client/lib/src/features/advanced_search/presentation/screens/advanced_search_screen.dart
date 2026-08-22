@@ -12,9 +12,9 @@ class AdvancedSearchScreen extends StatefulWidget {
   final bool autoExecuteInitialQuery;
 
   const AdvancedSearchScreen({
-    super.key,
-    this.initialQuery,
     this.autoExecuteInitialQuery = false,
+    this.initialQuery,
+    super.key,
   });
 
   @override
@@ -231,13 +231,12 @@ class _AdvancedSearchScreenState extends State<AdvancedSearchScreen> {
 }
 
 class _QueryLimitWidget extends StatelessWidget {
+  final void Function(int?) onChangeLimit;
+  final Stream<int?> limitStream;
   const _QueryLimitWidget({
     required this.onChangeLimit,
     required this.limitStream,
   });
-
-  final void Function(int?) onChangeLimit;
-  final Stream<int?> limitStream;
 
   @override
   Widget build(BuildContext context) {

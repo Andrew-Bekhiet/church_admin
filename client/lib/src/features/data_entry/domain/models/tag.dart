@@ -21,6 +21,9 @@ class Tag extends ViewableWithID with _$Tag implements SerializableExtra {
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
   final Color? color;
 
+  @override
+  String get typeName => AdvancedQueriesMetadata().tag.name;
+
   const Tag({
     required this.id,
     required this.name,
@@ -31,7 +34,4 @@ class Tag extends ViewableWithID with _$Tag implements SerializableExtra {
 
   @override
   Json toJson() => _$TagToJson(this);
-
-  @override
-  String get typeName => AdvancedQueriesMetadata().tag.name;
 }

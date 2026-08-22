@@ -72,6 +72,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   late final PageController _pageController;
   final Map<Type, ViewableObjectListController> _controllersToDispose = {};
+
   final Map<
     Type,
     ({Stream<List<Filter>>? where, Stream<List<OrderBy>>? orderBy})
@@ -203,11 +204,12 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     _pageController.addListener(
       _pageControllerListener = () {
         if (isClosed || !_pageController.hasClients) return;
-
-        if (_pageController.page != null &&
-            _pageController.page != state.currentPage) {
-          add(HomePageChange(_pageController.page!));
+        if (_pageController.page == null ||
+            _pageController.page == state.currentPage) {
+          return;
         }
+
+        add(HomePageChange(_pageController.page!));
       },
     );
 

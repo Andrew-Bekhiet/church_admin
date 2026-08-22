@@ -17,24 +17,24 @@ class LocalAuthService with WidgetsBindingObserver {
   final LocalAuthentication _localAuthPlugin;
 
   final NotificationsService _notificationsService;
-
-  bool get shouldAuthenticate => _shouldAuthenticate;
   bool _shouldAuthenticate = false;
 
   final Map<String, bool> _oneTimeAuthForPath = {};
 
   Timer? _timer;
   Completer<bool>? _localAuthCompleter;
-
-  Stream<void> get refreshUIStream => _refreshUI.stream;
   final StreamController<void> _refreshUI = StreamController.broadcast()
     ..add(null);
 
+  bool get shouldAuthenticate => _shouldAuthenticate;
+
+  Stream<void> get refreshUIStream => _refreshUI.stream;
+
   LocalAuthService({
     required this._localAuthPlugin,
+    this.timeToReauth = const Duration(seconds: 30),
     CurrentPlatformService? currentPlatformService,
     NotificationsService? notificationService,
-    this.timeToReauth = const Duration(seconds: 30),
   }) : _notificationsService = notificationService ?? NotificationsService.I,
        _currentPlatformService =
            currentPlatformService ?? CurrentPlatformService.I {
@@ -47,9 +47,9 @@ class LocalAuthService with WidgetsBindingObserver {
 
   LocalAuthService.noInitialAuth({
     required this._localAuthPlugin,
+    this.timeToReauth = const Duration(seconds: 30),
     CurrentPlatformService? currentPlatformService,
     NotificationsService? notificationService,
-    this.timeToReauth = const Duration(seconds: 30),
   }) : _notificationsService = notificationService ?? NotificationsService.I,
        _currentPlatformService =
            currentPlatformService ?? CurrentPlatformService.I {
@@ -63,9 +63,11 @@ class LocalAuthService with WidgetsBindingObserver {
     final auth = _oneTimeAuthForPath[path];
     if (auth == null) {
       _oneTimeAuthForPath[path] = false;
+
       return false;
     } else {
       _oneTimeAuthForPath.remove(path);
+
       return auth;
     }
   }

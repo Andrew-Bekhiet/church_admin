@@ -5,38 +5,6 @@ import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
 import 'package:rxdart/rxdart.dart';
 
-/// A base class that provides pagination functionality for streams of items.
-///
-/// This abstract class defines the core functionality needed to implement a paginated stream,
-/// where data is loaded and listened to in batches (pages) as needed.
-abstract class PaginatableStreamBase<T> extends Stream<List<T>> {
-  PaginatableStreamBase();
-
-  int get pageSize;
-
-  bool get hasMore;
-
-  int get currentPageIndex;
-
-  List<T> get currentItems;
-
-  T? get currentCursor;
-
-  int? get currentTotalCount;
-
-  bool get isLoading;
-
-  Stream<bool> get onLoadingChanged;
-
-  Stream<int?> get totalCountStream;
-
-  Future<void> listenToPage(int pageIndex);
-
-  Future<void> listenToNextPage() => listenToPage(currentPageIndex + 1);
-
-  Future<void> dispose();
-}
-
 /// A concrete implementation of [PaginatableStreamBase<T, P>] that handles pagination logic.
 ///
 /// This class manages a realtime list of items that are loaded in pages, using a factory function
@@ -61,6 +29,16 @@ abstract class PaginatableStreamBase<T> extends Stream<List<T>> {
 class PaginatableStream<T, P> extends PaginatableStreamBase<T> {
   static const int defaultPageSize = 100;
 
+  static PaginatableStream<T, String?> withSearch<T>({
+    required PaginatableStreamFactory<T, String?> factory,
+    required Stream<String?> searchStream,
+    int pageSize = defaultPageSize,
+  }) => PaginatableStream(
+    factory: factory,
+    parametersStream: searchStream,
+    pageSize: pageSize,
+  );
+
   @override
   final int pageSize;
 
@@ -70,6 +48,34 @@ class PaginatableStream<T, P> extends PaginatableStreamBase<T> {
   final BehaviorSubject<int> _pageIndex = BehaviorSubject.seeded(0);
 
   final BehaviorSubject<bool> _onLoadingChanged = BehaviorSubject.seeded(true);
+
+  @override
+  bool get hasMore => _subject.valueOrNull?.hasMore ?? false;
+
+  @override
+  int get currentPageIndex => _pageIndex.value;
+
+  @override
+  List<T> get currentItems => _subject.valueOrNull?.items ?? [];
+
+  @override
+  T? get currentCursor => _subject.valueOrNull?.cursor;
+
+  @override
+  int? get currentTotalCount => _subject.valueOrNull?.totalCount;
+
+  @override
+  bool get isLoading => _onLoadingChanged.value;
+
+  @override
+  Stream<bool> get onLoadingChanged => _onLoadingChanged.stream.distinct();
+
+  @override
+  Stream<int?> get totalCountStream =>
+      _subject.map((e) => e.totalCount).distinct();
+
+  @override
+  bool get isBroadcast => _subject.isBroadcast;
 
   PaginatableStream({
     required Stream<P> parametersStream,
@@ -81,6 +87,7 @@ class PaginatableStream<T, P> extends PaginatableStreamBase<T> {
           (previousValue, value, i) {
             if (i != 0 && previousValue?.value != value) {
               unawaited(listenToPage(0));
+
               return (value: value, changed: true);
             }
 
@@ -120,16 +127,6 @@ class PaginatableStream<T, P> extends PaginatableStreamBase<T> {
           onDone: _subject.close,
         );
   }
-
-  static PaginatableStream<T, String?> withSearch<T>({
-    required PaginatableStreamFactory<T, String?> factory,
-    required Stream<String?> searchStream,
-    int pageSize = defaultPageSize,
-  }) => PaginatableStream(
-    factory: factory,
-    parametersStream: searchStream,
-    pageSize: pageSize,
-  );
 
   Stream<
     ({int pageIndex, bool paramChanged, PaginatableStreamResponse<T> response})
@@ -192,31 +189,6 @@ class PaginatableStream<T, P> extends PaginatableStreamBase<T> {
   }
 
   @override
-  bool get hasMore => _subject.valueOrNull?.hasMore ?? false;
-
-  @override
-  int get currentPageIndex => _pageIndex.value;
-
-  @override
-  List<T> get currentItems => _subject.valueOrNull?.items ?? [];
-
-  @override
-  T? get currentCursor => _subject.valueOrNull?.cursor;
-
-  @override
-  int? get currentTotalCount => _subject.valueOrNull?.totalCount;
-
-  @override
-  bool get isLoading => _onLoadingChanged.value;
-
-  @override
-  Stream<bool> get onLoadingChanged => _onLoadingChanged.stream.distinct();
-
-  @override
-  Stream<int?> get totalCountStream =>
-      _subject.map((e) => e.totalCount).distinct();
-
-  @override
   Future<void> listenToPage(int pageIndex) async {
     RangeError.checkNotNegative(pageIndex);
 
@@ -226,9 +198,6 @@ class PaginatableStream<T, P> extends PaginatableStreamBase<T> {
     _onLoadingChanged.add(true);
     await _onLoadingChanged.distinct().skip(1).firstWhere((e) => !e);
   }
-
-  @override
-  bool get isBroadcast => _subject.isBroadcast;
 
   @override
   Stream<List<T>> asBroadcastStream({
@@ -260,6 +229,38 @@ class PaginatableStream<T, P> extends PaginatableStreamBase<T> {
     await _subjectSubscription.cancel();
     await _subject.close();
   }
+}
+
+/// A base class that provides pagination functionality for streams of items.
+///
+/// This abstract class defines the core functionality needed to implement a paginated stream,
+/// where data is loaded and listened to in batches (pages) as needed.
+abstract class PaginatableStreamBase<T> extends Stream<List<T>> {
+  int get pageSize;
+
+  bool get hasMore;
+
+  int get currentPageIndex;
+
+  List<T> get currentItems;
+
+  T? get currentCursor;
+
+  int? get currentTotalCount;
+
+  bool get isLoading;
+
+  Stream<bool> get onLoadingChanged;
+
+  Stream<int?> get totalCountStream;
+
+  PaginatableStreamBase();
+
+  Future<void> listenToPage(int pageIndex);
+
+  Future<void> listenToNextPage() => listenToPage(currentPageIndex + 1);
+
+  Future<void> dispose();
 }
 
 typedef PaginatableStreamFactory<T, P> =

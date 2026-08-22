@@ -3,7 +3,7 @@
 
 import 'package:flutter/material.dart';
 
-extension GetCopticDate on DateTime {
+extension ToCopticDate on DateTime {
   ({int year, int month, int day}) toCopticDate() {
     final DateTime gregorianDate = DateUtils.dateOnly(this);
     // Constants
@@ -74,6 +74,7 @@ int _calculateStartOfYearDays(int year) {
   }
 
   final ret = relativeYear * 365 + leapYears;
+
   return ret +
       (365 - 112); // Adjust for difference between 1687-01-01 and 1686-04-23
 }

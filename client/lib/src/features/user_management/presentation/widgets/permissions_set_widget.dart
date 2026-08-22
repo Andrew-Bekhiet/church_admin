@@ -2,12 +2,11 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 
 class PermissionsSetWidget extends StatelessWidget {
+  final PermissionsSet permissions;
   const PermissionsSetWidget({
     required this.permissions,
     super.key,
   });
-
-  final PermissionsSet permissions;
 
   @override
   Widget build(BuildContext context) {

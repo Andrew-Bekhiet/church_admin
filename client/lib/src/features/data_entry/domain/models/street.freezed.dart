@@ -83,6 +83,7 @@ abstract mixin class $StreetCopyWith<$Res> {
   $Res call({
     String id,
     String name,
+    bool userCanEdit,
     Line? line,
     Color? color,
     DateTime? photoUpdatedAt,
@@ -90,7 +91,6 @@ abstract mixin class $StreetCopyWith<$Res> {
     List<Area>? areas,
     LastRecordedByInfo? lastVisit,
     LastRecordedByInfo? lastEdit,
-    bool userCanEdit,
   });
 }
 
@@ -108,6 +108,7 @@ class _$StreetCopyWithImpl<$Res> implements $StreetCopyWith<$Res> {
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? userCanEdit = null,
     Object? line = freezed,
     Object? color = freezed,
     Object? photoUpdatedAt = freezed,
@@ -115,7 +116,6 @@ class _$StreetCopyWithImpl<$Res> implements $StreetCopyWith<$Res> {
     Object? areas = freezed,
     Object? lastVisit = freezed,
     Object? lastEdit = freezed,
-    Object? userCanEdit = null,
   }) {
     return _then(
       Street(
@@ -127,6 +127,10 @@ class _$StreetCopyWithImpl<$Res> implements $StreetCopyWith<$Res> {
             ? _self.name
             : name // ignore: cast_nullable_to_non_nullable
                   as String,
+        userCanEdit: null == userCanEdit
+            ? _self.userCanEdit
+            : userCanEdit // ignore: cast_nullable_to_non_nullable
+                  as bool,
         line: freezed == line
             ? _self.line
             : line // ignore: cast_nullable_to_non_nullable
@@ -155,10 +159,6 @@ class _$StreetCopyWithImpl<$Res> implements $StreetCopyWith<$Res> {
             ? _self.lastEdit
             : lastEdit // ignore: cast_nullable_to_non_nullable
                   as LastRecordedByInfo?,
-        userCanEdit: null == userCanEdit
-            ? _self.userCanEdit
-            : userCanEdit // ignore: cast_nullable_to_non_nullable
-                  as bool,
       ),
     );
   }

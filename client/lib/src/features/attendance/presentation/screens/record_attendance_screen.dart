@@ -20,12 +20,6 @@ class _RecordAttendanceScreenState extends State<RecordAttendanceScreen> {
   );
 
   @override
-  void dispose() {
-    unawaited(_cubit.close());
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return BlocProvider.value(
       value: _cubit,
@@ -47,5 +41,11 @@ class _RecordAttendanceScreenState extends State<RecordAttendanceScreen> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    unawaited(_cubit.close());
+    super.dispose();
   }
 }

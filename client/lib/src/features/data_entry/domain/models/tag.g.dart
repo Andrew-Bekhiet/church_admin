@@ -1,5 +1,8 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// coverage:ignore-file
+// ignore_for_file: type=lint
+
 part of 'tag.dart';
 
 // **************************************************************************
@@ -8,9 +11,6 @@ part of 'tag.dart';
 
 class TagFields {
   static final TagFields _instance = TagFields._();
-  factory TagFields() => _instance;
-  TagFields._();
-
   final FieldMetadata<Tag> id = FieldMetadata<Tag>(
     getValue: (obj) => obj is Tag ? obj.id : null,
     parentType: Tag,
@@ -48,6 +48,8 @@ class TagFields {
     'name': name,
     'color': color,
   };
+  factory TagFields() => _instance;
+  TagFields._();
 }
 
 // **************************************************************************

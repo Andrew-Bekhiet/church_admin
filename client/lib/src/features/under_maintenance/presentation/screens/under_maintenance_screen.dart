@@ -5,8 +5,8 @@ class UnderMaintenanceScreen extends StatelessWidget {
   final FeatureFlagsRepository _featureFlagsRepo;
 
   UnderMaintenanceScreen({
-    super.key,
     FeatureFlagsRepository? featureFlagsRepo,
+    super.key,
   }) : _featureFlagsRepo = featureFlagsRepo ?? FeatureFlagsRepository.I;
 
   @override

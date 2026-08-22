@@ -12,8 +12,6 @@ enum MultiSelectOperator<V extends Object> implements Operator<List<V>?> {
   isEmpty._('isEmpty', 'فارغ'),
   isNotEmpty._('isNotEmpty', 'ليس فارغاً');
 
-  const MultiSelectOperator._(this.name, this.label);
-
   @override
   final String label;
 
@@ -24,6 +22,8 @@ enum MultiSelectOperator<V extends Object> implements Operator<List<V>?> {
 
   @override
   bool get acceptsValue => !{isEmpty, isNotEmpty}.contains(this);
+
+  const MultiSelectOperator._(this.name, this.label);
 
   @override
   Json queryToJson(FieldMetadata field, List<V>? filterValue) {

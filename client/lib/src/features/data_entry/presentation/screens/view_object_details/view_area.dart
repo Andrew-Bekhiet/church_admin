@@ -127,61 +127,29 @@ class _ViewAreaState extends State<ViewArea> {
       objectStream: stream,
       childrenTypes: const [Street, Family, Person, Store],
       tabsContentBuilders: {
-        Street: (context) => StreamBuilder(
-          stream: _streetsOrderBy.stream,
-          initialData: _streetsOrderBy.value,
-          builder: (context, orderBySnapshot) => ViewableObjectList(
-            scrollController: PrimaryScrollController.maybeOf(context),
-            viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
-              secondLineField: orderBySnapshot.data?.first.getSecondLineField(),
-            ),
-            objectsController: _streetsController,
-          ),
+        Street: (context) => OrderedViewableObjectList(
+          orderByStream: _streetsOrderBy.stream,
+          initialOrderBy: _streetsOrderBy.value,
+          objectsController: _streetsController,
         ),
-        Family: (context) => StreamBuilder(
-          stream: _familiesOrderBy.stream,
-          initialData: _familiesOrderBy.value,
-          builder: (context, orderBySnapshot) => ViewableObjectList(
-            scrollController: PrimaryScrollController.maybeOf(context),
-            viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
-              secondLineField: orderBySnapshot.data?.first.getSecondLineField(),
-            ),
-            objectsController: _familiesController,
-          ),
+        Family: (context) => OrderedViewableObjectList(
+          orderByStream: _familiesOrderBy.stream,
+          initialOrderBy: _familiesOrderBy.value,
+          objectsController: _familiesController,
         ),
-        Person: (context) => StreamBuilder(
-          stream: _personsOrderBy.stream,
-          initialData: _personsOrderBy.value,
-          builder: (context, orderBySnapshot) => ViewableObjectList(
-            scrollController: PrimaryScrollController.maybeOf(context),
-            viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
-              secondLineField: orderBySnapshot.data?.first.getSecondLineField(),
-            ),
-            objectsController: _personsController,
-          ),
+        Person: (context) => OrderedViewableObjectList(
+          orderByStream: _personsOrderBy.stream,
+          initialOrderBy: _personsOrderBy.value,
+          objectsController: _personsController,
         ),
-        Store: (context) => StreamBuilder(
-          stream: _storesOrderBy.stream,
-          initialData: _storesOrderBy.value,
-          builder: (context, orderBySnapshot) => ViewableObjectList(
-            scrollController: PrimaryScrollController.maybeOf(context),
-            viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
-              secondLineField: orderBySnapshot.data?.first.getSecondLineField(),
-            ),
-            objectsController: _storesController,
-          ),
+        Store: (context) => OrderedViewableObjectList(
+          orderByStream: _storesOrderBy.stream,
+          initialOrderBy: _storesOrderBy.value,
+          objectsController: _storesController,
         ),
       },
       sliverPersistentHeaderDelegate: ChipTabBarPersistentHeaderDelegate(
-        filtersWidget: Builder(
-          builder: (context) => IconButton(
-            visualDensity: VisualDensity.compact,
-            padding: EdgeInsets.zero,
-            icon: const Icon(Symbols.sort),
-            onPressed: () =>
-                _showOrderBySheet(DefaultTabController.of(context).index),
-          ),
-        ),
+        filtersWidget: TabAwareSortButton(onPressed: _showOrderBySheet),
         tabs: [
           (
             icon: viewableObjectService.getDefaultIconFor<Street>(),
@@ -262,8 +230,8 @@ class _ViewAreaState extends State<ViewArea> {
           style: Theme.of(context).textTheme.titleLarge,
         ),
       ),
-      bottomNavBarBuilder: (context, tabController) => StreamBuilder<String?>(
-        stream: tabController.animation!.asStream().switchMap(
+      bottomNavBarBuilder: (context, tabController) => TotalCountLabel(
+        countStream: tabController.animation!.asStream().switchMap(
           (index) {
             final currentIndex = index.round();
 
@@ -284,16 +252,9 @@ class _ViewAreaState extends State<ViewArea> {
             );
           },
         ),
-        builder: (context, snapshot) {
-          return Text(
-            snapshot.data ?? '',
-            style: Theme.of(context).textTheme.titleLarge,
-            textAlign: TextAlign.center,
-          );
-        },
       ),
       floatingActionButtonBuilder: (context, tabController, area) =>
-          SwitchingFloatingActionButton.fromTabController(
+          SwitchingFAB.fromTabController(
             tabController: tabController,
             icons: const [
               Icon(Symbols.add_road),
@@ -332,6 +293,17 @@ class _ViewAreaState extends State<ViewArea> {
     );
   }
 
+  @override
+  void dispose() {
+    unawaited(Future.wait(_controllersToDispose.map((e) => e.dispose())));
+    unawaited(_streetsOrderBy.close());
+    unawaited(_familiesOrderBy.close());
+    unawaited(_personsOrderBy.close());
+    unawaited(_storesOrderBy.close());
+
+    super.dispose();
+  }
+
   Future<void> _showOrderBySheet(int currentTabIndex) async {
     final advancedQueriesMetadata = AdvancedQueriesMetadata();
 
@@ -343,19 +315,10 @@ class _ViewAreaState extends State<ViewArea> {
       _ => throw UnimplementedError(),
     };
 
-    await showOrderByBottomSheet(
+    await showOrderBySheetAndSave(
       context,
       queryableType: queryableType,
       orderBySubject: orderBySubject,
-      onChanged: (newOrderBy) {
-        orderBySubject.add(newOrderBy);
-        unawaited(
-          ViewObjectDetails.saveLastOrderByFor(
-            type: queryableType,
-            orderBy: newOrderBy,
-          ),
-        );
-      },
     );
   }
 
@@ -364,17 +327,7 @@ class _ViewAreaState extends State<ViewArea> {
     ViewableObjectListController<T> controller,
   ) {
     _controllersToDispose.add(controller);
+
     return controller;
-  }
-
-  @override
-  void dispose() {
-    unawaited(Future.wait(_controllersToDispose.map((e) => e.dispose())));
-    unawaited(_streetsOrderBy.close());
-    unawaited(_familiesOrderBy.close());
-    unawaited(_personsOrderBy.close());
-    unawaited(_storesOrderBy.close());
-
-    super.dispose();
   }
 }

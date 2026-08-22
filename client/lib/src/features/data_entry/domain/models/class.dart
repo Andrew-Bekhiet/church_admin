@@ -62,9 +62,17 @@ class Class extends ViewableWithIDAndImage
   @JsonKey(includeToJson: false)
   final bool userCanEdit;
 
+  @override
+  ObjectImageInfo get imageInfo =>
+      FunctionsObjectImageInfo('classes', id, lastUpdatedTime: photoUpdatedAt);
+
+  @override
+  String get typeName => AdvancedQueriesMetadata().$class.name;
+
   const Class({
     required this.id,
     required this.name,
+    this.userCanEdit = false,
     this.color,
     this.photoUpdatedAt,
     this.blurhash,
@@ -75,20 +83,12 @@ class Class extends ViewableWithIDAndImage
     this.serviceGender,
     this.lastEdit,
     this.adminUsers,
-    this.userCanEdit = false,
   });
 
   factory Class.fromJson(Map<String, Object?> json) => _$ClassFromJson(json);
 
   @override
   Json toJson() => _$ClassToJson(this);
-
-  @override
-  ObjectImageInfo get imageInfo =>
-      FunctionsObjectImageInfo('classes', id, lastUpdatedTime: photoUpdatedAt);
-
-  @override
-  String get typeName => AdvancedQueriesMetadata().$class.name;
 
   Input_ClassesInsertInput toInsertInput() {
     return Input_ClassesInsertInput(
@@ -130,12 +130,11 @@ class Class extends ViewableWithIDAndImage
 }
 
 class ClassFields extends _ClassFields {
-  ClassFields();
-
   @override
   FieldMetadata<User> get adminUsers => adminUsersRel.redirectTo(
     AdminOnDataFields().user,
     label: adminUsersRel.label,
     isExpandable: false,
   );
+  ClassFields();
 }

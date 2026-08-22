@@ -31,12 +31,6 @@ class _ExportInProgressBodyState extends State<ExportInProgressBody> {
   final _random = Random();
   late String _lastPonderingStatement = _pickPonderingStatement();
 
-  String _pickPonderingStatement({String? exclude}) {
-    final candidates = _ponderingStatements.where((s) => s != exclude).toList();
-
-    return candidates[_random.nextInt(candidates.length)];
-  }
-
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -107,5 +101,11 @@ class _ExportInProgressBodyState extends State<ExportInProgressBody> {
         ),
       ),
     );
+  }
+
+  String _pickPonderingStatement({String? exclude}) {
+    final candidates = _ponderingStatements.where((s) => s != exclude).toList();
+
+    return candidates[_random.nextInt(candidates.length)];
   }
 }

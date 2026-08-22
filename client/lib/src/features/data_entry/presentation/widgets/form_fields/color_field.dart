@@ -9,15 +9,14 @@ class ColorField extends StatelessWidget {
   final FormFieldSetter<Color?>? onSaved;
   final FormFieldValidator<Color?>? validator;
   final AutovalidateMode? autovalidateMode;
-  final void Function(Color?)? onChanged;
 
   const ColorField({
+    this.nullable = true,
     this.initialValue,
     this.onSaved,
     this.validator,
     this.autovalidateMode,
     this.onChanged,
-    this.nullable = true,
     super.key,
   });
 
@@ -56,6 +55,8 @@ class ColorField extends StatelessWidget {
       ),
     );
   }
+
+  final void Function(Color?)? onChanged;
 
   Future<void> _selectColor(
     BuildContext context,

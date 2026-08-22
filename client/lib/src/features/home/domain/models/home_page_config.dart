@@ -10,15 +10,6 @@ class HomePageConfig<T extends Viewable> extends Equatable {
   final ViewableObjectListType? listType;
   final ViewableObjectListController<T> Function()? objectsController;
 
-  const HomePageConfig({
-    required this.label,
-    required this.pageIcon,
-    this.objectsController,
-    this.fabIcon,
-    this.fabOnTapLocation,
-    this.listType,
-  });
-
   Type get type => T;
 
   @override
@@ -30,6 +21,15 @@ class HomePageConfig<T extends Viewable> extends Equatable {
     listType,
     type,
   ];
+
+  const HomePageConfig({
+    required this.label,
+    required this.pageIcon,
+    this.objectsController,
+    this.fabIcon,
+    this.fabOnTapLocation,
+    this.listType,
+  });
 
   HomePageConfig<T> copyWith({
     String? label,

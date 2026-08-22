@@ -4,6 +4,11 @@ enum AttendanceRosterAudienceView {
   persons,
   servants;
 
+  static AttendanceRosterAudienceView defaultFor(MeetingAudience audience) =>
+      audience.includesPersons
+      ? AttendanceRosterAudienceView.persons
+      : AttendanceRosterAudienceView.servants;
+
   bool get asServant => this == AttendanceRosterAudienceView.servants;
 
   String get label => switch (this) {
@@ -22,9 +27,4 @@ enum AttendanceRosterAudienceView {
     AttendanceRosterAudienceView.persons => !entry.asServant,
     AttendanceRosterAudienceView.servants => entry.asServant,
   };
-
-  static AttendanceRosterAudienceView defaultFor(MeetingAudience audience) =>
-      audience.includesPersons
-      ? AttendanceRosterAudienceView.persons
-      : AttendanceRosterAudienceView.servants;
 }

@@ -25,11 +25,11 @@ class EditFamily extends StatefulWidget {
 class _EditFamilyState extends State<EditFamily> {
   late EditObjectController<Family> _controller;
 
+  bool _relatedFamiliesLoaded = false;
+
   Family get initialFamily => _controller.initialObject!;
   Family get newFamily => _controller.newObject;
   set newFamily(Family f) => _controller.newObject = f;
-
-  bool _relatedFamiliesLoaded = false;
 
   @override
   void initState() {
@@ -90,10 +90,7 @@ class _EditFamilyState extends State<EditFamily> {
           ),
           ObjectSelectionField<Church, Church?>(
             initialValue: newFamily.church,
-            onCreateCustom: (name) =>
-                DatabaseService.I.metadata.churches.createObject(
-                  newObject: Church(id: const Uuid().v4(), name: name),
-                ),
+            onCreateCustom: MetadataQuickCreate.church,
             listController: (s) => ViewableObjectListController(
               objectsPaginatableStream: DatabaseService.I.metadata.churches
                   .streamAll(searchQuery: s),
@@ -123,20 +120,23 @@ class _EditFamilyState extends State<EditFamily> {
           ),
           if (newFamily.status == MartialStatus.widowed ||
               newFamily.status == MartialStatus.widowedWithoutChildren)
-            TextFormField(
-              key: const ValueKey('deceasedSpouseName'),
-              decoration: const InputDecoration(
-                labelText: 'اسم المتوفي/ـة',
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: TextFormField(
+                key: const ValueKey('deceasedSpouseName'),
+                decoration: const InputDecoration(
+                  labelText: 'اسم المتوفي/ـة',
+                ),
+                initialValue: newFamily.deceasedSpouseName,
+                onChanged: (value) => newFamily = newFamily.copyWith(
+                  deceasedSpouseName: value.trim(),
+                ),
+                textInputAction: TextInputAction.next,
+                validator: (value) => value != null && value.isEmpty
+                    ? 'الرجاء إدخال اسم المتوفي/ـة'
+                    : null,
               ),
-              initialValue: newFamily.deceasedSpouseName,
-              onChanged: (value) => newFamily = newFamily.copyWith(
-                deceasedSpouseName: value.trim(),
-              ),
-              textInputAction: TextInputAction.next,
-              validator: (value) => value != null && value.isEmpty
-                  ? 'الرجاء إدخال اسم المتوفي/ـة'
-                  : null,
-            ).withPadding(const EdgeInsets.symmetric(vertical: 8))
+            )
           else
             DateTimeField(
               label: 'تاريخ الزواج',
@@ -147,18 +147,21 @@ class _EditFamilyState extends State<EditFamily> {
               nullable: true,
               withTime: false,
             ),
-          TextFormField(
-            decoration: const InputDecoration(
-              labelText: 'ملاحظات',
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: TextFormField(
+              decoration: const InputDecoration(
+                labelText: 'ملاحظات',
+              ),
+              initialValue: newFamily.notes,
+              onChanged: (value) => newFamily = newFamily.copyWith(
+                notes: value.trim(),
+              ),
+              textInputAction: TextInputAction.newline,
+              maxLines: null,
+              validator: (value) => null,
             ),
-            initialValue: newFamily.notes,
-            onChanged: (value) => newFamily = newFamily.copyWith(
-              notes: value.trim(),
-            ),
-            textInputAction: TextInputAction.newline,
-            maxLines: null,
-            validator: (value) => null,
-          ).withPadding(const EdgeInsets.symmetric(vertical: 8)),
+          ),
           ColorField(
             initialValue: newFamily.color,
             onChanged: (value) => setState(
@@ -166,111 +169,29 @@ class _EditFamilyState extends State<EditFamily> {
             ),
           ),
           const Divider(),
-          MultiObjectSelectionField<Family>(
-            nullable: false,
-            key: ValueKey(('parents', newFamily.parents)),
-            validator: (p) => p?.contains(newFamily) ?? false
-                ? 'لا يمكن أن تكون عائلة أب أو أم لنفسها'
-                : null,
-            decoration: InputDecoration(
-              prefixIcon: !_relatedFamiliesLoaded
-                  ? const Center(
-                      heightFactor: 1,
-                      widthFactor: 1,
-                      child: SizedBox(
-                        height: 30,
-                        width: 30,
-                        child: CircularProgressIndicator(),
-                      ),
-                    )
-                  : null,
-              errorMaxLines: 2,
-            ),
-            initialValue: newFamily.parents?.toSet() ?? {},
-            listController: (s) => ViewableObjectListController(
-              objectsPaginatableStream: DatabaseService.I.families.streamAll(
-                searchQuery: s,
-              ),
-            ),
-            labelText: 'عائلات الأب والأم',
-            onChanged: (value) => newFamily = newFamily.copyWith(
+          FamilyRelativesFields(
+            family: newFamily,
+            relatedFamiliesLoaded: _relatedFamiliesLoaded,
+            onParentsChanged: (value) => newFamily = newFamily.copyWith(
               parents: value?.toList(),
             ),
-            builder: (context, state) {
-              return state.value != null
-                  ? IgnorePointer(
-                      child: Column(
-                        children: [
-                          for (final family in state.value!)
-                            ViewableObjectWidget(
-                              family,
-                              isDense: true,
-                            ),
-                        ],
-                      ),
-                    )
-                  : null;
-            },
-          ),
-          MultiObjectSelectionField<Family>(
-            nullable: false,
-            key: ValueKey(('children', newFamily.children)),
-            validator: (c) => c?.contains(newFamily) ?? false
-                ? 'لا يمكن أن تكون عائلة أبن أو أبنة لنفسها'
-                : null,
-            decoration: InputDecoration(
-              prefixIcon: !_relatedFamiliesLoaded
-                  ? const Center(
-                      heightFactor: 1,
-                      widthFactor: 1,
-                      child: SizedBox(
-                        height: 30,
-                        width: 30,
-                        child: CircularProgressIndicator(),
-                      ),
-                    )
-                  : null,
-              errorMaxLines: 2,
-            ),
-            initialValue: newFamily.children?.toSet() ?? {},
-            listController: (s) => ViewableObjectListController(
-              objectsPaginatableStream: DatabaseService.I.families.streamAll(
-                searchQuery: s,
-              ),
-            ),
-            labelText: 'عائلات الأبناء',
-            onChanged: (value) => newFamily = newFamily.copyWith(
+            onChildrenChanged: (value) => newFamily = newFamily.copyWith(
               children: value?.toList(),
             ),
-            builder: (context, state) {
-              return state.value != null
-                  ? IgnorePointer(
-                      child: Column(
-                        children: [
-                          for (final family in state.value!)
-                            ViewableObjectWidget(
-                              family,
-                              isDense: true,
-                            ),
-                        ],
-                      ),
-                    )
-                  : null;
-            },
           ),
           DateTimeField(
             label: 'أخر افتقاد',
             nullable: true,
             initialValue: newFamily.lastVisit?.time,
             onChanged: (v) {
-              if (v != null) {
-                newFamily = newFamily.copyWith(
-                  lastVisit: LastRecordedByInfo(
-                    time: v,
-                    recordedBy: AuthBloc.I.currentUser?.uid,
-                  ),
-                );
-              }
+              if (v == null) return;
+
+              newFamily = newFamily.copyWith(
+                lastVisit: LastRecordedByInfo(
+                  time: v,
+                  recordedBy: AuthBloc.I.currentUser?.uid,
+                ),
+              );
             },
             validator: (v) => null,
           ),
@@ -279,15 +200,15 @@ class _EditFamilyState extends State<EditFamily> {
             nullable: true,
             initialValue: newFamily.lastFatherVisit?.time,
             onChanged: (v) {
-              if (v != null) {
-                newFamily = newFamily.copyWith(
-                  lastFatherVisit: LastRecordedByInfo(
-                    time: v,
-                    recordedBy: AuthBloc.I.currentUser?.uid,
-                    isFatherVisit: true,
-                  ),
-                );
-              }
+              if (v == null) return;
+
+              newFamily = newFamily.copyWith(
+                lastFatherVisit: LastRecordedByInfo(
+                  time: v,
+                  recordedBy: AuthBloc.I.currentUser?.uid,
+                  isFatherVisit: true,
+                ),
+              );
             },
             validator: (v) => null,
           ),
@@ -317,9 +238,7 @@ class _EditFamilyState extends State<EditFamily> {
 
           _relatedFamiliesLoaded = true;
 
-          if (mounted) {
-            setState(() {});
-          }
+          if (mounted) setState(() => _relatedFamiliesLoaded = true);
         },
       );
     }
@@ -343,6 +262,7 @@ class _EditFamilyState extends State<EditFamily> {
     if (result != null) {
       newFamily = result;
     }
+
     return result?.geolocation;
   }
 }

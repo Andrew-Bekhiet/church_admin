@@ -23,14 +23,6 @@ class AttendanceGroupedRoster extends StatefulWidget {
 class _AttendanceGroupedRosterState extends State<AttendanceGroupedRoster> {
   final Set<int> _collapsedKeys = {};
 
-  void _toggleSection(int? key) {
-    if (key == null) return;
-
-    setState(() {
-      if (!_collapsedKeys.remove(key)) _collapsedKeys.add(key);
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     final sections = widget.entries.groupListsBy((e) => e.person.studyYear);
@@ -74,5 +66,15 @@ class _AttendanceGroupedRosterState extends State<AttendanceGroupedRoster> {
         );
       }).toList(),
     );
+  }
+
+  void _toggleSection(int? key) {
+    if (key == null) return;
+
+    setState(() {
+      if (_collapsedKeys.remove(key)) return;
+
+      _collapsedKeys.add(key);
+    });
   }
 }

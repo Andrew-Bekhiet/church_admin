@@ -1,5 +1,8 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// coverage:ignore-file
+// ignore_for_file: type=lint
+
 part of 'address.dart';
 
 // **************************************************************************
@@ -8,9 +11,6 @@ part of 'address.dart';
 
 class AddressFields {
   static final AddressFields _instance = AddressFields._();
-  factory AddressFields() => _instance;
-  AddressFields._();
-
   final FieldMetadata<Area> area = FieldMetadata<Area>(
     getValue: (obj) => obj is Address ? obj.area : null,
     parentType: Address,
@@ -195,6 +195,8 @@ class AddressFields {
     'family': family,
     'store': store,
   };
+  factory AddressFields() => _instance;
+  AddressFields._();
 }
 
 // **************************************************************************
@@ -202,11 +204,11 @@ class AddressFields {
 // **************************************************************************
 
 Address _$AddressFromJson(Map json) => Address(
+  countryIsoCode: json['countryIsoCode'] as String? ?? 'EG',
   id: json['id'] as String?,
   area: json['area'] == null
       ? null
       : Area.fromJson(Map<String, Object?>.from(json['area'] as Map)),
-  countryIsoCode: json['countryIsoCode'] as String? ?? 'EG',
   houseNumber: (json['houseNumber'] as num?)?.toInt(),
   street: json['street'] == null
       ? null

@@ -6,13 +6,6 @@ import 'package:collection/collection.dart';
 class GQLParser {
   const GQLParser();
 
-  Json castMapToJson(Map data) {
-    return data.cast<String, Object?>();
-  }
-
-  int? countParser(Json d) =>
-      d.values.singleOrNull?['aggregate']?['count'] as int?;
-
   List<T> Function(Json d) listParser<T>(
     T Function(Json) mapper, {
     String? dataKey,
@@ -21,6 +14,7 @@ class GQLParser {
       final value = dataKey != null
           ? d[dataKey] as List?
           : d.values.whereType<List?>().singleOrNull;
+
       return value?.map((o) => mapper(castMapToJson(o))).toList() ?? [];
     };
   }
@@ -44,6 +38,13 @@ class GQLParser {
     };
   }
 
+  Json castMapToJson(Map data) {
+    return data.cast<String, Object?>();
+  }
+
+  int? countParser(Json d) =>
+      d.values.singleOrNull?['aggregate']?['count'] as int?;
+
   ParserFn<T?> singleOrNullParser<T>(ParserFn<T?> fromJson, [String? key]) {
     return (data) {
       final value = key != null
@@ -60,6 +61,7 @@ class GQLParser {
       final value = key != null
           ? data[key] as Map
           : data.values.whereType<Map>().single;
+
       return fromJson(value.cast<String, Object?>());
     };
   }

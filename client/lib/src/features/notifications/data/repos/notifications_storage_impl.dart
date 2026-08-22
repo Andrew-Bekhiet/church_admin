@@ -11,9 +11,6 @@ class NotificationsStorageImpl implements NotificationsStorage {
   }
 
   @override
-  Future<Notification?> readNotification(String notificationId) async {
-    final notification = await _store.get(notificationId);
-
-    return notification;
-  }
+  Future<Notification?> readNotification(String notificationId) async =>
+      _store.get(notificationId);
 }

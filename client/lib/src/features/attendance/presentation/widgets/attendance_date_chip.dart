@@ -12,16 +12,6 @@ class AttendanceDateChip extends StatelessWidget {
     super.key,
   });
 
-  Future<void> _pickDate(BuildContext context) async {
-    final picked = await showDatePicker(
-      context: context,
-      initialDate: date,
-      firstDate: DateTime(2019),
-      lastDate: DateTime.now().add(const Duration(days: 365)),
-    );
-    if (picked != null) onDateSelected(picked);
-  }
-
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -42,5 +32,15 @@ class AttendanceDateChip extends StatelessWidget {
         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
       ),
     );
+  }
+
+  Future<void> _pickDate(BuildContext context) async {
+    final picked = await showDatePicker(
+      context: context,
+      initialDate: date,
+      firstDate: DateTime(2019),
+      lastDate: DateTime.now().add(const Duration(days: 365)),
+    );
+    if (picked != null) onDateSelected(picked);
   }
 }

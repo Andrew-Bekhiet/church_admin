@@ -2,16 +2,6 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 
 class ViewableObjectListItem<T extends Viewable> extends StatelessWidget {
-  ViewableObjectListItem({
-    required this.item,
-    required this.selectionController,
-    this.itemBuilder,
-    this.viewableObjectWidgetConfig,
-    this.addSeparator = true,
-    ViewableObjectService? viewableObjectService,
-    super.key,
-  }) : viewableObjectService = viewableObjectService ?? ViewableObjectService.I;
-
   final T item;
   final SelectionController<T> selectionController;
   final ItemBuilder<T>? itemBuilder;
@@ -24,6 +14,15 @@ class ViewableObjectListItem<T extends Viewable> extends StatelessWidget {
         onLongPress: _onLongPress,
         onTap: _onTap,
       );
+  ViewableObjectListItem({
+    required this.item,
+    required this.selectionController,
+    this.addSeparator = true,
+    this.itemBuilder,
+    this.viewableObjectWidgetConfig,
+    ViewableObjectService? viewableObjectService,
+    super.key,
+  }) : viewableObjectService = viewableObjectService ?? ViewableObjectService.I;
 
   @override
   Widget build(BuildContext context) {

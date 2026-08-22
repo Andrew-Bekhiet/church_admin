@@ -48,29 +48,6 @@ class _AttendanceAnalysisScaffoldState
 
   bool _seededMeetings = false;
 
-  void _applyPreset(DateTimeRangePreset preset) {
-    setState(() {
-      _preset = preset;
-      _options = _options.copyWith(dateRange: preset.range);
-    });
-  }
-
-  void _toggleSection(PersonAnalysisSection section, bool enabled) {
-    setState(() => _options = section.apply(_options, enabled));
-  }
-
-  void _applyMeetings(List<Meeting> meetings) {
-    setState(() => _options = _options.copyWith(meetings: meetings));
-  }
-
-  void _seedMeetings(List<Meeting> meetings) {
-    if (_seededMeetings) return;
-    setState(() {
-      _seededMeetings = true;
-      _options = _options.copyWith(meetings: meetings);
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -104,9 +81,9 @@ class _AttendanceAnalysisScaffoldState
           ),
           child: BlocConsumer<PersonMeetingsCubit, PersonMeetingsState>(
             listener: (context, state) {
-              if (state case PersonMeetingsLoaded(:final meetings)) {
-                _seedMeetings(meetings);
-              }
+              if (state is! PersonMeetingsLoaded) return;
+
+              _seedMeetings(state.meetings);
             },
             builder: (context, state) => switch (state) {
               PersonMeetingsLoading() => const Padding(
@@ -135,5 +112,28 @@ class _AttendanceAnalysisScaffoldState
         ),
       },
     );
+  }
+
+  void _applyPreset(DateTimeRangePreset preset) {
+    setState(() {
+      _preset = preset;
+      _options = _options.copyWith(dateRange: preset.range);
+    });
+  }
+
+  void _toggleSection(PersonAnalysisSection section, bool enabled) {
+    setState(() => _options = section.apply(_options, enabled));
+  }
+
+  void _applyMeetings(List<Meeting> meetings) {
+    setState(() => _options = _options.copyWith(meetings: meetings));
+  }
+
+  void _seedMeetings(List<Meeting> meetings) {
+    if (_seededMeetings) return;
+    setState(() {
+      _seededMeetings = true;
+      _options = _options.copyWith(meetings: meetings);
+    });
   }
 }

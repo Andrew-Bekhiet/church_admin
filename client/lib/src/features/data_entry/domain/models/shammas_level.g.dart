@@ -1,5 +1,8 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// coverage:ignore-file
+// ignore_for_file: type=lint
+
 part of 'shammas_level.dart';
 
 // **************************************************************************
@@ -8,9 +11,6 @@ part of 'shammas_level.dart';
 
 class ShammasLevelFields {
   static final ShammasLevelFields _instance = ShammasLevelFields._();
-  factory ShammasLevelFields() => _instance;
-  ShammasLevelFields._();
-
   final FieldMetadata<int> order = FieldMetadata<int>(
     getValue: (obj) => obj is ShammasLevel ? obj.order : null,
     parentType: ShammasLevel,
@@ -44,6 +44,8 @@ class ShammasLevelFields {
     'id': id,
     'name': name,
   };
+  factory ShammasLevelFields() => _instance;
+  ShammasLevelFields._();
 }
 
 // **************************************************************************

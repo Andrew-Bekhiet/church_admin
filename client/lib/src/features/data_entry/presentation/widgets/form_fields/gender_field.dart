@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
 
-enum GenderFieldType {
-  radio,
-  dropdown,
-}
-
 class GenderField extends StatelessWidget {
   final GenderFieldType type;
   final bool nullable;
@@ -12,7 +7,6 @@ class GenderField extends StatelessWidget {
   final bool? initialValue;
 
   final FormFieldSetter<bool?>? onSaved;
-  final void Function(bool?)? onChanged;
   final FormFieldValidator<bool?>? validator;
   final AutovalidateMode? autovalidateMode;
 
@@ -25,15 +19,15 @@ class GenderField extends StatelessWidget {
     this.type = GenderFieldType.radio,
     this.nullable = false,
     this.enabled = true,
+    this.label = 'النوع',
+    this.maleLabel = 'ذكر',
+    this.femaleLabel = 'أنثى',
+    this.nullLabel = 'غير معين',
     this.initialValue,
     this.onSaved,
     this.onChanged,
     this.validator,
     this.autovalidateMode,
-    this.label = 'النوع',
-    this.maleLabel = 'ذكر',
-    this.femaleLabel = 'أنثى',
-    this.nullLabel = 'غير معين',
     super.key,
   });
 
@@ -67,6 +61,7 @@ class GenderField extends StatelessWidget {
           enabled: enabled,
           builder: (state) {
             final theme = Theme.of(context);
+
             return InputDecorator(
               decoration: InputDecoration(
                 labelText: label,
@@ -144,10 +139,17 @@ class GenderField extends StatelessWidget {
     }
   }
 
+  final void Function(bool?)? onChanged;
+
   void _onChanged(FormFieldState<bool?> state, bool? value) {
     state.didChange(value);
     if (onChanged != null) {
       onChanged?.call(value);
     }
   }
+}
+
+enum GenderFieldType {
+  radio,
+  dropdown,
 }

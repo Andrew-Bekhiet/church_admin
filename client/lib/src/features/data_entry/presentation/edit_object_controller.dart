@@ -17,13 +17,17 @@ class EditObjectController<T extends ViewableWithID> {
   final T? initialObject;
 
   T newObject;
+  final UpdateFunc<T>? onUpdate;
+
+  final Json Function(T object) toJson;
 
   final void Function(T object)? afterCreate;
   final Future<T> Function(T object)? onCreate;
-  final UpdateFunc<T>? onUpdate;
   final Future<void> Function(T object)? onDelete;
 
-  final Json Function(T object) toJson;
+  bool get hasChanged => initialObject != newObject;
+  bool get isCreate => initialObject == null;
+  bool get isUpdate => initialObject != null;
 
   EditObjectController({
     required this.toJson,
@@ -57,10 +61,6 @@ class EditObjectController<T extends ViewableWithID> {
     this.initialObject,
   });
 
-  bool get hasChanged => initialObject != newObject;
-  bool get isCreate => initialObject == null;
-  bool get isUpdate => initialObject != null;
-
   Future<void> save(BuildContext context) async {
     final scaffoldMessenger = ScaffoldMessenger.of(context);
 
@@ -86,13 +86,9 @@ class EditObjectController<T extends ViewableWithID> {
           ),
         );
 
-        final T returnedObject;
-        if (isCreate) {
-          returnedObject = await onCreate!(newObject);
-        } else {
-          returnedObject =
-              await onUpdate!(initialObject!, newObject) ?? newObject;
-        }
+        final T returnedObject = isCreate
+            ? await onCreate!(newObject)
+            : await onUpdate!(initialObject!, newObject) ?? newObject;
 
         await _handlePhotoChange(returnedObject, scaffoldMessenger);
 
