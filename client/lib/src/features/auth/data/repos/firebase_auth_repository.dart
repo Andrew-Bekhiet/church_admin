@@ -297,6 +297,7 @@ class FirebaseAuthRepository implements AuthRepository {
   Future<void> dispose() async {
     _pendingMultiFactorResolver = null;
     _pendingSessions.clear();
+
     return SynchronousFuture(null);
   }
 }

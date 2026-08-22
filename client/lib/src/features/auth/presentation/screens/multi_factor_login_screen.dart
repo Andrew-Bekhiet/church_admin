@@ -22,7 +22,7 @@ final class MultiFactorLoginScreenKeys {
 class MultiFactorLogin extends StatefulWidget {
   final Clock clock;
 
-  const MultiFactorLogin({super.key, this.clock = const Clock()});
+  const MultiFactorLogin({this.clock = const Clock(), super.key});
 
   @override
   State<MultiFactorLogin> createState() => _MultifactorStateLogin();
@@ -36,10 +36,10 @@ class _MultifactorStateLogin extends State<MultiFactorLogin> {
     return BlocConsumer<AuthBloc, AuthState>(
       bloc: AuthBloc.I,
       listener: (context, state) {
-        if (state is AuthExceptionState) {
-          setState(() => _isEnrollmentInProgress = false);
-          _showAuthException(context, state);
-        }
+        if (state is! AuthExceptionState) return;
+
+        setState(() => _isEnrollmentInProgress = false);
+        _showAuthException(context, state);
       },
       builder: (context, state) {
         return Scaffold(
@@ -173,12 +173,14 @@ class _EnrollMultiFactorState extends State<_EnrollMultiFactor> {
                   PhoneValidator.validMobile(context),
                 ]),
                 onChanged: (value) {
-                  if (value.isoCode == IsoCode.EG &&
-                      value.nsn.startsWith('01')) {
-                    _phoneNumberController.changeNationalNumber(
-                      value.nsn.replaceFirst(RegExp('^01'), '1'),
-                    );
+                  if (value.isoCode != IsoCode.EG ||
+                      !value.nsn.startsWith('01')) {
+                    return;
                   }
+
+                  _phoneNumberController.changeNationalNumber(
+                    value.nsn.replaceFirst(RegExp('^01'), '1'),
+                  );
                 },
               ),
             ),
@@ -190,6 +192,7 @@ class _EnrollMultiFactorState extends State<_EnrollMultiFactor> {
                 if (password == null || password.isEmpty) {
                   return 'من فضلك أدخل كلمة المرور';
                 }
+
                 return null;
               },
               onFieldSubmitted: (_) => _sendCode(),
@@ -295,9 +298,9 @@ class _VerifyMultiFactorState extends State<_VerifyMultiFactor> {
                     controller: _code,
                     inputFormatters: [FilteringTextInputFormatter.digitsOnly],
                     onCompleted: (_) {
-                      if (!widget.loading) {
-                        widget.onVerificationCodeSubmitted(_code.text);
-                      }
+                      if (widget.loading) return;
+
+                      widget.onVerificationCodeSubmitted(_code.text);
                     },
                     isCursorAnimationEnabled: false,
                     defaultPinTheme: PinTheme(

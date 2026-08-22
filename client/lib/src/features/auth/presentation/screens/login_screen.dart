@@ -1,4 +1,6 @@
 import 'package:church_admin/church_admin.dart';
+import 'package:church_admin/src/features/auth/presentation/widgets/auth_form.dart';
+import 'package:church_admin/src/features/auth/presentation/widgets/auth_mode_switch.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -56,30 +58,29 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
     final screenSize = MediaQuery.sizeOf(context);
 
     return BlocConsumer<AuthBloc, AuthState>(
       bloc: authBloc,
       listener: (context, state) {
-        if (state is AuthExceptionState) {
-          switch (state.exception) {
-            case IncorrectCredentialsException() when _isLogin:
-              ScaffoldMessenger.of(context).showErrorSnackBar(
-                'كلمة سر أو بريد إلكتروني غير صحيح',
-              );
+        if (state is! AuthExceptionState) return;
 
-            case IncorrectCredentialsException():
-              ScaffoldMessenger.of(context).showInfoSnackBar(
-                'الحساب مسجل بالفعل. قم بتسجيل الدخول',
-              );
-              setState(() => _isLogin = true);
+        switch (state.exception) {
+          case IncorrectCredentialsException() when _isLogin:
+            ScaffoldMessenger.of(context).showErrorSnackBar(
+              'كلمة سر أو بريد إلكتروني غير صحيح',
+            );
 
-            default:
-              ScaffoldMessenger.of(context).showErrorSnackBar(
-                'تعذر تسجيل الدخول. برجاء المحاولة مرة أخرى.',
-              );
-          }
+          case IncorrectCredentialsException():
+            ScaffoldMessenger.of(context).showInfoSnackBar(
+              'الحساب مسجل بالفعل. قم بتسجيل الدخول',
+            );
+            setState(() => _isLogin = true);
+
+          default:
+            ScaffoldMessenger.of(context).showErrorSnackBar(
+              'تعذر تسجيل الدخول. برجاء المحاولة مرة أخرى.',
+            );
         }
       },
       builder: (context, state) {
@@ -100,184 +101,21 @@ class _LoginScreenState extends State<LoginScreen> {
                       fit: BoxFit.scaleDown,
                     ),
                   ),
-                  Center(
-                    child: Text(
-                      'قم بتسجيل الدخول أو إنشاء حساب',
-                      style: theme.textTheme.titleLarge?.copyWith(fontSize: 16),
-                    ),
+                  AuthForm(
+                    isLogin: _isLogin,
+                    loading: loading,
+                    formKey: _formKey,
+                    emailController: _emailController,
+                    passwordController: _passwordController,
+                    passwordConfirmationController:
+                        _passwordConfirmationController,
+                    termsOfServiceRecognizer: _termsOfServiceRecognizer,
+                    privacyPolicyRecognizer: _privacyPolicyRecognizer,
+                    onSubmit: _submit,
                   ),
-                  const SizedBox(height: 10),
-                  AutofillGroup(
-                    child: Form(
-                      key: _formKey,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          TextFormField(
-                            key: LoginScreenKeys.emailFieldKey,
-                            decoration: const InputDecoration(
-                              labelText: 'البريد الإلكتروني',
-                            ),
-                            keyboardType: TextInputType.emailAddress,
-                            autofillHints: const [AutofillHints.email],
-                            textInputAction: TextInputAction.next,
-                            autovalidateMode:
-                                AutovalidateMode.onUserInteraction,
-                            validator: (email) {
-                              if (email == null || email.isEmpty) {
-                                return 'البريد الإلكتروني لا يمكن أن يكون فارغاً';
-                              } else if (!emailRegex.hasMatch(email.trim())) {
-                                return 'البريد الإلكتروني غير صالح';
-                              }
-                              return null;
-                            },
-                            controller: _emailController,
-                          ).withPadding(
-                            const EdgeInsets.symmetric(vertical: 8),
-                          ),
-                          if (_isLogin)
-                            Column(
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.stretch,
-                              children: [
-                                PasswordFormField(
-                                  key: LoginScreenKeys.passwordFieldKey,
-                                  labelText: 'كلمة المرور',
-                                  autoValidateMode:
-                                      AutovalidateMode.onUserInteraction,
-                                  textInputAction: TextInputAction.done,
-                                  controller: _passwordController,
-                                  onFieldSubmitted: (_) => _submit,
-                                  validator: (password) {
-                                    if (password?.isEmpty ?? true) {
-                                      return 'كلمة المرور لا يمكن أن تكون فارغة';
-                                    }
-                                    return null;
-                                  },
-                                ),
-                                Container(
-                                  alignment: AlignmentDirectional.centerStart,
-                                  padding: const EdgeInsetsDirectional.only(
-                                    bottom: 20,
-                                    start: 8,
-                                  ),
-                                  child: InkWell(
-                                    key:
-                                        LoginScreenKeys.forgotPasswordButtonKey,
-                                    onTap: () => const ForgotPasswordRoute()
-                                        .push(context),
-                                    child: Text(
-                                      'نسيت كلمة المرور؟',
-                                      style: theme.textTheme.bodyLarge
-                                          ?.copyWith(
-                                            color: theme.colorScheme.primary,
-                                          ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            )
-                          else ...[
-                            NewPasswordField(
-                              key: LoginScreenKeys.passwordFieldKey,
-                              controller: _passwordController,
-                              getEmail: () => _emailController.text.trim(),
-                            ).withPadding(
-                              const EdgeInsets.symmetric(vertical: 10),
-                            ),
-                            PasswordFormField(
-                              key: LoginScreenKeys.passwordConfirmationFieldKey,
-                              labelText: 'تأكيد كلمة المرور',
-                              autoFillHints: const [AutofillHints.newPassword],
-                              controller: _passwordConfirmationController,
-                              textInputAction: TextInputAction.done,
-                              onFieldSubmitted: (_) => _submit,
-                              validator: (password) {
-                                if (password != _passwordController.text) {
-                                  return 'كلمتا المرور غير متطابقتين';
-                                }
-                                return null;
-                              },
-                            ),
-                          ],
-                          FilledButton(
-                            key: LoginScreenKeys.loginSignupButtonKey,
-                            onPressed: loading ? null : _submit,
-                            child: loading
-                                ? const Center(
-                                    child: CircularProgressIndicator(),
-                                  )
-                                : Text(
-                                    _isLogin
-                                        ? 'تسجيل الدخول'
-                                        : 'إنشاء حساب جديد',
-                                  ),
-                          ),
-                          if (!_isLogin) ...[
-                            const SizedBox(height: 10),
-                            RichText(
-                              textAlign: TextAlign.center,
-                              text: TextSpan(
-                                style: const TextStyle(
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                                children: [
-                                  TextSpan(
-                                    style: theme.textTheme.bodySmall,
-                                    text: 'بإنشائك حساب فإنك توافق على ',
-                                  ),
-                                  TextSpan(
-                                    style: theme.textTheme.bodySmall?.copyWith(
-                                      color: Colors.blue,
-                                    ),
-                                    text: 'شروط الاستخدام',
-                                    recognizer: _termsOfServiceRecognizer,
-                                  ),
-                                  TextSpan(
-                                    style: theme.textTheme.bodySmall,
-                                    text: ' و',
-                                  ),
-                                  TextSpan(
-                                    style: theme.textTheme.bodySmall?.copyWith(
-                                      color: Colors.blue,
-                                    ),
-                                    text: 'سياسة الخصوصية',
-                                    recognizer: _privacyPolicyRecognizer,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        ],
-                      ),
-                    ),
-                  ),
-                  Container(
-                    margin: const EdgeInsets.symmetric(vertical: 10),
-                    padding: const EdgeInsets.all(15),
-                    alignment: Alignment.bottomCenter,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Text(
-                          _isLogin ? 'ليس لديك حساب؟' : 'لديك حساب بالفعل؟',
-                          style: theme.textTheme.bodyMedium,
-                        ),
-                        const SizedBox(width: 10),
-                        InkWell(
-                          key: LoginScreenKeys.switchLoginSignupButtonKey,
-                          onTap: () => setState(() => _isLogin = !_isLogin),
-                          child: Text(
-                            _isLogin ? 'إنشاء حساب جديد' : 'تسجيل الدخول',
-                            style: theme.textTheme.bodyMedium?.copyWith(
-                              color: theme.colorScheme.primary,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                  AuthModeSwitch(
+                    isLogin: _isLogin,
+                    onToggle: () => setState(() => _isLogin = !_isLogin),
                   ),
                 ],
               ),
@@ -301,32 +139,32 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Future<void> _submit() async {
-    if (_formKey.currentState?.validate() ?? false) {
-      try {
-        authBloc.add(
-          _isLogin
-              ? SignInWithEmailPassword(
-                  email: _emailController.text.toLowerCase().trim(),
-                  password: _passwordController.text,
-                )
-              : SignUpWithEmailPassword(
-                  email: _emailController.text.toLowerCase().trim(),
-                  password: _passwordController.text,
-                ),
+    if (!(_formKey.currentState?.validate() ?? false)) return;
+
+    try {
+      authBloc.add(
+        _isLogin
+            ? SignInWithEmailPassword(
+                email: _emailController.text.toLowerCase().trim(),
+                password: _passwordController.text,
+              )
+            : SignUpWithEmailPassword(
+                email: _emailController.text.toLowerCase().trim(),
+                password: _passwordController.text,
+              ),
+      );
+    } on MultiFactorRequiredException {
+      if (mounted) const MultiFactorLoginRoute().go(context);
+    } on Exception catch (e, stackTrace) {
+      if (mounted) {
+        await LoggingService.I.showErrorDialogAndReport(
+          context,
+          LogRecord(
+            error: e,
+            stackTrace: stackTrace,
+            data: {'email': _emailController.text},
+          ),
         );
-      } on MultiFactorRequiredException {
-        if (mounted) const MultiFactorLoginRoute().go(context);
-      } on Exception catch (e, stackTrace) {
-        if (mounted) {
-          await LoggingService.I.showErrorDialogAndReport(
-            context,
-            LogRecord(
-              error: e,
-              stackTrace: stackTrace,
-              data: {'email': _emailController.text},
-            ),
-          );
-        }
       }
     }
   }

@@ -63,6 +63,7 @@ class _UnapprovedUserScreenState extends State<UnapprovedUserScreen> {
                   if (value!.isEmpty) {
                     return 'برجاء ادخال كود الدخول لتفعيل حسابك';
                   }
+
                   return null;
                 },
               ),

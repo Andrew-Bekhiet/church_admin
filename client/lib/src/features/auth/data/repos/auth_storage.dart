@@ -16,6 +16,7 @@ interface class AuthStorage {
 
   Future<AuthUser?> getAuthDataFromCache() async {
     final authDataJson = await _secureStorage.read(key: authUserKey);
+
     return authDataJson != null
         ? AuthUser.fromJson(jsonDecode(authDataJson))
         : null;
@@ -30,6 +31,7 @@ interface class AuthStorage {
 
   Future<User?> getUserFromCache() async {
     final userJson = await _secureStorage.read(key: userKey);
+
     return userJson != null ? User.fromJson(jsonDecode(userJson)) : null;
   }
 
