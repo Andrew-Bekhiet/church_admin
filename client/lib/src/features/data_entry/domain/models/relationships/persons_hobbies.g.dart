@@ -10,9 +10,6 @@ part of 'persons_hobbies.dart';
 
 class PersonsHobbiesFields {
   static final PersonsHobbiesFields _instance = PersonsHobbiesFields._();
-  factory PersonsHobbiesFields() => _instance;
-  PersonsHobbiesFields._();
-
   final FieldMetadata<Person> person = FieldMetadata<Person>(
     getValue: (obj) => obj is PersonsHobbies ? obj.person : null,
     parentType: PersonsHobbies,
@@ -61,6 +58,8 @@ class PersonsHobbiesFields {
     'personId': personId,
     'hobbyId': hobbyId,
   };
+  factory PersonsHobbiesFields() => _instance;
+  PersonsHobbiesFields._();
 }
 
 // **************************************************************************

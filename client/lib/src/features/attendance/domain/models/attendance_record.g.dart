@@ -10,9 +10,6 @@ part of 'attendance_record.dart';
 
 class AttendanceRecordFields {
   static final AttendanceRecordFields _instance = AttendanceRecordFields._();
-  factory AttendanceRecordFields() => _instance;
-  AttendanceRecordFields._();
-
   final FieldMetadata<AttendanceRecord> id = FieldMetadata<AttendanceRecord>(
     getValue: (obj) => obj is AttendanceRecord ? obj.id : null,
     parentType: AttendanceRecord,
@@ -95,6 +92,8 @@ class AttendanceRecordFields {
     'asServant': asServant,
     'recordedByUser': recordedByUser,
   };
+  factory AttendanceRecordFields() => _instance;
+  AttendanceRecordFields._();
 }
 
 // **************************************************************************

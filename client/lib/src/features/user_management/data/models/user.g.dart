@@ -9,8 +9,6 @@ part of 'user.dart';
 // **************************************************************************
 
 class _UserFields {
-  _UserFields();
-
   final FieldMetadata<String> uid = FieldMetadata<String>(
     getValue: (obj) => obj is User ? obj.uid : null,
     parentType: User,
@@ -140,6 +138,8 @@ class _UserFields {
     'person': person,
     'currentUserCanManageThisUser': currentUserCanManageThisUser,
   };
+
+  _UserFields();
 }
 
 // **************************************************************************

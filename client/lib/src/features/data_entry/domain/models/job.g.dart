@@ -10,9 +10,6 @@ part of 'job.dart';
 
 class JobFields {
   static final JobFields _instance = JobFields._();
-  factory JobFields() => _instance;
-  JobFields._();
-
   final FieldMetadata<Job> id = FieldMetadata<Job>(
     getValue: (obj) => obj is Job ? obj.id : null,
     parentType: Job,
@@ -36,6 +33,8 @@ class JobFields {
     'id': id,
     'name': name,
   };
+  factory JobFields() => _instance;
+  JobFields._();
 }
 
 // **************************************************************************

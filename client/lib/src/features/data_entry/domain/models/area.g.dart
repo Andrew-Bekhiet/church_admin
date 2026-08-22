@@ -9,8 +9,6 @@ part of 'area.dart';
 // **************************************************************************
 
 class _AreaFields {
-  _AreaFields();
-
   final FieldMetadata<Area> id = FieldMetadata<Area>(
     getValue: (obj) => obj is Area ? obj.id : null,
     parentType: Area,
@@ -132,6 +130,8 @@ class _AreaFields {
     'lastEdit': lastEdit,
     'adminUsers': adminUsers,
   };
+
+  _AreaFields();
 }
 
 // **************************************************************************

@@ -10,9 +10,6 @@ part of 'street.dart';
 
 class StreetFields {
   static final StreetFields _instance = StreetFields._();
-  factory StreetFields() => _instance;
-  StreetFields._();
-
   final FieldMetadata<Street> id = FieldMetadata<Street>(
     getValue: (obj) => obj is Street ? obj.id : null,
     parentType: Street,
@@ -134,6 +131,8 @@ class StreetFields {
     'lastVisit': lastVisit,
     'lastEdit': lastEdit,
   };
+  factory StreetFields() => _instance;
+  StreetFields._();
 }
 
 // **************************************************************************

@@ -10,9 +10,6 @@ part of 'church.dart';
 
 class ChurchFields {
   static final ChurchFields _instance = ChurchFields._();
-  factory ChurchFields() => _instance;
-  ChurchFields._();
-
   final FieldMetadata<Church> id = FieldMetadata<Church>(
     getValue: (obj) => obj is Church ? obj.id : null,
     parentType: Church,
@@ -46,6 +43,8 @@ class ChurchFields {
     'name': name,
     'isHidden': isHidden,
   };
+  factory ChurchFields() => _instance;
+  ChurchFields._();
 }
 
 // **************************************************************************

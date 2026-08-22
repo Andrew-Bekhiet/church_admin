@@ -59,9 +59,9 @@ class QueryableRegisteryGenerator extends Generator {
   ) {
     final stringBuffer = StringBuffer()
       ..writeln('abstract final class _\$$className {')
-      ..writeln('_\$$className();')
       ..writeAll(_writeRegisteryFields(queryables))
       ..writeln(_writeAllQueryablesFields(queryables))
+      ..writeln('_\$$className();')
       ..writeln('}');
 
     return stringBuffer.toString();

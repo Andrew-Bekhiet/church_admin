@@ -10,9 +10,6 @@ part of 'persons_tags.dart';
 
 class PersonsTagsFields {
   static final PersonsTagsFields _instance = PersonsTagsFields._();
-  factory PersonsTagsFields() => _instance;
-  PersonsTagsFields._();
-
   final FieldMetadata<Person> person = FieldMetadata<Person>(
     getValue: (obj) => obj is PersonsTags ? obj.person : null,
     parentType: PersonsTags,
@@ -61,6 +58,8 @@ class PersonsTagsFields {
     'personId': personId,
     'tagId': tagId,
   };
+  factory PersonsTagsFields() => _instance;
+  PersonsTagsFields._();
 }
 
 // **************************************************************************

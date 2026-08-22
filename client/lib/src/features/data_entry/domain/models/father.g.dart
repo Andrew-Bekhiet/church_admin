@@ -10,9 +10,6 @@ part of 'father.dart';
 
 class FatherFields {
   static final FatherFields _instance = FatherFields._();
-  factory FatherFields() => _instance;
-  FatherFields._();
-
   final FieldMetadata<Father> id = FieldMetadata<Father>(
     getValue: (obj) => obj is Father ? obj.id : null,
     parentType: Father,
@@ -46,6 +43,8 @@ class FatherFields {
     'name': name,
     'isHidden': isHidden,
   };
+  factory FatherFields() => _instance;
+  FatherFields._();
 }
 
 // **************************************************************************

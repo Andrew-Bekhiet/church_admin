@@ -10,9 +10,6 @@ part of 'admin_on_data.dart';
 
 class AdminOnDataFields {
   static final AdminOnDataFields _instance = AdminOnDataFields._();
-  factory AdminOnDataFields() => _instance;
-  AdminOnDataFields._();
-
   final FieldMetadata<Area> area = FieldMetadata<Area>(
     getValue: (obj) => obj is AdminOnData ? obj.area : null,
     parentType: AdminOnData,
@@ -355,6 +352,8 @@ class AdminOnDataFields {
     'groupWriteRelatedFamilies': groupWriteRelatedFamilies,
     'user': user,
   };
+  factory AdminOnDataFields() => _instance;
+  AdminOnDataFields._();
 }
 
 // **************************************************************************

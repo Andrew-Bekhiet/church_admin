@@ -9,8 +9,6 @@ part of 'class.dart';
 // **************************************************************************
 
 class _ClassFields {
-  _ClassFields();
-
   final FieldMetadata<Class> id = FieldMetadata<Class>(
     getValue: (obj) => obj is Class ? obj.id : null,
     parentType: Class,
@@ -146,6 +144,8 @@ class _ClassFields {
     'lastEdit': lastEdit,
     'adminUsers': adminUsers,
   };
+
+  _ClassFields();
 }
 
 // **************************************************************************

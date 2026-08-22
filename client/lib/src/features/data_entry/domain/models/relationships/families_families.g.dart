@@ -10,9 +10,6 @@ part of 'families_families.dart';
 
 class FamiliesFamiliesFields {
   static final FamiliesFamiliesFields _instance = FamiliesFamiliesFields._();
-  factory FamiliesFamiliesFields() => _instance;
-  FamiliesFamiliesFields._();
-
   final FieldMetadata<Family> parent = FieldMetadata<Family>(
     getValue: (obj) => obj is FamiliesFamilies ? obj.parent : null,
     parentType: FamiliesFamilies,
@@ -61,6 +58,8 @@ class FamiliesFamiliesFields {
     'parentFamilyId': parentFamilyId,
     'childFamilyId': childFamilyId,
   };
+  factory FamiliesFamiliesFields() => _instance;
+  FamiliesFamiliesFields._();
 }
 
 // **************************************************************************

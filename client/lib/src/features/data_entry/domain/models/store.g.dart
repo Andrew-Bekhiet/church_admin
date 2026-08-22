@@ -9,8 +9,6 @@ part of 'store.dart';
 // **************************************************************************
 
 class _StoreFields {
-  _StoreFields();
-
   final FieldMetadata<Store> id = FieldMetadata<Store>(
     getValue: (obj) => obj is Store ? obj.id : null,
     parentType: Store,
@@ -124,6 +122,8 @@ class _StoreFields {
     'photoUpdatedAt': photoUpdatedAt,
     'geolocation': geolocation,
   };
+
+  _StoreFields();
 }
 
 // **************************************************************************

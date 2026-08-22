@@ -9,8 +9,6 @@ part of 'service.dart';
 // **************************************************************************
 
 class _ServiceFields {
-  _ServiceFields();
-
   final FieldMetadata<Service> id = FieldMetadata<Service>(
     getValue: (obj) => obj is Service ? obj.id : null,
     parentType: Service,
@@ -197,6 +195,8 @@ class _ServiceFields {
     'lastEdit': lastEdit,
     'adminUsers': adminUsers,
   };
+
+  _ServiceFields();
 }
 
 // **************************************************************************

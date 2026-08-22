@@ -84,15 +84,15 @@ class QueryableFieldsGenerator extends GeneratorForAnnotation<Queryable> {
             ? ''
             : 'static final $generatedClassName _instance = $generatedClassName._();',
       )
-      ..writeln(
-        allowExtension ? '' : 'factory $generatedClassName() => _instance;',
-      )
-      ..writeln('$generatedClassName${allowExtension ? '' : '._'}();\n')
       ..writeAll(
         _writeClassFields(classElement, labelsOverrides, fields),
         '\n\n',
       )
       ..writeln(_collectAllClassFields(classElement.displayName, fields))
+      ..writeln(
+        allowExtension ? '' : 'factory $generatedClassName() => _instance;',
+      )
+      ..writeln('$generatedClassName${allowExtension ? '' : '._'}();\n')
       ..writeln('}');
 
     return buffer.toString();
