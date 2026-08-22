@@ -1,6 +1,7 @@
 import 'package:church_admin/church_admin.dart';
 
 abstract class AuthException implements Exception {
+  // Authentication SDKs expose untyped failures that callers need for diagnostics.
   // ignore: no-object-declaration
   final Object? error;
   final StackTrace? stackTrace;
