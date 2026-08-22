@@ -166,21 +166,14 @@
       "statusBar.background": "#009688",
       "statusBar.foreground": "#e7e7e7",
       "statusBarItem.hoverBackground": "#00c9b6",
-      "statusBarItem.remoteBackground": "#90009f",
+      "statusBarItem.remoteBackground": "#009688",
       "statusBarItem.remoteForeground": "#e7e7e7",
       "titleBar.activeBackground": "#009688",
       "titleBar.activeForeground": "#e7e7e7",
       "titleBar.inactiveBackground": "#00968899",
       "titleBar.inactiveForeground": "#e7e7e799",
       "commandCenter.border": "#e7e7e799",
-      "elixirLS.projectDir": "./backend-beta",
-      "activityBarTop.activeBackground": "#00c9b6",
-      "activityBarTop.background": "#00c9b6",
-      "activityBarTop.foreground": "#15202b",
-      "activityBarTop.inactiveForeground": "#15202b99",
-      "commandCenter.foreground": "#e7e7e7",
-      "statusBar.debuggingBackground": "#009688",
-      "statusBar.debuggingForeground": "#e7e7e7"
+      "elixirLS.projectDir": "./backend-beta"
     },
     "peacock.color": "009688",
     "json.schemas": [
