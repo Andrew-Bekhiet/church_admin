@@ -5,6 +5,20 @@ import 'package:go_router/go_router.dart';
 
 part 'edit_group_route.g.dart';
 
+@TypedGoRoute<EditGroupRoute>(path: '/edit_group')
+class EditGroupRoute extends GoRouteData with $EditGroupRoute {
+  final EditGroupExtra? $extra;
+  const EditGroupRoute({this.$extra});
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return EditGroup(
+      group: $extra?.group,
+      withService: $extra?.service,
+    );
+  }
+}
+
 @JsonSerializable()
 class EditGroupExtra extends SerializableExtra {
   final Group? group;
@@ -19,18 +33,4 @@ class EditGroupExtra extends SerializableExtra {
 
   @override
   Json toJson() => _$EditGroupExtraToJson(this);
-}
-
-@TypedGoRoute<EditGroupRoute>(path: '/edit_group')
-class EditGroupRoute extends GoRouteData with $EditGroupRoute {
-  final EditGroupExtra? $extra;
-  const EditGroupRoute({this.$extra});
-
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return EditGroup(
-      group: $extra?.group,
-      withService: $extra?.service,
-    );
-  }
 }

@@ -5,6 +5,25 @@ import 'package:go_router/go_router.dart';
 
 part 'edit_person_route.g.dart';
 
+@TypedGoRoute<EditPersonRoute>(path: '/edit_person')
+class EditPersonRoute extends GoRouteData with $EditPersonRoute {
+  final EditPersonExtra? $extra;
+  const EditPersonRoute({this.$extra});
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return EditPerson(
+      person: $extra?.person,
+      withFamily: $extra?.family,
+      withAddress: Address(street: $extra?.street, area: $extra?.area),
+      withService: $extra?.service,
+      withGroup: $extra?.group,
+      withStudyYear: $extra?.studyYear,
+      withGender: $extra?.gender,
+    );
+  }
+}
+
 @JsonSerializable()
 class EditPersonExtra extends SerializableExtra {
   final Person? person;
@@ -35,23 +54,4 @@ class EditPersonExtra extends SerializableExtra {
 
   @override
   Json toJson() => _$EditPersonExtraToJson(this);
-}
-
-@TypedGoRoute<EditPersonRoute>(path: '/edit_person')
-class EditPersonRoute extends GoRouteData with $EditPersonRoute {
-  final EditPersonExtra? $extra;
-  const EditPersonRoute({this.$extra});
-
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return EditPerson(
-      person: $extra?.person,
-      withFamily: $extra?.family,
-      withAddress: Address(street: $extra?.street, area: $extra?.area),
-      withService: $extra?.service,
-      withGroup: $extra?.group,
-      withStudyYear: $extra?.studyYear,
-      withGender: $extra?.gender,
-    );
-  }
 }

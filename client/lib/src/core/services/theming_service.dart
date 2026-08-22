@@ -7,12 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:tinycolor2/tinycolor2.dart';
 
-abstract final class AppColors {
-  static const Color primary = Color(0xFFB38A58);
-  static const Color secondary = Color(0xFFC7A483);
-  static const Color tertiary = Color(0xFFE2CABF);
-}
-
 class ThemingService with WidgetsBindingObserver {
   static ThemingService get I =>
       globalProviderContainer.read(themingServiceProvider);
@@ -363,6 +357,12 @@ class ThemingService with WidgetsBindingObserver {
   Future<void> dispose() async {
     await _themeData.close();
   }
+}
+
+abstract final class AppColors {
+  static const Color primary = Color(0xFFB38A58);
+  static const Color secondary = Color(0xFFC7A483);
+  static const Color tertiary = Color(0xFFE2CABF);
 }
 
 extension ChurchAdminTheming on ThemeData {

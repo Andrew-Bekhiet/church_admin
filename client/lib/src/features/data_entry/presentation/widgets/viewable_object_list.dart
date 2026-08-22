@@ -6,18 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
-enum ViewableObjectListType {
-  list(columns: 0),
-  grid(columns: 2),
-  grid3(columns: 3);
-
-  final int columns;
-
-  const ViewableObjectListType({
-    required this.columns,
-  });
-}
-
 class ViewableObjectList<T extends Viewable> extends StatefulWidget {
   final ScrollController? scrollController;
   final ViewableObjectListController<T> objectsController;
@@ -39,6 +27,18 @@ class ViewableObjectList<T extends Viewable> extends StatefulWidget {
 
   @override
   State<ViewableObjectList> createState() => _ViewableObjectListState<T>();
+}
+
+enum ViewableObjectListType {
+  list(columns: 0),
+  grid(columns: 2),
+  grid3(columns: 3);
+
+  final int columns;
+
+  const ViewableObjectListType({
+    required this.columns,
+  });
 }
 
 class _ViewableObjectListState<T extends Viewable>

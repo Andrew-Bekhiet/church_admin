@@ -5,6 +5,17 @@ import 'package:go_router/go_router.dart';
 
 part 'person_analysis_route.g.dart';
 
+@TypedGoRoute<PersonAnalysisRoute>(path: '/person_analysis')
+class PersonAnalysisRoute extends GoRouteData with $PersonAnalysisRoute {
+  final PersonAnalysisExtra $extra;
+  const PersonAnalysisRoute({required this.$extra});
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return PersonAnalysis(person: $extra.person);
+  }
+}
+
 @JsonSerializable()
 class PersonAnalysisExtra extends SerializableExtra {
   final Person person;
@@ -19,15 +30,4 @@ class PersonAnalysisExtra extends SerializableExtra {
 
   @override
   Json toJson() => _$PersonAnalysisExtraToJson(this);
-}
-
-@TypedGoRoute<PersonAnalysisRoute>(path: '/person_analysis')
-class PersonAnalysisRoute extends GoRouteData with $PersonAnalysisRoute {
-  final PersonAnalysisExtra $extra;
-  const PersonAnalysisRoute({required this.$extra});
-
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return PersonAnalysis(person: $extra.person);
-  }
 }

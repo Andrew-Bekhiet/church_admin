@@ -4,12 +4,6 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 
-abstract final class AuthenticateScreenKeys {
-  static const Key passwordFieldKey = Key('password_text_field');
-  static const Key biometricsButtonKey = Key('biometrics_button');
-  static const Key submitButtonKey = Key('submit_button');
-}
-
 class AuthenticateScreen extends StatefulWidget {
   final String? next;
 
@@ -17,6 +11,12 @@ class AuthenticateScreen extends StatefulWidget {
 
   @override
   State<AuthenticateScreen> createState() => _AuthenticateScreenState();
+}
+
+abstract final class AuthenticateScreenKeys {
+  static const Key passwordFieldKey = Key('password_text_field');
+  static const Key biometricsButtonKey = Key('biometrics_button');
+  static const Key submitButtonKey = Key('submit_button');
 }
 
 class _AuthenticateScreenState extends State<AuthenticateScreen> {

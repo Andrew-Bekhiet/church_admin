@@ -4,15 +4,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:material_symbols_icons/symbols.dart';
 import 'package:universal_io/io.dart';
 
-class PhotoFieldState {
-  final bool deletePhoto;
-  final XFile? newPhoto;
-
-  bool get hasChanged => deletePhoto || newPhoto != null;
-
-  PhotoFieldState({required this.deletePhoto, this.newPhoto});
-}
-
 class PhotoField extends StatelessWidget {
   final ViewableWithIDAndImage object;
 
@@ -137,4 +128,13 @@ class PhotoField extends StatelessWidget {
   }
 
   final void Function(PhotoFieldState?)? onSaved;
+}
+
+class PhotoFieldState {
+  final bool deletePhoto;
+  final XFile? newPhoto;
+
+  bool get hasChanged => deletePhoto || newPhoto != null;
+
+  PhotoFieldState({required this.deletePhoto, this.newPhoto});
 }

@@ -5,6 +5,17 @@ import 'package:go_router/go_router.dart';
 
 part 'edit_store_route.g.dart';
 
+@TypedGoRoute<EditStoreRoute>(path: '/edit_store')
+class EditStoreRoute extends GoRouteData with $EditStoreRoute {
+  final EditStoreExtra? $extra;
+  const EditStoreRoute({this.$extra});
+
+  @override
+  Widget build(BuildContext context, GoRouterState state) {
+    return EditStore(store: $extra?.store, withFamily: $extra?.family);
+  }
+}
+
 @JsonSerializable()
 class EditStoreExtra extends SerializableExtra {
   final Area? area;
@@ -21,15 +32,4 @@ class EditStoreExtra extends SerializableExtra {
 
   @override
   Json toJson() => _$EditStoreExtraToJson(this);
-}
-
-@TypedGoRoute<EditStoreRoute>(path: '/edit_store')
-class EditStoreRoute extends GoRouteData with $EditStoreRoute {
-  final EditStoreExtra? $extra;
-  const EditStoreRoute({this.$extra});
-
-  @override
-  Widget build(BuildContext context, GoRouterState state) {
-    return EditStore(store: $extra?.store, withFamily: $extra?.family);
-  }
 }

@@ -5,38 +5,6 @@ import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
 import 'package:rxdart/rxdart.dart';
 
-/// A base class that provides pagination functionality for streams of items.
-///
-/// This abstract class defines the core functionality needed to implement a paginated stream,
-/// where data is loaded and listened to in batches (pages) as needed.
-abstract class PaginatableStreamBase<T> extends Stream<List<T>> {
-  int get pageSize;
-
-  bool get hasMore;
-
-  int get currentPageIndex;
-
-  List<T> get currentItems;
-
-  T? get currentCursor;
-
-  int? get currentTotalCount;
-
-  bool get isLoading;
-
-  Stream<bool> get onLoadingChanged;
-
-  Stream<int?> get totalCountStream;
-
-  PaginatableStreamBase();
-
-  Future<void> listenToPage(int pageIndex);
-
-  Future<void> listenToNextPage() => listenToPage(currentPageIndex + 1);
-
-  Future<void> dispose();
-}
-
 /// A concrete implementation of [PaginatableStreamBase<T, P>] that handles pagination logic.
 ///
 /// This class manages a realtime list of items that are loaded in pages, using a factory function
@@ -261,6 +229,38 @@ class PaginatableStream<T, P> extends PaginatableStreamBase<T> {
     await _subjectSubscription.cancel();
     await _subject.close();
   }
+}
+
+/// A base class that provides pagination functionality for streams of items.
+///
+/// This abstract class defines the core functionality needed to implement a paginated stream,
+/// where data is loaded and listened to in batches (pages) as needed.
+abstract class PaginatableStreamBase<T> extends Stream<List<T>> {
+  int get pageSize;
+
+  bool get hasMore;
+
+  int get currentPageIndex;
+
+  List<T> get currentItems;
+
+  T? get currentCursor;
+
+  int? get currentTotalCount;
+
+  bool get isLoading;
+
+  Stream<bool> get onLoadingChanged;
+
+  Stream<int?> get totalCountStream;
+
+  PaginatableStreamBase();
+
+  Future<void> listenToPage(int pageIndex);
+
+  Future<void> listenToNextPage() => listenToPage(currentPageIndex + 1);
+
+  Future<void> dispose();
 }
 
 typedef PaginatableStreamFactory<T, P> =

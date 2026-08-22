@@ -1,8 +1,5 @@
 import 'package:equatable/equatable.dart';
 
-// TODO: support totp
-enum MultiFactorType { phone }
-
 class MultiFactorInfo extends Equatable {
   final String id;
   final MultiFactorType type;
@@ -20,3 +17,6 @@ class MultiFactorInfo extends Equatable {
     this.phoneNumber,
   });
 }
+
+// TODO: support totp
+enum MultiFactorType { phone }

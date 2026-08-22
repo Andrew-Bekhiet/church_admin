@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
 
-enum GenderFieldType {
-  radio,
-  dropdown,
-}
-
 class GenderField extends StatelessWidget {
   final GenderFieldType type;
   final bool nullable;
@@ -152,4 +147,9 @@ class GenderField extends StatelessWidget {
       onChanged?.call(value);
     }
   }
+}
+
+enum GenderFieldType {
+  radio,
+  dropdown,
 }
