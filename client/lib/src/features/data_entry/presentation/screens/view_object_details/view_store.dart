@@ -54,16 +54,10 @@ class _ViewStoreState extends State<ViewStore> {
       objectStream: stream,
       childrenTypes: const [Person],
       tabsContentBuilders: {
-        Person: (context) => StreamBuilder(
-          stream: _personsOrderBy.stream,
-          initialData: _personsOrderBy.value,
-          builder: (context, orderBySnapshot) => ViewableObjectList(
-            scrollController: PrimaryScrollController.maybeOf(context),
-            viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
-              secondLineField: orderBySnapshot.data?.first.getSecondLineField(),
-            ),
-            objectsController: _personsController,
-          ),
+        Person: (context) => OrderedViewableObjectList(
+          orderByStream: _personsOrderBy.stream,
+          initialOrderBy: _personsOrderBy.value,
+          objectsController: _personsController,
         ),
       },
       sliverPersistentHeaderDelegate: ChipTabBarPersistentHeaderDelegate(
@@ -143,7 +137,9 @@ class _ViewStoreState extends State<ViewStore> {
               icon: const Icon(Symbols.query_stats),
               label: const Text('احصائيات'),
               // TODO: add store analysis
-              onPressed: () {},
+              onPressed: () {
+                return;
+              },
             ),
           ),
           HistoryProperty(
@@ -160,6 +156,14 @@ class _ViewStoreState extends State<ViewStore> {
         ]),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    unawaited(_personsController.dispose());
+    unawaited(_personsOrderBy.close());
+
+    super.dispose();
   }
 
   Future<void> _showOrderBySheet() async {

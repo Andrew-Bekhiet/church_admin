@@ -167,15 +167,7 @@ class _ViewServiceState extends State<ViewService> {
         ),
       ),
       sliverPersistentHeaderDelegate: ChipTabBarPersistentHeaderDelegate(
-        filtersWidget: Builder(
-          builder: (context) => IconButton(
-            visualDensity: VisualDensity.compact,
-            padding: EdgeInsets.zero,
-            icon: const Icon(Symbols.sort),
-            onPressed: () =>
-                _showOrderBySheet(DefaultTabController.of(context).index),
-          ),
-        ),
+        filtersWidget: TabAwareSortButton(onPressed: _showOrderBySheet),
         tabs: [
           (
             label: 'الفصول',
@@ -213,27 +205,15 @@ class _ViewServiceState extends State<ViewService> {
             objectsController: _classesController,
           ),
         ),
-        Group: (context) => StreamBuilder(
-          stream: _groupsOrderBy.stream,
-          initialData: _groupsOrderBy.value,
-          builder: (context, orderBySnapshot) => ViewableObjectList(
-            scrollController: PrimaryScrollController.maybeOf(context),
-            viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
-              secondLineField: orderBySnapshot.data?.first.getSecondLineField(),
-            ),
-            objectsController: _groupsController,
-          ),
+        Group: (context) => OrderedViewableObjectList(
+          orderByStream: _groupsOrderBy.stream,
+          initialOrderBy: _groupsOrderBy.value,
+          objectsController: _groupsController,
         ),
-        Person: (context) => StreamBuilder(
-          stream: _personsOrderBy.stream,
-          initialData: _personsOrderBy.value,
-          builder: (context, orderBySnapshot) => ViewableObjectList(
-            scrollController: PrimaryScrollController.maybeOf(context),
-            viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
-              secondLineField: orderBySnapshot.data?.first.getSecondLineField(),
-            ),
-            objectsController: _personsController,
-          ),
+        Person: (context) => OrderedViewableObjectList(
+          orderByStream: _personsOrderBy.stream,
+          initialOrderBy: _personsOrderBy.value,
+          objectsController: _personsController,
         ),
       },
       notFoundBuilder: (context) => Center(
@@ -249,8 +229,8 @@ class _ViewServiceState extends State<ViewService> {
         ).push(context),
         icon: const Icon(Symbols.edit),
       ),
-      bottomNavBarBuilder: (context, tabController) => StreamBuilder<String?>(
-        stream: tabController.animation!.asStream().switchMap(
+      bottomNavBarBuilder: (context, tabController) => TotalCountLabel(
+        countStream: tabController.animation!.asStream().switchMap(
           (index) {
             final currentIndex = index.round();
 
@@ -269,13 +249,6 @@ class _ViewServiceState extends State<ViewService> {
             );
           },
         ),
-        builder: (context, snapshot) {
-          return Text(
-            snapshot.data ?? '',
-            style: Theme.of(context).textTheme.titleLarge,
-            textAlign: TextAlign.center,
-          );
-        },
       ),
       floatingActionButtonBuilder: (context, tabController, service) =>
           SwitchingFloatingActionButton.fromTabController(
@@ -313,6 +286,9 @@ class _ViewServiceState extends State<ViewService> {
   @override
   void dispose() {
     unawaited(Future.wait(_controllersToDispose.map((e) => e.dispose())));
+    unawaited(_classesOrderBy.close());
+    unawaited(_groupsOrderBy.close());
+    unawaited(_personsOrderBy.close());
 
     super.dispose();
   }
@@ -355,6 +331,7 @@ class _ViewServiceState extends State<ViewService> {
     ViewableObjectListController<T> controller,
   ) {
     _controllersToDispose.add(controller);
+
     return controller;
   }
 }

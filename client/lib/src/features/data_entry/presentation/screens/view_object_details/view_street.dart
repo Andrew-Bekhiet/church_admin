@@ -111,50 +111,24 @@ class _ViewStreetState extends State<ViewStreet> {
       objectStream: stream,
       childrenTypes: const [Family, Person, Store],
       tabsContentBuilders: {
-        Family: (context) => StreamBuilder(
-          stream: _familiesOrderBy.stream,
-          initialData: _familiesOrderBy.value,
-          builder: (context, orderBySnapshot) => ViewableObjectList(
-            scrollController: PrimaryScrollController.maybeOf(context),
-            viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
-              secondLineField: orderBySnapshot.data?.first.getSecondLineField(),
-            ),
-            objectsController: _familiesController,
-          ),
+        Family: (context) => OrderedViewableObjectList(
+          orderByStream: _familiesOrderBy.stream,
+          initialOrderBy: _familiesOrderBy.value,
+          objectsController: _familiesController,
         ),
-        Person: (context) => StreamBuilder(
-          stream: _personsOrderBy.stream,
-          initialData: _personsOrderBy.value,
-          builder: (context, orderBySnapshot) => ViewableObjectList(
-            scrollController: PrimaryScrollController.maybeOf(context),
-            viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
-              secondLineField: orderBySnapshot.data?.first.getSecondLineField(),
-            ),
-            objectsController: _personsController,
-          ),
+        Person: (context) => OrderedViewableObjectList(
+          orderByStream: _personsOrderBy.stream,
+          initialOrderBy: _personsOrderBy.value,
+          objectsController: _personsController,
         ),
-        Store: (context) => StreamBuilder(
-          stream: _storesOrderBy.stream,
-          initialData: _storesOrderBy.value,
-          builder: (context, orderBySnapshot) => ViewableObjectList(
-            scrollController: PrimaryScrollController.maybeOf(context),
-            viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
-              secondLineField: orderBySnapshot.data?.first.getSecondLineField(),
-            ),
-            objectsController: _storesController,
-          ),
+        Store: (context) => OrderedViewableObjectList(
+          orderByStream: _storesOrderBy.stream,
+          initialOrderBy: _storesOrderBy.value,
+          objectsController: _storesController,
         ),
       },
       sliverPersistentHeaderDelegate: ChipTabBarPersistentHeaderDelegate(
-        filtersWidget: Builder(
-          builder: (context) => IconButton(
-            visualDensity: VisualDensity.compact,
-            padding: EdgeInsets.zero,
-            icon: const Icon(Symbols.sort),
-            onPressed: () =>
-                _showOrderBySheet(DefaultTabController.of(context).index),
-          ),
-        ),
+        filtersWidget: TabAwareSortButton(onPressed: _showOrderBySheet),
         tabs: [
           (
             icon: viewableObjectService.getDefaultIconFor<Family>(),
@@ -206,7 +180,9 @@ class _ViewStreetState extends State<ViewStreet> {
               icon: const Icon(Symbols.query_stats),
               label: const Text('احصائيات'),
               // TODO: add street analysis
-              onPressed: () {},
+              onPressed: () {
+                return;
+              },
             ),
           ),
           HistoryProperty(
@@ -246,8 +222,8 @@ class _ViewStreetState extends State<ViewStreet> {
           style: Theme.of(context).textTheme.titleLarge,
         ),
       ),
-      bottomNavBarBuilder: (context, tabController) => StreamBuilder<String?>(
-        stream: tabController.animation!.asStream().switchMap(
+      bottomNavBarBuilder: (context, tabController) => TotalCountLabel(
+        countStream: tabController.animation!.asStream().switchMap(
           (index) {
             final currentIndex = index.round();
 
@@ -266,13 +242,6 @@ class _ViewStreetState extends State<ViewStreet> {
             );
           },
         ),
-        builder: (context, snapshot) {
-          return Text(
-            snapshot.data ?? '',
-            style: Theme.of(context).textTheme.titleLarge,
-            textAlign: TextAlign.center,
-          );
-        },
       ),
       floatingActionButtonBuilder: (context, tabController, street) =>
           SwitchingFloatingActionButton.fromTabController(
@@ -310,6 +279,9 @@ class _ViewStreetState extends State<ViewStreet> {
   @override
   void dispose() {
     unawaited(Future.wait(_controllersToDispose.map((e) => e.dispose())));
+    unawaited(_familiesOrderBy.close());
+    unawaited(_storesOrderBy.close());
+    unawaited(_personsOrderBy.close());
 
     super.dispose();
   }
@@ -345,6 +317,7 @@ class _ViewStreetState extends State<ViewStreet> {
     ViewableObjectListController<T> controller,
   ) {
     _controllersToDispose.add(controller);
+
     return controller;
   }
 }
