@@ -27,7 +27,7 @@ class FlutterLocalNotificationsInit implements Initializer {
 
     if (!initialized) {
       throw Exception(
-        'FlutterLocalNotificationsPluginInit failed to initialize',
+        'FlutterLocalNotificationsInit failed to initialize',
       );
     }
   }

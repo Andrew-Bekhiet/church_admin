@@ -103,8 +103,8 @@ class _ViewGeodataMapState extends State<ViewGeodataMap>
   }
 
   @override
-  Future<void> dispose() async {
-    await _mapOptions.close();
+  void dispose() {
+    unawaited(_mapOptions.close());
 
     super.dispose();
   }
