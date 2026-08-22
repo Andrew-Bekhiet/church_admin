@@ -241,9 +241,3 @@ typedef ItemBuilder<T extends Viewable> =
       T item,
       ViewableObjectWidgetConfig<T>? config,
     );
-
-typedef OffsetFromIndexFunction =
-    int Function(
-      int limit,
-      int itemIndex,
-    );

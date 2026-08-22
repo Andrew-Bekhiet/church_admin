@@ -75,10 +75,6 @@ class PermissionsSet extends DelegatingSet<UserPermission> with Equatable {
   }
 }
 
-extension RemoveQuotes on String {
-  String removeQuotes() => replaceAll('"', '').replaceAll("'", '');
-}
-
 List<Json> permissionsSetToJson(PermissionsSet data) =>
     data.map((e) => {'permission': e.name}).toList();
 PermissionsSet permissionsSetFromJson(dynamic data) => PermissionsSet.parse(

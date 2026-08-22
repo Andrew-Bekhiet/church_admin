@@ -5,7 +5,6 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:dio/dio.dart';
 import 'package:file/file.dart' show FileSystem;
 import 'package:file/local.dart';
-import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -175,7 +174,6 @@ final userPreferencesServiceProvider = Provider<UserPreferencesService>(
   ),
 );
 
-final firebaseAppCheckProvider = Provider((_) => FirebaseAppCheck.instance);
 final firebaseAuthProvider = Provider((_) => FirebaseAuth.instance);
 final firebaseDatabaseProvider = Provider((_) => FirebaseDatabase.instance);
 final firebaseFunctionsProvider = Provider(
