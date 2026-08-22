@@ -25,6 +25,7 @@ extension DateTimeX on DateTime {
     if (appendSince) {
       return format(this, locale: 'ar', clock: now ?? clock.now());
     }
+
     return format(
       this,
       locale: 'ar',
@@ -100,6 +101,7 @@ extension MaxValueLength<T> on Map<T, List> {
         value = newValue;
       }
     }
+
     return value.key;
   }
 }
@@ -126,16 +128,16 @@ extension NextItem<T> on Stream<T> {
     late final StreamSubscription<T> subscription;
     subscription = listen(
       (data) async {
-        if (!completer.isCompleted && test(data)) {
-          completer.complete(data);
-          await subscription.cancel();
-        }
+        if (completer.isCompleted || !test(data)) return;
+
+        completer.complete(data);
+        await subscription.cancel();
       },
       onError: (data) async {
-        if (!completer.isCompleted) {
-          completer.completeError(data);
-          await subscription.cancel();
-        }
+        if (completer.isCompleted) return;
+
+        completer.completeError(data);
+        await subscription.cancel();
       },
       onDone: () async {
         if (!completer.isCompleted && !ignoreStreamDone) {
@@ -169,13 +171,6 @@ extension NextItem<T> on Stream<T> {
       nextWhere((o) => o != null, ignoreStreamDone: true);
 }
 
-extension WithPadding on Widget {
-  Widget withPadding(EdgeInsetsGeometry padding) => Padding(
-    padding: padding,
-    child: this,
-  );
-}
-
 extension CopyDateTimeRange on DateTimeRange {
   DateTimeRange copyWith({DateTime? start, DateTime? end}) {
     return DateTimeRange(
@@ -204,6 +199,11 @@ extension ColorValue on Color {
 }
 
 extension ValueListenableAsStream<T> on ValueListenable<T> {
+  /// Returns a [Stream] mirroring this [ValueListenable].
+  ///
+  /// The underlying [StreamController] is closed automatically once the
+  /// returned stream's subscription is cancelled, since a [ValueListenable]
+  /// has no lifecycle event of its own to close it on.
   Stream<T> asStream() {
     late final StreamController<T> controller;
 
@@ -213,7 +213,10 @@ extension ValueListenableAsStream<T> on ValueListenable<T> {
 
     controller = StreamController<T>(
       onListen: () => addListener(listener),
-      onCancel: () => removeListener(listener),
+      onCancel: () {
+        removeListener(listener);
+        unawaited(controller.close());
+      },
     );
 
     return controller.stream.startWith(value);
