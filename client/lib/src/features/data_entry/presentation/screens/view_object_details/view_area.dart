@@ -315,19 +315,10 @@ class _ViewAreaState extends State<ViewArea> {
       _ => throw UnimplementedError(),
     };
 
-    await showOrderByBottomSheet(
+    await showOrderBySheetAndSave(
       context,
       queryableType: queryableType,
       orderBySubject: orderBySubject,
-      onChanged: (newOrderBy) {
-        orderBySubject.add(newOrderBy);
-        unawaited(
-          ViewObjectDetails.saveLastOrderByFor(
-            type: queryableType,
-            orderBy: newOrderBy,
-          ),
-        );
-      },
     );
   }
 

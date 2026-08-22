@@ -309,20 +309,11 @@ class _ViewServiceState extends State<ViewService> {
       _ => throw UnimplementedError(),
     };
 
-    await showOrderByBottomSheet(
+    await showOrderBySheetAndSave(
       context,
       queryableType: queryableType,
       orderBySubject: orderBySubject,
-      onChanged: (newOrderBy) {
-        orderBySubject.add(newOrderBy);
-        unawaited(
-          ViewObjectDetails.saveLastOrderByFor(
-            type: queryableType,
-            inServiceContext: currentTabIndex == 2,
-            orderBy: newOrderBy,
-          ),
-        );
-      },
+      inServiceContext: currentTabIndex == 2,
     );
   }
 

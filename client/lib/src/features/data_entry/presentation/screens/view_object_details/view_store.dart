@@ -167,21 +167,10 @@ class _ViewStoreState extends State<ViewStore> {
   }
 
   Future<void> _showOrderBySheet() async {
-    final queryableType = AdvancedQueriesMetadata().person;
-
-    await showOrderByBottomSheet(
+    await showOrderBySheetAndSave(
       context,
-      queryableType: queryableType,
+      queryableType: AdvancedQueriesMetadata().person,
       orderBySubject: _personsOrderBy,
-      onChanged: (newOrderBy) {
-        _personsOrderBy.add(newOrderBy);
-        unawaited(
-          ViewObjectDetails.saveLastOrderByFor(
-            type: queryableType,
-            orderBy: newOrderBy,
-          ),
-        );
-      },
     );
   }
 }

@@ -291,19 +291,10 @@ class _ViewFamilyState extends State<ViewFamily> {
       _ => throw UnimplementedError(),
     };
 
-    await showOrderByBottomSheet(
+    await showOrderBySheetAndSave(
       context,
       queryableType: queryableType,
       orderBySubject: orderBySubject,
-      onChanged: (newOrderBy) {
-        orderBySubject.add(newOrderBy);
-        unawaited(
-          ViewObjectDetails.saveLastOrderByFor(
-            type: queryableType,
-            orderBy: newOrderBy,
-          ),
-        );
-      },
     );
   }
 
