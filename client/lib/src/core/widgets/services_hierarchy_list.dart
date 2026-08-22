@@ -84,8 +84,27 @@ class _ServicesHierarchyListState extends State<ServicesHierarchyList>
       itemBuilder:
           listType == ViewableObjectListType.grid ||
               listType == ViewableObjectListType.grid3
-          ? _buildServiceCard
-          : _buildHierarchyServiceTile,
+          ? (
+              BuildContext context,
+              Service service,
+              ViewableObjectWidgetConfig<Service>? config,
+            ) => _ServiceCard(service: service, config: config)
+          : (
+              BuildContext context,
+              Service service,
+              ViewableObjectWidgetConfig<Service>? config,
+            ) => _HierarchyServiceTile(
+              service: service,
+              config: config,
+              controllers: _animationControllers,
+              vsync: this,
+              showClasses: widget.showClasses,
+              showGroups: widget.showGroups,
+              serviceTrailingBuilder: widget.serviceTrailingBuilder,
+              classBuilder: widget.classBuilder,
+              studyYearBuilder: widget.studyYearBuilder,
+              groupBuilder: widget.groupBuilder,
+            ),
     );
   }
 
@@ -97,12 +116,16 @@ class _ServicesHierarchyListState extends State<ServicesHierarchyList>
 
     super.dispose();
   }
+}
 
-  Widget _buildServiceCard(
-    BuildContext context,
-    Service service,
-    ViewableObjectWidgetConfig? config,
-  ) {
+class _ServiceCard extends StatelessWidget {
+  final Service service;
+  final ViewableObjectWidgetConfig<Service>? config;
+
+  const _ServiceCard({required this.service, required this.config});
+
+  @override
+  Widget build(BuildContext context) {
     return ViewableObjectCard(
       service,
       title: Text(
@@ -116,18 +139,39 @@ class _ServicesHierarchyListState extends State<ServicesHierarchyList>
       size: null,
     );
   }
+}
 
-  Widget _buildHierarchyServiceTile(
-    //ignore: avoid-unused-parameters
-    BuildContext context,
-    Service service,
-    ViewableObjectWidgetConfig? config,
-  ) {
-    final topController = _animationControllers[service] ??=
-        AnimationController(
-          duration: const Duration(milliseconds: 225),
-          vsync: this,
-        );
+class _HierarchyServiceTile extends StatelessWidget {
+  final Service service;
+  final ViewableObjectWidgetConfig<Service>? config;
+  final Map<Object, AnimationController> controllers;
+  final TickerProvider vsync;
+  final bool showClasses;
+  final bool showGroups;
+  final ServiceTrailingBuilder? serviceTrailingBuilder;
+  final ClassBuilder? classBuilder;
+  final StudyYearBuilder? studyYearBuilder;
+  final GroupBuilder? groupBuilder;
+
+  const _HierarchyServiceTile({
+    required this.service,
+    required this.config,
+    required this.controllers,
+    required this.vsync,
+    required this.showClasses,
+    required this.showGroups,
+    this.serviceTrailingBuilder,
+    this.classBuilder,
+    this.studyYearBuilder,
+    this.groupBuilder,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final topController = controllers[service] ??= AnimationController(
+      duration: const Duration(milliseconds: 225),
+      vsync: vsync,
+    );
 
     return AnimatedBuilder(
       animation: topController.drive(
@@ -150,8 +194,8 @@ class _ServicesHierarchyListState extends State<ServicesHierarchyList>
                 angle: topController.value * math.pi,
                 child: const Icon(Symbols.expand_more),
               ),
-              if (widget.serviceTrailingBuilder != null)
-                widget.serviceTrailingBuilder!(
+              if (serviceTrailingBuilder != null)
+                serviceTrailingBuilder!(
                   context,
                   service,
                   onLongPress: config?.onLongPress,
@@ -176,26 +220,26 @@ class _ServicesHierarchyListState extends State<ServicesHierarchyList>
             child: Text(service.name),
           ),
           children: [
-            if (widget.showClasses)
+            if (showClasses)
               _Classes(
                 service: service,
                 animationValue: topController.value,
-                classBuilder: widget.classBuilder,
-                studyYearBuilder: widget.studyYearBuilder,
+                classBuilder: classBuilder,
+                studyYearBuilder: studyYearBuilder,
               ),
-            if (widget.showClasses &&
-                widget.showGroups &&
+            if (showClasses &&
+                showGroups &&
                 service.studyYearFrom != null &&
                 service.studyYearTo != null &&
                 service.studyYearTo!.order - service.studyYearFrom!.order >=
                     1 &&
                 (service.groups?.isNotEmpty ?? false))
               const Divider(),
-            if (widget.showGroups)
+            if (showGroups)
               _Groups(
                 service: service,
                 animationValue: topController.value,
-                groupBuilder: widget.groupBuilder,
+                groupBuilder: groupBuilder,
               ),
           ],
         ),

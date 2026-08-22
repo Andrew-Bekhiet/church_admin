@@ -1,4 +1,5 @@
 export 'widgets/animated_fab.dart';
+export 'widgets/ca_error_widget.dart';
 export 'widgets/church_admin_splash_screen.dart';
 export 'widgets/error_dialog.dart';
 export 'widgets/lazy_tab_page.dart';

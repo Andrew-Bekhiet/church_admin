@@ -23,7 +23,7 @@ class LoggingService extends BlocObserver {
 
   LoggingService() {
     FlutterError.onError = _onFlutterError;
-    ErrorWidget.builder = _errorWidgetBuilder;
+    ErrorWidget.builder = (details) => CAErrorWidget(details: details);
   }
 
   Future<void> _onFlutterError(FlutterErrorDetails flutterError) async {
@@ -32,17 +32,6 @@ class LoggingService extends BlocObserver {
         message: flutterError.exceptionAsString(),
         error: flutterError.exception,
         stackTrace: flutterError.stack,
-      ),
-    );
-  }
-
-  Widget _errorWidgetBuilder(FlutterErrorDetails error) {
-    return Material(
-      type: MaterialType.card,
-      child: Center(
-        child: Text(
-          'حدث خطأ:\n${error.summary}',
-        ),
       ),
     );
   }
