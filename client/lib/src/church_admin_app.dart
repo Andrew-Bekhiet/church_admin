@@ -15,20 +15,19 @@ class ChurchAdminApp extends StatefulWidget {
 
 class _ChurchAdminAppState extends State<ChurchAdminApp>
     with WidgetsBindingObserver {
-  late final StreamSubscription<bool> _connectivityListener =
-      ConnectivityService.I.connectivityStream
-          .distinct()
-          .skip(1)
-          .listen(_onConnectivityChanged);
-  late final StreamSubscription<Notification> _notificationsListener =
-      NotificationsService.I.onNotificationTapStream.listen(
-        _onNotificationTapped,
-      );
+  late final StreamSubscription<bool> _connectivityListener;
+  late final StreamSubscription<Notification> _notificationsListener;
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);
+    _connectivityListener = ConnectivityService.I.connectivityStream
+        .distinct()
+        .skip(1)
+        .listen(_onConnectivityChanged);
+    _notificationsListener = NotificationsService.I.onNotificationTapStream
+        .listen(_onNotificationTapped);
   }
 
   @override
@@ -131,12 +130,12 @@ class _ChurchAdminAppState extends State<ChurchAdminApp>
   }
 
   @override
-  Future<void> dispose() async {
+  void dispose() {
     WidgetsBinding.instance.removeObserver(this);
-    globalProviderContainer.dispose();
+    unawaited(_connectivityListener.cancel());
+    unawaited(_notificationsListener.cancel());
 
-    await _connectivityListener.cancel();
-    await _notificationsListener.cancel();
+    globalProviderContainer.dispose();
 
     super.dispose();
   }
