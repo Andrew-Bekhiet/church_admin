@@ -2,9 +2,12 @@
   "folders": [
     {
       "name": "church_admin",
-      "path": ".",
+      "path": "."
     },
-    { "name": "server", "path": "./server" },
+    {
+      "name": "server",
+      "path": "./server"
+    }
   ],
   "launch": {
     "version": "0.2.0",
@@ -16,8 +19,8 @@
         "cwd": "${workspaceFolder:church_admin}/client",
         "args": [
           "--dart-define-from-file",
-          "${workspaceFolder:church_admin}/client/.env",
-        ],
+          "${workspaceFolder:church_admin}/client/.env"
+        ]
       },
       {
         "name": "church_admin (profile mode)",
@@ -27,8 +30,8 @@
         "cwd": "${workspaceFolder:church_admin}/client/",
         "args": [
           "--dart-define-from-file",
-          "${workspaceFolder:church_admin}/client/.env.dev",
-        ],
+          "${workspaceFolder:church_admin}/client/.env.dev"
+        ]
       },
       {
         "name": "church_admin (release mode)",
@@ -38,8 +41,8 @@
         "cwd": "${workspaceFolder:church_admin}/client/",
         "args": [
           "--dart-define-from-file",
-          "${workspaceFolder:church_admin}/client/.env",
-        ],
+          "${workspaceFolder:church_admin}/client/.env"
+        ]
       },
       {
         "name": "church_admin (web debug mode)",
@@ -50,26 +53,34 @@
           "--web-port",
           "5083",
           "--dart-define-from-file",
-          "${workspaceFolder:church_admin}/client/.env.dev",
-        ],
+          "${workspaceFolder:church_admin}/client/.env.dev"
+        ]
       },
       {
         "name": "Debug Build Generator",
         "request": "launch",
         "program": ".dart_tool/build/entrypoint/build.dart",
         "type": "dart",
-        "args": ["build", "--delete-conflicting-outputs"],
-        "cwd": "${workspaceFolder:church_admin}/client/",
+        "args": [
+          "build",
+          "--delete-conflicting-outputs"
+        ],
+        "cwd": "${workspaceFolder:church_admin}/client/"
       },
       {
         "name": "Golden",
         "request": "launch",
         "type": "dart",
         "codeLens": {
-          "for": ["run-test", "run-test-file"],
+          "for": [
+            "run-test",
+            "run-test-file"
+          ]
         },
-        "args": ["--update-goldens"],
-        "cwd": "${workspaceFolder:church_admin}/client/",
+        "args": [
+          "--update-goldens"
+        ],
+        "cwd": "${workspaceFolder:church_admin}/client/"
       },
       {
         "name": "Debug Migration Script",
@@ -92,11 +103,11 @@
           "-a",
           "--migrate-data",
           "-a",
-          "--migrate-storage",
-        ],
-      },
+          "--migrate-storage"
+        ]
+      }
     ],
-    "compounds": [],
+    "compounds": []
   },
   "tasks": {
     "version": "2.0.0",
@@ -104,12 +115,12 @@
       {
         "group": {
           "kind": "test",
-          "isDefault": true,
+          "isDefault": true
         },
         "label": "Flutter test coverage",
         "type": "shell",
         "options": {
-          "cwd": "${workspaceFolder:church_admin}/client",
+          "cwd": "${workspaceFolder:church_admin}/client"
         },
         "command": "fvm",
         "args": [
@@ -132,17 +143,17 @@
           "-r",
           "'.freezed.dart$'",
           "-r",
-          "'__generated__'",
+          "'__generated__'"
         ],
-        "problemMatcher": [],
-      },
-    ],
+        "problemMatcher": []
+      }
+    ]
   },
   "settings": {
     "editor.formatOnPaste": true,
     "editor.formatOnSave": true,
     "editor.formatOnType": true,
-    "dart.flutterSdkPath": "client/.fvm/flutter_sdk",
+    "dart.flutterSdkPath": ".fvm/versions/3.44.6",
     "workbench.colorCustomizations": {
       "activityBar.activeBackground": "#00c9b6",
       "activityBar.activeBorder": "#ca00df",
@@ -174,9 +185,11 @@
     "peacock.color": "009688",
     "json.schemas": [
       {
-        "fileMatch": ["**/metadata.json"],
-        "url": "https://github.com/hasura/graphql-engine/raw/refs/heads/master/contrib/metadata-types/src/metadata-schemas/MetadataExport.schema.json",
-      },
+        "fileMatch": [
+          "**/metadata.json"
+        ],
+        "url": "https://github.com/hasura/graphql-engine/raw/refs/heads/master/contrib/metadata-types/src/metadata-schemas/MetadataExport.schema.json"
+      }
     ],
     "yaml.schemas": {
       "https://github.com/hasura/graphql-engine/raw/refs/heads/master/contrib/metadata-types/src/metadata-schemas/ActionsYAML.schema.json": "**/actions.yaml",
@@ -189,13 +202,17 @@
       "https://json.schemastore.org/dart-build": [
         "build.yaml",
         "*.build.yaml",
-        "build.*.yaml",
-      ],
+        "build.*.yaml"
+      ]
     },
     "autoHide.autoHideSideBar": false,
     "autoHide.autoHidePanel": true,
-    "cSpell.words": ["Shammas"],
-    "sqlfluff.excludeRules": ["RF06"],
-    "postman.settings.dotenv-detection-notification-visibility": false,
-  },
+    "cSpell.words": [
+      "Shammas"
+    ],
+    "sqlfluff.excludeRules": [
+      "RF06"
+    ],
+    "postman.settings.dotenv-detection-notification-visibility": false
+  }
 }
