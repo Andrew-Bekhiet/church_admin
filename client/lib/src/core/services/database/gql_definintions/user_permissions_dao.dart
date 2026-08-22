@@ -1,7 +1,7 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/__generated__/user_permissions.graphql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/user_permissions/__generated__/mutations.gql.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/user_permissions/helpers.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/user_permissions/user_permissions_update_helper.dart';
 import 'package:graphql/client.dart';
 
 class UserPermissionsDAO {

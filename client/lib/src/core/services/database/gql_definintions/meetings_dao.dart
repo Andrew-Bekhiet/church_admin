@@ -33,6 +33,11 @@ class MeetingsDAO extends DAOBase<Meeting>
         varsConstructor: _createMeetingVarsConstructor,
       );
 
+  @override
+  StreamCountConfig<Meeting>? get baseStreamCountConfig => null;
+
+  MeetingsDAO({required super.db}) : super(fromJson: Meeting.fromJson);
+
   ({
     List<Input_HistoryMeetingsBoolExp> where,
     List<Input_HistoryMeetingDaysBoolExp> demographicsWhere,
@@ -125,10 +130,6 @@ class MeetingsDAO extends DAOBase<Meeting>
       ],
     );
   }
-
-  @override
-  StreamCountConfig<Meeting>? get baseStreamCountConfig => null;
-  MeetingsDAO({required super.db}) : super(fromJson: Meeting.fromJson);
 
   Json _streamSingleByIdVarsConstructor({required UuidValue id}) =>
       Variables_Subscription_watchMeeting(id: id).toJson();

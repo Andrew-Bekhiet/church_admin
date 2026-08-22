@@ -8,6 +8,9 @@ class CreateObjectConfig<T> extends DAOMethodTemplate<T> {
   final CreateObjectConfigVarsConstructor<T>? varsConstructor;
   final MutationOptions<T>? operationOptions;
 
+  @override
+  T Function(Json)? get parserFn => super.parserFn as T Function(Json)?;
+
   const CreateObjectConfig({
     required super.document,
     this.varsConstructor,
@@ -16,9 +19,6 @@ class CreateObjectConfig<T> extends DAOMethodTemplate<T> {
     super.variables,
     T Function(Json)? super.parserFn,
   });
-
-  @override
-  T Function(Json)? get parserFn => super.parserFn as T Function(Json)?;
 
   CreateObjectConfig<T> copyWith({
     DocumentNode? document,

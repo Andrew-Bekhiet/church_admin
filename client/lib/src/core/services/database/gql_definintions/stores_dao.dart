@@ -59,6 +59,7 @@ class StoresDAO extends FullCRUDDAO<Store> {
     required Store oldObject,
   }) {
     final updateInput = newObject.toUpdateInput(oldObject);
+
     return Variables_Mutation_updateStore(
       storeId: newObject.id.toUuid(),
       newStore: updateInput,

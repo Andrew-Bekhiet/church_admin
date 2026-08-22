@@ -8,6 +8,7 @@ abstract class DAOMethodTemplate<TParsed> {
 
   final DocumentNode document;
   final Json? variables;
+  final TParsed? Function(Json)? parserFn;
 
   String get effectiveOperationName =>
       _operationName ??
@@ -23,5 +24,4 @@ abstract class DAOMethodTemplate<TParsed> {
     this.variables,
     this.parserFn,
   });
-  final TParsed? Function(Json)? parserFn;
 }

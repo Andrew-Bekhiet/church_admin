@@ -2,7 +2,7 @@ import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/persons/__generated__/mutations.gql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/persons/__generated__/queries.gql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/persons/__generated__/subscriptions.gql.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/persons/helpers.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/persons/person_update_helper.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/persons/persons_notifications_queries.dart';
 import 'package:graphql/client.dart';
 
@@ -108,7 +108,6 @@ class PersonsDAO extends FullCRUDDAO<Person> {
   }
 
   Future<PersonsGeolocationsResponse?> personsGeolocations({
-    String? personId,
     List<UuidValue> areasIds = const [],
     List<UuidValue> streetsIds = const [],
     List<UuidValue> familiesIds = const [],
@@ -121,6 +120,7 @@ class PersonsDAO extends FullCRUDDAO<Person> {
     bool getFamilies = false,
     bool getStores = false,
     bool getPersons = false,
+    String? personId,
   }) {
     assert(
       getAreas || getStreets || getFamilies || getStores || getPersons,

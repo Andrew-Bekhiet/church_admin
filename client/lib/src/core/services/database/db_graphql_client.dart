@@ -40,17 +40,13 @@ class DBGraphQLClient extends GraphQLClient {
     MutationOptions<TParsed> options, {
     bool? autoChangeFetchPolicy,
   }) async {
-    late final Future<QueryResult<TParsed>> future;
-
-    if (autoChangeFetchPolicy ?? this.autoChangeFetchPolicy) {
-      future = super.mutate(
-        options.copyWithPolicies(
-          options.policies.copyWith(fetch: _currentFetchPolicy),
-        ),
-      );
-    } else {
-      future = super.mutate(options);
-    }
+    final future = autoChangeFetchPolicy ?? this.autoChangeFetchPolicy
+        ? super.mutate(
+            options.copyWithPolicies(
+              options.policies.copyWith(fetch: _currentFetchPolicy),
+            ),
+          )
+        : super.mutate(options);
 
     return future.then(_exceptionsMiddleware);
   }
@@ -80,19 +76,15 @@ class DBGraphQLClient extends GraphQLClient {
     SubscriptionOptions<TParsed> options, {
     bool? autoChangeFetchPolicy,
   }) {
-    late final Stream<QueryResult<TParsed>> stream;
-
-    if (autoChangeFetchPolicy ?? this.autoChangeFetchPolicy) {
-      stream = _fetchPolicyStream.switchMap(
-        (fp) => super.subscribe(
-          options.copyWithPolicies(
-            options.policies.copyWith(fetch: fp),
-          ),
-        ),
-      );
-    } else {
-      stream = super.subscribe(options);
-    }
+    final stream = autoChangeFetchPolicy ?? this.autoChangeFetchPolicy
+        ? _fetchPolicyStream.switchMap(
+            (fp) => super.subscribe(
+              options.copyWithPolicies(
+                options.policies.copyWith(fetch: fp),
+              ),
+            ),
+          )
+        : super.subscribe(options);
 
     return stream.map(_exceptionsMiddleware);
   }
@@ -134,17 +126,13 @@ class DBGraphQLClient extends GraphQLClient {
     QueryOptions<TParsed> options, {
     bool? autoChangeFetchPolicy,
   }) async {
-    late final Future<QueryResult<TParsed>> future;
-
-    if (autoChangeFetchPolicy ?? this.autoChangeFetchPolicy) {
-      future = super.query(
-        options.copyWithPolicies(
-          options.policies.copyWith(fetch: _currentFetchPolicy),
-        ),
-      );
-    } else {
-      future = super.query(options);
-    }
+    final future = autoChangeFetchPolicy ?? this.autoChangeFetchPolicy
+        ? super.query(
+            options.copyWithPolicies(
+              options.policies.copyWith(fetch: _currentFetchPolicy),
+            ),
+          )
+        : super.query(options);
 
     return future.then(_exceptionsMiddleware);
   }

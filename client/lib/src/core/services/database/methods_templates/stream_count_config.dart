@@ -7,6 +7,9 @@ import 'package:meta/meta.dart';
 class StreamCountConfig<T> extends DAOMethodTemplate<int> {
   final SubscriptionOptions<int>? operationOptions;
 
+  @override
+  int Function(Json)? get parserFn => super.parserFn as int Function(Json)?;
+
   const StreamCountConfig({
     required super.document,
     this.operationOptions,
@@ -14,9 +17,6 @@ class StreamCountConfig<T> extends DAOMethodTemplate<int> {
     super.variables,
     int Function(Json)? super.parserFn,
   });
-
-  @override
-  int Function(Json)? get parserFn => super.parserFn as int Function(Json)?;
 
   StreamCountConfig<T> copyWith({
     DocumentNode? document,

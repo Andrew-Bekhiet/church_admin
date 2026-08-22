@@ -4,6 +4,8 @@ import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
 
 class GQLParser {
+  const GQLParser();
+
   List<T> Function(Json d) listParser<T>(
     T Function(Json) mapper, {
     String? dataKey,
@@ -12,6 +14,7 @@ class GQLParser {
       final value = dataKey != null
           ? d[dataKey] as List?
           : d.values.whereType<List?>().singleOrNull;
+
       return value?.map((o) => mapper(castMapToJson(o))).toList() ?? [];
     };
   }
@@ -34,8 +37,6 @@ class GQLParser {
       );
     };
   }
-
-  const GQLParser();
 
   Json castMapToJson(Map data) {
     return data.cast<String, Object?>();
@@ -60,6 +61,7 @@ class GQLParser {
       final value = key != null
           ? data[key] as Map
           : data.values.whereType<Map>().single;
+
       return fromJson(value.cast<String, Object?>());
     };
   }
