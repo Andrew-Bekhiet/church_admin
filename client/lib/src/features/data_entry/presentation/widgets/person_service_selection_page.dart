@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
@@ -119,15 +121,14 @@ class _PersonServiceSelectionPageState extends State<PersonServiceSelectionPage>
   }
 
   @override
-  Future<void> dispose() async {
+  void dispose() {
     for (final c in _animationControllers.values) {
       c.dispose();
     }
 
-    await listController.dispose();
-
-    await search.close();
-    await selected.close();
+    unawaited(listController.dispose());
+    unawaited(search.close());
+    unawaited(selected.close());
     super.dispose();
   }
 }
