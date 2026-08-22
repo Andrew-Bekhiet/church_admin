@@ -29,7 +29,9 @@ class PersonPastoralDatesFields extends StatelessWidget {
           label: 'أخر تناول',
           initialValue: person.lastKodas?.time,
           onChanged: (v) {
-            if (v != null) onLastKodasChanged(v);
+            if (v == null) return;
+
+            onLastKodasChanged(v);
           },
           validator: (v) => null,
         ),
@@ -39,7 +41,9 @@ class PersonPastoralDatesFields extends StatelessWidget {
           label: 'أخر اعتراف',
           initialValue: person.lastConfession?.time,
           onChanged: (v) {
-            if (v != null) onLastConfessionChanged(v);
+            if (v == null) return;
+
+            onLastConfessionChanged(v);
           },
           validator: (v) => null,
         ),
@@ -49,7 +53,9 @@ class PersonPastoralDatesFields extends StatelessWidget {
           label: 'أخر افتقاد',
           initialValue: person.lastVisit?.time,
           onChanged: (v) {
-            if (v != null) onLastVisitChanged(v);
+            if (v == null) return;
+
+            onLastVisitChanged(v);
           },
           validator: (v) => null,
         ),
@@ -58,7 +64,9 @@ class PersonPastoralDatesFields extends StatelessWidget {
           label: 'أخر مكالمة',
           initialValue: person.lastCall?.time,
           onChanged: (v) {
-            if (v != null) onLastCallChanged(v);
+            if (v == null) return;
+
+            onLastCallChanged(v);
           },
           validator: (v) => null,
         ),
