@@ -1,4 +1,5 @@
 import 'package:church_admin/church_admin.dart';
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -46,7 +47,7 @@ class _PersonEditFormState extends State<PersonEditForm> {
                   .replaceAll('+20', '0'),
             ),
           ),
-          validatePhone: validatePhoneField,
+          validatePhone: _validatePhoneField,
           onEditPhoneName: _onEditPhoneFieldName,
           onOtherPhoneChanged: (key, value) => _update(
             (p) => p.copyWith(
@@ -68,11 +69,7 @@ class _PersonEditFormState extends State<PersonEditForm> {
           onAddressChanged: (value) =>
               _update((p) => p.copyWith(address: value)),
           onEditLocation: _editGeoLocation,
-          familyValidator: (value) => familyValidator(
-            value,
-            person.address,
-            widget.controller.isCreate,
-          ),
+          familyValidator: _familyValidator,
           onFamilyChanged: _changeFamily,
         ),
         const Divider(),
@@ -80,7 +77,7 @@ class _PersonEditFormState extends State<PersonEditForm> {
           person: person,
           classesAndGroupsLoaded: widget.classesAndGroupsLoaded,
           onTap: _selectServices,
-          combineGroupsWithServices: combineGroupsWithServices,
+          combineGroupsWithServices: _combineGroupsWithServices,
         ),
         PersonWorkAndEducationFields(
           person: person,
@@ -139,8 +136,7 @@ class _PersonEditFormState extends State<PersonEditForm> {
         const Divider(),
         PersonHobbiesTagsAndNotesFields(
           person: person,
-          generalCheckValidator: ([value]) =>
-              personGeneralCheckValidator(widget.controller.newObject, value),
+          generalCheckValidator: _generalCheckValidator,
           onHobbiesChanged: (value) =>
               _update((p) => p.copyWith(hobbies: value?.toList())),
           onTagsChanged: (value) =>
@@ -152,16 +148,16 @@ class _PersonEditFormState extends State<PersonEditForm> {
         PersonPastoralDatesFields(
           person: person,
           onLastKodasChanged: (value) => _update(
-            (p) => p.copyWith(lastKodas: recordedByCurrentUser(value)),
+            (p) => p.copyWith(lastKodas: _recordedByCurrentUser(value)),
           ),
           onLastConfessionChanged: (value) => _update(
-            (p) => p.copyWith(lastConfession: recordedByCurrentUser(value)),
+            (p) => p.copyWith(lastConfession: _recordedByCurrentUser(value)),
           ),
           onLastVisitChanged: (value) => _update(
-            (p) => p.copyWith(lastVisit: recordedByCurrentUser(value)),
+            (p) => p.copyWith(lastVisit: _recordedByCurrentUser(value)),
           ),
           onLastCallChanged: (value) => _update(
-            (p) => p.copyWith(lastCall: recordedByCurrentUser(value)),
+            (p) => p.copyWith(lastCall: _recordedByCurrentUser(value)),
           ),
         ),
       ],
@@ -276,7 +272,7 @@ class _PersonEditFormState extends State<PersonEditForm> {
       MaterialPageRoute(
         builder: (context) => PersonServiceSelectionPage(
           selected: state.value != null
-              ? combineGroupsWithServices(
+              ? _combineGroupsWithServices(
                   state.value!.$1,
                   state.value!.$2,
                 ).toSet()
@@ -321,4 +317,46 @@ class _PersonEditFormState extends State<PersonEditForm> {
 
     return result?.geolocation;
   }
+
+  List<Service> _combineGroupsWithServices(
+    Iterable<Service> services,
+    Iterable<Group> groups,
+  ) {
+    return EqualitySet<Service>.from(
+      EqualityBy((service) => service.id),
+      groups
+          .where((group) => group.service != null)
+          .groupListsBy((group) => group.service!)
+          .entries
+          .map((entry) => entry.key.copyWith(groups: entry.value)),
+    ).union(services.toSet()).toList();
+  }
+
+  String? _familyValidator(Family? family) =>
+      family == null && widget.controller.newObject.address == null
+      ? 'يجب تحديد العائلة${widget.controller.isCreate ? ' أو العنوان' : ''}'
+      : null;
+
+  String? _generalCheckValidator([dynamic _]) {
+    final person = widget.controller.newObject;
+
+    return person.address == null &&
+            (person.family == null || person.familyId == null) &&
+            (person.services?.isEmpty ?? true) &&
+            (person.groups?.isEmpty ?? true)
+        ? 'يجب تحديد على الأقل واحد من الآتي:\n'
+              '(العنوان - العائلة - خدمة أو أكثر - مجموعة أو أكثر)'
+        : null;
+  }
+
+  LastRecordedByInfo _recordedByCurrentUser(DateTime time) =>
+      LastRecordedByInfo(
+        time: time,
+        recordedBy: AuthBloc.I.currentUser?.uid,
+      );
+
+  String? _validatePhoneField(String? value) =>
+      value != null && !PhoneNumberService.I.validate(value)
+      ? 'برجاء ادخال رقم هاتف صالح'
+      : null;
 }
