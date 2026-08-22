@@ -14,8 +14,7 @@ class PersonServiceSelectionPage extends StatefulWidget {
       _PersonServiceSelectionPageState();
 }
 
-class _PersonServiceSelectionPageState
-    extends State<PersonServiceSelectionPage>
+class _PersonServiceSelectionPageState extends State<PersonServiceSelectionPage>
     with TickerProviderStateMixin {
   final search = BehaviorSubject<String?>.seeded(null);
   late final listController = ViewableObjectListController<Service>(

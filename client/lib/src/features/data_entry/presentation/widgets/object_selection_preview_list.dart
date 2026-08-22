@@ -11,7 +11,8 @@ class ObjectSelectionPreviewList<T extends Viewable> extends StatelessWidget {
     return IgnorePointer(
       child: Column(
         children: [
-          for (final value in values) ViewableObjectWidget(value, isDense: true),
+          for (final value in values)
+            ViewableObjectWidget(value, isDense: true),
         ],
       ),
     );

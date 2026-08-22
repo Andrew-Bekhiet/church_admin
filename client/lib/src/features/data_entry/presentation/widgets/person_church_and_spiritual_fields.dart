@@ -48,9 +48,10 @@ class PersonChurchAndSpiritualFields extends StatelessWidget {
         ),
         ObjectSelectionField<Father, Father?>(
           initialValue: person.father,
-          onCreateCustom: (name) => DatabaseService.I.metadata.fathers.createObject(
-            newObject: Father(id: const Uuid().v4(), name: name),
-          ),
+          onCreateCustom: (name) =>
+              DatabaseService.I.metadata.fathers.createObject(
+                newObject: Father(id: const Uuid().v4(), name: name),
+              ),
           listController: (s) => ViewableObjectListController(
             objectsPaginatableStream: DatabaseService.I.metadata.fathers
                 .streamAll(searchQuery: s),

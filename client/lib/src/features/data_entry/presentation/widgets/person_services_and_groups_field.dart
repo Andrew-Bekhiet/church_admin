@@ -4,8 +4,7 @@ import 'package:flutter/material.dart';
 class PersonServicesAndGroupsField extends StatelessWidget {
   final Person person;
   final bool classesAndGroupsLoaded;
-  final Future<void> Function(FormFieldState<(Set<Service>, Set<Group>)>)
-  onTap;
+  final Future<void> Function(FormFieldState<(Set<Service>, Set<Group>)>) onTap;
   final List<Service> Function(Iterable<Service>, Iterable<Group>)
   combineGroupsWithServices;
 
@@ -95,8 +94,9 @@ class PersonServicesAndGroupsField extends StatelessWidget {
   String? _validate((Set<Service>, Set<Group>)? v) {
     final (selectedServices, selectedGroups) = v ?? (<Service>{}, <Group>{});
 
-    if (person.studyYear case StudyYear(order: final personGrade)
-        when person.isStudent) {
+    if (person.studyYear case StudyYear(
+      order: final personGrade,
+    ) when person.isStudent) {
       final hasOutOfRangeService = selectedServices.any(
         (s) => switch (s) {
           Service(
