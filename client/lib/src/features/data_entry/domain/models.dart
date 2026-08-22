@@ -12,7 +12,7 @@ export 'models/hobby.dart';
 export 'models/i_image.dart';
 export 'models/id.dart';
 export 'models/job.dart';
-export 'models/json_serializable.dart';
+export 'models/to_json.dart';
 export 'models/labeled_enum.dart';
 export 'models/martial_status.dart';
 export 'models/object_image_info.dart';

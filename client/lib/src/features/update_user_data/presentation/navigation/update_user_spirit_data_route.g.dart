@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'update_user_spirit_data.dart';
+part of 'update_user_spirit_data_route.dart';
 
 // **************************************************************************
 // GoRouterGenerator

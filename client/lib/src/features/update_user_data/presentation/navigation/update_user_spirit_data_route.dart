@@ -2,7 +2,7 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-part 'update_user_spirit_data.g.dart';
+part 'update_user_spirit_data_route.g.dart';
 
 @TypedGoRoute<UpdateUserSpiritDataRoute>(path: '/update_user_spirit_data')
 class UpdateUserSpiritDataRoute extends GoRouteData
