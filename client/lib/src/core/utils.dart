@@ -1,7 +1,14 @@
-export 'utils/extensions.dart';
+export 'utils/color_argb_value.dart';
+export 'utils/date_time_extensions.dart';
+export 'utils/date_time_range_copy_with.dart';
 export 'utils/globals.dart';
 export 'utils/is_subtype.dart';
+export 'utils/list_max_frequency_or_null.dart';
 export 'utils/liturgy_season.dart';
+export 'utils/map_max_or_null.dart';
+export 'utils/operation_definition_node_first_selection_node.dart';
 export 'utils/snackbar_icons.dart';
+export 'utils/stream_extensions.dart';
 export 'utils/to_coptic_date.dart';
 export 'utils/typedefs.dart';
+export 'utils/value_listenable_as_stream.dart';
