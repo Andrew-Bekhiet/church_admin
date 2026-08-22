@@ -11,6 +11,10 @@ targets:
         options:
           any_map: true
           explicit_to_json: true
+      source_gen:combining_builder:
+        options:
+          ignore_for_file:
+            - member_ordering
       graphql_codegen:
         enabled: true
         options:

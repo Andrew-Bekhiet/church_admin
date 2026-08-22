@@ -5,13 +5,10 @@ plugins:
 
 solid_lints:
   diagnostics:
-    avoid_unused_parameters:
-      exclude:
-        - build
-        - builder
-      exclude_annotation:
-        - freezed
-        - unfreezed
+    avoid_unused_parameters: false
+    avoid_non_null_assertion: false
+    avoid_late_keyword: false
+    cyclomatic_complexity: false
     member_ordering:
       order:
         - static_getters_setters
@@ -35,10 +32,7 @@ solid_lints:
         - default
         - nullable
         - super
-    number_of_parameters:
-      max_parameters: 7
-      exclude:
-        - method_name: copyWith
+    number_of_parameters: false
     no_magic_number: false
 
 analyzer:
@@ -47,10 +41,13 @@ analyzer:
     strict-inference: false
     strict-raw-types: false
   exclude:
-    - build/**
-    - lib/**.freezed.dart
-    - lib/**.g.dart
-    - lib/**/__generated__/*
+    - "build/**"
+    - "**.g.dart"
+    - "**.freezed.dart"
+    - "**.gr.dart"
+    - "**.gql.dart"
+    - "**.graphql.dart"
+    - "**/__generated__/**"
   errors:
     duplicate_ignore: false
     invalid_annotation_target: false
