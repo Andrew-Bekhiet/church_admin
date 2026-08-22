@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 
@@ -75,7 +73,7 @@ class _ServicesHierarchyListState extends State<ServicesHierarchyList>
   }
 
   @override
-  Future<void> dispose() async {
+  void dispose() {
     for (final c in _animationControllers.values) {
       c.dispose();
     }

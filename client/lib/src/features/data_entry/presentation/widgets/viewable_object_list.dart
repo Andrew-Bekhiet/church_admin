@@ -145,7 +145,7 @@ class _ViewableObjectListState<T extends Viewable>
   }
 
   @override
-  Future<void> dispose() async {
+  void dispose() {
     _scrollController?.removeListener(_scrollListener);
 
     _ownScrollController?.dispose();
