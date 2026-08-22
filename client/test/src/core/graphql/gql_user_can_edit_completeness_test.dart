@@ -5,14 +5,16 @@ import 'package:gql/ast.dart';
 import 'package:gql/language.dart';
 
 import 'gql_key_field_checker.dart';
+import 'gql_user_can_edit_checker.dart';
 
 /// Guards the edit button: `ViewObjectDetails` gates it on
-/// `User.canEditObject`, which reads `userCanEdit` off the object. A
-/// single-object operation that omits the field leaves the model at its
-/// `false` default, silently hiding the action from users who do have
-/// permission.
+/// `User.canEditObject`, which reads `userCanEdit` off the object. A read
+/// operation that omits the field leaves the model at its `false` default,
+/// silently hiding the action from users who do have permission.
 void main() {
-  test('every by-pk selection of an editable type selects userCanEdit', () {
+  const rules = UserCanEditRules(exemptions: []);
+
+  test('every read selection of an editable type selects userCanEdit', () {
     const schemaPath = 'lib/src/core/graphql/schema.graphql';
     const operationsDir = 'lib/src/core/services/database/gql_definintions';
 
@@ -22,7 +24,7 @@ void main() {
 
     final fragments = <String, FragmentDefinitionNode>{};
     final operations = <OperationDefinitionNode>[];
-    for (final file in _gqlFiles(operationsDir)) {
+    for (final file in _allGqlFilesIn(operationsDir)) {
       for (final def in parseString(file.readAsStringSync()).definitions) {
         switch (def) {
           case FragmentDefinitionNode():
@@ -34,60 +36,198 @@ void main() {
       }
     }
 
-    final violations = <String>[];
+    final visitor = UserCanEditCompletenessVisitor(
+      schema: schema,
+      fragments: fragments,
+      rules: rules,
+    );
+
     for (final operation in operations) {
-      if (operation.type != OperationType.subscription) continue;
+      if (operation.type == OperationType.mutation) continue;
 
       final rootType = schema.rootType(operation.type);
-      if (rootType == null) continue;
-
-      for (final field
-          in operation.selectionSet.selections.whereType<FieldNode>()) {
-        if (!field.name.value.endsWith('ByPk')) continue;
-
-        final type = schema.fieldType(rootType, field.name.value);
-        if (type == null) continue;
-        if (schema.fieldType(type, _userCanEdit) == null) continue;
-
-        if (!_selectedFieldsOf(
-          field.selectionSet,
-          fragments,
-        ).contains(_userCanEdit)) {
-          violations.add(
-            'Operation "${operation.name?.value ?? '<anonymous>'}": '
-            '"${field.name.value}" of type "$type" does not select '
-            '$_userCanEdit, so the edit button can never render.',
-          );
-        }
-      }
+      expect(
+        rootType,
+        isNotNull,
+        reason:
+            'No root type for ${operation.type} '
+            '(operation "${operation.name?.value ?? '<anonymous>'}").',
+      );
+      visitor.visitOperation(operation, rootType!);
     }
 
-    expect(violations, isEmpty, reason: '\n${violations.join('\n')}');
+    final violations = visitor.violations;
+    expect(
+      violations,
+      isEmpty,
+      reason: '\n${violations.map((v) => v.message).join('\n')}',
+    );
+  });
+
+  group('checker behavior', () {
+    const schemaSource = '''
+type subscription_root {
+  familiesByPk: Families
+  districtsByPk: Districts
+}
+
+type Families {
+  id: uuid
+  name: String
+  userCanEdit: Boolean
+  address: Addresses
+}
+
+type Addresses {
+  id: uuid
+  area: Areas
+}
+
+type Areas {
+  id: uuid
+  userCanEdit: Boolean
+}
+
+type Districts {
+  id: uuid
+  name: String
+}
+''';
+
+    List<UserCanEditViolation> run(
+      String operationSource, {
+      UserCanEditRules rules = const UserCanEditRules(exemptions: []),
+    }) {
+      final schema = GqlSchemaIndex.fromDocument(parseString(schemaSource));
+      final fragments = <String, FragmentDefinitionNode>{};
+      final operations = <OperationDefinitionNode>[];
+      for (final def in parseString(operationSource).definitions) {
+        switch (def) {
+          case FragmentDefinitionNode():
+            fragments[def.name.value] = def;
+
+          case OperationDefinitionNode():
+            operations.add(def);
+        }
+      }
+
+      final visitor = UserCanEditCompletenessVisitor(
+        schema: schema,
+        fragments: fragments,
+        rules: rules,
+      );
+      for (final operation in operations) {
+        visitor.visitOperation(operation, schema.rootType(operation.type)!);
+      }
+
+      return visitor.violations;
+    }
+
+    test('visitor_whenSelectionOmitsUserCanEdit_reportsTheSelection', () {
+      final violations = run('''
+subscription watchFamily {
+  familiesByPk {
+    id
+    name
+  }
+}
+''');
+
+      expect(
+        violations.single,
+        isA<UserCanEditViolation>()
+            .having((v) => v.operation, 'operation', 'watchFamily')
+            .having((v) => v.fieldPath, 'fieldPath', 'familiesByPk')
+            .having((v) => v.type, 'type', 'Families'),
+      );
+    });
+
+    test('visitor_whenSelectionNamesUserCanEdit_reportsNothing', () {
+      final violations = run('''
+subscription watchFamily {
+  familiesByPk {
+    id
+    userCanEdit
+  }
+}
+''');
+
+      expect(violations, isEmpty);
+    });
+
+    test('visitor_whenAFragmentSuppliesUserCanEdit_reportsNothing', () {
+      final violations = run('''
+fragment Family on Families {
+  id
+  userCanEdit
+}
+
+subscription watchFamily {
+  familiesByPk {
+    ...Family
+  }
+}
+''');
+
+      expect(violations, isEmpty);
+    });
+
+    test('visitor_whenTheTypeHasNoUserCanEditField_reportsNothing', () {
+      final violations = run('''
+subscription watchDistrict {
+  districtsByPk {
+    id
+    name
+  }
+}
+''');
+
+      expect(violations, isEmpty);
+    });
+
+    test('visitor_whenAnEditableTypeIsNestedDeeper_reportsTheNestedPath', () {
+      final violations = run('''
+subscription watchFamily {
+  familiesByPk {
+    userCanEdit
+    address {
+      id
+      area {
+        id
+      }
+    }
+  }
+}
+''');
+
+      expect(
+        violations.single,
+        isA<UserCanEditViolation>()
+            .having((v) => v.fieldPath, 'fieldPath', 'area')
+            .having((v) => v.type, 'type', 'Areas'),
+      );
+    });
+
+    test('visitor_whenTheSelectionIsExempt_reportsNothing', () {
+      final violations = run(
+        '''
+subscription watchFamily {
+  familiesByPk {
+    id
+  }
+}
+''',
+        rules: const UserCanEditRules(
+          exemptions: [(operation: 'watchFamily', field: 'familiesByPk')],
+        ),
+      );
+
+      expect(violations, isEmpty);
+    });
   });
 }
 
-const _userCanEdit = 'userCanEdit';
-
-Set<String> _selectedFieldsOf(
-  SelectionSetNode? selectionSet,
-  Map<String, FragmentDefinitionNode> fragments,
-) => {
-  for (final selection in selectionSet?.selections ?? const <SelectionNode>[])
-    ...switch (selection) {
-      FieldNode(:final name) => {name.value},
-      FragmentSpreadNode(:final name) => _selectedFieldsOf(
-        fragments[name.value]?.selectionSet,
-        fragments,
-      ),
-      InlineFragmentNode(:final selectionSet) => _selectedFieldsOf(
-        selectionSet,
-        fragments,
-      ),
-      _ => const <String>{},
-    },
-};
-
-Iterable<File> _gqlFiles(String dir) => Directory(dir)
+Iterable<File> _allGqlFilesIn(String dir) => Directory(dir)
     .listSync(recursive: true)
     .whereType<File>()
     .where((f) => f.path.endsWith('.gql') && !f.path.contains('__generated__'));
