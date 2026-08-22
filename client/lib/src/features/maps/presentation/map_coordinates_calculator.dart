@@ -2,7 +2,7 @@ import 'dart:math' as math;
 
 import 'package:church_admin/church_admin.dart' hide Polygon;
 import 'package:flutter/material.dart';
-import 'package:flutter_map/flutter_map.dart' hide Coords;
+import 'package:flutter_map/flutter_map.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
 

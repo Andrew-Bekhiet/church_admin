@@ -7,7 +7,7 @@ import 'package:flutter/material.dart' hide Notification;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:rxdart/rxdart.dart' hide Notification;
+import 'package:rxdart/rxdart.dart';
 
 class NotificationsService extends BlocObserver {
   static NotificationsService get I =>

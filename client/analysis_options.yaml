@@ -48,10 +48,6 @@ analyzer:
     - "**.gql.dart"
     - "**.graphql.dart"
     - "**/__generated__/**"
-  errors:
-    duplicate_ignore: false
-    invalid_annotation_target: false
-    undefined_hidden_name: false
 linter:
   rules:
     # Disabled

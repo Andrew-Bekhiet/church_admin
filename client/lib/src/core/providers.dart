@@ -23,7 +23,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:riverpod/riverpod.dart';
-import 'package:rxdart/rxdart.dart' hide Notification;
+import 'package:rxdart/rxdart.dart';
 
 ProviderContainer? _globalProviderContainer;
 
