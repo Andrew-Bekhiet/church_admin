@@ -251,7 +251,7 @@ class _ViewServiceState extends State<ViewService> {
         ),
       ),
       floatingActionButtonBuilder: (context, tabController, service) =>
-          SwitchingFloatingActionButton.fromTabController(
+          SwitchingFAB.fromTabController(
             tabController: tabController,
             icons: const [
               Icon(Symbols.group_add),

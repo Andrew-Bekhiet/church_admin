@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-class HomeFloatingActionButton extends StatelessWidget {
+class HomeFAB extends StatelessWidget {
   final HomeBloc homeBloc;
 
-  const HomeFloatingActionButton({required this.homeBloc, super.key});
+  const HomeFAB({required this.homeBloc, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +17,7 @@ class HomeFloatingActionButton extends StatelessWidget {
       builder: (context, homeState) {
         final pages = homeState.pages;
 
-        return SwitchingFloatingActionButton(
+        return SwitchingFAB(
           animation: homeState.pageController,
           getIndex: () => homeState.currentPage.floor(),
           getOffset: () =>

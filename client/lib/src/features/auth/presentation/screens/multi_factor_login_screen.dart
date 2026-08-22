@@ -7,28 +7,16 @@ import 'package:phone_form_field/phone_form_field.dart';
 import 'package:pinput/pinput.dart';
 import 'package:rxdart/rxdart.dart';
 
-final class MultiFactorLoginScreenKeys {
-  static const phoneNumberFieldKey = ValueKey('Phone Number Field Key');
-  static const passwordFieldKey = ValueKey('Password Field Key');
-  static const enrollButtonKey = ValueKey('Enroll Button Key');
-
-  static const verificationCodeFieldKey = ValueKey(
-    'Verification Code Field Key',
-  );
-  static const verifyButtonKey = ValueKey('Verify Button Key');
-  static const resendCodeButtonKey = ValueKey('Resend Code Button Key');
-}
-
-class MultiFactorLogin extends StatefulWidget {
+class MultiFactorLoginScreen extends StatefulWidget {
   final Clock clock;
 
-  const MultiFactorLogin({this.clock = const Clock(), super.key});
+  const MultiFactorLoginScreen({this.clock = const Clock(), super.key});
 
   @override
-  State<MultiFactorLogin> createState() => _MultifactorStateLogin();
+  State<MultiFactorLoginScreen> createState() => _MultifactorStateLogin();
 }
 
-class _MultifactorStateLogin extends State<MultiFactorLogin> {
+class _MultifactorStateLogin extends State<MultiFactorLoginScreen> {
   bool _isEnrollmentInProgress = false;
 
   @override
@@ -119,6 +107,18 @@ class _MultifactorStateLogin extends State<MultiFactorLogin> {
         );
     }
   }
+}
+
+final class MultiFactorLoginScreenKeys {
+  static const phoneNumberFieldKey = ValueKey('Phone Number Field Key');
+  static const passwordFieldKey = ValueKey('Password Field Key');
+  static const enrollButtonKey = ValueKey('Enroll Button Key');
+
+  static const verificationCodeFieldKey = ValueKey(
+    'Verification Code Field Key',
+  );
+  static const verifyButtonKey = ValueKey('Verify Button Key');
+  static const resendCodeButtonKey = ValueKey('Resend Code Button Key');
 }
 
 class _EnrollMultiFactor extends StatefulWidget {

@@ -12,7 +12,7 @@ class PersonAnalysisRoute extends GoRouteData with $PersonAnalysisRoute {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return PersonAnalysis(person: $extra.person);
+    return PersonAnalysisScreen(person: $extra.person);
   }
 }
 

@@ -1,8 +1,8 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/foundation.dart';
 
-class HiveInit implements Initializer {
-  const HiveInit();
+class SembastInit implements Initializer {
+  const SembastInit();
 
   @override
   Future<void> initialize() async {

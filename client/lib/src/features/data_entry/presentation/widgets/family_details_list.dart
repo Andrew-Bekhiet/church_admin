@@ -14,7 +14,7 @@ class FamilyDetailsList extends StatelessWidget {
       delegate: SliverChildListDelegate([
         for (final MapEntry(key: personType, value: phone)
             in family.familyAdminsPhones?.entries ?? {})
-          PhoneNumberProperty(
+          PhoneNumberPropertyWidget(
             'رقم هاتف ال$personType',
             phone,
             (n) => LauncherService.I.launchCall(

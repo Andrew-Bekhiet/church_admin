@@ -244,7 +244,7 @@ class _ViewStreetState extends State<ViewStreet> {
         ),
       ),
       floatingActionButtonBuilder: (context, tabController, street) =>
-          SwitchingFloatingActionButton.fromTabController(
+          SwitchingFAB.fromTabController(
             tabController: tabController,
             icons: const [
               Icon(Symbols.group_add),

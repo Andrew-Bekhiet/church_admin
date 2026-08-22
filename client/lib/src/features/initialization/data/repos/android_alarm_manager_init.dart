@@ -4,8 +4,8 @@ import 'package:android_alarm_manager_plus/android_alarm_manager_plus.dart';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/foundation.dart';
 
-class AndroidAlarmManagerPluginInit implements Initializer {
-  const AndroidAlarmManagerPluginInit();
+class AndroidAlarmManagerInit implements Initializer {
+  const AndroidAlarmManagerInit();
 
   @override
   Future<void> initialize() async {

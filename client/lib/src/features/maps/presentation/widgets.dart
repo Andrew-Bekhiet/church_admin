@@ -8,6 +8,6 @@ export 'widgets/edit_person_location_map.dart';
 export 'widgets/edit_store_location_map.dart';
 export 'widgets/edit_street_line_map.dart';
 export 'widgets/geomap_fab.dart';
-export 'widgets/object_marker_widget.dart';
 export 'widgets/map_snapping_sheet.dart';
+export 'widgets/object_marker_widget.dart';
 export 'widgets/view_geodata_map.dart';

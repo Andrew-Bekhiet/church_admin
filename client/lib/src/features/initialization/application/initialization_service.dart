@@ -19,13 +19,13 @@ class InitializationService {
     SentryInit(),
     PackageInfoInit(),
     DeviceInfoInit(),
-    HiveInit(),
+    SembastInit(),
     FirebaseInit(),
     FeatureFlagsInit(),
     FMTCInit(),
     IntlLocaleMessagesInit(),
-    AndroidAlarmManagerPluginInit(),
-    FlutterLocalNotificationsPluginInit(),
+    AndroidAlarmManagerInit(),
+    FlutterLocalNotificationsInit(),
     BlocObserverInit(),
   };
 

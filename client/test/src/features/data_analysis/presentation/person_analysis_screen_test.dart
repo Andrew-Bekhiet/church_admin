@@ -62,7 +62,7 @@ void main() {
     // The screen opens on defaults with both attendance and history sections
     // enabled → both siblings render.
     await tester.pumpWidget(
-      MaterialApp(home: PersonAnalysis(person: person)),
+      MaterialApp(home: PersonAnalysisScreen(person: person)),
     );
 
     expect(tester.takeException(), isNull);

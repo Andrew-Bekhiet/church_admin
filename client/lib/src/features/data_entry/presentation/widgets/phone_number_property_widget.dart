@@ -5,12 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 
-class PhoneNumberProperty extends StatelessWidget {
+class PhoneNumberPropertyWidget extends StatelessWidget {
   final bool showErrorIfEmpty;
   final String propName;
   final String value;
   final void Function(String) phoneCall;
-  const PhoneNumberProperty(
+  const PhoneNumberPropertyWidget(
     this.propName,
     this.value,
     this.phoneCall, {

@@ -13,7 +13,7 @@ class UpdateUserSpiritDataRoute extends GoRouteData
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return UpdateUserSpiritData(userData: $extra);
+    return UpdateUserSpiritDataScreen(userData: $extra);
   }
 
   @override

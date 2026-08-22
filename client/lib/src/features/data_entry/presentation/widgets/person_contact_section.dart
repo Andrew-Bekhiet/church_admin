@@ -21,14 +21,14 @@ class PersonContactSection extends StatelessWidget {
             title: const Text('الرقم القومي'),
             subtitle: Text(person.nationalId?.toString() ?? ''),
           ),
-        PhoneNumberProperty(
+        PhoneNumberPropertyWidget(
           'رقم الهاتف',
           person.mainPhone ?? '',
           (n) => _phoneCall(context, n),
           addToContacts: (n) => _contactAdd(context, n, person),
         ),
         ...person.otherPhones.entries.map(
-          (e) => PhoneNumberProperty(
+          (e) => PhoneNumberPropertyWidget(
             e.key,
             e.value,
             (n) => _phoneCall(context, n),

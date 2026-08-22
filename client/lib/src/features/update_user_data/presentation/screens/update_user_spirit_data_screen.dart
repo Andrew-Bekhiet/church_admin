@@ -5,15 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 
-class UpdateUserSpiritData extends StatefulWidget {
+class UpdateUserSpiritDataScreen extends StatefulWidget {
   final Person? userData;
-  const UpdateUserSpiritData({this.userData, super.key});
+  const UpdateUserSpiritDataScreen({this.userData, super.key});
 
   @override
-  State<UpdateUserSpiritData> createState() => _UpdateUserSpiritDataState();
+  State<UpdateUserSpiritDataScreen> createState() => _UpdateUserSpiritDataState();
 }
 
-class _UpdateUserSpiritDataState extends State<UpdateUserSpiritData> {
+class _UpdateUserSpiritDataState extends State<UpdateUserSpiritDataScreen> {
   late Person _userData =
       widget.userData ?? AuthBloc.I.currentUserData!.person!;
   final _formKey = GlobalKey<FormState>();
@@ -169,7 +169,7 @@ class _UpdateUserSpiritDataState extends State<UpdateUserSpiritData> {
         await LoggingService.I.showErrorDialogAndReport(
           context,
           LogRecord(
-            moduleName: '$UpdateUserSpiritData',
+            moduleName: '$UpdateUserSpiritDataScreen',
             eventName: 'updateUserSpiritData',
             error: error,
             stackTrace: stackTrace,

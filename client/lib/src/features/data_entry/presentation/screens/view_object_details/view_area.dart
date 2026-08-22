@@ -254,7 +254,7 @@ class _ViewAreaState extends State<ViewArea> {
         ),
       ),
       floatingActionButtonBuilder: (context, tabController, area) =>
-          SwitchingFloatingActionButton.fromTabController(
+          SwitchingFAB.fromTabController(
             tabController: tabController,
             icons: const [
               Icon(Symbols.add_road),

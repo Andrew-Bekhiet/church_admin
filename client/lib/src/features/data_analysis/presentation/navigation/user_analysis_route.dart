@@ -12,7 +12,7 @@ class UserAnalysisRoute extends GoRouteData with $UserAnalysisRoute {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return UserAnalysis(user: $extra.user);
+    return UserAnalysisScreen(user: $extra.user);
   }
 }
 

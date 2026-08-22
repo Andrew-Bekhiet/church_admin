@@ -10,7 +10,7 @@ class MultiFactorLoginRoute extends GoRouteData with $MultiFactorLoginRoute {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return const MultiFactorLogin();
+    return const MultiFactorLoginScreen();
   }
 
   @override

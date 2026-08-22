@@ -230,7 +230,7 @@ class _ViewFamilyState extends State<ViewFamily> {
         ),
       ),
       floatingActionButtonBuilder: (context, tabController, family) =>
-          SwitchingFloatingActionButton.fromTabController(
+          SwitchingFAB.fromTabController(
             tabController: tabController,
             icons: const [
               Icon(Symbols.person_add),

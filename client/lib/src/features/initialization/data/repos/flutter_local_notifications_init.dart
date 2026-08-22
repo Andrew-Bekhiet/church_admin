@@ -3,8 +3,8 @@ import 'dart:async';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
-class FlutterLocalNotificationsPluginInit implements Initializer {
-  const FlutterLocalNotificationsPluginInit();
+class FlutterLocalNotificationsInit implements Initializer {
+  const FlutterLocalNotificationsInit();
 
   @override
   Future<void> initialize() async {

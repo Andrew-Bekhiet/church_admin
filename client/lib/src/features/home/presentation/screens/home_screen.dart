@@ -37,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
       drawer: HomeDrawer(homeBloc: homeBloc),
       appBar: HomeAppBar(homeBloc: homeBloc),
       body: HomeBody(homeBloc: homeBloc),
-      floatingActionButton: HomeFloatingActionButton(homeBloc: homeBloc),
+      floatingActionButton: HomeFAB(homeBloc: homeBloc),
       bottomNavigationBar: HomeBottomNavBar(homeBloc: homeBloc),
       extendBody: true,
     );

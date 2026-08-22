@@ -3,7 +3,7 @@
 
 import 'package:flutter/material.dart';
 
-extension GetCopticDate on DateTime {
+extension ToCopticDate on DateTime {
   ({int year, int month, int day}) toCopticDate() {
     final DateTime gregorianDate = DateUtils.dateOnly(this);
     // Constants

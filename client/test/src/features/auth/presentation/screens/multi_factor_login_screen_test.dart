@@ -62,7 +62,7 @@ Future<void> main() async {
                 )
                 ..overrideDevicesForAllScenarios(devices: [Device.iphone11])
                 ..addScenario(
-                  widget: const MultiFactorLogin(),
+                  widget: const MultiFactorLoginScreen(),
                   name: 'initial state',
                 );
 
@@ -94,7 +94,7 @@ Future<void> main() async {
                 )
                 ..overrideDevicesForAllScenarios(devices: [Device.iphone11])
                 ..addScenario(
-                  widget: const MultiFactorLogin(),
+                  widget: const MultiFactorLoginScreen(),
                   name: 'multi factor challenge in progress',
                 );
 
@@ -119,7 +119,7 @@ Future<void> main() async {
             ),
           );
           await tester.pumpWidgetBuilder(
-            const MultiFactorLogin(),
+            const MultiFactorLoginScreen(),
             wrapper: materialAppWithThemeAndLocale(),
           );
 
@@ -195,7 +195,7 @@ Future<void> main() async {
           });
 
           await tester.pumpWidgetBuilder(
-            MultiFactorLogin(clock: tester.binding.clock),
+            MultiFactorLoginScreen(clock: tester.binding.clock),
             wrapper: materialAppWithThemeAndLocale(),
           );
 
@@ -246,7 +246,7 @@ Future<void> main() async {
         'Enroll MFA',
         (tester) async {
           await tester.pumpWidgetBuilder(
-            const MultiFactorLogin(),
+            const MultiFactorLoginScreen(),
             wrapper: materialAppWithThemeAndLocale(),
           );
 

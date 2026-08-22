@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-class AnimatedFloatingActionButton extends StatelessWidget {
+class AnimatedFAB extends StatelessWidget {
   final double offset;
   final Widget? newFAB;
   final Widget? oldFAB;
-  const AnimatedFloatingActionButton({
+  const AnimatedFAB({
     required this.offset,
     required this.newFAB,
     required this.oldFAB,
