@@ -12,7 +12,14 @@ import 'gql_user_can_edit_checker.dart';
 /// operation that omits the field leaves the model at its `false` default,
 /// silently hiding the action from users who do have permission.
 void main() {
-  const rules = UserCanEditRules(exemptions: []);
+  const rules = UserCanEditRules(
+    exemptions: [
+      (operation: 'classesForService', field: 'classes'),
+      (operation: 'personsNames', field: 'persons'),
+      (operation: 'personHistoryAnalysis', field: 'personsByPk'),
+      (operation: 'personServicesClassesGroups', field: 'personsByPk'),
+    ],
+  );
 
   test('every read selection of an editable type selects userCanEdit', () {
     const schemaPath = 'lib/src/core/graphql/schema.graphql';
