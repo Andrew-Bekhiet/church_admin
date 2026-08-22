@@ -59,6 +59,7 @@ final GoRouter $appRouter = GoRouter(
         uri.scheme != 'https') {
       // Defer navigation to the next microtask to avoid build-time navigation
       WidgetsBinding.instance.addPostFrameCallback((_) => context.go('/login'));
+
       return const SizedBox.shrink();
     }
 

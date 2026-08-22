@@ -9,19 +9,19 @@ class SembastSerializableKvStore<T> implements SembastKvStore<T> {
   @override
   String get name => _inner.name;
 
-  @override
-  Future<T?> get(String key) async {
-    final value = await _inner.get(key);
-
-    return value == null ? null : fromJson(value);
-  }
-
   SembastSerializableKvStore({
     required DatabaseClient dbClient,
     required StoreRef<String, Map<String, dynamic>> storeRef,
     required this.fromJson,
     required this.toJson,
   }) : _inner = SembastKvStore(dbClient, storeRef);
+
+  @override
+  Future<T?> get(String key) async {
+    final value = await _inner.get(key);
+
+    return value == null ? null : fromJson(value);
+  }
 
   @override
   Future<void> clear() async => _inner.clear();

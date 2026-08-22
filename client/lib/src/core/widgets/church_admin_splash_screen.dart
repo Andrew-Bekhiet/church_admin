@@ -21,11 +21,11 @@ class _ChurchAdminSplashScreenState extends State<ChurchAdminSplashScreen> {
     super.initState();
     // Add a timeout to show a message if the app gets stuck
     _timeoutTimer = Timer(const Duration(seconds: 15), () {
-      if (mounted) {
-        setState(() {
-          _showTimeoutMessage = true;
-        });
-      }
+      if (!mounted) return;
+
+      setState(() {
+        _showTimeoutMessage = true;
+      });
     });
   }
 

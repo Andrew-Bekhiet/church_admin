@@ -74,6 +74,7 @@ int _calculateStartOfYearDays(int year) {
   }
 
   final ret = relativeYear * 365 + leapYears;
+
   return ret +
       (365 - 112); // Adjust for difference between 1687-01-01 and 1686-04-23
 }

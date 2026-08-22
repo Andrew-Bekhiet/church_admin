@@ -58,13 +58,14 @@ interface class SyncKVStore<T> {
 
   bool _isLoaded;
 
-  T? get(String key) {
-    _checkLoaded();
-    return _memoryCache[key];
-  }
-
   @visibleForTesting
   SyncKVStore.private(this._storage) : _isLoaded = false;
+
+  T? get(String key) {
+    _checkLoaded();
+
+    return _memoryCache[key];
+  }
 
   Future<void> _load() async {
     _memoryCache.addAll(await _storage.toMap());
@@ -105,9 +106,9 @@ interface class SyncKVStore<T> {
     _currentFlushOperationFuture = nextFlushFuture;
     unawaited(
       nextFlushFuture.whenComplete(() {
-        if (identical(_currentFlushOperationFuture, nextFlushFuture)) {
-          _currentFlushOperationFuture = null;
-        }
+        if (!identical(_currentFlushOperationFuture, nextFlushFuture)) return;
+
+        _currentFlushOperationFuture = null;
       }),
     );
 
@@ -141,16 +142,19 @@ interface class SyncKVStore<T> {
 
   bool containsKey(String key) {
     _checkLoaded();
+
     return _memoryCache.containsKey(key);
   }
 
   bool containsValue(T? value) {
     _checkLoaded();
+
     return _memoryCache.containsValue(value);
   }
 
   Map<String, T?> toMap() {
     _checkLoaded();
+
     return UnmodifiableMapView(_memoryCache);
   }
 

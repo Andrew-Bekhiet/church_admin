@@ -22,16 +22,6 @@ class AddAuthLink extends Link {
   HttpLink? _httpLink;
   WebSocketLink? _wsLink;
 
-  HttpLinkHeaders Function(HttpLinkHeaders?) _getHeadersWithToken(
-    String token,
-  ) =>
-      (headers) => HttpLinkHeaders(
-        headers: {
-          ...headers?.headers ?? {},
-          'Authorization': 'Bearer $token',
-        },
-      );
-
   AddAuthLink({
     required this.url,
     required Stream<String?> idTokenStream,
@@ -41,6 +31,16 @@ class AddAuthLink extends Link {
     _idTokenStream = idTokenStream.publishValue();
     _idTokenSubscription = _idTokenStream.connect();
   }
+
+  HttpLinkHeaders Function(HttpLinkHeaders?) _getHeadersWithToken(
+    String token,
+  ) =>
+      (headers) => HttpLinkHeaders(
+        headers: {
+          ...headers?.headers ?? {},
+          'Authorization': 'Bearer $token',
+        },
+      );
 
   @override
   Stream<Response> request(Request request, [NextLink? forward]) {
@@ -92,6 +92,7 @@ class AddAuthLink extends Link {
       ),
       onConnectionLost: (code, reason) {
         log('Connection lost: $code, reason: $reason');
+
         return null;
       },
       initialPayload: () async => {

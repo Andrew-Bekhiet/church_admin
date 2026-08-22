@@ -119,6 +119,7 @@ class PaginatableStream<T, P> extends PaginatableStreamBase<T> {
           (previousValue, value, i) {
             if (i != 0 && previousValue?.value != value) {
               unawaited(listenToPage(0));
+
               return (value: value, changed: true);
             }
 

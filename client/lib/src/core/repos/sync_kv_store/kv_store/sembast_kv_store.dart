@@ -8,27 +8,20 @@ class SembastKvStore<T> implements KVStore<T> {
   @override
   String get name => _storeRef.name;
 
-  @override
-  Future<T?> get(String key) async {
-    final value = await _storeRef.record(key).get(_dbClient);
-
-    return value;
-  }
-
   SembastKvStore(this._dbClient, this._storeRef);
+
+  @override
+  Future<T?> get(String key) async => _storeRef.record(key).get(_dbClient);
 
   @override
   Future<void> clear() async => _storeRef.delete(_dbClient);
 
   @override
-  Future<void> close() async {}
+  Future<void> close() => Future<void>.value();
 
   @override
-  Future<bool> containsKey(String key) async {
-    final exists = await _storeRef.record(key).exists(_dbClient);
-
-    return exists;
-  }
+  Future<bool> containsKey(String key) async =>
+      _storeRef.record(key).exists(_dbClient);
 
   @override
   Future<void> delete(String key) async {
@@ -52,6 +45,7 @@ class SembastKvStore<T> implements KVStore<T> {
       {},
       (acc, record) {
         acc[record.key] = record.value;
+
         return acc;
       },
     );

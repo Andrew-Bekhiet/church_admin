@@ -44,7 +44,7 @@ class UserPersistenceService {
         .child('Users/${_auth.currentUserData!.uid}/lastSeen')
         .onDisconnect()
         .set(ServerValue.timestamp)
-        .catchError((_) {});
+        .catchError((_) => null);
   }
 
   Future<void> cancelOnDisconnect() async {
