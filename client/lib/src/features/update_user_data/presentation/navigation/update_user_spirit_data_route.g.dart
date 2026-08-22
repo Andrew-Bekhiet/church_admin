@@ -1,6 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: member_ordering
+// coverage:ignore-file
+// ignore_for_file: type=lint
 
 part of 'update_user_spirit_data_route.dart';
 

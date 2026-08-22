@@ -13,8 +13,9 @@ targets:
           explicit_to_json: true
       source_gen:combining_builder:
         options:
-          ignore_for_file:
-            - member_ordering
+          preamble: |-
+            // coverage:ignore-file
+            // ignore_for_file: type=lint
       graphql_codegen:
         enabled: true
         options:
