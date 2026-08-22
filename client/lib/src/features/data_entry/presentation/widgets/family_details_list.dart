@@ -76,16 +76,6 @@ class FamilyDetailsList extends StatelessWidget {
               ? ViewableObjectCard(family.address!.street!)
               : null,
         ),
-        ListTile(
-          title: FilledButton.icon(
-            icon: const Icon(Symbols.query_stats),
-            label: const Text('احصائيات'),
-            // TODO: add family analysis
-            onPressed: () {
-              return;
-            },
-          ),
-        ),
         HistoryProperty(
           name: 'أخر افتقاد',
           value: family.lastVisit?.time,

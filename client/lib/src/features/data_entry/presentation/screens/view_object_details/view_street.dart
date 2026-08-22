@@ -175,16 +175,6 @@ class _ViewStreetState extends State<ViewStreet> {
               ],
             ),
           ),
-          ListTile(
-            title: FilledButton.icon(
-              icon: const Icon(Symbols.query_stats),
-              label: const Text('احصائيات'),
-              // TODO: add street analysis
-              onPressed: () {
-                return;
-              },
-            ),
-          ),
           HistoryProperty(
             name: 'أخر افتقاد',
             value: street.lastVisit?.time,

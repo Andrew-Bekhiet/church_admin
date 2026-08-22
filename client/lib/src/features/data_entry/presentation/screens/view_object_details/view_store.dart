@@ -132,16 +132,6 @@ class _ViewStoreState extends State<ViewStore> {
                   )
                 : const Text('لا يوجد'),
           ),
-          ListTile(
-            title: FilledButton.icon(
-              icon: const Icon(Symbols.query_stats),
-              label: const Text('احصائيات'),
-              // TODO: add store analysis
-              onPressed: () {
-                return;
-              },
-            ),
-          ),
           HistoryProperty(
             name: 'أخر تحديث للبيانات',
             value: store.lastEdit?.time,
