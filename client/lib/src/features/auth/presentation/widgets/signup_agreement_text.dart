@@ -13,25 +13,27 @@ class SignupAgreementText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
+    final bodySmall = TextTheme.of(context).bodySmall;
+    final linkStyle = bodySmall?.copyWith(
+      color: ColorScheme.of(context).primary,
+    );
 
     return RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
-        style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
+        style: bodySmall,
         children: [
-          TextSpan(
-            style: theme.textTheme.bodySmall,
+          const TextSpan(
             text: 'بإنشائك حساب فإنك توافق على ',
           ),
           TextSpan(
-            style: theme.textTheme.bodySmall?.copyWith(color: Colors.blue),
+            style: linkStyle,
             text: 'شروط الاستخدام',
             recognizer: termsOfServiceRecognizer,
           ),
-          TextSpan(style: theme.textTheme.bodySmall, text: ' و'),
+          const TextSpan(text: ' و'),
           TextSpan(
-            style: theme.textTheme.bodySmall?.copyWith(color: Colors.blue),
+            style: linkStyle,
             text: 'سياسة الخصوصية',
             recognizer: privacyPolicyRecognizer,
           ),
