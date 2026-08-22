@@ -67,21 +67,21 @@ class OrderByWidget extends StatelessWidget {
                   onChanged: (field) {
                     final newField =
                         field!.operators.isEmpty ||
-                            !(field.fieldQueryableType
+                            !(field
+                                    .fieldQueryableType
                                     ?.isSelectableAsReference ??
                                 true)
                         ? field.redirectTo(
-                            field.fieldQueryableType!.fieldsMetadata
-                                .firstWhere(
-                                  (f) =>
-                                      !f.isCodeOnly &&
-                                      f.isOrderable &&
-                                      (f.operators.isNotEmpty ||
-                                          (f
-                                                  .fieldQueryableType
-                                                  ?.isSelectableAsReference ??
-                                              false)),
-                                ),
+                            field.fieldQueryableType!.fieldsMetadata.firstWhere(
+                              (f) =>
+                                  !f.isCodeOnly &&
+                                  f.isOrderable &&
+                                  (f.operators.isNotEmpty ||
+                                      (f
+                                              .fieldQueryableType
+                                              ?.isSelectableAsReference ??
+                                          false)),
+                            ),
                           )
                         : field;
 

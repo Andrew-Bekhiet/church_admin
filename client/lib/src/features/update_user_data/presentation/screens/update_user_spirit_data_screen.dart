@@ -10,7 +10,8 @@ class UpdateUserSpiritDataScreen extends StatefulWidget {
   const UpdateUserSpiritDataScreen({this.userData, super.key});
 
   @override
-  State<UpdateUserSpiritDataScreen> createState() => _UpdateUserSpiritDataState();
+  State<UpdateUserSpiritDataScreen> createState() =>
+      _UpdateUserSpiritDataState();
 }
 
 class _UpdateUserSpiritDataState extends State<UpdateUserSpiritDataScreen> {
