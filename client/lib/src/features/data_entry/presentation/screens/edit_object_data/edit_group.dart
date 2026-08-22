@@ -88,15 +88,9 @@ class _EditGroupState extends State<EditGroup> {
               serviceId: value?.id,
             ),
             validator: (value) => value == null ? 'يجب اختيار الخدمة' : null,
-            builder: (context, state) {
-              return state.value != null
-                  ? IgnorePointer(
-                      child: ViewableObjectWidget(
-                        state.value!,
-                        isDense: true,
-                      ),
-                    )
-                  : null;
+            builder: (context, state) => switch (state.value) {
+              final service? => ObjectSelectionPreview(service),
+              null => null,
             },
           ),
           DateTimeRangeField(

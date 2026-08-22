@@ -90,15 +90,9 @@ class _EditServiceState extends State<EditService> {
               nextService: value,
               nextServiceId: value?.id,
             ),
-            builder: (context, state) {
-              return state.value != null
-                  ? IgnorePointer(
-                      child: ViewableObjectWidget(
-                        state.value!,
-                        isDense: true,
-                      ),
-                    )
-                  : null;
+            builder: (context, state) => switch (state.value) {
+              final service? => ObjectSelectionPreview(service),
+              null => null,
             },
           ),
           StudyYearRangeField(

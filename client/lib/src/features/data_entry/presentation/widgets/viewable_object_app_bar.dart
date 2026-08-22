@@ -10,8 +10,8 @@ class ViewableObjectAppBar extends StatefulWidget {
   const ViewableObjectAppBar({
     required this.viewable,
     required this.appBarMaxHeight,
-    this.foregroundColor,
     this.circleCrop = true,
+    this.foregroundColor,
     this.onTap,
     this.overrideImage,
     super.key,

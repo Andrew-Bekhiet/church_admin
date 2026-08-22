@@ -13,7 +13,8 @@ class PasswordFormField extends StatefulWidget {
   final AutovalidateMode autoValidateMode;
   final InputDecoration? decoration;
   const PasswordFormField({
-    super.key,
+    this.autoFillHints = const [AutofillHints.password],
+    this.autoValidateMode = AutovalidateMode.disabled,
     this.padding,
     this.labelText,
     this.initialValue,
@@ -23,10 +24,9 @@ class PasswordFormField extends StatefulWidget {
     this.onSaved,
     this.validator,
     this.textInputAction,
-    this.autoFillHints = const [AutofillHints.password],
     this.focusNode,
-    this.autoValidateMode = AutovalidateMode.disabled,
     this.decoration,
+    super.key,
   });
   final void Function(String)? onChanged;
   final void Function(String)? onFieldSubmitted;
@@ -78,6 +78,7 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
               if (value?.isEmpty ?? true) {
                 return 'برجاء ادخال كلمة السر';
               }
+
               return null;
             },
       ),

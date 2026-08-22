@@ -29,8 +29,8 @@ class Father extends ViewableWithID with _$Father implements SerializableExtra {
   const Father({
     required this.id,
     required this.name,
-    this.churchId,
     this.isHidden = true,
+    this.churchId,
   });
 
   factory Father.fromJson(Map<String, Object?> json) => _$FatherFromJson(json);

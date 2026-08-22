@@ -90,6 +90,7 @@ class Service extends ViewableWithIDAndImage
   const Service({
     required this.id,
     required this.name,
+    this.userCanEdit = false,
     this.studyYearFrom,
     this.studyYearTo,
     this.studyYearFromId,
@@ -105,7 +106,6 @@ class Service extends ViewableWithIDAndImage
     this.meetings,
     this.lastEdit,
     this.adminUsers,
-    this.userCanEdit = false,
   });
 
   factory Service.fromJson(Map<String, Object?> json) =>

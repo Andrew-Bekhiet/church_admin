@@ -98,15 +98,9 @@ class _EditClassState extends State<EditClass> {
               serviceId: value?.id,
             ),
             validator: (value) => value == null ? 'يجب اختيار الخدمة' : null,
-            builder: (context, state) {
-              return state.value != null
-                  ? IgnorePointer(
-                      child: ViewableObjectWidget(
-                        state.value!,
-                        isDense: true,
-                      ),
-                    )
-                  : null;
+            builder: (context, state) => switch (state.value) {
+              final service? => ObjectSelectionPreview(service),
+              null => null,
             },
           ),
           ObjectSelectionField<StudyYear, StudyYear?>(
@@ -117,14 +111,12 @@ class _EditClassState extends State<EditClass> {
             ),
             dialogFieldLabel: 'السنة الدراسية',
             onChanged: (value) => newClass = newClass.copyWith(
-              //Store the selected object
-              //so we can build the widget based on it ...
               studyYear: value,
-              //... and its id to send it in the mutation
               serviceStudyYear: value?.order,
             ),
-            builder: (context, state) {
-              return state.value != null ? Text(state.value!.name) : null;
+            builder: (context, state) => switch (state.value) {
+              final studyYear? => Text(studyYear.name),
+              null => null,
             },
             validator: (value) {
               if (value == null) {
@@ -135,6 +127,7 @@ class _EditClassState extends State<EditClass> {
                 return 'السنة الدراسية يجب ان تكون بين '
                     '${newClass.service!.studyYearFrom!.name} و${newClass.service!.studyYearTo!.name}';
               }
+
               return null;
             },
           ),

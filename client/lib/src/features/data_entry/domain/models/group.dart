@@ -75,6 +75,7 @@ class Group extends ViewableWithIDAndImage
   const Group({
     required this.id,
     required this.name,
+    this.userCanEdit = false,
     this.color,
     this.photoUpdatedAt,
     this.blurhash,
@@ -85,7 +86,6 @@ class Group extends ViewableWithIDAndImage
     this.meetings,
     this.lastEdit,
     this.adminUsers,
-    this.userCanEdit = false,
   });
 
   factory Group.fromJson(Map<String, Object?> json) => _$GroupFromJson(json);

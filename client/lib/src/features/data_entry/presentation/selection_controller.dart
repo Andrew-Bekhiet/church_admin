@@ -12,8 +12,8 @@ class SelectionController<T> {
   bool get isSelecting => currentValue != null;
 
   SelectionController({
-    Iterable<T>? initialSelection,
     this.equality = const Equality(),
+    Iterable<T>? initialSelection,
   }) {
     _subject = BehaviorSubject.seeded(_convertSet(initialSelection));
   }

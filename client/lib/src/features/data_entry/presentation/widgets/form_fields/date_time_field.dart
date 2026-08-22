@@ -1,7 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:material_symbols_icons/material_symbols_icons.dart';
 
 class DateTimeField extends StatelessWidget {
   final String label;
@@ -15,8 +14,9 @@ class DateTimeField extends StatelessWidget {
 
   DateTimeField({
     required this.label,
-    this.initialValue,
     this.nullable = false,
+    this.withTime = true,
+    this.initialValue,
     DateFormat? dateFormat,
     this.onChanged,
     this.onSaved,
@@ -24,7 +24,6 @@ class DateTimeField extends StatelessWidget {
     this.autovalidateMode,
     this.focusNode,
     this.decoration,
-    this.withTime = true,
     super.key,
   }) : dateFormat =
            dateFormat ?? DateFormat(withTime ? 'yyyy/M/d h:m a' : 'yyyy/M/d');
@@ -53,28 +52,13 @@ class DateTimeField extends StatelessWidget {
           if (nullable) focusScope.nextFocus();
         }
       },
-      decoration: (context, state) {
-        final inputDecoration = InputDecoration(
-          labelText: label,
-          errorText: state.errorText,
-          suffixIcon: nullable && state.value != null
-              ? IconButton(
-                  icon: const Icon(Symbols.delete),
-                  tooltip: 'حذف التاريخ',
-                  onPressed: () {
-                    state.didChange(null);
-                    onChanged?.call(null);
-                  },
-                )
-              : null,
-        );
-
-        return decoration?.copyWith(
-              errorText: inputDecoration.errorText,
-              suffixIcon: inputDecoration.suffixIcon,
-            ) ??
-            inputDecoration;
-      },
+      decoration: (context, state) => ClearableDateFieldDecoration.build(
+        label: label,
+        nullable: nullable,
+        decoration: decoration,
+        state: state,
+        onChanged: onChanged,
+      ),
       builder: (context, state) {
         return state.value != null
             ? Text(dateFormat.format(state.value!))
@@ -129,6 +113,7 @@ class DateTimeField extends StatelessWidget {
     if (resultDateTime != null && resultDateTime != initialDateTime) {
       return resultDateTime;
     }
+
     return null;
   }
 

@@ -17,9 +17,9 @@ class ViewableObjectListItem<T extends Viewable> extends StatelessWidget {
   ViewableObjectListItem({
     required this.item,
     required this.selectionController,
+    this.addSeparator = true,
     this.itemBuilder,
     this.viewableObjectWidgetConfig,
-    this.addSeparator = true,
     ViewableObjectService? viewableObjectService,
     super.key,
   }) : viewableObjectService = viewableObjectService ?? ViewableObjectService.I;

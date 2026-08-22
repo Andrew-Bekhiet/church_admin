@@ -18,6 +18,7 @@ class ViewableObjectCard<T extends Viewable> extends StatelessWidget {
 
   ViewableObjectCard(
     this.object, {
+    this.size = 150,
     this.title,
     this.photo,
     this.selected,
@@ -25,7 +26,6 @@ class ViewableObjectCard<T extends Viewable> extends StatelessWidget {
     this.heroTag,
     this.onTap,
     this.onLongPress,
-    this.size = 150,
     ViewableObjectWidgetConfig? config,
     ViewableObjectService? viewableObjectService,
     super.key,

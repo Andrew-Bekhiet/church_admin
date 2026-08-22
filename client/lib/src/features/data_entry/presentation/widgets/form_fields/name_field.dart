@@ -39,6 +39,7 @@ class NameField extends StatelessWidget {
         if (value?.trim().isEmpty ?? true) {
           return 'برجاء إدخال الاسم';
         }
+
         return null;
       },
     );

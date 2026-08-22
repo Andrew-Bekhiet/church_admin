@@ -38,6 +38,7 @@ class PhotoField extends StatelessWidget {
       state
         ..didChange(PhotoFieldState(deletePhoto: true))
         ..save();
+
       return;
     }
 

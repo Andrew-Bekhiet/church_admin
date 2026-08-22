@@ -12,8 +12,8 @@ class StudyYearRangeField extends StatelessWidget {
 
   const StudyYearRangeField({
     required this.label,
-    this.initialValue,
     this.nullable = false,
+    this.initialValue,
     this.onChanged,
     this.onSaved,
     this.validator,

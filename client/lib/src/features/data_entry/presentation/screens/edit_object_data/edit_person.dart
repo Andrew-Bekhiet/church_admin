@@ -43,24 +43,25 @@ class _EditPersonState extends State<EditPerson> {
       () async {
         final name = await _renamePhoneFieldName(true, phone.key);
 
-        if (name == true) {
-          newPerson = newPerson.copyWith(
-            otherPhones: {
-              for (final p in newPerson.otherPhones.entries)
-                if (p.key != phone.key) p.key: p.value,
-            },
-          );
-          if (mounted) setState(() {});
+        if (name == true && mounted) {
+          setState(() {
+            newPerson = newPerson.copyWith(
+              otherPhones: {
+                for (final p in newPerson.otherPhones.entries)
+                  if (p.key != phone.key) p.key: p.value,
+              },
+            );
+          });
         } else if (name is String) {
-          newPerson = newPerson.copyWith(
-            otherPhones: {
-              for (final p in newPerson.otherPhones.entries)
-                if (p.key != phone.key) p.key: p.value,
-              name: phone.value,
-            },
-          );
-
-          setState(() {});
+          setState(() {
+            newPerson = newPerson.copyWith(
+              otherPhones: {
+                for (final p in newPerson.otherPhones.entries)
+                  if (p.key != phone.key) p.key: p.value,
+                name: phone.value,
+              },
+            );
+          });
         }
       };
 
@@ -145,112 +146,121 @@ class _EditPersonState extends State<EditPerson> {
               padding: const EdgeInsets.symmetric(vertical: 8),
             ),
             if (FeatureFlagsRepository.I.enablePersonNationalId)
-              TextFormField(
-                decoration: const InputDecoration(labelText: 'الرقم القومي'),
-                onFieldSubmitted: (_) => FocusScope.of(context).nextFocus(),
-                initialValue: newPerson.nationalId?.toString(),
-                keyboardType: TextInputType.number,
-                textInputAction: TextInputAction.next,
-                onChanged: (value) => newPerson = newPerson.copyWith(
-                  nationalId: int.tryParse(value),
-                ),
-                validator: (v) =>
-                    v != null &&
-                        v.isNotEmpty &&
-                        (int.tryParse(v) ?? 0) < 20000000000000
-                    ? 'برجاء إدخال رقم قومي صالح'
-                    : null,
-              ).withPadding(const EdgeInsets.symmetric(vertical: 8)),
-            Builder(
-              builder: (context) => TextFormField(
-                key: ValueKey(newPerson.mainPhone),
-                decoration: InputDecoration(
-                  labelText: 'رقم الهاتف',
-                  suffixIcon:
-                      CurrentPlatformService.I.isAndroid ||
-                          CurrentPlatformService.I.isIOS
-                      ? IconButton(
-                          tooltip: 'اختيار من جهات الاتصال',
-                          onPressed: _importFromContacts,
-                          icon: const Icon(Symbols.contacts),
-                        )
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: TextFormField(
+                  decoration: const InputDecoration(labelText: 'الرقم القومي'),
+                  onFieldSubmitted: (_) => FocusScope.of(context).nextFocus(),
+                  initialValue: newPerson.nationalId?.toString(),
+                  keyboardType: TextInputType.number,
+                  textInputAction: TextInputAction.next,
+                  onChanged: (value) => newPerson = newPerson.copyWith(
+                    nationalId: int.tryParse(value),
+                  ),
+                  validator: (v) =>
+                      v != null &&
+                          v.isNotEmpty &&
+                          (int.tryParse(v) ?? 0) < 20000000000000
+                      ? 'برجاء إدخال رقم قومي صالح'
                       : null,
                 ),
-                onFieldSubmitted: (_) {
-                  FocusScope.of(context).nextFocus();
-                  if (newPerson.otherPhones.isEmpty) {
+              ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: Builder(
+                builder: (context) => TextFormField(
+                  key: ValueKey(newPerson.mainPhone),
+                  decoration: InputDecoration(
+                    labelText: 'رقم الهاتف',
+                    suffixIcon:
+                        CurrentPlatformService.I.isAndroid ||
+                            CurrentPlatformService.I.isIOS
+                        ? IconButton(
+                            tooltip: 'اختيار من جهات الاتصال',
+                            onPressed: _importFromContacts,
+                            icon: const Icon(Symbols.contacts),
+                          )
+                        : null,
+                  ),
+                  onFieldSubmitted: (_) {
                     FocusScope.of(context).nextFocus();
-                  }
-                },
-                initialValue: newPerson.mainPhone,
-                keyboardType: TextInputType.phone,
-                autofillHints: const [AutofillHints.telephoneNumber],
-                textInputAction: TextInputAction.next,
-                onChanged: (value) => newPerson = newPerson.copyWith(
-                  mainPhone: PhoneNumberService.I
-                      .formatInternational(value)
-                      .replaceAll('+20', '0'),
-                ),
-                validator: (v) =>
-                    v != null && v.isNotEmpty ? _validatePhoneField(v) : null,
-                inputFormatters: [
-                  TextInputFormatter.withFunction(
-                    (oldValue, newValue) => newValue.copyWith(
-                      text: newValue.text.replaceAll(
-                        RegExp(r'[^\d\+]'),
-                        '',
+                    if (newPerson.otherPhones.isEmpty) {
+                      FocusScope.of(context).nextFocus();
+                    }
+                  },
+                  initialValue: newPerson.mainPhone,
+                  keyboardType: TextInputType.phone,
+                  autofillHints: const [AutofillHints.telephoneNumber],
+                  textInputAction: TextInputAction.next,
+                  onChanged: (value) => newPerson = newPerson.copyWith(
+                    mainPhone: PhoneNumberService.I
+                        .formatInternational(value)
+                        .replaceAll('+20', '0'),
+                  ),
+                  validator: (v) =>
+                      v != null && v.isNotEmpty ? _validatePhoneField(v) : null,
+                  inputFormatters: [
+                    TextInputFormatter.withFunction(
+                      (oldValue, newValue) => newValue.copyWith(
+                        text: newValue.text.replaceAll(
+                          RegExp(r'[^\d\+]'),
+                          '',
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ).withPadding(const EdgeInsets.symmetric(vertical: 8)),
+            ),
             Column(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 ...newPerson.otherPhones.entries.mapIndexed((i, phone) {
-                  return Builder(
-                    builder: (context) {
-                      return TextFormField(
-                        decoration: InputDecoration(
-                          labelText: phone.key,
-                          hintText: 'مثال: 01234...',
-                          suffixIcon: IconButton(
-                            icon: const Icon(Symbols.edit),
-                            tooltip: 'تعديل اسم الهاتف',
-                            onPressed: _onEditPhoneFieldName(phone),
-                          ),
-                        ),
-                        onFieldSubmitted: (_) {
-                          FocusScope.of(context).nextFocus();
-                          if (i == newPerson.otherPhones.length - 1) {
-                            FocusScope.of(context).nextFocus();
-                          }
-                        },
-                        keyboardType: TextInputType.phone,
-                        autofillHints: const [AutofillHints.telephoneNumber],
-                        initialValue: phone.value,
-                        onChanged: (value) => newPerson = newPerson.copyWith(
-                          otherPhones: {
-                            ...newPerson.otherPhones,
-                            phone.key: PhoneNumberService.I
-                                .formatInternational(value)
-                                .replaceAll('+20', '0'),
-                          },
-                        ),
-                        validator: _validatePhoneField,
-                        inputFormatters: [
-                          TextInputFormatter.withFunction(
-                            (oldValue, newValue) => newValue.copyWith(
-                              text: newValue.text.replaceAll(r'[^\d\+]', ''),
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    child: Builder(
+                      builder: (context) {
+                        return TextFormField(
+                          decoration: InputDecoration(
+                            labelText: phone.key,
+                            hintText: 'مثال: 01234...',
+                            suffixIcon: IconButton(
+                              icon: const Icon(Symbols.edit),
+                              tooltip: 'تعديل اسم الهاتف',
+                              onPressed: _onEditPhoneFieldName(phone),
                             ),
                           ),
-                        ],
-                        textInputAction: TextInputAction.next,
-                      );
-                    },
-                  ).withPadding(const EdgeInsets.symmetric(vertical: 8));
+                          onFieldSubmitted: (_) {
+                            FocusScope.of(context).nextFocus();
+                            if (i == newPerson.otherPhones.length - 1) {
+                              FocusScope.of(context).nextFocus();
+                            }
+                          },
+                          keyboardType: TextInputType.phone,
+                          autofillHints: const [AutofillHints.telephoneNumber],
+                          initialValue: phone.value,
+                          onChanged: (value) => newPerson = newPerson.copyWith(
+                            otherPhones: {
+                              ...newPerson.otherPhones,
+                              phone.key: PhoneNumberService.I
+                                  .formatInternational(value)
+                                  .replaceAll('+20', '0'),
+                            },
+                          ),
+                          validator: _validatePhoneField,
+                          inputFormatters: [
+                            TextInputFormatter.withFunction(
+                              (oldValue, newValue) => newValue.copyWith(
+                                text: newValue.text.replaceAll(r'[^\d\+]', ''),
+                              ),
+                            ),
+                          ],
+                          textInputAction: TextInputAction.next,
+                        );
+                      },
+                    ),
+                  );
                 }),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8),
@@ -260,12 +270,15 @@ class _EditPersonState extends State<EditPerson> {
                     label: const Text('إضافة رقم هاتف أخر'),
                     onPressed: () async {
                       final name = await _renamePhoneFieldName();
-                      if (name is String) {
-                        newPerson = newPerson.copyWith(
-                          otherPhones: {...newPerson.otherPhones, name: ''},
-                        );
-
-                        if (mounted) setState(() {});
+                      if (name is String && mounted) {
+                        setState(() {
+                          newPerson = newPerson.copyWith(
+                            otherPhones: {
+                              ...newPerson.otherPhones,
+                              name: '',
+                            },
+                          );
+                        });
                       }
                     },
                   ),
@@ -322,10 +335,7 @@ class _EditPersonState extends State<EditPerson> {
                 } else {
                   setState(
                     () => newPerson = newPerson.copyWith(
-                      //Store the selected object
-                      //so we can build the widget based on it ...
                       family: value,
-                      //... and its id to send it in the mutation
                       familyId: value?.id,
                       address: switch (value) {
                         Family(:final address) => address,
@@ -335,15 +345,9 @@ class _EditPersonState extends State<EditPerson> {
                   );
                 }
               },
-              builder: (context, state) {
-                return state.value != null
-                    ? IgnorePointer(
-                        child: ViewableObjectWidget(
-                          state.value!,
-                          isDense: true,
-                        ),
-                      )
-                    : null;
+              builder: (context, state) => switch (state.value) {
+                final family? => ObjectSelectionPreview(family),
+                null => null,
               },
             ),
             const Divider(),
@@ -510,10 +514,7 @@ class _EditPersonState extends State<EditPerson> {
                 dialogFieldLabel: 'السنة الدراسية',
                 onChanged: (value) => setState(
                   () => newPerson = newPerson.copyWith(
-                    //Store the selected object
-                    //so we can build the widget based on it ...
                     studyYear: value,
-                    //... and its id to send it in the mutation
                     studyYearId: value?.order,
                   ),
                 ),
@@ -550,10 +551,7 @@ class _EditPersonState extends State<EditPerson> {
                   ),
                   dialogFieldLabel: 'الكلية',
                   onChanged: (value) => newPerson = newPerson.copyWith(
-                    //Store the selected object
-                    //so we can build the widget based on it ...
                     college: value,
-                    //... and its id to send it in the mutation
                     collegeId: value?.id,
                   ),
                   builder: (context, state) {
@@ -574,10 +572,7 @@ class _EditPersonState extends State<EditPerson> {
                   ),
                   dialogFieldLabel: 'المدرسة',
                   onChanged: (value) => newPerson = newPerson.copyWith(
-                    //Store the selected object
-                    //so we can build the widget based on it ...
                     school: value,
-                    //... and its id to send it in the mutation
                     schoolId: value?.id,
                   ),
                   builder: (context, state) {
@@ -604,10 +599,7 @@ class _EditPersonState extends State<EditPerson> {
                 ),
                 dialogFieldLabel: 'المؤهل',
                 onChanged: (value) => newPerson = newPerson.copyWith(
-                  //Store the selected object
-                  //so we can build the widget based on it ...
                   qualification: value,
-                  //... and its id to send it in the mutation
                   qualificationId: value?.id,
                 ),
                 builder: (context, state) {
@@ -629,10 +621,7 @@ class _EditPersonState extends State<EditPerson> {
                 ),
                 dialogFieldLabel: 'الوظيفة',
                 onChanged: (value) => newPerson = newPerson.copyWith(
-                  //Store the selected object
-                  //so we can build the widget based on it ...
                   job: value,
-                  //... and its id to send it in the mutation
                   jobId: value?.id,
                 ),
                 builder: (context, state) {
@@ -640,29 +629,38 @@ class _EditPersonState extends State<EditPerson> {
                 },
                 validator: (v) => null,
               ),
-              TextFormField(
-                decoration: const InputDecoration(labelText: 'تفاصيل الوظيفة'),
-                initialValue: newPerson.jobDescription,
-                onChanged: (value) => newPerson = newPerson.copyWith(
-                  jobDescription: value.trim(),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: TextFormField(
+                  decoration: const InputDecoration(
+                    labelText: 'تفاصيل الوظيفة',
+                  ),
+                  initialValue: newPerson.jobDescription,
+                  onChanged: (value) => newPerson = newPerson.copyWith(
+                    jobDescription: value.trim(),
+                  ),
+                  textInputAction: TextInputAction.next,
+                  validator: (value) => null,
                 ),
-                textInputAction: TextInputAction.next,
-                validator: (value) => null,
-              ).withPadding(const EdgeInsets.symmetric(vertical: 8)),
+              ),
             ],
             const Divider(),
-            GenderField(
-              initialValue: newPerson.gender,
-              onChanged: (v) {
-                newPerson = v!
-                    ? newPerson.copyWith(gender: v)
-                    : newPerson.copyWith(
-                        gender: v,
-                        isShammas: false,
-                      );
-                setState(() {});
-              },
-            ).withPadding(const EdgeInsets.symmetric(vertical: 8)),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: GenderField(
+                initialValue: newPerson.gender,
+                onChanged: (v) {
+                  setState(() {
+                    newPerson = v!
+                        ? newPerson.copyWith(gender: v)
+                        : newPerson.copyWith(
+                            gender: v,
+                            isShammas: false,
+                          );
+                  });
+                },
+              ),
+            ),
             ObjectSelectionField(
               nullable: false,
               initialValue: ViewableEnumWithID.wrap(
@@ -695,10 +693,7 @@ class _EditPersonState extends State<EditPerson> {
               ),
               dialogFieldLabel: 'نوع الفرد في العائلة',
               onChanged: (value) => newPerson = newPerson.copyWith(
-                //Store the selected object
-                //so we can build the widget based on it ...
                 personType: value,
-                //... and its id to send it in the mutation
                 personTypeId: value?.id,
               ),
               builder: (context, state) {
@@ -709,24 +704,19 @@ class _EditPersonState extends State<EditPerson> {
             const Divider(),
             ObjectSelectionField<Church, Church?>(
               initialValue: newPerson.church,
-              onCreateCustom: (name) =>
-                  DatabaseService.I.metadata.churches.createObject(
-                    newObject: Church(id: const Uuid().v4(), name: name),
-                  ),
+              onCreateCustom: MetadataQuickCreate.church,
               listController: (s) => ViewableObjectListController(
                 objectsPaginatableStream: DatabaseService.I.metadata.churches
                     .streamAll(searchQuery: s),
               ),
               dialogFieldLabel: 'الكنيسة',
               onChanged: (value) => newPerson = newPerson.copyWith(
-                //Store the selected object
-                //so we can build the widget based on it ...
                 church: value,
-                //... and its id to send it in the mutation
                 churchId: value?.id,
               ),
-              builder: (context, state) {
-                return state.value != null ? Text(state.value!.name) : null;
+              builder: (context, state) => switch (state.value) {
+                final church? => Text(church.name),
+                null => null,
               },
               validator: (v) => null,
             ),
@@ -742,10 +732,7 @@ class _EditPersonState extends State<EditPerson> {
               ),
               dialogFieldLabel: 'أب الاعتراف',
               onChanged: (value) => newPerson = newPerson.copyWith(
-                //Store the selected object
-                //so we can build the widget based on it ...
                 father: value,
-                //... and its id to send it in the mutation
                 fatherId: value?.id,
               ),
               builder: (context, state) {
@@ -768,10 +755,7 @@ class _EditPersonState extends State<EditPerson> {
               ObjectSelectionField<Church, Church?>(
                 key: ValueKey(newPerson.isServant),
                 initialValue: newPerson.servingChurch,
-                onCreateCustom: (name) =>
-                    DatabaseService.I.metadata.churches.createObject(
-                      newObject: Church(id: const Uuid().v4(), name: name),
-                    ),
+                onCreateCustom: MetadataQuickCreate.church,
                 listController: (s) => ViewableObjectListController(
                   objectsPaginatableStream: DatabaseService.I.metadata.churches
                       .streamAll(searchQuery: s),
@@ -780,20 +764,24 @@ class _EditPersonState extends State<EditPerson> {
                 onChanged: (value) => newPerson = newPerson.copyWith(
                   servingChurch: value,
                 ),
-                builder: (context, state) {
-                  return state.value != null ? Text(state.value!.name) : null;
+                builder: (context, state) => switch (state.value) {
+                  final church? => Text(church.name),
+                  null => null,
                 },
                 validator: (v) => null,
               ),
-              TextFormField(
-                decoration: const InputDecoration(
-                  labelText: 'نوع الخدمة',
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: TextFormField(
+                  decoration: const InputDecoration(
+                    labelText: 'نوع الخدمة',
+                  ),
+                  initialValue: newPerson.serviceType,
+                  onChanged: (value) =>
+                      newPerson = newPerson.copyWith(serviceType: value.trim()),
+                  validator: (value) => null,
                 ),
-                initialValue: newPerson.serviceType,
-                onChanged: (value) =>
-                    newPerson = newPerson.copyWith(serviceType: value.trim()),
-                validator: (value) => null,
-              ).withPadding(const EdgeInsets.symmetric(vertical: 8)),
+              ),
             ],
             if (newPerson.gender)
               FormField<bool>(
@@ -803,8 +791,9 @@ class _EditPersonState extends State<EditPerson> {
                   value: state.value,
                   onChanged: (v) {
                     state.didChange(v);
-                    newPerson = newPerson.copyWith(isShammas: v!);
-                    setState(() {});
+                    setState(() {
+                      newPerson = newPerson.copyWith(isShammas: v!);
+                    });
                   },
                 ),
               ),
@@ -822,10 +811,7 @@ class _EditPersonState extends State<EditPerson> {
                 ),
                 dialogFieldLabel: 'رتبة الشموسية',
                 onChanged: (value) => newPerson = newPerson.copyWith(
-                  //Store the selected object
-                  //so we can build the widget based on it ...
                   shammasLevel: value,
-                  //... and its id to send it in the mutation
                   shammasLevelId: value?.id,
                 ),
                 builder: (context, state) {
@@ -843,10 +829,7 @@ class _EditPersonState extends State<EditPerson> {
               ),
               dialogFieldLabel: 'الحالة الروحية',
               onChanged: (value) => newPerson = newPerson.copyWith(
-                //Store the selected object
-                //so we can build the widget based on it ...
                 state: value,
-                //... and its id to send it in the mutation
                 stateId: value?.id,
               ),
               builder: (context, state) {
@@ -897,6 +880,7 @@ class _EditPersonState extends State<EditPerson> {
               labelText: 'الهوايات',
               builder: (context, state) {
                 final labelStyle = themeData.textTheme.labelSmall!;
+
                 return state.value != null && state.value!.isNotEmpty
                     ? Wrap(
                         spacing: 3,
@@ -942,6 +926,7 @@ class _EditPersonState extends State<EditPerson> {
               labelText: 'الشارات',
               builder: (context, state) {
                 final labelStyle = themeData.textTheme.labelSmall!;
+
                 return state.value != null && state.value!.isNotEmpty
                     ? Wrap(
                         spacing: 3,
@@ -966,15 +951,18 @@ class _EditPersonState extends State<EditPerson> {
                     : const Text('لا يوجد شارات');
               },
             ),
-            TextFormField(
-              decoration: const InputDecoration(labelText: 'ملاحظات'),
-              initialValue: newPerson.notes,
-              onChanged: (value) =>
-                  newPerson = newPerson.copyWith(notes: value.trim()),
-              textInputAction: TextInputAction.newline,
-              maxLines: null,
-              validator: (value) => null,
-            ).withPadding(const EdgeInsets.symmetric(vertical: 8)),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: TextFormField(
+                decoration: const InputDecoration(labelText: 'ملاحظات'),
+                initialValue: newPerson.notes,
+                onChanged: (value) =>
+                    newPerson = newPerson.copyWith(notes: value.trim()),
+                textInputAction: TextInputAction.newline,
+                maxLines: null,
+                validator: (value) => null,
+              ),
+            ),
             ColorField(
               initialValue: newPerson.color,
               onChanged: (value) => setState(
@@ -997,14 +985,14 @@ class _EditPersonState extends State<EditPerson> {
               label: 'أخر تناول',
               initialValue: newPerson.lastKodas?.time,
               onChanged: (v) {
-                if (v != null) {
-                  newPerson = newPerson.copyWith(
-                    lastKodas: LastRecordedByInfo(
-                      time: v,
-                      recordedBy: AuthBloc.I.currentUser?.uid,
-                    ),
-                  );
-                }
+                if (v == null) return;
+
+                newPerson = newPerson.copyWith(
+                  lastKodas: LastRecordedByInfo(
+                    time: v,
+                    recordedBy: AuthBloc.I.currentUser?.uid,
+                  ),
+                );
               },
               validator: (v) => null,
             ),
@@ -1014,14 +1002,14 @@ class _EditPersonState extends State<EditPerson> {
               label: 'أخر اعتراف',
               initialValue: newPerson.lastConfession?.time,
               onChanged: (v) {
-                if (v != null) {
-                  newPerson = newPerson.copyWith(
-                    lastConfession: LastRecordedByInfo(
-                      time: v,
-                      recordedBy: AuthBloc.I.currentUser?.uid,
-                    ),
-                  );
-                }
+                if (v == null) return;
+
+                newPerson = newPerson.copyWith(
+                  lastConfession: LastRecordedByInfo(
+                    time: v,
+                    recordedBy: AuthBloc.I.currentUser?.uid,
+                  ),
+                );
               },
               validator: (v) => null,
             ),
@@ -1031,14 +1019,14 @@ class _EditPersonState extends State<EditPerson> {
               label: 'أخر افتقاد',
               initialValue: newPerson.lastVisit?.time,
               onChanged: (v) {
-                if (v != null) {
-                  newPerson = newPerson.copyWith(
-                    lastVisit: LastRecordedByInfo(
-                      time: v,
-                      recordedBy: AuthBloc.I.currentUser?.uid,
-                    ),
-                  );
-                }
+                if (v == null) return;
+
+                newPerson = newPerson.copyWith(
+                  lastVisit: LastRecordedByInfo(
+                    time: v,
+                    recordedBy: AuthBloc.I.currentUser?.uid,
+                  ),
+                );
               },
               validator: (v) => null,
             ),
@@ -1047,14 +1035,14 @@ class _EditPersonState extends State<EditPerson> {
               label: 'أخر مكالمة',
               initialValue: newPerson.lastCall?.time,
               onChanged: (v) {
-                if (v != null) {
-                  newPerson = newPerson.copyWith(
-                    lastCall: LastRecordedByInfo(
-                      time: v,
-                      recordedBy: AuthBloc.I.currentUser?.uid,
-                    ),
-                  );
-                }
+                if (v == null) return;
+
+                newPerson = newPerson.copyWith(
+                  lastCall: LastRecordedByInfo(
+                    time: v,
+                    recordedBy: AuthBloc.I.currentUser?.uid,
+                  ),
+                );
               },
               validator: (v) => null,
             ),
@@ -1085,9 +1073,7 @@ class _EditPersonState extends State<EditPerson> {
 
         _classesAndGroupsLoaded = true;
 
-        if (mounted) {
-          setState(() {});
-        }
+        if (mounted) setState(() => _classesAndGroupsLoaded = true);
       });
     }
   }
@@ -1210,15 +1196,16 @@ class _EditPersonState extends State<EditPerson> {
       ),
     );
 
-    if (rslt == true) {
-      newPerson = newPerson.copyWith(
-        name: useContactName ? (contact.displayName ?? '') : newPerson.name,
-        otherPhones: {
-          ...newPerson.otherPhones,
-          for (final n in numbersToImport) n.label: n.number,
-        },
-      );
-      if (mounted) setState(() {});
+    if (rslt == true && mounted) {
+      setState(() {
+        newPerson = newPerson.copyWith(
+          name: useContactName ? (contact.displayName ?? '') : newPerson.name,
+          otherPhones: {
+            ...newPerson.otherPhones,
+            for (final n in numbersToImport) n.label: n.number,
+          },
+        );
+      });
     }
   }
 
@@ -1420,11 +1407,11 @@ class __SelectServicesPageState extends State<_SelectServicesPage>
     for (final c in _animationControllers.values) {
       c.dispose();
     }
-    super.dispose();
 
     await listController.dispose();
 
     await search.close();
     await selected.close();
+    super.dispose();
   }
 }

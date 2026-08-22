@@ -10,9 +10,9 @@ class CopiablePropertyWidget extends StatelessWidget {
   const CopiablePropertyWidget(
     this.propName,
     this.value, {
-    super.key,
     this.showErrorIfEmpty = true,
     this.additionalOptions,
+    super.key,
   });
 
   @override
@@ -33,18 +33,15 @@ class CopiablePropertyWidget extends StatelessWidget {
       copyOrError = null;
     }
 
-    final Widget? trailing;
-    if (additionalOptions != null) {
-      trailing = Row(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          ...additionalOptions!,
-          ?copyOrError,
-        ],
-      );
-    } else {
-      trailing = copyOrError;
-    }
+    final Widget? trailing = additionalOptions != null
+        ? Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ...additionalOptions!,
+              ?copyOrError,
+            ],
+          )
+        : copyOrError;
 
     return ListTile(
       title: Text(propName),

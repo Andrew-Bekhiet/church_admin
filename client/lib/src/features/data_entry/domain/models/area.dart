@@ -60,6 +60,7 @@ class Area extends ViewableWithIDAndImage
   const Area({
     required this.id,
     required this.name,
+    this.userCanEdit = false,
     this.bounds,
     this.color,
     this.photoUpdatedAt,
@@ -67,7 +68,6 @@ class Area extends ViewableWithIDAndImage
     this.lastVisit,
     this.lastEdit,
     this.adminUsers,
-    this.userCanEdit = false,
   });
 
   factory Area.fromJson(Map<String, Object?> json) => _$AreaFromJson(json);

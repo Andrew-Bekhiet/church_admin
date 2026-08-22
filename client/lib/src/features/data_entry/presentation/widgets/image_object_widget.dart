@@ -64,13 +64,13 @@ class ImageObjectWidget extends StatelessWidget {
 
   ImageObjectWidget(
     this.imageObject, {
-    ImageUrlCacheService? imageUrlCacheService,
-    ViewableObjectService? viewableObjectService,
     this.circleCrop = true,
     this.isDense = false,
+    this.size = defaultSize,
+    ImageUrlCacheService? imageUrlCacheService,
+    ViewableObjectService? viewableObjectService,
     this.heroTag,
     this.borderRadius,
-    this.size = defaultSize,
     this.blurhashSize,
     super.key,
   }) : photoUrlCacheService = imageUrlCacheService ?? ImageUrlCacheService.I,

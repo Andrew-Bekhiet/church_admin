@@ -29,11 +29,11 @@ class ViewableObjectList<T extends Viewable> extends StatefulWidget {
   const ViewableObjectList({
     required this.objectsController,
     this.type = ViewableObjectListType.list,
+    this.itemsExpandable = false,
+    this.addSeparator = true,
     this.itemBuilder,
     this.viewableObjectWidgetConfig,
     this.scrollController,
-    this.itemsExpandable = false,
-    this.addSeparator = true,
     super.key,
   });
 
@@ -47,13 +47,25 @@ class _ViewableObjectListState<T extends Viewable>
   ScrollController? _scrollController;
 
   void Function(VisibilityInfo) _onVisibilityChanged(int i) => (info) {
-    if (info.visibleFraction >= 0.8) {
-      unawaited(objectsController.itemVisibleAt(i));
-    }
+    if (info.visibleFraction < 0.8) return;
+
+    unawaited(objectsController.itemVisibleAt(i));
   };
 
   ViewableObjectListController<T> get objectsController =>
       widget.objectsController;
+
+  Widget Function(BuildContext, int) _itemBuilderFor(List<T> items) =>
+      (context, i) => _ListItem<T>(
+        index: i,
+        items: items,
+        objectsController: objectsController,
+        type: widget.type,
+        addSeparator: widget.addSeparator,
+        itemBuilder: widget.itemBuilder,
+        viewableObjectWidgetConfig: widget.viewableObjectWidgetConfig,
+        onVisibilityChanged: _onVisibilityChanged(i),
+      );
 
   @override
   void initState() {
@@ -98,36 +110,7 @@ class _ViewableObjectListState<T extends Viewable>
           return const Center(child: CircularProgressIndicator());
         }
 
-        //ignore: avoid-unused-parameters
-        Widget itemBuilder(BuildContext context, int i) {
-          if (i >= items.length) {
-            return StreamBuilder(
-              stream: objectsController.onLoadingChanged,
-              builder: (context, state) =>
-                  state.hasData &&
-                      state.requireData &&
-                      (widget.type != ViewableObjectListType.list ||
-                          i == items.length)
-                  ? const Center(child: CircularProgressIndicator())
-                  : const SizedBox(height: 120),
-            );
-          }
-
-          return VisibilityDetector(
-            key: ValueKey(items[i]),
-            onVisibilityChanged: _onVisibilityChanged(i),
-            child: ViewableObjectListItem(
-              item: items[i],
-              selectionController: objectsController.selectionController,
-              itemBuilder: widget.itemBuilder,
-              viewableObjectWidgetConfig: widget.viewableObjectWidgetConfig,
-              addSeparator:
-                  widget.addSeparator &&
-                  i < items.length - 1 &&
-                  widget.type == ViewableObjectListType.list,
-            ),
-          );
-        }
+        final itemBuilder = _itemBuilderFor(items);
 
         if (widget.type == ViewableObjectListType.grid ||
             widget.type == ViewableObjectListType.grid3) {
@@ -153,7 +136,6 @@ class _ViewableObjectListState<T extends Viewable>
             itemCount: items.length + 2,
             keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
             prototypeItem: !widget.itemsExpandable
-                // ignore: avoid-returning-widgets
                 ? HeroMode(enabled: false, child: itemBuilder(context, 0))
                 : null,
           );
@@ -189,11 +171,66 @@ class _ViewableObjectListState<T extends Viewable>
 
     WidgetsBinding.instance.addPostFrameCallback(
       (_) async {
-        if (position.pixels >= position.maxScrollExtent &&
-            objectsController.hasMore) {
-          await objectsController.listenToNextPage();
+        if (position.pixels < position.maxScrollExtent ||
+            !objectsController.hasMore) {
+          return;
         }
+
+        await objectsController.listenToNextPage();
       },
+    );
+  }
+}
+
+class _ListItem<T extends Viewable> extends StatelessWidget {
+  final int index;
+  final List<T> items;
+  final ViewableObjectListController<T> objectsController;
+  final ViewableObjectListType type;
+  final bool addSeparator;
+  final ItemBuilder<T>? itemBuilder;
+  final ViewableObjectWidgetConfig<T>? viewableObjectWidgetConfig;
+  final void Function(VisibilityInfo) onVisibilityChanged;
+
+  const _ListItem({
+    required this.index,
+    required this.items,
+    required this.objectsController,
+    required this.type,
+    required this.addSeparator,
+    required this.onVisibilityChanged,
+    this.itemBuilder,
+    this.viewableObjectWidgetConfig,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    if (index >= items.length) {
+      return StreamBuilder(
+        stream: objectsController.onLoadingChanged,
+        builder: (context, state) =>
+            state.hasData &&
+                state.requireData &&
+                (type != ViewableObjectListType.list || index == items.length)
+            ? const Center(child: CircularProgressIndicator())
+            : const SizedBox(height: 120),
+      );
+    }
+
+    return VisibilityDetector(
+      key: ValueKey(items[index]),
+      onVisibilityChanged: onVisibilityChanged,
+      child: ViewableObjectListItem(
+        item: items[index],
+        selectionController: objectsController.selectionController,
+        itemBuilder: itemBuilder,
+        viewableObjectWidgetConfig: viewableObjectWidgetConfig,
+        addSeparator:
+            addSeparator &&
+            index < items.length - 1 &&
+            type == ViewableObjectListType.list,
+      ),
     );
   }
 }

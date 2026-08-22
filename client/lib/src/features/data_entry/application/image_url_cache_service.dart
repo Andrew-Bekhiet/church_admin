@@ -70,6 +70,7 @@ class ImageUrlCacheService {
 
   Future<bool> isUrlFileCachedAndValid(String cacheKey) async {
     final cacheFile = await cacheManager.getFileFromCache(cacheKey);
+
     return cacheFile != null && cacheFile.validTill.isAfter(DateTime.now());
   }
 

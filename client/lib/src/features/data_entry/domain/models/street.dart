@@ -60,6 +60,7 @@ class Street extends ViewableWithIDAndImage
   const Street({
     required this.id,
     required this.name,
+    this.userCanEdit = false,
     this.line,
     this.color,
     this.photoUpdatedAt,
@@ -67,7 +68,6 @@ class Street extends ViewableWithIDAndImage
     this.areas,
     this.lastVisit,
     this.lastEdit,
-    this.userCanEdit = false,
   });
 
   factory Street.fromJson(Map<String, Object?> json) => _$StreetFromJson(json);

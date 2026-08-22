@@ -108,8 +108,9 @@ class Family extends ViewableWithIDAndImage
   const Family({
     required this.id,
     required this.name,
-    this.address,
     this.status = MartialStatus.married,
+    this.userCanEdit = false,
+    this.address,
     this.marriageDate,
     this.deceasedSpouseName,
     this.church,
@@ -123,7 +124,6 @@ class Family extends ViewableWithIDAndImage
     this.lastVisit,
     this.lastFatherVisit,
     this.familyAdminsPhones,
-    this.userCanEdit = false,
   });
 
   factory Family.fromJson(Map<String, Object?> json) => _$FamilyFromJson(json);
@@ -221,42 +221,18 @@ class Family extends ViewableWithIDAndImage
   }
 }
 
-class FamilyFields extends _FamilyFields {
+class FamilyFields extends _FamilyFields with AddressDetailFields {
   @override
   FieldMetadata<Point> get geolocation =>
       address.redirectTo(AddressFields().geolocation, isExpandable: false);
 
-  FieldMetadata<Area> get area =>
-      address.redirectTo(AddressFields().area, isExpandable: false);
-
-  FieldMetadata<Street> get street =>
-      address.redirectTo(AddressFields().street, isExpandable: false);
-
-  FieldMetadata<District> get district =>
-      address.redirectTo(AddressFields().district, isExpandable: false);
-
-  FieldMetadata<String> get fullAddressText =>
-      address.redirectTo(AddressFields().fullAddressText, isExpandable: false);
+  @override
+  List<FieldMetadata<Object>> get allFields =>
+      withAddressDetailFields(super.allFields);
 
   @override
-  List<FieldMetadata<Object>> get allFields => [
-    ...super.allFields,
-    fullAddressText,
-    area,
-    street,
-    district,
-  ];
-
-  @override
-  Map<String, FieldMetadata<Object>> get allFieldsByName {
-    return {
-      ...super.allFieldsByName,
-      fullAddressText.name: fullAddressText,
-      area.name: area,
-      street.name: street,
-      district.name: district,
-    };
-  }
+  Map<String, FieldMetadata<Object>> get allFieldsByName =>
+      withAddressDetailFieldsByName(super.allFieldsByName);
 
   FamilyFields();
 }

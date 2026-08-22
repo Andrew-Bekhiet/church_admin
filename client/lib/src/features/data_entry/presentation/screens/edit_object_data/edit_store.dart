@@ -86,17 +86,12 @@ class _EditStoreState extends State<EditStore> {
               if (value == null && newStore.geolocation == null) {
                 return 'يجب اختيار عائلة أو تحديد الموقع';
               }
+
               return null;
             },
-            builder: (context, state) {
-              return state.value != null
-                  ? IgnorePointer(
-                      child: ViewableObjectWidget(
-                        state.value!,
-                        isDense: true,
-                      ),
-                    )
-                  : null;
+            builder: (context, state) => switch (state.value) {
+              final family? => ObjectSelectionPreview(family),
+              null => null,
             },
           ),
           ColorField(
@@ -126,6 +121,7 @@ class _EditStoreState extends State<EditStore> {
     if (result != null) {
       newStore = result;
     }
+
     return result?.geolocation;
   }
 }

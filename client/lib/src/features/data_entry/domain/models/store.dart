@@ -61,6 +61,7 @@ class Store extends ViewableWithIDAndImage
   const Store({
     required this.id,
     required this.name,
+    this.userCanEdit = false,
     this.address,
     this.family,
     this.familyId,
@@ -68,7 +69,6 @@ class Store extends ViewableWithIDAndImage
     this.lastEdit,
     this.photoUpdatedAt,
     this.blurhash,
-    this.userCanEdit = false,
   });
 
   factory Store.fromJson(Map<String, Object?> json) => _$StoreFromJson(json);
@@ -92,42 +92,18 @@ class Store extends ViewableWithIDAndImage
   );
 }
 
-class StoreFields extends _StoreFields {
+class StoreFields extends _StoreFields with AddressDetailFields {
   @override
   FieldMetadata<Point> get geolocation =>
       address.redirectTo(AddressFields().geolocation, isExpandable: false);
 
-  FieldMetadata<Area> get area =>
-      address.redirectTo(AddressFields().area, isExpandable: false);
-
-  FieldMetadata<Street> get street =>
-      address.redirectTo(AddressFields().street, isExpandable: false);
-
-  FieldMetadata<District> get district =>
-      address.redirectTo(AddressFields().district, isExpandable: false);
-
-  FieldMetadata<String> get fullAddressText =>
-      address.redirectTo(AddressFields().fullAddressText, isExpandable: false);
+  @override
+  List<FieldMetadata<Object>> get allFields =>
+      withAddressDetailFields(super.allFields);
 
   @override
-  List<FieldMetadata<Object>> get allFields => [
-    ...super.allFields,
-    fullAddressText,
-    area,
-    street,
-    district,
-  ];
-
-  @override
-  Map<String, FieldMetadata<Object>> get allFieldsByName {
-    return {
-      ...super.allFieldsByName,
-      fullAddressText.name: fullAddressText,
-      area.name: area,
-      street.name: street,
-      district.name: district,
-    };
-  }
+  Map<String, FieldMetadata<Object>> get allFieldsByName =>
+      withAddressDetailFieldsByName(super.allFieldsByName);
 
   StoreFields();
 }

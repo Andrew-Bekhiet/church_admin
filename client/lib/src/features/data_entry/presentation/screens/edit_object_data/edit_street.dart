@@ -123,14 +123,14 @@ class _EditStreetState extends State<EditStreet> {
             label: 'أخر افتقاد',
             initialValue: newStreet.lastVisit?.time,
             onChanged: (v) {
-              if (v != null) {
-                newStreet = newStreet.copyWith(
-                  lastVisit: LastRecordedByInfo(
-                    time: v,
-                    recordedBy: AuthBloc.I.currentUser?.uid,
-                  ),
-                );
-              }
+              if (v == null) return;
+
+              newStreet = newStreet.copyWith(
+                lastVisit: LastRecordedByInfo(
+                  time: v,
+                  recordedBy: AuthBloc.I.currentUser?.uid,
+                ),
+              );
             },
             validator: (v) => null,
           ),

@@ -72,6 +72,7 @@ class Class extends ViewableWithIDAndImage
   const Class({
     required this.id,
     required this.name,
+    this.userCanEdit = false,
     this.color,
     this.photoUpdatedAt,
     this.blurhash,
@@ -82,7 +83,6 @@ class Class extends ViewableWithIDAndImage
     this.serviceGender,
     this.lastEdit,
     this.adminUsers,
-    this.userCanEdit = false,
   });
 
   factory Class.fromJson(Map<String, Object?> json) => _$ClassFromJson(json);

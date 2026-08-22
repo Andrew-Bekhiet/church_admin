@@ -57,9 +57,9 @@ class Address with _$Address {
   final Store? store;
 
   const Address({
+    this.countryIsoCode = 'EG',
     this.id,
     this.area,
-    this.countryIsoCode = 'EG',
     this.houseNumber,
     this.street,
     this.substreetName,

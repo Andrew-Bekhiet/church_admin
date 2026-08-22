@@ -12,13 +12,13 @@ class TappableFormField<T> extends StatefulWidget {
     required this.onTap,
     required this.initialValue,
     required this.builder,
-    super.key,
     this.labelText,
     this.decoration,
     this.onSaved,
     this.validator,
     this.autovalidateMode,
     this.focusNode,
+    super.key,
   }) : assert(labelText != null || decoration != null);
   final Future<void>? Function(FormFieldState<T>)? onTap;
   final String? Function(T?)? validator;
@@ -93,7 +93,7 @@ class _TappableFormFieldState<T> extends State<TappableFormField<T>> {
 
   @override
   void dispose() {
-    super.dispose();
     if (widget.focusNode == null) _effectiveFocusNode.dispose();
+    super.dispose();
   }
 }

@@ -1,4 +1,3 @@
-// ignore_for_file: prefer-first
 import 'dart:io';
 
 import 'package:church_admin/church_admin.dart';
@@ -15,7 +14,7 @@ class LocationParsingService {
       switch (uri) {
         case Uri(scheme: 'geo', :final String path)
             when path.split(',').length == 2 &&
-                double.tryParse(path.split(',')[0]) != null &&
+                double.tryParse(path.split(',').first) != null &&
                 double.tryParse(path.split(',')[1]) != null:
           final [lat, lng] = path.split(',');
 
@@ -27,7 +26,7 @@ class LocationParsingService {
               pathSegments: ['maps', 'search', final String location],
             )
             when location.split(',').length == 2 &&
-                double.tryParse(location.split(',')[0]) != null &&
+                double.tryParse(location.split(',').first) != null &&
                 double.tryParse(location.split(',')[1]) != null:
           final [lat, lng] = location.split(',');
 
@@ -39,7 +38,7 @@ class LocationParsingService {
               queryParameters: {'q': final String location},
             )
             when location.split(',').length == 2 &&
-                double.tryParse(location.split(',')[0]) != null &&
+                double.tryParse(location.split(',').first) != null &&
                 double.tryParse(location.split(',')[1]) != null:
           final [lat, lng] = location.split(',');
 

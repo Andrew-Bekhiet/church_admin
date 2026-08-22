@@ -48,35 +48,33 @@ class ViewableObjectListController<T extends Viewable> {
                (o) => (o is ID) ? (o as ID).id : o,
              ),
            ) {
-    if (filterStream == null) {
-      _itemsSubjectSubscription = _objectsPaginatableStream.listen(
-        _itemsSubject.add,
-        onError: _itemsSubject.addError,
-        onDone: _itemsSubject.close,
-      );
-    } else {
-      _itemsSubjectSubscription = _objectsPaginatableStream
-          .switchMap(
-            (objects) => filterStream!
-                .distinct(
-                  (previous, next) => (previous ?? '') == (next ?? ''),
-                )
-                .map(
-                  (search) => objects
-                      .where(
-                        (object) => normalizeString(
-                          object.name,
-                        ).contains(normalizeString(search ?? '')),
-                      )
-                      .toList(),
-                ),
-          )
-          .listen(
+    _itemsSubjectSubscription = filterStream == null
+        ? _objectsPaginatableStream.listen(
             _itemsSubject.add,
             onError: _itemsSubject.addError,
             onDone: _itemsSubject.close,
-          );
-    }
+          )
+        : _objectsPaginatableStream
+              .switchMap(
+                (objects) => filterStream!
+                    .distinct(
+                      (previous, next) => (previous ?? '') == (next ?? ''),
+                    )
+                    .map(
+                      (search) => objects
+                          .where(
+                            (object) => normalizeString(
+                              object.name,
+                            ).contains(normalizeString(search ?? '')),
+                          )
+                          .toList(),
+                    ),
+              )
+              .listen(
+                _itemsSubject.add,
+                onError: _itemsSubject.addError,
+                onDone: _itemsSubject.close,
+              );
 
     _loadPageThrottlerListener = _loadPageThrottler
         .buffer(_loadPageThrottlerTimer)

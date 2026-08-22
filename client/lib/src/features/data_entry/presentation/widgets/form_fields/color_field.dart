@@ -11,12 +11,12 @@ class ColorField extends StatelessWidget {
   final AutovalidateMode? autovalidateMode;
 
   const ColorField({
+    this.nullable = true,
     this.initialValue,
     this.onSaved,
     this.validator,
     this.autovalidateMode,
     this.onChanged,
-    this.nullable = true,
     super.key,
   });
 

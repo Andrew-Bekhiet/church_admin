@@ -21,8 +21,8 @@ class MultiObjectSelectionField<T extends Viewable> extends StatelessWidget {
     required this.builder,
     required this.initialValue,
     required this.labelText,
-    this.itemBuilder,
     this.nullable = true,
+    this.itemBuilder,
     this.onCreateCustom,
     this.validator,
     this.autovalidateMode,
@@ -106,7 +106,9 @@ class MultiObjectSelectionField<T extends Viewable> extends StatelessWidget {
                         viewableObjectWidgetConfig: ViewableObjectWidgetConfig(
                           forceShowSecondLine: false,
                           isDense: true,
-                          onLongPress: (_) {},
+                          onLongPress: (_) {
+                            return;
+                          },
                         ),
                         itemBuilder: itemBuilder,
                       ),

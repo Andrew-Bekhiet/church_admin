@@ -1,4 +1,5 @@
 export 'models/address.dart';
+export 'models/address_detail_fields.dart';
 export 'models/area.dart';
 export 'models/church.dart';
 export 'models/class.dart';

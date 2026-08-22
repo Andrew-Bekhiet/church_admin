@@ -24,15 +24,15 @@ class GenderField extends StatelessWidget {
     this.type = GenderFieldType.radio,
     this.nullable = false,
     this.enabled = true,
+    this.label = 'النوع',
+    this.maleLabel = 'ذكر',
+    this.femaleLabel = 'أنثى',
+    this.nullLabel = 'غير معين',
     this.initialValue,
     this.onSaved,
     this.onChanged,
     this.validator,
     this.autovalidateMode,
-    this.label = 'النوع',
-    this.maleLabel = 'ذكر',
-    this.femaleLabel = 'أنثى',
-    this.nullLabel = 'غير معين',
     super.key,
   });
 
@@ -66,6 +66,7 @@ class GenderField extends StatelessWidget {
           enabled: enabled,
           builder: (state) {
             final theme = Theme.of(context);
+
             return InputDecorator(
               decoration: InputDecoration(
                 labelText: label,

@@ -14,8 +14,8 @@ class PhoneNumberProperty extends StatelessWidget {
     this.propName,
     this.value,
     this.phoneCall, {
-    this.addToContacts,
     this.showErrorIfEmpty = true,
+    this.addToContacts,
     super.key,
   });
 

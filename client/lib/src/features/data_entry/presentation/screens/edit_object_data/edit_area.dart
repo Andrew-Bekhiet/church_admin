@@ -89,14 +89,14 @@ class _EditAreaState extends State<EditArea> {
             label: 'أخر افتقاد',
             initialValue: newArea.lastVisit?.time,
             onChanged: (v) {
-              if (v != null) {
-                newArea = newArea.copyWith(
-                  lastVisit: LastRecordedByInfo(
-                    time: v,
-                    recordedBy: AuthBloc.I.currentUser?.uid,
-                  ),
-                );
-              }
+              if (v == null) return;
+
+              newArea = newArea.copyWith(
+                lastVisit: LastRecordedByInfo(
+                  time: v,
+                  recordedBy: AuthBloc.I.currentUser?.uid,
+                ),
+              );
             },
             validator: (v) => null,
           ),

@@ -77,10 +77,10 @@ class ViewObjectDetails<T extends ViewableWithIDAndImage>
     required this.notFoundBuilder,
     required this.editButtonBuilder,
     required this.detailsBuilder,
-    this.bottomNavBarBuilder,
     this.childrenTypes = const [],
-    this.sliverPersistentHeaderDelegate,
     this.tabsContentBuilders = const {},
+    this.bottomNavBarBuilder,
+    this.sliverPersistentHeaderDelegate,
     this.floatingActionButtonBuilder,
     this.object,
     super.key,
@@ -251,8 +251,8 @@ class _ViewObjectDetailsState<T extends ViewableWithIDAndImage>
 
   @override
   void dispose() {
-    super.dispose();
     _scrollTimer?.cancel();
+    super.dispose();
   }
 
   bool _onScrollEnd(ScrollEndNotification _) {
@@ -281,14 +281,16 @@ class _ViewObjectDetailsState<T extends ViewableWithIDAndImage>
         if (scrollPercent < 1 && scrollPercent != nearestSnap) {
           unawaited(
             Future.microtask(() async {
-              if (_scrollController.hasClients &&
-                  scrollPercent != nearestSnap) {
-                await _scrollController.animateTo(
-                  nearestSnap * maxScroll,
-                  duration: ViewObjectDetails.snapDuration,
-                  curve: Curves.easeOutExpo,
-                );
+              if (!_scrollController.hasClients ||
+                  scrollPercent == nearestSnap) {
+                return;
               }
+
+              await _scrollController.animateTo(
+                nearestSnap * maxScroll,
+                duration: ViewObjectDetails.snapDuration,
+                curve: Curves.easeOutExpo,
+              );
             }),
           );
         }
