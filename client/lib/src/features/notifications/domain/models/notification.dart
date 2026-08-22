@@ -51,8 +51,8 @@ class Notification with _$Notification {
     required this.body,
     required this.sentTime,
     required this.senderUID,
-    this.imageURL,
     this.type = NotificationType.remote,
+    this.imageURL,
     this.additionalData,
   });
 

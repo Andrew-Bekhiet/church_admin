@@ -39,10 +39,10 @@ class LastRecordedByInfo extends ViewableWithID
   String get typeName => AdvancedQueriesMetadata().lastRecordedByInfo.name;
 
   LastRecordedByInfo({
+    this.isFatherVisit = false,
     DateTime? time,
     this.recordedBy,
     this.user,
-    this.isFatherVisit = false,
   }) : time = time ?? DateTime.now();
 
   factory LastRecordedByInfo.fromJson(Map<String, Object?> json) =>

@@ -24,9 +24,9 @@ final class HomeState extends Equatable {
     required this.pageController,
     required this.pages,
     this.mode = HomeMode.sundaySchool,
-    this.dailyData,
     this.showSnowflakeAnimation = false,
     this.currentPage = 0,
+    this.dailyData,
   });
 
   HomeState copyWith({

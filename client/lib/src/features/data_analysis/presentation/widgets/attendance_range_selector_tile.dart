@@ -38,6 +38,7 @@ class AttendanceRangeSelectorTile extends StatelessWidget {
           if (selectedPreset == null ||
               selectedPreset is CustomDateTimeRangePreset) {
             await _pickCustomRange(context);
+
             return;
           }
 

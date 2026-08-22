@@ -8,6 +8,7 @@ export 'widgets/attendance_range_selector_tile.dart';
 export 'widgets/attendance_trend_chart.dart';
 export 'widgets/class_attendance_legend.dart';
 export 'widgets/class_attendance_pie_chart.dart';
+export 'widgets/empty_attendance_message.dart';
 export 'widgets/meeting_attendance_trend_chart.dart';
 export 'widgets/meeting_breakdown_tile.dart';
 export 'widgets/meeting_kpis_summary_grid.dart';

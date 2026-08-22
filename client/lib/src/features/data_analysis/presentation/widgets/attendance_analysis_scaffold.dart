@@ -81,9 +81,9 @@ class _AttendanceAnalysisScaffoldState
           ),
           child: BlocConsumer<PersonMeetingsCubit, PersonMeetingsState>(
             listener: (context, state) {
-              if (state case PersonMeetingsLoaded(:final meetings)) {
-                _seedMeetings(meetings);
-              }
+              if (state is! PersonMeetingsLoaded) return;
+
+              _seedMeetings(state.meetings);
             },
             builder: (context, state) => switch (state) {
               PersonMeetingsLoading() => const Padding(

@@ -8,6 +8,7 @@ class HomePageConfig<T extends Viewable> extends Equatable {
   final Widget? fabIcon;
   final String? fabOnTapLocation;
   final ViewableObjectListType? listType;
+  final ViewableObjectListController<T> Function()? objectsController;
 
   Type get type => T;
 
@@ -29,7 +30,6 @@ class HomePageConfig<T extends Viewable> extends Equatable {
     this.fabOnTapLocation,
     this.listType,
   });
-  final ViewableObjectListController<T> Function()? objectsController;
 
   HomePageConfig<T> copyWith({
     String? label,

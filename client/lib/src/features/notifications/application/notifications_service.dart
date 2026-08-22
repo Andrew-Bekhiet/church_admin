@@ -317,6 +317,7 @@ class NotificationsService extends BlocObserver {
               AuthorizationStatus.authorized ||
           fcmPermission.authorizationStatus == AuthorizationStatus.provisional;
     }
+
     return false;
   }
 

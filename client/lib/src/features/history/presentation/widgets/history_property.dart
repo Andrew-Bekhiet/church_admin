@@ -78,8 +78,8 @@ class HistoryProperty<T extends LastRecordedByInfo> extends StatelessWidget {
   const HistoryProperty({
     required this.name,
     required this.getHistoryListController,
-    this.onRecordNow,
     this.showTime = true,
+    this.onRecordNow,
     this.value,
     super.key,
   });

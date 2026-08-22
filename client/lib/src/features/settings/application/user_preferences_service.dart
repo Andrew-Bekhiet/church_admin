@@ -46,6 +46,7 @@ class UserPreferencesService extends BlocObserver {
   HomeMode? get lastHomeMode {
     if (_hasQueuedWrite(_lastHomeModeKey)) {
       final value = _readQueuedWrite(_lastHomeModeKey) as String?;
+
       return HomeMode.values.firstWhereOrNull((e) => e.name == value);
     }
 
@@ -82,6 +83,7 @@ class UserPreferencesService extends BlocObserver {
     }
 
     final serverValue = _serverPreferences?.orderByPreferences[storageKey];
+
     return _parseOrderByList(serverValue);
   }
 

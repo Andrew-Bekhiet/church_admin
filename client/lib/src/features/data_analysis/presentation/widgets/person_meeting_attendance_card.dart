@@ -155,6 +155,7 @@ class PersonMeetingAttendanceCard extends StatelessWidget {
     if (range == null) return null;
 
     final format = DateFormat('yyyy/M/d', 'ar');
+
     return 'من ${format.format(range.start)} إلى ${format.format(range.end)}';
   }
 

@@ -33,6 +33,7 @@ class MeetingsAnalysisCubit extends Cubit<MeetingsAnalysisState> {
 
       if (!range.isSingleDay) {
         emit(MeetingsAnalysisLoaded(analysis));
+
         return;
       }
 

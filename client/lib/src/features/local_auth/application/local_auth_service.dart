@@ -32,9 +32,9 @@ class LocalAuthService with WidgetsBindingObserver {
 
   LocalAuthService({
     required this._localAuthPlugin,
+    this.timeToReauth = const Duration(seconds: 30),
     CurrentPlatformService? currentPlatformService,
     NotificationsService? notificationService,
-    this.timeToReauth = const Duration(seconds: 30),
   }) : _notificationsService = notificationService ?? NotificationsService.I,
        _currentPlatformService =
            currentPlatformService ?? CurrentPlatformService.I {
@@ -47,9 +47,9 @@ class LocalAuthService with WidgetsBindingObserver {
 
   LocalAuthService.noInitialAuth({
     required this._localAuthPlugin,
+    this.timeToReauth = const Duration(seconds: 30),
     CurrentPlatformService? currentPlatformService,
     NotificationsService? notificationService,
-    this.timeToReauth = const Duration(seconds: 30),
   }) : _notificationsService = notificationService ?? NotificationsService.I,
        _currentPlatformService =
            currentPlatformService ?? CurrentPlatformService.I {
@@ -63,9 +63,11 @@ class LocalAuthService with WidgetsBindingObserver {
     final auth = _oneTimeAuthForPath[path];
     if (auth == null) {
       _oneTimeAuthForPath[path] = false;
+
       return false;
     } else {
       _oneTimeAuthForPath.remove(path);
+
       return auth;
     }
   }

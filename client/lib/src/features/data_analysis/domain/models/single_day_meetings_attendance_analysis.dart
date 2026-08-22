@@ -10,17 +10,6 @@ import 'package:collection/collection.dart';
 /// Counting is person-grained: a person who attends two meetings, or as both
 /// servant and member, is a single attendee — so every rate stays `<= 100%`.
 class SingleDayMeetingsAttendanceAnalysis extends MeetingsAttendanceAnalysis {
-  static int _compareKeys((int?, bool?) a, (int?, bool?) b) {
-    final studyYearCompare = (a.$1 ?? -1).compareTo(b.$1 ?? -1);
-    if (studyYearCompare != 0) return studyYearCompare;
-
-    return (a.$2 == b.$2)
-        ? 0
-        : (a.$2 ?? false)
-        ? 1
-        : -1;
-  }
-
   /// Null when [class$] doesn't match the slice at all; otherwise the number
   /// of fields matched exactly rather than through a null wildcard.
   static int? _matchSpecificity(Class class$, int? studyYearId, bool? gender) {
@@ -82,9 +71,9 @@ class SingleDayMeetingsAttendanceAnalysis extends MeetingsAttendanceAnalysis {
       _ratedClasses.length < 2 ? null : minBy(_ratedClasses, (c) => c.rate!);
 
   SingleDayMeetingsAttendanceAnalysis({
+    required this.rosterMembers,
     required super.title,
     required super.meetings,
-    required this.rosterMembers,
     this.classes = const [],
     super.color,
   });
@@ -116,7 +105,7 @@ class SingleDayMeetingsAttendanceAnalysis extends MeetingsAttendanceAnalysis {
     }
 
     final byKey = SplayTreeMap<(int?, bool?), ClassAttendanceRate>(
-      _compareKeys,
+      MeetingsAttendanceAnalysis.compareStudyYearGenderKeys,
     );
 
     for (final MapEntry(:key, value: rosterCount) in rosterCounts.entries) {

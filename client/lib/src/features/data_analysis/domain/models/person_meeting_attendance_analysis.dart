@@ -49,6 +49,7 @@ class PersonMeetingAttendanceAnalysis {
     if (streak == 0) return null;
 
     final streakDays = heldDays.sublist(heldDays.length - streak);
+
     return DateTimeRange(start: streakDays.first, end: streakDays.last);
   }
 

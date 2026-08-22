@@ -7,6 +7,7 @@ class MeetingAvatar extends StatelessWidget {
 
   String get _initial {
     final trimmed = meeting.name.trim();
+
     return trimmed.isEmpty ? '؟' : trimmed.substring(0, 1);
   }
 

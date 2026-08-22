@@ -19,8 +19,8 @@ class PersonAnalysisChart extends StatelessWidget {
     required this.range,
     required this.analysisData,
     required this.getHistoryListController,
-    this.color,
     this.showTime = true,
+    this.color,
     super.key,
   });
 

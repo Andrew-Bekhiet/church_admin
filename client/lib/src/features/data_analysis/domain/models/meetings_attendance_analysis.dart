@@ -4,6 +4,17 @@ import 'dart:ui';
 import 'package:church_admin/church_admin.dart';
 
 class MeetingsAttendanceAnalysis {
+  static int compareStudyYearGenderKeys((int?, bool?) a, (int?, bool?) b) {
+    final studyYearCompare = (a.$1 ?? -1).compareTo(b.$1 ?? -1);
+    if (studyYearCompare != 0) return studyYearCompare;
+
+    return (a.$2 == b.$2)
+        ? 0
+        : (a.$2 ?? false)
+        ? 1
+        : -1;
+  }
+
   final String title;
   final Color? color;
   final List<MeetingAttendanceSummary> meetings;
@@ -51,16 +62,7 @@ class MeetingsAttendanceAnalysis {
 
   List<DemographicBreakdownEntry> _computeDemographicBreakdown() {
     final byKey = SplayTreeMap<(int?, bool?), DemographicBreakdownEntry>(
-      (a, b) {
-        final studyYearCompare = (a.$1 ?? -1).compareTo(b.$1 ?? -1);
-        if (studyYearCompare != 0) return studyYearCompare;
-
-        return (a.$2 == b.$2)
-            ? 0
-            : (a.$2 ?? false)
-            ? 1
-            : -1;
-      },
+      compareStudyYearGenderKeys,
     );
 
     for (final d in allDemographics) {

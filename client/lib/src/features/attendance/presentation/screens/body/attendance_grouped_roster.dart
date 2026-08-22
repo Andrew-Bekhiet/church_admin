@@ -72,7 +72,9 @@ class _AttendanceGroupedRosterState extends State<AttendanceGroupedRoster> {
     if (key == null) return;
 
     setState(() {
-      if (!_collapsedKeys.remove(key)) _collapsedKeys.add(key);
+      if (_collapsedKeys.remove(key)) return;
+
+      _collapsedKeys.add(key);
     });
   }
 }

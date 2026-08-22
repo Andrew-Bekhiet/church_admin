@@ -102,6 +102,7 @@ class Meeting extends ViewableWithID
     if (isArchived != oldMeeting.isArchived) {
       result = result.copyWith(isArchived: isArchived);
     }
+
     return result;
   }
 }

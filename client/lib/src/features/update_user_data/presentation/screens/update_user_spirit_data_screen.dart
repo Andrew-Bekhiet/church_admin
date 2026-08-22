@@ -194,6 +194,7 @@ class _UpdateUserSpiritDataState extends State<UpdateUserSpiritData> {
     if (picked != null && picked != initialDate) {
       return picked;
     }
+
     return null;
   }
 }

@@ -129,6 +129,7 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
               const AlertDialog(title: Text('برجاء ادخال كلمة السر!')),
         ),
       );
+
       return;
     }
 
