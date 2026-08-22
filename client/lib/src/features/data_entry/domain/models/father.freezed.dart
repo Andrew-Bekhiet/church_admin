@@ -53,7 +53,7 @@ abstract mixin class $FatherCopyWith<$Res> {
   factory $FatherCopyWith(Father value, $Res Function(Father) _then) =
       _$FatherCopyWithImpl;
   @useResult
-  $Res call({String id, String name, String? churchId, bool isHidden});
+  $Res call({String id, String name, bool isHidden, String? churchId});
 }
 
 /// @nodoc
@@ -70,8 +70,8 @@ class _$FatherCopyWithImpl<$Res> implements $FatherCopyWith<$Res> {
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? churchId = freezed,
     Object? isHidden = null,
+    Object? churchId = freezed,
   }) {
     return _then(
       Father(
@@ -83,14 +83,14 @@ class _$FatherCopyWithImpl<$Res> implements $FatherCopyWith<$Res> {
             ? _self.name
             : name // ignore: cast_nullable_to_non_nullable
                   as String,
-        churchId: freezed == churchId
-            ? _self.churchId
-            : churchId // ignore: cast_nullable_to_non_nullable
-                  as String?,
         isHidden: null == isHidden
             ? _self.isHidden
             : isHidden // ignore: cast_nullable_to_non_nullable
                   as bool,
+        churchId: freezed == churchId
+            ? _self.churchId
+            : churchId // ignore: cast_nullable_to_non_nullable
+                  as String?,
       ),
     );
   }

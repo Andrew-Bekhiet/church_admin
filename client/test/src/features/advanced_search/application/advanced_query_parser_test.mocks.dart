@@ -1347,7 +1347,6 @@ class MockPersonsDAO extends _i1.Mock implements _i2.PersonsDAO {
 
   @override
   _i4.Future<_i2.PersonsGeolocationsResponse?> personsGeolocations({
-    String? personId,
     List<_i2.UuidValue>? areasIds = const [],
     List<_i2.UuidValue>? streetsIds = const [],
     List<_i2.UuidValue>? familiesIds = const [],
@@ -1360,10 +1359,10 @@ class MockPersonsDAO extends _i1.Mock implements _i2.PersonsDAO {
     bool? getFamilies = false,
     bool? getStores = false,
     bool? getPersons = false,
+    String? personId,
   }) =>
       (super.noSuchMethod(
             Invocation.method(#personsGeolocations, [], {
-              #personId: personId,
               #areasIds: areasIds,
               #streetsIds: streetsIds,
               #familiesIds: familiesIds,
@@ -1376,6 +1375,7 @@ class MockPersonsDAO extends _i1.Mock implements _i2.PersonsDAO {
               #getFamilies: getFamilies,
               #getStores: getStores,
               #getPersons: getPersons,
+              #personId: personId,
             }),
             returnValue: _i4.Future<_i2.PersonsGeolocationsResponse?>.value(),
             returnValueForMissingStub:

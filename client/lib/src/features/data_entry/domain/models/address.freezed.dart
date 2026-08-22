@@ -92,9 +92,9 @@ abstract mixin class $AddressCopyWith<$Res> {
       _$AddressCopyWithImpl;
   @useResult
   $Res call({
+    String countryIsoCode,
     String? id,
     Area? area,
-    String countryIsoCode,
     int? houseNumber,
     Street? street,
     String? substreetName,
@@ -121,9 +121,9 @@ class _$AddressCopyWithImpl<$Res> implements $AddressCopyWith<$Res> {
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? countryIsoCode = null,
     Object? id = freezed,
     Object? area = freezed,
-    Object? countryIsoCode = null,
     Object? houseNumber = freezed,
     Object? street = freezed,
     Object? substreetName = freezed,
@@ -138,6 +138,10 @@ class _$AddressCopyWithImpl<$Res> implements $AddressCopyWith<$Res> {
   }) {
     return _then(
       Address(
+        countryIsoCode: null == countryIsoCode
+            ? _self.countryIsoCode
+            : countryIsoCode // ignore: cast_nullable_to_non_nullable
+                  as String,
         id: freezed == id
             ? _self.id
             : id // ignore: cast_nullable_to_non_nullable
@@ -146,10 +150,6 @@ class _$AddressCopyWithImpl<$Res> implements $AddressCopyWith<$Res> {
             ? _self.area
             : area // ignore: cast_nullable_to_non_nullable
                   as Area?,
-        countryIsoCode: null == countryIsoCode
-            ? _self.countryIsoCode
-            : countryIsoCode // ignore: cast_nullable_to_non_nullable
-                  as String,
         houseNumber: freezed == houseNumber
             ? _self.houseNumber
             : houseNumber // ignore: cast_nullable_to_non_nullable

@@ -1,5 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: member_ordering
+
 part of 'street.dart';
 
 // **************************************************************************
@@ -141,6 +143,7 @@ class StreetFields {
 Street _$StreetFromJson(Map json) => Street(
   id: json['id'] as String? ?? '',
   name: json['name'] as String? ?? '',
+  userCanEdit: json['userCanEdit'] as bool? ?? false,
   line: lineFromJson(json['line']),
   color: colorFromInt((json['color'] as num?)?.toInt()),
   photoUpdatedAt: _$JsonConverterFromJson<String, DateTime>(
@@ -159,7 +162,6 @@ Street _$StreetFromJson(Map json) => Street(
       : LastRecordedByInfo.fromJson(
           Map<String, Object?>.from(json['lastEdit'] as Map),
         ),
-  userCanEdit: json['userCanEdit'] as bool? ?? false,
 );
 
 Map<String, dynamic> _$StreetToJson(Street instance) => <String, dynamic>{

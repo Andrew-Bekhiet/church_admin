@@ -1,5 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: member_ordering
+
 part of 'advanced_query.dart';
 
 // **************************************************************************
@@ -8,7 +10,6 @@ part of 'advanced_query.dart';
 
 AdvancedQuery _$AdvancedQueryFromJson(Map json) => AdvancedQuery(
   queryableType: queryableTypeFromJson(json['queryableType'] as String),
-  name: json['name'] as String?,
   filters: json['filters'] == null
       ? const []
       : conditionsFromJson(json['filters'] as List),
@@ -18,6 +19,7 @@ AdvancedQuery _$AdvancedQueryFromJson(Map json) => AdvancedQuery(
   orderBy: json['orderBy'] == null
       ? const []
       : orderBysFromJson(json['orderBy'] as List),
+  name: json['name'] as String?,
   limit: (json['limit'] as num?)?.toInt(),
 );
 

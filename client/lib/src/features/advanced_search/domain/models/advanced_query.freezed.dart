@@ -72,7 +72,6 @@ abstract mixin class $AdvancedQueryCopyWith<$Res> {
   @useResult
   $Res call({
     QueryableType<Object> queryableType,
-    String? name,
     List<Filter<Object>> filters,
     LogicalOperator<
       FieldMetadata<Object>,
@@ -82,6 +81,7 @@ abstract mixin class $AdvancedQueryCopyWith<$Res> {
     >
     logicalOperator,
     List<OrderBy> orderBy,
+    String? name,
     int? limit,
   });
 }
@@ -100,10 +100,10 @@ class _$AdvancedQueryCopyWithImpl<$Res>
   @override
   $Res call({
     Object? queryableType = null,
-    Object? name = freezed,
     Object? filters = null,
     Object? logicalOperator = null,
     Object? orderBy = null,
+    Object? name = freezed,
     Object? limit = freezed,
   }) {
     return _then(
@@ -112,10 +112,6 @@ class _$AdvancedQueryCopyWithImpl<$Res>
             ? _self.queryableType
             : queryableType // ignore: cast_nullable_to_non_nullable
                   as QueryableType<Object>,
-        name: freezed == name
-            ? _self.name
-            : name // ignore: cast_nullable_to_non_nullable
-                  as String?,
         filters: null == filters
             ? _self.filters
             : filters // ignore: cast_nullable_to_non_nullable
@@ -133,6 +129,10 @@ class _$AdvancedQueryCopyWithImpl<$Res>
             ? _self.orderBy
             : orderBy // ignore: cast_nullable_to_non_nullable
                   as List<OrderBy>,
+        name: freezed == name
+            ? _self.name
+            : name // ignore: cast_nullable_to_non_nullable
+                  as String?,
         limit: freezed == limit
             ? _self.limit
             : limit // ignore: cast_nullable_to_non_nullable

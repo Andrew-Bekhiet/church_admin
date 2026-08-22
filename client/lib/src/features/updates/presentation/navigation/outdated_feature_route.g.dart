@@ -1,5 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: member_ordering
+
 part of 'outdated_feature_route.dart';
 
 // **************************************************************************

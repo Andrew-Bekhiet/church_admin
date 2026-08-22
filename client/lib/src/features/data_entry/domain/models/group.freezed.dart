@@ -97,6 +97,7 @@ abstract mixin class $GroupCopyWith<$Res> {
   $Res call({
     String id,
     String name,
+    bool userCanEdit,
     Color? color,
     DateTime? photoUpdatedAt,
     String? blurhash,
@@ -107,7 +108,6 @@ abstract mixin class $GroupCopyWith<$Res> {
     List<Meeting>? meetings,
     LastRecordedByInfo? lastEdit,
     List<User>? adminUsers,
-    bool userCanEdit,
   });
 }
 
@@ -125,6 +125,7 @@ class _$GroupCopyWithImpl<$Res> implements $GroupCopyWith<$Res> {
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? userCanEdit = null,
     Object? color = freezed,
     Object? photoUpdatedAt = freezed,
     Object? blurhash = freezed,
@@ -135,7 +136,6 @@ class _$GroupCopyWithImpl<$Res> implements $GroupCopyWith<$Res> {
     Object? meetings = freezed,
     Object? lastEdit = freezed,
     Object? adminUsers = freezed,
-    Object? userCanEdit = null,
   }) {
     return _then(
       Group(
@@ -147,6 +147,10 @@ class _$GroupCopyWithImpl<$Res> implements $GroupCopyWith<$Res> {
             ? _self.name
             : name // ignore: cast_nullable_to_non_nullable
                   as String,
+        userCanEdit: null == userCanEdit
+            ? _self.userCanEdit
+            : userCanEdit // ignore: cast_nullable_to_non_nullable
+                  as bool,
         color: freezed == color
             ? _self.color
             : color // ignore: cast_nullable_to_non_nullable
@@ -187,10 +191,6 @@ class _$GroupCopyWithImpl<$Res> implements $GroupCopyWith<$Res> {
             ? _self.adminUsers
             : adminUsers // ignore: cast_nullable_to_non_nullable
                   as List<User>?,
-        userCanEdit: null == userCanEdit
-            ? _self.userCanEdit
-            : userCanEdit // ignore: cast_nullable_to_non_nullable
-                  as bool,
       ),
     );
   }

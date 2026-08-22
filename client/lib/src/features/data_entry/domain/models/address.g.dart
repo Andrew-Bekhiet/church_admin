@@ -1,5 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: member_ordering
+
 part of 'address.dart';
 
 // **************************************************************************
@@ -202,11 +204,11 @@ class AddressFields {
 // **************************************************************************
 
 Address _$AddressFromJson(Map json) => Address(
+  countryIsoCode: json['countryIsoCode'] as String? ?? 'EG',
   id: json['id'] as String?,
   area: json['area'] == null
       ? null
       : Area.fromJson(Map<String, Object?>.from(json['area'] as Map)),
-  countryIsoCode: json['countryIsoCode'] as String? ?? 'EG',
   houseNumber: (json['houseNumber'] as num?)?.toInt(),
   street: json['street'] == null
       ? null

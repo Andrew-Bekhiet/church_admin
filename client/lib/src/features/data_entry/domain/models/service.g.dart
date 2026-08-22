@@ -1,5 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: member_ordering
+
 part of 'service.dart';
 
 // **************************************************************************
@@ -204,6 +206,7 @@ class _ServiceFields {
 Service _$ServiceFromJson(Map json) => Service(
   id: json['id'] as String? ?? '',
   name: json['name'] as String? ?? '',
+  userCanEdit: json['userCanEdit'] as bool? ?? false,
   studyYearFrom: json['studyYearFrom'] == null
       ? null
       : StudyYear.fromJson(
@@ -246,7 +249,6 @@ Service _$ServiceFromJson(Map json) => Service(
           Map<String, Object?>.from(json['lastEdit'] as Map),
         ),
   adminUsers: adminUsersFromJson(json['adminUsers'] as List?),
-  userCanEdit: json['userCanEdit'] as bool? ?? false,
 );
 
 Map<String, dynamic> _$ServiceToJson(Service instance) => <String, dynamic>{

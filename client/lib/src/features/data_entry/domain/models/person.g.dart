@@ -1,5 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: member_ordering
+
 part of 'person.dart';
 
 // **************************************************************************
@@ -33,19 +35,6 @@ class _PersonFields {
     name: 'address',
     label: 'تفاصيل العنوان',
     isCodeOnly: false,
-  );
-
-  final FieldMetadata<Point> geolocation = FieldMetadata<Point>(
-    getValue: (obj) => obj is Person ? obj.geolocation : null,
-    parentType: Person,
-    name: 'geolocation',
-    label: 'الموقع',
-    isCodeOnly: false,
-    operators: {
-      ...SpatialOperator.values,
-      PrimitiveOperator.isNull,
-      PrimitiveOperator.isNotNull,
-    },
   );
 
   final FieldMetadata<String> mainPhone = FieldMetadata<String>(
@@ -675,11 +664,23 @@ class _PersonFields {
         isCodeOnly: true,
       );
 
+  final FieldMetadata<Point> geolocation = FieldMetadata<Point>(
+    getValue: (obj) => obj is Person ? obj.geolocation : null,
+    parentType: Person,
+    name: 'geolocation',
+    label: 'الموقع',
+    isCodeOnly: false,
+    operators: {
+      ...SpatialOperator.values,
+      PrimitiveOperator.isNull,
+      PrimitiveOperator.isNotNull,
+    },
+  );
+
   late final List<FieldMetadata<Object>> allFields = [
     id,
     name,
     address,
-    geolocation,
     mainPhone,
     birthdate,
     birthday,
@@ -730,12 +731,12 @@ class _PersonFields {
     callHistoryAggregate,
     visitHistoryAggregate,
     editHistoryAggregate,
+    geolocation,
   ];
   late final Map<String, FieldMetadata<Object>> allFieldsByName = {
     'id': id,
     'name': name,
     'address': address,
-    'geolocation': geolocation,
     'mainPhone': mainPhone,
     'birthdate': birthdate,
     'birthday': birthday,
@@ -786,6 +787,7 @@ class _PersonFields {
     'callHistoryAggregate': callHistoryAggregate,
     'visitHistoryAggregate': visitHistoryAggregate,
     'editHistoryAggregate': editHistoryAggregate,
+    'geolocation': geolocation,
   };
 }
 
@@ -796,21 +798,29 @@ class _PersonFields {
 Person _$PersonFromJson(Map json) => Person(
   id: json['id'] as String? ?? '',
   name: json['name'] as String? ?? '',
+  otherPhones:
+      (json['otherPhones'] as Map?)?.map((k, e) => MapEntry(k as String, e)) ??
+      const {},
+  gender: json['gender'] as bool? ?? true,
+  isShammas: json['isShammas'] as bool? ?? false,
+  workStatus:
+      $enumDecodeNullable(_$WorkStatusEnumMap, json['workStatus']) ??
+      WorkStatus.employed,
+  martialStatus:
+      $enumDecodeNullable(_$MartialStatusEnumMap, json['martialStatus']) ??
+      MartialStatus.single,
+  isServant: json['isServant'] as bool? ?? false,
+  userCanEdit: json['userCanEdit'] as bool? ?? false,
   nationalId: (json['nationalId'] as num?)?.toInt(),
   address: json['address'] == null
       ? null
       : Address.fromJson(Map<String, Object?>.from(json['address'] as Map)),
   mainPhone: json['mainPhone'] as String?,
-  otherPhones:
-      (json['otherPhones'] as Map?)?.map((k, e) => MapEntry(k as String, e)) ??
-      const {},
   birthdate: _$JsonConverterFromJson<String, DateTime>(
     json['birthdate'],
     const LocalDateTimeConverter().fromJson,
   ),
   birthday: json['birthday'] as String?,
-  gender: json['gender'] as bool? ?? true,
-  isShammas: json['isShammas'] as bool? ?? false,
   shammasLevelId: json['shammasLevelId'] as String?,
   shammasLevel: json['shammasLevel'] == null
       ? null
@@ -833,9 +843,6 @@ Person _$PersonFromJson(Map json) => Person(
       ? null
       : Father.fromJson(Map<String, Object?>.from(json['father'] as Map)),
   fatherId: json['fatherId'] as String?,
-  workStatus:
-      $enumDecodeNullable(_$WorkStatusEnumMap, json['workStatus']) ??
-      WorkStatus.employed,
   job: json['job'] == null
       ? null
       : Job.fromJson(Map<String, Object?>.from(json['job'] as Map)),
@@ -847,9 +854,6 @@ Person _$PersonFromJson(Map json) => Person(
           Map<String, Object?>.from(json['qualification'] as Map),
         ),
   qualificationId: json['qualificationId'] as String?,
-  martialStatus:
-      $enumDecodeNullable(_$MartialStatusEnumMap, json['martialStatus']) ??
-      MartialStatus.single,
   personType: json['personType'] == null
       ? null
       : PersonType.fromJson(
@@ -860,7 +864,6 @@ Person _$PersonFromJson(Map json) => Person(
       ? null
       : PersonState.fromJson(Map<String, Object?>.from(json['state'] as Map)),
   stateId: json['stateId'] as String?,
-  isServant: json['isServant'] as bool? ?? false,
   servingChurch: json['servingChurch'] == null
       ? null
       : Church.fromJson(
@@ -984,7 +987,6 @@ Person _$PersonFromJson(Map json) => Person(
       : HistoryAggregateData.fromJson(
           Map<String, dynamic>.from(json['editHistoryAggregate'] as Map),
         ),
-  userCanEdit: json['userCanEdit'] as bool? ?? false,
 );
 
 Map<String, dynamic> _$PersonToJson(Person instance) => <String, dynamic>{
@@ -1068,11 +1070,6 @@ Map<String, dynamic> _$PersonToJson(Person instance) => <String, dynamic>{
   'editHistoryAggregate': instance.editHistoryAggregate?.toJson(),
 };
 
-Value? _$JsonConverterFromJson<Json, Value>(
-  Object? json,
-  Value? Function(Json json) fromJson,
-) => json == null ? null : fromJson(json as Json);
-
 const _$WorkStatusEnumMap = {
   WorkStatus.student: 'student',
   WorkStatus.employed: 'employed',
@@ -1088,6 +1085,11 @@ const _$MartialStatusEnumMap = {
   MartialStatus.widowedWithoutChildren: 'widowedWithoutChildren',
   MartialStatus.single: 'single',
 };
+
+Value? _$JsonConverterFromJson<Json, Value>(
+  Object? json,
+  Value? Function(Json json) fromJson,
+) => json == null ? null : fromJson(json as Json);
 
 Json? _$JsonConverterToJson<Json, Value>(
   Value? value,

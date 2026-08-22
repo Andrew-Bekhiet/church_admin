@@ -117,20 +117,20 @@ abstract mixin class $UserCopyWith<$Res> {
   $Res call({
     String uid,
     String name,
+    PermissionsSet permissions,
+    List<FcmToken> fcmTokens,
+    bool currentUserCanManageThisUser,
     String? email,
     DateTime? photoUpdatedAt,
     String? blurhash,
     List<AdminOnData>? adminOn,
-    PermissionsSet permissions,
     String? authId,
     LastRecordedByInfo? lastEdit,
     Person? person,
     UserPreferences? preferences,
-    List<FcmToken> fcmTokens,
     List<AdminOnData>? servicesHistory,
     List<AdminOnData>? classesHistory,
     List<AdminOnData>? groupsHistory,
-    bool currentUserCanManageThisUser,
   });
 }
 
@@ -148,20 +148,20 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
   $Res call({
     Object? uid = null,
     Object? name = null,
+    Object? permissions = null,
+    Object? fcmTokens = null,
+    Object? currentUserCanManageThisUser = null,
     Object? email = freezed,
     Object? photoUpdatedAt = freezed,
     Object? blurhash = freezed,
     Object? adminOn = freezed,
-    Object? permissions = null,
     Object? authId = freezed,
     Object? lastEdit = freezed,
     Object? person = freezed,
     Object? preferences = freezed,
-    Object? fcmTokens = null,
     Object? servicesHistory = freezed,
     Object? classesHistory = freezed,
     Object? groupsHistory = freezed,
-    Object? currentUserCanManageThisUser = null,
   }) {
     return _then(
       User(
@@ -173,6 +173,18 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
             ? _self.name
             : name // ignore: cast_nullable_to_non_nullable
                   as String,
+        permissions: null == permissions
+            ? _self.permissions
+            : permissions // ignore: cast_nullable_to_non_nullable
+                  as PermissionsSet,
+        fcmTokens: null == fcmTokens
+            ? _self.fcmTokens
+            : fcmTokens // ignore: cast_nullable_to_non_nullable
+                  as List<FcmToken>,
+        currentUserCanManageThisUser: null == currentUserCanManageThisUser
+            ? _self.currentUserCanManageThisUser
+            : currentUserCanManageThisUser // ignore: cast_nullable_to_non_nullable
+                  as bool,
         email: freezed == email
             ? _self.email
             : email // ignore: cast_nullable_to_non_nullable
@@ -189,10 +201,6 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
             ? _self.adminOn
             : adminOn // ignore: cast_nullable_to_non_nullable
                   as List<AdminOnData>?,
-        permissions: null == permissions
-            ? _self.permissions
-            : permissions // ignore: cast_nullable_to_non_nullable
-                  as PermissionsSet,
         authId: freezed == authId
             ? _self.authId
             : authId // ignore: cast_nullable_to_non_nullable
@@ -209,10 +217,6 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
             ? _self.preferences
             : preferences // ignore: cast_nullable_to_non_nullable
                   as UserPreferences?,
-        fcmTokens: null == fcmTokens
-            ? _self.fcmTokens
-            : fcmTokens // ignore: cast_nullable_to_non_nullable
-                  as List<FcmToken>,
         servicesHistory: freezed == servicesHistory
             ? _self.servicesHistory
             : servicesHistory // ignore: cast_nullable_to_non_nullable
@@ -225,10 +229,6 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
             ? _self.groupsHistory
             : groupsHistory // ignore: cast_nullable_to_non_nullable
                   as List<AdminOnData>?,
-        currentUserCanManageThisUser: null == currentUserCanManageThisUser
-            ? _self.currentUserCanManageThisUser
-            : currentUserCanManageThisUser // ignore: cast_nullable_to_non_nullable
-                  as bool,
       ),
     );
   }

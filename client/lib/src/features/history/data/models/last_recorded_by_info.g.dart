@@ -1,5 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: member_ordering
+
 part of 'last_recorded_by_info.dart';
 
 // **************************************************************************
@@ -57,6 +59,7 @@ class _LastRecordedByInfoFields {
 // **************************************************************************
 
 LastRecordedByInfo _$LastRecordedByInfoFromJson(Map json) => LastRecordedByInfo(
+  isFatherVisit: json['isFatherVisit'] as bool? ?? false,
   time: _$JsonConverterFromJson<String, DateTime>(
     json['time'],
     const LocalDateTimeConverter().fromJson,
@@ -65,7 +68,6 @@ LastRecordedByInfo _$LastRecordedByInfoFromJson(Map json) => LastRecordedByInfo(
   user: json['user'] == null
       ? null
       : User.fromJson(Map<String, Object?>.from(json['user'] as Map)),
-  isFatherVisit: json['isFatherVisit'] as bool? ?? false,
 );
 
 Map<String, dynamic> _$LastRecordedByInfoToJson(LastRecordedByInfo instance) =>

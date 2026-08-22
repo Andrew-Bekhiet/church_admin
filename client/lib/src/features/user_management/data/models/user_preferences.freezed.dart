@@ -78,8 +78,8 @@ abstract mixin class $UserPreferencesCopyWith<$Res> {
   $Res call({
     String uid,
     Map<String, dynamic> orderByPreferences,
-    bool? darkTheme,
     bool greatFeastTheme,
+    bool? darkTheme,
     HomeMode? lastHomeMode,
     DateTime? updatedAt,
   });
@@ -100,8 +100,8 @@ class _$UserPreferencesCopyWithImpl<$Res>
   $Res call({
     Object? uid = null,
     Object? orderByPreferences = null,
-    Object? darkTheme = freezed,
     Object? greatFeastTheme = null,
+    Object? darkTheme = freezed,
     Object? lastHomeMode = freezed,
     Object? updatedAt = freezed,
   }) {
@@ -115,14 +115,14 @@ class _$UserPreferencesCopyWithImpl<$Res>
             ? _self.orderByPreferences
             : orderByPreferences // ignore: cast_nullable_to_non_nullable
                   as Map<String, dynamic>,
-        darkTheme: freezed == darkTheme
-            ? _self.darkTheme
-            : darkTheme // ignore: cast_nullable_to_non_nullable
-                  as bool?,
         greatFeastTheme: null == greatFeastTheme
             ? _self.greatFeastTheme
             : greatFeastTheme // ignore: cast_nullable_to_non_nullable
                   as bool,
+        darkTheme: freezed == darkTheme
+            ? _self.darkTheme
+            : darkTheme // ignore: cast_nullable_to_non_nullable
+                  as bool?,
         lastHomeMode: freezed == lastHomeMode
             ? _self.lastHomeMode
             : lastHomeMode // ignore: cast_nullable_to_non_nullable

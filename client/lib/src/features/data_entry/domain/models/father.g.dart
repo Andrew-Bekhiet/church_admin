@@ -1,5 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: member_ordering
+
 part of 'father.dart';
 
 // **************************************************************************
@@ -53,8 +55,8 @@ class FatherFields {
 Father _$FatherFromJson(Map json) => Father(
   id: json['id'] as String? ?? '',
   name: json['name'] as String? ?? '',
-  churchId: json['churchId'] as String?,
   isHidden: json['isHidden'] as bool? ?? true,
+  churchId: json['churchId'] as String?,
 );
 
 Map<String, dynamic> _$FatherToJson(Father instance) => <String, dynamic>{

@@ -41,15 +41,6 @@ class MockKVStore<T> extends _i1.Mock implements _i2.KVStore<T> {
           as String);
 
   @override
-  _i4.Future<bool> containsKey(String? key) =>
-      (super.noSuchMethod(
-            Invocation.method(#containsKey, [key]),
-            returnValue: _i4.Future<bool>.value(false),
-            returnValueForMissingStub: _i4.Future<bool>.value(false),
-          )
-          as _i4.Future<bool>);
-
-  @override
   _i4.Future<T?> get(String? key) =>
       (super.noSuchMethod(
             Invocation.method(#get, [key]),
@@ -57,6 +48,15 @@ class MockKVStore<T> extends _i1.Mock implements _i2.KVStore<T> {
             returnValueForMissingStub: _i4.Future<T?>.value(),
           )
           as _i4.Future<T?>);
+
+  @override
+  _i4.Future<bool> containsKey(String? key) =>
+      (super.noSuchMethod(
+            Invocation.method(#containsKey, [key]),
+            returnValue: _i4.Future<bool>.value(false),
+            returnValueForMissingStub: _i4.Future<bool>.value(false),
+          )
+          as _i4.Future<bool>);
 
   @override
   _i4.Future<void> put(String? key, T? value) =>

@@ -116,6 +116,7 @@ abstract mixin class $ServiceCopyWith<$Res> {
   $Res call({
     String id,
     String name,
+    bool userCanEdit,
     StudyYear? studyYearFrom,
     StudyYear? studyYearTo,
     int? studyYearFromId,
@@ -131,7 +132,6 @@ abstract mixin class $ServiceCopyWith<$Res> {
     List<Meeting>? meetings,
     LastRecordedByInfo? lastEdit,
     List<User>? adminUsers,
-    bool userCanEdit,
   });
 }
 
@@ -149,6 +149,7 @@ class _$ServiceCopyWithImpl<$Res> implements $ServiceCopyWith<$Res> {
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? userCanEdit = null,
     Object? studyYearFrom = freezed,
     Object? studyYearTo = freezed,
     Object? studyYearFromId = freezed,
@@ -164,7 +165,6 @@ class _$ServiceCopyWithImpl<$Res> implements $ServiceCopyWith<$Res> {
     Object? meetings = freezed,
     Object? lastEdit = freezed,
     Object? adminUsers = freezed,
-    Object? userCanEdit = null,
   }) {
     return _then(
       Service(
@@ -176,6 +176,10 @@ class _$ServiceCopyWithImpl<$Res> implements $ServiceCopyWith<$Res> {
             ? _self.name
             : name // ignore: cast_nullable_to_non_nullable
                   as String,
+        userCanEdit: null == userCanEdit
+            ? _self.userCanEdit
+            : userCanEdit // ignore: cast_nullable_to_non_nullable
+                  as bool,
         studyYearFrom: freezed == studyYearFrom
             ? _self.studyYearFrom
             : studyYearFrom // ignore: cast_nullable_to_non_nullable
@@ -236,10 +240,6 @@ class _$ServiceCopyWithImpl<$Res> implements $ServiceCopyWith<$Res> {
             ? _self.adminUsers
             : adminUsers // ignore: cast_nullable_to_non_nullable
                   as List<User>?,
-        userCanEdit: null == userCanEdit
-            ? _self.userCanEdit
-            : userCanEdit // ignore: cast_nullable_to_non_nullable
-                  as bool,
       ),
     );
   }

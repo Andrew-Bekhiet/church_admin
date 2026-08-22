@@ -1,5 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: member_ordering
+
 part of 'store.dart';
 
 // **************************************************************************
@@ -131,6 +133,7 @@ class _StoreFields {
 Store _$StoreFromJson(Map json) => Store(
   id: json['id'] as String? ?? '',
   name: json['name'] as String? ?? '',
+  userCanEdit: json['userCanEdit'] as bool? ?? false,
   address: json['address'] == null
       ? null
       : Address.fromJson(Map<String, Object?>.from(json['address'] as Map)),
@@ -149,7 +152,6 @@ Store _$StoreFromJson(Map json) => Store(
     const LocalDateTimeConverter().fromJson,
   ),
   blurhash: json['blurhash'] as String?,
-  userCanEdit: json['userCanEdit'] as bool? ?? false,
 );
 
 Map<String, dynamic> _$StoreToJson(Store instance) => <String, dynamic>{

@@ -323,14 +323,18 @@ abstract mixin class $PersonCopyWith<$Res> {
   $Res call({
     String id,
     String name,
+    Map<String, dynamic> otherPhones,
+    bool gender,
+    bool isShammas,
+    WorkStatus? workStatus,
+    MartialStatus? martialStatus,
+    bool isServant,
+    bool userCanEdit,
     int? nationalId,
     Address? address,
     String? mainPhone,
-    Map<String, dynamic> otherPhones,
     DateTime? birthdate,
     String? birthday,
-    bool gender,
-    bool isShammas,
     String? shammasLevelId,
     ShammasLevel? shammasLevel,
     School? school,
@@ -341,18 +345,15 @@ abstract mixin class $PersonCopyWith<$Res> {
     String? churchId,
     Father? father,
     String? fatherId,
-    WorkStatus? workStatus,
     Job? job,
     String? jobId,
     String? jobDescription,
     Qualification? qualification,
     String? qualificationId,
-    MartialStatus? martialStatus,
     PersonType? personType,
     String? personTypeId,
     PersonState? state,
     String? stateId,
-    bool isServant,
     Church? servingChurch,
     String? serviceType,
     String? notes,
@@ -389,7 +390,6 @@ abstract mixin class $PersonCopyWith<$Res> {
     HistoryAggregateData? callHistoryAggregate,
     HistoryAggregateData? visitHistoryAggregate,
     HistoryAggregateData? editHistoryAggregate,
-    bool userCanEdit,
   });
 }
 
@@ -407,14 +407,18 @@ class _$PersonCopyWithImpl<$Res> implements $PersonCopyWith<$Res> {
   $Res call({
     Object? id = null,
     Object? name = null,
+    Object? otherPhones = null,
+    Object? gender = null,
+    Object? isShammas = null,
+    Object? workStatus = freezed,
+    Object? martialStatus = freezed,
+    Object? isServant = null,
+    Object? userCanEdit = null,
     Object? nationalId = freezed,
     Object? address = freezed,
     Object? mainPhone = freezed,
-    Object? otherPhones = null,
     Object? birthdate = freezed,
     Object? birthday = freezed,
-    Object? gender = null,
-    Object? isShammas = null,
     Object? shammasLevelId = freezed,
     Object? shammasLevel = freezed,
     Object? school = freezed,
@@ -425,18 +429,15 @@ class _$PersonCopyWithImpl<$Res> implements $PersonCopyWith<$Res> {
     Object? churchId = freezed,
     Object? father = freezed,
     Object? fatherId = freezed,
-    Object? workStatus = freezed,
     Object? job = freezed,
     Object? jobId = freezed,
     Object? jobDescription = freezed,
     Object? qualification = freezed,
     Object? qualificationId = freezed,
-    Object? martialStatus = freezed,
     Object? personType = freezed,
     Object? personTypeId = freezed,
     Object? state = freezed,
     Object? stateId = freezed,
-    Object? isServant = null,
     Object? servingChurch = freezed,
     Object? serviceType = freezed,
     Object? notes = freezed,
@@ -473,7 +474,6 @@ class _$PersonCopyWithImpl<$Res> implements $PersonCopyWith<$Res> {
     Object? callHistoryAggregate = freezed,
     Object? visitHistoryAggregate = freezed,
     Object? editHistoryAggregate = freezed,
-    Object? userCanEdit = null,
   }) {
     return _then(
       Person(
@@ -485,6 +485,34 @@ class _$PersonCopyWithImpl<$Res> implements $PersonCopyWith<$Res> {
             ? _self.name
             : name // ignore: cast_nullable_to_non_nullable
                   as String,
+        otherPhones: null == otherPhones
+            ? _self.otherPhones
+            : otherPhones // ignore: cast_nullable_to_non_nullable
+                  as Map<String, dynamic>,
+        gender: null == gender
+            ? _self.gender
+            : gender // ignore: cast_nullable_to_non_nullable
+                  as bool,
+        isShammas: null == isShammas
+            ? _self.isShammas
+            : isShammas // ignore: cast_nullable_to_non_nullable
+                  as bool,
+        workStatus: freezed == workStatus
+            ? _self.workStatus
+            : workStatus // ignore: cast_nullable_to_non_nullable
+                  as WorkStatus?,
+        martialStatus: freezed == martialStatus
+            ? _self.martialStatus
+            : martialStatus // ignore: cast_nullable_to_non_nullable
+                  as MartialStatus?,
+        isServant: null == isServant
+            ? _self.isServant
+            : isServant // ignore: cast_nullable_to_non_nullable
+                  as bool,
+        userCanEdit: null == userCanEdit
+            ? _self.userCanEdit
+            : userCanEdit // ignore: cast_nullable_to_non_nullable
+                  as bool,
         nationalId: freezed == nationalId
             ? _self.nationalId
             : nationalId // ignore: cast_nullable_to_non_nullable
@@ -497,10 +525,6 @@ class _$PersonCopyWithImpl<$Res> implements $PersonCopyWith<$Res> {
             ? _self.mainPhone
             : mainPhone // ignore: cast_nullable_to_non_nullable
                   as String?,
-        otherPhones: null == otherPhones
-            ? _self.otherPhones
-            : otherPhones // ignore: cast_nullable_to_non_nullable
-                  as Map<String, dynamic>,
         birthdate: freezed == birthdate
             ? _self.birthdate
             : birthdate // ignore: cast_nullable_to_non_nullable
@@ -509,14 +533,6 @@ class _$PersonCopyWithImpl<$Res> implements $PersonCopyWith<$Res> {
             ? _self.birthday
             : birthday // ignore: cast_nullable_to_non_nullable
                   as String?,
-        gender: null == gender
-            ? _self.gender
-            : gender // ignore: cast_nullable_to_non_nullable
-                  as bool,
-        isShammas: null == isShammas
-            ? _self.isShammas
-            : isShammas // ignore: cast_nullable_to_non_nullable
-                  as bool,
         shammasLevelId: freezed == shammasLevelId
             ? _self.shammasLevelId
             : shammasLevelId // ignore: cast_nullable_to_non_nullable
@@ -557,10 +573,6 @@ class _$PersonCopyWithImpl<$Res> implements $PersonCopyWith<$Res> {
             ? _self.fatherId
             : fatherId // ignore: cast_nullable_to_non_nullable
                   as String?,
-        workStatus: freezed == workStatus
-            ? _self.workStatus
-            : workStatus // ignore: cast_nullable_to_non_nullable
-                  as WorkStatus?,
         job: freezed == job
             ? _self.job
             : job // ignore: cast_nullable_to_non_nullable
@@ -581,10 +593,6 @@ class _$PersonCopyWithImpl<$Res> implements $PersonCopyWith<$Res> {
             ? _self.qualificationId
             : qualificationId // ignore: cast_nullable_to_non_nullable
                   as String?,
-        martialStatus: freezed == martialStatus
-            ? _self.martialStatus
-            : martialStatus // ignore: cast_nullable_to_non_nullable
-                  as MartialStatus?,
         personType: freezed == personType
             ? _self.personType
             : personType // ignore: cast_nullable_to_non_nullable
@@ -601,10 +609,6 @@ class _$PersonCopyWithImpl<$Res> implements $PersonCopyWith<$Res> {
             ? _self.stateId
             : stateId // ignore: cast_nullable_to_non_nullable
                   as String?,
-        isServant: null == isServant
-            ? _self.isServant
-            : isServant // ignore: cast_nullable_to_non_nullable
-                  as bool,
         servingChurch: freezed == servingChurch
             ? _self.servingChurch
             : servingChurch // ignore: cast_nullable_to_non_nullable
@@ -749,10 +753,6 @@ class _$PersonCopyWithImpl<$Res> implements $PersonCopyWith<$Res> {
             ? _self.editHistoryAggregate
             : editHistoryAggregate // ignore: cast_nullable_to_non_nullable
                   as HistoryAggregateData?,
-        userCanEdit: null == userCanEdit
-            ? _self.userCanEdit
-            : userCanEdit // ignore: cast_nullable_to_non_nullable
-                  as bool,
       ),
     );
   }

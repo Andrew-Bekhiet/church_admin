@@ -1,5 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: member_ordering
+
 part of 'user_preferences.dart';
 
 // **************************************************************************
@@ -13,8 +15,8 @@ UserPreferences _$UserPreferencesFromJson(Map json) => UserPreferences(
         (k, e) => MapEntry(k as String, e),
       ) ??
       {},
-  darkTheme: json['darkTheme'] as bool?,
   greatFeastTheme: json['greatFeastTheme'] as bool? ?? true,
+  darkTheme: json['darkTheme'] as bool?,
   lastHomeMode: $enumDecodeNullable(_$HomeModeEnumMap, json['lastHomeMode']),
   updatedAt: _$JsonConverterFromJson<String, DateTime>(
     json['updatedAt'],

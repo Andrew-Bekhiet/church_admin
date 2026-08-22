@@ -86,8 +86,8 @@ abstract mixin class $NotificationCopyWith<$Res> {
     String body,
     DateTime sentTime,
     String senderUID,
-    String? imageURL,
     NotificationType type,
+    String? imageURL,
     Map<String, dynamic>? additionalData,
   });
 }
@@ -109,8 +109,8 @@ class _$NotificationCopyWithImpl<$Res> implements $NotificationCopyWith<$Res> {
     Object? body = null,
     Object? sentTime = null,
     Object? senderUID = null,
-    Object? imageURL = freezed,
     Object? type = null,
+    Object? imageURL = freezed,
     Object? additionalData = freezed,
   }) {
     return _then(
@@ -135,14 +135,14 @@ class _$NotificationCopyWithImpl<$Res> implements $NotificationCopyWith<$Res> {
             ? _self.senderUID
             : senderUID // ignore: cast_nullable_to_non_nullable
                   as String,
-        imageURL: freezed == imageURL
-            ? _self.imageURL
-            : imageURL // ignore: cast_nullable_to_non_nullable
-                  as String?,
         type: null == type
             ? _self.type
             : type // ignore: cast_nullable_to_non_nullable
                   as NotificationType,
+        imageURL: freezed == imageURL
+            ? _self.imageURL
+            : imageURL // ignore: cast_nullable_to_non_nullable
+                  as String?,
         additionalData: freezed == additionalData
             ? _self.additionalData
             : additionalData // ignore: cast_nullable_to_non_nullable
