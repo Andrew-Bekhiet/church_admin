@@ -93,6 +93,7 @@ class AdminOnData with _$AdminOnData implements ToJson {
 
   const AdminOnData({
     required this.permissionId,
+    this.classes = const [],
     this.area,
     this.areaAllowExport,
     this.areaAllowEdit,
@@ -106,7 +107,6 @@ class AdminOnData with _$AdminOnData implements ToJson {
     this.serviceAllowRecordServantsAttendance,
     this.serviceAdminOnUsers,
     this.serviceWriteRelatedFamilies,
-    this.classes = const [],
     this.group,
     this.groupAllowExport,
     this.groupAllowEdit,

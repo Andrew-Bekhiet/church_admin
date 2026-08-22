@@ -65,8 +65,8 @@ class FieldMetadata<T extends Object> with Equatable {
     required this.getValue,
     this.isCodeOnly = false,
     this.isOrderable = true,
-    this._type,
     this.operators = const {},
+    this._type,
   });
 
   Json toJson() {
@@ -116,9 +116,9 @@ class FieldMetadata<T extends Object> with Equatable {
   /// ```
   RedirectingFieldMetadata<T, U> redirectTo<U extends Object>(
     FieldMetadata<U> targetField, {
+    bool isExpandable = true,
     String? alias,
     String? label,
-    bool isExpandable = true,
     bool? isOrderable,
   }) => RedirectingFieldMetadata<T, U>(
     parentField: this,

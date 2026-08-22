@@ -12,9 +12,9 @@ class AdvancedSearchScreen extends StatefulWidget {
   final bool autoExecuteInitialQuery;
 
   const AdvancedSearchScreen({
-    super.key,
-    this.initialQuery,
     this.autoExecuteInitialQuery = false,
+    this.initialQuery,
+    super.key,
   });
 
   @override

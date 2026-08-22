@@ -28,10 +28,10 @@ class AdvancedQuery with _$AdvancedQuery implements ToJson, SerializableExtra {
 
   const AdvancedQuery({
     required this.queryableType,
-    this.name,
     this.filters = const [],
     this.logicalOperator = LogicalOperator.and,
     this.orderBy = const [],
+    this.name,
     this.limit,
   });
 

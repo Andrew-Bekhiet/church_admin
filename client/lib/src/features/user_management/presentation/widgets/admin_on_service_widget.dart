@@ -5,9 +5,9 @@ class AdminOnServiceWidget extends StatelessWidget {
   final (Service, List<AdminOnData>) serviceData;
   const AdminOnServiceWidget({
     required this.serviceData,
-    super.key,
     this.trailingBuilder,
     this.onTap,
+    super.key,
   });
 
   @override

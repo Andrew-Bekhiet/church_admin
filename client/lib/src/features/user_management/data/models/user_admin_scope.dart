@@ -71,12 +71,12 @@ class UserAdminScope<T extends ViewableWithID> {
   });
 
   UserAdminScope copyWith({
+    Object? studyYear = _undefined,
+    Object? gender = _undefined,
     bool? canManageUsers,
     bool? canWriteData,
     bool? canExportData,
     bool? canWriteRelatedFamilies,
-    Object? studyYear = _undefined,
-    Object? gender = _undefined,
     bool? canRecordAttendance,
     bool? canRecordServantsAttendance,
   }) {

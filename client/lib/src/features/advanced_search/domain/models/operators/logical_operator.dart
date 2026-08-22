@@ -3,8 +3,8 @@ import 'package:church_admin/church_admin.dart';
 enum LogicalOperator<
   Field extends FieldMetadata,
   OperatorT extends Operator,
-  V extends Object,
-  FilterT extends Filter<V>
+  Value extends Object,
+  FilterT extends Filter<Value>
 >
     implements Operator<List<FilterT>> {
   or('_or', 'أو'),

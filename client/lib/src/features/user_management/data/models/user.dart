@@ -107,20 +107,20 @@ class User extends ViewableWithIDAndImage
   const User({
     required this.uid,
     required this.name,
+    this.permissions = const PermissionsSet.empty(),
+    this.fcmTokens = const [],
+    this.currentUserCanManageThisUser = false,
     this.email,
     this.photoUpdatedAt,
     this.blurhash,
     this.adminOn,
-    this.permissions = const PermissionsSet.empty(),
     this.authId,
     this.lastEdit,
     this.person,
     this.preferences,
-    this.fcmTokens = const [],
     this.servicesHistory,
     this.classesHistory,
     this.groupsHistory,
-    this.currentUserCanManageThisUser = false,
   });
 
   factory User.fromJson(Map<String, Object?> json) => _$UserFromJson(json);

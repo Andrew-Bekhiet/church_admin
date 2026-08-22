@@ -220,6 +220,7 @@ class _ViewUserState extends State<ViewUser> {
       scaffoldMessenger.showErrorSnackBar(
         'حدث خطأ أثناء حذف الحساب، يرجى المحاولة لاحقا',
       );
+
       return;
     }
 

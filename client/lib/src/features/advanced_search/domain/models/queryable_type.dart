@@ -8,6 +8,8 @@ class QueryableType<T extends Object> with Equatable {
   final List<FieldMetadata> fieldsMetadata;
   final List<T> enumValues;
   final bool isEnum;
+  final T Function(Json)? fromJson;
+  final T Function(String)? byName;
 
   Type get type => T;
 
@@ -28,8 +30,6 @@ class QueryableType<T extends Object> with Equatable {
   }) : byName = null,
        enumValues = const [],
        isEnum = false;
-  final T Function(Json)? fromJson;
-  final T Function(String)? byName;
 
   QueryableType.enum$({
     required this.name,
