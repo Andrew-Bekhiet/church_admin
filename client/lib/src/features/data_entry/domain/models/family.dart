@@ -144,7 +144,9 @@ class Family extends ViewableWithIDAndImage
             status == MartialStatus.widowedWithoutChildren
         ? null
         : marriageDate,
-    deceasedSpouseName: status == MartialStatus.widowed
+    deceasedSpouseName:
+        status == MartialStatus.widowed ||
+            status == MartialStatus.widowedWithoutChildren
         ? deceasedSpouseName
         : null,
     churchId: church?.id.toUuid(),
@@ -210,8 +212,14 @@ class Family extends ViewableWithIDAndImage
     if (status != oldFamily.status) {
       result = result.copyWith(
         status: status.name,
-        marriageDate: status == MartialStatus.widowed ? null : marriageDate,
-        deceasedSpouseName: status == MartialStatus.widowed
+        marriageDate:
+            status == MartialStatus.widowed ||
+                status == MartialStatus.widowedWithoutChildren
+            ? null
+            : marriageDate,
+        deceasedSpouseName:
+            status == MartialStatus.widowed ||
+                status == MartialStatus.widowedWithoutChildren
             ? deceasedSpouseName
             : null,
       );
