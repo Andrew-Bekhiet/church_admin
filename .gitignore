@@ -21,6 +21,11 @@ alt-store-server/
 .env
 .env.*
 .vscode
+!/.vscode/
+!/.vscode/settings.json
+!/.vscode/launch.json
+!/.vscode/tasks.json
+!/.vscode/extensions.json
 client/resources/
 **/*/churchdata.json
 **/*/meetinghelper.json

@@ -1,0 +1,23 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "group": {
+        "kind": "test",
+        "isDefault": true
+      },
+      "label": "Flutter test coverage",
+      "type": "shell",
+      "options": {
+        "cwd": "${workspaceFolder}/client"
+      },
+      "command": "fvm",
+      "args": [
+        "flutter",
+        "test",
+        "--coverage"
+      ],
+      "problemMatcher": []
+    }
+  ]
+}

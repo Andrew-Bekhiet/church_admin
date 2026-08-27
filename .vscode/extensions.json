@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "Dart-Code.dart-code",
+    "Dart-Code.flutter",
+    "GraphQL.vscode-graphql",
+    "redhat.vscode-yaml",
+    "sqlfluff.vscode-sqlfluff",
+    "streetsidesoftware.code-spell-checker"
+  ]
+}

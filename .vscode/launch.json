@@ -1,0 +1,40 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "church_admin",
+      "request": "launch",
+      "type": "dart",
+      "cwd": "${workspaceFolder}/client",
+      "args": ["--dart-define-from-file", "${workspaceFolder}/client/.env.dev"]
+    },
+    {
+      "name": "church_admin (profile mode)",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "profile",
+      "cwd": "${workspaceFolder}/client/",
+      "args": ["--dart-define-from-file", "${workspaceFolder}/client/.env.dev"]
+    },
+    {
+      "name": "church_admin (release mode)",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "release",
+      "cwd": "${workspaceFolder}/client/",
+      "args": ["--dart-define-from-file", "${workspaceFolder}/client/.env"]
+    },
+    {
+      "name": "church_admin (web debug mode)",
+      "request": "launch",
+      "type": "dart",
+      "cwd": "${workspaceFolder}/client/",
+      "args": [
+        "--web-port",
+        "5083",
+        "--dart-define-from-file",
+        "${workspaceFolder}/client/.env.dev"
+      ]
+    }
+  ]
+}
