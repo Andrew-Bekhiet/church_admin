@@ -100,6 +100,14 @@ jobs:
           pub-cache-key: "flutter-pub:os:-:channel:-:version:-:arch:"
           cache-key: "flutter:os:-:channel:-:version:-:arch:"
 
+      - name: Install dependencies
+        working-directory: client
+        run: flutter pub get
+
+      - name: Run new builder
+        working-directory: client
+        run: rm -r lib/src/core/graphql/__generated__/; dart run build_runner build && ./scripts/split_schema_graphql_dart.sh
+
       - name: Install Codemagic CLI tools
         run: pip install codemagic-cli-tools
 
@@ -160,14 +168,6 @@ jobs:
           echo $ANDROID_SIGNING_KEY | sed 's/[^A-Za-z0-9+/=]//g' | base64 -d > ./android/app/key.keystore
           echo $GOOGLE_SERVICES_JSON | sed 's/[^A-Za-z0-9+/=]//g' | base64 -d > ./android/app/google-services.json
           echo $ANDROID_KEYSTORE_PROPERTIES | sed 's/[^A-Za-z0-9+/=]//g' | base64 -d > ./android/releaseKey.properties
-
-      - name: Install dependencies
-        working-directory: client
-        run: flutter pub get
-
-      - name: Run new builder
-        working-directory: client
-        run: rm -r lib/src/core/graphql/__generated__/; dart run build_runner build && ./scripts/split_schema_graphql_dart.sh
 
       - name: Decode app production environment
         working-directory: client
