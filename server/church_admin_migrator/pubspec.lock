@@ -1956,6 +1956,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "6.5.0"
+  posthog_flutter:
+    dependency: transitive
+    description:
+      name: posthog_flutter
+      sha256: "37980450ea8c76dcb6fd3634eefd8347111fdf1cf23a9e4cc295ea34a8e7addb"
+      url: "https://pub.dev"
+    source: hosted
+    version: "5.38.1"
   proj4dart:
     dependency: transitive
     description:
