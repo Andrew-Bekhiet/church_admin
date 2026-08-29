@@ -36,6 +36,7 @@ class AttendanceAppBar extends StatelessWidget {
       toolbarHeight: _kAttendanceToolbarHeight,
       titleSpacing: 8,
       leadingWidth: 28,
+      centerTitle: true,
       title: Column(
         mainAxisSize: MainAxisSize.min,
         spacing: 10,
