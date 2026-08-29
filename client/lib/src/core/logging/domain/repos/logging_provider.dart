@@ -4,9 +4,15 @@ import 'package:flutter/widgets.dart';
 abstract interface class LoggingProvider {
   List<NavigatorObserver> get navigatorObservers;
 
-  Future<void> initialize();
+  bool isEnabledBy(LoggingSettings settings);
+
+  Future<void> initialize(LoggingSettings settings);
 
   Future<void> identify(LoggingUser? user);
+
+  Future<void> setGlobalContext(Json contexts);
+
+  Future<void> setGlobalTags(Map<String, String> tags);
 
   Future<void> recordStep(LoggingLevel level, String message, Json? data);
 

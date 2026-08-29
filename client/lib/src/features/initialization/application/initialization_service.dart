@@ -27,6 +27,7 @@ class InitializationService {
     AndroidAlarmManagerInit(),
     FlutterLocalNotificationsInit(),
     BlocObserverInit(),
+    LoggingSyncInit(),
   };
 
   InitializationService();

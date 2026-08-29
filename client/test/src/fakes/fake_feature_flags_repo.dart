@@ -33,6 +33,21 @@ class FakeFeatureFlagsRepo implements FeatureFlagsRepository {
   bool get useSentryLogs => true;
 
   @override
+  bool get enableSentry => true;
+
+  @override
+  bool get enablePostHog => true;
+
+  @override
+  bool get enablePostHogLogs => true;
+
+  @override
+  double get postHogReplaySampleRate => 1;
+
+  @override
+  LoggingSettings get loggingSettings => LoggingSettings.defaults;
+
+  @override
   Stream<void> get onConfigChanged => const Stream.empty();
 
   @override

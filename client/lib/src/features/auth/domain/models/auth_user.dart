@@ -6,6 +6,8 @@ part 'auth_user.g.dart';
 @Freezed(toStringOverride: false)
 @JsonSerializable()
 class AuthUser with _$AuthUser {
+  static const String hasuraUserIdKey = 'x-hasura-user-id';
+
   @override
   final String uid;
   @override
@@ -21,6 +23,9 @@ class AuthUser with _$AuthUser {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   Map<String, dynamic> get filteredClaims => _filterClaims(claims);
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  String? get hasuraUserId => claims[hasuraUserIdKey] as String?;
 
   const AuthUser({
     required this.uid,

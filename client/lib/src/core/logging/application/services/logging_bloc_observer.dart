@@ -75,16 +75,15 @@ class LoggingBlocObserver extends BlocObserver {
       (_, AuthAuthenticated(:final authUser, :final userData))
           when currentState is! AuthAuthenticated =>
         LoggingUser(
-          id: authUser.uid,
+          id: authUser.hasuraUserId ?? authUser.uid,
+          firebaseUid: authUser.uid,
+          emailVerified: authUser.emailVerified,
+          isMultiFactorEnabled: authUser.isMultiFactorEnabled,
+          claims: authUser.filteredClaims,
+          permissions: [...?userData?.permissions.map((p) => p.name)],
+          adminOn: [...?userData?.adminOn?.map((a) => a.toJson())],
           email: authUser.email,
           name: userData?.name,
-          properties: {
-            'emailVerified': authUser.emailVerified,
-            'claims': authUser.filteredClaims,
-            'isMultiFactorEnabled': authUser.isMultiFactorEnabled,
-            'permissions': userData?.permissions.toList(),
-            'adminOn': userData?.adminOn?.map((a) => a.toJson()).toList(),
-          },
         ),
       (AuthAuthenticated(), _) when nextState is! AuthAuthenticated => null,
       _ => false,

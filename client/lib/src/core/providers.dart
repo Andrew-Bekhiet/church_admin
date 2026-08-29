@@ -166,8 +166,21 @@ final loggingProvidersProvider = Provider<List<LoggingProvider>>(
   (ref) => [SentryLoggingProvider()],
 );
 
+final loggingSettingsStoreProvider = Provider<LoggingSettingsStore>(
+  (ref) => SharedPreferencesLoggingSettingsStore(),
+);
+
 final loggingServiceProvider = Provider<LoggingService>(
-  (ref) => LoggingService(ref.watch(loggingProvidersProvider)),
+  (ref) {
+    final loggingService = LoggingService(
+      ref.watch(loggingProvidersProvider),
+      ref.watch(loggingSettingsStoreProvider),
+    );
+
+    ref.onDispose(loggingService.dispose);
+
+    return loggingService;
+  },
 );
 
 final loggingBlocObserverProvider = Provider<LoggingBlocObserver>(

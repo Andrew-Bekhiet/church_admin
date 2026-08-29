@@ -12,7 +12,10 @@ class SentryLoggingProvider implements LoggingProvider {
   ];
 
   @override
-  Future<void> initialize() async {
+  bool isEnabledBy(LoggingSettings settings) => settings.enableSentry;
+
+  @override
+  Future<void> initialize(LoggingSettings settings) async {
     await SentryFlutter.init(
       (options) => options
         ..dsn = globalProviderContainer.read(secretsServiceProvider).sentryDSN
@@ -44,9 +47,30 @@ class SentryLoggingProvider implements LoggingProvider {
             id: user.id,
             email: user.email,
             name: user.name,
-            data: user.properties,
+            data: user.toJson()
+              ..remove('id')
+              ..remove('email')
+              ..remove('name'),
           ),
         },
+      ),
+    );
+  }
+
+  @override
+  Future<void> setGlobalContext(Json contexts) async {
+    await Sentry.configureScope(
+      (scope) async => Future.wait(
+        contexts.entries.map((e) async => scope.setContexts(e.key, e.value)),
+      ),
+    );
+  }
+
+  @override
+  Future<void> setGlobalTags(Map<String, String> tags) async {
+    await Sentry.configureScope(
+      (scope) async => Future.wait(
+        tags.entries.map((e) async => scope.setTag(e.key, e.value)),
       ),
     );
   }

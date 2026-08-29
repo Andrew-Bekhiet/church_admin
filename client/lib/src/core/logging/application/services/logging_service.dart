@@ -4,6 +4,7 @@ import 'package:church_admin/church_admin.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql/client.dart';
+import 'package:shorebird_code_push/shorebird_code_push.dart';
 
 class LoggingService {
   static LoggingService get I =>
@@ -11,42 +12,106 @@ class LoggingService {
 
   final List<LoggingProvider> providers;
 
-  late final List<NavigatorObserver> navigatorObservers = providers
-      .expand((provider) => provider.navigatorObservers)
-      .toList();
+  final LoggingSettingsStore _settingsStore;
+
+  List<LoggingProvider> _enabledProviders = [];
+
+  StreamSubscription<void>? _featureFlagsSubscription;
+
+  void Function(FlutterErrorDetails details)? _previousOnError;
 
   late final Interceptor dioInterceptor = DioLoggingInterceptor(this);
 
   late final Link loggingLink = LoggingLink(this);
 
-  LoggingService(this.providers) {
-    FlutterError.onError = _onFlutterError;
-    ErrorWidget.builder = (details) => CAErrorWidget(details: details);
+  List<NavigatorObserver> get navigatorObservers => _enabledProviders
+      .expand((provider) => provider.navigatorObservers)
+      .toList();
+
+  LoggingService(this.providers, this._settingsStore);
+
+  void _onFlutterError(FlutterErrorDetails details) {
+    final message = details.exceptionAsString();
+
+    unawaited(
+      _forEachEnabledProvider(
+        (provider) => provider.recordStep(LoggingLevel.error, message, null),
+      ),
+    );
+
+    _previousOnError?.call(details);
   }
 
-  Future<void> _onFlutterError(FlutterErrorDetails flutterError) async {
-    await error(
-      LogRecord(
-        message: flutterError.exceptionAsString(),
-        error: flutterError.exception,
-        stackTrace: flutterError.stack,
+  Future<void> initialize() async {
+    final settings = await _settingsStore.read();
+
+    _enabledProviders = providers
+        .where((provider) => provider.isEnabledBy(settings))
+        .toList();
+
+    await _forEachEnabledProvider(
+      (provider) => provider.initialize(settings),
+    );
+
+    _previousOnError = FlutterError.onError;
+    FlutterError.onError = _onFlutterError;
+    ErrorWidget.builder = (details) => CAErrorWidget(details: details);
+
+    Patch? patch;
+
+    try {
+      patch = await ShorebirdUpdater().readCurrentPatch();
+    } on Object {
+      patch = null;
+    }
+
+    await setGlobalTags({'shorebirdPatchNumber': '${patch?.number}'});
+  }
+
+  Future<void> dispose() async {
+    await _featureFlagsSubscription?.cancel();
+    _featureFlagsSubscription = null;
+  }
+
+  Future<void> startSyncingWithFeatureFlags() async {
+    await _syncWithFeatureFlags();
+
+    _featureFlagsSubscription = FeatureFlagsRepository.I.onConfigChanged.listen(
+      (_) => unawaited(_syncWithFeatureFlags()),
+    );
+  }
+
+  Future<void> _syncWithFeatureFlags() async {
+    await _settingsStore.write(FeatureFlagsRepository.I.loggingSettings);
+    await refreshGlobalContext();
+  }
+
+  Future<void> refreshGlobalContext() async {
+    await _forEachEnabledProvider(
+      (provider) => provider.setGlobalContext(
+        Json.from({
+          'Feature Flags': FeatureFlagsRepository.I.toJson(),
+          'UserPreferences': UserPreferencesService.I.toJson(),
+        }),
       ),
     );
   }
 
-  Future<void> initialize() async {
-    await _forEachProvider((provider) => provider.initialize());
+  Future<void> setGlobalTags(Map<String, String> tags) async {
+    await _forEachEnabledProvider(
+      (provider) => provider.setGlobalTags(tags),
+    );
   }
 
   Future<void> identify(LoggingUser? user) async {
-    await _forEachProvider((provider) => provider.identify(user));
+    await _forEachEnabledProvider((provider) => provider.identify(user));
   }
 
   Future<void> log(LoggingLevel level, LogRecord record) async {
     final message = _formatRecordMessage(record);
 
     if (message.isNotEmpty) {
-      await _forEachProvider(
+      await _forEachEnabledProvider(
         (provider) => provider.recordStep(level, message, record.data),
       );
     }
@@ -56,23 +121,21 @@ class LoggingService {
         ...?record.data,
         'moduleName': record.moduleName,
         'eventName': record.eventName,
-        'Feature Flags': FeatureFlagsRepository.I.toJson(),
-        'UserPreferences': UserPreferencesService.I.toJson(),
       });
 
-      await _forEachProvider(
+      await _forEachEnabledProvider(
         (provider) => provider.captureException(record, contexts),
       );
     }
 
-    await _forEachProvider(
+    await _forEachEnabledProvider(
       (provider) => provider.log(level, message, record.data),
     );
   }
 
-  Future<void> _forEachProvider(
+  Future<void> _forEachEnabledProvider(
     Future<void> Function(LoggingProvider provider) action,
-  ) => Future.wait(providers.map(action));
+  ) => Future.wait(_enabledProviders.map(action));
 
   String _formatRecordMessage(LogRecord record) {
     final msgBuilder = StringBuffer();

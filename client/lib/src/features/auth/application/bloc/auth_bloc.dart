@@ -107,11 +107,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           return Stream.value((null, null));
         }
 
+        final hasuraUserId = authUser.hasuraUserId;
+        if (hasuraUserId == null) {
+          return Stream.value((authUser, null));
+        }
+
         final userDataStream = _databaseService.users
-            .streamSingleById(
-              id: authUser.claims['x-hasura-user-id'],
-              fullData: true,
-            )
+            .streamSingleById(id: hasuraUserId, fullData: true)
             .map((userData) => (authUser, userData));
 
         if (state.unwrapped case AuthAuthenticated(userData: User())) {
