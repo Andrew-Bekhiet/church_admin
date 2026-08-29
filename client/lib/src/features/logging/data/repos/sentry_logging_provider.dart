@@ -37,7 +37,7 @@ class SentryLoggingProvider implements LoggingProvider {
         ..replay.sessionSampleRate = settings.sessionReplaySampleRate
         ..replay.onErrorSampleRate = 1
         ..privacy.maskAllText = false
-        ..privacy.maskAllImages = false,
+        ..privacy.maskAllImages = true,
     );
   }
 
@@ -51,8 +51,7 @@ class SentryLoggingProvider implements LoggingProvider {
             id: user.firebaseUid,
             email: user.email,
             name: user.name,
-            data: user.toJson()
-              ..removeWhere((key, _) => {'id', 'name', 'email'}.contains(key)),
+            data: {...user.properties, 'hasuraUserId': user.id},
           ),
         },
       ),
@@ -67,11 +66,7 @@ class SentryLoggingProvider implements LoggingProvider {
 
   @override
   Future<void> setGlobalContext(Json contexts) async {
-    await Sentry.configureScope(
-      (scope) async => Future.wait(
-        contexts.entries.map((e) async => scope.setContexts(e.key, e.value)),
-      ),
-    );
+    await Sentry.configureScope((scope) => _setContexts(scope, contexts));
   }
 
   @override

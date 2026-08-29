@@ -57,15 +57,19 @@ class LoggingService {
     FlutterError.onError = _onFlutterError;
     ErrorWidget.builder = (details) => CAErrorWidget(details: details);
 
-    Patch? patch;
+    await _tagShorebirdPatch();
+  }
 
+  Future<void> _tagShorebirdPatch() async {
     try {
-      patch = await ShorebirdUpdater().readCurrentPatch();
-    } on Object {
-      patch = null;
-    }
+      final patch = await ShorebirdUpdater().readCurrentPatch();
 
-    await setGlobalTags({'shorebirdPatchNumber': '${patch?.number}'});
+      if (patch case final Patch patch) {
+        await setGlobalTags({'shorebirdPatchNumber': '${patch.number}'});
+      }
+    } catch (_) {
+      return;
+    }
   }
 
   Future<void> dispose() async {
@@ -93,10 +97,10 @@ class LoggingService {
   Future<void> refreshGlobalContext() async {
     await _forEachEnabledProvider(
       (provider) => provider.setGlobalContext(
-        Json.from({
+        {
           'Feature Flags': FeatureFlagsRepository.I.toJson(),
           'UserPreferences': UserPreferencesService.I.toJson(),
-        }),
+        },
       ),
     );
   }
@@ -121,11 +125,11 @@ class LoggingService {
     }
 
     if (level >= LoggingLevel.exception) {
-      final contexts = Json.from({
+      final contexts = {
         ...?record.data,
         'moduleName': record.moduleName,
         'eventName': record.eventName,
-      });
+      };
 
       await _forEachEnabledProvider(
         (provider) => provider.captureException(record, contexts),

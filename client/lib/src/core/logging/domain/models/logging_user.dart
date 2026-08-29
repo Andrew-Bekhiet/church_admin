@@ -11,6 +11,15 @@ class LoggingUser {
   final String? email;
   final String? name;
 
+  Json get properties => {
+    'firebaseUid': firebaseUid,
+    'emailVerified': emailVerified,
+    'isMultiFactorEnabled': isMultiFactorEnabled,
+    'claims': claims,
+    'permissions': permissions,
+    'adminOn': adminOn,
+  };
+
   const LoggingUser({
     required this.id,
     required this.firebaseUid,
@@ -27,11 +36,6 @@ class LoggingUser {
     'id': id,
     'email': email,
     'name': name,
-    'firebaseUid': firebaseUid,
-    'emailVerified': emailVerified,
-    'isMultiFactorEnabled': isMultiFactorEnabled,
-    'claims': claims,
-    'permissions': permissions,
-    'adminOn': adminOn,
+    ...properties,
   };
 }
