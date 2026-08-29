@@ -7,7 +7,6 @@ export 'services/device_info_service.dart';
 export 'services/encryption.dart';
 export 'services/functions_service.dart';
 export 'services/launcher_service.dart';
-export 'services/logging_service.dart';
 export 'services/router.dart';
 export 'services/secrets/secrets_service.dart';
 export 'services/share_service.dart';

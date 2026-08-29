@@ -101,6 +101,7 @@ dependencies:
   sembast_web: ^2.4.1
   sentry_flutter: ^9.24.0
   share_plus: ^13.2.0
+  shared_preferences: ^2.5.5
   shorebird_code_push: ^2.0.4
   sliver_tools: ^0.2.12
   snapping_sheet_2: ^3.1.5

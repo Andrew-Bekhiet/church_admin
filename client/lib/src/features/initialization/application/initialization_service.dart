@@ -16,7 +16,7 @@ class InitializationService {
 
   Set<Initializer> get steps => const {
     WebNavigationInit(),
-    SentryInit(),
+    LoggingInit(),
     PackageInfoInit(),
     DeviceInfoInit(),
     SembastInit(),
@@ -27,6 +27,7 @@ class InitializationService {
     AndroidAlarmManagerInit(),
     FlutterLocalNotificationsInit(),
     BlocObserverInit(),
+    LoggingSyncInit(),
   };
 
   InitializationService();

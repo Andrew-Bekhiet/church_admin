@@ -9,6 +9,7 @@ export 'features/history.dart';
 export 'features/home.dart';
 export 'features/initialization.dart';
 export 'features/local_auth.dart';
+export 'features/logging.dart';
 export 'features/maps.dart';
 export 'features/notifications.dart';
 export 'features/settings.dart';
