@@ -25,7 +25,6 @@ class _RecordAttendanceScreenState extends State<RecordAttendanceScreen> {
       value: _cubit,
       child: Scaffold(
         extendBody: true,
-        bottomNavigationBar: AttendanceSearchBar(onChanged: _cubit.onSearch),
         body: SafeArea(
           bottom: false,
           child: BlocBuilder<RecordAttendanceCubit, RecordAttendanceState>(
@@ -38,6 +37,10 @@ class _RecordAttendanceScreenState extends State<RecordAttendanceScreen> {
               ),
             },
           ),
+        ),
+        bottomNavigationBar: AttendanceSearchBar(
+          bottomViewInset: MediaQuery.viewInsetsOf(context).bottom,
+          onChanged: _cubit.onSearch,
         ),
       ),
     );
