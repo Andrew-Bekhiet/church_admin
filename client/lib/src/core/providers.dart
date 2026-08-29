@@ -163,7 +163,7 @@ final authBlocProvider = Provider<AuthBloc>((ref) {
 });
 
 final loggingProvidersProvider = Provider<List<LoggingProvider>>(
-  (ref) => [SentryLoggingProvider()],
+  (ref) => [SentryLoggingProvider(), PostHogLoggingProvider()],
 );
 
 final loggingSettingsStoreProvider = Provider<LoggingSettingsStore>(

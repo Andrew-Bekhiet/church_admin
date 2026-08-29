@@ -202,15 +202,6 @@ class MockLoggingService extends _i1.Mock implements _i6.LoggingService {
           as List<_i6.LoggingProvider>);
 
   @override
-  List<_i7.NavigatorObserver> get navigatorObservers =>
-      (super.noSuchMethod(
-            Invocation.getter(#navigatorObservers),
-            returnValue: <_i7.NavigatorObserver>[],
-            returnValueForMissingStub: <_i7.NavigatorObserver>[],
-          )
-          as List<_i7.NavigatorObserver>);
-
-  @override
   _i5.Interceptor get dioInterceptor =>
       (super.noSuchMethod(
             Invocation.getter(#dioInterceptor),
@@ -238,9 +229,54 @@ class MockLoggingService extends _i1.Mock implements _i6.LoggingService {
           as _i4.Link);
 
   @override
+  List<_i7.NavigatorObserver> get navigatorObservers =>
+      (super.noSuchMethod(
+            Invocation.getter(#navigatorObservers),
+            returnValue: <_i7.NavigatorObserver>[],
+            returnValueForMissingStub: <_i7.NavigatorObserver>[],
+          )
+          as List<_i7.NavigatorObserver>);
+
+  @override
   _i8.Future<void> initialize() =>
       (super.noSuchMethod(
             Invocation.method(#initialize, []),
+            returnValue: _i8.Future<void>.value(),
+            returnValueForMissingStub: _i8.Future<void>.value(),
+          )
+          as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> dispose() =>
+      (super.noSuchMethod(
+            Invocation.method(#dispose, []),
+            returnValue: _i8.Future<void>.value(),
+            returnValueForMissingStub: _i8.Future<void>.value(),
+          )
+          as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> startSyncingWithFeatureFlags() =>
+      (super.noSuchMethod(
+            Invocation.method(#startSyncingWithFeatureFlags, []),
+            returnValue: _i8.Future<void>.value(),
+            returnValueForMissingStub: _i8.Future<void>.value(),
+          )
+          as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> refreshGlobalContext() =>
+      (super.noSuchMethod(
+            Invocation.method(#refreshGlobalContext, []),
+            returnValue: _i8.Future<void>.value(),
+            returnValueForMissingStub: _i8.Future<void>.value(),
+          )
+          as _i8.Future<void>);
+
+  @override
+  _i8.Future<void> setGlobalTags(Map<String, String>? tags) =>
+      (super.noSuchMethod(
+            Invocation.method(#setGlobalTags, [tags]),
             returnValue: _i8.Future<void>.value(),
             returnValueForMissingStub: _i8.Future<void>.value(),
           )
