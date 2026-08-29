@@ -72,10 +72,16 @@ class LoggingBlocObserver extends BlocObserver {
     final currentState = transition.currentState.unwrapped;
 
     final loggingUser = switch ((currentState, nextState)) {
-      (_, AuthAuthenticated(:final authUser, :final userData))
+      (
+        _,
+        AuthAuthenticated(
+          authUser: AuthUser(:final hasuraUserId?) && final authUser,
+          :final userData,
+        ),
+      )
           when currentState is! AuthAuthenticated =>
         LoggingUser(
-          id: authUser.hasuraUserId ?? authUser.uid,
+          id: hasuraUserId,
           firebaseUid: authUser.uid,
           emailVerified: authUser.emailVerified,
           isMultiFactorEnabled: authUser.isMultiFactorEnabled,

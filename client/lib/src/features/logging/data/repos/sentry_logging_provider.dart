@@ -33,7 +33,11 @@ class SentryLoggingProvider implements LoggingProvider {
         ..attachScreenshot = true
         ..screenshotQuality = SentryScreenshotQuality.low
         ..enableLogs = true
-        ..enableUserInteractionTracing = true,
+        ..enableUserInteractionTracing = true
+        ..replay.sessionSampleRate = settings.sessionReplaySampleRate
+        ..replay.onErrorSampleRate = 1
+        ..privacy.maskAllText = false
+        ..privacy.maskAllImages = false,
     );
   }
 
@@ -44,16 +48,20 @@ class SentryLoggingProvider implements LoggingProvider {
         switch (user) {
           null => null,
           final user => SentryUser(
-            id: user.id,
+            id: user.firebaseUid,
             email: user.email,
             name: user.name,
             data: user.toJson()
-              ..remove('id')
-              ..remove('email')
-              ..remove('name'),
+              ..removeWhere((key, _) => {'id', 'name', 'email'}.contains(key)),
           ),
         },
       ),
+    );
+  }
+
+  Future<void> _setContexts(Scope scope, Json contexts) async {
+    await Future.wait(
+      contexts.entries.map((e) async => scope.setContexts(e.key, e.value)),
     );
   }
 
@@ -92,11 +100,7 @@ class SentryLoggingProvider implements LoggingProvider {
       record.error,
       stackTrace: record.stackTrace,
       hint: Hint.withMap({'data': record.data}),
-      withScope: (scope) async {
-        await Future.wait(
-          contexts.entries.map((e) async => scope.setContexts(e.key, e.value)),
-        );
-      },
+      withScope: (scope) => _setContexts(scope, contexts),
     );
   }
 
@@ -106,10 +110,6 @@ class SentryLoggingProvider implements LoggingProvider {
     String message,
     Json? attributes,
   ) async {
-    if (!FeatureFlagsRepository.I.useSentryLogs) {
-      return;
-    }
-
     final logFn = switch (level) {
       LoggingLevel.error => Sentry.logger.fatal,
       LoggingLevel.exception => Sentry.logger.error,

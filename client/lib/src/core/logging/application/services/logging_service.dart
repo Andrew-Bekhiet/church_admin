@@ -71,6 +71,10 @@ class LoggingService {
   Future<void> dispose() async {
     await _featureFlagsSubscription?.cancel();
     _featureFlagsSubscription = null;
+
+    if (FlutterError.onError == _onFlutterError) {
+      FlutterError.onError = _previousOnError;
+    }
   }
 
   Future<void> startSyncingWithFeatureFlags() async {

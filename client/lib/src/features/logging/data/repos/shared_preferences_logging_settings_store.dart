@@ -5,7 +5,8 @@ class SharedPreferencesLoggingSettingsStore implements LoggingSettingsStore {
   static const String _enableSentryKey = 'logging.enableSentry';
   static const String _enablePostHogKey = 'logging.enablePostHog';
   static const String _enablePostHogLogsKey = 'logging.enablePostHogLogs';
-  static const String _replaySampleRateKey = 'logging.replaySampleRate';
+  static const String _sessionReplaySampleRateKey =
+      'logging.sessionReplaySampleRate';
 
   @override
   Future<LoggingSettings> read() async {
@@ -16,9 +17,9 @@ class SharedPreferencesLoggingSettingsStore implements LoggingSettingsStore {
         'enableSentry': prefs.getBool(_enableSentryKey),
         'enablePostHog': prefs.getBool(_enablePostHogKey),
         'enablePostHogLogs': prefs.getBool(_enablePostHogLogsKey),
-        'replaySampleRate': prefs.getDouble(_replaySampleRateKey),
+        'sessionReplaySampleRate': prefs.getDouble(_sessionReplaySampleRateKey),
       });
-    } on Exception {
+    } catch (_) {
       return LoggingSettings.defaults;
     }
   }
@@ -31,7 +32,10 @@ class SharedPreferencesLoggingSettingsStore implements LoggingSettingsStore {
       prefs.setBool(_enableSentryKey, settings.enableSentry),
       prefs.setBool(_enablePostHogKey, settings.enablePostHog),
       prefs.setBool(_enablePostHogLogsKey, settings.enablePostHogLogs),
-      prefs.setDouble(_replaySampleRateKey, settings.replaySampleRate),
+      prefs.setDouble(
+        _sessionReplaySampleRateKey,
+        settings.sessionReplaySampleRate,
+      ),
     ]);
   }
 }

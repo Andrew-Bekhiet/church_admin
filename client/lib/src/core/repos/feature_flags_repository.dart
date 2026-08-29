@@ -16,11 +16,10 @@ class FeatureFlagsRepository {
   static const String isUnderMaintenanceKey = 'isUnderMaintenance';
   static const String maintenanceMessageKey = 'maintenanceMessage';
   static const String disabledRoutesKey = 'disabledRoutes';
-  static const String useSentryLogsKey = 'useSentryLogs';
   static const String enableSentryKey = 'enableSentry';
   static const String enablePostHogKey = 'enablePostHog';
   static const String enablePostHogLogsKey = 'enablePostHogLogs';
-  static const String postHogReplaySampleRateKey = 'postHogReplaySampleRate';
+  static const String sessionReplaySampleRateKey = 'sessionReplaySampleRate';
   static const String allowAddingCustomObjectsKey = 'allowAddingCustomObjects';
   static const String enablePersonNationalIdKey = 'enablePersonNationalId';
 
@@ -79,22 +78,20 @@ class FeatureFlagsRepository {
     return rawValue.split(',').toSet();
   }
 
-  bool get useSentryLogs => _remoteConfig.getBool(useSentryLogsKey);
-
   bool get enableSentry => _remoteConfig.getBool(enableSentryKey);
 
   bool get enablePostHog => _remoteConfig.getBool(enablePostHogKey);
 
   bool get enablePostHogLogs => _remoteConfig.getBool(enablePostHogLogsKey);
 
-  double get postHogReplaySampleRate =>
-      _remoteConfig.getDouble(postHogReplaySampleRateKey);
+  double get sessionReplaySampleRate =>
+      _remoteConfig.getDouble(sessionReplaySampleRateKey);
 
   LoggingSettings get loggingSettings => LoggingSettings(
     enableSentry: enableSentry,
     enablePostHog: enablePostHog,
     enablePostHogLogs: enablePostHogLogs,
-    replaySampleRate: postHogReplaySampleRate,
+    sessionReplaySampleRate: sessionReplaySampleRate,
   );
 
   Stream<void> get onConfigChanged => kIsWeb
@@ -121,11 +118,10 @@ class FeatureFlagsRepository {
       mustForceUpdateKey: false,
       isUnderMaintenanceKey: false,
       disabledRoutesKey: '',
-      useSentryLogsKey: true,
       enableSentryKey: true,
       enablePostHogKey: true,
       enablePostHogLogsKey: true,
-      postHogReplaySampleRateKey: 1,
+      sessionReplaySampleRateKey: 1,
       enablePersonNationalIdKey: false,
       allowAddingCustomObjectsKey: [
         advancedQueriesMetadata.district.name,

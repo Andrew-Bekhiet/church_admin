@@ -30,9 +30,6 @@ class FakeFeatureFlagsRepo implements FeatureFlagsRepository {
   bool get mustForceUpdate => false;
 
   @override
-  bool get useSentryLogs => true;
-
-  @override
   bool get enableSentry => true;
 
   @override
@@ -42,7 +39,7 @@ class FakeFeatureFlagsRepo implements FeatureFlagsRepository {
   bool get enablePostHogLogs => true;
 
   @override
-  double get postHogReplaySampleRate => 1;
+  double get sessionReplaySampleRate => 1;
 
   @override
   LoggingSettings get loggingSettings => LoggingSettings.defaults;
