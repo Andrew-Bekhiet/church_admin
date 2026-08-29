@@ -40,7 +40,7 @@ void main() {
 
       if (firstScreenVariant.currentValue ==
           FirstScreenVariantEnum.values.first) {
-        verify(LoggingService.I.navigatorObserver);
+        verify(LoggingService.I.navigatorObservers);
       }
 
       final goRouter = tester
@@ -225,7 +225,9 @@ Override _setUpGoRouterRefreshStream() {
 
 Override _setUpLoggingService() {
   final mockLoggingService = MockLoggingService();
-  when(mockLoggingService.navigatorObserver).thenReturn(NavigatorObserver());
+  when(
+    mockLoggingService.navigatorObservers,
+  ).thenReturn([NavigatorObserver()]);
 
   return loggingServiceProvider.overrideWithValue(mockLoggingService);
 }

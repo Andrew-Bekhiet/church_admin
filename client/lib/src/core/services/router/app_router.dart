@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 final GoRouter $appRouter = GoRouter(
-  observers: [LoggingService.I.navigatorObserver],
+  observers: LoggingService.I.navigatorObservers,
   extraCodec: ChurchAdminRouterExtraCodec(),
   refreshListenable: GoRouterRefreshStream.I,
   redirect: (context, state) {

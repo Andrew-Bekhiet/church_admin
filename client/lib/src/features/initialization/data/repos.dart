@@ -7,7 +7,7 @@ export 'repos/flutter_local_notifications_init.dart';
 export 'repos/fmtc_init.dart';
 export 'repos/initializer.dart';
 export 'repos/intl_locale_messages_init.dart';
+export 'repos/logging_init.dart';
 export 'repos/package_info_init.dart';
 export 'repos/sembast_init.dart';
-export 'repos/sentry_init.dart';
 export 'repos/web_navigation_init.dart';

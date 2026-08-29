@@ -162,8 +162,16 @@ final authBlocProvider = Provider<AuthBloc>((ref) {
   return authBloc;
 });
 
+final loggingProvidersProvider = Provider<List<LoggingProvider>>(
+  (ref) => [SentryLoggingProvider()],
+);
+
 final loggingServiceProvider = Provider<LoggingService>(
-  (ref) => LoggingService(),
+  (ref) => LoggingService(ref.watch(loggingProvidersProvider)),
+);
+
+final loggingBlocObserverProvider = Provider<LoggingBlocObserver>(
+  (ref) => LoggingBlocObserver(ref.watch(loggingServiceProvider)),
 );
 
 final userPreferencesServiceProvider = Provider<UserPreferencesService>(

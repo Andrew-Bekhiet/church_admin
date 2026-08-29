@@ -3,12 +3,11 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i9;
+import 'dart:async' as _i8;
 
-import 'package:church_admin/church_admin.dart' as _i7;
-import 'package:dio/dio.dart' as _i6;
-import 'package:flutter/material.dart' as _i5;
-import 'package:flutter_bloc/flutter_bloc.dart' as _i8;
+import 'package:church_admin/church_admin.dart' as _i6;
+import 'package:dio/dio.dart' as _i5;
+import 'package:flutter/material.dart' as _i7;
 import 'package:gql_exec/src/context.dart' as _i3;
 import 'package:gql_exec/src/operation.dart' as _i2;
 import 'package:graphql/client.dart' as _i4;
@@ -49,19 +48,13 @@ class _FakeResponse_3 extends _i1.SmartFake implements _i4.Response {
     : super(parent, parentInvocation);
 }
 
-class _FakeNavigatorObserver_4 extends _i1.SmartFake
-    implements _i5.NavigatorObserver {
-  _FakeNavigatorObserver_4(Object parent, Invocation parentInvocation)
+class _FakeInterceptor_4 extends _i1.SmartFake implements _i5.Interceptor {
+  _FakeInterceptor_4(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeInterceptor_5 extends _i1.SmartFake implements _i6.Interceptor {
-  _FakeInterceptor_5(Object parent, Invocation parentInvocation)
-    : super(parent, parentInvocation);
-}
-
-class _FakeLink_6 extends _i1.SmartFake implements _i4.Link {
-  _FakeLink_6(Object parent, Invocation parentInvocation)
+class _FakeLink_5 extends _i1.SmartFake implements _i4.Link {
+  _FakeLink_5(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
@@ -198,43 +191,46 @@ class MockResponse extends _i1.Mock implements _i4.Response {
 /// A class which mocks [LoggingService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockLoggingService extends _i1.Mock implements _i7.LoggingService {
+class MockLoggingService extends _i1.Mock implements _i6.LoggingService {
   @override
-  _i5.NavigatorObserver get navigatorObserver =>
+  List<_i6.LoggingProvider> get providers =>
       (super.noSuchMethod(
-            Invocation.getter(#navigatorObserver),
-            returnValue: _FakeNavigatorObserver_4(
-              this,
-              Invocation.getter(#navigatorObserver),
-            ),
-            returnValueForMissingStub: _FakeNavigatorObserver_4(
-              this,
-              Invocation.getter(#navigatorObserver),
-            ),
+            Invocation.getter(#providers),
+            returnValue: <_i6.LoggingProvider>[],
+            returnValueForMissingStub: <_i6.LoggingProvider>[],
           )
-          as _i5.NavigatorObserver);
+          as List<_i6.LoggingProvider>);
 
   @override
-  _i6.Interceptor get dioInterceptor =>
+  List<_i7.NavigatorObserver> get navigatorObservers =>
+      (super.noSuchMethod(
+            Invocation.getter(#navigatorObservers),
+            returnValue: <_i7.NavigatorObserver>[],
+            returnValueForMissingStub: <_i7.NavigatorObserver>[],
+          )
+          as List<_i7.NavigatorObserver>);
+
+  @override
+  _i5.Interceptor get dioInterceptor =>
       (super.noSuchMethod(
             Invocation.getter(#dioInterceptor),
-            returnValue: _FakeInterceptor_5(
+            returnValue: _FakeInterceptor_4(
               this,
               Invocation.getter(#dioInterceptor),
             ),
-            returnValueForMissingStub: _FakeInterceptor_5(
+            returnValueForMissingStub: _FakeInterceptor_4(
               this,
               Invocation.getter(#dioInterceptor),
             ),
           )
-          as _i6.Interceptor);
+          as _i5.Interceptor);
 
   @override
   _i4.Link get loggingLink =>
       (super.noSuchMethod(
             Invocation.getter(#loggingLink),
-            returnValue: _FakeLink_6(this, Invocation.getter(#loggingLink)),
-            returnValueForMissingStub: _FakeLink_6(
+            returnValue: _FakeLink_5(this, Invocation.getter(#loggingLink)),
+            returnValueForMissingStub: _FakeLink_5(
               this,
               Invocation.getter(#loggingLink),
             ),
@@ -242,133 +238,95 @@ class MockLoggingService extends _i1.Mock implements _i7.LoggingService {
           as _i4.Link);
 
   @override
-  void onError(
-    _i8.BlocBase<dynamic>? bloc,
-    Object? error,
-    StackTrace? stackTrace,
-  ) => super.noSuchMethod(
-    Invocation.method(#onError, [bloc, error, stackTrace]),
-    returnValueForMissingStub: null,
-  );
+  _i8.Future<void> initialize() =>
+      (super.noSuchMethod(
+            Invocation.method(#initialize, []),
+            returnValue: _i8.Future<void>.value(),
+            returnValueForMissingStub: _i8.Future<void>.value(),
+          )
+          as _i8.Future<void>);
 
   @override
-  void onEvent(_i8.Bloc<dynamic, dynamic>? bloc, Object? event) =>
-      super.noSuchMethod(
-        Invocation.method(#onEvent, [bloc, event]),
-        returnValueForMissingStub: null,
-      );
+  _i8.Future<void> identify(_i6.LoggingUser? user) =>
+      (super.noSuchMethod(
+            Invocation.method(#identify, [user]),
+            returnValue: _i8.Future<void>.value(),
+            returnValueForMissingStub: _i8.Future<void>.value(),
+          )
+          as _i8.Future<void>);
 
   @override
-  void onTransition(
-    _i8.Bloc<dynamic, dynamic>? bloc,
-    _i8.Transition<dynamic, dynamic>? transition,
-  ) => super.noSuchMethod(
-    Invocation.method(#onTransition, [bloc, transition]),
-    returnValueForMissingStub: null,
-  );
-
-  @override
-  _i9.Future<void> log(_i7.LoggingLevel? level, _i7.LogRecord? record) =>
+  _i8.Future<void> log(_i6.LoggingLevel? level, _i6.LogRecord? record) =>
       (super.noSuchMethod(
             Invocation.method(#log, [level, record]),
-            returnValue: _i9.Future<void>.value(),
-            returnValueForMissingStub: _i9.Future<void>.value(),
+            returnValue: _i8.Future<void>.value(),
+            returnValueForMissingStub: _i8.Future<void>.value(),
           )
-          as _i9.Future<void>);
+          as _i8.Future<void>);
 
   @override
-  _i9.Future<void> fine(_i7.LogRecord? record) =>
+  _i8.Future<void> fine(_i6.LogRecord? record) =>
       (super.noSuchMethod(
             Invocation.method(#fine, [record]),
-            returnValue: _i9.Future<void>.value(),
-            returnValueForMissingStub: _i9.Future<void>.value(),
+            returnValue: _i8.Future<void>.value(),
+            returnValueForMissingStub: _i8.Future<void>.value(),
           )
-          as _i9.Future<void>);
+          as _i8.Future<void>);
 
   @override
-  _i9.Future<void> config(_i7.LogRecord? record) =>
+  _i8.Future<void> config(_i6.LogRecord? record) =>
       (super.noSuchMethod(
             Invocation.method(#config, [record]),
-            returnValue: _i9.Future<void>.value(),
-            returnValueForMissingStub: _i9.Future<void>.value(),
+            returnValue: _i8.Future<void>.value(),
+            returnValueForMissingStub: _i8.Future<void>.value(),
           )
-          as _i9.Future<void>);
+          as _i8.Future<void>);
 
   @override
-  _i9.Future<void> info(_i7.LogRecord? record) =>
+  _i8.Future<void> info(_i6.LogRecord? record) =>
       (super.noSuchMethod(
             Invocation.method(#info, [record]),
-            returnValue: _i9.Future<void>.value(),
-            returnValueForMissingStub: _i9.Future<void>.value(),
+            returnValue: _i8.Future<void>.value(),
+            returnValueForMissingStub: _i8.Future<void>.value(),
           )
-          as _i9.Future<void>);
+          as _i8.Future<void>);
 
   @override
-  _i9.Future<void> warning(_i7.LogRecord? record) =>
+  _i8.Future<void> warning(_i6.LogRecord? record) =>
       (super.noSuchMethod(
             Invocation.method(#warning, [record]),
-            returnValue: _i9.Future<void>.value(),
-            returnValueForMissingStub: _i9.Future<void>.value(),
+            returnValue: _i8.Future<void>.value(),
+            returnValueForMissingStub: _i8.Future<void>.value(),
           )
-          as _i9.Future<void>);
+          as _i8.Future<void>);
 
   @override
-  _i9.Future<void> exception(_i7.LogRecord? record) =>
+  _i8.Future<void> exception(_i6.LogRecord? record) =>
       (super.noSuchMethod(
             Invocation.method(#exception, [record]),
-            returnValue: _i9.Future<void>.value(),
-            returnValueForMissingStub: _i9.Future<void>.value(),
+            returnValue: _i8.Future<void>.value(),
+            returnValueForMissingStub: _i8.Future<void>.value(),
           )
-          as _i9.Future<void>);
+          as _i8.Future<void>);
 
   @override
-  _i9.Future<void> error(_i7.LogRecord? record) =>
+  _i8.Future<void> error(_i6.LogRecord? record) =>
       (super.noSuchMethod(
             Invocation.method(#error, [record]),
-            returnValue: _i9.Future<void>.value(),
-            returnValueForMissingStub: _i9.Future<void>.value(),
+            returnValue: _i8.Future<void>.value(),
+            returnValueForMissingStub: _i8.Future<void>.value(),
           )
-          as _i9.Future<void>);
+          as _i8.Future<void>);
 
   @override
-  _i9.Future<void> showErrorDialogAndReport(
-    _i5.BuildContext? context,
-    _i7.LogRecord? record,
+  _i8.Future<void> showErrorDialogAndReport(
+    _i7.BuildContext? context,
+    _i6.LogRecord? record,
   ) =>
       (super.noSuchMethod(
             Invocation.method(#showErrorDialogAndReport, [context, record]),
-            returnValue: _i9.Future<void>.value(),
-            returnValueForMissingStub: _i9.Future<void>.value(),
+            returnValue: _i8.Future<void>.value(),
+            returnValueForMissingStub: _i8.Future<void>.value(),
           )
-          as _i9.Future<void>);
-
-  @override
-  void onCreate(_i8.BlocBase<dynamic>? bloc) => super.noSuchMethod(
-    Invocation.method(#onCreate, [bloc]),
-    returnValueForMissingStub: null,
-  );
-
-  @override
-  void onChange(_i8.BlocBase<dynamic>? bloc, _i8.Change<dynamic>? change) =>
-      super.noSuchMethod(
-        Invocation.method(#onChange, [bloc, change]),
-        returnValueForMissingStub: null,
-      );
-
-  @override
-  void onDone(
-    _i8.Bloc<dynamic, dynamic>? bloc,
-    Object? event, [
-    Object? error,
-    StackTrace? stackTrace,
-  ]) => super.noSuchMethod(
-    Invocation.method(#onDone, [bloc, event, error, stackTrace]),
-    returnValueForMissingStub: null,
-  );
-
-  @override
-  void onClose(_i8.BlocBase<dynamic>? bloc) => super.noSuchMethod(
-    Invocation.method(#onClose, [bloc]),
-    returnValueForMissingStub: null,
-  );
+          as _i8.Future<void>);
 }

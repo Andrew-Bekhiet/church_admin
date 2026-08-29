@@ -339,7 +339,9 @@ Override _setUpGoRouterRefreshStream() {
 Override _setUpLoggingService() {
   final loggingService = MockLoggingService();
 
-  when(loggingService.navigatorObserver).thenReturn(NavigatorObserver());
+  when(
+    loggingService.navigatorObservers,
+  ).thenReturn([NavigatorObserver()]);
 
   return loggingServiceProvider.overrideWithValue(loggingService);
 }
