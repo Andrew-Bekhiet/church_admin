@@ -8,6 +8,10 @@ class SecretsService {
   String get hasuraServer => const String.fromEnvironment('HASURA_SERVER');
   @pragma('vm:prefer-inline')
   String get sentryDSN => const String.fromEnvironment('SENTRY_DSN');
+  @pragma('vm:prefer-inline')
+  String get postHogToken => const String.fromEnvironment('POSTHOG_TOKEN');
+  @pragma('vm:prefer-inline')
+  String get postHogHost => const String.fromEnvironment('POSTHOG_HOST');
 
   @pragma('vm:prefer-inline')
   String get webRecaptchaSiteKey =>

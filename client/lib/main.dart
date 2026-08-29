@@ -5,6 +5,7 @@ import 'package:flutter/material.dart' hide Notification;
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:posthog_flutter/posthog_flutter.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 
 Future<void> main() async {
@@ -21,7 +22,9 @@ Future<void> main() async {
   runApp(
     UncontrolledProviderScope(
       container: globalProviderContainer,
-      child: SentryWidget(child: const ChurchAdminSplashScreen()),
+      child: PostHogWidget(
+        child: SentryWidget(child: const ChurchAdminSplashScreen()),
+      ),
     ),
   );
   FlutterNativeSplash.remove();
@@ -31,7 +34,7 @@ Future<void> main() async {
   runApp(
     UncontrolledProviderScope(
       container: globalProviderContainer,
-      child: SentryWidget(child: const ChurchAdminApp()),
+      child: PostHogWidget(child: SentryWidget(child: const ChurchAdminApp())),
     ),
   );
 }
