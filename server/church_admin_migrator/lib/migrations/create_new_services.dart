@@ -1,6 +1,8 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin_migrator/models/church_admin_context.dart';
 import 'package:church_admin_migrator/models/id_reference.dart';
+import 'package:church_admin_migrator/models/meetinghelper/models/data/person.dart'
+    as meetinghelper;
 import 'package:church_admin_migrator/models/meetinghelper_context.dart';
 
 final _newServices = [
@@ -166,4 +168,37 @@ Service? serviceForStudyYearOrder(
       churchAdminContext.services[IdReference.fromPath(
         'Services/خدمة إعداد خدام',
       )];
+}
+
+/// The services a legacy MeetingHelper [person] belongs to: every legacy
+/// service they carry over, plus the parent service of the class they are
+/// enrolled in.
+List<Service> migratedServicesForMeetingHelperPerson(
+  ChurchAdminContext churchAdminContext,
+  meetinghelper.Person person,
+) {
+  return [
+    for (final serviceRef in person.services)
+      ?churchAdminContext.services[serviceRef],
+    if (person.classId case final classId?)
+      ?churchAdminContext.classes[classId]?.service,
+  ];
+}
+
+/// The service ids [person] is exported into. A person who already belongs to
+/// a class's parent service or to a legacy service keeps exactly those; only a
+/// person with neither is auto-enrolled into the standard study-year service.
+Set<String> exportedServiceIdsForPerson(
+  ChurchAdminContext churchAdminContext,
+  Person person,
+) {
+  final serviceIds = {...?person.services?.map((s) => s.id)};
+  if (serviceIds.isNotEmpty) return serviceIds;
+
+  final studyYearOrder = person.studyYear?.order;
+  if (studyYearOrder == null) return serviceIds;
+
+  return {
+    ?standardServiceForStudyYearOrder(churchAdminContext, studyYearOrder)?.id,
+  };
 }

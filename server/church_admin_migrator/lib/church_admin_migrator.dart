@@ -438,10 +438,10 @@ Future<void> _migrateMeetingHelperPersons(
       martialStatus: MartialStatus.single,
       studyYear: churchAdminContext
           .studyYears[meetingHelperContext.studyYears[person.studyYear]?.grade],
-      services: [
-        for (final serviceRef in person.services)
-          ?churchAdminContext.services[serviceRef],
-      ],
+      services: migratedServicesForMeetingHelperPerson(
+        churchAdminContext,
+        person,
+      ),
       workStatus: WorkStatus.student,
       father: churchAdminContext.fathers[person.cFather],
       // shammas_level_id must be null when is_shammas is false to satisfy the
