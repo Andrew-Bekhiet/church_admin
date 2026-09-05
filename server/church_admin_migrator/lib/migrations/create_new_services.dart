@@ -170,10 +170,7 @@ Service? serviceForStudyYearOrder(
       )];
 }
 
-/// The services a legacy MeetingHelper [person] belongs to: every legacy
-/// service they carry over, plus the parent service of the class they are
-/// enrolled in.
-List<Service> migratedServicesForMeetingHelperPerson(
+List<Service> legacyAndClassParentServices(
   ChurchAdminContext churchAdminContext,
   meetinghelper.Person person,
 ) {
@@ -185,10 +182,7 @@ List<Service> migratedServicesForMeetingHelperPerson(
   ];
 }
 
-/// The service ids [person] is exported into. A person who already belongs to
-/// a class's parent service or to a legacy service keeps exactly those; only a
-/// person with neither is auto-enrolled into the standard study-year service.
-Set<String> exportedServiceIdsForPerson(
+Set<String> serviceIdsWithStudyYearFallback(
   ChurchAdminContext churchAdminContext,
   Person person,
 ) {

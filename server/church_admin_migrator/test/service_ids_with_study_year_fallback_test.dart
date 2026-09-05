@@ -20,7 +20,7 @@ void main() {
   });
 
   test(
-    'exportedServiceIdsForPerson_whenPersonHasLegacyServices_returnsOnlyThoseServices',
+    'serviceIdsWithStudyYearFallback_whenPersonHasLegacyServices_returnsOnlyThoseServices',
     () {
       final person = Person(
         id: 'person-1',
@@ -29,14 +29,14 @@ void main() {
         studyYear: StudyYear(order: 11, name: 'ثانية ثانوي'),
       );
 
-      final result = exportedServiceIdsForPerson(churchAdminContext, person);
+      final result = serviceIdsWithStudyYearFallback(churchAdminContext, person);
 
       expect(result, {'خدمة قديمة'});
     },
   );
 
   test(
-    'exportedServiceIdsForPerson_whenPersonHasNoServicesButAStudyYear_returnsTheStandardStudyYearService',
+    'serviceIdsWithStudyYearFallback_whenPersonHasNoServicesButAStudyYear_returnsTheStandardStudyYearService',
     () {
       final person = Person(
         id: 'person-2',
@@ -44,25 +44,25 @@ void main() {
         studyYear: StudyYear(order: 11, name: 'ثانية ثانوي'),
       );
 
-      final result = exportedServiceIdsForPerson(churchAdminContext, person);
+      final result = serviceIdsWithStudyYearFallback(churchAdminContext, person);
 
       expect(result, {'خدمة ثانوي'});
     },
   );
 
   test(
-    'exportedServiceIdsForPerson_whenPersonHasNoServicesAndNoStudyYear_returnsEmpty',
+    'serviceIdsWithStudyYearFallback_whenPersonHasNoServicesAndNoStudyYear_returnsEmpty',
     () {
       final person = Person(id: 'person-3', name: 'Test Person');
 
-      final result = exportedServiceIdsForPerson(churchAdminContext, person);
+      final result = serviceIdsWithStudyYearFallback(churchAdminContext, person);
 
       expect(result, isEmpty);
     },
   );
 
   test(
-    'exportedServiceIdsForPerson_whenStudyYearFallsOutsideEveryServiceRange_returnsEmpty',
+    'serviceIdsWithStudyYearFallback_whenStudyYearFallsOutsideEveryServiceRange_returnsEmpty',
     () {
       final person = Person(
         id: 'person-4',
@@ -70,7 +70,7 @@ void main() {
         studyYear: StudyYear(order: 20, name: 'Beyond University'),
       );
 
-      final result = exportedServiceIdsForPerson(churchAdminContext, person);
+      final result = serviceIdsWithStudyYearFallback(churchAdminContext, person);
 
       expect(result, isEmpty);
     },

@@ -438,7 +438,7 @@ Future<void> _migrateMeetingHelperPersons(
       martialStatus: MartialStatus.single,
       studyYear: churchAdminContext
           .studyYears[meetingHelperContext.studyYears[person.studyYear]?.grade],
-      services: migratedServicesForMeetingHelperPerson(
+      services: legacyAndClassParentServices(
         churchAdminContext,
         person,
       ),

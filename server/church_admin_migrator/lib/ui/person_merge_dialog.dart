@@ -385,7 +385,7 @@ class _PersonMergeDialogState extends State<_PersonMergeDialog> {
       for (final service in existingPerson.services ?? const <Service>[])
         service.id: service,
     };
-    for (final service in migratedServicesForMeetingHelperPerson(
+    for (final service in legacyAndClassParentServices(
       churchAdminContext,
       newPerson,
     )) {

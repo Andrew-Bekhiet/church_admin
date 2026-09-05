@@ -441,7 +441,7 @@ class ChurchAdminCsvExporter {
       'persons_services',
       churchAdminContext.persons.values
           .expand(
-            (p) => exportedServiceIdsForPerson(
+            (p) => serviceIdsWithStudyYearFallback(
               churchAdminContext,
               p,
             ).map((serviceId) => (personId: p.id, serviceId: serviceId)),
