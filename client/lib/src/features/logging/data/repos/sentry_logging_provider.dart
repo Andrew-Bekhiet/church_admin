@@ -36,7 +36,7 @@ class SentryLoggingProvider implements LoggingProvider {
         ..enableUserInteractionTracing = true
         ..replay.sessionSampleRate = settings.sessionReplaySampleRate
         ..replay.onErrorSampleRate = 1
-        ..privacy.maskAllText = false
+        ..privacy.maskAllText = true
         ..privacy.maskAllImages = true,
     );
   }

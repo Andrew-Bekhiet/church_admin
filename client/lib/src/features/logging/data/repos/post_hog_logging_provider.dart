@@ -27,7 +27,7 @@ class PostHogLoggingProvider implements LoggingProvider {
       ..host = secretsService.postHogHost
       ..sessionReplay = true
       ..sessionReplayConfig.sampleRate = settings.sessionReplaySampleRate
-      ..sessionReplayConfig.maskAllTexts = false
+      ..sessionReplayConfig.maskAllTexts = true
       ..sessionReplayConfig.maskAllImages = true
       ..sessionReplayConfig.maskAllPlatformViews = false
       ..surveys = true
