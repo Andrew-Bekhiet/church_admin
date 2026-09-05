@@ -105,6 +105,7 @@ class _ViewGeodataMapState extends State<ViewGeodataMap>
   @override
   void dispose() {
     unawaited(_mapOptions.close());
+    _sheetScrollController.dispose();
 
     super.dispose();
   }

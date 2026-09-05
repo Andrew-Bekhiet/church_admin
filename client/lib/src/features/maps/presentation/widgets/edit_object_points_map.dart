@@ -226,6 +226,7 @@ class _EditObjectPointsMap<T extends ViewableWithID>
   void dispose() {
     unawaited(_mapOptionsStream.close());
     unawaited(resultObject.close());
+    _sheetScrollController.dispose();
 
     super.dispose();
   }

@@ -11,7 +11,6 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:rxdart_ext/single.dart';
 
-import '../../utils.dart';
 import 'services_hierarchy_list_test.mocks.dart';
 
 @GenerateNiceMocks(
@@ -127,7 +126,6 @@ Future<void> main() async {
 
       // Dispose the main widget:
       await tester.pumpWidget(Container());
-      flushVisibilityDetectors();
 
       unawaited(viewableObjectListController.dispose());
     },
@@ -183,7 +181,7 @@ Future<void> main() async {
 
       // Dispose the main widget:
       await tester.pumpWidget(Container());
-      flushVisibilityDetectors();
+
       unawaited(viewableObjectListController.dispose());
     },
   );
@@ -289,7 +287,6 @@ Future<void> main() async {
 
       // Dispose the main widget:
       await tester.pumpWidget(Container());
-      flushVisibilityDetectors();
       unawaited(viewableObjectListController.dispose());
     },
   );

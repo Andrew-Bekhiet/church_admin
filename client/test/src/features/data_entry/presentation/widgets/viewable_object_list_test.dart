@@ -11,7 +11,6 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:rxdart/rxdart.dart';
 
-import '../../../../utils.dart';
 import 'viewable_object_list_test.mocks.dart';
 
 @GenerateNiceMocks([
@@ -106,7 +105,6 @@ void main() {
         findsOneWidget,
       );
 
-      flushVisibilityDetectors();
       unawaited(controller.dispose());
     },
   );
@@ -176,7 +174,6 @@ void main() {
       await tester.pumpAndSettle();
       expect(find.byType(Checkbox), findsNothing);
 
-      flushVisibilityDetectors();
       unawaited(controller.dispose());
     },
   );
@@ -243,7 +240,6 @@ void main() {
       );
 
       await filterStream.close();
-      flushVisibilityDetectors();
       unawaited(controller.dispose());
     },
   );
@@ -292,7 +288,6 @@ void main() {
 
       verify(paginatableStream.listenToNextPage()).called(1);
 
-      flushVisibilityDetectors();
       unawaited(controller.dispose());
     },
   );

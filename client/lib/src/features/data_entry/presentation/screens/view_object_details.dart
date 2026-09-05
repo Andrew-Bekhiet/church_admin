@@ -251,6 +251,7 @@ class _ViewObjectDetailsState<T extends ViewableWithIDAndImage>
 
   @override
   void dispose() {
+    _scrollController.dispose();
     _scrollTimer?.cancel();
     super.dispose();
   }

@@ -5,12 +5,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:mockito/mockito.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:visibility_detector/visibility_detector.dart';
-
-void flushVisibilityDetectors() {
-  VisibilityDetectorController.instance.updateInterval = Duration.zero;
-  VisibilityDetectorController.instance.notifyNow();
-}
 
 WidgetWrapper materialAppWithThemeAndLocale() => materialAppWrapper(
   localeOverrides: [const Locale('ar', 'EG')],

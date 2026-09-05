@@ -154,4 +154,10 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
       }
     }
   }
+
+  @override
+  void dispose() {
+    _passwordText.dispose();
+    super.dispose();
+  }
 }

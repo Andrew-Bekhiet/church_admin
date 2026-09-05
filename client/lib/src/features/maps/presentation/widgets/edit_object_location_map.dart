@@ -167,6 +167,7 @@ class _EditObjectLocationMap<T extends ViewableWithID>
     unawaited(_mapOptionsStream.close());
     unawaited(_userLocationSubject.close());
     unawaited(resultObject.close());
+    _sheetScrollController.dispose();
 
     super.dispose();
   }
