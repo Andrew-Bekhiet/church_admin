@@ -1,6 +1,8 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin_migrator/models/church_admin_context.dart';
 import 'package:church_admin_migrator/models/id_reference.dart';
+import 'package:church_admin_migrator/models/meetinghelper/models/data/person.dart'
+    as meetinghelper;
 import 'package:church_admin_migrator/models/meetinghelper_context.dart';
 
 final _newServices = [
@@ -166,4 +168,31 @@ Service? serviceForStudyYearOrder(
       churchAdminContext.services[IdReference.fromPath(
         'Services/خدمة إعداد خدام',
       )];
+}
+
+List<Service> legacyAndClassParentServices(
+  ChurchAdminContext churchAdminContext,
+  meetinghelper.Person person,
+) {
+  return [
+    for (final serviceRef in person.services)
+      ?churchAdminContext.services[serviceRef],
+    if (person.classId case final classId?)
+      ?churchAdminContext.classes[classId]?.service,
+  ];
+}
+
+Set<String> serviceIdsWithStudyYearFallback(
+  ChurchAdminContext churchAdminContext,
+  Person person,
+) {
+  final serviceIds = {...?person.services?.map((s) => s.id)};
+  if (serviceIds.isNotEmpty) return serviceIds;
+
+  final studyYearOrder = person.studyYear?.order;
+  if (studyYearOrder == null) return serviceIds;
+
+  return {
+    ?standardServiceForStudyYearOrder(churchAdminContext, studyYearOrder)?.id,
+  };
 }

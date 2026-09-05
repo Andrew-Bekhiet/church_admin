@@ -441,29 +441,10 @@ class ChurchAdminCsvExporter {
       'persons_services',
       churchAdminContext.persons.values
           .expand(
-            (p) {
-              // Each person keeps their legacy service links, plus is auto
-              // enrolled into the standard study-year service whose range
-              // contains their study year (KG/primary/middle/high/university).
-              final serviceIds = <String>{
-                ...?p.services?.map((s) => s.id),
-              };
-
-              final studyYearOrder = p.studyYear?.order;
-              if (studyYearOrder != null) {
-                final standardService = standardServiceForStudyYearOrder(
-                  churchAdminContext,
-                  studyYearOrder,
-                );
-                if (standardService != null) {
-                  serviceIds.add(standardService.id);
-                }
-              }
-
-              return serviceIds.map(
-                (serviceId) => (personId: p.id, serviceId: serviceId),
-              );
-            },
+            (p) => serviceIdsWithStudyYearFallback(
+              churchAdminContext,
+              p,
+            ).map((serviceId) => (personId: p.id, serviceId: serviceId)),
           )
           .map(
             (ps) => _ToJsonAdapter(

@@ -1,4 +1,5 @@
 import 'package:church_admin/church_admin.dart';
+import 'package:church_admin_migrator/migrations/create_new_services.dart';
 import 'package:church_admin_migrator/models/church_admin_context.dart';
 import 'package:church_admin_migrator/models/id_reference.dart';
 import 'package:church_admin_migrator/models/meetinghelper/models/data/person.dart'
@@ -384,9 +385,11 @@ class _PersonMergeDialogState extends State<_PersonMergeDialog> {
       for (final service in existingPerson.services ?? const <Service>[])
         service.id: service,
     };
-    for (final serviceRef in newPerson.services) {
-      final service = churchAdminContext.services[serviceRef];
-      if (service != null) mergedServicesById[service.id] = service;
+    for (final service in legacyAndClassParentServices(
+      churchAdminContext,
+      newPerson,
+    )) {
+      mergedServicesById[service.id] = service;
     }
     final mergedServices = mergedServicesById.values.toList();
 
