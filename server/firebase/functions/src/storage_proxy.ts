@@ -1,4 +1,4 @@
-import { storage } from "firebase-admin";
+import { getStorage } from "firebase-admin/storage";
 import { storageBucket } from "firebase-functions/params";
 import { https } from "firebase-functions/v2";
 import { AuthData } from "firebase-functions/v2/tasks";
@@ -26,7 +26,7 @@ export const deletePhoto = https.onCall({}, async (req) => {
 
   console.log("Deleting photo", { table, id, hasuraUID });
 
-  await storage().bucket(storageBucket.value()).file(path)
+  await getStorage().bucket(storageBucket.value()).file(path)
     .delete();
   await updatePhotoTime(table as PhotoTable, id, null);
 
@@ -43,7 +43,7 @@ export const getDownloadUrl = https.onCall({}, async (req) => {
   );
 
   return (
-    await storage()
+    await getStorage()
       .bucket(storageBucket.value())
       .file(path)
       .getSignedUrl({
@@ -65,7 +65,7 @@ export const getUploadUrl = https.onCall({}, async (req) => {
   );
 
   return (
-    await storage()
+    await getStorage()
       .bucket(storageBucket.value())
       .file(path)
       .getSignedUrl({

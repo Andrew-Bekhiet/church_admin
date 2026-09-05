@@ -1,5 +1,5 @@
 import { File, GetFilesOptions, GetFilesResponse } from "@google-cloud/storage";
-import { storage } from "firebase-admin";
+import { getStorage } from "firebase-admin/storage";
 import { https } from "firebase-functions/v2";
 import { assertUserAuthenticatedAndApproved } from "./common";
 
@@ -25,7 +25,7 @@ export const getAppDownloadLink = https.onCall({}, async (context) => {
     "Generating download link for user",
     currentUser.uid,
     "platform",
-    platform
+    platform,
   );
 
   let nextPageToken: string | undefined;
@@ -33,13 +33,13 @@ export const getAppDownloadLink = https.onCall({}, async (context) => {
   let maxVersion: { file: File | null; version: Version } | undefined;
 
   do {
-    response = await storage()
+    response = await getStorage()
       .bucket(process.env["APP_RELEASE_GCS_BUCKET"])
       .getFiles({ prefix: "app-release-v", pageToken: nextPageToken });
 
     maxVersion = response[0].reduce((maxResult, file) => {
       const versionMatch = file.name.match(
-        `app-release-v(\\d+)\\.(\\d+)\\.(\\d+)\\.${extension}`
+        `app-release-v(\\d+)\\.(\\d+)\\.(\\d+)\\.${extension}`,
       );
       const maxVersion = maxResult.version;
 
@@ -73,21 +73,21 @@ export const getAppDownloadLink = https.onCall({}, async (context) => {
       "Max version",
       maxVersion.version,
       "nextPageToken",
-      nextPageToken
+      nextPageToken,
     );
   } while (nextPageToken);
 
-  const maxVersionString = `${maxVersion.version.major}.${maxVersion.version.minor}.${maxVersion.version.patch}`;
+  const maxVersionString =
+    `${maxVersion.version.major}.${maxVersion.version.minor}.${maxVersion.version.patch}`;
 
   return (
-    await storage()
+    await getStorage()
       .bucket(process.env["APP_RELEASE_GCS_BUCKET"])
       .file(`app-release-v${maxVersionString}.${extension}`)
       .getSignedUrl({
         queryParams: {
           "content-length": maxVersion.file!.metadata.size?.toString() ?? "",
-          "response-content-type":
-            maxVersion.file!.metadata.contentType ??
+          "response-content-type": maxVersion.file!.metadata.contentType ??
             (platform === "android"
               ? "application/vnd.android.package-archive"
               : "application/octet-stream"),

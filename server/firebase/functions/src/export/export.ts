@@ -1,4 +1,4 @@
-import { storage } from "firebase-admin";
+import { getStorage } from "firebase-admin/storage";
 import { storageBucket } from "firebase-functions/params";
 import { https } from "firebase-functions/v2";
 import * as fs from "fs";
@@ -103,7 +103,7 @@ export async function exportDataHandler(
 
   const workbookDataBuffer = buildWorkbookBuffer(payload);
 
-  const file = storage()
+  const file = getStorage()
     .bucket(storageBucket.value())
     .file(`exports/${hasuraUID}/${exportId}.xlsx`);
   await file.save(workbookDataBuffer, {

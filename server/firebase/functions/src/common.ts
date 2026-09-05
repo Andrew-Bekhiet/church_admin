@@ -1,11 +1,11 @@
-import { auth } from "firebase-admin";
+import { getAuth, UserRecord } from "firebase-admin/auth";
 import { https } from "firebase-functions/v2";
 import { AuthData } from "firebase-functions/v2/tasks";
 import { checkUserApproved } from "./hasura_interface";
 
 export async function assertUserAuthenticatedAndApproved(
-  authData: AuthData | undefined
-): Promise<auth.UserRecord> {
+  authData: AuthData | undefined,
+): Promise<UserRecord> {
   if (!authData) {
     console.error("User not authenticated");
     throw new https.HttpsError("unauthenticated", "unauthenticated");
@@ -14,7 +14,7 @@ export async function assertUserAuthenticatedAndApproved(
     throw new https.HttpsError("unauthenticated", "unauthenticated");
   }
 
-  const authUser = await auth().getUser(authData!.uid!);
+  const authUser = await getAuth().getUser(authData!.uid!);
 
   if (!authUser.multiFactor) {
     console.error("User does not have 2FA enabled");

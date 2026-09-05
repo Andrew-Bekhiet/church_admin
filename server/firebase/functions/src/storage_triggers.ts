@@ -1,5 +1,5 @@
 import { encode } from "blurhash";
-import { storage } from "firebase-admin";
+import { getStorage } from "firebase-admin/storage";
 import { storageBucket } from "firebase-functions/params";
 import { storage as functions_storage } from "firebase-functions/v2";
 import * as sharp from "sharp";
@@ -32,12 +32,12 @@ export const onPhotoUploaded = functions_storage.onObjectFinalized(
 );
 
 export async function getImageBlurHash(object: { name?: string }) {
-  const downloadData = await storage()
+  const downloadData = await getStorage()
     .bucket(storageBucket.value())
     .file(object.name!)
     .download();
 
-  const { data: pixels, info: metadata } = await sharp(downloadData[0])
+  const { data: pixels, info: metadata } = await sharp.default(downloadData[0])
     .resize({ width: 1024, height: 1024, fit: "inside" })
     .raw()
     .ensureAlpha()

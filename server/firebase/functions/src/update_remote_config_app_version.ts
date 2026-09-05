@@ -1,5 +1,6 @@
 import * as admin from "firebase-admin";
 import { applicationDefault } from "firebase-admin/app";
+import { getRemoteConfig } from "firebase-admin/remote-config";
 
 admin.initializeApp({ credential: applicationDefault() });
 
@@ -10,8 +11,7 @@ async function run() {
     process.exit(1);
   }
 
-  const template = await admin
-    .remoteConfig()
+  const template = await getRemoteConfig()
     .getTemplate()
     .catch((err) => {
       console.error("Unable to get template.", err);
@@ -27,16 +27,14 @@ async function run() {
     },
   };
 
-  await admin
-    .remoteConfig()
+  await getRemoteConfig()
     .validateTemplate(template)
     .catch((err) => {
       console.error("Template validation failed:", err);
       process.exit(1);
     });
 
-  await admin
-    .remoteConfig()
+  await getRemoteConfig()
     .publishTemplate(template)
     .catch((err) => {
       console.error("Failed to publish template:", err);

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { storage } from "firebase-admin";
+import { getStorage } from "firebase-admin/storage";
 import { storageBucket } from "firebase-functions/params";
 import { HttpsError } from "firebase-functions/v2/https";
 import {
@@ -28,7 +28,7 @@ export const beforeUserSignUp = beforeUserCreated(async (event) => {
     const { person_id, hasura_uid } = dbUser;
 
     if (authUser.photoURL) {
-      const fileWriteStream = storage()
+      const fileWriteStream = getStorage()
         .bucket(storageBucket.value())
         .file("persons/" + person_id)
         .createWriteStream({
