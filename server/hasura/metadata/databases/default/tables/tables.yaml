@@ -20,6 +20,7 @@
 - "!include history_meeting_roster.yaml"
 - "!include history_meetings.yaml"
 - "!include history_visit_history.yaml"
+- "!include operations_study_year_roll_runs.yaml"
 - "!include public_addresses.yaml"
 - "!include public_areas.yaml"
 - "!include public_areas_streets.yaml"

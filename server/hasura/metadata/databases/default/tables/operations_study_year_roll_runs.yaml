@@ -1,0 +1,17 @@
+table:
+  name: study_year_roll_runs
+  schema: operations
+event_triggers:
+  - name: notify_study_year_roll_failure
+    definition:
+      enable_manual: false
+      insert:
+        columns: "*"
+    retry_conf:
+      num_retries: 3
+      interval_sec: 15
+      timeout_sec: 60
+    webhook: "{{STUDY_YEAR_ROLL_NOTIFY_URL}}"
+    headers:
+      - name: X-Study-Year-Roll-Secret
+        value_from_env: STUDY_YEAR_ROLL_WEBHOOK_SECRET
