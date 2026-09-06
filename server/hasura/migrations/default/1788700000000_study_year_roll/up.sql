@@ -170,7 +170,9 @@ begin
                next_service_id,
                next_service_first_study_year,
                case
-                   when outgrows_service and next_service_id is not null then 'relocate'
+                   when outgrows_service
+                        and next_service_id is not null
+                        and next_study_year is not null then 'relocate'
                    when not outgrows_service and next_study_year is not null then 'advance'
                end as action
         from cohort
@@ -320,10 +322,14 @@ begin
     get diagnostics v_rows = row_count;
     return query select 'dedupe_converging_persons_services_memberships'::text, v_rows;
 
-    update public.persons_services membership
-    set service_id = plan.destination_service_id
-    from _persons_next_service_roll plan
+    delete from public.persons_services membership
+    using _persons_next_service_roll plan
     where membership.rel_id = plan.rel_id and plan.action = 'move';
+
+    insert into public.persons_services (person_id, service_id)
+    select plan.person_id, plan.destination_service_id
+    from _persons_next_service_roll plan
+    where plan.action = 'move';
     get diagnostics v_rows = row_count;
     return query
     select 'advance_persons_services_memberships_to_next_service'::text, v_rows;
@@ -380,6 +386,7 @@ create or replace function operations.run_study_year_roll(
 )
 returns table (step text, affected_rows bigint)
 language plpgsql
+set client_min_messages = warning
 as $$
 declare
     v_season integer := coalesce(p_season_year, operations.current_season_year());
@@ -411,6 +418,8 @@ begin
         raise exception 'study year roll blocked for season %', v_season
             using detail = v_blockers;
     end if;
+
+    drop table if exists _study_year_roll_result;
 
     create temporary table _study_year_roll_result on commit drop as
     select * from operations.apply_study_year_roll_plan();
