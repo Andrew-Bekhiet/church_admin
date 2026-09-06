@@ -158,6 +158,9 @@ It blocks on:
 - a class whose destination placement would not match its cohort's next grade ([C9], [E8])
 - a `next_service_id` pointing at a soft-deleted service, when a membership or
   class would actually move there ([E14])
+- a person whose next grade falls outside the destination service's study year
+  range, which the deferred `check_persons_service_rel` would otherwise raise
+  from inside `set constraints all immediate`, long after the pre-flight passed
 
 The first, third and fourth are invariants on `services` that could be enforced
 by a trigger at write time instead; that is a schema change outside this

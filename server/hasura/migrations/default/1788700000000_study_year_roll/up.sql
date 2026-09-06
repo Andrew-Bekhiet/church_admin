@@ -286,6 +286,28 @@ begin
     where cohort.action = 'relocate'
       and cohort.next_service_first_study_year is distinct from cohort.next_study_year;
 
+    return query
+    select 'person_placement_mismatch',
+           format(
+               '%s person(s) move to service %s whose study year range %s-%s excludes year %s',
+               count(*),
+               destination.id,
+               destination.study_year_from_id,
+               destination.study_year_to_id,
+               rolling.next_study_year
+           )
+    from _persons_next_service_roll moving
+    join _persons_study_year_roll rolling on rolling.person_id = moving.person_id
+    join public.services destination on destination.id = moving.destination_service_id
+    where moving.action = 'move'
+      and rolling.next_study_year is not null
+      and destination.study_year_from_id is not null
+      and rolling.next_study_year not between destination.study_year_from_id
+          and destination.study_year_to_id
+    group by destination.id,
+             destination.study_year_from_id,
+             destination.study_year_to_id,
+             rolling.next_study_year;
 end;
 $$;
 
