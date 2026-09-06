@@ -9,6 +9,8 @@ const studyYearRollWebhookSecret = defineSecret(
 
 const MAINTENANCE_NOTIFICATIONS_PERMISSION = "maintenanceNotifications";
 
+const NON_USER_SENDER_UID = "LOCAL_NOTIFICATION_SENDER_UID";
+
 type StudyYearRollRunStatus = "succeeded" | "failed" | "missed";
 
 interface StudyYearRollRunRow {
@@ -88,7 +90,7 @@ export const notifyStudyYearRollFailure = https.onRequest(
               : "لم يتم تنفيذ عملية ترحيل السنة الدراسية في موعدها، يرجى المراجعة",
           },
           data: {
-            senderUID: "system",
+            senderUID: NON_USER_SENDER_UID,
             code: errorCode,
             seasonYear: String(run.season_year),
             status: run.status,
