@@ -273,6 +273,37 @@ export async function insertFcmToken(
   }
 }
 
+export async function getFcmTokensForPermission(
+  permission: string,
+): Promise<string[]> {
+  const hasura_response = await makeGraphqlRequest({
+    query: `
+            query getFcmTokensForPermission($permission: String!) {
+              authUsersData(where: { permissions: { permission: { _eq: $permission } } }) {
+                fcmTokens {
+                  token
+                }
+              }
+            }
+          `,
+    variables: { permission },
+    operationName: "getFcmTokensForPermission",
+  });
+
+  if (hasura_response.data?.["errors"]) {
+    throw new https.HttpsError(
+      "internal",
+      "Failed to fetch FCM tokens for permission",
+      hasura_response.data?.["errors"],
+    );
+  }
+
+  const users: { fcmTokens: { token: string }[] }[] =
+    hasura_response.data?.["data"]?.["authUsersData"] ?? [];
+
+  return [...new Set(users.flatMap((u) => u.fcmTokens.map((t) => t.token)))];
+}
+
 export async function updatePhotoTime(
   table: PhotoTable,
   id: string,
