@@ -194,9 +194,10 @@ still advance, per [C3].
 **Classes stay cohorts ([C9], [C10]).** A class is a (service, grade) cohort.
 Each roll the cohort's grade goes up: `advance` bumps `service_study_year`
 within the same service; `relocate` moves the class to `next_service_id` at
-that service's first grade when the cohort outgrows the service. A cohort that
-outgrows a service with no next service, or that has no next grade, is left
-alone. The alternative — classes as fixed slots that never move, with
+that service's first grade when the cohort outgrows the service; `delete` sets
+`deleted_at` when the next service is ungraded, because an all-ages service has
+no grade slot for the cohort to land in. A cohort that outgrows a service with
+no next service, or that has no next grade, is left alone. The alternative — classes as fixed slots that never move, with
 membership resolved live from service, grade and gender — would delete [C9],
 [C10], [E8], [E13] and [E15] outright. It was raised and not adopted; revisit
 before adding more class-move complexity.

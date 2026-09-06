@@ -176,6 +176,9 @@ begin
                case
                    when outgrows_service
                         and next_service_id is not null
+                        and next_service_first_study_year is null then 'delete'
+                   when outgrows_service
+                        and next_service_id is not null
                         and next_study_year is not null then 'relocate'
                    when not outgrows_service and next_study_year is not null then 'advance'
                end as action
@@ -381,6 +384,13 @@ begin
     where cls.id = plan.class_id and plan.action = 'relocate';
     get diagnostics v_rows = row_count;
     return query select 'relocate_classes_to_next_service'::text, v_rows;
+
+    update public.classes cls
+    set deleted_at = now()
+    from _classes_roll plan
+    where cls.id = plan.class_id and plan.action = 'delete';
+    get diagnostics v_rows = row_count;
+    return query select 'delete_classes_whose_next_service_has_no_grades'::text, v_rows;
 
     update auth.users_admin_on scope
     set service_study_year = plan.study_year_after_roll
