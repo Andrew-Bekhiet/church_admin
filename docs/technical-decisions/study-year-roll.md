@@ -123,9 +123,17 @@ Idempotency is a partial unique index on `season_year where status = 'succeeded'
 A failed attempt therefore does not block a retry the same day, and a successful
 one can never be repeated ([C13], [C16]).
 
+A second partial unique index on `season_year where status = 'failed'` keeps the
+hourly retries to one `failed` row per season: the recording insert is an
+`on conflict … do update`, which replaces the error with the latest attempt's.
+Retries stay free, but a season that fails all day alerts once rather than
+twenty-one times.
+
 Every insert into `operations.study_year_roll_runs` fires a Hasura event
 trigger; the Cloud Function pushes a maintenance notification for `failed` and
-`missed` rows to users holding the `maintenanceNotifications` permission.
+`missed` rows to users holding the `maintenanceNotifications` permission. An
+`on conflict … do update` is an update, so it does not fire that insert-only
+trigger — which is what bounds the alert to one per season.
 
 ## Concurrency
 

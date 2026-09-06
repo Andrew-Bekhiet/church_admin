@@ -15,6 +15,10 @@ create unique index if not exists study_year_roll_runs_one_success_per_season
 on operations.study_year_roll_runs (season_year)
 where status = 'succeeded';
 
+create unique index if not exists study_year_roll_runs_one_failure_per_season
+on operations.study_year_roll_runs (season_year)
+where status = 'failed';
+
 create or replace function operations.cairo_now()
 returns timestamp
 language sql
@@ -281,6 +285,7 @@ begin
     from _classes_roll cohort
     where cohort.action = 'relocate'
       and cohort.next_service_first_study_year is distinct from cohort.next_study_year;
+
 end;
 $$;
 
@@ -462,7 +467,9 @@ begin
 
     if v_error is not null then
         insert into operations.study_year_roll_runs (season_year, status, error)
-        values (v_season, 'failed', concat_ws(chr(10), v_error, nullif(v_error_detail, '')));
+        values (v_season, 'failed', concat_ws(chr(10), v_error, nullif(v_error_detail, '')))
+        on conflict (season_year) where status = 'failed'
+        do update set error = excluded.error, recorded_at = now();
     end if;
 end;
 $$;
