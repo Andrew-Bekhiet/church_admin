@@ -31,6 +31,7 @@ interface StudyYearRollRunInsertEvent {
 }
 
 export const notifyStudyYearRollFailure = https.onRequest(
+  { secrets: [studyYearRollWebhookSecret] },
   async (req, res) => {
     const configuredSecret = studyYearRollWebhookSecret.value();
 
@@ -105,6 +106,9 @@ export const notifyStudyYearRollFailure = https.onRequest(
       }
     } catch (e) {
       console.error("Failed to send study year roll failure notification", e);
+      res.status(500).send();
+
+      return;
     }
 
     res.status(200).send();
