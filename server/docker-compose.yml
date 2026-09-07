@@ -65,5 +65,41 @@ services:
     entrypoint: ["/bin/sh", "/apply-seeds.sh"]
     restart: "no"
 
+  firebase-emulators:
+    build:
+      context: ./firebase
+      dockerfile: Dockerfile.emulators
+    environment:
+      FIREBASE_PROJECT_ID: ${FIREBASE_PROJECT_ID:-demo-church-admin}
+      HASURA_SERVER: http://hasura:8080
+      HASURA_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET}
+      DEFAULT_GCS_BUCKET: ${DEFAULT_GCS_BUCKET:-demo-church-admin.appspot.com}
+      APP_RELEASE_GCS_BUCKET: ${APP_RELEASE_GCS_BUCKET:-demo-church-admin-releases}
+      IS_APP_LIVE: ${IS_APP_LIVE:-true}
+      LATEST_VERSION: ${LATEST_VERSION:-0.0.0}
+    volumes:
+      - ./firebase:/srv/firebase
+      - ./scripts/start-emulators.sh:/start-emulators.sh:ro
+      - firebase_functions_node_modules:/srv/firebase/functions/node_modules
+      - firebase_emulator_cache:/root/.cache/firebase
+    entrypoint: ["/bin/sh", "/start-emulators.sh"]
+    ports:
+      - "4000:4000"
+      - "4400:4400"
+      - "4500:4500"
+      - "5001:5001"
+      - "8085:8085"
+      - "9000:9000"
+      - "9099:9099"
+      - "9199:9199"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:4400/emulators || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 30
+      start_period: 180s
+
 volumes:
   pgdata:
+  firebase_functions_node_modules:
+  firebase_emulator_cache:
