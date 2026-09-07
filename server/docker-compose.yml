@@ -1,0 +1,69 @@
+name: church-admin
+
+services:
+  postgres:
+    build:
+      context: ./postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in server/.env}
+      POSTGRES_DB: ${POSTGRES_DB:-church_admin}
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -h 127.0.0.1 -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-church_admin}"]
+      interval: 5s
+      timeout: 5s
+      retries: 30
+      start_period: 60s
+
+  hasura:
+    build:
+      context: ./hasura
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      HASURA_GRAPHQL_DATABASE_URL: postgres://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-church_admin}
+      HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET:?set HASURA_GRAPHQL_ADMIN_SECRET in server/.env}
+      HASURA_GRAPHQL_ENABLE_CONSOLE: "true"
+      HASURA_GRAPHQL_DEV_MODE: "true"
+      HASURA_GRAPHQL_ENABLED_APIS: graphql,metadata,pgdump,config
+      HASURA_GRAPHQL_EXPERIMENTAL_FEATURES: naming_convention
+      HASURA_GRAPHQL_DEFAULT_NAMING_CONVENTION: graphql-default
+      HASURA_FF_NAMING_CONVENTION_SEP_2023: "True"
+      HASURA_GRAPHQL_ENABLE_TELEMETRY: "false"
+      HASURA_GRAPHQL_LIVE_QUERIES_MULTIPLEXED_REFETCH_INTERVAL: ${HASURA_GRAPHQL_LIVE_QUERIES_MULTIPLEXED_REFETCH_INTERVAL:-1000}
+      STUDY_YEAR_ROLL_WEBHOOK_SECRET: ${STUDY_YEAR_ROLL_WEBHOOK_SECRET:-local-dev-webhook-secret}
+      STUDY_YEAR_ROLL_NOTIFY_URL: ${STUDY_YEAR_ROLL_NOTIFY_URL:-http://firebase-emulators:5001/demo-church-admin/us-central1/notifyStudyYearRollFailure}
+    ports:
+      - "${HASURA_PORT:-8080}:8080"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:8080/healthz || exit 1"]
+      interval: 5s
+      timeout: 5s
+      retries: 60
+      start_period: 30s
+
+  seed:
+    image: postgres:17-alpine
+    depends_on:
+      hasura:
+        condition: service_healthy
+    environment:
+      PGHOST: postgres
+      PGPORT: 5432
+      PGUSER: ${POSTGRES_USER:-postgres}
+      PGPASSWORD: ${POSTGRES_PASSWORD}
+      PGDATABASE: ${POSTGRES_DB:-church_admin}
+    volumes:
+      - ./hasura/seeds/default:/seeds:ro
+      - ./scripts/apply-seeds.sh:/apply-seeds.sh:ro
+    entrypoint: ["/bin/sh", "/apply-seeds.sh"]
+    restart: "no"
+
+volumes:
+  pgdata:
