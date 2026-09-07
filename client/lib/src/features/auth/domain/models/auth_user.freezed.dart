@@ -15,10 +15,8 @@ T _$identity<T>(T value) => value;
 mixin _$AuthUser {
   String get uid;
   String get email;
-  bool get emailVerified;
   String get idToken;
   Map<String, dynamic> get claims;
-  bool get isMultiFactorEnabled;
 
   /// Create a copy of AuthUser
   /// with the given fields replaced by the non-null parameter values.
@@ -34,12 +32,8 @@ mixin _$AuthUser {
             other is AuthUser &&
             (identical(other.uid, uid) || other.uid == uid) &&
             (identical(other.email, email) || other.email == email) &&
-            (identical(other.emailVerified, emailVerified) ||
-                other.emailVerified == emailVerified) &&
             (identical(other.idToken, idToken) || other.idToken == idToken) &&
-            const DeepCollectionEquality().equals(other.claims, claims) &&
-            (identical(other.isMultiFactorEnabled, isMultiFactorEnabled) ||
-                other.isMultiFactorEnabled == isMultiFactorEnabled));
+            const DeepCollectionEquality().equals(other.claims, claims));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,10 +42,8 @@ mixin _$AuthUser {
     runtimeType,
     uid,
     email,
-    emailVerified,
     idToken,
     const DeepCollectionEquality().hash(claims),
-    isMultiFactorEnabled,
   );
 }
 
@@ -63,10 +55,8 @@ abstract mixin class $AuthUserCopyWith<$Res> {
   $Res call({
     String uid,
     String email,
-    bool emailVerified,
     String idToken,
     Map<String, dynamic> claims,
-    bool isMultiFactorEnabled,
   });
 }
 
@@ -84,10 +74,8 @@ class _$AuthUserCopyWithImpl<$Res> implements $AuthUserCopyWith<$Res> {
   $Res call({
     Object? uid = null,
     Object? email = null,
-    Object? emailVerified = null,
     Object? idToken = null,
     Object? claims = null,
-    Object? isMultiFactorEnabled = null,
   }) {
     return _then(
       AuthUser(
@@ -99,10 +87,6 @@ class _$AuthUserCopyWithImpl<$Res> implements $AuthUserCopyWith<$Res> {
             ? _self.email
             : email // ignore: cast_nullable_to_non_nullable
                   as String,
-        emailVerified: null == emailVerified
-            ? _self.emailVerified
-            : emailVerified // ignore: cast_nullable_to_non_nullable
-                  as bool,
         idToken: null == idToken
             ? _self.idToken
             : idToken // ignore: cast_nullable_to_non_nullable
@@ -111,10 +95,6 @@ class _$AuthUserCopyWithImpl<$Res> implements $AuthUserCopyWith<$Res> {
             ? _self.claims
             : claims // ignore: cast_nullable_to_non_nullable
                   as Map<String, dynamic>,
-        isMultiFactorEnabled: null == isMultiFactorEnabled
-            ? _self.isMultiFactorEnabled
-            : isMultiFactorEnabled // ignore: cast_nullable_to_non_nullable
-                  as bool,
       ),
     );
   }

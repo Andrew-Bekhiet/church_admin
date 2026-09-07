@@ -13,13 +13,9 @@ class AuthUser with _$AuthUser {
   @override
   final String email;
   @override
-  final bool emailVerified;
-  @override
   final String idToken;
   @override
   final Map<String, dynamic> claims;
-  @override
-  final bool isMultiFactorEnabled;
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   Map<String, dynamic> get filteredClaims => _filterClaims(claims);
@@ -30,10 +26,8 @@ class AuthUser with _$AuthUser {
   const AuthUser({
     required this.uid,
     required this.email,
-    required this.emailVerified,
     required this.idToken,
     this.claims = const {},
-    this.isMultiFactorEnabled = false,
   });
 
   factory AuthUser.fromJson(Map<String, dynamic> json) =>
@@ -49,7 +43,5 @@ class AuthUser with _$AuthUser {
   String toString() =>
       'AuthUser(uid: $uid, '
       'email: $email, '
-      'emailVerified: $emailVerified, '
-      'claims: $filteredClaims, '
-      'isMultiFactorEnabled: $isMultiFactorEnabled)';
+      'claims: $filteredClaims)';
 }

@@ -79,10 +79,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<SendPasswordResetEmail>(_onSendPasswordResetEmail);
     on<SignOut>(_onSignOut);
     on<ReloadUser>(_onReloadUser);
-    on<SendEmailVerification>(_onSendEmailVerification);
-    on<EnrollMultiFactor>(_onEnrollMultiFactor);
-    on<StartMultiFactorChallenge>(_onStartMultiFactorChallenge);
-    on<CompleteMultiFactorChallenge>(_onCompleteMultiFactorChallenge);
 
     add(ListenToSubscriptions(loadCachedUser: loadCachedUser));
   }
@@ -101,28 +97,26 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     Emitter<AuthState> emit,
     ListenToSubscriptions event,
   ) {
-    final liveUserStream = _authRepository.userChanges.switchMap(
-      (authUser) {
-        if (authUser == null) {
-          return Stream.value((null, null));
-        }
+    final liveUserStream = _authRepository.userChanges.switchMap((authUser) {
+      if (authUser == null) {
+        return Stream.value((null, null));
+      }
 
-        final hasuraUserId = authUser.hasuraUserId;
-        if (hasuraUserId == null) {
-          return Stream.value((authUser, null));
-        }
+      final hasuraUserId = authUser.hasuraUserId;
+      if (hasuraUserId == null) {
+        return Stream.value((authUser, null));
+      }
 
-        final userDataStream = _databaseService.users
-            .streamSingleById(id: hasuraUserId, fullData: true)
-            .map((userData) => (authUser, userData));
+      final userDataStream = _databaseService.users
+          .streamSingleById(id: hasuraUserId, fullData: true)
+          .map((userData) => (authUser, userData));
 
-        if (state.unwrapped case AuthAuthenticated(userData: User())) {
-          return userDataStream;
-        }
+      if (state.unwrapped case AuthAuthenticated(userData: User())) {
+        return userDataStream;
+      }
 
-        return userDataStream.startWith((authUser, null));
-      },
-    );
+      return userDataStream.startWith((authUser, null));
+    });
 
     return emit.forEach(
       (event.loadCachedUser ? _loadCachedData() : Future.value((null, null)))
@@ -208,16 +202,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       );
 
       await _authStorage.saveUserPasswordHash(event.email, event.password);
-    } on MultiFactorRequiredException catch (e) {
-      final factor = e.session.enrolledFactors.first;
-
-      await _onStartMultiFactorChallenge(
-        StartMultiFactorChallenge(
-          session: e.session,
-          selectedFactor: factor,
-        ),
-        emit,
-      );
     } catch (e, stackTrace) {
       emit(
         AuthExceptionState(
@@ -242,7 +226,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       );
 
       await _authStorage.saveUserPasswordHash(event.email, event.password);
-      await _authRepository.sendEmailVerification();
     } catch (e, stackTrace) {
       emit(
         AuthExceptionState(
@@ -277,10 +260,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     }
   }
 
-  Future<void> _onSignOut(
-    SignOut event,
-    Emitter<AuthState> emit,
-  ) async {
+  Future<void> _onSignOut(SignOut event, Emitter<AuthState> emit) async {
     try {
       emit(AuthLoading(previousState: state));
 
@@ -299,128 +279,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     }
   }
 
-  Future<void> _onReloadUser(
-    ReloadUser event,
-    Emitter<AuthState> emit,
-  ) async {
+  Future<void> _onReloadUser(ReloadUser event, Emitter<AuthState> emit) async {
     try {
       emit(AuthLoading(previousState: state));
       await _authRepository.reload();
-    } catch (e, stackTrace) {
-      emit(
-        AuthExceptionState(
-          exception: e,
-          stackTrace: stackTrace,
-          previousState: state,
-        ),
-      );
-    }
-  }
-
-  Future<void> _onSendEmailVerification(
-    SendEmailVerification event,
-    Emitter<AuthState> emit,
-  ) async {
-    try {
-      final previousState = state;
-      emit(AuthLoading(previousState: previousState));
-
-      await _authRepository.sendEmailVerification();
-
-      emit(previousState);
-    } catch (e, stackTrace) {
-      emit(
-        AuthExceptionState(
-          exception: e,
-          stackTrace: stackTrace,
-          previousState: state,
-        ),
-      );
-    }
-  }
-
-  Future<void> _onEnrollMultiFactor(
-    EnrollMultiFactor event,
-    Emitter<AuthState> emit,
-  ) async {
-    try {
-      emit(AuthLoading(previousState: state));
-
-      final session = await _authRepository.startMultiFactorEnrollment(
-        password: event.password,
-        phoneNumber: event.phoneNumber,
-      );
-      final challenge = await _authRepository.startMultiFactorChallenge(
-        session: session,
-        phoneNumber: event.phoneNumber,
-      );
-
-      emit(
-        AuthMultiFactorChallengeInProgress(
-          challenge: challenge,
-          session: session,
-        ),
-      );
-    } catch (e, stackTrace) {
-      emit(
-        AuthExceptionState(
-          exception: e,
-          stackTrace: stackTrace,
-          previousState: state,
-        ),
-      );
-    }
-  }
-
-  Future<void> _onStartMultiFactorChallenge(
-    StartMultiFactorChallenge event,
-    Emitter<AuthState> emit,
-  ) async {
-    try {
-      if (state is! AuthLoading) {
-        emit(AuthLoading(previousState: state));
-      }
-
-      final challenge = await _authRepository.startMultiFactorChallenge(
-        session: event.session,
-        selectedFactor: event.selectedFactor,
-        phoneNumber: event.phoneNumber,
-        resendToken: event.resendToken,
-      );
-
-      emit(
-        AuthMultiFactorChallengeInProgress(
-          challenge: challenge,
-          session: event.session,
-        ),
-      );
-    } catch (e, stackTrace) {
-      emit(
-        AuthExceptionState(
-          exception: e,
-          stackTrace: stackTrace,
-          previousState: state,
-        ),
-      );
-    }
-  }
-
-  Future<void> _onCompleteMultiFactorChallenge(
-    CompleteMultiFactorChallenge event,
-    Emitter<AuthState> emit,
-  ) async {
-    try {
-      emit(AuthLoading(previousState: state));
-
-      await _authRepository.completeMultiFactorChallenge(
-        selectedFactor: event.selectedFactor,
-        challenge: event.challenge,
-        verificationCode: event.verificationCode,
-      );
-
-      final session = event.session;
-
-      await _authStorage.saveUserPasswordHash(session.email, session.password);
     } catch (e, stackTrace) {
       emit(
         AuthExceptionState(

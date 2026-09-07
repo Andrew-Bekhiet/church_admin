@@ -39,32 +39,14 @@ final class AuthAuthenticated extends AuthState {
 
   @override
   List<Object?> get props => [authUser, userData];
-  const AuthAuthenticated({
-    required this.authUser,
-    this.userData,
-  });
+  const AuthAuthenticated({required this.authUser, this.userData});
 
-  AuthAuthenticated copyWith({
-    AuthUser? authUser,
-    User? userData,
-  }) {
+  AuthAuthenticated copyWith({AuthUser? authUser, User? userData}) {
     return AuthAuthenticated(
       authUser: authUser ?? this.authUser,
       userData: userData ?? this.userData,
     );
   }
-}
-
-final class AuthMultiFactorChallengeInProgress extends AuthState {
-  final MultiFactorChallenge challenge;
-  final MultiFactorSession session;
-
-  @override
-  List<Object?> get props => [challenge, session];
-  const AuthMultiFactorChallengeInProgress({
-    required this.challenge,
-    required this.session,
-  });
 }
 
 final class AuthExceptionState extends AuthState {

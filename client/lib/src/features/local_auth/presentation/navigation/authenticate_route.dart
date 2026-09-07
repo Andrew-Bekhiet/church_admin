@@ -48,9 +48,6 @@ class AuthenticateRoute extends GoRouteData with $AuthenticateRoute {
       case AuthUnauthenticated():
         return const LoginRoute().location;
 
-      case AuthAuthenticated(authUser: AuthUser(isMultiFactorEnabled: false)):
-        return const MultiFactorLoginRoute().location;
-
       case _
           when localAuthService.shouldAuthenticate ||
               (next != '/' && localAuthService.shouldAuthenticateForPath(next)):

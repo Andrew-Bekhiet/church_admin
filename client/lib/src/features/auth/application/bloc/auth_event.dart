@@ -1,4 +1,3 @@
-import 'package:church_admin/church_admin.dart';
 import 'package:equatable/equatable.dart';
 
 sealed class AuthEvent extends Equatable {
@@ -21,10 +20,7 @@ final class SignInWithEmailPassword extends AuthEvent {
   @override
   List<Object?> get props => [email, password];
 
-  const SignInWithEmailPassword({
-    required this.email,
-    required this.password,
-  });
+  const SignInWithEmailPassword({required this.email, required this.password});
 
   @override
   String toString() =>
@@ -38,10 +34,7 @@ final class SignUpWithEmailPassword extends AuthEvent {
   @override
   List<Object?> get props => [email, password];
 
-  const SignUpWithEmailPassword({
-    required this.email,
-    required this.password,
-  });
+  const SignUpWithEmailPassword({required this.email, required this.password});
 
   @override
   String toString() =>
@@ -58,70 +51,6 @@ final class ReloadUser extends AuthEvent {
   @override
   List<Object?> get props => [];
   const ReloadUser();
-}
-
-final class SendEmailVerification extends AuthEvent {
-  @override
-  List<Object?> get props => [];
-  const SendEmailVerification();
-}
-
-final class EnrollMultiFactor extends AuthEvent {
-  final String password;
-  final String phoneNumber;
-
-  @override
-  List<Object?> get props => [password, phoneNumber];
-  const EnrollMultiFactor({
-    required this.password,
-    required this.phoneNumber,
-  });
-
-  @override
-  String toString() =>
-      '$EnrollMultiFactor($phoneNumber, ${password.isEmpty ? '' : '********'})';
-}
-
-final class StartMultiFactorChallenge extends AuthEvent {
-  final MultiFactorSession session;
-  final MultiFactorInfo? selectedFactor;
-  final String? phoneNumber;
-  final int? resendToken;
-
-  @override
-  List<Object?> get props => [
-    session,
-    selectedFactor,
-    phoneNumber,
-    resendToken,
-  ];
-  const StartMultiFactorChallenge({
-    required this.session,
-    this.selectedFactor,
-    this.phoneNumber,
-    this.resendToken,
-  });
-}
-
-final class CompleteMultiFactorChallenge extends AuthEvent {
-  final MultiFactorSession session;
-  final MultiFactorChallenge challenge;
-  final String verificationCode;
-  final MultiFactorInfo? selectedFactor;
-
-  @override
-  List<Object?> get props => [
-    session,
-    challenge,
-    verificationCode,
-    selectedFactor,
-  ];
-  const CompleteMultiFactorChallenge({
-    required this.session,
-    required this.challenge,
-    required this.verificationCode,
-    this.selectedFactor,
-  });
 }
 
 final class SendPasswordResetEmail extends AuthEvent {

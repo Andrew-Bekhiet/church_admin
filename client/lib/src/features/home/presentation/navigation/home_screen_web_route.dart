@@ -20,12 +20,6 @@ class HomeScreenWebRoute extends GoRouteData with $HomeScreenWebRoute {
       case AuthUnauthenticated():
         return const LoginRoute().location;
 
-      case AuthAuthenticated(authUser: AuthUser(emailVerified: false)):
-        return const EmailVerificationRoute().location;
-
-      case AuthAuthenticated(authUser: AuthUser(isMultiFactorEnabled: false)):
-        return const MultiFactorLoginRoute().location;
-
       case AuthAuthenticated(userData: null):
         return const AuthLoadingRoute().location;
 
@@ -40,9 +34,6 @@ class HomeScreenWebRoute extends GoRouteData with $HomeScreenWebRoute {
           path: const UpdateUserSpiritDataRoute().location,
           queryParameters: {'forced': 'true'},
         ).toString();
-
-      case AuthMultiFactorChallengeInProgress():
-        return const MultiFactorLoginRoute().location;
 
       case _:
         return null;

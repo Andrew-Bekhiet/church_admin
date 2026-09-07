@@ -18,8 +18,6 @@ abstract interface class AuthRepository {
     required String password,
   });
 
-  Future<void> sendEmailVerification();
-
   Future<void> sendPasswordResetEmail({required String email});
 
   Future<void> reload();
@@ -27,24 +25,6 @@ abstract interface class AuthRepository {
   Future<void> refreshToken();
 
   Future<void> signOut();
-
-  Future<MultiFactorSession> startMultiFactorEnrollment({
-    required String password,
-    required String phoneNumber,
-  });
-
-  Future<MultiFactorChallenge> startMultiFactorChallenge({
-    required MultiFactorSession session,
-    MultiFactorInfo? selectedFactor,
-    String? phoneNumber,
-    int? resendToken,
-  });
-
-  Future<void> completeMultiFactorChallenge({
-    required MultiFactorChallenge challenge,
-    required String verificationCode,
-    MultiFactorInfo? selectedFactor,
-  });
 
   Future<void> dispose();
 }
