@@ -326,7 +326,6 @@ Override _setUpAuthBloc() {
       const AuthUser(
         uid: 'uid',
         email: 'email',
-        emailVerified: true,
         idToken: 'idToken',
       ),
     ),
@@ -338,7 +337,6 @@ Override _setUpAuthBloc() {
     const AuthUser(
       uid: 'uid',
       email: 'email',
-      emailVerified: true,
       idToken: 'idToken',
     ),
   );

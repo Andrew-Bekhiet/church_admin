@@ -281,13 +281,10 @@ class FirstScreenVariant extends ValueVariant<FirstScreenVariantEnum> {
     when(mock.isSignedIn).thenReturn(value != FirstScreenVariantEnum.login);
 
     final user = value != FirstScreenVariantEnum.login
-        ? AuthUser(
+        ? const AuthUser(
             uid: 'uid',
             email: 'email',
-            emailVerified: value != FirstScreenVariantEnum.emailVerification,
-            isMultiFactorEnabled: value != FirstScreenVariantEnum.multiFactor,
             idToken: 'idToken',
-            claims: {},
           )
         : null;
 
@@ -325,19 +322,6 @@ class FirstScreenVariant extends ValueVariant<FirstScreenVariantEnum> {
     when(mock.state).thenAnswer(
       (_) => user != null
           ? AuthAuthenticated(authUser: user, userData: userData)
-          : value == FirstScreenVariantEnum.multiFactor
-          ? AuthMultiFactorChallengeInProgress(
-              challenge: MultiFactorChallenge(
-                verificationId: 'verificationId',
-                createdAt: DateTime.now(),
-              ),
-              session: const MultiFactorSession(
-                id: 'id',
-                email: 'email',
-                password: 'password',
-                enrolledFactors: [],
-              ),
-            )
           : const AuthUnauthenticated(),
     );
 
@@ -353,12 +337,6 @@ class FirstScreenVariant extends ValueVariant<FirstScreenVariantEnum> {
     switch (currentValue) {
       case FirstScreenVariantEnum.login:
         return const LoginRoute().location;
-
-      case FirstScreenVariantEnum.emailVerification:
-        return const EmailVerificationRoute().location;
-
-      case FirstScreenVariantEnum.multiFactor:
-        return const MultiFactorLoginRoute().location;
 
       case FirstScreenVariantEnum.unapprovedUser:
         return const UnapprovedUserRoute().location;
@@ -387,8 +365,6 @@ class FirstScreenVariant extends ValueVariant<FirstScreenVariantEnum> {
 
 enum FirstScreenVariantEnum {
   login,
-  emailVerification,
-  multiFactor,
   unapprovedUser,
   updateUserSpiritData,
   authenticate,
