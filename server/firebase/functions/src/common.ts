@@ -11,7 +11,7 @@ export async function assertUserAuthenticatedAndApproved(
     throw new https.HttpsError("unauthenticated", "unauthenticated");
   }
 
-  const authUser = await getAuth().getUser(authData!.uid!);
+  const authUser = await getAuth().getUser(authData.uid);
 
   if (!(await checkUserApproved(authData.token["x-hasura-user-id"]))) {
     console.error("User is not approved", authData.token["x-hasura-user-id"]);

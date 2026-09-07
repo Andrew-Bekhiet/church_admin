@@ -97,26 +97,28 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     Emitter<AuthState> emit,
     ListenToSubscriptions event,
   ) {
-    final liveUserStream = _authRepository.userChanges.switchMap((authUser) {
-      if (authUser == null) {
-        return Stream.value((null, null));
-      }
+    final liveUserStream = _authRepository.userChanges.switchMap(
+      (authUser) {
+        if (authUser == null) {
+          return Stream.value((null, null));
+        }
 
-      final hasuraUserId = authUser.hasuraUserId;
-      if (hasuraUserId == null) {
-        return Stream.value((authUser, null));
-      }
+        final hasuraUserId = authUser.hasuraUserId;
+        if (hasuraUserId == null) {
+          return Stream.value((authUser, null));
+        }
 
-      final userDataStream = _databaseService.users
-          .streamSingleById(id: hasuraUserId, fullData: true)
-          .map((userData) => (authUser, userData));
+        final userDataStream = _databaseService.users
+            .streamSingleById(id: hasuraUserId, fullData: true)
+            .map((userData) => (authUser, userData));
 
-      if (state.unwrapped case AuthAuthenticated(userData: User())) {
-        return userDataStream;
-      }
+        if (state.unwrapped case AuthAuthenticated(userData: User())) {
+          return userDataStream;
+        }
 
-      return userDataStream.startWith((authUser, null));
-    });
+        return userDataStream.startWith((authUser, null));
+      },
+    );
 
     return emit.forEach(
       (event.loadCachedUser ? _loadCachedData() : Future.value((null, null)))
@@ -260,7 +262,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     }
   }
 
-  Future<void> _onSignOut(SignOut event, Emitter<AuthState> emit) async {
+  Future<void> _onSignOut(
+    SignOut event,
+    Emitter<AuthState> emit,
+  ) async {
     try {
       emit(AuthLoading(previousState: state));
 
@@ -279,7 +284,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     }
   }
 
-  Future<void> _onReloadUser(ReloadUser event, Emitter<AuthState> emit) async {
+  Future<void> _onReloadUser(
+    ReloadUser event,
+    Emitter<AuthState> emit,
+  ) async {
     try {
       emit(AuthLoading(previousState: state));
       await _authRepository.reload();

@@ -20,7 +20,10 @@ final class SignInWithEmailPassword extends AuthEvent {
   @override
   List<Object?> get props => [email, password];
 
-  const SignInWithEmailPassword({required this.email, required this.password});
+  const SignInWithEmailPassword({
+    required this.email,
+    required this.password,
+  });
 
   @override
   String toString() =>
@@ -34,7 +37,10 @@ final class SignUpWithEmailPassword extends AuthEvent {
   @override
   List<Object?> get props => [email, password];
 
-  const SignUpWithEmailPassword({required this.email, required this.password});
+  const SignUpWithEmailPassword({
+    required this.email,
+    required this.password,
+  });
 
   @override
   String toString() =>

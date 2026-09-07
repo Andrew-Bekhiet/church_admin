@@ -15,6 +15,8 @@ class NewPasswordField extends StatefulWidget {
 }
 
 class _NewPasswordFieldState extends State<NewPasswordField> {
+  static const _minPasswordLength = 8;
+
   final _passwordRulesController = FancyPasswordController();
   late final _passwordController = widget.controller ?? TextEditingController();
 
@@ -31,7 +33,10 @@ class _NewPasswordFieldState extends State<NewPasswordField> {
         UppercaseValidationRule(customText: 'تحتوي على حروف كبيرة'),
         LowercaseValidationRule(customText: 'تحتوي على حروف صغيرة'),
         SpecialCharacterValidationRule(customText: 'تحتوي على رموز'),
-        MinCharactersValidationRule(8, customText: 'تتكون من على الأقل 8 حروف'),
+        MinCharactersValidationRule(
+          _minPasswordLength,
+          customText: 'تتكون من على الأقل $_minPasswordLength حروف',
+        ),
       },
       textInputAction: TextInputAction.next,
       decoration: const InputDecoration(
@@ -57,12 +62,15 @@ class _NewPasswordFieldState extends State<NewPasswordField> {
               },
             ),
             const SizedBox(height: 10),
-            Text(switch (score) {
-              >= 0.9 => 'قوية',
-              >= 0.7 => 'متوسطة',
-              >= 0.5 => 'ضعيفة',
-              _ => 'ضعيفة جداً',
-            }, style: Theme.of(context).textTheme.bodyLarge),
+            Text(
+              switch (score) {
+                >= 0.9 => 'قوية',
+                >= 0.7 => 'متوسطة',
+                >= 0.5 => 'ضعيفة',
+                _ => 'ضعيفة جداً',
+              },
+              style: Theme.of(context).textTheme.bodyLarge,
+            ),
           ],
         );
       },

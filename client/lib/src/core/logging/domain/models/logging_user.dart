@@ -26,5 +26,10 @@ class LoggingUser {
     this.name,
   });
 
-  Json toJson() => {'id': id, 'email': email, 'name': name, ...properties};
+  Json toJson() => {
+    'id': id,
+    'email': email,
+    'name': name,
+    ...properties,
+  };
 }

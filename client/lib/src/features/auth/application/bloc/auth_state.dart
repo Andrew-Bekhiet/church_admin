@@ -39,9 +39,15 @@ final class AuthAuthenticated extends AuthState {
 
   @override
   List<Object?> get props => [authUser, userData];
-  const AuthAuthenticated({required this.authUser, this.userData});
+  const AuthAuthenticated({
+    required this.authUser,
+    this.userData,
+  });
 
-  AuthAuthenticated copyWith({AuthUser? authUser, User? userData}) {
+  AuthAuthenticated copyWith({
+    AuthUser? authUser,
+    User? userData,
+  }) {
     return AuthAuthenticated(
       authUser: authUser ?? this.authUser,
       userData: userData ?? this.userData,

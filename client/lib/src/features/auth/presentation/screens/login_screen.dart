@@ -44,12 +44,16 @@ class _LoginScreenState extends State<LoginScreen> {
 
   late final _termsOfServiceRecognizer = TapGestureRecognizer()
     ..onTap = () => LauncherService.I.launchUrl(
-      Uri.parse('https://church-data-admin.firebaseapp.com/terms-of-service/'),
+      Uri.parse(
+        'https://church-data-admin.firebaseapp.com/terms-of-service/',
+      ),
     );
 
   late final _privacyPolicyRecognizer = TapGestureRecognizer()
     ..onTap = () => LauncherService.I.launchUrl(
-      Uri.parse('https://church-data-admin.firebaseapp.com/privacy-policy/'),
+      Uri.parse(
+        'https://church-data-admin.firebaseapp.com/privacy-policy/',
+      ),
     );
 
   @override
@@ -63,20 +67,20 @@ class _LoginScreenState extends State<LoginScreen> {
 
         switch (state.exception) {
           case IncorrectCredentialsException() when _isLogin:
-            ScaffoldMessenger.of(
-              context,
-            ).showErrorSnackBar('كلمة سر أو بريد إلكتروني غير صحيح');
+            ScaffoldMessenger.of(context).showErrorSnackBar(
+              'كلمة سر أو بريد إلكتروني غير صحيح',
+            );
 
           case IncorrectCredentialsException():
-            ScaffoldMessenger.of(
-              context,
-            ).showInfoSnackBar('الحساب مسجل بالفعل. قم بتسجيل الدخول');
+            ScaffoldMessenger.of(context).showInfoSnackBar(
+              'الحساب مسجل بالفعل. قم بتسجيل الدخول',
+            );
             setState(() => _isLogin = true);
 
           default:
-            ScaffoldMessenger.of(
-              context,
-            ).showErrorSnackBar('تعذر تسجيل الدخول. برجاء المحاولة مرة أخرى.');
+            ScaffoldMessenger.of(context).showErrorSnackBar(
+              'تعذر تسجيل الدخول. برجاء المحاولة مرة أخرى.',
+            );
         }
       },
       builder: (context, state) {

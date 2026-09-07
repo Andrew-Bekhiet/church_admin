@@ -118,7 +118,7 @@ Permissions hang off `auth.users_data.uid` — never `auth_id`. `auth.users_perm
 ### TypeScript functions
 
 - Errors: wrap in `try`/`catch`, `console.error`, return a null/false fallback — match the surrounding file rather than throwing through it.
-- Callables assert the caller first (`assertUserAuthenticatedAndApproved`, or `assertUserEmailVerified` where 2FA/approval cannot exist yet).
+- Callables assert the caller first (`assertUserAuthenticatedAndApproved`).
 - Error messages should be user-friendly and localisable via error codes.
 
 ## Tooling gotchas

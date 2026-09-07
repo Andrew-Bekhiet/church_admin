@@ -5,7 +5,10 @@ abstract class AuthException implements Exception {
   final StackTrace? stackTrace;
 
   String get message;
-  const AuthException(this.error, this.stackTrace);
+  const AuthException(
+    this.error,
+    this.stackTrace,
+  );
 
   @override
   String toString() => message;
