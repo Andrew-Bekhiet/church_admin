@@ -11,7 +11,8 @@ INSERT INTO auth.permissions (name) VALUES
 ('recordAllServantsAttendance'),
 ('recoverDeleted'),
 ('deleteData'),
-('exportAllData')
+('exportAllData'),
+('maintenanceNotifications')
 ON CONFLICT DO NOTHING;
 
 INSERT INTO public.work_status (name) VALUES
