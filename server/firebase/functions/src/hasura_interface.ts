@@ -214,6 +214,40 @@ export async function upsertUser(user: {
   return null;
 }
 
+export async function insertAllPermissionsForFirstUser(
+  hasuraUID: string,
+): Promise<string[]> {
+  try {
+    const hasura_response = await makeGraphqlRequest({
+      query: `
+            mutation grantFirstUserAllPermissions($uid: uuid!) {
+              grantFirstUserAllPermissions(args: { userUid: $uid }) {
+                permission
+              }
+            }
+          `,
+      variables: { uid: hasuraUID },
+      operationName: "grantFirstUserAllPermissions",
+    });
+
+    if (hasura_response.data?.["errors"]) {
+      throw new https.HttpsError(
+        "internal",
+        "Failed to grant first user permissions",
+        hasura_response.data?.["errors"],
+      );
+    }
+
+    const granted: { permission: string }[] =
+      hasura_response.data?.["data"]?.["grantFirstUserAllPermissions"] ?? [];
+
+    return granted.map((p) => p.permission);
+  } catch (e) {
+    console.error(e);
+    throw e;
+  }
+}
+
 export async function unapproveUser(hasuraUID: string): Promise<void> {
   try {
     await makeGraphqlRequest({
