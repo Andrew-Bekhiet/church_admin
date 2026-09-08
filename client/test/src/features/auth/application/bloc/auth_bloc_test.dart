@@ -49,6 +49,7 @@ AuthUser initialAuthUser = AuthUser(
   MockSpec<AuthStorage>(),
   MockSpec<FirebaseAuthRepository>(),
   MockSpec<DatabaseService>(),
+  MockSpec<FunctionsService>(),
   MockSpec<LocalAuthService>(),
   MockSpec<ConnectivityService>(),
   MockSpec<UsersDAO>(),
@@ -426,6 +427,35 @@ void main() {
           verify(mockRepo.reload());
         },
       );
+
+      blocTest<AuthBloc, AuthState>(
+        'reloadUser_whenGrantingFirstUserPermissionsFails_staysAuthenticated',
+        setUp: () {
+          final mockFunctions =
+              globalProviderContainer.read(functionsServiceProvider)
+                  as MockFunctionsService;
+
+          when(
+            mockFunctions.grantFirstUserAllPermissions(),
+          ).thenThrow(Exception('offline'));
+        },
+        build: _createAuthBloc,
+        act: (bloc) async {
+          await Future.delayed(Duration.zero);
+          bloc.add(const ReloadUser());
+          await Future.delayed(Duration.zero);
+        },
+        wait: const Duration(seconds: 1),
+        expect: () => [
+          isA<AuthAuthenticated>()
+              .having((s) => s.authUser.idToken, 'idToken', 'idToken')
+              .having((s) => s.userData, 'userData', initialUserData),
+          isA<AuthLoading>(),
+          isA<AuthAuthenticated>()
+              .having((s) => s.authUser.idToken, 'idToken', 'reloaded')
+              .having((s) => s.userData, 'userData', initialUserData),
+        ],
+      );
     });
   });
 }
@@ -435,6 +465,7 @@ Future<void> _setUp() async {
     await _setUpMockConnectivity(),
     await _setUpMockAuthRepository(),
     await _setUpMockDatabaseService(),
+    await _setUpMockFunctionsService(),
     await _setUpMockAuthStorage(),
   ];
 
@@ -534,6 +565,14 @@ Future<Override> _setUpMockDatabaseService() async {
   return databaseServiceProvider.overrideWithValue(mock);
 }
 
+Future<Override> _setUpMockFunctionsService() async {
+  final mock = MockFunctionsService();
+
+  when(mock.grantFirstUserAllPermissions()).thenAnswer((_) async {});
+
+  return functionsServiceProvider.overrideWithValue(mock);
+}
+
 AuthBloc _createAuthBloc({bool noCachedUser = false}) {
   return AuthBloc(
     connectivityStream: globalProviderContainer
@@ -541,6 +580,7 @@ AuthBloc _createAuthBloc({bool noCachedUser = false}) {
         .connectivityStream,
     authRepository: globalProviderContainer.read(authRepositoryProvider),
     databaseService: globalProviderContainer.read(databaseServiceProvider),
+    functionsService: globalProviderContainer.read(functionsServiceProvider),
     authStorage: globalProviderContainer.read(authStorageProvider),
     loadCachedUser: !noCachedUser,
   );

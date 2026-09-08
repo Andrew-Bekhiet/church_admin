@@ -152,6 +152,7 @@ final authBlocProvider = Provider<AuthBloc>((ref) {
     authRepository: ref.watch(authRepositoryProvider),
     authStorage: ref.watch(authStorageProvider),
     databaseService: ref.watch(databaseServiceProvider),
+    functionsService: ref.watch(functionsServiceProvider),
     connectivityStream: ref
         .watch(connectivityServiceProvider)
         .connectivityStream,

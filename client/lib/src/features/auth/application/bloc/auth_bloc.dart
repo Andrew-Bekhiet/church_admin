@@ -9,6 +9,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   final AuthRepository _authRepository;
   final DatabaseService _databaseService;
+  final FunctionsService _functionsService;
   final AuthStorage _authStorage;
   final Stream<bool> _connectivityStream;
 
@@ -59,6 +60,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc({
     required this._authRepository,
     required this._databaseService,
+    required this._functionsService,
     required this._authStorage,
     required this._connectivityStream,
     bool loadCachedUser = true,
@@ -295,13 +297,31 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(AuthLoading(previousState: previousState));
       await _authRepository.reload();
 
-      if (!(currentUser?.emailVerified ?? false)) emit(previousState);
+      if (!(currentUser?.emailVerified ?? false)) {
+        emit(previousState);
+
+        return;
+      }
+
+      await _maybeGrantFirstUserAllPermissions();
     } catch (e, stackTrace) {
       emit(
         AuthExceptionState(
           exception: e,
           stackTrace: stackTrace,
           previousState: state,
+        ),
+      );
+    }
+  }
+
+  Future<void> _maybeGrantFirstUserAllPermissions() async {
+    try {
+      await _functionsService.grantFirstUserAllPermissions();
+    } catch (error, stackTrace) {
+      unawaited(
+        LoggingService.I.exception(
+          LogRecord(error: error, stackTrace: stackTrace),
         ),
       );
     }

@@ -131,6 +131,10 @@ class FunctionsService {
     return response.data;
   }
 
+  Future<void> grantFirstUserAllPermissions() async {
+    await httpsCallable('grantFirstUserAllPermissions').call();
+  }
+
   Future<void> deleteMyAccount() async {
     await httpsCallable('deleteMyAccount').call();
   }
