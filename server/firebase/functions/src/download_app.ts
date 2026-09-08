@@ -1,5 +1,6 @@
 import { File, GetFilesOptions, GetFilesResponse } from "@google-cloud/storage";
 import { getStorage } from "firebase-admin/storage";
+import { defineString } from "firebase-functions/params";
 import { https } from "firebase-functions/v2";
 import { assertUserAuthenticatedAndApproved } from "./common";
 
@@ -10,6 +11,11 @@ type Version = {
 };
 
 const expiryWindowMillis = 1000 * 60 * 20;
+
+const appReleaseBucketName = defineString("APP_RELEASE_GCS_BUCKET", {
+  description: "The name of the GCS bucket where app releases are stored",
+  default: "church-admin-local-releases",
+});
 
 export const getAppDownloadLink = https.onCall({}, async (context) => {
   const currentUser = await assertUserAuthenticatedAndApproved(context.auth);
@@ -34,7 +40,7 @@ export const getAppDownloadLink = https.onCall({}, async (context) => {
 
   do {
     response = await getStorage()
-      .bucket(process.env["APP_RELEASE_GCS_BUCKET"])
+      .bucket(appReleaseBucketName.value())
       .getFiles({ prefix: "app-release-v", pageToken: nextPageToken });
 
     maxVersion = response[0].reduce((maxResult, file) => {
@@ -82,7 +88,7 @@ export const getAppDownloadLink = https.onCall({}, async (context) => {
 
   return (
     await getStorage()
-      .bucket(process.env["APP_RELEASE_GCS_BUCKET"])
+      .bucket(appReleaseBucketName.value())
       .file(`app-release-v${maxVersionString}.${extension}`)
       .getSignedUrl({
         queryParams: {

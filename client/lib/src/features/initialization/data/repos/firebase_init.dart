@@ -4,6 +4,7 @@ import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 
@@ -20,8 +21,9 @@ class FirebaseInit implements Initializer {
 
     _initFirebaseFirebaseCloudMessaging();
 
-    if (kDebugMode && kEmulatorsHost != null) {
-      await _initializeFirebaseEmulators(kEmulatorsHost!);
+    if (kEmulatorsHost case final kEmulatorsHost?
+        when kEmulatorsHost.isNotEmpty && kDebugMode) {
+      await _initializeFirebaseEmulators(kEmulatorsHost);
     }
   }
 
@@ -52,10 +54,12 @@ class FirebaseInit implements Initializer {
   }
 
   Future<void> _initializeFirebaseEmulators(String kEmulatorsHost) async {
+    await FirebaseAuth.instance.useAuthEmulator(kEmulatorsHost, 9099);
     FirebaseFunctions.instanceFor(
       region: 'europe-west6',
     ).useFunctionsEmulator(kEmulatorsHost, 5001);
     FirebaseFunctions.instance.useFunctionsEmulator(kEmulatorsHost, 5001);
+    FirebaseDatabase.instance.useDatabaseEmulator(kEmulatorsHost, 9000);
   }
 
   void _initFirebaseFirebaseCloudMessaging() {

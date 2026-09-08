@@ -1,5 +1,14 @@
 import axios, { AxiosResponse } from "axios";
+import { defineSecret, defineString } from "firebase-functions/params";
 import { https } from "firebase-functions/v1";
+
+const hasuraServer = defineString("HASURA_SERVER", {
+  description: "The URL of the Hasura server",
+});
+
+const hasuraAdminSecret = defineSecret("HASURA_ADMIN_SECRET", {
+  description: "The admin secret for the Hasura server",
+});
 
 export async function checkUserApproved(uid: string): Promise<boolean> {
   try {
@@ -16,8 +25,8 @@ export async function checkUserApproved(uid: string): Promise<boolean> {
       variables: { uid },
       operationName: "checkApproved",
     });
-    const permissions: Record<string, string>[] =
-      hasura_response.data?.["data"]?.["authUsersData"]?.[0]?.["permissions"];
+    const permissions: Record<string, string>[] = hasura_response.data?.["data"]
+      ?.["authUsersData"]?.[0]?.["permissions"];
 
     return (
       permissions.find(
@@ -196,16 +205,15 @@ export async function upsertUser(user: {
       operationName: "addUser",
     });
 
-    const rslt =
-      hasura_response.data?.["data"]?.["insertAuthUsersData"]?.[
-        "returning"
-      ]?.[0];
+    const rslt = hasura_response.data?.["data"]?.["insertAuthUsersData"]?.[
+      "returning"
+    ]?.[0];
 
     return rslt
       ? {
-          hasura_uid: rslt?.["uid"],
-          person_id: rslt?.["person"]?.["id"],
-        }
+        hasura_uid: rslt?.["uid"],
+        person_id: rslt?.["person"]?.["id"],
+      }
       : null;
   } catch (e) {
     console.error(e);
@@ -319,8 +327,8 @@ export async function updatePhotoTime(
       query: `
             mutation updatePhotoTime($id: uuid!, $photoUpdatedAt: timestamptz) {
               ${op_name}(pkColumns: {${
-                table == "users" ? "u" : ""
-              }id: $id}, _set: {photoUpdatedAt: $photoUpdatedAt}) {
+        table == "users" ? "u" : ""
+      }id: $id}, _set: {photoUpdatedAt: $photoUpdatedAt}) {
                 ${table == "users" ? "u" : ""}id
               }
             }
@@ -338,12 +346,13 @@ export async function updatePhotoTime(
       (hasura_response.data?.["data"]?.[op_name]?.[
         `${table == "users" ? "u" : ""}id`
       ] ?? null) != id
-    )
+    ) {
       throw new https.HttpsError(
         "not-found",
         `Object ${id} was not found in ${table}`,
         hasura_response.data?.["errors"],
       );
+    }
   } catch (e) {
     console.error(e);
     throw e;
@@ -365,8 +374,8 @@ export async function updatePhotoBlurHash(
       query: `
             mutation updatePhotoBlurHash($id: uuid!, $blurhash: String) {
               ${op_name}(pkColumns: {${
-                table == "users" ? "u" : ""
-              }id: $id}, _set: {blurhash: $blurhash}) {
+        table == "users" ? "u" : ""
+      }id: $id}, _set: {blurhash: $blurhash}) {
                 ${table == "users" ? "u" : ""}id
               }
             }
@@ -382,12 +391,13 @@ export async function updatePhotoBlurHash(
       (hasura_response.data?.["data"]?.[op_name]?.[
         `${table == "users" ? "u" : ""}id`
       ] ?? null) != id
-    )
+    ) {
       throw new https.HttpsError(
         "not-found",
         `Object ${id} was not found in ${table}`,
         hasura_response.data?.["errors"],
       );
+    }
   } catch (e) {
     console.error(e);
     throw e;
@@ -424,7 +434,7 @@ export async function makeGraphqlRequest({
   asRole?: string;
 }): Promise<AxiosResponse> {
   return axios.post(
-    process.env["HASURA_SERVER"]!,
+    hasuraServer.value(),
     JSON.stringify({
       query,
       variables,
@@ -434,7 +444,7 @@ export async function makeGraphqlRequest({
       method: "POST",
       headers: {
         "content-type": "application/json",
-        "x-hasura-admin-secret": process.env["HASURA_ADMIN_SECRET"]!,
+        "x-hasura-admin-secret": hasuraAdminSecret.value(),
         "x-hasura-role": asRole ?? "admin",
         ...(asUser ? { "x-hasura-user-id": asUser } : {}),
       },

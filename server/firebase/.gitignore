@@ -65,6 +65,7 @@ node_modules/
 #Emulators data
 emulators/
 firebase-export-*/
+emulator-data/
 
 church-data-admin.json
 backup-script.sh
