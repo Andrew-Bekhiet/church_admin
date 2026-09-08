@@ -13,4 +13,4 @@ node_modules/
 # dotenv environment variables file
 .env
 .env.*
-.secrets.local
+.secret.local

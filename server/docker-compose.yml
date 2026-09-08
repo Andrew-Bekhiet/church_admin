@@ -80,7 +80,7 @@ services:
       HASURA_GRAPHQL_ENABLED_APIS: graphql,metadata,pgdump,config
       HASURA_GRAPHQL_EXPERIMENTAL_FEATURES: naming_convention
       HASURA_GRAPHQL_LIVE_QUERIES_MULTIPLEXED_REFETCH_INTERVAL: ${HASURA_GRAPHQL_LIVE_QUERIES_MULTIPLEXED_REFETCH_INTERVAL:-1000}
-      STUDY_YEAR_ROLL_NOTIFY_URL: ${STUDY_YEAR_ROLL_NOTIFY_URL:-http://firebase-emulators:5001/church-admin-local/us-central1/notifyStudyYearRollFailure}
+      STUDY_YEAR_ROLL_NOTIFY_URL: ${STUDY_YEAR_ROLL_NOTIFY_URL:-http://firebase-emulators:5001/church-admin-local/europe-west6/notifyStudyYearRollFailure}
       STUDY_YEAR_ROLL_WEBHOOK_SECRET: ${STUDY_YEAR_ROLL_WEBHOOK_SECRET:-local-dev-webhook-secret}
     ports:
       - "${HASURA_PORT:-8080}:8080"
@@ -121,7 +121,7 @@ services:
       dockerfile: Dockerfile.emulators
     environment:
       FIREBASE_PROJECT_ID: ${FIREBASE_PROJECT_ID:-church-admin-local}
-      HASURA_SERVER: http://hasura:8080
+      HASURA_SERVER: http://hasura:8080/v1/graphql
       HASURA_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET}
       APP_RELEASE_GCS_BUCKET: ${APP_RELEASE_GCS_BUCKET:-church-admin-local-releases}
     volumes:

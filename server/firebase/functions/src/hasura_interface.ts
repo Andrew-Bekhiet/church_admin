@@ -1,14 +1,6 @@
 import axios, { AxiosResponse } from "axios";
-import { defineSecret, defineString } from "firebase-functions/params";
 import { https } from "firebase-functions/v1";
-
-const hasuraServer = defineString("HASURA_SERVER", {
-  description: "The URL of the Hasura server",
-});
-
-const hasuraAdminSecret = defineSecret("HASURA_ADMIN_SECRET", {
-  description: "The admin secret for the Hasura server",
-});
+import { hasuraAdminSecret, hasuraServer } from ".";
 
 export async function checkUserApproved(uid: string): Promise<boolean> {
   try {
