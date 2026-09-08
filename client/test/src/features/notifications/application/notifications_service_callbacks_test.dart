@@ -182,7 +182,7 @@ Future<void> _testNotificationMethod({
 
   final paginatableStreamCall = verifyInOrder([
     InitializationService.I.initialize(),
-    AuthBloc.I.currentUser,
+    AuthBloc.I.isOnboarded,
     advancedQueryParser.createPaginatableStream(captureAny),
     (NotificationsStorage.I as MockNotificationsStorage).writeNotification(
       argThat(matchExpectedNotification(expectedNotification)),
@@ -261,6 +261,7 @@ Override _setUpMockAuthBloc() {
   );
 
   when(mockAuthBloc.isSignedIn).thenReturn(true);
+  when(mockAuthBloc.isOnboarded).thenReturn(true);
   when(mockAuthBloc.currentUser).thenReturn(authUser);
   when(mockAuthBloc.userStream).thenAnswer((_) => Stream.value(authUser));
 

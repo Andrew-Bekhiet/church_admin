@@ -312,6 +312,18 @@ async function insertUser(user: {
   return toUserRef(hasura_response, "insertAuthUsersData");
 }
 
+export async function hasPendingInvite(email: string): Promise<boolean> {
+  try {
+    const seeded = await findSeededUserByEmail(email);
+
+    return !!seeded && !seeded.auth_id;
+  } catch (e) {
+    console.error(e);
+  }
+
+  return false;
+}
+
 export async function claimSeededUser(user: {
   email: string;
   uid: string;

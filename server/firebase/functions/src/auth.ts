@@ -8,7 +8,12 @@ import {
 } from "firebase-functions/v2/identity";
 import { Readable } from "stream";
 import { hasuraClaims } from "./common";
-import { claimSeededUser, getHasuraUID, upsertUser } from "./hasura_interface";
+import {
+  claimSeededUser,
+  getHasuraUID,
+  hasPendingInvite,
+  upsertUser,
+} from "./hasura_interface";
 
 async function uploadUserPhotoToStorage(photoURL: string, person_id: string) {
   const fileWriteStream = getStorage()
@@ -28,12 +33,32 @@ async function uploadUserPhotoToStorage(photoURL: string, person_id: string) {
   );
 }
 
+async function mustVerifyEmailBeforeClaiming(authUser: {
+  email?: string;
+  emailVerified?: boolean;
+}): Promise<boolean> {
+  if (authUser.emailVerified) {
+    return false;
+  }
+
+  return hasPendingInvite(authUser.email!);
+}
+
 export const beforeUserSignUp = beforeUserCreated(async (event) => {
   const authUser = event.data!;
 
   console.dir(authUser, { depth: 4 });
   try {
     const displayName = authUser.displayName ?? authUser.email!;
+
+    if (await mustVerifyEmailBeforeClaiming(authUser)) {
+      console.info(
+        "Deferring invite claim for %s until the email is verified",
+        authUser.email,
+      );
+
+      return { displayName, photoURL: authUser.photoURL };
+    }
 
     const dbUser = await upsertUser({
       name: displayName,
@@ -73,6 +98,15 @@ export const beforeUserSignIn = beforeUserSignedIn(async (event) => {
 
     if (existing_uid) {
       return { customClaims: hasuraClaims(existing_uid) };
+    }
+
+    if (!authUser.emailVerified) {
+      console.info(
+        "No database user for %s yet; awaiting email verification",
+        authUser.email,
+      );
+
+      return;
     }
 
     const claimed = await claimSeededUser({

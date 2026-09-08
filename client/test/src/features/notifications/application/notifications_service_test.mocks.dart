@@ -869,6 +869,15 @@ class MockAuthBloc extends _i1.Mock implements _i4.AuthBloc {
           as bool);
 
   @override
+  bool get isOnboarded =>
+      (super.noSuchMethod(
+            Invocation.getter(#isOnboarded),
+            returnValue: false,
+            returnValueForMissingStub: false,
+          )
+          as bool);
+
+  @override
   _i11.Stream<_i4.AuthUser?> get userStream =>
       (super.noSuchMethod(
             Invocation.getter(#userStream),
@@ -1443,6 +1452,15 @@ class MockFunctionsService extends _i1.Mock implements _i4.FunctionsService {
             returnValueForMissingStub: _i11.Future<void>.value(),
           )
           as _i11.Future<void>);
+
+  @override
+  _i11.Future<bool> tryClaimInvitation() =>
+      (super.noSuchMethod(
+            Invocation.method(#tryClaimInvitation, []),
+            returnValue: _i11.Future<bool>.value(false),
+            returnValueForMissingStub: _i11.Future<bool>.value(false),
+          )
+          as _i11.Future<bool>);
 
   @override
   _i11.Future<_i4.Address?> getAddressFromLocation(_i4.Point? location) =>

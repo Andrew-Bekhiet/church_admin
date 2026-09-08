@@ -11,9 +11,7 @@ export function hasuraClaims(hasuraUID: string) {
   };
 }
 
-export async function assertUserAuthenticatedAndApproved(
-  authData: AuthData | undefined,
-): Promise<UserRecord> {
+function assertEmailVerified(authData: AuthData | undefined): AuthData {
   if (!authData) {
     console.error("User not authenticated");
     throw new https.HttpsError("unauthenticated", "unauthenticated");
@@ -24,10 +22,23 @@ export async function assertUserAuthenticatedAndApproved(
     throw new https.HttpsError("unauthenticated", "unauthenticated");
   }
 
-  const authUser = await getAuth().getUser(authData.uid);
+  return authData;
+}
 
-  if (!(await checkUserApproved(authData.token["x-hasura-user-id"]))) {
-    console.error("User is not approved", authData.token["x-hasura-user-id"]);
+export async function assertUserEmailVerified(
+  authData: AuthData | undefined,
+): Promise<UserRecord> {
+  return getAuth().getUser(assertEmailVerified(authData).uid);
+}
+
+export async function assertUserAuthenticatedAndApproved(
+  authData: AuthData | undefined,
+): Promise<UserRecord> {
+  const { uid, token } = assertEmailVerified(authData);
+  const authUser = await getAuth().getUser(uid);
+
+  if (!(await checkUserApproved(token["x-hasura-user-id"]))) {
+    console.error("User is not approved", token["x-hasura-user-id"]);
     throw new https.HttpsError("unauthenticated", "unauthenticated");
   }
 

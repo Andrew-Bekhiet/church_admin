@@ -467,6 +467,15 @@ class MockAuthBloc extends _i1.Mock implements _i2.AuthBloc {
           as bool);
 
   @override
+  bool get isOnboarded =>
+      (super.noSuchMethod(
+            Invocation.getter(#isOnboarded),
+            returnValue: false,
+            returnValueForMissingStub: false,
+          )
+          as bool);
+
+  @override
   _i3.Stream<_i2.AuthUser?> get userStream =>
       (super.noSuchMethod(
             Invocation.getter(#userStream),

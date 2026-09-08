@@ -63,6 +63,20 @@ class FunctionsService {
     await httpsCallable('deletePhoto').call({'table': table, 'id': id});
   }
 
+  Future<bool> tryClaimInvitation() async {
+    try {
+      await httpsCallable('tryClaimInvitation').call<void>();
+
+      return true;
+    } on FirebaseFunctionsException catch (e) {
+      if (e.code == 'unauthenticated' || e.code == 'not-found') {
+        return false;
+      }
+
+      rethrow;
+    }
+  }
+
   Future<Address?> getAddressFromLocation(Point location) async {
     final response = await _dio.getUri(
       Uri(

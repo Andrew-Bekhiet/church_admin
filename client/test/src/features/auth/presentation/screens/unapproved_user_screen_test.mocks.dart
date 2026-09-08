@@ -96,6 +96,15 @@ class MockAuthBloc extends _i1.Mock implements _i6.AuthBloc {
           as bool);
 
   @override
+  bool get isOnboarded =>
+      (super.noSuchMethod(
+            Invocation.getter(#isOnboarded),
+            returnValue: false,
+            returnValueForMissingStub: false,
+          )
+          as bool);
+
+  @override
   _i7.Stream<_i6.AuthUser?> get userStream =>
       (super.noSuchMethod(
             Invocation.getter(#userStream),
@@ -354,6 +363,15 @@ class MockFunctionsService extends _i1.Mock implements _i6.FunctionsService {
             returnValueForMissingStub: _i7.Future<void>.value(),
           )
           as _i7.Future<void>);
+
+  @override
+  _i7.Future<bool> tryClaimInvitation() =>
+      (super.noSuchMethod(
+            Invocation.method(#tryClaimInvitation, []),
+            returnValue: _i7.Future<bool>.value(false),
+            returnValueForMissingStub: _i7.Future<bool>.value(false),
+          )
+          as _i7.Future<bool>);
 
   @override
   _i7.Future<_i6.Address?> getAddressFromLocation(_i6.Point? location) =>

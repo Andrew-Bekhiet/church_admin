@@ -21,3 +21,4 @@ export * from "./notify_study_year_roll_failure";
 export * from "./register_fcm_token";
 export * from "./storage_proxy";
 export * from "./storage_triggers";
+export * from "./try_claim_invitation";

@@ -26,14 +26,14 @@ Aim for **zero** comments. A comment you feel like writing is a signal to rename
 
 Instead of a comment:
 
-- Extract a predicate whose name _is_ the rule — `if (await belongsToALiveAccount(seeded.auth_id))`.
-- Rename so a return value explains itself — `claimSeededUser()` returning the claimed row or `null`, rather than `claimUser()` with a doc comment explaining the `null`.
+- Extract a predicate whose name _is_ the rule — `if (await mustVerifyEmailBeforeClaiming(authUser))`.
+- Rename so a return value explains itself — `tryClaimInvitation()` rather than `claimInvitation()` with a doc comment explaining the `bool`.
 - Use a specific verb — `uploadUserPhotoToStorage`, not `copyProviderPhoto`.
-- Prefix conditional work with `_maybe` — `_maybeRefreshExpiredToken`.
+- Prefix conditional work with `_maybe` — `_maybeClaimPendingInvitation`.
 
 Doc comments are allowed only when they add value a name cannot carry. Never restate the code.
 
-**Keep names in sync across the client/server boundary.** A Dart wrapper, the callable it invokes, and the file exporting it should share one name (`deleteMyAccount` / `delete_my_account.ts`). Renaming a deployed callable is a deploy-order dependency — client and functions ship separately, so a mismatched pair fails with `NOT_FOUND`.
+**Keep names in sync across the client/server boundary.** A Dart wrapper, the callable it invokes, and the file exporting it should share one name (`tryClaimInvitation` / `try_claim_invitation.ts`). Renaming a deployed callable is a deploy-order dependency — client and functions ship separately, so a mismatched pair fails with `NOT_FOUND`.
 
 ## Dart & Flutter
 
@@ -120,7 +120,7 @@ Permissions hang off `auth.users_data.uid` — never `auth_id`. `auth.users_perm
 ### TypeScript functions
 
 - Errors: wrap in `try`/`catch`, `console.error`, return a null/false fallback — match the surrounding file rather than throwing through it.
-- Callables assert the caller first (`assertUserAuthenticatedAndApproved`).
+- Callables assert the caller first (`assertUserAuthenticatedAndApproved`, or `assertUserEmailVerified` where approval cannot exist yet).
 - Error messages should be user-friendly and localisable via error codes.
 
 ## Tooling gotchas

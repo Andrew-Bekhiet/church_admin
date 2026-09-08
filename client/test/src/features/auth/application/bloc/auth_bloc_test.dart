@@ -35,6 +35,7 @@ final initialUserData = User(
 final unclaimedAuthUser = AuthUser(
   uid: 'uid',
   email: 'email',
+  emailVerified: true,
   idToken: 'idToken',
   claims: {
     'exp':
@@ -63,6 +64,7 @@ AuthUser initialAuthUser = AuthUser(
   MockSpec<LocalAuthService>(),
   MockSpec<ConnectivityService>(),
   MockSpec<UsersDAO>(),
+  MockSpec<FunctionsService>(),
 ])
 void main() {
   group('AuthBloc =>', () {
@@ -437,6 +439,35 @@ void main() {
           verify(mockRepo.reload());
         },
       );
+
+      blocTest<AuthBloc, AuthState>(
+        'reloadUser_whenTokenCarriesNoHasuraUserId_onboardsTheInvitee',
+        setUp: () async {
+          await AuthStorage.I.clearAll();
+          await AuthStorage.I.writeAuthDataToCache(unclaimedAuthUser);
+
+          final mockRepo =
+              globalProviderContainer.read(authRepositoryProvider)
+                  as MockFirebaseAuthRepository;
+
+          when(mockRepo.reload()).thenAnswer((_) async {});
+        },
+        build: _createAuthBloc,
+        act: (bloc) async {
+          await Future.delayed(Duration.zero);
+          bloc.add(const ReloadUser());
+          await Future.delayed(Duration.zero);
+        },
+        wait: const Duration(seconds: 1),
+        verify: (bloc) => expect(
+          bloc.state.unwrapped,
+          isA<AuthAuthenticated>().having(
+            (s) => s.userData,
+            'userData',
+            initialUserData,
+          ),
+        ),
+      );
     });
 
     group('loaded =>', () {
@@ -465,9 +496,18 @@ Future<void> _setUp() async {
     await _setUpMockAuthRepository(),
     await _setUpMockDatabaseService(),
     await _setUpMockAuthStorage(),
+    await _setUpMockFunctionsService(),
   ];
 
   initGlobalProviderContainer(overrides);
+}
+
+Future<Override> _setUpMockFunctionsService() async {
+  final mock = MockFunctionsService();
+
+  when(mock.tryClaimInvitation()).thenAnswer((_) async => true);
+
+  return functionsServiceProvider.overrideWithValue(mock);
 }
 
 Future<Override> _setUpMockConnectivity() async {
@@ -571,6 +611,7 @@ AuthBloc _createAuthBloc({bool noCachedUser = false}) {
     authRepository: globalProviderContainer.read(authRepositoryProvider),
     databaseService: globalProviderContainer.read(databaseServiceProvider),
     authStorage: globalProviderContainer.read(authStorageProvider),
+    functionsService: globalProviderContainer.read(functionsServiceProvider),
     loadCachedUser: !noCachedUser,
   );
 }

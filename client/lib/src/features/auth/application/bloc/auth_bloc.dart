@@ -18,10 +18,13 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final DatabaseService _databaseService;
   final AuthStorage _authStorage;
   final Stream<bool> _connectivityStream;
+  final FunctionsService _functionsService;
 
   Timer? _refreshTokenTimer;
 
   bool get isSignedIn => state.unwrapped is AuthAuthenticated;
+
+  bool get isOnboarded => currentUser?.hasuraUserId != null;
 
   AuthUser? get currentUser => switch (state.unwrapped) {
     AuthAuthenticated(:final authUser) => authUser,
@@ -62,6 +65,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     required this._databaseService,
     required this._authStorage,
     required this._connectivityStream,
+    required this._functionsService,
     bool loadCachedUser = true,
   }) : super(const AuthInitial()) {
     on<ListenToSubscriptions>(
@@ -296,7 +300,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(AuthLoading(previousState: previousState));
       await _authRepository.reload();
 
-      if (!(currentUser?.emailVerified ?? false)) emit(previousState);
+      if (!(currentUser?.emailVerified ?? false)) {
+        emit(previousState);
+      } else {
+        await _maybeClaimPendingInvitation();
+      }
     } catch (e, stackTrace) {
       emit(
         AuthExceptionState(
@@ -308,25 +316,15 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     }
   }
 
-  Future<void> _onSendEmailVerification(
-    SendEmailVerification event,
-    Emitter<AuthState> emit,
-  ) async {
-    try {
-      final previousState = state;
-      emit(AuthLoading(previousState: previousState));
+  Future<void> _maybeClaimPendingInvitation() async {
+    if (!isSignedIn || isOnboarded) {
+      return;
+    }
 
-      await _authRepository.sendEmailVerification();
+    await _authRepository.refreshToken();
 
-      emit(previousState);
-    } catch (e, stackTrace) {
-      emit(
-        AuthExceptionState(
-          exception: e,
-          stackTrace: stackTrace,
-          previousState: state,
-        ),
-      );
+    if (await _functionsService.tryClaimInvitation()) {
+      await _authRepository.refreshToken();
     }
   }
 
