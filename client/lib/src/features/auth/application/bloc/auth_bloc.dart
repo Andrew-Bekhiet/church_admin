@@ -14,6 +14,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final Stream<bool> _connectivityStream;
 
   Timer? _refreshTokenTimer;
+  bool _firstUserPermissionsClaimed = false;
 
   bool get isSignedIn => state.unwrapped is AuthAuthenticated;
 
@@ -140,6 +141,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         }
 
         _scheduleTokenRefresh(authUser);
+
+        if (userData != null) {
+          _maybeClaimFirstUserPermissions(authUser, userData);
+        }
 
         return AuthAuthenticated(authUser: authUser, userData: userData);
       },
@@ -315,7 +320,21 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     }
   }
 
+  void _maybeClaimFirstUserPermissions(AuthUser authUser, User userData) {
+    if (!authUser.emailVerified || userData.permissions.isNotEmpty) {
+      return;
+    }
+
+    unawaited(_maybeGrantFirstUserAllPermissions());
+  }
+
   Future<void> _maybeGrantFirstUserAllPermissions() async {
+    if (_firstUserPermissionsClaimed) {
+      return;
+    }
+
+    _firstUserPermissionsClaimed = true;
+
     try {
       await _functionsService.grantFirstUserAllPermissions();
     } catch (error, stackTrace) {

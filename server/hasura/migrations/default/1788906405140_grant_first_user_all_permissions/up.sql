@@ -4,6 +4,7 @@ language plpgsql
 volatile
 as $$
 declare
+  prerequisite_order text[] := array['readAllData', 'writeAllData', 'manageAllUsers'];
   permission_name text;
   granted auth.users_permissions;
 begin
@@ -14,15 +15,12 @@ begin
   end if;
 
   -- check_users_permissions_level_consistency is a BEFORE ROW trigger and does
-  -- not see rows inserted by its own statement, so each permission is inserted
-  -- on its own, prerequisites first.
+  -- not see rows inserted by its own statement, so each permission goes in on
+  -- its own statement, and the chain in prerequisite_order goes in in order.
   for permission_name in
     select name
     from auth.permissions
-    order by array_position(
-      array['readAllData', 'writeAllData', 'manageAllUsers'],
-      name
-    ) nulls first
+    order by array_position(prerequisite_order, name) nulls first
   loop
     insert into auth.users_permissions (uid, permission)
     values (user_uid, permission_name)

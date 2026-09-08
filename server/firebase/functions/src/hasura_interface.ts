@@ -221,7 +221,7 @@ export async function insertAllPermissionsForFirstUser(
     const hasura_response = await makeGraphqlRequest({
       query: `
             mutation grantFirstUserAllPermissions($uid: uuid!) {
-              grantFirstUserAllPermissions(args: { userUid: $uid }) {
+              authGrantFirstUserAllPermissions(args: { user_uid: $uid }) {
                 permission
               }
             }
@@ -239,7 +239,8 @@ export async function insertAllPermissionsForFirstUser(
     }
 
     const granted: { permission: string }[] =
-      hasura_response.data?.["data"]?.["grantFirstUserAllPermissions"] ?? [];
+      hasura_response.data?.["data"]?.["authGrantFirstUserAllPermissions"] ??
+        [];
 
     return granted.map((p) => p.permission);
   } catch (e) {
