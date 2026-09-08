@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
-import { getAuth } from "firebase-admin/auth";
 import { https } from "firebase-functions/v1";
+import { HttpsError } from "firebase-functions/v2/https";
 import { hasuraAdminSecret, hasuraServer } from ".";
 
 export async function checkUserApproved(uid: string): Promise<boolean> {
@@ -49,7 +49,7 @@ export async function getHasuraUID(
       operationName: "getUserByFirebaseUID",
     });
     const hasura_uid: string =
-      hasura_response.data?.["data"]?.["authUsersData"]?.[0]?.["uid"] ?? null;
+      dataOrThrow(hasura_response)["authUsersData"]?.[0]?.["uid"] ?? null;
 
     return hasura_uid;
   } catch (e) {
@@ -219,71 +219,26 @@ async function findSeededUserByEmail(
     : null;
 }
 
-async function belongsToALiveAccount(
-  firebaseAuthUID: string,
-): Promise<boolean> {
-  try {
-    await getAuth().getUser(firebaseAuthUID);
-
-    return true;
-  } catch (e) {
-    if ((e as { code?: string })?.code === "auth/user-not-found") {
-      return false;
-    }
-
-    throw e;
-  }
-}
-
-async function releaseDeletedAccount(
-  hasuraUID: string,
-  deletedAuthID: string,
-): Promise<void> {
-  const hasura_response = await makeGraphqlRequest({
-    query: `
-          mutation releaseDeletedAccount($uid: uuid!, $deletedAuthID: String!) {
-            updateAuthUsersData(
-              where: { uid: { _eq: $uid }, authId: { _eq: $deletedAuthID } }
-              _set: { authId: null }
-            ) {
-              affectedRows
-            }
-          }
-        `,
-    variables: { uid: hasuraUID, deletedAuthID },
-    operationName: "releaseDeletedAccount",
-  });
-
-  const releasedRows = dataOrThrow(hasura_response)["updateAuthUsersData"]
-    ?.["affectedRows"];
-
-  if (releasedRows !== 1) {
-    throw new Error(
-      `Deleted account ${deletedAuthID} was no longer attached to user ${hasuraUID}`,
-    );
-  }
-}
-
 async function attachFirebaseAccount(
   seeded: SeededUser,
   firebaseAuthUID: string,
-): Promise<HasuraUserRef | null> {
+): Promise<HasuraUserRef> {
+  if (seeded.auth_id && seeded.auth_id !== firebaseAuthUID) {
+    throw new HttpsError(
+      "already-exists",
+      "auth/email-belongs-to-another-account",
+    );
+  }
+
   if (!seeded.person_id) {
-    throw new Error(
-      `Seeded user ${seeded.hasura_uid} is not linked to a person`,
+    throw new HttpsError(
+      "failed-precondition",
+      "auth/invite-not-linked-to-person",
     );
   }
 
   if (seeded.auth_id === firebaseAuthUID) {
     return { hasura_uid: seeded.hasura_uid, person_id: seeded.person_id };
-  }
-
-  if (seeded.auth_id) {
-    if (await belongsToALiveAccount(seeded.auth_id)) {
-      throw new Error("Email already belongs to another account");
-    }
-
-    await releaseDeletedAccount(seeded.hasura_uid, seeded.auth_id);
   }
 
   const hasura_response = await makeGraphqlRequest({
@@ -306,7 +261,13 @@ async function attachFirebaseAccount(
     operationName: "claimSeededUser",
   });
 
-  return toUserRef(hasura_response, "updateAuthUsersData");
+  const claimed = toUserRef(hasura_response, "updateAuthUsersData");
+
+  if (!claimed) {
+    throw new HttpsError("aborted", "auth/invite-already-claimed");
+  }
+
+  return claimed;
 }
 
 async function insertUser(user: {
@@ -327,8 +288,7 @@ async function insertUser(user: {
                 authId: $firebaseAuthUID
                 name: $name,
                 person: {
-                  data: { name: $name, isServant: true, isStudent: false },
-                  onConflict: { constraint: persons_uid_key, updateColumns: [isServant, isStudent] },
+                  data: { name: $name, isServant: true, isStudent: false }
                 }
               }
             ) {
@@ -362,6 +322,10 @@ export async function claimSeededUser(user: {
     return seeded ? await attachFirebaseAccount(seeded, user.uid) : null;
   } catch (e) {
     console.error(e);
+
+    if (e instanceof HttpsError) {
+      throw e;
+    }
   }
 
   return null;
@@ -380,28 +344,48 @@ export async function upsertUser(user: {
       : await insertUser(user);
   } catch (e) {
     console.error(e);
+
+    if (e instanceof HttpsError) {
+      throw e;
+    }
   }
 
   return null;
 }
 
-export async function unapproveUser(hasuraUID: string): Promise<void> {
+export async function releaseUserAccount(hasuraUID: string): Promise<void> {
   try {
-    await makeGraphqlRequest({
+    const hasura_response = await makeGraphqlRequest({
       query: `
-            mutation unapproveUser($uid: uuid!) {
-  deleteAuthUsersPermissions(where: {_and: [{uid: {_eq: $uid}}, {permission: {_eq: "approved"}}]}) {
-    returning {
-      uid
-    }
-  }
-}
+            mutation releaseUserAccount($uid: uuid!) {
+              deleteAuthUsersPermissions(where: { uid: { _eq: $uid } }) {
+                affectedRows
+              }
+              deleteAuthUsersAdminOn(where: { uid: { _eq: $uid } }) {
+                affectedRows
+              }
+              updateAuthUsersData(
+                where: { uid: { _eq: $uid } }
+                _set: { authId: null }
+              ) {
+                affectedRows
+              }
+            }
           `,
       variables: {
         uid: hasuraUID,
       },
-      operationName: "unapproveUser",
+      operationName: "releaseUserAccount",
     });
+
+    const detached = dataOrThrow(hasura_response)["updateAuthUsersData"]
+      ?.["affectedRows"];
+
+    if (detached !== 1) {
+      throw new Error(
+        `Could not detach the Firebase account from ${hasuraUID}`,
+      );
+    }
   } catch (e) {
     console.error(e);
   }
