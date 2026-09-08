@@ -35,7 +35,10 @@ class _NewPasswordFieldState extends State<NewPasswordField> {
         RegexValidationRule(
           name:
               'تحتوي على رموز (^ \$ * . [ ] { } ( ) ? " ! @ # % & / \\ , > < \' : ; | _ ~ `)',
-          regex: "[^\$*.[]{}()?\"!@#%&/\\,><':;|_~`]",
+          regex:
+              '[${RegExp.escape(r"^$.[]{}()?"
+              r'"!@#%&/\,><'
+              ":;|_~`-")}]',
         ),
         MinCharactersValidationRule(
           _minPasswordLength,
