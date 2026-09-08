@@ -23,20 +23,14 @@ class HomeScreenWebRoute extends GoRouteData with $HomeScreenWebRoute {
       case AuthAuthenticated(authUser: AuthUser(emailVerified: false)):
         return const EmailVerificationRoute().location;
 
-      case AuthAuthenticated(userData: null):
-        return const AuthLoadingRoute().location;
-
-      case AuthAuthenticated(
-        userData: User(permissions: PermissionsSet(approved: false)),
-      ):
+      case AuthAuthenticated(isApproved: false):
         return const UnapprovedUserRoute().location;
 
-      case AuthAuthenticated(userData: User(:final person))
-          when !(person?.spiritDataUpToDate() ?? false):
-        return Uri(
-          path: const UpdateUserSpiritDataRoute().location,
-          queryParameters: {'forced': 'true'},
-        ).toString();
+      // TODO(ENG-226): add a redirect to EditPersonRoute if the user has no person data
+
+      case AuthAuthenticated(userData: User(:final person?))
+          when !person.spiritDataUpToDate():
+        return const UpdateUserSpiritDataRoute(forced: true).location;
 
       case _:
         return null;

@@ -162,6 +162,15 @@ class MockFunctionsService extends _i1.Mock implements _i5.FunctionsService {
           as _i6.Future<void>);
 
   @override
+  _i6.Future<bool> tryClaimAccount() =>
+      (super.noSuchMethod(
+            Invocation.method(#tryClaimAccount, []),
+            returnValue: _i6.Future<bool>.value(false),
+            returnValueForMissingStub: _i6.Future<bool>.value(false),
+          )
+          as _i6.Future<bool>);
+
+  @override
   _i6.Future<_i5.Address?> getAddressFromLocation(_i5.Point? location) =>
       (super.noSuchMethod(
             Invocation.method(#getAddressFromLocation, [location]),
@@ -223,13 +232,55 @@ class MockFunctionsService extends _i1.Mock implements _i5.FunctionsService {
           as _i6.Future<bool>);
 
   @override
-  _i6.Future<void> registerUserWithCode(String? registerCode) =>
+  _i6.Future<void> applyInvitationCode(String? invitationCode) =>
       (super.noSuchMethod(
-            Invocation.method(#registerUserWithCode, [registerCode]),
+            Invocation.method(#applyInvitationCode, [invitationCode]),
             returnValue: _i6.Future<void>.value(),
             returnValueForMissingStub: _i6.Future<void>.value(),
           )
           as _i6.Future<void>);
+
+  @override
+  _i6.Future<List<_i5.AuthUser>> getAuthUsers() =>
+      (super.noSuchMethod(
+            Invocation.method(#getAuthUsers, []),
+            returnValue: _i6.Future<List<_i5.AuthUser>>.value(<_i5.AuthUser>[]),
+            returnValueForMissingStub: _i6.Future<List<_i5.AuthUser>>.value(
+              <_i5.AuthUser>[],
+            ),
+          )
+          as _i6.Future<List<_i5.AuthUser>>);
+
+  @override
+  _i6.Future<String> approveAndLinkAuthUser({
+    required String? authId,
+    required String? hasuraUid,
+  }) =>
+      (super.noSuchMethod(
+            Invocation.method(#approveAndLinkAuthUser, [], {
+              #authId: authId,
+              #hasuraUid: hasuraUid,
+            }),
+            returnValue: _i6.Future<String>.value(
+              _i7.dummyValue<String>(
+                this,
+                Invocation.method(#approveAndLinkAuthUser, [], {
+                  #authId: authId,
+                  #hasuraUid: hasuraUid,
+                }),
+              ),
+            ),
+            returnValueForMissingStub: _i6.Future<String>.value(
+              _i7.dummyValue<String>(
+                this,
+                Invocation.method(#approveAndLinkAuthUser, [], {
+                  #authId: authId,
+                  #hasuraUid: hasuraUid,
+                }),
+              ),
+            ),
+          )
+          as _i6.Future<String>);
 
   @override
   _i6.Future<String> getAppDownloadLink(String? platform) =>

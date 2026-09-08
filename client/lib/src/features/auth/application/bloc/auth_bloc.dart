@@ -11,10 +11,17 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final DatabaseService _databaseService;
   final AuthStorage _authStorage;
   final Stream<bool> _connectivityStream;
+  final FunctionsService _functionsService;
+  final FeatureFlagsRepository _featureFlagsRepository;
 
   Timer? _refreshTokenTimer;
 
   bool get isSignedIn => state.unwrapped is AuthAuthenticated;
+
+  bool get isApproved => switch (state.unwrapped) {
+    AuthAuthenticated(:final isApproved) => isApproved,
+    _ => false,
+  };
 
   AuthUser? get currentUser => switch (state.unwrapped) {
     AuthAuthenticated(:final authUser) => authUser,
@@ -43,24 +50,20 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   Stream<bool> get isSignedInStream =>
       stream.map((_) => isSignedIn).startWith(isSignedIn).distinct();
 
-  Future<void> get loaded => switch (state.unwrapped) {
-    AuthAuthenticated(userData: null) || AuthLoading() =>
-      stream
-          .firstWhere(
-            (state) =>
-                state is! AuthLoading &&
-                (state is! AuthAuthenticated || state.userData != null),
-          )
-          .timeout(const Duration(seconds: 8))
-          .whenComplete(() => null),
-    _ => Future.value(),
-  };
+  Future<void> get loaded => state is! AuthLoading
+      ? Future.value()
+      : stream
+            .firstWhere((state) => state is! AuthLoading)
+            .then<void>((_) => null)
+            .timeout(const Duration(seconds: 8), onTimeout: () => null);
 
   AuthBloc({
     required this._authRepository,
     required this._databaseService,
     required this._authStorage,
     required this._connectivityStream,
+    required this._functionsService,
+    required this._featureFlagsRepository,
     bool loadCachedUser = true,
   }) : super(const AuthInitial()) {
     on<ListenToSubscriptions>(
@@ -79,6 +82,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<SendPasswordResetEmail>(_onSendPasswordResetEmail);
     on<SignOut>(_onSignOut);
     on<ReloadUser>(_onReloadUser);
+    on<ApplyInvitationCode>(_onApplyInvitationCode);
     on<SendEmailVerification>(_onSendEmailVerification);
 
     add(ListenToSubscriptions(loadCachedUser: loadCachedUser));
@@ -139,7 +143,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
         _scheduleTokenRefresh(authUser);
 
-        return AuthAuthenticated(authUser: authUser, userData: userData);
+        final state = AuthAuthenticated(authUser: authUser, userData: userData);
+        if (!state.isApproved && authUser.emailVerified) _maybeClaimAccount();
+
+        return state;
       },
       onError: (error, stackTrace) => AuthExceptionState(
         exception: error,
@@ -302,6 +309,39 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           exception: e,
           stackTrace: stackTrace,
           previousState: state,
+        ),
+      );
+    }
+  }
+
+  Future<void> _maybeClaimAccount() async {
+    if (!_featureFlagsRepository.enableAccountClaimingByEmail) {
+      return;
+    }
+
+    if (!await _functionsService.tryClaimAccount()) return;
+
+    await _authRepository.refreshToken();
+  }
+
+  Future<void> _onApplyInvitationCode(
+    ApplyInvitationCode event,
+    Emitter<AuthState> emit,
+  ) async {
+    final previousState = state;
+
+    try {
+      emit(AuthLoading(previousState: previousState));
+
+      await _functionsService.applyInvitationCode(event.code);
+      await _authRepository.reload();
+      await _authRepository.refreshToken();
+    } catch (e, stackTrace) {
+      emit(
+        AuthExceptionState(
+          exception: e,
+          stackTrace: stackTrace,
+          previousState: previousState,
         ),
       );
     }

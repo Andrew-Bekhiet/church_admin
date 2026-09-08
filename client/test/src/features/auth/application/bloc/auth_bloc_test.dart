@@ -9,6 +9,7 @@ import 'package:mockito/mockito.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:rxdart/subjects.dart';
 
+import '../../../../fakes/fake_feature_flags_repo.dart';
 import '../../../../utils.dart';
 import 'auth_bloc_test.mocks.dart';
 
@@ -32,6 +33,18 @@ final initialUserData = User(
   ),
 );
 
+final unclaimedAuthUser = AuthUser(
+  uid: 'uid',
+  email: 'email',
+  emailVerified: true,
+  idToken: 'idToken',
+  claims: {
+    'exp':
+        DateTime.now().add(const Duration(hours: 1)).millisecondsSinceEpoch ~/
+        1000,
+  },
+);
+
 AuthUser initialAuthUser = AuthUser(
   uid: 'uid',
   email: 'email',
@@ -52,6 +65,7 @@ AuthUser initialAuthUser = AuthUser(
   MockSpec<LocalAuthService>(),
   MockSpec<ConnectivityService>(),
   MockSpec<UsersDAO>(),
+  MockSpec<FunctionsService>(),
 ])
 void main() {
   group('AuthBloc =>', () {
@@ -426,6 +440,86 @@ void main() {
           verify(mockRepo.reload());
         },
       );
+
+      blocTest<AuthBloc, AuthState>(
+        'reloadUser_whenTokenCarriesNoHasuraUserId_onboardsTheInvitee',
+        setUp: () async {
+          await AuthStorage.I.clearAll();
+          await AuthStorage.I.writeAuthDataToCache(unclaimedAuthUser);
+
+          final mockRepo =
+              globalProviderContainer.read(authRepositoryProvider)
+                  as MockFirebaseAuthRepository;
+
+          when(mockRepo.reload()).thenAnswer((_) async {});
+        },
+        build: _createAuthBloc,
+        act: (bloc) async {
+          await Future.delayed(Duration.zero);
+          bloc.add(const ReloadUser());
+          await Future.delayed(Duration.zero);
+        },
+        wait: const Duration(seconds: 1),
+        verify: (bloc) {
+          expect(
+            bloc.state.unwrapped,
+            isA<AuthAuthenticated>().having(
+              (s) => s.userData,
+              'userData',
+              initialUserData,
+            ),
+          );
+        },
+      );
+
+      blocTest<AuthBloc, AuthState>(
+        'applyInvitationCode_whenApplyingFails_restoresThePreloadingState',
+        setUp: () {
+          final mockFunctions =
+              globalProviderContainer.read(functionsServiceProvider)
+                  as MockFunctionsService;
+          when(
+            mockFunctions.applyInvitationCode('INVITE-CODE'),
+          ).thenThrow(StateError('invalid invitation code'));
+        },
+        build: () => _createAuthBloc(noCachedUser: true),
+        act: (bloc) async {
+          await Future<void>.delayed(Duration.zero);
+          bloc.add(const ApplyInvitationCode('INVITE-CODE'));
+        },
+        wait: const Duration(milliseconds: 100),
+        expect: () => [
+          isA<AuthUnauthenticated>(),
+          isA<AuthLoading>().having(
+            (state) => state.previousState,
+            'previousState',
+            isA<AuthUnauthenticated>(),
+          ),
+          isA<AuthExceptionState>().having(
+            (state) => state.previousState,
+            'previousState',
+            isA<AuthUnauthenticated>(),
+          ),
+        ],
+      );
+    });
+
+    group('loaded =>', () {
+      test(
+        'loaded_whenTokenCarriesNoHasuraUserId_settlesWithoutWaiting',
+        () async {
+          await AuthStorage.I.clearAll();
+          await AuthStorage.I.writeAuthDataToCache(unclaimedAuthUser);
+
+          final bloc = _createAuthBloc();
+          addTearDown(bloc.close);
+
+          await expectLater(
+            bloc.loaded.timeout(const Duration(seconds: 1)),
+            completes,
+          );
+        },
+      );
     });
   });
 }
@@ -436,9 +530,18 @@ Future<void> _setUp() async {
     await _setUpMockAuthRepository(),
     await _setUpMockDatabaseService(),
     await _setUpMockAuthStorage(),
+    await _setUpMockFunctionsService(),
   ];
 
   initGlobalProviderContainer(overrides);
+}
+
+Future<Override> _setUpMockFunctionsService() async {
+  final mock = MockFunctionsService();
+
+  when(mock.tryClaimAccount()).thenAnswer((_) async => true);
+
+  return functionsServiceProvider.overrideWithValue(mock);
 }
 
 Future<Override> _setUpMockConnectivity() async {
@@ -481,7 +584,7 @@ Future<Override> _setUpMockAuthStorage() async {
 }
 
 Future<Override> _setUpMockAuthRepository() async {
-  late final controller = StreamController<AuthUser?>.broadcast(sync: true);
+  final controller = StreamController<AuthUser?>.broadcast(sync: true);
 
   final mock = MockFirebaseAuthRepository();
 
@@ -534,7 +637,10 @@ Future<Override> _setUpMockDatabaseService() async {
   return databaseServiceProvider.overrideWithValue(mock);
 }
 
-AuthBloc _createAuthBloc({bool noCachedUser = false}) {
+AuthBloc _createAuthBloc({
+  bool noCachedUser = false,
+  bool enableAccountClaimingByEmail = true,
+}) {
   return AuthBloc(
     connectivityStream: globalProviderContainer
         .read(connectivityServiceProvider)
@@ -542,6 +648,10 @@ AuthBloc _createAuthBloc({bool noCachedUser = false}) {
     authRepository: globalProviderContainer.read(authRepositoryProvider),
     databaseService: globalProviderContainer.read(databaseServiceProvider),
     authStorage: globalProviderContainer.read(authStorageProvider),
+    functionsService: globalProviderContainer.read(functionsServiceProvider),
+    featureFlagsRepository: FakeFeatureFlagsRepo(
+      enableAccountClaimingByEmail: enableAccountClaimingByEmail,
+    ),
     loadCachedUser: !noCachedUser,
   );
 }

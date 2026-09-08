@@ -9,6 +9,7 @@ class UpdateUserSpiritDataRoute extends GoRouteData
     with $UpdateUserSpiritDataRoute {
   final bool forced;
   final Person? $extra;
+
   const UpdateUserSpiritDataRoute({this.forced = false, this.$extra});
 
   @override
@@ -24,8 +25,11 @@ class UpdateUserSpiritDataRoute extends GoRouteData
       case AuthUnauthenticated():
         return const LoginRoute().location;
 
-      case AuthAuthenticated(userData: User(:final person))
-          when person?.spiritDataUpToDate() ?? false:
+      case AuthAuthenticated(userData: User(person: null)):
+        return const EditPersonRoute().location;
+
+      case AuthAuthenticated(userData: User(:final person?))
+          when person.spiritDataUpToDate():
         return const HomeScreenWebRoute().location;
 
       case _:

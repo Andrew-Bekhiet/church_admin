@@ -6699,7 +6699,7 @@ class Subscription_watchPerson_personsByPk_user {
   Subscription_watchPerson_personsByPk_user({
     required this.uid,
     required this.name,
-    required this.email,
+    this.email,
     this.$__typename = 'AuthUsersData',
   });
 
@@ -6713,7 +6713,7 @@ class Subscription_watchPerson_personsByPk_user {
     return Subscription_watchPerson_personsByPk_user(
       uid: stringToUuid(l$uid),
       name: (l$name as String),
-      email: (l$email as String),
+      email: (l$email as String?),
       $__typename: (l$$__typename as String),
     );
   }
@@ -6722,7 +6722,7 @@ class Subscription_watchPerson_personsByPk_user {
 
   final String name;
 
-  final String email;
+  final String? email;
 
   final String $__typename;
 
@@ -6828,9 +6828,7 @@ class _CopyWithImpl_Subscription_watchPerson_personsByPk_user<TRes>
       name: name == _undefined || name == null
           ? _instance.name
           : (name as String),
-      email: email == _undefined || email == null
-          ? _instance.email
-          : (email as String),
+      email: email == _undefined ? _instance.email : (email as String?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),

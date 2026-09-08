@@ -6,7 +6,10 @@
       "request": "launch",
       "type": "dart",
       "cwd": "${workspaceFolder}/client",
-      "args": ["--dart-define-from-file", "${workspaceFolder}/client/.env.dev"]
+      "args": [
+        "--dart-define-from-file",
+        "${workspaceFolder}/client/.env.local"
+      ]
     },
     {
       "name": "church_admin (profile mode)",

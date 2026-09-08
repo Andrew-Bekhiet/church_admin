@@ -55,6 +55,18 @@ computed_fields:
         schema: auth
       session_argument: hasura_session
     comment: ""
+insert_permissions:
+  - role: user
+    permission:
+      check:
+        uid:
+          _eq: X-Hasura-User-Id
+      set:
+        uid: x-hasura-User-Id
+      columns:
+        - name
+        - uid
+    comment: ""
 select_permissions:
   - role: user
     permission:
@@ -89,3 +101,18 @@ select_permissions:
                             - $
                             - uid
       allow_aggregations: true
+update_permissions:
+  - role: user
+    permission:
+      columns:
+        - name
+        - uid
+      filter:
+        uid:
+          _eq: X-Hasura-User-Id
+      check:
+        uid:
+          _eq: X-Hasura-User-Id
+      set:
+        uid: x-hasura-User-Id
+    comment: ""

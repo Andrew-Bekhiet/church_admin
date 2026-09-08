@@ -82,6 +82,13 @@ class EmailVerificationScreen extends StatelessWidget {
                           },
                     child: const Text('إعادة إرسال رسالة التحقق'),
                   ),
+                  Text(
+                    'إذا كان لديك كود دعوة، يمكنك تفعيل الحساب الآن',
+                    style: themeData.textTheme.titleMedium,
+                    textAlign: TextAlign.center,
+                  ),
+                  const InvitationCodeForm(),
+                  const SizedBox(height: 50),
                 ],
               ),
             ),

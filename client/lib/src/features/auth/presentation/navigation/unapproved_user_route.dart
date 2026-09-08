@@ -18,13 +18,11 @@ class UnapprovedUserRoute extends GoRouteData with $UnapprovedUserRoute {
     final authState = AuthBloc.I.state.unwrapped;
 
     switch (authState) {
-      case AuthAuthenticated(
-        userData: User(permissions: PermissionsSet(approved: true)),
-      ):
-        return const HomeScreenWebRoute().location;
-
       case AuthUnauthenticated():
         return const LoginRoute().location;
+
+      case AuthAuthenticated(isApproved: true):
+        return const HomeScreenWebRoute().location;
 
       default:
         return null;

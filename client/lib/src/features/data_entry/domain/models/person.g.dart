@@ -925,6 +925,7 @@ Person _$PersonFromJson(Map json) => Person(
   services: personsServicesFromJson(json['services'] as List?),
   tags: personsTagsFromJson(json['tags'] as List?),
   hobbies: personsHobbiesFromJson(json['hobbies'] as List?),
+  uid: json['uid'] as String?,
   user: json['user'] == null
       ? null
       : User.fromJson(Map<String, Object?>.from(json['user'] as Map)),
@@ -1053,6 +1054,7 @@ Map<String, dynamic> _$PersonToJson(Person instance) => <String, dynamic>{
   'tags': personsTagsToJson(instance.tags),
   'hobbies': personsHobbiesToJson(instance.hobbies),
   'user': instance.user?.toJson(),
+  'uid': instance.uid,
   'kodasHistory': instance.kodasHistory?.map((e) => e.toJson()).toList(),
   'attendanceHistory': instance.attendanceHistory
       ?.map((e) => e.toJson())

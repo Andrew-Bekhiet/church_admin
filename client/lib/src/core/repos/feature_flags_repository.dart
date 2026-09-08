@@ -8,6 +8,8 @@ class FeatureFlagsRepository {
   static FeatureFlagsRepository get I =>
       globalProviderContainer.read(featureFlagsRepoProvider);
 
+  static const Duration averageMonthDuration = Duration(days: 30);
+
   static const String latestVersionKey = 'latestVersion';
   static const String downloadPageURLKey = 'downloadPageURL';
   static const String releaseNotesURLKey = 'releaseNotesURL';
@@ -22,6 +24,8 @@ class FeatureFlagsRepository {
   static const String sessionReplaySampleRateKey = 'sessionReplaySampleRate';
   static const String allowAddingCustomObjectsKey = 'allowAddingCustomObjects';
   static const String enablePersonNationalIdKey = 'enablePersonNationalId';
+  static const String enableAccountClaimingByEmailKey =
+      'enableAccountClaimingByEmail';
 
   final FirebaseRemoteConfig _remoteConfig;
   final PackageInfo _packageInfo;
@@ -45,6 +49,9 @@ class FeatureFlagsRepository {
 
   bool get enablePersonNationalId =>
       _remoteConfig.getBool(enablePersonNationalIdKey);
+
+  bool get enableAccountClaimingByEmail =>
+      _remoteConfig.getBool(enableAccountClaimingByEmailKey);
 
   String? get forceUpdateMessage {
     final rawValue = _remoteConfig.getString(forceUpdateMessageKey);
@@ -123,6 +130,7 @@ class FeatureFlagsRepository {
       enablePostHogLogsKey: true,
       sessionReplaySampleRateKey: 1,
       enablePersonNationalIdKey: false,
+      enableAccountClaimingByEmailKey: true,
       allowAddingCustomObjectsKey: [
         advancedQueriesMetadata.district.name,
         advancedQueriesMetadata.college.name,

@@ -14,11 +14,16 @@ class ManageUsersRoute extends GoRouteData with $ManageUsersRoute {
 
   @override
   String? redirect(BuildContext context, GoRouterState state) {
+    final permissions = AuthBloc.I.currentUserData?.permissions;
+    if (!(permissions?.manageAllUsers ?? false) &&
+        !(permissions?.onboardUsers ?? false)) {
+      return const HomeScreenWebRoute().location;
+    }
+
     if (!LocalAuthService.I.requestOneTimeAuthForPath('/manage_users')) {
-      return Uri(
-        path: '/authenticate',
-        queryParameters: {'next': '/manage_users'},
-      ).toString();
+      return AuthenticateRoute(
+        next: const ManageUsersRoute().location,
+      ).location;
     }
 
     return null;

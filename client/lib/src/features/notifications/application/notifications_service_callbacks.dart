@@ -68,7 +68,7 @@ class NotificationsServiceCallbacks {
 
     await AuthBloc.I.loaded;
 
-    if (!AuthBloc.I.isSignedIn) return;
+    if (!AuthBloc.I.isApproved) return;
 
     final persons = await DatabaseService.I.advancedQueryParser
         .createPaginatableStream(query)

@@ -10,6 +10,7 @@ class PermissionsSet extends DelegatingSet<UserPermission> with Equatable {
   bool get approved => contains(UserPermission.approved);
 
   bool get manageAllUsers => contains(UserPermission.manageAllUsers);
+  bool get onboardUsers => contains(UserPermission.onboardUsers);
   bool get readAllData => contains(UserPermission.readAllData);
   bool get writeAllData => contains(UserPermission.writeAllData);
 

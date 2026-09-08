@@ -37,6 +37,10 @@ final class AuthAuthenticated extends AuthState {
   final AuthUser authUser;
   final User? userData;
 
+  bool get isApproved =>
+      authUser.hasuraUserId != null &&
+      (userData?.permissions.approved ?? false);
+
   @override
   List<Object?> get props => [authUser, userData];
   const AuthAuthenticated({

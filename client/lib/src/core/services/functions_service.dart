@@ -63,6 +63,20 @@ class FunctionsService {
     await httpsCallable('deletePhoto').call({'table': table, 'id': id});
   }
 
+  Future<bool> tryClaimAccount() async {
+    try {
+      await httpsCallable('tryClaimAccount').call<void>();
+
+      return true;
+    } on FirebaseFunctionsException catch (e) {
+      if (e.code == 'unauthenticated' || e.code == 'not-found') {
+        return false;
+      }
+
+      rethrow;
+    }
+  }
+
   Future<Address?> getAddressFromLocation(Point location) async {
     final response = await _dio.getUri(
       Uri(
@@ -117,10 +131,32 @@ class FunctionsService {
     return res.data == 'OK';
   }
 
-  Future<void> registerUserWithCode(String? registerCode) async {
-    await httpsCallable(
-      'registerUserWithCode',
-    ).call({'registerCode': registerCode});
+  Future<void> applyInvitationCode(String invitationCode) async {
+    await httpsCallable('applyInvitationCode').call({'code': invitationCode});
+  }
+
+  Future<List<AuthUser>> getAuthUsers() async {
+    // TODO: make sure parsing works with the function
+    final response = await httpsCallable('getAuthUsers').call<List<dynamic>>();
+
+    return response.data
+        .cast<Map?>()
+        .map((u) => u ?? {})
+        .map((u) => u.cast<String, dynamic>())
+        .map(AuthUser.fromJson)
+        .toList();
+  }
+
+  Future<String> approveAndLinkAuthUser({
+    required String authId,
+    required String hasuraUid,
+  }) async {
+    final response = await httpsCallable('onboardAuthUser').call<Map>({
+      'authId': authId,
+      'hasuraUid': hasuraUid,
+    });
+
+    return response.data['uid'] as String;
   }
 
   Future<String> getAppDownloadLink(String platform) async {

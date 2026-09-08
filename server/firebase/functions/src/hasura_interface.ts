@@ -1,6 +1,44 @@
 import axios, { AxiosResponse } from "axios";
 import { https } from "firebase-functions/v1";
-import { hasuraAdminSecret, hasuraServer } from ".";
+import { hasuraAdminSecret, hasuraServer } from "./secrets";
+
+export const publicPhotoTables = [
+  "areas",
+  "streets",
+  "services",
+  "users",
+] as const;
+
+export const photoTables = [
+  ...publicPhotoTables,
+  "stores",
+  "families",
+  "groups",
+  "classes",
+  "persons",
+] as const;
+
+export type PhotoTable = (typeof photoTables)[number];
+
+export type UserData = {
+  hasura_uid: string;
+  person_id: string | null;
+  auth_id: string | null;
+};
+
+function dataOrThrow(hasura_response: AxiosResponse) {
+  const errors = hasura_response.data?.["errors"];
+
+  if (errors) {
+    throw new Error(`Hasura rejected the request: ${JSON.stringify(errors)}`);
+  }
+
+  return hasura_response.data?.["data"] ?? {};
+}
+
+function canonicalEmail(email: string): string {
+  return email.trim().toLowerCase();
+}
 
 export async function checkUserApproved(uid: string): Promise<boolean> {
   try {
@@ -48,9 +86,219 @@ export async function getHasuraUID(
       operationName: "getUserByFirebaseUID",
     });
     const hasura_uid: string =
-      hasura_response.data?.["data"]?.["authUsersData"]?.[0]?.["uid"] ?? null;
+      dataOrThrow(hasura_response)["authUsersData"]?.[0]?.["uid"] ?? null;
 
     return hasura_uid;
+  } catch (e) {
+    console.error(e);
+  }
+
+  return null;
+}
+
+export async function getAllAvailablePermissions(): Promise<string[]> {
+  try {
+    const hasura_response = await makeGraphqlRequest({
+      query: `
+            query getAllAvailablePermissions {
+              authPermissions {
+                name
+              }
+            }
+          `,
+      variables: {},
+      operationName: "getAllAvailablePermissions",
+    });
+    const permissions: { name: string }[] =
+      dataOrThrow(hasura_response)["authPermissions"] ?? [];
+
+    return permissions.map((permission) => permission.name);
+  } catch (e) {
+    console.error(e);
+
+    return [];
+  }
+}
+
+export async function createAdminUser({
+  authId,
+  email,
+  permissions,
+}: {
+  authId: string;
+  email: string;
+  permissions: string[];
+}): Promise<{ hasuraUid: string } | null> {
+  try {
+    const canonical = canonicalEmail(email);
+    const hasura_response = await makeGraphqlRequest({
+      query: `
+            mutation createAdminUser($authId: String!, $email: String!, $name: String!, $permissions: [AuthUsersPermissionsInsertInput!]!) {
+              insertAuthUsersDataOne(
+                object: {
+                  authId: $authId
+                  email: $email
+                  name: $name
+                  permissions: { data: $permissions }
+                }
+              ) {
+                uid
+              }
+            }
+          `,
+      variables: {
+        authId,
+        email: canonical,
+        name: canonical,
+        permissions: permissions.map((permission) => ({ permission })),
+      },
+      operationName: "createAdminUser",
+    });
+    const hasuraUid: string | null =
+      dataOrThrow(hasura_response)["insertAuthUsersDataOne"]?.["uid"] ?? null;
+
+    return hasuraUid ? { hasuraUid } : null;
+  } catch (e) {
+    console.error(e);
+  }
+
+  return null;
+}
+
+export async function createPerson({
+  uid,
+  name,
+  isServant = true,
+}: {
+  uid: string;
+  name: string;
+  isServant?: boolean;
+}): Promise<{ hasuraUid: string } | null> {
+  try {
+    const hasura_response = await makeGraphqlRequest({
+      query: `
+            mutation createPerson($uid: uuid!, $name: String!, $isServant: Boolean!) {
+              insertPersonsOne(
+                object: { uid: $uid, name: $name, isServant: $isServant }
+              ) {
+                id
+              }
+            }
+          `,
+      variables: { uid, name, isServant },
+      operationName: "createPerson",
+    });
+    const hasuraUid: string | null =
+      dataOrThrow(hasura_response)["insertPersonsOne"]?.["id"] ?? null;
+
+    return hasuraUid ? { hasuraUid } : null;
+  } catch (e) {
+    console.error(e);
+  }
+
+  return null;
+}
+
+export async function getUserPermissionsByFirebaseUID(
+  firebaseAuthUID: string,
+): Promise<string[]> {
+  try {
+    const hasura_response = await makeGraphqlRequest({
+      query: `
+            query getUserPermissionsByFirebaseUID($firebaseAuthUID: String!) {
+              authUsersData(where: {authId: {_eq: $firebaseAuthUID}}, limit: 1) {
+                permissions {
+                  permission
+                }
+              }
+            }
+          `,
+      variables: { firebaseAuthUID },
+      operationName: "getUserPermissionsByFirebaseUID",
+    });
+    const permissions: { permission: string }[] = dataOrThrow(
+      hasura_response,
+    )["authUsersData"]?.[0]?.["permissions"] ?? [];
+
+    return permissions.map((permission) => permission.permission);
+  } catch (e) {
+    console.error(e);
+
+    return [];
+  }
+}
+
+export async function getFirebaseAuthUIDsWithHasuraUsers(
+  firebaseAuthUIDs: string[],
+): Promise<Set<string>> {
+  if (firebaseAuthUIDs.length === 0) {
+    return new Set();
+  }
+
+  try {
+    const hasura_response = await makeGraphqlRequest({
+      query: `
+            query getFirebaseAuthUIDsWithHasuraUsers($firebaseAuthUIDs: [String!]!) {
+              authUsersData(where: {authId: {_in: $firebaseAuthUIDs}}) {
+                authId
+              }
+            }
+          `,
+      variables: { firebaseAuthUIDs },
+      operationName: "getFirebaseAuthUIDsWithHasuraUsers",
+    });
+    const users: { authId: string | null }[] = dataOrThrow(
+      hasura_response,
+    )["authUsersData"] ?? [];
+
+    return new Set(
+      users
+        .map((user) => user.authId)
+        .filter((authId): authId is string => authId != null),
+    );
+  } catch (e) {
+    console.error(e);
+
+    return new Set(firebaseAuthUIDs);
+  }
+}
+
+export async function claimInvitation({
+  codeDigest,
+  firebaseAuthUID,
+  email,
+}: {
+  codeDigest: string;
+  firebaseAuthUID: string;
+  email: string;
+}): Promise<{ hasuraUid: string } | null> {
+  try {
+    const hasura_response = await makeGraphqlRequest({
+      query: `
+            mutation claimInvitation(
+              $codeDigest: String!
+              $firebaseAuthUID: String!
+              $email: String!
+            ) {
+              authClaimInvitation(
+                args: {
+                  p_code_digest: $codeDigest
+                  p_auth_id: $firebaseAuthUID
+                  p_email: $email
+                }
+              ) {
+                uid
+              }
+            }
+          `,
+      variables: { codeDigest, firebaseAuthUID, email: canonicalEmail(email) },
+      operationName: "claimInvitation",
+    });
+
+    const newUser = dataOrThrow(hasura_response)["authClaimInvitation"]?.[0];
+    if (newUser?.uid) {
+      return { hasuraUid: newUser.uid };
+    }
   } catch (e) {
     console.error(e);
   }
@@ -155,82 +403,105 @@ export async function checkUserAccessToPerson(
   return { canRead: false, canWrite: false, personUid: null };
 }
 
-export async function upsertUser(user: {
-  email: string;
-  name: string;
-  uid: string;
-}): Promise<{ person_id: string; hasura_uid: string } | null> {
+export async function findUserDataByEmail(
+  email: string,
+): Promise<UserData | null> {
+  const hasura_response = await makeGraphqlRequest({
+    query: `
+          query findSeededUserByEmail($email: String!) {
+            authUsersData(where: { email: { _eq: $email } }, limit: 1) {
+              uid
+              authId
+              person {
+                id
+              }
+            }
+          }
+        `,
+    variables: { email: canonicalEmail(email) },
+    operationName: "findSeededUserByEmail",
+  });
+
+  const rslt = dataOrThrow(hasura_response)["authUsersData"]?.[0];
+
+  return rslt
+    ? {
+      hasura_uid: rslt["uid"],
+      person_id: rslt["person"]?.["id"] ?? null,
+      auth_id: rslt["authId"] ?? null,
+    }
+    : null;
+}
+
+export async function linkAuthAccount(
+  userDataUid: string,
+  authId: string,
+): Promise<UserData | null> {
+  const hasura_response = await makeGraphqlRequest({
+    query: `
+          mutation linkAuthAccount($uid: uuid!, $authId: String!) {
+            updateAuthUsersData(
+              where: { uid: { _eq: $uid }, authId: { _isNull: true } }
+              _set: { authId: $authId }
+            ) {
+              returning {
+                uid
+                person {
+                  id
+                }
+              }
+            }
+          }
+        `,
+    variables: { uid: userDataUid, authId },
+    operationName: "linkAuthAccount",
+  });
+
+  const rslt = dataOrThrow(hasura_response)["updateAuthUsersData"]
+    ?.["returning"]?.[0];
+
+  return rslt
+    ? {
+      hasura_uid: rslt["uid"],
+      person_id: rslt["person"]?.["id"],
+      auth_id: authId,
+    }
+    : null;
+}
+
+export async function releaseUserAccount(hasuraUID: string): Promise<void> {
   try {
     const hasura_response = await makeGraphqlRequest({
       query: `
-            mutation addUser(
-              $email: String
-              $name: String
-              $firebaseAuthUID: String
-            ) {
-              insertAuthUsersData(
-                objects: {
-                  email: $email
-                  authId: $firebaseAuthUID
-                  name: $name,
-                  person: {
-                    data: { name: $name, isServant: true, isStudent: false },
-                    onConflict: { constraint: persons_uid_key, updateColumns: [isServant, isStudent] },
-                  }
-                }
-                onConflict: {constraint: users_data_email_key, updateColumns: [authId]}
+            mutation releaseUserAccount($uid: uuid!) {
+              deleteAuthUsersPermissions(where: { uid: { _eq: $uid } }) {
+                affectedRows
+              }
+              deleteAuthUsersAdminOn(where: { uid: { _eq: $uid } }) {
+                affectedRows
+              }
+              updateAuthUsersData(
+                where: { uid: { _eq: $uid } }
+                _set: { authId: null }
               ) {
-                returning {
-                  uid
-                  person {
-                    id
-                  }
-                }
+                affectedRows
               }
             }
           `,
       variables: {
-        name: user.name,
-        email: user.email,
-        firebaseAuthUID: user.uid,
-      },
-      operationName: "addUser",
-    });
-
-    const rslt = hasura_response.data?.["data"]?.["insertAuthUsersData"]?.[
-      "returning"
-    ]?.[0];
-
-    return rslt
-      ? {
-        hasura_uid: rslt?.["uid"],
-        person_id: rslt?.["person"]?.["id"],
-      }
-      : null;
-  } catch (e) {
-    console.error(e);
-  }
-
-  return null;
-}
-
-export async function unapproveUser(hasuraUID: string): Promise<void> {
-  try {
-    await makeGraphqlRequest({
-      query: `
-            mutation unapproveUser($uid: uuid!) {
-  deleteAuthUsersPermissions(where: {_and: [{uid: {_eq: $uid}}, {permission: {_eq: "approved"}}]}) {
-    returning {
-      uid
-    }
-  }
-}
-          `,
-      variables: {
         uid: hasuraUID,
       },
-      operationName: "unapproveUser",
+      operationName: "releaseUserAccount",
     });
+
+    const detached = dataOrThrow(hasura_response)["updateAuthUsersData"]
+      ?.["affectedRows"];
+
+    if (detached !== 1) {
+      throw new Error(
+        `Could not detach the Firebase account from ${hasuraUID}`,
+      );
+    }
   } catch (e) {
     console.error(e);
   }
@@ -395,22 +666,6 @@ export async function updatePhotoBlurHash(
     throw e;
   }
 }
-
-export const publicPhotoTables = [
-  "areas",
-  "streets",
-  "services",
-  "users",
-] as const;
-export const photoTables = [
-  ...publicPhotoTables,
-  "stores",
-  "families",
-  "groups",
-  "classes",
-  "persons",
-] as const;
-export type PhotoTable = (typeof photoTables)[number];
 
 export async function makeGraphqlRequest({
   query,

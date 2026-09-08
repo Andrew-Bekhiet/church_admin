@@ -12,6 +12,6 @@ class EditUserRoute extends GoRouteData with $EditUserRoute {
 
   @override
   Widget build(BuildContext context, GoRouterState state) {
-    return EditUser(userId: uid, user: $extra);
+    return EditUserScreen(userId: uid, user: $extra);
   }
 }
