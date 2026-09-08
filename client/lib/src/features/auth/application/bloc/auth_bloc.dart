@@ -46,7 +46,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   Future<void> get loaded => switch (state.unwrapped) {
     AuthAuthenticated(userData: null) || AuthLoading() =>
       stream
-          .firstWhere((state) => state is! AuthLoading)
+          .firstWhere(
+            (state) =>
+                state is! AuthLoading &&
+                (state is! AuthAuthenticated || state.userData != null),
+          )
           .timeout(const Duration(seconds: 8))
           .whenComplete(() => null),
     _ => Future.value(),
