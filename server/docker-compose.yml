@@ -93,6 +93,8 @@ services:
 
   seed:
     image: hasura/graphql-engine:v2.50.1.cli-migrations-v3
+    profiles:
+      - plant_seeds
     depends_on:
       hasura:
         condition: service_healthy
