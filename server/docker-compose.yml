@@ -1,0 +1,150 @@
+name: church-admin-local
+
+services:
+  postgres:
+    build:
+      context: ./postgres
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in server/.env}
+      POSTGRES_DB: church_admin
+      PGDATA: /var/lib/postgresql/data/pgdata
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -h 127.0.0.1 -U ${POSTGRES_USER:-postgres} -d church_admin",
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+
+  local-unsigned-jwt-verifier:
+    build:
+      dockerfile_inline: |
+        # !!For use with local development ONLY. Do not use in production!!
+        # Forwards x-hasura-user-id and x-hasura-role headers to the Hasura GraphQL engine
+        FROM busybox:musl
+
+        RUN mkdir -p /www/cgi-bin && \
+            cat > /www/cgi-bin/auth <<'EOF'
+        #!/bin/sh
+
+        token="$${HTTP_AUTHORIZATION#Bearer }"
+        payload="$$(printf '%s' "$$token" | cut -d. -f2 | tr '_-' '/+')"
+
+        case $$(($${#payload} % 4)) in
+          2) payload="$${payload}==" ;;
+          3) payload="$${payload}=" ;;
+        esac
+
+        json="$$(printf '%s' "$$payload" | base64 -d 2>/dev/null)"
+
+        user_id="$$(printf '%s' "$$json" |
+          sed -n 's/.*"x-hasura-user-id"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p')"
+
+        role="$$(printf '%s' "$$json" |
+          sed -n 's/.*"x-hasura-default-role"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p')"
+
+        echo 'Content-Type: application/json'
+        echo
+        printf '{"X-Hasura-User-Id":"%s","X-Hasura-Role":"%s"}' "$$user_id" "$$role"
+        EOF
+
+        RUN chmod +x /www/cgi-bin/auth
+
+        CMD ["httpd","-f","-p","3000","-h","/www"]
+    restart: unless-stopped
+
+  hasura:
+    build:
+      context: ./hasura
+    depends_on:
+      postgres:
+        condition: service_healthy
+      local-unsigned-jwt-verifier:
+        condition: service_started
+    environment:
+      HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET:?set HASURA_GRAPHQL_ADMIN_SECRET in server/.env}
+      HASURA_GRAPHQL_AUTH_HOOK: http://local-unsigned-jwt-verifier:3000/cgi-bin/auth
+      HASURA_GRAPHQL_DATABASE_URL: postgres://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD}@postgres:5432/church_admin
+      HASURA_GRAPHQL_DEFAULT_NAMING_CONVENTION: graphql-default
+      HASURA_GRAPHQL_DEV_MODE: "true"
+      HASURA_GRAPHQL_ENABLE_CONSOLE: "false" # Use hasura console CLI instead of web console for local development
+      HASURA_GRAPHQL_ENABLE_TELEMETRY: "false"
+      HASURA_GRAPHQL_ENABLED_APIS: graphql,metadata,pgdump,config
+      HASURA_GRAPHQL_EXPERIMENTAL_FEATURES: naming_convention
+      HASURA_GRAPHQL_LIVE_QUERIES_MULTIPLEXED_REFETCH_INTERVAL: ${HASURA_GRAPHQL_LIVE_QUERIES_MULTIPLEXED_REFETCH_INTERVAL:-1000}
+      STUDY_YEAR_ROLL_NOTIFY_URL: ${STUDY_YEAR_ROLL_NOTIFY_URL:-http://firebase-emulators:5001/church-admin-local/europe-west6/notifyStudyYearRollFailure}
+      STUDY_YEAR_ROLL_WEBHOOK_SECRET: ${STUDY_YEAR_ROLL_WEBHOOK_SECRET:-local-dev-webhook-secret}
+    ports:
+      - "${HASURA_PORT:-8080}:8080"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:8080/healthz || exit 1"]
+      interval: 5s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+
+  seed:
+    image: hasura/graphql-engine:v2.50.1.cli-migrations-v3
+    profiles:
+      - plant_seeds
+    depends_on:
+      hasura:
+        condition: service_healthy
+    working_dir: /hasura
+    volumes:
+      - ./hasura:/hasura:ro
+    entrypoint: ["hasura-cli"]
+    command:
+      [
+        "seed",
+        "apply",
+        "--endpoint",
+        "http://hasura:8080",
+        "--admin-secret",
+        "${HASURA_GRAPHQL_ADMIN_SECRET}",
+        "--database-name",
+        "default",
+      ]
+    restart: "no"
+
+  firebase-emulators:
+    build:
+      context: ./firebase
+      dockerfile: Dockerfile.emulators
+    environment:
+      FIREBASE_PROJECT_ID: ${FIREBASE_PROJECT_ID:-church-admin-local}
+      HASURA_SERVER: http://hasura:8080/v1/graphql
+      HASURA_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET}
+      APP_RELEASE_GCS_BUCKET: ${APP_RELEASE_GCS_BUCKET:-church-admin-local-releases}
+    volumes:
+      - ./firebase:/srv/firebase
+      - ./scripts/start-firebase-emulators.sh:/start-firebase-emulators.sh:ro
+      - firebase_functions_node_modules:/srv/firebase/functions/node_modules
+      - firebase_emulator_cache:/root/.cache/firebase
+    entrypoint: ["/bin/sh", "/start-firebase-emulators.sh"]
+    ports:
+      - "4000:4000"
+      - "4500:4500"
+      - "5001:5001"
+      - "9000:9000"
+      - "9099:9099"
+      - "9199:9199"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:4400/emulators || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+
+volumes:
+  pgdata:
+  firebase_functions_node_modules:
+  firebase_emulator_cache:

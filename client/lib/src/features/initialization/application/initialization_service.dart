@@ -20,7 +20,9 @@ class InitializationService {
     PackageInfoInit(),
     DeviceInfoInit(),
     SembastInit(),
-    FirebaseInit(),
+    FirebaseInit(
+      kEmulatorsHost: String.fromEnvironment('FIREBASE_EMULATORS_HOST'),
+    ),
     FeatureFlagsInit(),
     FMTCInit(),
     IntlLocaleMessagesInit(),

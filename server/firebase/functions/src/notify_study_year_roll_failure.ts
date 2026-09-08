@@ -1,6 +1,7 @@
 import { getMessaging, SendResponse } from "firebase-admin/messaging";
 import { defineSecret } from "firebase-functions/params";
 import { https } from "firebase-functions/v2";
+import { hasuraAdminSecret } from ".";
 import { getFcmTokensForPermission } from "./hasura_interface";
 
 const studyYearRollWebhookSecret = defineSecret(
@@ -33,7 +34,7 @@ interface StudyYearRollRunInsertEvent {
 }
 
 export const notifyStudyYearRollFailure = https.onRequest(
-  { secrets: [studyYearRollWebhookSecret] },
+  { secrets: [hasuraAdminSecret, studyYearRollWebhookSecret] },
   async (req, res) => {
     const configuredSecret = studyYearRollWebhookSecret.value();
 

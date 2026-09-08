@@ -26,10 +26,6 @@
       "host": "0.0.0.0",
       "port": 5001
     },
-    "firestore": {
-      "host": "0.0.0.0",
-      "port": 8080
-    },
     "database": {
       "host": "0.0.0.0",
       "port": 9000
@@ -46,8 +42,18 @@
       "host": "0.0.0.0",
       "port": 9199
     },
+    "hub": {
+      "host": "0.0.0.0",
+      "port": 4400
+    },
+    "logging": {
+      "host": "0.0.0.0",
+      "port": 4500
+    },
     "ui": {
-      "enabled": true
+      "enabled": true,
+      "host": "0.0.0.0",
+      "port": 4000
     }
   }
 }
