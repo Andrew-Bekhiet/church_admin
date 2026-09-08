@@ -291,8 +291,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     Emitter<AuthState> emit,
   ) async {
     try {
-      emit(AuthLoading(previousState: state));
+      final previousState = state;
+      emit(AuthLoading(previousState: previousState));
       await _authRepository.reload();
+
+      if (!(currentUser?.emailVerified ?? false)) emit(previousState);
     } catch (e, stackTrace) {
       emit(
         AuthExceptionState(
