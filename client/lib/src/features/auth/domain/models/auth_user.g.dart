@@ -17,7 +17,6 @@ AuthUser _$AuthUserFromJson(Map json) => AuthUser(
   claims:
       (json['claims'] as Map?)?.map((k, e) => MapEntry(k as String, e)) ??
       const {},
-  isMultiFactorEnabled: json['isMultiFactorEnabled'] as bool? ?? false,
 );
 
 Map<String, dynamic> _$AuthUserToJson(AuthUser instance) => <String, dynamic>{
@@ -26,5 +25,4 @@ Map<String, dynamic> _$AuthUserToJson(AuthUser instance) => <String, dynamic>{
   'emailVerified': instance.emailVerified,
   'idToken': instance.idToken,
   'claims': instance.claims,
-  'isMultiFactorEnabled': instance.isMultiFactorEnabled,
 };

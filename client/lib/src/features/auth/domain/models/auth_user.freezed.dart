@@ -18,7 +18,6 @@ mixin _$AuthUser {
   bool get emailVerified;
   String get idToken;
   Map<String, dynamic> get claims;
-  bool get isMultiFactorEnabled;
 
   /// Create a copy of AuthUser
   /// with the given fields replaced by the non-null parameter values.
@@ -37,9 +36,7 @@ mixin _$AuthUser {
             (identical(other.emailVerified, emailVerified) ||
                 other.emailVerified == emailVerified) &&
             (identical(other.idToken, idToken) || other.idToken == idToken) &&
-            const DeepCollectionEquality().equals(other.claims, claims) &&
-            (identical(other.isMultiFactorEnabled, isMultiFactorEnabled) ||
-                other.isMultiFactorEnabled == isMultiFactorEnabled));
+            const DeepCollectionEquality().equals(other.claims, claims));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -51,7 +48,6 @@ mixin _$AuthUser {
     emailVerified,
     idToken,
     const DeepCollectionEquality().hash(claims),
-    isMultiFactorEnabled,
   );
 }
 
@@ -66,7 +62,6 @@ abstract mixin class $AuthUserCopyWith<$Res> {
     bool emailVerified,
     String idToken,
     Map<String, dynamic> claims,
-    bool isMultiFactorEnabled,
   });
 }
 
@@ -87,7 +82,6 @@ class _$AuthUserCopyWithImpl<$Res> implements $AuthUserCopyWith<$Res> {
     Object? emailVerified = null,
     Object? idToken = null,
     Object? claims = null,
-    Object? isMultiFactorEnabled = null,
   }) {
     return _then(
       AuthUser(
@@ -111,10 +105,6 @@ class _$AuthUserCopyWithImpl<$Res> implements $AuthUserCopyWith<$Res> {
             ? _self.claims
             : claims // ignore: cast_nullable_to_non_nullable
                   as Map<String, dynamic>,
-        isMultiFactorEnabled: null == isMultiFactorEnabled
-            ? _self.isMultiFactorEnabled
-            : isMultiFactorEnabled // ignore: cast_nullable_to_non_nullable
-                  as bool,
       ),
     );
   }

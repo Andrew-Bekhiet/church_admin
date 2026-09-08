@@ -84,7 +84,6 @@ class LoggingBlocObserver extends BlocObserver {
           id: hasuraUserId,
           firebaseUid: authUser.uid,
           emailVerified: authUser.emailVerified,
-          isMultiFactorEnabled: authUser.isMultiFactorEnabled,
           claims: authUser.filteredClaims,
           permissions: [...?userData?.permissions.map((p) => p.name)],
           adminOn: [...?userData?.adminOn?.map((a) => a.toJson())],

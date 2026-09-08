@@ -146,10 +146,7 @@ void main() {
         'sign up with email and password',
         setUp: () {
           final oldUser = initialAuthUser;
-          initialAuthUser = initialAuthUser.copyWith(
-            emailVerified: false,
-            isMultiFactorEnabled: false,
-          );
+          initialAuthUser = initialAuthUser.copyWith(emailVerified: false);
 
           addTearDown(() => initialAuthUser = oldUser);
         },

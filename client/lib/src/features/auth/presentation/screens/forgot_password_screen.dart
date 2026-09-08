@@ -58,8 +58,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                             autofillHints: const [AutofillHints.email],
                             textInputAction: TextInputAction.done,
                             onFieldSubmitted: (value) => _sendResetLink(),
-                            autovalidateMode:
-                                AutovalidateMode.onUserInteraction,
+                            autovalidateMode: AutovalidateMode.onUnfocus,
                             validator: (email) {
                               if (email == null || email.isEmpty) {
                                 return 'البريد الإلكتروني لا يمكن أن يكون فارغاً';

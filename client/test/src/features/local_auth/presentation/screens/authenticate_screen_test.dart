@@ -27,7 +27,6 @@ const AuthUser _fakeUser = AuthUser(
   email: email,
   emailVerified: true,
   idToken: 'idToken',
-  isMultiFactorEnabled: true,
 );
 
 const User _fakeUserData = User(uid: 'uid', email: email, name: 'name');

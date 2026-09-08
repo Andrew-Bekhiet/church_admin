@@ -41,6 +41,11 @@ class EmailVerificationScreen extends StatelessWidget {
                     style: themeData.textTheme.titleLarge,
                     textAlign: TextAlign.center,
                   ),
+                  Text(
+                    'لا تنس التحقق من الرسائل غير المرغوب فيها (Spam/Junk)',
+                    style: themeData.textTheme.titleMedium,
+                    textAlign: TextAlign.center,
+                  ),
                   if (isLoading)
                     const Center(child: CircularProgressIndicator())
                   else
@@ -48,7 +53,7 @@ class EmailVerificationScreen extends StatelessWidget {
                   FilledButton(
                     key: EmailVerificationScreenKeys.confirmEmailButtonKey,
                     onPressed: () => authBloc.add(const ReloadUser()),
-                    child: const Text('تأكيد البريد الإلكتروني'),
+                    child: const Text('تمام! ضغطت على الرابط'),
                   ),
                   FilledButton.tonal(
                     key: EmailVerificationScreenKeys.resendEmailButtonKey,

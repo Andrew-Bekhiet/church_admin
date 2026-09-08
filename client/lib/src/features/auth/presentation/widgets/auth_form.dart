@@ -59,7 +59,7 @@ class AuthForm extends StatelessWidget {
                     keyboardType: TextInputType.emailAddress,
                     autofillHints: const [AutofillHints.email],
                     textInputAction: TextInputAction.next,
-                    autovalidateMode: AutovalidateMode.onUserInteraction,
+                    autovalidateMode: AutovalidateMode.onUnfocus,
                     validator: (email) {
                       if (email == null || email.isEmpty) {
                         return 'البريد الإلكتروني لا يمكن أن يكون فارغاً';

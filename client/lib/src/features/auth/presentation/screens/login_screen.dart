@@ -117,6 +117,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     isLogin: _isLogin,
                     onToggle: () => setState(() => _isLogin = !_isLogin),
                   ),
+                  const SizedBox(height: 50),
                 ],
               ),
             ),
@@ -153,8 +154,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 password: _passwordController.text,
               ),
       );
-    } on MultiFactorRequiredException {
-      if (mounted) const MultiFactorLoginRoute().go(context);
     } on Exception catch (e, stackTrace) {
       if (mounted) {
         await LoggingService.I.showErrorDialogAndReport(

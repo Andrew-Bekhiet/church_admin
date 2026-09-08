@@ -55,18 +55,6 @@ final class AuthAuthenticated extends AuthState {
   }
 }
 
-final class AuthMultiFactorChallengeInProgress extends AuthState {
-  final MultiFactorChallenge challenge;
-  final MultiFactorSession session;
-
-  @override
-  List<Object?> get props => [challenge, session];
-  const AuthMultiFactorChallengeInProgress({
-    required this.challenge,
-    required this.session,
-  });
-}
-
 final class AuthExceptionState extends AuthState {
   // ignore: no-object-declaration
   final Object? exception;
