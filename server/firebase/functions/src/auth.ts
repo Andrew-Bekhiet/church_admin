@@ -7,15 +7,36 @@ import {
   beforeUserSignedIn,
 } from "firebase-functions/v2/identity";
 import { Readable } from "stream";
-import { getHasuraUID, upsertUser } from "./hasura_interface";
+import { hasuraClaims } from "./common";
+import { claimSeededUser, getHasuraUID, upsertUser } from "./hasura_interface";
+
+async function uploadUserPhotoToStorage(photoURL: string, person_id: string) {
+  const fileWriteStream = getStorage()
+    .bucket(storageBucket.value())
+    .file("persons/" + person_id)
+    .createWriteStream({
+      contentType: "image/jpeg",
+      gzip: true,
+    });
+
+  const photoStream = (
+    await axios.get<Readable>(photoURL, { responseType: "stream" })
+  ).data;
+
+  await new Promise((resolve, reject) =>
+    photoStream.pipe(fileWriteStream).on("finish", resolve).on("error", reject),
+  );
+}
 
 export const beforeUserSignUp = beforeUserCreated(async (event) => {
   const authUser = event.data!;
 
   console.dir(authUser, { depth: 4 });
   try {
+    const displayName = authUser.displayName ?? authUser.email!;
+
     const dbUser = await upsertUser({
-      name: authUser.displayName ?? authUser.email!,
+      name: displayName,
       email: authUser.email!,
       uid: authUser.uid!,
     });
@@ -28,36 +49,13 @@ export const beforeUserSignUp = beforeUserCreated(async (event) => {
     const { person_id, hasura_uid } = dbUser;
 
     if (authUser.photoURL) {
-      const fileWriteStream = getStorage()
-        .bucket(storageBucket.value())
-        .file("persons/" + person_id)
-        .createWriteStream({
-          contentType: "image/jpeg",
-          gzip: true,
-        });
-
-      const photoStream = (
-        await axios.get<Readable>(authUser.photoURL!, {
-          responseType: "stream",
-        })
-      ).data;
-
-      await new Promise((resolve, reject) =>
-        photoStream
-          .pipe(fileWriteStream)
-          .on("finish", resolve)
-          .on("error", reject)
-      );
+      await uploadUserPhotoToStorage(authUser.photoURL, person_id);
     }
 
     return {
-      displayName: authUser.displayName ?? authUser.email!,
+      displayName,
       photoURL: authUser.photoURL,
-      customClaims: {
-        "x-hasura-user-id": hasura_uid,
-        "x-hasura-default-role": "user",
-        "x-hasura-allowed-roles": ["user"],
-      },
+      customClaims: hasuraClaims(hasura_uid),
     };
   } catch (e) {
     console.error(e);
@@ -71,20 +69,23 @@ export const beforeUserSignIn = beforeUserSignedIn(async (event) => {
 
   console.dir(authUser, { depth: 4 });
   try {
-    const hasura_uid = await getHasuraUID(authUser.uid!);
+    const existing_uid = await getHasuraUID(authUser.uid!);
 
-    if (!hasura_uid) {
+    if (existing_uid) {
+      return { customClaims: hasuraClaims(existing_uid) };
+    }
+
+    const claimed = await claimSeededUser({
+      email: authUser.email!,
+      uid: authUser.uid!,
+    });
+
+    if (!claimed) {
       console.error("Could not find hasura_uid for user", authUser.uid);
       throw new HttpsError("not-found", "User not found in database");
     }
 
-    return {
-      customClaims: {
-        "x-hasura-user-id": hasura_uid,
-        "x-hasura-default-role": "user",
-        "x-hasura-allowed-roles": ["user"],
-      },
-    };
+    return { customClaims: hasuraClaims(claimed.hasura_uid) };
   } catch (e) {
     console.error(e);
     console.dir(e, { depth: 4 });

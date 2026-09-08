@@ -3,6 +3,14 @@ import { https } from "firebase-functions/v2";
 import { AuthData } from "firebase-functions/v2/tasks";
 import { checkUserApproved } from "./hasura_interface";
 
+export function hasuraClaims(hasuraUID: string) {
+  return {
+    "x-hasura-user-id": hasuraUID,
+    "x-hasura-default-role": "user",
+    "x-hasura-allowed-roles": ["user"],
+  };
+}
+
 export async function assertUserAuthenticatedAndApproved(
   authData: AuthData | undefined,
 ): Promise<UserRecord> {

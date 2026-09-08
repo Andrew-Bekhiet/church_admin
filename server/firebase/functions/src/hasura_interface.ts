@@ -1,4 +1,5 @@
 import axios, { AxiosResponse } from "axios";
+import { getAuth } from "firebase-admin/auth";
 import { https } from "firebase-functions/v1";
 import { hasuraAdminSecret, hasuraServer } from ".";
 
@@ -155,58 +156,228 @@ export async function checkUserAccessToPerson(
   return { canRead: false, canWrite: false, personUid: null };
 }
 
+export type HasuraUserRef = { person_id: string; hasura_uid: string };
+
+type SeededUser = {
+  hasura_uid: string;
+  person_id: string | null;
+  auth_id: string | null;
+};
+
+function canonicalEmail(email: string): string {
+  return email.trim().toLowerCase();
+}
+
+function dataOrThrow(hasura_response: AxiosResponse) {
+  const errors = hasura_response.data?.["errors"];
+
+  if (errors) {
+    throw new Error(`Hasura rejected the request: ${JSON.stringify(errors)}`);
+  }
+
+  return hasura_response.data?.["data"] ?? {};
+}
+
+function toUserRef(
+  hasura_response: AxiosResponse,
+  rootField: string,
+): HasuraUserRef | null {
+  const rslt = dataOrThrow(hasura_response)[rootField]?.["returning"]?.[0];
+
+  return rslt
+    ? { hasura_uid: rslt["uid"], person_id: rslt["person"]?.["id"] }
+    : null;
+}
+
+async function findSeededUserByEmail(
+  email: string,
+): Promise<SeededUser | null> {
+  const hasura_response = await makeGraphqlRequest({
+    query: `
+          query findSeededUserByEmail($email: String!) {
+            authUsersData(where: { email: { _eq: $email } }, limit: 1) {
+              uid
+              authId
+              person {
+                id
+              }
+            }
+          }
+        `,
+    variables: { email: canonicalEmail(email) },
+    operationName: "findSeededUserByEmail",
+  });
+
+  const rslt = dataOrThrow(hasura_response)["authUsersData"]?.[0];
+
+  return rslt
+    ? {
+      hasura_uid: rslt["uid"],
+      person_id: rslt["person"]?.["id"] ?? null,
+      auth_id: rslt["authId"] ?? null,
+    }
+    : null;
+}
+
+async function belongsToALiveAccount(
+  firebaseAuthUID: string,
+): Promise<boolean> {
+  try {
+    await getAuth().getUser(firebaseAuthUID);
+
+    return true;
+  } catch (e) {
+    if ((e as { code?: string })?.code === "auth/user-not-found") {
+      return false;
+    }
+
+    throw e;
+  }
+}
+
+async function releaseDeletedAccount(
+  hasuraUID: string,
+  deletedAuthID: string,
+): Promise<void> {
+  const hasura_response = await makeGraphqlRequest({
+    query: `
+          mutation releaseDeletedAccount($uid: uuid!, $deletedAuthID: String!) {
+            updateAuthUsersData(
+              where: { uid: { _eq: $uid }, authId: { _eq: $deletedAuthID } }
+              _set: { authId: null }
+            ) {
+              affectedRows
+            }
+          }
+        `,
+    variables: { uid: hasuraUID, deletedAuthID },
+    operationName: "releaseDeletedAccount",
+  });
+
+  const releasedRows = dataOrThrow(hasura_response)["updateAuthUsersData"]
+    ?.["affectedRows"];
+
+  if (releasedRows !== 1) {
+    throw new Error(
+      `Deleted account ${deletedAuthID} was no longer attached to user ${hasuraUID}`,
+    );
+  }
+}
+
+async function attachFirebaseAccount(
+  seeded: SeededUser,
+  firebaseAuthUID: string,
+): Promise<HasuraUserRef | null> {
+  if (!seeded.person_id) {
+    throw new Error(
+      `Seeded user ${seeded.hasura_uid} is not linked to a person`,
+    );
+  }
+
+  if (seeded.auth_id === firebaseAuthUID) {
+    return { hasura_uid: seeded.hasura_uid, person_id: seeded.person_id };
+  }
+
+  if (seeded.auth_id) {
+    if (await belongsToALiveAccount(seeded.auth_id)) {
+      throw new Error("Email already belongs to another account");
+    }
+
+    await releaseDeletedAccount(seeded.hasura_uid, seeded.auth_id);
+  }
+
+  const hasura_response = await makeGraphqlRequest({
+    query: `
+          mutation claimSeededUser($uid: uuid!, $firebaseAuthUID: String!) {
+            updateAuthUsersData(
+              where: { uid: { _eq: $uid }, authId: { _isNull: true } }
+              _set: { authId: $firebaseAuthUID }
+            ) {
+              returning {
+                uid
+                person {
+                  id
+                }
+              }
+            }
+          }
+        `,
+    variables: { uid: seeded.hasura_uid, firebaseAuthUID },
+    operationName: "claimSeededUser",
+  });
+
+  return toUserRef(hasura_response, "updateAuthUsersData");
+}
+
+async function insertUser(user: {
+  email: string;
+  name: string;
+  uid: string;
+}): Promise<HasuraUserRef | null> {
+  const hasura_response = await makeGraphqlRequest({
+    query: `
+          mutation addUser(
+            $email: String
+            $name: String
+            $firebaseAuthUID: String
+          ) {
+            insertAuthUsersData(
+              objects: {
+                email: $email
+                authId: $firebaseAuthUID
+                name: $name,
+                person: {
+                  data: { name: $name, isServant: true, isStudent: false },
+                  onConflict: { constraint: persons_uid_key, updateColumns: [isServant, isStudent] },
+                }
+              }
+            ) {
+              returning {
+                uid
+                person {
+                  id
+                }
+              }
+            }
+          }
+        `,
+    variables: {
+      name: user.name,
+      email: canonicalEmail(user.email),
+      firebaseAuthUID: user.uid,
+    },
+    operationName: "addUser",
+  });
+
+  return toUserRef(hasura_response, "insertAuthUsersData");
+}
+
+export async function claimSeededUser(user: {
+  email: string;
+  uid: string;
+}): Promise<HasuraUserRef | null> {
+  try {
+    const seeded = await findSeededUserByEmail(user.email);
+
+    return seeded ? await attachFirebaseAccount(seeded, user.uid) : null;
+  } catch (e) {
+    console.error(e);
+  }
+
+  return null;
+}
+
 export async function upsertUser(user: {
   email: string;
   name: string;
   uid: string;
-}): Promise<{ person_id: string; hasura_uid: string } | null> {
+}): Promise<HasuraUserRef | null> {
   try {
-    const hasura_response = await makeGraphqlRequest({
-      query: `
-            mutation addUser(
-              $email: String
-              $name: String
-              $firebaseAuthUID: String
-            ) {
-              insertAuthUsersData(
-                objects: {
-                  email: $email
-                  authId: $firebaseAuthUID
-                  name: $name,
-                  person: {
-                    data: { name: $name, isServant: true, isStudent: false },
-                    onConflict: { constraint: persons_uid_key, updateColumns: [isServant, isStudent] },
-                  }
-                }
-                onConflict: {constraint: users_data_email_key, updateColumns: [authId]}
-              ) {
-                returning {
-                  uid
-                  person {
-                    id
-                  }
-                }
-              }
-            }
-          `,
-      variables: {
-        name: user.name,
-        email: user.email,
-        firebaseAuthUID: user.uid,
-      },
-      operationName: "addUser",
-    });
+    const seeded = await findSeededUserByEmail(user.email);
 
-    const rslt = hasura_response.data?.["data"]?.["insertAuthUsersData"]?.[
-      "returning"
-    ]?.[0];
-
-    return rslt
-      ? {
-        hasura_uid: rslt?.["uid"],
-        person_id: rslt?.["person"]?.["id"],
-      }
-      : null;
+    return seeded
+      ? await attachFirebaseAccount(seeded, user.uid)
+      : await insertUser(user);
   } catch (e) {
     console.error(e);
   }
