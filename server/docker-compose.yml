@@ -7,7 +7,7 @@ services:
     environment:
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in server/.env}
-      POSTGRES_DB: ${POSTGRES_DB:-church_admin}
+      POSTGRES_DB: church_admin
       PGDATA: /var/lib/postgresql/data/pgdata
     ports:
       - "${POSTGRES_PORT:-5432}:5432"
@@ -17,7 +17,7 @@ services:
       test:
         [
           "CMD-SHELL",
-          "pg_isready -h 127.0.0.1 -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-church_admin}",
+          "pg_isready -h 127.0.0.1 -U ${POSTGRES_USER:-postgres} -d church_admin",
         ]
       interval: 5s
       timeout: 5s
@@ -72,7 +72,7 @@ services:
     environment:
       HASURA_GRAPHQL_ADMIN_SECRET: ${HASURA_GRAPHQL_ADMIN_SECRET:?set HASURA_GRAPHQL_ADMIN_SECRET in server/.env}
       HASURA_GRAPHQL_AUTH_HOOK: http://local-unsigned-jwt-verifier:3000/cgi-bin/auth
-      HASURA_GRAPHQL_DATABASE_URL: postgres://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB:-church_admin}
+      HASURA_GRAPHQL_DATABASE_URL: postgres://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD}@postgres:5432/church_admin
       HASURA_GRAPHQL_DEFAULT_NAMING_CONVENTION: graphql-default
       HASURA_GRAPHQL_DEV_MODE: "true"
       HASURA_GRAPHQL_ENABLE_CONSOLE: "false" # Use hasura console CLI instead of web console for local development
