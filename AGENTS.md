@@ -26,14 +26,14 @@ Aim for **zero** comments. A comment you feel like writing is a signal to rename
 
 Instead of a comment:
 
-- Extract a predicate whose name _is_ the rule — `if (await mustVerifyEmailBeforeClaiming(user))`.
-- Rename so a return value explains itself — `tryClaimInvitation()` rather than `claimInvitation()` with a doc comment explaining the `bool`.
+- Extract a predicate whose name _is_ the rule — `if (await belongsToALiveAccount(seeded.auth_id))`.
+- Rename so a return value explains itself — `claimSeededUser()` returning the claimed row or `null`, rather than `claimUser()` with a doc comment explaining the `null`.
 - Use a specific verb — `uploadUserPhotoToStorage`, not `copyProviderPhoto`.
-- Prefix conditional work with `_maybe` — `_maybeClaimPendingInvitation`.
+- Prefix conditional work with `_maybe` — `_maybeRefreshExpiredToken`.
 
 Doc comments are allowed only when they add value a name cannot carry. Never restate the code.
 
-**Keep names in sync across the client/server boundary.** A Dart wrapper, the callable it invokes, and the file exporting it should share one name (`tryClaimInvitation` / `try_claim_invitation.ts`). Renaming a deployed callable is a deploy-order dependency — client and functions ship separately, so a mismatched pair fails with `NOT_FOUND`.
+**Keep names in sync across the client/server boundary.** A Dart wrapper, the callable it invokes, and the file exporting it should share one name (`deleteMyAccount` / `delete_my_account.ts`). Renaming a deployed callable is a deploy-order dependency — client and functions ship separately, so a mismatched pair fails with `NOT_FOUND`.
 
 ## Dart & Flutter
 
@@ -114,6 +114,8 @@ Unit tests are a **design tool**, not a bug-finding tool. Integration and manual
 ### Auth model
 
 Permissions hang off `auth.users_data.uid` — never `auth_id`. `auth.users_permissions`, `auth.users_admin_on` and `persons.uid` are all keyed on it, and the JWT carries only `x-hasura-user-id = uid`. Anything that changes account identity must preserve that uid.
+
+`auth_id` is nullable so an admin can seed a pre-approved user — a `users_data` row plus its permission rows and a `persons` link — before the Firebase account exists. Sign-up and sign-in **claim** that row by attaching `auth_id` to it; they must never insert a second row for an address that already has one, or the seeded permissions are lost.
 
 ### TypeScript functions
 
