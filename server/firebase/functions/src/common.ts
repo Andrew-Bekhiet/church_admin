@@ -11,6 +11,11 @@ export async function assertUserAuthenticatedAndApproved(
     throw new https.HttpsError("unauthenticated", "unauthenticated");
   }
 
+  if (!authData.token.email_verified) {
+    console.error("User email not verified");
+    throw new https.HttpsError("unauthenticated", "unauthenticated");
+  }
+
   const authUser = await getAuth().getUser(authData.uid);
 
   if (!(await checkUserApproved(authData.token["x-hasura-user-id"]))) {

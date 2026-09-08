@@ -12,6 +12,7 @@ part of 'auth_user.dart';
 AuthUser _$AuthUserFromJson(Map json) => AuthUser(
   uid: json['uid'] as String,
   email: json['email'] as String,
+  emailVerified: json['emailVerified'] as bool,
   idToken: json['idToken'] as String,
   claims:
       (json['claims'] as Map?)?.map((k, e) => MapEntry(k as String, e)) ??
@@ -21,6 +22,7 @@ AuthUser _$AuthUserFromJson(Map json) => AuthUser(
 Map<String, dynamic> _$AuthUserToJson(AuthUser instance) => <String, dynamic>{
   'uid': instance.uid,
   'email': instance.email,
+  'emailVerified': instance.emailVerified,
   'idToken': instance.idToken,
   'claims': instance.claims,
 };

@@ -25,6 +25,7 @@ const email = 'email';
 const AuthUser _fakeUser = AuthUser(
   uid: 'uid',
   email: email,
+  emailVerified: true,
   idToken: 'idToken',
 );
 

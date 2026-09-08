@@ -20,6 +20,9 @@ class HomeScreenWebRoute extends GoRouteData with $HomeScreenWebRoute {
       case AuthUnauthenticated():
         return const LoginRoute().location;
 
+      case AuthAuthenticated(authUser: AuthUser(emailVerified: false)):
+        return const EmailVerificationRoute().location;
+
       case AuthAuthenticated(userData: null):
         return const AuthLoadingRoute().location;
 

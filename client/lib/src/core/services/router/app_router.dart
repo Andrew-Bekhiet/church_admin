@@ -40,6 +40,7 @@ final GoRouter $appRouter = GoRouter(
     if (kIsWeb) $homeScreenWebRoute else $homeScreenRoute,
     $forgotPasswordRoute,
     $loginRoute,
+    $emailVerificationRoute,
     $authLoadingRoute,
     $unapprovedUserRoute,
     $updateUserSpiritDataRoute,

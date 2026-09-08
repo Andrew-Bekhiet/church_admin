@@ -281,6 +281,7 @@ Override _setUpAuthBloc({bool isSignedIn = true}) {
     const user = AuthUser(
       uid: 'uid',
       email: 'email',
+      emailVerified: true,
       idToken: 'token',
     );
     when(authBloc.userStream).thenAnswer(
@@ -309,6 +310,7 @@ Override _setUpAuthBloc({bool isSignedIn = true}) {
         authUser: AuthUser(
           uid: 'uid',
           email: 'email',
+          emailVerified: true,
           idToken: 'token',
         ),
       ),

@@ -258,6 +258,7 @@ Override _setUpMockAuthBloc() {
       const AuthUser(
         uid: 'uid',
         email: 'email',
+        emailVerified: true,
         idToken: 'idToken',
       ),
     ),

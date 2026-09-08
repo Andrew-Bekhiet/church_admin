@@ -13,6 +13,8 @@ class AuthUser with _$AuthUser {
   @override
   final String email;
   @override
+  final bool emailVerified;
+  @override
   final String idToken;
   @override
   final Map<String, dynamic> claims;
@@ -26,6 +28,7 @@ class AuthUser with _$AuthUser {
   const AuthUser({
     required this.uid,
     required this.email,
+    required this.emailVerified,
     required this.idToken,
     this.claims = const {},
   });
@@ -43,5 +46,6 @@ class AuthUser with _$AuthUser {
   String toString() =>
       'AuthUser(uid: $uid, '
       'email: $email, '
+      'emailVerified: $emailVerified, '
       'claims: $filteredClaims)';
 }

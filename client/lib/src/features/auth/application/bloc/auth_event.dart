@@ -59,6 +59,12 @@ final class ReloadUser extends AuthEvent {
   const ReloadUser();
 }
 
+final class SendEmailVerification extends AuthEvent {
+  @override
+  List<Object?> get props => [];
+  const SendEmailVerification();
+}
+
 final class SendPasswordResetEmail extends AuthEvent {
   final String email;
 

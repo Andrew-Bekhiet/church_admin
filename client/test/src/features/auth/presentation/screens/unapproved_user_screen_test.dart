@@ -142,6 +142,7 @@ Future<void> main() async {
                   authUser: AuthUser(
                     uid: '123',
                     email: 'test@test.com',
+                    emailVerified: true,
                     idToken: 'token',
                   ),
                   userData: User(
@@ -170,6 +171,7 @@ Future<void> main() async {
                 authUser: AuthUser(
                   uid: '123',
                   email: 'test@test.com',
+                  emailVerified: true,
                   idToken: 'token',
                 ),
                 userData: User(
@@ -212,6 +214,7 @@ Override _setUpAuthBloc() {
     authUser: AuthUser(
       uid: '123',
       email: 'test@test.com',
+      emailVerified: true,
       idToken: 'token',
     ),
   );
@@ -230,6 +233,7 @@ Override _setUpAuthBloc() {
           authUser: AuthUser(
             uid: '123',
             email: 'test@test.com',
+            emailVerified: true,
             idToken: 'token',
             claims: {'approved': true},
           ),

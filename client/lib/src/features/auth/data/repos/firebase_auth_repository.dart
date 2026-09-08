@@ -17,6 +17,7 @@ class FirebaseAuthRepository implements AuthRepository {
       return AuthUser(
         uid: user.uid,
         email: user.email!,
+        emailVerified: user.emailVerified,
         idToken: idTokenResult.token!,
         claims: idTokenResult.claims!,
       );
@@ -50,6 +51,15 @@ class FirebaseAuthRepository implements AuthRepository {
     } on firebase_auth.FirebaseAuthException catch (e, stackTrace) {
       throw IncorrectCredentialsException(e, stackTrace);
     }
+  }
+
+  @override
+  Future<void> sendEmailVerification() async {
+    if (_auth.currentUser == null) {
+      throw StateError('Must be signed in');
+    }
+
+    await _auth.currentUser!.sendEmailVerification();
   }
 
   @override

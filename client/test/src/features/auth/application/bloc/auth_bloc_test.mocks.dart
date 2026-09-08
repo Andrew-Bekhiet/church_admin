@@ -308,6 +308,15 @@ class MockFirebaseAuthRepository extends _i1.Mock
           as _i4.Future<void>);
 
   @override
+  _i4.Future<void> sendEmailVerification() =>
+      (super.noSuchMethod(
+            Invocation.method(#sendEmailVerification, []),
+            returnValue: _i4.Future<void>.value(),
+            returnValueForMissingStub: _i4.Future<void>.value(),
+          )
+          as _i4.Future<void>);
+
+  @override
   _i4.Future<void> sendPasswordResetEmail({required String? email}) =>
       (super.noSuchMethod(
             Invocation.method(#sendPasswordResetEmail, [], {#email: email}),

@@ -281,9 +281,10 @@ class FirstScreenVariant extends ValueVariant<FirstScreenVariantEnum> {
     when(mock.isSignedIn).thenReturn(value != FirstScreenVariantEnum.login);
 
     final user = value != FirstScreenVariantEnum.login
-        ? const AuthUser(
+        ? AuthUser(
             uid: 'uid',
             email: 'email',
+            emailVerified: value != FirstScreenVariantEnum.emailVerification,
             idToken: 'idToken',
           )
         : null;
@@ -338,6 +339,9 @@ class FirstScreenVariant extends ValueVariant<FirstScreenVariantEnum> {
       case FirstScreenVariantEnum.login:
         return const LoginRoute().location;
 
+      case FirstScreenVariantEnum.emailVerification:
+        return const EmailVerificationRoute().location;
+
       case FirstScreenVariantEnum.unapprovedUser:
         return const UnapprovedUserRoute().location;
 
@@ -365,6 +369,7 @@ class FirstScreenVariant extends ValueVariant<FirstScreenVariantEnum> {
 
 enum FirstScreenVariantEnum {
   login,
+  emailVerification,
   unapprovedUser,
   updateUserSpiritData,
   authenticate,

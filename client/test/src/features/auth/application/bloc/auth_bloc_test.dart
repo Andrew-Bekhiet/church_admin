@@ -35,6 +35,7 @@ final initialUserData = User(
 AuthUser initialAuthUser = AuthUser(
   uid: 'uid',
   email: 'email',
+  emailVerified: true,
   idToken: 'idToken',
   claims: {
     'x-hasura-user-id': 'hasura-user-id',
@@ -143,6 +144,12 @@ void main() {
 
       blocTest<AuthBloc, AuthState>(
         'sign up with email and password',
+        setUp: () {
+          final oldUser = initialAuthUser;
+          initialAuthUser = initialAuthUser.copyWith(emailVerified: false);
+
+          addTearDown(() => initialAuthUser = oldUser);
+        },
         build: () => _createAuthBloc(noCachedUser: true),
         act: (bloc) => bloc.add(
           const SignUpWithEmailPassword(
@@ -171,6 +178,7 @@ void main() {
               password: 'password',
             ),
             AuthStorage.I.saveUserPasswordHash('email', 'password'),
+            mockRepo.sendEmailVerification(),
           ]);
 
           verifyInOrder([
@@ -367,6 +375,32 @@ void main() {
     });
 
     group('user management =>', () {
+      blocTest<AuthBloc, AuthState>(
+        'send email verification',
+        build: _createAuthBloc,
+        act: (bloc) async {
+          await Future.delayed(Duration.zero);
+
+          bloc.add(const SendEmailVerification());
+          await Future.delayed(Duration.zero);
+        },
+        expect: () => [
+          isA<AuthAuthenticated>()
+              .having((s) => s.authUser, 'authUser', initialAuthUser)
+              .having((s) => s.userData, 'userData', initialUserData),
+          isA<AuthLoading>(),
+          isA<AuthAuthenticated>()
+              .having((s) => s.authUser, 'authUser', initialAuthUser)
+              .having((s) => s.userData, 'userData', initialUserData),
+        ],
+        verify: (bloc) {
+          final mockRepo =
+              globalProviderContainer.read(authRepositoryProvider)
+                  as MockFirebaseAuthRepository;
+          verify(mockRepo.sendEmailVerification());
+        },
+      );
+
       blocTest<AuthBloc, AuthState>(
         'reload user',
         build: _createAuthBloc,

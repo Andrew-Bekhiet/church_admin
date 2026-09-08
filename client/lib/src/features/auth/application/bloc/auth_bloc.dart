@@ -79,6 +79,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<SendPasswordResetEmail>(_onSendPasswordResetEmail);
     on<SignOut>(_onSignOut);
     on<ReloadUser>(_onReloadUser);
+    on<SendEmailVerification>(_onSendEmailVerification);
 
     add(ListenToSubscriptions(loadCachedUser: loadCachedUser));
   }
@@ -228,6 +229,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       );
 
       await _authStorage.saveUserPasswordHash(event.email, event.password);
+      await _authRepository.sendEmailVerification();
     } catch (e, stackTrace) {
       emit(
         AuthExceptionState(
@@ -291,6 +293,28 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     try {
       emit(AuthLoading(previousState: state));
       await _authRepository.reload();
+    } catch (e, stackTrace) {
+      emit(
+        AuthExceptionState(
+          exception: e,
+          stackTrace: stackTrace,
+          previousState: state,
+        ),
+      );
+    }
+  }
+
+  Future<void> _onSendEmailVerification(
+    SendEmailVerification event,
+    Emitter<AuthState> emit,
+  ) async {
+    try {
+      final previousState = state;
+      emit(AuthLoading(previousState: previousState));
+
+      await _authRepository.sendEmailVerification();
+
+      emit(previousState);
     } catch (e, stackTrace) {
       emit(
         AuthExceptionState(
