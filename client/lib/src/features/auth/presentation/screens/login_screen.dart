@@ -117,6 +117,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     isLogin: _isLogin,
                     onToggle: () => setState(() => _isLogin = !_isLogin),
                   ),
+                  const SizedBox(height: 50),
                 ],
               ),
             ),
