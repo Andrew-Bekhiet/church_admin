@@ -329,6 +329,28 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     }
   }
 
+  Future<void> _onSendEmailVerification(
+    SendEmailVerification event,
+    Emitter<AuthState> emit,
+  ) async {
+    try {
+      final previousState = state;
+      emit(AuthLoading(previousState: previousState));
+
+      await _authRepository.sendEmailVerification();
+
+      emit(previousState);
+    } catch (e, stackTrace) {
+      emit(
+        AuthExceptionState(
+          exception: e,
+          stackTrace: stackTrace,
+          previousState: state,
+        ),
+      );
+    }
+  }
+
   @override
   Future<void> close() async {
     _refreshTokenTimer?.cancel();
