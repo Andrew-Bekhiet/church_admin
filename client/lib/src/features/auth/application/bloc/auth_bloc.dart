@@ -7,6 +7,13 @@ import 'package:rxdart/rxdart.dart';
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   static AuthBloc get I => globalProviderContainer.read(authBlocProvider);
 
+  static bool _hasSettled(AuthState state) => switch (state) {
+    AuthLoading() => false,
+    AuthAuthenticated(:final userData, :final authUser) =>
+      userData != null || authUser.hasuraUserId == null,
+    _ => true,
+  };
+
   final AuthRepository _authRepository;
   final DatabaseService _databaseService;
   final AuthStorage _authStorage;
@@ -43,18 +50,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   Stream<bool> get isSignedInStream =>
       stream.map((_) => isSignedIn).startWith(isSignedIn).distinct();
 
-  Future<void> get loaded => switch (state.unwrapped) {
-    AuthAuthenticated(userData: null) || AuthLoading() =>
-      stream
-          .firstWhere(
-            (state) =>
-                state is! AuthLoading &&
-                (state is! AuthAuthenticated || state.userData != null),
-          )
-          .then<void>((_) => null)
-          .timeout(const Duration(seconds: 8), onTimeout: () => null),
-    _ => Future.value(),
-  };
+  Future<void> get loaded => _hasSettled(state.unwrapped)
+      ? Future.value()
+      : stream
+            .firstWhere(_hasSettled)
+            .then<void>((_) => null)
+            .timeout(const Duration(seconds: 8), onTimeout: () => null);
 
   AuthBloc({
     required this._authRepository,

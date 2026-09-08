@@ -56,8 +56,6 @@ AuthUser initialAuthUser = AuthUser(
   },
 );
 
-late StreamController<AuthUser?> authUserController;
-
 @GenerateNiceMocks([
   MockSpec<AuthStorage>(),
   MockSpec<FirebaseAuthRepository>(),
@@ -439,29 +437,23 @@ void main() {
           verify(mockRepo.reload());
         },
       );
+    });
 
+    group('loaded =>', () {
       test(
-        'loaded_whenTokenCarriesNoHasuraUserId_completesInsteadOfHanging',
+        'loaded_whenTokenCarriesNoHasuraUserId_settlesWithoutWaiting',
         () async {
-          final bloc = _createAuthBloc(noCachedUser: true);
+          await AuthStorage.I.clearAll();
+          await AuthStorage.I.writeAuthDataToCache(unclaimedAuthUser);
+
+          final bloc = _createAuthBloc();
           addTearDown(bloc.close);
 
-          await Future.delayed(Duration.zero);
-          authUserController.add(unclaimedAuthUser);
-          await Future.delayed(Duration.zero);
-
-          expect(
-            bloc.state.unwrapped,
-            isA<AuthAuthenticated>().having(
-              (s) => s.userData,
-              'userData',
-              null,
-            ),
+          await expectLater(
+            bloc.loaded.timeout(const Duration(seconds: 1)),
+            completes,
           );
-
-          await expectLater(bloc.loaded, completes);
         },
-        timeout: const Timeout(Duration(seconds: 30)),
       );
     });
   });
@@ -519,7 +511,6 @@ Future<Override> _setUpMockAuthStorage() async {
 
 Future<Override> _setUpMockAuthRepository() async {
   final controller = StreamController<AuthUser?>.broadcast(sync: true);
-  authUserController = controller;
 
   final mock = MockFirebaseAuthRepository();
 
