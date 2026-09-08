@@ -29,10 +29,14 @@ class _NewPasswordFieldState extends State<NewPasswordField> {
       validationRules: {
         if (widget.getEmail != null)
           PreventEmailSimilarityRule(getEmail: widget.getEmail),
-        DigitValidationRule(customText: 'تحتوي على أرقام'),
-        UppercaseValidationRule(customText: 'تحتوي على حروف كبيرة'),
-        LowercaseValidationRule(customText: 'تحتوي على حروف صغيرة'),
-        SpecialCharacterValidationRule(customText: 'تحتوي على رموز'),
+        DigitValidationRule(customText: 'تحتوي على أرقام (0-9)'),
+        UppercaseValidationRule(customText: 'تحتوي على حروف كبيرة (A-Z)'),
+        LowercaseValidationRule(customText: 'تحتوي على حروف صغيرة (a-z)'),
+        RegexValidationRule(
+          name:
+              'تحتوي على رموز (^ \$ * . [ ] { } ( ) ? " ! @ # % & / \\ , > < \' : ; | _ ~ `)',
+          regex: "[^\$*.[]{}()?\"!@#%&/\\,><':;|_~`]",
+        ),
         MinCharactersValidationRule(
           _minPasswordLength,
           customText: 'تتكون من على الأقل $_minPasswordLength حروف',
