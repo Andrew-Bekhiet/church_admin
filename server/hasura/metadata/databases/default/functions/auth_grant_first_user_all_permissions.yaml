@@ -1,0 +1,6 @@
+# Deliberately has no role permissions: Hasura would pass user_uid straight
+# from the caller, letting any signed-in user grant permissions to anyone.
+# Only the admin role (the grantFirstUserAllPermissions callable) may call it.
+function:
+  name: grant_first_user_all_permissions
+  schema: auth
