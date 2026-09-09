@@ -184,25 +184,35 @@ class DataExportCubit extends Cubit<DataExportState> {
       ];
     }
 
-    final groups = exportableServiceScopes
-        .map(
-          (scope) => Filter(const DotField(), LogicalOperator.and, [
-            Filter(
-              ClassFields().service.redirectTo(ServiceFields().id),
-              MultiSelectOperator.anyOf,
-              [scope.object.id],
-            ),
-            if (scope.gender case final gender?)
-              Filter(ClassFields().serviceGender, BooleanOperator.is$, gender),
-            if (scope.studyYear case final studyYear?)
-              Filter(ClassFields().studyYear, MultiSelectOperator.anyOf, [
-                studyYear,
+    return [
+      Filter(
+        const DotField(),
+        LogicalOperator.or,
+        exportableServiceScopes
+            .map(
+              (scope) => Filter(const DotField(), LogicalOperator.and, [
+                Filter(
+                  ClassFields().service.redirectTo(ServiceFields().id),
+                  PrimitiveOperator.eq,
+                  scope.object.id,
+                ),
+                if (scope.gender case final gender?)
+                  Filter(
+                    ClassFields().serviceGender,
+                    BooleanOperator.is$,
+                    gender,
+                  ),
+                if (scope.studyYear case final studyYear?)
+                  Filter(
+                    ClassFields().studyYear.redirectTo(StudyYearFields().order),
+                    PrimitiveOperator.eq,
+                    studyYear.order,
+                  ),
               ]),
-          ]),
-        )
-        .toList();
-
-    return [Filter(const DotField(), LogicalOperator.or, groups)];
+            )
+            .toList(),
+      ),
+    ];
   }
 
   Future<void> startExport() async {
