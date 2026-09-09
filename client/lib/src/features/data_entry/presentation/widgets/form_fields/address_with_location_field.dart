@@ -31,6 +31,7 @@ class AddressWithLocationField extends StatefulWidget {
 
 class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
   late Address _address = widget.initialAddress ?? const Address();
+  late final ValueNotifier<Address> _previewedAddress = ValueNotifier(_address);
   Address? _suggestedAddress;
 
   @override
@@ -39,6 +40,7 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
 
     if (oldWidget.initialAddress != widget.initialAddress) {
       _address = widget.initialAddress ?? const Address();
+      _previewedAddress.value = _address;
       _suggestedAddress = null;
     }
   }
@@ -101,9 +103,19 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
               false,
             ),
           ),
+          ValueListenableBuilder(
+            valueListenable: _previewedAddress,
+            builder: (context, address, _) => AddressPreview(address: address),
+          ),
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _previewedAddress.dispose();
+    super.dispose();
   }
 
   Future<void> _handleLocationTap(FormFieldState<Point?> state) async {
@@ -145,6 +157,8 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
   }
 
   void _setAddress(Address address, [bool setState = true]) {
+    _previewedAddress.value = address;
+
     if (setState) {
       this.setState(() {
         _address = address;

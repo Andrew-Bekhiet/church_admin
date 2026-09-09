@@ -56,6 +56,19 @@ class Address with _$Address {
   @override
   final Store? store;
 
+  String get textComposedFromParts => [
+    if (houseNumber case final houseNumber?) houseNumber.toString(),
+    if (street case Street(name: final streetName))
+      'ش ${streetName.replaceAll(RegExp('شارع|الشارع'), '').trim()}',
+    if (substreetName case final substreetName?)
+      'متفرع من ${substreetName.replaceAll(RegExp('شارع|الشارع'), '').trim()}',
+    if (district case District(name: final districtName))
+      'حي ${districtName.replaceAll(RegExp('حي|الحي|حى|الحى'), '').trim()}',
+    ?specialLandmark,
+    if (storeyNumber case final storeyNumber?) 'الدور $storeyNumber',
+    if (apartmentNumber case final apartmentNumber?) 'شقة $apartmentNumber',
+  ].join(' ').trim();
+
   const Address({
     this.countryIsoCode = 'EG',
     this.id,
@@ -119,19 +132,7 @@ class Address with _$Address {
       return fullAddressText;
     }
 
-    // 45 شارع النصر, متفرع من شارع التحرير, حي الزهور بجوار مستشفى السلام الدور الثاني شقة 5
-    return [
-      if (houseNumber case final houseNumber?) houseNumber.toString(),
-      if (street case Street(name: final streetName))
-        'ش ${streetName.replaceAll(RegExp('شارع|الشارع'), '').trim()}',
-      if (substreetName case final substreetName?)
-        'متفرع من ${substreetName.replaceAll(RegExp('شارع|الشارع'), '').trim()}',
-      if (district case District(name: final districtName))
-        'حي ${districtName.replaceAll(RegExp('حي|الحي|حى|الحى'), '').trim()}',
-      ?specialLandmark,
-      if (storeyNumber case final storeyNumber?) 'الدور $storeyNumber',
-      if (apartmentNumber case final apartmentNumber?) 'شقة $apartmentNumber',
-    ].join(' ').trim();
+    return textComposedFromParts;
   }
 
   Input_AddressesInsertInput toInsertInput() {
