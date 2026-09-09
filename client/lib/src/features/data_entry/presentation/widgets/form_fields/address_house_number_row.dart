@@ -15,7 +15,7 @@ class AddressHouseNumberRow extends StatelessWidget {
   final Address address;
   final bool enabled;
   final void Function(String?) onSubstreetNameChanged;
-  final void Function(int) onHouseNumberChanged;
+  final void Function(int?) onHouseNumberChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -61,14 +61,7 @@ class AddressHouseNumberRow extends StatelessWidget {
                       int.tryParse(value) == null
                   ? 'برجاء ادخال رقم صحيح'
                   : null,
-              onChanged: (value) {
-                final houseNumber = int.tryParse(value);
-                if (houseNumber == null) {
-                  return;
-                }
-
-                onHouseNumberChanged(houseNumber);
-              },
+              onChanged: (value) => onHouseNumberChanged(int.tryParse(value)),
             ),
           ),
         ],

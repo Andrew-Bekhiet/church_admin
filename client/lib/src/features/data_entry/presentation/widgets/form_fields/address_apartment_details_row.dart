@@ -15,8 +15,8 @@ class AddressApartmentDetailsRow extends StatelessWidget {
 
   final Address address;
   final bool enabled;
-  final void Function(int) onStoreyNumberChanged;
-  final void Function(int) onApartmentNumberChanged;
+  final void Function(int?) onStoreyNumberChanged;
+  final void Function(int?) onApartmentNumberChanged;
   final void Function(String?) onSpecialLandmarkChanged;
 
   @override
@@ -48,14 +48,7 @@ class AddressApartmentDetailsRow extends StatelessWidget {
                       int.tryParse(value) == null
                   ? 'برجاء ادخال رقم صحيح'
                   : null,
-              onChanged: (value) {
-                final storeyNumber = int.tryParse(value);
-                if (storeyNumber == null) {
-                  return;
-                }
-
-                onStoreyNumberChanged(storeyNumber);
-              },
+              onChanged: (value) => onStoreyNumberChanged(int.tryParse(value)),
             ),
           ),
           Expanded(
@@ -79,14 +72,8 @@ class AddressApartmentDetailsRow extends StatelessWidget {
                       int.tryParse(value) == null
                   ? 'برجاء ادخال رقم صحيح'
                   : null,
-              onChanged: (value) {
-                final apartmentNumber = int.tryParse(value);
-                if (apartmentNumber == null) {
-                  return;
-                }
-
-                onApartmentNumberChanged(apartmentNumber);
-              },
+              onChanged: (value) =>
+                  onApartmentNumberChanged(int.tryParse(value)),
             ),
           ),
           Expanded(

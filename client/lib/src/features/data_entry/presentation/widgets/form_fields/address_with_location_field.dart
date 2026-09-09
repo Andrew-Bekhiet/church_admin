@@ -121,7 +121,7 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
   Future<void> _handleLocationTap(FormFieldState<Point?> state) async {
     final newLocation = await widget.onEditLocation(context);
 
-    if (newLocation == null) return;
+    if (newLocation == null || !mounted) return;
 
     final newAddress = _address.copyWith(geolocation: newLocation);
     state.didChange(newLocation);
@@ -136,6 +136,8 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
     final addressWithParsedObjects = await _parseAddressParentObjects(
       addressFromLocation,
     );
+
+    if (!mounted) return;
 
     setState(
       () =>
