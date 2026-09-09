@@ -138,15 +138,7 @@ class DataExportCubit extends Cubit<DataExportState> {
       filterStream: searchController.stream,
       objectsPaginatableStream: _databaseService.classes.streamAll(
         searchQuery: searchController.stream,
-        where: userAdminOnStream?.map(
-          (adminOn) => [
-            Filter(
-              ClassFields().service.redirectTo(ServiceFields().id),
-              MultiSelectOperator.anyOf,
-              _selectExportableIds<Service>(adminOn),
-            ),
-          ],
-        ),
+        where: userAdminOnStream?.map(_exportableClassesFilters),
       ),
     );
 
@@ -176,6 +168,41 @@ class DataExportCubit extends Cubit<DataExportState> {
         .where((adminOn) => adminOn.canExportData)
         .map((adminOn) => adminOn.object.id)
         .toList();
+  }
+
+  List<Filter> _exportableClassesFilters(
+    List<UserAdminScope<ViewableWithID>> adminOn,
+  ) {
+    final exportableServiceScopes = adminOn
+        .whereType<UserAdminScope<Service>>()
+        .where((scope) => scope.canExportData)
+        .toList();
+
+    if (exportableServiceScopes.isEmpty) {
+      return [
+        Filter(ClassFields().id, MultiSelectOperator.anyOf, const <String>[]),
+      ];
+    }
+
+    final groups = exportableServiceScopes
+        .map(
+          (scope) => Filter(const DotField(), LogicalOperator.and, [
+            Filter(
+              ClassFields().service.redirectTo(ServiceFields().id),
+              MultiSelectOperator.anyOf,
+              [scope.object.id],
+            ),
+            if (scope.gender case final gender?)
+              Filter(ClassFields().serviceGender, BooleanOperator.is$, gender),
+            if (scope.studyYear case final studyYear?)
+              Filter(ClassFields().studyYear, MultiSelectOperator.anyOf, [
+                studyYear,
+              ]),
+          ]),
+        )
+        .toList();
+
+    return [Filter(const DotField(), LogicalOperator.or, groups)];
   }
 
   Future<void> startExport() async {
