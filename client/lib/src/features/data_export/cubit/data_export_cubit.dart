@@ -73,9 +73,7 @@ class DataExportCubit extends Cubit<DataExportState> {
   Future<void> switchToSavedFiles() async {
     final files = await _exportOperationsStorage.listSavedFiles();
 
-    emit(
-      DataExportListSavedFiles(files: _sortFilesByLastModified(files)),
-    );
+    emit(DataExportListSavedFiles(files: _sortFilesByLastModified(files)));
   }
 
   void switchToSelectingObjects() {
@@ -143,9 +141,9 @@ class DataExportCubit extends Cubit<DataExportState> {
         where: userAdminOnStream?.map(
           (adminOn) => [
             Filter(
-              ClassFields().id,
+              ClassFields().service.redirectTo(ServiceFields().id),
               MultiSelectOperator.anyOf,
-              _selectExportableIds<Class>(adminOn),
+              _selectExportableIds<Service>(adminOn),
             ),
           ],
         ),
