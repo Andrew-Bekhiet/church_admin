@@ -26,7 +26,7 @@ Aim for **zero** comments. A comment you feel like writing is a signal to rename
 
 Instead of a comment:
 
-- Extract a predicate whose name _is_ the rule — `if (await mustVerifyEmailBeforeClaiming(user))`.
+- Extract a predicate whose name _is_ the rule — `if (await mustVerifyEmailBeforeClaiming(authUser))`.
 - Rename so a return value explains itself — `tryClaimInvitation()` rather than `claimInvitation()` with a doc comment explaining the `bool`.
 - Use a specific verb — `uploadUserPhotoToStorage`, not `copyProviderPhoto`.
 - Prefix conditional work with `_maybe` — `_maybeClaimPendingInvitation`.
@@ -115,10 +115,12 @@ Unit tests are a **design tool**, not a bug-finding tool. Integration and manual
 
 Permissions hang off `auth.users_data.uid` — never `auth_id`. `auth.users_permissions`, `auth.users_admin_on` and `persons.uid` are all keyed on it, and the JWT carries only `x-hasura-user-id = uid`. Anything that changes account identity must preserve that uid.
 
+`auth_id` is nullable so an admin can seed a pre-approved user — a `users_data` row plus its permission rows and a `persons` link — before the Firebase account exists. Sign-up and sign-in **claim** that row by attaching `auth_id` to it; they must never insert a second row for an address that already has one, or the seeded permissions are lost.
+
 ### TypeScript functions
 
 - Errors: wrap in `try`/`catch`, `console.error`, return a null/false fallback — match the surrounding file rather than throwing through it.
-- Callables assert the caller first (`assertUserAuthenticatedAndApproved`).
+- Callables assert the caller first (`assertUserAuthenticatedAndApproved`, or `assertUserEmailVerified` where approval cannot exist yet).
 - Error messages should be user-friendly and localisable via error codes.
 
 ## Tooling gotchas

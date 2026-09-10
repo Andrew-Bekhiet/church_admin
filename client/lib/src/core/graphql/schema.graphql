@@ -727,6 +727,7 @@ input AuthUsersAdminOnInsertInput {
   serviceStudyYearData: StudyYearsObjRelInsertInput
   serviceWriteRelatedFamilies: Boolean
   uid: uuid
+  user: AuthUsersDataObjRelInsertInput
 }
 
 input AuthUsersAdminOnMaxOrderBy {
@@ -883,7 +884,7 @@ type AuthUsersData {
   ): [AuthUsersAdminOn!]!
   blurhash: String
   currentUserCanManageThisUser: Boolean
-  email: String!
+  email: String
   fcmTokens(
     distinctOn: [UsersFcmTokensSelectColumn!]
     limit: Int
@@ -934,6 +935,21 @@ input AuthUsersDataBoolExp {
   preferences: UsersPreferencesBoolExp
   uid: UuidComparisonExp
 }
+
+enum AuthUsersDataConstraint {
+  users_data_auth_id_key
+  users_data_email_key
+  users_data_name_key
+  users_data_pkey
+}
+
+input AuthUsersDataInsertInput {
+  adminOn: AuthUsersAdminOnArrRelInsertInput
+  fcmTokens: UsersFcmTokensArrRelInsertInput
+  name: String
+  permissions: AuthUsersPermissionsArrRelInsertInput
+  person: PersonsObjRelInsertInput
+}
 type AuthUsersDataMaxFields {
   blurhash: String
   email: String
@@ -947,6 +963,22 @@ type AuthUsersDataMinFields {
   name: String
   photoUpdatedAt: timestamptz
   uid: uuid
+}
+
+type AuthUsersDataMutationResponse {
+  affectedRows: Int!
+  returning: [AuthUsersData!]!
+}
+
+input AuthUsersDataObjRelInsertInput {
+  data: AuthUsersDataInsertInput!
+  onConflict: AuthUsersDataOnConflict
+}
+
+input AuthUsersDataOnConflict {
+  constraint: AuthUsersDataConstraint!
+  updateColumns: [AuthUsersDataUpdateColumn!]! = []
+  where: AuthUsersDataBoolExp
 }
 input AuthUsersDataOrderBy {
   adminOnAggregate: AuthUsersAdminOnAggregateOrderBy
@@ -962,6 +994,9 @@ input AuthUsersDataOrderBy {
   preferences: UsersPreferencesOrderBy
   uid: OrderBy
 }
+input AuthUsersDataPkColumnsInput {
+  uid: uuid!
+}
 
 enum AuthUsersDataSelectColumn {
   blurhash
@@ -969,6 +1004,10 @@ enum AuthUsersDataSelectColumn {
   name
   photoUpdatedAt
   uid
+}
+
+input AuthUsersDataSetInput {
+  name: String
 }
 
 input AuthUsersDataStreamCursorInput {
@@ -982,6 +1021,15 @@ input AuthUsersDataStreamCursorValueInput {
   photoUpdatedAt: timestamptz
   uid: uuid
 }
+
+enum AuthUsersDataUpdateColumn {
+  name
+}
+
+input AuthUsersDataUpdates {
+  _set: AuthUsersDataSetInput
+  where: AuthUsersDataBoolExp!
+}
 type AuthUsersPermissions {
   permission: String!
   uid: uuid!
@@ -992,6 +1040,11 @@ input AuthUsersPermissionsAggregateOrderBy {
   count: OrderBy
   max: AuthUsersPermissionsMaxOrderBy
   min: AuthUsersPermissionsMinOrderBy
+}
+
+input AuthUsersPermissionsArrRelInsertInput {
+  data: [AuthUsersPermissionsInsertInput!]!
+  onConflict: AuthUsersPermissionsOnConflict
 }
 
 input AuthUsersPermissionsBoolExp {
@@ -1011,6 +1064,7 @@ enum AuthUsersPermissionsConstraint {
 input AuthUsersPermissionsInsertInput {
   permission: String
   uid: uuid
+  user: AuthUsersDataObjRelInsertInput
 }
 
 input AuthUsersPermissionsMaxOrderBy {
@@ -2891,6 +2945,7 @@ input HistoryAttendanceHistoryInsertInput {
   meetingId: uuid
   person: PersonsObjRelInsertInput
   personId: uuid
+  recordedByUser: AuthUsersDataObjRelInsertInput
 }
 type HistoryAttendanceHistoryMaxFields {
   datetime: timestamptz
@@ -3052,6 +3107,7 @@ input HistoryCallHistoryInsertInput {
   person: PersonsObjRelInsertInput
   personId: uuid
   time: timestamptz
+  user: AuthUsersDataObjRelInsertInput
 }
 type HistoryCallHistoryMaxFields {
   personId: uuid
@@ -3175,6 +3231,7 @@ input HistoryConfessionHistoryInsertInput {
   dayId: date
   person: PersonsObjRelInsertInput
   personId: uuid
+  user: AuthUsersDataObjRelInsertInput
 }
 type HistoryConfessionHistoryMaxFields {
   dayId: date
@@ -3401,6 +3458,7 @@ input HistoryKodasHistoryInsertInput {
   dayId: date
   person: PersonsObjRelInsertInput
   personId: uuid
+  user: AuthUsersDataObjRelInsertInput
 }
 type HistoryKodasHistoryMaxFields {
   dayId: date
@@ -4371,6 +4429,7 @@ input HistoryVisitHistoryInsertInput {
   recordId: uuid
   table: name
   time: timestamptz
+  user: AuthUsersDataObjRelInsertInput
 }
 type HistoryVisitHistoryMaxFields {
   recordId: uuid
@@ -4678,6 +4737,8 @@ input JsonbComparisonExp {
   _hasKeysAny: [String!]
   _in: [jsonb!]
   _isNull: Boolean
+  _jsonbPathExists: String
+  _jsonbPathMatch: String
   _lt: jsonb
   _lte: jsonb
   _neq: jsonb
@@ -5484,6 +5545,8 @@ input PersonsInsertInput {
   studyYear: StudyYearsObjRelInsertInput
   studyYearId: smallint
   tags: PersonsTagsArrRelInsertInput
+  uid: uuid
+  user: AuthUsersDataObjRelInsertInput
   visitHistory: HistoryVisitHistoryArrRelInsertInput
   workStatus: String
 }
@@ -7494,6 +7557,11 @@ input UsersFcmTokensAggregateOrderBy {
   min: UsersFcmTokensMinOrderBy
 }
 
+input UsersFcmTokensArrRelInsertInput {
+  data: [UsersFcmTokensInsertInput!]!
+  onConflict: UsersFcmTokensOnConflict
+}
+
 input UsersFcmTokensBoolExp {
   _and: [UsersFcmTokensBoolExp!]
   _not: UsersFcmTokensBoolExp
@@ -7511,6 +7579,7 @@ enum UsersFcmTokensConstraint {
 input UsersFcmTokensInsertInput {
   token: String
   uid: uuid
+  user: AuthUsersDataObjRelInsertInput
 }
 
 input UsersFcmTokensMaxOrderBy {
@@ -7971,6 +8040,14 @@ type mutation_root {
     object: AuthUsersAdminOnInsertInput!
     onConflict: AuthUsersAdminOnOnConflict
   ): AuthUsersAdminOn
+  insertAuthUsersData(
+    objects: [AuthUsersDataInsertInput!]!
+    onConflict: AuthUsersDataOnConflict
+  ): AuthUsersDataMutationResponse
+  insertAuthUsersDataOne(
+    object: AuthUsersDataInsertInput!
+    onConflict: AuthUsersDataOnConflict
+  ): AuthUsersData
   insertAuthUsersPermissions(
     objects: [AuthUsersPermissionsInsertInput!]!
     onConflict: AuthUsersPermissionsOnConflict
@@ -8269,6 +8346,17 @@ type mutation_root {
   updateAreasMany(
     updates: [AreasUpdates!]!
   ): [AreasMutationResponse]
+  updateAuthUsersData(
+    _set: AuthUsersDataSetInput
+    where: AuthUsersDataBoolExp!
+  ): AuthUsersDataMutationResponse
+  updateAuthUsersDataByPk(
+    _set: AuthUsersDataSetInput
+    pkColumns: AuthUsersDataPkColumnsInput!
+  ): AuthUsersData
+  updateAuthUsersDataMany(
+    updates: [AuthUsersDataUpdates!]!
+  ): [AuthUsersDataMutationResponse]
   updateChurches(
     _set: ChurchesSetInput
     where: ChurchesBoolExp!

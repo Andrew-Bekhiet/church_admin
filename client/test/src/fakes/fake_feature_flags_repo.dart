@@ -3,6 +3,11 @@ import 'package:pub_semver/pub_semver.dart';
 
 class FakeFeatureFlagsRepo implements FeatureFlagsRepository {
   @override
+  final bool enableAccountClaimingByEmail;
+
+  FakeFeatureFlagsRepo({this.enableAccountClaimingByEmail = true});
+
+  @override
   Future<void> initialize() async {}
 
   @override

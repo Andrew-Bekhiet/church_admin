@@ -75,7 +75,7 @@ class _UpdateUserSpiritDataState extends State<UpdateUserSpiritDataScreen> {
                 validator: (value) => value == null
                     ? 'برجاء اختيار تاريخ أخر تناول'
                     : value.isBefore(
-                        DateTime.now().subtract(const Duration(days: 60)),
+                        DateTime.now().subtract(Person.maxSpiritDataAge),
                       )
                     ? 'يجب أن يكون التاريخ منذ شهرين على الأكثر'
                     : null,
@@ -116,7 +116,7 @@ class _UpdateUserSpiritDataState extends State<UpdateUserSpiritDataScreen> {
                 validator: (value) => value == null
                     ? 'برجاء اختيار تاريخ أخر اعتراف'
                     : value.isBefore(
-                        DateTime.now().subtract(const Duration(days: 60)),
+                        DateTime.now().subtract(Person.maxSpiritDataAge),
                       )
                     ? 'يجب أن يكون التاريخ منذ شهرين على الأكثر'
                     : null,

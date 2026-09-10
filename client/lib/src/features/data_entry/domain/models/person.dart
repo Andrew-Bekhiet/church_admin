@@ -11,7 +11,14 @@ part 'person.g.dart';
 @JsonSerializable()
 @Queryable(
   classLabel: 'المخدومين',
-  ignoreFields: ['blurhash', 'isStudent', 'otherPhones', 'userCanEdit'],
+  ignoreFields: [
+    'blurhash',
+    'isStudent',
+    'otherPhones',
+    'userCanEdit',
+    'maxSpiritDataAge',
+    'uid',
+  ],
   allowExtension: true,
   labelsOverrides: {
     'martialStatus': 'الحالة الاجتماعية',
@@ -23,6 +30,8 @@ part 'person.g.dart';
 class Person extends ViewableWithIDAndImage
     with _$Person
     implements SerializableExtra {
+  static const Duration maxSpiritDataAge = Duration(days: 60);
+
   @override
   @JsonKey(defaultValue: '')
   final String id;
@@ -207,6 +216,9 @@ class Person extends ViewableWithIDAndImage
   final User? user;
 
   @override
+  final String? uid;
+
+  @override
   final List<LastRecordedByInfo>? kodasHistory;
 
   @override
@@ -313,6 +325,7 @@ class Person extends ViewableWithIDAndImage
     this.services,
     this.tags,
     this.hobbies,
+    this.uid,
     this.user,
     this.kodasHistory,
     this.attendanceHistory,
@@ -356,13 +369,16 @@ class Person extends ViewableWithIDAndImage
   @override
   Json toJson() => _$PersonToJson(this);
 
-  bool spiritDataUpToDate() {
-    final thirtyDaysAgo = DateTime.now().subtract(const Duration(days: 60));
+  bool spiritDataUpToDate({
+    Duration maxAge = maxSpiritDataAge,
+    DateTime? now,
+  }) {
+    final earliestDate = (now ?? DateTime.now()).subtract(maxAge);
 
     return lastKodas != null &&
         lastConfession != null &&
-        !lastKodas!.time.isBefore(thirtyDaysAgo) &&
-        !lastConfession!.time.isBefore(thirtyDaysAgo);
+        !lastKodas!.time.isBefore(earliestDate) &&
+        !lastConfession!.time.isBefore(earliestDate);
   }
 
   Input_PersonsInsertInput toInsertInput() => Input_PersonsInsertInput(
@@ -423,6 +439,7 @@ class Person extends ViewableWithIDAndImage
                 .toList(),
           )
         : null,
+    uid: uid?.toUuid(),
     tags: tags != null
         ? Input_PersonsTagsArrRelInsertInput(
             data: tags!

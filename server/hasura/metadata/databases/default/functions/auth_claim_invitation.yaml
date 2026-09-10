@@ -1,0 +1,6 @@
+function:
+  name: claim_invitation
+  schema: auth
+configuration:
+  custom_root_fields: {}
+  exposed_as: mutation

@@ -50,7 +50,9 @@
     "titleBar.activeForeground": "#e7e7e7",
     "titleBar.inactiveBackground": "#00968899",
     "titleBar.inactiveForeground": "#e7e7e799",
-    "sash.hoverBorder": "#00c9b6"
+    "sash.hoverBorder": "#00c9b6",
+    "activityBar.activeBorder": "#15202b",
+    "activityBarTop.activeBorder": "#15202b"
   },
   "peacock.color": "#009688",
   "peacock.affectStatusBar": false

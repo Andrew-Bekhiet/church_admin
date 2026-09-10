@@ -1,8 +1,8 @@
 import { File, GetFilesOptions, GetFilesResponse } from "@google-cloud/storage";
 import { getStorage } from "firebase-admin/storage";
-import { defineString } from "firebase-functions/params";
 import { https } from "firebase-functions/v2";
 import { assertUserAuthenticatedAndApproved } from "./common";
+import { appReleaseBucketName } from "./secrets";
 
 type Version = {
   major: number;
@@ -11,11 +11,6 @@ type Version = {
 };
 
 const expiryWindowMillis = 1000 * 60 * 20;
-
-const appReleaseBucketName = defineString("APP_RELEASE_GCS_BUCKET", {
-  description: "The name of the GCS bucket where app releases are stored",
-  default: "church-admin-local-releases",
-});
 
 export const getAppDownloadLink = https.onCall({}, async (context) => {
   const currentUser = await assertUserAuthenticatedAndApproved(context.auth);

@@ -182,7 +182,6 @@ Future<void> _testNotificationMethod({
 
   final paginatableStreamCall = verifyInOrder([
     InitializationService.I.initialize(),
-    AuthBloc.I.isSignedIn,
     advancedQueryParser.createPaginatableStream(captureAny),
     (NotificationsStorage.I as MockNotificationsStorage).writeNotification(
       argThat(matchExpectedNotification(expectedNotification)),
@@ -195,7 +194,7 @@ Future<void> _testNotificationMethod({
         named: 'notificationDetails',
       ),
     ),
-  ]).captured[2];
+  ]).captured[1];
 
   final advQueryJson = json.encode(
     (paginatableStreamCall.first as AdvancedQuery).toJson(),
@@ -252,17 +251,18 @@ Override _setUpMockInitializationService() {
 Override _setUpMockAuthBloc() {
   final mockAuthBloc = MockAuthBloc();
 
-  when(mockAuthBloc.isSignedIn).thenReturn(true);
-  when(mockAuthBloc.userStream).thenAnswer(
-    (_) => Stream.value(
-      const AuthUser(
-        uid: 'uid',
-        email: 'email',
-        emailVerified: true,
-        idToken: 'idToken',
-      ),
-    ),
+  const authUser = AuthUser(
+    uid: 'uid',
+    email: 'email',
+    emailVerified: true,
+    idToken: 'idToken',
+    claims: {AuthUser.hasuraUserIdKey: 'hasura-user-id'},
   );
+
+  when(mockAuthBloc.isSignedIn).thenReturn(true);
+  when(mockAuthBloc.isApproved).thenReturn(true);
+  when(mockAuthBloc.currentUser).thenReturn(authUser);
+  when(mockAuthBloc.userStream).thenAnswer((_) => Stream.value(authUser));
 
   return authBlocProvider.overrideWithValue(mockAuthBloc);
 }

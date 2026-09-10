@@ -13,7 +13,7 @@ class Fragment_User implements Fragment_UserNoPhoto {
   Fragment_User({
     required this.uid,
     required this.name,
-    required this.email,
+    this.email,
     this.$__typename = 'AuthUsersData',
     this.photoUpdatedAt,
     this.blurhash,
@@ -29,7 +29,7 @@ class Fragment_User implements Fragment_UserNoPhoto {
     return Fragment_User(
       uid: stringToUuid(l$uid),
       name: (l$name as String),
-      email: (l$email as String),
+      email: (l$email as String?),
       $__typename: (l$$__typename as String),
       photoUpdatedAt: l$photoUpdatedAt == null
           ? null
@@ -42,7 +42,7 @@ class Fragment_User implements Fragment_UserNoPhoto {
 
   final String name;
 
-  final String email;
+  final String? email;
 
   final String $__typename;
 
@@ -178,9 +178,7 @@ class _CopyWithImpl_Fragment_User<TRes>
       name: name == _undefined || name == null
           ? _instance.name
           : (name as String),
-      email: email == _undefined || email == null
-          ? _instance.email
-          : (email as String),
+      email: email == _undefined ? _instance.email : (email as String?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -254,7 +252,7 @@ class Fragment_UserNoPhoto {
   Fragment_UserNoPhoto({
     required this.uid,
     required this.name,
-    required this.email,
+    this.email,
     this.$__typename = 'AuthUsersData',
   });
 
@@ -266,7 +264,7 @@ class Fragment_UserNoPhoto {
     return Fragment_UserNoPhoto(
       uid: stringToUuid(l$uid),
       name: (l$name as String),
-      email: (l$email as String),
+      email: (l$email as String?),
       $__typename: (l$$__typename as String),
     );
   }
@@ -275,7 +273,7 @@ class Fragment_UserNoPhoto {
 
   final String name;
 
-  final String email;
+  final String? email;
 
   final String $__typename;
 
@@ -373,9 +371,7 @@ class _CopyWithImpl_Fragment_UserNoPhoto<TRes>
       name: name == _undefined || name == null
           ? _instance.name
           : (name as String),
-      email: email == _undefined || email == null
-          ? _instance.email
-          : (email as String),
+      email: email == _undefined ? _instance.email : (email as String?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -441,7 +437,7 @@ class Fragment_UserOverview
   Fragment_UserOverview({
     required this.uid,
     required this.name,
-    required this.email,
+    this.email,
     this.$__typename = 'AuthUsersData',
     this.photoUpdatedAt,
     this.blurhash,
@@ -463,7 +459,7 @@ class Fragment_UserOverview
     return Fragment_UserOverview(
       uid: stringToUuid(l$uid),
       name: (l$name as String),
-      email: (l$email as String),
+      email: (l$email as String?),
       $__typename: (l$$__typename as String),
       photoUpdatedAt: l$photoUpdatedAt == null
           ? null
@@ -489,7 +485,7 @@ class Fragment_UserOverview
 
   final String name;
 
-  final String email;
+  final String? email;
 
   final String $__typename;
 
@@ -684,9 +680,7 @@ class _CopyWithImpl_Fragment_UserOverview<TRes>
       name: name == _undefined || name == null
           ? _instance.name
           : (name as String),
-      email: email == _undefined || email == null
-          ? _instance.email
-          : (email as String),
+      email: email == _undefined ? _instance.email : (email as String?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -1295,7 +1289,7 @@ class Fragment_UserDetails
   Fragment_UserDetails({
     required this.uid,
     required this.name,
-    required this.email,
+    this.email,
     this.$__typename = 'AuthUsersData',
     this.photoUpdatedAt,
     this.blurhash,
@@ -1325,7 +1319,7 @@ class Fragment_UserDetails
     return Fragment_UserDetails(
       uid: stringToUuid(l$uid),
       name: (l$name as String),
-      email: (l$email as String),
+      email: (l$email as String?),
       $__typename: (l$$__typename as String),
       photoUpdatedAt: l$photoUpdatedAt == null
           ? null
@@ -1371,7 +1365,7 @@ class Fragment_UserDetails
 
   final String name;
 
-  final String email;
+  final String? email;
 
   final String $__typename;
 
@@ -1648,9 +1642,7 @@ class _CopyWithImpl_Fragment_UserDetails<TRes>
       name: name == _undefined || name == null
           ? _instance.name
           : (name as String),
-      email: email == _undefined || email == null
-          ? _instance.email
-          : (email as String),
+      email: email == _undefined ? _instance.email : (email as String?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),

@@ -13,6 +13,10 @@ enum UserPermission implements LabeledEnum {
     label: 'إدارة جميع الخدام',
     icon: Symbols.manage_accounts,
   ),
+  onboardUsers(
+    label: 'إضافة حسابات الخدام',
+    icon: Symbols.person_add,
+  ),
   readAllData(
     label: 'رؤية جميع البيانات',
     icon: Symbols.visibility,

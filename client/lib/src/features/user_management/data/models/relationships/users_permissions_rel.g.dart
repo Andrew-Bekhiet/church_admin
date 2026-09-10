@@ -72,6 +72,7 @@ Map<String, dynamic> _$UsersPermissionsRelToJson(
 const _$UserPermissionEnumMap = {
   UserPermission.approved: 'approved',
   UserPermission.manageAllUsers: 'manageAllUsers',
+  UserPermission.onboardUsers: 'onboardUsers',
   UserPermission.readAllData: 'readAllData',
   UserPermission.writeAllData: 'writeAllData',
   UserPermission.exportAllData: 'exportAllData',

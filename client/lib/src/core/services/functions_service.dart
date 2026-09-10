@@ -63,6 +63,20 @@ class FunctionsService {
     await httpsCallable('deletePhoto').call({'table': table, 'id': id});
   }
 
+  Future<bool> tryClaimAccount() async {
+    try {
+      await httpsCallable('tryClaimAccount').call<void>();
+
+      return true;
+    } on FirebaseFunctionsException catch (e) {
+      if (e.code == 'unauthenticated' || e.code == 'not-found') {
+        return false;
+      }
+
+      rethrow;
+    }
+  }
+
   Future<Address?> getAddressFromLocation(Point location) async {
     final response = await _dio.getUri(
       Uri(
@@ -117,10 +131,8 @@ class FunctionsService {
     return res.data == 'OK';
   }
 
-  Future<void> registerUserWithCode(String? registerCode) async {
-    await httpsCallable(
-      'registerUserWithCode',
-    ).call({'registerCode': registerCode});
+  Future<void> applyInvitationCode(String invitationCode) async {
+    await httpsCallable('applyInvitationCode').call({'code': invitationCode});
   }
 
   Future<String> getAppDownloadLink(String platform) async {

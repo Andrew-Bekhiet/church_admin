@@ -15,7 +15,6 @@ import 'unapproved_user_screen_test.mocks.dart';
 
 @GenerateNiceMocks([
   MockSpec<AuthBloc>(),
-  MockSpec<FunctionsService>(),
   MockSpec<BuildContext>(),
   MockSpec<GoRouterState>(),
 ])
@@ -51,72 +50,6 @@ Future<void> main() async {
         },
       );
 
-      testWidgets(
-        'Register with valid code',
-        (tester) async {
-          const inviteCode = 'VALID_INVITE_CODE';
-          final mockFunctions = FunctionsService.I as MockFunctionsService;
-
-          when(mockFunctions.registerUserWithCode(inviteCode)).thenAnswer((
-            _,
-          ) async {
-            return;
-          });
-
-          await tester.pumpWidgetBuilder(
-            const UnapprovedUserScreen(),
-            wrapper: materialAppWithThemeAndLocale(),
-          );
-
-          await tester.pumpAndSettle();
-
-          await act.enterText(
-            spotKey(UnapprovedUserScreenKeys.codeField),
-            inviteCode,
-          );
-
-          await act.tap(
-            spotKey(UnapprovedUserScreenKeys.registerButton),
-          );
-
-          verify(mockFunctions.registerUserWithCode(inviteCode)).called(1);
-
-          verify(AuthBloc.I.add(const ReloadUser())).called(1);
-        },
-      );
-
-      testWidgets(
-        'Can submit with enter key',
-        (tester) async {
-          const inviteCode = 'ENTER_KEY_CODE';
-          final mockFunctions = FunctionsService.I as MockFunctionsService;
-
-          when(mockFunctions.registerUserWithCode(inviteCode)).thenAnswer((
-            _,
-          ) async {
-            return;
-          });
-
-          await tester.pumpWidgetBuilder(
-            const UnapprovedUserScreen(),
-            wrapper: materialAppWithThemeAndLocale(),
-          );
-
-          await tester.pumpAndSettle();
-
-          await act.enterText(
-            spotKey(UnapprovedUserScreenKeys.codeField),
-            inviteCode,
-          );
-
-          await tester.testTextInput.receiveAction(TextInputAction.done);
-          await tester.pumpAndSettle();
-
-          verify(mockFunctions.registerUserWithCode(inviteCode)).called(1);
-          verify(AuthBloc.I.add(const ReloadUser())).called(1);
-        },
-      );
-
       group(
         'Route',
         () {
@@ -144,6 +77,7 @@ Future<void> main() async {
                     email: 'test@test.com',
                     emailVerified: true,
                     idToken: 'token',
+                    claims: {AuthUser.hasuraUserIdKey: '123'},
                   ),
                   userData: User(
                     uid: '123',
@@ -200,7 +134,6 @@ void _setUp() {
 
   final overrides = [
     _setUpAuthBloc(),
-    _setUpFunctionsService(),
   ];
 
   initGlobalProviderContainer(overrides);
@@ -247,9 +180,4 @@ Override _setUpAuthBloc() {
 
     return authBloc;
   });
-}
-
-Override _setUpFunctionsService() {
-  final functionsService = MockFunctionsService();
-  return functionsServiceProvider.overrideWithValue(functionsService);
 }

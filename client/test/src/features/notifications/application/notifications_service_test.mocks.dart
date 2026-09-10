@@ -869,6 +869,15 @@ class MockAuthBloc extends _i1.Mock implements _i4.AuthBloc {
           as bool);
 
   @override
+  bool get isApproved =>
+      (super.noSuchMethod(
+            Invocation.getter(#isApproved),
+            returnValue: false,
+            returnValueForMissingStub: false,
+          )
+          as bool);
+
+  @override
   _i11.Stream<_i4.AuthUser?> get userStream =>
       (super.noSuchMethod(
             Invocation.getter(#userStream),
@@ -1445,6 +1454,15 @@ class MockFunctionsService extends _i1.Mock implements _i4.FunctionsService {
           as _i11.Future<void>);
 
   @override
+  _i11.Future<bool> tryClaimAccount() =>
+      (super.noSuchMethod(
+            Invocation.method(#tryClaimAccount, []),
+            returnValue: _i11.Future<bool>.value(false),
+            returnValueForMissingStub: _i11.Future<bool>.value(false),
+          )
+          as _i11.Future<bool>);
+
+  @override
   _i11.Future<_i4.Address?> getAddressFromLocation(_i4.Point? location) =>
       (super.noSuchMethod(
             Invocation.method(#getAddressFromLocation, [location]),
@@ -1506,13 +1524,57 @@ class MockFunctionsService extends _i1.Mock implements _i4.FunctionsService {
           as _i11.Future<bool>);
 
   @override
-  _i11.Future<void> registerUserWithCode(String? registerCode) =>
+  _i11.Future<void> applyInvitationCode(String? invitationCode) =>
       (super.noSuchMethod(
-            Invocation.method(#registerUserWithCode, [registerCode]),
+            Invocation.method(#applyInvitationCode, [invitationCode]),
             returnValue: _i11.Future<void>.value(),
             returnValueForMissingStub: _i11.Future<void>.value(),
           )
           as _i11.Future<void>);
+
+  @override
+  _i11.Future<List<_i4.AuthUser>> getAuthUsers() =>
+      (super.noSuchMethod(
+            Invocation.method(#getAuthUsers, []),
+            returnValue: _i11.Future<List<_i4.AuthUser>>.value(
+              <_i4.AuthUser>[],
+            ),
+            returnValueForMissingStub: _i11.Future<List<_i4.AuthUser>>.value(
+              <_i4.AuthUser>[],
+            ),
+          )
+          as _i11.Future<List<_i4.AuthUser>>);
+
+  @override
+  _i11.Future<String> approveAndLinkAuthUser({
+    required String? authId,
+    required String? hasuraUid,
+  }) =>
+      (super.noSuchMethod(
+            Invocation.method(#approveAndLinkAuthUser, [], {
+              #authId: authId,
+              #hasuraUid: hasuraUid,
+            }),
+            returnValue: _i11.Future<String>.value(
+              _i20.dummyValue<String>(
+                this,
+                Invocation.method(#approveAndLinkAuthUser, [], {
+                  #authId: authId,
+                  #hasuraUid: hasuraUid,
+                }),
+              ),
+            ),
+            returnValueForMissingStub: _i11.Future<String>.value(
+              _i20.dummyValue<String>(
+                this,
+                Invocation.method(#approveAndLinkAuthUser, [], {
+                  #authId: authId,
+                  #hasuraUid: hasuraUid,
+                }),
+              ),
+            ),
+          )
+          as _i11.Future<String>);
 
   @override
   _i11.Future<String> getAppDownloadLink(String? platform) =>

@@ -204,7 +204,12 @@ computed_fields:
 insert_permissions:
   - role: user
     permission:
-      check: {}
+      check:
+        _or:
+          - uid:
+              _is_null: true
+          - uid:
+              _eq: X-Hasura-User-Id
       columns:
         - birthdate
         - church_id
@@ -233,6 +238,7 @@ insert_permissions:
         - state_id
         - store_id
         - study_year_id
+        - uid
         - work_status
 select_permissions:
   - role: user

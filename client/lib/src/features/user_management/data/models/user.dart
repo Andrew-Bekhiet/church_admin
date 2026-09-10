@@ -96,6 +96,7 @@ class User extends ViewableWithIDAndImage
 
   bool get canManageSomeUsers =>
       permissions.manageAllUsers ||
+      permissions.onboardUsers ||
       (adminOn?.any(
             (p) =>
                 (p.areaAdminOnUsers ?? false) ||
@@ -150,6 +151,15 @@ class User extends ViewableWithIDAndImage
 }
 
 class UserFields extends _UserFields {
+  FieldMetadata<String> get authId => FieldMetadata<String>(
+    parentType: User,
+    name: 'authId',
+    label: 'معرف حساب Firebase',
+    operators: {...StringOperator.values},
+    isCodeOnly: true,
+    getValue: (obj) => obj is User ? obj.authId : null,
+  );
+
   @override
   FieldMetadata<String> get uid => FieldMetadata<String>(
     parentType: User,

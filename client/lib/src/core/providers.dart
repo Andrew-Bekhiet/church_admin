@@ -155,6 +155,8 @@ final authBlocProvider = Provider<AuthBloc>((ref) {
     connectivityStream: ref
         .watch(connectivityServiceProvider)
         .connectivityStream,
+    functionsService: ref.watch(functionsServiceProvider),
+    featureFlagsRepository: ref.watch(featureFlagsRepoProvider),
   );
 
   ref.onDispose(authBloc.close);

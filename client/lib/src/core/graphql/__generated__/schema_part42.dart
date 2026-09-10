@@ -906,6 +906,7 @@ class Input_PersonsInsertInput {
     Input_StudyYearsObjRelInsertInput? studyYear,
     int? studyYearId,
     Input_PersonsTagsArrRelInsertInput? tags,
+    UuidValue? uid,
     Input_HistoryVisitHistoryArrRelInsertInput? visitHistory,
     String? workStatus,
   }) => Input_PersonsInsertInput._({
@@ -957,6 +958,7 @@ class Input_PersonsInsertInput {
     if (studyYear != null) r'studyYear': studyYear,
     if (studyYearId != null) r'studyYearId': studyYearId,
     if (tags != null) r'tags': tags,
+    if (uid != null) r'uid': uid,
     if (visitHistory != null) r'visitHistory': visitHistory,
     if (workStatus != null) r'workStatus': workStatus,
   });
@@ -1265,6 +1267,10 @@ class Input_PersonsInsertInput {
               (l$tags as Map<String, dynamic>),
             );
     }
+    if (data.containsKey('uid')) {
+      final l$uid = data['uid'];
+      result$data['uid'] = l$uid == null ? null : stringToUuid(l$uid);
+    }
     if (data.containsKey('visitHistory')) {
       final l$visitHistory = data['visitHistory'];
       result$data['visitHistory'] = l$visitHistory == null
@@ -1400,6 +1406,8 @@ class Input_PersonsInsertInput {
 
   Input_PersonsTagsArrRelInsertInput? get tags =>
       (_$data['tags'] as Input_PersonsTagsArrRelInsertInput?);
+
+  UuidValue? get uid => (_$data['uid'] as UuidValue?);
 
   Input_HistoryVisitHistoryArrRelInsertInput? get visitHistory =>
       (_$data['visitHistory'] as Input_HistoryVisitHistoryArrRelInsertInput?);
@@ -1623,6 +1631,10 @@ class Input_PersonsInsertInput {
     if (_$data.containsKey('tags')) {
       final l$tags = tags;
       result$data['tags'] = l$tags?.toJson();
+    }
+    if (_$data.containsKey('uid')) {
+      final l$uid = uid;
+      result$data['uid'] = l$uid == null ? null : uuidToString(l$uid);
     }
     if (_$data.containsKey('visitHistory')) {
       final l$visitHistory = visitHistory;
@@ -2060,6 +2072,14 @@ class Input_PersonsInsertInput {
     if (l$tags != lOther$tags) {
       return false;
     }
+    final l$uid = uid;
+    final lOther$uid = other.uid;
+    if (_$data.containsKey('uid') != other._$data.containsKey('uid')) {
+      return false;
+    }
+    if (l$uid != lOther$uid) {
+      return false;
+    }
     final l$visitHistory = visitHistory;
     final lOther$visitHistory = other.visitHistory;
     if (_$data.containsKey('visitHistory') !=
@@ -2131,6 +2151,7 @@ class Input_PersonsInsertInput {
     final l$studyYear = studyYear;
     final l$studyYearId = studyYearId;
     final l$tags = tags;
+    final l$uid = uid;
     final l$visitHistory = visitHistory;
     final l$workStatus = workStatus;
     return Object.hashAll([
@@ -2182,6 +2203,7 @@ class Input_PersonsInsertInput {
       _$data.containsKey('studyYear') ? l$studyYear : const {},
       _$data.containsKey('studyYearId') ? l$studyYearId : const {},
       _$data.containsKey('tags') ? l$tags : const {},
+      _$data.containsKey('uid') ? l$uid : const {},
       _$data.containsKey('visitHistory') ? l$visitHistory : const {},
       _$data.containsKey('workStatus') ? l$workStatus : const {},
     ]);
@@ -2246,6 +2268,7 @@ abstract class CopyWith_Input_PersonsInsertInput<TRes> {
     Input_StudyYearsObjRelInsertInput? studyYear,
     int? studyYearId,
     Input_PersonsTagsArrRelInsertInput? tags,
+    UuidValue? uid,
     Input_HistoryVisitHistoryArrRelInsertInput? visitHistory,
     String? workStatus,
   });
@@ -2334,6 +2357,7 @@ class _CopyWithImpl_Input_PersonsInsertInput<TRes>
     Object? studyYear = _undefined,
     Object? studyYearId = _undefined,
     Object? tags = _undefined,
+    Object? uid = _undefined,
     Object? visitHistory = _undefined,
     Object? workStatus = _undefined,
   }) => _then(
@@ -2420,6 +2444,7 @@ class _CopyWithImpl_Input_PersonsInsertInput<TRes>
       if (studyYearId != _undefined) 'studyYearId': (studyYearId as int?),
       if (tags != _undefined)
         'tags': (tags as Input_PersonsTagsArrRelInsertInput?),
+      if (uid != _undefined) 'uid': (uid as UuidValue?),
       if (visitHistory != _undefined)
         'visitHistory':
             (visitHistory as Input_HistoryVisitHistoryArrRelInsertInput?),
@@ -2712,6 +2737,7 @@ class _CopyWithStubImpl_Input_PersonsInsertInput<TRes>
     Input_StudyYearsObjRelInsertInput? studyYear,
     int? studyYearId,
     Input_PersonsTagsArrRelInsertInput? tags,
+    UuidValue? uid,
     Input_HistoryVisitHistoryArrRelInsertInput? visitHistory,
     String? workStatus,
   }) => _res;
