@@ -15,6 +15,8 @@ class Class {
   final IdReference ref;
   final String name;
 
+  final List<String> allowedUsers;
+
   Class({
     required this.ref,
     required this.name,
@@ -22,6 +24,7 @@ class Class {
     this.gender = true,
     this.hasPhoto = false,
     this.color,
+    this.allowedUsers = const [],
   });
 
   Class.fromQueryDoc(QueryDocumentSnapshot snapshot, IdReference ref)
@@ -34,7 +37,8 @@ class Class {
       hasPhoto = data['HasPhoto'] ?? false,
       color = data['Color'] == null || data['Color'] == 0
           ? null
-          : Color(data['Color']);
+          : Color(data['Color']),
+      allowedUsers = data['Allowed']?.cast<String>() ?? [];
 
   Map<String, dynamic> toJson() => {
     'Name': name,
@@ -42,5 +46,6 @@ class Class {
     'Gender': gender,
     'HasPhoto': hasPhoto,
     'Color': color?.toARGB32(),
+    'Allowed': allowedUsers,
   };
 }
