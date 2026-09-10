@@ -42,6 +42,7 @@ const bool isSilentMigration = true;
 Future<void> migrate({
   required FirebaseAdminApp churchDataApp,
   required FirebaseAdminApp meetingHelperApp,
+  required bool migrateAuthUsers,
 }) async {
   String? currentStep;
   int? lastStepElapsedMs;
@@ -52,6 +53,7 @@ Future<void> migrate({
   await _migrateWithTiming(
     churchDataApp: churchDataApp,
     meetingHelperApp: meetingHelperApp,
+    migrateAuthUsers: migrateAuthUsers,
     beforeStepStart: (stepName) {
       if (currentStep != null && lastStepElapsedMs != null) {
         logger.i(
@@ -72,6 +74,7 @@ Future<void> migrate({
 Future<void> _migrateWithTiming({
   required FirebaseAdminApp churchDataApp,
   required FirebaseAdminApp meetingHelperApp,
+  required bool migrateAuthUsers,
   required void Function(String stepName) beforeStepStart,
 }) async {
   final churchAdminContext = ChurchAdminContext();
@@ -139,6 +142,15 @@ Future<void> _migrateWithTiming({
 
   beforeStepStart('Migrating Persons Types from persons');
   _migratePersonsTypes(churchAdminContext);
+
+  if (migrateAuthUsers) {
+    beforeStepStart('Migrating Auth Users');
+    await _migrateAuthUsers(
+      churchDataContext: churchDataContext,
+      meetingHelperContext: meetingHelperContext,
+      churchAdminContext: churchAdminContext,
+    );
+  }
 
   beforeStepStart('Exporting to CSV');
   await _exportToCsv(churchAdminContext);
@@ -438,10 +450,7 @@ Future<void> _migrateMeetingHelperPersons(
       martialStatus: MartialStatus.single,
       studyYear: churchAdminContext
           .studyYears[meetingHelperContext.studyYears[person.studyYear]?.grade],
-      services: legacyAndClassParentServices(
-        churchAdminContext,
-        person,
-      ),
+      services: legacyAndClassParentServices(churchAdminContext, person),
       workStatus: WorkStatus.student,
       father: churchAdminContext.fathers[person.cFather],
       // shammas_level_id must be null when is_shammas is false to satisfy the
@@ -1358,6 +1367,12 @@ void _recordVisitHistory(
     ));
   }
 }
+
+Future<void> _migrateAuthUsers({
+  required ChurchDataContext churchDataContext,
+  required ChurchAdminContext churchAdminContext,
+  required MeetingHelperContext meetingHelperContext,
+}) async {}
 
 Future<T> showUIForResult<T>(
   Widget Function(BuildContext, void Function(T)) widgetBuilder,

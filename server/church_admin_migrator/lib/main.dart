@@ -40,6 +40,12 @@ Future<void> main(List<String> arguments) async {
       defaultsTo: false,
       help:
           'Migrate storage (photos) from ChurchData and MeetingHelper to ChurchAdmin.',
+    )
+    ..addFlag(
+      'migrate-auth-users',
+      defaultsTo: false,
+      help:
+          'Migrate auth users and map permissions from ChurchData and MeetingHelper to ChurchAdmin.',
     );
 
   final argResults = parser.parse(arguments);
@@ -66,6 +72,7 @@ Future<void> main(List<String> arguments) async {
     await church_admin_migrator.migrate(
       churchDataApp: churchDataApp,
       meetingHelperApp: meetingHelperApp,
+      migrateAuthUsers: argResults.flag('migrate-auth-users'),
     );
   }
 

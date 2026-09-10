@@ -26,6 +26,7 @@ class ChurchAdminContext {
   final Map<IdReference, Person> persons;
   final Map<IdReference, Store> stores;
   final Map<IdReference, Street> streets;
+  final Map<IdReference, User> users;
 
   /// `history.visit_history` rows. [recordId] is the original Firestore id of
   /// the visited family/store/person (converted to a UUID on export).
@@ -65,6 +66,7 @@ class ChurchAdminContext {
       streets = {},
       services = {},
       meetings = {},
+      users = {},
       visitHistory = [],
       callHistory = [],
       confessionHistory = [],

@@ -401,6 +401,7 @@ DROP TABLE _s;
 CREATE TEMP TABLE _s AS
 SELECT
     id,
+    uid,
     national_id,
     name,
     main_phone,
@@ -431,13 +432,15 @@ SELECT
 FROM public.persons WITH NO DATA;
 \copy _s FROM 'persons.csv' WITH (FORMAT csv, HEADER true, FORCE_NOT_NULL("name"))
 INSERT INTO public.persons (
-    id, national_id, name, main_phone, other_phones, birthdate, gender, is_shammas, shammas_level_id,
+    id, uid, national_id, name, main_phone, other_phones, birthdate, gender, is_shammas,
+    shammas_level_id,
     school_id, college_id, church_id, father_id, work_status, job_id, job_description, qualification_id,
     martial_status, person_type_id, state_id, is_servant, family_id, store_id, study_year_id, color,
     photo_updated_at, blurhash, notes
 )
 SELECT
     id,
+    uid,
     national_id,
     name,
     main_phone,
@@ -477,6 +480,81 @@ FROM public.persons_services WITH NO DATA;
 INSERT INTO public.persons_services (person_id, service_id) SELECT
     person_id,
     service_id
+FROM _s ON CONFLICT DO NOTHING;
+DROP TABLE _s;
+
+-- ---- users: additive, never purged and never promoted ---------------------
+CREATE TEMP TABLE _s AS SELECT
+    uid,
+    email,
+    name,
+    photo_updated_at,
+    auth_id
+FROM auth.users_data WITH NO DATA;
+\copy _s FROM 'users_data.csv' WITH (FORMAT csv, HEADER true, FORCE_NOT_NULL("name"))
+INSERT INTO auth.users_data (uid, email, name, photo_updated_at, auth_id) SELECT
+    uid,
+    email,
+    name,
+    photo_updated_at,
+    auth_id
+FROM _s ON CONFLICT DO NOTHING;
+DROP TABLE _s;
+
+CREATE TEMP TABLE _s AS SELECT
+    uid,
+    permission
+FROM auth.users_permissions WITH NO DATA;
+\copy _s FROM 'users_permissions.csv' WITH (FORMAT csv, HEADER true)
+INSERT INTO auth.users_permissions (uid, permission) SELECT
+    uid,
+    permission
+FROM _s ON CONFLICT DO NOTHING;
+DROP TABLE _s;
+
+CREATE TEMP TABLE _s AS SELECT
+    uid,
+    permission_id,
+    admin_on_service,
+    service_gender,
+    service_study_year,
+    service_allow_edit,
+    service_admin_on_users,
+    admin_on_area,
+    area_allow_edit,
+    area_admin_on_users,
+    service_write_related_families,
+    group_write_related_families,
+    area_allow_export,
+    service_allow_export,
+    service_allow_record_attendance,
+    service_allow_record_servants_attendance
+FROM auth.users_admin_on WITH NO DATA;
+\copy _s FROM 'users_admin_on.csv' WITH (FORMAT csv, HEADER true)
+INSERT INTO auth.users_admin_on (
+    uid, permission_id, admin_on_service, service_gender, service_study_year,
+    service_allow_edit, service_admin_on_users, admin_on_area, area_allow_edit,
+    area_admin_on_users, service_write_related_families,
+    group_write_related_families, area_allow_export, service_allow_export,
+    service_allow_record_attendance, service_allow_record_servants_attendance
+)
+SELECT
+    uid,
+    permission_id,
+    admin_on_service,
+    service_gender,
+    service_study_year,
+    service_allow_edit,
+    service_admin_on_users,
+    admin_on_area,
+    area_allow_edit,
+    area_admin_on_users,
+    service_write_related_families,
+    group_write_related_families,
+    area_allow_export,
+    service_allow_export,
+    service_allow_record_attendance,
+    service_allow_record_servants_attendance
 FROM _s ON CONFLICT DO NOTHING;
 DROP TABLE _s;
 
