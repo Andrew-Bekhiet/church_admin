@@ -135,30 +135,6 @@ class FunctionsService {
     await httpsCallable('applyInvitationCode').call({'code': invitationCode});
   }
 
-  Future<List<AuthUser>> getAuthUsers() async {
-    // TODO: make sure parsing works with the function
-    final response = await httpsCallable('getAuthUsers').call<List<dynamic>>();
-
-    return response.data
-        .cast<Map?>()
-        .map((u) => u ?? {})
-        .map((u) => u.cast<String, dynamic>())
-        .map(AuthUser.fromJson)
-        .toList();
-  }
-
-  Future<String> approveAndLinkAuthUser({
-    required String authId,
-    required String hasuraUid,
-  }) async {
-    final response = await httpsCallable('onboardAuthUser').call<Map>({
-      'authId': authId,
-      'hasuraUid': hasuraUid,
-    });
-
-    return response.data['uid'] as String;
-  }
-
   Future<String> getAppDownloadLink(String platform) async {
     final response = await httpsCallable(
       'getAppDownloadLink',
