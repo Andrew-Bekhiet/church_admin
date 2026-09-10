@@ -28,6 +28,7 @@ class HomeScreenWebRoute extends GoRouteData with $HomeScreenWebRoute {
 
       // TODO(ENG-226): add a redirect to EditPersonRoute if the user has no person data
 
+      case AuthAuthenticated(userData: User(person: null)):
       case AuthAuthenticated(userData: User(:final person?))
           when !person.spiritDataUpToDate():
         return const UpdateUserSpiritDataRoute(forced: true).location;

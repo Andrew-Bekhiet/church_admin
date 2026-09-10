@@ -286,6 +286,7 @@ class FirstScreenVariant extends ValueVariant<FirstScreenVariantEnum> {
             email: 'email',
             emailVerified: value != FirstScreenVariantEnum.emailVerification,
             idToken: 'idToken',
+            claims: {AuthUser.hasuraUserIdKey: 'hasura-user-id'},
           )
         : null;
 

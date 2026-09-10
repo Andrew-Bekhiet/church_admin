@@ -444,6 +444,11 @@ void main() {
       blocTest<AuthBloc, AuthState>(
         'reloadUser_whenTokenCarriesNoHasuraUserId_onboardsTheInvitee',
         setUp: () async {
+          final functionsMock =
+              globalProviderContainer.read(functionsServiceProvider)
+                  as MockFunctionsService;
+          when(functionsMock.tryClaimAccount()).thenAnswer((_) async => true);
+
           await AuthStorage.I.clearAll();
           await AuthStorage.I.writeAuthDataToCache(unclaimedAuthUser);
 
@@ -539,7 +544,7 @@ Future<void> _setUp() async {
 Future<Override> _setUpMockFunctionsService() async {
   final mock = MockFunctionsService();
 
-  when(mock.tryClaimAccount()).thenAnswer((_) async => true);
+  when(mock.tryClaimAccount()).thenAnswer((_) async => false);
 
   return functionsServiceProvider.overrideWithValue(mock);
 }
