@@ -15,8 +15,8 @@ export const InviteCode = z
     },
   )
   .transform((s) => {
-    const raw = s.replace(/-/g, "");
-    // at this point raw should be 12 alphanumerics
+    const raw = s.replace(/-/g, "").toUpperCase();
+
     return raw.replace(/^(.{4})(.{4})(.{4})$/, "$1-$2-$3");
   });
 

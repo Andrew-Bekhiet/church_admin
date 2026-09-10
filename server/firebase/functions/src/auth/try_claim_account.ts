@@ -35,7 +35,7 @@ export const tryClaimAccount = https.onCall({}, async (request) => {
     throw new https.HttpsError("not-found", "not-found");
   }
 
-  const hasuraUid = authUser.customClaims?.hasura_uid ??
+  const hasuraUid = authUser.customClaims?.["x-hasura-user-id"] ??
     await getHasuraUID(authUser.uid);
   if (hasuraUid) {
     console.error(

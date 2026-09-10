@@ -77,6 +77,7 @@ Future<void> main() async {
                     email: 'test@test.com',
                     emailVerified: true,
                     idToken: 'token',
+                    claims: {AuthUser.hasuraUserIdKey: '123'},
                   ),
                   userData: User(
                     uid: '123',

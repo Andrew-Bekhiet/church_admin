@@ -14,9 +14,7 @@ class ManageUsersRoute extends GoRouteData with $ManageUsersRoute {
 
   @override
   String? redirect(BuildContext context, GoRouterState state) {
-    final permissions = AuthBloc.I.currentUserData?.permissions;
-    if (!(permissions?.manageAllUsers ?? false) &&
-        !(permissions?.onboardUsers ?? false)) {
+    if (!(AuthBloc.I.currentUserData?.canManageSomeUsers ?? false)) {
       return const HomeScreenWebRoute().location;
     }
 

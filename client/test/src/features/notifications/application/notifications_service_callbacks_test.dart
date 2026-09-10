@@ -194,7 +194,7 @@ Future<void> _testNotificationMethod({
         named: 'notificationDetails',
       ),
     ),
-  ]).captured[2];
+  ]).captured[1];
 
   final advQueryJson = json.encode(
     (paginatableStreamCall.first as AdvancedQuery).toJson(),

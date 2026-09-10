@@ -470,40 +470,34 @@ export async function linkAuthAccount(
 }
 
 export async function releaseUserAccount(hasuraUID: string): Promise<void> {
-  try {
-    const hasura_response = await makeGraphqlRequest({
-      query: `
-            mutation releaseUserAccount($uid: uuid!) {
-              deleteAuthUsersPermissions(where: { uid: { _eq: $uid } }) {
-                affectedRows
-              }
-              deleteAuthUsersAdminOn(where: { uid: { _eq: $uid } }) {
-                affectedRows
-              }
-              updateAuthUsersData(
-                where: { uid: { _eq: $uid } }
-                _set: { authId: null }
-              ) {
-                affectedRows
-              }
+  const hasura_response = await makeGraphqlRequest({
+    query: `
+          mutation releaseUserAccount($uid: uuid!) {
+            deleteAuthUsersPermissions(where: { uid: { _eq: $uid } }) {
+              affectedRows
             }
-          `,
-      variables: {
-        uid: hasuraUID,
-      },
-      operationName: "releaseUserAccount",
-    });
+            deleteAuthUsersAdminOn(where: { uid: { _eq: $uid } }) {
+              affectedRows
+            }
+            updateAuthUsersData(
+              where: { uid: { _eq: $uid } }
+              _set: { authId: null }
+            ) {
+              affectedRows
+            }
+          }
+        `,
+    variables: {
+      uid: hasuraUID,
+    },
+    operationName: "releaseUserAccount",
+  });
 
-    const detached = dataOrThrow(hasura_response)["updateAuthUsersData"]
-      ?.["affectedRows"];
+  const detached = dataOrThrow(hasura_response)["updateAuthUsersData"]
+    ?.["affectedRows"];
 
-    if (detached !== 1) {
-      throw new Error(
-        `Could not detach the Firebase account from ${hasuraUID}`,
-      );
-    }
-  } catch (e) {
-    console.error(e);
+  if (detached !== 1) {
+    throw new Error(`Could not detach the Firebase account from ${hasuraUID}`);
   }
 }
 
