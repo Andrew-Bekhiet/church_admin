@@ -1,12 +1,14 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:church_admin_migrator/models/church_data_users_loader.dart';
 import 'package:church_admin_migrator/models/id_reference.dart';
 import 'package:dart_firebase_admin/dart_firebase_admin.dart';
 import 'package:dart_firebase_admin/firestore.dart';
 import 'package:equatable/equatable.dart';
 
 import 'church_data/models/area.dart';
+import 'church_data/models/church_data_user.dart';
 import 'church_data/models/family.dart';
 import 'church_data/models/mini_models.dart';
 import 'church_data/models/person.dart';
@@ -31,6 +33,7 @@ class ChurchDataContext with Equatable {
   final Map<IdReference, Street> streets;
   final Map<IdReference, Family> familiesAndStores;
   final Map<IdReference, Person> persons;
+  final Map<String, ChurchDataUser> users;
 
   ChurchDataContext._(this.app)
     : churches = {},
@@ -45,7 +48,8 @@ class ChurchDataContext with Equatable {
       areas = {},
       streets = {},
       familiesAndStores = {},
-      persons = {};
+      persons = {},
+      users = {};
 
   factory ChurchDataContext._fromJson(
     Map<String, dynamic> json,
@@ -237,6 +241,8 @@ class ChurchDataContext with Equatable {
           .where((entry) => entry.value.name.isNotEmpty),
     );
 
+    context.users.addAll(ChurchDataUsersLoader.fromCache(json));
+
     return context;
   }
 
@@ -344,6 +350,8 @@ class ChurchDataContext with Equatable {
       afterParse: (ref, parsed) =>
           parsed.name.isNotEmpty ? context.persons[ref] = parsed : null,
     );
+
+    context.users.addAll(await ChurchDataUsersLoader.load(context.app));
   }
 
   static Future<ChurchDataContext?> _maybeLoadFromCache(
@@ -400,6 +408,7 @@ class ChurchDataContext with Equatable {
       'persons': persons
           .map((key, value) => MapEntry(key, value.getMap()))
           .map(_serializeFirestoreValues),
+      'users': ChurchDataUsersLoader.toJson(users),
     };
   }
 
@@ -497,5 +506,6 @@ class ChurchDataContext with Equatable {
     streets,
     familiesAndStores,
     persons,
+    users,
   ];
 }

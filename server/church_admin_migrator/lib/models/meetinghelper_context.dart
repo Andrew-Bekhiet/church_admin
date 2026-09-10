@@ -4,11 +4,14 @@ import 'dart:io';
 import 'package:church_admin_migrator/models/church_data/models/mini_models.dart';
 import 'package:church_admin_migrator/models/id_reference.dart';
 import 'package:church_admin_migrator/models/meetinghelper/models/data.dart';
+import 'package:church_admin_migrator/models/meetinghelper/models/data/meeting_helper_user.dart';
 import 'package:church_admin_migrator/models/meetinghelper/models/data/service.dart';
 import 'package:church_admin_migrator/models/meetinghelper/models/meta/school.dart';
+import 'package:church_admin_migrator/models/meetinghelper_users_loader.dart';
 import 'package:dart_firebase_admin/dart_firebase_admin.dart';
 import 'package:dart_firebase_admin/firestore.dart';
 import 'package:equatable/equatable.dart';
+import 'package:logger/logger.dart';
 
 class MeetingHelperContext with Equatable {
   static FirebaseAdminApp? _deserializationApp;
@@ -23,6 +26,7 @@ class MeetingHelperContext with Equatable {
   final Map<IdReference, Service> services;
   final Map<IdReference, Class> classes;
   final Map<IdReference, Person> persons;
+  final Map<String, MeetingHelperUser> users;
 
   MeetingHelperContext._(this.app)
     : churches = {},
@@ -32,7 +36,8 @@ class MeetingHelperContext with Equatable {
       studyYears = {},
       services = {},
       classes = {},
-      persons = {};
+      persons = {},
+      users = {};
 
   factory MeetingHelperContext._fromJson(
     Map<String, dynamic> json,
@@ -153,6 +158,25 @@ class MeetingHelperContext with Equatable {
           .where((entry) => entry.value.name.isNotEmpty),
     );
 
+    if (json['users'] case final Map usersJson) {
+      context.users.addAll(
+        usersJson
+            .cast<String, dynamic>()
+            .map(_deserializeFirestoreValues)
+            .map(
+              (key, value) => MapEntry(
+                key,
+                MeetingHelperUser.fromJson(value as Map<String, dynamic>, key),
+              ),
+            ),
+      );
+    } else {
+      Logger().w(
+        'meetinghelper_context_cache.json has no "users" key. Delete the '
+        'cache file and re-run the migrator to load users.',
+      );
+    }
+
     return context;
   }
 
@@ -231,6 +255,8 @@ class MeetingHelperContext with Equatable {
       afterParse: (ref, parsed) =>
           parsed.name.isNotEmpty ? context.persons[ref] = parsed : null,
     );
+
+    context.users.addAll(await MeetingHelperUsersLoader.load(context.app));
   }
 
   static Future<MeetingHelperContext?> _maybeLoadFromCache(
@@ -270,6 +296,9 @@ class MeetingHelperContext with Equatable {
           .map((key, value) => MapEntry(key, value.toJson()))
           .map(_serializeFirestoreValues),
       'persons': persons
+          .map((key, value) => MapEntry(key, value.toJson()))
+          .map(_serializeFirestoreValues),
+      'users': users
           .map((key, value) => MapEntry(key, value.toJson()))
           .map(_serializeFirestoreValues),
     };
@@ -363,5 +392,6 @@ class MeetingHelperContext with Equatable {
     classes,
     services,
     persons,
+    users,
   ];
 }
