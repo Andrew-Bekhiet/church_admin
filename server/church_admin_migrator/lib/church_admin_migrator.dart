@@ -5,6 +5,7 @@ import 'package:church_admin/church_admin.dart';
 import 'package:church_admin_migrator/church_admin_csv_exporter.dart';
 import 'package:church_admin_migrator/migrations/create_new_services.dart';
 import 'package:church_admin_migrator/migrations/create_new_study_years.dart';
+import 'package:church_admin_migrator/migrations/migrate_auth_users.dart';
 import 'package:church_admin_migrator/models/church_admin_context.dart';
 import 'package:church_admin_migrator/models/church_data/models/mini_models.dart'
     as churchdata;
@@ -23,21 +24,15 @@ import 'package:collection/collection.dart';
 import 'package:dart_firebase_admin/dart_firebase_admin.dart';
 import 'package:dart_firebase_admin/firestore.dart' show Timestamp;
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
+import 'package:church_admin_migrator/migrations/migration_log.dart';
 
-final logger = Logger(
-  printer: PrettyPrinter(
-    methodCount: 0,
-    noBoxingByDefault: true,
-    dateTimeFormat: DateTimeFormat.dateAndTime,
-  ),
-);
+final logger = MigrationLog.logger;
 final bool isDryRun = bool.fromEnvironment('dryRun', defaultValue: false);
 
 /// When true the migration runs without prompting for merge/family decisions,
 /// applying the automatic defaults instead. Kept as a single switch so the
 /// interactive UI can be re-enabled in one place.
-const bool isSilentMigration = true;
+const bool isSilentMigration = MigrationLog.isSilentMigration;
 
 Future<void> migrate({
   required FirebaseAdminApp churchDataApp,
@@ -1372,7 +1367,19 @@ Future<void> _migrateAuthUsers({
   required ChurchDataContext churchDataContext,
   required ChurchAdminContext churchAdminContext,
   required MeetingHelperContext meetingHelperContext,
-}) async {}
+}) async {
+  MigrateAuthUsers.merge(
+    churchDataUsers: churchDataContext.users.values,
+    churchDataAreaAllowedUsers: churchDataContext.areas.entries.map(
+      (entry) => (ref: entry.key, allowedUsers: entry.value.allowedUsers),
+    ),
+    meetingHelperUsers: meetingHelperContext.users.values,
+    meetingHelperClassAllowedUsers: meetingHelperContext.classes.entries.map(
+      (entry) => (ref: entry.key, allowedUsers: entry.value.allowedUsers),
+    ),
+    churchAdminContext: churchAdminContext,
+  );
+}
 
 Future<T> showUIForResult<T>(
   Widget Function(BuildContext, void Function(T)) widgetBuilder,
