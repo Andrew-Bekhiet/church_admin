@@ -14,6 +14,7 @@ class _LegacyUserAggregate {
 
 class MigrateAuthUsers {
   static const _droppedFlagNames = [
+    'manageDeleted',
     'approveLocations',
     'changeHistory',
     'dumpImages',

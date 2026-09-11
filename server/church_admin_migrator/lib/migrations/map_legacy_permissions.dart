@@ -8,7 +8,6 @@ typedef LegacyPermissionFlags = ({
   bool write,
   bool manageUsers,
   bool manageAllowedUsers,
-  bool manageDeleted,
   bool export,
   bool recordAttendance,
   bool recordServantsAttendance,
@@ -32,6 +31,7 @@ typedef MergedLegacyUser = ({String name, MappedLegacyPermissions mapped});
 
 class MapLegacyPermissions {
   static const _meetingHelperDroppedFlags = [
+    'manageDeleted',
     'changeHistory',
     'dumpImages',
     'birthdayNotify',
@@ -57,11 +57,11 @@ class MapLegacyPermissions {
     write: user.write,
     manageUsers: user.manageUsers,
     manageAllowedUsers: user.manageAllowedUsers,
-    manageDeleted: user.manageDeleted,
     export: user.exportAreas,
     recordAttendance: false,
     recordServantsAttendance: false,
     droppedFlags: {
+      if (user.manageDeleted) 'manageDeleted',
       if (user.approveLocations) 'approveLocations',
       if (user.birthdayNotify) 'birthdayNotify',
       if (user.confessionsNotify) 'confessionsNotify',
@@ -80,7 +80,6 @@ class MapLegacyPermissions {
       write: has('write'),
       manageUsers: has('manageUsers'),
       manageAllowedUsers: has('manageAllowedUsers'),
-      manageDeleted: has('manageDeleted'),
       export: has('export'),
       recordAttendance: has('recordHistory'),
       recordServantsAttendance: has('secretary'),
@@ -147,7 +146,6 @@ class MapLegacyPermissions {
       if (superAccess) UserPermission.readAllData,
       if (superAccess && flags.write) UserPermission.writeAllData,
       if (flags.manageUsers) UserPermission.manageAllUsers,
-      if (flags.manageDeleted) UserPermission.recoverDeleted,
       if (superAccess && flags.export) UserPermission.exportAllData,
       if (superAccess && flags.recordAttendance)
         UserPermission.recordAllAttendance,

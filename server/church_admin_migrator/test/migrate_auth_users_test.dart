@@ -85,7 +85,7 @@ void main() {
             personId: 'p1',
             name: 'Meeting Helper Name',
             email: 'servant@example.com',
-            permissions: {'manageDeleted'},
+            permissions: {'manageUsers'},
           ),
         ],
       );
@@ -96,7 +96,7 @@ void main() {
       expect(entry.value.name, 'Meeting Helper Name');
       expect(entry.value.email, 'servant@example.com');
       expect(
-        entry.value.permissions.contains(UserPermission.recoverDeleted),
+        entry.value.permissions.contains(UserPermission.manageAllUsers),
         isTrue,
       );
     },

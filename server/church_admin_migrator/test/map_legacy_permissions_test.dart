@@ -15,7 +15,6 @@ void main() {
     bool write = false,
     bool manageUsers = false,
     bool manageAllowedUsers = false,
-    bool manageDeleted = false,
     bool export = false,
     bool recordAttendance = false,
     bool recordServantsAttendance = false,
@@ -26,7 +25,6 @@ void main() {
     write: write,
     manageUsers: manageUsers,
     manageAllowedUsers: manageAllowedUsers,
-    manageDeleted: manageDeleted,
     export: export,
     recordAttendance: recordAttendance,
     recordServantsAttendance: recordServantsAttendance,
@@ -151,7 +149,7 @@ void main() {
       personId: 'p1',
       name: 'Meeting Helper Name',
       email: 'servant@example.com',
-      permissions: {'manageDeleted'},
+      permissions: {'manageUsers'},
     );
 
     final result = MapLegacyPermissions.mergeLegacyUsers(
@@ -163,7 +161,7 @@ void main() {
     expect(result.name, 'Meeting Helper Name');
     expect(result.mapped.permissions.contains(UserPermission.approved), isTrue);
     expect(
-      result.mapped.permissions.contains(UserPermission.recoverDeleted),
+      result.mapped.permissions.contains(UserPermission.manageAllUsers),
       isTrue,
     );
   });
