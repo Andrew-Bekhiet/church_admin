@@ -1,0 +1,104 @@
+import 'dart:async';
+
+import 'package:bloc_test/bloc_test.dart';
+import 'package:church_admin/church_admin.dart';
+import 'package:collection/collection.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:mocktail/mocktail.dart';
+
+class _MockUsersDAO extends Mock implements UsersDAO {}
+
+void main() {
+  group('ManageUsersCubit', () {
+    const pageSize = 2;
+
+    const area = Area(id: 'a1', name: 'منطقة الزيتون');
+    const service = Service(id: 's1', name: 'خدمة ابتدائي');
+
+    User user(
+      String name, {
+      List<ViewableWithID> adminOn = const [],
+    }) => User(
+      uid: name,
+      name: name,
+      permissions: const PermissionsSet.empty(),
+      currentUserCanManageThisUser: true,
+      adminOn: [
+        for (final scope in adminOn)
+          AdminOnData(
+            permissionId: '${name}_${scope.id}',
+            area: scope is Area ? scope : null,
+            service: scope is Service ? scope : null,
+          ),
+      ],
+    );
+
+    late _MockUsersDAO dao;
+
+    void stubUsers(List<User> users, {int pageSize = pageSize}) {
+      when(
+        () => dao.streamAll(
+          searchQuery: any(named: 'searchQuery'),
+          where: any(named: 'where'),
+        ),
+      ).thenAnswer((invocation) {
+        final searchQuery =
+            invocation.namedArguments[#searchQuery] as Stream<String?>? ??
+            Stream.value(null);
+
+        return PaginatableStream<User, String?>(
+          parametersStream: searchQuery,
+          pageSize: pageSize,
+          factory: (request) {
+            final matching = users
+                .sortedBy((u) => u.name)
+                .where(
+                  (u) =>
+                      request.param == null || u.name.contains(request.param!),
+                )
+                .where(
+                  (u) =>
+                      request.cursor == null ||
+                      u.name.compareTo(request.cursor!.name) > 0,
+                )
+                .take(pageSize + 1)
+                .toList();
+
+            return Stream.value(
+              PaginatableStreamResponse(
+                data: matching.take(pageSize).toList(),
+                cursor: matching.elementAtOrNull(pageSize),
+              ),
+            );
+          },
+        );
+      });
+    }
+
+    setUp(() {
+      dao = _MockUsersDAO();
+    });
+
+    List<String> groupsOf(ManageUsersState state) => [
+      for (final group in state.groups)
+        '${group.title}: ${group.users.map((u) => u.name).join(', ')}',
+    ];
+
+    blocTest<ManageUsersCubit, ManageUsersState>(
+      'users open grouped under the areas and services they administer',
+      setUp: () => stubUsers([
+        user('مينا', adminOn: [area, service]),
+        user('مريم', adminOn: [service]),
+      ]),
+      build: () => ManageUsersCubit(usersDao: dao),
+      wait: Duration.zero,
+      verify: (cubit) {
+        expect(cubit.state.view, ManageUsersView.grouped);
+        expect(groupsOf(cubit.state), [
+          'منطقة الزيتون: مينا',
+          'خدمة ابتدائي: مريم, مينا',
+        ]);
+      },
+    );
+  });
+}
