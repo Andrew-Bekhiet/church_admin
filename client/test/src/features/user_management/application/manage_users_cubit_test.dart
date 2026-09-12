@@ -100,5 +100,26 @@ void main() {
         ]);
       },
     );
+
+    blocTest<ManageUsersCubit, ManageUsersState>(
+      'grouped view shows every user even when they span several pages',
+      setUp: () => stubUsers([
+        user('مينا', adminOn: [service]),
+        user('مريم', adminOn: [service]),
+        user('يوسف'),
+        user('بيتر', adminOn: [area]),
+        user('ماري'),
+      ]),
+      build: () => ManageUsersCubit(usersDao: dao),
+      wait: Duration.zero,
+      verify: (cubit) {
+        expect(cubit.state.isLoading, isFalse);
+        expect(groupsOf(cubit.state), [
+          'منطقة الزيتون: بيتر',
+          'خدمة ابتدائي: مريم, مينا',
+          'بدون مسؤولية: ماري, يوسف',
+        ]);
+      },
+    );
   });
 }
