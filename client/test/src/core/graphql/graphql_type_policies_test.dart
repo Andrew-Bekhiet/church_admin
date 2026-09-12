@@ -1,7 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/meetings/__generated__/queries.gql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/metadata/study_years/__generated__/subscriptions.gql.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/users/__generated__/fragments.gql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/users/__generated__/subscriptions.gql.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:graphql/client.dart';
@@ -108,11 +107,12 @@ void main() {
 
       final data = Subscription_watchAllUsers(
         authUsersData: [
-          Fragment_UserOverview(
+          Subscription_watchAllUsers_authUsersData(
             uid: stringToUuid(userUid),
             name: 'Nabil',
             email: 'nabil@example.com',
             permissions: [],
+            adminOn: [],
           ),
         ],
       );

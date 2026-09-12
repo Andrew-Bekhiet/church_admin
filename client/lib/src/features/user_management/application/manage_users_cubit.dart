@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:bloc/bloc.dart';
 import 'package:church_admin/church_admin.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rxdart/rxdart.dart';
 
 class ManageUsersCubit extends Cubit<ManageUsersState> {
@@ -29,7 +29,7 @@ class ManageUsersCubit extends Cubit<ManageUsersState> {
   }
 
   void search(String query) {
-    _search.add(query);
+    _search.add(query.isEmpty ? null : query);
     emit(state.copyWith(searchQuery: query, isLoading: true));
   }
 

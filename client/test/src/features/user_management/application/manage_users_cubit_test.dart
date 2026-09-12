@@ -21,8 +21,6 @@ void main() {
     }) => User(
       uid: name,
       name: name,
-      permissions: const PermissionsSet.empty(),
-      currentUserCanManageThisUser: true,
       adminOn: [
         for (final scope in adminOn)
           AdminOnData(

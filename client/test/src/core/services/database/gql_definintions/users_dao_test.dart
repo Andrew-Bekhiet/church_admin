@@ -17,15 +17,17 @@ void main() {
     test(
       'the next page of users continues after the cursor by name then uid',
       () {
-        final cursor = User(
+        const cursor = User(
           uid: '00000000-0000-0000-0000-000000000001',
           name: 'مينا',
-          permissions: const PermissionsSet.empty(),
-          currentUserCanManageThisUser: true,
         );
 
         final vars = dao.baseStreamAllConfig.transformRequest!(
-          PaginatableStreamRequest(cursor: cursor, pageIndex: 1, pageSize: 100),
+          const PaginatableStreamRequest(
+            cursor: cursor,
+            pageIndex: 1,
+            pageSize: 100,
+          ),
         );
 
         expect(vars['orderBy'], [
