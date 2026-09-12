@@ -34,7 +34,7 @@ export PGDATABASE="${PGDATABASE:-church_admin}"
 export PGUSER="${PGUSER:-postgres}"
 
 CUTOFF_DATE="${CUTOFF_DATE:-2026-05-31}"
-EXPORT_DIR="${EXPORT_DIR:-$SCRIPT_DIR/../export/2026-06-29}"
+EXPORT_DIR="${EXPORT_DIR:-$SCRIPT_DIR/../export}"
 
 if ! command -v psql >/dev/null 2>&1; then
   echo "error: psql not found on PATH" >&2

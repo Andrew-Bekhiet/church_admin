@@ -1,11 +1,9 @@
 import 'package:church_admin_migrator/models/church_data/models/church_data_user.dart';
-import 'package:dart_firebase_admin/auth.dart';
-import 'package:dart_firebase_admin/dart_firebase_admin.dart';
-import 'package:dart_firebase_admin/firestore.dart';
+import 'package:firebase_admin_sdk/firebase_admin_sdk.dart';
 import 'package:logger/logger.dart';
 
 class ChurchDataUsersLoader {
-  static Future<Map<String, ChurchDataUser>> load(FirebaseAdminApp app) async {
+  static Future<Map<String, ChurchDataUser>> load(FirebaseApp app) async {
     final claimsUsers = await _loadFromAuthClaims(app);
     final firestoreExtras = await _loadFirestoreExtras(app);
 
@@ -40,9 +38,9 @@ class ChurchDataUsersLoader {
   }
 
   static Future<Map<String, ChurchDataUser>> _loadFromAuthClaims(
-    FirebaseAdminApp app,
+    FirebaseApp app,
   ) async {
-    final auth = Auth(app);
+    final auth = app.auth();
     final users = <String, ChurchDataUser>{};
     String? pageToken;
 
@@ -65,8 +63,8 @@ class ChurchDataUsersLoader {
   }
 
   static Future<Map<String, ({String? name, List<String> allowedUsers})>>
-  _loadFirestoreExtras(FirebaseAdminApp app) async {
-    final snapshot = await Firestore(app).collection('Users').get();
+  _loadFirestoreExtras(FirebaseApp app) async {
+    final snapshot = await app.firestore().collection('Users').get();
     final extras = <String, ({String? name, List<String> allowedUsers})>{};
 
     for (final doc in snapshot.docs) {

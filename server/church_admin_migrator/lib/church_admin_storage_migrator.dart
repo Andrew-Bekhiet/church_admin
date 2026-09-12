@@ -274,7 +274,7 @@ Future<Map<String, String>> _readIdMapping(File mappingFile) async {
 
   try {
     final content = await mappingFile.readAsString();
-    final rows = const CsvToListConverter().convert(content);
+    final rows = const CsvDecoder().convert(content);
 
     if (rows.isEmpty) {
       logger.w('ID mapping file is empty: ${mappingFile.path}');

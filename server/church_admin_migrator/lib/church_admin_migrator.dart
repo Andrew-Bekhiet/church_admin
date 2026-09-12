@@ -6,6 +6,7 @@ import 'package:church_admin_migrator/church_admin_csv_exporter.dart';
 import 'package:church_admin_migrator/migrations/create_new_services.dart';
 import 'package:church_admin_migrator/migrations/create_new_study_years.dart';
 import 'package:church_admin_migrator/migrations/migrate_auth_users.dart';
+import 'package:church_admin_migrator/migrations/migration_log.dart';
 import 'package:church_admin_migrator/models/church_admin_context.dart';
 import 'package:church_admin_migrator/models/church_data/models/mini_models.dart'
     as churchdata;
@@ -21,10 +22,10 @@ import 'package:church_admin_migrator/ui/person_merge_dialog.dart';
 import 'package:church_admin_migrator/utils/fuzzy_match.dart';
 import 'package:church_admin_migrator/utils/normalize_string.dart';
 import 'package:collection/collection.dart';
-import 'package:dart_firebase_admin/dart_firebase_admin.dart';
-import 'package:dart_firebase_admin/firestore.dart' show Timestamp;
+import 'package:firebase_admin_sdk/firebase_admin_sdk.dart';
 import 'package:flutter/material.dart';
-import 'package:church_admin_migrator/migrations/migration_log.dart';
+import 'package:google_cloud_firestore/google_cloud_firestore.dart'
+    show Timestamp;
 
 final logger = MigrationLog.logger;
 final bool isDryRun = bool.fromEnvironment('dryRun', defaultValue: false);
@@ -35,8 +36,8 @@ final bool isDryRun = bool.fromEnvironment('dryRun', defaultValue: false);
 const bool isSilentMigration = MigrationLog.isSilentMigration;
 
 Future<void> migrate({
-  required FirebaseAdminApp churchDataApp,
-  required FirebaseAdminApp meetingHelperApp,
+  required FirebaseApp churchDataApp,
+  required FirebaseApp meetingHelperApp,
   required bool migrateAuthUsers,
 }) async {
   String? currentStep;
@@ -67,8 +68,8 @@ Future<void> migrate({
 }
 
 Future<void> _migrateWithTiming({
-  required FirebaseAdminApp churchDataApp,
-  required FirebaseAdminApp meetingHelperApp,
+  required FirebaseApp churchDataApp,
+  required FirebaseApp meetingHelperApp,
   required bool migrateAuthUsers,
   required void Function(String stepName) beforeStepStart,
 }) async {
@@ -130,7 +131,7 @@ Future<void> _migrateWithTiming({
   _migrateChurchDataPersons(churchDataContext, churchAdminContext);
 
   beforeStepStart('Migrating Meeting Helper Persons');
-  _migrateMeetingHelperPersons(meetingHelperContext, churchAdminContext);
+  await _migrateMeetingHelperPersons(meetingHelperContext, churchAdminContext);
 
   beforeStepStart('Migrating Persons States from persons');
   _migratePersonsStates(churchAdminContext);

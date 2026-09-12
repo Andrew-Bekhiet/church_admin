@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:church_admin_migrator/models/id_reference.dart';
-import 'package:dart_firebase_admin/firestore.dart';
+import 'package:google_cloud_firestore/google_cloud_firestore.dart';
 import 'package:meta/meta.dart';
 
 @immutable
@@ -164,12 +164,4 @@ class Person {
     'MotherPhone': motherPhone,
     'Services': services,
   };
-}
-
-extension on Timestamp? {
-  DateTime? toDate() {
-    if (this == null) return null;
-
-    return DateTime.fromMillisecondsSinceEpoch(this!.seconds * 1000);
-  }
 }

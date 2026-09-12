@@ -8,15 +8,15 @@ import 'package:church_admin_migrator/models/meetinghelper/models/data/meeting_h
 import 'package:church_admin_migrator/models/meetinghelper/models/data/service.dart';
 import 'package:church_admin_migrator/models/meetinghelper/models/meta/school.dart';
 import 'package:church_admin_migrator/models/meetinghelper_users_loader.dart';
-import 'package:dart_firebase_admin/dart_firebase_admin.dart';
-import 'package:dart_firebase_admin/firestore.dart';
 import 'package:equatable/equatable.dart';
+import 'package:firebase_admin_sdk/firebase_admin_sdk.dart';
+import 'package:google_cloud_firestore/google_cloud_firestore.dart';
 import 'package:logger/logger.dart';
 
 class MeetingHelperContext with Equatable {
-  static FirebaseAdminApp? _deserializationApp;
+  static FirebaseApp? _deserializationApp;
 
-  final FirebaseAdminApp app;
+  final FirebaseApp app;
 
   final Map<IdReference, Church> churches;
   final Map<IdReference, Father> cFathers;
@@ -41,7 +41,7 @@ class MeetingHelperContext with Equatable {
 
   factory MeetingHelperContext._fromJson(
     Map<String, dynamic> json,
-    FirebaseAdminApp app,
+    FirebaseApp app,
   ) {
     final context = MeetingHelperContext._(app);
     _deserializationApp = app;
@@ -180,7 +180,7 @@ class MeetingHelperContext with Equatable {
     return context;
   }
 
-  static Future<MeetingHelperContext> load(FirebaseAdminApp app) async {
+  static Future<MeetingHelperContext> load(FirebaseApp app) async {
     final context = MeetingHelperContext._(app);
 
     final cache = await _maybeLoadFromCache(context);
@@ -198,7 +198,7 @@ class MeetingHelperContext with Equatable {
   static Future<void> _loadDataContextData(MeetingHelperContext context) async {
     _deserializationApp = context.app;
 
-    final firestore = Firestore(context.app);
+    final firestore = context.app.firestore();
 
     await _loadDataUsing(
       context,
@@ -345,7 +345,7 @@ class MeetingHelperContext with Equatable {
 
         return MapEntry(
           key,
-          Firestore(_deserializationApp!).collection(collection).doc(id),
+          _deserializationApp!.firestore().collection(collection).doc(id),
         );
       }
     }

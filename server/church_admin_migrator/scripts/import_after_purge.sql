@@ -660,3 +660,15 @@ UPDATE streets SET color = null
 WHERE color = 0;
 UPDATE areas SET color = null
 WHERE color = 0;
+
+INSERT INTO "public"."users_preferences" (
+    "uid",
+    "order_by_preferences",
+    "great_feast_theme"
+)
+SELECT
+    "uid",
+    "public"."default_order_by_preferences"() AS "order_by_preferences",
+    true AS "great_feast_theme"
+FROM "auth"."users_data"
+ON CONFLICT ("uid") DO NOTHING;

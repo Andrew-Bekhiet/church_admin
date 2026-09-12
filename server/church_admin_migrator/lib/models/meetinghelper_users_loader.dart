@@ -1,12 +1,9 @@
 import 'package:church_admin_migrator/models/meetinghelper/models/data/meeting_helper_user.dart';
-import 'package:dart_firebase_admin/dart_firebase_admin.dart';
-import 'package:dart_firebase_admin/firestore.dart';
+import 'package:firebase_admin_sdk/firebase_admin_sdk.dart';
 
 class MeetingHelperUsersLoader {
-  static Future<Map<String, MeetingHelperUser>> load(
-    FirebaseAdminApp app,
-  ) async {
-    final snapshot = await Firestore(app).collection('UsersData').get();
+  static Future<Map<String, MeetingHelperUser>> load(FirebaseApp app) async {
+    final snapshot = await app.firestore().collection('UsersData').get();
     final users = <String, MeetingHelperUser>{};
 
     for (final doc in snapshot.docs) {

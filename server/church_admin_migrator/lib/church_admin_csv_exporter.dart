@@ -724,11 +724,11 @@ class ChurchAdminCsvExporter {
         (user) => user.permissions
             .map(
               (p) => _ToJsonAdapter(
-                p,
-                p.name,
-                (s) => {
-                  'uid': _uuidFromFirestoreId(user.id),
-                  'permission': p.name,
+                (uid: user.id, permission: p.name),
+                user.id + p.name,
+                (r) => {
+                  'uid': _uuidFromFirestoreId(r.uid),
+                  'permission': r.permission,
                 },
               ),
             )

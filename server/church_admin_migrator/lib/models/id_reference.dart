@@ -1,5 +1,5 @@
-import 'package:dart_firebase_admin/firestore.dart';
 import 'package:equatable/equatable.dart';
+import 'package:google_cloud_firestore/google_cloud_firestore.dart';
 
 class IdReference with Equatable {
   static final Map<String, IdReference> _instances = {};
