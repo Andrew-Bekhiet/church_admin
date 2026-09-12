@@ -3780,13 +3780,15 @@ class Subscription_watchAllUsers {
     return Subscription_watchAllUsers(
       authUsersData: (l$authUsersData as List<dynamic>)
           .map(
-            (e) => Fragment_UserOverview.fromJson((e as Map<String, dynamic>)),
+            (e) => Subscription_watchAllUsers_authUsersData.fromJson(
+              (e as Map<String, dynamic>),
+            ),
           )
           .toList(),
     );
   }
 
-  final List<Fragment_UserOverview> authUsersData;
+  final List<Subscription_watchAllUsers_authUsersData> authUsersData;
 
   Map<String, dynamic> toJson() {
     final _resultData = <String, dynamic>{};
@@ -3843,10 +3845,14 @@ abstract class CopyWith_Subscription_watchAllUsers<TRes> {
   factory CopyWith_Subscription_watchAllUsers.stub(TRes res) =
       _CopyWithStubImpl_Subscription_watchAllUsers;
 
-  TRes call({List<Fragment_UserOverview>? authUsersData});
+  TRes call({List<Subscription_watchAllUsers_authUsersData>? authUsersData});
   TRes authUsersData(
-    Iterable<Fragment_UserOverview> Function(
-      Iterable<CopyWith_Fragment_UserOverview<Fragment_UserOverview>>,
+    Iterable<Subscription_watchAllUsers_authUsersData> Function(
+      Iterable<
+        CopyWith_Subscription_watchAllUsers_authUsersData<
+          Subscription_watchAllUsers_authUsersData
+        >
+      >,
     )
     _fn,
   );
@@ -3866,19 +3872,23 @@ class _CopyWithImpl_Subscription_watchAllUsers<TRes>
     Subscription_watchAllUsers(
       authUsersData: authUsersData == _undefined || authUsersData == null
           ? _instance.authUsersData
-          : (authUsersData as List<Fragment_UserOverview>),
+          : (authUsersData as List<Subscription_watchAllUsers_authUsersData>),
     ),
   );
 
   TRes authUsersData(
-    Iterable<Fragment_UserOverview> Function(
-      Iterable<CopyWith_Fragment_UserOverview<Fragment_UserOverview>>,
+    Iterable<Subscription_watchAllUsers_authUsersData> Function(
+      Iterable<
+        CopyWith_Subscription_watchAllUsers_authUsersData<
+          Subscription_watchAllUsers_authUsersData
+        >
+      >,
     )
     _fn,
   ) => call(
     authUsersData: _fn(
       _instance.authUsersData.map(
-        (e) => CopyWith_Fragment_UserOverview(e, (i) => i),
+        (e) => CopyWith_Subscription_watchAllUsers_authUsersData(e, (i) => i),
       ),
     ).toList(),
   );
@@ -3890,7 +3900,7 @@ class _CopyWithStubImpl_Subscription_watchAllUsers<TRes>
 
   TRes _res;
 
-  call({List<Fragment_UserOverview>? authUsersData}) => _res;
+  call({List<Subscription_watchAllUsers_authUsersData>? authUsersData}) => _res;
 
   authUsersData(_fn) => _res;
 }
@@ -3975,6 +3985,10 @@ const documentNodeSubscriptionwatchAllUsers = DocumentNode(
                   name: NameNode(value: 'UserOverview'),
                   directives: [],
                 ),
+                FragmentSpreadNode(
+                  name: NameNode(value: 'UserAdminScopes'),
+                  directives: [],
+                ),
                 FieldNode(
                   name: NameNode(value: '__typename'),
                   alias: null,
@@ -3996,5 +4010,1092 @@ const documentNodeSubscriptionwatchAllUsers = DocumentNode(
     fragmentDefinitionPersonNoPhoto,
     fragmentDefinitionLatestKodasHistory,
     fragmentDefinitionLatestConfessionHistory,
+    fragmentDefinitionUserAdminScopes,
+    fragmentDefinitionAreaNoPhoto,
+    fragmentDefinitionServiceNoPhoto,
+    fragmentDefinitionGroupNoPhoto,
   ],
 );
+
+class Subscription_watchAllUsers_authUsersData
+    implements
+        Fragment_UserOverview,
+        Fragment_User,
+        Fragment_UserNoPhoto,
+        Fragment_UserPermissions,
+        Fragment_UserAdminScopes {
+  Subscription_watchAllUsers_authUsersData({
+    required this.uid,
+    required this.name,
+    this.email,
+    this.$__typename = 'AuthUsersData',
+    this.photoUpdatedAt,
+    this.blurhash,
+    this.currentUserCanManageThisUser,
+    required this.permissions,
+    this.person,
+    required this.adminOn,
+  });
+
+  factory Subscription_watchAllUsers_authUsersData.fromJson(
+    Map<String, dynamic> json,
+  ) {
+    final l$uid = json['uid'];
+    final l$name = json['name'];
+    final l$email = json['email'];
+    final l$$__typename = json['__typename'];
+    final l$photoUpdatedAt = json['photoUpdatedAt'];
+    final l$blurhash = json['blurhash'];
+    final l$currentUserCanManageThisUser = json['currentUserCanManageThisUser'];
+    final l$permissions = json['permissions'];
+    final l$person = json['person'];
+    final l$adminOn = json['adminOn'];
+    return Subscription_watchAllUsers_authUsersData(
+      uid: stringToUuid(l$uid),
+      name: (l$name as String),
+      email: (l$email as String?),
+      $__typename: (l$$__typename as String),
+      photoUpdatedAt: l$photoUpdatedAt == null
+          ? null
+          : tstzFromString(l$photoUpdatedAt),
+      blurhash: (l$blurhash as String?),
+      currentUserCanManageThisUser: (l$currentUserCanManageThisUser as bool?),
+      permissions: (l$permissions as List<dynamic>)
+          .map(
+            (e) =>
+                Subscription_watchAllUsers_authUsersData_permissions.fromJson(
+                  (e as Map<String, dynamic>),
+                ),
+          )
+          .toList(),
+      person: l$person == null
+          ? null
+          : Subscription_watchAllUsers_authUsersData_person.fromJson(
+              (l$person as Map<String, dynamic>),
+            ),
+      adminOn: (l$adminOn as List<dynamic>)
+          .map(
+            (e) => Subscription_watchAllUsers_authUsersData_adminOn.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
+          .toList(),
+    );
+  }
+
+  final UuidValue uid;
+
+  final String name;
+
+  final String? email;
+
+  final String $__typename;
+
+  final DateTime? photoUpdatedAt;
+
+  final String? blurhash;
+
+  final bool? currentUserCanManageThisUser;
+
+  final List<Subscription_watchAllUsers_authUsersData_permissions> permissions;
+
+  final Subscription_watchAllUsers_authUsersData_person? person;
+
+  final List<Subscription_watchAllUsers_authUsersData_adminOn> adminOn;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$uid = uid;
+    _resultData['uid'] = uuidToString(l$uid);
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$email = email;
+    _resultData['email'] = l$email;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    final l$photoUpdatedAt = photoUpdatedAt;
+    _resultData['photoUpdatedAt'] = l$photoUpdatedAt == null
+        ? null
+        : tstzToString(l$photoUpdatedAt);
+    final l$blurhash = blurhash;
+    _resultData['blurhash'] = l$blurhash;
+    final l$currentUserCanManageThisUser = currentUserCanManageThisUser;
+    _resultData['currentUserCanManageThisUser'] =
+        l$currentUserCanManageThisUser;
+    final l$permissions = permissions;
+    _resultData['permissions'] = l$permissions.map((e) => e.toJson()).toList();
+    final l$person = person;
+    _resultData['person'] = l$person?.toJson();
+    final l$adminOn = adminOn;
+    _resultData['adminOn'] = l$adminOn.map((e) => e.toJson()).toList();
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$uid = uid;
+    final l$name = name;
+    final l$email = email;
+    final l$$__typename = $__typename;
+    final l$photoUpdatedAt = photoUpdatedAt;
+    final l$blurhash = blurhash;
+    final l$currentUserCanManageThisUser = currentUserCanManageThisUser;
+    final l$permissions = permissions;
+    final l$person = person;
+    final l$adminOn = adminOn;
+    return Object.hashAll([
+      l$uid,
+      l$name,
+      l$email,
+      l$$__typename,
+      l$photoUpdatedAt,
+      l$blurhash,
+      l$currentUserCanManageThisUser,
+      Object.hashAll(l$permissions.map((v) => v)),
+      l$person,
+      Object.hashAll(l$adminOn.map((v) => v)),
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Subscription_watchAllUsers_authUsersData ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$uid = uid;
+    final lOther$uid = other.uid;
+    if (l$uid != lOther$uid) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$email = email;
+    final lOther$email = other.email;
+    if (l$email != lOther$email) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    final l$photoUpdatedAt = photoUpdatedAt;
+    final lOther$photoUpdatedAt = other.photoUpdatedAt;
+    if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
+    final l$currentUserCanManageThisUser = currentUserCanManageThisUser;
+    final lOther$currentUserCanManageThisUser =
+        other.currentUserCanManageThisUser;
+    if (l$currentUserCanManageThisUser != lOther$currentUserCanManageThisUser) {
+      return false;
+    }
+    final l$permissions = permissions;
+    final lOther$permissions = other.permissions;
+    if (l$permissions.length != lOther$permissions.length) {
+      return false;
+    }
+    for (int i = 0; i < l$permissions.length; i++) {
+      final l$permissions$entry = l$permissions[i];
+      final lOther$permissions$entry = lOther$permissions[i];
+      if (l$permissions$entry != lOther$permissions$entry) {
+        return false;
+      }
+    }
+    final l$person = person;
+    final lOther$person = other.person;
+    if (l$person != lOther$person) {
+      return false;
+    }
+    final l$adminOn = adminOn;
+    final lOther$adminOn = other.adminOn;
+    if (l$adminOn.length != lOther$adminOn.length) {
+      return false;
+    }
+    for (int i = 0; i < l$adminOn.length; i++) {
+      final l$adminOn$entry = l$adminOn[i];
+      final lOther$adminOn$entry = lOther$adminOn[i];
+      if (l$adminOn$entry != lOther$adminOn$entry) {
+        return false;
+      }
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Subscription_watchAllUsers_authUsersData
+    on Subscription_watchAllUsers_authUsersData {
+  CopyWith_Subscription_watchAllUsers_authUsersData<
+    Subscription_watchAllUsers_authUsersData
+  >
+  get copyWith =>
+      CopyWith_Subscription_watchAllUsers_authUsersData(this, (i) => i);
+}
+
+abstract class CopyWith_Subscription_watchAllUsers_authUsersData<TRes> {
+  factory CopyWith_Subscription_watchAllUsers_authUsersData(
+    Subscription_watchAllUsers_authUsersData instance,
+    TRes Function(Subscription_watchAllUsers_authUsersData) then,
+  ) = _CopyWithImpl_Subscription_watchAllUsers_authUsersData;
+
+  factory CopyWith_Subscription_watchAllUsers_authUsersData.stub(TRes res) =
+      _CopyWithStubImpl_Subscription_watchAllUsers_authUsersData;
+
+  TRes call({
+    UuidValue? uid,
+    String? name,
+    String? email,
+    String? $__typename,
+    DateTime? photoUpdatedAt,
+    String? blurhash,
+    bool? currentUserCanManageThisUser,
+    List<Subscription_watchAllUsers_authUsersData_permissions>? permissions,
+    Subscription_watchAllUsers_authUsersData_person? person,
+    List<Subscription_watchAllUsers_authUsersData_adminOn>? adminOn,
+  });
+  TRes permissions(
+    Iterable<Subscription_watchAllUsers_authUsersData_permissions> Function(
+      Iterable<
+        CopyWith_Subscription_watchAllUsers_authUsersData_permissions<
+          Subscription_watchAllUsers_authUsersData_permissions
+        >
+      >,
+    )
+    _fn,
+  );
+  CopyWith_Subscription_watchAllUsers_authUsersData_person<TRes> get person;
+  TRes adminOn(
+    Iterable<Subscription_watchAllUsers_authUsersData_adminOn> Function(
+      Iterable<
+        CopyWith_Subscription_watchAllUsers_authUsersData_adminOn<
+          Subscription_watchAllUsers_authUsersData_adminOn
+        >
+      >,
+    )
+    _fn,
+  );
+}
+
+class _CopyWithImpl_Subscription_watchAllUsers_authUsersData<TRes>
+    implements CopyWith_Subscription_watchAllUsers_authUsersData<TRes> {
+  _CopyWithImpl_Subscription_watchAllUsers_authUsersData(
+    this._instance,
+    this._then,
+  );
+
+  final Subscription_watchAllUsers_authUsersData _instance;
+
+  final TRes Function(Subscription_watchAllUsers_authUsersData) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? uid = _undefined,
+    Object? name = _undefined,
+    Object? email = _undefined,
+    Object? $__typename = _undefined,
+    Object? photoUpdatedAt = _undefined,
+    Object? blurhash = _undefined,
+    Object? currentUserCanManageThisUser = _undefined,
+    Object? permissions = _undefined,
+    Object? person = _undefined,
+    Object? adminOn = _undefined,
+  }) => _then(
+    Subscription_watchAllUsers_authUsersData(
+      uid: uid == _undefined || uid == null
+          ? _instance.uid
+          : (uid as UuidValue),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      email: email == _undefined ? _instance.email : (email as String?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+      photoUpdatedAt: photoUpdatedAt == _undefined
+          ? _instance.photoUpdatedAt
+          : (photoUpdatedAt as DateTime?),
+      blurhash: blurhash == _undefined
+          ? _instance.blurhash
+          : (blurhash as String?),
+      currentUserCanManageThisUser: currentUserCanManageThisUser == _undefined
+          ? _instance.currentUserCanManageThisUser
+          : (currentUserCanManageThisUser as bool?),
+      permissions: permissions == _undefined || permissions == null
+          ? _instance.permissions
+          : (permissions
+                as List<Subscription_watchAllUsers_authUsersData_permissions>),
+      person: person == _undefined
+          ? _instance.person
+          : (person as Subscription_watchAllUsers_authUsersData_person?),
+      adminOn: adminOn == _undefined || adminOn == null
+          ? _instance.adminOn
+          : (adminOn as List<Subscription_watchAllUsers_authUsersData_adminOn>),
+    ),
+  );
+
+  TRes permissions(
+    Iterable<Subscription_watchAllUsers_authUsersData_permissions> Function(
+      Iterable<
+        CopyWith_Subscription_watchAllUsers_authUsersData_permissions<
+          Subscription_watchAllUsers_authUsersData_permissions
+        >
+      >,
+    )
+    _fn,
+  ) => call(
+    permissions: _fn(
+      _instance.permissions.map(
+        (e) => CopyWith_Subscription_watchAllUsers_authUsersData_permissions(
+          e,
+          (i) => i,
+        ),
+      ),
+    ).toList(),
+  );
+
+  CopyWith_Subscription_watchAllUsers_authUsersData_person<TRes> get person {
+    final local$person = _instance.person;
+    return local$person == null
+        ? CopyWith_Subscription_watchAllUsers_authUsersData_person.stub(
+            _then(_instance),
+          )
+        : CopyWith_Subscription_watchAllUsers_authUsersData_person(
+            local$person,
+            (e) => call(person: e),
+          );
+  }
+
+  TRes adminOn(
+    Iterable<Subscription_watchAllUsers_authUsersData_adminOn> Function(
+      Iterable<
+        CopyWith_Subscription_watchAllUsers_authUsersData_adminOn<
+          Subscription_watchAllUsers_authUsersData_adminOn
+        >
+      >,
+    )
+    _fn,
+  ) => call(
+    adminOn: _fn(
+      _instance.adminOn.map(
+        (e) => CopyWith_Subscription_watchAllUsers_authUsersData_adminOn(
+          e,
+          (i) => i,
+        ),
+      ),
+    ).toList(),
+  );
+}
+
+class _CopyWithStubImpl_Subscription_watchAllUsers_authUsersData<TRes>
+    implements CopyWith_Subscription_watchAllUsers_authUsersData<TRes> {
+  _CopyWithStubImpl_Subscription_watchAllUsers_authUsersData(this._res);
+
+  TRes _res;
+
+  call({
+    UuidValue? uid,
+    String? name,
+    String? email,
+    String? $__typename,
+    DateTime? photoUpdatedAt,
+    String? blurhash,
+    bool? currentUserCanManageThisUser,
+    List<Subscription_watchAllUsers_authUsersData_permissions>? permissions,
+    Subscription_watchAllUsers_authUsersData_person? person,
+    List<Subscription_watchAllUsers_authUsersData_adminOn>? adminOn,
+  }) => _res;
+
+  permissions(_fn) => _res;
+
+  CopyWith_Subscription_watchAllUsers_authUsersData_person<TRes> get person =>
+      CopyWith_Subscription_watchAllUsers_authUsersData_person.stub(_res);
+
+  adminOn(_fn) => _res;
+}
+
+class Subscription_watchAllUsers_authUsersData_permissions
+    implements
+        Fragment_UserOverview_permissions,
+        Fragment_UserPermissions_permissions {
+  Subscription_watchAllUsers_authUsersData_permissions({
+    required this.permission,
+    this.$__typename = 'AuthUsersPermissions',
+  });
+
+  factory Subscription_watchAllUsers_authUsersData_permissions.fromJson(
+    Map<String, dynamic> json,
+  ) {
+    final l$permission = json['permission'];
+    final l$$__typename = json['__typename'];
+    return Subscription_watchAllUsers_authUsersData_permissions(
+      permission: (l$permission as String),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String permission;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$permission = permission;
+    _resultData['permission'] = l$permission;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$permission = permission;
+    final l$$__typename = $__typename;
+    return Object.hashAll([l$permission, l$$__typename]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Subscription_watchAllUsers_authUsersData_permissions ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$permission = permission;
+    final lOther$permission = other.permission;
+    if (l$permission != lOther$permission) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Subscription_watchAllUsers_authUsersData_permissions
+    on Subscription_watchAllUsers_authUsersData_permissions {
+  CopyWith_Subscription_watchAllUsers_authUsersData_permissions<
+    Subscription_watchAllUsers_authUsersData_permissions
+  >
+  get copyWith => CopyWith_Subscription_watchAllUsers_authUsersData_permissions(
+    this,
+    (i) => i,
+  );
+}
+
+abstract class CopyWith_Subscription_watchAllUsers_authUsersData_permissions<
+  TRes
+> {
+  factory CopyWith_Subscription_watchAllUsers_authUsersData_permissions(
+    Subscription_watchAllUsers_authUsersData_permissions instance,
+    TRes Function(Subscription_watchAllUsers_authUsersData_permissions) then,
+  ) = _CopyWithImpl_Subscription_watchAllUsers_authUsersData_permissions;
+
+  factory CopyWith_Subscription_watchAllUsers_authUsersData_permissions.stub(
+    TRes res,
+  ) = _CopyWithStubImpl_Subscription_watchAllUsers_authUsersData_permissions;
+
+  TRes call({String? permission, String? $__typename});
+}
+
+class _CopyWithImpl_Subscription_watchAllUsers_authUsersData_permissions<TRes>
+    implements
+        CopyWith_Subscription_watchAllUsers_authUsersData_permissions<TRes> {
+  _CopyWithImpl_Subscription_watchAllUsers_authUsersData_permissions(
+    this._instance,
+    this._then,
+  );
+
+  final Subscription_watchAllUsers_authUsersData_permissions _instance;
+
+  final TRes Function(Subscription_watchAllUsers_authUsersData_permissions)
+  _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? permission = _undefined,
+    Object? $__typename = _undefined,
+  }) => _then(
+    Subscription_watchAllUsers_authUsersData_permissions(
+      permission: permission == _undefined || permission == null
+          ? _instance.permission
+          : (permission as String),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
+}
+
+class _CopyWithStubImpl_Subscription_watchAllUsers_authUsersData_permissions<
+  TRes
+>
+    implements
+        CopyWith_Subscription_watchAllUsers_authUsersData_permissions<TRes> {
+  _CopyWithStubImpl_Subscription_watchAllUsers_authUsersData_permissions(
+    this._res,
+  );
+
+  TRes _res;
+
+  call({String? permission, String? $__typename}) => _res;
+}
+
+class Subscription_watchAllUsers_authUsersData_person
+    implements
+        Fragment_UserOverview_person,
+        Fragment_Person,
+        Fragment_PersonNoPhoto {
+  Subscription_watchAllUsers_authUsersData_person({
+    required this.id,
+    required this.name,
+    this.color,
+    this.userCanEdit,
+    this.$__typename = 'Persons',
+    this.photoUpdatedAt,
+    this.blurhash,
+    this.lastKodas,
+    this.lastConfession,
+  });
+
+  factory Subscription_watchAllUsers_authUsersData_person.fromJson(
+    Map<String, dynamic> json,
+  ) {
+    final l$id = json['id'];
+    final l$name = json['name'];
+    final l$color = json['color'];
+    final l$userCanEdit = json['userCanEdit'];
+    final l$$__typename = json['__typename'];
+    final l$photoUpdatedAt = json['photoUpdatedAt'];
+    final l$blurhash = json['blurhash'];
+    final l$lastKodas = json['lastKodas'];
+    final l$lastConfession = json['lastConfession'];
+    return Subscription_watchAllUsers_authUsersData_person(
+      id: stringToUuid(l$id),
+      name: (l$name as String),
+      color: (l$color as int?),
+      userCanEdit: (l$userCanEdit as bool?),
+      $__typename: (l$$__typename as String),
+      photoUpdatedAt: l$photoUpdatedAt == null
+          ? null
+          : tstzFromString(l$photoUpdatedAt),
+      blurhash: (l$blurhash as String?),
+      lastKodas: l$lastKodas == null
+          ? null
+          : Fragment_LatestKodasHistory.fromJson(
+              (l$lastKodas as Map<String, dynamic>),
+            ),
+      lastConfession: l$lastConfession == null
+          ? null
+          : Fragment_LatestConfessionHistory.fromJson(
+              (l$lastConfession as Map<String, dynamic>),
+            ),
+    );
+  }
+
+  final UuidValue id;
+
+  final String name;
+
+  final int? color;
+
+  final bool? userCanEdit;
+
+  final String $__typename;
+
+  final DateTime? photoUpdatedAt;
+
+  final String? blurhash;
+
+  final Fragment_LatestKodasHistory? lastKodas;
+
+  final Fragment_LatestConfessionHistory? lastConfession;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = uuidToString(l$id);
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$color = color;
+    _resultData['color'] = l$color;
+    final l$userCanEdit = userCanEdit;
+    _resultData['userCanEdit'] = l$userCanEdit;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    final l$photoUpdatedAt = photoUpdatedAt;
+    _resultData['photoUpdatedAt'] = l$photoUpdatedAt == null
+        ? null
+        : tstzToString(l$photoUpdatedAt);
+    final l$blurhash = blurhash;
+    _resultData['blurhash'] = l$blurhash;
+    final l$lastKodas = lastKodas;
+    _resultData['lastKodas'] = l$lastKodas?.toJson();
+    final l$lastConfession = lastConfession;
+    _resultData['lastConfession'] = l$lastConfession?.toJson();
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$name = name;
+    final l$color = color;
+    final l$userCanEdit = userCanEdit;
+    final l$$__typename = $__typename;
+    final l$photoUpdatedAt = photoUpdatedAt;
+    final l$blurhash = blurhash;
+    final l$lastKodas = lastKodas;
+    final l$lastConfession = lastConfession;
+    return Object.hashAll([
+      l$id,
+      l$name,
+      l$color,
+      l$userCanEdit,
+      l$$__typename,
+      l$photoUpdatedAt,
+      l$blurhash,
+      l$lastKodas,
+      l$lastConfession,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Subscription_watchAllUsers_authUsersData_person ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$color = color;
+    final lOther$color = other.color;
+    if (l$color != lOther$color) {
+      return false;
+    }
+    final l$userCanEdit = userCanEdit;
+    final lOther$userCanEdit = other.userCanEdit;
+    if (l$userCanEdit != lOther$userCanEdit) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    final l$photoUpdatedAt = photoUpdatedAt;
+    final lOther$photoUpdatedAt = other.photoUpdatedAt;
+    if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
+      return false;
+    }
+    final l$blurhash = blurhash;
+    final lOther$blurhash = other.blurhash;
+    if (l$blurhash != lOther$blurhash) {
+      return false;
+    }
+    final l$lastKodas = lastKodas;
+    final lOther$lastKodas = other.lastKodas;
+    if (l$lastKodas != lOther$lastKodas) {
+      return false;
+    }
+    final l$lastConfession = lastConfession;
+    final lOther$lastConfession = other.lastConfession;
+    if (l$lastConfession != lOther$lastConfession) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Subscription_watchAllUsers_authUsersData_person
+    on Subscription_watchAllUsers_authUsersData_person {
+  CopyWith_Subscription_watchAllUsers_authUsersData_person<
+    Subscription_watchAllUsers_authUsersData_person
+  >
+  get copyWith =>
+      CopyWith_Subscription_watchAllUsers_authUsersData_person(this, (i) => i);
+}
+
+abstract class CopyWith_Subscription_watchAllUsers_authUsersData_person<TRes> {
+  factory CopyWith_Subscription_watchAllUsers_authUsersData_person(
+    Subscription_watchAllUsers_authUsersData_person instance,
+    TRes Function(Subscription_watchAllUsers_authUsersData_person) then,
+  ) = _CopyWithImpl_Subscription_watchAllUsers_authUsersData_person;
+
+  factory CopyWith_Subscription_watchAllUsers_authUsersData_person.stub(
+    TRes res,
+  ) = _CopyWithStubImpl_Subscription_watchAllUsers_authUsersData_person;
+
+  TRes call({
+    UuidValue? id,
+    String? name,
+    int? color,
+    bool? userCanEdit,
+    String? $__typename,
+    DateTime? photoUpdatedAt,
+    String? blurhash,
+    Fragment_LatestKodasHistory? lastKodas,
+    Fragment_LatestConfessionHistory? lastConfession,
+  });
+  CopyWith_Fragment_LatestKodasHistory<TRes> get lastKodas;
+  CopyWith_Fragment_LatestConfessionHistory<TRes> get lastConfession;
+}
+
+class _CopyWithImpl_Subscription_watchAllUsers_authUsersData_person<TRes>
+    implements CopyWith_Subscription_watchAllUsers_authUsersData_person<TRes> {
+  _CopyWithImpl_Subscription_watchAllUsers_authUsersData_person(
+    this._instance,
+    this._then,
+  );
+
+  final Subscription_watchAllUsers_authUsersData_person _instance;
+
+  final TRes Function(Subscription_watchAllUsers_authUsersData_person) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? name = _undefined,
+    Object? color = _undefined,
+    Object? userCanEdit = _undefined,
+    Object? $__typename = _undefined,
+    Object? photoUpdatedAt = _undefined,
+    Object? blurhash = _undefined,
+    Object? lastKodas = _undefined,
+    Object? lastConfession = _undefined,
+  }) => _then(
+    Subscription_watchAllUsers_authUsersData_person(
+      id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      color: color == _undefined ? _instance.color : (color as int?),
+      userCanEdit: userCanEdit == _undefined
+          ? _instance.userCanEdit
+          : (userCanEdit as bool?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+      photoUpdatedAt: photoUpdatedAt == _undefined
+          ? _instance.photoUpdatedAt
+          : (photoUpdatedAt as DateTime?),
+      blurhash: blurhash == _undefined
+          ? _instance.blurhash
+          : (blurhash as String?),
+      lastKodas: lastKodas == _undefined
+          ? _instance.lastKodas
+          : (lastKodas as Fragment_LatestKodasHistory?),
+      lastConfession: lastConfession == _undefined
+          ? _instance.lastConfession
+          : (lastConfession as Fragment_LatestConfessionHistory?),
+    ),
+  );
+
+  CopyWith_Fragment_LatestKodasHistory<TRes> get lastKodas {
+    final local$lastKodas = _instance.lastKodas;
+    return local$lastKodas == null
+        ? CopyWith_Fragment_LatestKodasHistory.stub(_then(_instance))
+        : CopyWith_Fragment_LatestKodasHistory(
+            local$lastKodas,
+            (e) => call(lastKodas: e),
+          );
+  }
+
+  CopyWith_Fragment_LatestConfessionHistory<TRes> get lastConfession {
+    final local$lastConfession = _instance.lastConfession;
+    return local$lastConfession == null
+        ? CopyWith_Fragment_LatestConfessionHistory.stub(_then(_instance))
+        : CopyWith_Fragment_LatestConfessionHistory(
+            local$lastConfession,
+            (e) => call(lastConfession: e),
+          );
+  }
+}
+
+class _CopyWithStubImpl_Subscription_watchAllUsers_authUsersData_person<TRes>
+    implements CopyWith_Subscription_watchAllUsers_authUsersData_person<TRes> {
+  _CopyWithStubImpl_Subscription_watchAllUsers_authUsersData_person(this._res);
+
+  TRes _res;
+
+  call({
+    UuidValue? id,
+    String? name,
+    int? color,
+    bool? userCanEdit,
+    String? $__typename,
+    DateTime? photoUpdatedAt,
+    String? blurhash,
+    Fragment_LatestKodasHistory? lastKodas,
+    Fragment_LatestConfessionHistory? lastConfession,
+  }) => _res;
+
+  CopyWith_Fragment_LatestKodasHistory<TRes> get lastKodas =>
+      CopyWith_Fragment_LatestKodasHistory.stub(_res);
+
+  CopyWith_Fragment_LatestConfessionHistory<TRes> get lastConfession =>
+      CopyWith_Fragment_LatestConfessionHistory.stub(_res);
+}
+
+class Subscription_watchAllUsers_authUsersData_adminOn
+    implements Fragment_UserAdminScopes_adminOn {
+  Subscription_watchAllUsers_authUsersData_adminOn({
+    required this.permissionId,
+    this.area,
+    this.service,
+    this.group,
+    this.$__typename = 'AuthUsersAdminOn',
+  });
+
+  factory Subscription_watchAllUsers_authUsersData_adminOn.fromJson(
+    Map<String, dynamic> json,
+  ) {
+    final l$permissionId = json['permissionId'];
+    final l$area = json['area'];
+    final l$service = json['service'];
+    final l$group = json['group'];
+    final l$$__typename = json['__typename'];
+    return Subscription_watchAllUsers_authUsersData_adminOn(
+      permissionId: stringToUuid(l$permissionId),
+      area: l$area == null
+          ? null
+          : Fragment_AreaNoPhoto.fromJson((l$area as Map<String, dynamic>)),
+      service: l$service == null
+          ? null
+          : Fragment_ServiceNoPhoto.fromJson(
+              (l$service as Map<String, dynamic>),
+            ),
+      group: l$group == null
+          ? null
+          : Fragment_GroupNoPhoto.fromJson((l$group as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final UuidValue permissionId;
+
+  final Fragment_AreaNoPhoto? area;
+
+  final Fragment_ServiceNoPhoto? service;
+
+  final Fragment_GroupNoPhoto? group;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$permissionId = permissionId;
+    _resultData['permissionId'] = uuidToString(l$permissionId);
+    final l$area = area;
+    _resultData['area'] = l$area?.toJson();
+    final l$service = service;
+    _resultData['service'] = l$service?.toJson();
+    final l$group = group;
+    _resultData['group'] = l$group?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$permissionId = permissionId;
+    final l$area = area;
+    final l$service = service;
+    final l$group = group;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$permissionId,
+      l$area,
+      l$service,
+      l$group,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Subscription_watchAllUsers_authUsersData_adminOn ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$permissionId = permissionId;
+    final lOther$permissionId = other.permissionId;
+    if (l$permissionId != lOther$permissionId) {
+      return false;
+    }
+    final l$area = area;
+    final lOther$area = other.area;
+    if (l$area != lOther$area) {
+      return false;
+    }
+    final l$service = service;
+    final lOther$service = other.service;
+    if (l$service != lOther$service) {
+      return false;
+    }
+    final l$group = group;
+    final lOther$group = other.group;
+    if (l$group != lOther$group) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Subscription_watchAllUsers_authUsersData_adminOn
+    on Subscription_watchAllUsers_authUsersData_adminOn {
+  CopyWith_Subscription_watchAllUsers_authUsersData_adminOn<
+    Subscription_watchAllUsers_authUsersData_adminOn
+  >
+  get copyWith =>
+      CopyWith_Subscription_watchAllUsers_authUsersData_adminOn(this, (i) => i);
+}
+
+abstract class CopyWith_Subscription_watchAllUsers_authUsersData_adminOn<TRes> {
+  factory CopyWith_Subscription_watchAllUsers_authUsersData_adminOn(
+    Subscription_watchAllUsers_authUsersData_adminOn instance,
+    TRes Function(Subscription_watchAllUsers_authUsersData_adminOn) then,
+  ) = _CopyWithImpl_Subscription_watchAllUsers_authUsersData_adminOn;
+
+  factory CopyWith_Subscription_watchAllUsers_authUsersData_adminOn.stub(
+    TRes res,
+  ) = _CopyWithStubImpl_Subscription_watchAllUsers_authUsersData_adminOn;
+
+  TRes call({
+    UuidValue? permissionId,
+    Fragment_AreaNoPhoto? area,
+    Fragment_ServiceNoPhoto? service,
+    Fragment_GroupNoPhoto? group,
+    String? $__typename,
+  });
+  CopyWith_Fragment_AreaNoPhoto<TRes> get area;
+  CopyWith_Fragment_ServiceNoPhoto<TRes> get service;
+  CopyWith_Fragment_GroupNoPhoto<TRes> get group;
+}
+
+class _CopyWithImpl_Subscription_watchAllUsers_authUsersData_adminOn<TRes>
+    implements CopyWith_Subscription_watchAllUsers_authUsersData_adminOn<TRes> {
+  _CopyWithImpl_Subscription_watchAllUsers_authUsersData_adminOn(
+    this._instance,
+    this._then,
+  );
+
+  final Subscription_watchAllUsers_authUsersData_adminOn _instance;
+
+  final TRes Function(Subscription_watchAllUsers_authUsersData_adminOn) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? permissionId = _undefined,
+    Object? area = _undefined,
+    Object? service = _undefined,
+    Object? group = _undefined,
+    Object? $__typename = _undefined,
+  }) => _then(
+    Subscription_watchAllUsers_authUsersData_adminOn(
+      permissionId: permissionId == _undefined || permissionId == null
+          ? _instance.permissionId
+          : (permissionId as UuidValue),
+      area: area == _undefined
+          ? _instance.area
+          : (area as Fragment_AreaNoPhoto?),
+      service: service == _undefined
+          ? _instance.service
+          : (service as Fragment_ServiceNoPhoto?),
+      group: group == _undefined
+          ? _instance.group
+          : (group as Fragment_GroupNoPhoto?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
+
+  CopyWith_Fragment_AreaNoPhoto<TRes> get area {
+    final local$area = _instance.area;
+    return local$area == null
+        ? CopyWith_Fragment_AreaNoPhoto.stub(_then(_instance))
+        : CopyWith_Fragment_AreaNoPhoto(local$area, (e) => call(area: e));
+  }
+
+  CopyWith_Fragment_ServiceNoPhoto<TRes> get service {
+    final local$service = _instance.service;
+    return local$service == null
+        ? CopyWith_Fragment_ServiceNoPhoto.stub(_then(_instance))
+        : CopyWith_Fragment_ServiceNoPhoto(
+            local$service,
+            (e) => call(service: e),
+          );
+  }
+
+  CopyWith_Fragment_GroupNoPhoto<TRes> get group {
+    final local$group = _instance.group;
+    return local$group == null
+        ? CopyWith_Fragment_GroupNoPhoto.stub(_then(_instance))
+        : CopyWith_Fragment_GroupNoPhoto(local$group, (e) => call(group: e));
+  }
+}
+
+class _CopyWithStubImpl_Subscription_watchAllUsers_authUsersData_adminOn<TRes>
+    implements CopyWith_Subscription_watchAllUsers_authUsersData_adminOn<TRes> {
+  _CopyWithStubImpl_Subscription_watchAllUsers_authUsersData_adminOn(this._res);
+
+  TRes _res;
+
+  call({
+    UuidValue? permissionId,
+    Fragment_AreaNoPhoto? area,
+    Fragment_ServiceNoPhoto? service,
+    Fragment_GroupNoPhoto? group,
+    String? $__typename,
+  }) => _res;
+
+  CopyWith_Fragment_AreaNoPhoto<TRes> get area =>
+      CopyWith_Fragment_AreaNoPhoto.stub(_res);
+
+  CopyWith_Fragment_ServiceNoPhoto<TRes> get service =>
+      CopyWith_Fragment_ServiceNoPhoto.stub(_res);
+
+  CopyWith_Fragment_GroupNoPhoto<TRes> get group =>
+      CopyWith_Fragment_GroupNoPhoto.stub(_res);
+}

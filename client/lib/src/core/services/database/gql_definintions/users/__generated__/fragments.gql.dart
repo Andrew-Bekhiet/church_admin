@@ -4037,6 +4037,502 @@ class _CopyWithStubImpl_Fragment_UserPermissions_permissions<TRes>
   call({String? permission, String? $__typename}) => _res;
 }
 
+class Fragment_UserAdminScopes {
+  Fragment_UserAdminScopes({
+    required this.adminOn,
+    this.$__typename = 'AuthUsersData',
+  });
+
+  factory Fragment_UserAdminScopes.fromJson(Map<String, dynamic> json) {
+    final l$adminOn = json['adminOn'];
+    final l$$__typename = json['__typename'];
+    return Fragment_UserAdminScopes(
+      adminOn: (l$adminOn as List<dynamic>)
+          .map(
+            (e) => Fragment_UserAdminScopes_adminOn.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
+          .toList(),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final List<Fragment_UserAdminScopes_adminOn> adminOn;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$adminOn = adminOn;
+    _resultData['adminOn'] = l$adminOn.map((e) => e.toJson()).toList();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$adminOn = adminOn;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      Object.hashAll(l$adminOn.map((v) => v)),
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Fragment_UserAdminScopes ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$adminOn = adminOn;
+    final lOther$adminOn = other.adminOn;
+    if (l$adminOn.length != lOther$adminOn.length) {
+      return false;
+    }
+    for (int i = 0; i < l$adminOn.length; i++) {
+      final l$adminOn$entry = l$adminOn[i];
+      final lOther$adminOn$entry = lOther$adminOn[i];
+      if (l$adminOn$entry != lOther$adminOn$entry) {
+        return false;
+      }
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Fragment_UserAdminScopes
+    on Fragment_UserAdminScopes {
+  CopyWith_Fragment_UserAdminScopes<Fragment_UserAdminScopes> get copyWith =>
+      CopyWith_Fragment_UserAdminScopes(this, (i) => i);
+}
+
+abstract class CopyWith_Fragment_UserAdminScopes<TRes> {
+  factory CopyWith_Fragment_UserAdminScopes(
+    Fragment_UserAdminScopes instance,
+    TRes Function(Fragment_UserAdminScopes) then,
+  ) = _CopyWithImpl_Fragment_UserAdminScopes;
+
+  factory CopyWith_Fragment_UserAdminScopes.stub(TRes res) =
+      _CopyWithStubImpl_Fragment_UserAdminScopes;
+
+  TRes call({
+    List<Fragment_UserAdminScopes_adminOn>? adminOn,
+    String? $__typename,
+  });
+  TRes adminOn(
+    Iterable<Fragment_UserAdminScopes_adminOn> Function(
+      Iterable<
+        CopyWith_Fragment_UserAdminScopes_adminOn<
+          Fragment_UserAdminScopes_adminOn
+        >
+      >,
+    )
+    _fn,
+  );
+}
+
+class _CopyWithImpl_Fragment_UserAdminScopes<TRes>
+    implements CopyWith_Fragment_UserAdminScopes<TRes> {
+  _CopyWithImpl_Fragment_UserAdminScopes(this._instance, this._then);
+
+  final Fragment_UserAdminScopes _instance;
+
+  final TRes Function(Fragment_UserAdminScopes) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? adminOn = _undefined, Object? $__typename = _undefined}) =>
+      _then(
+        Fragment_UserAdminScopes(
+          adminOn: adminOn == _undefined || adminOn == null
+              ? _instance.adminOn
+              : (adminOn as List<Fragment_UserAdminScopes_adminOn>),
+          $__typename: $__typename == _undefined || $__typename == null
+              ? _instance.$__typename
+              : ($__typename as String),
+        ),
+      );
+
+  TRes adminOn(
+    Iterable<Fragment_UserAdminScopes_adminOn> Function(
+      Iterable<
+        CopyWith_Fragment_UserAdminScopes_adminOn<
+          Fragment_UserAdminScopes_adminOn
+        >
+      >,
+    )
+    _fn,
+  ) => call(
+    adminOn: _fn(
+      _instance.adminOn.map(
+        (e) => CopyWith_Fragment_UserAdminScopes_adminOn(e, (i) => i),
+      ),
+    ).toList(),
+  );
+}
+
+class _CopyWithStubImpl_Fragment_UserAdminScopes<TRes>
+    implements CopyWith_Fragment_UserAdminScopes<TRes> {
+  _CopyWithStubImpl_Fragment_UserAdminScopes(this._res);
+
+  TRes _res;
+
+  call({
+    List<Fragment_UserAdminScopes_adminOn>? adminOn,
+    String? $__typename,
+  }) => _res;
+
+  adminOn(_fn) => _res;
+}
+
+const fragmentDefinitionUserAdminScopes = FragmentDefinitionNode(
+  name: NameNode(value: 'UserAdminScopes'),
+  typeCondition: TypeConditionNode(
+    on: NamedTypeNode(name: NameNode(value: 'AuthUsersData'), isNonNull: false),
+  ),
+  directives: [],
+  selectionSet: SelectionSetNode(
+    selections: [
+      FieldNode(
+        name: NameNode(value: 'adminOn'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: SelectionSetNode(
+          selections: [
+            FieldNode(
+              name: NameNode(value: 'permissionId'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+            FieldNode(
+              name: NameNode(value: 'area'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: SelectionSetNode(
+                selections: [
+                  FragmentSpreadNode(
+                    name: NameNode(value: 'AreaNoPhoto'),
+                    directives: [],
+                  ),
+                  FieldNode(
+                    name: NameNode(value: '__typename'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                ],
+              ),
+            ),
+            FieldNode(
+              name: NameNode(value: 'service'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: SelectionSetNode(
+                selections: [
+                  FragmentSpreadNode(
+                    name: NameNode(value: 'ServiceNoPhoto'),
+                    directives: [],
+                  ),
+                  FieldNode(
+                    name: NameNode(value: '__typename'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                ],
+              ),
+            ),
+            FieldNode(
+              name: NameNode(value: 'group'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: SelectionSetNode(
+                selections: [
+                  FragmentSpreadNode(
+                    name: NameNode(value: 'GroupNoPhoto'),
+                    directives: [],
+                  ),
+                  FieldNode(
+                    name: NameNode(value: '__typename'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                ],
+              ),
+            ),
+            FieldNode(
+              name: NameNode(value: '__typename'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: null,
+            ),
+          ],
+        ),
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ],
+  ),
+);
+const documentNodeFragmentUserAdminScopes = DocumentNode(
+  definitions: [
+    fragmentDefinitionUserAdminScopes,
+    fragmentDefinitionAreaNoPhoto,
+    fragmentDefinitionServiceNoPhoto,
+    fragmentDefinitionGroupNoPhoto,
+  ],
+);
+
+class Fragment_UserAdminScopes_adminOn {
+  Fragment_UserAdminScopes_adminOn({
+    required this.permissionId,
+    this.area,
+    this.service,
+    this.group,
+    this.$__typename = 'AuthUsersAdminOn',
+  });
+
+  factory Fragment_UserAdminScopes_adminOn.fromJson(Map<String, dynamic> json) {
+    final l$permissionId = json['permissionId'];
+    final l$area = json['area'];
+    final l$service = json['service'];
+    final l$group = json['group'];
+    final l$$__typename = json['__typename'];
+    return Fragment_UserAdminScopes_adminOn(
+      permissionId: stringToUuid(l$permissionId),
+      area: l$area == null
+          ? null
+          : Fragment_AreaNoPhoto.fromJson((l$area as Map<String, dynamic>)),
+      service: l$service == null
+          ? null
+          : Fragment_ServiceNoPhoto.fromJson(
+              (l$service as Map<String, dynamic>),
+            ),
+      group: l$group == null
+          ? null
+          : Fragment_GroupNoPhoto.fromJson((l$group as Map<String, dynamic>)),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final UuidValue permissionId;
+
+  final Fragment_AreaNoPhoto? area;
+
+  final Fragment_ServiceNoPhoto? service;
+
+  final Fragment_GroupNoPhoto? group;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$permissionId = permissionId;
+    _resultData['permissionId'] = uuidToString(l$permissionId);
+    final l$area = area;
+    _resultData['area'] = l$area?.toJson();
+    final l$service = service;
+    _resultData['service'] = l$service?.toJson();
+    final l$group = group;
+    _resultData['group'] = l$group?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$permissionId = permissionId;
+    final l$area = area;
+    final l$service = service;
+    final l$group = group;
+    final l$$__typename = $__typename;
+    return Object.hashAll([
+      l$permissionId,
+      l$area,
+      l$service,
+      l$group,
+      l$$__typename,
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Fragment_UserAdminScopes_adminOn ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$permissionId = permissionId;
+    final lOther$permissionId = other.permissionId;
+    if (l$permissionId != lOther$permissionId) {
+      return false;
+    }
+    final l$area = area;
+    final lOther$area = other.area;
+    if (l$area != lOther$area) {
+      return false;
+    }
+    final l$service = service;
+    final lOther$service = other.service;
+    if (l$service != lOther$service) {
+      return false;
+    }
+    final l$group = group;
+    final lOther$group = other.group;
+    if (l$group != lOther$group) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Fragment_UserAdminScopes_adminOn
+    on Fragment_UserAdminScopes_adminOn {
+  CopyWith_Fragment_UserAdminScopes_adminOn<Fragment_UserAdminScopes_adminOn>
+  get copyWith => CopyWith_Fragment_UserAdminScopes_adminOn(this, (i) => i);
+}
+
+abstract class CopyWith_Fragment_UserAdminScopes_adminOn<TRes> {
+  factory CopyWith_Fragment_UserAdminScopes_adminOn(
+    Fragment_UserAdminScopes_adminOn instance,
+    TRes Function(Fragment_UserAdminScopes_adminOn) then,
+  ) = _CopyWithImpl_Fragment_UserAdminScopes_adminOn;
+
+  factory CopyWith_Fragment_UserAdminScopes_adminOn.stub(TRes res) =
+      _CopyWithStubImpl_Fragment_UserAdminScopes_adminOn;
+
+  TRes call({
+    UuidValue? permissionId,
+    Fragment_AreaNoPhoto? area,
+    Fragment_ServiceNoPhoto? service,
+    Fragment_GroupNoPhoto? group,
+    String? $__typename,
+  });
+  CopyWith_Fragment_AreaNoPhoto<TRes> get area;
+  CopyWith_Fragment_ServiceNoPhoto<TRes> get service;
+  CopyWith_Fragment_GroupNoPhoto<TRes> get group;
+}
+
+class _CopyWithImpl_Fragment_UserAdminScopes_adminOn<TRes>
+    implements CopyWith_Fragment_UserAdminScopes_adminOn<TRes> {
+  _CopyWithImpl_Fragment_UserAdminScopes_adminOn(this._instance, this._then);
+
+  final Fragment_UserAdminScopes_adminOn _instance;
+
+  final TRes Function(Fragment_UserAdminScopes_adminOn) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? permissionId = _undefined,
+    Object? area = _undefined,
+    Object? service = _undefined,
+    Object? group = _undefined,
+    Object? $__typename = _undefined,
+  }) => _then(
+    Fragment_UserAdminScopes_adminOn(
+      permissionId: permissionId == _undefined || permissionId == null
+          ? _instance.permissionId
+          : (permissionId as UuidValue),
+      area: area == _undefined
+          ? _instance.area
+          : (area as Fragment_AreaNoPhoto?),
+      service: service == _undefined
+          ? _instance.service
+          : (service as Fragment_ServiceNoPhoto?),
+      group: group == _undefined
+          ? _instance.group
+          : (group as Fragment_GroupNoPhoto?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
+
+  CopyWith_Fragment_AreaNoPhoto<TRes> get area {
+    final local$area = _instance.area;
+    return local$area == null
+        ? CopyWith_Fragment_AreaNoPhoto.stub(_then(_instance))
+        : CopyWith_Fragment_AreaNoPhoto(local$area, (e) => call(area: e));
+  }
+
+  CopyWith_Fragment_ServiceNoPhoto<TRes> get service {
+    final local$service = _instance.service;
+    return local$service == null
+        ? CopyWith_Fragment_ServiceNoPhoto.stub(_then(_instance))
+        : CopyWith_Fragment_ServiceNoPhoto(
+            local$service,
+            (e) => call(service: e),
+          );
+  }
+
+  CopyWith_Fragment_GroupNoPhoto<TRes> get group {
+    final local$group = _instance.group;
+    return local$group == null
+        ? CopyWith_Fragment_GroupNoPhoto.stub(_then(_instance))
+        : CopyWith_Fragment_GroupNoPhoto(local$group, (e) => call(group: e));
+  }
+}
+
+class _CopyWithStubImpl_Fragment_UserAdminScopes_adminOn<TRes>
+    implements CopyWith_Fragment_UserAdminScopes_adminOn<TRes> {
+  _CopyWithStubImpl_Fragment_UserAdminScopes_adminOn(this._res);
+
+  TRes _res;
+
+  call({
+    UuidValue? permissionId,
+    Fragment_AreaNoPhoto? area,
+    Fragment_ServiceNoPhoto? service,
+    Fragment_GroupNoPhoto? group,
+    String? $__typename,
+  }) => _res;
+
+  CopyWith_Fragment_AreaNoPhoto<TRes> get area =>
+      CopyWith_Fragment_AreaNoPhoto.stub(_res);
+
+  CopyWith_Fragment_ServiceNoPhoto<TRes> get service =>
+      CopyWith_Fragment_ServiceNoPhoto.stub(_res);
+
+  CopyWith_Fragment_GroupNoPhoto<TRes> get group =>
+      CopyWith_Fragment_GroupNoPhoto.stub(_res);
+}
+
 class Fragment_UserAdminOn {
   Fragment_UserAdminOn({
     required this.adminOn,
