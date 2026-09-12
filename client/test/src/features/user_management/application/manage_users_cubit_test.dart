@@ -164,5 +164,50 @@ void main() {
       wait: Duration.zero,
       verify: (cubit) => expect(cubit.state.view, ManageUsersView.flat),
     );
+
+    blocTest<ManageUsersCubit, ManageUsersState>(
+      'loading more in the flat view appends the next page of users',
+      setUp: () => stubUsers([
+        user('مينا'),
+        user('مريم'),
+        user('يوسف'),
+        user('بيتر'),
+        user('ماري'),
+      ]),
+      build: () => ManageUsersCubit(usersDao: dao),
+      act: (cubit) async {
+        cubit.showFlat();
+        await Future<void>.delayed(Duration.zero);
+        await cubit.loadMore();
+      },
+      wait: Duration.zero,
+      verify: (cubit) {
+        expect(cubit.state.users.map((u) => u.name), [
+          'بيتر',
+          'ماري',
+          'مريم',
+          'مينا',
+        ]);
+        expect(cubit.state.hasMore, isTrue);
+      },
+    );
+
+    blocTest<ManageUsersCubit, ManageUsersState>(
+      'switching back to the grouped view completes the groups',
+      setUp: () => stubUsers([
+        user('مينا', adminOn: [service]),
+        user('مريم', adminOn: [service]),
+        user('يوسف', adminOn: [service]),
+      ]),
+      build: () => ManageUsersCubit(usersDao: dao),
+      act: (cubit) async {
+        cubit.showFlat();
+        await Future<void>.delayed(Duration.zero);
+        cubit.showGrouped();
+      },
+      wait: Duration.zero,
+      verify: (cubit) =>
+          expect(groupsOf(cubit.state), ['خدمة ابتدائي: مريم, مينا, يوسف']),
+    );
   });
 }

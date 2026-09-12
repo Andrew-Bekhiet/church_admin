@@ -33,28 +33,30 @@ class ManageUsersCubit extends Cubit<ManageUsersState> {
     emit(state.copyWith(searchQuery: query, isLoading: true));
   }
 
-  void showGrouped() =>
-      emit(state.copyWith(preferredView: ManageUsersView.grouped));
+  void showGrouped() {
+    emit(state.copyWith(preferredView: ManageUsersView.grouped));
+    _maybeDrainRemainingPages();
+  }
 
   void showFlat() => emit(state.copyWith(preferredView: ManageUsersView.flat));
 
   Future<void> loadMore() async {
     if (!_users.hasMore || _users.isLoading) return;
 
+    emit(state.copyWith(isLoading: true));
     await _users.listenToNextPage();
   }
 
   void _onUsersPageArrived(List<User> users) {
+    emit(state.copyWith(users: users, hasMore: _users.hasMore));
+    _maybeDrainRemainingPages();
+  }
+
+  void _maybeDrainRemainingPages() {
     final groupedViewStillIncomplete =
         state.view == ManageUsersView.grouped && _users.hasMore;
 
-    emit(
-      state.copyWith(
-        users: users,
-        isLoading: groupedViewStillIncomplete,
-        hasMore: _users.hasMore,
-      ),
-    );
+    emit(state.copyWith(isLoading: groupedViewStillIncomplete));
 
     if (groupedViewStillIncomplete) unawaited(loadMore());
   }
