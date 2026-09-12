@@ -25,17 +25,7 @@ class UsersDAO extends DAOBase<User> with StreamableDAO<User> {
 
     return db.varsTransformer.transformrequestForPagination(
       request,
-      overrideOrderBy: [
-        ...?orderBy,
-        OrderBy(
-          field: UserFields().permissionsAggregate.redirectTo(
-            AggregateDataFields().count,
-          ),
-          value: OrderByValue.desc,
-        ),
-        OrderBy(field: UserFields().name),
-        OrderBy(field: UserFields().email),
-      ],
+      overrideOrderBy: [...?orderBy, OrderBy(field: UserFields().name)],
     );
   }
 
