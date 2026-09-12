@@ -75,13 +75,13 @@ class ChurchAdminCsvExporter {
     String filename,
     Iterable<T> serializables,
   ) async {
+    final file = _getExportFile(filename);
+
     if (serializables.isEmpty) {
       return;
     }
 
     final firstSerializable = serializables.first;
-
-    final file = _getExportFile(filename);
     final writer = CsvWriter.withHeaders(
       file.openWrite(),
       firstSerializable.toJson().keys,

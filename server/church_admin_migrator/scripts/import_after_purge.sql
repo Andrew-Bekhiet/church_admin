@@ -499,6 +499,19 @@ INSERT INTO auth.users_data (uid, email, name, photo_updated_at, auth_id) SELECT
     photo_updated_at,
     auth_id
 FROM _s ON CONFLICT DO NOTHING;
+-- FK triggers are off under replica role, so a uid skipped here would leave
+-- orphaned permission rows and persons behind. Fail instead.
+DO $$
+DECLARE
+    skipped integer;
+BEGIN
+    SELECT count(*) INTO skipped
+    FROM _s s
+    WHERE NOT EXISTS (SELECT 1 FROM auth.users_data u WHERE u.uid = s.uid);
+    IF skipped > 0 THEN
+        RAISE EXCEPTION '% migrated user(s) collided with existing users_data rows (email or name) and were not inserted', skipped;
+    END IF;
+END $$;
 DROP TABLE _s;
 
 CREATE TEMP TABLE _s AS SELECT
