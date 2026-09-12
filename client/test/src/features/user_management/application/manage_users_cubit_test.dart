@@ -121,5 +121,48 @@ void main() {
         ]);
       },
     );
+
+    blocTest<ManageUsersCubit, ManageUsersState>(
+      'searching a name switches to a flat list of the matching users only',
+      setUp: () => stubUsers([
+        user('مينا', adminOn: [service]),
+        user('مريم', adminOn: [service]),
+        user('مارك'),
+      ]),
+      build: () => ManageUsersCubit(usersDao: dao),
+      act: (cubit) => cubit.search('مار'),
+      wait: Duration.zero,
+      verify: (cubit) {
+        expect(cubit.state.view, ManageUsersView.flat);
+        expect(cubit.state.users.map((u) => u.name), ['مارك']);
+      },
+    );
+
+    blocTest<ManageUsersCubit, ManageUsersState>(
+      'clearing the search returns to the grouped view it started from',
+      setUp: () => stubUsers([
+        user('مينا', adminOn: [service]),
+      ]),
+      build: () => ManageUsersCubit(usersDao: dao),
+      act: (cubit) => cubit
+        ..search('مي')
+        ..search(''),
+      wait: Duration.zero,
+      verify: (cubit) => expect(cubit.state.view, ManageUsersView.grouped),
+    );
+
+    blocTest<ManageUsersCubit, ManageUsersState>(
+      'clearing the search stays flat when the user had chosen the flat view',
+      setUp: () => stubUsers([
+        user('مينا', adminOn: [service]),
+      ]),
+      build: () => ManageUsersCubit(usersDao: dao),
+      act: (cubit) => cubit
+        ..showFlat()
+        ..search('مي')
+        ..search(''),
+      wait: Duration.zero,
+      verify: (cubit) => expect(cubit.state.view, ManageUsersView.flat),
+    );
   });
 }

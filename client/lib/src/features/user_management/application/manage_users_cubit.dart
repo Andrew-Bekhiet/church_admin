@@ -28,6 +28,16 @@ class ManageUsersCubit extends Cubit<ManageUsersState> {
     );
   }
 
+  void search(String query) {
+    _search.add(query);
+    emit(state.copyWith(searchQuery: query, isLoading: true));
+  }
+
+  void showGrouped() =>
+      emit(state.copyWith(preferredView: ManageUsersView.grouped));
+
+  void showFlat() => emit(state.copyWith(preferredView: ManageUsersView.flat));
+
   Future<void> loadMore() async {
     if (!_users.hasMore || _users.isLoading) return;
 
