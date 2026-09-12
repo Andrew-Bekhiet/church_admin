@@ -4,7 +4,7 @@ import 'package:args/args.dart';
 import 'package:church_admin_migrator/church_admin_migrator.dart'
     as church_admin_migrator;
 import 'package:church_admin_migrator/church_admin_storage_migrator.dart';
-import 'package:dart_firebase_admin/dart_firebase_admin.dart';
+import 'package:firebase_admin_sdk/firebase_admin_sdk.dart';
 import 'package:logger/logger.dart';
 
 final logger = Logger();
@@ -40,6 +40,12 @@ Future<void> main(List<String> arguments) async {
       defaultsTo: false,
       help:
           'Migrate storage (photos) from ChurchData and MeetingHelper to ChurchAdmin.',
+    )
+    ..addFlag(
+      'migrate-auth-users',
+      defaultsTo: true,
+      help:
+          'Migrate auth users and map permissions from ChurchData and MeetingHelper to ChurchAdmin.',
     );
 
   final argResults = parser.parse(arguments);
@@ -50,14 +56,20 @@ Future<void> main(List<String> arguments) async {
   )!;
   final churchAdminCredentials = argResults.option('church-admin-credentials');
 
-  final churchDataApp = FirebaseAdminApp.initializeApp(
-    'churchdata-cf3db',
-    Credential.fromServiceAccount(File(churchDataCredentials)),
+  final churchDataApp = FirebaseApp.initializeApp(
+    options: AppOptions(
+      credential: Credential.fromServiceAccount(File(churchDataCredentials)),
+      projectId: 'churchdata-cf3db',
+    ),
+    name: 'churchdata',
   );
 
-  final meetingHelperApp = FirebaseAdminApp.initializeApp(
-    'meetinghelper-2a869',
-    Credential.fromServiceAccount(File(meetingHelperCredentials)),
+  final meetingHelperApp = FirebaseApp.initializeApp(
+    options: AppOptions(
+      credential: Credential.fromServiceAccount(File(meetingHelperCredentials)),
+      projectId: 'meetinghelper-2a869',
+    ),
+    name: 'meetinghelper',
   );
 
   logger.i('Starting migration at ${DateTime.now()}', time: DateTime.now());
@@ -66,6 +78,7 @@ Future<void> main(List<String> arguments) async {
     await church_admin_migrator.migrate(
       churchDataApp: churchDataApp,
       meetingHelperApp: meetingHelperApp,
+      migrateAuthUsers: argResults.flag('migrate-auth-users'),
     );
   }
 

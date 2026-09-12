@@ -4,7 +4,7 @@ import 'package:church_admin/church_admin.dart';
 import 'package:church_admin_migrator/models/church_data/models/person_types_additional_data.dart';
 import 'package:church_admin_migrator/models/church_data/models/super_classes.dart';
 import 'package:church_admin_migrator/models/id_reference.dart';
-import 'package:dart_firebase_admin/firestore.dart';
+import 'package:google_cloud_firestore/google_cloud_firestore.dart';
 
 abstract class MiniModel extends DataObject {
   final String collectionName;

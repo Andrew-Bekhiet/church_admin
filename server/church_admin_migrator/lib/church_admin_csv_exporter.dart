@@ -53,6 +53,7 @@ class ChurchAdminCsvExporter {
     await _exportPersons();
     await _exportStores();
     await _exportStreets();
+    await _exportUsers();
 
     await _exportVisitHistory();
     await _exportCallHistory();
@@ -66,19 +67,21 @@ class ChurchAdminCsvExporter {
     await _exportPersonsIdsMapping();
     await _exportServicesIdsMapping();
     await _exportClassesIdsMapping();
+
+    await _exportUsersIdsMapping();
   }
 
   Future<void> _exportSerializables<T extends ToJson>(
     String filename,
     Iterable<T> serializables,
   ) async {
+    final file = _getExportFile(filename);
+
     if (serializables.isEmpty) {
       return;
     }
 
     final firstSerializable = serializables.first;
-
-    final file = _getExportFile(filename);
     final writer = CsvWriter.withHeaders(
       file.openWrite(),
       firstSerializable.toJson().keys,
@@ -397,6 +400,7 @@ class ChurchAdminCsvExporter {
           person.id,
           (p) => {
             'id': _uuidFromFirestoreId(p.id),
+            'uid': _uuidFromFirestoreId(p.uid),
             'national_id': p.nationalId,
             'name': p.name,
             'main_phone': p.mainPhone,
@@ -660,6 +664,81 @@ class ChurchAdminCsvExporter {
 
   Future<void> _exportAreasIdsMapping() async {
     await _exportIdMappings('areas_ids_mapping', churchAdminContext.areas);
+  }
+
+  Future<void> _exportUsers() async {
+    await _exportSerializables(
+      'users_data',
+      churchAdminContext.users.values.map(
+        (user) => _ToJsonAdapter(
+          user,
+          user.id,
+          (u) => {
+            'id': _uuidFromFirestoreId(u.id),
+            'email': u.email,
+            'name': u.name,
+            'photo_updated_at': u.photoUpdatedAt?.toIso8601String(),
+            'auth_id': null,
+          },
+        ),
+      ),
+    );
+    await _exportSerializables(
+      'users_admin_on',
+      churchAdminContext.users.values.expand(
+        (user) => (user.adminOn ?? [])
+            .map(
+              (scope) => _ToJsonAdapter(
+                scope,
+                scope.permissionId,
+                (s) => {
+                  'uid': _uuidFromFirestoreId(user.id),
+                  'permission_id': _uuidFromFirestoreId(s.permissionId),
+                  'admin_on_service': _uuidFromFirestoreId(s.service?.id),
+                  'service_gender': s.serviceGender,
+                  'service_study_year': s.serviceStudyYearData?.order,
+                  'service_allow_edit': s.serviceAllowEdit,
+                  'service_admin_on_users': s.serviceAdminOnUsers,
+                  'admin_on_area': _uuidFromFirestoreId(s.area?.id),
+                  'area_allow_edit': s.areaAllowEdit,
+                  'area_admin_on_users': s.areaAdminOnUsers,
+                  'service_write_related_families':
+                      s.serviceWriteRelatedFamilies ?? false,
+                  'group_write_related_families':
+                      s.groupWriteRelatedFamilies ?? false,
+                  'area_allow_export': s.areaAllowExport,
+                  'service_allow_export': s.serviceAllowExport,
+                  'service_allow_record_attendance':
+                      s.serviceAllowRecordAttendance,
+                  'service_allow_record_servants_attendance':
+                      s.serviceAllowRecordServantsAttendance,
+                },
+              ),
+            )
+            .toList(),
+      ),
+    );
+    await _exportSerializables(
+      'users_permissions',
+      churchAdminContext.users.values.expand(
+        (user) => user.permissions
+            .map(
+              (p) => _ToJsonAdapter(
+                (uid: user.id, permission: p.name),
+                user.id + p.name,
+                (r) => {
+                  'uid': _uuidFromFirestoreId(r.uid),
+                  'permission': r.permission,
+                },
+              ),
+            )
+            .toList(),
+      ),
+    );
+  }
+
+  Future<void> _exportUsersIdsMapping() async {
+    await _exportIdMappings('users_ids_mapping', churchAdminContext.users);
   }
 }
 

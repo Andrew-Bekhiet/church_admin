@@ -5,6 +5,8 @@ import 'package:church_admin/church_admin.dart';
 import 'package:church_admin_migrator/church_admin_csv_exporter.dart';
 import 'package:church_admin_migrator/migrations/create_new_services.dart';
 import 'package:church_admin_migrator/migrations/create_new_study_years.dart';
+import 'package:church_admin_migrator/migrations/migrate_auth_users.dart';
+import 'package:church_admin_migrator/migrations/migration_log.dart';
 import 'package:church_admin_migrator/models/church_admin_context.dart';
 import 'package:church_admin_migrator/models/church_data/models/mini_models.dart'
     as churchdata;
@@ -20,28 +22,23 @@ import 'package:church_admin_migrator/ui/person_merge_dialog.dart';
 import 'package:church_admin_migrator/utils/fuzzy_match.dart';
 import 'package:church_admin_migrator/utils/normalize_string.dart';
 import 'package:collection/collection.dart';
-import 'package:dart_firebase_admin/dart_firebase_admin.dart';
-import 'package:dart_firebase_admin/firestore.dart' show Timestamp;
+import 'package:firebase_admin_sdk/firebase_admin_sdk.dart';
 import 'package:flutter/material.dart';
-import 'package:logger/logger.dart';
+import 'package:google_cloud_firestore/google_cloud_firestore.dart'
+    show Timestamp;
 
-final logger = Logger(
-  printer: PrettyPrinter(
-    methodCount: 0,
-    noBoxingByDefault: true,
-    dateTimeFormat: DateTimeFormat.dateAndTime,
-  ),
-);
+final logger = MigrationLog.logger;
 final bool isDryRun = bool.fromEnvironment('dryRun', defaultValue: false);
 
 /// When true the migration runs without prompting for merge/family decisions,
 /// applying the automatic defaults instead. Kept as a single switch so the
 /// interactive UI can be re-enabled in one place.
-const bool isSilentMigration = true;
+const bool isSilentMigration = MigrationLog.isSilentMigration;
 
 Future<void> migrate({
-  required FirebaseAdminApp churchDataApp,
-  required FirebaseAdminApp meetingHelperApp,
+  required FirebaseApp churchDataApp,
+  required FirebaseApp meetingHelperApp,
+  required bool migrateAuthUsers,
 }) async {
   String? currentStep;
   int? lastStepElapsedMs;
@@ -52,6 +49,7 @@ Future<void> migrate({
   await _migrateWithTiming(
     churchDataApp: churchDataApp,
     meetingHelperApp: meetingHelperApp,
+    migrateAuthUsers: migrateAuthUsers,
     beforeStepStart: (stepName) {
       if (currentStep != null && lastStepElapsedMs != null) {
         logger.i(
@@ -70,8 +68,9 @@ Future<void> migrate({
 }
 
 Future<void> _migrateWithTiming({
-  required FirebaseAdminApp churchDataApp,
-  required FirebaseAdminApp meetingHelperApp,
+  required FirebaseApp churchDataApp,
+  required FirebaseApp meetingHelperApp,
+  required bool migrateAuthUsers,
   required void Function(String stepName) beforeStepStart,
 }) async {
   final churchAdminContext = ChurchAdminContext();
@@ -132,13 +131,22 @@ Future<void> _migrateWithTiming({
   _migrateChurchDataPersons(churchDataContext, churchAdminContext);
 
   beforeStepStart('Migrating Meeting Helper Persons');
-  _migrateMeetingHelperPersons(meetingHelperContext, churchAdminContext);
+  await _migrateMeetingHelperPersons(meetingHelperContext, churchAdminContext);
 
   beforeStepStart('Migrating Persons States from persons');
   _migratePersonsStates(churchAdminContext);
 
   beforeStepStart('Migrating Persons Types from persons');
   _migratePersonsTypes(churchAdminContext);
+
+  if (migrateAuthUsers) {
+    beforeStepStart('Migrating Auth Users');
+    await _migrateAuthUsers(
+      churchDataContext: churchDataContext,
+      meetingHelperContext: meetingHelperContext,
+      churchAdminContext: churchAdminContext,
+    );
+  }
 
   beforeStepStart('Exporting to CSV');
   await _exportToCsv(churchAdminContext);
@@ -438,10 +446,7 @@ Future<void> _migrateMeetingHelperPersons(
       martialStatus: MartialStatus.single,
       studyYear: churchAdminContext
           .studyYears[meetingHelperContext.studyYears[person.studyYear]?.grade],
-      services: legacyAndClassParentServices(
-        churchAdminContext,
-        person,
-      ),
+      services: legacyAndClassParentServices(churchAdminContext, person),
       workStatus: WorkStatus.student,
       father: churchAdminContext.fathers[person.cFather],
       // shammas_level_id must be null when is_shammas is false to satisfy the
@@ -1357,6 +1362,24 @@ void _recordVisitHistory(
       isFatherVisit: true,
     ));
   }
+}
+
+Future<void> _migrateAuthUsers({
+  required ChurchDataContext churchDataContext,
+  required ChurchAdminContext churchAdminContext,
+  required MeetingHelperContext meetingHelperContext,
+}) async {
+  MigrateAuthUsers.merge(
+    churchDataUsers: churchDataContext.users.values,
+    churchDataAreaAllowedUsers: churchDataContext.areas.entries.map(
+      (entry) => (ref: entry.key, allowedUsers: entry.value.allowedUsers),
+    ),
+    meetingHelperUsers: meetingHelperContext.users.values,
+    meetingHelperClassAllowedUsers: meetingHelperContext.classes.entries.map(
+      (entry) => (ref: entry.key, allowedUsers: entry.value.allowedUsers),
+    ),
+    churchAdminContext: churchAdminContext,
+  );
 }
 
 Future<T> showUIForResult<T>(
