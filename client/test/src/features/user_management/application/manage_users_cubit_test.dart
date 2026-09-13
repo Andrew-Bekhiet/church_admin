@@ -8,6 +8,12 @@ import 'package:mocktail/mocktail.dart';
 
 class _MockUsersDAO extends Mock implements UsersDAO {}
 
+class _MockUsersDAOProxy<T extends ViewableWithID> extends Mock
+    implements StreamableDAOProxy<T> {}
+
+class MockStreamAllConfig<T extends ViewableWithID> extends Mock
+    implements StreamAllConfig<T> {}
+
 void main() {
   group('ManageUsersCubit', () {
     const pageSize = 2;
@@ -40,10 +46,15 @@ void main() {
     late _MockUsersDAO dao;
 
     void stubUsers(List<User> users, {int pageSize = pageSize}) {
+      final proxyDao = _MockUsersDAOProxy<User>();
+      when(() => dao.streamingProxy).thenReturn(proxyDao);
+      when(() => dao.baseStreamAllConfig).thenReturn(MockStreamAllConfig());
       when(
-        () => dao.streamAll(
+        () => proxyDao.streamAll(
+          streamAllConfig: any(named: 'streamAllConfig'),
           searchQuery: any(named: 'searchQuery'),
           where: any(named: 'where'),
+          overrideTotalLimit: any(named: 'overrideTotalLimit'),
         ),
       ).thenAnswer((invocation) {
         final searchQuery =
@@ -79,6 +90,7 @@ void main() {
       });
     }
 
+    setUpAll(() => registerFallbackValue(MockStreamAllConfig<User>()));
     setUp(() {
       dao = _MockUsersDAO();
     });
