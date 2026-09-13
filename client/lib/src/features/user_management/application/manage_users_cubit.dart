@@ -5,12 +5,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:rxdart/rxdart.dart';
 
 class ManageUsersCubit extends Cubit<ManageUsersState> {
+  static const int _pageSize = 1000;
+
   final BehaviorSubject<String?> _search = BehaviorSubject.seeded(null);
   late final PaginatableStreamBase<User> _users;
   late final StreamSubscription<List<User>> _usersSubscription;
 
   ManageUsersCubit({UsersDAO? usersDao}) : super(const ManageUsersState()) {
-    _users = (usersDao ?? DatabaseService.I.users).streamAll(
+    final dao = usersDao ?? DatabaseService.I.users;
+
+    _users = dao.streamingProxy.streamAll(
+      streamAllConfig: dao.baseStreamAllConfig,
       searchQuery: _search.stream,
       where: Stream.value([
         Filter(
@@ -19,10 +24,11 @@ class ManageUsersCubit extends Cubit<ManageUsersState> {
           true,
         ),
       ]),
+      overrideTotalLimit: _pageSize,
     );
 
     _usersSubscription = _users.listen(
-      _onUsersPageArrived,
+      _loadNextPage,
       onError: (Object error) =>
           emit(state.copyWith(isLoading: false, error: error)),
     );
@@ -38,7 +44,7 @@ class ManageUsersCubit extends Cubit<ManageUsersState> {
 
   void showFlat() => emit(state.copyWith(preferredView: ManageUsersView.flat));
 
-  void _onUsersPageArrived(List<User> users) {
+  void _loadNextPage(List<User> users) {
     emit(state.copyWith(users: users, isLoading: _users.hasMore));
 
     if (_users.hasMore) unawaited(_users.listenToNextPage());
