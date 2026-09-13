@@ -41,29 +41,25 @@ class AddressPreview extends StatelessWidget {
                 children: [
                   Icon(
                     Symbols.home_pin,
-                    size: 16,
                     color: colors.onSurfaceVariant,
                   ),
                   Text(
                     'معاينة العنوان',
-                    style: textTheme.labelSmall?.copyWith(
+                    style: textTheme.labelMedium?.copyWith(
                       color: colors.onSurfaceVariant,
                     ),
                   ),
                 ],
               ),
-              AnimatedSwitcher(
-                duration: const Duration(milliseconds: 150),
-                child: Text(
-                  hasText ? composedText : 'اكتب العنوان لتظهر المعاينة هنا',
-                  key: ValueKey(composedText),
-                  style: hasText
-                      ? textTheme.bodyLarge
-                      : textTheme.bodyMedium?.copyWith(
-                          color: colors.onSurfaceVariant,
-                          fontStyle: FontStyle.italic,
-                        ),
-                ),
+              Text(
+                hasText ? composedText : 'اكتب العنوان لتظهر المعاينة هنا',
+                key: ValueKey(composedText),
+                style: hasText
+                    ? textTheme.bodyLarge
+                    : textTheme.bodyMedium?.copyWith(
+                        color: colors.onSurfaceVariant,
+                        fontStyle: FontStyle.italic,
+                      ),
               ),
             ],
           ),
