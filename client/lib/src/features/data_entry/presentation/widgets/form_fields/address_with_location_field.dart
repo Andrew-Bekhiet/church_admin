@@ -103,9 +103,15 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
               false,
             ),
           ),
-          ValueListenableBuilder(
-            valueListenable: _previewedAddress,
-            builder: (context, address, _) => AddressPreview(address: address),
+          Padding(
+            padding: const EdgeInsets.only(top: 8),
+            child: ValueListenableBuilder(
+              valueListenable: _previewedAddress,
+              builder: (context, address, _) => Text(
+                address.toString(),
+                style: TextTheme.of(context).bodyMedium,
+              ),
+            ),
           ),
         ],
       ),
@@ -121,7 +127,7 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
   Future<void> _handleLocationTap(FormFieldState<Point?> state) async {
     final newLocation = await widget.onEditLocation(context);
 
-    if (newLocation == null || !mounted) return;
+    if (newLocation == null) return;
 
     final newAddress = _address.copyWith(geolocation: newLocation);
     state.didChange(newLocation);
@@ -136,8 +142,6 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
     final addressWithParsedObjects = await _parseAddressParentObjects(
       addressFromLocation,
     );
-
-    if (!mounted) return;
 
     setState(
       () =>

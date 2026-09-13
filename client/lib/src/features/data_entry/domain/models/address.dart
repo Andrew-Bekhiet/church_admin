@@ -10,23 +10,9 @@ part 'address.g.dart';
 @JsonSerializable()
 @Queryable(
   classLabel: 'العنوان',
-  ignoreFields: ['id', 'countryIsoCode', 'textComposedFromParts'],
+  ignoreFields: ['id', 'countryIsoCode'],
 )
 class Address with _$Address {
-  static String? _streetNameWithoutPrefix(String? name) =>
-      _withoutPrefix(name, RegExp('شارع|الشارع'));
-
-  static String? _districtNameWithoutPrefix(String? name) =>
-      _withoutPrefix(name, RegExp('حي|الحي|حى|الحى'));
-
-  static String? _withoutPrefix(String? name, RegExp prefix) {
-    if (name == null) return null;
-
-    final strippedName = name.replaceAll(prefix, '').trim();
-
-    return strippedName.isEmpty ? null : strippedName;
-  }
-
   @override
   final String? id;
 
@@ -69,19 +55,6 @@ class Address with _$Address {
 
   @override
   final Store? store;
-
-  String get textComposedFromParts => [
-    if (houseNumber case final houseNumber?) houseNumber.toString(),
-    if (_streetNameWithoutPrefix(street?.name) case final streetName?)
-      'ش $streetName',
-    if (_streetNameWithoutPrefix(substreetName) case final substreetName?)
-      'متفرع من $substreetName',
-    if (_districtNameWithoutPrefix(district?.name) case final districtName?)
-      'حي $districtName',
-    ?specialLandmark,
-    if (storeyNumber case final storeyNumber?) 'الدور $storeyNumber',
-    if (apartmentNumber case final apartmentNumber?) 'شقة $apartmentNumber',
-  ].join(' ').trim();
 
   const Address({
     this.countryIsoCode = 'EG',
@@ -146,7 +119,19 @@ class Address with _$Address {
       return fullAddressText;
     }
 
-    return textComposedFromParts;
+    // 45 شارع النصر, متفرع من شارع التحرير, حي الزهور بجوار مستشفى السلام الدور الثاني شقة 5
+    return [
+      if (houseNumber case final houseNumber?) houseNumber.toString(),
+      if (street case Street(name: final streetName))
+        'ش ${streetName.replaceAll(RegExp('شارع|الشارع'), '').trim()}',
+      if (substreetName case final substreetName?)
+        'متفرع من ${substreetName.replaceAll(RegExp('شارع|الشارع'), '').trim()}',
+      if (district case District(name: final districtName))
+        'حي ${districtName.replaceAll(RegExp('حي|الحي|حى|الحى'), '').trim()}',
+      ?specialLandmark,
+      if (storeyNumber case final storeyNumber?) 'الدور $storeyNumber',
+      if (apartmentNumber case final apartmentNumber?) 'شقة $apartmentNumber',
+    ].join(' ').trim();
   }
 
   Input_AddressesInsertInput toInsertInput() {
