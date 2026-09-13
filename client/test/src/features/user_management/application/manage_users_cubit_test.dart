@@ -95,19 +95,37 @@ void main() {
       dao = _MockUsersDAO();
     });
 
-    String describe(UserAdminGroup group, UserAdminSubgroup subgroup) {
-      final title = switch (subgroup.title) {
-        final subtitle? => '${group.title} / $subtitle',
-        null => group.title,
-      };
+    Matcher subgroup(List<String> userNames, {String? title}) =>
+        isA<UserAdminSubgroup>()
+            .having((s) => s.title, 'title', title)
+            .having((s) => s.users.map((u) => u.name), 'users', userNames);
 
-      return '$title: ${subgroup.users.map((u) => u.name).join(', ')}';
-    }
+    Matcher allStudyYears(List<String> userNames) =>
+        subgroup(userNames, title: 'كل السنوات الدراسية');
 
-    List<String> groupsOf(ManageUsersState state) => [
-      for (final group in state.groups)
-        for (final subgroup in group.subgroups) describe(group, subgroup),
-    ];
+    Matcher studyYear(String name, List<String> userNames) =>
+        subgroup(userNames, title: name);
+
+    Matcher groupOf(
+      UserAdminGroupKind kind,
+      List<Matcher> subgroups, {
+      ViewableWithIDAndImage? scope,
+    }) => isA<UserAdminGroup>()
+        .having((g) => g.kind, 'kind', kind)
+        .having((g) => g.scope, 'scope', scope)
+        .having((g) => g.subgroups, 'subgroups', subgroups);
+
+    Matcher superAdmins(List<String> userNames) =>
+        groupOf(UserAdminGroupKind.superAdmins, [subgroup(userNames)]);
+
+    Matcher unscoped(List<String> userNames) =>
+        groupOf(UserAdminGroupKind.unscoped, [subgroup(userNames)]);
+
+    Matcher areaGroup(Area area, List<String> userNames) =>
+        groupOf(UserAdminGroupKind.area, scope: area, [subgroup(userNames)]);
+
+    Matcher serviceGroup(Service service, List<Matcher> subgroups) =>
+        groupOf(UserAdminGroupKind.service, scope: service, subgroups);
 
     blocTest<ManageUsersCubit, ManageUsersState>(
       'users open grouped under the areas and services they administer',
@@ -119,9 +137,11 @@ void main() {
       wait: Duration.zero,
       verify: (cubit) {
         expect(cubit.state.view, ManageUsersView.grouped);
-        expect(groupsOf(cubit.state), [
-          'منطقة الزيتون: مينا',
-          'خدمة ابتدائي / كل السنوات الدراسية: مريم, مينا',
+        expect(cubit.state.groups, [
+          areaGroup(area, ['مينا']),
+          serviceGroup(service, [
+            allStudyYears(['مريم', 'مينا']),
+          ]),
         ]);
       },
     );
@@ -140,9 +160,11 @@ void main() {
       ]),
       build: () => ManageUsersCubit(usersDao: dao),
       wait: Duration.zero,
-      verify: (cubit) => expect(groupsOf(cubit.state), [
-        'مسؤلون: مريم, يوسف',
-        'خدمة ابتدائي / كل السنوات الدراسية: مريم, مينا',
+      verify: (cubit) => expect(cubit.state.groups, [
+        superAdmins(['مريم', 'يوسف']),
+        serviceGroup(service, [
+          allStudyYears(['مريم', 'مينا']),
+        ]),
       ]),
     );
 
@@ -163,10 +185,12 @@ void main() {
       ]),
       build: () => ManageUsersCubit(usersDao: dao),
       wait: Duration.zero,
-      verify: (cubit) => expect(groupsOf(cubit.state), [
-        'خدمة ابتدائي / كل السنوات الدراسية: مريم',
-        'خدمة ابتدائي / أولى: يوسف',
-        'خدمة ابتدائي / ثانية: مينا',
+      verify: (cubit) => expect(cubit.state.groups, [
+        serviceGroup(service, [
+          allStudyYears(['مريم']),
+          studyYear('أولى', ['يوسف']),
+          studyYear('ثانية', ['مينا']),
+        ]),
       ]),
     );
 
@@ -187,10 +211,12 @@ void main() {
       ]),
       build: () => ManageUsersCubit(usersDao: dao),
       wait: Duration.zero,
-      verify: (cubit) => expect(groupsOf(cubit.state), [
-        'خدمة ابتدائي / كل السنوات الدراسية: مريم',
-        'خدمة ابتدائي / حضانة 1: يوسف',
-        'خدمة ابتدائي / حضانة 3: مينا',
+      verify: (cubit) => expect(cubit.state.groups, [
+        serviceGroup(service, [
+          allStudyYears(['مريم']),
+          studyYear('حضانة 1', ['يوسف']),
+          studyYear('حضانة 3', ['مينا']),
+        ]),
       ]),
     );
 
@@ -202,9 +228,11 @@ void main() {
       ]),
       build: () => ManageUsersCubit(usersDao: dao),
       wait: Duration.zero,
-      verify: (cubit) => expect(groupsOf(cubit.state), [
-        'خدمة ابتدائي / كل السنوات الدراسية: مريم',
-        'بدون مسؤولية: مينا',
+      verify: (cubit) => expect(cubit.state.groups, [
+        serviceGroup(service, [
+          allStudyYears(['مريم']),
+        ]),
+        unscoped(['مينا']),
       ]),
     );
 
@@ -221,10 +249,12 @@ void main() {
       wait: Duration.zero,
       verify: (cubit) {
         expect(cubit.state.isLoading, isFalse);
-        expect(groupsOf(cubit.state), [
-          'منطقة الزيتون: بيتر',
-          'خدمة ابتدائي / كل السنوات الدراسية: مريم, مينا',
-          'بدون مسؤولية: ماري, يوسف',
+        expect(cubit.state.groups, [
+          areaGroup(area, ['بيتر']),
+          serviceGroup(service, [
+            allStudyYears(['مريم', 'مينا']),
+          ]),
+          unscoped(['ماري', 'يوسف']),
         ]);
       },
     );
@@ -291,8 +321,10 @@ void main() {
       wait: const Duration(milliseconds: 50),
       verify: (cubit) {
         expect(cubit.state.isLoading, isFalse);
-        expect(groupsOf(cubit.state), [
-          'خدمة ابتدائي / كل السنوات الدراسية: بيتر, ماري, مريم, مينا, يوسف',
+        expect(cubit.state.groups, [
+          serviceGroup(service, [
+            allStudyYears(['بيتر', 'ماري', 'مريم', 'مينا', 'يوسف']),
+          ]),
         ]);
       },
     );
@@ -335,8 +367,10 @@ void main() {
         cubit.showGrouped();
       },
       wait: Duration.zero,
-      verify: (cubit) => expect(groupsOf(cubit.state), [
-        'خدمة ابتدائي / كل السنوات الدراسية: مريم, مينا, يوسف',
+      verify: (cubit) => expect(cubit.state.groups, [
+        serviceGroup(service, [
+          allStudyYears(['مريم', 'مينا', 'يوسف']),
+        ]),
       ]),
     );
   });

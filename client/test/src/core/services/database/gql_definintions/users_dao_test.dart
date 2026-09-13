@@ -30,33 +30,41 @@ void main() {
           ),
         );
 
-        expect(vars['orderBy'], [
-          {'name': 'ASC_NULLS_LAST'},
-          {'uid': 'ASC_NULLS_LAST'},
-        ]);
-        expect(vars['where'], [
-          {
-            '_or': [
-              {
-                '_and': [
-                  {
-                    'name': {'_gt': 'مينا'},
-                  },
-                ],
-              },
-              {
-                '_and': [
-                  {
-                    'name': {'_eq': 'مينا'},
-                  },
-                  {
-                    'uid': {'_gt': '00000000-0000-0000-0000-000000000001'},
-                  },
-                ],
-              },
-            ],
-          },
-        ]);
+        expect(
+          vars['orderBy'],
+          [
+            Input_AuthUsersDataOrderBy(name: Enum_OrderBy.ASC_NULLS_LAST),
+            Input_AuthUsersDataOrderBy(uid: Enum_OrderBy.ASC_NULLS_LAST),
+          ].map((o) => o.toJson()),
+        );
+        expect(
+          vars['where'],
+          [
+            Input_AuthUsersDataBoolExp(
+              $_or: [
+                Input_AuthUsersDataBoolExp(
+                  $_and: [
+                    Input_AuthUsersDataBoolExp(
+                      name: Input_StringComparisonExp($_gt: cursor.name),
+                    ),
+                  ],
+                ),
+                Input_AuthUsersDataBoolExp(
+                  $_and: [
+                    Input_AuthUsersDataBoolExp(
+                      name: Input_StringComparisonExp($_eq: cursor.name),
+                    ),
+                    Input_AuthUsersDataBoolExp(
+                      uid: Input_UuidComparisonExp(
+                        $_gt: UuidValue.fromString(cursor.uid),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ].map((w) => w.toJson()),
+        );
       },
     );
   });
