@@ -223,6 +223,33 @@ void main() {
 
       expect(paginatableStream.currentPageIndex, equals(0));
     });
+
+    test('after the search changes, next pages continue past the new first '
+        'page instead of repeating it', () async {
+      paginatableStream = PaginatableStream.withSearch(
+        pageSize: 4,
+        searchStream: searchController.stream,
+        factory: (request) => Stream.value(
+          _keysetPage(
+            request,
+            testData.where((item) => item.contains(request.param ?? '')),
+          ),
+        ),
+      );
+
+      await paginatableStream.onLoadingChanged.firstWhere((e) => !e);
+      searchController.add('Item 1');
+      await paginatableStream.firstWhere((items) => items.first == 'Item 10');
+
+      await paginatableStream.listenToNextPage();
+      await paginatableStream.listenToNextPage();
+
+      expect(
+        paginatableStream.currentItems,
+        List.generate(10, (i) => 'Item ${10 + i}'),
+      );
+      expect(paginatableStream.hasMore, isFalse);
+    });
   });
 
   group(
@@ -352,5 +379,22 @@ PaginatableStreamResponse<String> _paginateData(
     data: slicedData.sublist(0, min(slicedData.length, request.pageSize)),
     cursor: hasNext ? slicedData.lastOrNull : null,
     totalCount: testData.length,
+  );
+}
+
+PaginatableStreamResponse<String> _keysetPage(
+  PaginatableStreamRequest<String, String?> request,
+  Iterable<String> matching,
+) {
+  final afterCursor = matching
+      .where(
+        (item) => request.cursor == null || item.compareTo(request.cursor!) > 0,
+      )
+      .take(request.pageSize + 1)
+      .toList();
+
+  return PaginatableStreamResponse(
+    data: afterCursor.take(request.pageSize).toList(),
+    cursor: afterCursor.elementAtOrNull(request.pageSize),
   );
 }

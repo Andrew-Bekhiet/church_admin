@@ -86,7 +86,7 @@ class PaginatableStream<T, P> extends PaginatableStreamBase<T> {
         .scan<({P value, bool changed})?>(
           (previousValue, value, i) {
             if (i != 0 && previousValue?.value != value) {
-              unawaited(listenToPage(0));
+              _pageIndex.add(0);
 
               return (value: value, changed: true);
             }
@@ -96,11 +96,7 @@ class PaginatableStream<T, P> extends PaginatableStreamBase<T> {
           null,
         )
         .doOnData((_) => _onLoadingChanged.add(true))
-        .switchMap(
-          (p) => _pageIndex
-              .doOnData((_) => _onLoadingChanged.add(true))
-              .switchMap((pageIndex) => _loadPage(factory, pageIndex, p)),
-        )
+        .switchMap(_loadPagesFor(factory))
         .map(_mapPageResult)
         .doOnData((_) => _onLoadingChanged.add(false))
         .listen(
@@ -114,11 +110,7 @@ class PaginatableStream<T, P> extends PaginatableStreamBase<T> {
     required PaginatableStreamFactory<T, P?> factory,
     this.pageSize = defaultPageSize,
   }) {
-    _subjectSubscription = _pageIndex
-        .doOnData((_) => _onLoadingChanged.add(true))
-        .switchMap(
-          (pageIndex) => _loadPage(factory, pageIndex, null),
-        )
+    _subjectSubscription = _loadPagesFor(factory)(null)
         .map(_mapPageResult)
         .doOnData((_) => _onLoadingChanged.add(false))
         .listen(
@@ -128,21 +120,40 @@ class PaginatableStream<T, P> extends PaginatableStreamBase<T> {
         );
   }
 
-  Stream<
-    ({int pageIndex, bool paramChanged, PaginatableStreamResponse<T> response})
-  >
-  _loadPage(
+  Stream<_PageResult<T>> Function(({P? value, bool changed})? parameter)
+  _loadPagesFor(PaginatableStreamFactory<T, P> factory) {
+    return (parameter) {
+      var replaceItemsOnNextPage = parameter?.changed ?? false;
+
+      return _pageIndex.doOnData((_) => _onLoadingChanged.add(true)).switchMap((
+        pageIndex,
+      ) {
+        final replaceItems = replaceItemsOnNextPage;
+        replaceItemsOnNextPage = false;
+
+        return _loadPage(
+          factory,
+          pageIndex,
+          parameter?.value,
+          replaceItems: replaceItems,
+        );
+      });
+    };
+  }
+
+  Stream<_PageResult<T>> _loadPage(
     PaginatableStreamFactory<T, P> factory,
     int currentPageIndex,
-    ({P? value, bool changed})? parameter,
-  ) {
+    P? param, {
+    required bool replaceItems,
+  }) {
     return factory(
       PaginatableStreamRequest(
-        cursor: currentPageIndex == 0 || (parameter?.changed ?? false)
+        cursor: currentPageIndex == 0
             ? null
             : currentItems.elementAtOrNull(currentPageIndex * pageSize - 1) ??
                   currentCursor,
-        param: parameter?.value,
+        param: param,
         pageIndex: currentPageIndex,
         pageSize: pageSize,
       ),
@@ -150,19 +161,16 @@ class PaginatableStream<T, P> extends PaginatableStreamBase<T> {
       (response) => (
         pageIndex: currentPageIndex,
         response: response,
-        paramChanged: parameter?.changed ?? false,
+        replaceItems: replaceItems,
       ),
     );
   }
 
-  PaginatableStreamData<T> _mapPageResult(
-    ({int pageIndex, PaginatableStreamResponse<T> response, bool paramChanged})
-    newPageResult,
-  ) {
+  PaginatableStreamData<T> _mapPageResult(_PageResult<T> newPageResult) {
     final currentPageIndex = newPageResult.pageIndex;
     final newItems = newPageResult.response.data;
 
-    if (newPageResult.paramChanged) {
+    if (newPageResult.replaceItems) {
       return PaginatableStreamData<T>(
         items: newItems,
         cursor: newPageResult.response.cursor,
@@ -230,6 +238,12 @@ class PaginatableStream<T, P> extends PaginatableStreamBase<T> {
     await _subject.close();
   }
 }
+
+typedef _PageResult<T> = ({
+  int pageIndex,
+  PaginatableStreamResponse<T> response,
+  bool replaceItems,
+});
 
 /// A base class that provides pagination functionality for streams of items.
 ///

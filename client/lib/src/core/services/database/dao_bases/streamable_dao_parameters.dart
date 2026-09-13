@@ -1,9 +1,13 @@
 import 'package:church_admin/church_admin.dart';
+import 'package:equatable/equatable.dart';
 
-class StreamableDAOParameters<T> {
+class StreamableDAOParameters<T> with Equatable {
   final String? search;
   final List<Filter>? where;
   final List<OrderBy>? orderBy;
+
+  @override
+  List<Object?> get props => [search, where, orderBy];
 
   const StreamableDAOParameters({
     this.search,

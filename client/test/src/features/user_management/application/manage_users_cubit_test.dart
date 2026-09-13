@@ -164,6 +164,31 @@ void main() {
     );
 
     blocTest<ManageUsersCubit, ManageUsersState>(
+      'after a search is cleared the grouped view finishes loading '
+      'with every user once',
+      setUp: () => stubUsers([
+        user('مينا', adminOn: [service]),
+        user('مريم', adminOn: [service]),
+        user('يوسف', adminOn: [service]),
+        user('بيتر', adminOn: [service]),
+        user('ماري', adminOn: [service]),
+      ]),
+      build: () => ManageUsersCubit(usersDao: dao),
+      act: (cubit) async {
+        cubit.search('مي');
+        await Future<void>.delayed(Duration.zero);
+        cubit.search('');
+      },
+      wait: const Duration(milliseconds: 50),
+      verify: (cubit) {
+        expect(cubit.state.isLoading, isFalse);
+        expect(groupsOf(cubit.state), [
+          'خدمة ابتدائي: بيتر, ماري, مريم, مينا, يوسف',
+        ]);
+      },
+    );
+
+    blocTest<ManageUsersCubit, ManageUsersState>(
       'loading more in the flat view appends the next page of users',
       setUp: () => stubUsers([
         user('مينا'),
