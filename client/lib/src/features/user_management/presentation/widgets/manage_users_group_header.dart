@@ -35,7 +35,11 @@ class ManageUsersGroupHeader extends StatelessWidget {
                 child: const Icon(Icons.expand_more, size: 20),
               ),
               switch (group.scope) {
-                final IImage image => ImageObjectWidget(image, isDense: true),
+                final IImage image => ImageObjectWidget(
+                  image,
+                  isDense: true,
+                  circleCrop: false,
+                ),
                 _ => Icon(
                   switch (group.kind) {
                     UserAdminGroupKind.superAdmins => Symbols.shield_person,

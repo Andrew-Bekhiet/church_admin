@@ -129,7 +129,7 @@ void main() {
       build: () => ManageUsersCubit(usersDao: dao),
       wait: Duration.zero,
       verify: (cubit) => expect(groupsOf(cubit.state), [
-        'مسؤولون عامون: مريم, يوسف',
+        'مسؤلون: مريم, يوسف',
         'خدمة ابتدائي / كل السنوات الدراسية: مريم, مينا',
       ]),
     );

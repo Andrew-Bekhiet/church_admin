@@ -17,12 +17,12 @@ class ManageUsersViewToggle extends StatelessWidget {
         return switch (state.preferredView) {
           ManageUsersView.grouped => IconButton(
             tooltip: 'عرض كقائمة',
-            icon: const Icon(Symbols.view_list),
+            icon: const Icon(Symbols.format_list_bulleted),
             onPressed: cubit.showFlat,
           ),
           ManageUsersView.flat => IconButton(
             tooltip: 'تجميع حسب المسؤولية',
-            icon: const Icon(Symbols.workspaces),
+            icon: const Icon(Symbols.account_tree),
             onPressed: cubit.showGrouped,
           ),
         };

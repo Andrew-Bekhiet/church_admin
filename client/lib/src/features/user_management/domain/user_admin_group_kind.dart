@@ -1,5 +1,5 @@
 enum UserAdminGroupKind {
-  superAdmins(title: 'مسؤولون عامون'),
+  superAdmins(title: 'مسؤلون'),
   area(),
   service(),
   unscoped(title: 'بدون مسؤولية');
