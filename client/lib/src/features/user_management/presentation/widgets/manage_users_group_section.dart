@@ -1,6 +1,5 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
-import 'package:sliver_tools/sliver_tools.dart';
 
 class ManageUsersGroupSection extends StatelessWidget {
   final UserAdminGroup group;
@@ -16,10 +15,9 @@ class ManageUsersGroupSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiSliver(
-      pushPinnedChildren: true,
-      children: [
-        SliverPinnedHeader(
+    return SliverMainAxisGroup(
+      slivers: [
+        PinnedHeaderSliver(
           child: ManageUsersGroupHeader(
             group: group,
             expanded: expanded,
