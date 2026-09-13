@@ -28,7 +28,9 @@ export const deletePhoto = https.onCall({}, async (req) => {
 
   await getStorage().bucket(storageBucket.value()).file(path)
     .delete();
-  await updatePhotoTime(table as PhotoTable, id, null);
+
+  const [objectTable, objectId] = path.split("/");
+  await updatePhotoTime(objectTable as PhotoTable, objectId, null);
 
   return true;
 });
