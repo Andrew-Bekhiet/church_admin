@@ -343,7 +343,7 @@ export async function checkUserAccessToPerson(
 ): Promise<{ canRead: boolean; canWrite: boolean; personUid: string | null }> {
   try {
     if (table == "users") {
-      return { canRead: true, canWrite: false, personUid: null };
+      return { canRead: true, canWrite: id == hasuraUid, personUid: null };
     }
 
     const hasura_response = await makeGraphqlRequest({
