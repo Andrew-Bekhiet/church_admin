@@ -17,14 +17,19 @@ class EditUserAdminScopeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final objectLabel = switch (userAdminScope) {
-      UserAdminScope(object: Area()) => 'منطقة',
+    final serviceScopeLabel = switch (userAdminScope) {
       UserAdminScope(object: Service(), :final studyYear, :final gender) =>
-        'خدمة (${studyYear?.name ?? 'جميع السنوات الدراسية'} ${gender == null
+        '${studyYear?.name ?? 'جميع السنوات الدراسية'} ${gender == null
             ? 'بنين و بنات'
             : gender
             ? 'بنين'
-            : 'بنات'} فقط)',
+            : 'بنات'} فقط',
+      _ => null,
+    };
+
+    final objectLabel = switch (userAdminScope) {
+      UserAdminScope(object: Area()) => 'منطقة',
+      UserAdminScope(object: Service()) => 'خدمة ($serviceScopeLabel)',
       UserAdminScope(object: Group()) => 'مجموعة',
       _ => '',
     };
@@ -41,6 +46,12 @@ class EditUserAdminScopeWidget extends StatelessWidget {
                   isDense: true,
                   forceShowSecondLine: false,
                   wrapInCard: false,
+                  subtitle: serviceScopeLabel != null
+                      ? Text(
+                          serviceScopeLabel,
+                          overflow: TextOverflow.ellipsis,
+                        )
+                      : null,
                 ),
               ),
             ),
