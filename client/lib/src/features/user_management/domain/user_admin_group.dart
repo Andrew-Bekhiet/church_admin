@@ -70,11 +70,14 @@ class UserAdminGroup with Equatable {
     return byStudyYearOrder.entries
         .sortedByCompare((e) => e.key, nullStudyYearsFirst)
         .map(
-          (e) => UserAdminSubgroup(
-            splitByStudyYear: true,
-            studyYear: e.value.first.serviceStudyYearData,
-            users: _distinctUsers(e.value),
-          ),
+          (e) {
+            final studyYear = e.value.first.serviceStudyYearData;
+
+            return UserAdminSubgroup(
+              title: studyYear?.name ?? 'كل السنوات الدراسية',
+              users: _distinctUsers(e.value),
+            );
+          },
         )
         .toList();
   }
