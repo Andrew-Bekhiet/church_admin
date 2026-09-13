@@ -16,9 +16,8 @@ class ManageUsersSubgroupHeader extends StatelessWidget {
     final colors = theme.colorScheme;
 
     return Padding(
-      padding: const EdgeInsetsDirectional.fromSTEB(16, 6, 16, 0),
+      padding: const EdgeInsetsDirectional.only(start: 16, top: 4, end: 16),
       child: Row(
-        spacing: 8,
         children: [
           Text(
             title,
@@ -27,7 +26,7 @@ class ManageUsersSubgroupHeader extends StatelessWidget {
               fontWeight: FontWeight.w600,
             ),
           ),
-          Expanded(child: Divider(color: colors.outlineVariant, height: 1)),
+          const Expanded(child: Divider()),
           Text(
             userCount.toString(),
             style: theme.textTheme.labelSmall?.copyWith(

@@ -22,7 +22,9 @@ class ManageUsersFlatList extends StatelessWidget {
           return ManageUsersListFooter(isLoading: isLoading);
         }
 
-        return ManageUserListItem(users[index], key: ValueKey(users[index].id));
+        final user = users[index];
+
+        return ManageUserListItem(user, key: ValueKey(user.id));
       },
     );
   }
