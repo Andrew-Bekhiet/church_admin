@@ -196,3 +196,20 @@ Set<String> serviceIdsWithStudyYearFallback(
     ?standardServiceForStudyYearOrder(churchAdminContext, studyYearOrder)?.id,
   };
 }
+
+bool isChurchDataPersonInStandardService(
+  ChurchAdminContext churchAdminContext,
+  Person person,
+) {
+  if (!churchAdminContext.churchDataPersonIds.contains(person.id)) return false;
+
+  final standardServiceIds = {
+    for (final base in _newServices)
+      if (base.studyYearFromId != null && base.studyYearToId != null) base.id,
+  };
+
+  return serviceIdsWithStudyYearFallback(
+    churchAdminContext,
+    person,
+  ).any(standardServiceIds.contains);
+}

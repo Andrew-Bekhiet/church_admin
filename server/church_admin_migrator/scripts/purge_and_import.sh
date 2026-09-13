@@ -18,7 +18,7 @@
 #   PGHOST, PGPORT, PGDATABASE, PGUSER, PGPASSWORD
 #
 # Knobs (env vars):
-#   CUTOFF_DATE   purge cutoff date            (default 2026-05-31)
+#   CUTOFF_DATE   purge cutoff date            (default 2026-07-01)
 #   EXPORT_DIR    folder containing the CSVs   (default ../export)
 #   DRY_RUN=1     purge previews counts + rolls back; import is skipped
 #   SKIP_PURGE=1  skip the purge step
@@ -33,7 +33,7 @@ export PGPORT="${PGPORT:-5432}"
 export PGDATABASE="${PGDATABASE:-church_admin}"
 export PGUSER="${PGUSER:-postgres}"
 
-CUTOFF_DATE="${CUTOFF_DATE:-2026-05-31}"
+CUTOFF_DATE="${CUTOFF_DATE:-2026-07-01}"
 EXPORT_DIR="${EXPORT_DIR:-$SCRIPT_DIR/../export}"
 
 if ! command -v psql >/dev/null 2>&1; then
@@ -55,7 +55,7 @@ if [[ "${SKIP_PURGE:-1}" != "1" ]]; then
   else
     echo "== PURGE =="
   fi
-  psql "${PURGE_ARGS[@]}" -f "$SCRIPT_DIR/purge_before_import.sql"
+  psql "${PURGE_ARGS[@]}" -f "$SCRIPT_DIR/purge_before_cutoff_date.sql"
   echo
 else
   echo "== PURGE skipped =="
@@ -74,7 +74,7 @@ if [[ "${SKIP_IMPORT:-0}" != "1" ]]; then
   fi
   echo "== IMPORT =="
   # \copy paths in the SQL are relative; run psql from the export directory.
-  ( cd "$EXPORT_DIR" && psql -v ON_ERROR_STOP=1 -f "$SCRIPT_DIR/import_after_purge.sql" )
+  ( cd "$EXPORT_DIR" && psql -v ON_ERROR_STOP=1 -f "$SCRIPT_DIR/import_migrated_csv_export.sql" )
   echo
 else
   echo "== IMPORT skipped =="

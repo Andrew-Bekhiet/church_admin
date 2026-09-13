@@ -23,8 +23,8 @@
 --     rarely edited). Extend `_doomed_*` below if you really want them.
 --
 -- Usage:
---   psql -v ON_ERROR_STOP=1 -v cutoff_date=2026-05-31 -f purge_before_import.sql
--- (cutoff_date defaults to 2026-05-31 if not provided)
+--   psql -v ON_ERROR_STOP=1 -v cutoff_date=2026-07-01 -f purge_before_import.sql
+-- (cutoff_date defaults to 2026-07-01 if not provided)
 -- =============================================================================
 
 \set ON_ERROR_STOP on
@@ -32,7 +32,7 @@
 -- Default the cutoff date when not supplied via `-v cutoff_date=...`.
 \if :{?cutoff_date}
 \else
-\set cutoff_date 2026-05-31
+\set cutoff_date 2026-07-01
 \endif
 
 \echo 'Purging staging rows not updated before' :'cutoff_date'
@@ -51,7 +51,7 @@ WHERE NOT EXISTS (
     WHERE
         e."table" = 'persons'
         AND e.record_id = p.id
-        AND e."time" <: 'cutoff_date'::timestamptz
+        AND e."time" >= :'cutoff_date'::timestamptz
 );
 
 CREATE TEMP TABLE _doomed_families ON COMMIT DROP AS
@@ -63,7 +63,7 @@ WHERE NOT EXISTS (
     WHERE
         e."table" = 'families'
         AND e.record_id = f.id
-        AND e."time" <: 'cutoff_date'::timestamptz
+        AND e."time" >= :'cutoff_date'::timestamptz
 );
 
 CREATE TEMP TABLE _doomed_stores ON COMMIT DROP AS
@@ -75,8 +75,14 @@ WHERE NOT EXISTS (
     WHERE
         e."table" = 'stores'
         AND e.record_id = s.id
-        AND e."time" <: 'cutoff_date'::timestamptz
+        AND e."time" >= :'cutoff_date'::timestamptz
 );
+
+\echo 'Doomed rows (no edit on/after the cutoff):'
+SELECT
+    (SELECT count(*) FROM _doomed_persons) AS persons,
+    (SELECT count(*) FROM _doomed_families) AS families,
+    (SELECT count(*) FROM _doomed_stores) AS stores;
 
 -- ---------------------------------------------------------------------------
 -- 2. Persons: clear the dependents that RESTRICT a delete, then delete.
@@ -121,15 +127,32 @@ DELETE FROM public.families
 WHERE id IN (SELECT id FROM _delete_families);
 
 -- ---------------------------------------------------------------------------
--- 4. Stores: addresses(store) + streets_stores cascade automatically.
+-- 4. Stores: only delete a doomed store that has NO surviving persons, since
+--    persons.store_id is ON DELETE SET NULL and persons_general_check() would
+--    reject a person left with no family/store/service/group/uid at COMMIT.
+--    addresses(store) + streets_stores cascade automatically.
 -- ---------------------------------------------------------------------------
+CREATE TEMP TABLE _delete_stores ON COMMIT DROP AS
+SELECT ds.id
+FROM _doomed_stores AS ds
+WHERE NOT EXISTS (
+    SELECT 1 FROM public.persons AS p
+    WHERE p.store_id = ds.id
+);
+
 DELETE FROM history.visit_history
-WHERE "table" = 'stores' AND record_id IN (SELECT id FROM _doomed_stores);
+WHERE "table" = 'stores' AND record_id IN (SELECT id FROM _delete_stores);
 DELETE FROM history.edit_history
-WHERE "table" = 'stores' AND record_id IN (SELECT id FROM _doomed_stores);
+WHERE "table" = 'stores' AND record_id IN (SELECT id FROM _delete_stores);
 
 DELETE FROM public.stores
-WHERE id IN (SELECT id FROM _doomed_stores);
+WHERE id IN (SELECT id FROM _delete_stores);
+
+\echo 'Rows to delete (doomed rows still anchoring a person are kept):'
+SELECT
+    (SELECT count(*) FROM _doomed_persons) AS persons,
+    (SELECT count(*) FROM _delete_families) AS families,
+    (SELECT count(*) FROM _delete_stores) AS stores;
 
 -- ---------------------------------------------------------------------------
 -- 5. Remove history rows with a NULL recorded_by (edit / visit / call).

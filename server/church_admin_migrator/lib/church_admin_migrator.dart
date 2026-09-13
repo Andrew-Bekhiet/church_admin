@@ -222,6 +222,7 @@ void _migrateChurchDataPersons(
 
     churchAdminContext.persons[newRef] = newPerson;
     churchAdminContext.persons[oldRef] = newPerson;
+    churchAdminContext.churchDataPersonIds.add(newRef.id);
 
     _recordPersonHistory(
       churchAdminContext,

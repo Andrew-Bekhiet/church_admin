@@ -24,6 +24,7 @@ class ChurchAdminContext {
   final List<({IdReference parentFamilyId, IdReference childFamilyId})>
   familiesFamilies;
   final Map<IdReference, Person> persons;
+  final Set<String> churchDataPersonIds;
   final Map<IdReference, Store> stores;
   final Map<IdReference, Street> streets;
   final Map<IdReference, User> users;
@@ -62,6 +63,7 @@ class ChurchAdminContext {
       families = {},
       familiesFamilies = [],
       persons = {},
+      churchDataPersonIds = {},
       stores = {},
       streets = {},
       services = {},

@@ -10,8 +10,8 @@
 #   PGHOST, PGPORT, PGDATABASE, PGUSER, PGPASSWORD
 # Must connect as a superuser/admin so soft-delete triggers perform hard deletes.
 #
-# Cutoff date (rows with no edit before it are purged) defaults to 2026-05-31:
-#   CUTOFF_DATE=2026-05-31 ./run_purge.sh
+# Cutoff date (rows with no edit before it are purged) defaults to 2026-07-01:
+#   CUTOFF_DATE=2026-07-01 ./run_purge.sh
 # =============================================================================
 set -euo pipefail
 
@@ -21,7 +21,7 @@ PGHOST="${PGHOST:-localhost}"
 PGPORT="${PGPORT:-5432}"
 PGDATABASE="${PGDATABASE:-church_admin}"
 PGUSER="${PGUSER:-postgres}"
-CUTOFF_DATE="${CUTOFF_DATE:-2026-05-31}"
+CUTOFF_DATE="${CUTOFF_DATE:-2026-07-01}"
 
 # Set DRY_RUN=1 to preview deletion counts and roll back without committing.
 DRY_RUN_ARGS=()

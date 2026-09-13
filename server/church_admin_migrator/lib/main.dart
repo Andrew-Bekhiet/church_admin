@@ -26,7 +26,7 @@ Future<void> main(List<String> arguments) async {
     ..addOption(
       'church-admin-credentials',
       abbr: 'a',
-      mandatory: false,
+      mandatory: true,
       help: 'Path to the Church Admin service account JSON file.',
     )
     ..addFlag(
@@ -37,7 +37,7 @@ Future<void> main(List<String> arguments) async {
     )
     ..addFlag(
       'migrate-storage',
-      defaultsTo: false,
+      defaultsTo: true,
       help:
           'Migrate storage (photos) from ChurchData and MeetingHelper to ChurchAdmin.',
     )

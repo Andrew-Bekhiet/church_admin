@@ -38,7 +38,7 @@ export async function getImageBlurHash(object: { name?: string }) {
     .download();
 
   const { data: pixels, info: metadata } = await sharp.default(downloadData[0])
-    .resize({ width: 1024, height: 1024, fit: "inside" })
+    .resize({ width: 32, height: 32, fit: "inside" })
     .raw()
     .ensureAlpha()
     .toBuffer({ resolveWithObject: true });

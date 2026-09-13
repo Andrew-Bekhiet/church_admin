@@ -402,7 +402,9 @@ class ChurchAdminCsvExporter {
             'id': _uuidFromFirestoreId(p.id),
             'uid': _uuidFromFirestoreId(p.uid),
             'national_id': p.nationalId,
-            'name': p.name,
+            'name': isChurchDataPersonInStandardService(churchAdminContext, p)
+                ? '${p.name}*'
+                : p.name,
             'main_phone': p.mainPhone,
             'other_phones': p.otherPhones,
             'birthdate': p.birthdate?.toIso8601String(),
