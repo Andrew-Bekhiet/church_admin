@@ -13,11 +13,18 @@ class UserAdminGroup with Equatable {
 
       if (scopedAdminOn.isEmpty && !user.permissions.isSuperAdmin) {
         unscoped.add(user);
+        continue;
       }
 
       for (final adminOn in scopedAdminOn) {
+        final scopeKey = switch (adminOn) {
+          AdminOnData(:final area?) => area,
+          AdminOnData(:final service?) => service,
+          _ => throw ArgumentError('AdminOnData has no area or service'),
+        };
+
         byScope
-            .putIfAbsent(_scopeOf(adminOn), () => [])
+            .putIfAbsent(scopeKey, () => [])
             .add(adminOn.copyWith(user: user));
       }
     }
@@ -30,7 +37,7 @@ class UserAdminGroup with Equatable {
         ),
       ...byScope.entries
           .map((e) => UserAdminGroup._forScope(e.key, e.value))
-          .sorted(_byKindThenName),
+          .sorted(_compareByKindThenTitle),
       if (unscoped.isNotEmpty)
         UserAdminGroup.ofKind(UserAdminGroupKind.unscoped, users: unscoped),
     ];
@@ -39,14 +46,7 @@ class UserAdminGroup with Equatable {
   static bool _hasAreaOrService(AdminOnData adminOn) =>
       adminOn.area != null || adminOn.service != null;
 
-  static ViewableWithIDAndImage _scopeOf(AdminOnData adminOn) =>
-      switch (adminOn) {
-        AdminOnData(area: final area?) => area,
-        AdminOnData(service: final service?) => service,
-        _ => throw ArgumentError('AdminOnData has no area or service'),
-      };
-
-  static int _byKindThenName(UserAdminGroup a, UserAdminGroup b) {
+  static int _compareByKindThenTitle(UserAdminGroup a, UserAdminGroup b) {
     final byKind = a.kind.index.compareTo(b.kind.index);
     if (byKind != 0) return byKind;
 
@@ -60,8 +60,15 @@ class UserAdminGroup with Equatable {
       (a) => a.serviceStudyYearData?.order,
     );
 
+    int nullStudyYearsFirst(int? a, int? b) => switch ((a, b)) {
+      (null, null) => 0,
+      (null, _) => -1,
+      (_, null) => 1,
+      (final a?, final b?) => a.compareTo(b),
+    };
+
     return byStudyYearOrder.entries
-        .sortedByCompare((e) => e.key, _allStudyYearsFirst)
+        .sortedByCompare((e) => e.key, nullStudyYearsFirst)
         .map(
           (e) => UserAdminSubgroup(
             splitByStudyYear: true,
@@ -72,16 +79,11 @@ class UserAdminGroup with Equatable {
         .toList();
   }
 
-  static int _allStudyYearsFirst(int? a, int? b) => switch ((a, b)) {
-    (null, null) => 0,
-    (null, _) => -1,
-    (_, null) => 1,
-    (final a?, final b?) => a.compareTo(b),
-  };
-
-  static List<User> _distinctUsers(List<AdminOnData> adminOn) => {
-    for (final user in adminOn.map((a) => a.user).nonNulls) user.uid: user,
-  }.values.toList();
+  static List<User> _distinctUsers(List<AdminOnData> adminOn) =>
+      EqualitySet.from(
+        EqualityBy((User u) => u.uid),
+        adminOn.map((a) => a.user).nonNulls,
+      ).toList();
 
   final UserAdminGroupKind kind;
   final ViewableWithIDAndImage? scope;
@@ -91,7 +93,7 @@ class UserAdminGroup with Equatable {
 
   String get title => scope?.name ?? kind.title ?? '';
 
-  int get userCount => subgroups.fold(0, (sum, s) => sum + s.users.length);
+  int get userCount => subgroups.map((s) => s.users.length).sum;
 
   @override
   List<Object?> get props => [kind, scope, subgroups];
