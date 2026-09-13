@@ -61,7 +61,7 @@ class UserAdminGroup with Equatable {
     );
 
     return byStudyYearOrder.entries
-        .sortedBy<num>((e) => e.key ?? -1)
+        .sortedByCompare((e) => e.key, _allStudyYearsFirst)
         .map(
           (e) => UserAdminSubgroup(
             splitByStudyYear: true,
@@ -71,6 +71,13 @@ class UserAdminGroup with Equatable {
         )
         .toList();
   }
+
+  static int _allStudyYearsFirst(int? a, int? b) => switch ((a, b)) {
+    (null, null) => 0,
+    (null, _) => -1,
+    (_, null) => 1,
+    (final a?, final b?) => a.compareTo(b),
+  };
 
   static List<User> _distinctUsers(List<AdminOnData> adminOn) => {
     for (final user in adminOn.map((a) => a.user).nonNulls) user.uid: user,

@@ -159,6 +159,30 @@ void main() {
     );
 
     blocTest<ManageUsersCubit, ManageUsersState>(
+      'all-years admins stay on top even when study years have negative order',
+      setUp: () => stubUsers([
+        user(
+          'مينا',
+          adminOn: [service],
+          studyYear: StudyYear(order: -3, name: 'حضانة 3'),
+        ),
+        user('مريم', adminOn: [service]),
+        user(
+          'يوسف',
+          adminOn: [service],
+          studyYear: StudyYear(order: -5, name: 'حضانة 1'),
+        ),
+      ]),
+      build: () => ManageUsersCubit(usersDao: dao),
+      wait: Duration.zero,
+      verify: (cubit) => expect(groupsOf(cubit.state), [
+        'خدمة ابتدائي / كل السنوات الدراسية: مريم',
+        'خدمة ابتدائي / حضانة 1: يوسف',
+        'خدمة ابتدائي / حضانة 3: مينا',
+      ]),
+    );
+
+    blocTest<ManageUsersCubit, ManageUsersState>(
       'users who only administer a group are listed as having no scope',
       setUp: () => stubUsers([
         user('مينا', adminOn: [group]),
