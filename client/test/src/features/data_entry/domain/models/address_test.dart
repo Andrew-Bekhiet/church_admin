@@ -6,7 +6,7 @@ void main() {
     'Address => textComposedFromParts',
     () {
       test(
-        'whenAllPartsAreSet_joinsThemInReadingOrder',
+        'joins all parts in reading order',
         () {
           const address = Address(
             houseNumber: 45,
@@ -27,7 +27,7 @@ void main() {
       );
 
       test(
-        'whenStreetNameIsOnlyThePrefix_dropsTheSegment',
+        'drops a street or district whose name is only the prefix',
         () {
           const address = Address(
             street: Street(id: 'street-id', name: 'شارع'),
@@ -39,7 +39,7 @@ void main() {
       );
 
       test(
-        'whenServerTextIsPresent_stillComposesFromTheEnteredParts',
+        'ignores the server full address text',
         () {
           const address = Address(
             houseNumber: 12,
