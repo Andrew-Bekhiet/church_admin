@@ -1,5 +1,4 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 
@@ -100,36 +99,16 @@ class _EditObjectDataState<T extends ViewableWithID>
                     ),
                   ),
                 ),
-                SliverToBoxAdapter(
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 8,
-                      vertical: 4,
-                    ),
-                    child: SaveAndCancelButtons(
-                      onSave: () => _controller.save(context),
-                      onCancel: () async {
-                        final bool value = await _controller.confirmExit(
-                          context,
-                        );
-                        if (value && context.mounted) {
-                          Navigator.of(context).pop();
-                        }
-                      },
-                    ),
-                  ),
-                ),
-                const SliverToBoxAdapter(child: SizedBox(height: 80)),
+                const SliverToBoxAdapter(child: SizedBox(height: 120)),
               ],
             ),
           ),
         ),
-        floatingActionButton: kDebugMode
-            ? FloatingActionButton(
-                onPressed: () => _controller.save(context),
-                child: const Icon(Icons.save),
-              )
-            : null,
+        floatingActionButton: FloatingActionButton.extended(
+          label: const Text('حفظ'),
+          icon: const Icon(Icons.save),
+          onPressed: () => _controller.save(context),
+        ),
       ),
     );
   }
