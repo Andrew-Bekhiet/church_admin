@@ -169,7 +169,7 @@ async function _authenticateStorageRequest(
     }
 
     const path = table == "users"
-      ? "persons/" + (await getPersonIdFromUser(hasuraUID))!
+      ? "persons/" + (await getRequestedUserPersonId(id))
       : table + "/" + id;
 
     return { path, contentType, table, id, hasuraUID };
@@ -178,4 +178,17 @@ async function _authenticateStorageRequest(
     console.dir(e, { depth: 4 });
     throw e;
   }
+}
+
+async function getRequestedUserPersonId(userId: string): Promise<string> {
+  const personId = await getPersonIdFromUser(userId);
+
+  if (personId == null) {
+    throw new https.HttpsError(
+      "not-found",
+      `User with id ${userId} has no linked person`,
+    );
+  }
+
+  return personId;
 }
