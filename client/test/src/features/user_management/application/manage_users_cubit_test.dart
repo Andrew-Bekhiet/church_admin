@@ -19,15 +19,19 @@ void main() {
     User user(
       String name, {
       List<ViewableWithID> adminOn = const [],
+      StudyYear? studyYear,
+      Set<UserPermission> permissions = const {},
     }) => User(
       uid: name,
       name: name,
+      permissions: PermissionsSet.fromSet(permissions),
       adminOn: [
         for (final scope in adminOn)
           AdminOnData(
             permissionId: '${name}_${scope.id}',
             area: scope is Area ? scope : null,
             service: scope is Service ? scope : null,
+            serviceStudyYearData: scope is Service ? studyYear : null,
             group: scope is Group ? scope : null,
           ),
       ],
@@ -79,9 +83,18 @@ void main() {
       dao = _MockUsersDAO();
     });
 
+    String describe(UserAdminGroup group, UserAdminSubgroup subgroup) {
+      final title = switch (subgroup.title) {
+        final subtitle? => '${group.title} / $subtitle',
+        null => group.title,
+      };
+
+      return '$title: ${subgroup.users.map((u) => u.name).join(', ')}';
+    }
+
     List<String> groupsOf(ManageUsersState state) => [
       for (final group in state.groups)
-        '${group.title}: ${group.users.map((u) => u.name).join(', ')}',
+        for (final subgroup in group.subgroups) describe(group, subgroup),
     ];
 
     blocTest<ManageUsersCubit, ManageUsersState>(
@@ -96,9 +109,53 @@ void main() {
         expect(cubit.state.view, ManageUsersView.grouped);
         expect(groupsOf(cubit.state), [
           'منطقة الزيتون: مينا',
-          'خدمة ابتدائي: مريم, مينا',
+          'خدمة ابتدائي / كل السنوات الدراسية: مريم, مينا',
         ]);
       },
+    );
+
+    blocTest<ManageUsersCubit, ManageUsersState>(
+      'super admins come first in their own group and still appear '
+      'under their scopes',
+      setUp: () => stubUsers([
+        user('مينا', adminOn: [service]),
+        user(
+          'مريم',
+          adminOn: [service],
+          permissions: {UserPermission.writeAllData},
+        ),
+        user('يوسف', permissions: {UserPermission.manageAllUsers}),
+      ]),
+      build: () => ManageUsersCubit(usersDao: dao),
+      wait: Duration.zero,
+      verify: (cubit) => expect(groupsOf(cubit.state), [
+        'مسؤولون عامون: مريم, يوسف',
+        'خدمة ابتدائي / كل السنوات الدراسية: مريم, مينا',
+      ]),
+    );
+
+    blocTest<ManageUsersCubit, ManageUsersState>(
+      'service admins are split by study year with all-years admins first',
+      setUp: () => stubUsers([
+        user(
+          'مينا',
+          adminOn: [service],
+          studyYear: StudyYear(order: 2, name: 'ثانية'),
+        ),
+        user('مريم', adminOn: [service]),
+        user(
+          'يوسف',
+          adminOn: [service],
+          studyYear: StudyYear(order: 1, name: 'أولى'),
+        ),
+      ]),
+      build: () => ManageUsersCubit(usersDao: dao),
+      wait: Duration.zero,
+      verify: (cubit) => expect(groupsOf(cubit.state), [
+        'خدمة ابتدائي / كل السنوات الدراسية: مريم',
+        'خدمة ابتدائي / أولى: يوسف',
+        'خدمة ابتدائي / ثانية: مينا',
+      ]),
     );
 
     blocTest<ManageUsersCubit, ManageUsersState>(
@@ -110,7 +167,7 @@ void main() {
       build: () => ManageUsersCubit(usersDao: dao),
       wait: Duration.zero,
       verify: (cubit) => expect(groupsOf(cubit.state), [
-        'خدمة ابتدائي: مريم',
+        'خدمة ابتدائي / كل السنوات الدراسية: مريم',
         'بدون مسؤولية: مينا',
       ]),
     );
@@ -130,7 +187,7 @@ void main() {
         expect(cubit.state.isLoading, isFalse);
         expect(groupsOf(cubit.state), [
           'منطقة الزيتون: بيتر',
-          'خدمة ابتدائي: مريم, مينا',
+          'خدمة ابتدائي / كل السنوات الدراسية: مريم, مينا',
           'بدون مسؤولية: ماري, يوسف',
         ]);
       },
@@ -199,13 +256,13 @@ void main() {
       verify: (cubit) {
         expect(cubit.state.isLoading, isFalse);
         expect(groupsOf(cubit.state), [
-          'خدمة ابتدائي: بيتر, ماري, مريم, مينا, يوسف',
+          'خدمة ابتدائي / كل السنوات الدراسية: بيتر, ماري, مريم, مينا, يوسف',
         ]);
       },
     );
 
     blocTest<ManageUsersCubit, ManageUsersState>(
-      'loading more in the flat view appends the next page of users',
+      'the flat view loads every page on its own',
       setUp: () => stubUsers([
         user('مينا'),
         user('مريم'),
@@ -214,20 +271,17 @@ void main() {
         user('ماري'),
       ]),
       build: () => ManageUsersCubit(usersDao: dao),
-      act: (cubit) async {
-        cubit.showFlat();
-        await Future<void>.delayed(Duration.zero);
-        await cubit.loadMore();
-      },
+      act: (cubit) => cubit.showFlat(),
       wait: Duration.zero,
       verify: (cubit) {
+        expect(cubit.state.isLoading, isFalse);
         expect(cubit.state.users.map((u) => u.name), [
           'بيتر',
           'ماري',
           'مريم',
           'مينا',
+          'يوسف',
         ]);
-        expect(cubit.state.hasMore, isTrue);
       },
     );
 
@@ -245,8 +299,9 @@ void main() {
         cubit.showGrouped();
       },
       wait: Duration.zero,
-      verify: (cubit) =>
-          expect(groupsOf(cubit.state), ['خدمة ابتدائي: مريم, مينا, يوسف']),
+      verify: (cubit) => expect(groupsOf(cubit.state), [
+        'خدمة ابتدائي / كل السنوات الدراسية: مريم, مينا, يوسف',
+      ]),
     );
   });
 }

@@ -50,10 +50,14 @@ fragment UserAdminScopes on AuthUsersData {
   adminOn {
     permissionId
     area {
-      ...AreaNoPhoto
+      ...Area
     }
     service {
-      ...ServiceNoPhoto
+      ...Service
+    }
+    serviceStudyYearData {
+      name
+      order
     }
   }
 }

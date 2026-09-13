@@ -4226,7 +4226,7 @@ const fragmentDefinitionUserAdminScopes = FragmentDefinitionNode(
               selectionSet: SelectionSetNode(
                 selections: [
                   FragmentSpreadNode(
-                    name: NameNode(value: 'AreaNoPhoto'),
+                    name: NameNode(value: 'Area'),
                     directives: [],
                   ),
                   FieldNode(
@@ -4247,8 +4247,39 @@ const fragmentDefinitionUserAdminScopes = FragmentDefinitionNode(
               selectionSet: SelectionSetNode(
                 selections: [
                   FragmentSpreadNode(
-                    name: NameNode(value: 'ServiceNoPhoto'),
+                    name: NameNode(value: 'Service'),
                     directives: [],
+                  ),
+                  FieldNode(
+                    name: NameNode(value: '__typename'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                ],
+              ),
+            ),
+            FieldNode(
+              name: NameNode(value: 'serviceStudyYearData'),
+              alias: null,
+              arguments: [],
+              directives: [],
+              selectionSet: SelectionSetNode(
+                selections: [
+                  FieldNode(
+                    name: NameNode(value: 'name'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
+                  ),
+                  FieldNode(
+                    name: NameNode(value: 'order'),
+                    alias: null,
+                    arguments: [],
+                    directives: [],
+                    selectionSet: null,
                   ),
                   FieldNode(
                     name: NameNode(value: '__typename'),
@@ -4283,7 +4314,9 @@ const fragmentDefinitionUserAdminScopes = FragmentDefinitionNode(
 const documentNodeFragmentUserAdminScopes = DocumentNode(
   definitions: [
     fragmentDefinitionUserAdminScopes,
+    fragmentDefinitionArea,
     fragmentDefinitionAreaNoPhoto,
+    fragmentDefinitionService,
     fragmentDefinitionServiceNoPhoto,
   ],
 );
@@ -4293,6 +4326,7 @@ class Fragment_UserAdminScopes_adminOn {
     required this.permissionId,
     this.area,
     this.service,
+    this.serviceStudyYearData,
     this.$__typename = 'AuthUsersAdminOn',
   });
 
@@ -4300,16 +4334,20 @@ class Fragment_UserAdminScopes_adminOn {
     final l$permissionId = json['permissionId'];
     final l$area = json['area'];
     final l$service = json['service'];
+    final l$serviceStudyYearData = json['serviceStudyYearData'];
     final l$$__typename = json['__typename'];
     return Fragment_UserAdminScopes_adminOn(
       permissionId: stringToUuid(l$permissionId),
       area: l$area == null
           ? null
-          : Fragment_AreaNoPhoto.fromJson((l$area as Map<String, dynamic>)),
+          : Fragment_Area.fromJson((l$area as Map<String, dynamic>)),
       service: l$service == null
           ? null
-          : Fragment_ServiceNoPhoto.fromJson(
-              (l$service as Map<String, dynamic>),
+          : Fragment_Service.fromJson((l$service as Map<String, dynamic>)),
+      serviceStudyYearData: l$serviceStudyYearData == null
+          ? null
+          : Fragment_UserAdminScopes_adminOn_serviceStudyYearData.fromJson(
+              (l$serviceStudyYearData as Map<String, dynamic>),
             ),
       $__typename: (l$$__typename as String),
     );
@@ -4317,9 +4355,12 @@ class Fragment_UserAdminScopes_adminOn {
 
   final UuidValue permissionId;
 
-  final Fragment_AreaNoPhoto? area;
+  final Fragment_Area? area;
 
-  final Fragment_ServiceNoPhoto? service;
+  final Fragment_Service? service;
+
+  final Fragment_UserAdminScopes_adminOn_serviceStudyYearData?
+  serviceStudyYearData;
 
   final String $__typename;
 
@@ -4331,6 +4372,8 @@ class Fragment_UserAdminScopes_adminOn {
     _resultData['area'] = l$area?.toJson();
     final l$service = service;
     _resultData['service'] = l$service?.toJson();
+    final l$serviceStudyYearData = serviceStudyYearData;
+    _resultData['serviceStudyYearData'] = l$serviceStudyYearData?.toJson();
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -4341,8 +4384,15 @@ class Fragment_UserAdminScopes_adminOn {
     final l$permissionId = permissionId;
     final l$area = area;
     final l$service = service;
+    final l$serviceStudyYearData = serviceStudyYearData;
     final l$$__typename = $__typename;
-    return Object.hashAll([l$permissionId, l$area, l$service, l$$__typename]);
+    return Object.hashAll([
+      l$permissionId,
+      l$area,
+      l$service,
+      l$serviceStudyYearData,
+      l$$__typename,
+    ]);
   }
 
   @override
@@ -4367,6 +4417,11 @@ class Fragment_UserAdminScopes_adminOn {
     final l$service = service;
     final lOther$service = other.service;
     if (l$service != lOther$service) {
+      return false;
+    }
+    final l$serviceStudyYearData = serviceStudyYearData;
+    final lOther$serviceStudyYearData = other.serviceStudyYearData;
+    if (l$serviceStudyYearData != lOther$serviceStudyYearData) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -4395,12 +4450,15 @@ abstract class CopyWith_Fragment_UserAdminScopes_adminOn<TRes> {
 
   TRes call({
     UuidValue? permissionId,
-    Fragment_AreaNoPhoto? area,
-    Fragment_ServiceNoPhoto? service,
+    Fragment_Area? area,
+    Fragment_Service? service,
+    Fragment_UserAdminScopes_adminOn_serviceStudyYearData? serviceStudyYearData,
     String? $__typename,
   });
-  CopyWith_Fragment_AreaNoPhoto<TRes> get area;
-  CopyWith_Fragment_ServiceNoPhoto<TRes> get service;
+  CopyWith_Fragment_Area<TRes> get area;
+  CopyWith_Fragment_Service<TRes> get service;
+  CopyWith_Fragment_UserAdminScopes_adminOn_serviceStudyYearData<TRes>
+  get serviceStudyYearData;
 }
 
 class _CopyWithImpl_Fragment_UserAdminScopes_adminOn<TRes>
@@ -4417,38 +4475,51 @@ class _CopyWithImpl_Fragment_UserAdminScopes_adminOn<TRes>
     Object? permissionId = _undefined,
     Object? area = _undefined,
     Object? service = _undefined,
+    Object? serviceStudyYearData = _undefined,
     Object? $__typename = _undefined,
   }) => _then(
     Fragment_UserAdminScopes_adminOn(
       permissionId: permissionId == _undefined || permissionId == null
           ? _instance.permissionId
           : (permissionId as UuidValue),
-      area: area == _undefined
-          ? _instance.area
-          : (area as Fragment_AreaNoPhoto?),
+      area: area == _undefined ? _instance.area : (area as Fragment_Area?),
       service: service == _undefined
           ? _instance.service
-          : (service as Fragment_ServiceNoPhoto?),
+          : (service as Fragment_Service?),
+      serviceStudyYearData: serviceStudyYearData == _undefined
+          ? _instance.serviceStudyYearData
+          : (serviceStudyYearData
+                as Fragment_UserAdminScopes_adminOn_serviceStudyYearData?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
     ),
   );
 
-  CopyWith_Fragment_AreaNoPhoto<TRes> get area {
+  CopyWith_Fragment_Area<TRes> get area {
     final local$area = _instance.area;
     return local$area == null
-        ? CopyWith_Fragment_AreaNoPhoto.stub(_then(_instance))
-        : CopyWith_Fragment_AreaNoPhoto(local$area, (e) => call(area: e));
+        ? CopyWith_Fragment_Area.stub(_then(_instance))
+        : CopyWith_Fragment_Area(local$area, (e) => call(area: e));
   }
 
-  CopyWith_Fragment_ServiceNoPhoto<TRes> get service {
+  CopyWith_Fragment_Service<TRes> get service {
     final local$service = _instance.service;
     return local$service == null
-        ? CopyWith_Fragment_ServiceNoPhoto.stub(_then(_instance))
-        : CopyWith_Fragment_ServiceNoPhoto(
-            local$service,
-            (e) => call(service: e),
+        ? CopyWith_Fragment_Service.stub(_then(_instance))
+        : CopyWith_Fragment_Service(local$service, (e) => call(service: e));
+  }
+
+  CopyWith_Fragment_UserAdminScopes_adminOn_serviceStudyYearData<TRes>
+  get serviceStudyYearData {
+    final local$serviceStudyYearData = _instance.serviceStudyYearData;
+    return local$serviceStudyYearData == null
+        ? CopyWith_Fragment_UserAdminScopes_adminOn_serviceStudyYearData.stub(
+            _then(_instance),
+          )
+        : CopyWith_Fragment_UserAdminScopes_adminOn_serviceStudyYearData(
+            local$serviceStudyYearData,
+            (e) => call(serviceStudyYearData: e),
           );
   }
 }
@@ -4461,16 +4532,168 @@ class _CopyWithStubImpl_Fragment_UserAdminScopes_adminOn<TRes>
 
   call({
     UuidValue? permissionId,
-    Fragment_AreaNoPhoto? area,
-    Fragment_ServiceNoPhoto? service,
+    Fragment_Area? area,
+    Fragment_Service? service,
+    Fragment_UserAdminScopes_adminOn_serviceStudyYearData? serviceStudyYearData,
     String? $__typename,
   }) => _res;
 
-  CopyWith_Fragment_AreaNoPhoto<TRes> get area =>
-      CopyWith_Fragment_AreaNoPhoto.stub(_res);
+  CopyWith_Fragment_Area<TRes> get area => CopyWith_Fragment_Area.stub(_res);
 
-  CopyWith_Fragment_ServiceNoPhoto<TRes> get service =>
-      CopyWith_Fragment_ServiceNoPhoto.stub(_res);
+  CopyWith_Fragment_Service<TRes> get service =>
+      CopyWith_Fragment_Service.stub(_res);
+
+  CopyWith_Fragment_UserAdminScopes_adminOn_serviceStudyYearData<TRes>
+  get serviceStudyYearData =>
+      CopyWith_Fragment_UserAdminScopes_adminOn_serviceStudyYearData.stub(_res);
+}
+
+class Fragment_UserAdminScopes_adminOn_serviceStudyYearData {
+  Fragment_UserAdminScopes_adminOn_serviceStudyYearData({
+    required this.name,
+    required this.order,
+    this.$__typename = 'StudyYears',
+  });
+
+  factory Fragment_UserAdminScopes_adminOn_serviceStudyYearData.fromJson(
+    Map<String, dynamic> json,
+  ) {
+    final l$name = json['name'];
+    final l$order = json['order'];
+    final l$$__typename = json['__typename'];
+    return Fragment_UserAdminScopes_adminOn_serviceStudyYearData(
+      name: (l$name as String),
+      order: (l$order as int),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final String name;
+
+  final int order;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$name = name;
+    _resultData['name'] = l$name;
+    final l$order = order;
+    _resultData['order'] = l$order;
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$name = name;
+    final l$order = order;
+    final l$$__typename = $__typename;
+    return Object.hashAll([l$name, l$order, l$$__typename]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Fragment_UserAdminScopes_adminOn_serviceStudyYearData ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$order = order;
+    final lOther$order = other.order;
+    if (l$order != lOther$order) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Fragment_UserAdminScopes_adminOn_serviceStudyYearData
+    on Fragment_UserAdminScopes_adminOn_serviceStudyYearData {
+  CopyWith_Fragment_UserAdminScopes_adminOn_serviceStudyYearData<
+    Fragment_UserAdminScopes_adminOn_serviceStudyYearData
+  >
+  get copyWith =>
+      CopyWith_Fragment_UserAdminScopes_adminOn_serviceStudyYearData(
+        this,
+        (i) => i,
+      );
+}
+
+abstract class CopyWith_Fragment_UserAdminScopes_adminOn_serviceStudyYearData<
+  TRes
+> {
+  factory CopyWith_Fragment_UserAdminScopes_adminOn_serviceStudyYearData(
+    Fragment_UserAdminScopes_adminOn_serviceStudyYearData instance,
+    TRes Function(Fragment_UserAdminScopes_adminOn_serviceStudyYearData) then,
+  ) = _CopyWithImpl_Fragment_UserAdminScopes_adminOn_serviceStudyYearData;
+
+  factory CopyWith_Fragment_UserAdminScopes_adminOn_serviceStudyYearData.stub(
+    TRes res,
+  ) = _CopyWithStubImpl_Fragment_UserAdminScopes_adminOn_serviceStudyYearData;
+
+  TRes call({String? name, int? order, String? $__typename});
+}
+
+class _CopyWithImpl_Fragment_UserAdminScopes_adminOn_serviceStudyYearData<TRes>
+    implements
+        CopyWith_Fragment_UserAdminScopes_adminOn_serviceStudyYearData<TRes> {
+  _CopyWithImpl_Fragment_UserAdminScopes_adminOn_serviceStudyYearData(
+    this._instance,
+    this._then,
+  );
+
+  final Fragment_UserAdminScopes_adminOn_serviceStudyYearData _instance;
+
+  final TRes Function(Fragment_UserAdminScopes_adminOn_serviceStudyYearData)
+  _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? name = _undefined,
+    Object? order = _undefined,
+    Object? $__typename = _undefined,
+  }) => _then(
+    Fragment_UserAdminScopes_adminOn_serviceStudyYearData(
+      name: name == _undefined || name == null
+          ? _instance.name
+          : (name as String),
+      order: order == _undefined || order == null
+          ? _instance.order
+          : (order as int),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
+}
+
+class _CopyWithStubImpl_Fragment_UserAdminScopes_adminOn_serviceStudyYearData<
+  TRes
+>
+    implements
+        CopyWith_Fragment_UserAdminScopes_adminOn_serviceStudyYearData<TRes> {
+  _CopyWithStubImpl_Fragment_UserAdminScopes_adminOn_serviceStudyYearData(
+    this._res,
+  );
+
+  TRes _res;
+
+  call({String? name, int? order, String? $__typename}) => _res;
 }
 
 class Fragment_UserAdminOn {
