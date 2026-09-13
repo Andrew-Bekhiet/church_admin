@@ -19,9 +19,9 @@ class ManageUsersCountBadge extends StatelessWidget {
         : (colors.secondaryContainer, colors.onSecondaryContainer);
 
     return DecoratedBox(
-      decoration: BoxDecoration(
+      decoration: ShapeDecoration(
         color: background,
-        borderRadius: const BorderRadius.all(Radius.circular(999)),
+        shape: const StadiumBorder(),
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
