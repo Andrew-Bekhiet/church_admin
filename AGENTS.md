@@ -14,6 +14,8 @@ Conventions for anyone (human or agent) writing code here. Rules are stated as r
 
 Organise files by feature or domain, not by type. All backend access goes through the database service module (`client/lib/src/core/services/database/`) with `graphql_codegen`-generated operations — features never issue raw GraphQL themselves.
 
+To stream a whole collection rather than the default page size, raise the limit instead of draining pages: `dao.streamingProxy.streamAll(streamAllConfig: dao.baseStreamAllConfig, overrideTotalLimit: _pageSize, …)` with `static const int _pageSize` on the caller.
+
 ## Working agreements
 
 - **Conventional commits.** `feat(scope):`, `fix(scope):`, `refactor(scope):` etc.
@@ -54,11 +56,14 @@ Generated code is exempt. `analyzer: exclude` covers `**.g.dart`, `**.freezed.da
 
 ### Idioms
 
-- **Pattern matching over conditionals.** `switch` on enums and sealed classes for compile-time exhaustiveness; `if (x case final y?)` for non-null matching.
-- **`package:collection`** (`maxBy`, `groupListsBy`, …) instead of hand-rolled folds.
+- **Pattern matching over conditionals.** `switch` on enums and sealed classes for compile-time exhaustiveness; `if (x case final y?)` for non-null matching. Use the object-pattern shorthand `Foo(:final bar?)`, not `Foo(bar: final bar?)`.
+- **`package:collection`** (`maxBy`, `groupListsBy`, `EqualitySet.from(EqualityBy(...))` for de-duplication, `.map(...).sum`, …) instead of hand-rolled folds and `{key: value}` map tricks.
 - **Domain models are classes, not record typedefs.** Behaviour (display names, formatting) belongs on the class.
+- **A helper with one caller is inlined at that caller** — as an expression, or a local closure when it needs a name (`int nullsFirst(int? a, int? b) => …` inside the method that sorts). Do not add a private static method for it.
 - **`Row.spacing` / `Column.spacing`** instead of `SizedBox` gaps; `MainAxisAlignment.space*` instead of `Expanded` where it fits; `Padding` instead of `SizedBox` in linear layouts.
-- **Blank line before `return`** unless it is the block's only statement (`newline_before_return`). Return early rather than nesting in `else`.
+- **Shape APIs over numeric approximations.** `ShapeDecoration(shape: StadiumBorder())`, not `BorderRadius.circular(999)`; `EdgeInsetsDirectional.only(start:, end:)`, not `fromSTEB`; a bare `const Divider()` over one with hand-set colour and height — the theme owns those.
+- **Bind an indexed element to a local** (`final user = users[index];`) before using it more than once.
+- **Blank line before `return`** unless it is the block's only statement (`newline_before_return`). Return early rather than nesting in `else`; in loops, `continue` early instead of wrapping the rest of the body in a condition.
 - **`dispose()` returns `void`.** `Future<void> dispose() async` compiles and the analyzer accepts it, because any type is assignable to `void` in an override. It is still wrong: awaiting before `super.dispose()` defers the super call past the frame in which the framework treats the state as disposed. Close sinks with `unawaited(x.close())` and keep `dispose` synchronous.
 - **`close_sinks` does not catch a missing `dispose()`,** only an incomplete one. A `BehaviorSubject` field on a `State` with no `dispose` at all is invisible to it, so check by hand.
 - **Handle errors thoroughly** with typed Dart exceptions, and carry user-facing messages as error codes so they can be localised later.
