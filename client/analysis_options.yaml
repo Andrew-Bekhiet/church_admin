@@ -48,9 +48,6 @@ analyzer:
     - "**.gql.dart"
     - "**.graphql.dart"
     - "**/__generated__/**"
-    - android/**
-    - ios/**
-    - web/**
 linter:
   rules:
     # Disabled
