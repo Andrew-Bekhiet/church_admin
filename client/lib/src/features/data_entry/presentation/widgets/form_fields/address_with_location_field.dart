@@ -103,15 +103,9 @@ class _AddressWithLocationFieldState extends State<AddressWithLocationField> {
               false,
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.only(top: 8),
-            child: ValueListenableBuilder(
-              valueListenable: _previewedAddress,
-              builder: (context, address, _) => Text(
-                address.toString(),
-                style: TextTheme.of(context).bodyMedium,
-              ),
-            ),
+          ValueListenableBuilder(
+            valueListenable: _previewedAddress,
+            builder: (context, address, _) => AddressPreview(address: address),
           ),
         ],
       ),
