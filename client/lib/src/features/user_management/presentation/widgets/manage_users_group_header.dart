@@ -4,6 +4,8 @@ import 'package:material_symbols_icons/material_symbols_icons.dart';
 
 class ManageUsersGroupHeader extends StatelessWidget {
   static const _duration = Duration(milliseconds: 200);
+  static const _leadingSize = 36.0;
+  static const _leadingRadius = BorderRadius.all(Radius.circular(8));
 
   final UserAdminGroup group;
   final bool expanded;
@@ -19,44 +21,71 @@ class ManageUsersGroupHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final colors = theme.colorScheme;
+    final collapsedTurns = switch (Directionality.of(context)) {
+      TextDirection.rtl => -0.25,
+      TextDirection.ltr => 0.25,
+    };
 
     return Material(
-      color: theme.colorScheme.surfaceContainerLow,
+      color: colors.surface,
       child: InkWell(
         onTap: onTap,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        child: AnimatedContainer(
+          duration: _duration,
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+          decoration: BoxDecoration(
+            color: expanded ? colors.surfaceContainerHigh : colors.surface,
+            border: Border(
+              bottom: BorderSide(color: colors.outlineVariant, width: 0.5),
+            ),
+          ),
           child: Row(
-            spacing: 12,
+            spacing: 10,
             children: [
-              AnimatedRotation(
-                turns: expanded ? 0 : 0.25,
-                duration: _duration,
-                child: const Icon(Icons.expand_more, size: 20),
-              ),
               switch (group.scope) {
                 final IImage image => ImageObjectWidget(
                   image,
                   isDense: true,
                   circleCrop: false,
+                  size: _leadingSize,
+                  borderRadius: _leadingRadius,
                 ),
-                _ => Icon(
-                  switch (group.kind) {
-                    UserAdminGroupKind.superAdmins => Symbols.shield_person,
-                    _ => Symbols.person_off,
-                  },
-                ),
+                _ => ManageUsersGroupKindIcon(kind: group.kind),
               },
               Expanded(
-                child: Text(
-                  group.title,
-                  style: theme.textTheme.titleSmall,
-                  overflow: TextOverflow.ellipsis,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      group.title,
+                      style: theme.textTheme.titleSmall,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    if (group.kind.label case final label?)
+                      Text(
+                        label,
+                        style: theme.textTheme.labelSmall?.copyWith(
+                          color: colors.onSurfaceVariant,
+                        ),
+                      ),
+                  ],
                 ),
               ),
-              Text(
-                group.userCount.toString(),
-                style: theme.textTheme.bodySmall,
+              ManageUsersCountBadge(
+                count: group.userCount,
+                highlighted: expanded,
+              ),
+              AnimatedRotation(
+                turns: expanded ? 0 : collapsedTurns,
+                duration: _duration,
+                child: Icon(
+                  Symbols.expand_more,
+                  size: 20,
+                  color: colors.onSurfaceVariant,
+                ),
               ),
             ],
           ),

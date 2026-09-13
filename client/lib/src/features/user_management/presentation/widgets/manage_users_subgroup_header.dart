@@ -13,20 +13,27 @@ class ManageUsersSubgroupHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final colors = theme.colorScheme;
 
     return Padding(
-      padding: const EdgeInsetsDirectional.fromSTEB(48, 12, 16, 4),
+      padding: const EdgeInsetsDirectional.fromSTEB(16, 6, 16, 0),
       child: Row(
+        spacing: 8,
         children: [
-          Expanded(
-            child: Text(
-              title,
-              style: theme.textTheme.labelLarge?.copyWith(
-                color: theme.colorScheme.primary,
-              ),
+          Text(
+            title,
+            style: theme.textTheme.labelMedium?.copyWith(
+              color: colors.primary,
+              fontWeight: FontWeight.w600,
             ),
           ),
-          Text(userCount.toString(), style: theme.textTheme.labelSmall),
+          Expanded(child: Divider(color: colors.outlineVariant, height: 1)),
+          Text(
+            userCount.toString(),
+            style: theme.textTheme.labelSmall?.copyWith(
+              color: colors.onSurfaceVariant,
+            ),
+          ),
         ],
       ),
     );
