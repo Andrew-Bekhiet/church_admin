@@ -73,9 +73,7 @@ class DataExportCubit extends Cubit<DataExportState> {
   Future<void> switchToSavedFiles() async {
     final files = await _exportOperationsStorage.listSavedFiles();
 
-    emit(
-      DataExportListSavedFiles(files: _sortFilesByLastModified(files)),
-    );
+    emit(DataExportListSavedFiles(files: _sortFilesByLastModified(files)));
   }
 
   void switchToSelectingObjects() {
@@ -140,15 +138,7 @@ class DataExportCubit extends Cubit<DataExportState> {
       filterStream: searchController.stream,
       objectsPaginatableStream: _databaseService.classes.streamAll(
         searchQuery: searchController.stream,
-        where: userAdminOnStream?.map(
-          (adminOn) => [
-            Filter(
-              ClassFields().id,
-              MultiSelectOperator.anyOf,
-              _selectExportableIds<Class>(adminOn),
-            ),
-          ],
-        ),
+        where: userAdminOnStream?.map(_exportableClassesFilters),
       ),
     );
 
@@ -178,6 +168,51 @@ class DataExportCubit extends Cubit<DataExportState> {
         .where((adminOn) => adminOn.canExportData)
         .map((adminOn) => adminOn.object.id)
         .toList();
+  }
+
+  List<Filter> _exportableClassesFilters(
+    List<UserAdminScope<ViewableWithID>> adminOn,
+  ) {
+    final exportableServiceScopes = adminOn
+        .whereType<UserAdminScope<Service>>()
+        .where((scope) => scope.canExportData)
+        .toList();
+
+    if (exportableServiceScopes.isEmpty) {
+      return [
+        Filter(ClassFields().id, MultiSelectOperator.anyOf, const <String>[]),
+      ];
+    }
+
+    return [
+      Filter(
+        const DotField(),
+        LogicalOperator.or,
+        exportableServiceScopes
+            .map(
+              (scope) => Filter(const DotField(), LogicalOperator.and, [
+                Filter(
+                  ClassFields().service.redirectTo(ServiceFields().id),
+                  PrimitiveOperator.eq,
+                  scope.object.id,
+                ),
+                if (scope.gender case final gender?)
+                  Filter(
+                    ClassFields().serviceGender,
+                    BooleanOperator.is$,
+                    gender,
+                  ),
+                if (scope.studyYear case final studyYear?)
+                  Filter(
+                    ClassFields().studyYear.redirectTo(StudyYearFields().order),
+                    PrimitiveOperator.eq,
+                    studyYear.order,
+                  ),
+              ]),
+            )
+            .toList(),
+      ),
+    ];
   }
 
   Future<void> startExport() async {
