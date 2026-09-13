@@ -23,5 +23,6 @@ subscription watchAllUsers(
 ) {
   authUsersData(where: { _and: $where }, orderBy: $orderBy, limit: $limit) {
     ...UserOverview
+    ...UserAdminScopes
   }
 }

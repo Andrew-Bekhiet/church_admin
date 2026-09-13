@@ -46,6 +46,22 @@ fragment UserPermissions on AuthUsersData {
   }
 }
 
+fragment UserAdminScopes on AuthUsersData {
+  adminOn {
+    permissionId
+    area {
+      ...Area
+    }
+    service {
+      ...Service
+    }
+    serviceStudyYearData {
+      name
+      order
+    }
+  }
+}
+
 fragment UserAdminOn on AuthUsersData {
   adminOn(
     orderBy: [

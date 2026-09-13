@@ -27,14 +27,7 @@ class UsersDAO extends DAOBase<User> with StreamableDAO<User> {
       request,
       overrideOrderBy: [
         ...?orderBy,
-        OrderBy(
-          field: UserFields().permissionsAggregate.redirectTo(
-            AggregateDataFields().count,
-          ),
-          value: OrderByValue.desc,
-        ),
         OrderBy(field: UserFields().name),
-        OrderBy(field: UserFields().email),
       ],
     );
   }

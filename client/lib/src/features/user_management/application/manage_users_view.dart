@@ -1,0 +1,1 @@
+enum ManageUsersView { grouped, flat }
