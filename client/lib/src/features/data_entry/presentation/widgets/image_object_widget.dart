@@ -113,6 +113,7 @@ class ImageObjectWidget extends StatelessWidget {
                   ? const CircleBorder()
                   : RoundedRectangleBorder(borderRadius: borderRadius!),
               child: FutureBuilder<String>(
+                key: ValueKey(cacheKey),
                 initialData: cachedImageUrl,
                 future: photoUrlCacheService.getImageUrl(imageObject.imageInfo),
                 builder: (context, downloadUrlData) {

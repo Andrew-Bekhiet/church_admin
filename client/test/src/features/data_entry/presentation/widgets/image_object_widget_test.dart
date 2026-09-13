@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:typed_data';
 
@@ -121,6 +122,65 @@ void main() {
         staleImageFinder,
         findsNothing,
       );
+    },
+  );
+
+  testWidgets(
+    'Image Object Widget => reused for an uncached object, '
+    'never requests the previous object url under the new cache key',
+    (tester) async {
+      final personA = Person(
+        id: 'a',
+        name: 'a',
+        photoUpdatedAt: DateTime(2024),
+      );
+      final personB = Person(
+        id: 'b',
+        name: 'b',
+        photoUpdatedAt: DateTime(2024),
+      );
+
+      final urlCompleters = <String, Completer<String>>{};
+      final imageUrlCacheService =
+          globalProviderContainer.read(imageUrlCacheServiceProvider)
+              as MockImageUrlCacheService;
+      when(imageUrlCacheService.getCachedImageUrl(any)).thenReturn(null);
+      when(imageUrlCacheService.getImageUrl(any)).thenAnswer(
+        (i) => urlCompleters
+            .putIfAbsent(
+              (i.positionalArguments.first as ObjectImageInfo).cacheKey,
+              Completer.new,
+            )
+            .future,
+      );
+
+      await tester.pumpWidgetBuilder(
+        Scaffold(body: ImageObjectWidget(personA)),
+        wrapper: materialAppWrapper(),
+      );
+      urlCompleters[personA.imageInfo.cacheKey]!.complete('urlA');
+      await tester.pump();
+
+      await tester.pumpWidgetBuilder(
+        Scaffold(body: ImageObjectWidget(personB)),
+        wrapper: materialAppWrapper(),
+      );
+      await tester.pump();
+
+      final cacheManager =
+          globalProviderContainer.read(baseCacheManagerProvider)
+              as MockBaseCacheManager;
+      verifyNever(
+        cacheManager.getFileStream(
+          'urlA',
+          key: personB.imageInfo.cacheKey,
+          headers: anyNamed('headers'),
+          withProgress: anyNamed('withProgress'),
+        ),
+      );
+
+      urlCompleters[personB.imageInfo.cacheKey]!.complete('urlB');
+      await tester.pump();
     },
   );
 
