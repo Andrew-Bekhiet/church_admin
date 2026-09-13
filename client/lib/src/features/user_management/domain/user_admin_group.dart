@@ -22,7 +22,7 @@ class UserAdminGroup with Equatable {
   }
 
   static ViewableWithID? _scopeOf(AdminOnData adminOn) =>
-      adminOn.area ?? adminOn.service ?? adminOn.group;
+      adminOn.area ?? adminOn.service;
 
   static int _byScopeTypeThenName(UserAdminGroup a, UserAdminGroup b) {
     final byType = a._scopeRank.compareTo(b._scopeRank);
@@ -39,8 +39,7 @@ class UserAdminGroup with Equatable {
   int get _scopeRank => switch (scope) {
     Area() => 0,
     Service() => 1,
-    Group() => 2,
-    _ => 3,
+    _ => 2,
   };
 
   @override

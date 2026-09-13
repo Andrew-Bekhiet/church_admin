@@ -14,6 +14,7 @@ void main() {
 
     const area = Area(id: 'a1', name: 'منطقة الزيتون');
     const service = Service(id: 's1', name: 'خدمة ابتدائي');
+    const group = Group(id: 'g1', name: 'مجموعة الشباب');
 
     User user(
       String name, {
@@ -27,6 +28,7 @@ void main() {
             permissionId: '${name}_${scope.id}',
             area: scope is Area ? scope : null,
             service: scope is Service ? scope : null,
+            group: scope is Group ? scope : null,
           ),
       ],
     );
@@ -97,6 +99,20 @@ void main() {
           'خدمة ابتدائي: مريم, مينا',
         ]);
       },
+    );
+
+    blocTest<ManageUsersCubit, ManageUsersState>(
+      'users who only administer a group are listed as having no scope',
+      setUp: () => stubUsers([
+        user('مينا', adminOn: [group]),
+        user('مريم', adminOn: [service, group]),
+      ]),
+      build: () => ManageUsersCubit(usersDao: dao),
+      wait: Duration.zero,
+      verify: (cubit) => expect(groupsOf(cubit.state), [
+        'خدمة ابتدائي: مريم',
+        'بدون مسؤولية: مينا',
+      ]),
     );
 
     blocTest<ManageUsersCubit, ManageUsersState>(

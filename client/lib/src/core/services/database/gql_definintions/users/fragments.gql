@@ -55,9 +55,6 @@ fragment UserAdminScopes on AuthUsersData {
     service {
       ...ServiceNoPhoto
     }
-    group {
-      ...GroupNoPhoto
-    }
   }
 }
 

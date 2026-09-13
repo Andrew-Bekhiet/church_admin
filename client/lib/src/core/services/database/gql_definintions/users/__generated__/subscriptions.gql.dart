@@ -4013,7 +4013,6 @@ const documentNodeSubscriptionwatchAllUsers = DocumentNode(
     fragmentDefinitionUserAdminScopes,
     fragmentDefinitionAreaNoPhoto,
     fragmentDefinitionServiceNoPhoto,
-    fragmentDefinitionGroupNoPhoto,
   ],
 );
 
@@ -4873,7 +4872,6 @@ class Subscription_watchAllUsers_authUsersData_adminOn
     required this.permissionId,
     this.area,
     this.service,
-    this.group,
     this.$__typename = 'AuthUsersAdminOn',
   });
 
@@ -4883,7 +4881,6 @@ class Subscription_watchAllUsers_authUsersData_adminOn
     final l$permissionId = json['permissionId'];
     final l$area = json['area'];
     final l$service = json['service'];
-    final l$group = json['group'];
     final l$$__typename = json['__typename'];
     return Subscription_watchAllUsers_authUsersData_adminOn(
       permissionId: stringToUuid(l$permissionId),
@@ -4895,9 +4892,6 @@ class Subscription_watchAllUsers_authUsersData_adminOn
           : Fragment_ServiceNoPhoto.fromJson(
               (l$service as Map<String, dynamic>),
             ),
-      group: l$group == null
-          ? null
-          : Fragment_GroupNoPhoto.fromJson((l$group as Map<String, dynamic>)),
       $__typename: (l$$__typename as String),
     );
   }
@@ -4907,8 +4901,6 @@ class Subscription_watchAllUsers_authUsersData_adminOn
   final Fragment_AreaNoPhoto? area;
 
   final Fragment_ServiceNoPhoto? service;
-
-  final Fragment_GroupNoPhoto? group;
 
   final String $__typename;
 
@@ -4920,8 +4912,6 @@ class Subscription_watchAllUsers_authUsersData_adminOn
     _resultData['area'] = l$area?.toJson();
     final l$service = service;
     _resultData['service'] = l$service?.toJson();
-    final l$group = group;
-    _resultData['group'] = l$group?.toJson();
     final l$$__typename = $__typename;
     _resultData['__typename'] = l$$__typename;
     return _resultData;
@@ -4932,15 +4922,8 @@ class Subscription_watchAllUsers_authUsersData_adminOn
     final l$permissionId = permissionId;
     final l$area = area;
     final l$service = service;
-    final l$group = group;
     final l$$__typename = $__typename;
-    return Object.hashAll([
-      l$permissionId,
-      l$area,
-      l$service,
-      l$group,
-      l$$__typename,
-    ]);
+    return Object.hashAll([l$permissionId, l$area, l$service, l$$__typename]);
   }
 
   @override
@@ -4965,11 +4948,6 @@ class Subscription_watchAllUsers_authUsersData_adminOn
     final l$service = service;
     final lOther$service = other.service;
     if (l$service != lOther$service) {
-      return false;
-    }
-    final l$group = group;
-    final lOther$group = other.group;
-    if (l$group != lOther$group) {
       return false;
     }
     final l$$__typename = $__typename;
@@ -5004,12 +4982,10 @@ abstract class CopyWith_Subscription_watchAllUsers_authUsersData_adminOn<TRes> {
     UuidValue? permissionId,
     Fragment_AreaNoPhoto? area,
     Fragment_ServiceNoPhoto? service,
-    Fragment_GroupNoPhoto? group,
     String? $__typename,
   });
   CopyWith_Fragment_AreaNoPhoto<TRes> get area;
   CopyWith_Fragment_ServiceNoPhoto<TRes> get service;
-  CopyWith_Fragment_GroupNoPhoto<TRes> get group;
 }
 
 class _CopyWithImpl_Subscription_watchAllUsers_authUsersData_adminOn<TRes>
@@ -5029,7 +5005,6 @@ class _CopyWithImpl_Subscription_watchAllUsers_authUsersData_adminOn<TRes>
     Object? permissionId = _undefined,
     Object? area = _undefined,
     Object? service = _undefined,
-    Object? group = _undefined,
     Object? $__typename = _undefined,
   }) => _then(
     Subscription_watchAllUsers_authUsersData_adminOn(
@@ -5042,9 +5017,6 @@ class _CopyWithImpl_Subscription_watchAllUsers_authUsersData_adminOn<TRes>
       service: service == _undefined
           ? _instance.service
           : (service as Fragment_ServiceNoPhoto?),
-      group: group == _undefined
-          ? _instance.group
-          : (group as Fragment_GroupNoPhoto?),
       $__typename: $__typename == _undefined || $__typename == null
           ? _instance.$__typename
           : ($__typename as String),
@@ -5067,13 +5039,6 @@ class _CopyWithImpl_Subscription_watchAllUsers_authUsersData_adminOn<TRes>
             (e) => call(service: e),
           );
   }
-
-  CopyWith_Fragment_GroupNoPhoto<TRes> get group {
-    final local$group = _instance.group;
-    return local$group == null
-        ? CopyWith_Fragment_GroupNoPhoto.stub(_then(_instance))
-        : CopyWith_Fragment_GroupNoPhoto(local$group, (e) => call(group: e));
-  }
 }
 
 class _CopyWithStubImpl_Subscription_watchAllUsers_authUsersData_adminOn<TRes>
@@ -5086,7 +5051,6 @@ class _CopyWithStubImpl_Subscription_watchAllUsers_authUsersData_adminOn<TRes>
     UuidValue? permissionId,
     Fragment_AreaNoPhoto? area,
     Fragment_ServiceNoPhoto? service,
-    Fragment_GroupNoPhoto? group,
     String? $__typename,
   }) => _res;
 
@@ -5095,7 +5059,4 @@ class _CopyWithStubImpl_Subscription_watchAllUsers_authUsersData_adminOn<TRes>
 
   CopyWith_Fragment_ServiceNoPhoto<TRes> get service =>
       CopyWith_Fragment_ServiceNoPhoto.stub(_res);
-
-  CopyWith_Fragment_GroupNoPhoto<TRes> get group =>
-      CopyWith_Fragment_GroupNoPhoto.stub(_res);
 }

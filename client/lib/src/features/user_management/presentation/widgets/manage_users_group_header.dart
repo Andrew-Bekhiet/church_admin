@@ -10,7 +10,6 @@ class ManageUsersGroupHeader extends StatelessWidget {
   IconData get _icon => switch (group.scope) {
     Area() => Symbols.map,
     Service() => Symbols.church,
-    Group() => Symbols.groups,
     _ => Symbols.person_off,
   };
 
