@@ -4,12 +4,10 @@ import 'package:flutter/material.dart';
 class ManageUsersFlatList extends StatelessWidget {
   final List<User> users;
   final bool isLoading;
-  final VoidCallback onLoadMore;
 
   const ManageUsersFlatList({
     required this.users,
     required this.isLoading,
-    required this.onLoadMore,
     super.key,
   });
 
@@ -22,10 +20,6 @@ class ManageUsersFlatList extends StatelessWidget {
       itemBuilder: (context, index) {
         if (index == users.length) {
           return ManageUsersListFooter(isLoading: isLoading);
-        }
-
-        if (index == users.length - 1) {
-          WidgetsBinding.instance.addPostFrameCallback((_) => onLoadMore());
         }
 
         return ManageUserListItem(users[index], key: ValueKey(users[index].id));

@@ -60,7 +60,6 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
               ManageUsersView.flat => ManageUsersFlatList(
                 users: state.users,
                 isLoading: state.isLoading,
-                onLoadMore: () => unawaited(_cubit.loadMore()),
               ),
             };
           },

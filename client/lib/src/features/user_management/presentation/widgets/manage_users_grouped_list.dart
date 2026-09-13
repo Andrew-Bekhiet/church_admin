@@ -1,7 +1,7 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 
-class ManageUsersGroupedList extends StatelessWidget {
+class ManageUsersGroupedList extends StatefulWidget {
   final List<UserAdminGroup> groups;
   final bool isLoading;
 
@@ -11,32 +11,37 @@ class ManageUsersGroupedList extends StatelessWidget {
     super.key,
   });
 
-  List<Object> get _rows => [
-    for (final group in groups) ...[group, ...group.users],
-  ];
+  @override
+  State<ManageUsersGroupedList> createState() => _ManageUsersGroupedListState();
+}
+
+class _ManageUsersGroupedListState extends State<ManageUsersGroupedList> {
+  final Set<String> _expandedKeys = {};
 
   @override
   Widget build(BuildContext context) {
-    final rows = _rows;
-
-    return ListView.builder(
-      padding: const EdgeInsets.all(2),
+    return CustomScrollView(
       keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
-      itemCount: rows.length + 1,
-      itemBuilder: (context, index) {
-        if (index == rows.length) {
-          return ManageUsersListFooter(isLoading: isLoading);
-        }
-
-        return switch (rows[index]) {
-          final UserAdminGroup group => ManageUsersGroupHeader(
-            group,
-            key: ValueKey(group.scope?.id ?? UserAdminGroup.unscopedTitle),
+      slivers: [
+        for (final group in widget.groups)
+          ManageUsersGroupSection(
+            key: ValueKey(group.key),
+            group: group,
+            expanded: _expandedKeys.contains(group.key),
+            onToggle: () => _toggle(group.key),
           ),
-          final User user => ManageUserListItem(user),
-          _ => const SizedBox.shrink(),
-        };
-      },
+        SliverToBoxAdapter(
+          child: ManageUsersListFooter(isLoading: widget.isLoading),
+        ),
+      ],
     );
+  }
+
+  void _toggle(String key) {
+    setState(() {
+      if (_expandedKeys.remove(key)) return;
+
+      _expandedKeys.add(key);
+    });
   }
 }
