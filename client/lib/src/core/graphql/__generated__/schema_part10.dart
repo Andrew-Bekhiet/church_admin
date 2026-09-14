@@ -1,6 +1,1330 @@
 // Part 10 of the schema
 part of "schema.graphql.dart";
 
+abstract class CopyWith_Input_AuthUsersPermissionsInsertInput<TRes> {
+  factory CopyWith_Input_AuthUsersPermissionsInsertInput(
+    Input_AuthUsersPermissionsInsertInput instance,
+    TRes Function(Input_AuthUsersPermissionsInsertInput) then,
+  ) = _CopyWithImpl_Input_AuthUsersPermissionsInsertInput;
+
+  factory CopyWith_Input_AuthUsersPermissionsInsertInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_AuthUsersPermissionsInsertInput;
+
+  TRes call({
+    String? permission,
+    UuidValue? uid,
+    Input_AuthUsersDataObjRelInsertInput? user,
+  });
+  CopyWith_Input_AuthUsersDataObjRelInsertInput<TRes> get user;
+}
+
+class _CopyWithImpl_Input_AuthUsersPermissionsInsertInput<TRes>
+    implements CopyWith_Input_AuthUsersPermissionsInsertInput<TRes> {
+  _CopyWithImpl_Input_AuthUsersPermissionsInsertInput(
+    this._instance,
+    this._then,
+  );
+
+  final Input_AuthUsersPermissionsInsertInput _instance;
+
+  final TRes Function(Input_AuthUsersPermissionsInsertInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? permission = _undefined,
+    Object? uid = _undefined,
+    Object? user = _undefined,
+  }) => _then(
+    Input_AuthUsersPermissionsInsertInput._({
+      ..._instance._$data,
+      if (permission != _undefined) 'permission': (permission as String?),
+      if (uid != _undefined) 'uid': (uid as UuidValue?),
+      if (user != _undefined)
+        'user': (user as Input_AuthUsersDataObjRelInsertInput?),
+    }),
+  );
+
+  CopyWith_Input_AuthUsersDataObjRelInsertInput<TRes> get user {
+    final local$user = _instance.user;
+    return local$user == null
+        ? CopyWith_Input_AuthUsersDataObjRelInsertInput.stub(_then(_instance))
+        : CopyWith_Input_AuthUsersDataObjRelInsertInput(
+            local$user,
+            (e) => call(user: e),
+          );
+  }
+}
+
+class _CopyWithStubImpl_Input_AuthUsersPermissionsInsertInput<TRes>
+    implements CopyWith_Input_AuthUsersPermissionsInsertInput<TRes> {
+  _CopyWithStubImpl_Input_AuthUsersPermissionsInsertInput(this._res);
+
+  TRes _res;
+
+  call({
+    String? permission,
+    UuidValue? uid,
+    Input_AuthUsersDataObjRelInsertInput? user,
+  }) => _res;
+
+  CopyWith_Input_AuthUsersDataObjRelInsertInput<TRes> get user =>
+      CopyWith_Input_AuthUsersDataObjRelInsertInput.stub(_res);
+}
+
+class Input_AuthUsersPermissionsMaxOrderBy {
+  factory Input_AuthUsersPermissionsMaxOrderBy({
+    Enum_OrderBy? permission,
+    Enum_OrderBy? uid,
+  }) => Input_AuthUsersPermissionsMaxOrderBy._({
+    if (permission != null) r'permission': permission,
+    if (uid != null) r'uid': uid,
+  });
+
+  Input_AuthUsersPermissionsMaxOrderBy._(this._$data);
+
+  factory Input_AuthUsersPermissionsMaxOrderBy.fromJson(
+    Map<String, dynamic> data,
+  ) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('permission')) {
+      final l$permission = data['permission'];
+      result$data['permission'] = l$permission == null
+          ? null
+          : fromJson_Enum_OrderBy((l$permission as String));
+    }
+    if (data.containsKey('uid')) {
+      final l$uid = data['uid'];
+      result$data['uid'] = l$uid == null
+          ? null
+          : fromJson_Enum_OrderBy((l$uid as String));
+    }
+    return Input_AuthUsersPermissionsMaxOrderBy._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Enum_OrderBy? get permission => (_$data['permission'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get uid => (_$data['uid'] as Enum_OrderBy?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('permission')) {
+      final l$permission = permission;
+      result$data['permission'] = l$permission == null
+          ? null
+          : toJson_Enum_OrderBy(l$permission);
+    }
+    if (_$data.containsKey('uid')) {
+      final l$uid = uid;
+      result$data['uid'] = l$uid == null ? null : toJson_Enum_OrderBy(l$uid);
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_AuthUsersPermissionsMaxOrderBy<
+    Input_AuthUsersPermissionsMaxOrderBy
+  >
+  get copyWith => CopyWith_Input_AuthUsersPermissionsMaxOrderBy(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_AuthUsersPermissionsMaxOrderBy ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$permission = permission;
+    final lOther$permission = other.permission;
+    if (_$data.containsKey('permission') !=
+        other._$data.containsKey('permission')) {
+      return false;
+    }
+    if (l$permission != lOther$permission) {
+      return false;
+    }
+    final l$uid = uid;
+    final lOther$uid = other.uid;
+    if (_$data.containsKey('uid') != other._$data.containsKey('uid')) {
+      return false;
+    }
+    if (l$uid != lOther$uid) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$permission = permission;
+    final l$uid = uid;
+    return Object.hashAll([
+      _$data.containsKey('permission') ? l$permission : const {},
+      _$data.containsKey('uid') ? l$uid : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_AuthUsersPermissionsMaxOrderBy<TRes> {
+  factory CopyWith_Input_AuthUsersPermissionsMaxOrderBy(
+    Input_AuthUsersPermissionsMaxOrderBy instance,
+    TRes Function(Input_AuthUsersPermissionsMaxOrderBy) then,
+  ) = _CopyWithImpl_Input_AuthUsersPermissionsMaxOrderBy;
+
+  factory CopyWith_Input_AuthUsersPermissionsMaxOrderBy.stub(TRes res) =
+      _CopyWithStubImpl_Input_AuthUsersPermissionsMaxOrderBy;
+
+  TRes call({Enum_OrderBy? permission, Enum_OrderBy? uid});
+}
+
+class _CopyWithImpl_Input_AuthUsersPermissionsMaxOrderBy<TRes>
+    implements CopyWith_Input_AuthUsersPermissionsMaxOrderBy<TRes> {
+  _CopyWithImpl_Input_AuthUsersPermissionsMaxOrderBy(
+    this._instance,
+    this._then,
+  );
+
+  final Input_AuthUsersPermissionsMaxOrderBy _instance;
+
+  final TRes Function(Input_AuthUsersPermissionsMaxOrderBy) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? permission = _undefined, Object? uid = _undefined}) =>
+      _then(
+        Input_AuthUsersPermissionsMaxOrderBy._({
+          ..._instance._$data,
+          if (permission != _undefined)
+            'permission': (permission as Enum_OrderBy?),
+          if (uid != _undefined) 'uid': (uid as Enum_OrderBy?),
+        }),
+      );
+}
+
+class _CopyWithStubImpl_Input_AuthUsersPermissionsMaxOrderBy<TRes>
+    implements CopyWith_Input_AuthUsersPermissionsMaxOrderBy<TRes> {
+  _CopyWithStubImpl_Input_AuthUsersPermissionsMaxOrderBy(this._res);
+
+  TRes _res;
+
+  call({Enum_OrderBy? permission, Enum_OrderBy? uid}) => _res;
+}
+
+class Input_AuthUsersPermissionsMinOrderBy {
+  factory Input_AuthUsersPermissionsMinOrderBy({
+    Enum_OrderBy? permission,
+    Enum_OrderBy? uid,
+  }) => Input_AuthUsersPermissionsMinOrderBy._({
+    if (permission != null) r'permission': permission,
+    if (uid != null) r'uid': uid,
+  });
+
+  Input_AuthUsersPermissionsMinOrderBy._(this._$data);
+
+  factory Input_AuthUsersPermissionsMinOrderBy.fromJson(
+    Map<String, dynamic> data,
+  ) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('permission')) {
+      final l$permission = data['permission'];
+      result$data['permission'] = l$permission == null
+          ? null
+          : fromJson_Enum_OrderBy((l$permission as String));
+    }
+    if (data.containsKey('uid')) {
+      final l$uid = data['uid'];
+      result$data['uid'] = l$uid == null
+          ? null
+          : fromJson_Enum_OrderBy((l$uid as String));
+    }
+    return Input_AuthUsersPermissionsMinOrderBy._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Enum_OrderBy? get permission => (_$data['permission'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get uid => (_$data['uid'] as Enum_OrderBy?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('permission')) {
+      final l$permission = permission;
+      result$data['permission'] = l$permission == null
+          ? null
+          : toJson_Enum_OrderBy(l$permission);
+    }
+    if (_$data.containsKey('uid')) {
+      final l$uid = uid;
+      result$data['uid'] = l$uid == null ? null : toJson_Enum_OrderBy(l$uid);
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_AuthUsersPermissionsMinOrderBy<
+    Input_AuthUsersPermissionsMinOrderBy
+  >
+  get copyWith => CopyWith_Input_AuthUsersPermissionsMinOrderBy(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_AuthUsersPermissionsMinOrderBy ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$permission = permission;
+    final lOther$permission = other.permission;
+    if (_$data.containsKey('permission') !=
+        other._$data.containsKey('permission')) {
+      return false;
+    }
+    if (l$permission != lOther$permission) {
+      return false;
+    }
+    final l$uid = uid;
+    final lOther$uid = other.uid;
+    if (_$data.containsKey('uid') != other._$data.containsKey('uid')) {
+      return false;
+    }
+    if (l$uid != lOther$uid) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$permission = permission;
+    final l$uid = uid;
+    return Object.hashAll([
+      _$data.containsKey('permission') ? l$permission : const {},
+      _$data.containsKey('uid') ? l$uid : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_AuthUsersPermissionsMinOrderBy<TRes> {
+  factory CopyWith_Input_AuthUsersPermissionsMinOrderBy(
+    Input_AuthUsersPermissionsMinOrderBy instance,
+    TRes Function(Input_AuthUsersPermissionsMinOrderBy) then,
+  ) = _CopyWithImpl_Input_AuthUsersPermissionsMinOrderBy;
+
+  factory CopyWith_Input_AuthUsersPermissionsMinOrderBy.stub(TRes res) =
+      _CopyWithStubImpl_Input_AuthUsersPermissionsMinOrderBy;
+
+  TRes call({Enum_OrderBy? permission, Enum_OrderBy? uid});
+}
+
+class _CopyWithImpl_Input_AuthUsersPermissionsMinOrderBy<TRes>
+    implements CopyWith_Input_AuthUsersPermissionsMinOrderBy<TRes> {
+  _CopyWithImpl_Input_AuthUsersPermissionsMinOrderBy(
+    this._instance,
+    this._then,
+  );
+
+  final Input_AuthUsersPermissionsMinOrderBy _instance;
+
+  final TRes Function(Input_AuthUsersPermissionsMinOrderBy) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? permission = _undefined, Object? uid = _undefined}) =>
+      _then(
+        Input_AuthUsersPermissionsMinOrderBy._({
+          ..._instance._$data,
+          if (permission != _undefined)
+            'permission': (permission as Enum_OrderBy?),
+          if (uid != _undefined) 'uid': (uid as Enum_OrderBy?),
+        }),
+      );
+}
+
+class _CopyWithStubImpl_Input_AuthUsersPermissionsMinOrderBy<TRes>
+    implements CopyWith_Input_AuthUsersPermissionsMinOrderBy<TRes> {
+  _CopyWithStubImpl_Input_AuthUsersPermissionsMinOrderBy(this._res);
+
+  TRes _res;
+
+  call({Enum_OrderBy? permission, Enum_OrderBy? uid}) => _res;
+}
+
+class Input_AuthUsersPermissionsOnConflict {
+  factory Input_AuthUsersPermissionsOnConflict({
+    required Enum_AuthUsersPermissionsConstraint constraint,
+    List<Enum_AuthUsersPermissionsUpdateColumn>? updateColumns,
+    Input_AuthUsersPermissionsBoolExp? where,
+  }) => Input_AuthUsersPermissionsOnConflict._({
+    r'constraint': constraint,
+    if (updateColumns != null) r'updateColumns': updateColumns,
+    if (where != null) r'where': where,
+  });
+
+  Input_AuthUsersPermissionsOnConflict._(this._$data);
+
+  factory Input_AuthUsersPermissionsOnConflict.fromJson(
+    Map<String, dynamic> data,
+  ) {
+    final result$data = <String, dynamic>{};
+    final l$constraint = data['constraint'];
+    result$data['constraint'] = fromJson_Enum_AuthUsersPermissionsConstraint(
+      (l$constraint as String),
+    );
+    if (data.containsKey('updateColumns')) {
+      final l$updateColumns = data['updateColumns'];
+      result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
+          .map(
+            (e) =>
+                fromJson_Enum_AuthUsersPermissionsUpdateColumn((e as String)),
+          )
+          .toList();
+    }
+    if (data.containsKey('where')) {
+      final l$where = data['where'];
+      result$data['where'] = l$where == null
+          ? null
+          : Input_AuthUsersPermissionsBoolExp.fromJson(
+              (l$where as Map<String, dynamic>),
+            );
+    }
+    return Input_AuthUsersPermissionsOnConflict._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Enum_AuthUsersPermissionsConstraint get constraint =>
+      (_$data['constraint'] as Enum_AuthUsersPermissionsConstraint);
+
+  List<Enum_AuthUsersPermissionsUpdateColumn>? get updateColumns =>
+      (_$data['updateColumns'] as List<Enum_AuthUsersPermissionsUpdateColumn>?);
+
+  Input_AuthUsersPermissionsBoolExp? get where =>
+      (_$data['where'] as Input_AuthUsersPermissionsBoolExp?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$constraint = constraint;
+    result$data['constraint'] = toJson_Enum_AuthUsersPermissionsConstraint(
+      l$constraint,
+    );
+    if (_$data.containsKey('updateColumns')) {
+      final l$updateColumns = updateColumns;
+      result$data['updateColumns'] =
+          (l$updateColumns as List<Enum_AuthUsersPermissionsUpdateColumn>)
+              .map((e) => toJson_Enum_AuthUsersPermissionsUpdateColumn(e))
+              .toList();
+    }
+    if (_$data.containsKey('where')) {
+      final l$where = where;
+      result$data['where'] = l$where?.toJson();
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_AuthUsersPermissionsOnConflict<
+    Input_AuthUsersPermissionsOnConflict
+  >
+  get copyWith => CopyWith_Input_AuthUsersPermissionsOnConflict(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_AuthUsersPermissionsOnConflict ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$constraint = constraint;
+    final lOther$constraint = other.constraint;
+    if (l$constraint != lOther$constraint) {
+      return false;
+    }
+    final l$updateColumns = updateColumns;
+    final lOther$updateColumns = other.updateColumns;
+    if (_$data.containsKey('updateColumns') !=
+        other._$data.containsKey('updateColumns')) {
+      return false;
+    }
+    if (l$updateColumns != null && lOther$updateColumns != null) {
+      if (l$updateColumns.length != lOther$updateColumns.length) {
+        return false;
+      }
+      for (int i = 0; i < l$updateColumns.length; i++) {
+        final l$updateColumns$entry = l$updateColumns[i];
+        final lOther$updateColumns$entry = lOther$updateColumns[i];
+        if (l$updateColumns$entry != lOther$updateColumns$entry) {
+          return false;
+        }
+      }
+    } else if (l$updateColumns != lOther$updateColumns) {
+      return false;
+    }
+    final l$where = where;
+    final lOther$where = other.where;
+    if (_$data.containsKey('where') != other._$data.containsKey('where')) {
+      return false;
+    }
+    if (l$where != lOther$where) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$constraint = constraint;
+    final l$updateColumns = updateColumns;
+    final l$where = where;
+    return Object.hashAll([
+      l$constraint,
+      _$data.containsKey('updateColumns')
+          ? l$updateColumns == null
+                ? null
+                : Object.hashAll(l$updateColumns.map((v) => v))
+          : const {},
+      _$data.containsKey('where') ? l$where : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_AuthUsersPermissionsOnConflict<TRes> {
+  factory CopyWith_Input_AuthUsersPermissionsOnConflict(
+    Input_AuthUsersPermissionsOnConflict instance,
+    TRes Function(Input_AuthUsersPermissionsOnConflict) then,
+  ) = _CopyWithImpl_Input_AuthUsersPermissionsOnConflict;
+
+  factory CopyWith_Input_AuthUsersPermissionsOnConflict.stub(TRes res) =
+      _CopyWithStubImpl_Input_AuthUsersPermissionsOnConflict;
+
+  TRes call({
+    Enum_AuthUsersPermissionsConstraint? constraint,
+    List<Enum_AuthUsersPermissionsUpdateColumn>? updateColumns,
+    Input_AuthUsersPermissionsBoolExp? where,
+  });
+  CopyWith_Input_AuthUsersPermissionsBoolExp<TRes> get where;
+}
+
+class _CopyWithImpl_Input_AuthUsersPermissionsOnConflict<TRes>
+    implements CopyWith_Input_AuthUsersPermissionsOnConflict<TRes> {
+  _CopyWithImpl_Input_AuthUsersPermissionsOnConflict(
+    this._instance,
+    this._then,
+  );
+
+  final Input_AuthUsersPermissionsOnConflict _instance;
+
+  final TRes Function(Input_AuthUsersPermissionsOnConflict) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? constraint = _undefined,
+    Object? updateColumns = _undefined,
+    Object? where = _undefined,
+  }) => _then(
+    Input_AuthUsersPermissionsOnConflict._({
+      ..._instance._$data,
+      if (constraint != _undefined && constraint != null)
+        'constraint': (constraint as Enum_AuthUsersPermissionsConstraint),
+      if (updateColumns != _undefined && updateColumns != null)
+        'updateColumns':
+            (updateColumns as List<Enum_AuthUsersPermissionsUpdateColumn>),
+      if (where != _undefined)
+        'where': (where as Input_AuthUsersPermissionsBoolExp?),
+    }),
+  );
+
+  CopyWith_Input_AuthUsersPermissionsBoolExp<TRes> get where {
+    final local$where = _instance.where;
+    return local$where == null
+        ? CopyWith_Input_AuthUsersPermissionsBoolExp.stub(_then(_instance))
+        : CopyWith_Input_AuthUsersPermissionsBoolExp(
+            local$where,
+            (e) => call(where: e),
+          );
+  }
+}
+
+class _CopyWithStubImpl_Input_AuthUsersPermissionsOnConflict<TRes>
+    implements CopyWith_Input_AuthUsersPermissionsOnConflict<TRes> {
+  _CopyWithStubImpl_Input_AuthUsersPermissionsOnConflict(this._res);
+
+  TRes _res;
+
+  call({
+    Enum_AuthUsersPermissionsConstraint? constraint,
+    List<Enum_AuthUsersPermissionsUpdateColumn>? updateColumns,
+    Input_AuthUsersPermissionsBoolExp? where,
+  }) => _res;
+
+  CopyWith_Input_AuthUsersPermissionsBoolExp<TRes> get where =>
+      CopyWith_Input_AuthUsersPermissionsBoolExp.stub(_res);
+}
+
+class Input_AuthUsersPermissionsOrderBy {
+  factory Input_AuthUsersPermissionsOrderBy({
+    Enum_OrderBy? permission,
+    Enum_OrderBy? uid,
+    Input_AuthUsersDataOrderBy? user,
+  }) => Input_AuthUsersPermissionsOrderBy._({
+    if (permission != null) r'permission': permission,
+    if (uid != null) r'uid': uid,
+    if (user != null) r'user': user,
+  });
+
+  Input_AuthUsersPermissionsOrderBy._(this._$data);
+
+  factory Input_AuthUsersPermissionsOrderBy.fromJson(
+    Map<String, dynamic> data,
+  ) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('permission')) {
+      final l$permission = data['permission'];
+      result$data['permission'] = l$permission == null
+          ? null
+          : fromJson_Enum_OrderBy((l$permission as String));
+    }
+    if (data.containsKey('uid')) {
+      final l$uid = data['uid'];
+      result$data['uid'] = l$uid == null
+          ? null
+          : fromJson_Enum_OrderBy((l$uid as String));
+    }
+    if (data.containsKey('user')) {
+      final l$user = data['user'];
+      result$data['user'] = l$user == null
+          ? null
+          : Input_AuthUsersDataOrderBy.fromJson(
+              (l$user as Map<String, dynamic>),
+            );
+    }
+    return Input_AuthUsersPermissionsOrderBy._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Enum_OrderBy? get permission => (_$data['permission'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get uid => (_$data['uid'] as Enum_OrderBy?);
+
+  Input_AuthUsersDataOrderBy? get user =>
+      (_$data['user'] as Input_AuthUsersDataOrderBy?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('permission')) {
+      final l$permission = permission;
+      result$data['permission'] = l$permission == null
+          ? null
+          : toJson_Enum_OrderBy(l$permission);
+    }
+    if (_$data.containsKey('uid')) {
+      final l$uid = uid;
+      result$data['uid'] = l$uid == null ? null : toJson_Enum_OrderBy(l$uid);
+    }
+    if (_$data.containsKey('user')) {
+      final l$user = user;
+      result$data['user'] = l$user?.toJson();
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_AuthUsersPermissionsOrderBy<Input_AuthUsersPermissionsOrderBy>
+  get copyWith => CopyWith_Input_AuthUsersPermissionsOrderBy(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_AuthUsersPermissionsOrderBy ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$permission = permission;
+    final lOther$permission = other.permission;
+    if (_$data.containsKey('permission') !=
+        other._$data.containsKey('permission')) {
+      return false;
+    }
+    if (l$permission != lOther$permission) {
+      return false;
+    }
+    final l$uid = uid;
+    final lOther$uid = other.uid;
+    if (_$data.containsKey('uid') != other._$data.containsKey('uid')) {
+      return false;
+    }
+    if (l$uid != lOther$uid) {
+      return false;
+    }
+    final l$user = user;
+    final lOther$user = other.user;
+    if (_$data.containsKey('user') != other._$data.containsKey('user')) {
+      return false;
+    }
+    if (l$user != lOther$user) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$permission = permission;
+    final l$uid = uid;
+    final l$user = user;
+    return Object.hashAll([
+      _$data.containsKey('permission') ? l$permission : const {},
+      _$data.containsKey('uid') ? l$uid : const {},
+      _$data.containsKey('user') ? l$user : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_AuthUsersPermissionsOrderBy<TRes> {
+  factory CopyWith_Input_AuthUsersPermissionsOrderBy(
+    Input_AuthUsersPermissionsOrderBy instance,
+    TRes Function(Input_AuthUsersPermissionsOrderBy) then,
+  ) = _CopyWithImpl_Input_AuthUsersPermissionsOrderBy;
+
+  factory CopyWith_Input_AuthUsersPermissionsOrderBy.stub(TRes res) =
+      _CopyWithStubImpl_Input_AuthUsersPermissionsOrderBy;
+
+  TRes call({
+    Enum_OrderBy? permission,
+    Enum_OrderBy? uid,
+    Input_AuthUsersDataOrderBy? user,
+  });
+  CopyWith_Input_AuthUsersDataOrderBy<TRes> get user;
+}
+
+class _CopyWithImpl_Input_AuthUsersPermissionsOrderBy<TRes>
+    implements CopyWith_Input_AuthUsersPermissionsOrderBy<TRes> {
+  _CopyWithImpl_Input_AuthUsersPermissionsOrderBy(this._instance, this._then);
+
+  final Input_AuthUsersPermissionsOrderBy _instance;
+
+  final TRes Function(Input_AuthUsersPermissionsOrderBy) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? permission = _undefined,
+    Object? uid = _undefined,
+    Object? user = _undefined,
+  }) => _then(
+    Input_AuthUsersPermissionsOrderBy._({
+      ..._instance._$data,
+      if (permission != _undefined) 'permission': (permission as Enum_OrderBy?),
+      if (uid != _undefined) 'uid': (uid as Enum_OrderBy?),
+      if (user != _undefined) 'user': (user as Input_AuthUsersDataOrderBy?),
+    }),
+  );
+
+  CopyWith_Input_AuthUsersDataOrderBy<TRes> get user {
+    final local$user = _instance.user;
+    return local$user == null
+        ? CopyWith_Input_AuthUsersDataOrderBy.stub(_then(_instance))
+        : CopyWith_Input_AuthUsersDataOrderBy(local$user, (e) => call(user: e));
+  }
+}
+
+class _CopyWithStubImpl_Input_AuthUsersPermissionsOrderBy<TRes>
+    implements CopyWith_Input_AuthUsersPermissionsOrderBy<TRes> {
+  _CopyWithStubImpl_Input_AuthUsersPermissionsOrderBy(this._res);
+
+  TRes _res;
+
+  call({
+    Enum_OrderBy? permission,
+    Enum_OrderBy? uid,
+    Input_AuthUsersDataOrderBy? user,
+  }) => _res;
+
+  CopyWith_Input_AuthUsersDataOrderBy<TRes> get user =>
+      CopyWith_Input_AuthUsersDataOrderBy.stub(_res);
+}
+
+class Input_AuthUsersPermissionsStreamCursorInput {
+  factory Input_AuthUsersPermissionsStreamCursorInput({
+    required Input_AuthUsersPermissionsStreamCursorValueInput initialValue,
+    Enum_CursorOrdering? ordering,
+  }) => Input_AuthUsersPermissionsStreamCursorInput._({
+    r'initialValue': initialValue,
+    if (ordering != null) r'ordering': ordering,
+  });
+
+  Input_AuthUsersPermissionsStreamCursorInput._(this._$data);
+
+  factory Input_AuthUsersPermissionsStreamCursorInput.fromJson(
+    Map<String, dynamic> data,
+  ) {
+    final result$data = <String, dynamic>{};
+    final l$initialValue = data['initialValue'];
+    result$data['initialValue'] =
+        Input_AuthUsersPermissionsStreamCursorValueInput.fromJson(
+          (l$initialValue as Map<String, dynamic>),
+        );
+    if (data.containsKey('ordering')) {
+      final l$ordering = data['ordering'];
+      result$data['ordering'] = l$ordering == null
+          ? null
+          : fromJson_Enum_CursorOrdering((l$ordering as String));
+    }
+    return Input_AuthUsersPermissionsStreamCursorInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Input_AuthUsersPermissionsStreamCursorValueInput get initialValue =>
+      (_$data['initialValue']
+          as Input_AuthUsersPermissionsStreamCursorValueInput);
+
+  Enum_CursorOrdering? get ordering =>
+      (_$data['ordering'] as Enum_CursorOrdering?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$initialValue = initialValue;
+    result$data['initialValue'] = l$initialValue.toJson();
+    if (_$data.containsKey('ordering')) {
+      final l$ordering = ordering;
+      result$data['ordering'] = l$ordering == null
+          ? null
+          : toJson_Enum_CursorOrdering(l$ordering);
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_AuthUsersPermissionsStreamCursorInput<
+    Input_AuthUsersPermissionsStreamCursorInput
+  >
+  get copyWith =>
+      CopyWith_Input_AuthUsersPermissionsStreamCursorInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_AuthUsersPermissionsStreamCursorInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$initialValue = initialValue;
+    final lOther$initialValue = other.initialValue;
+    if (l$initialValue != lOther$initialValue) {
+      return false;
+    }
+    final l$ordering = ordering;
+    final lOther$ordering = other.ordering;
+    if (_$data.containsKey('ordering') !=
+        other._$data.containsKey('ordering')) {
+      return false;
+    }
+    if (l$ordering != lOther$ordering) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$initialValue = initialValue;
+    final l$ordering = ordering;
+    return Object.hashAll([
+      l$initialValue,
+      _$data.containsKey('ordering') ? l$ordering : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_AuthUsersPermissionsStreamCursorInput<TRes> {
+  factory CopyWith_Input_AuthUsersPermissionsStreamCursorInput(
+    Input_AuthUsersPermissionsStreamCursorInput instance,
+    TRes Function(Input_AuthUsersPermissionsStreamCursorInput) then,
+  ) = _CopyWithImpl_Input_AuthUsersPermissionsStreamCursorInput;
+
+  factory CopyWith_Input_AuthUsersPermissionsStreamCursorInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_AuthUsersPermissionsStreamCursorInput;
+
+  TRes call({
+    Input_AuthUsersPermissionsStreamCursorValueInput? initialValue,
+    Enum_CursorOrdering? ordering,
+  });
+  CopyWith_Input_AuthUsersPermissionsStreamCursorValueInput<TRes>
+  get initialValue;
+}
+
+class _CopyWithImpl_Input_AuthUsersPermissionsStreamCursorInput<TRes>
+    implements CopyWith_Input_AuthUsersPermissionsStreamCursorInput<TRes> {
+  _CopyWithImpl_Input_AuthUsersPermissionsStreamCursorInput(
+    this._instance,
+    this._then,
+  );
+
+  final Input_AuthUsersPermissionsStreamCursorInput _instance;
+
+  final TRes Function(Input_AuthUsersPermissionsStreamCursorInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? initialValue = _undefined,
+    Object? ordering = _undefined,
+  }) => _then(
+    Input_AuthUsersPermissionsStreamCursorInput._({
+      ..._instance._$data,
+      if (initialValue != _undefined && initialValue != null)
+        'initialValue':
+            (initialValue as Input_AuthUsersPermissionsStreamCursorValueInput),
+      if (ordering != _undefined)
+        'ordering': (ordering as Enum_CursorOrdering?),
+    }),
+  );
+
+  CopyWith_Input_AuthUsersPermissionsStreamCursorValueInput<TRes>
+  get initialValue {
+    final local$initialValue = _instance.initialValue;
+    return CopyWith_Input_AuthUsersPermissionsStreamCursorValueInput(
+      local$initialValue,
+      (e) => call(initialValue: e),
+    );
+  }
+}
+
+class _CopyWithStubImpl_Input_AuthUsersPermissionsStreamCursorInput<TRes>
+    implements CopyWith_Input_AuthUsersPermissionsStreamCursorInput<TRes> {
+  _CopyWithStubImpl_Input_AuthUsersPermissionsStreamCursorInput(this._res);
+
+  TRes _res;
+
+  call({
+    Input_AuthUsersPermissionsStreamCursorValueInput? initialValue,
+    Enum_CursorOrdering? ordering,
+  }) => _res;
+
+  CopyWith_Input_AuthUsersPermissionsStreamCursorValueInput<TRes>
+  get initialValue =>
+      CopyWith_Input_AuthUsersPermissionsStreamCursorValueInput.stub(_res);
+}
+
+class Input_AuthUsersPermissionsStreamCursorValueInput {
+  factory Input_AuthUsersPermissionsStreamCursorValueInput({
+    String? permission,
+    UuidValue? uid,
+  }) => Input_AuthUsersPermissionsStreamCursorValueInput._({
+    if (permission != null) r'permission': permission,
+    if (uid != null) r'uid': uid,
+  });
+
+  Input_AuthUsersPermissionsStreamCursorValueInput._(this._$data);
+
+  factory Input_AuthUsersPermissionsStreamCursorValueInput.fromJson(
+    Map<String, dynamic> data,
+  ) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('permission')) {
+      final l$permission = data['permission'];
+      result$data['permission'] = (l$permission as String?);
+    }
+    if (data.containsKey('uid')) {
+      final l$uid = data['uid'];
+      result$data['uid'] = l$uid == null ? null : stringToUuid(l$uid);
+    }
+    return Input_AuthUsersPermissionsStreamCursorValueInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  String? get permission => (_$data['permission'] as String?);
+
+  UuidValue? get uid => (_$data['uid'] as UuidValue?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('permission')) {
+      final l$permission = permission;
+      result$data['permission'] = l$permission;
+    }
+    if (_$data.containsKey('uid')) {
+      final l$uid = uid;
+      result$data['uid'] = l$uid == null ? null : uuidToString(l$uid);
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_AuthUsersPermissionsStreamCursorValueInput<
+    Input_AuthUsersPermissionsStreamCursorValueInput
+  >
+  get copyWith =>
+      CopyWith_Input_AuthUsersPermissionsStreamCursorValueInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_AuthUsersPermissionsStreamCursorValueInput ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$permission = permission;
+    final lOther$permission = other.permission;
+    if (_$data.containsKey('permission') !=
+        other._$data.containsKey('permission')) {
+      return false;
+    }
+    if (l$permission != lOther$permission) {
+      return false;
+    }
+    final l$uid = uid;
+    final lOther$uid = other.uid;
+    if (_$data.containsKey('uid') != other._$data.containsKey('uid')) {
+      return false;
+    }
+    if (l$uid != lOther$uid) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$permission = permission;
+    final l$uid = uid;
+    return Object.hashAll([
+      _$data.containsKey('permission') ? l$permission : const {},
+      _$data.containsKey('uid') ? l$uid : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_AuthUsersPermissionsStreamCursorValueInput<TRes> {
+  factory CopyWith_Input_AuthUsersPermissionsStreamCursorValueInput(
+    Input_AuthUsersPermissionsStreamCursorValueInput instance,
+    TRes Function(Input_AuthUsersPermissionsStreamCursorValueInput) then,
+  ) = _CopyWithImpl_Input_AuthUsersPermissionsStreamCursorValueInput;
+
+  factory CopyWith_Input_AuthUsersPermissionsStreamCursorValueInput.stub(
+    TRes res,
+  ) = _CopyWithStubImpl_Input_AuthUsersPermissionsStreamCursorValueInput;
+
+  TRes call({String? permission, UuidValue? uid});
+}
+
+class _CopyWithImpl_Input_AuthUsersPermissionsStreamCursorValueInput<TRes>
+    implements CopyWith_Input_AuthUsersPermissionsStreamCursorValueInput<TRes> {
+  _CopyWithImpl_Input_AuthUsersPermissionsStreamCursorValueInput(
+    this._instance,
+    this._then,
+  );
+
+  final Input_AuthUsersPermissionsStreamCursorValueInput _instance;
+
+  final TRes Function(Input_AuthUsersPermissionsStreamCursorValueInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? permission = _undefined, Object? uid = _undefined}) =>
+      _then(
+        Input_AuthUsersPermissionsStreamCursorValueInput._({
+          ..._instance._$data,
+          if (permission != _undefined) 'permission': (permission as String?),
+          if (uid != _undefined) 'uid': (uid as UuidValue?),
+        }),
+      );
+}
+
+class _CopyWithStubImpl_Input_AuthUsersPermissionsStreamCursorValueInput<TRes>
+    implements CopyWith_Input_AuthUsersPermissionsStreamCursorValueInput<TRes> {
+  _CopyWithStubImpl_Input_AuthUsersPermissionsStreamCursorValueInput(this._res);
+
+  TRes _res;
+
+  call({String? permission, UuidValue? uid}) => _res;
+}
+
+class Input_BigintComparisonExp {
+  factory Input_BigintComparisonExp({
+    int? $_eq,
+    int? $_gt,
+    int? $_gte,
+    List<int>? $_in,
+    bool? $_isNull,
+    int? $_lt,
+    int? $_lte,
+    int? $_neq,
+    List<int>? $_nin,
+  }) => Input_BigintComparisonExp._({
+    if ($_eq != null) r'_eq': $_eq,
+    if ($_gt != null) r'_gt': $_gt,
+    if ($_gte != null) r'_gte': $_gte,
+    if ($_in != null) r'_in': $_in,
+    if ($_isNull != null) r'_isNull': $_isNull,
+    if ($_lt != null) r'_lt': $_lt,
+    if ($_lte != null) r'_lte': $_lte,
+    if ($_neq != null) r'_neq': $_neq,
+    if ($_nin != null) r'_nin': $_nin,
+  });
+
+  Input_BigintComparisonExp._(this._$data);
+
+  factory Input_BigintComparisonExp.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('_eq')) {
+      final l$$_eq = data['_eq'];
+      result$data['_eq'] = (l$$_eq as int?);
+    }
+    if (data.containsKey('_gt')) {
+      final l$$_gt = data['_gt'];
+      result$data['_gt'] = (l$$_gt as int?);
+    }
+    if (data.containsKey('_gte')) {
+      final l$$_gte = data['_gte'];
+      result$data['_gte'] = (l$$_gte as int?);
+    }
+    if (data.containsKey('_in')) {
+      final l$$_in = data['_in'];
+      result$data['_in'] = (l$$_in as List<dynamic>?)
+          ?.map((e) => (e as int))
+          .toList();
+    }
+    if (data.containsKey('_isNull')) {
+      final l$$_isNull = data['_isNull'];
+      result$data['_isNull'] = (l$$_isNull as bool?);
+    }
+    if (data.containsKey('_lt')) {
+      final l$$_lt = data['_lt'];
+      result$data['_lt'] = (l$$_lt as int?);
+    }
+    if (data.containsKey('_lte')) {
+      final l$$_lte = data['_lte'];
+      result$data['_lte'] = (l$$_lte as int?);
+    }
+    if (data.containsKey('_neq')) {
+      final l$$_neq = data['_neq'];
+      result$data['_neq'] = (l$$_neq as int?);
+    }
+    if (data.containsKey('_nin')) {
+      final l$$_nin = data['_nin'];
+      result$data['_nin'] = (l$$_nin as List<dynamic>?)
+          ?.map((e) => (e as int))
+          .toList();
+    }
+    return Input_BigintComparisonExp._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  int? get $_eq => (_$data['_eq'] as int?);
+
+  int? get $_gt => (_$data['_gt'] as int?);
+
+  int? get $_gte => (_$data['_gte'] as int?);
+
+  List<int>? get $_in => (_$data['_in'] as List<int>?);
+
+  bool? get $_isNull => (_$data['_isNull'] as bool?);
+
+  int? get $_lt => (_$data['_lt'] as int?);
+
+  int? get $_lte => (_$data['_lte'] as int?);
+
+  int? get $_neq => (_$data['_neq'] as int?);
+
+  List<int>? get $_nin => (_$data['_nin'] as List<int>?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('_eq')) {
+      final l$$_eq = $_eq;
+      result$data['_eq'] = l$$_eq;
+    }
+    if (_$data.containsKey('_gt')) {
+      final l$$_gt = $_gt;
+      result$data['_gt'] = l$$_gt;
+    }
+    if (_$data.containsKey('_gte')) {
+      final l$$_gte = $_gte;
+      result$data['_gte'] = l$$_gte;
+    }
+    if (_$data.containsKey('_in')) {
+      final l$$_in = $_in;
+      result$data['_in'] = l$$_in?.map((e) => e).toList();
+    }
+    if (_$data.containsKey('_isNull')) {
+      final l$$_isNull = $_isNull;
+      result$data['_isNull'] = l$$_isNull;
+    }
+    if (_$data.containsKey('_lt')) {
+      final l$$_lt = $_lt;
+      result$data['_lt'] = l$$_lt;
+    }
+    if (_$data.containsKey('_lte')) {
+      final l$$_lte = $_lte;
+      result$data['_lte'] = l$$_lte;
+    }
+    if (_$data.containsKey('_neq')) {
+      final l$$_neq = $_neq;
+      result$data['_neq'] = l$$_neq;
+    }
+    if (_$data.containsKey('_nin')) {
+      final l$$_nin = $_nin;
+      result$data['_nin'] = l$$_nin?.map((e) => e).toList();
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_BigintComparisonExp<Input_BigintComparisonExp> get copyWith =>
+      CopyWith_Input_BigintComparisonExp(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_BigintComparisonExp ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$$_eq = $_eq;
+    final lOther$$_eq = other.$_eq;
+    if (_$data.containsKey('_eq') != other._$data.containsKey('_eq')) {
+      return false;
+    }
+    if (l$$_eq != lOther$$_eq) {
+      return false;
+    }
+    final l$$_gt = $_gt;
+    final lOther$$_gt = other.$_gt;
+    if (_$data.containsKey('_gt') != other._$data.containsKey('_gt')) {
+      return false;
+    }
+    if (l$$_gt != lOther$$_gt) {
+      return false;
+    }
+    final l$$_gte = $_gte;
+    final lOther$$_gte = other.$_gte;
+    if (_$data.containsKey('_gte') != other._$data.containsKey('_gte')) {
+      return false;
+    }
+    if (l$$_gte != lOther$$_gte) {
+      return false;
+    }
+    final l$$_in = $_in;
+    final lOther$$_in = other.$_in;
+    if (_$data.containsKey('_in') != other._$data.containsKey('_in')) {
+      return false;
+    }
+    if (l$$_in != null && lOther$$_in != null) {
+      if (l$$_in.length != lOther$$_in.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$_in.length; i++) {
+        final l$$_in$entry = l$$_in[i];
+        final lOther$$_in$entry = lOther$$_in[i];
+        if (l$$_in$entry != lOther$$_in$entry) {
+          return false;
+        }
+      }
+    } else if (l$$_in != lOther$$_in) {
+      return false;
+    }
+    final l$$_isNull = $_isNull;
+    final lOther$$_isNull = other.$_isNull;
+    if (_$data.containsKey('_isNull') != other._$data.containsKey('_isNull')) {
+      return false;
+    }
+    if (l$$_isNull != lOther$$_isNull) {
+      return false;
+    }
+    final l$$_lt = $_lt;
+    final lOther$$_lt = other.$_lt;
+    if (_$data.containsKey('_lt') != other._$data.containsKey('_lt')) {
+      return false;
+    }
+    if (l$$_lt != lOther$$_lt) {
+      return false;
+    }
+    final l$$_lte = $_lte;
+    final lOther$$_lte = other.$_lte;
+    if (_$data.containsKey('_lte') != other._$data.containsKey('_lte')) {
+      return false;
+    }
+    if (l$$_lte != lOther$$_lte) {
+      return false;
+    }
+    final l$$_neq = $_neq;
+    final lOther$$_neq = other.$_neq;
+    if (_$data.containsKey('_neq') != other._$data.containsKey('_neq')) {
+      return false;
+    }
+    if (l$$_neq != lOther$$_neq) {
+      return false;
+    }
+    final l$$_nin = $_nin;
+    final lOther$$_nin = other.$_nin;
+    if (_$data.containsKey('_nin') != other._$data.containsKey('_nin')) {
+      return false;
+    }
+    if (l$$_nin != null && lOther$$_nin != null) {
+      if (l$$_nin.length != lOther$$_nin.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$_nin.length; i++) {
+        final l$$_nin$entry = l$$_nin[i];
+        final lOther$$_nin$entry = lOther$$_nin[i];
+        if (l$$_nin$entry != lOther$$_nin$entry) {
+          return false;
+        }
+      }
+    } else if (l$$_nin != lOther$$_nin) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$$_eq = $_eq;
+    final l$$_gt = $_gt;
+    final l$$_gte = $_gte;
+    final l$$_in = $_in;
+    final l$$_isNull = $_isNull;
+    final l$$_lt = $_lt;
+    final l$$_lte = $_lte;
+    final l$$_neq = $_neq;
+    final l$$_nin = $_nin;
+    return Object.hashAll([
+      _$data.containsKey('_eq') ? l$$_eq : const {},
+      _$data.containsKey('_gt') ? l$$_gt : const {},
+      _$data.containsKey('_gte') ? l$$_gte : const {},
+      _$data.containsKey('_in')
+          ? l$$_in == null
+                ? null
+                : Object.hashAll(l$$_in.map((v) => v))
+          : const {},
+      _$data.containsKey('_isNull') ? l$$_isNull : const {},
+      _$data.containsKey('_lt') ? l$$_lt : const {},
+      _$data.containsKey('_lte') ? l$$_lte : const {},
+      _$data.containsKey('_neq') ? l$$_neq : const {},
+      _$data.containsKey('_nin')
+          ? l$$_nin == null
+                ? null
+                : Object.hashAll(l$$_nin.map((v) => v))
+          : const {},
+    ]);
+  }
+}
+
 abstract class CopyWith_Input_BigintComparisonExp<TRes> {
   factory CopyWith_Input_BigintComparisonExp(
     Input_BigintComparisonExp instance,
@@ -1218,1298 +2542,6 @@ class Input_ChurchesObjRelInsertInput {
     return Object.hashAll([
       l$data,
       _$data.containsKey('onConflict') ? l$onConflict : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_ChurchesObjRelInsertInput<TRes> {
-  factory CopyWith_Input_ChurchesObjRelInsertInput(
-    Input_ChurchesObjRelInsertInput instance,
-    TRes Function(Input_ChurchesObjRelInsertInput) then,
-  ) = _CopyWithImpl_Input_ChurchesObjRelInsertInput;
-
-  factory CopyWith_Input_ChurchesObjRelInsertInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_ChurchesObjRelInsertInput;
-
-  TRes call({
-    Input_ChurchesInsertInput? data,
-    Input_ChurchesOnConflict? onConflict,
-  });
-  CopyWith_Input_ChurchesInsertInput<TRes> get data;
-  CopyWith_Input_ChurchesOnConflict<TRes> get onConflict;
-}
-
-class _CopyWithImpl_Input_ChurchesObjRelInsertInput<TRes>
-    implements CopyWith_Input_ChurchesObjRelInsertInput<TRes> {
-  _CopyWithImpl_Input_ChurchesObjRelInsertInput(this._instance, this._then);
-
-  final Input_ChurchesObjRelInsertInput _instance;
-
-  final TRes Function(Input_ChurchesObjRelInsertInput) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({Object? data = _undefined, Object? onConflict = _undefined}) =>
-      _then(
-        Input_ChurchesObjRelInsertInput._({
-          ..._instance._$data,
-          if (data != _undefined && data != null)
-            'data': (data as Input_ChurchesInsertInput),
-          if (onConflict != _undefined)
-            'onConflict': (onConflict as Input_ChurchesOnConflict?),
-        }),
-      );
-
-  CopyWith_Input_ChurchesInsertInput<TRes> get data {
-    final local$data = _instance.data;
-    return CopyWith_Input_ChurchesInsertInput(local$data, (e) => call(data: e));
-  }
-
-  CopyWith_Input_ChurchesOnConflict<TRes> get onConflict {
-    final local$onConflict = _instance.onConflict;
-    return local$onConflict == null
-        ? CopyWith_Input_ChurchesOnConflict.stub(_then(_instance))
-        : CopyWith_Input_ChurchesOnConflict(
-            local$onConflict,
-            (e) => call(onConflict: e),
-          );
-  }
-}
-
-class _CopyWithStubImpl_Input_ChurchesObjRelInsertInput<TRes>
-    implements CopyWith_Input_ChurchesObjRelInsertInput<TRes> {
-  _CopyWithStubImpl_Input_ChurchesObjRelInsertInput(this._res);
-
-  TRes _res;
-
-  call({
-    Input_ChurchesInsertInput? data,
-    Input_ChurchesOnConflict? onConflict,
-  }) => _res;
-
-  CopyWith_Input_ChurchesInsertInput<TRes> get data =>
-      CopyWith_Input_ChurchesInsertInput.stub(_res);
-
-  CopyWith_Input_ChurchesOnConflict<TRes> get onConflict =>
-      CopyWith_Input_ChurchesOnConflict.stub(_res);
-}
-
-class Input_ChurchesOnConflict {
-  factory Input_ChurchesOnConflict({
-    required Enum_ChurchesConstraint constraint,
-    List<Enum_ChurchesUpdateColumn>? updateColumns,
-    Input_ChurchesBoolExp? where,
-  }) => Input_ChurchesOnConflict._({
-    r'constraint': constraint,
-    if (updateColumns != null) r'updateColumns': updateColumns,
-    if (where != null) r'where': where,
-  });
-
-  Input_ChurchesOnConflict._(this._$data);
-
-  factory Input_ChurchesOnConflict.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    final l$constraint = data['constraint'];
-    result$data['constraint'] = fromJson_Enum_ChurchesConstraint(
-      (l$constraint as String),
-    );
-    if (data.containsKey('updateColumns')) {
-      final l$updateColumns = data['updateColumns'];
-      result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
-          .map((e) => fromJson_Enum_ChurchesUpdateColumn((e as String)))
-          .toList();
-    }
-    if (data.containsKey('where')) {
-      final l$where = data['where'];
-      result$data['where'] = l$where == null
-          ? null
-          : Input_ChurchesBoolExp.fromJson((l$where as Map<String, dynamic>));
-    }
-    return Input_ChurchesOnConflict._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  Enum_ChurchesConstraint get constraint =>
-      (_$data['constraint'] as Enum_ChurchesConstraint);
-
-  List<Enum_ChurchesUpdateColumn>? get updateColumns =>
-      (_$data['updateColumns'] as List<Enum_ChurchesUpdateColumn>?);
-
-  Input_ChurchesBoolExp? get where =>
-      (_$data['where'] as Input_ChurchesBoolExp?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    final l$constraint = constraint;
-    result$data['constraint'] = toJson_Enum_ChurchesConstraint(l$constraint);
-    if (_$data.containsKey('updateColumns')) {
-      final l$updateColumns = updateColumns;
-      result$data['updateColumns'] =
-          (l$updateColumns as List<Enum_ChurchesUpdateColumn>)
-              .map((e) => toJson_Enum_ChurchesUpdateColumn(e))
-              .toList();
-    }
-    if (_$data.containsKey('where')) {
-      final l$where = where;
-      result$data['where'] = l$where?.toJson();
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_ChurchesOnConflict<Input_ChurchesOnConflict> get copyWith =>
-      CopyWith_Input_ChurchesOnConflict(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_ChurchesOnConflict ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$constraint = constraint;
-    final lOther$constraint = other.constraint;
-    if (l$constraint != lOther$constraint) {
-      return false;
-    }
-    final l$updateColumns = updateColumns;
-    final lOther$updateColumns = other.updateColumns;
-    if (_$data.containsKey('updateColumns') !=
-        other._$data.containsKey('updateColumns')) {
-      return false;
-    }
-    if (l$updateColumns != null && lOther$updateColumns != null) {
-      if (l$updateColumns.length != lOther$updateColumns.length) {
-        return false;
-      }
-      for (int i = 0; i < l$updateColumns.length; i++) {
-        final l$updateColumns$entry = l$updateColumns[i];
-        final lOther$updateColumns$entry = lOther$updateColumns[i];
-        if (l$updateColumns$entry != lOther$updateColumns$entry) {
-          return false;
-        }
-      }
-    } else if (l$updateColumns != lOther$updateColumns) {
-      return false;
-    }
-    final l$where = where;
-    final lOther$where = other.where;
-    if (_$data.containsKey('where') != other._$data.containsKey('where')) {
-      return false;
-    }
-    if (l$where != lOther$where) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$constraint = constraint;
-    final l$updateColumns = updateColumns;
-    final l$where = where;
-    return Object.hashAll([
-      l$constraint,
-      _$data.containsKey('updateColumns')
-          ? l$updateColumns == null
-                ? null
-                : Object.hashAll(l$updateColumns.map((v) => v))
-          : const {},
-      _$data.containsKey('where') ? l$where : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_ChurchesOnConflict<TRes> {
-  factory CopyWith_Input_ChurchesOnConflict(
-    Input_ChurchesOnConflict instance,
-    TRes Function(Input_ChurchesOnConflict) then,
-  ) = _CopyWithImpl_Input_ChurchesOnConflict;
-
-  factory CopyWith_Input_ChurchesOnConflict.stub(TRes res) =
-      _CopyWithStubImpl_Input_ChurchesOnConflict;
-
-  TRes call({
-    Enum_ChurchesConstraint? constraint,
-    List<Enum_ChurchesUpdateColumn>? updateColumns,
-    Input_ChurchesBoolExp? where,
-  });
-  CopyWith_Input_ChurchesBoolExp<TRes> get where;
-}
-
-class _CopyWithImpl_Input_ChurchesOnConflict<TRes>
-    implements CopyWith_Input_ChurchesOnConflict<TRes> {
-  _CopyWithImpl_Input_ChurchesOnConflict(this._instance, this._then);
-
-  final Input_ChurchesOnConflict _instance;
-
-  final TRes Function(Input_ChurchesOnConflict) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? constraint = _undefined,
-    Object? updateColumns = _undefined,
-    Object? where = _undefined,
-  }) => _then(
-    Input_ChurchesOnConflict._({
-      ..._instance._$data,
-      if (constraint != _undefined && constraint != null)
-        'constraint': (constraint as Enum_ChurchesConstraint),
-      if (updateColumns != _undefined && updateColumns != null)
-        'updateColumns': (updateColumns as List<Enum_ChurchesUpdateColumn>),
-      if (where != _undefined) 'where': (where as Input_ChurchesBoolExp?),
-    }),
-  );
-
-  CopyWith_Input_ChurchesBoolExp<TRes> get where {
-    final local$where = _instance.where;
-    return local$where == null
-        ? CopyWith_Input_ChurchesBoolExp.stub(_then(_instance))
-        : CopyWith_Input_ChurchesBoolExp(local$where, (e) => call(where: e));
-  }
-}
-
-class _CopyWithStubImpl_Input_ChurchesOnConflict<TRes>
-    implements CopyWith_Input_ChurchesOnConflict<TRes> {
-  _CopyWithStubImpl_Input_ChurchesOnConflict(this._res);
-
-  TRes _res;
-
-  call({
-    Enum_ChurchesConstraint? constraint,
-    List<Enum_ChurchesUpdateColumn>? updateColumns,
-    Input_ChurchesBoolExp? where,
-  }) => _res;
-
-  CopyWith_Input_ChurchesBoolExp<TRes> get where =>
-      CopyWith_Input_ChurchesBoolExp.stub(_res);
-}
-
-class Input_ChurchesOrderBy {
-  factory Input_ChurchesOrderBy({
-    Input_FathersAggregateOrderBy? fathersAggregate,
-    Enum_OrderBy? id,
-    Enum_OrderBy? isHidden,
-    Enum_OrderBy? name,
-    Input_PersonsAggregateOrderBy? personsAggregate,
-  }) => Input_ChurchesOrderBy._({
-    if (fathersAggregate != null) r'fathersAggregate': fathersAggregate,
-    if (id != null) r'id': id,
-    if (isHidden != null) r'isHidden': isHidden,
-    if (name != null) r'name': name,
-    if (personsAggregate != null) r'personsAggregate': personsAggregate,
-  });
-
-  Input_ChurchesOrderBy._(this._$data);
-
-  factory Input_ChurchesOrderBy.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('fathersAggregate')) {
-      final l$fathersAggregate = data['fathersAggregate'];
-      result$data['fathersAggregate'] = l$fathersAggregate == null
-          ? null
-          : Input_FathersAggregateOrderBy.fromJson(
-              (l$fathersAggregate as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('id')) {
-      final l$id = data['id'];
-      result$data['id'] = l$id == null
-          ? null
-          : fromJson_Enum_OrderBy((l$id as String));
-    }
-    if (data.containsKey('isHidden')) {
-      final l$isHidden = data['isHidden'];
-      result$data['isHidden'] = l$isHidden == null
-          ? null
-          : fromJson_Enum_OrderBy((l$isHidden as String));
-    }
-    if (data.containsKey('name')) {
-      final l$name = data['name'];
-      result$data['name'] = l$name == null
-          ? null
-          : fromJson_Enum_OrderBy((l$name as String));
-    }
-    if (data.containsKey('personsAggregate')) {
-      final l$personsAggregate = data['personsAggregate'];
-      result$data['personsAggregate'] = l$personsAggregate == null
-          ? null
-          : Input_PersonsAggregateOrderBy.fromJson(
-              (l$personsAggregate as Map<String, dynamic>),
-            );
-    }
-    return Input_ChurchesOrderBy._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  Input_FathersAggregateOrderBy? get fathersAggregate =>
-      (_$data['fathersAggregate'] as Input_FathersAggregateOrderBy?);
-
-  Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
-
-  Enum_OrderBy? get isHidden => (_$data['isHidden'] as Enum_OrderBy?);
-
-  Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
-
-  Input_PersonsAggregateOrderBy? get personsAggregate =>
-      (_$data['personsAggregate'] as Input_PersonsAggregateOrderBy?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('fathersAggregate')) {
-      final l$fathersAggregate = fathersAggregate;
-      result$data['fathersAggregate'] = l$fathersAggregate?.toJson();
-    }
-    if (_$data.containsKey('id')) {
-      final l$id = id;
-      result$data['id'] = l$id == null ? null : toJson_Enum_OrderBy(l$id);
-    }
-    if (_$data.containsKey('isHidden')) {
-      final l$isHidden = isHidden;
-      result$data['isHidden'] = l$isHidden == null
-          ? null
-          : toJson_Enum_OrderBy(l$isHidden);
-    }
-    if (_$data.containsKey('name')) {
-      final l$name = name;
-      result$data['name'] = l$name == null ? null : toJson_Enum_OrderBy(l$name);
-    }
-    if (_$data.containsKey('personsAggregate')) {
-      final l$personsAggregate = personsAggregate;
-      result$data['personsAggregate'] = l$personsAggregate?.toJson();
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_ChurchesOrderBy<Input_ChurchesOrderBy> get copyWith =>
-      CopyWith_Input_ChurchesOrderBy(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_ChurchesOrderBy || runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$fathersAggregate = fathersAggregate;
-    final lOther$fathersAggregate = other.fathersAggregate;
-    if (_$data.containsKey('fathersAggregate') !=
-        other._$data.containsKey('fathersAggregate')) {
-      return false;
-    }
-    if (l$fathersAggregate != lOther$fathersAggregate) {
-      return false;
-    }
-    final l$id = id;
-    final lOther$id = other.id;
-    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
-      return false;
-    }
-    if (l$id != lOther$id) {
-      return false;
-    }
-    final l$isHidden = isHidden;
-    final lOther$isHidden = other.isHidden;
-    if (_$data.containsKey('isHidden') !=
-        other._$data.containsKey('isHidden')) {
-      return false;
-    }
-    if (l$isHidden != lOther$isHidden) {
-      return false;
-    }
-    final l$name = name;
-    final lOther$name = other.name;
-    if (_$data.containsKey('name') != other._$data.containsKey('name')) {
-      return false;
-    }
-    if (l$name != lOther$name) {
-      return false;
-    }
-    final l$personsAggregate = personsAggregate;
-    final lOther$personsAggregate = other.personsAggregate;
-    if (_$data.containsKey('personsAggregate') !=
-        other._$data.containsKey('personsAggregate')) {
-      return false;
-    }
-    if (l$personsAggregate != lOther$personsAggregate) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$fathersAggregate = fathersAggregate;
-    final l$id = id;
-    final l$isHidden = isHidden;
-    final l$name = name;
-    final l$personsAggregate = personsAggregate;
-    return Object.hashAll([
-      _$data.containsKey('fathersAggregate') ? l$fathersAggregate : const {},
-      _$data.containsKey('id') ? l$id : const {},
-      _$data.containsKey('isHidden') ? l$isHidden : const {},
-      _$data.containsKey('name') ? l$name : const {},
-      _$data.containsKey('personsAggregate') ? l$personsAggregate : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_ChurchesOrderBy<TRes> {
-  factory CopyWith_Input_ChurchesOrderBy(
-    Input_ChurchesOrderBy instance,
-    TRes Function(Input_ChurchesOrderBy) then,
-  ) = _CopyWithImpl_Input_ChurchesOrderBy;
-
-  factory CopyWith_Input_ChurchesOrderBy.stub(TRes res) =
-      _CopyWithStubImpl_Input_ChurchesOrderBy;
-
-  TRes call({
-    Input_FathersAggregateOrderBy? fathersAggregate,
-    Enum_OrderBy? id,
-    Enum_OrderBy? isHidden,
-    Enum_OrderBy? name,
-    Input_PersonsAggregateOrderBy? personsAggregate,
-  });
-  CopyWith_Input_FathersAggregateOrderBy<TRes> get fathersAggregate;
-  CopyWith_Input_PersonsAggregateOrderBy<TRes> get personsAggregate;
-}
-
-class _CopyWithImpl_Input_ChurchesOrderBy<TRes>
-    implements CopyWith_Input_ChurchesOrderBy<TRes> {
-  _CopyWithImpl_Input_ChurchesOrderBy(this._instance, this._then);
-
-  final Input_ChurchesOrderBy _instance;
-
-  final TRes Function(Input_ChurchesOrderBy) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? fathersAggregate = _undefined,
-    Object? id = _undefined,
-    Object? isHidden = _undefined,
-    Object? name = _undefined,
-    Object? personsAggregate = _undefined,
-  }) => _then(
-    Input_ChurchesOrderBy._({
-      ..._instance._$data,
-      if (fathersAggregate != _undefined)
-        'fathersAggregate':
-            (fathersAggregate as Input_FathersAggregateOrderBy?),
-      if (id != _undefined) 'id': (id as Enum_OrderBy?),
-      if (isHidden != _undefined) 'isHidden': (isHidden as Enum_OrderBy?),
-      if (name != _undefined) 'name': (name as Enum_OrderBy?),
-      if (personsAggregate != _undefined)
-        'personsAggregate':
-            (personsAggregate as Input_PersonsAggregateOrderBy?),
-    }),
-  );
-
-  CopyWith_Input_FathersAggregateOrderBy<TRes> get fathersAggregate {
-    final local$fathersAggregate = _instance.fathersAggregate;
-    return local$fathersAggregate == null
-        ? CopyWith_Input_FathersAggregateOrderBy.stub(_then(_instance))
-        : CopyWith_Input_FathersAggregateOrderBy(
-            local$fathersAggregate,
-            (e) => call(fathersAggregate: e),
-          );
-  }
-
-  CopyWith_Input_PersonsAggregateOrderBy<TRes> get personsAggregate {
-    final local$personsAggregate = _instance.personsAggregate;
-    return local$personsAggregate == null
-        ? CopyWith_Input_PersonsAggregateOrderBy.stub(_then(_instance))
-        : CopyWith_Input_PersonsAggregateOrderBy(
-            local$personsAggregate,
-            (e) => call(personsAggregate: e),
-          );
-  }
-}
-
-class _CopyWithStubImpl_Input_ChurchesOrderBy<TRes>
-    implements CopyWith_Input_ChurchesOrderBy<TRes> {
-  _CopyWithStubImpl_Input_ChurchesOrderBy(this._res);
-
-  TRes _res;
-
-  call({
-    Input_FathersAggregateOrderBy? fathersAggregate,
-    Enum_OrderBy? id,
-    Enum_OrderBy? isHidden,
-    Enum_OrderBy? name,
-    Input_PersonsAggregateOrderBy? personsAggregate,
-  }) => _res;
-
-  CopyWith_Input_FathersAggregateOrderBy<TRes> get fathersAggregate =>
-      CopyWith_Input_FathersAggregateOrderBy.stub(_res);
-
-  CopyWith_Input_PersonsAggregateOrderBy<TRes> get personsAggregate =>
-      CopyWith_Input_PersonsAggregateOrderBy.stub(_res);
-}
-
-class Input_ChurchesPkColumnsInput {
-  factory Input_ChurchesPkColumnsInput({required UuidValue id}) =>
-      Input_ChurchesPkColumnsInput._({r'id': id});
-
-  Input_ChurchesPkColumnsInput._(this._$data);
-
-  factory Input_ChurchesPkColumnsInput.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    final l$id = data['id'];
-    result$data['id'] = stringToUuid(l$id);
-    return Input_ChurchesPkColumnsInput._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  UuidValue get id => (_$data['id'] as UuidValue);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    final l$id = id;
-    result$data['id'] = uuidToString(l$id);
-    return result$data;
-  }
-
-  CopyWith_Input_ChurchesPkColumnsInput<Input_ChurchesPkColumnsInput>
-  get copyWith => CopyWith_Input_ChurchesPkColumnsInput(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_ChurchesPkColumnsInput ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$id = id;
-    final lOther$id = other.id;
-    if (l$id != lOther$id) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$id = id;
-    return Object.hashAll([l$id]);
-  }
-}
-
-abstract class CopyWith_Input_ChurchesPkColumnsInput<TRes> {
-  factory CopyWith_Input_ChurchesPkColumnsInput(
-    Input_ChurchesPkColumnsInput instance,
-    TRes Function(Input_ChurchesPkColumnsInput) then,
-  ) = _CopyWithImpl_Input_ChurchesPkColumnsInput;
-
-  factory CopyWith_Input_ChurchesPkColumnsInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_ChurchesPkColumnsInput;
-
-  TRes call({UuidValue? id});
-}
-
-class _CopyWithImpl_Input_ChurchesPkColumnsInput<TRes>
-    implements CopyWith_Input_ChurchesPkColumnsInput<TRes> {
-  _CopyWithImpl_Input_ChurchesPkColumnsInput(this._instance, this._then);
-
-  final Input_ChurchesPkColumnsInput _instance;
-
-  final TRes Function(Input_ChurchesPkColumnsInput) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({Object? id = _undefined}) => _then(
-    Input_ChurchesPkColumnsInput._({
-      ..._instance._$data,
-      if (id != _undefined && id != null) 'id': (id as UuidValue),
-    }),
-  );
-}
-
-class _CopyWithStubImpl_Input_ChurchesPkColumnsInput<TRes>
-    implements CopyWith_Input_ChurchesPkColumnsInput<TRes> {
-  _CopyWithStubImpl_Input_ChurchesPkColumnsInput(this._res);
-
-  TRes _res;
-
-  call({UuidValue? id}) => _res;
-}
-
-class Input_ChurchesSetInput {
-  factory Input_ChurchesSetInput({String? name}) =>
-      Input_ChurchesSetInput._({if (name != null) r'name': name});
-
-  Input_ChurchesSetInput._(this._$data);
-
-  factory Input_ChurchesSetInput.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('name')) {
-      final l$name = data['name'];
-      result$data['name'] = (l$name as String?);
-    }
-    return Input_ChurchesSetInput._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  String? get name => (_$data['name'] as String?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('name')) {
-      final l$name = name;
-      result$data['name'] = l$name;
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_ChurchesSetInput<Input_ChurchesSetInput> get copyWith =>
-      CopyWith_Input_ChurchesSetInput(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_ChurchesSetInput || runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$name = name;
-    final lOther$name = other.name;
-    if (_$data.containsKey('name') != other._$data.containsKey('name')) {
-      return false;
-    }
-    if (l$name != lOther$name) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$name = name;
-    return Object.hashAll([_$data.containsKey('name') ? l$name : const {}]);
-  }
-}
-
-abstract class CopyWith_Input_ChurchesSetInput<TRes> {
-  factory CopyWith_Input_ChurchesSetInput(
-    Input_ChurchesSetInput instance,
-    TRes Function(Input_ChurchesSetInput) then,
-  ) = _CopyWithImpl_Input_ChurchesSetInput;
-
-  factory CopyWith_Input_ChurchesSetInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_ChurchesSetInput;
-
-  TRes call({String? name});
-}
-
-class _CopyWithImpl_Input_ChurchesSetInput<TRes>
-    implements CopyWith_Input_ChurchesSetInput<TRes> {
-  _CopyWithImpl_Input_ChurchesSetInput(this._instance, this._then);
-
-  final Input_ChurchesSetInput _instance;
-
-  final TRes Function(Input_ChurchesSetInput) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({Object? name = _undefined}) => _then(
-    Input_ChurchesSetInput._({
-      ..._instance._$data,
-      if (name != _undefined) 'name': (name as String?),
-    }),
-  );
-}
-
-class _CopyWithStubImpl_Input_ChurchesSetInput<TRes>
-    implements CopyWith_Input_ChurchesSetInput<TRes> {
-  _CopyWithStubImpl_Input_ChurchesSetInput(this._res);
-
-  TRes _res;
-
-  call({String? name}) => _res;
-}
-
-class Input_ChurchesStreamCursorInput {
-  factory Input_ChurchesStreamCursorInput({
-    required Input_ChurchesStreamCursorValueInput initialValue,
-    Enum_CursorOrdering? ordering,
-  }) => Input_ChurchesStreamCursorInput._({
-    r'initialValue': initialValue,
-    if (ordering != null) r'ordering': ordering,
-  });
-
-  Input_ChurchesStreamCursorInput._(this._$data);
-
-  factory Input_ChurchesStreamCursorInput.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    final l$initialValue = data['initialValue'];
-    result$data['initialValue'] = Input_ChurchesStreamCursorValueInput.fromJson(
-      (l$initialValue as Map<String, dynamic>),
-    );
-    if (data.containsKey('ordering')) {
-      final l$ordering = data['ordering'];
-      result$data['ordering'] = l$ordering == null
-          ? null
-          : fromJson_Enum_CursorOrdering((l$ordering as String));
-    }
-    return Input_ChurchesStreamCursorInput._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  Input_ChurchesStreamCursorValueInput get initialValue =>
-      (_$data['initialValue'] as Input_ChurchesStreamCursorValueInput);
-
-  Enum_CursorOrdering? get ordering =>
-      (_$data['ordering'] as Enum_CursorOrdering?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    final l$initialValue = initialValue;
-    result$data['initialValue'] = l$initialValue.toJson();
-    if (_$data.containsKey('ordering')) {
-      final l$ordering = ordering;
-      result$data['ordering'] = l$ordering == null
-          ? null
-          : toJson_Enum_CursorOrdering(l$ordering);
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_ChurchesStreamCursorInput<Input_ChurchesStreamCursorInput>
-  get copyWith => CopyWith_Input_ChurchesStreamCursorInput(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_ChurchesStreamCursorInput ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$initialValue = initialValue;
-    final lOther$initialValue = other.initialValue;
-    if (l$initialValue != lOther$initialValue) {
-      return false;
-    }
-    final l$ordering = ordering;
-    final lOther$ordering = other.ordering;
-    if (_$data.containsKey('ordering') !=
-        other._$data.containsKey('ordering')) {
-      return false;
-    }
-    if (l$ordering != lOther$ordering) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$initialValue = initialValue;
-    final l$ordering = ordering;
-    return Object.hashAll([
-      l$initialValue,
-      _$data.containsKey('ordering') ? l$ordering : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_ChurchesStreamCursorInput<TRes> {
-  factory CopyWith_Input_ChurchesStreamCursorInput(
-    Input_ChurchesStreamCursorInput instance,
-    TRes Function(Input_ChurchesStreamCursorInput) then,
-  ) = _CopyWithImpl_Input_ChurchesStreamCursorInput;
-
-  factory CopyWith_Input_ChurchesStreamCursorInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_ChurchesStreamCursorInput;
-
-  TRes call({
-    Input_ChurchesStreamCursorValueInput? initialValue,
-    Enum_CursorOrdering? ordering,
-  });
-  CopyWith_Input_ChurchesStreamCursorValueInput<TRes> get initialValue;
-}
-
-class _CopyWithImpl_Input_ChurchesStreamCursorInput<TRes>
-    implements CopyWith_Input_ChurchesStreamCursorInput<TRes> {
-  _CopyWithImpl_Input_ChurchesStreamCursorInput(this._instance, this._then);
-
-  final Input_ChurchesStreamCursorInput _instance;
-
-  final TRes Function(Input_ChurchesStreamCursorInput) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? initialValue = _undefined,
-    Object? ordering = _undefined,
-  }) => _then(
-    Input_ChurchesStreamCursorInput._({
-      ..._instance._$data,
-      if (initialValue != _undefined && initialValue != null)
-        'initialValue': (initialValue as Input_ChurchesStreamCursorValueInput),
-      if (ordering != _undefined)
-        'ordering': (ordering as Enum_CursorOrdering?),
-    }),
-  );
-
-  CopyWith_Input_ChurchesStreamCursorValueInput<TRes> get initialValue {
-    final local$initialValue = _instance.initialValue;
-    return CopyWith_Input_ChurchesStreamCursorValueInput(
-      local$initialValue,
-      (e) => call(initialValue: e),
-    );
-  }
-}
-
-class _CopyWithStubImpl_Input_ChurchesStreamCursorInput<TRes>
-    implements CopyWith_Input_ChurchesStreamCursorInput<TRes> {
-  _CopyWithStubImpl_Input_ChurchesStreamCursorInput(this._res);
-
-  TRes _res;
-
-  call({
-    Input_ChurchesStreamCursorValueInput? initialValue,
-    Enum_CursorOrdering? ordering,
-  }) => _res;
-
-  CopyWith_Input_ChurchesStreamCursorValueInput<TRes> get initialValue =>
-      CopyWith_Input_ChurchesStreamCursorValueInput.stub(_res);
-}
-
-class Input_ChurchesStreamCursorValueInput {
-  factory Input_ChurchesStreamCursorValueInput({
-    UuidValue? id,
-    bool? isHidden,
-    String? name,
-  }) => Input_ChurchesStreamCursorValueInput._({
-    if (id != null) r'id': id,
-    if (isHidden != null) r'isHidden': isHidden,
-    if (name != null) r'name': name,
-  });
-
-  Input_ChurchesStreamCursorValueInput._(this._$data);
-
-  factory Input_ChurchesStreamCursorValueInput.fromJson(
-    Map<String, dynamic> data,
-  ) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('id')) {
-      final l$id = data['id'];
-      result$data['id'] = l$id == null ? null : stringToUuid(l$id);
-    }
-    if (data.containsKey('isHidden')) {
-      final l$isHidden = data['isHidden'];
-      result$data['isHidden'] = (l$isHidden as bool?);
-    }
-    if (data.containsKey('name')) {
-      final l$name = data['name'];
-      result$data['name'] = (l$name as String?);
-    }
-    return Input_ChurchesStreamCursorValueInput._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  UuidValue? get id => (_$data['id'] as UuidValue?);
-
-  bool? get isHidden => (_$data['isHidden'] as bool?);
-
-  String? get name => (_$data['name'] as String?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('id')) {
-      final l$id = id;
-      result$data['id'] = l$id == null ? null : uuidToString(l$id);
-    }
-    if (_$data.containsKey('isHidden')) {
-      final l$isHidden = isHidden;
-      result$data['isHidden'] = l$isHidden;
-    }
-    if (_$data.containsKey('name')) {
-      final l$name = name;
-      result$data['name'] = l$name;
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_ChurchesStreamCursorValueInput<
-    Input_ChurchesStreamCursorValueInput
-  >
-  get copyWith => CopyWith_Input_ChurchesStreamCursorValueInput(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_ChurchesStreamCursorValueInput ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$id = id;
-    final lOther$id = other.id;
-    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
-      return false;
-    }
-    if (l$id != lOther$id) {
-      return false;
-    }
-    final l$isHidden = isHidden;
-    final lOther$isHidden = other.isHidden;
-    if (_$data.containsKey('isHidden') !=
-        other._$data.containsKey('isHidden')) {
-      return false;
-    }
-    if (l$isHidden != lOther$isHidden) {
-      return false;
-    }
-    final l$name = name;
-    final lOther$name = other.name;
-    if (_$data.containsKey('name') != other._$data.containsKey('name')) {
-      return false;
-    }
-    if (l$name != lOther$name) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$id = id;
-    final l$isHidden = isHidden;
-    final l$name = name;
-    return Object.hashAll([
-      _$data.containsKey('id') ? l$id : const {},
-      _$data.containsKey('isHidden') ? l$isHidden : const {},
-      _$data.containsKey('name') ? l$name : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_ChurchesStreamCursorValueInput<TRes> {
-  factory CopyWith_Input_ChurchesStreamCursorValueInput(
-    Input_ChurchesStreamCursorValueInput instance,
-    TRes Function(Input_ChurchesStreamCursorValueInput) then,
-  ) = _CopyWithImpl_Input_ChurchesStreamCursorValueInput;
-
-  factory CopyWith_Input_ChurchesStreamCursorValueInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_ChurchesStreamCursorValueInput;
-
-  TRes call({UuidValue? id, bool? isHidden, String? name});
-}
-
-class _CopyWithImpl_Input_ChurchesStreamCursorValueInput<TRes>
-    implements CopyWith_Input_ChurchesStreamCursorValueInput<TRes> {
-  _CopyWithImpl_Input_ChurchesStreamCursorValueInput(
-    this._instance,
-    this._then,
-  );
-
-  final Input_ChurchesStreamCursorValueInput _instance;
-
-  final TRes Function(Input_ChurchesStreamCursorValueInput) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? id = _undefined,
-    Object? isHidden = _undefined,
-    Object? name = _undefined,
-  }) => _then(
-    Input_ChurchesStreamCursorValueInput._({
-      ..._instance._$data,
-      if (id != _undefined) 'id': (id as UuidValue?),
-      if (isHidden != _undefined) 'isHidden': (isHidden as bool?),
-      if (name != _undefined) 'name': (name as String?),
-    }),
-  );
-}
-
-class _CopyWithStubImpl_Input_ChurchesStreamCursorValueInput<TRes>
-    implements CopyWith_Input_ChurchesStreamCursorValueInput<TRes> {
-  _CopyWithStubImpl_Input_ChurchesStreamCursorValueInput(this._res);
-
-  TRes _res;
-
-  call({UuidValue? id, bool? isHidden, String? name}) => _res;
-}
-
-class Input_ChurchesUpdates {
-  factory Input_ChurchesUpdates({
-    Input_ChurchesSetInput? $_set,
-    required Input_ChurchesBoolExp where,
-  }) => Input_ChurchesUpdates._({
-    if ($_set != null) r'_set': $_set,
-    r'where': where,
-  });
-
-  Input_ChurchesUpdates._(this._$data);
-
-  factory Input_ChurchesUpdates.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('_set')) {
-      final l$$_set = data['_set'];
-      result$data['_set'] = l$$_set == null
-          ? null
-          : Input_ChurchesSetInput.fromJson((l$$_set as Map<String, dynamic>));
-    }
-    final l$where = data['where'];
-    result$data['where'] = Input_ChurchesBoolExp.fromJson(
-      (l$where as Map<String, dynamic>),
-    );
-    return Input_ChurchesUpdates._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  Input_ChurchesSetInput? get $_set =>
-      (_$data['_set'] as Input_ChurchesSetInput?);
-
-  Input_ChurchesBoolExp get where => (_$data['where'] as Input_ChurchesBoolExp);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('_set')) {
-      final l$$_set = $_set;
-      result$data['_set'] = l$$_set?.toJson();
-    }
-    final l$where = where;
-    result$data['where'] = l$where.toJson();
-    return result$data;
-  }
-
-  CopyWith_Input_ChurchesUpdates<Input_ChurchesUpdates> get copyWith =>
-      CopyWith_Input_ChurchesUpdates(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_ChurchesUpdates || runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$$_set = $_set;
-    final lOther$$_set = other.$_set;
-    if (_$data.containsKey('_set') != other._$data.containsKey('_set')) {
-      return false;
-    }
-    if (l$$_set != lOther$$_set) {
-      return false;
-    }
-    final l$where = where;
-    final lOther$where = other.where;
-    if (l$where != lOther$where) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$$_set = $_set;
-    final l$where = where;
-    return Object.hashAll([
-      _$data.containsKey('_set') ? l$$_set : const {},
-      l$where,
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_ChurchesUpdates<TRes> {
-  factory CopyWith_Input_ChurchesUpdates(
-    Input_ChurchesUpdates instance,
-    TRes Function(Input_ChurchesUpdates) then,
-  ) = _CopyWithImpl_Input_ChurchesUpdates;
-
-  factory CopyWith_Input_ChurchesUpdates.stub(TRes res) =
-      _CopyWithStubImpl_Input_ChurchesUpdates;
-
-  TRes call({Input_ChurchesSetInput? $_set, Input_ChurchesBoolExp? where});
-  CopyWith_Input_ChurchesSetInput<TRes> get $_set;
-  CopyWith_Input_ChurchesBoolExp<TRes> get where;
-}
-
-class _CopyWithImpl_Input_ChurchesUpdates<TRes>
-    implements CopyWith_Input_ChurchesUpdates<TRes> {
-  _CopyWithImpl_Input_ChurchesUpdates(this._instance, this._then);
-
-  final Input_ChurchesUpdates _instance;
-
-  final TRes Function(Input_ChurchesUpdates) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({Object? $_set = _undefined, Object? where = _undefined}) => _then(
-    Input_ChurchesUpdates._({
-      ..._instance._$data,
-      if ($_set != _undefined) '_set': ($_set as Input_ChurchesSetInput?),
-      if (where != _undefined && where != null)
-        'where': (where as Input_ChurchesBoolExp),
-    }),
-  );
-
-  CopyWith_Input_ChurchesSetInput<TRes> get $_set {
-    final local$$_set = _instance.$_set;
-    return local$$_set == null
-        ? CopyWith_Input_ChurchesSetInput.stub(_then(_instance))
-        : CopyWith_Input_ChurchesSetInput(local$$_set, (e) => call($_set: e));
-  }
-
-  CopyWith_Input_ChurchesBoolExp<TRes> get where {
-    final local$where = _instance.where;
-    return CopyWith_Input_ChurchesBoolExp(local$where, (e) => call(where: e));
-  }
-}
-
-class _CopyWithStubImpl_Input_ChurchesUpdates<TRes>
-    implements CopyWith_Input_ChurchesUpdates<TRes> {
-  _CopyWithStubImpl_Input_ChurchesUpdates(this._res);
-
-  TRes _res;
-
-  call({Input_ChurchesSetInput? $_set, Input_ChurchesBoolExp? where}) => _res;
-
-  CopyWith_Input_ChurchesSetInput<TRes> get $_set =>
-      CopyWith_Input_ChurchesSetInput.stub(_res);
-
-  CopyWith_Input_ChurchesBoolExp<TRes> get where =>
-      CopyWith_Input_ChurchesBoolExp.stub(_res);
-}
-
-class Input_ClassesAggregateBoolExp {
-  factory Input_ClassesAggregateBoolExp({
-    Input_classesAggregateBoolExpBool_and? bool_and,
-    Input_classesAggregateBoolExpBool_or? bool_or,
-    Input_classesAggregateBoolExpCount? count,
-  }) => Input_ClassesAggregateBoolExp._({
-    if (bool_and != null) r'bool_and': bool_and,
-    if (bool_or != null) r'bool_or': bool_or,
-    if (count != null) r'count': count,
-  });
-
-  Input_ClassesAggregateBoolExp._(this._$data);
-
-  factory Input_ClassesAggregateBoolExp.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('bool_and')) {
-      final l$bool_and = data['bool_and'];
-      result$data['bool_and'] = l$bool_and == null
-          ? null
-          : Input_classesAggregateBoolExpBool_and.fromJson(
-              (l$bool_and as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('bool_or')) {
-      final l$bool_or = data['bool_or'];
-      result$data['bool_or'] = l$bool_or == null
-          ? null
-          : Input_classesAggregateBoolExpBool_or.fromJson(
-              (l$bool_or as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('count')) {
-      final l$count = data['count'];
-      result$data['count'] = l$count == null
-          ? null
-          : Input_classesAggregateBoolExpCount.fromJson(
-              (l$count as Map<String, dynamic>),
-            );
-    }
-    return Input_ClassesAggregateBoolExp._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  Input_classesAggregateBoolExpBool_and? get bool_and =>
-      (_$data['bool_and'] as Input_classesAggregateBoolExpBool_and?);
-
-  Input_classesAggregateBoolExpBool_or? get bool_or =>
-      (_$data['bool_or'] as Input_classesAggregateBoolExpBool_or?);
-
-  Input_classesAggregateBoolExpCount? get count =>
-      (_$data['count'] as Input_classesAggregateBoolExpCount?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('bool_and')) {
-      final l$bool_and = bool_and;
-      result$data['bool_and'] = l$bool_and?.toJson();
-    }
-    if (_$data.containsKey('bool_or')) {
-      final l$bool_or = bool_or;
-      result$data['bool_or'] = l$bool_or?.toJson();
-    }
-    if (_$data.containsKey('count')) {
-      final l$count = count;
-      result$data['count'] = l$count?.toJson();
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_ClassesAggregateBoolExp<Input_ClassesAggregateBoolExp>
-  get copyWith => CopyWith_Input_ClassesAggregateBoolExp(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_ClassesAggregateBoolExp ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$bool_and = bool_and;
-    final lOther$bool_and = other.bool_and;
-    if (_$data.containsKey('bool_and') !=
-        other._$data.containsKey('bool_and')) {
-      return false;
-    }
-    if (l$bool_and != lOther$bool_and) {
-      return false;
-    }
-    final l$bool_or = bool_or;
-    final lOther$bool_or = other.bool_or;
-    if (_$data.containsKey('bool_or') != other._$data.containsKey('bool_or')) {
-      return false;
-    }
-    if (l$bool_or != lOther$bool_or) {
-      return false;
-    }
-    final l$count = count;
-    final lOther$count = other.count;
-    if (_$data.containsKey('count') != other._$data.containsKey('count')) {
-      return false;
-    }
-    if (l$count != lOther$count) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$bool_and = bool_and;
-    final l$bool_or = bool_or;
-    final l$count = count;
-    return Object.hashAll([
-      _$data.containsKey('bool_and') ? l$bool_and : const {},
-      _$data.containsKey('bool_or') ? l$bool_or : const {},
-      _$data.containsKey('count') ? l$count : const {},
     ]);
   }
 }

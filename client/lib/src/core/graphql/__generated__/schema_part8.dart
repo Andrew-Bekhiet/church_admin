@@ -2125,289 +2125,132 @@ class _CopyWithStubImpl_Input_AuthUsersDataBoolExp<TRes>
       CopyWith_Input_UuidComparisonExp.stub(_res);
 }
 
-class Input_AuthUsersDataOrderBy {
-  factory Input_AuthUsersDataOrderBy({
-    Input_AuthUsersAdminOnAggregateOrderBy? adminOnAggregate,
-    Enum_OrderBy? blurhash,
-    Enum_OrderBy? currentUserCanManageThisUser,
-    Enum_OrderBy? email,
-    Input_UsersFcmTokensAggregateOrderBy? fcmTokensAggregate,
-    Input_HistoryLatestEditsOrderBy? lastEdit,
-    Enum_OrderBy? name,
-    Input_AuthUsersPermissionsAggregateOrderBy? permissionsAggregate,
-    Input_PersonsOrderBy? person,
-    Enum_OrderBy? photoUpdatedAt,
-    Input_UsersPreferencesOrderBy? preferences,
-    Enum_OrderBy? uid,
-  }) => Input_AuthUsersDataOrderBy._({
-    if (adminOnAggregate != null) r'adminOnAggregate': adminOnAggregate,
-    if (blurhash != null) r'blurhash': blurhash,
-    if (currentUserCanManageThisUser != null)
-      r'currentUserCanManageThisUser': currentUserCanManageThisUser,
-    if (email != null) r'email': email,
-    if (fcmTokensAggregate != null) r'fcmTokensAggregate': fcmTokensAggregate,
-    if (lastEdit != null) r'lastEdit': lastEdit,
+class Input_AuthUsersDataInsertInput {
+  factory Input_AuthUsersDataInsertInput({
+    Input_AuthUsersAdminOnArrRelInsertInput? adminOn,
+    Input_UsersFcmTokensArrRelInsertInput? fcmTokens,
+    String? name,
+    Input_AuthUsersPermissionsArrRelInsertInput? permissions,
+    Input_PersonsObjRelInsertInput? person,
+  }) => Input_AuthUsersDataInsertInput._({
+    if (adminOn != null) r'adminOn': adminOn,
+    if (fcmTokens != null) r'fcmTokens': fcmTokens,
     if (name != null) r'name': name,
-    if (permissionsAggregate != null)
-      r'permissionsAggregate': permissionsAggregate,
+    if (permissions != null) r'permissions': permissions,
     if (person != null) r'person': person,
-    if (photoUpdatedAt != null) r'photoUpdatedAt': photoUpdatedAt,
-    if (preferences != null) r'preferences': preferences,
-    if (uid != null) r'uid': uid,
   });
 
-  Input_AuthUsersDataOrderBy._(this._$data);
+  Input_AuthUsersDataInsertInput._(this._$data);
 
-  factory Input_AuthUsersDataOrderBy.fromJson(Map<String, dynamic> data) {
+  factory Input_AuthUsersDataInsertInput.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
-    if (data.containsKey('adminOnAggregate')) {
-      final l$adminOnAggregate = data['adminOnAggregate'];
-      result$data['adminOnAggregate'] = l$adminOnAggregate == null
+    if (data.containsKey('adminOn')) {
+      final l$adminOn = data['adminOn'];
+      result$data['adminOn'] = l$adminOn == null
           ? null
-          : Input_AuthUsersAdminOnAggregateOrderBy.fromJson(
-              (l$adminOnAggregate as Map<String, dynamic>),
+          : Input_AuthUsersAdminOnArrRelInsertInput.fromJson(
+              (l$adminOn as Map<String, dynamic>),
             );
     }
-    if (data.containsKey('blurhash')) {
-      final l$blurhash = data['blurhash'];
-      result$data['blurhash'] = l$blurhash == null
+    if (data.containsKey('fcmTokens')) {
+      final l$fcmTokens = data['fcmTokens'];
+      result$data['fcmTokens'] = l$fcmTokens == null
           ? null
-          : fromJson_Enum_OrderBy((l$blurhash as String));
-    }
-    if (data.containsKey('currentUserCanManageThisUser')) {
-      final l$currentUserCanManageThisUser =
-          data['currentUserCanManageThisUser'];
-      result$data['currentUserCanManageThisUser'] =
-          l$currentUserCanManageThisUser == null
-          ? null
-          : fromJson_Enum_OrderBy((l$currentUserCanManageThisUser as String));
-    }
-    if (data.containsKey('email')) {
-      final l$email = data['email'];
-      result$data['email'] = l$email == null
-          ? null
-          : fromJson_Enum_OrderBy((l$email as String));
-    }
-    if (data.containsKey('fcmTokensAggregate')) {
-      final l$fcmTokensAggregate = data['fcmTokensAggregate'];
-      result$data['fcmTokensAggregate'] = l$fcmTokensAggregate == null
-          ? null
-          : Input_UsersFcmTokensAggregateOrderBy.fromJson(
-              (l$fcmTokensAggregate as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('lastEdit')) {
-      final l$lastEdit = data['lastEdit'];
-      result$data['lastEdit'] = l$lastEdit == null
-          ? null
-          : Input_HistoryLatestEditsOrderBy.fromJson(
-              (l$lastEdit as Map<String, dynamic>),
+          : Input_UsersFcmTokensArrRelInsertInput.fromJson(
+              (l$fcmTokens as Map<String, dynamic>),
             );
     }
     if (data.containsKey('name')) {
       final l$name = data['name'];
-      result$data['name'] = l$name == null
-          ? null
-          : fromJson_Enum_OrderBy((l$name as String));
+      result$data['name'] = (l$name as String?);
     }
-    if (data.containsKey('permissionsAggregate')) {
-      final l$permissionsAggregate = data['permissionsAggregate'];
-      result$data['permissionsAggregate'] = l$permissionsAggregate == null
+    if (data.containsKey('permissions')) {
+      final l$permissions = data['permissions'];
+      result$data['permissions'] = l$permissions == null
           ? null
-          : Input_AuthUsersPermissionsAggregateOrderBy.fromJson(
-              (l$permissionsAggregate as Map<String, dynamic>),
+          : Input_AuthUsersPermissionsArrRelInsertInput.fromJson(
+              (l$permissions as Map<String, dynamic>),
             );
     }
     if (data.containsKey('person')) {
       final l$person = data['person'];
       result$data['person'] = l$person == null
           ? null
-          : Input_PersonsOrderBy.fromJson((l$person as Map<String, dynamic>));
-    }
-    if (data.containsKey('photoUpdatedAt')) {
-      final l$photoUpdatedAt = data['photoUpdatedAt'];
-      result$data['photoUpdatedAt'] = l$photoUpdatedAt == null
-          ? null
-          : fromJson_Enum_OrderBy((l$photoUpdatedAt as String));
-    }
-    if (data.containsKey('preferences')) {
-      final l$preferences = data['preferences'];
-      result$data['preferences'] = l$preferences == null
-          ? null
-          : Input_UsersPreferencesOrderBy.fromJson(
-              (l$preferences as Map<String, dynamic>),
+          : Input_PersonsObjRelInsertInput.fromJson(
+              (l$person as Map<String, dynamic>),
             );
     }
-    if (data.containsKey('uid')) {
-      final l$uid = data['uid'];
-      result$data['uid'] = l$uid == null
-          ? null
-          : fromJson_Enum_OrderBy((l$uid as String));
-    }
-    return Input_AuthUsersDataOrderBy._(result$data);
+    return Input_AuthUsersDataInsertInput._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  Input_AuthUsersAdminOnAggregateOrderBy? get adminOnAggregate =>
-      (_$data['adminOnAggregate'] as Input_AuthUsersAdminOnAggregateOrderBy?);
+  Input_AuthUsersAdminOnArrRelInsertInput? get adminOn =>
+      (_$data['adminOn'] as Input_AuthUsersAdminOnArrRelInsertInput?);
 
-  Enum_OrderBy? get blurhash => (_$data['blurhash'] as Enum_OrderBy?);
+  Input_UsersFcmTokensArrRelInsertInput? get fcmTokens =>
+      (_$data['fcmTokens'] as Input_UsersFcmTokensArrRelInsertInput?);
 
-  Enum_OrderBy? get currentUserCanManageThisUser =>
-      (_$data['currentUserCanManageThisUser'] as Enum_OrderBy?);
+  String? get name => (_$data['name'] as String?);
 
-  Enum_OrderBy? get email => (_$data['email'] as Enum_OrderBy?);
+  Input_AuthUsersPermissionsArrRelInsertInput? get permissions =>
+      (_$data['permissions'] as Input_AuthUsersPermissionsArrRelInsertInput?);
 
-  Input_UsersFcmTokensAggregateOrderBy? get fcmTokensAggregate =>
-      (_$data['fcmTokensAggregate'] as Input_UsersFcmTokensAggregateOrderBy?);
-
-  Input_HistoryLatestEditsOrderBy? get lastEdit =>
-      (_$data['lastEdit'] as Input_HistoryLatestEditsOrderBy?);
-
-  Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
-
-  Input_AuthUsersPermissionsAggregateOrderBy? get permissionsAggregate =>
-      (_$data['permissionsAggregate']
-          as Input_AuthUsersPermissionsAggregateOrderBy?);
-
-  Input_PersonsOrderBy? get person =>
-      (_$data['person'] as Input_PersonsOrderBy?);
-
-  Enum_OrderBy? get photoUpdatedAt =>
-      (_$data['photoUpdatedAt'] as Enum_OrderBy?);
-
-  Input_UsersPreferencesOrderBy? get preferences =>
-      (_$data['preferences'] as Input_UsersPreferencesOrderBy?);
-
-  Enum_OrderBy? get uid => (_$data['uid'] as Enum_OrderBy?);
+  Input_PersonsObjRelInsertInput? get person =>
+      (_$data['person'] as Input_PersonsObjRelInsertInput?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
-    if (_$data.containsKey('adminOnAggregate')) {
-      final l$adminOnAggregate = adminOnAggregate;
-      result$data['adminOnAggregate'] = l$adminOnAggregate?.toJson();
+    if (_$data.containsKey('adminOn')) {
+      final l$adminOn = adminOn;
+      result$data['adminOn'] = l$adminOn?.toJson();
     }
-    if (_$data.containsKey('blurhash')) {
-      final l$blurhash = blurhash;
-      result$data['blurhash'] = l$blurhash == null
-          ? null
-          : toJson_Enum_OrderBy(l$blurhash);
-    }
-    if (_$data.containsKey('currentUserCanManageThisUser')) {
-      final l$currentUserCanManageThisUser = currentUserCanManageThisUser;
-      result$data['currentUserCanManageThisUser'] =
-          l$currentUserCanManageThisUser == null
-          ? null
-          : toJson_Enum_OrderBy(l$currentUserCanManageThisUser);
-    }
-    if (_$data.containsKey('email')) {
-      final l$email = email;
-      result$data['email'] = l$email == null
-          ? null
-          : toJson_Enum_OrderBy(l$email);
-    }
-    if (_$data.containsKey('fcmTokensAggregate')) {
-      final l$fcmTokensAggregate = fcmTokensAggregate;
-      result$data['fcmTokensAggregate'] = l$fcmTokensAggregate?.toJson();
-    }
-    if (_$data.containsKey('lastEdit')) {
-      final l$lastEdit = lastEdit;
-      result$data['lastEdit'] = l$lastEdit?.toJson();
+    if (_$data.containsKey('fcmTokens')) {
+      final l$fcmTokens = fcmTokens;
+      result$data['fcmTokens'] = l$fcmTokens?.toJson();
     }
     if (_$data.containsKey('name')) {
       final l$name = name;
-      result$data['name'] = l$name == null ? null : toJson_Enum_OrderBy(l$name);
+      result$data['name'] = l$name;
     }
-    if (_$data.containsKey('permissionsAggregate')) {
-      final l$permissionsAggregate = permissionsAggregate;
-      result$data['permissionsAggregate'] = l$permissionsAggregate?.toJson();
+    if (_$data.containsKey('permissions')) {
+      final l$permissions = permissions;
+      result$data['permissions'] = l$permissions?.toJson();
     }
     if (_$data.containsKey('person')) {
       final l$person = person;
       result$data['person'] = l$person?.toJson();
     }
-    if (_$data.containsKey('photoUpdatedAt')) {
-      final l$photoUpdatedAt = photoUpdatedAt;
-      result$data['photoUpdatedAt'] = l$photoUpdatedAt == null
-          ? null
-          : toJson_Enum_OrderBy(l$photoUpdatedAt);
-    }
-    if (_$data.containsKey('preferences')) {
-      final l$preferences = preferences;
-      result$data['preferences'] = l$preferences?.toJson();
-    }
-    if (_$data.containsKey('uid')) {
-      final l$uid = uid;
-      result$data['uid'] = l$uid == null ? null : toJson_Enum_OrderBy(l$uid);
-    }
     return result$data;
   }
 
-  CopyWith_Input_AuthUsersDataOrderBy<Input_AuthUsersDataOrderBy>
-  get copyWith => CopyWith_Input_AuthUsersDataOrderBy(this, (i) => i);
+  CopyWith_Input_AuthUsersDataInsertInput<Input_AuthUsersDataInsertInput>
+  get copyWith => CopyWith_Input_AuthUsersDataInsertInput(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input_AuthUsersDataOrderBy ||
+    if (other is! Input_AuthUsersDataInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
-    final l$adminOnAggregate = adminOnAggregate;
-    final lOther$adminOnAggregate = other.adminOnAggregate;
-    if (_$data.containsKey('adminOnAggregate') !=
-        other._$data.containsKey('adminOnAggregate')) {
+    final l$adminOn = adminOn;
+    final lOther$adminOn = other.adminOn;
+    if (_$data.containsKey('adminOn') != other._$data.containsKey('adminOn')) {
       return false;
     }
-    if (l$adminOnAggregate != lOther$adminOnAggregate) {
+    if (l$adminOn != lOther$adminOn) {
       return false;
     }
-    final l$blurhash = blurhash;
-    final lOther$blurhash = other.blurhash;
-    if (_$data.containsKey('blurhash') !=
-        other._$data.containsKey('blurhash')) {
+    final l$fcmTokens = fcmTokens;
+    final lOther$fcmTokens = other.fcmTokens;
+    if (_$data.containsKey('fcmTokens') !=
+        other._$data.containsKey('fcmTokens')) {
       return false;
     }
-    if (l$blurhash != lOther$blurhash) {
-      return false;
-    }
-    final l$currentUserCanManageThisUser = currentUserCanManageThisUser;
-    final lOther$currentUserCanManageThisUser =
-        other.currentUserCanManageThisUser;
-    if (_$data.containsKey('currentUserCanManageThisUser') !=
-        other._$data.containsKey('currentUserCanManageThisUser')) {
-      return false;
-    }
-    if (l$currentUserCanManageThisUser != lOther$currentUserCanManageThisUser) {
-      return false;
-    }
-    final l$email = email;
-    final lOther$email = other.email;
-    if (_$data.containsKey('email') != other._$data.containsKey('email')) {
-      return false;
-    }
-    if (l$email != lOther$email) {
-      return false;
-    }
-    final l$fcmTokensAggregate = fcmTokensAggregate;
-    final lOther$fcmTokensAggregate = other.fcmTokensAggregate;
-    if (_$data.containsKey('fcmTokensAggregate') !=
-        other._$data.containsKey('fcmTokensAggregate')) {
-      return false;
-    }
-    if (l$fcmTokensAggregate != lOther$fcmTokensAggregate) {
-      return false;
-    }
-    final l$lastEdit = lastEdit;
-    final lOther$lastEdit = other.lastEdit;
-    if (_$data.containsKey('lastEdit') !=
-        other._$data.containsKey('lastEdit')) {
-      return false;
-    }
-    if (l$lastEdit != lOther$lastEdit) {
+    if (l$fcmTokens != lOther$fcmTokens) {
       return false;
     }
     final l$name = name;
@@ -2418,13 +2261,13 @@ class Input_AuthUsersDataOrderBy {
     if (l$name != lOther$name) {
       return false;
     }
-    final l$permissionsAggregate = permissionsAggregate;
-    final lOther$permissionsAggregate = other.permissionsAggregate;
-    if (_$data.containsKey('permissionsAggregate') !=
-        other._$data.containsKey('permissionsAggregate')) {
+    final l$permissions = permissions;
+    final lOther$permissions = other.permissions;
+    if (_$data.containsKey('permissions') !=
+        other._$data.containsKey('permissions')) {
       return false;
     }
-    if (l$permissionsAggregate != lOther$permissionsAggregate) {
+    if (l$permissions != lOther$permissions) {
       return false;
     }
     final l$person = person;
@@ -2435,30 +2278,227 @@ class Input_AuthUsersDataOrderBy {
     if (l$person != lOther$person) {
       return false;
     }
-    final l$photoUpdatedAt = photoUpdatedAt;
-    final lOther$photoUpdatedAt = other.photoUpdatedAt;
-    if (_$data.containsKey('photoUpdatedAt') !=
-        other._$data.containsKey('photoUpdatedAt')) {
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$adminOn = adminOn;
+    final l$fcmTokens = fcmTokens;
+    final l$name = name;
+    final l$permissions = permissions;
+    final l$person = person;
+    return Object.hashAll([
+      _$data.containsKey('adminOn') ? l$adminOn : const {},
+      _$data.containsKey('fcmTokens') ? l$fcmTokens : const {},
+      _$data.containsKey('name') ? l$name : const {},
+      _$data.containsKey('permissions') ? l$permissions : const {},
+      _$data.containsKey('person') ? l$person : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_AuthUsersDataInsertInput<TRes> {
+  factory CopyWith_Input_AuthUsersDataInsertInput(
+    Input_AuthUsersDataInsertInput instance,
+    TRes Function(Input_AuthUsersDataInsertInput) then,
+  ) = _CopyWithImpl_Input_AuthUsersDataInsertInput;
+
+  factory CopyWith_Input_AuthUsersDataInsertInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_AuthUsersDataInsertInput;
+
+  TRes call({
+    Input_AuthUsersAdminOnArrRelInsertInput? adminOn,
+    Input_UsersFcmTokensArrRelInsertInput? fcmTokens,
+    String? name,
+    Input_AuthUsersPermissionsArrRelInsertInput? permissions,
+    Input_PersonsObjRelInsertInput? person,
+  });
+  CopyWith_Input_AuthUsersAdminOnArrRelInsertInput<TRes> get adminOn;
+  CopyWith_Input_UsersFcmTokensArrRelInsertInput<TRes> get fcmTokens;
+  CopyWith_Input_AuthUsersPermissionsArrRelInsertInput<TRes> get permissions;
+  CopyWith_Input_PersonsObjRelInsertInput<TRes> get person;
+}
+
+class _CopyWithImpl_Input_AuthUsersDataInsertInput<TRes>
+    implements CopyWith_Input_AuthUsersDataInsertInput<TRes> {
+  _CopyWithImpl_Input_AuthUsersDataInsertInput(this._instance, this._then);
+
+  final Input_AuthUsersDataInsertInput _instance;
+
+  final TRes Function(Input_AuthUsersDataInsertInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? adminOn = _undefined,
+    Object? fcmTokens = _undefined,
+    Object? name = _undefined,
+    Object? permissions = _undefined,
+    Object? person = _undefined,
+  }) => _then(
+    Input_AuthUsersDataInsertInput._({
+      ..._instance._$data,
+      if (adminOn != _undefined)
+        'adminOn': (adminOn as Input_AuthUsersAdminOnArrRelInsertInput?),
+      if (fcmTokens != _undefined)
+        'fcmTokens': (fcmTokens as Input_UsersFcmTokensArrRelInsertInput?),
+      if (name != _undefined) 'name': (name as String?),
+      if (permissions != _undefined)
+        'permissions':
+            (permissions as Input_AuthUsersPermissionsArrRelInsertInput?),
+      if (person != _undefined)
+        'person': (person as Input_PersonsObjRelInsertInput?),
+    }),
+  );
+
+  CopyWith_Input_AuthUsersAdminOnArrRelInsertInput<TRes> get adminOn {
+    final local$adminOn = _instance.adminOn;
+    return local$adminOn == null
+        ? CopyWith_Input_AuthUsersAdminOnArrRelInsertInput.stub(
+            _then(_instance),
+          )
+        : CopyWith_Input_AuthUsersAdminOnArrRelInsertInput(
+            local$adminOn,
+            (e) => call(adminOn: e),
+          );
+  }
+
+  CopyWith_Input_UsersFcmTokensArrRelInsertInput<TRes> get fcmTokens {
+    final local$fcmTokens = _instance.fcmTokens;
+    return local$fcmTokens == null
+        ? CopyWith_Input_UsersFcmTokensArrRelInsertInput.stub(_then(_instance))
+        : CopyWith_Input_UsersFcmTokensArrRelInsertInput(
+            local$fcmTokens,
+            (e) => call(fcmTokens: e),
+          );
+  }
+
+  CopyWith_Input_AuthUsersPermissionsArrRelInsertInput<TRes> get permissions {
+    final local$permissions = _instance.permissions;
+    return local$permissions == null
+        ? CopyWith_Input_AuthUsersPermissionsArrRelInsertInput.stub(
+            _then(_instance),
+          )
+        : CopyWith_Input_AuthUsersPermissionsArrRelInsertInput(
+            local$permissions,
+            (e) => call(permissions: e),
+          );
+  }
+
+  CopyWith_Input_PersonsObjRelInsertInput<TRes> get person {
+    final local$person = _instance.person;
+    return local$person == null
+        ? CopyWith_Input_PersonsObjRelInsertInput.stub(_then(_instance))
+        : CopyWith_Input_PersonsObjRelInsertInput(
+            local$person,
+            (e) => call(person: e),
+          );
+  }
+}
+
+class _CopyWithStubImpl_Input_AuthUsersDataInsertInput<TRes>
+    implements CopyWith_Input_AuthUsersDataInsertInput<TRes> {
+  _CopyWithStubImpl_Input_AuthUsersDataInsertInput(this._res);
+
+  TRes _res;
+
+  call({
+    Input_AuthUsersAdminOnArrRelInsertInput? adminOn,
+    Input_UsersFcmTokensArrRelInsertInput? fcmTokens,
+    String? name,
+    Input_AuthUsersPermissionsArrRelInsertInput? permissions,
+    Input_PersonsObjRelInsertInput? person,
+  }) => _res;
+
+  CopyWith_Input_AuthUsersAdminOnArrRelInsertInput<TRes> get adminOn =>
+      CopyWith_Input_AuthUsersAdminOnArrRelInsertInput.stub(_res);
+
+  CopyWith_Input_UsersFcmTokensArrRelInsertInput<TRes> get fcmTokens =>
+      CopyWith_Input_UsersFcmTokensArrRelInsertInput.stub(_res);
+
+  CopyWith_Input_AuthUsersPermissionsArrRelInsertInput<TRes> get permissions =>
+      CopyWith_Input_AuthUsersPermissionsArrRelInsertInput.stub(_res);
+
+  CopyWith_Input_PersonsObjRelInsertInput<TRes> get person =>
+      CopyWith_Input_PersonsObjRelInsertInput.stub(_res);
+}
+
+class Input_AuthUsersDataObjRelInsertInput {
+  factory Input_AuthUsersDataObjRelInsertInput({
+    required Input_AuthUsersDataInsertInput data,
+    Input_AuthUsersDataOnConflict? onConflict,
+  }) => Input_AuthUsersDataObjRelInsertInput._({
+    r'data': data,
+    if (onConflict != null) r'onConflict': onConflict,
+  });
+
+  Input_AuthUsersDataObjRelInsertInput._(this._$data);
+
+  factory Input_AuthUsersDataObjRelInsertInput.fromJson(
+    Map<String, dynamic> data,
+  ) {
+    final result$data = <String, dynamic>{};
+    final l$data = data['data'];
+    result$data['data'] = Input_AuthUsersDataInsertInput.fromJson(
+      (l$data as Map<String, dynamic>),
+    );
+    if (data.containsKey('onConflict')) {
+      final l$onConflict = data['onConflict'];
+      result$data['onConflict'] = l$onConflict == null
+          ? null
+          : Input_AuthUsersDataOnConflict.fromJson(
+              (l$onConflict as Map<String, dynamic>),
+            );
+    }
+    return Input_AuthUsersDataObjRelInsertInput._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Input_AuthUsersDataInsertInput get data =>
+      (_$data['data'] as Input_AuthUsersDataInsertInput);
+
+  Input_AuthUsersDataOnConflict? get onConflict =>
+      (_$data['onConflict'] as Input_AuthUsersDataOnConflict?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$data = data;
+    result$data['data'] = l$data.toJson();
+    if (_$data.containsKey('onConflict')) {
+      final l$onConflict = onConflict;
+      result$data['onConflict'] = l$onConflict?.toJson();
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_AuthUsersDataObjRelInsertInput<
+    Input_AuthUsersDataObjRelInsertInput
+  >
+  get copyWith => CopyWith_Input_AuthUsersDataObjRelInsertInput(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_AuthUsersDataObjRelInsertInput ||
+        runtimeType != other.runtimeType) {
       return false;
     }
-    if (l$photoUpdatedAt != lOther$photoUpdatedAt) {
+    final l$data = data;
+    final lOther$data = other.data;
+    if (l$data != lOther$data) {
       return false;
     }
-    final l$preferences = preferences;
-    final lOther$preferences = other.preferences;
-    if (_$data.containsKey('preferences') !=
-        other._$data.containsKey('preferences')) {
+    final l$onConflict = onConflict;
+    final lOther$onConflict = other.onConflict;
+    if (_$data.containsKey('onConflict') !=
+        other._$data.containsKey('onConflict')) {
       return false;
     }
-    if (l$preferences != lOther$preferences) {
-      return false;
-    }
-    final l$uid = uid;
-    final lOther$uid = other.uid;
-    if (_$data.containsKey('uid') != other._$data.containsKey('uid')) {
-      return false;
-    }
-    if (l$uid != lOther$uid) {
+    if (l$onConflict != lOther$onConflict) {
       return false;
     }
     return true;
@@ -2466,37 +2506,11 @@ class Input_AuthUsersDataOrderBy {
 
   @override
   int get hashCode {
-    final l$adminOnAggregate = adminOnAggregate;
-    final l$blurhash = blurhash;
-    final l$currentUserCanManageThisUser = currentUserCanManageThisUser;
-    final l$email = email;
-    final l$fcmTokensAggregate = fcmTokensAggregate;
-    final l$lastEdit = lastEdit;
-    final l$name = name;
-    final l$permissionsAggregate = permissionsAggregate;
-    final l$person = person;
-    final l$photoUpdatedAt = photoUpdatedAt;
-    final l$preferences = preferences;
-    final l$uid = uid;
+    final l$data = data;
+    final l$onConflict = onConflict;
     return Object.hashAll([
-      _$data.containsKey('adminOnAggregate') ? l$adminOnAggregate : const {},
-      _$data.containsKey('blurhash') ? l$blurhash : const {},
-      _$data.containsKey('currentUserCanManageThisUser')
-          ? l$currentUserCanManageThisUser
-          : const {},
-      _$data.containsKey('email') ? l$email : const {},
-      _$data.containsKey('fcmTokensAggregate')
-          ? l$fcmTokensAggregate
-          : const {},
-      _$data.containsKey('lastEdit') ? l$lastEdit : const {},
-      _$data.containsKey('name') ? l$name : const {},
-      _$data.containsKey('permissionsAggregate')
-          ? l$permissionsAggregate
-          : const {},
-      _$data.containsKey('person') ? l$person : const {},
-      _$data.containsKey('photoUpdatedAt') ? l$photoUpdatedAt : const {},
-      _$data.containsKey('preferences') ? l$preferences : const {},
-      _$data.containsKey('uid') ? l$uid : const {},
+      l$data,
+      _$data.containsKey('onConflict') ? l$onConflict : const {},
     ]);
   }
 }

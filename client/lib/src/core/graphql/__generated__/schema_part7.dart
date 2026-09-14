@@ -37,12 +37,14 @@ abstract class CopyWith_Input_AuthUsersAdminOnInsertInput<TRes> {
     Input_StudyYearsObjRelInsertInput? serviceStudyYearData,
     bool? serviceWriteRelatedFamilies,
     UuidValue? uid,
+    Input_AuthUsersDataObjRelInsertInput? user,
   });
   CopyWith_Input_AreasObjRelInsertInput<TRes> get area;
   CopyWith_Input_ClassesArrRelInsertInput<TRes> get classes;
   CopyWith_Input_GroupsObjRelInsertInput<TRes> get group;
   CopyWith_Input_ServicesObjRelInsertInput<TRes> get service;
   CopyWith_Input_StudyYearsObjRelInsertInput<TRes> get serviceStudyYearData;
+  CopyWith_Input_AuthUsersDataObjRelInsertInput<TRes> get user;
 }
 
 class _CopyWithImpl_Input_AuthUsersAdminOnInsertInput<TRes>
@@ -82,6 +84,7 @@ class _CopyWithImpl_Input_AuthUsersAdminOnInsertInput<TRes>
     Object? serviceStudyYearData = _undefined,
     Object? serviceWriteRelatedFamilies = _undefined,
     Object? uid = _undefined,
+    Object? user = _undefined,
   }) => _then(
     Input_AuthUsersAdminOnInsertInput._({
       ..._instance._$data,
@@ -137,6 +140,8 @@ class _CopyWithImpl_Input_AuthUsersAdminOnInsertInput<TRes>
       if (serviceWriteRelatedFamilies != _undefined)
         'serviceWriteRelatedFamilies': (serviceWriteRelatedFamilies as bool?),
       if (uid != _undefined) 'uid': (uid as UuidValue?),
+      if (user != _undefined)
+        'user': (user as Input_AuthUsersDataObjRelInsertInput?),
     }),
   );
 
@@ -189,6 +194,16 @@ class _CopyWithImpl_Input_AuthUsersAdminOnInsertInput<TRes>
             (e) => call(serviceStudyYearData: e),
           );
   }
+
+  CopyWith_Input_AuthUsersDataObjRelInsertInput<TRes> get user {
+    final local$user = _instance.user;
+    return local$user == null
+        ? CopyWith_Input_AuthUsersDataObjRelInsertInput.stub(_then(_instance))
+        : CopyWith_Input_AuthUsersDataObjRelInsertInput(
+            local$user,
+            (e) => call(user: e),
+          );
+  }
 }
 
 class _CopyWithStubImpl_Input_AuthUsersAdminOnInsertInput<TRes>
@@ -224,6 +239,7 @@ class _CopyWithStubImpl_Input_AuthUsersAdminOnInsertInput<TRes>
     Input_StudyYearsObjRelInsertInput? serviceStudyYearData,
     bool? serviceWriteRelatedFamilies,
     UuidValue? uid,
+    Input_AuthUsersDataObjRelInsertInput? user,
   }) => _res;
 
   CopyWith_Input_AreasObjRelInsertInput<TRes> get area =>
@@ -240,6 +256,9 @@ class _CopyWithStubImpl_Input_AuthUsersAdminOnInsertInput<TRes>
 
   CopyWith_Input_StudyYearsObjRelInsertInput<TRes> get serviceStudyYearData =>
       CopyWith_Input_StudyYearsObjRelInsertInput.stub(_res);
+
+  CopyWith_Input_AuthUsersDataObjRelInsertInput<TRes> get user =>
+      CopyWith_Input_AuthUsersDataObjRelInsertInput.stub(_res);
 }
 
 class Input_AuthUsersAdminOnMaxOrderBy {

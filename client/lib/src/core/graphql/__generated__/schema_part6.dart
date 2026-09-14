@@ -1910,6 +1910,7 @@ class Input_AuthUsersAdminOnInsertInput {
     Input_StudyYearsObjRelInsertInput? serviceStudyYearData,
     bool? serviceWriteRelatedFamilies,
     UuidValue? uid,
+    Input_AuthUsersDataObjRelInsertInput? user,
   }) => Input_AuthUsersAdminOnInsertInput._({
     if (adminOnArea != null) r'adminOnArea': adminOnArea,
     if (adminOnGroup != null) r'adminOnGroup': adminOnGroup,
@@ -1946,6 +1947,7 @@ class Input_AuthUsersAdminOnInsertInput {
     if (serviceWriteRelatedFamilies != null)
       r'serviceWriteRelatedFamilies': serviceWriteRelatedFamilies,
     if (uid != null) r'uid': uid,
+    if (user != null) r'user': user,
   });
 
   Input_AuthUsersAdminOnInsertInput._(this._$data);
@@ -2093,6 +2095,14 @@ class Input_AuthUsersAdminOnInsertInput {
       final l$uid = data['uid'];
       result$data['uid'] = l$uid == null ? null : stringToUuid(l$uid);
     }
+    if (data.containsKey('user')) {
+      final l$user = data['user'];
+      result$data['user'] = l$user == null
+          ? null
+          : Input_AuthUsersDataObjRelInsertInput.fromJson(
+              (l$user as Map<String, dynamic>),
+            );
+    }
     return Input_AuthUsersAdminOnInsertInput._(result$data);
   }
 
@@ -2160,6 +2170,9 @@ class Input_AuthUsersAdminOnInsertInput {
       (_$data['serviceWriteRelatedFamilies'] as bool?);
 
   UuidValue? get uid => (_$data['uid'] as UuidValue?);
+
+  Input_AuthUsersDataObjRelInsertInput? get user =>
+      (_$data['user'] as Input_AuthUsersDataObjRelInsertInput?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -2278,6 +2291,10 @@ class Input_AuthUsersAdminOnInsertInput {
     if (_$data.containsKey('uid')) {
       final l$uid = uid;
       result$data['uid'] = l$uid == null ? null : uuidToString(l$uid);
+    }
+    if (_$data.containsKey('user')) {
+      final l$user = user;
+      result$data['user'] = l$user?.toJson();
     }
     return result$data;
   }
@@ -2531,6 +2548,14 @@ class Input_AuthUsersAdminOnInsertInput {
     if (l$uid != lOther$uid) {
       return false;
     }
+    final l$user = user;
+    final lOther$user = other.user;
+    if (_$data.containsKey('user') != other._$data.containsKey('user')) {
+      return false;
+    }
+    if (l$user != lOther$user) {
+      return false;
+    }
     return true;
   }
 
@@ -2564,6 +2589,7 @@ class Input_AuthUsersAdminOnInsertInput {
     final l$serviceStudyYearData = serviceStudyYearData;
     final l$serviceWriteRelatedFamilies = serviceWriteRelatedFamilies;
     final l$uid = uid;
+    final l$user = user;
     return Object.hashAll([
       _$data.containsKey('adminOnArea') ? l$adminOnArea : const {},
       _$data.containsKey('adminOnGroup') ? l$adminOnGroup : const {},
@@ -2609,6 +2635,7 @@ class Input_AuthUsersAdminOnInsertInput {
           ? l$serviceWriteRelatedFamilies
           : const {},
       _$data.containsKey('uid') ? l$uid : const {},
+      _$data.containsKey('user') ? l$user : const {},
     ]);
   }
 }

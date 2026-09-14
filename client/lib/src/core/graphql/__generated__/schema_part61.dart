@@ -1,2547 +1,2543 @@
 // Part 61 of the schema
 part of "schema.graphql.dart";
 
-String toJson_Enum_HistoryConfessionHistoryUpdateColumn(
-  Enum_HistoryConfessionHistoryUpdateColumn e,
-) {
-  switch (e) {
-    case Enum_HistoryConfessionHistoryUpdateColumn.$_PLACEHOLDER:
-      return r'_PLACEHOLDER';
-    case Enum_HistoryConfessionHistoryUpdateColumn.$unknown:
-      return r'$unknown';
+abstract class CopyWith_Input_personsAggregateBoolExpCount<TRes> {
+  factory CopyWith_Input_personsAggregateBoolExpCount(
+    Input_personsAggregateBoolExpCount instance,
+    TRes Function(Input_personsAggregateBoolExpCount) then,
+  ) = _CopyWithImpl_Input_personsAggregateBoolExpCount;
+
+  factory CopyWith_Input_personsAggregateBoolExpCount.stub(TRes res) =
+      _CopyWithStubImpl_Input_personsAggregateBoolExpCount;
+
+  TRes call({
+    List<Enum_PersonsSelectColumn>? arguments,
+    bool? distinct,
+    Input_PersonsBoolExp? filter,
+    Input_IntComparisonExp? predicate,
+  });
+  CopyWith_Input_PersonsBoolExp<TRes> get filter;
+  CopyWith_Input_IntComparisonExp<TRes> get predicate;
+}
+
+class _CopyWithImpl_Input_personsAggregateBoolExpCount<TRes>
+    implements CopyWith_Input_personsAggregateBoolExpCount<TRes> {
+  _CopyWithImpl_Input_personsAggregateBoolExpCount(this._instance, this._then);
+
+  final Input_personsAggregateBoolExpCount _instance;
+
+  final TRes Function(Input_personsAggregateBoolExpCount) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? arguments = _undefined,
+    Object? distinct = _undefined,
+    Object? filter = _undefined,
+    Object? predicate = _undefined,
+  }) => _then(
+    Input_personsAggregateBoolExpCount._({
+      ..._instance._$data,
+      if (arguments != _undefined)
+        'arguments': (arguments as List<Enum_PersonsSelectColumn>?),
+      if (distinct != _undefined) 'distinct': (distinct as bool?),
+      if (filter != _undefined) 'filter': (filter as Input_PersonsBoolExp?),
+      if (predicate != _undefined && predicate != null)
+        'predicate': (predicate as Input_IntComparisonExp),
+    }),
+  );
+
+  CopyWith_Input_PersonsBoolExp<TRes> get filter {
+    final local$filter = _instance.filter;
+    return local$filter == null
+        ? CopyWith_Input_PersonsBoolExp.stub(_then(_instance))
+        : CopyWith_Input_PersonsBoolExp(local$filter, (e) => call(filter: e));
+  }
+
+  CopyWith_Input_IntComparisonExp<TRes> get predicate {
+    final local$predicate = _instance.predicate;
+    return CopyWith_Input_IntComparisonExp(
+      local$predicate,
+      (e) => call(predicate: e),
+    );
   }
 }
 
-Enum_HistoryConfessionHistoryUpdateColumn
-fromJson_Enum_HistoryConfessionHistoryUpdateColumn(String value) {
-  switch (value) {
-    case r'_PLACEHOLDER':
-      return Enum_HistoryConfessionHistoryUpdateColumn.$_PLACEHOLDER;
-    default:
-      return Enum_HistoryConfessionHistoryUpdateColumn.$unknown;
+class _CopyWithStubImpl_Input_personsAggregateBoolExpCount<TRes>
+    implements CopyWith_Input_personsAggregateBoolExpCount<TRes> {
+  _CopyWithStubImpl_Input_personsAggregateBoolExpCount(this._res);
+
+  TRes _res;
+
+  call({
+    List<Enum_PersonsSelectColumn>? arguments,
+    bool? distinct,
+    Input_PersonsBoolExp? filter,
+    Input_IntComparisonExp? predicate,
+  }) => _res;
+
+  CopyWith_Input_PersonsBoolExp<TRes> get filter =>
+      CopyWith_Input_PersonsBoolExp.stub(_res);
+
+  CopyWith_Input_IntComparisonExp<TRes> get predicate =>
+      CopyWith_Input_IntComparisonExp.stub(_res);
+}
+
+class Input_st_d_within_geography_input {
+  factory Input_st_d_within_geography_input({
+    required double distance,
+    required Map<String, dynamic> from,
+    bool? use_spheroid,
+  }) => Input_st_d_within_geography_input._({
+    r'distance': distance,
+    r'from': from,
+    if (use_spheroid != null) r'use_spheroid': use_spheroid,
+  });
+
+  Input_st_d_within_geography_input._(this._$data);
+
+  factory Input_st_d_within_geography_input.fromJson(
+    Map<String, dynamic> data,
+  ) {
+    final result$data = <String, dynamic>{};
+    final l$distance = data['distance'];
+    result$data['distance'] = (l$distance as num).toDouble();
+    final l$from = data['from'];
+    result$data['from'] = (l$from as Map<String, dynamic>);
+    if (data.containsKey('use_spheroid')) {
+      final l$use_spheroid = data['use_spheroid'];
+      result$data['use_spheroid'] = (l$use_spheroid as bool?);
+    }
+    return Input_st_d_within_geography_input._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  double get distance => (_$data['distance'] as double);
+
+  Map<String, dynamic> get from => (_$data['from'] as Map<String, dynamic>);
+
+  bool? get use_spheroid => (_$data['use_spheroid'] as bool?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$distance = distance;
+    result$data['distance'] = l$distance;
+    final l$from = from;
+    result$data['from'] = l$from;
+    if (_$data.containsKey('use_spheroid')) {
+      final l$use_spheroid = use_spheroid;
+      result$data['use_spheroid'] = l$use_spheroid;
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_st_d_within_geography_input<Input_st_d_within_geography_input>
+  get copyWith => CopyWith_Input_st_d_within_geography_input(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_st_d_within_geography_input ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$distance = distance;
+    final lOther$distance = other.distance;
+    if (l$distance != lOther$distance) {
+      return false;
+    }
+    final l$from = from;
+    final lOther$from = other.from;
+    if (l$from != lOther$from) {
+      return false;
+    }
+    final l$use_spheroid = use_spheroid;
+    final lOther$use_spheroid = other.use_spheroid;
+    if (_$data.containsKey('use_spheroid') !=
+        other._$data.containsKey('use_spheroid')) {
+      return false;
+    }
+    if (l$use_spheroid != lOther$use_spheroid) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$distance = distance;
+    final l$from = from;
+    final l$use_spheroid = use_spheroid;
+    return Object.hashAll([
+      l$distance,
+      l$from,
+      _$data.containsKey('use_spheroid') ? l$use_spheroid : const {},
+    ]);
   }
 }
 
-enum Enum_HistoryEditHistorySelectColumn {
-  recordId,
-  recordedBy,
-  table,
-  time,
+abstract class CopyWith_Input_st_d_within_geography_input<TRes> {
+  factory CopyWith_Input_st_d_within_geography_input(
+    Input_st_d_within_geography_input instance,
+    TRes Function(Input_st_d_within_geography_input) then,
+  ) = _CopyWithImpl_Input_st_d_within_geography_input;
+
+  factory CopyWith_Input_st_d_within_geography_input.stub(TRes res) =
+      _CopyWithStubImpl_Input_st_d_within_geography_input;
+
+  TRes call({double? distance, Map<String, dynamic>? from, bool? use_spheroid});
+}
+
+class _CopyWithImpl_Input_st_d_within_geography_input<TRes>
+    implements CopyWith_Input_st_d_within_geography_input<TRes> {
+  _CopyWithImpl_Input_st_d_within_geography_input(this._instance, this._then);
+
+  final Input_st_d_within_geography_input _instance;
+
+  final TRes Function(Input_st_d_within_geography_input) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? distance = _undefined,
+    Object? from = _undefined,
+    Object? use_spheroid = _undefined,
+  }) => _then(
+    Input_st_d_within_geography_input._({
+      ..._instance._$data,
+      if (distance != _undefined && distance != null)
+        'distance': (distance as double),
+      if (from != _undefined && from != null)
+        'from': (from as Map<String, dynamic>),
+      if (use_spheroid != _undefined) 'use_spheroid': (use_spheroid as bool?),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Input_st_d_within_geography_input<TRes>
+    implements CopyWith_Input_st_d_within_geography_input<TRes> {
+  _CopyWithStubImpl_Input_st_d_within_geography_input(this._res);
+
+  TRes _res;
+
+  call({double? distance, Map<String, dynamic>? from, bool? use_spheroid}) =>
+      _res;
+}
+
+class Input_st_d_within_input {
+  factory Input_st_d_within_input({
+    required double distance,
+    required Map<String, dynamic> from,
+  }) => Input_st_d_within_input._({r'distance': distance, r'from': from});
+
+  Input_st_d_within_input._(this._$data);
+
+  factory Input_st_d_within_input.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$distance = data['distance'];
+    result$data['distance'] = (l$distance as num).toDouble();
+    final l$from = data['from'];
+    result$data['from'] = (l$from as Map<String, dynamic>);
+    return Input_st_d_within_input._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  double get distance => (_$data['distance'] as double);
+
+  Map<String, dynamic> get from => (_$data['from'] as Map<String, dynamic>);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$distance = distance;
+    result$data['distance'] = l$distance;
+    final l$from = from;
+    result$data['from'] = l$from;
+    return result$data;
+  }
+
+  CopyWith_Input_st_d_within_input<Input_st_d_within_input> get copyWith =>
+      CopyWith_Input_st_d_within_input(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_st_d_within_input || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$distance = distance;
+    final lOther$distance = other.distance;
+    if (l$distance != lOther$distance) {
+      return false;
+    }
+    final l$from = from;
+    final lOther$from = other.from;
+    if (l$from != lOther$from) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$distance = distance;
+    final l$from = from;
+    return Object.hashAll([l$distance, l$from]);
+  }
+}
+
+abstract class CopyWith_Input_st_d_within_input<TRes> {
+  factory CopyWith_Input_st_d_within_input(
+    Input_st_d_within_input instance,
+    TRes Function(Input_st_d_within_input) then,
+  ) = _CopyWithImpl_Input_st_d_within_input;
+
+  factory CopyWith_Input_st_d_within_input.stub(TRes res) =
+      _CopyWithStubImpl_Input_st_d_within_input;
+
+  TRes call({double? distance, Map<String, dynamic>? from});
+}
+
+class _CopyWithImpl_Input_st_d_within_input<TRes>
+    implements CopyWith_Input_st_d_within_input<TRes> {
+  _CopyWithImpl_Input_st_d_within_input(this._instance, this._then);
+
+  final Input_st_d_within_input _instance;
+
+  final TRes Function(Input_st_d_within_input) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? distance = _undefined, Object? from = _undefined}) =>
+      _then(
+        Input_st_d_within_input._({
+          ..._instance._$data,
+          if (distance != _undefined && distance != null)
+            'distance': (distance as double),
+          if (from != _undefined && from != null)
+            'from': (from as Map<String, dynamic>),
+        }),
+      );
+}
+
+class _CopyWithStubImpl_Input_st_d_within_input<TRes>
+    implements CopyWith_Input_st_d_within_input<TRes> {
+  _CopyWithStubImpl_Input_st_d_within_input(this._res);
+
+  TRes _res;
+
+  call({double? distance, Map<String, dynamic>? from}) => _res;
+}
+
+class Input_storesAggregateBoolExpCount {
+  factory Input_storesAggregateBoolExpCount({
+    List<Enum_StoresSelectColumn>? arguments,
+    bool? distinct,
+    Input_StoresBoolExp? filter,
+    required Input_IntComparisonExp predicate,
+  }) => Input_storesAggregateBoolExpCount._({
+    if (arguments != null) r'arguments': arguments,
+    if (distinct != null) r'distinct': distinct,
+    if (filter != null) r'filter': filter,
+    r'predicate': predicate,
+  });
+
+  Input_storesAggregateBoolExpCount._(this._$data);
+
+  factory Input_storesAggregateBoolExpCount.fromJson(
+    Map<String, dynamic> data,
+  ) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('arguments')) {
+      final l$arguments = data['arguments'];
+      result$data['arguments'] = (l$arguments as List<dynamic>?)
+          ?.map((e) => fromJson_Enum_StoresSelectColumn((e as String)))
+          .toList();
+    }
+    if (data.containsKey('distinct')) {
+      final l$distinct = data['distinct'];
+      result$data['distinct'] = (l$distinct as bool?);
+    }
+    if (data.containsKey('filter')) {
+      final l$filter = data['filter'];
+      result$data['filter'] = l$filter == null
+          ? null
+          : Input_StoresBoolExp.fromJson((l$filter as Map<String, dynamic>));
+    }
+    final l$predicate = data['predicate'];
+    result$data['predicate'] = Input_IntComparisonExp.fromJson(
+      (l$predicate as Map<String, dynamic>),
+    );
+    return Input_storesAggregateBoolExpCount._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  List<Enum_StoresSelectColumn>? get arguments =>
+      (_$data['arguments'] as List<Enum_StoresSelectColumn>?);
+
+  bool? get distinct => (_$data['distinct'] as bool?);
+
+  Input_StoresBoolExp? get filter => (_$data['filter'] as Input_StoresBoolExp?);
+
+  Input_IntComparisonExp get predicate =>
+      (_$data['predicate'] as Input_IntComparisonExp);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('arguments')) {
+      final l$arguments = arguments;
+      result$data['arguments'] = l$arguments
+          ?.map((e) => toJson_Enum_StoresSelectColumn(e))
+          .toList();
+    }
+    if (_$data.containsKey('distinct')) {
+      final l$distinct = distinct;
+      result$data['distinct'] = l$distinct;
+    }
+    if (_$data.containsKey('filter')) {
+      final l$filter = filter;
+      result$data['filter'] = l$filter?.toJson();
+    }
+    final l$predicate = predicate;
+    result$data['predicate'] = l$predicate.toJson();
+    return result$data;
+  }
+
+  CopyWith_Input_storesAggregateBoolExpCount<Input_storesAggregateBoolExpCount>
+  get copyWith => CopyWith_Input_storesAggregateBoolExpCount(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_storesAggregateBoolExpCount ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$arguments = arguments;
+    final lOther$arguments = other.arguments;
+    if (_$data.containsKey('arguments') !=
+        other._$data.containsKey('arguments')) {
+      return false;
+    }
+    if (l$arguments != null && lOther$arguments != null) {
+      if (l$arguments.length != lOther$arguments.length) {
+        return false;
+      }
+      for (int i = 0; i < l$arguments.length; i++) {
+        final l$arguments$entry = l$arguments[i];
+        final lOther$arguments$entry = lOther$arguments[i];
+        if (l$arguments$entry != lOther$arguments$entry) {
+          return false;
+        }
+      }
+    } else if (l$arguments != lOther$arguments) {
+      return false;
+    }
+    final l$distinct = distinct;
+    final lOther$distinct = other.distinct;
+    if (_$data.containsKey('distinct') !=
+        other._$data.containsKey('distinct')) {
+      return false;
+    }
+    if (l$distinct != lOther$distinct) {
+      return false;
+    }
+    final l$filter = filter;
+    final lOther$filter = other.filter;
+    if (_$data.containsKey('filter') != other._$data.containsKey('filter')) {
+      return false;
+    }
+    if (l$filter != lOther$filter) {
+      return false;
+    }
+    final l$predicate = predicate;
+    final lOther$predicate = other.predicate;
+    if (l$predicate != lOther$predicate) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$arguments = arguments;
+    final l$distinct = distinct;
+    final l$filter = filter;
+    final l$predicate = predicate;
+    return Object.hashAll([
+      _$data.containsKey('arguments')
+          ? l$arguments == null
+                ? null
+                : Object.hashAll(l$arguments.map((v) => v))
+          : const {},
+      _$data.containsKey('distinct') ? l$distinct : const {},
+      _$data.containsKey('filter') ? l$filter : const {},
+      l$predicate,
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_storesAggregateBoolExpCount<TRes> {
+  factory CopyWith_Input_storesAggregateBoolExpCount(
+    Input_storesAggregateBoolExpCount instance,
+    TRes Function(Input_storesAggregateBoolExpCount) then,
+  ) = _CopyWithImpl_Input_storesAggregateBoolExpCount;
+
+  factory CopyWith_Input_storesAggregateBoolExpCount.stub(TRes res) =
+      _CopyWithStubImpl_Input_storesAggregateBoolExpCount;
+
+  TRes call({
+    List<Enum_StoresSelectColumn>? arguments,
+    bool? distinct,
+    Input_StoresBoolExp? filter,
+    Input_IntComparisonExp? predicate,
+  });
+  CopyWith_Input_StoresBoolExp<TRes> get filter;
+  CopyWith_Input_IntComparisonExp<TRes> get predicate;
+}
+
+class _CopyWithImpl_Input_storesAggregateBoolExpCount<TRes>
+    implements CopyWith_Input_storesAggregateBoolExpCount<TRes> {
+  _CopyWithImpl_Input_storesAggregateBoolExpCount(this._instance, this._then);
+
+  final Input_storesAggregateBoolExpCount _instance;
+
+  final TRes Function(Input_storesAggregateBoolExpCount) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? arguments = _undefined,
+    Object? distinct = _undefined,
+    Object? filter = _undefined,
+    Object? predicate = _undefined,
+  }) => _then(
+    Input_storesAggregateBoolExpCount._({
+      ..._instance._$data,
+      if (arguments != _undefined)
+        'arguments': (arguments as List<Enum_StoresSelectColumn>?),
+      if (distinct != _undefined) 'distinct': (distinct as bool?),
+      if (filter != _undefined) 'filter': (filter as Input_StoresBoolExp?),
+      if (predicate != _undefined && predicate != null)
+        'predicate': (predicate as Input_IntComparisonExp),
+    }),
+  );
+
+  CopyWith_Input_StoresBoolExp<TRes> get filter {
+    final local$filter = _instance.filter;
+    return local$filter == null
+        ? CopyWith_Input_StoresBoolExp.stub(_then(_instance))
+        : CopyWith_Input_StoresBoolExp(local$filter, (e) => call(filter: e));
+  }
+
+  CopyWith_Input_IntComparisonExp<TRes> get predicate {
+    final local$predicate = _instance.predicate;
+    return CopyWith_Input_IntComparisonExp(
+      local$predicate,
+      (e) => call(predicate: e),
+    );
+  }
+}
+
+class _CopyWithStubImpl_Input_storesAggregateBoolExpCount<TRes>
+    implements CopyWith_Input_storesAggregateBoolExpCount<TRes> {
+  _CopyWithStubImpl_Input_storesAggregateBoolExpCount(this._res);
+
+  TRes _res;
+
+  call({
+    List<Enum_StoresSelectColumn>? arguments,
+    bool? distinct,
+    Input_StoresBoolExp? filter,
+    Input_IntComparisonExp? predicate,
+  }) => _res;
+
+  CopyWith_Input_StoresBoolExp<TRes> get filter =>
+      CopyWith_Input_StoresBoolExp.stub(_res);
+
+  CopyWith_Input_IntComparisonExp<TRes> get predicate =>
+      CopyWith_Input_IntComparisonExp.stub(_res);
+}
+
+enum Enum_AddressesConstraint {
+  addresses_family_id_idx,
+  addresses_pk,
+  addresses_store_id_idx,
   $unknown;
 
-  factory Enum_HistoryEditHistorySelectColumn.fromJson(String value) =>
-      fromJson_Enum_HistoryEditHistorySelectColumn(value);
+  factory Enum_AddressesConstraint.fromJson(String value) =>
+      fromJson_Enum_AddressesConstraint(value);
 
-  String toJson() => toJson_Enum_HistoryEditHistorySelectColumn(this);
+  String toJson() => toJson_Enum_AddressesConstraint(this);
 }
 
-String toJson_Enum_HistoryEditHistorySelectColumn(
-  Enum_HistoryEditHistorySelectColumn e,
-) {
+String toJson_Enum_AddressesConstraint(Enum_AddressesConstraint e) {
   switch (e) {
-    case Enum_HistoryEditHistorySelectColumn.recordId:
-      return r'recordId';
-    case Enum_HistoryEditHistorySelectColumn.recordedBy:
-      return r'recordedBy';
-    case Enum_HistoryEditHistorySelectColumn.table:
-      return r'table';
-    case Enum_HistoryEditHistorySelectColumn.time:
-      return r'time';
-    case Enum_HistoryEditHistorySelectColumn.$unknown:
+    case Enum_AddressesConstraint.addresses_family_id_idx:
+      return r'addresses_family_id_idx';
+    case Enum_AddressesConstraint.addresses_pk:
+      return r'addresses_pk';
+    case Enum_AddressesConstraint.addresses_store_id_idx:
+      return r'addresses_store_id_idx';
+    case Enum_AddressesConstraint.$unknown:
       return r'$unknown';
   }
 }
 
-Enum_HistoryEditHistorySelectColumn
-fromJson_Enum_HistoryEditHistorySelectColumn(String value) {
+Enum_AddressesConstraint fromJson_Enum_AddressesConstraint(String value) {
   switch (value) {
-    case r'recordId':
-      return Enum_HistoryEditHistorySelectColumn.recordId;
-    case r'recordedBy':
-      return Enum_HistoryEditHistorySelectColumn.recordedBy;
-    case r'table':
-      return Enum_HistoryEditHistorySelectColumn.table;
-    case r'time':
-      return Enum_HistoryEditHistorySelectColumn.time;
+    case r'addresses_family_id_idx':
+      return Enum_AddressesConstraint.addresses_family_id_idx;
+    case r'addresses_pk':
+      return Enum_AddressesConstraint.addresses_pk;
+    case r'addresses_store_id_idx':
+      return Enum_AddressesConstraint.addresses_store_id_idx;
     default:
-      return Enum_HistoryEditHistorySelectColumn.$unknown;
+      return Enum_AddressesConstraint.$unknown;
   }
 }
 
-enum Enum_HistoryKodasHistoryConstraint {
-  kodas_history_day_id_person_id_key,
-  kodas_history_pkey,
+enum Enum_AddressesSelectColumn {
+  apartmentNumber,
+  areaId,
+  countryIsoCode,
+  districtId,
+  familyId,
+  geolocation,
+  houseNumber,
+  id,
+  specialLandmark,
+  storeId,
+  storeyNumber,
+  streetId,
+  substreetName,
   $unknown;
 
-  factory Enum_HistoryKodasHistoryConstraint.fromJson(String value) =>
-      fromJson_Enum_HistoryKodasHistoryConstraint(value);
+  factory Enum_AddressesSelectColumn.fromJson(String value) =>
+      fromJson_Enum_AddressesSelectColumn(value);
 
-  String toJson() => toJson_Enum_HistoryKodasHistoryConstraint(this);
+  String toJson() => toJson_Enum_AddressesSelectColumn(this);
 }
 
-String toJson_Enum_HistoryKodasHistoryConstraint(
-  Enum_HistoryKodasHistoryConstraint e,
-) {
+String toJson_Enum_AddressesSelectColumn(Enum_AddressesSelectColumn e) {
   switch (e) {
-    case Enum_HistoryKodasHistoryConstraint.kodas_history_day_id_person_id_key:
-      return r'kodas_history_day_id_person_id_key';
-    case Enum_HistoryKodasHistoryConstraint.kodas_history_pkey:
-      return r'kodas_history_pkey';
-    case Enum_HistoryKodasHistoryConstraint.$unknown:
+    case Enum_AddressesSelectColumn.apartmentNumber:
+      return r'apartmentNumber';
+    case Enum_AddressesSelectColumn.areaId:
+      return r'areaId';
+    case Enum_AddressesSelectColumn.countryIsoCode:
+      return r'countryIsoCode';
+    case Enum_AddressesSelectColumn.districtId:
+      return r'districtId';
+    case Enum_AddressesSelectColumn.familyId:
+      return r'familyId';
+    case Enum_AddressesSelectColumn.geolocation:
+      return r'geolocation';
+    case Enum_AddressesSelectColumn.houseNumber:
+      return r'houseNumber';
+    case Enum_AddressesSelectColumn.id:
+      return r'id';
+    case Enum_AddressesSelectColumn.specialLandmark:
+      return r'specialLandmark';
+    case Enum_AddressesSelectColumn.storeId:
+      return r'storeId';
+    case Enum_AddressesSelectColumn.storeyNumber:
+      return r'storeyNumber';
+    case Enum_AddressesSelectColumn.streetId:
+      return r'streetId';
+    case Enum_AddressesSelectColumn.substreetName:
+      return r'substreetName';
+    case Enum_AddressesSelectColumn.$unknown:
       return r'$unknown';
   }
 }
 
-Enum_HistoryKodasHistoryConstraint fromJson_Enum_HistoryKodasHistoryConstraint(
+Enum_AddressesSelectColumn fromJson_Enum_AddressesSelectColumn(String value) {
+  switch (value) {
+    case r'apartmentNumber':
+      return Enum_AddressesSelectColumn.apartmentNumber;
+    case r'areaId':
+      return Enum_AddressesSelectColumn.areaId;
+    case r'countryIsoCode':
+      return Enum_AddressesSelectColumn.countryIsoCode;
+    case r'districtId':
+      return Enum_AddressesSelectColumn.districtId;
+    case r'familyId':
+      return Enum_AddressesSelectColumn.familyId;
+    case r'geolocation':
+      return Enum_AddressesSelectColumn.geolocation;
+    case r'houseNumber':
+      return Enum_AddressesSelectColumn.houseNumber;
+    case r'id':
+      return Enum_AddressesSelectColumn.id;
+    case r'specialLandmark':
+      return Enum_AddressesSelectColumn.specialLandmark;
+    case r'storeId':
+      return Enum_AddressesSelectColumn.storeId;
+    case r'storeyNumber':
+      return Enum_AddressesSelectColumn.storeyNumber;
+    case r'streetId':
+      return Enum_AddressesSelectColumn.streetId;
+    case r'substreetName':
+      return Enum_AddressesSelectColumn.substreetName;
+    default:
+      return Enum_AddressesSelectColumn.$unknown;
+  }
+}
+
+enum Enum_AddressesUpdateColumn {
+  apartmentNumber,
+  areaId,
+  countryIsoCode,
+  districtId,
+  familyId,
+  geolocation,
+  houseNumber,
+  specialLandmark,
+  storeId,
+  storeyNumber,
+  streetId,
+  substreetName,
+  $unknown;
+
+  factory Enum_AddressesUpdateColumn.fromJson(String value) =>
+      fromJson_Enum_AddressesUpdateColumn(value);
+
+  String toJson() => toJson_Enum_AddressesUpdateColumn(this);
+}
+
+String toJson_Enum_AddressesUpdateColumn(Enum_AddressesUpdateColumn e) {
+  switch (e) {
+    case Enum_AddressesUpdateColumn.apartmentNumber:
+      return r'apartmentNumber';
+    case Enum_AddressesUpdateColumn.areaId:
+      return r'areaId';
+    case Enum_AddressesUpdateColumn.countryIsoCode:
+      return r'countryIsoCode';
+    case Enum_AddressesUpdateColumn.districtId:
+      return r'districtId';
+    case Enum_AddressesUpdateColumn.familyId:
+      return r'familyId';
+    case Enum_AddressesUpdateColumn.geolocation:
+      return r'geolocation';
+    case Enum_AddressesUpdateColumn.houseNumber:
+      return r'houseNumber';
+    case Enum_AddressesUpdateColumn.specialLandmark:
+      return r'specialLandmark';
+    case Enum_AddressesUpdateColumn.storeId:
+      return r'storeId';
+    case Enum_AddressesUpdateColumn.storeyNumber:
+      return r'storeyNumber';
+    case Enum_AddressesUpdateColumn.streetId:
+      return r'streetId';
+    case Enum_AddressesUpdateColumn.substreetName:
+      return r'substreetName';
+    case Enum_AddressesUpdateColumn.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_AddressesUpdateColumn fromJson_Enum_AddressesUpdateColumn(String value) {
+  switch (value) {
+    case r'apartmentNumber':
+      return Enum_AddressesUpdateColumn.apartmentNumber;
+    case r'areaId':
+      return Enum_AddressesUpdateColumn.areaId;
+    case r'countryIsoCode':
+      return Enum_AddressesUpdateColumn.countryIsoCode;
+    case r'districtId':
+      return Enum_AddressesUpdateColumn.districtId;
+    case r'familyId':
+      return Enum_AddressesUpdateColumn.familyId;
+    case r'geolocation':
+      return Enum_AddressesUpdateColumn.geolocation;
+    case r'houseNumber':
+      return Enum_AddressesUpdateColumn.houseNumber;
+    case r'specialLandmark':
+      return Enum_AddressesUpdateColumn.specialLandmark;
+    case r'storeId':
+      return Enum_AddressesUpdateColumn.storeId;
+    case r'storeyNumber':
+      return Enum_AddressesUpdateColumn.storeyNumber;
+    case r'streetId':
+      return Enum_AddressesUpdateColumn.streetId;
+    case r'substreetName':
+      return Enum_AddressesUpdateColumn.substreetName;
+    default:
+      return Enum_AddressesUpdateColumn.$unknown;
+  }
+}
+
+enum Enum_AreasConstraint {
+  areas_pkey,
+  $unknown;
+
+  factory Enum_AreasConstraint.fromJson(String value) =>
+      fromJson_Enum_AreasConstraint(value);
+
+  String toJson() => toJson_Enum_AreasConstraint(this);
+}
+
+String toJson_Enum_AreasConstraint(Enum_AreasConstraint e) {
+  switch (e) {
+    case Enum_AreasConstraint.areas_pkey:
+      return r'areas_pkey';
+    case Enum_AreasConstraint.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_AreasConstraint fromJson_Enum_AreasConstraint(String value) {
+  switch (value) {
+    case r'areas_pkey':
+      return Enum_AreasConstraint.areas_pkey;
+    default:
+      return Enum_AreasConstraint.$unknown;
+  }
+}
+
+enum Enum_AreasSelectColumn {
+  blurhash,
+  bounds,
+  color,
+  id,
+  name,
+  photoUpdatedAt,
+  $unknown;
+
+  factory Enum_AreasSelectColumn.fromJson(String value) =>
+      fromJson_Enum_AreasSelectColumn(value);
+
+  String toJson() => toJson_Enum_AreasSelectColumn(this);
+}
+
+String toJson_Enum_AreasSelectColumn(Enum_AreasSelectColumn e) {
+  switch (e) {
+    case Enum_AreasSelectColumn.blurhash:
+      return r'blurhash';
+    case Enum_AreasSelectColumn.bounds:
+      return r'bounds';
+    case Enum_AreasSelectColumn.color:
+      return r'color';
+    case Enum_AreasSelectColumn.id:
+      return r'id';
+    case Enum_AreasSelectColumn.name:
+      return r'name';
+    case Enum_AreasSelectColumn.photoUpdatedAt:
+      return r'photoUpdatedAt';
+    case Enum_AreasSelectColumn.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_AreasSelectColumn fromJson_Enum_AreasSelectColumn(String value) {
+  switch (value) {
+    case r'blurhash':
+      return Enum_AreasSelectColumn.blurhash;
+    case r'bounds':
+      return Enum_AreasSelectColumn.bounds;
+    case r'color':
+      return Enum_AreasSelectColumn.color;
+    case r'id':
+      return Enum_AreasSelectColumn.id;
+    case r'name':
+      return Enum_AreasSelectColumn.name;
+    case r'photoUpdatedAt':
+      return Enum_AreasSelectColumn.photoUpdatedAt;
+    default:
+      return Enum_AreasSelectColumn.$unknown;
+  }
+}
+
+enum Enum_AreasStreetsConstraint {
+  areas_streets_pk,
+  $unknown;
+
+  factory Enum_AreasStreetsConstraint.fromJson(String value) =>
+      fromJson_Enum_AreasStreetsConstraint(value);
+
+  String toJson() => toJson_Enum_AreasStreetsConstraint(this);
+}
+
+String toJson_Enum_AreasStreetsConstraint(Enum_AreasStreetsConstraint e) {
+  switch (e) {
+    case Enum_AreasStreetsConstraint.areas_streets_pk:
+      return r'areas_streets_pk';
+    case Enum_AreasStreetsConstraint.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_AreasStreetsConstraint fromJson_Enum_AreasStreetsConstraint(String value) {
+  switch (value) {
+    case r'areas_streets_pk':
+      return Enum_AreasStreetsConstraint.areas_streets_pk;
+    default:
+      return Enum_AreasStreetsConstraint.$unknown;
+  }
+}
+
+enum Enum_AreasStreetsSelectColumn {
+  areaId,
+  streetId,
+  $unknown;
+
+  factory Enum_AreasStreetsSelectColumn.fromJson(String value) =>
+      fromJson_Enum_AreasStreetsSelectColumn(value);
+
+  String toJson() => toJson_Enum_AreasStreetsSelectColumn(this);
+}
+
+String toJson_Enum_AreasStreetsSelectColumn(Enum_AreasStreetsSelectColumn e) {
+  switch (e) {
+    case Enum_AreasStreetsSelectColumn.areaId:
+      return r'areaId';
+    case Enum_AreasStreetsSelectColumn.streetId:
+      return r'streetId';
+    case Enum_AreasStreetsSelectColumn.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_AreasStreetsSelectColumn fromJson_Enum_AreasStreetsSelectColumn(
   String value,
 ) {
   switch (value) {
-    case r'kodas_history_day_id_person_id_key':
-      return Enum_HistoryKodasHistoryConstraint
-          .kodas_history_day_id_person_id_key;
-    case r'kodas_history_pkey':
-      return Enum_HistoryKodasHistoryConstraint.kodas_history_pkey;
+    case r'areaId':
+      return Enum_AreasStreetsSelectColumn.areaId;
+    case r'streetId':
+      return Enum_AreasStreetsSelectColumn.streetId;
     default:
-      return Enum_HistoryKodasHistoryConstraint.$unknown;
+      return Enum_AreasStreetsSelectColumn.$unknown;
   }
 }
 
-enum Enum_HistoryKodasHistorySelectColumn {
-  dayId,
-  id,
-  personId,
-  recordedBy,
-  time,
-  $unknown;
-
-  factory Enum_HistoryKodasHistorySelectColumn.fromJson(String value) =>
-      fromJson_Enum_HistoryKodasHistorySelectColumn(value);
-
-  String toJson() => toJson_Enum_HistoryKodasHistorySelectColumn(this);
-}
-
-String toJson_Enum_HistoryKodasHistorySelectColumn(
-  Enum_HistoryKodasHistorySelectColumn e,
-) {
-  switch (e) {
-    case Enum_HistoryKodasHistorySelectColumn.dayId:
-      return r'dayId';
-    case Enum_HistoryKodasHistorySelectColumn.id:
-      return r'id';
-    case Enum_HistoryKodasHistorySelectColumn.personId:
-      return r'personId';
-    case Enum_HistoryKodasHistorySelectColumn.recordedBy:
-      return r'recordedBy';
-    case Enum_HistoryKodasHistorySelectColumn.time:
-      return r'time';
-    case Enum_HistoryKodasHistorySelectColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_HistoryKodasHistorySelectColumn
-fromJson_Enum_HistoryKodasHistorySelectColumn(String value) {
-  switch (value) {
-    case r'dayId':
-      return Enum_HistoryKodasHistorySelectColumn.dayId;
-    case r'id':
-      return Enum_HistoryKodasHistorySelectColumn.id;
-    case r'personId':
-      return Enum_HistoryKodasHistorySelectColumn.personId;
-    case r'recordedBy':
-      return Enum_HistoryKodasHistorySelectColumn.recordedBy;
-    case r'time':
-      return Enum_HistoryKodasHistorySelectColumn.time;
-    default:
-      return Enum_HistoryKodasHistorySelectColumn.$unknown;
-  }
-}
-
-enum Enum_HistoryKodasHistoryUpdateColumn {
+enum Enum_AreasStreetsUpdateColumn {
   $_PLACEHOLDER,
   $unknown;
 
-  factory Enum_HistoryKodasHistoryUpdateColumn.fromJson(String value) =>
-      fromJson_Enum_HistoryKodasHistoryUpdateColumn(value);
+  factory Enum_AreasStreetsUpdateColumn.fromJson(String value) =>
+      fromJson_Enum_AreasStreetsUpdateColumn(value);
 
-  String toJson() => toJson_Enum_HistoryKodasHistoryUpdateColumn(this);
+  String toJson() => toJson_Enum_AreasStreetsUpdateColumn(this);
 }
 
-String toJson_Enum_HistoryKodasHistoryUpdateColumn(
-  Enum_HistoryKodasHistoryUpdateColumn e,
-) {
+String toJson_Enum_AreasStreetsUpdateColumn(Enum_AreasStreetsUpdateColumn e) {
   switch (e) {
-    case Enum_HistoryKodasHistoryUpdateColumn.$_PLACEHOLDER:
+    case Enum_AreasStreetsUpdateColumn.$_PLACEHOLDER:
       return r'_PLACEHOLDER';
-    case Enum_HistoryKodasHistoryUpdateColumn.$unknown:
+    case Enum_AreasStreetsUpdateColumn.$unknown:
       return r'$unknown';
   }
 }
 
-Enum_HistoryKodasHistoryUpdateColumn
-fromJson_Enum_HistoryKodasHistoryUpdateColumn(String value) {
+Enum_AreasStreetsUpdateColumn fromJson_Enum_AreasStreetsUpdateColumn(
+  String value,
+) {
   switch (value) {
     case r'_PLACEHOLDER':
-      return Enum_HistoryKodasHistoryUpdateColumn.$_PLACEHOLDER;
+      return Enum_AreasStreetsUpdateColumn.$_PLACEHOLDER;
     default:
-      return Enum_HistoryKodasHistoryUpdateColumn.$unknown;
+      return Enum_AreasStreetsUpdateColumn.$unknown;
   }
 }
 
-enum Enum_HistoryMeetingDaysSelectColumn {
-  day,
-  gender,
-  meetingId,
-  personsCount,
-  servantsCount,
-  studyYearId,
-  totalCount,
+enum Enum_AreasUpdateColumn {
+  bounds,
+  color,
+  name,
   $unknown;
 
-  factory Enum_HistoryMeetingDaysSelectColumn.fromJson(String value) =>
-      fromJson_Enum_HistoryMeetingDaysSelectColumn(value);
+  factory Enum_AreasUpdateColumn.fromJson(String value) =>
+      fromJson_Enum_AreasUpdateColumn(value);
 
-  String toJson() => toJson_Enum_HistoryMeetingDaysSelectColumn(this);
+  String toJson() => toJson_Enum_AreasUpdateColumn(this);
 }
 
-String toJson_Enum_HistoryMeetingDaysSelectColumn(
-  Enum_HistoryMeetingDaysSelectColumn e,
-) {
+String toJson_Enum_AreasUpdateColumn(Enum_AreasUpdateColumn e) {
   switch (e) {
-    case Enum_HistoryMeetingDaysSelectColumn.day:
-      return r'day';
-    case Enum_HistoryMeetingDaysSelectColumn.gender:
-      return r'gender';
-    case Enum_HistoryMeetingDaysSelectColumn.meetingId:
-      return r'meetingId';
-    case Enum_HistoryMeetingDaysSelectColumn.personsCount:
-      return r'personsCount';
-    case Enum_HistoryMeetingDaysSelectColumn.servantsCount:
-      return r'servantsCount';
-    case Enum_HistoryMeetingDaysSelectColumn.studyYearId:
-      return r'studyYearId';
-    case Enum_HistoryMeetingDaysSelectColumn.totalCount:
-      return r'totalCount';
-    case Enum_HistoryMeetingDaysSelectColumn.$unknown:
+    case Enum_AreasUpdateColumn.bounds:
+      return r'bounds';
+    case Enum_AreasUpdateColumn.color:
+      return r'color';
+    case Enum_AreasUpdateColumn.name:
+      return r'name';
+    case Enum_AreasUpdateColumn.$unknown:
       return r'$unknown';
   }
 }
 
-Enum_HistoryMeetingDaysSelectColumn
-fromJson_Enum_HistoryMeetingDaysSelectColumn(String value) {
+Enum_AreasUpdateColumn fromJson_Enum_AreasUpdateColumn(String value) {
   switch (value) {
-    case r'day':
-      return Enum_HistoryMeetingDaysSelectColumn.day;
-    case r'gender':
-      return Enum_HistoryMeetingDaysSelectColumn.gender;
-    case r'meetingId':
-      return Enum_HistoryMeetingDaysSelectColumn.meetingId;
-    case r'personsCount':
-      return Enum_HistoryMeetingDaysSelectColumn.personsCount;
-    case r'servantsCount':
-      return Enum_HistoryMeetingDaysSelectColumn.servantsCount;
-    case r'studyYearId':
-      return Enum_HistoryMeetingDaysSelectColumn.studyYearId;
-    case r'totalCount':
-      return Enum_HistoryMeetingDaysSelectColumn.totalCount;
+    case r'bounds':
+      return Enum_AreasUpdateColumn.bounds;
+    case r'color':
+      return Enum_AreasUpdateColumn.color;
+    case r'name':
+      return Enum_AreasUpdateColumn.name;
     default:
-      return Enum_HistoryMeetingDaysSelectColumn.$unknown;
+      return Enum_AreasUpdateColumn.$unknown;
   }
 }
 
-enum Enum_HistoryMeetingDaysSelectColumnHistoryMeetingDaysAggregateBoolExpBool_andArgumentsColumns {
-  gender,
+enum Enum_AuthUsersAdminOnConstraint {
+  users_admin_on_area,
+  users_admin_on_group,
+  users_admin_on_pkey,
+  users_admin_on_service,
   $unknown;
 
-  factory Enum_HistoryMeetingDaysSelectColumnHistoryMeetingDaysAggregateBoolExpBool_andArgumentsColumns.fromJson(
-    String value,
-  ) =>
-      fromJson_Enum_HistoryMeetingDaysSelectColumnHistoryMeetingDaysAggregateBoolExpBool_andArgumentsColumns(
-        value,
-      );
+  factory Enum_AuthUsersAdminOnConstraint.fromJson(String value) =>
+      fromJson_Enum_AuthUsersAdminOnConstraint(value);
 
-  String toJson() =>
-      toJson_Enum_HistoryMeetingDaysSelectColumnHistoryMeetingDaysAggregateBoolExpBool_andArgumentsColumns(
-        this,
-      );
+  String toJson() => toJson_Enum_AuthUsersAdminOnConstraint(this);
 }
 
-String
-toJson_Enum_HistoryMeetingDaysSelectColumnHistoryMeetingDaysAggregateBoolExpBool_andArgumentsColumns(
-  Enum_HistoryMeetingDaysSelectColumnHistoryMeetingDaysAggregateBoolExpBool_andArgumentsColumns
-  e,
+String toJson_Enum_AuthUsersAdminOnConstraint(
+  Enum_AuthUsersAdminOnConstraint e,
 ) {
   switch (e) {
-    case Enum_HistoryMeetingDaysSelectColumnHistoryMeetingDaysAggregateBoolExpBool_andArgumentsColumns
-        .gender:
-      return r'gender';
-    case Enum_HistoryMeetingDaysSelectColumnHistoryMeetingDaysAggregateBoolExpBool_andArgumentsColumns
-        .$unknown:
+    case Enum_AuthUsersAdminOnConstraint.users_admin_on_area:
+      return r'users_admin_on_area';
+    case Enum_AuthUsersAdminOnConstraint.users_admin_on_group:
+      return r'users_admin_on_group';
+    case Enum_AuthUsersAdminOnConstraint.users_admin_on_pkey:
+      return r'users_admin_on_pkey';
+    case Enum_AuthUsersAdminOnConstraint.users_admin_on_service:
+      return r'users_admin_on_service';
+    case Enum_AuthUsersAdminOnConstraint.$unknown:
       return r'$unknown';
   }
 }
 
-Enum_HistoryMeetingDaysSelectColumnHistoryMeetingDaysAggregateBoolExpBool_andArgumentsColumns
-fromJson_Enum_HistoryMeetingDaysSelectColumnHistoryMeetingDaysAggregateBoolExpBool_andArgumentsColumns(
+Enum_AuthUsersAdminOnConstraint fromJson_Enum_AuthUsersAdminOnConstraint(
   String value,
 ) {
   switch (value) {
-    case r'gender':
-      return Enum_HistoryMeetingDaysSelectColumnHistoryMeetingDaysAggregateBoolExpBool_andArgumentsColumns
-          .gender;
+    case r'users_admin_on_area':
+      return Enum_AuthUsersAdminOnConstraint.users_admin_on_area;
+    case r'users_admin_on_group':
+      return Enum_AuthUsersAdminOnConstraint.users_admin_on_group;
+    case r'users_admin_on_pkey':
+      return Enum_AuthUsersAdminOnConstraint.users_admin_on_pkey;
+    case r'users_admin_on_service':
+      return Enum_AuthUsersAdminOnConstraint.users_admin_on_service;
     default:
-      return Enum_HistoryMeetingDaysSelectColumnHistoryMeetingDaysAggregateBoolExpBool_andArgumentsColumns
-          .$unknown;
+      return Enum_AuthUsersAdminOnConstraint.$unknown;
   }
 }
 
-enum Enum_HistoryMeetingDaysSelectColumnHistoryMeetingDaysAggregateBoolExpBool_orArgumentsColumns {
-  gender,
+enum Enum_AuthUsersAdminOnSelectColumn {
+  adminOnArea,
+  adminOnGroup,
+  adminOnService,
+  areaAdminOnUsers,
+  areaAllowEdit,
+  areaAllowExport,
+  groupAdminOnUsers,
+  groupAllowEdit,
+  groupAllowExport,
+  groupAllowRecordAttendance,
+  groupAllowRecordServantsAttendance,
+  groupWriteRelatedFamilies,
+  permissionId,
+  serviceAdminOnUsers,
+  serviceAllowEdit,
+  serviceAllowExport,
+  serviceAllowRecordAttendance,
+  serviceAllowRecordServantsAttendance,
+  serviceGender,
+  serviceStudyYear,
+  serviceWriteRelatedFamilies,
+  uid,
   $unknown;
 
-  factory Enum_HistoryMeetingDaysSelectColumnHistoryMeetingDaysAggregateBoolExpBool_orArgumentsColumns.fromJson(
-    String value,
-  ) =>
-      fromJson_Enum_HistoryMeetingDaysSelectColumnHistoryMeetingDaysAggregateBoolExpBool_orArgumentsColumns(
-        value,
-      );
+  factory Enum_AuthUsersAdminOnSelectColumn.fromJson(String value) =>
+      fromJson_Enum_AuthUsersAdminOnSelectColumn(value);
 
-  String toJson() =>
-      toJson_Enum_HistoryMeetingDaysSelectColumnHistoryMeetingDaysAggregateBoolExpBool_orArgumentsColumns(
-        this,
-      );
+  String toJson() => toJson_Enum_AuthUsersAdminOnSelectColumn(this);
 }
 
-String
-toJson_Enum_HistoryMeetingDaysSelectColumnHistoryMeetingDaysAggregateBoolExpBool_orArgumentsColumns(
-  Enum_HistoryMeetingDaysSelectColumnHistoryMeetingDaysAggregateBoolExpBool_orArgumentsColumns
-  e,
+String toJson_Enum_AuthUsersAdminOnSelectColumn(
+  Enum_AuthUsersAdminOnSelectColumn e,
 ) {
   switch (e) {
-    case Enum_HistoryMeetingDaysSelectColumnHistoryMeetingDaysAggregateBoolExpBool_orArgumentsColumns
-        .gender:
-      return r'gender';
-    case Enum_HistoryMeetingDaysSelectColumnHistoryMeetingDaysAggregateBoolExpBool_orArgumentsColumns
-        .$unknown:
+    case Enum_AuthUsersAdminOnSelectColumn.adminOnArea:
+      return r'adminOnArea';
+    case Enum_AuthUsersAdminOnSelectColumn.adminOnGroup:
+      return r'adminOnGroup';
+    case Enum_AuthUsersAdminOnSelectColumn.adminOnService:
+      return r'adminOnService';
+    case Enum_AuthUsersAdminOnSelectColumn.areaAdminOnUsers:
+      return r'areaAdminOnUsers';
+    case Enum_AuthUsersAdminOnSelectColumn.areaAllowEdit:
+      return r'areaAllowEdit';
+    case Enum_AuthUsersAdminOnSelectColumn.areaAllowExport:
+      return r'areaAllowExport';
+    case Enum_AuthUsersAdminOnSelectColumn.groupAdminOnUsers:
+      return r'groupAdminOnUsers';
+    case Enum_AuthUsersAdminOnSelectColumn.groupAllowEdit:
+      return r'groupAllowEdit';
+    case Enum_AuthUsersAdminOnSelectColumn.groupAllowExport:
+      return r'groupAllowExport';
+    case Enum_AuthUsersAdminOnSelectColumn.groupAllowRecordAttendance:
+      return r'groupAllowRecordAttendance';
+    case Enum_AuthUsersAdminOnSelectColumn.groupAllowRecordServantsAttendance:
+      return r'groupAllowRecordServantsAttendance';
+    case Enum_AuthUsersAdminOnSelectColumn.groupWriteRelatedFamilies:
+      return r'groupWriteRelatedFamilies';
+    case Enum_AuthUsersAdminOnSelectColumn.permissionId:
+      return r'permissionId';
+    case Enum_AuthUsersAdminOnSelectColumn.serviceAdminOnUsers:
+      return r'serviceAdminOnUsers';
+    case Enum_AuthUsersAdminOnSelectColumn.serviceAllowEdit:
+      return r'serviceAllowEdit';
+    case Enum_AuthUsersAdminOnSelectColumn.serviceAllowExport:
+      return r'serviceAllowExport';
+    case Enum_AuthUsersAdminOnSelectColumn.serviceAllowRecordAttendance:
+      return r'serviceAllowRecordAttendance';
+    case Enum_AuthUsersAdminOnSelectColumn.serviceAllowRecordServantsAttendance:
+      return r'serviceAllowRecordServantsAttendance';
+    case Enum_AuthUsersAdminOnSelectColumn.serviceGender:
+      return r'serviceGender';
+    case Enum_AuthUsersAdminOnSelectColumn.serviceStudyYear:
+      return r'serviceStudyYear';
+    case Enum_AuthUsersAdminOnSelectColumn.serviceWriteRelatedFamilies:
+      return r'serviceWriteRelatedFamilies';
+    case Enum_AuthUsersAdminOnSelectColumn.uid:
+      return r'uid';
+    case Enum_AuthUsersAdminOnSelectColumn.$unknown:
       return r'$unknown';
   }
 }
 
-Enum_HistoryMeetingDaysSelectColumnHistoryMeetingDaysAggregateBoolExpBool_orArgumentsColumns
-fromJson_Enum_HistoryMeetingDaysSelectColumnHistoryMeetingDaysAggregateBoolExpBool_orArgumentsColumns(
+Enum_AuthUsersAdminOnSelectColumn fromJson_Enum_AuthUsersAdminOnSelectColumn(
   String value,
 ) {
   switch (value) {
-    case r'gender':
-      return Enum_HistoryMeetingDaysSelectColumnHistoryMeetingDaysAggregateBoolExpBool_orArgumentsColumns
-          .gender;
+    case r'adminOnArea':
+      return Enum_AuthUsersAdminOnSelectColumn.adminOnArea;
+    case r'adminOnGroup':
+      return Enum_AuthUsersAdminOnSelectColumn.adminOnGroup;
+    case r'adminOnService':
+      return Enum_AuthUsersAdminOnSelectColumn.adminOnService;
+    case r'areaAdminOnUsers':
+      return Enum_AuthUsersAdminOnSelectColumn.areaAdminOnUsers;
+    case r'areaAllowEdit':
+      return Enum_AuthUsersAdminOnSelectColumn.areaAllowEdit;
+    case r'areaAllowExport':
+      return Enum_AuthUsersAdminOnSelectColumn.areaAllowExport;
+    case r'groupAdminOnUsers':
+      return Enum_AuthUsersAdminOnSelectColumn.groupAdminOnUsers;
+    case r'groupAllowEdit':
+      return Enum_AuthUsersAdminOnSelectColumn.groupAllowEdit;
+    case r'groupAllowExport':
+      return Enum_AuthUsersAdminOnSelectColumn.groupAllowExport;
+    case r'groupAllowRecordAttendance':
+      return Enum_AuthUsersAdminOnSelectColumn.groupAllowRecordAttendance;
+    case r'groupAllowRecordServantsAttendance':
+      return Enum_AuthUsersAdminOnSelectColumn
+          .groupAllowRecordServantsAttendance;
+    case r'groupWriteRelatedFamilies':
+      return Enum_AuthUsersAdminOnSelectColumn.groupWriteRelatedFamilies;
+    case r'permissionId':
+      return Enum_AuthUsersAdminOnSelectColumn.permissionId;
+    case r'serviceAdminOnUsers':
+      return Enum_AuthUsersAdminOnSelectColumn.serviceAdminOnUsers;
+    case r'serviceAllowEdit':
+      return Enum_AuthUsersAdminOnSelectColumn.serviceAllowEdit;
+    case r'serviceAllowExport':
+      return Enum_AuthUsersAdminOnSelectColumn.serviceAllowExport;
+    case r'serviceAllowRecordAttendance':
+      return Enum_AuthUsersAdminOnSelectColumn.serviceAllowRecordAttendance;
+    case r'serviceAllowRecordServantsAttendance':
+      return Enum_AuthUsersAdminOnSelectColumn
+          .serviceAllowRecordServantsAttendance;
+    case r'serviceGender':
+      return Enum_AuthUsersAdminOnSelectColumn.serviceGender;
+    case r'serviceStudyYear':
+      return Enum_AuthUsersAdminOnSelectColumn.serviceStudyYear;
+    case r'serviceWriteRelatedFamilies':
+      return Enum_AuthUsersAdminOnSelectColumn.serviceWriteRelatedFamilies;
+    case r'uid':
+      return Enum_AuthUsersAdminOnSelectColumn.uid;
     default:
-      return Enum_HistoryMeetingDaysSelectColumnHistoryMeetingDaysAggregateBoolExpBool_orArgumentsColumns
-          .$unknown;
+      return Enum_AuthUsersAdminOnSelectColumn.$unknown;
   }
 }
 
-enum Enum_HistoryMeetingRosterSelectColumn {
-  asServant,
+enum Enum_AuthUsersAdminOnUpdateColumn {
+  $_PLACEHOLDER,
+  $unknown;
+
+  factory Enum_AuthUsersAdminOnUpdateColumn.fromJson(String value) =>
+      fromJson_Enum_AuthUsersAdminOnUpdateColumn(value);
+
+  String toJson() => toJson_Enum_AuthUsersAdminOnUpdateColumn(this);
+}
+
+String toJson_Enum_AuthUsersAdminOnUpdateColumn(
+  Enum_AuthUsersAdminOnUpdateColumn e,
+) {
+  switch (e) {
+    case Enum_AuthUsersAdminOnUpdateColumn.$_PLACEHOLDER:
+      return r'_PLACEHOLDER';
+    case Enum_AuthUsersAdminOnUpdateColumn.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_AuthUsersAdminOnUpdateColumn fromJson_Enum_AuthUsersAdminOnUpdateColumn(
+  String value,
+) {
+  switch (value) {
+    case r'_PLACEHOLDER':
+      return Enum_AuthUsersAdminOnUpdateColumn.$_PLACEHOLDER;
+    default:
+      return Enum_AuthUsersAdminOnUpdateColumn.$unknown;
+  }
+}
+
+enum Enum_AuthUsersDataConstraint {
+  users_data_auth_id_key,
+  users_data_email_key,
+  users_data_name_key,
+  users_data_pkey,
+  $unknown;
+
+  factory Enum_AuthUsersDataConstraint.fromJson(String value) =>
+      fromJson_Enum_AuthUsersDataConstraint(value);
+
+  String toJson() => toJson_Enum_AuthUsersDataConstraint(this);
+}
+
+String toJson_Enum_AuthUsersDataConstraint(Enum_AuthUsersDataConstraint e) {
+  switch (e) {
+    case Enum_AuthUsersDataConstraint.users_data_auth_id_key:
+      return r'users_data_auth_id_key';
+    case Enum_AuthUsersDataConstraint.users_data_email_key:
+      return r'users_data_email_key';
+    case Enum_AuthUsersDataConstraint.users_data_name_key:
+      return r'users_data_name_key';
+    case Enum_AuthUsersDataConstraint.users_data_pkey:
+      return r'users_data_pkey';
+    case Enum_AuthUsersDataConstraint.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_AuthUsersDataConstraint fromJson_Enum_AuthUsersDataConstraint(
+  String value,
+) {
+  switch (value) {
+    case r'users_data_auth_id_key':
+      return Enum_AuthUsersDataConstraint.users_data_auth_id_key;
+    case r'users_data_email_key':
+      return Enum_AuthUsersDataConstraint.users_data_email_key;
+    case r'users_data_name_key':
+      return Enum_AuthUsersDataConstraint.users_data_name_key;
+    case r'users_data_pkey':
+      return Enum_AuthUsersDataConstraint.users_data_pkey;
+    default:
+      return Enum_AuthUsersDataConstraint.$unknown;
+  }
+}
+
+enum Enum_AuthUsersDataSelectColumn {
+  blurhash,
+  email,
+  name,
+  photoUpdatedAt,
+  uid,
+  $unknown;
+
+  factory Enum_AuthUsersDataSelectColumn.fromJson(String value) =>
+      fromJson_Enum_AuthUsersDataSelectColumn(value);
+
+  String toJson() => toJson_Enum_AuthUsersDataSelectColumn(this);
+}
+
+String toJson_Enum_AuthUsersDataSelectColumn(Enum_AuthUsersDataSelectColumn e) {
+  switch (e) {
+    case Enum_AuthUsersDataSelectColumn.blurhash:
+      return r'blurhash';
+    case Enum_AuthUsersDataSelectColumn.email:
+      return r'email';
+    case Enum_AuthUsersDataSelectColumn.name:
+      return r'name';
+    case Enum_AuthUsersDataSelectColumn.photoUpdatedAt:
+      return r'photoUpdatedAt';
+    case Enum_AuthUsersDataSelectColumn.uid:
+      return r'uid';
+    case Enum_AuthUsersDataSelectColumn.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_AuthUsersDataSelectColumn fromJson_Enum_AuthUsersDataSelectColumn(
+  String value,
+) {
+  switch (value) {
+    case r'blurhash':
+      return Enum_AuthUsersDataSelectColumn.blurhash;
+    case r'email':
+      return Enum_AuthUsersDataSelectColumn.email;
+    case r'name':
+      return Enum_AuthUsersDataSelectColumn.name;
+    case r'photoUpdatedAt':
+      return Enum_AuthUsersDataSelectColumn.photoUpdatedAt;
+    case r'uid':
+      return Enum_AuthUsersDataSelectColumn.uid;
+    default:
+      return Enum_AuthUsersDataSelectColumn.$unknown;
+  }
+}
+
+enum Enum_AuthUsersDataUpdateColumn {
+  name,
+  $unknown;
+
+  factory Enum_AuthUsersDataUpdateColumn.fromJson(String value) =>
+      fromJson_Enum_AuthUsersDataUpdateColumn(value);
+
+  String toJson() => toJson_Enum_AuthUsersDataUpdateColumn(this);
+}
+
+String toJson_Enum_AuthUsersDataUpdateColumn(Enum_AuthUsersDataUpdateColumn e) {
+  switch (e) {
+    case Enum_AuthUsersDataUpdateColumn.name:
+      return r'name';
+    case Enum_AuthUsersDataUpdateColumn.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_AuthUsersDataUpdateColumn fromJson_Enum_AuthUsersDataUpdateColumn(
+  String value,
+) {
+  switch (value) {
+    case r'name':
+      return Enum_AuthUsersDataUpdateColumn.name;
+    default:
+      return Enum_AuthUsersDataUpdateColumn.$unknown;
+  }
+}
+
+enum Enum_AuthUsersPermissionsConstraint {
+  users_permissions_pkey,
+  users_permissions_uid_permission_key,
+  $unknown;
+
+  factory Enum_AuthUsersPermissionsConstraint.fromJson(String value) =>
+      fromJson_Enum_AuthUsersPermissionsConstraint(value);
+
+  String toJson() => toJson_Enum_AuthUsersPermissionsConstraint(this);
+}
+
+String toJson_Enum_AuthUsersPermissionsConstraint(
+  Enum_AuthUsersPermissionsConstraint e,
+) {
+  switch (e) {
+    case Enum_AuthUsersPermissionsConstraint.users_permissions_pkey:
+      return r'users_permissions_pkey';
+    case Enum_AuthUsersPermissionsConstraint
+        .users_permissions_uid_permission_key:
+      return r'users_permissions_uid_permission_key';
+    case Enum_AuthUsersPermissionsConstraint.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_AuthUsersPermissionsConstraint
+fromJson_Enum_AuthUsersPermissionsConstraint(String value) {
+  switch (value) {
+    case r'users_permissions_pkey':
+      return Enum_AuthUsersPermissionsConstraint.users_permissions_pkey;
+    case r'users_permissions_uid_permission_key':
+      return Enum_AuthUsersPermissionsConstraint
+          .users_permissions_uid_permission_key;
+    default:
+      return Enum_AuthUsersPermissionsConstraint.$unknown;
+  }
+}
+
+enum Enum_AuthUsersPermissionsSelectColumn {
+  permission,
+  uid,
+  $unknown;
+
+  factory Enum_AuthUsersPermissionsSelectColumn.fromJson(String value) =>
+      fromJson_Enum_AuthUsersPermissionsSelectColumn(value);
+
+  String toJson() => toJson_Enum_AuthUsersPermissionsSelectColumn(this);
+}
+
+String toJson_Enum_AuthUsersPermissionsSelectColumn(
+  Enum_AuthUsersPermissionsSelectColumn e,
+) {
+  switch (e) {
+    case Enum_AuthUsersPermissionsSelectColumn.permission:
+      return r'permission';
+    case Enum_AuthUsersPermissionsSelectColumn.uid:
+      return r'uid';
+    case Enum_AuthUsersPermissionsSelectColumn.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_AuthUsersPermissionsSelectColumn
+fromJson_Enum_AuthUsersPermissionsSelectColumn(String value) {
+  switch (value) {
+    case r'permission':
+      return Enum_AuthUsersPermissionsSelectColumn.permission;
+    case r'uid':
+      return Enum_AuthUsersPermissionsSelectColumn.uid;
+    default:
+      return Enum_AuthUsersPermissionsSelectColumn.$unknown;
+  }
+}
+
+enum Enum_AuthUsersPermissionsUpdateColumn {
+  $_PLACEHOLDER,
+  $unknown;
+
+  factory Enum_AuthUsersPermissionsUpdateColumn.fromJson(String value) =>
+      fromJson_Enum_AuthUsersPermissionsUpdateColumn(value);
+
+  String toJson() => toJson_Enum_AuthUsersPermissionsUpdateColumn(this);
+}
+
+String toJson_Enum_AuthUsersPermissionsUpdateColumn(
+  Enum_AuthUsersPermissionsUpdateColumn e,
+) {
+  switch (e) {
+    case Enum_AuthUsersPermissionsUpdateColumn.$_PLACEHOLDER:
+      return r'_PLACEHOLDER';
+    case Enum_AuthUsersPermissionsUpdateColumn.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_AuthUsersPermissionsUpdateColumn
+fromJson_Enum_AuthUsersPermissionsUpdateColumn(String value) {
+  switch (value) {
+    case r'_PLACEHOLDER':
+      return Enum_AuthUsersPermissionsUpdateColumn.$_PLACEHOLDER;
+    default:
+      return Enum_AuthUsersPermissionsUpdateColumn.$unknown;
+  }
+}
+
+enum Enum_ChurchesConstraint {
+  churches_name_key,
+  churches_pkey,
+  $unknown;
+
+  factory Enum_ChurchesConstraint.fromJson(String value) =>
+      fromJson_Enum_ChurchesConstraint(value);
+
+  String toJson() => toJson_Enum_ChurchesConstraint(this);
+}
+
+String toJson_Enum_ChurchesConstraint(Enum_ChurchesConstraint e) {
+  switch (e) {
+    case Enum_ChurchesConstraint.churches_name_key:
+      return r'churches_name_key';
+    case Enum_ChurchesConstraint.churches_pkey:
+      return r'churches_pkey';
+    case Enum_ChurchesConstraint.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_ChurchesConstraint fromJson_Enum_ChurchesConstraint(String value) {
+  switch (value) {
+    case r'churches_name_key':
+      return Enum_ChurchesConstraint.churches_name_key;
+    case r'churches_pkey':
+      return Enum_ChurchesConstraint.churches_pkey;
+    default:
+      return Enum_ChurchesConstraint.$unknown;
+  }
+}
+
+enum Enum_ChurchesSelectColumn {
+  id,
+  isHidden,
+  name,
+  $unknown;
+
+  factory Enum_ChurchesSelectColumn.fromJson(String value) =>
+      fromJson_Enum_ChurchesSelectColumn(value);
+
+  String toJson() => toJson_Enum_ChurchesSelectColumn(this);
+}
+
+String toJson_Enum_ChurchesSelectColumn(Enum_ChurchesSelectColumn e) {
+  switch (e) {
+    case Enum_ChurchesSelectColumn.id:
+      return r'id';
+    case Enum_ChurchesSelectColumn.isHidden:
+      return r'isHidden';
+    case Enum_ChurchesSelectColumn.name:
+      return r'name';
+    case Enum_ChurchesSelectColumn.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_ChurchesSelectColumn fromJson_Enum_ChurchesSelectColumn(String value) {
+  switch (value) {
+    case r'id':
+      return Enum_ChurchesSelectColumn.id;
+    case r'isHidden':
+      return Enum_ChurchesSelectColumn.isHidden;
+    case r'name':
+      return Enum_ChurchesSelectColumn.name;
+    default:
+      return Enum_ChurchesSelectColumn.$unknown;
+  }
+}
+
+enum Enum_ChurchesUpdateColumn {
+  name,
+  $unknown;
+
+  factory Enum_ChurchesUpdateColumn.fromJson(String value) =>
+      fromJson_Enum_ChurchesUpdateColumn(value);
+
+  String toJson() => toJson_Enum_ChurchesUpdateColumn(this);
+}
+
+String toJson_Enum_ChurchesUpdateColumn(Enum_ChurchesUpdateColumn e) {
+  switch (e) {
+    case Enum_ChurchesUpdateColumn.name:
+      return r'name';
+    case Enum_ChurchesUpdateColumn.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_ChurchesUpdateColumn fromJson_Enum_ChurchesUpdateColumn(String value) {
+  switch (value) {
+    case r'name':
+      return Enum_ChurchesUpdateColumn.name;
+    default:
+      return Enum_ChurchesUpdateColumn.$unknown;
+  }
+}
+
+enum Enum_ClassesConstraint {
+  classes_pkey,
+  $unknown;
+
+  factory Enum_ClassesConstraint.fromJson(String value) =>
+      fromJson_Enum_ClassesConstraint(value);
+
+  String toJson() => toJson_Enum_ClassesConstraint(this);
+}
+
+String toJson_Enum_ClassesConstraint(Enum_ClassesConstraint e) {
+  switch (e) {
+    case Enum_ClassesConstraint.classes_pkey:
+      return r'classes_pkey';
+    case Enum_ClassesConstraint.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_ClassesConstraint fromJson_Enum_ClassesConstraint(String value) {
+  switch (value) {
+    case r'classes_pkey':
+      return Enum_ClassesConstraint.classes_pkey;
+    default:
+      return Enum_ClassesConstraint.$unknown;
+  }
+}
+
+enum Enum_ClassesPersonsSelectColumn {
+  classId,
+  personId,
+  $unknown;
+
+  factory Enum_ClassesPersonsSelectColumn.fromJson(String value) =>
+      fromJson_Enum_ClassesPersonsSelectColumn(value);
+
+  String toJson() => toJson_Enum_ClassesPersonsSelectColumn(this);
+}
+
+String toJson_Enum_ClassesPersonsSelectColumn(
+  Enum_ClassesPersonsSelectColumn e,
+) {
+  switch (e) {
+    case Enum_ClassesPersonsSelectColumn.classId:
+      return r'classId';
+    case Enum_ClassesPersonsSelectColumn.personId:
+      return r'personId';
+    case Enum_ClassesPersonsSelectColumn.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_ClassesPersonsSelectColumn fromJson_Enum_ClassesPersonsSelectColumn(
+  String value,
+) {
+  switch (value) {
+    case r'classId':
+      return Enum_ClassesPersonsSelectColumn.classId;
+    case r'personId':
+      return Enum_ClassesPersonsSelectColumn.personId;
+    default:
+      return Enum_ClassesPersonsSelectColumn.$unknown;
+  }
+}
+
+enum Enum_ClassesSelectColumn {
   blurhash,
   color,
-  gender,
-  mainPhone,
-  meetingId,
+  id,
   name,
-  personId,
   photoUpdatedAt,
-  studyYearId,
-  studyYearName,
+  serviceGender,
+  serviceId,
+  serviceStudyYear,
   $unknown;
 
-  factory Enum_HistoryMeetingRosterSelectColumn.fromJson(String value) =>
-      fromJson_Enum_HistoryMeetingRosterSelectColumn(value);
+  factory Enum_ClassesSelectColumn.fromJson(String value) =>
+      fromJson_Enum_ClassesSelectColumn(value);
 
-  String toJson() => toJson_Enum_HistoryMeetingRosterSelectColumn(this);
+  String toJson() => toJson_Enum_ClassesSelectColumn(this);
 }
 
-String toJson_Enum_HistoryMeetingRosterSelectColumn(
-  Enum_HistoryMeetingRosterSelectColumn e,
+String toJson_Enum_ClassesSelectColumn(Enum_ClassesSelectColumn e) {
+  switch (e) {
+    case Enum_ClassesSelectColumn.blurhash:
+      return r'blurhash';
+    case Enum_ClassesSelectColumn.color:
+      return r'color';
+    case Enum_ClassesSelectColumn.id:
+      return r'id';
+    case Enum_ClassesSelectColumn.name:
+      return r'name';
+    case Enum_ClassesSelectColumn.photoUpdatedAt:
+      return r'photoUpdatedAt';
+    case Enum_ClassesSelectColumn.serviceGender:
+      return r'serviceGender';
+    case Enum_ClassesSelectColumn.serviceId:
+      return r'serviceId';
+    case Enum_ClassesSelectColumn.serviceStudyYear:
+      return r'serviceStudyYear';
+    case Enum_ClassesSelectColumn.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_ClassesSelectColumn fromJson_Enum_ClassesSelectColumn(String value) {
+  switch (value) {
+    case r'blurhash':
+      return Enum_ClassesSelectColumn.blurhash;
+    case r'color':
+      return Enum_ClassesSelectColumn.color;
+    case r'id':
+      return Enum_ClassesSelectColumn.id;
+    case r'name':
+      return Enum_ClassesSelectColumn.name;
+    case r'photoUpdatedAt':
+      return Enum_ClassesSelectColumn.photoUpdatedAt;
+    case r'serviceGender':
+      return Enum_ClassesSelectColumn.serviceGender;
+    case r'serviceId':
+      return Enum_ClassesSelectColumn.serviceId;
+    case r'serviceStudyYear':
+      return Enum_ClassesSelectColumn.serviceStudyYear;
+    default:
+      return Enum_ClassesSelectColumn.$unknown;
+  }
+}
+
+enum Enum_ClassesSelectColumnClassesAggregateBoolExpBool_andArgumentsColumns {
+  serviceGender,
+  $unknown;
+
+  factory Enum_ClassesSelectColumnClassesAggregateBoolExpBool_andArgumentsColumns.fromJson(
+    String value,
+  ) =>
+      fromJson_Enum_ClassesSelectColumnClassesAggregateBoolExpBool_andArgumentsColumns(
+        value,
+      );
+
+  String toJson() =>
+      toJson_Enum_ClassesSelectColumnClassesAggregateBoolExpBool_andArgumentsColumns(
+        this,
+      );
+}
+
+String
+toJson_Enum_ClassesSelectColumnClassesAggregateBoolExpBool_andArgumentsColumns(
+  Enum_ClassesSelectColumnClassesAggregateBoolExpBool_andArgumentsColumns e,
 ) {
   switch (e) {
-    case Enum_HistoryMeetingRosterSelectColumn.asServant:
-      return r'asServant';
-    case Enum_HistoryMeetingRosterSelectColumn.blurhash:
-      return r'blurhash';
-    case Enum_HistoryMeetingRosterSelectColumn.color:
-      return r'color';
-    case Enum_HistoryMeetingRosterSelectColumn.gender:
-      return r'gender';
-    case Enum_HistoryMeetingRosterSelectColumn.mainPhone:
-      return r'mainPhone';
-    case Enum_HistoryMeetingRosterSelectColumn.meetingId:
-      return r'meetingId';
-    case Enum_HistoryMeetingRosterSelectColumn.name:
-      return r'name';
-    case Enum_HistoryMeetingRosterSelectColumn.personId:
-      return r'personId';
-    case Enum_HistoryMeetingRosterSelectColumn.photoUpdatedAt:
-      return r'photoUpdatedAt';
-    case Enum_HistoryMeetingRosterSelectColumn.studyYearId:
-      return r'studyYearId';
-    case Enum_HistoryMeetingRosterSelectColumn.studyYearName:
-      return r'studyYearName';
-    case Enum_HistoryMeetingRosterSelectColumn.$unknown:
+    case Enum_ClassesSelectColumnClassesAggregateBoolExpBool_andArgumentsColumns
+        .serviceGender:
+      return r'serviceGender';
+    case Enum_ClassesSelectColumnClassesAggregateBoolExpBool_andArgumentsColumns
+        .$unknown:
       return r'$unknown';
   }
 }
 
-Enum_HistoryMeetingRosterSelectColumn
-fromJson_Enum_HistoryMeetingRosterSelectColumn(String value) {
-  switch (value) {
-    case r'asServant':
-      return Enum_HistoryMeetingRosterSelectColumn.asServant;
-    case r'blurhash':
-      return Enum_HistoryMeetingRosterSelectColumn.blurhash;
-    case r'color':
-      return Enum_HistoryMeetingRosterSelectColumn.color;
-    case r'gender':
-      return Enum_HistoryMeetingRosterSelectColumn.gender;
-    case r'mainPhone':
-      return Enum_HistoryMeetingRosterSelectColumn.mainPhone;
-    case r'meetingId':
-      return Enum_HistoryMeetingRosterSelectColumn.meetingId;
-    case r'name':
-      return Enum_HistoryMeetingRosterSelectColumn.name;
-    case r'personId':
-      return Enum_HistoryMeetingRosterSelectColumn.personId;
-    case r'photoUpdatedAt':
-      return Enum_HistoryMeetingRosterSelectColumn.photoUpdatedAt;
-    case r'studyYearId':
-      return Enum_HistoryMeetingRosterSelectColumn.studyYearId;
-    case r'studyYearName':
-      return Enum_HistoryMeetingRosterSelectColumn.studyYearName;
-    default:
-      return Enum_HistoryMeetingRosterSelectColumn.$unknown;
-  }
-}
-
-enum Enum_HistoryMeetingsConstraint {
-  meetings_pkey,
-  $unknown;
-
-  factory Enum_HistoryMeetingsConstraint.fromJson(String value) =>
-      fromJson_Enum_HistoryMeetingsConstraint(value);
-
-  String toJson() => toJson_Enum_HistoryMeetingsConstraint(this);
-}
-
-String toJson_Enum_HistoryMeetingsConstraint(Enum_HistoryMeetingsConstraint e) {
-  switch (e) {
-    case Enum_HistoryMeetingsConstraint.meetings_pkey:
-      return r'meetings_pkey';
-    case Enum_HistoryMeetingsConstraint.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_HistoryMeetingsConstraint fromJson_Enum_HistoryMeetingsConstraint(
+Enum_ClassesSelectColumnClassesAggregateBoolExpBool_andArgumentsColumns
+fromJson_Enum_ClassesSelectColumnClassesAggregateBoolExpBool_andArgumentsColumns(
   String value,
 ) {
   switch (value) {
-    case r'meetings_pkey':
-      return Enum_HistoryMeetingsConstraint.meetings_pkey;
+    case r'serviceGender':
+      return Enum_ClassesSelectColumnClassesAggregateBoolExpBool_andArgumentsColumns
+          .serviceGender;
     default:
-      return Enum_HistoryMeetingsConstraint.$unknown;
+      return Enum_ClassesSelectColumnClassesAggregateBoolExpBool_andArgumentsColumns
+          .$unknown;
   }
 }
 
-enum Enum_HistoryMeetingsSelectColumn {
-  audience,
+enum Enum_ClassesSelectColumnClassesAggregateBoolExpBool_orArgumentsColumns {
+  serviceGender,
+  $unknown;
+
+  factory Enum_ClassesSelectColumnClassesAggregateBoolExpBool_orArgumentsColumns.fromJson(
+    String value,
+  ) =>
+      fromJson_Enum_ClassesSelectColumnClassesAggregateBoolExpBool_orArgumentsColumns(
+        value,
+      );
+
+  String toJson() =>
+      toJson_Enum_ClassesSelectColumnClassesAggregateBoolExpBool_orArgumentsColumns(
+        this,
+      );
+}
+
+String
+toJson_Enum_ClassesSelectColumnClassesAggregateBoolExpBool_orArgumentsColumns(
+  Enum_ClassesSelectColumnClassesAggregateBoolExpBool_orArgumentsColumns e,
+) {
+  switch (e) {
+    case Enum_ClassesSelectColumnClassesAggregateBoolExpBool_orArgumentsColumns
+        .serviceGender:
+      return r'serviceGender';
+    case Enum_ClassesSelectColumnClassesAggregateBoolExpBool_orArgumentsColumns
+        .$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_ClassesSelectColumnClassesAggregateBoolExpBool_orArgumentsColumns
+fromJson_Enum_ClassesSelectColumnClassesAggregateBoolExpBool_orArgumentsColumns(
+  String value,
+) {
+  switch (value) {
+    case r'serviceGender':
+      return Enum_ClassesSelectColumnClassesAggregateBoolExpBool_orArgumentsColumns
+          .serviceGender;
+    default:
+      return Enum_ClassesSelectColumnClassesAggregateBoolExpBool_orArgumentsColumns
+          .$unknown;
+  }
+}
+
+enum Enum_ClassesUpdateColumn {
   color,
-  groupId,
-  id,
-  isArchived,
   name,
   serviceGender,
   serviceId,
   serviceStudyYear,
   $unknown;
 
-  factory Enum_HistoryMeetingsSelectColumn.fromJson(String value) =>
-      fromJson_Enum_HistoryMeetingsSelectColumn(value);
+  factory Enum_ClassesUpdateColumn.fromJson(String value) =>
+      fromJson_Enum_ClassesUpdateColumn(value);
 
-  String toJson() => toJson_Enum_HistoryMeetingsSelectColumn(this);
+  String toJson() => toJson_Enum_ClassesUpdateColumn(this);
 }
 
-String toJson_Enum_HistoryMeetingsSelectColumn(
-  Enum_HistoryMeetingsSelectColumn e,
-) {
+String toJson_Enum_ClassesUpdateColumn(Enum_ClassesUpdateColumn e) {
   switch (e) {
-    case Enum_HistoryMeetingsSelectColumn.audience:
-      return r'audience';
-    case Enum_HistoryMeetingsSelectColumn.color:
+    case Enum_ClassesUpdateColumn.color:
       return r'color';
-    case Enum_HistoryMeetingsSelectColumn.groupId:
-      return r'groupId';
-    case Enum_HistoryMeetingsSelectColumn.id:
-      return r'id';
-    case Enum_HistoryMeetingsSelectColumn.isArchived:
-      return r'isArchived';
-    case Enum_HistoryMeetingsSelectColumn.name:
+    case Enum_ClassesUpdateColumn.name:
       return r'name';
-    case Enum_HistoryMeetingsSelectColumn.serviceGender:
+    case Enum_ClassesUpdateColumn.serviceGender:
       return r'serviceGender';
-    case Enum_HistoryMeetingsSelectColumn.serviceId:
+    case Enum_ClassesUpdateColumn.serviceId:
       return r'serviceId';
-    case Enum_HistoryMeetingsSelectColumn.serviceStudyYear:
+    case Enum_ClassesUpdateColumn.serviceStudyYear:
       return r'serviceStudyYear';
-    case Enum_HistoryMeetingsSelectColumn.$unknown:
+    case Enum_ClassesUpdateColumn.$unknown:
       return r'$unknown';
   }
 }
 
-Enum_HistoryMeetingsSelectColumn fromJson_Enum_HistoryMeetingsSelectColumn(
-  String value,
-) {
+Enum_ClassesUpdateColumn fromJson_Enum_ClassesUpdateColumn(String value) {
   switch (value) {
-    case r'audience':
-      return Enum_HistoryMeetingsSelectColumn.audience;
     case r'color':
-      return Enum_HistoryMeetingsSelectColumn.color;
-    case r'groupId':
-      return Enum_HistoryMeetingsSelectColumn.groupId;
-    case r'id':
-      return Enum_HistoryMeetingsSelectColumn.id;
-    case r'isArchived':
-      return Enum_HistoryMeetingsSelectColumn.isArchived;
+      return Enum_ClassesUpdateColumn.color;
     case r'name':
-      return Enum_HistoryMeetingsSelectColumn.name;
+      return Enum_ClassesUpdateColumn.name;
     case r'serviceGender':
-      return Enum_HistoryMeetingsSelectColumn.serviceGender;
+      return Enum_ClassesUpdateColumn.serviceGender;
     case r'serviceId':
-      return Enum_HistoryMeetingsSelectColumn.serviceId;
+      return Enum_ClassesUpdateColumn.serviceId;
     case r'serviceStudyYear':
-      return Enum_HistoryMeetingsSelectColumn.serviceStudyYear;
+      return Enum_ClassesUpdateColumn.serviceStudyYear;
     default:
-      return Enum_HistoryMeetingsSelectColumn.$unknown;
+      return Enum_ClassesUpdateColumn.$unknown;
   }
 }
 
-enum Enum_HistoryMeetingsUpdateColumn {
-  audience,
-  color,
-  isArchived,
-  name,
+enum Enum_CollegesConstraint {
+  colleges_name_key,
+  colleges_pkey,
   $unknown;
 
-  factory Enum_HistoryMeetingsUpdateColumn.fromJson(String value) =>
-      fromJson_Enum_HistoryMeetingsUpdateColumn(value);
+  factory Enum_CollegesConstraint.fromJson(String value) =>
+      fromJson_Enum_CollegesConstraint(value);
 
-  String toJson() => toJson_Enum_HistoryMeetingsUpdateColumn(this);
+  String toJson() => toJson_Enum_CollegesConstraint(this);
 }
 
-String toJson_Enum_HistoryMeetingsUpdateColumn(
-  Enum_HistoryMeetingsUpdateColumn e,
-) {
+String toJson_Enum_CollegesConstraint(Enum_CollegesConstraint e) {
   switch (e) {
-    case Enum_HistoryMeetingsUpdateColumn.audience:
-      return r'audience';
-    case Enum_HistoryMeetingsUpdateColumn.color:
-      return r'color';
-    case Enum_HistoryMeetingsUpdateColumn.isArchived:
-      return r'isArchived';
-    case Enum_HistoryMeetingsUpdateColumn.name:
-      return r'name';
-    case Enum_HistoryMeetingsUpdateColumn.$unknown:
+    case Enum_CollegesConstraint.colleges_name_key:
+      return r'colleges_name_key';
+    case Enum_CollegesConstraint.colleges_pkey:
+      return r'colleges_pkey';
+    case Enum_CollegesConstraint.$unknown:
       return r'$unknown';
   }
 }
 
-Enum_HistoryMeetingsUpdateColumn fromJson_Enum_HistoryMeetingsUpdateColumn(
-  String value,
-) {
+Enum_CollegesConstraint fromJson_Enum_CollegesConstraint(String value) {
   switch (value) {
-    case r'audience':
-      return Enum_HistoryMeetingsUpdateColumn.audience;
-    case r'color':
-      return Enum_HistoryMeetingsUpdateColumn.color;
-    case r'isArchived':
-      return Enum_HistoryMeetingsUpdateColumn.isArchived;
-    case r'name':
-      return Enum_HistoryMeetingsUpdateColumn.name;
+    case r'colleges_name_key':
+      return Enum_CollegesConstraint.colleges_name_key;
+    case r'colleges_pkey':
+      return Enum_CollegesConstraint.colleges_pkey;
     default:
-      return Enum_HistoryMeetingsUpdateColumn.$unknown;
+      return Enum_CollegesConstraint.$unknown;
   }
 }
 
-enum Enum_HistoryVisitHistoryConstraint {
-  visit_history_pkey,
-  $unknown;
-
-  factory Enum_HistoryVisitHistoryConstraint.fromJson(String value) =>
-      fromJson_Enum_HistoryVisitHistoryConstraint(value);
-
-  String toJson() => toJson_Enum_HistoryVisitHistoryConstraint(this);
-}
-
-String toJson_Enum_HistoryVisitHistoryConstraint(
-  Enum_HistoryVisitHistoryConstraint e,
-) {
-  switch (e) {
-    case Enum_HistoryVisitHistoryConstraint.visit_history_pkey:
-      return r'visit_history_pkey';
-    case Enum_HistoryVisitHistoryConstraint.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_HistoryVisitHistoryConstraint fromJson_Enum_HistoryVisitHistoryConstraint(
-  String value,
-) {
-  switch (value) {
-    case r'visit_history_pkey':
-      return Enum_HistoryVisitHistoryConstraint.visit_history_pkey;
-    default:
-      return Enum_HistoryVisitHistoryConstraint.$unknown;
-  }
-}
-
-enum Enum_HistoryVisitHistorySelectColumn {
-  isFatherVisit,
-  recordId,
-  recordedBy,
-  table,
-  time,
-  visitId,
-  $unknown;
-
-  factory Enum_HistoryVisitHistorySelectColumn.fromJson(String value) =>
-      fromJson_Enum_HistoryVisitHistorySelectColumn(value);
-
-  String toJson() => toJson_Enum_HistoryVisitHistorySelectColumn(this);
-}
-
-String toJson_Enum_HistoryVisitHistorySelectColumn(
-  Enum_HistoryVisitHistorySelectColumn e,
-) {
-  switch (e) {
-    case Enum_HistoryVisitHistorySelectColumn.isFatherVisit:
-      return r'isFatherVisit';
-    case Enum_HistoryVisitHistorySelectColumn.recordId:
-      return r'recordId';
-    case Enum_HistoryVisitHistorySelectColumn.recordedBy:
-      return r'recordedBy';
-    case Enum_HistoryVisitHistorySelectColumn.table:
-      return r'table';
-    case Enum_HistoryVisitHistorySelectColumn.time:
-      return r'time';
-    case Enum_HistoryVisitHistorySelectColumn.visitId:
-      return r'visitId';
-    case Enum_HistoryVisitHistorySelectColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_HistoryVisitHistorySelectColumn
-fromJson_Enum_HistoryVisitHistorySelectColumn(String value) {
-  switch (value) {
-    case r'isFatherVisit':
-      return Enum_HistoryVisitHistorySelectColumn.isFatherVisit;
-    case r'recordId':
-      return Enum_HistoryVisitHistorySelectColumn.recordId;
-    case r'recordedBy':
-      return Enum_HistoryVisitHistorySelectColumn.recordedBy;
-    case r'table':
-      return Enum_HistoryVisitHistorySelectColumn.table;
-    case r'time':
-      return Enum_HistoryVisitHistorySelectColumn.time;
-    case r'visitId':
-      return Enum_HistoryVisitHistorySelectColumn.visitId;
-    default:
-      return Enum_HistoryVisitHistorySelectColumn.$unknown;
-  }
-}
-
-enum Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_andArgumentsColumns {
-  isFatherVisit,
-  $unknown;
-
-  factory Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_andArgumentsColumns.fromJson(
-    String value,
-  ) =>
-      fromJson_Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_andArgumentsColumns(
-        value,
-      );
-
-  String toJson() =>
-      toJson_Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_andArgumentsColumns(
-        this,
-      );
-}
-
-String
-toJson_Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_andArgumentsColumns(
-  Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_andArgumentsColumns
-  e,
-) {
-  switch (e) {
-    case Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_andArgumentsColumns
-        .isFatherVisit:
-      return r'isFatherVisit';
-    case Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_andArgumentsColumns
-        .$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_andArgumentsColumns
-fromJson_Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_andArgumentsColumns(
-  String value,
-) {
-  switch (value) {
-    case r'isFatherVisit':
-      return Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_andArgumentsColumns
-          .isFatherVisit;
-    default:
-      return Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_andArgumentsColumns
-          .$unknown;
-  }
-}
-
-enum Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_orArgumentsColumns {
-  isFatherVisit,
-  $unknown;
-
-  factory Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_orArgumentsColumns.fromJson(
-    String value,
-  ) =>
-      fromJson_Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_orArgumentsColumns(
-        value,
-      );
-
-  String toJson() =>
-      toJson_Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_orArgumentsColumns(
-        this,
-      );
-}
-
-String
-toJson_Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_orArgumentsColumns(
-  Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_orArgumentsColumns
-  e,
-) {
-  switch (e) {
-    case Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_orArgumentsColumns
-        .isFatherVisit:
-      return r'isFatherVisit';
-    case Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_orArgumentsColumns
-        .$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_orArgumentsColumns
-fromJson_Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_orArgumentsColumns(
-  String value,
-) {
-  switch (value) {
-    case r'isFatherVisit':
-      return Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_orArgumentsColumns
-          .isFatherVisit;
-    default:
-      return Enum_HistoryVisitHistorySelectColumnHistoryVisitHistoryAggregateBoolExpBool_orArgumentsColumns
-          .$unknown;
-  }
-}
-
-enum Enum_HistoryVisitHistoryUpdateColumn {
-  $_PLACEHOLDER,
-  $unknown;
-
-  factory Enum_HistoryVisitHistoryUpdateColumn.fromJson(String value) =>
-      fromJson_Enum_HistoryVisitHistoryUpdateColumn(value);
-
-  String toJson() => toJson_Enum_HistoryVisitHistoryUpdateColumn(this);
-}
-
-String toJson_Enum_HistoryVisitHistoryUpdateColumn(
-  Enum_HistoryVisitHistoryUpdateColumn e,
-) {
-  switch (e) {
-    case Enum_HistoryVisitHistoryUpdateColumn.$_PLACEHOLDER:
-      return r'_PLACEHOLDER';
-    case Enum_HistoryVisitHistoryUpdateColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_HistoryVisitHistoryUpdateColumn
-fromJson_Enum_HistoryVisitHistoryUpdateColumn(String value) {
-  switch (value) {
-    case r'_PLACEHOLDER':
-      return Enum_HistoryVisitHistoryUpdateColumn.$_PLACEHOLDER;
-    default:
-      return Enum_HistoryVisitHistoryUpdateColumn.$unknown;
-  }
-}
-
-enum Enum_HobbiesConstraint {
-  hobbies_name_key,
-  hobbies_pkey,
-  $unknown;
-
-  factory Enum_HobbiesConstraint.fromJson(String value) =>
-      fromJson_Enum_HobbiesConstraint(value);
-
-  String toJson() => toJson_Enum_HobbiesConstraint(this);
-}
-
-String toJson_Enum_HobbiesConstraint(Enum_HobbiesConstraint e) {
-  switch (e) {
-    case Enum_HobbiesConstraint.hobbies_name_key:
-      return r'hobbies_name_key';
-    case Enum_HobbiesConstraint.hobbies_pkey:
-      return r'hobbies_pkey';
-    case Enum_HobbiesConstraint.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_HobbiesConstraint fromJson_Enum_HobbiesConstraint(String value) {
-  switch (value) {
-    case r'hobbies_name_key':
-      return Enum_HobbiesConstraint.hobbies_name_key;
-    case r'hobbies_pkey':
-      return Enum_HobbiesConstraint.hobbies_pkey;
-    default:
-      return Enum_HobbiesConstraint.$unknown;
-  }
-}
-
-enum Enum_HobbiesSelectColumn {
-  color,
+enum Enum_CollegesSelectColumn {
   id,
   name,
+  universityId,
   $unknown;
 
-  factory Enum_HobbiesSelectColumn.fromJson(String value) =>
-      fromJson_Enum_HobbiesSelectColumn(value);
+  factory Enum_CollegesSelectColumn.fromJson(String value) =>
+      fromJson_Enum_CollegesSelectColumn(value);
 
-  String toJson() => toJson_Enum_HobbiesSelectColumn(this);
+  String toJson() => toJson_Enum_CollegesSelectColumn(this);
 }
 
-String toJson_Enum_HobbiesSelectColumn(Enum_HobbiesSelectColumn e) {
+String toJson_Enum_CollegesSelectColumn(Enum_CollegesSelectColumn e) {
   switch (e) {
-    case Enum_HobbiesSelectColumn.color:
-      return r'color';
-    case Enum_HobbiesSelectColumn.id:
+    case Enum_CollegesSelectColumn.id:
       return r'id';
-    case Enum_HobbiesSelectColumn.name:
+    case Enum_CollegesSelectColumn.name:
       return r'name';
-    case Enum_HobbiesSelectColumn.$unknown:
+    case Enum_CollegesSelectColumn.universityId:
+      return r'universityId';
+    case Enum_CollegesSelectColumn.$unknown:
       return r'$unknown';
   }
 }
 
-Enum_HobbiesSelectColumn fromJson_Enum_HobbiesSelectColumn(String value) {
-  switch (value) {
-    case r'color':
-      return Enum_HobbiesSelectColumn.color;
-    case r'id':
-      return Enum_HobbiesSelectColumn.id;
-    case r'name':
-      return Enum_HobbiesSelectColumn.name;
-    default:
-      return Enum_HobbiesSelectColumn.$unknown;
-  }
-}
-
-enum Enum_HobbiesUpdateColumn {
-  color,
-  name,
-  $unknown;
-
-  factory Enum_HobbiesUpdateColumn.fromJson(String value) =>
-      fromJson_Enum_HobbiesUpdateColumn(value);
-
-  String toJson() => toJson_Enum_HobbiesUpdateColumn(this);
-}
-
-String toJson_Enum_HobbiesUpdateColumn(Enum_HobbiesUpdateColumn e) {
-  switch (e) {
-    case Enum_HobbiesUpdateColumn.color:
-      return r'color';
-    case Enum_HobbiesUpdateColumn.name:
-      return r'name';
-    case Enum_HobbiesUpdateColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_HobbiesUpdateColumn fromJson_Enum_HobbiesUpdateColumn(String value) {
-  switch (value) {
-    case r'color':
-      return Enum_HobbiesUpdateColumn.color;
-    case r'name':
-      return Enum_HobbiesUpdateColumn.name;
-    default:
-      return Enum_HobbiesUpdateColumn.$unknown;
-  }
-}
-
-enum Enum_JobsConstraint {
-  jobs_name_key,
-  jobs_pkey,
-  $unknown;
-
-  factory Enum_JobsConstraint.fromJson(String value) =>
-      fromJson_Enum_JobsConstraint(value);
-
-  String toJson() => toJson_Enum_JobsConstraint(this);
-}
-
-String toJson_Enum_JobsConstraint(Enum_JobsConstraint e) {
-  switch (e) {
-    case Enum_JobsConstraint.jobs_name_key:
-      return r'jobs_name_key';
-    case Enum_JobsConstraint.jobs_pkey:
-      return r'jobs_pkey';
-    case Enum_JobsConstraint.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_JobsConstraint fromJson_Enum_JobsConstraint(String value) {
-  switch (value) {
-    case r'jobs_name_key':
-      return Enum_JobsConstraint.jobs_name_key;
-    case r'jobs_pkey':
-      return Enum_JobsConstraint.jobs_pkey;
-    default:
-      return Enum_JobsConstraint.$unknown;
-  }
-}
-
-enum Enum_JobsSelectColumn {
-  id,
-  name,
-  $unknown;
-
-  factory Enum_JobsSelectColumn.fromJson(String value) =>
-      fromJson_Enum_JobsSelectColumn(value);
-
-  String toJson() => toJson_Enum_JobsSelectColumn(this);
-}
-
-String toJson_Enum_JobsSelectColumn(Enum_JobsSelectColumn e) {
-  switch (e) {
-    case Enum_JobsSelectColumn.id:
-      return r'id';
-    case Enum_JobsSelectColumn.name:
-      return r'name';
-    case Enum_JobsSelectColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_JobsSelectColumn fromJson_Enum_JobsSelectColumn(String value) {
+Enum_CollegesSelectColumn fromJson_Enum_CollegesSelectColumn(String value) {
   switch (value) {
     case r'id':
-      return Enum_JobsSelectColumn.id;
+      return Enum_CollegesSelectColumn.id;
     case r'name':
-      return Enum_JobsSelectColumn.name;
+      return Enum_CollegesSelectColumn.name;
+    case r'universityId':
+      return Enum_CollegesSelectColumn.universityId;
     default:
-      return Enum_JobsSelectColumn.$unknown;
+      return Enum_CollegesSelectColumn.$unknown;
   }
 }
 
-enum Enum_JobsUpdateColumn {
+enum Enum_CollegesUpdateColumn {
   name,
   $unknown;
 
-  factory Enum_JobsUpdateColumn.fromJson(String value) =>
-      fromJson_Enum_JobsUpdateColumn(value);
+  factory Enum_CollegesUpdateColumn.fromJson(String value) =>
+      fromJson_Enum_CollegesUpdateColumn(value);
 
-  String toJson() => toJson_Enum_JobsUpdateColumn(this);
+  String toJson() => toJson_Enum_CollegesUpdateColumn(this);
 }
 
-String toJson_Enum_JobsUpdateColumn(Enum_JobsUpdateColumn e) {
+String toJson_Enum_CollegesUpdateColumn(Enum_CollegesUpdateColumn e) {
   switch (e) {
-    case Enum_JobsUpdateColumn.name:
+    case Enum_CollegesUpdateColumn.name:
       return r'name';
-    case Enum_JobsUpdateColumn.$unknown:
+    case Enum_CollegesUpdateColumn.$unknown:
       return r'$unknown';
   }
 }
 
-Enum_JobsUpdateColumn fromJson_Enum_JobsUpdateColumn(String value) {
+Enum_CollegesUpdateColumn fromJson_Enum_CollegesUpdateColumn(String value) {
   switch (value) {
     case r'name':
-      return Enum_JobsUpdateColumn.name;
+      return Enum_CollegesUpdateColumn.name;
     default:
-      return Enum_JobsUpdateColumn.$unknown;
+      return Enum_CollegesUpdateColumn.$unknown;
   }
 }
 
-enum Enum_OrderBy {
+enum Enum_CursorOrdering {
   ASC,
-  ASC_NULLS_FIRST,
-  ASC_NULLS_LAST,
   DESC,
-  DESC_NULLS_FIRST,
-  DESC_NULLS_LAST,
   $unknown;
 
-  factory Enum_OrderBy.fromJson(String value) => fromJson_Enum_OrderBy(value);
+  factory Enum_CursorOrdering.fromJson(String value) =>
+      fromJson_Enum_CursorOrdering(value);
 
-  String toJson() => toJson_Enum_OrderBy(this);
+  String toJson() => toJson_Enum_CursorOrdering(this);
 }
 
-String toJson_Enum_OrderBy(Enum_OrderBy e) {
+String toJson_Enum_CursorOrdering(Enum_CursorOrdering e) {
   switch (e) {
-    case Enum_OrderBy.ASC:
+    case Enum_CursorOrdering.ASC:
       return r'ASC';
-    case Enum_OrderBy.ASC_NULLS_FIRST:
-      return r'ASC_NULLS_FIRST';
-    case Enum_OrderBy.ASC_NULLS_LAST:
-      return r'ASC_NULLS_LAST';
-    case Enum_OrderBy.DESC:
+    case Enum_CursorOrdering.DESC:
       return r'DESC';
-    case Enum_OrderBy.DESC_NULLS_FIRST:
-      return r'DESC_NULLS_FIRST';
-    case Enum_OrderBy.DESC_NULLS_LAST:
-      return r'DESC_NULLS_LAST';
-    case Enum_OrderBy.$unknown:
+    case Enum_CursorOrdering.$unknown:
       return r'$unknown';
   }
 }
 
-Enum_OrderBy fromJson_Enum_OrderBy(String value) {
+Enum_CursorOrdering fromJson_Enum_CursorOrdering(String value) {
   switch (value) {
     case r'ASC':
-      return Enum_OrderBy.ASC;
-    case r'ASC_NULLS_FIRST':
-      return Enum_OrderBy.ASC_NULLS_FIRST;
-    case r'ASC_NULLS_LAST':
-      return Enum_OrderBy.ASC_NULLS_LAST;
+      return Enum_CursorOrdering.ASC;
     case r'DESC':
-      return Enum_OrderBy.DESC;
-    case r'DESC_NULLS_FIRST':
-      return Enum_OrderBy.DESC_NULLS_FIRST;
-    case r'DESC_NULLS_LAST':
-      return Enum_OrderBy.DESC_NULLS_LAST;
+      return Enum_CursorOrdering.DESC;
     default:
-      return Enum_OrderBy.$unknown;
+      return Enum_CursorOrdering.$unknown;
   }
 }
 
-enum Enum_PersonStatesConstraint {
-  states_color_key,
-  states_name_key,
-  states_pkey,
+enum Enum_DistrictsConstraint {
+  districts_pk,
+  districts_unique_name,
   $unknown;
 
-  factory Enum_PersonStatesConstraint.fromJson(String value) =>
-      fromJson_Enum_PersonStatesConstraint(value);
+  factory Enum_DistrictsConstraint.fromJson(String value) =>
+      fromJson_Enum_DistrictsConstraint(value);
 
-  String toJson() => toJson_Enum_PersonStatesConstraint(this);
+  String toJson() => toJson_Enum_DistrictsConstraint(this);
 }
 
-String toJson_Enum_PersonStatesConstraint(Enum_PersonStatesConstraint e) {
+String toJson_Enum_DistrictsConstraint(Enum_DistrictsConstraint e) {
   switch (e) {
-    case Enum_PersonStatesConstraint.states_color_key:
-      return r'states_color_key';
-    case Enum_PersonStatesConstraint.states_name_key:
-      return r'states_name_key';
-    case Enum_PersonStatesConstraint.states_pkey:
-      return r'states_pkey';
-    case Enum_PersonStatesConstraint.$unknown:
+    case Enum_DistrictsConstraint.districts_pk:
+      return r'districts_pk';
+    case Enum_DistrictsConstraint.districts_unique_name:
+      return r'districts_unique_name';
+    case Enum_DistrictsConstraint.$unknown:
       return r'$unknown';
   }
 }
 
-Enum_PersonStatesConstraint fromJson_Enum_PersonStatesConstraint(String value) {
+Enum_DistrictsConstraint fromJson_Enum_DistrictsConstraint(String value) {
   switch (value) {
-    case r'states_color_key':
-      return Enum_PersonStatesConstraint.states_color_key;
-    case r'states_name_key':
-      return Enum_PersonStatesConstraint.states_name_key;
-    case r'states_pkey':
-      return Enum_PersonStatesConstraint.states_pkey;
+    case r'districts_pk':
+      return Enum_DistrictsConstraint.districts_pk;
+    case r'districts_unique_name':
+      return Enum_DistrictsConstraint.districts_unique_name;
     default:
-      return Enum_PersonStatesConstraint.$unknown;
+      return Enum_DistrictsConstraint.$unknown;
   }
 }
 
-enum Enum_PersonStatesSelectColumn {
-  color,
+enum Enum_DistrictsSelectColumn {
   id,
   name,
   $unknown;
 
-  factory Enum_PersonStatesSelectColumn.fromJson(String value) =>
-      fromJson_Enum_PersonStatesSelectColumn(value);
+  factory Enum_DistrictsSelectColumn.fromJson(String value) =>
+      fromJson_Enum_DistrictsSelectColumn(value);
 
-  String toJson() => toJson_Enum_PersonStatesSelectColumn(this);
+  String toJson() => toJson_Enum_DistrictsSelectColumn(this);
 }
 
-String toJson_Enum_PersonStatesSelectColumn(Enum_PersonStatesSelectColumn e) {
+String toJson_Enum_DistrictsSelectColumn(Enum_DistrictsSelectColumn e) {
   switch (e) {
-    case Enum_PersonStatesSelectColumn.color:
-      return r'color';
-    case Enum_PersonStatesSelectColumn.id:
+    case Enum_DistrictsSelectColumn.id:
       return r'id';
-    case Enum_PersonStatesSelectColumn.name:
+    case Enum_DistrictsSelectColumn.name:
       return r'name';
-    case Enum_PersonStatesSelectColumn.$unknown:
+    case Enum_DistrictsSelectColumn.$unknown:
       return r'$unknown';
   }
 }
 
-Enum_PersonStatesSelectColumn fromJson_Enum_PersonStatesSelectColumn(
-  String value,
-) {
+Enum_DistrictsSelectColumn fromJson_Enum_DistrictsSelectColumn(String value) {
   switch (value) {
-    case r'color':
-      return Enum_PersonStatesSelectColumn.color;
     case r'id':
-      return Enum_PersonStatesSelectColumn.id;
+      return Enum_DistrictsSelectColumn.id;
     case r'name':
-      return Enum_PersonStatesSelectColumn.name;
+      return Enum_DistrictsSelectColumn.name;
     default:
-      return Enum_PersonStatesSelectColumn.$unknown;
+      return Enum_DistrictsSelectColumn.$unknown;
   }
 }
 
-enum Enum_PersonStatesUpdateColumn {
-  color,
+enum Enum_DistrictsUpdateColumn {
   name,
   $unknown;
 
-  factory Enum_PersonStatesUpdateColumn.fromJson(String value) =>
-      fromJson_Enum_PersonStatesUpdateColumn(value);
+  factory Enum_DistrictsUpdateColumn.fromJson(String value) =>
+      fromJson_Enum_DistrictsUpdateColumn(value);
 
-  String toJson() => toJson_Enum_PersonStatesUpdateColumn(this);
+  String toJson() => toJson_Enum_DistrictsUpdateColumn(this);
 }
 
-String toJson_Enum_PersonStatesUpdateColumn(Enum_PersonStatesUpdateColumn e) {
+String toJson_Enum_DistrictsUpdateColumn(Enum_DistrictsUpdateColumn e) {
   switch (e) {
-    case Enum_PersonStatesUpdateColumn.color:
-      return r'color';
-    case Enum_PersonStatesUpdateColumn.name:
+    case Enum_DistrictsUpdateColumn.name:
       return r'name';
-    case Enum_PersonStatesUpdateColumn.$unknown:
+    case Enum_DistrictsUpdateColumn.$unknown:
       return r'$unknown';
   }
 }
 
-Enum_PersonStatesUpdateColumn fromJson_Enum_PersonStatesUpdateColumn(
+Enum_DistrictsUpdateColumn fromJson_Enum_DistrictsUpdateColumn(String value) {
+  switch (value) {
+    case r'name':
+      return Enum_DistrictsUpdateColumn.name;
+    default:
+      return Enum_DistrictsUpdateColumn.$unknown;
+  }
+}
+
+enum Enum_FamiliesAdminsPhonesSelectColumn {
+  aggregatedPhones,
+  familyId,
+  $unknown;
+
+  factory Enum_FamiliesAdminsPhonesSelectColumn.fromJson(String value) =>
+      fromJson_Enum_FamiliesAdminsPhonesSelectColumn(value);
+
+  String toJson() => toJson_Enum_FamiliesAdminsPhonesSelectColumn(this);
+}
+
+String toJson_Enum_FamiliesAdminsPhonesSelectColumn(
+  Enum_FamiliesAdminsPhonesSelectColumn e,
+) {
+  switch (e) {
+    case Enum_FamiliesAdminsPhonesSelectColumn.aggregatedPhones:
+      return r'aggregatedPhones';
+    case Enum_FamiliesAdminsPhonesSelectColumn.familyId:
+      return r'familyId';
+    case Enum_FamiliesAdminsPhonesSelectColumn.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_FamiliesAdminsPhonesSelectColumn
+fromJson_Enum_FamiliesAdminsPhonesSelectColumn(String value) {
+  switch (value) {
+    case r'aggregatedPhones':
+      return Enum_FamiliesAdminsPhonesSelectColumn.aggregatedPhones;
+    case r'familyId':
+      return Enum_FamiliesAdminsPhonesSelectColumn.familyId;
+    default:
+      return Enum_FamiliesAdminsPhonesSelectColumn.$unknown;
+  }
+}
+
+enum Enum_FamiliesConstraint {
+  families_pkey,
+  $unknown;
+
+  factory Enum_FamiliesConstraint.fromJson(String value) =>
+      fromJson_Enum_FamiliesConstraint(value);
+
+  String toJson() => toJson_Enum_FamiliesConstraint(this);
+}
+
+String toJson_Enum_FamiliesConstraint(Enum_FamiliesConstraint e) {
+  switch (e) {
+    case Enum_FamiliesConstraint.families_pkey:
+      return r'families_pkey';
+    case Enum_FamiliesConstraint.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_FamiliesConstraint fromJson_Enum_FamiliesConstraint(String value) {
+  switch (value) {
+    case r'families_pkey':
+      return Enum_FamiliesConstraint.families_pkey;
+    default:
+      return Enum_FamiliesConstraint.$unknown;
+  }
+}
+
+enum Enum_FamiliesFamiliesConstraint {
+  families_families_pkey,
+  families_families_rel_id_key,
+  $unknown;
+
+  factory Enum_FamiliesFamiliesConstraint.fromJson(String value) =>
+      fromJson_Enum_FamiliesFamiliesConstraint(value);
+
+  String toJson() => toJson_Enum_FamiliesFamiliesConstraint(this);
+}
+
+String toJson_Enum_FamiliesFamiliesConstraint(
+  Enum_FamiliesFamiliesConstraint e,
+) {
+  switch (e) {
+    case Enum_FamiliesFamiliesConstraint.families_families_pkey:
+      return r'families_families_pkey';
+    case Enum_FamiliesFamiliesConstraint.families_families_rel_id_key:
+      return r'families_families_rel_id_key';
+    case Enum_FamiliesFamiliesConstraint.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_FamiliesFamiliesConstraint fromJson_Enum_FamiliesFamiliesConstraint(
   String value,
 ) {
   switch (value) {
-    case r'color':
-      return Enum_PersonStatesUpdateColumn.color;
-    case r'name':
-      return Enum_PersonStatesUpdateColumn.name;
+    case r'families_families_pkey':
+      return Enum_FamiliesFamiliesConstraint.families_families_pkey;
+    case r'families_families_rel_id_key':
+      return Enum_FamiliesFamiliesConstraint.families_families_rel_id_key;
     default:
-      return Enum_PersonStatesUpdateColumn.$unknown;
+      return Enum_FamiliesFamiliesConstraint.$unknown;
   }
 }
 
-enum Enum_PersonTypesConstraint {
-  person_types_name_key,
-  person_types_order_key,
-  person_types_pkey,
+enum Enum_FamiliesFamiliesSelectColumn {
+  childFamilyId,
+  parentFamilyId,
   $unknown;
 
-  factory Enum_PersonTypesConstraint.fromJson(String value) =>
-      fromJson_Enum_PersonTypesConstraint(value);
+  factory Enum_FamiliesFamiliesSelectColumn.fromJson(String value) =>
+      fromJson_Enum_FamiliesFamiliesSelectColumn(value);
 
-  String toJson() => toJson_Enum_PersonTypesConstraint(this);
+  String toJson() => toJson_Enum_FamiliesFamiliesSelectColumn(this);
 }
 
-String toJson_Enum_PersonTypesConstraint(Enum_PersonTypesConstraint e) {
+String toJson_Enum_FamiliesFamiliesSelectColumn(
+  Enum_FamiliesFamiliesSelectColumn e,
+) {
   switch (e) {
-    case Enum_PersonTypesConstraint.person_types_name_key:
-      return r'person_types_name_key';
-    case Enum_PersonTypesConstraint.person_types_order_key:
-      return r'person_types_order_key';
-    case Enum_PersonTypesConstraint.person_types_pkey:
-      return r'person_types_pkey';
-    case Enum_PersonTypesConstraint.$unknown:
+    case Enum_FamiliesFamiliesSelectColumn.childFamilyId:
+      return r'childFamilyId';
+    case Enum_FamiliesFamiliesSelectColumn.parentFamilyId:
+      return r'parentFamilyId';
+    case Enum_FamiliesFamiliesSelectColumn.$unknown:
       return r'$unknown';
   }
 }
 
-Enum_PersonTypesConstraint fromJson_Enum_PersonTypesConstraint(String value) {
+Enum_FamiliesFamiliesSelectColumn fromJson_Enum_FamiliesFamiliesSelectColumn(
+  String value,
+) {
   switch (value) {
-    case r'person_types_name_key':
-      return Enum_PersonTypesConstraint.person_types_name_key;
-    case r'person_types_order_key':
-      return Enum_PersonTypesConstraint.person_types_order_key;
-    case r'person_types_pkey':
-      return Enum_PersonTypesConstraint.person_types_pkey;
+    case r'childFamilyId':
+      return Enum_FamiliesFamiliesSelectColumn.childFamilyId;
+    case r'parentFamilyId':
+      return Enum_FamiliesFamiliesSelectColumn.parentFamilyId;
     default:
-      return Enum_PersonTypesConstraint.$unknown;
+      return Enum_FamiliesFamiliesSelectColumn.$unknown;
   }
 }
 
-enum Enum_PersonTypesSelectColumn {
+enum Enum_FamiliesFamiliesUpdateColumn {
+  $_PLACEHOLDER,
+  $unknown;
+
+  factory Enum_FamiliesFamiliesUpdateColumn.fromJson(String value) =>
+      fromJson_Enum_FamiliesFamiliesUpdateColumn(value);
+
+  String toJson() => toJson_Enum_FamiliesFamiliesUpdateColumn(this);
+}
+
+String toJson_Enum_FamiliesFamiliesUpdateColumn(
+  Enum_FamiliesFamiliesUpdateColumn e,
+) {
+  switch (e) {
+    case Enum_FamiliesFamiliesUpdateColumn.$_PLACEHOLDER:
+      return r'_PLACEHOLDER';
+    case Enum_FamiliesFamiliesUpdateColumn.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_FamiliesFamiliesUpdateColumn fromJson_Enum_FamiliesFamiliesUpdateColumn(
+  String value,
+) {
+  switch (value) {
+    case r'_PLACEHOLDER':
+      return Enum_FamiliesFamiliesUpdateColumn.$_PLACEHOLDER;
+    default:
+      return Enum_FamiliesFamiliesUpdateColumn.$unknown;
+  }
+}
+
+enum Enum_FamiliesSelectColumn {
+  blurhash,
+  churchId,
+  color,
+  deceasedSpouseName,
   id,
-  isFamilyAdmin,
+  marriageDate,
+  name,
+  notes,
+  photoUpdatedAt,
+  status,
+  $unknown;
+
+  factory Enum_FamiliesSelectColumn.fromJson(String value) =>
+      fromJson_Enum_FamiliesSelectColumn(value);
+
+  String toJson() => toJson_Enum_FamiliesSelectColumn(this);
+}
+
+String toJson_Enum_FamiliesSelectColumn(Enum_FamiliesSelectColumn e) {
+  switch (e) {
+    case Enum_FamiliesSelectColumn.blurhash:
+      return r'blurhash';
+    case Enum_FamiliesSelectColumn.churchId:
+      return r'churchId';
+    case Enum_FamiliesSelectColumn.color:
+      return r'color';
+    case Enum_FamiliesSelectColumn.deceasedSpouseName:
+      return r'deceasedSpouseName';
+    case Enum_FamiliesSelectColumn.id:
+      return r'id';
+    case Enum_FamiliesSelectColumn.marriageDate:
+      return r'marriageDate';
+    case Enum_FamiliesSelectColumn.name:
+      return r'name';
+    case Enum_FamiliesSelectColumn.notes:
+      return r'notes';
+    case Enum_FamiliesSelectColumn.photoUpdatedAt:
+      return r'photoUpdatedAt';
+    case Enum_FamiliesSelectColumn.status:
+      return r'status';
+    case Enum_FamiliesSelectColumn.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_FamiliesSelectColumn fromJson_Enum_FamiliesSelectColumn(String value) {
+  switch (value) {
+    case r'blurhash':
+      return Enum_FamiliesSelectColumn.blurhash;
+    case r'churchId':
+      return Enum_FamiliesSelectColumn.churchId;
+    case r'color':
+      return Enum_FamiliesSelectColumn.color;
+    case r'deceasedSpouseName':
+      return Enum_FamiliesSelectColumn.deceasedSpouseName;
+    case r'id':
+      return Enum_FamiliesSelectColumn.id;
+    case r'marriageDate':
+      return Enum_FamiliesSelectColumn.marriageDate;
+    case r'name':
+      return Enum_FamiliesSelectColumn.name;
+    case r'notes':
+      return Enum_FamiliesSelectColumn.notes;
+    case r'photoUpdatedAt':
+      return Enum_FamiliesSelectColumn.photoUpdatedAt;
+    case r'status':
+      return Enum_FamiliesSelectColumn.status;
+    default:
+      return Enum_FamiliesSelectColumn.$unknown;
+  }
+}
+
+enum Enum_FamiliesUpdateColumn {
+  churchId,
+  color,
+  deceasedSpouseName,
+  marriageDate,
+  name,
+  notes,
+  status,
+  $unknown;
+
+  factory Enum_FamiliesUpdateColumn.fromJson(String value) =>
+      fromJson_Enum_FamiliesUpdateColumn(value);
+
+  String toJson() => toJson_Enum_FamiliesUpdateColumn(this);
+}
+
+String toJson_Enum_FamiliesUpdateColumn(Enum_FamiliesUpdateColumn e) {
+  switch (e) {
+    case Enum_FamiliesUpdateColumn.churchId:
+      return r'churchId';
+    case Enum_FamiliesUpdateColumn.color:
+      return r'color';
+    case Enum_FamiliesUpdateColumn.deceasedSpouseName:
+      return r'deceasedSpouseName';
+    case Enum_FamiliesUpdateColumn.marriageDate:
+      return r'marriageDate';
+    case Enum_FamiliesUpdateColumn.name:
+      return r'name';
+    case Enum_FamiliesUpdateColumn.notes:
+      return r'notes';
+    case Enum_FamiliesUpdateColumn.status:
+      return r'status';
+    case Enum_FamiliesUpdateColumn.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_FamiliesUpdateColumn fromJson_Enum_FamiliesUpdateColumn(String value) {
+  switch (value) {
+    case r'churchId':
+      return Enum_FamiliesUpdateColumn.churchId;
+    case r'color':
+      return Enum_FamiliesUpdateColumn.color;
+    case r'deceasedSpouseName':
+      return Enum_FamiliesUpdateColumn.deceasedSpouseName;
+    case r'marriageDate':
+      return Enum_FamiliesUpdateColumn.marriageDate;
+    case r'name':
+      return Enum_FamiliesUpdateColumn.name;
+    case r'notes':
+      return Enum_FamiliesUpdateColumn.notes;
+    case r'status':
+      return Enum_FamiliesUpdateColumn.status;
+    default:
+      return Enum_FamiliesUpdateColumn.$unknown;
+  }
+}
+
+enum Enum_FathersConstraint {
+  fathers_name_key,
+  fathers_pkey,
+  $unknown;
+
+  factory Enum_FathersConstraint.fromJson(String value) =>
+      fromJson_Enum_FathersConstraint(value);
+
+  String toJson() => toJson_Enum_FathersConstraint(this);
+}
+
+String toJson_Enum_FathersConstraint(Enum_FathersConstraint e) {
+  switch (e) {
+    case Enum_FathersConstraint.fathers_name_key:
+      return r'fathers_name_key';
+    case Enum_FathersConstraint.fathers_pkey:
+      return r'fathers_pkey';
+    case Enum_FathersConstraint.$unknown:
+      return r'$unknown';
+  }
+}
+
+Enum_FathersConstraint fromJson_Enum_FathersConstraint(String value) {
+  switch (value) {
+    case r'fathers_name_key':
+      return Enum_FathersConstraint.fathers_name_key;
+    case r'fathers_pkey':
+      return Enum_FathersConstraint.fathers_pkey;
+    default:
+      return Enum_FathersConstraint.$unknown;
+  }
+}
+
+enum Enum_FathersSelectColumn {
+  churchId,
+  id,
   isHidden,
   name,
-  order,
   $unknown;
 
-  factory Enum_PersonTypesSelectColumn.fromJson(String value) =>
-      fromJson_Enum_PersonTypesSelectColumn(value);
+  factory Enum_FathersSelectColumn.fromJson(String value) =>
+      fromJson_Enum_FathersSelectColumn(value);
 
-  String toJson() => toJson_Enum_PersonTypesSelectColumn(this);
+  String toJson() => toJson_Enum_FathersSelectColumn(this);
 }
 
-String toJson_Enum_PersonTypesSelectColumn(Enum_PersonTypesSelectColumn e) {
+String toJson_Enum_FathersSelectColumn(Enum_FathersSelectColumn e) {
   switch (e) {
-    case Enum_PersonTypesSelectColumn.id:
+    case Enum_FathersSelectColumn.churchId:
+      return r'churchId';
+    case Enum_FathersSelectColumn.id:
       return r'id';
-    case Enum_PersonTypesSelectColumn.isFamilyAdmin:
-      return r'isFamilyAdmin';
-    case Enum_PersonTypesSelectColumn.isHidden:
+    case Enum_FathersSelectColumn.isHidden:
       return r'isHidden';
-    case Enum_PersonTypesSelectColumn.name:
+    case Enum_FathersSelectColumn.name:
       return r'name';
-    case Enum_PersonTypesSelectColumn.order:
-      return r'order';
-    case Enum_PersonTypesSelectColumn.$unknown:
+    case Enum_FathersSelectColumn.$unknown:
       return r'$unknown';
   }
 }
 
-Enum_PersonTypesSelectColumn fromJson_Enum_PersonTypesSelectColumn(
-  String value,
-) {
+Enum_FathersSelectColumn fromJson_Enum_FathersSelectColumn(String value) {
   switch (value) {
+    case r'churchId':
+      return Enum_FathersSelectColumn.churchId;
     case r'id':
-      return Enum_PersonTypesSelectColumn.id;
-    case r'isFamilyAdmin':
-      return Enum_PersonTypesSelectColumn.isFamilyAdmin;
+      return Enum_FathersSelectColumn.id;
     case r'isHidden':
-      return Enum_PersonTypesSelectColumn.isHidden;
+      return Enum_FathersSelectColumn.isHidden;
     case r'name':
-      return Enum_PersonTypesSelectColumn.name;
-    case r'order':
-      return Enum_PersonTypesSelectColumn.order;
+      return Enum_FathersSelectColumn.name;
     default:
-      return Enum_PersonTypesSelectColumn.$unknown;
+      return Enum_FathersSelectColumn.$unknown;
   }
 }
 
-enum Enum_PersonTypesUpdateColumn {
+enum Enum_FathersUpdateColumn {
   name,
   $unknown;
 
-  factory Enum_PersonTypesUpdateColumn.fromJson(String value) =>
-      fromJson_Enum_PersonTypesUpdateColumn(value);
+  factory Enum_FathersUpdateColumn.fromJson(String value) =>
+      fromJson_Enum_FathersUpdateColumn(value);
 
-  String toJson() => toJson_Enum_PersonTypesUpdateColumn(this);
+  String toJson() => toJson_Enum_FathersUpdateColumn(this);
 }
 
-String toJson_Enum_PersonTypesUpdateColumn(Enum_PersonTypesUpdateColumn e) {
+String toJson_Enum_FathersUpdateColumn(Enum_FathersUpdateColumn e) {
   switch (e) {
-    case Enum_PersonTypesUpdateColumn.name:
+    case Enum_FathersUpdateColumn.name:
       return r'name';
-    case Enum_PersonTypesUpdateColumn.$unknown:
+    case Enum_FathersUpdateColumn.$unknown:
       return r'$unknown';
   }
 }
 
-Enum_PersonTypesUpdateColumn fromJson_Enum_PersonTypesUpdateColumn(
-  String value,
-) {
+Enum_FathersUpdateColumn fromJson_Enum_FathersUpdateColumn(String value) {
   switch (value) {
     case r'name':
-      return Enum_PersonTypesUpdateColumn.name;
+      return Enum_FathersUpdateColumn.name;
     default:
-      return Enum_PersonTypesUpdateColumn.$unknown;
+      return Enum_FathersUpdateColumn.$unknown;
   }
 }
 
-enum Enum_PersonsConstraint {
-  persons_pkey,
-  persons_uid_key,
+enum Enum_GroupsConstraint {
+  groups_default_meeting_id_key,
+  groups_pkey,
   $unknown;
 
-  factory Enum_PersonsConstraint.fromJson(String value) =>
-      fromJson_Enum_PersonsConstraint(value);
+  factory Enum_GroupsConstraint.fromJson(String value) =>
+      fromJson_Enum_GroupsConstraint(value);
 
-  String toJson() => toJson_Enum_PersonsConstraint(this);
+  String toJson() => toJson_Enum_GroupsConstraint(this);
 }
 
-String toJson_Enum_PersonsConstraint(Enum_PersonsConstraint e) {
+String toJson_Enum_GroupsConstraint(Enum_GroupsConstraint e) {
   switch (e) {
-    case Enum_PersonsConstraint.persons_pkey:
-      return r'persons_pkey';
-    case Enum_PersonsConstraint.persons_uid_key:
-      return r'persons_uid_key';
-    case Enum_PersonsConstraint.$unknown:
+    case Enum_GroupsConstraint.groups_default_meeting_id_key:
+      return r'groups_default_meeting_id_key';
+    case Enum_GroupsConstraint.groups_pkey:
+      return r'groups_pkey';
+    case Enum_GroupsConstraint.$unknown:
       return r'$unknown';
   }
 }
 
-Enum_PersonsConstraint fromJson_Enum_PersonsConstraint(String value) {
+Enum_GroupsConstraint fromJson_Enum_GroupsConstraint(String value) {
   switch (value) {
-    case r'persons_pkey':
-      return Enum_PersonsConstraint.persons_pkey;
-    case r'persons_uid_key':
-      return Enum_PersonsConstraint.persons_uid_key;
+    case r'groups_default_meeting_id_key':
+      return Enum_GroupsConstraint.groups_default_meeting_id_key;
+    case r'groups_pkey':
+      return Enum_GroupsConstraint.groups_pkey;
     default:
-      return Enum_PersonsConstraint.$unknown;
+      return Enum_GroupsConstraint.$unknown;
   }
 }
 
-enum Enum_PersonsGroupsConstraint {
-  persons_groups_person_id_group_id_key,
-  persons_groups_pkey,
-  $unknown;
-
-  factory Enum_PersonsGroupsConstraint.fromJson(String value) =>
-      fromJson_Enum_PersonsGroupsConstraint(value);
-
-  String toJson() => toJson_Enum_PersonsGroupsConstraint(this);
-}
-
-String toJson_Enum_PersonsGroupsConstraint(Enum_PersonsGroupsConstraint e) {
-  switch (e) {
-    case Enum_PersonsGroupsConstraint.persons_groups_person_id_group_id_key:
-      return r'persons_groups_person_id_group_id_key';
-    case Enum_PersonsGroupsConstraint.persons_groups_pkey:
-      return r'persons_groups_pkey';
-    case Enum_PersonsGroupsConstraint.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_PersonsGroupsConstraint fromJson_Enum_PersonsGroupsConstraint(
-  String value,
-) {
-  switch (value) {
-    case r'persons_groups_person_id_group_id_key':
-      return Enum_PersonsGroupsConstraint.persons_groups_person_id_group_id_key;
-    case r'persons_groups_pkey':
-      return Enum_PersonsGroupsConstraint.persons_groups_pkey;
-    default:
-      return Enum_PersonsGroupsConstraint.$unknown;
-  }
-}
-
-enum Enum_PersonsGroupsSelectColumn {
-  groupId,
-  personId,
-  $unknown;
-
-  factory Enum_PersonsGroupsSelectColumn.fromJson(String value) =>
-      fromJson_Enum_PersonsGroupsSelectColumn(value);
-
-  String toJson() => toJson_Enum_PersonsGroupsSelectColumn(this);
-}
-
-String toJson_Enum_PersonsGroupsSelectColumn(Enum_PersonsGroupsSelectColumn e) {
-  switch (e) {
-    case Enum_PersonsGroupsSelectColumn.groupId:
-      return r'groupId';
-    case Enum_PersonsGroupsSelectColumn.personId:
-      return r'personId';
-    case Enum_PersonsGroupsSelectColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_PersonsGroupsSelectColumn fromJson_Enum_PersonsGroupsSelectColumn(
-  String value,
-) {
-  switch (value) {
-    case r'groupId':
-      return Enum_PersonsGroupsSelectColumn.groupId;
-    case r'personId':
-      return Enum_PersonsGroupsSelectColumn.personId;
-    default:
-      return Enum_PersonsGroupsSelectColumn.$unknown;
-  }
-}
-
-enum Enum_PersonsGroupsUpdateColumn {
-  $_PLACEHOLDER,
-  $unknown;
-
-  factory Enum_PersonsGroupsUpdateColumn.fromJson(String value) =>
-      fromJson_Enum_PersonsGroupsUpdateColumn(value);
-
-  String toJson() => toJson_Enum_PersonsGroupsUpdateColumn(this);
-}
-
-String toJson_Enum_PersonsGroupsUpdateColumn(Enum_PersonsGroupsUpdateColumn e) {
-  switch (e) {
-    case Enum_PersonsGroupsUpdateColumn.$_PLACEHOLDER:
-      return r'_PLACEHOLDER';
-    case Enum_PersonsGroupsUpdateColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_PersonsGroupsUpdateColumn fromJson_Enum_PersonsGroupsUpdateColumn(
-  String value,
-) {
-  switch (value) {
-    case r'_PLACEHOLDER':
-      return Enum_PersonsGroupsUpdateColumn.$_PLACEHOLDER;
-    default:
-      return Enum_PersonsGroupsUpdateColumn.$unknown;
-  }
-}
-
-enum Enum_PersonsHobbiesConstraint {
-  persons_hobbies_pkey,
-  $unknown;
-
-  factory Enum_PersonsHobbiesConstraint.fromJson(String value) =>
-      fromJson_Enum_PersonsHobbiesConstraint(value);
-
-  String toJson() => toJson_Enum_PersonsHobbiesConstraint(this);
-}
-
-String toJson_Enum_PersonsHobbiesConstraint(Enum_PersonsHobbiesConstraint e) {
-  switch (e) {
-    case Enum_PersonsHobbiesConstraint.persons_hobbies_pkey:
-      return r'persons_hobbies_pkey';
-    case Enum_PersonsHobbiesConstraint.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_PersonsHobbiesConstraint fromJson_Enum_PersonsHobbiesConstraint(
-  String value,
-) {
-  switch (value) {
-    case r'persons_hobbies_pkey':
-      return Enum_PersonsHobbiesConstraint.persons_hobbies_pkey;
-    default:
-      return Enum_PersonsHobbiesConstraint.$unknown;
-  }
-}
-
-enum Enum_PersonsHobbiesSelectColumn {
-  hobbyId,
-  personId,
-  $unknown;
-
-  factory Enum_PersonsHobbiesSelectColumn.fromJson(String value) =>
-      fromJson_Enum_PersonsHobbiesSelectColumn(value);
-
-  String toJson() => toJson_Enum_PersonsHobbiesSelectColumn(this);
-}
-
-String toJson_Enum_PersonsHobbiesSelectColumn(
-  Enum_PersonsHobbiesSelectColumn e,
-) {
-  switch (e) {
-    case Enum_PersonsHobbiesSelectColumn.hobbyId:
-      return r'hobbyId';
-    case Enum_PersonsHobbiesSelectColumn.personId:
-      return r'personId';
-    case Enum_PersonsHobbiesSelectColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_PersonsHobbiesSelectColumn fromJson_Enum_PersonsHobbiesSelectColumn(
-  String value,
-) {
-  switch (value) {
-    case r'hobbyId':
-      return Enum_PersonsHobbiesSelectColumn.hobbyId;
-    case r'personId':
-      return Enum_PersonsHobbiesSelectColumn.personId;
-    default:
-      return Enum_PersonsHobbiesSelectColumn.$unknown;
-  }
-}
-
-enum Enum_PersonsHobbiesUpdateColumn {
-  $_PLACEHOLDER,
-  $unknown;
-
-  factory Enum_PersonsHobbiesUpdateColumn.fromJson(String value) =>
-      fromJson_Enum_PersonsHobbiesUpdateColumn(value);
-
-  String toJson() => toJson_Enum_PersonsHobbiesUpdateColumn(this);
-}
-
-String toJson_Enum_PersonsHobbiesUpdateColumn(
-  Enum_PersonsHobbiesUpdateColumn e,
-) {
-  switch (e) {
-    case Enum_PersonsHobbiesUpdateColumn.$_PLACEHOLDER:
-      return r'_PLACEHOLDER';
-    case Enum_PersonsHobbiesUpdateColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_PersonsHobbiesUpdateColumn fromJson_Enum_PersonsHobbiesUpdateColumn(
-  String value,
-) {
-  switch (value) {
-    case r'_PLACEHOLDER':
-      return Enum_PersonsHobbiesUpdateColumn.$_PLACEHOLDER;
-    default:
-      return Enum_PersonsHobbiesUpdateColumn.$unknown;
-  }
-}
-
-enum Enum_PersonsSelectColumn {
-  birthdate,
-  blurhash,
-  churchId,
-  collegeId,
-  color,
-  familyId,
-  fatherId,
-  gender,
-  id,
-  isServant,
-  isShammas,
-  isStudent,
-  jobDescription,
-  jobId,
-  mainPhone,
-  martialStatus,
-  name,
-  nationalId,
-  notes,
-  otherPhones,
-  personTypeId,
-  photoUpdatedAt,
-  qualificationId,
-  schoolId,
-  serviceType,
-  servingChurchId,
-  shammasLevelId,
-  stateId,
-  storeId,
-  studyYearId,
-  uid,
-  workStatus,
-  $unknown;
-
-  factory Enum_PersonsSelectColumn.fromJson(String value) =>
-      fromJson_Enum_PersonsSelectColumn(value);
-
-  String toJson() => toJson_Enum_PersonsSelectColumn(this);
-}
-
-String toJson_Enum_PersonsSelectColumn(Enum_PersonsSelectColumn e) {
-  switch (e) {
-    case Enum_PersonsSelectColumn.birthdate:
-      return r'birthdate';
-    case Enum_PersonsSelectColumn.blurhash:
-      return r'blurhash';
-    case Enum_PersonsSelectColumn.churchId:
-      return r'churchId';
-    case Enum_PersonsSelectColumn.collegeId:
-      return r'collegeId';
-    case Enum_PersonsSelectColumn.color:
-      return r'color';
-    case Enum_PersonsSelectColumn.familyId:
-      return r'familyId';
-    case Enum_PersonsSelectColumn.fatherId:
-      return r'fatherId';
-    case Enum_PersonsSelectColumn.gender:
-      return r'gender';
-    case Enum_PersonsSelectColumn.id:
-      return r'id';
-    case Enum_PersonsSelectColumn.isServant:
-      return r'isServant';
-    case Enum_PersonsSelectColumn.isShammas:
-      return r'isShammas';
-    case Enum_PersonsSelectColumn.isStudent:
-      return r'isStudent';
-    case Enum_PersonsSelectColumn.jobDescription:
-      return r'jobDescription';
-    case Enum_PersonsSelectColumn.jobId:
-      return r'jobId';
-    case Enum_PersonsSelectColumn.mainPhone:
-      return r'mainPhone';
-    case Enum_PersonsSelectColumn.martialStatus:
-      return r'martialStatus';
-    case Enum_PersonsSelectColumn.name:
-      return r'name';
-    case Enum_PersonsSelectColumn.nationalId:
-      return r'nationalId';
-    case Enum_PersonsSelectColumn.notes:
-      return r'notes';
-    case Enum_PersonsSelectColumn.otherPhones:
-      return r'otherPhones';
-    case Enum_PersonsSelectColumn.personTypeId:
-      return r'personTypeId';
-    case Enum_PersonsSelectColumn.photoUpdatedAt:
-      return r'photoUpdatedAt';
-    case Enum_PersonsSelectColumn.qualificationId:
-      return r'qualificationId';
-    case Enum_PersonsSelectColumn.schoolId:
-      return r'schoolId';
-    case Enum_PersonsSelectColumn.serviceType:
-      return r'serviceType';
-    case Enum_PersonsSelectColumn.servingChurchId:
-      return r'servingChurchId';
-    case Enum_PersonsSelectColumn.shammasLevelId:
-      return r'shammasLevelId';
-    case Enum_PersonsSelectColumn.stateId:
-      return r'stateId';
-    case Enum_PersonsSelectColumn.storeId:
-      return r'storeId';
-    case Enum_PersonsSelectColumn.studyYearId:
-      return r'studyYearId';
-    case Enum_PersonsSelectColumn.uid:
-      return r'uid';
-    case Enum_PersonsSelectColumn.workStatus:
-      return r'workStatus';
-    case Enum_PersonsSelectColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_PersonsSelectColumn fromJson_Enum_PersonsSelectColumn(String value) {
-  switch (value) {
-    case r'birthdate':
-      return Enum_PersonsSelectColumn.birthdate;
-    case r'blurhash':
-      return Enum_PersonsSelectColumn.blurhash;
-    case r'churchId':
-      return Enum_PersonsSelectColumn.churchId;
-    case r'collegeId':
-      return Enum_PersonsSelectColumn.collegeId;
-    case r'color':
-      return Enum_PersonsSelectColumn.color;
-    case r'familyId':
-      return Enum_PersonsSelectColumn.familyId;
-    case r'fatherId':
-      return Enum_PersonsSelectColumn.fatherId;
-    case r'gender':
-      return Enum_PersonsSelectColumn.gender;
-    case r'id':
-      return Enum_PersonsSelectColumn.id;
-    case r'isServant':
-      return Enum_PersonsSelectColumn.isServant;
-    case r'isShammas':
-      return Enum_PersonsSelectColumn.isShammas;
-    case r'isStudent':
-      return Enum_PersonsSelectColumn.isStudent;
-    case r'jobDescription':
-      return Enum_PersonsSelectColumn.jobDescription;
-    case r'jobId':
-      return Enum_PersonsSelectColumn.jobId;
-    case r'mainPhone':
-      return Enum_PersonsSelectColumn.mainPhone;
-    case r'martialStatus':
-      return Enum_PersonsSelectColumn.martialStatus;
-    case r'name':
-      return Enum_PersonsSelectColumn.name;
-    case r'nationalId':
-      return Enum_PersonsSelectColumn.nationalId;
-    case r'notes':
-      return Enum_PersonsSelectColumn.notes;
-    case r'otherPhones':
-      return Enum_PersonsSelectColumn.otherPhones;
-    case r'personTypeId':
-      return Enum_PersonsSelectColumn.personTypeId;
-    case r'photoUpdatedAt':
-      return Enum_PersonsSelectColumn.photoUpdatedAt;
-    case r'qualificationId':
-      return Enum_PersonsSelectColumn.qualificationId;
-    case r'schoolId':
-      return Enum_PersonsSelectColumn.schoolId;
-    case r'serviceType':
-      return Enum_PersonsSelectColumn.serviceType;
-    case r'servingChurchId':
-      return Enum_PersonsSelectColumn.servingChurchId;
-    case r'shammasLevelId':
-      return Enum_PersonsSelectColumn.shammasLevelId;
-    case r'stateId':
-      return Enum_PersonsSelectColumn.stateId;
-    case r'storeId':
-      return Enum_PersonsSelectColumn.storeId;
-    case r'studyYearId':
-      return Enum_PersonsSelectColumn.studyYearId;
-    case r'uid':
-      return Enum_PersonsSelectColumn.uid;
-    case r'workStatus':
-      return Enum_PersonsSelectColumn.workStatus;
-    default:
-      return Enum_PersonsSelectColumn.$unknown;
-  }
-}
-
-enum Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns {
-  gender,
-  isServant,
-  isShammas,
-  isStudent,
-  $unknown;
-
-  factory Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns.fromJson(
-    String value,
-  ) =>
-      fromJson_Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns(
-        value,
-      );
-
-  String toJson() =>
-      toJson_Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns(
-        this,
-      );
-}
-
-String
-toJson_Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns(
-  Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns e,
-) {
-  switch (e) {
-    case Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns
-        .gender:
-      return r'gender';
-    case Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns
-        .isServant:
-      return r'isServant';
-    case Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns
-        .isShammas:
-      return r'isShammas';
-    case Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns
-        .isStudent:
-      return r'isStudent';
-    case Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns
-        .$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns
-fromJson_Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns(
-  String value,
-) {
-  switch (value) {
-    case r'gender':
-      return Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns
-          .gender;
-    case r'isServant':
-      return Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns
-          .isServant;
-    case r'isShammas':
-      return Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns
-          .isShammas;
-    case r'isStudent':
-      return Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns
-          .isStudent;
-    default:
-      return Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_andArgumentsColumns
-          .$unknown;
-  }
-}
-
-enum Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns {
-  gender,
-  isServant,
-  isShammas,
-  isStudent,
-  $unknown;
-
-  factory Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns.fromJson(
-    String value,
-  ) =>
-      fromJson_Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns(
-        value,
-      );
-
-  String toJson() =>
-      toJson_Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns(
-        this,
-      );
-}
-
-String
-toJson_Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns(
-  Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns e,
-) {
-  switch (e) {
-    case Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns
-        .gender:
-      return r'gender';
-    case Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns
-        .isServant:
-      return r'isServant';
-    case Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns
-        .isShammas:
-      return r'isShammas';
-    case Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns
-        .isStudent:
-      return r'isStudent';
-    case Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns
-        .$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns
-fromJson_Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns(
-  String value,
-) {
-  switch (value) {
-    case r'gender':
-      return Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns
-          .gender;
-    case r'isServant':
-      return Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns
-          .isServant;
-    case r'isShammas':
-      return Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns
-          .isShammas;
-    case r'isStudent':
-      return Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns
-          .isStudent;
-    default:
-      return Enum_PersonsSelectColumnPersonsAggregateBoolExpBool_orArgumentsColumns
-          .$unknown;
-  }
-}
-
-enum Enum_PersonsServicesConstraint {
-  persons_services_person_id_service_id_key,
-  persons_services_pkey,
-  $unknown;
-
-  factory Enum_PersonsServicesConstraint.fromJson(String value) =>
-      fromJson_Enum_PersonsServicesConstraint(value);
-
-  String toJson() => toJson_Enum_PersonsServicesConstraint(this);
-}
-
-String toJson_Enum_PersonsServicesConstraint(Enum_PersonsServicesConstraint e) {
-  switch (e) {
-    case Enum_PersonsServicesConstraint
-        .persons_services_person_id_service_id_key:
-      return r'persons_services_person_id_service_id_key';
-    case Enum_PersonsServicesConstraint.persons_services_pkey:
-      return r'persons_services_pkey';
-    case Enum_PersonsServicesConstraint.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_PersonsServicesConstraint fromJson_Enum_PersonsServicesConstraint(
-  String value,
-) {
-  switch (value) {
-    case r'persons_services_person_id_service_id_key':
-      return Enum_PersonsServicesConstraint
-          .persons_services_person_id_service_id_key;
-    case r'persons_services_pkey':
-      return Enum_PersonsServicesConstraint.persons_services_pkey;
-    default:
-      return Enum_PersonsServicesConstraint.$unknown;
-  }
-}
-
-enum Enum_PersonsServicesSelectColumn {
-  personId,
-  serviceId,
-  $unknown;
-
-  factory Enum_PersonsServicesSelectColumn.fromJson(String value) =>
-      fromJson_Enum_PersonsServicesSelectColumn(value);
-
-  String toJson() => toJson_Enum_PersonsServicesSelectColumn(this);
-}
-
-String toJson_Enum_PersonsServicesSelectColumn(
-  Enum_PersonsServicesSelectColumn e,
-) {
-  switch (e) {
-    case Enum_PersonsServicesSelectColumn.personId:
-      return r'personId';
-    case Enum_PersonsServicesSelectColumn.serviceId:
-      return r'serviceId';
-    case Enum_PersonsServicesSelectColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_PersonsServicesSelectColumn fromJson_Enum_PersonsServicesSelectColumn(
-  String value,
-) {
-  switch (value) {
-    case r'personId':
-      return Enum_PersonsServicesSelectColumn.personId;
-    case r'serviceId':
-      return Enum_PersonsServicesSelectColumn.serviceId;
-    default:
-      return Enum_PersonsServicesSelectColumn.$unknown;
-  }
-}
-
-enum Enum_PersonsServicesUpdateColumn {
-  personId,
-  serviceId,
-  $unknown;
-
-  factory Enum_PersonsServicesUpdateColumn.fromJson(String value) =>
-      fromJson_Enum_PersonsServicesUpdateColumn(value);
-
-  String toJson() => toJson_Enum_PersonsServicesUpdateColumn(this);
-}
-
-String toJson_Enum_PersonsServicesUpdateColumn(
-  Enum_PersonsServicesUpdateColumn e,
-) {
-  switch (e) {
-    case Enum_PersonsServicesUpdateColumn.personId:
-      return r'personId';
-    case Enum_PersonsServicesUpdateColumn.serviceId:
-      return r'serviceId';
-    case Enum_PersonsServicesUpdateColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_PersonsServicesUpdateColumn fromJson_Enum_PersonsServicesUpdateColumn(
-  String value,
-) {
-  switch (value) {
-    case r'personId':
-      return Enum_PersonsServicesUpdateColumn.personId;
-    case r'serviceId':
-      return Enum_PersonsServicesUpdateColumn.serviceId;
-    default:
-      return Enum_PersonsServicesUpdateColumn.$unknown;
-  }
-}
-
-enum Enum_PersonsTagsConstraint {
-  persons_tags_pkey,
-  $unknown;
-
-  factory Enum_PersonsTagsConstraint.fromJson(String value) =>
-      fromJson_Enum_PersonsTagsConstraint(value);
-
-  String toJson() => toJson_Enum_PersonsTagsConstraint(this);
-}
-
-String toJson_Enum_PersonsTagsConstraint(Enum_PersonsTagsConstraint e) {
-  switch (e) {
-    case Enum_PersonsTagsConstraint.persons_tags_pkey:
-      return r'persons_tags_pkey';
-    case Enum_PersonsTagsConstraint.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_PersonsTagsConstraint fromJson_Enum_PersonsTagsConstraint(String value) {
-  switch (value) {
-    case r'persons_tags_pkey':
-      return Enum_PersonsTagsConstraint.persons_tags_pkey;
-    default:
-      return Enum_PersonsTagsConstraint.$unknown;
-  }
-}
-
-enum Enum_PersonsTagsSelectColumn {
-  personId,
-  tagId,
-  $unknown;
-
-  factory Enum_PersonsTagsSelectColumn.fromJson(String value) =>
-      fromJson_Enum_PersonsTagsSelectColumn(value);
-
-  String toJson() => toJson_Enum_PersonsTagsSelectColumn(this);
-}
-
-String toJson_Enum_PersonsTagsSelectColumn(Enum_PersonsTagsSelectColumn e) {
-  switch (e) {
-    case Enum_PersonsTagsSelectColumn.personId:
-      return r'personId';
-    case Enum_PersonsTagsSelectColumn.tagId:
-      return r'tagId';
-    case Enum_PersonsTagsSelectColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_PersonsTagsSelectColumn fromJson_Enum_PersonsTagsSelectColumn(
-  String value,
-) {
-  switch (value) {
-    case r'personId':
-      return Enum_PersonsTagsSelectColumn.personId;
-    case r'tagId':
-      return Enum_PersonsTagsSelectColumn.tagId;
-    default:
-      return Enum_PersonsTagsSelectColumn.$unknown;
-  }
-}
-
-enum Enum_PersonsTagsUpdateColumn {
-  $_PLACEHOLDER,
-  $unknown;
-
-  factory Enum_PersonsTagsUpdateColumn.fromJson(String value) =>
-      fromJson_Enum_PersonsTagsUpdateColumn(value);
-
-  String toJson() => toJson_Enum_PersonsTagsUpdateColumn(this);
-}
-
-String toJson_Enum_PersonsTagsUpdateColumn(Enum_PersonsTagsUpdateColumn e) {
-  switch (e) {
-    case Enum_PersonsTagsUpdateColumn.$_PLACEHOLDER:
-      return r'_PLACEHOLDER';
-    case Enum_PersonsTagsUpdateColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_PersonsTagsUpdateColumn fromJson_Enum_PersonsTagsUpdateColumn(
-  String value,
-) {
-  switch (value) {
-    case r'_PLACEHOLDER':
-      return Enum_PersonsTagsUpdateColumn.$_PLACEHOLDER;
-    default:
-      return Enum_PersonsTagsUpdateColumn.$unknown;
-  }
-}
-
-enum Enum_PersonsUpdateColumn {
-  birthdate,
-  churchId,
-  collegeId,
-  color,
-  familyId,
-  fatherId,
-  gender,
-  isServant,
-  isShammas,
-  isStudent,
-  jobDescription,
-  jobId,
-  mainPhone,
-  martialStatus,
-  name,
-  nationalId,
-  notes,
-  otherPhones,
-  personTypeId,
-  qualificationId,
-  schoolId,
-  serviceType,
-  servingChurchId,
-  shammasLevelId,
-  stateId,
-  storeId,
-  studyYearId,
-  workStatus,
-  $unknown;
-
-  factory Enum_PersonsUpdateColumn.fromJson(String value) =>
-      fromJson_Enum_PersonsUpdateColumn(value);
-
-  String toJson() => toJson_Enum_PersonsUpdateColumn(this);
-}
-
-String toJson_Enum_PersonsUpdateColumn(Enum_PersonsUpdateColumn e) {
-  switch (e) {
-    case Enum_PersonsUpdateColumn.birthdate:
-      return r'birthdate';
-    case Enum_PersonsUpdateColumn.churchId:
-      return r'churchId';
-    case Enum_PersonsUpdateColumn.collegeId:
-      return r'collegeId';
-    case Enum_PersonsUpdateColumn.color:
-      return r'color';
-    case Enum_PersonsUpdateColumn.familyId:
-      return r'familyId';
-    case Enum_PersonsUpdateColumn.fatherId:
-      return r'fatherId';
-    case Enum_PersonsUpdateColumn.gender:
-      return r'gender';
-    case Enum_PersonsUpdateColumn.isServant:
-      return r'isServant';
-    case Enum_PersonsUpdateColumn.isShammas:
-      return r'isShammas';
-    case Enum_PersonsUpdateColumn.isStudent:
-      return r'isStudent';
-    case Enum_PersonsUpdateColumn.jobDescription:
-      return r'jobDescription';
-    case Enum_PersonsUpdateColumn.jobId:
-      return r'jobId';
-    case Enum_PersonsUpdateColumn.mainPhone:
-      return r'mainPhone';
-    case Enum_PersonsUpdateColumn.martialStatus:
-      return r'martialStatus';
-    case Enum_PersonsUpdateColumn.name:
-      return r'name';
-    case Enum_PersonsUpdateColumn.nationalId:
-      return r'nationalId';
-    case Enum_PersonsUpdateColumn.notes:
-      return r'notes';
-    case Enum_PersonsUpdateColumn.otherPhones:
-      return r'otherPhones';
-    case Enum_PersonsUpdateColumn.personTypeId:
-      return r'personTypeId';
-    case Enum_PersonsUpdateColumn.qualificationId:
-      return r'qualificationId';
-    case Enum_PersonsUpdateColumn.schoolId:
-      return r'schoolId';
-    case Enum_PersonsUpdateColumn.serviceType:
-      return r'serviceType';
-    case Enum_PersonsUpdateColumn.servingChurchId:
-      return r'servingChurchId';
-    case Enum_PersonsUpdateColumn.shammasLevelId:
-      return r'shammasLevelId';
-    case Enum_PersonsUpdateColumn.stateId:
-      return r'stateId';
-    case Enum_PersonsUpdateColumn.storeId:
-      return r'storeId';
-    case Enum_PersonsUpdateColumn.studyYearId:
-      return r'studyYearId';
-    case Enum_PersonsUpdateColumn.workStatus:
-      return r'workStatus';
-    case Enum_PersonsUpdateColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_PersonsUpdateColumn fromJson_Enum_PersonsUpdateColumn(String value) {
-  switch (value) {
-    case r'birthdate':
-      return Enum_PersonsUpdateColumn.birthdate;
-    case r'churchId':
-      return Enum_PersonsUpdateColumn.churchId;
-    case r'collegeId':
-      return Enum_PersonsUpdateColumn.collegeId;
-    case r'color':
-      return Enum_PersonsUpdateColumn.color;
-    case r'familyId':
-      return Enum_PersonsUpdateColumn.familyId;
-    case r'fatherId':
-      return Enum_PersonsUpdateColumn.fatherId;
-    case r'gender':
-      return Enum_PersonsUpdateColumn.gender;
-    case r'isServant':
-      return Enum_PersonsUpdateColumn.isServant;
-    case r'isShammas':
-      return Enum_PersonsUpdateColumn.isShammas;
-    case r'isStudent':
-      return Enum_PersonsUpdateColumn.isStudent;
-    case r'jobDescription':
-      return Enum_PersonsUpdateColumn.jobDescription;
-    case r'jobId':
-      return Enum_PersonsUpdateColumn.jobId;
-    case r'mainPhone':
-      return Enum_PersonsUpdateColumn.mainPhone;
-    case r'martialStatus':
-      return Enum_PersonsUpdateColumn.martialStatus;
-    case r'name':
-      return Enum_PersonsUpdateColumn.name;
-    case r'nationalId':
-      return Enum_PersonsUpdateColumn.nationalId;
-    case r'notes':
-      return Enum_PersonsUpdateColumn.notes;
-    case r'otherPhones':
-      return Enum_PersonsUpdateColumn.otherPhones;
-    case r'personTypeId':
-      return Enum_PersonsUpdateColumn.personTypeId;
-    case r'qualificationId':
-      return Enum_PersonsUpdateColumn.qualificationId;
-    case r'schoolId':
-      return Enum_PersonsUpdateColumn.schoolId;
-    case r'serviceType':
-      return Enum_PersonsUpdateColumn.serviceType;
-    case r'servingChurchId':
-      return Enum_PersonsUpdateColumn.servingChurchId;
-    case r'shammasLevelId':
-      return Enum_PersonsUpdateColumn.shammasLevelId;
-    case r'stateId':
-      return Enum_PersonsUpdateColumn.stateId;
-    case r'storeId':
-      return Enum_PersonsUpdateColumn.storeId;
-    case r'studyYearId':
-      return Enum_PersonsUpdateColumn.studyYearId;
-    case r'workStatus':
-      return Enum_PersonsUpdateColumn.workStatus;
-    default:
-      return Enum_PersonsUpdateColumn.$unknown;
-  }
-}
-
-enum Enum_QualificationsConstraint {
-  qualifications_name_key,
-  qualifications_pkey,
-  $unknown;
-
-  factory Enum_QualificationsConstraint.fromJson(String value) =>
-      fromJson_Enum_QualificationsConstraint(value);
-
-  String toJson() => toJson_Enum_QualificationsConstraint(this);
-}
-
-String toJson_Enum_QualificationsConstraint(Enum_QualificationsConstraint e) {
-  switch (e) {
-    case Enum_QualificationsConstraint.qualifications_name_key:
-      return r'qualifications_name_key';
-    case Enum_QualificationsConstraint.qualifications_pkey:
-      return r'qualifications_pkey';
-    case Enum_QualificationsConstraint.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_QualificationsConstraint fromJson_Enum_QualificationsConstraint(
-  String value,
-) {
-  switch (value) {
-    case r'qualifications_name_key':
-      return Enum_QualificationsConstraint.qualifications_name_key;
-    case r'qualifications_pkey':
-      return Enum_QualificationsConstraint.qualifications_pkey;
-    default:
-      return Enum_QualificationsConstraint.$unknown;
-  }
-}
-
-enum Enum_QualificationsSelectColumn {
-  id,
-  name,
-  $unknown;
-
-  factory Enum_QualificationsSelectColumn.fromJson(String value) =>
-      fromJson_Enum_QualificationsSelectColumn(value);
-
-  String toJson() => toJson_Enum_QualificationsSelectColumn(this);
-}
-
-String toJson_Enum_QualificationsSelectColumn(
-  Enum_QualificationsSelectColumn e,
-) {
-  switch (e) {
-    case Enum_QualificationsSelectColumn.id:
-      return r'id';
-    case Enum_QualificationsSelectColumn.name:
-      return r'name';
-    case Enum_QualificationsSelectColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_QualificationsSelectColumn fromJson_Enum_QualificationsSelectColumn(
-  String value,
-) {
-  switch (value) {
-    case r'id':
-      return Enum_QualificationsSelectColumn.id;
-    case r'name':
-      return Enum_QualificationsSelectColumn.name;
-    default:
-      return Enum_QualificationsSelectColumn.$unknown;
-  }
-}
-
-enum Enum_QualificationsUpdateColumn {
-  name,
-  $unknown;
-
-  factory Enum_QualificationsUpdateColumn.fromJson(String value) =>
-      fromJson_Enum_QualificationsUpdateColumn(value);
-
-  String toJson() => toJson_Enum_QualificationsUpdateColumn(this);
-}
-
-String toJson_Enum_QualificationsUpdateColumn(
-  Enum_QualificationsUpdateColumn e,
-) {
-  switch (e) {
-    case Enum_QualificationsUpdateColumn.name:
-      return r'name';
-    case Enum_QualificationsUpdateColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_QualificationsUpdateColumn fromJson_Enum_QualificationsUpdateColumn(
-  String value,
-) {
-  switch (value) {
-    case r'name':
-      return Enum_QualificationsUpdateColumn.name;
-    default:
-      return Enum_QualificationsUpdateColumn.$unknown;
-  }
-}
-
-enum Enum_SchoolsConstraint {
-  schools_name_key,
-  schools_pkey,
-  $unknown;
-
-  factory Enum_SchoolsConstraint.fromJson(String value) =>
-      fromJson_Enum_SchoolsConstraint(value);
-
-  String toJson() => toJson_Enum_SchoolsConstraint(this);
-}
-
-String toJson_Enum_SchoolsConstraint(Enum_SchoolsConstraint e) {
-  switch (e) {
-    case Enum_SchoolsConstraint.schools_name_key:
-      return r'schools_name_key';
-    case Enum_SchoolsConstraint.schools_pkey:
-      return r'schools_pkey';
-    case Enum_SchoolsConstraint.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_SchoolsConstraint fromJson_Enum_SchoolsConstraint(String value) {
-  switch (value) {
-    case r'schools_name_key':
-      return Enum_SchoolsConstraint.schools_name_key;
-    case r'schools_pkey':
-      return Enum_SchoolsConstraint.schools_pkey;
-    default:
-      return Enum_SchoolsConstraint.$unknown;
-  }
-}
-
-enum Enum_SchoolsSelectColumn {
-  id,
-  name,
-  $unknown;
-
-  factory Enum_SchoolsSelectColumn.fromJson(String value) =>
-      fromJson_Enum_SchoolsSelectColumn(value);
-
-  String toJson() => toJson_Enum_SchoolsSelectColumn(this);
-}
-
-String toJson_Enum_SchoolsSelectColumn(Enum_SchoolsSelectColumn e) {
-  switch (e) {
-    case Enum_SchoolsSelectColumn.id:
-      return r'id';
-    case Enum_SchoolsSelectColumn.name:
-      return r'name';
-    case Enum_SchoolsSelectColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_SchoolsSelectColumn fromJson_Enum_SchoolsSelectColumn(String value) {
-  switch (value) {
-    case r'id':
-      return Enum_SchoolsSelectColumn.id;
-    case r'name':
-      return Enum_SchoolsSelectColumn.name;
-    default:
-      return Enum_SchoolsSelectColumn.$unknown;
-  }
-}
-
-enum Enum_SchoolsUpdateColumn {
-  name,
-  $unknown;
-
-  factory Enum_SchoolsUpdateColumn.fromJson(String value) =>
-      fromJson_Enum_SchoolsUpdateColumn(value);
-
-  String toJson() => toJson_Enum_SchoolsUpdateColumn(this);
-}
-
-String toJson_Enum_SchoolsUpdateColumn(Enum_SchoolsUpdateColumn e) {
-  switch (e) {
-    case Enum_SchoolsUpdateColumn.name:
-      return r'name';
-    case Enum_SchoolsUpdateColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_SchoolsUpdateColumn fromJson_Enum_SchoolsUpdateColumn(String value) {
-  switch (value) {
-    case r'name':
-      return Enum_SchoolsUpdateColumn.name;
-    default:
-      return Enum_SchoolsUpdateColumn.$unknown;
-  }
-}
-
-enum Enum_ServicesConstraint {
-  services_default_meeting_id_key,
-  services_name_key,
-  services_pkey,
-  $unknown;
-
-  factory Enum_ServicesConstraint.fromJson(String value) =>
-      fromJson_Enum_ServicesConstraint(value);
-
-  String toJson() => toJson_Enum_ServicesConstraint(this);
-}
-
-String toJson_Enum_ServicesConstraint(Enum_ServicesConstraint e) {
-  switch (e) {
-    case Enum_ServicesConstraint.services_default_meeting_id_key:
-      return r'services_default_meeting_id_key';
-    case Enum_ServicesConstraint.services_name_key:
-      return r'services_name_key';
-    case Enum_ServicesConstraint.services_pkey:
-      return r'services_pkey';
-    case Enum_ServicesConstraint.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_ServicesConstraint fromJson_Enum_ServicesConstraint(String value) {
-  switch (value) {
-    case r'services_default_meeting_id_key':
-      return Enum_ServicesConstraint.services_default_meeting_id_key;
-    case r'services_name_key':
-      return Enum_ServicesConstraint.services_name_key;
-    case r'services_pkey':
-      return Enum_ServicesConstraint.services_pkey;
-    default:
-      return Enum_ServicesConstraint.$unknown;
-  }
-}
-
-enum Enum_ServicesSelectColumn {
+enum Enum_GroupsSelectColumn {
   blurhash,
   color,
   defaultMeetingId,
   id,
   name,
-  nextServiceId,
   photoUpdatedAt,
-  studyYearFromId,
-  studyYearToId,
+  serviceId,
+  validity,
   $unknown;
 
-  factory Enum_ServicesSelectColumn.fromJson(String value) =>
-      fromJson_Enum_ServicesSelectColumn(value);
+  factory Enum_GroupsSelectColumn.fromJson(String value) =>
+      fromJson_Enum_GroupsSelectColumn(value);
 
-  String toJson() => toJson_Enum_ServicesSelectColumn(this);
+  String toJson() => toJson_Enum_GroupsSelectColumn(this);
 }
 
-String toJson_Enum_ServicesSelectColumn(Enum_ServicesSelectColumn e) {
+String toJson_Enum_GroupsSelectColumn(Enum_GroupsSelectColumn e) {
   switch (e) {
-    case Enum_ServicesSelectColumn.blurhash:
+    case Enum_GroupsSelectColumn.blurhash:
       return r'blurhash';
-    case Enum_ServicesSelectColumn.color:
+    case Enum_GroupsSelectColumn.color:
       return r'color';
-    case Enum_ServicesSelectColumn.defaultMeetingId:
+    case Enum_GroupsSelectColumn.defaultMeetingId:
       return r'defaultMeetingId';
-    case Enum_ServicesSelectColumn.id:
+    case Enum_GroupsSelectColumn.id:
       return r'id';
-    case Enum_ServicesSelectColumn.name:
+    case Enum_GroupsSelectColumn.name:
       return r'name';
-    case Enum_ServicesSelectColumn.nextServiceId:
-      return r'nextServiceId';
-    case Enum_ServicesSelectColumn.photoUpdatedAt:
+    case Enum_GroupsSelectColumn.photoUpdatedAt:
       return r'photoUpdatedAt';
-    case Enum_ServicesSelectColumn.studyYearFromId:
-      return r'studyYearFromId';
-    case Enum_ServicesSelectColumn.studyYearToId:
-      return r'studyYearToId';
-    case Enum_ServicesSelectColumn.$unknown:
+    case Enum_GroupsSelectColumn.serviceId:
+      return r'serviceId';
+    case Enum_GroupsSelectColumn.validity:
+      return r'validity';
+    case Enum_GroupsSelectColumn.$unknown:
       return r'$unknown';
   }
 }
 
-Enum_ServicesSelectColumn fromJson_Enum_ServicesSelectColumn(String value) {
+Enum_GroupsSelectColumn fromJson_Enum_GroupsSelectColumn(String value) {
   switch (value) {
     case r'blurhash':
-      return Enum_ServicesSelectColumn.blurhash;
+      return Enum_GroupsSelectColumn.blurhash;
     case r'color':
-      return Enum_ServicesSelectColumn.color;
+      return Enum_GroupsSelectColumn.color;
     case r'defaultMeetingId':
-      return Enum_ServicesSelectColumn.defaultMeetingId;
+      return Enum_GroupsSelectColumn.defaultMeetingId;
     case r'id':
-      return Enum_ServicesSelectColumn.id;
+      return Enum_GroupsSelectColumn.id;
     case r'name':
-      return Enum_ServicesSelectColumn.name;
-    case r'nextServiceId':
-      return Enum_ServicesSelectColumn.nextServiceId;
+      return Enum_GroupsSelectColumn.name;
     case r'photoUpdatedAt':
-      return Enum_ServicesSelectColumn.photoUpdatedAt;
-    case r'studyYearFromId':
-      return Enum_ServicesSelectColumn.studyYearFromId;
-    case r'studyYearToId':
-      return Enum_ServicesSelectColumn.studyYearToId;
+      return Enum_GroupsSelectColumn.photoUpdatedAt;
+    case r'serviceId':
+      return Enum_GroupsSelectColumn.serviceId;
+    case r'validity':
+      return Enum_GroupsSelectColumn.validity;
     default:
-      return Enum_ServicesSelectColumn.$unknown;
+      return Enum_GroupsSelectColumn.$unknown;
   }
 }
 
-enum Enum_ServicesUpdateColumn {
+enum Enum_GroupsUpdateColumn {
   color,
   defaultMeetingId,
   name,
-  nextServiceId,
-  studyYearFromId,
-  studyYearToId,
+  serviceId,
+  validity,
   $unknown;
 
-  factory Enum_ServicesUpdateColumn.fromJson(String value) =>
-      fromJson_Enum_ServicesUpdateColumn(value);
+  factory Enum_GroupsUpdateColumn.fromJson(String value) =>
+      fromJson_Enum_GroupsUpdateColumn(value);
 
-  String toJson() => toJson_Enum_ServicesUpdateColumn(this);
-}
-
-String toJson_Enum_ServicesUpdateColumn(Enum_ServicesUpdateColumn e) {
-  switch (e) {
-    case Enum_ServicesUpdateColumn.color:
-      return r'color';
-    case Enum_ServicesUpdateColumn.defaultMeetingId:
-      return r'defaultMeetingId';
-    case Enum_ServicesUpdateColumn.name:
-      return r'name';
-    case Enum_ServicesUpdateColumn.nextServiceId:
-      return r'nextServiceId';
-    case Enum_ServicesUpdateColumn.studyYearFromId:
-      return r'studyYearFromId';
-    case Enum_ServicesUpdateColumn.studyYearToId:
-      return r'studyYearToId';
-    case Enum_ServicesUpdateColumn.$unknown:
-      return r'$unknown';
-  }
-}
-
-Enum_ServicesUpdateColumn fromJson_Enum_ServicesUpdateColumn(String value) {
-  switch (value) {
-    case r'color':
-      return Enum_ServicesUpdateColumn.color;
-    case r'defaultMeetingId':
-      return Enum_ServicesUpdateColumn.defaultMeetingId;
-    case r'name':
-      return Enum_ServicesUpdateColumn.name;
-    case r'nextServiceId':
-      return Enum_ServicesUpdateColumn.nextServiceId;
-    case r'studyYearFromId':
-      return Enum_ServicesUpdateColumn.studyYearFromId;
-    case r'studyYearToId':
-      return Enum_ServicesUpdateColumn.studyYearToId;
-    default:
-      return Enum_ServicesUpdateColumn.$unknown;
-  }
-}
-
-enum Enum_ShammasLevelsSelectColumn {
-  id,
-  name,
-  order,
-  $unknown;
-
-  factory Enum_ShammasLevelsSelectColumn.fromJson(String value) =>
-      fromJson_Enum_ShammasLevelsSelectColumn(value);
-
-  String toJson() => toJson_Enum_ShammasLevelsSelectColumn(this);
+  String toJson() => toJson_Enum_GroupsUpdateColumn(this);
 }
