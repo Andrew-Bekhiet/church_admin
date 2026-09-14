@@ -1304,48 +1304,6 @@ class MockFunctionsService extends _i1.Mock implements _i2.FunctionsService {
           as _i6.Future<void>);
 
   @override
-  _i6.Future<List<_i2.AuthUser>> getAuthUsers() =>
-      (super.noSuchMethod(
-            Invocation.method(#getAuthUsers, []),
-            returnValue: _i6.Future<List<_i2.AuthUser>>.value(<_i2.AuthUser>[]),
-            returnValueForMissingStub: _i6.Future<List<_i2.AuthUser>>.value(
-              <_i2.AuthUser>[],
-            ),
-          )
-          as _i6.Future<List<_i2.AuthUser>>);
-
-  @override
-  _i6.Future<String> approveAndLinkAuthUser({
-    required String? authId,
-    required String? hasuraUid,
-  }) =>
-      (super.noSuchMethod(
-            Invocation.method(#approveAndLinkAuthUser, [], {
-              #authId: authId,
-              #hasuraUid: hasuraUid,
-            }),
-            returnValue: _i6.Future<String>.value(
-              _i10.dummyValue<String>(
-                this,
-                Invocation.method(#approveAndLinkAuthUser, [], {
-                  #authId: authId,
-                  #hasuraUid: hasuraUid,
-                }),
-              ),
-            ),
-            returnValueForMissingStub: _i6.Future<String>.value(
-              _i10.dummyValue<String>(
-                this,
-                Invocation.method(#approveAndLinkAuthUser, [], {
-                  #authId: authId,
-                  #hasuraUid: hasuraUid,
-                }),
-              ),
-            ),
-          )
-          as _i6.Future<String>);
-
-  @override
   _i6.Future<String> getAppDownloadLink(String? platform) =>
       (super.noSuchMethod(
             Invocation.method(#getAppDownloadLink, [platform]),
