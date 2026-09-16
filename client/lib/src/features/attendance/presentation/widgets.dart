@@ -1,6 +1,7 @@
 export 'widgets/attendance_app_bar.dart';
 export 'widgets/attendance_audience_toggle.dart';
 export 'widgets/attendance_date_chip.dart';
+export 'widgets/attendance_date_selector_day_cell.dart';
 export 'widgets/attendance_group_header.dart';
 export 'widgets/attendance_letter_gutter.dart';
 export 'widgets/attendance_overflow_menu.dart';
