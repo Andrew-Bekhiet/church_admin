@@ -1,7 +1,4 @@
-import 'dart:math' as math;
-
-import 'package:calendar_date_picker2/calendar_date_picker2.dart';
-import 'package:church_admin/church_admin.dart';
+import 'package:church_admin/src/features/attendance/presentation/widgets/attendance_date_picker_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
@@ -43,53 +40,15 @@ class AttendanceDateChip extends StatelessWidget {
   }
 
   Future<void> _pickDate(BuildContext context) async {
-    final theme = Theme.of(context);
-    final colorScheme = theme.colorScheme;
-    final effectiveIndicatorColor = indicatorColor ?? colorScheme.primary;
-
-    final picked = await showCalendarDatePicker2Dialog(
+    final picked = await AttendanceDatePickerDialog.show(
       context: context,
-      dialogSize: Size(
-        math.min(MediaQuery.sizeOf(context).width - 32, 360),
-        400,
-      ),
-      borderRadius: BorderRadius.circular(16),
-      value: [date],
-      config: CalendarDatePicker2WithActionButtonsConfig(
-        calendarType: CalendarDatePicker2Type.single,
-        firstDate: DateTime(2019),
-        lastDate: DateTime.now().add(const Duration(days: 365)),
-        currentDate: DateTime.now(),
-        selectedDayHighlightColor: colorScheme.primary,
-        dayBuilder:
-            ({
-              required date,
-              decoration,
-              isDisabled,
-              isSelected,
-              isToday,
-              textStyle,
-            }) {
-              final dayOnly = DateUtils.dateOnly(date);
-              final hasRecord = recordedDays.contains(dayOnly);
-              final selected = isSelected ?? false;
-
-              return AttendanceDateSelectorDayCell(
-                date: date,
-                hasRecord: hasRecord,
-                isSelected: selected,
-                indicatorColor: selected
-                    ? colorScheme.onPrimary
-                    : effectiveIndicatorColor,
-                textStyle: textStyle,
-                decoration: decoration,
-              );
-            },
-      ),
+      initialDate: date,
+      firstDate: DateTime(2019),
+      lastDate: DateTime.now().add(const Duration(days: 365)),
+      recordedDays: recordedDays,
+      indicatorColor: indicatorColor,
     );
 
-    if (picked != null && picked.isNotEmpty && picked.first != null) {
-      onDateSelected(picked.first!);
-    }
+    if (picked != null) onDateSelected(picked);
   }
 }

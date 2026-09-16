@@ -64,20 +64,15 @@ void main() {
       await tester.tap(find.byType(AttendanceDateChip));
       await tester.pumpAndSettle();
 
+      expect(find.byType(AttendanceDatePickerDialog), findsOneWidget);
+
       final dayCells = tester.widgetList<AttendanceDateSelectorDayCell>(
         find.byType(AttendanceDateSelectorDayCell),
       );
-      expect(dayCells, isNotEmpty);
+      expect(dayCells, hasLength(1));
+      expect(DateUtils.dateOnly(dayCells.first.date), recordedDate);
 
-      final recordedCell = dayCells.firstWhere(
-        (cell) => DateUtils.dateOnly(cell.date) == recordedDate,
-      );
-      expect(recordedCell.hasRecord, isTrue);
-
-      final unrecordedCell = dayCells.firstWhere(
-        (cell) => DateUtils.dateOnly(cell.date) == testDate,
-      );
-      expect(unrecordedCell.hasRecord, isFalse);
+      expect(find.text('${testDate.day}'), findsOneWidget);
     });
 
     testWidgets('allows selecting any day without records', (tester) async {
@@ -93,24 +88,19 @@ void main() {
       await tester.tap(find.byType(AttendanceDateChip));
       await tester.pumpAndSettle();
 
-      final targetDate = DateTime(2026, 7, 15);
-      final cellFinder = find.byWidgetPredicate(
-        (widget) =>
-            widget is AttendanceDateSelectorDayCell &&
-            DateUtils.dateOnly(widget.date) == targetDate,
-      );
-      expect(cellFinder, findsOneWidget);
+      final targetDayFinder = find.text('15');
+      expect(targetDayFinder, findsOneWidget);
 
-      await tester.tap(cellFinder);
+      await tester.tap(targetDayFinder);
       await tester.pumpAndSettle();
 
-      final okButton = find.byType(InkWell).last;
+      final okButton = find.byType(TextButton).last;
       expect(okButton, findsOneWidget);
       await tester.tap(okButton);
       await tester.pumpAndSettle();
 
       expect(selected, isNotNull);
-      expect(DateUtils.dateOnly(selected!), targetDate);
+      expect(DateUtils.dateOnly(selected!), DateTime(2026, 7, 15));
     });
   });
 }

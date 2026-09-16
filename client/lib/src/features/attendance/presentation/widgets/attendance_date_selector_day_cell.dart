@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 class AttendanceDateSelectorDayCell extends StatelessWidget {
   final DateTime date;
-  final bool hasRecord;
   final bool isSelected;
   final Color indicatorColor;
   final TextStyle? textStyle;
@@ -10,7 +9,6 @@ class AttendanceDateSelectorDayCell extends StatelessWidget {
 
   const AttendanceDateSelectorDayCell({
     required this.date,
-    required this.hasRecord,
     required this.isSelected,
     required this.indicatorColor,
     this.textStyle,
@@ -28,20 +26,19 @@ class AttendanceDateSelectorDayCell extends StatelessWidget {
             MaterialLocalizations.of(context).formatDecimal(date.day),
             style: textStyle,
           ),
-          if (hasRecord)
-            Padding(
-              padding: const EdgeInsetsDirectional.only(top: 24),
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: indicatorColor,
-                ),
-                child: const SizedBox(
-                  height: 5,
-                  width: 5,
-                ),
+          Padding(
+            padding: const EdgeInsetsDirectional.only(top: 24),
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: indicatorColor,
+              ),
+              child: const SizedBox(
+                height: 5,
+                width: 5,
               ),
             ),
+          ),
         ],
       ),
     );
