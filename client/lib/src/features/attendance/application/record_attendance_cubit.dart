@@ -43,6 +43,7 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
 
   StreamSubscription<List<AttendanceRecord>>? _attendanceSub;
   final LiveAttendance _liveAttendance = LiveAttendance();
+  Set<DateTime> _recordedDays = const {};
 
   RosterStatus _rosterStatus = RosterStatus.loading;
   Map<String, int> _gutterIndex = const {};
@@ -98,6 +99,7 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
     _audienceView = _recordAttendanceRights.initialViewFor(_meeting);
     _liveAttendance.reset();
     _personsAttendanceAnalyses = const {};
+    _recordedDays = const {};
     unawaited(_restartSession());
   }
 
@@ -236,6 +238,9 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
     _liveAttendance
       ..markOptimistic(personId, _asServant, optimisticTime)
       ..beginInFlight(personId);
+    if (optimisticTime != null && !_recordedDays.contains(_selectedDate)) {
+      _recordedDays = {..._recordedDays, _selectedDate};
+    }
     _emitLoaded();
 
     try {
@@ -262,8 +267,35 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
       if (isClosed) return;
       _subscribeAttendance();
       unawaited(_loadAttendanceAnalyses());
+      unawaited(_loadRecordedDays());
     } catch (error, stackTrace) {
       _onRosterError(error, stackTrace);
+    }
+  }
+
+  Future<void> _loadRecordedDays() async {
+    try {
+      final days = await _dao.getRecordedDays(meeting: _meeting);
+      if (isClosed) return;
+
+      final merged = {
+        ...days,
+        ..._recordedDays,
+      };
+      if (const SetEquality<DateTime>().equals(merged, _recordedDays)) return;
+
+      _recordedDays = merged;
+      _emitLoaded();
+    } catch (error, stackTrace) {
+      unawaited(
+        LoggingService.I.exception(
+          LogRecord(
+            moduleName: '$RecordAttendanceCubit',
+            error: error,
+            stackTrace: stackTrace,
+          ),
+        ),
+      );
     }
   }
 
@@ -341,6 +373,9 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
   void _onServerAttendanceRecords(List<AttendanceRecord> records) {
     if (isClosed) return;
 
+    if (records.isNotEmpty && !_recordedDays.contains(_selectedDate)) {
+      _recordedDays = {..._recordedDays, _selectedDate};
+    }
     _liveAttendance.refreshWithServerRecords(records);
     _emitLoaded();
   }
@@ -404,6 +439,7 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
         sort: _sort,
         rosterStatus: _rosterStatus,
         searchQuery: _searchQuery,
+        recordedDays: _recordedDays,
         entries: sorted,
         gutterLetters: sortedGutterLetters,
         streakWindowDays: _streakWindowDays,
