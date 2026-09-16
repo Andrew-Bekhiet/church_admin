@@ -322,6 +322,43 @@ void main() {
         },
       );
     });
+
+    group('recordedDays', () {
+      final recordedDate = DateTime(2026, 6, 15);
+
+      blocTest<RecordAttendanceCubit, RecordAttendanceState>(
+        'recordedDays from dao are emitted in loaded state',
+        setUp: () {
+          f.recordedDays = {recordedDate};
+        },
+        build: () => f.createCubit(),
+        verify: (cubit) {
+          final state = cubit.state as RecordAttendanceLoaded;
+          expect(state.recordedDays, contains(recordedDate));
+        },
+      );
+
+      blocTest<RecordAttendanceCubit, RecordAttendanceState>(
+        'marking attendance adds selectedDate to recordedDays',
+        setUp: () {
+          f
+            ..rosterPersons = [_Fixture.rosterPerson('p1')]
+            ..markAttendanceRecord = _Fixture.makeRecord('p1');
+        },
+        build: () => f.createCubit(),
+        act: (cubit) async {
+          final ready = await cubit.stream
+              .whereType<RecordAttendanceLoaded>()
+              .firstWhere((s) => s.rosterStatus == RosterStatus.ready);
+
+          await cubit.toggleAttendance(ready.entries.first);
+        },
+        verify: (cubit) {
+          final state = cubit.state as RecordAttendanceLoaded;
+          expect(state.recordedDays, contains(state.selectedDate));
+        },
+      );
+    });
   });
 }
 
@@ -340,11 +377,19 @@ final class _Fixture {
 
   List<MeetingRosterEntry> rosterPersons = [];
   List<AttendanceRecord> attendanceRecords = [];
+  Set<DateTime> recordedDays = const {};
   AttendanceRecord? markAttendanceRecord;
   AttendanceRecord? unmarkAttendanceRecord;
 
   _Fixture() {
     when(() => authBloc.currentUserData).thenAnswer((_) => user);
+
+    when(
+      () => dao.getRecordedDays(
+        meeting: any(named: 'meeting'),
+        range: any(named: 'range'),
+      ),
+    ).thenAnswer((_) async => recordedDays);
 
     when(
       () => dao.getMeetingRoster(

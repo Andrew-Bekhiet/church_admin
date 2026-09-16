@@ -98,4 +98,5 @@ void main() {
   );
 }
 
-DateTime keepOnlyDate(DateTime date) => DateTime(date.year, date.month, date.day);
+DateTime keepOnlyDate(DateTime date) =>
+    DateTime(date.year, date.month, date.day);
