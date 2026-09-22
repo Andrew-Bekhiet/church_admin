@@ -41,17 +41,11 @@ class UserInvitationField extends StatelessWidget {
         ],
       ),
       ExistingInvitation(:final invitation) when invitation.isClaimed =>
-        UserInvitationCodeTile(
-          code: invitation.code,
-          caption: invitation.statusCaptionAt(DateTime.now()),
-        ),
+        UserInvitationCodeTile(invitation: invitation),
       ExistingInvitation(:final invitation) => Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          UserInvitationCodeTile(
-            code: invitation.code,
-            caption: invitation.statusCaptionAt(DateTime.now()),
-          ),
+          UserInvitationCodeTile(invitation: invitation),
           UserInvitationExpiryTile(
             expiresAt: invitation.expiresAt,
             firstDate:

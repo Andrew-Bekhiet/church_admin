@@ -1,21 +1,21 @@
+import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:intl/intl.dart' hide TextDirection;
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 
 class UserInvitationCodeTile extends StatelessWidget {
-  final String code;
-  final String caption;
-  final VoidCallback? onShare;
+  final Invitation invitation;
 
   const UserInvitationCodeTile({
-    required this.code,
-    required this.caption,
-    this.onShare,
+    required this.invitation,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
+    final dateFormat = DateFormat.yMd('ar-EG').add_jm();
+    final now = DateTime.now();
     final textTheme = TextTheme.of(context);
     final colorScheme = ColorScheme.of(context);
 
@@ -26,7 +26,7 @@ class UserInvitationCodeTile extends StatelessWidget {
         spacing: 2,
         children: [
           Text(
-            code,
+            invitation.code,
             textDirection: TextDirection.ltr,
             style: textTheme.headlineSmall?.copyWith(
               fontFeatures: const [FontFeature.tabularFigures()],
@@ -34,7 +34,13 @@ class UserInvitationCodeTile extends StatelessWidget {
             ),
           ),
           Text(
-            caption,
+            switch (invitation) {
+              Invitation(:final claimedAt?) =>
+                'استُخدمت في ${dateFormat.format(claimedAt)}',
+              _ when invitation.isExpiredAt(now) =>
+                'انتهت في ${dateFormat.format(invitation.expiresAt)}',
+              _ => 'صالحة حتى ${dateFormat.format(invitation.expiresAt)}',
+            },
             style: textTheme.bodySmall?.copyWith(
               color: colorScheme.onSurfaceVariant,
             ),
@@ -44,16 +50,22 @@ class UserInvitationCodeTile extends StatelessWidget {
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          if (onShare case final onShare?)
+          if (invitation.isActiveAt(now))
             IconButton(
               icon: const Icon(Symbols.share),
               tooltip: 'مشاركة',
-              onPressed: onShare,
+              onPressed: () => ShareService.I.shareText(
+                'كود الدعوة للانضمام إلى تطبيق خدمة الكنيسة: '
+                '${invitation.code}\n'
+                'صالح حتى '
+                '${dateFormat.format(invitation.expiresAt)}',
+              ),
             ),
           IconButton(
             icon: const Icon(Symbols.content_copy),
             tooltip: 'نسخ',
-            onPressed: () => Clipboard.setData(ClipboardData(text: code)),
+            onPressed: () =>
+                Clipboard.setData(ClipboardData(text: invitation.code)),
           ),
         ],
       ),

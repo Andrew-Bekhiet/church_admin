@@ -3,7 +3,6 @@ import 'package:church_admin/src/features/user_management/presentation/widgets/u
 import 'package:church_admin/src/features/user_management/presentation/widgets/user_invitation_code_tile.dart';
 import 'package:church_admin/src/features/user_management/presentation/widgets/user_section_card.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 
 class UserAccountCard extends StatelessWidget {
@@ -25,18 +24,7 @@ class UserAccountCard extends StatelessWidget {
           if (user.invitation case final invitation?
               when !invitation.isClaimed) ...[
             const Divider(height: 1),
-            UserInvitationCodeTile(
-              code: invitation.code,
-              caption: invitation.statusCaptionAt(now),
-              onShare: invitation.isActiveAt(now)
-                  ? () => ShareService.I.shareText(
-                      'كود الدعوة للانضمام إلى تطبيق خدمة الكنيسة: '
-                      '${invitation.code}\n'
-                      'صالح حتى '
-                      '${DateFormat('yyyy/M/d').format(invitation.expiresAt)}',
-                    )
-                  : null,
-            ),
+            UserInvitationCodeTile(invitation: invitation),
           ],
         ],
       ),
