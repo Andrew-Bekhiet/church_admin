@@ -2,6 +2,15 @@ table:
   name: users_data
   schema: auth
 object_relationships:
+  - name: invitation
+    using:
+      manual_configuration:
+        column_mapping:
+          uid: user_uid
+        insertion_order: after_parent
+        remote_table:
+          name: invitations
+          schema: auth
   - name: lastEdit
     using:
       manual_configuration:
@@ -71,6 +80,7 @@ select_permissions:
   - role: user
     permission:
       columns:
+        - auth_id
         - email
         - name
         - photo_updated_at
@@ -105,14 +115,61 @@ update_permissions:
   - role: user
     permission:
       columns:
+        - email
         - name
         - uid
       filter:
-        uid:
-          _eq: X-Hasura-User-Id
+        _or:
+          - uid:
+              _eq: X-Hasura-User-Id
+          - _exists:
+              _table:
+                name: users_permissions_by_entity_id
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - allow_edit:
+                      _eq: true
+                  - _or:
+                      - _and:
+                          - entity_type:
+                              _eq: any-user
+                          - entity_id:
+                              _is_null: true
+                      - _and:
+                          - entity_type:
+                              _eq: user
+                          - entity_id:
+                              _ceq:
+                                - $
+                                - uid
       check:
-        uid:
-          _eq: X-Hasura-User-Id
-      set:
-        uid: x-hasura-User-Id
+        _or:
+          - uid:
+              _eq: X-Hasura-User-Id
+          - _exists:
+              _table:
+                name: users_permissions_by_entity_id
+                schema: auth
+              _where:
+                _and:
+                  - uid:
+                      _eq: X-Hasura-User-Id
+                  - allow_edit:
+                      _eq: true
+                  - _or:
+                      - _and:
+                          - entity_type:
+                              _eq: any-user
+                          - entity_id:
+                              _is_null: true
+                      - _and:
+                          - entity_type:
+                              _eq: user
+                          - entity_id:
+                              _ceq:
+                                - $
+                                - uid
     comment: ""

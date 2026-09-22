@@ -1932,317 +1932,362 @@ class _CopyWithStubImpl_Input_AreasUpdates<TRes>
       CopyWith_Input_AreasBoolExp.stub(_res);
 }
 
-class Input_AuthUsersAdminOnAggregateOrderBy {
-  factory Input_AuthUsersAdminOnAggregateOrderBy({
-    Input_AuthUsersAdminOnAvgOrderBy? avg,
-    Enum_OrderBy? count,
-    Input_AuthUsersAdminOnMaxOrderBy? max,
-    Input_AuthUsersAdminOnMinOrderBy? min,
-    Input_AuthUsersAdminOnStddevOrderBy? stddev,
-    Input_AuthUsersAdminOnStddevPopOrderBy? stddevPop,
-    Input_AuthUsersAdminOnStddevSampOrderBy? stddevSamp,
-    Input_AuthUsersAdminOnSumOrderBy? sum,
-    Input_AuthUsersAdminOnVarPopOrderBy? varPop,
-    Input_AuthUsersAdminOnVarSampOrderBy? varSamp,
-    Input_AuthUsersAdminOnVarianceOrderBy? variance,
-  }) => Input_AuthUsersAdminOnAggregateOrderBy._({
-    if (avg != null) r'avg': avg,
-    if (count != null) r'count': count,
-    if (max != null) r'max': max,
-    if (min != null) r'min': min,
-    if (stddev != null) r'stddev': stddev,
-    if (stddevPop != null) r'stddevPop': stddevPop,
-    if (stddevSamp != null) r'stddevSamp': stddevSamp,
-    if (sum != null) r'sum': sum,
-    if (varPop != null) r'varPop': varPop,
-    if (varSamp != null) r'varSamp': varSamp,
-    if (variance != null) r'variance': variance,
+class Input_AuthInvitationsBoolExp {
+  factory Input_AuthInvitationsBoolExp({
+    List<Input_AuthInvitationsBoolExp>? $_and,
+    Input_AuthInvitationsBoolExp? $_not,
+    List<Input_AuthInvitationsBoolExp>? $_or,
+    Input_TimestamptzComparisonExp? claimedAt,
+    Input_StringComparisonExp? code,
+    Input_TimestamptzComparisonExp? createdAt,
+    Input_UuidComparisonExp? createdBy,
+    Input_AuthUsersDataBoolExp? creator,
+    Input_TimestamptzComparisonExp? expiresAt,
+    Input_UuidComparisonExp? id,
+    Input_AuthUsersDataBoolExp? user,
+    Input_UuidComparisonExp? userUid,
+  }) => Input_AuthInvitationsBoolExp._({
+    if ($_and != null) r'_and': $_and,
+    if ($_not != null) r'_not': $_not,
+    if ($_or != null) r'_or': $_or,
+    if (claimedAt != null) r'claimedAt': claimedAt,
+    if (code != null) r'code': code,
+    if (createdAt != null) r'createdAt': createdAt,
+    if (createdBy != null) r'createdBy': createdBy,
+    if (creator != null) r'creator': creator,
+    if (expiresAt != null) r'expiresAt': expiresAt,
+    if (id != null) r'id': id,
+    if (user != null) r'user': user,
+    if (userUid != null) r'userUid': userUid,
   });
 
-  Input_AuthUsersAdminOnAggregateOrderBy._(this._$data);
+  Input_AuthInvitationsBoolExp._(this._$data);
 
-  factory Input_AuthUsersAdminOnAggregateOrderBy.fromJson(
-    Map<String, dynamic> data,
-  ) {
+  factory Input_AuthInvitationsBoolExp.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
-    if (data.containsKey('avg')) {
-      final l$avg = data['avg'];
-      result$data['avg'] = l$avg == null
+    if (data.containsKey('_and')) {
+      final l$$_and = data['_and'];
+      result$data['_and'] = (l$$_and as List<dynamic>?)
+          ?.map(
+            (e) => Input_AuthInvitationsBoolExp.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
+          .toList();
+    }
+    if (data.containsKey('_not')) {
+      final l$$_not = data['_not'];
+      result$data['_not'] = l$$_not == null
           ? null
-          : Input_AuthUsersAdminOnAvgOrderBy.fromJson(
-              (l$avg as Map<String, dynamic>),
+          : Input_AuthInvitationsBoolExp.fromJson(
+              (l$$_not as Map<String, dynamic>),
             );
     }
-    if (data.containsKey('count')) {
-      final l$count = data['count'];
-      result$data['count'] = l$count == null
-          ? null
-          : fromJson_Enum_OrderBy((l$count as String));
+    if (data.containsKey('_or')) {
+      final l$$_or = data['_or'];
+      result$data['_or'] = (l$$_or as List<dynamic>?)
+          ?.map(
+            (e) => Input_AuthInvitationsBoolExp.fromJson(
+              (e as Map<String, dynamic>),
+            ),
+          )
+          .toList();
     }
-    if (data.containsKey('max')) {
-      final l$max = data['max'];
-      result$data['max'] = l$max == null
+    if (data.containsKey('claimedAt')) {
+      final l$claimedAt = data['claimedAt'];
+      result$data['claimedAt'] = l$claimedAt == null
           ? null
-          : Input_AuthUsersAdminOnMaxOrderBy.fromJson(
-              (l$max as Map<String, dynamic>),
+          : Input_TimestamptzComparisonExp.fromJson(
+              (l$claimedAt as Map<String, dynamic>),
             );
     }
-    if (data.containsKey('min')) {
-      final l$min = data['min'];
-      result$data['min'] = l$min == null
+    if (data.containsKey('code')) {
+      final l$code = data['code'];
+      result$data['code'] = l$code == null
           ? null
-          : Input_AuthUsersAdminOnMinOrderBy.fromJson(
-              (l$min as Map<String, dynamic>),
+          : Input_StringComparisonExp.fromJson(
+              (l$code as Map<String, dynamic>),
             );
     }
-    if (data.containsKey('stddev')) {
-      final l$stddev = data['stddev'];
-      result$data['stddev'] = l$stddev == null
+    if (data.containsKey('createdAt')) {
+      final l$createdAt = data['createdAt'];
+      result$data['createdAt'] = l$createdAt == null
           ? null
-          : Input_AuthUsersAdminOnStddevOrderBy.fromJson(
-              (l$stddev as Map<String, dynamic>),
+          : Input_TimestamptzComparisonExp.fromJson(
+              (l$createdAt as Map<String, dynamic>),
             );
     }
-    if (data.containsKey('stddevPop')) {
-      final l$stddevPop = data['stddevPop'];
-      result$data['stddevPop'] = l$stddevPop == null
+    if (data.containsKey('createdBy')) {
+      final l$createdBy = data['createdBy'];
+      result$data['createdBy'] = l$createdBy == null
           ? null
-          : Input_AuthUsersAdminOnStddevPopOrderBy.fromJson(
-              (l$stddevPop as Map<String, dynamic>),
+          : Input_UuidComparisonExp.fromJson(
+              (l$createdBy as Map<String, dynamic>),
             );
     }
-    if (data.containsKey('stddevSamp')) {
-      final l$stddevSamp = data['stddevSamp'];
-      result$data['stddevSamp'] = l$stddevSamp == null
+    if (data.containsKey('creator')) {
+      final l$creator = data['creator'];
+      result$data['creator'] = l$creator == null
           ? null
-          : Input_AuthUsersAdminOnStddevSampOrderBy.fromJson(
-              (l$stddevSamp as Map<String, dynamic>),
+          : Input_AuthUsersDataBoolExp.fromJson(
+              (l$creator as Map<String, dynamic>),
             );
     }
-    if (data.containsKey('sum')) {
-      final l$sum = data['sum'];
-      result$data['sum'] = l$sum == null
+    if (data.containsKey('expiresAt')) {
+      final l$expiresAt = data['expiresAt'];
+      result$data['expiresAt'] = l$expiresAt == null
           ? null
-          : Input_AuthUsersAdminOnSumOrderBy.fromJson(
-              (l$sum as Map<String, dynamic>),
+          : Input_TimestamptzComparisonExp.fromJson(
+              (l$expiresAt as Map<String, dynamic>),
             );
     }
-    if (data.containsKey('varPop')) {
-      final l$varPop = data['varPop'];
-      result$data['varPop'] = l$varPop == null
+    if (data.containsKey('id')) {
+      final l$id = data['id'];
+      result$data['id'] = l$id == null
           ? null
-          : Input_AuthUsersAdminOnVarPopOrderBy.fromJson(
-              (l$varPop as Map<String, dynamic>),
+          : Input_UuidComparisonExp.fromJson((l$id as Map<String, dynamic>));
+    }
+    if (data.containsKey('user')) {
+      final l$user = data['user'];
+      result$data['user'] = l$user == null
+          ? null
+          : Input_AuthUsersDataBoolExp.fromJson(
+              (l$user as Map<String, dynamic>),
             );
     }
-    if (data.containsKey('varSamp')) {
-      final l$varSamp = data['varSamp'];
-      result$data['varSamp'] = l$varSamp == null
+    if (data.containsKey('userUid')) {
+      final l$userUid = data['userUid'];
+      result$data['userUid'] = l$userUid == null
           ? null
-          : Input_AuthUsersAdminOnVarSampOrderBy.fromJson(
-              (l$varSamp as Map<String, dynamic>),
+          : Input_UuidComparisonExp.fromJson(
+              (l$userUid as Map<String, dynamic>),
             );
     }
-    if (data.containsKey('variance')) {
-      final l$variance = data['variance'];
-      result$data['variance'] = l$variance == null
-          ? null
-          : Input_AuthUsersAdminOnVarianceOrderBy.fromJson(
-              (l$variance as Map<String, dynamic>),
-            );
-    }
-    return Input_AuthUsersAdminOnAggregateOrderBy._(result$data);
+    return Input_AuthInvitationsBoolExp._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  Input_AuthUsersAdminOnAvgOrderBy? get avg =>
-      (_$data['avg'] as Input_AuthUsersAdminOnAvgOrderBy?);
+  List<Input_AuthInvitationsBoolExp>? get $_and =>
+      (_$data['_and'] as List<Input_AuthInvitationsBoolExp>?);
 
-  Enum_OrderBy? get count => (_$data['count'] as Enum_OrderBy?);
+  Input_AuthInvitationsBoolExp? get $_not =>
+      (_$data['_not'] as Input_AuthInvitationsBoolExp?);
 
-  Input_AuthUsersAdminOnMaxOrderBy? get max =>
-      (_$data['max'] as Input_AuthUsersAdminOnMaxOrderBy?);
+  List<Input_AuthInvitationsBoolExp>? get $_or =>
+      (_$data['_or'] as List<Input_AuthInvitationsBoolExp>?);
 
-  Input_AuthUsersAdminOnMinOrderBy? get min =>
-      (_$data['min'] as Input_AuthUsersAdminOnMinOrderBy?);
+  Input_TimestamptzComparisonExp? get claimedAt =>
+      (_$data['claimedAt'] as Input_TimestamptzComparisonExp?);
 
-  Input_AuthUsersAdminOnStddevOrderBy? get stddev =>
-      (_$data['stddev'] as Input_AuthUsersAdminOnStddevOrderBy?);
+  Input_StringComparisonExp? get code =>
+      (_$data['code'] as Input_StringComparisonExp?);
 
-  Input_AuthUsersAdminOnStddevPopOrderBy? get stddevPop =>
-      (_$data['stddevPop'] as Input_AuthUsersAdminOnStddevPopOrderBy?);
+  Input_TimestamptzComparisonExp? get createdAt =>
+      (_$data['createdAt'] as Input_TimestamptzComparisonExp?);
 
-  Input_AuthUsersAdminOnStddevSampOrderBy? get stddevSamp =>
-      (_$data['stddevSamp'] as Input_AuthUsersAdminOnStddevSampOrderBy?);
+  Input_UuidComparisonExp? get createdBy =>
+      (_$data['createdBy'] as Input_UuidComparisonExp?);
 
-  Input_AuthUsersAdminOnSumOrderBy? get sum =>
-      (_$data['sum'] as Input_AuthUsersAdminOnSumOrderBy?);
+  Input_AuthUsersDataBoolExp? get creator =>
+      (_$data['creator'] as Input_AuthUsersDataBoolExp?);
 
-  Input_AuthUsersAdminOnVarPopOrderBy? get varPop =>
-      (_$data['varPop'] as Input_AuthUsersAdminOnVarPopOrderBy?);
+  Input_TimestamptzComparisonExp? get expiresAt =>
+      (_$data['expiresAt'] as Input_TimestamptzComparisonExp?);
 
-  Input_AuthUsersAdminOnVarSampOrderBy? get varSamp =>
-      (_$data['varSamp'] as Input_AuthUsersAdminOnVarSampOrderBy?);
+  Input_UuidComparisonExp? get id => (_$data['id'] as Input_UuidComparisonExp?);
 
-  Input_AuthUsersAdminOnVarianceOrderBy? get variance =>
-      (_$data['variance'] as Input_AuthUsersAdminOnVarianceOrderBy?);
+  Input_AuthUsersDataBoolExp? get user =>
+      (_$data['user'] as Input_AuthUsersDataBoolExp?);
+
+  Input_UuidComparisonExp? get userUid =>
+      (_$data['userUid'] as Input_UuidComparisonExp?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
-    if (_$data.containsKey('avg')) {
-      final l$avg = avg;
-      result$data['avg'] = l$avg?.toJson();
+    if (_$data.containsKey('_and')) {
+      final l$$_and = $_and;
+      result$data['_and'] = l$$_and?.map((e) => e.toJson()).toList();
     }
-    if (_$data.containsKey('count')) {
-      final l$count = count;
-      result$data['count'] = l$count == null
-          ? null
-          : toJson_Enum_OrderBy(l$count);
+    if (_$data.containsKey('_not')) {
+      final l$$_not = $_not;
+      result$data['_not'] = l$$_not?.toJson();
     }
-    if (_$data.containsKey('max')) {
-      final l$max = max;
-      result$data['max'] = l$max?.toJson();
+    if (_$data.containsKey('_or')) {
+      final l$$_or = $_or;
+      result$data['_or'] = l$$_or?.map((e) => e.toJson()).toList();
     }
-    if (_$data.containsKey('min')) {
-      final l$min = min;
-      result$data['min'] = l$min?.toJson();
+    if (_$data.containsKey('claimedAt')) {
+      final l$claimedAt = claimedAt;
+      result$data['claimedAt'] = l$claimedAt?.toJson();
     }
-    if (_$data.containsKey('stddev')) {
-      final l$stddev = stddev;
-      result$data['stddev'] = l$stddev?.toJson();
+    if (_$data.containsKey('code')) {
+      final l$code = code;
+      result$data['code'] = l$code?.toJson();
     }
-    if (_$data.containsKey('stddevPop')) {
-      final l$stddevPop = stddevPop;
-      result$data['stddevPop'] = l$stddevPop?.toJson();
+    if (_$data.containsKey('createdAt')) {
+      final l$createdAt = createdAt;
+      result$data['createdAt'] = l$createdAt?.toJson();
     }
-    if (_$data.containsKey('stddevSamp')) {
-      final l$stddevSamp = stddevSamp;
-      result$data['stddevSamp'] = l$stddevSamp?.toJson();
+    if (_$data.containsKey('createdBy')) {
+      final l$createdBy = createdBy;
+      result$data['createdBy'] = l$createdBy?.toJson();
     }
-    if (_$data.containsKey('sum')) {
-      final l$sum = sum;
-      result$data['sum'] = l$sum?.toJson();
+    if (_$data.containsKey('creator')) {
+      final l$creator = creator;
+      result$data['creator'] = l$creator?.toJson();
     }
-    if (_$data.containsKey('varPop')) {
-      final l$varPop = varPop;
-      result$data['varPop'] = l$varPop?.toJson();
+    if (_$data.containsKey('expiresAt')) {
+      final l$expiresAt = expiresAt;
+      result$data['expiresAt'] = l$expiresAt?.toJson();
     }
-    if (_$data.containsKey('varSamp')) {
-      final l$varSamp = varSamp;
-      result$data['varSamp'] = l$varSamp?.toJson();
+    if (_$data.containsKey('id')) {
+      final l$id = id;
+      result$data['id'] = l$id?.toJson();
     }
-    if (_$data.containsKey('variance')) {
-      final l$variance = variance;
-      result$data['variance'] = l$variance?.toJson();
+    if (_$data.containsKey('user')) {
+      final l$user = user;
+      result$data['user'] = l$user?.toJson();
+    }
+    if (_$data.containsKey('userUid')) {
+      final l$userUid = userUid;
+      result$data['userUid'] = l$userUid?.toJson();
     }
     return result$data;
   }
 
-  CopyWith_Input_AuthUsersAdminOnAggregateOrderBy<
-    Input_AuthUsersAdminOnAggregateOrderBy
-  >
-  get copyWith =>
-      CopyWith_Input_AuthUsersAdminOnAggregateOrderBy(this, (i) => i);
+  CopyWith_Input_AuthInvitationsBoolExp<Input_AuthInvitationsBoolExp>
+  get copyWith => CopyWith_Input_AuthInvitationsBoolExp(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input_AuthUsersAdminOnAggregateOrderBy ||
+    if (other is! Input_AuthInvitationsBoolExp ||
         runtimeType != other.runtimeType) {
       return false;
     }
-    final l$avg = avg;
-    final lOther$avg = other.avg;
-    if (_$data.containsKey('avg') != other._$data.containsKey('avg')) {
+    final l$$_and = $_and;
+    final lOther$$_and = other.$_and;
+    if (_$data.containsKey('_and') != other._$data.containsKey('_and')) {
       return false;
     }
-    if (l$avg != lOther$avg) {
+    if (l$$_and != null && lOther$$_and != null) {
+      if (l$$_and.length != lOther$$_and.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$_and.length; i++) {
+        final l$$_and$entry = l$$_and[i];
+        final lOther$$_and$entry = lOther$$_and[i];
+        if (l$$_and$entry != lOther$$_and$entry) {
+          return false;
+        }
+      }
+    } else if (l$$_and != lOther$$_and) {
       return false;
     }
-    final l$count = count;
-    final lOther$count = other.count;
-    if (_$data.containsKey('count') != other._$data.containsKey('count')) {
+    final l$$_not = $_not;
+    final lOther$$_not = other.$_not;
+    if (_$data.containsKey('_not') != other._$data.containsKey('_not')) {
       return false;
     }
-    if (l$count != lOther$count) {
+    if (l$$_not != lOther$$_not) {
       return false;
     }
-    final l$max = max;
-    final lOther$max = other.max;
-    if (_$data.containsKey('max') != other._$data.containsKey('max')) {
+    final l$$_or = $_or;
+    final lOther$$_or = other.$_or;
+    if (_$data.containsKey('_or') != other._$data.containsKey('_or')) {
       return false;
     }
-    if (l$max != lOther$max) {
+    if (l$$_or != null && lOther$$_or != null) {
+      if (l$$_or.length != lOther$$_or.length) {
+        return false;
+      }
+      for (int i = 0; i < l$$_or.length; i++) {
+        final l$$_or$entry = l$$_or[i];
+        final lOther$$_or$entry = lOther$$_or[i];
+        if (l$$_or$entry != lOther$$_or$entry) {
+          return false;
+        }
+      }
+    } else if (l$$_or != lOther$$_or) {
       return false;
     }
-    final l$min = min;
-    final lOther$min = other.min;
-    if (_$data.containsKey('min') != other._$data.containsKey('min')) {
+    final l$claimedAt = claimedAt;
+    final lOther$claimedAt = other.claimedAt;
+    if (_$data.containsKey('claimedAt') !=
+        other._$data.containsKey('claimedAt')) {
       return false;
     }
-    if (l$min != lOther$min) {
+    if (l$claimedAt != lOther$claimedAt) {
       return false;
     }
-    final l$stddev = stddev;
-    final lOther$stddev = other.stddev;
-    if (_$data.containsKey('stddev') != other._$data.containsKey('stddev')) {
+    final l$code = code;
+    final lOther$code = other.code;
+    if (_$data.containsKey('code') != other._$data.containsKey('code')) {
       return false;
     }
-    if (l$stddev != lOther$stddev) {
+    if (l$code != lOther$code) {
       return false;
     }
-    final l$stddevPop = stddevPop;
-    final lOther$stddevPop = other.stddevPop;
-    if (_$data.containsKey('stddevPop') !=
-        other._$data.containsKey('stddevPop')) {
+    final l$createdAt = createdAt;
+    final lOther$createdAt = other.createdAt;
+    if (_$data.containsKey('createdAt') !=
+        other._$data.containsKey('createdAt')) {
       return false;
     }
-    if (l$stddevPop != lOther$stddevPop) {
+    if (l$createdAt != lOther$createdAt) {
       return false;
     }
-    final l$stddevSamp = stddevSamp;
-    final lOther$stddevSamp = other.stddevSamp;
-    if (_$data.containsKey('stddevSamp') !=
-        other._$data.containsKey('stddevSamp')) {
+    final l$createdBy = createdBy;
+    final lOther$createdBy = other.createdBy;
+    if (_$data.containsKey('createdBy') !=
+        other._$data.containsKey('createdBy')) {
       return false;
     }
-    if (l$stddevSamp != lOther$stddevSamp) {
+    if (l$createdBy != lOther$createdBy) {
       return false;
     }
-    final l$sum = sum;
-    final lOther$sum = other.sum;
-    if (_$data.containsKey('sum') != other._$data.containsKey('sum')) {
+    final l$creator = creator;
+    final lOther$creator = other.creator;
+    if (_$data.containsKey('creator') != other._$data.containsKey('creator')) {
       return false;
     }
-    if (l$sum != lOther$sum) {
+    if (l$creator != lOther$creator) {
       return false;
     }
-    final l$varPop = varPop;
-    final lOther$varPop = other.varPop;
-    if (_$data.containsKey('varPop') != other._$data.containsKey('varPop')) {
+    final l$expiresAt = expiresAt;
+    final lOther$expiresAt = other.expiresAt;
+    if (_$data.containsKey('expiresAt') !=
+        other._$data.containsKey('expiresAt')) {
       return false;
     }
-    if (l$varPop != lOther$varPop) {
+    if (l$expiresAt != lOther$expiresAt) {
       return false;
     }
-    final l$varSamp = varSamp;
-    final lOther$varSamp = other.varSamp;
-    if (_$data.containsKey('varSamp') != other._$data.containsKey('varSamp')) {
+    final l$id = id;
+    final lOther$id = other.id;
+    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
       return false;
     }
-    if (l$varSamp != lOther$varSamp) {
+    if (l$id != lOther$id) {
       return false;
     }
-    final l$variance = variance;
-    final lOther$variance = other.variance;
-    if (_$data.containsKey('variance') !=
-        other._$data.containsKey('variance')) {
+    final l$user = user;
+    final lOther$user = other.user;
+    if (_$data.containsKey('user') != other._$data.containsKey('user')) {
       return false;
     }
-    if (l$variance != lOther$variance) {
+    if (l$user != lOther$user) {
+      return false;
+    }
+    final l$userUid = userUid;
+    final lOther$userUid = other.userUid;
+    if (_$data.containsKey('userUid') != other._$data.containsKey('userUid')) {
+      return false;
+    }
+    if (l$userUid != lOther$userUid) {
       return false;
     }
     return true;
@@ -2250,356 +2295,449 @@ class Input_AuthUsersAdminOnAggregateOrderBy {
 
   @override
   int get hashCode {
-    final l$avg = avg;
-    final l$count = count;
-    final l$max = max;
-    final l$min = min;
-    final l$stddev = stddev;
-    final l$stddevPop = stddevPop;
-    final l$stddevSamp = stddevSamp;
-    final l$sum = sum;
-    final l$varPop = varPop;
-    final l$varSamp = varSamp;
-    final l$variance = variance;
+    final l$$_and = $_and;
+    final l$$_not = $_not;
+    final l$$_or = $_or;
+    final l$claimedAt = claimedAt;
+    final l$code = code;
+    final l$createdAt = createdAt;
+    final l$createdBy = createdBy;
+    final l$creator = creator;
+    final l$expiresAt = expiresAt;
+    final l$id = id;
+    final l$user = user;
+    final l$userUid = userUid;
     return Object.hashAll([
-      _$data.containsKey('avg') ? l$avg : const {},
-      _$data.containsKey('count') ? l$count : const {},
-      _$data.containsKey('max') ? l$max : const {},
-      _$data.containsKey('min') ? l$min : const {},
-      _$data.containsKey('stddev') ? l$stddev : const {},
-      _$data.containsKey('stddevPop') ? l$stddevPop : const {},
-      _$data.containsKey('stddevSamp') ? l$stddevSamp : const {},
-      _$data.containsKey('sum') ? l$sum : const {},
-      _$data.containsKey('varPop') ? l$varPop : const {},
-      _$data.containsKey('varSamp') ? l$varSamp : const {},
-      _$data.containsKey('variance') ? l$variance : const {},
+      _$data.containsKey('_and')
+          ? l$$_and == null
+                ? null
+                : Object.hashAll(l$$_and.map((v) => v))
+          : const {},
+      _$data.containsKey('_not') ? l$$_not : const {},
+      _$data.containsKey('_or')
+          ? l$$_or == null
+                ? null
+                : Object.hashAll(l$$_or.map((v) => v))
+          : const {},
+      _$data.containsKey('claimedAt') ? l$claimedAt : const {},
+      _$data.containsKey('code') ? l$code : const {},
+      _$data.containsKey('createdAt') ? l$createdAt : const {},
+      _$data.containsKey('createdBy') ? l$createdBy : const {},
+      _$data.containsKey('creator') ? l$creator : const {},
+      _$data.containsKey('expiresAt') ? l$expiresAt : const {},
+      _$data.containsKey('id') ? l$id : const {},
+      _$data.containsKey('user') ? l$user : const {},
+      _$data.containsKey('userUid') ? l$userUid : const {},
     ]);
   }
 }
 
-abstract class CopyWith_Input_AuthUsersAdminOnAggregateOrderBy<TRes> {
-  factory CopyWith_Input_AuthUsersAdminOnAggregateOrderBy(
-    Input_AuthUsersAdminOnAggregateOrderBy instance,
-    TRes Function(Input_AuthUsersAdminOnAggregateOrderBy) then,
-  ) = _CopyWithImpl_Input_AuthUsersAdminOnAggregateOrderBy;
+abstract class CopyWith_Input_AuthInvitationsBoolExp<TRes> {
+  factory CopyWith_Input_AuthInvitationsBoolExp(
+    Input_AuthInvitationsBoolExp instance,
+    TRes Function(Input_AuthInvitationsBoolExp) then,
+  ) = _CopyWithImpl_Input_AuthInvitationsBoolExp;
 
-  factory CopyWith_Input_AuthUsersAdminOnAggregateOrderBy.stub(TRes res) =
-      _CopyWithStubImpl_Input_AuthUsersAdminOnAggregateOrderBy;
+  factory CopyWith_Input_AuthInvitationsBoolExp.stub(TRes res) =
+      _CopyWithStubImpl_Input_AuthInvitationsBoolExp;
 
   TRes call({
-    Input_AuthUsersAdminOnAvgOrderBy? avg,
-    Enum_OrderBy? count,
-    Input_AuthUsersAdminOnMaxOrderBy? max,
-    Input_AuthUsersAdminOnMinOrderBy? min,
-    Input_AuthUsersAdminOnStddevOrderBy? stddev,
-    Input_AuthUsersAdminOnStddevPopOrderBy? stddevPop,
-    Input_AuthUsersAdminOnStddevSampOrderBy? stddevSamp,
-    Input_AuthUsersAdminOnSumOrderBy? sum,
-    Input_AuthUsersAdminOnVarPopOrderBy? varPop,
-    Input_AuthUsersAdminOnVarSampOrderBy? varSamp,
-    Input_AuthUsersAdminOnVarianceOrderBy? variance,
+    List<Input_AuthInvitationsBoolExp>? $_and,
+    Input_AuthInvitationsBoolExp? $_not,
+    List<Input_AuthInvitationsBoolExp>? $_or,
+    Input_TimestamptzComparisonExp? claimedAt,
+    Input_StringComparisonExp? code,
+    Input_TimestamptzComparisonExp? createdAt,
+    Input_UuidComparisonExp? createdBy,
+    Input_AuthUsersDataBoolExp? creator,
+    Input_TimestamptzComparisonExp? expiresAt,
+    Input_UuidComparisonExp? id,
+    Input_AuthUsersDataBoolExp? user,
+    Input_UuidComparisonExp? userUid,
   });
-  CopyWith_Input_AuthUsersAdminOnAvgOrderBy<TRes> get avg;
-  CopyWith_Input_AuthUsersAdminOnMaxOrderBy<TRes> get max;
-  CopyWith_Input_AuthUsersAdminOnMinOrderBy<TRes> get min;
-  CopyWith_Input_AuthUsersAdminOnStddevOrderBy<TRes> get stddev;
-  CopyWith_Input_AuthUsersAdminOnStddevPopOrderBy<TRes> get stddevPop;
-  CopyWith_Input_AuthUsersAdminOnStddevSampOrderBy<TRes> get stddevSamp;
-  CopyWith_Input_AuthUsersAdminOnSumOrderBy<TRes> get sum;
-  CopyWith_Input_AuthUsersAdminOnVarPopOrderBy<TRes> get varPop;
-  CopyWith_Input_AuthUsersAdminOnVarSampOrderBy<TRes> get varSamp;
-  CopyWith_Input_AuthUsersAdminOnVarianceOrderBy<TRes> get variance;
+  TRes $_and(
+    Iterable<Input_AuthInvitationsBoolExp>? Function(
+      Iterable<
+        CopyWith_Input_AuthInvitationsBoolExp<Input_AuthInvitationsBoolExp>
+      >?,
+    )
+    _fn,
+  );
+  CopyWith_Input_AuthInvitationsBoolExp<TRes> get $_not;
+  TRes $_or(
+    Iterable<Input_AuthInvitationsBoolExp>? Function(
+      Iterable<
+        CopyWith_Input_AuthInvitationsBoolExp<Input_AuthInvitationsBoolExp>
+      >?,
+    )
+    _fn,
+  );
+  CopyWith_Input_TimestamptzComparisonExp<TRes> get claimedAt;
+  CopyWith_Input_StringComparisonExp<TRes> get code;
+  CopyWith_Input_TimestamptzComparisonExp<TRes> get createdAt;
+  CopyWith_Input_UuidComparisonExp<TRes> get createdBy;
+  CopyWith_Input_AuthUsersDataBoolExp<TRes> get creator;
+  CopyWith_Input_TimestamptzComparisonExp<TRes> get expiresAt;
+  CopyWith_Input_UuidComparisonExp<TRes> get id;
+  CopyWith_Input_AuthUsersDataBoolExp<TRes> get user;
+  CopyWith_Input_UuidComparisonExp<TRes> get userUid;
 }
 
-class _CopyWithImpl_Input_AuthUsersAdminOnAggregateOrderBy<TRes>
-    implements CopyWith_Input_AuthUsersAdminOnAggregateOrderBy<TRes> {
-  _CopyWithImpl_Input_AuthUsersAdminOnAggregateOrderBy(
-    this._instance,
-    this._then,
-  );
+class _CopyWithImpl_Input_AuthInvitationsBoolExp<TRes>
+    implements CopyWith_Input_AuthInvitationsBoolExp<TRes> {
+  _CopyWithImpl_Input_AuthInvitationsBoolExp(this._instance, this._then);
 
-  final Input_AuthUsersAdminOnAggregateOrderBy _instance;
+  final Input_AuthInvitationsBoolExp _instance;
 
-  final TRes Function(Input_AuthUsersAdminOnAggregateOrderBy) _then;
+  final TRes Function(Input_AuthInvitationsBoolExp) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
   TRes call({
-    Object? avg = _undefined,
-    Object? count = _undefined,
-    Object? max = _undefined,
-    Object? min = _undefined,
-    Object? stddev = _undefined,
-    Object? stddevPop = _undefined,
-    Object? stddevSamp = _undefined,
-    Object? sum = _undefined,
-    Object? varPop = _undefined,
-    Object? varSamp = _undefined,
-    Object? variance = _undefined,
+    Object? $_and = _undefined,
+    Object? $_not = _undefined,
+    Object? $_or = _undefined,
+    Object? claimedAt = _undefined,
+    Object? code = _undefined,
+    Object? createdAt = _undefined,
+    Object? createdBy = _undefined,
+    Object? creator = _undefined,
+    Object? expiresAt = _undefined,
+    Object? id = _undefined,
+    Object? user = _undefined,
+    Object? userUid = _undefined,
   }) => _then(
-    Input_AuthUsersAdminOnAggregateOrderBy._({
+    Input_AuthInvitationsBoolExp._({
       ..._instance._$data,
-      if (avg != _undefined) 'avg': (avg as Input_AuthUsersAdminOnAvgOrderBy?),
-      if (count != _undefined) 'count': (count as Enum_OrderBy?),
-      if (max != _undefined) 'max': (max as Input_AuthUsersAdminOnMaxOrderBy?),
-      if (min != _undefined) 'min': (min as Input_AuthUsersAdminOnMinOrderBy?),
-      if (stddev != _undefined)
-        'stddev': (stddev as Input_AuthUsersAdminOnStddevOrderBy?),
-      if (stddevPop != _undefined)
-        'stddevPop': (stddevPop as Input_AuthUsersAdminOnStddevPopOrderBy?),
-      if (stddevSamp != _undefined)
-        'stddevSamp': (stddevSamp as Input_AuthUsersAdminOnStddevSampOrderBy?),
-      if (sum != _undefined) 'sum': (sum as Input_AuthUsersAdminOnSumOrderBy?),
-      if (varPop != _undefined)
-        'varPop': (varPop as Input_AuthUsersAdminOnVarPopOrderBy?),
-      if (varSamp != _undefined)
-        'varSamp': (varSamp as Input_AuthUsersAdminOnVarSampOrderBy?),
-      if (variance != _undefined)
-        'variance': (variance as Input_AuthUsersAdminOnVarianceOrderBy?),
+      if ($_and != _undefined)
+        '_and': ($_and as List<Input_AuthInvitationsBoolExp>?),
+      if ($_not != _undefined) '_not': ($_not as Input_AuthInvitationsBoolExp?),
+      if ($_or != _undefined)
+        '_or': ($_or as List<Input_AuthInvitationsBoolExp>?),
+      if (claimedAt != _undefined)
+        'claimedAt': (claimedAt as Input_TimestamptzComparisonExp?),
+      if (code != _undefined) 'code': (code as Input_StringComparisonExp?),
+      if (createdAt != _undefined)
+        'createdAt': (createdAt as Input_TimestamptzComparisonExp?),
+      if (createdBy != _undefined)
+        'createdBy': (createdBy as Input_UuidComparisonExp?),
+      if (creator != _undefined)
+        'creator': (creator as Input_AuthUsersDataBoolExp?),
+      if (expiresAt != _undefined)
+        'expiresAt': (expiresAt as Input_TimestamptzComparisonExp?),
+      if (id != _undefined) 'id': (id as Input_UuidComparisonExp?),
+      if (user != _undefined) 'user': (user as Input_AuthUsersDataBoolExp?),
+      if (userUid != _undefined)
+        'userUid': (userUid as Input_UuidComparisonExp?),
     }),
   );
 
-  CopyWith_Input_AuthUsersAdminOnAvgOrderBy<TRes> get avg {
-    final local$avg = _instance.avg;
-    return local$avg == null
-        ? CopyWith_Input_AuthUsersAdminOnAvgOrderBy.stub(_then(_instance))
-        : CopyWith_Input_AuthUsersAdminOnAvgOrderBy(
-            local$avg,
-            (e) => call(avg: e),
+  TRes $_and(
+    Iterable<Input_AuthInvitationsBoolExp>? Function(
+      Iterable<
+        CopyWith_Input_AuthInvitationsBoolExp<Input_AuthInvitationsBoolExp>
+      >?,
+    )
+    _fn,
+  ) => call(
+    $_and: _fn(
+      _instance.$_and?.map(
+        (e) => CopyWith_Input_AuthInvitationsBoolExp(e, (i) => i),
+      ),
+    )?.toList(),
+  );
+
+  CopyWith_Input_AuthInvitationsBoolExp<TRes> get $_not {
+    final local$$_not = _instance.$_not;
+    return local$$_not == null
+        ? CopyWith_Input_AuthInvitationsBoolExp.stub(_then(_instance))
+        : CopyWith_Input_AuthInvitationsBoolExp(
+            local$$_not,
+            (e) => call($_not: e),
           );
   }
 
-  CopyWith_Input_AuthUsersAdminOnMaxOrderBy<TRes> get max {
-    final local$max = _instance.max;
-    return local$max == null
-        ? CopyWith_Input_AuthUsersAdminOnMaxOrderBy.stub(_then(_instance))
-        : CopyWith_Input_AuthUsersAdminOnMaxOrderBy(
-            local$max,
-            (e) => call(max: e),
+  TRes $_or(
+    Iterable<Input_AuthInvitationsBoolExp>? Function(
+      Iterable<
+        CopyWith_Input_AuthInvitationsBoolExp<Input_AuthInvitationsBoolExp>
+      >?,
+    )
+    _fn,
+  ) => call(
+    $_or: _fn(
+      _instance.$_or?.map(
+        (e) => CopyWith_Input_AuthInvitationsBoolExp(e, (i) => i),
+      ),
+    )?.toList(),
+  );
+
+  CopyWith_Input_TimestamptzComparisonExp<TRes> get claimedAt {
+    final local$claimedAt = _instance.claimedAt;
+    return local$claimedAt == null
+        ? CopyWith_Input_TimestamptzComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_TimestamptzComparisonExp(
+            local$claimedAt,
+            (e) => call(claimedAt: e),
           );
   }
 
-  CopyWith_Input_AuthUsersAdminOnMinOrderBy<TRes> get min {
-    final local$min = _instance.min;
-    return local$min == null
-        ? CopyWith_Input_AuthUsersAdminOnMinOrderBy.stub(_then(_instance))
-        : CopyWith_Input_AuthUsersAdminOnMinOrderBy(
-            local$min,
-            (e) => call(min: e),
+  CopyWith_Input_StringComparisonExp<TRes> get code {
+    final local$code = _instance.code;
+    return local$code == null
+        ? CopyWith_Input_StringComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_StringComparisonExp(local$code, (e) => call(code: e));
+  }
+
+  CopyWith_Input_TimestamptzComparisonExp<TRes> get createdAt {
+    final local$createdAt = _instance.createdAt;
+    return local$createdAt == null
+        ? CopyWith_Input_TimestamptzComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_TimestamptzComparisonExp(
+            local$createdAt,
+            (e) => call(createdAt: e),
           );
   }
 
-  CopyWith_Input_AuthUsersAdminOnStddevOrderBy<TRes> get stddev {
-    final local$stddev = _instance.stddev;
-    return local$stddev == null
-        ? CopyWith_Input_AuthUsersAdminOnStddevOrderBy.stub(_then(_instance))
-        : CopyWith_Input_AuthUsersAdminOnStddevOrderBy(
-            local$stddev,
-            (e) => call(stddev: e),
+  CopyWith_Input_UuidComparisonExp<TRes> get createdBy {
+    final local$createdBy = _instance.createdBy;
+    return local$createdBy == null
+        ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_UuidComparisonExp(
+            local$createdBy,
+            (e) => call(createdBy: e),
           );
   }
 
-  CopyWith_Input_AuthUsersAdminOnStddevPopOrderBy<TRes> get stddevPop {
-    final local$stddevPop = _instance.stddevPop;
-    return local$stddevPop == null
-        ? CopyWith_Input_AuthUsersAdminOnStddevPopOrderBy.stub(_then(_instance))
-        : CopyWith_Input_AuthUsersAdminOnStddevPopOrderBy(
-            local$stddevPop,
-            (e) => call(stddevPop: e),
+  CopyWith_Input_AuthUsersDataBoolExp<TRes> get creator {
+    final local$creator = _instance.creator;
+    return local$creator == null
+        ? CopyWith_Input_AuthUsersDataBoolExp.stub(_then(_instance))
+        : CopyWith_Input_AuthUsersDataBoolExp(
+            local$creator,
+            (e) => call(creator: e),
           );
   }
 
-  CopyWith_Input_AuthUsersAdminOnStddevSampOrderBy<TRes> get stddevSamp {
-    final local$stddevSamp = _instance.stddevSamp;
-    return local$stddevSamp == null
-        ? CopyWith_Input_AuthUsersAdminOnStddevSampOrderBy.stub(
-            _then(_instance),
-          )
-        : CopyWith_Input_AuthUsersAdminOnStddevSampOrderBy(
-            local$stddevSamp,
-            (e) => call(stddevSamp: e),
+  CopyWith_Input_TimestamptzComparisonExp<TRes> get expiresAt {
+    final local$expiresAt = _instance.expiresAt;
+    return local$expiresAt == null
+        ? CopyWith_Input_TimestamptzComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_TimestamptzComparisonExp(
+            local$expiresAt,
+            (e) => call(expiresAt: e),
           );
   }
 
-  CopyWith_Input_AuthUsersAdminOnSumOrderBy<TRes> get sum {
-    final local$sum = _instance.sum;
-    return local$sum == null
-        ? CopyWith_Input_AuthUsersAdminOnSumOrderBy.stub(_then(_instance))
-        : CopyWith_Input_AuthUsersAdminOnSumOrderBy(
-            local$sum,
-            (e) => call(sum: e),
-          );
+  CopyWith_Input_UuidComparisonExp<TRes> get id {
+    final local$id = _instance.id;
+    return local$id == null
+        ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_UuidComparisonExp(local$id, (e) => call(id: e));
   }
 
-  CopyWith_Input_AuthUsersAdminOnVarPopOrderBy<TRes> get varPop {
-    final local$varPop = _instance.varPop;
-    return local$varPop == null
-        ? CopyWith_Input_AuthUsersAdminOnVarPopOrderBy.stub(_then(_instance))
-        : CopyWith_Input_AuthUsersAdminOnVarPopOrderBy(
-            local$varPop,
-            (e) => call(varPop: e),
-          );
+  CopyWith_Input_AuthUsersDataBoolExp<TRes> get user {
+    final local$user = _instance.user;
+    return local$user == null
+        ? CopyWith_Input_AuthUsersDataBoolExp.stub(_then(_instance))
+        : CopyWith_Input_AuthUsersDataBoolExp(local$user, (e) => call(user: e));
   }
 
-  CopyWith_Input_AuthUsersAdminOnVarSampOrderBy<TRes> get varSamp {
-    final local$varSamp = _instance.varSamp;
-    return local$varSamp == null
-        ? CopyWith_Input_AuthUsersAdminOnVarSampOrderBy.stub(_then(_instance))
-        : CopyWith_Input_AuthUsersAdminOnVarSampOrderBy(
-            local$varSamp,
-            (e) => call(varSamp: e),
-          );
-  }
-
-  CopyWith_Input_AuthUsersAdminOnVarianceOrderBy<TRes> get variance {
-    final local$variance = _instance.variance;
-    return local$variance == null
-        ? CopyWith_Input_AuthUsersAdminOnVarianceOrderBy.stub(_then(_instance))
-        : CopyWith_Input_AuthUsersAdminOnVarianceOrderBy(
-            local$variance,
-            (e) => call(variance: e),
+  CopyWith_Input_UuidComparisonExp<TRes> get userUid {
+    final local$userUid = _instance.userUid;
+    return local$userUid == null
+        ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_UuidComparisonExp(
+            local$userUid,
+            (e) => call(userUid: e),
           );
   }
 }
 
-class _CopyWithStubImpl_Input_AuthUsersAdminOnAggregateOrderBy<TRes>
-    implements CopyWith_Input_AuthUsersAdminOnAggregateOrderBy<TRes> {
-  _CopyWithStubImpl_Input_AuthUsersAdminOnAggregateOrderBy(this._res);
+class _CopyWithStubImpl_Input_AuthInvitationsBoolExp<TRes>
+    implements CopyWith_Input_AuthInvitationsBoolExp<TRes> {
+  _CopyWithStubImpl_Input_AuthInvitationsBoolExp(this._res);
 
   TRes _res;
 
   call({
-    Input_AuthUsersAdminOnAvgOrderBy? avg,
-    Enum_OrderBy? count,
-    Input_AuthUsersAdminOnMaxOrderBy? max,
-    Input_AuthUsersAdminOnMinOrderBy? min,
-    Input_AuthUsersAdminOnStddevOrderBy? stddev,
-    Input_AuthUsersAdminOnStddevPopOrderBy? stddevPop,
-    Input_AuthUsersAdminOnStddevSampOrderBy? stddevSamp,
-    Input_AuthUsersAdminOnSumOrderBy? sum,
-    Input_AuthUsersAdminOnVarPopOrderBy? varPop,
-    Input_AuthUsersAdminOnVarSampOrderBy? varSamp,
-    Input_AuthUsersAdminOnVarianceOrderBy? variance,
+    List<Input_AuthInvitationsBoolExp>? $_and,
+    Input_AuthInvitationsBoolExp? $_not,
+    List<Input_AuthInvitationsBoolExp>? $_or,
+    Input_TimestamptzComparisonExp? claimedAt,
+    Input_StringComparisonExp? code,
+    Input_TimestamptzComparisonExp? createdAt,
+    Input_UuidComparisonExp? createdBy,
+    Input_AuthUsersDataBoolExp? creator,
+    Input_TimestamptzComparisonExp? expiresAt,
+    Input_UuidComparisonExp? id,
+    Input_AuthUsersDataBoolExp? user,
+    Input_UuidComparisonExp? userUid,
   }) => _res;
 
-  CopyWith_Input_AuthUsersAdminOnAvgOrderBy<TRes> get avg =>
-      CopyWith_Input_AuthUsersAdminOnAvgOrderBy.stub(_res);
+  $_and(_fn) => _res;
 
-  CopyWith_Input_AuthUsersAdminOnMaxOrderBy<TRes> get max =>
-      CopyWith_Input_AuthUsersAdminOnMaxOrderBy.stub(_res);
+  CopyWith_Input_AuthInvitationsBoolExp<TRes> get $_not =>
+      CopyWith_Input_AuthInvitationsBoolExp.stub(_res);
 
-  CopyWith_Input_AuthUsersAdminOnMinOrderBy<TRes> get min =>
-      CopyWith_Input_AuthUsersAdminOnMinOrderBy.stub(_res);
+  $_or(_fn) => _res;
 
-  CopyWith_Input_AuthUsersAdminOnStddevOrderBy<TRes> get stddev =>
-      CopyWith_Input_AuthUsersAdminOnStddevOrderBy.stub(_res);
+  CopyWith_Input_TimestamptzComparisonExp<TRes> get claimedAt =>
+      CopyWith_Input_TimestamptzComparisonExp.stub(_res);
 
-  CopyWith_Input_AuthUsersAdminOnStddevPopOrderBy<TRes> get stddevPop =>
-      CopyWith_Input_AuthUsersAdminOnStddevPopOrderBy.stub(_res);
+  CopyWith_Input_StringComparisonExp<TRes> get code =>
+      CopyWith_Input_StringComparisonExp.stub(_res);
 
-  CopyWith_Input_AuthUsersAdminOnStddevSampOrderBy<TRes> get stddevSamp =>
-      CopyWith_Input_AuthUsersAdminOnStddevSampOrderBy.stub(_res);
+  CopyWith_Input_TimestamptzComparisonExp<TRes> get createdAt =>
+      CopyWith_Input_TimestamptzComparisonExp.stub(_res);
 
-  CopyWith_Input_AuthUsersAdminOnSumOrderBy<TRes> get sum =>
-      CopyWith_Input_AuthUsersAdminOnSumOrderBy.stub(_res);
+  CopyWith_Input_UuidComparisonExp<TRes> get createdBy =>
+      CopyWith_Input_UuidComparisonExp.stub(_res);
 
-  CopyWith_Input_AuthUsersAdminOnVarPopOrderBy<TRes> get varPop =>
-      CopyWith_Input_AuthUsersAdminOnVarPopOrderBy.stub(_res);
+  CopyWith_Input_AuthUsersDataBoolExp<TRes> get creator =>
+      CopyWith_Input_AuthUsersDataBoolExp.stub(_res);
 
-  CopyWith_Input_AuthUsersAdminOnVarSampOrderBy<TRes> get varSamp =>
-      CopyWith_Input_AuthUsersAdminOnVarSampOrderBy.stub(_res);
+  CopyWith_Input_TimestamptzComparisonExp<TRes> get expiresAt =>
+      CopyWith_Input_TimestamptzComparisonExp.stub(_res);
 
-  CopyWith_Input_AuthUsersAdminOnVarianceOrderBy<TRes> get variance =>
-      CopyWith_Input_AuthUsersAdminOnVarianceOrderBy.stub(_res);
+  CopyWith_Input_UuidComparisonExp<TRes> get id =>
+      CopyWith_Input_UuidComparisonExp.stub(_res);
+
+  CopyWith_Input_AuthUsersDataBoolExp<TRes> get user =>
+      CopyWith_Input_AuthUsersDataBoolExp.stub(_res);
+
+  CopyWith_Input_UuidComparisonExp<TRes> get userUid =>
+      CopyWith_Input_UuidComparisonExp.stub(_res);
 }
 
-class Input_AuthUsersAdminOnArrRelInsertInput {
-  factory Input_AuthUsersAdminOnArrRelInsertInput({
-    required List<Input_AuthUsersAdminOnInsertInput> data,
-    Input_AuthUsersAdminOnOnConflict? onConflict,
-  }) => Input_AuthUsersAdminOnArrRelInsertInput._({
-    r'data': data,
-    if (onConflict != null) r'onConflict': onConflict,
+class Input_AuthInvitationsInsertInput {
+  factory Input_AuthInvitationsInsertInput({
+    Input_AuthUsersDataObjRelInsertInput? creator,
+    DateTime? expiresAt,
+    Input_AuthUsersDataObjRelInsertInput? user,
+    UuidValue? userUid,
+  }) => Input_AuthInvitationsInsertInput._({
+    if (creator != null) r'creator': creator,
+    if (expiresAt != null) r'expiresAt': expiresAt,
+    if (user != null) r'user': user,
+    if (userUid != null) r'userUid': userUid,
   });
 
-  Input_AuthUsersAdminOnArrRelInsertInput._(this._$data);
+  Input_AuthInvitationsInsertInput._(this._$data);
 
-  factory Input_AuthUsersAdminOnArrRelInsertInput.fromJson(
-    Map<String, dynamic> data,
-  ) {
+  factory Input_AuthInvitationsInsertInput.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
-    final l$data = data['data'];
-    result$data['data'] = (l$data as List<dynamic>)
-        .map(
-          (e) => Input_AuthUsersAdminOnInsertInput.fromJson(
-            (e as Map<String, dynamic>),
-          ),
-        )
-        .toList();
-    if (data.containsKey('onConflict')) {
-      final l$onConflict = data['onConflict'];
-      result$data['onConflict'] = l$onConflict == null
+    if (data.containsKey('creator')) {
+      final l$creator = data['creator'];
+      result$data['creator'] = l$creator == null
           ? null
-          : Input_AuthUsersAdminOnOnConflict.fromJson(
-              (l$onConflict as Map<String, dynamic>),
+          : Input_AuthUsersDataObjRelInsertInput.fromJson(
+              (l$creator as Map<String, dynamic>),
             );
     }
-    return Input_AuthUsersAdminOnArrRelInsertInput._(result$data);
+    if (data.containsKey('expiresAt')) {
+      final l$expiresAt = data['expiresAt'];
+      result$data['expiresAt'] = l$expiresAt == null
+          ? null
+          : tstzFromString(l$expiresAt);
+    }
+    if (data.containsKey('user')) {
+      final l$user = data['user'];
+      result$data['user'] = l$user == null
+          ? null
+          : Input_AuthUsersDataObjRelInsertInput.fromJson(
+              (l$user as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('userUid')) {
+      final l$userUid = data['userUid'];
+      result$data['userUid'] = l$userUid == null
+          ? null
+          : stringToUuid(l$userUid);
+    }
+    return Input_AuthInvitationsInsertInput._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
-  List<Input_AuthUsersAdminOnInsertInput> get data =>
-      (_$data['data'] as List<Input_AuthUsersAdminOnInsertInput>);
+  Input_AuthUsersDataObjRelInsertInput? get creator =>
+      (_$data['creator'] as Input_AuthUsersDataObjRelInsertInput?);
 
-  Input_AuthUsersAdminOnOnConflict? get onConflict =>
-      (_$data['onConflict'] as Input_AuthUsersAdminOnOnConflict?);
+  DateTime? get expiresAt => (_$data['expiresAt'] as DateTime?);
+
+  Input_AuthUsersDataObjRelInsertInput? get user =>
+      (_$data['user'] as Input_AuthUsersDataObjRelInsertInput?);
+
+  UuidValue? get userUid => (_$data['userUid'] as UuidValue?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
-    final l$data = data;
-    result$data['data'] = l$data.map((e) => e.toJson()).toList();
-    if (_$data.containsKey('onConflict')) {
-      final l$onConflict = onConflict;
-      result$data['onConflict'] = l$onConflict?.toJson();
+    if (_$data.containsKey('creator')) {
+      final l$creator = creator;
+      result$data['creator'] = l$creator?.toJson();
+    }
+    if (_$data.containsKey('expiresAt')) {
+      final l$expiresAt = expiresAt;
+      result$data['expiresAt'] = l$expiresAt == null
+          ? null
+          : tstzToString(l$expiresAt);
+    }
+    if (_$data.containsKey('user')) {
+      final l$user = user;
+      result$data['user'] = l$user?.toJson();
+    }
+    if (_$data.containsKey('userUid')) {
+      final l$userUid = userUid;
+      result$data['userUid'] = l$userUid == null
+          ? null
+          : uuidToString(l$userUid);
     }
     return result$data;
   }
 
-  CopyWith_Input_AuthUsersAdminOnArrRelInsertInput<
-    Input_AuthUsersAdminOnArrRelInsertInput
-  >
-  get copyWith =>
-      CopyWith_Input_AuthUsersAdminOnArrRelInsertInput(this, (i) => i);
+  CopyWith_Input_AuthInvitationsInsertInput<Input_AuthInvitationsInsertInput>
+  get copyWith => CopyWith_Input_AuthInvitationsInsertInput(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Input_AuthUsersAdminOnArrRelInsertInput ||
+    if (other is! Input_AuthInvitationsInsertInput ||
         runtimeType != other.runtimeType) {
       return false;
     }
-    final l$data = data;
-    final lOther$data = other.data;
-    if (l$data.length != lOther$data.length) {
+    final l$creator = creator;
+    final lOther$creator = other.creator;
+    if (_$data.containsKey('creator') != other._$data.containsKey('creator')) {
       return false;
     }
-    for (int i = 0; i < l$data.length; i++) {
-      final l$data$entry = l$data[i];
-      final lOther$data$entry = lOther$data[i];
-      if (l$data$entry != lOther$data$entry) {
-        return false;
-      }
-    }
-    final l$onConflict = onConflict;
-    final lOther$onConflict = other.onConflict;
-    if (_$data.containsKey('onConflict') !=
-        other._$data.containsKey('onConflict')) {
+    if (l$creator != lOther$creator) {
       return false;
     }
-    if (l$onConflict != lOther$onConflict) {
+    final l$expiresAt = expiresAt;
+    final lOther$expiresAt = other.expiresAt;
+    if (_$data.containsKey('expiresAt') !=
+        other._$data.containsKey('expiresAt')) {
+      return false;
+    }
+    if (l$expiresAt != lOther$expiresAt) {
+      return false;
+    }
+    final l$user = user;
+    final lOther$user = other.user;
+    if (_$data.containsKey('user') != other._$data.containsKey('user')) {
+      return false;
+    }
+    if (l$user != lOther$user) {
+      return false;
+    }
+    final l$userUid = userUid;
+    final lOther$userUid = other.userUid;
+    if (_$data.containsKey('userUid') != other._$data.containsKey('userUid')) {
+      return false;
+    }
+    if (l$userUid != lOther$userUid) {
       return false;
     }
     return true;
@@ -2607,11 +2745,15 @@ class Input_AuthUsersAdminOnArrRelInsertInput {
 
   @override
   int get hashCode {
-    final l$data = data;
-    final l$onConflict = onConflict;
+    final l$creator = creator;
+    final l$expiresAt = expiresAt;
+    final l$user = user;
+    final l$userUid = userUid;
     return Object.hashAll([
-      Object.hashAll(l$data.map((v) => v)),
-      _$data.containsKey('onConflict') ? l$onConflict : const {},
+      _$data.containsKey('creator') ? l$creator : const {},
+      _$data.containsKey('expiresAt') ? l$expiresAt : const {},
+      _$data.containsKey('user') ? l$user : const {},
+      _$data.containsKey('userUid') ? l$userUid : const {},
     ]);
   }
 }
