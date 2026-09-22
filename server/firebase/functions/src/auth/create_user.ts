@@ -1,5 +1,5 @@
-import { randomUUID } from "node:crypto";
 import { https } from "firebase-functions/v2";
+import { randomUUID } from "node:crypto";
 import * as z from "zod";
 import { assertUserCanOnboard } from "../common";
 import {
@@ -13,9 +13,9 @@ import { assertScopesWithinCaller } from "./scopes_within_caller";
 
 const AdminOnInput = z
   .object({
-    adminOnArea: z.string().uuid().optional(),
-    adminOnService: z.string().uuid().optional(),
-    adminOnGroup: z.string().uuid().optional(),
+    adminOnArea: z.uuid().optional(),
+    adminOnService: z.uuid().optional(),
+    adminOnGroup: z.uuid().optional(),
     serviceStudyYear: z.number().int().optional(),
     serviceGender: z.boolean().optional(),
     areaAllowEdit: z.boolean().optional(),
@@ -46,7 +46,7 @@ const AdminOnInput = z
   );
 
 const PersonInput = z.discriminatedUnion("kind", [
-  z.object({ kind: z.literal("existing"), id: z.string().uuid() }),
+  z.object({ kind: z.literal("existing"), id: z.uuid() }),
   z.object({
     kind: z.literal("new"),
     name: z.string().trim().min(1),
