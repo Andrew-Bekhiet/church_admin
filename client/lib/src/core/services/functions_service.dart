@@ -147,6 +147,14 @@ class FunctionsService {
     await httpsCallable('deleteMyAccount').call();
   }
 
+  Future<String> createUser(CreateUserRequest request) async {
+    final result = await httpsCallable(
+      'createUser',
+    ).call(request.toJson());
+
+    return result.data['uid'] as String;
+  }
+
   Future<String> exportData({
     List<String> areasIds = const [],
     List<String> servicesIds = const [],
