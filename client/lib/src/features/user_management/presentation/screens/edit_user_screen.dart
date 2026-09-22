@@ -17,7 +17,9 @@ class EditUserScreen extends StatefulWidget {
 
 class _EditUserScreenState extends State<EditUserScreen> {
   late final UserFormCubit _cubit = switch (widget.intent) {
-    CreateUser() => CreateUserCubit(initial: const UserDraft.empty()),
+    CreateUser() => CreateUserCubit(
+      initial: UserDraft.forNewUser(DateTime.now()),
+    ),
     UpdateUser(:final user) => EditUserCubit(user: user),
   };
 

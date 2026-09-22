@@ -44,6 +44,20 @@ void main() {
     });
   });
 
+  group('UserDraft.forNewUser', () {
+    test('a new user starts approved with a default-validity invitation', () {
+      final now = DateTime(2026, 9, 22);
+
+      final draft = UserDraft.forNewUser(now);
+
+      expect(draft.permissions.approved, isTrue);
+      expect(
+        draft.invitation,
+        InvitationRequest(InvitationRequest.defaultExpiry(now)),
+      );
+    });
+  });
+
   group('UserDraft.isValid', () {
     test('a draft with an empty name is not valid', () {
       final draft = UserDraft(

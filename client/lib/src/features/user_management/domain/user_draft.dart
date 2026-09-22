@@ -46,6 +46,11 @@ class UserDraft with Equatable {
       adminOn = const [],
       invitation = const NoInvitation();
 
+  factory UserDraft.forNewUser(DateTime now) =>
+      const UserDraft.empty().copyWith(
+        invitation: InvitationRequest(InvitationRequest.defaultExpiry(now)),
+      );
+
   factory UserDraft.fromUser(User user) => UserDraft(
     name: user.name,
     email: user.email ?? '',
