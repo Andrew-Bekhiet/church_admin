@@ -39,8 +39,10 @@ class EditUserForm extends StatelessWidget {
           cubit: cubit,
         ),
         const Divider(thickness: 1),
-        UserInvitationField(invitation: draft.invitation, cubit: cubit),
-        const Divider(thickness: 1),
+        if (existingUser?.authId == null) ...[
+          UserInvitationField(invitation: draft.invitation, cubit: cubit),
+          const Divider(thickness: 1),
+        ],
         PermissionCheckWidget(
           permission: UserPermission.approved,
           permissions: draft.permissions,
