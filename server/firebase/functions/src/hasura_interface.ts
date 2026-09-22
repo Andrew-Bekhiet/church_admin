@@ -1,6 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import { https } from "firebase-functions/v1";
-import { AdminOnEntry } from "./auth/scopes_within_caller";
+import { AdminOnEntry } from "./auth/caller_manages_scopes";
 import { hasuraAdminSecret, hasuraServer } from "./secrets";
 
 export const publicPhotoTables = [

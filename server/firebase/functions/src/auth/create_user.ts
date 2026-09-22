@@ -9,7 +9,7 @@ import {
   insertUserWithPermissionsAndAdminOn,
 } from "../hasura_interface";
 import { hasuraAdminSecret } from "../secrets";
-import { assertScopesWithinCaller } from "./scopes_within_caller";
+import { assertCallerManagesScopes } from "./caller_manages_scopes";
 
 const AdminOnInput = z
   .object({
@@ -99,7 +99,7 @@ export const createUser = https.onCall<z.infer<typeof CreateUserRequest>>(
     );
 
     if (!permissions.includes("manageAllUsers")) {
-      assertScopesWithinCaller(adminOn, requestData.data.adminOn);
+      assertCallerManagesScopes(adminOn, requestData.data.adminOn);
     }
 
     const { person } = requestData.data;
