@@ -102,7 +102,7 @@ export const createUser = https.onCall<z.infer<typeof CreateUserRequest>>(
       assertCallerManagesScopes(adminOn, requestData.data.adminOn);
     }
 
-    const { person } = requestData.data;
+    const { person, invitation } = requestData.data;
 
     const uid = randomUUID();
     let createdUid: string | null = null;
@@ -119,7 +119,7 @@ export const createUser = https.onCall<z.infer<typeof CreateUserRequest>>(
           ? { name: person.name, gender: person.gender }
           : null,
         existingPersonId: person.kind === "existing" ? person.id : null,
-        invitationExpiresAt: requestData.data.invitation?.expiresAt ?? null,
+        invitationExpiresAt: invitation?.expiresAt ?? null,
       });
       createdUid = created.uid;
 
