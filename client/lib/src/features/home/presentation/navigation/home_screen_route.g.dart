@@ -325,16 +325,13 @@ mixin $ViewUserRoute on GoRouteData {
 }
 
 mixin $EditUserRoute on GoRouteData {
-  static EditUserRoute _fromState(GoRouterState state) => EditUserRoute(
-    uid: state.uri.queryParameters['uid']!,
-    $extra: state.extra as User,
-  );
+  static EditUserRoute _fromState(GoRouterState state) =>
+      EditUserRoute($extra: state.extra as UserEditIntent);
 
   EditUserRoute get _self => this as EditUserRoute;
 
   @override
-  String get location =>
-      GoRouteData.$location('/edit_user', queryParams: {'uid': _self.uid});
+  String get location => GoRouteData.$location('/edit_user');
 
   @override
   void go(BuildContext context) => context.go(location, extra: _self.$extra);

@@ -1,49 +1,56 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/features/data_entry/presentation/screens/edit_object_data/permission_check_widget.dart';
+import 'package:church_admin/src/features/user_management/presentation/widgets/user_identity_fields.dart';
+import 'package:church_admin/src/features/user_management/presentation/widgets/user_invitation_field.dart';
+import 'package:church_admin/src/features/user_management/presentation/widgets/user_person_link_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 
 class EditUserForm extends StatelessWidget {
-  final String email;
-  final PermissionsSet permissions;
-  final List<AdminOnData> adminOn;
+  final UserEditIntent intent;
+  final UserDraft draft;
 
-  final void Function(UserPermission) onTogglePermission;
-  final void Function(List<AdminOnData>) onAdminOnChanged;
-
-  const EditUserForm({
-    required this.email,
-    required this.permissions,
-    required this.adminOn,
-    required this.onTogglePermission,
-    required this.onAdminOnChanged,
-    super.key,
-  });
+  const EditUserForm({required this.intent, required this.draft, super.key});
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final cubit = context.read<UserFormCubit>();
+    final existingUser = switch (intent) {
+      UpdateUser(:final user) => user,
+      CreateUser() => null,
+    };
 
     return Column(
       children: [
-        CopiablePropertyWidget(
-          'البريد الإكتروني',
-          email,
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          child: UserPersonLinkField(
+            person: draft.person,
+            allowCreatingNewPerson: intent is CreateUser,
+            cubit: cubit,
+          ),
         ),
+        const Divider(thickness: 1),
+        UserIdentityFields(
+          draft: draft,
+          existingUser: existingUser,
+          cubit: cubit,
+        ),
+        const Divider(thickness: 1),
+        UserInvitationField(invitation: draft.invitation, cubit: cubit),
         const Divider(thickness: 1),
         PermissionCheckWidget(
           permission: UserPermission.approved,
-          permissions: permissions,
-          onToggle: onTogglePermission,
+          permissions: draft.permissions,
+          onToggle: cubit.togglePermission,
           subtitleText: 'يجب تفعيل الحساب للسماح للمستخدم بالدخول',
         ),
         const SizedBox(height: 16),
         ListTile(
           leading: const Icon(Symbols.shield),
-          title: Text(
-            'صلاحيات عامة',
-            style: theme.textTheme.titleMedium,
-          ),
+          title: Text('صلاحيات عامة', style: theme.textTheme.titleMedium),
         ),
         Card.outlined(
           color: theme.colorScheme.surfaceContainerLow,
@@ -57,8 +64,8 @@ class EditUserForm extends StatelessWidget {
                 .map(
                   (p) => PermissionCheckWidget(
                     permission: p,
-                    permissions: permissions,
-                    onToggle: onTogglePermission,
+                    permissions: draft.permissions,
+                    onToggle: cubit.togglePermission,
                     subtitleText: p.label,
                   ),
                 )
@@ -67,15 +74,13 @@ class EditUserForm extends StatelessWidget {
         ),
         ListTile(
           leading: const Icon(Symbols.admin_panel_settings),
-          title: Text(
-            'أمين على',
-            style: theme.textTheme.titleMedium,
-          ),
+          title: Text('أمين على', style: theme.textTheme.titleMedium),
         ),
         EditAdminOnDataWidget(
-          adminOn: adminOn,
-          onAdminOnChanged: onAdminOnChanged,
+          adminOn: draft.adminOn,
+          onAdminOnChanged: cubit.setAdminOn,
         ),
+        const SizedBox(height: 80),
       ],
     );
   }

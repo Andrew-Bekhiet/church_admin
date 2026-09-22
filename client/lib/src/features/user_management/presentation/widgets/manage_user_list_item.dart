@@ -1,4 +1,5 @@
 import 'package:church_admin/church_admin.dart';
+import 'package:church_admin/src/features/user_management/presentation/widgets/user_account_status_indicators.dart';
 import 'package:flutter/material.dart';
 
 class ManageUserListItem extends StatelessWidget {
@@ -13,6 +14,7 @@ class ManageUserListItem extends StatelessWidget {
 
     return ViewableObjectWidget(
       user,
+      trailing: UserAccountStatusIndicators(user),
       subtitle: onlyApproved
           ? null
           : Row(

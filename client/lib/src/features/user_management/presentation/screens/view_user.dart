@@ -1,4 +1,5 @@
 import 'package:church_admin/church_admin.dart';
+import 'package:church_admin/src/features/user_management/presentation/widgets/user_invitation_section.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 
@@ -42,6 +43,19 @@ class _ViewUserState extends State<ViewUser> {
 
         final userInfoWidgets = [
           const Divider(thickness: 1),
+          if (user.person case final person?)
+            ListTile(
+              leading: const Icon(Symbols.person),
+              title: const Text('عرض بيانات الشخص المرتبط'),
+              onTap: () => ViewPersonRoute(
+                id: person.id,
+                $extra: person,
+              ).push(context),
+            ),
+          if (user.invitation case final invitation?) ...[
+            const Divider(thickness: 1),
+            UserInvitationSection(invitation),
+          ],
           if (permissions.permissions.isEmpty)
             const ListTile(
               title: Text('الصلاحيات'),
@@ -140,7 +154,7 @@ class _ViewUserState extends State<ViewUser> {
       editButtonBuilder: (context, user) => IconButton(
         tooltip: 'تعديل',
         onPressed: () =>
-            EditUserRoute(uid: widget.userId, $extra: user).push(context),
+            EditUserRoute($extra: UpdateUser(user: user)).push(context),
         icon: const Icon(Symbols.edit),
       ),
       notFoundBuilder: (context) => Center(

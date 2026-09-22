@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:rxdart/rxdart.dart';
 
 class ManageUsersScreen extends StatefulWidget {
@@ -64,11 +65,23 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
             };
           },
         ),
-
-        // TODO: implement adding new user data, importing a user
-        // and inviting a user with inviation code
+        floatingActionButton: _canCreateUsers()
+            ? FloatingActionButton.extended(
+                icon: const Icon(Symbols.person_add),
+                label: const Text('إضافة خادم'),
+                onPressed: () =>
+                    const EditUserRoute($extra: CreateUser()).push(context),
+              )
+            : null,
       ),
     );
+  }
+
+  bool _canCreateUsers() {
+    final permissions = AuthBloc.I.currentUserData?.permissions;
+
+    return (permissions?.manageAllUsers ?? false) ||
+        (permissions?.onboardUsers ?? false);
   }
 
   @override
