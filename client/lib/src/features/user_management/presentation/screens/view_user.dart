@@ -46,7 +46,7 @@ class _ViewUserState extends State<ViewUser> {
           if (user.person case final person?)
             UserSectionCard(
               icon: Symbols.person,
-              title: 'الشخص المرتبط',
+              title: 'المخدوم المرتبط',
               child: ViewableObjectWidget(
                 person,
                 onTap: (person) => ViewPersonRoute(

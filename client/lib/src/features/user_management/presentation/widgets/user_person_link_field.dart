@@ -25,8 +25,8 @@ class UserPersonLinkField extends StatelessWidget {
             padding: const EdgeInsetsDirectional.only(bottom: 8),
             child: SegmentedButton<bool>(
               segments: const [
-                ButtonSegment(value: false, label: Text('ربط بشخص موجود')),
-                ButtonSegment(value: true, label: Text('إنشاء شخص جديد')),
+                ButtonSegment(value: false, label: Text('ربط بمخدوم موجود')),
+                ButtonSegment(value: true, label: Text('إنشاء مخدوم جديد')),
               ],
               selected: {isCreatingNewPerson},
               onSelectionChanged: (selection) => _switchMode(selection.first),
@@ -46,7 +46,7 @@ class UserPersonLinkField extends StatelessWidget {
               NoPersonSelected() || CreateNewPerson() => null,
             },
             nullable: false,
-            dialogFieldLabel: 'الشخص',
+            dialogFieldLabel: 'المخدوم',
             listController: (search) => ViewableObjectListController(
               objectsPaginatableStream: DatabaseService.I.persons.streamAll(
                 searchQuery: search,

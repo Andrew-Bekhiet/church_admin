@@ -119,7 +119,7 @@ void main() {
       const draft = UserDraft(
         name: 'مينا',
         email: '',
-        person: CreateNewPerson(name: 'شخص جديد', gender: true),
+        person: CreateNewPerson(name: 'مخدوم جديد', gender: true),
         permissions: PermissionsSet.empty(),
         adminOn: [],
         invitation: NoInvitation(),

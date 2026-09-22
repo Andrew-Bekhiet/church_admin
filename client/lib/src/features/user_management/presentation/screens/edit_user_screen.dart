@@ -87,9 +87,9 @@ class _EditUserScreenState extends State<EditUserScreen> {
 
   String _messageFor(Object error) => switch (error) {
     UserFormValidationError() => 'برجاء إكمال البيانات المطلوبة',
-    PersonAlreadyLinkedException() => 'هذا الشخص مرتبط بحساب آخر بالفعل',
+    PersonAlreadyLinkedException() => 'هذا المخدوم مرتبط بحساب آخر بالفعل',
     FirebaseFunctionsException(message: 'user/person-already-linked') =>
-      'هذا الشخص مرتبط بحساب آخر بالفعل',
+      'هذا المخدوم مرتبط بحساب آخر بالفعل',
     FirebaseFunctionsException(message: 'user/email-taken') =>
       'البريد الإلكتروني مستخدم بحساب آخر',
     FirebaseFunctionsException(message: 'user/name-taken') =>

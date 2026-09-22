@@ -28,7 +28,7 @@ class EditUserForm extends StatelessWidget {
       children: [
         UserSectionCard(
           icon: Symbols.person,
-          title: 'الشخص',
+          title: 'المخدوم',
           child: Padding(
             padding: const EdgeInsets.all(12),
             child: UserPersonLinkField(
