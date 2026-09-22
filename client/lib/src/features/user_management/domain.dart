@@ -1,5 +1,6 @@
 export 'domain/create_user_request.dart';
 export 'domain/invitation_choice.dart';
+export 'domain/person_already_linked_exception.dart';
 export 'domain/person_link.dart';
 export 'domain/user_admin_group.dart';
 export 'domain/user_admin_group_kind.dart';

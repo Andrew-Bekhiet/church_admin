@@ -7,6 +7,15 @@ class UserInvitationExpiryTile extends StatelessWidget {
   final DateTime lastDate;
   final ValueChanged<DateTime> onExpiryChanged;
 
+  bool get _canExtend => !lastDate.isBefore(firstDate);
+
+  DateTime get _initialDate {
+    if (expiresAt.isBefore(firstDate)) return firstDate;
+    if (expiresAt.isAfter(lastDate)) return lastDate;
+
+    return expiresAt;
+  }
+
   const UserInvitationExpiryTile({
     required this.expiresAt,
     required this.firstDate,
@@ -20,16 +29,19 @@ class UserInvitationExpiryTile extends StatelessWidget {
     return ListTile(
       title: const Text('تاريخ انتهاء الدعوة'),
       subtitle: Text(DateFormat('yyyy/M/d').format(expiresAt)),
-      onTap: () async {
-        final picked = await showDatePicker(
-          context: context,
-          initialDate: expiresAt,
-          firstDate: firstDate,
-          lastDate: lastDate,
-        );
-
-        if (picked != null) onExpiryChanged(picked);
-      },
+      enabled: _canExtend,
+      onTap: _canExtend ? () => _pickExpiry(context) : null,
     );
+  }
+
+  Future<void> _pickExpiry(BuildContext context) async {
+    final picked = await showDatePicker(
+      context: context,
+      initialDate: _initialDate,
+      firstDate: firstDate,
+      lastDate: lastDate,
+    );
+
+    if (picked != null) onExpiryChanged(picked);
   }
 }
