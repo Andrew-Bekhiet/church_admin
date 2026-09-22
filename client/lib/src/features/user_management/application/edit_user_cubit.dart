@@ -6,16 +6,19 @@ class EditUserCubit extends UserFormCubit {
   final UsersDAO _usersDao;
   final UserPermissionsDAO _permissionsDao;
   final InvitationsDAO _invitationsDao;
+  final AuthBloc _authBloc;
 
   EditUserCubit({
     required User user,
     UsersDAO? usersDao,
     UserPermissionsDAO? permissionsDao,
     InvitationsDAO? invitationsDao,
+    AuthBloc? authBloc,
   }) : _originalUser = user,
        _usersDao = usersDao ?? DatabaseService.I.users,
        _permissionsDao = permissionsDao ?? DatabaseService.I.userPermissions,
        _invitationsDao = invitationsDao ?? DatabaseService.I.invitations,
+       _authBloc = authBloc ?? AuthBloc.I,
        super(UserDraft.fromUser(user));
 
   @override
@@ -25,7 +28,7 @@ class EditUserCubit extends UserFormCubit {
       userId: _originalUser.uid,
       oldPermissions: _originalUser.permissions,
       newPermissions: draft.permissions.validated(),
-      newAdminOn: draft.adminOn,
+      newAdminOn: _restrictAdminOnToCallerScopes(draft.adminOn),
       oldAdminOn: _originalUser.adminOn ?? [],
     );
 
@@ -38,6 +41,33 @@ class EditUserCubit extends UserFormCubit {
     await _persistInvitation(draft);
 
     return _originalUser.uid;
+  }
+
+  List<AdminOnData> _restrictAdminOnToCallerScopes(
+    List<AdminOnData> newAdminOn,
+  ) {
+    final caller = _authBloc.currentUserData;
+    if (caller?.permissions.manageAllUsers ?? false) return newAdminOn;
+
+    final callerAdminOn = caller?.adminOn ?? [];
+
+    bool callerCanManage(AdminOnData data) => callerAdminOn.any(
+      (scope) =>
+          (data.area != null &&
+              scope.area?.id == data.area?.id &&
+              (scope.areaAdminOnUsers ?? false)) ||
+          (data.service != null &&
+              scope.service?.id == data.service?.id &&
+              (scope.serviceAdminOnUsers ?? false)) ||
+          (data.group != null &&
+              scope.group?.id == data.group?.id &&
+              (scope.groupAdminOnUsers ?? false)),
+    );
+
+    return [
+      ...(_originalUser.adminOn ?? []).where((a) => !callerCanManage(a)),
+      ...newAdminOn.where(callerCanManage),
+    ];
   }
 
   UserUpdate _buildUserUpdate(UserDraft draft) {
