@@ -148,9 +148,7 @@ class FunctionsService {
   }
 
   Future<String> createUser(CreateUserRequest request) async {
-    final result = await httpsCallable(
-      'createUser',
-    ).call(request.toJson());
+    final result = await httpsCallable('createUser').call(request.toJson());
 
     return result.data['uid'] as String;
   }
