@@ -32,7 +32,6 @@ class UserInvitationField extends StatelessWidget {
           ),
           if (invitation case InvitationRequest(:final expiresAt))
             UserInvitationExpiryTile(
-              code: null,
               expiresAt: expiresAt,
               firstDate: DateTime.now().add(const Duration(days: 1)),
               lastDate: InvitationRequest.maxExpiry(DateTime.now()),
@@ -49,8 +48,11 @@ class UserInvitationField extends StatelessWidget {
       ExistingInvitation(:final invitation) => Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          UserInvitationExpiryTile(
+          UserInvitationCodeTile(
             code: invitation.code,
+            caption: invitation.statusCaptionAt(DateTime.now()),
+          ),
+          UserInvitationExpiryTile(
             expiresAt: invitation.expiresAt,
             firstDate:
                 DateTime.now().isAfter(

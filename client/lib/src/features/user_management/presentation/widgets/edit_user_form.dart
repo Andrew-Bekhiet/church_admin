@@ -3,6 +3,7 @@ import 'package:church_admin/src/features/data_entry/presentation/screens/edit_o
 import 'package:church_admin/src/features/user_management/presentation/widgets/user_identity_fields.dart';
 import 'package:church_admin/src/features/user_management/presentation/widgets/user_invitation_field.dart';
 import 'package:church_admin/src/features/user_management/presentation/widgets/user_person_link_field.dart';
+import 'package:church_admin/src/features/user_management/presentation/widgets/user_section_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
@@ -23,43 +24,51 @@ class EditUserForm extends StatelessWidget {
     };
 
     return Column(
+      spacing: 8,
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8),
-          child: UserPersonLinkField(
-            person: draft.person,
-            allowCreatingNewPerson: intent is CreateUser,
-            cubit: cubit,
+        UserSectionCard(
+          icon: Symbols.person,
+          title: 'الشخص',
+          child: Padding(
+            padding: const EdgeInsets.all(12),
+            child: UserPersonLinkField(
+              person: draft.person,
+              allowCreatingNewPerson: intent is CreateUser,
+              cubit: cubit,
+            ),
           ),
         ),
-        const Divider(thickness: 1),
-        UserIdentityFields(
-          draft: draft,
-          existingUser: existingUser,
-          cubit: cubit,
-        ),
-        const Divider(thickness: 1),
-        if (existingUser?.authId == null) ...[
-          UserInvitationField(invitation: draft.invitation, cubit: cubit),
-          const Divider(thickness: 1),
-        ],
-        PermissionCheckWidget(
-          permission: UserPermission.approved,
-          permissions: draft.permissions,
-          onToggle: cubit.togglePermission,
-          subtitleText: 'يجب تفعيل الحساب للسماح للمستخدم بالدخول',
-        ),
-        const SizedBox(height: 16),
-        ListTile(
-          leading: const Icon(Symbols.shield),
-          title: Text('صلاحيات عامة', style: theme.textTheme.titleMedium),
-        ),
-        Card.outlined(
-          color: theme.colorScheme.surfaceContainerLow,
-          shape: RoundedRectangleBorder(
-            side: BorderSide(color: theme.colorScheme.outline),
-            borderRadius: BorderRadius.circular(16),
+        UserSectionCard(
+          icon: Symbols.account_circle,
+          title: 'الحساب',
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 12),
+                child: UserIdentityFields(
+                  draft: draft,
+                  existingUser: existingUser,
+                  cubit: cubit,
+                ),
+              ),
+              if (existingUser?.authId == null) ...[
+                const Divider(height: 1),
+                UserInvitationField(invitation: draft.invitation, cubit: cubit),
+              ],
+              const Divider(height: 1),
+              PermissionCheckWidget(
+                permission: UserPermission.approved,
+                permissions: draft.permissions,
+                onToggle: cubit.togglePermission,
+                subtitleText: 'يجب تفعيل الحساب للسماح للمستخدم بالدخول',
+              ),
+            ],
           ),
+        ),
+        UserSectionCard(
+          icon: Symbols.shield,
+          title: 'صلاحيات عامة',
           child: Column(
             children: UserPermission.values
                 .where((p) => p != UserPermission.approved)

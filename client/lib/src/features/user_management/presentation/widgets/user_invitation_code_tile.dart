@@ -3,38 +3,60 @@ import 'package:flutter/services.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 
 class UserInvitationCodeTile extends StatelessWidget {
-  final String? code;
+  final String code;
   final String caption;
-  final VoidCallback? onTap;
+  final VoidCallback? onShare;
 
   const UserInvitationCodeTile({
     required this.code,
     required this.caption,
-    this.onTap,
+    this.onShare,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     final textTheme = TextTheme.of(context);
+    final colorScheme = ColorScheme.of(context);
 
     return ListTile(
-      title: const Text('كود الدعوة'),
-      subtitle: Row(
+      title: Text('كود الدعوة', style: textTheme.labelMedium),
+      subtitle: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        spacing: 2,
         children: [
-          Expanded(child: Text(code ?? 'يتم إنشاؤه عند الحفظ')),
-          Text(caption, style: textTheme.labelSmall),
+          Text(
+            code,
+            textDirection: TextDirection.ltr,
+            style: textTheme.headlineSmall?.copyWith(
+              fontFeatures: const [FontFeature.tabularFigures()],
+              letterSpacing: 2,
+            ),
+          ),
+          Text(
+            caption,
+            style: textTheme.bodySmall?.copyWith(
+              color: colorScheme.onSurfaceVariant,
+            ),
+          ),
         ],
       ),
-      trailing: switch (code) {
-        final code? => IconButton(
-          icon: const Icon(Symbols.content_copy),
-          tooltip: 'نسخ',
-          onPressed: () => Clipboard.setData(ClipboardData(text: code)),
-        ),
-        null => null,
-      },
-      onTap: onTap,
+      trailing: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (onShare case final onShare?)
+            IconButton(
+              icon: const Icon(Symbols.share),
+              tooltip: 'مشاركة',
+              onPressed: onShare,
+            ),
+          IconButton(
+            icon: const Icon(Symbols.content_copy),
+            tooltip: 'نسخ',
+            onPressed: () => Clipboard.setData(ClipboardData(text: code)),
+          ),
+        ],
+      ),
     );
   }
 }

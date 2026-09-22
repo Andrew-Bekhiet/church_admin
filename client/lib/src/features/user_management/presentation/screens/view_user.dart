@@ -1,5 +1,6 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/src/features/user_management/presentation/widgets/user_invitation_section.dart';
+import 'package:church_admin/src/features/user_management/presentation/widgets/user_account_card.dart';
+import 'package:church_admin/src/features/user_management/presentation/widgets/user_section_card.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 
@@ -42,20 +43,18 @@ class _ViewUserState extends State<ViewUser> {
         final permissions = user.permissions;
 
         final userInfoWidgets = [
-          const Divider(thickness: 1),
           if (user.person case final person?)
-            ListTile(
-              leading: const Icon(Symbols.person),
-              title: const Text('عرض بيانات الشخص المرتبط'),
-              onTap: () => ViewPersonRoute(
-                id: person.id,
-                $extra: person,
-              ).push(context),
+            UserSectionCard(
+              icon: Symbols.person,
+              title: 'الشخص المرتبط',
+              child: ViewableObjectWidget(
+                person,
+                onTap: (person) => ViewPersonRoute(
+                  id: person.id,
+                  $extra: person,
+                ).push(context),
+              ),
             ),
-          if (user.invitation case final invitation?) ...[
-            const Divider(thickness: 1),
-            UserInvitationSection(invitation),
-          ],
           if (permissions.permissions.isEmpty)
             const ListTile(
               title: Text('الصلاحيات'),
@@ -112,10 +111,7 @@ class _ViewUserState extends State<ViewUser> {
         return SliverList(
           delegate: SliverChildListDelegate(
             [
-              CopiablePropertyWidget(
-                'البريد الاكتروني',
-                user.email,
-              ),
+              UserAccountCard(user),
               if (appUserPermissions.manageAllUsers && !isUserApproved) ...[
                 const ListTile(
                   leading: Icon(Symbols.person_off),
