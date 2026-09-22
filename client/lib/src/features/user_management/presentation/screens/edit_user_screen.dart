@@ -76,10 +76,12 @@ class _EditUserScreenState extends State<EditUserScreen> {
         if (widget.intent case CreateUser()) {
           unawaited(ViewUserRoute(uid: uid).push(context));
         }
+
       case UserFormEditing(error: final error?):
         ScaffoldMessenger.of(context)
           ..hideCurrentSnackBar()
           ..showSnackBar(SnackBar(content: Text(_messageFor(error))));
+
       case UserFormEditing() || UserFormSaving():
         return;
     }
