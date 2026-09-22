@@ -67,12 +67,14 @@ class EditUserCubit extends UserFormCubit {
           userUid: _originalUser.uid,
           expiresAt: expiresAt,
         );
+
       case ExistingInvitation(:final invitation)
           when invitation.expiresAt != _originalUser.invitation?.expiresAt:
         await _invitationsDao.updateInvitationExpiry(
           id: invitation.id,
           expiresAt: invitation.expiresAt,
         );
+
       case InvitationRequest() || ExistingInvitation() || NoInvitation():
         return;
     }

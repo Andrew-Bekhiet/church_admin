@@ -88,10 +88,12 @@ class EditAdminOnDataWidget extends StatelessWidget {
     final existingServices = adminOn.map((a) => a.service).nonNulls.toList();
     final existingGroups = adminOn.map((a) => a.group).nonNulls.toList();
 
-    final currentUserPermissions = AuthBloc.I.currentUserData?.permissions;
+    final currentUserData = AuthBloc.I.currentUserData;
+
+    final currentUserPermissions = currentUserData?.permissions;
     final restrictToCallerScopes =
         currentUserPermissions?.manageAllUsers != true;
-    final callerAdminOn = AuthBloc.I.currentUserData?.adminOn ?? [];
+    final callerAdminOn = currentUserData?.adminOn ?? [];
     final allowedAreas = callerAdminOn
         .where((a) => a.areaAdminOnUsers ?? false)
         .map((a) => a.area)
