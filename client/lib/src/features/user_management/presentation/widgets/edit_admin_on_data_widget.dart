@@ -88,6 +88,26 @@ class EditAdminOnDataWidget extends StatelessWidget {
     final existingServices = adminOn.map((a) => a.service).nonNulls.toList();
     final existingGroups = adminOn.map((a) => a.group).nonNulls.toList();
 
+    final currentUserPermissions = AuthBloc.I.currentUserData?.permissions;
+    final restrictToCallerScopes =
+        currentUserPermissions?.manageAllUsers != true;
+    final callerAdminOn = AuthBloc.I.currentUserData?.adminOn ?? [];
+    final allowedAreas = callerAdminOn
+        .where((a) => a.areaAdminOnUsers ?? false)
+        .map((a) => a.area)
+        .nonNulls
+        .toList();
+    final allowedServices = callerAdminOn
+        .where((a) => a.serviceAdminOnUsers ?? false)
+        .map((a) => a.service)
+        .nonNulls
+        .toList();
+    final allowedGroups = callerAdminOn
+        .where((a) => a.groupAdminOnUsers ?? false)
+        .map((a) => a.group)
+        .nonNulls
+        .toList();
+
     final areasSelectionController = SelectionController<Area>(
       equality: EqualityBy((a) => a.id),
       initialSelection: existingAreas,
@@ -144,6 +164,15 @@ class EditAdminOnDataWidget extends StatelessWidget {
                         objectsPaginatableStream: DatabaseService.I.areas
                             .streamAll(
                               searchQuery: search,
+                              where: restrictToCallerScopes
+                                  ? Stream.value([
+                                      Filter(
+                                        AreaFields().id,
+                                        MultiSelectOperator.anyOf,
+                                        allowedAreas,
+                                      ),
+                                    ])
+                                  : null,
                             ),
                       ),
                     ),
@@ -154,6 +183,15 @@ class EditAdminOnDataWidget extends StatelessWidget {
                         objectsPaginatableStream: DatabaseService.I.services
                             .streamAll(
                               searchQuery: search,
+                              where: restrictToCallerScopes
+                                  ? Stream.value([
+                                      Filter(
+                                        ServiceFields().id,
+                                        MultiSelectOperator.anyOf,
+                                        allowedServices,
+                                      ),
+                                    ])
+                                  : null,
                             ),
                       ),
                     ),
@@ -164,6 +202,15 @@ class EditAdminOnDataWidget extends StatelessWidget {
                         objectsPaginatableStream: DatabaseService.I.groups
                             .streamAll(
                               searchQuery: search,
+                              where: restrictToCallerScopes
+                                  ? Stream.value([
+                                      Filter(
+                                        GroupFields().id,
+                                        MultiSelectOperator.anyOf,
+                                        allowedGroups,
+                                      ),
+                                    ])
+                                  : null,
                             ),
                       ),
                     ),
