@@ -30,7 +30,11 @@ class UserInvitationExpiryTile extends StatelessWidget {
     return ListTile(
       title: const Text('تاريخ انتهاء الدعوة'),
       subtitle: Text(DateFormat.yMd('ar-EG').add_jm().format(expiresAt)),
-      trailing: const Icon(Symbols.edit_calendar),
+      trailing: IconButton(
+        icon: const Icon(Symbols.edit_calendar),
+        tooltip: 'تغيير تاريخ الانتهاء',
+        onPressed: _canExtend ? () => _pickExpiry(context) : null,
+      ),
       enabled: _canExtend,
       onTap: _canExtend ? () => _pickExpiry(context) : null,
     );
