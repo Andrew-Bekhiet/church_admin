@@ -33,14 +33,10 @@ class UserPersonLinkField extends StatelessWidget {
             ),
           ),
         if (person case CreateNewPerson(:final name, :final gender))
-          SegmentedButton<bool>(
-            segments: const [
-              ButtonSegment(value: true, label: Text('ذكر')),
-              ButtonSegment(value: false, label: Text('أنثى')),
-            ],
-            selected: {gender},
-            onSelectionChanged: (selection) => cubit.selectPerson(
-              CreateNewPerson(name: name, gender: selection.first),
+          GenderField(
+            initialValue: gender,
+            onChanged: (value) => cubit.selectPerson(
+              CreateNewPerson(name: name, gender: value ?? gender),
             ),
           )
         else

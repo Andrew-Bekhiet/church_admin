@@ -15,48 +15,38 @@ class UserIdentityFields extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final canEditName = draft.person is CreateNewPerson;
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        if (canEditName)
-          TextFormField(
-            initialValue: draft.name,
-            decoration: const InputDecoration(labelText: 'الاسم'),
-            onChanged: cubit.setName,
-          )
-        else
-          ListTile(
-            title: const Text('الاسم'),
-            subtitle: Text(
-              draft.name.isEmpty
-                  ? 'يتم أخذ الاسم من بيانات الشخص المرتبط'
-                  : draft.name,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        spacing: 8,
+        children: [
+          if (draft.person is CreateNewPerson)
+            TextFormField(
+              initialValue: draft.name,
+              decoration: const InputDecoration(labelText: 'الاسم'),
+              onChanged: cubit.setName,
             ),
-          ),
-        if (existingUser?.authId != null)
-          CopiablePropertyWidget('البريد الإلكتروني', draft.email)
-        else
-          TextFormField(
-            initialValue: draft.email,
-            keyboardType: TextInputType.emailAddress,
-            decoration: const InputDecoration(labelText: 'البريد الإلكتروني'),
-            onChanged: cubit.setEmail,
-          ),
-        if (existingUser?.authId == null &&
-            draft.email.isNotEmpty &&
-            FeatureFlagsRepository.I.enableAccountClaimingByEmail)
-          Padding(
-            padding: const EdgeInsetsDirectional.only(start: 16, end: 16),
-            child: Text(
+          if (existingUser?.authId != null)
+            CopiablePropertyWidget('البريد الإلكتروني', draft.email)
+          else
+            TextFormField(
+              initialValue: draft.email,
+              keyboardType: TextInputType.emailAddress,
+              decoration: const InputDecoration(labelText: 'البريد الإلكتروني'),
+              onChanged: cubit.setEmail,
+            ),
+          if (existingUser?.authId == null &&
+              draft.email.isNotEmpty &&
+              FeatureFlagsRepository.I.enableAccountClaimingByEmail)
+            Text(
               'سيتم ربط هذا الحساب تلقائياً بأول مستخدم يسجل ويؤكد هذا البريد الإلكتروني',
               style: TextTheme.of(context).bodySmall?.copyWith(
                 color: ColorScheme.of(context).onSurfaceVariant,
               ),
             ),
-          ),
-      ],
+        ],
+      ),
     );
   }
 }

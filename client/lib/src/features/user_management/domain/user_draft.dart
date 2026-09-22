@@ -42,7 +42,7 @@ class UserDraft with Equatable {
     : name = '',
       email = '',
       person = const NoPersonSelected(),
-      permissions = const PermissionsSet.empty(),
+      permissions = const PermissionsSet.fromSet({UserPermission.approved}),
       adminOn = const [],
       invitation = const NoInvitation();
 
