@@ -10,30 +10,33 @@ class UserAccountStatusIndicators extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = ColorScheme.of(context);
-    final invitation = user.invitation;
+    final now = DateTime.now();
 
-    return Row(
-      mainAxisSize: MainAxisSize.min,
-      spacing: 4,
-      children: [
-        if (user.authId != null)
-          Tooltip(
-            message: 'حساب مرتبط',
-            child: Icon(Symbols.verified_user, color: colorScheme.primary),
-          ),
-        if (invitation != null && invitation.isActiveAt(DateTime.now()))
-          Tooltip(
-            message: 'دعوة سارية',
-            child: Icon(Symbols.mail, color: colorScheme.tertiary),
-          ),
-        if (invitation != null &&
-            !invitation.isActiveAt(DateTime.now()) &&
-            !invitation.isClaimed)
-          Tooltip(
-            message: 'دعوة منتهية',
-            child: Icon(Symbols.mail, color: colorScheme.onSurfaceVariant),
-          ),
-      ],
-    );
+    final indicator = switch (user) {
+      User(authId: final _?) => null,
+      User(:final invitation?) when invitation.isActiveAt(now) => (
+        Symbols.schedule_send,
+        colorScheme.tertiary,
+        'دعوة بانتظار القبول',
+      ),
+      User(:final invitation?) when invitation.isExpiredAt(now) => (
+        Symbols.event_busy,
+        colorScheme.error,
+        'انتهت صلاحية الدعوة',
+      ),
+      _ => (
+        Symbols.no_accounts,
+        colorScheme.onSurfaceVariant,
+        'لم يسجّل حسابه بعد',
+      ),
+    };
+
+    return switch (indicator) {
+      (final icon, final color, final message) => Tooltip(
+        message: message,
+        child: Icon(icon, color: color),
+      ),
+      null => const SizedBox.shrink(),
+    };
   }
 }

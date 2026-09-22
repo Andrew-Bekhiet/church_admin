@@ -1,7 +1,9 @@
+import 'package:church_admin/src/features/user_management/presentation/widgets/user_invitation_code_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class UserInvitationExpiryTile extends StatelessWidget {
+  final String? code;
   final DateTime expiresAt;
   final DateTime firstDate;
   final DateTime lastDate;
@@ -17,6 +19,7 @@ class UserInvitationExpiryTile extends StatelessWidget {
   }
 
   const UserInvitationExpiryTile({
+    required this.code,
     required this.expiresAt,
     required this.firstDate,
     required this.lastDate,
@@ -26,10 +29,9 @@ class UserInvitationExpiryTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      title: const Text('تاريخ انتهاء الدعوة'),
-      subtitle: Text(DateFormat('yyyy/M/d').format(expiresAt)),
-      enabled: _canExtend,
+    return UserInvitationCodeTile(
+      code: code,
+      caption: 'صالحة حتى ${DateFormat('yyyy/M/d').format(expiresAt)}',
       onTap: _canExtend ? () => _pickExpiry(context) : null,
     );
   }

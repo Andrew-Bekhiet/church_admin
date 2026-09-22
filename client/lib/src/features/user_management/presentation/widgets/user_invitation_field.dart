@@ -1,4 +1,5 @@
 import 'package:church_admin/church_admin.dart';
+import 'package:church_admin/src/features/user_management/presentation/widgets/user_invitation_code_tile.dart';
 import 'package:church_admin/src/features/user_management/presentation/widgets/user_invitation_expiry_tile.dart';
 import 'package:flutter/material.dart';
 
@@ -31,6 +32,7 @@ class UserInvitationField extends StatelessWidget {
           ),
           if (invitation case InvitationRequest(:final expiresAt))
             UserInvitationExpiryTile(
+              code: null,
               expiresAt: expiresAt,
               firstDate: DateTime.now().add(const Duration(days: 1)),
               lastDate: InvitationRequest.maxExpiry(DateTime.now()),
@@ -40,12 +42,15 @@ class UserInvitationField extends StatelessWidget {
         ],
       ),
       ExistingInvitation(:final invitation) when invitation.isClaimed =>
-        const ListTile(title: Text('تم استخدام الدعوة')),
+        UserInvitationCodeTile(
+          code: invitation.code,
+          caption: invitation.statusCaptionAt(DateTime.now()),
+        ),
       ExistingInvitation(:final invitation) => Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          CopiablePropertyWidget('كود الدعوة', invitation.code),
           UserInvitationExpiryTile(
+            code: invitation.code,
             expiresAt: invitation.expiresAt,
             firstDate:
                 DateTime.now().isAfter(

@@ -1,4 +1,5 @@
 import 'package:church_admin/church_admin.dart';
+import 'package:church_admin/src/features/user_management/presentation/widgets/user_invitation_code_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
@@ -10,22 +11,14 @@ class UserInvitationSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dateFormat = DateFormat.yMd('ar-EG').add_jm();
-    final statusText = switch (invitation) {
-      Invitation(:final claimedAt?) =>
-        'تم استخدام الدعوة في ${dateFormat.format(claimedAt)}',
-      Invitation(:final expiresAt) when expiresAt.isBefore(DateTime.now()) =>
-        'انتهت صلاحية الدعوة',
-      Invitation(:final expiresAt) =>
-        'صالحة حتى ${dateFormat.format(expiresAt)}',
-    };
-
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        CopiablePropertyWidget('كود الدعوة', invitation.code),
-        ListTile(title: Text(statusText)),
-        if (!invitation.isClaimed)
+        UserInvitationCodeTile(
+          code: invitation.code,
+          caption: invitation.statusCaptionAt(DateTime.now()),
+        ),
+        if (invitation.isActiveAt(DateTime.now()))
           Padding(
             padding: const EdgeInsetsDirectional.only(start: 16, end: 16),
             child: FilledButton.tonalIcon(
@@ -33,7 +26,7 @@ class UserInvitationSection extends StatelessWidget {
               label: const Text('مشاركة كود الدعوة'),
               onPressed: () => ShareService.I.shareText(
                 'كود الدعوة للانضمام إلى تطبيق خدمة الكنيسة: ${invitation.code}\n'
-                'صالح حتى ${dateFormat.format(invitation.expiresAt)}',
+                'صالح حتى ${DateFormat.yMd('ar-EG').add_jm().format(invitation.expiresAt)}',
               ),
             ),
           ),

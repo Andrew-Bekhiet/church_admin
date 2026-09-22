@@ -1,5 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:intl/intl.dart';
 
 part 'invitation.freezed.dart';
 part 'invitation.g.dart';
@@ -46,4 +47,17 @@ class Invitation with _$Invitation implements ToJson {
   Map<String, dynamic> toJson() => _$InvitationToJson(this);
 
   bool isActiveAt(DateTime now) => !isClaimed && expiresAt.isAfter(now);
+
+  bool isExpiredAt(DateTime now) => !isClaimed && !expiresAt.isAfter(now);
+
+  String statusCaptionAt(DateTime now) {
+    final dateFormat = DateFormat('yyyy/M/d');
+
+    return switch (this) {
+      Invitation(:final claimedAt?) =>
+        'استُخدمت في ${dateFormat.format(claimedAt)}',
+      _ when isExpiredAt(now) => 'انتهت في ${dateFormat.format(expiresAt)}',
+      _ => 'صالحة حتى ${dateFormat.format(expiresAt)}',
+    };
+  }
 }
