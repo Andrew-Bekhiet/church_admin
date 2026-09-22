@@ -28,6 +28,7 @@ mixin _$User {
   List<AdminOnData>? get servicesHistory;
   List<AdminOnData>? get classesHistory;
   List<AdminOnData>? get groupsHistory;
+  Invitation? get invitation;
   bool get currentUserCanManageThisUser;
 
   /// Create a copy of User
@@ -73,6 +74,8 @@ mixin _$User {
               other.groupsHistory,
               groupsHistory,
             ) &&
+            (identical(other.invitation, invitation) ||
+                other.invitation == invitation) &&
             (identical(
                   other.currentUserCanManageThisUser,
                   currentUserCanManageThisUser,
@@ -100,12 +103,13 @@ mixin _$User {
     const DeepCollectionEquality().hash(servicesHistory),
     const DeepCollectionEquality().hash(classesHistory),
     const DeepCollectionEquality().hash(groupsHistory),
+    invitation,
     currentUserCanManageThisUser,
   );
 
   @override
   String toString() {
-    return 'User(uid: $uid, name: $name, email: $email, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, adminOn: $adminOn, permissions: $permissions, authId: $authId, lastEdit: $lastEdit, person: $person, preferences: $preferences, fcmTokens: $fcmTokens, servicesHistory: $servicesHistory, classesHistory: $classesHistory, groupsHistory: $groupsHistory, currentUserCanManageThisUser: $currentUserCanManageThisUser)';
+    return 'User(uid: $uid, name: $name, email: $email, photoUpdatedAt: $photoUpdatedAt, blurhash: $blurhash, adminOn: $adminOn, permissions: $permissions, authId: $authId, lastEdit: $lastEdit, person: $person, preferences: $preferences, fcmTokens: $fcmTokens, servicesHistory: $servicesHistory, classesHistory: $classesHistory, groupsHistory: $groupsHistory, invitation: $invitation, currentUserCanManageThisUser: $currentUserCanManageThisUser)';
   }
 }
 
@@ -131,6 +135,7 @@ abstract mixin class $UserCopyWith<$Res> {
     List<AdminOnData>? servicesHistory,
     List<AdminOnData>? classesHistory,
     List<AdminOnData>? groupsHistory,
+    Invitation? invitation,
   });
 }
 
@@ -162,6 +167,7 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
     Object? servicesHistory = freezed,
     Object? classesHistory = freezed,
     Object? groupsHistory = freezed,
+    Object? invitation = freezed,
   }) {
     return _then(
       User(
@@ -229,6 +235,10 @@ class _$UserCopyWithImpl<$Res> implements $UserCopyWith<$Res> {
             ? _self.groupsHistory
             : groupsHistory // ignore: cast_nullable_to_non_nullable
                   as List<AdminOnData>?,
+        invitation: freezed == invitation
+            ? _self.invitation
+            : invitation // ignore: cast_nullable_to_non_nullable
+                  as Invitation?,
       ),
     );
   }

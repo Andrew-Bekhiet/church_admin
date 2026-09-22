@@ -192,6 +192,11 @@ User _$UserFromJson(Map json) => User(
   groupsHistory: (json['groupsHistory'] as List<dynamic>?)
       ?.map((e) => AdminOnData.fromJson(Map<String, Object?>.from(e as Map)))
       .toList(),
+  invitation: json['invitation'] == null
+      ? null
+      : Invitation.fromJson(
+          Map<String, Object?>.from(json['invitation'] as Map),
+        ),
 );
 
 Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
@@ -213,6 +218,7 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
   'servicesHistory': instance.servicesHistory?.map((e) => e.toJson()).toList(),
   'classesHistory': instance.classesHistory?.map((e) => e.toJson()).toList(),
   'groupsHistory': instance.groupsHistory?.map((e) => e.toJson()).toList(),
+  'invitation': instance.invitation?.toJson(),
 };
 
 Value? _$JsonConverterFromJson<Json, Value>(
