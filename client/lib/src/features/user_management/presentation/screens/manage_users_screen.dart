@@ -65,23 +65,27 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
             };
           },
         ),
-        floatingActionButton: _canCreateUsers()
-            ? FloatingActionButton.extended(
-                icon: const Icon(Symbols.person_add),
-                label: const Text('إضافة خادم'),
-                onPressed: () =>
-                    const EditUserRoute($extra: CreateUser()).push(context),
-              )
-            : null,
+        floatingActionButton: BlocBuilder<AuthBloc, AuthState>(
+          bloc: AuthBloc.I,
+          builder: (context, state) {
+            final canCreateUsers = switch (state.unwrapped) {
+              AuthAuthenticated(userData: User(:final permissions)) =>
+                permissions.manageAllUsers || permissions.onboardUsers,
+              _ => false,
+            };
+
+            if (!canCreateUsers) return const SizedBox.shrink();
+
+            return FloatingActionButton.extended(
+              icon: const Icon(Symbols.person_add),
+              label: const Text('إضافة خادم'),
+              onPressed: () =>
+                  const EditUserRoute($extra: CreateUser()).push(context),
+            );
+          },
+        ),
       ),
     );
-  }
-
-  bool _canCreateUsers() {
-    final permissions = AuthBloc.I.currentUserData?.permissions;
-
-    return (permissions?.manageAllUsers ?? false) ||
-        (permissions?.onboardUsers ?? false);
   }
 
   @override
