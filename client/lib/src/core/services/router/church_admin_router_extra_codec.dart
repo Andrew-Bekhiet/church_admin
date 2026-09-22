@@ -10,6 +10,7 @@ final Map<String, Object Function(Json)> fromJsonByTypeName = {
   'EditPersonExtra': EditPersonExtra.fromJson,
   'EditClassExtra': EditClassExtra.fromJson,
   'EditGroupExtra': EditGroupExtra.fromJson,
+  'UserEditIntent': UserEditIntent.fromJson,
   'AdvancedQuery': AdvancedQuery.fromJson,
   for (final MapEntry(value: QueryableType(:name, :fromJson))
       in AdvancedQueriesMetadata().allQueryablesByType.entries)
