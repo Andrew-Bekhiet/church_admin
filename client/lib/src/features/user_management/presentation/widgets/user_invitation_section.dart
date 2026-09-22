@@ -10,10 +10,10 @@ class UserInvitationSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final dateFormat = DateFormat('yyyy/M/d');
+    final dateFormat = DateFormat.yMd('ar-EG').add_jm();
     final statusText = switch (invitation) {
-      Invitation(isClaimed: true, :final claimedAt) =>
-        'تم استخدام الدعوة في ${dateFormat.format(claimedAt!)}',
+      Invitation(:final claimedAt?) =>
+        'تم استخدام الدعوة في ${dateFormat.format(claimedAt)}',
       Invitation(:final expiresAt) when expiresAt.isBefore(DateTime.now()) =>
         'انتهت صلاحية الدعوة',
       Invitation(:final expiresAt) =>
