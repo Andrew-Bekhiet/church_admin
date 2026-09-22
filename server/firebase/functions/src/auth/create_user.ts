@@ -9,7 +9,10 @@ import {
   insertUserWithPermissionsAndAdminOn,
 } from "../hasura_interface";
 import { hasuraAdminSecret } from "../secrets";
-import { assertCallerManagesScopes } from "./caller_manages_scopes";
+import {
+  assertCallerHoldsPermissions,
+  assertCallerManagesScopes,
+} from "./caller_manages_scopes";
 
 const AdminOnInput = z
   .object({
@@ -56,7 +59,7 @@ const PersonInput = z.discriminatedUnion("kind", [
 
 const CreateUserRequest = z.object({
   name: z.string().trim().min(1),
-  email: z.email().nullish(),
+  email: z.string().trim().toLowerCase().pipe(z.email()).nullish(),
   permissions: z.array(z.string()),
   adminOn: z.array(AdminOnInput),
   person: PersonInput,
@@ -99,6 +102,7 @@ export const createUser = https.onCall<z.infer<typeof CreateUserRequest>>(
     );
 
     if (!permissions.includes("manageAllUsers")) {
+      assertCallerHoldsPermissions(permissions, requestData.data.permissions);
       assertCallerManagesScopes(adminOn, requestData.data.adminOn);
     }
 
@@ -150,7 +154,11 @@ export const createUser = https.onCall<z.infer<typeof CreateUserRequest>>(
         throw new https.HttpsError("already-exists", "user/name-taken");
       }
 
-      if (createdUid) await deleteUserByUid(createdUid);
+      if (createdUid) {
+        await deleteUserByUid(createdUid).catch((cleanupError) =>
+          console.error("Could not delete half-created user", createdUid, cleanupError)
+        );
+      }
 
       console.error("Could not create user", authUser.uid, e);
       throw new https.HttpsError("internal", "internal");

@@ -25,6 +25,36 @@ export type AdminOnEntry = {
 
 type ContainerKind = "area" | "service" | "group";
 
+const capabilityFlags = [
+  "areaAllowEdit",
+  "areaAllowExport",
+  "areaAdminOnUsers",
+  "serviceAllowEdit",
+  "serviceAllowExport",
+  "serviceAllowRecordAttendance",
+  "serviceAllowRecordServantsAttendance",
+  "serviceWriteRelatedFamilies",
+  "serviceAdminOnUsers",
+  "groupAllowEdit",
+  "groupAllowExport",
+  "groupAllowRecordAttendance",
+  "groupAllowRecordServantsAttendance",
+  "groupWriteRelatedFamilies",
+  "groupAdminOnUsers",
+] as const satisfies readonly (keyof AdminOnEntry)[];
+
+export function assertCallerHoldsPermissions(
+  callerPermissions: string[],
+  permissions: string[],
+): void {
+  if (permissions.every((p) => callerPermissions.includes(p))) return;
+
+  throw new https.HttpsError(
+    "permission-denied",
+    "user/permission-not-grantable",
+  );
+}
+
 export function assertCallerManagesScopes(
   callerScopes: AdminOnEntry[],
   scopes: AdminOnEntry[],
@@ -73,6 +103,9 @@ function canManageScope(
   return callerContainer.kind === requestedContainer.kind &&
     callerManagesContainerUsers(callerContainer.kind, callerScope) &&
     callerContainer.id === requestedContainer.id &&
+    capabilityFlags.every((flag) =>
+      requestedScope[flag] !== true || callerScope[flag] === true
+    ) &&
     (callerContainer.kind !== "service" ||
       callerManagesService(callerScope, requestedScope));
 }
