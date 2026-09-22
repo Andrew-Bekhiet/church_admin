@@ -44,9 +44,12 @@ class _EditUserScreenState extends State<EditUserScreen> {
           builder: (context, state) => FloatingActionButton.extended(
             label: const Text('حفظ'),
             icon: state is UserFormSaving
-                ? const SizedBox.square(
+                ? SizedBox.square(
                     dimension: 18,
-                    child: CircularProgressIndicator(strokeWidth: 2),
+                    child: CircularProgressIndicator(
+                      strokeWidth: 2,
+                      color: ColorScheme.of(context).onPrimaryContainer,
+                    ),
                   )
                 : const Icon(Icons.save),
             onPressed: state is UserFormSaving ? null : _cubit.save,
