@@ -88,7 +88,7 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(selected, isNotNull);
-      expect(DateUtils.dateOnly(selected!), DateTime(2026, 7, 15));
+      expect(DateUtils.dateOnly(selected!), testDate.copyWith(day: 15));
     });
   });
 }
