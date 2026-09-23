@@ -94,19 +94,19 @@ class EditAdminOnDataWidget extends StatelessWidget {
     final restrictToCallerScopes =
         currentUserPermissions?.manageAllUsers != true;
     final callerAdminOn = currentUserData?.adminOn ?? [];
-    final allowedAreas = callerAdminOn
+    final allowedAreaIds = callerAdminOn
         .where((a) => a.areaAdminOnUsers ?? false)
-        .map((a) => a.area)
+        .map((a) => a.area?.id)
         .nonNulls
         .toList();
-    final allowedServices = callerAdminOn
+    final allowedServiceIds = callerAdminOn
         .where((a) => a.serviceAdminOnUsers ?? false)
-        .map((a) => a.service)
+        .map((a) => a.service?.id)
         .nonNulls
         .toList();
-    final allowedGroups = callerAdminOn
+    final allowedGroupIds = callerAdminOn
         .where((a) => a.groupAdminOnUsers ?? false)
-        .map((a) => a.group)
+        .map((a) => a.group?.id)
         .nonNulls
         .toList();
 
@@ -171,7 +171,7 @@ class EditAdminOnDataWidget extends StatelessWidget {
                                       Filter(
                                         AreaFields().id,
                                         MultiSelectOperator.anyOf,
-                                        allowedAreas,
+                                        allowedAreaIds,
                                       ),
                                     ])
                                   : null,
@@ -190,7 +190,7 @@ class EditAdminOnDataWidget extends StatelessWidget {
                                       Filter(
                                         ServiceFields().id,
                                         MultiSelectOperator.anyOf,
-                                        allowedServices,
+                                        allowedServiceIds,
                                       ),
                                     ])
                                   : null,
@@ -209,7 +209,7 @@ class EditAdminOnDataWidget extends StatelessWidget {
                                       Filter(
                                         GroupFields().id,
                                         MultiSelectOperator.anyOf,
-                                        allowedGroups,
+                                        allowedGroupIds,
                                       ),
                                     ])
                                   : null,
