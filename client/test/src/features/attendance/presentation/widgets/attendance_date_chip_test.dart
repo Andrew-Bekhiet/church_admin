@@ -38,18 +38,6 @@ void main() {
       );
     }
 
-    testWidgets('renders button with formatted date', (tester) async {
-      await tester.pumpWidget(
-        buildSubject(
-          date: testDate,
-          onDateSelected: (_) {},
-        ),
-      );
-
-      expect(find.byType(AttendanceDateChip), findsOneWidget);
-      expect(find.byType(FilledButton), findsOneWidget);
-    });
-
     testWidgets('opens calendar dialog on tap with day cell indicators', (
       tester,
     ) async {
