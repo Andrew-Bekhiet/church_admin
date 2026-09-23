@@ -173,10 +173,11 @@ class _AttendanceDatePickerDialogState
                 ),
                 value: [_selectedDate],
                 onValueChanged: (dates) {
-                  if (dates case [final date, ...]) {
-                    setState(() {
-                      _selectedDate = date;
-                    });
+                  switch (dates) {
+                    case [final date, ...]:
+                      setState(() {
+                        _selectedDate = date;
+                      });
                   }
                 },
               ),
