@@ -57,7 +57,7 @@ void main() {
       final dayCells = tester.widgetList<AttendanceDateSelectorDayCell>(
         find.byType(AttendanceDateSelectorDayCell),
       );
-      expect(dayCells, hasLength(1));
+      expect(dayCells, findsOneWidget);
       expect(DateUtils.dateOnly(dayCells.first.date), recordedDate);
 
       expect(find.text('${testDate.day}'), findsOneWidget);
