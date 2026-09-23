@@ -71,7 +71,7 @@ class LocationParsingService {
 
           if (redirectLocation == null) return null;
 
-          return maybeParseLocationUri(redirectLocation);
+          return await maybeParseLocationUri(redirectLocation);
       }
 
       return null;
