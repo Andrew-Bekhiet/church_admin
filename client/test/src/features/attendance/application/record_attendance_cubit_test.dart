@@ -385,11 +385,32 @@ final class _Fixture {
     when(() => authBloc.currentUserData).thenAnswer((_) => user);
 
     when(
-      () => dao.getRecordedDays(
-        meeting: any(named: 'meeting'),
+      () => dao.getMeetingsAttendanceAnalysis(
+        subject: any(named: 'subject'),
         range: any(named: 'range'),
       ),
-    ).thenAnswer((_) async => recordedDays);
+    ).thenAnswer(
+      (_) async => MeetingsAttendanceAnalysis(
+        title: meeting.name,
+        meetings: recordedDays.isEmpty
+            ? const []
+            : [
+                MeetingAttendanceSummary(
+                  meeting: meeting,
+                  demographics: recordedDays
+                      .map(
+                        (d) => MeetingDayDemographicCounts(
+                          day: d,
+                          personsCount: 1,
+                          servantsCount: 0,
+                          totalCount: 1,
+                        ),
+                      )
+                      .toList(),
+                ),
+              ],
+      ),
+    );
 
     when(
       () => dao.getMeetingRoster(

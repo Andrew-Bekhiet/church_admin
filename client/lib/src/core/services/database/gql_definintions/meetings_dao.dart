@@ -2,7 +2,6 @@ import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/meetings/__generated__/mutations.gql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/meetings/__generated__/queries.gql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/meetings/__generated__/subscriptions.gql.dart';
-import 'package:flutter/material.dart' show DateUtils;
 import 'package:graphql/client.dart';
 
 class MeetingsDAO extends DAOBase<Meeting>
@@ -336,26 +335,6 @@ class MeetingsDAO extends DAOBase<Meeting>
     );
   }
 
-  Future<Set<DateTime>> getRecordedDays({
-    required Meeting meeting,
-    DateTimeRange? range,
-  }) async {
-    final analysis = await getMeetingsAttendanceAnalysis(
-      subject: MeetingAnalysisSubject(meeting),
-      range:
-          range ??
-          DateTimeRange(
-            start: DateTime(2019),
-            end: DateTime.now(),
-          ),
-    );
-
-    return analysis.meetings.firstOrNull?.days
-            .where((d) => d.totalCount > 0)
-            .map((d) => DateUtils.dateOnly(d.day))
-            .toSet() ??
-        const <DateTime>{};
-  }
 
   Future<List<SingleDayRosterMember>> getSingleDayRosterDemographics({
     required MeetingsAnalysisSubject subject,
