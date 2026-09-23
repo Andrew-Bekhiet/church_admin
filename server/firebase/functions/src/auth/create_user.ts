@@ -10,43 +10,10 @@ import {
 } from "../hasura_interface";
 import { hasuraAdminSecret } from "../secrets";
 import {
+  AdminOnInput,
   assertCallerHoldsPermissions,
   assertCallerManagesScopes,
 } from "./caller_manages_scopes";
-
-const AdminOnInput = z
-  .object({
-    adminOnArea: z.uuid().optional(),
-    adminOnService: z.uuid().optional(),
-    adminOnGroup: z.uuid().optional(),
-    serviceStudyYear: z.number().int().optional(),
-    serviceGender: z.boolean().optional(),
-    areaAllowEdit: z.boolean().optional(),
-    areaAllowExport: z.boolean().optional(),
-    areaAdminOnUsers: z.boolean().optional(),
-    serviceAllowEdit: z.boolean().optional(),
-    serviceAllowExport: z.boolean().optional(),
-    serviceAllowRecordAttendance: z.boolean().optional(),
-    serviceAllowRecordServantsAttendance: z.boolean().optional(),
-    serviceWriteRelatedFamilies: z.boolean().optional(),
-    serviceAdminOnUsers: z.boolean().optional(),
-    groupAllowEdit: z.boolean().optional(),
-    groupAllowExport: z.boolean().optional(),
-    groupAllowRecordAttendance: z.boolean().optional(),
-    groupAllowRecordServantsAttendance: z.boolean().optional(),
-    groupWriteRelatedFamilies: z.boolean().optional(),
-    groupAdminOnUsers: z.boolean().optional(),
-  })
-  .refine(
-    (row) =>
-      [row.adminOnArea, row.adminOnService, row.adminOnGroup].filter(
-        (id) => id != null,
-      ).length === 1,
-    {
-      message:
-        "exactly one of adminOnArea, adminOnService, adminOnGroup is required",
-    },
-  );
 
 const PersonInput = z.discriminatedUnion("kind", [
   z.object({ kind: z.literal("existing"), id: z.uuid() }),
