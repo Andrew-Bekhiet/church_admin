@@ -350,7 +350,7 @@ class MeetingsDAO extends DAOBase<Meeting>
           ),
     );
 
-    return analysis.meetings.firstOrNull?.days
+     return analysis.meetings.firstOrNull?.days
             .where((d) => d.totalCount > 0)
             .map((d) => DateUtils.dateOnly(d.day))
             .toSet() ??
