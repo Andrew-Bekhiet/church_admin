@@ -346,7 +346,7 @@ class MeetingsDAO extends DAOBase<Meeting>
           range ??
           DateTimeRange(
             start: DateTime(2019),
-            end: DateTime.now().add(const Duration(days: 365)),
+            end: DateTime.now(),
           ),
     );
 
