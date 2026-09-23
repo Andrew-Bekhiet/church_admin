@@ -101,8 +101,9 @@ export const createUser = https.onCall<z.infer<typeof CreateUserRequest>>(
       callerHasuraUid,
     );
 
+    assertCallerHoldsPermissions(permissions, requestData.data.permissions);
+
     if (!permissions.includes("manageAllUsers")) {
-      assertCallerHoldsPermissions(permissions, requestData.data.permissions);
       assertCallerManagesScopes(adminOn, requestData.data.adminOn);
     }
 
