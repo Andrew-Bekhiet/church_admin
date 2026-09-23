@@ -16,6 +16,7 @@ begin
         select 1
         from auth.users_data as u
         where u.uid in (old.uid, new.uid)
+            and u.uid <> v_caller
             and not auth.user_can_edit_user(u, v_session)
     ) then
         raise exception 'person/user-link-not-permitted'
