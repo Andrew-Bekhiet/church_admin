@@ -16,8 +16,43 @@ class _FakeUsersDAO extends Fake implements UsersDAO {
   Future<void> updateUser(UserUpdate update) async {
     lastUpdate = update;
     storedName = update.name ?? storedName;
-    if (update.unlinkPersonId == linkedPersonId) linkedPersonId = null;
+    if (update.unlinkPersonId == linkedPersonId) {
+      linkedPersonId = null;
+    }
     linkedPersonId = update.linkPersonId ?? linkedPersonId;
+  }
+}
+
+class _FlakyUsersDAO extends Fake implements UsersDAO {
+  int failuresLeft = 1;
+
+  @override
+  Future<void> updateUser(UserUpdate update) async {
+    if (failuresLeft > 0) {
+      failuresLeft--;
+      throw PersonAlreadyLinkedException(update.linkPersonId ?? '');
+    }
+  }
+}
+
+class _StoredUserPermissionsDAO extends Fake implements UserPermissionsDAO {
+  PermissionsSet stored;
+
+  _StoredUserPermissionsDAO(this.stored);
+
+  @override
+  Future<void> updateUserPermissions({
+    required String userId,
+    required PermissionsSet newPermissions,
+    required PermissionsSet oldPermissions,
+    required List<AdminOnData> newAdminOn,
+    required List<AdminOnData> oldAdminOn,
+  }) async {
+    if (newPermissions.difference(oldPermissions).any(stored.contains)) {
+      throw StateError('permission already granted');
+    }
+
+    stored = newPermissions;
   }
 }
 
@@ -173,6 +208,34 @@ void main() {
         expect(invitationsDao.updatedInvitationId, 'inv1');
         expect(invitationsDao.updatedExpiresAt, DateTime(2026, 1, 20));
       },
+    );
+
+    blocTest<EditUserCubit, UserFormState>(
+      'saving again after a failed person link does not grant the same permission twice',
+      build: () => EditUserCubit(
+        user: User(
+          uid: 'u1',
+          name: 'مينا',
+          person: person1,
+          permissions: const PermissionsSet.fromSet({UserPermission.approved}),
+        ),
+        usersDao: _FlakyUsersDAO(),
+        permissionsDao: _StoredUserPermissionsDAO(
+          const PermissionsSet.fromSet({UserPermission.approved}),
+        ),
+        invitationsDao: invitationsDao,
+        authBloc: authBloc,
+      ),
+      act: (cubit) async {
+        cubit
+          ..togglePermission(UserPermission.readAllData)
+          ..selectPerson(LinkExistingPerson(person2));
+        await cubit.save();
+
+        return cubit.save();
+      },
+      skip: 5,
+      expect: () => [isA<UserFormSaved>()],
     );
 
     group('restricting admin scopes to what the manager can access', () {

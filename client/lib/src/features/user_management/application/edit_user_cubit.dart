@@ -2,7 +2,7 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter/foundation.dart';
 
 class EditUserCubit extends UserFormCubit {
-  final User _originalUser;
+  User _persistedUser;
   final UsersDAO _usersDao;
   final UserPermissionsDAO _permissionsDao;
   final InvitationsDAO _invitationsDao;
@@ -14,7 +14,7 @@ class EditUserCubit extends UserFormCubit {
     UserPermissionsDAO? permissionsDao,
     InvitationsDAO? invitationsDao,
     AuthBloc? authBloc,
-  }) : _originalUser = user,
+  }) : _persistedUser = user,
        _usersDao = usersDao ?? DatabaseService.I.users,
        _permissionsDao = permissionsDao ?? DatabaseService.I.userPermissions,
        _invitationsDao = invitationsDao ?? DatabaseService.I.invitations,
@@ -24,23 +24,38 @@ class EditUserCubit extends UserFormCubit {
   @override
   @protected
   Future<String> persist(UserDraft draft) async {
+    final newPermissions = draft.permissions.validated();
+    final newAdminOn = _restrictAdminOnToCallerScopes(draft.adminOn);
+
     await _permissionsDao.updateUserPermissions(
-      userId: _originalUser.uid,
-      oldPermissions: _originalUser.permissions,
-      newPermissions: draft.permissions.validated(),
-      newAdminOn: _restrictAdminOnToCallerScopes(draft.adminOn),
-      oldAdminOn: _originalUser.adminOn ?? [],
+      userId: _persistedUser.uid,
+      oldPermissions: _persistedUser.permissions,
+      newPermissions: newPermissions,
+      newAdminOn: newAdminOn,
+      oldAdminOn: _persistedUser.adminOn ?? [],
+    );
+    _persistedUser = _persistedUser.copyWith(
+      permissions: newPermissions,
+      adminOn: newAdminOn,
     );
 
     final update = _buildUserUpdate(draft);
 
     if (update.hasChanges) {
       await _usersDao.updateUser(update);
+      _persistedUser = _persistedUser.copyWith(
+        name: draft.name,
+        email: draft.email.isEmpty ? null : draft.email,
+        person: switch (draft.person) {
+          LinkExistingPerson(:final person) => person,
+          NoPersonSelected() || CreateNewPerson() => null,
+        },
+      );
     }
 
     await _persistInvitation(draft);
 
-    return _originalUser.uid;
+    return _persistedUser.uid;
   }
 
   List<AdminOnData> _restrictAdminOnToCallerScopes(
@@ -65,19 +80,19 @@ class EditUserCubit extends UserFormCubit {
     );
 
     return [
-      ...(_originalUser.adminOn ?? []).where((a) => !callerCanManage(a)),
+      ...(_persistedUser.adminOn ?? []).where((a) => !callerCanManage(a)),
       ...newAdminOn.where(callerCanManage),
     ];
   }
 
   UserUpdate _buildUserUpdate(UserDraft draft) {
-    final oldPersonId = _personIdOf(UserDraft.fromUser(_originalUser).person);
+    final oldPersonId = _personIdOf(UserDraft.fromUser(_persistedUser).person);
     final newPersonId = _personIdOf(draft.person);
 
     return UserUpdate(
-      uid: _originalUser.uid,
-      name: draft.name != _originalUser.name ? draft.name : null,
-      email: draft.email != (_originalUser.email ?? '') ? draft.email : null,
+      uid: _persistedUser.uid,
+      name: draft.name != _persistedUser.name ? draft.name : null,
+      email: draft.email != (_persistedUser.email ?? '') ? draft.email : null,
       linkPersonId: newPersonId != oldPersonId ? newPersonId : null,
       unlinkPersonId: oldPersonId != null && oldPersonId != newPersonId
           ? oldPersonId
@@ -93,18 +108,20 @@ class EditUserCubit extends UserFormCubit {
   Future<void> _persistInvitation(UserDraft draft) async {
     switch (draft.invitation) {
       case InvitationRequest(:final expiresAt)
-          when _originalUser.invitation == null:
-        await _invitationsDao.createInvitation(
-          userUid: _originalUser.uid,
+          when _persistedUser.invitation == null:
+        final created = await _invitationsDao.createInvitation(
+          userUid: _persistedUser.uid,
           expiresAt: expiresAt,
         );
+        _persistedUser = _persistedUser.copyWith(invitation: created);
 
       case ExistingInvitation(:final invitation)
-          when invitation.expiresAt != _originalUser.invitation?.expiresAt:
+          when invitation.expiresAt != _persistedUser.invitation?.expiresAt:
         await _invitationsDao.updateInvitationExpiry(
           id: invitation.id,
           expiresAt: invitation.expiresAt,
         );
+        _persistedUser = _persistedUser.copyWith(invitation: invitation);
 
       case InvitationRequest() || ExistingInvitation() || NoInvitation():
         return;
