@@ -805,7 +805,7 @@ export async function insertUserWithPermissionsAndAdminOn(
 }
 
 export async function deleteUserByUid(uid: string): Promise<void> {
-  await makeGraphqlRequest({
+  const hasura_response = await makeGraphqlRequest({
     query: `
           mutation deleteUserByUid($uid: uuid!) {
             deleteAuthUsersDataByPk(uid: $uid) {
@@ -816,6 +816,8 @@ export async function deleteUserByUid(uid: string): Promise<void> {
     variables: { uid },
     operationName: "deleteUserByUid",
   });
+
+  dataOrThrow(hasura_response);
 }
 
 export async function makeGraphqlRequest({
