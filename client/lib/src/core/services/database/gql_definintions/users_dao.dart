@@ -81,6 +81,13 @@ class UsersDAO extends DAOBase<User> with StreamableDAO<User> {
 
     if (update.linkPersonId case final personId?
         when result.link?.affectedRows != 1) {
+      if (update.unlinkPersonId case final unlinkedPersonId?
+          when result.unlink?.affectedRows == 1) {
+        await updateUser(
+          UserUpdate(uid: update.uid, linkPersonId: unlinkedPersonId),
+        );
+      }
+
       throw PersonAlreadyLinkedException(personId);
     }
   }
