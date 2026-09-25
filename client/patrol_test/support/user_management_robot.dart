@@ -120,12 +120,21 @@ class UserManagementRobot {
 
     await tester.tapOn(find.byKey(ViewUserScreenKeys.linkedPerson));
     final personScreen = await tester.waitFor(find.byType(ViewPerson));
+    await tester.waitForAbsent(
+      find.descendant(
+        of: personScreen,
+        matching: find.byType(CircularProgressIndicator),
+      ),
+    );
+    final personDetails = await tester.waitFor(
+      find
+          .descendant(of: personScreen, matching: find.byType(Scrollable))
+          .first,
+    );
     await tester.scrollUntilVisible(
       linkedUserButton,
       300,
-      scrollable: find
-          .descendant(of: personScreen, matching: find.byType(Scrollable))
-          .first,
+      scrollable: personDetails,
     );
     await tester.tapOn(linkedUserButton);
     await tester.waitFor(

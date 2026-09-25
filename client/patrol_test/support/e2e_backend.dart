@@ -11,20 +11,31 @@ abstract final class E2eBackend {
   static final Uri _authEmulator = Uri.http('localhost:9099');
   static final Uri _hasura = Uri.http('localhost:8080', '/v1/graphql');
   static const _hasuraAdminSecret = 'localdevadminsecret';
+  static const _verificationEmailTimeout = Duration(seconds: 30);
+  static const _pollInterval = Duration(milliseconds: 500);
 
   static Future<void> verifyEmail(String email) async {
-    final response = await http.get(
-      _authEmulator.replace(path: '/emulator/v1/projects/$projectId/oobCodes'),
-    );
-    final codes = (jsonDecode(response.body)['oobCodes'] as List)
-        .cast<Map<String, dynamic>>()
-        .where(
-          (code) =>
-              code['email'] == email && code['requestType'] == 'VERIFY_EMAIL',
-        );
+    final deadline = DateTime.now().add(_verificationEmailTimeout);
+    var codes = <Map<String, dynamic>>[];
 
-    if (codes.isEmpty) {
-      throw StateError('No verification email was sent to $email');
+    while (codes.isEmpty) {
+      if (DateTime.now().isAfter(deadline)) {
+        throw StateError('No verification email was sent to $email');
+      }
+
+      await Future<void>.delayed(_pollInterval);
+      final response = await http.get(
+        _authEmulator.replace(
+          path: '/emulator/v1/projects/$projectId/oobCodes',
+        ),
+      );
+      codes = (jsonDecode(response.body)['oobCodes'] as List)
+          .cast<Map<String, dynamic>>()
+          .where(
+            (code) =>
+                code['email'] == email && code['requestType'] == 'VERIFY_EMAIL',
+          )
+          .toList();
     }
 
     final applied = await http.get(Uri.parse(codes.last['oobLink'] as String));

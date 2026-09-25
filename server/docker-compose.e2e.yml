@@ -1,6 +1,10 @@
 name: church-admin-e2e
 
 services:
+  postgres:
+    healthcheck:
+      start_period: 2m
+
   hasura:
     environment:
       STUDY_YEAR_ROLL_NOTIFY_URL: http://firebase-emulators:5001/demo-church-admin/europe-west6/notifyStudyYearRollFailure
