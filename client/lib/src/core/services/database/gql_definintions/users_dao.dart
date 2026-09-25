@@ -65,10 +65,11 @@ class UsersDAO extends DAOBase<User> with StreamableDAO<User> {
         variables: Variables_Mutation_updateUser(
           uid: update.uid.toUuid(),
           $set: Input_AuthUsersDataSetInput.fromJson({
+            if (update.name case final name?) 'name': name,
             if (update.email case final email?)
               'email': email.isEmpty ? null : email,
           }),
-          updateUser: update.email != null,
+          updateUser: update.name != null || update.email != null,
           linkPersonId: update.linkPersonId?.toUuid(),
           linkPerson: update.linkPersonId != null,
           unlinkPersonId: update.unlinkPersonId?.toUuid(),

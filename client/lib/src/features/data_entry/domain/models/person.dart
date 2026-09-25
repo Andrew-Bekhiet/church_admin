@@ -684,6 +684,15 @@ class Person extends ViewableWithIDAndImage
 }
 
 class PersonFields extends _PersonFields {
+  FieldMetadata<String> get uid => FieldMetadata<String>(
+    parentType: Person,
+    name: 'uid',
+    label: 'معرف حساب المستخدم',
+    operators: {...StringOperator.values},
+    isCodeOnly: true,
+    getValue: (obj) => obj is Person ? obj.uid : null,
+  );
+
   FieldMetadata<Area> get area => address.redirectTo(
     AddressFields().area,
     isExpandable: false,
