@@ -591,6 +591,113 @@ type AreasVarSampFields {
 type AreasVarianceFields {
   color: Float
 }
+
+type AuthInvitations {
+  claimedAt: timestamptz
+  code: String!
+  createdAt: timestamptz!
+  createdBy: uuid!
+  creator: AuthUsersData!
+  expiresAt: timestamptz!
+  id: uuid!
+  user: AuthUsersData!
+  userUid: uuid!
+}
+
+input AuthInvitationsBoolExp {
+  _and: [AuthInvitationsBoolExp!]
+  _not: AuthInvitationsBoolExp
+  _or: [AuthInvitationsBoolExp!]
+  claimedAt: TimestamptzComparisonExp
+  code: StringComparisonExp
+  createdAt: TimestamptzComparisonExp
+  createdBy: UuidComparisonExp
+  creator: AuthUsersDataBoolExp
+  expiresAt: TimestamptzComparisonExp
+  id: UuidComparisonExp
+  user: AuthUsersDataBoolExp
+  userUid: UuidComparisonExp
+}
+
+enum AuthInvitationsConstraint {
+  invitations_code_key
+  invitations_pkey
+  invitations_user_uid_key
+}
+
+input AuthInvitationsInsertInput {
+  creator: AuthUsersDataObjRelInsertInput
+  expiresAt: timestamptz
+  user: AuthUsersDataObjRelInsertInput
+  userUid: uuid
+}
+
+type AuthInvitationsMutationResponse {
+  affectedRows: Int!
+  returning: [AuthInvitations!]!
+}
+
+input AuthInvitationsObjRelInsertInput {
+  data: AuthInvitationsInsertInput!
+  onConflict: AuthInvitationsOnConflict
+}
+
+input AuthInvitationsOnConflict {
+  constraint: AuthInvitationsConstraint!
+  updateColumns: [AuthInvitationsUpdateColumn!]! = []
+  where: AuthInvitationsBoolExp
+}
+input AuthInvitationsOrderBy {
+  claimedAt: OrderBy
+  code: OrderBy
+  createdAt: OrderBy
+  createdBy: OrderBy
+  creator: AuthUsersDataOrderBy
+  expiresAt: OrderBy
+  id: OrderBy
+  user: AuthUsersDataOrderBy
+  userUid: OrderBy
+}
+input AuthInvitationsPkColumnsInput {
+  id: uuid!
+}
+
+enum AuthInvitationsSelectColumn {
+  claimedAt
+  code
+  createdAt
+  createdBy
+  expiresAt
+  id
+  userUid
+}
+
+input AuthInvitationsSetInput {
+  expiresAt: timestamptz
+}
+
+input AuthInvitationsStreamCursorInput {
+  initialValue: AuthInvitationsStreamCursorValueInput!
+  ordering: CursorOrdering
+}
+input AuthInvitationsStreamCursorValueInput {
+  claimedAt: timestamptz
+  code: String
+  createdAt: timestamptz
+  createdBy: uuid
+  expiresAt: timestamptz
+  id: uuid
+  userUid: uuid
+}
+
+enum AuthInvitationsUpdateColumn {
+  expiresAt
+}
+
+input AuthInvitationsUpdates {
+  _set: AuthInvitationsSetInput
+  where: AuthInvitationsBoolExp!
+}
 type AuthUsersAdminOn {
   adminOnArea: uuid
   adminOnGroup: uuid
@@ -882,6 +989,7 @@ type AuthUsersData {
     orderBy: [AuthUsersAdminOnOrderBy!]
     where: AuthUsersAdminOnBoolExp
   ): [AuthUsersAdminOn!]!
+  authId: String
   blurhash: String
   currentUserCanManageThisUser: Boolean
   email: String
@@ -892,6 +1000,7 @@ type AuthUsersData {
     orderBy: [UsersFcmTokensOrderBy!]
     where: UsersFcmTokensBoolExp
   ): [UsersFcmTokens!]!
+  invitation: AuthInvitations
   lastEdit: HistoryLatestEdits
   name: String!
   permissions(
@@ -923,10 +1032,12 @@ input AuthUsersDataBoolExp {
   _not: AuthUsersDataBoolExp
   _or: [AuthUsersDataBoolExp!]
   adminOn: AuthUsersAdminOnBoolExp
+  authId: StringComparisonExp
   blurhash: StringComparisonExp
   currentUserCanManageThisUser: BooleanComparisonExp
   email: StringComparisonExp
   fcmTokens: UsersFcmTokensBoolExp
+  invitation: AuthInvitationsBoolExp
   lastEdit: HistoryLatestEditsBoolExp
   name: StringComparisonExp
   permissions: AuthUsersPermissionsBoolExp
@@ -946,11 +1057,13 @@ enum AuthUsersDataConstraint {
 input AuthUsersDataInsertInput {
   adminOn: AuthUsersAdminOnArrRelInsertInput
   fcmTokens: UsersFcmTokensArrRelInsertInput
+  invitation: AuthInvitationsObjRelInsertInput
   name: String
   permissions: AuthUsersPermissionsArrRelInsertInput
   person: PersonsObjRelInsertInput
 }
 type AuthUsersDataMaxFields {
+  authId: String
   blurhash: String
   email: String
   name: String
@@ -958,6 +1071,7 @@ type AuthUsersDataMaxFields {
   uid: uuid
 }
 type AuthUsersDataMinFields {
+  authId: String
   blurhash: String
   email: String
   name: String
@@ -982,10 +1096,12 @@ input AuthUsersDataOnConflict {
 }
 input AuthUsersDataOrderBy {
   adminOnAggregate: AuthUsersAdminOnAggregateOrderBy
+  authId: OrderBy
   blurhash: OrderBy
   currentUserCanManageThisUser: OrderBy
   email: OrderBy
   fcmTokensAggregate: UsersFcmTokensAggregateOrderBy
+  invitation: AuthInvitationsOrderBy
   lastEdit: HistoryLatestEditsOrderBy
   name: OrderBy
   permissionsAggregate: AuthUsersPermissionsAggregateOrderBy
@@ -999,6 +1115,7 @@ input AuthUsersDataPkColumnsInput {
 }
 
 enum AuthUsersDataSelectColumn {
+  authId
   blurhash
   email
   name
@@ -1007,7 +1124,9 @@ enum AuthUsersDataSelectColumn {
 }
 
 input AuthUsersDataSetInput {
+  email: String
   name: String
+  uid: uuid
 }
 
 input AuthUsersDataStreamCursorInput {
@@ -1015,6 +1134,7 @@ input AuthUsersDataStreamCursorInput {
   ordering: CursorOrdering
 }
 input AuthUsersDataStreamCursorValueInput {
+  authId: String
   blurhash: String
   email: String
   name: String
@@ -1023,7 +1143,9 @@ input AuthUsersDataStreamCursorValueInput {
 }
 
 enum AuthUsersDataUpdateColumn {
+  email
   name
+  uid
 }
 
 input AuthUsersDataUpdates {
@@ -5933,6 +6055,7 @@ input PersonsSetInput {
   stateId: uuid
   storeId: uuid
   studyYearId: smallint
+  uid: uuid
   workStatus: String
 }
 type PersonsStddevFields {
@@ -6135,6 +6258,7 @@ enum PersonsUpdateColumn {
   stateId
   storeId
   studyYearId
+  uid
   workStatus
 }
 
@@ -7889,6 +8013,10 @@ type mutation_root {
     where: AreasStreetsBoolExp!
   ): AreasStreetsMutationResponse
   deleteAreasStreetsByPk(areaId: uuid!, streetId: uuid!): AreasStreets
+  deleteAuthInvitations(
+    where: AuthInvitationsBoolExp!
+  ): AuthInvitationsMutationResponse
+  deleteAuthInvitationsByPk(id: uuid!): AuthInvitations
   deleteAuthUsersAdminOn(
     where: AuthUsersAdminOnBoolExp!
   ): AuthUsersAdminOnMutationResponse
@@ -8032,6 +8160,14 @@ type mutation_root {
     object: AreasStreetsInsertInput!
     onConflict: AreasStreetsOnConflict
   ): AreasStreets
+  insertAuthInvitations(
+    objects: [AuthInvitationsInsertInput!]!
+    onConflict: AuthInvitationsOnConflict
+  ): AuthInvitationsMutationResponse
+  insertAuthInvitationsOne(
+    object: AuthInvitationsInsertInput!
+    onConflict: AuthInvitationsOnConflict
+  ): AuthInvitations
   insertAuthUsersAdminOn(
     objects: [AuthUsersAdminOnInsertInput!]!
     onConflict: AuthUsersAdminOnOnConflict
@@ -8346,6 +8482,17 @@ type mutation_root {
   updateAreasMany(
     updates: [AreasUpdates!]!
   ): [AreasMutationResponse]
+  updateAuthInvitations(
+    _set: AuthInvitationsSetInput
+    where: AuthInvitationsBoolExp!
+  ): AuthInvitationsMutationResponse
+  updateAuthInvitationsByPk(
+    _set: AuthInvitationsSetInput
+    pkColumns: AuthInvitationsPkColumnsInput!
+  ): AuthInvitations
+  updateAuthInvitationsMany(
+    updates: [AuthInvitationsUpdates!]!
+  ): [AuthInvitationsMutationResponse]
   updateAuthUsersData(
     _set: AuthUsersDataSetInput
     where: AuthUsersDataBoolExp!
@@ -8746,6 +8893,14 @@ type query_root {
     where: AreasStreetsBoolExp
   ): [AreasStreets!]!
   areasStreetsByPk(areaId: uuid!, streetId: uuid!): AreasStreets
+  authInvitations(
+    distinctOn: [AuthInvitationsSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [AuthInvitationsOrderBy!]
+    where: AuthInvitationsBoolExp
+  ): [AuthInvitations!]!
+  authInvitationsByPk(id: uuid!): AuthInvitations
   authUsersAdminOn(
     distinctOn: [AuthUsersAdminOnSelectColumn!]
     limit: Int
@@ -9261,6 +9416,19 @@ type subscription_root {
     cursor: [AreasStreetsStreamCursorInput]!
     where: AreasStreetsBoolExp
   ): [AreasStreets!]!
+  authInvitations(
+    distinctOn: [AuthInvitationsSelectColumn!]
+    limit: Int
+    offset: Int
+    orderBy: [AuthInvitationsOrderBy!]
+    where: AuthInvitationsBoolExp
+  ): [AuthInvitations!]!
+  authInvitationsByPk(id: uuid!): AuthInvitations
+  authInvitationsStream(
+    batchSize: Int!
+    cursor: [AuthInvitationsStreamCursorInput]!
+    where: AuthInvitationsBoolExp
+  ): [AuthInvitations!]!
   authUsersAdminOn(
     distinctOn: [AuthUsersAdminOnSelectColumn!]
     limit: Int

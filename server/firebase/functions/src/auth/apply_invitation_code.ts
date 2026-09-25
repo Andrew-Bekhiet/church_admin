@@ -3,9 +3,9 @@ import { https } from "firebase-functions/v2";
 import * as z from "zod";
 import { assertUserAuthenticated, defaultHasuraClaims } from "../common";
 import { claimInvitation } from "../hasura_interface";
-import { hasuraAdminSecret, invitationCodeHmacSecret } from "../secrets";
+import { hasuraAdminSecret } from "../secrets";
 import { recordInvitationAttemptOrThrow } from "./invitation_attempt_limiter";
-import { invitationCodeDigest, InviteCode } from "./invitation_code";
+import { InviteCode } from "./invitation_code_normalizer";
 
 const ApplyInvitationCodeRequest = z.object({ code: InviteCode });
 
@@ -15,7 +15,7 @@ function throwNotFound(): never {
 
 export const applyInvitationCode = https.onCall<
   z.infer<typeof ApplyInvitationCodeRequest>
->({ secrets: [hasuraAdminSecret, invitationCodeHmacSecret] }, async (request) => {
+>({ secrets: [hasuraAdminSecret] }, async (request) => {
   const authUser = await assertUserAuthenticated(request.auth);
 
   await recordInvitationAttemptOrThrow(
@@ -47,13 +47,8 @@ export const applyInvitationCode = https.onCall<
 
   let hasuraUID: string | null;
   try {
-    const codeDigest = invitationCodeDigest(
-      code,
-      invitationCodeHmacSecret.value(),
-    );
-
     const newUser = await claimInvitation({
-      codeDigest: codeDigest,
+      code,
       firebaseAuthUID: authUser.uid,
       email: authUser.email,
     });

@@ -1,0 +1,8 @@
+fragment Invitation on AuthInvitations {
+  id
+  userUid
+  code
+  createdAt
+  expiresAt
+  claimedAt
+}

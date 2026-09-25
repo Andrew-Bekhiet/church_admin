@@ -16,6 +16,7 @@ part 'user.g.dart';
     'canManageSomeUsers',
     'preferences',
     'fcmTokens',
+    'invitation',
   ],
   regexIgnoreFields: [r'.+History$'],
   allowExtension: true,
@@ -45,10 +46,7 @@ class User extends ViewableWithIDAndImage
   final List<AdminOnData>? adminOn;
 
   @override
-  @JsonKey(
-    fromJson: permissionsSetFromJson,
-    toJson: permissionsSetToJson,
-  )
+  @JsonKey(fromJson: permissionsSetFromJson, toJson: permissionsSetToJson)
   @QueryableField(
     manyToManyRelSelectField: 'permission',
     manyToManyRelType: UsersPermissionsRel,
@@ -79,6 +77,9 @@ class User extends ViewableWithIDAndImage
 
   @override
   final List<AdminOnData>? groupsHistory;
+
+  @override
+  final Invitation? invitation;
 
   @override
   @JsonKey(includeToJson: false)
@@ -122,6 +123,7 @@ class User extends ViewableWithIDAndImage
     this.servicesHistory,
     this.classesHistory,
     this.groupsHistory,
+    this.invitation,
   });
 
   factory User.fromJson(Map<String, Object?> json) => _$UserFromJson(json);

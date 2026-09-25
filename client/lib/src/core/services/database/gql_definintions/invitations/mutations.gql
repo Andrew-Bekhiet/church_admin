@@ -1,0 +1,16 @@
+mutation insertInvitation($userUid: uuid!, $expiresAt: timestamptz!) {
+  insertAuthInvitationsOne(
+    object: { userUid: $userUid, expiresAt: $expiresAt }
+  ) {
+    ...Invitation
+  }
+}
+
+mutation updateInvitationExpiry($id: uuid!, $expiresAt: timestamptz!) {
+  updateAuthInvitationsByPk(
+    pkColumns: { id: $id }
+    _set: { expiresAt: $expiresAt }
+  ) {
+    ...Invitation
+  }
+}

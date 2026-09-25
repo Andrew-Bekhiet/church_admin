@@ -538,6 +538,25 @@ class MockFunctionsService extends _i1.Mock implements _i10.FunctionsService {
           as _i7.Future<void>);
 
   @override
+  _i7.Future<String> createUser(_i10.CreateUserRequest? request) =>
+      (super.noSuchMethod(
+            Invocation.method(#createUser, [request]),
+            returnValue: _i7.Future<String>.value(
+              _i11.dummyValue<String>(
+                this,
+                Invocation.method(#createUser, [request]),
+              ),
+            ),
+            returnValueForMissingStub: _i7.Future<String>.value(
+              _i11.dummyValue<String>(
+                this,
+                Invocation.method(#createUser, [request]),
+              ),
+            ),
+          )
+          as _i7.Future<String>);
+
+  @override
   _i7.Future<String> exportData({
     List<String>? areasIds = const [],
     List<String>? servicesIds = const [],

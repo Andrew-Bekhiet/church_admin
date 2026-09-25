@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:material_symbols_icons/material_symbols_icons.dart';
 import 'package:rxdart/rxdart.dart';
 
 class ManageUsersScreen extends StatefulWidget {
@@ -64,9 +65,25 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
             };
           },
         ),
+        floatingActionButton: BlocBuilder<AuthBloc, AuthState>(
+          bloc: AuthBloc.I,
+          builder: (context, state) {
+            final canCreateUsers = switch (state.unwrapped) {
+              AuthAuthenticated(userData: User(:final permissions)) =>
+                permissions.manageAllUsers || permissions.onboardUsers,
+              _ => false,
+            };
 
-        // TODO: implement adding new user data, importing a user
-        // and inviting a user with inviation code
+            if (!canCreateUsers) return const SizedBox.shrink();
+
+            return FloatingActionButton.extended(
+              icon: const Icon(Symbols.person_add),
+              label: const Text('إضافة خادم'),
+              onPressed: () =>
+                  const EditUserRoute($extra: CreateUser()).push(context),
+            );
+          },
+        ),
       ),
     );
   }

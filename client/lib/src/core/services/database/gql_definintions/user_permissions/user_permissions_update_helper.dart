@@ -6,6 +6,37 @@ import 'package:church_admin/src/core/services/database/gql_definintions/user_pe
 /// Similar to `PersonUpdateHelper`, this computes what needs to be deleted
 /// and what needs to be inserted when updating a user's admin permissions.
 class UserPermissionsUpdateHelper {
+  static Input_AuthUsersAdminOnInsertInput adminOnInsertInputFrom(
+    String? userId,
+    AdminOnData data,
+  ) {
+    return Input_AuthUsersAdminOnInsertInput(
+      uid: userId?.toUuid(),
+      adminOnArea: data.area?.id.toUuid(),
+      areaAllowEdit: data.areaAllowEdit,
+      areaAllowExport: data.areaAllowExport,
+      areaAdminOnUsers: data.areaAdminOnUsers,
+      adminOnService: data.service?.id.toUuid(),
+      serviceStudyYear: data.serviceStudyYearData?.order,
+      serviceGender: data.serviceGender,
+      serviceAllowEdit: data.serviceAllowEdit,
+      serviceAllowExport: data.serviceAllowExport,
+      serviceAllowRecordAttendance: data.serviceAllowRecordAttendance,
+      serviceAllowRecordServantsAttendance:
+          data.serviceAllowRecordServantsAttendance,
+      serviceAdminOnUsers: data.serviceAdminOnUsers,
+      serviceWriteRelatedFamilies: data.serviceWriteRelatedFamilies,
+      adminOnGroup: data.group?.id.toUuid(),
+      groupAllowEdit: data.groupAllowEdit,
+      groupAllowExport: data.groupAllowExport,
+      groupAllowRecordAttendance: data.groupAllowRecordAttendance,
+      groupAllowRecordServantsAttendance:
+          data.groupAllowRecordServantsAttendance,
+      groupAdminOnUsers: data.groupAdminOnUsers,
+      groupWriteRelatedFamilies: data.groupWriteRelatedFamilies,
+    );
+  }
+
   final String userId;
   final PermissionsSet newPermissions;
   final PermissionsSet oldPermissions;
@@ -29,8 +60,9 @@ class UserPermissionsUpdateHelper {
   List<UuidValue> get _deleteAdminOnIds =>
       _adminOnDiff.removed.map((a) => a.permissionId.toUuid()).toList();
 
-  List<Input_AuthUsersAdminOnInsertInput> get _newAdminOn =>
-      _adminOnDiff.added.map(_toInsertInput).toList();
+  List<Input_AuthUsersAdminOnInsertInput> get _newAdminOn => _adminOnDiff.added
+      .map((data) => adminOnInsertInputFrom(userId, data))
+      .toList();
 
   Variables_Mutation_updateUserPermissions get variables =>
       Variables_Mutation_updateUserPermissions(
@@ -61,41 +93,7 @@ class UserPermissionsUpdateHelper {
     required this.oldAdminOn,
     required this.userId,
   }) {
-    _permissionsDiff = diff(
-      oldPermissions.toSet(),
-      newPermissions.toSet(),
-    );
-    _adminOnDiff = diff(
-      oldAdminOn.toSet(),
-      newAdminOn.toSet(),
-    );
-  }
-
-  Input_AuthUsersAdminOnInsertInput _toInsertInput(AdminOnData data) {
-    return Input_AuthUsersAdminOnInsertInput(
-      uid: userId.toUuid(),
-      adminOnArea: data.area?.id.toUuid(),
-      areaAllowEdit: data.areaAllowEdit,
-      areaAllowExport: data.areaAllowExport,
-      areaAdminOnUsers: data.areaAdminOnUsers,
-      adminOnService: data.service?.id.toUuid(),
-      serviceStudyYear: data.serviceStudyYearData?.order,
-      serviceGender: data.serviceGender,
-      serviceAllowEdit: data.serviceAllowEdit,
-      serviceAllowExport: data.serviceAllowExport,
-      serviceAllowRecordAttendance: data.serviceAllowRecordAttendance,
-      serviceAllowRecordServantsAttendance:
-          data.serviceAllowRecordServantsAttendance,
-      serviceAdminOnUsers: data.serviceAdminOnUsers,
-      serviceWriteRelatedFamilies: data.serviceWriteRelatedFamilies,
-      adminOnGroup: data.group?.id.toUuid(),
-      groupAllowEdit: data.groupAllowEdit,
-      groupAllowExport: data.groupAllowExport,
-      groupAllowRecordAttendance: data.groupAllowRecordAttendance,
-      groupAllowRecordServantsAttendance:
-          data.groupAllowRecordServantsAttendance,
-      groupAdminOnUsers: data.groupAdminOnUsers,
-      groupWriteRelatedFamilies: data.groupWriteRelatedFamilies,
-    );
+    _permissionsDiff = diff(oldPermissions.toSet(), newPermissions.toSet());
+    _adminOnDiff = diff(oldAdminOn.toSet(), newAdminOn.toSet());
   }
 }

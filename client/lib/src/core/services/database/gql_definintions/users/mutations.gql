@@ -1,0 +1,35 @@
+mutation updateUser(
+  $uid: uuid!
+  $set: AuthUsersDataSetInput!
+  $updateUser: Boolean!
+  $linkPersonId: uuid
+  $linkPerson: Boolean!
+  $unlinkPersonId: uuid
+  $unlinkPerson: Boolean!
+) {
+  updateAuthUsersDataByPk(pkColumns: { uid: $uid }, _set: $set)
+    @include(if: $updateUser) {
+    uid
+  }
+
+  unlink: updatePersons(
+    where: {
+      _and: [{ id: { _eq: $unlinkPersonId } }, { uid: { _eq: $uid } }]
+    }
+    _set: { uid: null }
+  ) @include(if: $unlinkPerson) {
+    affectedRows
+  }
+
+  link: updatePersons(
+    where: {
+      _and: [
+        { id: { _eq: $linkPersonId } }
+        { uid: { _isNull: true } }
+      ]
+    }
+    _set: { uid: $uid }
+  ) @include(if: $linkPerson) {
+    affectedRows
+  }
+}

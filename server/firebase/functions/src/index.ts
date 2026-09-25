@@ -10,6 +10,7 @@ setGlobalOptions({
 });
 
 export * from "./auth/apply_invitation_code";
+export * from "./auth/create_user";
 export * from "./auth/delete_my_account";
 export * from "./auth/triggers";
 export * from "./auth/try_claim_account";

@@ -4,6 +4,7 @@ import '../../classes/__generated__/fragments.gql.dart';
 import '../../fcm_tokens/__generated__/fragments.gql.dart';
 import '../../gql/__generated__/fragments.gql.dart';
 import '../../groups/__generated__/fragments.gql.dart';
+import '../../invitations/__generated__/fragments.gql.dart';
 import '../../persons/__generated__/fragments.gql.dart';
 import '../../services/__generated__/fragments.gql.dart';
 import '../../users_preferences/__generated__/fragments.gql.dart';
@@ -324,6 +325,7 @@ const documentNodeSubscriptionwatchUser = DocumentNode(
     fragmentDefinitionUserOverview,
     fragmentDefinitionUser,
     fragmentDefinitionUserNoPhoto,
+    fragmentDefinitionInvitation,
     fragmentDefinitionUserPermissions,
     fragmentDefinitionPerson,
     fragmentDefinitionPersonNoPhoto,
@@ -361,6 +363,8 @@ class Subscription_watchUser_authUsersDataByPk
     this.photoUpdatedAt,
     this.blurhash,
     this.currentUserCanManageThisUser,
+    this.authId,
+    this.invitation,
     required this.permissions,
     this.person,
     this.lastEdit,
@@ -379,6 +383,8 @@ class Subscription_watchUser_authUsersDataByPk
     final l$photoUpdatedAt = json['photoUpdatedAt'];
     final l$blurhash = json['blurhash'];
     final l$currentUserCanManageThisUser = json['currentUserCanManageThisUser'];
+    final l$authId = json['authId'];
+    final l$invitation = json['invitation'];
     final l$permissions = json['permissions'];
     final l$person = json['person'];
     final l$lastEdit = json['lastEdit'];
@@ -395,6 +401,12 @@ class Subscription_watchUser_authUsersDataByPk
           : tstzFromString(l$photoUpdatedAt),
       blurhash: (l$blurhash as String?),
       currentUserCanManageThisUser: (l$currentUserCanManageThisUser as bool?),
+      authId: (l$authId as String?),
+      invitation: l$invitation == null
+          ? null
+          : Fragment_Invitation.fromJson(
+              (l$invitation as Map<String, dynamic>),
+            ),
       permissions: (l$permissions as List<dynamic>)
           .map(
             (e) =>
@@ -445,6 +457,10 @@ class Subscription_watchUser_authUsersDataByPk
 
   final bool? currentUserCanManageThisUser;
 
+  final String? authId;
+
+  final Fragment_Invitation? invitation;
+
   final List<Subscription_watchUser_authUsersDataByPk_permissions> permissions;
 
   final Subscription_watchUser_authUsersDataByPk_person? person;
@@ -476,6 +492,10 @@ class Subscription_watchUser_authUsersDataByPk
     final l$currentUserCanManageThisUser = currentUserCanManageThisUser;
     _resultData['currentUserCanManageThisUser'] =
         l$currentUserCanManageThisUser;
+    final l$authId = authId;
+    _resultData['authId'] = l$authId;
+    final l$invitation = invitation;
+    _resultData['invitation'] = l$invitation?.toJson();
     final l$permissions = permissions;
     _resultData['permissions'] = l$permissions.map((e) => e.toJson()).toList();
     final l$person = person;
@@ -500,6 +520,8 @@ class Subscription_watchUser_authUsersDataByPk
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$blurhash = blurhash;
     final l$currentUserCanManageThisUser = currentUserCanManageThisUser;
+    final l$authId = authId;
+    final l$invitation = invitation;
     final l$permissions = permissions;
     final l$person = person;
     final l$lastEdit = lastEdit;
@@ -514,6 +536,8 @@ class Subscription_watchUser_authUsersDataByPk
       l$photoUpdatedAt,
       l$blurhash,
       l$currentUserCanManageThisUser,
+      l$authId,
+      l$invitation,
       Object.hashAll(l$permissions.map((v) => v)),
       l$person,
       l$lastEdit,
@@ -566,6 +590,16 @@ class Subscription_watchUser_authUsersDataByPk
     final lOther$currentUserCanManageThisUser =
         other.currentUserCanManageThisUser;
     if (l$currentUserCanManageThisUser != lOther$currentUserCanManageThisUser) {
+      return false;
+    }
+    final l$authId = authId;
+    final lOther$authId = other.authId;
+    if (l$authId != lOther$authId) {
+      return false;
+    }
+    final l$invitation = invitation;
+    final lOther$invitation = other.invitation;
+    if (l$invitation != lOther$invitation) {
       return false;
     }
     final l$permissions = permissions;
@@ -649,6 +683,8 @@ abstract class CopyWith_Subscription_watchUser_authUsersDataByPk<TRes> {
     DateTime? photoUpdatedAt,
     String? blurhash,
     bool? currentUserCanManageThisUser,
+    String? authId,
+    Fragment_Invitation? invitation,
     List<Subscription_watchUser_authUsersDataByPk_permissions>? permissions,
     Subscription_watchUser_authUsersDataByPk_person? person,
     Fragment_LatestEditHistory? lastEdit,
@@ -656,6 +692,7 @@ abstract class CopyWith_Subscription_watchUser_authUsersDataByPk<TRes> {
     Fragment_UserPreferences? preferences,
     List<Fragment_FcmToken>? fcmTokens,
   });
+  CopyWith_Fragment_Invitation<TRes> get invitation;
   TRes permissions(
     Iterable<Subscription_watchUser_authUsersDataByPk_permissions> Function(
       Iterable<
@@ -708,6 +745,8 @@ class _CopyWithImpl_Subscription_watchUser_authUsersDataByPk<TRes>
     Object? photoUpdatedAt = _undefined,
     Object? blurhash = _undefined,
     Object? currentUserCanManageThisUser = _undefined,
+    Object? authId = _undefined,
+    Object? invitation = _undefined,
     Object? permissions = _undefined,
     Object? person = _undefined,
     Object? lastEdit = _undefined,
@@ -735,6 +774,10 @@ class _CopyWithImpl_Subscription_watchUser_authUsersDataByPk<TRes>
       currentUserCanManageThisUser: currentUserCanManageThisUser == _undefined
           ? _instance.currentUserCanManageThisUser
           : (currentUserCanManageThisUser as bool?),
+      authId: authId == _undefined ? _instance.authId : (authId as String?),
+      invitation: invitation == _undefined
+          ? _instance.invitation
+          : (invitation as Fragment_Invitation?),
       permissions: permissions == _undefined || permissions == null
           ? _instance.permissions
           : (permissions
@@ -756,6 +799,16 @@ class _CopyWithImpl_Subscription_watchUser_authUsersDataByPk<TRes>
           : (fcmTokens as List<Fragment_FcmToken>),
     ),
   );
+
+  CopyWith_Fragment_Invitation<TRes> get invitation {
+    final local$invitation = _instance.invitation;
+    return local$invitation == null
+        ? CopyWith_Fragment_Invitation.stub(_then(_instance))
+        : CopyWith_Fragment_Invitation(
+            local$invitation,
+            (e) => call(invitation: e),
+          );
+  }
 
   TRes permissions(
     Iterable<Subscription_watchUser_authUsersDataByPk_permissions> Function(
@@ -855,6 +908,8 @@ class _CopyWithStubImpl_Subscription_watchUser_authUsersDataByPk<TRes>
     DateTime? photoUpdatedAt,
     String? blurhash,
     bool? currentUserCanManageThisUser,
+    String? authId,
+    Fragment_Invitation? invitation,
     List<Subscription_watchUser_authUsersDataByPk_permissions>? permissions,
     Subscription_watchUser_authUsersDataByPk_person? person,
     Fragment_LatestEditHistory? lastEdit,
@@ -862,6 +917,9 @@ class _CopyWithStubImpl_Subscription_watchUser_authUsersDataByPk<TRes>
     Fragment_UserPreferences? preferences,
     List<Fragment_FcmToken>? fcmTokens,
   }) => _res;
+
+  CopyWith_Fragment_Invitation<TRes> get invitation =>
+      CopyWith_Fragment_Invitation.stub(_res);
 
   permissions(_fn) => _res;
 
@@ -4005,6 +4063,7 @@ const documentNodeSubscriptionwatchAllUsers = DocumentNode(
     fragmentDefinitionUserOverview,
     fragmentDefinitionUser,
     fragmentDefinitionUserNoPhoto,
+    fragmentDefinitionInvitation,
     fragmentDefinitionUserPermissions,
     fragmentDefinitionPerson,
     fragmentDefinitionPersonNoPhoto,
@@ -4033,6 +4092,8 @@ class Subscription_watchAllUsers_authUsersData
     this.photoUpdatedAt,
     this.blurhash,
     this.currentUserCanManageThisUser,
+    this.authId,
+    this.invitation,
     required this.permissions,
     this.person,
     required this.adminOn,
@@ -4048,6 +4109,8 @@ class Subscription_watchAllUsers_authUsersData
     final l$photoUpdatedAt = json['photoUpdatedAt'];
     final l$blurhash = json['blurhash'];
     final l$currentUserCanManageThisUser = json['currentUserCanManageThisUser'];
+    final l$authId = json['authId'];
+    final l$invitation = json['invitation'];
     final l$permissions = json['permissions'];
     final l$person = json['person'];
     final l$adminOn = json['adminOn'];
@@ -4061,6 +4124,12 @@ class Subscription_watchAllUsers_authUsersData
           : tstzFromString(l$photoUpdatedAt),
       blurhash: (l$blurhash as String?),
       currentUserCanManageThisUser: (l$currentUserCanManageThisUser as bool?),
+      authId: (l$authId as String?),
+      invitation: l$invitation == null
+          ? null
+          : Fragment_Invitation.fromJson(
+              (l$invitation as Map<String, dynamic>),
+            ),
       permissions: (l$permissions as List<dynamic>)
           .map(
             (e) =>
@@ -4098,6 +4167,10 @@ class Subscription_watchAllUsers_authUsersData
 
   final bool? currentUserCanManageThisUser;
 
+  final String? authId;
+
+  final Fragment_Invitation? invitation;
+
   final List<Subscription_watchAllUsers_authUsersData_permissions> permissions;
 
   final Subscription_watchAllUsers_authUsersData_person? person;
@@ -4123,6 +4196,10 @@ class Subscription_watchAllUsers_authUsersData
     final l$currentUserCanManageThisUser = currentUserCanManageThisUser;
     _resultData['currentUserCanManageThisUser'] =
         l$currentUserCanManageThisUser;
+    final l$authId = authId;
+    _resultData['authId'] = l$authId;
+    final l$invitation = invitation;
+    _resultData['invitation'] = l$invitation?.toJson();
     final l$permissions = permissions;
     _resultData['permissions'] = l$permissions.map((e) => e.toJson()).toList();
     final l$person = person;
@@ -4141,6 +4218,8 @@ class Subscription_watchAllUsers_authUsersData
     final l$photoUpdatedAt = photoUpdatedAt;
     final l$blurhash = blurhash;
     final l$currentUserCanManageThisUser = currentUserCanManageThisUser;
+    final l$authId = authId;
+    final l$invitation = invitation;
     final l$permissions = permissions;
     final l$person = person;
     final l$adminOn = adminOn;
@@ -4152,6 +4231,8 @@ class Subscription_watchAllUsers_authUsersData
       l$photoUpdatedAt,
       l$blurhash,
       l$currentUserCanManageThisUser,
+      l$authId,
+      l$invitation,
       Object.hashAll(l$permissions.map((v) => v)),
       l$person,
       Object.hashAll(l$adminOn.map((v) => v)),
@@ -4201,6 +4282,16 @@ class Subscription_watchAllUsers_authUsersData
     final lOther$currentUserCanManageThisUser =
         other.currentUserCanManageThisUser;
     if (l$currentUserCanManageThisUser != lOther$currentUserCanManageThisUser) {
+      return false;
+    }
+    final l$authId = authId;
+    final lOther$authId = other.authId;
+    if (l$authId != lOther$authId) {
+      return false;
+    }
+    final l$invitation = invitation;
+    final lOther$invitation = other.invitation;
+    if (l$invitation != lOther$invitation) {
       return false;
     }
     final l$permissions = permissions;
@@ -4262,10 +4353,13 @@ abstract class CopyWith_Subscription_watchAllUsers_authUsersData<TRes> {
     DateTime? photoUpdatedAt,
     String? blurhash,
     bool? currentUserCanManageThisUser,
+    String? authId,
+    Fragment_Invitation? invitation,
     List<Subscription_watchAllUsers_authUsersData_permissions>? permissions,
     Subscription_watchAllUsers_authUsersData_person? person,
     List<Subscription_watchAllUsers_authUsersData_adminOn>? adminOn,
   });
+  CopyWith_Fragment_Invitation<TRes> get invitation;
   TRes permissions(
     Iterable<Subscription_watchAllUsers_authUsersData_permissions> Function(
       Iterable<
@@ -4310,6 +4404,8 @@ class _CopyWithImpl_Subscription_watchAllUsers_authUsersData<TRes>
     Object? photoUpdatedAt = _undefined,
     Object? blurhash = _undefined,
     Object? currentUserCanManageThisUser = _undefined,
+    Object? authId = _undefined,
+    Object? invitation = _undefined,
     Object? permissions = _undefined,
     Object? person = _undefined,
     Object? adminOn = _undefined,
@@ -4334,6 +4430,10 @@ class _CopyWithImpl_Subscription_watchAllUsers_authUsersData<TRes>
       currentUserCanManageThisUser: currentUserCanManageThisUser == _undefined
           ? _instance.currentUserCanManageThisUser
           : (currentUserCanManageThisUser as bool?),
+      authId: authId == _undefined ? _instance.authId : (authId as String?),
+      invitation: invitation == _undefined
+          ? _instance.invitation
+          : (invitation as Fragment_Invitation?),
       permissions: permissions == _undefined || permissions == null
           ? _instance.permissions
           : (permissions
@@ -4346,6 +4446,16 @@ class _CopyWithImpl_Subscription_watchAllUsers_authUsersData<TRes>
           : (adminOn as List<Subscription_watchAllUsers_authUsersData_adminOn>),
     ),
   );
+
+  CopyWith_Fragment_Invitation<TRes> get invitation {
+    final local$invitation = _instance.invitation;
+    return local$invitation == null
+        ? CopyWith_Fragment_Invitation.stub(_then(_instance))
+        : CopyWith_Fragment_Invitation(
+            local$invitation,
+            (e) => call(invitation: e),
+          );
+  }
 
   TRes permissions(
     Iterable<Subscription_watchAllUsers_authUsersData_permissions> Function(
@@ -4414,10 +4524,15 @@ class _CopyWithStubImpl_Subscription_watchAllUsers_authUsersData<TRes>
     DateTime? photoUpdatedAt,
     String? blurhash,
     bool? currentUserCanManageThisUser,
+    String? authId,
+    Fragment_Invitation? invitation,
     List<Subscription_watchAllUsers_authUsersData_permissions>? permissions,
     Subscription_watchAllUsers_authUsersData_person? person,
     List<Subscription_watchAllUsers_authUsersData_adminOn>? adminOn,
   }) => _res;
+
+  CopyWith_Fragment_Invitation<TRes> get invitation =>
+      CopyWith_Fragment_Invitation.stub(_res);
 
   permissions(_fn) => _res;
 

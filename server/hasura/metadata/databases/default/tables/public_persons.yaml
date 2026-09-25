@@ -336,6 +336,7 @@ update_permissions:
         - state_id
         - store_id
         - study_year_id
+        - uid
         - work_status
       filter:
         _exists:
