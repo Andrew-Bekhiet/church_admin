@@ -1,3 +1,5 @@
+// ignore: unused_import
+import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -5,8 +7,16 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('AttendanceDateChip', () {
-    final testDate = DateTime(2026, 7, 30);
-    final recordedDates = [DateTime(2026, 7, 10), DateTime(2026, 7, 20)];
+    final testTime = DateTime.now();
+    final testDate = DateUtils.dateOnly(
+      testTime.copyWith(
+        day: DateUtils.getDaysInMonth(testTime.year, testTime.month),
+      ),
+    );
+    final recordedDates = [
+      testDate.copyWith(day: 10),
+      testDate.copyWith(day: 20),
+    ];
 
     Widget buildSubject({
       required DateTime date,
@@ -50,12 +60,16 @@ void main() {
       await tester.tap(find.byType(AttendanceDateChip));
       await tester.pumpAndSettle();
 
-      final dayCells = tester.widgetList<AttendanceDateSelectorDayCell>(
-        find.byType(AttendanceDateSelectorDayCell),
-      );
-      expect(dayCells, findsNWidgets(recordedDates.length));
       expect(
-        dayCells.map((c) => DateUtils.dateOnly(c.date)),
+        find.byType(CalendarDayWithIndicatorWidget),
+        findsNWidgets(recordedDates.length),
+      );
+      expect(
+        tester
+            .widgetList<CalendarDayWithIndicatorWidget>(
+              find.byType(CalendarDayWithIndicatorWidget),
+            )
+            .map((c) => DateUtils.dateOnly(c.date)),
         orderedEquals(recordedDates),
       );
 
@@ -81,7 +95,14 @@ void main() {
       await tester.tap(targetDayFinder);
       await tester.pumpAndSettle();
 
-      final okButton = find.byType(TextButton).last;
+      final okButton = find.descendant(
+        of: find.byType(InkWell),
+        matching: find.text(
+          MaterialLocalizations.of(
+            tester.element(find.byType(Navigator)),
+          ).okButtonLabel.toUpperCase(),
+        ),
+      );
       expect(okButton, findsOneWidget);
       await tester.tap(okButton);
       await tester.pumpAndSettle();
