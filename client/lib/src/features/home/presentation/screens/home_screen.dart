@@ -47,7 +47,6 @@ class _HomeScreenState extends State<HomeScreen> {
   void dispose() {
     _appLifecycleListener.dispose();
 
-    unawaited(homeBloc.close());
     unawaited(_localAuthListener.cancel());
 
     super.dispose();
