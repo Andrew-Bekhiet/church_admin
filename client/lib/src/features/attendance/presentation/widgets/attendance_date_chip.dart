@@ -92,7 +92,7 @@ class AttendanceDateChip extends StatelessWidget {
               final dayOnly = DateUtils.dateOnly(date);
               if (!recordedDays.contains(dayOnly)) return null;
 
-              return AttendanceDateSelectorDayCell(
+              return CalendarDayWithIndicatorWidget(
                 date: dayOnly,
                 isSelected: isSelected ?? false,
                 indicatorColor: isSelected ?? false

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class AttendanceDateSelectorDayCell extends StatelessWidget {
+class CalendarDayWithIndicatorWidget extends StatelessWidget {
   final DateTime date;
   final bool isSelected;
   final Color indicatorColor;
   final TextStyle? textStyle;
   final Decoration? decoration;
 
-  const AttendanceDateSelectorDayCell({
+  const CalendarDayWithIndicatorWidget({
     required this.date,
     required this.isSelected,
     required this.indicatorColor,
