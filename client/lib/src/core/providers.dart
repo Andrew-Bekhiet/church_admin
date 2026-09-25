@@ -95,14 +95,11 @@ final graphQLClientProvider = Provider<DBGraphQLClient>(
       link: Link.concat(
         loggingService.loggingLink,
         AddAuthLink(
-          idTokenStream: ref
+          authUserStream: ref
               .watch(authStorageProvider)
               .getAuthDataFromCache()
               .asStream()
-              .concatWith([ref.watch(authRepositoryProvider).userChanges])
-              .map(
-                (u) => u?.idToken,
-              ),
+              .concatWith([ref.watch(authRepositoryProvider).userChanges]),
           url: ref.watch(secretsServiceProvider).hasuraServer,
         ),
       ),

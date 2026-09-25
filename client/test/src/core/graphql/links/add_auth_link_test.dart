@@ -66,7 +66,7 @@ void main() {
       final mockWebSocketLink = _createMockWSLink(mockResponse);
 
       final unit = AddAuthLink(
-        idTokenStream: AuthBloc.I.idTokenStream,
+        authUserStream: AuthBloc.I.userStream,
         url: 'url',
         createHttpLink: (url) => mockHttpLink,
         createWSLink: (url, config) {
@@ -101,8 +101,8 @@ void main() {
   test(
     'Add Auth Link => request => gets latest idTokenStream data',
     () async {
-      late final idTokenStreamController = BehaviorSubject<String>();
-      addTearDown(idTokenStreamController.close);
+      late final authUserStreamController = BehaviorSubject<AuthUser>();
+      addTearDown(authUserStreamController.close);
 
       dynamic Function()? capturedInitialPayload;
 
@@ -112,7 +112,9 @@ void main() {
       final mockWebSocketLink = _createMockWSLink(mockResponse);
 
       final unit = AddAuthLink(
-        idTokenStream: idTokenStreamController.stream.startWith('seedIdToken'),
+        authUserStream: authUserStreamController.stream.startWith(
+          _createAuthUser(idToken: 'seedIdToken'),
+        ),
         url: 'url',
         createHttpLink: (url) => mockHttpLink,
         createWSLink: (url, config) {
@@ -136,7 +138,7 @@ void main() {
         ),
       );
 
-      idTokenStreamController.add('newIdToken');
+      authUserStreamController.add(_createAuthUser(idToken: 'newIdToken'));
       await Future.delayed(Duration.zero);
 
       expect(
@@ -155,14 +157,14 @@ void main() {
   test(
     'Add Auth Link => request => subscription => reconnects with the new token when another user signs in',
     () => fakeAsync((async) {
-      final idTokenStreamController = BehaviorSubject<String?>.seeded(
-        'firstUserToken',
+      final authUserStreamController = BehaviorSubject<AuthUser?>.seeded(
+        _createAuthUser(uid: 'firstUser', idToken: 'firstUserToken'),
       );
 
       final connectionInitAuthorizations = <String>[];
 
       final unit = AddAuthLink(
-        idTokenStream: idTokenStreamController.stream,
+        authUserStream: authUserStreamController.stream,
         url: 'https://example.com',
         createWSLink: (url, config) => _createFakeServerWSLink(
           url,
@@ -191,9 +193,9 @@ void main() {
           .listen(null);
       async.flushMicrotasks();
 
-      idTokenStreamController
+      authUserStreamController
         ..add(null)
-        ..add('secondUserToken');
+        ..add(_createAuthUser(uid: 'secondUser', idToken: 'secondUserToken'));
       async.elapse(const Duration(seconds: 2));
 
       expect(
@@ -203,19 +205,21 @@ void main() {
 
       unawaited(subscription.cancel());
       unawaited(unit.dispose());
-      unawaited(idTokenStreamController.close());
+      unawaited(authUserStreamController.close());
     }),
   );
 
   test(
-    'Add Auth Link => request => subscription => restarts on the new connection when the id token refreshes',
+    'Add Auth Link => request => subscription => keeps the connection when the id token refreshes for the same account',
     () => fakeAsync((async) {
-      final idTokens = BehaviorSubject<String?>.seeded('firstIdToken');
+      final authUsers = BehaviorSubject<AuthUser?>.seeded(
+        _createAuthUser(idToken: 'firstIdToken'),
+      );
 
       final clientMessages = <String>[];
 
       final unit = AddAuthLink(
-        idTokenStream: idTokens,
+        authUserStream: authUsers,
         url: 'https://example.com',
         createWSLink: (url, config) => _createFakeServerWSLink(
           url,
@@ -245,27 +249,27 @@ void main() {
           .listen(null);
       async.flushMicrotasks();
 
-      idTokens.add('refreshedIdToken');
+      authUsers
+        ..add(_createAuthUser(idToken: 'secondIdToken'))
+        ..add(_createAuthUser(idToken: 'thirdIdToken'))
+        ..add(_createAuthUser(idToken: 'fourthIdToken'));
       async.elapse(const Duration(seconds: 2));
 
-      expect(clientMessages, [
-        'connection_init Bearer firstIdToken',
-        'start',
-        'connection_init Bearer refreshedIdToken',
-        'start',
-      ]);
+      expect(clientMessages, ['connection_init Bearer firstIdToken', 'start']);
 
       unawaited(subscription.cancel());
       unawaited(unit.dispose());
-      unawaited(idTokens.close());
+      unawaited(authUsers.close());
     }),
   );
 
   test(
     'Add Auth Link => request => query => sends the refreshed id token after the id token refreshes',
     () => fakeAsync((async) {
-      final idTokens = BehaviorSubject<String?>.seeded('firstIdToken');
-      addTearDown(idTokens.close);
+      final authUsers = BehaviorSubject<AuthUser?>.seeded(
+        _createAuthUser(idToken: 'firstIdToken'),
+      );
+      addTearDown(authUsers.close);
 
       final sentAuthorizations = <String?>[];
       final mockHttpLink = MockHttpLink();
@@ -279,7 +283,7 @@ void main() {
       });
 
       final unit = AddAuthLink(
-        idTokenStream: idTokens,
+        authUserStream: authUsers,
         url: 'url',
         createHttpLink: (url) => mockHttpLink,
       );
@@ -291,7 +295,7 @@ void main() {
 
       unit.request(createQueryRequest()).listen(null);
       async.flushMicrotasks();
-      idTokens.add('refreshedIdToken');
+      authUsers.add(_createAuthUser(idToken: 'refreshedIdToken'));
       async.flushMicrotasks();
       unit.request(createQueryRequest()).listen(null);
       async.flushMicrotasks();
@@ -312,7 +316,7 @@ void main() {
       final mockWebSocketLink = _createMockWSLink(mockResponse);
 
       final unit = AddAuthLink(
-        idTokenStream: AuthBloc.I.idTokenStream,
+        authUserStream: AuthBloc.I.userStream,
         url: 'url',
         createHttpLink: (url) => mockHttpLink,
         createWSLink: (url, config) => mockWebSocketLink,
@@ -325,7 +329,7 @@ void main() {
       );
 
       verifyInOrder([
-        AuthBloc.I.idTokenStream,
+        AuthBloc.I.userStream,
         mockHttpLink.request(mockRequest, forward),
       ]);
       verifyNever(mockWebSocketLink.request(mockRequest, forward));
@@ -335,12 +339,14 @@ void main() {
   test(
     'Add Auth Link => request => query completes after one response when the id token changes',
     () async {
-      final idTokens = BehaviorSubject<String?>.seeded('firstIdToken');
-      addTearDown(idTokens.close);
+      final authUsers = BehaviorSubject<AuthUser?>.seeded(
+        _createAuthUser(idToken: 'firstIdToken'),
+      );
+      addTearDown(authUsers.close);
       final mockResponse = MockResponse();
 
       final unit = AddAuthLink(
-        idTokenStream: idTokens,
+        authUserStream: authUsers,
         url: 'url',
         createHttpLink: (url) => _createMockHttpLink(mockResponse),
         createWSLink: (url, config) => _createMockWSLink(mockResponse),
@@ -351,7 +357,7 @@ void main() {
         _createMockRequest(isSubscription: false),
         forward,
       );
-      idTokens.add('refreshedIdToken');
+      authUsers.add(_createAuthUser(idToken: 'refreshedIdToken'));
 
       await expectLater(responses, emitsInOrder([mockResponse, emitsDone]));
     },
@@ -366,7 +372,7 @@ void main() {
       final mockWebSocketLink = _createMockWSLink(mockResponse);
 
       final unit = AddAuthLink(
-        idTokenStream: AuthBloc.I.idTokenStream,
+        authUserStream: AuthBloc.I.userStream,
         url: 'https://example.com',
         createHttpLink: (url) => mockHttpLink,
         createWSLink: (url, config) {
@@ -395,7 +401,6 @@ void main() {
       );
 
       verify(mockWebSocketLink.request(mockRequest, forward));
-      verifyNever(AuthBloc.I.userStream);
       verifyNever(mockHttpLink.request(mockRequest, forward));
     },
   );
@@ -409,7 +414,7 @@ void main() {
       final mockWebSocketLink = _createMockWSLink(mockResponse);
 
       final unit = AddAuthLink(
-        idTokenStream: AuthBloc.I.idTokenStream,
+        authUserStream: AuthBloc.I.userStream,
         url: 'https://example.com',
         createHttpLink: (url) {
           expect(url, 'https://example.com');
@@ -447,7 +452,6 @@ void main() {
       );
 
       verify(mockHttpLink.request(mockRequest, forward));
-      verifyNever(AuthBloc.I.userStream);
       verifyNever(mockWebSocketLink.request(mockRequest, forward));
     },
   );
@@ -476,6 +480,9 @@ WebSocketLink _createFakeServerWSLink(
     ),
   );
 }
+
+AuthUser _createAuthUser({required String idToken, String uid = 'uid'}) =>
+    AuthUser(uid: uid, email: 'email', emailVerified: true, idToken: idToken);
 
 MockWebSocketLink _createMockWSLink(Response response) {
   final mock = MockWebSocketLink();
