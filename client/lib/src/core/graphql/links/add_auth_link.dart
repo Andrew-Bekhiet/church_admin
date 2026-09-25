@@ -37,10 +37,10 @@ class AddAuthLink extends Link {
     _credentialsStream = credentialsStream.publishValue();
     _credentialsSubscription = _credentialsStream.connect();
     _reconnectSocketOnAccountChangeSubscription = _credentialsStream
-        .map((credentials) => credentials?.uid)
+        .map((credentials) => (credentials?.uid, credentials?.hasuraUserId))
         .distinct()
         .skip(1)
-        .whereNotNull()
+        .where((identity) => identity.$1 != null)
         .listen((_) => _wsLink?.getSocketClient?.onConnectionLost());
   }
 

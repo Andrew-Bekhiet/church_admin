@@ -102,10 +102,12 @@ final graphQLClientProvider = Provider<DBGraphQLClient>(
               .concatWith([ref.watch(authRepositoryProvider).userChanges])
               .map(
                 (user) => switch (user) {
-                  AuthUser(:final uid, :final idToken) => AuthLinkCredentials(
-                    uid: uid,
-                    idToken: idToken,
-                  ),
+                  AuthUser(:final uid, :final hasuraUserId, :final idToken) =>
+                    AuthLinkCredentials(
+                      uid: uid,
+                      hasuraUserId: hasuraUserId,
+                      idToken: idToken,
+                    ),
                   null => null,
                 },
               ),

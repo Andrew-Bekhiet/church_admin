@@ -208,6 +208,62 @@ void main() {
   );
 
   test(
+    'Add Auth Link => request => subscription => reconnects with the new token when the same account gains its hasura user id',
+    () => fakeAsync((async) {
+      final credentialsController =
+          BehaviorSubject<AuthLinkCredentials?>.seeded(
+            _createCredentials(idToken: 'claimlessToken'),
+          );
+
+      final connectionInitAuthorizations = <String>[];
+
+      final unit = AddAuthLink(
+        credentialsStream: credentialsController.stream,
+        url: 'https://example.com',
+        createWSLink: (url, config) => _createFakeServerWSLink(
+          url,
+          config,
+          onClientMessage: (message) {
+            if (message case {
+              'type': 'connection_init',
+              'payload': {
+                'headers': {'Authorization': final String authorization},
+              },
+            }) {
+              connectionInitAuthorizations.add(authorization);
+            }
+          },
+        ),
+      );
+
+      final subscription = unit
+          .request(
+            Request(
+              operation: Operation(
+                document: gql('subscription WatchUsers { users { id } }'),
+              ),
+            ),
+          )
+          .listen(null);
+      async.flushMicrotasks();
+
+      credentialsController.add(
+        _createCredentials(idToken: 'claimedToken', hasuraUserId: 'hasuraUser'),
+      );
+      async.elapse(const Duration(seconds: 2));
+
+      expect(
+        connectionInitAuthorizations,
+        ['Bearer claimlessToken', 'Bearer claimedToken'],
+      );
+
+      unawaited(subscription.cancel());
+      unawaited(unit.dispose());
+      unawaited(credentialsController.close());
+    }),
+  );
+
+  test(
     'Add Auth Link => request => subscription => keeps the connection when the id token refreshes for the same account',
     () => fakeAsync((async) {
       final credentials = BehaviorSubject<AuthLinkCredentials?>.seeded(
@@ -479,7 +535,12 @@ WebSocketLink _createFakeServerWSLink(
 AuthLinkCredentials _createCredentials({
   required String idToken,
   String uid = 'uid',
-}) => AuthLinkCredentials(uid: uid, idToken: idToken);
+  String? hasuraUserId,
+}) => AuthLinkCredentials(
+  uid: uid,
+  hasuraUserId: hasuraUserId,
+  idToken: idToken,
+);
 
 MockWebSocketLink _createMockWSLink(Response response) {
   final mock = MockWebSocketLink();
