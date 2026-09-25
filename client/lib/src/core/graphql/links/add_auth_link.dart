@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:developer';
 
-import 'package:church_admin/src/features/auth/domain/models/auth_user.dart';
+import 'package:church_admin/src/core/graphql/links/auth_link_credentials.dart';
 import 'package:graphql/client.dart';
 import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
@@ -17,8 +17,8 @@ class AddAuthLink extends Link {
   final HttpLink Function(String) createHttpLink;
   final WebSocketLink Function(String, SocketClientConfig) createWSLink;
 
-  late final ValueConnectableStream<AuthUser?> _authUserStream;
-  late final StreamSubscription<AuthUser?> _authUserSubscription;
+  late final ValueConnectableStream<AuthLinkCredentials?> _credentialsStream;
+  late final StreamSubscription<AuthLinkCredentials?> _credentialsSubscription;
   late final StreamSubscription<void>
   _reconnectSocketOnAccountChangeSubscription;
 
@@ -26,18 +26,18 @@ class AddAuthLink extends Link {
   WebSocketLink? _wsLink;
 
   Stream<String?> get _idTokenStream =>
-      _authUserStream.map((user) => user?.idToken);
+      _credentialsStream.map((credentials) => credentials?.idToken);
 
   AddAuthLink({
     required this.url,
-    required Stream<AuthUser?> authUserStream,
+    required Stream<AuthLinkCredentials?> credentialsStream,
     this.createHttpLink = defaultCreateHttpLink,
     this.createWSLink = defaultCreateWSLink,
   }) {
-    _authUserStream = authUserStream.publishValue();
-    _authUserSubscription = _authUserStream.connect();
-    _reconnectSocketOnAccountChangeSubscription = _authUserStream
-        .map((user) => user?.uid)
+    _credentialsStream = credentialsStream.publishValue();
+    _credentialsSubscription = _credentialsStream.connect();
+    _reconnectSocketOnAccountChangeSubscription = _credentialsStream
+        .map((credentials) => credentials?.uid)
         .distinct()
         .skip(1)
         .whereNotNull()
@@ -115,7 +115,7 @@ class AddAuthLink extends Link {
       initialPayload: () async => {
         'headers': {
           'Authorization':
-              'Bearer ${_authUserStream.valueOrNull?.idToken ?? await _idTokenStream.whereNotNull().first}',
+              'Bearer ${_credentialsStream.valueOrNull?.idToken ?? await _idTokenStream.whereNotNull().first}',
           'content-type': 'application/json',
         },
       },
@@ -125,7 +125,7 @@ class AddAuthLink extends Link {
   @override
   Future<void> dispose() async {
     await _reconnectSocketOnAccountChangeSubscription.cancel();
-    await _authUserSubscription.cancel();
+    await _credentialsSubscription.cancel();
     await _httpLink?.dispose();
     await _wsLink?.dispose();
   }
