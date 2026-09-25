@@ -5,8 +5,8 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('AttendanceDateChip', () {
-    final testDate = DateTime(2026, 7, 2);
-    final recordedDate = DateTime(2026, 7, 10);
+    final testDate = DateTime(2026, 7, 30);
+    final recordedDates = [DateTime(2026, 7, 10), DateTime(2026, 7, 20)];
 
     Widget buildSubject({
       required DateTime date,
@@ -38,13 +38,11 @@ void main() {
       );
     }
 
-    testWidgets('opens calendar dialog on tap with day cell indicators', (
-      tester,
-    ) async {
+    testWidgets('day cell indicators match only recorded days', (tester) async {
       await tester.pumpWidget(
         buildSubject(
           date: testDate,
-          recordedDays: {recordedDate},
+          recordedDays: recordedDates.toSet(),
           onDateSelected: (_) {},
         ),
       );
@@ -52,13 +50,14 @@ void main() {
       await tester.tap(find.byType(AttendanceDateChip));
       await tester.pumpAndSettle();
 
-      expect(find.byType(AttendanceDatePickerDialog), findsOneWidget);
-
       final dayCells = tester.widgetList<AttendanceDateSelectorDayCell>(
         find.byType(AttendanceDateSelectorDayCell),
       );
-      expect(dayCells, findsOneWidget);
-      expect(DateUtils.dateOnly(dayCells.first.date), recordedDate);
+      expect(dayCells, findsNWidgets(recordedDates.length));
+      expect(
+        dayCells.map((c) => DateUtils.dateOnly(c.date)),
+        orderedEquals(recordedDates),
+      );
 
       expect(find.text('${testDate.day}'), findsOneWidget);
     });
@@ -68,7 +67,7 @@ void main() {
       await tester.pumpWidget(
         buildSubject(
           date: testDate,
-          recordedDays: {recordedDate},
+          recordedDays: recordedDates.toSet(),
           onDateSelected: (date) => selected = date,
         ),
       );

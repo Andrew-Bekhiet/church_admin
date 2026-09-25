@@ -1,4 +1,5 @@
-import 'package:church_admin/src/features/attendance/presentation/widgets/attendance_date_picker_dialog.dart';
+import 'package:calendar_date_picker2/calendar_date_picker2.dart';
+import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
@@ -40,14 +41,72 @@ class AttendanceDateChip extends StatelessWidget {
   }
 
   Future<void> _pickDate(BuildContext context) async {
-    final picked = await AttendanceDatePickerDialog.show(
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    final textTheme = theme.textTheme;
+    final effectiveIndicatorColor = indicatorColor ?? colorScheme.primary;
+
+    final result = await showCalendarDatePicker2Dialog(
       context: context,
-      initialDate: date,
-      firstDate: DateTime(2019),
-      lastDate: DateTime.now().add(const Duration(days: 365)),
-      recordedDays: recordedDays,
-      indicatorColor: indicatorColor,
+      dialogSize: Size(MediaQuery.widthOf(context) - 16, 410),
+      config: CalendarDatePicker2WithActionButtonsConfig(
+        calendarType: CalendarDatePicker2Type.single,
+        firstDate: DateTime.now().subtract(const Duration(days: 365 * 10)),
+        lastDate: DateTime.now(),
+        currentDate: DateTime.now(),
+        selectedDayHighlightColor: colorScheme.primary,
+        controlsHeight: 44,
+        controlsTextStyle: textTheme.titleMedium?.copyWith(
+          fontWeight: FontWeight.bold,
+          color: colorScheme.onSurface,
+        ),
+        weekdayLabelTextStyle: textTheme.bodyMedium?.copyWith(
+          color: colorScheme.onSurfaceVariant,
+          fontWeight: FontWeight.w600,
+        ),
+        dayTextStyle: textTheme.bodyLarge?.copyWith(
+          color: colorScheme.onSurface,
+          fontWeight: FontWeight.w500,
+        ),
+        selectedDayTextStyle: textTheme.bodyLarge?.copyWith(
+          color: colorScheme.onPrimary,
+          fontWeight: FontWeight.bold,
+        ),
+        todayTextStyle: textTheme.bodyLarge?.copyWith(
+          color: colorScheme.primary,
+          fontWeight: FontWeight.bold,
+        ),
+        disabledDayTextStyle: textTheme.bodyLarge?.copyWith(
+          color: colorScheme.onSurface.withValues(alpha: 0.38),
+        ),
+        dayBuilder:
+            ({
+              required date,
+              decoration,
+              isDisabled,
+              isSelected,
+              isToday,
+              textStyle,
+            }) {
+              final dayOnly = DateUtils.dateOnly(date);
+              if (!recordedDays.contains(dayOnly)) return null;
+
+              final selected = isSelected ?? false;
+
+              return AttendanceDateSelectorDayCell(
+                date: date,
+                isSelected: selected,
+                indicatorColor: selected
+                    ? colorScheme.onPrimary
+                    : effectiveIndicatorColor,
+                textStyle: textStyle,
+                decoration: decoration,
+              );
+            },
+      ),
     );
+
+    final picked = result?.singleOrNull;
 
     if (picked != null) onDateSelected(picked);
   }
