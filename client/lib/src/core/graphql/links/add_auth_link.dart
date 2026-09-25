@@ -108,7 +108,7 @@ class AddAuthLink extends Link {
       initialPayload: () async => {
         'headers': {
           'Authorization':
-              'Bearer ${await _idTokenStream.whereNotNull().first}',
+              'Bearer ${_idTokenStream.valueOrNull ?? await _idTokenStream.whereNotNull().first}',
           'content-type': 'application/json',
         },
       },

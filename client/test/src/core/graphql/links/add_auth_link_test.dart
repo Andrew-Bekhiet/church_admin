@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:church_admin/church_admin.dart';
+import 'package:fake_async/fake_async.dart';
 import 'package:flutter_riverpod/misc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gql/ast.dart';
@@ -153,11 +154,10 @@ void main() {
 
   test(
     'Add Auth Link => request => subscription => reconnects with the new token when another user signs in',
-    () async {
+    () => fakeAsync((async) {
       final idTokenStreamController = BehaviorSubject<String?>.seeded(
         'firstUserToken',
       );
-      addTearDown(idTokenStreamController.close);
 
       final connectionInitAuthorizations = <String>[];
 
@@ -179,7 +179,6 @@ void main() {
           },
         ),
       );
-      addTearDown(unit.dispose);
 
       final subscription = unit
           .request(
@@ -190,26 +189,28 @@ void main() {
             ),
           )
           .listen(null);
-      addTearDown(subscription.cancel);
-      await pumpEventQueue();
+      async.flushMicrotasks();
 
       idTokenStreamController
         ..add(null)
         ..add('secondUserToken');
-      await Future<void>.delayed(const Duration(seconds: 2));
+      async.elapse(const Duration(seconds: 2));
 
       expect(
         connectionInitAuthorizations,
         ['Bearer firstUserToken', 'Bearer secondUserToken'],
       );
-    },
+
+      unawaited(subscription.cancel());
+      unawaited(unit.dispose());
+      unawaited(idTokenStreamController.close());
+    }),
   );
 
   test(
     'Add Auth Link => request => subscription => restarts on the new connection when the id token refreshes',
-    () async {
+    () => fakeAsync((async) {
       final idTokens = BehaviorSubject<String?>.seeded('firstIdToken');
-      addTearDown(idTokens.close);
 
       final clientMessages = <String>[];
 
@@ -232,7 +233,6 @@ void main() {
           }),
         ),
       );
-      addTearDown(unit.dispose);
 
       final subscription = unit
           .request(
@@ -243,11 +243,10 @@ void main() {
             ),
           )
           .listen(null);
-      addTearDown(subscription.cancel);
-      await pumpEventQueue();
+      async.flushMicrotasks();
 
       idTokens.add('refreshedIdToken');
-      await Future<void>.delayed(const Duration(seconds: 2));
+      async.elapse(const Duration(seconds: 2));
 
       expect(clientMessages, [
         'connection_init Bearer firstIdToken',
@@ -255,12 +254,16 @@ void main() {
         'connection_init Bearer refreshedIdToken',
         'start',
       ]);
-    },
+
+      unawaited(subscription.cancel());
+      unawaited(unit.dispose());
+      unawaited(idTokens.close());
+    }),
   );
 
   test(
     'Add Auth Link => request => query => sends the refreshed id token after the id token refreshes',
-    () async {
+    () => fakeAsync((async) {
       final idTokens = BehaviorSubject<String?>.seeded('firstIdToken');
       addTearDown(idTokens.close);
 
@@ -286,16 +289,18 @@ void main() {
         operation: Operation(document: gql('query GetUsers { users { id } }')),
       );
 
-      await unit.request(createQueryRequest()).drain<void>();
+      unit.request(createQueryRequest()).listen(null);
+      async.flushMicrotasks();
       idTokens.add('refreshedIdToken');
-      await pumpEventQueue();
-      await unit.request(createQueryRequest()).drain<void>();
+      async.flushMicrotasks();
+      unit.request(createQueryRequest()).listen(null);
+      async.flushMicrotasks();
 
       expect(
         sentAuthorizations,
         ['Bearer firstIdToken', 'Bearer refreshedIdToken'],
       );
-    },
+    }),
   );
 
   test(
