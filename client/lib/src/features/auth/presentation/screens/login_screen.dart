@@ -65,23 +65,32 @@ class _LoginScreenState extends State<LoginScreen> {
       listener: (context, state) {
         if (state is! AuthExceptionState) return;
 
-        switch (state.exception) {
-          case IncorrectCredentialsException() when _isLogin:
-            ScaffoldMessenger.of(context).showErrorSnackBar(
-              'كلمة سر أو بريد إلكتروني غير صحيح',
-            );
+        final exception = state.exception;
+        if (exception is EmailAlreadyInUseException) {
+          ScaffoldMessenger.of(context).showInfoSnackBar(
+            'الحساب مسجل بالفعل. قم بتسجيل الدخول',
+          );
+          setState(() => _isLogin = true);
 
-          case IncorrectCredentialsException():
-            ScaffoldMessenger.of(context).showInfoSnackBar(
-              'الحساب مسجل بالفعل. قم بتسجيل الدخول',
-            );
-            setState(() => _isLogin = true);
-
-          default:
-            ScaffoldMessenger.of(context).showErrorSnackBar(
-              'تعذر تسجيل الدخول. برجاء المحاولة مرة أخرى.',
-            );
+          return;
         }
+
+        ScaffoldMessenger.of(context).showErrorSnackBar(
+          switch (exception) {
+            IncorrectCredentialsException() =>
+              'كلمة سر أو بريد إلكتروني غير صحيح',
+            WeakPasswordException() =>
+              'كلمة السر ضعيفة. برجاء اختيار كلمة سر أقوى',
+            TooManyAttemptsException() =>
+              'محاولات كثيرة. برجاء المحاولة مرة أخرى بعد قليل',
+            AuthNetworkException() =>
+              'تعذر الاتصال بالخادم. تأكد من اتصالك بالإنترنت',
+            _ when _isLogin => 'تعذر تسجيل الدخول. برجاء المحاولة مرة أخرى.',
+            UnknownAuthException() =>
+              'تعذر إنشاء الحساب. برجاء المحاولة مرة أخرى.',
+            _ => 'حدث خطأ غير متوقع. برجاء المحاولة مرة أخرى.',
+          },
+        );
       },
       builder: (context, state) {
         final loading = state is AuthLoading;

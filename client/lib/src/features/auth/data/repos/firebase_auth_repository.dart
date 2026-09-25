@@ -5,6 +5,21 @@ import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:flutter/foundation.dart';
 
 class FirebaseAuthRepository implements AuthRepository {
+  static AuthException _toAuthException(
+    firebase_auth.FirebaseAuthException exception,
+    StackTrace stackTrace,
+  ) => switch (exception.code) {
+    'invalid-credential' ||
+    'wrong-password' ||
+    'user-not-found' ||
+    'invalid-email' => IncorrectCredentialsException(exception, stackTrace),
+    'email-already-in-use' => EmailAlreadyInUseException(exception, stackTrace),
+    'weak-password' => WeakPasswordException(exception, stackTrace),
+    'too-many-requests' => TooManyAttemptsException(exception, stackTrace),
+    'network-request-failed' => AuthNetworkException(exception, stackTrace),
+    _ => UnknownAuthException(exception, stackTrace),
+  };
+
   final firebase_auth.FirebaseAuth _auth;
 
   @override
@@ -37,7 +52,7 @@ class FirebaseAuthRepository implements AuthRepository {
         password: password,
       );
     } on firebase_auth.FirebaseAuthException catch (e, stackTrace) {
-      throw IncorrectCredentialsException(e, stackTrace);
+      throw _toAuthException(e, stackTrace);
     }
   }
 
@@ -49,7 +64,7 @@ class FirebaseAuthRepository implements AuthRepository {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
     } on firebase_auth.FirebaseAuthException catch (e, stackTrace) {
-      throw IncorrectCredentialsException(e, stackTrace);
+      throw _toAuthException(e, stackTrace);
     }
   }
 
