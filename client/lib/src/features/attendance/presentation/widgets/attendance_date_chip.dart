@@ -48,6 +48,7 @@ class AttendanceDateChip extends StatelessWidget {
 
     final result = await showCalendarDatePicker2Dialog(
       context: context,
+      value: [date],
       dialogSize: Size(MediaQuery.widthOf(context) - 16, 410),
       config: CalendarDatePicker2WithActionButtonsConfig(
         calendarType: CalendarDatePicker2Type.single,
@@ -91,12 +92,10 @@ class AttendanceDateChip extends StatelessWidget {
               final dayOnly = DateUtils.dateOnly(date);
               if (!recordedDays.contains(dayOnly)) return null;
 
-              final selected = isSelected ?? false;
-
               return AttendanceDateSelectorDayCell(
-                date: date,
-                isSelected: selected,
-                indicatorColor: selected
+                date: dayOnly,
+                isSelected: isSelected ?? false,
+                indicatorColor: isSelected ?? false
                     ? colorScheme.onPrimary
                     : effectiveIndicatorColor,
                 textStyle: textStyle,
