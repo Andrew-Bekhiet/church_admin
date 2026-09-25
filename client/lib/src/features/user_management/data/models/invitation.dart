@@ -46,4 +46,6 @@ class Invitation with _$Invitation implements ToJson {
   Map<String, dynamic> toJson() => _$InvitationToJson(this);
 
   bool isActiveAt(DateTime now) => !isClaimed && expiresAt.isAfter(now);
+
+  bool isExpiredAt(DateTime now) => !isClaimed && !expiresAt.isAfter(now);
 }

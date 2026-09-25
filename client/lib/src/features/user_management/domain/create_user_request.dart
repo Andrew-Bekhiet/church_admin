@@ -21,7 +21,7 @@ class CreateUserRequest {
   factory CreateUserRequest.fromDraft(UserDraft draft) => CreateUserRequest(
     name: draft.name,
     email: draft.email.isEmpty ? null : draft.email,
-    permissions: draft.permissions.map((p) => p.name).toList(),
+    permissions: draft.permissions.validated().map((p) => p.name).toList(),
     adminOn: draft.adminOn
         .map(
           (data) => UserPermissionsUpdateHelper.adminOnInsertInputFrom(

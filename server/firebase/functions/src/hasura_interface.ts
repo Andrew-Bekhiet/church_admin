@@ -771,8 +771,8 @@ export async function insertUserWithPermissionsAndAdminOn(
       invitation: input.invitationExpiresAt
         ? {
           data: {
-            expires_at: input.invitationExpiresAt,
-            created_by: input.createdBy,
+            expiresAt: input.invitationExpiresAt,
+            createdBy: input.createdBy,
           },
         }
         : undefined,
@@ -781,7 +781,7 @@ export async function insertUserWithPermissionsAndAdminOn(
           data: {
             name: input.newPerson.name,
             gender: input.newPerson.gender,
-            is_servant: true,
+            isServant: true,
           },
         }
         : undefined,

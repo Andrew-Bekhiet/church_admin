@@ -58,7 +58,7 @@ class UsersDAO extends DAOBase<User> with StreamableDAO<User> {
   Future<void> updateUser(UserUpdate update) async {
     if (!update.hasChanges) return;
 
-    await graphQLClient.mutateAndReturnParsed(
+    final result = await graphQLClient.mutateAndReturnParsed(
       MutationOptions(
         document: documentNodeMutationupdateUser,
         operationName: 'updateUser',
@@ -78,5 +78,10 @@ class UsersDAO extends DAOBase<User> with StreamableDAO<User> {
         parserFn: Mutation_updateUser.fromJson,
       ),
     );
+
+    if (update.linkPersonId case final personId?
+        when result.link?.affectedRows != 1) {
+      throw PersonAlreadyLinkedException(personId);
+    }
   }
 }

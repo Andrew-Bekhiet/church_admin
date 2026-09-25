@@ -56,11 +56,11 @@ const PersonInput = z.discriminatedUnion("kind", [
 
 const CreateUserRequest = z.object({
   name: z.string().trim().min(1),
-  email: z.string().trim().toLowerCase().email().optional(),
+  email: z.email().nullish(),
   permissions: z.array(z.string()),
   adminOn: z.array(AdminOnInput),
   person: PersonInput,
-  invitation: z.object({ expiresAt: z.string().datetime() }).optional(),
+  invitation: z.object({ expiresAt: z.iso.datetime() }).nullish(),
 });
 
 function constraintViolationColumn(error: unknown): string | null {

@@ -1,4 +1,6 @@
 import 'package:church_admin/church_admin.dart';
+import 'package:church_admin/src/features/user_management/presentation/widgets/user_account_card.dart';
+import 'package:church_admin/src/features/user_management/presentation/widgets/user_section_card.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 
@@ -41,7 +43,18 @@ class _ViewUserState extends State<ViewUser> {
         final permissions = user.permissions;
 
         final userInfoWidgets = [
-          const Divider(thickness: 1),
+          if (user.person case final person?)
+            UserSectionCard(
+              icon: Symbols.person,
+              title: 'المخدوم المرتبط',
+              child: ViewableObjectWidget(
+                person,
+                onTap: (person) => ViewPersonRoute(
+                  id: person.id,
+                  $extra: person,
+                ).push(context),
+              ),
+            ),
           if (permissions.permissions.isEmpty)
             const ListTile(
               title: Text('الصلاحيات'),
@@ -98,10 +111,7 @@ class _ViewUserState extends State<ViewUser> {
         return SliverList(
           delegate: SliverChildListDelegate(
             [
-              CopiablePropertyWidget(
-                'البريد الاكتروني',
-                user.email,
-              ),
+              UserAccountCard(user),
               if (appUserPermissions.manageAllUsers && !isUserApproved) ...[
                 const ListTile(
                   leading: Icon(Symbols.person_off),
@@ -140,7 +150,7 @@ class _ViewUserState extends State<ViewUser> {
       editButtonBuilder: (context, user) => IconButton(
         tooltip: 'تعديل',
         onPressed: () =>
-            EditUserRoute(uid: widget.userId, $extra: user).push(context),
+            EditUserRoute($extra: UpdateUser(user: user)).push(context),
         icon: const Icon(Symbols.edit),
       ),
       notFoundBuilder: (context) => Center(
