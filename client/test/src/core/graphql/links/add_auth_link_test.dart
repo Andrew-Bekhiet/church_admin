@@ -3,7 +3,6 @@ import 'dart:convert';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:fake_async/fake_async.dart';
-import 'package:flutter_riverpod/misc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gql/ast.dart';
 import 'package:graphql_flutter/graphql_flutter.dart' as h show HttpLink;
@@ -18,7 +17,6 @@ import 'package:web_socket_channel/adapter_web_socket_channel.dart';
 import 'add_auth_link_test.mocks.dart';
 
 @GenerateNiceMocks([
-  MockSpec<AuthBloc>(),
   MockSpec<Request>(),
   MockSpec<Response>(),
   MockSpec<Operation>(),
@@ -27,9 +25,6 @@ import 'add_auth_link_test.mocks.dart';
 ])
 void main() {
   Stream<Response> forward(Request r) => const Stream.empty();
-
-  setUp(_setUp);
-  tearDown(resetGlobalProviderContainer);
 
   test(
     'Add Auth Link => defaultCreateHttpLink',
@@ -66,7 +61,7 @@ void main() {
       final mockWebSocketLink = _createMockWSLink(mockResponse);
 
       final unit = AddAuthLink(
-        idTokenStream: AuthBloc.I.idTokenStream,
+        credentialsStream: Stream.value(_createCredentials(idToken: 'idToken')),
         url: 'url',
         createHttpLink: (url) => mockHttpLink,
         createWSLink: (url, config) {
@@ -77,7 +72,7 @@ void main() {
                 'headers',
                 containsPair(
                   'Authorization',
-                  'Bearer ${AuthBloc.I.currentUser!.idToken}',
+                  'Bearer idToken',
                 ),
               ),
             ),
@@ -101,8 +96,8 @@ void main() {
   test(
     'Add Auth Link => request => gets latest idTokenStream data',
     () async {
-      late final idTokenStreamController = BehaviorSubject<String>();
-      addTearDown(idTokenStreamController.close);
+      late final credentialsController = BehaviorSubject<AuthLinkCredentials>();
+      addTearDown(credentialsController.close);
 
       dynamic Function()? capturedInitialPayload;
 
@@ -112,7 +107,9 @@ void main() {
       final mockWebSocketLink = _createMockWSLink(mockResponse);
 
       final unit = AddAuthLink(
-        idTokenStream: idTokenStreamController.stream.startWith('seedIdToken'),
+        credentialsStream: credentialsController.stream.startWith(
+          _createCredentials(idToken: 'seedIdToken'),
+        ),
         url: 'url',
         createHttpLink: (url) => mockHttpLink,
         createWSLink: (url, config) {
@@ -136,7 +133,7 @@ void main() {
         ),
       );
 
-      idTokenStreamController.add('newIdToken');
+      credentialsController.add(_createCredentials(idToken: 'newIdToken'));
       await Future.delayed(Duration.zero);
 
       expect(
@@ -155,14 +152,15 @@ void main() {
   test(
     'Add Auth Link => request => subscription => reconnects with the new token when another user signs in',
     () => fakeAsync((async) {
-      final idTokenStreamController = BehaviorSubject<String?>.seeded(
-        'firstUserToken',
-      );
+      final credentialsController =
+          BehaviorSubject<AuthLinkCredentials?>.seeded(
+            _createCredentials(uid: 'firstUser', idToken: 'firstUserToken'),
+          );
 
       final connectionInitAuthorizations = <String>[];
 
       final unit = AddAuthLink(
-        idTokenStream: idTokenStreamController.stream,
+        credentialsStream: credentialsController.stream,
         url: 'https://example.com',
         createWSLink: (url, config) => _createFakeServerWSLink(
           url,
@@ -191,9 +189,11 @@ void main() {
           .listen(null);
       async.flushMicrotasks();
 
-      idTokenStreamController
+      credentialsController
         ..add(null)
-        ..add('secondUserToken');
+        ..add(
+          _createCredentials(uid: 'secondUser', idToken: 'secondUserToken'),
+        );
       async.elapse(const Duration(seconds: 2));
 
       expect(
@@ -203,19 +203,77 @@ void main() {
 
       unawaited(subscription.cancel());
       unawaited(unit.dispose());
-      unawaited(idTokenStreamController.close());
+      unawaited(credentialsController.close());
     }),
   );
 
   test(
-    'Add Auth Link => request => subscription => restarts on the new connection when the id token refreshes',
+    'Add Auth Link => request => subscription => reconnects with the new token when the same account gains its hasura user id',
     () => fakeAsync((async) {
-      final idTokens = BehaviorSubject<String?>.seeded('firstIdToken');
+      final credentialsController =
+          BehaviorSubject<AuthLinkCredentials?>.seeded(
+            _createCredentials(idToken: 'claimlessToken'),
+          );
+
+      final connectionInitAuthorizations = <String>[];
+
+      final unit = AddAuthLink(
+        credentialsStream: credentialsController.stream,
+        url: 'https://example.com',
+        createWSLink: (url, config) => _createFakeServerWSLink(
+          url,
+          config,
+          onClientMessage: (message) {
+            if (message case {
+              'type': 'connection_init',
+              'payload': {
+                'headers': {'Authorization': final String authorization},
+              },
+            }) {
+              connectionInitAuthorizations.add(authorization);
+            }
+          },
+        ),
+      );
+
+      final subscription = unit
+          .request(
+            Request(
+              operation: Operation(
+                document: gql('subscription WatchUsers { users { id } }'),
+              ),
+            ),
+          )
+          .listen(null);
+      async.flushMicrotasks();
+
+      credentialsController.add(
+        _createCredentials(idToken: 'claimedToken', hasuraUserId: 'hasuraUser'),
+      );
+      async.elapse(const Duration(seconds: 2));
+
+      expect(
+        connectionInitAuthorizations,
+        ['Bearer claimlessToken', 'Bearer claimedToken'],
+      );
+
+      unawaited(subscription.cancel());
+      unawaited(unit.dispose());
+      unawaited(credentialsController.close());
+    }),
+  );
+
+  test(
+    'Add Auth Link => request => subscription => keeps the connection when the id token refreshes for the same account',
+    () => fakeAsync((async) {
+      final credentials = BehaviorSubject<AuthLinkCredentials?>.seeded(
+        _createCredentials(idToken: 'firstIdToken'),
+      );
 
       final clientMessages = <String>[];
 
       final unit = AddAuthLink(
-        idTokenStream: idTokens,
+        credentialsStream: credentials,
         url: 'https://example.com',
         createWSLink: (url, config) => _createFakeServerWSLink(
           url,
@@ -245,27 +303,27 @@ void main() {
           .listen(null);
       async.flushMicrotasks();
 
-      idTokens.add('refreshedIdToken');
+      credentials
+        ..add(_createCredentials(idToken: 'secondIdToken'))
+        ..add(_createCredentials(idToken: 'thirdIdToken'))
+        ..add(_createCredentials(idToken: 'fourthIdToken'));
       async.elapse(const Duration(seconds: 2));
 
-      expect(clientMessages, [
-        'connection_init Bearer firstIdToken',
-        'start',
-        'connection_init Bearer refreshedIdToken',
-        'start',
-      ]);
+      expect(clientMessages, ['connection_init Bearer firstIdToken', 'start']);
 
       unawaited(subscription.cancel());
       unawaited(unit.dispose());
-      unawaited(idTokens.close());
+      unawaited(credentials.close());
     }),
   );
 
   test(
     'Add Auth Link => request => query => sends the refreshed id token after the id token refreshes',
     () => fakeAsync((async) {
-      final idTokens = BehaviorSubject<String?>.seeded('firstIdToken');
-      addTearDown(idTokens.close);
+      final credentials = BehaviorSubject<AuthLinkCredentials?>.seeded(
+        _createCredentials(idToken: 'firstIdToken'),
+      );
+      addTearDown(credentials.close);
 
       final sentAuthorizations = <String?>[];
       final mockHttpLink = MockHttpLink();
@@ -279,7 +337,7 @@ void main() {
       });
 
       final unit = AddAuthLink(
-        idTokenStream: idTokens,
+        credentialsStream: credentials,
         url: 'url',
         createHttpLink: (url) => mockHttpLink,
       );
@@ -291,7 +349,7 @@ void main() {
 
       unit.request(createQueryRequest()).listen(null);
       async.flushMicrotasks();
-      idTokens.add('refreshedIdToken');
+      credentials.add(_createCredentials(idToken: 'refreshedIdToken'));
       async.flushMicrotasks();
       unit.request(createQueryRequest()).listen(null);
       async.flushMicrotasks();
@@ -312,7 +370,7 @@ void main() {
       final mockWebSocketLink = _createMockWSLink(mockResponse);
 
       final unit = AddAuthLink(
-        idTokenStream: AuthBloc.I.idTokenStream,
+        credentialsStream: Stream.value(_createCredentials(idToken: 'idToken')),
         url: 'url',
         createHttpLink: (url) => mockHttpLink,
         createWSLink: (url, config) => mockWebSocketLink,
@@ -324,10 +382,7 @@ void main() {
         emits(mockResponse),
       );
 
-      verifyInOrder([
-        AuthBloc.I.idTokenStream,
-        mockHttpLink.request(mockRequest, forward),
-      ]);
+      verify(mockHttpLink.request(mockRequest, forward));
       verifyNever(mockWebSocketLink.request(mockRequest, forward));
     },
   );
@@ -335,12 +390,14 @@ void main() {
   test(
     'Add Auth Link => request => query completes after one response when the id token changes',
     () async {
-      final idTokens = BehaviorSubject<String?>.seeded('firstIdToken');
-      addTearDown(idTokens.close);
+      final credentials = BehaviorSubject<AuthLinkCredentials?>.seeded(
+        _createCredentials(idToken: 'firstIdToken'),
+      );
+      addTearDown(credentials.close);
       final mockResponse = MockResponse();
 
       final unit = AddAuthLink(
-        idTokenStream: idTokens,
+        credentialsStream: credentials,
         url: 'url',
         createHttpLink: (url) => _createMockHttpLink(mockResponse),
         createWSLink: (url, config) => _createMockWSLink(mockResponse),
@@ -351,7 +408,7 @@ void main() {
         _createMockRequest(isSubscription: false),
         forward,
       );
-      idTokens.add('refreshedIdToken');
+      credentials.add(_createCredentials(idToken: 'refreshedIdToken'));
 
       await expectLater(responses, emitsInOrder([mockResponse, emitsDone]));
     },
@@ -366,7 +423,7 @@ void main() {
       final mockWebSocketLink = _createMockWSLink(mockResponse);
 
       final unit = AddAuthLink(
-        idTokenStream: AuthBloc.I.idTokenStream,
+        credentialsStream: Stream.value(_createCredentials(idToken: 'idToken')),
         url: 'https://example.com',
         createHttpLink: (url) => mockHttpLink,
         createWSLink: (url, config) {
@@ -378,7 +435,7 @@ void main() {
                 'headers',
                 containsPair(
                   'Authorization',
-                  'Bearer ${AuthBloc.I.currentUser!.idToken}',
+                  'Bearer idToken',
                 ),
               ),
             ),
@@ -395,7 +452,6 @@ void main() {
       );
 
       verify(mockWebSocketLink.request(mockRequest, forward));
-      verifyNever(AuthBloc.I.userStream);
       verifyNever(mockHttpLink.request(mockRequest, forward));
     },
   );
@@ -409,7 +465,7 @@ void main() {
       final mockWebSocketLink = _createMockWSLink(mockResponse);
 
       final unit = AddAuthLink(
-        idTokenStream: AuthBloc.I.idTokenStream,
+        credentialsStream: Stream.value(_createCredentials(idToken: 'idToken')),
         url: 'https://example.com',
         createHttpLink: (url) {
           expect(url, 'https://example.com');
@@ -440,14 +496,13 @@ void main() {
             return containsPair('foo', 'bar').matches(returnedHeaders, {}) &&
                 containsPair(
                   'Authorization',
-                  'Bearer ${AuthBloc.I.currentUser!.idToken}',
+                  'Bearer idToken',
                 ).matches(returnedHeaders, {});
           }),
         ),
       );
 
       verify(mockHttpLink.request(mockRequest, forward));
-      verifyNever(AuthBloc.I.userStream);
       verifyNever(mockWebSocketLink.request(mockRequest, forward));
     },
   );
@@ -476,6 +531,16 @@ WebSocketLink _createFakeServerWSLink(
     ),
   );
 }
+
+AuthLinkCredentials _createCredentials({
+  required String idToken,
+  String uid = 'uid',
+  String? hasuraUserId,
+}) => AuthLinkCredentials(
+  uid: uid,
+  hasuraUserId: hasuraUserId,
+  idToken: idToken,
+);
 
 MockWebSocketLink _createMockWSLink(Response response) {
   final mock = MockWebSocketLink();
@@ -516,37 +581,4 @@ MockOperation _createMockOperation(bool isSubscription) {
   );
 
   return mockOperation;
-}
-
-void _setUp() {
-  final overrides = [_setUpAuthBloc()];
-
-  initGlobalProviderContainer(overrides);
-}
-
-Override _setUpAuthBloc() {
-  final mock = MockAuthBloc();
-  when(mock.userStream).thenAnswer(
-    (_) => BehaviorSubject.seeded(
-      const AuthUser(
-        uid: 'uid',
-        email: 'email',
-        emailVerified: true,
-        idToken: 'idToken',
-      ),
-    ),
-  );
-  when(mock.idTokenStream).thenAnswer(
-    (_) => BehaviorSubject.seeded('idToken'),
-  );
-  when(mock.currentUser).thenReturn(
-    const AuthUser(
-      uid: 'uid',
-      email: 'email',
-      emailVerified: true,
-      idToken: 'idToken',
-    ),
-  );
-
-  return authBlocProvider.overrideWithValue(mock);
 }
