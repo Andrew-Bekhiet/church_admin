@@ -18,7 +18,7 @@ class AddAuthLink extends Link {
 
   late final ValueConnectableStream<String?> _idTokenStream;
   late final StreamSubscription<String?> _idTokenSubscription;
-  late final StreamSubscription<void> _reconnectSocketOnSignInSubscription;
+  late final StreamSubscription<void> _reconnectSocketOnNewTokenSubscription;
 
   HttpLink? _httpLink;
   WebSocketLink? _wsLink;
@@ -31,9 +31,9 @@ class AddAuthLink extends Link {
   }) {
     _idTokenStream = idTokenStream.publishValue();
     _idTokenSubscription = _idTokenStream.connect();
-    _reconnectSocketOnSignInSubscription = _idTokenStream
+    _reconnectSocketOnNewTokenSubscription = _idTokenStream
         .pairwise()
-        .where((tokens) => tokens.first == null && tokens.last != null)
+        .where((tokens) => tokens.last != null && tokens.last != tokens.first)
         .listen((_) => _wsLink?.getSocketClient?.onConnectionLost());
   }
 
@@ -117,7 +117,7 @@ class AddAuthLink extends Link {
 
   @override
   Future<void> dispose() async {
-    await _reconnectSocketOnSignInSubscription.cancel();
+    await _reconnectSocketOnNewTokenSubscription.cancel();
     await _idTokenSubscription.cancel();
     await _httpLink?.dispose();
     await _wsLink?.dispose();

@@ -164,30 +164,19 @@ void main() {
       final unit = AddAuthLink(
         idTokenStream: idTokenStreamController.stream,
         url: 'https://example.com',
-        createWSLink: (url, config) => WebSocketLink(
+        createWSLink: (url, config) => _createFakeServerWSLink(
           url,
-          config: SocketClientConfig(
-            delayBetweenReconnectionAttempts:
-                config.delayBetweenReconnectionAttempts,
-            initialPayload: config.initialPayload,
-            connectFn: (uri, protocols) {
-              final (client, server) = fakes();
-              server.events.listen((event) {
-                if (event case TextDataReceived(:final text)) {
-                  if (jsonDecode(text) case {
-                    'type': 'connection_init',
-                    'payload': {
-                      'headers': {'Authorization': final String authorization},
-                    },
-                  }) {
-                    connectionInitAuthorizations.add(authorization);
-                  }
-                }
-              });
-
-              return AdapterWebSocketChannel(client);
-            },
-          ),
+          config,
+          onClientMessage: (message) {
+            if (message case {
+              'type': 'connection_init',
+              'payload': {
+                'headers': {'Authorization': final String authorization},
+              },
+            }) {
+              connectionInitAuthorizations.add(authorization);
+            }
+          },
         ),
       );
       addTearDown(unit.dispose);
@@ -212,6 +201,99 @@ void main() {
       expect(
         connectionInitAuthorizations,
         ['Bearer firstUserToken', 'Bearer secondUserToken'],
+      );
+    },
+  );
+
+  test(
+    'Add Auth Link => request => subscription => restarts on the new connection when the id token refreshes',
+    () async {
+      final idTokens = BehaviorSubject<String?>.seeded('firstIdToken');
+      addTearDown(idTokens.close);
+
+      final clientMessages = <String>[];
+
+      final unit = AddAuthLink(
+        idTokenStream: idTokens,
+        url: 'https://example.com',
+        createWSLink: (url, config) => _createFakeServerWSLink(
+          url,
+          config,
+          onClientMessage: (message) => clientMessages.add(switch (message) {
+            {
+              'type': 'connection_init',
+              'payload': {
+                'headers': {'Authorization': final String authorization},
+              },
+            } =>
+              'connection_init $authorization',
+            {'type': final String type} => type,
+            _ => '$message',
+          }),
+        ),
+      );
+      addTearDown(unit.dispose);
+
+      final subscription = unit
+          .request(
+            Request(
+              operation: Operation(
+                document: gql('subscription WatchUsers { users { id } }'),
+              ),
+            ),
+          )
+          .listen(null);
+      addTearDown(subscription.cancel);
+      await pumpEventQueue();
+
+      idTokens.add('refreshedIdToken');
+      await Future<void>.delayed(const Duration(seconds: 2));
+
+      expect(clientMessages, [
+        'connection_init Bearer firstIdToken',
+        'start',
+        'connection_init Bearer refreshedIdToken',
+        'start',
+      ]);
+    },
+  );
+
+  test(
+    'Add Auth Link => request => query => sends the refreshed id token after the id token refreshes',
+    () async {
+      final idTokens = BehaviorSubject<String?>.seeded('firstIdToken');
+      addTearDown(idTokens.close);
+
+      final sentAuthorizations = <String?>[];
+      final mockHttpLink = MockHttpLink();
+      when(mockHttpLink.request(any, any)).thenAnswer((invocation) {
+        final request = invocation.positionalArguments.first as Request;
+        sentAuthorizations.add(
+          request.context.entry<HttpLinkHeaders>()?.headers['Authorization'],
+        );
+
+        return Stream.value(MockResponse());
+      });
+
+      final unit = AddAuthLink(
+        idTokenStream: idTokens,
+        url: 'url',
+        createHttpLink: (url) => mockHttpLink,
+      );
+      addTearDown(unit.dispose);
+
+      Request createQueryRequest() => Request(
+        operation: Operation(document: gql('query GetUsers { users { id } }')),
+      );
+
+      await unit.request(createQueryRequest()).drain<void>();
+      idTokens.add('refreshedIdToken');
+      await pumpEventQueue();
+      await unit.request(createQueryRequest()).drain<void>();
+
+      expect(
+        sentAuthorizations,
+        ['Bearer firstIdToken', 'Bearer refreshedIdToken'],
       );
     },
   );
@@ -363,6 +445,30 @@ void main() {
       verifyNever(AuthBloc.I.userStream);
       verifyNever(mockWebSocketLink.request(mockRequest, forward));
     },
+  );
+}
+
+WebSocketLink _createFakeServerWSLink(
+  String url,
+  SocketClientConfig config, {
+  required void Function(Object? message) onClientMessage,
+}) {
+  return WebSocketLink(
+    url,
+    config: SocketClientConfig(
+      delayBetweenReconnectionAttempts: config.delayBetweenReconnectionAttempts,
+      initialPayload: config.initialPayload,
+      connectFn: (uri, protocols) {
+        final (client, server) = fakes();
+        server.events.listen((event) {
+          if (event case TextDataReceived(:final text)) {
+            onClientMessage(jsonDecode(text));
+          }
+        });
+
+        return AdapterWebSocketChannel(client);
+      },
+    ),
   );
 }
 
