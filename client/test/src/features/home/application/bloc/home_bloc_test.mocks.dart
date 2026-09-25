@@ -110,35 +110,41 @@ class _FakeUserPermissionsDAO_14 extends _i1.SmartFake
     : super(parent, parentInvocation);
 }
 
-class _FakeUserPreferencesDAO_15 extends _i1.SmartFake
+class _FakeInvitationsDAO_15 extends _i1.SmartFake
+    implements _i2.InvitationsDAO {
+  _FakeInvitationsDAO_15(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
+}
+
+class _FakeUserPreferencesDAO_16 extends _i1.SmartFake
     implements _i2.UserPreferencesDAO {
-  _FakeUserPreferencesDAO_15(Object parent, Invocation parentInvocation)
+  _FakeUserPreferencesDAO_16(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeFcmTokensDAO_16 extends _i1.SmartFake implements _i2.FcmTokensDAO {
-  _FakeFcmTokensDAO_16(Object parent, Invocation parentInvocation)
+class _FakeFcmTokensDAO_17 extends _i1.SmartFake implements _i2.FcmTokensDAO {
+  _FakeFcmTokensDAO_17(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeMetadataDAO_17 extends _i1.SmartFake implements _i2.MetadataDAO {
-  _FakeMetadataDAO_17(Object parent, Invocation parentInvocation)
+class _FakeMetadataDAO_18 extends _i1.SmartFake implements _i2.MetadataDAO {
+  _FakeMetadataDAO_18(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeHistoryDAO_18 extends _i1.SmartFake implements _i2.HistoryDAO {
-  _FakeHistoryDAO_18(Object parent, Invocation parentInvocation)
+class _FakeHistoryDAO_19 extends _i1.SmartFake implements _i2.HistoryDAO {
+  _FakeHistoryDAO_19(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeMeetingsDAO_19 extends _i1.SmartFake implements _i2.MeetingsDAO {
-  _FakeMeetingsDAO_19(Object parent, Invocation parentInvocation)
+class _FakeMeetingsDAO_20 extends _i1.SmartFake implements _i2.MeetingsDAO {
+  _FakeMeetingsDAO_20(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
-class _FakeScrollPosition_20 extends _i1.SmartFake
+class _FakeScrollPosition_21 extends _i1.SmartFake
     implements _i3.ScrollPosition {
-  _FakeScrollPosition_20(Object parent, Invocation parentInvocation)
+  _FakeScrollPosition_21(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
@@ -404,14 +410,29 @@ class MockDatabaseService extends _i1.Mock implements _i2.DatabaseService {
           as _i2.UserPermissionsDAO);
 
   @override
+  _i2.InvitationsDAO get invitations =>
+      (super.noSuchMethod(
+            Invocation.getter(#invitations),
+            returnValue: _FakeInvitationsDAO_15(
+              this,
+              Invocation.getter(#invitations),
+            ),
+            returnValueForMissingStub: _FakeInvitationsDAO_15(
+              this,
+              Invocation.getter(#invitations),
+            ),
+          )
+          as _i2.InvitationsDAO);
+
+  @override
   _i2.UserPreferencesDAO get userPreferences =>
       (super.noSuchMethod(
             Invocation.getter(#userPreferences),
-            returnValue: _FakeUserPreferencesDAO_15(
+            returnValue: _FakeUserPreferencesDAO_16(
               this,
               Invocation.getter(#userPreferences),
             ),
-            returnValueForMissingStub: _FakeUserPreferencesDAO_15(
+            returnValueForMissingStub: _FakeUserPreferencesDAO_16(
               this,
               Invocation.getter(#userPreferences),
             ),
@@ -422,11 +443,11 @@ class MockDatabaseService extends _i1.Mock implements _i2.DatabaseService {
   _i2.FcmTokensDAO get fcmTokens =>
       (super.noSuchMethod(
             Invocation.getter(#fcmTokens),
-            returnValue: _FakeFcmTokensDAO_16(
+            returnValue: _FakeFcmTokensDAO_17(
               this,
               Invocation.getter(#fcmTokens),
             ),
-            returnValueForMissingStub: _FakeFcmTokensDAO_16(
+            returnValueForMissingStub: _FakeFcmTokensDAO_17(
               this,
               Invocation.getter(#fcmTokens),
             ),
@@ -437,11 +458,11 @@ class MockDatabaseService extends _i1.Mock implements _i2.DatabaseService {
   _i2.MetadataDAO get metadata =>
       (super.noSuchMethod(
             Invocation.getter(#metadata),
-            returnValue: _FakeMetadataDAO_17(
+            returnValue: _FakeMetadataDAO_18(
               this,
               Invocation.getter(#metadata),
             ),
-            returnValueForMissingStub: _FakeMetadataDAO_17(
+            returnValueForMissingStub: _FakeMetadataDAO_18(
               this,
               Invocation.getter(#metadata),
             ),
@@ -452,8 +473,8 @@ class MockDatabaseService extends _i1.Mock implements _i2.DatabaseService {
   _i2.HistoryDAO get history =>
       (super.noSuchMethod(
             Invocation.getter(#history),
-            returnValue: _FakeHistoryDAO_18(this, Invocation.getter(#history)),
-            returnValueForMissingStub: _FakeHistoryDAO_18(
+            returnValue: _FakeHistoryDAO_19(this, Invocation.getter(#history)),
+            returnValueForMissingStub: _FakeHistoryDAO_19(
               this,
               Invocation.getter(#history),
             ),
@@ -464,11 +485,11 @@ class MockDatabaseService extends _i1.Mock implements _i2.DatabaseService {
   _i2.MeetingsDAO get meetings =>
       (super.noSuchMethod(
             Invocation.getter(#meetings),
-            returnValue: _FakeMeetingsDAO_19(
+            returnValue: _FakeMeetingsDAO_20(
               this,
               Invocation.getter(#meetings),
             ),
-            returnValueForMissingStub: _FakeMeetingsDAO_19(
+            returnValueForMissingStub: _FakeMeetingsDAO_20(
               this,
               Invocation.getter(#meetings),
             ),
@@ -684,11 +705,11 @@ class MockPageController extends _i1.Mock implements _i7.PageController {
   _i3.ScrollPosition get position =>
       (super.noSuchMethod(
             Invocation.getter(#position),
-            returnValue: _FakeScrollPosition_20(
+            returnValue: _FakeScrollPosition_21(
               this,
               Invocation.getter(#position),
             ),
-            returnValueForMissingStub: _FakeScrollPosition_20(
+            returnValueForMissingStub: _FakeScrollPosition_21(
               this,
               Invocation.getter(#position),
             ),
@@ -778,7 +799,7 @@ class MockPageController extends _i1.Mock implements _i7.PageController {
               context,
               oldPosition,
             ]),
-            returnValue: _FakeScrollPosition_20(
+            returnValue: _FakeScrollPosition_21(
               this,
               Invocation.method(#createScrollPosition, [
                 physics,
@@ -786,7 +807,7 @@ class MockPageController extends _i1.Mock implements _i7.PageController {
                 oldPosition,
               ]),
             ),
-            returnValueForMissingStub: _FakeScrollPosition_20(
+            returnValueForMissingStub: _FakeScrollPosition_21(
               this,
               Invocation.method(#createScrollPosition, [
                 physics,

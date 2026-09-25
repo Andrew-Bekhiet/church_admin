@@ -5,6 +5,7 @@ export 'gql_definintions/fcm_tokens_dao.dart';
 export 'gql_definintions/groups_dao.dart';
 export 'gql_definintions/history_dao.dart';
 export 'gql_definintions/home.dart';
+export 'gql_definintions/invitations_dao.dart';
 export 'gql_definintions/meetings_dao.dart';
 export 'gql_definintions/metadata_dao.dart';
 export 'gql_definintions/persons_dao.dart';
