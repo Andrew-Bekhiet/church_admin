@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Resets the hermetic backend and the app's state on a dedicated iOS simulator,
-# then runs one Patrol test on it. The simulator is separate so wiping the app
+# then runs a Patrol test on it; with no argument, every journey runs in turn,
+# each against a fresh backend. The simulator is separate so wiping the app
 # never touches the dev app's data, which shares the bundle id. It is reset
 # without shutting down because Simulator.app aborts when a device it is
 # showing gets erased.
@@ -8,7 +9,6 @@
 set -euo pipefail
 
 client_dir="$(cd "$(dirname "$0")/.." && pwd)"
-test_file="${1:-patrol_test/user_invitation_journey_test.dart}"
 device_name="${E2E_DEVICE_NAME:-church-admin-e2e}"
 bundle_id="$(yq -r '.patrol.ios.bundle_id' "$client_dir/pubspec.yaml")"
 
@@ -30,11 +30,23 @@ if [ "$state" != "Booted" ]; then
   xcrun simctl bootstatus "$device" -b >/dev/null
 fi
 
-xcrun simctl uninstall "$device" "$bundle_id"
-xcrun simctl keychain "$device" reset
+run_journey() {
+  xcrun simctl uninstall "$device" "$bundle_id"
+  xcrun simctl keychain "$device" reset
 
-"$client_dir/../server/scripts/e2e-backend.sh" up
+  "$client_dir/../server/scripts/e2e-backend.sh" up
+
+  PATROL_FLUTTER_COMMAND="fvm flutter" "${PATROL:-$HOME/.pub-cache/bin/patrol}" test \
+    -t "$1" -d "$device" --dart-define-from-file e2e.env
+}
 
 cd "$client_dir"
-PATROL_FLUTTER_COMMAND="fvm flutter" "${PATROL:-$HOME/.pub-cache/bin/patrol}" test \
-  -t "$test_file" -d "$device" --dart-define-from-file e2e.env
+
+if [ $# -gt 0 ]; then
+  run_journey "$1"
+  exit
+fi
+
+for journey in patrol_test/*_journey_test.dart; do
+  run_journey "$journey"
+done

@@ -22,6 +22,10 @@ class UserManagementRobot {
     await tester.waitFor(_addUserButton);
   }
 
+  Future<void> showUsersAsFlatList() async {
+    await tester.tapOn(find.byKey(ManageUsersScreenKeys.showFlatListButton));
+  }
+
   Future<void> backToManageUsers() async {
     await tester.tapOn(find.byType(BackButton));
     await tester.waitFor(_addUserButton);
@@ -75,13 +79,19 @@ class UserManagementRobot {
     await tester.tapOn(find.byKey(EditUserScreenKeys.permission(permission)));
   }
 
-  Future<void> addServiceScopeWithUserManagement(String serviceId) async {
+  Future<void> addServiceScope(
+    String serviceId, {
+    bool managesUsers = false,
+  }) async {
     final scope = find.byKey(EditUserScreenKeys.scope(serviceId));
 
     await tester.tapOn(find.byKey(EditUserScreenKeys.addScopeButton));
     await tester.tapOn(find.byKey(EditUserScreenKeys.servicesTab));
     await tester.tapOn(tester.viewableObject(serviceId));
     await tester.tapOn(find.byKey(EditUserScreenKeys.confirmScopesButton));
+
+    if (!managesUsers) return;
+
     await tester.tapOn(scope);
 
     for (final checkbox in [

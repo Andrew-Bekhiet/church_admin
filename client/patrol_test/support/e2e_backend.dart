@@ -57,10 +57,7 @@ abstract final class E2eBackend {
     return body['data'] as Map<String, dynamic>;
   }
 
-  static Future<String> insertPerson(
-    String name, {
-    required String serviceName,
-  }) async {
+  static Future<String> serviceIdByName(String serviceName) async {
     final data = await hasuraQuery(
       r'''
       query ServiceByName($serviceName: String!) {
@@ -69,7 +66,15 @@ abstract final class E2eBackend {
       ''',
       variables: {'serviceName': serviceName},
     );
-    final serviceId = (data['services'] as List).single['id'];
+
+    return (data['services'] as List).single['id'] as String;
+  }
+
+  static Future<String> insertPerson(
+    String name, {
+    required String serviceName,
+  }) async {
+    final serviceId = await serviceIdByName(serviceName);
     final inserted = await hasuraQuery(
       r'''
       mutation InsertPerson($name: String!, $serviceId: uuid!) {
@@ -80,6 +85,42 @@ abstract final class E2eBackend {
     );
 
     return (inserted['insertPersonsOne'] as Map)['id'] as String;
+  }
+
+  static Future<String> insertApprovedUser(
+    String name, {
+    required String adminOnServiceId,
+  }) async {
+    final inserted = await hasuraQuery(
+      r'''
+      mutation InsertApprovedUser($name: String!, $serviceId: uuid!) {
+        insertAuthUsersDataOne(object: {
+          name: $name
+          permissions: {data: [{permission: "approved"}]}
+          adminOn: {data: [{adminOnService: $serviceId}]}
+        }) { uid }
+      }
+      ''',
+      variables: {'name': name, 'serviceId': adminOnServiceId},
+    );
+
+    return (inserted['insertAuthUsersDataOne'] as Map)['uid'] as String;
+  }
+
+  static Future<Set<String>> adminOnServicesOf(String uid) async {
+    final data = await hasuraQuery(
+      r'''
+      query AdminOnServicesOf($uid: uuid!) {
+        authUsersAdminOn(where: {uid: {_eq: $uid}}) { adminOnService }
+      }
+      ''',
+      variables: {'uid': uid},
+    );
+
+    return {
+      for (final row in data['authUsersAdminOn'] as List)
+        (row as Map)['adminOnService'] as String,
+    };
   }
 
   static Future<Map<String, dynamic>> userByEmail(String email) async {
