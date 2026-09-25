@@ -1,11 +1,12 @@
 import 'package:church_admin/church_admin.dart';
+import 'package:fake_async/fake_async.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mocktail/mocktail.dart';
 
 void main() {
-  TestWidgetsFlutterBinding.ensureInitialized();
+  final binding = TestWidgetsFlutterBinding.ensureInitialized();
 
   const route = ManageUsersRoute();
   final authenticateLocation = AuthenticateRoute(next: route.location).location;
@@ -27,6 +28,8 @@ void main() {
   String? redirect() => route.redirect(_MockBuildContext(), routerState);
 
   setUp(() {
+    binding.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
+
     final authBloc = _MockAuthBloc();
     when(() => authBloc.isSignedIn).thenReturn(true);
     when(() => authBloc.currentUserData).thenReturn(
@@ -72,16 +75,34 @@ void main() {
   );
 
   test(
-    'an unlocked manage users screen stays open after unlocking the app on resume',
+    'an unlocked manage users screen stays open after the screen turns off and the app is unlocked again',
     () {
-      localAuthService.resetAuthState(path: route.location);
-      redirect();
+      void turnScreenOff() => [
+        AppLifecycleState.inactive,
+        AppLifecycleState.hidden,
+        AppLifecycleState.paused,
+      ].forEach(binding.handleAppLifecycleStateChanged);
 
-      localAuthService
-        ..scheduleReauth()
-        ..resetAuthState();
+      void turnScreenOn() => [
+        AppLifecycleState.hidden,
+        AppLifecycleState.inactive,
+        AppLifecycleState.resumed,
+      ].forEach(binding.handleAppLifecycleStateChanged);
 
-      expect(redirect(), isNull);
+      fakeAsync((async) {
+        localAuthService.resetAuthState(path: route.location);
+        redirect();
+
+        turnScreenOff();
+        async.elapse(localAuthService.timeToReauth);
+        turnScreenOn();
+
+        expect(localAuthService.shouldAuthenticate, isTrue);
+
+        localAuthService.resetAuthState();
+
+        expect(redirect(), isNull);
+      });
     },
   );
 
