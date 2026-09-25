@@ -63,9 +63,13 @@ hasura_admin_query() {
 up() {
   ensure_functions_env
 
+  compose config --images | while read -r image; do
+    docker image inspect "$image" >/dev/null 2>&1 || { compose build; break; }
+  done
+
   compose down --remove-orphans
   docker volume rm -f church-admin-e2e_pgdata >/dev/null
-  compose up -d --build --wait postgres local-unsigned-jwt-verifier hasura firebase-emulators
+  compose up -d --no-build --wait postgres local-unsigned-jwt-verifier hasura firebase-emulators
   compose --profile plant_seeds run --rm seed
 
   wait_for "the functions emulator to load the auth blocking function" 150 functions_loaded

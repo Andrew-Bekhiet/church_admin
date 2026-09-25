@@ -6,6 +6,9 @@ services:
       start_period: 2m
 
   hasura:
+    volumes:
+      - ./hasura/migrations:/hasura-migrations:ro
+      - ./hasura/metadata:/hasura-metadata:ro
     environment:
       STUDY_YEAR_ROLL_NOTIFY_URL: http://firebase-emulators:5001/demo-church-admin/europe-west6/notifyStudyYearRollFailure
 
