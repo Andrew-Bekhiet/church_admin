@@ -16,6 +16,7 @@ void main() {
 
     setUpAll(() {
       registerFallbackValue(_Fixture.makeMeeting());
+      registerFallbackValue(MeetingAnalysisSubject(_Fixture.makeMeeting()));
       registerFallbackValue(
         DateTimeRange(start: DateTime(2026), end: DateTime(2026)),
       );
@@ -219,10 +220,7 @@ void main() {
           await changed;
         },
         verify: (cubit) {
-          expect(
-            (cubit.state as RecordAttendanceLoaded).streakWindowDays,
-            30,
-          );
+          expect((cubit.state as RecordAttendanceLoaded).streakWindowDays, 30);
 
           verify(
             () => f.dao.getMeetingRoster(
@@ -454,9 +452,7 @@ final class _Fixture {
         range: any(named: 'range'),
         asServant: any(named: 'asServant'),
       ),
-    ).thenAnswer(
-      (_) async => const [],
-    );
+    ).thenAnswer((_) async => const []);
   }
 
   RecordAttendanceCubit createCubit() => RecordAttendanceCubit(
@@ -491,16 +487,14 @@ final class _Fixture {
     personAttendanceAnalysis: null,
   );
 
-  static AttendanceRecord makeRecord(
-    String personId, {
-    String id = 'att-1',
-  }) => AttendanceRecord(
-    id: id,
-    meetingId: 'meeting-1',
-    personId: personId,
-    datetime: DateTime(2026, 7, 2, 10),
-    asServant: false,
-  );
+  static AttendanceRecord makeRecord(String personId, {String id = 'att-1'}) =>
+      AttendanceRecord(
+        id: id,
+        meetingId: 'meeting-1',
+        personId: personId,
+        datetime: DateTime(2026, 7, 2, 10),
+        asServant: false,
+      );
 
   static User userWithPersonsOnlyRecordRights() => User(
     uid: 'uid',
@@ -511,10 +505,7 @@ final class _Fixture {
       UserPermission.recordAllAttendance,
     }),
     photoUpdatedAt: DateTime(2026),
-    lastEdit: LastRecordedByInfo(
-      time: DateTime(2026),
-      recordedBy: 'system',
-    ),
+    lastEdit: LastRecordedByInfo(time: DateTime(2026), recordedBy: 'system'),
   );
 
   static User userWithBothRecordRights() => User(
@@ -527,10 +518,7 @@ final class _Fixture {
       UserPermission.recordAllServantsAttendance,
     }),
     photoUpdatedAt: DateTime(2026),
-    lastEdit: LastRecordedByInfo(
-      time: DateTime(2026),
-      recordedBy: 'system',
-    ),
+    lastEdit: LastRecordedByInfo(time: DateTime(2026), recordedBy: 'system'),
   );
 }
 
