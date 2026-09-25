@@ -152,6 +152,8 @@ dev_dependencies:
       url: https://github.com/passsy/spot
       ref: main
   url_launcher_platform_interface: ^2.1.2
+  web_socket: ^1.0.1
+  web_socket_channel: ^3.0.3
 
 flutter:
   uses-material-design: true
