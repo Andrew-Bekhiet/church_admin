@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import { https } from "firebase-functions/v1";
+import { AdminOnEntry } from "./auth/caller_manages_scopes";
 import { hasuraAdminSecret, hasuraServer } from "./secrets";
 
 export const publicPhotoTables = [
@@ -264,11 +265,11 @@ export async function getFirebaseAuthUIDsWithHasuraUsers(
 }
 
 export async function claimInvitation({
-  codeDigest,
+  code,
   firebaseAuthUID,
   email,
 }: {
-  codeDigest: string;
+  code: string;
   firebaseAuthUID: string;
   email: string;
 }): Promise<{ hasuraUid: string } | null> {
@@ -276,13 +277,13 @@ export async function claimInvitation({
     const hasura_response = await makeGraphqlRequest({
       query: `
             mutation claimInvitation(
-              $codeDigest: String!
+              $pCode: String!
               $firebaseAuthUID: String!
               $email: String!
             ) {
               authClaimInvitation(
                 args: {
-                  p_code_digest: $codeDigest
+                  p_code: $pCode
                   p_auth_id: $firebaseAuthUID
                   p_email: $email
                 }
@@ -291,7 +292,7 @@ export async function claimInvitation({
               }
             }
           `,
-      variables: { codeDigest, firebaseAuthUID, email: canonicalEmail(email) },
+      variables: { pCode: code, firebaseAuthUID, email: canonicalEmail(email) },
       operationName: "claimInvitation",
     });
 
@@ -659,6 +660,162 @@ export async function updatePhotoBlurHash(
     console.error(e);
     throw e;
   }
+}
+
+export async function getCallerScopeInfo(hasuraUid: string): Promise<{
+  permissions: string[];
+  adminOn: AdminOnEntry[];
+}> {
+  const hasura_response = await makeGraphqlRequest({
+    query: `
+          query getCallerScopeInfo($uid: uuid!) {
+            authUsersDataByPk(uid: $uid) {
+              permissions {
+                permission
+              }
+              adminOn {
+                adminOnArea
+                adminOnService
+                adminOnGroup
+                serviceStudyYear
+                serviceGender
+                areaAllowEdit
+                areaAllowExport
+                areaAdminOnUsers
+                serviceAllowEdit
+                serviceAllowExport
+                serviceAllowRecordAttendance
+                serviceAllowRecordServantsAttendance
+                serviceWriteRelatedFamilies
+                serviceAdminOnUsers
+                groupAllowEdit
+                groupAllowExport
+                groupAllowRecordAttendance
+                groupAllowRecordServantsAttendance
+                groupWriteRelatedFamilies
+                groupAdminOnUsers
+              }
+            }
+          }
+        `,
+    variables: { uid: hasuraUid },
+    operationName: "getCallerScopeInfo",
+  });
+
+  const user = dataOrThrow(hasura_response)["authUsersDataByPk"];
+  const permissions: { permission: string }[] = user?.["permissions"] ?? [];
+  const adminOn: AdminOnEntry[] = user?.["adminOn"] ?? [];
+
+  return {
+    permissions: permissions.map((permission) => permission.permission),
+    adminOn,
+  };
+}
+
+export type CreateUserInput = {
+  uid: string;
+  name: string;
+  email: string | null;
+  permissions: string[];
+  adminOn: AdminOnEntry[];
+  createdBy: string;
+  newPerson: { name: string; gender: boolean } | null;
+  existingPersonId: string | null;
+  invitationExpiresAt: string | null;
+};
+
+export async function insertUserWithPermissionsAndAdminOn(
+  input: CreateUserInput,
+): Promise<{ uid: string; personLinked: boolean }> {
+  const linkPerson = input.existingPersonId != null;
+  const hasura_response = await makeGraphqlRequest({
+    query: `
+          mutation insertUserWithPermissionsAndAdminOn(
+            $uid: uuid!
+            $name: String!
+            $email: String
+            $permissions: [AuthUsersPermissionsInsertInput!]!
+            $adminOn: [AuthUsersAdminOnInsertInput!]!
+            $invitation: AuthInvitationsObjRelInsertInput
+            $person: PersonsObjRelInsertInput
+            $personId: uuid
+            $linkPerson: Boolean!
+          ) {
+            insertAuthUsersDataOne(
+              object: {
+                uid: $uid
+                name: $name
+                email: $email
+                permissions: { data: $permissions }
+                adminOn: { data: $adminOn }
+                invitation: $invitation
+                person: $person
+              }
+            ) {
+              uid
+            }
+            updatePersons(
+              where: { _and: [{ id: { _eq: $personId } }, { uid: { _isNull: true } }] }
+              _set: { uid: $uid }
+            ) @include(if: $linkPerson) {
+              affectedRows
+            }
+          }
+        `,
+    variables: {
+      uid: input.uid,
+      name: input.name,
+      email: input.email,
+      permissions: input.permissions.map((permission) => ({ permission })),
+      adminOn: input.adminOn,
+      invitation: input.invitationExpiresAt
+        ? {
+          data: {
+            expires_at: input.invitationExpiresAt,
+            created_by: input.createdBy,
+          },
+        }
+        : undefined,
+      person: input.newPerson
+        ? {
+          data: {
+            name: input.newPerson.name,
+            gender: input.newPerson.gender,
+            is_servant: true,
+          },
+        }
+        : undefined,
+      personId: input.existingPersonId,
+      linkPerson,
+    },
+    operationName: "insertUserWithPermissionsAndAdminOn",
+  });
+
+  const data = dataOrThrow(hasura_response);
+  const uid: string | null = data["insertAuthUsersDataOne"]?.["uid"] ?? null;
+
+  if (!uid) {
+    throw new Error("Hasura did not return a uid for the new user");
+  }
+
+  const personLinked = !linkPerson ||
+    data["updatePersons"]?.["affectedRows"] === 1;
+
+  return { uid, personLinked };
+}
+
+export async function deleteUserByUid(uid: string): Promise<void> {
+  await makeGraphqlRequest({
+    query: `
+          mutation deleteUserByUid($uid: uuid!) {
+            deleteAuthUsersDataByPk(uid: $uid) {
+              uid
+            }
+          }
+        `,
+    variables: { uid },
+    operationName: "deleteUserByUid",
+  });
 }
 
 export async function makeGraphqlRequest({
