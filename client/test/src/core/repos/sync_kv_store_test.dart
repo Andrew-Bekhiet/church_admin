@@ -176,34 +176,42 @@ void main() {
   });
 
   group('SyncKVStore debounce timing', () {
-    SyncKVStore<int> loadInZone(FakeAsync async, RecordingKvStore<int> storage) {
+    SyncKVStore<int> loadInZone(
+      FakeAsync async,
+      RecordingKvStore<int> storage,
+    ) {
       late SyncKVStore<int> store;
-      unawaited(SyncKVStore.load<int>(storage).then((loaded) => store = loaded));
+      unawaited(
+        SyncKVStore.load<int>(storage).then((loaded) => store = loaded),
+      );
       async.flushMicrotasks();
       return store;
     }
 
-    test('debounced timer flushes pending writes without an explicit flush', () {
-      fakeAsync((async) {
-        final storage = RecordingKvStore<int>('debounce');
-        final store = loadInZone(async, storage)..put('a', 1);
+    test(
+      'debounced timer flushes pending writes without an explicit flush',
+      () {
+        fakeAsync((async) {
+          final storage = RecordingKvStore<int>('debounce');
+          final store = loadInZone(async, storage)..put('a', 1);
 
-        expect(storage.putAllBatches, isEmpty);
+          expect(storage.putAllBatches, isEmpty);
 
-        async.elapse(const Duration(milliseconds: 700));
-        expect(storage.putAllBatches, isEmpty);
+          async.elapse(const Duration(milliseconds: 700));
+          expect(storage.putAllBatches, isEmpty);
 
-        async
-          ..elapse(const Duration(milliseconds: 50))
-          ..flushMicrotasks();
+          async
+            ..elapse(const Duration(milliseconds: 50))
+            ..flushMicrotasks();
 
-        expect(storage.putAllBatches, hasLength(1));
-        expect(storage.putAllBatches.single, {'a': 1});
+          expect(storage.putAllBatches, hasLength(1));
+          expect(storage.putAllBatches.single, {'a': 1});
 
-        unawaited(store.close());
-        async.flushMicrotasks();
-      });
-    });
+          unawaited(store.close());
+          async.flushMicrotasks();
+        });
+      },
+    );
 
     test('max-coalesce cap flushes despite a continuously reset debounce', () {
       fakeAsync((async) {

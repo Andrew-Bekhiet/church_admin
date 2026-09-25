@@ -16,6 +16,7 @@ void main() {
 
     setUpAll(() {
       registerFallbackValue(_Fixture.makeMeeting());
+      registerFallbackValue(MeetingAnalysisSubject(_Fixture.makeMeeting()));
       registerFallbackValue(
         DateTimeRange(start: DateTime(2026), end: DateTime(2026)),
       );
@@ -219,10 +220,7 @@ void main() {
           await changed;
         },
         verify: (cubit) {
-          expect(
-            (cubit.state as RecordAttendanceLoaded).streakWindowDays,
-            30,
-          );
+          expect((cubit.state as RecordAttendanceLoaded).streakWindowDays, 30);
 
           verify(
             () => f.dao.getMeetingRoster(
@@ -322,6 +320,43 @@ void main() {
         },
       );
     });
+
+    group('recordedDays', () {
+      final recordedDate = DateTime(2026, 6, 15);
+
+      blocTest<RecordAttendanceCubit, RecordAttendanceState>(
+        'recordedDays from dao are emitted in loaded state',
+        setUp: () {
+          f.recordedDays = {recordedDate};
+        },
+        build: () => f.createCubit(),
+        verify: (cubit) {
+          final state = cubit.state as RecordAttendanceLoaded;
+          expect(state.recordedDays, contains(recordedDate));
+        },
+      );
+
+      blocTest<RecordAttendanceCubit, RecordAttendanceState>(
+        'marking attendance adds selectedDate to recordedDays',
+        setUp: () {
+          f
+            ..rosterPersons = [_Fixture.rosterPerson('p1')]
+            ..markAttendanceRecord = _Fixture.makeRecord('p1');
+        },
+        build: () => f.createCubit(),
+        act: (cubit) async {
+          final ready = await cubit.stream
+              .whereType<RecordAttendanceLoaded>()
+              .firstWhere((s) => s.rosterStatus == RosterStatus.ready);
+
+          await cubit.toggleAttendance(ready.entries.first);
+        },
+        verify: (cubit) {
+          final state = cubit.state as RecordAttendanceLoaded;
+          expect(state.recordedDays, contains(state.selectedDate));
+        },
+      );
+    });
   });
 }
 
@@ -340,11 +375,40 @@ final class _Fixture {
 
   List<MeetingRosterEntry> rosterPersons = [];
   List<AttendanceRecord> attendanceRecords = [];
+  Set<DateTime> recordedDays = const {};
   AttendanceRecord? markAttendanceRecord;
   AttendanceRecord? unmarkAttendanceRecord;
 
   _Fixture() {
     when(() => authBloc.currentUserData).thenAnswer((_) => user);
+
+    when(
+      () => dao.getMeetingsAttendanceAnalysis(
+        subject: any(named: 'subject'),
+        range: any(named: 'range'),
+      ),
+    ).thenAnswer(
+      (_) async => MeetingsAttendanceAnalysis(
+        title: meeting.name,
+        meetings: recordedDays.isEmpty
+            ? const []
+            : [
+                MeetingAttendanceSummary(
+                  meeting: meeting,
+                  demographics: recordedDays
+                      .map(
+                        (d) => MeetingDayDemographicCounts(
+                          day: d,
+                          personsCount: 1,
+                          servantsCount: 0,
+                          totalCount: 1,
+                        ),
+                      )
+                      .toList(),
+                ),
+              ],
+      ),
+    );
 
     when(
       () => dao.getMeetingRoster(
@@ -388,9 +452,7 @@ final class _Fixture {
         range: any(named: 'range'),
         asServant: any(named: 'asServant'),
       ),
-    ).thenAnswer(
-      (_) async => const [],
-    );
+    ).thenAnswer((_) async => const []);
   }
 
   RecordAttendanceCubit createCubit() => RecordAttendanceCubit(
@@ -425,16 +487,14 @@ final class _Fixture {
     personAttendanceAnalysis: null,
   );
 
-  static AttendanceRecord makeRecord(
-    String personId, {
-    String id = 'att-1',
-  }) => AttendanceRecord(
-    id: id,
-    meetingId: 'meeting-1',
-    personId: personId,
-    datetime: DateTime(2026, 7, 2, 10),
-    asServant: false,
-  );
+  static AttendanceRecord makeRecord(String personId, {String id = 'att-1'}) =>
+      AttendanceRecord(
+        id: id,
+        meetingId: 'meeting-1',
+        personId: personId,
+        datetime: DateTime(2026, 7, 2, 10),
+        asServant: false,
+      );
 
   static User userWithPersonsOnlyRecordRights() => User(
     uid: 'uid',
@@ -445,10 +505,7 @@ final class _Fixture {
       UserPermission.recordAllAttendance,
     }),
     photoUpdatedAt: DateTime(2026),
-    lastEdit: LastRecordedByInfo(
-      time: DateTime(2026),
-      recordedBy: 'system',
-    ),
+    lastEdit: LastRecordedByInfo(time: DateTime(2026), recordedBy: 'system'),
   );
 
   static User userWithBothRecordRights() => User(
@@ -461,10 +518,7 @@ final class _Fixture {
       UserPermission.recordAllServantsAttendance,
     }),
     photoUpdatedAt: DateTime(2026),
-    lastEdit: LastRecordedByInfo(
-      time: DateTime(2026),
-      recordedBy: 'system',
-    ),
+    lastEdit: LastRecordedByInfo(time: DateTime(2026), recordedBy: 'system'),
   );
 }
 

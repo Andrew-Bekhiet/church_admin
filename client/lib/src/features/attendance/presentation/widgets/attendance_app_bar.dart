@@ -14,6 +14,7 @@ class AttendanceAppBar extends StatelessWidget {
   final AttendanceGrouping grouping;
   final int streakWindowDays;
   final bool canToggleAudience;
+  final Set<DateTime> recordedDays;
 
   const AttendanceAppBar({
     required this.meeting,
@@ -23,6 +24,7 @@ class AttendanceAppBar extends StatelessWidget {
     required this.grouping,
     required this.streakWindowDays,
     required this.canToggleAudience,
+    this.recordedDays = const {},
     super.key,
   });
 
@@ -51,6 +53,8 @@ class AttendanceAppBar extends StatelessWidget {
             children: [
               AttendanceDateChip(
                 date: selectedDate,
+                recordedDays: recordedDays,
+                indicatorColor: meeting.color,
                 onDateSelected: cubit.selectDate,
               ),
               if (canToggleAudience)

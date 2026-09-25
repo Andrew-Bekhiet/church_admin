@@ -335,6 +335,7 @@ class MeetingsDAO extends DAOBase<Meeting>
     );
   }
 
+
   Future<List<SingleDayRosterMember>> getSingleDayRosterDemographics({
     required MeetingsAnalysisSubject subject,
     required DateTime day,

@@ -31,6 +31,7 @@ final class RecordAttendanceLoaded extends RecordAttendanceState {
   final int? eligibleCount;
 
   final bool canToggleAudience;
+  final Set<DateTime> recordedDays;
 
   int? get absentCount => (presentCount != null && eligibleCount != null)
       ? (eligibleCount! - presentCount!).clamp(0, eligibleCount!)
@@ -47,6 +48,7 @@ final class RecordAttendanceLoaded extends RecordAttendanceState {
     rosterStatus,
     searchQuery,
     canToggleAudience,
+    recordedDays,
     entries,
     gutterLetters,
     streakWindowDays,
@@ -68,6 +70,7 @@ final class RecordAttendanceLoaded extends RecordAttendanceState {
     required this.presentCount,
     required this.eligibleCount,
     required this.streakWindowDays,
+    this.recordedDays = const {},
     this.searchQuery,
   });
 }

@@ -77,6 +77,7 @@ class _RecordAttendanceLoadedViewState
           grouping: state.grouping,
           streakWindowDays: state.streakWindowDays,
           canToggleAudience: state.canToggleAudience,
+          recordedDays: state.recordedDays,
         ),
       ],
       body: Builder(
