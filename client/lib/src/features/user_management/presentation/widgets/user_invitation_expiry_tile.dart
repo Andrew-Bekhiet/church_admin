@@ -1,3 +1,4 @@
+import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
@@ -48,6 +49,12 @@ class UserInvitationExpiryTile extends StatelessWidget {
       lastDate: lastDate,
     );
 
-    if (picked != null) onExpiryChanged(picked);
+    if (picked == null) return;
+
+    final endOfPickedDay = DateUtils.dateOnly(
+      picked,
+    ).add(const Duration(days: 1)).subtract(const Duration(minutes: 1));
+
+    onExpiryChanged([endOfPickedDay, lastDate].min);
   }
 }

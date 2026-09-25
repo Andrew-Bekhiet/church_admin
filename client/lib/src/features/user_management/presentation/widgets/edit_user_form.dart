@@ -22,6 +22,7 @@ class EditUserForm extends StatelessWidget {
       UpdateUser(:final user) => user,
       CreateUser() => null,
     };
+    final callerPermissions = AuthBloc.I.currentUserData?.permissions;
 
     return Column(
       spacing: 8,
@@ -71,7 +72,11 @@ class EditUserForm extends StatelessWidget {
           title: 'صلاحيات عامة',
           child: Column(
             children: UserPermission.values
-                .where((p) => p != UserPermission.approved)
+                .where(
+                  (p) =>
+                      p != UserPermission.approved &&
+                      (callerPermissions?.contains(p) ?? false),
+                )
                 .map(
                   (p) => PermissionCheckWidget(
                     permission: p,

@@ -22,7 +22,7 @@ class UserAccountCard extends StatelessWidget {
         children: [
           UserAccountStatusBanner(status: status, email: user.email),
           if (user.invitation case final invitation?
-              when !invitation.isClaimed) ...[
+              when !invitation.isClaimed && user.authId == null) ...[
             const Divider(height: 1),
             UserInvitationCodeTile(invitation: invitation),
           ],

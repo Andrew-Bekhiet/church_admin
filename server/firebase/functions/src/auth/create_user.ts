@@ -9,41 +9,11 @@ import {
   insertUserWithPermissionsAndAdminOn,
 } from "../hasura_interface";
 import { hasuraAdminSecret } from "../secrets";
-import { assertCallerManagesScopes } from "./caller_manages_scopes";
-
-const AdminOnInput = z
-  .object({
-    adminOnArea: z.uuid().optional(),
-    adminOnService: z.uuid().optional(),
-    adminOnGroup: z.uuid().optional(),
-    serviceStudyYear: z.number().int().optional(),
-    serviceGender: z.boolean().optional(),
-    areaAllowEdit: z.boolean().optional(),
-    areaAllowExport: z.boolean().optional(),
-    areaAdminOnUsers: z.boolean().optional(),
-    serviceAllowEdit: z.boolean().optional(),
-    serviceAllowExport: z.boolean().optional(),
-    serviceAllowRecordAttendance: z.boolean().optional(),
-    serviceAllowRecordServantsAttendance: z.boolean().optional(),
-    serviceWriteRelatedFamilies: z.boolean().optional(),
-    serviceAdminOnUsers: z.boolean().optional(),
-    groupAllowEdit: z.boolean().optional(),
-    groupAllowExport: z.boolean().optional(),
-    groupAllowRecordAttendance: z.boolean().optional(),
-    groupAllowRecordServantsAttendance: z.boolean().optional(),
-    groupWriteRelatedFamilies: z.boolean().optional(),
-    groupAdminOnUsers: z.boolean().optional(),
-  })
-  .refine(
-    (row) =>
-      [row.adminOnArea, row.adminOnService, row.adminOnGroup].filter(
-        (id) => id != null,
-      ).length === 1,
-    {
-      message:
-        "exactly one of adminOnArea, adminOnService, adminOnGroup is required",
-    },
-  );
+import {
+  AdminOnInput,
+  assertCallerHoldsPermissions,
+  assertCallerManagesScopes,
+} from "./caller_manages_scopes";
 
 const PersonInput = z.discriminatedUnion("kind", [
   z.object({ kind: z.literal("existing"), id: z.uuid() }),
@@ -56,7 +26,7 @@ const PersonInput = z.discriminatedUnion("kind", [
 
 const CreateUserRequest = z.object({
   name: z.string().trim().min(1),
-  email: z.email().nullish(),
+  email: z.string().trim().toLowerCase().pipe(z.email()).nullish(),
   permissions: z.array(z.string()),
   adminOn: z.array(AdminOnInput),
   person: PersonInput,
@@ -97,6 +67,8 @@ export const createUser = https.onCall<z.infer<typeof CreateUserRequest>>(
     const { permissions, adminOn } = await getCallerScopeInfo(
       callerHasuraUid,
     );
+
+    assertCallerHoldsPermissions(permissions, requestData.data.permissions);
 
     if (!permissions.includes("manageAllUsers")) {
       assertCallerManagesScopes(adminOn, requestData.data.adminOn);
@@ -150,7 +122,11 @@ export const createUser = https.onCall<z.infer<typeof CreateUserRequest>>(
         throw new https.HttpsError("already-exists", "user/name-taken");
       }
 
-      if (createdUid) await deleteUserByUid(createdUid);
+      if (createdUid) {
+        await deleteUserByUid(createdUid).catch((cleanupError) =>
+          console.error("Could not delete half-created user", createdUid, cleanupError)
+        );
+      }
 
       console.error("Could not create user", authUser.uid, e);
       throw new https.HttpsError("internal", "internal");
