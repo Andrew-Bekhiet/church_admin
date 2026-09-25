@@ -73,6 +73,11 @@ void main() {
         replacementPerson,
       );
 
+      step('admin goes from the user to the person and back');
+      await admin.roundTripThroughLinkedPerson(
+        (await E2eBackend.userByEmail(lateInviteeEmail))['uid'] as String,
+      );
+
       await E2eApp.signOut(tester);
 
       step('invitee applies the code before verifying their email');

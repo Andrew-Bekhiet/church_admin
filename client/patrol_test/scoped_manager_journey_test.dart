@@ -109,6 +109,9 @@ void main() {
         replacementPersonId,
       );
 
+      step('the manager goes from the user to the person and back');
+      await manager.roundTripThroughLinkedPerson(invitee['uid'] as String);
+
       await E2eApp.signOut(tester);
       await E2eApp.finish(tester);
     },

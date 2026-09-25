@@ -113,6 +113,28 @@ class UserManagementRobot {
     return tester.widget<Text>(code).data ?? '';
   }
 
+  Future<void> roundTripThroughLinkedPerson(String uid) async {
+    final linkedUserButton = find.byKey(
+      PersonChurchSectionKeys.linkedUserButton,
+    );
+
+    await tester.tapOn(find.byKey(ViewUserScreenKeys.linkedPerson));
+    final personScreen = await tester.waitFor(find.byType(ViewPerson));
+    await tester.scrollUntilVisible(
+      linkedUserButton,
+      300,
+      scrollable: find
+          .descendant(of: personScreen, matching: find.byType(Scrollable))
+          .first,
+    );
+    await tester.tapOn(linkedUserButton);
+    await tester.waitFor(
+      find.byWidgetPredicate(
+        (widget) => widget is ViewUser && widget.userId == uid,
+      ),
+    );
+  }
+
   Future<void> changeLinkedPerson({
     required String personId,
     required String personName,
