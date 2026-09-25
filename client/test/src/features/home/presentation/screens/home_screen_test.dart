@@ -1,62 +1,79 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 
 import '../../../../fakes/fake_feature_flags_repo.dart';
 import '../../../../utils.dart';
-import 'home_screen_test.mocks.dart';
 
-@GenerateNiceMocks([
-  MockSpec<AuthBloc>(),
-  MockSpec<DatabaseService>(),
-  MockSpec<PersonsDAO>(),
-  MockSpec<ServicesDAO>(),
-  MockSpec<HomeDailyDataRepository>(),
-  MockSpec<LocalAuthService>(),
-  MockSpec<UserPreferencesService>(),
-])
+class _MockAuthBloc extends Mock implements AuthBloc {}
+
+class _MockDatabaseService extends Mock implements DatabaseService {}
+
+class _MockPersonsDAO extends Mock implements PersonsDAO {}
+
+class _MockServicesDAO extends Mock implements ServicesDAO {}
+
+class _MockAreasDAO extends Mock implements AreasDAO {}
+
+class _MockStreetsDAO extends Mock implements StreetsDAO {}
+
+class _MockFamiliesDAO extends Mock implements FamiliesDAO {}
+
+class _MockStoresDAO extends Mock implements StoresDAO {}
+
+class _MockHomeDailyDataRepository extends Mock
+    implements HomeDailyDataRepository {}
+
+class _MockLocalAuthService extends Mock implements LocalAuthService {}
+
+class _MockUserPreferencesService extends Mock
+    implements UserPreferencesService {}
+
 void main() {
   setUp(() {
-    final authBloc = MockAuthBloc();
-    when(authBloc.userDataStream).thenAnswer((_) => const Stream.empty());
+    final authBloc = _MockAuthBloc();
+    when(() => authBloc.userDataStream).thenAnswer((_) => const Stream.empty());
 
-    final personsDAO = MockPersonsDAO();
+    final personsDAO = _MockPersonsDAO();
     when(
-      personsDAO.streamAll(
-        where: anyNamed('where'),
-        orderBy: anyNamed('orderBy'),
+      () => personsDAO.streamAll(
+        where: any(named: 'where'),
+        orderBy: any(named: 'orderBy'),
       ),
     ).thenAnswer((_) => PaginatableStream.simple(factory: (_) async* {}));
 
-    final servicesDAO = MockServicesDAO();
+    final servicesDAO = _MockServicesDAO();
     when(
-      servicesDAO.streamAll(
-        where: anyNamed('where'),
-        orderBy: anyNamed('orderBy'),
+      () => servicesDAO.streamAll(
+        where: any(named: 'where'),
+        orderBy: any(named: 'orderBy'),
       ),
     ).thenAnswer((_) => PaginatableStream.simple(factory: (_) async* {}));
 
-    final databaseService = MockDatabaseService();
-    when(databaseService.persons).thenReturn(personsDAO);
-    when(databaseService.services).thenReturn(servicesDAO);
+    final databaseService = _MockDatabaseService();
+    when(() => databaseService.persons).thenReturn(personsDAO);
+    when(() => databaseService.services).thenReturn(servicesDAO);
+    when(() => databaseService.areas).thenReturn(_MockAreasDAO());
+    when(() => databaseService.streets).thenReturn(_MockStreetsDAO());
+    when(() => databaseService.families).thenReturn(_MockFamiliesDAO());
+    when(() => databaseService.stores).thenReturn(_MockStoresDAO());
 
-    final homeDailyDataRepository = MockHomeDailyDataRepository();
-    when(homeDailyDataRepository.getVerse()).thenReturn('verse');
-    when(homeDailyDataRepository.getTodaysSneksar()).thenReturn('sneksar');
-    when(homeDailyDataRepository.getSaying()).thenReturn('saying');
+    final homeDailyDataRepository = _MockHomeDailyDataRepository();
+    when(homeDailyDataRepository.getVerse).thenReturn('verse');
+    when(homeDailyDataRepository.getTodaysSneksar).thenReturn('sneksar');
+    when(homeDailyDataRepository.getSaying).thenReturn('saying');
     when(
-      homeDailyDataRepository.getTodaysBirthdaysData(),
+      homeDailyDataRepository.getTodaysBirthdaysData,
     ).thenAnswer((_) async => []);
 
-    final localAuthService = MockLocalAuthService();
-    when(localAuthService.shouldAuthenticate).thenReturn(false);
+    final localAuthService = _MockLocalAuthService();
+    when(() => localAuthService.shouldAuthenticate).thenReturn(false);
     when(
-      localAuthService.refreshUIStream,
+      () => localAuthService.refreshUIStream,
     ).thenAnswer((_) => const Stream.empty());
-    when(localAuthService.canCheckBiometrics()).thenAnswer((_) async => false);
+    when(localAuthService.canCheckBiometrics).thenAnswer((_) async => false);
 
     initGlobalProviderContainer([
       authBlocProvider.overrideWithValue(authBloc),
@@ -75,7 +92,7 @@ void main() {
         ),
       ),
       userPreferencesServiceProvider.overrideWithValue(
-        MockUserPreferencesService(),
+        _MockUserPreferencesService(),
       ),
     ]);
   });
