@@ -195,42 +195,53 @@ void main() {
         },
       );
 
-      test(
-        'One time auth for path',
-        () async {
-          final unit = LocalAuthService.noInitialAuth(
+      group('Auth for path', () {
+        late LocalAuthService unit;
+
+        setUp(() {
+          unit = LocalAuthService.noInitialAuth(
             localAuthPlugin: globalProviderContainer.read(
               localAuthPluginProvider,
             ),
           );
           addTearDown(unit.dispose);
+        });
 
-          expect(unit.shouldAuthenticate, isFalse);
-          expect(unit.shouldAuthenticateForPath('/test'), isTrue);
-
-          expect(unit.requestOneTimeAuthForPath('/test'), isFalse);
-
-          expect(unit.shouldAuthenticate, isFalse);
-          expect(unit.shouldAuthenticateForPath('/test'), isTrue);
-          //Multiple calls should return false
-          expect(unit.requestOneTimeAuthForPath('/test'), isFalse);
-
+        test('a path requires authentication until it is granted', () {
           unit.resetAuthState();
-          expect(unit.shouldAuthenticate, isFalse);
-          expect(unit.shouldAuthenticateForPath('/test'), isTrue);
-          expect(unit.requestOneTimeAuthForPath('/test'), isFalse);
 
+          expect(unit.shouldAuthenticateForPath('/test'), isTrue);
+        });
+
+        test('a granted path stays granted across repeated checks', () {
           unit.resetAuthState(path: '/test');
 
-          expect(unit.shouldAuthenticate, isFalse);
           expect(unit.shouldAuthenticateForPath('/test'), isFalse);
-          expect(unit.requestOneTimeAuthForPath('/test'), isTrue);
-          //Second call should return false
-          expect(unit.requestOneTimeAuthForPath('/test'), isFalse);
+          expect(unit.shouldAuthenticateForPath('/test'), isFalse);
+        });
+
+        test('granting a path leaves other paths locked', () {
+          unit.resetAuthState(path: '/test');
+
+          expect(unit.shouldAuthenticateForPath('/other'), isTrue);
+        });
+
+        test('a revoked path requires authentication again', () {
+          unit
+            ..resetAuthState(path: '/test')
+            ..revokeAuthForPath('/test');
+
           expect(unit.shouldAuthenticateForPath('/test'), isTrue);
-          expect(unit.shouldAuthenticate, isFalse);
-        },
-      );
+        });
+
+        test('scheduling reauth keeps path grants', () {
+          unit
+            ..resetAuthState(path: '/test')
+            ..scheduleReauth();
+
+          expect(unit.shouldAuthenticateForPath('/test'), isFalse);
+        });
+      });
 
       testWidgets(
         'Authentication (all finish false)',

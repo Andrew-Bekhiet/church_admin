@@ -360,15 +360,6 @@ class MockLocalAuthService extends _i1.Mock implements _i4.LocalAuthService {
           as _i5.Stream<void>);
 
   @override
-  bool requestOneTimeAuthForPath(String? path) =>
-      (super.noSuchMethod(
-            Invocation.method(#requestOneTimeAuthForPath, [path]),
-            returnValue: false,
-            returnValueForMissingStub: false,
-          )
-          as bool);
-
-  @override
   bool shouldAuthenticateForPath(String? path) =>
       (super.noSuchMethod(
             Invocation.method(#shouldAuthenticateForPath, [path]),
@@ -376,6 +367,12 @@ class MockLocalAuthService extends _i1.Mock implements _i4.LocalAuthService {
             returnValueForMissingStub: false,
           )
           as bool);
+
+  @override
+  void revokeAuthForPath(String? path) => super.noSuchMethod(
+    Invocation.method(#revokeAuthForPath, [path]),
+    returnValueForMissingStub: null,
+  );
 
   @override
   void didChangeAppLifecycleState(_i8.AppLifecycleState? state) =>

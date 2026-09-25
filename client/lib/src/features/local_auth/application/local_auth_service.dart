@@ -19,7 +19,7 @@ class LocalAuthService with WidgetsBindingObserver {
   final NotificationsService _notificationsService;
   bool _shouldAuthenticate = false;
 
-  final Map<String, bool> _oneTimeAuthForPath = {};
+  final Set<String> _authenticatedPaths = {};
 
   Timer? _timer;
   Completer<bool>? _localAuthCompleter;
@@ -59,21 +59,10 @@ class LocalAuthService with WidgetsBindingObserver {
     WidgetsBinding.instance.addObserver(this);
   }
 
-  bool requestOneTimeAuthForPath(String path) {
-    final auth = _oneTimeAuthForPath[path];
-    if (auth == null) {
-      _oneTimeAuthForPath[path] = false;
-
-      return false;
-    } else {
-      _oneTimeAuthForPath.remove(path);
-
-      return auth;
-    }
-  }
-
   bool shouldAuthenticateForPath(String path) =>
-      !(_oneTimeAuthForPath[path] ?? false);
+      !_authenticatedPaths.contains(path);
+
+  void revokeAuthForPath(String path) => _authenticatedPaths.remove(path);
 
   Timer _createTimer() => Timer(timeToReauth, scheduleReauth);
 
@@ -100,7 +89,7 @@ class LocalAuthService with WidgetsBindingObserver {
 
   void resetAuthState({String? path}) {
     _shouldAuthenticate = false;
-    if (path != null) _oneTimeAuthForPath[path] = true;
+    if (path != null) _authenticatedPaths.add(path);
 
     _refreshUI.add(null);
 

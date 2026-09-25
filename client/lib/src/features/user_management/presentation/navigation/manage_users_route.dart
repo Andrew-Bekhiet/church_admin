@@ -18,12 +18,17 @@ class ManageUsersRoute extends GoRouteData with $ManageUsersRoute {
       return const HomeScreenWebRoute().location;
     }
 
-    if (!LocalAuthService.I.requestOneTimeAuthForPath('/manage_users')) {
-      return AuthenticateRoute(
-        next: const ManageUsersRoute().location,
-      ).location;
+    if (LocalAuthService.I.shouldAuthenticateForPath(location)) {
+      return AuthenticateRoute(next: location).location;
     }
 
     return null;
+  }
+
+  @override
+  bool onExit(BuildContext context, GoRouterState state) {
+    LocalAuthService.I.revokeAuthForPath(location);
+
+    return true;
   }
 }
