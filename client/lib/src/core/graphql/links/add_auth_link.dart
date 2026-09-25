@@ -18,7 +18,7 @@ class AddAuthLink extends Link {
 
   late final ValueConnectableStream<String?> _idTokenStream;
   late final StreamSubscription<String?> _idTokenSubscription;
-  late final StreamSubscription<void> _reconnectSocketOnSignInSubscription;
+  late final StreamSubscription<void> _reconnectSocketOnNewTokenSubscription;
 
   HttpLink? _httpLink;
   WebSocketLink? _wsLink;
@@ -31,9 +31,9 @@ class AddAuthLink extends Link {
   }) {
     _idTokenStream = idTokenStream.publishValue();
     _idTokenSubscription = _idTokenStream.connect();
-    _reconnectSocketOnSignInSubscription = _idTokenStream
+    _reconnectSocketOnNewTokenSubscription = _idTokenStream
         .pairwise()
-        .where((tokens) => tokens.first == null && tokens.last != null)
+        .where((tokens) => tokens.last != null && tokens.last != tokens.first)
         .listen((_) => _wsLink?.getSocketClient?.onConnectionLost());
   }
 
@@ -61,12 +61,17 @@ class AddAuthLink extends Link {
   ]) {
     _httpLink ??= createHttpLink(url);
 
-    return _idTokenStream.whereNotNull().switchMap(
-      (t) => _httpLink!.request(
-        request.updateContextEntry<HttpLinkHeaders>(_getHeadersWithToken(t)),
-        forward,
-      ),
-    );
+    return _idTokenStream
+        .whereNotNull()
+        .take(1)
+        .asyncExpand(
+          (t) => _httpLink!.request(
+            request.updateContextEntry<HttpLinkHeaders>(
+              _getHeadersWithToken(t),
+            ),
+            forward,
+          ),
+        );
   }
 
   @visibleForTesting
@@ -103,7 +108,7 @@ class AddAuthLink extends Link {
       initialPayload: () async => {
         'headers': {
           'Authorization':
-              'Bearer ${await _idTokenStream.whereNotNull().first}',
+              'Bearer ${_idTokenStream.valueOrNull ?? await _idTokenStream.whereNotNull().first}',
           'content-type': 'application/json',
         },
       },
@@ -112,7 +117,7 @@ class AddAuthLink extends Link {
 
   @override
   Future<void> dispose() async {
-    await _reconnectSocketOnSignInSubscription.cancel();
+    await _reconnectSocketOnNewTokenSubscription.cancel();
     await _idTokenSubscription.cancel();
     await _httpLink?.dispose();
     await _wsLink?.dispose();
