@@ -72,6 +72,7 @@ class EditAdminOnDataWidget extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: ElevatedButton.icon(
+            key: EditUserScreenKeys.addScopeButton,
             icon: const Icon(Symbols.add),
             label: const Text('إضافة أمانة جديدة'),
             onPressed: () => _showAddAdminOnDialog(context),
@@ -143,6 +144,7 @@ class EditAdminOnDataWidget extends StatelessWidget {
                         text: 'المناطق',
                       ),
                       Tab(
+                        key: EditUserScreenKeys.servicesTab,
                         icon: Icon(
                           ViewableObjectService.I.getDefaultIconFor<Service>(),
                         ),
@@ -219,6 +221,7 @@ class EditAdminOnDataWidget extends StatelessWidget {
                   ],
                 ),
                 floatingActionButton: FloatingActionButton(
+                  key: EditUserScreenKeys.confirmScopesButton,
                   onPressed: () => Navigator.of(context).pop((
                     areas: areasSelectionController.currentValue,
                     services: servicesSelectionController.currentValue,

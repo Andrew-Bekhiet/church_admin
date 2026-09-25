@@ -1,3 +1,4 @@
+import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -83,8 +84,11 @@ extension E2eWidgetTester on WidgetTester {
     return TestFailure('$reason\nOn screen: ${onScreen.join(' | ')}');
   }
 
-  Finder labelledField(String label) => find.byWidgetPredicate(
-    (widget) =>
-        widget is InputDecorator && widget.decoration.labelText == label,
+  Finder viewableObject(String id) => find.byWidgetPredicate(
+    (widget) => switch (widget) {
+      ViewableObjectWidget(object: ViewableWithID(id: final objectId)) =>
+        objectId == id,
+      _ => false,
+    },
   );
 }

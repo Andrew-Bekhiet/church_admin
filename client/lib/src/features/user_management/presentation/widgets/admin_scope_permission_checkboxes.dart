@@ -19,6 +19,7 @@ class AdminScopePermissionCheckboxes extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         CheckboxListTile(
+          key: EditUserScreenKeys.scopeManageUsersCheckbox,
           dense: true,
           enabled: userAdminScope.canWriteData,
           secondary: Icon(UserPermission.manageAllUsers.icon),
@@ -31,6 +32,7 @@ class AdminScopePermissionCheckboxes extends StatelessWidget {
               onChanged(userAdminScope.copyWith(canManageUsers: value)),
         ),
         CheckboxListTile(
+          key: EditUserScreenKeys.scopeWriteDataCheckbox,
           dense: true,
           secondary: Icon(UserPermission.writeAllData.icon),
           title: const Text('تعديل البيانات'),

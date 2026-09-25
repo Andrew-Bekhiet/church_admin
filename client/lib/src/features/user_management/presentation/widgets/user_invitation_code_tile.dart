@@ -27,6 +27,7 @@ class UserInvitationCodeTile extends StatelessWidget {
         children: [
           Text(
             invitation.code,
+            key: UserInvitationCodeTileKeys.code,
             textDirection: TextDirection.ltr,
             style: textTheme.headlineSmall?.copyWith(
               fontFeatures: const [FontFeature.tabularFigures()],
@@ -71,4 +72,8 @@ class UserInvitationCodeTile extends StatelessWidget {
       ),
     );
   }
+}
+
+abstract final class UserInvitationCodeTileKeys {
+  static const Key code = ValueKey('Invitation Code Key');
 }

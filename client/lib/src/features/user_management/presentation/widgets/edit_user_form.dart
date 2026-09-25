@@ -79,6 +79,7 @@ class EditUserForm extends StatelessWidget {
                 )
                 .map(
                   (p) => PermissionCheckWidget(
+                    key: EditUserScreenKeys.permission(p),
                     permission: p,
                     permissions: draft.permissions,
                     onToggle: cubit.togglePermission,

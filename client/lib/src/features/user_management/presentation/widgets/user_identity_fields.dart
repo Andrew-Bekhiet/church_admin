@@ -23,6 +23,7 @@ class UserIdentityFields extends StatelessWidget {
         children: [
           if (draft.person is CreateNewPerson)
             TextFormField(
+              key: EditUserScreenKeys.nameField,
               initialValue: draft.name,
               decoration: const InputDecoration(labelText: 'الاسم'),
               onChanged: cubit.setName,
@@ -31,6 +32,7 @@ class UserIdentityFields extends StatelessWidget {
             CopiablePropertyWidget('البريد الإلكتروني', draft.email)
           else
             TextFormField(
+              key: EditUserScreenKeys.emailField,
               initialValue: draft.email,
               keyboardType: TextInputType.emailAddress,
               decoration: const InputDecoration(labelText: 'البريد الإلكتروني'),

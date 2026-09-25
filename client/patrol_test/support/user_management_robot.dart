@@ -1,3 +1,5 @@
+import 'package:church_admin/church_admin.dart';
+import 'package:church_admin/src/features/user_management/presentation/widgets/user_invitation_code_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -5,116 +7,110 @@ import 'e2e_app.dart';
 import 'e2e_widget_tester.dart';
 
 class UserManagementRobot {
-  static final RegExp _invitationCodePattern = RegExp(
-    r'^[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$',
-  );
-
   final WidgetTester tester;
   final String password;
 
-  Finder get _saveButton => find.widgetWithText(FloatingActionButton, 'حفظ');
+  Finder get _addUserButton => find.byKey(ManageUsersScreenKeys.addUserButton);
+  Finder get _saveButton => find.byKey(EditUserScreenKeys.saveButton);
+  Finder get _selectionDialog => find.byType(AlertDialog);
 
   const UserManagementRobot(this.tester, {required this.password});
 
   Future<void> openManageUsers() async {
-    await E2eApp.openDrawerItem(tester, 'إدارة الخدام');
+    await E2eApp.openDrawerItem(tester, HomeDrawerKeys.manageUsers);
     await E2eApp.unlock(tester, password);
-    await tester.waitFor(find.text('إدارة الخدام'));
+    await tester.waitFor(_addUserButton);
   }
 
   Future<void> backToManageUsers() async {
     await tester.tapOn(find.byType(BackButton));
-    await tester.waitFor(
-      find.widgetWithText(FloatingActionButton, 'إضافة خادم'),
-    );
+    await tester.waitFor(_addUserButton);
   }
 
   Future<void> startCreatingUser() async {
-    await tester.tapOn(
-      find.widgetWithText(FloatingActionButton, 'إضافة خادم'),
-    );
-    await tester.waitFor(find.text('إنشاء دعوة للانضمام'));
+    await tester.tapOn(_addUserButton);
+    await tester.waitFor(_saveButton);
   }
 
   Future<void> fillNewPerson({
     required String name,
     required String email,
   }) async {
-    await tester.tapOn(find.text('إنشاء مخدوم جديد'));
-    await tester.typeInto(tester.labelledField('الاسم'), name);
-    await tester.tapOn(find.text('ذكر'));
-    await tester.typeInto(tester.labelledField('البريد الإلكتروني'), email);
+    await tester.tapOn(find.byKey(EditUserScreenKeys.createNewPersonSegment));
+    await tester.typeInto(find.byKey(EditUserScreenKeys.nameField), name);
+    await tester.typeInto(find.byKey(EditUserScreenKeys.emailField), email);
   }
 
   Future<void> fillExistingPerson({
+    required String personId,
     required String personName,
     required String email,
   }) async {
-    await tester.tapOn(find.text('ربط بمخدوم موجود'));
-    await pickPerson(personName);
-    await tester.typeInto(tester.labelledField('البريد الإلكتروني'), email);
+    await tester.tapOn(
+      find.byKey(EditUserScreenKeys.linkExistingPersonSegment),
+    );
+    await pickPerson(personId: personId, personName: personName);
+    await tester.typeInto(find.byKey(EditUserScreenKeys.emailField), email);
   }
 
-  Future<void> pickPerson(String personName) async {
-    await tester.tapOn(tester.labelledField('المخدوم'));
-    await tester.waitFor(find.text('اختيار المخدوم'));
+  Future<void> pickPerson({
+    required String personId,
+    required String personName,
+  }) async {
+    await tester.tapOn(find.byKey(EditUserScreenKeys.personField));
     await tester.typeInto(
-      find.descendant(
-        of: find.byType(AlertDialog),
-        matching: find.byType(TextField),
-      ),
+      find.descendant(of: _selectionDialog, matching: find.byType(TextField)),
       personName,
     );
     await tester.tapOn(
       find.descendant(
-        of: find.byType(AlertDialog),
-        matching: find.byWidgetPredicate(
-          (widget) => widget is Text && widget.data == personName,
-        ),
+        of: _selectionDialog,
+        matching: tester.viewableObject(personId),
       ),
     );
-    await tester.waitForAbsent(find.text('اختيار المخدوم'));
+    await tester.waitForAbsent(_selectionDialog);
   }
 
-  Future<void> grantPermission(String label) async {
-    await tester.tapOn(find.widgetWithText(CheckboxListTile, label));
+  Future<void> grantPermission(UserPermission permission) async {
+    await tester.tapOn(find.byKey(EditUserScreenKeys.permission(permission)));
   }
 
-  Future<void> addServiceScopeWithUserManagement(String serviceName) async {
-    await tester.tapOn(find.text('إضافة أمانة جديدة'));
-    await tester.tapOn(find.text('الخدمات'));
-    await tester.tapOn(find.text(serviceName));
-    await tester.tapOn(find.byType(FloatingActionButton).last);
-    await tester.tapOn(find.widgetWithText(ExpansionTile, serviceName));
+  Future<void> addServiceScopeWithUserManagement(String serviceId) async {
+    final scope = find.byKey(EditUserScreenKeys.scope(serviceId));
 
-    for (final label in ['تعديل البيانات', 'ادارة المستخدمين']) {
+    await tester.tapOn(find.byKey(EditUserScreenKeys.addScopeButton));
+    await tester.tapOn(find.byKey(EditUserScreenKeys.servicesTab));
+    await tester.tapOn(tester.viewableObject(serviceId));
+    await tester.tapOn(find.byKey(EditUserScreenKeys.confirmScopesButton));
+    await tester.tapOn(scope);
+
+    for (final checkbox in [
+      EditUserScreenKeys.scopeWriteDataCheckbox,
+      EditUserScreenKeys.scopeManageUsersCheckbox,
+    ]) {
       await tester.tapOn(
-        find.descendant(
-          of: find.byType(ExpansionTile),
-          matching: find.widgetWithText(CheckboxListTile, label),
-        ),
+        find.descendant(of: scope, matching: find.byKey(checkbox)),
       );
     }
   }
 
   Future<String> saveAndReadInvitationCode() async {
     await tester.tapOn(_saveButton);
-    final codeText = await tester.waitFor(
-      find.byWidgetPredicate(
-        (widget) =>
-            widget is Text &&
-            _invitationCodePattern.hasMatch(widget.data ?? ''),
-      ),
+    final code = await tester.waitFor(
+      find.byKey(UserInvitationCodeTileKeys.code),
     );
 
-    return tester.widget<Text>(codeText.first).data!;
+    return tester.widget<Text>(code).data ?? '';
   }
 
-  Future<void> changeLinkedPerson(String personName) async {
-    await tester.tapOn(find.byTooltip('تعديل'));
-    await tester.waitFor(find.text('تعديل بيانات الخادم'));
-    await pickPerson(personName);
+  Future<void> changeLinkedPerson({
+    required String personId,
+    required String personName,
+  }) async {
+    await tester.tapOn(find.byKey(ViewUserScreenKeys.editButton));
+    await tester.waitFor(_saveButton);
+    await pickPerson(personId: personId, personName: personName);
     await tester.tapOn(_saveButton);
-    await tester.waitForAbsent(find.text('تعديل بيانات الخادم'));
+    await tester.waitForAbsent(_saveButton);
   }
 }

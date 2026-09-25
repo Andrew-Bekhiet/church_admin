@@ -37,6 +37,7 @@ class EditUserAdminScopeWidget extends StatelessWidget {
     return ListTileTheme.merge(
       contentPadding: const EdgeInsets.symmetric(horizontal: 6),
       child: ExpansionTile(
+        key: EditUserScreenKeys.scope(userAdminScope.object.id),
         title: Row(
           children: [
             Expanded(

@@ -43,7 +43,10 @@ class HomeDrawer extends StatelessWidget {
           ))
             HomeDrawerDestination(
               icon: const Icon(Symbols.manage_accounts),
-              label: const Text('إدارة الخدام'),
+              label: const Text(
+                'إدارة الخدام',
+                key: HomeDrawerKeys.manageUsers,
+              ),
               onTap: () => const ManageUsersRoute().push(context),
             ),
           HomeDrawerDestination(
@@ -136,6 +139,7 @@ class HomeDrawer extends StatelessWidget {
                   },
                 ),
                 ListTile(
+                  key: HomeDrawerKeys.signOut,
                   leading: const Icon(Symbols.logout),
                   title: const Text('تسجيل الخروج'),
                   onTap: () {
@@ -152,4 +156,9 @@ class HomeDrawer extends StatelessWidget {
       },
     );
   }
+}
+
+abstract final class HomeDrawerKeys {
+  static const Key manageUsers = ValueKey('Home Drawer Manage Users Key');
+  static const Key signOut = ValueKey('Home Drawer Sign Out Key');
 }

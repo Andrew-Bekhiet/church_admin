@@ -1,3 +1,4 @@
+import 'package:church_admin/church_admin.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:patrol/patrol.dart';
@@ -21,8 +22,14 @@ void main() {
 
       void step(String description) => debugPrint('E2E STEP: $description');
 
-      await E2eBackend.insertPerson(existingPerson, serviceName: serviceName);
-      await E2eBackend.insertPerson(
+      final verificationScreen = find.byKey(
+        EmailVerificationScreenKeys.confirmEmailButtonKey,
+      );
+      final existingPersonId = await E2eBackend.insertPerson(
+        existingPerson,
+        serviceName: serviceName,
+      );
+      final replacementPersonId = await E2eBackend.insertPerson(
         replacementPerson,
         serviceName: serviceName,
       );
@@ -49,13 +56,17 @@ void main() {
       await admin.backToManageUsers();
       await admin.startCreatingUser();
       await admin.fillExistingPerson(
+        personId: existingPersonId,
         personName: existingPerson,
         email: lateInviteeEmail,
       );
       final lateCode = await admin.saveAndReadInvitationCode();
 
       step('admin changes the linked person');
-      await admin.changeLinkedPerson(replacementPerson);
+      await admin.changeLinkedPerson(
+        personId: replacementPersonId,
+        personName: replacementPerson,
+      );
       expect(
         ((await E2eBackend.userByEmail(lateInviteeEmail))['person']
             as Map)['name'],
@@ -66,7 +77,7 @@ void main() {
 
       step('invitee applies the code before verifying their email');
       await E2eApp.signUp(tester, email: earlyInviteeEmail, password: password);
-      await tester.waitFor(find.text('التحقق من البريد الإلكتروني'));
+      await tester.waitFor(verificationScreen);
       await E2eApp.applyInvitationCode(tester, earlyCode);
       await E2eApp.completeSpiritualData(tester);
       await E2eApp.enterHome(tester, password);
@@ -80,10 +91,10 @@ void main() {
 
       step('invitee applies the code after verifying their email');
       await E2eApp.signUp(tester, email: lateInviteeEmail, password: password);
-      await tester.waitFor(find.text('التحقق من البريد الإلكتروني'));
+      await tester.waitFor(verificationScreen);
       await E2eBackend.verifyEmail(lateInviteeEmail);
-      await tester.tapOn(find.text('تمام! ضغطت على الرابط'));
-      await tester.waitFor(find.text('في انتظار الموافقة'));
+      await tester.tapOn(verificationScreen);
+      await tester.waitForAbsent(verificationScreen);
       await E2eApp.applyInvitationCode(tester, lateCode);
       await E2eApp.completeSpiritualData(tester);
       await E2eApp.enterHome(tester, password);

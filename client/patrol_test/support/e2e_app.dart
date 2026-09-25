@@ -93,21 +93,23 @@ abstract final class E2eApp {
   }
 
   static Future<void> completeSpiritualData(WidgetTester tester) async {
-    await tester.waitFor(find.text('تحديث البيانات الروحية'));
+    final saveButton = find.byKey(UpdateUserSpiritDataScreenKeys.saveButton);
+    final datePicker = find.byType(DatePickerDialog);
+    await tester.waitFor(saveButton);
 
-    for (final label in ['تاريخ أخر تناول', 'تاريخ أخر اعتراف']) {
+    for (final field in [
+      UpdateUserSpiritDataScreenKeys.lastCommunionField,
+      UpdateUserSpiritDataScreenKeys.lastConfessionField,
+    ]) {
+      await tester.tapOn(find.byKey(field));
       await tester.tapOn(
-        find.ancestor(
-          of: find.text(label),
-          matching: find.byType(InputDecorator),
-        ),
+        find.descendant(of: datePicker, matching: find.byType(TextButton)).last,
       );
-      await tester.tapOn(find.text('حسنًا'));
-      await tester.waitForAbsent(find.byType(DatePickerDialog));
+      await tester.waitForAbsent(datePicker);
     }
 
-    await tester.tapOn(find.byTooltip('حفظ'));
-    await tester.waitForAbsent(find.text('تحديث البيانات الروحية'));
+    await tester.tapOn(saveButton);
+    await tester.waitForAbsent(saveButton);
   }
 
   static Future<void> unlock(WidgetTester tester, String password) async {
@@ -121,13 +123,13 @@ abstract final class E2eApp {
     await tester.waitFor(homeScreen);
   }
 
-  static Future<void> openDrawerItem(WidgetTester tester, String label) async {
+  static Future<void> openDrawerItem(WidgetTester tester, Key item) async {
     await tester.waitFor(homeScreen);
     tester
         .stateList<ScaffoldState>(find.byType(Scaffold))
         .firstWhere((scaffold) => scaffold.hasDrawer)
         .openDrawer();
-    await tester.tapOn(find.text(label));
+    await tester.tapOn(find.byKey(item));
   }
 
   static Future<void> signOut(
@@ -152,7 +154,7 @@ abstract final class E2eApp {
       await tester.tapOn(backButton);
     }
 
-    await openDrawerItem(tester, 'تسجيل الخروج');
+    await openDrawerItem(tester, HomeDrawerKeys.signOut);
     await tester.waitFor(loginButton);
   }
 
