@@ -1,0 +1,117 @@
+import 'dart:convert';
+
+import 'package:http/http.dart' as http;
+
+/// Talks to the hermetic backend started by `server/scripts/e2e-backend.sh`.
+abstract final class E2eBackend {
+  static const projectId = 'demo-church-admin';
+  static const adminEmail = 'admin@e2e.test';
+  static const password = 'Harness_Passw0rd';
+
+  static final Uri _authEmulator = Uri.http('localhost:9099');
+  static final Uri _hasura = Uri.http('localhost:8080', '/v1/graphql');
+  static const _hasuraAdminSecret = 'localdevadminsecret';
+
+  static Future<void> verifyEmail(String email) async {
+    final response = await http.get(
+      _authEmulator.replace(path: '/emulator/v1/projects/$projectId/oobCodes'),
+    );
+    final codes = (jsonDecode(response.body)['oobCodes'] as List)
+        .cast<Map<String, dynamic>>()
+        .where(
+          (code) =>
+              code['email'] == email && code['requestType'] == 'VERIFY_EMAIL',
+        );
+
+    if (codes.isEmpty) {
+      throw StateError('No verification email was sent to $email');
+    }
+
+    final applied = await http.get(Uri.parse(codes.last['oobLink'] as String));
+
+    if (applied.statusCode != 200) {
+      throw StateError(
+        'Applying the verification link failed: ${applied.body}',
+      );
+    }
+  }
+
+  static Future<Map<String, dynamic>> hasuraQuery(
+    String query, {
+    Map<String, dynamic> variables = const {},
+  }) async {
+    final response = await http.post(
+      _hasura,
+      headers: {
+        'content-type': 'application/json',
+        'x-hasura-admin-secret': _hasuraAdminSecret,
+      },
+      body: jsonEncode({'query': query, 'variables': variables}),
+    );
+    final body = jsonDecode(response.body) as Map<String, dynamic>;
+
+    if (body['errors'] case final errors?) {
+      throw StateError('Hasura query failed: $errors');
+    }
+
+    return body['data'] as Map<String, dynamic>;
+  }
+
+  static Future<String> insertPerson(
+    String name, {
+    required String serviceName,
+  }) async {
+    final data = await hasuraQuery(
+      r'''
+      query ServiceByName($serviceName: String!) {
+        services(where: {name: {_eq: $serviceName}}) { id }
+      }
+      ''',
+      variables: {'serviceName': serviceName},
+    );
+    final serviceId = (data['services'] as List).single['id'];
+    final inserted = await hasuraQuery(
+      r'''
+      mutation InsertPerson($name: String!, $serviceId: uuid!) {
+        insertPersonsOne(object: {name: $name, services: {data: [{serviceId: $serviceId}]}}) { id }
+      }
+      ''',
+      variables: {'name': name, 'serviceId': serviceId},
+    );
+
+    return (inserted['insertPersonsOne'] as Map)['id'] as String;
+  }
+
+  static Future<Map<String, dynamic>> userByEmail(String email) async {
+    final data = await hasuraQuery(
+      r'''
+      query UserByEmail($email: String!) {
+        authUsersData(where: {email: {_eq: $email}}) {
+          uid
+          authId
+          person { id name }
+        }
+      }
+      ''',
+      variables: {'email': email},
+    );
+
+    return (data['authUsersData'] as List).single as Map<String, dynamic>;
+  }
+
+  static Future<Set<String>> permissionsOf(String uid) async {
+    final data = await hasuraQuery(
+      r'''
+      query PermissionsOf($uid: uuid!) {
+        authUsersPermissions(where: {uid: {_eq: $uid}}) { permission }
+      }
+      ''',
+      variables: {'uid': uid},
+    );
+
+    return {
+      for (final row in data['authUsersPermissions'] as List)
+        (row as Map)['permission'] as String,
+    };
+  }
+}
