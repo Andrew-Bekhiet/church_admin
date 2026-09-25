@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_riverpod/misc.dart';
@@ -9,6 +10,9 @@ import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:rxdart/rxdart.dart';
+import 'package:web_socket/testing.dart';
+import 'package:web_socket/web_socket.dart';
+import 'package:web_socket_channel/adapter_web_socket_channel.dart';
 
 import 'add_auth_link_test.mocks.dart';
 
@@ -143,6 +147,71 @@ void main() {
             'Bearer newIdToken',
           ),
         ),
+      );
+    },
+  );
+
+  test(
+    'Add Auth Link => request => subscription => reconnects with the new token when another user signs in',
+    () async {
+      final idTokenStreamController = BehaviorSubject<String?>.seeded(
+        'firstUserToken',
+      );
+      addTearDown(idTokenStreamController.close);
+
+      final connectionInitAuthorizations = <String>[];
+
+      final unit = AddAuthLink(
+        idTokenStream: idTokenStreamController.stream,
+        url: 'https://example.com',
+        createWSLink: (url, config) => WebSocketLink(
+          url,
+          config: SocketClientConfig(
+            delayBetweenReconnectionAttempts:
+                config.delayBetweenReconnectionAttempts,
+            initialPayload: config.initialPayload,
+            connectFn: (uri, protocols) {
+              final (client, server) = fakes();
+              server.events.listen((event) {
+                if (event case TextDataReceived(:final text)) {
+                  if (jsonDecode(text) case {
+                    'type': 'connection_init',
+                    'payload': {
+                      'headers': {'Authorization': final String authorization},
+                    },
+                  }) {
+                    connectionInitAuthorizations.add(authorization);
+                  }
+                }
+              });
+
+              return AdapterWebSocketChannel(client);
+            },
+          ),
+        ),
+      );
+      addTearDown(unit.dispose);
+
+      final subscription = unit
+          .request(
+            Request(
+              operation: Operation(
+                document: gql('subscription WatchUsers { users { id } }'),
+              ),
+            ),
+          )
+          .listen(null);
+      addTearDown(subscription.cancel);
+      await pumpEventQueue();
+
+      idTokenStreamController
+        ..add(null)
+        ..add('secondUserToken');
+      await Future<void>.delayed(const Duration(seconds: 2));
+
+      expect(
+        connectionInitAuthorizations,
+        ['Bearer firstUserToken', 'Bearer secondUserToken'],
       );
     },
   );
