@@ -56,12 +56,17 @@ class AddAuthLink extends Link {
   ]) {
     _httpLink ??= createHttpLink(url);
 
-    return _idTokenStream.whereNotNull().switchMap(
-      (t) => _httpLink!.request(
-        request.updateContextEntry<HttpLinkHeaders>(_getHeadersWithToken(t)),
-        forward,
-      ),
-    );
+    return _idTokenStream
+        .whereNotNull()
+        .take(1)
+        .asyncExpand(
+          (t) => _httpLink!.request(
+            request.updateContextEntry<HttpLinkHeaders>(
+              _getHeadersWithToken(t),
+            ),
+            forward,
+          ),
+        );
   }
 
   @visibleForTesting

@@ -177,6 +177,31 @@ void main() {
   );
 
   test(
+    'Add Auth Link => request => query completes after one response when the id token changes',
+    () async {
+      final idTokens = BehaviorSubject<String?>.seeded('firstIdToken');
+      addTearDown(idTokens.close);
+      final mockResponse = MockResponse();
+
+      final unit = AddAuthLink(
+        idTokenStream: idTokens,
+        url: 'url',
+        createHttpLink: (url) => _createMockHttpLink(mockResponse),
+        createWSLink: (url, config) => _createMockWSLink(mockResponse),
+      );
+      addTearDown(unit.dispose);
+
+      final responses = unit.request(
+        _createMockRequest(isSubscription: false),
+        forward,
+      );
+      idTokens.add('refreshedIdToken');
+
+      await expectLater(responses, emitsInOrder([mockResponse, emitsDone]));
+    },
+  );
+
+  test(
     'Add Auth Link => getWebSocketRequest',
     () async {
       final mockRequest = _createMockRequest(isSubscription: false);
