@@ -9,10 +9,15 @@ class _MockAuthBloc extends Mock implements AuthBloc {}
 
 class _FakeUsersDAO extends Fake implements UsersDAO {
   UserUpdate? lastUpdate;
+  String storedName = 'مينا';
+  String? linkedPersonId = 'p1';
 
   @override
   Future<void> updateUser(UserUpdate update) async {
     lastUpdate = update;
+    storedName = update.name ?? storedName;
+    if (update.unlinkPersonId == linkedPersonId) linkedPersonId = null;
+    linkedPersonId = update.linkPersonId ?? linkedPersonId;
   }
 }
 
@@ -109,20 +114,16 @@ void main() {
     );
 
     blocTest<EditUserCubit, UserFormState>(
-      'picking a different person unlinks the old one and links the new one',
+      'picking a different person updates the link and account name',
       build: () => buildCubit(User(uid: 'u1', name: 'مينا', person: person1)),
       act: (cubit) {
         cubit.selectPerson(LinkExistingPerson(person2));
         return cubit.save();
       },
-      verify: (_) => expect(
-        usersDao.lastUpdate,
-        const UserUpdate(
-          uid: 'u1',
-          linkPersonId: 'p2',
-          unlinkPersonId: 'p1',
-        ),
-      ),
+      verify: (_) {
+        expect(usersDao.linkedPersonId, 'p2');
+        expect(usersDao.storedName, 'مريم');
+      },
     );
 
     blocTest<EditUserCubit, UserFormState>(

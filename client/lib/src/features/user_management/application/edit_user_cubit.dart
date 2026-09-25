@@ -76,6 +76,7 @@ class EditUserCubit extends UserFormCubit {
 
     return UserUpdate(
       uid: _originalUser.uid,
+      name: draft.name != _originalUser.name ? draft.name : null,
       email: draft.email != (_originalUser.email ?? '') ? draft.email : null,
       linkPersonId: newPersonId != oldPersonId ? newPersonId : null,
       unlinkPersonId: oldPersonId != null && oldPersonId != newPersonId
