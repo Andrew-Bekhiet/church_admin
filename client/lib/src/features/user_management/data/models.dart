@@ -1,5 +1,6 @@
 export 'models/admin_on_data.dart';
 export 'models/fcm_token.dart';
+export 'models/invitation.dart';
 export 'models/permissions_set.dart';
 export 'models/relationships.dart';
 export 'models/user.dart';
