@@ -1126,7 +1126,6 @@ enum AuthUsersDataSelectColumn {
 input AuthUsersDataSetInput {
   email: String
   name: String
-  uid: uuid
 }
 
 input AuthUsersDataStreamCursorInput {
@@ -1145,7 +1144,6 @@ input AuthUsersDataStreamCursorValueInput {
 enum AuthUsersDataUpdateColumn {
   email
   name
-  uid
 }
 
 input AuthUsersDataUpdates {
