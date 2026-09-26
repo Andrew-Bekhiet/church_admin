@@ -45,7 +45,16 @@ void main() {
       expect(find.text('Class 2'), findsNothing);
       expect(find.text('Group 1'), findsNothing);
       expect(find.text('Group 2'), findsNothing);
-      expect(find.text('Fisrt Primary'), findsNothing);
+      expect(find.text('First Primary'), findsNothing);
+
+      await tester.tap(find.text('Service 1'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Class 1'), findsNothing);
+      expect(find.text('Class 2'), findsNothing);
+      expect(find.text('Group 1'), findsOneWidget);
+      expect(find.text('Group 2'), findsOneWidget);
+      expect(find.text('First Primary'), findsOneWidget);
 
       await tester.tap(find.text('Service 1'));
       await tester.pumpAndSettle();
@@ -54,25 +63,16 @@ void main() {
       expect(find.text('Class 2'), findsNothing);
       expect(find.text('Group 1'), findsNothing);
       expect(find.text('Group 2'), findsNothing);
-      expect(find.text('Fisrt Primary'), findsNothing);
-
-      await tester.tap(find.text('Service 1'));
-      await tester.pumpAndSettle();
-
-      expect(find.text('Class 1'), findsNothing);
-      expect(find.text('Class 2'), findsNothing);
-      expect(find.text('Group 1'), findsNothing);
-      expect(find.text('Group 2'), findsNothing);
-      expect(find.text('Fisrt Primary'), findsNothing);
+      expect(find.text('First Primary'), findsNothing);
 
       await tester.tap(find.text('Service 2'));
       await tester.pumpAndSettle();
 
-      expect(find.text('Class 1'), findsNothing);
+      expect(find.text('Class 1'), findsOneWidget);
       expect(find.text('Class 2'), findsNothing);
-      expect(find.text('Group 1'), findsNothing);
-      expect(find.text('Group 2'), findsNothing);
-      expect(find.text('Fisrt Primary'), findsNothing);
+      expect(find.text('Group 1'), findsOneWidget);
+      expect(find.text('Group 2'), findsOneWidget);
+      expect(find.text('First Primary'), findsNothing);
 
       // Dispose the main widget:
       await tester.pumpWidget(Container());
@@ -151,7 +151,16 @@ void main() {
       expect(find.byKey(const Key('Class 2')), findsNothing);
       expect(find.byKey(const Key('Group 1')), findsNothing);
       expect(find.byKey(const Key('Group 2')), findsNothing);
-      expect(find.byKey(const Key('Fisrt Primary')), findsNothing);
+      expect(find.byKey(const Key('First Primary')), findsNothing);
+
+      await tester.tap(find.byKey(const Key('Service 1')));
+      await tester.pumpAndSettle();
+
+      expect(find.byKey(const Key('Class 1')), findsNothing);
+      expect(find.byKey(const Key('Class 2')), findsNothing);
+      expect(find.byKey(const Key('Group 1')), findsOneWidget);
+      expect(find.byKey(const Key('Group 2')), findsOneWidget);
+      expect(find.byKey(const Key('First Primary')), findsOneWidget);
 
       await tester.tap(find.byKey(const Key('Service 1')));
       await tester.pumpAndSettle();
@@ -160,25 +169,16 @@ void main() {
       expect(find.byKey(const Key('Class 2')), findsNothing);
       expect(find.byKey(const Key('Group 1')), findsNothing);
       expect(find.byKey(const Key('Group 2')), findsNothing);
-      expect(find.byKey(const Key('Fisrt Primary')), findsNothing);
-
-      await tester.tap(find.byKey(const Key('Service 1')));
-      await tester.pumpAndSettle();
-
-      expect(find.byKey(const Key('Class 1')), findsNothing);
-      expect(find.byKey(const Key('Class 2')), findsNothing);
-      expect(find.byKey(const Key('Group 1')), findsNothing);
-      expect(find.byKey(const Key('Group 2')), findsNothing);
-      expect(find.byKey(const Key('Fisrt Primary')), findsNothing);
+      expect(find.byKey(const Key('First Primary')), findsNothing);
 
       await tester.tap(find.byKey(const Key('Service 2')));
       await tester.pumpAndSettle();
 
-      expect(find.byKey(const Key('Class 1')), findsNothing);
+      expect(find.byKey(const Key('Class 1')), findsOneWidget);
       expect(find.byKey(const Key('Class 2')), findsNothing);
-      expect(find.byKey(const Key('Group 1')), findsNothing);
-      expect(find.byKey(const Key('Group 2')), findsNothing);
-      expect(find.byKey(const Key('Fisrt Primary')), findsNothing);
+      expect(find.byKey(const Key('Group 1')), findsOneWidget);
+      expect(find.byKey(const Key('Group 2')), findsOneWidget);
+      expect(find.byKey(const Key('First Primary')), findsNothing);
 
       // Dispose the main widget:
       await tester.pumpWidget(Container());
