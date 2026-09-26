@@ -1443,7 +1443,6 @@ Enum_AuthUsersDataSelectColumn fromJson_Enum_AuthUsersDataSelectColumn(
 enum Enum_AuthUsersDataUpdateColumn {
   email,
   name,
-  uid,
   $unknown;
 
   factory Enum_AuthUsersDataUpdateColumn.fromJson(String value) =>
@@ -1458,8 +1457,6 @@ String toJson_Enum_AuthUsersDataUpdateColumn(Enum_AuthUsersDataUpdateColumn e) {
       return r'email';
     case Enum_AuthUsersDataUpdateColumn.name:
       return r'name';
-    case Enum_AuthUsersDataUpdateColumn.uid:
-      return r'uid';
     case Enum_AuthUsersDataUpdateColumn.$unknown:
       return r'$unknown';
   }
@@ -1473,8 +1470,6 @@ Enum_AuthUsersDataUpdateColumn fromJson_Enum_AuthUsersDataUpdateColumn(
       return Enum_AuthUsersDataUpdateColumn.email;
     case r'name':
       return Enum_AuthUsersDataUpdateColumn.name;
-    case r'uid':
-      return Enum_AuthUsersDataUpdateColumn.uid;
     default:
       return Enum_AuthUsersDataUpdateColumn.$unknown;
   }

@@ -1014,15 +1014,11 @@ class _CopyWithStubImpl_Input_AuthUsersDataPkColumnsInput<TRes>
 }
 
 class Input_AuthUsersDataSetInput {
-  factory Input_AuthUsersDataSetInput({
-    String? email,
-    String? name,
-    UuidValue? uid,
-  }) => Input_AuthUsersDataSetInput._({
-    if (email != null) r'email': email,
-    if (name != null) r'name': name,
-    if (uid != null) r'uid': uid,
-  });
+  factory Input_AuthUsersDataSetInput({String? email, String? name}) =>
+      Input_AuthUsersDataSetInput._({
+        if (email != null) r'email': email,
+        if (name != null) r'name': name,
+      });
 
   Input_AuthUsersDataSetInput._(this._$data);
 
@@ -1036,10 +1032,6 @@ class Input_AuthUsersDataSetInput {
       final l$name = data['name'];
       result$data['name'] = (l$name as String?);
     }
-    if (data.containsKey('uid')) {
-      final l$uid = data['uid'];
-      result$data['uid'] = l$uid == null ? null : stringToUuid(l$uid);
-    }
     return Input_AuthUsersDataSetInput._(result$data);
   }
 
@@ -1048,8 +1040,6 @@ class Input_AuthUsersDataSetInput {
   String? get email => (_$data['email'] as String?);
 
   String? get name => (_$data['name'] as String?);
-
-  UuidValue? get uid => (_$data['uid'] as UuidValue?);
 
   Map<String, dynamic> toJson() {
     final result$data = <String, dynamic>{};
@@ -1060,10 +1050,6 @@ class Input_AuthUsersDataSetInput {
     if (_$data.containsKey('name')) {
       final l$name = name;
       result$data['name'] = l$name;
-    }
-    if (_$data.containsKey('uid')) {
-      final l$uid = uid;
-      result$data['uid'] = l$uid == null ? null : uuidToString(l$uid);
     }
     return result$data;
   }
@@ -1096,14 +1082,6 @@ class Input_AuthUsersDataSetInput {
     if (l$name != lOther$name) {
       return false;
     }
-    final l$uid = uid;
-    final lOther$uid = other.uid;
-    if (_$data.containsKey('uid') != other._$data.containsKey('uid')) {
-      return false;
-    }
-    if (l$uid != lOther$uid) {
-      return false;
-    }
     return true;
   }
 
@@ -1111,11 +1089,9 @@ class Input_AuthUsersDataSetInput {
   int get hashCode {
     final l$email = email;
     final l$name = name;
-    final l$uid = uid;
     return Object.hashAll([
       _$data.containsKey('email') ? l$email : const {},
       _$data.containsKey('name') ? l$name : const {},
-      _$data.containsKey('uid') ? l$uid : const {},
     ]);
   }
 }
@@ -1129,7 +1105,7 @@ abstract class CopyWith_Input_AuthUsersDataSetInput<TRes> {
   factory CopyWith_Input_AuthUsersDataSetInput.stub(TRes res) =
       _CopyWithStubImpl_Input_AuthUsersDataSetInput;
 
-  TRes call({String? email, String? name, UuidValue? uid});
+  TRes call({String? email, String? name});
 }
 
 class _CopyWithImpl_Input_AuthUsersDataSetInput<TRes>
@@ -1142,16 +1118,11 @@ class _CopyWithImpl_Input_AuthUsersDataSetInput<TRes>
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? email = _undefined,
-    Object? name = _undefined,
-    Object? uid = _undefined,
-  }) => _then(
+  TRes call({Object? email = _undefined, Object? name = _undefined}) => _then(
     Input_AuthUsersDataSetInput._({
       ..._instance._$data,
       if (email != _undefined) 'email': (email as String?),
       if (name != _undefined) 'name': (name as String?),
-      if (uid != _undefined) 'uid': (uid as UuidValue?),
     }),
   );
 }
@@ -1162,7 +1133,7 @@ class _CopyWithStubImpl_Input_AuthUsersDataSetInput<TRes>
 
   TRes _res;
 
-  call({String? email, String? name, UuidValue? uid}) => _res;
+  call({String? email, String? name}) => _res;
 }
 
 class Input_AuthUsersDataStreamCursorInput {
