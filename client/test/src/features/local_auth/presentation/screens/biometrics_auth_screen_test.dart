@@ -40,42 +40,35 @@ void main() {
 
   tearDown(defaultTearDown);
 
-  const size = Size(100, 1365 * 3);
+  Future<void> pumpLockScreen(
+    WidgetTester tester, {
+    Widget screen = const BiometricsAuthScreen(),
+    WidgetWrapper? wrapper,
+  }) async {
+    addTearDown(() => tester.binding.setSurfaceSize(null));
+    await tester.pumpWidgetBuilder(
+      screen,
+      wrapper: wrapper ?? materialAppWrapper(),
+      surfaceSize: const Size(390, 1200),
+    );
+    await tester.pumpAndSettle();
+  }
 
   testWidgets(
     'the lock screen shows password entry and available biometric recovery',
     (tester) async {
-      await tester.binding.setSurfaceSize(size);
-
-      await tester.pumpWidgetBuilder(
-        SizedBox.fromSize(
-          size: size,
-          child: Builder(
-            builder: (context) {
-              return MediaQuery(
-                data: MediaQuery.of(context).copyWith(size: size),
-                child: const BiometricsAuthScreen(),
-              );
-            },
-          ),
-        ),
-        wrapper: materialAppWrapper(),
-      );
-      await tester.pumpAndSettle();
+      await pumpLockScreen(tester);
 
       expect(
-        find.byElementPredicate(
-          (e) {
-            final Widget widget = e.widget;
-            if (widget is Image) {
-              return widget.image == const AssetImage('assets/holyweek.jpeg') ||
-                  widget.image == const AssetImage('assets/risen.jpg') ||
-                  widget.image == const AssetImage('assets/logo.png');
-            }
-            return false;
-          },
-          skipOffstage: false,
-        ),
+        find.byElementPredicate((e) {
+          final Widget widget = e.widget;
+          if (widget is Image) {
+            return widget.image == const AssetImage('assets/holyweek.jpeg') ||
+                widget.image == const AssetImage('assets/risen.jpg') ||
+                widget.image == const AssetImage('assets/logo.png');
+          }
+          return false;
+        }, skipOffstage: false),
         findsOneWidget,
       );
 
@@ -99,21 +92,8 @@ void main() {
   testWidgets('a wrong password is reported in a dialog, not inline', (
     tester,
   ) async {
-    await tester.binding.setSurfaceSize(const Size(390, 1200));
-    await authVariant.setUp(AuthenticationVariantEnum.password);
-    await tester.pumpWidgetBuilder(
-      SizedBox.fromSize(
-        size: size,
-        child: Builder(
-          builder: (context) => MediaQuery(
-            data: MediaQuery.of(context).copyWith(size: size),
-            child: const BiometricsAuthScreen(),
-          ),
-        ),
-      ),
-      wrapper: materialAppWrapper(),
-    );
-    await tester.pumpAndSettle();
+    AuthenticationVariant.initProviders(AuthenticationVariantEnum.password);
+    await pumpLockScreen(tester);
 
     await act.enterText(
       spotKey(BiometricsAuthScreenKeys.passwordFieldKey),
@@ -130,24 +110,11 @@ void main() {
     'a password check that cannot complete shows inline feedback until the '
     'user retries',
     (tester) async {
-      await tester.binding.setSurfaceSize(const Size(390, 1200));
-      await authVariant.setUp(AuthenticationVariantEnum.password);
+      AuthenticationVariant.initProviders(AuthenticationVariantEnum.password);
       mocktail
           .when(AuthStorage.I.getPasswordHash)
           .thenThrow(Exception('storage unavailable'));
-      await tester.pumpWidgetBuilder(
-        SizedBox.fromSize(
-          size: size,
-          child: Builder(
-            builder: (context) => MediaQuery(
-              data: MediaQuery.of(context).copyWith(size: size),
-              child: const BiometricsAuthScreen(),
-            ),
-          ),
-        ),
-        wrapper: materialAppWrapper(),
-      );
-      await tester.pumpAndSettle();
+      await pumpLockScreen(tester);
 
       await act.enterText(
         spotKey(BiometricsAuthScreenKeys.passwordFieldKey),
@@ -172,26 +139,13 @@ void main() {
   testWidgets('a pending biometric prompt disables retry until it finishes', (
     tester,
   ) async {
-    await tester.binding.setSurfaceSize(const Size(390, 1200));
-    await authVariant.setUp(AuthenticationVariantEnum.biometrics);
+    AuthenticationVariant.initProviders(AuthenticationVariantEnum.biometrics);
     final authCompleter = Completer<bool>();
     when(
       LocalAuthService.I.authenticate(),
     ).thenAnswer((_) async => authCompleter.future);
 
-    await tester.pumpWidgetBuilder(
-      SizedBox.fromSize(
-        size: size,
-        child: Builder(
-          builder: (context) => MediaQuery(
-            data: MediaQuery.of(context).copyWith(size: size),
-            child: const BiometricsAuthScreen(),
-          ),
-        ),
-      ),
-      wrapper: materialAppWrapper(),
-    );
-    await tester.pumpAndSettle();
+    await pumpLockScreen(tester);
 
     final biometricsButton = find.byKey(
       BiometricsAuthScreenKeys.biometricsButtonKey,
@@ -207,22 +161,17 @@ void main() {
   testWidgets('the wrong password dialog is visible above an auth overlay', (
     tester,
   ) async {
-    await tester.binding.setSurfaceSize(const Size(390, 1200));
-    await authVariant.setUp(AuthenticationVariantEnum.password);
+    AuthenticationVariant.initProviders(AuthenticationVariantEnum.password);
     final overlayController = OverlayPortalController();
 
-    await tester.pumpWidget(
-      MaterialApp(
-        builder: (context, child) => Directionality(
-          textDirection: TextDirection.rtl,
-          child: child ?? const SizedBox.shrink(),
-        ),
-        home: OverlayPortal(
-          controller: overlayController,
-          overlayChildBuilder: (context) => const BiometricsAuthScreen(),
-          child: const Scaffold(),
-        ),
+    await pumpLockScreen(
+      tester,
+      screen: OverlayPortal(
+        controller: overlayController,
+        overlayChildBuilder: (context) => const BiometricsAuthScreen(),
+        child: const Scaffold(),
       ),
+      wrapper: materialAppWithThemeAndLocale(),
     );
     overlayController.show();
     await tester.pumpAndSettle();
@@ -243,28 +192,17 @@ void main() {
 }
 
 class AuthenticationVariant extends ValueVariant<AuthenticationVariantEnum> {
-  AuthenticationVariant() : super(AuthenticationVariantEnum.values.toSet());
-
-  @override
-  Future<AuthenticationVariantEnum> setUp(
-    AuthenticationVariantEnum value,
-  ) async {
-    await super.setUp(value);
-
-    final overrides = [
+  static void initProviders(AuthenticationVariantEnum value) {
+    initGlobalProviderContainer([
       _setUpAuthBloc(),
       _setUpLocalAuthService(value),
       _setUpAuthRepository(),
       _setUpAuthStorage(),
       encryptionServiceProvider.overrideWithValue(_PasswordEncryptionService()),
-    ];
-
-    initGlobalProviderContainer(overrides);
-
-    return value;
+    ]);
   }
 
-  Override _setUpAuthBloc() {
+  static Override _setUpAuthBloc() {
     final mock = MockAuthBloc();
 
     when(mock.currentUser).thenReturn(_fakeUser);
@@ -272,7 +210,7 @@ class AuthenticationVariant extends ValueVariant<AuthenticationVariantEnum> {
     return authBlocProvider.overrideWithValue(mock);
   }
 
-  Override _setUpLocalAuthService(AuthenticationVariantEnum value) {
+  static Override _setUpLocalAuthService(AuthenticationVariantEnum value) {
     final mockLocalAuthService = MockLocalAuthService();
 
     when(
@@ -283,22 +221,33 @@ class AuthenticationVariant extends ValueVariant<AuthenticationVariantEnum> {
     return localAuthServiceProvider.overrideWithValue(mockLocalAuthService);
   }
 
-  Override _setUpAuthRepository() {
+  static Override _setUpAuthRepository() {
     final authRepository = _AuthRepositoryMock();
     mocktail.when(() => authRepository.currentUserEmail).thenReturn(email);
 
     return authRepositoryProvider.overrideWithValue(authRepository);
   }
 
-  Override _setUpAuthStorage() {
+  static Override _setUpAuthStorage() {
     final authStorage = _AuthStorageMock();
     mocktail
-        .when(
-          authStorage.getPasswordHash,
-        )
+        .when(authStorage.getPasswordHash)
         .thenAnswer((_) async => '$testPassword:$email');
 
     return authStorageProvider.overrideWithValue(authStorage);
+  }
+
+  AuthenticationVariant() : super(AuthenticationVariantEnum.values.toSet());
+
+  @override
+  Future<AuthenticationVariantEnum> setUp(
+    AuthenticationVariantEnum value,
+  ) async {
+    await super.setUp(value);
+
+    initProviders(value);
+
+    return value;
   }
 }
 

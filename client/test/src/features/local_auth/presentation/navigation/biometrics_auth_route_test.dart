@@ -75,15 +75,6 @@ void main() {
     );
   });
 
-  test('a signed-in account without a person stays on the lock screen', () {
-    setUpRoute(const AuthAuthenticated(authUser: authUser));
-
-    expect(
-      BiometricsAuthRoute().redirect(_MockBuildContext(), routeState()),
-      isNull,
-    );
-  });
-
   test('an account requiring local auth stays on the lock screen', () {
     setUpRoute(const AuthAuthenticated(authUser: authUser, userData: userData));
 

@@ -11,9 +11,13 @@ class _MockAuthStorage extends Mock implements AuthStorage {}
 
 class _LocalAuthService extends Mock implements LocalAuthService {
   bool isLocked = true;
+  String? unlockedPath;
 
   @override
-  void resetAuthState({String? path}) => isLocked = false;
+  void resetAuthState({String? path}) {
+    isLocked = false;
+    unlockedPath = path;
+  }
 }
 
 class _PasswordEncryptionService extends EncryptionService {
@@ -46,12 +50,13 @@ void main() {
     ).thenAnswer((_) async => 'correct:user@example.com');
   });
 
-  BiometricsAuthCubit createCubit() {
+  BiometricsAuthCubit createCubit({String? next}) {
     final cubit = BiometricsAuthCubit(
       localAuthService: localAuthService,
       authRepository: authRepository,
       authStorage: authStorage,
       encryptionService: _PasswordEncryptionService(),
+      next: next,
     );
     addTearDown(cubit.close);
 
@@ -106,6 +111,27 @@ void main() {
     await cubit.submitPassword('correct');
 
     expect(localAuthService.isLocked, isFalse);
+  });
+
+  test('a correct password unlocks the requested path', () async {
+    final cubit = createCubit(next: '/manage_users');
+
+    await cubit.submitPassword('correct');
+
+    expect(localAuthService.unlockedPath, '/manage_users');
+  });
+
+  test('successful biometrics unlock the requested path', () async {
+    when(
+      () => localAuthService.canCheckBiometrics(),
+    ).thenAnswer((_) async => true);
+    when(() => localAuthService.authenticate()).thenAnswer((_) async => true);
+    final cubit = createCubit(next: '/manage_users');
+
+    await cubit.initialize();
+    await cubit.authenticateBiometrically();
+
+    expect(localAuthService.unlockedPath, '/manage_users');
   });
 
   test('unavailable password storage shows a retryable error', () async {
