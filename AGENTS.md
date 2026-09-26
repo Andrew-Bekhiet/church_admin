@@ -144,6 +144,8 @@ dart run build_runner build --build-filter="lib/src/features/<feature>/**"
 
 Repeat the flag to cover several areas. The filter must match everything you changed — scoping to mocks while a `freezed` model also changed leaves that model stale.
 
+A filtered build from a cold cache (no `.dart_tool/build`, e.g. a fresh clone or CI runner) deletes every generated output outside the filter and re-collapses `schema.graphql.dart`. Run one full build first, or restore the rest with `git checkout -- .` afterwards.
+
 Run the full sequence **only when `.graphql` documents or the Hasura schema change**, and re-split afterwards:
 
 ```sh
