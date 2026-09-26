@@ -13,7 +13,7 @@ hasura_url="http://localhost:8080"
 admin_email="${E2E_ADMIN_EMAIL:-admin@e2e.test}"
 admin_password="${E2E_ADMIN_PASSWORD:-Harness_Passw0rd}"
 
-compose() {
+start_docker_compose() {
   docker compose \
     --project-directory "$server_dir" \
     --env-file "$server_dir/e2e/backend.env" \
@@ -23,7 +23,7 @@ compose() {
     "$@"
 }
 
-ensure_functions_env() {
+ensure_functions_env_exist() {
   [ -f "$functions_dir/.env.local" ] || cp "$functions_dir/example.env.local" "$functions_dir/.env.local"
   [ -f "$functions_dir/.secret.local" ] || cp "$functions_dir/example.secrets.local" "$functions_dir/.secret.local"
 }
@@ -38,13 +38,13 @@ wait_for() {
   done
 
   echo "Timed out waiting for $description" >&2
-  compose logs --tail 80 firebase-emulators >&2
+  start_docker_compose logs --tail 80 firebase-emulators >&2
 
   return 1
 }
 
 functions_loaded() {
-  compose logs firebase-emulators | grep -q "beforeUserSignUp"
+  start_docker_compose logs firebase-emulators | grep -q "beforeUserSignUp"
 }
 
 sign_up() {
@@ -61,16 +61,16 @@ hasura_admin_query() {
 }
 
 up() {
-  ensure_functions_env
+  ensure_functions_env_exist
 
-  compose config --images | while read -r image; do
-    docker image inspect "$image" >/dev/null 2>&1 || { compose build; break; }
+  start_docker_compose config --images | while read -r image; do
+    docker image inspect "$image" >/dev/null 2>&1 || { start_docker_compose build; break; }
   done
 
-  compose down --remove-orphans
+  start_docker_compose down --remove-orphans
   docker volume rm -f church-admin-e2e_pgdata >/dev/null
-  compose up -d --no-build --wait postgres local-unsigned-jwt-verifier hasura firebase-emulators
-  compose --profile plant_seeds run --rm seed
+  start_docker_compose up -d --no-build --wait postgres local-unsigned-jwt-verifier hasura firebase-emulators
+  start_docker_compose --profile plant_seeds run --rm seed
 
   wait_for "the functions emulator to load the auth blocking function" 150 functions_loaded
 
@@ -84,8 +84,8 @@ up() {
 
 case "${1:-up}" in
   up) up ;;
-  down) compose down -v --remove-orphans ;;
-  logs) shift; compose logs "$@" ;;
-  compose) shift; compose "$@" ;;
+  down) start_docker_compose down -v --remove-orphans ;;
+  logs) shift; start_docker_compose logs "$@" ;;
+  compose) shift; start_docker_compose "$@" ;;
   *) echo "usage: $0 [up|down|logs|compose ...]" >&2; exit 64 ;;
 esac
