@@ -14,10 +14,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   late final homeBloc = HomeBloc.I;
 
-  final _authEntry = OverlayEntry(
-    builder: (context) => const AuthenticateScreen(),
-    opaque: true,
-  );
+  final _authOverlayController = OverlayPortalController();
   late final StreamSubscription<bool> _localAuthListener;
 
   late final AppLifecycleListener _appLifecycleListener;
@@ -34,13 +31,17 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      drawer: HomeDrawer(homeBloc: homeBloc),
-      appBar: HomeAppBar(homeBloc: homeBloc),
-      body: HomeBody(homeBloc: homeBloc),
-      floatingActionButton: HomeFAB(homeBloc: homeBloc),
-      bottomNavigationBar: HomeBottomNavBar(homeBloc: homeBloc),
-      extendBody: true,
+    return OverlayPortal(
+      controller: _authOverlayController,
+      overlayChildBuilder: (context) => const AuthenticateScreen(),
+      child: Scaffold(
+        drawer: HomeDrawer(homeBloc: homeBloc),
+        appBar: HomeAppBar(homeBloc: homeBloc),
+        body: HomeBody(homeBloc: homeBloc),
+        floatingActionButton: HomeFAB(homeBloc: homeBloc),
+        bottomNavigationBar: HomeBottomNavBar(homeBloc: homeBloc),
+        extendBody: true,
+      ),
     );
   }
 
@@ -54,9 +55,10 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _listenToLocalAuth() {
-    final overlay = Overlay.of(context);
     WidgetsBinding.instance.addPostFrameCallback(
-      (_) => !_authEntry.mounted ? overlay.insert(_authEntry) : null,
+      (_) => !_authOverlayController.isShowing
+          ? _authOverlayController.show()
+          : null,
     );
 
     _localAuthListener =
@@ -69,10 +71,10 @@ class _HomeScreenState extends State<HomeScreen> {
             final mustAuthenticate =
                 isSignedIn && LocalAuthService.I.shouldAuthenticate;
 
-            if (mustAuthenticate && !_authEntry.mounted) {
-              overlay.insert(_authEntry);
-            } else if (!mustAuthenticate && _authEntry.mounted) {
-              _authEntry.remove();
+            if (mustAuthenticate && !_authOverlayController.isShowing) {
+              _authOverlayController.show();
+            } else if (!mustAuthenticate && _authOverlayController.isShowing) {
+              _authOverlayController.hide();
             }
           },
         );
@@ -80,7 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void _onAppLifecycleStateChanged(AppLifecycleState state) {
     switch (state) {
-      case AppLifecycleState.resumed when !_authEntry.mounted:
+      case AppLifecycleState.resumed when !_authOverlayController.isShowing:
         unawaited(UserPersistenceService.I.recordActive());
 
       case AppLifecycleState.resumed:
