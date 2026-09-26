@@ -141,6 +141,8 @@ void main() {
   testWidgets('signing out from the lock screen leaves it for the login page', (
     tester,
   ) async {
+    when(() => LocalAuthService.I.shouldAuthenticate).thenReturn(true);
+
     final signedIn = ValueNotifier(true);
     addTearDown(signedIn.dispose);
     final router = GoRouter(
@@ -157,7 +159,10 @@ void main() {
     await tester.pumpWidget(MaterialApp.router(routerConfig: router));
     await tester.pump();
 
-    expect(find.byType(AuthenticateScreen), findsOneWidget);
+    expect(
+      find.byType(AuthenticateScreen, skipOffstage: false),
+      findsOneWidget,
+    );
 
     when(() => authBloc.isSignedIn).thenReturn(false);
     authStates.add(const AuthUnauthenticated());
@@ -165,7 +170,7 @@ void main() {
     await tester.pump(const Duration(seconds: 1));
     await tester.pump();
 
-    expect(find.byType(AuthenticateScreen), findsNothing);
+    expect(find.byType(AuthenticateScreen, skipOffstage: false), findsNothing);
 
     await tester.pumpWidget(const SizedBox.shrink());
     resetGlobalProviderContainer();
