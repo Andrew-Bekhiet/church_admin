@@ -1,0 +1,47 @@
+name: Generated Code
+
+on:
+  pull_request:
+    paths:
+      - "client/**"
+      - "server/hasura/**"
+      - "server/postgres/**"
+      - "server/docker-compose.yml"
+      - ".github/workflows/generated-code.yml"
+
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  generated-code:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Check schema.graphql matches Hasura
+        run: client/scripts/check_graphql_schema.sh
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          cache: true
+          flutter-version-file: client/.fvmrc
+          pub-cache-key: "flutter-pub:os:-:channel:-:version:-:arch:"
+          cache-key: "flutter:os:-:channel:-:version:-:arch:"
+
+      - name: Install dependencies
+        working-directory: client
+        run: flutter pub get
+
+      - name: Check generated code matches schema.graphql
+        working-directory: client
+        run: scripts/check_generated_code.sh
