@@ -1,6 +1,5 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/features/data_export/application/export_operations_storage.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 
 class LocalUserDataWiper implements UserDataWiper {
@@ -25,10 +24,7 @@ class LocalUserDataWiper implements UserDataWiper {
       SyncKVStore.clearAllLoaded,
       () => _notificationsStorage().clear(),
       _imageCacheManager.emptyCache,
-      () async {
-        if (kIsWeb) return;
-        await _exportOperationsStorage.deleteSavedFiles();
-      },
+      _exportOperationsStorage.deleteSavedFiles,
       () async => _existingLocalAuthService()?.revokeAuthForAllPaths(),
     ];
 

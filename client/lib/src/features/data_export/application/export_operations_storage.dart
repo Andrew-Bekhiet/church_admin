@@ -1,8 +1,8 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:dio/dio.dart';
 import 'package:file/file.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:meta/meta.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart' as p;
 import 'package:rxdart/rxdart.dart';
@@ -57,6 +57,8 @@ class ExportOperationsStorage {
   }
 
   Future<void> deleteSavedFiles() async {
+    if (kIsWeb) return;
+
     final exportsDir = await getExportsDirectory();
 
     if (await exportsDir.exists()) await exportsDir.delete(recursive: true);
