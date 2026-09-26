@@ -170,7 +170,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     _refreshTokenTimer?.cancel();
     _refreshTokenTimer = Timer(
       _getTokenExpiry(authUser).difference(DateTime.now()),
-      _verifySession,
+      _refreshTokenOrSignOut,
     );
   }
 
@@ -186,11 +186,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
               _ => false,
             },
       ),
-      onData: (_) => unawaited(_verifySession()),
+      onData: (_) => unawaited(_refreshTokenOrSignOut()),
     );
   }
 
-  Future<void> _verifySession() async {
+  Future<void> _refreshTokenOrSignOut() async {
     try {
       await _authRepository.refreshToken();
     } catch (e, stackTrace) {
