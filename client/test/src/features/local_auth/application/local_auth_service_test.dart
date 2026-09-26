@@ -7,9 +7,9 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:local_auth_platform_interface/local_auth_platform_interface.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:mocktail/mocktail.dart' as mocktail;
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
-import '../../../fakes/fake_auth_repository.dart';
 import 'local_auth_service_test.mocks.dart';
 
 @GenerateNiceMocks(
@@ -21,6 +21,9 @@ import 'local_auth_service_test.mocks.dart';
   ],
 )
 void main() {
+  AuthRepository authRepository() =>
+      globalProviderContainer.read(authRepositoryProvider);
+
   setUp(_setUp);
 
   tearDown(resetGlobalProviderContainer);
@@ -29,13 +32,14 @@ void main() {
     'LocalAuthService =>',
     () {
       test(
-        'Initial State (noInitialAuth)',
+        'local auth without an initial challenge starts unlocked',
         () async {
           final unit = LocalAuthService.noInitialAuth(
             localAuthPlugin: globalProviderContainer.read(
               localAuthPluginProvider,
             ),
             userDataWiper: _MockUserDataWiper(),
+            authRepository: authRepository(),
           );
 
           addTearDown(unit.dispose);
@@ -49,7 +53,7 @@ void main() {
       );
 
       test(
-        'Initial State (default constructor)',
+        'local auth with an initial challenge starts locked',
         () async {
           final unit = globalProviderContainer.read(localAuthServiceProvider);
           addTearDown(unit.dispose);
@@ -63,13 +67,14 @@ void main() {
       );
 
       test(
-        'canCheckBiometrics',
+        'biometrics are available only on a supported device',
         () async {
           final unit = LocalAuthService.noInitialAuth(
             localAuthPlugin: globalProviderContainer.read(
               localAuthPluginProvider,
             ),
             userDataWiper: _MockUserDataWiper(),
+            authRepository: authRepository(),
           );
 
           addTearDown(unit.dispose);
@@ -127,7 +132,7 @@ void main() {
       );
 
       test(
-        'Authentication (all finish true)',
+        'concurrent biometric requests share a successful result',
         () async {
           final authCompleter = Completer<bool>();
 
@@ -136,6 +141,7 @@ void main() {
               localAuthPluginProvider,
             ),
             userDataWiper: _MockUserDataWiper(),
+            authRepository: authRepository(),
           );
 
           addTearDown(unit.dispose);
@@ -174,30 +180,31 @@ void main() {
               localAuthPluginProvider,
             ),
             userDataWiper: _MockUserDataWiper(),
+            authRepository: authRepository(),
           );
           addTearDown(unit.dispose);
         });
 
-        test('a path requires authentication until it is granted', () {
+        test('an ungranted path requires authentication', () {
           unit.resetAuthState();
 
           expect(unit.shouldAuthenticateForPath('/test'), isTrue);
         });
 
-        test('a granted path stays granted across repeated checks', () {
+        test('a granted path remains accessible across repeated checks', () {
           unit.resetAuthState(path: '/test');
 
           expect(unit.shouldAuthenticateForPath('/test'), isFalse);
           expect(unit.shouldAuthenticateForPath('/test'), isFalse);
         });
 
-        test('granting a path leaves other paths locked', () {
+        test('granting one path leaves other paths locked', () {
           unit.resetAuthState(path: '/test');
 
           expect(unit.shouldAuthenticateForPath('/other'), isTrue);
         });
 
-        test('a revoked path requires authentication again', () {
+        test('revoking a path requires authentication again', () {
           unit
             ..resetAuthState(path: '/test')
             ..revokeAuthForPath('/test');
@@ -205,7 +212,7 @@ void main() {
           expect(unit.shouldAuthenticateForPath('/test'), isTrue);
         });
 
-        test('scheduling reauth keeps path grants', () {
+        test('scheduling reauthentication preserves path grants', () {
           unit
             ..resetAuthState(path: '/test')
             ..scheduleReauth();
@@ -215,7 +222,7 @@ void main() {
       });
 
       testWidgets(
-        'Authentication (all finish false)',
+        'concurrent biometric requests share a rejected result',
         (tester) async {
           final authCompleter = Completer<bool>();
 
@@ -224,6 +231,7 @@ void main() {
               localAuthPluginProvider,
             ),
             userDataWiper: _MockUserDataWiper(),
+            authRepository: authRepository(),
           );
 
           LocalAuthPlatform.instance = MockLocalAuthPlatform();
@@ -254,13 +262,14 @@ void main() {
       );
 
       test(
-        'Authentication returns false on LocalAuthException',
+        'a canceled biometric prompt leaves authentication locked',
         () async {
           final unit = LocalAuthService.noInitialAuth(
             localAuthPlugin: globalProviderContainer.read(
               localAuthPluginProvider,
             ),
             userDataWiper: _MockUserDataWiper(),
+            authRepository: authRepository(),
           );
 
           addTearDown(unit.dispose);
@@ -290,13 +299,14 @@ void main() {
       );
 
       test(
-        'Authentication can be retried after LocalAuthException',
+        'a biometric prompt can succeed after cancellation',
         () async {
           final unit = LocalAuthService.noInitialAuth(
             localAuthPlugin: globalProviderContainer.read(
               localAuthPluginProvider,
             ),
             userDataWiper: _MockUserDataWiper(),
+            authRepository: authRepository(),
           );
 
           addTearDown(unit.dispose);
@@ -329,7 +339,7 @@ void main() {
       );
 
       testWidgets(
-        'reset',
+        'resetting authentication unlocks access and resumes notifications',
         (tester) async {
           tester.binding.handleAppLifecycleStateChanged(
             AppLifecycleState.resumed,
@@ -371,8 +381,7 @@ void main() {
 void _setUp() {
   final overrides = [
     _setUpCANotificationsService(),
-    _setUpAuthBloc(),
-    authRepositoryProvider.overrideWithValue(FakeAuthRepository()),
+    _setUpAuthRepository(),
   ];
 
   initGlobalProviderContainer(overrides);
@@ -399,15 +408,18 @@ Override _setUpCANotificationsService() {
   );
 }
 
-Override _setUpAuthBloc() {
-  final auth = MockAuthBloc();
+Override _setUpAuthRepository() {
+  final auth = _AuthRepositoryMock();
 
-  when(auth.isSignedIn).thenReturn(true);
+  mocktail.when(() => auth.isSignedIn).thenReturn(true);
+  mocktail.when(() => auth.userChanges).thenAnswer((_) => const Stream.empty());
 
-  return authBlocProvider.overrideWithValue(auth);
+  return authRepositoryProvider.overrideWithValue(auth);
 }
 
 class MockLocalAuthPlatform extends LocalAuthPlatformMock
     with MockPlatformInterfaceMixin {}
 
 final class _MockUserDataWiper extends Mock implements UserDataWiper {}
+
+class _AuthRepositoryMock extends mocktail.Mock implements AuthRepository {}

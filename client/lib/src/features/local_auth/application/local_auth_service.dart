@@ -18,6 +18,7 @@ class LocalAuthService with WidgetsBindingObserver {
   final LocalAuthentication _localAuthPlugin;
 
   final NotificationsService _notificationsService;
+  final AuthRepository authRepository;
   final Clock _clock;
   bool _shouldAuthenticate = false;
 
@@ -42,6 +43,7 @@ class LocalAuthService with WidgetsBindingObserver {
   LocalAuthService({
     required this._localAuthPlugin,
     required UserDataWiper userDataWiper,
+    required this.authRepository,
     this.timeToReauth = const Duration(seconds: 30),
     CurrentPlatformService? currentPlatformService,
     NotificationsService? notificationService,
@@ -61,6 +63,7 @@ class LocalAuthService with WidgetsBindingObserver {
   LocalAuthService.noInitialAuth({
     required this._localAuthPlugin,
     required UserDataWiper userDataWiper,
+    required this.authRepository,
     this.timeToReauth = const Duration(seconds: 30),
     CurrentPlatformService? currentPlatformService,
     NotificationsService? notificationService,
@@ -92,7 +95,7 @@ class LocalAuthService with WidgetsBindingObserver {
         scheduleReauth();
         _refreshUI.add(null);
       }
-    } else if (AuthBloc.I.isSignedIn && !shouldAuthenticate) {
+    } else if (authRepository.isSignedIn && !shouldAuthenticate) {
       _lastActiveAt ??= _clock.now();
     }
   }
@@ -157,23 +160,6 @@ class LocalAuthService with WidgetsBindingObserver {
             return false;
           },
         );
-  }
-
-  Future<bool> verifyPassword(String password) async {
-    final email = AuthBloc.I.currentUser?.email;
-    if (email == null) return false;
-
-    final storedPasswordHash = await AuthStorage.I.getPasswordHash();
-    final keyBytes = await EncryptionService.I.deriveKey(
-      password: password,
-      salt: email,
-    );
-
-    return EncryptionService.I.verifyPassword(
-      passwordToVerify: password,
-      keyBytes: keyBytes,
-      storedPasswordHash: storedPasswordHash,
-    );
   }
 
   Future<void> dispose() async {

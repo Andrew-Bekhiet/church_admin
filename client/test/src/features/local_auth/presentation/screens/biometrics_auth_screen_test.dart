@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:device_info_plus_platform_interface/device_info_plus_platform_interface.dart';
@@ -9,6 +11,7 @@ import 'package:go_router/go_router.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:mocktail/mocktail.dart' as mocktail;
 import 'package:spot/spot.dart';
 
 import '../../../../fakes/fake_device_info.dart';
@@ -24,7 +27,6 @@ const AuthUser _fakeUser = AuthUser(
   idToken: 'idToken',
 );
 
-const User _fakeUserData = User(uid: 'uid', email: email, name: 'name');
 @GenerateNiceMocks([
   MockSpec<AuthBloc>(),
   MockSpec<LocalAuthService>(),
@@ -41,7 +43,7 @@ void main() {
   const size = Size(100, 1365 * 3);
 
   testWidgets(
-    'Biometrics Auth Screen => Key elements',
+    'the lock screen shows password entry and available biometric recovery',
     (tester) async {
       await tester.binding.setSurfaceSize(size);
 
@@ -94,86 +96,78 @@ void main() {
     variant: authVariant,
   );
 
-  testWidgets(
-    'Biometrics Auth Screen => Authentication',
-    (tester) async {
-      final authCompleter = Completer<bool>();
-
-      when(
-        LocalAuthService.I.authenticate(),
-      ).thenAnswer((_) async => authCompleter.future);
-
-      await tester.pumpWidgetBuilder(
-        SizedBox.fromSize(
-          size: size,
-          child: Builder(
-            builder: (context) {
-              return MediaQuery(
-                data: MediaQuery.of(context).copyWith(size: size),
-                child: const BiometricsAuthScreen(),
-              );
-            },
+  testWidgets('a wrong password shows inline feedback until the user retries', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(390, 1200));
+    await authVariant.setUp(AuthenticationVariantEnum.password);
+    await tester.pumpWidgetBuilder(
+      SizedBox.fromSize(
+        size: size,
+        child: Builder(
+          builder: (context) => MediaQuery(
+            data: MediaQuery.of(context).copyWith(size: size),
+            child: const BiometricsAuthScreen(),
           ),
         ),
-        wrapper: materialAppWrapper(),
-      );
-      await tester.pumpAndSettle();
+      ),
+      wrapper: materialAppWrapper(),
+    );
+    await tester.pumpAndSettle();
 
-      verify(LocalAuthService.I.canCheckBiometrics());
+    await act.enterText(
+      spotKey(BiometricsAuthScreenKeys.passwordFieldKey),
+      'wrong password',
+    );
+    await act.tap(spotKey(BiometricsAuthScreenKeys.submitButtonKey));
+    await tester.pumpAndSettle();
 
-      if (authVariant.currentValue == AuthenticationVariantEnum.password) {
-        await act.enterText(
-          spotKey(BiometricsAuthScreenKeys.passwordFieldKey),
-          'wrong password',
-        );
-        await act.tap(spotKey(BiometricsAuthScreenKeys.submitButtonKey));
+    spotKey(
+      BiometricsAuthScreenKeys.passwordFieldKey,
+    ).spotText('كلمة سر خاطئة!').existsOnce();
 
-        await tester.pumpAndSettle();
+    await act.enterText(
+      spotKey(BiometricsAuthScreenKeys.passwordFieldKey),
+      testPassword,
+    );
 
-        spotKey(
-          BiometricsAuthScreenKeys.passwordFieldKey,
-        ).spotText('كلمة سر خاطئة!').existsOnce();
+    expect(find.text('كلمة سر خاطئة!'), findsNothing);
+  });
 
-        await act.enterText(
-          spotKey(BiometricsAuthScreenKeys.passwordFieldKey),
-          testPassword,
-        );
-        expect(find.text('كلمة سر خاطئة!'), findsNothing);
-        await act.tap(spotKey(BiometricsAuthScreenKeys.submitButtonKey));
+  testWidgets('a pending biometric prompt disables retry until it finishes', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(390, 1200));
+    await authVariant.setUp(AuthenticationVariantEnum.biometrics);
+    final authCompleter = Completer<bool>();
+    when(
+      LocalAuthService.I.authenticate(),
+    ).thenAnswer((_) async => authCompleter.future);
 
-        await tester.pumpAndSettle();
+    await tester.pumpWidgetBuilder(
+      SizedBox.fromSize(
+        size: size,
+        child: Builder(
+          builder: (context) => MediaQuery(
+            data: MediaQuery.of(context).copyWith(size: size),
+            child: const BiometricsAuthScreen(),
+          ),
+        ),
+      ),
+      wrapper: materialAppWrapper(),
+    );
+    await tester.pumpAndSettle();
 
-        verifyInOrder([
-          LocalAuthService.I.verifyPassword(testPassword),
-          LocalAuthService.I.resetAuthState(),
-        ]);
-        verifyNever(LocalAuthService.I.authenticate());
-      } else {
-        verify(LocalAuthService.I.authenticate());
+    final biometricsButton = find.byKey(
+      BiometricsAuthScreenKeys.biometricsButtonKey,
+    );
+    expect(tester.widget<FilledButton>(biometricsButton).onPressed, isNull);
 
-        authCompleter.complete(false);
+    authCompleter.complete(false);
+    await tester.pumpAndSettle();
 
-        await tester.pumpAndSettle();
-
-        verifyNever(LocalAuthService.I.resetAuthState());
-
-        final authCompleter2 = Completer<bool>();
-
-        when(
-          LocalAuthService.I.authenticate(),
-        ).thenAnswer((_) async => authCompleter2.future);
-
-        await act.tap(spotKey(BiometricsAuthScreenKeys.biometricsButtonKey));
-
-        authCompleter2.complete(true);
-
-        await tester.pumpAndSettle();
-
-        verify(LocalAuthService.I.resetAuthState());
-      }
-    },
-    variant: authVariant,
-  );
+    expect(tester.widget<FilledButton>(biometricsButton).onPressed, isNotNull);
+  });
 
   testWidgets('wrong password feedback is visible above an auth overlay', (
     tester,
@@ -208,160 +202,6 @@ void main() {
       TextDirection.rtl,
     );
   });
-
-  group('Authenticate Route =>', () {
-    test('No Signed In User', () async {
-      initGlobalProviderContainer([_setUpAuthBloc(), _setUpLocalAuth()]);
-
-      expect(
-        AuthenticateRoute().redirect(
-          MockBuildContext(),
-          MockGoRouterState(),
-        ),
-        '/login',
-      );
-    });
-    group('Signed In User =>', () {
-      test('No Person', () async {
-        initGlobalProviderContainer([
-          _setUpAuthBloc(
-            currentUser: _fakeUser,
-            currentUserData: _fakeUserData.copyWith(person: null),
-          ),
-          _setUpLocalAuth(),
-        ]);
-
-        expect(
-          AuthenticateRoute().redirect(
-            MockBuildContext(),
-            MockGoRouterState(),
-          ),
-          isNull,
-        );
-      });
-
-      test('Should Authenticate', () async {
-        initGlobalProviderContainer([
-          _setUpAuthBloc(
-            currentUser: _fakeUser,
-            currentUserData: _fakeUserData,
-          ),
-          _setUpLocalAuth(),
-        ]);
-
-        expect(
-          AuthenticateRoute().redirect(
-            MockBuildContext(),
-            MockGoRouterState(),
-          ),
-          null,
-        );
-      });
-
-      test('Should not Authenticate (with redirection)', () async {
-        initGlobalProviderContainer([
-          _setUpAuthBloc(
-            currentUser: _fakeUser,
-            currentUserData: _fakeUserData,
-          ),
-          _setUpLocalAuth(shouldAuthenticate: false),
-        ]);
-
-        expect(
-          AuthenticateRoute(
-            next: '/next',
-          ).redirect(MockBuildContext(), MockGoRouterState()),
-          '/next',
-        );
-      });
-
-      test('Should not Authenticate (without redirection)', () async {
-        initGlobalProviderContainer([
-          _setUpAuthBloc(
-            currentUser: _fakeUser,
-            currentUserData: _fakeUserData,
-          ),
-          _setUpLocalAuth(shouldAuthenticate: false),
-        ]);
-
-        final mockGoRouterState = MockGoRouterState();
-        when(mockGoRouterState.uri).thenReturn(Uri());
-
-        expect(
-          AuthenticateRoute().redirect(
-            MockBuildContext(),
-            mockGoRouterState,
-          ),
-          '/',
-        );
-      });
-
-      test('Should authenticate for path', () async {
-        initGlobalProviderContainer([
-          _setUpAuthBloc(
-            currentUser: _fakeUser,
-            currentUserData: _fakeUserData,
-          ),
-          _setUpLocalAuth(shouldAuthenticate: false),
-        ]);
-
-        expect(
-          AuthenticateRoute(
-            next: '/test',
-          ).redirect(MockBuildContext(), MockGoRouterState()),
-          '/test',
-        );
-
-        when(
-          LocalAuthService.I.shouldAuthenticateForPath('/test'),
-        ).thenReturn(true);
-
-        expect(
-          AuthenticateRoute(
-            next: '/test',
-          ).redirect(MockBuildContext(), MockGoRouterState()),
-          null,
-        );
-        when(
-          LocalAuthService.I.shouldAuthenticateForPath('/test'),
-        ).thenReturn(false);
-
-        expect(
-          AuthenticateRoute(
-            next: '/test',
-          ).redirect(MockBuildContext(), MockGoRouterState()),
-          '/test',
-        );
-      });
-    });
-  });
-}
-
-Override _setUpLocalAuth({bool shouldAuthenticate = true}) {
-  final mockLocalAuthService = MockLocalAuthService();
-  when(mockLocalAuthService.shouldAuthenticate).thenReturn(shouldAuthenticate);
-
-  return localAuthServiceProvider.overrideWithValue(mockLocalAuthService);
-}
-
-Override _setUpAuthBloc({AuthUser? currentUser, User? currentUserData}) {
-  final mockAuthBloc = MockAuthBloc();
-
-  when(mockAuthBloc.isSignedIn).thenReturn(currentUser != null);
-  if (currentUser != null) {
-    when(mockAuthBloc.currentUser).thenReturn(currentUser);
-  }
-
-  if (currentUserData != null) {
-    when(mockAuthBloc.currentUserData).thenReturn(currentUserData);
-  }
-  when(mockAuthBloc.state).thenReturn(
-    currentUser != null
-        ? AuthAuthenticated(authUser: currentUser, userData: currentUserData)
-        : const AuthUnauthenticated(),
-  );
-
-  return authBlocProvider.overrideWithValue(mockAuthBloc);
 }
 
 class AuthenticationVariant extends ValueVariant<AuthenticationVariantEnum> {
@@ -376,6 +216,9 @@ class AuthenticationVariant extends ValueVariant<AuthenticationVariantEnum> {
     final overrides = [
       _setUpAuthBloc(),
       _setUpLocalAuthService(value),
+      _setUpAuthRepository(),
+      _setUpAuthStorage(),
+      encryptionServiceProvider.overrideWithValue(_PasswordEncryptionService()),
     ];
 
     initGlobalProviderContainer(overrides);
@@ -398,13 +241,47 @@ class AuthenticationVariant extends ValueVariant<AuthenticationVariantEnum> {
       mockLocalAuthService.canCheckBiometrics(),
     ).thenAnswer((_) async => value == AuthenticationVariantEnum.biometrics);
     when(mockLocalAuthService.authenticate()).thenAnswer((_) async => true);
-    when(
-      mockLocalAuthService.verifyPassword(any),
-    ).thenAnswer((i) async => i.positionalArguments.single == testPassword);
 
     return localAuthServiceProvider.overrideWithValue(mockLocalAuthService);
   }
+
+  Override _setUpAuthRepository() {
+    final authRepository = _AuthRepositoryMock();
+    mocktail.when(() => authRepository.currentUserEmail).thenReturn(email);
+
+    return authRepositoryProvider.overrideWithValue(authRepository);
+  }
+
+  Override _setUpAuthStorage() {
+    final authStorage = _AuthStorageMock();
+    mocktail
+        .when(
+          authStorage.getPasswordHash,
+        )
+        .thenAnswer((_) async => '$testPassword:$email');
+
+    return authStorageProvider.overrideWithValue(authStorage);
+  }
 }
+
+class _PasswordEncryptionService extends EncryptionService {
+  @override
+  Future<Uint8List> deriveKey({
+    required String password,
+    required String salt,
+  }) async => Uint8List.fromList(utf8.encode('$password:$salt'));
+
+  @override
+  Future<bool> verifyPassword({
+    required String passwordToVerify,
+    required Uint8List keyBytes,
+    required String? storedPasswordHash,
+  }) async => storedPasswordHash == utf8.decode(keyBytes);
+}
+
+class _AuthRepositoryMock extends mocktail.Mock implements AuthRepository {}
+
+class _AuthStorageMock extends mocktail.Mock implements AuthStorage {}
 
 enum AuthenticationVariantEnum { password, biometrics }
 

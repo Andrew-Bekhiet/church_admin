@@ -43,7 +43,8 @@ class _BiometricsAuthScreenState extends State<BiometricsAuthScreen> {
       value: _cubit,
       child: BlocConsumer<BiometricsAuthCubit, BiometricsAuthState>(
         listenWhen: (previous, current) =>
-            !previous.wrongPassword && current.wrongPassword,
+            previous is! BiometricsAuthWrongPassword &&
+            current is BiometricsAuthWrongPassword,
         listener: (context, state) => _passwordText.clear(),
         builder: (context, state) => Scaffold(
           appBar: AppBar(
@@ -62,7 +63,7 @@ class _BiometricsAuthScreenState extends State<BiometricsAuthScreen> {
             ],
             flexibleSpace: FlexibleSpaceBar(
               background: SafeArea(
-                child: Image.asset(_getAssetImage(), fit: BoxFit.scaleDown),
+                child: Image.asset(state.imageAsset, fit: BoxFit.scaleDown),
               ),
             ),
             shape: const RoundedRectangleBorder(
@@ -82,11 +83,11 @@ class _BiometricsAuthScreenState extends State<BiometricsAuthScreen> {
                     controller: _passwordText,
                     decoration: InputDecoration(
                       labelText: 'كلمة السر',
-                      errorText: state.wrongPassword
-                          ? 'كلمة سر خاطئة!'
-                          : state.authenticationFailed
-                          ? 'تعذر التحقق، حاول مرة أخرى'
-                          : null,
+                      errorText: switch (state) {
+                        BiometricsAuthWrongPassword() => 'كلمة سر خاطئة!',
+                        BiometricsAuthFailure() => 'تعذر التحقق، حاول مرة أخرى',
+                        _ => null,
+                      },
                     ),
                     validator: (password) =>
                         password == null || password.isEmpty
@@ -96,7 +97,7 @@ class _BiometricsAuthScreenState extends State<BiometricsAuthScreen> {
                   ),
                   FilledButton(
                     key: BiometricsAuthScreenKeys.submitButtonKey,
-                    onPressed: state.isAuthenticating
+                    onPressed: state is BiometricsAuthAuthenticating
                         ? null
                         : () => _submit(_passwordText.text),
                     child: const Text('تسجيل الدخول'),
@@ -110,7 +111,7 @@ class _BiometricsAuthScreenState extends State<BiometricsAuthScreen> {
                         'إعادة المحاولة عن طريق البصمة',
                         textAlign: TextAlign.center,
                       ),
-                      onPressed: state.isAuthenticating
+                      onPressed: state is BiometricsAuthAuthenticating
                           ? null
                           : () => unawaited(_cubit.authenticateBiometrically()),
                     ),
@@ -121,19 +122,6 @@ class _BiometricsAuthScreenState extends State<BiometricsAuthScreen> {
         ),
       ),
     );
-  }
-
-  String _getAssetImage() {
-    switch (LiturgySeason.current) {
-      case LiturgySeason.holyWeek:
-        return 'assets/holyweek.jpeg';
-
-      case LiturgySeason.pentecost:
-        return 'assets/risen.jpg';
-
-      case _:
-        return 'assets/logo.png';
-    }
   }
 
   void _submit(String password) {

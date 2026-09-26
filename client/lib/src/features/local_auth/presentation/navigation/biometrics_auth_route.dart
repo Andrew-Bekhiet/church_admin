@@ -4,15 +4,15 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-part 'authenticate_route.g.dart';
+part 'biometrics_auth_route.g.dart';
 
-@TypedGoRoute<AuthenticateRoute>(path: '/authenticate')
-class AuthenticateRoute extends GoRouteData with $AuthenticateRoute {
+@TypedGoRoute<BiometricsAuthRoute>(path: '/biometrics_auth')
+class BiometricsAuthRoute extends GoRouteData with $BiometricsAuthRoute {
   bool _redirectedOnce = false;
 
   final String next;
 
-  AuthenticateRoute({this.next = '/'});
+  BiometricsAuthRoute({this.next = '/'});
 
   @override
   Widget build(BuildContext context, GoRouterState state) {

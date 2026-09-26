@@ -293,6 +293,7 @@ final notificationsSettingsProvider = Provider<NotificationsSettingsStorage>(
 final localAuthServiceProvider = Provider<LocalAuthService>((ref) {
   final localAuthBloc = LocalAuthService(
     localAuthPlugin: ref.watch(localAuthPluginProvider),
+    authRepository: ref.watch(authRepositoryProvider),
     notificationService: ref.watch(notificationsServiceProvider),
     userDataWiper: ref.watch(userDataWiperProvider),
   );

@@ -1,35 +1,42 @@
 import 'package:equatable/equatable.dart';
 
-class BiometricsAuthState with Equatable {
+sealed class BiometricsAuthState with Equatable {
   final bool canCheckBiometrics;
-  final bool isAuthenticating;
-  final bool wrongPassword;
-  final bool authenticationFailed;
+  final String imageAsset;
 
   @override
-  List<Object?> get props => [
-    canCheckBiometrics,
-    isAuthenticating,
-    wrongPassword,
-    authenticationFailed,
-  ];
+  List<Object?> get props => [canCheckBiometrics, imageAsset];
 
   const BiometricsAuthState({
-    this.canCheckBiometrics = false,
-    this.isAuthenticating = false,
-    this.wrongPassword = false,
-    this.authenticationFailed = false,
+    required this.canCheckBiometrics,
+    required this.imageAsset,
   });
+}
 
-  BiometricsAuthState copyWith({
-    bool? canCheckBiometrics,
-    bool? isAuthenticating,
-    bool? wrongPassword,
-    bool? authenticationFailed,
-  }) => BiometricsAuthState(
-    canCheckBiometrics: canCheckBiometrics ?? this.canCheckBiometrics,
-    isAuthenticating: isAuthenticating ?? this.isAuthenticating,
-    wrongPassword: wrongPassword ?? this.wrongPassword,
-    authenticationFailed: authenticationFailed ?? this.authenticationFailed,
-  );
+final class BiometricsAuthReady extends BiometricsAuthState {
+  const BiometricsAuthReady({
+    required super.canCheckBiometrics,
+    required super.imageAsset,
+  });
+}
+
+final class BiometricsAuthAuthenticating extends BiometricsAuthState {
+  const BiometricsAuthAuthenticating({
+    required super.canCheckBiometrics,
+    required super.imageAsset,
+  });
+}
+
+final class BiometricsAuthWrongPassword extends BiometricsAuthState {
+  const BiometricsAuthWrongPassword({
+    required super.canCheckBiometrics,
+    required super.imageAsset,
+  });
+}
+
+final class BiometricsAuthFailure extends BiometricsAuthState {
+  const BiometricsAuthFailure({
+    required super.canCheckBiometrics,
+    required super.imageAsset,
+  });
 }

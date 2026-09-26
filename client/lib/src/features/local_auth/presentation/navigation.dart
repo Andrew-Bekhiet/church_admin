@@ -1,1 +1,1 @@
-export 'navigation/authenticate_route.dart';
+export 'navigation/biometrics_auth_route.dart';

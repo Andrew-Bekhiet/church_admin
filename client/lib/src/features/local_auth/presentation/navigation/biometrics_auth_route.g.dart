@@ -3,28 +3,28 @@
 // coverage:ignore-file
 // ignore_for_file: type=lint
 
-part of 'authenticate_route.dart';
+part of 'biometrics_auth_route.dart';
 
 // **************************************************************************
 // GoRouterGenerator
 // **************************************************************************
 
-List<RouteBase> get $appRoutes => [$authenticateRoute];
+List<RouteBase> get $appRoutes => [$biometricsAuthRoute];
 
-RouteBase get $authenticateRoute => GoRouteData.$route(
-  path: '/authenticate',
-  factory: $AuthenticateRoute._fromState,
+RouteBase get $biometricsAuthRoute => GoRouteData.$route(
+  path: '/biometrics_auth',
+  factory: $BiometricsAuthRoute._fromState,
 );
 
-mixin $AuthenticateRoute on GoRouteData {
-  static AuthenticateRoute _fromState(GoRouterState state) =>
-      AuthenticateRoute(next: state.uri.queryParameters['next'] ?? '/');
+mixin $BiometricsAuthRoute on GoRouteData {
+  static BiometricsAuthRoute _fromState(GoRouterState state) =>
+      BiometricsAuthRoute(next: state.uri.queryParameters['next'] ?? '/');
 
-  AuthenticateRoute get _self => this as AuthenticateRoute;
+  BiometricsAuthRoute get _self => this as BiometricsAuthRoute;
 
   @override
   String get location => GoRouteData.$location(
-    '/authenticate',
+    '/biometrics_auth',
     queryParams: {if (_self.next != '/') 'next': _self.next},
   );
 

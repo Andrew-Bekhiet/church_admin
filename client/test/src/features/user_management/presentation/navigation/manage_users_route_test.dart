@@ -5,13 +5,13 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mocktail/mocktail.dart';
 
-import '../../../../fakes/fake_auth_repository.dart';
-
 void main() {
   final binding = TestWidgetsFlutterBinding.ensureInitialized();
 
   const route = ManageUsersRoute();
-  final authenticateLocation = AuthenticateRoute(next: route.location).location;
+  final biometricsAuthLocation = BiometricsAuthRoute(
+    next: route.location,
+  ).location;
 
   final routerState = GoRouterState(
     RouteConfiguration(
@@ -35,7 +35,6 @@ void main() {
     binding.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
 
     final authBloc = _MockAuthBloc();
-    when(() => authBloc.isSignedIn).thenReturn(true);
     when(() => authBloc.currentUserData).thenReturn(
       const User(
         uid: 'uid',
@@ -46,13 +45,16 @@ void main() {
 
     final notificationsService = _MockNotificationsService();
     when(() => notificationsService.isPaused).thenReturn(false);
+    final authRepository = _MockAuthRepository();
+    when(() => authRepository.isSignedIn).thenReturn(true);
 
     initGlobalProviderContainer([
       authBlocProvider.overrideWithValue(authBloc),
-      authRepositoryProvider.overrideWithValue(FakeAuthRepository()),
+      authRepositoryProvider.overrideWithValue(authRepository),
       localAuthServiceProvider.overrideWith(
         (ref) => LocalAuthService.noInitialAuth(
           localAuthPlugin: ref.read(localAuthPluginProvider),
+          authRepository: authRepository,
           notificationService: notificationsService,
           userDataWiper: _MockUserDataWiper(),
           clock: Clock(() => now),
@@ -68,7 +70,7 @@ void main() {
   });
 
   test('entering manage users asks for local authentication', () {
-    expect(redirect(), authenticateLocation);
+    expect(redirect(), biometricsAuthLocation);
   });
 
   test(
@@ -119,12 +121,14 @@ void main() {
 
       route.onExit(_MockBuildContext(), routerState);
 
-      expect(redirect(), authenticateLocation);
+      expect(redirect(), biometricsAuthLocation);
     },
   );
 }
 
 final class _MockAuthBloc extends Mock implements AuthBloc {}
+
+final class _MockAuthRepository extends Mock implements AuthRepository {}
 
 final class _MockNotificationsService extends Mock
     implements NotificationsService {}

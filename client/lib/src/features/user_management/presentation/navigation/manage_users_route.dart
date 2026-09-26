@@ -19,7 +19,7 @@ class ManageUsersRoute extends GoRouteData with $ManageUsersRoute {
     }
 
     if (LocalAuthService.I.shouldAuthenticateForPath(location)) {
-      return AuthenticateRoute(next: location).location;
+      return BiometricsAuthRoute(next: location).location;
     }
 
     return null;

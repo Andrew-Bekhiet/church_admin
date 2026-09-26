@@ -5,6 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:mocktail/mocktail.dart' as mocktail;
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:rxdart_ext/not_replay_value_stream.dart';
 
@@ -33,7 +34,7 @@ void main() {
   tearDown(resetGlobalProviderContainer);
 
   testWidgets(
-    'Church Admin App => First Screen',
+    'the first screen matches the account authentication state',
     (tester) async {
       await tester.pumpWidget(const ChurchAdminApp());
       await tester.pump();
@@ -66,7 +67,7 @@ void main() {
     variant: firstScreenVariant,
   );
 
-  testWidgets('Church Admin App => Observes ThemingService', (tester) async {
+  testWidgets('the app uses the selected theme', (tester) async {
     await tester.pumpWidget(const ChurchAdminApp());
 
     expect(
@@ -83,7 +84,7 @@ void main() {
     );
   });
 
-  testWidgets('Church Admin App => Shows SnackBar on connectivity changed', (
+  testWidgets('losing connectivity shows a snack bar', (
     tester,
   ) async {
     final connectivityController = BehaviorSubject.seeded(true);
@@ -257,6 +258,13 @@ class FirstScreenVariant extends ValueVariant<FirstScreenVariantEnum> {
     if (value != FirstScreenVariantEnum.login) {
       overrides.add(_setUpLocalAuthService(value));
     }
+    if (value == FirstScreenVariantEnum.authenticate) {
+      final authRepository = _AuthRepositoryMock();
+      mocktail
+          .when(() => authRepository.userChanges)
+          .thenAnswer((_) => const Stream.empty());
+      overrides.add(authRepositoryProvider.overrideWithValue(authRepository));
+    }
 
     initGlobalProviderContainer(overrides);
 
@@ -379,3 +387,5 @@ enum FirstScreenVariantEnum {
 
 class FakeUserPreferencesService extends Fake
     implements UserPreferencesService {}
+
+class _AuthRepositoryMock extends mocktail.Mock implements AuthRepository {}

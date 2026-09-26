@@ -13,6 +13,8 @@ import '../../../../utils.dart';
 
 class _MockAuthBloc extends Mock implements AuthBloc {}
 
+class _MockAuthRepository extends Mock implements AuthRepository {}
+
 class _MockDatabaseService extends Mock implements DatabaseService {}
 
 class _MockPersonsDAO extends Mock implements PersonsDAO {}
@@ -92,8 +94,14 @@ void main() {
     ).thenAnswer((_) => const Stream.empty());
     when(localAuthService.canCheckBiometrics).thenAnswer((_) async => false);
 
+    final authRepository = _MockAuthRepository();
+    when(
+      () => authRepository.userChanges,
+    ).thenAnswer((_) => const Stream.empty());
+
     initGlobalProviderContainer([
       authBlocProvider.overrideWithValue(authBloc),
+      authRepositoryProvider.overrideWithValue(authRepository),
       databaseServiceProvider.overrideWithValue(databaseService),
       homeDailyDataRepositoryProvider.overrideWithValue(
         homeDailyDataRepository,

@@ -56,9 +56,15 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void _listenToLocalAuth() {
     WidgetsBinding.instance.addPostFrameCallback(
-      (_) => !_authOverlayController.isShowing
-          ? _authOverlayController.show()
-          : null,
+      (_) {
+        if (!mounted ||
+            !LocalAuthService.I.shouldAuthenticate ||
+            _authOverlayController.isShowing) {
+          return;
+        }
+
+        _authOverlayController.show();
+      },
     );
 
     _localAuthListener =
