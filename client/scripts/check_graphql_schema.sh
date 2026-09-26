@@ -8,8 +8,8 @@ root=$(cd "$(dirname "$0")/../.." && pwd)
 
 export POSTGRES_PASSWORD=schema-check
 export HASURA_GRAPHQL_ADMIN_SECRET=schema-check
-export POSTGRES_PORT=${POSTGRES_PORT:-55432}
-export HASURA_PORT=${HASURA_PORT:-58080}
+export POSTGRES_PORT=${POSTGRES_PORT:-25432}
+export HASURA_PORT=${HASURA_PORT:-28080}
 export HASURA_GRAPHQL_ENDPOINT="http://localhost:$HASURA_PORT"
 
 compose=(docker compose --env-file /dev/null -f "$root/server/docker-compose.yml" -p church-admin-schema-check)
