@@ -134,17 +134,16 @@ Permissions hang off `auth.users_data.uid` — never `auth_id`. `auth.users_perm
 
 **GraphQL codegen** — the split is not a build_runner output. `graphql_codegen` always emits `schema.graphql.dart` as one ~166k-line file, and `client/scripts/split_schema_graphql_dart.sh` rewrites that file in place into a stub plus `schema_partN.dart`. Any build that regenerates it destroys the split.
 
-So **default to a `--build-filter` scoped to what you changed** — that keeps the schema out of the build's output set:
+On the current toolchain (build_runner 2.15.2), `--build-filter` does not merely scope the build — from a cold cache (no `.dart_tool/build`, e.g. a fresh clone or CI runner) it deletes every generated output *outside* the filter and still re-collapses `schema.graphql.dart`, because `graphql_codegen` runs lazily regardless of the filter. **Prefer a full `dart run build_runner build`** for hand-run builds, then restore the stub and clean up:
 
 ```sh
 cd client
-dart run build_runner build --build-filter="test/**.mocks.dart"
-dart run build_runner build --build-filter="lib/src/features/<feature>/**"
+dart run build_runner build
+git checkout -- lib/src/core/graphql/__generated__/schema.graphql.dart
+rm -f lib/src/core/graphql/__generated__/schema.graphql.dart.bak
 ```
 
-Repeat the flag to cover several areas. The filter must match everything you changed — scoping to mocks while a `freezed` model also changed leaves that model stale.
-
-A filtered build from a cold cache (no `.dart_tool/build`, e.g. a fresh clone or CI runner) deletes every generated output outside the filter and re-collapses `schema.graphql.dart`. Run one full build first, or restore the rest with `git checkout -- .` afterwards.
+Also check `git status` afterward for unexpected changes to unrelated `.gql.dart`/`.g.dart` files, and `git checkout --` anything a full build touched that you didn't intend to change.
 
 Run the full sequence **only when `.graphql` documents or the Hasura schema change**, and re-split afterwards:
 
