@@ -10,12 +10,12 @@ class UserDataWiper {
 
   StreamSubscription<bool>? _subscription;
 
-  UserDataWiper({required Stream<AuthUser?> signedOutSignal}) {
-    _subscription = signedOutSignal
-        .map((authUser) => authUser != null)
+  UserDataWiper({required Stream<AuthUser?> userChangesStream}) {
+    _subscription = userChangesStream
+        .map((authUser) => authUser == null)
         .distinct()
-        .skipWhile((isSignedIn) => !isSignedIn)
-        .where((isSignedIn) => !isSignedIn)
+        .skipWhile((isSignedOut) => isSignedOut)
+        .where((isSignedOut) => isSignedOut)
         .listen((_) => unawaited(_wipe()));
   }
 

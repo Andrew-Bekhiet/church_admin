@@ -11,17 +11,17 @@ void main() {
     idToken: 'idToken',
   );
 
-  late StreamController<AuthUser?> signedOutController;
+  late StreamController<AuthUser?> userChangesController;
   late UserDataWiper unit;
 
   setUp(() {
-    signedOutController = StreamController<AuthUser?>.broadcast();
-    unit = UserDataWiper(signedOutSignal: signedOutController.stream);
+    userChangesController = StreamController<AuthUser?>.broadcast();
+    unit = UserDataWiper(userChangesStream: userChangesController.stream);
   });
 
   tearDown(() async {
     await unit.dispose();
-    await signedOutController.close();
+    await userChangesController.close();
   });
 
   test(
@@ -33,7 +33,7 @@ void main() {
         ..register(() async => callOrder.add('second'))
         ..register(() async => callOrder.add('third'));
 
-      signedOutController
+      userChangesController
         ..add(signedInUser)
         ..add(null);
       await pumpEventQueue();
@@ -49,7 +49,7 @@ void main() {
       ..register(() async => throw Exception('boom'))
       ..register(() async => callOrder.add('third'));
 
-    signedOutController
+    userChangesController
       ..add(signedInUser)
       ..add(null);
     await pumpEventQueue();
@@ -61,7 +61,7 @@ void main() {
     var wasCalled = false;
     unit.register(() async => wasCalled = true);
 
-    signedOutController.add(signedInUser);
+    userChangesController.add(signedInUser);
     await pumpEventQueue();
 
     expect(wasCalled, isFalse);
@@ -71,7 +71,7 @@ void main() {
     var wasCalled = false;
     unit.register(() async => wasCalled = true);
 
-    signedOutController.add(null);
+    userChangesController.add(null);
     await pumpEventQueue();
 
     expect(wasCalled, isFalse);

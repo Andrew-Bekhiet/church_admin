@@ -436,13 +436,16 @@ final authRepositoryProvider = Provider<AuthRepository>(
 );
 
 final authStorageProvider = Provider<AuthStorage>(
-  (ref) => AuthStorage(secureStorage: ref.watch(secureStorageProvider)),
+  (ref) => AuthStorage(
+    secureStorage: ref.watch(secureStorageProvider),
+    userDataWiper: ref.watch(userDataWiperProvider),
+  ),
 );
 
 final Provider<UserDataWiper> userDataWiperProvider = Provider<UserDataWiper>(
   (ref) {
     final wiper = UserDataWiper(
-      signedOutSignal: ref.watch(authRepositoryProvider).userChanges,
+      userChangesStream: ref.watch(authRepositoryProvider).userChanges,
     );
 
     wiper.register(SyncKVStore.clearAllLoaded);
