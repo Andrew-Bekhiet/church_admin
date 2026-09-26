@@ -64,6 +64,8 @@ class LocalAuthService with WidgetsBindingObserver {
 
   void revokeAuthForPath(String path) => _authenticatedPaths.remove(path);
 
+  void revokeAuthForAllPaths() => _authenticatedPaths.clear();
+
   Timer _createTimer() => Timer(timeToReauth, scheduleReauth);
 
   @override

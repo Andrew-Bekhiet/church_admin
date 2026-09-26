@@ -20,8 +20,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final Stream<bool> _connectivityStream;
   final FunctionsService _functionsService;
   final FeatureFlagsRepository _featureFlagsRepository;
+  final UserDataWiper _userDataWiper;
 
   Timer? _refreshTokenTimer;
+  Future<void> _localDataUpdates = Future.value();
 
   bool get isSignedIn => state.unwrapped is AuthAuthenticated;
 
@@ -71,6 +73,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     required this._connectivityStream,
     required this._functionsService,
     required this._featureFlagsRepository,
+    required this._userDataWiper,
     bool loadCachedUser = true,
   }) : super(const AuthInitial()) {
     on<ListenToSubscriptions>(
@@ -137,9 +140,19 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           .asStream()
           .concatWith([liveUserStream])
           .distinct()
-          .doOnData((data) async {
-            await _authStorage.writeAuthDataToCache(data.$1);
-            await _authStorage.writeUserToCache(data.$2);
+          .doOnData((data) {
+            final (authUser, userData) = data;
+            final sessionEnded =
+                authUser == null && state.unwrapped is AuthAuthenticated;
+
+            unawaited(
+              _enqueueLocalDataUpdate(() async {
+                if (sessionEnded) return _userDataWiper.wipeUserData();
+
+                await _authStorage.writeAuthDataToCache(authUser);
+                await _authStorage.writeUserToCache(userData);
+              }),
+            );
           }),
       onData: (data) {
         final (authUser, userData) = data;
@@ -161,6 +174,20 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         previousState: state,
       ),
     );
+  }
+
+  Future<void> _enqueueLocalDataUpdate(Future<void> Function() update) {
+    final queuedUpdate = _localDataUpdates.then((_) => update());
+
+    _localDataUpdates = queuedUpdate.then(
+      (_) {},
+      onError: (Object error, StackTrace stackTrace) =>
+          LoggingService.I.exception(
+            LogRecord(error: error, stackTrace: stackTrace),
+          ),
+    );
+
+    return queuedUpdate;
   }
 
   void _scheduleTokenRefresh(AuthUser authUser) {
@@ -286,7 +313,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(AuthLoading(previousState: state));
 
       await _authRepository.signOut();
-      await _authStorage.clearAll();
+      await _enqueueLocalDataUpdate(_userDataWiper.wipeUserData);
 
       emit(const AuthUnauthenticated());
     } catch (e, stackTrace) {

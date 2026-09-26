@@ -10,6 +10,7 @@ import 'package:rxdart/rxdart.dart';
 import 'package:rxdart/subjects.dart';
 
 import '../../../../fakes/fake_feature_flags_repo.dart';
+import '../../../../fakes/fake_user_data_wiper.dart';
 import '../../../../utils.dart';
 import 'auth_bloc_test.mocks.dart';
 
@@ -57,6 +58,9 @@ AuthUser initialAuthUser = AuthUser(
         1000,
   },
 );
+
+late FakeUserDataWiper userDataWiper;
+late StreamController<AuthUser?> userChangesController;
 
 @GenerateNiceMocks([
   MockSpec<AuthStorage>(),
@@ -203,7 +207,7 @@ void main() {
       );
 
       blocTest<AuthBloc, AuthState>(
-        'sign out',
+        "signing out ends the session and wipes the user's local data",
         setUp: () async {
           await AuthStorage.I.writeAuthDataToCache(initialAuthUser);
           await AuthStorage.I.writeUserToCache(initialUserData);
@@ -231,6 +235,40 @@ void main() {
           expect(AuthStorage.I.getAuthDataFromCache(), completion(isNull));
           expect(AuthStorage.I.getUserFromCache(), completion(isNull));
           expect(AuthStorage.I.getPasswordHash(), completion(isNull));
+          expect(userDataWiper.wasWiped, isTrue);
+        },
+      );
+    });
+
+    group('session ending =>', () {
+      blocTest<AuthBloc, AuthState>(
+        "a session ended remotely wipes the user's local data",
+        build: _createAuthBloc,
+        act: (bloc) async {
+          await Future.delayed(Duration.zero);
+          userChangesController.add(null);
+        },
+        expect: () => [
+          isA<AuthAuthenticated>(),
+          isA<AuthUnauthenticated>(),
+        ],
+        verify: (bloc) {
+          expect(userDataWiper.wasWiped, isTrue);
+          expect(AuthStorage.I.getPasswordHash(), completion(isNull));
+        },
+      );
+
+      blocTest<AuthBloc, AuthState>(
+        'starting without a signed-in user does not wipe local data',
+        build: () => _createAuthBloc(noCachedUser: true),
+        act: (bloc) async {
+          await Future.delayed(Duration.zero);
+          userChangesController.add(null);
+        },
+        expect: () => [isA<AuthUnauthenticated>()],
+        verify: (bloc) {
+          expect(userDataWiper.wasWiped, isFalse);
+          expect(AuthStorage.I.getPasswordHash(), completion(isNotNull));
         },
       );
     });
@@ -539,6 +577,8 @@ Future<void> _setUp() async {
   ];
 
   initGlobalProviderContainer(overrides);
+
+  userDataWiper = FakeUserDataWiper(AuthStorage.I);
 }
 
 Future<Override> _setUpMockFunctionsService() async {
@@ -589,7 +629,8 @@ Future<Override> _setUpMockAuthStorage() async {
 }
 
 Future<Override> _setUpMockAuthRepository() async {
-  final controller = StreamController<AuthUser?>.broadcast(sync: true);
+  final controller = userChangesController =
+      StreamController<AuthUser?>.broadcast(sync: true);
 
   final mock = MockFirebaseAuthRepository();
 
@@ -657,6 +698,7 @@ AuthBloc _createAuthBloc({
     featureFlagsRepository: FakeFeatureFlagsRepo(
       enableAccountClaimingByEmail: enableAccountClaimingByEmail,
     ),
+    userDataWiper: userDataWiper,
     loadCachedUser: !noCachedUser,
   );
 }

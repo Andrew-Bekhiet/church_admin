@@ -177,6 +177,15 @@ class MockNotificationsStorage extends _i1.Mock
             returnValueForMissingStub: _i3.Future<_i2.Notification?>.value(),
           )
           as _i3.Future<_i2.Notification?>);
+
+  @override
+  _i3.Future<void> clear() =>
+      (super.noSuchMethod(
+            Invocation.method(#clear, []),
+            returnValue: _i3.Future<void>.value(),
+            returnValueForMissingStub: _i3.Future<void>.value(),
+          )
+          as _i3.Future<void>);
 }
 
 /// A class which mocks [InitializationService].

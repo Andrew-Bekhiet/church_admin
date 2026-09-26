@@ -56,6 +56,12 @@ class ExportOperationsStorage {
         .toList();
   }
 
+  Future<void> deleteSavedFiles() async {
+    final exportsDir = await getExportsDirectory();
+
+    if (await exportsDir.exists()) await exportsDir.delete(recursive: true);
+  }
+
   Future<File> _getFileFromUri(Uri uri) async {
     final exportsDir = await _maybeCreateExportsDirectory();
 

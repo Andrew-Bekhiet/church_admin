@@ -745,6 +745,12 @@ class MockLocalAuthService extends _i1.Mock implements _i2.LocalAuthService {
   );
 
   @override
+  void revokeAuthForAllPaths() => super.noSuchMethod(
+    Invocation.method(#revokeAuthForAllPaths, []),
+    returnValueForMissingStub: null,
+  );
+
+  @override
   void didChangeAppLifecycleState(_i7.AppLifecycleState? state) =>
       super.noSuchMethod(
         Invocation.method(#didChangeAppLifecycleState, [state]),

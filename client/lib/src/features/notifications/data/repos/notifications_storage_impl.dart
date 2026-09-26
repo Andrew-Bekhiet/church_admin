@@ -13,4 +13,7 @@ class NotificationsStorageImpl implements NotificationsStorage {
   @override
   Future<Notification?> readNotification(String notificationId) async =>
       _store.get(notificationId);
+
+  @override
+  Future<void> clear() => _store.clear();
 }

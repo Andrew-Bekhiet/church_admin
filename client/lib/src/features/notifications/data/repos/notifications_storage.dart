@@ -7,4 +7,6 @@ abstract interface class NotificationsStorage {
   Future<void> writeNotification(Notification notification);
 
   Future<Notification?> readNotification(String notificationId);
+
+  Future<void> clear();
 }
