@@ -21,7 +21,8 @@ class GqlSchemaIndex {
       switch (def) {
         case ObjectTypeDefinitionNode():
           objectFields[def.name.value] = {
-            for (final field in def.fields) field.name.value: _unwrap(field.type),
+            for (final field in def.fields)
+              field.name.value: _unwrap(field.type),
           };
         case SchemaDefinitionNode():
           for (final op in def.operationTypes) {
@@ -37,7 +38,9 @@ class GqlSchemaIndex {
         OperationType.subscription: 'subscription_root',
       };
       for (final entry in fallback.entries) {
-        if (objectFields.containsKey(entry.value)) roots[entry.key] = entry.value;
+        if (objectFields.containsKey(entry.value)) {
+          roots[entry.key] = entry.value;
+        }
       }
     }
 
@@ -121,7 +124,9 @@ class KeyFieldRules {
 
     if (presentFields.contains('id')) return null;
     if (_isTransient(type)) return null;
-    if (exemptions.any((e) => e.operation == operation && e.field == fieldPath)) {
+    if (exemptions.any(
+      (e) => e.operation == operation && e.field == fieldPath,
+    )) {
       return null;
     }
 
