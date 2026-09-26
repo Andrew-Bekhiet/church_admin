@@ -1,11 +1,9 @@
 import 'package:church_admin/church_admin.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 
 class SendPasswordResetButton extends StatelessWidget {
-  static const _isolateStart = '\u2066';
-  static const _isolateEnd = '\u2069';
-
   final String email;
 
   const SendPasswordResetButton({required this.email, super.key});
@@ -23,13 +21,14 @@ class SendPasswordResetButton extends StatelessWidget {
   }
 
   Future<void> _confirmAndSend(BuildContext context) async {
+    final isolatedEmail = '${Unicode.LRI}$email${Unicode.PDI}';
+
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('إرسال رابط إعادة تعيين كلمة المرور؟'),
         content: Text(
-          'سيتم إرسال رابط إعادة تعيين كلمة المرور إلى '
-          '$_isolateStart$email$_isolateEnd',
+          'سيتم إرسال رابط إعادة تعيين كلمة المرور إلى $isolatedEmail',
         ),
         actions: [
           OutlinedButton(
@@ -67,8 +66,7 @@ class SendPasswordResetButton extends StatelessWidget {
       ..showSnackBar(
         SnackBar(
           content: Text(
-            'تم إرسال رابط إعادة تعيين كلمة المرور إلى '
-            '$_isolateStart$email$_isolateEnd',
+            'تم إرسال رابط إعادة تعيين كلمة المرور إلى $isolatedEmail',
           ),
           duration: const Duration(seconds: 3),
         ),
