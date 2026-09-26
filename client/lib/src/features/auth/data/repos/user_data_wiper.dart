@@ -21,7 +21,10 @@ class UserDataWiper {
 
   void register(Future<void> Function() clear) => _clears.add(clear);
 
-  Future<void> dispose() => _subscription?.cancel() ?? Future.value();
+  Future<void> dispose() async {
+    _clears.clear();
+    await _subscription?.cancel();
+  }
 
   Future<void> _wipe() async {
     for (final clear in _clears.reversed) {
