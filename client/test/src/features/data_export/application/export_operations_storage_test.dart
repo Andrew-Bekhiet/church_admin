@@ -19,7 +19,10 @@ void main() {
     PathProviderPlatform.instance = mockPathProviderPlatform;
   });
 
-  tearDown(() => reset(PathProviderPlatform.instance));
+  tearDown(() {
+    reset(PathProviderPlatform.instance);
+    resetGlobalProviderContainer();
+  });
 
   test('saveFile downloads the file', () async {
     final mockDio = MockDio();
@@ -50,6 +53,7 @@ void main() {
     final unit = ExportOperationsStorage(
       dioClient: mockDio,
       fileSystem: mockFileSystem,
+      userDataWiper: MockUserDataWiper(),
     );
 
     int capturedProgressIndex = 0;
@@ -78,6 +82,7 @@ void main() {
     final unit = ExportOperationsStorage(
       dioClient: mockDio,
       fileSystem: mockFileSystem,
+      userDataWiper: MockUserDataWiper(),
     );
     final exportsDirectory = await unit.getExportsDirectory();
 
@@ -113,3 +118,5 @@ final class MockResponse extends Mock implements Response {}
 final class MockPathProviderPlatform extends Mock
     with MockPlatformInterfaceMixin
     implements PathProviderPlatform {}
+
+final class MockUserDataWiper extends Mock implements UserDataWiper {}

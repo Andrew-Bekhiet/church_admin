@@ -1,8 +1,8 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:dio/dio.dart';
 import 'package:file/file.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:meta/meta.dart';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart' as p;
 import 'package:rxdart/rxdart.dart';
@@ -15,16 +15,20 @@ class ExportOperationsStorage {
         (ref) => ExportOperationsStorage(
           dioClient: ref.read(dioProvider),
           fileSystem: ref.read(fileSystemProvider),
+          userDataWiper: ref.read(userDataWiperProvider),
         ),
       );
 
   final Dio _dioClient;
   final FileSystem _fileSystem;
 
-  const ExportOperationsStorage({
+  ExportOperationsStorage({
     required this._dioClient,
     required this._fileSystem,
-  });
+    required UserDataWiper userDataWiper,
+  }) {
+    userDataWiper.register(deleteSavedFiles);
+  }
 
   Future<DataExportFile> saveFile({
     required String downloadUrl,
@@ -54,6 +58,14 @@ class ExportOperationsStorage {
         .whereType<File>()
         .map(DataExportFile.fromFile)
         .toList();
+  }
+
+  Future<void> deleteSavedFiles() async {
+    if (kIsWeb) return;
+
+    final exportsDir = await getExportsDirectory();
+
+    if (await exportsDir.exists()) await exportsDir.delete(recursive: true);
   }
 
   Future<File> _getFileFromUri(Uri uri) async {

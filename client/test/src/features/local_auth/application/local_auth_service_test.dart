@@ -9,6 +9,7 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
+import '../../../fakes/fake_auth_repository.dart';
 import 'local_auth_service_test.mocks.dart';
 
 @GenerateNiceMocks(
@@ -33,6 +34,7 @@ void main() {
             localAuthPlugin: globalProviderContainer.read(
               localAuthPluginProvider,
             ),
+            userDataWiper: _MockUserDataWiper(),
           );
 
           addTearDown(unit.dispose);
@@ -70,6 +72,7 @@ void main() {
             localAuthPlugin: globalProviderContainer.read(
               localAuthPluginProvider,
             ),
+            userDataWiper: _MockUserDataWiper(),
           );
 
           addTearDown(unit.dispose);
@@ -101,6 +104,7 @@ void main() {
             localAuthPlugin: globalProviderContainer.read(
               localAuthPluginProvider,
             ),
+            userDataWiper: _MockUserDataWiper(),
           );
 
           addTearDown(unit.dispose);
@@ -166,6 +170,7 @@ void main() {
             localAuthPlugin: globalProviderContainer.read(
               localAuthPluginProvider,
             ),
+            userDataWiper: _MockUserDataWiper(),
           );
 
           addTearDown(unit.dispose);
@@ -203,6 +208,7 @@ void main() {
             localAuthPlugin: globalProviderContainer.read(
               localAuthPluginProvider,
             ),
+            userDataWiper: _MockUserDataWiper(),
           );
           addTearDown(unit.dispose);
         });
@@ -252,6 +258,7 @@ void main() {
             localAuthPlugin: globalProviderContainer.read(
               localAuthPluginProvider,
             ),
+            userDataWiper: _MockUserDataWiper(),
           );
 
           LocalAuthPlatform.instance = MockLocalAuthPlatform();
@@ -288,6 +295,7 @@ void main() {
             localAuthPlugin: globalProviderContainer.read(
               localAuthPluginProvider,
             ),
+            userDataWiper: _MockUserDataWiper(),
           );
 
           addTearDown(unit.dispose);
@@ -323,6 +331,7 @@ void main() {
             localAuthPlugin: globalProviderContainer.read(
               localAuthPluginProvider,
             ),
+            userDataWiper: _MockUserDataWiper(),
           );
 
           addTearDown(unit.dispose);
@@ -368,6 +377,7 @@ void main() {
             localAuthPlugin: globalProviderContainer.read(
               localAuthPluginProvider,
             ),
+            userDataWiper: _MockUserDataWiper(),
             timeToReauth: const Duration(minutes: 1),
           )..resetAuthState();
 
@@ -444,6 +454,7 @@ void _setUp() {
   final overrides = [
     _setUpCANotificationsService(),
     _setUpAuthBloc(),
+    authRepositoryProvider.overrideWithValue(FakeAuthRepository()),
   ];
 
   initGlobalProviderContainer(overrides);
@@ -480,3 +491,5 @@ Override _setUpAuthBloc() {
 
 class MockLocalAuthPlatform extends LocalAuthPlatformMock
     with MockPlatformInterfaceMixin {}
+
+final class _MockUserDataWiper extends Mock implements UserDataWiper {}

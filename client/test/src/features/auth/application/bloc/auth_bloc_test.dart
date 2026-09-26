@@ -58,6 +58,9 @@ AuthUser initialAuthUser = AuthUser(
   },
 );
 
+late StreamController<AuthUser?> userChangesController;
+late BehaviorSubject<bool> connectivityController;
+
 @GenerateNiceMocks([
   MockSpec<AuthStorage>(),
   MockSpec<FirebaseAuthRepository>(),
@@ -149,10 +152,9 @@ void main() {
             AuthStorage.I.saveUserPasswordHash('email', 'password'),
           ]);
 
-          verifyInOrder([
-            AuthStorage.I.writeAuthDataToCache(initialAuthUser),
-            AuthStorage.I.writeUserToCache(initialUserData),
-          ]);
+          verify(
+            AuthStorage.I.writeSessionToCache(initialAuthUser, initialUserData),
+          );
         },
       );
 
@@ -195,15 +197,14 @@ void main() {
             mockRepo.sendEmailVerification(),
           ]);
 
-          verifyInOrder([
-            AuthStorage.I.writeAuthDataToCache(initialAuthUser),
-            AuthStorage.I.writeUserToCache(initialUserData),
-          ]);
+          verify(
+            AuthStorage.I.writeSessionToCache(initialAuthUser, initialUserData),
+          );
         },
       );
 
       blocTest<AuthBloc, AuthState>(
-        'sign out',
+        'signing out ends the session',
         setUp: () async {
           await AuthStorage.I.writeAuthDataToCache(initialAuthUser);
           await AuthStorage.I.writeUserToCache(initialUserData);
@@ -227,11 +228,85 @@ void main() {
           verify(
             globalProviderContainer.read(authRepositoryProvider).signOut(),
           );
-
-          expect(AuthStorage.I.getAuthDataFromCache(), completion(isNull));
-          expect(AuthStorage.I.getUserFromCache(), completion(isNull));
-          expect(AuthStorage.I.getPasswordHash(), completion(isNull));
         },
+      );
+    });
+
+    group('session ending =>', () {
+      blocTest<AuthBloc, AuthState>(
+        'a session ended remotely ends the session',
+        build: _createAuthBloc,
+        act: (bloc) async {
+          await Future.delayed(Duration.zero);
+          userChangesController.add(null);
+        },
+        expect: () => [
+          isA<AuthAuthenticated>(),
+          isA<AuthUnauthenticated>(),
+        ],
+      );
+
+      blocTest<AuthBloc, AuthState>(
+        'a session revoked on the server is signed out once its token expires',
+        setUp: () async {
+          await _cacheExpiredAuthUser();
+
+          final mockRepo =
+              globalProviderContainer.read(authRepositoryProvider)
+                  as MockFirebaseAuthRepository;
+          when(mockRepo.refreshToken()).thenAnswer(
+            (_) async => throw const SessionRevokedException(null, null),
+          );
+        },
+        build: _createAuthBloc,
+        wait: Duration.zero,
+        expect: () => [
+          isA<AuthAuthenticated>(),
+          isA<AuthLoading>(),
+          isA<AuthUnauthenticated>(),
+        ],
+      );
+
+      blocTest<AuthBloc, AuthState>(
+        'failing to reach the server while checking the session keeps the user signed in',
+        setUp: () async {
+          await _cacheExpiredAuthUser();
+
+          final mockRepo =
+              globalProviderContainer.read(authRepositoryProvider)
+                  as MockFirebaseAuthRepository;
+          when(mockRepo.refreshToken()).thenAnswer(
+            (_) async => throw const AuthNetworkException(null, null),
+          );
+        },
+        build: _createAuthBloc,
+        act: (bloc) async {
+          await Future.delayed(Duration.zero);
+          connectivityController
+            ..add(false)
+            ..add(true);
+        },
+        expect: () => [isA<AuthAuthenticated>()],
+      );
+
+      blocTest<AuthBloc, AuthState>(
+        'a session with a fresh token stays signed in when the app reconnects',
+        setUp: () {
+          final mockRepo =
+              globalProviderContainer.read(authRepositoryProvider)
+                  as MockFirebaseAuthRepository;
+          when(mockRepo.refreshToken()).thenAnswer(
+            (_) async => throw const SessionRevokedException(null, null),
+          );
+        },
+        build: _createAuthBloc,
+        act: (bloc) async {
+          await Future.delayed(Duration.zero);
+          connectivityController
+            ..add(false)
+            ..add(true);
+        },
+        expect: () => [isA<AuthAuthenticated>()],
       );
     });
 
@@ -282,15 +357,10 @@ void main() {
     });
 
     group('token management =>', () {
-      late BehaviorSubject<bool> connectivityController;
-
       blocTest<AuthBloc, AuthState>(
-        'refresh token on connectivity change when token expired',
+        'refresh token when the app reconnects',
         setUp: () async {
-          connectivityController = BehaviorSubject.seeded(false);
-          when(
-            ConnectivityService.I.connectivityStream,
-          ).thenAnswer((_) => connectivityController.stream);
+          connectivityController.add(false);
 
           final oldUser = initialAuthUser;
           addTearDown(() => initialAuthUser = oldUser);
@@ -339,9 +409,6 @@ void main() {
               globalProviderContainer.read(authRepositoryProvider)
                   as MockFirebaseAuthRepository;
           verify(mockRepo.refreshToken());
-        },
-        tearDown: () async {
-          await connectivityController.close();
         },
       );
 
@@ -553,9 +620,22 @@ Future<Override> _setUpMockConnectivity() async {
   final mock = MockConnectivityService();
 
   when(mock.isConnected()).thenAnswer((_) async => true);
-  when(mock.connectivityStream).thenAnswer((_) => BehaviorSubject.seeded(true));
+  final controller = connectivityController = BehaviorSubject.seeded(true);
+  when(mock.connectivityStream).thenAnswer((_) => controller.stream);
+  addTearDown(controller.close);
 
   return connectivityServiceProvider.overrideWithValue(mock);
+}
+
+Future<void> _cacheExpiredAuthUser() async {
+  final oldUser = initialAuthUser;
+  addTearDown(() => initialAuthUser = oldUser);
+
+  initialAuthUser = initialAuthUser.copyWith(
+    claims: {...initialAuthUser.claims, 'exp': 0},
+  );
+
+  await AuthStorage.I.writeAuthDataToCache(initialAuthUser);
 }
 
 Future<Override> _setUpMockAuthStorage() async {
@@ -577,6 +657,10 @@ Future<Override> _setUpMockAuthStorage() async {
   when(
     mock.writeUserToCache(captureAny),
   ).thenAnswer((i) async => user = i.positionalArguments[0]);
+  when(mock.writeSessionToCache(captureAny, captureAny)).thenAnswer((i) async {
+    authUser = i.positionalArguments[0];
+    user = i.positionalArguments[1];
+  });
   when(mock.saveUserPasswordHash(captureAny, captureAny)).thenAnswer(
     (i) async => passwordHash =
         '${i.positionalArguments[0]}-hash-${i.positionalArguments[1]}',
@@ -589,7 +673,8 @@ Future<Override> _setUpMockAuthStorage() async {
 }
 
 Future<Override> _setUpMockAuthRepository() async {
-  final controller = StreamController<AuthUser?>.broadcast(sync: true);
+  final controller = userChangesController =
+      StreamController<AuthUser?>.broadcast(sync: true);
 
   final mock = MockFirebaseAuthRepository();
 

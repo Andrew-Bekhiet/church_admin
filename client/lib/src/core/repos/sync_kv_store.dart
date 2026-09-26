@@ -22,6 +22,9 @@ interface class SyncKVStore<T> {
   static Future<void> flushAll() =>
       Future.wait(_loadedStores.values.map((store) => store.flush()));
 
+  static Future<void> clearAllLoaded() =>
+      Future.wait(_loadedStores.values.map((store) => store.clear()));
+
   static SyncKVStore<T> fromLoaded<T>(String name) {
     final store = _loadedStores[name];
 

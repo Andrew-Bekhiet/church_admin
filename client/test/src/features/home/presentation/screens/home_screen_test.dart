@@ -1,8 +1,12 @@
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:rxdart/rxdart.dart';
 
 import '../../../../fakes/fake_feature_flags_repo.dart';
 import '../../../../utils.dart';
@@ -32,9 +36,22 @@ class _MockUserPreferencesService extends Mock
     implements UserPreferencesService {}
 
 void main() {
+  late _MockAuthBloc authBloc;
+  late StreamController<AuthState> authStates;
+
   setUp(() {
-    final authBloc = _MockAuthBloc();
+    authStates = StreamController<AuthState>.broadcast();
+    addTearDown(authStates.close);
+
+    authBloc = _MockAuthBloc();
     when(() => authBloc.userDataStream).thenAnswer((_) => const Stream.empty());
+    when(() => authBloc.stream).thenAnswer((_) => authStates.stream);
+    when(() => authBloc.isSignedIn).thenReturn(true);
+    when(() => authBloc.isSignedInStream).thenAnswer(
+      (_) => authStates.stream
+          .map((state) => state is! AuthUnauthenticated)
+          .startWith(true),
+    );
 
     final personsDAO = _MockPersonsDAO();
     when(
@@ -119,5 +136,44 @@ void main() {
     await tester.pump();
 
     expect(homeBloc.isClosed, isTrue);
+  });
+
+  testWidgets('signing out from the lock screen leaves it for the login page', (
+    tester,
+  ) async {
+    when(() => LocalAuthService.I.shouldAuthenticate).thenReturn(true);
+
+    final signedIn = ValueNotifier(true);
+    addTearDown(signedIn.dispose);
+    final router = GoRouter(
+      refreshListenable: signedIn,
+      redirect: (_, state) =>
+          signedIn.value || state.matchedLocation == '/login' ? null : '/login',
+      routes: [
+        GoRoute(path: '/', builder: (_, _) => const HomeScreen()),
+        GoRoute(path: '/login', builder: (_, _) => const SizedBox.shrink()),
+      ],
+    );
+    addTearDown(router.dispose);
+
+    await tester.pumpWidget(MaterialApp.router(routerConfig: router));
+    await tester.pump();
+
+    expect(
+      find.byType(AuthenticateScreen, skipOffstage: false),
+      findsOneWidget,
+    );
+
+    when(() => authBloc.isSignedIn).thenReturn(false);
+    authStates.add(const AuthUnauthenticated());
+    signedIn.value = false;
+    await tester.pump(const Duration(seconds: 1));
+    await tester.pump();
+
+    expect(find.byType(AuthenticateScreen, skipOffstage: false), findsNothing);
+
+    await tester.pumpWidget(const SizedBox.shrink());
+    resetGlobalProviderContainer();
+    await tester.pump();
   });
 }

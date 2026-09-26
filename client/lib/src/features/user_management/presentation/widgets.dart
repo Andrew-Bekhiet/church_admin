@@ -17,4 +17,5 @@ export 'widgets/manage_users_list_footer.dart';
 export 'widgets/manage_users_subgroup_header.dart';
 export 'widgets/manage_users_view_toggle.dart';
 export 'widgets/permissions_set_widget.dart';
+export 'widgets/send_password_reset_button.dart';
 export 'widgets/service_admin_scope_fields.dart';

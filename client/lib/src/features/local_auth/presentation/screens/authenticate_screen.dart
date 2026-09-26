@@ -17,6 +17,7 @@ abstract final class AuthenticateScreenKeys {
   static const Key passwordFieldKey = Key('password_text_field');
   static const Key biometricsButtonKey = Key('biometrics_button');
   static const Key submitButtonKey = Key('submit_button');
+  static const Key signOutButtonKey = Key('sign_out_button');
 }
 
 class _AuthenticateScreenState extends State<AuthenticateScreen> {
@@ -39,6 +40,17 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
       appBar: AppBar(
         toolbarHeight: size.width,
         leading: widget.next != null ? const BackButton() : null,
+        actions: [
+          Align(
+            alignment: AlignmentDirectional.topEnd,
+            child: TextButton.icon(
+              key: AuthenticateScreenKeys.signOutButtonKey,
+              onPressed: _confirmSignOut,
+              icon: const Icon(Symbols.logout),
+              label: const Text('تسجيل الخروج'),
+            ),
+          ),
+        ],
         flexibleSpace: FlexibleSpaceBar(
           background: SafeArea(
             child: Image.asset(_getAssetImage(), fit: BoxFit.scaleDown),
@@ -153,6 +165,19 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
         );
       }
     }
+  }
+
+  Future<void> _confirmSignOut() async {
+    final confirmed =
+        await showDialog<bool>(
+          context: context,
+          builder: (context) => const SignOutConfirmationDialog(),
+        ) ??
+        false;
+
+    if (!confirmed || !mounted) return;
+
+    AuthBloc.I.add(const SignOut());
   }
 
   @override

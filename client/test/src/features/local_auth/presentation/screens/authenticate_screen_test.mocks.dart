@@ -268,6 +268,18 @@ class MockAuthStorage extends _i1.Mock implements _i4.AuthStorage {
           as _i5.Future<void>);
 
   @override
+  _i5.Future<void> writeSessionToCache(
+    _i4.AuthUser? authUser,
+    _i4.User? user,
+  ) =>
+      (super.noSuchMethod(
+            Invocation.method(#writeSessionToCache, [authUser, user]),
+            returnValue: _i5.Future<void>.value(),
+            returnValueForMissingStub: _i5.Future<void>.value(),
+          )
+          as _i5.Future<void>);
+
+  @override
   _i5.Future<_i4.User?> getUserFromCache() =>
       (super.noSuchMethod(
             Invocation.method(#getUserFromCache, []),
@@ -371,6 +383,12 @@ class MockLocalAuthService extends _i1.Mock implements _i4.LocalAuthService {
   @override
   void revokeAuthForPath(String? path) => super.noSuchMethod(
     Invocation.method(#revokeAuthForPath, [path]),
+    returnValueForMissingStub: null,
+  );
+
+  @override
+  void revokeAuthForAllPaths() => super.noSuchMethod(
+    Invocation.method(#revokeAuthForAllPaths, []),
     returnValueForMissingStub: null,
   );
 

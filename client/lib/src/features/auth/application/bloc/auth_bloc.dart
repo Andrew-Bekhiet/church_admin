@@ -137,9 +137,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           .asStream()
           .concatWith([liveUserStream])
           .distinct()
-          .doOnData((data) async {
-            await _authStorage.writeAuthDataToCache(data.$1);
-            await _authStorage.writeUserToCache(data.$2);
+          .doOnData((data) {
+            final (authUser, userData) = data;
+
+            if (authUser == null) return;
+
+            unawaited(_authStorage.writeSessionToCache(authUser, userData));
           }),
       onData: (data) {
         final (authUser, userData) = data;
@@ -167,25 +170,43 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     _refreshTokenTimer?.cancel();
     _refreshTokenTimer = Timer(
       _getTokenExpiry(authUser).difference(DateTime.now()),
-      _authRepository.refreshToken,
+      _refreshTokenOrSignOut,
     );
   }
 
   Future<void> _listenToConnectivityChanges(Emitter<AuthState> emit) {
     return emit.onEach(
-      _connectivityStream,
-      onData: (isConnected) {
-        final state = this.state;
-
-        if (isConnected && state is AuthAuthenticated) {
-          final tokenExpiry = _getTokenExpiry(state.authUser);
-
-          if (tokenExpiry.isBefore(DateTime.now())) {
-            unawaited(_authRepository.refreshToken());
-          }
-        }
-      },
+      _connectivityStream.distinct().where(
+        (isConnected) =>
+            isConnected &&
+            switch (state) {
+              AuthAuthenticated(:final authUser) => _getTokenExpiry(
+                authUser,
+              ).isBefore(DateTime.now()),
+              _ => false,
+            },
+      ),
+      onData: (_) => unawaited(_refreshTokenOrSignOut()),
     );
+  }
+
+  Future<void> _refreshTokenOrSignOut() async {
+    try {
+      await _authRepository.refreshToken();
+    } catch (e, stackTrace) {
+      switch (e) {
+        case SessionRevokedException():
+          add(const SignOut());
+
+        case AuthNetworkException() || StateError():
+          return;
+
+        default:
+          await LoggingService.I.exception(
+            LogRecord(error: e, stackTrace: stackTrace),
+          );
+      }
+    }
   }
 
   DateTime _getTokenExpiry(AuthUser authUser) {
@@ -286,7 +307,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(AuthLoading(previousState: state));
 
       await _authRepository.signOut();
-      await _authStorage.clearAll();
 
       emit(const AuthUnauthenticated());
     } catch (e, stackTrace) {

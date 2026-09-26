@@ -12,7 +12,14 @@ interface class AuthStorage {
 
   final FlutterSecureStorage _secureStorage;
 
-  AuthStorage({required this._secureStorage});
+  Future<void> _pendingSessionWrite = Future.value();
+
+  AuthStorage({
+    required this._secureStorage,
+    required UserDataWiper userDataWiper,
+  }) {
+    userDataWiper.register(clearAll);
+  }
 
   Future<AuthUser?> getAuthDataFromCache() async {
     final authDataJson = await _secureStorage.read(key: authUserKey);
@@ -27,6 +34,21 @@ interface class AuthStorage {
       key: authUserKey,
       value: authData != null ? jsonEncode(authData.toJson()) : null,
     );
+  }
+
+  Future<void> writeSessionToCache(AuthUser authUser, User? user) {
+    final write = _pendingSessionWrite.then<void>((_) async {
+      await writeAuthDataToCache(authUser);
+      await writeUserToCache(user);
+    });
+
+    _pendingSessionWrite = write.catchError(
+      (Object error, StackTrace stackTrace) => LoggingService.I.exception(
+        LogRecord(error: error, stackTrace: stackTrace),
+      ),
+    );
+
+    return write;
   }
 
   Future<User?> getUserFromCache() async {

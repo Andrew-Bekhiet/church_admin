@@ -3,5 +3,7 @@ export 'application/edit_user_cubit.dart';
 export 'application/manage_users_cubit.dart';
 export 'application/manage_users_state.dart';
 export 'application/manage_users_view.dart';
+export 'application/password_reset_cubit.dart';
+export 'application/password_reset_state.dart';
 export 'application/user_form_cubit.dart';
 export 'application/user_form_state.dart';

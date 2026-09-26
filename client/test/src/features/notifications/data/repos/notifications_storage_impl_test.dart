@@ -7,6 +7,8 @@ import 'notifications_storage_impl_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<KVStore>()])
 void main() {
+  tearDown(resetGlobalProviderContainer);
+
   group(
     'NotificationsStorageImpl =>',
     () {
@@ -26,7 +28,10 @@ void main() {
             mockLazyBox.get('1'),
           ).thenAnswer((_) async => expectedNotification);
 
-          final unit = NotificationsStorageImpl(mockLazyBox);
+          final unit = NotificationsStorageImpl(
+            mockLazyBox,
+            userDataWiper: _MockUserDataWiper(),
+          );
 
           final actualNotification = await unit.readNotification('1');
 
@@ -44,7 +49,10 @@ void main() {
           mockLazyBox.get('1'),
         ).thenAnswer((_) async => expectedNotification);
 
-        final unit = NotificationsStorageImpl(mockLazyBox);
+        final unit = NotificationsStorageImpl(
+          mockLazyBox,
+          userDataWiper: _MockUserDataWiper(),
+        );
 
         await unit.writeNotification(expectedNotification);
 
@@ -55,3 +63,5 @@ void main() {
     },
   );
 }
+
+final class _MockUserDataWiper extends Mock implements UserDataWiper {}

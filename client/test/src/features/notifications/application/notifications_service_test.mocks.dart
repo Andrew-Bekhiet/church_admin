@@ -1686,6 +1686,15 @@ class MockNotificationsStorage extends _i1.Mock
             returnValueForMissingStub: _i11.Future<_i4.Notification?>.value(),
           )
           as _i11.Future<_i4.Notification?>);
+
+  @override
+  _i11.Future<void> clear() =>
+      (super.noSuchMethod(
+            Invocation.method(#clear, []),
+            returnValue: _i11.Future<void>.value(),
+            returnValueForMissingStub: _i11.Future<void>.value(),
+          )
+          as _i11.Future<void>);
 }
 
 /// A class which mocks [NotificationsSettingsStorage].

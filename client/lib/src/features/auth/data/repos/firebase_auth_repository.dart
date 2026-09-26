@@ -101,11 +101,22 @@ class FirebaseAuthRepository implements AuthRepository {
 
   @override
   Future<void> refreshToken() async {
-    if (_auth.currentUser == null) {
+    final user = _auth.currentUser;
+    if (user == null) {
       throw StateError('Must be signed in');
     }
 
-    await _auth.currentUser!.getIdToken(true);
+    try {
+      await user.getIdToken(true);
+    } on firebase_auth.FirebaseAuthException catch (e, stackTrace) {
+      throw switch (e.code) {
+        'user-token-expired' ||
+        'invalid-user-token' ||
+        'user-disabled' ||
+        'user-not-found' => SessionRevokedException(e, stackTrace),
+        _ => _toAuthException(e, stackTrace),
+      };
+    }
   }
 
   @override

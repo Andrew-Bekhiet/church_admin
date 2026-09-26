@@ -5,6 +5,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../../../fakes/fake_auth_repository.dart';
+
 void main() {
   final binding = TestWidgetsFlutterBinding.ensureInitialized();
 
@@ -45,10 +47,12 @@ void main() {
 
     initGlobalProviderContainer([
       authBlocProvider.overrideWithValue(authBloc),
+      authRepositoryProvider.overrideWithValue(FakeAuthRepository()),
       localAuthServiceProvider.overrideWith(
         (ref) => LocalAuthService.noInitialAuth(
           localAuthPlugin: ref.read(localAuthPluginProvider),
           notificationService: notificationsService,
+          userDataWiper: _MockUserDataWiper(),
         ),
       ),
     ]);
@@ -125,3 +129,5 @@ final class _MockNotificationsService extends Mock
     implements NotificationsService {}
 
 final class _MockBuildContext extends Mock implements BuildContext {}
+
+final class _MockUserDataWiper extends Mock implements UserDataWiper {}
