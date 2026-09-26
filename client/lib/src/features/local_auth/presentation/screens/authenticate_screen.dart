@@ -40,6 +40,13 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
       appBar: AppBar(
         toolbarHeight: size.width,
         leading: widget.next != null ? const BackButton() : null,
+        actions: [
+          TextButton(
+            key: AuthenticateScreenKeys.signOutButtonKey,
+            onPressed: _confirmSignOut,
+            child: const Text('تسجيل الخروج'),
+          ),
+        ],
         flexibleSpace: FlexibleSpaceBar(
           background: SafeArea(
             child: Image.asset(_getAssetImage(), fit: BoxFit.scaleDown),
@@ -87,11 +94,6 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
 
                   return const SizedBox();
                 },
-              ),
-              TextButton(
-                key: AuthenticateScreenKeys.signOutButtonKey,
-                onPressed: _confirmSignOut,
-                child: const Text('تسجيل الخروج'),
               ),
             ],
           ),

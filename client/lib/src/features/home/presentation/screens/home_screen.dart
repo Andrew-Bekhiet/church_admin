@@ -18,7 +18,7 @@ class _HomeScreenState extends State<HomeScreen> {
     builder: (context) => const AuthenticateScreen(),
     opaque: true,
   );
-  late final StreamSubscription<void> _localAuthListener;
+  late final StreamSubscription<bool> _localAuthListener;
 
   late final AppLifecycleListener _appLifecycleListener;
 
@@ -59,12 +59,15 @@ class _HomeScreenState extends State<HomeScreen> {
       (_) => !_authEntry.mounted ? overlay.insert(_authEntry) : null,
     );
 
-    _localAuthListener = LocalAuthService.I.refreshUIStream
-        .mergeWith([AuthBloc.I.stream])
-        .listen(
-          (_) {
+    _localAuthListener =
+        Rx.combineLatest2<bool, void, bool>(
+          AuthBloc.I.isSignedInStream,
+          LocalAuthService.I.refreshUIStream.startWith(null),
+          (isSignedIn, _) => isSignedIn,
+        ).listen(
+          (isSignedIn) {
             final mustAuthenticate =
-                AuthBloc.I.isSignedIn && LocalAuthService.I.shouldAuthenticate;
+                isSignedIn && LocalAuthService.I.shouldAuthenticate;
 
             if (mustAuthenticate && !_authEntry.mounted) {
               overlay.insert(_authEntry);

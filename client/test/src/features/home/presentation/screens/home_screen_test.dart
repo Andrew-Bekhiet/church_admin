@@ -6,6 +6,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:rxdart/rxdart.dart';
 
 import '../../../../fakes/fake_feature_flags_repo.dart';
 import '../../../../utils.dart';
@@ -46,6 +47,11 @@ void main() {
     when(() => authBloc.userDataStream).thenAnswer((_) => const Stream.empty());
     when(() => authBloc.stream).thenAnswer((_) => authStates.stream);
     when(() => authBloc.isSignedIn).thenReturn(true);
+    when(() => authBloc.isSignedInStream).thenAnswer(
+      (_) => authStates.stream
+          .map((state) => state is! AuthUnauthenticated)
+          .startWith(true),
+    );
 
     final personsDAO = _MockPersonsDAO();
     when(
@@ -150,6 +156,8 @@ void main() {
 
     await tester.pumpWidget(MaterialApp.router(routerConfig: router));
     await tester.pump();
+
+    expect(find.byType(AuthenticateScreen), findsOneWidget);
 
     when(() => authBloc.isSignedIn).thenReturn(false);
     authStates.add(const AuthUnauthenticated());
