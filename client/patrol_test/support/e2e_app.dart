@@ -169,7 +169,7 @@ abstract final class E2eApp {
     }
 
     ErrorWidget.builder = _testErrorWidgetBuilder!;
-    debugPrint('E2E uncaught app errors: ${uncaughtAppErrors.length}');
+    expect(uncaughtAppErrors, isEmpty);
   }
 
   static void _recordUncaughtAppError(Object error, StackTrace stackTrace) {

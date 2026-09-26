@@ -1,4 +1,5 @@
 import 'package:church_admin/church_admin.dart';
+import 'package:church_admin/src/features/user_management/presentation/widgets/manage_users_flat_list.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:patrol/patrol.dart';
@@ -79,10 +80,21 @@ void main() {
       final adminUid =
           (await E2eBackend.userByEmail(E2eBackend.adminEmail))['uid']
               as String;
-      for (final hiddenUid in [outOfScopeUid, adminUid]) {
-        await tester.waitForAbsent(tester.viewableObject(hiddenUid));
-      }
-      await tester.waitFor(tester.viewableObject(inScopeUid));
+      final loadedList = find.byWidgetPredicate(
+        (widget) =>
+            widget is ManageUsersFlatList &&
+            !widget.isLoading &&
+            widget.users.any((user) => user.id == inScopeUid),
+      );
+      await tester.waitFor(loadedList);
+      final listedUserIds = tester
+          .widget<ManageUsersFlatList>(loadedList)
+          .users
+          .map((user) => user.id)
+          .toSet();
+      expect(listedUserIds, contains(inScopeUid));
+      expect(listedUserIds, isNot(contains(outOfScopeUid)));
+      expect(listedUserIds, isNot(contains(adminUid)));
 
       step('the manager invites a user linked to a person in their service');
       await manager.startCreatingUser();
