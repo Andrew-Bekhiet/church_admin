@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# Compiles the suite once instead of once per file (flutter/flutter#90225).
+# Compiles the suite once instead of once per file, working around
+# [flutter/flutter#90225](https://github.com/flutter/flutter/issues/90225).
 # Writes test/test_bundle.dart and prints the files it could not bundle,
 # so CI can run: flutter test test/test_bundle.dart $(scripts/generate_test_bundle.sh)
 # An async main cannot run inside group(), so those files stay separate.
