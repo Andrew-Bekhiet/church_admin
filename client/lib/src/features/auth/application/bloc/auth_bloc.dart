@@ -198,7 +198,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
   Future<void> _listenToConnectivityChanges(Emitter<AuthState> emit) {
     return emit.onEach(
-      _connectivityStream.where(
+      _connectivityStream.distinct().where(
         (isConnected) => isConnected && state is AuthAuthenticated,
       ),
       onData: (_) => unawaited(_verifySession()),

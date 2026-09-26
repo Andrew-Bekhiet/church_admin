@@ -286,7 +286,9 @@ void main() {
         build: _createAuthBloc,
         act: (bloc) async {
           await Future.delayed(Duration.zero);
-          connectivityController.add(true);
+          connectivityController
+            ..add(false)
+            ..add(true);
         },
         expect: () => [
           isA<AuthAuthenticated>(),
@@ -311,7 +313,9 @@ void main() {
         build: _createAuthBloc,
         act: (bloc) async {
           await Future.delayed(Duration.zero);
-          connectivityController.add(true);
+          connectivityController
+            ..add(false)
+            ..add(true);
         },
         expect: () => [isA<AuthAuthenticated>()],
         verify: (bloc) {
@@ -368,7 +372,7 @@ void main() {
 
     group('token management =>', () {
       blocTest<AuthBloc, AuthState>(
-        'refresh token on connectivity change when token expired',
+        'refresh token when the app reconnects',
         setUp: () async {
           connectivityController.add(false);
 
