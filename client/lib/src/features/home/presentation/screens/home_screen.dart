@@ -33,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return OverlayPortal(
       controller: _authOverlayController,
-      overlayChildBuilder: (context) => const AuthenticateScreen(),
+      overlayChildBuilder: (context) => const BiometricsAuthScreen(),
       child: Scaffold(
         drawer: HomeDrawer(homeBloc: homeBloc),
         appBar: HomeAppBar(homeBloc: homeBloc),

@@ -1,5 +1,5 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:fake_async/fake_async.dart';
+import 'package:clock/clock.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
@@ -26,10 +26,12 @@ void main() {
   );
 
   late LocalAuthService localAuthService;
+  late DateTime now;
 
   String? redirect() => route.redirect(_MockBuildContext(), routerState);
 
   setUp(() {
+    now = DateTime(2026);
     binding.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
 
     final authBloc = _MockAuthBloc();
@@ -53,6 +55,7 @@ void main() {
           localAuthPlugin: ref.read(localAuthPluginProvider),
           notificationService: notificationsService,
           userDataWiper: _MockUserDataWiper(),
+          clock: Clock(() => now),
         ),
       ),
     ]);
@@ -93,20 +96,18 @@ void main() {
         AppLifecycleState.resumed,
       ].forEach(binding.handleAppLifecycleStateChanged);
 
-      fakeAsync((async) {
-        localAuthService.resetAuthState(path: route.location);
-        redirect();
+      localAuthService.resetAuthState(path: route.location);
+      redirect();
 
-        turnScreenOff();
-        async.elapse(localAuthService.timeToReauth);
-        turnScreenOn();
+      turnScreenOff();
+      now = now.add(localAuthService.timeToReauth);
+      turnScreenOn();
 
-        expect(localAuthService.shouldAuthenticate, isTrue);
+      expect(localAuthService.shouldAuthenticate, isTrue);
 
-        localAuthService.resetAuthState();
+      localAuthService.resetAuthState();
 
-        expect(redirect(), isNull);
-      });
+      expect(redirect(), isNull);
     },
   );
 

@@ -116,6 +116,18 @@ void main() {
 
   tearDown(defaultTearDown);
 
+  testWidgets('unlocked home screen has no authentication overlay', (
+    tester,
+  ) async {
+    await tester.pumpWidget(const MaterialApp(home: HomeScreen()));
+    await tester.pump();
+
+    expect(find.byType(BiometricsAuthScreen), findsNothing);
+    await tester.pumpWidget(const SizedBox.shrink());
+    resetGlobalProviderContainer();
+    await tester.pump();
+  });
+
   testWidgets('unmounting the home screen leaves the shared home bloc open', (
     tester,
   ) async {
@@ -160,7 +172,7 @@ void main() {
     await tester.pump();
 
     expect(
-      find.byType(AuthenticateScreen, skipOffstage: false),
+      find.byType(BiometricsAuthScreen, skipOffstage: false),
       findsOneWidget,
     );
 
@@ -170,7 +182,10 @@ void main() {
     await tester.pump(const Duration(seconds: 1));
     await tester.pump();
 
-    expect(find.byType(AuthenticateScreen, skipOffstage: false), findsNothing);
+    expect(
+      find.byType(BiometricsAuthScreen, skipOffstage: false),
+      findsNothing,
+    );
 
     await tester.pumpWidget(const SizedBox.shrink());
     resetGlobalProviderContainer();

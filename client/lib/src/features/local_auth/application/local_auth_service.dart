@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
+import 'package:clock/clock.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -17,16 +18,24 @@ class LocalAuthService with WidgetsBindingObserver {
   final LocalAuthentication _localAuthPlugin;
 
   final NotificationsService _notificationsService;
+  final Clock _clock;
   bool _shouldAuthenticate = false;
 
   final Set<String> _authenticatedPaths = {};
 
-  Timer? _timer;
+  DateTime? _lastActiveAt;
   Completer<bool>? _localAuthCompleter;
   final StreamController<void> _refreshUI = StreamController.broadcast()
     ..add(null);
 
-  bool get shouldAuthenticate => _shouldAuthenticate;
+  bool get shouldAuthenticate {
+    if (_shouldAuthenticate) return true;
+    if (_lastActiveAt case final lastActiveAt?) {
+      return _clock.now().difference(lastActiveAt) >= timeToReauth;
+    }
+
+    return false;
+  }
 
   Stream<void> get refreshUIStream => _refreshUI.stream;
 
@@ -36,7 +45,9 @@ class LocalAuthService with WidgetsBindingObserver {
     this.timeToReauth = const Duration(seconds: 30),
     CurrentPlatformService? currentPlatformService,
     NotificationsService? notificationService,
+    Clock? clock,
   }) : _notificationsService = notificationService ?? NotificationsService.I,
+       _clock = clock ?? const Clock(),
        _currentPlatformService =
            currentPlatformService ?? CurrentPlatformService.I {
     userDataWiper.register(revokeAuthForAllPaths);
@@ -53,7 +64,9 @@ class LocalAuthService with WidgetsBindingObserver {
     this.timeToReauth = const Duration(seconds: 30),
     CurrentPlatformService? currentPlatformService,
     NotificationsService? notificationService,
+    Clock? clock,
   }) : _notificationsService = notificationService ?? NotificationsService.I,
+       _clock = clock ?? const Clock(),
        _currentPlatformService =
            currentPlatformService ?? CurrentPlatformService.I {
     userDataWiper.register(revokeAuthForAllPaths);
@@ -70,16 +83,17 @@ class LocalAuthService with WidgetsBindingObserver {
 
   void revokeAuthForAllPaths() => _authenticatedPaths.clear();
 
-  Timer _createTimer() => Timer(timeToReauth, scheduleReauth);
-
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (WidgetsBinding.instance.lifecycleState == AppLifecycleState.resumed) {
-      if (shouldAuthenticate) _refreshUI.add(null);
-      _timer?.cancel();
-      _timer = null;
+    if (state == AppLifecycleState.resumed) {
+      final needsReauth = shouldAuthenticate;
+      _lastActiveAt = null;
+      if (needsReauth) {
+        scheduleReauth();
+        _refreshUI.add(null);
+      }
     } else if (AuthBloc.I.isSignedIn && !shouldAuthenticate) {
-      _timer ??= _createTimer();
+      _lastActiveAt ??= _clock.now();
     }
   }
 
@@ -95,6 +109,7 @@ class LocalAuthService with WidgetsBindingObserver {
 
   void resetAuthState({String? path}) {
     _shouldAuthenticate = false;
+    _lastActiveAt = null;
     if (path != null) _authenticatedPaths.add(path);
 
     _refreshUI.add(null);
@@ -104,8 +119,6 @@ class LocalAuthService with WidgetsBindingObserver {
     if (notificationsService.isPaused) {
       notificationsService.resumeListeners();
     }
-    _timer?.cancel();
-    _timer = null;
   }
 
   Future<bool> canCheckBiometrics() async {
@@ -146,11 +159,11 @@ class LocalAuthService with WidgetsBindingObserver {
         );
   }
 
-  Future<bool> verifyPassword({
-    required String email,
-    required String password,
-    String? storedPasswordHash,
-  }) async {
+  Future<bool> verifyPassword(String password) async {
+    final email = AuthBloc.I.currentUser?.email;
+    if (email == null) return false;
+
+    final storedPasswordHash = await AuthStorage.I.getPasswordHash();
     final keyBytes = await EncryptionService.I.deriveKey(
       password: password,
       salt: email,
@@ -165,7 +178,6 @@ class LocalAuthService with WidgetsBindingObserver {
 
   Future<void> dispose() async {
     WidgetsBinding.instance.removeObserver(this);
-    _timer?.cancel();
     await _refreshUI.close();
   }
 }

@@ -1,6 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
-import 'dart:typed_data';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:device_info_plus_platform_interface/device_info_plus_platform_interface.dart';
@@ -11,17 +9,14 @@ import 'package:go_router/go_router.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:sembast/sembast.dart';
 import 'package:spot/spot.dart';
 
 import '../../../../fakes/fake_device_info.dart';
 import '../../../../utils.dart';
-import 'authenticate_screen_test.mocks.dart';
+import 'biometrics_auth_screen_test.mocks.dart';
 
 const testPassword = r'password\1234';
-const testPasswordHash = 'hash-password1234';
 const email = 'email';
-
 const AuthUser _fakeUser = AuthUser(
   uid: 'uid',
   email: email,
@@ -30,10 +25,8 @@ const AuthUser _fakeUser = AuthUser(
 );
 
 const User _fakeUserData = User(uid: 'uid', email: email, name: 'name');
-
 @GenerateNiceMocks([
   MockSpec<AuthBloc>(),
-  MockSpec<AuthStorage>(),
   MockSpec<LocalAuthService>(),
   MockSpec<GoRouterState>(),
   MockSpec<BuildContext>(),
@@ -48,7 +41,7 @@ void main() {
   const size = Size(100, 1365 * 3);
 
   testWidgets(
-    'Authenticate Screen => Key elements',
+    'Biometrics Auth Screen => Key elements',
     (tester) async {
       await tester.binding.setSurfaceSize(size);
 
@@ -59,7 +52,7 @@ void main() {
             builder: (context) {
               return MediaQuery(
                 data: MediaQuery.of(context).copyWith(size: size),
-                child: const AuthenticateScreen(),
+                child: const BiometricsAuthScreen(),
               );
             },
           ),
@@ -85,12 +78,12 @@ void main() {
       );
 
       spotKey(
-        AuthenticateScreenKeys.passwordFieldKey,
+        BiometricsAuthScreenKeys.passwordFieldKey,
       ).spot<PasswordFormField>().existsOnce();
 
-      spotKey(AuthenticateScreenKeys.submitButtonKey).existsOnce();
+      spotKey(BiometricsAuthScreenKeys.submitButtonKey).existsOnce();
 
-      spotKey(AuthenticateScreenKeys.biometricsButtonKey)
+      spotKey(BiometricsAuthScreenKeys.biometricsButtonKey)
           .spotFinder(find.bySubtype<FilledButton>())
           .existsExactlyNTimes(
             authVariant.currentValue == AuthenticationVariantEnum.password
@@ -102,10 +95,9 @@ void main() {
   );
 
   testWidgets(
-    'Authenticate Screen => Authentication',
+    'Biometrics Auth Screen => Authentication',
     (tester) async {
       final authCompleter = Completer<bool>();
-      final widgetKey = GlobalKey();
 
       when(
         LocalAuthService.I.authenticate(),
@@ -118,7 +110,7 @@ void main() {
             builder: (context) {
               return MediaQuery(
                 data: MediaQuery.of(context).copyWith(size: size),
-                child: AuthenticateScreen(key: widgetKey),
+                child: const BiometricsAuthScreen(),
               );
             },
           ),
@@ -131,32 +123,28 @@ void main() {
 
       if (authVariant.currentValue == AuthenticationVariantEnum.password) {
         await act.enterText(
-          spotKey(AuthenticateScreenKeys.passwordFieldKey),
+          spotKey(BiometricsAuthScreenKeys.passwordFieldKey),
           'wrong password',
         );
-        await act.tap(spotKey(AuthenticateScreenKeys.submitButtonKey));
+        await act.tap(spotKey(BiometricsAuthScreenKeys.submitButtonKey));
 
         await tester.pumpAndSettle();
 
         spotKey(
-          AuthenticateScreenKeys.passwordFieldKey,
+          BiometricsAuthScreenKeys.passwordFieldKey,
         ).spotText('كلمة سر خاطئة!').existsOnce();
 
         await act.enterText(
-          spotKey(AuthenticateScreenKeys.passwordFieldKey),
+          spotKey(BiometricsAuthScreenKeys.passwordFieldKey),
           testPassword,
         );
         expect(find.text('كلمة سر خاطئة!'), findsNothing);
-        await act.tap(spotKey(AuthenticateScreenKeys.submitButtonKey));
+        await act.tap(spotKey(BiometricsAuthScreenKeys.submitButtonKey));
 
         await tester.pumpAndSettle();
 
         verifyInOrder([
-          LocalAuthService.I.verifyPassword(
-            email: _fakeUser.email,
-            password: testPassword,
-            storedPasswordHash: testPasswordHash,
-          ),
+          LocalAuthService.I.verifyPassword(testPassword),
           LocalAuthService.I.resetAuthState(),
         ]);
         verifyNever(LocalAuthService.I.authenticate());
@@ -175,7 +163,7 @@ void main() {
           LocalAuthService.I.authenticate(),
         ).thenAnswer((_) async => authCompleter2.future);
 
-        await act.tap(spotKey(AuthenticateScreenKeys.biometricsButtonKey));
+        await act.tap(spotKey(BiometricsAuthScreenKeys.biometricsButtonKey));
 
         authCompleter2.complete(true);
 
@@ -203,15 +191,15 @@ void main() {
       ),
     );
     Overlay.of(tester.element(find.byType(Scaffold))).insert(
-      OverlayEntry(builder: (context) => const AuthenticateScreen()),
+      OverlayEntry(builder: (context) => const BiometricsAuthScreen()),
     );
     await tester.pumpAndSettle();
 
     await act.enterText(
-      spotKey(AuthenticateScreenKeys.passwordFieldKey),
+      spotKey(BiometricsAuthScreenKeys.passwordFieldKey),
       'wrong password',
     );
-    await act.tap(spotKey(AuthenticateScreenKeys.submitButtonKey));
+    await act.tap(spotKey(BiometricsAuthScreenKeys.submitButtonKey));
     await tester.pumpAndSettle();
 
     expect(find.text('كلمة سر خاطئة!').hitTestable(), findsOneWidget);
@@ -221,7 +209,7 @@ void main() {
     );
   });
 
-  group('Authenticate Screen => Route =>', () {
+  group('Authenticate Route =>', () {
     test('No Signed In User', () async {
       initGlobalProviderContainer([_setUpAuthBloc(), _setUpLocalAuth()]);
 
@@ -385,25 +373,14 @@ class AuthenticationVariant extends ValueVariant<AuthenticationVariantEnum> {
   ) async {
     await super.setUp(value);
 
-    final encryptionService = FakeEncryptionService();
-
     final overrides = [
-      encryptionServiceProvider.overrideWithValue(encryptionService),
       _setUpAuthBloc(),
       _setUpLocalAuthService(value),
-      _setUpAuthStorage(encryptionService),
     ];
 
     initGlobalProviderContainer(overrides);
 
     return value;
-  }
-
-  Override _setUpAuthStorage(EncryptionService encryptionService) {
-    final mock = MockAuthStorage();
-    when(mock.getPasswordHash()).thenAnswer((_) async => testPasswordHash);
-
-    return authStorageProvider.overrideWithValue(mock);
   }
 
   Override _setUpAuthBloc() {
@@ -422,12 +399,8 @@ class AuthenticationVariant extends ValueVariant<AuthenticationVariantEnum> {
     ).thenAnswer((_) async => value == AuthenticationVariantEnum.biometrics);
     when(mockLocalAuthService.authenticate()).thenAnswer((_) async => true);
     when(
-      mockLocalAuthService.verifyPassword(
-        email: anyNamed('email'),
-        password: anyNamed('password'),
-        storedPasswordHash: anyNamed('storedPasswordHash'),
-      ),
-    ).thenAnswer((i) async => i.namedArguments[#password] == testPassword);
+      mockLocalAuthService.verifyPassword(any),
+    ).thenAnswer((i) async => i.positionalArguments.single == testPassword);
 
     return localAuthServiceProvider.overrideWithValue(mockLocalAuthService);
   }
@@ -443,36 +416,4 @@ void _setUp() {
 
 void _setUpDeviceInfo() {
   DeviceInfoPlatform.instance = FakeDeviceInfoPlatform();
-}
-
-class FakeEncryptionService extends EncryptionService {
-  @override
-  Future<String> hashPassword({
-    required String password,
-    required Uint8List keyBytes,
-  }) async {
-    return password;
-  }
-
-  @override
-  Future<Uint8List> deriveKey({
-    required String password,
-    required String salt,
-  }) async {
-    return Uint8List.fromList(utf8.encode(password));
-  }
-
-  @override
-  Future<bool> verifyPassword({
-    required String passwordToVerify,
-    required Uint8List keyBytes,
-    required String? storedPasswordHash,
-  }) async {
-    return passwordToVerify == testPassword;
-  }
-
-  @override
-  Future<SembastCodec> getSembastCodec(String dbName) {
-    throw UnimplementedError();
-  }
 }

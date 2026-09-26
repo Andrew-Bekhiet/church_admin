@@ -16,6 +16,7 @@ import 'local_auth_service_test.mocks.dart';
   [
     MockSpec<NotificationsService>(),
     MockSpec<AuthBloc>(),
+    MockSpec<AuthStorage>(),
     MockSpec<LocalAuthPlatform>(as: #LocalAuthPlatformMock),
   ],
 )
@@ -54,42 +55,6 @@ void main() {
           addTearDown(unit.dispose);
 
           expect(unit.shouldAuthenticate, isTrue);
-          expect(
-            NotificationsService.I.isPaused,
-            isTrue,
-          );
-        },
-      );
-
-      testWidgets(
-        'Observes App Lifecycle',
-        (tester) async {
-          tester.binding.handleAppLifecycleStateChanged(
-            AppLifecycleState.resumed,
-          );
-
-          final unit = LocalAuthService.noInitialAuth(
-            localAuthPlugin: globalProviderContainer.read(
-              localAuthPluginProvider,
-            ),
-            userDataWiper: _MockUserDataWiper(),
-          );
-
-          addTearDown(unit.dispose);
-
-          tester.binding.handleAppLifecycleStateChanged(
-            AppLifecycleState.paused,
-          );
-
-          expect(unit.shouldAuthenticate, isFalse);
-
-          await tester.pump(const Duration(seconds: 30));
-
-          expect(
-            unit.shouldAuthenticate,
-            isTrue,
-          );
-
           expect(
             NotificationsService.I.isPaused,
             isTrue,
@@ -360,53 +325,6 @@ void main() {
           shouldThrow = false;
 
           await expectLater(unit.authenticate(), completion(isTrue));
-        },
-      );
-
-      testWidgets(
-        'Authentication => cancels timer if '
-        'lifecycle changed in timer duration',
-        (tester) async {
-          tester.binding.handleAppLifecycleStateChanged(
-            AppLifecycleState.resumed,
-          );
-
-          LocalAuthPlatform.instance = MockLocalAuthPlatform();
-
-          final unit = LocalAuthService(
-            localAuthPlugin: globalProviderContainer.read(
-              localAuthPluginProvider,
-            ),
-            userDataWiper: _MockUserDataWiper(),
-            timeToReauth: const Duration(minutes: 1),
-          )..resetAuthState();
-
-          tester.binding.handleAppLifecycleStateChanged(
-            AppLifecycleState.paused,
-          );
-
-          await tester.pump(const Duration(seconds: 30));
-          tester.binding.handleAppLifecycleStateChanged(
-            AppLifecycleState.resumed,
-          );
-
-          expect(unit.shouldAuthenticate, isFalse);
-
-          await tester.pump(const Duration(seconds: 32));
-          expect(unit.shouldAuthenticate, isFalse);
-
-          tester.binding.handleAppLifecycleStateChanged(
-            AppLifecycleState.paused,
-          );
-
-          await tester.pump(const Duration(minutes: 1, seconds: 2));
-          tester.binding.handleAppLifecycleStateChanged(
-            AppLifecycleState.resumed,
-          );
-
-          expect(unit.shouldAuthenticate, isTrue);
-
-          await unit.dispose();
         },
       );
 

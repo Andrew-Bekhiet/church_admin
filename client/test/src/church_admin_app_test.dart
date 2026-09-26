@@ -58,7 +58,7 @@ void main() {
       if (firstScreenVariant.currentValue ==
           FirstScreenVariantEnum.authenticate) {
         expect(
-          find.byType(AuthenticateScreen, skipOffstage: false),
+          find.byType(BiometricsAuthScreen, skipOffstage: false),
           findsOneWidget,
         );
       }

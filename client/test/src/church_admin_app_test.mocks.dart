@@ -2114,17 +2114,9 @@ class MockLocalAuthService extends _i1.Mock implements _i4.LocalAuthService {
           as _i8.Future<bool>);
 
   @override
-  _i8.Future<bool> verifyPassword({
-    required String? email,
-    required String? password,
-    String? storedPasswordHash,
-  }) =>
+  _i8.Future<bool> verifyPassword(String? password) =>
       (super.noSuchMethod(
-            Invocation.method(#verifyPassword, [], {
-              #email: email,
-              #password: password,
-              #storedPasswordHash: storedPasswordHash,
-            }),
+            Invocation.method(#verifyPassword, [password]),
             returnValue: _i8.Future<bool>.value(false),
             returnValueForMissingStub: _i8.Future<bool>.value(false),
           )

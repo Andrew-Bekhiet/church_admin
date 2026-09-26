@@ -19,7 +19,7 @@ class AuthenticateRoute extends GoRouteData with $AuthenticateRoute {
     // Workaround until https://github.com/flutter/flutter/issues/116651 is fixed
     unawaited(_maybeForceRedirect(context));
 
-    return AuthenticateScreen(next: next != '/' ? next : null);
+    return BiometricsAuthScreen(next: next != '/' ? next : null);
   }
 
   Future<void> _maybeForceRedirect(BuildContext context) async {

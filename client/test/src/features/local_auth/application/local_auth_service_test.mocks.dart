@@ -417,6 +417,95 @@ class MockAuthBloc extends _i1.Mock implements _i2.AuthBloc {
   );
 }
 
+/// A class which mocks [AuthStorage].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockAuthStorage extends _i1.Mock implements _i2.AuthStorage {
+  @override
+  _i3.Future<_i2.AuthUser?> getAuthDataFromCache() =>
+      (super.noSuchMethod(
+            Invocation.method(#getAuthDataFromCache, []),
+            returnValue: _i3.Future<_i2.AuthUser?>.value(),
+            returnValueForMissingStub: _i3.Future<_i2.AuthUser?>.value(),
+          )
+          as _i3.Future<_i2.AuthUser?>);
+
+  @override
+  _i3.Future<void> writeAuthDataToCache(_i2.AuthUser? authData) =>
+      (super.noSuchMethod(
+            Invocation.method(#writeAuthDataToCache, [authData]),
+            returnValue: _i3.Future<void>.value(),
+            returnValueForMissingStub: _i3.Future<void>.value(),
+          )
+          as _i3.Future<void>);
+
+  @override
+  _i3.Future<void> writeSessionToCache(
+    _i2.AuthUser? authUser,
+    _i2.User? user,
+  ) =>
+      (super.noSuchMethod(
+            Invocation.method(#writeSessionToCache, [authUser, user]),
+            returnValue: _i3.Future<void>.value(),
+            returnValueForMissingStub: _i3.Future<void>.value(),
+          )
+          as _i3.Future<void>);
+
+  @override
+  _i3.Future<_i2.User?> getUserFromCache() =>
+      (super.noSuchMethod(
+            Invocation.method(#getUserFromCache, []),
+            returnValue: _i3.Future<_i2.User?>.value(),
+            returnValueForMissingStub: _i3.Future<_i2.User?>.value(),
+          )
+          as _i3.Future<_i2.User?>);
+
+  @override
+  _i3.Future<void> writeUserToCache(_i2.User? user) =>
+      (super.noSuchMethod(
+            Invocation.method(#writeUserToCache, [user]),
+            returnValue: _i3.Future<void>.value(),
+            returnValueForMissingStub: _i3.Future<void>.value(),
+          )
+          as _i3.Future<void>);
+
+  @override
+  _i3.Future<String?> getPasswordHash() =>
+      (super.noSuchMethod(
+            Invocation.method(#getPasswordHash, []),
+            returnValue: _i3.Future<String?>.value(),
+            returnValueForMissingStub: _i3.Future<String?>.value(),
+          )
+          as _i3.Future<String?>);
+
+  @override
+  _i3.Future<void> saveUserPasswordHash(String? email, String? password) =>
+      (super.noSuchMethod(
+            Invocation.method(#saveUserPasswordHash, [email, password]),
+            returnValue: _i3.Future<void>.value(),
+            returnValueForMissingStub: _i3.Future<void>.value(),
+          )
+          as _i3.Future<void>);
+
+  @override
+  _i3.Future<void> clearPasswordHash() =>
+      (super.noSuchMethod(
+            Invocation.method(#clearPasswordHash, []),
+            returnValue: _i3.Future<void>.value(),
+            returnValueForMissingStub: _i3.Future<void>.value(),
+          )
+          as _i3.Future<void>);
+
+  @override
+  _i3.Future<void> clearAll() =>
+      (super.noSuchMethod(
+            Invocation.method(#clearAll, []),
+            returnValue: _i3.Future<void>.value(),
+            returnValueForMissingStub: _i3.Future<void>.value(),
+          )
+          as _i3.Future<void>);
+}
+
 /// A class which mocks [LocalAuthPlatform].
 ///
 /// See the documentation for Mockito's code generation for more information.
