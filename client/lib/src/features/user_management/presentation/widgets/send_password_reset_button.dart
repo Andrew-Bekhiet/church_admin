@@ -1,6 +1,7 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 
 class SendPasswordResetButton extends StatelessWidget {
@@ -10,18 +11,55 @@ class SendPasswordResetButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      title: FilledButton.tonalIcon(
-        style: Theme.of(context).filledTonalButtonStyleWorkaround,
-        icon: const Icon(Symbols.lock_reset),
-        label: const Text('إرسال رابط إعادة تعيين كلمة المرور'),
-        onPressed: () => _confirmAndSend(context),
+    return BlocProvider(
+      create: (_) => PasswordResetCubit(),
+      child: BlocConsumer<PasswordResetCubit, PasswordResetState>(
+        listener: _listenToPasswordResetState,
+        builder: (context, state) => ListTile(
+          title: FilledButton.tonalIcon(
+            style: Theme.of(context).filledTonalButtonStyleWorkaround,
+            icon: const Icon(Symbols.lock_reset),
+            label: const Text('إرسال رابط إعادة تعيين كلمة المرور'),
+            onPressed: () => _confirmAndSend(context),
+          ),
+        ),
       ),
     );
   }
 
+  void _listenToPasswordResetState(
+    BuildContext context,
+    PasswordResetState state,
+  ) {
+    final isolatedEmail = '${Unicode.LRI}$email${Unicode.PDI}';
+
+    switch (state) {
+      case PasswordResetIdle():
+      case PasswordResetSending():
+        return;
+
+      case PasswordResetSent():
+        scaffoldMessenger
+          ..hideCurrentSnackBar()
+          ..showSnackBar(
+            SnackBar(
+              content: Text(
+                'تم إرسال رابط إعادة تعيين كلمة المرور إلى $isolatedEmail',
+              ),
+              duration: const Duration(seconds: 3),
+            ),
+          );
+
+      case PasswordResetFailed():
+        scaffoldMessenger.showErrorSnackBar(
+          'حدث خطأ أثناء إرسال رابط إعادة تعيين كلمة المرور، يرجى المحاولة لاحقا',
+        );
+    }
+  }
+
   Future<void> _confirmAndSend(BuildContext context) async {
     final isolatedEmail = '${Unicode.LRI}$email${Unicode.PDI}';
+    final cubit = context.read<PasswordResetCubit>();
 
     final confirmed = await showDialog<bool>(
       context: context,
@@ -43,33 +81,8 @@ class SendPasswordResetButton extends StatelessWidget {
       ),
     );
 
-    if (confirmed != true) return;
+    if (!(confirmed ?? false)) return;
 
-    try {
-      await globalProviderContainer
-          .read(authRepositoryProvider)
-          .sendPasswordResetEmail(email: email);
-    } catch (err, stkTrace) {
-      await LoggingService.I.exception(
-        LogRecord(error: err, stackTrace: stkTrace),
-      );
-
-      scaffoldMessenger.showErrorSnackBar(
-        'حدث خطأ أثناء إرسال رابط إعادة تعيين كلمة المرور، يرجى المحاولة لاحقا',
-      );
-
-      return;
-    }
-
-    scaffoldMessenger
-      ..hideCurrentSnackBar()
-      ..showSnackBar(
-        SnackBar(
-          content: Text(
-            'تم إرسال رابط إعادة تعيين كلمة المرور إلى $isolatedEmail',
-          ),
-          duration: const Duration(seconds: 3),
-        ),
-      );
+    await cubit.sendPasswordResetEmail(email);
   }
 }
