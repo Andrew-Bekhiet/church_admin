@@ -128,6 +128,11 @@ class _ViewUserState extends State<ViewUser> {
                 ),
               ],
               if (isUserApproved) ...userInfoWidgets,
+              if (!isMyAccount &&
+                  (user.currentUserCanManageThisUser ||
+                      appUserPermissions.manageAllUsers))
+                if (user.email case final email? when email.isNotEmpty)
+                  SendPasswordResetButton(email: email),
               if (appUserPermissions.manageAllUsers &&
                   isUserApproved &&
                   !isMyAccount)
