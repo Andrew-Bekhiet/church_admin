@@ -29,9 +29,9 @@ void main() {
     () async {
       final callOrder = <String>[];
       unit
-        ..register(() async => callOrder.add('first'))
-        ..register(() async => callOrder.add('second'))
-        ..register(() async => callOrder.add('third'));
+        ..register(() => callOrder.add('first'))
+        ..register(() => callOrder.add('second'))
+        ..register(() => callOrder.add('third'));
 
       userChangesController
         ..add(signedInUser)
@@ -45,9 +45,9 @@ void main() {
   test('a failing clear does not stop the others from running', () async {
     final callOrder = <String>[];
     unit
-      ..register(() async => callOrder.add('first'))
-      ..register(() async => throw Exception('boom'))
-      ..register(() async => callOrder.add('third'));
+      ..register(() => callOrder.add('first'))
+      ..register(() => throw Exception('boom'))
+      ..register(() => callOrder.add('third'));
 
     userChangesController
       ..add(signedInUser)
@@ -59,7 +59,7 @@ void main() {
 
   test('nothing runs while the user stays signed in', () async {
     var wasCalled = false;
-    unit.register(() async => wasCalled = true);
+    unit.register(() => wasCalled = true);
 
     userChangesController.add(signedInUser);
     await pumpEventQueue();
@@ -69,7 +69,7 @@ void main() {
 
   test('starting signed out does not wipe local data', () async {
     var wasCalled = false;
-    unit.register(() async => wasCalled = true);
+    unit.register(() => wasCalled = true);
 
     userChangesController.add(null);
     await pumpEventQueue();

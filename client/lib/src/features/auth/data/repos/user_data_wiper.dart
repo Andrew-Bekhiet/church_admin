@@ -3,10 +3,7 @@ import 'dart:async';
 import 'package:church_admin/church_admin.dart';
 
 class UserDataWiper {
-  static UserDataWiper get I =>
-      globalProviderContainer.read(userDataWiperProvider);
-
-  final List<Future<void> Function()> _clears = [];
+  final List<void Function()> _clears = [];
 
   StreamSubscription<bool>? _subscription;
 
@@ -19,7 +16,7 @@ class UserDataWiper {
         .listen((_) => unawaited(_wipe()));
   }
 
-  void register(Future<void> Function() clear) => _clears.add(clear);
+  void register(void Function() clear) => _clears.add(clear);
 
   Future<void> dispose() async {
     _clears.clear();
@@ -29,7 +26,7 @@ class UserDataWiper {
   Future<void> _wipe() async {
     for (final clear in _clears.reversed) {
       try {
-        await clear();
+        clear();
       } catch (error, stackTrace) {
         await LoggingService.I.exception(
           LogRecord(error: error, stackTrace: stackTrace),

@@ -32,13 +32,14 @@ class LocalAuthService with WidgetsBindingObserver {
 
   LocalAuthService({
     required this._localAuthPlugin,
+    required UserDataWiper userDataWiper,
     this.timeToReauth = const Duration(seconds: 30),
     CurrentPlatformService? currentPlatformService,
     NotificationsService? notificationService,
   }) : _notificationsService = notificationService ?? NotificationsService.I,
        _currentPlatformService =
            currentPlatformService ?? CurrentPlatformService.I {
-    UserDataWiper.I.register(() async => revokeAuthForAllPaths());
+    userDataWiper.register(revokeAuthForAllPaths);
     scheduleReauth();
     didChangeAppLifecycleState(
       WidgetsBinding.instance.lifecycleState ?? AppLifecycleState.resumed,
@@ -48,13 +49,14 @@ class LocalAuthService with WidgetsBindingObserver {
 
   LocalAuthService.noInitialAuth({
     required this._localAuthPlugin,
+    required UserDataWiper userDataWiper,
     this.timeToReauth = const Duration(seconds: 30),
     CurrentPlatformService? currentPlatformService,
     NotificationsService? notificationService,
   }) : _notificationsService = notificationService ?? NotificationsService.I,
        _currentPlatformService =
            currentPlatformService ?? CurrentPlatformService.I {
-    UserDataWiper.I.register(() async => revokeAuthForAllPaths());
+    userDataWiper.register(revokeAuthForAllPaths);
     didChangeAppLifecycleState(
       WidgetsBinding.instance.lifecycleState ?? AppLifecycleState.resumed,
     );

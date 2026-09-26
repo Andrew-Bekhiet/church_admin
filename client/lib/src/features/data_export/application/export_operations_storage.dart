@@ -15,6 +15,7 @@ class ExportOperationsStorage {
         (ref) => ExportOperationsStorage(
           dioClient: ref.read(dioProvider),
           fileSystem: ref.read(fileSystemProvider),
+          userDataWiper: ref.read(userDataWiperProvider),
         ),
       );
 
@@ -24,8 +25,9 @@ class ExportOperationsStorage {
   ExportOperationsStorage({
     required this._dioClient,
     required this._fileSystem,
+    required UserDataWiper userDataWiper,
   }) {
-    UserDataWiper.I.register(deleteSavedFiles);
+    userDataWiper.register(deleteSavedFiles);
   }
 
   Future<DataExportFile> saveFile({

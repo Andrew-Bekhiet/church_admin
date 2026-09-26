@@ -129,6 +129,7 @@ final graphQLCacheStore = Provider<GqlKvStore>((ref) {
   final store = GqlKvStore(
     SyncKVStore.fromLoaded<Json>(GqlKvStore.storeName),
   );
+  ref.read(userDataWiperProvider).register(store.reset);
 
   ref.onDispose(store.close);
 
@@ -279,6 +280,7 @@ final notificationsStorageProvider = Provider<NotificationsStorage>(
           fromJson: Notification.fromJson,
           toJson: (n) => n.toJson(),
         ),
+    userDataWiper: ref.read(userDataWiperProvider),
   ),
 );
 
@@ -292,6 +294,7 @@ final localAuthServiceProvider = Provider<LocalAuthService>((ref) {
   final localAuthBloc = LocalAuthService(
     localAuthPlugin: ref.watch(localAuthPluginProvider),
     notificationService: ref.watch(notificationsServiceProvider),
+    userDataWiper: ref.watch(userDataWiperProvider),
   );
 
   ref.onDispose(localAuthBloc.dispose);
@@ -348,7 +351,7 @@ final baseCacheManagerProvider = Provider<BaseCacheManager>((ref) {
     ),
   );
 
-  UserDataWiper.I.register(cacheManager.emptyCache);
+  ref.read(userDataWiperProvider).register(cacheManager.emptyCache);
 
   ref.onDispose(cacheManager.dispose);
 

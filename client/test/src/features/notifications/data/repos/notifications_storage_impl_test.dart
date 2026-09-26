@@ -3,17 +3,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../../../fakes/fake_auth_repository.dart';
 import 'notifications_storage_impl_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<KVStore>()])
 void main() {
-  setUp(() {
-    initGlobalProviderContainer([
-      authRepositoryProvider.overrideWithValue(FakeAuthRepository()),
-    ]);
-  });
-
   tearDown(resetGlobalProviderContainer);
 
   group(
@@ -35,7 +28,10 @@ void main() {
             mockLazyBox.get('1'),
           ).thenAnswer((_) async => expectedNotification);
 
-          final unit = NotificationsStorageImpl(mockLazyBox);
+          final unit = NotificationsStorageImpl(
+            mockLazyBox,
+            userDataWiper: _MockUserDataWiper(),
+          );
 
           final actualNotification = await unit.readNotification('1');
 
@@ -53,7 +49,10 @@ void main() {
           mockLazyBox.get('1'),
         ).thenAnswer((_) async => expectedNotification);
 
-        final unit = NotificationsStorageImpl(mockLazyBox);
+        final unit = NotificationsStorageImpl(
+          mockLazyBox,
+          userDataWiper: _MockUserDataWiper(),
+        );
 
         await unit.writeNotification(expectedNotification);
 
@@ -64,3 +63,5 @@ void main() {
     },
   );
 }
+
+final class _MockUserDataWiper extends Mock implements UserDataWiper {}

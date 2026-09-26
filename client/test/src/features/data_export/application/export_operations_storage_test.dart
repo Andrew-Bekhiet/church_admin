@@ -8,8 +8,6 @@ import 'package:path/path.dart' as p;
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
-import '../../../fakes/fake_auth_repository.dart';
-
 void main() {
   setUp(() {
     registerFallbackValue(Uri.base);
@@ -19,10 +17,6 @@ void main() {
     ).thenAnswer((_) async => '/');
 
     PathProviderPlatform.instance = mockPathProviderPlatform;
-
-    initGlobalProviderContainer([
-      authRepositoryProvider.overrideWithValue(FakeAuthRepository()),
-    ]);
   });
 
   tearDown(() {
@@ -59,6 +53,7 @@ void main() {
     final unit = ExportOperationsStorage(
       dioClient: mockDio,
       fileSystem: mockFileSystem,
+      userDataWiper: MockUserDataWiper(),
     );
 
     int capturedProgressIndex = 0;
@@ -87,6 +82,7 @@ void main() {
     final unit = ExportOperationsStorage(
       dioClient: mockDio,
       fileSystem: mockFileSystem,
+      userDataWiper: MockUserDataWiper(),
     );
     final exportsDirectory = await unit.getExportsDirectory();
 
@@ -122,3 +118,5 @@ final class MockResponse extends Mock implements Response {}
 final class MockPathProviderPlatform extends Mock
     with MockPlatformInterfaceMixin
     implements PathProviderPlatform {}
+
+final class MockUserDataWiper extends Mock implements UserDataWiper {}

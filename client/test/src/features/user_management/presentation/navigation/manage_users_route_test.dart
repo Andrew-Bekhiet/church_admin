@@ -52,6 +52,7 @@ void main() {
         (ref) => LocalAuthService.noInitialAuth(
           localAuthPlugin: ref.read(localAuthPluginProvider),
           notificationService: notificationsService,
+          userDataWiper: _MockUserDataWiper(),
         ),
       ),
     ]);
@@ -128,3 +129,5 @@ final class _MockNotificationsService extends Mock
     implements NotificationsService {}
 
 final class _MockBuildContext extends Mock implements BuildContext {}
+
+final class _MockUserDataWiper extends Mock implements UserDataWiper {}
