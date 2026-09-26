@@ -179,12 +179,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   Future<void> _enqueueLocalDataUpdate(Future<void> Function() update) {
     final queuedUpdate = _localDataUpdates.then((_) => update());
 
-    _localDataUpdates = queuedUpdate.then(
-      (_) {},
-      onError: (Object error, StackTrace stackTrace) =>
-          LoggingService.I.exception(
-            LogRecord(error: error, stackTrace: stackTrace),
-          ),
+    _localDataUpdates = queuedUpdate.catchError(
+      (Object error, StackTrace stackTrace) => LoggingService.I.exception(
+        LogRecord(error: error, stackTrace: stackTrace),
+      ),
     );
 
     return queuedUpdate;
@@ -194,25 +192,34 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     _refreshTokenTimer?.cancel();
     _refreshTokenTimer = Timer(
       _getTokenExpiry(authUser).difference(DateTime.now()),
-      _authRepository.refreshToken,
+      () => unawaited(_verifySession()),
     );
   }
 
   Future<void> _listenToConnectivityChanges(Emitter<AuthState> emit) {
     return emit.onEach(
-      _connectivityStream,
-      onData: (isConnected) {
-        final state = this.state;
-
-        if (isConnected && state is AuthAuthenticated) {
-          final tokenExpiry = _getTokenExpiry(state.authUser);
-
-          if (tokenExpiry.isBefore(DateTime.now())) {
-            unawaited(_authRepository.refreshToken());
-          }
-        }
-      },
+      _connectivityStream.where(
+        (isConnected) => isConnected && state is AuthAuthenticated,
+      ),
+      onData: (_) => unawaited(_verifySession()),
     );
+  }
+
+  Future<void> _verifySession() async {
+    try {
+      await _authRepository.refreshToken();
+    } catch (e, stackTrace) {
+      switch (e) {
+        case SessionRevokedException():
+          add(const SignOut());
+        case AuthNetworkException() || StateError():
+          return;
+        default:
+          await LoggingService.I.exception(
+            LogRecord(error: e, stackTrace: stackTrace),
+          );
+      }
+    }
   }
 
   DateTime _getTokenExpiry(AuthUser authUser) {

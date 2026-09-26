@@ -61,6 +61,7 @@ AuthUser initialAuthUser = AuthUser(
 
 late FakeUserDataWiper userDataWiper;
 late StreamController<AuthUser?> userChangesController;
+late BehaviorSubject<bool> connectivityController;
 
 @GenerateNiceMocks([
   MockSpec<AuthStorage>(),
@@ -271,6 +272,52 @@ void main() {
           expect(AuthStorage.I.getPasswordHash(), completion(isNotNull));
         },
       );
+
+      blocTest<AuthBloc, AuthState>(
+        'a session revoked on the server is signed out and wiped when the app reconnects',
+        setUp: () {
+          final mockRepo =
+              globalProviderContainer.read(authRepositoryProvider)
+                  as MockFirebaseAuthRepository;
+          when(mockRepo.refreshToken()).thenAnswer(
+            (_) async => throw const SessionRevokedException(null, null),
+          );
+        },
+        build: _createAuthBloc,
+        act: (bloc) async {
+          await Future.delayed(Duration.zero);
+          connectivityController.add(true);
+        },
+        expect: () => [
+          isA<AuthAuthenticated>(),
+          isA<AuthLoading>(),
+          isA<AuthUnauthenticated>(),
+        ],
+        verify: (bloc) {
+          expect(userDataWiper.wasWiped, isTrue);
+        },
+      );
+
+      blocTest<AuthBloc, AuthState>(
+        'failing to reach the server while checking the session keeps the user signed in',
+        setUp: () {
+          final mockRepo =
+              globalProviderContainer.read(authRepositoryProvider)
+                  as MockFirebaseAuthRepository;
+          when(mockRepo.refreshToken()).thenAnswer(
+            (_) async => throw const AuthNetworkException(null, null),
+          );
+        },
+        build: _createAuthBloc,
+        act: (bloc) async {
+          await Future.delayed(Duration.zero);
+          connectivityController.add(true);
+        },
+        expect: () => [isA<AuthAuthenticated>()],
+        verify: (bloc) {
+          expect(userDataWiper.wasWiped, isFalse);
+        },
+      );
     });
 
     group('password reset =>', () {
@@ -320,15 +367,10 @@ void main() {
     });
 
     group('token management =>', () {
-      late BehaviorSubject<bool> connectivityController;
-
       blocTest<AuthBloc, AuthState>(
         'refresh token on connectivity change when token expired',
         setUp: () async {
-          connectivityController = BehaviorSubject.seeded(false);
-          when(
-            ConnectivityService.I.connectivityStream,
-          ).thenAnswer((_) => connectivityController.stream);
+          connectivityController.add(false);
 
           final oldUser = initialAuthUser;
           addTearDown(() => initialAuthUser = oldUser);
@@ -377,9 +419,6 @@ void main() {
               globalProviderContainer.read(authRepositoryProvider)
                   as MockFirebaseAuthRepository;
           verify(mockRepo.refreshToken());
-        },
-        tearDown: () async {
-          await connectivityController.close();
         },
       );
 
@@ -593,7 +632,9 @@ Future<Override> _setUpMockConnectivity() async {
   final mock = MockConnectivityService();
 
   when(mock.isConnected()).thenAnswer((_) async => true);
-  when(mock.connectivityStream).thenAnswer((_) => BehaviorSubject.seeded(true));
+  final controller = connectivityController = BehaviorSubject.seeded(true);
+  when(mock.connectivityStream).thenAnswer((_) => controller.stream);
+  addTearDown(controller.close);
 
   return connectivityServiceProvider.overrideWithValue(mock);
 }

@@ -5,6 +5,8 @@ import 'package:mocktail/mocktail.dart';
 
 class _MockFirebaseAuth extends Mock implements firebase_auth.FirebaseAuth {}
 
+class _MockFirebaseUser extends Mock implements firebase_auth.User {}
+
 void main() {
   late _MockFirebaseAuth firebaseAuth;
   late FirebaseAuthRepository repository;
@@ -81,5 +83,30 @@ void main() {
 
       await expectLater(signIn(), throwsA(failure));
     });
+  }
+
+  const revokedSessionCodes = [
+    'user-token-expired',
+    'invalid-user-token',
+    'user-disabled',
+    'user-not-found',
+  ];
+
+  for (final code in revokedSessionCodes) {
+    test(
+      'refreshing a session revoked on the server with $code reports it as revoked',
+      () async {
+        final user = _MockFirebaseUser();
+        when(() => firebaseAuth.currentUser).thenReturn(user);
+        when(
+          () => user.getIdToken(true),
+        ).thenThrow(firebase_auth.FirebaseAuthException(code: code));
+
+        await expectLater(
+          repository.refreshToken(),
+          throwsA(isA<SessionRevokedException>()),
+        );
+      },
+    );
   }
 }

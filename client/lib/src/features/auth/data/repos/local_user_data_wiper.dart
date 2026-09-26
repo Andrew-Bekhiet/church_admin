@@ -26,7 +26,8 @@ class LocalUserDataWiper implements UserDataWiper {
       () => _notificationsStorage().clear(),
       _imageCacheManager.emptyCache,
       () async {
-        if (!kIsWeb) await _exportOperationsStorage.deleteSavedFiles();
+        if (kIsWeb) return;
+        await _exportOperationsStorage.deleteSavedFiles();
       },
       () async => _existingLocalAuthService()?.revokeAuthForAllPaths(),
     ];

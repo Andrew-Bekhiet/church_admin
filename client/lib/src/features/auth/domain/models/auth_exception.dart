@@ -38,3 +38,7 @@ class TooManyAttemptsException extends AuthException {
 class AuthNetworkException extends AuthException {
   const AuthNetworkException(super.error, super.stackTrace);
 }
+
+class SessionRevokedException extends AuthException {
+  const SessionRevokedException(super.error, super.stackTrace);
+}
