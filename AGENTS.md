@@ -65,10 +65,12 @@ Generated code is exempt. `analyzer: exclude` covers `**.g.dart`, `**.freezed.da
 - **`Row.spacing` / `Column.spacing`** instead of `SizedBox` gaps; `MainAxisAlignment.space*` instead of `Expanded` where it fits; `Padding` instead of `SizedBox` in linear layouts.
 - **Shape APIs over numeric approximations.** `ShapeDecoration(shape: StadiumBorder())`, not `BorderRadius.circular(999)`; `EdgeInsetsDirectional.only(start:, end:)`, not `fromSTEB`; a bare `const Divider()` over one with hand-set colour and height — the theme owns those.
 - **Bind an indexed element to a local** (`final user = users[index];`) before using it more than once.
+- **Blank line between `switch` cases that each have their own body.** Stacked case labels that fall through to one shared body stay together with no blank line between them.
 - **Blank line before `return`** unless it is the block's only statement (`newline_before_return`). Return early rather than nesting in `else`; in loops, `continue` early instead of wrapping the rest of the body in a condition.
 - **`dispose()` returns `void`.** `Future<void> dispose() async` compiles and the analyzer accepts it, because any type is assignable to `void` in an override. It is still wrong: awaiting before `super.dispose()` defers the super call past the frame in which the framework treats the state as disposed. Close sinks with `unawaited(x.close())` and keep `dispose` synchronous.
 - **`close_sinks` does not catch a missing `dispose()`,** only an incomplete one. A `BehaviorSubject` field on a `State` with no `dispose` at all is invisible to it, so check by hand.
 - **Handle errors thoroughly** with typed Dart exceptions, and carry user-facing messages as error codes so they can be localised later.
+- **Presentation talks only to blocs/cubits, never to repositories or data sources.**
 
 #### Unenforced house style
 
