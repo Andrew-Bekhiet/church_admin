@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
+import 'package:rxdart/rxdart.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -58,16 +59,20 @@ class _HomeScreenState extends State<HomeScreen> {
       (_) => !_authEntry.mounted ? overlay.insert(_authEntry) : null,
     );
 
-    _localAuthListener = LocalAuthService.I.refreshUIStream.listen(
-      (_) {
-        if (LocalAuthService.I.shouldAuthenticate && !_authEntry.mounted) {
-          overlay.insert(_authEntry);
-        } else if (!LocalAuthService.I.shouldAuthenticate &&
-            _authEntry.mounted) {
-          _authEntry.remove();
-        }
-      },
-    );
+    _localAuthListener = LocalAuthService.I.refreshUIStream
+        .mergeWith([AuthBloc.I.stream])
+        .listen(
+          (_) {
+            final mustAuthenticate =
+                AuthBloc.I.isSignedIn && LocalAuthService.I.shouldAuthenticate;
+
+            if (mustAuthenticate && !_authEntry.mounted) {
+              overlay.insert(_authEntry);
+            } else if (!mustAuthenticate && _authEntry.mounted) {
+              _authEntry.remove();
+            }
+          },
+        );
   }
 
   void _onAppLifecycleStateChanged(AppLifecycleState state) {
