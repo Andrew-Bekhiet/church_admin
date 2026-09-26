@@ -26,6 +26,7 @@ void main() {
         },
       );
 
+      tearDown(resetGlobalProviderContainer);
 
       group(
         'Confirm Dialog',
