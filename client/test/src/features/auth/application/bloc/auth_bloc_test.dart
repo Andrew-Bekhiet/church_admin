@@ -152,10 +152,9 @@ void main() {
             AuthStorage.I.saveUserPasswordHash('email', 'password'),
           ]);
 
-          verifyInOrder([
-            AuthStorage.I.writeAuthDataToCache(initialAuthUser),
-            AuthStorage.I.writeUserToCache(initialUserData),
-          ]);
+          verify(
+            AuthStorage.I.writeSessionToCache(initialAuthUser, initialUserData),
+          );
         },
       );
 
@@ -198,10 +197,9 @@ void main() {
             mockRepo.sendEmailVerification(),
           ]);
 
-          verifyInOrder([
-            AuthStorage.I.writeAuthDataToCache(initialAuthUser),
-            AuthStorage.I.writeUserToCache(initialUserData),
-          ]);
+          verify(
+            AuthStorage.I.writeSessionToCache(initialAuthUser, initialUserData),
+          );
         },
       );
 
@@ -249,8 +247,10 @@ void main() {
       );
 
       blocTest<AuthBloc, AuthState>(
-        'a session revoked on the server is signed out when the app reconnects',
-        setUp: () {
+        'a session revoked on the server is signed out once its token expires',
+        setUp: () async {
+          await _cacheExpiredAuthUser();
+
           final mockRepo =
               globalProviderContainer.read(authRepositoryProvider)
                   as MockFirebaseAuthRepository;
@@ -259,12 +259,7 @@ void main() {
           );
         },
         build: _createAuthBloc,
-        act: (bloc) async {
-          await Future.delayed(Duration.zero);
-          connectivityController
-            ..add(false)
-            ..add(true);
-        },
+        wait: Duration.zero,
         expect: () => [
           isA<AuthAuthenticated>(),
           isA<AuthLoading>(),
@@ -274,12 +269,34 @@ void main() {
 
       blocTest<AuthBloc, AuthState>(
         'failing to reach the server while checking the session keeps the user signed in',
-        setUp: () {
+        setUp: () async {
+          await _cacheExpiredAuthUser();
+
           final mockRepo =
               globalProviderContainer.read(authRepositoryProvider)
                   as MockFirebaseAuthRepository;
           when(mockRepo.refreshToken()).thenAnswer(
             (_) async => throw const AuthNetworkException(null, null),
+          );
+        },
+        build: _createAuthBloc,
+        act: (bloc) async {
+          await Future.delayed(Duration.zero);
+          connectivityController
+            ..add(false)
+            ..add(true);
+        },
+        expect: () => [isA<AuthAuthenticated>()],
+      );
+
+      blocTest<AuthBloc, AuthState>(
+        'a session with a fresh token stays signed in when the app reconnects',
+        setUp: () {
+          final mockRepo =
+              globalProviderContainer.read(authRepositoryProvider)
+                  as MockFirebaseAuthRepository;
+          when(mockRepo.refreshToken()).thenAnswer(
+            (_) async => throw const SessionRevokedException(null, null),
           );
         },
         build: _createAuthBloc,
@@ -610,6 +627,17 @@ Future<Override> _setUpMockConnectivity() async {
   return connectivityServiceProvider.overrideWithValue(mock);
 }
 
+Future<void> _cacheExpiredAuthUser() async {
+  final oldUser = initialAuthUser;
+  addTearDown(() => initialAuthUser = oldUser);
+
+  initialAuthUser = initialAuthUser.copyWith(
+    claims: {...initialAuthUser.claims, 'exp': 0},
+  );
+
+  await AuthStorage.I.writeAuthDataToCache(initialAuthUser);
+}
+
 Future<Override> _setUpMockAuthStorage() async {
   final mock = MockAuthStorage();
 
@@ -629,6 +657,10 @@ Future<Override> _setUpMockAuthStorage() async {
   when(
     mock.writeUserToCache(captureAny),
   ).thenAnswer((i) async => user = i.positionalArguments[0]);
+  when(mock.writeSessionToCache(captureAny, captureAny)).thenAnswer((i) async {
+    authUser = i.positionalArguments[0];
+    user = i.positionalArguments[1];
+  });
   when(mock.saveUserPasswordHash(captureAny, captureAny)).thenAnswer(
     (i) async => passwordHash =
         '${i.positionalArguments[0]}-hash-${i.positionalArguments[1]}',

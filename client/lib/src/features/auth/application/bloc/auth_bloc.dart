@@ -22,7 +22,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final FeatureFlagsRepository _featureFlagsRepository;
 
   Timer? _refreshTokenTimer;
-  Future<void> _localDataUpdates = Future.value();
 
   bool get isSignedIn => state.unwrapped is AuthAuthenticated;
 
@@ -143,12 +142,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
 
             if (authUser == null) return;
 
-            unawaited(
-              _enqueueLocalDataUpdate(() async {
-                await _authStorage.writeAuthDataToCache(authUser);
-                await _authStorage.writeUserToCache(userData);
-              }),
-            );
+            unawaited(_authStorage.writeSessionToCache(authUser, userData));
           }),
       onData: (data) {
         final (authUser, userData) = data;
@@ -172,18 +166,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     );
   }
 
-  Future<void> _enqueueLocalDataUpdate(Future<void> Function() update) {
-    final queuedUpdate = _localDataUpdates.then((_) => update());
-
-    _localDataUpdates = queuedUpdate.catchError(
-      (Object error, StackTrace stackTrace) => LoggingService.I.exception(
-        LogRecord(error: error, stackTrace: stackTrace),
-      ),
-    );
-
-    return queuedUpdate;
-  }
-
   void _scheduleTokenRefresh(AuthUser authUser) {
     _refreshTokenTimer?.cancel();
     _refreshTokenTimer = Timer(
@@ -195,7 +177,14 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   Future<void> _listenToConnectivityChanges(Emitter<AuthState> emit) {
     return emit.onEach(
       _connectivityStream.distinct().where(
-        (isConnected) => isConnected && state is AuthAuthenticated,
+        (isConnected) =>
+            isConnected &&
+            switch (state) {
+              AuthAuthenticated(:final authUser) => _getTokenExpiry(
+                authUser,
+              ).isBefore(DateTime.now()),
+              _ => false,
+            },
       ),
       onData: (_) => unawaited(_verifySession()),
     );

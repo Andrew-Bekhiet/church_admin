@@ -227,6 +227,18 @@ class MockAuthStorage extends _i1.Mock implements _i2.AuthStorage {
           as _i6.Future<void>);
 
   @override
+  _i6.Future<void> writeSessionToCache(
+    _i2.AuthUser? authUser,
+    _i2.User? user,
+  ) =>
+      (super.noSuchMethod(
+            Invocation.method(#writeSessionToCache, [authUser, user]),
+            returnValue: _i6.Future<void>.value(),
+            returnValueForMissingStub: _i6.Future<void>.value(),
+          )
+          as _i6.Future<void>);
+
+  @override
   _i6.Future<_i2.User?> getUserFromCache() =>
       (super.noSuchMethod(
             Invocation.method(#getUserFromCache, []),
