@@ -3,10 +3,8 @@ schema {
   mutation: mutation_root
   subscription: subscription_root
 }
-directive @cached(
-  refresh: Boolean! = false
-  ttl: Int! = 60
-) on QUERY
+
+directive @cached(ttl: Int! = 60, refresh: Boolean! = false) on QUERY
 
 type Addresses {
   apartmentNumber: smallint
@@ -157,6 +155,7 @@ input AddressesOnConflict {
   updateColumns: [AddressesUpdateColumn!]! = []
   where: AddressesBoolExp
 }
+
 input AddressesOrderBy {
   apartmentNumber: OrderBy
   area: AreasOrderBy
@@ -178,6 +177,7 @@ input AddressesOrderBy {
   streetId: OrderBy
   substreetName: OrderBy
 }
+
 input AddressesPkColumnsInput {
   id: uuid!
 }
@@ -235,6 +235,7 @@ input AddressesStreamCursorInput {
   initialValue: AddressesStreamCursorValueInput!
   ordering: CursorOrdering
 }
+
 input AddressesStreamCursorValueInput {
   apartmentNumber: smallint
   areaId: uuid
@@ -297,48 +298,18 @@ input AddressesVarianceOrderBy {
 }
 
 type Areas {
-  addresses(
-    distinctOn: [AddressesSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [AddressesOrderBy!]
-    where: AddressesBoolExp
-  ): [Addresses!]!
-  adminUsers(
-    distinctOn: [AuthUsersAdminOnSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [AuthUsersAdminOnOrderBy!]
-    where: AuthUsersAdminOnBoolExp
-  ): [AuthUsersAdminOn!]!
+  addresses(distinctOn: [AddressesSelectColumn!], limit: Int, offset: Int, orderBy: [AddressesOrderBy!], where: AddressesBoolExp): [Addresses!]!
+  adminUsers(distinctOn: [AuthUsersAdminOnSelectColumn!], limit: Int, offset: Int, orderBy: [AuthUsersAdminOnOrderBy!], where: AuthUsersAdminOnBoolExp): [AuthUsersAdminOn!]!
   blurhash: String
   bounds: geography
   color: bigint
-  editHistory(
-    distinctOn: [HistoryEditHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryEditHistoryOrderBy!]
-    where: HistoryEditHistoryBoolExp
-  ): [HistoryEditHistory!]!
-  editHistoryAggregate(
-    distinctOn: [HistoryEditHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryEditHistoryOrderBy!]
-    where: HistoryEditHistoryBoolExp
-  ): HistoryEditHistoryAggregate!
+  editHistory(distinctOn: [HistoryEditHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryEditHistoryOrderBy!], where: HistoryEditHistoryBoolExp): [HistoryEditHistory!]!
+  editHistoryAggregate(distinctOn: [HistoryEditHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryEditHistoryOrderBy!], where: HistoryEditHistoryBoolExp): HistoryEditHistoryAggregate!
   id: uuid!
   lastEdit: HistoryLatestEdits
   name: String!
   photoUpdatedAt: timestamptz
-  streets(
-    distinctOn: [AreasStreetsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [AreasStreetsOrderBy!]
-    where: AreasStreetsBoolExp
-  ): [AreasStreets!]!
+  streets(distinctOn: [AreasStreetsSelectColumn!], limit: Int, offset: Int, orderBy: [AreasStreetsOrderBy!], where: AreasStreetsBoolExp): [AreasStreets!]!
   userCanEdit: Boolean
 }
 
@@ -360,6 +331,7 @@ type AreasAggregateFields {
   varSamp: AreasVarSampFields
   variance: AreasVarianceFields
 }
+
 type AreasAvgFields {
   color: Float
 }
@@ -399,6 +371,7 @@ input AreasInsertInput {
   name: String
   streets: AreasStreetsArrRelInsertInput
 }
+
 type AreasMaxFields {
   blurhash: String
   color: bigint
@@ -406,6 +379,7 @@ type AreasMaxFields {
   name: String
   photoUpdatedAt: timestamptz
 }
+
 type AreasMinFields {
   blurhash: String
   color: bigint
@@ -429,6 +403,7 @@ input AreasOnConflict {
   updateColumns: [AreasUpdateColumn!]! = []
   where: AreasBoolExp
 }
+
 input AreasOrderBy {
   addressesAggregate: AddressesAggregateOrderBy
   adminUsersAggregate: AuthUsersAdminOnAggregateOrderBy
@@ -443,6 +418,7 @@ input AreasOrderBy {
   streetsAggregate: AreasStreetsAggregateOrderBy
   userCanEdit: OrderBy
 }
+
 input AreasPkColumnsInput {
   id: uuid!
 }
@@ -461,12 +437,15 @@ input AreasSetInput {
   color: bigint
   name: String
 }
+
 type AreasStddevFields {
   color: Float
 }
+
 type AreasStddevPopFields {
   color: Float
 }
+
 type AreasStddevSampFields {
   color: Float
 }
@@ -475,6 +454,7 @@ input AreasStreamCursorInput {
   initialValue: AreasStreamCursorValueInput!
   ordering: CursorOrdering
 }
+
 input AreasStreamCursorValueInput {
   blurhash: String
   bounds: geography
@@ -543,6 +523,7 @@ input AreasStreetsOnConflict {
   updateColumns: [AreasStreetsUpdateColumn!]! = []
   where: AreasStreetsBoolExp
 }
+
 input AreasStreetsOrderBy {
   area: AreasOrderBy
   areaId: OrderBy
@@ -559,6 +540,7 @@ input AreasStreetsStreamCursorInput {
   initialValue: AreasStreetsStreamCursorValueInput!
   ordering: CursorOrdering
 }
+
 input AreasStreetsStreamCursorValueInput {
   areaId: uuid
   streetId: uuid
@@ -567,6 +549,7 @@ input AreasStreetsStreamCursorValueInput {
 enum AreasStreetsUpdateColumn {
   _PLACEHOLDER
 }
+
 type AreasSumFields {
   color: bigint
 }
@@ -582,12 +565,15 @@ input AreasUpdates {
   _set: AreasSetInput
   where: AreasBoolExp!
 }
+
 type AreasVarPopFields {
   color: Float
 }
+
 type AreasVarSampFields {
   color: Float
 }
+
 type AreasVarianceFields {
   color: Float
 }
@@ -647,6 +633,7 @@ input AuthInvitationsOnConflict {
   updateColumns: [AuthInvitationsUpdateColumn!]! = []
   where: AuthInvitationsBoolExp
 }
+
 input AuthInvitationsOrderBy {
   claimedAt: OrderBy
   code: OrderBy
@@ -658,6 +645,7 @@ input AuthInvitationsOrderBy {
   user: AuthUsersDataOrderBy
   userUid: OrderBy
 }
+
 input AuthInvitationsPkColumnsInput {
   id: uuid!
 }
@@ -680,6 +668,7 @@ input AuthInvitationsStreamCursorInput {
   initialValue: AuthInvitationsStreamCursorValueInput!
   ordering: CursorOrdering
 }
+
 input AuthInvitationsStreamCursorValueInput {
   claimedAt: timestamptz
   code: String
@@ -698,6 +687,7 @@ input AuthInvitationsUpdates {
   _set: AuthInvitationsSetInput
   where: AuthInvitationsBoolExp!
 }
+
 type AuthUsersAdminOn {
   adminOnArea: uuid
   adminOnGroup: uuid
@@ -706,20 +696,8 @@ type AuthUsersAdminOn {
   areaAdminOnUsers: Boolean
   areaAllowEdit: Boolean
   areaAllowExport: Boolean
-  classes(
-    distinctOn: [ClassesSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [ClassesOrderBy!]
-    where: ClassesBoolExp
-  ): [Classes!]!
-  classesAggregate(
-    distinctOn: [ClassesSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [ClassesOrderBy!]
-    where: ClassesBoolExp
-  ): ClassesAggregate!
+  classes(distinctOn: [ClassesSelectColumn!], limit: Int, offset: Int, orderBy: [ClassesOrderBy!], where: ClassesBoolExp): [Classes!]!
+  classesAggregate(distinctOn: [ClassesSelectColumn!], limit: Int, offset: Int, orderBy: [ClassesOrderBy!], where: ClassesBoolExp): ClassesAggregate!
   group: Groups
   groupAdminOnUsers: Boolean
   groupAllowEdit: Boolean
@@ -865,6 +843,7 @@ input AuthUsersAdminOnOnConflict {
   updateColumns: [AuthUsersAdminOnUpdateColumn!]! = []
   where: AuthUsersAdminOnBoolExp
 }
+
 input AuthUsersAdminOnOrderBy {
   adminOnArea: OrderBy
   adminOnGroup: OrderBy
@@ -937,6 +916,7 @@ input AuthUsersAdminOnStreamCursorInput {
   initialValue: AuthUsersAdminOnStreamCursorValueInput!
   ordering: CursorOrdering
 }
+
 input AuthUsersAdminOnStreamCursorValueInput {
   adminOnArea: uuid
   adminOnGroup: uuid
@@ -981,35 +961,18 @@ input AuthUsersAdminOnVarSampOrderBy {
 input AuthUsersAdminOnVarianceOrderBy {
   serviceStudyYear: OrderBy
 }
+
 type AuthUsersData {
-  adminOn(
-    distinctOn: [AuthUsersAdminOnSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [AuthUsersAdminOnOrderBy!]
-    where: AuthUsersAdminOnBoolExp
-  ): [AuthUsersAdminOn!]!
+  adminOn(distinctOn: [AuthUsersAdminOnSelectColumn!], limit: Int, offset: Int, orderBy: [AuthUsersAdminOnOrderBy!], where: AuthUsersAdminOnBoolExp): [AuthUsersAdminOn!]!
   authId: String
   blurhash: String
   currentUserCanManageThisUser: Boolean
   email: String
-  fcmTokens(
-    distinctOn: [UsersFcmTokensSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [UsersFcmTokensOrderBy!]
-    where: UsersFcmTokensBoolExp
-  ): [UsersFcmTokens!]!
+  fcmTokens(distinctOn: [UsersFcmTokensSelectColumn!], limit: Int, offset: Int, orderBy: [UsersFcmTokensOrderBy!], where: UsersFcmTokensBoolExp): [UsersFcmTokens!]!
   invitation: AuthInvitations
   lastEdit: HistoryLatestEdits
   name: String!
-  permissions(
-    distinctOn: [AuthUsersPermissionsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [AuthUsersPermissionsOrderBy!]
-    where: AuthUsersPermissionsBoolExp
-  ): [AuthUsersPermissions!]!
+  permissions(distinctOn: [AuthUsersPermissionsSelectColumn!], limit: Int, offset: Int, orderBy: [AuthUsersPermissionsOrderBy!], where: AuthUsersPermissionsBoolExp): [AuthUsersPermissions!]!
   person: Persons
   photoUpdatedAt: timestamptz
   preferences: UsersPreferences
@@ -1062,6 +1025,7 @@ input AuthUsersDataInsertInput {
   permissions: AuthUsersPermissionsArrRelInsertInput
   person: PersonsObjRelInsertInput
 }
+
 type AuthUsersDataMaxFields {
   authId: String
   blurhash: String
@@ -1070,6 +1034,7 @@ type AuthUsersDataMaxFields {
   photoUpdatedAt: timestamptz
   uid: uuid
 }
+
 type AuthUsersDataMinFields {
   authId: String
   blurhash: String
@@ -1094,6 +1059,7 @@ input AuthUsersDataOnConflict {
   updateColumns: [AuthUsersDataUpdateColumn!]! = []
   where: AuthUsersDataBoolExp
 }
+
 input AuthUsersDataOrderBy {
   adminOnAggregate: AuthUsersAdminOnAggregateOrderBy
   authId: OrderBy
@@ -1110,6 +1076,7 @@ input AuthUsersDataOrderBy {
   preferences: UsersPreferencesOrderBy
   uid: OrderBy
 }
+
 input AuthUsersDataPkColumnsInput {
   uid: uuid!
 }
@@ -1126,13 +1093,13 @@ enum AuthUsersDataSelectColumn {
 input AuthUsersDataSetInput {
   email: String
   name: String
-  uid: uuid
 }
 
 input AuthUsersDataStreamCursorInput {
   initialValue: AuthUsersDataStreamCursorValueInput!
   ordering: CursorOrdering
 }
+
 input AuthUsersDataStreamCursorValueInput {
   authId: String
   blurhash: String
@@ -1145,13 +1112,13 @@ input AuthUsersDataStreamCursorValueInput {
 enum AuthUsersDataUpdateColumn {
   email
   name
-  uid
 }
 
 input AuthUsersDataUpdates {
   _set: AuthUsersDataSetInput
   where: AuthUsersDataBoolExp!
 }
+
 type AuthUsersPermissions {
   permission: String!
   uid: uuid!
@@ -1209,6 +1176,7 @@ input AuthUsersPermissionsOnConflict {
   updateColumns: [AuthUsersPermissionsUpdateColumn!]! = []
   where: AuthUsersPermissionsBoolExp
 }
+
 input AuthUsersPermissionsOrderBy {
   permission: OrderBy
   uid: OrderBy
@@ -1224,6 +1192,7 @@ input AuthUsersPermissionsStreamCursorInput {
   initialValue: AuthUsersPermissionsStreamCursorValueInput!
   ordering: CursorOrdering
 }
+
 input AuthUsersPermissionsStreamCursorValueInput {
   permission: String
   uid: uuid
@@ -1258,30 +1227,12 @@ input BooleanComparisonExp {
 }
 
 type Churches {
-  fathers(
-    distinctOn: [FathersSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [FathersOrderBy!]
-    where: FathersBoolExp
-  ): [Fathers!]!
+  fathers(distinctOn: [FathersSelectColumn!], limit: Int, offset: Int, orderBy: [FathersOrderBy!], where: FathersBoolExp): [Fathers!]!
   id: uuid!
   isHidden: Boolean!
   name: String!
-  persons(
-    distinctOn: [PersonsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [PersonsOrderBy!]
-    where: PersonsBoolExp
-  ): [Persons!]!
-  personsAggregate(
-    distinctOn: [PersonsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [PersonsOrderBy!]
-    where: PersonsBoolExp
-  ): PersonsAggregate!
+  persons(distinctOn: [PersonsSelectColumn!], limit: Int, offset: Int, orderBy: [PersonsOrderBy!], where: PersonsBoolExp): [Persons!]!
+  personsAggregate(distinctOn: [PersonsSelectColumn!], limit: Int, offset: Int, orderBy: [PersonsOrderBy!], where: PersonsBoolExp): PersonsAggregate!
 }
 
 input ChurchesBoolExp {
@@ -1322,6 +1273,7 @@ input ChurchesOnConflict {
   updateColumns: [ChurchesUpdateColumn!]! = []
   where: ChurchesBoolExp
 }
+
 input ChurchesOrderBy {
   fathersAggregate: FathersAggregateOrderBy
   id: OrderBy
@@ -1329,6 +1281,7 @@ input ChurchesOrderBy {
   name: OrderBy
   personsAggregate: PersonsAggregateOrderBy
 }
+
 input ChurchesPkColumnsInput {
   id: uuid!
 }
@@ -1347,6 +1300,7 @@ input ChurchesStreamCursorInput {
   initialValue: ChurchesStreamCursorValueInput!
   ordering: CursorOrdering
 }
+
 input ChurchesStreamCursorValueInput {
   id: uuid
   isHidden: Boolean
@@ -1363,46 +1317,16 @@ input ChurchesUpdates {
 }
 
 type Classes {
-  adminUsers(
-    distinctOn: [AuthUsersAdminOnSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [AuthUsersAdminOnOrderBy!]
-    where: AuthUsersAdminOnBoolExp
-  ): [AuthUsersAdminOn!]!
+  adminUsers(distinctOn: [AuthUsersAdminOnSelectColumn!], limit: Int, offset: Int, orderBy: [AuthUsersAdminOnOrderBy!], where: AuthUsersAdminOnBoolExp): [AuthUsersAdminOn!]!
   blurhash: String
   color: bigint
-  editHistory(
-    distinctOn: [HistoryEditHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryEditHistoryOrderBy!]
-    where: HistoryEditHistoryBoolExp
-  ): [HistoryEditHistory!]!
-  editHistoryAggregate(
-    distinctOn: [HistoryEditHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryEditHistoryOrderBy!]
-    where: HistoryEditHistoryBoolExp
-  ): HistoryEditHistoryAggregate!
+  editHistory(distinctOn: [HistoryEditHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryEditHistoryOrderBy!], where: HistoryEditHistoryBoolExp): [HistoryEditHistory!]!
+  editHistoryAggregate(distinctOn: [HistoryEditHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryEditHistoryOrderBy!], where: HistoryEditHistoryBoolExp): HistoryEditHistoryAggregate!
   id: uuid!
   lastEdit: HistoryLatestEdits
-  meetings(
-    distinctOn: [HistoryMeetingsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryMeetingsOrderBy!]
-    where: HistoryMeetingsBoolExp
-  ): [HistoryMeetings!]!
+  meetings(distinctOn: [HistoryMeetingsSelectColumn!], limit: Int, offset: Int, orderBy: [HistoryMeetingsOrderBy!], where: HistoryMeetingsBoolExp): [HistoryMeetings!]!
   name: String!
-  persons(
-    distinctOn: [ClassesPersonsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [ClassesPersonsOrderBy!]
-    where: ClassesPersonsBoolExp
-  ): [ClassesPersons!]!
+  persons(distinctOn: [ClassesPersonsSelectColumn!], limit: Int, offset: Int, orderBy: [ClassesPersonsOrderBy!], where: ClassesPersonsBoolExp): [ClassesPersons!]!
   photoUpdatedAt: timestamptz
   service: Services!
   serviceGender: Boolean
@@ -1455,6 +1379,7 @@ input ClassesArrRelInsertInput {
   data: [ClassesInsertInput!]!
   onConflict: ClassesOnConflict
 }
+
 type ClassesAvgFields {
   color: Float
   serviceStudyYear: Float
@@ -1508,6 +1433,7 @@ input ClassesInsertInput {
   serviceStudyYear: Int
   studyYear: StudyYearsObjRelInsertInput
 }
+
 type ClassesMaxFields {
   blurhash: String
   color: bigint
@@ -1527,6 +1453,7 @@ input ClassesMaxOrderBy {
   serviceId: OrderBy
   serviceStudyYear: OrderBy
 }
+
 type ClassesMinFields {
   blurhash: String
   color: bigint
@@ -1557,6 +1484,7 @@ input ClassesOnConflict {
   updateColumns: [ClassesUpdateColumn!]! = []
   where: ClassesBoolExp
 }
+
 input ClassesOrderBy {
   adminUsersAggregate: AuthUsersAdminOnAggregateOrderBy
   blurhash: OrderBy
@@ -1608,6 +1536,7 @@ input ClassesPersonsMinOrderBy {
   classId: OrderBy
   personId: OrderBy
 }
+
 input ClassesPersonsOrderBy {
   class: ClassesOrderBy
   classId: OrderBy
@@ -1624,10 +1553,12 @@ input ClassesPersonsStreamCursorInput {
   initialValue: ClassesPersonsStreamCursorValueInput!
   ordering: CursorOrdering
 }
+
 input ClassesPersonsStreamCursorValueInput {
   classId: uuid
   personId: uuid
 }
+
 input ClassesPkColumnsInput {
   id: uuid!
 }
@@ -1658,6 +1589,7 @@ input ClassesSetInput {
   serviceId: uuid
   serviceStudyYear: Int
 }
+
 type ClassesStddevFields {
   color: Float
   serviceStudyYear: Float
@@ -1667,6 +1599,7 @@ input ClassesStddevOrderBy {
   color: OrderBy
   serviceStudyYear: OrderBy
 }
+
 type ClassesStddevPopFields {
   color: Float
   serviceStudyYear: Float
@@ -1676,6 +1609,7 @@ input ClassesStddevPopOrderBy {
   color: OrderBy
   serviceStudyYear: OrderBy
 }
+
 type ClassesStddevSampFields {
   color: Float
   serviceStudyYear: Float
@@ -1690,6 +1624,7 @@ input ClassesStreamCursorInput {
   initialValue: ClassesStreamCursorValueInput!
   ordering: CursorOrdering
 }
+
 input ClassesStreamCursorValueInput {
   blurhash: String
   color: bigint
@@ -1700,6 +1635,7 @@ input ClassesStreamCursorValueInput {
   serviceId: uuid
   serviceStudyYear: Int
 }
+
 type ClassesSumFields {
   color: bigint
   serviceStudyYear: Int
@@ -1723,6 +1659,7 @@ input ClassesUpdates {
   _set: ClassesSetInput
   where: ClassesBoolExp!
 }
+
 type ClassesVarPopFields {
   color: Float
   serviceStudyYear: Float
@@ -1732,6 +1669,7 @@ input ClassesVarPopOrderBy {
   color: OrderBy
   serviceStudyYear: OrderBy
 }
+
 type ClassesVarSampFields {
   color: Float
   serviceStudyYear: Float
@@ -1741,6 +1679,7 @@ input ClassesVarSampOrderBy {
   color: OrderBy
   serviceStudyYear: OrderBy
 }
+
 type ClassesVarianceFields {
   color: Float
   serviceStudyYear: Float
@@ -1754,20 +1693,8 @@ input ClassesVarianceOrderBy {
 type Colleges {
   id: uuid!
   name: String!
-  persons(
-    distinctOn: [PersonsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [PersonsOrderBy!]
-    where: PersonsBoolExp
-  ): [Persons!]!
-  personsAggregate(
-    distinctOn: [PersonsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [PersonsOrderBy!]
-    where: PersonsBoolExp
-  ): PersonsAggregate!
+  persons(distinctOn: [PersonsSelectColumn!], limit: Int, offset: Int, orderBy: [PersonsOrderBy!], where: PersonsBoolExp): [Persons!]!
+  personsAggregate(distinctOn: [PersonsSelectColumn!], limit: Int, offset: Int, orderBy: [PersonsOrderBy!], where: PersonsBoolExp): PersonsAggregate!
   university: Universities
   universityId: uuid
 }
@@ -1834,6 +1761,7 @@ input CollegesOnConflict {
   updateColumns: [CollegesUpdateColumn!]! = []
   where: CollegesBoolExp
 }
+
 input CollegesOrderBy {
   id: OrderBy
   name: OrderBy
@@ -1841,6 +1769,7 @@ input CollegesOrderBy {
   university: UniversitiesOrderBy
   universityId: OrderBy
 }
+
 input CollegesPkColumnsInput {
   id: uuid!
 }
@@ -1859,6 +1788,7 @@ input CollegesStreamCursorInput {
   initialValue: CollegesStreamCursorValueInput!
   ordering: CursorOrdering
 }
+
 input CollegesStreamCursorValueInput {
   id: uuid
   name: String
@@ -1873,6 +1803,7 @@ input CollegesUpdates {
   _set: CollegesSetInput
   where: CollegesBoolExp!
 }
+
 enum CursorOrdering {
   ASC
   DESC
@@ -1939,10 +1870,12 @@ input DistrictsOnConflict {
   updateColumns: [DistrictsUpdateColumn!]! = []
   where: DistrictsBoolExp
 }
+
 input DistrictsOrderBy {
   id: OrderBy
   name: OrderBy
 }
+
 input DistrictsPkColumnsInput {
   id: uuid!
 }
@@ -1960,6 +1893,7 @@ input DistrictsStreamCursorInput {
   initialValue: DistrictsStreamCursorValueInput!
   ordering: CursorOrdering
 }
+
 input DistrictsStreamCursorValueInput {
   id: uuid
   name: String
@@ -1977,31 +1911,13 @@ input DistrictsUpdates {
 type Families {
   address: Addresses
   blurhash: String
-  children(
-    distinctOn: [FamiliesFamiliesSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [FamiliesFamiliesOrderBy!]
-    where: FamiliesFamiliesBoolExp
-  ): [FamiliesFamilies!]!
+  children(distinctOn: [FamiliesFamiliesSelectColumn!], limit: Int, offset: Int, orderBy: [FamiliesFamiliesOrderBy!], where: FamiliesFamiliesBoolExp): [FamiliesFamilies!]!
   church: Churches
   churchId: uuid
   color: bigint
   deceasedSpouseName: String
-  editHistory(
-    distinctOn: [HistoryEditHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryEditHistoryOrderBy!]
-    where: HistoryEditHistoryBoolExp
-  ): [HistoryEditHistory!]!
-  editHistoryAggregate(
-    distinctOn: [HistoryEditHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryEditHistoryOrderBy!]
-    where: HistoryEditHistoryBoolExp
-  ): HistoryEditHistoryAggregate!
+  editHistory(distinctOn: [HistoryEditHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryEditHistoryOrderBy!], where: HistoryEditHistoryBoolExp): [HistoryEditHistory!]!
+  editHistoryAggregate(distinctOn: [HistoryEditHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryEditHistoryOrderBy!], where: HistoryEditHistoryBoolExp): HistoryEditHistoryAggregate!
   familyAdminsPhones: FamiliesAdminsPhones
   id: uuid!
   lastEdit: HistoryLatestEdits
@@ -2010,64 +1926,20 @@ type Families {
   marriageDate: date
   name: String!
   notes: String
-  parents(
-    distinctOn: [FamiliesFamiliesSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [FamiliesFamiliesOrderBy!]
-    where: FamiliesFamiliesBoolExp
-  ): [FamiliesFamilies!]!
-  persons(
-    distinctOn: [PersonsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [PersonsOrderBy!]
-    where: PersonsBoolExp
-  ): [Persons!]!
-  personsAggregate(
-    distinctOn: [PersonsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [PersonsOrderBy!]
-    where: PersonsBoolExp
-  ): PersonsAggregate!
+  parents(distinctOn: [FamiliesFamiliesSelectColumn!], limit: Int, offset: Int, orderBy: [FamiliesFamiliesOrderBy!], where: FamiliesFamiliesBoolExp): [FamiliesFamilies!]!
+  persons(distinctOn: [PersonsSelectColumn!], limit: Int, offset: Int, orderBy: [PersonsOrderBy!], where: PersonsBoolExp): [Persons!]!
+  personsAggregate(distinctOn: [PersonsSelectColumn!], limit: Int, offset: Int, orderBy: [PersonsOrderBy!], where: PersonsBoolExp): PersonsAggregate!
   photoUpdatedAt: timestamptz
   status: String!
-  stores(
-    distinctOn: [StoresSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [StoresOrderBy!]
-    where: StoresBoolExp
-  ): [Stores!]!
-  storesAggregate(
-    distinctOn: [StoresSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [StoresOrderBy!]
-    where: StoresBoolExp
-  ): StoresAggregate!
+  stores(distinctOn: [StoresSelectColumn!], limit: Int, offset: Int, orderBy: [StoresOrderBy!], where: StoresBoolExp): [Stores!]!
+  storesAggregate(distinctOn: [StoresSelectColumn!], limit: Int, offset: Int, orderBy: [StoresOrderBy!], where: StoresBoolExp): StoresAggregate!
   userCanEdit: Boolean
-  visitHistory(
-    distinctOn: [HistoryVisitHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryVisitHistoryOrderBy!]
-    where: HistoryVisitHistoryBoolExp
-  ): [HistoryVisitHistory!]!
-  visitHistoryAggregate(
-    distinctOn: [HistoryVisitHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryVisitHistoryOrderBy!]
-    where: HistoryVisitHistoryBoolExp
-  ): HistoryVisitHistoryAggregate!
+  visitHistory(distinctOn: [HistoryVisitHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryVisitHistoryOrderBy!], where: HistoryVisitHistoryBoolExp): [HistoryVisitHistory!]!
+  visitHistoryAggregate(distinctOn: [HistoryVisitHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryVisitHistoryOrderBy!], where: HistoryVisitHistoryBoolExp): HistoryVisitHistoryAggregate!
 }
 
 type FamiliesAdminsPhones {
-  aggregatedPhones(
-    path: String
-  ): json
+  aggregatedPhones(path: String): json
   familyId: uuid
 }
 
@@ -2078,6 +1950,7 @@ input FamiliesAdminsPhonesBoolExp {
   aggregatedPhones: JsonComparisonExp
   familyId: UuidComparisonExp
 }
+
 input FamiliesAdminsPhonesOrderBy {
   aggregatedPhones: OrderBy
   familyId: OrderBy
@@ -2092,6 +1965,7 @@ input FamiliesAdminsPhonesStreamCursorInput {
   initialValue: FamiliesAdminsPhonesStreamCursorValueInput!
   ordering: CursorOrdering
 }
+
 input FamiliesAdminsPhonesStreamCursorValueInput {
   aggregatedPhones: json
   familyId: uuid
@@ -2115,6 +1989,7 @@ type FamiliesAggregateFields {
   varSamp: FamiliesVarSampFields
   variance: FamiliesVarianceFields
 }
+
 type FamiliesAvgFields {
   color: Float
 }
@@ -2216,6 +2091,7 @@ input FamiliesFamiliesOnConflict {
   updateColumns: [FamiliesFamiliesUpdateColumn!]! = []
   where: FamiliesFamiliesBoolExp
 }
+
 input FamiliesFamiliesOrderBy {
   child: FamiliesOrderBy
   childFamilyId: OrderBy
@@ -2232,6 +2108,7 @@ input FamiliesFamiliesStreamCursorInput {
   initialValue: FamiliesFamiliesStreamCursorValueInput!
   ordering: CursorOrdering
 }
+
 input FamiliesFamiliesStreamCursorValueInput {
   childFamilyId: uuid
   parentFamilyId: uuid
@@ -2261,6 +2138,7 @@ input FamiliesInsertInput {
   stores: StoresArrRelInsertInput
   visitHistory: HistoryVisitHistoryArrRelInsertInput
 }
+
 type FamiliesMaxFields {
   blurhash: String
   churchId: uuid
@@ -2273,6 +2151,7 @@ type FamiliesMaxFields {
   photoUpdatedAt: timestamptz
   status: String
 }
+
 type FamiliesMinFields {
   blurhash: String
   churchId: uuid
@@ -2301,6 +2180,7 @@ input FamiliesOnConflict {
   updateColumns: [FamiliesUpdateColumn!]! = []
   where: FamiliesBoolExp
 }
+
 input FamiliesOrderBy {
   address: AddressesOrderBy
   blurhash: OrderBy
@@ -2326,6 +2206,7 @@ input FamiliesOrderBy {
   userCanEdit: OrderBy
   visitHistoryAggregate: HistoryVisitHistoryAggregateOrderBy
 }
+
 input FamiliesPkColumnsInput {
   id: uuid!
 }
@@ -2352,12 +2233,15 @@ input FamiliesSetInput {
   notes: String
   status: String
 }
+
 type FamiliesStddevFields {
   color: Float
 }
+
 type FamiliesStddevPopFields {
   color: Float
 }
+
 type FamiliesStddevSampFields {
   color: Float
 }
@@ -2366,6 +2250,7 @@ input FamiliesStreamCursorInput {
   initialValue: FamiliesStreamCursorValueInput!
   ordering: CursorOrdering
 }
+
 input FamiliesStreamCursorValueInput {
   blurhash: String
   churchId: uuid
@@ -2378,6 +2263,7 @@ input FamiliesStreamCursorValueInput {
   photoUpdatedAt: timestamptz
   status: String
 }
+
 type FamiliesSumFields {
   color: bigint
 }
@@ -2397,12 +2283,15 @@ input FamiliesUpdates {
   _set: FamiliesSetInput
   where: FamiliesBoolExp!
 }
+
 type FamiliesVarPopFields {
   color: Float
 }
+
 type FamiliesVarSampFields {
   color: Float
 }
+
 type FamiliesVarianceFields {
   color: Float
 }
@@ -2413,20 +2302,8 @@ type Fathers {
   id: uuid!
   isHidden: Boolean!
   name: String!
-  persons(
-    distinctOn: [PersonsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [PersonsOrderBy!]
-    where: PersonsBoolExp
-  ): [Persons!]!
-  personsAggregate(
-    distinctOn: [PersonsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [PersonsOrderBy!]
-    where: PersonsBoolExp
-  ): PersonsAggregate!
+  persons(distinctOn: [PersonsSelectColumn!], limit: Int, offset: Int, orderBy: [PersonsOrderBy!], where: PersonsBoolExp): [Persons!]!
+  personsAggregate(distinctOn: [PersonsSelectColumn!], limit: Int, offset: Int, orderBy: [PersonsOrderBy!], where: PersonsBoolExp): PersonsAggregate!
 }
 
 input FathersAggregateOrderBy {
@@ -2492,6 +2369,7 @@ input FathersOnConflict {
   updateColumns: [FathersUpdateColumn!]! = []
   where: FathersBoolExp
 }
+
 input FathersOrderBy {
   church: ChurchesOrderBy
   churchId: OrderBy
@@ -2500,6 +2378,7 @@ input FathersOrderBy {
   name: OrderBy
   personsAggregate: PersonsAggregateOrderBy
 }
+
 input FathersPkColumnsInput {
   id: uuid!
 }
@@ -2519,6 +2398,7 @@ input FathersStreamCursorInput {
   initialValue: FathersStreamCursorValueInput!
   ordering: CursorOrdering
 }
+
 input FathersStreamCursorValueInput {
   churchId: uuid
   id: uuid
@@ -2580,49 +2460,20 @@ input GeometryComparisonExp {
   _stTouches: geometry
   _stWithin: geometry
 }
+
 type Groups {
-  adminUsers(
-    distinctOn: [AuthUsersAdminOnSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [AuthUsersAdminOnOrderBy!]
-    where: AuthUsersAdminOnBoolExp
-  ): [AuthUsersAdminOn!]!
+  adminUsers(distinctOn: [AuthUsersAdminOnSelectColumn!], limit: Int, offset: Int, orderBy: [AuthUsersAdminOnOrderBy!], where: AuthUsersAdminOnBoolExp): [AuthUsersAdminOn!]!
   blurhash: String
   color: bigint
   defaultMeeting: HistoryMeetings
   defaultMeetingId: uuid
-  editHistroy(
-    distinctOn: [HistoryEditHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryEditHistoryOrderBy!]
-    where: HistoryEditHistoryBoolExp
-  ): [HistoryEditHistory!]!
-  editHistroyAggregate(
-    distinctOn: [HistoryEditHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryEditHistoryOrderBy!]
-    where: HistoryEditHistoryBoolExp
-  ): HistoryEditHistoryAggregate!
+  editHistroy(distinctOn: [HistoryEditHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryEditHistoryOrderBy!], where: HistoryEditHistoryBoolExp): [HistoryEditHistory!]!
+  editHistroyAggregate(distinctOn: [HistoryEditHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryEditHistoryOrderBy!], where: HistoryEditHistoryBoolExp): HistoryEditHistoryAggregate!
   id: uuid!
   lastEdit: HistoryLatestEdits
-  meetings(
-    distinctOn: [HistoryMeetingsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryMeetingsOrderBy!]
-    where: HistoryMeetingsBoolExp
-  ): [HistoryMeetings!]!
+  meetings(distinctOn: [HistoryMeetingsSelectColumn!], limit: Int, offset: Int, orderBy: [HistoryMeetingsOrderBy!], where: HistoryMeetingsBoolExp): [HistoryMeetings!]!
   name: String!
-  persons(
-    distinctOn: [PersonsGroupsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [PersonsGroupsOrderBy!]
-    where: PersonsGroupsBoolExp
-  ): [PersonsGroups!]!
+  persons(distinctOn: [PersonsGroupsSelectColumn!], limit: Int, offset: Int, orderBy: [PersonsGroupsOrderBy!], where: PersonsGroupsBoolExp): [PersonsGroups!]!
   photoUpdatedAt: timestamptz
   service: Services!
   serviceId: uuid!
@@ -2671,6 +2522,7 @@ input GroupsArrRelInsertInput {
   data: [GroupsInsertInput!]!
   onConflict: GroupsOnConflict
 }
+
 type GroupsAvgFields {
   color: Float
 }
@@ -2723,6 +2575,7 @@ input GroupsInsertInput {
   serviceId: uuid
   validity: daterange
 }
+
 type GroupsMaxFields {
   blurhash: String
   color: bigint
@@ -2742,6 +2595,7 @@ input GroupsMaxOrderBy {
   photoUpdatedAt: OrderBy
   serviceId: OrderBy
 }
+
 type GroupsMinFields {
   blurhash: String
   color: bigint
@@ -2777,6 +2631,7 @@ input GroupsOnConflict {
   updateColumns: [GroupsUpdateColumn!]! = []
   where: GroupsBoolExp
 }
+
 input GroupsOrderBy {
   adminUsersAggregate: AuthUsersAdminOnAggregateOrderBy
   blurhash: OrderBy
@@ -2795,6 +2650,7 @@ input GroupsOrderBy {
   userCanEdit: OrderBy
   validity: OrderBy
 }
+
 input GroupsPkColumnsInput {
   id: uuid!
 }
@@ -2817,6 +2673,7 @@ input GroupsSetInput {
   serviceId: uuid
   validity: daterange
 }
+
 type GroupsStddevFields {
   color: Float
 }
@@ -2824,6 +2681,7 @@ type GroupsStddevFields {
 input GroupsStddevOrderBy {
   color: OrderBy
 }
+
 type GroupsStddevPopFields {
   color: Float
 }
@@ -2831,6 +2689,7 @@ type GroupsStddevPopFields {
 input GroupsStddevPopOrderBy {
   color: OrderBy
 }
+
 type GroupsStddevSampFields {
   color: Float
 }
@@ -2843,6 +2702,7 @@ input GroupsStreamCursorInput {
   initialValue: GroupsStreamCursorValueInput!
   ordering: CursorOrdering
 }
+
 input GroupsStreamCursorValueInput {
   blurhash: String
   color: bigint
@@ -2853,6 +2713,7 @@ input GroupsStreamCursorValueInput {
   serviceId: uuid
   validity: daterange
 }
+
 type GroupsSumFields {
   color: bigint
 }
@@ -2874,6 +2735,7 @@ input GroupsUpdates {
   _set: GroupsSetInput
   where: GroupsBoolExp!
 }
+
 type GroupsVarPopFields {
   color: Float
 }
@@ -2881,6 +2743,7 @@ type GroupsVarPopFields {
 input GroupsVarPopOrderBy {
   color: OrderBy
 }
+
 type GroupsVarSampFields {
   color: Float
 }
@@ -2888,6 +2751,7 @@ type GroupsVarSampFields {
 input GroupsVarSampOrderBy {
   color: OrderBy
 }
+
 type GroupsVarianceFields {
   color: Float
 }
@@ -2897,35 +2761,11 @@ input GroupsVarianceOrderBy {
 }
 
 type HistoryAttendanceDays {
-  confessionHistory(
-    distinctOn: [HistoryConfessionHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryConfessionHistoryOrderBy!]
-    where: HistoryConfessionHistoryBoolExp
-  ): [HistoryConfessionHistory!]!
-  confessionHistoryAggregate(
-    distinctOn: [HistoryConfessionHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryConfessionHistoryOrderBy!]
-    where: HistoryConfessionHistoryBoolExp
-  ): HistoryConfessionHistoryAggregate!
+  confessionHistory(distinctOn: [HistoryConfessionHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryConfessionHistoryOrderBy!], where: HistoryConfessionHistoryBoolExp): [HistoryConfessionHistory!]!
+  confessionHistoryAggregate(distinctOn: [HistoryConfessionHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryConfessionHistoryOrderBy!], where: HistoryConfessionHistoryBoolExp): HistoryConfessionHistoryAggregate!
   day: date!
-  kodasHistory(
-    distinctOn: [HistoryKodasHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryKodasHistoryOrderBy!]
-    where: HistoryKodasHistoryBoolExp
-  ): [HistoryKodasHistory!]!
-  kodasHistoryAggregate(
-    distinctOn: [HistoryKodasHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryKodasHistoryOrderBy!]
-    where: HistoryKodasHistoryBoolExp
-  ): HistoryKodasHistoryAggregate!
+  kodasHistory(distinctOn: [HistoryKodasHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryKodasHistoryOrderBy!], where: HistoryKodasHistoryBoolExp): [HistoryKodasHistory!]!
+  kodasHistoryAggregate(distinctOn: [HistoryKodasHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryKodasHistoryOrderBy!], where: HistoryKodasHistoryBoolExp): HistoryKodasHistoryAggregate!
 }
 
 input HistoryAttendanceDaysBoolExp {
@@ -2964,11 +2804,13 @@ input HistoryAttendanceDaysOnConflict {
   updateColumns: [HistoryAttendanceDaysUpdateColumn!]! = []
   where: HistoryAttendanceDaysBoolExp
 }
+
 input HistoryAttendanceDaysOrderBy {
   confessionHistoryAggregate: HistoryConfessionHistoryAggregateOrderBy
   day: OrderBy
   kodasHistoryAggregate: HistoryKodasHistoryAggregateOrderBy
 }
+
 input HistoryAttendanceDaysPkColumnsInput {
   day: date!
 }
@@ -2985,6 +2827,7 @@ input HistoryAttendanceDaysStreamCursorInput {
   initialValue: HistoryAttendanceDaysStreamCursorValueInput!
   ordering: CursorOrdering
 }
+
 input HistoryAttendanceDaysStreamCursorValueInput {
   day: date
 }
@@ -3069,6 +2912,7 @@ input HistoryAttendanceHistoryInsertInput {
   personId: uuid
   recordedByUser: AuthUsersDataObjRelInsertInput
 }
+
 type HistoryAttendanceHistoryMaxFields {
   datetime: timestamptz
   day: date
@@ -3086,6 +2930,7 @@ input HistoryAttendanceHistoryMaxOrderBy {
   personId: OrderBy
   recordedBy: OrderBy
 }
+
 type HistoryAttendanceHistoryMinFields {
   datetime: timestamptz
   day: date
@@ -3127,6 +2972,7 @@ input HistoryAttendanceHistoryOrderBy {
   recordedBy: OrderBy
   recordedByUser: AuthUsersDataOrderBy
 }
+
 input HistoryAttendanceHistoryPkColumnsInput {
   id: uuid!
 }
@@ -3157,6 +3003,7 @@ input HistoryAttendanceHistoryStreamCursorInput {
   initialValue: HistoryAttendanceHistoryStreamCursorValueInput!
   ordering: CursorOrdering
 }
+
 input HistoryAttendanceHistoryStreamCursorValueInput {
   asServant: Boolean
   datetime: timestamptz
@@ -3231,6 +3078,7 @@ input HistoryCallHistoryInsertInput {
   time: timestamptz
   user: AuthUsersDataObjRelInsertInput
 }
+
 type HistoryCallHistoryMaxFields {
   personId: uuid
   recordedBy: uuid
@@ -3242,6 +3090,7 @@ input HistoryCallHistoryMaxOrderBy {
   recordedBy: OrderBy
   time: OrderBy
 }
+
 type HistoryCallHistoryMinFields {
   personId: uuid
   recordedBy: uuid
@@ -3264,6 +3113,7 @@ input HistoryCallHistoryOnConflict {
   updateColumns: [HistoryCallHistoryUpdateColumn!]! = []
   where: HistoryCallHistoryBoolExp
 }
+
 input HistoryCallHistoryOrderBy {
   person: PersonsOrderBy
   personId: OrderBy
@@ -3282,6 +3132,7 @@ input HistoryCallHistoryStreamCursorInput {
   initialValue: HistoryCallHistoryStreamCursorValueInput!
   ordering: CursorOrdering
 }
+
 input HistoryCallHistoryStreamCursorValueInput {
   personId: uuid
   recordedBy: uuid
@@ -3355,6 +3206,7 @@ input HistoryConfessionHistoryInsertInput {
   personId: uuid
   user: AuthUsersDataObjRelInsertInput
 }
+
 type HistoryConfessionHistoryMaxFields {
   dayId: date
   id: uuid
@@ -3370,6 +3222,7 @@ input HistoryConfessionHistoryMaxOrderBy {
   recordedBy: OrderBy
   time: OrderBy
 }
+
 type HistoryConfessionHistoryMinFields {
   dayId: date
   id: uuid
@@ -3420,6 +3273,7 @@ input HistoryConfessionHistoryStreamCursorInput {
   initialValue: HistoryConfessionHistoryStreamCursorValueInput!
   ordering: CursorOrdering
 }
+
 input HistoryConfessionHistoryStreamCursorValueInput {
   dayId: date
   id: uuid
@@ -3471,6 +3325,7 @@ input HistoryEditHistoryBoolExp {
   time: TimestamptzComparisonExp
   user: AuthUsersDataBoolExp
 }
+
 type HistoryEditHistoryMaxFields {
   recordId: uuid
   recordedBy: uuid
@@ -3482,6 +3337,7 @@ input HistoryEditHistoryMaxOrderBy {
   recordedBy: OrderBy
   time: OrderBy
 }
+
 type HistoryEditHistoryMinFields {
   recordId: uuid
   recordedBy: uuid
@@ -3493,6 +3349,7 @@ input HistoryEditHistoryMinOrderBy {
   recordedBy: OrderBy
   time: OrderBy
 }
+
 input HistoryEditHistoryOrderBy {
   recordId: OrderBy
   recordedBy: OrderBy
@@ -3512,6 +3369,7 @@ input HistoryEditHistoryStreamCursorInput {
   initialValue: HistoryEditHistoryStreamCursorValueInput!
   ordering: CursorOrdering
 }
+
 input HistoryEditHistoryStreamCursorValueInput {
   recordId: uuid
   recordedBy: uuid
@@ -3582,6 +3440,7 @@ input HistoryKodasHistoryInsertInput {
   personId: uuid
   user: AuthUsersDataObjRelInsertInput
 }
+
 type HistoryKodasHistoryMaxFields {
   dayId: date
   id: uuid
@@ -3597,6 +3456,7 @@ input HistoryKodasHistoryMaxOrderBy {
   recordedBy: OrderBy
   time: OrderBy
 }
+
 type HistoryKodasHistoryMinFields {
   dayId: date
   id: uuid
@@ -3623,6 +3483,7 @@ input HistoryKodasHistoryOnConflict {
   updateColumns: [HistoryKodasHistoryUpdateColumn!]! = []
   where: HistoryKodasHistoryBoolExp
 }
+
 input HistoryKodasHistoryOrderBy {
   day: HistoryAttendanceDaysOrderBy
   dayId: OrderBy
@@ -3646,6 +3507,7 @@ input HistoryKodasHistoryStreamCursorInput {
   initialValue: HistoryKodasHistoryStreamCursorValueInput!
   ordering: CursorOrdering
 }
+
 input HistoryKodasHistoryStreamCursorValueInput {
   dayId: date
   id: uuid
@@ -3676,6 +3538,7 @@ input HistoryLatestCallsBoolExp {
   time: TimestamptzComparisonExp
   user: AuthUsersDataBoolExp
 }
+
 input HistoryLatestCallsOrderBy {
   person: PersonsOrderBy
   personId: OrderBy
@@ -3729,6 +3592,7 @@ input HistoryLatestEditsBoolExp {
   time: TimestamptzComparisonExp
   user: AuthUsersDataBoolExp
 }
+
 input HistoryLatestEditsOrderBy {
   recordId: OrderBy
   recordedBy: OrderBy
@@ -3785,6 +3649,7 @@ input HistoryLatestKodasesBoolExp {
   time: DateComparisonExp
   user: AuthUsersDataBoolExp
 }
+
 input HistoryLatestKodasesOrderBy {
   person: PersonsOrderBy
   personId: OrderBy
@@ -3813,6 +3678,7 @@ input HistoryLatestVisitsBoolExp {
   user: AuthUsersDataBoolExp
   visitId: UuidComparisonExp
 }
+
 input HistoryLatestVisitsOrderBy {
   recordId: OrderBy
   recordedBy: OrderBy
@@ -3872,6 +3738,7 @@ input HistoryMeetingDaysAggregateOrderBy {
   varSamp: HistoryMeetingDaysVarSampOrderBy
   variance: HistoryMeetingDaysVarianceOrderBy
 }
+
 type HistoryMeetingDaysAvgFields {
   personsCount: Float
   servantsCount: Float
@@ -3900,6 +3767,7 @@ input HistoryMeetingDaysBoolExp {
   studyYearId: SmallintComparisonExp
   totalCount: IntComparisonExp
 }
+
 type HistoryMeetingDaysMaxFields {
   day: date
   meetingId: uuid
@@ -3917,6 +3785,7 @@ input HistoryMeetingDaysMaxOrderBy {
   studyYearId: OrderBy
   totalCount: OrderBy
 }
+
 type HistoryMeetingDaysMinFields {
   day: date
   meetingId: uuid
@@ -3934,6 +3803,7 @@ input HistoryMeetingDaysMinOrderBy {
   studyYearId: OrderBy
   totalCount: OrderBy
 }
+
 input HistoryMeetingDaysOrderBy {
   day: OrderBy
   gender: OrderBy
@@ -3963,6 +3833,7 @@ enum HistoryMeetingDaysSelectColumnHistoryMeetingDaysAggregateBoolExpBool_andArg
 enum HistoryMeetingDaysSelectColumnHistoryMeetingDaysAggregateBoolExpBool_orArgumentsColumns {
   gender
 }
+
 type HistoryMeetingDaysStddevFields {
   personsCount: Float
   servantsCount: Float
@@ -3976,6 +3847,7 @@ input HistoryMeetingDaysStddevOrderBy {
   studyYearId: OrderBy
   totalCount: OrderBy
 }
+
 type HistoryMeetingDaysStddevPopFields {
   personsCount: Float
   servantsCount: Float
@@ -3989,6 +3861,7 @@ input HistoryMeetingDaysStddevPopOrderBy {
   studyYearId: OrderBy
   totalCount: OrderBy
 }
+
 type HistoryMeetingDaysStddevSampFields {
   personsCount: Float
   servantsCount: Float
@@ -4007,6 +3880,7 @@ input HistoryMeetingDaysStreamCursorInput {
   initialValue: HistoryMeetingDaysStreamCursorValueInput!
   ordering: CursorOrdering
 }
+
 input HistoryMeetingDaysStreamCursorValueInput {
   day: date
   gender: Boolean
@@ -4016,6 +3890,7 @@ input HistoryMeetingDaysStreamCursorValueInput {
   studyYearId: smallint
   totalCount: Int
 }
+
 type HistoryMeetingDaysSumFields {
   personsCount: Int
   servantsCount: Int
@@ -4029,6 +3904,7 @@ input HistoryMeetingDaysSumOrderBy {
   studyYearId: OrderBy
   totalCount: OrderBy
 }
+
 type HistoryMeetingDaysVarPopFields {
   personsCount: Float
   servantsCount: Float
@@ -4042,6 +3918,7 @@ input HistoryMeetingDaysVarPopOrderBy {
   studyYearId: OrderBy
   totalCount: OrderBy
 }
+
 type HistoryMeetingDaysVarSampFields {
   personsCount: Float
   servantsCount: Float
@@ -4055,6 +3932,7 @@ input HistoryMeetingDaysVarSampOrderBy {
   studyYearId: OrderBy
   totalCount: OrderBy
 }
+
 type HistoryMeetingDaysVarianceFields {
   personsCount: Float
   servantsCount: Float
@@ -4071,20 +3949,8 @@ input HistoryMeetingDaysVarianceOrderBy {
 
 type HistoryMeetingRoster {
   asServant: Boolean
-  attendanceHistory(
-    distinctOn: [HistoryAttendanceHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryAttendanceHistoryOrderBy!]
-    where: HistoryAttendanceHistoryBoolExp
-  ): [HistoryAttendanceHistory!]!
-  attendanceHistoryAggregate(
-    distinctOn: [HistoryAttendanceHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryAttendanceHistoryOrderBy!]
-    where: HistoryAttendanceHistoryBoolExp
-  ): HistoryAttendanceHistoryAggregate!
+  attendanceHistory(distinctOn: [HistoryAttendanceHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryAttendanceHistoryOrderBy!], where: HistoryAttendanceHistoryBoolExp): [HistoryAttendanceHistory!]!
+  attendanceHistoryAggregate(distinctOn: [HistoryAttendanceHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryAttendanceHistoryOrderBy!], where: HistoryAttendanceHistoryBoolExp): HistoryAttendanceHistoryAggregate!
   blurhash: String
   color: bigint
   gender: Boolean
@@ -4117,6 +3983,7 @@ type HistoryMeetingRosterAggregateFields {
   varSamp: HistoryMeetingRosterVarSampFields
   variance: HistoryMeetingRosterVarianceFields
 }
+
 type HistoryMeetingRosterAvgFields {
   color: Float
   studyYearId: Float
@@ -4142,6 +4009,7 @@ input HistoryMeetingRosterBoolExp {
   studyYearId: IntComparisonExp
   studyYearName: StringComparisonExp
 }
+
 type HistoryMeetingRosterMaxFields {
   blurhash: String
   color: bigint
@@ -4153,6 +4021,7 @@ type HistoryMeetingRosterMaxFields {
   studyYearId: Int
   studyYearName: String
 }
+
 type HistoryMeetingRosterMinFields {
   blurhash: String
   color: bigint
@@ -4164,6 +4033,7 @@ type HistoryMeetingRosterMinFields {
   studyYearId: Int
   studyYearName: String
 }
+
 input HistoryMeetingRosterOrderBy {
   asServant: OrderBy
   attendanceHistoryAggregate: HistoryAttendanceHistoryAggregateOrderBy
@@ -4194,14 +4064,17 @@ enum HistoryMeetingRosterSelectColumn {
   studyYearId
   studyYearName
 }
+
 type HistoryMeetingRosterStddevFields {
   color: Float
   studyYearId: Float
 }
+
 type HistoryMeetingRosterStddevPopFields {
   color: Float
   studyYearId: Float
 }
+
 type HistoryMeetingRosterStddevSampFields {
   color: Float
   studyYearId: Float
@@ -4211,6 +4084,7 @@ input HistoryMeetingRosterStreamCursorInput {
   initialValue: HistoryMeetingRosterStreamCursorValueInput!
   ordering: CursorOrdering
 }
+
 input HistoryMeetingRosterStreamCursorValueInput {
   asServant: Boolean
   blurhash: String
@@ -4224,54 +4098,34 @@ input HistoryMeetingRosterStreamCursorValueInput {
   studyYearId: Int
   studyYearName: String
 }
+
 type HistoryMeetingRosterSumFields {
   color: bigint
   studyYearId: Int
 }
+
 type HistoryMeetingRosterVarPopFields {
   color: Float
   studyYearId: Float
 }
+
 type HistoryMeetingRosterVarSampFields {
   color: Float
   studyYearId: Float
 }
+
 type HistoryMeetingRosterVarianceFields {
   color: Float
   studyYearId: Float
 }
 
 type HistoryMeetings {
-  attendanceHistory(
-    distinctOn: [HistoryAttendanceHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryAttendanceHistoryOrderBy!]
-    where: HistoryAttendanceHistoryBoolExp
-  ): [HistoryAttendanceHistory!]!
-  attendanceHistoryAggregate(
-    distinctOn: [HistoryAttendanceHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryAttendanceHistoryOrderBy!]
-    where: HistoryAttendanceHistoryBoolExp
-  ): HistoryAttendanceHistoryAggregate!
+  attendanceHistory(distinctOn: [HistoryAttendanceHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryAttendanceHistoryOrderBy!], where: HistoryAttendanceHistoryBoolExp): [HistoryAttendanceHistory!]!
+  attendanceHistoryAggregate(distinctOn: [HistoryAttendanceHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryAttendanceHistoryOrderBy!], where: HistoryAttendanceHistoryBoolExp): HistoryAttendanceHistoryAggregate!
   audience: meeting_audience!
   color: bigint
-  days(
-    distinctOn: [HistoryMeetingDaysSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryMeetingDaysOrderBy!]
-    where: HistoryMeetingDaysBoolExp
-  ): [HistoryMeetingDays!]!
-  daysAggregate(
-    distinctOn: [HistoryMeetingDaysSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryMeetingDaysOrderBy!]
-    where: HistoryMeetingDaysBoolExp
-  ): HistoryMeetingDaysAggregate!
+  days(distinctOn: [HistoryMeetingDaysSelectColumn!], limit: Int, offset: Int, orderBy: [HistoryMeetingDaysOrderBy!], where: HistoryMeetingDaysBoolExp): [HistoryMeetingDays!]!
+  daysAggregate(distinctOn: [HistoryMeetingDaysSelectColumn!], limit: Int, offset: Int, orderBy: [HistoryMeetingDaysOrderBy!], where: HistoryMeetingDaysBoolExp): HistoryMeetingDaysAggregate!
   group: Groups
   groupId: uuid
   id: uuid!
@@ -4388,6 +4242,7 @@ input HistoryMeetingsOnConflict {
   updateColumns: [HistoryMeetingsUpdateColumn!]! = []
   where: HistoryMeetingsBoolExp
 }
+
 input HistoryMeetingsOrderBy {
   attendanceHistoryAggregate: HistoryAttendanceHistoryAggregateOrderBy
   audience: OrderBy
@@ -4404,6 +4259,7 @@ input HistoryMeetingsOrderBy {
   serviceStudyYear: OrderBy
   studyYear: StudyYearsOrderBy
 }
+
 input HistoryMeetingsPkColumnsInput {
   id: uuid!
 }
@@ -4446,6 +4302,7 @@ input HistoryMeetingsStreamCursorInput {
   initialValue: HistoryMeetingsStreamCursorValueInput!
   ordering: CursorOrdering
 }
+
 input HistoryMeetingsStreamCursorValueInput {
   audience: meeting_audience
   color: bigint
@@ -4553,6 +4410,7 @@ input HistoryVisitHistoryInsertInput {
   time: timestamptz
   user: AuthUsersDataObjRelInsertInput
 }
+
 type HistoryVisitHistoryMaxFields {
   recordId: uuid
   recordedBy: uuid
@@ -4566,6 +4424,7 @@ input HistoryVisitHistoryMaxOrderBy {
   time: OrderBy
   visitId: OrderBy
 }
+
 type HistoryVisitHistoryMinFields {
   recordId: uuid
   recordedBy: uuid
@@ -4590,6 +4449,7 @@ input HistoryVisitHistoryOnConflict {
   updateColumns: [HistoryVisitHistoryUpdateColumn!]! = []
   where: HistoryVisitHistoryBoolExp
 }
+
 input HistoryVisitHistoryOrderBy {
   isFatherVisit: OrderBy
   recordId: OrderBy
@@ -4621,6 +4481,7 @@ input HistoryVisitHistoryStreamCursorInput {
   initialValue: HistoryVisitHistoryStreamCursorValueInput!
   ordering: CursorOrdering
 }
+
 input HistoryVisitHistoryStreamCursorValueInput {
   isFatherVisit: Boolean
   recordId: uuid
@@ -4638,13 +4499,7 @@ type Hobbies {
   color: bigint
   id: uuid!
   name: String!
-  persons(
-    distinctOn: [PersonsHobbiesSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [PersonsHobbiesOrderBy!]
-    where: PersonsHobbiesBoolExp
-  ): [PersonsHobbies!]!
+  persons(distinctOn: [PersonsHobbiesSelectColumn!], limit: Int, offset: Int, orderBy: [PersonsHobbiesOrderBy!], where: PersonsHobbiesBoolExp): [PersonsHobbies!]!
 }
 
 input HobbiesBoolExp {
@@ -4687,12 +4542,14 @@ input HobbiesOnConflict {
   updateColumns: [HobbiesUpdateColumn!]! = []
   where: HobbiesBoolExp
 }
+
 input HobbiesOrderBy {
   color: OrderBy
   id: OrderBy
   name: OrderBy
   personsAggregate: PersonsHobbiesAggregateOrderBy
 }
+
 input HobbiesPkColumnsInput {
   id: uuid!
 }
@@ -4712,6 +4569,7 @@ input HobbiesStreamCursorInput {
   initialValue: HobbiesStreamCursorValueInput!
   ordering: CursorOrdering
 }
+
 input HobbiesStreamCursorValueInput {
   color: bigint
   id: uuid
@@ -4744,20 +4602,8 @@ input IntComparisonExp {
 type Jobs {
   id: uuid!
   name: String!
-  persons(
-    distinctOn: [PersonsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [PersonsOrderBy!]
-    where: PersonsBoolExp
-  ): [Persons!]!
-  personsAggregate(
-    distinctOn: [PersonsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [PersonsOrderBy!]
-    where: PersonsBoolExp
-  ): PersonsAggregate!
+  persons(distinctOn: [PersonsSelectColumn!], limit: Int, offset: Int, orderBy: [PersonsOrderBy!], where: PersonsBoolExp): [Persons!]!
+  personsAggregate(distinctOn: [PersonsSelectColumn!], limit: Int, offset: Int, orderBy: [PersonsOrderBy!], where: PersonsBoolExp): PersonsAggregate!
 }
 
 input JobsBoolExp {
@@ -4795,11 +4641,13 @@ input JobsOnConflict {
   updateColumns: [JobsUpdateColumn!]! = []
   where: JobsBoolExp
 }
+
 input JobsOrderBy {
   id: OrderBy
   name: OrderBy
   personsAggregate: PersonsAggregateOrderBy
 }
+
 input JobsPkColumnsInput {
   id: uuid!
 }
@@ -4817,6 +4665,7 @@ input JobsStreamCursorInput {
   initialValue: JobsStreamCursorValueInput!
   ordering: CursorOrdering
 }
+
 input JobsStreamCursorValueInput {
   id: uuid
   name: String
@@ -4890,6 +4739,7 @@ input NameComparisonExp {
   _neq: name
   _nin: [name!]
 }
+
 enum OrderBy {
   ASC
   ASC_NULLS_FIRST
@@ -4903,20 +4753,8 @@ type PersonStates {
   color: bigint!
   id: uuid!
   name: String!
-  persons(
-    distinctOn: [PersonsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [PersonsOrderBy!]
-    where: PersonsBoolExp
-  ): [Persons!]!
-  personsAggregate(
-    distinctOn: [PersonsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [PersonsOrderBy!]
-    where: PersonsBoolExp
-  ): PersonsAggregate!
+  persons(distinctOn: [PersonsSelectColumn!], limit: Int, offset: Int, orderBy: [PersonsOrderBy!], where: PersonsBoolExp): [Persons!]!
+  personsAggregate(distinctOn: [PersonsSelectColumn!], limit: Int, offset: Int, orderBy: [PersonsOrderBy!], where: PersonsBoolExp): PersonsAggregate!
 }
 
 input PersonStatesBoolExp {
@@ -4961,12 +4799,14 @@ input PersonStatesOnConflict {
   updateColumns: [PersonStatesUpdateColumn!]! = []
   where: PersonStatesBoolExp
 }
+
 input PersonStatesOrderBy {
   color: OrderBy
   id: OrderBy
   name: OrderBy
   personsAggregate: PersonsAggregateOrderBy
 }
+
 input PersonStatesPkColumnsInput {
   id: uuid!
 }
@@ -4986,6 +4826,7 @@ input PersonStatesStreamCursorInput {
   initialValue: PersonStatesStreamCursorValueInput!
   ordering: CursorOrdering
 }
+
 input PersonStatesStreamCursorValueInput {
   color: bigint
   id: uuid
@@ -5009,20 +4850,8 @@ type PersonTypes {
   isHidden: Boolean!
   name: String!
   order: Int!
-  persons(
-    distinctOn: [PersonsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [PersonsOrderBy!]
-    where: PersonsBoolExp
-  ): [Persons!]!
-  personsAggregate(
-    distinctOn: [PersonsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [PersonsOrderBy!]
-    where: PersonsBoolExp
-  ): PersonsAggregate!
+  persons(distinctOn: [PersonsSelectColumn!], limit: Int, offset: Int, orderBy: [PersonsOrderBy!], where: PersonsBoolExp): [Persons!]!
+  personsAggregate(distinctOn: [PersonsSelectColumn!], limit: Int, offset: Int, orderBy: [PersonsOrderBy!], where: PersonsBoolExp): PersonsAggregate!
 }
 
 input PersonTypesBoolExp {
@@ -5064,6 +4893,7 @@ input PersonTypesOnConflict {
   updateColumns: [PersonTypesUpdateColumn!]! = []
   where: PersonTypesBoolExp
 }
+
 input PersonTypesOrderBy {
   id: OrderBy
   isFamilyAdmin: OrderBy
@@ -5072,6 +4902,7 @@ input PersonTypesOrderBy {
   order: OrderBy
   personsAggregate: PersonsAggregateOrderBy
 }
+
 input PersonTypesPkColumnsInput {
   id: uuid!
 }
@@ -5092,6 +4923,7 @@ input PersonTypesStreamCursorInput {
   initialValue: PersonTypesStreamCursorValueInput!
   ordering: CursorOrdering
 }
+
 input PersonTypesStreamCursorValueInput {
   id: uuid
   isFamilyAdmin: Boolean
@@ -5111,96 +4943,30 @@ input PersonTypesUpdates {
 
 type Persons {
   address: Addresses
-  attendanceHistory(
-    distinctOn: [HistoryAttendanceHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryAttendanceHistoryOrderBy!]
-    where: HistoryAttendanceHistoryBoolExp
-  ): [HistoryAttendanceHistory!]!
-  attendanceHistoryAggregate(
-    distinctOn: [HistoryAttendanceHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryAttendanceHistoryOrderBy!]
-    where: HistoryAttendanceHistoryBoolExp
-  ): HistoryAttendanceHistoryAggregate!
+  attendanceHistory(distinctOn: [HistoryAttendanceHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryAttendanceHistoryOrderBy!], where: HistoryAttendanceHistoryBoolExp): [HistoryAttendanceHistory!]!
+  attendanceHistoryAggregate(distinctOn: [HistoryAttendanceHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryAttendanceHistoryOrderBy!], where: HistoryAttendanceHistoryBoolExp): HistoryAttendanceHistoryAggregate!
   birthdate: date
   birthday: String
   blurhash: String
-  callHistory(
-    distinctOn: [HistoryCallHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryCallHistoryOrderBy!]
-    where: HistoryCallHistoryBoolExp
-  ): [HistoryCallHistory!]!
-  callHistoryAggregate(
-    distinctOn: [HistoryCallHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryCallHistoryOrderBy!]
-    where: HistoryCallHistoryBoolExp
-  ): HistoryCallHistoryAggregate!
+  callHistory(distinctOn: [HistoryCallHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryCallHistoryOrderBy!], where: HistoryCallHistoryBoolExp): [HistoryCallHistory!]!
+  callHistoryAggregate(distinctOn: [HistoryCallHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryCallHistoryOrderBy!], where: HistoryCallHistoryBoolExp): HistoryCallHistoryAggregate!
   church: Churches
   churchId: uuid
-  classes(
-    distinctOn: [ClassesPersonsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [ClassesPersonsOrderBy!]
-    where: ClassesPersonsBoolExp
-  ): [ClassesPersons!]!
+  classes(distinctOn: [ClassesPersonsSelectColumn!], limit: Int, offset: Int, orderBy: [ClassesPersonsOrderBy!], where: ClassesPersonsBoolExp): [ClassesPersons!]!
   college: Colleges
   collegeId: uuid
   color: bigint
-  confessionHistory(
-    distinctOn: [HistoryConfessionHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryConfessionHistoryOrderBy!]
-    where: HistoryConfessionHistoryBoolExp
-  ): [HistoryConfessionHistory!]!
-  confessionHistoryAggregate(
-    distinctOn: [HistoryConfessionHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryConfessionHistoryOrderBy!]
-    where: HistoryConfessionHistoryBoolExp
-  ): HistoryConfessionHistoryAggregate!
-  editHistory(
-    distinctOn: [HistoryEditHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryEditHistoryOrderBy!]
-    where: HistoryEditHistoryBoolExp
-  ): [HistoryEditHistory!]!
-  editHistoryAggregate(
-    distinctOn: [HistoryEditHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryEditHistoryOrderBy!]
-    where: HistoryEditHistoryBoolExp
-  ): HistoryEditHistoryAggregate!
+  confessionHistory(distinctOn: [HistoryConfessionHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryConfessionHistoryOrderBy!], where: HistoryConfessionHistoryBoolExp): [HistoryConfessionHistory!]!
+  confessionHistoryAggregate(distinctOn: [HistoryConfessionHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryConfessionHistoryOrderBy!], where: HistoryConfessionHistoryBoolExp): HistoryConfessionHistoryAggregate!
+  editHistory(distinctOn: [HistoryEditHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryEditHistoryOrderBy!], where: HistoryEditHistoryBoolExp): [HistoryEditHistory!]!
+  editHistoryAggregate(distinctOn: [HistoryEditHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryEditHistoryOrderBy!], where: HistoryEditHistoryBoolExp): HistoryEditHistoryAggregate!
   family: Families
   familyId: uuid
   father: Fathers
   fatherId: uuid
   gender: Boolean!
-  groups(
-    distinctOn: [PersonsGroupsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [PersonsGroupsOrderBy!]
-    where: PersonsGroupsBoolExp
-  ): [PersonsGroups!]!
-  hobbies(
-    distinctOn: [PersonsHobbiesSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [PersonsHobbiesOrderBy!]
-    where: PersonsHobbiesBoolExp
-  ): [PersonsHobbies!]!
+  groups(distinctOn: [PersonsGroupsSelectColumn!], limit: Int, offset: Int, orderBy: [PersonsGroupsOrderBy!], where: PersonsGroupsBoolExp): [PersonsGroups!]!
+  hobbies(distinctOn: [PersonsHobbiesSelectColumn!], limit: Int, offset: Int, orderBy: [PersonsHobbiesOrderBy!], where: PersonsHobbiesBoolExp): [PersonsHobbies!]!
   id: uuid!
   isServant: Boolean!
   isShammas: Boolean!
@@ -5208,20 +4974,8 @@ type Persons {
   job: Jobs
   jobDescription: String
   jobId: uuid
-  kodasHistory(
-    distinctOn: [HistoryKodasHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryKodasHistoryOrderBy!]
-    where: HistoryKodasHistoryBoolExp
-  ): [HistoryKodasHistory!]!
-  kodasHistoryAggregate(
-    distinctOn: [HistoryKodasHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryKodasHistoryOrderBy!]
-    where: HistoryKodasHistoryBoolExp
-  ): HistoryKodasHistoryAggregate!
+  kodasHistory(distinctOn: [HistoryKodasHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryKodasHistoryOrderBy!], where: HistoryKodasHistoryBoolExp): [HistoryKodasHistory!]!
+  kodasHistoryAggregate(distinctOn: [HistoryKodasHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryKodasHistoryOrderBy!], where: HistoryKodasHistoryBoolExp): HistoryKodasHistoryAggregate!
   lastCall: HistoryLatestCalls
   lastConfession: HistoryLatestConfessions
   lastEdit: HistoryLatestEdits
@@ -5232,9 +4986,7 @@ type Persons {
   name: String!
   nationalId: Int
   notes: String
-  otherPhones(
-    path: String
-  ): jsonb!
+  otherPhones(path: String): jsonb!
   personType: PersonTypes
   personTypeId: uuid
   photoUpdatedAt: timestamptz
@@ -5243,13 +4995,7 @@ type Persons {
   school: Schools
   schoolId: uuid
   serviceType: String
-  services(
-    distinctOn: [PersonsServicesSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [PersonsServicesOrderBy!]
-    where: PersonsServicesBoolExp
-  ): [PersonsServices!]!
+  services(distinctOn: [PersonsServicesSelectColumn!], limit: Int, offset: Int, orderBy: [PersonsServicesOrderBy!], where: PersonsServicesBoolExp): [PersonsServices!]!
   servingChurch: Churches
   servingChurchId: uuid
   shammasLevel: ShammasLevels
@@ -5260,30 +5006,12 @@ type Persons {
   storeId: uuid
   studyYear: StudyYears
   studyYearId: smallint
-  tags(
-    distinctOn: [PersonsTagsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [PersonsTagsOrderBy!]
-    where: PersonsTagsBoolExp
-  ): [PersonsTags!]!
+  tags(distinctOn: [PersonsTagsSelectColumn!], limit: Int, offset: Int, orderBy: [PersonsTagsOrderBy!], where: PersonsTagsBoolExp): [PersonsTags!]!
   uid: uuid
   user: AuthUsersData
   userCanEdit: Boolean
-  visitHistory(
-    distinctOn: [HistoryVisitHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryVisitHistoryOrderBy!]
-    where: HistoryVisitHistoryBoolExp
-  ): [HistoryVisitHistory!]!
-  visitHistoryAggregate(
-    distinctOn: [HistoryVisitHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryVisitHistoryOrderBy!]
-    where: HistoryVisitHistoryBoolExp
-  ): HistoryVisitHistoryAggregate!
+  visitHistory(distinctOn: [HistoryVisitHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryVisitHistoryOrderBy!], where: HistoryVisitHistoryBoolExp): [HistoryVisitHistory!]!
+  visitHistoryAggregate(distinctOn: [HistoryVisitHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryVisitHistoryOrderBy!], where: HistoryVisitHistoryBoolExp): HistoryVisitHistoryAggregate!
   workStatus: String
 }
 
@@ -5325,6 +5053,7 @@ input PersonsAggregateOrderBy {
   varSamp: PersonsVarSampOrderBy
   variance: PersonsVarianceOrderBy
 }
+
 input PersonsAppendInput {
   otherPhones: jsonb
 }
@@ -5333,6 +5062,7 @@ input PersonsArrRelInsertInput {
   data: [PersonsInsertInput!]!
   onConflict: PersonsOnConflict
 }
+
 type PersonsAvgFields {
   color: Float
   nationalId: Float
@@ -5499,6 +5229,7 @@ input PersonsGroupsOnConflict {
   updateColumns: [PersonsGroupsUpdateColumn!]! = []
   where: PersonsGroupsBoolExp
 }
+
 input PersonsGroupsOrderBy {
   group: GroupsOrderBy
   groupId: OrderBy
@@ -5515,6 +5246,7 @@ input PersonsGroupsStreamCursorInput {
   initialValue: PersonsGroupsStreamCursorValueInput!
   ordering: CursorOrdering
 }
+
 input PersonsGroupsStreamCursorValueInput {
   groupId: uuid
   personId: uuid
@@ -5583,6 +5315,7 @@ input PersonsHobbiesOnConflict {
   updateColumns: [PersonsHobbiesUpdateColumn!]! = []
   where: PersonsHobbiesBoolExp
 }
+
 input PersonsHobbiesOrderBy {
   hobby: HobbiesOrderBy
   hobbyId: OrderBy
@@ -5599,6 +5332,7 @@ input PersonsHobbiesStreamCursorInput {
   initialValue: PersonsHobbiesStreamCursorValueInput!
   ordering: CursorOrdering
 }
+
 input PersonsHobbiesStreamCursorValueInput {
   hobbyId: uuid
   personId: uuid
@@ -5672,6 +5406,7 @@ input PersonsInsertInput {
   visitHistory: HistoryVisitHistoryArrRelInsertInput
   workStatus: String
 }
+
 type PersonsMaxFields {
   birthdate: date
   birthday: String
@@ -5732,6 +5467,7 @@ input PersonsMaxOrderBy {
   uid: OrderBy
   workStatus: OrderBy
 }
+
 type PersonsMinFields {
   birthdate: date
   birthday: String
@@ -5808,6 +5544,7 @@ input PersonsOnConflict {
   updateColumns: [PersonsUpdateColumn!]! = []
   where: PersonsBoolExp
 }
+
 input PersonsOrderBy {
   address: AddressesOrderBy
   attendanceHistoryAggregate: HistoryAttendanceHistoryAggregateOrderBy
@@ -5875,9 +5612,11 @@ input PersonsOrderBy {
   visitHistoryAggregate: HistoryVisitHistoryAggregateOrderBy
   workStatus: OrderBy
 }
+
 input PersonsPkColumnsInput {
   id: uuid!
 }
+
 input PersonsPrependInput {
   otherPhones: jsonb
 }
@@ -5991,6 +5730,7 @@ input PersonsServicesOnConflict {
   updateColumns: [PersonsServicesUpdateColumn!]! = []
   where: PersonsServicesBoolExp
 }
+
 input PersonsServicesOrderBy {
   person: PersonsOrderBy
   personId: OrderBy
@@ -6012,6 +5752,7 @@ input PersonsServicesStreamCursorInput {
   initialValue: PersonsServicesStreamCursorValueInput!
   ordering: CursorOrdering
 }
+
 input PersonsServicesStreamCursorValueInput {
   personId: uuid
   serviceId: uuid
@@ -6058,6 +5799,7 @@ input PersonsSetInput {
   uid: uuid
   workStatus: String
 }
+
 type PersonsStddevFields {
   color: Float
   nationalId: Float
@@ -6069,6 +5811,7 @@ input PersonsStddevOrderBy {
   nationalId: OrderBy
   studyYearId: OrderBy
 }
+
 type PersonsStddevPopFields {
   color: Float
   nationalId: Float
@@ -6080,6 +5823,7 @@ input PersonsStddevPopOrderBy {
   nationalId: OrderBy
   studyYearId: OrderBy
 }
+
 type PersonsStddevSampFields {
   color: Float
   nationalId: Float
@@ -6096,6 +5840,7 @@ input PersonsStreamCursorInput {
   initialValue: PersonsStreamCursorValueInput!
   ordering: CursorOrdering
 }
+
 input PersonsStreamCursorValueInput {
   birthdate: date
   blurhash: String
@@ -6130,6 +5875,7 @@ input PersonsStreamCursorValueInput {
   uid: uuid
   workStatus: String
 }
+
 type PersonsSumFields {
   color: bigint
   nationalId: Int
@@ -6201,6 +5947,7 @@ input PersonsTagsOnConflict {
   updateColumns: [PersonsTagsUpdateColumn!]! = []
   where: PersonsTagsBoolExp
 }
+
 input PersonsTagsOrderBy {
   person: PersonsOrderBy
   personId: OrderBy
@@ -6217,6 +5964,7 @@ input PersonsTagsStreamCursorInput {
   initialValue: PersonsTagsStreamCursorValueInput!
   ordering: CursorOrdering
 }
+
 input PersonsTagsStreamCursorValueInput {
   personId: uuid
   tagId: uuid
@@ -6272,6 +6020,7 @@ input PersonsUpdates {
   _set: PersonsSetInput
   where: PersonsBoolExp!
 }
+
 type PersonsVarPopFields {
   color: Float
   nationalId: Float
@@ -6283,6 +6032,7 @@ input PersonsVarPopOrderBy {
   nationalId: OrderBy
   studyYearId: OrderBy
 }
+
 type PersonsVarSampFields {
   color: Float
   nationalId: Float
@@ -6294,6 +6044,7 @@ input PersonsVarSampOrderBy {
   nationalId: OrderBy
   studyYearId: OrderBy
 }
+
 type PersonsVarianceFields {
   color: Float
   nationalId: Float
@@ -6309,20 +6060,8 @@ input PersonsVarianceOrderBy {
 type Qualifications {
   id: uuid!
   name: String!
-  persons(
-    distinctOn: [PersonsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [PersonsOrderBy!]
-    where: PersonsBoolExp
-  ): [Persons!]!
-  personsAggregate(
-    distinctOn: [PersonsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [PersonsOrderBy!]
-    where: PersonsBoolExp
-  ): PersonsAggregate!
+  persons(distinctOn: [PersonsSelectColumn!], limit: Int, offset: Int, orderBy: [PersonsOrderBy!], where: PersonsBoolExp): [Persons!]!
+  personsAggregate(distinctOn: [PersonsSelectColumn!], limit: Int, offset: Int, orderBy: [PersonsOrderBy!], where: PersonsBoolExp): PersonsAggregate!
 }
 
 input QualificationsBoolExp {
@@ -6360,11 +6099,13 @@ input QualificationsOnConflict {
   updateColumns: [QualificationsUpdateColumn!]! = []
   where: QualificationsBoolExp
 }
+
 input QualificationsOrderBy {
   id: OrderBy
   name: OrderBy
   personsAggregate: PersonsAggregateOrderBy
 }
+
 input QualificationsPkColumnsInput {
   id: uuid!
 }
@@ -6382,6 +6123,7 @@ input QualificationsStreamCursorInput {
   initialValue: QualificationsStreamCursorValueInput!
   ordering: CursorOrdering
 }
+
 input QualificationsStreamCursorValueInput {
   id: uuid
   name: String
@@ -6399,20 +6141,8 @@ input QualificationsUpdates {
 type Schools {
   id: uuid!
   name: String!
-  persons(
-    distinctOn: [PersonsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [PersonsOrderBy!]
-    where: PersonsBoolExp
-  ): [Persons!]!
-  personsAggregate(
-    distinctOn: [PersonsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [PersonsOrderBy!]
-    where: PersonsBoolExp
-  ): PersonsAggregate!
+  persons(distinctOn: [PersonsSelectColumn!], limit: Int, offset: Int, orderBy: [PersonsOrderBy!], where: PersonsBoolExp): [Persons!]!
+  personsAggregate(distinctOn: [PersonsSelectColumn!], limit: Int, offset: Int, orderBy: [PersonsOrderBy!], where: PersonsBoolExp): PersonsAggregate!
 }
 
 input SchoolsBoolExp {
@@ -6450,11 +6180,13 @@ input SchoolsOnConflict {
   updateColumns: [SchoolsUpdateColumn!]! = []
   where: SchoolsBoolExp
 }
+
 input SchoolsOrderBy {
   id: OrderBy
   name: OrderBy
   personsAggregate: PersonsAggregateOrderBy
 }
+
 input SchoolsPkColumnsInput {
   id: uuid!
 }
@@ -6472,6 +6204,7 @@ input SchoolsStreamCursorInput {
   initialValue: SchoolsStreamCursorValueInput!
   ordering: CursorOrdering
 }
+
 input SchoolsStreamCursorValueInput {
   id: uuid
   name: String
@@ -6487,78 +6220,24 @@ input SchoolsUpdates {
 }
 
 type Services {
-  adminUsers(
-    distinctOn: [AuthUsersAdminOnSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [AuthUsersAdminOnOrderBy!]
-    where: AuthUsersAdminOnBoolExp
-  ): [AuthUsersAdminOn!]!
+  adminUsers(distinctOn: [AuthUsersAdminOnSelectColumn!], limit: Int, offset: Int, orderBy: [AuthUsersAdminOnOrderBy!], where: AuthUsersAdminOnBoolExp): [AuthUsersAdminOn!]!
   blurhash: String
-  classes(
-    distinctOn: [ClassesSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [ClassesOrderBy!]
-    where: ClassesBoolExp
-  ): [Classes!]!
-  classesAggregate(
-    distinctOn: [ClassesSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [ClassesOrderBy!]
-    where: ClassesBoolExp
-  ): ClassesAggregate!
+  classes(distinctOn: [ClassesSelectColumn!], limit: Int, offset: Int, orderBy: [ClassesOrderBy!], where: ClassesBoolExp): [Classes!]!
+  classesAggregate(distinctOn: [ClassesSelectColumn!], limit: Int, offset: Int, orderBy: [ClassesOrderBy!], where: ClassesBoolExp): ClassesAggregate!
   color: bigint
   defaultMeeting: HistoryMeetings
   defaultMeetingId: uuid
-  editHistory(
-    distinctOn: [HistoryEditHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryEditHistoryOrderBy!]
-    where: HistoryEditHistoryBoolExp
-  ): [HistoryEditHistory!]!
-  editHistoryAggregate(
-    distinctOn: [HistoryEditHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryEditHistoryOrderBy!]
-    where: HistoryEditHistoryBoolExp
-  ): HistoryEditHistoryAggregate!
-  groups(
-    distinctOn: [GroupsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [GroupsOrderBy!]
-    where: GroupsBoolExp
-  ): [Groups!]!
-  groupsAggregate(
-    distinctOn: [GroupsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [GroupsOrderBy!]
-    where: GroupsBoolExp
-  ): GroupsAggregate!
+  editHistory(distinctOn: [HistoryEditHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryEditHistoryOrderBy!], where: HistoryEditHistoryBoolExp): [HistoryEditHistory!]!
+  editHistoryAggregate(distinctOn: [HistoryEditHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryEditHistoryOrderBy!], where: HistoryEditHistoryBoolExp): HistoryEditHistoryAggregate!
+  groups(distinctOn: [GroupsSelectColumn!], limit: Int, offset: Int, orderBy: [GroupsOrderBy!], where: GroupsBoolExp): [Groups!]!
+  groupsAggregate(distinctOn: [GroupsSelectColumn!], limit: Int, offset: Int, orderBy: [GroupsOrderBy!], where: GroupsBoolExp): GroupsAggregate!
   id: uuid!
   lastEdit: HistoryLatestEdits
-  meetings(
-    distinctOn: [HistoryMeetingsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryMeetingsOrderBy!]
-    where: HistoryMeetingsBoolExp
-  ): [HistoryMeetings!]!
+  meetings(distinctOn: [HistoryMeetingsSelectColumn!], limit: Int, offset: Int, orderBy: [HistoryMeetingsOrderBy!], where: HistoryMeetingsBoolExp): [HistoryMeetings!]!
   name: String!
   nextService: Services
   nextServiceId: uuid
-  persons(
-    distinctOn: [PersonsServicesSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [PersonsServicesOrderBy!]
-    where: PersonsServicesBoolExp
-  ): [PersonsServices!]!
+  persons(distinctOn: [PersonsServicesSelectColumn!], limit: Int, offset: Int, orderBy: [PersonsServicesOrderBy!], where: PersonsServicesBoolExp): [PersonsServices!]!
   photoUpdatedAt: timestamptz
   studyYearFrom: StudyYears
   studyYearFromId: smallint
@@ -6585,6 +6264,7 @@ type ServicesAggregateFields {
   varSamp: ServicesVarSampFields
   variance: ServicesVarianceFields
 }
+
 type ServicesAvgFields {
   color: Float
   studyYearFromId: Float
@@ -6650,6 +6330,7 @@ input ServicesInsertInput {
   studyYearTo: StudyYearsObjRelInsertInput
   studyYearToId: smallint
 }
+
 type ServicesMaxFields {
   blurhash: String
   color: bigint
@@ -6661,6 +6342,7 @@ type ServicesMaxFields {
   studyYearFromId: smallint
   studyYearToId: smallint
 }
+
 type ServicesMinFields {
   blurhash: String
   color: bigint
@@ -6688,6 +6370,7 @@ input ServicesOnConflict {
   updateColumns: [ServicesUpdateColumn!]! = []
   where: ServicesBoolExp
 }
+
 input ServicesOrderBy {
   adminUsersAggregate: AuthUsersAdminOnAggregateOrderBy
   blurhash: OrderBy
@@ -6711,6 +6394,7 @@ input ServicesOrderBy {
   studyYearToId: OrderBy
   userCanEdit: OrderBy
 }
+
 input ServicesPkColumnsInput {
   id: uuid!
 }
@@ -6735,16 +6419,19 @@ input ServicesSetInput {
   studyYearFromId: smallint
   studyYearToId: smallint
 }
+
 type ServicesStddevFields {
   color: Float
   studyYearFromId: Float
   studyYearToId: Float
 }
+
 type ServicesStddevPopFields {
   color: Float
   studyYearFromId: Float
   studyYearToId: Float
 }
+
 type ServicesStddevSampFields {
   color: Float
   studyYearFromId: Float
@@ -6755,6 +6442,7 @@ input ServicesStreamCursorInput {
   initialValue: ServicesStreamCursorValueInput!
   ordering: CursorOrdering
 }
+
 input ServicesStreamCursorValueInput {
   blurhash: String
   color: bigint
@@ -6766,6 +6454,7 @@ input ServicesStreamCursorValueInput {
   studyYearFromId: smallint
   studyYearToId: smallint
 }
+
 type ServicesSumFields {
   color: bigint
   studyYearFromId: smallint
@@ -6786,16 +6475,19 @@ input ServicesUpdates {
   _set: ServicesSetInput
   where: ServicesBoolExp!
 }
+
 type ServicesVarPopFields {
   color: Float
   studyYearFromId: Float
   studyYearToId: Float
 }
+
 type ServicesVarSampFields {
   color: Float
   studyYearFromId: Float
   studyYearToId: Float
 }
+
 type ServicesVarianceFields {
   color: Float
   studyYearFromId: Float
@@ -6821,11 +6513,13 @@ type ShammasLevelsMutationResponse {
   affectedRows: Int!
   returning: [ShammasLevels!]!
 }
+
 input ShammasLevelsOrderBy {
   id: OrderBy
   name: OrderBy
   order: OrderBy
 }
+
 input ShammasLevelsPkColumnsInput {
   id: uuid!
 }
@@ -6840,6 +6534,7 @@ input ShammasLevelsStreamCursorInput {
   initialValue: ShammasLevelsStreamCursorValueInput!
   ordering: CursorOrdering
 }
+
 input ShammasLevelsStreamCursorValueInput {
   id: uuid
   name: String
@@ -6867,20 +6562,8 @@ type Stores {
   adminFamily: uuid
   blurhash: String
   color: bigint
-  editHistory(
-    distinctOn: [HistoryEditHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryEditHistoryOrderBy!]
-    where: HistoryEditHistoryBoolExp
-  ): [HistoryEditHistory!]!
-  editHistoryAggregate(
-    distinctOn: [HistoryEditHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryEditHistoryOrderBy!]
-    where: HistoryEditHistoryBoolExp
-  ): HistoryEditHistoryAggregate!
+  editHistory(distinctOn: [HistoryEditHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryEditHistoryOrderBy!], where: HistoryEditHistoryBoolExp): [HistoryEditHistory!]!
+  editHistoryAggregate(distinctOn: [HistoryEditHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryEditHistoryOrderBy!], where: HistoryEditHistoryBoolExp): HistoryEditHistoryAggregate!
   family: Families
   id: uuid!
   lastEdit: HistoryLatestEdits
@@ -6930,6 +6613,7 @@ input StoresArrRelInsertInput {
   data: [StoresInsertInput!]!
   onConflict: StoresOnConflict
 }
+
 type StoresAvgFields {
   color: Float
 }
@@ -6971,6 +6655,7 @@ input StoresInsertInput {
   family: FamiliesObjRelInsertInput
   name: String
 }
+
 type StoresMaxFields {
   adminFamily: uuid
   blurhash: String
@@ -6988,6 +6673,7 @@ input StoresMaxOrderBy {
   name: OrderBy
   photoUpdatedAt: OrderBy
 }
+
 type StoresMinFields {
   adminFamily: uuid
   blurhash: String
@@ -7021,6 +6707,7 @@ input StoresOnConflict {
   updateColumns: [StoresUpdateColumn!]! = []
   where: StoresBoolExp
 }
+
 input StoresOrderBy {
   address: AddressesOrderBy
   adminFamily: OrderBy
@@ -7034,6 +6721,7 @@ input StoresOrderBy {
   photoUpdatedAt: OrderBy
   userCanEdit: OrderBy
 }
+
 input StoresPkColumnsInput {
   id: uuid!
 }
@@ -7052,6 +6740,7 @@ input StoresSetInput {
   color: bigint
   name: String
 }
+
 type StoresStddevFields {
   color: Float
 }
@@ -7059,6 +6748,7 @@ type StoresStddevFields {
 input StoresStddevOrderBy {
   color: OrderBy
 }
+
 type StoresStddevPopFields {
   color: Float
 }
@@ -7066,6 +6756,7 @@ type StoresStddevPopFields {
 input StoresStddevPopOrderBy {
   color: OrderBy
 }
+
 type StoresStddevSampFields {
   color: Float
 }
@@ -7078,6 +6769,7 @@ input StoresStreamCursorInput {
   initialValue: StoresStreamCursorValueInput!
   ordering: CursorOrdering
 }
+
 input StoresStreamCursorValueInput {
   adminFamily: uuid
   blurhash: String
@@ -7086,6 +6778,7 @@ input StoresStreamCursorValueInput {
   name: String
   photoUpdatedAt: timestamptz
 }
+
 type StoresSumFields {
   color: bigint
 }
@@ -7105,6 +6798,7 @@ input StoresUpdates {
   _set: StoresSetInput
   where: StoresBoolExp!
 }
+
 type StoresVarPopFields {
   color: Float
 }
@@ -7112,6 +6806,7 @@ type StoresVarPopFields {
 input StoresVarPopOrderBy {
   color: OrderBy
 }
+
 type StoresVarSampFields {
   color: Float
 }
@@ -7119,6 +6814,7 @@ type StoresVarSampFields {
 input StoresVarSampOrderBy {
   color: OrderBy
 }
+
 type StoresVarianceFields {
   color: Float
 }
@@ -7128,36 +6824,12 @@ input StoresVarianceOrderBy {
 }
 
 type Streets {
-  addresses(
-    distinctOn: [AddressesSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [AddressesOrderBy!]
-    where: AddressesBoolExp
-  ): [Addresses!]!
-  areas(
-    distinctOn: [AreasStreetsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [AreasStreetsOrderBy!]
-    where: AreasStreetsBoolExp
-  ): [AreasStreets!]!
+  addresses(distinctOn: [AddressesSelectColumn!], limit: Int, offset: Int, orderBy: [AddressesOrderBy!], where: AddressesBoolExp): [Addresses!]!
+  areas(distinctOn: [AreasStreetsSelectColumn!], limit: Int, offset: Int, orderBy: [AreasStreetsOrderBy!], where: AreasStreetsBoolExp): [AreasStreets!]!
   blurhash: String
   color: bigint
-  editHistory(
-    distinctOn: [HistoryEditHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryEditHistoryOrderBy!]
-    where: HistoryEditHistoryBoolExp
-  ): [HistoryEditHistory!]!
-  editHistoryAggregate(
-    distinctOn: [HistoryEditHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryEditHistoryOrderBy!]
-    where: HistoryEditHistoryBoolExp
-  ): HistoryEditHistoryAggregate!
+  editHistory(distinctOn: [HistoryEditHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryEditHistoryOrderBy!], where: HistoryEditHistoryBoolExp): [HistoryEditHistory!]!
+  editHistoryAggregate(distinctOn: [HistoryEditHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryEditHistoryOrderBy!], where: HistoryEditHistoryBoolExp): HistoryEditHistoryAggregate!
   id: uuid!
   lastEdit: HistoryLatestEdits
   lastVisit: HistoryLatestVisits
@@ -7185,6 +6857,7 @@ type StreetsAggregateFields {
   varSamp: StreetsVarSampFields
   variance: StreetsVarianceFields
 }
+
 type StreetsAvgFields {
   color: Float
 }
@@ -7223,6 +6896,7 @@ input StreetsInsertInput {
   line: geography
   name: String
 }
+
 type StreetsMaxFields {
   blurhash: String
   color: bigint
@@ -7230,6 +6904,7 @@ type StreetsMaxFields {
   name: String
   photoUpdatedAt: timestamptz
 }
+
 type StreetsMinFields {
   blurhash: String
   color: bigint
@@ -7253,6 +6928,7 @@ input StreetsOnConflict {
   updateColumns: [StreetsUpdateColumn!]! = []
   where: StreetsBoolExp
 }
+
 input StreetsOrderBy {
   addressesAggregate: AddressesAggregateOrderBy
   areasAggregate: AreasStreetsAggregateOrderBy
@@ -7267,6 +6943,7 @@ input StreetsOrderBy {
   photoUpdatedAt: OrderBy
   userCanEdit: OrderBy
 }
+
 input StreetsPkColumnsInput {
   id: uuid!
 }
@@ -7285,12 +6962,15 @@ input StreetsSetInput {
   line: geography
   name: String
 }
+
 type StreetsStddevFields {
   color: Float
 }
+
 type StreetsStddevPopFields {
   color: Float
 }
+
 type StreetsStddevSampFields {
   color: Float
 }
@@ -7299,6 +6979,7 @@ input StreetsStreamCursorInput {
   initialValue: StreetsStreamCursorValueInput!
   ordering: CursorOrdering
 }
+
 input StreetsStreamCursorValueInput {
   blurhash: String
   color: bigint
@@ -7307,6 +6988,7 @@ input StreetsStreamCursorValueInput {
   name: String
   photoUpdatedAt: timestamptz
 }
+
 type StreetsSumFields {
   color: bigint
 }
@@ -7322,12 +7004,15 @@ input StreetsUpdates {
   _set: StreetsSetInput
   where: StreetsBoolExp!
 }
+
 type StreetsVarPopFields {
   color: Float
 }
+
 type StreetsVarSampFields {
   color: Float
 }
+
 type StreetsVarianceFields {
   color: Float
 }
@@ -7355,44 +7040,14 @@ input StringComparisonExp {
 }
 
 type StudyYears {
-  classes(
-    distinctOn: [ClassesSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [ClassesOrderBy!]
-    where: ClassesBoolExp
-  ): [Classes!]!
-  classesAggregate(
-    distinctOn: [ClassesSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [ClassesOrderBy!]
-    where: ClassesBoolExp
-  ): ClassesAggregate!
+  classes(distinctOn: [ClassesSelectColumn!], limit: Int, offset: Int, orderBy: [ClassesOrderBy!], where: ClassesBoolExp): [Classes!]!
+  classesAggregate(distinctOn: [ClassesSelectColumn!], limit: Int, offset: Int, orderBy: [ClassesOrderBy!], where: ClassesBoolExp): ClassesAggregate!
   id: String
-  meetings(
-    distinctOn: [HistoryMeetingsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryMeetingsOrderBy!]
-    where: HistoryMeetingsBoolExp
-  ): [HistoryMeetings!]!
+  meetings(distinctOn: [HistoryMeetingsSelectColumn!], limit: Int, offset: Int, orderBy: [HistoryMeetingsOrderBy!], where: HistoryMeetingsBoolExp): [HistoryMeetings!]!
   name: String!
   order: smallint!
-  persons(
-    distinctOn: [PersonsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [PersonsOrderBy!]
-    where: PersonsBoolExp
-  ): [Persons!]!
-  personsAggregate(
-    distinctOn: [PersonsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [PersonsOrderBy!]
-    where: PersonsBoolExp
-  ): PersonsAggregate!
+  persons(distinctOn: [PersonsSelectColumn!], limit: Int, offset: Int, orderBy: [PersonsOrderBy!], where: PersonsBoolExp): [Persons!]!
+  personsAggregate(distinctOn: [PersonsSelectColumn!], limit: Int, offset: Int, orderBy: [PersonsOrderBy!], where: PersonsBoolExp): PersonsAggregate!
 }
 
 input StudyYearsBoolExp {
@@ -7438,6 +7093,7 @@ input StudyYearsOnConflict {
   updateColumns: [StudyYearsUpdateColumn!]! = []
   where: StudyYearsBoolExp
 }
+
 input StudyYearsOrderBy {
   classesAggregate: ClassesAggregateOrderBy
   id: OrderBy
@@ -7446,6 +7102,7 @@ input StudyYearsOrderBy {
   order: OrderBy
   personsAggregate: PersonsAggregateOrderBy
 }
+
 input StudyYearsPkColumnsInput {
   order: smallint!
 }
@@ -7464,6 +7121,7 @@ input StudyYearsStreamCursorInput {
   initialValue: StudyYearsStreamCursorValueInput!
   ordering: CursorOrdering
 }
+
 input StudyYearsStreamCursorValueInput {
   id: String
   name: String
@@ -7483,13 +7141,7 @@ type Tags {
   color: bigint
   id: uuid!
   name: String!
-  persons(
-    distinctOn: [PersonsTagsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [PersonsTagsOrderBy!]
-    where: PersonsTagsBoolExp
-  ): [PersonsTags!]!
+  persons(distinctOn: [PersonsTagsSelectColumn!], limit: Int, offset: Int, orderBy: [PersonsTagsOrderBy!], where: PersonsTagsBoolExp): [PersonsTags!]!
 }
 
 input TagsBoolExp {
@@ -7532,12 +7184,14 @@ input TagsOnConflict {
   updateColumns: [TagsUpdateColumn!]! = []
   where: TagsBoolExp
 }
+
 input TagsOrderBy {
   color: OrderBy
   id: OrderBy
   name: OrderBy
   personsAggregate: PersonsTagsAggregateOrderBy
 }
+
 input TagsPkColumnsInput {
   id: uuid!
 }
@@ -7557,6 +7211,7 @@ input TagsStreamCursorInput {
   initialValue: TagsStreamCursorValueInput!
   ordering: CursorOrdering
 }
+
 input TagsStreamCursorValueInput {
   color: bigint
   id: uuid
@@ -7587,13 +7242,7 @@ input TimestamptzComparisonExp {
 }
 
 type Universities {
-  colleges(
-    distinctOn: [CollegesSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [CollegesOrderBy!]
-    where: CollegesBoolExp
-  ): [Colleges!]!
+  colleges(distinctOn: [CollegesSelectColumn!], limit: Int, offset: Int, orderBy: [CollegesOrderBy!], where: CollegesBoolExp): [Colleges!]!
   id: uuid!
   name: String!
 }
@@ -7632,11 +7281,13 @@ input UniversitiesOnConflict {
   updateColumns: [UniversitiesUpdateColumn!]! = []
   where: UniversitiesBoolExp
 }
+
 input UniversitiesOrderBy {
   collegesAggregate: CollegesAggregateOrderBy
   id: OrderBy
   name: OrderBy
 }
+
 input UniversitiesPkColumnsInput {
   id: uuid!
 }
@@ -7654,6 +7305,7 @@ input UniversitiesStreamCursorInput {
   initialValue: UniversitiesStreamCursorValueInput!
   ordering: CursorOrdering
 }
+
 input UniversitiesStreamCursorValueInput {
   id: uuid
   name: String
@@ -7728,6 +7380,7 @@ input UsersFcmTokensOnConflict {
   updateColumns: [UsersFcmTokensUpdateColumn!]! = []
   where: UsersFcmTokensBoolExp
 }
+
 input UsersFcmTokensOrderBy {
   createdAt: OrderBy
   token: OrderBy
@@ -7745,6 +7398,7 @@ input UsersFcmTokensStreamCursorInput {
   initialValue: UsersFcmTokensStreamCursorValueInput!
   ordering: CursorOrdering
 }
+
 input UsersFcmTokensStreamCursorValueInput {
   createdAt: timestamptz
   token: String
@@ -7759,13 +7413,12 @@ type UsersPreferences {
   darkTheme: Boolean
   greatFeastTheme: Boolean!
   lastHomeMode: String
-  orderByPreferences(
-    path: String
-  ): jsonb!
+  orderByPreferences(path: String): jsonb!
   uid: uuid!
   updatedAt: timestamptz!
   user: AuthUsersData!
 }
+
 input UsersPreferencesAppendInput {
   orderByPreferences: jsonb
 }
@@ -7799,6 +7452,7 @@ type UsersPreferencesMutationResponse {
   affectedRows: Int!
   returning: [UsersPreferences!]!
 }
+
 input UsersPreferencesOrderBy {
   darkTheme: OrderBy
   greatFeastTheme: OrderBy
@@ -7808,9 +7462,11 @@ input UsersPreferencesOrderBy {
   updatedAt: OrderBy
   user: AuthUsersDataOrderBy
 }
+
 input UsersPreferencesPkColumnsInput {
   uid: uuid!
 }
+
 input UsersPreferencesPrependInput {
   orderByPreferences: jsonb
 }
@@ -7835,6 +7491,7 @@ input UsersPreferencesStreamCursorInput {
   initialValue: UsersPreferencesStreamCursorValueInput!
   ordering: CursorOrdering
 }
+
 input UsersPreferencesStreamCursorValueInput {
   darkTheme: Boolean
   greatFeastTheme: Boolean
@@ -8000,842 +7657,246 @@ scalar json
 scalar jsonb
 
 scalar meeting_audience
+
 type mutation_root {
-  deleteAddresses(
-    where: AddressesBoolExp!
-  ): AddressesMutationResponse
+  deleteAddresses(where: AddressesBoolExp!): AddressesMutationResponse
   deleteAddressesByPk(id: uuid!): Addresses
-  deleteAreas(
-    where: AreasBoolExp!
-  ): AreasMutationResponse
+  deleteAreas(where: AreasBoolExp!): AreasMutationResponse
   deleteAreasByPk(id: uuid!): Areas
-  deleteAreasStreets(
-    where: AreasStreetsBoolExp!
-  ): AreasStreetsMutationResponse
+  deleteAreasStreets(where: AreasStreetsBoolExp!): AreasStreetsMutationResponse
   deleteAreasStreetsByPk(areaId: uuid!, streetId: uuid!): AreasStreets
-  deleteAuthInvitations(
-    where: AuthInvitationsBoolExp!
-  ): AuthInvitationsMutationResponse
+  deleteAuthInvitations(where: AuthInvitationsBoolExp!): AuthInvitationsMutationResponse
   deleteAuthInvitationsByPk(id: uuid!): AuthInvitations
-  deleteAuthUsersAdminOn(
-    where: AuthUsersAdminOnBoolExp!
-  ): AuthUsersAdminOnMutationResponse
+  deleteAuthUsersAdminOn(where: AuthUsersAdminOnBoolExp!): AuthUsersAdminOnMutationResponse
   deleteAuthUsersAdminOnByPk(permissionId: uuid!): AuthUsersAdminOn
-  deleteAuthUsersPermissions(
-    where: AuthUsersPermissionsBoolExp!
-  ): AuthUsersPermissionsMutationResponse
+  deleteAuthUsersPermissions(where: AuthUsersPermissionsBoolExp!): AuthUsersPermissionsMutationResponse
   deleteAuthUsersPermissionsByPk(permission: String!, uid: uuid!): AuthUsersPermissions
-  deleteChurches(
-    where: ChurchesBoolExp!
-  ): ChurchesMutationResponse
+  deleteChurches(where: ChurchesBoolExp!): ChurchesMutationResponse
   deleteChurchesByPk(id: uuid!): Churches
-  deleteClasses(
-    where: ClassesBoolExp!
-  ): ClassesMutationResponse
+  deleteClasses(where: ClassesBoolExp!): ClassesMutationResponse
   deleteClassesByPk(id: uuid!): Classes
-  deleteColleges(
-    where: CollegesBoolExp!
-  ): CollegesMutationResponse
+  deleteColleges(where: CollegesBoolExp!): CollegesMutationResponse
   deleteCollegesByPk(id: uuid!): Colleges
-  deleteDistricts(
-    where: DistrictsBoolExp!
-  ): DistrictsMutationResponse
+  deleteDistricts(where: DistrictsBoolExp!): DistrictsMutationResponse
   deleteDistrictsByPk(id: uuid!): Districts
-  deleteFamilies(
-    where: FamiliesBoolExp!
-  ): FamiliesMutationResponse
+  deleteFamilies(where: FamiliesBoolExp!): FamiliesMutationResponse
   deleteFamiliesByPk(id: uuid!): Families
-  deleteFamiliesFamilies(
-    where: FamiliesFamiliesBoolExp!
-  ): FamiliesFamiliesMutationResponse
-  deleteFathers(
-    where: FathersBoolExp!
-  ): FathersMutationResponse
+  deleteFamiliesFamilies(where: FamiliesFamiliesBoolExp!): FamiliesFamiliesMutationResponse
+  deleteFathers(where: FathersBoolExp!): FathersMutationResponse
   deleteFathersByPk(id: uuid!): Fathers
-  deleteGroups(
-    where: GroupsBoolExp!
-  ): GroupsMutationResponse
+  deleteGroups(where: GroupsBoolExp!): GroupsMutationResponse
   deleteGroupsByPk(id: uuid!): Groups
-  deleteHistoryAttendanceDays(
-    where: HistoryAttendanceDaysBoolExp!
-  ): HistoryAttendanceDaysMutationResponse
+  deleteHistoryAttendanceDays(where: HistoryAttendanceDaysBoolExp!): HistoryAttendanceDaysMutationResponse
   deleteHistoryAttendanceDaysByPk(day: date!): HistoryAttendanceDays
-  deleteHistoryAttendanceHistory(
-    where: HistoryAttendanceHistoryBoolExp!
-  ): HistoryAttendanceHistoryMutationResponse
+  deleteHistoryAttendanceHistory(where: HistoryAttendanceHistoryBoolExp!): HistoryAttendanceHistoryMutationResponse
   deleteHistoryAttendanceHistoryByPk(id: uuid!): HistoryAttendanceHistory
-  deleteHistoryMeetings(
-    where: HistoryMeetingsBoolExp!
-  ): HistoryMeetingsMutationResponse
+  deleteHistoryMeetings(where: HistoryMeetingsBoolExp!): HistoryMeetingsMutationResponse
   deleteHistoryMeetingsByPk(id: uuid!): HistoryMeetings
-  deleteHobbies(
-    where: HobbiesBoolExp!
-  ): HobbiesMutationResponse
+  deleteHobbies(where: HobbiesBoolExp!): HobbiesMutationResponse
   deleteHobbiesByPk(id: uuid!): Hobbies
-  deleteJobs(
-    where: JobsBoolExp!
-  ): JobsMutationResponse
+  deleteJobs(where: JobsBoolExp!): JobsMutationResponse
   deleteJobsByPk(id: uuid!): Jobs
-  deletePersonStates(
-    where: PersonStatesBoolExp!
-  ): PersonStatesMutationResponse
+  deletePersonStates(where: PersonStatesBoolExp!): PersonStatesMutationResponse
   deletePersonStatesByPk(id: uuid!): PersonStates
-  deletePersonTypes(
-    where: PersonTypesBoolExp!
-  ): PersonTypesMutationResponse
+  deletePersonTypes(where: PersonTypesBoolExp!): PersonTypesMutationResponse
   deletePersonTypesByPk(id: uuid!): PersonTypes
-  deletePersons(
-    where: PersonsBoolExp!
-  ): PersonsMutationResponse
+  deletePersons(where: PersonsBoolExp!): PersonsMutationResponse
   deletePersonsByPk(id: uuid!): Persons
-  deletePersonsGroups(
-    where: PersonsGroupsBoolExp!
-  ): PersonsGroupsMutationResponse
-  deletePersonsHobbies(
-    where: PersonsHobbiesBoolExp!
-  ): PersonsHobbiesMutationResponse
-  deletePersonsServices(
-    where: PersonsServicesBoolExp!
-  ): PersonsServicesMutationResponse
-  deletePersonsTags(
-    where: PersonsTagsBoolExp!
-  ): PersonsTagsMutationResponse
-  deleteQualifications(
-    where: QualificationsBoolExp!
-  ): QualificationsMutationResponse
+  deletePersonsGroups(where: PersonsGroupsBoolExp!): PersonsGroupsMutationResponse
+  deletePersonsHobbies(where: PersonsHobbiesBoolExp!): PersonsHobbiesMutationResponse
+  deletePersonsServices(where: PersonsServicesBoolExp!): PersonsServicesMutationResponse
+  deletePersonsTags(where: PersonsTagsBoolExp!): PersonsTagsMutationResponse
+  deleteQualifications(where: QualificationsBoolExp!): QualificationsMutationResponse
   deleteQualificationsByPk(id: uuid!): Qualifications
-  deleteSchools(
-    where: SchoolsBoolExp!
-  ): SchoolsMutationResponse
+  deleteSchools(where: SchoolsBoolExp!): SchoolsMutationResponse
   deleteSchoolsByPk(id: uuid!): Schools
-  deleteServices(
-    where: ServicesBoolExp!
-  ): ServicesMutationResponse
+  deleteServices(where: ServicesBoolExp!): ServicesMutationResponse
   deleteServicesByPk(id: uuid!): Services
-  deleteShammasLevels(
-    where: ShammasLevelsBoolExp!
-  ): ShammasLevelsMutationResponse
+  deleteShammasLevels(where: ShammasLevelsBoolExp!): ShammasLevelsMutationResponse
   deleteShammasLevelsByPk(id: uuid!): ShammasLevels
-  deleteStores(
-    where: StoresBoolExp!
-  ): StoresMutationResponse
+  deleteStores(where: StoresBoolExp!): StoresMutationResponse
   deleteStoresByPk(id: uuid!): Stores
-  deleteStreets(
-    where: StreetsBoolExp!
-  ): StreetsMutationResponse
+  deleteStreets(where: StreetsBoolExp!): StreetsMutationResponse
   deleteStreetsByPk(id: uuid!): Streets
-  deleteStudyYears(
-    where: StudyYearsBoolExp!
-  ): StudyYearsMutationResponse
+  deleteStudyYears(where: StudyYearsBoolExp!): StudyYearsMutationResponse
   deleteStudyYearsByPk(order: smallint!): StudyYears
-  deleteTags(
-    where: TagsBoolExp!
-  ): TagsMutationResponse
+  deleteTags(where: TagsBoolExp!): TagsMutationResponse
   deleteTagsByPk(id: uuid!): Tags
-  deleteUniversities(
-    where: UniversitiesBoolExp!
-  ): UniversitiesMutationResponse
+  deleteUniversities(where: UniversitiesBoolExp!): UniversitiesMutationResponse
   deleteUniversitiesByPk(id: uuid!): Universities
-  insertAddresses(
-    objects: [AddressesInsertInput!]!
-    onConflict: AddressesOnConflict
-  ): AddressesMutationResponse
-  insertAddressesOne(
-    object: AddressesInsertInput!
-    onConflict: AddressesOnConflict
-  ): Addresses
-  insertAreas(
-    objects: [AreasInsertInput!]!
-    onConflict: AreasOnConflict
-  ): AreasMutationResponse
-  insertAreasOne(
-    object: AreasInsertInput!
-    onConflict: AreasOnConflict
-  ): Areas
-  insertAreasStreets(
-    objects: [AreasStreetsInsertInput!]!
-    onConflict: AreasStreetsOnConflict
-  ): AreasStreetsMutationResponse
-  insertAreasStreetsOne(
-    object: AreasStreetsInsertInput!
-    onConflict: AreasStreetsOnConflict
-  ): AreasStreets
-  insertAuthInvitations(
-    objects: [AuthInvitationsInsertInput!]!
-    onConflict: AuthInvitationsOnConflict
-  ): AuthInvitationsMutationResponse
-  insertAuthInvitationsOne(
-    object: AuthInvitationsInsertInput!
-    onConflict: AuthInvitationsOnConflict
-  ): AuthInvitations
-  insertAuthUsersAdminOn(
-    objects: [AuthUsersAdminOnInsertInput!]!
-    onConflict: AuthUsersAdminOnOnConflict
-  ): AuthUsersAdminOnMutationResponse
-  insertAuthUsersAdminOnOne(
-    object: AuthUsersAdminOnInsertInput!
-    onConflict: AuthUsersAdminOnOnConflict
-  ): AuthUsersAdminOn
-  insertAuthUsersData(
-    objects: [AuthUsersDataInsertInput!]!
-    onConflict: AuthUsersDataOnConflict
-  ): AuthUsersDataMutationResponse
-  insertAuthUsersDataOne(
-    object: AuthUsersDataInsertInput!
-    onConflict: AuthUsersDataOnConflict
-  ): AuthUsersData
-  insertAuthUsersPermissions(
-    objects: [AuthUsersPermissionsInsertInput!]!
-    onConflict: AuthUsersPermissionsOnConflict
-  ): AuthUsersPermissionsMutationResponse
-  insertAuthUsersPermissionsOne(
-    object: AuthUsersPermissionsInsertInput!
-    onConflict: AuthUsersPermissionsOnConflict
-  ): AuthUsersPermissions
-  insertChurches(
-    objects: [ChurchesInsertInput!]!
-    onConflict: ChurchesOnConflict
-  ): ChurchesMutationResponse
-  insertChurchesOne(
-    object: ChurchesInsertInput!
-    onConflict: ChurchesOnConflict
-  ): Churches
-  insertClasses(
-    objects: [ClassesInsertInput!]!
-    onConflict: ClassesOnConflict
-  ): ClassesMutationResponse
-  insertClassesOne(
-    object: ClassesInsertInput!
-    onConflict: ClassesOnConflict
-  ): Classes
-  insertColleges(
-    objects: [CollegesInsertInput!]!
-    onConflict: CollegesOnConflict
-  ): CollegesMutationResponse
-  insertCollegesOne(
-    object: CollegesInsertInput!
-    onConflict: CollegesOnConflict
-  ): Colleges
-  insertDistricts(
-    objects: [DistrictsInsertInput!]!
-    onConflict: DistrictsOnConflict
-  ): DistrictsMutationResponse
-  insertDistrictsOne(
-    object: DistrictsInsertInput!
-    onConflict: DistrictsOnConflict
-  ): Districts
-  insertFamilies(
-    objects: [FamiliesInsertInput!]!
-    onConflict: FamiliesOnConflict
-  ): FamiliesMutationResponse
-  insertFamiliesFamilies(
-    objects: [FamiliesFamiliesInsertInput!]!
-    onConflict: FamiliesFamiliesOnConflict
-  ): FamiliesFamiliesMutationResponse
-  insertFamiliesFamiliesOne(
-    object: FamiliesFamiliesInsertInput!
-    onConflict: FamiliesFamiliesOnConflict
-  ): FamiliesFamilies
-  insertFamiliesOne(
-    object: FamiliesInsertInput!
-    onConflict: FamiliesOnConflict
-  ): Families
-  insertFathers(
-    objects: [FathersInsertInput!]!
-    onConflict: FathersOnConflict
-  ): FathersMutationResponse
-  insertFathersOne(
-    object: FathersInsertInput!
-    onConflict: FathersOnConflict
-  ): Fathers
-  insertGroups(
-    objects: [GroupsInsertInput!]!
-    onConflict: GroupsOnConflict
-  ): GroupsMutationResponse
-  insertGroupsOne(
-    object: GroupsInsertInput!
-    onConflict: GroupsOnConflict
-  ): Groups
-  insertHistoryAttendanceDays(
-    objects: [HistoryAttendanceDaysInsertInput!]!
-    onConflict: HistoryAttendanceDaysOnConflict
-  ): HistoryAttendanceDaysMutationResponse
-  insertHistoryAttendanceDaysOne(
-    object: HistoryAttendanceDaysInsertInput!
-    onConflict: HistoryAttendanceDaysOnConflict
-  ): HistoryAttendanceDays
-  insertHistoryAttendanceHistory(
-    objects: [HistoryAttendanceHistoryInsertInput!]!
-    onConflict: HistoryAttendanceHistoryOnConflict
-  ): HistoryAttendanceHistoryMutationResponse
-  insertHistoryAttendanceHistoryOne(
-    object: HistoryAttendanceHistoryInsertInput!
-    onConflict: HistoryAttendanceHistoryOnConflict
-  ): HistoryAttendanceHistory
-  insertHistoryCallHistory(
-    objects: [HistoryCallHistoryInsertInput!]!
-    onConflict: HistoryCallHistoryOnConflict
-  ): HistoryCallHistoryMutationResponse
-  insertHistoryCallHistoryOne(
-    object: HistoryCallHistoryInsertInput!
-    onConflict: HistoryCallHistoryOnConflict
-  ): HistoryCallHistory
-  insertHistoryConfessionHistory(
-    objects: [HistoryConfessionHistoryInsertInput!]!
-    onConflict: HistoryConfessionHistoryOnConflict
-  ): HistoryConfessionHistoryMutationResponse
-  insertHistoryConfessionHistoryOne(
-    object: HistoryConfessionHistoryInsertInput!
-    onConflict: HistoryConfessionHistoryOnConflict
-  ): HistoryConfessionHistory
-  insertHistoryKodasHistory(
-    objects: [HistoryKodasHistoryInsertInput!]!
-    onConflict: HistoryKodasHistoryOnConflict
-  ): HistoryKodasHistoryMutationResponse
-  insertHistoryKodasHistoryOne(
-    object: HistoryKodasHistoryInsertInput!
-    onConflict: HistoryKodasHistoryOnConflict
-  ): HistoryKodasHistory
-  insertHistoryMeetings(
-    objects: [HistoryMeetingsInsertInput!]!
-    onConflict: HistoryMeetingsOnConflict
-  ): HistoryMeetingsMutationResponse
-  insertHistoryMeetingsOne(
-    object: HistoryMeetingsInsertInput!
-    onConflict: HistoryMeetingsOnConflict
-  ): HistoryMeetings
-  insertHistoryVisitHistory(
-    objects: [HistoryVisitHistoryInsertInput!]!
-    onConflict: HistoryVisitHistoryOnConflict
-  ): HistoryVisitHistoryMutationResponse
-  insertHistoryVisitHistoryOne(
-    object: HistoryVisitHistoryInsertInput!
-    onConflict: HistoryVisitHistoryOnConflict
-  ): HistoryVisitHistory
-  insertHobbies(
-    objects: [HobbiesInsertInput!]!
-    onConflict: HobbiesOnConflict
-  ): HobbiesMutationResponse
-  insertHobbiesOne(
-    object: HobbiesInsertInput!
-    onConflict: HobbiesOnConflict
-  ): Hobbies
-  insertJobs(
-    objects: [JobsInsertInput!]!
-    onConflict: JobsOnConflict
-  ): JobsMutationResponse
-  insertJobsOne(
-    object: JobsInsertInput!
-    onConflict: JobsOnConflict
-  ): Jobs
-  insertPersonStates(
-    objects: [PersonStatesInsertInput!]!
-    onConflict: PersonStatesOnConflict
-  ): PersonStatesMutationResponse
-  insertPersonStatesOne(
-    object: PersonStatesInsertInput!
-    onConflict: PersonStatesOnConflict
-  ): PersonStates
-  insertPersonTypes(
-    objects: [PersonTypesInsertInput!]!
-    onConflict: PersonTypesOnConflict
-  ): PersonTypesMutationResponse
-  insertPersonTypesOne(
-    object: PersonTypesInsertInput!
-    onConflict: PersonTypesOnConflict
-  ): PersonTypes
-  insertPersons(
-    objects: [PersonsInsertInput!]!
-    onConflict: PersonsOnConflict
-  ): PersonsMutationResponse
-  insertPersonsGroups(
-    objects: [PersonsGroupsInsertInput!]!
-    onConflict: PersonsGroupsOnConflict
-  ): PersonsGroupsMutationResponse
-  insertPersonsGroupsOne(
-    object: PersonsGroupsInsertInput!
-    onConflict: PersonsGroupsOnConflict
-  ): PersonsGroups
-  insertPersonsHobbies(
-    objects: [PersonsHobbiesInsertInput!]!
-    onConflict: PersonsHobbiesOnConflict
-  ): PersonsHobbiesMutationResponse
-  insertPersonsHobbiesOne(
-    object: PersonsHobbiesInsertInput!
-    onConflict: PersonsHobbiesOnConflict
-  ): PersonsHobbies
-  insertPersonsOne(
-    object: PersonsInsertInput!
-    onConflict: PersonsOnConflict
-  ): Persons
-  insertPersonsServices(
-    objects: [PersonsServicesInsertInput!]!
-    onConflict: PersonsServicesOnConflict
-  ): PersonsServicesMutationResponse
-  insertPersonsServicesOne(
-    object: PersonsServicesInsertInput!
-    onConflict: PersonsServicesOnConflict
-  ): PersonsServices
-  insertPersonsTags(
-    objects: [PersonsTagsInsertInput!]!
-    onConflict: PersonsTagsOnConflict
-  ): PersonsTagsMutationResponse
-  insertPersonsTagsOne(
-    object: PersonsTagsInsertInput!
-    onConflict: PersonsTagsOnConflict
-  ): PersonsTags
-  insertQualifications(
-    objects: [QualificationsInsertInput!]!
-    onConflict: QualificationsOnConflict
-  ): QualificationsMutationResponse
-  insertQualificationsOne(
-    object: QualificationsInsertInput!
-    onConflict: QualificationsOnConflict
-  ): Qualifications
-  insertSchools(
-    objects: [SchoolsInsertInput!]!
-    onConflict: SchoolsOnConflict
-  ): SchoolsMutationResponse
-  insertSchoolsOne(
-    object: SchoolsInsertInput!
-    onConflict: SchoolsOnConflict
-  ): Schools
-  insertServices(
-    objects: [ServicesInsertInput!]!
-    onConflict: ServicesOnConflict
-  ): ServicesMutationResponse
-  insertServicesOne(
-    object: ServicesInsertInput!
-    onConflict: ServicesOnConflict
-  ): Services
-  insertStores(
-    objects: [StoresInsertInput!]!
-    onConflict: StoresOnConflict
-  ): StoresMutationResponse
-  insertStoresOne(
-    object: StoresInsertInput!
-    onConflict: StoresOnConflict
-  ): Stores
-  insertStreets(
-    objects: [StreetsInsertInput!]!
-    onConflict: StreetsOnConflict
-  ): StreetsMutationResponse
-  insertStreetsOne(
-    object: StreetsInsertInput!
-    onConflict: StreetsOnConflict
-  ): Streets
-  insertStudyYears(
-    objects: [StudyYearsInsertInput!]!
-    onConflict: StudyYearsOnConflict
-  ): StudyYearsMutationResponse
-  insertStudyYearsOne(
-    object: StudyYearsInsertInput!
-    onConflict: StudyYearsOnConflict
-  ): StudyYears
-  insertTags(
-    objects: [TagsInsertInput!]!
-    onConflict: TagsOnConflict
-  ): TagsMutationResponse
-  insertTagsOne(
-    object: TagsInsertInput!
-    onConflict: TagsOnConflict
-  ): Tags
-  insertUniversities(
-    objects: [UniversitiesInsertInput!]!
-    onConflict: UniversitiesOnConflict
-  ): UniversitiesMutationResponse
-  insertUniversitiesOne(
-    object: UniversitiesInsertInput!
-    onConflict: UniversitiesOnConflict
-  ): Universities
-  insertUsersFcmTokens(
-    objects: [UsersFcmTokensInsertInput!]!
-    onConflict: UsersFcmTokensOnConflict
-  ): UsersFcmTokensMutationResponse
-  insertUsersFcmTokensOne(
-    object: UsersFcmTokensInsertInput!
-    onConflict: UsersFcmTokensOnConflict
-  ): UsersFcmTokens
-  updateAddresses(
-    _inc: AddressesIncInput
-    _set: AddressesSetInput
-    where: AddressesBoolExp!
-  ): AddressesMutationResponse
-  updateAddressesByPk(
-    _inc: AddressesIncInput
-    _set: AddressesSetInput
-    pkColumns: AddressesPkColumnsInput!
-  ): Addresses
-  updateAddressesMany(
-    updates: [AddressesUpdates!]!
-  ): [AddressesMutationResponse]
-  updateAreas(
-    _inc: AreasIncInput
-    _set: AreasSetInput
-    where: AreasBoolExp!
-  ): AreasMutationResponse
-  updateAreasByPk(
-    _inc: AreasIncInput
-    _set: AreasSetInput
-    pkColumns: AreasPkColumnsInput!
-  ): Areas
-  updateAreasMany(
-    updates: [AreasUpdates!]!
-  ): [AreasMutationResponse]
-  updateAuthInvitations(
-    _set: AuthInvitationsSetInput
-    where: AuthInvitationsBoolExp!
-  ): AuthInvitationsMutationResponse
-  updateAuthInvitationsByPk(
-    _set: AuthInvitationsSetInput
-    pkColumns: AuthInvitationsPkColumnsInput!
-  ): AuthInvitations
-  updateAuthInvitationsMany(
-    updates: [AuthInvitationsUpdates!]!
-  ): [AuthInvitationsMutationResponse]
-  updateAuthUsersData(
-    _set: AuthUsersDataSetInput
-    where: AuthUsersDataBoolExp!
-  ): AuthUsersDataMutationResponse
-  updateAuthUsersDataByPk(
-    _set: AuthUsersDataSetInput
-    pkColumns: AuthUsersDataPkColumnsInput!
-  ): AuthUsersData
-  updateAuthUsersDataMany(
-    updates: [AuthUsersDataUpdates!]!
-  ): [AuthUsersDataMutationResponse]
-  updateChurches(
-    _set: ChurchesSetInput
-    where: ChurchesBoolExp!
-  ): ChurchesMutationResponse
-  updateChurchesByPk(
-    _set: ChurchesSetInput
-    pkColumns: ChurchesPkColumnsInput!
-  ): Churches
-  updateChurchesMany(
-    updates: [ChurchesUpdates!]!
-  ): [ChurchesMutationResponse]
-  updateClasses(
-    _inc: ClassesIncInput
-    _set: ClassesSetInput
-    where: ClassesBoolExp!
-  ): ClassesMutationResponse
-  updateClassesByPk(
-    _inc: ClassesIncInput
-    _set: ClassesSetInput
-    pkColumns: ClassesPkColumnsInput!
-  ): Classes
-  updateClassesMany(
-    updates: [ClassesUpdates!]!
-  ): [ClassesMutationResponse]
-  updateColleges(
-    _set: CollegesSetInput
-    where: CollegesBoolExp!
-  ): CollegesMutationResponse
-  updateCollegesByPk(
-    _set: CollegesSetInput
-    pkColumns: CollegesPkColumnsInput!
-  ): Colleges
-  updateCollegesMany(
-    updates: [CollegesUpdates!]!
-  ): [CollegesMutationResponse]
-  updateDistricts(
-    _set: DistrictsSetInput
-    where: DistrictsBoolExp!
-  ): DistrictsMutationResponse
-  updateDistrictsByPk(
-    _set: DistrictsSetInput
-    pkColumns: DistrictsPkColumnsInput!
-  ): Districts
-  updateDistrictsMany(
-    updates: [DistrictsUpdates!]!
-  ): [DistrictsMutationResponse]
-  updateFamilies(
-    _inc: FamiliesIncInput
-    _set: FamiliesSetInput
-    where: FamiliesBoolExp!
-  ): FamiliesMutationResponse
-  updateFamiliesByPk(
-    _inc: FamiliesIncInput
-    _set: FamiliesSetInput
-    pkColumns: FamiliesPkColumnsInput!
-  ): Families
-  updateFamiliesMany(
-    updates: [FamiliesUpdates!]!
-  ): [FamiliesMutationResponse]
-  updateFathers(
-    _set: FathersSetInput
-    where: FathersBoolExp!
-  ): FathersMutationResponse
-  updateFathersByPk(
-    _set: FathersSetInput
-    pkColumns: FathersPkColumnsInput!
-  ): Fathers
-  updateFathersMany(
-    updates: [FathersUpdates!]!
-  ): [FathersMutationResponse]
-  updateGroups(
-    _inc: GroupsIncInput
-    _set: GroupsSetInput
-    where: GroupsBoolExp!
-  ): GroupsMutationResponse
-  updateGroupsByPk(
-    _inc: GroupsIncInput
-    _set: GroupsSetInput
-    pkColumns: GroupsPkColumnsInput!
-  ): Groups
-  updateGroupsMany(
-    updates: [GroupsUpdates!]!
-  ): [GroupsMutationResponse]
-  updateHistoryAttendanceDays(
-    _set: HistoryAttendanceDaysSetInput
-    where: HistoryAttendanceDaysBoolExp!
-  ): HistoryAttendanceDaysMutationResponse
-  updateHistoryAttendanceDaysByPk(
-    _set: HistoryAttendanceDaysSetInput
-    pkColumns: HistoryAttendanceDaysPkColumnsInput!
-  ): HistoryAttendanceDays
-  updateHistoryAttendanceDaysMany(
-    updates: [HistoryAttendanceDaysUpdates!]!
-  ): [HistoryAttendanceDaysMutationResponse]
-  updateHistoryAttendanceHistory(
-    _set: HistoryAttendanceHistorySetInput
-    where: HistoryAttendanceHistoryBoolExp!
-  ): HistoryAttendanceHistoryMutationResponse
-  updateHistoryAttendanceHistoryByPk(
-    _set: HistoryAttendanceHistorySetInput
-    pkColumns: HistoryAttendanceHistoryPkColumnsInput!
-  ): HistoryAttendanceHistory
-  updateHistoryAttendanceHistoryMany(
-    updates: [HistoryAttendanceHistoryUpdates!]!
-  ): [HistoryAttendanceHistoryMutationResponse]
-  updateHistoryMeetings(
-    _inc: HistoryMeetingsIncInput
-    _set: HistoryMeetingsSetInput
-    where: HistoryMeetingsBoolExp!
-  ): HistoryMeetingsMutationResponse
-  updateHistoryMeetingsByPk(
-    _inc: HistoryMeetingsIncInput
-    _set: HistoryMeetingsSetInput
-    pkColumns: HistoryMeetingsPkColumnsInput!
-  ): HistoryMeetings
-  updateHistoryMeetingsMany(
-    updates: [HistoryMeetingsUpdates!]!
-  ): [HistoryMeetingsMutationResponse]
-  updateHobbies(
-    _inc: HobbiesIncInput
-    _set: HobbiesSetInput
-    where: HobbiesBoolExp!
-  ): HobbiesMutationResponse
-  updateHobbiesByPk(
-    _inc: HobbiesIncInput
-    _set: HobbiesSetInput
-    pkColumns: HobbiesPkColumnsInput!
-  ): Hobbies
-  updateHobbiesMany(
-    updates: [HobbiesUpdates!]!
-  ): [HobbiesMutationResponse]
-  updateJobs(
-    _set: JobsSetInput
-    where: JobsBoolExp!
-  ): JobsMutationResponse
-  updateJobsByPk(
-    _set: JobsSetInput
-    pkColumns: JobsPkColumnsInput!
-  ): Jobs
-  updateJobsMany(
-    updates: [JobsUpdates!]!
-  ): [JobsMutationResponse]
-  updatePersonStates(
-    _inc: PersonStatesIncInput
-    _set: PersonStatesSetInput
-    where: PersonStatesBoolExp!
-  ): PersonStatesMutationResponse
-  updatePersonStatesByPk(
-    _inc: PersonStatesIncInput
-    _set: PersonStatesSetInput
-    pkColumns: PersonStatesPkColumnsInput!
-  ): PersonStates
-  updatePersonStatesMany(
-    updates: [PersonStatesUpdates!]!
-  ): [PersonStatesMutationResponse]
-  updatePersonTypes(
-    _set: PersonTypesSetInput
-    where: PersonTypesBoolExp!
-  ): PersonTypesMutationResponse
-  updatePersonTypesByPk(
-    _set: PersonTypesSetInput
-    pkColumns: PersonTypesPkColumnsInput!
-  ): PersonTypes
-  updatePersonTypesMany(
-    updates: [PersonTypesUpdates!]!
-  ): [PersonTypesMutationResponse]
-  updatePersons(
-    _append: PersonsAppendInput
-    _deleteAtPath: PersonsDeleteAtPathInput
-    _deleteElem: PersonsDeleteElemInput
-    _deleteKey: PersonsDeleteKeyInput
-    _inc: PersonsIncInput
-    _prepend: PersonsPrependInput
-    _set: PersonsSetInput
-    where: PersonsBoolExp!
-  ): PersonsMutationResponse
-  updatePersonsByPk(
-    _append: PersonsAppendInput
-    _deleteAtPath: PersonsDeleteAtPathInput
-    _deleteElem: PersonsDeleteElemInput
-    _deleteKey: PersonsDeleteKeyInput
-    _inc: PersonsIncInput
-    _prepend: PersonsPrependInput
-    _set: PersonsSetInput
-    pkColumns: PersonsPkColumnsInput!
-  ): Persons
-  updatePersonsHobbies(
-    where: PersonsHobbiesBoolExp!
-  ): PersonsHobbiesMutationResponse
-  updatePersonsHobbiesMany(
-    updates: [PersonsHobbiesUpdates!]!
-  ): [PersonsHobbiesMutationResponse]
-  updatePersonsMany(
-    updates: [PersonsUpdates!]!
-  ): [PersonsMutationResponse]
-  updatePersonsServices(
-    _set: PersonsServicesSetInput
-    where: PersonsServicesBoolExp!
-  ): PersonsServicesMutationResponse
-  updatePersonsServicesMany(
-    updates: [PersonsServicesUpdates!]!
-  ): [PersonsServicesMutationResponse]
-  updatePersonsTags(
-    where: PersonsTagsBoolExp!
-  ): PersonsTagsMutationResponse
-  updatePersonsTagsMany(
-    updates: [PersonsTagsUpdates!]!
-  ): [PersonsTagsMutationResponse]
-  updateQualifications(
-    _set: QualificationsSetInput
-    where: QualificationsBoolExp!
-  ): QualificationsMutationResponse
-  updateQualificationsByPk(
-    _set: QualificationsSetInput
-    pkColumns: QualificationsPkColumnsInput!
-  ): Qualifications
-  updateQualificationsMany(
-    updates: [QualificationsUpdates!]!
-  ): [QualificationsMutationResponse]
-  updateSchools(
-    _set: SchoolsSetInput
-    where: SchoolsBoolExp!
-  ): SchoolsMutationResponse
-  updateSchoolsByPk(
-    _set: SchoolsSetInput
-    pkColumns: SchoolsPkColumnsInput!
-  ): Schools
-  updateSchoolsMany(
-    updates: [SchoolsUpdates!]!
-  ): [SchoolsMutationResponse]
-  updateServices(
-    _inc: ServicesIncInput
-    _set: ServicesSetInput
-    where: ServicesBoolExp!
-  ): ServicesMutationResponse
-  updateServicesByPk(
-    _inc: ServicesIncInput
-    _set: ServicesSetInput
-    pkColumns: ServicesPkColumnsInput!
-  ): Services
-  updateServicesMany(
-    updates: [ServicesUpdates!]!
-  ): [ServicesMutationResponse]
-  updateShammasLevels(
-    where: ShammasLevelsBoolExp!
-  ): ShammasLevelsMutationResponse
+  insertAddresses(objects: [AddressesInsertInput!]!, onConflict: AddressesOnConflict): AddressesMutationResponse
+  insertAddressesOne(object: AddressesInsertInput!, onConflict: AddressesOnConflict): Addresses
+  insertAreas(objects: [AreasInsertInput!]!, onConflict: AreasOnConflict): AreasMutationResponse
+  insertAreasOne(object: AreasInsertInput!, onConflict: AreasOnConflict): Areas
+  insertAreasStreets(objects: [AreasStreetsInsertInput!]!, onConflict: AreasStreetsOnConflict): AreasStreetsMutationResponse
+  insertAreasStreetsOne(object: AreasStreetsInsertInput!, onConflict: AreasStreetsOnConflict): AreasStreets
+  insertAuthInvitations(objects: [AuthInvitationsInsertInput!]!, onConflict: AuthInvitationsOnConflict): AuthInvitationsMutationResponse
+  insertAuthInvitationsOne(object: AuthInvitationsInsertInput!, onConflict: AuthInvitationsOnConflict): AuthInvitations
+  insertAuthUsersAdminOn(objects: [AuthUsersAdminOnInsertInput!]!, onConflict: AuthUsersAdminOnOnConflict): AuthUsersAdminOnMutationResponse
+  insertAuthUsersAdminOnOne(object: AuthUsersAdminOnInsertInput!, onConflict: AuthUsersAdminOnOnConflict): AuthUsersAdminOn
+  insertAuthUsersData(objects: [AuthUsersDataInsertInput!]!, onConflict: AuthUsersDataOnConflict): AuthUsersDataMutationResponse
+  insertAuthUsersDataOne(object: AuthUsersDataInsertInput!, onConflict: AuthUsersDataOnConflict): AuthUsersData
+  insertAuthUsersPermissions(objects: [AuthUsersPermissionsInsertInput!]!, onConflict: AuthUsersPermissionsOnConflict): AuthUsersPermissionsMutationResponse
+  insertAuthUsersPermissionsOne(object: AuthUsersPermissionsInsertInput!, onConflict: AuthUsersPermissionsOnConflict): AuthUsersPermissions
+  insertChurches(objects: [ChurchesInsertInput!]!, onConflict: ChurchesOnConflict): ChurchesMutationResponse
+  insertChurchesOne(object: ChurchesInsertInput!, onConflict: ChurchesOnConflict): Churches
+  insertClasses(objects: [ClassesInsertInput!]!, onConflict: ClassesOnConflict): ClassesMutationResponse
+  insertClassesOne(object: ClassesInsertInput!, onConflict: ClassesOnConflict): Classes
+  insertColleges(objects: [CollegesInsertInput!]!, onConflict: CollegesOnConflict): CollegesMutationResponse
+  insertCollegesOne(object: CollegesInsertInput!, onConflict: CollegesOnConflict): Colleges
+  insertDistricts(objects: [DistrictsInsertInput!]!, onConflict: DistrictsOnConflict): DistrictsMutationResponse
+  insertDistrictsOne(object: DistrictsInsertInput!, onConflict: DistrictsOnConflict): Districts
+  insertFamilies(objects: [FamiliesInsertInput!]!, onConflict: FamiliesOnConflict): FamiliesMutationResponse
+  insertFamiliesFamilies(objects: [FamiliesFamiliesInsertInput!]!, onConflict: FamiliesFamiliesOnConflict): FamiliesFamiliesMutationResponse
+  insertFamiliesFamiliesOne(object: FamiliesFamiliesInsertInput!, onConflict: FamiliesFamiliesOnConflict): FamiliesFamilies
+  insertFamiliesOne(object: FamiliesInsertInput!, onConflict: FamiliesOnConflict): Families
+  insertFathers(objects: [FathersInsertInput!]!, onConflict: FathersOnConflict): FathersMutationResponse
+  insertFathersOne(object: FathersInsertInput!, onConflict: FathersOnConflict): Fathers
+  insertGroups(objects: [GroupsInsertInput!]!, onConflict: GroupsOnConflict): GroupsMutationResponse
+  insertGroupsOne(object: GroupsInsertInput!, onConflict: GroupsOnConflict): Groups
+  insertHistoryAttendanceDays(objects: [HistoryAttendanceDaysInsertInput!]!, onConflict: HistoryAttendanceDaysOnConflict): HistoryAttendanceDaysMutationResponse
+  insertHistoryAttendanceDaysOne(object: HistoryAttendanceDaysInsertInput!, onConflict: HistoryAttendanceDaysOnConflict): HistoryAttendanceDays
+  insertHistoryAttendanceHistory(objects: [HistoryAttendanceHistoryInsertInput!]!, onConflict: HistoryAttendanceHistoryOnConflict): HistoryAttendanceHistoryMutationResponse
+  insertHistoryAttendanceHistoryOne(object: HistoryAttendanceHistoryInsertInput!, onConflict: HistoryAttendanceHistoryOnConflict): HistoryAttendanceHistory
+  insertHistoryCallHistory(objects: [HistoryCallHistoryInsertInput!]!, onConflict: HistoryCallHistoryOnConflict): HistoryCallHistoryMutationResponse
+  insertHistoryCallHistoryOne(object: HistoryCallHistoryInsertInput!, onConflict: HistoryCallHistoryOnConflict): HistoryCallHistory
+  insertHistoryConfessionHistory(objects: [HistoryConfessionHistoryInsertInput!]!, onConflict: HistoryConfessionHistoryOnConflict): HistoryConfessionHistoryMutationResponse
+  insertHistoryConfessionHistoryOne(object: HistoryConfessionHistoryInsertInput!, onConflict: HistoryConfessionHistoryOnConflict): HistoryConfessionHistory
+  insertHistoryKodasHistory(objects: [HistoryKodasHistoryInsertInput!]!, onConflict: HistoryKodasHistoryOnConflict): HistoryKodasHistoryMutationResponse
+  insertHistoryKodasHistoryOne(object: HistoryKodasHistoryInsertInput!, onConflict: HistoryKodasHistoryOnConflict): HistoryKodasHistory
+  insertHistoryMeetings(objects: [HistoryMeetingsInsertInput!]!, onConflict: HistoryMeetingsOnConflict): HistoryMeetingsMutationResponse
+  insertHistoryMeetingsOne(object: HistoryMeetingsInsertInput!, onConflict: HistoryMeetingsOnConflict): HistoryMeetings
+  insertHistoryVisitHistory(objects: [HistoryVisitHistoryInsertInput!]!, onConflict: HistoryVisitHistoryOnConflict): HistoryVisitHistoryMutationResponse
+  insertHistoryVisitHistoryOne(object: HistoryVisitHistoryInsertInput!, onConflict: HistoryVisitHistoryOnConflict): HistoryVisitHistory
+  insertHobbies(objects: [HobbiesInsertInput!]!, onConflict: HobbiesOnConflict): HobbiesMutationResponse
+  insertHobbiesOne(object: HobbiesInsertInput!, onConflict: HobbiesOnConflict): Hobbies
+  insertJobs(objects: [JobsInsertInput!]!, onConflict: JobsOnConflict): JobsMutationResponse
+  insertJobsOne(object: JobsInsertInput!, onConflict: JobsOnConflict): Jobs
+  insertPersonStates(objects: [PersonStatesInsertInput!]!, onConflict: PersonStatesOnConflict): PersonStatesMutationResponse
+  insertPersonStatesOne(object: PersonStatesInsertInput!, onConflict: PersonStatesOnConflict): PersonStates
+  insertPersonTypes(objects: [PersonTypesInsertInput!]!, onConflict: PersonTypesOnConflict): PersonTypesMutationResponse
+  insertPersonTypesOne(object: PersonTypesInsertInput!, onConflict: PersonTypesOnConflict): PersonTypes
+  insertPersons(objects: [PersonsInsertInput!]!, onConflict: PersonsOnConflict): PersonsMutationResponse
+  insertPersonsGroups(objects: [PersonsGroupsInsertInput!]!, onConflict: PersonsGroupsOnConflict): PersonsGroupsMutationResponse
+  insertPersonsGroupsOne(object: PersonsGroupsInsertInput!, onConflict: PersonsGroupsOnConflict): PersonsGroups
+  insertPersonsHobbies(objects: [PersonsHobbiesInsertInput!]!, onConflict: PersonsHobbiesOnConflict): PersonsHobbiesMutationResponse
+  insertPersonsHobbiesOne(object: PersonsHobbiesInsertInput!, onConflict: PersonsHobbiesOnConflict): PersonsHobbies
+  insertPersonsOne(object: PersonsInsertInput!, onConflict: PersonsOnConflict): Persons
+  insertPersonsServices(objects: [PersonsServicesInsertInput!]!, onConflict: PersonsServicesOnConflict): PersonsServicesMutationResponse
+  insertPersonsServicesOne(object: PersonsServicesInsertInput!, onConflict: PersonsServicesOnConflict): PersonsServices
+  insertPersonsTags(objects: [PersonsTagsInsertInput!]!, onConflict: PersonsTagsOnConflict): PersonsTagsMutationResponse
+  insertPersonsTagsOne(object: PersonsTagsInsertInput!, onConflict: PersonsTagsOnConflict): PersonsTags
+  insertQualifications(objects: [QualificationsInsertInput!]!, onConflict: QualificationsOnConflict): QualificationsMutationResponse
+  insertQualificationsOne(object: QualificationsInsertInput!, onConflict: QualificationsOnConflict): Qualifications
+  insertSchools(objects: [SchoolsInsertInput!]!, onConflict: SchoolsOnConflict): SchoolsMutationResponse
+  insertSchoolsOne(object: SchoolsInsertInput!, onConflict: SchoolsOnConflict): Schools
+  insertServices(objects: [ServicesInsertInput!]!, onConflict: ServicesOnConflict): ServicesMutationResponse
+  insertServicesOne(object: ServicesInsertInput!, onConflict: ServicesOnConflict): Services
+  insertStores(objects: [StoresInsertInput!]!, onConflict: StoresOnConflict): StoresMutationResponse
+  insertStoresOne(object: StoresInsertInput!, onConflict: StoresOnConflict): Stores
+  insertStreets(objects: [StreetsInsertInput!]!, onConflict: StreetsOnConflict): StreetsMutationResponse
+  insertStreetsOne(object: StreetsInsertInput!, onConflict: StreetsOnConflict): Streets
+  insertStudyYears(objects: [StudyYearsInsertInput!]!, onConflict: StudyYearsOnConflict): StudyYearsMutationResponse
+  insertStudyYearsOne(object: StudyYearsInsertInput!, onConflict: StudyYearsOnConflict): StudyYears
+  insertTags(objects: [TagsInsertInput!]!, onConflict: TagsOnConflict): TagsMutationResponse
+  insertTagsOne(object: TagsInsertInput!, onConflict: TagsOnConflict): Tags
+  insertUniversities(objects: [UniversitiesInsertInput!]!, onConflict: UniversitiesOnConflict): UniversitiesMutationResponse
+  insertUniversitiesOne(object: UniversitiesInsertInput!, onConflict: UniversitiesOnConflict): Universities
+  insertUsersFcmTokens(objects: [UsersFcmTokensInsertInput!]!, onConflict: UsersFcmTokensOnConflict): UsersFcmTokensMutationResponse
+  insertUsersFcmTokensOne(object: UsersFcmTokensInsertInput!, onConflict: UsersFcmTokensOnConflict): UsersFcmTokens
+  updateAddresses(_inc: AddressesIncInput, _set: AddressesSetInput, where: AddressesBoolExp!): AddressesMutationResponse
+  updateAddressesByPk(_inc: AddressesIncInput, _set: AddressesSetInput, pkColumns: AddressesPkColumnsInput!): Addresses
+  updateAddressesMany(updates: [AddressesUpdates!]!): [AddressesMutationResponse]
+  updateAreas(_inc: AreasIncInput, _set: AreasSetInput, where: AreasBoolExp!): AreasMutationResponse
+  updateAreasByPk(_inc: AreasIncInput, _set: AreasSetInput, pkColumns: AreasPkColumnsInput!): Areas
+  updateAreasMany(updates: [AreasUpdates!]!): [AreasMutationResponse]
+  updateAuthInvitations(_set: AuthInvitationsSetInput, where: AuthInvitationsBoolExp!): AuthInvitationsMutationResponse
+  updateAuthInvitationsByPk(_set: AuthInvitationsSetInput, pkColumns: AuthInvitationsPkColumnsInput!): AuthInvitations
+  updateAuthInvitationsMany(updates: [AuthInvitationsUpdates!]!): [AuthInvitationsMutationResponse]
+  updateAuthUsersData(_set: AuthUsersDataSetInput, where: AuthUsersDataBoolExp!): AuthUsersDataMutationResponse
+  updateAuthUsersDataByPk(_set: AuthUsersDataSetInput, pkColumns: AuthUsersDataPkColumnsInput!): AuthUsersData
+  updateAuthUsersDataMany(updates: [AuthUsersDataUpdates!]!): [AuthUsersDataMutationResponse]
+  updateChurches(_set: ChurchesSetInput, where: ChurchesBoolExp!): ChurchesMutationResponse
+  updateChurchesByPk(_set: ChurchesSetInput, pkColumns: ChurchesPkColumnsInput!): Churches
+  updateChurchesMany(updates: [ChurchesUpdates!]!): [ChurchesMutationResponse]
+  updateClasses(_inc: ClassesIncInput, _set: ClassesSetInput, where: ClassesBoolExp!): ClassesMutationResponse
+  updateClassesByPk(_inc: ClassesIncInput, _set: ClassesSetInput, pkColumns: ClassesPkColumnsInput!): Classes
+  updateClassesMany(updates: [ClassesUpdates!]!): [ClassesMutationResponse]
+  updateColleges(_set: CollegesSetInput, where: CollegesBoolExp!): CollegesMutationResponse
+  updateCollegesByPk(_set: CollegesSetInput, pkColumns: CollegesPkColumnsInput!): Colleges
+  updateCollegesMany(updates: [CollegesUpdates!]!): [CollegesMutationResponse]
+  updateDistricts(_set: DistrictsSetInput, where: DistrictsBoolExp!): DistrictsMutationResponse
+  updateDistrictsByPk(_set: DistrictsSetInput, pkColumns: DistrictsPkColumnsInput!): Districts
+  updateDistrictsMany(updates: [DistrictsUpdates!]!): [DistrictsMutationResponse]
+  updateFamilies(_inc: FamiliesIncInput, _set: FamiliesSetInput, where: FamiliesBoolExp!): FamiliesMutationResponse
+  updateFamiliesByPk(_inc: FamiliesIncInput, _set: FamiliesSetInput, pkColumns: FamiliesPkColumnsInput!): Families
+  updateFamiliesMany(updates: [FamiliesUpdates!]!): [FamiliesMutationResponse]
+  updateFathers(_set: FathersSetInput, where: FathersBoolExp!): FathersMutationResponse
+  updateFathersByPk(_set: FathersSetInput, pkColumns: FathersPkColumnsInput!): Fathers
+  updateFathersMany(updates: [FathersUpdates!]!): [FathersMutationResponse]
+  updateGroups(_inc: GroupsIncInput, _set: GroupsSetInput, where: GroupsBoolExp!): GroupsMutationResponse
+  updateGroupsByPk(_inc: GroupsIncInput, _set: GroupsSetInput, pkColumns: GroupsPkColumnsInput!): Groups
+  updateGroupsMany(updates: [GroupsUpdates!]!): [GroupsMutationResponse]
+  updateHistoryAttendanceDays(_set: HistoryAttendanceDaysSetInput, where: HistoryAttendanceDaysBoolExp!): HistoryAttendanceDaysMutationResponse
+  updateHistoryAttendanceDaysByPk(_set: HistoryAttendanceDaysSetInput, pkColumns: HistoryAttendanceDaysPkColumnsInput!): HistoryAttendanceDays
+  updateHistoryAttendanceDaysMany(updates: [HistoryAttendanceDaysUpdates!]!): [HistoryAttendanceDaysMutationResponse]
+  updateHistoryAttendanceHistory(_set: HistoryAttendanceHistorySetInput, where: HistoryAttendanceHistoryBoolExp!): HistoryAttendanceHistoryMutationResponse
+  updateHistoryAttendanceHistoryByPk(_set: HistoryAttendanceHistorySetInput, pkColumns: HistoryAttendanceHistoryPkColumnsInput!): HistoryAttendanceHistory
+  updateHistoryAttendanceHistoryMany(updates: [HistoryAttendanceHistoryUpdates!]!): [HistoryAttendanceHistoryMutationResponse]
+  updateHistoryMeetings(_inc: HistoryMeetingsIncInput, _set: HistoryMeetingsSetInput, where: HistoryMeetingsBoolExp!): HistoryMeetingsMutationResponse
+  updateHistoryMeetingsByPk(_inc: HistoryMeetingsIncInput, _set: HistoryMeetingsSetInput, pkColumns: HistoryMeetingsPkColumnsInput!): HistoryMeetings
+  updateHistoryMeetingsMany(updates: [HistoryMeetingsUpdates!]!): [HistoryMeetingsMutationResponse]
+  updateHobbies(_inc: HobbiesIncInput, _set: HobbiesSetInput, where: HobbiesBoolExp!): HobbiesMutationResponse
+  updateHobbiesByPk(_inc: HobbiesIncInput, _set: HobbiesSetInput, pkColumns: HobbiesPkColumnsInput!): Hobbies
+  updateHobbiesMany(updates: [HobbiesUpdates!]!): [HobbiesMutationResponse]
+  updateJobs(_set: JobsSetInput, where: JobsBoolExp!): JobsMutationResponse
+  updateJobsByPk(_set: JobsSetInput, pkColumns: JobsPkColumnsInput!): Jobs
+  updateJobsMany(updates: [JobsUpdates!]!): [JobsMutationResponse]
+  updatePersonStates(_inc: PersonStatesIncInput, _set: PersonStatesSetInput, where: PersonStatesBoolExp!): PersonStatesMutationResponse
+  updatePersonStatesByPk(_inc: PersonStatesIncInput, _set: PersonStatesSetInput, pkColumns: PersonStatesPkColumnsInput!): PersonStates
+  updatePersonStatesMany(updates: [PersonStatesUpdates!]!): [PersonStatesMutationResponse]
+  updatePersonTypes(_set: PersonTypesSetInput, where: PersonTypesBoolExp!): PersonTypesMutationResponse
+  updatePersonTypesByPk(_set: PersonTypesSetInput, pkColumns: PersonTypesPkColumnsInput!): PersonTypes
+  updatePersonTypesMany(updates: [PersonTypesUpdates!]!): [PersonTypesMutationResponse]
+  updatePersons(_append: PersonsAppendInput, _deleteAtPath: PersonsDeleteAtPathInput, _deleteElem: PersonsDeleteElemInput, _deleteKey: PersonsDeleteKeyInput, _inc: PersonsIncInput, _prepend: PersonsPrependInput, _set: PersonsSetInput, where: PersonsBoolExp!): PersonsMutationResponse
+  updatePersonsByPk(_append: PersonsAppendInput, _deleteAtPath: PersonsDeleteAtPathInput, _deleteElem: PersonsDeleteElemInput, _deleteKey: PersonsDeleteKeyInput, _inc: PersonsIncInput, _prepend: PersonsPrependInput, _set: PersonsSetInput, pkColumns: PersonsPkColumnsInput!): Persons
+  updatePersonsHobbies(where: PersonsHobbiesBoolExp!): PersonsHobbiesMutationResponse
+  updatePersonsHobbiesMany(updates: [PersonsHobbiesUpdates!]!): [PersonsHobbiesMutationResponse]
+  updatePersonsMany(updates: [PersonsUpdates!]!): [PersonsMutationResponse]
+  updatePersonsServices(_set: PersonsServicesSetInput, where: PersonsServicesBoolExp!): PersonsServicesMutationResponse
+  updatePersonsServicesMany(updates: [PersonsServicesUpdates!]!): [PersonsServicesMutationResponse]
+  updatePersonsTags(where: PersonsTagsBoolExp!): PersonsTagsMutationResponse
+  updatePersonsTagsMany(updates: [PersonsTagsUpdates!]!): [PersonsTagsMutationResponse]
+  updateQualifications(_set: QualificationsSetInput, where: QualificationsBoolExp!): QualificationsMutationResponse
+  updateQualificationsByPk(_set: QualificationsSetInput, pkColumns: QualificationsPkColumnsInput!): Qualifications
+  updateQualificationsMany(updates: [QualificationsUpdates!]!): [QualificationsMutationResponse]
+  updateSchools(_set: SchoolsSetInput, where: SchoolsBoolExp!): SchoolsMutationResponse
+  updateSchoolsByPk(_set: SchoolsSetInput, pkColumns: SchoolsPkColumnsInput!): Schools
+  updateSchoolsMany(updates: [SchoolsUpdates!]!): [SchoolsMutationResponse]
+  updateServices(_inc: ServicesIncInput, _set: ServicesSetInput, where: ServicesBoolExp!): ServicesMutationResponse
+  updateServicesByPk(_inc: ServicesIncInput, _set: ServicesSetInput, pkColumns: ServicesPkColumnsInput!): Services
+  updateServicesMany(updates: [ServicesUpdates!]!): [ServicesMutationResponse]
+  updateShammasLevels(where: ShammasLevelsBoolExp!): ShammasLevelsMutationResponse
   updateShammasLevelsByPk(pkColumns: ShammasLevelsPkColumnsInput!): ShammasLevels
-  updateShammasLevelsMany(
-    updates: [ShammasLevelsUpdates!]!
-  ): [ShammasLevelsMutationResponse]
-  updateStores(
-    _inc: StoresIncInput
-    _set: StoresSetInput
-    where: StoresBoolExp!
-  ): StoresMutationResponse
-  updateStoresByPk(
-    _inc: StoresIncInput
-    _set: StoresSetInput
-    pkColumns: StoresPkColumnsInput!
-  ): Stores
-  updateStoresMany(
-    updates: [StoresUpdates!]!
-  ): [StoresMutationResponse]
-  updateStreets(
-    _inc: StreetsIncInput
-    _set: StreetsSetInput
-    where: StreetsBoolExp!
-  ): StreetsMutationResponse
-  updateStreetsByPk(
-    _inc: StreetsIncInput
-    _set: StreetsSetInput
-    pkColumns: StreetsPkColumnsInput!
-  ): Streets
-  updateStreetsMany(
-    updates: [StreetsUpdates!]!
-  ): [StreetsMutationResponse]
-  updateStudyYears(
-    _set: StudyYearsSetInput
-    where: StudyYearsBoolExp!
-  ): StudyYearsMutationResponse
-  updateStudyYearsByPk(
-    _set: StudyYearsSetInput
-    pkColumns: StudyYearsPkColumnsInput!
-  ): StudyYears
-  updateStudyYearsMany(
-    updates: [StudyYearsUpdates!]!
-  ): [StudyYearsMutationResponse]
-  updateTags(
-    _inc: TagsIncInput
-    _set: TagsSetInput
-    where: TagsBoolExp!
-  ): TagsMutationResponse
-  updateTagsByPk(
-    _inc: TagsIncInput
-    _set: TagsSetInput
-    pkColumns: TagsPkColumnsInput!
-  ): Tags
-  updateTagsMany(
-    updates: [TagsUpdates!]!
-  ): [TagsMutationResponse]
-  updateUniversities(
-    _set: UniversitiesSetInput
-    where: UniversitiesBoolExp!
-  ): UniversitiesMutationResponse
-  updateUniversitiesByPk(
-    _set: UniversitiesSetInput
-    pkColumns: UniversitiesPkColumnsInput!
-  ): Universities
-  updateUniversitiesMany(
-    updates: [UniversitiesUpdates!]!
-  ): [UniversitiesMutationResponse]
-  updateUsersPreferences(
-    _append: UsersPreferencesAppendInput
-    _deleteAtPath: UsersPreferencesDeleteAtPathInput
-    _deleteElem: UsersPreferencesDeleteElemInput
-    _deleteKey: UsersPreferencesDeleteKeyInput
-    _prepend: UsersPreferencesPrependInput
-    _set: UsersPreferencesSetInput
-    where: UsersPreferencesBoolExp!
-  ): UsersPreferencesMutationResponse
-  updateUsersPreferencesByPk(
-    _append: UsersPreferencesAppendInput
-    _deleteAtPath: UsersPreferencesDeleteAtPathInput
-    _deleteElem: UsersPreferencesDeleteElemInput
-    _deleteKey: UsersPreferencesDeleteKeyInput
-    _prepend: UsersPreferencesPrependInput
-    _set: UsersPreferencesSetInput
-    pkColumns: UsersPreferencesPkColumnsInput!
-  ): UsersPreferences
-  updateUsersPreferencesMany(
-    updates: [UsersPreferencesUpdates!]!
-  ): [UsersPreferencesMutationResponse]
+  updateShammasLevelsMany(updates: [ShammasLevelsUpdates!]!): [ShammasLevelsMutationResponse]
+  updateStores(_inc: StoresIncInput, _set: StoresSetInput, where: StoresBoolExp!): StoresMutationResponse
+  updateStoresByPk(_inc: StoresIncInput, _set: StoresSetInput, pkColumns: StoresPkColumnsInput!): Stores
+  updateStoresMany(updates: [StoresUpdates!]!): [StoresMutationResponse]
+  updateStreets(_inc: StreetsIncInput, _set: StreetsSetInput, where: StreetsBoolExp!): StreetsMutationResponse
+  updateStreetsByPk(_inc: StreetsIncInput, _set: StreetsSetInput, pkColumns: StreetsPkColumnsInput!): Streets
+  updateStreetsMany(updates: [StreetsUpdates!]!): [StreetsMutationResponse]
+  updateStudyYears(_set: StudyYearsSetInput, where: StudyYearsBoolExp!): StudyYearsMutationResponse
+  updateStudyYearsByPk(_set: StudyYearsSetInput, pkColumns: StudyYearsPkColumnsInput!): StudyYears
+  updateStudyYearsMany(updates: [StudyYearsUpdates!]!): [StudyYearsMutationResponse]
+  updateTags(_inc: TagsIncInput, _set: TagsSetInput, where: TagsBoolExp!): TagsMutationResponse
+  updateTagsByPk(_inc: TagsIncInput, _set: TagsSetInput, pkColumns: TagsPkColumnsInput!): Tags
+  updateTagsMany(updates: [TagsUpdates!]!): [TagsMutationResponse]
+  updateUniversities(_set: UniversitiesSetInput, where: UniversitiesBoolExp!): UniversitiesMutationResponse
+  updateUniversitiesByPk(_set: UniversitiesSetInput, pkColumns: UniversitiesPkColumnsInput!): Universities
+  updateUniversitiesMany(updates: [UniversitiesUpdates!]!): [UniversitiesMutationResponse]
+  updateUsersPreferences(_append: UsersPreferencesAppendInput, _deleteAtPath: UsersPreferencesDeleteAtPathInput, _deleteElem: UsersPreferencesDeleteElemInput, _deleteKey: UsersPreferencesDeleteKeyInput, _prepend: UsersPreferencesPrependInput, _set: UsersPreferencesSetInput, where: UsersPreferencesBoolExp!): UsersPreferencesMutationResponse
+  updateUsersPreferencesByPk(_append: UsersPreferencesAppendInput, _deleteAtPath: UsersPreferencesDeleteAtPathInput, _deleteElem: UsersPreferencesDeleteElemInput, _deleteKey: UsersPreferencesDeleteKeyInput, _prepend: UsersPreferencesPrependInput, _set: UsersPreferencesSetInput, pkColumns: UsersPreferencesPkColumnsInput!): UsersPreferences
+  updateUsersPreferencesMany(updates: [UsersPreferencesUpdates!]!): [UsersPreferencesMutationResponse]
 }
 
 scalar name
@@ -8862,490 +7923,106 @@ input personsAggregateBoolExpCount {
 }
 
 type query_root {
-  addresses(
-    distinctOn: [AddressesSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [AddressesOrderBy!]
-    where: AddressesBoolExp
-  ): [Addresses!]!
+  addresses(distinctOn: [AddressesSelectColumn!], limit: Int, offset: Int, orderBy: [AddressesOrderBy!], where: AddressesBoolExp): [Addresses!]!
   addressesByPk(id: uuid!): Addresses
-  areas(
-    distinctOn: [AreasSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [AreasOrderBy!]
-    where: AreasBoolExp
-  ): [Areas!]!
-  areasAggregate(
-    distinctOn: [AreasSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [AreasOrderBy!]
-    where: AreasBoolExp
-  ): AreasAggregate!
+  areas(distinctOn: [AreasSelectColumn!], limit: Int, offset: Int, orderBy: [AreasOrderBy!], where: AreasBoolExp): [Areas!]!
+  areasAggregate(distinctOn: [AreasSelectColumn!], limit: Int, offset: Int, orderBy: [AreasOrderBy!], where: AreasBoolExp): AreasAggregate!
   areasByPk(id: uuid!): Areas
-  areasStreets(
-    distinctOn: [AreasStreetsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [AreasStreetsOrderBy!]
-    where: AreasStreetsBoolExp
-  ): [AreasStreets!]!
+  areasStreets(distinctOn: [AreasStreetsSelectColumn!], limit: Int, offset: Int, orderBy: [AreasStreetsOrderBy!], where: AreasStreetsBoolExp): [AreasStreets!]!
   areasStreetsByPk(areaId: uuid!, streetId: uuid!): AreasStreets
-  authInvitations(
-    distinctOn: [AuthInvitationsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [AuthInvitationsOrderBy!]
-    where: AuthInvitationsBoolExp
-  ): [AuthInvitations!]!
+  authInvitations(distinctOn: [AuthInvitationsSelectColumn!], limit: Int, offset: Int, orderBy: [AuthInvitationsOrderBy!], where: AuthInvitationsBoolExp): [AuthInvitations!]!
   authInvitationsByPk(id: uuid!): AuthInvitations
-  authUsersAdminOn(
-    distinctOn: [AuthUsersAdminOnSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [AuthUsersAdminOnOrderBy!]
-    where: AuthUsersAdminOnBoolExp
-  ): [AuthUsersAdminOn!]!
+  authUsersAdminOn(distinctOn: [AuthUsersAdminOnSelectColumn!], limit: Int, offset: Int, orderBy: [AuthUsersAdminOnOrderBy!], where: AuthUsersAdminOnBoolExp): [AuthUsersAdminOn!]!
   authUsersAdminOnByPk(permissionId: uuid!): AuthUsersAdminOn
-  authUsersData(
-    distinctOn: [AuthUsersDataSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [AuthUsersDataOrderBy!]
-    where: AuthUsersDataBoolExp
-  ): [AuthUsersData!]!
-  authUsersDataAggregate(
-    distinctOn: [AuthUsersDataSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [AuthUsersDataOrderBy!]
-    where: AuthUsersDataBoolExp
-  ): AuthUsersDataAggregate!
+  authUsersData(distinctOn: [AuthUsersDataSelectColumn!], limit: Int, offset: Int, orderBy: [AuthUsersDataOrderBy!], where: AuthUsersDataBoolExp): [AuthUsersData!]!
+  authUsersDataAggregate(distinctOn: [AuthUsersDataSelectColumn!], limit: Int, offset: Int, orderBy: [AuthUsersDataOrderBy!], where: AuthUsersDataBoolExp): AuthUsersDataAggregate!
   authUsersDataByPk(uid: uuid!): AuthUsersData
-  authUsersPermissions(
-    distinctOn: [AuthUsersPermissionsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [AuthUsersPermissionsOrderBy!]
-    where: AuthUsersPermissionsBoolExp
-  ): [AuthUsersPermissions!]!
+  authUsersPermissions(distinctOn: [AuthUsersPermissionsSelectColumn!], limit: Int, offset: Int, orderBy: [AuthUsersPermissionsOrderBy!], where: AuthUsersPermissionsBoolExp): [AuthUsersPermissions!]!
   authUsersPermissionsByPk(permission: String!, uid: uuid!): AuthUsersPermissions
-  churches(
-    distinctOn: [ChurchesSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [ChurchesOrderBy!]
-    where: ChurchesBoolExp
-  ): [Churches!]!
+  churches(distinctOn: [ChurchesSelectColumn!], limit: Int, offset: Int, orderBy: [ChurchesOrderBy!], where: ChurchesBoolExp): [Churches!]!
   churchesByPk(id: uuid!): Churches
-  classes(
-    distinctOn: [ClassesSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [ClassesOrderBy!]
-    where: ClassesBoolExp
-  ): [Classes!]!
-  classesAggregate(
-    distinctOn: [ClassesSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [ClassesOrderBy!]
-    where: ClassesBoolExp
-  ): ClassesAggregate!
+  classes(distinctOn: [ClassesSelectColumn!], limit: Int, offset: Int, orderBy: [ClassesOrderBy!], where: ClassesBoolExp): [Classes!]!
+  classesAggregate(distinctOn: [ClassesSelectColumn!], limit: Int, offset: Int, orderBy: [ClassesOrderBy!], where: ClassesBoolExp): ClassesAggregate!
   classesByPk(id: uuid!): Classes
-  classesPersons(
-    distinctOn: [ClassesPersonsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [ClassesPersonsOrderBy!]
-    where: ClassesPersonsBoolExp
-  ): [ClassesPersons!]!
-  colleges(
-    distinctOn: [CollegesSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [CollegesOrderBy!]
-    where: CollegesBoolExp
-  ): [Colleges!]!
+  classesPersons(distinctOn: [ClassesPersonsSelectColumn!], limit: Int, offset: Int, orderBy: [ClassesPersonsOrderBy!], where: ClassesPersonsBoolExp): [ClassesPersons!]!
+  colleges(distinctOn: [CollegesSelectColumn!], limit: Int, offset: Int, orderBy: [CollegesOrderBy!], where: CollegesBoolExp): [Colleges!]!
   collegesByPk(id: uuid!): Colleges
-  districts(
-    distinctOn: [DistrictsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [DistrictsOrderBy!]
-    where: DistrictsBoolExp
-  ): [Districts!]!
+  districts(distinctOn: [DistrictsSelectColumn!], limit: Int, offset: Int, orderBy: [DistrictsOrderBy!], where: DistrictsBoolExp): [Districts!]!
   districtsByPk(id: uuid!): Districts
-  families(
-    distinctOn: [FamiliesSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [FamiliesOrderBy!]
-    where: FamiliesBoolExp
-  ): [Families!]!
-  familiesAdminsPhones(
-    distinctOn: [FamiliesAdminsPhonesSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [FamiliesAdminsPhonesOrderBy!]
-    where: FamiliesAdminsPhonesBoolExp
-  ): [FamiliesAdminsPhones!]!
-  familiesAggregate(
-    distinctOn: [FamiliesSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [FamiliesOrderBy!]
-    where: FamiliesBoolExp
-  ): FamiliesAggregate!
+  families(distinctOn: [FamiliesSelectColumn!], limit: Int, offset: Int, orderBy: [FamiliesOrderBy!], where: FamiliesBoolExp): [Families!]!
+  familiesAdminsPhones(distinctOn: [FamiliesAdminsPhonesSelectColumn!], limit: Int, offset: Int, orderBy: [FamiliesAdminsPhonesOrderBy!], where: FamiliesAdminsPhonesBoolExp): [FamiliesAdminsPhones!]!
+  familiesAggregate(distinctOn: [FamiliesSelectColumn!], limit: Int, offset: Int, orderBy: [FamiliesOrderBy!], where: FamiliesBoolExp): FamiliesAggregate!
   familiesByPk(id: uuid!): Families
-  familiesFamilies(
-    distinctOn: [FamiliesFamiliesSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [FamiliesFamiliesOrderBy!]
-    where: FamiliesFamiliesBoolExp
-  ): [FamiliesFamilies!]!
-  fathers(
-    distinctOn: [FathersSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [FathersOrderBy!]
-    where: FathersBoolExp
-  ): [Fathers!]!
+  familiesFamilies(distinctOn: [FamiliesFamiliesSelectColumn!], limit: Int, offset: Int, orderBy: [FamiliesFamiliesOrderBy!], where: FamiliesFamiliesBoolExp): [FamiliesFamilies!]!
+  fathers(distinctOn: [FathersSelectColumn!], limit: Int, offset: Int, orderBy: [FathersOrderBy!], where: FathersBoolExp): [Fathers!]!
   fathersByPk(id: uuid!): Fathers
-  groups(
-    distinctOn: [GroupsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [GroupsOrderBy!]
-    where: GroupsBoolExp
-  ): [Groups!]!
-  groupsAggregate(
-    distinctOn: [GroupsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [GroupsOrderBy!]
-    where: GroupsBoolExp
-  ): GroupsAggregate!
+  groups(distinctOn: [GroupsSelectColumn!], limit: Int, offset: Int, orderBy: [GroupsOrderBy!], where: GroupsBoolExp): [Groups!]!
+  groupsAggregate(distinctOn: [GroupsSelectColumn!], limit: Int, offset: Int, orderBy: [GroupsOrderBy!], where: GroupsBoolExp): GroupsAggregate!
   groupsByPk(id: uuid!): Groups
-  historyAttendanceDays(
-    distinctOn: [HistoryAttendanceDaysSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryAttendanceDaysOrderBy!]
-    where: HistoryAttendanceDaysBoolExp
-  ): [HistoryAttendanceDays!]!
+  historyAttendanceDays(distinctOn: [HistoryAttendanceDaysSelectColumn!], limit: Int, offset: Int, orderBy: [HistoryAttendanceDaysOrderBy!], where: HistoryAttendanceDaysBoolExp): [HistoryAttendanceDays!]!
   historyAttendanceDaysByPk(day: date!): HistoryAttendanceDays
-  historyAttendanceHistory(
-    distinctOn: [HistoryAttendanceHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryAttendanceHistoryOrderBy!]
-    where: HistoryAttendanceHistoryBoolExp
-  ): [HistoryAttendanceHistory!]!
-  historyAttendanceHistoryAggregate(
-    distinctOn: [HistoryAttendanceHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryAttendanceHistoryOrderBy!]
-    where: HistoryAttendanceHistoryBoolExp
-  ): HistoryAttendanceHistoryAggregate!
+  historyAttendanceHistory(distinctOn: [HistoryAttendanceHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryAttendanceHistoryOrderBy!], where: HistoryAttendanceHistoryBoolExp): [HistoryAttendanceHistory!]!
+  historyAttendanceHistoryAggregate(distinctOn: [HistoryAttendanceHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryAttendanceHistoryOrderBy!], where: HistoryAttendanceHistoryBoolExp): HistoryAttendanceHistoryAggregate!
   historyAttendanceHistoryByPk(id: uuid!): HistoryAttendanceHistory
-  historyCallHistory(
-    distinctOn: [HistoryCallHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryCallHistoryOrderBy!]
-    where: HistoryCallHistoryBoolExp
-  ): [HistoryCallHistory!]!
-  historyCallHistoryAggregate(
-    distinctOn: [HistoryCallHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryCallHistoryOrderBy!]
-    where: HistoryCallHistoryBoolExp
-  ): HistoryCallHistoryAggregate!
+  historyCallHistory(distinctOn: [HistoryCallHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryCallHistoryOrderBy!], where: HistoryCallHistoryBoolExp): [HistoryCallHistory!]!
+  historyCallHistoryAggregate(distinctOn: [HistoryCallHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryCallHistoryOrderBy!], where: HistoryCallHistoryBoolExp): HistoryCallHistoryAggregate!
   historyCallHistoryByPk(time: timestamptz!): HistoryCallHistory
-  historyConfessionHistory(
-    distinctOn: [HistoryConfessionHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryConfessionHistoryOrderBy!]
-    where: HistoryConfessionHistoryBoolExp
-  ): [HistoryConfessionHistory!]!
-  historyConfessionHistoryAggregate(
-    distinctOn: [HistoryConfessionHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryConfessionHistoryOrderBy!]
-    where: HistoryConfessionHistoryBoolExp
-  ): HistoryConfessionHistoryAggregate!
+  historyConfessionHistory(distinctOn: [HistoryConfessionHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryConfessionHistoryOrderBy!], where: HistoryConfessionHistoryBoolExp): [HistoryConfessionHistory!]!
+  historyConfessionHistoryAggregate(distinctOn: [HistoryConfessionHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryConfessionHistoryOrderBy!], where: HistoryConfessionHistoryBoolExp): HistoryConfessionHistoryAggregate!
   historyConfessionHistoryByPk(id: uuid!): HistoryConfessionHistory
-  historyEditHistory(
-    distinctOn: [HistoryEditHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryEditHistoryOrderBy!]
-    where: HistoryEditHistoryBoolExp
-  ): [HistoryEditHistory!]!
-  historyEditHistoryAggregate(
-    distinctOn: [HistoryEditHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryEditHistoryOrderBy!]
-    where: HistoryEditHistoryBoolExp
-  ): HistoryEditHistoryAggregate!
-  historyKodasHistory(
-    distinctOn: [HistoryKodasHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryKodasHistoryOrderBy!]
-    where: HistoryKodasHistoryBoolExp
-  ): [HistoryKodasHistory!]!
-  historyKodasHistoryAggregate(
-    distinctOn: [HistoryKodasHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryKodasHistoryOrderBy!]
-    where: HistoryKodasHistoryBoolExp
-  ): HistoryKodasHistoryAggregate!
+  historyEditHistory(distinctOn: [HistoryEditHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryEditHistoryOrderBy!], where: HistoryEditHistoryBoolExp): [HistoryEditHistory!]!
+  historyEditHistoryAggregate(distinctOn: [HistoryEditHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryEditHistoryOrderBy!], where: HistoryEditHistoryBoolExp): HistoryEditHistoryAggregate!
+  historyKodasHistory(distinctOn: [HistoryKodasHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryKodasHistoryOrderBy!], where: HistoryKodasHistoryBoolExp): [HistoryKodasHistory!]!
+  historyKodasHistoryAggregate(distinctOn: [HistoryKodasHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryKodasHistoryOrderBy!], where: HistoryKodasHistoryBoolExp): HistoryKodasHistoryAggregate!
   historyKodasHistoryByPk(id: uuid!): HistoryKodasHistory
-  historyMeetingDays(
-    distinctOn: [HistoryMeetingDaysSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryMeetingDaysOrderBy!]
-    where: HistoryMeetingDaysBoolExp
-  ): [HistoryMeetingDays!]!
-  historyMeetingDaysAggregate(
-    distinctOn: [HistoryMeetingDaysSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryMeetingDaysOrderBy!]
-    where: HistoryMeetingDaysBoolExp
-  ): HistoryMeetingDaysAggregate!
-  historyMeetingRoster(
-    distinctOn: [HistoryMeetingRosterSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryMeetingRosterOrderBy!]
-    where: HistoryMeetingRosterBoolExp
-  ): [HistoryMeetingRoster!]!
-  historyMeetingRosterAggregate(
-    distinctOn: [HistoryMeetingRosterSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryMeetingRosterOrderBy!]
-    where: HistoryMeetingRosterBoolExp
-  ): HistoryMeetingRosterAggregate!
-  historyMeetings(
-    distinctOn: [HistoryMeetingsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryMeetingsOrderBy!]
-    where: HistoryMeetingsBoolExp
-  ): [HistoryMeetings!]!
+  historyMeetingDays(distinctOn: [HistoryMeetingDaysSelectColumn!], limit: Int, offset: Int, orderBy: [HistoryMeetingDaysOrderBy!], where: HistoryMeetingDaysBoolExp): [HistoryMeetingDays!]!
+  historyMeetingDaysAggregate(distinctOn: [HistoryMeetingDaysSelectColumn!], limit: Int, offset: Int, orderBy: [HistoryMeetingDaysOrderBy!], where: HistoryMeetingDaysBoolExp): HistoryMeetingDaysAggregate!
+  historyMeetingRoster(distinctOn: [HistoryMeetingRosterSelectColumn!], limit: Int, offset: Int, orderBy: [HistoryMeetingRosterOrderBy!], where: HistoryMeetingRosterBoolExp): [HistoryMeetingRoster!]!
+  historyMeetingRosterAggregate(distinctOn: [HistoryMeetingRosterSelectColumn!], limit: Int, offset: Int, orderBy: [HistoryMeetingRosterOrderBy!], where: HistoryMeetingRosterBoolExp): HistoryMeetingRosterAggregate!
+  historyMeetings(distinctOn: [HistoryMeetingsSelectColumn!], limit: Int, offset: Int, orderBy: [HistoryMeetingsOrderBy!], where: HistoryMeetingsBoolExp): [HistoryMeetings!]!
   historyMeetingsByPk(id: uuid!): HistoryMeetings
-  historyVisitHistory(
-    distinctOn: [HistoryVisitHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryVisitHistoryOrderBy!]
-    where: HistoryVisitHistoryBoolExp
-  ): [HistoryVisitHistory!]!
-  historyVisitHistoryAggregate(
-    distinctOn: [HistoryVisitHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryVisitHistoryOrderBy!]
-    where: HistoryVisitHistoryBoolExp
-  ): HistoryVisitHistoryAggregate!
+  historyVisitHistory(distinctOn: [HistoryVisitHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryVisitHistoryOrderBy!], where: HistoryVisitHistoryBoolExp): [HistoryVisitHistory!]!
+  historyVisitHistoryAggregate(distinctOn: [HistoryVisitHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryVisitHistoryOrderBy!], where: HistoryVisitHistoryBoolExp): HistoryVisitHistoryAggregate!
   historyVisitHistoryByPk(visitId: uuid!): HistoryVisitHistory
-  hobbies(
-    distinctOn: [HobbiesSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HobbiesOrderBy!]
-    where: HobbiesBoolExp
-  ): [Hobbies!]!
+  hobbies(distinctOn: [HobbiesSelectColumn!], limit: Int, offset: Int, orderBy: [HobbiesOrderBy!], where: HobbiesBoolExp): [Hobbies!]!
   hobbiesByPk(id: uuid!): Hobbies
-  jobs(
-    distinctOn: [JobsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [JobsOrderBy!]
-    where: JobsBoolExp
-  ): [Jobs!]!
+  jobs(distinctOn: [JobsSelectColumn!], limit: Int, offset: Int, orderBy: [JobsOrderBy!], where: JobsBoolExp): [Jobs!]!
   jobsByPk(id: uuid!): Jobs
-  personStates(
-    distinctOn: [PersonStatesSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [PersonStatesOrderBy!]
-    where: PersonStatesBoolExp
-  ): [PersonStates!]!
+  personStates(distinctOn: [PersonStatesSelectColumn!], limit: Int, offset: Int, orderBy: [PersonStatesOrderBy!], where: PersonStatesBoolExp): [PersonStates!]!
   personStatesByPk(id: uuid!): PersonStates
-  personTypes(
-    distinctOn: [PersonTypesSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [PersonTypesOrderBy!]
-    where: PersonTypesBoolExp
-  ): [PersonTypes!]!
+  personTypes(distinctOn: [PersonTypesSelectColumn!], limit: Int, offset: Int, orderBy: [PersonTypesOrderBy!], where: PersonTypesBoolExp): [PersonTypes!]!
   personTypesByPk(id: uuid!): PersonTypes
-  persons(
-    distinctOn: [PersonsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [PersonsOrderBy!]
-    where: PersonsBoolExp
-  ): [Persons!]!
-  personsAggregate(
-    distinctOn: [PersonsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [PersonsOrderBy!]
-    where: PersonsBoolExp
-  ): PersonsAggregate!
+  persons(distinctOn: [PersonsSelectColumn!], limit: Int, offset: Int, orderBy: [PersonsOrderBy!], where: PersonsBoolExp): [Persons!]!
+  personsAggregate(distinctOn: [PersonsSelectColumn!], limit: Int, offset: Int, orderBy: [PersonsOrderBy!], where: PersonsBoolExp): PersonsAggregate!
   personsByPk(id: uuid!): Persons
-  personsGroups(
-    distinctOn: [PersonsGroupsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [PersonsGroupsOrderBy!]
-    where: PersonsGroupsBoolExp
-  ): [PersonsGroups!]!
-  personsHobbies(
-    distinctOn: [PersonsHobbiesSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [PersonsHobbiesOrderBy!]
-    where: PersonsHobbiesBoolExp
-  ): [PersonsHobbies!]!
-  personsServices(
-    distinctOn: [PersonsServicesSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [PersonsServicesOrderBy!]
-    where: PersonsServicesBoolExp
-  ): [PersonsServices!]!
-  personsTags(
-    distinctOn: [PersonsTagsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [PersonsTagsOrderBy!]
-    where: PersonsTagsBoolExp
-  ): [PersonsTags!]!
-  qualifications(
-    distinctOn: [QualificationsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [QualificationsOrderBy!]
-    where: QualificationsBoolExp
-  ): [Qualifications!]!
+  personsGroups(distinctOn: [PersonsGroupsSelectColumn!], limit: Int, offset: Int, orderBy: [PersonsGroupsOrderBy!], where: PersonsGroupsBoolExp): [PersonsGroups!]!
+  personsHobbies(distinctOn: [PersonsHobbiesSelectColumn!], limit: Int, offset: Int, orderBy: [PersonsHobbiesOrderBy!], where: PersonsHobbiesBoolExp): [PersonsHobbies!]!
+  personsServices(distinctOn: [PersonsServicesSelectColumn!], limit: Int, offset: Int, orderBy: [PersonsServicesOrderBy!], where: PersonsServicesBoolExp): [PersonsServices!]!
+  personsTags(distinctOn: [PersonsTagsSelectColumn!], limit: Int, offset: Int, orderBy: [PersonsTagsOrderBy!], where: PersonsTagsBoolExp): [PersonsTags!]!
+  qualifications(distinctOn: [QualificationsSelectColumn!], limit: Int, offset: Int, orderBy: [QualificationsOrderBy!], where: QualificationsBoolExp): [Qualifications!]!
   qualificationsByPk(id: uuid!): Qualifications
-  schools(
-    distinctOn: [SchoolsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [SchoolsOrderBy!]
-    where: SchoolsBoolExp
-  ): [Schools!]!
+  schools(distinctOn: [SchoolsSelectColumn!], limit: Int, offset: Int, orderBy: [SchoolsOrderBy!], where: SchoolsBoolExp): [Schools!]!
   schoolsByPk(id: uuid!): Schools
-  services(
-    distinctOn: [ServicesSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [ServicesOrderBy!]
-    where: ServicesBoolExp
-  ): [Services!]!
-  servicesAggregate(
-    distinctOn: [ServicesSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [ServicesOrderBy!]
-    where: ServicesBoolExp
-  ): ServicesAggregate!
+  services(distinctOn: [ServicesSelectColumn!], limit: Int, offset: Int, orderBy: [ServicesOrderBy!], where: ServicesBoolExp): [Services!]!
+  servicesAggregate(distinctOn: [ServicesSelectColumn!], limit: Int, offset: Int, orderBy: [ServicesOrderBy!], where: ServicesBoolExp): ServicesAggregate!
   servicesByPk(id: uuid!): Services
-  shammasLevels(
-    distinctOn: [ShammasLevelsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [ShammasLevelsOrderBy!]
-    where: ShammasLevelsBoolExp
-  ): [ShammasLevels!]!
+  shammasLevels(distinctOn: [ShammasLevelsSelectColumn!], limit: Int, offset: Int, orderBy: [ShammasLevelsOrderBy!], where: ShammasLevelsBoolExp): [ShammasLevels!]!
   shammasLevelsByPk(id: uuid!): ShammasLevels
-  stores(
-    distinctOn: [StoresSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [StoresOrderBy!]
-    where: StoresBoolExp
-  ): [Stores!]!
-  storesAggregate(
-    distinctOn: [StoresSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [StoresOrderBy!]
-    where: StoresBoolExp
-  ): StoresAggregate!
+  stores(distinctOn: [StoresSelectColumn!], limit: Int, offset: Int, orderBy: [StoresOrderBy!], where: StoresBoolExp): [Stores!]!
+  storesAggregate(distinctOn: [StoresSelectColumn!], limit: Int, offset: Int, orderBy: [StoresOrderBy!], where: StoresBoolExp): StoresAggregate!
   storesByPk(id: uuid!): Stores
-  streets(
-    distinctOn: [StreetsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [StreetsOrderBy!]
-    where: StreetsBoolExp
-  ): [Streets!]!
-  streetsAggregate(
-    distinctOn: [StreetsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [StreetsOrderBy!]
-    where: StreetsBoolExp
-  ): StreetsAggregate!
+  streets(distinctOn: [StreetsSelectColumn!], limit: Int, offset: Int, orderBy: [StreetsOrderBy!], where: StreetsBoolExp): [Streets!]!
+  streetsAggregate(distinctOn: [StreetsSelectColumn!], limit: Int, offset: Int, orderBy: [StreetsOrderBy!], where: StreetsBoolExp): StreetsAggregate!
   streetsByPk(id: uuid!): Streets
-  studyYears(
-    distinctOn: [StudyYearsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [StudyYearsOrderBy!]
-    where: StudyYearsBoolExp
-  ): [StudyYears!]!
+  studyYears(distinctOn: [StudyYearsSelectColumn!], limit: Int, offset: Int, orderBy: [StudyYearsOrderBy!], where: StudyYearsBoolExp): [StudyYears!]!
   studyYearsByPk(order: smallint!): StudyYears
-  tags(
-    distinctOn: [TagsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [TagsOrderBy!]
-    where: TagsBoolExp
-  ): [Tags!]!
+  tags(distinctOn: [TagsSelectColumn!], limit: Int, offset: Int, orderBy: [TagsOrderBy!], where: TagsBoolExp): [Tags!]!
   tagsByPk(id: uuid!): Tags
-  universities(
-    distinctOn: [UniversitiesSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [UniversitiesOrderBy!]
-    where: UniversitiesBoolExp
-  ): [Universities!]!
+  universities(distinctOn: [UniversitiesSelectColumn!], limit: Int, offset: Int, orderBy: [UniversitiesOrderBy!], where: UniversitiesBoolExp): [Universities!]!
   universitiesByPk(id: uuid!): Universities
-  usersFcmTokens(
-    distinctOn: [UsersFcmTokensSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [UsersFcmTokensOrderBy!]
-    where: UsersFcmTokensBoolExp
-  ): [UsersFcmTokens!]!
+  usersFcmTokens(distinctOn: [UsersFcmTokensSelectColumn!], limit: Int, offset: Int, orderBy: [UsersFcmTokensOrderBy!], where: UsersFcmTokensBoolExp): [UsersFcmTokens!]!
   usersFcmTokensByPk(token: String!, uid: uuid!): UsersFcmTokens
-  usersPreferences(
-    distinctOn: [UsersPreferencesSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [UsersPreferencesOrderBy!]
-    where: UsersPreferencesBoolExp
-  ): [UsersPreferences!]!
+  usersPreferences(distinctOn: [UsersPreferencesSelectColumn!], limit: Int, offset: Int, orderBy: [UsersPreferencesOrderBy!], where: UsersPreferencesBoolExp): [UsersPreferences!]!
   usersPreferencesByPk(uid: uuid!): UsersPreferences
 }
 
@@ -9370,726 +8047,154 @@ input storesAggregateBoolExpCount {
 }
 
 type subscription_root {
-  addresses(
-    distinctOn: [AddressesSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [AddressesOrderBy!]
-    where: AddressesBoolExp
-  ): [Addresses!]!
+  addresses(distinctOn: [AddressesSelectColumn!], limit: Int, offset: Int, orderBy: [AddressesOrderBy!], where: AddressesBoolExp): [Addresses!]!
   addressesByPk(id: uuid!): Addresses
-  addressesStream(
-    batchSize: Int!
-    cursor: [AddressesStreamCursorInput]!
-    where: AddressesBoolExp
-  ): [Addresses!]!
-  areas(
-    distinctOn: [AreasSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [AreasOrderBy!]
-    where: AreasBoolExp
-  ): [Areas!]!
-  areasAggregate(
-    distinctOn: [AreasSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [AreasOrderBy!]
-    where: AreasBoolExp
-  ): AreasAggregate!
+  addressesStream(batchSize: Int!, cursor: [AddressesStreamCursorInput]!, where: AddressesBoolExp): [Addresses!]!
+  areas(distinctOn: [AreasSelectColumn!], limit: Int, offset: Int, orderBy: [AreasOrderBy!], where: AreasBoolExp): [Areas!]!
+  areasAggregate(distinctOn: [AreasSelectColumn!], limit: Int, offset: Int, orderBy: [AreasOrderBy!], where: AreasBoolExp): AreasAggregate!
   areasByPk(id: uuid!): Areas
-  areasStream(
-    batchSize: Int!
-    cursor: [AreasStreamCursorInput]!
-    where: AreasBoolExp
-  ): [Areas!]!
-  areasStreets(
-    distinctOn: [AreasStreetsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [AreasStreetsOrderBy!]
-    where: AreasStreetsBoolExp
-  ): [AreasStreets!]!
+  areasStream(batchSize: Int!, cursor: [AreasStreamCursorInput]!, where: AreasBoolExp): [Areas!]!
+  areasStreets(distinctOn: [AreasStreetsSelectColumn!], limit: Int, offset: Int, orderBy: [AreasStreetsOrderBy!], where: AreasStreetsBoolExp): [AreasStreets!]!
   areasStreetsByPk(areaId: uuid!, streetId: uuid!): AreasStreets
-  areasStreetsStream(
-    batchSize: Int!
-    cursor: [AreasStreetsStreamCursorInput]!
-    where: AreasStreetsBoolExp
-  ): [AreasStreets!]!
-  authInvitations(
-    distinctOn: [AuthInvitationsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [AuthInvitationsOrderBy!]
-    where: AuthInvitationsBoolExp
-  ): [AuthInvitations!]!
+  areasStreetsStream(batchSize: Int!, cursor: [AreasStreetsStreamCursorInput]!, where: AreasStreetsBoolExp): [AreasStreets!]!
+  authInvitations(distinctOn: [AuthInvitationsSelectColumn!], limit: Int, offset: Int, orderBy: [AuthInvitationsOrderBy!], where: AuthInvitationsBoolExp): [AuthInvitations!]!
   authInvitationsByPk(id: uuid!): AuthInvitations
-  authInvitationsStream(
-    batchSize: Int!
-    cursor: [AuthInvitationsStreamCursorInput]!
-    where: AuthInvitationsBoolExp
-  ): [AuthInvitations!]!
-  authUsersAdminOn(
-    distinctOn: [AuthUsersAdminOnSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [AuthUsersAdminOnOrderBy!]
-    where: AuthUsersAdminOnBoolExp
-  ): [AuthUsersAdminOn!]!
+  authInvitationsStream(batchSize: Int!, cursor: [AuthInvitationsStreamCursorInput]!, where: AuthInvitationsBoolExp): [AuthInvitations!]!
+  authUsersAdminOn(distinctOn: [AuthUsersAdminOnSelectColumn!], limit: Int, offset: Int, orderBy: [AuthUsersAdminOnOrderBy!], where: AuthUsersAdminOnBoolExp): [AuthUsersAdminOn!]!
   authUsersAdminOnByPk(permissionId: uuid!): AuthUsersAdminOn
-  authUsersAdminOnStream(
-    batchSize: Int!
-    cursor: [AuthUsersAdminOnStreamCursorInput]!
-    where: AuthUsersAdminOnBoolExp
-  ): [AuthUsersAdminOn!]!
-  authUsersData(
-    distinctOn: [AuthUsersDataSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [AuthUsersDataOrderBy!]
-    where: AuthUsersDataBoolExp
-  ): [AuthUsersData!]!
-  authUsersDataAggregate(
-    distinctOn: [AuthUsersDataSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [AuthUsersDataOrderBy!]
-    where: AuthUsersDataBoolExp
-  ): AuthUsersDataAggregate!
+  authUsersAdminOnStream(batchSize: Int!, cursor: [AuthUsersAdminOnStreamCursorInput]!, where: AuthUsersAdminOnBoolExp): [AuthUsersAdminOn!]!
+  authUsersData(distinctOn: [AuthUsersDataSelectColumn!], limit: Int, offset: Int, orderBy: [AuthUsersDataOrderBy!], where: AuthUsersDataBoolExp): [AuthUsersData!]!
+  authUsersDataAggregate(distinctOn: [AuthUsersDataSelectColumn!], limit: Int, offset: Int, orderBy: [AuthUsersDataOrderBy!], where: AuthUsersDataBoolExp): AuthUsersDataAggregate!
   authUsersDataByPk(uid: uuid!): AuthUsersData
-  authUsersDataStream(
-    batchSize: Int!
-    cursor: [AuthUsersDataStreamCursorInput]!
-    where: AuthUsersDataBoolExp
-  ): [AuthUsersData!]!
-  authUsersPermissions(
-    distinctOn: [AuthUsersPermissionsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [AuthUsersPermissionsOrderBy!]
-    where: AuthUsersPermissionsBoolExp
-  ): [AuthUsersPermissions!]!
+  authUsersDataStream(batchSize: Int!, cursor: [AuthUsersDataStreamCursorInput]!, where: AuthUsersDataBoolExp): [AuthUsersData!]!
+  authUsersPermissions(distinctOn: [AuthUsersPermissionsSelectColumn!], limit: Int, offset: Int, orderBy: [AuthUsersPermissionsOrderBy!], where: AuthUsersPermissionsBoolExp): [AuthUsersPermissions!]!
   authUsersPermissionsByPk(permission: String!, uid: uuid!): AuthUsersPermissions
-  authUsersPermissionsStream(
-    batchSize: Int!
-    cursor: [AuthUsersPermissionsStreamCursorInput]!
-    where: AuthUsersPermissionsBoolExp
-  ): [AuthUsersPermissions!]!
-  churches(
-    distinctOn: [ChurchesSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [ChurchesOrderBy!]
-    where: ChurchesBoolExp
-  ): [Churches!]!
+  authUsersPermissionsStream(batchSize: Int!, cursor: [AuthUsersPermissionsStreamCursorInput]!, where: AuthUsersPermissionsBoolExp): [AuthUsersPermissions!]!
+  churches(distinctOn: [ChurchesSelectColumn!], limit: Int, offset: Int, orderBy: [ChurchesOrderBy!], where: ChurchesBoolExp): [Churches!]!
   churchesByPk(id: uuid!): Churches
-  churchesStream(
-    batchSize: Int!
-    cursor: [ChurchesStreamCursorInput]!
-    where: ChurchesBoolExp
-  ): [Churches!]!
-  classes(
-    distinctOn: [ClassesSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [ClassesOrderBy!]
-    where: ClassesBoolExp
-  ): [Classes!]!
-  classesAggregate(
-    distinctOn: [ClassesSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [ClassesOrderBy!]
-    where: ClassesBoolExp
-  ): ClassesAggregate!
+  churchesStream(batchSize: Int!, cursor: [ChurchesStreamCursorInput]!, where: ChurchesBoolExp): [Churches!]!
+  classes(distinctOn: [ClassesSelectColumn!], limit: Int, offset: Int, orderBy: [ClassesOrderBy!], where: ClassesBoolExp): [Classes!]!
+  classesAggregate(distinctOn: [ClassesSelectColumn!], limit: Int, offset: Int, orderBy: [ClassesOrderBy!], where: ClassesBoolExp): ClassesAggregate!
   classesByPk(id: uuid!): Classes
-  classesPersons(
-    distinctOn: [ClassesPersonsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [ClassesPersonsOrderBy!]
-    where: ClassesPersonsBoolExp
-  ): [ClassesPersons!]!
-  classesPersonsStream(
-    batchSize: Int!
-    cursor: [ClassesPersonsStreamCursorInput]!
-    where: ClassesPersonsBoolExp
-  ): [ClassesPersons!]!
-  classesStream(
-    batchSize: Int!
-    cursor: [ClassesStreamCursorInput]!
-    where: ClassesBoolExp
-  ): [Classes!]!
-  colleges(
-    distinctOn: [CollegesSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [CollegesOrderBy!]
-    where: CollegesBoolExp
-  ): [Colleges!]!
+  classesPersons(distinctOn: [ClassesPersonsSelectColumn!], limit: Int, offset: Int, orderBy: [ClassesPersonsOrderBy!], where: ClassesPersonsBoolExp): [ClassesPersons!]!
+  classesPersonsStream(batchSize: Int!, cursor: [ClassesPersonsStreamCursorInput]!, where: ClassesPersonsBoolExp): [ClassesPersons!]!
+  classesStream(batchSize: Int!, cursor: [ClassesStreamCursorInput]!, where: ClassesBoolExp): [Classes!]!
+  colleges(distinctOn: [CollegesSelectColumn!], limit: Int, offset: Int, orderBy: [CollegesOrderBy!], where: CollegesBoolExp): [Colleges!]!
   collegesByPk(id: uuid!): Colleges
-  collegesStream(
-    batchSize: Int!
-    cursor: [CollegesStreamCursorInput]!
-    where: CollegesBoolExp
-  ): [Colleges!]!
-  districts(
-    distinctOn: [DistrictsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [DistrictsOrderBy!]
-    where: DistrictsBoolExp
-  ): [Districts!]!
+  collegesStream(batchSize: Int!, cursor: [CollegesStreamCursorInput]!, where: CollegesBoolExp): [Colleges!]!
+  districts(distinctOn: [DistrictsSelectColumn!], limit: Int, offset: Int, orderBy: [DistrictsOrderBy!], where: DistrictsBoolExp): [Districts!]!
   districtsByPk(id: uuid!): Districts
-  districtsStream(
-    batchSize: Int!
-    cursor: [DistrictsStreamCursorInput]!
-    where: DistrictsBoolExp
-  ): [Districts!]!
-  families(
-    distinctOn: [FamiliesSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [FamiliesOrderBy!]
-    where: FamiliesBoolExp
-  ): [Families!]!
-  familiesAdminsPhones(
-    distinctOn: [FamiliesAdminsPhonesSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [FamiliesAdminsPhonesOrderBy!]
-    where: FamiliesAdminsPhonesBoolExp
-  ): [FamiliesAdminsPhones!]!
-  familiesAdminsPhonesStream(
-    batchSize: Int!
-    cursor: [FamiliesAdminsPhonesStreamCursorInput]!
-    where: FamiliesAdminsPhonesBoolExp
-  ): [FamiliesAdminsPhones!]!
-  familiesAggregate(
-    distinctOn: [FamiliesSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [FamiliesOrderBy!]
-    where: FamiliesBoolExp
-  ): FamiliesAggregate!
+  districtsStream(batchSize: Int!, cursor: [DistrictsStreamCursorInput]!, where: DistrictsBoolExp): [Districts!]!
+  families(distinctOn: [FamiliesSelectColumn!], limit: Int, offset: Int, orderBy: [FamiliesOrderBy!], where: FamiliesBoolExp): [Families!]!
+  familiesAdminsPhones(distinctOn: [FamiliesAdminsPhonesSelectColumn!], limit: Int, offset: Int, orderBy: [FamiliesAdminsPhonesOrderBy!], where: FamiliesAdminsPhonesBoolExp): [FamiliesAdminsPhones!]!
+  familiesAdminsPhonesStream(batchSize: Int!, cursor: [FamiliesAdminsPhonesStreamCursorInput]!, where: FamiliesAdminsPhonesBoolExp): [FamiliesAdminsPhones!]!
+  familiesAggregate(distinctOn: [FamiliesSelectColumn!], limit: Int, offset: Int, orderBy: [FamiliesOrderBy!], where: FamiliesBoolExp): FamiliesAggregate!
   familiesByPk(id: uuid!): Families
-  familiesFamilies(
-    distinctOn: [FamiliesFamiliesSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [FamiliesFamiliesOrderBy!]
-    where: FamiliesFamiliesBoolExp
-  ): [FamiliesFamilies!]!
-  familiesFamiliesStream(
-    batchSize: Int!
-    cursor: [FamiliesFamiliesStreamCursorInput]!
-    where: FamiliesFamiliesBoolExp
-  ): [FamiliesFamilies!]!
-  familiesStream(
-    batchSize: Int!
-    cursor: [FamiliesStreamCursorInput]!
-    where: FamiliesBoolExp
-  ): [Families!]!
-  fathers(
-    distinctOn: [FathersSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [FathersOrderBy!]
-    where: FathersBoolExp
-  ): [Fathers!]!
+  familiesFamilies(distinctOn: [FamiliesFamiliesSelectColumn!], limit: Int, offset: Int, orderBy: [FamiliesFamiliesOrderBy!], where: FamiliesFamiliesBoolExp): [FamiliesFamilies!]!
+  familiesFamiliesStream(batchSize: Int!, cursor: [FamiliesFamiliesStreamCursorInput]!, where: FamiliesFamiliesBoolExp): [FamiliesFamilies!]!
+  familiesStream(batchSize: Int!, cursor: [FamiliesStreamCursorInput]!, where: FamiliesBoolExp): [Families!]!
+  fathers(distinctOn: [FathersSelectColumn!], limit: Int, offset: Int, orderBy: [FathersOrderBy!], where: FathersBoolExp): [Fathers!]!
   fathersByPk(id: uuid!): Fathers
-  fathersStream(
-    batchSize: Int!
-    cursor: [FathersStreamCursorInput]!
-    where: FathersBoolExp
-  ): [Fathers!]!
-  groups(
-    distinctOn: [GroupsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [GroupsOrderBy!]
-    where: GroupsBoolExp
-  ): [Groups!]!
-  groupsAggregate(
-    distinctOn: [GroupsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [GroupsOrderBy!]
-    where: GroupsBoolExp
-  ): GroupsAggregate!
+  fathersStream(batchSize: Int!, cursor: [FathersStreamCursorInput]!, where: FathersBoolExp): [Fathers!]!
+  groups(distinctOn: [GroupsSelectColumn!], limit: Int, offset: Int, orderBy: [GroupsOrderBy!], where: GroupsBoolExp): [Groups!]!
+  groupsAggregate(distinctOn: [GroupsSelectColumn!], limit: Int, offset: Int, orderBy: [GroupsOrderBy!], where: GroupsBoolExp): GroupsAggregate!
   groupsByPk(id: uuid!): Groups
-  groupsStream(
-    batchSize: Int!
-    cursor: [GroupsStreamCursorInput]!
-    where: GroupsBoolExp
-  ): [Groups!]!
-  historyAttendanceDays(
-    distinctOn: [HistoryAttendanceDaysSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryAttendanceDaysOrderBy!]
-    where: HistoryAttendanceDaysBoolExp
-  ): [HistoryAttendanceDays!]!
+  groupsStream(batchSize: Int!, cursor: [GroupsStreamCursorInput]!, where: GroupsBoolExp): [Groups!]!
+  historyAttendanceDays(distinctOn: [HistoryAttendanceDaysSelectColumn!], limit: Int, offset: Int, orderBy: [HistoryAttendanceDaysOrderBy!], where: HistoryAttendanceDaysBoolExp): [HistoryAttendanceDays!]!
   historyAttendanceDaysByPk(day: date!): HistoryAttendanceDays
-  historyAttendanceDaysStream(
-    batchSize: Int!
-    cursor: [HistoryAttendanceDaysStreamCursorInput]!
-    where: HistoryAttendanceDaysBoolExp
-  ): [HistoryAttendanceDays!]!
-  historyAttendanceHistory(
-    distinctOn: [HistoryAttendanceHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryAttendanceHistoryOrderBy!]
-    where: HistoryAttendanceHistoryBoolExp
-  ): [HistoryAttendanceHistory!]!
-  historyAttendanceHistoryAggregate(
-    distinctOn: [HistoryAttendanceHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryAttendanceHistoryOrderBy!]
-    where: HistoryAttendanceHistoryBoolExp
-  ): HistoryAttendanceHistoryAggregate!
+  historyAttendanceDaysStream(batchSize: Int!, cursor: [HistoryAttendanceDaysStreamCursorInput]!, where: HistoryAttendanceDaysBoolExp): [HistoryAttendanceDays!]!
+  historyAttendanceHistory(distinctOn: [HistoryAttendanceHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryAttendanceHistoryOrderBy!], where: HistoryAttendanceHistoryBoolExp): [HistoryAttendanceHistory!]!
+  historyAttendanceHistoryAggregate(distinctOn: [HistoryAttendanceHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryAttendanceHistoryOrderBy!], where: HistoryAttendanceHistoryBoolExp): HistoryAttendanceHistoryAggregate!
   historyAttendanceHistoryByPk(id: uuid!): HistoryAttendanceHistory
-  historyAttendanceHistoryStream(
-    batchSize: Int!
-    cursor: [HistoryAttendanceHistoryStreamCursorInput]!
-    where: HistoryAttendanceHistoryBoolExp
-  ): [HistoryAttendanceHistory!]!
-  historyCallHistory(
-    distinctOn: [HistoryCallHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryCallHistoryOrderBy!]
-    where: HistoryCallHistoryBoolExp
-  ): [HistoryCallHistory!]!
-  historyCallHistoryAggregate(
-    distinctOn: [HistoryCallHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryCallHistoryOrderBy!]
-    where: HistoryCallHistoryBoolExp
-  ): HistoryCallHistoryAggregate!
+  historyAttendanceHistoryStream(batchSize: Int!, cursor: [HistoryAttendanceHistoryStreamCursorInput]!, where: HistoryAttendanceHistoryBoolExp): [HistoryAttendanceHistory!]!
+  historyCallHistory(distinctOn: [HistoryCallHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryCallHistoryOrderBy!], where: HistoryCallHistoryBoolExp): [HistoryCallHistory!]!
+  historyCallHistoryAggregate(distinctOn: [HistoryCallHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryCallHistoryOrderBy!], where: HistoryCallHistoryBoolExp): HistoryCallHistoryAggregate!
   historyCallHistoryByPk(time: timestamptz!): HistoryCallHistory
-  historyCallHistoryStream(
-    batchSize: Int!
-    cursor: [HistoryCallHistoryStreamCursorInput]!
-    where: HistoryCallHistoryBoolExp
-  ): [HistoryCallHistory!]!
-  historyConfessionHistory(
-    distinctOn: [HistoryConfessionHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryConfessionHistoryOrderBy!]
-    where: HistoryConfessionHistoryBoolExp
-  ): [HistoryConfessionHistory!]!
-  historyConfessionHistoryAggregate(
-    distinctOn: [HistoryConfessionHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryConfessionHistoryOrderBy!]
-    where: HistoryConfessionHistoryBoolExp
-  ): HistoryConfessionHistoryAggregate!
+  historyCallHistoryStream(batchSize: Int!, cursor: [HistoryCallHistoryStreamCursorInput]!, where: HistoryCallHistoryBoolExp): [HistoryCallHistory!]!
+  historyConfessionHistory(distinctOn: [HistoryConfessionHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryConfessionHistoryOrderBy!], where: HistoryConfessionHistoryBoolExp): [HistoryConfessionHistory!]!
+  historyConfessionHistoryAggregate(distinctOn: [HistoryConfessionHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryConfessionHistoryOrderBy!], where: HistoryConfessionHistoryBoolExp): HistoryConfessionHistoryAggregate!
   historyConfessionHistoryByPk(id: uuid!): HistoryConfessionHistory
-  historyConfessionHistoryStream(
-    batchSize: Int!
-    cursor: [HistoryConfessionHistoryStreamCursorInput]!
-    where: HistoryConfessionHistoryBoolExp
-  ): [HistoryConfessionHistory!]!
-  historyEditHistory(
-    distinctOn: [HistoryEditHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryEditHistoryOrderBy!]
-    where: HistoryEditHistoryBoolExp
-  ): [HistoryEditHistory!]!
-  historyEditHistoryAggregate(
-    distinctOn: [HistoryEditHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryEditHistoryOrderBy!]
-    where: HistoryEditHistoryBoolExp
-  ): HistoryEditHistoryAggregate!
-  historyEditHistoryStream(
-    batchSize: Int!
-    cursor: [HistoryEditHistoryStreamCursorInput]!
-    where: HistoryEditHistoryBoolExp
-  ): [HistoryEditHistory!]!
-  historyKodasHistory(
-    distinctOn: [HistoryKodasHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryKodasHistoryOrderBy!]
-    where: HistoryKodasHistoryBoolExp
-  ): [HistoryKodasHistory!]!
-  historyKodasHistoryAggregate(
-    distinctOn: [HistoryKodasHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryKodasHistoryOrderBy!]
-    where: HistoryKodasHistoryBoolExp
-  ): HistoryKodasHistoryAggregate!
+  historyConfessionHistoryStream(batchSize: Int!, cursor: [HistoryConfessionHistoryStreamCursorInput]!, where: HistoryConfessionHistoryBoolExp): [HistoryConfessionHistory!]!
+  historyEditHistory(distinctOn: [HistoryEditHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryEditHistoryOrderBy!], where: HistoryEditHistoryBoolExp): [HistoryEditHistory!]!
+  historyEditHistoryAggregate(distinctOn: [HistoryEditHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryEditHistoryOrderBy!], where: HistoryEditHistoryBoolExp): HistoryEditHistoryAggregate!
+  historyEditHistoryStream(batchSize: Int!, cursor: [HistoryEditHistoryStreamCursorInput]!, where: HistoryEditHistoryBoolExp): [HistoryEditHistory!]!
+  historyKodasHistory(distinctOn: [HistoryKodasHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryKodasHistoryOrderBy!], where: HistoryKodasHistoryBoolExp): [HistoryKodasHistory!]!
+  historyKodasHistoryAggregate(distinctOn: [HistoryKodasHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryKodasHistoryOrderBy!], where: HistoryKodasHistoryBoolExp): HistoryKodasHistoryAggregate!
   historyKodasHistoryByPk(id: uuid!): HistoryKodasHistory
-  historyKodasHistoryStream(
-    batchSize: Int!
-    cursor: [HistoryKodasHistoryStreamCursorInput]!
-    where: HistoryKodasHistoryBoolExp
-  ): [HistoryKodasHistory!]!
-  historyMeetingDays(
-    distinctOn: [HistoryMeetingDaysSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryMeetingDaysOrderBy!]
-    where: HistoryMeetingDaysBoolExp
-  ): [HistoryMeetingDays!]!
-  historyMeetingDaysAggregate(
-    distinctOn: [HistoryMeetingDaysSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryMeetingDaysOrderBy!]
-    where: HistoryMeetingDaysBoolExp
-  ): HistoryMeetingDaysAggregate!
-  historyMeetingDaysStream(
-    batchSize: Int!
-    cursor: [HistoryMeetingDaysStreamCursorInput]!
-    where: HistoryMeetingDaysBoolExp
-  ): [HistoryMeetingDays!]!
-  historyMeetingRoster(
-    distinctOn: [HistoryMeetingRosterSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryMeetingRosterOrderBy!]
-    where: HistoryMeetingRosterBoolExp
-  ): [HistoryMeetingRoster!]!
-  historyMeetingRosterAggregate(
-    distinctOn: [HistoryMeetingRosterSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryMeetingRosterOrderBy!]
-    where: HistoryMeetingRosterBoolExp
-  ): HistoryMeetingRosterAggregate!
-  historyMeetingRosterStream(
-    batchSize: Int!
-    cursor: [HistoryMeetingRosterStreamCursorInput]!
-    where: HistoryMeetingRosterBoolExp
-  ): [HistoryMeetingRoster!]!
-  historyMeetings(
-    distinctOn: [HistoryMeetingsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryMeetingsOrderBy!]
-    where: HistoryMeetingsBoolExp
-  ): [HistoryMeetings!]!
+  historyKodasHistoryStream(batchSize: Int!, cursor: [HistoryKodasHistoryStreamCursorInput]!, where: HistoryKodasHistoryBoolExp): [HistoryKodasHistory!]!
+  historyMeetingDays(distinctOn: [HistoryMeetingDaysSelectColumn!], limit: Int, offset: Int, orderBy: [HistoryMeetingDaysOrderBy!], where: HistoryMeetingDaysBoolExp): [HistoryMeetingDays!]!
+  historyMeetingDaysAggregate(distinctOn: [HistoryMeetingDaysSelectColumn!], limit: Int, offset: Int, orderBy: [HistoryMeetingDaysOrderBy!], where: HistoryMeetingDaysBoolExp): HistoryMeetingDaysAggregate!
+  historyMeetingDaysStream(batchSize: Int!, cursor: [HistoryMeetingDaysStreamCursorInput]!, where: HistoryMeetingDaysBoolExp): [HistoryMeetingDays!]!
+  historyMeetingRoster(distinctOn: [HistoryMeetingRosterSelectColumn!], limit: Int, offset: Int, orderBy: [HistoryMeetingRosterOrderBy!], where: HistoryMeetingRosterBoolExp): [HistoryMeetingRoster!]!
+  historyMeetingRosterAggregate(distinctOn: [HistoryMeetingRosterSelectColumn!], limit: Int, offset: Int, orderBy: [HistoryMeetingRosterOrderBy!], where: HistoryMeetingRosterBoolExp): HistoryMeetingRosterAggregate!
+  historyMeetingRosterStream(batchSize: Int!, cursor: [HistoryMeetingRosterStreamCursorInput]!, where: HistoryMeetingRosterBoolExp): [HistoryMeetingRoster!]!
+  historyMeetings(distinctOn: [HistoryMeetingsSelectColumn!], limit: Int, offset: Int, orderBy: [HistoryMeetingsOrderBy!], where: HistoryMeetingsBoolExp): [HistoryMeetings!]!
   historyMeetingsByPk(id: uuid!): HistoryMeetings
-  historyMeetingsStream(
-    batchSize: Int!
-    cursor: [HistoryMeetingsStreamCursorInput]!
-    where: HistoryMeetingsBoolExp
-  ): [HistoryMeetings!]!
-  historyVisitHistory(
-    distinctOn: [HistoryVisitHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryVisitHistoryOrderBy!]
-    where: HistoryVisitHistoryBoolExp
-  ): [HistoryVisitHistory!]!
-  historyVisitHistoryAggregate(
-    distinctOn: [HistoryVisitHistorySelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HistoryVisitHistoryOrderBy!]
-    where: HistoryVisitHistoryBoolExp
-  ): HistoryVisitHistoryAggregate!
+  historyMeetingsStream(batchSize: Int!, cursor: [HistoryMeetingsStreamCursorInput]!, where: HistoryMeetingsBoolExp): [HistoryMeetings!]!
+  historyVisitHistory(distinctOn: [HistoryVisitHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryVisitHistoryOrderBy!], where: HistoryVisitHistoryBoolExp): [HistoryVisitHistory!]!
+  historyVisitHistoryAggregate(distinctOn: [HistoryVisitHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryVisitHistoryOrderBy!], where: HistoryVisitHistoryBoolExp): HistoryVisitHistoryAggregate!
   historyVisitHistoryByPk(visitId: uuid!): HistoryVisitHistory
-  historyVisitHistoryStream(
-    batchSize: Int!
-    cursor: [HistoryVisitHistoryStreamCursorInput]!
-    where: HistoryVisitHistoryBoolExp
-  ): [HistoryVisitHistory!]!
-  hobbies(
-    distinctOn: [HobbiesSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [HobbiesOrderBy!]
-    where: HobbiesBoolExp
-  ): [Hobbies!]!
+  historyVisitHistoryStream(batchSize: Int!, cursor: [HistoryVisitHistoryStreamCursorInput]!, where: HistoryVisitHistoryBoolExp): [HistoryVisitHistory!]!
+  hobbies(distinctOn: [HobbiesSelectColumn!], limit: Int, offset: Int, orderBy: [HobbiesOrderBy!], where: HobbiesBoolExp): [Hobbies!]!
   hobbiesByPk(id: uuid!): Hobbies
-  hobbiesStream(
-    batchSize: Int!
-    cursor: [HobbiesStreamCursorInput]!
-    where: HobbiesBoolExp
-  ): [Hobbies!]!
-  jobs(
-    distinctOn: [JobsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [JobsOrderBy!]
-    where: JobsBoolExp
-  ): [Jobs!]!
+  hobbiesStream(batchSize: Int!, cursor: [HobbiesStreamCursorInput]!, where: HobbiesBoolExp): [Hobbies!]!
+  jobs(distinctOn: [JobsSelectColumn!], limit: Int, offset: Int, orderBy: [JobsOrderBy!], where: JobsBoolExp): [Jobs!]!
   jobsByPk(id: uuid!): Jobs
-  jobsStream(
-    batchSize: Int!
-    cursor: [JobsStreamCursorInput]!
-    where: JobsBoolExp
-  ): [Jobs!]!
-  personStates(
-    distinctOn: [PersonStatesSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [PersonStatesOrderBy!]
-    where: PersonStatesBoolExp
-  ): [PersonStates!]!
+  jobsStream(batchSize: Int!, cursor: [JobsStreamCursorInput]!, where: JobsBoolExp): [Jobs!]!
+  personStates(distinctOn: [PersonStatesSelectColumn!], limit: Int, offset: Int, orderBy: [PersonStatesOrderBy!], where: PersonStatesBoolExp): [PersonStates!]!
   personStatesByPk(id: uuid!): PersonStates
-  personStatesStream(
-    batchSize: Int!
-    cursor: [PersonStatesStreamCursorInput]!
-    where: PersonStatesBoolExp
-  ): [PersonStates!]!
-  personTypes(
-    distinctOn: [PersonTypesSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [PersonTypesOrderBy!]
-    where: PersonTypesBoolExp
-  ): [PersonTypes!]!
+  personStatesStream(batchSize: Int!, cursor: [PersonStatesStreamCursorInput]!, where: PersonStatesBoolExp): [PersonStates!]!
+  personTypes(distinctOn: [PersonTypesSelectColumn!], limit: Int, offset: Int, orderBy: [PersonTypesOrderBy!], where: PersonTypesBoolExp): [PersonTypes!]!
   personTypesByPk(id: uuid!): PersonTypes
-  personTypesStream(
-    batchSize: Int!
-    cursor: [PersonTypesStreamCursorInput]!
-    where: PersonTypesBoolExp
-  ): [PersonTypes!]!
-  persons(
-    distinctOn: [PersonsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [PersonsOrderBy!]
-    where: PersonsBoolExp
-  ): [Persons!]!
-  personsAggregate(
-    distinctOn: [PersonsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [PersonsOrderBy!]
-    where: PersonsBoolExp
-  ): PersonsAggregate!
+  personTypesStream(batchSize: Int!, cursor: [PersonTypesStreamCursorInput]!, where: PersonTypesBoolExp): [PersonTypes!]!
+  persons(distinctOn: [PersonsSelectColumn!], limit: Int, offset: Int, orderBy: [PersonsOrderBy!], where: PersonsBoolExp): [Persons!]!
+  personsAggregate(distinctOn: [PersonsSelectColumn!], limit: Int, offset: Int, orderBy: [PersonsOrderBy!], where: PersonsBoolExp): PersonsAggregate!
   personsByPk(id: uuid!): Persons
-  personsGroups(
-    distinctOn: [PersonsGroupsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [PersonsGroupsOrderBy!]
-    where: PersonsGroupsBoolExp
-  ): [PersonsGroups!]!
-  personsGroupsStream(
-    batchSize: Int!
-    cursor: [PersonsGroupsStreamCursorInput]!
-    where: PersonsGroupsBoolExp
-  ): [PersonsGroups!]!
-  personsHobbies(
-    distinctOn: [PersonsHobbiesSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [PersonsHobbiesOrderBy!]
-    where: PersonsHobbiesBoolExp
-  ): [PersonsHobbies!]!
-  personsHobbiesStream(
-    batchSize: Int!
-    cursor: [PersonsHobbiesStreamCursorInput]!
-    where: PersonsHobbiesBoolExp
-  ): [PersonsHobbies!]!
-  personsServices(
-    distinctOn: [PersonsServicesSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [PersonsServicesOrderBy!]
-    where: PersonsServicesBoolExp
-  ): [PersonsServices!]!
-  personsServicesStream(
-    batchSize: Int!
-    cursor: [PersonsServicesStreamCursorInput]!
-    where: PersonsServicesBoolExp
-  ): [PersonsServices!]!
-  personsStream(
-    batchSize: Int!
-    cursor: [PersonsStreamCursorInput]!
-    where: PersonsBoolExp
-  ): [Persons!]!
-  personsTags(
-    distinctOn: [PersonsTagsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [PersonsTagsOrderBy!]
-    where: PersonsTagsBoolExp
-  ): [PersonsTags!]!
-  personsTagsStream(
-    batchSize: Int!
-    cursor: [PersonsTagsStreamCursorInput]!
-    where: PersonsTagsBoolExp
-  ): [PersonsTags!]!
-  qualifications(
-    distinctOn: [QualificationsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [QualificationsOrderBy!]
-    where: QualificationsBoolExp
-  ): [Qualifications!]!
+  personsGroups(distinctOn: [PersonsGroupsSelectColumn!], limit: Int, offset: Int, orderBy: [PersonsGroupsOrderBy!], where: PersonsGroupsBoolExp): [PersonsGroups!]!
+  personsGroupsStream(batchSize: Int!, cursor: [PersonsGroupsStreamCursorInput]!, where: PersonsGroupsBoolExp): [PersonsGroups!]!
+  personsHobbies(distinctOn: [PersonsHobbiesSelectColumn!], limit: Int, offset: Int, orderBy: [PersonsHobbiesOrderBy!], where: PersonsHobbiesBoolExp): [PersonsHobbies!]!
+  personsHobbiesStream(batchSize: Int!, cursor: [PersonsHobbiesStreamCursorInput]!, where: PersonsHobbiesBoolExp): [PersonsHobbies!]!
+  personsServices(distinctOn: [PersonsServicesSelectColumn!], limit: Int, offset: Int, orderBy: [PersonsServicesOrderBy!], where: PersonsServicesBoolExp): [PersonsServices!]!
+  personsServicesStream(batchSize: Int!, cursor: [PersonsServicesStreamCursorInput]!, where: PersonsServicesBoolExp): [PersonsServices!]!
+  personsStream(batchSize: Int!, cursor: [PersonsStreamCursorInput]!, where: PersonsBoolExp): [Persons!]!
+  personsTags(distinctOn: [PersonsTagsSelectColumn!], limit: Int, offset: Int, orderBy: [PersonsTagsOrderBy!], where: PersonsTagsBoolExp): [PersonsTags!]!
+  personsTagsStream(batchSize: Int!, cursor: [PersonsTagsStreamCursorInput]!, where: PersonsTagsBoolExp): [PersonsTags!]!
+  qualifications(distinctOn: [QualificationsSelectColumn!], limit: Int, offset: Int, orderBy: [QualificationsOrderBy!], where: QualificationsBoolExp): [Qualifications!]!
   qualificationsByPk(id: uuid!): Qualifications
-  qualificationsStream(
-    batchSize: Int!
-    cursor: [QualificationsStreamCursorInput]!
-    where: QualificationsBoolExp
-  ): [Qualifications!]!
-  schools(
-    distinctOn: [SchoolsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [SchoolsOrderBy!]
-    where: SchoolsBoolExp
-  ): [Schools!]!
+  qualificationsStream(batchSize: Int!, cursor: [QualificationsStreamCursorInput]!, where: QualificationsBoolExp): [Qualifications!]!
+  schools(distinctOn: [SchoolsSelectColumn!], limit: Int, offset: Int, orderBy: [SchoolsOrderBy!], where: SchoolsBoolExp): [Schools!]!
   schoolsByPk(id: uuid!): Schools
-  schoolsStream(
-    batchSize: Int!
-    cursor: [SchoolsStreamCursorInput]!
-    where: SchoolsBoolExp
-  ): [Schools!]!
-  services(
-    distinctOn: [ServicesSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [ServicesOrderBy!]
-    where: ServicesBoolExp
-  ): [Services!]!
-  servicesAggregate(
-    distinctOn: [ServicesSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [ServicesOrderBy!]
-    where: ServicesBoolExp
-  ): ServicesAggregate!
+  schoolsStream(batchSize: Int!, cursor: [SchoolsStreamCursorInput]!, where: SchoolsBoolExp): [Schools!]!
+  services(distinctOn: [ServicesSelectColumn!], limit: Int, offset: Int, orderBy: [ServicesOrderBy!], where: ServicesBoolExp): [Services!]!
+  servicesAggregate(distinctOn: [ServicesSelectColumn!], limit: Int, offset: Int, orderBy: [ServicesOrderBy!], where: ServicesBoolExp): ServicesAggregate!
   servicesByPk(id: uuid!): Services
-  servicesStream(
-    batchSize: Int!
-    cursor: [ServicesStreamCursorInput]!
-    where: ServicesBoolExp
-  ): [Services!]!
-  shammasLevels(
-    distinctOn: [ShammasLevelsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [ShammasLevelsOrderBy!]
-    where: ShammasLevelsBoolExp
-  ): [ShammasLevels!]!
+  servicesStream(batchSize: Int!, cursor: [ServicesStreamCursorInput]!, where: ServicesBoolExp): [Services!]!
+  shammasLevels(distinctOn: [ShammasLevelsSelectColumn!], limit: Int, offset: Int, orderBy: [ShammasLevelsOrderBy!], where: ShammasLevelsBoolExp): [ShammasLevels!]!
   shammasLevelsByPk(id: uuid!): ShammasLevels
-  shammasLevelsStream(
-    batchSize: Int!
-    cursor: [ShammasLevelsStreamCursorInput]!
-    where: ShammasLevelsBoolExp
-  ): [ShammasLevels!]!
-  stores(
-    distinctOn: [StoresSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [StoresOrderBy!]
-    where: StoresBoolExp
-  ): [Stores!]!
-  storesAggregate(
-    distinctOn: [StoresSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [StoresOrderBy!]
-    where: StoresBoolExp
-  ): StoresAggregate!
+  shammasLevelsStream(batchSize: Int!, cursor: [ShammasLevelsStreamCursorInput]!, where: ShammasLevelsBoolExp): [ShammasLevels!]!
+  stores(distinctOn: [StoresSelectColumn!], limit: Int, offset: Int, orderBy: [StoresOrderBy!], where: StoresBoolExp): [Stores!]!
+  storesAggregate(distinctOn: [StoresSelectColumn!], limit: Int, offset: Int, orderBy: [StoresOrderBy!], where: StoresBoolExp): StoresAggregate!
   storesByPk(id: uuid!): Stores
-  storesStream(
-    batchSize: Int!
-    cursor: [StoresStreamCursorInput]!
-    where: StoresBoolExp
-  ): [Stores!]!
-  streets(
-    distinctOn: [StreetsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [StreetsOrderBy!]
-    where: StreetsBoolExp
-  ): [Streets!]!
-  streetsAggregate(
-    distinctOn: [StreetsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [StreetsOrderBy!]
-    where: StreetsBoolExp
-  ): StreetsAggregate!
+  storesStream(batchSize: Int!, cursor: [StoresStreamCursorInput]!, where: StoresBoolExp): [Stores!]!
+  streets(distinctOn: [StreetsSelectColumn!], limit: Int, offset: Int, orderBy: [StreetsOrderBy!], where: StreetsBoolExp): [Streets!]!
+  streetsAggregate(distinctOn: [StreetsSelectColumn!], limit: Int, offset: Int, orderBy: [StreetsOrderBy!], where: StreetsBoolExp): StreetsAggregate!
   streetsByPk(id: uuid!): Streets
-  streetsStream(
-    batchSize: Int!
-    cursor: [StreetsStreamCursorInput]!
-    where: StreetsBoolExp
-  ): [Streets!]!
-  studyYears(
-    distinctOn: [StudyYearsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [StudyYearsOrderBy!]
-    where: StudyYearsBoolExp
-  ): [StudyYears!]!
+  streetsStream(batchSize: Int!, cursor: [StreetsStreamCursorInput]!, where: StreetsBoolExp): [Streets!]!
+  studyYears(distinctOn: [StudyYearsSelectColumn!], limit: Int, offset: Int, orderBy: [StudyYearsOrderBy!], where: StudyYearsBoolExp): [StudyYears!]!
   studyYearsByPk(order: smallint!): StudyYears
-  studyYearsStream(
-    batchSize: Int!
-    cursor: [StudyYearsStreamCursorInput]!
-    where: StudyYearsBoolExp
-  ): [StudyYears!]!
-  tags(
-    distinctOn: [TagsSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [TagsOrderBy!]
-    where: TagsBoolExp
-  ): [Tags!]!
+  studyYearsStream(batchSize: Int!, cursor: [StudyYearsStreamCursorInput]!, where: StudyYearsBoolExp): [StudyYears!]!
+  tags(distinctOn: [TagsSelectColumn!], limit: Int, offset: Int, orderBy: [TagsOrderBy!], where: TagsBoolExp): [Tags!]!
   tagsByPk(id: uuid!): Tags
-  tagsStream(
-    batchSize: Int!
-    cursor: [TagsStreamCursorInput]!
-    where: TagsBoolExp
-  ): [Tags!]!
-  universities(
-    distinctOn: [UniversitiesSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [UniversitiesOrderBy!]
-    where: UniversitiesBoolExp
-  ): [Universities!]!
+  tagsStream(batchSize: Int!, cursor: [TagsStreamCursorInput]!, where: TagsBoolExp): [Tags!]!
+  universities(distinctOn: [UniversitiesSelectColumn!], limit: Int, offset: Int, orderBy: [UniversitiesOrderBy!], where: UniversitiesBoolExp): [Universities!]!
   universitiesByPk(id: uuid!): Universities
-  universitiesStream(
-    batchSize: Int!
-    cursor: [UniversitiesStreamCursorInput]!
-    where: UniversitiesBoolExp
-  ): [Universities!]!
-  usersFcmTokens(
-    distinctOn: [UsersFcmTokensSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [UsersFcmTokensOrderBy!]
-    where: UsersFcmTokensBoolExp
-  ): [UsersFcmTokens!]!
+  universitiesStream(batchSize: Int!, cursor: [UniversitiesStreamCursorInput]!, where: UniversitiesBoolExp): [Universities!]!
+  usersFcmTokens(distinctOn: [UsersFcmTokensSelectColumn!], limit: Int, offset: Int, orderBy: [UsersFcmTokensOrderBy!], where: UsersFcmTokensBoolExp): [UsersFcmTokens!]!
   usersFcmTokensByPk(token: String!, uid: uuid!): UsersFcmTokens
-  usersFcmTokensStream(
-    batchSize: Int!
-    cursor: [UsersFcmTokensStreamCursorInput]!
-    where: UsersFcmTokensBoolExp
-  ): [UsersFcmTokens!]!
-  usersPreferences(
-    distinctOn: [UsersPreferencesSelectColumn!]
-    limit: Int
-    offset: Int
-    orderBy: [UsersPreferencesOrderBy!]
-    where: UsersPreferencesBoolExp
-  ): [UsersPreferences!]!
+  usersFcmTokensStream(batchSize: Int!, cursor: [UsersFcmTokensStreamCursorInput]!, where: UsersFcmTokensBoolExp): [UsersFcmTokens!]!
+  usersPreferences(distinctOn: [UsersPreferencesSelectColumn!], limit: Int, offset: Int, orderBy: [UsersPreferencesOrderBy!], where: UsersPreferencesBoolExp): [UsersPreferences!]!
   usersPreferencesByPk(uid: uuid!): UsersPreferences
-  usersPreferencesStream(
-    batchSize: Int!
-    cursor: [UsersPreferencesStreamCursorInput]!
-    where: UsersPreferencesBoolExp
-  ): [UsersPreferences!]!
+  usersPreferencesStream(batchSize: Int!, cursor: [UsersPreferencesStreamCursorInput]!, where: UsersPreferencesBoolExp): [UsersPreferences!]!
 }
 
 scalar timestamptz

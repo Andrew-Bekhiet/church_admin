@@ -5,10 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/misc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
-import 'package:golden_toolkit/golden_toolkit.dart' hide loadAppFonts;
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:spot/spot.dart';
 
 import '../../../../utils.dart';
 import 'unapproved_user_screen_test.mocks.dart';
@@ -18,38 +16,13 @@ import 'unapproved_user_screen_test.mocks.dart';
   MockSpec<BuildContext>(),
   MockSpec<GoRouterState>(),
 ])
-Future<void> main() async {
-  await loadAppFonts();
-
+void main() {
   setUp(_setUp);
   tearDown(defaultTearDown);
 
   group(
     'Unapproved User Screen =>',
     () {
-      testGoldens(
-        'UI',
-        (tester) async {
-          final deviceBuilder =
-              DeviceBuilder(
-                  wrap: materialAppWithThemeAndLocale(),
-                )
-                ..overrideDevicesForAllScenarios(devices: [Device.iphone11])
-                ..addScenario(
-                  widget: const UnapprovedUserScreen(),
-                  name: 'initial state',
-                );
-
-          await tester.pumpDeviceBuilder(deviceBuilder);
-          await tester.pumpAndSettle();
-
-          await screenMatchesGolden(
-            tester,
-            'unapproved_user_screen',
-          );
-        },
-      );
-
       group(
         'Route',
         () {

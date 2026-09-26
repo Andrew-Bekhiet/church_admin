@@ -101,12 +101,10 @@ jobs:
           cache-key: "flutter:os:-:channel:-:version:-:arch:"
 
       - name: Install dependencies
-        working-directory: client
-        run: flutter pub get
+        run: cd client && flutter pub get
 
       - name: Run new builder
-        working-directory: client
-        run: rm -r lib/src/core/graphql/__generated__/; dart run build_runner build && ./scripts/split_schema_graphql_dart.sh
+        run: cd client && rm -r lib/src/core/graphql/__generated__/; dart run build_runner build && ./scripts/split_schema_graphql_dart.sh
 
       - name: Install Codemagic CLI tools
         run: pip install codemagic-cli-tools
@@ -117,7 +115,6 @@ jobs:
 
       - name: Fetch signing files
         if: ${{ matrix.os == 'macos-latest' }}
-        working-directory: client/ios
         env:
           APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
           APP_STORE_CONNECT_KEY_IDENTIFIER: ${{ secrets.APP_STORE_CONNECT_KEY_IDENTIFIER }}
@@ -125,6 +122,7 @@ jobs:
           CERTIFICATE_PRIVATE_KEY: ${{ secrets.CERTIFICATE_PRIVATE_KEY }}
           APP_STORE_APPLE_ID: ${{ secrets.APP_STORE_APPLE_ID }}
         run: |
+          cd client/ios
           app-store-connect fetch-signing-files $(xcode-project detect-bundle-id) \
           --type IOS_APP_STORE \
           --create
@@ -158,22 +156,21 @@ jobs:
         run: flutter precache
 
       - name: Decode and save android secrets
-        working-directory: client
         if: ${{ matrix.os == 'ubuntu-latest' }}
         env:
           ANDROID_SIGNING_KEY: ${{ secrets.ANDROID_SIGNING_KEY }}
           GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
           ANDROID_KEYSTORE_PROPERTIES: ${{ secrets.ANDROID_KEYSTORE_PROPERTIES }}
         run: |
+          cd client
           echo $ANDROID_SIGNING_KEY | sed 's/[^A-Za-z0-9+/=]//g' | base64 -d > ./android/app/key.keystore
           echo $GOOGLE_SERVICES_JSON | sed 's/[^A-Za-z0-9+/=]//g' | base64 -d > ./android/app/google-services.json
           echo $ANDROID_KEYSTORE_PROPERTIES | sed 's/[^A-Za-z0-9+/=]//g' | base64 -d > ./android/releaseKey.properties
 
       - name: Decode app production environment
-        working-directory: client
         env:
           APP_PROD_ENV_FILE: ${{ secrets.APP_PROD_ENV_FILE }}
-        run: echo "$APP_PROD_ENV_FILE" | base64 -d > .env
+        run: cd client && echo "$APP_PROD_ENV_FILE" | base64 -d > .env
 
       - name: 🚀 Shorebird Release
         if: ${{ matrix.os == 'ubuntu-latest' }}
@@ -189,13 +186,11 @@ jobs:
 
       - name: Run pod repo update
         if: ${{ matrix.os == 'macos-latest' }}
-        working-directory: client
-        run: pod repo update
+        run: cd client && pod repo update
 
       - name: Update podfile.lock
         if: ${{ matrix.os == 'macos-latest' }}
-        working-directory: client/ios
-        run: pod install --repo-update
+        run: cd client/ios && pod install --repo-update
 
       - name: Get version from tag
         id: version
@@ -222,22 +217,20 @@ jobs:
 
       - name: Delete app production environment
         if: ${{ always() }}
-        working-directory: client
-        run: rm -f .env
+        run: cd client && rm -f .env
 
       - name: Publish to Google Play
         if: ${{ matrix.os == 'ubuntu-latest' }}
-        working-directory: client
         env:
           GOOGLE_PLAY_SERVICE_ACCOUNT_CREDENTIALS: ${{ secrets.GOOGLE_PLAY_SERVICE_ACCOUNT_CREDENTIALS }}
         run: |
+          cd client
           google-play bundles publish \
           --bundle "build/app/outputs/bundle/release/app-release.aab" \
           --track production
 
       - name: Publish the app to App Store Connect
         if: ${{ matrix.os == 'macos-latest' }}
-        working-directory: client
         env:
           APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
           APP_STORE_CONNECT_KEY_IDENTIFIER: ${{ secrets.APP_STORE_CONNECT_KEY_IDENTIFIER }}
@@ -245,18 +238,19 @@ jobs:
           CERTIFICATE_PRIVATE_KEY: ${{ secrets.CERTIFICATE_PRIVATE_KEY }}
           APP_STORE_APPLE_ID: ${{ secrets.APP_STORE_APPLE_ID }}
         run: |
+          cd client
           app-store-connect publish --path "$(find $(pwd) -name "*.ipa")"
 
       - name: Add version to APK filename
         if: ${{ matrix.os == 'ubuntu-latest' }}
-        working-directory: client
         run: |
+          cd client
           mv build/app/outputs/flutter-apk/app-release.apk build/app/outputs/flutter-apk/app-release-v${{ steps.version.outputs.version }}.apk
 
       - name: Add version to ipa filename
         if: ${{ matrix.os == 'macos-latest' }}
-        working-directory: client
         run: |
+          cd client
           mv build/ios/ipa/churchAdmin.ipa build/ios/ipa/app-release-v${{ steps.version.outputs.version }}.ipa
 
       - name: Authenticate with Google Cloud
@@ -307,28 +301,24 @@ jobs:
           echo "current_version=$VERSION" >> $GITHUB_OUTPUT
 
       - name: Write service account key to file
-        working-directory: server/firebase/functions
         env:
           FIREBASE_REMOTE_CONFIG_UPDATER_KEY: ${{ secrets.FIREBASE_REMOTE_CONFIG_UPDATER_KEY }}
         run: |
+          cd server/firebase/functions
           echo $FIREBASE_REMOTE_CONFIG_UPDATER_KEY | sed 's/[^A-Za-z0-9+/=]//g' | base64 -d > ./firebase-service-account.json
 
       - name: Install npm dependencies
-        working-directory: server/firebase/functions
-        run: npm ci
+        run: cd server/firebase/functions && npm ci
 
       - name: Build server
-        working-directory: server/firebase/functions
-        run: npm run build
+        run: cd server/firebase/functions && npm run build
 
       - name: Update remote config app version
-        working-directory: server/firebase/functions
         env:
           LATEST_VERSION: ${{ steps.get-version.outputs.current_version }}
           GOOGLE_APPLICATION_CREDENTIALS: ./firebase-service-account.json
-        run: node ./lib/update_remote_config_app_version.js
+        run: cd server/firebase/functions && node ./lib/update_remote_config_app_version.js
 
       - name: Remove service account key file
-        working-directory: server/firebase/functions
         if: ${{ always() }}
-        run: rm -f ./firebase-service-account.json
+        run: cd server/firebase/functions && rm -f ./firebase-service-account.json

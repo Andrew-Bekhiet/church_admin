@@ -1,0 +1,54 @@
+name: Check generated code matches committed files
+
+on:
+  pull_request:
+    paths:
+      - "client/**"
+      - "server/hasura/**"
+      - "server/postgres/**"
+      - "server/docker-compose.yml"
+      - ".github/workflows/generated-code.yml"
+
+  push:
+    branches: [master]
+    paths:
+      - "client/**"
+      - "server/hasura/**"
+      - "server/postgres/**"
+      - "server/docker-compose.yml"
+      - ".github/workflows/generated-code.yml"
+
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  generated-code:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Check client schema.graphql matches the Hasura schema built from this commit's migrations and metadata
+        run: client/scripts/check_graphql_schema.sh
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          cache: true
+          flutter-version-file: client/.fvmrc
+          pub-cache-key: "flutter-pub:os:-:channel:-:version:-:arch:"
+          cache-key: "flutter:os:-:channel:-:version:-:arch:"
+
+      - name: Install client dependencies
+        run: flutter pub get --directory client
+
+      - name: Check committed build_runner outputs match a fresh build (changed files on PRs, everything on master)
+        run: client/scripts/check_generated_code.sh ${{ github.event_name == 'pull_request' && 'HEAD^1' || '' }}

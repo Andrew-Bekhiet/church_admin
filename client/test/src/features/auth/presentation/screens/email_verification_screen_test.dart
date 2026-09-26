@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/misc.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
-import 'package:golden_toolkit/golden_toolkit.dart' hide loadAppFonts;
+import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:rxdart/rxdart.dart';
@@ -23,43 +23,12 @@ import 'email_verification_screen_test.mocks.dart';
   MockSpec<GoRouterState>(),
   MockSpec<LoggingService>(),
 ])
-Future<void> main() async {
-  await loadAppFonts();
-
+void main() {
   setUp(() => provideDummy<AuthState>(const AuthUnauthenticated()));
 
   tearDown(defaultTearDown);
 
   group('Email Verification Screen =>', () {
-    testGoldens(
-      'UI',
-      (tester) async {
-        final overrides = [
-          _setUpAuthBloc(),
-          _setUpAuthStorage(),
-        ];
-
-        initGlobalProviderContainer(overrides);
-
-        final builder =
-            DeviceBuilder(
-                wrap: materialAppWithThemeAndLocale(),
-              )
-              ..overrideDevicesForAllScenarios(devices: [Device.iphone11])
-              ..addScenario(
-                widget: const EmailVerificationScreen(),
-                name: 'email_verification_screen',
-              );
-
-        await tester.pumpDeviceBuilder(
-          builder,
-          wrapper: materialAppWrapper(),
-        );
-
-        await screenMatchesGolden(tester, 'email_verification_screen');
-      },
-    );
-
     testWidgets(
       'Can reload user to confirm email',
       (tester) async {

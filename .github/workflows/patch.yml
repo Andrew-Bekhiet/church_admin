@@ -21,6 +21,10 @@ on:
         default: true
         type: boolean
 
+defaults:
+  run:
+    working-directory: client
+
 jobs:
   patch-mobile:
     permissions:
@@ -38,6 +42,10 @@ jobs:
     runs-on: ${{ matrix.os }}
 
     steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
       - name: Free up disk space
         if: ${{ matrix.os == 'ubuntu-latest' }}
         run: |
@@ -53,9 +61,6 @@ jobs:
 
           # Verify gains
           df -h /
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 1
 
       - name: Get Flutter
         id: flutter-action
@@ -67,11 +72,9 @@ jobs:
           cache-key: "flutter:os:-:channel:-:version:-:arch:"
 
       - name: Install dependencies
-        working-directory: client
         run: flutter pub get
 
       - name: Run new builder
-        working-directory: client
         run: rm -r lib/src/core/graphql/__generated__/; dart run build_runner build && ./scripts/split_schema_graphql_dart.sh
 
       - name: Install Codemagic CLI tools
@@ -84,7 +87,6 @@ jobs:
 
       - name: Fetch signing files
         if: ${{ matrix.os == 'macos-latest' }}
-        working-directory: client/ios
         env:
           APP_STORE_CONNECT_ISSUER_ID: ${{ secrets.APP_STORE_CONNECT_ISSUER_ID }}
           APP_STORE_CONNECT_KEY_IDENTIFIER: ${{ secrets.APP_STORE_CONNECT_KEY_IDENTIFIER }}
@@ -92,6 +94,7 @@ jobs:
           CERTIFICATE_PRIVATE_KEY: ${{ secrets.CERTIFICATE_PRIVATE_KEY }}
           APP_STORE_APPLE_ID: ${{ secrets.APP_STORE_APPLE_ID }}
         run: |
+          cd ios
           app-store-connect fetch-signing-files $(xcode-project detect-bundle-id) \
           --type IOS_APP_STORE \
           --create
@@ -125,7 +128,6 @@ jobs:
         run: flutter precache
 
       - name: Decode and save android secrets
-        working-directory: client
         if: ${{ matrix.os == 'ubuntu-latest' }}
         env:
           ANDROID_SIGNING_KEY: ${{ secrets.ANDROID_SIGNING_KEY }}
@@ -137,7 +139,6 @@ jobs:
           echo $ANDROID_KEYSTORE_PROPERTIES | sed 's/[^A-Za-z0-9+/=]//g' | base64 -d > ./android/releaseKey.properties
 
       - name: Decode app production environment
-        working-directory: client
         env:
           APP_PROD_ENV_FILE: ${{ secrets.APP_PROD_ENV_FILE }}
         run: echo "$APP_PROD_ENV_FILE" | base64 -d > .env
@@ -156,13 +157,11 @@ jobs:
 
       - name: Run pod repo update
         if: ${{ matrix.os == 'macos-latest' }}
-        working-directory: client
         run: pod repo update
 
       - name: Update podfile.lock
         if: ${{ matrix.os == 'macos-latest' }}
-        working-directory: client/ios
-        run: pod install --repo-update
+        run: cd ios && pod install --repo-update
 
       - name: 🚀 Shorebird Patch iOS
         uses: shorebirdtech/shorebird-patch@v0
@@ -179,5 +178,4 @@ jobs:
 
       - name: Delete app production environment
         if: ${{ always() }}
-        working-directory: client
         run: rm -f .env

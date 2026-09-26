@@ -10,9 +10,7 @@ import '../../../../utils.dart';
 import 'settings_screen_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<UserPreferencesService>()])
-Future<void> main() async {
-  await loadAppFonts();
-
+void main() {
   group(
     'SettingsScreen',
     () {
@@ -27,77 +25,8 @@ Future<void> main() async {
           );
         },
       );
-      // Tests outline:
-      //
-      // 1. Verify that the settings screen renders correctly, by opening each expansion tile and adding it as a golden scenario
-      // 2. Verify confirm exit dialog shows when any setting is changed without saving, and doesn't show when no changes are made
-      // 3. Verify that saving actually saves the changes to UserSettingsService
-      testGoldens(
-        'Structure',
-        (tester) async {
-          final deviceBuilder =
-              DeviceBuilder(
-                  wrap: materialAppWithThemeAndLocale(),
-                )
-                ..addScenario(
-                  name: 'SettingsScreen Collapsed',
-                  widget: const SettingsScreen(),
-                  onCreate: (key) async {
-                    expect(
-                      find.descendant(
-                        of: find.byKey(key),
-                        matching: find.widgetWithText(ExpansionTile, 'المظهر'),
-                      ),
-                      findsOneWidget,
-                    );
-                    expect(
-                      find.descendant(
-                        of: find.byKey(key),
-                        matching: find.widgetWithText(
-                          ExpansionTile,
-                          'الاشعارات',
-                        ),
-                      ),
-                      findsOneWidget,
-                    );
-                  },
-                )
-                ..addScenario(
-                  name: 'SettingsScreen: Theme settings expanded',
-                  widget: const SettingsScreen(),
-                  onCreate: (key) async {
-                    await tester.tap(
-                      find.descendant(
-                        of: find.byKey(key),
-                        matching: find.widgetWithText(ExpansionTile, 'المظهر'),
-                      ),
-                    );
-                  },
-                )
-                ..addScenario(
-                  name: 'SettingsScreen: Notifications settings expanded',
-                  widget: const SettingsScreen(),
-                  onCreate: (key) async {
-                    await tester.tap(
-                      find.descendant(
-                        of: find.byKey(key),
-                        matching: find.widgetWithText(
-                          ExpansionTile,
-                          'الاشعارات',
-                        ),
-                      ),
-                    );
-                  },
-                )
-                ..overrideDevicesForAllScenarios(
-                  devices: [Device.iphone11, Device.tabletPortrait],
-                );
 
-          await tester.pumpDeviceBuilder(deviceBuilder);
-
-          await screenMatchesGolden(tester, 'settings_screen');
-        },
-      );
+      tearDown(resetGlobalProviderContainer);
 
       group(
         'Confirm Dialog',

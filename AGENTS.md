@@ -35,6 +35,8 @@ Instead of a comment:
 
 Doc comments are allowed only when they add value a name cannot carry. Never restate the code.
 
+**Link the issue behind a workaround.** When code works around a bug that has a GitHub issue, the comment explaining the workaround links it as a markdown link — `[flutter/flutter#90225](https://github.com/flutter/flutter/issues/90225)`.
+
 **Keep names in sync across the client/server boundary.** A Dart wrapper, the callable it invokes, and the file exporting it should share one name (`tryClaimInvitation` / `try_claim_invitation.ts`). Renaming a deployed callable is a deploy-order dependency — client and functions ship separately, so a mismatched pair fails with `NOT_FOUND`.
 
 ## Dart & Flutter
@@ -136,11 +138,13 @@ So **default to a `--build-filter` scoped to what you changed** — that keeps t
 
 ```sh
 cd client
-dart run build_runner build --delete-conflicting-outputs --build-filter="test/**.mocks.dart"
-dart run build_runner build --delete-conflicting-outputs --build-filter="lib/src/features/<feature>/**"
+dart run build_runner build --build-filter="test/**.mocks.dart"
+dart run build_runner build --build-filter="lib/src/features/<feature>/**"
 ```
 
 Repeat the flag to cover several areas. The filter must match everything you changed — scoping to mocks while a `freezed` model also changed leaves that model stale.
+
+A filtered build from a cold cache (no `.dart_tool/build`, e.g. a fresh clone or CI runner) deletes every generated output outside the filter and re-collapses `schema.graphql.dart`. Run one full build first, or restore the rest with `git checkout -- .` afterwards.
 
 Run the full sequence **only when `.graphql` documents or the Hasura schema change**, and re-split afterwards:
 
@@ -151,6 +155,12 @@ rm -r lib/src/core/graphql/__generated__/ && dart run build_runner build && ./sc
 
 If an unfiltered build slips through, `git checkout -- lib/src/core/graphql/__generated__/schema.graphql.dart` restores the stub; the `schema_partN.dart` files are untouched. The split script also leaves an untracked `schema.graphql.dart.bak` — delete it.
 
+`--delete-conflicting-outputs` is gone from build_runner; conflicting outputs are deleted by default.
+
+**GraphQL schema** — `client/lib/src/core/graphql/schema.graphql` is the `user`-role schema Hasura serves. Refresh it with `client/scripts/fetch_graphql_schema.sh`, which reads `HASURA_GRAPHQL_ENDPOINT` and `HASURA_GRAPHQL_ADMIN_SECRET` (prod: `set -a && source server/hasura/.env && set +a` first), or with `client/scripts/check_graphql_schema.sh --write`, which boots a throwaway Hasura from this commit's migrations and metadata. The VS Code tasks wrap both.
+
+CI enforces both halves: `check_graphql_schema.sh` fails when `schema.graphql` drifts from the migrations and metadata, and `check_generated_code.sh` fails when committed build_runner outputs differ from a fresh build (outputs of changed files on PRs, everything on master).
+
 **Lints** — `dart analyze` does load the solid_lints plugin. It is declared under `plugins:` in `client/analysis_options.yaml` and the analyzer picks it up on its own, so a plain `dart analyze` already reports diagnostics such as `prefer_match_file_name`. `--plugins` is a real but undocumented flag, and redundant on Dart 3.12.2. Run the same gate CI runs:
 
 ```sh
@@ -160,4 +170,8 @@ dart analyze --plugins --fatal-infos
 
 Keep `--fatal-infos`. Most solid_lints diagnostics are `info`, so a plain run exits 0 with findings outstanding.
 
-**Run `dart format` over the whole package before committing**, not only the directory you touched. It also normalises a mixed-ending file back to one style. Formatting a single subdirectory is how the mixed endings above survived review.
+**Run `dart format` over the whole package before committing**, not only the directory you touched. It also normalises a mixed-ending file back to one style. Formatting a single subdirectory is how the mixed endings above survived review. CI fails on unformatted code (`dart format --output=none --set-exit-if-changed .`).
+
+## CI workflows
+
+**Set `working-directory` once per workflow, never per step.** A workflow that only touches `client/` sets `defaults.run.working-directory: client`; one that only touches a server project sets it to that project (`server/firebase/functions`). Every `run` step then starts there and names paths relative to it, and a step needing a subdirectory `cd`s into it inside `run`. A workflow that spans both sets no `working-directory` at all and spells every path from the repo root (`client/scripts/…`). `defaults` does not reach action inputs under `with:`, so those keep repo-root paths.

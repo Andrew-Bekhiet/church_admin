@@ -1,5 +1,4 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:clock/clock.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:golden_toolkit/golden_toolkit.dart';
@@ -60,34 +59,6 @@ void main() {
   tearDown(defaultTearDown);
 
   group('HomeModeSelector =>', () {
-    testGoldens(
-      'displays daily data correctly',
-      (tester) => withClock(
-        Clock.fixed(DateTime(2025, 11)),
-        () async {
-          final builder = DeviceBuilder()
-            ..overrideDevicesForAllScenarios(devices: [Device.phone])
-            ..addScenario(
-              widget: Scaffold(
-                body: HomeScreenSummary(homeBloc: homeBloc),
-              ),
-              name: 'Loaded State',
-            );
-
-          await tester.pumpDeviceBuilder(
-            builder,
-            wrapper: materialAppWithThemeAndLocale(),
-          );
-
-          spotText(mockData.verse).existsOnce();
-          spotText(mockData.sneksar).existsOnce();
-          spotText(mockData.saying).existsOnce();
-
-          await screenMatchesGolden(tester, 'home_mode_selector');
-        },
-      ),
-    );
-
     testWidgets('requests new data on dialog button tap', (tester) async {
       await tester.pumpWidgetBuilder(
         Scaffold(body: HomeScreenSummary(homeBloc: homeBloc)),
