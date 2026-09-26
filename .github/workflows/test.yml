@@ -6,6 +6,12 @@ on:
       - "client/**"
       - ".github/workflows/test.yml"
 
+  push:
+    branches: [master]
+    paths:
+      - "client/**"
+      - ".github/workflows/test.yml"
+
   workflow_dispatch:
 
 concurrency:
@@ -36,9 +42,25 @@ jobs:
         working-directory: client
         run: flutter pub get
 
+      - name: Restore analyzer cache
+        uses: actions/cache/restore@v4
+        with:
+          path: ~/.dartServer
+          key: dart-server-${{ runner.os }}-${{ hashFiles('client/.fvmrc', 'client/pubspec.lock') }}-${{ github.sha }}
+          restore-keys: |
+            dart-server-${{ runner.os }}-${{ hashFiles('client/.fvmrc', 'client/pubspec.lock') }}-
+            dart-server-${{ runner.os }}-
+
       - name: Analyze code
         working-directory: client
         run: dart analyze --plugins --fatal-infos
+
+      - name: Save analyzer cache
+        if: ${{ github.event_name != 'pull_request' }}
+        uses: actions/cache/save@v4
+        with:
+          path: ~/.dartServer
+          key: dart-server-${{ runner.os }}-${{ hashFiles('client/.fvmrc', 'client/pubspec.lock') }}-${{ github.sha }}
 
   test:
     runs-on: ubuntu-latest
