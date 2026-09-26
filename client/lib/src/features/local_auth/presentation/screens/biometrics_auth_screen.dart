@@ -45,7 +45,16 @@ class _BiometricsAuthScreenState extends State<BiometricsAuthScreen> {
         listenWhen: (previous, current) =>
             previous is! BiometricsAuthWrongPassword &&
             current is BiometricsAuthWrongPassword,
-        listener: (context, state) => _passwordText.clear(),
+        listener: (context, state) {
+          _passwordText.clear();
+          unawaited(
+            showDialog<void>(
+              context: context,
+              builder: (context) =>
+                  const AlertDialog(title: Text('كلمة سر خاطئة!')),
+            ),
+          );
+        },
         builder: (context, state) => Scaffold(
           appBar: AppBar(
             toolbarHeight: size.width,
@@ -84,7 +93,6 @@ class _BiometricsAuthScreenState extends State<BiometricsAuthScreen> {
                     decoration: InputDecoration(
                       labelText: 'كلمة السر',
                       errorText: switch (state) {
-                        BiometricsAuthWrongPassword() => 'كلمة سر خاطئة!',
                         BiometricsAuthFailure() => 'تعذر التحقق، حاول مرة أخرى',
                         _ => null,
                       },

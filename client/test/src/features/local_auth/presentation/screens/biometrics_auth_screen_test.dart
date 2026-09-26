@@ -96,7 +96,7 @@ void main() {
     variant: authVariant,
   );
 
-  testWidgets('a wrong password shows inline feedback until the user retries', (
+  testWidgets('a wrong password is reported in a dialog, not inline', (
     tester,
   ) async {
     await tester.binding.setSurfaceSize(const Size(390, 1200));
@@ -122,17 +122,52 @@ void main() {
     await act.tap(spotKey(BiometricsAuthScreenKeys.submitButtonKey));
     await tester.pumpAndSettle();
 
-    spotKey(
-      BiometricsAuthScreenKeys.passwordFieldKey,
-    ).spotText('كلمة سر خاطئة!').existsOnce();
-
-    await act.enterText(
-      spotKey(BiometricsAuthScreenKeys.passwordFieldKey),
-      testPassword,
-    );
-
-    expect(find.text('كلمة سر خاطئة!'), findsNothing);
+    spot<AlertDialog>().spotText('كلمة سر خاطئة!').existsOnce();
+    expect(find.text('كلمة سر خاطئة!'), findsOneWidget);
   });
+
+  testWidgets(
+    'a password check that cannot complete shows inline feedback until the '
+    'user retries',
+    (tester) async {
+      await tester.binding.setSurfaceSize(const Size(390, 1200));
+      await authVariant.setUp(AuthenticationVariantEnum.password);
+      mocktail
+          .when(AuthStorage.I.getPasswordHash)
+          .thenThrow(Exception('storage unavailable'));
+      await tester.pumpWidgetBuilder(
+        SizedBox.fromSize(
+          size: size,
+          child: Builder(
+            builder: (context) => MediaQuery(
+              data: MediaQuery.of(context).copyWith(size: size),
+              child: const BiometricsAuthScreen(),
+            ),
+          ),
+        ),
+        wrapper: materialAppWrapper(),
+      );
+      await tester.pumpAndSettle();
+
+      await act.enterText(
+        spotKey(BiometricsAuthScreenKeys.passwordFieldKey),
+        testPassword,
+      );
+      await act.tap(spotKey(BiometricsAuthScreenKeys.submitButtonKey));
+      await tester.pumpAndSettle();
+
+      spotKey(
+        BiometricsAuthScreenKeys.passwordFieldKey,
+      ).spotText('تعذر التحقق، حاول مرة أخرى').existsOnce();
+
+      await act.enterText(
+        spotKey(BiometricsAuthScreenKeys.passwordFieldKey),
+        'another attempt',
+      );
+
+      expect(find.text('تعذر التحقق، حاول مرة أخرى'), findsNothing);
+    },
+  );
 
   testWidgets('a pending biometric prompt disables retry until it finishes', (
     tester,
@@ -169,11 +204,12 @@ void main() {
     expect(tester.widget<FilledButton>(biometricsButton).onPressed, isNotNull);
   });
 
-  testWidgets('wrong password feedback is visible above an auth overlay', (
+  testWidgets('the wrong password dialog is visible above an auth overlay', (
     tester,
   ) async {
     await tester.binding.setSurfaceSize(const Size(390, 1200));
     await authVariant.setUp(AuthenticationVariantEnum.password);
+    final overlayController = OverlayPortalController();
 
     await tester.pumpWidget(
       MaterialApp(
@@ -181,12 +217,14 @@ void main() {
           textDirection: TextDirection.rtl,
           child: child ?? const SizedBox.shrink(),
         ),
-        home: const Scaffold(),
+        home: OverlayPortal(
+          controller: overlayController,
+          overlayChildBuilder: (context) => const BiometricsAuthScreen(),
+          child: const Scaffold(),
+        ),
       ),
     );
-    Overlay.of(tester.element(find.byType(Scaffold))).insert(
-      OverlayEntry(builder: (context) => const BiometricsAuthScreen()),
-    );
+    overlayController.show();
     await tester.pumpAndSettle();
 
     await act.enterText(
