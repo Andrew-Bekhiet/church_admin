@@ -111,9 +111,7 @@ class _BiometricsAuthScreenState extends State<BiometricsAuthScreen> {
                   ),
                   FilledButton(
                     key: BiometricsAuthScreenKeys.submitButtonKey,
-                    onPressed: state is BiometricsAuthAuthenticating
-                        ? null
-                        : () => _submit(_passwordText.text),
+                    onPressed: () => _submit(_passwordText.text),
                     child: const Text('تسجيل الدخول'),
                   ),
                   if (state.canCheckBiometrics)

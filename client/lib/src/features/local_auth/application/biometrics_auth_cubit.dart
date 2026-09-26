@@ -77,7 +77,7 @@ class BiometricsAuthCubit extends Cubit<BiometricsAuthState> {
   }
 
   Future<void> submitPassword(String password) async {
-    if (state is BiometricsAuthAuthenticating || isClosed) return;
+    if (isClosed) return;
 
     emit(
       BiometricsAuthAuthenticating(
