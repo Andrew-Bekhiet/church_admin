@@ -31,7 +31,13 @@ class _BiometricsAuthScreenState extends State<BiometricsAuthScreen> {
   @override
   void initState() {
     super.initState();
-    unawaited(_cubit.initialize());
+    unawaited(
+      _cubit.initialize().then((_) async {
+        if (!_cubit.state.canCheckBiometrics) return;
+
+        await _cubit.authenticateBiometrically();
+      }),
+    );
   }
 
   @override

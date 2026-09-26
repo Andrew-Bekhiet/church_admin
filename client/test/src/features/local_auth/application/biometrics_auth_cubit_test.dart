@@ -66,10 +66,26 @@ void main() {
     final cubit = createCubit();
 
     await cubit.initialize();
+    await cubit.authenticateBiometrically();
 
     expect(cubit.state, isA<BiometricsAuthReady>());
     expect(cubit.state.canCheckBiometrics, isTrue);
   });
+
+  test(
+    'initializing leaves the app locked until biometrics are requested',
+    () async {
+      when(
+        () => localAuthService.canCheckBiometrics(),
+      ).thenAnswer((_) async => true);
+      when(() => localAuthService.authenticate()).thenAnswer((_) async => true);
+      final cubit = createCubit();
+
+      await cubit.initialize();
+
+      expect(localAuthService.isLocked, isTrue);
+    },
+  );
 
   test('a wrong password shows an error and permits another attempt', () async {
     final cubit = createCubit();

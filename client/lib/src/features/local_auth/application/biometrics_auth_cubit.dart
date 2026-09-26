@@ -46,7 +46,6 @@ class BiometricsAuthCubit extends Cubit<BiometricsAuthState> {
         imageAsset: state.imageAsset,
       ),
     );
-    if (canCheckBiometrics) await authenticateBiometrically();
   }
 
   Future<void> authenticateBiometrically() async {
