@@ -18,6 +18,62 @@
         "--coverage"
       ],
       "problemMatcher": []
+    },
+    {
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "label": "Generate code",
+      "type": "shell",
+      "options": {
+        "cwd": "${workspaceFolder}/client"
+      },
+      "command": "fvm",
+      "args": [
+        "dart",
+        "run",
+        "build_runner",
+        "build"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "group": "build",
+      "label": "Generate code after GraphQL changes",
+      "type": "shell",
+      "options": {
+        "cwd": "${workspaceFolder}/client"
+      },
+      "command": "rm -r lib/src/core/graphql/__generated__/ && fvm dart run build_runner build && ./scripts/split_schema_graphql_dart.sh && rm -f lib/src/core/graphql/__generated__/schema.graphql.dart.bak",
+      "problemMatcher": []
+    },
+    {
+      "label": "Fetch GraphQL schema from prod",
+      "type": "shell",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "command": "set -a && source server/hasura/.env && set +a && client/scripts/fetch_graphql_schema.sh",
+      "problemMatcher": []
+    },
+    {
+      "label": "Fetch GraphQL schema from local stack",
+      "type": "shell",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "command": "HASURA_PORT=8080 && set -a && source server/.env && set +a && HASURA_GRAPHQL_ENDPOINT=http://localhost:$HASURA_PORT client/scripts/fetch_graphql_schema.sh",
+      "problemMatcher": []
+    },
+    {
+      "label": "Fetch GraphQL schema from this commit's migrations",
+      "type": "shell",
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "command": "client/scripts/check_graphql_schema.sh --write",
+      "problemMatcher": []
     }
   ]
 }
