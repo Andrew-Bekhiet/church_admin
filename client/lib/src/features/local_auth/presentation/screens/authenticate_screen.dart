@@ -23,6 +23,7 @@ abstract final class AuthenticateScreenKeys {
 class _AuthenticateScreenState extends State<AuthenticateScreen> {
   final _passwordText = TextEditingController();
   final _form = GlobalKey<FormState>();
+  String? _passwordError;
 
   @override
   void initState() {
@@ -69,8 +70,16 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
               PasswordFormField(
                 key: AuthenticateScreenKeys.passwordFieldKey,
                 onFieldSubmitted: _submit,
+                onChanged: (_) {
+                  if (_passwordError != null) {
+                    setState(() => _passwordError = null);
+                  }
+                },
                 controller: _passwordText,
-                decoration: const InputDecoration(labelText: 'كلمة السر'),
+                decoration: InputDecoration(
+                  labelText: 'كلمة السر',
+                  errorText: _passwordError,
+                ),
                 validator: (p) =>
                     p == null || p.isEmpty ? 'برجاء ادخال كلمة السر' : null,
                 textInputAction: TextInputAction.done,
@@ -131,20 +140,6 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
   Future<void> _submit(String password) async {
     if (!_form.currentState!.validate()) return;
 
-    if (password.isEmpty) {
-      _passwordText.clear();
-
-      unawaited(
-        showDialog(
-          context: context,
-          builder: (context) =>
-              const AlertDialog(title: Text('برجاء ادخال كلمة السر!')),
-        ),
-      );
-
-      return;
-    }
-
     final storedPasswordHash = await AuthStorage.I.getPasswordHash();
     final isPasswordValid = await LocalAuthService.I.verifyPassword(
       email: AuthBloc.I.currentUser!.email,
@@ -158,11 +153,7 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
       _passwordText.clear();
 
       if (mounted) {
-        await showDialog(
-          context: context,
-          builder: (context) =>
-              const AlertDialog(title: Text('كلمة سر خاطئة!')),
-        );
+        setState(() => _passwordError = 'كلمة سر خاطئة!');
       }
     }
   }

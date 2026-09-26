@@ -138,15 +138,15 @@ void main() {
 
         await tester.pumpAndSettle();
 
-        spot<AlertDialog>().spotText('كلمة سر خاطئة!').existsOnce();
-
-        Navigator.of(widgetKey.currentContext!).pop();
-        await tester.pumpAndSettle();
+        spotKey(
+          AuthenticateScreenKeys.passwordFieldKey,
+        ).spotText('كلمة سر خاطئة!').existsOnce();
 
         await act.enterText(
           spotKey(AuthenticateScreenKeys.passwordFieldKey),
           testPassword,
         );
+        expect(find.text('كلمة سر خاطئة!'), findsNothing);
         await act.tap(spotKey(AuthenticateScreenKeys.submitButtonKey));
 
         await tester.pumpAndSettle();
@@ -186,6 +186,40 @@ void main() {
     },
     variant: authVariant,
   );
+
+  testWidgets('wrong password feedback is visible above an auth overlay', (
+    tester,
+  ) async {
+    await tester.binding.setSurfaceSize(const Size(390, 1200));
+    await authVariant.setUp(AuthenticationVariantEnum.password);
+
+    await tester.pumpWidget(
+      MaterialApp(
+        builder: (context, child) => Directionality(
+          textDirection: TextDirection.rtl,
+          child: child ?? const SizedBox.shrink(),
+        ),
+        home: const Scaffold(),
+      ),
+    );
+    Overlay.of(tester.element(find.byType(Scaffold))).insert(
+      OverlayEntry(builder: (context) => const AuthenticateScreen()),
+    );
+    await tester.pumpAndSettle();
+
+    await act.enterText(
+      spotKey(AuthenticateScreenKeys.passwordFieldKey),
+      'wrong password',
+    );
+    await act.tap(spotKey(AuthenticateScreenKeys.submitButtonKey));
+    await tester.pumpAndSettle();
+
+    expect(find.text('كلمة سر خاطئة!').hitTestable(), findsOneWidget);
+    expect(
+      Directionality.of(tester.element(find.text('كلمة سر خاطئة!'))),
+      TextDirection.rtl,
+    );
+  });
 
   group('Authenticate Screen => Route =>', () {
     test('No Signed In User', () async {
