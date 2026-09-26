@@ -79,7 +79,7 @@ class EditUserForm extends StatelessWidget {
                 )
                 .map(
                   (p) => PermissionCheckWidget(
-                    key: EditUserScreenKeys.permission(p),
+                    key: EditUserFormKeys.permission(p),
                     permission: p,
                     permissions: draft.permissions,
                     onToggle: cubit.togglePermission,
@@ -101,4 +101,9 @@ class EditUserForm extends StatelessWidget {
       ],
     );
   }
+}
+
+abstract final class EditUserFormKeys {
+  static Key permission(UserPermission permission) =>
+      ValueKey(('User Permission Key', permission));
 }

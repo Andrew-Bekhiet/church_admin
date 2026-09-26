@@ -19,7 +19,7 @@ class AdminScopePermissionCheckboxes extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         CheckboxListTile(
-          key: EditUserScreenKeys.scopeManageUsersCheckbox,
+          key: AdminScopePermissionCheckboxesKeys.manageUsersCheckbox,
           dense: true,
           enabled: userAdminScope.canWriteData,
           secondary: Icon(UserPermission.manageAllUsers.icon),
@@ -32,7 +32,7 @@ class AdminScopePermissionCheckboxes extends StatelessWidget {
               onChanged(userAdminScope.copyWith(canManageUsers: value)),
         ),
         CheckboxListTile(
-          key: EditUserScreenKeys.scopeWriteDataCheckbox,
+          key: AdminScopePermissionCheckboxesKeys.writeDataCheckbox,
           dense: true,
           secondary: Icon(UserPermission.writeAllData.icon),
           title: const Text('تعديل البيانات'),
@@ -50,9 +50,8 @@ class AdminScopePermissionCheckboxes extends StatelessWidget {
               'السماح بتسجيل الحضور لجميع المخدومين في ال$objectLabel',
             ),
             value: userAdminScope.canRecordAttendance,
-            onChanged: (value) => onChanged(
-              userAdminScope.copyWith(canRecordAttendance: value),
-            ),
+            onChanged: (value) =>
+                onChanged(userAdminScope.copyWith(canRecordAttendance: value)),
           ),
         if (userAdminScope.object case Service() || Group())
           CheckboxListTile(
@@ -94,4 +93,13 @@ class AdminScopePermissionCheckboxes extends StatelessWidget {
       ],
     );
   }
+}
+
+abstract final class AdminScopePermissionCheckboxesKeys {
+  static const Key manageUsersCheckbox = ValueKey(
+    'Admin Scope Manage Users Checkbox Key',
+  );
+  static const Key writeDataCheckbox = ValueKey(
+    'Admin Scope Write Data Checkbox Key',
+  );
 }

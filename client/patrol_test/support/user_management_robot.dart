@@ -23,7 +23,9 @@ class UserManagementRobot {
   }
 
   Future<void> showUsersAsFlatList() async {
-    await tester.tapOn(find.byKey(ManageUsersScreenKeys.showFlatListButton));
+    await tester.tapOn(
+      find.byKey(ManageUsersViewToggleKeys.showFlatListButton),
+    );
   }
 
   Future<void> backToManageUsers() async {
@@ -40,9 +42,11 @@ class UserManagementRobot {
     required String name,
     required String email,
   }) async {
-    await tester.tapOn(find.byKey(EditUserScreenKeys.createNewPersonSegment));
-    await tester.typeInto(find.byKey(EditUserScreenKeys.nameField), name);
-    await tester.typeInto(find.byKey(EditUserScreenKeys.emailField), email);
+    await tester.tapOn(
+      find.byKey(UserPersonLinkFieldKeys.createNewPersonSegment),
+    );
+    await tester.typeInto(find.byKey(UserIdentityFieldsKeys.nameField), name);
+    await tester.typeInto(find.byKey(UserIdentityFieldsKeys.emailField), email);
   }
 
   Future<void> fillExistingPerson({
@@ -51,17 +55,17 @@ class UserManagementRobot {
     required String email,
   }) async {
     await tester.tapOn(
-      find.byKey(EditUserScreenKeys.linkExistingPersonSegment),
+      find.byKey(UserPersonLinkFieldKeys.linkExistingPersonSegment),
     );
     await pickPerson(personId: personId, personName: personName);
-    await tester.typeInto(find.byKey(EditUserScreenKeys.emailField), email);
+    await tester.typeInto(find.byKey(UserIdentityFieldsKeys.emailField), email);
   }
 
   Future<void> pickPerson({
     required String personId,
     required String personName,
   }) async {
-    await tester.tapOn(find.byKey(EditUserScreenKeys.personField));
+    await tester.tapOn(find.byKey(UserPersonLinkFieldKeys.personField));
     await tester.typeInto(
       find.descendant(of: _selectionDialog, matching: find.byType(TextField)),
       personName,
@@ -76,27 +80,29 @@ class UserManagementRobot {
   }
 
   Future<void> grantPermission(UserPermission permission) async {
-    await tester.tapOn(find.byKey(EditUserScreenKeys.permission(permission)));
+    await tester.tapOn(find.byKey(EditUserFormKeys.permission(permission)));
   }
 
   Future<void> addServiceScope(
     String serviceId, {
     bool managesUsers = false,
   }) async {
-    final scope = find.byKey(EditUserScreenKeys.scope(serviceId));
+    final scope = find.byKey(EditUserAdminScopeWidgetKeys.scope(serviceId));
 
-    await tester.tapOn(find.byKey(EditUserScreenKeys.addScopeButton));
-    await tester.tapOn(find.byKey(EditUserScreenKeys.servicesTab));
+    await tester.tapOn(find.byKey(EditAdminOnDataWidgetKeys.addScopeButton));
+    await tester.tapOn(find.byKey(EditAdminOnDataWidgetKeys.servicesTab));
     await tester.tapOn(tester.viewableObject(serviceId));
-    await tester.tapOn(find.byKey(EditUserScreenKeys.confirmScopesButton));
+    await tester.tapOn(
+      find.byKey(EditAdminOnDataWidgetKeys.confirmScopesButton),
+    );
 
     if (!managesUsers) return;
 
     await tester.tapOn(scope);
 
     for (final checkbox in [
-      EditUserScreenKeys.scopeWriteDataCheckbox,
-      EditUserScreenKeys.scopeManageUsersCheckbox,
+      AdminScopePermissionCheckboxesKeys.writeDataCheckbox,
+      AdminScopePermissionCheckboxesKeys.manageUsersCheckbox,
     ]) {
       await tester.tapOn(
         find.descendant(of: scope, matching: find.byKey(checkbox)),

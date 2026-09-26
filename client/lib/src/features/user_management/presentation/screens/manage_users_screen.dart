@@ -15,9 +15,6 @@ class ManageUsersScreen extends StatefulWidget {
 
 abstract final class ManageUsersScreenKeys {
   static const Key addUserButton = ValueKey('Add User Button Key');
-  static const Key showFlatListButton = ValueKey(
-    'Show Users As Flat List Button Key',
-  );
 }
 
 class _ManageUsersScreenState extends State<ManageUsersScreen> {

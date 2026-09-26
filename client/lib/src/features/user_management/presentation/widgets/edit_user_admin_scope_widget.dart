@@ -37,7 +37,7 @@ class EditUserAdminScopeWidget extends StatelessWidget {
     return ListTileTheme.merge(
       contentPadding: const EdgeInsets.symmetric(horizontal: 6),
       child: ExpansionTile(
-        key: EditUserScreenKeys.scope(userAdminScope.object.id),
+        key: EditUserAdminScopeWidgetKeys.scope(userAdminScope.object.id),
         title: Row(
           children: [
             Expanded(
@@ -48,10 +48,7 @@ class EditUserAdminScopeWidget extends StatelessWidget {
                   forceShowSecondLine: false,
                   wrapInCard: false,
                   subtitle: serviceScopeLabel != null
-                      ? Text(
-                          serviceScopeLabel,
-                          overflow: TextOverflow.ellipsis,
-                        )
+                      ? Text(serviceScopeLabel, overflow: TextOverflow.ellipsis)
                       : null,
                 ),
               ),
@@ -73,12 +70,13 @@ class EditUserAdminScopeWidget extends StatelessWidget {
             objectLabel: objectLabel,
             onChanged: onChanged,
           ),
-          AdminScopeActionButtons(
-            onDuplicate: onDuplicate,
-            onDelete: onDelete,
-          ),
+          AdminScopeActionButtons(onDuplicate: onDuplicate, onDelete: onDelete),
         ],
       ),
     );
   }
+}
+
+abstract final class EditUserAdminScopeWidgetKeys {
+  static Key scope(String objectId) => ValueKey(('Admin Scope Key', objectId));
 }

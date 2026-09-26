@@ -17,31 +17,6 @@ class EditUserScreen extends StatefulWidget {
 
 abstract final class EditUserScreenKeys {
   static const Key saveButton = ValueKey('Save User Button Key');
-  static const Key linkExistingPersonSegment = ValueKey(
-    'Link Existing Person Segment Key',
-  );
-  static const Key createNewPersonSegment = ValueKey(
-    'Create New Person Segment Key',
-  );
-  static const Key personField = ValueKey('User Person Field Key');
-  static const Key nameField = ValueKey('User Name Field Key');
-  static const Key emailField = ValueKey('User Email Field Key');
-  static const Key addScopeButton = ValueKey('Add Admin Scope Button Key');
-  static const Key servicesTab = ValueKey('Admin Scope Services Tab Key');
-  static const Key confirmScopesButton = ValueKey(
-    'Confirm Admin Scopes Button Key',
-  );
-  static const Key scopeWriteDataCheckbox = ValueKey(
-    'Admin Scope Write Data Checkbox Key',
-  );
-  static const Key scopeManageUsersCheckbox = ValueKey(
-    'Admin Scope Manage Users Checkbox Key',
-  );
-
-  static Key permission(UserPermission permission) =>
-      ValueKey(('User Permission Key', permission));
-
-  static Key scope(String objectId) => ValueKey(('Admin Scope Key', objectId));
 }
 
 class _EditUserScreenState extends State<EditUserScreen> {
@@ -58,12 +33,10 @@ class _EditUserScreenState extends State<EditUserScreen> {
       value: _cubit,
       child: Scaffold(
         appBar: AppBar(
-          title: Text(
-            switch (widget.intent) {
-              CreateUser() => 'إضافة خادم',
-              UpdateUser() => 'تعديل بيانات الخادم',
-            },
-          ),
+          title: Text(switch (widget.intent) {
+            CreateUser() => 'إضافة خادم',
+            UpdateUser() => 'تعديل بيانات الخادم',
+          }),
         ),
         body: BlocConsumer<UserFormCubit, UserFormState>(
           listener: _listenToFormState,
