@@ -18,6 +18,10 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
   cancel-in-progress: true
 
+defaults:
+  run:
+    working-directory: client
+
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -41,11 +45,9 @@ jobs:
           cache-key: "flutter:os:-:channel:-:version:-:arch:"
 
       - name: Install dependencies
-        working-directory: client
         run: flutter pub get
 
       - name: Check formatting
-        working-directory: client
         run: dart format --output=none --set-exit-if-changed .
 
       - name: Restore analyzer cache
@@ -58,7 +60,6 @@ jobs:
             dart-server-${{ runner.os }}-
 
       - name: Analyze code
-        working-directory: client
         run: dart analyze --plugins --fatal-infos
 
       - name: Save analyzer cache
@@ -69,7 +70,6 @@ jobs:
           key: dart-server-${{ runner.os }}-${{ hashFiles('client/.fvmrc', 'client/pubspec.lock') }}-${{ github.sha }}
 
       - name: Run tests with coverage
-        working-directory: client
         run: flutter test --coverage --reporter=expanded --file-reporter "json:test-results.json" --dart-define CI=true test/test_bundle.dart $(scripts/generate_test_bundle.sh)
 
       - name: Upload test results
