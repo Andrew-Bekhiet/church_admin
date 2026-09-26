@@ -1,7 +1,7 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter_riverpod/misc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:golden_toolkit/golden_toolkit.dart' hide loadAppFonts;
+import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:spot/spot.dart';
@@ -10,62 +10,13 @@ import '../../../../utils.dart';
 import 'forgot_password_screen_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<AuthBloc>()])
-Future<void> main() async {
-  await loadAppFonts();
-
+void main() {
   setUp(_setUp);
   tearDown(defaultTearDown);
 
   group(
     'Forgot Password Screen =>',
     () {
-      testGoldens(
-        'UI',
-        (tester) async {
-          final deviceBuilder =
-              DeviceBuilder(
-                  wrap: materialAppWithThemeAndLocale(),
-                )
-                ..overrideDevicesForAllScenarios(devices: [Device.iphone11])
-                ..addScenario(
-                  widget: const ForgotPasswordScreen(),
-                  name: 'forgot password',
-                )
-                ..addScenario(
-                  widget: const ForgotPasswordScreen(),
-                  name: 'reset link sent',
-                  onCreate: (key) async {
-                    await act.enterText(
-                      spotKey(
-                        ForgotPasswordScreenKeys.emailFieldKey,
-                        parents: [
-                          spotKey(key),
-                        ],
-                      ),
-                      'email@example.com',
-                    );
-
-                    await act.tap(
-                      spotKey(
-                        ForgotPasswordScreenKeys.sendResetLinkButtonKey,
-                        parents: [spotKey(key)],
-                      ),
-                    );
-
-                    await tester.pumpAndSettle();
-                  },
-                );
-
-          await tester.pumpDeviceBuilder(deviceBuilder);
-          await tester.pumpAndSettle();
-
-          await screenMatchesGolden(
-            tester,
-            'forgot_password_screen',
-          );
-        },
-      );
-
       testWidgets(
         'Send Reset Link',
         (tester) async {

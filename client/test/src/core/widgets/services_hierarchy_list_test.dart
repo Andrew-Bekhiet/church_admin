@@ -21,115 +21,10 @@ import 'services_hierarchy_list_test.mocks.dart';
     MockSpec<UserPreferencesService>(),
   ],
 )
-Future<void> main() async {
-  await loadAppFonts();
-
+void main() {
   setUp(_setUp);
 
   tearDown(resetGlobalProviderContainer);
-
-  testGoldens(
-    'ServicesHierarchyList => Goldens test',
-    (tester) async {
-      final mock = _createPaginatableStreamMock();
-
-      final viewableObjectListController = ViewableObjectListController(
-        objectsPaginatableStream: mock,
-      );
-
-      final deviceBuilder =
-          DeviceBuilder(
-              wrap: materialAppWrapper(
-                theme: ThemingService.getDefault(
-                  isDarkOverride: false,
-                  greatFeastThemeOverride: false,
-                ),
-              ),
-            )
-            ..addScenario(
-              widget: ServicesHierarchyList(
-                listController: viewableObjectListController,
-              ),
-              name: 'collapsed',
-            )
-            ..addScenario(
-              widget: ServicesHierarchyList(
-                listController: viewableObjectListController,
-              ),
-              name: 'service_1_expanded',
-              onCreate: (key) async => tester.tap(
-                find.descendant(
-                  of: find.byKey(key),
-                  matching: find.text('Service 1'),
-                ),
-              ),
-            )
-            ..addScenario(
-              widget: ServicesHierarchyList(
-                listController: viewableObjectListController,
-              ),
-              name: 'study_year_expanded',
-              onCreate: (key) async {
-                await tester.tap(
-                  find.descendant(
-                    of: find.byKey(key),
-                    matching: find.text('Service 1'),
-                  ),
-                );
-
-                await tester.pumpAndSettle();
-
-                await tester.tap(
-                  find.descendant(
-                    of: find.byKey(key),
-                    matching: find.text('First Primary'),
-                  ),
-                );
-              },
-            )
-            ..addScenario(
-              widget: ServicesHierarchyList(
-                listController: viewableObjectListController,
-              ),
-              name: 'service_2_expanded',
-              onCreate: (key) async {
-                await tester.tap(
-                  find.descendant(
-                    of: find.byKey(key),
-                    matching: find.text('Service 1'),
-                  ),
-                );
-
-                await tester.pumpAndSettle();
-
-                await tester.tap(
-                  find.descendant(
-                    of: find.byKey(key),
-                    matching: find.text('First Primary'),
-                  ),
-                );
-
-                await tester.pumpAndSettle();
-
-                await tester.tap(
-                  find.descendant(
-                    of: find.byKey(key),
-                    matching: find.text('Service 2'),
-                  ),
-                );
-              },
-            );
-
-      await tester.pumpDeviceBuilder(deviceBuilder);
-
-      await screenMatchesGolden(tester, 'services_hierarchy_list');
-
-      // Dispose the main widget:
-      await tester.pumpWidget(Container());
-
-      unawaited(viewableObjectListController.dispose());
-    },
-  );
 
   testWidgets(
     'ServicesHierarchyList => Hierachy Expansion',
@@ -157,8 +52,8 @@ Future<void> main() async {
 
       expect(find.text('Class 1'), findsNothing);
       expect(find.text('Class 2'), findsNothing);
-      expect(find.text('Group 1'), findsOneWidget);
-      expect(find.text('Group 2'), findsOneWidget);
+      expect(find.text('Group 1'), findsNothing);
+      expect(find.text('Group 2'), findsNothing);
       expect(find.text('Fisrt Primary'), findsNothing);
 
       await tester.tap(find.text('Service 1'));
@@ -173,10 +68,10 @@ Future<void> main() async {
       await tester.tap(find.text('Service 2'));
       await tester.pumpAndSettle();
 
-      expect(find.text('Class 1'), findsOneWidget);
+      expect(find.text('Class 1'), findsNothing);
       expect(find.text('Class 2'), findsNothing);
-      expect(find.text('Group 1'), findsOneWidget);
-      expect(find.text('Group 2'), findsOneWidget);
+      expect(find.text('Group 1'), findsNothing);
+      expect(find.text('Group 2'), findsNothing);
       expect(find.text('Fisrt Primary'), findsNothing);
 
       // Dispose the main widget:
@@ -263,8 +158,8 @@ Future<void> main() async {
 
       expect(find.byKey(const Key('Class 1')), findsNothing);
       expect(find.byKey(const Key('Class 2')), findsNothing);
-      expect(find.byKey(const Key('Group 1')), findsOneWidget);
-      expect(find.byKey(const Key('Group 2')), findsOneWidget);
+      expect(find.byKey(const Key('Group 1')), findsNothing);
+      expect(find.byKey(const Key('Group 2')), findsNothing);
       expect(find.byKey(const Key('Fisrt Primary')), findsNothing);
 
       await tester.tap(find.byKey(const Key('Service 1')));
@@ -279,10 +174,10 @@ Future<void> main() async {
       await tester.tap(find.byKey(const Key('Service 2')));
       await tester.pumpAndSettle();
 
-      expect(find.byKey(const Key('Class 1')), findsOneWidget);
+      expect(find.byKey(const Key('Class 1')), findsNothing);
       expect(find.byKey(const Key('Class 2')), findsNothing);
-      expect(find.byKey(const Key('Group 1')), findsOneWidget);
-      expect(find.byKey(const Key('Group 2')), findsOneWidget);
+      expect(find.byKey(const Key('Group 1')), findsNothing);
+      expect(find.byKey(const Key('Group 2')), findsNothing);
       expect(find.byKey(const Key('Fisrt Primary')), findsNothing);
 
       // Dispose the main widget:

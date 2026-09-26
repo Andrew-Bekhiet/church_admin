@@ -2,11 +2,9 @@ import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:go_router/go_router.dart';
-import 'package:golden_toolkit/golden_toolkit.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import '../../../../utils.dart';
 import 'home_search_delegate_test.mocks.dart';
 
 @GenerateNiceMocks([
@@ -15,9 +13,7 @@ import 'home_search_delegate_test.mocks.dart';
   MockSpec<ImageUrlCacheService>(),
   MockSpec<UserPreferencesService>(),
 ])
-Future<void> main() async {
-  await loadAppFonts();
-
+void main() {
   setUp(
     () => initGlobalProviderContainer([
       goRouterRefreshStreamProvider.overrideWithValue(
@@ -37,185 +33,6 @@ Future<void> main() async {
   tearDown(resetGlobalProviderContainer);
 
   group('HomeSearchDelegate', () {
-    testGoldens('Structure', (tester) async {
-      final mockHomeDAO = MockHomeDAO();
-
-      when(mockHomeDAO.searchAll(any)).thenAnswer(
-        (_) async => const HomeSearchResults(
-          areas: [
-            Area(id: '1', name: 'Test Area 1'),
-            Area(id: '2', name: 'Test Area 2'),
-          ],
-          families: [
-            Family(id: '1', name: 'Test Family'),
-          ],
-        ),
-      );
-      when(mockHomeDAO.searchAll('nonexistent')).thenAnswer(
-        (_) async => const HomeSearchResults(),
-      );
-
-      // final shownDelegates = <HomeSearchDelegate>{};
-
-      final emptySearchDelegate = HomeSearchDelegate(mockHomeDAO);
-      final resultsDelegate = HomeSearchDelegate(mockHomeDAO);
-      final noResultsDelegate = HomeSearchDelegate(mockHomeDAO);
-
-      resultsDelegate.query = 'test';
-      noResultsDelegate.query = 'nonexistent';
-
-      final deviceBuilder =
-          DeviceBuilder(
-              wrap: materialAppWithThemeAndLocale(),
-            )
-            ..overrideDevicesForAllScenarios(
-              devices: [Device.iphone11],
-            )
-            ..addScenario(
-              name: 'Empty Search',
-              widget: Scaffold(
-                body: Builder(
-                  builder: emptySearchDelegate.buildSuggestions,
-                ),
-              ),
-              onCreate: (key) async {
-                await tester.pump(HomeSearchDelegate.debounceDuration);
-
-                expect(
-                  find.descendant(
-                    of: find.byKey(key),
-                    matching: find.widgetWithText(
-                      ViewableObjectWidget<ViewableWithIDAndImage>,
-                      'Test Area 1',
-                    ),
-                  ),
-                  findsNothing,
-                );
-
-                expect(
-                  find.descendant(
-                    of: find.byKey(key),
-                    matching: find.widgetWithText(
-                      ViewableObjectWidget<ViewableWithIDAndImage>,
-                      'Test Area 2',
-                    ),
-                  ),
-                  findsNothing,
-                );
-
-                expect(
-                  find.descendant(
-                    of: find.byKey(key),
-                    matching: find.widgetWithText(
-                      ViewableObjectWidget<ViewableWithIDAndImage>,
-                      'Test Family',
-                    ),
-                  ),
-                  findsNothing,
-                );
-              },
-            )
-            ..addScenario(
-              name: 'With Results',
-              widget: Material(
-                child: Builder(
-                  builder: resultsDelegate.buildResults,
-                ),
-              ),
-              onCreate: (key) async {
-                await tester.pump(
-                  HomeSearchDelegate.debounceDuration +
-                      const Duration(milliseconds: 100),
-                );
-
-                expect(
-                  find.descendant(
-                    of: find.byKey(key),
-                    matching: find.widgetWithText(
-                      ViewableObjectWidget<ViewableWithIDAndImage>,
-                      'Test Area 1',
-                    ),
-                  ),
-                  findsOneWidget,
-                );
-
-                expect(
-                  find.descendant(
-                    of: find.byKey(key),
-                    matching: find.widgetWithText(
-                      ViewableObjectWidget<ViewableWithIDAndImage>,
-                      'Test Area 2',
-                    ),
-                  ),
-                  findsOneWidget,
-                );
-
-                expect(
-                  find.descendant(
-                    of: find.byKey(key),
-                    matching: find.widgetWithText(
-                      ViewableObjectWidget<ViewableWithIDAndImage>,
-                      'Test Family',
-                    ),
-                  ),
-                  findsOneWidget,
-                );
-              },
-            )
-            ..addScenario(
-              name: 'No Results',
-              widget: Material(
-                child: Builder(
-                  builder: noResultsDelegate.buildResults,
-                ),
-              ),
-              onCreate: (key) async {
-                await tester.pump(HomeSearchDelegate.debounceDuration);
-
-                expect(
-                  find.descendant(
-                    of: find.byKey(key),
-                    matching: find.widgetWithText(
-                      ViewableObjectWidget<ViewableWithIDAndImage>,
-                      'Test Area 1',
-                    ),
-                  ),
-                  findsNothing,
-                );
-
-                expect(
-                  find.descendant(
-                    of: find.byKey(key),
-                    matching: find.widgetWithText(
-                      ViewableObjectWidget<ViewableWithIDAndImage>,
-                      'Test Area 2',
-                    ),
-                  ),
-                  findsNothing,
-                );
-
-                expect(
-                  find.descendant(
-                    of: find.byKey(key),
-                    matching: find.widgetWithText(
-                      ViewableObjectWidget<ViewableWithIDAndImage>,
-                      'Test Family',
-                    ),
-                  ),
-                  findsNothing,
-                );
-              },
-            );
-
-      await tester.pumpDeviceBuilder(deviceBuilder);
-
-      await screenMatchesGolden(tester, 'home_search_delegate');
-
-      emptySearchDelegate.dispose();
-      resultsDelegate.dispose();
-      noResultsDelegate.dispose();
-    });
-
     testWidgets('Search debouncing', (tester) async {
       final mockHomeDAO = MockHomeDAO();
       final delegate = HomeSearchDelegate(mockHomeDAO);

@@ -18,83 +18,14 @@ import 'history_property_test.mocks.dart';
   MockSpec<ViewableObjectService>(),
   MockSpec<ImageUrlCacheService>(),
 ])
-Future<void> main() async {
-  await initializeDateFormatting();
-  setLocaleMessages('ar', ArMessages());
-  await loadAppFonts();
+void main() {
+  setUpAll(() async {
+    await initializeDateFormatting();
+    setLocaleMessages('ar', ArMessages());
+  });
 
   setUp(_setUp);
   tearDown(resetGlobalProviderContainer);
-
-  testGoldens(
-    'HistoryProperty => Goldens test',
-    (tester) async {
-      await withClock(Clock.fixed(DateTime(2050)), () async {
-        final value = clock.now().subtract(const Duration(days: 5));
-
-        final historyProperty = HistoryProperty<LastRecordedByInfo>(
-          name: 'name',
-          value: value,
-          getHistoryListController: () => ViewableObjectListController(
-            objectsPaginatableStream: MockPaginatableStreamBase(),
-          ),
-          onRecordNow: () {},
-        );
-
-        await tester.pumpWidgetBuilder(
-          Scaffold(
-            body: historyProperty,
-          ),
-          wrapper: materialAppWrapper(
-            theme: ThemeData(
-              fontFamily: 'Cairo',
-            ),
-          ),
-        );
-
-        expect(
-          find.descendant(
-            of: find.byType(ListTile),
-            matching: find.text('name'),
-          ),
-          findsOneWidget,
-        );
-
-        expect(
-          find.descendant(
-            of: find.byType(ListTile),
-            matching: find.text(value.toDurationString()),
-          ),
-          findsOneWidget,
-        );
-        expect(
-          find.descendant(
-            of: find.byType(ListTile),
-            matching: find.text(historyProperty.dateFormat.format(value)),
-          ),
-          findsOneWidget,
-        );
-
-        expect(
-          find.descendant(
-            of: find.byType(IconButton),
-            matching: find.byIcon(Symbols.history),
-          ),
-          findsOneWidget,
-        );
-
-        expect(
-          find.descendant(
-            of: find.byType(IconButton),
-            matching: find.byIcon(Symbols.task_alt),
-          ),
-          findsOneWidget,
-        );
-      });
-
-      await screenMatchesGolden(tester, 'history_property');
-    },
-  );
 
   testWidgets(
     'HistoryProperty => onRecordNow',

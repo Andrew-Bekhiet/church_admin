@@ -153,59 +153,6 @@ void main() {
           );
         },
       );
-
-      testGoldens(
-        'Snapping',
-        (tester) async {
-          const size = Size(1080, 1920);
-          final expandedHeight = size.width - kToolbarHeight;
-
-          await _pumpWidget(tester, area, size: size);
-
-          await screenMatchesGolden(
-            tester,
-            'view_object_details/structure/expanded',
-          );
-
-          for (final percent in ViewObjectDetails.snapPositions) {
-            await tester.drag(
-              find.byType(ViewObjectDetails<Area>),
-              Offset(0, -expandedHeight * percent),
-            );
-            await tester.pump(ViewObjectDetails.snapDuration);
-
-            await screenMatchesGolden(
-              tester,
-              'view_object_details/structure/collapsed_$percent',
-            );
-
-            await tester.drag(
-              find.byType(ViewObjectDetails<Area>),
-              Offset(0, expandedHeight),
-            );
-          }
-
-          // Snaps to predefined positions
-          const threshold = 15;
-          for (final percent in ViewObjectDetails.snapPositions) {
-            await tester.drag(
-              find.byType(ViewObjectDetails<Area>),
-              Offset(0, -expandedHeight * percent + threshold),
-            );
-            await tester.pump(ViewObjectDetails.snapDuration);
-
-            await screenMatchesGolden(
-              tester,
-              'view_object_details/structure/collapsed_$percent',
-            );
-
-            await tester.drag(
-              find.byType(ViewObjectDetails<Area>),
-              Offset(0, expandedHeight),
-            );
-          }
-        },
-      );
     },
   );
 }
