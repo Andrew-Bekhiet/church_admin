@@ -41,10 +41,14 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
         toolbarHeight: size.width,
         leading: widget.next != null ? const BackButton() : null,
         actions: [
-          TextButton(
-            key: AuthenticateScreenKeys.signOutButtonKey,
-            onPressed: _confirmSignOut,
-            child: const Text('تسجيل الخروج'),
+          Align(
+            alignment: AlignmentDirectional.topEnd,
+            child: TextButton.icon(
+              key: AuthenticateScreenKeys.signOutButtonKey,
+              onPressed: _confirmSignOut,
+              icon: const Icon(Symbols.logout),
+              label: const Text('تسجيل الخروج'),
+            ),
           ),
         ],
         flexibleSpace: FlexibleSpaceBar(
@@ -164,12 +168,14 @@ class _AuthenticateScreenState extends State<AuthenticateScreen> {
   }
 
   Future<void> _confirmSignOut() async {
-    final confirmed = await showDialog<bool>(
-      context: context,
-      builder: (context) => const SignOutConfirmationDialog(),
-    );
+    final confirmed =
+        await showDialog<bool>(
+          context: context,
+          builder: (context) => const SignOutConfirmationDialog(),
+        ) ??
+        false;
 
-    if (confirmed != true || !mounted) return;
+    if (!confirmed || !mounted) return;
 
     AuthBloc.I.add(const SignOut());
   }
