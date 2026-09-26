@@ -1,5 +1,4 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/src/features/data_export/application/export_operations_storage.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:device_info_plus/device_info_plus.dart';
@@ -166,7 +165,6 @@ final authBlocProvider = Provider<AuthBloc>((ref) {
         .connectivityStream,
     functionsService: ref.watch(functionsServiceProvider),
     featureFlagsRepository: ref.watch(featureFlagsRepoProvider),
-    userDataWiper: ref.watch(userDataWiperProvider),
   );
 
   ref.onDispose(authBloc.close);
@@ -350,6 +348,8 @@ final baseCacheManagerProvider = Provider<BaseCacheManager>((ref) {
     ),
   );
 
+  UserDataWiper.I.register(cacheManager.emptyCache);
+
   ref.onDispose(cacheManager.dispose);
 
   return cacheManager;
@@ -440,15 +440,17 @@ final authStorageProvider = Provider<AuthStorage>(
 );
 
 final Provider<UserDataWiper> userDataWiperProvider = Provider<UserDataWiper>(
-  (ref) => LocalUserDataWiper(
-    authStorage: ref.watch(authStorageProvider),
-    imageCacheManager: ref.watch(baseCacheManagerProvider),
-    exportOperationsStorage: ExportOperationsStorage.I,
-    notificationsStorage: () => ref.read(notificationsStorageProvider),
-    existingLocalAuthService: () => ref.exists(localAuthServiceProvider)
-        ? ref.read(localAuthServiceProvider)
-        : null,
-  ),
+  (ref) {
+    final wiper = UserDataWiper(
+      signedOutSignal: ref.watch(authRepositoryProvider).userChanges,
+    );
+
+    wiper.register(SyncKVStore.clearAllLoaded);
+
+    ref.onDispose(wiper.dispose);
+
+    return wiper;
+  },
 );
 
 final currentPlatformServiceProvider = Provider<CurrentPlatformService>(

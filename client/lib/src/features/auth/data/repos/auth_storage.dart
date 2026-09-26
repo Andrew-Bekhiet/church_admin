@@ -12,7 +12,9 @@ interface class AuthStorage {
 
   final FlutterSecureStorage _secureStorage;
 
-  AuthStorage({required this._secureStorage});
+  AuthStorage({required this._secureStorage}) {
+    UserDataWiper.I.register(clearAll);
+  }
 
   Future<AuthUser?> getAuthDataFromCache() async {
     final authDataJson = await _secureStorage.read(key: authUserKey);

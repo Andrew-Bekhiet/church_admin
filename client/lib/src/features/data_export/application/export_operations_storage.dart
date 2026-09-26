@@ -21,10 +21,12 @@ class ExportOperationsStorage {
   final Dio _dioClient;
   final FileSystem _fileSystem;
 
-  const ExportOperationsStorage({
+  ExportOperationsStorage({
     required this._dioClient,
     required this._fileSystem,
-  });
+  }) {
+    UserDataWiper.I.register(deleteSavedFiles);
+  }
 
   Future<DataExportFile> saveFile({
     required String downloadUrl,

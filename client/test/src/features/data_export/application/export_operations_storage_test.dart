@@ -8,6 +8,8 @@ import 'package:path/path.dart' as p;
 import 'package:path_provider_platform_interface/path_provider_platform_interface.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 
+import '../../../fakes/fake_auth_repository.dart';
+
 void main() {
   setUp(() {
     registerFallbackValue(Uri.base);
@@ -17,9 +19,16 @@ void main() {
     ).thenAnswer((_) async => '/');
 
     PathProviderPlatform.instance = mockPathProviderPlatform;
+
+    initGlobalProviderContainer([
+      authRepositoryProvider.overrideWithValue(FakeAuthRepository()),
+    ]);
   });
 
-  tearDown(() => reset(PathProviderPlatform.instance));
+  tearDown(() {
+    reset(PathProviderPlatform.instance);
+    resetGlobalProviderContainer();
+  });
 
   test('saveFile downloads the file', () async {
     final mockDio = MockDio();

@@ -38,6 +38,7 @@ class LocalAuthService with WidgetsBindingObserver {
   }) : _notificationsService = notificationService ?? NotificationsService.I,
        _currentPlatformService =
            currentPlatformService ?? CurrentPlatformService.I {
+    UserDataWiper.I.register(() async => revokeAuthForAllPaths());
     scheduleReauth();
     didChangeAppLifecycleState(
       WidgetsBinding.instance.lifecycleState ?? AppLifecycleState.resumed,
@@ -53,6 +54,7 @@ class LocalAuthService with WidgetsBindingObserver {
   }) : _notificationsService = notificationService ?? NotificationsService.I,
        _currentPlatformService =
            currentPlatformService ?? CurrentPlatformService.I {
+    UserDataWiper.I.register(() async => revokeAuthForAllPaths());
     didChangeAppLifecycleState(
       WidgetsBinding.instance.lifecycleState ?? AppLifecycleState.resumed,
     );

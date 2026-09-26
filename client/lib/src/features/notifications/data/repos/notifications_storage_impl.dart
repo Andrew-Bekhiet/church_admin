@@ -3,7 +3,9 @@ import 'package:church_admin/church_admin.dart';
 class NotificationsStorageImpl implements NotificationsStorage {
   final KVStore<Notification> _store;
 
-  NotificationsStorageImpl(this._store);
+  NotificationsStorageImpl(this._store) {
+    UserDataWiper.I.register(clear);
+  }
 
   @override
   Future<void> writeNotification(Notification notification) async {

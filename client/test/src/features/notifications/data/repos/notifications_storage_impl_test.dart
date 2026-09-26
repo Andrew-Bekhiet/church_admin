@@ -3,10 +3,19 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
+import '../../../../fakes/fake_auth_repository.dart';
 import 'notifications_storage_impl_test.mocks.dart';
 
 @GenerateNiceMocks([MockSpec<KVStore>()])
 void main() {
+  setUp(() {
+    initGlobalProviderContainer([
+      authRepositoryProvider.overrideWithValue(FakeAuthRepository()),
+    ]);
+  });
+
+  tearDown(resetGlobalProviderContainer);
+
   group(
     'NotificationsStorageImpl =>',
     () {

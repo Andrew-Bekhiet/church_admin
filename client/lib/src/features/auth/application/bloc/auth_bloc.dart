@@ -20,7 +20,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   final Stream<bool> _connectivityStream;
   final FunctionsService _functionsService;
   final FeatureFlagsRepository _featureFlagsRepository;
-  final UserDataWiper _userDataWiper;
 
   Timer? _refreshTokenTimer;
   Future<void> _localDataUpdates = Future.value();
@@ -73,7 +72,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     required this._connectivityStream,
     required this._functionsService,
     required this._featureFlagsRepository,
-    required this._userDataWiper,
     bool loadCachedUser = true,
   }) : super(const AuthInitial()) {
     on<ListenToSubscriptions>(
@@ -142,13 +140,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
           .distinct()
           .doOnData((data) {
             final (authUser, userData) = data;
-            final sessionEnded =
-                authUser == null && state.unwrapped is AuthAuthenticated;
+
+            if (authUser == null) return;
 
             unawaited(
               _enqueueLocalDataUpdate(() async {
-                if (sessionEnded) return _userDataWiper.wipeUserData();
-
                 await _authStorage.writeAuthDataToCache(authUser);
                 await _authStorage.writeUserToCache(userData);
               }),
@@ -192,7 +188,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     _refreshTokenTimer?.cancel();
     _refreshTokenTimer = Timer(
       _getTokenExpiry(authUser).difference(DateTime.now()),
-      () => unawaited(_verifySession()),
+      _verifySession,
     );
   }
 
@@ -212,8 +208,10 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       switch (e) {
         case SessionRevokedException():
           add(const SignOut());
+
         case AuthNetworkException() || StateError():
           return;
+
         default:
           await LoggingService.I.exception(
             LogRecord(error: e, stackTrace: stackTrace),
@@ -320,7 +318,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(AuthLoading(previousState: state));
 
       await _authRepository.signOut();
-      await _enqueueLocalDataUpdate(_userDataWiper.wipeUserData);
 
       emit(const AuthUnauthenticated());
     } catch (e, stackTrace) {
