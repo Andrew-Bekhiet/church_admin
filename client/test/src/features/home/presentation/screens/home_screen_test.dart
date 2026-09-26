@@ -13,6 +13,8 @@ import '../../../../utils.dart';
 
 class _MockAuthBloc extends Mock implements AuthBloc {}
 
+class _MockAuthRepository extends Mock implements AuthRepository {}
+
 class _MockDatabaseService extends Mock implements DatabaseService {}
 
 class _MockPersonsDAO extends Mock implements PersonsDAO {}
@@ -92,8 +94,14 @@ void main() {
     ).thenAnswer((_) => const Stream.empty());
     when(localAuthService.canCheckBiometrics).thenAnswer((_) async => false);
 
+    final authRepository = _MockAuthRepository();
+    when(
+      () => authRepository.userChanges,
+    ).thenAnswer((_) => const Stream.empty());
+
     initGlobalProviderContainer([
       authBlocProvider.overrideWithValue(authBloc),
+      authRepositoryProvider.overrideWithValue(authRepository),
       databaseServiceProvider.overrideWithValue(databaseService),
       homeDailyDataRepositoryProvider.overrideWithValue(
         homeDailyDataRepository,
@@ -115,6 +123,18 @@ void main() {
   });
 
   tearDown(defaultTearDown);
+
+  testWidgets('unlocked home screen has no authentication overlay', (
+    tester,
+  ) async {
+    await tester.pumpWidget(const MaterialApp(home: HomeScreen()));
+    await tester.pump();
+
+    expect(find.byType(BiometricsAuthScreen), findsNothing);
+    await tester.pumpWidget(const SizedBox.shrink());
+    resetGlobalProviderContainer();
+    await tester.pump();
+  });
 
   testWidgets('unmounting the home screen leaves the shared home bloc open', (
     tester,
@@ -160,7 +180,7 @@ void main() {
     await tester.pump();
 
     expect(
-      find.byType(AuthenticateScreen, skipOffstage: false),
+      find.byType(BiometricsAuthScreen, skipOffstage: false),
       findsOneWidget,
     );
 
@@ -170,7 +190,10 @@ void main() {
     await tester.pump(const Duration(seconds: 1));
     await tester.pump();
 
-    expect(find.byType(AuthenticateScreen, skipOffstage: false), findsNothing);
+    expect(
+      find.byType(BiometricsAuthScreen, skipOffstage: false),
+      findsNothing,
+    );
 
     await tester.pumpWidget(const SizedBox.shrink());
     resetGlobalProviderContainer();

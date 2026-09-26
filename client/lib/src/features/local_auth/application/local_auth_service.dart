@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
+import 'package:clock/clock.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -17,26 +18,38 @@ class LocalAuthService with WidgetsBindingObserver {
   final LocalAuthentication _localAuthPlugin;
 
   final NotificationsService _notificationsService;
+  final AuthRepository authRepository;
+  final Clock _clock;
   bool _shouldAuthenticate = false;
 
   final Set<String> _authenticatedPaths = {};
 
-  Timer? _timer;
+  DateTime? _lastActiveAt;
   Completer<bool>? _localAuthCompleter;
   final StreamController<void> _refreshUI = StreamController.broadcast()
     ..add(null);
 
-  bool get shouldAuthenticate => _shouldAuthenticate;
+  bool get shouldAuthenticate {
+    if (_shouldAuthenticate) return true;
+    if (_lastActiveAt case final lastActiveAt?) {
+      return _clock.now().difference(lastActiveAt) >= timeToReauth;
+    }
+
+    return false;
+  }
 
   Stream<void> get refreshUIStream => _refreshUI.stream;
 
   LocalAuthService({
     required this._localAuthPlugin,
     required UserDataWiper userDataWiper,
+    required this.authRepository,
     this.timeToReauth = const Duration(seconds: 30),
     CurrentPlatformService? currentPlatformService,
     NotificationsService? notificationService,
+    Clock? clock,
   }) : _notificationsService = notificationService ?? NotificationsService.I,
+       _clock = clock ?? const Clock(),
        _currentPlatformService =
            currentPlatformService ?? CurrentPlatformService.I {
     userDataWiper.register(revokeAuthForAllPaths);
@@ -50,10 +63,13 @@ class LocalAuthService with WidgetsBindingObserver {
   LocalAuthService.noInitialAuth({
     required this._localAuthPlugin,
     required UserDataWiper userDataWiper,
+    required this.authRepository,
     this.timeToReauth = const Duration(seconds: 30),
     CurrentPlatformService? currentPlatformService,
     NotificationsService? notificationService,
+    Clock? clock,
   }) : _notificationsService = notificationService ?? NotificationsService.I,
+       _clock = clock ?? const Clock(),
        _currentPlatformService =
            currentPlatformService ?? CurrentPlatformService.I {
     userDataWiper.register(revokeAuthForAllPaths);
@@ -70,16 +86,17 @@ class LocalAuthService with WidgetsBindingObserver {
 
   void revokeAuthForAllPaths() => _authenticatedPaths.clear();
 
-  Timer _createTimer() => Timer(timeToReauth, scheduleReauth);
-
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (WidgetsBinding.instance.lifecycleState == AppLifecycleState.resumed) {
-      if (shouldAuthenticate) _refreshUI.add(null);
-      _timer?.cancel();
-      _timer = null;
-    } else if (AuthBloc.I.isSignedIn && !shouldAuthenticate) {
-      _timer ??= _createTimer();
+    if (state == AppLifecycleState.resumed) {
+      final needsReauth = shouldAuthenticate;
+      _lastActiveAt = null;
+      if (needsReauth) {
+        scheduleReauth();
+        _refreshUI.add(null);
+      }
+    } else if (authRepository.isSignedIn && !shouldAuthenticate) {
+      _lastActiveAt ??= _clock.now();
     }
   }
 
@@ -95,6 +112,7 @@ class LocalAuthService with WidgetsBindingObserver {
 
   void resetAuthState({String? path}) {
     _shouldAuthenticate = false;
+    _lastActiveAt = null;
     if (path != null) _authenticatedPaths.add(path);
 
     _refreshUI.add(null);
@@ -104,8 +122,6 @@ class LocalAuthService with WidgetsBindingObserver {
     if (notificationsService.isPaused) {
       notificationsService.resumeListeners();
     }
-    _timer?.cancel();
-    _timer = null;
   }
 
   Future<bool> canCheckBiometrics() async {
@@ -146,26 +162,8 @@ class LocalAuthService with WidgetsBindingObserver {
         );
   }
 
-  Future<bool> verifyPassword({
-    required String email,
-    required String password,
-    String? storedPasswordHash,
-  }) async {
-    final keyBytes = await EncryptionService.I.deriveKey(
-      password: password,
-      salt: email,
-    );
-
-    return EncryptionService.I.verifyPassword(
-      passwordToVerify: password,
-      keyBytes: keyBytes,
-      storedPasswordHash: storedPasswordHash,
-    );
-  }
-
   Future<void> dispose() async {
     WidgetsBinding.instance.removeObserver(this);
-    _timer?.cancel();
     await _refreshUI.close();
   }
 }

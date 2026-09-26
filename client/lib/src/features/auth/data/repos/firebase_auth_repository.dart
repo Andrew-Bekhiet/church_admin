@@ -23,6 +23,12 @@ class FirebaseAuthRepository implements AuthRepository {
   final firebase_auth.FirebaseAuth _auth;
 
   @override
+  bool get isSignedIn => _auth.currentUser != null;
+
+  @override
+  String? get currentUserEmail => _auth.currentUser?.email;
+
+  @override
   Stream<AuthUser?> get userChanges {
     return _auth.userChanges().asyncMap((user) async {
       if (user == null) return null;

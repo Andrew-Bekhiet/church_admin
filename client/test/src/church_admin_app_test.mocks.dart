@@ -266,9 +266,15 @@ class _FakeDuration_40 extends _i1.SmartFake implements Duration {
     : super(parent, parentInvocation);
 }
 
-class _FakeValueStream_41<T> extends _i1.SmartFake
+class _FakeAuthRepository_41 extends _i1.SmartFake
+    implements _i4.AuthRepository {
+  _FakeAuthRepository_41(Object parent, Invocation parentInvocation)
+    : super(parent, parentInvocation);
+}
+
+class _FakeValueStream_42<T> extends _i1.SmartFake
     implements _i6.ValueStream<T> {
-  _FakeValueStream_41(Object parent, Invocation parentInvocation)
+  _FakeValueStream_42(Object parent, Invocation parentInvocation)
     : super(parent, parentInvocation);
 }
 
@@ -2038,6 +2044,21 @@ class MockLocalAuthService extends _i1.Mock implements _i4.LocalAuthService {
           as Duration);
 
   @override
+  _i4.AuthRepository get authRepository =>
+      (super.noSuchMethod(
+            Invocation.getter(#authRepository),
+            returnValue: _FakeAuthRepository_41(
+              this,
+              Invocation.getter(#authRepository),
+            ),
+            returnValueForMissingStub: _FakeAuthRepository_41(
+              this,
+              Invocation.getter(#authRepository),
+            ),
+          )
+          as _i4.AuthRepository);
+
+  @override
   bool get shouldAuthenticate =>
       (super.noSuchMethod(
             Invocation.getter(#shouldAuthenticate),
@@ -2108,23 +2129,6 @@ class MockLocalAuthService extends _i1.Mock implements _i4.LocalAuthService {
   _i8.Future<bool> authenticate() =>
       (super.noSuchMethod(
             Invocation.method(#authenticate, []),
-            returnValue: _i8.Future<bool>.value(false),
-            returnValueForMissingStub: _i8.Future<bool>.value(false),
-          )
-          as _i8.Future<bool>);
-
-  @override
-  _i8.Future<bool> verifyPassword({
-    required String? email,
-    required String? password,
-    String? storedPasswordHash,
-  }) =>
-      (super.noSuchMethod(
-            Invocation.method(#verifyPassword, [], {
-              #email: email,
-              #password: password,
-              #storedPasswordHash: storedPasswordHash,
-            }),
             returnValue: _i8.Future<bool>.value(false),
             returnValueForMissingStub: _i8.Future<bool>.value(false),
           )
@@ -2282,11 +2286,11 @@ class MockConnectivityService extends _i1.Mock
   _i6.ValueStream<bool> get connectivityStream =>
       (super.noSuchMethod(
             Invocation.getter(#connectivityStream),
-            returnValue: _FakeValueStream_41<bool>(
+            returnValue: _FakeValueStream_42<bool>(
               this,
               Invocation.getter(#connectivityStream),
             ),
-            returnValueForMissingStub: _FakeValueStream_41<bool>(
+            returnValueForMissingStub: _FakeValueStream_42<bool>(
               this,
               Invocation.getter(#connectivityStream),
             ),

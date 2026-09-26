@@ -1,6 +1,10 @@
 import 'package:church_admin/church_admin.dart';
 
 abstract interface class AuthRepository {
+  bool get isSignedIn;
+
+  String? get currentUserEmail;
+
   Stream<AuthUser?> get userChanges;
 
   Future<void> signInWithEmailPassword({

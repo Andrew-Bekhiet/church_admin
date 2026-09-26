@@ -15,7 +15,11 @@
       "args": [
         "flutter",
         "test",
-        "--coverage"
+        "--coverage",
+        "--dart-define",
+        "CI=true",
+        "test/test_bundle.dart",
+        "$(scripts/generate_test_bundle.sh)"
       ],
       "problemMatcher": []
     },
@@ -30,12 +34,7 @@
         "cwd": "${workspaceFolder}/client"
       },
       "command": "fvm",
-      "args": [
-        "dart",
-        "run",
-        "build_runner",
-        "build"
-      ],
+      "args": ["dart", "run", "build_runner", "build"],
       "problemMatcher": []
     },
     {

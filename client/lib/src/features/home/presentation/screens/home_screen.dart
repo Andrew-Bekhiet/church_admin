@@ -33,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return OverlayPortal(
       controller: _authOverlayController,
-      overlayChildBuilder: (context) => const AuthenticateScreen(),
+      overlayChildBuilder: (context) => const BiometricsAuthScreen(),
       child: Scaffold(
         drawer: HomeDrawer(homeBloc: homeBloc),
         appBar: HomeAppBar(homeBloc: homeBloc),
@@ -56,9 +56,15 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void _listenToLocalAuth() {
     WidgetsBinding.instance.addPostFrameCallback(
-      (_) => !_authOverlayController.isShowing
-          ? _authOverlayController.show()
-          : null,
+      (_) {
+        if (!mounted ||
+            !LocalAuthService.I.shouldAuthenticate ||
+            _authOverlayController.isShowing) {
+          return;
+        }
+
+        _authOverlayController.show();
+      },
     );
 
     _localAuthListener =

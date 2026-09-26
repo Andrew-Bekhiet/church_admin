@@ -43,7 +43,7 @@ final GoRouter $appRouter = GoRouter(
     $emailVerificationRoute,
     $unapprovedUserRoute,
     $updateUserSpiritDataRoute,
-    $authenticateRoute,
+    $biometricsAuthRoute,
     $forceUpdateRoute,
     $underMaintenanceRoute,
     $outdatedFeatureRoute,
