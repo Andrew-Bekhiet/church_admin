@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class AttendanceLabelledToggle extends StatelessWidget {
-  static const double width = 58;
+  static const double totalWidth = 58;
 
-  static const double _circleSize = 40;
+  static const double _circleSize = 30;
   static const double _labelLineHeight = 1.2;
   static const double _iconSize = 22;
   static const double _outlineWidth = 1.5;
@@ -51,17 +51,17 @@ class AttendanceLabelledToggle extends StatelessWidget {
       enabled: enabled,
       label: semanticsLabel,
       excludeSemantics: true,
-      child: InkWell(
-        onTap: onTap,
-        onLongPress: onLongPress,
-        customBorder: const StadiumBorder(),
-        child: SizedBox(
-          width: width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            spacing: 1,
-            children: [
-              AnimatedContainer(
+      child: SizedBox(
+        width: totalWidth,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          spacing: 1,
+          children: [
+            InkWell(
+              onTap: onTap,
+              onLongPress: onLongPress,
+              customBorder: const CircleBorder(),
+              child: AnimatedContainer(
                 duration: Durations.short4,
                 curve: Curves.easeOut,
                 width: _circleSize,
@@ -90,7 +90,11 @@ class AttendanceLabelledToggle extends StatelessWidget {
                       : const SizedBox.shrink(key: ValueKey(false)),
                 ),
               ),
-              Text(
+            ),
+            GestureDetector(
+              onTap: onTap,
+              onLongPress: onLongPress,
+              child: Text(
                 label,
                 maxLines: 1,
                 overflow: TextOverflow.fade,
@@ -101,8 +105,8 @@ class AttendanceLabelledToggle extends StatelessWidget {
                   fontWeight: selected ? FontWeight.w700 : FontWeight.w500,
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
