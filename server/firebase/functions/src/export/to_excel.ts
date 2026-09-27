@@ -39,14 +39,16 @@ function createSheetFrom(
     mapper.map(row as Record<string, unknown>),
   );
   const rowsWithIdsMovedToTheEnd = moveIdsToEnd(jsonRows);
+  const header = mergeRowsKeys(rowsWithIdsMovedToTheEnd);
 
   const sheet = XLSX.utils.json_to_sheet(rowsWithIdsMovedToTheEnd, {
+    header,
     cellDates: true,
     cellStyles: true,
   });
 
-  adjustColumnsWidths(sheet, rowsWithIdsMovedToTheEnd);
-  addAutoFilterRange(sheet, rowsWithIdsMovedToTheEnd);
+  adjustColumnsWidths(sheet, header, rowsWithIdsMovedToTheEnd);
+  addAutoFilterRange(sheet, header, rowsWithIdsMovedToTheEnd);
 
   return { sheet, sheetName: sanitizeSheetName(table) };
 }
@@ -111,16 +113,32 @@ function moveIdsToEnd(jsonRows: Record<string, unknown>[]) {
   );
 }
 
+function mergeRowsKeys(jsonRows: Record<string, unknown>[]): string[] {
+  return jsonRows.reduce((header, row) => {
+    let insertionIndex = 0;
+
+    for (const key of Object.keys(row)) {
+      const existingIndex = header.indexOf(key);
+
+      if (existingIndex === -1) {
+        header.splice(insertionIndex, 0, key);
+        insertionIndex++;
+        continue;
+      }
+
+      insertionIndex = Math.max(insertionIndex, existingIndex + 1);
+    }
+
+    return header;
+  }, [] as string[]);
+}
+
 function adjustColumnsWidths(
   sheet: XLSX.WorkSheet,
+  header: string[],
   jsonRows: Record<string, unknown>[],
 ) {
-  if (jsonRows.length === 0) return;
-
-  const firstRow = jsonRows[0];
-  if (!firstRow) return;
-
-  sheet["!cols"] = Object.keys(firstRow).map((propertyName) => {
+  sheet["!cols"] = header.map((propertyName) => {
     const maxCharWidth = jsonRows.reduce(
       (max, current) =>
         Math.max(max, String(current[propertyName] ?? "").length),
@@ -135,13 +153,14 @@ function adjustColumnsWidths(
 
 function addAutoFilterRange(
   sheet: XLSX.WorkSheet,
+  header: string[],
   jsonRows: Record<string, unknown>[],
 ) {
   const autoFilterRange = XLSX.utils.encode_range(
     { r: 0, c: 0 },
     {
       r: jsonRows.length,
-      c: Object.keys(jsonRows[0]).length - 1,
+      c: header.length - 1,
     },
   );
   sheet["!autofilter"] = { ref: autoFilterRange };
