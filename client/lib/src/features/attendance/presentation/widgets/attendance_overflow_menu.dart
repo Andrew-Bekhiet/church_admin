@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -32,31 +34,28 @@ class AttendanceOverflowMenu extends StatelessWidget {
       icon: const Icon(Symbols.more_vert),
       itemBuilder: (context) {
         final kodasState = context.read<RecordKodasCubit>().state;
-        final canChangeKodasVisibility = switch (kodasState) {
-          RecordKodasHidden(:final hiddenForDay) => hiddenForDay,
-          RecordKodasLoading() || RecordKodasReady() => true,
-        };
 
         return [
-          if (canChangeKodasVisibility)
-            PopupMenuItem(
-              onTap: () => context.read<RecordKodasCubit>().changeVisibility(
+          PopupMenuItem(
+            onTap: () => unawaited(
+              context.read<RecordKodasCubit>().changeVisibility(
                 visible: !kodasState.isVisible,
               ),
-              child: ListTile(
-                contentPadding: EdgeInsets.zero,
-                leading: const KodasChaliceIcon(),
-                title: const Text('تسجيل التناول'),
-                subtitle: const Text('خانة للتناول بجانب الحضور في هذا اليوم'),
-                trailing: Visibility(
-                  visible: kodasState.isVisible,
-                  maintainAnimation: true,
-                  maintainSize: true,
-                  maintainState: true,
-                  child: const Icon(Symbols.check),
-                ),
+            ),
+            child: ListTile(
+              contentPadding: EdgeInsets.zero,
+              leading: const KodasChaliceIcon(),
+              title: const Text('تسجيل التناول'),
+              subtitle: const Text('خانة للتناول بجانب الحضور في هذا الاجتماع'),
+              trailing: Visibility(
+                visible: kodasState.isVisible,
+                maintainAnimation: true,
+                maintainSize: true,
+                maintainState: true,
+                child: const Icon(Symbols.check),
               ),
             ),
+          ),
           PopupMenuItem(
             onTap: () => onGroupingChanged(grouping.toggled),
             child: ListTile(

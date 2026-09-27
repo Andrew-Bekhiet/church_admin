@@ -4,7 +4,6 @@ export 'application/attendance_presence_filter.dart';
 export 'application/attendance_roster_audience_view.dart';
 export 'application/attendance_sorting.dart';
 export 'application/attendance_undoable_change.dart';
-export 'application/kodas_day_visibility.dart';
 export 'application/record_attendance_cubit.dart';
 export 'application/record_attendance_state.dart';
 export 'application/record_kodas_cubit.dart';

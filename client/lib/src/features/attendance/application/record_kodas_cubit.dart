@@ -8,8 +8,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class RecordKodasCubit extends Cubit<RecordKodasState> {
   final HistoryDAO _historyDao;
+  final MeetingsDAO _meetingsDao;
   final AttendanceUndoPresenter _presenter;
-  final KodasDayVisibility _dayVisibility = KodasDayVisibility.I;
+
+  final Map<String, bool> _savedShowKodasByMeetingId = {};
 
   final LiveRecords<String, KodasRecord> _liveKodasRecords = LiveRecords(
     keyOf: (record) => record.personId,
@@ -20,17 +22,18 @@ class RecordKodasCubit extends Cubit<RecordKodasState> {
   int _sessionId = 0;
   StreamSubscription<List<KodasRecord>>? _kodasSub;
 
-  bool get _meetingShowsKodas => _meeting?.showKodasCheckbox ?? false;
-
-  bool get _isVisible => switch (_day) {
-    final day? => _meetingShowsKodas && _dayVisibility.isKodasVisibleFor(day),
+  bool get _isVisible => switch (_meeting) {
+    final meeting? =>
+      _savedShowKodasByMeetingId[meeting.id] ?? meeting.showKodasCheckbox,
     null => false,
   };
 
   RecordKodasCubit({
     HistoryDAO? historyDao,
+    MeetingsDAO? meetingsDao,
     AttendanceUndoPresenter? presenter,
   }) : _historyDao = historyDao ?? DatabaseService.I.history,
+       _meetingsDao = meetingsDao ?? DatabaseService.I.meetings,
        _presenter = presenter ?? const ScaffoldAttendanceUndoPresenter(),
        super(const RecordKodasHidden());
 
@@ -46,12 +49,28 @@ class RecordKodasCubit extends Cubit<RecordKodasState> {
     if (isNewDay || wasVisible != _isVisible) _restartSession();
   }
 
-  void changeVisibility({required bool visible}) {
-    final day = _day;
-    if (day == null || visible == _isVisible) return;
+  Future<void> changeVisibility({required bool visible}) async {
+    final meeting = _meeting;
+    if (meeting == null || visible == _isVisible) return;
 
-    _dayVisibility.setIsVisibleFor(day, visible: visible);
+    final previous = meeting.copyWith(showKodasCheckbox: _isVisible);
+    _savedShowKodasByMeetingId[meeting.id] = visible;
     _restartSession();
+
+    try {
+      final saved = await _meetingsDao.updateObject(
+        newObject: previous.copyWith(showKodasCheckbox: visible),
+        oldObject: previous,
+      );
+      if (saved == null) throw const KodasChangeRejectedException();
+    } catch (error, stackTrace) {
+      _logError(error, stackTrace);
+      if (isClosed) return;
+
+      _savedShowKodasByMeetingId[meeting.id] = previous.showKodasCheckbox;
+      if (_meeting?.id == meeting.id) _restartSession();
+      _presenter.showError('تعذر تغيير إعداد تسجيل التناول، حاول مرة أخرى');
+    }
   }
 
   Future<void> toggleKodas(Person person) async {
@@ -118,7 +137,7 @@ class RecordKodasCubit extends Cubit<RecordKodasState> {
 
     final day = _day;
     if (day == null || !_isVisible) {
-      emit(RecordKodasHidden(hiddenForDay: _meetingShowsKodas));
+      emit(const RecordKodasHidden());
 
       return;
     }

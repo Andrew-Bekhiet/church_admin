@@ -25,14 +25,11 @@ void main() {
 
     late _Fixture f;
 
+    setUpAll(() => registerFallbackValue(liturgy));
+
     setUp(() {
       f = _Fixture();
       addTearDown(f.dispose);
-      addTearDown(() {
-        for (final day in [sunday, nextSunday]) {
-          KodasDayVisibility.I.setIsVisibleFor(day, visible: true);
-        }
-      });
     });
     tearDown(defaultTearDown);
 
@@ -206,73 +203,66 @@ void main() {
     );
 
     blocTest<RecordKodasCubit, RecordKodasState>(
-      'hiding kodas for the day hides it',
+      'hiding kodas saves it on the meeting and hides it',
       build: () => f.createCubit(),
       act: (cubit) async {
         cubit.follow(meeting: liturgy, day: sunday);
         await f.settle();
-        cubit.changeVisibility(visible: false);
+        await cubit.changeVisibility(visible: false);
       },
       expect: () => [
         _loading(sunday),
         _communicants(sunday, const {}),
-        const RecordKodasHidden(hiddenForDay: true),
+        const RecordKodasHidden(),
       ],
+      verify: (_) => expect(f.savedMeeting, _showsKodas(isFalse)),
     );
 
     blocTest<RecordKodasCubit, RecordKodasState>(
-      'showing kodas again for a hidden day brings back its communicants',
+      'showing kodas saves it on a meeting that hid it and shows the day',
       setUp: () => f.server.seed([
         KodasRecord(id: 'k1', personId: mina.id, day: sunday),
       ]),
       build: () => f.createCubit(),
       act: (cubit) async {
-        cubit
-          ..follow(meeting: liturgy, day: sunday)
-          ..changeVisibility(visible: false)
-          ..changeVisibility(visible: true);
+        cubit.follow(meeting: hiddenKodasMeeting, day: sunday);
+        await cubit.changeVisibility(visible: true);
         await f.settle();
       },
-      skip: 2,
       expect: () => [
+        const RecordKodasHidden(),
         _loading(sunday),
         _communicants(sunday, {mina.id}),
       ],
+      verify: (_) => expect(f.savedMeeting, _showsKodas(isTrue)),
     );
 
     blocTest<RecordKodasCubit, RecordKodasState>(
-      'kodas can not be shown for a meeting that hides the kodas checkbox',
-      build: () => f.createCubit(),
-      act: (cubit) => cubit
-        ..follow(meeting: hiddenKodasMeeting, day: sunday)
-        ..changeVisibility(visible: true),
-      expect: () => [const RecordKodasHidden()],
-    );
-
-    blocTest<RecordKodasCubit, RecordKodasState>(
-      'a hidden day stays hidden in the other meetings of that day',
-      build: () => f.createCubit(),
-      act: (cubit) => cubit
-        ..follow(meeting: liturgy, day: sunday)
-        ..changeVisibility(visible: false)
-        ..follow(meeting: sundaySchool, day: sunday),
-      expect: () => [
-        _loading(sunday),
-        const RecordKodasHidden(hiddenForDay: true),
-      ],
-    );
-
-    blocTest<RecordKodasCubit, RecordKodasState>(
-      "hiding a day does not hide the meeting's other days",
+      'a rejected visibility change is rolled back and reported',
+      setUp: () => f.rejectMeetingUpdates = true,
       build: () => f.createCubit(),
       act: (cubit) async {
-        cubit
-          ..follow(meeting: liturgy, day: sunday)
-          ..changeVisibility(visible: false)
-          ..follow(meeting: liturgy, day: nextSunday);
+        cubit.follow(meeting: hiddenKodasMeeting, day: sunday);
+        await cubit.changeVisibility(visible: true);
+      },
+      verify: (cubit) {
+        expect(cubit.state, const RecordKodasHidden());
+        expect(f.savedMeeting, isNull);
+        expect(f.presenter.errors, hasLength(1));
+      },
+    );
+
+    blocTest<RecordKodasCubit, RecordKodasState>(
+      'a saved visibility survives a stale copy of the same meeting',
+      build: () => f.createCubit(),
+      act: (cubit) async {
+        cubit.follow(meeting: hiddenKodasMeeting, day: sunday);
+        await cubit.changeVisibility(visible: true);
+        await f.settle();
+        cubit.follow(meeting: hiddenKodasMeeting, day: nextSunday);
         await f.settle();
       },
-      skip: 2,
+      skip: 3,
       expect: () => [
         _loading(nextSunday),
         _communicants(nextSunday, const {}),
@@ -280,16 +270,27 @@ void main() {
     );
 
     blocTest<RecordKodasCubit, RecordKodasState>(
-      'a hidden day stays hidden for a later cubit',
-      setUp: () => f.createCubit()
-        ..follow(meeting: liturgy, day: sunday)
-        ..changeVisibility(visible: false),
+      "switching meetings on the same day follows the new meeting's setting",
       build: () => f.createCubit(),
-      act: (cubit) => cubit.follow(meeting: liturgy, day: sunday),
-      expect: () => [const RecordKodasHidden(hiddenForDay: true)],
+      act: (cubit) async {
+        cubit.follow(meeting: liturgy, day: sunday);
+        await f.settle();
+        cubit.follow(meeting: hiddenKodasMeeting, day: sunday);
+      },
+      expect: () => [
+        _loading(sunday),
+        _communicants(sunday, const {}),
+        const RecordKodasHidden(),
+      ],
     );
   });
 }
+
+Matcher _showsKodas(Matcher matcher) => isA<Meeting>().having(
+  (m) => m.showKodasCheckbox,
+  'showKodasCheckbox',
+  matcher,
+);
 
 Matcher _loading(DateTime day) =>
     isA<RecordKodasLoading>().having((s) => s.day, 'day', day);
@@ -312,8 +313,12 @@ final class _Fixture {
   );
 
   final historyDao = _MockHistoryDAO();
+  final meetingsDao = _MockMeetingsDAO();
   final presenter = _PresenterSpy();
   final server = _KodasServer();
+
+  bool rejectMeetingUpdates = false;
+  Meeting? savedMeeting;
 
   _Fixture() {
     when(
@@ -339,10 +344,22 @@ final class _Fixture {
     ).thenAnswer(
       (i) => server.delete(i.namedArguments[#kodasRecordId] as String),
     );
+
+    when(
+      () => meetingsDao.updateObject(
+        newObject: any(named: 'newObject'),
+        oldObject: any(named: 'oldObject'),
+      ),
+    ).thenAnswer((i) async {
+      if (rejectMeetingUpdates) return null;
+
+      return savedMeeting = i.namedArguments[#newObject] as Meeting;
+    });
   }
 
   RecordKodasCubit createCubit() => RecordKodasCubit(
     historyDao: historyDao,
+    meetingsDao: meetingsDao,
     presenter: presenter,
   );
 
@@ -405,6 +422,8 @@ final class _KodasServer {
 }
 
 final class _MockHistoryDAO extends Mock implements HistoryDAO {}
+
+final class _MockMeetingsDAO extends Mock implements MeetingsDAO {}
 
 final class _PresenterSpy implements AttendanceUndoPresenter {
   final List<({String personName, AttendanceUndoableChange change})>

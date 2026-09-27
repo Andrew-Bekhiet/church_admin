@@ -10,15 +10,10 @@ sealed class RecordKodasState with Equatable {
 }
 
 final class RecordKodasHidden extends RecordKodasState {
-  final bool hiddenForDay;
-
   @override
   bool get isVisible => false;
 
-  @override
-  List<Object?> get props => [hiddenForDay];
-
-  const RecordKodasHidden({this.hiddenForDay = false});
+  const RecordKodasHidden();
 }
 
 final class RecordKodasLoading extends RecordKodasState {
