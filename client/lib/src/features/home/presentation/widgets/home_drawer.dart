@@ -90,59 +90,63 @@ class HomeDrawer extends StatelessWidget {
         ];
 
         return Drawer(
-          child: Column(
-            children: [
-              const DrawerHeader(
-                decoration: BoxDecoration(
-                  image: DecorationImage(image: AssetImage('assets/logo.png')),
+          child: SafeArea(
+            child: Column(
+              children: [
+                const DrawerHeader(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/logo.png'),
+                    ),
+                  ),
+                  child: SizedBox.expand(),
                 ),
-                child: SizedBox.expand(),
-              ),
-              if (state case AuthAuthenticated(:final userData?))
+                if (state case AuthAuthenticated(:final userData?))
+                  ListTile(
+                    leading: ImageObjectWidget(userData),
+                    title: const Text('حسابي'),
+                    onTap: () {
+                      Scaffold.of(context).openEndDrawer();
+                      unawaited(const MyAccountRoute().push(context));
+                    },
+                  ),
+                Expanded(
+                  child: NavigationDrawer(
+                    onDestinationSelected: (i) {
+                      Scaffold.of(context).openEndDrawer();
+
+                      destinations[i].onTap();
+                    },
+                    children: destinations
+                        .map(
+                          (e) => NavigationDrawerDestination(
+                            icon: e.icon,
+                            label: e.label,
+                          ),
+                        )
+                        .toList(),
+                  ),
+                ),
                 ListTile(
-                  leading: ImageObjectWidget(userData),
-                  title: const Text('حسابي'),
+                  leading: const Icon(Symbols.info),
+                  title: const Text('حول'),
                   onTap: () {
                     Scaffold.of(context).openEndDrawer();
-                    unawaited(const MyAccountRoute().push(context));
+                    unawaited(AboutAppService.I.showAboutDialog(context));
                   },
                 ),
-              Expanded(
-                child: NavigationDrawer(
-                  onDestinationSelected: (i) {
+                ListTile(
+                  leading: const Icon(Symbols.logout),
+                  title: const Text('تسجيل الخروج'),
+                  onTap: () {
                     Scaffold.of(context).openEndDrawer();
 
-                    destinations[i].onTap();
+                    LocalAuthService.I.scheduleReauth();
+                    authBloc.add(const SignOut());
                   },
-                  children: destinations
-                      .map(
-                        (e) => NavigationDrawerDestination(
-                          icon: e.icon,
-                          label: e.label,
-                        ),
-                      )
-                      .toList(),
                 ),
-              ),
-              ListTile(
-                leading: const Icon(Symbols.info),
-                title: const Text('حول'),
-                onTap: () {
-                  Scaffold.of(context).openEndDrawer();
-                  unawaited(AboutAppService.I.showAboutDialog(context));
-                },
-              ),
-              ListTile(
-                leading: const Icon(Symbols.logout),
-                title: const Text('تسجيل الخروج'),
-                onTap: () {
-                  Scaffold.of(context).openEndDrawer();
-
-                  LocalAuthService.I.scheduleReauth();
-                  authBloc.add(const SignOut());
-                },
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },
