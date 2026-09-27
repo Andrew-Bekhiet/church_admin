@@ -92,3 +92,24 @@ mutation insertStreetLastVisit(
     }
   }
 }
+
+mutation recordMeetingKodas($personId: uuid!, $meetingId: uuid!, $day: date!) {
+  insertHistoryKodasHistoryOne(
+    object: {
+      personId: $personId
+      meetingId: $meetingId
+      day: {
+        data: { day: $day }
+        onConflict: { constraint: attendance_days_pkey, updateColumns: day }
+      }
+    }
+  ) {
+    ...KodasDayRecord
+  }
+}
+
+mutation deleteKodas($id: uuid!) {
+  deleteHistoryKodasHistoryByPk(id: $id) {
+    ...KodasDayRecord
+  }
+}

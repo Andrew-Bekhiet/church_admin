@@ -1,6 +1,410 @@
 // Part 38 of the schema
 part of "schema.graphql.dart";
 
+abstract class CopyWith_Input_HobbiesObjRelInsertInput<TRes> {
+  factory CopyWith_Input_HobbiesObjRelInsertInput(
+    Input_HobbiesObjRelInsertInput instance,
+    TRes Function(Input_HobbiesObjRelInsertInput) then,
+  ) = _CopyWithImpl_Input_HobbiesObjRelInsertInput;
+
+  factory CopyWith_Input_HobbiesObjRelInsertInput.stub(TRes res) =
+      _CopyWithStubImpl_Input_HobbiesObjRelInsertInput;
+
+  TRes call({
+    Input_HobbiesInsertInput? data,
+    Input_HobbiesOnConflict? onConflict,
+  });
+  CopyWith_Input_HobbiesInsertInput<TRes> get data;
+  CopyWith_Input_HobbiesOnConflict<TRes> get onConflict;
+}
+
+class _CopyWithImpl_Input_HobbiesObjRelInsertInput<TRes>
+    implements CopyWith_Input_HobbiesObjRelInsertInput<TRes> {
+  _CopyWithImpl_Input_HobbiesObjRelInsertInput(this._instance, this._then);
+
+  final Input_HobbiesObjRelInsertInput _instance;
+
+  final TRes Function(Input_HobbiesObjRelInsertInput) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? data = _undefined, Object? onConflict = _undefined}) =>
+      _then(
+        Input_HobbiesObjRelInsertInput._({
+          ..._instance._$data,
+          if (data != _undefined && data != null)
+            'data': (data as Input_HobbiesInsertInput),
+          if (onConflict != _undefined)
+            'onConflict': (onConflict as Input_HobbiesOnConflict?),
+        }),
+      );
+
+  CopyWith_Input_HobbiesInsertInput<TRes> get data {
+    final local$data = _instance.data;
+    return CopyWith_Input_HobbiesInsertInput(local$data, (e) => call(data: e));
+  }
+
+  CopyWith_Input_HobbiesOnConflict<TRes> get onConflict {
+    final local$onConflict = _instance.onConflict;
+    return local$onConflict == null
+        ? CopyWith_Input_HobbiesOnConflict.stub(_then(_instance))
+        : CopyWith_Input_HobbiesOnConflict(
+            local$onConflict,
+            (e) => call(onConflict: e),
+          );
+  }
+}
+
+class _CopyWithStubImpl_Input_HobbiesObjRelInsertInput<TRes>
+    implements CopyWith_Input_HobbiesObjRelInsertInput<TRes> {
+  _CopyWithStubImpl_Input_HobbiesObjRelInsertInput(this._res);
+
+  TRes _res;
+
+  call({Input_HobbiesInsertInput? data, Input_HobbiesOnConflict? onConflict}) =>
+      _res;
+
+  CopyWith_Input_HobbiesInsertInput<TRes> get data =>
+      CopyWith_Input_HobbiesInsertInput.stub(_res);
+
+  CopyWith_Input_HobbiesOnConflict<TRes> get onConflict =>
+      CopyWith_Input_HobbiesOnConflict.stub(_res);
+}
+
+class Input_HobbiesOnConflict {
+  factory Input_HobbiesOnConflict({
+    required Enum_HobbiesConstraint constraint,
+    List<Enum_HobbiesUpdateColumn>? updateColumns,
+    Input_HobbiesBoolExp? where,
+  }) => Input_HobbiesOnConflict._({
+    r'constraint': constraint,
+    if (updateColumns != null) r'updateColumns': updateColumns,
+    if (where != null) r'where': where,
+  });
+
+  Input_HobbiesOnConflict._(this._$data);
+
+  factory Input_HobbiesOnConflict.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$constraint = data['constraint'];
+    result$data['constraint'] = fromJson_Enum_HobbiesConstraint(
+      (l$constraint as String),
+    );
+    if (data.containsKey('updateColumns')) {
+      final l$updateColumns = data['updateColumns'];
+      result$data['updateColumns'] = (l$updateColumns as List<dynamic>)
+          .map((e) => fromJson_Enum_HobbiesUpdateColumn((e as String)))
+          .toList();
+    }
+    if (data.containsKey('where')) {
+      final l$where = data['where'];
+      result$data['where'] = l$where == null
+          ? null
+          : Input_HobbiesBoolExp.fromJson((l$where as Map<String, dynamic>));
+    }
+    return Input_HobbiesOnConflict._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Enum_HobbiesConstraint get constraint =>
+      (_$data['constraint'] as Enum_HobbiesConstraint);
+
+  List<Enum_HobbiesUpdateColumn>? get updateColumns =>
+      (_$data['updateColumns'] as List<Enum_HobbiesUpdateColumn>?);
+
+  Input_HobbiesBoolExp? get where => (_$data['where'] as Input_HobbiesBoolExp?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$constraint = constraint;
+    result$data['constraint'] = toJson_Enum_HobbiesConstraint(l$constraint);
+    if (_$data.containsKey('updateColumns')) {
+      final l$updateColumns = updateColumns;
+      result$data['updateColumns'] =
+          (l$updateColumns as List<Enum_HobbiesUpdateColumn>)
+              .map((e) => toJson_Enum_HobbiesUpdateColumn(e))
+              .toList();
+    }
+    if (_$data.containsKey('where')) {
+      final l$where = where;
+      result$data['where'] = l$where?.toJson();
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_HobbiesOnConflict<Input_HobbiesOnConflict> get copyWith =>
+      CopyWith_Input_HobbiesOnConflict(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_HobbiesOnConflict || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$constraint = constraint;
+    final lOther$constraint = other.constraint;
+    if (l$constraint != lOther$constraint) {
+      return false;
+    }
+    final l$updateColumns = updateColumns;
+    final lOther$updateColumns = other.updateColumns;
+    if (_$data.containsKey('updateColumns') !=
+        other._$data.containsKey('updateColumns')) {
+      return false;
+    }
+    if (l$updateColumns != null && lOther$updateColumns != null) {
+      if (l$updateColumns.length != lOther$updateColumns.length) {
+        return false;
+      }
+      for (int i = 0; i < l$updateColumns.length; i++) {
+        final l$updateColumns$entry = l$updateColumns[i];
+        final lOther$updateColumns$entry = lOther$updateColumns[i];
+        if (l$updateColumns$entry != lOther$updateColumns$entry) {
+          return false;
+        }
+      }
+    } else if (l$updateColumns != lOther$updateColumns) {
+      return false;
+    }
+    final l$where = where;
+    final lOther$where = other.where;
+    if (_$data.containsKey('where') != other._$data.containsKey('where')) {
+      return false;
+    }
+    if (l$where != lOther$where) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$constraint = constraint;
+    final l$updateColumns = updateColumns;
+    final l$where = where;
+    return Object.hashAll([
+      l$constraint,
+      _$data.containsKey('updateColumns')
+          ? l$updateColumns == null
+                ? null
+                : Object.hashAll(l$updateColumns.map((v) => v))
+          : const {},
+      _$data.containsKey('where') ? l$where : const {},
+    ]);
+  }
+}
+
+abstract class CopyWith_Input_HobbiesOnConflict<TRes> {
+  factory CopyWith_Input_HobbiesOnConflict(
+    Input_HobbiesOnConflict instance,
+    TRes Function(Input_HobbiesOnConflict) then,
+  ) = _CopyWithImpl_Input_HobbiesOnConflict;
+
+  factory CopyWith_Input_HobbiesOnConflict.stub(TRes res) =
+      _CopyWithStubImpl_Input_HobbiesOnConflict;
+
+  TRes call({
+    Enum_HobbiesConstraint? constraint,
+    List<Enum_HobbiesUpdateColumn>? updateColumns,
+    Input_HobbiesBoolExp? where,
+  });
+  CopyWith_Input_HobbiesBoolExp<TRes> get where;
+}
+
+class _CopyWithImpl_Input_HobbiesOnConflict<TRes>
+    implements CopyWith_Input_HobbiesOnConflict<TRes> {
+  _CopyWithImpl_Input_HobbiesOnConflict(this._instance, this._then);
+
+  final Input_HobbiesOnConflict _instance;
+
+  final TRes Function(Input_HobbiesOnConflict) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? constraint = _undefined,
+    Object? updateColumns = _undefined,
+    Object? where = _undefined,
+  }) => _then(
+    Input_HobbiesOnConflict._({
+      ..._instance._$data,
+      if (constraint != _undefined && constraint != null)
+        'constraint': (constraint as Enum_HobbiesConstraint),
+      if (updateColumns != _undefined && updateColumns != null)
+        'updateColumns': (updateColumns as List<Enum_HobbiesUpdateColumn>),
+      if (where != _undefined) 'where': (where as Input_HobbiesBoolExp?),
+    }),
+  );
+
+  CopyWith_Input_HobbiesBoolExp<TRes> get where {
+    final local$where = _instance.where;
+    return local$where == null
+        ? CopyWith_Input_HobbiesBoolExp.stub(_then(_instance))
+        : CopyWith_Input_HobbiesBoolExp(local$where, (e) => call(where: e));
+  }
+}
+
+class _CopyWithStubImpl_Input_HobbiesOnConflict<TRes>
+    implements CopyWith_Input_HobbiesOnConflict<TRes> {
+  _CopyWithStubImpl_Input_HobbiesOnConflict(this._res);
+
+  TRes _res;
+
+  call({
+    Enum_HobbiesConstraint? constraint,
+    List<Enum_HobbiesUpdateColumn>? updateColumns,
+    Input_HobbiesBoolExp? where,
+  }) => _res;
+
+  CopyWith_Input_HobbiesBoolExp<TRes> get where =>
+      CopyWith_Input_HobbiesBoolExp.stub(_res);
+}
+
+class Input_HobbiesOrderBy {
+  factory Input_HobbiesOrderBy({
+    Enum_OrderBy? color,
+    Enum_OrderBy? id,
+    Enum_OrderBy? name,
+    Input_PersonsHobbiesAggregateOrderBy? personsAggregate,
+  }) => Input_HobbiesOrderBy._({
+    if (color != null) r'color': color,
+    if (id != null) r'id': id,
+    if (name != null) r'name': name,
+    if (personsAggregate != null) r'personsAggregate': personsAggregate,
+  });
+
+  Input_HobbiesOrderBy._(this._$data);
+
+  factory Input_HobbiesOrderBy.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('color')) {
+      final l$color = data['color'];
+      result$data['color'] = l$color == null
+          ? null
+          : fromJson_Enum_OrderBy((l$color as String));
+    }
+    if (data.containsKey('id')) {
+      final l$id = data['id'];
+      result$data['id'] = l$id == null
+          ? null
+          : fromJson_Enum_OrderBy((l$id as String));
+    }
+    if (data.containsKey('name')) {
+      final l$name = data['name'];
+      result$data['name'] = l$name == null
+          ? null
+          : fromJson_Enum_OrderBy((l$name as String));
+    }
+    if (data.containsKey('personsAggregate')) {
+      final l$personsAggregate = data['personsAggregate'];
+      result$data['personsAggregate'] = l$personsAggregate == null
+          ? null
+          : Input_PersonsHobbiesAggregateOrderBy.fromJson(
+              (l$personsAggregate as Map<String, dynamic>),
+            );
+    }
+    return Input_HobbiesOrderBy._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Enum_OrderBy? get color => (_$data['color'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get id => (_$data['id'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get name => (_$data['name'] as Enum_OrderBy?);
+
+  Input_PersonsHobbiesAggregateOrderBy? get personsAggregate =>
+      (_$data['personsAggregate'] as Input_PersonsHobbiesAggregateOrderBy?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('color')) {
+      final l$color = color;
+      result$data['color'] = l$color == null
+          ? null
+          : toJson_Enum_OrderBy(l$color);
+    }
+    if (_$data.containsKey('id')) {
+      final l$id = id;
+      result$data['id'] = l$id == null ? null : toJson_Enum_OrderBy(l$id);
+    }
+    if (_$data.containsKey('name')) {
+      final l$name = name;
+      result$data['name'] = l$name == null ? null : toJson_Enum_OrderBy(l$name);
+    }
+    if (_$data.containsKey('personsAggregate')) {
+      final l$personsAggregate = personsAggregate;
+      result$data['personsAggregate'] = l$personsAggregate?.toJson();
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_HobbiesOrderBy<Input_HobbiesOrderBy> get copyWith =>
+      CopyWith_Input_HobbiesOrderBy(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_HobbiesOrderBy || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$color = color;
+    final lOther$color = other.color;
+    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
+      return false;
+    }
+    if (l$color != lOther$color) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (_$data.containsKey('id') != other._$data.containsKey('id')) {
+      return false;
+    }
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$name = name;
+    final lOther$name = other.name;
+    if (_$data.containsKey('name') != other._$data.containsKey('name')) {
+      return false;
+    }
+    if (l$name != lOther$name) {
+      return false;
+    }
+    final l$personsAggregate = personsAggregate;
+    final lOther$personsAggregate = other.personsAggregate;
+    if (_$data.containsKey('personsAggregate') !=
+        other._$data.containsKey('personsAggregate')) {
+      return false;
+    }
+    if (l$personsAggregate != lOther$personsAggregate) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$color = color;
+    final l$id = id;
+    final l$name = name;
+    final l$personsAggregate = personsAggregate;
+    return Object.hashAll([
+      _$data.containsKey('color') ? l$color : const {},
+      _$data.containsKey('id') ? l$id : const {},
+      _$data.containsKey('name') ? l$name : const {},
+      _$data.containsKey('personsAggregate') ? l$personsAggregate : const {},
+    ]);
+  }
+}
+
 abstract class CopyWith_Input_HobbiesOrderBy<TRes> {
   factory CopyWith_Input_HobbiesOrderBy(
     Input_HobbiesOrderBy instance,
@@ -2150,362 +2554,4 @@ class Input_JobsOrderBy {
       _$data.containsKey('personsAggregate') ? l$personsAggregate : const {},
     ]);
   }
-}
-
-abstract class CopyWith_Input_JobsOrderBy<TRes> {
-  factory CopyWith_Input_JobsOrderBy(
-    Input_JobsOrderBy instance,
-    TRes Function(Input_JobsOrderBy) then,
-  ) = _CopyWithImpl_Input_JobsOrderBy;
-
-  factory CopyWith_Input_JobsOrderBy.stub(TRes res) =
-      _CopyWithStubImpl_Input_JobsOrderBy;
-
-  TRes call({
-    Enum_OrderBy? id,
-    Enum_OrderBy? name,
-    Input_PersonsAggregateOrderBy? personsAggregate,
-  });
-  CopyWith_Input_PersonsAggregateOrderBy<TRes> get personsAggregate;
-}
-
-class _CopyWithImpl_Input_JobsOrderBy<TRes>
-    implements CopyWith_Input_JobsOrderBy<TRes> {
-  _CopyWithImpl_Input_JobsOrderBy(this._instance, this._then);
-
-  final Input_JobsOrderBy _instance;
-
-  final TRes Function(Input_JobsOrderBy) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? id = _undefined,
-    Object? name = _undefined,
-    Object? personsAggregate = _undefined,
-  }) => _then(
-    Input_JobsOrderBy._({
-      ..._instance._$data,
-      if (id != _undefined) 'id': (id as Enum_OrderBy?),
-      if (name != _undefined) 'name': (name as Enum_OrderBy?),
-      if (personsAggregate != _undefined)
-        'personsAggregate':
-            (personsAggregate as Input_PersonsAggregateOrderBy?),
-    }),
-  );
-
-  CopyWith_Input_PersonsAggregateOrderBy<TRes> get personsAggregate {
-    final local$personsAggregate = _instance.personsAggregate;
-    return local$personsAggregate == null
-        ? CopyWith_Input_PersonsAggregateOrderBy.stub(_then(_instance))
-        : CopyWith_Input_PersonsAggregateOrderBy(
-            local$personsAggregate,
-            (e) => call(personsAggregate: e),
-          );
-  }
-}
-
-class _CopyWithStubImpl_Input_JobsOrderBy<TRes>
-    implements CopyWith_Input_JobsOrderBy<TRes> {
-  _CopyWithStubImpl_Input_JobsOrderBy(this._res);
-
-  TRes _res;
-
-  call({
-    Enum_OrderBy? id,
-    Enum_OrderBy? name,
-    Input_PersonsAggregateOrderBy? personsAggregate,
-  }) => _res;
-
-  CopyWith_Input_PersonsAggregateOrderBy<TRes> get personsAggregate =>
-      CopyWith_Input_PersonsAggregateOrderBy.stub(_res);
-}
-
-class Input_JobsPkColumnsInput {
-  factory Input_JobsPkColumnsInput({required UuidValue id}) =>
-      Input_JobsPkColumnsInput._({r'id': id});
-
-  Input_JobsPkColumnsInput._(this._$data);
-
-  factory Input_JobsPkColumnsInput.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    final l$id = data['id'];
-    result$data['id'] = stringToUuid(l$id);
-    return Input_JobsPkColumnsInput._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  UuidValue get id => (_$data['id'] as UuidValue);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    final l$id = id;
-    result$data['id'] = uuidToString(l$id);
-    return result$data;
-  }
-
-  CopyWith_Input_JobsPkColumnsInput<Input_JobsPkColumnsInput> get copyWith =>
-      CopyWith_Input_JobsPkColumnsInput(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_JobsPkColumnsInput ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$id = id;
-    final lOther$id = other.id;
-    if (l$id != lOther$id) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$id = id;
-    return Object.hashAll([l$id]);
-  }
-}
-
-abstract class CopyWith_Input_JobsPkColumnsInput<TRes> {
-  factory CopyWith_Input_JobsPkColumnsInput(
-    Input_JobsPkColumnsInput instance,
-    TRes Function(Input_JobsPkColumnsInput) then,
-  ) = _CopyWithImpl_Input_JobsPkColumnsInput;
-
-  factory CopyWith_Input_JobsPkColumnsInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_JobsPkColumnsInput;
-
-  TRes call({UuidValue? id});
-}
-
-class _CopyWithImpl_Input_JobsPkColumnsInput<TRes>
-    implements CopyWith_Input_JobsPkColumnsInput<TRes> {
-  _CopyWithImpl_Input_JobsPkColumnsInput(this._instance, this._then);
-
-  final Input_JobsPkColumnsInput _instance;
-
-  final TRes Function(Input_JobsPkColumnsInput) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({Object? id = _undefined}) => _then(
-    Input_JobsPkColumnsInput._({
-      ..._instance._$data,
-      if (id != _undefined && id != null) 'id': (id as UuidValue),
-    }),
-  );
-}
-
-class _CopyWithStubImpl_Input_JobsPkColumnsInput<TRes>
-    implements CopyWith_Input_JobsPkColumnsInput<TRes> {
-  _CopyWithStubImpl_Input_JobsPkColumnsInput(this._res);
-
-  TRes _res;
-
-  call({UuidValue? id}) => _res;
-}
-
-class Input_JobsSetInput {
-  factory Input_JobsSetInput({String? name}) =>
-      Input_JobsSetInput._({if (name != null) r'name': name});
-
-  Input_JobsSetInput._(this._$data);
-
-  factory Input_JobsSetInput.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('name')) {
-      final l$name = data['name'];
-      result$data['name'] = (l$name as String?);
-    }
-    return Input_JobsSetInput._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  String? get name => (_$data['name'] as String?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('name')) {
-      final l$name = name;
-      result$data['name'] = l$name;
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_JobsSetInput<Input_JobsSetInput> get copyWith =>
-      CopyWith_Input_JobsSetInput(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_JobsSetInput || runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$name = name;
-    final lOther$name = other.name;
-    if (_$data.containsKey('name') != other._$data.containsKey('name')) {
-      return false;
-    }
-    if (l$name != lOther$name) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$name = name;
-    return Object.hashAll([_$data.containsKey('name') ? l$name : const {}]);
-  }
-}
-
-abstract class CopyWith_Input_JobsSetInput<TRes> {
-  factory CopyWith_Input_JobsSetInput(
-    Input_JobsSetInput instance,
-    TRes Function(Input_JobsSetInput) then,
-  ) = _CopyWithImpl_Input_JobsSetInput;
-
-  factory CopyWith_Input_JobsSetInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_JobsSetInput;
-
-  TRes call({String? name});
-}
-
-class _CopyWithImpl_Input_JobsSetInput<TRes>
-    implements CopyWith_Input_JobsSetInput<TRes> {
-  _CopyWithImpl_Input_JobsSetInput(this._instance, this._then);
-
-  final Input_JobsSetInput _instance;
-
-  final TRes Function(Input_JobsSetInput) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({Object? name = _undefined}) => _then(
-    Input_JobsSetInput._({
-      ..._instance._$data,
-      if (name != _undefined) 'name': (name as String?),
-    }),
-  );
-}
-
-class _CopyWithStubImpl_Input_JobsSetInput<TRes>
-    implements CopyWith_Input_JobsSetInput<TRes> {
-  _CopyWithStubImpl_Input_JobsSetInput(this._res);
-
-  TRes _res;
-
-  call({String? name}) => _res;
-}
-
-class Input_JobsStreamCursorInput {
-  factory Input_JobsStreamCursorInput({
-    required Input_JobsStreamCursorValueInput initialValue,
-    Enum_CursorOrdering? ordering,
-  }) => Input_JobsStreamCursorInput._({
-    r'initialValue': initialValue,
-    if (ordering != null) r'ordering': ordering,
-  });
-
-  Input_JobsStreamCursorInput._(this._$data);
-
-  factory Input_JobsStreamCursorInput.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    final l$initialValue = data['initialValue'];
-    result$data['initialValue'] = Input_JobsStreamCursorValueInput.fromJson(
-      (l$initialValue as Map<String, dynamic>),
-    );
-    if (data.containsKey('ordering')) {
-      final l$ordering = data['ordering'];
-      result$data['ordering'] = l$ordering == null
-          ? null
-          : fromJson_Enum_CursorOrdering((l$ordering as String));
-    }
-    return Input_JobsStreamCursorInput._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  Input_JobsStreamCursorValueInput get initialValue =>
-      (_$data['initialValue'] as Input_JobsStreamCursorValueInput);
-
-  Enum_CursorOrdering? get ordering =>
-      (_$data['ordering'] as Enum_CursorOrdering?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    final l$initialValue = initialValue;
-    result$data['initialValue'] = l$initialValue.toJson();
-    if (_$data.containsKey('ordering')) {
-      final l$ordering = ordering;
-      result$data['ordering'] = l$ordering == null
-          ? null
-          : toJson_Enum_CursorOrdering(l$ordering);
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_JobsStreamCursorInput<Input_JobsStreamCursorInput>
-  get copyWith => CopyWith_Input_JobsStreamCursorInput(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_JobsStreamCursorInput ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$initialValue = initialValue;
-    final lOther$initialValue = other.initialValue;
-    if (l$initialValue != lOther$initialValue) {
-      return false;
-    }
-    final l$ordering = ordering;
-    final lOther$ordering = other.ordering;
-    if (_$data.containsKey('ordering') !=
-        other._$data.containsKey('ordering')) {
-      return false;
-    }
-    if (l$ordering != lOther$ordering) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$initialValue = initialValue;
-    final l$ordering = ordering;
-    return Object.hashAll([
-      l$initialValue,
-      _$data.containsKey('ordering') ? l$ordering : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_JobsStreamCursorInput<TRes> {
-  factory CopyWith_Input_JobsStreamCursorInput(
-    Input_JobsStreamCursorInput instance,
-    TRes Function(Input_JobsStreamCursorInput) then,
-  ) = _CopyWithImpl_Input_JobsStreamCursorInput;
-
-  factory CopyWith_Input_JobsStreamCursorInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_JobsStreamCursorInput;
-
-  TRes call({
-    Input_JobsStreamCursorValueInput? initialValue,
-    Enum_CursorOrdering? ordering,
-  });
-  CopyWith_Input_JobsStreamCursorValueInput<TRes> get initialValue;
 }

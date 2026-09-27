@@ -48,6 +48,15 @@ class MeetingFields {
     operators: {...BooleanOperator.values},
   );
 
+  final FieldMetadata<bool> showKodasCheckbox = FieldMetadata<bool>(
+    getValue: (obj) => obj is Meeting ? obj.showKodasCheckbox : null,
+    parentType: Meeting,
+    name: 'showKodasCheckbox',
+    label: 'showKodasCheckbox',
+    isCodeOnly: false,
+    operators: {...BooleanOperator.values},
+  );
+
   final FieldMetadata<Color> color = FieldMetadata<Color>(
     getValue: (obj) => obj is Meeting ? obj.color : null,
     parentType: Meeting,
@@ -131,6 +140,7 @@ class MeetingFields {
     name,
     audience,
     isArchived,
+    showKodasCheckbox,
     color,
     service,
     serviceStudyYear,
@@ -143,6 +153,7 @@ class MeetingFields {
     'name': name,
     'audience': audience,
     'isArchived': isArchived,
+    'showKodasCheckbox': showKodasCheckbox,
     'color': color,
     'service': service,
     'serviceStudyYear': serviceStudyYear,
@@ -163,6 +174,7 @@ Meeting _$MeetingFromJson(Map json) => Meeting(
   name: json['name'] as String? ?? '',
   audience: $enumDecode(_$MeetingAudienceEnumMap, json['audience']),
   isArchived: json['isArchived'] as bool,
+  showKodasCheckbox: json['showKodasCheckbox'] as bool? ?? false,
   color: colorFromInt((json['color'] as num?)?.toInt()),
   serviceId: json['serviceId'] as String?,
   service: json['service'] == null
@@ -184,6 +196,7 @@ Map<String, dynamic> _$MeetingToJson(Meeting instance) => <String, dynamic>{
   'name': instance.name,
   'audience': _$MeetingAudienceEnumMap[instance.audience]!,
   'isArchived': instance.isArchived,
+  'showKodasCheckbox': instance.showKodasCheckbox,
   'color': colorToInt(instance.color),
   'serviceId': instance.serviceId,
   'service': instance.service?.toJson(),

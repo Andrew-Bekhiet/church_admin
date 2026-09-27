@@ -1,3 +1,4 @@
+import '../../gql/__generated__/fragments.gql.dart';
 import '../../persons/__generated__/fragments.gql.dart';
 import '../../users/__generated__/fragments.gql.dart';
 import 'package:church_admin/src/core/graphql/scalars.dart';
@@ -3346,3 +3347,680 @@ class _CopyWithStubImpl_Mutation_insertStreetLastVisit_insertHistoryVisitHistory
 
   CopyWith_Fragment_User<TRes> get user => CopyWith_Fragment_User.stub(_res);
 }
+
+class Variables_Mutation_recordMeetingKodas {
+  factory Variables_Mutation_recordMeetingKodas({
+    required UuidValue personId,
+    required UuidValue meetingId,
+    required DateTime day,
+  }) => Variables_Mutation_recordMeetingKodas._({
+    r'personId': personId,
+    r'meetingId': meetingId,
+    r'day': day,
+  });
+
+  Variables_Mutation_recordMeetingKodas._(this._$data);
+
+  factory Variables_Mutation_recordMeetingKodas.fromJson(
+    Map<String, dynamic> data,
+  ) {
+    final result$data = <String, dynamic>{};
+    final l$personId = data['personId'];
+    result$data['personId'] = stringToUuid(l$personId);
+    final l$meetingId = data['meetingId'];
+    result$data['meetingId'] = stringToUuid(l$meetingId);
+    final l$day = data['day'];
+    result$data['day'] = dateFromString(l$day);
+    return Variables_Mutation_recordMeetingKodas._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  UuidValue get personId => (_$data['personId'] as UuidValue);
+
+  UuidValue get meetingId => (_$data['meetingId'] as UuidValue);
+
+  DateTime get day => (_$data['day'] as DateTime);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$personId = personId;
+    result$data['personId'] = uuidToString(l$personId);
+    final l$meetingId = meetingId;
+    result$data['meetingId'] = uuidToString(l$meetingId);
+    final l$day = day;
+    result$data['day'] = dateToString(l$day);
+    return result$data;
+  }
+
+  CopyWith_Variables_Mutation_recordMeetingKodas<
+    Variables_Mutation_recordMeetingKodas
+  >
+  get copyWith =>
+      CopyWith_Variables_Mutation_recordMeetingKodas(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Variables_Mutation_recordMeetingKodas ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$personId = personId;
+    final lOther$personId = other.personId;
+    if (l$personId != lOther$personId) {
+      return false;
+    }
+    final l$meetingId = meetingId;
+    final lOther$meetingId = other.meetingId;
+    if (l$meetingId != lOther$meetingId) {
+      return false;
+    }
+    final l$day = day;
+    final lOther$day = other.day;
+    if (l$day != lOther$day) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$personId = personId;
+    final l$meetingId = meetingId;
+    final l$day = day;
+    return Object.hashAll([l$personId, l$meetingId, l$day]);
+  }
+}
+
+abstract class CopyWith_Variables_Mutation_recordMeetingKodas<TRes> {
+  factory CopyWith_Variables_Mutation_recordMeetingKodas(
+    Variables_Mutation_recordMeetingKodas instance,
+    TRes Function(Variables_Mutation_recordMeetingKodas) then,
+  ) = _CopyWithImpl_Variables_Mutation_recordMeetingKodas;
+
+  factory CopyWith_Variables_Mutation_recordMeetingKodas.stub(TRes res) =
+      _CopyWithStubImpl_Variables_Mutation_recordMeetingKodas;
+
+  TRes call({UuidValue? personId, UuidValue? meetingId, DateTime? day});
+}
+
+class _CopyWithImpl_Variables_Mutation_recordMeetingKodas<TRes>
+    implements CopyWith_Variables_Mutation_recordMeetingKodas<TRes> {
+  _CopyWithImpl_Variables_Mutation_recordMeetingKodas(
+    this._instance,
+    this._then,
+  );
+
+  final Variables_Mutation_recordMeetingKodas _instance;
+
+  final TRes Function(Variables_Mutation_recordMeetingKodas) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? personId = _undefined,
+    Object? meetingId = _undefined,
+    Object? day = _undefined,
+  }) => _then(
+    Variables_Mutation_recordMeetingKodas._({
+      ..._instance._$data,
+      if (personId != _undefined && personId != null)
+        'personId': (personId as UuidValue),
+      if (meetingId != _undefined && meetingId != null)
+        'meetingId': (meetingId as UuidValue),
+      if (day != _undefined && day != null) 'day': (day as DateTime),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Variables_Mutation_recordMeetingKodas<TRes>
+    implements CopyWith_Variables_Mutation_recordMeetingKodas<TRes> {
+  _CopyWithStubImpl_Variables_Mutation_recordMeetingKodas(this._res);
+
+  TRes _res;
+
+  call({UuidValue? personId, UuidValue? meetingId, DateTime? day}) => _res;
+}
+
+class Mutation_recordMeetingKodas {
+  Mutation_recordMeetingKodas({
+    this.insertHistoryKodasHistoryOne,
+    this.$__typename = 'mutation_root',
+  });
+
+  factory Mutation_recordMeetingKodas.fromJson(Map<String, dynamic> json) {
+    final l$insertHistoryKodasHistoryOne = json['insertHistoryKodasHistoryOne'];
+    final l$$__typename = json['__typename'];
+    return Mutation_recordMeetingKodas(
+      insertHistoryKodasHistoryOne: l$insertHistoryKodasHistoryOne == null
+          ? null
+          : Fragment_KodasDayRecord.fromJson(
+              (l$insertHistoryKodasHistoryOne as Map<String, dynamic>),
+            ),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Fragment_KodasDayRecord? insertHistoryKodasHistoryOne;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$insertHistoryKodasHistoryOne = insertHistoryKodasHistoryOne;
+    _resultData['insertHistoryKodasHistoryOne'] = l$insertHistoryKodasHistoryOne
+        ?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$insertHistoryKodasHistoryOne = insertHistoryKodasHistoryOne;
+    final l$$__typename = $__typename;
+    return Object.hashAll([l$insertHistoryKodasHistoryOne, l$$__typename]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Mutation_recordMeetingKodas ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$insertHistoryKodasHistoryOne = insertHistoryKodasHistoryOne;
+    final lOther$insertHistoryKodasHistoryOne =
+        other.insertHistoryKodasHistoryOne;
+    if (l$insertHistoryKodasHistoryOne != lOther$insertHistoryKodasHistoryOne) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Mutation_recordMeetingKodas
+    on Mutation_recordMeetingKodas {
+  CopyWith_Mutation_recordMeetingKodas<Mutation_recordMeetingKodas>
+  get copyWith => CopyWith_Mutation_recordMeetingKodas(this, (i) => i);
+}
+
+abstract class CopyWith_Mutation_recordMeetingKodas<TRes> {
+  factory CopyWith_Mutation_recordMeetingKodas(
+    Mutation_recordMeetingKodas instance,
+    TRes Function(Mutation_recordMeetingKodas) then,
+  ) = _CopyWithImpl_Mutation_recordMeetingKodas;
+
+  factory CopyWith_Mutation_recordMeetingKodas.stub(TRes res) =
+      _CopyWithStubImpl_Mutation_recordMeetingKodas;
+
+  TRes call({
+    Fragment_KodasDayRecord? insertHistoryKodasHistoryOne,
+    String? $__typename,
+  });
+  CopyWith_Fragment_KodasDayRecord<TRes> get insertHistoryKodasHistoryOne;
+}
+
+class _CopyWithImpl_Mutation_recordMeetingKodas<TRes>
+    implements CopyWith_Mutation_recordMeetingKodas<TRes> {
+  _CopyWithImpl_Mutation_recordMeetingKodas(this._instance, this._then);
+
+  final Mutation_recordMeetingKodas _instance;
+
+  final TRes Function(Mutation_recordMeetingKodas) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? insertHistoryKodasHistoryOne = _undefined,
+    Object? $__typename = _undefined,
+  }) => _then(
+    Mutation_recordMeetingKodas(
+      insertHistoryKodasHistoryOne: insertHistoryKodasHistoryOne == _undefined
+          ? _instance.insertHistoryKodasHistoryOne
+          : (insertHistoryKodasHistoryOne as Fragment_KodasDayRecord?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
+
+  CopyWith_Fragment_KodasDayRecord<TRes> get insertHistoryKodasHistoryOne {
+    final local$insertHistoryKodasHistoryOne =
+        _instance.insertHistoryKodasHistoryOne;
+    return local$insertHistoryKodasHistoryOne == null
+        ? CopyWith_Fragment_KodasDayRecord.stub(_then(_instance))
+        : CopyWith_Fragment_KodasDayRecord(
+            local$insertHistoryKodasHistoryOne,
+            (e) => call(insertHistoryKodasHistoryOne: e),
+          );
+  }
+}
+
+class _CopyWithStubImpl_Mutation_recordMeetingKodas<TRes>
+    implements CopyWith_Mutation_recordMeetingKodas<TRes> {
+  _CopyWithStubImpl_Mutation_recordMeetingKodas(this._res);
+
+  TRes _res;
+
+  call({
+    Fragment_KodasDayRecord? insertHistoryKodasHistoryOne,
+    String? $__typename,
+  }) => _res;
+
+  CopyWith_Fragment_KodasDayRecord<TRes> get insertHistoryKodasHistoryOne =>
+      CopyWith_Fragment_KodasDayRecord.stub(_res);
+}
+
+const documentNodeMutationrecordMeetingKodas = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.mutation,
+      name: NameNode(value: 'recordMeetingKodas'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'personId')),
+          type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'meetingId')),
+          type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'day')),
+          type: NamedTypeNode(name: NameNode(value: 'date'), isNonNull: true),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
+          FieldNode(
+            name: NameNode(value: 'insertHistoryKodasHistoryOne'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'object'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'personId'),
+                      value: VariableNode(name: NameNode(value: 'personId')),
+                    ),
+                    ObjectFieldNode(
+                      name: NameNode(value: 'meetingId'),
+                      value: VariableNode(name: NameNode(value: 'meetingId')),
+                    ),
+                    ObjectFieldNode(
+                      name: NameNode(value: 'day'),
+                      value: ObjectValueNode(
+                        fields: [
+                          ObjectFieldNode(
+                            name: NameNode(value: 'data'),
+                            value: ObjectValueNode(
+                              fields: [
+                                ObjectFieldNode(
+                                  name: NameNode(value: 'day'),
+                                  value: VariableNode(
+                                    name: NameNode(value: 'day'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          ObjectFieldNode(
+                            name: NameNode(value: 'onConflict'),
+                            value: ObjectValueNode(
+                              fields: [
+                                ObjectFieldNode(
+                                  name: NameNode(value: 'constraint'),
+                                  value: EnumValueNode(
+                                    name: NameNode(
+                                      value: 'attendance_days_pkey',
+                                    ),
+                                  ),
+                                ),
+                                ObjectFieldNode(
+                                  name: NameNode(value: 'updateColumns'),
+                                  value: EnumValueNode(
+                                    name: NameNode(value: 'day'),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FragmentSpreadNode(
+                  name: NameNode(value: 'KodasDayRecord'),
+                  directives: [],
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ],
+      ),
+    ),
+    fragmentDefinitionKodasDayRecord,
+  ],
+);
+
+class Variables_Mutation_deleteKodas {
+  factory Variables_Mutation_deleteKodas({required UuidValue id}) =>
+      Variables_Mutation_deleteKodas._({r'id': id});
+
+  Variables_Mutation_deleteKodas._(this._$data);
+
+  factory Variables_Mutation_deleteKodas.fromJson(Map<String, dynamic> data) {
+    final result$data = <String, dynamic>{};
+    final l$id = data['id'];
+    result$data['id'] = stringToUuid(l$id);
+    return Variables_Mutation_deleteKodas._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  UuidValue get id => (_$data['id'] as UuidValue);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$id = id;
+    result$data['id'] = uuidToString(l$id);
+    return result$data;
+  }
+
+  CopyWith_Variables_Mutation_deleteKodas<Variables_Mutation_deleteKodas>
+  get copyWith => CopyWith_Variables_Mutation_deleteKodas(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Variables_Mutation_deleteKodas ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    return Object.hashAll([l$id]);
+  }
+}
+
+abstract class CopyWith_Variables_Mutation_deleteKodas<TRes> {
+  factory CopyWith_Variables_Mutation_deleteKodas(
+    Variables_Mutation_deleteKodas instance,
+    TRes Function(Variables_Mutation_deleteKodas) then,
+  ) = _CopyWithImpl_Variables_Mutation_deleteKodas;
+
+  factory CopyWith_Variables_Mutation_deleteKodas.stub(TRes res) =
+      _CopyWithStubImpl_Variables_Mutation_deleteKodas;
+
+  TRes call({UuidValue? id});
+}
+
+class _CopyWithImpl_Variables_Mutation_deleteKodas<TRes>
+    implements CopyWith_Variables_Mutation_deleteKodas<TRes> {
+  _CopyWithImpl_Variables_Mutation_deleteKodas(this._instance, this._then);
+
+  final Variables_Mutation_deleteKodas _instance;
+
+  final TRes Function(Variables_Mutation_deleteKodas) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? id = _undefined}) => _then(
+    Variables_Mutation_deleteKodas._({
+      ..._instance._$data,
+      if (id != _undefined && id != null) 'id': (id as UuidValue),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Variables_Mutation_deleteKodas<TRes>
+    implements CopyWith_Variables_Mutation_deleteKodas<TRes> {
+  _CopyWithStubImpl_Variables_Mutation_deleteKodas(this._res);
+
+  TRes _res;
+
+  call({UuidValue? id}) => _res;
+}
+
+class Mutation_deleteKodas {
+  Mutation_deleteKodas({
+    this.deleteHistoryKodasHistoryByPk,
+    this.$__typename = 'mutation_root',
+  });
+
+  factory Mutation_deleteKodas.fromJson(Map<String, dynamic> json) {
+    final l$deleteHistoryKodasHistoryByPk =
+        json['deleteHistoryKodasHistoryByPk'];
+    final l$$__typename = json['__typename'];
+    return Mutation_deleteKodas(
+      deleteHistoryKodasHistoryByPk: l$deleteHistoryKodasHistoryByPk == null
+          ? null
+          : Fragment_KodasDayRecord.fromJson(
+              (l$deleteHistoryKodasHistoryByPk as Map<String, dynamic>),
+            ),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final Fragment_KodasDayRecord? deleteHistoryKodasHistoryByPk;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$deleteHistoryKodasHistoryByPk = deleteHistoryKodasHistoryByPk;
+    _resultData['deleteHistoryKodasHistoryByPk'] =
+        l$deleteHistoryKodasHistoryByPk?.toJson();
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$deleteHistoryKodasHistoryByPk = deleteHistoryKodasHistoryByPk;
+    final l$$__typename = $__typename;
+    return Object.hashAll([l$deleteHistoryKodasHistoryByPk, l$$__typename]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Mutation_deleteKodas || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$deleteHistoryKodasHistoryByPk = deleteHistoryKodasHistoryByPk;
+    final lOther$deleteHistoryKodasHistoryByPk =
+        other.deleteHistoryKodasHistoryByPk;
+    if (l$deleteHistoryKodasHistoryByPk !=
+        lOther$deleteHistoryKodasHistoryByPk) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Mutation_deleteKodas on Mutation_deleteKodas {
+  CopyWith_Mutation_deleteKodas<Mutation_deleteKodas> get copyWith =>
+      CopyWith_Mutation_deleteKodas(this, (i) => i);
+}
+
+abstract class CopyWith_Mutation_deleteKodas<TRes> {
+  factory CopyWith_Mutation_deleteKodas(
+    Mutation_deleteKodas instance,
+    TRes Function(Mutation_deleteKodas) then,
+  ) = _CopyWithImpl_Mutation_deleteKodas;
+
+  factory CopyWith_Mutation_deleteKodas.stub(TRes res) =
+      _CopyWithStubImpl_Mutation_deleteKodas;
+
+  TRes call({
+    Fragment_KodasDayRecord? deleteHistoryKodasHistoryByPk,
+    String? $__typename,
+  });
+  CopyWith_Fragment_KodasDayRecord<TRes> get deleteHistoryKodasHistoryByPk;
+}
+
+class _CopyWithImpl_Mutation_deleteKodas<TRes>
+    implements CopyWith_Mutation_deleteKodas<TRes> {
+  _CopyWithImpl_Mutation_deleteKodas(this._instance, this._then);
+
+  final Mutation_deleteKodas _instance;
+
+  final TRes Function(Mutation_deleteKodas) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? deleteHistoryKodasHistoryByPk = _undefined,
+    Object? $__typename = _undefined,
+  }) => _then(
+    Mutation_deleteKodas(
+      deleteHistoryKodasHistoryByPk: deleteHistoryKodasHistoryByPk == _undefined
+          ? _instance.deleteHistoryKodasHistoryByPk
+          : (deleteHistoryKodasHistoryByPk as Fragment_KodasDayRecord?),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
+
+  CopyWith_Fragment_KodasDayRecord<TRes> get deleteHistoryKodasHistoryByPk {
+    final local$deleteHistoryKodasHistoryByPk =
+        _instance.deleteHistoryKodasHistoryByPk;
+    return local$deleteHistoryKodasHistoryByPk == null
+        ? CopyWith_Fragment_KodasDayRecord.stub(_then(_instance))
+        : CopyWith_Fragment_KodasDayRecord(
+            local$deleteHistoryKodasHistoryByPk,
+            (e) => call(deleteHistoryKodasHistoryByPk: e),
+          );
+  }
+}
+
+class _CopyWithStubImpl_Mutation_deleteKodas<TRes>
+    implements CopyWith_Mutation_deleteKodas<TRes> {
+  _CopyWithStubImpl_Mutation_deleteKodas(this._res);
+
+  TRes _res;
+
+  call({
+    Fragment_KodasDayRecord? deleteHistoryKodasHistoryByPk,
+    String? $__typename,
+  }) => _res;
+
+  CopyWith_Fragment_KodasDayRecord<TRes> get deleteHistoryKodasHistoryByPk =>
+      CopyWith_Fragment_KodasDayRecord.stub(_res);
+}
+
+const documentNodeMutationdeleteKodas = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.mutation,
+      name: NameNode(value: 'deleteKodas'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'id')),
+          type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
+          FieldNode(
+            name: NameNode(value: 'deleteHistoryKodasHistoryByPk'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'id'),
+                value: VariableNode(name: NameNode(value: 'id')),
+              ),
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FragmentSpreadNode(
+                  name: NameNode(value: 'KodasDayRecord'),
+                  directives: [],
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
+          ),
+          FieldNode(
+            name: NameNode(value: '__typename'),
+            alias: null,
+            arguments: [],
+            directives: [],
+            selectionSet: null,
+          ),
+        ],
+      ),
+    ),
+    fragmentDefinitionKodasDayRecord,
+  ],
+);

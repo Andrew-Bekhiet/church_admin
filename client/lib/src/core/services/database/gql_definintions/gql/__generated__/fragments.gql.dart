@@ -1689,6 +1689,202 @@ const documentNodeFragmentKodasHistory = DocumentNode(
   ],
 );
 
+class Fragment_KodasDayRecord {
+  Fragment_KodasDayRecord({
+    required this.id,
+    required this.personId,
+    required this.dayId,
+    this.$__typename = 'HistoryKodasHistory',
+  });
+
+  factory Fragment_KodasDayRecord.fromJson(Map<String, dynamic> json) {
+    final l$id = json['id'];
+    final l$personId = json['personId'];
+    final l$dayId = json['dayId'];
+    final l$$__typename = json['__typename'];
+    return Fragment_KodasDayRecord(
+      id: stringToUuid(l$id),
+      personId: stringToUuid(l$personId),
+      dayId: dateFromString(l$dayId),
+      $__typename: (l$$__typename as String),
+    );
+  }
+
+  final UuidValue id;
+
+  final UuidValue personId;
+
+  final DateTime dayId;
+
+  final String $__typename;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$id = id;
+    _resultData['id'] = uuidToString(l$id);
+    final l$personId = personId;
+    _resultData['personId'] = uuidToString(l$personId);
+    final l$dayId = dayId;
+    _resultData['dayId'] = dateToString(l$dayId);
+    final l$$__typename = $__typename;
+    _resultData['__typename'] = l$$__typename;
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$id = id;
+    final l$personId = personId;
+    final l$dayId = dayId;
+    final l$$__typename = $__typename;
+    return Object.hashAll([l$id, l$personId, l$dayId, l$$__typename]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Fragment_KodasDayRecord || runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$id = id;
+    final lOther$id = other.id;
+    if (l$id != lOther$id) {
+      return false;
+    }
+    final l$personId = personId;
+    final lOther$personId = other.personId;
+    if (l$personId != lOther$personId) {
+      return false;
+    }
+    final l$dayId = dayId;
+    final lOther$dayId = other.dayId;
+    if (l$dayId != lOther$dayId) {
+      return false;
+    }
+    final l$$__typename = $__typename;
+    final lOther$$__typename = other.$__typename;
+    if (l$$__typename != lOther$$__typename) {
+      return false;
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Fragment_KodasDayRecord on Fragment_KodasDayRecord {
+  CopyWith_Fragment_KodasDayRecord<Fragment_KodasDayRecord> get copyWith =>
+      CopyWith_Fragment_KodasDayRecord(this, (i) => i);
+}
+
+abstract class CopyWith_Fragment_KodasDayRecord<TRes> {
+  factory CopyWith_Fragment_KodasDayRecord(
+    Fragment_KodasDayRecord instance,
+    TRes Function(Fragment_KodasDayRecord) then,
+  ) = _CopyWithImpl_Fragment_KodasDayRecord;
+
+  factory CopyWith_Fragment_KodasDayRecord.stub(TRes res) =
+      _CopyWithStubImpl_Fragment_KodasDayRecord;
+
+  TRes call({
+    UuidValue? id,
+    UuidValue? personId,
+    DateTime? dayId,
+    String? $__typename,
+  });
+}
+
+class _CopyWithImpl_Fragment_KodasDayRecord<TRes>
+    implements CopyWith_Fragment_KodasDayRecord<TRes> {
+  _CopyWithImpl_Fragment_KodasDayRecord(this._instance, this._then);
+
+  final Fragment_KodasDayRecord _instance;
+
+  final TRes Function(Fragment_KodasDayRecord) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? id = _undefined,
+    Object? personId = _undefined,
+    Object? dayId = _undefined,
+    Object? $__typename = _undefined,
+  }) => _then(
+    Fragment_KodasDayRecord(
+      id: id == _undefined || id == null ? _instance.id : (id as UuidValue),
+      personId: personId == _undefined || personId == null
+          ? _instance.personId
+          : (personId as UuidValue),
+      dayId: dayId == _undefined || dayId == null
+          ? _instance.dayId
+          : (dayId as DateTime),
+      $__typename: $__typename == _undefined || $__typename == null
+          ? _instance.$__typename
+          : ($__typename as String),
+    ),
+  );
+}
+
+class _CopyWithStubImpl_Fragment_KodasDayRecord<TRes>
+    implements CopyWith_Fragment_KodasDayRecord<TRes> {
+  _CopyWithStubImpl_Fragment_KodasDayRecord(this._res);
+
+  TRes _res;
+
+  call({
+    UuidValue? id,
+    UuidValue? personId,
+    DateTime? dayId,
+    String? $__typename,
+  }) => _res;
+}
+
+const fragmentDefinitionKodasDayRecord = FragmentDefinitionNode(
+  name: NameNode(value: 'KodasDayRecord'),
+  typeCondition: TypeConditionNode(
+    on: NamedTypeNode(
+      name: NameNode(value: 'HistoryKodasHistory'),
+      isNonNull: false,
+    ),
+  ),
+  directives: [],
+  selectionSet: SelectionSetNode(
+    selections: [
+      FieldNode(
+        name: NameNode(value: 'id'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'personId'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: 'dayId'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+      FieldNode(
+        name: NameNode(value: '__typename'),
+        alias: null,
+        arguments: [],
+        directives: [],
+        selectionSet: null,
+      ),
+    ],
+  ),
+);
+const documentNodeFragmentKodasDayRecord = DocumentNode(
+  definitions: [fragmentDefinitionKodasDayRecord],
+);
+
 class Fragment_ConfessionHistory {
   Fragment_ConfessionHistory({
     required this.id,

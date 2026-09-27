@@ -56,6 +56,12 @@ fragment KodasHistory on HistoryKodasHistory {
   }
 }
 
+fragment KodasDayRecord on HistoryKodasHistory {
+  id
+  personId
+  dayId
+}
+
 fragment ConfessionHistory on HistoryConfessionHistory {
   id
   time

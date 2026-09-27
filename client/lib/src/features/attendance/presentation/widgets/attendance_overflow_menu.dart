@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 
 class AttendanceOverflowMenu extends StatelessWidget {
@@ -26,10 +29,34 @@ class AttendanceOverflowMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final recordsKodas = context.select<RecordKodasCubit, bool>(
+      (cubit) => cubit.state.isTracking,
+    );
+
     return PopupMenuButton<void>(
       borderRadius: BorderRadius.circular(12),
       icon: const Icon(Symbols.more_vert),
       itemBuilder: (context) => [
+        PopupMenuItem(
+          onTap: () => unawaited(
+            context.read<RecordKodasCubit>().changeTracking(
+              enabled: !recordsKodas,
+            ),
+          ),
+          child: ListTile(
+            contentPadding: EdgeInsets.zero,
+            leading: const KodasChaliceIcon(),
+            title: const Text('تسجيل التناول'),
+            subtitle: const Text('خانة للتناول بجانب الحضور'),
+            trailing: Visibility(
+              visible: recordsKodas,
+              maintainAnimation: true,
+              maintainSize: true,
+              maintainState: true,
+              child: const Icon(Symbols.check),
+            ),
+          ),
+        ),
         PopupMenuItem(
           onTap: () => onGroupingChanged(grouping.toggled),
           child: ListTile(

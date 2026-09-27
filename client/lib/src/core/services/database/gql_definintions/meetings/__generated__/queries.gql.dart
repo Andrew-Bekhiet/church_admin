@@ -3099,6 +3099,7 @@ class Query_meetingsAttendanceAnalysis_historyMeetings
     required this.audience,
     this.color,
     required this.isArchived,
+    required this.showKodasCheckbox,
     this.serviceId,
     this.serviceGender,
     this.serviceStudyYear,
@@ -3118,6 +3119,7 @@ class Query_meetingsAttendanceAnalysis_historyMeetings
     final l$audience = json['audience'];
     final l$color = json['color'];
     final l$isArchived = json['isArchived'];
+    final l$showKodasCheckbox = json['showKodasCheckbox'];
     final l$serviceId = json['serviceId'];
     final l$serviceGender = json['serviceGender'];
     final l$serviceStudyYear = json['serviceStudyYear'];
@@ -3133,6 +3135,7 @@ class Query_meetingsAttendanceAnalysis_historyMeetings
       audience: (l$audience as String),
       color: (l$color as int?),
       isArchived: (l$isArchived as bool),
+      showKodasCheckbox: (l$showKodasCheckbox as bool),
       serviceId: l$serviceId == null ? null : stringToUuid(l$serviceId),
       serviceGender: (l$serviceGender as bool?),
       serviceStudyYear: (l$serviceStudyYear as int?),
@@ -3172,6 +3175,8 @@ class Query_meetingsAttendanceAnalysis_historyMeetings
 
   final bool isArchived;
 
+  final bool showKodasCheckbox;
+
   final UuidValue? serviceId;
 
   final bool? serviceGender;
@@ -3202,6 +3207,8 @@ class Query_meetingsAttendanceAnalysis_historyMeetings
     _resultData['color'] = l$color;
     final l$isArchived = isArchived;
     _resultData['isArchived'] = l$isArchived;
+    final l$showKodasCheckbox = showKodasCheckbox;
+    _resultData['showKodasCheckbox'] = l$showKodasCheckbox;
     final l$serviceId = serviceId;
     _resultData['serviceId'] = l$serviceId == null
         ? null
@@ -3232,6 +3239,7 @@ class Query_meetingsAttendanceAnalysis_historyMeetings
     final l$audience = audience;
     final l$color = color;
     final l$isArchived = isArchived;
+    final l$showKodasCheckbox = showKodasCheckbox;
     final l$serviceId = serviceId;
     final l$serviceGender = serviceGender;
     final l$serviceStudyYear = serviceStudyYear;
@@ -3247,6 +3255,7 @@ class Query_meetingsAttendanceAnalysis_historyMeetings
       l$audience,
       l$color,
       l$isArchived,
+      l$showKodasCheckbox,
       l$serviceId,
       l$serviceGender,
       l$serviceStudyYear,
@@ -3291,6 +3300,11 @@ class Query_meetingsAttendanceAnalysis_historyMeetings
     final l$isArchived = isArchived;
     final lOther$isArchived = other.isArchived;
     if (l$isArchived != lOther$isArchived) {
+      return false;
+    }
+    final l$showKodasCheckbox = showKodasCheckbox;
+    final lOther$showKodasCheckbox = other.showKodasCheckbox;
+    if (l$showKodasCheckbox != lOther$showKodasCheckbox) {
       return false;
     }
     final l$serviceId = serviceId;
@@ -3374,6 +3388,7 @@ abstract class CopyWith_Query_meetingsAttendanceAnalysis_historyMeetings<TRes> {
     String? audience,
     int? color,
     bool? isArchived,
+    bool? showKodasCheckbox,
     UuidValue? serviceId,
     bool? serviceGender,
     int? serviceStudyYear,
@@ -3419,6 +3434,7 @@ class _CopyWithImpl_Query_meetingsAttendanceAnalysis_historyMeetings<TRes>
     Object? audience = _undefined,
     Object? color = _undefined,
     Object? isArchived = _undefined,
+    Object? showKodasCheckbox = _undefined,
     Object? serviceId = _undefined,
     Object? serviceGender = _undefined,
     Object? serviceStudyYear = _undefined,
@@ -3441,6 +3457,10 @@ class _CopyWithImpl_Query_meetingsAttendanceAnalysis_historyMeetings<TRes>
       isArchived: isArchived == _undefined || isArchived == null
           ? _instance.isArchived
           : (isArchived as bool),
+      showKodasCheckbox:
+          showKodasCheckbox == _undefined || showKodasCheckbox == null
+          ? _instance.showKodasCheckbox
+          : (showKodasCheckbox as bool),
       serviceId: serviceId == _undefined
           ? _instance.serviceId
           : (serviceId as UuidValue?),
@@ -3536,6 +3556,7 @@ class _CopyWithStubImpl_Query_meetingsAttendanceAnalysis_historyMeetings<TRes>
     String? audience,
     int? color,
     bool? isArchived,
+    bool? showKodasCheckbox,
     UuidValue? serviceId,
     bool? serviceGender,
     int? serviceStudyYear,

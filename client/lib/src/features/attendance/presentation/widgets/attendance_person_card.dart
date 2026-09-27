@@ -1,5 +1,6 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart' hide TextDirection;
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 
@@ -26,8 +27,12 @@ class AttendancePersonCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = ColorScheme.of(context);
     final present = entry.attended;
     final attendanceTime = present ? entry.attendance?.datetime : null;
+    final recordsKodas = context.select<RecordKodasCubit, bool>(
+      (cubit) => cubit.state.isTracking,
+    );
 
     const minTileHeight =
         kCardExtent - _cardVerticalMargin * 2 - _cardVerticalPadding * 2;
@@ -39,7 +44,7 @@ class AttendancePersonCard extends StatelessWidget {
       ).copyWith(end: removeEndPadding ? 0 : null),
       clipBehavior: Clip.antiAlias,
       elevation: 0,
-      color: ColorScheme.of(context).surfaceContainerLow,
+      color: colorScheme.surfaceContainerLow,
       child: ListTile(
         minTileHeight: minTileHeight,
         contentPadding: const EdgeInsets.symmetric(
@@ -59,24 +64,51 @@ class AttendancePersonCard extends StatelessWidget {
           analysis: entry.personAttendanceAnalysis,
           staleWeeks: _staleWeeks,
         ),
-        trailing: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            if (attendanceTime != null)
-              TextButton(
-                style: TextButton.styleFrom(
-                  padding: EdgeInsets.zero,
-                  visualDensity: VisualDensity.compact,
-                ),
-                onPressed: () => _changeAttendanceTime(context),
-                child: Text(DateFormat.jm('ar').format(attendanceTime)),
+        trailing: recordsKodas
+            ? Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  AttendanceKodasToggle(person: entry.person),
+                  AttendanceLabelledToggle(
+                    selected: present,
+                    label: switch (attendanceTime) {
+                      final time? => DateFormat.jm('ar').format(time),
+                      null => 'حضور',
+                    },
+                    semanticsLabel: 'حضور ${entry.person.name}',
+                    icon: Icon(
+                      present
+                          ? Symbols.check_circle
+                          : Symbols.radio_button_unchecked,
+                      fill: present ? 1 : 0,
+                    ),
+                    indicatorColor: colorScheme.primaryContainer,
+                    selectedColor: colorScheme.onPrimaryContainer,
+                    onTap: () => onToggle(entry),
+                    onLongPress: present
+                        ? () => _changeAttendanceTime(context)
+                        : null,
+                  ),
+                ],
+              )
+            : Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  if (attendanceTime != null)
+                    TextButton(
+                      style: TextButton.styleFrom(
+                        padding: EdgeInsets.zero,
+                        visualDensity: VisualDensity.compact,
+                      ),
+                      onPressed: () => _changeAttendanceTime(context),
+                      child: Text(DateFormat.jm('ar').format(attendanceTime)),
+                    ),
+                  AttendancePersonToggle(
+                    isPresent: present,
+                    onTap: () => onToggle(entry),
+                  ),
+                ],
               ),
-            AttendancePersonToggle(
-              isPresent: present,
-              onTap: () => onToggle(entry),
-            ),
-          ],
-        ),
       ),
     );
   }

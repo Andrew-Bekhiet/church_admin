@@ -1,6 +1,445 @@
 // Part 31 of the schema
 part of "schema.graphql.dart";
 
+abstract class CopyWith_Input_HistoryLatestFatherVisitsBoolExp<TRes> {
+  factory CopyWith_Input_HistoryLatestFatherVisitsBoolExp(
+    Input_HistoryLatestFatherVisitsBoolExp instance,
+    TRes Function(Input_HistoryLatestFatherVisitsBoolExp) then,
+  ) = _CopyWithImpl_Input_HistoryLatestFatherVisitsBoolExp;
+
+  factory CopyWith_Input_HistoryLatestFatherVisitsBoolExp.stub(TRes res) =
+      _CopyWithStubImpl_Input_HistoryLatestFatherVisitsBoolExp;
+
+  TRes call({
+    List<Input_HistoryLatestFatherVisitsBoolExp>? $_and,
+    Input_HistoryLatestFatherVisitsBoolExp? $_not,
+    List<Input_HistoryLatestFatherVisitsBoolExp>? $_or,
+    Input_UuidComparisonExp? recordId,
+    Input_UuidComparisonExp? recordedBy,
+    Input_NameComparisonExp? table,
+    Input_TimestamptzComparisonExp? time,
+    Input_AuthUsersDataBoolExp? user,
+    Input_UuidComparisonExp? visitId,
+  });
+  TRes $_and(
+    Iterable<Input_HistoryLatestFatherVisitsBoolExp>? Function(
+      Iterable<
+        CopyWith_Input_HistoryLatestFatherVisitsBoolExp<
+          Input_HistoryLatestFatherVisitsBoolExp
+        >
+      >?,
+    )
+    _fn,
+  );
+  CopyWith_Input_HistoryLatestFatherVisitsBoolExp<TRes> get $_not;
+  TRes $_or(
+    Iterable<Input_HistoryLatestFatherVisitsBoolExp>? Function(
+      Iterable<
+        CopyWith_Input_HistoryLatestFatherVisitsBoolExp<
+          Input_HistoryLatestFatherVisitsBoolExp
+        >
+      >?,
+    )
+    _fn,
+  );
+  CopyWith_Input_UuidComparisonExp<TRes> get recordId;
+  CopyWith_Input_UuidComparisonExp<TRes> get recordedBy;
+  CopyWith_Input_NameComparisonExp<TRes> get table;
+  CopyWith_Input_TimestamptzComparisonExp<TRes> get time;
+  CopyWith_Input_AuthUsersDataBoolExp<TRes> get user;
+  CopyWith_Input_UuidComparisonExp<TRes> get visitId;
+}
+
+class _CopyWithImpl_Input_HistoryLatestFatherVisitsBoolExp<TRes>
+    implements CopyWith_Input_HistoryLatestFatherVisitsBoolExp<TRes> {
+  _CopyWithImpl_Input_HistoryLatestFatherVisitsBoolExp(
+    this._instance,
+    this._then,
+  );
+
+  final Input_HistoryLatestFatherVisitsBoolExp _instance;
+
+  final TRes Function(Input_HistoryLatestFatherVisitsBoolExp) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({
+    Object? $_and = _undefined,
+    Object? $_not = _undefined,
+    Object? $_or = _undefined,
+    Object? recordId = _undefined,
+    Object? recordedBy = _undefined,
+    Object? table = _undefined,
+    Object? time = _undefined,
+    Object? user = _undefined,
+    Object? visitId = _undefined,
+  }) => _then(
+    Input_HistoryLatestFatherVisitsBoolExp._({
+      ..._instance._$data,
+      if ($_and != _undefined)
+        '_and': ($_and as List<Input_HistoryLatestFatherVisitsBoolExp>?),
+      if ($_not != _undefined)
+        '_not': ($_not as Input_HistoryLatestFatherVisitsBoolExp?),
+      if ($_or != _undefined)
+        '_or': ($_or as List<Input_HistoryLatestFatherVisitsBoolExp>?),
+      if (recordId != _undefined)
+        'recordId': (recordId as Input_UuidComparisonExp?),
+      if (recordedBy != _undefined)
+        'recordedBy': (recordedBy as Input_UuidComparisonExp?),
+      if (table != _undefined) 'table': (table as Input_NameComparisonExp?),
+      if (time != _undefined) 'time': (time as Input_TimestamptzComparisonExp?),
+      if (user != _undefined) 'user': (user as Input_AuthUsersDataBoolExp?),
+      if (visitId != _undefined)
+        'visitId': (visitId as Input_UuidComparisonExp?),
+    }),
+  );
+
+  TRes $_and(
+    Iterable<Input_HistoryLatestFatherVisitsBoolExp>? Function(
+      Iterable<
+        CopyWith_Input_HistoryLatestFatherVisitsBoolExp<
+          Input_HistoryLatestFatherVisitsBoolExp
+        >
+      >?,
+    )
+    _fn,
+  ) => call(
+    $_and: _fn(
+      _instance.$_and?.map(
+        (e) => CopyWith_Input_HistoryLatestFatherVisitsBoolExp(e, (i) => i),
+      ),
+    )?.toList(),
+  );
+
+  CopyWith_Input_HistoryLatestFatherVisitsBoolExp<TRes> get $_not {
+    final local$$_not = _instance.$_not;
+    return local$$_not == null
+        ? CopyWith_Input_HistoryLatestFatherVisitsBoolExp.stub(_then(_instance))
+        : CopyWith_Input_HistoryLatestFatherVisitsBoolExp(
+            local$$_not,
+            (e) => call($_not: e),
+          );
+  }
+
+  TRes $_or(
+    Iterable<Input_HistoryLatestFatherVisitsBoolExp>? Function(
+      Iterable<
+        CopyWith_Input_HistoryLatestFatherVisitsBoolExp<
+          Input_HistoryLatestFatherVisitsBoolExp
+        >
+      >?,
+    )
+    _fn,
+  ) => call(
+    $_or: _fn(
+      _instance.$_or?.map(
+        (e) => CopyWith_Input_HistoryLatestFatherVisitsBoolExp(e, (i) => i),
+      ),
+    )?.toList(),
+  );
+
+  CopyWith_Input_UuidComparisonExp<TRes> get recordId {
+    final local$recordId = _instance.recordId;
+    return local$recordId == null
+        ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_UuidComparisonExp(
+            local$recordId,
+            (e) => call(recordId: e),
+          );
+  }
+
+  CopyWith_Input_UuidComparisonExp<TRes> get recordedBy {
+    final local$recordedBy = _instance.recordedBy;
+    return local$recordedBy == null
+        ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_UuidComparisonExp(
+            local$recordedBy,
+            (e) => call(recordedBy: e),
+          );
+  }
+
+  CopyWith_Input_NameComparisonExp<TRes> get table {
+    final local$table = _instance.table;
+    return local$table == null
+        ? CopyWith_Input_NameComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_NameComparisonExp(local$table, (e) => call(table: e));
+  }
+
+  CopyWith_Input_TimestamptzComparisonExp<TRes> get time {
+    final local$time = _instance.time;
+    return local$time == null
+        ? CopyWith_Input_TimestamptzComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_TimestamptzComparisonExp(
+            local$time,
+            (e) => call(time: e),
+          );
+  }
+
+  CopyWith_Input_AuthUsersDataBoolExp<TRes> get user {
+    final local$user = _instance.user;
+    return local$user == null
+        ? CopyWith_Input_AuthUsersDataBoolExp.stub(_then(_instance))
+        : CopyWith_Input_AuthUsersDataBoolExp(local$user, (e) => call(user: e));
+  }
+
+  CopyWith_Input_UuidComparisonExp<TRes> get visitId {
+    final local$visitId = _instance.visitId;
+    return local$visitId == null
+        ? CopyWith_Input_UuidComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_UuidComparisonExp(
+            local$visitId,
+            (e) => call(visitId: e),
+          );
+  }
+}
+
+class _CopyWithStubImpl_Input_HistoryLatestFatherVisitsBoolExp<TRes>
+    implements CopyWith_Input_HistoryLatestFatherVisitsBoolExp<TRes> {
+  _CopyWithStubImpl_Input_HistoryLatestFatherVisitsBoolExp(this._res);
+
+  TRes _res;
+
+  call({
+    List<Input_HistoryLatestFatherVisitsBoolExp>? $_and,
+    Input_HistoryLatestFatherVisitsBoolExp? $_not,
+    List<Input_HistoryLatestFatherVisitsBoolExp>? $_or,
+    Input_UuidComparisonExp? recordId,
+    Input_UuidComparisonExp? recordedBy,
+    Input_NameComparisonExp? table,
+    Input_TimestamptzComparisonExp? time,
+    Input_AuthUsersDataBoolExp? user,
+    Input_UuidComparisonExp? visitId,
+  }) => _res;
+
+  $_and(_fn) => _res;
+
+  CopyWith_Input_HistoryLatestFatherVisitsBoolExp<TRes> get $_not =>
+      CopyWith_Input_HistoryLatestFatherVisitsBoolExp.stub(_res);
+
+  $_or(_fn) => _res;
+
+  CopyWith_Input_UuidComparisonExp<TRes> get recordId =>
+      CopyWith_Input_UuidComparisonExp.stub(_res);
+
+  CopyWith_Input_UuidComparisonExp<TRes> get recordedBy =>
+      CopyWith_Input_UuidComparisonExp.stub(_res);
+
+  CopyWith_Input_NameComparisonExp<TRes> get table =>
+      CopyWith_Input_NameComparisonExp.stub(_res);
+
+  CopyWith_Input_TimestamptzComparisonExp<TRes> get time =>
+      CopyWith_Input_TimestamptzComparisonExp.stub(_res);
+
+  CopyWith_Input_AuthUsersDataBoolExp<TRes> get user =>
+      CopyWith_Input_AuthUsersDataBoolExp.stub(_res);
+
+  CopyWith_Input_UuidComparisonExp<TRes> get visitId =>
+      CopyWith_Input_UuidComparisonExp.stub(_res);
+}
+
+class Input_HistoryLatestFatherVisitsOrderBy {
+  factory Input_HistoryLatestFatherVisitsOrderBy({
+    Enum_OrderBy? recordId,
+    Enum_OrderBy? recordedBy,
+    Enum_OrderBy? table,
+    Enum_OrderBy? time,
+    Input_AuthUsersDataOrderBy? user,
+    Enum_OrderBy? visitId,
+  }) => Input_HistoryLatestFatherVisitsOrderBy._({
+    if (recordId != null) r'recordId': recordId,
+    if (recordedBy != null) r'recordedBy': recordedBy,
+    if (table != null) r'table': table,
+    if (time != null) r'time': time,
+    if (user != null) r'user': user,
+    if (visitId != null) r'visitId': visitId,
+  });
+
+  Input_HistoryLatestFatherVisitsOrderBy._(this._$data);
+
+  factory Input_HistoryLatestFatherVisitsOrderBy.fromJson(
+    Map<String, dynamic> data,
+  ) {
+    final result$data = <String, dynamic>{};
+    if (data.containsKey('recordId')) {
+      final l$recordId = data['recordId'];
+      result$data['recordId'] = l$recordId == null
+          ? null
+          : fromJson_Enum_OrderBy((l$recordId as String));
+    }
+    if (data.containsKey('recordedBy')) {
+      final l$recordedBy = data['recordedBy'];
+      result$data['recordedBy'] = l$recordedBy == null
+          ? null
+          : fromJson_Enum_OrderBy((l$recordedBy as String));
+    }
+    if (data.containsKey('table')) {
+      final l$table = data['table'];
+      result$data['table'] = l$table == null
+          ? null
+          : fromJson_Enum_OrderBy((l$table as String));
+    }
+    if (data.containsKey('time')) {
+      final l$time = data['time'];
+      result$data['time'] = l$time == null
+          ? null
+          : fromJson_Enum_OrderBy((l$time as String));
+    }
+    if (data.containsKey('user')) {
+      final l$user = data['user'];
+      result$data['user'] = l$user == null
+          ? null
+          : Input_AuthUsersDataOrderBy.fromJson(
+              (l$user as Map<String, dynamic>),
+            );
+    }
+    if (data.containsKey('visitId')) {
+      final l$visitId = data['visitId'];
+      result$data['visitId'] = l$visitId == null
+          ? null
+          : fromJson_Enum_OrderBy((l$visitId as String));
+    }
+    return Input_HistoryLatestFatherVisitsOrderBy._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  Enum_OrderBy? get recordId => (_$data['recordId'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get recordedBy => (_$data['recordedBy'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get table => (_$data['table'] as Enum_OrderBy?);
+
+  Enum_OrderBy? get time => (_$data['time'] as Enum_OrderBy?);
+
+  Input_AuthUsersDataOrderBy? get user =>
+      (_$data['user'] as Input_AuthUsersDataOrderBy?);
+
+  Enum_OrderBy? get visitId => (_$data['visitId'] as Enum_OrderBy?);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    if (_$data.containsKey('recordId')) {
+      final l$recordId = recordId;
+      result$data['recordId'] = l$recordId == null
+          ? null
+          : toJson_Enum_OrderBy(l$recordId);
+    }
+    if (_$data.containsKey('recordedBy')) {
+      final l$recordedBy = recordedBy;
+      result$data['recordedBy'] = l$recordedBy == null
+          ? null
+          : toJson_Enum_OrderBy(l$recordedBy);
+    }
+    if (_$data.containsKey('table')) {
+      final l$table = table;
+      result$data['table'] = l$table == null
+          ? null
+          : toJson_Enum_OrderBy(l$table);
+    }
+    if (_$data.containsKey('time')) {
+      final l$time = time;
+      result$data['time'] = l$time == null ? null : toJson_Enum_OrderBy(l$time);
+    }
+    if (_$data.containsKey('user')) {
+      final l$user = user;
+      result$data['user'] = l$user?.toJson();
+    }
+    if (_$data.containsKey('visitId')) {
+      final l$visitId = visitId;
+      result$data['visitId'] = l$visitId == null
+          ? null
+          : toJson_Enum_OrderBy(l$visitId);
+    }
+    return result$data;
+  }
+
+  CopyWith_Input_HistoryLatestFatherVisitsOrderBy<
+    Input_HistoryLatestFatherVisitsOrderBy
+  >
+  get copyWith =>
+      CopyWith_Input_HistoryLatestFatherVisitsOrderBy(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Input_HistoryLatestFatherVisitsOrderBy ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$recordId = recordId;
+    final lOther$recordId = other.recordId;
+    if (_$data.containsKey('recordId') !=
+        other._$data.containsKey('recordId')) {
+      return false;
+    }
+    if (l$recordId != lOther$recordId) {
+      return false;
+    }
+    final l$recordedBy = recordedBy;
+    final lOther$recordedBy = other.recordedBy;
+    if (_$data.containsKey('recordedBy') !=
+        other._$data.containsKey('recordedBy')) {
+      return false;
+    }
+    if (l$recordedBy != lOther$recordedBy) {
+      return false;
+    }
+    final l$table = table;
+    final lOther$table = other.table;
+    if (_$data.containsKey('table') != other._$data.containsKey('table')) {
+      return false;
+    }
+    if (l$table != lOther$table) {
+      return false;
+    }
+    final l$time = time;
+    final lOther$time = other.time;
+    if (_$data.containsKey('time') != other._$data.containsKey('time')) {
+      return false;
+    }
+    if (l$time != lOther$time) {
+      return false;
+    }
+    final l$user = user;
+    final lOther$user = other.user;
+    if (_$data.containsKey('user') != other._$data.containsKey('user')) {
+      return false;
+    }
+    if (l$user != lOther$user) {
+      return false;
+    }
+    final l$visitId = visitId;
+    final lOther$visitId = other.visitId;
+    if (_$data.containsKey('visitId') != other._$data.containsKey('visitId')) {
+      return false;
+    }
+    if (l$visitId != lOther$visitId) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$recordId = recordId;
+    final l$recordedBy = recordedBy;
+    final l$table = table;
+    final l$time = time;
+    final l$user = user;
+    final l$visitId = visitId;
+    return Object.hashAll([
+      _$data.containsKey('recordId') ? l$recordId : const {},
+      _$data.containsKey('recordedBy') ? l$recordedBy : const {},
+      _$data.containsKey('table') ? l$table : const {},
+      _$data.containsKey('time') ? l$time : const {},
+      _$data.containsKey('user') ? l$user : const {},
+      _$data.containsKey('visitId') ? l$visitId : const {},
+    ]);
+  }
+}
+
 abstract class CopyWith_Input_HistoryLatestFatherVisitsOrderBy<TRes> {
   factory CopyWith_Input_HistoryLatestFatherVisitsOrderBy(
     Input_HistoryLatestFatherVisitsOrderBy instance,
@@ -2242,404 +2681,6 @@ class Input_HistoryMeetingDaysAggregateOrderBy {
       _$data.containsKey('varPop') ? l$varPop : const {},
       _$data.containsKey('varSamp') ? l$varSamp : const {},
       _$data.containsKey('variance') ? l$variance : const {},
-    ]);
-  }
-}
-
-abstract class CopyWith_Input_HistoryMeetingDaysAggregateOrderBy<TRes> {
-  factory CopyWith_Input_HistoryMeetingDaysAggregateOrderBy(
-    Input_HistoryMeetingDaysAggregateOrderBy instance,
-    TRes Function(Input_HistoryMeetingDaysAggregateOrderBy) then,
-  ) = _CopyWithImpl_Input_HistoryMeetingDaysAggregateOrderBy;
-
-  factory CopyWith_Input_HistoryMeetingDaysAggregateOrderBy.stub(TRes res) =
-      _CopyWithStubImpl_Input_HistoryMeetingDaysAggregateOrderBy;
-
-  TRes call({
-    Input_HistoryMeetingDaysAvgOrderBy? avg,
-    Enum_OrderBy? count,
-    Input_HistoryMeetingDaysMaxOrderBy? max,
-    Input_HistoryMeetingDaysMinOrderBy? min,
-    Input_HistoryMeetingDaysStddevOrderBy? stddev,
-    Input_HistoryMeetingDaysStddevPopOrderBy? stddevPop,
-    Input_HistoryMeetingDaysStddevSampOrderBy? stddevSamp,
-    Input_HistoryMeetingDaysSumOrderBy? sum,
-    Input_HistoryMeetingDaysVarPopOrderBy? varPop,
-    Input_HistoryMeetingDaysVarSampOrderBy? varSamp,
-    Input_HistoryMeetingDaysVarianceOrderBy? variance,
-  });
-  CopyWith_Input_HistoryMeetingDaysAvgOrderBy<TRes> get avg;
-  CopyWith_Input_HistoryMeetingDaysMaxOrderBy<TRes> get max;
-  CopyWith_Input_HistoryMeetingDaysMinOrderBy<TRes> get min;
-  CopyWith_Input_HistoryMeetingDaysStddevOrderBy<TRes> get stddev;
-  CopyWith_Input_HistoryMeetingDaysStddevPopOrderBy<TRes> get stddevPop;
-  CopyWith_Input_HistoryMeetingDaysStddevSampOrderBy<TRes> get stddevSamp;
-  CopyWith_Input_HistoryMeetingDaysSumOrderBy<TRes> get sum;
-  CopyWith_Input_HistoryMeetingDaysVarPopOrderBy<TRes> get varPop;
-  CopyWith_Input_HistoryMeetingDaysVarSampOrderBy<TRes> get varSamp;
-  CopyWith_Input_HistoryMeetingDaysVarianceOrderBy<TRes> get variance;
-}
-
-class _CopyWithImpl_Input_HistoryMeetingDaysAggregateOrderBy<TRes>
-    implements CopyWith_Input_HistoryMeetingDaysAggregateOrderBy<TRes> {
-  _CopyWithImpl_Input_HistoryMeetingDaysAggregateOrderBy(
-    this._instance,
-    this._then,
-  );
-
-  final Input_HistoryMeetingDaysAggregateOrderBy _instance;
-
-  final TRes Function(Input_HistoryMeetingDaysAggregateOrderBy) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({
-    Object? avg = _undefined,
-    Object? count = _undefined,
-    Object? max = _undefined,
-    Object? min = _undefined,
-    Object? stddev = _undefined,
-    Object? stddevPop = _undefined,
-    Object? stddevSamp = _undefined,
-    Object? sum = _undefined,
-    Object? varPop = _undefined,
-    Object? varSamp = _undefined,
-    Object? variance = _undefined,
-  }) => _then(
-    Input_HistoryMeetingDaysAggregateOrderBy._({
-      ..._instance._$data,
-      if (avg != _undefined)
-        'avg': (avg as Input_HistoryMeetingDaysAvgOrderBy?),
-      if (count != _undefined) 'count': (count as Enum_OrderBy?),
-      if (max != _undefined)
-        'max': (max as Input_HistoryMeetingDaysMaxOrderBy?),
-      if (min != _undefined)
-        'min': (min as Input_HistoryMeetingDaysMinOrderBy?),
-      if (stddev != _undefined)
-        'stddev': (stddev as Input_HistoryMeetingDaysStddevOrderBy?),
-      if (stddevPop != _undefined)
-        'stddevPop': (stddevPop as Input_HistoryMeetingDaysStddevPopOrderBy?),
-      if (stddevSamp != _undefined)
-        'stddevSamp':
-            (stddevSamp as Input_HistoryMeetingDaysStddevSampOrderBy?),
-      if (sum != _undefined)
-        'sum': (sum as Input_HistoryMeetingDaysSumOrderBy?),
-      if (varPop != _undefined)
-        'varPop': (varPop as Input_HistoryMeetingDaysVarPopOrderBy?),
-      if (varSamp != _undefined)
-        'varSamp': (varSamp as Input_HistoryMeetingDaysVarSampOrderBy?),
-      if (variance != _undefined)
-        'variance': (variance as Input_HistoryMeetingDaysVarianceOrderBy?),
-    }),
-  );
-
-  CopyWith_Input_HistoryMeetingDaysAvgOrderBy<TRes> get avg {
-    final local$avg = _instance.avg;
-    return local$avg == null
-        ? CopyWith_Input_HistoryMeetingDaysAvgOrderBy.stub(_then(_instance))
-        : CopyWith_Input_HistoryMeetingDaysAvgOrderBy(
-            local$avg,
-            (e) => call(avg: e),
-          );
-  }
-
-  CopyWith_Input_HistoryMeetingDaysMaxOrderBy<TRes> get max {
-    final local$max = _instance.max;
-    return local$max == null
-        ? CopyWith_Input_HistoryMeetingDaysMaxOrderBy.stub(_then(_instance))
-        : CopyWith_Input_HistoryMeetingDaysMaxOrderBy(
-            local$max,
-            (e) => call(max: e),
-          );
-  }
-
-  CopyWith_Input_HistoryMeetingDaysMinOrderBy<TRes> get min {
-    final local$min = _instance.min;
-    return local$min == null
-        ? CopyWith_Input_HistoryMeetingDaysMinOrderBy.stub(_then(_instance))
-        : CopyWith_Input_HistoryMeetingDaysMinOrderBy(
-            local$min,
-            (e) => call(min: e),
-          );
-  }
-
-  CopyWith_Input_HistoryMeetingDaysStddevOrderBy<TRes> get stddev {
-    final local$stddev = _instance.stddev;
-    return local$stddev == null
-        ? CopyWith_Input_HistoryMeetingDaysStddevOrderBy.stub(_then(_instance))
-        : CopyWith_Input_HistoryMeetingDaysStddevOrderBy(
-            local$stddev,
-            (e) => call(stddev: e),
-          );
-  }
-
-  CopyWith_Input_HistoryMeetingDaysStddevPopOrderBy<TRes> get stddevPop {
-    final local$stddevPop = _instance.stddevPop;
-    return local$stddevPop == null
-        ? CopyWith_Input_HistoryMeetingDaysStddevPopOrderBy.stub(
-            _then(_instance),
-          )
-        : CopyWith_Input_HistoryMeetingDaysStddevPopOrderBy(
-            local$stddevPop,
-            (e) => call(stddevPop: e),
-          );
-  }
-
-  CopyWith_Input_HistoryMeetingDaysStddevSampOrderBy<TRes> get stddevSamp {
-    final local$stddevSamp = _instance.stddevSamp;
-    return local$stddevSamp == null
-        ? CopyWith_Input_HistoryMeetingDaysStddevSampOrderBy.stub(
-            _then(_instance),
-          )
-        : CopyWith_Input_HistoryMeetingDaysStddevSampOrderBy(
-            local$stddevSamp,
-            (e) => call(stddevSamp: e),
-          );
-  }
-
-  CopyWith_Input_HistoryMeetingDaysSumOrderBy<TRes> get sum {
-    final local$sum = _instance.sum;
-    return local$sum == null
-        ? CopyWith_Input_HistoryMeetingDaysSumOrderBy.stub(_then(_instance))
-        : CopyWith_Input_HistoryMeetingDaysSumOrderBy(
-            local$sum,
-            (e) => call(sum: e),
-          );
-  }
-
-  CopyWith_Input_HistoryMeetingDaysVarPopOrderBy<TRes> get varPop {
-    final local$varPop = _instance.varPop;
-    return local$varPop == null
-        ? CopyWith_Input_HistoryMeetingDaysVarPopOrderBy.stub(_then(_instance))
-        : CopyWith_Input_HistoryMeetingDaysVarPopOrderBy(
-            local$varPop,
-            (e) => call(varPop: e),
-          );
-  }
-
-  CopyWith_Input_HistoryMeetingDaysVarSampOrderBy<TRes> get varSamp {
-    final local$varSamp = _instance.varSamp;
-    return local$varSamp == null
-        ? CopyWith_Input_HistoryMeetingDaysVarSampOrderBy.stub(_then(_instance))
-        : CopyWith_Input_HistoryMeetingDaysVarSampOrderBy(
-            local$varSamp,
-            (e) => call(varSamp: e),
-          );
-  }
-
-  CopyWith_Input_HistoryMeetingDaysVarianceOrderBy<TRes> get variance {
-    final local$variance = _instance.variance;
-    return local$variance == null
-        ? CopyWith_Input_HistoryMeetingDaysVarianceOrderBy.stub(
-            _then(_instance),
-          )
-        : CopyWith_Input_HistoryMeetingDaysVarianceOrderBy(
-            local$variance,
-            (e) => call(variance: e),
-          );
-  }
-}
-
-class _CopyWithStubImpl_Input_HistoryMeetingDaysAggregateOrderBy<TRes>
-    implements CopyWith_Input_HistoryMeetingDaysAggregateOrderBy<TRes> {
-  _CopyWithStubImpl_Input_HistoryMeetingDaysAggregateOrderBy(this._res);
-
-  TRes _res;
-
-  call({
-    Input_HistoryMeetingDaysAvgOrderBy? avg,
-    Enum_OrderBy? count,
-    Input_HistoryMeetingDaysMaxOrderBy? max,
-    Input_HistoryMeetingDaysMinOrderBy? min,
-    Input_HistoryMeetingDaysStddevOrderBy? stddev,
-    Input_HistoryMeetingDaysStddevPopOrderBy? stddevPop,
-    Input_HistoryMeetingDaysStddevSampOrderBy? stddevSamp,
-    Input_HistoryMeetingDaysSumOrderBy? sum,
-    Input_HistoryMeetingDaysVarPopOrderBy? varPop,
-    Input_HistoryMeetingDaysVarSampOrderBy? varSamp,
-    Input_HistoryMeetingDaysVarianceOrderBy? variance,
-  }) => _res;
-
-  CopyWith_Input_HistoryMeetingDaysAvgOrderBy<TRes> get avg =>
-      CopyWith_Input_HistoryMeetingDaysAvgOrderBy.stub(_res);
-
-  CopyWith_Input_HistoryMeetingDaysMaxOrderBy<TRes> get max =>
-      CopyWith_Input_HistoryMeetingDaysMaxOrderBy.stub(_res);
-
-  CopyWith_Input_HistoryMeetingDaysMinOrderBy<TRes> get min =>
-      CopyWith_Input_HistoryMeetingDaysMinOrderBy.stub(_res);
-
-  CopyWith_Input_HistoryMeetingDaysStddevOrderBy<TRes> get stddev =>
-      CopyWith_Input_HistoryMeetingDaysStddevOrderBy.stub(_res);
-
-  CopyWith_Input_HistoryMeetingDaysStddevPopOrderBy<TRes> get stddevPop =>
-      CopyWith_Input_HistoryMeetingDaysStddevPopOrderBy.stub(_res);
-
-  CopyWith_Input_HistoryMeetingDaysStddevSampOrderBy<TRes> get stddevSamp =>
-      CopyWith_Input_HistoryMeetingDaysStddevSampOrderBy.stub(_res);
-
-  CopyWith_Input_HistoryMeetingDaysSumOrderBy<TRes> get sum =>
-      CopyWith_Input_HistoryMeetingDaysSumOrderBy.stub(_res);
-
-  CopyWith_Input_HistoryMeetingDaysVarPopOrderBy<TRes> get varPop =>
-      CopyWith_Input_HistoryMeetingDaysVarPopOrderBy.stub(_res);
-
-  CopyWith_Input_HistoryMeetingDaysVarSampOrderBy<TRes> get varSamp =>
-      CopyWith_Input_HistoryMeetingDaysVarSampOrderBy.stub(_res);
-
-  CopyWith_Input_HistoryMeetingDaysVarianceOrderBy<TRes> get variance =>
-      CopyWith_Input_HistoryMeetingDaysVarianceOrderBy.stub(_res);
-}
-
-class Input_HistoryMeetingDaysAvgOrderBy {
-  factory Input_HistoryMeetingDaysAvgOrderBy({
-    Enum_OrderBy? personsCount,
-    Enum_OrderBy? servantsCount,
-    Enum_OrderBy? studyYearId,
-    Enum_OrderBy? totalCount,
-  }) => Input_HistoryMeetingDaysAvgOrderBy._({
-    if (personsCount != null) r'personsCount': personsCount,
-    if (servantsCount != null) r'servantsCount': servantsCount,
-    if (studyYearId != null) r'studyYearId': studyYearId,
-    if (totalCount != null) r'totalCount': totalCount,
-  });
-
-  Input_HistoryMeetingDaysAvgOrderBy._(this._$data);
-
-  factory Input_HistoryMeetingDaysAvgOrderBy.fromJson(
-    Map<String, dynamic> data,
-  ) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('personsCount')) {
-      final l$personsCount = data['personsCount'];
-      result$data['personsCount'] = l$personsCount == null
-          ? null
-          : fromJson_Enum_OrderBy((l$personsCount as String));
-    }
-    if (data.containsKey('servantsCount')) {
-      final l$servantsCount = data['servantsCount'];
-      result$data['servantsCount'] = l$servantsCount == null
-          ? null
-          : fromJson_Enum_OrderBy((l$servantsCount as String));
-    }
-    if (data.containsKey('studyYearId')) {
-      final l$studyYearId = data['studyYearId'];
-      result$data['studyYearId'] = l$studyYearId == null
-          ? null
-          : fromJson_Enum_OrderBy((l$studyYearId as String));
-    }
-    if (data.containsKey('totalCount')) {
-      final l$totalCount = data['totalCount'];
-      result$data['totalCount'] = l$totalCount == null
-          ? null
-          : fromJson_Enum_OrderBy((l$totalCount as String));
-    }
-    return Input_HistoryMeetingDaysAvgOrderBy._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  Enum_OrderBy? get personsCount => (_$data['personsCount'] as Enum_OrderBy?);
-
-  Enum_OrderBy? get servantsCount => (_$data['servantsCount'] as Enum_OrderBy?);
-
-  Enum_OrderBy? get studyYearId => (_$data['studyYearId'] as Enum_OrderBy?);
-
-  Enum_OrderBy? get totalCount => (_$data['totalCount'] as Enum_OrderBy?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('personsCount')) {
-      final l$personsCount = personsCount;
-      result$data['personsCount'] = l$personsCount == null
-          ? null
-          : toJson_Enum_OrderBy(l$personsCount);
-    }
-    if (_$data.containsKey('servantsCount')) {
-      final l$servantsCount = servantsCount;
-      result$data['servantsCount'] = l$servantsCount == null
-          ? null
-          : toJson_Enum_OrderBy(l$servantsCount);
-    }
-    if (_$data.containsKey('studyYearId')) {
-      final l$studyYearId = studyYearId;
-      result$data['studyYearId'] = l$studyYearId == null
-          ? null
-          : toJson_Enum_OrderBy(l$studyYearId);
-    }
-    if (_$data.containsKey('totalCount')) {
-      final l$totalCount = totalCount;
-      result$data['totalCount'] = l$totalCount == null
-          ? null
-          : toJson_Enum_OrderBy(l$totalCount);
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_HistoryMeetingDaysAvgOrderBy<
-    Input_HistoryMeetingDaysAvgOrderBy
-  >
-  get copyWith => CopyWith_Input_HistoryMeetingDaysAvgOrderBy(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_HistoryMeetingDaysAvgOrderBy ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$personsCount = personsCount;
-    final lOther$personsCount = other.personsCount;
-    if (_$data.containsKey('personsCount') !=
-        other._$data.containsKey('personsCount')) {
-      return false;
-    }
-    if (l$personsCount != lOther$personsCount) {
-      return false;
-    }
-    final l$servantsCount = servantsCount;
-    final lOther$servantsCount = other.servantsCount;
-    if (_$data.containsKey('servantsCount') !=
-        other._$data.containsKey('servantsCount')) {
-      return false;
-    }
-    if (l$servantsCount != lOther$servantsCount) {
-      return false;
-    }
-    final l$studyYearId = studyYearId;
-    final lOther$studyYearId = other.studyYearId;
-    if (_$data.containsKey('studyYearId') !=
-        other._$data.containsKey('studyYearId')) {
-      return false;
-    }
-    if (l$studyYearId != lOther$studyYearId) {
-      return false;
-    }
-    final l$totalCount = totalCount;
-    final lOther$totalCount = other.totalCount;
-    if (_$data.containsKey('totalCount') !=
-        other._$data.containsKey('totalCount')) {
-      return false;
-    }
-    if (l$totalCount != lOther$totalCount) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$personsCount = personsCount;
-    final l$servantsCount = servantsCount;
-    final l$studyYearId = studyYearId;
-    final l$totalCount = totalCount;
-    return Object.hashAll([
-      _$data.containsKey('personsCount') ? l$personsCount : const {},
-      _$data.containsKey('servantsCount') ? l$servantsCount : const {},
-      _$data.containsKey('studyYearId') ? l$studyYearId : const {},
-      _$data.containsKey('totalCount') ? l$totalCount : const {},
     ]);
   }
 }

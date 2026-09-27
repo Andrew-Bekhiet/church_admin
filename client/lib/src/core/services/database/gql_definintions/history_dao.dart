@@ -1,10 +1,18 @@
 import 'package:church_admin/church_admin.dart';
+import 'package:church_admin/src/core/services/database/gql_definintions/gql/__generated__/fragments.gql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/history/__generated__/mutations.gql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/history/__generated__/subscriptions.gql.dart';
 import 'package:gql/ast.dart';
 import 'package:graphql/client.dart';
 
 class HistoryDAO {
+  static KodasRecord _kodasRecordFrom(Fragment_KodasDayRecord fragment) =>
+      KodasRecord(
+        id: fragment.id.uuid,
+        personId: fragment.personId.uuid,
+        day: fragment.dayId,
+      );
+
   final DatabaseService db;
 
   DBGraphQLClient get graphQLClient => db.graphQLClient;
@@ -217,6 +225,61 @@ class HistoryDAO {
         parserFn: db.parser.singleOrNullParser(
           db.parser.singleOrNullParser(Person.fromJson),
         ),
+      ),
+    );
+  }
+
+  Stream<List<KodasRecord>> streamDayKodas({required DateTime day}) {
+    return graphQLClient.subscribeAndReturnParsed(
+      SubscriptionOptions(
+        document: documentNodeSubscriptionwatchDayKodas,
+        operationName: 'watchDayKodas',
+        variables: Variables_Subscription_watchDayKodas(day: day).toJson(),
+        parserFn: (data) => Subscription_watchDayKodas.fromJson(
+          data,
+        ).historyKodasHistory.map(_kodasRecordFrom).toList(),
+      ),
+    );
+  }
+
+  Future<KodasRecord> recordMeetingKodas({
+    required String personId,
+    required String meetingId,
+    required DateTime day,
+  }) {
+    return graphQLClient.mutateAndReturnParsed(
+      MutationOptions(
+        document: documentNodeMutationrecordMeetingKodas,
+        operationName: 'recordMeetingKodas',
+        variables: Variables_Mutation_recordMeetingKodas(
+          personId: personId.toUuid(),
+          meetingId: meetingId.toUuid(),
+          day: day,
+        ).toJson(),
+        parserFn: (data) => switch (Mutation_recordMeetingKodas.fromJson(
+          data,
+        ).insertHistoryKodasHistoryOne) {
+          final inserted? => _kodasRecordFrom(inserted),
+          null => throw const KodasChangeRejectedException(),
+        },
+      ),
+    );
+  }
+
+  Future<KodasRecord> deleteKodas({required String kodasRecordId}) {
+    return graphQLClient.mutateAndReturnParsed(
+      MutationOptions(
+        document: documentNodeMutationdeleteKodas,
+        operationName: 'deleteKodas',
+        variables: Variables_Mutation_deleteKodas(
+          id: kodasRecordId.toUuid(),
+        ).toJson(),
+        parserFn: (data) => switch (Mutation_deleteKodas.fromJson(
+          data,
+        ).deleteHistoryKodasHistoryByPk) {
+          final deleted? => _kodasRecordFrom(deleted),
+          null => throw const KodasChangeRejectedException(),
+        },
       ),
     );
   }
