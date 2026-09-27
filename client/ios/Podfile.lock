@@ -1,6 +1,4 @@
 PODS:
-  - cryptography_flutter_plus (0.2.0):
-    - Flutter
   - Flutter (1.0.0)
   - ObjectBox (4.4.1)
   - objectbox_flutter_libs (0.0.1):
@@ -8,7 +6,6 @@ PODS:
     - ObjectBox (= 4.4.1)
 
 DEPENDENCIES:
-  - cryptography_flutter_plus (from `.symlinks/plugins/cryptography_flutter_plus/ios`)
   - Flutter (from `Flutter`)
   - objectbox_flutter_libs (from `.symlinks/plugins/objectbox_flutter_libs/ios`)
 
@@ -17,15 +14,12 @@ SPEC REPOS:
     - ObjectBox
 
 EXTERNAL SOURCES:
-  cryptography_flutter_plus:
-    :path: ".symlinks/plugins/cryptography_flutter_plus/ios"
   Flutter:
     :path: Flutter
   objectbox_flutter_libs:
     :path: ".symlinks/plugins/objectbox_flutter_libs/ios"
 
 SPEC CHECKSUMS:
-  cryptography_flutter_plus: 44f4e9e4079395fcbb3e7809c0ac2c6ae2d9576f
   Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
   ObjectBox: 7da4aceb5013d041bfafdbc6d744a26918b09757
   objectbox_flutter_libs: 09b1dec1b4cd27bf1a5f9bae7ccaa7e43588bf31

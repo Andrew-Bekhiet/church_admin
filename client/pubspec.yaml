@@ -147,10 +147,7 @@ dev_dependencies:
   plugin_platform_interface: ^2.1.3
   rxdart_ext: ^0.3.0
   solid_lints: 1.0.0-dev.1
-  spot:
-    git:
-      url: https://github.com/passsy/spot
-      ref: main
+  spot: ^0.20.1
   url_launcher_platform_interface: ^2.1.2
   web_socket: ^1.0.1
   web_socket_channel: ^3.0.3
