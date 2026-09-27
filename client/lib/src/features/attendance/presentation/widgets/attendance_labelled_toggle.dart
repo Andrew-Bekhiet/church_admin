@@ -1,34 +1,34 @@
 import 'package:flutter/material.dart';
 
 class AttendanceLabelledToggle extends StatelessWidget {
-  static const double width = 56;
+  static const double width = 58;
 
-  static const double _indicatorWidth = 44;
-  static const double _indicatorHeight = 28;
+  static const double _circleSize = 40;
+  static const double _labelLineHeight = 1.2;
   static const double _iconSize = 22;
-  static const double _disabledOpacity = 0.38;
   static const double _outlineWidth = 1.5;
+  static const double _disabledOpacity = 0.38;
 
   final bool selected;
   final Widget icon;
   final String label;
   final String semanticsLabel;
-  final Color indicatorColor;
-  final Color selectedColor;
+  final Color fillColor;
+  final Color iconColor;
+  final Color selectedLabelColor;
   final VoidCallback? onTap;
   final VoidCallback? onLongPress;
-  final Color? unselectedOutlineColor;
 
   const AttendanceLabelledToggle({
     required this.selected,
     required this.icon,
     required this.label,
     required this.semanticsLabel,
-    required this.indicatorColor,
-    required this.selectedColor,
+    required this.fillColor,
+    required this.iconColor,
+    required this.selectedLabelColor,
     required this.onTap,
     this.onLongPress,
-    this.unselectedOutlineColor,
     super.key,
   });
 
@@ -36,9 +36,12 @@ class AttendanceLabelledToggle extends StatelessWidget {
   Widget build(BuildContext context) {
     final colorScheme = ColorScheme.of(context);
     final enabled = onTap != null;
-    final foreground = switch ((enabled, selected)) {
+    final outlineColor = enabled
+        ? colorScheme.outline
+        : colorScheme.outline.withValues(alpha: _disabledOpacity);
+    final labelColor = switch ((enabled, selected)) {
       (false, _) => colorScheme.onSurface.withValues(alpha: _disabledOpacity),
-      (true, true) => selectedColor,
+      (true, true) => selectedLabelColor,
       (true, false) => colorScheme.onSurfaceVariant,
     };
 
@@ -56,32 +59,35 @@ class AttendanceLabelledToggle extends StatelessWidget {
           width: width,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            spacing: 2,
+            spacing: 1,
             children: [
               AnimatedContainer(
                 duration: Durations.short4,
                 curve: Curves.easeOut,
-                width: _indicatorWidth,
-                height: _indicatorHeight,
+                width: _circleSize,
+                height: _circleSize,
                 decoration: ShapeDecoration(
-                  shape: StadiumBorder(
-                    side: switch (unselectedOutlineColor) {
-                      final outline? when !selected => BorderSide(
-                        color: enabled
-                            ? outline
-                            : outline.withValues(alpha: _disabledOpacity),
-                        width: _outlineWidth,
-                      ),
-                      _ => BorderSide.none,
-                    },
+                  shape: CircleBorder(
+                    side: selected
+                        ? BorderSide.none
+                        : BorderSide(color: outlineColor, width: _outlineWidth),
                   ),
-                  color: selected && enabled
-                      ? indicatorColor
-                      : indicatorColor.withValues(alpha: 0),
+                  color: selected ? fillColor : fillColor.withValues(alpha: 0),
                 ),
-                child: IconTheme.merge(
-                  data: IconThemeData(color: foreground, size: _iconSize),
-                  child: Center(child: icon),
+                child: AnimatedSwitcher(
+                  duration: Durations.short4,
+                  transitionBuilder: (child, animation) =>
+                      ScaleTransition(scale: animation, child: child),
+                  child: selected
+                      ? IconTheme.merge(
+                          key: const ValueKey(true),
+                          data: IconThemeData(
+                            color: iconColor,
+                            size: _iconSize,
+                          ),
+                          child: Center(child: icon),
+                        )
+                      : const SizedBox.shrink(key: ValueKey(false)),
                 ),
               ),
               Text(
@@ -89,8 +95,9 @@ class AttendanceLabelledToggle extends StatelessWidget {
                 maxLines: 1,
                 overflow: TextOverflow.fade,
                 softWrap: false,
-                style: TextTheme.of(context).labelSmall?.copyWith(
-                  color: foreground,
+                style: TextTheme.of(context).labelMedium?.copyWith(
+                  color: labelColor,
+                  height: _labelLineHeight,
                   fontWeight: selected ? FontWeight.w700 : FontWeight.w500,
                 ),
               ),

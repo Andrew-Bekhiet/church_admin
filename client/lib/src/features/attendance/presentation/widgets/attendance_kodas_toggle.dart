@@ -23,10 +23,10 @@ class AttendanceKodasToggle extends StatelessWidget {
       selected: tookKodas ?? false,
       label: 'تناول',
       semanticsLabel: 'تناول ${person.name}',
-      icon: KodasCheckIcon(checked: tookKodas ?? false),
-      indicatorColor: colorScheme.primaryContainer,
-      selectedColor: colorScheme.onPrimaryContainer,
-      unselectedOutlineColor: colorScheme.outline,
+      icon: const KodasChaliceIcon(),
+      fillColor: colorScheme.primary,
+      iconColor: colorScheme.onPrimary,
+      selectedLabelColor: colorScheme.primary,
       onTap: switch (tookKodas) {
         null => null,
         _ => () => unawaited(

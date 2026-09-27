@@ -30,7 +30,6 @@ class AttendancePersonCard extends StatelessWidget {
     final colorScheme = ColorScheme.of(context);
     final present = entry.attended;
     final attendanceTime = present ? entry.attendance?.datetime : null;
-    final attendanceTimeFormat = DateFormat.jm('ar');
     final recordsKodas = context.select<RecordKodasCubit, bool>(
       (cubit) => cubit.state.isVisible,
     );
@@ -65,51 +64,28 @@ class AttendancePersonCard extends StatelessWidget {
           analysis: entry.personAttendanceAnalysis,
           staleWeeks: _staleWeeks,
         ),
-        trailing: recordsKodas
-            ? Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  AttendanceKodasToggle(person: entry.person),
-                  AttendanceLabelledToggle(
-                    selected: present,
-                    label: switch (attendanceTime) {
-                      final time? => attendanceTimeFormat.format(time),
-                      null => 'حضور',
-                    },
-                    semanticsLabel: 'حضور ${entry.person.name}',
-                    icon: Icon(
-                      present
-                          ? Symbols.check_circle
-                          : Symbols.radio_button_unchecked,
-                      fill: present ? 1 : 0,
-                    ),
-                    indicatorColor: colorScheme.primaryContainer,
-                    selectedColor: colorScheme.onPrimaryContainer,
-                    onTap: () => onToggle(entry),
-                    onLongPress: present
-                        ? () => _changeAttendanceTime(context)
-                        : null,
-                  ),
-                ],
-              )
-            : Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  if (attendanceTime != null)
-                    TextButton(
-                      style: TextButton.styleFrom(
-                        padding: EdgeInsets.zero,
-                        visualDensity: VisualDensity.compact,
-                      ),
-                      onPressed: () => _changeAttendanceTime(context),
-                      child: Text(attendanceTimeFormat.format(attendanceTime)),
-                    ),
-                  AttendancePersonToggle(
-                    isPresent: present,
-                    onTap: () => onToggle(entry),
-                  ),
-                ],
-              ),
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            if (recordsKodas) AttendanceKodasToggle(person: entry.person),
+            AttendanceLabelledToggle(
+              selected: present,
+              label: switch (attendanceTime) {
+                final time? => DateFormat.jm('ar').format(time),
+                null => 'حضور',
+              },
+              semanticsLabel: 'حضور ${entry.person.name}',
+              icon: const AttendanceCheckIcon(),
+              fillColor: colorScheme.inverseSurface,
+              iconColor: colorScheme.onInverseSurface,
+              selectedLabelColor: colorScheme.onSurface,
+              onTap: () => onToggle(entry),
+              onLongPress: present
+                  ? () => _changeAttendanceTime(context)
+                  : null,
+            ),
+          ],
+        ),
       ),
     );
   }
