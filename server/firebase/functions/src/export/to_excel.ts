@@ -118,23 +118,32 @@ function isIdColumn(key: string): boolean {
 }
 
 function mergeRowsKeys(jsonRows: Record<string, unknown>[]): string[] {
-  return jsonRows.reduce((header, row) => {
-    let insertionIndex = 0;
+  return jsonRows.reduce(
+    (header, row) =>
+      Object.keys(row).reduce(
+        ({ merged, insertionIndex }, key) => {
+          const existingIndex = merged.indexOf(key);
 
-    for (const key of Object.keys(row)) {
-      const existingIndex = header.indexOf(key);
+          if (existingIndex === -1) {
+            return {
+              merged: [
+                ...merged.slice(0, insertionIndex),
+                key,
+                ...merged.slice(insertionIndex),
+              ],
+              insertionIndex: insertionIndex + 1,
+            };
+          }
 
-      if (existingIndex === -1) {
-        header.splice(insertionIndex, 0, key);
-        insertionIndex++;
-        continue;
-      }
-
-      insertionIndex = Math.max(insertionIndex, existingIndex + 1);
-    }
-
-    return header;
-  }, [] as string[]);
+          return {
+            merged,
+            insertionIndex: Math.max(insertionIndex, existingIndex + 1),
+          };
+        },
+        { merged: header, insertionIndex: 0 },
+      ).merged,
+    [] as string[],
+  );
 }
 
 function adjustColumnsWidths(
