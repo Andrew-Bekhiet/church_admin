@@ -30,6 +30,7 @@ class AttendancePersonCard extends StatelessWidget {
     final colorScheme = ColorScheme.of(context);
     final present = entry.attended;
     final attendanceTime = present ? entry.attendance?.datetime : null;
+    final attendanceTimeFormat = DateFormat.jm('ar');
     final recordsKodas = context.select<RecordKodasCubit, bool>(
       (cubit) => cubit.state.isVisible,
     );
@@ -72,7 +73,7 @@ class AttendancePersonCard extends StatelessWidget {
                   AttendanceLabelledToggle(
                     selected: present,
                     label: switch (attendanceTime) {
-                      final time? => DateFormat.jm('ar').format(time),
+                      final time? => attendanceTimeFormat.format(time),
                       null => 'حضور',
                     },
                     semanticsLabel: 'حضور ${entry.person.name}',
@@ -101,7 +102,7 @@ class AttendancePersonCard extends StatelessWidget {
                         visualDensity: VisualDensity.compact,
                       ),
                       onPressed: () => _changeAttendanceTime(context),
-                      child: Text(DateFormat.jm('ar').format(attendanceTime)),
+                      child: Text(attendanceTimeFormat.format(attendanceTime)),
                     ),
                   AttendancePersonToggle(
                     isPresent: present,

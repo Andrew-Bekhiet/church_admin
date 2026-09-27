@@ -28,6 +28,11 @@ void main() {
     setUp(() {
       f = _Fixture();
       addTearDown(f.dispose);
+      addTearDown(() {
+        for (final day in [sunday, nextSunday]) {
+          KodasDayVisibility.I.setIsVisibleFor(day, visible: true);
+        }
+      });
     });
     tearDown(defaultTearDown);
 
@@ -47,13 +52,13 @@ void main() {
       build: () => f.createCubit(),
       act: (cubit) => cubit.follow(meeting: liturgy, day: sunday),
       expect: () => [
-        const RecordKodasLoading(),
-        _communicants({mina.id}),
+        _loading(sunday),
+        _communicants(sunday, {mina.id}),
       ],
     );
 
     blocTest<RecordKodasCubit, RecordKodasState>(
-      'kodas of a day show in every meeting held that day',
+      'kodas of a day show in every meeting held that day without reloading',
       setUp: () => f.server.seed([
         KodasRecord(id: 'k1', personId: mina.id, day: sunday),
       ]),
@@ -62,10 +67,12 @@ void main() {
         cubit.follow(meeting: liturgy, day: sunday);
         await f.settle();
         cubit.follow(meeting: sundaySchool, day: sunday);
+        await f.settle();
       },
-      skip: 2,
-      expect: () => const <RecordKodasState>[],
-      verify: (cubit) => expect(cubit.state, _communicants({mina.id})),
+      expect: () => [
+        _loading(sunday),
+        _communicants(sunday, {mina.id}),
+      ],
     );
 
     blocTest<RecordKodasCubit, RecordKodasState>(
@@ -80,10 +87,11 @@ void main() {
         await f.settle();
         cubit.follow(meeting: liturgy, day: nextSunday);
       },
-      skip: 2,
       expect: () => [
-        const RecordKodasLoading(),
-        _communicants({mark.id}),
+        _loading(sunday),
+        _communicants(sunday, {mina.id}),
+        _loading(nextSunday),
+        _communicants(nextSunday, {mark.id}),
       ],
     );
 
@@ -97,7 +105,7 @@ void main() {
         await f.settle();
       },
       verify: (cubit) {
-        expect(cubit.state, _communicants({mina.id}));
+        expect(cubit.state, _communicants(sunday, {mina.id}));
         expect(f.server.recordsOn(sunday).single.personId, mina.id);
       },
     );
@@ -116,6 +124,18 @@ void main() {
     );
 
     blocTest<RecordKodasCubit, RecordKodasState>(
+      'kodas someone else already recorded that day is not offered for undo',
+      setUp: () => f.server.alreadyRecorded = true,
+      build: () => f.createCubit(),
+      act: (cubit) async {
+        cubit.follow(meeting: liturgy, day: sunday);
+        await f.settle();
+        await cubit.toggleKodas(mina);
+      },
+      verify: (_) => expect(f.presenter.undoableChanges, isEmpty),
+    );
+
+    blocTest<RecordKodasCubit, RecordKodasState>(
       'undoing recorded kodas removes it',
       build: () => f.createCubit(),
       act: (cubit) async {
@@ -127,7 +147,7 @@ void main() {
         await f.settle();
       },
       verify: (cubit) {
-        expect(cubit.state, _communicants(const {}));
+        expect(cubit.state, _communicants(sunday, const {}));
         expect(f.server.recordsOn(sunday), isEmpty);
       },
     );
@@ -145,7 +165,7 @@ void main() {
         await f.settle();
       },
       verify: (cubit) {
-        expect(cubit.state, _communicants(const {}));
+        expect(cubit.state, _communicants(sunday, const {}));
         expect(f.server.recordsOn(sunday), isEmpty);
       },
     );
@@ -164,7 +184,7 @@ void main() {
         f.presenter.undoLast();
         await f.settle();
       },
-      verify: (cubit) => expect(cubit.state, _communicants({mina.id})),
+      verify: (cubit) => expect(cubit.state, _communicants(sunday, {mina.id})),
     );
 
     blocTest<RecordKodasCubit, RecordKodasState>(
@@ -176,29 +196,13 @@ void main() {
         await f.settle();
         await cubit.toggleKodas(mina);
       },
-      skip: 2,
       expect: () => [
-        _communicants({mina.id}),
-        _communicants(const {}),
+        _loading(sunday),
+        _communicants(sunday, const {}),
+        _communicants(sunday, {mina.id}),
+        _communicants(sunday, const {}),
       ],
       verify: (_) => expect(f.presenter.errors, hasLength(1)),
-    );
-
-    blocTest<RecordKodasCubit, RecordKodasState>(
-      'showing kodas for the day starts tracking a meeting that hides it',
-      setUp: () => f.server.seed([
-        KodasRecord(id: 'k1', personId: mina.id, day: sunday),
-      ]),
-      build: () => f.createCubit(),
-      act: (cubit) async {
-        cubit.follow(meeting: hiddenKodasMeeting, day: sunday);
-        cubit.changeVisibility(visible: true);
-      },
-      skip: 1,
-      expect: () => [
-        const RecordKodasLoading(),
-        _communicants({mina.id}),
-      ],
     );
 
     blocTest<RecordKodasCubit, RecordKodasState>(
@@ -209,20 +213,53 @@ void main() {
         await f.settle();
         cubit.changeVisibility(visible: false);
       },
+      expect: () => [
+        _loading(sunday),
+        _communicants(sunday, const {}),
+        const RecordKodasHidden(hiddenForDay: true),
+      ],
+    );
+
+    blocTest<RecordKodasCubit, RecordKodasState>(
+      'showing kodas again for a hidden day brings back its communicants',
+      setUp: () => f.server.seed([
+        KodasRecord(id: 'k1', personId: mina.id, day: sunday),
+      ]),
+      build: () => f.createCubit(),
+      act: (cubit) async {
+        cubit
+          ..follow(meeting: liturgy, day: sunday)
+          ..changeVisibility(visible: false)
+          ..changeVisibility(visible: true);
+        await f.settle();
+      },
       skip: 2,
+      expect: () => [
+        _loading(sunday),
+        _communicants(sunday, {mina.id}),
+      ],
+    );
+
+    blocTest<RecordKodasCubit, RecordKodasState>(
+      'kodas can not be shown for a meeting that hides the kodas checkbox',
+      build: () => f.createCubit(),
+      act: (cubit) => cubit
+        ..follow(meeting: hiddenKodasMeeting, day: sunday)
+        ..changeVisibility(visible: true),
       expect: () => [const RecordKodasHidden()],
     );
 
     blocTest<RecordKodasCubit, RecordKodasState>(
       'a hidden day stays hidden in the other meetings of that day',
       build: () => f.createCubit(),
-      act: (cubit) async {
-        cubit
-          ..follow(meeting: liturgy, day: sunday)
-          ..changeVisibility(visible: false)
-          ..follow(meeting: sundaySchool, day: sunday);
-      },
-      verify: (cubit) => expect(cubit.state, const RecordKodasHidden()),
+      act: (cubit) => cubit
+        ..follow(meeting: liturgy, day: sunday)
+        ..changeVisibility(visible: false)
+        ..follow(meeting: sundaySchool, day: sunday),
+      expect: () => [
+        _loading(sunday),
+        const RecordKodasHidden(hiddenForDay: true),
+      ],
     );
 
     blocTest<RecordKodasCubit, RecordKodasState>(
@@ -235,29 +272,32 @@ void main() {
           ..follow(meeting: liturgy, day: nextSunday);
         await f.settle();
       },
-      verify: (cubit) => expect(cubit.state, isA<RecordKodasReady>()),
+      skip: 2,
+      expect: () => [
+        _loading(nextSunday),
+        _communicants(nextSunday, const {}),
+      ],
     );
 
     blocTest<RecordKodasCubit, RecordKodasState>(
-      'the day visibility is remembered by a later cubit',
-      build: () {
-        f.createCubit()
-          ..follow(meeting: liturgy, day: sunday)
-          ..changeVisibility(visible: false);
-
-        return f.createCubit();
-      },
+      'a hidden day stays hidden for a later cubit',
+      setUp: () => f.createCubit()
+        ..follow(meeting: liturgy, day: sunday)
+        ..changeVisibility(visible: false),
+      build: () => f.createCubit(),
       act: (cubit) => cubit.follow(meeting: liturgy, day: sunday),
-      expect: () => [const RecordKodasHidden()],
+      expect: () => [const RecordKodasHidden(hiddenForDay: true)],
     );
   });
 }
 
-Matcher _communicants(Set<String> personIds) => isA<RecordKodasReady>().having(
-  (s) => s.communicantIds,
-  'communicantIds',
-  personIds,
-);
+Matcher _loading(DateTime day) =>
+    isA<RecordKodasLoading>().having((s) => s.day, 'day', day);
+
+Matcher _communicants(DateTime day, Set<String> personIds) =>
+    isA<RecordKodasReady>()
+        .having((s) => s.day, 'day', day)
+        .having((s) => s.communicantIds, 'communicantIds', personIds);
 
 final class _Fixture {
   static Meeting meeting({
@@ -274,7 +314,6 @@ final class _Fixture {
   final historyDao = _MockHistoryDAO();
   final presenter = _PresenterSpy();
   final server = _KodasServer();
-  final visibility = KodasDayVisibility();
 
   _Fixture() {
     when(
@@ -305,7 +344,6 @@ final class _Fixture {
   RecordKodasCubit createCubit() => RecordKodasCubit(
     historyDao: historyDao,
     presenter: presenter,
-    dayVisibility: visibility,
   );
 
   Future<void> settle() => pumpEventQueue();
@@ -320,6 +358,7 @@ final class _KodasServer {
   int _nextId = 0;
 
   Object? rejectWith;
+  bool alreadyRecorded = false;
 
   void seed(List<KodasRecord> records) => _records.add(records);
 
@@ -329,11 +368,19 @@ final class _KodasServer {
   Stream<List<KodasRecord>> watchDay(DateTime day) =>
       _records.map((records) => records.where((r) => r.day == day).toList());
 
-  Future<KodasRecord> record({
+  Future<KodasRecord?> record({
     required String personId,
     required DateTime day,
   }) async {
     if (rejectWith case final error?) throw error;
+    if (alreadyRecorded) {
+      _records.add([
+        ..._records.value,
+        KodasRecord(id: 'other', personId: personId, day: day),
+      ]);
+
+      return null;
+    }
 
     final record = KodasRecord(
       id: 'server-${_nextId++}',

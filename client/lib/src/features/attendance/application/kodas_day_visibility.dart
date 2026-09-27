@@ -1,12 +1,21 @@
 import 'package:flutter/material.dart' show DateUtils;
 
 final class KodasDayVisibility {
-  static final KodasDayVisibility I = KodasDayVisibility();
+  static final KodasDayVisibility I = KodasDayVisibility._();
 
-  final Map<DateTime, bool> _visibleByDay = {};
+  final Set<DateTime> _hiddenDays = {};
 
-  bool? forDay(DateTime day) => _visibleByDay[DateUtils.dateOnly(day)];
+  KodasDayVisibility._();
 
-  void setForDay(DateTime day, {required bool visible}) =>
-      _visibleByDay[DateUtils.dateOnly(day)] = visible;
+  bool isKodasVisibleFor(DateTime day) =>
+      !_hiddenDays.contains(DateUtils.dateOnly(day));
+
+  void setIsVisibleFor(DateTime day, {required bool visible}) {
+    final dayOnly = DateUtils.dateOnly(day);
+    if (visible) {
+      _hiddenDays.remove(dayOnly);
+    } else {
+      _hiddenDays.add(dayOnly);
+    }
+  }
 }

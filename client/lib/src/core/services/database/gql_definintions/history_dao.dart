@@ -1,18 +1,10 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:church_admin/src/core/services/database/gql_definintions/gql/__generated__/fragments.gql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/history/__generated__/mutations.gql.dart';
 import 'package:church_admin/src/core/services/database/gql_definintions/history/__generated__/subscriptions.gql.dart';
 import 'package:gql/ast.dart';
 import 'package:graphql/client.dart';
 
 class HistoryDAO {
-  static KodasRecord _kodasRecordFrom(Fragment_KodasDayRecord fragment) =>
-      KodasRecord(
-        id: fragment.id.uuid,
-        personId: fragment.personId.uuid,
-        day: fragment.dayId,
-      );
-
   final DatabaseService db;
 
   DBGraphQLClient get graphQLClient => db.graphQLClient;
@@ -210,25 +202,6 @@ class HistoryDAO {
     );
   }
 
-  Future<Person?> updatePersonLastKodas({
-    required String personId,
-    required DateTime lastKodas,
-  }) {
-    return graphQLClient.mutateAndReturnParsed(
-      MutationOptions(
-        document: documentNodeMutationinsertPersonLastKodas,
-        operationName: 'insertPersonLastKodas',
-        variables: Variables_Mutation_insertPersonLastKodas(
-          personId: personId.toUuid(),
-          lastKodas: lastKodas,
-        ).toJson(),
-        parserFn: db.parser.singleOrNullParser(
-          db.parser.singleOrNullParser(Person.fromJson),
-        ),
-      ),
-    );
-  }
-
   Stream<List<KodasRecord>> streamDayKodas({required DateTime day}) {
     return graphQLClient.subscribeAndReturnParsed(
       SubscriptionOptions(
@@ -237,16 +210,16 @@ class HistoryDAO {
         variables: Variables_Subscription_watchDayKodas(day: day).toJson(),
         parserFn: (data) => Subscription_watchDayKodas.fromJson(
           data,
-        ).historyKodasHistory.map(_kodasRecordFrom).toList(),
+        ).historyKodasHistory.map(KodasRecord.fromFragment).toList(),
       ),
     );
   }
 
-  Future<KodasRecord> recordKodas({
+  Future<KodasRecord?> recordKodas({
     required String personId,
     required DateTime day,
   }) {
-    return graphQLClient.mutateAndReturnParsed(
+    return graphQLClient.mutateAndReturnParsedNullable(
       MutationOptions(
         document: documentNodeMutationrecordKodas,
         operationName: 'recordKodas',
@@ -257,8 +230,8 @@ class HistoryDAO {
         parserFn: (data) => switch (Mutation_recordKodas.fromJson(
           data,
         ).insertHistoryKodasHistoryOne) {
-          final inserted? => _kodasRecordFrom(inserted),
-          null => throw const KodasChangeRejectedException(),
+          final inserted? => KodasRecord.fromFragment(inserted),
+          null => null,
         },
       ),
     );
@@ -275,7 +248,7 @@ class HistoryDAO {
         parserFn: (data) => switch (Mutation_deleteKodas.fromJson(
           data,
         ).deleteHistoryKodasHistoryByPk) {
-          final deleted? => _kodasRecordFrom(deleted),
+          final deleted? => KodasRecord.fromFragment(deleted),
           null => throw const KodasChangeRejectedException(),
         },
       ),

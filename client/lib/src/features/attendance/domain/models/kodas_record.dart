@@ -1,3 +1,4 @@
+import 'package:church_admin/src/core/services/database/gql_definintions/gql/__generated__/fragments.gql.dart';
 import 'package:equatable/equatable.dart';
 
 final class KodasRecord with Equatable {
@@ -13,4 +14,11 @@ final class KodasRecord with Equatable {
     required this.personId,
     required this.day,
   });
+
+  factory KodasRecord.fromFragment(Fragment_KodasDayRecord fragment) =>
+      KodasRecord(
+        id: fragment.id.uuid,
+        personId: fragment.personId.uuid,
+        day: fragment.dayId,
+      );
 }

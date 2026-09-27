@@ -27,110 +27,44 @@ class AttendanceOverflowMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final recordsKodas = context.select<RecordKodasCubit, bool>(
-      (cubit) => cubit.state.isVisible,
-    );
-
     return PopupMenuButton<void>(
       borderRadius: BorderRadius.circular(12),
       icon: const Icon(Symbols.more_vert),
-      itemBuilder: (context) => [
-        PopupMenuItem(
-          onTap: () => context.read<RecordKodasCubit>().changeVisibility(
-            visible: !recordsKodas,
-          ),
-          child: ListTile(
-            contentPadding: EdgeInsets.zero,
-            leading: const KodasChaliceIcon(),
-            title: const Text('تسجيل التناول'),
-            subtitle: const Text('خانة للتناول بجانب الحضور في هذا اليوم'),
-            trailing: Visibility(
-              visible: recordsKodas,
-              maintainAnimation: true,
-              maintainSize: true,
-              maintainState: true,
-              child: const Icon(Symbols.check),
+      itemBuilder: (context) {
+        final kodasState = context.read<RecordKodasCubit>().state;
+        final canChangeKodasVisibility = switch (kodasState) {
+          RecordKodasHidden(:final hiddenForDay) => hiddenForDay,
+          RecordKodasLoading() || RecordKodasReady() => true,
+        };
+
+        return [
+          if (canChangeKodasVisibility)
+            PopupMenuItem(
+              onTap: () => context.read<RecordKodasCubit>().changeVisibility(
+                visible: !kodasState.isVisible,
+              ),
+              child: ListTile(
+                contentPadding: EdgeInsets.zero,
+                leading: const KodasChaliceIcon(),
+                title: const Text('تسجيل التناول'),
+                subtitle: const Text('خانة للتناول بجانب الحضور في هذا اليوم'),
+                trailing: Visibility(
+                  visible: kodasState.isVisible,
+                  maintainAnimation: true,
+                  maintainSize: true,
+                  maintainState: true,
+                  child: const Icon(Symbols.check),
+                ),
+              ),
             ),
-          ),
-        ),
-        PopupMenuItem(
-          onTap: () => onGroupingChanged(grouping.toggled),
-          child: ListTile(
-            contentPadding: EdgeInsets.zero,
-            leading: const Icon(Symbols.school),
-            title: const Text('تقسيم حسب السنة الدراسية'),
-            trailing: Visibility(
-              visible: grouping == AttendanceGrouping.studyYear,
-              maintainAnimation: true,
-              maintainSize: true,
-              maintainState: true,
-              child: const Icon(Symbols.check),
-            ),
-          ),
-        ),
-        const PopupMenuDivider(),
-        PopupMenuItem(
-          height: kMinInteractiveDimension / 2,
-          enabled: false,
-          child: Text(
-            'ترتيب حسب',
-            style: TextTheme.of(context).labelMedium,
-          ),
-        ),
-        _SortingMenuItem<AttendanceSortingByName>(
-          title: 'الاسم',
-          icon: Symbols.person,
-          currentSorting: sorting,
-          onChanged: onSortChanged,
-          value: AttendanceSorting.byName(),
-        ),
-        _SortingMenuItem<AttendanceSortingByTime>(
-          title: 'وقت الحضور',
-          icon: Symbols.access_time,
-          currentSorting: sorting,
-          onChanged: onSortChanged,
-          value: AttendanceSorting.byAttendanceTime(),
-        ),
-        _SortingMenuItem<AttendanceSortingByStreak>(
-          title: switch (sorting) {
-            AttendanceSortingByStreak(direction: SortingDirection.descending) =>
-              'الحضور المستمر',
-            _ => 'الغياب المستمر',
-          },
-          icon: switch (sorting) {
-            AttendanceSortingByStreak(direction: SortingDirection.descending) =>
-              Symbols.local_fire_department,
-            _ => Symbols.error,
-          },
-          currentSorting: sorting,
-          onChanged: onSortChanged,
-          value: AttendanceSorting.byAttendanceStreak(),
-        ),
-        _SortingMenuItem<AttendanceSortingByLastAttendanceTime>(
-          title: 'آخر وقت حضور',
-          icon: Symbols.history,
-          currentSorting: sorting,
-          onChanged: onSortChanged,
-          value: AttendanceSorting.byLastAttendanceTime(),
-        ),
-        const PopupMenuDivider(),
-        PopupMenuItem(
-          height: kMinInteractiveDimension / 2,
-          enabled: false,
-          child: Text(
-            'فترة المواظبة وتاريخ آخر الحضور',
-            style: TextTheme.of(context).labelMedium,
-          ),
-        ),
-        for (final days in _streakWindowOptions)
           PopupMenuItem(
-            onTap: () => onStreakWindowChanged(days),
+            onTap: () => onGroupingChanged(grouping.toggled),
             child: ListTile(
               contentPadding: EdgeInsets.zero,
-              leading: const Icon(Symbols.date_range),
-              title: Text('$days يوم'),
+              leading: const Icon(Symbols.school),
+              title: const Text('تقسيم حسب السنة الدراسية'),
               trailing: Visibility(
-                visible: streakWindowDays == days,
+                visible: grouping == AttendanceGrouping.studyYear,
                 maintainAnimation: true,
                 maintainSize: true,
                 maintainState: true,
@@ -138,16 +72,91 @@ class AttendanceOverflowMenu extends StatelessWidget {
               ),
             ),
           ),
-        const PopupMenuDivider(),
-        PopupMenuItem(
-          onTap: openAnalysis,
-          child: const ListTile(
-            contentPadding: EdgeInsets.zero,
-            leading: Icon(Symbols.query_stats),
-            title: Text('احصائيات الحضور'),
+          const PopupMenuDivider(),
+          PopupMenuItem(
+            height: kMinInteractiveDimension / 2,
+            enabled: false,
+            child: Text(
+              'ترتيب حسب',
+              style: TextTheme.of(context).labelMedium,
+            ),
           ),
-        ),
-      ],
+          _SortingMenuItem<AttendanceSortingByName>(
+            title: 'الاسم',
+            icon: Symbols.person,
+            currentSorting: sorting,
+            onChanged: onSortChanged,
+            value: AttendanceSorting.byName(),
+          ),
+          _SortingMenuItem<AttendanceSortingByTime>(
+            title: 'وقت الحضور',
+            icon: Symbols.access_time,
+            currentSorting: sorting,
+            onChanged: onSortChanged,
+            value: AttendanceSorting.byAttendanceTime(),
+          ),
+          _SortingMenuItem<AttendanceSortingByStreak>(
+            title: switch (sorting) {
+              AttendanceSortingByStreak(
+                direction: SortingDirection.descending,
+              ) =>
+                'الحضور المستمر',
+              _ => 'الغياب المستمر',
+            },
+            icon: switch (sorting) {
+              AttendanceSortingByStreak(
+                direction: SortingDirection.descending,
+              ) =>
+                Symbols.local_fire_department,
+              _ => Symbols.error,
+            },
+            currentSorting: sorting,
+            onChanged: onSortChanged,
+            value: AttendanceSorting.byAttendanceStreak(),
+          ),
+          _SortingMenuItem<AttendanceSortingByLastAttendanceTime>(
+            title: 'آخر وقت حضور',
+            icon: Symbols.history,
+            currentSorting: sorting,
+            onChanged: onSortChanged,
+            value: AttendanceSorting.byLastAttendanceTime(),
+          ),
+          const PopupMenuDivider(),
+          PopupMenuItem(
+            height: kMinInteractiveDimension / 2,
+            enabled: false,
+            child: Text(
+              'فترة المواظبة وتاريخ آخر الحضور',
+              style: TextTheme.of(context).labelMedium,
+            ),
+          ),
+          for (final days in _streakWindowOptions)
+            PopupMenuItem(
+              onTap: () => onStreakWindowChanged(days),
+              child: ListTile(
+                contentPadding: EdgeInsets.zero,
+                leading: const Icon(Symbols.date_range),
+                title: Text('$days يوم'),
+                trailing: Visibility(
+                  visible: streakWindowDays == days,
+                  maintainAnimation: true,
+                  maintainSize: true,
+                  maintainState: true,
+                  child: const Icon(Symbols.check),
+                ),
+              ),
+            ),
+          const PopupMenuDivider(),
+          PopupMenuItem(
+            onTap: openAnalysis,
+            child: const ListTile(
+              contentPadding: EdgeInsets.zero,
+              leading: Icon(Symbols.query_stats),
+              title: Text('احصائيات الحضور'),
+            ),
+          ),
+        ];
+      },
     );
   }
 }

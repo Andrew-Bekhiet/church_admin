@@ -10,23 +10,34 @@ sealed class RecordKodasState with Equatable {
 }
 
 final class RecordKodasHidden extends RecordKodasState {
+  final bool hiddenForDay;
+
   @override
   bool get isVisible => false;
 
-  const RecordKodasHidden();
+  @override
+  List<Object?> get props => [hiddenForDay];
+
+  const RecordKodasHidden({this.hiddenForDay = false});
 }
 
 final class RecordKodasLoading extends RecordKodasState {
-  const RecordKodasLoading();
+  final DateTime day;
+
+  @override
+  List<Object?> get props => [day];
+
+  const RecordKodasLoading({required this.day});
 }
 
 final class RecordKodasReady extends RecordKodasState {
+  final DateTime day;
   final Set<String> communicantIds;
 
   @override
-  List<Object?> get props => [communicantIds];
+  List<Object?> get props => [day, communicantIds];
 
-  const RecordKodasReady({required this.communicantIds});
+  const RecordKodasReady({required this.day, required this.communicantIds});
 
   bool tookKodas(String personId) => communicantIds.contains(personId);
 }

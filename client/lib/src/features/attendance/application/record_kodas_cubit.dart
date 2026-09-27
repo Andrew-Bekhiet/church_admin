@@ -9,9 +9,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class RecordKodasCubit extends Cubit<RecordKodasState> {
   final HistoryDAO _historyDao;
   final AttendanceUndoPresenter _presenter;
-  final KodasDayVisibility _dayVisibility;
+  final KodasDayVisibility _dayVisibility = KodasDayVisibility.I;
 
-  final LiveRecords<String, KodasRecord> _liveKodas = LiveRecords(
+  final LiveRecords<String, KodasRecord> _liveKodasRecords = LiveRecords(
     keyOf: (record) => record.personId,
   );
 
@@ -20,19 +20,18 @@ class RecordKodasCubit extends Cubit<RecordKodasState> {
   int _sessionId = 0;
   StreamSubscription<List<KodasRecord>>? _kodasSub;
 
-  bool get _isVisible => switch ((_meeting, _day)) {
-    (final meeting?, final day?) =>
-      _dayVisibility.forDay(day) ?? meeting.showKodasCheckbox,
-    _ => false,
+  bool get _meetingShowsKodas => _meeting?.showKodasCheckbox ?? false;
+
+  bool get _isVisible => switch (_day) {
+    final day? => _meetingShowsKodas && _dayVisibility.isKodasVisibleFor(day),
+    null => false,
   };
 
   RecordKodasCubit({
     HistoryDAO? historyDao,
     AttendanceUndoPresenter? presenter,
-    KodasDayVisibility? dayVisibility,
   }) : _historyDao = historyDao ?? DatabaseService.I.history,
        _presenter = presenter ?? const ScaffoldAttendanceUndoPresenter(),
-       _dayVisibility = dayVisibility ?? KodasDayVisibility.I,
        super(const RecordKodasHidden());
 
   void follow({required Meeting meeting, required DateTime day}) {
@@ -51,7 +50,7 @@ class RecordKodasCubit extends Cubit<RecordKodasState> {
     final day = _day;
     if (day == null || visible == _isVisible) return;
 
-    _dayVisibility.setForDay(day, visible: visible);
+    _dayVisibility.setIsVisibleFor(day, visible: visible);
     _restartSession();
   }
 
@@ -60,13 +59,13 @@ class RecordKodasCubit extends Cubit<RecordKodasState> {
     final personId = person.id;
     if (day == null ||
         state is! RecordKodasReady ||
-        _liveKodas.isPending(personId)) {
+        _liveKodasRecords.isPending(personId)) {
       return;
     }
 
     final sessionId = _sessionId;
-    final existing = _liveKodas.effectiveRecord(personId);
-    _liveKodas.beginOptimistic(
+    final existing = _liveKodasRecords.effectiveRecord(personId);
+    _liveKodasRecords.beginOptimistic(
       personId,
       existing == null
           ? KodasRecord(id: personId, personId: personId, day: day)
@@ -81,11 +80,13 @@ class RecordKodasCubit extends Cubit<RecordKodasState> {
           day: day,
         );
 
-        _presenter.showUndo(
-          personName: person.name,
-          change: AttendanceUndoableChange.kodasRecorded,
-          onUndo: () => _historyDao.deleteKodas(kodasRecordId: recorded.id),
-        );
+        if (recorded != null) {
+          _presenter.showUndo(
+            personName: person.name,
+            change: AttendanceUndoableChange.kodasRecorded,
+            onUndo: () => _historyDao.deleteKodas(kodasRecordId: recorded.id),
+          );
+        }
       } else {
         await _historyDao.deleteKodas(kodasRecordId: existing.id);
 
@@ -99,11 +100,11 @@ class RecordKodasCubit extends Cubit<RecordKodasState> {
       _logError(error, stackTrace);
       if (isClosed || sessionId != _sessionId) return;
 
-      _liveKodas.rollbackOptimistic(personId);
+      _liveKodasRecords.rollbackOptimistic(personId);
       _presenter.showError('تعذر حفظ التناول، حاول مرة أخرى');
     } finally {
       if (sessionId == _sessionId) {
-        _liveKodas.settle(personId);
+        _liveKodasRecords.settle(personId);
         _emitReady();
       }
     }
@@ -113,30 +114,36 @@ class RecordKodasCubit extends Cubit<RecordKodasState> {
     _sessionId++;
     unawaited(_kodasSub?.cancel());
     _kodasSub = null;
-    _liveKodas.reset();
+    _liveKodasRecords.reset();
 
     final day = _day;
     if (day == null || !_isVisible) {
-      emit(const RecordKodasHidden());
+      emit(RecordKodasHidden(hiddenForDay: _meetingShowsKodas));
 
       return;
     }
 
-    emit(const RecordKodasLoading());
+    emit(RecordKodasLoading(day: day));
     _kodasSub = _historyDao
         .streamDayKodas(day: day)
         .listen(_onServerKodas, onError: _logError);
   }
 
   void _onServerKodas(List<KodasRecord> records) {
-    _liveKodas.refreshWithServerRecords(records);
+    _liveKodasRecords.refreshWithServerRecords(records);
     _emitReady();
   }
 
   void _emitReady() {
-    if (isClosed) return;
+    final day = _day;
+    if (isClosed || day == null) return;
 
-    emit(RecordKodasReady(communicantIds: _liveKodas.effectiveKeys));
+    emit(
+      RecordKodasReady(
+        day: day,
+        communicantIds: _liveKodasRecords.effectiveKeys,
+      ),
+    );
   }
 
   void _logError(Object error, StackTrace stackTrace) => unawaited(
