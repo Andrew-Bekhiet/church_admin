@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class KodasChalicePainter extends CustomPainter {
   static const double _viewBox = 24;
-  static const double _strokeWidth = 1.8;
+  static const double _strokeWidth = 1.6;
 
   final Color color;
   final bool filled;

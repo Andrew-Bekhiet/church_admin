@@ -46,7 +46,7 @@ class AttendanceOverflowMenu extends StatelessWidget {
               contentPadding: EdgeInsets.zero,
               leading: const KodasChaliceIcon(),
               title: const Text('تسجيل التناول'),
-              subtitle: const Text('خانة للتناول بجانب الحضور في هذا الاجتماع'),
+              subtitle: const Text('بجانب الحضور لهذا الاجتماع'),
               trailing: Visibility(
                 visible: kodasState.isVisible,
                 maintainAnimation: true,

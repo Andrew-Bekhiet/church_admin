@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 
 class AttendanceCheckPainter extends CustomPainter {
   static const double _viewBox = 24;
-  static const double _strokeWidth = 1.8;
+  static const double _strokeWidth = 1.6;
+  static const Offset _opticalCenterShift = Offset(1.1, 0.8);
 
   final Color color;
 
@@ -10,7 +11,9 @@ class AttendanceCheckPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    canvas.scale(size.width / _viewBox, size.height / _viewBox);
+    canvas
+      ..scale(size.width / _viewBox, size.height / _viewBox)
+      ..translate(_opticalCenterShift.dx, _opticalCenterShift.dy);
 
     final stroke = Paint()
       ..color = color
