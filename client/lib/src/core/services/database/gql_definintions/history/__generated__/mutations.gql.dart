@@ -3348,37 +3348,26 @@ class _CopyWithStubImpl_Mutation_insertStreetLastVisit_insertHistoryVisitHistory
   CopyWith_Fragment_User<TRes> get user => CopyWith_Fragment_User.stub(_res);
 }
 
-class Variables_Mutation_recordMeetingKodas {
-  factory Variables_Mutation_recordMeetingKodas({
+class Variables_Mutation_recordKodas {
+  factory Variables_Mutation_recordKodas({
     required UuidValue personId,
-    required UuidValue meetingId,
     required DateTime day,
-  }) => Variables_Mutation_recordMeetingKodas._({
-    r'personId': personId,
-    r'meetingId': meetingId,
-    r'day': day,
-  });
+  }) => Variables_Mutation_recordKodas._({r'personId': personId, r'day': day});
 
-  Variables_Mutation_recordMeetingKodas._(this._$data);
+  Variables_Mutation_recordKodas._(this._$data);
 
-  factory Variables_Mutation_recordMeetingKodas.fromJson(
-    Map<String, dynamic> data,
-  ) {
+  factory Variables_Mutation_recordKodas.fromJson(Map<String, dynamic> data) {
     final result$data = <String, dynamic>{};
     final l$personId = data['personId'];
     result$data['personId'] = stringToUuid(l$personId);
-    final l$meetingId = data['meetingId'];
-    result$data['meetingId'] = stringToUuid(l$meetingId);
     final l$day = data['day'];
     result$data['day'] = dateFromString(l$day);
-    return Variables_Mutation_recordMeetingKodas._(result$data);
+    return Variables_Mutation_recordKodas._(result$data);
   }
 
   Map<String, dynamic> _$data;
 
   UuidValue get personId => (_$data['personId'] as UuidValue);
-
-  UuidValue get meetingId => (_$data['meetingId'] as UuidValue);
 
   DateTime get day => (_$data['day'] as DateTime);
 
@@ -3386,36 +3375,26 @@ class Variables_Mutation_recordMeetingKodas {
     final result$data = <String, dynamic>{};
     final l$personId = personId;
     result$data['personId'] = uuidToString(l$personId);
-    final l$meetingId = meetingId;
-    result$data['meetingId'] = uuidToString(l$meetingId);
     final l$day = day;
     result$data['day'] = dateToString(l$day);
     return result$data;
   }
 
-  CopyWith_Variables_Mutation_recordMeetingKodas<
-    Variables_Mutation_recordMeetingKodas
-  >
-  get copyWith =>
-      CopyWith_Variables_Mutation_recordMeetingKodas(this, (i) => i);
+  CopyWith_Variables_Mutation_recordKodas<Variables_Mutation_recordKodas>
+  get copyWith => CopyWith_Variables_Mutation_recordKodas(this, (i) => i);
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Variables_Mutation_recordMeetingKodas ||
+    if (other is! Variables_Mutation_recordKodas ||
         runtimeType != other.runtimeType) {
       return false;
     }
     final l$personId = personId;
     final lOther$personId = other.personId;
     if (l$personId != lOther$personId) {
-      return false;
-    }
-    final l$meetingId = meetingId;
-    final lOther$meetingId = other.meetingId;
-    if (l$meetingId != lOther$meetingId) {
       return false;
     }
     final l$day = day;
@@ -3429,72 +3408,62 @@ class Variables_Mutation_recordMeetingKodas {
   @override
   int get hashCode {
     final l$personId = personId;
-    final l$meetingId = meetingId;
     final l$day = day;
-    return Object.hashAll([l$personId, l$meetingId, l$day]);
+    return Object.hashAll([l$personId, l$day]);
   }
 }
 
-abstract class CopyWith_Variables_Mutation_recordMeetingKodas<TRes> {
-  factory CopyWith_Variables_Mutation_recordMeetingKodas(
-    Variables_Mutation_recordMeetingKodas instance,
-    TRes Function(Variables_Mutation_recordMeetingKodas) then,
-  ) = _CopyWithImpl_Variables_Mutation_recordMeetingKodas;
+abstract class CopyWith_Variables_Mutation_recordKodas<TRes> {
+  factory CopyWith_Variables_Mutation_recordKodas(
+    Variables_Mutation_recordKodas instance,
+    TRes Function(Variables_Mutation_recordKodas) then,
+  ) = _CopyWithImpl_Variables_Mutation_recordKodas;
 
-  factory CopyWith_Variables_Mutation_recordMeetingKodas.stub(TRes res) =
-      _CopyWithStubImpl_Variables_Mutation_recordMeetingKodas;
+  factory CopyWith_Variables_Mutation_recordKodas.stub(TRes res) =
+      _CopyWithStubImpl_Variables_Mutation_recordKodas;
 
-  TRes call({UuidValue? personId, UuidValue? meetingId, DateTime? day});
+  TRes call({UuidValue? personId, DateTime? day});
 }
 
-class _CopyWithImpl_Variables_Mutation_recordMeetingKodas<TRes>
-    implements CopyWith_Variables_Mutation_recordMeetingKodas<TRes> {
-  _CopyWithImpl_Variables_Mutation_recordMeetingKodas(
-    this._instance,
-    this._then,
-  );
+class _CopyWithImpl_Variables_Mutation_recordKodas<TRes>
+    implements CopyWith_Variables_Mutation_recordKodas<TRes> {
+  _CopyWithImpl_Variables_Mutation_recordKodas(this._instance, this._then);
 
-  final Variables_Mutation_recordMeetingKodas _instance;
+  final Variables_Mutation_recordKodas _instance;
 
-  final TRes Function(Variables_Mutation_recordMeetingKodas) _then;
+  final TRes Function(Variables_Mutation_recordKodas) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
-  TRes call({
-    Object? personId = _undefined,
-    Object? meetingId = _undefined,
-    Object? day = _undefined,
-  }) => _then(
-    Variables_Mutation_recordMeetingKodas._({
+  TRes call({Object? personId = _undefined, Object? day = _undefined}) => _then(
+    Variables_Mutation_recordKodas._({
       ..._instance._$data,
       if (personId != _undefined && personId != null)
         'personId': (personId as UuidValue),
-      if (meetingId != _undefined && meetingId != null)
-        'meetingId': (meetingId as UuidValue),
       if (day != _undefined && day != null) 'day': (day as DateTime),
     }),
   );
 }
 
-class _CopyWithStubImpl_Variables_Mutation_recordMeetingKodas<TRes>
-    implements CopyWith_Variables_Mutation_recordMeetingKodas<TRes> {
-  _CopyWithStubImpl_Variables_Mutation_recordMeetingKodas(this._res);
+class _CopyWithStubImpl_Variables_Mutation_recordKodas<TRes>
+    implements CopyWith_Variables_Mutation_recordKodas<TRes> {
+  _CopyWithStubImpl_Variables_Mutation_recordKodas(this._res);
 
   TRes _res;
 
-  call({UuidValue? personId, UuidValue? meetingId, DateTime? day}) => _res;
+  call({UuidValue? personId, DateTime? day}) => _res;
 }
 
-class Mutation_recordMeetingKodas {
-  Mutation_recordMeetingKodas({
+class Mutation_recordKodas {
+  Mutation_recordKodas({
     this.insertHistoryKodasHistoryOne,
     this.$__typename = 'mutation_root',
   });
 
-  factory Mutation_recordMeetingKodas.fromJson(Map<String, dynamic> json) {
+  factory Mutation_recordKodas.fromJson(Map<String, dynamic> json) {
     final l$insertHistoryKodasHistoryOne = json['insertHistoryKodasHistoryOne'];
     final l$$__typename = json['__typename'];
-    return Mutation_recordMeetingKodas(
+    return Mutation_recordKodas(
       insertHistoryKodasHistoryOne: l$insertHistoryKodasHistoryOne == null
           ? null
           : Fragment_KodasDayRecord.fromJson(
@@ -3530,8 +3499,7 @@ class Mutation_recordMeetingKodas {
     if (identical(this, other)) {
       return true;
     }
-    if (other is! Mutation_recordMeetingKodas ||
-        runtimeType != other.runtimeType) {
+    if (other is! Mutation_recordKodas || runtimeType != other.runtimeType) {
       return false;
     }
     final l$insertHistoryKodasHistoryOne = insertHistoryKodasHistoryOne;
@@ -3549,20 +3517,19 @@ class Mutation_recordMeetingKodas {
   }
 }
 
-extension UtilityExtension_Mutation_recordMeetingKodas
-    on Mutation_recordMeetingKodas {
-  CopyWith_Mutation_recordMeetingKodas<Mutation_recordMeetingKodas>
-  get copyWith => CopyWith_Mutation_recordMeetingKodas(this, (i) => i);
+extension UtilityExtension_Mutation_recordKodas on Mutation_recordKodas {
+  CopyWith_Mutation_recordKodas<Mutation_recordKodas> get copyWith =>
+      CopyWith_Mutation_recordKodas(this, (i) => i);
 }
 
-abstract class CopyWith_Mutation_recordMeetingKodas<TRes> {
-  factory CopyWith_Mutation_recordMeetingKodas(
-    Mutation_recordMeetingKodas instance,
-    TRes Function(Mutation_recordMeetingKodas) then,
-  ) = _CopyWithImpl_Mutation_recordMeetingKodas;
+abstract class CopyWith_Mutation_recordKodas<TRes> {
+  factory CopyWith_Mutation_recordKodas(
+    Mutation_recordKodas instance,
+    TRes Function(Mutation_recordKodas) then,
+  ) = _CopyWithImpl_Mutation_recordKodas;
 
-  factory CopyWith_Mutation_recordMeetingKodas.stub(TRes res) =
-      _CopyWithStubImpl_Mutation_recordMeetingKodas;
+  factory CopyWith_Mutation_recordKodas.stub(TRes res) =
+      _CopyWithStubImpl_Mutation_recordKodas;
 
   TRes call({
     Fragment_KodasDayRecord? insertHistoryKodasHistoryOne,
@@ -3571,13 +3538,13 @@ abstract class CopyWith_Mutation_recordMeetingKodas<TRes> {
   CopyWith_Fragment_KodasDayRecord<TRes> get insertHistoryKodasHistoryOne;
 }
 
-class _CopyWithImpl_Mutation_recordMeetingKodas<TRes>
-    implements CopyWith_Mutation_recordMeetingKodas<TRes> {
-  _CopyWithImpl_Mutation_recordMeetingKodas(this._instance, this._then);
+class _CopyWithImpl_Mutation_recordKodas<TRes>
+    implements CopyWith_Mutation_recordKodas<TRes> {
+  _CopyWithImpl_Mutation_recordKodas(this._instance, this._then);
 
-  final Mutation_recordMeetingKodas _instance;
+  final Mutation_recordKodas _instance;
 
-  final TRes Function(Mutation_recordMeetingKodas) _then;
+  final TRes Function(Mutation_recordKodas) _then;
 
   static const _undefined = <dynamic, dynamic>{};
 
@@ -3585,7 +3552,7 @@ class _CopyWithImpl_Mutation_recordMeetingKodas<TRes>
     Object? insertHistoryKodasHistoryOne = _undefined,
     Object? $__typename = _undefined,
   }) => _then(
-    Mutation_recordMeetingKodas(
+    Mutation_recordKodas(
       insertHistoryKodasHistoryOne: insertHistoryKodasHistoryOne == _undefined
           ? _instance.insertHistoryKodasHistoryOne
           : (insertHistoryKodasHistoryOne as Fragment_KodasDayRecord?),
@@ -3607,9 +3574,9 @@ class _CopyWithImpl_Mutation_recordMeetingKodas<TRes>
   }
 }
 
-class _CopyWithStubImpl_Mutation_recordMeetingKodas<TRes>
-    implements CopyWith_Mutation_recordMeetingKodas<TRes> {
-  _CopyWithStubImpl_Mutation_recordMeetingKodas(this._res);
+class _CopyWithStubImpl_Mutation_recordKodas<TRes>
+    implements CopyWith_Mutation_recordKodas<TRes> {
+  _CopyWithStubImpl_Mutation_recordKodas(this._res);
 
   TRes _res;
 
@@ -3622,20 +3589,14 @@ class _CopyWithStubImpl_Mutation_recordMeetingKodas<TRes>
       CopyWith_Fragment_KodasDayRecord.stub(_res);
 }
 
-const documentNodeMutationrecordMeetingKodas = DocumentNode(
+const documentNodeMutationrecordKodas = DocumentNode(
   definitions: [
     OperationDefinitionNode(
       type: OperationType.mutation,
-      name: NameNode(value: 'recordMeetingKodas'),
+      name: NameNode(value: 'recordKodas'),
       variableDefinitions: [
         VariableDefinitionNode(
           variable: VariableNode(name: NameNode(value: 'personId')),
-          type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
-          defaultValue: DefaultValueNode(value: null),
-          directives: [],
-        ),
-        VariableDefinitionNode(
-          variable: VariableNode(name: NameNode(value: 'meetingId')),
           type: NamedTypeNode(name: NameNode(value: 'uuid'), isNonNull: true),
           defaultValue: DefaultValueNode(value: null),
           directives: [],
@@ -3661,10 +3622,6 @@ const documentNodeMutationrecordMeetingKodas = DocumentNode(
                     ObjectFieldNode(
                       name: NameNode(value: 'personId'),
                       value: VariableNode(name: NameNode(value: 'personId')),
-                    ),
-                    ObjectFieldNode(
-                      name: NameNode(value: 'meetingId'),
-                      value: VariableNode(name: NameNode(value: 'meetingId')),
                     ),
                     ObjectFieldNode(
                       name: NameNode(value: 'day'),

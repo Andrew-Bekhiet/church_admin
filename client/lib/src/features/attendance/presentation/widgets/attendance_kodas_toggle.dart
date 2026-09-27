@@ -15,7 +15,7 @@ class AttendanceKodasToggle extends StatelessWidget {
     final tookKodas = context.select<RecordKodasCubit, bool?>(
       (cubit) => switch (cubit.state) {
         final RecordKodasReady ready => ready.tookKodas(person.id),
-        RecordKodasLoading() || RecordKodasDisabled() => null,
+        RecordKodasLoading() || RecordKodasHidden() => null,
       },
     );
 

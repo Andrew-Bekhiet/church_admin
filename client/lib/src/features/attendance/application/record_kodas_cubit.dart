@@ -8,8 +8,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class RecordKodasCubit extends Cubit<RecordKodasState> {
   final HistoryDAO _historyDao;
-  final MeetingsDAO _meetingsDao;
   final AttendanceUndoPresenter _presenter;
+  final KodasDayVisibility _dayVisibility;
 
   final LiveRecords<String, KodasRecord> _liveKodas = LiveRecords(
     keyOf: (record) => record.personId,
@@ -20,55 +20,45 @@ class RecordKodasCubit extends Cubit<RecordKodasState> {
   int _sessionId = 0;
   StreamSubscription<List<KodasRecord>>? _kodasSub;
 
+  bool get _isVisible => switch ((_meeting, _day)) {
+    (final meeting?, final day?) =>
+      _dayVisibility.forDay(day) ?? meeting.showKodasCheckbox,
+    _ => false,
+  };
+
   RecordKodasCubit({
     HistoryDAO? historyDao,
-    MeetingsDAO? meetingsDao,
     AttendanceUndoPresenter? presenter,
+    KodasDayVisibility? dayVisibility,
   }) : _historyDao = historyDao ?? DatabaseService.I.history,
-       _meetingsDao = meetingsDao ?? DatabaseService.I.meetings,
        _presenter = presenter ?? const ScaffoldAttendanceUndoPresenter(),
-       super(const RecordKodasDisabled());
+       _dayVisibility = dayVisibility ?? KodasDayVisibility.I,
+       super(const RecordKodasHidden());
 
   void follow({required Meeting meeting, required DateTime day}) {
     final dayOnly = DateUtils.dateOnly(day);
-    final isNewMeeting = meeting.id != _meeting?.id;
-    if (!isNewMeeting && dayOnly == _day) return;
+    if (meeting.id == _meeting?.id && dayOnly == _day) return;
 
-    if (isNewMeeting) _meeting = meeting;
+    final wasVisible = _isVisible;
+    final isNewDay = dayOnly != _day;
+    _meeting = meeting;
     _day = dayOnly;
-    _restartSession();
+
+    if (isNewDay || wasVisible != _isVisible) _restartSession();
   }
 
-  Future<void> changeTracking({required bool enabled}) async {
-    final previous = _meeting;
-    if (previous == null || previous.showKodasCheckbox == enabled) return;
+  void changeVisibility({required bool visible}) {
+    final day = _day;
+    if (day == null || visible == _isVisible) return;
 
-    final changed = previous.copyWith(showKodasCheckbox: enabled);
-    _meeting = changed;
+    _dayVisibility.setForDay(day, visible: visible);
     _restartSession();
-
-    try {
-      final saved = await _meetingsDao.updateObject(
-        newObject: changed,
-        oldObject: previous,
-      );
-      if (saved == null) throw const KodasChangeRejectedException();
-    } catch (error, stackTrace) {
-      _logError(error, stackTrace);
-      if (isClosed || _meeting != changed) return;
-
-      _meeting = previous;
-      _restartSession();
-      _presenter.showError('تعذر تغيير إعداد تسجيل التناول، حاول مرة أخرى');
-    }
   }
 
   Future<void> toggleKodas(Person person) async {
-    final meeting = _meeting;
     final day = _day;
     final personId = person.id;
-    if (meeting == null ||
-        day == null ||
+    if (day == null ||
         state is! RecordKodasReady ||
         _liveKodas.isPending(personId)) {
       return;
@@ -86,9 +76,8 @@ class RecordKodasCubit extends Cubit<RecordKodasState> {
 
     try {
       if (existing == null) {
-        final recorded = await _historyDao.recordMeetingKodas(
+        final recorded = await _historyDao.recordKodas(
           personId: personId,
-          meetingId: meeting.id,
           day: day,
         );
 
@@ -103,11 +92,7 @@ class RecordKodasCubit extends Cubit<RecordKodasState> {
         _presenter.showUndo(
           personName: person.name,
           change: AttendanceUndoableChange.kodasRemoved,
-          onUndo: () => _historyDao.recordMeetingKodas(
-            personId: personId,
-            meetingId: meeting.id,
-            day: day,
-          ),
+          onUndo: () => _historyDao.recordKodas(personId: personId, day: day),
         );
       }
     } catch (error, stackTrace) {
@@ -131,8 +116,8 @@ class RecordKodasCubit extends Cubit<RecordKodasState> {
     _liveKodas.reset();
 
     final day = _day;
-    if (day == null || !(_meeting?.showKodasCheckbox ?? false)) {
-      emit(const RecordKodasDisabled());
+    if (day == null || !_isVisible) {
+      emit(const RecordKodasHidden());
 
       return;
     }

@@ -31,7 +31,7 @@ class AttendancePersonCard extends StatelessWidget {
     final present = entry.attended;
     final attendanceTime = present ? entry.attendance?.datetime : null;
     final recordsKodas = context.select<RecordKodasCubit, bool>(
-      (cubit) => cubit.state.isTracking,
+      (cubit) => cubit.state.isVisible,
     );
 
     const minTileHeight =

@@ -242,21 +242,19 @@ class HistoryDAO {
     );
   }
 
-  Future<KodasRecord> recordMeetingKodas({
+  Future<KodasRecord> recordKodas({
     required String personId,
-    required String meetingId,
     required DateTime day,
   }) {
     return graphQLClient.mutateAndReturnParsed(
       MutationOptions(
-        document: documentNodeMutationrecordMeetingKodas,
-        operationName: 'recordMeetingKodas',
-        variables: Variables_Mutation_recordMeetingKodas(
+        document: documentNodeMutationrecordKodas,
+        operationName: 'recordKodas',
+        variables: Variables_Mutation_recordKodas(
           personId: personId.toUuid(),
-          meetingId: meetingId.toUuid(),
           day: day,
         ).toJson(),
-        parserFn: (data) => switch (Mutation_recordMeetingKodas.fromJson(
+        parserFn: (data) => switch (Mutation_recordKodas.fromJson(
           data,
         ).insertHistoryKodasHistoryOne) {
           final inserted? => _kodasRecordFrom(inserted),

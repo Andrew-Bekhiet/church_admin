@@ -8,7 +8,7 @@ Meeting _meeting({
   String name = 'Test Meeting',
   MeetingAudience audience = MeetingAudience.onlyPersons,
   bool isArchived = false,
-  bool showKodasCheckbox = false,
+  bool showKodasCheckbox = true,
   Color? color,
   String? serviceId,
   int? serviceStudyYear,
@@ -85,7 +85,7 @@ void main() {
       expect(meeting.color, isNull);
     });
 
-    test('a meeting without the kodas flag does not record kodas', () {
+    test('a meeting without the kodas flag shows the kodas checkbox', () {
       final json = {
         'id': 'meet-1',
         'name': 'Sunday Meeting',
@@ -95,7 +95,7 @@ void main() {
 
       final meeting = Meeting.fromJson(json);
 
-      expect(meeting.showKodasCheckbox, isFalse);
+      expect(meeting.showKodasCheckbox, isTrue);
     });
 
     test('parses the kodas flag', () {
@@ -104,12 +104,12 @@ void main() {
         'name': 'Liturgy',
         'audience': 'onlyPersons',
         'isArchived': false,
-        'showKodasCheckbox': true,
+        'showKodasCheckbox': false,
       };
 
       final meeting = Meeting.fromJson(json);
 
-      expect(meeting.showKodasCheckbox, isTrue);
+      expect(meeting.showKodasCheckbox, isFalse);
     });
 
     test('parses color from int', () {
@@ -211,9 +211,9 @@ void main() {
     });
 
     test('includes the kodas flag when changed', () {
-      final updated = _meeting(showKodasCheckbox: true);
+      final updated = _meeting(showKodasCheckbox: false);
       final input = updated.toUpdateInput(oldMeeting: original);
-      expect(input.showKodasCheckbox, isTrue);
+      expect(input.showKodasCheckbox, isFalse);
     });
 
     test('returns empty input when nothing changed', () {

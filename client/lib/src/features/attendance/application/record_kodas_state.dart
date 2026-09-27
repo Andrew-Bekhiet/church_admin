@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 sealed class RecordKodasState with Equatable {
-  bool get isTracking => true;
+  bool get isVisible => true;
 
   @override
   List<Object?> get props => [];
@@ -9,11 +9,11 @@ sealed class RecordKodasState with Equatable {
   const RecordKodasState();
 }
 
-final class RecordKodasDisabled extends RecordKodasState {
+final class RecordKodasHidden extends RecordKodasState {
   @override
-  bool get isTracking => false;
+  bool get isVisible => false;
 
-  const RecordKodasDisabled();
+  const RecordKodasHidden();
 }
 
 final class RecordKodasLoading extends RecordKodasState {

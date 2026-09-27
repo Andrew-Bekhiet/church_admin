@@ -3381,8 +3381,6 @@ type HistoryKodasHistory {
   day: HistoryAttendanceDays!
   dayId: date!
   id: uuid!
-  meeting: HistoryMeetings
-  meetingId: uuid
   person: Persons!
   personId: uuid!
   recordedBy: uuid!
@@ -3423,8 +3421,6 @@ input HistoryKodasHistoryBoolExp {
   day: HistoryAttendanceDaysBoolExp
   dayId: DateComparisonExp
   id: UuidComparisonExp
-  meeting: HistoryMeetingsBoolExp
-  meetingId: UuidComparisonExp
   person: PersonsBoolExp
   personId: UuidComparisonExp
   recordedBy: UuidComparisonExp
@@ -3440,8 +3436,6 @@ enum HistoryKodasHistoryConstraint {
 input HistoryKodasHistoryInsertInput {
   day: HistoryAttendanceDaysObjRelInsertInput
   dayId: date
-  meeting: HistoryMeetingsObjRelInsertInput
-  meetingId: uuid
   person: PersonsObjRelInsertInput
   personId: uuid
   user: AuthUsersDataObjRelInsertInput
@@ -3450,7 +3444,6 @@ input HistoryKodasHistoryInsertInput {
 type HistoryKodasHistoryMaxFields {
   dayId: date
   id: uuid
-  meetingId: uuid
   personId: uuid
   recordedBy: uuid
   time: date
@@ -3459,7 +3452,6 @@ type HistoryKodasHistoryMaxFields {
 input HistoryKodasHistoryMaxOrderBy {
   dayId: OrderBy
   id: OrderBy
-  meetingId: OrderBy
   personId: OrderBy
   recordedBy: OrderBy
   time: OrderBy
@@ -3468,7 +3460,6 @@ input HistoryKodasHistoryMaxOrderBy {
 type HistoryKodasHistoryMinFields {
   dayId: date
   id: uuid
-  meetingId: uuid
   personId: uuid
   recordedBy: uuid
   time: date
@@ -3477,7 +3468,6 @@ type HistoryKodasHistoryMinFields {
 input HistoryKodasHistoryMinOrderBy {
   dayId: OrderBy
   id: OrderBy
-  meetingId: OrderBy
   personId: OrderBy
   recordedBy: OrderBy
   time: OrderBy
@@ -3498,8 +3488,6 @@ input HistoryKodasHistoryOrderBy {
   day: HistoryAttendanceDaysOrderBy
   dayId: OrderBy
   id: OrderBy
-  meeting: HistoryMeetingsOrderBy
-  meetingId: OrderBy
   person: PersonsOrderBy
   personId: OrderBy
   recordedBy: OrderBy
@@ -3510,7 +3498,6 @@ input HistoryKodasHistoryOrderBy {
 enum HistoryKodasHistorySelectColumn {
   dayId
   id
-  meetingId
   personId
   recordedBy
   time
@@ -3524,7 +3511,6 @@ input HistoryKodasHistoryStreamCursorInput {
 input HistoryKodasHistoryStreamCursorValueInput {
   dayId: date
   id: uuid
-  meetingId: uuid
   personId: uuid
   recordedBy: uuid
   time: date

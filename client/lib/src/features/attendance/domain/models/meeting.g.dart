@@ -174,7 +174,7 @@ Meeting _$MeetingFromJson(Map json) => Meeting(
   name: json['name'] as String? ?? '',
   audience: $enumDecode(_$MeetingAudienceEnumMap, json['audience']),
   isArchived: json['isArchived'] as bool,
-  showKodasCheckbox: json['showKodasCheckbox'] as bool? ?? false,
+  showKodasCheckbox: json['showKodasCheckbox'] as bool? ?? true,
   color: colorFromInt((json['color'] as num?)?.toInt()),
   serviceId: json['serviceId'] as String?,
   service: json['service'] == null

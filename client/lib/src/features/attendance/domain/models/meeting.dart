@@ -27,7 +27,7 @@ class Meeting extends ViewableWithID
   final bool isArchived;
 
   @override
-  @JsonKey(defaultValue: false)
+  @JsonKey(defaultValue: true)
   final bool showKodasCheckbox;
 
   @override
@@ -63,7 +63,7 @@ class Meeting extends ViewableWithID
     required this.name,
     required this.audience,
     required this.isArchived,
-    this.showKodasCheckbox = false,
+    this.showKodasCheckbox = true,
     this.color,
     this.serviceId,
     this.service,

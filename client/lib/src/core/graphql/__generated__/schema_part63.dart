@@ -829,7 +829,6 @@ Enum_HistoryKodasHistoryConstraint fromJson_Enum_HistoryKodasHistoryConstraint(
 enum Enum_HistoryKodasHistorySelectColumn {
   dayId,
   id,
-  meetingId,
   personId,
   recordedBy,
   time,
@@ -849,8 +848,6 @@ String toJson_Enum_HistoryKodasHistorySelectColumn(
       return r'dayId';
     case Enum_HistoryKodasHistorySelectColumn.id:
       return r'id';
-    case Enum_HistoryKodasHistorySelectColumn.meetingId:
-      return r'meetingId';
     case Enum_HistoryKodasHistorySelectColumn.personId:
       return r'personId';
     case Enum_HistoryKodasHistorySelectColumn.recordedBy:
@@ -869,8 +866,6 @@ fromJson_Enum_HistoryKodasHistorySelectColumn(String value) {
       return Enum_HistoryKodasHistorySelectColumn.dayId;
     case r'id':
       return Enum_HistoryKodasHistorySelectColumn.id;
-    case r'meetingId':
-      return Enum_HistoryKodasHistorySelectColumn.meetingId;
     case r'personId':
       return Enum_HistoryKodasHistorySelectColumn.personId;
     case r'recordedBy':

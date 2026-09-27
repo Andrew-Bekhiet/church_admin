@@ -93,11 +93,10 @@ mutation insertStreetLastVisit(
   }
 }
 
-mutation recordMeetingKodas($personId: uuid!, $meetingId: uuid!, $day: date!) {
+mutation recordKodas($personId: uuid!, $day: date!) {
   insertHistoryKodasHistoryOne(
     object: {
       personId: $personId
-      meetingId: $meetingId
       day: {
         data: { day: $day }
         onConflict: { constraint: attendance_days_pkey, updateColumns: day }
