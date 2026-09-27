@@ -39,14 +39,16 @@ function createSheetFrom(
     mapper.map(row as Record<string, unknown>),
   );
   const rowsWithIdsMovedToTheEnd = moveIdsToEnd(jsonRows);
+  const header = mergeRowsKeys(rowsWithIdsMovedToTheEnd);
 
   const sheet = XLSX.utils.json_to_sheet(rowsWithIdsMovedToTheEnd, {
+    header,
     cellDates: true,
     cellStyles: true,
   });
 
-  adjustColumnsWidths(sheet, rowsWithIdsMovedToTheEnd);
-  addAutoFilterRange(sheet, rowsWithIdsMovedToTheEnd);
+  adjustColumnsWidths(sheet, header, rowsWithIdsMovedToTheEnd);
+  addAutoFilterRange(sheet, header, rowsWithIdsMovedToTheEnd);
 
   return { sheet, sheetName: sanitizeSheetName(table) };
 }
@@ -87,7 +89,7 @@ function moveIdsToEnd(jsonRows: Record<string, unknown>[]) {
     (acc, row) => {
       const { fields, idFields } = Object.entries(row).reduce(
         (acc, [key, value]) => {
-          if (key.toLowerCase().endsWith("id")) {
+          if (isIdColumn(key)) {
             return {
               fields: acc.fields,
               idFields: { ...acc.idFields, [key]: value },
@@ -111,16 +113,45 @@ function moveIdsToEnd(jsonRows: Record<string, unknown>[]) {
   );
 }
 
+function isIdColumn(key: string): boolean {
+  return /(^|\.)u?id$/.test(key);
+}
+
+function mergeRowsKeys(jsonRows: Record<string, unknown>[]): string[] {
+  return jsonRows.reduce(
+    (header, row) =>
+      Object.keys(row).reduce(
+        ({ merged, insertionIndex }, key) => {
+          const existingIndex = merged.indexOf(key);
+
+          if (existingIndex === -1) {
+            return {
+              merged: [
+                ...merged.slice(0, insertionIndex),
+                key,
+                ...merged.slice(insertionIndex),
+              ],
+              insertionIndex: insertionIndex + 1,
+            };
+          }
+
+          return {
+            merged,
+            insertionIndex: Math.max(insertionIndex, existingIndex + 1),
+          };
+        },
+        { merged: header, insertionIndex: 0 },
+      ).merged,
+    [] as string[],
+  );
+}
+
 function adjustColumnsWidths(
   sheet: XLSX.WorkSheet,
+  header: string[],
   jsonRows: Record<string, unknown>[],
 ) {
-  if (jsonRows.length === 0) return;
-
-  const firstRow = jsonRows[0];
-  if (!firstRow) return;
-
-  sheet["!cols"] = Object.keys(firstRow).map((propertyName) => {
+  sheet["!cols"] = header.map((propertyName) => {
     const maxCharWidth = jsonRows.reduce(
       (max, current) =>
         Math.max(max, String(current[propertyName] ?? "").length),
@@ -135,13 +166,14 @@ function adjustColumnsWidths(
 
 function addAutoFilterRange(
   sheet: XLSX.WorkSheet,
+  header: string[],
   jsonRows: Record<string, unknown>[],
 ) {
   const autoFilterRange = XLSX.utils.encode_range(
     { r: 0, c: 0 },
     {
       r: jsonRows.length,
-      c: Object.keys(jsonRows[0]).length - 1,
+      c: header.length - 1,
     },
   );
   sheet["!autofilter"] = { ref: autoFilterRange };
