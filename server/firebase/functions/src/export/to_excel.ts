@@ -89,7 +89,7 @@ function moveIdsToEnd(jsonRows: Record<string, unknown>[]) {
     (acc, row) => {
       const { fields, idFields } = Object.entries(row).reduce(
         (acc, [key, value]) => {
-          if (key.toLowerCase().endsWith("id")) {
+          if (isIdColumn(key)) {
             return {
               fields: acc.fields,
               idFields: { ...acc.idFields, [key]: value },
@@ -111,6 +111,10 @@ function moveIdsToEnd(jsonRows: Record<string, unknown>[]) {
     },
     [] as Record<string, unknown>[],
   );
+}
+
+function isIdColumn(key: string): boolean {
+  return /(^|\.)u?id$/.test(key);
 }
 
 function mergeRowsKeys(jsonRows: Record<string, unknown>[]): string[] {
