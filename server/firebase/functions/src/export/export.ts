@@ -4,7 +4,8 @@ import { https } from "firebase-functions/v2";
 import * as fs from "fs";
 import * as path from "path";
 import * as z from "zod";
-import { checkUserApproved, makeGraphqlRequest } from "../hasura_interface";
+import { assertUserAuthenticatedAndApproved } from "../common";
+import { makeGraphqlRequest } from "../hasura_interface";
 import { buildExportVariables } from "./build_export_variables";
 import { buildWorkbookBuffer, type ExportPayload } from "./to_excel";
 
@@ -34,14 +35,11 @@ export const exportData = https.onCall({ memory: "512MiB" }, exportDataHandler);
 export async function exportDataHandler(
   data: https.CallableRequest<z.infer<typeof ExportDataRequestData>>,
 ) {
+  await assertUserAuthenticatedAndApproved(data.auth);
+
   const hasuraUID = data.auth?.token["x-hasura-user-id"];
   if (!hasuraUID) {
-    throw new https.HttpsError("unauthenticated", "User not authenticated");
-  }
-
-  const isApproved = await checkUserApproved(hasuraUID);
-  if (!isApproved) {
-    throw new https.HttpsError("permission-denied", "User not approved");
+    throw new https.HttpsError("unauthenticated", "unauthenticated");
   }
 
   const requestData = ExportDataRequestData.safeParse(data.data);
