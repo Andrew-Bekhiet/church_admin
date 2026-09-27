@@ -3,6 +3,7 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+
 import 'dart:async' as _i8;
 
 import 'package:firebase_app_check_platform_interface/firebase_app_check_platform_interface.dart'
@@ -439,6 +440,7 @@ class FirebaseAuthPlatform_ extends _i1.Mock
   _i8.Future<void> setSettings({
     bool? appVerificationDisabledForTesting = false,
     String? userAccessGroup,
+    bool? migrateCurrentUser = false,
     String? phoneNumber,
     String? smsCode,
     bool? forceRecaptchaFlow,
@@ -448,6 +450,7 @@ class FirebaseAuthPlatform_ extends _i1.Mock
               #appVerificationDisabledForTesting:
                   appVerificationDisabledForTesting,
               #userAccessGroup: userAccessGroup,
+              #migrateCurrentUser: migrateCurrentUser,
               #phoneNumber: phoneNumber,
               #smsCode: smsCode,
               #forceRecaptchaFlow: forceRecaptchaFlow,
@@ -884,6 +887,16 @@ class FirebaseAppCheckPlatform_ extends _i1.Mock
             returnValueForMissingStub: _i8.Future<String?>.value(),
           )
           as _i8.Future<String?>);
+
+  @override
+  _i8.Future<_i5.AppCheckTokenResult?> getTokenResult(bool? forceRefresh) =>
+      (super.noSuchMethod(
+            Invocation.method(#getTokenResult, [forceRefresh]),
+            returnValue: _i8.Future<_i5.AppCheckTokenResult?>.value(),
+            returnValueForMissingStub:
+                _i8.Future<_i5.AppCheckTokenResult?>.value(),
+          )
+          as _i8.Future<_i5.AppCheckTokenResult?>);
 
   @override
   _i8.Future<void> setTokenAutoRefreshEnabled(

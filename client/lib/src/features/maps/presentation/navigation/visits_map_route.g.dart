@@ -13,6 +13,7 @@ List<RouteBase> get $appRoutes => [$visitsMapRoute];
 
 RouteBase get $visitsMapRoute => GoRouteData.$route(
   path: '/visits_map',
+  hasOverriddenOnExit: false,
   factory: $VisitsMapRoute._fromState,
 );
 

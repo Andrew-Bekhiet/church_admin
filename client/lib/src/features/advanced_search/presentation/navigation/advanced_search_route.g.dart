@@ -13,6 +13,7 @@ List<RouteBase> get $appRoutes => [$advancedSearchRoute];
 
 RouteBase get $advancedSearchRoute => GoRouteData.$route(
   path: '/advanced_search',
+  hasOverriddenOnExit: false,
   factory: $AdvancedSearchRoute._fromState,
 );
 

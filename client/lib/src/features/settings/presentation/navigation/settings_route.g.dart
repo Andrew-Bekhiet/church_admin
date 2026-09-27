@@ -11,8 +11,11 @@ part of 'settings_route.dart';
 
 List<RouteBase> get $appRoutes => [$settingsRoute];
 
-RouteBase get $settingsRoute =>
-    GoRouteData.$route(path: '/settings', factory: $SettingsRoute._fromState);
+RouteBase get $settingsRoute => GoRouteData.$route(
+  path: '/settings',
+  hasOverriddenOnExit: false,
+  factory: $SettingsRoute._fromState,
+);
 
 mixin $SettingsRoute on GoRouteData {
   static SettingsRoute _fromState(GoRouterState state) => const SettingsRoute();

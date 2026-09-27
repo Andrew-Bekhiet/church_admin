@@ -13,6 +13,7 @@ List<RouteBase> get $appRoutes => [$downloadAppRoute];
 
 RouteBase get $downloadAppRoute => GoRouteData.$route(
   path: '/download',
+  hasOverriddenOnExit: false,
   factory: $DownloadAppRoute._fromState,
 );
 

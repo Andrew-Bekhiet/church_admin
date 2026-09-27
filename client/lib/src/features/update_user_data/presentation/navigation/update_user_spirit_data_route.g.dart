@@ -13,6 +13,7 @@ List<RouteBase> get $appRoutes => [$updateUserSpiritDataRoute];
 
 RouteBase get $updateUserSpiritDataRoute => GoRouteData.$route(
   path: '/update_user_spirit_data',
+  hasOverriddenOnExit: false,
   factory: $UpdateUserSpiritDataRoute._fromState,
 );
 

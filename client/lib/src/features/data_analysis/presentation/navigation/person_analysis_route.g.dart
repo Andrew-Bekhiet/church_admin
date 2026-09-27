@@ -13,6 +13,7 @@ List<RouteBase> get $appRoutes => [$personAnalysisRoute];
 
 RouteBase get $personAnalysisRoute => GoRouteData.$route(
   path: '/person_analysis',
+  hasOverriddenOnExit: false,
   factory: $PersonAnalysisRoute._fromState,
 );
 

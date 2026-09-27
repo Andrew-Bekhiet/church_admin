@@ -11,8 +11,11 @@ part of 'edit_user_route.dart';
 
 List<RouteBase> get $appRoutes => [$editUserRoute];
 
-RouteBase get $editUserRoute =>
-    GoRouteData.$route(path: '/edit_user', factory: $EditUserRoute._fromState);
+RouteBase get $editUserRoute => GoRouteData.$route(
+  path: '/edit_user',
+  hasOverriddenOnExit: false,
+  factory: $EditUserRoute._fromState,
+);
 
 mixin $EditUserRoute on GoRouteData {
   static EditUserRoute _fromState(GoRouterState state) =>

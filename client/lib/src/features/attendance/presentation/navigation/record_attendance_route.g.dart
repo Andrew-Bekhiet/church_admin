@@ -13,6 +13,7 @@ List<RouteBase> get $appRoutes => [$recordAttendanceRoute];
 
 RouteBase get $recordAttendanceRoute => GoRouteData.$route(
   path: '/record_attendance',
+  hasOverriddenOnExit: false,
   factory: $RecordAttendanceRoute._fromState,
 );
 

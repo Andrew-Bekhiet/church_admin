@@ -13,6 +13,7 @@ List<RouteBase> get $appRoutes => [$myAccountRoute];
 
 RouteBase get $myAccountRoute => GoRouteData.$route(
   path: '/my_account',
+  hasOverriddenOnExit: false,
   factory: $MyAccountRoute._fromState,
 );
 

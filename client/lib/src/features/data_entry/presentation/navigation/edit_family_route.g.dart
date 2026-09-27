@@ -13,6 +13,7 @@ List<RouteBase> get $appRoutes => [$editFamilyRoute];
 
 RouteBase get $editFamilyRoute => GoRouteData.$route(
   path: '/edit_family',
+  hasOverriddenOnExit: false,
   factory: $EditFamilyRoute._fromState,
 );
 

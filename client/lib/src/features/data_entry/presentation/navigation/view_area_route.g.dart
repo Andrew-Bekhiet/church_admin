@@ -11,8 +11,11 @@ part of 'view_area_route.dart';
 
 List<RouteBase> get $appRoutes => [$viewAreaRoute];
 
-RouteBase get $viewAreaRoute =>
-    GoRouteData.$route(path: '/view_area', factory: $ViewAreaRoute._fromState);
+RouteBase get $viewAreaRoute => GoRouteData.$route(
+  path: '/view_area',
+  hasOverriddenOnExit: false,
+  factory: $ViewAreaRoute._fromState,
+);
 
 mixin $ViewAreaRoute on GoRouteData {
   static ViewAreaRoute _fromState(GoRouterState state) => ViewAreaRoute(

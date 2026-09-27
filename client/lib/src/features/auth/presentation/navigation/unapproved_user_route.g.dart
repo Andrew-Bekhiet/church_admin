@@ -13,6 +13,7 @@ List<RouteBase> get $appRoutes => [$unapprovedUserRoute];
 
 RouteBase get $unapprovedUserRoute => GoRouteData.$route(
   path: '/unapproved_user',
+  hasOverriddenOnExit: false,
   factory: $UnapprovedUserRoute._fromState,
 );
 

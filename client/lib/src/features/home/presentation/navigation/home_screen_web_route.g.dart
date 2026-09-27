@@ -11,8 +11,11 @@ part of 'home_screen_web_route.dart';
 
 List<RouteBase> get $appRoutes => [$homeScreenWebRoute];
 
-RouteBase get $homeScreenWebRoute =>
-    GoRouteData.$route(path: '/', factory: $HomeScreenWebRoute._fromState);
+RouteBase get $homeScreenWebRoute => GoRouteData.$route(
+  path: '/',
+  hasOverriddenOnExit: false,
+  factory: $HomeScreenWebRoute._fromState,
+);
 
 mixin $HomeScreenWebRoute on GoRouteData {
   static HomeScreenWebRoute _fromState(GoRouterState state) =>

@@ -13,6 +13,7 @@ List<RouteBase> get $appRoutes => [$exportEntitiesSelectionRoute];
 
 RouteBase get $exportEntitiesSelectionRoute => GoRouteData.$route(
   path: '/export_entities_selection',
+  hasOverriddenOnExit: false,
   factory: $ExportEntitiesSelectionRoute._fromState,
 );
 

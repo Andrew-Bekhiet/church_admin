@@ -13,6 +13,7 @@ List<RouteBase> get $appRoutes => [$forceUpdateRoute];
 
 RouteBase get $forceUpdateRoute => GoRouteData.$route(
   path: '/force_update',
+  hasOverriddenOnExit: false,
   factory: $ForceUpdateRoute._fromState,
 );
 

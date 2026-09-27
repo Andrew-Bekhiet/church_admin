@@ -13,6 +13,7 @@ List<RouteBase> get $appRoutes => [$editGroupRoute];
 
 RouteBase get $editGroupRoute => GoRouteData.$route(
   path: '/edit_group',
+  hasOverriddenOnExit: false,
   factory: $EditGroupRoute._fromState,
 );
 

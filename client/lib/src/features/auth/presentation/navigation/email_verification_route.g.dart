@@ -13,6 +13,7 @@ List<RouteBase> get $appRoutes => [$emailVerificationRoute];
 
 RouteBase get $emailVerificationRoute => GoRouteData.$route(
   path: '/email_verification',
+  hasOverriddenOnExit: false,
   factory: $EmailVerificationRoute._fromState,
 );
 

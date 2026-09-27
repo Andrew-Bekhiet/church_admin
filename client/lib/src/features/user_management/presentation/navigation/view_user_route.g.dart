@@ -11,8 +11,11 @@ part of 'view_user_route.dart';
 
 List<RouteBase> get $appRoutes => [$viewUserRoute];
 
-RouteBase get $viewUserRoute =>
-    GoRouteData.$route(path: '/view_user', factory: $ViewUserRoute._fromState);
+RouteBase get $viewUserRoute => GoRouteData.$route(
+  path: '/view_user',
+  hasOverriddenOnExit: false,
+  factory: $ViewUserRoute._fromState,
+);
 
 mixin $ViewUserRoute on GoRouteData {
   static ViewUserRoute _fromState(GoRouterState state) => ViewUserRoute(

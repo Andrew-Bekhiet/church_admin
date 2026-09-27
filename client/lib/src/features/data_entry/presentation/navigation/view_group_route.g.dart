@@ -13,6 +13,7 @@ List<RouteBase> get $appRoutes => [$viewGroupRoute];
 
 RouteBase get $viewGroupRoute => GoRouteData.$route(
   path: '/view_group',
+  hasOverriddenOnExit: false,
   factory: $ViewGroupRoute._fromState,
 );
 

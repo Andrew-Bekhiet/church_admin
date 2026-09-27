@@ -13,6 +13,7 @@ List<RouteBase> get $appRoutes => [$viewStoreRoute];
 
 RouteBase get $viewStoreRoute => GoRouteData.$route(
   path: '/view_store',
+  hasOverriddenOnExit: false,
   factory: $ViewStoreRoute._fromState,
 );
 

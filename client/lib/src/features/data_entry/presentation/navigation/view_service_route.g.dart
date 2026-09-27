@@ -13,6 +13,7 @@ List<RouteBase> get $appRoutes => [$viewServiceRoute];
 
 RouteBase get $viewServiceRoute => GoRouteData.$route(
   path: '/view_service',
+  hasOverriddenOnExit: false,
   factory: $ViewServiceRoute._fromState,
 );
 

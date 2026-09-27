@@ -13,6 +13,7 @@ List<RouteBase> get $appRoutes => [$editStreetRoute];
 
 RouteBase get $editStreetRoute => GoRouteData.$route(
   path: '/edit_street',
+  hasOverriddenOnExit: false,
   factory: $EditStreetRoute._fromState,
 );
 

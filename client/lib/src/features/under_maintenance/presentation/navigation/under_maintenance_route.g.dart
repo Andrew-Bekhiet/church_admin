@@ -13,6 +13,7 @@ List<RouteBase> get $appRoutes => [$underMaintenanceRoute];
 
 RouteBase get $underMaintenanceRoute => GoRouteData.$route(
   path: '/under_maintenance',
+  hasOverriddenOnExit: false,
   factory: $UnderMaintenanceRoute._fromState,
 );
 

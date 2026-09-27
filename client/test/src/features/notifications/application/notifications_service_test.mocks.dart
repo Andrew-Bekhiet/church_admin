@@ -3,6 +3,7 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+
 import 'dart:async' as _i11;
 import 'dart:convert' as _i26;
 import 'dart:io' as _i9;
@@ -845,6 +846,15 @@ class MockFlutterLocalNotificationsPlugin extends _i1.Mock
                 ),
           )
           as _i11.Future<List<_i16.PendingNotificationRequest>>);
+
+  @override
+  _i11.Future<bool?> openAppNotificationSettings() =>
+      (super.noSuchMethod(
+            Invocation.method(#openAppNotificationSettings, []),
+            returnValue: _i11.Future<bool?>.value(),
+            returnValueForMissingStub: _i11.Future<bool?>.value(),
+          )
+          as _i11.Future<bool?>);
 
   @override
   _i11.Future<List<_i16.ActiveNotification>> getActiveNotifications() =>

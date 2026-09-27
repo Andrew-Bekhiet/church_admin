@@ -13,6 +13,7 @@ List<RouteBase> get $appRoutes => [$forgotPasswordRoute];
 
 RouteBase get $forgotPasswordRoute => GoRouteData.$route(
   path: '/forgot_password',
+  hasOverriddenOnExit: false,
   factory: $ForgotPasswordRoute._fromState,
 );
 

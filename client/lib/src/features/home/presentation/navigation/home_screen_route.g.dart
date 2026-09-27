@@ -13,81 +13,149 @@ List<RouteBase> get $appRoutes => [$homeScreenRoute];
 
 RouteBase get $homeScreenRoute => GoRouteData.$route(
   path: '/',
+  hasOverriddenOnExit: false,
   factory: $HomeScreenRoute._fromState,
   routes: [
     GoRouteData.$route(
       path: 'view_person',
+      hasOverriddenOnExit: false,
       factory: $ViewPersonRoute._fromState,
     ),
     GoRouteData.$route(
       path: 'edit_person',
+      hasOverriddenOnExit: false,
       factory: $EditPersonRoute._fromState,
     ),
-    GoRouteData.$route(path: 'view_area', factory: $ViewAreaRoute._fromState),
-    GoRouteData.$route(path: 'edit_area', factory: $EditAreaRoute._fromState),
+    GoRouteData.$route(
+      path: 'view_area',
+      hasOverriddenOnExit: false,
+      factory: $ViewAreaRoute._fromState,
+    ),
+    GoRouteData.$route(
+      path: 'edit_area',
+      hasOverriddenOnExit: false,
+      factory: $EditAreaRoute._fromState,
+    ),
     GoRouteData.$route(
       path: 'view_service',
+      hasOverriddenOnExit: false,
       factory: $ViewServiceRoute._fromState,
     ),
     GoRouteData.$route(
       path: 'record_attendance',
+      hasOverriddenOnExit: false,
       factory: $RecordAttendanceRoute._fromState,
     ),
     GoRouteData.$route(
       path: 'edit_service',
+      hasOverriddenOnExit: false,
       factory: $EditServiceRoute._fromState,
     ),
-    GoRouteData.$route(path: 'view_user', factory: $ViewUserRoute._fromState),
-    GoRouteData.$route(path: 'edit_user', factory: $EditUserRoute._fromState),
-    GoRouteData.$route(path: 'view_group', factory: $ViewGroupRoute._fromState),
-    GoRouteData.$route(path: 'edit_group', factory: $EditGroupRoute._fromState),
-    GoRouteData.$route(path: 'view_class', factory: $ViewClassRoute._fromState),
-    GoRouteData.$route(path: 'edit_class', factory: $EditClassRoute._fromState),
+    GoRouteData.$route(
+      path: 'view_user',
+      hasOverriddenOnExit: false,
+      factory: $ViewUserRoute._fromState,
+    ),
+    GoRouteData.$route(
+      path: 'edit_user',
+      hasOverriddenOnExit: false,
+      factory: $EditUserRoute._fromState,
+    ),
+    GoRouteData.$route(
+      path: 'view_group',
+      hasOverriddenOnExit: false,
+      factory: $ViewGroupRoute._fromState,
+    ),
+    GoRouteData.$route(
+      path: 'edit_group',
+      hasOverriddenOnExit: false,
+      factory: $EditGroupRoute._fromState,
+    ),
+    GoRouteData.$route(
+      path: 'view_class',
+      hasOverriddenOnExit: false,
+      factory: $ViewClassRoute._fromState,
+    ),
+    GoRouteData.$route(
+      path: 'edit_class',
+      hasOverriddenOnExit: false,
+      factory: $EditClassRoute._fromState,
+    ),
     GoRouteData.$route(
       path: 'view_family',
+      hasOverriddenOnExit: false,
       factory: $ViewFamilyRoute._fromState,
     ),
     GoRouteData.$route(
       path: 'edit_family',
+      hasOverriddenOnExit: false,
       factory: $EditFamilyRoute._fromState,
     ),
     GoRouteData.$route(
       path: 'view_street',
+      hasOverriddenOnExit: false,
       factory: $ViewStreetRoute._fromState,
     ),
     GoRouteData.$route(
       path: 'edit_street',
+      hasOverriddenOnExit: false,
       factory: $EditStreetRoute._fromState,
     ),
-    GoRouteData.$route(path: 'view_store', factory: $ViewStoreRoute._fromState),
-    GoRouteData.$route(path: 'edit_store', factory: $EditStoreRoute._fromState),
+    GoRouteData.$route(
+      path: 'view_store',
+      hasOverriddenOnExit: false,
+      factory: $ViewStoreRoute._fromState,
+    ),
+    GoRouteData.$route(
+      path: 'edit_store',
+      hasOverriddenOnExit: false,
+      factory: $EditStoreRoute._fromState,
+    ),
     GoRouteData.$route(
       path: 'person_analysis',
+      hasOverriddenOnExit: false,
       factory: $PersonAnalysisRoute._fromState,
     ),
     GoRouteData.$route(
       path: 'user_analysis',
+      hasOverriddenOnExit: false,
       factory: $UserAnalysisRoute._fromState,
     ),
     GoRouteData.$route(
       path: 'meetings_analysis',
+      hasOverriddenOnExit: false,
       factory: $MeetingsAnalysisRoute._fromState,
     ),
-    GoRouteData.$route(path: 'my_account', factory: $MyAccountRoute._fromState),
+    GoRouteData.$route(
+      path: 'my_account',
+      hasOverriddenOnExit: false,
+      factory: $MyAccountRoute._fromState,
+    ),
     GoRouteData.$route(
       path: 'manage_users',
+      hasOverriddenOnExit: true,
       factory: $ManageUsersRoute._fromState,
     ),
     GoRouteData.$route(
       path: 'export_entities_selection',
+      hasOverriddenOnExit: false,
       factory: $ExportEntitiesSelectionRoute._fromState,
     ),
-    GoRouteData.$route(path: 'visits_map', factory: $VisitsMapRoute._fromState),
+    GoRouteData.$route(
+      path: 'visits_map',
+      hasOverriddenOnExit: false,
+      factory: $VisitsMapRoute._fromState,
+    ),
     GoRouteData.$route(
       path: 'advanced_search',
+      hasOverriddenOnExit: false,
       factory: $AdvancedSearchRoute._fromState,
     ),
-    GoRouteData.$route(path: 'settings', factory: $SettingsRoute._fromState),
+    GoRouteData.$route(
+      path: 'settings',
+      hasOverriddenOnExit: false,
+      factory: $SettingsRoute._fromState,
+    ),
   ],
 );
 

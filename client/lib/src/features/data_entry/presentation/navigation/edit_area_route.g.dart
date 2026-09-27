@@ -11,8 +11,11 @@ part of 'edit_area_route.dart';
 
 List<RouteBase> get $appRoutes => [$editAreaRoute];
 
-RouteBase get $editAreaRoute =>
-    GoRouteData.$route(path: '/edit_area', factory: $EditAreaRoute._fromState);
+RouteBase get $editAreaRoute => GoRouteData.$route(
+  path: '/edit_area',
+  hasOverriddenOnExit: false,
+  factory: $EditAreaRoute._fromState,
+);
 
 mixin $EditAreaRoute on GoRouteData {
   static EditAreaRoute _fromState(GoRouterState state) =>

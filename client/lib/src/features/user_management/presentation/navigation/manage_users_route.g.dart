@@ -13,6 +13,7 @@ List<RouteBase> get $appRoutes => [$manageUsersRoute];
 
 RouteBase get $manageUsersRoute => GoRouteData.$route(
   path: '/manage_users',
+  hasOverriddenOnExit: true,
   factory: $ManageUsersRoute._fromState,
 );
 

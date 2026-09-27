@@ -13,6 +13,7 @@ List<RouteBase> get $appRoutes => [$biometricsAuthRoute];
 
 RouteBase get $biometricsAuthRoute => GoRouteData.$route(
   path: '/biometrics_auth',
+  hasOverriddenOnExit: false,
   factory: $BiometricsAuthRoute._fromState,
 );
 

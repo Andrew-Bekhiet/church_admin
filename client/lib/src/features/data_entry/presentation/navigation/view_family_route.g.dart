@@ -13,6 +13,7 @@ List<RouteBase> get $appRoutes => [$viewFamilyRoute];
 
 RouteBase get $viewFamilyRoute => GoRouteData.$route(
   path: '/view_family',
+  hasOverriddenOnExit: false,
   factory: $ViewFamilyRoute._fromState,
 );
 

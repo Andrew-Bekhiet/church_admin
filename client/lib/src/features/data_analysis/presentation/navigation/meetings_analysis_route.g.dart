@@ -13,6 +13,7 @@ List<RouteBase> get $appRoutes => [$meetingsAnalysisRoute];
 
 RouteBase get $meetingsAnalysisRoute => GoRouteData.$route(
   path: '/meetings_analysis',
+  hasOverriddenOnExit: false,
   factory: $MeetingsAnalysisRoute._fromState,
 );
 

@@ -3,6 +3,7 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+
 import 'dart:async' as _i5;
 import 'dart:ui' as _i8;
 
@@ -544,6 +545,15 @@ class MockGoRouterState extends _i1.Mock implements _i10.GoRouterState {
             ),
           )
           as _i3.ValueKey<String>);
+
+  @override
+  Map<String, dynamic> get metadata =>
+      (super.noSuchMethod(
+            Invocation.getter(#metadata),
+            returnValue: <String, dynamic>{},
+            returnValueForMissingStub: <String, dynamic>{},
+          )
+          as Map<String, dynamic>);
 
   @override
   String namedLocation(

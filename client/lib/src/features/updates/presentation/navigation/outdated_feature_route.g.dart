@@ -13,6 +13,7 @@ List<RouteBase> get $appRoutes => [$outdatedFeatureRoute];
 
 RouteBase get $outdatedFeatureRoute => GoRouteData.$route(
   path: '/outdated_feature',
+  hasOverriddenOnExit: false,
   factory: $OutdatedFeatureRoute._fromState,
 );
 
