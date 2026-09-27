@@ -4,7 +4,17 @@ table:
 insert_permissions:
   - role: user
     permission:
-      check: {}
+      check:
+        _exists:
+          _table:
+            name: users_permissions
+            schema: auth
+          _where:
+            _and:
+              - uid:
+                  _eq: X-Hasura-User-Id
+              - permission:
+                  _eq: approved
       columns:
         - name
     comment: ""
@@ -21,11 +31,41 @@ update_permissions:
     permission:
       columns:
         - name
-      filter: {}
-      check: {}
+      filter:
+        _exists:
+          _table:
+            name: users_permissions
+            schema: auth
+          _where:
+            _and:
+              - uid:
+                  _eq: X-Hasura-User-Id
+              - permission:
+                  _eq: approved
+      check:
+        _exists:
+          _table:
+            name: users_permissions
+            schema: auth
+          _where:
+            _and:
+              - uid:
+                  _eq: X-Hasura-User-Id
+              - permission:
+                  _eq: approved
     comment: ""
 delete_permissions:
   - role: user
     permission:
-      filter: {}
+      filter:
+        _exists:
+          _table:
+            name: users_permissions
+            schema: auth
+          _where:
+            _and:
+              - uid:
+                  _eq: X-Hasura-User-Id
+              - permission:
+                  _eq: approved
     comment: ""
