@@ -13,6 +13,7 @@ export 'widgets/attendance_summary_bar.dart';
 export 'widgets/attendance_summary_segment.dart';
 export 'widgets/calendar_day_with_indicator_widget.dart';
 export 'widgets/kodas_chalice_icon.dart';
+export 'widgets/kodas_check_icon.dart';
 export 'widgets/meeting_avatar.dart';
 export 'widgets/meeting_list_tile.dart';
 export 'widgets/meeting_selector_button.dart';

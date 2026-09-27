@@ -7,6 +7,7 @@ class AttendanceLabelledToggle extends StatelessWidget {
   static const double _indicatorHeight = 28;
   static const double _iconSize = 22;
   static const double _disabledOpacity = 0.38;
+  static const double _outlineWidth = 1.5;
 
   final bool selected;
   final Widget icon;
@@ -16,6 +17,7 @@ class AttendanceLabelledToggle extends StatelessWidget {
   final Color selectedColor;
   final VoidCallback? onTap;
   final VoidCallback? onLongPress;
+  final Color? unselectedOutlineColor;
 
   const AttendanceLabelledToggle({
     required this.selected,
@@ -26,6 +28,7 @@ class AttendanceLabelledToggle extends StatelessWidget {
     required this.selectedColor,
     required this.onTap,
     this.onLongPress,
+    this.unselectedOutlineColor,
     super.key,
   });
 
@@ -61,7 +64,17 @@ class AttendanceLabelledToggle extends StatelessWidget {
                 width: _indicatorWidth,
                 height: _indicatorHeight,
                 decoration: ShapeDecoration(
-                  shape: const StadiumBorder(),
+                  shape: StadiumBorder(
+                    side: switch (unselectedOutlineColor) {
+                      final outline? when !selected => BorderSide(
+                        color: enabled
+                            ? outline
+                            : outline.withValues(alpha: _disabledOpacity),
+                        width: _outlineWidth,
+                      ),
+                      _ => BorderSide.none,
+                    },
+                  ),
                   color: selected && enabled
                       ? indicatorColor
                       : indicatorColor.withValues(alpha: 0),
