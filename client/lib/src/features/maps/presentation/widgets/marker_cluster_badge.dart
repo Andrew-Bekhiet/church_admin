@@ -18,16 +18,11 @@ class MarkerClusterBadge extends StatelessWidget {
         shadows: kElevationToShadow[2],
       ),
       child: Center(
-        child: FittedBox(
-          child: Padding(
-            padding: const EdgeInsets.all(4),
-            child: Text(
-              count.toString(),
-              style: TextTheme.of(
-                context,
-              ).labelLarge?.copyWith(color: colorScheme.onPrimary),
-            ),
-          ),
+        child: Text(
+          count.toString(),
+          style: TextTheme.of(
+            context,
+          ).labelLarge?.copyWith(color: colorScheme.onPrimary),
         ),
       ),
     );
