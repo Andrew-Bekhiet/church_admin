@@ -20,9 +20,9 @@ class PersonHistorySection extends StatelessWidget {
                   personId: person.id,
                 ),
           ),
-          onRecordNow: () => DatabaseService.I.history.updatePersonLastKodas(
+          onRecordNow: () => DatabaseService.I.history.recordKodas(
             personId: person.id,
-            lastKodas: DateTime.now(),
+            day: DateTime.now(),
           ),
         ),
         HistoryProperty(

@@ -4135,6 +4135,7 @@ type HistoryMeetings {
   serviceGender: Boolean
   serviceId: uuid
   serviceStudyYear: Int
+  showKodasCheckbox: Boolean!
   studyYear: StudyYears
 }
 
@@ -4181,6 +4182,7 @@ input HistoryMeetingsBoolExp {
   serviceGender: BooleanComparisonExp
   serviceId: UuidComparisonExp
   serviceStudyYear: IntComparisonExp
+  showKodasCheckbox: BooleanComparisonExp
   studyYear: StudyYearsBoolExp
 }
 
@@ -4204,6 +4206,7 @@ input HistoryMeetingsInsertInput {
   serviceGender: Boolean
   serviceId: uuid
   serviceStudyYear: Int
+  showKodasCheckbox: Boolean
   studyYear: StudyYearsObjRelInsertInput
 }
 
@@ -4257,6 +4260,7 @@ input HistoryMeetingsOrderBy {
   serviceGender: OrderBy
   serviceId: OrderBy
   serviceStudyYear: OrderBy
+  showKodasCheckbox: OrderBy
   studyYear: StudyYearsOrderBy
 }
 
@@ -4274,6 +4278,7 @@ enum HistoryMeetingsSelectColumn {
   serviceGender
   serviceId
   serviceStudyYear
+  showKodasCheckbox
 }
 
 input HistoryMeetingsSetInput {
@@ -4281,6 +4286,7 @@ input HistoryMeetingsSetInput {
   color: bigint
   isArchived: Boolean
   name: String
+  showKodasCheckbox: Boolean
 }
 
 input HistoryMeetingsStddevOrderBy {
@@ -4313,6 +4319,7 @@ input HistoryMeetingsStreamCursorValueInput {
   serviceGender: Boolean
   serviceId: uuid
   serviceStudyYear: Int
+  showKodasCheckbox: Boolean
 }
 
 input HistoryMeetingsSumOrderBy {
@@ -4325,6 +4332,7 @@ enum HistoryMeetingsUpdateColumn {
   color
   isArchived
   name
+  showKodasCheckbox
 }
 
 input HistoryMeetingsUpdates {
@@ -7690,6 +7698,8 @@ type mutation_root {
   deleteHistoryAttendanceDaysByPk(day: date!): HistoryAttendanceDays
   deleteHistoryAttendanceHistory(where: HistoryAttendanceHistoryBoolExp!): HistoryAttendanceHistoryMutationResponse
   deleteHistoryAttendanceHistoryByPk(id: uuid!): HistoryAttendanceHistory
+  deleteHistoryKodasHistory(where: HistoryKodasHistoryBoolExp!): HistoryKodasHistoryMutationResponse
+  deleteHistoryKodasHistoryByPk(id: uuid!): HistoryKodasHistory
   deleteHistoryMeetings(where: HistoryMeetingsBoolExp!): HistoryMeetingsMutationResponse
   deleteHistoryMeetingsByPk(id: uuid!): HistoryMeetings
   deleteHobbies(where: HobbiesBoolExp!): HobbiesMutationResponse

@@ -530,7 +530,7 @@ final class _FakePresenter implements AttendanceUndoPresenter {
   @override
   void showUndo({
     required String personName,
-    required bool isPresent,
+    required AttendanceUndoableChange change,
     required VoidCallback onUndo,
   }) {}
 

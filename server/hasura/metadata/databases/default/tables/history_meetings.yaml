@@ -113,6 +113,7 @@ insert_permissions:
         - service_study_year
         - service_gender
         - is_archived
+        - show_kodas_checkbox
 select_permissions:
   - role: user
     permission:
@@ -126,6 +127,7 @@ select_permissions:
         - service_study_year
         - service_gender
         - is_archived
+        - show_kodas_checkbox
       filter:
         _or:
           - _exists:
@@ -158,6 +160,7 @@ update_permissions:
         - audience
         - color
         - is_archived
+        - show_kodas_checkbox
       filter: *meeting_write_permission
       check: *meeting_write_permission
 delete_permissions:

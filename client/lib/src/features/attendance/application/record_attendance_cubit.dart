@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:church_admin/church_admin.dart';
 import 'package:church_admin/src/features/attendance/application/attendance_undo_presenter.dart';
-import 'package:church_admin/src/features/attendance/application/live_attendance.dart';
+import 'package:church_admin/src/features/attendance/application/live_records.dart';
 import 'package:church_admin/src/features/attendance/domain/attendance_record_rights.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart' show DateTimeRange, DateUtils, TimeOfDay;
@@ -42,7 +42,8 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
   int _streakWindowDays = defaultStreakWindowDays;
 
   StreamSubscription<List<AttendanceRecord>>? _attendanceSub;
-  final LiveAttendance _liveAttendance = LiveAttendance();
+  final LiveRecords<(String personId, bool asServant), AttendanceRecord>
+  _liveAttendance = LiveRecords(keyOf: (r) => (r.personId, r.asServant));
   Set<DateTime> _recordedDays = const {};
 
   RosterStatus _rosterStatus = RosterStatus.loading;
@@ -159,11 +160,10 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
 
   Future<void> toggleAttendance(MeetingRosterEntry entry) {
     final personId = entry.person.id;
-    final effectiveAttendanceRecord = _liveAttendance.effectiveAttendanceRecord(
-      personId: personId,
-      asServant: _asServant,
-      meetingId: _meeting.id,
-    );
+    final effectiveAttendanceRecord = _liveAttendance.effectiveRecord((
+      personId,
+      _asServant,
+    ));
     final newIsPresent = effectiveAttendanceRecord == null;
     final attendanceTime = _selectedDate.replaceTime(DateTime.now());
 
@@ -181,7 +181,7 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
 
           _presenter.showUndo(
             personName: entry.person.name,
-            isPresent: true,
+            change: AttendanceUndoableChange.markedPresent,
             onUndo: () => _dao.unmarkAttendance(attendanceRecordId: record.id),
           );
         } else if (entry.attendance?.id case final attendanceRecordId?) {
@@ -191,7 +191,7 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
 
           _presenter.showUndo(
             personName: entry.person.name,
-            isPresent: false,
+            change: AttendanceUndoableChange.markedAbsent,
             onUndo: () => _dao.markAttendance(
               meetingId: record.meetingId,
               personId: record.personId,
@@ -230,14 +230,19 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
     required Future<void> Function() action,
   }) async {
     final personId = entry.person.id;
-    if (_liveAttendance.isInFlight(personId) ||
-        _liveAttendance.isOptimistic(personId, _asServant)) {
-      return;
-    }
+    final key = (personId, _asServant);
+    if (_liveAttendance.isPending(key)) return;
 
-    _liveAttendance
-      ..markOptimistic(personId, _asServant, optimisticTime)
-      ..beginInFlight(personId);
+    _liveAttendance.beginOptimistic(key, switch (optimisticTime) {
+      null => null,
+      final time => AttendanceRecord(
+        id: _meeting.id,
+        meetingId: _meeting.id,
+        personId: personId,
+        datetime: time,
+        asServant: _asServant,
+      ),
+    });
     if (optimisticTime != null && !_recordedDays.contains(_selectedDate)) {
       _recordedDays = {..._recordedDays, _selectedDate};
     }
@@ -246,7 +251,7 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
     try {
       await action();
     } catch (error, stackTrace) {
-      _liveAttendance.rollbackOptimistic(personId, _asServant);
+      _liveAttendance.rollbackOptimistic(key);
 
       unawaited(
         LoggingService.I.exception(
@@ -256,7 +261,7 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
 
       if (!isClosed) _presenter.showError('تعذر حفظ الحضور، حاول مرة أخرى');
     } finally {
-      _liveAttendance.endInFlight(personId);
+      _liveAttendance.endInFlight(key);
       _emitLoaded();
     }
   }
@@ -461,11 +466,10 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
   }
 
   MeetingRosterEntry _withLiveAttendance(MeetingRosterEntry entry) {
-    final record = _liveAttendance.effectiveAttendanceRecord(
-      personId: entry.person.id,
-      asServant: entry.asServant,
-      meetingId: _meeting.id,
-    );
+    final record = _liveAttendance.effectiveRecord((
+      entry.person.id,
+      entry.asServant,
+    ));
 
     return entry.copyWith(attendanceRecord: record);
   }

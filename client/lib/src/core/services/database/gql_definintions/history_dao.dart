@@ -202,21 +202,55 @@ class HistoryDAO {
     );
   }
 
-  Future<Person?> updatePersonLastKodas({
+  Stream<List<KodasRecord>> streamDayKodas({required DateTime day}) {
+    return graphQLClient.subscribeAndReturnParsed(
+      SubscriptionOptions(
+        document: documentNodeSubscriptionwatchDayKodas,
+        operationName: 'watchDayKodas',
+        variables: Variables_Subscription_watchDayKodas(day: day).toJson(),
+        parserFn: (data) => Subscription_watchDayKodas.fromJson(
+          data,
+        ).historyKodasHistory.map(KodasRecord.fromFragment).toList(),
+      ),
+    );
+  }
+
+  Future<KodasRecord?> recordKodas({
     required String personId,
-    required DateTime lastKodas,
+    required DateTime day,
   }) {
+    return graphQLClient.mutateAndReturnParsedNullable(
+      MutationOptions(
+        document: documentNodeMutationrecordKodas,
+        operationName: 'recordKodas',
+        variables: Variables_Mutation_recordKodas(
+          personId: personId.toUuid(),
+          day: day,
+        ).toJson(),
+        parserFn: (data) => switch (Mutation_recordKodas.fromJson(
+          data,
+        ).insertHistoryKodasHistoryOne) {
+          final inserted? => KodasRecord.fromFragment(inserted),
+          null => null,
+        },
+      ),
+    );
+  }
+
+  Future<KodasRecord> deleteKodas({required String kodasRecordId}) {
     return graphQLClient.mutateAndReturnParsed(
       MutationOptions(
-        document: documentNodeMutationinsertPersonLastKodas,
-        operationName: 'insertPersonLastKodas',
-        variables: Variables_Mutation_insertPersonLastKodas(
-          personId: personId.toUuid(),
-          lastKodas: lastKodas,
+        document: documentNodeMutationdeleteKodas,
+        operationName: 'deleteKodas',
+        variables: Variables_Mutation_deleteKodas(
+          id: kodasRecordId.toUuid(),
         ).toJson(),
-        parserFn: db.parser.singleOrNullParser(
-          db.parser.singleOrNullParser(Person.fromJson),
-        ),
+        parserFn: (data) => switch (Mutation_deleteKodas.fromJson(
+          data,
+        ).deleteHistoryKodasHistoryByPk) {
+          final deleted? => KodasRecord.fromFragment(deleted),
+          null => throw const KodasChangeRejectedException(),
+        },
       ),
     );
   }

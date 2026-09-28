@@ -85,3 +85,9 @@ subscription personKodasHistory(
     ...KodasHistory
   }
 }
+
+subscription watchDayKodas($day: date!) {
+  historyKodasHistory(where: { dayId: { _eq: $day } }) {
+    ...KodasDayRecord
+  }
+}

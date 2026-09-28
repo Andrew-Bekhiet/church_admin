@@ -1,10 +1,11 @@
 import 'package:church_admin/src/core/utils/globals.dart';
+import 'package:church_admin/src/features/attendance/application/attendance_undoable_change.dart';
 import 'package:flutter/material.dart';
 
 abstract interface class AttendanceUndoPresenter {
   void showUndo({
     required String personName,
-    required bool isPresent,
+    required AttendanceUndoableChange change,
     required VoidCallback onUndo,
   });
 
@@ -17,18 +18,14 @@ final class ScaffoldAttendanceUndoPresenter implements AttendanceUndoPresenter {
   @override
   void showUndo({
     required String personName,
-    required bool isPresent,
+    required AttendanceUndoableChange change,
     required VoidCallback onUndo,
   }) {
     scaffoldMessenger
       ..clearSnackBars()
       ..showSnackBar(
         SnackBar(
-          content: Text(
-            isPresent
-                ? 'تم تسجيل حضور $personName'
-                : 'تم إلغاء حضور $personName',
-          ),
+          content: Text(change.messageFor(personName)),
           action: SnackBarAction(label: 'تراجع', onPressed: onUndo),
         ),
       );

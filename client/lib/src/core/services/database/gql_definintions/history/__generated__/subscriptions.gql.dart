@@ -2487,3 +2487,290 @@ const documentNodeSubscriptionpersonKodasHistory = DocumentNode(
     fragmentDefinitionUserNoPhoto,
   ],
 );
+
+class Variables_Subscription_watchDayKodas {
+  factory Variables_Subscription_watchDayKodas({required DateTime day}) =>
+      Variables_Subscription_watchDayKodas._({r'day': day});
+
+  Variables_Subscription_watchDayKodas._(this._$data);
+
+  factory Variables_Subscription_watchDayKodas.fromJson(
+    Map<String, dynamic> data,
+  ) {
+    final result$data = <String, dynamic>{};
+    final l$day = data['day'];
+    result$data['day'] = dateFromString(l$day);
+    return Variables_Subscription_watchDayKodas._(result$data);
+  }
+
+  Map<String, dynamic> _$data;
+
+  DateTime get day => (_$data['day'] as DateTime);
+
+  Map<String, dynamic> toJson() {
+    final result$data = <String, dynamic>{};
+    final l$day = day;
+    result$data['day'] = dateToString(l$day);
+    return result$data;
+  }
+
+  CopyWith_Variables_Subscription_watchDayKodas<
+    Variables_Subscription_watchDayKodas
+  >
+  get copyWith => CopyWith_Variables_Subscription_watchDayKodas(this, (i) => i);
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Variables_Subscription_watchDayKodas ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$day = day;
+    final lOther$day = other.day;
+    if (l$day != lOther$day) {
+      return false;
+    }
+    return true;
+  }
+
+  @override
+  int get hashCode {
+    final l$day = day;
+    return Object.hashAll([l$day]);
+  }
+}
+
+abstract class CopyWith_Variables_Subscription_watchDayKodas<TRes> {
+  factory CopyWith_Variables_Subscription_watchDayKodas(
+    Variables_Subscription_watchDayKodas instance,
+    TRes Function(Variables_Subscription_watchDayKodas) then,
+  ) = _CopyWithImpl_Variables_Subscription_watchDayKodas;
+
+  factory CopyWith_Variables_Subscription_watchDayKodas.stub(TRes res) =
+      _CopyWithStubImpl_Variables_Subscription_watchDayKodas;
+
+  TRes call({DateTime? day});
+}
+
+class _CopyWithImpl_Variables_Subscription_watchDayKodas<TRes>
+    implements CopyWith_Variables_Subscription_watchDayKodas<TRes> {
+  _CopyWithImpl_Variables_Subscription_watchDayKodas(
+    this._instance,
+    this._then,
+  );
+
+  final Variables_Subscription_watchDayKodas _instance;
+
+  final TRes Function(Variables_Subscription_watchDayKodas) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? day = _undefined}) => _then(
+    Variables_Subscription_watchDayKodas._({
+      ..._instance._$data,
+      if (day != _undefined && day != null) 'day': (day as DateTime),
+    }),
+  );
+}
+
+class _CopyWithStubImpl_Variables_Subscription_watchDayKodas<TRes>
+    implements CopyWith_Variables_Subscription_watchDayKodas<TRes> {
+  _CopyWithStubImpl_Variables_Subscription_watchDayKodas(this._res);
+
+  TRes _res;
+
+  call({DateTime? day}) => _res;
+}
+
+class Subscription_watchDayKodas {
+  Subscription_watchDayKodas({required this.historyKodasHistory});
+
+  factory Subscription_watchDayKodas.fromJson(Map<String, dynamic> json) {
+    final l$historyKodasHistory = json['historyKodasHistory'];
+    return Subscription_watchDayKodas(
+      historyKodasHistory: (l$historyKodasHistory as List<dynamic>)
+          .map(
+            (e) =>
+                Fragment_KodasDayRecord.fromJson((e as Map<String, dynamic>)),
+          )
+          .toList(),
+    );
+  }
+
+  final List<Fragment_KodasDayRecord> historyKodasHistory;
+
+  Map<String, dynamic> toJson() {
+    final _resultData = <String, dynamic>{};
+    final l$historyKodasHistory = historyKodasHistory;
+    _resultData['historyKodasHistory'] = l$historyKodasHistory
+        .map((e) => e.toJson())
+        .toList();
+    return _resultData;
+  }
+
+  @override
+  int get hashCode {
+    final l$historyKodasHistory = historyKodasHistory;
+    return Object.hashAll([
+      Object.hashAll(l$historyKodasHistory.map((v) => v)),
+    ]);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other is! Subscription_watchDayKodas ||
+        runtimeType != other.runtimeType) {
+      return false;
+    }
+    final l$historyKodasHistory = historyKodasHistory;
+    final lOther$historyKodasHistory = other.historyKodasHistory;
+    if (l$historyKodasHistory.length != lOther$historyKodasHistory.length) {
+      return false;
+    }
+    for (int i = 0; i < l$historyKodasHistory.length; i++) {
+      final l$historyKodasHistory$entry = l$historyKodasHistory[i];
+      final lOther$historyKodasHistory$entry = lOther$historyKodasHistory[i];
+      if (l$historyKodasHistory$entry != lOther$historyKodasHistory$entry) {
+        return false;
+      }
+    }
+    return true;
+  }
+}
+
+extension UtilityExtension_Subscription_watchDayKodas
+    on Subscription_watchDayKodas {
+  CopyWith_Subscription_watchDayKodas<Subscription_watchDayKodas>
+  get copyWith => CopyWith_Subscription_watchDayKodas(this, (i) => i);
+}
+
+abstract class CopyWith_Subscription_watchDayKodas<TRes> {
+  factory CopyWith_Subscription_watchDayKodas(
+    Subscription_watchDayKodas instance,
+    TRes Function(Subscription_watchDayKodas) then,
+  ) = _CopyWithImpl_Subscription_watchDayKodas;
+
+  factory CopyWith_Subscription_watchDayKodas.stub(TRes res) =
+      _CopyWithStubImpl_Subscription_watchDayKodas;
+
+  TRes call({List<Fragment_KodasDayRecord>? historyKodasHistory});
+  TRes historyKodasHistory(
+    Iterable<Fragment_KodasDayRecord> Function(
+      Iterable<CopyWith_Fragment_KodasDayRecord<Fragment_KodasDayRecord>>,
+    )
+    _fn,
+  );
+}
+
+class _CopyWithImpl_Subscription_watchDayKodas<TRes>
+    implements CopyWith_Subscription_watchDayKodas<TRes> {
+  _CopyWithImpl_Subscription_watchDayKodas(this._instance, this._then);
+
+  final Subscription_watchDayKodas _instance;
+
+  final TRes Function(Subscription_watchDayKodas) _then;
+
+  static const _undefined = <dynamic, dynamic>{};
+
+  TRes call({Object? historyKodasHistory = _undefined}) => _then(
+    Subscription_watchDayKodas(
+      historyKodasHistory:
+          historyKodasHistory == _undefined || historyKodasHistory == null
+          ? _instance.historyKodasHistory
+          : (historyKodasHistory as List<Fragment_KodasDayRecord>),
+    ),
+  );
+
+  TRes historyKodasHistory(
+    Iterable<Fragment_KodasDayRecord> Function(
+      Iterable<CopyWith_Fragment_KodasDayRecord<Fragment_KodasDayRecord>>,
+    )
+    _fn,
+  ) => call(
+    historyKodasHistory: _fn(
+      _instance.historyKodasHistory.map(
+        (e) => CopyWith_Fragment_KodasDayRecord(e, (i) => i),
+      ),
+    ).toList(),
+  );
+}
+
+class _CopyWithStubImpl_Subscription_watchDayKodas<TRes>
+    implements CopyWith_Subscription_watchDayKodas<TRes> {
+  _CopyWithStubImpl_Subscription_watchDayKodas(this._res);
+
+  TRes _res;
+
+  call({List<Fragment_KodasDayRecord>? historyKodasHistory}) => _res;
+
+  historyKodasHistory(_fn) => _res;
+}
+
+const documentNodeSubscriptionwatchDayKodas = DocumentNode(
+  definitions: [
+    OperationDefinitionNode(
+      type: OperationType.subscription,
+      name: NameNode(value: 'watchDayKodas'),
+      variableDefinitions: [
+        VariableDefinitionNode(
+          variable: VariableNode(name: NameNode(value: 'day')),
+          type: NamedTypeNode(name: NameNode(value: 'date'), isNonNull: true),
+          defaultValue: DefaultValueNode(value: null),
+          directives: [],
+        ),
+      ],
+      directives: [],
+      selectionSet: SelectionSetNode(
+        selections: [
+          FieldNode(
+            name: NameNode(value: 'historyKodasHistory'),
+            alias: null,
+            arguments: [
+              ArgumentNode(
+                name: NameNode(value: 'where'),
+                value: ObjectValueNode(
+                  fields: [
+                    ObjectFieldNode(
+                      name: NameNode(value: 'dayId'),
+                      value: ObjectValueNode(
+                        fields: [
+                          ObjectFieldNode(
+                            name: NameNode(value: '_eq'),
+                            value: VariableNode(name: NameNode(value: 'day')),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+            directives: [],
+            selectionSet: SelectionSetNode(
+              selections: [
+                FragmentSpreadNode(
+                  name: NameNode(value: 'KodasDayRecord'),
+                  directives: [],
+                ),
+                FieldNode(
+                  name: NameNode(value: '__typename'),
+                  alias: null,
+                  arguments: [],
+                  directives: [],
+                  selectionSet: null,
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    ),
+    fragmentDefinitionKodasDayRecord,
+  ],
+);

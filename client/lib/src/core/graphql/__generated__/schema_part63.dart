@@ -1182,6 +1182,7 @@ enum Enum_HistoryMeetingsSelectColumn {
   serviceGender,
   serviceId,
   serviceStudyYear,
+  showKodasCheckbox,
   $unknown;
 
   factory Enum_HistoryMeetingsSelectColumn.fromJson(String value) =>
@@ -1212,6 +1213,8 @@ String toJson_Enum_HistoryMeetingsSelectColumn(
       return r'serviceId';
     case Enum_HistoryMeetingsSelectColumn.serviceStudyYear:
       return r'serviceStudyYear';
+    case Enum_HistoryMeetingsSelectColumn.showKodasCheckbox:
+      return r'showKodasCheckbox';
     case Enum_HistoryMeetingsSelectColumn.$unknown:
       return r'$unknown';
   }
@@ -1239,6 +1242,8 @@ Enum_HistoryMeetingsSelectColumn fromJson_Enum_HistoryMeetingsSelectColumn(
       return Enum_HistoryMeetingsSelectColumn.serviceId;
     case r'serviceStudyYear':
       return Enum_HistoryMeetingsSelectColumn.serviceStudyYear;
+    case r'showKodasCheckbox':
+      return Enum_HistoryMeetingsSelectColumn.showKodasCheckbox;
     default:
       return Enum_HistoryMeetingsSelectColumn.$unknown;
   }
@@ -1249,6 +1254,7 @@ enum Enum_HistoryMeetingsUpdateColumn {
   color,
   isArchived,
   name,
+  showKodasCheckbox,
   $unknown;
 
   factory Enum_HistoryMeetingsUpdateColumn.fromJson(String value) =>
@@ -1269,6 +1275,8 @@ String toJson_Enum_HistoryMeetingsUpdateColumn(
       return r'isArchived';
     case Enum_HistoryMeetingsUpdateColumn.name:
       return r'name';
+    case Enum_HistoryMeetingsUpdateColumn.showKodasCheckbox:
+      return r'showKodasCheckbox';
     case Enum_HistoryMeetingsUpdateColumn.$unknown:
       return r'$unknown';
   }
@@ -1286,6 +1294,8 @@ Enum_HistoryMeetingsUpdateColumn fromJson_Enum_HistoryMeetingsUpdateColumn(
       return Enum_HistoryMeetingsUpdateColumn.isArchived;
     case r'name':
       return Enum_HistoryMeetingsUpdateColumn.name;
+    case r'showKodasCheckbox':
+      return Enum_HistoryMeetingsUpdateColumn.showKodasCheckbox;
     default:
       return Enum_HistoryMeetingsUpdateColumn.$unknown;
   }

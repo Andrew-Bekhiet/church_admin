@@ -1,5 +1,8 @@
+import 'dart:async';
+
 import 'package:church_admin/church_admin.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:material_symbols_icons/material_symbols_icons.dart';
 
 class AttendanceOverflowMenu extends StatelessWidget {
@@ -29,85 +32,23 @@ class AttendanceOverflowMenu extends StatelessWidget {
     return PopupMenuButton<void>(
       borderRadius: BorderRadius.circular(12),
       icon: const Icon(Symbols.more_vert),
-      itemBuilder: (context) => [
-        PopupMenuItem(
-          onTap: () => onGroupingChanged(grouping.toggled),
-          child: ListTile(
-            contentPadding: EdgeInsets.zero,
-            leading: const Icon(Symbols.school),
-            title: const Text('تقسيم حسب السنة الدراسية'),
-            trailing: Visibility(
-              visible: grouping == AttendanceGrouping.studyYear,
-              maintainAnimation: true,
-              maintainSize: true,
-              maintainState: true,
-              child: const Icon(Symbols.check),
-            ),
-          ),
-        ),
-        const PopupMenuDivider(),
-        PopupMenuItem(
-          height: kMinInteractiveDimension / 2,
-          enabled: false,
-          child: Text(
-            'ترتيب حسب',
-            style: TextTheme.of(context).labelMedium,
-          ),
-        ),
-        _SortingMenuItem<AttendanceSortingByName>(
-          title: 'الاسم',
-          icon: Symbols.person,
-          currentSorting: sorting,
-          onChanged: onSortChanged,
-          value: AttendanceSorting.byName(),
-        ),
-        _SortingMenuItem<AttendanceSortingByTime>(
-          title: 'وقت الحضور',
-          icon: Symbols.access_time,
-          currentSorting: sorting,
-          onChanged: onSortChanged,
-          value: AttendanceSorting.byAttendanceTime(),
-        ),
-        _SortingMenuItem<AttendanceSortingByStreak>(
-          title: switch (sorting) {
-            AttendanceSortingByStreak(direction: SortingDirection.descending) =>
-              'الحضور المستمر',
-            _ => 'الغياب المستمر',
-          },
-          icon: switch (sorting) {
-            AttendanceSortingByStreak(direction: SortingDirection.descending) =>
-              Symbols.local_fire_department,
-            _ => Symbols.error,
-          },
-          currentSorting: sorting,
-          onChanged: onSortChanged,
-          value: AttendanceSorting.byAttendanceStreak(),
-        ),
-        _SortingMenuItem<AttendanceSortingByLastAttendanceTime>(
-          title: 'آخر وقت حضور',
-          icon: Symbols.history,
-          currentSorting: sorting,
-          onChanged: onSortChanged,
-          value: AttendanceSorting.byLastAttendanceTime(),
-        ),
-        const PopupMenuDivider(),
-        PopupMenuItem(
-          height: kMinInteractiveDimension / 2,
-          enabled: false,
-          child: Text(
-            'فترة المواظبة وتاريخ آخر الحضور',
-            style: TextTheme.of(context).labelMedium,
-          ),
-        ),
-        for (final days in _streakWindowOptions)
+      itemBuilder: (context) {
+        final kodasState = context.read<RecordKodasCubit>().state;
+
+        return [
           PopupMenuItem(
-            onTap: () => onStreakWindowChanged(days),
+            onTap: () => unawaited(
+              context.read<RecordKodasCubit>().changeVisibility(
+                visible: !kodasState.isVisible,
+              ),
+            ),
             child: ListTile(
               contentPadding: EdgeInsets.zero,
-              leading: const Icon(Symbols.date_range),
-              title: Text('$days يوم'),
+              leading: const KodasChaliceIcon(),
+              title: const Text('تسجيل التناول'),
+              subtitle: const Text('بجانب الحضور لهذا الاجتماع'),
               trailing: Visibility(
-                visible: streakWindowDays == days,
+                visible: kodasState.isVisible,
                 maintainAnimation: true,
                 maintainSize: true,
                 maintainState: true,
@@ -115,16 +56,106 @@ class AttendanceOverflowMenu extends StatelessWidget {
               ),
             ),
           ),
-        const PopupMenuDivider(),
-        PopupMenuItem(
-          onTap: openAnalysis,
-          child: const ListTile(
-            contentPadding: EdgeInsets.zero,
-            leading: Icon(Symbols.query_stats),
-            title: Text('احصائيات الحضور'),
+          PopupMenuItem(
+            onTap: () => onGroupingChanged(grouping.toggled),
+            child: ListTile(
+              contentPadding: EdgeInsets.zero,
+              leading: const Icon(Symbols.school),
+              title: const Text('تقسيم حسب السنة الدراسية'),
+              trailing: Visibility(
+                visible: grouping == AttendanceGrouping.studyYear,
+                maintainAnimation: true,
+                maintainSize: true,
+                maintainState: true,
+                child: const Icon(Symbols.check),
+              ),
+            ),
           ),
-        ),
-      ],
+          const PopupMenuDivider(),
+          PopupMenuItem(
+            height: kMinInteractiveDimension / 2,
+            enabled: false,
+            child: Text(
+              'ترتيب حسب',
+              style: TextTheme.of(context).labelMedium,
+            ),
+          ),
+          _SortingMenuItem<AttendanceSortingByName>(
+            title: 'الاسم',
+            icon: Symbols.person,
+            currentSorting: sorting,
+            onChanged: onSortChanged,
+            value: AttendanceSorting.byName(),
+          ),
+          _SortingMenuItem<AttendanceSortingByTime>(
+            title: 'وقت الحضور',
+            icon: Symbols.access_time,
+            currentSorting: sorting,
+            onChanged: onSortChanged,
+            value: AttendanceSorting.byAttendanceTime(),
+          ),
+          _SortingMenuItem<AttendanceSortingByStreak>(
+            title: switch (sorting) {
+              AttendanceSortingByStreak(
+                direction: SortingDirection.descending,
+              ) =>
+                'الحضور المستمر',
+              _ => 'الغياب المستمر',
+            },
+            icon: switch (sorting) {
+              AttendanceSortingByStreak(
+                direction: SortingDirection.descending,
+              ) =>
+                Symbols.local_fire_department,
+              _ => Symbols.error,
+            },
+            currentSorting: sorting,
+            onChanged: onSortChanged,
+            value: AttendanceSorting.byAttendanceStreak(),
+          ),
+          _SortingMenuItem<AttendanceSortingByLastAttendanceTime>(
+            title: 'آخر وقت حضور',
+            icon: Symbols.history,
+            currentSorting: sorting,
+            onChanged: onSortChanged,
+            value: AttendanceSorting.byLastAttendanceTime(),
+          ),
+          const PopupMenuDivider(),
+          PopupMenuItem(
+            height: kMinInteractiveDimension / 2,
+            enabled: false,
+            child: Text(
+              'فترة المواظبة وتاريخ آخر الحضور',
+              style: TextTheme.of(context).labelMedium,
+            ),
+          ),
+          for (final days in _streakWindowOptions)
+            PopupMenuItem(
+              onTap: () => onStreakWindowChanged(days),
+              child: ListTile(
+                contentPadding: EdgeInsets.zero,
+                leading: const Icon(Symbols.date_range),
+                title: Text('$days يوم'),
+                trailing: Visibility(
+                  visible: streakWindowDays == days,
+                  maintainAnimation: true,
+                  maintainSize: true,
+                  maintainState: true,
+                  child: const Icon(Symbols.check),
+                ),
+              ),
+            ),
+          const PopupMenuDivider(),
+          PopupMenuItem(
+            onTap: openAnalysis,
+            child: const ListTile(
+              contentPadding: EdgeInsets.zero,
+              leading: Icon(Symbols.query_stats),
+              title: Text('احصائيات الحضور'),
+            ),
+          ),
+        ];
+      },
     );
   }
 }

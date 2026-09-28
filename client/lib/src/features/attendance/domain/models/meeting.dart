@@ -27,6 +27,10 @@ class Meeting extends ViewableWithID
   final bool isArchived;
 
   @override
+  @JsonKey(defaultValue: true)
+  final bool showKodasCheckbox;
+
+  @override
   @JsonKey(fromJson: colorFromInt, toJson: colorToInt)
   final Color? color;
 
@@ -59,6 +63,7 @@ class Meeting extends ViewableWithID
     required this.name,
     required this.audience,
     required this.isArchived,
+    this.showKodasCheckbox = true,
     this.color,
     this.serviceId,
     this.service,
@@ -81,6 +86,7 @@ class Meeting extends ViewableWithID
       audience: audience.name,
       color: colorToInt(color),
       isArchived: isArchived,
+      showKodasCheckbox: showKodasCheckbox,
       serviceId: service?.id.toUuid() ?? serviceId?.toUuid(),
       serviceStudyYear: serviceStudyYear,
       serviceGender: serviceGender,
@@ -101,6 +107,9 @@ class Meeting extends ViewableWithID
     }
     if (isArchived != oldMeeting.isArchived) {
       result = result.copyWith(isArchived: isArchived);
+    }
+    if (showKodasCheckbox != oldMeeting.showKodasCheckbox) {
+      result = result.copyWith(showKodasCheckbox: showKodasCheckbox);
     }
 
     return result;

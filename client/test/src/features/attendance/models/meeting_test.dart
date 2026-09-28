@@ -8,6 +8,7 @@ Meeting _meeting({
   String name = 'Test Meeting',
   MeetingAudience audience = MeetingAudience.onlyPersons,
   bool isArchived = false,
+  bool showKodasCheckbox = true,
   Color? color,
   String? serviceId,
   int? serviceStudyYear,
@@ -18,6 +19,7 @@ Meeting _meeting({
   name: name,
   audience: audience,
   isArchived: isArchived,
+  showKodasCheckbox: showKodasCheckbox,
   color: color,
   serviceId: serviceId,
   serviceStudyYear: serviceStudyYear,
@@ -81,6 +83,33 @@ void main() {
       expect(meeting.audience, MeetingAudience.onlyPersons);
       expect(meeting.isArchived, isFalse);
       expect(meeting.color, isNull);
+    });
+
+    test('a meeting without the kodas flag shows the kodas checkbox', () {
+      final json = {
+        'id': 'meet-1',
+        'name': 'Sunday Meeting',
+        'audience': 'onlyPersons',
+        'isArchived': false,
+      };
+
+      final meeting = Meeting.fromJson(json);
+
+      expect(meeting.showKodasCheckbox, isTrue);
+    });
+
+    test('parses the kodas flag', () {
+      final json = {
+        'id': 'meet-1',
+        'name': 'Liturgy',
+        'audience': 'onlyPersons',
+        'isArchived': false,
+        'showKodasCheckbox': false,
+      };
+
+      final meeting = Meeting.fromJson(json);
+
+      expect(meeting.showKodasCheckbox, isFalse);
     });
 
     test('parses color from int', () {
@@ -181,12 +210,19 @@ void main() {
       expect(input.isArchived, isTrue);
     });
 
+    test('includes the kodas flag when changed', () {
+      final updated = _meeting(showKodasCheckbox: false);
+      final input = updated.toUpdateInput(oldMeeting: original);
+      expect(input.showKodasCheckbox, isFalse);
+    });
+
     test('returns empty input when nothing changed', () {
       final input = original.toUpdateInput(oldMeeting: original);
       expect(input.name, isNull);
       expect(input.audience, isNull);
       expect(input.isArchived, isNull);
       expect(input.color, isNull);
+      expect(input.showKodasCheckbox, isNull);
     });
   });
 }

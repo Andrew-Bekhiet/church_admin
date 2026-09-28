@@ -14,7 +14,7 @@ object_relationships:
 insert_permissions:
   - role: user
     permission:
-      check:
+      check: &check_edit_person_kodas_permission
         _exists:
           _table:
             name: users_permissions_by_entity_id
@@ -73,3 +73,7 @@ select_permissions:
                       - entity_id:
                           _is_null: true
       allow_aggregations: true
+delete_permissions:
+  - role: user
+    permission:
+      filter: *check_edit_person_kodas_permission

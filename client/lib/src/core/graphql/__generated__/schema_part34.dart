@@ -1406,6 +1406,7 @@ class Input_HistoryMeetingsBoolExp {
     Input_BooleanComparisonExp? serviceGender,
     Input_UuidComparisonExp? serviceId,
     Input_IntComparisonExp? serviceStudyYear,
+    Input_BooleanComparisonExp? showKodasCheckbox,
     Input_StudyYearsBoolExp? studyYear,
   }) => Input_HistoryMeetingsBoolExp._({
     if ($_and != null) r'_and': $_and,
@@ -1427,6 +1428,7 @@ class Input_HistoryMeetingsBoolExp {
     if (serviceGender != null) r'serviceGender': serviceGender,
     if (serviceId != null) r'serviceId': serviceId,
     if (serviceStudyYear != null) r'serviceStudyYear': serviceStudyYear,
+    if (showKodasCheckbox != null) r'showKodasCheckbox': showKodasCheckbox,
     if (studyYear != null) r'studyYear': studyYear,
   });
 
@@ -1577,6 +1579,14 @@ class Input_HistoryMeetingsBoolExp {
               (l$serviceStudyYear as Map<String, dynamic>),
             );
     }
+    if (data.containsKey('showKodasCheckbox')) {
+      final l$showKodasCheckbox = data['showKodasCheckbox'];
+      result$data['showKodasCheckbox'] = l$showKodasCheckbox == null
+          ? null
+          : Input_BooleanComparisonExp.fromJson(
+              (l$showKodasCheckbox as Map<String, dynamic>),
+            );
+    }
     if (data.containsKey('studyYear')) {
       final l$studyYear = data['studyYear'];
       result$data['studyYear'] = l$studyYear == null
@@ -1643,6 +1653,9 @@ class Input_HistoryMeetingsBoolExp {
 
   Input_IntComparisonExp? get serviceStudyYear =>
       (_$data['serviceStudyYear'] as Input_IntComparisonExp?);
+
+  Input_BooleanComparisonExp? get showKodasCheckbox =>
+      (_$data['showKodasCheckbox'] as Input_BooleanComparisonExp?);
 
   Input_StudyYearsBoolExp? get studyYear =>
       (_$data['studyYear'] as Input_StudyYearsBoolExp?);
@@ -1721,6 +1734,10 @@ class Input_HistoryMeetingsBoolExp {
     if (_$data.containsKey('serviceStudyYear')) {
       final l$serviceStudyYear = serviceStudyYear;
       result$data['serviceStudyYear'] = l$serviceStudyYear?.toJson();
+    }
+    if (_$data.containsKey('showKodasCheckbox')) {
+      final l$showKodasCheckbox = showKodasCheckbox;
+      result$data['showKodasCheckbox'] = l$showKodasCheckbox?.toJson();
     }
     if (_$data.containsKey('studyYear')) {
       final l$studyYear = studyYear;
@@ -1915,6 +1932,15 @@ class Input_HistoryMeetingsBoolExp {
     if (l$serviceStudyYear != lOther$serviceStudyYear) {
       return false;
     }
+    final l$showKodasCheckbox = showKodasCheckbox;
+    final lOther$showKodasCheckbox = other.showKodasCheckbox;
+    if (_$data.containsKey('showKodasCheckbox') !=
+        other._$data.containsKey('showKodasCheckbox')) {
+      return false;
+    }
+    if (l$showKodasCheckbox != lOther$showKodasCheckbox) {
+      return false;
+    }
     final l$studyYear = studyYear;
     final lOther$studyYear = other.studyYear;
     if (_$data.containsKey('studyYear') !=
@@ -1947,6 +1973,7 @@ class Input_HistoryMeetingsBoolExp {
     final l$serviceGender = serviceGender;
     final l$serviceId = serviceId;
     final l$serviceStudyYear = serviceStudyYear;
+    final l$showKodasCheckbox = showKodasCheckbox;
     final l$studyYear = studyYear;
     return Object.hashAll([
       _$data.containsKey('_and')
@@ -1977,6 +2004,7 @@ class Input_HistoryMeetingsBoolExp {
       _$data.containsKey('serviceGender') ? l$serviceGender : const {},
       _$data.containsKey('serviceId') ? l$serviceId : const {},
       _$data.containsKey('serviceStudyYear') ? l$serviceStudyYear : const {},
+      _$data.containsKey('showKodasCheckbox') ? l$showKodasCheckbox : const {},
       _$data.containsKey('studyYear') ? l$studyYear : const {},
     ]);
   }
@@ -2010,6 +2038,7 @@ abstract class CopyWith_Input_HistoryMeetingsBoolExp<TRes> {
     Input_BooleanComparisonExp? serviceGender,
     Input_UuidComparisonExp? serviceId,
     Input_IntComparisonExp? serviceStudyYear,
+    Input_BooleanComparisonExp? showKodasCheckbox,
     Input_StudyYearsBoolExp? studyYear,
   });
   TRes $_and(
@@ -2045,6 +2074,7 @@ abstract class CopyWith_Input_HistoryMeetingsBoolExp<TRes> {
   CopyWith_Input_BooleanComparisonExp<TRes> get serviceGender;
   CopyWith_Input_UuidComparisonExp<TRes> get serviceId;
   CopyWith_Input_IntComparisonExp<TRes> get serviceStudyYear;
+  CopyWith_Input_BooleanComparisonExp<TRes> get showKodasCheckbox;
   CopyWith_Input_StudyYearsBoolExp<TRes> get studyYear;
 }
 
@@ -2077,6 +2107,7 @@ class _CopyWithImpl_Input_HistoryMeetingsBoolExp<TRes>
     Object? serviceGender = _undefined,
     Object? serviceId = _undefined,
     Object? serviceStudyYear = _undefined,
+    Object? showKodasCheckbox = _undefined,
     Object? studyYear = _undefined,
   }) => _then(
     Input_HistoryMeetingsBoolExp._({
@@ -2115,6 +2146,8 @@ class _CopyWithImpl_Input_HistoryMeetingsBoolExp<TRes>
         'serviceId': (serviceId as Input_UuidComparisonExp?),
       if (serviceStudyYear != _undefined)
         'serviceStudyYear': (serviceStudyYear as Input_IntComparisonExp?),
+      if (showKodasCheckbox != _undefined)
+        'showKodasCheckbox': (showKodasCheckbox as Input_BooleanComparisonExp?),
       if (studyYear != _undefined)
         'studyYear': (studyYear as Input_StudyYearsBoolExp?),
     }),
@@ -2307,6 +2340,16 @@ class _CopyWithImpl_Input_HistoryMeetingsBoolExp<TRes>
           );
   }
 
+  CopyWith_Input_BooleanComparisonExp<TRes> get showKodasCheckbox {
+    final local$showKodasCheckbox = _instance.showKodasCheckbox;
+    return local$showKodasCheckbox == null
+        ? CopyWith_Input_BooleanComparisonExp.stub(_then(_instance))
+        : CopyWith_Input_BooleanComparisonExp(
+            local$showKodasCheckbox,
+            (e) => call(showKodasCheckbox: e),
+          );
+  }
+
   CopyWith_Input_StudyYearsBoolExp<TRes> get studyYear {
     final local$studyYear = _instance.studyYear;
     return local$studyYear == null
@@ -2343,6 +2386,7 @@ class _CopyWithStubImpl_Input_HistoryMeetingsBoolExp<TRes>
     Input_BooleanComparisonExp? serviceGender,
     Input_UuidComparisonExp? serviceId,
     Input_IntComparisonExp? serviceStudyYear,
+    Input_BooleanComparisonExp? showKodasCheckbox,
     Input_StudyYearsBoolExp? studyYear,
   }) => _res;
 
@@ -2398,6 +2442,9 @@ class _CopyWithStubImpl_Input_HistoryMeetingsBoolExp<TRes>
 
   CopyWith_Input_IntComparisonExp<TRes> get serviceStudyYear =>
       CopyWith_Input_IntComparisonExp.stub(_res);
+
+  CopyWith_Input_BooleanComparisonExp<TRes> get showKodasCheckbox =>
+      CopyWith_Input_BooleanComparisonExp.stub(_res);
 
   CopyWith_Input_StudyYearsBoolExp<TRes> get studyYear =>
       CopyWith_Input_StudyYearsBoolExp.stub(_res);
@@ -2458,385 +2505,5 @@ class Input_HistoryMeetingsIncInput {
   int get hashCode {
     final l$color = color;
     return Object.hashAll([_$data.containsKey('color') ? l$color : const {}]);
-  }
-}
-
-abstract class CopyWith_Input_HistoryMeetingsIncInput<TRes> {
-  factory CopyWith_Input_HistoryMeetingsIncInput(
-    Input_HistoryMeetingsIncInput instance,
-    TRes Function(Input_HistoryMeetingsIncInput) then,
-  ) = _CopyWithImpl_Input_HistoryMeetingsIncInput;
-
-  factory CopyWith_Input_HistoryMeetingsIncInput.stub(TRes res) =
-      _CopyWithStubImpl_Input_HistoryMeetingsIncInput;
-
-  TRes call({int? color});
-}
-
-class _CopyWithImpl_Input_HistoryMeetingsIncInput<TRes>
-    implements CopyWith_Input_HistoryMeetingsIncInput<TRes> {
-  _CopyWithImpl_Input_HistoryMeetingsIncInput(this._instance, this._then);
-
-  final Input_HistoryMeetingsIncInput _instance;
-
-  final TRes Function(Input_HistoryMeetingsIncInput) _then;
-
-  static const _undefined = <dynamic, dynamic>{};
-
-  TRes call({Object? color = _undefined}) => _then(
-    Input_HistoryMeetingsIncInput._({
-      ..._instance._$data,
-      if (color != _undefined) 'color': (color as int?),
-    }),
-  );
-}
-
-class _CopyWithStubImpl_Input_HistoryMeetingsIncInput<TRes>
-    implements CopyWith_Input_HistoryMeetingsIncInput<TRes> {
-  _CopyWithStubImpl_Input_HistoryMeetingsIncInput(this._res);
-
-  TRes _res;
-
-  call({int? color}) => _res;
-}
-
-class Input_HistoryMeetingsInsertInput {
-  factory Input_HistoryMeetingsInsertInput({
-    Input_HistoryAttendanceHistoryArrRelInsertInput? attendanceHistory,
-    String? audience,
-    int? color,
-    Input_GroupsObjRelInsertInput? group,
-    UuidValue? groupId,
-    bool? isArchived,
-    String? name,
-    Input_ServicesObjRelInsertInput? service,
-    bool? serviceGender,
-    UuidValue? serviceId,
-    int? serviceStudyYear,
-    Input_StudyYearsObjRelInsertInput? studyYear,
-  }) => Input_HistoryMeetingsInsertInput._({
-    if (attendanceHistory != null) r'attendanceHistory': attendanceHistory,
-    if (audience != null) r'audience': audience,
-    if (color != null) r'color': color,
-    if (group != null) r'group': group,
-    if (groupId != null) r'groupId': groupId,
-    if (isArchived != null) r'isArchived': isArchived,
-    if (name != null) r'name': name,
-    if (service != null) r'service': service,
-    if (serviceGender != null) r'serviceGender': serviceGender,
-    if (serviceId != null) r'serviceId': serviceId,
-    if (serviceStudyYear != null) r'serviceStudyYear': serviceStudyYear,
-    if (studyYear != null) r'studyYear': studyYear,
-  });
-
-  Input_HistoryMeetingsInsertInput._(this._$data);
-
-  factory Input_HistoryMeetingsInsertInput.fromJson(Map<String, dynamic> data) {
-    final result$data = <String, dynamic>{};
-    if (data.containsKey('attendanceHistory')) {
-      final l$attendanceHistory = data['attendanceHistory'];
-      result$data['attendanceHistory'] = l$attendanceHistory == null
-          ? null
-          : Input_HistoryAttendanceHistoryArrRelInsertInput.fromJson(
-              (l$attendanceHistory as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('audience')) {
-      final l$audience = data['audience'];
-      result$data['audience'] = (l$audience as String?);
-    }
-    if (data.containsKey('color')) {
-      final l$color = data['color'];
-      result$data['color'] = (l$color as int?);
-    }
-    if (data.containsKey('group')) {
-      final l$group = data['group'];
-      result$data['group'] = l$group == null
-          ? null
-          : Input_GroupsObjRelInsertInput.fromJson(
-              (l$group as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('groupId')) {
-      final l$groupId = data['groupId'];
-      result$data['groupId'] = l$groupId == null
-          ? null
-          : stringToUuid(l$groupId);
-    }
-    if (data.containsKey('isArchived')) {
-      final l$isArchived = data['isArchived'];
-      result$data['isArchived'] = (l$isArchived as bool?);
-    }
-    if (data.containsKey('name')) {
-      final l$name = data['name'];
-      result$data['name'] = (l$name as String?);
-    }
-    if (data.containsKey('service')) {
-      final l$service = data['service'];
-      result$data['service'] = l$service == null
-          ? null
-          : Input_ServicesObjRelInsertInput.fromJson(
-              (l$service as Map<String, dynamic>),
-            );
-    }
-    if (data.containsKey('serviceGender')) {
-      final l$serviceGender = data['serviceGender'];
-      result$data['serviceGender'] = (l$serviceGender as bool?);
-    }
-    if (data.containsKey('serviceId')) {
-      final l$serviceId = data['serviceId'];
-      result$data['serviceId'] = l$serviceId == null
-          ? null
-          : stringToUuid(l$serviceId);
-    }
-    if (data.containsKey('serviceStudyYear')) {
-      final l$serviceStudyYear = data['serviceStudyYear'];
-      result$data['serviceStudyYear'] = (l$serviceStudyYear as int?);
-    }
-    if (data.containsKey('studyYear')) {
-      final l$studyYear = data['studyYear'];
-      result$data['studyYear'] = l$studyYear == null
-          ? null
-          : Input_StudyYearsObjRelInsertInput.fromJson(
-              (l$studyYear as Map<String, dynamic>),
-            );
-    }
-    return Input_HistoryMeetingsInsertInput._(result$data);
-  }
-
-  Map<String, dynamic> _$data;
-
-  Input_HistoryAttendanceHistoryArrRelInsertInput? get attendanceHistory =>
-      (_$data['attendanceHistory']
-          as Input_HistoryAttendanceHistoryArrRelInsertInput?);
-
-  String? get audience => (_$data['audience'] as String?);
-
-  int? get color => (_$data['color'] as int?);
-
-  Input_GroupsObjRelInsertInput? get group =>
-      (_$data['group'] as Input_GroupsObjRelInsertInput?);
-
-  UuidValue? get groupId => (_$data['groupId'] as UuidValue?);
-
-  bool? get isArchived => (_$data['isArchived'] as bool?);
-
-  String? get name => (_$data['name'] as String?);
-
-  Input_ServicesObjRelInsertInput? get service =>
-      (_$data['service'] as Input_ServicesObjRelInsertInput?);
-
-  bool? get serviceGender => (_$data['serviceGender'] as bool?);
-
-  UuidValue? get serviceId => (_$data['serviceId'] as UuidValue?);
-
-  int? get serviceStudyYear => (_$data['serviceStudyYear'] as int?);
-
-  Input_StudyYearsObjRelInsertInput? get studyYear =>
-      (_$data['studyYear'] as Input_StudyYearsObjRelInsertInput?);
-
-  Map<String, dynamic> toJson() {
-    final result$data = <String, dynamic>{};
-    if (_$data.containsKey('attendanceHistory')) {
-      final l$attendanceHistory = attendanceHistory;
-      result$data['attendanceHistory'] = l$attendanceHistory?.toJson();
-    }
-    if (_$data.containsKey('audience')) {
-      final l$audience = audience;
-      result$data['audience'] = l$audience;
-    }
-    if (_$data.containsKey('color')) {
-      final l$color = color;
-      result$data['color'] = l$color;
-    }
-    if (_$data.containsKey('group')) {
-      final l$group = group;
-      result$data['group'] = l$group?.toJson();
-    }
-    if (_$data.containsKey('groupId')) {
-      final l$groupId = groupId;
-      result$data['groupId'] = l$groupId == null
-          ? null
-          : uuidToString(l$groupId);
-    }
-    if (_$data.containsKey('isArchived')) {
-      final l$isArchived = isArchived;
-      result$data['isArchived'] = l$isArchived;
-    }
-    if (_$data.containsKey('name')) {
-      final l$name = name;
-      result$data['name'] = l$name;
-    }
-    if (_$data.containsKey('service')) {
-      final l$service = service;
-      result$data['service'] = l$service?.toJson();
-    }
-    if (_$data.containsKey('serviceGender')) {
-      final l$serviceGender = serviceGender;
-      result$data['serviceGender'] = l$serviceGender;
-    }
-    if (_$data.containsKey('serviceId')) {
-      final l$serviceId = serviceId;
-      result$data['serviceId'] = l$serviceId == null
-          ? null
-          : uuidToString(l$serviceId);
-    }
-    if (_$data.containsKey('serviceStudyYear')) {
-      final l$serviceStudyYear = serviceStudyYear;
-      result$data['serviceStudyYear'] = l$serviceStudyYear;
-    }
-    if (_$data.containsKey('studyYear')) {
-      final l$studyYear = studyYear;
-      result$data['studyYear'] = l$studyYear?.toJson();
-    }
-    return result$data;
-  }
-
-  CopyWith_Input_HistoryMeetingsInsertInput<Input_HistoryMeetingsInsertInput>
-  get copyWith => CopyWith_Input_HistoryMeetingsInsertInput(this, (i) => i);
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-    if (other is! Input_HistoryMeetingsInsertInput ||
-        runtimeType != other.runtimeType) {
-      return false;
-    }
-    final l$attendanceHistory = attendanceHistory;
-    final lOther$attendanceHistory = other.attendanceHistory;
-    if (_$data.containsKey('attendanceHistory') !=
-        other._$data.containsKey('attendanceHistory')) {
-      return false;
-    }
-    if (l$attendanceHistory != lOther$attendanceHistory) {
-      return false;
-    }
-    final l$audience = audience;
-    final lOther$audience = other.audience;
-    if (_$data.containsKey('audience') !=
-        other._$data.containsKey('audience')) {
-      return false;
-    }
-    if (l$audience != lOther$audience) {
-      return false;
-    }
-    final l$color = color;
-    final lOther$color = other.color;
-    if (_$data.containsKey('color') != other._$data.containsKey('color')) {
-      return false;
-    }
-    if (l$color != lOther$color) {
-      return false;
-    }
-    final l$group = group;
-    final lOther$group = other.group;
-    if (_$data.containsKey('group') != other._$data.containsKey('group')) {
-      return false;
-    }
-    if (l$group != lOther$group) {
-      return false;
-    }
-    final l$groupId = groupId;
-    final lOther$groupId = other.groupId;
-    if (_$data.containsKey('groupId') != other._$data.containsKey('groupId')) {
-      return false;
-    }
-    if (l$groupId != lOther$groupId) {
-      return false;
-    }
-    final l$isArchived = isArchived;
-    final lOther$isArchived = other.isArchived;
-    if (_$data.containsKey('isArchived') !=
-        other._$data.containsKey('isArchived')) {
-      return false;
-    }
-    if (l$isArchived != lOther$isArchived) {
-      return false;
-    }
-    final l$name = name;
-    final lOther$name = other.name;
-    if (_$data.containsKey('name') != other._$data.containsKey('name')) {
-      return false;
-    }
-    if (l$name != lOther$name) {
-      return false;
-    }
-    final l$service = service;
-    final lOther$service = other.service;
-    if (_$data.containsKey('service') != other._$data.containsKey('service')) {
-      return false;
-    }
-    if (l$service != lOther$service) {
-      return false;
-    }
-    final l$serviceGender = serviceGender;
-    final lOther$serviceGender = other.serviceGender;
-    if (_$data.containsKey('serviceGender') !=
-        other._$data.containsKey('serviceGender')) {
-      return false;
-    }
-    if (l$serviceGender != lOther$serviceGender) {
-      return false;
-    }
-    final l$serviceId = serviceId;
-    final lOther$serviceId = other.serviceId;
-    if (_$data.containsKey('serviceId') !=
-        other._$data.containsKey('serviceId')) {
-      return false;
-    }
-    if (l$serviceId != lOther$serviceId) {
-      return false;
-    }
-    final l$serviceStudyYear = serviceStudyYear;
-    final lOther$serviceStudyYear = other.serviceStudyYear;
-    if (_$data.containsKey('serviceStudyYear') !=
-        other._$data.containsKey('serviceStudyYear')) {
-      return false;
-    }
-    if (l$serviceStudyYear != lOther$serviceStudyYear) {
-      return false;
-    }
-    final l$studyYear = studyYear;
-    final lOther$studyYear = other.studyYear;
-    if (_$data.containsKey('studyYear') !=
-        other._$data.containsKey('studyYear')) {
-      return false;
-    }
-    if (l$studyYear != lOther$studyYear) {
-      return false;
-    }
-    return true;
-  }
-
-  @override
-  int get hashCode {
-    final l$attendanceHistory = attendanceHistory;
-    final l$audience = audience;
-    final l$color = color;
-    final l$group = group;
-    final l$groupId = groupId;
-    final l$isArchived = isArchived;
-    final l$name = name;
-    final l$service = service;
-    final l$serviceGender = serviceGender;
-    final l$serviceId = serviceId;
-    final l$serviceStudyYear = serviceStudyYear;
-    final l$studyYear = studyYear;
-    return Object.hashAll([
-      _$data.containsKey('attendanceHistory') ? l$attendanceHistory : const {},
-      _$data.containsKey('audience') ? l$audience : const {},
-      _$data.containsKey('color') ? l$color : const {},
-      _$data.containsKey('group') ? l$group : const {},
-      _$data.containsKey('groupId') ? l$groupId : const {},
-      _$data.containsKey('isArchived') ? l$isArchived : const {},
-      _$data.containsKey('name') ? l$name : const {},
-      _$data.containsKey('service') ? l$service : const {},
-      _$data.containsKey('serviceGender') ? l$serviceGender : const {},
-      _$data.containsKey('serviceId') ? l$serviceId : const {},
-      _$data.containsKey('serviceStudyYear') ? l$serviceStudyYear : const {},
-      _$data.containsKey('studyYear') ? l$studyYear : const {},
-    ]);
   }
 }

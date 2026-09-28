@@ -4,6 +4,7 @@ fragment Meeting on HistoryMeetings {
   audience
   color
   isArchived
+  showKodasCheckbox
   serviceId
   serviceGender
   serviceStudyYear
