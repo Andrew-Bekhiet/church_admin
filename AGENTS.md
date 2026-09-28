@@ -21,6 +21,7 @@ To stream a whole collection rather than the default page size, raise the limit 
 - **Conventional commits.** `feat(scope):`, `fix(scope):`, `refactor(scope):` etc.
 - **Do not write summary or README files** after implementing something unless explicitly asked.
 - Prefer clean, SOLID, DRY code; break large units into smaller ones; use design patterns where they fit.
+- **Branch from the right base.** A PR branch starts from `master`, or from the layer below it when it belongs to a stack. Create, rebase and merge stacks with `/gh-stack`.
 
 ## Comments — write none
 
@@ -71,6 +72,7 @@ Generated code is exempt. `analyzer: exclude` covers `**.g.dart`, `**.freezed.da
 - **`close_sinks` does not catch a missing `dispose()`,** only an incomplete one. A `BehaviorSubject` field on a `State` with no `dispose` at all is invisible to it, so check by hand.
 - **Handle errors thoroughly** with typed Dart exceptions, and carry user-facing messages as error codes so they can be localised later.
 - **Presentation talks only to blocs/cubits, never to repositories or data sources.**
+- **Keep the upstream message** when mapping a Firebase error to a typed exception. The code drives the UI's wording; the original message is what explains the real cause.
 
 #### Unenforced house style
 
@@ -94,9 +96,11 @@ Unit tests are a **design tool**, not a bug-finding tool. Integration and manual
 - **Assert observable behaviour, never interactions.** Check the state the unit ends in, not which collaborators it called.
 - **If there is no observable difference, there is no test.** Delete it rather than asserting an interaction.
 - **One behaviour per test.** Don't bundle unrelated assertions.
-- **Name subject/scenario/result** — `reloadUser_whenTokenCarriesNoHasuraUserId_onboardsTheInvitee`.
+- **Name tests as behaviour sentences** — `'selecting an existing person makes the user take that person's name'`, not `existingPerson_selectPerson_nameFollowsThePerson`. Say what is observed, never which method ran.
 - **Mock all external services** (DB, network, filesystem). Tests must not depend on ordering or live infra.
-- **Verify red before trusting green.** Break the line under test, confirm a meaningful failure, restore.
+- **New mocks use `mocktail`.** Tests still on `mockito` migrate when touched: stub every member the mockito nice mock answered by default, and `registerFallbackValue` for custom argument types.
+- **Drive the path production takes.** Simulate app lifecycle through `WidgetsBindingObserver` under `fakeAsync` instead of calling internals such as `LocalAuthService.scheduleReauth()`.
+- **Verify red before trusting green.** Break the line under test, confirm a meaningful failure, restore. A bug fix's regression test must fail on the unfixed code.
 - Don't unit-test wiring, DI registration, or configuration — that belongs in integration tests.
 - Beyond unit tests: standard **widget tests** for Flutter UI, and **integration tests per API module**.
 
@@ -117,12 +121,15 @@ Unit tests are a **design tool**, not a bug-finding tool. Integration and manual
   end $$;
   ```
 
+- **Production holds real users' data.** Migrations are additive and preserve existing rows; never treat the schema as greenfield or propose dropping what is there.
 - Lint/format with `sqlfluff` when it is installed.
 - Migrations and functions deploy automatically on merge.
 
 ### Auth model
 
 Permissions hang off `auth.users_data.uid` — never `auth_id`. `auth.users_permissions`, `auth.users_admin_on` and `persons.uid` are all keyed on it, and the JWT carries only `x-hasura-user-id = uid`. Anything that changes account identity must preserve that uid.
+
+Before reusing a SQL permission function such as `auth.user_can_edit_user`, check it against the current Hasura metadata permissions for the tables involved. The two are maintained separately and can disagree.
 
 `auth_id` is nullable so an admin can seed a pre-approved user — a `users_data` row plus its permission rows and a `persons` link — before the Firebase account exists. Sign-up and sign-in **claim** that row by attaching `auth_id` to it; they must never insert a second row for an address that already has one, or the seeded permissions are lost.
 
@@ -136,7 +143,7 @@ Permissions hang off `auth.users_data.uid` — never `auth_id`. `auth.users_perm
 
 **GraphQL codegen** — the split is not a build_runner output. `graphql_codegen` always emits `schema.graphql.dart` as one ~166k-line file, and `client/scripts/split_schema_graphql_dart.sh` rewrites that file in place into a stub plus `schema_partN.dart`. Any build that regenerates it destroys the split.
 
-On the current toolchain (build_runner 2.15.2), `--build-filter` does not merely scope the build — from a cold cache (no `.dart_tool/build`, e.g. a fresh clone or CI runner) it deletes every generated output *outside* the filter and still re-collapses `schema.graphql.dart`, because `graphql_codegen` runs lazily regardless of the filter. **Prefer a full `dart run build_runner build`** for hand-run builds, then restore the stub and clean up:
+On the current toolchain (build_runner 2.15.2), `--build-filter` does not merely scope the build — from a cold cache (no `.dart_tool/build`, e.g. a fresh clone or CI runner) it deletes every generated output _outside_ the filter and still re-collapses `schema.graphql.dart`, because `graphql_codegen` runs lazily regardless of the filter. **Prefer a full `dart run build_runner build`** for hand-run builds, then restore the stub and clean up:
 
 ```sh
 cd client
