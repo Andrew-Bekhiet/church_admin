@@ -20,7 +20,7 @@ abstract final class E2eApp {
   static const _maxUnlocksWhileLeaving = 3;
 
   static final Finder lockPasswordField = find.byKey(
-    AuthenticateScreenKeys.passwordFieldKey,
+    BiometricsAuthScreenKeys.passwordFieldKey,
   );
 
   static ErrorWidgetBuilder? _testErrorWidgetBuilder;
@@ -114,7 +114,7 @@ abstract final class E2eApp {
 
   static Future<void> unlock(WidgetTester tester, String password) async {
     await tester.typeInto(lockPasswordField, password);
-    await tester.tapOn(find.byKey(AuthenticateScreenKeys.submitButtonKey));
+    await tester.tapOn(find.byKey(BiometricsAuthScreenKeys.submitButtonKey));
     await tester.waitForAbsent(lockPasswordField);
   }
 
