@@ -171,6 +171,8 @@ Future<void> _pumpWidget(
     addTearDown(objectStreamController.close);
   }
 
+  addTearDown(() => tester.binding.setSurfaceSize(null));
+
   await tester.pumpWidgetBuilder(
     ViewObjectDetails<Area>(
       object: area,
