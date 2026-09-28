@@ -15,14 +15,17 @@ class SortedListDocument {
     final primaryOrder = orderBy.firstOrNull;
     if (primaryOrder == null) return listDocument;
 
-    final sortFields = [
-      primaryOrder.getSecondLineField(),
-      for (final order in orderBy) order.field.sortKey,
-    ];
-    final sortSelections = [
-      for (final field in sortFields)
-        transform(_selectionBuilder.visit(field), [const TypenameAdder()]),
-    ];
+    final sortSelections =
+        [
+              primaryOrder.getSecondLineField(),
+              for (final order in orderBy) order.field.sortKey,
+            ]
+            .map(
+              (field) => transform(_selectionBuilder.visit(field), [
+                const TypenameAdder(),
+              ]),
+            )
+            .toList();
 
     return transform(
       transform(listDocument, [RootFieldSelectionsAppender(sortSelections)]),
