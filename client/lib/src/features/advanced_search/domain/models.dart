@@ -1,6 +1,7 @@
 export 'models/advanced_query.dart';
 export 'models/dot_field.dart';
 export 'models/field_metadata.dart';
+export 'models/field_metadata_visitor.dart';
 export 'models/filter.dart';
 export 'models/operator.dart';
 export 'models/order_by.dart';

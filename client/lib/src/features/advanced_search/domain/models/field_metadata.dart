@@ -35,25 +35,17 @@ class FieldMetadata<T extends Object> with Equatable {
   QueryableType<T>? get fieldQueryableType =>
       AdvancedQueriesMetadata().allQueryablesByType[type] as QueryableType<T>?;
 
-  List<String> get fieldPath => [name];
+  QueryableType? get referencedObjectType => switch (fieldQueryableType) {
+    final QueryableType type when !type.isEnum && type.keyField != this => type,
+    _ => null,
+  };
 
-  List<String> get orderByFieldPath {
-    final subFields = AdvancedQueriesMetadata()
-        .allQueryablesByType[type]
-        ?.fieldsMetadataByName;
-
-    return switch (subFields) {
-      {'order': FieldMetadata(:final orderByFieldPath)} => [
-        ...fieldPath,
-        ...orderByFieldPath,
-      ],
-      {'name': FieldMetadata(:final orderByFieldPath)} => [
-        ...fieldPath,
-        ...orderByFieldPath,
-      ],
-      _ => fieldPath,
-    };
-  }
+  FieldMetadata get sortKey =>
+      switch (referencedObjectType?.fieldsMetadataByName) {
+        {'order': final subField} ||
+        {'name': final subField} => redirectTo(subField.sortKey),
+        _ => this,
+      };
 
   @override
   List<Object?> get props => [name, label, operators];

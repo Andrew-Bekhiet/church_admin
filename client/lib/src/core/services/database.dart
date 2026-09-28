@@ -1,5 +1,4 @@
 export '../../features/advanced_search/application/advanced_query_parser.dart';
-export 'database/add_selection_fields.dart';
 export 'database/dao_base.dart';
 export 'database/dao_bases.dart';
 export 'database/db_graphql_client.dart';
@@ -8,7 +7,10 @@ export 'database/diff.dart';
 export 'database/gql_definintions.dart';
 export 'database/gql_parser.dart';
 export 'database/gql_selection_node.dart';
+export 'database/identifiable_selection_builder.dart';
 export 'database/iterable_difference_result.dart';
 export 'database/methods_templates.dart';
-export 'database/string_gql_selection_node.dart';
+export 'database/root_field_selections_appender.dart';
+export 'database/selection_merger.dart';
+export 'database/sorted_list_document.dart';
 export 'database/string_to_uuid.dart';

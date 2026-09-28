@@ -61,7 +61,7 @@ class GqlSchemaIndex {
       _objectFields[parentType]?[fieldName];
 }
 
-enum ViolationKind { missingKeyFields, missingIdentity }
+enum ViolationKind { missingKeyFields, missingIdentity, missingTypename }
 
 /// A single selection that would be silently embedded by `normalize`.
 class KeyFieldViolation {
@@ -87,17 +87,38 @@ class KeyFieldViolation {
       'Operation "$operation": selection "$fieldPath" of type "$type" has no '
           'id, no type policy, and no exemption. Add `id` to the selection, add '
           'an explicit TypePolicy, or exempt it.',
+    ViolationKind.missingTypename =>
+      'Operation "$operation": selection "$fieldPath" of type "$type" does '
+          'not select __typename, so the cache cannot identify it.',
   };
 }
 
 /// Decides whether a single object selection satisfies its keying rules.
 class KeyFieldRules {
+  static const hasuraTransientSuffixes = [
+    'Aggregate',
+    'AggregateFields',
+    'AvgFields',
+    'MaxFields',
+    'MinFields',
+    'SumFields',
+    'StddevFields',
+    'StddevPopFields',
+    'StddevSampFields',
+    'VarPopFields',
+    'VarSampFields',
+    'VarianceFields',
+    'MutationResponse',
+  ];
+
   final List<KeyFieldExemption> exemptions;
   final List<String> transientSuffixes;
+  final bool requireTypename;
 
   const KeyFieldRules({
     required this.exemptions,
     required this.transientSuffixes,
+    this.requireTypename = false,
   });
 
   KeyFieldViolation? evaluate({
@@ -106,6 +127,15 @@ class KeyFieldRules {
     required String operation,
     required String fieldPath,
   }) {
+    if (requireTypename && !presentFields.contains('__typename')) {
+      return KeyFieldViolation(
+        kind: ViolationKind.missingTypename,
+        operation: operation,
+        fieldPath: fieldPath,
+        type: type,
+      );
+    }
+
     final keyFields = GqlTypePolicies.policies[type]?.keyFields;
     if (keyFields != null) {
       if (keyFields.isEmpty) return null;

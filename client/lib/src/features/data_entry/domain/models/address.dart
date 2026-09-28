@@ -11,6 +11,7 @@ part 'address.g.dart';
 @Queryable(
   classLabel: 'العنوان',
   ignoreFields: ['id', 'countryIsoCode', 'textComposedFromParts'],
+  allowExtension: true,
 )
 class Address with _$Address {
   static String? _streetNameWithoutPrefix(String? name) =>
@@ -219,4 +220,28 @@ class Address with _$Address {
 
     return result;
   }
+}
+
+class AddressFields extends _AddressFields {
+  FieldMetadata<Address> get id => FieldMetadata<Address>(
+    parentType: Address,
+    name: 'id',
+    label: '=',
+    isCodeOnly: true,
+    isOrderable: false,
+    getValue: (obj) => obj is Address ? obj.id : null,
+  );
+
+  @override
+  List<FieldMetadata<Object>> get allFields => [id, ...super.allFields];
+
+  @override
+  Map<String, FieldMetadata<Object>> get allFieldsByName {
+    return {
+      id.name: id,
+      ...super.allFieldsByName,
+    };
+  }
+
+  AddressFields();
 }
