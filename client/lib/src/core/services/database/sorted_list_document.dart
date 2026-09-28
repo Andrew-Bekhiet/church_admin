@@ -2,9 +2,10 @@ import 'package:church_admin/church_admin.dart';
 import 'package:gql/ast.dart';
 
 /// A list document that also selects what sorting it needs: every sort key and
-/// the primary sort field shown as each item's second line.
+/// the primary sort field shown as each item's second line, each identifiable
+/// by the cache exactly like generated selections.
 class SortedListDocument {
-  static const _selectionBuilder = IdentifiableSelectionBuilder();
+  static const _selectionBuilder = NestedSelectionBuilder();
 
   final DocumentNode listDocument;
 
@@ -14,9 +15,13 @@ class SortedListDocument {
     final primaryOrder = orderBy.firstOrNull;
     if (primaryOrder == null) return listDocument;
 
+    final sortFields = [
+      primaryOrder.getSecondLineField(),
+      for (final order in orderBy) order.field.sortKey,
+    ];
     final sortSelections = [
-      _selectionBuilder.visit(primaryOrder.getSecondLineField()),
-      for (final order in orderBy) _selectionBuilder.visit(order.field.sortKey),
+      for (final field in sortFields)
+        transform(_selectionBuilder.visit(field), [const TypenameAdder()]),
     ];
 
     return transform(

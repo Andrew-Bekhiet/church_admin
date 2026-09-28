@@ -1,15 +1,12 @@
 import 'package:church_admin/church_admin.dart';
 import 'package:gql/ast.dart';
 
-/// Builds the selection of a field so that every related object it reaches
-/// selects `__typename` and its key field, exactly like generated selections,
-/// letting the cache store it as the same linked entry other screens use.
-class IdentifiableSelectionBuilder extends FieldMetadataVisitor<FieldNode> {
-  static const _typename = FieldNode(name: NameNode(value: '__typename'));
-
+/// Builds the selection a field needs, nesting through every related object
+/// it reaches and selecting each one's key field so the cache can link it.
+class NestedSelectionBuilder extends FieldMetadataVisitor<FieldNode> {
   final List<SelectionNode> nestedSelections;
 
-  const IdentifiableSelectionBuilder({this.nestedSelections = const []});
+  const NestedSelectionBuilder({this.nestedSelections = const []});
 
   @override
   FieldNode visitField(FieldMetadata field) => FieldNode(
@@ -17,7 +14,6 @@ class IdentifiableSelectionBuilder extends FieldMetadataVisitor<FieldNode> {
     selectionSet: switch (field.referencedObjectType) {
       final objectType? => SelectionSetNode(
         selections: [
-          _typename,
           if (objectType.keyField case final keyField?)
             FieldNode(name: NameNode(value: keyField.name)),
           ...nestedSelections,
@@ -29,7 +25,7 @@ class IdentifiableSelectionBuilder extends FieldMetadataVisitor<FieldNode> {
 
   @override
   FieldNode visitRedirectingField(RedirectingFieldMetadata field) =>
-      IdentifiableSelectionBuilder(
+      NestedSelectionBuilder(
         nestedSelections: [visit(field.targetField)],
       ).visit(field.parentField);
 }
