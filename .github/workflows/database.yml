@@ -1,0 +1,42 @@
+name: Database tests
+
+on:
+  pull_request:
+    paths:
+      - "server/hasura/**"
+      - "server/postgres/**"
+      - "server/docker-compose.pgtap.yml"
+      - "server/scripts/pgtap.sh"
+      - ".github/workflows/database.yml"
+
+  push:
+    branches: [master]
+    paths:
+      - "server/hasura/**"
+      - "server/postgres/**"
+      - "server/docker-compose.pgtap.yml"
+      - "server/scripts/pgtap.sh"
+      - ".github/workflows/database.yml"
+
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.ref }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    working-directory: server
+
+jobs:
+  pgtap:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run pgTAP tests against a database built from this commit's migrations
+        run: scripts/pgtap.sh
