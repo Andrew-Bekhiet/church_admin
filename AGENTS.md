@@ -22,7 +22,6 @@ To stream a whole collection rather than the default page size, raise the limit 
 - **Do not write summary or README files** after implementing something unless explicitly asked.
 - Prefer clean, SOLID, DRY code; break large units into smaller ones; use design patterns where they fit.
 - **Branch from the right base.** A PR branch starts from `master`, or from the layer below it when it belongs to a stack. Create, rebase and merge stacks with `/gh-stack`.
-- **Never invent numbers** in written content such as release notes or PR descriptions. Mark an unknown `[TBD]`.
 
 ## Comments — write none
 
@@ -144,7 +143,7 @@ Before reusing a SQL permission function such as `auth.user_can_edit_user`, chec
 
 **GraphQL codegen** — the split is not a build_runner output. `graphql_codegen` always emits `schema.graphql.dart` as one ~166k-line file, and `client/scripts/split_schema_graphql_dart.sh` rewrites that file in place into a stub plus `schema_partN.dart`. Any build that regenerates it destroys the split.
 
-On the current toolchain (build_runner 2.15.2), `--build-filter` does not merely scope the build — from a cold cache (no `.dart_tool/build`, e.g. a fresh clone or CI runner) it deletes every generated output *outside* the filter and still re-collapses `schema.graphql.dart`, because `graphql_codegen` runs lazily regardless of the filter. **Prefer a full `dart run build_runner build`** for hand-run builds, then restore the stub and clean up:
+On the current toolchain (build_runner 2.15.2), `--build-filter` does not merely scope the build — from a cold cache (no `.dart_tool/build`, e.g. a fresh clone or CI runner) it deletes every generated output _outside_ the filter and still re-collapses `schema.graphql.dart`, because `graphql_codegen` runs lazily regardless of the filter. **Prefer a full `dart run build_runner build`** for hand-run builds, then restore the stub and clean up:
 
 ```sh
 cd client
