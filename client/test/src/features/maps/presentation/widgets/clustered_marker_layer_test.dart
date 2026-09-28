@@ -15,10 +15,14 @@ void main() {
   LatLng nearCenter(int offset) =>
       LatLng(center.latitude + offset * 0.0001, center.longitude);
 
+  const maxZoom = 18.0;
+
   Future<void> pumpMap(
     WidgetTester tester, {
     required List<Marker> markers,
     Marker? focusedMarker,
+    double initialZoom = 14,
+    MapController? mapController,
   }) async {
     tester.view
       ..physicalSize = const Size(800, 800)
@@ -28,7 +32,12 @@ void main() {
     await tester.pumpWidget(
       MaterialApp(
         home: FlutterMap(
-          options: const MapOptions(initialCenter: center, initialZoom: 14),
+          mapController: mapController,
+          options: MapOptions(
+            initialCenter: center,
+            initialZoom: initialZoom,
+            maxZoom: maxZoom,
+          ),
           children: [
             ClusteredMarkerLayer(
               markers: markers,
@@ -84,5 +93,46 @@ void main() {
     );
 
     expect(find.byKey(const ValueKey('focused')), findsOneWidget);
+  });
+
+  group('pins a few metres apart', () {
+    final westPoint = LatLng(center.latitude, center.longitude - 0.00016);
+    final eastPoint = LatLng(center.latitude, center.longitude + 0.00016);
+
+    testWidgets('show individually at the map maximum zoom', (tester) async {
+      await pumpMap(
+        tester,
+        markers: [pin('west', westPoint), pin('east', eastPoint)],
+        initialZoom: maxZoom,
+      );
+
+      expect(find.byType(MarkerClusterBadge), findsNothing);
+    });
+
+    testWidgets('appear at their real positions after tapping their cluster', (
+      tester,
+    ) async {
+      final mapController = MapController();
+      addTearDown(mapController.dispose);
+      await pumpMap(
+        tester,
+        markers: [pin('west', westPoint), pin('east', eastPoint)],
+        initialZoom: 15,
+        mapController: mapController,
+      );
+
+      await tester.tap(find.byType(MarkerClusterBadge));
+      await tester.pumpAndSettle();
+
+      final camera = mapController.camera;
+      expect(
+        tester.getCenter(find.byKey(const ValueKey('west'))),
+        offsetMoreOrLessEquals(camera.latLngToScreenOffset(westPoint)),
+      );
+      expect(
+        tester.getCenter(find.byKey(const ValueKey('east'))),
+        offsetMoreOrLessEquals(camera.latLngToScreenOffset(eastPoint)),
+      );
+    });
   });
 }

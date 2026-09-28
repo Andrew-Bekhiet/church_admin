@@ -4,6 +4,8 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:flutter_map_marker_cluster/flutter_map_marker_cluster.dart';
 
 class ClusteredMarkerLayer extends StatelessWidget {
+  static const double _fallbackMaxZoom = 18;
+
   final List<Marker> markers;
   final Marker? focusedMarker;
 
@@ -15,6 +17,9 @@ class ClusteredMarkerLayer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final maxZoom = MapOptions.of(context).maxZoom ?? _fallbackMaxZoom;
+    final lastClusteredZoom = maxZoom.floor() - 1;
+
     return Stack(
       children: [
         MarkerClusterLayerWidget(
@@ -23,6 +28,9 @@ class ClusteredMarkerLayer extends StatelessWidget {
             rotate: true,
             size: const Size.square(40),
             markerChildBehavior: true,
+            spiderfyCluster: false,
+            maxZoom: maxZoom,
+            disableClusteringAtZoom: lastClusteredZoom,
             builder: (context, markers) =>
                 MarkerClusterBadge(count: markers.length),
           ),
