@@ -54,17 +54,16 @@ class _LocationsLayerState<T extends Viewable> extends State<_LocationsLayer<T>>
     final (:T? focusedObject, :List<Marker> markers) =
         _splitFocusedObjectFromMarkers();
 
-    return MarkerLayer(
-      rotate: true,
-      markers: [
-        ...markers,
-        if (focusedObject != null && widget.currentFocusedLocation != null)
-          _makeMarkerFromPoint(
-            isFocused: true,
-            location: widget.currentFocusedLocation!,
-            object: focusedObject,
-          ),
-      ],
+    return ClusteredMarkerLayer(
+      markers: markers,
+      focusedMarker: switch ((focusedObject, widget.currentFocusedLocation)) {
+        (final object?, final location?) => _makeMarkerFromPoint(
+          isFocused: true,
+          location: location,
+          object: object,
+        ),
+        _ => null,
+      },
     );
   }
 

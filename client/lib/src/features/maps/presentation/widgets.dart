@@ -1,3 +1,4 @@
+export 'widgets/clustered_marker_layer.dart';
 export 'widgets/data_geomap.dart';
 export 'widgets/edit_area_polygon_map.dart';
 export 'widgets/edit_family_location_map.dart';
@@ -9,5 +10,6 @@ export 'widgets/edit_store_location_map.dart';
 export 'widgets/edit_street_line_map.dart';
 export 'widgets/geomap_fab.dart';
 export 'widgets/map_snapping_sheet.dart';
+export 'widgets/marker_cluster_badge.dart';
 export 'widgets/object_marker_widget.dart';
 export 'widgets/view_geodata_map.dart';
