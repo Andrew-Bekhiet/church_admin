@@ -15,6 +15,10 @@ class EditUserScreen extends StatefulWidget {
   State<EditUserScreen> createState() => _EditUserScreenState();
 }
 
+abstract final class EditUserScreenKeys {
+  static const Key saveButton = ValueKey('Save User Button Key');
+}
+
 class _EditUserScreenState extends State<EditUserScreen> {
   late final UserFormCubit _cubit = switch (widget.intent) {
     CreateUser() => CreateUserCubit(
@@ -29,12 +33,10 @@ class _EditUserScreenState extends State<EditUserScreen> {
       value: _cubit,
       child: Scaffold(
         appBar: AppBar(
-          title: Text(
-            switch (widget.intent) {
-              CreateUser() => 'إضافة خادم',
-              UpdateUser() => 'تعديل بيانات الخادم',
-            },
-          ),
+          title: Text(switch (widget.intent) {
+            CreateUser() => 'إضافة خادم',
+            UpdateUser() => 'تعديل بيانات الخادم',
+          }),
         ),
         body: BlocConsumer<UserFormCubit, UserFormState>(
           listener: _listenToFormState,
@@ -44,6 +46,7 @@ class _EditUserScreenState extends State<EditUserScreen> {
         ),
         floatingActionButton: BlocBuilder<UserFormCubit, UserFormState>(
           builder: (context, state) => FloatingActionButton.extended(
+            key: EditUserScreenKeys.saveButton,
             label: const Text('حفظ'),
             icon: state is UserFormSaving
                 ? SizedBox.square(

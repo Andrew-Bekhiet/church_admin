@@ -13,6 +13,10 @@ class ManageUsersScreen extends StatefulWidget {
   State<ManageUsersScreen> createState() => _ManageUsersScreenState();
 }
 
+abstract final class ManageUsersScreenKeys {
+  static const Key addUserButton = ValueKey('Add User Button Key');
+}
+
 class _ManageUsersScreenState extends State<ManageUsersScreen> {
   final _search = BehaviorSubject<String?>.seeded(null);
   late final _cubit = ManageUsersCubit();
@@ -77,6 +81,7 @@ class _ManageUsersScreenState extends State<ManageUsersScreen> {
             if (!canCreateUsers) return const SizedBox.shrink();
 
             return FloatingActionButton.extended(
+              key: ManageUsersScreenKeys.addUserButton,
               icon: const Icon(Symbols.person_add),
               label: const Text('إضافة خادم'),
               onPressed: () =>

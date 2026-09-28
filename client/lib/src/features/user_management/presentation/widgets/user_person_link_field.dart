@@ -25,8 +25,20 @@ class UserPersonLinkField extends StatelessWidget {
             padding: const EdgeInsetsDirectional.only(bottom: 8),
             child: SegmentedButton<bool>(
               segments: const [
-                ButtonSegment(value: false, label: Text('ربط بمخدوم موجود')),
-                ButtonSegment(value: true, label: Text('إنشاء مخدوم جديد')),
+                ButtonSegment(
+                  value: false,
+                  label: Text(
+                    'ربط بمخدوم موجود',
+                    key: UserPersonLinkFieldKeys.linkExistingPersonSegment,
+                  ),
+                ),
+                ButtonSegment(
+                  value: true,
+                  label: Text(
+                    'إنشاء مخدوم جديد',
+                    key: UserPersonLinkFieldKeys.createNewPersonSegment,
+                  ),
+                ),
               ],
               selected: {isCreatingNewPerson},
               onSelectionChanged: (selection) => _switchMode(selection.first),
@@ -41,6 +53,7 @@ class UserPersonLinkField extends StatelessWidget {
           )
         else
           ObjectSelectionField<Person, Person?>(
+            key: UserPersonLinkFieldKeys.personField,
             initialValue: switch (person) {
               LinkExistingPerson(:final person) => person,
               NoPersonSelected() || CreateNewPerson() => null,
@@ -78,4 +91,14 @@ class UserPersonLinkField extends StatelessWidget {
 
     cubit.selectPerson(const CreateNewPerson(name: '', gender: true));
   }
+}
+
+abstract final class UserPersonLinkFieldKeys {
+  static const Key linkExistingPersonSegment = ValueKey(
+    'Link Existing Person Segment Key',
+  );
+  static const Key createNewPersonSegment = ValueKey(
+    'Create New Person Segment Key',
+  );
+  static const Key personField = ValueKey('User Person Field Key');
 }

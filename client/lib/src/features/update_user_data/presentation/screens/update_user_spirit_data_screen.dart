@@ -14,6 +14,12 @@ class UpdateUserSpiritDataScreen extends StatefulWidget {
       _UpdateUserSpiritDataState();
 }
 
+abstract final class UpdateUserSpiritDataScreenKeys {
+  static const Key lastCommunionField = ValueKey('Last Communion Field Key');
+  static const Key lastConfessionField = ValueKey('Last Confession Field Key');
+  static const Key saveButton = ValueKey('Save Spirit Data Button Key');
+}
+
 class _UpdateUserSpiritDataState extends State<UpdateUserSpiritDataScreen> {
   late Person _userData =
       widget.userData ?? AuthBloc.I.currentUserData!.person!;
@@ -41,6 +47,7 @@ class _UpdateUserSpiritDataState extends State<UpdateUserSpiritDataScreen> {
               ),
               const SizedBox(height: 40),
               TappableFormField<DateTime?>(
+                key: UpdateUserSpiritDataScreenKeys.lastCommunionField,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 decoration: (context, state) => InputDecoration(
                   errorText: state.errorText,
@@ -82,6 +89,7 @@ class _UpdateUserSpiritDataState extends State<UpdateUserSpiritDataScreen> {
               ),
               const SizedBox(height: 20),
               TappableFormField<DateTime?>(
+                key: UpdateUserSpiritDataScreenKeys.lastConfessionField,
                 autovalidateMode: AutovalidateMode.onUserInteraction,
                 decoration: (context, state) => InputDecoration(
                   errorText: state.errorText,
@@ -127,6 +135,7 @@ class _UpdateUserSpiritDataState extends State<UpdateUserSpiritDataScreen> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        key: UpdateUserSpiritDataScreenKeys.saveButton,
         onPressed: _save,
         tooltip: 'حفظ',
         child: const Icon(Symbols.done),

@@ -24,6 +24,7 @@ class PersonChurchSection extends StatelessWidget {
           subtitle: Text(person.isServant ? 'نعم' : 'لا'),
           trailing: person.isServant && person.user?.email != null
               ? IconButton(
+                  key: PersonChurchSectionKeys.linkedUserButton,
                   onPressed: () => ViewUserRoute(
                     uid: person.user!.uid,
                     $extra: person.user,
@@ -72,4 +73,8 @@ class PersonChurchSection extends StatelessWidget {
       ],
     );
   }
+}
+
+abstract final class PersonChurchSectionKeys {
+  static const Key linkedUserButton = ValueKey('Person Linked User Button Key');
 }

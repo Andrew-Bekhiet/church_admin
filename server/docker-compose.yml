@@ -64,6 +64,9 @@ services:
   hasura:
     build:
       context: ./hasura
+    volumes:
+      - ./hasura/migrations:/hasura-migrations:ro
+      - ./hasura/metadata:/hasura-metadata:ro
     depends_on:
       postgres:
         condition: service_healthy

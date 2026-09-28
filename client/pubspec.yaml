@@ -144,6 +144,7 @@ dev_dependencies:
   mockito: ^5.4.4
   mocktail: ^1.0.5
   path_provider_platform_interface: ^2.1.0
+  patrol: ^4.10.0
   permission_handler_platform_interface: ^4.0.2
   plugin_platform_interface: ^2.1.3
   rxdart_ext: ^0.3.0
@@ -152,6 +153,11 @@ dev_dependencies:
   url_launcher_platform_interface: ^2.1.2
   web_socket: ^1.0.1
   web_socket_channel: ^3.0.3
+
+patrol:
+  app_name: St Mary Church
+  ios:
+    bundle_id: com.AndroidQuartz.churchAdmin
 
 flutter:
   uses-material-design: true

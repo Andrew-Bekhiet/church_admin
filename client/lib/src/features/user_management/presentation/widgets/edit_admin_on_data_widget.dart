@@ -36,14 +36,10 @@ class EditAdminOnDataWidget extends StatelessWidget {
                     (index, userAdminScope) => EditUserAdminScopeWidget(
                       userAdminScope: userAdminScope,
                       onDuplicate: userAdminScope.object is Service
-                          ? () => onAdminOnChanged(
-                              [
-                                ...adminOn,
-                                userAdminScope.toAdminOnData(
-                                  permissionId: '',
-                                ),
-                              ],
-                            )
+                          ? () => onAdminOnChanged([
+                              ...adminOn,
+                              userAdminScope.toAdminOnData(permissionId: ''),
+                            ])
                           : null,
                       onChanged: (newUserAdminScope) => onAdminOnChanged(
                         adminOn
@@ -57,11 +53,7 @@ class EditAdminOnDataWidget extends StatelessWidget {
                             .toList(),
                       ),
                       onDelete: () => onAdminOnChanged(
-                        adminOn
-                            .whereIndexed(
-                              (i, a) => i != index,
-                            )
-                            .toList(),
+                        adminOn.whereIndexed((i, a) => i != index).toList(),
                       ),
                     ),
                   )
@@ -72,6 +64,7 @@ class EditAdminOnDataWidget extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: ElevatedButton.icon(
+            key: EditAdminOnDataWidgetKeys.addScopeButton,
             icon: const Icon(Symbols.add),
             label: const Text('إضافة أمانة جديدة'),
             onPressed: () => _showAddAdminOnDialog(context),
@@ -143,6 +136,7 @@ class EditAdminOnDataWidget extends StatelessWidget {
                         text: 'المناطق',
                       ),
                       Tab(
+                        key: EditAdminOnDataWidgetKeys.servicesTab,
                         icon: Icon(
                           ViewableObjectService.I.getDefaultIconFor<Service>(),
                         ),
@@ -219,6 +213,7 @@ class EditAdminOnDataWidget extends StatelessWidget {
                   ],
                 ),
                 floatingActionButton: FloatingActionButton(
+                  key: EditAdminOnDataWidgetKeys.confirmScopesButton,
                   onPressed: () => Navigator.of(context).pop((
                     areas: areasSelectionController.currentValue,
                     services: servicesSelectionController.currentValue,
@@ -241,10 +236,7 @@ class EditAdminOnDataWidget extends StatelessWidget {
     if (result == null) return;
 
     final areasDiff = diff(existingAreas.toSet(), result.areas);
-    final servicesDiff = diff(
-      existingServices.toSet(),
-      result.services,
-    );
+    final servicesDiff = diff(existingServices.toSet(), result.services);
     final groupsDiff = diff(existingGroups.toSet(), result.groups);
 
     onAdminOnChanged([
@@ -262,4 +254,12 @@ class EditAdminOnDataWidget extends StatelessWidget {
         AdminOnData(permissionId: '', group: group),
     ]);
   }
+}
+
+abstract final class EditAdminOnDataWidgetKeys {
+  static const Key addScopeButton = ValueKey('Add Admin Scope Button Key');
+  static const Key servicesTab = ValueKey('Admin Scope Services Tab Key');
+  static const Key confirmScopesButton = ValueKey(
+    'Confirm Admin Scopes Button Key',
+  );
 }

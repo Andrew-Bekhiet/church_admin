@@ -18,6 +18,11 @@ class ViewUser extends StatefulWidget {
   State<ViewUser> createState() => _ViewUserState();
 }
 
+abstract final class ViewUserScreenKeys {
+  static const Key editButton = ValueKey('Edit User Button Key');
+  static const Key linkedPerson = ValueKey('User Linked Person Key');
+}
+
 class _ViewUserState extends State<ViewUser> {
   final scrollController = ScrollController();
 
@@ -49,6 +54,7 @@ class _ViewUserState extends State<ViewUser> {
               title: 'المخدوم المرتبط',
               child: ViewableObjectWidget(
                 person,
+                key: ViewUserScreenKeys.linkedPerson,
                 onTap: (person) => ViewPersonRoute(
                   id: person.id,
                   $extra: person,
@@ -159,6 +165,7 @@ class _ViewUserState extends State<ViewUser> {
         );
       },
       editButtonBuilder: (context, user) => IconButton(
+        key: ViewUserScreenKeys.editButton,
         tooltip: 'تعديل',
         onPressed: () =>
             EditUserRoute($extra: UpdateUser(user: user)).push(context),

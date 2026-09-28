@@ -16,6 +16,7 @@ class ManageUsersViewToggle extends StatelessWidget {
 
         return switch (state.preferredView) {
           ManageUsersView.grouped => IconButton(
+            key: ManageUsersViewToggleKeys.showFlatListButton,
             tooltip: 'عرض كقائمة',
             icon: const Icon(Symbols.format_list_bulleted),
             onPressed: cubit.showFlat,
@@ -29,4 +30,10 @@ class ManageUsersViewToggle extends StatelessWidget {
       },
     );
   }
+}
+
+abstract final class ManageUsersViewToggleKeys {
+  static const Key showFlatListButton = ValueKey(
+    'Show Users As Flat List Button Key',
+  );
 }
