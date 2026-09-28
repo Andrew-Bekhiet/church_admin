@@ -1,0 +1,14 @@
+create or replace function pg_temp.add_contact(
+    p_person_id uuid,
+    p_family_id uuid,
+    p_person_type_id uuid,
+    p_phone text,
+    p_is_main_phone boolean default false
+)
+returns uuid
+language sql
+as $$
+    insert into public.contacts (person_id, family_id, person_type_id, phone, is_main_phone)
+    values (p_person_id, p_family_id, p_person_type_id, p_phone, p_is_main_phone)
+    returning id;
+$$;
