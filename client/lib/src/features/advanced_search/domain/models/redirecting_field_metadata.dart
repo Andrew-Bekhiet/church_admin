@@ -34,7 +34,7 @@ class RedirectingFieldMetadata<P extends Object, T extends Object>
   int get hashCode => Object.hash(parentField, targetField);
 
   @override
-  List<String> get fieldPath => [...parentField.fieldPath, name];
+  QueryableType? get referencedObjectType => targetField.referencedObjectType;
 
   RedirectingFieldMetadata({
     required this.parentField,

@@ -250,16 +250,43 @@ Future<void> _runTestCase(AdvancedQuery query, Json expectedVarsJson) async {
 
   expect(capturedVars, expectedVarsJson);
 
-  final expectedOrderByFields = (expectedVarsJson['orderBy'] as List<Json>)
-      .map((e) => e.toGQLFieldWithSelection())
-      .toList()
-      // Exclude the 'id' orderBy added by default
-      .take(expectedVarsJson['orderBy'].length - 1);
+  final fragments = {
+    for (final fragment
+        in subscriptionOptions.document.definitions
+            .whereType<FragmentDefinitionNode>())
+      fragment.name.value: fragment.selectionSet.selections,
+  };
 
-  expect(
-    firstSelectionNode.selectionSet!.selections,
-    containsAll(expectedOrderByFields),
+  bool selectsPath(List<SelectionNode> selections, Json orderBy) {
+    final MapEntry(:key, :value) = orderBy.entries.single;
+
+    return selections.any(
+      (selection) => switch (selection) {
+        FragmentSpreadNode(:final name) => selectsPath(
+          fragments[name.value] ?? [],
+          orderBy,
+        ),
+        FieldNode(:final name, :final selectionSet) when name.value == key =>
+          switch (value) {
+            final Json nested => selectsPath(
+              selectionSet?.selections ?? [],
+              nested,
+            ),
+            _ => true,
+          },
+        _ => false,
+      },
+    );
+  }
+
+  final unselectedOrderBy = (expectedVarsJson['orderBy'] as List<Json>).where(
+    (orderBy) => !selectsPath(
+      firstSelectionNode.selectionSet?.selections ?? [],
+      orderBy,
+    ),
   );
+
+  expect(unselectedOrderBy, isEmpty);
 }
 
 Future<void> _setUp() async {
@@ -274,19 +301,4 @@ Override _mockDBService() {
   return databaseServiceProvider.overrideWithValue(
     DatabaseService(MockDBGraphQLClient()),
   );
-}
-
-extension ToGQLFieldWithSelection on Json {
-  FieldNode toGQLFieldWithSelection() {
-    return FieldNode(
-      name: NameNode(value: keys.single),
-      selectionSet: entries.single.value is Json
-          ? SelectionSetNode(
-              selections: [
-                (entries.single.value as Json).toGQLFieldWithSelection(),
-              ],
-            )
-          : null,
-    );
-  }
 }

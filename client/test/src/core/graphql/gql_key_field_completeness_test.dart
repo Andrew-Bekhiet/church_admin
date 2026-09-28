@@ -12,21 +12,7 @@ import 'gql_key_field_checker.dart';
 void main() {
   const rules = KeyFieldRules(
     exemptions: [],
-    transientSuffixes: [
-      'Aggregate',
-      'AggregateFields',
-      'AvgFields',
-      'MaxFields',
-      'MinFields',
-      'SumFields',
-      'StddevFields',
-      'StddevPopFields',
-      'StddevSampFields',
-      'VarPopFields',
-      'VarSampFields',
-      'VarianceFields',
-      'MutationResponse',
-    ],
+    transientSuffixes: KeyFieldRules.hasuraTransientSuffixes,
   );
 
   test('every keyed-type selection selects all of its key fields', () {

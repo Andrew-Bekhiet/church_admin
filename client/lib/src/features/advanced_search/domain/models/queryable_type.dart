@@ -18,6 +18,9 @@ class QueryableType<T extends Object> with Equatable {
 
   bool get isSelectableAsReference => isEnum || dao != null;
 
+  FieldMetadata? get keyField =>
+      fieldsMetadataByName['id'] ?? fieldsMetadataByName['uid'];
+
   @override
   List<Object?> get props => [name, label, fieldsMetadataByName, fromJson];
 

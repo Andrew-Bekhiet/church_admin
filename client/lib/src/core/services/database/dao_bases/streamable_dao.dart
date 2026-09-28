@@ -1,5 +1,4 @@
 import 'package:church_admin/church_admin.dart';
-import 'package:gql/ast.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:meta/meta.dart';
 import 'package:rxdart/rxdart.dart';
@@ -121,10 +120,9 @@ class StreamableDAOProxy<T extends ViewableWithID> extends DAOBase<T> {
       graphQLClient.subscribeAndReturnParsed(
         streamAllConfig.operationOptions ??
             SubscriptionOptions(
-              document: _getDocumentWithSecondLine(
-                streamAllConfig,
-                request.param?.orderBy,
-              ),
+              document: SortedListDocument(
+                streamAllConfig.document,
+              ).sortedBy(request.param?.orderBy ?? []),
               operationName: streamAllConfig.effectiveOperationName,
               variables: _getEffectiveStreamAllVars(streamAllConfig, request),
               parserFn:
@@ -151,35 +149,6 @@ class StreamableDAOProxy<T extends ViewableWithID> extends DAOBase<T> {
     return streamAllConfig.variables ??
         streamAllConfig.transformRequest?.call(request) ??
         db.varsTransformer.transformrequestForPagination<T>(request);
-  }
-
-  dynamic _getDocumentWithSecondLine(
-    StreamAllConfig<T> streamAllConfig, [
-    List<OrderBy>? orderBy,
-  ]) {
-    final configDocument = streamAllConfig.document;
-
-    final firstSelectionNodeName = configDocument.definitions
-        .whereType<OperationDefinitionNode>()
-        .first
-        .firstSelectionNode
-        .name
-        .value;
-
-    if (orderBy?.firstOrNull case final secondLine?) {
-      return configDocument.withSelectionFields(
-        {
-          firstSelectionNodeName: {
-            ...secondLine.getSecondLineField().fieldPath.asGQLSelectionNode(),
-            ...?orderBy?.expand(
-              (o) => o.field.orderByFieldPath.asGQLSelectionNode(),
-            ),
-          }.toList(),
-        },
-      );
-    }
-
-    return configDocument;
   }
 
   Stream<T?> streamSingleById({
