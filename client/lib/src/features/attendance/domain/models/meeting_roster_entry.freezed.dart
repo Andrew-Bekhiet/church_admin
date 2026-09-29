@@ -16,6 +16,7 @@ mixin _$MeetingRosterEntry {
   bool get asServant;
   Person get person;
   AttendanceRecord? get attendanceRecord;
+  List<String> get phones;
   PersonMeetingAttendanceAnalysis? get personAttendanceAnalysis;
 
   /// Create a copy of MeetingRosterEntry
@@ -38,6 +39,7 @@ mixin _$MeetingRosterEntry {
             (identical(other.person, person) || other.person == person) &&
             (identical(other.attendanceRecord, attendanceRecord) ||
                 other.attendanceRecord == attendanceRecord) &&
+            const DeepCollectionEquality().equals(other.phones, phones) &&
             (identical(
                   other.personAttendanceAnalysis,
                   personAttendanceAnalysis,
@@ -51,12 +53,13 @@ mixin _$MeetingRosterEntry {
     asServant,
     person,
     attendanceRecord,
+    const DeepCollectionEquality().hash(phones),
     personAttendanceAnalysis,
   );
 
   @override
   String toString() {
-    return 'MeetingRosterEntry(asServant: $asServant, person: $person, attendanceRecord: $attendanceRecord, personAttendanceAnalysis: $personAttendanceAnalysis)';
+    return 'MeetingRosterEntry(asServant: $asServant, person: $person, attendanceRecord: $attendanceRecord, phones: $phones, personAttendanceAnalysis: $personAttendanceAnalysis)';
   }
 }
 
@@ -72,6 +75,7 @@ abstract mixin class $MeetingRosterEntryCopyWith<$Res> {
     Person person,
     AttendanceRecord? attendanceRecord,
     PersonMeetingAttendanceAnalysis? personAttendanceAnalysis,
+    List<String> phones,
   });
 }
 
@@ -92,6 +96,7 @@ class _$MeetingRosterEntryCopyWithImpl<$Res>
     Object? person = null,
     Object? attendanceRecord = freezed,
     Object? personAttendanceAnalysis = freezed,
+    Object? phones = null,
   }) {
     return _then(
       MeetingRosterEntry(
@@ -111,6 +116,10 @@ class _$MeetingRosterEntryCopyWithImpl<$Res>
             ? _self.personAttendanceAnalysis
             : personAttendanceAnalysis // ignore: cast_nullable_to_non_nullable
                   as PersonMeetingAttendanceAnalysis?,
+        phones: null == phones
+            ? _self.phones
+            : phones // ignore: cast_nullable_to_non_nullable
+                  as List<String>,
       ),
     );
   }
