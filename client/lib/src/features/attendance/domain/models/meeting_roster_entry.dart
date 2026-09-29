@@ -35,7 +35,32 @@ class MeetingRosterEntry with _$MeetingRosterEntry {
     final person = Person(
       id: row.personId?.uuid ?? '',
       name: row.name ?? '',
-      mainPhone: row.mainPhone,
+      contacts: [
+        for (final contact in row.person?.contacts ?? const [])
+          PhoneContact(
+            id: contact.id.uuid,
+            phone: contact.phone,
+            isMainPhone: contact.isMainPhone,
+            personId: contact.personId?.uuid,
+          ),
+      ],
+      family: switch (row.person?.family) {
+        final family? => Family(
+          id: family.id.uuid,
+          name: '',
+          contacts: [
+            for (final contact in family.contacts)
+              PhoneContact(
+                id: contact.id?.uuid ?? '',
+                phone: contact.phone ?? '',
+                personId: contact.personId?.uuid,
+                familyId: contact.familyId?.uuid,
+                personTypeId: contact.personTypeId?.uuid,
+              ),
+          ],
+        ),
+        null => null,
+      },
       gender: row.gender ?? false,
       color: colorFromInt(row.color),
       studyYearId: row.studyYearId,

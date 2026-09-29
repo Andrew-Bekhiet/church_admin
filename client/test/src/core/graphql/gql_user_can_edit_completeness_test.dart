@@ -18,6 +18,8 @@ void main() {
       (operation: 'personsNames', field: 'persons'),
       (operation: 'personHistoryAnalysis', field: 'personsByPk'),
       (operation: 'personServicesClassesGroups', field: 'personsByPk'),
+      (operation: 'historyMeetingRoster', field: 'person'),
+      (operation: 'historyMeetingRoster', field: 'family'),
     ],
   );
 

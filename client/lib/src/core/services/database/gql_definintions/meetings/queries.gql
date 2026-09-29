@@ -12,7 +12,18 @@ query historyMeetingRoster(
     personId
     meetingId
     name
-    mainPhone
+    person {
+      id
+      contacts {
+        ...Contact
+      }
+      family {
+        id
+        contacts(where: { personType: { isFamilyAdmin: { _eq: true } } }) {
+          ...ResolvedContact
+        }
+      }
+    }
     gender
     color
     studyYearId
