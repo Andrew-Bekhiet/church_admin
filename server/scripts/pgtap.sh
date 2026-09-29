@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
-# Boots postgres and hasura from this commit's migrations and metadata, then
-# runs the pgTAP tests in server/postgres/tests (or the files given).
 set -euo pipefail
 
 root=$(cd "$(dirname "$0")/../.." && pwd)
