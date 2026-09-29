@@ -6,6 +6,24 @@ class PhoneNumberService {
   static PhoneNumberService get I =>
       globalProviderContainer.read(phoneNumberServiceProvider);
 
+  static String searchFragment(String typed) {
+    final compact = typed.replaceAll(RegExp(r'[\s\-.()]'), '');
+
+    return switch (compact) {
+      final international when international.startsWith('+') => international,
+      final prefixed when prefixed.startsWith('00') =>
+        '+${prefixed.substring(2)}',
+      final national when national.startsWith('0') => national.substring(1),
+      final digits => digits,
+    };
+  }
+
+  static bool matchesSearch(String typed, Iterable<String> storedPhones) {
+    final fragment = searchFragment(typed);
+
+    return fragment.isNotEmpty && storedPhones.any((p) => p.contains(fragment));
+  }
+
   const PhoneNumberService();
 
   bool validate(String phone) => _parse(phone).isValid();
