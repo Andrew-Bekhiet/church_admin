@@ -1,0 +1,35 @@
+create or replace function pg_temp.make_group(p_name text default 'group')
+returns uuid
+language sql
+as $$
+    with service as (
+        insert into public.services (name)
+        values (gen_random_uuid()::text)
+        returning id
+    )
+    insert into public.groups (name, service_id)
+    select p_name, service.id from service
+    returning id;
+$$;
+
+create or replace function pg_temp.add_to_group(p_person_id uuid, p_group_id uuid)
+returns void
+language sql
+as $$
+    insert into public.persons_groups (person_id, group_id)
+    values (p_person_id, p_group_id);
+$$;
+
+create or replace function pg_temp.make_group_admin(p_group_id uuid, p_allow_edit boolean)
+returns uuid
+language plpgsql
+as $$
+declare
+    v_uid uuid := pg_temp.make_user(gen_random_uuid()::text, array['approved']);
+begin
+    insert into auth.users_admin_on (uid, admin_on_group, group_allow_edit)
+    values (v_uid, p_group_id, p_allow_edit);
+
+    return v_uid;
+end;
+$$;
