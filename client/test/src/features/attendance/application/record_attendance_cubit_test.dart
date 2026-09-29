@@ -546,27 +546,10 @@ final class _Fixture {
     required String familyAdminPhone,
   }) => MeetingRosterEntry(
     asServant: false,
-    person: Person(
-      id: personId,
-      name: 'Person $personId',
-      contacts: [
-        PhoneContact(id: '$personId-own', phone: ownPhone, personId: personId),
-      ],
-      family: Family(
-        id: '$personId-family',
-        name: 'Family',
-        contacts: [
-          PhoneContact(
-            id: '$personId-admin',
-            phone: familyAdminPhone,
-            familyId: '$personId-family',
-            personTypeId: 'mother-type',
-          ),
-        ],
-      ),
-    ),
+    person: Person(id: personId, name: 'Person $personId'),
     attendanceRecord: null,
     personAttendanceAnalysis: null,
+    phones: [ownPhone, familyAdminPhone],
   );
 
   static AttendanceRecord makeRecord(String personId, {String id = 'att-1'}) =>

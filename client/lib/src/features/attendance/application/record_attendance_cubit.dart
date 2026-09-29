@@ -481,10 +481,7 @@ class RecordAttendanceCubit extends Cubit<RecordAttendanceState> {
     final personName = person.name.toLowerCase().trim();
 
     return personName.contains(query) ||
-        PhoneNumberService.matchesSearch(
-          query,
-          person.contactsWithFamilyAdmins.map((c) => c.phone),
-        );
+        PhoneNumberService.matchesSearch(query, entry.phones);
   }
 
   @override
