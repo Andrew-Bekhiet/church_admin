@@ -5,7 +5,7 @@ import { GenderRowMapper } from "../fragments/GenderRowMapper";
 import { ListNamesAndIdsRowMapper } from "../fragments/ListNamesAndIdsRowMapper";
 import { ObjectRefRowMapper } from "../fragments/ObjectRefRowMapper";
 import { PersonTypeRowMapper } from "../fragments/PersonTypeRowMapper";
-import { PhonesMapRowMapper } from "../fragments/PhonesMapRowMapper";
+import { ContactsRowMapper } from "../fragments/ContactsRowMapper";
 import { RawFieldRowMapper } from "../fragments/RawFieldRowMapper";
 import { StudyYearRowMapper } from "../fragments/StudyYearRowMapper";
 import { ViewableRowMapper } from "../fragments/ViewableRowMapper";
@@ -19,8 +19,7 @@ export class PersonRowMapper implements RowMapper {
     this.mapper = new LocalizationRowMapper(
       new MultiRowMapper([
         new ViewableRowMapper(),
-        new RawFieldRowMapper("mainPhone"),
-        new PhonesMapRowMapper("otherPhones"),
+        new ContactsRowMapper(),
         new AddressRowMapper(),
         new RawFieldRowMapper("birthdate"),
         new RawFieldRowMapper("birthday"),

@@ -54,9 +54,30 @@ query exportData(
       name
     }
     color
+    contacts(orderBy: { createdAt: ASC }) {
+      phone
+      label
+      isMainPhone
+      createdAt
+    }
     family {
       id
       name
+    }
+    familyAdminContacts: family {
+      contacts(
+        where: { personType: { isFamilyAdmin: { _eq: true } } }
+        orderBy: { createdAt: ASC }
+      ) {
+        personId
+        phone
+        isMainPhone
+        createdAt
+        personType {
+          id
+          name
+        }
+      }
     }
     confessionFather: father {
       id
@@ -119,11 +140,9 @@ query exportData(
         name
       }
     }
-    mainPhone
     martialStatus
     name
     notes
-    otherPhones
     personType {
       id
       name
