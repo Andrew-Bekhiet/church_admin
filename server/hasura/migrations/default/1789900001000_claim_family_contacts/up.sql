@@ -121,6 +121,28 @@ before insert on public.contacts
 for each row
 execute function public.claim_contact_on_insert();
 
+create or replace function public.assert_unclaimed_contact_type_is_family_admin()
+returns trigger
+language plpgsql
+as $$
+begin
+    if not coalesce(
+        (select pt.is_family_admin from public.person_types as pt where pt.id = new.person_type_id),
+        false
+    ) then
+        raise exception 'contacts/unclaimed-type-not-family-admin' using errcode = '23514';
+    end if;
+
+    return new;
+end;
+$$;
+
+create or replace trigger contacts_guard_unclaimed_type
+before insert or update of person_id, person_type_id on public.contacts
+for each row
+when (new.person_id is null)
+execute function public.assert_unclaimed_contact_type_is_family_admin();
+
 create or replace function public.claim_family_contacts_on_person_change()
 returns trigger
 language plpgsql
