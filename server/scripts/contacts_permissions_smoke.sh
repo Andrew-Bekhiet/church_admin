@@ -1,9 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-root=$(cd "$(dirname "$0")/../.." && pwd)
-export POSTGRES_PASSWORD=pgtap HASURA_GRAPHQL_ADMIN_SECRET=pgtap
-compose=(docker compose --env-file /dev/null -f "$root/server/docker-compose.yml" -f "$root/server/docker-compose.pgtap.yml" -p "${PGTAP_PROJECT:-church-admin-pgtap}")
+source "$(dirname "$0")/pgtap_compose.sh"
 endpoint="http://localhost:${HASURA_PORT:-28081}/v1/graphql"
 
 psql_q() { "${compose[@]}" exec -T postgres psql -U postgres -d church_admin -At -v ON_ERROR_STOP=1 -c "$1"; }
