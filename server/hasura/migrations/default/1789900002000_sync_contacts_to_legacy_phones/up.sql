@@ -11,7 +11,7 @@ as $$
             when s.digits like '0%' then '+20' || substr(s.digits, 2)
             else '+20' || s.digits
         end as phone
-        from (select regexp_replace(coalesce(p_phone, ''), '[\s\-\.\(\)]', '', 'g') as digits) as s
+        from (select regexp_replace(coalesce(p_phone, ''), '[\s\-\.\(\)‎‏‪‬]', '', 'g') as digits) as s
     ) as v;
 $$;
 
@@ -236,7 +236,7 @@ execute function public.legacy_phones_sync_from_person();
 create or replace view public.families_admins_phones as
 select
     role_phones.family_id,
-    json_object_agg(pt.name, public.phone_to_legacy(role_phones.phone) order by pt.is_family_admin desc, pt."order") as aggregated_phones
+    json_object_agg(pt.name, public.phone_to_legacy(role_phones.phone) order by pt.is_family_admin desc, pt."order" asc) as aggregated_phones
 from (
     select distinct on (rc.effective_family_id, rc.effective_person_type_id)
         rc.effective_family_id as family_id,
@@ -244,9 +244,9 @@ from (
         rc.phone
     from public.resolved_contacts as rc
     where rc.effective_family_id is not null
-    order by rc.effective_family_id, rc.effective_person_type_id, rc.is_main_phone desc, rc.created_at, rc.id
+    order by rc.effective_family_id asc, rc.effective_person_type_id asc, rc.is_main_phone desc, rc.created_at asc, rc.id asc
 ) as role_phones
-join public.person_types as pt on pt.id = role_phones.person_type_id
+inner join public.person_types as pt on role_phones.person_type_id = pt.id
 where pt.is_family_admin
 group by role_phones.family_id
 order by count(role_phones.phone) desc;
