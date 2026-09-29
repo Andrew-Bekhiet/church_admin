@@ -57,6 +57,7 @@ class HomeBottomNavBar extends StatelessWidget {
                     );
 
                     return Column(
+                      key: HomeBottomNavBarKeys.page(item.type),
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Icon(item.pageIcon, color: fgColor, fill: 1),
@@ -101,4 +102,8 @@ class HomeBottomNavBar extends StatelessWidget {
       ),
     );
   }
+}
+
+abstract final class HomeBottomNavBarKeys {
+  static Key page(Type type) => ValueKey(('Home Bottom Nav Bar Page', type));
 }

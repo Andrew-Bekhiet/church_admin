@@ -50,6 +50,7 @@ class _ViewPersonState extends State<ViewPerson> {
         onLoadAllGroups: () => _groupsLimit.add(null),
       ),
       editButtonBuilder: (context, person) => IconButton(
+        key: ViewPersonKeys.editButton,
         tooltip: 'تعديل',
         onPressed: () => EditPersonRoute(
           $extra: EditPersonExtra(person: person),
@@ -75,4 +76,8 @@ class _ViewPersonState extends State<ViewPerson> {
 
     super.dispose();
   }
+}
+
+abstract final class ViewPersonKeys {
+  static const Key editButton = ValueKey('View Person Edit Button Key');
 }
