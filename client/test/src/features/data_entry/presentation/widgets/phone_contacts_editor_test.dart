@@ -15,8 +15,22 @@ void main() {
         isMainPhone: isMain,
       );
 
+  PhoneContact fatherNumber(String id, String phone, {bool isMain = false}) =>
+      PhoneContact(
+        id: id,
+        phone: phone,
+        familyId: 'f1',
+        personTypeId: 'father',
+        personType: father,
+        isMainPhone: isMain,
+      );
+
   final formKey = GlobalKey<FormState>();
   late List<PhoneContact> contacts;
+
+  Map<String, bool> mainFlags() => {
+    for (final c in contacts) c.id: c.isMainPhone,
+  };
 
   Future<void> pumpEditor(
     WidgetTester tester, {
@@ -67,7 +81,6 @@ void main() {
     expect(row.isFamilyRole, isTrue);
     expect(row.personTypeId, 'father');
     expect(row.familyId, 'f1');
-    expect(find.byKey(PhoneContactRowKeys.mainChip('a')), findsNothing);
   });
 
   testWidgets('choosing a main number clears the previous one', (tester) async {
@@ -87,6 +100,96 @@ void main() {
       {'a': false, 'b': true},
     );
   });
+
+  testWidgets('the first number added becomes the main one', (tester) async {
+    await pumpEditor(tester, initial: const []);
+
+    await tester.tap(find.byKey(PhoneContactsEditorKeys.addButton));
+    await tester.pump();
+
+    expect(contacts.single.isMainPhone, isTrue);
+  });
+
+  testWidgets('a number added next to a main one is not main', (tester) async {
+    await pumpEditor(
+      tester,
+      initial: [own('a', '+201001234567', isMain: true)],
+    );
+
+    await tester.tap(find.byKey(PhoneContactsEditorKeys.addButton));
+    await tester.pump();
+
+    expect(contacts.last.isMainPhone, isFalse);
+  });
+
+  testWidgets('the first number given a role becomes the main of that role', (
+    tester,
+  ) async {
+    await pumpEditor(
+      tester,
+      initial: [own('a', '+201001234567', isMain: true)],
+    );
+
+    await tester.tap(find.byKey(PhoneContactRowKeys.roleChip('a', 'father')));
+    await tester.pump();
+
+    expect(contacts.single.isMainPhone, isTrue);
+  });
+
+  testWidgets('a second number under the same role stays secondary', (
+    tester,
+  ) async {
+    await pumpEditor(
+      tester,
+      initial: [
+        fatherNumber('f', '+201009998887', isMain: true),
+        own('a', '+201001234567', isMain: true),
+      ],
+    );
+
+    await tester.tap(find.byKey(PhoneContactRowKeys.roleChip('a', 'father')));
+    await tester.pump();
+
+    expect(mainFlags(), {'f': true, 'a': false});
+  });
+
+  testWidgets('choosing a role main leaves the own main number alone', (
+    tester,
+  ) async {
+    await pumpEditor(
+      tester,
+      initial: [
+        own('a', '+201001234567', isMain: true),
+        fatherNumber('f', '+201009998887'),
+      ],
+    );
+
+    await tester.tap(find.byKey(PhoneContactRowKeys.mainChip('f')));
+    await tester.pump();
+
+    expect(mainFlags(), {'a': true, 'f': true});
+  });
+
+  testWidgets(
+    'choosing a role main clears the previous main of that role only',
+    (
+      tester,
+    ) async {
+      await pumpEditor(
+        tester,
+        initial: [
+          own('a', '+201001234567', isMain: true),
+          fatherNumber('f1', '+201009998887', isMain: true),
+          fatherNumber('f2', '+201008887776'),
+        ],
+      );
+
+      await tester.tap(find.byKey(PhoneContactRowKeys.mainChip('f2')));
+      await tester.pump();
+
+      expect(mainFlags(), {'a': true, 'f1': false, 'f2': true});
+    },
+  );
 
   testWidgets('an invalid number blocks saving and says why', (tester) async {
     await pumpEditor(tester, initial: [own('a', 'abc')]);

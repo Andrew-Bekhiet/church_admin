@@ -195,15 +195,20 @@ class _PersonEditFormState extends State<PersonEditForm> {
       _updateAndRebuild(
         (p) => p.copyWith(
           name: result.useContactName ? (contact.displayName ?? '') : p.name,
-          contacts: [
-            ...p.contacts,
-            for (final number in result.numbers)
-              PhoneContact.create(
-                phone:
-                    PhoneNumberService.I.toE164(number.number) ?? number.number,
-                label: number.label,
-              ),
-          ],
+          contacts: result.numbers
+              .fold(
+                PhoneContactList(p.contacts),
+                (list, number) => list.add(
+                  PhoneContact.create(
+                    phone:
+                        PhoneNumberService.I.toE164(number.number) ??
+                        number.number,
+                    label: number.label,
+                    personId: p.id,
+                  ),
+                ),
+              )
+              .contacts,
         ),
       );
     }

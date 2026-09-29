@@ -4,19 +4,17 @@ import 'package:material_symbols_icons/material_symbols_icons.dart';
 
 class PhoneContactRow extends StatelessWidget {
   final PhoneContact contact;
-  final String ownerPersonId;
-  final String? familyId;
   final List<PersonType> familyAdminTypes;
   final ValueChanged<PhoneContact> onChanged;
+  final ValueChanged<PersonType?> onRoleChanged;
   final VoidCallback onMainToggled;
   final VoidCallback onDeleted;
 
   const PhoneContactRow({
     required this.contact,
-    required this.ownerPersonId,
-    required this.familyId,
     required this.familyAdminTypes,
     required this.onChanged,
+    required this.onRoleChanged,
     required this.onMainToggled,
     required this.onDeleted,
     super.key,
@@ -66,23 +64,18 @@ class PhoneContactRow extends StatelessWidget {
         Wrap(
           spacing: 8,
           children: [
-            if (contact.isOwn)
-              FilterChip(
-                key: PhoneContactRowKeys.mainChip(contact.id),
-                label: const Text('أساسي'),
-                selected: contact.isMainPhone,
-                onSelected: (_) => onMainToggled(),
-              ),
+            FilterChip(
+              key: PhoneContactRowKeys.mainChip(contact.id),
+              label: const Text('أساسي'),
+              selected: contact.isMainPhone,
+              onSelected: (_) => onMainToggled(),
+            ),
             for (final type in familyAdminTypes)
               ChoiceChip(
                 key: PhoneContactRowKeys.roleChip(contact.id, type.id),
                 label: Text(PhoneContact.roleLabel(type.name)),
                 selected: contact.personTypeId == type.id,
-                onSelected: (selected) => onChanged(
-                  selected
-                      ? contact.withRole(type, familyId)
-                      : contact.ownedBy(ownerPersonId),
-                ),
+                onSelected: (selected) => onRoleChanged(selected ? type : null),
               ),
           ],
         ),

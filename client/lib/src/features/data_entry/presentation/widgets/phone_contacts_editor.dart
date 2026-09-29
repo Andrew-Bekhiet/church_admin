@@ -40,22 +40,26 @@ class PhoneContactsEditor extends StatelessWidget {
             PhoneContactRow(
               key: ValueKey(contact.id),
               contact: contact,
-              ownerPersonId: ownerPersonId,
-              familyId: familyId,
               familyAdminTypes: familyAdminTypes,
-              onChanged: (changed) => onChanged([
-                for (final c in contacts) c.id == changed.id ? changed : c,
-              ]),
-              onMainToggled: () => onChanged([
-                for (final c in contacts)
-                  c.isOwn
-                      ? c.copyWith(
-                          isMainPhone: c.id == contact.id && !c.isMainPhone,
-                        )
-                      : c,
-              ]),
-              onDeleted: () =>
-                  onChanged(contacts.where((c) => c.id != contact.id).toList()),
+              onChanged: (changed) => onChanged(
+                PhoneContactList(contacts).replace(changed).contacts,
+              ),
+              onRoleChanged: (role) => onChanged(
+                switch (role) {
+                  final role? => PhoneContactList(
+                    contacts,
+                  ).withRole(contact.id, role, familyId),
+                  null => PhoneContactList(
+                    contacts,
+                  ).withoutRole(contact.id, ownerPersonId),
+                }.contacts,
+              ),
+              onMainToggled: () => onChanged(
+                PhoneContactList(contacts).toggleMain(contact.id).contacts,
+              ),
+              onDeleted: () => onChanged(
+                PhoneContactList(contacts).remove(contact.id).contacts,
+              ),
             ),
           if (state.errorText case final error?)
             Text(
@@ -72,13 +76,16 @@ class PhoneContactsEditor extends StatelessWidget {
                   key: PhoneContactsEditorKeys.addButton,
                   icon: const Icon(Symbols.add),
                   label: const Text('إضافة رقم هاتف'),
-                  onPressed: () => onChanged([
-                    ...contacts,
-                    PhoneContact.create(
-                      phone: '',
-                      isMainPhone: !contacts.any((c) => c.isOwn),
-                    ),
-                  ]),
+                  onPressed: () => onChanged(
+                    PhoneContactList(contacts)
+                        .add(
+                          PhoneContact.create(
+                            phone: '',
+                            personId: ownerPersonId,
+                          ),
+                        )
+                        .contacts,
+                  ),
                 ),
               ),
               if (onImportFromContacts != null)

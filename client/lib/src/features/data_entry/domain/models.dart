@@ -20,6 +20,7 @@ export 'models/person.dart';
 export 'models/person_state.dart';
 export 'models/person_type.dart';
 export 'models/phone_contact.dart';
+export 'models/phone_contact_list.dart';
 export 'models/qualification.dart';
 export 'models/relationships.dart';
 export 'models/school.dart';
