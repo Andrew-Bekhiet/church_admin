@@ -196,22 +196,4 @@ void main() {
     expect(created.upserts?.single.familyId?.uuid, familyId);
     expect(created.upserts?.single.personId, isNull);
   });
-
-  test('a role number with no family to attach to is refused', () {
-    final orphan = helper(
-      from: const [],
-      to: [second.withRole(fatherType, null)],
-    );
-
-    expect(
-      () => orphan.variables,
-      throwsA(
-        isA<ContactsSaveException>().having(
-          (e) => e.errorCode,
-          'errorCode',
-          ContactsErrorCode.familyRequired,
-        ),
-      ),
-    );
-  });
 }

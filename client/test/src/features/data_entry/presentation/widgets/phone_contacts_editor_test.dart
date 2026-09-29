@@ -35,7 +35,6 @@ void main() {
   Future<void> pumpEditor(
     WidgetTester tester, {
     required List<PhoneContact> initial,
-    bool hasFamilyOrAddress = true,
     double width = 800,
   }) async {
     contacts = initial;
@@ -56,7 +55,6 @@ void main() {
                     contacts: contacts,
                     ownerPersonId: 'p1',
                     familyId: 'f1',
-                    hasFamilyOrAddress: hasFamilyOrAddress,
                     familyAdminTypes: const [father, mother],
                     onChanged: (value) => setState(() => contacts = value),
                   ),
@@ -199,26 +197,6 @@ void main() {
 
     expect(valid, isFalse);
     expect(find.text(invalidMessage), findsOneWidget);
-  });
-
-  testWidgets('a role number without a family or address is rejected', (
-    tester,
-  ) async {
-    final asFather = own('a', '+201001234567').withRole(father, null);
-    await pumpEditor(
-      tester,
-      initial: [asFather],
-      hasFamilyOrAddress: false,
-    );
-
-    final valid = formKey.currentState!.validate();
-    await tester.pump();
-
-    expect(valid, isFalse);
-    expect(
-      find.text('يجب تحديد العائلة أو العنوان لحفظ أرقام الأسرة'),
-      findsOneWidget,
-    );
   });
 
   testWidgets('rows fit a 320 px right-to-left screen', (tester) async {

@@ -54,10 +54,6 @@ class PersonContactFields extends StatelessWidget {
           contacts: person.contacts,
           ownerPersonId: person.id,
           familyId: person.family?.id ?? person.familyId,
-          hasFamilyOrAddress:
-              person.family != null ||
-              person.familyId != null ||
-              person.address != null,
           familyAdminTypes: familyAdminTypes,
           onChanged: onContactsChanged,
           onImportFromContacts:

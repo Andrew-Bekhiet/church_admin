@@ -434,12 +434,14 @@ class Person extends ViewableWithIDAndImage
     servingChurchId: servingChurch?.id.toUuid(),
     serviceType: serviceType,
     notes: notes,
-    family: family == null && address != null
+    family:
+        family == null &&
+            (address != null || contacts.any((c) => c.isFamilyRole))
         ? Input_FamiliesObjRelInsertInput(
             data: Family(
               id: family?.id ?? Namespace.nil.value,
               name: name.split(' ').sublist(1).join(' '),
-              address: address!.copyWith(family: null),
+              address: address?.copyWith(family: null),
             ).toInsertInput(),
           )
         : null,

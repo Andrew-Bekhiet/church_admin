@@ -62,9 +62,6 @@ class ContactsUpdateHelper {
     if (_upserts.any((c) => !_e164.hasMatch(c.phone))) {
       throw const ContactsSaveException(ContactsErrorCode.invalidPhone);
     }
-    if (_upserts.any((c) => c.isFamilyRole && c.familyId == null)) {
-      throw const ContactsSaveException(ContactsErrorCode.familyRequired);
-    }
 
     return Variables_Mutation_saveContacts(
       deleteIds: _deleteIds,

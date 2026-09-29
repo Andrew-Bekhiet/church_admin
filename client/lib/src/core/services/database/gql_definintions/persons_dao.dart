@@ -83,7 +83,7 @@ class PersonsDAO extends FullCRUDDAO<Person> {
       personId: created.id,
       familyId: created.familyId,
       newContacts: newObject.contacts,
-      oldContacts: const [],
+      oldContacts: newObject.familyAdminContacts,
     );
 
     return created;
