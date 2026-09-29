@@ -235,10 +235,18 @@ execute function public.legacy_phones_sync_from_person();
 
 create or replace view public.families_admins_phones as
 select
-    rc.effective_family_id as family_id,
-    json_object_agg(pt.name, public.phone_to_legacy(rc.phone) order by pt.is_family_admin desc, pt."order") as aggregated_phones
-from public.resolved_contacts as rc
-join public.person_types as pt on pt.id = rc.effective_person_type_id
-where pt.is_family_admin and rc.is_main_phone and rc.effective_family_id is not null
-group by rc.effective_family_id
-order by count(rc.phone) desc;
+    role_phones.family_id,
+    json_object_agg(pt.name, public.phone_to_legacy(role_phones.phone) order by pt.is_family_admin desc, pt."order") as aggregated_phones
+from (
+    select distinct on (rc.effective_family_id, rc.effective_person_type_id)
+        rc.effective_family_id as family_id,
+        rc.effective_person_type_id as person_type_id,
+        rc.phone
+    from public.resolved_contacts as rc
+    where rc.effective_family_id is not null
+    order by rc.effective_family_id, rc.effective_person_type_id, rc.is_main_phone desc, rc.created_at, rc.id
+) as role_phones
+join public.person_types as pt on pt.id = role_phones.person_type_id
+where pt.is_family_admin
+group by role_phones.family_id
+order by count(role_phones.phone) desc;
