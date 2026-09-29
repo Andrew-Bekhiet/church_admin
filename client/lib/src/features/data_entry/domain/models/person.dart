@@ -15,6 +15,7 @@ part 'person.g.dart';
     'blurhash',
     'isStudent',
     'otherPhones',
+    'contacts',
     'userCanEdit',
     'maxSpiritDataAge',
     'uid',
@@ -51,6 +52,9 @@ class Person extends ViewableWithIDAndImage
 
   @override
   final Json otherPhones;
+
+  @override
+  final List<PhoneContact> contacts;
 
   @override
   @LocalDateTimeConverter()
@@ -272,6 +276,7 @@ class Person extends ViewableWithIDAndImage
     required this.id,
     required this.name,
     this.otherPhones = const {},
+    this.contacts = const [],
     this.gender = true,
     this.isShammas = false,
     this.workStatus = WorkStatus.employed,

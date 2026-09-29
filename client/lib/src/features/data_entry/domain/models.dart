@@ -18,6 +18,7 @@ export 'models/object_image_info.dart';
 export 'models/person.dart';
 export 'models/person_state.dart';
 export 'models/person_type.dart';
+export 'models/phone_contact.dart';
 export 'models/qualification.dart';
 export 'models/relationships.dart';
 export 'models/school.dart';

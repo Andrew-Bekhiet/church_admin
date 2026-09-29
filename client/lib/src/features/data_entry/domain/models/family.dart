@@ -19,7 +19,7 @@ part 'family.g.dart';
     'children': 'عائلات الأبناء',
     'parents': 'عائلات الآباء',
   },
-  ignoreFields: ['blurhash', 'familyAdminsPhones', 'userCanEdit'],
+  ignoreFields: ['blurhash', 'familyAdminsPhones', 'contacts', 'userCanEdit'],
 )
 class Family extends ViewableWithIDAndImage
     with _$Family
@@ -84,6 +84,9 @@ class Family extends ViewableWithIDAndImage
   final Json? familyAdminsPhones;
 
   @override
+  final List<PhoneContact> contacts;
+
+  @override
   final LastRecordedByInfo? lastEdit;
 
   @override
@@ -110,6 +113,7 @@ class Family extends ViewableWithIDAndImage
     required this.name,
     this.status = MartialStatus.married,
     this.userCanEdit = false,
+    this.contacts = const [],
     this.address,
     this.marriageDate,
     this.deceasedSpouseName,
