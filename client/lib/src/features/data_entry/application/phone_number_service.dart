@@ -8,29 +8,11 @@ class PhoneNumberService {
 
   const PhoneNumberService();
 
-  bool validate(String phone) => PhoneNumber.parse(
-    phone,
-    destinationCountry:
-        PhoneNumber.findPotentialPhoneNumbers(phone).singleOrNull == null
-        ? IsoCode.EG
-        : null,
-  ).isValid();
+  bool validate(String phone) => _parse(phone).isValid();
 
-  String format(String phone) => PhoneNumber.parse(
-    phone,
-    destinationCountry:
-        PhoneNumber.findPotentialPhoneNumbers(phone).singleOrNull == null
-        ? IsoCode.EG
-        : null,
-  ).nsn;
+  String format(String phone) => _parse(phone).nsn;
 
-  String formatInternational(String phone) => PhoneNumber.parse(
-    phone,
-    destinationCountry:
-        PhoneNumber.findPotentialPhoneNumbers(phone).singleOrNull == null
-        ? IsoCode.EG
-        : null,
-  ).international;
+  String formatInternational(String phone) => _parse(phone).international;
 
   String? toE164(String input) {
     final phone = _parse(input);
@@ -45,8 +27,15 @@ class PhoneNumberService {
     return phone.isoCode == IsoCode.EG ? '0${phone.nsn}' : phone.international;
   }
 
-  PhoneNumber _parse(String input) => PhoneNumber.parse(
-    input,
-    destinationCountry: input.trimLeft().startsWith('+') ? null : IsoCode.EG,
-  );
+  PhoneNumber _parse(String input) {
+    final trimmed = input.trimLeft();
+    final isInternational =
+        (trimmed.startsWith('+') || trimmed.startsWith('00')) &&
+        PhoneNumber.findPotentialPhoneNumbers(input).singleOrNull != null;
+
+    return PhoneNumber.parse(
+      input,
+      destinationCountry: isInternational ? null : IsoCode.EG,
+    );
+  }
 }
