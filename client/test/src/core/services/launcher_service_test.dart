@@ -74,7 +74,7 @@ void main() {
       test(
         'launchWhatsappChat',
         () async {
-          const phoneNumber = '1234567890';
+          const phoneNumber = '+1234567890';
 
           final unit = LauncherService();
 
@@ -82,7 +82,7 @@ void main() {
 
           verify(
             (UrlLauncherPlatform.instance as MockUrlLauncherPlatform).launchUrl(
-              Uri.parse('whatsapp://send?phone=%2B$phoneNumber').toString(),
+              'whatsapp://send?phone=%2B1234567890',
               any,
             ),
           );

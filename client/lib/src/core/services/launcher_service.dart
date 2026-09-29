@@ -17,12 +17,12 @@ class LauncherService {
     return launchUrl(Uri(scheme: 'tel', path: fomattedPhone));
   }
 
-  Future<bool> launchWhatsappChat(String fomattedPhone) {
+  Future<bool> launchWhatsappChat(String e164Phone) {
     return launchUrl(
       Uri(
         scheme: 'whatsapp',
         host: 'send',
-        queryParameters: {'phone': '+$fomattedPhone'},
+        queryParameters: {'phone': e164Phone},
       ),
     );
   }
