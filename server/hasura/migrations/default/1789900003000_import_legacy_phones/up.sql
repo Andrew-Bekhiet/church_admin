@@ -5,6 +5,8 @@ as $$
 declare
     v_unconvertible bigint;
 begin
+    perform set_config('church_admin.skip_contact_edit_history', 'on', true);
+
     drop table if exists legacy_phone_entries;
 
     create temp table legacy_phone_entries on commit drop as
@@ -96,6 +98,8 @@ begin
         )
     from ranked as r
     on conflict do nothing;
+
+    perform set_config('church_admin.skip_contact_edit_history', 'off', true);
 end;
 $$;
 

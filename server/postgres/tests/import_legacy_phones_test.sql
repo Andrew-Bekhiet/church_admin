@@ -4,7 +4,7 @@ create extension if not exists pgtap;
 \ir fixtures/legacy_phones.psql
 \ir fixtures/legacy_phones_convergence.psql
 
-select plan(15);
+select plan(18);
 
 select set_config('church_admin.skip_legacy_phones_sync', 'on', true);
 
@@ -129,6 +129,31 @@ select is(
     (select count(*) from public.contacts where phone = '+201000000004'),
     1::bigint,
     'running again after the family gained the member does not duplicate the number'
+);
+
+select pg_temp.make_person_type('أخ', false) as brother_type \gset
+select pg_temp.make_person(:'family', :'brother_type') as brother \gset
+update public.persons
+set other_phones = '{"رقم الهاتف (الأخ)": "01000000051", "إضافي": "01000000052", "اضافي": "01000000053"}'
+where id = :'brother';
+select public.import_legacy_phones();
+
+select results_eq(
+    format($$select phone from public.contacts where person_id = %L and label = 'رقم الهاتف (الأخ)'$$, :'brother'),
+    array['+201000000051'],
+    'a role label of a type that is not a family admin is imported as a labelled number of the person'
+);
+
+select is(
+    (select count(*) from public.contacts where family_id = :'family' and person_type_id = :'brother_type'),
+    0::bigint,
+    'a role label of a type that is not a family admin creates no family contact'
+);
+
+select results_eq(
+    format($$select label from public.contacts where person_id = %L and phone in ('+201000000052', '+201000000053') order by phone$$, :'brother'),
+    array['إضافي', 'اضافي'],
+    'custom labels that differ only in spelling are imported as separate contacts with their labels kept'
 );
 
 select * from finish();
