@@ -1,0 +1,27 @@
+fragment Contact on Contacts {
+  id
+  personId
+  familyId
+  personTypeId
+  personType {
+    id
+    name
+  }
+  label
+  phone
+  isMainPhone
+}
+
+fragment ResolvedContact on ResolvedContacts {
+  id
+  personId
+  familyId
+  personTypeId: effectivePersonTypeId
+  personType {
+    id
+    name
+  }
+  label
+  phone
+  isMainPhone
+}

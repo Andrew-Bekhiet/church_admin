@@ -48,6 +48,16 @@ subscription watchFamily($id: uuid!) {
     familyAdminsPhones {
       aggregatedPhones
     }
+    contacts(
+      where: { personType: { isFamilyAdmin: { _eq: true } } }
+      orderBy: [
+        { personType: { order: ASC } }
+        { isMainPhone: DESC }
+        { createdAt: ASC }
+      ]
+    ) {
+      ...ResolvedContact
+    }
     notes
     lastEdit {
       ...LatestEditHistory

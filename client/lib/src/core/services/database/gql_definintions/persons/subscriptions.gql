@@ -29,6 +29,9 @@ subscription watchPerson(
       ...Address
     }
     birthdate
+    contacts(orderBy: [{ isMainPhone: DESC }, { createdAt: ASC }]) {
+      ...Contact
+    }
     classes(limit: $classesLimit, orderBy: { class: { name: ASC } }) {
       class {
         ...Class
@@ -44,6 +47,16 @@ subscription watchPerson(
     }
     family {
       ...Family
+      contacts(
+        where: { personType: { isFamilyAdmin: { _eq: true } } }
+        orderBy: [
+          { personType: { order: ASC } }
+          { isMainPhone: DESC }
+          { createdAt: ASC }
+        ]
+      ) {
+        ...ResolvedContact
+      }
     }
     father {
       id

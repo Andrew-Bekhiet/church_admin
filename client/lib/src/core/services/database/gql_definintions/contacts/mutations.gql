@@ -1,0 +1,30 @@
+mutation saveContacts(
+  $deleteIds: [uuid!]! = []
+  $unsetMainIds: [uuid!]! = []
+  $upserts: [ContactsInsertInput!]! = []
+  $deleteContacts: Boolean! = true
+  $unsetMainContacts: Boolean! = true
+  $upsertContacts: Boolean! = true
+) {
+  deleteContacts(where: { id: { _in: $deleteIds } })
+    @include(if: $deleteContacts) {
+    affectedRows
+  }
+
+  updateContacts(
+    where: { id: { _in: $unsetMainIds } }
+    _set: { isMainPhone: false }
+  ) @include(if: $unsetMainContacts) {
+    affectedRows
+  }
+
+  insertContacts(
+    objects: $upserts
+    onConflict: {
+      constraint: contacts_pkey
+      updateColumns: [label, phone, isMainPhone]
+    }
+  ) @include(if: $upsertContacts) {
+    affectedRows
+  }
+}
