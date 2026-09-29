@@ -1804,6 +1804,177 @@ input CollegesUpdates {
   where: CollegesBoolExp!
 }
 
+type Contacts {
+  createdAt: timestamptz!
+  family: Families
+  familyId: uuid
+  id: uuid!
+  isMainPhone: Boolean!
+  label: String
+  person: Persons
+  personId: uuid
+  personType: PersonTypes
+  personTypeId: uuid
+  phone: String!
+  updatedAt: timestamptz!
+}
+
+input ContactsAggregateOrderBy {
+  count: OrderBy
+  max: ContactsMaxOrderBy
+  min: ContactsMinOrderBy
+}
+
+input ContactsArrRelInsertInput {
+  data: [ContactsInsertInput!]!
+  onConflict: ContactsOnConflict
+}
+
+input ContactsBoolExp {
+  _and: [ContactsBoolExp!]
+  _not: ContactsBoolExp
+  _or: [ContactsBoolExp!]
+  createdAt: TimestamptzComparisonExp
+  family: FamiliesBoolExp
+  familyId: UuidComparisonExp
+  id: UuidComparisonExp
+  isMainPhone: BooleanComparisonExp
+  label: StringComparisonExp
+  person: PersonsBoolExp
+  personId: UuidComparisonExp
+  personType: PersonTypesBoolExp
+  personTypeId: UuidComparisonExp
+  phone: StringComparisonExp
+  updatedAt: TimestamptzComparisonExp
+}
+
+enum ContactsConstraint {
+  contacts_family_type_main_key
+  contacts_family_type_phone_key
+  contacts_person_id_phone_key
+  contacts_person_main_key
+  contacts_pkey
+}
+
+input ContactsInsertInput {
+  family: FamiliesObjRelInsertInput
+  familyId: uuid
+  id: uuid
+  isMainPhone: Boolean
+  label: String
+  person: PersonsObjRelInsertInput
+  personId: uuid
+  personType: PersonTypesObjRelInsertInput
+  personTypeId: uuid
+  phone: String
+}
+
+input ContactsMaxOrderBy {
+  createdAt: OrderBy
+  familyId: OrderBy
+  id: OrderBy
+  label: OrderBy
+  personId: OrderBy
+  personTypeId: OrderBy
+  phone: OrderBy
+  updatedAt: OrderBy
+}
+
+input ContactsMinOrderBy {
+  createdAt: OrderBy
+  familyId: OrderBy
+  id: OrderBy
+  label: OrderBy
+  personId: OrderBy
+  personTypeId: OrderBy
+  phone: OrderBy
+  updatedAt: OrderBy
+}
+
+type ContactsMutationResponse {
+  affectedRows: Int!
+  returning: [Contacts!]!
+}
+
+input ContactsOnConflict {
+  constraint: ContactsConstraint!
+  updateColumns: [ContactsUpdateColumn!]! = []
+  where: ContactsBoolExp
+}
+
+input ContactsOrderBy {
+  createdAt: OrderBy
+  family: FamiliesOrderBy
+  familyId: OrderBy
+  id: OrderBy
+  isMainPhone: OrderBy
+  label: OrderBy
+  person: PersonsOrderBy
+  personId: OrderBy
+  personType: PersonTypesOrderBy
+  personTypeId: OrderBy
+  phone: OrderBy
+  updatedAt: OrderBy
+}
+
+input ContactsPkColumnsInput {
+  id: uuid!
+}
+
+enum ContactsSelectColumn {
+  createdAt
+  familyId
+  id
+  isMainPhone
+  label
+  personId
+  personTypeId
+  phone
+  updatedAt
+}
+
+input ContactsSetInput {
+  familyId: uuid
+  id: uuid
+  isMainPhone: Boolean
+  label: String
+  personId: uuid
+  personTypeId: uuid
+  phone: String
+}
+
+input ContactsStreamCursorInput {
+  initialValue: ContactsStreamCursorValueInput!
+  ordering: CursorOrdering
+}
+
+input ContactsStreamCursorValueInput {
+  createdAt: timestamptz
+  familyId: uuid
+  id: uuid
+  isMainPhone: Boolean
+  label: String
+  personId: uuid
+  personTypeId: uuid
+  phone: String
+  updatedAt: timestamptz
+}
+
+enum ContactsUpdateColumn {
+  familyId
+  id
+  isMainPhone
+  label
+  personId
+  personTypeId
+  phone
+}
+
+input ContactsUpdates {
+  _set: ContactsSetInput
+  where: ContactsBoolExp!
+}
+
 enum CursorOrdering {
   ASC
   DESC
@@ -1915,6 +2086,7 @@ type Families {
   church: Churches
   churchId: uuid
   color: bigint
+  contacts(distinctOn: [ResolvedContactsSelectColumn!], limit: Int, offset: Int, orderBy: [ResolvedContactsOrderBy!], where: ResolvedContactsBoolExp): [ResolvedContacts!]!
   deceasedSpouseName: String
   editHistory(distinctOn: [HistoryEditHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryEditHistoryOrderBy!], where: HistoryEditHistoryBoolExp): [HistoryEditHistory!]!
   editHistoryAggregate(distinctOn: [HistoryEditHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryEditHistoryOrderBy!], where: HistoryEditHistoryBoolExp): HistoryEditHistoryAggregate!
@@ -2004,6 +2176,7 @@ input FamiliesBoolExp {
   church: ChurchesBoolExp
   churchId: UuidComparisonExp
   color: BigintComparisonExp
+  contacts: ResolvedContactsBoolExp
   deceasedSpouseName: StringComparisonExp
   editHistory: HistoryEditHistoryBoolExp
   editHistoryAggregate: HistoryEditHistoryAggregateBoolExp
@@ -2188,6 +2361,7 @@ input FamiliesOrderBy {
   church: ChurchesOrderBy
   churchId: OrderBy
   color: OrderBy
+  contactsAggregate: ResolvedContactsAggregateOrderBy
   deceasedSpouseName: OrderBy
   editHistoryAggregate: HistoryEditHistoryAggregateOrderBy
   familyAdminsPhones: FamiliesAdminsPhonesOrderBy
@@ -4724,6 +4898,47 @@ input JsonbComparisonExp {
   _nin: [jsonb!]
 }
 
+type MainContacts {
+  id: uuid
+  person: Persons
+  personId: uuid
+  phone: String
+}
+
+input MainContactsBoolExp {
+  _and: [MainContactsBoolExp!]
+  _not: MainContactsBoolExp
+  _or: [MainContactsBoolExp!]
+  id: UuidComparisonExp
+  person: PersonsBoolExp
+  personId: UuidComparisonExp
+  phone: StringComparisonExp
+}
+
+input MainContactsOrderBy {
+  id: OrderBy
+  person: PersonsOrderBy
+  personId: OrderBy
+  phone: OrderBy
+}
+
+enum MainContactsSelectColumn {
+  id
+  personId
+  phone
+}
+
+input MainContactsStreamCursorInput {
+  initialValue: MainContactsStreamCursorValueInput!
+  ordering: CursorOrdering
+}
+
+input MainContactsStreamCursorValueInput {
+  id: uuid
+  personId: uuid
+  phone: String
+}
+
 input MeetingAudienceComparisonExp {
   _eq: meeting_audience
   _gt: meeting_audience
@@ -4966,6 +5181,7 @@ type Persons {
   color: bigint
   confessionHistory(distinctOn: [HistoryConfessionHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryConfessionHistoryOrderBy!], where: HistoryConfessionHistoryBoolExp): [HistoryConfessionHistory!]!
   confessionHistoryAggregate(distinctOn: [HistoryConfessionHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryConfessionHistoryOrderBy!], where: HistoryConfessionHistoryBoolExp): HistoryConfessionHistoryAggregate!
+  contacts(distinctOn: [ContactsSelectColumn!], limit: Int, offset: Int, orderBy: [ContactsOrderBy!], where: ContactsBoolExp): [Contacts!]!
   editHistory(distinctOn: [HistoryEditHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryEditHistoryOrderBy!], where: HistoryEditHistoryBoolExp): [HistoryEditHistory!]!
   editHistoryAggregate(distinctOn: [HistoryEditHistorySelectColumn!], limit: Int, offset: Int, orderBy: [HistoryEditHistoryOrderBy!], where: HistoryEditHistoryBoolExp): HistoryEditHistoryAggregate!
   family: Families
@@ -4989,6 +5205,7 @@ type Persons {
   lastEdit: HistoryLatestEdits
   lastKodas: HistoryLatestKodases
   lastVisit: HistoryLatestVisits
+  mainContact: MainContacts
   mainPhone: String
   martialStatus: String!
   name: String!
@@ -5103,6 +5320,7 @@ input PersonsBoolExp {
   color: BigintComparisonExp
   confessionHistory: HistoryConfessionHistoryBoolExp
   confessionHistoryAggregate: HistoryConfessionHistoryAggregateBoolExp
+  contacts: ContactsBoolExp
   editHistory: HistoryEditHistoryBoolExp
   editHistoryAggregate: HistoryEditHistoryAggregateBoolExp
   family: FamiliesBoolExp
@@ -5126,6 +5344,7 @@ input PersonsBoolExp {
   lastEdit: HistoryLatestEditsBoolExp
   lastKodas: HistoryLatestKodasesBoolExp
   lastVisit: HistoryLatestVisitsBoolExp
+  mainContact: MainContactsBoolExp
   mainPhone: StringComparisonExp
   martialStatus: StringComparisonExp
   name: StringComparisonExp
@@ -5371,6 +5590,7 @@ input PersonsInsertInput {
   collegeId: uuid
   color: bigint
   confessionHistory: HistoryConfessionHistoryArrRelInsertInput
+  contacts: ContactsArrRelInsertInput
   family: FamiliesObjRelInsertInput
   familyId: uuid
   father: FathersObjRelInsertInput
@@ -5567,6 +5787,7 @@ input PersonsOrderBy {
   collegeId: OrderBy
   color: OrderBy
   confessionHistoryAggregate: HistoryConfessionHistoryAggregateOrderBy
+  contactsAggregate: ContactsAggregateOrderBy
   editHistoryAggregate: HistoryEditHistoryAggregateOrderBy
   family: FamiliesOrderBy
   familyId: OrderBy
@@ -5588,6 +5809,7 @@ input PersonsOrderBy {
   lastEdit: HistoryLatestEditsOrderBy
   lastKodas: HistoryLatestKodasesOrderBy
   lastVisit: HistoryLatestVisitsOrderBy
+  mainContact: MainContactsOrderBy
   mainPhone: OrderBy
   martialStatus: OrderBy
   name: OrderBy
@@ -6144,6 +6366,122 @@ enum QualificationsUpdateColumn {
 input QualificationsUpdates {
   _set: QualificationsSetInput
   where: QualificationsBoolExp!
+}
+
+type ResolvedContacts {
+  createdAt: timestamptz
+  effectiveFamilyId: uuid
+  effectivePersonTypeId: uuid
+  familyId: uuid
+  id: uuid
+  isMainPhone: Boolean
+  label: String
+  person: Persons
+  personId: uuid
+  personType: PersonTypes
+  personTypeId: uuid
+  phone: String
+  updatedAt: timestamptz
+}
+
+input ResolvedContactsAggregateOrderBy {
+  count: OrderBy
+  max: ResolvedContactsMaxOrderBy
+  min: ResolvedContactsMinOrderBy
+}
+
+input ResolvedContactsBoolExp {
+  _and: [ResolvedContactsBoolExp!]
+  _not: ResolvedContactsBoolExp
+  _or: [ResolvedContactsBoolExp!]
+  createdAt: TimestamptzComparisonExp
+  effectiveFamilyId: UuidComparisonExp
+  effectivePersonTypeId: UuidComparisonExp
+  familyId: UuidComparisonExp
+  id: UuidComparisonExp
+  isMainPhone: BooleanComparisonExp
+  label: StringComparisonExp
+  person: PersonsBoolExp
+  personId: UuidComparisonExp
+  personType: PersonTypesBoolExp
+  personTypeId: UuidComparisonExp
+  phone: StringComparisonExp
+  updatedAt: TimestamptzComparisonExp
+}
+
+input ResolvedContactsMaxOrderBy {
+  createdAt: OrderBy
+  effectiveFamilyId: OrderBy
+  effectivePersonTypeId: OrderBy
+  familyId: OrderBy
+  id: OrderBy
+  label: OrderBy
+  personId: OrderBy
+  personTypeId: OrderBy
+  phone: OrderBy
+  updatedAt: OrderBy
+}
+
+input ResolvedContactsMinOrderBy {
+  createdAt: OrderBy
+  effectiveFamilyId: OrderBy
+  effectivePersonTypeId: OrderBy
+  familyId: OrderBy
+  id: OrderBy
+  label: OrderBy
+  personId: OrderBy
+  personTypeId: OrderBy
+  phone: OrderBy
+  updatedAt: OrderBy
+}
+
+input ResolvedContactsOrderBy {
+  createdAt: OrderBy
+  effectiveFamilyId: OrderBy
+  effectivePersonTypeId: OrderBy
+  familyId: OrderBy
+  id: OrderBy
+  isMainPhone: OrderBy
+  label: OrderBy
+  person: PersonsOrderBy
+  personId: OrderBy
+  personType: PersonTypesOrderBy
+  personTypeId: OrderBy
+  phone: OrderBy
+  updatedAt: OrderBy
+}
+
+enum ResolvedContactsSelectColumn {
+  createdAt
+  effectiveFamilyId
+  effectivePersonTypeId
+  familyId
+  id
+  isMainPhone
+  label
+  personId
+  personTypeId
+  phone
+  updatedAt
+}
+
+input ResolvedContactsStreamCursorInput {
+  initialValue: ResolvedContactsStreamCursorValueInput!
+  ordering: CursorOrdering
+}
+
+input ResolvedContactsStreamCursorValueInput {
+  createdAt: timestamptz
+  effectiveFamilyId: uuid
+  effectivePersonTypeId: uuid
+  familyId: uuid
+  id: uuid
+  isMainPhone: Boolean
+  label: String
+  personId: uuid
+  personTypeId: uuid
+  phone: String
+  updatedAt: timestamptz
 }
 
 type Schools {
@@ -7685,6 +8023,8 @@ type mutation_root {
   deleteClassesByPk(id: uuid!): Classes
   deleteColleges(where: CollegesBoolExp!): CollegesMutationResponse
   deleteCollegesByPk(id: uuid!): Colleges
+  deleteContacts(where: ContactsBoolExp!): ContactsMutationResponse
+  deleteContactsByPk(id: uuid!): Contacts
   deleteDistricts(where: DistrictsBoolExp!): DistrictsMutationResponse
   deleteDistrictsByPk(id: uuid!): Districts
   deleteFamilies(where: FamiliesBoolExp!): FamiliesMutationResponse
@@ -7754,6 +8094,8 @@ type mutation_root {
   insertClassesOne(object: ClassesInsertInput!, onConflict: ClassesOnConflict): Classes
   insertColleges(objects: [CollegesInsertInput!]!, onConflict: CollegesOnConflict): CollegesMutationResponse
   insertCollegesOne(object: CollegesInsertInput!, onConflict: CollegesOnConflict): Colleges
+  insertContacts(objects: [ContactsInsertInput!]!, onConflict: ContactsOnConflict): ContactsMutationResponse
+  insertContactsOne(object: ContactsInsertInput!, onConflict: ContactsOnConflict): Contacts
   insertDistricts(objects: [DistrictsInsertInput!]!, onConflict: DistrictsOnConflict): DistrictsMutationResponse
   insertDistrictsOne(object: DistrictsInsertInput!, onConflict: DistrictsOnConflict): Districts
   insertFamilies(objects: [FamiliesInsertInput!]!, onConflict: FamiliesOnConflict): FamiliesMutationResponse
@@ -7835,6 +8177,9 @@ type mutation_root {
   updateColleges(_set: CollegesSetInput, where: CollegesBoolExp!): CollegesMutationResponse
   updateCollegesByPk(_set: CollegesSetInput, pkColumns: CollegesPkColumnsInput!): Colleges
   updateCollegesMany(updates: [CollegesUpdates!]!): [CollegesMutationResponse]
+  updateContacts(_set: ContactsSetInput, where: ContactsBoolExp!): ContactsMutationResponse
+  updateContactsByPk(_set: ContactsSetInput, pkColumns: ContactsPkColumnsInput!): Contacts
+  updateContactsMany(updates: [ContactsUpdates!]!): [ContactsMutationResponse]
   updateDistricts(_set: DistrictsSetInput, where: DistrictsBoolExp!): DistrictsMutationResponse
   updateDistrictsByPk(_set: DistrictsSetInput, pkColumns: DistrictsPkColumnsInput!): Districts
   updateDistrictsMany(updates: [DistrictsUpdates!]!): [DistrictsMutationResponse]
@@ -7957,6 +8302,8 @@ type query_root {
   classesPersons(distinctOn: [ClassesPersonsSelectColumn!], limit: Int, offset: Int, orderBy: [ClassesPersonsOrderBy!], where: ClassesPersonsBoolExp): [ClassesPersons!]!
   colleges(distinctOn: [CollegesSelectColumn!], limit: Int, offset: Int, orderBy: [CollegesOrderBy!], where: CollegesBoolExp): [Colleges!]!
   collegesByPk(id: uuid!): Colleges
+  contacts(distinctOn: [ContactsSelectColumn!], limit: Int, offset: Int, orderBy: [ContactsOrderBy!], where: ContactsBoolExp): [Contacts!]!
+  contactsByPk(id: uuid!): Contacts
   districts(distinctOn: [DistrictsSelectColumn!], limit: Int, offset: Int, orderBy: [DistrictsOrderBy!], where: DistrictsBoolExp): [Districts!]!
   districtsByPk(id: uuid!): Districts
   families(distinctOn: [FamiliesSelectColumn!], limit: Int, offset: Int, orderBy: [FamiliesOrderBy!], where: FamiliesBoolExp): [Families!]!
@@ -7998,6 +8345,7 @@ type query_root {
   hobbiesByPk(id: uuid!): Hobbies
   jobs(distinctOn: [JobsSelectColumn!], limit: Int, offset: Int, orderBy: [JobsOrderBy!], where: JobsBoolExp): [Jobs!]!
   jobsByPk(id: uuid!): Jobs
+  mainContacts(distinctOn: [MainContactsSelectColumn!], limit: Int, offset: Int, orderBy: [MainContactsOrderBy!], where: MainContactsBoolExp): [MainContacts!]!
   personStates(distinctOn: [PersonStatesSelectColumn!], limit: Int, offset: Int, orderBy: [PersonStatesOrderBy!], where: PersonStatesBoolExp): [PersonStates!]!
   personStatesByPk(id: uuid!): PersonStates
   personTypes(distinctOn: [PersonTypesSelectColumn!], limit: Int, offset: Int, orderBy: [PersonTypesOrderBy!], where: PersonTypesBoolExp): [PersonTypes!]!
@@ -8011,6 +8359,7 @@ type query_root {
   personsTags(distinctOn: [PersonsTagsSelectColumn!], limit: Int, offset: Int, orderBy: [PersonsTagsOrderBy!], where: PersonsTagsBoolExp): [PersonsTags!]!
   qualifications(distinctOn: [QualificationsSelectColumn!], limit: Int, offset: Int, orderBy: [QualificationsOrderBy!], where: QualificationsBoolExp): [Qualifications!]!
   qualificationsByPk(id: uuid!): Qualifications
+  resolvedContacts(distinctOn: [ResolvedContactsSelectColumn!], limit: Int, offset: Int, orderBy: [ResolvedContactsOrderBy!], where: ResolvedContactsBoolExp): [ResolvedContacts!]!
   schools(distinctOn: [SchoolsSelectColumn!], limit: Int, offset: Int, orderBy: [SchoolsOrderBy!], where: SchoolsBoolExp): [Schools!]!
   schoolsByPk(id: uuid!): Schools
   services(distinctOn: [ServicesSelectColumn!], limit: Int, offset: Int, orderBy: [ServicesOrderBy!], where: ServicesBoolExp): [Services!]!
@@ -8092,6 +8441,9 @@ type subscription_root {
   colleges(distinctOn: [CollegesSelectColumn!], limit: Int, offset: Int, orderBy: [CollegesOrderBy!], where: CollegesBoolExp): [Colleges!]!
   collegesByPk(id: uuid!): Colleges
   collegesStream(batchSize: Int!, cursor: [CollegesStreamCursorInput]!, where: CollegesBoolExp): [Colleges!]!
+  contacts(distinctOn: [ContactsSelectColumn!], limit: Int, offset: Int, orderBy: [ContactsOrderBy!], where: ContactsBoolExp): [Contacts!]!
+  contactsByPk(id: uuid!): Contacts
+  contactsStream(batchSize: Int!, cursor: [ContactsStreamCursorInput]!, where: ContactsBoolExp): [Contacts!]!
   districts(distinctOn: [DistrictsSelectColumn!], limit: Int, offset: Int, orderBy: [DistrictsOrderBy!], where: DistrictsBoolExp): [Districts!]!
   districtsByPk(id: uuid!): Districts
   districtsStream(batchSize: Int!, cursor: [DistrictsStreamCursorInput]!, where: DistrictsBoolExp): [Districts!]!
@@ -8151,6 +8503,8 @@ type subscription_root {
   jobs(distinctOn: [JobsSelectColumn!], limit: Int, offset: Int, orderBy: [JobsOrderBy!], where: JobsBoolExp): [Jobs!]!
   jobsByPk(id: uuid!): Jobs
   jobsStream(batchSize: Int!, cursor: [JobsStreamCursorInput]!, where: JobsBoolExp): [Jobs!]!
+  mainContacts(distinctOn: [MainContactsSelectColumn!], limit: Int, offset: Int, orderBy: [MainContactsOrderBy!], where: MainContactsBoolExp): [MainContacts!]!
+  mainContactsStream(batchSize: Int!, cursor: [MainContactsStreamCursorInput]!, where: MainContactsBoolExp): [MainContacts!]!
   personStates(distinctOn: [PersonStatesSelectColumn!], limit: Int, offset: Int, orderBy: [PersonStatesOrderBy!], where: PersonStatesBoolExp): [PersonStates!]!
   personStatesByPk(id: uuid!): PersonStates
   personStatesStream(batchSize: Int!, cursor: [PersonStatesStreamCursorInput]!, where: PersonStatesBoolExp): [PersonStates!]!
@@ -8172,6 +8526,8 @@ type subscription_root {
   qualifications(distinctOn: [QualificationsSelectColumn!], limit: Int, offset: Int, orderBy: [QualificationsOrderBy!], where: QualificationsBoolExp): [Qualifications!]!
   qualificationsByPk(id: uuid!): Qualifications
   qualificationsStream(batchSize: Int!, cursor: [QualificationsStreamCursorInput]!, where: QualificationsBoolExp): [Qualifications!]!
+  resolvedContacts(distinctOn: [ResolvedContactsSelectColumn!], limit: Int, offset: Int, orderBy: [ResolvedContactsOrderBy!], where: ResolvedContactsBoolExp): [ResolvedContacts!]!
+  resolvedContactsStream(batchSize: Int!, cursor: [ResolvedContactsStreamCursorInput]!, where: ResolvedContactsBoolExp): [ResolvedContacts!]!
   schools(distinctOn: [SchoolsSelectColumn!], limit: Int, offset: Int, orderBy: [SchoolsOrderBy!], where: SchoolsBoolExp): [Schools!]!
   schoolsByPk(id: uuid!): Schools
   schoolsStream(batchSize: Int!, cursor: [SchoolsStreamCursorInput]!, where: SchoolsBoolExp): [Schools!]!
