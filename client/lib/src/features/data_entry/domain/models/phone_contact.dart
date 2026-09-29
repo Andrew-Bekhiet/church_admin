@@ -38,6 +38,14 @@ class PhoneContact with _$PhoneContact {
 
   bool get isFamilyRole => familyId != null;
 
+  ContactOwner get owner => switch (familyId) {
+    final familyId? => FamilyRoleContactOwner(
+      familyId: familyId,
+      personTypeId: personTypeId,
+    ),
+    null => const PersonContactOwner(),
+  };
+
   String? get ownLabel {
     final trimmed = label?.trim();
 

@@ -104,6 +104,24 @@ void main() {
     },
   );
 
+  test('moving a family number to another role deletes and re-inserts it', () {
+    const motherTypeId = '00000000-0000-4000-8000-000000000004';
+    const asFather = PhoneContact(
+      id: idB,
+      phone: '+201112223334',
+      familyId: familyId,
+      personTypeId: fatherTypeId,
+    );
+
+    final changed = helper(
+      from: [asFather],
+      to: [asFather.copyWith(personTypeId: motherTypeId)],
+    ).variables;
+
+    expect(ids(changed.deleteIds), [idB]);
+    expect(changed.upserts?.single.personTypeId?.uuid, motherTypeId);
+  });
+
   test('a number that is not E.164 is refused before anything is sent', () {
     final invalid = helper(
       from: [first],

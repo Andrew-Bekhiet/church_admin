@@ -4,6 +4,7 @@ export 'models/area.dart';
 export 'models/church.dart';
 export 'models/class.dart';
 export 'models/college.dart';
+export 'models/contact_owner.dart';
 export 'models/district.dart';
 export 'models/family.dart';
 export 'models/father.dart';
