@@ -31,4 +31,22 @@ class PhoneNumberService {
         ? IsoCode.EG
         : null,
   ).international;
+
+  String? toE164(String input) {
+    final phone = _parse(input);
+
+    return phone.isValid() ? phone.international : null;
+  }
+
+  String display(String e164) {
+    final phone = _parse(e164);
+    if (!phone.isValid()) return e164;
+
+    return phone.isoCode == IsoCode.EG ? '0${phone.nsn}' : phone.international;
+  }
+
+  PhoneNumber _parse(String input) => PhoneNumber.parse(
+    input,
+    destinationCountry: input.trimLeft().startsWith('+') ? null : IsoCode.EG,
+  );
 }
