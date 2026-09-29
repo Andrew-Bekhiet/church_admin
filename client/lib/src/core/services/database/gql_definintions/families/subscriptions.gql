@@ -45,9 +45,6 @@ subscription watchFamily($id: uuid!) {
     status
     deceasedSpouseName
     marriageDate
-    familyAdminsPhones {
-      aggregatedPhones
-    }
     contacts(
       where: { personType: { isFamilyAdmin: { _eq: true } } }
       orderBy: [

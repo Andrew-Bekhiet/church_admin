@@ -100,9 +100,7 @@ subscription watchPerson(
     lastVisit {
       ...LatestVisitHistory
     }
-    mainPhone
     notes
-    otherPhones
     martialStatus
     personType {
       id

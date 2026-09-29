@@ -19,7 +19,7 @@ part 'family.g.dart';
     'children': 'عائلات الأبناء',
     'parents': 'عائلات الآباء',
   },
-  ignoreFields: ['blurhash', 'familyAdminsPhones', 'contacts', 'userCanEdit'],
+  ignoreFields: ['blurhash', 'contacts', 'userCanEdit'],
 )
 class Family extends ViewableWithIDAndImage
     with _$Family
@@ -80,10 +80,6 @@ class Family extends ViewableWithIDAndImage
   final List<Family>? parents;
 
   @override
-  @JsonKey(readValue: _readFamilyAdminsPhones)
-  final Json? familyAdminsPhones;
-
-  @override
   final List<PhoneContact> contacts;
 
   @override
@@ -127,7 +123,6 @@ class Family extends ViewableWithIDAndImage
     this.lastEdit,
     this.lastVisit,
     this.lastFatherVisit,
-    this.familyAdminsPhones,
   });
 
   factory Family.fromJson(Map<String, Object?> json) => _$FamilyFromJson(json);
@@ -258,6 +253,3 @@ List<Family>? familyParentsFromJson(List? data) =>
     data?.map((e) => Family.fromJson(e['parent'])).toList();
 List<Json>? familyParentsToJson(List<Family>? hobbies) =>
     hobbies?.map((e) => {'parent': e.toJson()}).toList();
-
-Json? _readFamilyAdminsPhones(Map json, String key) =>
-    json[key]?['aggregatedPhones'];
