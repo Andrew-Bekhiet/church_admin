@@ -5,7 +5,7 @@ as $$
 declare
     v_unconvertible bigint;
 begin
-    drop table if exists pg_temp.legacy_phone_entries;
+    drop table if exists legacy_phone_entries;
 
     create temp table legacy_phone_entries on commit drop as
     select
