@@ -34,20 +34,12 @@ class _AppSwitcherPrivacyCoverState extends State<AppSwitcherPrivacyCover>
       children: [
         widget.child,
         if (_isCovered)
-          ColoredBox(
+          const ColoredBox(
             key: AppSwitcherPrivacyCoverKeys.cover,
             color: AppSwitcherPrivacyCover._nativeSplashColor,
-            child: SafeArea(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Expanded(child: Image.asset('assets/logo.png')),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 24),
-                    child: Image.asset('assets/branding.png', height: 80),
-                  ),
-                ],
-              ),
+            child: Padding(
+              padding: EdgeInsets.only(bottom: 24),
+              child: SplashBranding(),
             ),
           ),
       ],

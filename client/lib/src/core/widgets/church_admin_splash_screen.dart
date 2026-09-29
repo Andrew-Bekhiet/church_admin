@@ -46,35 +46,25 @@ class _ChurchAdminSplashScreenState extends State<ChurchAdminSplashScreen> {
       locale: const Locale('ar', 'EG'),
       title: 'St Mary Church',
       home: Scaffold(
-        body: SafeArea(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Expanded(
-                child: Image.asset('assets/logo.png'),
-              ),
-              Image.asset('assets/branding.png', height: 80),
-              Center(
-                child: Column(
-                  children: [
-                    RepaintBoundary(
-                      child: CircularProgressIndicator(
-                        constraints: BoxConstraints.tight(const Size(20, 20)),
-                        strokeWidth: 2,
-                      ),
-                    ),
-                    if (_showTimeoutMessage) ...[
-                      const SizedBox(height: 16),
-                      const Text(
-                        'جاري التحميل...',
-                        style: TextStyle(fontSize: 14),
-                      ),
-                    ],
-                  ],
+        body: SplashBranding(
+          footer: Center(
+            child: Column(
+              children: [
+                RepaintBoundary(
+                  child: CircularProgressIndicator(
+                    constraints: BoxConstraints.tight(const Size(20, 20)),
+                    strokeWidth: 2,
+                  ),
                 ),
-              ),
-            ],
+                if (_showTimeoutMessage) ...[
+                  const SizedBox(height: 16),
+                  const Text(
+                    'جاري التحميل...',
+                    style: TextStyle(fontSize: 14),
+                  ),
+                ],
+              ],
+            ),
           ),
         ),
       ),

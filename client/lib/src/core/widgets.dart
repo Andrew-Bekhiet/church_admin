@@ -10,5 +10,6 @@ export 'widgets/service_hierarchy_classes.dart';
 export 'widgets/service_hierarchy_groups.dart';
 export 'widgets/service_hierarchy_tile.dart';
 export 'widgets/services_hierarchy_list.dart';
+export 'widgets/splash_branding.dart';
 export 'widgets/switching_fab.dart';
 export 'widgets/title_search_field.dart';
